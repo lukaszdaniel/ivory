@@ -1,0 +1,91 @@
+# # File R_HOME/src/library/stats4/po/R-ko.po
+# # Managed by Chel Hee Lee (Korean, R Development Translation Team)
+# # Email <gnustats@gmail.com> or <chl948@mail.usask.ca>
+# # Copyright 1995-2012 R Core Team & R Develoment Translation Team
+# # Distributed under GPL 2 or later
+# #
+msgid ""
+msgstr ""
+"Project-Id-Version: R 2.3.0\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2014-07-19 18:11\n"
+"PO-Revision-Date: 2012-03-06 18:03+0200\n"
+"Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
+"Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 2.1.6\n"
+
+#. R/mle.R: stop("'start' must be a named list")
+#: R/mle.R:0
+msgid "'start' must be a named list"
+msgstr "'start' 는 이름이 주어진 list 이어야 합니다 "
+
+#. R/mle.R: gettext("Call:", domain = "R-stats4")
+#. R/mle.R: gettext("Call:", domain = "R-stats4")
+#: R/mle.R:0
+msgid "Call:"
+msgstr ""
+
+#. R/mle.R: gettext("Coefficients:", domain = "R-stats4")
+#. R/mle.R: gettext("Coefficients:", domain = "R-stats4")
+#: R/mle.R:0
+msgid "Coefficients:"
+msgstr ""
+
+#. R/mle.R: gettext("Maximum likelihood estimation", domain = "R-stats4")
+#: R/mle.R:0
+msgid "Maximum likelihood estimation"
+msgstr ""
+
+#. R/mle.R: gettextf("Parameter: %s down", pi, domain = "R-stats4")
+#: R/mle.R:0
+msgid "Parameter: %s down"
+msgstr ""
+
+#. R/mle.R: gettextf("Parameter: %s up", pi, domain = "R-stats4")
+#: R/mle.R:0
+msgid "Parameter: %s up"
+msgstr ""
+
+#. R/mle.R: gettext("Profiling...", domain = "R-stats4")
+#: R/mle.R:0
+msgid "Profiling..."
+msgstr ""
+
+#. R/mle.R: warning("extra arguments discarded")
+#: R/mle.R:0
+msgid "extra arguments discarded"
+msgstr "불필요한 인자들이 삭제되었습니다 "
+
+#. R/mle.R: warning("levels truncated to positive values only")
+#: R/mle.R:0
+msgid "levels truncated to positive values only"
+msgstr "levels 는 양의 정수값만 가집니다 "
+
+#. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
+#: R/mle.R:0
+msgid ""
+"profiling has found a better solution, so original fit had not converged"
+msgstr ""
+"profiling 이 더 적합한 해를 찾았으므로 초기 적합은 수렴하지 않았음을 의미합니"
+"다 "
+
+#. R/mle.R: stop("some named arguments in 'fixed' are not arguments to the supplied log-likelihood")
+#: R/mle.R:0
+msgid ""
+"some named arguments in 'fixed' are not arguments to the supplied log-"
+"likelihood"
+msgstr "'fixed'에서 이름 인수는 주어졌던 대수우도에 대한 인수가 아닙니다"
+
+#. R/mle.R: stop("some named arguments in 'start' are not arguments to the supplied log-likelihood")
+#: R/mle.R:0
+msgid ""
+"some named arguments in 'start' are not arguments to the supplied log-"
+"likelihood"
+msgstr ""
+"'start' 에 일부 이름이 주어진 인자들은 log-likelihood 에서 지원하는 인자들이 "
+"아닙니다 "

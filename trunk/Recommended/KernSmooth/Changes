@@ -1,0 +1,43 @@
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/KernSmooth/R/all.R R-recommended-moje/KernSmooth/R/all.R
+53c53
+<         warning("Binning grid too coarse for current (small) bandwidth: consider increasing 'gridsize'")
+---
+>         warning("Binning grid is too coarse for current (small) bandwidth: consider increasing 'gridsize'")
+75c75
+<     list(x = gpoints, y = (Re(fft(kappa*gcounts, TRUE))/P)[1L:M])
+---
+>     list(x = gpoints, y = (Re(fft(kappa*gcounts, TRUE))/P)[seq_len(M)])
+121c121
+<     for (id in 1L:2L) {
+---
+>     for (id in seq_len(2L)) {
+132c132
+<         warning("Binning grid too coarse for current (small) bandwidth: consider increasing 'gridsize'")
+---
+>         warning("Binning grid is too coarse for current (small) bandwidth: consider increasing 'gridsize'")
+142,143c142,143
+<     rp[1L:(L1+1), 1L:(L2+1)] <- kapp
+<     if (L1) rp[(P1-L1+1):P1, 1L:(L2+1)] <- kapp[(L1+1):2, 1L:(L2+1)]
+---
+>     rp[seq_len(L1+1), seq_len(L2+1)] <- kapp
+>     if (L1) rp[(P1-L1+1):P1, seq_len(L2+1)] <- kapp[(L1+1):2, seq_len(L2+1)]
+148c148
+<     sp[1L:M1, 1L:M2] <- gcounts
+---
+>     sp[seq_len(M1), seq_len(M2)] <- gcounts
+153c153
+<     rp <- Re(fft(rp*sp, inverse = TRUE)/(P1*P2))[1L:M1, 1L:M2]
+---
+>     rp <- Re(fft(rp*sp, inverse = TRUE)/(P1*P2))[seq_len(M1), seq_len(M2)]
+204c204
+<         warning("Binning grid too coarse for current (small) bandwidth: consider increasing 'gridsize'")
+---
+>         warning("Binning grid is too coarse for current (small) bandwidth: consider increasing 'gridsize'")
+229c229
+<     sum(gcounts * (Re(fft(kappam*Gcounts, TRUE))/P)[1L:M] )/(n^2)
+---
+>     sum(gcounts * (Re(fft(kappam*Gcounts, TRUE))/P)[seq_len(M)] )/(n^2)
+682c682
+<         stop("Binning grid too coarse for current (small) bandwidth: consider increasing 'gridsize'")
+---
+>         stop("Binning grid is too coarse for current (small) bandwidth: consider increasing 'gridsize'")

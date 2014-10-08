@@ -1,0 +1,985 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: boot 1.3-11\n"
+"Report-Msgid-Bugs-To: bugs@r-project.org\n"
+"POT-Creation-Date: 2014-07-13 09:15\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
+"Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"na-Revision-Date: 2012-05-29 07:55+0100\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. R/bootfuns.q: gettextf("%s distribution not supported: using normal instead", sQuote(qdist))
+#: R/bootfuns.q:0
+msgid "%s distribution not supported: using normal instead"
+msgstr "rozkład %s nie jest wspierany: w zamian używanie rozkładu normalnego"
+
+#. R/bootfuns.q: stop("'F.surv' is required but missing")
+#: R/bootfuns.q:0
+msgid "'F.surv' is required but missing"
+msgstr "'F.surv' jest wymagany, ale jest nieobecny"
+
+#. R/bootfuns.q: stop("'G.surv' is required but missing")
+#: R/bootfuns.q:0
+msgid "'G.surv' is required but missing"
+msgstr "'G.surv' jest wymagany, ale jest nieobecny"
+
+#. R/bootfuns.q: gettextf("'K' has been set to %f", K)
+#: R/bootfuns.q:0
+msgid "'K' has been set to %f"
+msgstr "'K' został ustawiony na %f"
+
+#. R/bootfuns.q: stop("'K' outside allowable range")
+#: R/bootfuns.q:0
+msgid "'K' outside allowable range"
+msgstr "'K' poza dozwolonym zakresem"
+
+#. R/bootfuns.q: stop("'R' and 'alpha' have incompatible lengths")
+#: R/bootfuns.q:0
+msgid "'R' and 'alpha' have incompatible lengths"
+msgstr "'R' oraz 'alpha' mają niekompatybilne długości"
+
+#. R/bootfuns.q: stop("'R' and 'theta' have incompatible lengths")
+#: R/bootfuns.q:0
+msgid "'R' and 'theta' have incompatible lengths"
+msgstr "'R' oraz 'theta' mają niekompatybilne długości"
+
+#. R/bootfuns.q: stop("'R' must be positive")
+#: R/bootfuns.q:0
+msgid "'R' must be positive"
+msgstr "'R' musi być dodatnie"
+
+#. R/bootfuns.q: warning("'alpha' ignored; R[1L] = 0")
+#: R/bootfuns.q:0
+msgid "'alpha' ignored; R[1L] = 0"
+msgstr "'alpha' zostało zignornowane; R[1L]=0"
+
+#. R/bootfuns.q: stop("'data' must be a matrix with at least 2 columns")
+#. R/bootfuns.q: stop("'data' must be a matrix with at least 2 columns")
+#: R/bootfuns.q:0
+msgid "'data' must be a matrix with at least 2 columns"
+msgstr "'data' musi być macierzą o co najmniej 2 kolumnach"
+
+#. R/bootfuns.q: stop("'index' must contain 2 elements")
+#: R/bootfuns.q:0
+msgid "'index' must contain 2 elements"
+msgstr "'index' musi zawierać 2 elementy"
+
+#. R/bootfuns.q: warning("'simple=TRUE' is only valid for 'sim=\"ordinary\", stype=\"i\", n=0', so ignored")
+#: R/bootfuns.q:0
+msgid ""
+"'simple=TRUE' is only valid for 'sim=\"ordinary\", stype=\"i\", n=0', so "
+"ignored"
+msgstr ""
+"'simple=TRUE' jest poprawne jedynie dla 'sim=\"ordinary\", stype=\"i\", "
+"n=0', tak więc zignorowano"
+
+#. R/bootfuns.q: stop("'strata' of wrong length")
+#: R/bootfuns.q:0
+msgid "'strata' of wrong length"
+msgstr "'strata' o niepoprawnej długości"
+
+#. R/bootfuns.q: stop("'stype' must be \"w\" for type=\"inf\"")
+#: R/bootfuns.q:0
+msgid "'stype' must be \"w\" for type=\"inf\""
+msgstr "'stype' musi być \"w\" dla type=\"inf\""
+
+#. R/bootfuns.q: stop("'t' and 't0' must be supplied together")
+#: R/bootfuns.q:0
+msgid "'t' and 't0' must be supplied together"
+msgstr "'t' oraz 't0' muszą zostać dostarczone razem"
+
+#. R/bootfuns.q: gettextf("'t' must of length %d", boot.out$R)
+#: R/bootfuns.q:0
+msgid "'t' must of length %d"
+msgstr "'t' musi być długości %d"
+
+#. R/bootfuns.q: stop("'theta' must be supplied if R[1L] = 0")
+#: R/bootfuns.q:0
+msgid "'theta' must be supplied if R[1L] = 0"
+msgstr "'theta' musi zostać dostarczona jeśli R[1L] = 0"
+
+#. R/bootfuns.q: stop("'theta' or 'lambda' required")
+#: R/bootfuns.q:0
+msgid "'theta' or 'lambda' required"
+msgstr "'theta' lub 'lambda' są wymagane"
+
+#. R/bootfuns.q: stop("'u' must be a function")
+#: R/bootfuns.q:0
+msgid "'u' must be a function"
+msgstr "'u' musi być funkcją"
+
+#. R/bootfuns.q: stop("0 elements not allowed in 'q'")
+#: R/bootfuns.q:0
+msgid "0 elements not allowed in 'q'"
+msgstr "0 elementów nie jest dozwolone w 'q'"
+
+#. R/bootfuns.q: gettext("0 will terminate the function", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "0 will terminate the function"
+msgstr "0 przerwie działanie funkcji"
+
+#. R/bootfuns.q: gettext("5, 10, 16, 50, 84, 90, 95 percentiles of (T*-t)", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "5, 10, 16, 50, 84, 90, 95 percentiles of (T*-t)"
+msgstr "5, 10, 16, 50, 84, 90, 95 procent (T*-t)"
+
+#. R/bootfuns.q: gettext("ANTITHETIC BOOTSTRAP", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "ANTITHETIC BOOTSTRAP"
+msgstr "PRZECIWSTAWNY BOOTSTRAP"
+
+#. R/bootfuns.q: gettextf("All values of t are equal to %s", mean(t, na.rm = TRUE), domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "All values of t are equal to %s"
+msgstr "Wszystkie wartości t są równe %s"
+
+#. R/bootfuns.q: gettextf("All values of t* are equal to %s", mean(t, na.rm = TRUE))
+#: R/bootfuns.q:0
+msgid "All values of t* are equal to %s"
+msgstr "Wszystkie wartości t* są równe %s"
+
+#. R/bootfuns.q: gettextf("Average Block Length of %s", boot.out$l, domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Average Block Length of %s"
+msgstr "Średnia długość bloku %s"
+
+#. R/bootfuns.q: gettext("BALANCED BOOTSTRAP", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "BALANCED BOOTSTRAP"
+msgstr "ZBALANSOWANY BOOTSTRAP"
+
+#. R/bootfuns.q: gettext("BALANCED TILTED BOOTSTRAP", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "BALANCED TILTED BOOTSTRAP"
+msgstr "ZBALANSOWANY NACHYLONY BOOTSTRAP"
+
+#. R/bootfuns.q: gettext("BALANCED WEIGHTED BOOTSTRAP", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "BALANCED WEIGHTED BOOTSTRAP"
+msgstr "ZBALANSOWANY WAŻONY BOOTSTRAP"
+
+#. R/bootfuns.q: gettext("      BCa          ", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "BCa"
+msgstr "BC"
+
+#. R/bootfuns.q: warning("BCa intervals not defined for time series bootstraps")
+#: R/bootfuns.q:0
+msgid "BCa intervals not defined for time series bootstraps"
+msgstr ""
+"przedziały BC nie są zdefiniowane dla bootstrapowych szeregów czasowych"
+
+#. R/bootfuns.q: gettext("BLOCK BOOTSTRAP FOR TIME SERIES", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "BLOCK BOOTSTRAP FOR TIME SERIES"
+msgstr "BLOKOWY BOOTSTRAP DLA SZEREGÓW CZASOWYCH"
+
+#. R/bootfuns.q: gettext("BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS"
+msgstr "OBLICZENIA BOOTSTRAPOWANEGO PRZEDZIAŁU UFNOŚCI"
+
+#. R/bootfuns.q: gettextf("Based on %d bootstrap replicates", R, domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Based on %d bootstrap replicates"
+msgstr "Oparte na %d replikacjach bootstrapu"
+
+#. R/bootfuns.q: gettext("     Basic         ", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Basic"
+msgstr "Podstawowy"
+
+#. R/bootfuns.q: gettext("Bootstrap Statistics:", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Bootstrap Statistics:"
+msgstr "Statystyki bootstrapu:"
+
+#. R/bootfuns.q: gettext("CALL:", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "CALL:"
+msgstr "WYWOŁANIE:"
+
+#. R/bootfuns.q: gettext("CASE RESAMPLING BOOTSTRAP FOR CENSORED DATA", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "CASE RESAMPLING BOOTSTRAP FOR CENSORED DATA"
+msgstr "BOOTSTRAP PONOWNIE PRÓBKOWANYCH PRZYPADKÓW DLA DANYCH CENZOROWANYCH"
+
+#. R/bootfuns.q: gettext("CONDITIONAL BOOTSTRAP FOR CENSORED DATA", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "CONDITIONAL BOOTSTRAP FOR CENSORED DATA"
+msgstr "WARUNKOWY BOOTSTRAP DLA CENZUROWANYCH DANYCH"
+
+#. R/bootfuns.q: gettext("CONDITIONAL BOOTSTRAP FOR COX REGRESSION MODEL", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "CONDITIONAL BOOTSTRAP FOR COX REGRESSION MODEL"
+msgstr "WARUNKOWY BOOTSTRAP DLA MODELU REGRESYJNEGO COXA"
+
+#. R/bootfuns.q: gettext("Calculations and Intervals on Original Scale", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Calculations and Intervals on Original Scale"
+msgstr "Obliczenia oraz Przedziały na oryginalnej skali"
+
+#. R/bootfuns.q: gettext("Calculations and Intervals on Transformed Scale", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Calculations and Intervals on Transformed Scale"
+msgstr "Obliczenia oraz Przedziały na przentransformowanej skali"
+
+#. R/bootfuns.q: gettext("Calculations on Original Scale but Intervals Transformed", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Calculations on Original Scale but Intervals Transformed"
+msgstr ""
+"Obliczenia na oryginalnej skali, ale przedziały zostały przetransformowane"
+
+#. R/bootfuns.q: gettext("Calculations on Transformed Scale; Intervals on Original Scale", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Calculations on Transformed Scale; Intervals on Original Scale"
+msgstr "Obliczenia na przetransformowanej skali; Przedziały na oryginalnej"
+
+#. R/bootfuns.q: gettext("Call:", domain = "R-boot")
+#. R/bootfuns.q: gettext("Call: ", domain = "R-boot")
+#. R/bootfuns.q: gettext("Call:", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Call:"
+msgstr "Wywołanie:"
+
+#. R/bootfuns.q: gettext("Cannot calculate confidence intervals", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Cannot calculate confidence intervals"
+msgstr "Nie można obliczyć przedziałów ufności"
+
+#. R/bootfuns.q: gettext("Case", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Case"
+msgstr "Przypadek"
+
+#. R/bootfuns.q: gettext("Cook statistic", domain = "R-boot")
+#. R/bootfuns.q: gettext("Cook statistic", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Cook statistic"
+msgstr "Statystyka Cooka"
+
+#. R/bootfuns.q: gettext("DATA PERMUTATION", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "DATA PERMUTATION"
+msgstr "PERMUTACJA DANYCH"
+
+#. R/bootfuns.q: gettext("Exponential tilting used", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Exponential tilting used"
+msgstr "Użyto eksponencjalnego przechylania"
+
+#. R/bootfuns.q: gettextf("Fixed Block Length of %s", boot.out$l, domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Fixed Block Length of %s"
+msgstr "Ustawiona długość bloku %s"
+
+#. R/bootfuns.q: gettext("Frequency Smoothing used", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Frequency Smoothing used"
+msgstr "Użyto wygładzania częstotliwościowego"
+
+#. R/bootfuns.q: gettextf("Interactive Identification for screen %d", num, domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Interactive Identification for screen %d"
+msgstr "Interaktywna identyfikacja dla ekranu %d"
+
+#. R/bootfuns.q: gettext("Intervals:", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Intervals:"
+msgstr "Przedziały:"
+
+#. R/bootfuns.q: gettext("Iteration limit exceeded without finding solution", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Iteration limit exceeded without finding solution"
+msgstr "Osiągnięto limit iteracji bez znalezienia rozwiązania"
+
+#. R/bootfuns.q: gettext("Level", domain = "R-boot")
+#. R/bootfuns.q: gettext("Level", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Level"
+msgstr "Poziom"
+
+#. R/bootfuns.q: gettext("Linear Programming Results", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Linear Programming Results"
+msgstr "Wyniki liniowego programowania"
+
+#. R/bootfuns.q: gettext("Linear predictor", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Linear predictor"
+msgstr "Liniowy predyktor"
+
+#. R/bootfuns.q: gettext("Lugananni-Rice approximations used", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Lugananni-Rice approximations used"
+msgstr "Użyto przybliżeń Lugananniego-Ricea"
+
+#. R/bootfuns.q: gettext("MODEL BASED BOOTSTRAP FOR COX REGRESSION MODEL", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "MODEL BASED BOOTSTRAP FOR COX REGRESSION MODEL"
+msgstr "BOOTSTRAP OPARTY NA MODELU DLA MODELU REGRESYJNEGO COXA"
+
+#. R/bootfuns.q: gettext("MODEL BASED BOOTSTRAP FOR TIME SERIES", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "MODEL BASED BOOTSTRAP FOR TIME SERIES"
+msgstr "BOOTSTRAP OPARTY NA MODELU DLA SZEREGU CZASOWEGO"
+
+#. R/bootfuns.q: gettext("Maximization Problem with Objective Function Coefficients", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Maximization Problem with Objective Function Coefficients"
+msgstr "Problem maksymalizacyjny ze współczynnikami funkcji celu"
+
+#. R/bootfuns.q: gettext("Minimization Problem with Objective Function Coefficients", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Minimization Problem with Objective Function Coefficients"
+msgstr "Problem minimalizacyjny ze współczynnikami funkcji celu"
+
+#. R/bootfuns.q: gettext("No feasible solution could be found", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "No feasible solution could be found"
+msgstr "Nie można znaleźć realnego rozwiązania"
+
+#. R/bootfuns.q: gettext("     Normal        ", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Normal"
+msgstr "Normalny"
+
+#. R/bootfuns.q: gettext("Normal margins used.", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Normal margins used."
+msgstr "Użyto granic rozkładu normalnego."
+
+#. R/bootfuns.q: gettext("ORDINARY NONPARAMETRIC BOOTSTRAP", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "ORDINARY NONPARAMETRIC BOOTSTRAP"
+msgstr "ZWYCZAJNY NIEPARAMETRYCZNY BOOTSTRAP"
+
+#. R/bootfuns.q: gettext("Observed margins used.", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Observed margins used."
+msgstr "Użyto granic danych zaobserwowanych."
+
+#. R/bootfuns.q: gettext("Optimal solution has the following values", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Optimal solution has the following values"
+msgstr "Optymalne rozwiązanie posiada następujące wartości"
+
+#. R/bootfuns.q: gettext("Ordered deviance residuals")
+#: R/bootfuns.q:0
+msgid "Ordered deviance residuals"
+msgstr "Uporządkowane reszty odchyleń"
+
+#. R/bootfuns.q: gettext("PARAMETRIC BOOTSTRAP", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "PARAMETRIC BOOTSTRAP"
+msgstr "PARAMETRYCZNY BOOTSTRAP"
+
+#. R/bootfuns.q: gettext("PHASE SCRAMBLED BOOTSTRAP FOR TIME SERIES", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "PHASE SCRAMBLED BOOTSTRAP FOR TIME SERIES"
+msgstr "FAZOWO WYMIESZANY BOOTSTRAP DLA SZEREGÓW CZASOWYCH"
+
+#. R/bootfuns.q: gettext("POST-BLACKENED BLOCK BOOTSTRAP FOR TIME SERIES", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "POST-BLACKENED BLOCK BOOTSTRAP FOR TIME SERIES"
+msgstr "POST-BLACKENED BLOKOWY BOOTSTRAP DLA SZEREGÓW CZASOWYCH"
+
+#. R/bootfuns.q: gettext("POST-BLACKENED STATIONARY BOOTSTRAP FOR TIME SERIES", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "POST-BLACKENED STATIONARY BOOTSTRAP FOR TIME SERIES"
+msgstr "POST-BLACKENED STACJONARNY BOOTSTRAP DLA SZEREGÓW CZASOWYCH"
+
+#. R/bootfuns.q: gettext("    Percentile     ", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Percentile"
+msgstr "Procenty"
+
+#. R/bootfuns.q: gettext("Percentiles of (T*-t)", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Percentiles of (T*-t)"
+msgstr "Procenty (T*-t)"
+
+#. R/bootfuns.q: gettext("Please Input a screen number (1,2,3 or 4)", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Please Input a screen number (1,2,3 or 4)"
+msgstr "Proszę wprowadzić numer ekranu (1, 2, 3 lub 4)"
+
+#. R/bootfuns.q: gettextf("Quantiles of Chi-squared(%d)", df)
+#: R/bootfuns.q:0
+msgid "Quantiles of Chi-squared(%d)"
+msgstr "Kwantyle rozkładu Chi-kwadrat(%d)"
+
+#. R/bootfuns.q: gettext("Quantiles of Standard Normal")
+#: R/bootfuns.q:0
+msgid "Quantiles of Standard Normal"
+msgstr "Kwantyle rozkładu normalnego"
+
+#. R/bootfuns.q: gettext("Quantiles of standard normal")
+#: R/bootfuns.q:0
+msgid "Quantiles of standard normal"
+msgstr "Kwantyle rozkładu normalnego"
+
+#. R/bootfuns.q: gettext("Quantiles of the Distribution", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Quantiles of the Distribution"
+msgstr "Kwantyle rozkładu"
+
+#. R/bootfuns.q: stop("R[1L] must be positive for frequency smoothing")
+#: R/bootfuns.q:0
+msgid "R[1L] must be positive for frequency smoothing"
+msgstr "R[1L] musi być dodatnia dla wygładzania częstotliwości"
+
+#. R/bootfuns.q: gettext("Residuals", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Residuals"
+msgstr "Reszty"
+
+#. R/bootfuns.q: gettext("STATIONARY BOOTSTRAP FOR TIME SERIES", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "STATIONARY BOOTSTRAP FOR TIME SERIES"
+msgstr "STACJONARNY BOOTSTRAP DLA SZEREGU CZASOWEGO"
+
+#. R/bootfuns.q: gettext("STRATIFIED ANTITHETIC BOOTSTRAP", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "STRATIFIED ANTITHETIC BOOTSTRAP"
+msgstr "WARSTWOWY PRZECIWSTAWNY BOOTSTRAP"
+
+#. R/bootfuns.q: gettext("STRATIFIED BALANCED BOOTSTRAP", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "STRATIFIED BALANCED BOOTSTRAP"
+msgstr "WARSTWOWY ZBALANSOWANY BOOTSTRAP"
+
+#. R/bootfuns.q: gettext("STRATIFIED BOOTSTRAP", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "STRATIFIED BOOTSTRAP"
+msgstr "WARSTWOWY BOOTSTRAP"
+
+#. R/bootfuns.q: gettext("STRATIFIED CASE RESAMPLING BOOTSTRAP FOR CENSORED DATA", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "STRATIFIED CASE RESAMPLING BOOTSTRAP FOR CENSORED DATA"
+msgstr ""
+"WARSTWOWY BOOTSTRAP PONOWNIE PRÓBKOWANYCH PRZYPADKÓW DLA DANYCH CENZOROWANYCH"
+
+#. R/bootfuns.q: gettext("STRATIFIED CONDITIONAL BOOTSTRAP FOR CENSORED DATA", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "STRATIFIED CONDITIONAL BOOTSTRAP FOR CENSORED DATA"
+msgstr "WARSTWOWY WARUNKOWY BOOTSTRAP DLA CENZUROWANYCH DANYCH"
+
+#. R/bootfuns.q: gettext("STRATIFIED CONDITIONAL BOOTSTRAP FOR COX REGRESSION MODEL", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "STRATIFIED CONDITIONAL BOOTSTRAP FOR COX REGRESSION MODEL"
+msgstr "WARSTWOWY WARUNKOWY BOOTSTRAP DLA MODELU REGRESYJNEGO COXA"
+
+#. R/bootfuns.q: gettext("STRATIFIED DATA PERMUTATION", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "STRATIFIED DATA PERMUTATION"
+msgstr "WARSTWOWA PERMUTACJA DANYCH"
+
+#. R/bootfuns.q: gettext("STRATIFIED MODEL BASED BOOTSTRAP FOR COX REGRESSION MODEL", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "STRATIFIED MODEL BASED BOOTSTRAP FOR COX REGRESSION MODEL"
+msgstr "WARSTWOWY BOOTSTRAP OPARTY NA MODELU DLA MODELU REGRESYJNEGO COXA"
+
+#. R/bootfuns.q: gettext("STRATIFIED WEIGHTED BALANCED BOOTSTRAP", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "STRATIFIED WEIGHTED BALANCED BOOTSTRAP"
+msgstr "WARSTWOWY WAŻONY ZBALANSOWANY BOOTSTRAP"
+
+#. R/bootfuns.q: gettext("STRATIFIED WEIGHTED BOOTSTRAP", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "STRATIFIED WEIGHTED BOOTSTRAP"
+msgstr "WARSTWOWY WAŻONY BOOTSTRAP"
+
+#. R/bootfuns.q: gettext("STRATIFIED WEIRD BOOTSTRAP FOR CENSORED DATA", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "STRATIFIED WEIRD BOOTSTRAP FOR CENSORED DATA"
+msgstr "WARSTWOWY DZIWNY BOOTSTRAP DLA CENZUROWANYCH DANYCH"
+
+#. R/bootfuns.q: gettext("Saddlepoint Distribution Approximations", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Saddlepoint Distribution Approximations"
+msgstr "Przybliżenia rozkładu metodą punktu siodłowego"
+
+#. R/bootfuns.q: gettextf("Smoothing spline used %d points in the range %s to %s.", nrow(sad.d$points),     rg[1L], rg[2L], domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Smoothing spline used %d points in the range %s to %s."
+msgstr "Wygładzający splajn użył %d punktów w zakresie od %s do %s."
+
+#. R/bootfuns.q: gettext("Some BCa intervals may be unstable", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Some BCa intervals may be unstable"
+msgstr "Niektóre bootstrapowane przedziały ufności (BCa) mogą być niestabilne"
+
+#. R/bootfuns.q: gettext("Some basic intervals may be unstable", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Some basic intervals may be unstable"
+msgstr "Niektóre podstawowe przedziały mogą być niestabilne"
+
+#. R/bootfuns.q: gettext("Some percentile intervals may be unstable", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Some percentile intervals may be unstable"
+msgstr "Niektóre procentowe przedziały mogą być niestabilne"
+
+#. R/bootfuns.q: gettext("Some studentized intervals may be unstable", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Some studentized intervals may be unstable"
+msgstr "Niektóre studentyzowane przedziały mogą być niestabilne"
+
+#. R/bootfuns.q: gettext("   Studentized     ", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Studentized"
+msgstr "Studentyzowany"
+
+#. R/bootfuns.q: gettext("TILTED BOOTSTRAP", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "TILTED BOOTSTRAP"
+msgstr "NACHYLONY BOOTSTRAP"
+
+#. R/bootfuns.q: gettext("TIME SERIES BOOTSTRAP USING SUPPLIED INDICES", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "TIME SERIES BOOTSTRAP USING SUPPLIED INDICES"
+msgstr "BOOTSTRAP SZEREGU CZASOWEGO UŻYWAJĄC DOSTARCZONYCH INDEKSÓW"
+
+#. R/bootfuns.q: gettext("The coefficient values at termination were", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "The coefficient values at termination were"
+msgstr "Wartości współczynnika przy zakończeniu wynosiły"
+
+#. R/bootfuns.q: gettextf("The objective function value was %s.", simp.out$value, domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "The objective function value was %s."
+msgstr "Wartość funkcji celu wyniosła %s."
+
+#. R/bootfuns.q: gettextf("The optimal value of the objective function is %s.", simp.out$value, domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "The optimal value of the objective function is %s."
+msgstr "Optymalna wartość funkcji celu wynosi %s."
+
+#. R/bootfuns.q: gettextf("WARNING: All values of %s are NA", paste("t", j, "*", sep = ""), domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "WARNING: All values of %s are NA"
+msgstr "OSTRZEŻENIE: Wszystkie wartości %s wynoszą NA"
+
+#. R/bootfuns.q: gettext("WEIGHTED BOOTSTRAP", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "WEIGHTED BOOTSTRAP"
+msgstr "WAŻONY BOOTSTRAP"
+
+#. R/bootfuns.q: gettext("WEIRD BOOTSTRAP FOR CENSORED DATA", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "WEIRD BOOTSTRAP FOR CENSORED DATA"
+msgstr "DZIWNY BOOTSTRAP DLA CENZUROWANYCH DANYCH"
+
+#. R/bootfuns.q: gettext("Warning: BCa Intervals used Extreme Quantiles", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Warning: BCa Intervals used Extreme Quantiles"
+msgstr ""
+"Ostrzeżenie: Bootstrapowane przedziały ufności użyłu ekstremalnych kwantyli"
+
+#. R/bootfuns.q: gettext("Warning: Basic Intervals used Extreme Quantiles", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Warning: Basic Intervals used Extreme Quantiles"
+msgstr ""
+"Ostrzeżenie: Podstawowe przedziały ufności użyły ekstremalnych kwantyli"
+
+#. R/bootfuns.q: gettext("Warning: Percentile Intervals used Extreme Quantiles", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Warning: Percentile Intervals used Extreme Quantiles"
+msgstr "Ostrzeżenie: Procentowe przedziały użyły ekstremalnych kwantyli"
+
+#. R/bootfuns.q: gettext("Warning: Studentized Intervals used Extreme Quantiles", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "Warning: Studentized Intervals used Extreme Quantiles"
+msgstr "Ostrzeżenie: Studentyzowane przedziały użyły ekstremalnych kwantyli"
+
+#. R/bootfuns.q: stop("arguments are not all the same type of \"boot\" object")
+#: R/bootfuns.q:0
+msgid "arguments are not all the same type of \"boot\" object"
+msgstr "argumenty nie są wszystkie tego samego typu obiektu 'boot'"
+
+#. R/bootfuns.q: stop("array cannot be found for parametric bootstrap")
+#: R/bootfuns.q:0
+msgid "array cannot be found for parametric bootstrap"
+msgstr "nie można znaleźć tablicy dla parametrycznego bootstrapu"
+
+#. R/bootfuns.q: gettext(" bias  ", domain = "R-boot")
+#. R/bootfuns.q: gettext(" bias  ", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "bias"
+msgstr "obciążenie"
+
+#. R/bootfuns.q: stop("boot.array not implemented for this object")
+#: R/bootfuns.q:0
+msgid "boot.array not implemented for this object"
+msgstr "'boot.array' nie został zaimplementowany dla tego obiektu"
+
+#. R/bootfuns.q: stop("bootstrap object needed for type=\"reg\"")
+#: R/bootfuns.q:0
+msgid "bootstrap object needed for type=\"reg\""
+msgstr "obiekt bootstrapu jest potrzebny dla type=\"reg\""
+
+#. R/bootfuns.q: stop("bootstrap output matrix missing")
+#: R/bootfuns.q:0
+msgid "bootstrap output matrix missing"
+msgstr "brakuje wyjściowej macierzy bootstrapu"
+
+#. R/bootfuns.q: stop("bootstrap output object or 't0' required")
+#: R/bootfuns.q:0
+msgid "bootstrap output object or 't0' required"
+msgstr "wymagany jest obiekt wyjściowy bootstrapu albo 't0'"
+
+#. R/bootfuns.q: stop("bootstrap replicates must be supplied")
+#. R/bootfuns.q: stop("bootstrap replicates must be supplied")
+#. R/bootfuns.q: stop("bootstrap replicates must be supplied")
+#: R/bootfuns.q:0
+msgid "bootstrap replicates must be supplied"
+msgstr "bootstrapowane repliki muszą zostać dostarczone"
+
+#. R/bootfuns.q: warning("bootstrap variances needed for studentized intervals")
+#: R/bootfuns.q:0
+msgid "bootstrap variances needed for studentized intervals"
+msgstr "potrzebne są bootstrapowe wariancje dla studentyzowanych przedziałów"
+
+#. R/bootfuns.q: stop("control methods undefined when 'boot.out' has weights")
+#: R/bootfuns.q:0
+msgid "control methods undefined when 'boot.out' has weights"
+msgstr "metody kontroli nie są zdefiniowane gdy 'boot.out' posiada wagi"
+
+#. R/bootfuns.q: stop("dimensions of 'R' and 'weights' do not match")
+#: R/bootfuns.q:0
+msgid "dimensions of 'R' and 'weights' do not match"
+msgstr "wymiary 'R' oraz 'weights' nie zgadzają się"
+
+#. R/bootfuns.q: stop("either 'A' and 'u' or 'K.adj' and 'K2' must be supplied")
+#: R/bootfuns.q:0
+msgid "either 'A' and 'u' or 'K.adj' and 'K2' must be supplied"
+msgstr "albo 'A' oraz 'u', albo 'K.adj' oraz 'K2' muszą zostać dostarczone"
+
+#. R/bootfuns.q: stop("either 'boot.out' or 'w' must be specified.")
+#. R/bootfuns.q: stop("either 'boot.out' or 'w' must be specified.")
+#. R/bootfuns.q: stop("either 'boot.out' or 'w' must be specified.")
+#: R/bootfuns.q:0
+msgid "either 'boot.out' or 'w' must be specified."
+msgstr "jedno z 'boot.out' lub 'w' musi zostać dostarczone."
+
+#. R/bootfuns.q: stop("estimated adjustment 'a' is NA")
+#: R/bootfuns.q:0
+msgid "estimated adjustment 'a' is NA"
+msgstr "oszacowana korekta 'a' wynosi 'NA'"
+
+#. R/bootfuns.q: stop("estimated adjustment 'w' is infinite")
+#: R/bootfuns.q:0
+msgid "estimated adjustment 'w' is infinite"
+msgstr "oszacowana korekta 'w' wynosi nieskończoność"
+
+#. R/bootfuns.q: warning("extreme order statistics used as endpoints")
+#: R/bootfuns.q:0
+msgid "extreme order statistics used as endpoints"
+msgstr "ekstremalnie uporządkowana statystyka użyta jako punkty końcowe"
+
+#. R/bootfuns.q: warning("extreme values used for quantiles")
+#: R/bootfuns.q:0
+msgid "extreme values used for quantiles"
+msgstr "ekstremalne wartości użyte dla kwantyli"
+
+#. R/bootfuns.q: stop("function 'u' missing")
+#: R/bootfuns.q:0
+msgid "function 'u' missing"
+msgstr "brakuje funkcji 'u'"
+
+#. R/bootfuns.q: stop("index array not defined for model-based resampling")
+#: R/bootfuns.q:0
+msgid "index array not defined for model-based resampling"
+msgstr ""
+"tablica indeksów nie jest zdefiniowana dla próbkowania opartego na modelu"
+
+#. R/bootfuns.q: warning("index out of bounds; minimum index only used.")
+#: R/bootfuns.q:0
+msgid "index out of bounds; minimum index only used."
+msgstr "indeks poza zakresem; użyto minimalnego indeksu."
+
+#. R/bootfuns.q: stop("indices are incompatible with 'ncol(data)'")
+#: R/bootfuns.q:0
+msgid "indices are incompatible with 'ncol(data)'"
+msgstr "indeksy są niezgodne z 'ncol(data)'"
+
+#. R/bootfuns.q: gettext("infinitesimal jackknife value", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "infinitesimal jackknife value"
+msgstr "wartość infinitezymalnego jackknife"
+
+#. R/bootfuns.q: stop("influence values cannot be found from a parametric bootstrap")
+#: R/bootfuns.q:0
+msgid "influence values cannot be found from a parametric bootstrap"
+msgstr ""
+"wartości wpływu nie mogą zostać znalezione z parametrycznego bootstrapu"
+
+#. R/bootfuns.q: warning("input 't' ignored; type=\"inf\"")
+#: R/bootfuns.q:0
+msgid "input 't' ignored; type=\"inf\""
+msgstr "wejście 't' zostało zignornowane; type=\"inf\""
+
+#. R/bootfuns.q: warning("input 't' ignored; type=\"jack\"")
+#: R/bootfuns.q:0
+msgid "input 't' ignored; type=\"jack\""
+msgstr "wejście 't' zostało zignornowane; type=\"jack\""
+
+#. R/bootfuns.q: warning("input 't' ignored; type=\"pos\"")
+#: R/bootfuns.q:0
+msgid "input 't' ignored; type=\"pos\""
+msgstr "wejście 't' zostało zignorowane; type=\"pos\""
+
+#. R/bootfuns.q: warning("input 't0' ignored: neither 't' nor 'L' supplied")
+#: R/bootfuns.q:0
+msgid "input 't0' ignored: neither 't' nor 'L' supplied"
+msgstr "wejście 't0' zostało zignornowane: nie dostarczono ani 't' ani 'L'"
+
+#. R/bootfuns.q: stop("invalid value of 'l'")
+#: R/bootfuns.q:0
+msgid "invalid value of 'l'"
+msgstr "niepoprawna wartość 'l'"
+
+#. R/bootfuns.q: stop("invalid value of 'sim' supplied")
+#: R/bootfuns.q:0
+msgid "invalid value of 'sim' supplied"
+msgstr "dostarczono niepoprawną wartość 'sim'"
+
+#. R/bootfuns.q: gettext("jackknife value")
+#. R/bootfuns.q: gettext("jackknife value", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "jackknife value"
+msgstr "wartość jackknife"
+
+#. R/bootfuns.q: gettext("left button = Identify, center button = Exit", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "left button = Identify, center button = Exit"
+msgstr "lewy przycisk = Identyfikuj, środkowy przycisk = Wyjdź"
+
+#. R/bootfuns.q: stop("length of 'm' incompatible with 'strata'")
+#: R/bootfuns.q:0
+msgid "length of 'm' incompatible with 'strata'"
+msgstr "długość 'm' jest niekompatybilna z 'strata'"
+
+#. R/bootpracs.q: gettextf("likelihood exceeds %f at only one point", lim)
+#: R/bootpracs.q:0
+msgid "likelihood exceeds %f at only one point"
+msgstr "funkcja wiarygodności przekracza %f tylko w jednym punkcie"
+
+#. R/bootpracs.q: gettextf("likelihood never exceeds %f", lim)
+#: R/bootpracs.q:0
+msgid "likelihood never exceeds %f"
+msgstr "funkcja wiarygodności nigdy nie przekracza %f"
+
+#. R/bootfuns.q: gettext("mean")
+#: R/bootfuns.q:0
+msgid "mean"
+msgstr "średnia"
+
+#. R/bootfuns.q: gettext(" mean(t*)", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "mean(t*)"
+msgstr "średnia(t*)"
+
+#. R/bootfuns.q: stop("missing values not allowed in 'data'")
+#: R/bootfuns.q:0
+msgid "missing values not allowed in 'data'"
+msgstr "brakujące wartości nie są dozwolone w 'data'"
+
+#. R/bootfuns.q: stop("multivariate time series not allowed")
+#: R/bootfuns.q:0
+msgid "multivariate time series not allowed"
+msgstr "wielowymiarowe szeregi czasowe nie są dozwolone"
+
+#. R/bootfuns.q: stop("negative value of 'm' supplied")
+#: R/bootfuns.q:0
+msgid "negative value of 'm' supplied"
+msgstr "dostarczono ujemną wartość 'm'"
+
+#. R/bootfuns.q: stop("neither 'data' nor bootstrap object specified")
+#: R/bootfuns.q:0
+msgid "neither 'data' nor bootstrap object specified"
+msgstr "brak 'data' lub określonego obiektu bootstrapu"
+
+#. R/bootfuns.q: stop("neither 'statistic' nor bootstrap object specified")
+#: R/bootfuns.q:0
+msgid "neither 'statistic' nor bootstrap object specified"
+msgstr "brak 'statistic' lub określonego obiektu bootstrapu"
+
+#. R/bootfuns.q: warning("no coefficients in Cox model -- model ignored")
+#: R/bootfuns.q:0
+msgid "no coefficients in Cox model -- model ignored"
+msgstr "brak współczynników w modelu Coxa -- model został zignorowany"
+
+#. R/bootfuns.q: stop("no data in call to 'boot'")
+#: R/bootfuns.q:0
+msgid "no data in call to 'boot'"
+msgstr "brak danych w wywołaniu 'boot'"
+
+#. R/bootfuns.q: gettextf("number of columns of 'A' (%d) not equal to length of 'u' (%d)", d, length(u))
+#: R/bootfuns.q:0
+msgid "number of columns of 'A' (%d) not equal to length of 'u' (%d)"
+msgstr "liczba kolumn 'A' (%d) nie równa się długości 'u' (%d)"
+
+#. R/bootfuns.q: stop("one of 't' or 't0' required")
+#: R/bootfuns.q:0
+msgid "one of 't' or 't0' required"
+msgstr "jeden z 't' lub 't0' jest wymagany"
+
+#. R/bootfuns.q: gettextf("only columns %s and %s of 'data' used", index[1L], index[2L])
+#: R/bootfuns.q:0
+msgid "only columns %s and %s of 'data' used"
+msgstr "tylko kolumny %s oraz %s 'data' zostały użyte"
+
+#. R/bootfuns.q: warning("only first 2 elements of 'index' used")
+#: R/bootfuns.q:0
+msgid "only first 2 elements of 'index' used"
+msgstr "tylko pierwsze 2 elementy 'index' zostały użyte"
+
+#. R/bootfuns.q: warning("only first column of 't' used")
+#: R/bootfuns.q:0
+msgid "only first column of 't' used"
+msgstr "tylko pierwsza kolumna 't' została użyta"
+
+#. R/bootfuns.q: warning("only first element of 'index' used")
+#. R/bootfuns.q: warning("only first element of 'index' used")
+#. R/bootfuns.q: warning("only first element of 'index' used")
+#. R/bootfuns.q: warning("only first element of 'index' used")
+#. R/bootfuns.q: warning("only first element of 'index' used")
+#. R/bootfuns.q: warning("only first element of 'index' used")
+#. R/bootfuns.q: warning("only first element of 'index' used")
+#. R/bootfuns.q: warning("only first element of 'index' used")
+#. R/bootfuns.q: warning("only first element of 'index' used")
+#. R/bootfuns.q: warning("only first element of 'index' used")
+#. R/bootfuns.q: warning("only first element of 'index' used")
+#. R/bootfuns.q: warning("only first element of 'index' used")
+#: R/bootfuns.q:0
+msgid "only first element of 'index' used"
+msgstr "tylko pierwszy element 'index' został użyty"
+
+#. R/bootfuns.q: warning("only first element of 'index' used in 'abc.ci'")
+#: R/bootfuns.q:0
+msgid "only first element of 'index' used in 'abc.ci'"
+msgstr "tylko pierwszy element 'index' został użyty w 'abc.ci'"
+
+#. R/bootfuns.q: gettext("original", domain = "R-boot")
+#. R/bootfuns.q: gettext("original", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "original"
+msgstr "oryginał"
+
+#. R/bootfuns.q: gettext("regression jackknife value", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "regression jackknife value"
+msgstr "wartość regresyjnego jackknife"
+
+#. R/bootfuns.q: stop("sim = \"weird\" cannot be used with a \"coxph\" object")
+#: R/bootfuns.q:0
+msgid "sim = \"weird\" cannot be used with a \"coxph\" object"
+msgstr "sim=\"weird\" nie może być użyte z obiektem \"coxph\""
+
+#. R/bootfuns.q: gettext("standardized infinitesimal jackknife value", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "standardized infinitesimal jackknife value"
+msgstr "wartość standaryzowanego inifinitezymalnego jackknife"
+
+#. R/bootfuns.q: gettext("standardized jackknife value", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "standardized jackknife value"
+msgstr "ustandaryzowana wartość jackknife"
+
+#. R/bootfuns.q: gettext("standardized regression jackknife value", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "standardized regression jackknife value"
+msgstr "wartość standaryzowanego regresyjnego jackknife"
+
+#. R/bootfuns.q: gettext("std. error")
+#. R/bootfuns.q: gettext(" std. error", domain = "R-boot")
+#. R/bootfuns.q: gettext(" std. error", domain = "R-boot")
+#: R/bootfuns.q:0
+msgid "std. error"
+msgstr "błąd std."
+
+#. R/bootfuns.q: stop("this type not implemented for Binary")
+#: R/bootfuns.q:0
+msgid "this type not implemented for Binary"
+msgstr "ten typ nie jest zaimplementowany dla rozkładu Bernoulliego"
+
+#. R/bootfuns.q: stop("this type not implemented for Poisson")
+#: R/bootfuns.q:0
+msgid "this type not implemented for Poisson"
+msgstr "ten typ nie jest zaimplementowany dla rozkładu Poisson'a"
+
+#. R/bootfuns.q: warning("unable to achieve requested overall error rate")
+#: R/bootfuns.q:0
+msgid "unable to achieve requested overall error rate"
+msgstr "nie można uzyskać zażądanego ogólnego wskaźnika błędu"
+
+#. R/bootfuns.q: stop("unable to calculate 'var.t0'")
+#: R/bootfuns.q:0
+msgid "unable to calculate 'var.t0'"
+msgstr "nie można wyliczyć 'var.t0'"
+
+#. R/bootfuns.q: gettextf("unable to find multiplier for %f", theta[i])
+#: R/bootfuns.q:0
+msgid "unable to find multiplier for %f"
+msgstr "nie można znaleźć mnożnika dla %f"
+
+#. R/bootfuns.q: stop("unable to find range")
+#. R/bootfuns.q: stop("unable to find range")
+#. R/bootfuns.q: stop("unable to find range")
+#. R/bootfuns.q: stop("unable to find range")
+#: R/bootfuns.q:0
+msgid "unable to find range"
+msgstr "nie można znaleźć zakresu"
+
+#. R/bootfuns.q: stop("unknown value of 'sim'")
+#: R/bootfuns.q:0
+msgid "unknown value of 'sim'"
+msgstr "nieznana wartość 'sim'"
+
+#. R/bootfuns.q: stop("unrecognized value of 'sim'")
+#: R/bootfuns.q:0
+msgid "unrecognized value of 'sim'"
+msgstr "nierozpoznana wartość 'sim'"
+
+#. R/bootfuns.q: stop("use 'boot.ci' for scalar parameters")
+#: R/bootfuns.q:0
+msgid "use 'boot.ci' for scalar parameters"
+msgstr "użyj 'boot.ci' dla skalarnych parametrów"
+
+#. R/bootfuns.q: warning("variance required for studentized intervals")
+#: R/bootfuns.q:0
+msgid "variance required for studentized intervals"
+msgstr "wariancja jest wymagana dla studentyzowanych przedziałów ufności"
+
+#. R/bootfuns.q: ngettext(R[2L], "First %d replicate tilted to %s", "First %d replicates tilted to %s")
+#: R/bootfuns.q:0
+msgid "First %d replicate tilted to %s"
+msgid_plural "First %d replicates tilted to %s"
+msgstr[0] "Pierwsza %d replika jest nieprzechylona na %s"
+msgstr[1] "Pierwsze %d repliki są nieprzechylone na %s"
+msgstr[2] "Pierwszych %d replik jest nieprzechylonych na %s"
+
+#. R/bootfuns.q: ngettext(R[1L], "First %d replicate untilted", "First %d replicates untilted")
+#: R/bootfuns.q:0
+msgid "First %d replicate untilted"
+msgid_plural "First %d replicates untilted"
+msgstr[0] "Pierwsza %d replika jest nieprzechylona"
+msgstr[1] "Pierwsze %d repliki są nieprzechylone"
+msgstr[2] "Pierwszych %d replik jest nieprzechylonych"
+
+#. R/bootfuns.q: ngettext(R[j + 1L], "Next %d replicate tilted to %s", "Next %d replicates tilted to %s")
+#: R/bootfuns.q:0
+msgid "Next %d replicate tilted to %s"
+msgid_plural "Next %d replicates tilted to %s"
+msgstr[0] "Następna %d replika jest nieprzechylona na %s"
+msgstr[1] "Następne %d repliki są nieprzechylone na %s"
+msgstr[2] "Następne %d replik jest nieprzechylonych na %s"

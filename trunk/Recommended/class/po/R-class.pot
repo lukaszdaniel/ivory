@@ -1,0 +1,138 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: class 7.3-11\n"
+"POT-Creation-Date: 2014-07-22 16:15\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+
+#: R/SOM.R: 0
+#. R/SOM.R: stop("'SOM' called with no data")
+
+msgid "'SOM' called with no data"
+msgstr ""
+
+
+#: R/SOM.R: 0
+#. R/SOM.R: stop("'alpha' and 'radii' arguments do not have the same lengths")
+
+msgid "'alpha' and 'radii' arguments do not have the same lengths"
+msgstr ""
+
+
+#: R/SOM.R: 0
+#. R/SOM.R: stop("'alpha' and 'radii' arguments do not match")
+
+msgid "'alpha' and 'radii' arguments do not match"
+msgstr ""
+
+
+#: R/lvq.R: 0
+#. R/lvq.R: stop("'prior' argument is of incorrect length")
+
+msgid "'prior' argument is of incorrect length"
+msgstr ""
+
+
+#: R/SOM.R: 0
+#. R/SOM.R: stop("'radii' must be a list of the same length as 'alpha'")
+
+msgid "'radii' must be a list of the same length as 'alpha'"
+msgstr ""
+
+
+#: R/knn.R: 0
+#. R/knn.R: stop("'train' and 'class' have different lengths")
+#. R/knn.R: stop("'train' and 'class' have different lengths")
+#. R/knn.R: stop("'train' and 'class' have different lengths")
+
+msgid "'train' and 'class' have different lengths"
+msgstr ""
+
+
+#: R/lvq.R: 0
+#. R/lvq.R: stop("'x' and 'cl' arguments have different lengths")
+#. R/lvq.R: stop("'x' and 'cl' arguments have different lengths")
+#. R/lvq.R: stop("'x' and 'cl' arguments have different lengths")
+#. R/lvq.R: stop("'x' and 'cl' arguments have different lengths")
+#. R/lvq.R: stop("'x' and 'cl' arguments have different lengths")
+
+msgid "'x' and 'cl' arguments have different lengths"
+msgstr ""
+
+
+#: R/knn.R: 0
+#. R/knn.R: stop("dims of 'test' and 'train' differ")
+#. R/knn.R: stop("dims of 'test' and 'train' differ")
+
+msgid "dims of 'test' and 'train' differ"
+msgstr ""
+
+
+#: R/lvq.R: 0
+#. R/lvq.R: stop("invalid 'prior' argument")
+
+msgid "invalid 'prior' argument"
+msgstr ""
+
+
+#: R/knn.R: 0
+#. R/knn.R: gettextf("k = %d exceeds number %d of patterns", k, ntr)
+#. R/knn.R: gettextf("k = %d exceeds number %d of patterns", k, ntr - 1)
+
+msgid "k = %d exceeds number %d of patterns"
+msgstr ""
+
+
+#: R/knn.R: 0
+#. R/knn.R: gettextf("k = %d must be at least 1", k)
+#. R/knn.R: gettextf("k = %d must be at least 1", k)
+
+msgid "k = %d must be at least 1"
+msgstr ""
+
+
+#: R/knn.R: 0
+#: R/lvq.R: 0
+#: R/lvq.R: 0
+#: R/lvq.R: 0
+#: R/lvq.R: 0
+#: R/lvq.R: 0
+#. R/knn.R: stop("no missing values are allowed")
+#. R/knn.R: stop("no missing values are allowed")
+#. R/knn.R: stop("no missing values are allowed")
+#. R/lvq.R: stop("no missing values are allowed")
+#. R/lvq.R: stop("no missing values are allowed")
+#. R/lvq.R: stop("no missing values are allowed")
+#. R/lvq.R: stop("no missing values are allowed")
+#. R/lvq.R: stop("no missing values are allowed")
+
+msgid "no missing values are allowed"
+msgstr ""
+
+
+#: R/multiedit.R: 0
+#. R/multiedit.R: gettextf("pass %s size %d", pass, n2)
+
+msgid "pass %s size %d"
+msgstr ""
+
+
+#: R/multiedit.R: 0
+#. R/multiedit.R: warning("retained set is now too small to proceed")
+
+msgid "retained set is now too small to proceed"
+msgstr ""
+
+
+#: R/SOM.R: 0
+#. R/SOM.R: stop("wrong plot method used")
+#. R/SOM.R: stop("wrong plot method used")
+
+msgid "wrong plot method used"
+msgstr ""

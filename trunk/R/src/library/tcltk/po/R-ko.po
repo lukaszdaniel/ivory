@@ -1,0 +1,185 @@
+# # File R_HOME/src/library/tcltk/po/R-ko.po
+# # Managed by Chel Hee Lee (Korean, R Development Translation Team)
+# # Email <gnustats@gmail.com> or <chl948@mail.usask.ca>
+# # Copyright 1995-2012 R Core Team & R Develoment Translation Team
+# # Distributed under GPL 2 or later
+# #
+msgid ""
+msgstr ""
+"Project-Id-Version: R 2.2.0\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2014-07-19 18:11\n"
+"PO-Revision-Date: 2012-03-08 20:29+0200\n"
+"Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
+"Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Pootle 2.1.6\n"
+
+#. R/utils.R: stop("'filters' must be a 2-column character matrix")
+#: R/utils.R:0
+msgid "'filters' must be a 2-column character matrix"
+msgstr "'filters' 는 반드시 2개의 열을 가진 문자형 행렬이어야 합니다 "
+
+#. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
+#. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
+#: R/utils.R:0
+#, fuzzy
+msgid "'pb' is not from class %s"
+msgstr "'pb' 는 \"tkProgressBar\" 클래스가 아닙니다 "
+
+#. R/utils.R: gettext("Cancel")
+#: R/utils.R:0
+msgid "Cancel"
+msgstr "취소"
+
+#. R/tkGUI.R: gettext("Demos")
+#: R/tkGUI.R:0
+msgid "Demos"
+msgstr "데모"
+
+#. R/tkGUI.R: gettext("Density")
+#: R/tkGUI.R:0
+msgid "Density"
+msgstr "밀도"
+
+#. R/tkGUI.R: gettext("Don't save workspace")
+#: R/tkGUI.R:0
+msgid "Don't save workspace"
+msgstr "워크스페이스 저장하지 않기 "
+
+#. R/tkGUI.R: gettext("File")
+#: R/tkGUI.R:0
+msgid "File"
+msgstr "파일 "
+
+#. R/tkGUI.R: gettext("Go get them!")
+#: R/tkGUI.R:0
+msgid "Go get them!"
+msgstr "가서 가져오세요!"
+
+#. R/tkGUI.R: gettext("Help")
+#: R/tkGUI.R:0
+msgid "Help"
+msgstr "도움말"
+
+#. R/tkGUI.R: gettext("Help topic:")
+#: R/tkGUI.R:0
+msgid "Help topic:"
+msgstr "도움말 주제들:"
+
+#. R/tkGUI.R: gettext("Install packages from CRAN")
+#: R/tkGUI.R:0
+msgid "Install packages from CRAN"
+msgstr "CRAN 으로부터 패키지를 설치하세요 "
+
+#. R/tkGUI.R: gettext("Interactive linear fitting")
+#: R/tkGUI.R:0
+msgid "Interactive linear fitting"
+msgstr "인터랙티브한 선형적합 "
+
+#. R/tkGUI.R: gettext("Load")
+#: R/tkGUI.R:0
+msgid "Load"
+msgstr "내려받기 "
+
+#. R/tkGUI.R: gettext("Load packages")
+#: R/tkGUI.R:0
+msgid "Load packages"
+msgstr "패키지를 내려받습니다 "
+
+#. R/tkGUI.R: gettext("Manuals in PDF format")
+#: R/tkGUI.R:0
+msgid "Manuals in PDF format"
+msgstr "PDF 형식의 매뉴얼들 "
+
+#. R/utils.R: gettext("OK")
+#: R/utils.R:0
+msgid "OK"
+msgstr "OK"
+
+#. R/tkGUI.R: gettext("Packages")
+#: R/tkGUI.R:0
+msgid "Packages"
+msgstr "패키지"
+
+#. R/tkGUI.R: gettext("Quit")
+#: R/tkGUI.R:0
+msgid "Quit"
+msgstr "종료"
+
+#. R/tkGUI.R: gettext("R FAQ")
+#: R/tkGUI.R:0
+msgid "R FAQ"
+msgstr "R 자주 찾는 질문들 "
+
+#. R/tkGUI.R: gettext("Save workspace")
+#: R/tkGUI.R:0
+msgid "Save workspace"
+msgstr "워크스페이스 저장"
+
+#. R/tkGUI.R: gettext("Source R code")
+#: R/tkGUI.R:0
+msgid "Source R code"
+msgstr "R 소스코드 "
+
+#. R/tclsearch.R: gettextf("Tcl package '%s' not found", package)
+#: R/tclsearch.R:0
+msgid "Tcl package '%s' not found"
+msgstr "Tcl 패키지 '%s' 를 찾을 수 없습니다 "
+
+#. R/unix/zzz.R: stop("Tcl/Tk libraries are missing: install the Tcl/Tk component from the R installer")
+#: R/unix/zzz.R:0
+msgid ""
+"Tcl/Tk libraries are missing: install the Tcl/Tk component from the R "
+"installer"
+msgstr ""
+
+#. R/windows/zzz.R: stop("Tcl/Tk support files were not installed", call. = FALSE)
+#: R/windows/zzz.R:0
+msgid "Tcl/Tk support files were not installed"
+msgstr "Tcl/Tk 을 지원하는 파일들이 설치되지 않았습니다 "
+
+#. R/unix/zzzstub.R: stop("Tcl/Tk support is not available on this system", domain = "R-tcltk")
+#: R/unix/zzzstub.R:0
+msgid "Tcl/Tk support is not available on this system"
+msgstr "이 시스템에서는 Tcl/Tk 이 지원되지 않습니다 "
+
+#. R/tkGUI.R: stop("The tkGUI is not available under Windows")
+#: R/tkGUI.R:0
+msgid "The tkGUI is not available under Windows"
+msgstr "tkGUI 는 Windows 에서 사용할 수 없습니다 "
+
+#. R/unix/zzz.R: stop("X11 library is missing: install XQuartz from xquartz.macosforge.org")
+#: R/unix/zzz.R:0
+msgid "X11 library is missing: install XQuartz from xquartz.macosforge.org"
+msgstr ""
+
+#. R/tclarray.R: stop("cannot change names on Tcl array")
+#: R/tclarray.R:0
+msgid "cannot change names on Tcl array"
+msgstr "Tcl 배열에서는 이름을 변경할수 없습니다"
+
+#. R/Tk.R: gettextf("cannot handle object of mode '%s'", storage.mode(x))
+#: R/Tk.R:0
+msgid "cannot handle object of mode '%s'"
+msgstr "모드가 '%s' 인 객체를 처리할 수 없습니다 "
+
+#. R/tclarray.R: stop("cannot set length of Tcl array")
+#: R/tclarray.R:0
+msgid "cannot set length of Tcl array"
+msgstr "Tcl 배열의 길이를 정할 수 없습니다 "
+
+#. R/tkGUI.R: gettext("t test")
+#: R/tkGUI.R:0
+msgid "t test"
+msgstr "t 테스트 "
+
+#~ msgid "Loading Tcl/Tk interface ..."
+#~ msgstr "Tcl/Tk 인터페이스를 내려받는 중입니다 ... "
+
+#~ msgid "done"
+#~ msgstr "완료 "

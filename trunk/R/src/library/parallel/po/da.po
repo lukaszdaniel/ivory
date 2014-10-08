@@ -1,0 +1,193 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR The R Foundation
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: R 3.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-08-23 06:12+0200\n"
+"PO-Revision-Date: 2011-11-29 09:15+0200\n"
+"Last-Translator: Joe <joedalton2@yahoo.dk>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.1.6\n"
+
+#: fork.c:80
+#, c-format
+msgid "removing child %d\n"
+msgstr ""
+
+#: fork.c:98
+#, c-format
+msgid "WARNING: child %d was to be removed but it doesn't exist\n"
+msgstr ""
+
+#: fork.c:153
+#, c-format
+msgid "child process %d got SIGUSR1; child_exit_status=%d\n"
+msgstr ""
+
+#: fork.c:168 fork.c:203
+#, fuzzy, c-format
+msgid "child %d terminated with %d\n"
+msgstr "underproces %d findes ikke"
+
+#: fork.c:170 fork.c:205
+#, fuzzy, c-format
+msgid "child %d terminated by signal %d\n"
+msgstr "underproces %d findes ikke"
+
+#: fork.c:251 fork.c:254
+msgid "unable to create a pipe"
+msgstr "kan ikke oprette en datakanal"
+
+#: fork.c:257
+#, c-format
+msgid "parent[%d] created pipes: comm (%d->%d), sir (%d->%d)\n"
+msgstr ""
+
+#: fork.c:272
+#, c-format
+msgid "unable to fork, possible reason: %s"
+msgstr "kan ikke forgrene, mulig årsag: %s"
+
+#: fork.c:299
+#, c-format
+msgid "child process %d started\n"
+msgstr ""
+
+#: fork.c:314
+#, c-format
+msgid "parent registers new child %d\n"
+msgstr ""
+
+#: fork.c:318
+msgid "memory allocation error"
+msgstr "allokeringsfejl for hukommelse"
+
+#: fork.c:359
+msgid "descriptors must be integers"
+msgstr ""
+
+#: fork.c:371
+msgid "only children can send data to the master process"
+msgstr "kun underprocesser kan sende data til overprocessen"
+
+#: fork.c:373
+msgid "there is no pipe to the master process"
+msgstr "der er ingen datakanal til overprocessen"
+
+#: fork.c:375
+msgid "content to send must be RAW, use serialize() if needed"
+msgstr "indhold at sende skal være RAW (RÅ), brug serialize() hvis krævet"
+
+#: fork.c:379
+#, c-format
+msgid "child %d: send_master (%d bytes)\n"
+msgstr ""
+
+#: fork.c:384 fork.c:391 fork.c:713
+msgid "write error, closing pipe to the master"
+msgstr "skrivefejl, lukke datakanal til overproces"
+
+#: fork.c:404
+msgid "only the master process can send data to a child process"
+msgstr "kun overprocessen kan sende data til en underproces"
+
+#: fork.c:405
+msgid "what must be a raw vector"
+msgstr ""
+
+#: fork.c:411
+#, c-format
+msgid "child %d does not exist"
+msgstr "underproces %d findes ikke"
+
+#: fork.c:417
+msgid "write error"
+msgstr "skrivefejl"
+
+#: fork.c:485 fork.c:607
+#, c-format
+msgid "error '%s' in select"
+msgstr "fejl '%s' i select"
+
+#: fork.c:499
+#, c-format
+msgid " - read select %d children: "
+msgstr ""
+
+#: fork.c:522
+#, c-format
+msgid " read_child_ci(%d) - read length returned %d\n"
+msgstr ""
+
+#: fork.c:537
+#, c-format
+msgid " read_child_ci(%d) - read %d at %d returned %d\n"
+msgstr ""
+
+#: fork.c:568
+#, c-format
+msgid "read_child(%d) - pid is not in the list of children\n"
+msgstr ""
+
+#: fork.c:695
+#, fuzzy
+msgid "'mckill' failed"
+msgstr "mckill fejlede"
+
+#: fork.c:703
+#, fuzzy, c-format
+msgid "child %d: 'mcexit' called\n"
+msgstr "mcexit fejlede"
+
+#: fork.c:705
+#, fuzzy
+msgid "'mcexit' can only be used in a child process"
+msgstr "mcexit kan kun bruges i en underproces"
+
+#: fork.c:717
+#, c-format
+msgid "child %d is waiting for permission to exit\n"
+msgstr ""
+
+#: fork.c:723
+#, fuzzy, c-format
+msgid "child %d: exiting\n"
+msgstr "underproces %d findes ikke"
+
+#: fork.c:726
+#, fuzzy
+msgid "'mcexit' failed"
+msgstr "mcexit fejlede"
+
+#: fork.c:756 fork.c:765
+msgid "invalid CPU affinity specification"
+msgstr ""
+
+#: fork.c:776
+msgid "requested CPU set is too large for this system"
+msgstr ""
+
+#: fork.c:799
+msgid "retrieving CPU affinity set failed"
+msgstr ""
+
+#: ncpus.c:77
+msgid "GetLogicalProcessorInformation is not supported on this OS."
+msgstr ""
+
+#: ncpus.c:87
+msgid "allocation failure"
+msgstr ""
+
+#: ncpus.c:88
+#, c-format
+msgid "in reading processor information, probable cause: %d"
+msgstr ""

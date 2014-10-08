@@ -1,0 +1,784 @@
+# Translation of R-lattice.pot to French
+# Copyright (C) 2007 The R Foundation
+# This file is distributed under the same license as the lattice R package.
+# Philippe Grosjean <phgrosjean@sciviews.org>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lattice 0.13-1\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2014-07-13 09:15\n"
+"PO-Revision-Date: 2007-03-23 10:18+0100\n"
+"Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
+"Language-Team: French <R-core@r-project.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. R/legend.R: gettextf("'%s' must be a list", "key")
+#. R/legend.R: gettextf("'%s' must be a list", "key")
+#. R/update.trellis.R: gettextf("'%s' must be a list", "par.strip.text")
+#. R/update.trellis.R: gettextf("'%s' must be a list", "par.settings")
+#. R/update.trellis.R: gettextf("'%s' must be a list", "plot.args")
+#. R/update.trellis.R: gettextf("'%s' must be a list", "lattice.options")
+#: R/legend.R:0 R/update.trellis.R:0
+#, fuzzy
+msgid "'%s' must be a list"
+msgstr "'key' doit être une liste"
+
+#. R/panels.R: warning("'a' and 'b' are overridden by 'coef'")
+#: R/panels.R:0
+msgid "'a' and 'b' are overridden by 'coef'"
+msgstr ""
+
+#. R/panels.R: warning("'a' is overridden by 'reg'")
+#: R/panels.R:0
+msgid "'a' is overridden by 'reg'"
+msgstr ""
+
+#. R/scales.R: warning("'aspect=\"iso\"' approximate since 'relation=\"free\"'")
+#: R/scales.R:0
+msgid "'aspect=\"iso\"' approximate since 'relation=\"free\"'"
+msgstr "'aspect=\"iso\"' approximatif lorsque 'relation=\"free\"'"
+
+#. R/axis.R: stop("'at' missing or incompatible with 'labels'")
+#: R/axis.R:0
+msgid "'at' missing or incompatible with 'labels'"
+msgstr ""
+
+#. R/legend.R: warning("'at' values are not equispaced; output may be wrong")
+#: R/legend.R:0
+msgid "'at' values are not equispaced; output may be wrong"
+msgstr ""
+
+#. R/panel.smoothscatter.R: stop("'bandwidth' must be numeric")
+#: R/panel.smoothscatter.R:0
+msgid "'bandwidth' must be numeric"
+msgstr ""
+
+#. R/update.trellis.R: warning("'drop=TRUE' ignored")
+#: R/update.trellis.R:0
+msgid "'drop=TRUE' ignored"
+msgstr "'drop=TRUE' est ignoré"
+
+#. R/panels.R: stop("'expr' must be a function or an expression containing 'x'")
+#: R/panels.R:0
+msgid "'expr' must be a function or an expression containing 'x'"
+msgstr "'expr' doit être une fonction ou une expression contenant 'x'"
+
+#. R/interaction.R: warning("'f.value' not supported; ignoring")
+#: R/interaction.R:0
+msgid "'f.value' not supported; ignoring"
+msgstr ""
+
+#. R/common.R: stop("'length' and 'prop' cannot both be specified")
+#: R/common.R:0
+msgid "'length' and 'prop' cannot both be specified"
+msgstr "'length' et 'prop' ne peuvent être spécifiés simultanément"
+
+#. R/common.R: stop("'length' must be positive")
+#: R/common.R:0
+msgid "'length' must be positive"
+msgstr "'length' doit être positif"
+
+#. R/common.R: warning("'multiple=TRUE' ignored ('groups' non-null with 'outer=FALSE')")
+#: R/common.R:0
+msgid "'multiple=TRUE' ignored ('groups' non-null with 'outer=FALSE')"
+msgstr "'multiple = TRUE' est ignoré ('groups' non nuls avec 'outer = FALSE')"
+
+#. R/panel.smoothscatter.R: stop("'nbin' must be numeric of length 1 or 2")
+#: R/panel.smoothscatter.R:0
+msgid "'nbin' must be numeric of length 1 or 2"
+msgstr ""
+
+#. R/panel.smoothscatter.R: stop("'nrpoints' should be numeric scalar with value >= 0.")
+#: R/panel.smoothscatter.R:0
+msgid "'nrpoints' should be numeric scalar with value >= 0."
+msgstr ""
+
+#. R/bwplot.R: warning("'origin' forced to 0 for stacked bars")
+#. R/bwplot.R: warning("'origin' forced to 0 for stacked bars")
+#: R/bwplot.R:0
+msgid "'origin' forced to 0 for stacked bars"
+msgstr "'origin' replacée à 0 pour les diagrammes en barre empilées"
+
+#. R/qqmath.R: stop("'probs' outside [0,1]")
+#: R/qqmath.R:0
+msgid "'probs' outside [0,1]"
+msgstr "'probs' en dehors de [0,1]"
+
+#. R/settings.R: warning("'trellis.device' has changed, 'bg' may not be doing what you think it is")
+#: R/settings.R:0
+msgid ""
+"'trellis.device' has changed, 'bg' may not be doing what you think it is"
+msgstr "'trellis.device' a changé, 'bg' peut ne plus faire ce que vous pensez"
+
+#. R/interaction.R: stop("'trellis.switchFocus' cannot be used to switch to a different 'prefix'.  Use 'trellis.focus' first")
+#: R/interaction.R:0
+msgid ""
+"'trellis.switchFocus' cannot be used to switch to a different 'prefix'.  Use "
+"'trellis.focus' first"
+msgstr ""
+
+#. R/histogram.R: gettextf("'type = %s' can be misleading in this context", type)
+#. R/histogram.R: gettextf("'type = %s' can be misleading in this context", type)
+#: R/histogram.R:0
+#, fuzzy
+msgid "'type = %s' can be misleading in this context"
+msgstr "type='%s' peut être ambigü dans ce contexte"
+
+#. R/cloud.R: warning("'type' has unsupported values")
+#: R/cloud.R:0
+msgid "'type' has unsupported values"
+msgstr "argument 'type' contient des valeurs non autorisées"
+
+#. R/parallel.R: stop("'varnames' has wrong length.")
+#. R/splom.R: stop("'varnames' has wrong length.")
+#: R/parallel.R:0 R/splom.R:0
+msgid "'varnames' has wrong length."
+msgstr ""
+
+#. R/shingle.R: stop("'x' argument is not an object of class \"shingle\"")
+#: R/shingle.R:0
+msgid "'x' argument is not an object of class \"shingle\""
+msgstr ""
+
+#. R/shingle.R: stop("'x' must be matrix with 2 columns")
+#: R/shingle.R:0
+#, fuzzy
+msgid "'x' must be matrix with 2 columns"
+msgstr "'x' doit être une matrice à 2 colonnes"
+
+#. R/levelplot.R: warning("'x' values are not equispaced; output may be wrong")
+#: R/levelplot.R:0
+msgid "'x' values are not equispaced; output may be wrong"
+msgstr ""
+
+#. R/levelplot.R: warning("'y' values are not equispaced; output may be wrong")
+#: R/levelplot.R:0
+msgid "'y' values are not equispaced; output may be wrong"
+msgstr ""
+
+#. R/panel.smoothscatter.R: message("(loaded the KernSmooth namespace)")
+#: R/panel.smoothscatter.R:0
+msgid "(loaded the KernSmooth namespace)"
+msgstr ""
+
+#. R/summary.trellis.R: gettext("Call:", domain = "R-lattice")
+#: R/summary.trellis.R:0
+msgid "Call:"
+msgstr "Appel :"
+
+#. R/qqmath.R: warning("Can't have log X-scale")
+#: R/qqmath.R:0
+msgid "Can't have log X-scale"
+msgstr "axe X logarithmique impossible"
+
+#. R/densityplot.R: warning("Can't have log Y-scale")
+#. R/histogram.R: warning("Can't have log Y-scale")
+#: R/densityplot.R:0 R/histogram.R:0
+msgid "Can't have log Y-scale"
+msgstr "L'axe Y ne peut avoir une échelle logarithmique"
+
+#. R/interaction.R: message("Click on panel to focus")
+#: R/interaction.R:0
+msgid "Click on panel to focus"
+msgstr ""
+
+#. R/interaction.R: message("Click to choose one point to highlight")
+#: R/interaction.R:0
+msgid "Click to choose one point to highlight"
+msgstr ""
+
+#. R/settings.R: gettextf("Could not find device function '%s'", device)
+#: R/settings.R:0
+msgid "Could not find device function '%s'"
+msgstr "Impossible de trouver la fonction du périphérique '%s'"
+
+#. R/histogram.R: gettext("Count")
+#: R/histogram.R:0
+msgid "Count"
+msgstr "Dénombrements"
+
+#. R/shingle.R: gettext("Data:", domain = "R-lattice")
+#: R/shingle.R:0
+msgid "Data:"
+msgstr "Données :"
+
+#. R/densityplot.R: gettext("Density")
+#. R/densityplot.R: gettext("Density")
+#. R/histogram.R: gettext("Density")
+#: R/densityplot.R:0 R/histogram.R:0
+msgid "Density"
+msgstr "Densité"
+
+#. R/print.trellis.R: gettextf("Error using packet %g\n%s", panel.number(), conditionMessage(e))
+#: R/print.trellis.R:0
+msgid ""
+"Error using packet %g\n"
+"%s"
+msgstr ""
+
+#. R/scales.R: warning("Explicitly specified limits ignored")
+#: R/scales.R:0
+msgid "Explicitly specified limits ignored"
+msgstr "Les limites explicitement spécifiées ont été ignorées"
+
+#. R/rfs.R: gettext("Fitted Values minus Mean", domain = "R-lattice")
+#: R/rfs.R:0
+msgid "Fitted Values minus Mean"
+msgstr "Valeurs ajustées moins la moyenne"
+
+#. R/common.R: stop("Inadmissible value of layout.")
+#: R/common.R:0
+#, fuzzy
+msgid "Inadmissible value of layout."
+msgstr "valeur impossible pour 'layout'"
+
+#. R/common.R: stop("Inappropriate arguments")
+#: R/common.R:0
+msgid "Inappropriate arguments"
+msgstr "Arguments inadaptés"
+
+#. R/update.trellis.R: warning("Inappropriate value of 'as.table'")
+#: R/update.trellis.R:0
+msgid "Inappropriate value of 'as.table'"
+msgstr "Valeur de 'as.table' incorrecte"
+
+#. R/shingle.R: gettext("Intervals:", domain = "R-lattice")
+#: R/shingle.R:0
+msgid "Intervals:"
+msgstr "Intervalles :"
+
+#. R/levelplot.R: warning("Invalid 'shrink' parameter ignored")
+#: R/levelplot.R:0
+msgid "Invalid 'shrink' parameter ignored"
+msgstr "'shrink' incorrect et ignoré"
+
+#. R/settings.R: warning("Invalid 'theme' specified")
+#. R/settings.R: warning("Invalid 'theme' specified")
+#: R/settings.R:0
+msgid "Invalid 'theme' specified"
+msgstr "Thème spécifié incorrect"
+
+#. R/update.trellis.R: stop("Invalid indices")
+#: R/update.trellis.R:0
+msgid "Invalid indices"
+msgstr "Indices incorrects"
+
+#. R/legend.R: stop("Invalid key, need at least one component named lines, text, rect or points")
+#: R/legend.R:0
+msgid ""
+"Invalid key, need at least one component named lines, text, rect or points"
+msgstr ""
+"'key' incorrecte, besoin d'une composante parmi 'lines', 'text', 'rect' ou "
+"'points'"
+
+#. R/scales.R: warning("Invalid or ambiguous component names: ", tmp_n, sep = "")
+#: R/scales.R:0
+msgid "Invalid or ambiguous component names:"
+msgstr ""
+
+#. R/miscellaneous.R: warning("Invalid value of 'pos' ignored.")
+#: R/miscellaneous.R:0
+#, fuzzy
+msgid "Invalid value of 'pos' ignored."
+msgstr "Valeur de 'pos' incorrecte"
+
+#. R/common.R: stop("Invalid value of index.cond")
+#: R/common.R:0
+msgid "Invalid value of index.cond"
+msgstr "Valeur de 'index.cond' incorrecte"
+
+#. R/common.R: stop("Length check mismatch; you have found a bug!")
+#: R/common.R:0
+msgid "Length check mismatch; you have found a bug!"
+msgstr ""
+"Incohérence lors de la verification de la longueur ; Vous avez trouvé une "
+"anomalie !"
+
+#. R/common.R: warning("More pages in layout than seem to be necessary.")
+#: R/common.R:0
+msgid "More pages in layout than seem to be necessary."
+msgstr ""
+
+#. R/scales.R: stop("Multiple matches to component name")
+#: R/scales.R:0
+msgid "Multiple matches to component name"
+msgstr ""
+
+#. R/interaction.R: warning("No panels available")
+#: R/interaction.R:0
+msgid "No panels available"
+msgstr ""
+
+#. R/common.R: stop("Non matching lengths")
+#. R/common.R: stop("Non matching lengths")
+#: R/common.R:0
+msgid "Non matching lengths"
+msgstr "Longueurs incohérentes"
+
+#. R/update.trellis.R: message("Note: 'auto.key' ignored since legend already present.\nUse 'update(..., legend = NULL)' to remove existing legend(s)")
+#: R/update.trellis.R:0
+#, fuzzy
+msgid ""
+"Note: 'auto.key' ignored since legend already present.\n"
+"Use 'update(..., legend = NULL)' to remove existing legend(s)"
+msgstr ""
+"Remarque : 'auto.key' est ignoré puisque des clefs sont déjà présentes.\n"
+"Utilisez 'update(..., legend = NULL)' pour retirer le(s) légende(s) "
+"existante(s)"
+
+#. R/settings.R: warning("Note: The default device has been opened to honour attempt to modify trellis settings")
+#: R/settings.R:0
+msgid ""
+"Note: The default device has been opened to honour attempt to modify trellis "
+"settings"
+msgstr ""
+"Remarque : le périphérique par défaut a été ouvert afin de permettre la "
+"modification des paramètres d'un graphe trellis"
+
+#. R/summary.trellis.R: gettext("Number of observations:", domain = "R-lattice")
+#: R/summary.trellis.R:0
+msgid "Number of observations:"
+msgstr "Nombre d'observations :"
+
+#. R/shingle.R: gettext("Overlap between adjacent intervals:", domain = "R-lattice")
+#: R/shingle.R:0
+msgid "Overlap between adjacent intervals:"
+msgstr "Superposition d'intervalles contigus :"
+
+#. R/shingle.R: gettext("Panel")
+#: R/shingle.R:0
+msgid "Panel"
+msgstr "Panneau"
+
+#. R/parallel.R: gettext("Parallel Coordinate Plot")
+#: R/parallel.R:0
+msgid "Parallel Coordinate Plot"
+msgstr ""
+
+#. R/histogram.R: gettext("Percent of Total")
+#: R/histogram.R:0
+msgid "Percent of Total"
+msgstr "Pourcentage du total"
+
+#. R/interaction.R: stop("Plot object was not saved, cannot retrieve panel data")
+#: R/interaction.R:0
+#, fuzzy
+msgid "Plot object was not saved, cannot retrieve panel data"
+msgstr ""
+"le graphe actuel n'a pas été souvegardé, impossible de restaurer les données "
+"des panneaux"
+
+#. R/interaction.R: warning("Plot spans multiple pages, only last page can be updated")
+#: R/interaction.R:0
+#, fuzzy
+msgid "Plot spans multiple pages, only last page can be updated"
+msgstr ""
+"le graph s'étend sur plusieurs pages, seule la dernière peut être mise à jour"
+
+#. R/shingle.R: gettext("Range")
+#: R/shingle.R:0
+msgid "Range"
+msgstr "Étendue"
+
+#. R/update.trellis.R: warning("Requested 'trellis' object was not saved")
+#: R/update.trellis.R:0
+#, fuzzy
+msgid "Requested 'trellis' object was not saved"
+msgstr "Aucun objet trellis n'est actuellement sauvegardé"
+
+#. R/rfs.R: gettext("Residuals", domain = "R-lattice")
+#: R/rfs.R:0
+msgid "Residuals"
+msgstr "Résidus"
+
+#. R/splom.R: gettext("Scatter Plot Matrix")
+#. R/splom.R: gettext("Scatter Plot Matrix")
+#: R/splom.R:0
+msgid "Scatter Plot Matrix"
+msgstr "Matrice de nuages de points"
+
+#. R/interaction.R: sprintf("Selecting panel at position (%g, %g)", focusRow, focusCol)
+#: R/interaction.R:0
+msgid "Selecting panel at position (%g, %g)"
+msgstr ""
+
+#. R/legend.R: stop("Sorry, 'align = FALSE' is not supported")
+#: R/legend.R:0
+#, fuzzy
+msgid "Sorry, 'align = FALSE' is not supported"
+msgstr "désolé, 'align=FALSE' n'est pas (encore ?) disponible"
+
+#. R/update.trellis.R: gettextf("Unrecognized value of 'aspect': '%s'", as.character(aspect))
+#: R/update.trellis.R:0
+msgid "Unrecognized value of 'aspect': '%s'"
+msgstr "Valeur inconnue pour 'aspect' : '%s'"
+
+#. R/interaction.R: stop("You have to first select a panel using trellis.focus()")
+#: R/interaction.R:0
+#, fuzzy
+msgid "You have to first select a panel using trellis.focus()"
+msgstr "vous devez d'abord sélectionner un panneau avec trellis.focus()"
+
+#. R/shingle.R: stop("bad value of 'intervals'")
+#: R/shingle.R:0
+msgid "bad value of 'intervals'"
+msgstr "mauvaise valeur pour 'intervals'"
+
+#. R/parallel.R: warning("cannot have log y-scale")
+#: R/parallel.R:0
+msgid "cannot have log y-scale"
+msgstr "axe Y logarithmique impossible"
+
+#. R/interaction.R: stop("column must be specified")
+#: R/interaction.R:0
+msgid "column must be specified"
+msgstr "'column' doit être spécifié"
+
+#. R/legend.R: gettextf("component '%s' duplicated in key and legend", space)
+#: R/legend.R:0
+msgid "component '%s' duplicated in key and legend"
+msgstr "la composante '%s' est redondante dans 'key' et 'legend'"
+
+#. R/levelplot.R: warning("device does not support raster images with NA, ignoring 'raster=TRUE'")
+#: R/levelplot.R:0
+msgid "device does not support raster images with NA, ignoring 'raster=TRUE'"
+msgstr ""
+
+#. R/levelplot.R: warning("device has no raster support, ignoring 'raster=TRUE'")
+#: R/levelplot.R:0
+msgid "device has no raster support, ignoring 'raster=TRUE'"
+msgstr ""
+
+#. R/levelplot.R: warning("device support for raster images unknown, ignoring 'raster=TRUE'")
+#: R/levelplot.R:0
+msgid "device support for raster images unknown, ignoring 'raster=TRUE'"
+msgstr ""
+
+#. R/tmd.R: gettext("difference")
+#: R/tmd.R:0
+msgid "difference"
+msgstr "différence"
+
+#. R/miscellaneous.R: stop("error")
+#: R/miscellaneous.R:0
+msgid "error"
+msgstr "erreur"
+
+#. R/bwplot.R: warning("explicit 'data' specification ignored")
+#. R/bwplot.R: warning("explicit 'data' specification ignored")
+#. R/bwplot.R: warning("explicit 'data' specification ignored")
+#. R/bwplot.R: warning("explicit 'data' specification ignored")
+#. R/bwplot.R: warning("explicit 'data' specification ignored")
+#. R/bwplot.R: warning("explicit 'data' specification ignored")
+#. R/cloud.R: warning("explicit 'data' specification ignored")
+#. R/cloud.R: warning("explicit 'data' specification ignored")
+#. R/densityplot.R: warning("explicit 'data' specification ignored")
+#. R/histogram.R: warning("explicit 'data' specification ignored")
+#. R/levelplot.R: warning("explicit 'data' specification ignored")
+#. R/levelplot.R: warning("explicit 'data' specification ignored")
+#. R/levelplot.R: warning("explicit 'data' specification ignored")
+#. R/levelplot.R: warning("explicit 'data' specification ignored")
+#. R/levelplot.R: warning("explicit 'data' specification ignored")
+#. R/levelplot.R: warning("explicit 'data' specification ignored")
+#. R/parallel.R: warning("explicit 'data' specification ignored")
+#. R/qqmath.R: warning("explicit 'data' specification ignored")
+#. R/splom.R: warning("explicit 'data' specification ignored")
+#: R/bwplot.R:0 R/cloud.R:0 R/densityplot.R:0 R/histogram.R:0 R/levelplot.R:0
+#: R/parallel.R:0 R/qqmath.R:0 R/splom.R:0
+msgid "explicit 'data' specification ignored"
+msgstr "spécification explicite de 'data' ignorée"
+
+#. R/rfs.R: gettext("f-value", domain = "R-lattice")
+#: R/rfs.R:0
+msgid "f-value"
+msgstr ""
+
+#. R/legend.R: stop("first component of text must be vector of labels")
+#: R/legend.R:0
+#, fuzzy
+msgid "first component of text must be vector of labels"
+msgstr "la première composante de 'text' doit être un vecteur d'étiquettes"
+
+#. R/common.R: stop("improper length of 'lim'")
+#: R/common.R:0
+msgid "improper length of 'lim'"
+msgstr "taille incorrecte de 'lim'"
+
+#. R/axis.R: gettextf("invalid '%s' value", "log")
+#. R/common.R: gettextf("invalid '%s' value", "perm.cond")
+#. R/common.R: gettextf("invalid '%s' value", "layout")
+#. R/levelplot.R: gettextf("invalid '%s' value", "label.style")
+#. R/update.trellis.R: gettextf("invalid '%s' value", "perm.cond")
+#. R/update.trellis.R: gettextf("invalid '%s' value", "aspect")
+#: R/axis.R:0 R/common.R:0 R/levelplot.R:0 R/update.trellis.R:0
+#, fuzzy
+msgid "invalid '%s' value"
+msgstr "valeur incorrecte pour 'layout'"
+
+#. R/common.R: gettextf("invalid dimension '%s'", as.character(dimension))
+#: R/common.R:0
+msgid "invalid dimension '%s'"
+msgstr "dimension '%s' incorrecte"
+
+#. R/common.R: stop("invalid model")
+#: R/common.R:0
+msgid "invalid model"
+msgstr "model incorrect"
+
+#. R/common.R: stop("layout must have at least 2 elements")
+#: R/common.R:0
+msgid "layout must have at least 2 elements"
+msgstr "'layout' doit avoir au moins 2 éléments"
+
+#. R/scales.R: stop("limits cannot be a list when relation = same")
+#: R/scales.R:0
+msgid "limits cannot be a list when relation = same"
+msgstr "'limits' ne peut être une liste lorsque 'relation = same'"
+
+#. R/update.trellis.R: warning("log scales cannot be changed via 'update'")
+#: R/update.trellis.R:0
+msgid "log scales cannot be changed via 'update'"
+msgstr ""
+"les échelles d'axes logarithmiques ne peuvent être modifiées à l'aide "
+"d''update'"
+
+#. R/legend.R: stop("malformed colorkey")
+#: R/legend.R:0
+msgid "malformed colorkey"
+msgstr "'colorkey' inadéquat"
+
+#. R/tmd.R: gettext("mean")
+#: R/tmd.R:0
+msgid "mean"
+msgstr "moyenne"
+
+#. R/bwplot.R: stop("mismatch in number of packets")
+#. R/cloud.R: stop("mismatch in number of packets")
+#. R/densityplot.R: stop("mismatch in number of packets")
+#. R/histogram.R: stop("mismatch in number of packets")
+#. R/levelplot.R: stop("mismatch in number of packets")
+#. R/parallel.R: stop("mismatch in number of packets")
+#. R/qq.R: stop("mismatch in number of packets")
+#. R/qqmath.R: stop("mismatch in number of packets")
+#. R/splom.R: stop("mismatch in number of packets")
+#. R/xyplot.R: stop("mismatch in number of packets")
+#: R/bwplot.R:0 R/cloud.R:0 R/densityplot.R:0 R/histogram.R:0 R/levelplot.R:0
+#: R/parallel.R:0 R/qq.R:0 R/qqmath.R:0 R/splom.R:0 R/xyplot.R:0
+msgid "mismatch in number of packets"
+msgstr "incohérence dans le nombre de paquets"
+
+#. R/qqmath.R: stop("missing values and NaN's not allowed if 'na.rm' is FALSE")
+#: R/qqmath.R:0
+msgid "missing values and NaN's not allowed if 'na.rm' is FALSE"
+msgstr ""
+"les valeurs manquantes et les NaN's ne sont pas permis lorsque 'na.rm = "
+"FALSE'"
+
+#. R/common.R: stop("model must be a formula object")
+#: R/common.R:0
+msgid "model must be a formula object"
+msgstr "l'argument 'model' doit être un object formula"
+
+#. R/interaction.R: warning("nearest observation already identified")
+#. R/interaction.R: warning("nearest observation already identified")
+#: R/interaction.R:0
+msgid "nearest observation already identified"
+msgstr "le point le plus proche est déjà identifié"
+
+#. R/scales.R: stop("need at least one panel")
+#: R/scales.R:0
+msgid "need at least one panel"
+msgstr "besoin d'au moins un panneau"
+
+#. R/common.R: stop("newFactor != NULL && groups == NULL does not hold; you have found a bug!")
+#: R/common.R:0
+msgid ""
+"newFactor != NULL && groups == NULL does not hold; you have found a bug!"
+msgstr ""
+"'newFactor != NULL && groups == NULL' est impossible ; Vous trouvé une "
+"anomalie !"
+
+#. R/common.R: stop("newFactor cannot be NULL; you have found a bug!")
+#: R/common.R:0
+msgid "newFactor cannot be NULL; you have found a bug!"
+msgstr "'newFactor' ne peut être NULL ; Vous avez découvert une anomalie !"
+
+#. R/shingle.R: gettext("no intervals", domain = "R-lattice")
+#: R/shingle.R:0
+msgid "no intervals"
+msgstr "pas d'intervalles"
+
+#. R/interaction.R: gettextf("no observations within %d points", threshold)
+#. R/interaction.R: gettextf("no observations within %d points", threshold)
+#: R/interaction.R:0
+#, fuzzy
+msgid "no observations within %d points"
+msgstr "aucun point dans"
+
+#. R/interaction.R: gettextf("no points within %d points of click", threshold)
+#: R/interaction.R:0
+#, fuzzy
+msgid "no points within %d points of click"
+msgstr "aucun point dans"
+
+#. R/legend.R: warning("not enough rows for columns")
+#: R/legend.R:0
+msgid "not enough rows for columns"
+msgstr "trop peu de lignes pour le nombre de colonnes"
+
+#. R/panels.R: warning("only using the first two of ", p, "regression coefficients")
+#: R/panels.R:0
+msgid "only using the first two of"
+msgstr ""
+
+#. R/interaction.R: stop("panel position unspecified or invalid")
+#: R/interaction.R:0
+msgid "panel position unspecified or invalid"
+msgstr "la position du panneau n'est pas spécifiée ou est incorrecte"
+
+#. R/panel.smoothscatter.R: stop("panel.smoothScatter() requires the KernSmooth package, but unable to load KernSmooth namespace")
+#: R/panel.smoothscatter.R:0
+msgid ""
+"panel.smoothScatter() requires the KernSmooth package, but unable to load "
+"KernSmooth namespace"
+msgstr ""
+
+#. R/histogram.R: warning("problem with 'hist' computations")
+#: R/histogram.R:0
+msgid "problem with 'hist' computations"
+msgstr "calcul d'histogramme défectueux"
+
+#. R/axis.R: stop("range too small for min.n")
+#: R/axis.R:0
+msgid "range too small for min.n"
+msgstr ""
+
+#. R/panels.R: warning("only using the first two of ", p, "regression coefficients")
+#: R/panels.R:0
+msgid "regression coefficients"
+msgstr ""
+
+#. R/interaction.R: stop("row must be specified")
+#: R/interaction.R:0
+msgid "row must be specified"
+msgstr "'row' doit être spécifié"
+
+#. R/common.R: stop("shingles can not be concatenated")
+#: R/common.R:0
+msgid "shingles can not be concatenated"
+msgstr "les lattes ('shingles') ne peuvent être concaténées"
+
+#. R/common.R: stop("skip cannot be all TRUE")
+#: R/common.R:0
+msgid "skip cannot be all TRUE"
+msgstr "les valeurs de 'skip' ne peuvent pas toutes être 'TRUE'"
+
+#. R/summary.trellis.R: stop("some components of supplied 'dimnames' have wrong length")
+#: R/summary.trellis.R:0
+msgid "some components of supplied 'dimnames' have wrong length"
+msgstr ""
+
+#. R/summary.trellis.R: stop("supplied 'dimnames' have wrong length")
+#: R/summary.trellis.R:0
+msgid "supplied 'dimnames' have wrong length"
+msgstr ""
+
+#. R/scales.R: stop("the 'at' and 'labels' components of 'scales' may not be lists when 'relation = \"same\"'")
+#. R/scales.R: stop("the 'at' and 'labels' components of 'scales' may not be lists when 'relation = \"same\"'")
+#: R/scales.R:0
+#, fuzzy
+msgid ""
+"the 'at' and 'labels' components of 'scales' may not be lists when 'relation "
+"= \"same\"'"
+msgstr ""
+"les composantes d'échelles 'at' et 'labels' ne peuvent être des listes "
+"lorsque 'relation = same'"
+
+#. R/update.trellis.R: stop("the at and labels components of scales may not be lists when relation = same")
+#. R/update.trellis.R: stop("the at and labels components of scales may not be lists when relation = same")
+#: R/update.trellis.R:0
+msgid ""
+"the at and labels components of scales may not be lists when relation = same"
+msgstr ""
+"les composantes d'échelles 'at' et 'labels' ne peuvent être des listes "
+"lorsque 'relation = same'"
+
+#. R/miscellaneous.R: stop("x must be (coercible to be) a factor")
+#: R/miscellaneous.R:0
+msgid "x must be (coercible to be) a factor"
+msgstr ""
+"'x' doit être un facteur (ou doit être convertible automatiquement en "
+"facteur)"
+
+#. R/qq.R: stop("y must have exactly 2 levels")
+#: R/qq.R:0
+msgid "y must have exactly 2 levels"
+msgstr "'y' doit avoir exactement 2 niveaux"
+
+#~ msgid "x must be a shingle"
+#~ msgstr "'x' soit être une latte ('shingle')"
+
+#~ msgid "Invalid value of 'aspect'"
+#~ msgstr "Valeur incorrecte pour 'aspect'"
+
+#, fuzzy
+#~ msgid "Invalid value of 'log'"
+#~ msgstr "Valeur incorrecte pour 'aspect'"
+
+#~ msgid "Invalid value of perm.cond"
+#~ msgstr "Valeur de 'perm.cond' incorrecte"
+
+#~ msgid "Invalid label.style"
+#~ msgstr "'label.style' incorrect"
+
+#~ msgid "'par.strip.text' must be a list"
+#~ msgstr "'par.strip.text' doit être une liste"
+
+#~ msgid "'par.settings' must be a list"
+#~ msgstr "'par.settings' doit être une liste"
+
+#~ msgid "'plot.args' must be a list"
+#~ msgstr "'plot.args' doit être une liste"
+
+#~ msgid "'lattice.options' must be a list"
+#~ msgstr "'lattice.options' doit être une liste"
+
+#, fuzzy
+#~ msgid "Invalid value of 'perm.cond'"
+#~ msgstr "Valeur de 'perm.cond' incorrecte"
+
+#~ msgid "points"
+#~ msgstr "points"
+
+#~ msgid ""
+#~ "Note: you shouldn't be seeing this message unless\n"
+#~ "you are using a non-standard version of lattice"
+#~ msgstr ""
+#~ "Remarque : vous ne devriez pas lire ce message à moins que\n"
+#~ "vous utilisiez une version non standard de lattice"
+
+#~ msgid ""
+#~ "The grid package couldn't be loaded.\n"
+#~ "Please check your installation of R"
+#~ msgstr ""
+#~ "Le package grid ne peut être chargé.\n"
+#~ "Veuillez vérifier votre installation de R"
+
+#~ msgid "at least one element of layout must be positive"
+#~ msgstr "au moins un des éléments de 'layout' doit être positif"
+
+#~ msgid ""
+#~ "'packet.number' and 'panel.number' are no longer supplied to the panel "
+#~ "function.  See ?packet.number"
+#~ msgstr ""
+#~ "'packet.number' et 'panel.number' ne sont plus passés à la fonction "
+#~ "panel. Voir ?packet.number"
+
+#~ msgid "currently saved object is not the last one plotted"
+#~ msgstr ""
+#~ "l'objet actuellement sauvegardé n'est pas le dernier qui a été tracé"

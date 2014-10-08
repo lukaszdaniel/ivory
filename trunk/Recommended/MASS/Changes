@@ -1,0 +1,1207 @@
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/man/boxcox.Rd R-recommended-moje/MASS/man/boxcox.Rd
+21c21
+<        ylab = "log-Likelihood", \dots)
+---
+>        ylab = gettext("log-Likelihood", domain = "R-MASS"), \dots)
+25c25
+<        ylab = "log-Likelihood", \dots)
+---
+>        ylab = gettext("log-Likelihood", domain = "R-MASS"), \dots)
+29c29
+<        ylab = "log-Likelihood", \dots)
+---
+>        ylab = gettext("log-Likelihood", domain = "R-MASS"), \dots)
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/man/logtrans.Rd R-recommended-moje/MASS/man/logtrans.Rd
+21c21
+<          ylab = "log Likelihood")
+---
+>          ylab = gettext("log-Likelihood", domain = "R-MASS"))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/man/MASS-internal.Rd R-recommended-moje/MASS/man/MASS-internal.Rd
+21c21
+< neg.bin(theta = stop("'theta' must be given"))
+---
+> neg.bin(theta = stop("'theta' argument must be specified"))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/man/negative.binomial.Rd R-recommended-moje/MASS/man/negative.binomial.Rd
+14c14
+< negative.binomial(theta = stop("'theta' must be specified"), link = "log")
+---
+> negative.binomial(theta = stop("'theta' argument must be specified"), link = "log")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/man/rnegbin.Rd R-recommended-moje/MASS/man/rnegbin.Rd
+14c14
+< rnegbin(n, mu = n, theta = stop("'theta' must be specified"))
+---
+> rnegbin(n, mu = n, theta = stop("'theta' argument must be specified"))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/add.R R-recommended-moje/MASS/R/add.R
+56c56
+<             message(gettextf("trying + %s", tt), domain = NA)
+---
+>             message(gettextf("trying + %s", tt), domain = "R-MASS")
+83,85c83,87
+<     head <- c("Single term additions", "\nModel:", deparse(formula(object)))
+<     if(scale > 0)
+<         head <- c(head, paste("\nscale: ", format(scale), "\n"))
+---
+>     if(scale > 0) {
+> 	head <- paste(gettext("Single term additions", domain = "R-MASS"), "\n\n", gettext("Model:", domain = "R-MASS"), "\n", paste(deparse(formula(object)), collapse = ""), "\n", gettext("scale: ", domain = "R-MASS"), format(scale), "\n", sep = "", collapse = "")
+>     } else {
+> 	head <- paste(gettext("Single term additions", domain = "R-MASS"), "\n\n", gettext("Model:", domain = "R-MASS"), "\n", paste(deparse(formula(object)), collapse = ""), sep = "", collapse = "")
+>     }
+133,135c135,139
+<     head <- c("Single term additions", "\nModel:", deparse(formula(object)))
+<     if(scale > 0)
+<         head <- c(head, paste("\nscale: ", format(scale), "\n"))
+---
+>     if(scale > 0) {
+> 	head <- paste(gettext("Single term additions", domain = "R-MASS"), "\n\n", gettext("Model:", domain = "R-MASS"), "\n", paste(deparse(formula(object)), collapse = ""), "\n", gettext("scale: ", domain = "R-MASS"), format(scale), "\n", sep = "", collapse = "")
+>     } else {
+> 	head <- paste(gettext("Single term additions", domain = "R-MASS"), "\n\n", gettext("Model:", domain = "R-MASS"), "\n", paste(deparse(formula(object)), collapse = ""), sep = "", collapse = "")
+> 	}
+187c191
+<                                  "using the %d/%d rows from a combined fit"),
+---
+>                                  "using the %d/%d rows from a combined fit", domain = "R-MASS"),
+205c209
+<             message(gettextf("trying + %s", tt), domain = NA)
+---
+>             message(gettextf("trying + %s", tt), domain = "R-MASS")
+243,244c247
+<             warning(gettextf("F test assumes 'quasi%s' family", fam),
+<                     domain = NA)
+---
+>             warning(gettextf("F test assumes 'quasi%s' family", fam), domain = "R-MASS")
+249,251c252,256
+<     head <- c("Single term additions", "\nModel:", deparse(formula(object)))
+<     if(scale > 0)
+<         head <- c(head, paste("\nscale: ", format(scale), "\n"))
+---
+>     if(scale > 0) {
+> 	head <- paste(gettext("Single term additions", domain = "R-MASS"), "\n\n", gettext("Model:", domain = "R-MASS"), "\n", paste(deparse(formula(object)), collapse = ""), "\n", gettext("scale: ", domain = "R-MASS"), format(scale), "\n", sep = "", collapse = "")
+>     } else {
+> 	head <- paste(gettext("Single term additions", domain = "R-MASS"), "\n\n", gettext("Model:", domain = "R-MASS"), "\n", paste(deparse(formula(object)), collapse = ""), sep = "", collapse = "")
+>     }
+283c288
+<             message(gettextf("trying - %s", tt), domain = NA)
+---
+>             message(gettextf("trying - %s", tt), domain = "R-MASS")
+308,310c313,317
+<     head <- c("Single term deletions", "\nModel:", deparse(formula(object)))
+<     if(scale > 0)
+<         head <- c(head, paste("\nscale: ", format(scale), "\n"))
+---
+>     if(scale > 0) {
+> 	head <- paste(gettext("Single term deletions", domain = "R-MASS"), "\n\n", gettext("Model:", domain = "R-MASS"), "\n", paste(deparse(formula(object)), collapse = ""), "\n", gettext("scale: ", domain = "R-MASS"), format(scale), "\n", sep = "", collapse = "")
+>     } else {
+> 	head <- paste(gettext("Single term deletions", domain = "R-MASS"), "\n\n", gettext("Model:", domain = "R-MASS"), "\n", paste(deparse(formula(object)), collapse = ""), sep = "", collapse = "")
+>     }
+346,348c353,357
+<     head <- c("Single term deletions", "\nModel:", deparse(formula(object)))
+<     if(scale > 0)
+<         head <- c(head, paste("\nscale: ", format(scale), "\n"))
+---
+>     if(scale > 0) {
+> 	head <- paste(gettext("Single term deletions", domain = "R-MASS"), "\n\n", gettext("Model:", domain = "R-MASS"), "\n", paste(deparse(formula(object)), collapse = ""), "\n", gettext("scale: ", domain = "R-MASS"), format(scale), "\n", sep = "", collapse = "")
+>     } else {
+> 	head <- paste(gettext("Single term deletions", domain = "R-MASS"), "\n\n", gettext("Model:", domain = "R-MASS"), "\n", paste(deparse(formula(object)), collapse = ""), sep = "", collapse = "")
+>     }
+387c396
+<             message(gettextf("trying - %s", scope[i]), domain = NA)
+---
+>             message(gettextf("trying - %s", scope[i]), domain = "R-MASS")
+427,428c436
+<             warning(gettextf("F test assumes 'quasi%s' family", fam),
+<                     domain = NA)
+---
+>             warning(gettextf("F test assumes 'quasi%s' family", fam), domain = "R-MASS")
+442,444c450,454
+<     head <- c("Single term deletions", "\nModel:", deparse(formula(object)))
+<     if(scale > 0)
+<         head <- c(head, paste("\nscale: ", format(scale), "\n"))
+---
+>     if(scale > 0) {
+> 	head <- paste(gettext("Single term deletions", domain = "R-MASS"), "\n\n", gettext("Model:", domain = "R-MASS"), "\n", paste(deparse(formula(object)), collapse = ""), "\n", gettext("scale: ", domain = "R-MASS"), format(scale), "\n", sep = "", collapse = "")
+>     } else {
+> 	head <- paste(gettext("Single term deletions", domain = "R-MASS"), "\n\n", gettext("Model:", domain = "R-MASS"), "\n", paste(deparse(formula(object)), collapse = ""), sep = "", collapse = "")
+>     }
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/area.R R-recommended-moje/MASS/R/area.R
+29,30c29
+<         warning(gettextf("iteration limit reached near 'x = %f'", d),
+<                 doman = NA)
+---
+>         warning(gettextf("iteration limit reached near 'x = %f'", d))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/boxcox.R R-recommended-moje/MASS/R/boxcox.R
+22c22
+<          xlab = expression(lambda), ylab = "log-Likelihood", ...)
+---
+>          xlab = expression(lambda), ylab = gettext("log-Likelihood", domain = "R-MASS"), ...)
+34c34
+<          xlab = expression(lambda), ylab = "log-Likelihood", ...)
+---
+>          xlab = expression(lambda), ylab = gettext("log-Likelihood", domain = "R-MASS"), ...)
+47c47
+<          50, xlab = expression(lambda), ylab = "log-Likelihood", ...)
+---
+>          50, xlab = expression(lambda), ylab = gettext("log-Likelihood", domain = "R-MASS"), ...)
+50,51c50
+<         stop(gettextf("%s does not have both 'qr' and 'y' components",
+<                       sQuote(deparse(substitute(object)))), domain = NA)
+---
+>         stop(gettextf("%s does not have both 'qr' and 'y' components", sQuote(deparse(substitute(object)))), domain = "R-MASS")
+60c59
+<     for(i in 1L:m) {
+---
+>     for(i in seq_len(m)) {
+74c73
+<         mx <- (1L:m)[loglik == max(loglik)][1L]
+---
+>         mx <- seq_len(m)[loglik == max(loglik)][1L]
+89c88
+<         ind <- range((1L:m)[loglik > lim])
+---
+>         ind <- range(seq_len(m)[loglik > lim])
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/corresp.R R-recommended-moje/MASS/R/corresp.R
+22c22
+<     stop(gettextf("frequency table is %d-dimensional", m), domain = NA)
+---
+>     stop(gettextf("frequency table is %d-dimensional", m), domain = "R-MASS")
+57,58c57
+<         dimnames(x) <- list(Row = paste("R", 1L:nrow(x)),
+<                             Col = paste("C", 1L:ncol(x)))
+---
+>         dimnames(x) <- list(Row = paste("R", seq_len(nrow(x))), Col = paste("C", seq_len(ncol(x))))
+64,65c63
+<     res <- list(cor = X.svd$d[1L:nf], rscore = X.svd$u[, 1L:nf] * Dr,
+<                 cscore = X.svd$v[, 1L:nf] * Dc, Freq = x)
+---
+>     res <- list(cor = X.svd$d[seq_len(nf)], rscore = X.svd$u[, seq_len(nf)] * Dr, cscore = X.svd$v[, seq_len(nf)] * Dc, Freq = x)
+96c94
+<     cat("First canonical correlation(s):", format(x$cor, ...), "\n")
+---
+>     cat(gettext("First canonical correlation(s):", domain = "R-MASS"), " ", paste(format(x$cor, ...), collapse = " "), "\n", sep = "")
+98c96
+<     cat("\n", rcn[1L], "scores:\n")
+---
+>     cat("\n", gettextf("%s scores:", rcn[1L], domain = "R-MASS"), "\n", sep = "")
+100c98
+<     cat("\n", rcn[2L], "scores:\n")
+---
+>     cat("\n", gettextf("%s scores:", rcn[2L], domain = "R-MASS"), "\n", sep = "")
+108c106
+<     if(length(x$cor) < 2L) stop("biplot is only possible if nf >= 2")
+---
+>     if(length(x$cor) < 2L) stop("biplot is only possible if 'nf >= 2'")
+141c139
+<         vlab.real <- vlab <- paste("Var", 1L:p)
+---
+>         vlab.real <- vlab <- paste("Var", seq_len(p))
+147c145
+<         if(length(olab) != n) olab <- as.character(1L:n)
+---
+>         if(length(olab) != n) olab <- as.character(seq_len(n))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/cov.trob.R R-recommended-moje/MASS/R/cov.trob.R
+36,37c36,37
+<             stop("length of 'wt' must equal number of observations")
+<         if(any(wt < 0)) stop("negative weights not allowed")
+---
+>             stop(gettextf("length of '%s' argument must equal number of observations", "wt"))
+>         if(any(wt < 0)) stop("negative weights are not allowed")
+43c43
+<         if(length(center) != p) stop("'center' is not the right length")
+---
+>         if(length(center) != p) stop(gettextf("'%s' argument is of the wrong length", "center"))
+49c49
+<     for(iter in 1L:maxit) {
+---
+>     for(iter in seq_len(maxit)) {
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/eqscplot.R R-recommended-moje/MASS/R/eqscplot.R
+57c57
+<     if(any(c(xuin, yuin) < uin)) stop("'uin' is too large to fit plot in")
+---
+>     if(any(c(xuin, yuin) < uin)) stop("'uin' argument is too large to fit plot in")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/fitdistr.R R-recommended-moje/MASS/R/fitdistr.R
+29,30c29,30
+<         stop("'x' must be a non-empty numeric vector")
+<     if(any(!is.finite(x))) stop("'x' contains missing or infinite values")
+---
+>         stop("'x' argument must be a non-empty numeric vector")
+>     if(any(!is.finite(x))) stop("'x' argument contains missing or infinite values")
+32c32
+<         stop("'densfun' must be supplied as a function or name")
+---
+>         stop("'densfun' argument must be supplied as a function or name")
+58,59c58
+<                 stop(gettextf("supplying pars for the %s distribution is not supported",
+<                               "log-Normal"), domain = NA)
+---
+>                 stop(gettext("supplying pars for the log-Normal distribution is not supported"), domain = "R-MASS")
+77,78c76
+<                 stop(gettextf("supplying pars for the %s distribution is not supported",
+<                               "Normal"), domain = NA)
+---
+>                 stop(gettext("supplying pars for the Normal distribution is not supported"), domain = "R-MASS")
+92,93c90
+<                 stop(gettextf("supplying pars for the %s distribution is not supported",
+<                               "Poisson"), domain = NA)
+---
+>                 stop(gettext("supplying pars for the Poisson distribution is not supported"), domain = "R-MASS")
+106,107c103
+<                 stop(gettextf("supplying pars for the %s distribution is not supported",
+<                               "exponential"), domain = NA)
+---
+>                 stop(gettext("supplying pars for the exponential distribution is not supported"), domain = "R-MASS")
+119,120c115
+<                 stop(gettextf("supplying pars for the %s distribution is not supported",
+<                               "geometric"), domain = NA)
+---
+>                 stop(gettext("supplying pars for the geometric distribution is not supported"), domain = "R-MASS")
+176c171
+<                   paste("parm[", 1L:l, "]", collapse = ", "),
+---
+>                   paste("parm[", seq_len(l), "]", collapse = ", "),
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/glmmPQL.R R-recommended-moje/MASS/R/glmmPQL.R
+26c26
+< 	stop("'family' not recognized")
+---
+> 	stop("'family' argument was not recognized")
+81c81
+<         if(verbose) message(gettextf("iteration %d", i), domain = NA)
+---
+>         if(verbose) message(gettextf("iteration %d", i), domain = "R-MASS")
+139c139
+<     stop("'anova' is not available for PQL fits")
+---
+>     stop("'anova()' is not available for PQL fits")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/hubers.R R-recommended-moje/MASS/R/hubers.R
+36c36
+<     for(i in 1:30) { # avoid infinite loop
+---
+>     for(i in seq_len(30)) { # avoid infinite loop
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/isoMDS.R R-recommended-moje/MASS/R/isoMDS.R
+22c22
+<     if(!is.matrix(y)) stop("'y' must be a matrix")
+---
+>     if(!is.matrix(y)) stop(gettextf("'%s' argument is not a matrix", "y"))
+42,43c42
+<         stop(gettextf("zero or negative distance between objects %d and %d",
+<                       aa[1,1], aa[1,2]), domain = NA)
+---
+>         stop(gettextf("zero or negative distance between objects %d and %d", aa[1,1], aa[1,2]), domain = "R-MASS")
+79c78
+<   if (is.na(n)) stop("invalid row(x)")
+---
+>   if (is.na(n)) stop(gettextf("invalid '%s' value", "row(x)"))
+85c84
+<   if (is.na(nd)) stop("invalid length(d)")
+---
+>   if (is.na(nd)) stop(gettextf("invalid '%s' value", "length(d)"))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/lda.R R-recommended-moje/MASS/R/lda.R
+78c78
+<     if(is.null(dim(x))) stop("'x' is not a matrix")
+---
+>     if(is.null(dim(x))) stop(gettextf("'%s' argument is not a matrix", "x"))
+85c85
+<         stop("nrow(x) and length(grouping) are different")
+---
+>         stop("'nrow(x)' and 'length(grouping)' are different")
+90,91c90,91
+<         if(any(prior < 0) || round(sum(prior), 5) != 1) stop("invalid 'prior'")
+<         if(length(prior) != nlevels(g)) stop("'prior' is of incorrect length")
+---
+>         if(any(prior < 0) || round(sum(prior), 5) != 1) stop(gettextf("invalid '%s' argument", "prior"))
+>         if(length(prior) != nlevels(g)) stop(gettextf("'%s' argument is of the wrong length", "prior"))
+98c98
+<                                  "groups %s are empty"),
+---
+>                                  "groups %s are empty", domain = "R-MASS"),
+109,110c109
+<         stop(gettext("cannot use leave-one-out CV with method %s",
+<                      sQuote(method)), domain = NA)
+---
+>         stop(gettext("cannot use leave-one-out CV with method %s", sQuote(method)), domain = "R-MASS")
+114c113
+<         const <- format((1L:p)[f1 < tol])
+---
+>         const <- format(seq_len(p)[f1 < tol])
+117,119c116,117
+<                      "variables %s appear to be constant within groups"),
+<                      paste(const, collapse = " ")),
+<              domain = NA)
+---
+>                      "variables %s appear to be constant within groups", domain = "R-MASS"),
+>                      paste(const, collapse = " ")), domain = NA)
+130,131c128,129
+<         scaling <- scaling %*% sX$v[, 1L:rank] %*%
+<             diag(sqrt(1/sX$d[1L:rank]),,rank)
+---
+>         scaling <- scaling %*% sX$v[, seq_len(rank)] %*%
+>             diag(sqrt(1/sX$d[seq_len(rank)]), , rank)
+133c131
+<         if(nu <= 2) stop("'nu' must exceed 2")
+---
+>         if(nu <= 2) stop("'nu' argument must exceed 2")
+151c149
+<         scaling <- scaling %*% X.s$v[, 1L:rank] %*% diag(1/X.s$d[1L:rank],,rank)
+---
+>         scaling <- scaling %*% X.s$v[, seq_len(rank)] %*% diag(1/X.s$d[seq_len(rank)], , rank)
+159c157
+<         scaling <- scaling %*% X.s$v[, 1L:rank] %*% diag(1/X.s$d[1L:rank],,rank)
+---
+>         scaling <- scaling %*% X.s$v[, seq_len(rank)] %*% diag(1/X.s$d[seq_len(rank)], , rank)
+167c165
+<         for(i in 1L:ng) {
+---
+>         for(i in seq_len(ng)) {
+171c169
+<         ind <- cbind(1L:n, g)
+---
+>         ind <- cbind(seq_len(n), g)
+175c173
+<         for(i in 1L:ng) {
+---
+>         for(i in seq_len(ng)) {
+197c195
+<     scaling <- scaling %*% X.s$v[, 1L:rank]
+---
+>     scaling <- scaling %*% X.s$v[, seq_len(rank)]
+199c197
+<         dimnames(scaling) <- list(NULL, paste("LD", 1L:rank, sep = ""))
+---
+>         dimnames(scaling) <- list(NULL, paste("LD", seq_len(rank), sep = ""))
+201c199
+<         dimnames(scaling) <- list(colnames(x), paste("LD", 1L:rank, sep = ""))
+---
+>         dimnames(scaling) <- list(colnames(x), paste("LD", seq_len(rank), sep = ""))
+207c205
+<                    scaling = scaling, lev = lev, svd = X.s$d[1L:rank],
+---
+>                    scaling = scaling, lev = lev, svd = X.s$d[seq_len(rank)],
+215c213
+<     if(!inherits(object, "lda")) stop("object not of class \"lda\"")
+---
+>     if(!inherits(object, "lda")) stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("lda"), domain = "R-MASS"))
+250,251c248,249
+<         if(any(prior < 0) || round(sum(prior), 5) != 1) stop("invalid 'prior'")
+<         if(length(prior) != ng) stop("'prior' is of incorrect length")
+---
+>         if(any(prior < 0) || round(sum(prior), 5) != 1) stop(gettextf("invalid '%s' argument", "prior"))
+>         if(length(prior) != ng) stop(gettextf("'%s' argument is of the wrong length", "prior"))
+262c260
+<         dm <- dm[, 1L:dimen, drop = FALSE]
+---
+>         dm <- dm[, seq_len(dimen), drop = FALSE]
+264c262
+<                        length(prior), byrow = TRUE) - x[, 1L:dimen, drop=FALSE] %*% t(dm)
+---
+>                        length(prior), byrow = TRUE) - x[, seq_len(dimen), drop=FALSE] %*% t(dm)
+267c265
+<         dm <- dm[, 1L:dimen, drop=FALSE]
+---
+>         dm <- dm[, seq_len(dimen), drop=FALSE]
+269c267
+<             x[, 1L:dimen, drop=FALSE] %*% t(dm)
+---
+>             x[, seq_len(dimen), drop=FALSE] %*% t(dm)
+278c276
+<         for(i in 1L:ng) {
+---
+>         for(i in seq_len(ng)) {
+289c287
+<     list(class = cl, posterior = posterior, x = x[, 1L:dimen, drop = FALSE])
+---
+>     list(class = cl, posterior = posterior, x = x[, seq_len(dimen), drop = FALSE])
+296c294
+<         cat("Call:\n")
+---
+>         cat(gettext("Call:", domain = "R-MASS"), "\n", sep = "")
+299c297
+<     cat("\nPrior probabilities of groups:\n")
+---
+>     cat("\n", gettext("Prior probabilities of groups:", domain = "R-MASS"), "\n", sep = "")
+301c299
+<     cat("\nGroup means:\n")
+---
+>     cat("\n", gettext("Group means:", domain = "R-MASS"), "\n", sep = "")
+303c301
+<     cat("\nCoefficients of linear discriminants:\n")
+---
+>     cat("\n", gettext("Coefficients of linear discriminants:", domain = "R-MASS"), "\n", sep = "")
+308c306
+<         cat("\nProportion of trace:\n")
+---
+>         cat("\n", gettext("Proportion of trace:", domain = "R-MASS"), "\n", sep = "")
+347c345
+<     if(!missing(dimen) && dimen < ncol(X)) X <- X[, 1L:dimen, drop = FALSE]
+---
+>     if(!missing(dimen) && dimen < ncol(X)) X <- X[, seq_len(dimen), drop = FALSE]
+377c375
+<         if(any(diff(breaks) <= 0)) stop("'breaks' must be strictly increasing")
+---
+>         if(any(diff(breaks) <= 0)) stop("'breaks' argument must be strictly increasing")
+379c377
+<             stop("'breaks' do not cover the data")
+---
+>             stop("'breaks' argument do not cover the data")
+454c452
+<     if(!missing(dimen) && dimen < ncol(X)) X <- X[, 1L:dimen]
+---
+>     if(!missing(dimen) && dimen < ncol(X)) X <- X[, seq_len(dimen)]
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/lm.ridge.R R-recommended-moje/MASS/R/lm.ridge.R
+74,75c74,75
+<     cat("modified HKB estimator is", format(obj$kHKB), "\n")
+<     cat("modified L-W estimator is", format(obj$kLW), "\n")
+---
+>     cat(gettextf("modified HKB estimator is %s", format(obj$kHKB), domain = "R-MASS"), "\n", sep = "")
+>     cat(gettextf("modified L-W estimator is %s", format(obj$kLW), domain = "R-MASS"), "\n", sep = "")
+79,80c79
+<         cat("smallest value of GCV  at",
+<             format(obj$lambda[k]), "\n")
+---
+>         cat(gettextf("smallest value of GCV at %s", format(obj$lambda[k]), domain = "R-MASS"), "\n", sep = "")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/loglm.R R-recommended-moje/MASS/R/loglm.R
+198c198
+<     for(j in 1L:5L) {
+---
+>     for(j in seq_len(5L)) {
+205c205
+<     cat("LR tests for hierarchical log-linear models\n\n")
+---
+>     cat(gettext("LR tests for hierarchical log-linear models", domain = "R-MASS"), "\n\n", sep = "")
+207,208c207
+<         cat(paste("Model ", i, ":\n", sep = ""),
+<             deparse(forms[[i]], width.cutoff = 500L), "\n")
+---
+>         cat(gettextf("Model %d:", i, domain = "R-MASS"), "\n", deparse(forms[[i]], width.cutoff = 500L), "\n", sep = "")
+216c215
+<     cat("Call:\n")
+---
+>     cat(gettext("Call:", domain = "R-MASS"), "\n", sep = "")
+223,225c222,223
+<     dimnames(ts.array) <- list(c("Likelihood Ratio",
+<                                  "Pearson"), c("X^2", "df", "P(> X^2)"))
+<     cat("\nStatistics:\n")
+---
+>     dimnames(ts.array) <- list(c("Likelihood Ratio", "Pearson"), c("X^2", "df", "P(> X^2)"))
+>     cat("\n", gettext("Statistics:", domain = "R-MASS"), "\n", sep = "")
+242c240
+<             cat("Re-fitting to find fitted values\n")
+---
+>             cat(gettext("Re-fitting to find fitted values", domain = "R-MASS"), "\n", sep = "")
+255c253
+<     cat("Formula:\n")
+---
+>     cat(gettext("Formula:", domain = "R-MASS"), "\n", sep = "")
+257c255
+<     cat("\nStatistics:\n")
+---
+>     cat("\n", gettext("Statistics:", domain = "R-MASS"), "\n", sep = "")
+260c258
+<         cat("\nObserved (Expected):\n")
+---
+>         cat("\n", gettext("Observed (Expected):", domain = "R-MASS"), "\n", sep = "")
+269c267
+<         stop("'object' has no 'call' component.  Updating not possible")
+---
+>         stop("'object' argument has no 'call' component. Updating not possible")
+293c291
+<     cat("Re-fitting to get fitted values\n")
+---
+>     cat(gettext("Re-fitting to get fitted values", domain = "R-MASS"), "\n", sep = "")
+302c300
+<         cat("Re-fitting to get frequencies and fitted values\n")
+---
+>         cat(gettext("Re-fitting to get frequencies and fitted values", domain = "R-MASS"), "\n", sep = "")
+323c321
+<     cat("Re-fitting to calculate missing coefficients\n")
+---
+>     cat(gettext("Re-fitting to calculate missing coefficients", domain = "R-MASS"), "\n", sep = "")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/logtrans.R R-recommended-moje/MASS/R/logtrans.R
+22c22
+< 	100)), xlab = "alpha", ylab = "log Likelihood")
+---
+> 	100)), xlab = "alpha", ylab = gettext("log-Likelihood", domain = "R-MASS"))
+25,26c25
+<         stop(gettextf("%s does not have both 'qr' and 'y' components",
+<                       sQuote(deparse(substitute(object)))), domain = NA)
+---
+>         stop(gettextf("%s does not have both 'qr' and 'y' components", sQuote(deparse(substitute(object)))), domain = "R-MASS")
+34c33
+<     for(i in 1L:m) {
+---
+>     for(i in seq_len(m)) {
+45c44
+<         mx <- (1L:m)[loglik == max(loglik)][1L]
+---
+>         mx <- seq_len(m)[loglik == max(loglik)][1L]
+60c59
+<         ind <- range((1L:m)[loglik > lim])
+---
+>         ind <- range(seq_len(m)[loglik > lim])
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/lqs.R R-recommended-moje/MASS/R/lqs.R
+70c70
+< 	nm <- if(p > 1) paste("X", 1L:p, sep="") else if(p == 1) "X" else NULL
+---
+> 	nm <- if(p > 1) paste("X", seq_len(p), sep = "") else if(p == 1) "X" else NULL
+95,96c95
+<         stop(gettextf("'quantile' must be at most %d", n-1),
+<              domain = NA)
+---
+>         stop(gettextf("'quantile' must be at most %d", n-1), domain = "R-MASS")
+111c110
+<                                  "only %d sets, so all sets will be tried"),
+---
+>                                  "only %d sets, so all sets will be tried", domain = "R-MASS"),
+137c136
+<     z$sing <- paste(z$sing, "singular samples of size", ps, "out of", nsamp)
+---
+>     z$sing <- sprintf(ngettext(z$sing, "%d singular sample of size %d out of %d", "%d singular samples of size %d out of %d", domain = "R-MASS"), z$sing, ps, nsamp)
+156c155
+< 	for(i in 1L:30L) {
+---
+> 	for(i in seq_len(30)) {
+176c175
+< 	cat("Call:\n")
+---
+> 	cat(gettext("Call:", domain = "R-MASS"), "\n", sep = "")
+180,183c179,181
+<     cat("Coefficients:\n")
+<     print.default(format(coef(x), digits = digits), print.gap = 2,
+< 		  quote = FALSE)
+<     cat("\nScale estimates", format(x$scale, digits = digits) ,"\n\n")
+---
+>     cat(gettext("Coefficients:", domain = "R-MASS"), "\n", sep = "")
+>     print.default(format(coef(x), digits = digits), print.gap = 2, quote = FALSE)
+>     cat("\n", gettextf("Scale estimates %s", paste(format(x$scale, digits = digits), collapse = " "), domain = "R-MASS"), "\n\n", sep = "")
+206c204
+< 	stop("missing or infinite values are not allowed")
+---
+> 	stop("missing or infinite values in the data are not allowed")
+209c207
+<         stop(gettextf("at least %d cases are needed", p+1), domain = NA)
+---
+>         stop(gettextf("at least %d cases are needed", p+1), domain = "R-MASS")
+214c212
+<             stop(gettextf("'quantile' must be at least %d", p+1), domain = NA)
+---
+>             stop(gettextf("'quantile' must be at least %d", p+1), domain = "R-MASS")
+216c214
+<             stop(gettextf("'quantile' must be at most %d", n-1), domain = NA)
+---
+>             stop(gettextf("'quantile' must be at most %d", n-1), domain = "R-MASS")
+229c227
+<                                      "only %d sets, so all sets will be tried"),
+---
+>                                      "only %d sets, so all sets will be tried", domain = "R-MASS"),
+250,251c248
+< 	z$sing <- paste(z$sing, "singular samples of size", ps,
+<                         "out of", nsamp)
+---
+>         z$sing <- sprintf(ngettext(z$sing, "%d singular sample of size %d out of %d", "%d singular samples of size %d out of %d", domain = "R-MASS"), z$sing, ps, nsamp)
+255c252
+<         if(!length(best)) stop("'x' is probably collinear")
+---
+>         if(!length(best)) stop("'x' argument is probably collinear")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/mca.R R-recommended-moje/MASS/R/mca.R
+23c23
+<     x[(1L:n) + n * (unclass(cl) - 1)] <- 1
+---
+>     x[seq_len(n) + n * (unclass(cl) - 1)] <- 1
+31,32c31
+<   G <- as.matrix(do.call("data.frame", c(lapply(df, class.ind),
+<                                          check.names=FALSE)))
+---
+>   G <- as.matrix(do.call("data.frame", c(lapply(df, class.ind), check.names=FALSE)))
+36c35
+<   sec <- 1 + (1L:nf)
+---
+>   sec <- 1 + seq_len(nf)
+40c39
+<   dimnames(rs) <- list(row.names(df), as.character(1L:nf))
+---
+>   dimnames(rs) <- list(row.names(df), as.character(seq_len(nf)))
+44,46c43,44
+<   dimnames(cs) <- list(varnames, as.character(1L:nf))
+<   structure(list(rs=rs, cs=cs, fs=fs, d=X.svd$d[sec], p=p, call=Call),
+<             class="mca")
+---
+>   dimnames(cs) <- list(varnames, as.character(seq_len(nf)))
+>   structure(list(rs=rs, cs=cs, fs=fs, d=X.svd$d[sec], p=p, call=Call), class="mca")
+52c50
+<     cat("Call:\n")
+---
+>     cat(gettext("Call:", domain = "R-MASS"), "\n", sep = "")
+55,58c53
+<   cat("\nMultiple correspondence analysis of",
+<             nrow(x$rs), "cases of", x$p,
+<             "factors\n")
+<   cat("\nCorrelations", format(round(x$d,3), ...))
+---
+>   cat("\n", gettextf("Multiple correspondence analysis of %d cases of %d factors", nrow(x$rs), x$p, domain = "R-MASS"), "\n", sep = "")
+60c55
+<   cat("  cumulative % explained", format(round(p,2), ...), "\n")
+---
+>   cat("\n", gettextf("Correlations %s  cumulative %% explained %s", paste(format(round(x$d,3), ...), collapse = " "), paste(format(round(p,2), ...), collapse = " "), domain = "R-MASS"), "\n", sep = "")
+64,65c59
+< plot.mca <- function(x, rows = TRUE,
+<                      col, cex = par("cex"), ...)
+---
+> plot.mca <- function(x, rows = TRUE, col, cex = par("cex"), ...)
+86c80
+<     x[(1L:n) + n * (unclass(cl) - 1)] <- 1
+---
+>     x[seq_len(n) + n * (unclass(cl) - 1)] <- 1
+108c102
+<       stop("'newdata' is not of the right length")
+---
+>       stop(gettextf("'%s' argument is of the wrong length", "newdata"))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/misc.R R-recommended-moje/MASS/R/misc.R
+36c36
+<         stop("'X' must be a numeric or complex matrix")
+---
+>         stop("'X' argument must be a numeric or complex matrix")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/mvrnorm.R R-recommended-moje/MASS/R/mvrnorm.R
+25c25
+<     if(!all(ev >= -tol*abs(ev[1L]))) stop("'Sigma' is not positive definite")
+---
+>     if(!all(ev >= -tol*abs(ev[1L]))) stop(gettextf("'%s' argument is not positive definite", "Sigma"))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/neg.bin.R R-recommended-moje/MASS/R/neg.bin.R
+17c17
+< neg.bin <- function(theta = stop("'theta' must be given"))
+---
+> neg.bin <- function(theta = stop("'theta' argument must be specified"))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/negbin.R R-recommended-moje/MASS/R/negbin.R
+23c23
+<       stop("not all objects are of class \"negbin\"")
+---
+>       stop(gettextf("not all objects are of class %s", dQuote("negbin")))
+29c29
+<     tss <- c("", paste(1L:(nt - 1L), 2:nt, sep = " vs "))
+---
+>     tss <- c("", paste(seq_len(nt - 1L), 2:nt, sep = " vs "))
+36,37c36
+<     names(out) <- c("Model", "theta", "Resid. df",
+<                     "   2 x log-lik.", "Test", "   df", "LR stat.", "Pr(Chi)")
+---
+>     names(out) <- c("Model", "theta", "Resid. df", "   2 x log-lik.", "Test", "   df", "LR stat.", "Pr(Chi)")
+39,41c38
+<     attr(out, "heading") <-
+<       c("Likelihood ratio tests of Negative Binomial Models\n",
+<         paste("Response:", rsp))
+---
+>     attr(out, "heading") <- c(paste(gettext("Likelihood ratio tests of Negative Binomial Models", domain = "R-MASS"), "\n", sep = "", collapse = ""), paste("Response:", rsp))
+107c104
+<     else if(any(w < 0)) stop("negative weights not allowed")
+---
+>     else if(any(w < 0)) stop("negative weights are not allowed")
+115,116c112
+<             stop(gettextf("unimplemented method: %s", sQuote(method)),
+<                  domain = NA)
+---
+>             stop(gettextf("unimplemented method: %s", sQuote(method)), domain = "R-MASS")
+135,136c131
+<         message(gettextf("Initial value for 'theta': %f", signif(th)),
+<                 domain = NA)
+---
+>         message(gettextf("Initial value for 'theta': %f", signif(th)), domain = "R-MASS")
+171c166
+<         fit$th.warn <- gettext("alternation limit reached")
+---
+>         fit$th.warn <- gettext("alternation limit reached", domain = "R-MASS")
+215c210
+<     function(theta = stop("'theta' must be specified"), link = "log")
+---
+>     function(theta = stop("'theta' argument must be specified"), link = "log")
+270c265
+< rnegbin <- function(n, mu = n, theta = stop("'theta' must be specified"))
+---
+> rnegbin <- function(n, mu = n, theta = stop("'theta' argument must be specified"))
+294,295c289,290
+<         cat("Warning while fitting theta:", x$th.warn,"\n")
+<     cat("\n 2 x log-likelihood: ", format(round(x$twologlik, 3), nsmall=dp), "\n")
+---
+>         cat(gettext("Warning while fitting theta: ", domain = "R-MASS"), x$th.warn, "\n", sep = "")
+>     cat(gettextf("\n 2 x log-likelihood: %s", paste(format(round(x$twologlik, 3), nsmall=dp), collapse = " "), domain = "R-MASS"), "\n", sep = "")
+324c319
+<         attr(t0, "warn") <- gettext("estimate truncated at zero")
+---
+>         attr(t0, "warn") <- gettext("estimate truncated at zero", domain = "R-MASS")
+348,349c343
+<     if(trace) message(sprintf("theta.ml: iter %d 'theta = %f'",
+<                               it, signif(t0)), domain = NA)
+---
+>     if(trace) message(sprintf("theta.ml: iter %d 'theta = %f'", it, signif(t0)), domain = "R-MASS")
+354c348
+<         if(trace) message("theta.ml: iter", it," theta =", signif(t0))
+---
+>         if(trace) message(gettextf("theta.ml: iter %d 'theta = %f'", it, signif(t0)))
+359c353
+<         attr(t0, "warn") <- gettext("estimate truncated at zero")
+---
+>         attr(t0, "warn") <- gettext("estimate truncated at zero", domain = "R-MASS")
+363c357
+<         attr(t0, "warn") <- gettext("iteration limit reached")
+---
+>         attr(t0, "warn") <- gettext("iteration limit reached", domain = "R-MASS")
+391c385
+<         attr(t0, "warn") <- gettext("estimate truncated at zero")
+---
+>         attr(t0, "warn") <- gettext("estimate truncated at zero", domain = "R-MASS")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/parcoord.R R-recommended-moje/MASS/R/parcoord.R
+23c23
+<     matplot(1L:ncol(x), t(x), type = "l", col = col, lty = lty,
+---
+>     matplot(seq_len(ncol(x)), t(x), type = "l", col = col, lty = lty,
+26,27c26,27
+<     axis(1, at = 1L:ncol(x), labels = colnames(x))
+<     for(i in 1L:ncol(x)) {
+---
+>     axis(1, at = seq_len(ncol(x)), labels = colnames(x))
+>     for(i in seq_len(ncol(x))) {
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/polr.R R-recommended-moje/MASS/R/polr.R
+74c74
+<         spacing <- logit((1L:q)/(q+1L)) # just a guess
+---
+>         spacing <- logit(seq_len(q)/(q+1L)) # just a guess
+79c79
+< 	stop("'start' is not of the correct length")
+---
+> 	stop(gettextf("'%s' argument is of the wrong length", "start"))
+116c116
+<         cat("Call:\n")
+---
+>         cat(gettext("Call:", domain = "R-MASS"), "\n", sep = "")
+120c120
+<         cat("\nCoefficients:\n")
+---
+>         cat("\n", gettext("Coefficients:", domain = "R-MASS"), "\n", sep = "")
+123c123
+<         cat("\nNo coefficients\n")
+---
+>         cat("\n", gettext("No coefficients", domain = "R-MASS"), "\n", sep = "")
+125c125
+<     cat("\nIntercepts:\n")
+---
+>     cat("\n", gettext("Intercepts:", domain = "R-MASS"), "\n", sep = "")
+127,128c127,128
+<     cat("\nResidual Deviance:", format(x$deviance, nsmall=2L), "\n")
+<     cat("AIC:", format(x$deviance + 2*x$edf, nsmall=2L), "\n")
+---
+>     cat("\n", gettextf("Residual Deviance: %s", format(x$deviance, nsmall=2L), domain = "R-MASS"), "\n", sep = "")
+>     cat(gettextf("AIC: %s", format(x$deviance + 2*x$edf, nsmall=2L), domain = "R-MASS"), "\n", sep = "")
+131c131
+<         cat("Warning: did not converge as iteration limit reached\n")
+---
+>         cat(gettext("Warning: did not converge as iteration limit reached", domain = "R-MASS"), "\n", sep = "")
+147c147
+<         message("\nRe-fitting to get Hessian\n")
+---
+>         message("\n", "Re-fitting to get Hessian", "\n", sep = "")
+188c188
+<         cat("Call:\n")
+---
+>         cat(gettext("Call:", domain = "R-MASS"), "\n", sep = "")
+194c194
+<         cat("\nCoefficients:\n")
+---
+>         cat("\n", gettext("Coefficients:", domain = "R-MASS"), "\n", sep = "")
+198c198
+<         cat("\nNo coefficients\n")
+---
+>         cat("\n", gettext("No coefficients", domain = "R-MASS"), "\n", sep = "")
+200c200
+<     cat("\nIntercepts:\n")
+---
+>     cat("\n", gettext("Intercepts:", domain = "R-MASS"), "\n", sep = "")
+203,204c203,204
+<     cat("\nResidual Deviance:", format(x$deviance, nsmall=2L), "\n")
+<     cat("AIC:", format(x$deviance + 2*x$edf, nsmall=2L), "\n")
+---
+>     cat("\n", gettextf("Residual Deviance: %s", format(x$deviance, nsmall=2L), domain = "R-MASS"), "\n", sep = "")
+>     cat(gettextf("AIC: %s", format(x$deviance + 2*x$edf, nsmall=2L), domain = "R-MASS"), "\n", sep = "")
+207c207
+<         cat("\nCorrelation of Coefficients:\n")
+---
+>         cat("\n", gettext("Correlation of Coefficients:", domain = "R-MASS"), "\n", sep = "")
+218c218
+<     if(!inherits(object, "polr")) stop("not a \"polr\" object")
+---
+>     if(!inherits(object, "polr")) stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("polr"), domain = "R-MASS"))
+306c306
+<         stop('anova is not implemented for a single "polr" object')
+---
+>         stop("'anova()' function is not implemented for a single object of class \"polr\"")
+313c313
+<         stop('not all objects are of class "polr"')
+---
+>         stop(gettextf("not all objects are of class %s", dQuote("polr")))
+332c332
+<         c("Likelihood ratio tests of ordinal regression models\n",
+---
+>         c(paste(gettext("Likelihood ratio tests of ordinal regression models", domain = "R-MASS"), "\n", sep = "", collapse = ""),
+401c401
+< profile.polr <- function(fitted, which = 1L:p, alpha = 0.01,
+---
+> profile.polr <- function(fitted, which = seq_len(p), alpha = 0.01,
+430c430,434
+<                 message("\nParameter:", pi, c("down", "up")[(sgn + 1)/2 + 1])
+---
+>                if(sgn == -1) {
+>                 message("\n", gettextf("Parameter: %s down", pi))
+>                 } else {
+>                 message("\n", gettextf("Parameter: %s up", pi))
+>                 }
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/profiles.R R-recommended-moje/MASS/R/profiles.R
+20c20
+< profile.glm <- function(fitted, which = 1:p, alpha = 0.01,
+---
+> profile.glm <- function(fitted, which = seq_len(p), alpha = 0.01,
+69,71c69,75
+<             if(trace)
+<                 message("\nParameter: ", pi, " ",
+<                         c("down", "up")[(sgn + 1)/2 + 1])
+---
+>             if(trace) {
+>                if(sgn == -1) {
+>                 message("\n", gettextf("Parameter: %s down", pi))
+>                 } else {
+>                 message("\n", gettextf("Parameter: %s up", pi))
+>                 }
+>             }
+158c162
+<     for(i in 1L:npar) {
+---
+>     for(i in seq_len(npar)) {
+161c165
+<         for(j in 1L:npar) {
+---
+>         for(j in seq_len(npar)) {
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/qda.R R-recommended-moje/MASS/R/qda.R
+78c78
+<     if(is.null(dim(x))) stop("'x' is not a matrix")
+---
+>     if(is.null(dim(x))) stop(gettextf("'%s' argument is not a matrix", "x"))
+85c85
+<         stop("nrow(x) and length(grouping) are different")
+---
+>         stop("'nrow(x)' and 'length(grouping)' are different")
+94,95c94,95
+<     if(any(prior < 0) || round(sum(prior), 5) != 1) stop("invalid 'prior'")
+<     if(length(prior) != ng) stop("'prior' is of incorrect length")
+---
+>     if(any(prior < 0) || round(sum(prior), 5) != 1) stop(gettextf("invalid '%s' argument", "prior"))
+>     if(length(prior) != ng) stop(gettextf("'%s' argument is of the wrong length", "prior"))
+103,105c103,104
+<         stop(gettext("cannot use leave-one-out CV with method %s",
+<                      sQuote(method)), domain = NA)
+<     for (i in 1L:ng){
+---
+>         stop(gettext("cannot use leave-one-out CV with method %s", sQuote(method)), domain = "R-MASS")
+>     for (i in seq_len(ng)){
+113c112
+<             if(nu <= 2) stop("'nu' must exceed 2")
+---
+>             if(nu <= 2) stop("'nu' argument must exceed 2")
+128,129c127
+<             if(qx$rank < p) stop(gettextf("rank deficiency in group %s",
+<                                           lev[i]), domain = NA)
+---
+>             if(qx$rank < p) stop(gettextf("rank deficiency in group %s", lev[i]), domain = "R-MASS")
+131c129
+<             scaling[, , i] <- backsolve(qx[1L:p,  ], diag(p))
+---
+>             scaling[, , i] <- backsolve(qx[seq_len(p),  ], diag(p))
+137,138c135
+<             if(qx$rank < p) stop(gettextf("rank deficiency in group %s",
+<                                           lev[i]), domain = NA)
+---
+>             if(qx$rank < p) stop(gettextf("rank deficiency in group %s", lev[i]), domain = "R-MASS")
+140c137
+<             scaling[, , i] <- backsolve(qx[1L:p, ], diag(p))
+---
+>             scaling[, , i] <- backsolve(qx[seq_len(p), ], diag(p))
+148c145
+<         for(i in 1L:ng) {
+---
+>         for(i in seq_len(ng)) {
+155c152
+<         ind <- cbind(1L:n, g)
+---
+>         ind <- cbind(seq_len(n), g)
+168c165
+<         dimnames(scaling) <- list(NULL, as.character(1L:p), lev)
+---
+>         dimnames(scaling) <- list(NULL, as.character(seq_len(p)), lev)
+170c167
+<         dimnames(scaling) <- list(colnames(x), as.character(1L:p), lev)
+---
+>         dimnames(scaling) <- list(colnames(x), as.character(seq_len(p)), lev)
+185c182
+<     if(!inherits(object, "qda")) stop("object not of class \"qda\"")
+---
+>     if(!inherits(object, "qda")) stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("qda")))
+191,192c188
+<         stop(gettext("cannot use leave-one-out CV with method %s",
+<                      sQuote(mt), domain = NA))
+---
+>         stop(gettext("cannot use leave-one-out CV with method %s", sQuote(mt), domain = "R-MASS"))
+195,196c191,192
+<         if(any(prior < 0) || round(sum(prior), 5) != 1) stop("invalid 'prior'")
+<         if(length(prior) != ngroup) stop("'prior' is of incorrect length")
+---
+>         if(any(prior < 0) || round(sum(prior), 5) != 1) stop(gettextf("invalid '%s' argument", "prior"))
+>         if(length(prior) != ngroup) stop(gettextf("'%s' argument is of the wrong length", "prior"))
+245c241
+<         for(i in 1L:ngroup) {
+---
+>         for(i in seq_len(ngroup)) {
+257c253
+<         for(i in 1L:ngroup) {
+---
+>         for(i in seq_len(ngroup)) {
+264c260
+<         ind <- cbind(1L:n, g)
+---
+>         ind <- cbind(seq_len(n), g)
+273c269
+<         for(i in 1L:ngroup) {
+---
+>         for(i in seq_len(ngroup)) {
+275c271
+<             Bm <- p * log((nk-1)/2) - sum(digamma(0.5 * (nk - 1L:ngroup)))
+---
+>             Bm <- p * log((nk-1)/2) - sum(digamma(0.5 * (nk - seq_len(ngroup))))
+283c279
+<         for(i in 1L:ngroup) {
+---
+>         for(i in seq_len(ngroup)) {
+304c300
+<         cat("Call:\n")
+---
+>         cat(gettext("Call:", domain = "R-MASS"), "\n", sep = "")
+307c303
+<     cat("\nPrior probabilities of groups:\n")
+---
+>     cat("\n", gettext("Prior probabilities of groups:", domain = "R-MASS"), "\n", sep = "")
+309c305
+<     cat("\nGroup means:\n")
+---
+>     cat("\n", gettext("Group means:", domain = "R-MASS"), "\n", sep = "")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/rlm.R R-recommended-moje/MASS/R/rlm.R
+95c95
+<         stop("'x' is singular: singular fits are not implemented in 'rlm'")
+---
+>         stop("'x' is singular: singular fits are not implemented in 'rlm()'")
+98c98
+<          || is.null(test.vec))) stop("invalid 'test.vec'")
+---
+>          || is.null(test.vec))) stop(gettextf("invalid '%s' argument", "test.vec"))
+104c104
+<             stop("length of 'weights' must equal number of observations")
+---
+>             stop(gettextf("length of '%s' argument must equal number of observations", "weights"))
+123c123
+<             if(any(pm == 0L)) warning("some of ... do not match")
+---
+>             if(any(pm == 0L)) warning("some of '...' do not match")
+132c132
+<             } else stop("'init' method is unknown")
+---
+>             } else stop("'init()' method is unknown")
+168c168
+<     for(iiter in 1L:maxit) {
+---
+>     for(iiter in seq_len(maxit)) {
+193,194c193
+<         warning(gettextf("'rlm' failed to converge in %d steps", maxit),
+<                 domain = NA)
+---
+>         warning(gettextf("'rlm' failed to converge in %d steps", maxit), domain = "R-MASS")
+213c212
+<         cat("Call:\n")
+---
+>         cat(gettext("Call:", domain = "R-MASS"), "\n", sep = "")
+217,218c216,217
+<         cat("Converged in", length(x$conv), "iterations\n")
+<     else cat("Ran", length(x$conv), "iterations without convergence\n")
+---
+>         cat(gettextf("Converged in %d iterations", length(x$conv), domain = "R-MASS"), "\n", sep = "")
+>     else cat(gettextf("Ran %d iterations without convergence", length(x$conv), domain = "R-MASS"), "\n", sep = "")
+220c219
+<     cat("\nCoefficients:\n")
+---
+>     cat("\n", gettext("Coefficients:", domain = "R-MASS"), "\n", sep = "")
+224c223
+<     cat("\nDegrees of freedom:", nobs, "total;", rdf, "residual\n")
+---
+>     cat("\n", gettextf("Degrees of freedom: %d total; %d residual", nobs, rdf, domain = "R-MASS"), "\n", sep = "")
+226c225
+<     cat("Scale estimate:", format(signif(x$s,3)), "\n")
+---
+>     cat(gettextf("Scale estimate: %s", format(signif(x$s,3)), domain = "R-MASS"), "\n", sep = "")
+273c272
+<     R <- R[1L:p, 1L:p, drop = FALSE]
+---
+>     R <- R[seq_len(p), seq_len(p), drop = FALSE]
+304c303
+<     cat("\nCall: ")
+---
+>     cat(gettext("\nCall: ", domain = "R-MASS"))
+309,310c308,309
+<     cat(if(!is.null(x$weights) && diff(range(x$weights))) "Weighted ",
+<         "Residuals:\n", sep="")
+---
+>     if(!is.null(x$weights) && diff(range(x$weights))) { cat(gettext("Weighted Residuals:", domain = "R-MASS"), "\n", sep = "")
+>     } else { cat(gettext("Residuals:\n", domain = "R-MASS")) }
+325,327c324,325
+<         cat("\nCoefficients: (", nsingular,
+<             " not defined because of singularities)\n", sep = "")
+<     else cat("\nCoefficients:\n")
+---
+>         cat("\n", gettextf("Coefficients: (%d not defined because of singularities)", nsingular, domain = "R-MASS"), "\n", sep = "")
+>     else cat("\n", gettext("Coefficients:", domain = "R-MASS"), "\n", sep = "")
+329,330c327
+<     cat("\nResidual standard error:", format(signif(x$sigma, digits)),
+<         "on", rdf, "degrees of freedom\n")
+---
+>     cat("\n", gettextf("Residual standard error: %s on %d degrees of freedom", format(signif(x$sigma, digits)), rdf, domain = "R-MASS"), "\n", sep = "")
+335c332
+<             cat("\nCorrelation of Coefficients:\n")
+---
+>             cat("\n", gettext("Correlation of Coefficients:", domain = "R-MASS"), "\n", sep = "")
+372c369
+<         asgn <- object$assign[object$qr$pivot[1L:object$rank]]
+---
+>         asgn <- object$assign[object$qr$pivot[seq_len(object$rank)]]
+399,401c396
+<                        stop(gettextf("each element of '%s' must be logical",
+<                                      substitute(contrasts.list)),
+<                             domain = NA)
+---
+>                        stop(gettextf("each element of '%s' must be logical", substitute(contrasts.list)), domain = "R-MASS")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/rms.curv.R R-recommended-moje/MASS/R/rms.curv.R
+22c22
+<   if(is.null(v)) stop("\"gradient\" attribute missing")
+---
+>   if(is.null(v)) stop(gettextf("%s attribute is missing", dQuote("gradient")))
+24c24
+<   if(is.null(a)) stop("\"hessian\" attribute missing")
+---
+>   if(is.null(a)) stop(gettextf("%s attribute is missing", dQuote("hessian")))
+30c30
+<   for(j in 1L:p) D <- cbind(D, a[, 1L:j, j])
+---
+>   for(j in seq_len(p)) D <- cbind(D, a[, seq_len(j), j])
+34,35c34,35
+<   if(rnk <= p) warning("regression apparently linear")
+<   Q1 <- Q[, 1L:rnk]
+---
+>   if(rnk <= p) warning("regression is apparently linear")
+>   Q1 <- Q[, seq_len(rnk)]
+37c37
+<   for(j in 1L:p) C[,  , j] <- crossprod(Q1, a[,  , j])
+---
+>   for(j in seq_len(p)) C[,  , j] <- crossprod(Q1, a[,  , j])
+39c39
+<   r11i <- solve(qr.R(qrd)[1L:p, 1L:p])
+---
+>   r11i <- solve(qr.R(qrd)[seq_len(p), seq_len(p)])
+41c41
+<   for(j in 1L:p) {
+---
+>   for(j in seq_len(p)) {
+60,62c60,62
+<   cat("Parameter effects: c^theta x sqrt(F) =", round(x$pe, 4), "\n",
+<       "       Intrinsic: c^iota  x sqrt(F) =", round(x$ic, 4), "\n",
+<       ...)
+---
+>   cat(gettextf("Parameter effects: c^theta x sqrt(F) = %s", round(x$pe, 4), domain = "R-MASS"), "\n",
+>       "       ", gettextf("Intrinsic: c^iota  x sqrt(F) = %s", round(x$ic, 4), domain = "R-MASS"), "\n",
+>       ..., sep = "")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/sammon.R R-recommended-moje/MASS/R/sammon.R
+24c24
+<     if(!is.matrix(y)) stop("'y' must be a matrix")
+---
+>     if(!is.matrix(y)) stop(gettextf("'%s' argument is not a matrix", "y"))
+44,45c44
+<         stop(gettextf("zero or negative distance between objects %d and %d",
+<                       aa[1,1], aa[1,2]), domain = NA)
+---
+>         stop(gettextf("zero or negative distance between objects %d and %d", aa[1,1], aa[1,2]), domain = "R-MASS")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/stdres.R R-recommended-moje/MASS/R/stdres.R
+27c27
+<                                  "%d missing observations deleted"),
+---
+>                                  "%d missing observations deleted", domain = "R-MASS"),
+42c42
+<                                      "%d rows with zero weights not counted"),
+---
+>                                      "%d rows with zero weights not counted", domain = "R-MASS"),
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/stepAIC.R R-recommended-moje/MASS/R/stepAIC.R
+52,54c52,54
+<         heading <- c("Stepwise Model Path \nAnalysis of Deviance Table",
+<                      "\nInitial Model:", deparse(formula(object)),
+<                      "\nFinal Model:", deparse(formula(fit)),
+---
+>         heading <- c(gettext("Stepwise Model Path \nAnalysis of Deviance Table", domain = "R-MASS"),
+>                      "\n", gettext("Initial Model:", domain = "R-MASS"), deparse(formula(object)),
+>                      "\n", gettext("Final Model:", domain = "R-MASS"), deparse(formula(fit)),
+75c75
+<     if(use.start) warning("'use.start' cannot be used with R's version of 'glm'")
+---
+>     if(use.start) warning("'use.start' argument cannot be used with R's version of 'glm'")
+111c111
+<         cat("Start:  AIC=", format(round(bAIC, 2)), "\n",
+---
+>         cat(gettextf("Start:  AIC=%s", format(round(bAIC, 2)), domain = "R-MASS"), "\n",
+188c188
+<             cat("\nStep:  AIC=", format(round(bAIC, 2)), "\n",
+---
+>             cat("\n", gettextf("Step:  AIC=%s", format(round(bAIC, 2)), domain = "R-MASS"), "\n",
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/truehist.R R-recommended-moje/MASS/R/truehist.R
+46c46
+< 		stop("'nbins' must result in a positive integer")
+---
+> 		stop("'nbins' argument must result in a positive integer")
+50c50
+< 	    stop("'h' must be strictly positive")
+---
+> 	    stop("'h' argument must be strictly positive")
+55c55
+<     if(any(diff(breaks) <= 0)) stop("'breaks' must be strictly increasing")
+---
+>     if(any(diff(breaks) <= 0)) stop("'breaks' argument must be strictly increasing")
+57c57
+<         stop("'breaks' do not cover the data")
+---
+>         stop("'breaks' argument do not cover the data")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/ucv.R R-recommended-moje/MASS/R/ucv.R
+42c42
+<     if(!n) stop("'x' has length zero")
+---
+>     if(!n) stop("'x' argument has length zero")
+84c84
+<     if(!n) stop("'x' has length zero")
+---
+>     if(!n) stop("'x' argument has length zero")
+113c113
+<     if(!n) stop("'x' has length zero")
+---
+>     if(!n) stop("'x' argument has length zero")
+Tylko w R-recommended-moje/MASS/src: localization.h
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/src/MASS.c R-recommended-moje/MASS/src/MASS.c
+19a20
+> #include "localization.h"
+62c63
+< 	    if(d1 == 0) error("initial configuration has duplicates");
+---
+> 	    if(d1 == 0) error(_("initial configuration has duplicates"));
+66c67
+<     if (*trace) Rprintf("Initial stress        : %7.5f\n", e);
+---
+>     if (*trace) Rprintf(_("Initial stress        : %7.5f\n"), e);
+121c122
+< 		Rprintf("stress after %3d iters: %7.5f\n", i - 1, e);
+---
+> 		Rprintf(_("stress after %3d iters: %7.5f\n"), i - 1, e);
+141c142
+< 		Rprintf("stress after %3d iters: %7.5f, magic = %5.3f\n", i, e, magic);
+---
+> 		Rprintf(_("stress after %3d iters: %7.5f, magic = %5.3f\n"), i, e, magic);

@@ -1,0 +1,139 @@
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/spatial/R/kr.R R-recommended-moje/spatial/R/kr.R
+33c33
+<     if (np > 6L) stop("'np' exceeds 6")
+---
+>     if (np > 6L) stop("'np' argument exceeds 6")
+73c73
+<     if (np > 6) stop("'np' exceeds 6")
+---
+>     if (np > 6) stop("'np' argument exceeds 6")
+143c143
+<         stop("'object' is not a fitted trend surface")
+---
+>         stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls")))
+158c158
+<         stop("'object' is not a fitted trend surface")
+---
+>         stop(gettextf("'%s' argument is not an object of class %s", "obj", dQuote("trls")))
+172c172,173
+<     if(!inherits(obj, "trls")) stop("'object' is not a fitted trend surface")
+---
+>     if(!inherits(obj, "trls"))
+>         stop(gettextf("'%s' argument is not an object of class %s", "obj", dQuote("trls")))
+207,208c208,210
+<     if(!inherits(obj, "trgls")) stop("'object' not from kriging")
+<     if(n > 999) stop("'n' is too large")
+---
+>     if(!inherits(obj, "trgls"))
+>         stop(gettextf("'%s' argument is not an object of class %s", "obj", dQuote("trgls")))
+>     if(n > 999) stop("'n' argument is too large")
+259,260c261,263
+<     if(!inherits(obj, "trgls")) stop("object not from kriging")
+<     if(n > 999) stop("'n' is too large")
+---
+>     if(!inherits(obj, "trgls"))
+>         stop(gettextf("'%s' argument is not an object of class %s", "obj", dQuote("trgls")))
+>     if(n > 999) stop("'n' argument is too large")
+309c312
+<       warning("Device not active")
+---
+>       warning("Device is not active")
+337c340
+<       warning("Device not active")
+---
+>       warning("Device is not active")
+369c372
+<             stop("'object' is not a fitted trend surface")
+---
+>         stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls")))
+376c379
+<         stop("'object' is not a fitted trend surface")
+---
+>         stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls")))
+383c386
+<         stop("'object' is not a fitted trend surface")
+---
+>         stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls")))
+390c393
+<         stop("'object' is not a fitted trend surface")
+---
+>         stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls")))
+397c400
+<         stop("'object' is not a fitted trend surface")
+---
+>         stop(gettextf("'%s' argument is not an object of class %s", "fit", dQuote("trls")))
+415c418
+<         stop("'object' is not a fitted trend surface")
+---
+>         stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls")))
+434c437
+<     cat("Analysis of Variance Table\n", "Model: ")
+---
+>     cat(gettext("Analysis of Variance Table", domain = "R-spatial"), "\n", gettext("Model: ", domain = "R-spatial"))
+443c446
+<     for (i in 1L:nmodels) {
+---
+>     for (i in seq_len(nmodels)) {
+445c448
+<             stop("'object' is not a fitted trend surface")
+---
+>             stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls")))
+469,473c472,475
+<         list(1L:nmodels, c("Res.Df", "Res.Sum Sq",
+<                           "Df", "Sum Sq", "F value", "Pr(>F)"))
+<     title <- "Analysis of Variance Table\n"
+<     topnote <- paste("Model ", format(1L:nmodels), ": ", models,
+<                      sep = "", collapse = "\n")
+---
+>         list(1L:nmodels, c("Res.Df", "Res.Sum Sq", "Df", "Sum Sq", "F value", "Pr(>F)"))
+>     title <- paste(gettext("Analysis of Variance Table"), "\n", sep = "")
+>     topnote <- paste(gettextf("Model %s: %s", format(1L:nmodels), models), collapse = "\n")
+> 				#paste(gettextf("Model %d: %s", format(1L:nmodels), models), "\n", sep = "")
+476,477c478
+<     print(structure(table, heading = c(title, topnote),
+<                     class = c("anova", "data.frame")))
+---
+>     print(structure(table, heading = c(title, topnote), class = c("anova", "data.frame")))
+479,480c480
+<     invisible(structure(table, heading = c(title, topnote),
+<                         class = c("anova", "data.frame")))
+---
+>     invisible(structure(table, heading = c(title, topnote), class = c("anova", "data.frame")))
+490c490
+<         stop("'object' is not a fitted trend surface")
+---
+>         stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls")))
+499,501c499,501
+<     cat("Multiple R-Squared:", format(rsquared, digits = digits))
+<     cat(",\tAdjusted R-squared:", format(adj.rsquared, digits = digits),
+<         "\n")
+---
+>     cat(gettext("Multiple R-Squared:", domain = "R-spatial"), " ", format(rsquared, digits = digits), sep = "")
+>     cat(",\t", gettext("Adjusted R-squared:", domain = "R-spatial"), " ", format(adj.rsquared, digits = digits),
+>         "\n", sep = "")
+503,504c503,504
+<     cat("AIC: (df = ", AIC[1L], ") ", AIC[2L], "\n", sep = "")
+<     cat("Fitted:\n")
+---
+>     cat(gettextf("AIC: (df = %s) %s", AIC[1L], round(AIC[2L], 4), domain = "R-spatial"), "\n", sep = "")
+>     cat(gettext("Fitted:", domain = "R-spatial"), "\n", sep = "")
+512c512
+<     cat("Residuals:\n")
+---
+>     cat(gettext("Residuals:", domain = "R-spatial"), "\n", sep = "")
+527c527
+<         stop("'object' is not a fitted trend surface")
+---
+>         stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls")))
+544c544
+<         stop("'x' not a fitted trend surface")
+---
+>         stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("trls")))
+Tylko w R-recommended-moje/spatial/src: localization.h
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/spatial/src/pps.c R-recommended-moje/spatial/src/pps.c
+26a27
+> #include "localization.h"
+40c41
+< 	error("not initialized -- use ppregion");
+---
+> 	error(_("not initialized -- use ppregion"));

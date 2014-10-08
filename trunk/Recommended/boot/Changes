@@ -1,0 +1,633 @@
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/boot/man/boot.ci.Rd R-recommended-moje/boot/man/boot.ci.Rd
+16c16
+<         index = 1:min(2,length(boot.out$t0)), var.t0 = NULL, 
+---
+>         index = seq_len(min(2,length(boot.out$t0))), var.t0 = NULL, 
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/boot/man/envelope.Rd R-recommended-moje/boot/man/envelope.Rd
+12c12
+< envelope(boot.out = NULL, mat = NULL, level = 0.95, index = 1:ncol(mat))
+---
+> envelope(boot.out = NULL, mat = NULL, level = 0.95, index = seq_len(ncol(mat)))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/boot/man/print.boot.Rd R-recommended-moje/boot/man/print.boot.Rd
+11c11
+<       index = 1:ncol(boot.out$t), \dots)
+---
+>       index = seq_len(ncol(boot.out$t)), \dots)
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/boot/R/bootfuns.q R-recommended-moje/boot/R/bootfuns.q
+337c337
+<         print(paste("All values of t* are equal to ", mean(t, na.rm=TRUE)))
+---
+>         print(gettextf("All values of t* are equal to %s", mean(t, na.rm=TRUE)))
+356c356
+<         qlab <- paste("Quantiles of Chi-squared(",df,")",sep="")
+---
+>         qlab <- gettextf("Quantiles of Chi-squared(%d)", df)
+360c360
+<             warning(gettextf("%s distribution not supported: using normal instead", sQuote(qdist)), domain = NA)
+---
+>             warning(gettextf("%s distribution not supported: using normal instead", sQuote(qdist)), domain = "R-boot")
+362c362
+<         qlab <-"Quantiles of Standard Normal"
+---
+>         qlab <-gettext("Quantiles of Standard Normal")
+390c390
+<                           index = 1L:ncol(boot.out$t), ...)
+---
+>                           index = seq_len(ncol(boot.out$t)), ...)
+416c416
+<         dimnames(op) <- list(rn,c("mean", "std. error"))
+---
+>         dimnames(op) <- list(rn,c(gettext("mean"), gettext("std. error")))
+423c423
+<             dimnames(op) <- list(rn, c("original"," bias  "," std. error"))
+---
+>             dimnames(op) <- list(rn, c(gettext("original", domain = "R-boot"), gettext(" bias  ", domain = "R-boot"), gettext(" std. error", domain = "R-boot")))
+431,432c431
+<             dimnames(op) <- list(rn,c("original", " bias  ",
+<                                       " std. error", " mean(t*)"))
+---
+>             dimnames(op) <- list(rn,c(gettext("original", domain = "R-boot"), gettext(" bias  ", domain = "R-boot"), gettext(" std. error", domain = "R-boot"), gettext(" mean(t*)", domain = "R-boot")))
+437c436
+<             cat("\nPARAMETRIC BOOTSTRAP\n\n")
+---
+>             cat("\n", gettext("PARAMETRIC BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
+440,441c439,440
+<                 cat("\nANTITHETIC BOOTSTRAP\n\n")
+<             else	cat("\nSTRATIFIED ANTITHETIC BOOTSTRAP\n\n")
+---
+>                 cat("\n", gettext("ANTITHETIC BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
+>             else	cat("\n", gettext("STRATIFIED ANTITHETIC BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
+445,446c444,445
+<                 cat("\nDATA PERMUTATION\n\n")
+<             else	cat("\nSTRATIFIED DATA PERMUTATION\n\n")
+---
+>                 cat("\n", gettext("DATA PERMUTATION", domain = "R-boot"), "\n\n", sep = "")
+>             else	cat("\n", gettext("STRATIFIED DATA PERMUTATION", domain = "R-boot"), "\n\n", sep = "")
+450c449
+<                 cat("\nBALANCED BOOTSTRAP\n\n")
+---
+>                 cat("\n", gettext("BALANCED BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
+452c451
+<                 cat("\nBALANCED WEIGHTED BOOTSTRAP\n\n")
+---
+>                 cat("\n", gettext("BALANCED WEIGHTED BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
+454,455c453,454
+<                 cat("\nSTRATIFIED BALANCED BOOTSTRAP\n\n")
+<             else	cat("\nSTRATIFIED WEIGHTED BALANCED BOOTSTRAP\n\n")
+---
+>                 cat("\n", gettext("STRATIFIED BALANCED BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
+>             else	cat("\n", gettext("STRATIFIED WEIGHTED BALANCED BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
+459c458
+<                 cat("\nORDINARY NONPARAMETRIC BOOTSTRAP\n\n")
+---
+>                 cat("\n", gettext("ORDINARY NONPARAMETRIC BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
+461c460
+<                 cat("\nWEIGHTED BOOTSTRAP\n\n")
+---
+>                 cat("\n", gettext("WEIGHTED BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
+463,464c462,463
+<                 cat("\nSTRATIFIED BOOTSTRAP\n\n")
+<             else 	cat("\nSTRATIFIED WEIGHTED BOOTSTRAP\n\n")
+---
+>                 cat("\n", gettext("STRATIFIED BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
+>             else 	cat("\n", gettext("STRATIFIED WEIGHTED BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
+471,472c470,471
+<             cat("\nBALANCED TILTED BOOTSTRAP\n\n")
+<         else	cat("\nTILTED BOOTSTRAP\n\n")
+---
+>             cat("\n", gettext("BALANCED TILTED BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
+>         else	cat("\n", gettext("TILTED BOOTSTRAP", domain = "R-boot"), "\n\n", sep = "")
+474,475c473,474
+<             cat("Exponential tilting used\n")
+<         else	cat("Frequency Smoothing used\n")
+---
+>             cat(gettext("Exponential tilting used", domain = "R-boot"), "\n", sep = "")
+>         else	cat(gettext("Frequency Smoothing used", domain = "R-boot"), "\n", sep = "")
+478c477
+<             cat(paste("First",R[1L],"replicates untilted,\n"))
+---
+>             cat(sprintf(ngettext(R[1L], "First %d replicate untilted", "First %d replicates untilted"), R[1L]),",\n", sep = "")
+480,481c479
+<             cat(paste("First ",R[2L]," replicates tilted to ",
+<                       signif(th[1L],4),",\n",sep=""))
+---
+>             cat(sprintf(ngettext(R[2L], "First %d replicate tilted to %s", "First %d replicates tilted to %s"), R[2L], signif(th[1L],4)), ",\n", sep = "")
+486,488c484,485
+<                 cat(paste("Next ",R[j+1L]," replicates tilted to ",
+<                           signif(th[j],4L),
+<                           ifelse(j!=length(th),",\n",".\n"),sep=""))
+---
+>                 cat(sprintf(ngettext(R[j+1L], "Next %d replicate tilted to %s", "Next %d replicates tilted to %s"), R[j+1L], signif(th[j],4L)),
+>                           ifelse(j!=length(th), ",\n", ".\n"), sep = "")
+494c491
+<             cat("\nTIME SERIES BOOTSTRAP USING SUPPLIED INDICES\n\n")
+---
+>             cat("\n", gettext("TIME SERIES BOOTSTRAP USING SUPPLIED INDICES", domain = "R-boot"), "\n\n", sep = "")
+496c493
+<             cat("\nMODEL BASED BOOTSTRAP FOR TIME SERIES\n\n")
+---
+>             cat("\n", gettext("MODEL BASED BOOTSTRAP FOR TIME SERIES", domain = "R-boot"), "\n\n", sep = "")
+498c495
+<             cat("\nPHASE SCRAMBLED BOOTSTRAP FOR TIME SERIES\n\n")
+---
+>             cat("\n", gettext("PHASE SCRAMBLED BOOTSTRAP FOR TIME SERIES", domain = "R-boot"), "\n\n", sep = "")
+500,501c497,498
+<                 cat("Normal margins used.\n")
+<             else	cat("Observed margins used.\n")
+---
+>                 cat(gettext("Normal margins used.", domain = "R-boot"), "\n", sep = "")
+>             else	cat(gettext("Observed margins used.", domain = "R-boot"), "\n", sep = "")
+505,508c502,504
+<                 cat("\nSTATIONARY BOOTSTRAP FOR TIME SERIES\n\n")
+<             else	cat(paste("\nPOST-BLACKENED STATIONARY",
+<                                   "BOOTSTRAP FOR TIME SERIES\n\n"))
+<             cat(paste("Average Block Length of",boot.out$l,"\n"))
+---
+>                 cat("\n", gettext("STATIONARY BOOTSTRAP FOR TIME SERIES", domain = "R-boot"), "\n\n", sep = "")
+>             else	cat("\n", gettext("POST-BLACKENED STATIONARY BOOTSTRAP FOR TIME SERIES", domain = "R-boot"), "\n\n", sep = "")
+>             cat(gettextf("Average Block Length of %s", boot.out$l, domain = "R-boot"), "\n", sep = "")
+511,514c507,509
+<                     cat("\nBLOCK BOOTSTRAP FOR TIME SERIES\n\n")
+<         else	cat(paste("\nPOST-BLACKENED BLOCK",
+<                           "BOOTSTRAP FOR TIME SERIES\n\n"))
+<                     cat(paste("Fixed Block Length of",boot.out$l,"\n"))
+---
+>                     cat("\n", gettext("BLOCK BOOTSTRAP FOR TIME SERIES", domain = "R-boot"), "\n\n", sep = "")
+>         else	cat("\n", gettext("POST-BLACKENED BLOCK BOOTSTRAP FOR TIME SERIES", domain = "R-boot"), "\n\n", sep = "")
+>                     cat(gettextf("Fixed Block Length of %s", boot.out$l, domain = "R-boot"), "\n", sep = "")
+520,521c515,516
+<             if (!is.null(cl$strata)) cat("STRATIFIED ")
+<             cat("WEIRD BOOTSTRAP FOR CENSORED DATA\n\n")
+---
+>             if (!is.null(cl$strata)) cat(gettext("STRATIFIED WEIRD BOOTSTRAP FOR CENSORED DATA", domain = "R-boot"), "\n\n", sep = "")
+>             else cat(gettext("WEIRD BOOTSTRAP FOR CENSORED DATA", domain = "R-boot"), "\n\n", sep = "")
+525,526c520,521
+<             if (!is.null(cl$strata)) cat("STRATIFIED ")
+<             cat("CASE RESAMPLING BOOTSTRAP FOR CENSORED DATA\n\n")
+---
+>             if (!is.null(cl$strata)) cat(gettext("STRATIFIED CASE RESAMPLING BOOTSTRAP FOR CENSORED DATA", domain = "R-boot"), "\n\n", sep = "")
+>             else cat(gettext("CASE RESAMPLING BOOTSTRAP FOR CENSORED DATA", domain = "R-boot"), "\n\n", sep = "")
+529,530c524,525
+<             if (!is.null(cl$strata)) cat("STRATIFIED ")
+<             cat("MODEL BASED BOOTSTRAP FOR COX REGRESSION MODEL\n\n")
+---
+>             if (!is.null(cl$strata)) cat(gettext("STRATIFIED MODEL BASED BOOTSTRAP FOR COX REGRESSION MODEL", domain = "R-boot"), "\n\n", sep = "")
+>             else cat(gettext("MODEL BASED BOOTSTRAP FOR COX REGRESSION MODEL", domain = "R-boot"), "\n\n", sep = "")
+533,537c528,535
+<             if (!is.null(cl$strata)) cat("STRATIFIED ")
+<             cat("CONDITIONAL BOOTSTRAP ")
+<             if (is.null(boot.out$cox))
+<                 cat("FOR CENSORED DATA\n\n")
+<             else	cat("FOR COX REGRESSION MODEL\n\n")
+---
+> 	    if(!is.null(cl$strata) && is.null(boot.out$cox))
+> 		cat(gettext("STRATIFIED CONDITIONAL BOOTSTRAP FOR CENSORED DATA", domain = "R-boot"), "\n\n", sep = "")
+> 	    else if(!is.null(cl$strata) && !is.null(boot.out$cox))
+> 		cat(gettext("STRATIFIED CONDITIONAL BOOTSTRAP FOR COX REGRESSION MODEL", domain = "R-boot"), "\n\n", sep = "")
+> 	    else if(is.null(cl$strata) && is.null(boot.out$cox))
+> 		cat(gettext("CONDITIONAL BOOTSTRAP FOR CENSORED DATA", domain = "R-boot"), "\n\n", sep = "")
+> 	    else
+> 		cat(gettext("CONDITIONAL BOOTSTRAP FOR COX REGRESSION MODEL", domain = "R-boot"), "\n\n", sep = "")
+540c538
+<     cat("\nCall:\n")
+---
+>     cat("\n", gettext("Call:", domain = "R-boot"), "\n", sep = "")
+542c540
+<     cat("\n\nBootstrap Statistics :\n")
+---
+>     cat("\n\n", gettext("Bootstrap Statistics:", domain = "R-boot"), "\n", sep = "")
+546c544
+<             cat(paste("WARNING: All values of t", j, "* are NA\n", sep=""))
+---
+>             cat(gettextf("WARNING: All values of %s are NA", paste("t", j, "*", sep = ""), domain = "R-boot"), "\n", sep="")
+709c707
+<             ylab <- "5, 10, 16, 50, 84, 90, 95 %-iles of (T*-t)"
+---
+>             ylab <- gettext("5, 10, 16, 50, 84, 90, 95 percentiles of (T*-t)", domain = "R-boot")
+711c709
+<     if (is.null(ylab)) ylab <- "Percentiles of (T*-t)"
+---
+>     if (is.null(ylab)) ylab <- gettext("Percentiles of (T*-t)", domain = "R-boot")
+731,736c729
+<     xtext <- "jackknife value"
+<     if (!useJ) {
+<         if (!is.null(L) || (is.null(t.o) && (boot.out$stype == "w")))
+<             xtext <- paste("infinitesimal", xtext)
+<         else	xtext <- paste("regression", xtext)
+<     }
+---
+>     xtext <- gettext("jackknife value")
+739d731
+<         xtext <- paste("standardized", xtext)
+740a733,756
+> 	####
+> 	if (!useJ && (!is.null(L) || (is.null(t.o) && (boot.out$stype == "w"))) && stinf) {
+> 		xtext <- gettext("standardized infinitesimal jackknife value", domain = "R-boot")
+> 	}
+> 	else if (!useJ && (!is.null(L) || (is.null(t.o) && (boot.out$stype == "w"))) && !stinf) {
+> 		xtext <- gettext("infinitesimal jackknife value", domain = "R-boot")
+> 	}
+> 	else if (!useJ && is.null(L) && (!is.null(t.o) || !(boot.out$stype == "w")) && stinf) {
+> 	#else if (!useJ && !(!is.null(L) || (is.null(t.o) && (boot.out$stype == "w"))) && stinf) {
+> 		xtext <- gettext("standardized regression jackknife value", domain = "R-boot")
+> 	}
+> 	else if (!useJ && is.null(L) && (!is.null(t.o) || !(boot.out$stype == "w")) && !stinf) {
+> 	#else if (!useJ && !(!is.null(L) || (is.null(t.o) && (boot.out$stype == "w"))) && !stinf) {
+> 		xtext <- gettext("regression jackknife value", domain = "R-boot")
+> 	}
+> 	else if (useJ && stinf) {
+> 		xtext <- gettext("standardized jackknife value", domain = "R-boot")
+> 	}
+> 	else if (useJ && !stinf) {
+> 		xtext <- gettext("jackknife value", domain = "R-boot")
+> 	}	
+> 
+> 
+> 	
+830c846
+<     if (K!=K.o) warning(gettextf("'K' has been set to %f", K), domain = NA)
+---
+>     if (K!=K.o) warning(gettextf("'K' has been set to %f", K), domain = "R-boot")
+832c848
+<     s <- sample0(rep(1L:K, f), n)
+---
+>     s <- sample0(rep(seq_len(K), f), n)
+861c877
+< 		    index = 1L:min(2L, length(boot.out$t0)),
+---
+> 		    index = seq_len(min(2L, length(boot.out$t0))),
+900,901c916,917
+<         print(paste("All values of t are equal to ", mean(t, na.rm=TRUE),
+<                     "\n Cannot calculate confidence intervals"))
+---
+>         print(paste(gettextf("All values of t are equal to %s", mean(t, na.rm=TRUE), domain = "R-boot"),
+>                     "\n ", gettext("Cannot calculate confidence intervals", domain = "R-boot")))
+905c921
+<         stop(gettextf("'t' must of length %d", boot.out$R), domain = NA)
+---
+>         stop(gettextf("'t' must of length %d", boot.out$R), domain = "R-boot")
+966c982
+<         intlabs <- c(intlabs,"     Normal        ")
+---
+>         intlabs <- c(intlabs, gettext("     Normal        ", domain = "R-boot"))
+968c984
+<         intlabs <- c(intlabs,"     Basic         ")
+---
+>         intlabs <- c(intlabs, gettext("     Basic         ", domain = "R-boot"))
+971c987
+<         intlabs <- c(intlabs,"   Studentized     ")
+---
+>         intlabs <- c(intlabs, gettext("   Studentized     ", domain = "R-boot"))
+974c990
+<         intlabs <- c(intlabs,"    Percentile     ")
+---
+>         intlabs <- c(intlabs, gettext("    Percentile     ", domain = "R-boot"))
+977c993
+<         intlabs <- c(intlabs,"      BCa          ")
+---
+>         intlabs <- c(intlabs, gettext("      BCa          ", domain = "R-boot"))
+998,999c1014,1015
+<     ints1[,2*(1L:n1)] <- paste("(",ints1[,2*(1L:n1)],",",sep="")
+<     ints1[,2*(1L:n1)+1L] <- paste(ints1[,2*(1L:n1)+1L],")  ")
+---
+>     ints1[, 2*seq_len(n1)] <- paste("(",ints1[,2*seq_len(n1)], ", ", sep = "")
+>     ints1[, 2*seq_len(n1) + 1L] <- paste(ints1[, 2*seq_len(n1) + 1L], ")  ")
+1012,1013c1028,1029
+<         ints2[,2*(1L:n2)] <- paste("(",ints2[,2*(1L:n2)],",",sep="")
+<         ints2[,2*(1L:n2)+1L] <- paste(ints2[,2*(1L:n2)+1L],")  ")
+---
+>         ints2[, 2*seq_len(n2)] <- paste("(", ints2[, 2*seq_len(n2)], ", ", sep = "")
+>         ints2[, 2*seq_len(n2) + 1L] <- paste(ints2[, 2*seq_len(n2) + 1L], ")  ")
+1017,1019c1033,1035
+<     cat("BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS\n")
+<     cat(paste("Based on",R,"bootstrap replicates\n\n"))
+<     cat("CALL : \n")
+---
+>     cat(gettext("BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS", domain = "R-boot"), "\n", sep = "")
+>     cat(gettextf("Based on %d bootstrap replicates", R, domain = "R-boot"), "\n\n", sep = "")
+>     cat(gettext("CALL:", domain = "R-boot"), "\n", sep = "")
+1021,1022c1037,1038
+<     cat("\nIntervals : ")
+<     cat("\nLevel",intlabs[1L:n1])
+---
+>     cat("\n", gettext("Intervals:", domain = "R-boot"), sep = "")
+>     cat("\n", gettext("Level", domain = "R-boot"), intlabs[seq_len(n1)])
+1025c1041
+<         cat("\n\nLevel",intlabs[(n1+1):(n1+n2)])
+---
+>         cat("\n\n", gettext("Level", domain = "R-boot"), intlabs[(n1+1):(n1+n2)])
+1030,1033c1046,1047
+<             cat("\nCalculations and Intervals on ",
+<                 "Transformed Scale\n")
+<         else	cat("\nCalculations on Transformed Scale;",
+<                     " Intervals on Original Scale\n")
+---
+>             cat("\n", gettext("Calculations and Intervals on Transformed Scale", domain = "R-boot"), "\n", sep = "")
+>         else	cat("\n", gettext("Calculations on Transformed Scale; Intervals on Original Scale", domain = "R-boot"), "\n", sep = "")
+1036,1038c1050,1051
+<         cat("\nCalculations and Intervals on Original Scale\n")
+<     else 	cat("\nCalculations on Original Scale",
+<                     " but Intervals Transformed\n")#
+---
+>         cat("\n", gettext("Calculations and Intervals on Original Scale", domain = "R-boot"), "\n", sep = "")
+>     else 	cat("\n", gettext("Calculations on Original Scale but Intervals Transformed", domain = "R-boot"), "\n", sep = "")#
+1042c1055
+<             cat("Warning : Basic Intervals used Extreme Quantiles\n")
+---
+>             cat(gettext("Warning: Basic Intervals used Extreme Quantiles", domain = "R-boot"), "\n", sep = "")
+1044c1057
+<             cat("Some basic intervals may be unstable\n")
+---
+> 		    cat(gettext("Some basic intervals may be unstable", domain = "R-boot"), "\n", sep = "")
+1048c1061
+<             cat("Warning : Studentized Intervals used Extreme Quantiles\n")
+---
+>             cat(gettext("Warning: Studentized Intervals used Extreme Quantiles", domain = "R-boot"), "\n", sep = "")
+1050c1063
+<             cat("Some studentized intervals may be unstable\n")
+---
+>             cat(gettext("Some studentized intervals may be unstable", domain = "R-boot"), "\n", sep = "")
+1054c1067
+<             cat("Warning : Percentile Intervals used Extreme Quantiles\n")
+---
+>             cat(gettext("Warning: Percentile Intervals used Extreme Quantiles", domain = "R-boot"), "\n", sep = "")
+1056c1069
+<             cat("Some percentile intervals may be unstable\n")
+---
+>             cat(gettext("Some percentile intervals may be unstable", domain = "R-boot"), "\n", sep = "")
+1060c1073
+<             cat("Warning : BCa Intervals used Extreme Quantiles\n")
+---
+>             cat(gettext("Warning: BCa Intervals used Extreme Quantiles", domain = "R-boot"), "\n", sep = "")
+1062c1075
+<             cat("Some BCa intervals may be unstable\n")
+---
+>             cat(gettext("Some BCa intervals may be unstable", domain = "R-boot"), "\n", sep = "")
+1222c1235
+<     for (s in 1L:S) {
+---
+>     for (s in seq_len(S)) {
+1314,1315c1327
+<             warning(gettextf("only columns %s and %s of 'data' used",
+<                              index[1L], index[2L]), domain = NA)
+---
+>             warning(gettextf("only columns %s and %s of 'data' used", index[1L], index[2L]), domain = "R-boot")
+1443c1455
+<         str <- rep(1L:nstr, surv$strata)
+---
+>         str <- rep(seq_len(nstr), surv$strata)
+1451c1463
+<     for (s in 1L:nstr) {
+---
+>     for (s in seq_len(nstr)) {
+1843c1855
+<     for(s in 1L:S) {
+---
+>     for(s in seq_len(S)) {
+1851c1863
+<     function(boot.out = NULL, mat = NULL, level = 0.95, index = 1L:ncol(mat))
+---
+>     function(boot.out = NULL, mat = NULL, level = 0.95, index = seq_len(ncol(mat)))
+1955c1967
+<         subset <- (1L:(length(subset)+length(glmdiag$h)))[subset]
+---
+>         subset <- seq_len(length(subset)+length(glmdiag$h))[subset]
+1966c1978
+<     plot(x1, glmdiag$res, xlab = "Linear predictor", ylab = "Residuals")
+---
+>     plot(x1, glmdiag$res, xlab = gettext("Linear predictor", domain = "R-boot"), ylab = gettext("Residuals", domain = "R-boot"))
+1973,1974c1985,1986
+<     plot(x2, y2, ylab = "Quantiles of standard normal",
+<          xlab = "Ordered deviance residuals")
+---
+>     plot(x2, y2, ylab = gettext("Quantiles of standard normal"),
+>          xlab = gettext("Ordered deviance residuals"))
+1981c1993
+<     plot(hh, glmdiag$cook, xlab = "h/(1-h)", ylab = "Cook statistic")
+---
+>     plot(hh, glmdiag$cook, xlab = "h/(1-h)", ylab = gettext("Cook statistic", domain = "R-boot"))
+1994c2006
+<     plot(subset, glmdiag$cook, xlab = "Case", ylab = "Cook statistic")
+---
+>     plot(subset, glmdiag$cook, xlab = gettext("Case", domain = "R-boot"), ylab = gettext("Cook statistic", domain = "R-boot"))
+2007,2008c2019,2020
+<         cat("Please Input a screen number (1,2,3 or 4)\n")
+<         cat("0 will terminate the function \n")
+---
+>         cat(gettext("Please Input a screen number (1,2,3 or 4)", domain = "R-boot"), "\n", sep = "")
+>         cat(gettext("0 will terminate the function", domain = "R-boot"), "\n", sep = "")
+2013,2015c2025,2026
+<             cat(paste("Interactive Identification for screen",
+<                       num,"\n"))
+<             cat("left button = Identify, center button = Exit\n")
+---
+>             cat(gettextf("Interactive Identification for screen %d", num, domain = "R-boot"), "\n", sep = "")
+>             cat(gettext("left button = Identify, center button = Exit", domain = "R-boot"), "\n", sep = "")
+2055c2066
+<         for (i in 1L:m)
+---
+>         for (i in seq_len(m))
+2068c2079
+<         for (i in 1L:m) {
+---
+>         for (i in seq_len(m)) {
+2075,2076c2086
+<                 stop(gettextf("unable to find multiplier for %f", theta[i]),
+<                      domain = NA)
+---
+>                 stop(gettextf("unable to find multiplier for %f", theta[i]), domain = "R-boot")
+2119c2129
+<     for(i in 1L:np) {
+---
+>     for(i in seq_len(np)) {
+2290c2300
+<         for (i in 1L:m)
+---
+>         for (i in seq_len(m))
+2453c2463
+<                                   alpha = (1L:R)/(R + 1),
+---
+>                                   alpha = seq_len(R)/(R + 1),
+2458c2468
+<         else	dist.q <- predict(distn, x=qnorm((1L:R)/(R+1)))$y#
+---
+>         else	dist.q <- predict(distn, x=qnorm(seq_len(R)/(R+1)))$y#
+2478c2488
+<     for(s in 1L:S) {
+---
+>     for(s in seq_len(S)) {
+2494c2504
+<     for(s in 1L:S) {
+---
+>     for(s in seq_len(S)) {
+2584c2594
+<                         c(rep(0,m1),b1), n+(1L:m1), eps=eps)
+---
+>                         c(rep(0,m1),b1), n+seq_len(m1), eps=eps)
+2596c2606
+<                              c(n+(1L:m1),(n+m1+m2)+(1L:(m2+m3))),
+---
+>                              c(n+seq_len(m1),(n+m1+m2)+seq_len(m2+m3)),
+2605c2615
+<                              n+(1L:(m1+m3)), stage=1, n1=n+m1,
+---
+>                              n+seq_len(m1+m3), stage=1, n1=n+m1,
+2615,2616c2625,2626
+<         else	out <- simplex1(out1$a[1L:(n+m1+m2)],
+<                                 out1$A[,1L:(n+m1+m2)],
+---
+>         else	out <- simplex1(out1$a[seq_len(n+m1+m2)],
+>                                 out1$A[, seq_len(n+m1+m2)],
+2618c2628
+<                                 out1$soln[1L:(n+m1+m2)],
+---
+>                                 out1$soln[seq_len(n+m1+m2)],
+2626c2636
+<         out$slack <- out$soln[n+(1L:m1)]
+---
+>         out$slack <- out$soln[n + seq_len(m1)]
+2628c2638
+<         out$surplus <- out$soln[n+m1+(1L:m2)]
+---
+>         out$surplus <- out$soln[n + m1 + seq_len(m2)]
+2630c2640
+<         out$artificial <- out$soln[-(1L:n+m1+m2)]
+---
+>         out$artificial <- out$soln[ -seq_len(n+m1+m2)]
+2663c2673
+<     nonbasic <- (1L:N)[-basic]
+---
+>     nonbasic <- seq_len(N)[-basic]
+2684,2685c2694,2695
+<             neg <- (1L:M)[tableau[1L:M,pcol]< -eps]
+<         else 	neg <- 1+ (1L:M)[tableau[2:(M+1),pcol] < -eps]
+---
+>             neg <- seq_len(M)[tableau[seq_len(M), pcol]< -eps]
+>         else 	neg <- 1 + seq_len(M)[tableau[2:(M+1),pcol] < -eps]
+2709c2719
+<             ar <- (1L:M)[basic>n1]
+---
+>             ar <- seq_len(M)[basic>n1]
+2735c2745
+<         soln[basic] <- tableau[1L:M,1L]
+---
+>         soln[basic] <- tableau[seq_len(M), 1L]
+2739c2749
+<         A.out[,nonbasic] <- tableau[1L:M,-1L]
+---
+>         A.out[, nonbasic] <- tableau[seq_len(M), -1L]
+2754c2764
+<     cat("\nLinear Programming Results\n\n")
+---
+>     cat("\n", gettext("Linear Programming Results", domain = "R-boot"), "\n\n", sep = "")
+2756c2766
+<     cat("Call : ")
+---
+>     cat(gettext("Call: ", domain = "R-boot"))
+2758,2760c2768,2769
+<     if (simp.out$maxi) cat("\nMaximization ")
+<     else cat("\nMinimization ")
+<     cat("Problem with Objective Function Coefficients\n")
+---
+>     if (simp.out$maxi) cat("\n", gettext("Maximization Problem with Objective Function Coefficients", domain = "R-boot"), "\n", sep = "")
+>     else cat("\n", gettext("Minimization Problem with Objective Function Coefficients", domain = "R-boot"), "\n", sep = "")
+2763c2772
+<         cat("\n\nOptimal solution has the following values\n")
+---
+>         cat("\n\n", gettext("Optimal solution has the following values", domain = "R-boot"), "\n", sep = "")
+2765,2766c2774
+<         cat(paste("The optimal value of the objective ",
+<                   " function is ",simp.out$value,".\n",sep=""))
+---
+>         cat(gettextf("The optimal value of the objective function is %s.", simp.out$value, domain = "R-boot"), "\n", sep = "")
+2769,2770c2777,2778
+<         cat("\n\nIteration limit exceeded without finding solution\n")
+<         cat("The coefficient values at termination were\n")
+---
+>         cat("\n\n", gettext("Iteration limit exceeded without finding solution", domain = "R-boot"), "\n", sep = "")
+>         cat(gettext("The coefficient values at termination were", domain = "R-boot"), "\n", sep = "")
+2772,2773c2780
+<         cat(paste("The objective function value was ",simp.out$value,
+<                   ".\n",sep=""))
+---
+>         cat(gettextf("The objective function value was %s.",simp.out$value, domain = "R-boot"), "\n", sep = "")
+2775c2782
+<     else cat("\nNo feasible solution could be found\n")
+---
+>     else cat("\n", gettext("No feasible solution could be found", domain = "R-boot"), "\n", sep = "")
+2806,2807c2813
+<             stop(gettextf("number of columns of 'A' (%d) not equal to length of 'u' (%d)",
+<                           d, length(u)), domain = NA)
+---
+>             stop(gettextf("number of columns of 'A' (%d) not equal to length of 'u' (%d)", d, length(u)), domain = "R-boot")
+2898,2899c2904,2905
+<                 A1 <- A[,1L:d1]
+<                 A2 <- A[,-(1L:d1)]
+---
+>                 A1 <- A[, seq_len(d1)]
+>                 A2 <- A[, -seq_len(d1)]
+2932,2933c2938,2939
+<                 A1 <- A[, 1L:d1]
+<                 A2 <- A[, -(1L:d1)]
+---
+>                 A1 <- A[, seq_len(d1)]
+>                 A2 <- A[, -seq_len(d1)]
+3235,3236c3241
+<     pts.in <- (1L:npts)[(abs(zeta[,1L]) > 1e-6) &
+<                        (abs(spa[, 2L] - 0.5) < 0.5 - 1e-10)]
+---
+>     pts.in <- seq_len(npts)[(abs(zeta[,1L]) > 1e-6) & (abs(spa[, 2L] - 0.5) < 0.5 - 1e-10)]
+3250c3255
+< 		for (j in 1L:d) anames[j] <- paste("zeta1.", j ,sep = "")
+---
+> 		for (j in seq_len(d)) anames[j] <- paste("zeta1.", j ,sep = "")
+3276,3277c3281,3282
+<     cat("\nSaddlepoint Distribution Approximations\n\n")
+<     cat("Call : \n")
+---
+>     cat("\n", gettext("Saddlepoint Distribution Approximations", domain = "R-boot"), "\n\n", sep = "")
+>     cat(gettext("Call:", domain = "R-boot"), "\n", sep = "")
+3279c3284
+<     cat("\nQuantiles of the Distribution\n")
+---
+>     cat("\n", gettext("Quantiles of the Distribution", domain = "R-boot"), "\n", sep = "")
+3281,3282c3286
+<     cat(paste("\n\nSmoothing spline used ", nrow(sad.d$points),
+<               " points in the range ", rg[1L]," to ", rg[2L], ".\n", sep=""))
+---
+>     cat("\n\n", gettextf("Smoothing spline used %d points in the range %s to %s.", nrow(sad.d$points), rg[1L], rg[2L], domain = "R-boot"), "\n", sep="")
+3284c3288
+<         cat("Lugananni-Rice approximations used\n")
+---
+>         cat(gettext("Lugananni-Rice approximations used", domain = "R-boot"), "\n", sep = "")
+3336c3340
+< #            inds <- (1L:R)[len.tot < n.sim]
+---
+> #            inds <- seq_len(R)[len.tot < n.sim]
+3428c3432
+<             inds <- if (is.list(inds)) matrix(unlist(inds)[1L:n.sim], n.sim, 1L)
+---
+>             inds <- if (is.list(inds)) matrix(unlist(inds)[seq_len(n.sim)], n.sim, 1L)
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/boot/R/bootpracs.q R-recommended-moje/boot/R/bootpracs.q
+69,72c69,71
+< 	i <- min(c(1L:n)[L > lim])
+< 	if (is.na(i)) stop(gettextf("likelihood never exceeds %f", lim),
+<                            domain = NA)
+< 	j <- max(c(1L:n)[L > lim])
+---
+> 	i <- min(c(seq_len(n))[L > lim])
+> 	if (is.na(i)) stop(gettextf("likelihood never exceeds %f", lim), domain = "R-boot")
+> 	j <- max(c(seq_len(n))[L > lim])
+74,75c73
+<             stop(gettextf("likelihood exceeds %f at only one point", lim),
+<                  domain = NA)
+---
+>             stop(gettextf("likelihood exceeds %f at only one point", lim), domain = "R-boot")
+110c108
+<         i <- rep(1L:n, round(n * w))
+---
+>         i <- rep(seq_len(n), round(n * w))
+117c115
+<     i <- rep(1L:n,round(n*w))
+---
+>     i <- rep(seq_len(n), round(n * w))

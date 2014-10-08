@@ -1,0 +1,70 @@
+
+R Under development (unstable) (2014-09-30 r594) -- "Unsuffered Consequences"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-unknown-linux-gnu (64-bit)
+
+This version of R supports extended localization
+See README-ELS file for details
+R-ELS Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
+
+R-ELS is not part of the R project, so please do not report bugs
+via r-bugs or the R website - instead refer to the author.
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> #
+> library(survival)
+Loading required package: 'splines'
+> 
+> # Some simple tests of the Surv function
+> #  The first two are motivated by a bug, pointed out by Kevin Buhr,
+> #    where a mixture of NAs and invalid values didn't work right
+> #  Even for the simplest things a test case is good.
+> #  All but the third should produce warning messages
+> aeq <- function(x,y) all.equal(as.vector(x), as.vector(y))
+> temp <- Surv(c(1, 10, 20, 30), c(2, NA, 0, 40), c(1,1,1,1))
+Warning message:
+In command 'Surv(c(1, 10, 20, 30), c(2, NA, 0, 40), c(1, 1, 1, 1))':
+  stop time must be > start time, NA created
+> aeq(temp, c(1,10,NA,30,  2,NA,0,40, 1,1,1,1))
+[1] TRUE
+> 
+> temp <- Surv(c(1, 10, 20, 30), c(2, NA, 0, 40), type='interval2')
+Warning message:
+In command 'Surv(c(1, 10, 20, 30), c(2, NA, 0, 40), type = "interval2")':
+  invalid interval: start > stop, NA created
+> aeq(temp, c(1,10,20,30,  2,1,1,40, 3,0,NA,3))
+[1] TRUE
+> 
+> #No error
+> temp <- Surv(1:5)
+> aeq(temp, c(1:5, 1,1,1,1,1))
+[1] TRUE
+> 
+> temp1 <- Surv(c(1,10,NA, 30, 30), c(1,NA,10,20, 40), type='interval2')
+Warning message:
+In command 'Surv(c(1, 10, NA, 30, 30), c(1, NA, 10, 20, 40), type = "interval2")':
+  invalid interval: start > stop, NA created
+> temp2 <- Surv(c(1,10,10,30,30), c(9, NA, 5, 20,40), c(1, 0, 2,3,3),
++               type='interval')
+Warning message:
+In command 'Surv(c(1, 10, 10, 30, 30), c(9, NA, 5, 20, 40), c(1, 0, 2, 3, 3), type = "interval")':
+  invalid interval: start > stop, NA created
+> aeq(temp1, temp2)
+[1] TRUE
+> aeq(temp1, c(1,10,10,30,30, 1,1,1,1, 40, 1,0,2,NA,3))
+[1] TRUE
+> 
+> proc.time()
+   user  system elapsed 
+  0.241   0.030   0.257 

@@ -1,0 +1,2504 @@
+Tylko w R-recommended-moje/nlme/inst/po: ko
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/corStruct.R R-recommended-moje/nlme/R/corStruct.R
+60,61c60
+<       stop(gettextf("do not know how to calculate correlation matrix of %s object",
+<                     dQuote(class(object)[1])), domain = NA)
+---
+>       stop(gettextf("do not know how to calculate correlation matrix of %s object", dQuote(class(object)[1])), domain = "R-nlme")
+66c65
+< 	names(covariate) <- 1:length(covariate)
+---
+> 	names(covariate) <- seq_len(length(covariate))
+81c80
+<       val <- split(val, rep(1:corD[["M"]], (corD[["len"]])^2))
+---
+>       val <- split(val, rep(seq_len(corD[["M"]]), (corD[["len"]])^2))
+108c107
+<       stop("\"corStruct\" object must have a \"fixed\" attribute")
+---
+>       stop(gettextf("object of class %s must have a \"fixed\" attribute", dQuote("corStruct")))
+116,117c115
+<       stop(gettextf("do not know how to obtain parameters of %s object",
+<                     dQuote(class(object)[1])), domain = NA)
+---
+>       stop(gettextf("do not know how to obtain parameters of %s object", dQuote(class(object)[1])), domain = "R-nlme")
+127c125
+<     stop("cannot change the length of the parameter of a \"corStruct\" object")
+---
+>     stop(gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corStruct")))
+162c160
+<     warning("cannot change 'form'")
+---
+>     warning("cannot change 'form' argument")
+166c164
+<       stop("need data to calculate covariate of \"corStruct\" object")
+---
+>       stop(gettextf("'%s' argument is required in order to calculate covariate of an object of class %s", "data", dQuote("corStruct")))
+187c185
+<         covar <- 1:nrow(data)
+---
+>         covar <- seq_len(nrow(data))
+189c187
+< 	covar <- lapply(split(grps, grps), function(x) 1:length(x))
+---
+> 	covar <- lapply(split(grps, grps), function(x) seq_len(length(x)))
+270c268
+<     cat("Correlation structure of class", class(x)[1], "representing\n")
+---
+>     cat(gettextf("Correlation structure of class %s representing", dQuote(class(x)[1]), domain = "R-nlme"), "\n", sep = "")
+273c271
+<     cat("Uninitialized correlation structure of class", class(x)[1], "\n")
+---
+>     cat(gettextf("Uninitialized correlation structure of class %s", dQuote(class(x)[1]), domain = "R-nlme"), "\n", sep = "")
+282,284c280,282
+<   cat(paste("Correlation Structure: ", attr(x, "structName"), "\n", sep = ""))
+<   cat(paste(" Formula:", deparse(formula(x)),"\n"))
+<   cat(" Parameter estimate(s):\n")
+---
+>   cat(gettext("Correlation structure: ", domain = "R-nlme"), attr(x, "structName"), "\n", sep = "")
+>   cat(gettext(" Formula: ", domain = "R-nlme"), deparse(formula(x)), "\n", sep = "")
+>   cat(gettext(" Parameter estimates:", domain = "R-nlme"), "\n", sep = "")
+358c356
+<       names(covariate) <- 1:length(covariate)
+---
+>       names(covariate) <- seq_len(length(covariate))
+385c383
+<     val <- split(val, rep(1:corD[["M"]], (corD[["len"]])^2))
+---
+>     val <- split(val, rep(seq_len(corD[["M"]]), (corD[["len"]])^2))
+420c418
+<     stop("cannot change the length of the parameter of a \"corSymm\" object")
+---
+>     stop(gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corSymm")))
+450c448
+<     stop("covariate must have unique values within groups for \"corSymm\" objects")
+---
+>     stop(gettextf("covariate must have unique values within groups for objects of class %s", dQuote("corSymm")))
+455c453
+<     stop("unique values of the covariate  for \"corSymm\" objects must be a sequence of consecutive integers")
+---
+>     stop(gettextf("unique values of the covariate  for objects of class %s must be a sequence of consecutive integers", dQuote("corSymm")))
+467c465
+<       stop("initial value for \"corSymm\" parameters of wrong dimension")
+---
+>       stop(gettextf("initial value for %s parameters of wrong dimension", dQuote("corSymm")))
+470c468
+<       stop("initial values for \"corSymm\" must be between -1 and 1")
+---
+>       stop(gettextf("initial values for %s must be between %d and %d", dQuote("corSymm"), -1, 1))
+477c475
+<       stop("initial values for \"corSymm\" do not define a positive-definite correlation structure")
+---
+>       stop(gettextf("initial values for %s do not define a positive-definite correlation structure", dQuote("corSymm")))
+482c480
+<       aux <- acos(natMat[1:(i-1),i]/sqrt(cumsum(natMat[i:1,i]^2)[i:2]))
+---
+>       aux <- acos(natMat[seq_len(i-1),i]/sqrt(cumsum(natMat[i:1,i]^2)[i:2]))
+503c501
+<     dimnames(val) <- list(1:mC, 1:mC)
+---
+>     dimnames(val) <- list(seq_len(mC), seq_len(mC))
+506c504
+<     cat("Correlation structure of class corSymm representing\n")
+---
+>     cat(gettextf("Correlation structure of class %s representing", dQuote("corSymm"), domain = "R-nlme"), "\n", sep = "")
+509c507
+<   else cat("Unitialized correlation structure of class corSymm\n")
+---
+>   else cat(gettextf("Uninitialized correlation structure of class %s", dQuote("corSymm"), domain = "R-nlme"), "\n", sep = "")
+518,520c516,518
+<     cat("Correlation Structure: General\n")
+<     cat(paste(" Formula:", deparse(formula(x)),"\n"))
+<     cat(" Parameter estimate(s):\n")
+---
+>     cat(gettext("Correlation Structure: General", domain = "R-nlme"), "\n", sep = "")
+>     cat(gettext(" Formula: ", domain = "R-nlme"), deparse(formula(x)), "\n", sep = "")
+>     cat(gettext(" Parameter estimates:", domain = "R-nlme"), "\n", sep = "")
+522c520
+<     dimnames(val) <- list(1:mC, 1:mC)
+---
+>     dimnames(val) <- list(seq_len(mC), seq_len(mC))
+526c524
+<   } else cat("Unitialized correlation structure of class corSymm\n")
+---
+>   } else cat(gettextf("Uninitialized correlation structure of class %s", dQuote("corSymm"), domain = "R-nlme"), "\n", sep = "")
+548c546
+<   function(object, structName = "General correlation", ...)
+---
+>   function(object, structName = gettext("General correlation", domain = "R-nlme"), ...)
+593c591
+<       names(covariate) <- 1:length(covariate)
+---
+>       names(covariate) <- seq_len(length(covariate))
+620c618
+<     val <- split(val, rep(1:corD[["M"]], (corD[["len"]])^2))
+---
+>     val <- split(val, rep(seq_len(corD[["M"]]), (corD[["len"]])^2))
+649c647
+<   names(val) <- outer(1:mC, 1:mC,
+---
+>   names(val) <- outer(seq_len(mC), seq_len(mC),
+660c658
+<     stop("cannot change the length of the parameter of a \"corNatural\" object")
+---
+>     stop(gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corNatural")))
+690c688
+<     stop("covariate must have unique values within groups for \"corNatural\" objects")
+---
+>     stop(gettextf("covariate must have unique values within groups for objects of class %s", dQuote("corNatural")))
+695c693
+<     stop("unique values of the covariate for \"corNatural\" objects must be a sequence of consecutive integers")
+---
+>     stop(gettextf("unique values of the covariate  for objects of class %s must be a sequence of consecutive integers", dQuote("corNatural")))
+707c705
+<       stop("initial value for \"corNatural\" parameters of wrong dimension")
+---
+>       stop(gettextf("initial value for %s parameters of wrong dimension", dQuote("corNatural")))
+710c708
+<       stop("initial values for \"corNatural\" must be between -1 and 1")
+---
+>       stop(gettextf("initial values for %s must be between %d and %d", dQuote("corNatural"), -1, 1))
+717c715
+<       stop("initial values for \"corNatural\" do not define a positive-definite correlation structure")
+---
+>       stop(gettextf("initial values for %s do not define a positive-definite correlation structure", dQuote("corNatural")))
+737c735
+<     dimnames(val) <- list(1:mC, 1:mC)
+---
+>     dimnames(val) <- list(seq_len(mC), seq_len(mC))
+740c738
+<     cat("Correlation structure of class corNatural representing\n")
+---
+>     cat(gettextf("Correlation structure of class %s representing", dQuote("corNatural"), domain = "R-nlme"), "\n", sep = "")
+743c741
+<   else cat("Unitialized correlation structure of class corNatural\n")
+---
+>   else cat(gettextf("Uninitialized correlation structure of class %s", dQuote("corNatural"), domain = "R-nlme"), "\n", sep = "")
+752,754c750,752
+<     cat("Correlation Structure: General\n")
+<     cat(paste(" Formula:", deparse(formula(x)),"\n"))
+<     cat(" Parameter estimate(s):\n")
+---
+>     cat(gettext("Correlation Structure: General", domain = "R-nlme"), "\n", sep = "")
+>     cat(gettext(" Formula: ", domain = "R-nlme"), deparse(formula(x)), "\n", sep = "")
+>     cat(gettext(" Parameter estimates:", domain = "R-nlme"), "\n", sep = "")
+757c755
+<     dimnames(val) <- list(1:mC, 1:mC)
+---
+>     dimnames(val) <- list(seq_len(mC), seq_len(mC))
+761c759
+<   } else cat("Unitialized correlation structure of class corNatural\n")
+---
+>   } else cat(gettextf("Uninitialized correlation structure of class %s", dQuote("corNatural"), domain = "R-nlme"), "\n", sep = "")
+784c782
+<            structName = "General correlation, with natural parametrization",
+---
+>            structName = gettext("General correlation, with natural parametrization", domain = "R-nlme"),
+844c842
+<   function(object, structName = "Independent", ...)
+---
+>   function(object, structName = gettext("Independent", domain = "R-nlme"), ...)
+858c856
+<     stop("parameter in AR(1) structure must be between -1 and 1")
+---
+>     stop(gettextf("parameter in %s structure must be between %d and %d", dQuote("AR(1)"), -1, 1))
+889c887
+<       names(covariate) <- 1:length(covariate)
+---
+>       names(covariate) <- seq_len(length(covariate))
+912c910
+<     val <- split(val, rep(1:corD[["M"]], (corD[["len"]])^2))
+---
+>     val <- split(val, rep(seq_len(corD[["M"]]), (corD[["len"]])^2))
+948c946
+<     stop("cannot change the length of the parameter of a \"corAR1\" object")
+---
+>     stop(gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corAR1")))
+973c971
+<     stop("covariate must have unique values within groups for \"corAR1\" objects")
+---
+>     stop(gettextf("covariate must have unique values within groups for objects of class %s", dQuote("corAR1")))
+1020c1018
+<     stop("parameter in CAR(1) structure must be between 0 and 1")
+---
+>     stop(gettextf("parameter in %s structure must be between %d and %d", dQuote("CAR(1)"), 0, 1))
+1053c1051
+<       names(covariate) <- 1:length(covariate)
+---
+>       names(covariate) <- seq_len(length(covariate))
+1078c1076
+<     val <- split(val, rep(1:corD[["M"]], (corD[["len"]])^2))
+---
+>     val <- split(val, rep(seq_len(corD[["M"]]), (corD[["len"]])^2))
+1114c1112
+<     stop("cannot change the length of the parameter of a \"corCAR1\" object")
+---
+>     stop(gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corCAR1")))
+1141c1139
+<     stop("covariate must have unique values within groups for \"corCAR1\" objects")
+---
+>     stop(gettextf("covariate must have unique values within groups for objects of class %s", dQuote("corCAR1")))
+1165c1163
+<   function(object, structName = "Continuous AR(1)", ...)
+---
+>   function(object, structName = gettext("Continuous AR(1)", domain = "R-nlme"), ...)
+1191c1189
+<     stop("parameters in ARMA structure must be < 1 in absolute value")
+---
+>     stop(gettextf("parameters in %s structure must be between %d and %d", dQuote("ARMA"), -1, 1))
+1210c1208
+<     if(is.null(maxLag)) stop("'object' has not been Initialize()d")
+---
+>     if(is.null(maxLag)) stop("'object' argument has not been initialized with 'Initialize()' function")
+1233c1231
+<       names(covariate) <- 1:length(covariate)
+---
+>       names(covariate) <- seq_len(length(covariate))
+1243c1241
+<   if(is.null(maxLag)) stop("'object' has not been Initialize()d")
+---
+>   if(is.null(maxLag)) stop("'object' argument has not been initialized with 'Initialize()' function")
+1268c1266
+<     val <- split(val, rep(1:corD[["M"]], (corD[["len"]])^2))
+---
+>     val <- split(val, rep(seq_len(corD[["M"]]), (corD[["len"]])^2))
+1296c1294
+<       nams <- paste(rep("Phi", p), 1:p, sep="")
+---
+>       nams <- paste(rep("Phi", p), seq_len(p), sep = "")
+1299c1297
+<       nams <- c(nams, paste(rep("Theta", q), 1:q, sep=""))
+---
+>       nams <- c(nams, paste(rep("Theta", q), seq_len(q), sep = ""))
+1313c1311
+<   if(is.null(maxLag)) stop("'object' has not been Initialize()d")
+---
+>   if(is.null(maxLag)) stop("'object' argument has not been initialized with 'Initialize()' function")
+1315c1313
+<     stop("cannot change the length of the parameter of a \"corARMA\" object")
+---
+>     stop(gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corARMA")))
+1346c1344
+<     stop("covariate must have unique values within groups for \"corARMA\" objects")
+---
+>     stop(gettextf("covariate must have unique values within groups for objects of class %s", dQuote("corARMA")))
+1366c1364
+<     if(is.null(maxLag)) stop("'object' has not been Initialize()d")
+---
+>     if(is.null(maxLag)) stop("'object' argument has not been initialized with 'Initialize()' function")
+1399c1397
+<     stop("parameter in \"corCompSymm\" structure must be < 1 in absolute value")
+---
+>     stop(gettextf("parameter in %s structure must be between %d and %d", dQuote("corCompSymm"), -1, 1))
+1430c1428
+<       names(covariate) <- 1:length(covariate)
+---
+>       names(covariate) <- seq_len(length(covariate))
+1455c1453
+<     val <- split(val, rep(1:corD[["M"]], (corD[["len"]])^2))
+---
+>     val <- split(val, rep(seq_len(corD[["M"]]), (corD[["len"]])^2))
+1491c1489
+<     stop("cannot change the length of the parameter of a \"corCompSymm\" object")
+---
+>     stop(gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corCompSymm")))
+1518,1519c1516
+<       stop(gettextf("initial value in \"corCompSymm\" must be greater than %s",
+<                     attr(object, "inf")), domain = NA)
+---
+>       stop(sprintf(gettext("initial value in \"corCompSymm\" must be greater than %s", domain = "R-nlme"), attr(object, "inf")), domain = NA)
+1544c1541
+<   function(object, structName = "Compound symmetry", ...)
+---
+>   function(object, structName = gettext("Compound symmetry", domain = "R-nlme"), ...)
+1584c1581
+< #      names(covariate) <- 1:length(covariate)
+---
+> #      names(covariate) <- seq_len(length(covariate))
+1611c1608
+< #    val <- split(val, rep(1:corD[["M"]], (corD[["len"]])^2))
+---
+> #    val <- split(val, rep(seq_len(corD[["M"]]), (corD[["len"]])^2))
+1708c1705
+< #  else cat("Unitialized correlation structure of class corHF\n")
+---
+> #  else cat("Uninitialized correlation structure of class corHF\n")
+1785c1782
+<       names(covariate) <- 1:length(covariate)
+---
+>       names(covariate) <- seq_len(length(covariate))
+1815c1812
+<     val <- split(val, rep(1:corD[["M"]], (corD[["len"]])^2))
+---
+>     val <- split(val, rep(seq_len(corD[["M"]]), (corD[["len"]])^2))
+1882,1883c1879
+<     match(class(object)[1], c("corSpher", "corExp", "corGaus", "corLin",
+<                               "corRatio"), 0)
+---
+>     match(class(object)[1], c("corSpher", "corExp", "corGaus", "corLin", "corRatio"), 0)
+1892c1888
+<       stop("need data to calculate covariate")
+---
+>       stop(gettextf("'%s' argument is required in order to calculate covariate of an object of class %s", "data", dQuote("corSpatial")))
+1912c1908
+<                         function(x) as.vector(dist(1:length(x))))
+---
+>                         function(x) as.vector(dist(seq_len(length(x)))))
+1927c1923
+< 	covar <- as.vector(dist(1:nrow(data)))
+---
+> 	covar <- as.vector(dist(seq_len(nrow(data))))
+1952c1948
+<       stop("'range' must be > 0 in \"corSpatial\" initial value")
+---
+>       stop(gettextf("'%s' argument must be > 0 in %s initial value", "range", dQuote("corSpatial")))
+1959c1955
+< 	  stop("initial value for \"corSpatial\" parameters of wrong dimension")
+---
+> 	  stop(gettextf("initial value for %s parameters of wrong dimension", dQuote("corSpatial")))
+1967c1963
+< 	stop("initial value for \"corSpatial\" parameters of wrong dimension")
+---
+> 	stop(gettextf("initial value for %s parameters of wrong dimension", dQuote("corSpatial")))
+2042c2038
+<   function(object, structName = "Exponential spatial correlation", ...)
+---
+>   function(object, structName = gettext("Exponential spatial correlation", domain = "R-nlme"), ...)
+2072c2068
+<   function(object, structName = "Gaussian spatial correlation", ...)
+---
+>   function(object, structName = gettext("Gaussian spatial correlation", domain = "R-nlme"), ...)
+2122c2118
+<       stop("'range' must be > 0 in \"corLin\" initial value")
+---
+>       stop(gettextf("'%s' argument must be > 0 in %s initial value", "range", dQuote("corLin")))
+2133c2129
+< 	  stop("initial value for \"corLin\" parameters of wrong dimension")
+---
+> 	  stop(gettextf("initial value for %s parameters of wrong dimension", dQuote("corLin")))
+2141c2137
+< 	stop("initial value for \"corLin\" parameters of wrong dimension")
+---
+> 	stop(gettextf("initial value for %s parameters of wrong dimension", dQuote("corLin")))
+2160c2156
+<   function(object, structName = "Linear spatial correlation", ...)
+---
+>   function(object, structName = gettext("Linear spatial correlation", domain = "R-nlme"), ...)
+2190c2186
+<   function(object, structName = "Rational quadratic spatial correlation", ...)
+---
+>   function(object, structName = gettext("Rational quadratic spatial correlation", domain = "R-nlme"), ...)
+2254c2250
+< 	  stop("initial value for \"corSpher\" parameters of wrong dimension")
+---
+> 	  stop(gettextf("initial value for %s parameters of wrong dimension", dQuote("corSpher")))
+2262c2258
+< 	stop("initial value for \"corSpher\" parameters of wrong dimension")
+---
+> 	stop(gettextf("initial value for %s parameters of wrong dimension", dQuote("corSpher")))
+2281c2277
+<   function(object, structName = "Spherical spatial correlation", ...)
+---
+>   function(object, structName = gettext("Spherical spatial correlation", domain = "R-nlme"), ...)
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/gls.R R-recommended-moje/nlme/R/gls.R
+44c44
+<         stop("\nmodel must be a formula of the form \"resp ~ pred\"")
+---
+>         stop("'model' argument must be a formula of the form \"resp ~ pred\"")
+150,151c150,151
+<         aConv <- c("beta" = max(conv[1:p]))
+<         conv <- conv[-(1:p)]
+---
+>         aConv <- c("beta" = max(conv[seq_len(p)]))
+>         conv <- conv[-(seq_len(p))]
+159,160c159,160
+<             cat("\nIteration:",numIter)
+<             cat("\nObjective:", format(optRes$value), "\n")
+---
+>             cat("\n", gettext("Iteration: ", domain = "R-nlme"), numIter, sep = "")
+>             cat("\n", gettext("Objective: ", domain = "R-nlme"), format(optRes$value), "\n", sep = "")
+162c162
+<             cat("\nConvergence:\n")
+---
+>             cat("\n", gettext("Convergence:", domain = "R-nlme"), "\n", sep = "")
+202c202
+<         apVar <- "Approximate variance-covariance matrix not available"
+---
+>         apVar <- gettext("Approximate variance-covariance matrix not available", domain = "R-nlme")
+290c290
+<             "Non-positive definite approximate variance-covariance"
+---
+>             gettext("Non-positive definite approximate variance-covariance", domain = "R-nlme")
+311c311
+<               pivot = as.integer(1:(p + 1L)),
+---
+>               pivot = as.integer(seq_len(p + 1L)),
+316,317c316
+<         stop(gettextf("computed \"gls\" fit is singular, rank %s", rnk),
+<              domain = NA)
+---
+>         stop(gettextf("computed \"gls\" fit is singular, rank %s", rnk), domain = "R-nlme")
+320c319
+<     namCoef <- colnames(oXy)[val[["pivot"]][1:rnkm1] + 1L]	# coef names
+---
+>     namCoef <- colnames(oXy)[val[["pivot"]][seq_len(rnkm1)] + 1L]	# coef names
+324c323
+<     beta <- val[["beta"]][1:rnkm1]
+---
+>     beta <- val[["beta"]][seq_len(rnkm1)]
+378c377
+<                       nn[1:N] <- n + 1L - 1:N
+---
+>                       nn[seq_len(N)] <- n + 1L - seq_len(N)
+380,381c379,380
+<                       for(i in 1:N) {
+<                           el1 <- el[1:(n-i+1L)]
+---
+>                       for(i in seq_len(N)) {
+>                           el1 <- el[seq_len(n-i+1L)]
+405c404
+<             stop("object must inherit from class \"gls\"")
+---
+>             stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("gls")))
+423c422
+<         lab <- paste("Denom. DF:", dDF,"\n")
+---
+>         lab <- paste(gettext("Denom. DF: ", domain = "R-nlme"), dDF, "\n", sep = "")
+429c428
+<             for(i in 1:nTerms) {
+---
+>             for(i in seq_len(nTerms)) {
+434c433
+<                     c0i <- c(qr.qty(qr(vBeta[, assign[[i]], drop = FALSE]), c0))[1:nDF[i]]
+---
+>                     c0i <- c(qr.qty(qr(vBeta[, assign[[i]], drop = FALSE]), c0))[seq_len(nDF[i])]
+449,450c448
+<                         stop(gettextf("'Terms' must be between 1 and %d",
+<                                       nTerms), domain = NA)
+---
+>                         stop(gettextf("'%s' argument must be between %d and %d", "Terms", 1, nTerms), domain = "R-nlme")
+456,457c454,455
+<                                                   "term %s not matched",
+<                                                   "terms %s not matched"),
+---
+>                                                   "term %s was not matched",
+>                                                   "terms %s were not matched", domain = "R-nlme"),
+466,467c464
+<                     paste(lab, "F-test for:",
+<                           paste(names(assign[Terms]),collapse=", "),"\n")
+---
+>                     paste(lab, gettext(" F-test for: ", domain = "R-nlme"), paste(names(assign[Terms]), collapse = ", "), "\n", sep = "")
+477c474
+<                                           "'L' must have at most %d columns"),
+---
+>                                           "'L' must have at most %d columns", domain = "R-nlme"),
+484c481
+<                     L0[, 1:ncolL] <- L
+---
+>                     L0[, seq_len(ncolL)] <- L
+488,491c485,487
+<                                               "effect %s not matched",
+<                                               "effects %s not matched"),
+<                                      paste(dmsL2[noMatch],collapse=", ")),
+<                              domain = NA)
+---
+>                                               "effect %s was not matched",
+>                                               "effects %s were not matched", domain = "R-nlme"),
+>                                      paste(dmsL2[noMatch], collapse = ", ")), domain = NA)
+499c495
+<                     dmsL1 <- 1:nrowL
+---
+>                     dmsL1 <- seq_len(nrowL)
+504c500
+<                 lab <- paste(lab, "F-test for linear combination(s)\n")
+---
+>                 lab <- paste(lab, gettext(" F-test for linear combinations", domain = "R-nlme"), "\n", sep = "")
+507c503
+<             c0 <- c(qr.qty(qr(vBeta %*% t(L)), c0))[1:nDF]
+---
+>             c0 <- c(qr.qty(qr(vBeta %*% t(L)), c0))[seq_len(nDF)]
+539,540c535
+<         stop(gettextf("data in %s call must evaluate to a data frame",
+<                       sQuote(substitute(object))), domain = NA)
+---
+>         stop(gettextf("data in %s call must evaluate to a data frame", sQuote(substitute(object))), domain = "R-nlme")
+544,545c539
+<             stop(gettextf("%s without \"primary\" can only be used with fits of \"groupedData\" objects",
+<                           sys.call()[[1L]]), domain = NA)
+---
+>             stop(gettextf("%s without \"primary\" can only be used with fits of \"groupedData\" objects", sys.call()[[1L]]), domain = "R-nlme")
+657,658c651
+<             stop(gettextf("%s and %s must have the same group levels", c1, c2),
+<                  domain = NA)
+---
+>             stop(gettextf("%s and %s must have the same group levels", sQuote(c1), sQuote(c2)), domain = "R-nlme")
+706c699
+<     lab <- "Fitted values"
+---
+>     lab <- gettext("Fitted values", domain = "R-nlme")
+755c748
+<         attr(val[["coef"]], "label") <- "Coefficients:"
+---
+>         attr(val[["coef"]], "label") <- gettext("Coefficients:", domain = "R-nlme")
+770c763
+<             attr(val[["sigma"]], "label") <- "Residual standard error:"
+---
+>             attr(val[["sigma"]], "label") <- gettext("Residual standard error:", domain = "R-nlme")
+773,774c766
+<                 stop(gettextf("cannot get confidence intervals on var-cov components: %s",
+<                               aV), domain = NA)
+---
+>                 stop(gettextf("cannot get confidence intervals on var-cov components: %s", aV), domain = "R-nlme")
+802c794
+<             attr(auxVal[["sigma"]], "label") <- "Residual standard error:"
+---
+>             attr(auxVal[["sigma"]], "label") <- gettext("Residual standard error:", domain = "R-nlme")
+806c798
+<             for(i in 1:3) {
+---
+>             for(i in seq_len(3)) {
+816,817c808,809
+<                            corStruct = "Correlation structure:",
+<                            varStruct = "Variance function:",
+---
+>                            corStruct = gettext("Correlation structure:", domain = "R-nlme"),
+>                            varStruct = gettext("Variance function:", domain = "R-nlme"),
+885,888c877,879
+<                                       "level %s not allowed for %s",
+<                                       "levels %s not allowed for %s"),
+<                              paste(levs[wch], collapse = ",")),
+<                      domain = NA)
+---
+>                                       "level %s is not allowed for %s",
+>                                       "levels %s are not allowed for %s", domain = "R-nlme"),
+>                              paste(levs[wch], collapse = ", ")), domain = NA)
+909c900
+<     attr(val, "label") <- "Predicted values"
+---
+>     attr(val, "label") <- gettext("Predicted values", domain = "R-nlme")
+919,920c910
+<     cat(paste("Approximate ", attr(x, "level") * 100,
+<               "% confidence intervals\n", sep = ""))
+---
+>     cat(gettextf("Approximate %s %% confidence intervals", attr(x, "level") * 100, domain = "R-nlme"), "\n", sep = "")
+937c927,930
+<         cat("Generalized nonlinear least squares fit\n")
+---
+>         cat(gettext("Generalized nonlinear least squares fit", domain = "R-nlme"), "\n", sep = "")
+>     } else {
+>        if(x$method == "REML") {
+>         cat(gettext("Generalized least squares fit by REML", domain = "R-nlme"), "\n", sep = "")
+939,940c932,933
+<         cat("Generalized least squares fit by ")
+<         cat(ifelse(x$method == "REML", "REML\n", "maximum likelihood\n"))
+---
+>         cat(gettext("Generalized least squares fit by maximum likelihood", domain = "R-nlme"), "\n", sep = "")
+>        }
+942,943c935,936
+<     cat("  Model:", deparse(mCall$model), "\n")
+<     cat("  Data:", deparse( mCall$data ), "\n")
+---
+>     cat(gettext("  Model: ", domain = "R-nlme"), deparse(mCall$model), "\n", sep = "")
+>     cat(gettext("  Data: ", domain = "R-nlme"), deparse( mCall$data ), "\n", sep = "")
+945c938
+<         cat("  Subset:", deparse(asOneSidedFormula(mCall$subset)[[2]]),"\n")
+---
+>         cat(gettext("  Subset: ", domain = "R-nlme"), deparse(asOneSidedFormula(mCall$subset)[[2]]), "\n", sep = "")
+948c941
+<         cat("  Log-likelihood: ", format(x$logLik), "\n", sep = "")
+---
+>         cat(gettext("  Log-likelihood: ", domain = "R-nlme"), format(x$logLik), "\n", sep = "")
+950,951c943,947
+<         cat("  Log-", ifelse(x$method == "REML", "restricted-", ""),
+<             "likelihood: ", format(x$logLik), "\n", sep = "")
+---
+>       if(x$method == "REML") {
+>         cat(gettext("  Log-restricted-likelihood: ", domain = "R-nlme"), format(x$logLik), "\n", sep = "")
+>       } else {
+>         cat(gettext("  Log-likelihood: ", domain = "R-nlme"), format(x$logLik), "\n", sep = "")
+>       }
+953c949
+<     cat("\nCoefficients:\n")
+---
+>     cat("\n", gettext("Coefficients:", domain = "R-nlme"), "\n", sep = "")
+959,961c955,956
+<     cat("Degrees of freedom:", dd[["N"]],"total;",dd[["N"]] - dd[["p"]],
+<         "residual\n")
+<     cat("Residual standard error:", format(x$sigma),"\n")
+---
+>     cat(gettextf("Degrees of freedom: %s total; %s residual", dd[["N"]], dd[["N"]] - dd[["p"]], domain = "R-nlme"), "\n", sep = "")
+>     cat(gettext("Residual standard error: ", domain = "R-nlme"), format(x$sigma), "\n", sep = "")
+972c967,970
+<         cat("Generalized nonlinear least squares fit\n")
+---
+>         cat(gettext("Generalized nonlinear least squares fit", domain = "R-nlme"), "\n", sep = "")
+>     } else {
+>        if(x$method == "REML") {
+>         cat(gettext("Generalized least squares fit by REML", domain = "R-nlme"), "\n", sep = "")
+974,975c972
+<         cat("Generalized least squares fit by ")
+<         cat(ifelse(x$method == "REML", "REML\n", "maximum likelihood\n"))
+---
+>         cat(gettext("Generalized least squares fit by maximum likelihood", domain = "R-nlme"), "\n", sep = "")
+977,978c974,976
+<     cat("  Model:", deparse(mCall$model), "\n")
+<     cat("  Data:", deparse( mCall$data ), "\n")
+---
+>     }
+>     cat(gettext("  Model: ", domain = "R-nlme"), deparse(mCall$model), "\n", sep = "")
+>     cat(gettext("  Data: ", domain = "R-nlme"), deparse( mCall$data ), "\n", sep = "")
+980c978
+<         cat("  Subset:", deparse(asOneSidedFormula(mCall$subset)[[2]]),"\n")
+---
+>         cat(gettext("  Subset: ", domain = "R-nlme"), deparse(asOneSidedFormula(mCall$subset)[[2]]), "\n", sep = "")
+983c981
+<     if (verbose) { cat("Convergence at iteration:",x$numIter,"\n") }
+---
+>     if (verbose) { cat(gettext("Convergence at iteration: ", domain = "R-nlme"), x$numIter, "\n", sep = "") }
+988c986
+<     cat("\nCoefficients:\n")
+---
+>     cat("\n", gettext("Coefficients:", domain = "R-nlme"), "\n", sep = "")
+1004,1005c1002
+<               title = "\n Correlation:",
+<               ...)
+---
+>               title = paste("\n ", gettext("Correlation:", domain = "R-nlme"), collapse = ""), ...)
+1007c1004
+<     cat("\nStandardized residuals:\n")
+---
+>     cat("\n", gettext("Standardized residuals:", domain = "R-nlme"), "\n", sep = "")
+1010,1012c1007,1008
+<     cat("Residual standard error:", format(x$sigma),"\n")
+<     cat("Degrees of freedom:", dd[["N"]],"total;",dd[["N"]] - dd[["p"]],
+<         "residual\n")
+---
+>     cat(gettext("Residual standard error: ", domain = "R-nlme"), format(x$sigma), "\n", sep = "")
+>     cat(gettextf("Degrees of freedom: %s total; %s residual", dd[["N"]], dd[["N"]] - dd[["p"]], domain = "R-nlme"), "\n", sep = "")
+1023c1019
+<         attr(val, "label") <- "Standardized residuals"
+---
+>         attr(val, "label") <- gettext("Standardized residuals", domain = "R-nlme")
+1028c1024
+<                 attr(val, "label") <- "Normalized residuals"
+---
+>                 attr(val, "label") <- gettext("Normalized residuals", domain = "R-nlme")
+1032c1028
+<         lab <- "Residuals"
+---
+>         lab <- gettext("Residuals", domain = "R-nlme")
+1091c1087
+< 	stop("need an object with call component")
+---
+> 	stop("an object with 'call' component is required")
+1165c1161
+<                     covar <- 1:nrow(data)
+---
+>                     covar <- seq_len(nrow(data))
+1215c1211
+<                 stop("'nint' is not consistent with 'breaks'")
+---
+>                 stop(gettextf("'%s' is not consistent with '%s'", "nint", "breaks"))
+1246c1242
+<     row.names(val) <- 1:nrow(val)
+---
+>     row.names(val) <- seq_len(nrow(val))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/gnls.R R-recommended-moje/nlme/R/gnls.R
+67c67
+<     stop("'object' must be a formula")
+---
+>     stop(gettextf("'%s' argument is not an object of class %s", "model", dQuote("formula")))
+69c69
+<     stop("object formula must be of the form \"resp ~ pred\"")
+---
+>     stop("model formula must be of the form \"resp ~ pred\"")
+81c81
+<           stop("'data' must be given explicitly to use 'nls' to get initial estimates")
+---
+>           stop(gettextf("'%s' argument must be given explicitly to use %s function to get initial estimates", "data", sQuote("nls()")))
+122c122
+<       stop ("'params' must be a formula or list of formulae")
+---
+>       stop(gettextf("'%s' argument must be a formula or list of formulae", "params"))
+124c124
+<       stop ("formulae in 'params' must be of the form \"parameter ~ expr\"")
+---
+>       stop(gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "params"))
+126c126
+<       stop ("formulae in 'params' must be of the form \"parameter ~ expr\"")
+---
+>       stop(gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "params"))
+378c378
+<             cat("\n**Iteration", numIter)
+---
+>             cat("\n**", gettextf("Iteration %d", numIter, domain = "R-nlme"), sep = "")
+380c380
+<             cat("GLS step: Objective:", format(optRes$value))
+---
+>             cat(gettext("GLS step: Objective: ", domain = "R-nlme"), format(optRes$value), sep = "")
+429,431c429,431
+<       cat("\nNLS step: RSS = ", format(work$set[6]), "\n model parameters:")
+<       for (i in 1:pLen) cat(format(signif(spar[i]))," ")
+<       cat("\n iterations:",work$set[5],"\n")
+---
+>       cat("\n", gettextf("NLS step: RSS = %s", format(work$set[6]), domain = "R-nlme"), "\n ", gettext("model parameters:", domain = "R-nlme"), sep = "")
+>       for (i in seq_len(pLen)) cat(format(signif(spar[i]))," ")
+>       cat("\n ", gettext("iterations: ", domain = "R-nlme"), work$set[5], "\n", sep = "")
+437c437
+<     aConv <- c(max(conv[1:pLen]))
+---
+>     aConv <- c(max(conv[seq_len(pLen)]))
+440c440
+<       conv <- conv[-(1:pLen)]
+---
+>       conv <- conv[-(seq_len(pLen))]
+450c450
+<       cat("\nConvergence:\n")
+---
+>       cat("\n", gettext("Convergence:", domain = "R-nlme"), "\n", sep = "")
+472c472
+<   auxRes <- ww[NReal * pLen + (1:NReal)]
+---
+>   auxRes <- ww[NReal * pLen + seq_len(NReal)]
+477c477
+<   varBeta <- qr(attr(gnlsSt, "conLin")$Xy[ , 1:pLen, drop = FALSE])
+---
+>   varBeta <- qr(attr(gnlsSt, "conLin")$Xy[ , seq_len(pLen), drop = FALSE])
+508c508
+<     apVar <- "Approximate variance-covariance matrix not available"
+---
+>     apVar <- gettext("Approximate variance-covariance matrix not available", domain = "R-nlme")
+590c590
+<       "Non-positive definite approximate variance-covariance"
+---
+>       gettext("Non-positive definite approximate variance-covariance", domain = "R-nlme")
+693,694c693,694
+<                                 "level %s not allowed for %s",
+<                                 "levels %s not allowed for %s"),
+---
+>                                 "level %s is not allowed for %s",
+>                                 "levels %s are not allowed for %s", domain = "R-nlme"),
+752c752
+<   lab <- "Predicted values"
+---
+>   lab <- gettext("Predicted values", domain = "R-nlme")
+766c766
+< 	stop("need an object with call component")
+---
+> 	stop("an object with 'call' component is required")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/groupedData.R R-recommended-moje/nlme/R/groupedData.R
+31c31
+<     stop("first argument to 'groupedData' must be a two-sided formula")
+---
+>     stop(gettextf("first argument passed to %s function must be a two-sided formula", sQuote("GroupedData()")))
+51c51
+<     stop("first argument to 'nfGroupedData' must be a two-sided formula")
+---
+>     stop(gettextf("first argument passed to %s function must be a two-sided formula", sQuote("nfGroupedData()")))
+68c68
+<       stop("second argument to 'groupedData' must inherit from data.frame")
+---
+>       stop("second argument passed to 'groupedData()' function must inherit from \"data.frame\"")
+151c151
+<     stop("first argument to 'nmGroupedData' must be a two-sided formula")
+---
+>     stop(gettextf("first argument passed to %s function must be a two-sided formula", sQuote("nmGroupedData()")))
+177c177
+<       stop("second argument to 'groupedData' must inherit from data.frame")
+---
+>       stop("second argument passed to 'groupedData()' function must inherit from \"data.frame\"")
+228c228
+<       stop("'subset' must be a list")
+---
+>       stop(gettextf("'%s' argument must be a list", "subset"))
+249,250c249
+<       stop(gettextf("undefined display level %s for %s",
+<                     displayLevel, sQuote(substitute(object))), domain = NA)
+---
+>       stop(gettextf("undefined display level %s for %s", displayLevel, sQuote(substitute(object))), domain = "R-nlme")
+275,276c274
+<         stop(gettextf("undefined collapsing level %s for %s",
+<                       collapseLevel, sQuote(substitute(object))), domain = NA)
+---
+>         stop(gettextf("undefined collapsing level %s for %s", collapseLevel, sQuote(substitute(object))), domain = "R-nlme")
+296c294
+<           stop("'preserve' must be a two-sided formula")
+---
+>           stop(gettextf("'%s' argument must be a two-sided formula", "preserve"))
+563c561
+<   cat("Grouped Data: ")
+---
+>   cat(gettext("Grouped Data: ", domain = "R-nlme"))
+629c627
+<     stop("'asTable' cannot be used with multilevel grouped data")
+---
+>     stop("'asTable()' function cannot be used with multilevel grouped data")
+633c631
+<     stop("'asTable' can only be used with balanced 'groupedData' objects")
+---
+>     stop("'asTable()' function can only be used with balanced object of class \"groupedData\"")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/lme.R R-recommended-moje/nlme/R/lme.R
+67c67
+<     stop("can only fit \"lmList\" objects with single grouping variable")
+---
+>     stop(gettextf("can only fit objects of class %s with single grouping variable", dQuote("lmList")))
+72c72
+<     warning("'lme.lmList' will redefine 'data'")
+---
+>     warning("'lme.lmList()' function will redefine 'data' argument")
+107c107
+<     stop("can only fit \"lmList\" objects with single grouping variable")
+---
+>     stop(gettextf("can only fit objects of class %s with single grouping variable", dQuote("lmList")))
+112c112
+<       warning("initial value for \"reStruct\" overwritten in 'lme.lmList'")
+---
+>       warning(gettextf("initial value for 'reStruct' overwritten in %s function", sQuote("lme.lmList()")))
+151c151
+<     stop("\nfixed-effects model must be a formula of the form \"resp ~ pred\"")
+---
+>     stop("fixed-effects model must be a formula of the form \"resp ~ pred\"")
+164c164
+< 	  stop("incompatible lengths for 'random' and grouping factors")
+---
+> 	  stop("incompatible lengths for 'random' argument and grouping factors")
+168c168
+<         for(i in 1:Q) randL[[i]] <- random
+---
+>         for(i in seq_len(Q)) randL[[i]] <- random
+192c192
+<           stop("incompatible formulas for groups in 'random' and 'correlation'")
+---
+>           stop("incompatible formulas for groups in 'random' and 'correlation' arguments")
+203c203
+<           stop("incompatible formulas for groups in 'random' and 'correlation'")
+---
+>           stop("incompatible formulas for groups in 'random' and 'correlation' arguments")
+288,289c288
+<       warning(gettextf("fewer observations than random effects in all level %s groups",
+<                        Q), domain = NA)
+---
+>       warning(gettextf("fewer observations than random effects in all level %s groups", Q), domain = "R-nlme")
+341c340
+< 		stop(msg, domain = NA)
+---
+> 		stop(msg, domain = "R-nlme")
+343c342
+< 		warning(msg, domain = NA)
+---
+> 		warning(msg, domain = "R-nlme")
+367c366
+< 	    warning(msg, domain = NA)
+---
+> 	    warning(msg, domain = "R-nlme")
+370c369
+< 	    stop(msg, domain = NA)
+---
+> 	    stop(msg, domain = "R-nlme")
+408c407
+<     apVar <- "Approximate variance-covariance matrix not available"
+---
+>     apVar <- gettext("Approximate variance-covariance matrix not available", domain = "R-nlme")
+614c613
+<     "Non-positive definite approximate variance-covariance"
+---
+>     gettext("Non-positive definite approximate variance-covariance", domain = "R-nlme")
+755c754
+<   for(i in 1:Q) {
+---
+>   for(i in seq_len(Q)) {
+777c776
+<   for(i in 1:Q) lastBlock[[i]] <- c(strSizes[i, -N], strRows)
+---
+>   for(i in seq_len(Q)) lastBlock[[i]] <- c(strSizes[i, -N], strRows)
+779c778
+<   for(i in 1:Q) lastBlock[[i]] <- maxStr[as.logical(lastBlock[[i]])]
+---
+>   for(i in seq_len(Q)) lastBlock[[i]] <- maxStr[as.logical(lastBlock[[i]])]
+825c824
+<                   for(i in 1:N) {
+---
+>                   for(i in seq_len(N)) {
+850c849
+<       stop("object must inherit from class \"lme\" ")
+---
+>       stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("lme")))
+865c864
+<       for(i in 1:nTerms) {
+---
+>       for(i in seq_len(nTerms)) {
+887,888c886
+<               stop(gettextf("'Terms' must be between 1 and %d", nTerms),
+<                    domain = NA)
+---
+>               stop(gettextf("'%s' argument must be between %d and %d", "Terms", 1, nTerms), domain = "R-nlme")
+894,895c892,893
+<                                       "term %s not matched",
+<                                       "terms %s not matched"),
+---
+>                                       "term %s was not matched",
+>                                       "terms %s were not matched", domain = "R-nlme"),
+908c906
+<           paste("F-test for:",paste(names(assign[Terms]),collapse=", "),"\n")
+---
+>           paste(gettext("F-test for: ", domain = "R-nlme"), paste(names(assign[Terms]), collapse = ", "), "\n", sep = "")
+918c916
+<                                 "'L' must have at most %d columns"),
+---
+>                                 "'L' must have at most %d columns", domain = "R-nlme"),
+929,930c927,928
+<                                     "effect %s not matched",
+<                                     "effects %s not matched"),
+---
+>                                     "effect %s was not matched",
+>                                     "effects %s were not matched", domain = "R-nlme"),
+950c948
+<         lab <- "F-test for linear combination(s)\n"
+---
+>         lab <- paste(gettext("F-test for linear combinations", domain = "R-nlme"), "\n", sep = "")
+977,978c975,977
+<     if(!all(match(termsClass, c("gls", "gnls", "lm", "lmList", "lme","nlme","nlsList","nls"), 0))) {
+<       stop("objects must inherit from classes \"gls\", \"gnls\",\"lm\",\"lmList\", \"lme\",\"nlme\",\"nlsList\", or \"nls\"")
+---
+>     valid.classes <- c("gls", "gnls", "lm", "lmList", "lme","nlme","nlsList","nls")
+>     if(!all(match(termsClass, valid.classes, 0))) {
+>       stop(gettextf("objects must inherit from at least one of the following classes: %s", paste(dQuote(valid.classes), collapse = ", ")))
+1081,1082c1080
+<        stop(gettextf("data in %s call must evaluate to a data frame",
+<                       sQuote(substitute(object))), domain = NA)
+---
+>        stop(gettextf("data in %s call must evaluate to a data frame", sQuote(substitute(object))), domain = "R-nlme")
+1086,1087c1084
+<         stop(gettextf("%s without \"primary\" can only be used with fits of \"groupedData\" objects",
+<                       sys.call()[[1L]]), domain = NA)
+---
+>         stop(gettextf("%s without \"primary\" can only be used with fits of \"groupedData\" objects", sys.call()[[1L]]), domain = "R-nlme")
+1184c1181
+<   for (i in 1:level) {
+---
+>   for (i in seq_len(level)) {
+1205c1202
+<   attr(effs, "label") <- "Coefficients"
+---
+>   attr(effs, "label") <- gettext("Coefficients", domain = "R-nlme")
+1223c1220
+<                               "nonexistent levels %s"),
+---
+>                               "nonexistent levels %s", domain = "R-nlme"),
+1239c1236
+<     lab <- "Fitted values"
+---
+>     lab <- gettext("Fitted values", domain = "R-nlme")
+1293c1290
+<     attr(vfix, "label") <- "Fixed effects:"
+---
+>     attr(vfix, "label") <- gettext("Fixed effects:", domain = "R-nlme")
+1298,1299c1295
+<         stop(gettextf("cannot get confidence intervals on var-cov components: %s",
+<                       aV), domain = NA)
+---
+>         stop(gettextf("cannot get confidence intervals on var-cov components: %s", aV), domain = "R-nlme")
+1330c1326
+<     attr(vsig, "label") <- "Within-group standard error:"
+---
+>     attr(vsig, "label") <- gettext("Within-group standard error:", domain = "R-nlme")
+1352c1348
+<     for(i in 1:3) {                     # re-express intervals in constrained pars
+---
+>     for(i in seq_len(3)) {                     # re-express intervals in constrained pars
+1379,1381c1375,1377
+< 	       reStruct = "Random Effects:",
+< 	       corStruct = "Correlation structure:",
+< 	       varStruct = "Variance function:",
+---
+> 	       reStruct = gettext("Random effects:", domain = "R-nlme"),
+> 	       corStruct = gettext("Correlation structure:", domain = "R-nlme"),
+> 	       varStruct = gettext("Variance function:", domain = "R-nlme"),
+1424c1420
+<     stop("'form' must be a formula")
+---
+>     stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
+1427c1423
+<     stop("'form' must be a one-sided formula")
+---
+>     stop(gettextf("'%s' argument must be a one-sided formula", "form"))
+1443,1444c1439,1440
+<                               "%s not found in data",
+<                               "%s not found in data"),
+---
+>                               "%s was not found in data",
+>                               "%s were not found in data", domain = "R-nlme"),
+1496c1492
+<     for(i in 1:length(gr)) {
+---
+>     for(i in seq_len(length(gr))) {
+1513c1509
+< 		 stop("'id' must be between 0 and 1")
+---
+>                  stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
+1525c1521
+< 	     stop("'id' can only be a formula or numeric")
+---
+> 	     stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
+1530c1526
+< 	stop("covariate must have a level attribute when 'id' is a formula")
+---
+> 	stop(gettextf("covariate must have a level attribute when '%s' argument is a formula", "id"))
+1543c1539
+< 	  stop("'idLabels' of incorrect length")
+---
+> 	  stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
+1547c1543
+< 	stop("'idLabels' can only be a formula or a vector")
+---
+> 	stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
+1553c1549
+<       stop("covariate must have a level attribute when 'idLabels' is a formula")
+---
+>       stop(gettextf("covariate must have a level attribute when '%s' argument is a formula", "idLabels"))
+1686,1687c1682,1683
+<                                 "%s not available for plotting",
+<                                 "%s not available for plotting"),
+---
+>                                 "%s is not available for plotting",
+>                                 "%s are not available for plotting", domain = "R-nlme"),
+1725c1721
+<       stop("'form' must be a formula when not NULL")
+---
+>       stop(gettextf("'%s' argument must be a formula when not NULL", "form"))
+1735,1736c1731
+<       stop(gettextf("%s is not a valid effect name", sQuote(reName)),
+<            domain = NA)
+---
+>       stop(gettextf("%s is not a valid effect name", sQuote(reName)), domain = "R-nlme")
+1744,1745c1739,1740
+<                               "%s not available for plotting",
+<                               "%s not available for plotting"),
+---
+>                               "%s is not available for plotting",
+>                               "%s are not available for plotting", domain = "R-nlme"),
+1758c1753
+<     for(i in 1:nV) {
+---
+>     for(i in seq_len(nV)) {
+1933,1934c1928,1929
+<                                 "level %s not allowed for %s",
+<                                 "levels %s not allowed for %s"),
+---
+>                                 "level %s is not allowed for %s",
+>                                 "levels %s are not allowed for %s", domain = "R-nlme"),
+1965c1960
+<     attr(val, "label") <- "Predicted values"
+---
+>     attr(val, "label") <- gettext("Predicted values", domain = "R-nlme")
+2007c2002
+<     attr(val, "label") <- "Predicted values"
+---
+>     attr(val, "label") <- gettext("Predicted values", domain = "R-nlme")
+2034c2029
+<       cat("Call:\n")
+---
+>       cat(gettext("Call:", domain = "R-nlme"), "\n", sep = "")
+2036c2031
+<       for(i in 1:rt) {
+---
+>       for(i in seq_len(rt)) {
+2038c2033
+< 	cat(" ",as.character(x[i,"call"]),"\n")
+---
+> 	cat(" ", as.character(x[i,"call"]), "\n", sep = "")
+2070,2071c2065
+<   cat(paste("Approximate ", attr(x, "level") * 100,
+< 	    "% confidence intervals\n", sep = ""))
+---
+>   cat(gettextf("Approximate %s %% confidence intervals", attr(x, "level") * 100,  domain = "R-nlme"), "\n", sep = "")
+2077c2071
+< 	cat("  Level:", j, "\n")
+---
+> 	cat(gettext("  Level: ",  domain = "R-nlme"), j, "\n", sep = "")
+2093,2095c2087,2092
+<     cat( "Nonlinear mixed-effects model fit by " )
+<     cat( ifelse( x$method == "REML", "REML\n", "maximum likelihood\n") )
+<     cat("  Model:", deparse(x$call$model),"\n")
+---
+>     if(x$method == "REML") {
+>      cat(gettext("Nonlinear mixed-effects model fit by REML", domain = "R-nlme"), "\n", sep = "")
+>     } else {
+>      cat(gettext("Nonlinear mixed-effects model fit by maximum likelihood", domain = "R-nlme"), "\n", sep = "")
+>     }
+>     cat(gettext("  Model: ", domain = "R-nlme"), deparse(x$call$model), "\n", sep = "")
+2097,2098c2094,2098
+<     cat( "Linear mixed-effects model fit by " )
+<     cat( ifelse( x$method == "REML", "REML\n", "maximum likelihood\n") )
+---
+>     if(x$method == "REML") {
+>      cat(gettext("Linear mixed-effects model fit by REML", domain = "R-nlme"), "\n", sep = "")
+>     } else {
+>      cat(gettext("Linear mixed-effects model fit by maximum likelihood", domain = "R-nlme"), "\n", sep = "")
+>     }
+2100c2100
+<   cat("  Data:", deparse( x$call$data ), "\n")
+---
+>   cat(gettext("  Data: ", domain = "R-nlme"), deparse( x$call$data ), "\n", sep = "")
+2102c2102,2107
+<     cat("  Subset:", deparse(asOneSidedFormula(x$call$subset)[[2L]]),"\n")
+---
+>     cat(gettext("  Subset: ", domain = "R-nlme"), deparse(asOneSidedFormula(x$call$subset)[[2L]]), "\n", sep = "")
+>   }
+>   if(x$method == "REML") {
+>    cat(gettext("  Log-restricted-likelihood: ", domain = "R-nlme"), format(x$logLik), "\n", sep = "")
+>   } else {
+>    cat(gettext("  Log-likelihood: ", domain = "R-nlme"), format(x$logLik), "\n", sep = "")
+2104,2105d2108
+<   cat("  Log-", ifelse(x$method == "REML", "restricted-", ""),
+<              "likelihood: ", format(x$logLik), "\n", sep = "")
+2108c2111
+<     cat("  Fixed:", deparse(x$call$fixed), "\n")
+---
+>     cat(gettext("  Fixed: ", domain = "R-nlme"), deparse(x$call$fixed), "\n", sep = "")
+2110,2111c2113
+<     cat("  Fixed:", deparse(lapply(fixF, function(el)
+<                                    as.name(deparse(el)))), "\n")
+---
+>     cat("  Fixed: ", deparse(lapply(fixF, function(el) as.name(deparse(el)))), "\n", sep = "")
+2116,2117c2118,2119
+<   cat("Number of Observations:", dd[["N"]])
+<   cat("\nNumber of Groups: ")
+---
+>   cat(gettext("Number of Observations: ", domain = "R-nlme"), dd[["N"]], "\n", sep = "")
+>   cat(gettext("Number of Groups: ", domain = "R-nlme"))
+2140c2142
+<       cat("Level:", attr(x, "grpNames")[i],"\n")
+---
+>       cat(gettext("Level: ", domain = "R-nlme"), attr(x, "grpNames")[i], "\n", sep = "")
+2154,2156c2156,2161
+<     cat( "Nonlinear mixed-effects model fit by " )
+<     cat( ifelse( x$method == "REML", "REML\n", "maximum likelihood\n") )
+<     cat("  Model:", deparse(x$call$model),"\n")
+---
+>     if(x$method == "REML") {
+>      cat(gettext("Nonlinear mixed-effects model fit by REML", domain = "R-nlme"), "\n", sep = "")
+>     } else {
+>      cat(gettext("Nonlinear mixed-effects model fit by maximum likelihood", domain = "R-nlme"), "\n", sep = "")
+>     }
+>     cat(gettext("  Model: ", domain = "R-nlme"), deparse(x$call$model), "\n", sep = "")
+2158,2159c2163,2167
+<     cat( "Linear mixed-effects model fit by " )
+<     cat( ifelse( x$method == "REML", "REML\n", "maximum likelihood\n") )
+---
+>     if(x$method == "REML") {
+>      cat(gettext("Linear mixed-effects model fit by REML", domain = "R-nlme"), "\n", sep = "")
+>     } else {
+>      cat(gettext("Linear mixed-effects model fit by maximum likelihood", domain = "R-nlme"), "\n", sep = "")
+>     }
+2162c2170
+<   cat(" Data:", deparse( x$call$data ), "\n")
+---
+>   cat(gettext(" Data: ", domain = "R-nlme"), deparse( x$call$data ), "\n", sep = "")
+2164c2172
+<     cat("  Subset:", deparse(asOneSidedFormula(x$call$subset)[[2L]]),"\n")
+---
+>     cat(gettext("  Subset: ", domain = "R-nlme"), deparse(asOneSidedFormula(x$call$subset)[[2L]]), "\n", sep = "")
+2166,2168c2174,2175
+<   print( data.frame( AIC = x$AIC, BIC = x$BIC, logLik = c(x$logLik),
+<                     row.names = " ") )
+<   if (verbose) { cat("Convergence at iteration:",x$numIter,"\n") }
+---
+>   print( data.frame( AIC = x$AIC, BIC = x$BIC, logLik = c(x$logLik), row.names = " ") )
+>   if (verbose) { cat(gettext("Convergence at iteration: ", domain = "R-nlme"), x$numIter, "\n", sep = "") }
+2172c2179
+<   cat("Fixed effects: ")
+---
+>   cat(gettext("Fixed effects: ", domain = "R-nlme"))
+2175c2182
+<     cat(deparse(x$call$fixed), "\n")
+---
+>     cat(deparse(x$call$fixed), "\n", sep = "")
+2195,2197c2202
+<     print(corr,
+< 	  title = " Correlation:",
+< 	  ...)
+---
+>     print(corr, title = gettext(" Correlation:", domain = "R-nlme"), ...)
+2199c2204
+<   cat("\nStandardized Within-Group Residuals:\n")
+---
+>   cat("\n", gettext("Standardized Within-Group Residuals:", domain = "R-nlme"), "\n", sep = "")
+2201,2202c2206,2207
+<   cat("\nNumber of Observations:",x$dims[["N"]])
+<   cat("\nNumber of Groups: ")
+---
+>   cat("\n", gettext("Number of Observations: ", domain = "R-nlme"), x$dims[["N"]], sep = "")
+>   cat("\n", gettext("Number of Groups: ", domain = "R-nlme"), sep = "")
+2225c2230
+<     stop("'form' must be a formula")
+---
+>     stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
+2241,2242c2246,2247
+<                               "%s not found in data",
+<                               "%s not found in data"),
+---
+>                               "%s was not found in data",
+>                               "%s were not found in data", domain = "R-nlme"),
+2261,2263c2266,2269
+<     if (!is.null(labs) && ((labs == "Standardized residuals") ||
+<                            (labs == "Normalized residuals") ||
+<                            (substring(labs, 1, 9) == "Residuals"))) {
+---
+>     if (!is.null(labs) && ((labs == gettext("Standardized residuals", domain = "R-nlme")) ||
+>                            (labs == gettext("Normalized residuals", domain = "R-nlme")) ||
+>                            #(substring(labs, 1, 9) == "Residuals"))) { #LUKI: TODO
+>                            (labs == gettext("Residuals", domain = "R-nlme")))) { #LUKI: TODO
+2270c2276
+<   if (is.null(args$ylab)) args$ylab <- "Quantiles of standard normal"
+---
+>   if (is.null(args$ylab)) args$ylab <- gettext("Quantiles of standard normal", domain = "R-nlme")
+2284c2290
+<                    stop("'Id' must be between 0 and 1")
+---
+>                    stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
+2286,2288c2292,2293
+<                  if (labs == "Normalized residuals") {
+<                    as.logical(abs(resid(object, type="normalized"))
+<                               > -qnorm(id / 2))
+---
+>                  if (labs == gettext("Normalized residuals", domain = "R-nlme")) {
+>                    as.logical(abs(resid(object, type="normalized")) > -qnorm(id / 2))
+2290,2291c2295
+<                    as.logical(abs(resid(object, type="pearson"))
+<                               > -qnorm(id / 2))
+---
+>                    as.logical(abs(resid(object, type="pearson")) > -qnorm(id / 2))
+2295c2299
+<                stop("'id' can only be a formula or numeric")
+---
+>                stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
+2307c2311
+<             stop("'idLabels' of incorrect length")
+---
+>             stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
+2311c2315
+<           stop("'idLabels' can only be a formula or a vector")
+---
+>           stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
+2342c2346
+<                    stop("'id' must be between 0 and 1")
+---
+>                    stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
+2348c2352
+<                stop("'id' can only be a formula or numeric")
+---
+>                stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
+2363c2367
+<             stop("'idLabels' of incorrect length")
+---
+>             stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
+2367c2371
+<           stop("'idLabels' can only be a formula or a vector")
+---
+>           stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
+2482,2483c2486
+< 	data[, is.na(match(names(data), names(object$modelStruct$reStruct))),
+< 	      drop = FALSE]
+---
+> 	data[, is.na(match(names(data), names(object$modelStruct$reStruct))), drop = FALSE]
+2499c2502
+<       "Standardized random effects"
+---
+>       gettext("Standardized random effects", domain = "R-nlme")
+2501c2504
+<       "Random effects"
+---
+>       gettext("Random effects", domain = "R-nlme")
+2523c2526
+<                               "nonexistent levels %s"),
+---
+>                               "nonexistent levels %s", domain = "R-nlme"),
+2556c2559
+<                lab <- "Residuals"
+---
+>                lab <- gettext("Residuals", domain = "R-nlme")
+2562,2563c2565,2566
+<              pearson = "Standardized residuals",
+<              normalized = "Normalized residuals"
+---
+>              pearson = gettext("Standardized residuals", domain = "R-nlme"),
+>              normalized = gettext("Normalized residuals", domain = "R-nlme")
+2615c2618
+< 	stop("need an object with call component")
+---
+> 	stop("an object with 'call' component is required")
+2751c2754
+<         stop("'nint' is not consistent with 'breaks'")
+---
+>         stop(gettextf("'%s' is not consistent with '%s'", "nint", "breaks"))
+2843c2846
+<   for(i in 1:Q) {
+---
+>   for(i in seq_len(Q)) {
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/lmList.R R-recommended-moje/nlme/R/lmList.R
+65c65
+<       stop ("'data' must be a \"groupedData\" object if 'groups' argument is missing")
+---
+>       stop(gettextf("'%s' argument must be an object of class %s if 'groups' argument is missing", "data", dQuote("groupedData")))
+113,114c113
+<       stop(gettextf("'data' in %s call must evaluate to a data frame",
+<                      sQuote(substitute(object))), domain = NA)
+---
+>       stop(gettextf("'data' in %s call must evaluate to a data frame", sQuote(substitute(object))), domain = "R-nlme")
+118,119c117
+<         stop(gettextf("%s without \"primary\" can only be used with fits of \"groupedData\" objects",
+<                       sys.call()[[1]]), domain = NA)
+---
+>         stop(gettextf("%s without \"primary\" can only be used with fits of \"groupedData\" objects", sys.call()[[1]]), domain = "R-nlme")
+218c216
+<       attr(coefs, "label") <- "Coefficients"
+---
+>       attr(coefs, "label") <- gettext("Coefficients", domain = "R-nlme")
+234c232
+<         stop("nonexistent groups requested in 'subset'")
+---
+>         stop("nonexistent groups requested in 'subset' argument")
+239c237
+<           stop("nonexistent groups requested in 'subset'")
+---
+>           stop("nonexistent groups requested in 'subset' argument")
+242c240
+<         stop("'subset' can only be character or integer")
+---
+>         stop(gettextf("'%s' argument can only be character or integer", "subset"))
+264c262
+<   lab <- "Fitted values"
+---
+>   lab <- gettext("Fitted values", domain = "R-nlme")
+389c387
+<     stop("'form' must be a formula")
+---
+>     stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
+392c390
+<     stop("'form' must be a one-sided formula")
+---
+>     stop(gettextf("'%s' argument must be a one-sided formula", "form"))
+408,409c406,407
+<                               "%s not found in data",
+<                               "%s not found in data"),
+---
+>                               "%s was not found in data",
+>                               "%s were not found in data", domain = "R-nlme"),
+460c458
+<     for(i in 1:length(gr)) {
+---
+>     for(i in seq_len(length(gr))) {
+475c473
+< 		 stop("'id' must be between 0 and 1")
+---
+> 		 stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
+484c482
+< 	     stop("'id' can only be a formula or numeric")
+---
+>              stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
+499c497
+< 	  stop("'idLabels' of incorrect length")
+---
+>           stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
+503c501
+< 	stop("'idLabels' can only be a formula or a vector")
+---
+> 	stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
+651c649
+<     stop("'form' must be a formula")
+---
+>     stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
+668,669c666,667
+<                               "%s not found in data",
+<                               "%s not found in data"),
+---
+>                               "%s was not found in data",
+>                               "%s were not found in data", domain = "R-nlme"),
+727c725
+<     for(i in 1:length(gr)) {
+---
+>     for(i in seq_len(length(gr))) {
+747c745
+< 		 stop("'id' must be between 0 and 1")
+---
+> 		 stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
+752c750
+< 	     stop("'id' can only be a formula or numeric")
+---
+>              stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
+764c762
+< 	  stop("'idLabels' of incorrect length")
+---
+>           stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
+768c766
+< 	stop("'idLabels' can only be a formula or a vector")
+---
+> 	stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
+872c870
+<       stop("nonexistent group requested in 'subset'")
+---
+>       stop("nonexistent groups requested in 'subset' argument")
+958c956
+<       attr(val, "label") <- "Predicted values"
+---
+>       attr(val, "label") <- gettext("Predicted values", domain = "R-nlme")
+981c979
+<   cat("Call:\n")
+---
+>   cat(gettext("Call:", domain = "R-nlme"), "\n", sep = "")
+983,985c981
+<   cat("  Model:", deparse(getResponseFormula(form)[[2]]),
+<       "~", c_deparse(getCovariateFormula(form)[[2]]), "|",
+<       deparse(getGroupsFormula(x)[[2]]), "\n")
+---
+>   cat(gettext("  Model: ", domain = "R-nlme"), deparse(getResponseFormula(form)[[2]]), " ~ ", c_deparse(getCovariateFormula(form)[[2]]), " | ", deparse(getGroupsFormula(x)[[2]]), "\n", sep = "")
+987c983
+<     cat(" Level:", mCall$level, "\n")
+---
+>     cat(gettext(" Level: ", domain = "R-nlme"), mCall$level, "\n", sep = "")
+989,990c985,986
+<   cat("   Data:", deparse(mCall$data),"\n\n")
+<   cat("Coefficients:\n")
+---
+>   cat(gettext("   Data: ", domain = "R-nlme"), deparse(mCall$data), "\n\n", sep = "")
+>   cat(gettext("Coefficients:", domain = "R-nlme"), "\n", sep = "")
+997,999c993,994
+<     cat("Degrees of freedom: ", length(unlist(lapply(x, fitted))),
+< 	" total; ", dfRes, " residual\n", sep = "")
+<     cat("Residual standard error:", format(RSE))
+---
+>     cat(gettextf("Degrees of freedom: %s total; %s residual", length(unlist(lapply(x, fitted))), dfRes, domain = "R-nlme"), "\n", sep = "")
+>     cat(gettext("Residual standard error: ", domain = "R-nlme"), format(RSE), sep = "")
+1008c1003
+<   cat("Call:\n")
+---
+>   cat(gettext("Call:", domain = "R-nlme"), "\n", sep = "")
+1010,1012c1005,1006
+<   cat("  Model:", deparse(getResponseFormula(form)[[2]]),
+<       "~", c_deparse(getCovariateFormula(form)[[2]]), "|",
+<       deparse(attr(x, "groupsForm")[[2]]), "\n")
+---
+>   cat(gettext("  Model: ", domain = "R-nlme"), deparse(getResponseFormula(form)[[2]]),
+>       " ~ ", c_deparse(getCovariateFormula(form)[[2]]), " | ", deparse(attr(x, "groupsForm")[[2]]), "\n", sep = "")
+1014c1008
+<     cat(" Level:", x$call$level, "\n")
+---
+>     cat(gettext(" Level: ", domain = "R-nlme"), x$call$level, "\n", sep = "")
+1016,1017c1010,1011
+<   cat("   Data:", deparse(x$call$data),"\n\n")
+<   cat("Coefficients:\n")
+---
+>   cat(gettext("   Data: ", domain = "R-nlme"), deparse(x$call$data), "\n\n", sep = "")
+>   cat(gettext("Coefficients:", domain = "R-nlme"), "\n", sep = "")
+1024,1025c1018
+<     cat("Residual standard error:", format(x$RSE), "on",
+< 	x$df.residual, "degrees of freedom\n")
+---
+>     cat(gettextf("Residual standard error: %s on %s degrees of freedom", format(x$RSE), x$df.residual, domain = "R-nlme"), "\n", sep = "")
+1038c1031
+<     stop("'form' must be a formula")
+---
+>     stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
+1054,1055c1047,1048
+<                               "%s not found in data",
+<                               "%s not found in data"),
+---
+>                               "%s was not found in data",
+>                               "%s were not found in data", domain = "R-nlme"),
+1074,1075c1067,1069
+<     if (!is.null(labs) && ((labs == "Standardized residuals") ||
+<                            (substring(labs, 1, 9) == "Residuals"))) {
+---
+>     if (!is.null(labs) && ((labs == gettext("Standardized residuals", domain = "R-nlme")) ||
+>                            #(substring(labs, 1, 9) == "Residuals"))) {
+>                            (labs == gettext("Residuals", domain = "R-nlme")))) { #LUKI: TODO
+1082c1076
+<   if (is.null(args$ylab)) args$ylab <- "Quantiles of standard normal"
+---
+>   if (is.null(args$ylab)) args$ylab <- gettext("Quantiles of standard normal", domain = "R-nlme")
+1096c1090
+<                    stop("'id' must be between 0 and 1")
+---
+> 		   stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
+1102c1096
+<                stop("'id' can only be a formula or numeric")
+---
+>                stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
+1114c1108
+<             stop("'idLabels' of incorrect length")
+---
+>             stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
+1118c1112
+<           stop("'idLabels' can only be a formula or a vector")
+---
+> 	  stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
+1149c1143
+<                    stop("'id' must be between 0 and 1")
+---
+> 		   stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
+1155c1149
+<                stop("'id' can only be a formula or numeric")
+---
+>                stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
+1170c1164
+<             stop("'idLabels' of incorrect length")
+---
+>             stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
+1174c1168
+<           stop("'idLabels' can only be a formula or a vector")
+---
+> 	  stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
+1249c1243
+<     attr(val, "label") <- "Standardized random effects"
+---
+>     attr(val, "label") <- gettext("Standardized random effects", domain = "R-nlme")
+1251c1245
+<     attr(val, "label") <- "Random effects"
+---
+>     attr(val, "label") <- gettext("Random effects", domain = "R-nlme")
+1270c1264
+<         stop("nonexistent groups requested in 'subset'")
+---
+>         stop("nonexistent groups requested in 'subset' argument")
+1275c1269
+<           stop("nonexistent groups requested in 'subset'")
+---
+>           stop("nonexistent groups requested in 'subset' argument")
+1278c1272
+<         stop("'subset' can only be character or integer")
+---
+>         stop(gettextf("'%s' argument can only be character or integer", "subset"))
+1321c1315
+<     lab <- "Residuals"
+---
+>     lab <- gettext("Residuals", domain = "R-nlme")
+1325c1319
+<   } else lab <- "Standardized residuals"
+---
+>   } else lab <- gettext("Standardized residuals", domain = "R-nlme")
+1347c1341
+< 		for (ii in 1:length(lst))
+---
+> 		for (ii in seq_len(length(lst)))
+1357c1351
+< 		for (ii in 1:length(lst))
+---
+> 		for (ii in seq_len(length(lst)))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/modelStruct.R R-recommended-moje/nlme/R/modelStruct.R
+62c62
+<       cat(paste(i, " parameters:\n"))
+---
+>       cat(gettextf("%s parameters:", i, domain = "R-nlme"), "\n", sep = "")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/newFunc.R R-recommended-moje/nlme/R/newFunc.R
+135c135
+<     stop("object must inherit from \"data.frame\"")
+---
+>     stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("data.frame")))
+140c140
+<       stop("'form' must be a formula")
+---
+>       stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
+148c148
+<       stop("only one level allowed in 'gapply'")
+---
+>       stop(gettextf("only one level allowed in %s function", sQuote("gapply")))
+158,159c158,159
+<                                        "%s not matched",
+<                                        "%s not matched"),
+---
+>                                        "%s value was not matched",
+>                                        "%s values were not matched", domain = "R-nlme"),
+166,167c166
+<                  stop(gettextf("'which' must be between 1 and %d",
+<                                ncol(object)), domain = NA)
+---
+>                  stop(gettextf("'%s' argument must be between %d and %d", "which", 1, ncol(object)), domain = "R-nlme")
+170c169
+<            stop("'which' can only be character or integer")
+---
+>            stop(gettextf("'%s' argument can only be character or integer", "which"))
+187c186
+<     stop("formula(object) must return a formula")
+---
+>     stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("formula")))
+202c201
+<     stop("'form' must be a two-sided formula")
+---
+>     stop(gettextf("'%s' argument must be a two-sided formula", "form"))
+217c216
+<     stop("object must inherit from \"data.frame\"")
+---
+>     stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("data.frame")))
+221c220
+<       stop("'form' must be a formula")
+---
+>       stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("fomrula")))
+229c228
+<       stop("only one level allowed in 'gsummary'")
+---
+>       stop(gettextf("only one level allowed in %s function", sQuote("gsummary")))
+254c253
+< 	stop("'FUN' can only be a function or a list of functions")
+---
+> 	stop(gettextf("'%s' argument can only be a function or a list of functions", "FUN"))
+302c301
+<     stop("object must inherit from class \"lmList\"")
+---
+>     stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("lmList")))
+314c313
+<     stop("no degrees of freedom for estimating std. dev.")
+---
+>     stop("no degrees of freedom for estimating standard deviation")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/newMethods.R R-recommended-moje/nlme/R/newMethods.R
+15c15
+<     stop("'form' must be a formula")
+---
+>     stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
+52c52
+<     stop( "data argument to \"data.frame\" method for 'getGroups' does not make sense" )
+---
+>     stop("'data' argument passed to \"data.frame\" method for 'getGroups()' does not make sense")
+71c71
+<       stop("'form' must have all components as formulas")
+---
+>       stop(gettextf("'%s' argument must have all components as formulae", "form"))
+74c74
+<     stop("'form' can only be a formula, or a list of formulas")
+---
+>     stop(gettextf("'%s' argument can only be a formula or a list of formulae", "form"))
+93,95c93
+<         stop(gettextf("level of %s does not match formula %s",
+<                       level[aux], sQuote(deparse(form))),
+<              domain = "NA")
+---
+>         stop(gettextf("level of %s does not match formula %s", level[aux], sQuote(deparse(form))), domain = "R-nlme")
+100,102c98
+<         stop(gettextf("level of %s does not match formula %s",
+<                       level[aux], sQuote(deparse(form))),
+<              domain = "NA")
+---
+>         stop(gettextf("level of %s does not match formula %s", level[aux], sQuote(deparse(form))), domain = "R-nlme")
+126c122
+<     stop("'form' must be a two-sided formula")
+---
+>     stop(gettextf("'%s' argument must be a two-sided formula", "form"))
+139c135
+<     stop("'form' argument must be a formula")
+---
+>     stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("formula")))
+278c274
+<     stop("'form' must be a formula")
+---
+>     stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
+294,295c290,291
+<                                 "%s not found in data",
+<                                 "%s not found in data"),
+---
+>                                 "%s was not found in data",
+>                                 "%s were not found in data", domain = "R-nlme"),
+351c347
+<     for(i in 1:length(gr)) {
+---
+>     for(i in seq_len(length(gr))) {
+375c371
+< 		 stop("'id' must be between 0 and 1")
+---
+> 		 stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
+381c377
+< 	     stop("'id' can only be a formula or numeric")
+---
+> 	     stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
+393c389
+< 	  stop("'idLabels' of incorrect length")
+---
+> 	  stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
+397c393
+< 	stop("'idLabels' can only be a formula or a vector")
+---
+> 	stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
+480c476
+<   function(x, alpha = 0, xlab = "Lag", ylab = "Autocorrelation",
+---
+>   function(x, alpha = 0, xlab = gettext("Lag", domain = "R-nlme"), ylab = gettext("Autocorrelation", domain = "R-nlme"),
+608c604
+<            xlab = "Distance", ylab = "Semivariogram", type = "p", ylim,
+---
+>            xlab = gettext("Distance", domain = "R-nlme"), ylab = gettext("Semivariogram", domain = "R-nlme"), type = "p", ylim,
+673c669
+<   function(x, title = " Correlation:", rdig = 3, ...)
+---
+>   function(x, title = gettext(" Correlation:", domain = "R-nlme"), rdig = 3, ...)
+698c694
+<     stop("'form' must be a formula")
+---
+>     stop(gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula")))
+714,715c710,711
+<                               "%s not found in data",
+<                               "%s not found in data"),
+---
+>                               "%s was not found in data",
+>                               "%s were not found in data", domain = "R-nlme"),
+731,733c727,730
+<   if (is.null(labs) || ((labs != "Standardized residuals") &&
+<                         (labs != "Normalized residuals") &&
+<                         (substring(labs, 1, 9) != "Residuals"))) {
+---
+>   if (is.null(labs) || ((labs != gettext("Standardized residuals", domain = "R-nlme")) &&
+>                         (labs != gettext("Normalized residuals", domain = "R-nlme")) &&
+>                         #(substring(labs, 1, 9) != "Residuals"))) {
+>                         (labs != gettext("Residuals", domain = "R-nlme")))) { # LUKI: TODO
+737c734
+<   if (is.null(args$ylab)) args$ylab <- "Quantiles of standard normal"
+---
+>   if (is.null(args$ylab)) args$ylab <- gettext("Quantiles of standard normal", domain = "R-nlme")
+750c747
+<                  stop("'id' must be between 0 and 1")
+---
+> 		 stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
+752c749
+<                if (labs == "Normalized residuals") {
+---
+>                if (labs == gettext("Normalized residuals", domain = "R-nlme")) {
+761c758
+<              stop("'id' can only be a formula or numeric")
+---
+>              stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
+773c770
+<           stop("'idLabels' of incorrect length")
+---
+>           stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
+777c774
+<         stop("'idLabels' can only be a formula or a vector")
+---
+>         stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
+819c816
+<     stop("'distance' and 'object' have incompatible lengths")
+---
+>     stop(gettextf("'%s' and '%s' arguments have incompatible lengths", "distance", "object"))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/nlme.R R-recommended-moje/nlme/R/nlme.R
+61,63c61,62
+<   if (any(!is.na(match(names(thisCall),
+< 		       c("fixed", "data", "start"))))) {
+<     warning("'nlme.nlsList' will redefine 'fixed', 'data', and 'start'")
+---
+>   if (any(!is.na(match(names(thisCall), c("fixed", "data", "start"))))) {
+>     warning("'nlme.nlsList()' function will redefine 'fixed', 'data', and 'start' arguments")
+90c89
+<     stop("can only fit \"nlsList\" objects with single grouping variable")
+---
+>     stop(gettextf("can only fit objects of class %s with single grouping variable", dQuote("nlsList")))
+122c121
+<       warning("initial value for 'reStruct' overwritten in 'nlme.nlsList'")
+---
+>       warning(gettextf("initial value for 'reStruct' overwritten in %s function", sQuote("nlme.nlsList()")))
+182c181
+<     stop("'model' must be a formula")
+---
+>     stop(gettextf("'%s' argument is not an object of class %s", "model", dQuote("formula")))
+202c201
+< 	  stop("incompatible lengths for 'random' and grouping factors")
+---
+> 	  stop("incompatible lengths for 'random' argument and grouping factors")
+206c205
+<         for(i in 1:Q) randL[[i]] <- random
+---
+>         for(i in seq_len(Q)) randL[[i]] <- random
+235c234
+<       stop("'data' must be given explicitly to use 'nlsList'")
+---
+>       stop(gettextf("'%s' argument must be given explicitly to use %s function", "data", sQuote("nlsList()")))
+271c270
+<       stop ("'fixed' must be a formula or list of formulae")
+---
+>       stop(gettextf("'%s' argument must be a formula or list of formulae", "fixed"))
+273c272
+<       stop ("formulae in 'fixed' must be of the form \"parameter ~ expr\"")
+---
+>       stop(gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "fixed"))
+275c274
+<       stop ("formulae in 'fixed' must be of the form \"parameter ~ expr\"")
+---
+>       stop(gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "fixed"))
+285c284
+<   for(i in 1:Q) {
+---
+>   for(i in seq_len(Q)) {
+290c289
+<         stop ("'random' must be a formula or list of formulae")
+---
+>         stop(gettextf("'%s' argument must be a formula or list of formulae", "random"))
+292c291
+<         stop ("formulae in 'random' must be of the form \"parameter ~ expr\"")
+---
+>         stop(gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "random"))
+294c293
+<         stop ("formulae in 'random' must be of the form \"parameter ~ expr\"")
+---
+>         stop(gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "random"))
+325c324
+<           stop("incompatible formulas for groups in \"random\" and \"correlation\"")
+---
+>           stop("incompatible formulas for groups in 'random' and 'correlation' arguments")
+328c327
+<           warning("cannot use smaller level of grouping for \"correlation\" than for \"random\". Replacing the former with the latter.")
+---
+>           warning("cannot use smaller level of grouping for 'correlation' than for 'random'. Replacing the former with the latter.")
+336c335
+<           stop("incompatible formulas for groups in \"random\" and \"correlation\"")
+---
+>           stop("incompatible formulas for groups in 'random' and 'correlation' arguments")
+432c431
+<       for(i in 1:Q) {
+---
+>       for(i in seq_len(Q)) {
+524c523
+<   for(i in 1:Q) {
+---
+>   for(i in seq_len(Q)) {
+555,556c554
+<     warning(gettextf("fewer observations than random effects in all level %s groups",
+<                      Q), domain = NA)
+---
+>     warning(gettextf("fewer observations than random effects in all level %s groups", Q), domain = "R-nlme")
+573,574c571
+<           stop(gettextf("list with starting values for random effects must have names or be of length %d",
+<                         Q), domain = NA)
+---
+>           stop(gettextf("list with starting values for random effects must have names or be of length %d", Q), domain = "R-nlme")
+581c578
+<                                 "group names not matched in starting values for random effects: %s"),
+---
+>                                 "group names not matched in starting values for random effects: %s", domain = "R-nlme"),
+586c583
+<   for(i in 1:Q) {
+---
+>   for(i in seq_len(Q)) {
+595,596c592
+<           stop(gettextf("number of rows in starting values for random component at level %s should be %d",
+<                         namGrp[i], Dims$ngrps[i]), domain = NA)
+---
+>           stop(gettextf("number of rows in starting values for random component at level %s should be %d", namGrp[i], Dims$ngrps[i]), domain = "R-nlme")
+599,600c595
+<           stop(gettextf("number of columns in starting values for random component at level %s should be %d",
+<                         namGrp[i], rlength[i]), domain = NA)
+---
+>           stop(gettextf("number of columns in starting values for random component at level %s should be %d", namGrp[i], rlength[i]), domain = "R-nlme")
+608,609c603
+<           stop(gettextf("groups levels mismatch in 'random' and starting values for 'random' at level %s",
+<                         namGrp[i]), domain = NA)
+---
+>           stop(gettextf("groups levels mismatch in 'random' and starting values for 'random' at level %s", namGrp[i]), domain = "R-nlme")
+617c611
+<           for(j in 1:rlength[i]) {
+---
+>           for(j in seq_len(rlength[i])) {
+627,628c621
+<                   stop (gettextf("names mismatch in 'random' and starting values  for 'random' at level %s",
+<                                  namGrp[i]), domain = NA)
+---
+>                   stop (gettextf("names mismatch in 'random' and starting values  for 'random' at level %s", namGrp[i]), domain = "R-nlme")
+666c659
+<   for(i in 1:Q) {
+---
+>   for(i in seq_len(Q)) {
+740c733
+<       for(i in 1:Q) {
+---
+>       for(i in seq_len(Q)) {
+774c767
+<     for(i in 1:Q) {
+---
+>     for(i in seq_len(Q)) {
+843c836
+<       cat("\n**Iteration", numIter)
+---
+>       cat("\n**", gettextf("Iteration %d", numIter, domain = "R-nlme"), sep = "")
+845,846c838
+<       cat("LME step: Loglik:", format(nlmeFit$logLik),
+<           ", nlm iterations:", convIter, "\n")
+---
+>       cat(gettextf("LME step: Loglik: %s, nlm iterations: %d", format(nlmeFit$logLik), convIter, domain = "R-nlme"), "\n", sep = "")
+899c891
+<     for(i in 1:Q) sran[[i]][] <- work$thetaPNLS[(bmap[i]+1):bmap[i+1]]
+---
+>     for(i in seq_len(Q)) sran[[i]][] <- work$thetaPNLS[(bmap[i]+1):bmap[i+1]]
+902,904c894,896
+<       cat("\nPNLS step: RSS = ", format(work$set[6]), "\n fixed effects:")
+<       for (i in 1:fLen) cat(format(signif(sfix[i]))," ")
+<       cat("\n iterations:",work$set[5],"\n")
+---
+>       cat("\n", gettextf("PNLS step: RSS = %s", format(work$set[6]), domain = "R-nlme"), "\n ", gettext("Fixed effects:", domain = "R-nlme"), sep = "")
+>       for (i in seq_len(fLen)) cat(format(signif(sfix[i]))," ")
+>       cat("\n ", gettext("iterations: ", domain = "R-nlme"), work$set[5], "\n", sep = "")
+912c904
+<     for(i in 1:Q) {
+---
+>     for(i in seq_len(Q)) {
+939c931
+<       cat("\nConvergence:\n")
+---
+>       cat("\n", gettext("Convergence:", domain = "R-nlme"), "\n", sep = "")
+1182,1185c1174,1176
+<                                 "level %s not allowed for %s",
+<                                 "levels %s not allowed for %s"),
+<                        paste(levs[wch], collapse = ",")),
+<                domain = NA)
+---
+>                                 "level %s is not allowed for %s",
+>                                 "levels %s ares not allowed for %s", domain = "R-nlme"),
+>                        paste(levs[wch], collapse = ", ")), domain = NA)
+1243c1234
+<     for(i in 1:length(ranForm)) {
+---
+>     for(i in seq_len(length(ranForm))) {
+1288c1279
+<   for(i in 1:nlev) {
+---
+>   for(i in seq_len(nlev)) {
+1319c1310
+<     lab <- "Predicted values"
+---
+>     lab <- gettext("Predicted values", domain = "R-nlme")
+1336c1327
+< 	stop("need an object with call component")
+---
+> 	stop("an object with 'call' component is required")
+1440c1431
+<   for(i in 1:length(level)) {
+---
+>   for(i in seq_len(length(level))) {
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/nlsList.R R-recommended-moje/nlme/R/nlsList.R
+31c31
+<     stop("second argument must be a groupedData object")
+---
+>     stop(gettextf("'%s' argument must be an object of class %s", "data", dQuote("groupedData")))
+68c68
+<       stop("'data' must be a \"groupedData\" object if 'formula' does not include groups")
+---
+>       stop(gettextf("'%s' argument must be an object of class %s if 'formula' argument does not include groups", "data", dQuote("groupedData")))
+87c87
+<       stop("old-style self-starting model functions\nare no longer supported.\nNew selfStart functions are available.\nUse\n  SSfpl instead of fpl,\n  SSfol instead of first.order.log,\n  SSbiexp instead of biexp,\n  SSlogis instead of logistic.\nIf writing your own selfStart model, see\n  \"help(selfStart)\"\nfor the new form of the \"initial\" attribute.")
+---
+>       stop("old-style self-starting model functions\nare no longer supported.\nNew selfStart functions are available.\nUse\n  SSfpl instead of fpl,\n  SSfol instead of first.order.log,\n  SSbiexp instead of biexp,\n  SSlogis instead of logistic.\nIf writing your own selfStart model, see\n  \"help(selfStart)\"\nfor the new form of the \"initial\" attribute.", domain = "R-nlme")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/pdMat.R R-recommended-moje/nlme/R/pdMat.R
+90c90
+< 	warning("ignoring argument 'form'")
+---
+> 	warning(gettextf("ignoring argument '%s'", "form"))
+98c98
+< 	warning("ignoring argument 'nam'")
+---
+> 	warning(gettextf("ignoring argument '%s'", "nam"))
+133c133
+< 	warning("ignoring argument 'form'")
+---
+> 	warning(gettextf("ignoring argument '%s'", "form"))
+137,138c137
+<         stop(gettextf("%s is not a valid object for \"pdMat\"",
+<                       sQuote(deparse(object))), domain = NA)
+---
+>         stop(gettextf("%s is not a valid object for \"pdMat\"", sQuote(deparse(object))), domain = "R-nlme")
+171c170
+<         stop("'form' can only be a formula or a list of formulae")
+---
+>         stop(gettextf("'%s' argument can only be a formula or a list of formulae", "form"))
+201c200
+<           if (err) stop("'form' not consistent with 'nam'")
+---
+>           if (err) stop(gettextf("'%s' is not consistent with '%s'", "form", "nam"))
+209c208
+<       stop("length of 'nam' not consistent with dimensions of initial value")
+---
+>       stop("length of 'nam' is not consistent with dimensions of initial value")
+324c323
+<             stop(gettextf("Length of names should be %d", aux), domain = NA)
+---
+>             stop(gettextf("Length of names should be %d", aux), domain = "R-nlme")
+331c330
+<         stop(gettextf("Length of names should be %d", length(dn)), domain = NA)
+---
+>         stop(gettextf("Length of names should be %d", length(dn)), domain = "R-nlme")
+420c419
+< 			 stop("x-y data to splom got botched somehow")
+---
+> 			 stop("x-y data passed to 'splom()' function got botched somehow")
+437c436
+<     cat("Positive definite matrix structure of class", class(x)[1], "representing\n")
+---
+>     cat(gettextf("Positive definite matrix structure of class %s representing", dQuote(class(x)[1]), domain = "R-nlme"), "\n", sep = "")
+440,441c439
+<     cat("Uninitialized positive definite matrix structure of class ", class(x)[1],
+< 	".\n", sep = "")
+---
+>     cat(gettextf("Uninitialized positive definite matrix structure of class %s.", dQuote(class(x)[1]), domain = "R-nlme"), "\n", sep = "")
+452c450
+<       cat(paste(" Formula: "))
+---
+>       cat(gettext(" Formula: ", domain = "R-nlme"))
+463c461
+<           cat("\n Level:", Level)
+---
+>           cat("\n ", gettext("Level: ", domain = "R-nlme"), Level, sep = "")
+478c476
+<       cat(paste(" Structure: ", attr(x, "structName"), "\n", sep = ""))
+---
+>       cat(gettext(" Structure: ", domain = "R-nlme"), attr(x, "structName"), "\n", sep = "")
+512c510
+<     cat(paste(" Composite Structure: ", attr(x, "structName"), "\n", sep =""))
+---
+>     cat(gettext(" Composite Structure: ", domain = "R-nlme"), attr(x, "structName"), "\n", sep ="")
+614,615c612
+<       stop(gettextf("an object of length %d does not match the required parameter size",
+<                     length(val)), domain = NA)
+---
+>       stop(gettextf("an object of length %d does not match the required parameter size", length(val)), domain = "R-nlme")
+740,741c737
+<       stop(gettextf("an object of length %d does not match a Cholesky factor",
+<                     length(val)), domain = NA)
+---
+>       stop(gettextf("an object of length %d does not match a Cholesky factor", length(val)), domain = "R-nlme")
+1044c1040
+< #    for(i in 1:(q-1)) {
+---
+> #    for(i in seq_len(q-1)) {
+1146,1147c1142
+<       stop(gettextf("an object of length %d does not match the required parameter size",
+<                     length(val)), domain = NA)
+---
+>       stop(gettextf("an object of length %d does not match the required parameter size", length(val)), domain = "R-nlme")
+1308,1309c1303
+<         stop(gettextf("an object of length %d does not match the required parameter size",
+<                       length(val)), domain = NA)
+---
+>         stop(gettextf("an object of length %d does not match the required parameter size", length(val)), domain = "R-nlme")
+1325c1319
+<     stop("cannot extract the matrix from an uninitialized object")
+---
+>     stop(gettextf("cannot extract the matrix from an uninitialized object of class %s", dQuote("pdDiag")))
+1409c1403
+<     stop("cannot extract the matrix from an uninitialized \"pdIdent\" object")
+---
+>     stop(gettextf("cannot extract the matrix from an uninitialized object of class %s", dQuote("pdIdent")))
+1449,1450c1443
+<       stop(gettextf("an object of length %d does not match the required parameter size",
+<                     length(val)), domain = NA)
+---
+>       stop(gettextf("an object of length %d does not match the required parameter size", length(val)), domain = "R-nlme")
+1453c1446
+<     stop("must give names when initializing \"pdIdent\" from parameter without a formula")
+---
+>     stop(gettextf("must give names when initializing %s from parameter without a formula", dQuote("pdIdent")))
+1471c1464
+<     stop("cannot extract the matrix from an uninitialized \"pdIdent\" object")
+---
+>     stop(gettextf("cannot extract the matrix from an uninitialized object of class %s", dQuote("pdIdent")))
+1548c1541
+<     stop("cannot extract the matrix from an uninitialized \"pdCompSymm\" object")
+---
+>     stop(gettextf("cannot extract the matrix from an uninitialized object of class %s", dQuote("pdCompSymm")))
+1600,1601c1593
+<       stop(gettextf("an object of length %d does not match the required parameter size",
+<                     length(val)), domain = NA)
+---
+>       stop(gettextf("an object of length %d does not match the required parameter size", length(val)), domain = "R-nlme")
+1604c1596
+<     stop("must give names when initializing \"pdCompSymm\" from parameter without a formula")
+---
+>     stop(gettextf("must give names when initializing %s from parameter without a formula", dQuote("pdCompSymm")))
+1625c1617
+<     stop("cannot extract the matrix from an uninitialized \"pdCompSymm\" object")
+---
+>     stop(gettextf("cannot extract the matrix from an uninitialized object of class %s", dQuote("pdCompSymm")))
+1748c1740
+<       stop("'form' must be a list")
+---
+>       stop(gettextf("'%s' argument must be a list", "form"))
+1757c1749
+<       stop("'nam' must be a list")
+---
+>       stop(gettextf("'%s' argument must be a list", "nam"))
+1761c1753
+<       stop("'form' and 'nam' have incompatible lengths")
+---
+>       stop(gettextf("'%s' and '%s' arguments have incompatible lengths", "form", "nam"))
+1769c1761
+<       stop("'pdClass' must be a character vector")
+---
+>       stop(gettextf("'%s' argument must be a character vector", "pdClass"))
+1774c1766
+< 	stop("'form' and 'pdClass' have incompatible lengths")
+---
+>         stop(gettextf("'%s' and '%s' arguments have incompatible lengths", "form", "pdClass"))
+1777c1769
+< 	stop("'nam' and 'pdClass' have incompatible lengths")
+---
+>         stop(gettextf("'%s' and '%s' arguments have incompatible lengths", "nam", "pdClass"))
+1810c1802
+<   for(i in 1:nB) {
+---
+>   for(i in seq_len(nB)) {
+1871c1863
+<     stop("all elements in the argument must generate \"pdMat\" objects")
+---
+>     stop(gettextf("all elements in the argument must generate objects of class %s", dQuote("pdMat")))
+1883c1875
+<       for(i in 1:nB) {
+---
+>       for(i in seq_len(nB)) {
+1981c1973
+<     stop("cannot change parameter length of initialized \"pdMat\" object")
+---
+>     stop(gettextf("cannot change parameter length of initialized object of class %s", dQuote("pdMat")))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/reStruct.R R-recommended-moje/nlme/R/reStruct.R
+66c66
+<       stop("\"pdMat\" element must have a formula")
+---
+>       stop(gettextf("'%s' argument must have a formula", "object"))
+71c71
+<       stop("'object' must be a list or a formula")
+---
+>       stop(gettextf("'%s' argument must be a list or a formula", "object"))
+84c84
+<                              stop("\"pdMat\" elements must have a formula")
+---
+>                              stop(gettextf("'%s' argument must have a formula", "object"))
+101c101
+<                  stop("elements in 'object' must be formulas or \"pdMat\" objects")
+---
+>                  stop("elements in 'object' argument must be formulae or objects of class \"pdMat\"")
+189c189
+<     stop("cannot change the parameter when ength of parameters is undefined")
+---
+>     stop("cannot change the parameter when length of parameters is undefined")
+192c192
+<     stop("cannot change parameter length of initialized objects")
+---
+>     stop(gettextf("cannot change parameter length of initialized object of class %s", dQuote("reStruct")))
+253c253
+<     stop("all elements of a \"reStruct\" object must have a non-zero size")
+---
+>     stop(gettextf("all elements of an object of class %s must have a non-zero size", dQuote("reStruct")))
+303c303
+<     stop("cannot change the length of 'object'")
+---
+>     stop("cannot change the length of 'object' argument")
+397c397
+<     cat("Random effects:\n")
+---
+>     cat(gettext("Random effects:", domain = "R-nlme"), "\n", sep = "")
+402c402
+< 	cat("Random effects estimates:\n")
+---
+> 	cat(gettext("Random effects estimates:", domain = "R-nlme"), "\n", sep = "")
+408c408
+<     cat("Uninitialized random effects structure\n")
+---
+>     cat(gettext("Uninitialized random effects structure", domain = "R-nlme"), "\n", sep = "")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/simulate.R R-recommended-moje/nlme/R/simulate.R
+26c26
+<         stop("\nfixed-effects model must be a formula of the form \"resp ~ pred\"")
+---
+>         stop("fixed-effects model must be a formula of the form \"resp ~ pred\"")
+39c39
+<                     stop("incompatible lengths for 'random' and grouping factors")
+---
+>                     stop("incompatible lengths for 'random' argument and grouping factors")
+115c115
+<         stop("order of arguments in 'simulate.lme' has changed to conform with generic in R-2.2.0", domain = NA)
+---
+>         stop("order of arguments in 'simulate.lme' has changed to conform with generic in R-2.2.0", domain = "R-nlme")
+197c197
+<     for(i in 1:Q) {
+---
+>     for(i in seq_len(Q)) {
+253c253
+<     for(i in 1:nsim) {
+---
+>     for(i in seq_len(nsim)) {
+255c255
+<         for(j in 1:Q) {
+---
+>         for(j in seq_len(Q)) {
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/VarCov.R R-recommended-moje/nlme/R/VarCov.R
+26c26
+<         stop("not implemented for \"nlme\" objects")
+---
+>         stop(gettextf("'%s' function is not implemented for objects of class %s", "getVarCov.lme()", dQuote("nlme")))
+28c28
+<         stop("not implemented for multiple levels of nesting")
+---
+>         stop(gettextf("'%s' function is not implemented for multiple levels of nesting", "getVarCov.lme()"))
+46,51c46,47
+<             if (!length(indx))
+<                 stop(gettextf("individual %s was not used in the fit",
+<                               sQuote(individ)), domain = NA)
+<             if (is.na(indx))
+<                  stop(gettextf("individual %s was not used in the fit",
+<                               sQuote(individ)), domain = NA)
+---
+>             if (!length(indx) || is.na(indx))
+>                 stop(gettextf("individual %s was not used in the fit", sQuote(individ)), domain = "R-nlme")
+110c106
+<             cat("correlation matrix\n")
+---
+>             cat(gettext("correlation matrix", domain = "R-nlme"), "\n", sep = "")
+116c112
+<             cat("variance covariance matrix\n")
+---
+>             cat(gettext("variance covariance matrix", domain = "R-nlme"), "\n", sep = "")
+121c117
+<         if (stdevs) cat("  Standard Deviations:",signif(sds,digits),"\n")
+---
+>         if (stdevs) cat(gettext("  Standard Deviations: ", domain = "R-nlme"), signif(sds,digits), "\n", sep = "")
+129c125
+<             cat(attr(x,"group.levels"),nm,"\n")
+---
+>             cat(attr(x,"group.levels"), " ", nm, "\n", sep = "")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/varFunc.R R-recommended-moje/nlme/R/varFunc.R
+80,81c80
+<       stop(gettextf("do not know how to get coefficients for %s object",
+<                     dQuote(class(object)[1])), domain = NA)
+---
+>       stop(gettextf("do not know how to get coefficients for %s object", dQuote(class(object)[1])), domain = "R-nlme")
+135,138c134,137
+<     if (header) cat("Variance function:\n")
+<     cat(paste(" Structure: ", attr(x, "structName"), "\n", sep = ""))
+<     cat(paste(" Formula:", deparse(formula(x)),"\n"))
+<     cat(" Parameter estimates:\n")
+---
+>     if (header) cat(gettext("Variance function:", domain = "R-nlme"), "\n", sep = "")
+>     cat(gettext(" Structure: ", domain = "R-nlme"), attr(x, "structName"), "\n", sep = "")
+>     cat(gettext(" Formula: ", domain = "R-nlme"), deparse(formula(x)), "\n", sep = "")
+>     cat(gettext(" Parameter estimates:", domain = "R-nlme"), "\n", sep = "")
+145,146c144
+<     cat("Variance function structure of class", class(x)[1],
+< 	"with no parameters, or uninitialized\n")
+---
+>     cat(gettextf("Variance function structure of class %s with no parameters, or uninitialized", dQuote(class(x)[1]), domain = "R-nlme"), "\n", sep = "")
+155,156c153
+<     cat("Variance function structure of class", class(x)[1],
+< 	"representing\n")
+---
+>     cat(gettextf("Variance function structure of class %s representing", dQuote(class(x)[1]), domain = "R-nlme"), "\n", sep = "")
+159,160c156
+<     cat("Variance function structure of class", class(x)[1],
+< 	"with no parameters, or uninitialized\n")
+---
+>     cat(gettextf("Variance function structure of class %s with no parameters, or uninitialized", dQuote(class(x)[1]), domain = "R-nlme"), "\n", sep = "")
+202c198
+<     stop("'value' must be a one sided formula")
+---
+>     stop(gettextf("'%s' argument is not an object of class %s", "value", dQuote("formula")))
+206c202
+<     stop("'form' must have a covariate")
+---
+>     stop(gettextf("'%s' argument must have a covariate", "value"))
+210c206
+<     warning("ignoring 'group' in \"varFixed\" formula")
+---
+>     warning("ignoring group in 'varFixed()' function")
+232c228
+<     stop("all variables used in 'formula' must be in 'data'")
+---
+>     stop("all variables used in 'object' argument must be in 'data' argument")
+244,246c240,242
+<   cat("Variance function:\n")
+<   cat(" Structure: fixed weights\n")
+<   cat(paste(" Formula:", deparse(formula(x)),"\n"))
+---
+>   cat(gettext("Variance function:", domain = "R-nlme"), "\n", sep = "")
+>   cat(gettext(" Structure: fixed weights", domain = "R-nlme"), "\n", sep = "")
+>   cat(gettext(" Formula: ", domain = "R-nlme"), deparse(formula(x)), "\n", sep = "")
+270c266
+< 	stop("initial values must have group names in 'varIdent'")
+---
+> 	stop(gettextf("initial values must have group names in %s function", sQuote("varIdent()")))
+274c270
+< 	stop("initial values for 'varIdent' must be > 0")
+---
+> 	stop("initial values for 'varIdent()' function must be > 0")
+282c278
+< 	stop("fixed parameters must have names in 'varIdent'")
+---
+> 	stop("fixed parameters must have names in 'varIdent()' function")
+339c335
+<       stop("cannot change the length of the \"varIdent\" parameter after initialization")
+---
+>       stop(gettextf("cannot change the length of the %s parameter after initialization", dQuote("varIdent")))
+368c364
+< 	stop("fixed parameter names in 'varIdent' must be a subset of group names")
+---
+> 	stop("fixed parameter names in 'varIdent()' function must be a subset of group names")
+391,392c387
+<             stop(gettextf("initial value for \"varIdent\" should be of length %d",
+<                           len), domain = NA)
+---
+>             stop(gettextf("initial value for %s should be of length %d", dQuote("varIdent"), len), domain = "R-nlme")
+397c392
+< 	    stop("names of starting value for \"varIdent\" object must contain all but one of the stratum levels")
+---
+> 	    stop("names of starting value for object of class \"varIdent\" must contain all but one of the stratum levels")
+402c397
+< 	    stop("nonexistent group names for initial values in 'varIdent'")
+---
+> 	    stop(gettextf("nonexistent group names for initial values in %s function", sQuote("varIdent()")))
+449,450c444,445
+< 	   structName = if (is.null(formula(object))) "Constant variance"
+< 	                else "Different standard deviations per stratum",
+---
+> 	   structName = if (is.null(formula(object))) gettext("Constant variance", domain = "R-nlme")
+> 	                else gettext("Different standard deviations per stratum", domain = "R-nlme"),
+468c463
+<     stop("'form' must have a covariate")
+---
+>     stop(gettextf("'%s' argument must have a covariate", "form"))
+472c467
+<       stop("initial values must have group names in 'varPower'")
+---
+>       stop(gettextf("initial values must have group names in %s function", sQuote("varPower()")))
+476c471
+< 	stop("fixed parameters must have group names in 'varPower'")
+---
+> 	stop(gettextf("fixed parameters must have group names in %s function", sQuote("varPower()")))
+523c518
+<       stop("cannot change the length of the \"varStruct\" parameter after initialization")
+---
+>       stop(gettextf("cannot change the length of the %s parameter after initialization", dQuote("varStruct")))
+561c556
+< 	  stop("fixed parameters must have group names")
+---
+> 	  stop(gettextf("fixed parameters must have group names in %s function", sQuote("Initialize.varPower()")))
+587,588c582
+<               stop(gettextf("initial value for \"varPower\" should be of length %d",
+<                             nStratVar), domain = NA)
+---
+>               stop(gettextf("initial value for %s should be of length %d", dQuote("varPower"), nStratVar), domain = "R-nlme")
+593c587
+< 	    stop("nonexistent group names for initial values in \"varPower\"")
+---
+> 	    stop(gettextf("nonexistent group names for initial values in %s function", sQuote("varPower()")))
+630c624
+<         stop("initial value for \"varPower\" should be of length 1")
+---
+>         stop(gettextf("initial value for %s should be of length %d", dQuote("varPower"), 1), domain = "R-nlme")
+648c642
+<   function(object, structName = "Power of variance covariate", ...)
+---
+>   function(object, structName = gettext("Power of variance covariate", domain = "R-nlme"), ...)
+682c676
+<     stop("'form' must have a covariate")
+---
+>     stop(gettextf("'%s' argument must have a covariate", "form"))
+686c680
+<       stop("initial values must have group names in 'varExp'")
+---
+>       stop(gettextf("initial values must have group names in %s function", sQuote("varExp()")))
+690c684
+< 	stop("fixed parameters must have group names in 'varExp'")
+---
+> 	stop(gettextf("fixed parameters must have group names in %s function", sQuote("varExp()")))
+736c730
+<       stop("cannot change the length of the \"varExp\" parameter after initialization")
+---
+>       stop(gettextf("cannot change the length of the %s parameter after initialization", dQuote("varExp")))
+772c766
+< 	  stop("fixed parameters must have group names")
+---
+> 	   stop(gettextf("fixed parameters must have group names in %s function", sQuote("Initialize.varExp()")))
+798,799c792
+<               stop(gettextf("initial value for \"varExp\" should be of length %d",
+<                             nStratVar), domain = NA)
+---
+>               stop(gettextf("initial value for %s should be of length %d", dQuote("varExp"), nStratVar), domain = "R-nlme")
+804c797
+< 	    stop("nonexistent group names for initial values in \"varExp\"")
+---
+> 	    stop(gettextf("nonexistent group names for initial values in %s function", sQuote("varExp()")))
+841c834
+<         stop("initial value for \"varExp\" should be of length 1")
+---
+>         stop(gettextf("initial value for %s should be of length %d", dQuote("varExp"), 1), domain = "R-nlme")
+896c889
+<       stop(gettextf("%s can have at most two components", nam), domain = NA)
+---
+>       stop(gettextf("%s can have at most two components", nam), domain = "R-nlme")
+902,903c895
+<         stop(gettextf("%s can only have names \"const\" and \"power\"", nam),
+<              domain = NA)
+---
+>         stop(gettextf("%s can only have names \"const\" and \"power\"", nam), domain = "R-nlme")
+912c904
+<         stop(gettextf("%s can only be a list or numeric", nam), domain = NA)
+---
+>         stop(gettextf("%s can only be a list or numeric", nam), domain = "R-nlme")
+922,923c914
+<         stop(gettextf("%s must have group names in 'varConstPower'", nam),
+<              domain = NA)
+---
+>         stop(gettextf("%s must have group names in 'varConstPower'", nam), domain = "R-nlme")
+938c929
+<     stop("'form' must have a covariate")
+---
+>     stop(gettextf("'%s' argument must have a covariate", "form"))
+1054c1045
+< 	    stop("fixed parameters must have group names")
+---
+> 	     stop(gettextf("fixed parameters must have group names in %s function", sQuote("Initialize.varConstPower()")))
+1079,1080c1070
+<                 stop(gettext("initial value should be of length %d",
+<                              nStratVar), domain = NA)
+---
+>                 stop(gettext("initial value should be of length %d", nStratVar), domain = "R-nlme")
+1085c1075
+< 	      stop("nonexistent group names for initial values")
+---
+> 	      stop(gettextf("nonexistent group names for initial values in %s function", sQuote("varConstPower()")))
+1128c1118
+<       stop(gettext("initial value should be of length %d", aux), domain = NA)
+---
+>       stop(gettext("initial value should be of length %d", aux), domain = "R-nlme")
+1134c1124
+<   function(object, structName = "Constant plus power of variance covariate",
+---
+>   function(object, structName = gettext("Constant plus power of variance covariate"),
+1169c1159
+<     stop("all arguments to 'varComb' must be of class \"varFunc\".")
+---
+>     stop("all arguments passed to 'varComb()' function must be of class \"varFunc\"")
+1201c1191
+<       stop("cannot change parameter length of initialized \"varComb\" object")
+---
+>       stop(gettextf("cannot change parameter length of initialized object of class %s", dQuote("varComb")))
+1242c1232
+<   cat("Combination of:\n")
+---
+>   cat(gettext("Combination of:", domain = "R-nlme"), "\n", sep = "")
+1256c1246
+<   function(object, structName = "Combination of variance functions:", ...)
+---
+>   function(object, structName = gettext("Combination of variance functions:", domain = "R-nlme"), ...)
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/src/base.h R-recommended-moje/nlme/src/base.h
+35,40d34
+< #ifdef ENABLE_NLS
+< #include <libintl.h>
+< #define _(String) dgettext ("nlme", String)
+< #else
+< #define _(String) (String)
+< #endif
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/src/corStruct.c R-recommended-moje/nlme/src/corStruct.c
+27c27
+< 
+---
+> #include "localization.h"
+Tylko w R-recommended-moje/nlme/src: localization.h
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/src/nlme.c R-recommended-moje/nlme/src/nlme.c
+27a28
+> #include "localization.h"
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/src/nlmefit.c R-recommended-moje/nlme/src/nlmefit.c
+28a29
+> #include "localization.h"
+369c370
+< 		warning("Singular precision matrix in level %ld, block %ld",
+---
+> 		warning(_("Singular precision matrix in level %ld, block %ld"),

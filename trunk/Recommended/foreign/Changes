@@ -1,0 +1,580 @@
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/foreign/R/arff.R R-recommended-moje/foreign/R/arff.R
+32c32
+<         stop("Argument 'file' must be a character string or connection.")
+---
+>         stop(gettextf("'%s' argument must be a character string or connection", "file"))
+108c108
+<         stop("Argument 'file' must be a character string or connection.")
+---
+>         stop(gettextf("'%s' argument must be a character string or connection", "file"))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/foreign/R/dbf.R R-recommended-moje/foreign/R/dbf.R
+28,30c28
+<                 message(gettextf("Field name: %s changed to: %s",
+<                                  sQuote(onames[i]), sQuote(inames[i])),
+<                         domain = NA)
+---
+>                 message(gettextf("Field name: %s changed to: %s", sQuote(onames[i]), sQuote(inames[i])), domain = "R-foreign")
+59,60c57
+<                               "data frame contains columns of unsupported classes %s"),
+< 
+---
+>                               "data frame contains columns of unsupported classes %s", domain = "R-foreign"),
+100c97
+<                 warning(gettextf("character column %d will be truncated to %d bytes", i, max_nchar), domain = NA)
+---
+>                 warning(gettextf("character column %d will be truncated to %d bytes", i, max_nchar), domain = "R-foreign")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/foreign/R/octave.R R-recommended-moje/foreign/R/octave.R
+169,170c169
+<         warning(gettextf("cannot handle unknown type %s", sQuote(type)),
+<                 domain = NA)
+---
+>         warning(gettextf("cannot handle unknown type %s", sQuote(type)), domain = "R-foreign")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/foreign/R/R_systat.R R-recommended-moje/foreign/R/R_systat.R
+22c22
+<     if (!is.character(file)) stop("'file' must be character")
+---
+>     if (!is.character(file)) stop(gettextf("'%s' argument must be a character string", "file"))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/foreign/R/spss.R R-recommended-moje/foreign/R/spss.R
+87c87
+<             message(gettextf("re-encoding from %s", cp), domain = NA)
+---
+>             message(gettextf("re-encoding from %s", cp), domain = "R-foreign")
+153,154c153
+<                     warning(gettextf("missingness type %s is not handled", tp),
+<                             domain = NA)
+---
+>                     warning(gettextf("missingness type %s is not handled", tp), domain = "R-foreign")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/foreign/R/Sread.R R-recommended-moje/foreign/R/Sread.R
+66c66
+< 		for (i in 1L:len) {
+---
+> 		for (i in seq_len(len)) {
+110c110
+< 		result <- call("stop", "Argument is missing")
+---
+> 		result <- call("stop", gettext("Argument is missing", domain = "R-foreign"))
+114c114
+< 	    return(paste("Unrecognized S mode", code, "not supported"))
+---
+> 	    return(gettextf("Unrecognized S mode %s is not supported", code, domain = "R-foreign"))
+164,165c164
+< 			     paste("Argument ", sQuote(name), " is missing",
+<                                    sep=""))
+---
+> 			     gettextf("Argument %s is missing", sQuote(name), domain = "R-foreign"))
+208,209c207
+<             stop(gettextf("S mode %s (near byte offset %s) not supported",
+<                           sQuote(code), seek(dump)), domain = NA)
+---
+>             stop(gettextf("S mode %s (near byte offset %s) not supported", sQuote(code), seek(dump)), domain = "R-foreign")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/foreign/R/writeForeignSAS.R R-recommended-moje/foreign/R/writeForeignSAS.R
+28c28
+<       stop(gettextf("Cannot uniquely abbreviate the variable names to %d or fewer characters", nmax), domain = NA)
+---
+>       stop(gettextf("Cannot uniquely abbreviate the variable names to %d or fewer characters", nmax), domain = "R-foreign")
+40,41c40
+<     stop("Cannot uniquely abbreviate format names to conform to ",
+<          " eight-character limit and not ending in a digit")
+---
+>     stop("Cannot uniquely abbreviate format names to conform to eight-character limit and not ending in a digit")
+89c88
+<             for(i in 1L:length(values)){
+---
+>             for(i in seq_len(length(values))){
+134c133
+<     for(v in 1L:ncol(df))
+---
+>     for(v in seq_len(ncol(df)))
+140c139
+<     for(v in 1L:ncol(df))
+---
+>     for(v in seq_len(ncol(df)))
+146c145
+<         for (f in 1L:length(fmtnames))
+---
+>         for (f in seq_len(length(fmtnames)))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/foreign/src/avl.c R-recommended-moje/foreign/src/avl.c
+28a29
+> #include "localization.h"
+56c57
+<   if (!(cmp != NULL)) error("assert failed : cmp != NULL");
+---
+>   if (!(cmp != NULL)) error(_("assert failed : cmp != NULL"));
+87c88
+<   if (!(tree != NULL)) error("assert failed : tree != NULL");
+---
+>   if (!(tree != NULL)) error(_("assert failed : tree != NULL"));
+155c156
+<   if (!(tree != NULL)) error("assert failed : tree != NULL");
+---
+>   if (!(tree != NULL)) error(_("assert failed : tree != NULL"));
+206c207
+<   if (!(tree != NULL)) error("assert failed : tree != NULL");
+---
+>   if (!(tree != NULL)) error(_("assert failed : tree != NULL"));
+244c245
+< 	      if (!(qp == qa)) error("assert failed : qp == qa");
+---
+> 	      if (!(qp == qa)) error(_("assert failed : qp == qa"));
+281c282
+<   if (!(tree && walk_func)) error("assert failed : tree && walk_func");
+---
+>   if (!(tree && walk_func)) error(_("assert failed : tree && walk_func"));
+318c319
+<   if (!(tree && trav)) error("assert failed : tree && trav");
+---
+>   if (!(tree && trav)) error(_("assert failed : tree && trav"));
+374c375
+<   if (!(tree != NULL)) error("assert failed : tree != NULL");
+---
+>   if (!(tree != NULL)) error(_("assert failed : tree != NULL"));
+381c382
+<       if (!(tree->count == 1)) error("assert failed : tree->count == 1");
+---
+>       if (!(tree->count == 1)) error(_("assert failed : tree->count == 1"));
+455c456
+<       if (!(s->bal == -1)) error("assert failed : s->bal == -1");
+---
+>       if (!(s->bal == -1)) error(_("assert failed : s->bal == -1"));
+467c468
+< 	  if (!(r->bal == +1)) error("assert failed : r->bal == +1");
+---
+> 	  if (!(r->bal == +1)) error(_("assert failed : r->bal == +1"));
+479c480
+< 	      if (!(p->bal == +1)) error("assert failed : p->bal == +1");
+---
+> 	      if (!(p->bal == +1)) error(_("assert failed : p->bal == +1"));
+499c500
+<       if (!(s->bal == +1)) error("assert failed : s->bal == +1");
+---
+>       if (!(s->bal == +1)) error(_("assert failed : s->bal == +1"));
+511c512
+< 	  if (!(r->bal == -1)) error("assert failed : r->bal == -1");
+---
+> 	  if (!(r->bal == -1)) error(_("assert failed : r->bal == -1"));
+523c524
+< 	      if (!(p->bal == -1)) error("assert failed : p->bal == -1");
+---
+> 	      if (!(p->bal == -1)) error(_("assert failed : p->bal == -1"));
+545c546
+<   if (!(tree != NULL)) error("assert failed : tree != NULL");
+---
+>   if (!(tree != NULL)) error(_("assert failed : tree != NULL"));
+583c584
+<   if (!(tree != NULL)) error("assert failed : tree != NULL");
+---
+>   if (!(tree != NULL)) error(_("assert failed : tree != NULL"));
+672c673
+<   if (!(k > 0)) error("assert failed : k > 0");
+---
+>   if (!(k > 0)) error(_("assert failed : k > 0"));
+692c693
+< 	  if (!(s->bal == +1)) error("assert failed : s->bal == +1");
+---
+> 	  if (!(s->bal == +1)) error(_("assert failed : s->bal == +1"));
+695c696
+< 	  if (!(r != NULL)) error("assert failed : r != NULL");
+---
+> 	  if (!(r != NULL)) error(_("assert failed : r != NULL"));
+716c717
+< 	      if (!(r->bal == -1)) error("assert failed : r->bal == -1");
+---
+> 	      if (!(r->bal == -1)) error(_("assert failed : r->bal == -1"));
+728c729
+< 		  if (!(p->bal == -1)) error("assert failed : p->bal == -1");
+---
+> 		  if (!(p->bal == -1)) error(_("assert failed : p->bal == -1"));
+737c738
+< 	  if (!(a[k] == 1)) error("assert failed : a[k] == 1");
+---
+> 	  if (!(a[k] == 1)) error(_("assert failed : a[k] == 1"));
+751c752
+< 	  if (!(s->bal == -1)) error("assert failed : s->bal == -1");
+---
+> 	  if (!(s->bal == -1)) error(_("assert failed : s->bal == -1"));
+785c786
+< 		  if (!(p->bal == 1)) error("assert failed : p->bal == 1");
+---
+> 		  if (!(p->bal == 1)) error(_("assert failed : p->bal == 1"));
+805c806
+<   if (!(tree != NULL)) error("assert failed : tree != NULL");
+---
+>   if (!(tree != NULL)) error(_("assert failed : tree != NULL"));
+820c821
+<   if (!(tree != NULL)) error("assert failed : tree != NULL");
+---
+>   if (!(tree != NULL)) error(_("assert failed : tree != NULL"));
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/foreign/src/dbfopen.c R-recommended-moje/foreign/src/dbfopen.c
+196a197
+> #include "localization.h"
+276c277
+< 	error("binary write error");
+---
+> 	error(_("binary write error"));
+278c279
+< 	!= psDBF->nFields) error("binary write error");
+---
+> 	!= psDBF->nFields) error(_("binary write error"));
+289c290
+< 	    error("binary write error");
+---
+> 	    error(_("binary write error"));
+313c314
+< 		    psDBF->fp ) != 1) error("binary write error");
+---
+> 		    psDBF->fp ) != 1) error(_("binary write error"));
+334c335
+< 	error("binary read error");
+---
+> 	error(_("binary read error"));
+343c344
+< 	error("binary write error");
+---
+> 	error(_("binary write error"));
+725c726
+< 	    REprintf("fseek(%d) failed on DBF file", nRecordOffset);
+---
+> 	    REprintf(_("fseek(%d) failed on DBF file"), nRecordOffset);
+732c733
+< 	    REprintf("fread(%d) failed on DBF file", psDBF->nRecordLength );
+---
+> 	    REprintf(_("fread(%d) failed on DBF file"), psDBF->nRecordLength );
+1030c1031
+< 		   psDBF->fp ) != 1) error("binary read error");
+---
+> 		   psDBF->fp ) != 1) error(_("binary read error"));
+1200c1201
+< 		   1, psDBF->fp ) != 1) error("binary read error");
+---
+> 		   1, psDBF->fp ) != 1) error(_("binary read error"));
+1347c1348
+< 		   1, psDBF->fp ) != 1) error("binary read error");
+---
+> 		   1, psDBF->fp ) != 1) error(_("binary read error"));
+1392c1393
+< 		   1, psDBF->fp ) != 1) error("binary read error");
+---
+> 		   1, psDBF->fp ) != 1) error(_("binary read error"));
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/foreign/src/file-handle.c R-recommended-moje/foreign/src/file-handle.c
+27a28
+> #include "localization.h"
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/foreign/src/foreign.h R-recommended-moje/foreign/src/foreign.h
+32,40d31
+< #ifdef ENABLE_NLS
+< #include <libintl.h>
+< #define _(String) dgettext ("foreign", String)
+< #define gettext_noop(String) (String)
+< #else
+< #define _(String) (String)
+< #define gettext_noop(String) (String)
+< #endif
+< 
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/foreign/src/format.c R-recommended-moje/foreign/src/format.c
+24a25
+> #include "localization.h"
+221c222
+< 	    error("convert_fmt_ItoO : assert failed");
+---
+> 	    error(_("convert_fmt_ItoO: assert failed"));
+243c244
+<       error("convert_fmt_ItoO : invalid input->type : %d", input->type);
+---
+>       error(_("convert_fmt_ItoO: invalid input->type: %d"), input->type);
+277c278
+<       error("convert_fmt_ItoO : invalid input->type : %d", input->type);
+---
+>       error(_("convert_fmt_ItoO: invalid input->type: %d"), input->type);
+Tylko w R-recommended-moje/foreign/src: localization.h
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/foreign/src/minitab.c R-recommended-moje/foreign/src/minitab.c
+28a29
+> #include "localization.h"
+121,122c122
+< 	error(_("file '%s' is not in Minitab Portable Worksheet format"),
+< 	      CHAR(fname));
+---
+> 	error(_("file '%s' is not in Minitab Portable Worksheet format"), CHAR(fname));
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/foreign/src/pfm-read.c R-recommended-moje/foreign/src/pfm-read.c
+34a35
+> #include "localization.h"
+100c101
+<   "reading as a portable file",
+---
+>   N_("reading as a portable file"),
+226,227c227
+<       error(_("cannot read file %s as portable file: already opened for %s"),
+< 	   fh_handle_name (h), h->class->name);
+---
+>       error(_("cannot read file %s as portable file: already opened for %s"), fh_handle_name (h), h->class->name);
+242,243c242
+<       error(_("an error occurred while opening \"%s\" for reading as a portable file: %s"),
+< 	    h->fn, strerror (errno));
+---
+>       error(_("an error occurred while opening \"%s\" for reading as a portable file: %s"), h->fn, strerror (errno));
+646,650c645,658
+<     lose ((_("%s variable %s has %s format specifier %s"),
+< 	   vv->type == ALPHA ? "String" : "Numeric",
+< 	   vv->name,
+< 	   formats[v->type].cat & FCAT_STRING ? "string" : "numeric",
+< 	   formats[v->type].name));
+---
+>   {
+>     if(vv->type == ALPHA) {
+> 	if(formats[v->type].cat & FCAT_STRING)
+> 	 lose ((_("String variable %s has string format specifier %s"),  vv->name, formats[v->type].name));
+> 	else 
+> 	 lose ((_("String variable %s has numeric format specifier %s"), vv->name, formats[v->type].name));
+> 	}
+>     else {
+> 	if(formats[v->type].cat & FCAT_STRING)
+> 	 lose ((_("Numeric variable %s has string format specifier %s"),  vv->name, formats[v->type].name));
+> 	else 
+> 	 lose ((_("Numeric variable %s has numeric format specifier %s"), vv->name, formats[v->type].name));
+> 	}
+>   }
+749,750c757
+< 	lose ((_("position %d: Variable name has %u characters"),
+< 	       i, strlen ((char *) name)));
+---
+> 	lose ((_("position %d: Variable name has %u characters"), i, strlen ((char *) name)));
+753,754c760
+< 	lose ((_("position %d: Variable name begins with invalid character"),
+< 	       i));
+---
+> 	lose ((_("position %d: Variable name begins with invalid character"), i));
+757,758c763
+< 	  warning(_("position %d: Variable name begins with lowercase letter %c"),
+< 		  i, name[0] - 100 + 'a');
+---
+> 	  warning(_("position %d: Variable name begins with lowercase letter %c"), i, name[0] - 100 + 'a');
+769,770c774
+< 	      warning(_("position %d: Variable name character %d is lowercase letter %c"),
+< 		      i, j + 1, c - 100 + 'a');
+---
+> 	      warning(_("position %d: Variable name character %d is lowercase letter %c"), i, j + 1, c - 100 + 'a');
+778,779c782
+< 	    lose ((_("position %d: character `\\%03o' is not valid in a variable name"),
+< 		   i, c));
+---
+> 	    lose ((_("position %d: character `\\%03o' is not valid in a variable name"), i, c));
+857,858c860
+<     lose ((_("Weighting variable %s not present in dictionary"),
+< 	   ext->dict->weight_var));
+---
+>     lose ((_("Weighting variable %s not present in dictionary"), ext->dict->weight_var));
+928,929c930
+< 	lose ((_("Cannot assign value labels to %s and %s, which have different variable types or widths"),
+< 	       v[0]->name, v[i]->name));
+---
+> 	lose ((_("Cannot assign value labels to %s and %s, which have different variable types or widths"), v[0]->name, v[i]->name));
+974,975c975
+< 	    lose ((_("Duplicate label for value %g for variable %s"),
+< 		   vl->v.f, var->name));
+---
+> 	    lose ((_("Duplicate label for value %g for variable %s"), vl->v.f, var->name));
+977,978c977
+< 	    lose ((_("Duplicate label for value `%.*s' for variable %s"),
+< 		   var->width, vl->v.s, var->name));
+---
+> 	    lose ((_("Duplicate label for value '%.*s' for variable %s"), var->width, vl->v.s, var->name));
+1076c1075
+<   "reading as a portable file",
+---
+>   N_("reading as a portable file"),
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/foreign/src/Rdbfread.c R-recommended-moje/foreign/src/Rdbfread.c
+29a30
+> #include "localization.h"
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/foreign/src/Rdbfwrite.c R-recommended-moje/foreign/src/Rdbfwrite.c
+30c30
+< 
+---
+> #include "localization.h"
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/foreign/src/R_systat.c R-recommended-moje/foreign/src/R_systat.c
+100a101
+> #include "localization.h"
+131,132c132
+< 	sprintf(msg, _("not a rectangular data file (%s mtype is %d)"),
+< 		CHAR(STRING_ELT(file, 0)), getmtype(use));
+---
+> 	sprintf(msg, _("not a rectangular data file (%s mtype is %d)"), CHAR(STRING_ELT(file, 0)), getmtype(use));
+334c334
+< 	    sprintf(tmp, "Getuse: failure reading byte %d", end);
+---
+> 	    sprintf(tmp, _("Getuse: failure reading byte %d"), end);
+346c346
+< 	sprintf(tmp, "Getuse: last byte = %o octal", k);
+---
+> 	sprintf(tmp, _("Getuse: last byte = %o octal"), k);
+503,504c503
+< 	    sprintf(tmp1, _("getlab: byte lab[%d]0 = %o, nv=%d"),
+< 		    j, o, u->h.nv);
+---
+> 	    sprintf(tmp1, _("getlab: byte lab[%d]0 = %o, nv=%d"), j, o, u->h.nv);
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/foreign/src/SASxport.c R-recommended-moje/foreign/src/SASxport.c
+29a30
+> #include "localization.h"
+610,611c611
+< 	error(_("problem reading SAS XPORT file '%s'"),
+< 	      CHAR(STRING_ELT(xportFile, 0)));
+---
+> 	error(_("problem reading SAS XPORT file '%s'"), CHAR(STRING_ELT(xportFile, 0)));
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/foreign/src/sfm-read.c R-recommended-moje/foreign/src/sfm-read.c
+32a33
+> #include "localization.h"
+135c136
+<   "reading as a system file",
+---
+>   N_("reading as a system file"),
+161c162
+<   if (!(ext->opened == 0)) error("assert failed : ext->opened == 0");
+---
+>   if (!(ext->opened == 0)) error(_("assert failed : ext->opened == 0"));
+220c221
+<   if (!(v->ref_count >= 1)) error("assert failed : v->ref_count >= 1");
+---
+>   if (!(v->ref_count >= 1)) error(_("assert failed : v->ref_count >= 1"));
+295,296c296
+<       error(_("cannot read file %s as system file: already opened for %s"),
+< 	    fh_handle_name (h), h->class->name);
+---
+>       error(_("cannot read file %s as system file: already opened for %s"), fh_handle_name (h), h->class->name);
+310,311c310
+<       error(_("An error occurred while opening '%s' for reading as a system file: %s"),
+< 	    h->fn, strerror (errno));
+---
+>       error(_("An error occurred while opening '%s' for reading as a system file: %s"), h->fn, strerror (errno));
+343,344c342
+< 	lose ((_("%s: Weighting variable may not be a string variable"),
+< 	       h->fn));
+---
+> 	lose ((_("%s: Weighting variable may not be a string variable"), h->fn));
+368,369c366
+< 	  lose ((_("%s: Orphaned variable index record (type 4).  Type 4 records must always immediately follow type 3 records"),
+< 		 h->fn));
+---
+> 	  lose ((_("%s: Orphaned variable index record (type 4). Type 4 records must always immediately follow type 3 records"), h->fn));
+472c469
+<   warning ("Read system-file dictionary successfully");
+---
+>   warning(_("Read system-file dictionary successfully"));
+504,505c501
+<     lose ((_("%s: Bad size (%d) or count (%d) field on record type 7, subtype 3.	Expected size %d, count 8"),
+< 	h->fn, size, count, sizeof (R_int32)));
+---
+>     lose ((_("%s: Bad size (%d) or count (%d) field on record type 7, subtype 3. Expected size %d, count 8"), h->fn, size, count, sizeof (R_int32)));
+520c516
+<       if (!(0)) error("assert failed : 0");
+---
+>       if (!(0)) error(_("assert failed : 0"));
+533c529
+< 	if (!(0)) error("assert failed : 0");
+---
+> 	if (!(0)) error(_("assert failed : 0"));
+571,572c567
+<     lose ((_("%s: Bad size (%d) or count (%d) field on record type 7, subtype 4.	Expected size %d, count 8"),
+< 	   h->fn, size, count, sizeof (R_flt64)));
+---
+>     lose ((_("%s: Bad size (%d) or count (%d) field on record type 7, subtype 4. Expected size %d, count 8"), h->fn, size, count, sizeof (R_flt64)));
+611,613c606
+<     warning("%s: strange record info seen, size=%u, count=%u"
+<       ", ignoring long variable names"
+<       , h->fn, size, count);
+---
+>     warning(_("%s: strange record info seen, size=%u, count=%u, ignoring long variable names"), h->fn, size, count);
+626c619
+<       warning("%s: no long variable name for variable '%s'", h->fn, p);
+---
+>       warning(_("%s: no long variable name for variable '%s'"), h->fn, p);
+638,640c631
+<         warning("%s: long variable name mapping '%s' to '%s'"
+<         "for variable which does not exist"
+<         , h->fn, p, val);
+---
+>         warning(_("%s: long variable name mapping '%s' to '%s' for variable which does not exist"), h->fn, p, val);
+693,694c684
+<     lose ((_("%s: Bad magic.  Proper system files begin with the four characters `$FL2'. This file will not be read"),
+< 	   h->fn));
+---
+>     lose ((_("%s: Bad magic. Proper system files begin with the four characters `$FL2'. This file will not be read"), h->fn));
+1108,1113c1098,1115
+<   if ((vv->type == ALPHA) ^ ((formats[v->type].cat & FCAT_STRING) != 0))
+<     lose ((_("%s: %s variable %s has %s format specifier %s"),
+< 	   h->fn, vv->type == ALPHA ? "String" : "Numeric",
+< 	   vv->name,
+< 	   formats[v->type].cat & FCAT_STRING ? "string" : "numeric",
+< 	   formats[v->type].name));
+---
+>   if ((vv->type == ALPHA) ^ ((formats[v->type].cat & FCAT_STRING) != 0)) {
+>     if(vv->type == ALPHA) {
+>         if(formats[v->type].cat & FCAT_STRING)
+>          lose ((_("%s: String variable %s has string format specifier %s"),
+>            h->fn, vv->name, formats[v->type].name));
+>         else
+>          lose ((_("%s: String variable %s has numeric format specifier %s"),
+>            h->fn, vv->name, formats[v->type].name));
+>         }
+>     else {
+>         if(formats[v->type].cat & FCAT_STRING)
+>          lose ((_("%s: Numeric variable %s has string format specifier %s"),
+>            h->fn, vv->name, formats[v->type].name));
+>         else
+>          lose ((_("%s: Numeric variable %s has numeric format specifier %s"),
+>            h->fn, vv->name, formats[v->type].name));
+>         }
+>   }
+1231,1234c1233,1240
+<     if (var[i]->type != var[0]->type)
+<       lose ((_("%s: Variables associated with value label are not all of identical type.  Variable %s has %s type, but variable %s has %s type"), h->fn,
+< 	     var[0]->name, var[0]->type == ALPHA ? "string" : "numeric",
+< 	     var[i]->name, var[i]->type == ALPHA ? "string" : "numeric"));
+---
+>     if (var[i]->type != var[0]->type) {
+>      if(var[0]->type == ALPHA)
+>       lose ((_("%s: Variables associated with value label are not all of identical type. Variable %s has string type, but variable %s has numeric type"), h->fn,
+> 	     var[0]->name, var[i]->name));
+>      else
+>       lose ((_("%s: Variables associated with value label are not all of identical type. Variable %s has numeric type, but variable %s has string type"), h->fn,
+> 	     var[0]->name, var[i]->name));
+>     }
+1426c1432
+<           if (!(0)) warning("assert failed : 0");
+---
+>           if (!(0)) warning(_("assert failed : 0"));
+1580c1586
+<   if (!(dict->nval > 0)) error("assert failed : dict->nval > 0");
+---
+>   if (!(dict->nval > 0)) error(_("assert failed : dict->nval > 0"));
+1636c1642
+<   "reading as a system file",
+---
+>   N_("reading as a system file"),
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/foreign/src/spss.c R-recommended-moje/foreign/src/spss.c
+28a29
+> #include "localization.h"
+681,682c682
+< 	    error(_("file '%s' is not in any supported SPSS format"),
+< 		  filename);
+---
+> 	    error(_("file '%s' is not in any supported SPSS format"), filename);
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/foreign/src/stataread.c R-recommended-moje/foreign/src/stataread.c
+45a46
+> #include "localization.h"
+459c460
+< 			warning("invalid character string length -- truncating to 244 bytes");
+---
+> 			warning(_("invalid character string length -- truncating to 244 bytes"));
+491c492
+< 			warning("invalid character string length -- truncating to 244 bytes");
+---
+> 			warning(_("invalid character string length -- truncating to 244 bytes"));
+801c802
+< 		    warning("character strings of >244 bytes in column %d will be truncated", i+1);
+---
+> 		    warning(_("character strings of >244 bytes in column %d will be truncated"), i+1);
+831c832
+< 		    warning("character strings of >244 bytes in column %d will be truncated", i+1);
+---
+> 		    warning(_("character strings of >244 bytes in column %d will be truncated"), i+1);
+968c969
+< 		    error("empty string is not valid in Stata's documented format");
+---
+> 		    error(_("empty string is not valid in Stata's documented format"));

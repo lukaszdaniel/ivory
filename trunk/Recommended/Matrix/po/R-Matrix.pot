@@ -1,0 +1,2131 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Matrix 1.1-4\n"
+"POT-Creation-Date: 2014-07-13 09:15\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: gettextf("%3g duplicated (i,j) pairs", m)
+
+msgid "%3g duplicated (i,j) pairs"
+msgstr ""
+
+
+#: R/Auxiliaries.R: 0
+#. R/Auxiliaries.R: gettextf("%d x %d Matrix of class \"%s\"", d[1], d[2], cl, domain = "R-Matrix")
+
+msgid "%d x %d Matrix of class \"%s\""
+msgstr ""
+
+
+#: R/Auxiliaries.R: 0
+#. R/Auxiliaries.R: gettextf("%d x %d Matrix of class \"%s\" (unitriangular)", d[1], d[2], cl, domain = "R-Matrix")
+
+msgid "%d x %d Matrix of class \"%s\" (unitriangular)"
+msgstr ""
+
+
+#: R/diagMatrix.R: 0
+#. R/diagMatrix.R: gettextf("%d x %d diagonal matrix of class %s", d[1], d[2], dQuote(cl), domain = "R-Matrix")
+#. R/diagMatrix.R: gettextf("%d x %d diagonal matrix of class %s", d[1], d[2], dQuote(class(object)),     domain = "R-Matrix")
+
+msgid "%d x %d diagonal matrix of class %s"
+msgstr ""
+
+
+#: R/diagMatrix.R: 0
+#. R/diagMatrix.R: gettextf("%d x %d diagonal matrix of class %s, with diagonal entries", d[1], d[2],     dQuote(cl), domain = "R-Matrix")
+
+msgid "%d x %d diagonal matrix of class %s, with diagonal entries"
+msgstr ""
+
+
+#: R/Ops.R: 0
+#. R/Ops.R: gettext("%s %s <Matrix> is undefined", domain = "R-Matrix")
+
+msgid "%s %s <Matrix> is undefined"
+msgstr ""
+
+
+#: R/diagMatrix.R: 0
+#. R/diagMatrix.R: gettextf("%s kind not yet implemented", sQuote(kind))
+
+msgid "%s kind not yet implemented"
+msgstr ""
+
+
+#: R/HBMM.R: 0
+#. R/HBMM.R: gettext("'%s()' is not yet implemented for element type '%s'", domain = "R-Matrix")
+
+msgid "'%s()' is not yet implemented for element type '%s'"
+msgstr ""
+
+
+#: R/HBMM.R: 0
+#. R/HBMM.R: gettext("'%s()' is not yet implemented for representation '%s'", domain = "R-Matrix")
+
+msgid "'%s()' is not yet implemented for representation '%s'"
+msgstr ""
+
+
+#: R/condest.R: 0
+#. R/condest.R: stop("'A' must be a square matrix")
+#. R/condest.R: stop("'A' must be a square matrix")
+
+msgid "'A' must be a square matrix"
+msgstr ""
+
+
+#: R/MatrixFactorization.R: 0
+#. R/MatrixFactorization.R: gettext("'Bunch-Kaufman' factorization of:", domain = "R-Matrix")
+
+msgid "'Bunch-Kaufman' factorization of:"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("'Dim' slot is not (n,n)", domain = "R-Matrix")
+
+msgid "'Dim' slot is not (n,n)"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("'Dimnames' slot must be list of length 2", domain = "R-Matrix")
+
+msgid "'Dimnames' slot must be list of length 2"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("'EValues' is not of correct length", domain = "R-Matrix")
+
+msgid "'EValues' is not of correct length"
+msgstr ""
+
+
+#: R/MatrixFactorization.R: 0
+#. R/MatrixFactorization.R: gettext("'MatrixFactorization' of:", domain = "R-Matrix")
+
+msgid "'MatrixFactorization' of:"
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#. R/Tsparse.R: stop("'NA' indices are not (yet?) supported for sparse Matrices")
+
+msgid "'NA' indices are not (yet?) supported for sparse Matrices"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: stop("'V' is not a *square* matrix")
+
+msgid "'V' is not a *square* matrix"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: stop("'V' is not a square matrix")
+
+msgid "'V' is not a square matrix"
+msgstr ""
+
+
+#: R/abIndex.R: 0
+#. R/abIndex.R: stop("'by' argument is much too small")
+
+msgid "'by' argument is much too small"
+msgstr ""
+
+
+#: R/bandSparse.R: 0
+#. R/bandSparse.R: gettextf("'diagonals' must have the same length (%d) as 'k'", len.k)
+
+msgid "'diagonals' must have the same length (%d) as 'k'"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("'dim(Q)' is incorrect", domain = "R-Matrix")
+
+msgid "'dim(Q)' is incorrect"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("'dim(T)' is incorrect", domain = "R-Matrix")
+
+msgid "'dim(T)' is incorrect"
+msgstr ""
+
+
+#: R/HBMM.R: 0
+#. R/HBMM.R: stop("'file' must be a character string or connection")
+#. R/HBMM.R: stop("'file' must be a character string or connection")
+
+msgid "'file' must be a character string or connection"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("'first' must be of length one", domain = "R-Matrix")
+
+msgid "'first' must be of length one"
+msgstr ""
+
+
+#: R/abIndex.R: 0
+#. R/abIndex.R: stop("'force' must be (coercable to) TRUE or FALSE")
+
+msgid "'force' must be (coercable to) TRUE or FALSE"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("'i' and 'x' differ in length", domain = "R-Matrix")
+
+msgid "'i' and 'x' differ in length"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettextf("'i' must be in 1:%d", n, domain = "R-Matrix")
+
+msgid "'i' must be in 1:%d"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("'i' must be sorted strictly increasingly", domain = "R-Matrix")
+
+msgid "'i' must be sorted strictly increasingly"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("'i' slot is not all finite", domain = "R-Matrix")
+
+msgid "'i' slot is not all finite"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("'kind' must be one of (\"int32\", \"double\", \"rleDiff\")", domain = "R-Matrix")
+
+msgid "'kind' must be one of (\"int32\", \"double\", \"rleDiff\")"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: stop("'lag' and 'differences' must be integers >= 1")
+
+msgid "'lag' and 'differences' must be integers >= 1"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("'lengths' and 'values' differ in length", domain = "R-Matrix")
+
+msgid "'lengths' and 'values' differ in length"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("'lengths' must be positive", domain = "R-Matrix")
+
+msgid "'lengths' must be positive"
+msgstr ""
+
+
+#: R/dgTMatrix.R: 0
+#. R/dgTMatrix.R: stop("'lwd' must be NULL or non-negative numeric")
+
+msgid "'lwd' must be NULL or non-negative numeric"
+msgstr ""
+
+
+#: R/sparseVector.R: 0
+#. R/sparseVector.R: warning("'ncol' is not a factor of length(x)")
+
+msgid "'ncol' is not a factor of length(x)"
+msgstr ""
+
+
+#: R/sparseVector.R: 0
+#. R/sparseVector.R: stop("'ncol' must be >= 0")
+
+msgid "'ncol' must be >= 0"
+msgstr ""
+
+
+#: R/nearPD.R: 0
+#. R/nearPD.R: gettextf("'nearPD()' did not converge in %d iterations", iter)
+
+msgid "'nearPD()' did not converge in %d iterations"
+msgstr ""
+
+
+#: R/sparseVector.R: 0
+#. R/sparseVector.R: stop("'nrow' and 'ncol' must be the same when 'symmetric' is true")
+
+msgid "'nrow' and 'ncol' must be the same when 'symmetric' is true"
+msgstr ""
+
+
+#: R/sparseVector.R: 0
+#. R/sparseVector.R: warning("'nrow' is not a factor of length(x)")
+
+msgid "'nrow' is not a factor of length(x)"
+msgstr ""
+
+
+#: R/sparseVector.R: 0
+#. R/sparseVector.R: stop("'nrow' must be >= 0")
+
+msgid "'nrow' must be >= 0"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: warning("'nrow', 'ncol', etc, are disregarded for matrix 'data'")
+
+msgid "'nrow', 'ncol', etc, are disregarded for matrix 'data'"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: warning("'nrow', 'ncol', etc, are disregarded when 'data' is \"Matrix\" already")
+
+msgid "'nrow', 'ncol', etc, are disregarded when 'data' is \"Matrix\" already"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("'object' argument is not a 3 x n matrix", domain = "R-Matrix")
+
+msgid "'object' argument is not a 3 x n matrix"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("'object' argument is not numeric", domain = "R-Matrix")
+
+msgid "'object' argument is not numeric"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: stop("'p' must be a non-decreasing vector (0, ...)")
+
+msgid "'p' must be a non-decreasing vector (0, ...)"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("'perm' slot is not a valid permutation", domain = "R-Matrix")
+
+msgid "'perm' slot is not a valid permutation"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("'rle' must be a list (lengths = *, values = *)", domain = "R-Matrix")
+
+msgid "'rle' must be a list (lengths = *, values = *)"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("'sd' slot has negative entries", domain = "R-Matrix")
+
+msgid "'sd' slot has negative entries"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("'sd' slot has non-finite entries", domain = "R-Matrix")
+
+msgid "'sd' slot has non-finite entries"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("'sd' slot must be of length 'dim(.)[1]'", domain = "R-Matrix")
+
+msgid "'sd' slot must be of length 'dim(.)[1]'"
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#. R/Tsparse.R: gettextf("'sub-optimal sparse 'x[i] <- v' assignment: Coercing class %s to %s", dQuote(cl),     dQuote(class(x)), domain = "R-Matrix")
+
+msgid "'sub-optimal sparse 'x[i] <- v' assignment: Coercing class %s to %s"
+msgstr ""
+
+
+#: R/sparseVector.R: 0
+#. R/sparseVector.R: stop("'times >= 0' is required")
+
+msgid "'times >= 0' is required"
+msgstr ""
+
+
+#: R/CHMfactor.R: 0
+#. R/CHMfactor.R: stop("'update' must be logical or '+' or '-'; 'C' a matrix, and 'L' a \"CHMfactor\"")
+
+msgid "'update' must be logical or '+' or '-'; 'C' a matrix, and 'L' a \"CHMfactor\""
+msgstr ""
+
+
+#: R/diagMatrix.R: 0
+#. R/diagMatrix.R: stop("'x' has invalid data type")
+
+msgid "'x' has invalid data type"
+msgstr ""
+
+
+#: R/Auxiliaries.R: 0
+#: R/dsparseMatrix.R: 0
+#. R/Auxiliaries.R: stop("'x' is not positive definite -- chol() undefined.")
+#. R/dsparseMatrix.R: stop("'x' is not positive definite -- chol() undefined.")
+
+msgid "'x' is not positive definite -- chol() undefined."
+msgstr ""
+
+
+#: R/symmetricMatrix.R: 0
+#. R/symmetricMatrix.R: stop("'x' is not symmetric nor triangular")
+
+msgid "'x' is not symmetric nor triangular"
+msgstr ""
+
+
+#: R/Auxiliaries.R: 0
+#. R/Auxiliaries.R: gettext("'x' must be \"sparseMatrix\"")
+
+msgid "'x' must be \"sparseMatrix\""
+msgstr ""
+
+
+#: R/sparseVector.R: 0
+#. R/sparseVector.R: stop("'x' must have length nrow^2 when 'symmetric' is true")
+
+msgid "'x' must have length nrow^2 when 'symmetric' is true"
+msgstr ""
+
+
+#: R/sparseVector.R: 0
+#. R/sparseVector.R: stop("'x' must inherit from \"sparseVector\"")
+
+msgid "'x' must inherit from \"sparseVector\""
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("'x' slot must be double when kind is 'double'", domain = "R-Matrix")
+
+msgid "'x' slot must be double when kind is 'double'"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("'x' slot must be empty when kind is 'rleDiff'", domain = "R-Matrix")
+
+msgid "'x' slot must be empty when kind is 'rleDiff'"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("'x' slot must be integer when kind is 'int32'", domain = "R-Matrix")
+
+msgid "'x' slot must be integer when kind is 'int32'"
+msgstr ""
+
+
+#: R/symmetricMatrix.R: 0
+#. R/symmetricMatrix.R: sprintf("(un)packing only applies to dense matrices, class(x)='%s'", cx)
+#. R/symmetricMatrix.R: sprintf("(un)packing only applies to dense matrices, class(x)='%s'", class(x))
+
+msgid "(un)packing only applies to dense matrices, class(x)='%s'"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: stop(".M.repl.i.2col(): 'i' has no integer column number;\n should never happen; please report")
+
+msgid ".M.repl.i.2col(): 'i' has no integer column number;\n should never happen; please report"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: message(".M.repl.i.2col(): drop 'matrix' case ...")
+
+msgid ".M.repl.i.2col(): drop 'matrix' case ..."
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: stop(".M.sub.i.2col(): 'i' has no integer column number;\n should never happen; please report")
+
+msgid ".M.sub.i.2col(): 'i' has no integer column number;\n should never happen; please report"
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#. R/Tsparse.R: gettext(".TM.repl.i.mat(): \"lMatrix\" case ...", domain = "R-Matrix")
+
+msgid ".TM.repl.i.mat(): \"lMatrix\" case ..."
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#. R/Tsparse.R: gettext(".TM.repl.i.mat(): drop 'matrix' case ...", domain = "R-Matrix")
+
+msgid ".TM.repl.i.mat(): drop 'matrix' case ..."
+msgstr ""
+
+
+#: R/Ops.R: 0
+#. R/Ops.R: gettext("<Matrix> %s %s is undefined", domain = "R-Matrix")
+#. R/Ops.R: gettext("<Matrix> %s %s is undefined", domain = "R-Matrix")
+#. R/Ops.R: gettext("<Matrix> %s %s is undefined", domain = "R-Matrix")
+
+msgid "<Matrix> %s %s is undefined"
+msgstr ""
+
+
+#: R/abIndex.R: 0
+#. R/abIndex.R: stop("<abIndex>  -->  <seqMat> is not yet implemented")
+
+msgid "<abIndex>  -->  <seqMat> is not yet implemented"
+msgstr ""
+
+
+#: R/abIndex.R: 0
+#. R/abIndex.R: stop("<abIndex>[i] is not yet implemented")
+
+msgid "<abIndex>[i] is not yet implemented"
+msgstr ""
+
+
+#: R/abIndex.R: 0
+#. R/abIndex.R: stop("<seqMat>  -->  <abIndex> is not yet implemented")
+
+msgid "<seqMat>  -->  <abIndex> is not yet implemented"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: message("<sparse>[ <logic> ] : .M.sub.i.logical() maybe inefficient")
+
+msgid "<sparse>[ <logic> ] : .M.sub.i.logical() maybe inefficient"
+msgstr ""
+
+
+#: R/abIndex.R: 0
+#. R/abIndex.R: gettextf("Abstract Index vector (class 'abIndex') of length %.0f, kind \"%s\"\n and \"x\" slot",     length(object), knd, domain = "R-Matrix")
+
+msgid "Abstract Index vector (class 'abIndex') of length %.0f, kind \"%s\"\n and \"x\" slot"
+msgstr ""
+
+
+#: R/abIndex.R: 0
+#. R/abIndex.R: gettextf("Abstract Index vector (class 'abIndex') of length %.0f, kind \"%s\"\n and slot \"rleD\":",     length(object), knd, domain = "R-Matrix")
+
+msgid "Abstract Index vector (class 'abIndex') of length %.0f, kind \"%s\"\n and slot \"rleD\":"
+msgstr ""
+
+
+#: R/Csparse.R: 0
+#. R/Csparse.R: stop("Cholesky(<nsparse...>) -> *symbolic* factorization -- not yet implemented")
+
+msgid "Cholesky(<nsparse...>) -> *symbolic* factorization -- not yet implemented"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: gettextf("Cholesky(A) called for 'A' of class \"%s\";\n\t it is currently defined for sparseMatrix only; consider using chol() instead",     class(A))
+
+msgid "Cholesky(A) called for 'A' of class \"%s\";\n\t it is currently defined for sparseMatrix only; consider using chol() instead"
+msgstr ""
+
+
+#: R/sparseVector.R: 0
+#. R/sparseVector.R: gettextf("Class %s is not yet implemented", dQuote(cNam))
+
+msgid "Class %s is not yet implemented"
+msgstr ""
+
+
+#: R/Ops.R: 0
+#. R/Ops.R: stop("Cmp.Mat.atomic() should not be called for diagonalMatrix")
+
+msgid "Cmp.Mat.atomic() should not be called for diagonalMatrix"
+msgstr ""
+
+
+#: R/dgTMatrix.R: 0
+#. R/dgTMatrix.R: gettext("Column")
+
+msgid "Column"
+msgstr ""
+
+
+#: R/Ops.R: 0
+#. R/Ops.R: gettextf("Compare <Csparse> -- \"%s\" %s \"%s\" :\n", cD1@className, .Generic, cD2@className,     domain = "R-Matrix")
+
+msgid "Compare <Csparse> -- \"%s\" %s \"%s\" :"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("Dim slot must be of length 2", domain = "R-Matrix")
+
+msgid "Dim slot must be of length 2"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("Dim slot must contain non-negative values", domain = "R-Matrix")
+
+msgid "Dim slot must contain non-negative values"
+msgstr ""
+
+
+#: R/dgTMatrix.R: 0
+#. R/dgTMatrix.R: gettextf("Dimensions: %d x %d", di[1], di[2])
+
+msgid "Dimensions: %d x %d"
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#. R/Tsparse.R: stop("FIXME: NOT YET FINISHED IMPLEMENTATION")
+
+msgid "FIXME: NOT YET FINISHED IMPLEMENTATION"
+msgstr ""
+
+
+#: R/diagMatrix.R: 0
+#. R/diagMatrix.R: gettextf("Internal bug: nargs()=%d; please report", na)
+
+msgid "Internal bug: nargs()=%d; please report"
+msgstr ""
+
+
+#: R/HBMM.R: 0
+#. R/HBMM.R: gettextf("Invalid assembled indicator: %s", t3)
+
+msgid "Invalid assembled indicator: %s"
+msgstr ""
+
+
+#: R/HBMM.R: 0
+#. R/HBMM.R: gettextf("Invalid storage format: %s", t2)
+
+msgid "Invalid storage format: %s"
+msgstr ""
+
+
+#: R/HBMM.R: 0
+#. R/HBMM.R: gettextf("Invalid storage type: %s", t1)
+
+msgid "Invalid storage type: %s"
+msgstr ""
+
+
+#: R/dgCMatrix.R: 0
+#. R/dgCMatrix.R: gettextf("LU computationally singular: ratio of extreme entries in |diag(U)| = %9.4g",     rU[1]/rU[2])
+
+msgid "LU computationally singular: ratio of extreme entries in |diag(U)| = %9.4g"
+msgstr ""
+
+
+#: R/Ops.R: 0
+#. R/Ops.R: stop("Logic.Mat.atomic() should not be called for diagonalMatrix")
+
+msgid "Logic.Mat.atomic() should not be called for diagonalMatrix"
+msgstr ""
+
+
+#: R/Auxiliaries.R: 0
+#. R/Auxiliaries.R: gettextf("Matrices must have same dimensions in %s", deparse(sys.call(sys.parent())))
+
+msgid "Matrices must have same dimensions in %s"
+msgstr ""
+
+
+#: R/Auxiliaries.R: 0
+#: R/bind2.R: 0
+#. R/Auxiliaries.R: gettextf("Matrices must have same number of columns in %s", deparse(sys.call(sys.parent())))
+#. R/bind2.R: gettextf("Matrices must have same number of columns in %s", deparse(sys.call(sys.parent())))
+
+msgid "Matrices must have same number of columns in %s"
+msgstr ""
+
+
+#: R/Ops.R: 0
+#. R/Ops.R: stop("Matrices must have same number of rows for arithmetic")
+
+msgid "Matrices must have same number of rows for arithmetic"
+msgstr ""
+
+
+#: R/Auxiliaries.R: 0
+#. R/Auxiliaries.R: gettextf("Matrices must have same number of rows in %s", deparse(sys.call(sys.parent())))
+
+msgid "Matrices must have same number of rows in %s"
+msgstr ""
+
+
+#: R/nearPD.R: 0
+#. R/nearPD.R: stop("Matrix seems negative semi-definite")
+
+msgid "Matrix seems negative semi-definite"
+msgstr ""
+
+
+#: R/Csparse.R: 0
+#. R/Csparse.R: stop("Matrix-internal error in <CsparseM>[i,,d]; please report")
+
+msgid "Matrix-internal error in <CsparseM>[i,,d]; please report"
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#. R/Tsparse.R: stop("Matrix-internal error in <TsparseM>[i,,d]; please report")
+
+msgid "Matrix-internal error in <TsparseM>[i,,d]; please report"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: stop("Matrix-internal error in <sparseM>[i,,d]; please report")
+
+msgid "Matrix-internal error in <sparseM>[i,,d]; please report"
+msgstr ""
+
+
+#: R/sparseVector.R: 0
+#. R/sparseVector.R: stop("Must specify 'nrow' when 'symmetric' is true")
+
+msgid "Must specify 'nrow' when 'symmetric' is true"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: stop("NA's in (i,j) are not allowed")
+
+msgid "NA's in (i,j) are not allowed"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#: R/Tsparse.R: 0
+#. R/Matrix.R: stop("NAs are not allowed in subscripted assignments")
+#. R/Tsparse.R: stop("NAs are not allowed in subscripted assignments")
+
+msgid "NAs are not allowed in subscripted assignments"
+msgstr ""
+
+
+#: R/HBMM.R: 0
+#. R/HBMM.R: stop("Not a valid format")
+
+msgid "Not a valid format"
+msgstr ""
+
+
+#: R/HBMM.R: 0
+#. R/HBMM.R: stop("Only numeric sparse matrices allowed")
+
+msgid "Only numeric sparse matrices allowed"
+msgstr ""
+
+
+#: R/CHMfactor.R: 0
+#. R/CHMfactor.R: gettext("Quadratic matrix '%s' (=: A) is not formally symmetric. Will be treated as A A'",     domain = "R-Matrix")
+
+msgid "Quadratic matrix '%s' (=: A) is not formally symmetric. Will be treated as A A'"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: gettextf("RHS 'value' (class %s) matches 'ANY', but must match matrix class %s",     class(value), class(x))
+
+msgid "RHS 'value' (class %s) matches 'ANY', but must match matrix class %s"
+msgstr ""
+
+
+#: R/abIndex.R: 0
+#. R/abIndex.R: gettextf(" RLE difference (class 'rleDiff'): first = %s, \"rle\":%s", format(object@first),     if (length(rl <- object@rle)) "\n" else " ", domain = "R-Matrix")
+
+msgid "RLE difference (class 'rleDiff'): first = %s, \"rle\":%s"
+msgstr ""
+
+
+#: R/dgTMatrix.R: 0
+#. R/dgTMatrix.R: gettext("Row")
+
+msgid "Row"
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#. R/Tsparse.R: stop("[ <character> ] indexing not allowed: forgot a \",\" ?")
+
+msgid "[ <character> ] indexing not allowed: forgot a \",\" ?"
+msgstr ""
+
+
+#: R/Auxiliaries.R: 0
+#. R/Auxiliaries.R: gettext("   [[ suppressing %d column names %s ... ]]", domain = "R-Matrix")
+
+msgid "[[ suppressing %d column names %s ... ]]"
+msgstr ""
+
+
+#: R/Auxiliaries.R: 0
+#. R/Auxiliaries.R: gettext("   [[ suppressing %d column names %s ]]", domain = "R-Matrix")
+
+msgid "[[ suppressing %d column names %s ]]"
+msgstr ""
+
+
+#: R/abIndex.R: 0
+#. R/abIndex.R: gettextf("abIndex: lengths (%d, %d) differ", lt, lc, domain = "R-Matrix")
+
+msgid "abIndex: lengths (%d, %d) differ"
+msgstr ""
+
+
+#: R/abIndex.R: 0
+#. R/abIndex.R: stop("all(<abIndex>) is not yet implemented")
+
+msgid "all(<abIndex>) is not yet implemented"
+msgstr ""
+
+
+#: R/dsCMatrix.R: 0
+#. R/dsCMatrix.R: warning("as(.,\"dsCMatrix\") is deprecated (since 2008); do use as(., \"symmetricMatrix\")")
+
+msgid "as(.,\"dsCMatrix\") is deprecated (since 2008); do use as(., \"symmetricMatrix\")"
+msgstr ""
+
+
+#: R/abIndex.R: 0
+#. R/abIndex.R: warning("c(<abIndex>,..) of different kinds, coercing all to 'rleDiff'")
+
+msgid "c(<abIndex>,..) of different kinds, coercing all to 'rleDiff'"
+msgstr ""
+
+
+#: R/ngTMatrix.R: 0
+#. R/ngTMatrix.R: stop("cannot coerce 'NA's to \"nsparseMatrix\"")
+
+msgid "cannot coerce 'NA's to \"nsparseMatrix\""
+msgstr ""
+
+
+#: R/sparseVector.R: 0
+#. R/sparseVector.R: stop("cannot coerce 'NA's to \"nsparseVector\"")
+
+msgid "cannot coerce 'NA's to \"nsparseVector\""
+msgstr ""
+
+
+#: R/dgTMatrix.R: 0
+#. R/dgTMatrix.R: stop("cannot coerce non-symmetric \"dgTMatrix\" to \"dsCMatrix\" class")
+
+msgid "cannot coerce non-symmetric \"dgTMatrix\" to \"dsCMatrix\" class"
+msgstr ""
+
+
+#: R/diagMatrix.R: 0
+#. R/diagMatrix.R: stop("chol() is undefined for diagonal matrix with negative entries")
+
+msgid "chol() is undefined for diagonal matrix with negative entries"
+msgstr ""
+
+
+#: R/Auxiliaries.R: 0
+#. R/Auxiliaries.R: gettextf("class(target) is %s, current is %s", c1, c2, domain = "R-Matrix")
+
+msgid "class(target) is %s, current is %s"
+msgstr ""
+
+
+#: R/indMatrix.R: 0
+#. R/indMatrix.R: stop("coercion from list(i1,...,ik, d) to \"indMatrix\" failed.\n All entries must be integer valued and the number of columns, d, not smaller\n than the maximal index i*.")
+
+msgid "coercion from list(i1,...,ik, d) to \"indMatrix\" failed.\n All entries must be integer valued and the number of columns, d, not smaller\n than the maximal index i*."
+msgstr ""
+
+
+#: R/indMatrix.R: 0
+#. R/indMatrix.R: stop("coercion to \"indMatrix\" only works from integer numeric")
+
+msgid "coercion to \"indMatrix\" only works from integer numeric"
+msgstr ""
+
+
+#: R/pMatrix.R: 0
+#. R/pMatrix.R: stop("coercion to \"pMatrix\" only works from integer numeric")
+
+msgid "coercion to \"pMatrix\" only works from integer numeric"
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#. R/Tsparse.R: gettextf("column indices must be <= ncol(.) which is %d", nc)
+
+msgid "column indices must be <= ncol(.) which is %d"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: stop("complex matrices not yet implemented in Matrix package")
+
+msgid "complex matrices not yet implemented in Matrix package"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("diag = \"U\" (identity matrix) requires empty 'x' slot", domain = "R-Matrix")
+
+msgid "diag = \"U\" (identity matrix) requires empty 'x' slot"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#: R/sparseMatrix.R: 0
+#. R/Matrix.R: warning("diag(.) had 0 or NA entries; non-finite result is doubtful")
+#. R/sparseMatrix.R: warning("diag(.) had 0 or NA entries; non-finite result is doubtful")
+
+msgid "diag(.) had 0 or NA entries; non-finite result is doubtful"
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#. R/Tsparse.R: gettext("diagnosing replTmat(x,i,j,v): nargs()= 3; ", domain = "R-Matrix")
+
+msgid "diagnosing replTmat(x,i,j,v): nargs()= 3;"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("diagonal matrix 'diag' slot must be \"U\" or \"N\"", domain = "R-Matrix")
+
+msgid "diagonal matrix 'diag' slot must be \"U\" or \"N\""
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("diagonal matrix has 'x' slot of length != 'n'", domain = "R-Matrix")
+
+msgid "diagonal matrix has 'x' slot of length != 'n'"
+msgstr ""
+
+
+#: R/denseMatrix.R: 0
+#. R/denseMatrix.R: stop("diagonalMatrix in .dense2C() -- should never happen, please report!")
+
+msgid "diagonalMatrix in .dense2C() -- should never happen, please report!"
+msgstr ""
+
+
+#: R/Ops.R: 0
+#. R/Ops.R: sprintf("dim [product %d] do not match the length of object [%d]", n1, n2)
+#. R/Ops.R: sprintf("dim [product %d] do not match the length of object [%d]", n2, n1)
+
+msgid "dim [product %d] do not match the length of object [%d]"
+msgstr ""
+
+
+#: R/denseMatrix.R: 0
+#: R/sparseMatrix.R: 0
+#: R/sparseVector.R: 0
+#. R/denseMatrix.R: stop("dim(.) value must be numeric of length 2")
+#. R/sparseMatrix.R: stop("dim(.) value must be numeric of length 2")
+#. R/sparseVector.R: stop("dim(.) value must be numeric of length 2")
+
+msgid "dim(.) value must be numeric of length 2"
+msgstr ""
+
+
+#: R/denseMatrix.R: 0
+#: R/sparseMatrix.R: 0
+#: R/sparseVector.R: 0
+#. R/denseMatrix.R: stop("dimensions don't match the number of cells")
+#. R/sparseMatrix.R: stop("dimensions don't match the number of cells")
+#. R/sparseVector.R: stop("dimensions don't match the number of cells")
+
+msgid "dimensions don't match the number of cells"
+msgstr ""
+
+
+#: R/Auxiliaries.R: 0
+#. R/Auxiliaries.R: gettextf("dimnames [%d] mismatch in %s", j, deparse(sys.call(sys.parent())))
+
+msgid "dimnames [%d] mismatch in %s"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: message("dimnames(.) <- NULL:  translated to \ndimnames(.) <- list(NULL,NULL)  <==>  unname(.)")
+
+msgid "dimnames(.) <- NULL:  translated to \ndimnames(.) <- list(NULL,NULL)  <==>  unname(.)"
+msgstr ""
+
+
+#: R/HBMM.R: 0
+#. R/HBMM.R: gettextf("element type '%s' not recognized", elt)
+
+msgid "element type '%s' not recognized"
+msgstr ""
+
+
+#: R/HBMM.R: 0
+#. R/HBMM.R: stop("element type 'complex' not yet implemented")
+
+msgid "element type 'complex' not yet implemented"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: stop("exactly one of 'i', 'j', or 'p' must be missing from call")
+
+msgid "exactly one of 'i', 'j', or 'p' must be missing from call"
+msgstr ""
+
+
+#: R/diagMatrix.R: 0
+#. R/diagMatrix.R: gettext("exploding <diag> o <diag> into dense matrix", domain = "R-Matrix")
+
+msgid "exploding <diag> o <diag> into dense matrix"
+msgstr ""
+
+
+#: R/HBMM.R: 0
+#. R/HBMM.R: stop("file is not a MatrixMarket file")
+
+msgid "file is not a MatrixMarket file"
+msgstr ""
+
+
+#: R/bandSparse.R: 0
+#. R/bandSparse.R: stop("for symmetric band matrix, only specify upper or lower triangle\n hence, all k must have the same sign")
+
+msgid "for symmetric band matrix, only specify upper or lower triangle\n hence, all k must have the same sign"
+msgstr ""
+
+
+#: R/nsCMatrix.R: 0
+#. R/nsCMatrix.R: stop("function is temporarily disabled")
+
+msgid "function is temporarily disabled"
+msgstr ""
+
+
+#: R/Auxiliaries.R: 0
+#. R/Auxiliaries.R: gettextf("general Matrix class not yet implemented for %s", dQuote(class(x)))
+
+msgid "general Matrix class not yet implemented for %s"
+msgstr ""
+
+
+#: R/condest.R: 0
+#. R/condest.R: message("hit a cycle (1) -- stop iterations")
+
+msgid "hit a cycle (1) -- stop iterations"
+msgstr ""
+
+
+#: R/condest.R: 0
+#. R/condest.R: message("hit a cycle (2) -- stop iterations")
+
+msgid "hit a cycle (2) -- stop iterations"
+msgstr ""
+
+
+#: R/Csparse.R: 0
+#. R/Csparse.R: warning("i1[1] == 0 ==> C-level verbosity will not happen!")
+
+msgid "i1[1] == 0 ==> C-level verbosity will not happen!"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: gettextf("in Summary(<ANY>, .): %s(<%s>, <%s>)\n", .Generic, class(x), class(a[[1]]))
+
+msgid "in Summary(<ANY>, .): %s(<%s>, <%s>)"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: gettextf("in Summary(<ANY>, .): %s(<%s>, <%s>,...)\n", .Generic, class(x), class(a[[1]]))
+
+msgid "in Summary(<ANY>, .): %s(<%s>, <%s>,...)"
+msgstr ""
+
+
+#: R/diagMatrix.R: 0
+#. R/diagMatrix.R: stop("incompatible matrix dimensions")
+
+msgid "incompatible matrix dimensions"
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#. R/Tsparse.R: gettextf("index larger than maximal %d", n)
+#. R/Tsparse.R: gettextf("index larger than maximal %d", n)
+
+msgid "index larger than maximal %d"
+msgstr ""
+
+
+#: R/sparseVector.R: 0
+#. R/sparseVector.R: stop("index must be numeric, logical or sparseVector for indexing sparseVectors")
+
+msgid "index must be numeric, logical or sparseVector for indexing sparseVectors"
+msgstr ""
+
+
+#: R/dtpMatrix.R: 0
+#. R/dtpMatrix.R: warning("inefficient coercion (lost triangularity); please report")
+
+msgid "inefficient coercion (lost triangularity); please report"
+msgstr ""
+
+
+#: R/Ops.R: 0
+#. R/Ops.R: warning("inefficient method used for \"- e1\"")
+
+msgid "inefficient method used for \"- e1\""
+msgstr ""
+
+
+#: R/diagMatrix.R: 0
+#. R/diagMatrix.R: gettextf("intermediate 'r' is of type %s", typeof(r))
+
+msgid "intermediate 'r' is of type %s"
+msgstr ""
+
+
+#: R/Ops.R: 0
+#. R/Ops.R: stop("internal bug in \"Compare\" method (Cmp.Mat.atomic); please report")
+
+msgid "internal bug in \"Compare\" method (Cmp.Mat.atomic); please report"
+msgstr ""
+
+
+#: R/Ops.R: 0
+#. R/Ops.R: stop("internal bug in \"Logic\" method (Logic.Mat.atomic); please report")
+
+msgid "internal bug in \"Logic\" method (Logic.Mat.atomic); please report"
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#. R/Tsparse.R: stop("internal bug: matrix 'i' in replTmat(): please report")
+
+msgid "internal bug: matrix 'i' in replTmat(): please report"
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#. R/Tsparse.R: stop("internal bug: missing 'i' in replTmat(): please report")
+
+msgid "internal bug: missing 'i' in replTmat(): please report"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: gettextf("invalid 'col.names' string: %s", cn)
+
+msgid "invalid 'col.names' string: %s"
+msgstr ""
+
+
+#: R/spModels.R: 0
+#. R/spModels.R: stop("invalid 'contrasts.arg' argument")
+
+msgid "invalid 'contrasts.arg' argument"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: stop("invalid 'data'")
+
+msgid "invalid 'data'"
+msgstr ""
+
+
+#: R/Auxiliaries.R: 0
+#. R/Auxiliaries.R: gettextf("invalid 'mod': %s", mod)
+#. R/Auxiliaries.R: gettextf("invalid 'mod': %s", mod)
+
+msgid "invalid 'mod': %s"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: stop("invalid 'type'")
+
+msgid "invalid 'type'"
+msgstr ""
+
+
+#: R/abIndex.R: 0
+#. R/abIndex.R: stop("invalid (to - from)/by in 'seq(.)'")
+
+msgid "invalid (to - from)/by in 'seq(.)'"
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#. R/Tsparse.R: stop("invalid character indexing")
+
+msgid "invalid character indexing"
+msgstr ""
+
+
+#: R/Rsparse.R: 0
+#. R/Rsparse.R: gettextf("invalid class: %s", dQuote(cl))
+#. R/Rsparse.R: gettextf("invalid class: %s", dQuote(cl))
+
+msgid "invalid class: %s"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: gettextf("invalid dimnames given for %s object", dQuote(class(x)))
+
+msgid "invalid dimnames given for %s object"
+msgstr ""
+
+
+#: R/denseMatrix.R: 0
+#. R/denseMatrix.R: gettextf("invalid nargs()= %d", na)
+#. R/denseMatrix.R: gettextf("invalid nargs()= %d", na)
+
+msgid "invalid nargs()= %d"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: stop("invalid or not-yet-implemented 'Matrix' subsetting")
+
+msgid "invalid or not-yet-implemented 'Matrix' subsetting"
+msgstr ""
+
+
+#: R/indMatrix.R: 0
+#: R/kronecker.R: 0
+#: R/kronecker.R: 0
+#. R/indMatrix.R: stop("kronecker method must use default 'FUN'")
+#. R/kronecker.R: stop("kronecker method must use default 'FUN'")
+#. R/kronecker.R: stop("kronecker method must use default 'FUN'")
+
+msgid "kronecker method must use default 'FUN'"
+msgstr ""
+
+
+#: R/abIndex.R: 0
+#. R/abIndex.R: stop("length must be non-negative number")
+
+msgid "length must be non-negative number"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettextf("length of 'perm' slot must be %d", n)
+
+msgid "length of 'perm' slot must be %d"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettextf("length of 'perm' slot must be %s", n, domain = "R-Matrix")
+
+msgid "length of 'perm' slot must be %s"
+msgstr ""
+
+
+#: R/Ops.R: 0
+#. R/Ops.R: stop("length of 1st arg does not match dimension of 2nd")
+#. R/Ops.R: stop("length of 1st arg does not match dimension of 2nd")
+
+msgid "length of 1st arg does not match dimension of 2nd"
+msgstr ""
+
+
+#: R/Ops.R: 0
+#. R/Ops.R: stop("length of 2nd arg does not match dimension of first")
+#. R/Ops.R: stop("length of 2nd arg does not match dimension of first")
+
+msgid "length of 2nd arg does not match dimension of first"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("length(Dimnames[[1]])' must match Dim[1]", domain = "R-Matrix")
+
+msgid "length(Dimnames[[1]])' must match Dim[1]"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("length(Dimnames[[2]])' must match Dim[2]", domain = "R-Matrix")
+
+msgid "length(Dimnames[[2]])' must match Dim[2]"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: warning("length(i) is not a multiple of length(x)")
+
+msgid "length(i) is not a multiple of length(x)"
+msgstr ""
+
+
+#: R/diagMatrix.R: 0
+#. R/diagMatrix.R: stop("length(x) must be either 1 or #{cols}")
+
+msgid "length(x) must be either 1 or #{cols}"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: stop("logic programming error in printSpMatrix2(), please report")
+
+msgid "logic programming error in printSpMatrix2(), please report"
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#. R/Tsparse.R: gettextf("logical subscript too long (%d, should be %d)", length(i), n)
+
+msgid "logical subscript too long (%d, should be %d)"
+msgstr ""
+
+
+#: R/Ops.R: 0
+#. R/Ops.R: warning("longer object length\n\tis not a multiple of shorter object length")
+
+msgid "longer object length\n\tis not a multiple of shorter object length"
+msgstr ""
+
+
+#: R/Ops.R: 0
+#: R/abIndex.R: 0
+#. R/Ops.R: warning("longer object length is not a multiple of shorter object length")
+#. R/Ops.R: warning("longer object length is not a multiple of shorter object length")
+#. R/Ops.R: warning("longer object length is not a multiple of shorter object length")
+#. R/abIndex.R: warning("longer object length is not a multiple of shorter object length")
+
+msgid "longer object length is not a multiple of shorter object length"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: message("m[ <ij-matrix> ] <- v: inefficiently treating single elements")
+
+msgid "m[ <ij-matrix> ] <- v: inefficiently treating single elements"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: message("m[ <ij-matrix> ]: inefficiently indexing single elements")
+
+msgid "m[ <ij-matrix> ]: inefficiently indexing single elements"
+msgstr ""
+
+
+#: R/diagMatrix.R: 0
+#. R/diagMatrix.R: stop("matrix is not diagonal")
+
+msgid "matrix is not diagonal"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("matrix is not square")
+
+msgid "matrix is not square"
+msgstr ""
+
+
+#: R/diagMatrix.R: 0
+#. R/diagMatrix.R: stop("matrix with non-zero off-diagonals cannot be coerced to \"diagonalMatrix\"")
+
+msgid "matrix with non-zero off-diagonals cannot be coerced to \"diagonalMatrix\""
+msgstr ""
+
+
+#: R/Csparse.R: 0
+#: R/Tsparse.R: 0
+#: R/Tsparse.R: 0
+#. R/Csparse.R: gettextf("missing (i,j) = (%d,%d)", iMi, jMi, domain = "R-Matrix")
+#. R/Tsparse.R: gettextf("missing (i,j) = (%d,%d)", iMi, jMi, domain = "R-Matrix")
+#. R/Tsparse.R: gettextf("missing (i,j) = (%d,%d)", iMi, jMi, domain = "R-Matrix")
+
+msgid "missing (i,j) = (%d,%d)"
+msgstr ""
+
+
+#: R/spModels.R: 0
+#. R/spModels.R: stop("model frame and formula mismatch in model.matrix()")
+
+msgid "model frame and formula mismatch in model.matrix()"
+msgstr ""
+
+
+#: R/spModels.R: 0
+#. R/spModels.R: gettextf("model.spmatrix(t, data, ..) with 't' equal to:", domain = "R-Matrix")
+
+msgid "model.spmatrix(t, data, ..) with 't' equal to:"
+msgstr ""
+
+
+#: R/condest.R: 0
+#. R/condest.R: stop("must either specify 'A' or the functions 'A.x' and 'At.x'")
+
+msgid "must either specify 'A' or the functions 'A.x' and 'At.x'"
+msgstr ""
+
+
+#: R/indMatrix.R: 0
+#: R/pMatrix.R: 0
+#. R/indMatrix.R: stop("must have exactly one non-zero entry per row")
+#. R/pMatrix.R: stop("must have exactly one non-zero entry per row")
+
+msgid "must have exactly one non-zero entry per row"
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#. R/Tsparse.R: gettextf("nargs() = %d should never happen; please report.", nA)
+
+msgid "nargs() = %d should never happen; please report."
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: gettextf("nargs() = %d.  Extraneous illegal arguments inside '[ .. ]' (i.2col)?",     nA)
+
+msgid "nargs() = %d.  Extraneous illegal arguments inside '[ .. ]' (i.2col)?"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: gettextf("nargs() = %d.  Extraneous illegal arguments inside '[ .. ]' (i.logical)?",     nA)
+
+msgid "nargs() = %d.  Extraneous illegal arguments inside '[ .. ]' (i.logical)?"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: gettextf("nargs() = %d.  Extraneous illegal arguments inside '[ .. ]' ?", nA)
+
+msgid "nargs() = %d.  Extraneous illegal arguments inside '[ .. ]' ?"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#: R/Tsparse.R: 0
+#. R/Matrix.R: stop("negative values are not allowed in a matrix subscript")
+#. R/Tsparse.R: stop("negative values are not allowed in a matrix subscript")
+
+msgid "negative values are not allowed in a matrix subscript"
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#. R/Tsparse.R: stop("no 'dimnames[[.]]': cannot use character indexing")
+
+msgid "no 'dimnames[[.]]': cannot use character indexing"
+msgstr ""
+
+
+#: R/Auxiliaries.R: 0
+#. R/Auxiliaries.R: gettextf("non-conformable matrix dimensions in %s", deparse(sys.call(sys.parent())))
+
+msgid "non-conformable matrix dimensions in %s"
+msgstr ""
+
+
+#: R/diagMatrix.R: 0
+#. R/diagMatrix.R: stop("non-matching dimensions")
+#. R/diagMatrix.R: stop("non-matching dimensions")
+#. R/diagMatrix.R: stop("non-matching dimensions")
+#. R/diagMatrix.R: stop("non-matching dimensions")
+#. R/diagMatrix.R: stop("non-matching dimensions")
+#. R/diagMatrix.R: stop("non-matching dimensions")
+
+msgid "non-matching dimensions"
+msgstr ""
+
+
+#: R/diagMatrix.R: 0
+#. R/diagMatrix.R: stop("non-square matrix")
+#. R/diagMatrix.R: stop("non-square matrix")
+
+msgid "non-square matrix"
+msgstr ""
+
+
+#: R/dppMatrix.R: 0
+#: R/dsyMatrix.R: 0
+#. R/dppMatrix.R: stop("not a positive definite matrix")
+#. R/dsyMatrix.R: stop("not a positive definite matrix")
+
+msgid "not a positive definite matrix"
+msgstr ""
+
+
+#: R/indMatrix.R: 0
+#. R/indMatrix.R: stop("not a skinny matrix")
+
+msgid "not a skinny matrix"
+msgstr ""
+
+
+#: R/pMatrix.R: 0
+#. R/pMatrix.R: stop("not a square matrix")
+
+msgid "not a square matrix"
+msgstr ""
+
+
+#: R/Auxiliaries.R: 0
+#: R/Csparse.R: 0
+#: R/dsyMatrix.R: 0
+#: R/ldenseMatrix.R: 0
+#: R/ndenseMatrix.R: 0
+#. R/Auxiliaries.R: stop("not a symmetric matrix; consider forceSymmetric() or symmpart()")
+#. R/Csparse.R: stop("not a symmetric matrix; consider forceSymmetric() or symmpart()")
+#. R/dsyMatrix.R: stop("not a symmetric matrix; consider forceSymmetric() or symmpart()")
+#. R/ldenseMatrix.R: stop("not a symmetric matrix; consider forceSymmetric() or symmpart()")
+#. R/ndenseMatrix.R: stop("not a symmetric matrix; consider forceSymmetric() or symmpart()")
+
+msgid "not a symmetric matrix; consider forceSymmetric() or symmpart()"
+msgstr ""
+
+
+#: R/Auxiliaries.R: 0
+#: R/ldenseMatrix.R: 0
+#: R/ndenseMatrix.R: 0
+#. R/Auxiliaries.R: stop("not a triangular matrix")
+#. R/Auxiliaries.R: stop("not a triangular matrix")
+#. R/ldenseMatrix.R: stop("not a triangular matrix")
+#. R/ndenseMatrix.R: stop("not a triangular matrix")
+
+msgid "not a triangular matrix"
+msgstr ""
+
+
+#: R/condest.R: 0
+#. R/condest.R: gettextf("not converged in %d iterations", iter.max)
+
+msgid "not converged in %d iterations"
+msgstr ""
+
+
+#: R/condest.R: 0
+#. R/condest.R: message("not enough new vecs -- stop iterations")
+
+msgid "not enough new vecs -- stop iterations"
+msgstr ""
+
+
+#: R/abIndex.R: 0
+#: R/sparseMatrix.R: 0
+#. R/abIndex.R: stop("not yet implemented")
+#. R/sparseMatrix.R: stop("not yet implemented")
+
+msgid "not yet implemented"
+msgstr ""
+
+
+#: R/diagMatrix.R: 0
+#. R/diagMatrix.R: stop("not yet implemented .. please report")
+
+msgid "not yet implemented .. please report"
+msgstr ""
+
+
+#: R/Auxiliaries.R: 0
+#. R/Auxiliaries.R: gettextf(" not yet implemented for %s", clx@className)
+
+msgid "not yet implemented for %s"
+msgstr ""
+
+
+#: R/Auxiliaries.R: 0
+#. R/Auxiliaries.R: gettextf("not yet implemented for class %s", dQuote(class.x))
+
+msgid "not yet implemented for class %s"
+msgstr ""
+
+
+#: R/Auxiliaries.R: 0
+#. R/Auxiliaries.R: gettextf("not yet implemented for matrix with typeof %s", typeof(x))
+#. R/Auxiliaries.R: gettextf("not yet implemented for matrix with typeof %s", typeof(x))
+
+msgid "not yet implemented for matrix with typeof %s"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: stop("not-yet-implemented 'Matrix[<-' method")
+
+msgid "not-yet-implemented 'Matrix[<-' method"
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#. R/Tsparse.R: stop("not-yet-implemented coercion to \"TsparseMatrix\"")
+
+msgid "not-yet-implemented coercion to \"TsparseMatrix\""
+msgstr ""
+
+
+#: R/Auxiliaries.R: 0
+#. R/Auxiliaries.R: gettextf("not-yet-implemented method for %s(<%s>).\n ->>  Ask the package authors to implement the missing feature.",     fun, cl)
+
+msgid "not-yet-implemented method for %s(<%s>).\n ->>  Ask the package authors to implement the missing feature."
+msgstr ""
+
+
+#: R/Auxiliaries.R: 0
+#. R/Auxiliaries.R: gettextf("not-yet-implemented method for %s(<%s>, <%s>).\n ->>  Ask the package authors to implement the missing feature.",     fun, cl1, cl2)
+
+msgid "not-yet-implemented method for %s(<%s>, <%s>).\n ->>  Ask the package authors to implement the missing feature."
+msgstr ""
+
+
+#: R/products.R: 0
+#. R/products.R: gettextf("not-yet-implemented method for <%s> %%*%% <%s>", class(x), class(y))
+
+msgid "not-yet-implemented method for <%s> %%*%% <%s>"
+msgstr ""
+
+
+#: R/Csparse.R: 0
+#: R/Tsparse.R: 0
+#: R/Tsparse.R: 0
+#: R/sparseVector.R: 0
+#. R/Csparse.R: stop("nothing to replace with")
+#. R/Tsparse.R: stop("nothing to replace with")
+#. R/Tsparse.R: stop("nothing to replace with")
+#. R/sparseVector.R: stop("nothing to replace with")
+
+msgid "nothing to replace with"
+msgstr ""
+
+
+#: R/Csparse.R: 0
+#: R/Matrix.R: 0
+#: R/Tsparse.R: 0
+#: R/Tsparse.R: 0
+#: R/Tsparse.R: 0
+#: R/sparseVector.R: 0
+#. R/Csparse.R: stop("number of items to replace is not a multiple of replacement length")
+#. R/Matrix.R: warning("number of items to replace is not a multiple of replacement length")
+#. R/Tsparse.R: warning("number of items to replace is not a multiple of replacement length")
+#. R/Tsparse.R: stop("number of items to replace is not a multiple of replacement length")
+#. R/Tsparse.R: warning("number of items to replace is not a multiple of replacement length")
+#. R/sparseVector.R: stop("number of items to replace is not a multiple of replacement length")
+
+msgid "number of items to replace is not a multiple of replacement length"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: warning("number of non zeros is smaller than 'nnz' because of duplicated (i,j)s")
+
+msgid "number of non zeros is smaller than 'nnz' because of duplicated (i,j)s"
+msgstr ""
+
+
+#: R/Ops.R: 0
+#. R/Ops.R: gettextf("number of rows are not compatible for %s", .Generic)
+
+msgid "number of rows are not compatible for %s"
+msgstr ""
+
+
+#: R/dMatrix.R: 0
+#: R/lMatrix.R: 0
+#. R/dMatrix.R: gettextf("object of class %s with NA values cannot be coerced to an object of class %s",     dQuote("dMatrix"), dQuote("nMatrix"))
+#. R/lMatrix.R: gettextf("object of class %s with NA values cannot be coerced to an object of class %s",     dQuote("lMatrix"), dQuote("nMatrix"))
+
+msgid "object of class %s with NA values cannot be coerced to an object of class %s"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: stop("only 2-dimensional tables can be directly coerced to sparse matrices")
+
+msgid "only 2-dimensional tables can be directly coerced to sparse matrices"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: stop("only square matrices can be used as incidence matrices for graphs")
+
+msgid "only square matrices can be used as incidence matrices for graphs"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("pMatrix must be square", domain = "R-Matrix")
+
+msgid "pMatrix must be square"
+msgstr ""
+
+
+#: R/MatrixFactorization.R: 0
+#. R/MatrixFactorization.R: gettext("packed 'Bunch-Kaufman' factorization of:", domain = "R-Matrix")
+
+msgid "packed 'Bunch-Kaufman' factorization of:"
+msgstr ""
+
+
+#: R/products.R: 0
+#. R/products.R: gettextf("potentially suboptimal crossprod(\"%s\", <%s>[=<ANY>]) as t(.) %s y", class(x),     class(y), "%*%")
+
+msgid "potentially suboptimal crossprod(\"%s\", <%s>[=<ANY>]) as t(.) %s y"
+msgstr ""
+
+
+#: R/products.R: 0
+#. R/products.R: gettextf("potentially suboptimal crossprod(\"%s\",\"%s\") as t(.) %s y", class(x),     class(y), "%*%")
+
+msgid "potentially suboptimal crossprod(\"%s\",\"%s\") as t(.) %s y"
+msgstr ""
+
+
+#: R/products.R: 0
+#. R/products.R: gettextf("potentially suboptimal crossprod(<", class(x), ">) as t(.) %*% . ")
+#. R/products.R: gettextf("potentially suboptimal crossprod(<", class(x), ">) as  . %*% t(.)")
+
+msgid "potentially suboptimal crossprod(<"
+msgstr ""
+
+
+#: R/products.R: 0
+#. R/products.R: gettextf("potentially suboptimal tcrossprod(\"%s\",\"%s\") as  x %s t(y)", class(x),     class(y), "%*%")
+
+msgid "potentially suboptimal tcrossprod(\"%s\",\"%s\") as  x %s t(y)"
+msgstr ""
+
+
+#: R/products.R: 0
+#. R/products.R: gettextf("potentially suboptimal tcrossprod(<%s>[=<ANY>], \"%s\") as  x %s t(y)",     class(x), class(y), "%*%")
+
+msgid "potentially suboptimal tcrossprod(<%s>[=<ANY>], \"%s\") as  x %s t(y)"
+msgstr ""
+
+
+#: R/abIndex.R: 0
+#. R/abIndex.R: stop("prod(<abIndex>) is not yet implemented")
+
+msgid "prod(<abIndex>) is not yet implemented"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: stop("programming error: min() should have dispatched w/ 1st arg much earlier")
+
+msgid "programming error: min() should have dispatched w/ 1st arg much earlier"
+msgstr ""
+
+
+#: R/sparseQR.R: 0
+#. R/sparseQR.R: warning("qr.R(<sparse>) may differ from qr.R(<dense>) because of permutations.  Possibly use our qrR() instead")
+
+msgid "qr.R(<sparse>) may differ from qr.R(<dense>) because of permutations.  Possibly use our qrR() instead"
+msgstr ""
+
+
+#: R/rankMatrix.R: 0
+#. R/rankMatrix.R: gettextf("rankMatrix(<large sparse Matrix>, method = '%s') coerces to dense matrix. Probably should rather use method = 'qr' !?",     method)
+
+msgid "rankMatrix(<large sparse Matrix>, method = '%s') coerces to dense matrix. Probably should rather use method = 'qr' !?"
+msgstr ""
+
+
+#: R/rankMatrix.R: 0
+#. R/rankMatrix.R: gettextf("rankMatrix(x, method='qr'): computing t(x) as nrow(x) < ncol(x)")
+
+msgid "rankMatrix(x, method='qr'): computing t(x) as nrow(x) < ncol(x)"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: warning("rcond(.) via sparse -> dense coercion")
+
+msgid "rcond(.) via sparse -> dense coercion"
+msgstr ""
+
+
+#: R/HBMM.R: 0
+#. R/HBMM.R: stop("readMM(): column values 'j' are not in 1:nc", call. = FALSE)
+
+msgid "readMM(): column values 'j' are not in 1:nc"
+msgstr ""
+
+
+#: R/HBMM.R: 0
+#. R/HBMM.R: stop("readMM(): row\t values 'i' are not in 1:nr", call. = FALSE)
+
+msgid "readMM(): row\t values 'i' are not in 1:nr"
+msgstr ""
+
+
+#: R/dgTMatrix.R: 0
+#. R/dgTMatrix.R: gettextf("rectangle size %s [pixels];  --> lwd :%s", paste(round(pSize, 1), collapse = " x "),     formatC(lwd), domain = "R-Matrix")
+
+msgid "rectangle size %s [pixels];  --> lwd :%s"
+msgstr ""
+
+
+#: R/indMatrix.R: 0
+#. R/indMatrix.R: stop("replacing \"indMatrix\" entries is not allowed, as rarely sensible")
+
+msgid "replacing \"indMatrix\" entries is not allowed, as rarely sensible"
+msgstr ""
+
+
+#: R/HBMM.R: 0
+#. R/HBMM.R: gettextf("representation '%s' not recognized", repr)
+
+msgid "representation '%s' not recognized"
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#. R/Tsparse.R: gettextf("row indices must be <= nrow(.) which is %d", nr)
+
+msgid "row indices must be <= nrow(.) which is %d"
+msgstr ""
+
+
+#: R/dsCMatrix.R: 0
+#. R/dsCMatrix.R: gettext("solve.dsC.dC(): Cholmod factorization unsuccessful --> using LU(<dgC>)",     domain = "R-Matrix")
+
+msgid "solve.dsC.dC(): Cholmod factorization unsuccessful --> using LU(<dgC>)"
+msgstr ""
+
+
+#: R/dsCMatrix.R: 0
+#. R/dsCMatrix.R: gettext("solve.dsC.mat(): Cholmod factorization unsuccessful --> using LU(<dgC>)",     domain = "R-Matrix")
+
+msgid "solve.dsC.mat(): Cholmod factorization unsuccessful --> using LU(<dgC>)"
+msgstr ""
+
+
+#: R/diagMatrix.R: 0
+#. R/diagMatrix.R: stop("some arguments are not matrices")
+
+msgid "some arguments are not matrices"
+msgstr ""
+
+
+#: R/AllClass.R: 0
+#. R/AllClass.R: gettext("some entries are not integer valued", domain = "R-Matrix")
+
+msgid "some entries are not integer valued"
+msgstr ""
+
+
+#: R/Ops.R: 0
+#. R/Ops.R: gettextf("sparse to dense (%s) coercion in '%s' -> %s", lClass, .Generic, "Cmp.Mat.atomic",     domain = "R-Matrix")
+#. R/Ops.R: gettextf("sparse to dense (%s) coercion in '%s' -> %s", lClass, .Generic, "Logic.Mat.atomic",     domain = "R-Matrix")
+
+msgid "sparse to dense (%s) coercion in '%s' -> %s"
+msgstr ""
+
+
+#: R/Ops.R: 0
+#. R/Ops.R: gettext("suboptimal 'Arith' implementation of  'dsC*  o  dsC*'", domain = "R-Matrix")
+
+msgid "suboptimal 'Arith' implementation of  'dsC*  o  dsC*'"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#: R/Tsparse.R: 0
+#: R/Tsparse.R: 0
+#. R/Matrix.R: stop("such indexing must be by logical or 2-column numeric matrix")
+#. R/Matrix.R: stop("such indexing must be by logical or 2-column numeric matrix")
+#. R/Tsparse.R: stop("such indexing must be by logical or 2-column numeric matrix")
+#. R/Tsparse.R: stop("such indexing must be by logical or 2-column numeric matrix")
+
+msgid "such indexing must be by logical or 2-column numeric matrix"
+msgstr ""
+
+
+#: R/abIndex.R: 0
+#. R/abIndex.R: stop("sum(<abIndex>) is not yet implemented")
+
+msgid "sum(<abIndex>) is not yet implemented"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: stop("symmetric matrix must be square")
+
+msgid "symmetric matrix must be square"
+msgstr ""
+
+
+#: R/HBMM.R: 0
+#. R/HBMM.R: gettextf("symmetry form '%s' is not yet implemented", sym)
+#. R/HBMM.R: gettextf("symmetry form '%s' is not yet implemented", sym)
+
+msgid "symmetry form '%s' is not yet implemented"
+msgstr ""
+
+
+#: R/HBMM.R: 0
+#. R/HBMM.R: gettextf("symmetry form '%s' not recognized", sym)
+
+msgid "symmetry form '%s' not recognized"
+msgstr ""
+
+
+#: R/HBMM.R: 0
+#. R/HBMM.R: stop("symmetry form 'hermitian' not yet implemented for reading")
+#. R/HBMM.R: stop("symmetry form 'hermitian' not yet implemented for reading")
+
+msgid "symmetry form 'hermitian' not yet implemented for reading"
+msgstr ""
+
+
+#: R/HBMM.R: 0
+#. R/HBMM.R: stop("symmetry form 'skew-symmetric' not yet implemented for reading")
+#. R/HBMM.R: stop("symmetry form 'skew-symmetric' not yet implemented for reading")
+
+msgid "symmetry form 'skew-symmetric' not yet implemented for reading"
+msgstr ""
+
+
+#: R/abIndex.R: 0
+#. R/abIndex.R: gettextf("target is %s, current is %s", data.class(target), data.class(current),     domain = "R-Matrix")
+
+msgid "target is %s, current is %s"
+msgstr ""
+
+
+#: R/bandSparse.R: 0
+#. R/bandSparse.R: gettextf("the %d-th (sub)-diagonal (k = %d) is too short; filling with NA's", s,     kk)
+
+msgid "the %d-th (sub)-diagonal (k = %d) is too short; filling with NA's"
+msgstr ""
+
+
+#: R/dgTMatrix.R: 0
+#. R/dgTMatrix.R: stop("the matrix is not triangular")
+
+msgid "the matrix is not triangular"
+msgstr ""
+
+
+#: R/indMatrix.R: 0
+#: R/pMatrix.R: 0
+#. R/indMatrix.R: stop("the number of non-zero entries differs from nrow(.)")
+#. R/pMatrix.R: stop("the number of non-zero entries differs from nrow(.)")
+
+msgid "the number of non-zero entries differs from nrow(.)"
+msgstr ""
+
+
+#: R/abIndex.R: 0
+#. R/abIndex.R: stop("too many arguments")
+
+msgid "too many arguments"
+msgstr ""
+
+
+#: R/Csparse.R: 0
+#: R/Tsparse.R: 0
+#: R/sparseVector.R: 0
+#. R/Csparse.R: stop("too many replacement values")
+#. R/Tsparse.R: stop("too many replacement values")
+#. R/sparseVector.R: stop("too many replacement values")
+
+msgid "too many replacement values"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: warning("trimmed mean of 'sparseVector' -- suboptimally using as.numeric(.)")
+
+msgid "trimmed mean of 'sparseVector' -- suboptimally using as.numeric(.)"
+msgstr ""
+
+
+#: R/HBMM.R: 0
+#. R/HBMM.R: gettextf("type '%s' not recognized", typ)
+
+msgid "type '%s' not recognized"
+msgstr ""
+
+
+#: R/denseMatrix.R: 0
+#. R/denseMatrix.R: gettextf("undefined method for class %s", dQuote(cl))
+
+msgid "undefined method for class %s"
+msgstr ""
+
+
+#: R/CHMfactor.R: 0
+#. R/CHMfactor.R: stop("update must be TRUE/FALSE or '+' or '-'")
+
+msgid "update must be TRUE/FALSE or '+' or '-'"
+msgstr ""
+
+
+#: R/Csparse.R: 0
+#. R/Csparse.R: stop("using\t\"old code\" part in  Csparse subassignment")
+
+msgid "using\t\"old code\" part in  Csparse subassignment"
+msgstr ""
+
+
+#: R/Matrix.R: 0
+#. R/Matrix.R: warning("using slow kronecker() method")
+#. R/Matrix.R: warning("using slow kronecker() method")
+
+msgid "using slow kronecker() method"
+msgstr ""
+
+
+#: R/Csparse.R: 0
+#. R/Csparse.R: warning("using\"old code\" part in  Csparse subassignment\n >>> please report to Matrix-authors@r-project.org",     immediate. = TRUE, domain = "R-Matrix")
+
+msgid "using\"old code\" part in  Csparse subassignment\n >>> please report to Matrix-authors@r-project.org"
+msgstr ""
+
+
+#: R/spModels.R: 0
+#. R/spModels.R: gettextf("variable '%s' converted to a factor", i)
+
+msgid "variable '%s' converted to a factor"
+msgstr ""
+
+
+#: R/spModels.R: 0
+#. R/spModels.R: gettextf("variable '%s' is absent, its contrast will be ignored", nn)
+
+msgid "variable '%s' is absent, its contrast will be ignored"
+msgstr ""
+
+
+#: R/Ops.R: 0
+#. R/Ops.R: stop("vector too long in Matrix - vector operation")
+
+msgid "vector too long in Matrix - vector operation"
+msgstr ""
+
+
+#: R/Csparse.R: 0
+#. R/Csparse.R: gettext("wasteful C -> T -> C in replCmat(x,i,j,v) for <sparse>[i,j] <- v", domain = "R-Matrix")
+
+msgid "wasteful C -> T -> C in replCmat(x,i,j,v) for <sparse>[i,j] <- v"
+msgstr ""
+
+
+#: R/condest.R: 0
+#. R/condest.R: warning("when 'A' is specified, 'A.x' and 'At.x' are disregarded")
+
+msgid "when 'A' is specified, 'A.x' and 'At.x' are disregarded"
+msgstr ""
+
+
+#: R/abIndex.R: 0
+#. R/abIndex.R: stop("wrong sign in 'by' argument")
+
+msgid "wrong sign in 'by' argument"
+msgstr ""
+
+
+#: R/abIndex.R: 0
+#. R/abIndex.R: warning("x / 0 for an <abIndex> x with sign-change\nno longer representable as 'rleDiff'")
+
+msgid "x / 0 for an <abIndex> x with sign-change\nno longer representable as 'rleDiff'"
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#. R/Tsparse.R: gettextf("x[.,.] <- val : x being coerced from Tsparse* to CsparseMatrix")
+
+msgid "x[.,.] <- val : x being coerced from Tsparse* to CsparseMatrix"
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#. R/Tsparse.R: gettextf("x[.,.] <- val: x is %s, val not in {TRUE, FALSE} is coerced NA |--> TRUE.",     dQuote(clx))
+
+msgid "x[.,.] <- val: x is %s, val not in {TRUE, FALSE} is coerced NA |--> TRUE."
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#. R/Tsparse.R: gettextf("x[.,.] <- val: x is %s, val not in {TRUE, FALSE} is coerced.", dQuote(clx))
+
+msgid "x[.,.] <- val: x is %s, val not in {TRUE, FALSE} is coerced."
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#. R/Tsparse.R: gettextf("x[.] <- val: x is %s, val not in {TRUE, FALSE} is coerced.", dQuote(clx))
+
+msgid "x[.] <- val: x is %s, val not in {TRUE, FALSE} is coerced."
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#. R/Tsparse.R: gettextf("x[.] <- val: x is %s, val not in {TRUE, FALSE} is coerced; NA |--> TRUE.",     dQuote(clx))
+
+msgid "x[.] <- val: x is %s, val not in {TRUE, FALSE} is coerced; NA |--> TRUE."
+msgstr ""
+
+
+#: R/Tsparse.R: 0
+#: R/sparseVector.R: 0
+#. R/Tsparse.R: stop("you cannot mix negative and positive indices")
+#. R/Tsparse.R: stop("you cannot mix negative and positive indices")
+#. R/sparseVector.R: stop("you cannot mix negative and positive indices")
+
+msgid "you cannot mix negative and positive indices"
+msgstr ""
+
+
+#: R/bandSparse.R: 0
+#. R/bandSparse.R: ngettext(len.k, "'diagonals' matrix must have %d column (= length(k) )", "'diagonals' matrix must have %d columns (= length(k) )",     domain = "R-Matrix")
+
+msgid        "'diagonals' matrix must have %d column (= length(k) )"
+msgid_plural "'diagonals' matrix must have %d columns (= length(k) )"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/Auxiliaries.R: 0
+#. R/Auxiliaries.R: ngettext(nx, "extra argument %s will be disregarded in\n %s", "extra arguments %s will be disregarded in\n %s",     domain = "R-Matrix")
+
+msgid        "extra argument %s will be disregarded in\n %s"
+msgid_plural "extra arguments %s will be disregarded in\n %s"
+msgstr[0]    ""
+msgstr[1]    ""

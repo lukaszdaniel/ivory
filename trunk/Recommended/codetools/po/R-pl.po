@@ -1,0 +1,177 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: codetools 0.2-8\n"
+"POT-Creation-Date: 2014-07-13 09:15\n"
+"PO-Revision-Date: 2013-08-13 23:26+0100\n"
+"Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
+"Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. R/codetools.R: gettextf("%s is not a valid function in complex assignments", sQuote(deparse(fun)),     domain = "R-codetools")
+#: R/codetools.R:0
+msgid "%s is not a valid function in complex assignments"
+msgstr "%s nie jest poprawną funkcją w złożonych przypisaniach"
+
+#. R/codetools.R: gettextf("%s may be used in an incorrect context", sQuote("..."), domain = "R-codetools")
+#. R/codetools.R: gettextf("%s may be used in an incorrect context", sQuote(v), domain = "R-codetools")
+#. R/codetools.R: gettextf("%s may be used in an incorrect context", sQuote("..."), domain = "R-codetools")
+#. R/codetools.R: gettextf("%s may be used in an incorrect context", sQuote(v), domain = "R-codetools")
+#: R/codetools.R:0
+msgid "%s may be used in an incorrect context"
+msgstr "%s może być użyte w niepoprawnym kontekście"
+
+#. R/codetools.R: gettextf("%s may be used in an incorrect context: %s", sQuote(a), pasteExpr(e), domain = "R-codetools")
+#: R/codetools.R:0
+msgid "%s may be used in an incorrect context: %s"
+msgstr "%s może być użyte w niepoprawnym kontekście: %s"
+
+#. R/codetools.R: gettext("bad argument to '.Internal':", domain = "R-codetools")
+#: R/codetools.R:0
+msgid "bad argument to '.Internal':"
+msgstr "zły argument przekazany do '.Internal':"
+
+#. R/codetools.R: gettext("bad assignment:", domain = "R-codetools")
+#. R/codetools.R: gettext("bad assignment:", domain = "R-codetools")
+#. R/codetools.R: gettext("bad assignment:", domain = "R-codetools")
+#. R/codetools.R: gettext("bad assignment:", domain = "R-codetools")
+#: R/codetools.R:0
+msgid "bad assignment:"
+msgstr "błędne przypisanie:"
+
+#. R/codetools.R: stop("bad local variable entry")
+#: R/codetools.R:0
+msgid "bad local variable entry"
+msgstr "błędny wpis zmiennej lokalnej"
+
+#. R/codetools.R: stop("constant folding cannot continue")
+#: R/codetools.R:0
+msgid "constant folding cannot continue"
+msgstr "stałe składanie nie może być kontynuowane"
+
+#. R/codetools.R: gettextf("link %s not available for %s", sQuote(e[[2]]), sQuote(family), domain = "R-codetools")
+#: R/codetools.R:0
+msgid "link %s not available for %s"
+msgstr "link %s nie jest dostępny dla %s"
+
+#. R/codetools.R: gettext("local assignments to syntactic functions:", domain = "R-codetools")
+#: R/codetools.R:0
+msgid "local assignments to syntactic functions:"
+msgstr "lokalne przypisania przekazywane do funkcji syntaktycznych:"
+
+#. R/codetools.R: gettextf("local variable %s assigned but may not be used", sQuote(v), domain = "R-codetools")
+#: R/codetools.R:0
+msgid "local variable %s assigned but may not be used"
+msgstr "lokalna zmienna %s została przypisana, ale nie może zostać użyta"
+
+#. R/codetools.R: gettextf("local variable %s used as function with no apparent local function definition",     sQuote(v), domain = "R-codetools")
+#: R/codetools.R:0
+msgid ""
+"local variable %s used as function with no apparent local function definition"
+msgstr ""
+"lokalna zmienna %s użyta jako funkcja bez widocznej lokalnej definicji "
+"funkcji"
+
+#. R/codetools.R: gettextf("missing arguments not allowed in calls to %s", sQuote(fn), domain = "R-codetools")
+#: R/codetools.R:0
+msgid "missing arguments not allowed in calls to %s"
+msgstr ""
+"brakujące argumenty nie są dozwolone w wywołaniach przekazywanych do %s"
+
+#. R/codetools.R: gettextf("multiple local function definitions for %s with different formal arguments",     sQuote(v), domain = "R-codetools")
+#: R/codetools.R:0
+msgid ""
+"multiple local function definitions for %s with different formal arguments"
+msgstr ""
+"wiele lokalnych definicji funkcji dla %s z różnymi formalnymi argumentami"
+
+#. R/codetools.R: stop("no local variable entry")
+#: R/codetools.R:0
+msgid "no local variable entry"
+msgstr "brak wpisu zmiennej lokalnej"
+
+#. R/codetools.R: gettextf("no visible binding for '<<-' assignment to %s", sQuote(n), domain = "R-codetools")
+#: R/codetools.R:0
+msgid "no visible binding for '<<-' assignment to %s"
+msgstr "brak widocznego powiązania dla przypisania '<<-' do %s"
+
+#. R/codetools.R: gettextf("no visible binding for global variable %s", sQuote(n), domain = "R-codetools")
+#: R/codetools.R:0
+msgid "no visible binding for global variable %s"
+msgstr "brak widocznego powiązania dla globalnej zmiennej %s"
+
+#. R/codetools.R: gettextf("no visible global function definition for %s", sQuote(n), domain = "R-codetools")
+#: R/codetools.R:0
+msgid "no visible global function definition for %s"
+msgstr "brak widocznej globalnej definicji funkcji dla %s"
+
+#. R/codetools.R: gettext("not a foldable expression:", domain = "R-codetools")
+#: R/codetools.R:0
+msgid "not a foldable expression:"
+msgstr "to nie jest składalne wyrażenie:"
+
+#. R/codetools.R: gettext("not a symbol or string", domain = "R-codetools")
+#: R/codetools.R:0
+msgid "not a symbol or string"
+msgstr "to nie jest symbol lub też łańcuch"
+
+#. R/codetools.R: stop("only works for closures")
+#: R/codetools.R:0
+msgid "only works for closures"
+msgstr "działa tylko dla zamknięć"
+
+#. R/codetools.R: stop("package must be loaded")
+#: R/codetools.R:0
+msgid "package must be loaded"
+msgstr "pakiet musi być załadowany"
+
+#. R/codetools.R: gettextf("parameter %s changed by assignment", sQuote(v), domain = "R-codetools")
+#: R/codetools.R:0
+msgid "parameter %s changed by assignment"
+msgstr "parametr %s został zmieniony przez przypisanie"
+
+#. R/codetools.R: gettextf("parameter %s may not be used", sQuote(v), domain = "R-codetools")
+#: R/codetools.R:0
+msgid "parameter %s may not be used"
+msgstr "parametr %s nie może zostać użyty"
+
+#. R/codetools.R: gettextf("possible error in %s: ", sQuote(deparse(call, width.cutoff = 500)), domain = "R-codetools")
+#: R/codetools.R:0
+msgid "possible error in %s:"
+msgstr "prawdopodobny błąd w %s:"
+
+#. R/codetools.R: stop("sanity check on local usage frame failed")
+#: R/codetools.R:0
+msgid "sanity check on local usage frame failed"
+msgstr "sprawdzenie na lokalnie używanej ramce nie powiodło się"
+
+#. R/codetools.R: gettextf("warning in %s: ", sQuote(deparse(call, width.cutoff = 500)), domain = "R-codetools")
+#: R/codetools.R:0
+msgid "warning in %s:"
+msgstr "ostrzeżenie w %s:"
+
+#. R/codetools.R: gettextf("wrong number of arguments to %s", sQuote(fn), domain = "R-codetools")
+#: R/codetools.R:0
+msgid "wrong number of arguments to %s"
+msgstr "błędna liczba argumentów przekazanych do %s"
+
+#. R/codetools.R: gettext("wrong number of arguments to '.Internal':", domain = "R-codetools")
+#: R/codetools.R:0
+msgid "wrong number of arguments to '.Internal':"
+msgstr "błędna liczba argumentów przekazanych do '.Internal':"
+
+#. R/codetools.R: gettext("wrong number of arguments to 'bquote'", domain = "R-codetools")
+#: R/codetools.R:0
+msgid "wrong number of arguments to 'bquote'"
+msgstr "błędna liczba argumentów przekazanych do 'bquote'"
+
+#. R/codetools.R: gettext("wrong number of arguments to 'substitute'", domain = "R-codetools")
+#: R/codetools.R:0
+msgid "wrong number of arguments to 'substitute'"
+msgstr "błędna liczba argumentów przekazanych do 'substitute'"

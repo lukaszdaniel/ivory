@@ -1,0 +1,853 @@
+# Chinese translations for R package
+# Copyright (C) 2006 The R Foundation
+# This file is distributed under the same license as the PACKAGE package.
+# 陈斐 <feic@avaya.com>, 2007.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: R 2.4.0\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2014-07-19 18:10\n"
+"PO-Revision-Date: 2005-02-04 08:37+0000\n"
+"Last-Translator: 陈斐 <feic@avaya.com>\n"
+"Language-Team: Chinese\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. R/image.R: gettextf("%s can only be used with a regular grid", sQuote("useRaster = TRUE"))
+#: R/image.R:0
+#, fuzzy
+msgid "%s can only be used with a regular grid"
+msgstr "useRaster=TRUE只适用于普通网格"
+
+#. R/datetime.R: gettextf("'%s' argument is not of class %s", "x", dQuote("POSIXt"))
+#. R/datetime.R: gettextf("'%s' argument is not of class %s", "x", dQuote("Date"))
+#: R/datetime.R:0
+#, fuzzy
+msgid "'%s' argument is not of class %s"
+msgstr "没有用%s这个参数"
+
+#. R/hist.R: gettextf("'%s' argument must be numeric", "x")
+#: R/hist.R:0
+#, fuzzy
+msgid "'%s' argument must be numeric"
+msgstr "'x'必需为数值"
+
+#. R/abline.R: warning("'a' and 'b' are overridden by 'coef'")
+#: R/abline.R:0
+msgid "'a' and 'b' are overridden by 'coef'"
+msgstr "'a'和'b'被' coef'覆盖"
+
+#. R/abline.R: warning("'a' is overridden by 'reg'")
+#: R/abline.R:0
+msgid "'a' is overridden by 'reg'"
+msgstr "'a'被'reg'覆盖"
+
+#. R/curve.R: warning("'add' will be ignored as there is no existing plot")
+#: R/curve.R:0
+msgid "'add' will be ignored as there is no existing plot"
+msgstr "'add'将被忽略，因为没有任何现有的图形"
+
+#. R/stripchart.R: gettextf("'at' argument must have length equal to the number %d of groups", n)
+#: R/stripchart.R:0
+#, fuzzy
+msgid "'at' argument must have length equal to the number %d of groups"
+msgstr "'at'的长度必需同组数目%d相等"
+
+#. R/boxplot.R: gettextf("'at' must have same length as 'z$n', i.e. %d", n)
+#: R/boxplot.R:0
+#, fuzzy
+msgid "'at' must have same length as 'z$n', i.e. %d"
+msgstr "'at'同'z$n'的长度必需相等, 如"
+
+#. R/hist.R: stop("'breaks' are not strictly increasing")
+#: R/hist.R:0
+msgid "'breaks' are not strictly increasing"
+msgstr "'breaks'必需严格递增"
+
+#. R/datetime.R: stop("'breaks' argument must be specified")
+#. R/datetime.R: stop("'breaks' argument must be specified")
+#: R/datetime.R:0
+#, fuzzy
+msgid "'breaks' argument must be specified"
+msgstr "数据间隔值不能有无限的"
+
+#. R/image.R: stop("'breaks' must all be finite")
+#: R/image.R:0
+#, fuzzy
+msgid "'breaks' must all be finite"
+msgstr "数据间隔值不能有无限的"
+
+#. R/fourfoldplot.R: stop("'conf.level' must be a single number between 0 and 1")
+#: R/fourfoldplot.R:0
+#, fuzzy
+msgid "'conf.level' must be a single number between 0 and 1"
+msgstr "'conf.level'必需是在零和一之间的单个数字"
+
+#. R/curve.R: stop("'expr' did not evaluate to an object of length 'n'")
+#: R/curve.R:0
+msgid "'expr' did not evaluate to an object of length 'n'"
+msgstr "'expr'没有评估为长度是'n'的对象"
+
+#. R/curve.R: gettextf("'expr' must be a function, or a call or an expression containing '%s'",     xname)
+#: R/curve.R:0
+msgid "'expr' must be a function, or a call or an expression containing '%s'"
+msgstr "'expr'要么是函数，要么调用，要么是包含'%s'的表达式"
+
+#. R/screen.R: stop("'figs' must be a vector or a matrix with 4 columns")
+#: R/screen.R:0
+msgid "'figs' must be a vector or a matrix with 4 columns"
+msgstr "'figs'要么是向量，要么是有四条列的矩阵"
+
+#. R/screen.R: stop("'figs' must specify at least one screen")
+#: R/screen.R:0
+msgid "'figs' must specify at least one screen"
+msgstr "'figs'至少要设定一个屏幕"
+
+#. R/boxplot.R: stop("'formula' missing or incorrect")
+#: R/boxplot.R:0
+msgid "'formula' missing or incorrect"
+msgstr "要么是缺少'formula'，要么是它的设定不对"
+
+#. R/cdplot.R: stop("'formula' should specify exactly two variables")
+#. R/spineplot.R: stop("'formula' should specify exactly two variables")
+#. R/sunflowerplot.R: stop("'formula' should specify exactly two variables")
+#: R/cdplot.R:0 R/spineplot.R:0 R/sunflowerplot.R:0
+msgid "'formula' should specify exactly two variables"
+msgstr "'formula'只能设定两个变量"
+
+#. R/curve.R: stop("'from' and 'to' must be > 0 with log=\"x\"")
+#: R/curve.R:0
+msgid "'from' and 'to' must be > 0 with log=\"x\""
+msgstr "log=\"x\"意味着'from'和'to'的值必需大于零"
+
+#. R/barplot.R: stop("'height' must be a vector or a matrix")
+#: R/barplot.R:0
+msgid "'height' must be a vector or a matrix"
+msgstr "'height'要么是向量，要么是矩阵"
+
+#. R/hist.R: warning("'include.lowest' ignored as 'breaks' is not a vector")
+#: R/hist.R:0
+msgid "'include.lowest' ignored as 'breaks' is not a vector"
+msgstr "因为'breaks'不对向量，'include.lowest'略过不用"
+
+#. R/legend.R: stop("'legend' argument is of length 0")
+#: R/legend.R:0
+#, fuzzy
+msgid "'legend' argument is of length 0"
+msgstr "'legend'长度为零"
+
+#. R/stars.R: stop("'locations' must be a 2-column matrix.")
+#: R/stars.R:0
+msgid "'locations' must be a 2-column matrix."
+msgstr "'locations'必需是含两条列的矩阵."
+
+#. R/legend.R: warning("'merge = TRUE' has no effect when no line segments are drawn")
+#: R/legend.R:0
+msgid "'merge = TRUE' has no effect when no line segments are drawn"
+msgstr "不画线断时'merge = TRUE'就沿用"
+
+#. R/hist.R: warning("'nclass' not used when 'breaks' is specified")
+#: R/hist.R:0
+msgid "'nclass' not used when 'breaks' is specified"
+msgstr "'breaks'设定了的话'nclass'就不能用了"
+
+#. R/stars.R: stop("'nrow * ncol' is less than the number of observations")
+#: R/stars.R:0
+#, fuzzy
+msgid "'nrow * ncol' is less than the number of observations"
+msgstr "nrow乘ncol不能小于观测量的数目"
+
+#. R/smoothScatter.R: stop("'nrpoints' should be numeric scalar with value >= 0.")
+#: R/smoothScatter.R:0
+msgid "'nrpoints' should be numeric scalar with value >= 0."
+msgstr "'nrpoints'必需为大于0的数字标量。"
+
+#. R/coplot.R: stop("'number' must be integer >= 1")
+#: R/coplot.R:0
+#, fuzzy
+msgid "'number' must be integer >= 1"
+msgstr "'number'必需为大于等于一的整数"
+
+#. R/sunflowerplot.R: stop("'number' must have same length as 'x' and 'y'")
+#: R/sunflowerplot.R:0
+msgid "'number' must have same length as 'x' and 'y'"
+msgstr "'number'的长度必需同'x'和'y'的长度相同"
+
+#. R/coplot.R: stop("'overlap' must be < 1 (and typically >= 0).")
+#: R/coplot.R:0
+msgid "'overlap' must be < 1 (and typically >= 0)."
+msgstr "'overlap'必需小于一(其典型值则大于等于零)."
+
+#. R/plot.R: stop("'plot.data.frame' applied to non data frame")
+#: R/plot.R:0
+msgid "'plot.data.frame' applied to non data frame"
+msgstr "'plot.data.frame'不能用在非数据框上"
+
+#. R/hist.R: stop("'probability' is an alias for '!freq', however they differ.")
+#: R/hist.R:0
+msgid "'probability' is an alias for '!freq', however they differ."
+msgstr "'probability'是'!freq'的化名，因此它们应该是一样的。"
+
+#. R/layout.R: stop("'respect' must be logical or matrix with same dimension as 'mat'")
+#: R/layout.R:0
+msgid "'respect' must be logical or matrix with same dimension as 'mat'"
+msgstr "'respect'要么是逻辑值，要么是同'mat'大小一样的矩阵"
+
+#. R/stem.R: stop("'scale' argument must be positive")
+#: R/stem.R:0
+#, fuzzy
+msgid "'scale' argument must be positive"
+msgstr "'scale'必需为正数"
+
+#. R/axis.R: stop("'side' argument must be in {1:4}")
+#: R/axis.R:0
+#, fuzzy
+msgid "'side' argument must be in {1:4}"
+msgstr "'side'的值必需在{1:4}中"
+
+#. R/legend.R: stop("'text.width' argument must be numeric, >= 0")
+#: R/legend.R:0
+#, fuzzy
+msgid "'text.width' argument must be numeric, >= 0"
+msgstr "'text.width'必需为大于等于零的数值"
+
+#. R/matplot.R: stop("'x' and 'y' must have only 1 or the same number of columns")
+#: R/matplot.R:0
+msgid "'x' and 'y' must have only 1 or the same number of columns"
+msgstr "'x'和'y'要么是一，要么有相等的列数"
+
+#. R/matplot.R: stop("'x' and 'y' must have same number of rows")
+#: R/matplot.R:0
+msgid "'x' and 'y' must have same number of rows"
+msgstr "'x'和'y'的行数必需相等"
+
+#. R/image.R: stop("'x' and 'y' values must be finite and non-missing")
+#: R/image.R:0
+msgid "'x' and 'y' values must be finite and non-missing"
+msgstr "'x'和'y'的值不能是无限的，而且不能有缺少"
+
+#. R/stem.R: stop("'x' argument must be numeric")
+#: R/stem.R:0
+#, fuzzy
+msgid "'x' argument must be numeric"
+msgstr "'x'必需为数值"
+
+#. R/mosaicplot.R: stop("'x' argument must not have 0 dimensionality")
+#: R/mosaicplot.R:0
+#, fuzzy
+msgid "'x' argument must not have 0 dimensionality"
+msgstr "'x'不能为零维数"
+
+#. R/dotchart.R: warning("'x' is neither a vector nor a matrix: using as.numeric(x)")
+#: R/dotchart.R:0
+msgid "'x' is neither a vector nor a matrix: using as.numeric(x)"
+msgstr "既不是一个向量也不是矩阵：使用as.numeric(x)"
+
+#. R/hist.R: stop("'x' is wrongly structured")
+#: R/hist.R:0
+msgid "'x' is wrongly structured"
+msgstr "'x'的结构不对"
+
+#. R/fourfoldplot.R: stop("'x' must be 2- or 3-dimensional")
+#: R/fourfoldplot.R:0
+msgid "'x' must be 2- or 3-dimensional"
+msgstr "'x'必需是二维或三维"
+
+#. R/assocplot.R: stop("'x' must be a 2-d contingency table")
+#: R/assocplot.R:0
+msgid "'x' must be a 2-d contingency table"
+msgstr "'x'必需是二维列联表"
+
+#. R/plot.design.R: stop("'x' must be a data frame")
+#: R/plot.design.R:0
+msgid "'x' must be a data frame"
+msgstr "'x'必需为数据框"
+
+#. R/plot.design.R: stop("'x' must be a dataframe or a formula")
+#: R/plot.design.R:0
+msgid "'x' must be a dataframe or a formula"
+msgstr "'x'要么是数据框，要么是公式"
+
+#. R/stars.R: stop("'x' must be a matrix or a data frame")
+#: R/stars.R:0
+msgid "'x' must be a matrix or a data frame"
+msgstr "'x'要么是矩阵，要么是数据框"
+
+#. R/dotchart.R: stop("'x' must be a numeric vector or matrix")
+#: R/dotchart.R:0
+msgid "'x' must be a numeric vector or matrix"
+msgstr "'x'要么是数值向量，要么是矩阵"
+
+#. R/fourfoldplot.R: stop("'x' must be an array")
+#: R/fourfoldplot.R:0
+msgid "'x' must be an array"
+msgstr "'x'必需为排列"
+
+#. R/pie.R: stop("'x' values must be positive")
+#: R/pie.R:0
+#, fuzzy
+msgid "'x' values must be positive"
+msgstr "'x'必需是正数."
+
+#. R/plot.design.R: stop("'y' must be a numeric vector")
+#: R/plot.design.R:0
+msgid "'y' must be a numeric vector"
+msgstr "'y'必需为数值向量"
+
+#. R/image.R: stop("'z' must be a matrix")
+#: R/image.R:0
+msgid "'z' must be a matrix"
+msgstr "'z'必需是矩阵"
+
+#. R/barplot.R: stop("Cannot use shading lines in bars when log scale is used")
+#: R/barplot.R:0
+msgid "Cannot use shading lines in bars when log scale is used"
+msgstr "用对数尺度时条里不能用带阻影的线条"
+
+#. R/hist.R: gettext("Density", domain = "R-graphics")
+#: R/hist.R:0
+msgid "Density"
+msgstr ""
+
+#. R/hist.R: gettext("Frequency", domain = "R-graphics")
+#: R/hist.R:0
+msgid "Frequency"
+msgstr ""
+
+#. R/hist.R: gettextf("Histogram of %s", xname, domain = "R-graphics")
+#. R/hist.R: gettextf("Histogram of %s", paste(x$xname, collapse = "\n"), domain = "R-graphics")
+#: R/hist.R:0
+msgid "Histogram of %s"
+msgstr ""
+
+#. R/hist.R: gettextf("Invalid breakpoints produced by 'breaks(x)': %s", format(breaks))
+#: R/hist.R:0
+msgid "Invalid breakpoints produced by 'breaks(x)': %s"
+msgstr ""
+
+#. R/polygon.R: stop("Invalid fill rule for graphics path")
+#: R/polygon.R:0
+msgid "Invalid fill rule for graphics path"
+msgstr "图形填充路径规则不对"
+
+#. R/coplot.R: gettextf("Missing rows: %s", paste0(missingrows, collapse = ", "), domain = "R-graphics")
+#: R/coplot.R:0
+#, fuzzy
+msgid "Missing rows: %s"
+msgstr "缺少行"
+
+#. R/mosaicplot.R: gettext("Standardized\nResiduals:")
+#: R/mosaicplot.R:0
+msgid ""
+"Standardized\n"
+"Residuals:"
+msgstr ""
+
+#. R/spineplot.R: stop("a 2-way table has to be specified")
+#: R/spineplot.R:0
+msgid "a 2-way table has to be specified"
+msgstr "没有设定双向表"
+
+#. R/plot.design.R: stop("a variable in 'y' is not numeric")
+#: R/plot.design.R:0
+msgid "a variable in 'y' is not numeric"
+msgstr "'y'里有个非数值的变量"
+
+#. R/plot.design.R: stop("all columns/components of 'x' must be factors")
+#: R/plot.design.R:0
+msgid "all columns/components of 'x' must be factors"
+msgstr "所有'x'的列/元件都必需是因子"
+
+#. R/assocplot.R: stop("all entries of 'x' must be nonnegative and finite")
+#: R/assocplot.R:0
+msgid "all entries of 'x' must be nonnegative and finite"
+msgstr "'x'包含的所有值都必需为非负的有限数"
+
+#. R/image.R: stop("argument must be matrix-like")
+#: R/image.R:0
+msgid "argument must be matrix-like"
+msgstr "参数必需类似于矩阵"
+
+#. R/assocplot.R: stop("at least one entry of 'x' must be positive")
+#: R/assocplot.R:0
+msgid "at least one entry of 'x' must be positive"
+msgstr "'x'里至少要有一个值是正数"
+
+#. R/plot.R: stop("cannot handle more than one 'x' coordinate")
+#. R/plot.R: stop("cannot handle more than one 'x' coordinate")
+#. R/plot.R: stop("cannot handle more than one 'x' coordinate")
+#: R/plot.R:0
+msgid "cannot handle more than one 'x' coordinate"
+msgstr "不能处理多个'x'座标"
+
+#. R/polygon.R: warning("cannot hatch with logarithmic scale active")
+#: R/polygon.R:0
+msgid "cannot hatch with logarithmic scale active"
+msgstr "对数尺度设定时不能进行策劃"
+
+#. R/stars.R: stop("data in 'x' must be numeric")
+#: R/stars.R:0
+msgid "data in 'x' must be numeric"
+msgstr "'x'里的数据必需为数值"
+
+#. R/matplot.R: warning("default 'pch' is smaller than number of columns and hence recycled")
+#: R/matplot.R:0
+msgid "default 'pch' is smaller than number of columns and hence recycled"
+msgstr "'pch'的缺省值比列的数目要小，因此再循环使用"
+
+#. R/cdplot.R: stop("dependent variable should be a factor")
+#. R/cdplot.R: stop("dependent variable should be a factor")
+#. R/spineplot.R: stop("dependent variable should be a factor")
+#. R/spineplot.R: stop("dependent variable should be a factor")
+#: R/cdplot.R:0 R/spineplot.R:0
+msgid "dependent variable should be a factor"
+msgstr "因变量应当为因子"
+
+#. R/image.R: stop("dimensions of z are not length(x)(-1) times length(y)(-1)")
+#: R/image.R:0
+msgid "dimensions of z are not length(x)(-1) times length(y)(-1)"
+msgstr "z的大小应该等于length(x)(-1)乘length(y)(-1)"
+
+#. R/symbols.R: stop("exactly one symbol type must be specified")
+#: R/symbols.R:0
+msgid "exactly one symbol type must be specified"
+msgstr "只能设定一个符号种类"
+
+#. R/stripchart.R: stop("formula missing or incorrect")
+#. R/sunflowerplot.R: stop("formula missing or incorrect")
+#: R/stripchart.R:0 R/sunflowerplot.R:0
+msgid "formula missing or incorrect"
+msgstr "要么是缺少公式，要么是公式设定不对"
+
+#. R/hist.R: gettextf("hist.default: pretty() error, breaks=%s", format(breaks))
+#: R/hist.R:0
+#, fuzzy
+msgid "hist.default: pretty() error, breaks=%s"
+msgstr "hist.default: pretty()错误, breaks="
+
+#. R/legend.R: gettextf("horizontal specification overrides: Number of columns := %d", n.leg)
+#: R/legend.R:0
+#, fuzzy
+msgid "horizontal specification overrides: Number of columns := %d"
+msgstr "水平定义超越其它的定义： 列的数目为 :="
+
+#. R/coplot.R: stop("incompatible variable lengths")
+#: R/coplot.R:0
+msgid "incompatible variable lengths"
+msgstr "变量长度不匹配"
+
+#. R/assocplot.R: stop("incorrect 'col': must be length 2")
+#: R/assocplot.R:0
+#, fuzzy
+msgid "incorrect 'col': must be length 2"
+msgstr "'col'不对: 长度必需为二"
+
+#. R/fourfoldplot.R: stop("incorrect 'margin' specification")
+#: R/fourfoldplot.R:0
+msgid "incorrect 'margin' specification"
+msgstr "'margin'定义不对"
+
+#. R/fourfoldplot.R: stop("incorrect geometry specification")
+#: R/fourfoldplot.R:0
+msgid "incorrect geometry specification"
+msgstr "几何定义不对"
+
+#. R/barplot.R: stop("incorrect number of names")
+#: R/barplot.R:0
+msgid "incorrect number of names"
+msgstr "名字数目不对"
+
+#. R/contour.R: stop("increasing 'x' and 'y' values expected")
+#. R/filled.contour.R: stop("increasing 'x' and 'y' values expected")
+#. R/image.R: stop("increasing 'x' and 'y' values expected")
+#. R/persp.R: stop("increasing 'x' and 'y' values expected")
+#: R/contour.R:0 R/filled.contour.R:0 R/image.R:0 R/persp.R:0
+msgid "increasing 'x' and 'y' values expected"
+msgstr "需要递增的'x'和'y'值"
+
+#. R/image.R: stop("integer colors must be non-negative")
+#: R/image.R:0
+msgid "integer colors must be non-negative"
+msgstr ""
+
+#. R/axis.R: gettextf("invalid '%s' argument", "axp")
+#. R/axis.R: gettextf("invalid '%s' argument", "log")
+#. R/axis.R: gettextf("invalid '%s' argument", "usr")
+#. R/coplot.R: gettextf("invalid '%s' argument", "given.values")
+#. R/datetime.R: gettextf("invalid '%s' argument", "breaks")
+#. R/datetime.R: gettextf("invalid '%s' argument", "breaks")
+#. R/datetime.R: gettextf("invalid '%s' argument", "breaks")
+#. R/datetime.R: gettextf("invalid '%s' argument", "breaks")
+#. R/legend.R: gettextf("invalid '%s' argument", "title")
+#. R/mosaicplot.R: gettextf("invalid '%s' argument", "shade")
+#. R/pairs.R: gettextf("invalid '%s' argument", "hordInd")
+#. R/pairs.R: gettextf("invalid '%s' argument", "verInd")
+#: R/axis.R:0 R/coplot.R:0 R/datetime.R:0 R/legend.R:0 R/mosaicplot.R:0
+#: R/pairs.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "第一个参数不对"
+
+#. R/hist.R: gettextf("invalid '%s' value", "length(x)")
+#. R/hist.R: gettextf("invalid '%s' value", "length(breaks)")
+#. R/stem.R: gettextf("invalid '%s' value", "length(x)")
+#: R/hist.R:0 R/stem.R:0
+#, fuzzy
+msgid "invalid '%s' value"
+msgstr "第一个参数不对"
+
+#. R/boxplot.R: stop("invalid boxplot widths")
+#: R/boxplot.R:0
+msgid "invalid boxplot widths"
+msgstr "boxplot宽度不对"
+
+#. R/coplot.R: stop("invalid conditioning formula")
+#: R/coplot.R:0
+msgid "invalid conditioning formula"
+msgstr "条件公式不对"
+
+#. R/legend.R: stop("invalid coordinate lengths")
+#: R/legend.R:0
+msgid "invalid coordinate lengths"
+msgstr "座标长度不对"
+
+#. R/boxplot.R: stop("invalid first argument")
+#. R/boxplot.R: stop("invalid first argument")
+#. R/stripchart.R: stop("invalid first argument")
+#: R/boxplot.R:0 R/stripchart.R:0
+msgid "invalid first argument"
+msgstr "第一个参数不对"
+
+#. R/hist.R: stop("invalid number of 'breaks'")
+#: R/hist.R:0
+msgid "invalid number of 'breaks'"
+msgstr "'breaks'数目不对"
+
+#. R/stripchart.R: stop("invalid plotting method")
+#: R/stripchart.R:0
+msgid "invalid plotting method"
+msgstr "画图方法不对"
+
+#. R/axis.R: stop("invalid positive 'axp[3]'")
+#: R/axis.R:0
+msgid "invalid positive 'axp[3]'"
+msgstr "正的'axp[3]'不对"
+
+#. R/rect.R: stop("invalid rectangle specification")
+#: R/rect.R:0
+msgid "invalid rectangle specification"
+msgstr "长方形定义不对"
+
+#. R/screen.R: stop("invalid screen number")
+#. R/screen.R: stop("invalid screen number")
+#. R/screen.R: stop("invalid screen number")
+#: R/screen.R:0
+msgid "invalid screen number"
+msgstr "屏幕数字不对"
+
+#. R/plot.R: stop("invalid table 'x'")
+#: R/plot.R:0
+msgid "invalid table 'x'"
+msgstr "'x'表不对"
+
+#. R/image.R: stop("invalid z limits")
+#: R/image.R:0
+msgid "invalid z limits"
+msgstr "z的限制不对"
+
+#. R/stars.R: warning("labels do not make sense for a single location")
+#: R/stars.R:0
+msgid "labels do not make sense for a single location"
+msgstr "单一位置的标签没有意义"
+
+#. R/layout.R: gettextf("layout matrix must contain at least one reference\nto each of the values {1 ... %d}",     num.figures)
+#: R/layout.R:0
+#, fuzzy
+msgid ""
+"layout matrix must contain at least one reference\n"
+"to each of the values {1 ... %d}"
+msgstr "格式矩阵至少要有对{1..n}里每一个值的参考值；但这里n ="
+
+#. R/stars.R: stop("length of 'angles' must equal 'ncol(x)'")
+#: R/stars.R:0
+msgid "length of 'angles' must equal 'ncol(x)'"
+msgstr "'angles'的长度必需同'ncol(x)'相等"
+
+#. R/mosaicplot.R: stop("length of 'sort' does not conform to 'dim(x)'")
+#: R/mosaicplot.R:0
+msgid "length of 'sort' does not conform to 'dim(x)'"
+msgstr "'sort'的长度同'dim(x)'不相匹配"
+
+#. R/barplot.R: gettextf("log scale error: '%s' <= 0", "xlim")
+#. R/barplot.R: gettextf("log scale error: '%s' <= 0", "ylim")
+#: R/barplot.R:0
+#, fuzzy
+msgid "log scale error: '%s' <= 0"
+msgstr "对数尺度错误: 'xlim'小于等于零"
+
+#. R/barplot.R: stop("log scale error: at least one 'height + offset' value <= 0")
+#: R/barplot.R:0
+#, fuzzy
+msgid "log scale error: at least one 'height + offset' value <= 0"
+msgstr "对数尺度错误: 'height + offset'中至少要有一个值小于等于零"
+
+#. R/units.R: warning("log scale:  xyinch() is nonsense")
+#: R/units.R:0
+#, fuzzy
+msgid "log scale:  xyinch() is nonsense"
+msgstr "对数尺度：xyinch()没有意义"
+
+#. R/matplot.R: gettextf("matplot: doing %d plots with %s %s ...", k, paste0(" col= (", paste.ch(col),     ")"), paste0(" pch= (", paste.ch(pch), ")"))
+#: R/matplot.R:0
+msgid "matplot: doing %d plots with %s %s ..."
+msgstr ""
+
+#. R/mosaicplot.R: stop("missing values in contingency table")
+#: R/mosaicplot.R:0
+msgid "missing values in contingency table"
+msgstr "列联表里有缺少值"
+
+#. R/plot.R: stop("must have a response variable")
+#. R/plot.R: stop("must have a response variable")
+#. R/plot.R: stop("must have a response variable")
+#: R/plot.R:0
+msgid "must have a response variable"
+msgstr "必需有响应变量"
+
+#. R/image.R: stop("must have one more break than colour")
+#: R/image.R:0
+msgid "must have one more break than colour"
+msgstr "数据间隔的数目必需比颜色要多一个"
+
+#. R/matplot.R: stop("must specify at least one of 'x' and 'y'")
+#: R/matplot.R:0
+msgid "must specify at least one of 'x' and 'y'"
+msgstr "必需设定'x'和'y'中的一个"
+
+#. R/hist.R: stop("negative 'counts'. Internal Error.", domain = "R-graphics")
+#: R/hist.R:0
+#, fuzzy
+msgid "negative 'counts'. Internal Error."
+msgstr "负的'counts'。\"bincount\"的C码里出现了内部错误"
+
+#. R/contour.R: stop("no 'z' matrix specified")
+#. R/filled.contour.R: stop("no 'z' matrix specified")
+#. R/image.R: stop("no 'z' matrix specified")
+#. R/persp.R: stop("no 'z' matrix specified")
+#: R/contour.R:0 R/filled.contour.R:0 R/image.R:0 R/persp.R:0
+msgid "no 'z' matrix specified"
+msgstr "没有设定'z'矩阵"
+
+#. R/stem.R: stop("no finite and non-missing values")
+#: R/stem.R:0
+#, fuzzy
+msgid "no finite and non-missing values"
+msgstr "所有的值都是缺少值"
+
+#. R/contour.R: stop("no proper 'z' matrix specified")
+#. R/filled.contour.R: stop("no proper 'z' matrix specified")
+#: R/contour.R:0 R/filled.contour.R:0
+msgid "no proper 'z' matrix specified"
+msgstr "没有设定正确的'z'矩阵"
+
+#. R/pairs.R: stop("non-numeric argument to 'pairs'")
+#. R/pairs.R: stop("non-numeric argument to 'pairs'")
+#: R/pairs.R:0
+msgid "non-numeric argument to 'pairs'"
+msgstr "非数值参数不能适用于'pairs'"
+
+#. R/legend.R: warning("not using pch[2..] since pch[1L] has multiple chars")
+#: R/legend.R:0
+msgid "not using pch[2..] since pch[1L] has multiple chars"
+msgstr "pch[2..]没用，因为pch[1L] 包含多个字符"
+
+#. R/stars.R: stop("number of rows of 'locations' and 'x' must be equal.")
+#: R/stars.R:0
+msgid "number of rows of 'locations' and 'x' must be equal."
+msgstr "'locations'和'x'的行数必需相等。"
+
+#. R/arrows.R: stop("one of 'x1' and 'y1' must be given")
+#. R/segments.R: stop("one of 'x1' and 'y1' must be given")
+#: R/arrows.R:0 R/segments.R:0
+msgid "one of 'x1' and 'y1' must be given"
+msgstr "至少需要设定'x1'和'y1'中的一个"
+
+#. R/axis.R: stop("only for 1-D table")
+#. R/lines.R: stop("only for 1-D table")
+#. R/points.R: stop("only for 1-D table")
+#: R/axis.R:0 R/lines.R:0 R/points.R:0
+msgid "only for 1-D table"
+msgstr "只适用于1-D表"
+
+#. R/pairs.R: stop("only one column in the argument to 'pairs'")
+#: R/pairs.R:0
+msgid "only one column in the argument to 'pairs'"
+msgstr "参数里只有一个列用在'pairs'上"
+
+#. R/abline.R: gettextf("only using the first two of %d regression coefficients", p)
+#: R/abline.R:0
+msgid "only using the first two of %d regression coefficients"
+msgstr "只用两个%d回归系数中的第一个"
+
+#. R/coplot.R: stop("rows * columns too small")
+#: R/coplot.R:0
+msgid "rows * columns too small"
+msgstr "行 * 列的结果太小"
+
+#. R/hist.R: stop("some 'x' not counted; maybe 'breaks' do not span range of 'x'")
+#: R/hist.R:0
+msgid "some 'x' not counted; maybe 'breaks' do not span range of 'x'"
+msgstr "有些'x'值没有被计数；有可能是因为'breaks'没有跨距整个'x'的范围"
+
+#. R/plot.design.R: warning("some levels of the factors are empty", call. = FALSE)
+#: R/plot.design.R:0
+msgid "some levels of the factors are empty"
+msgstr "因子的有些阶层是空的"
+
+#. R/boxplot.R: warning("some notches went outside hinges ('box'): maybe set notch=FALSE")
+#: R/boxplot.R:0
+msgid "some notches went outside hinges ('box'): maybe set notch=FALSE"
+msgstr "一些槽在折叶点外('box'): 可能是因为notch=FALSE"
+
+#. R/rug.R: warning("some values will be clipped")
+#: R/rug.R:0
+msgid "some values will be clipped"
+msgstr "有些值不能被修整"
+
+#. R/persp.R: warning("surface extends beyond the box")
+#: R/persp.R:0
+msgid "surface extends beyond the box"
+msgstr "面超出框"
+
+#. R/fourfoldplot.R: stop("table for each stratum must be 2 by 2")
+#: R/fourfoldplot.R:0
+#, fuzzy
+msgid "table for each stratum must be 2 by 2"
+msgstr "每阶层的表的大小都应该是二乘二"
+
+#. R/pairs.R: stop("the 'panel' function made a new plot")
+#: R/pairs.R:0
+msgid "the 'panel' function made a new plot"
+msgstr "'panel'函数画了一个新的图"
+
+#. R/hist.R: warning("the AREAS in the plot are wrong -- rather use 'freq = FALSE'")
+#: R/hist.R:0
+#, fuzzy
+msgid "the AREAS in the plot are wrong -- rather use 'freq = FALSE'"
+msgstr "图形的面积不对 -- 用freq=FALSE"
+
+#. R/plot.design.R: stop("there must be at least one numeric variable!")
+#: R/plot.design.R:0
+msgid "there must be at least one numeric variable!"
+msgstr "至少要有一个数值变量!"
+
+#. R/hist.R: stop("unknown 'breaks' algorithm")
+#: R/hist.R:0
+msgid "unknown 'breaks' algorithm"
+msgstr "没有'breaks'这样的算法"
+
+#. R/image.R: warning("unsorted 'breaks' will be sorted before use")
+#: R/image.R:0
+msgid "unsorted 'breaks' will be sorted before use"
+msgstr ""
+
+#. R/spineplot.R: warning("x axis is on a cumulative probability scale, 'xlim' must be in [0,1]")
+#: R/spineplot.R:0
+msgid "x axis is on a cumulative probability scale, 'xlim' must be in [0,1]"
+msgstr "因为x轴的尺度为累计概率, 'xlim'的值必需在[0,1]"
+
+#. R/units.R: warning("x log scale:  xinch() is nonsense")
+#: R/units.R:0
+#, fuzzy
+msgid "x log scale:  xinch() is nonsense"
+msgstr "x对数尺度：xinch()没有意义"
+
+#. R/cdplot.R: warning("y axis is on a cumulative probability scale, 'ylim' must be in [0,1]")
+#. R/spineplot.R: warning("y axis is on a cumulative probability scale, 'ylim' must be in [0,1]")
+#: R/cdplot.R:0 R/spineplot.R:0
+msgid "y axis is on a cumulative probability scale, 'ylim' must be in [0,1]"
+msgstr "因为y轴的尺度为累计概率, 'ylim'的值必需在[0,1] 之间"
+
+#. R/units.R: warning("y log scale:  yinch() is nonsense")
+#: R/units.R:0
+#, fuzzy
+msgid "y log scale:  yinch() is nonsense"
+msgstr "y对数尺度：yinch()没有意义"
+
+#. R/boxplot.R: ngettext(length(unique(out[inf])), "Outlier (%s) in boxplot %d is not drawn", "Outliers (%s) in boxplot %d are not drawn",     domain = "R-graphics")
+#: R/boxplot.R:0
+msgid "Outlier (%s) in boxplot %d is not drawn"
+msgid_plural "Outliers (%s) in boxplot %d are not drawn"
+msgstr[0] "boxplot%2$d里没有画离群值(%1$s)"
+
+#. R/hist.R: ngettext(sum(not.miss), "argument %s is not made use of", "arguments %s are not made use of",     domain = "R-graphics")
+#: R/hist.R:0
+msgid "argument %s is not made use of"
+msgid_plural "arguments %s are not made use of"
+msgstr[0] "没有用%s这个参数"
+
+#. R/mosaicplot.R: ngettext(length(list(...)), "extra argument %s will be disregarded", "extra arguments %s will be disregarded",     domain = "R-graphics")
+#: R/mosaicplot.R:0
+#, fuzzy
+msgid "extra argument %s will be disregarded"
+msgid_plural "extra arguments %s will be disregarded"
+msgstr[0] "多余的参数%s略过不用"
+
+#~ msgid "'x' must be numeric"
+#~ msgstr "'x'必需为数值"
+
+#, fuzzy
+#~ msgid "invalid length(x)"
+#~ msgstr "'log'不对"
+
+#, fuzzy
+#~ msgid "invalid length(breaks)"
+#~ msgstr "座标长度不对"
+
+#, fuzzy
+#~ msgid "invalid length(x) value"
+#~ msgstr "'log'不对"
+
+#~ msgid "invalid 'axp'"
+#~ msgstr "'axp'不对"
+
+#~ msgid "invalid 'log'"
+#~ msgstr "'log'不对"
+
+#~ msgid "invalid 'usr'"
+#~ msgstr "'usr'不对"
+
+#~ msgid "log scale error: 'ylim' <= 0"
+#~ msgstr "对数尺度错误: 'ylim'小于等于零"
+
+#~ msgid "invalid 'given.values'"
+#~ msgstr "'given.values'值不对"
+
+#~ msgid "wrong method"
+#~ msgstr "方法不对"
+
+#~ msgid "Must specify 'breaks' in hist(<POSIXt>)"
+#~ msgstr "hist(<POSIXt>)必需设定'breaks'"
+
+#~ msgid "invalid specification of 'breaks'"
+#~ msgstr "'breaks'定义不对"
+
+#~ msgid "Must specify 'breaks' in hist(<Date>)"
+#~ msgstr " hist(<Date>)必需设定'breaks'"
+
+#, fuzzy
+#~ msgid "invalid 'title'"
+#~ msgstr "标题不对"
+
+#~ msgid "invalid 'shade' specification"
+#~ msgstr "'shade'定义不对"
+
+#~ msgid "explanatory variable should be numeric"
+#~ msgstr "说明变量应当为数值"
+
+#~ msgid "regression coefficients"
+#~ msgstr "回归系数"

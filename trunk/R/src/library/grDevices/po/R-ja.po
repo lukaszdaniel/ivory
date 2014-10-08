@@ -1,0 +1,838 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: R 2.1.0 \n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2014-08-10 17:28\n"
+"PO-Revision-Date: 2011-10-22 19:11+0900 \n"
+"Last-Translator: takahashi <takahashi.kohske@gmail.com> \n"
+"Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
+"Language: \n"
+"MIME-Version: 1.0 \n"
+"Content-Type: text/plain; charset=UTF-8 \n"
+"Content-Transfer-Encoding: 8bit \n"
+"Plural-Forms: nplurals=1; plural=0; \n"
+"X-Generator: Pootle 1.1.0 \n"
+
+#. R/windows/windows.R: gettext("  #plot calls are:", domain = "R-grDevices")
+#: R/windows/windows.R:0
+msgid "#plot calls are:"
+msgstr ""
+
+#. R/convertColor.R: gettextf("'%s' argument disagrees with definition of '%s'", "from.ref.white", from$name)
+#. R/convertColor.R: gettextf("'%s' argument disagrees with definition of '%s'", "to.ref.white", to$name)
+#: R/convertColor.R:0
+#, fuzzy
+msgid "'%s' argument disagrees with definition of '%s'"
+msgstr " 'from.ref.white' が以下の定義と一致しません:  "
+
+#. R/postscript.R: gettextf("'%s' argument is not an object of class %s", "font", dQuote("CIDFont"))
+#. R/recordplot.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("recordedplot"))
+#. R/windows/windows.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("SavedPlots"),     domain = "R-grDevices")
+#: R/postscript.R:0 R/recordplot.R:0 R/windows/windows.R:0
+#, fuzzy
+msgid "'%s' argument is not an object of class %s"
+msgstr " 引数はクラス \"recordedplot\" ではありません "
+
+#. R/convertColor.R: gettextf("'%s' argument must be an object of class %s or a string", "from", dQuote("colorConverter"))
+#. R/convertColor.R: gettextf("'%s' argument must be an object of class %s or a string", "to", dQuote("colorConverter"))
+#: R/convertColor.R:0
+#, fuzzy
+msgid "'%s' argument must be an object of class %s or a string"
+msgstr " 'rbin'は長さ1または2の数値でなければなりません "
+
+#. R/smooth2d.R: gettextf("'%s' argument must be numeric", "bandwidth")
+#: R/smooth2d.R:0
+#, fuzzy
+msgid "'%s' argument must be numeric"
+msgstr " rgb 行列は数値でなければなりません "
+
+#. R/colorRamp.R: gettextf("'%s' argument must be positive", "bias")
+#. R/smooth2d.R: gettextf("'%s' argument must be positive", "bandwidth")
+#: R/colorRamp.R:0 R/smooth2d.R:0
+#, fuzzy
+msgid "'%s' argument must be positive"
+msgstr " 'bias' は正の値でなければなりません "
+
+#. R/device.R: gettextf("'%s' function called without an open graphics device", "dev.control()")
+#. R/device.R: gettextf("'%s' function called without an open graphics device", "dev.displaylist()")
+#: R/device.R:0
+#, fuzzy
+msgid "'%s' function called without an open graphics device"
+msgstr ""
+" dev.control() が，開かれたグラフィックスデバイスがないのに呼び出されました "
+
+#. R/colorRamp.R: stop("'alpha' must be false if 'space' is specified")
+#: R/colorRamp.R:0
+msgid "'alpha' must be false if 'space' is specified"
+msgstr ""
+
+#. R/calc.R: stop("'coef' must not be negative")
+#: R/calc.R:0
+msgid "'coef' must not be negative"
+msgstr " 'coef' は負にはなれません "
+
+#. R/device.R: stop("'device' should be a function")
+#: R/device.R:0
+msgid "'device' should be a function"
+msgstr " 'device' は関数でなければなりません "
+
+#. R/raster.R: warning("'drop' is always implicitly FALSE in '[.raster'")
+#: R/raster.R:0
+msgid "'drop' is always implicitly FALSE in '[.raster'"
+msgstr " '[.raster' では引数 'drop' は常に暗黙のうちに FALSE です "
+
+#. R/unix/dev2bitmap.R: stop("'file' argument is missing with no default")
+#. R/unix/dev2bitmap.R: stop("'file' argument is missing with no default")
+#. R/windows/dev2bitmap.R: stop("'file' argument is missing with no default")
+#. R/windows/dev2bitmap.R: stop("'file' argument is missing with no default")
+#: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
+#, fuzzy
+msgid "'file' argument is missing with no default"
+msgstr " 引数がありませんが、省略時既定値もありません "
+
+#. R/postscript.R: stop("'file' argument must be a non-empty character string")
+#. R/unix/dev2bitmap.R: stop("'file' argument must be a non-empty character string")
+#. R/unix/dev2bitmap.R: stop("'file' argument must be a non-empty character string")
+#. R/windows/dev2bitmap.R: stop("'file' argument must be a non-empty character string")
+#. R/windows/dev2bitmap.R: stop("'file' argument must be a non-empty character string")
+#: R/postscript.R:0 R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
+#, fuzzy
+msgid "'file' argument must be a non-empty character string"
+msgstr " 'file' は空でない文字列でなければなりません "
+
+#. R/convertColor.R: stop("'gamma' argument must be a scalar or 'sRGB' value")
+#: R/convertColor.R:0
+#, fuzzy
+msgid "'gamma' argument must be a scalar or 'sRGB' value"
+msgstr " 'gamma' はスカラーまたは 'sRGB' でなければなりません "
+
+#. R/device.R: stop("'name' must be a character vector")
+#: R/device.R:0
+msgid "'name' must be a character vector"
+msgstr " 'name' は文字列でなければなりません "
+
+#. R/postscript.R: stop("'name.opt' argument must be character, name of an existing list")
+#: R/postscript.R:0
+#, fuzzy
+msgid "'name.opt' argument must be character, name of an existing list"
+msgstr " 'name.opt' は既存のリストの名前である文字列でなければなりません "
+
+#. R/smooth2d.R: stop("'nbin' argument must be numeric of length 1 or 2")
+#: R/smooth2d.R:0
+#, fuzzy
+msgid "'nbin' argument must be numeric of length 1 or 2"
+msgstr " 'rbin'は長さ1または2の数値でなければなりません "
+
+#. R/utils.R: stop("'r' must be a 'range()' result, hence of length 2")
+#: R/utils.R:0
+#, fuzzy
+msgid "'r' must be a 'range()' result, hence of length 2"
+msgstr " 'r' は範囲でなければなりません. 従って長さは2です "
+
+#. R/colorstuff.R: stop("'r', 'g', and 'b' arguments must be in [0, maxColorValue]")
+#: R/colorstuff.R:0
+#, fuzzy
+msgid "'r', 'g', and 'b' arguments must be in [0, maxColorValue]"
+msgstr " rgb 値の範囲は [0, maxColorValue] でなければなりません "
+
+#. R/unix/png.R: stop("'res' must be specified unless 'units = \"px\"'")
+#. R/windows/cairo.R: stop("'res' must be specified unless 'units = \"px\"'")
+#. R/windows/cairo.R: stop("'res' must be specified unless 'units = \"px\"'")
+#. R/windows/cairo.R: stop("'res' must be specified unless 'units = \"px\"'")
+#. R/windows/cairo.R: stop("'res' must be specified unless 'units = \"px\"'")
+#. R/windows/png.R: stop("'res' must be specified unless 'units = \"px\"'")
+#: R/unix/png.R:0 R/windows/cairo.R:0 R/windows/png.R:0
+msgid "'res' must be specified unless 'units = \"px\"'"
+msgstr " 'res' は 'units = \"px\"' で無い限り指定される必要があります "
+
+#. R/colorstuff.R: stop("'start' and 'end' must be distinct and in [0, 1].")
+#: R/colorstuff.R:0
+msgid "'start' and 'end' must be distinct and in [0, 1]."
+msgstr ""
+" 'start' と 'end' の値は異なり，どちらも範囲 [0, 1] 内になければなりません "
+
+#. R/windows/windows.R: stop("'type' not applicable to the R console")
+#: R/windows/windows.R:0
+msgid "'type' not applicable to the R console"
+msgstr " 'type' は R コンソールに対して適用できません "
+
+#. R/xyz.coords.R: stop("'x' and 'y' lengths differ")
+#: R/xyz.coords.R:0
+msgid "'x' and 'y' lengths differ"
+msgstr " 'x' と 'y' の長さが異なります "
+
+#. R/xyz.coords.R: stop("'x' is a list, but does not have components 'x' and 'y'")
+#: R/xyz.coords.R:0
+msgid "'x' is a list, but does not have components 'x' and 'y'"
+msgstr " 'x' はリストですが，成分 'x' と 'y' を持ちません "
+
+#. R/xyz.coords.R: stop("'x' is a list, but does not have components 'x', 'y'  and 'z'")
+#: R/xyz.coords.R:0
+msgid "'x' is a list, but does not have components 'x', 'y'  and 'z'"
+msgstr " 'x' はリストですが，成分 'x' と 'y' そして 'z' を持ちません "
+
+#. R/xyz.coords.R: stop("'x', 'y' and 'z' lengths differ")
+#: R/xyz.coords.R:0
+msgid "'x', 'y' and 'z' lengths differ"
+msgstr " 'x','y' そして 'z' の長さが異なります "
+
+#. R/unix/dev2bitmap.R: gettextf("Available devices are:\n%s", paste(gsdevs, collapse = "\n"))
+#. R/windows/dev2bitmap.R: gettextf("Available devices are:\n%s", paste(gsdevs, collapse = "\n"))
+#: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
+#, fuzzy
+msgid ""
+"Available devices are:\n"
+"%s"
+msgstr " 利用可能なデバイスは %s です "
+
+#. R/convertColor.R: gettextf("Color space converter: %s", x$name, domain = "R-grDevices")
+#: R/convertColor.R:0
+#, fuzzy
+msgid "Color space converter: %s"
+msgstr " 色空間変換器: "
+
+#. R/windows/windows.R: gettextf("  Contains %d out of a maximum %d plots", x[[2L]], x[[3L]], domain = "R-grDevices")
+#: R/windows/windows.R:0
+msgid "Contains %d out of a maximum %d plots"
+msgstr ""
+
+#. R/windows/windows.R: gettextf("  Current position is plot %d", 1L + x[[4L]], domain = "R-grDevices")
+#: R/windows/windows.R:0
+msgid "Current position is plot %d"
+msgstr ""
+
+#. R/postscript.R: stop("GhostScript was not found")
+#. R/unix/dev2bitmap.R: stop("GhostScript was not found")
+#. R/unix/dev2bitmap.R: stop("GhostScript was not found")
+#. R/windows/dev2bitmap.R: stop("GhostScript was not found")
+#. R/windows/dev2bitmap.R: stop("GhostScript was not found")
+#: R/postscript.R:0 R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
+#, fuzzy
+msgid "GhostScript was not found"
+msgstr " デバイス '%s' が見つかりません "
+
+#. R/postscript.R: stop("Invalid font database name")
+#: R/postscript.R:0
+msgid "Invalid font database name"
+msgstr " 不正なフォントデータベース名です "
+
+#. R/postscript.R: stop("Invalid font type")
+#: R/postscript.R:0
+msgid "Invalid font type"
+msgstr " 不正なフォント型です "
+
+#. R/convertColor.R: gettextf("Reference white: %s", x$reference.white, domain = "R-grDevices")
+#: R/convertColor.R:0
+#, fuzzy
+msgid "Reference white: %s"
+msgstr " 基準白色: "
+
+#. R/windows/windows.R: gettext("Saved Plots from R version 1.4.0 or later", domain = "R-grDevices")
+#: R/windows/windows.R:0
+msgid "Saved Plots from R version 1.4.0 or later"
+msgstr ""
+
+#. R/gevents.R: gettext("Waiting for input", domain = "R-grDevices")
+#: R/gevents.R:0
+msgid "Waiting for input"
+msgstr ""
+
+#. R/unix/x11.R: stop("X11 library is missing: install XQuartz from xquartz.macosforge.org", domain = "R-utils")
+#: R/unix/x11.R:0
+msgid "X11 library is missing: install XQuartz from xquartz.macosforge.org"
+msgstr ""
+
+#. R/raster.R: stop("a raster array must be numeric")
+#: R/raster.R:0
+#, fuzzy
+msgid "a raster array must be numeric"
+msgstr " ラスター配列は数値でなければなりません "
+
+#. R/raster.R: stop("a raster array must have exactly 3 dimensions")
+#: R/raster.R:0
+#, fuzzy
+msgid "a raster array must have exactly 3 dimensions"
+msgstr " ラスター配列は丁度3つの次元を持つ必要があります "
+
+#. R/raster.R: stop("a raster array must have exactly 3 or 4 planes")
+#: R/raster.R:0
+#, fuzzy
+msgid "a raster array must have exactly 3 or 4 planes"
+msgstr " ラスター配列は丁度3か4の平面(plane)を持つ必要があります "
+
+#. R/raster.R: stop("a raster matrix must be character, or numeric, or logical")
+#: R/raster.R:0
+#, fuzzy
+msgid "a raster matrix must be character, or numeric, or logical"
+msgstr " ラスター行列は文字、数値もしくは論理値でなければなりません "
+
+#. R/postscript.R: warning("argument 'append' is for back-compatibility and will be ignored", immediate. = TRUE)
+#: R/postscript.R:0
+msgid "argument 'append' is for back-compatibility and will be ignored"
+msgstr " 引数 'append' は下位互換のためのもので、今後は無視されます "
+
+#. R/device.R: stop("argument is missing with no default")
+#: R/device.R:0
+msgid "argument is missing with no default"
+msgstr " 引数がありませんが、省略時既定値もありません "
+
+#. R/xyz.coords.R: stop("at least 2 columns are needed")
+#: R/xyz.coords.R:0
+#, fuzzy
+msgid "at least 2 columns are needed"
+msgstr " 少なくとも二つの列が必要です "
+
+#. R/colorstuff.R: stop("at least 3 columns are needed")
+#: R/colorstuff.R:0
+#, fuzzy
+msgid "at least 3 columns are needed"
+msgstr " 少なくとも三つ列が必要です "
+
+#. R/unix/x11.R: warning("cairo-based types are not supported on this build - using \"Xlib\"")
+#: R/unix/x11.R:0
+msgid "cairo-based types are not supported on this build - using \"Xlib\""
+msgstr ""
+" このビルドではcarioベースのデバイスはサポートされていません。Xlibを使いま"
+"す。 "
+
+#. R/windows/windows.R: stop("can only bring windows devices to the front")
+#: R/windows/windows.R:0
+msgid "can only bring windows devices to the front"
+msgstr " windows デバイスしか正面にもってくることが出来ません "
+
+#. R/unix/x11.R: stop("can only copy from 'X11(type=\"*cairo\")' devices")
+#: R/unix/x11.R:0
+msgid "can only copy from 'X11(type=\"*cairo\")' devices"
+msgstr " 'X11(type=\"*cairo\")' デバイスからしかコピーできません "
+
+#. R/windows/windows.R: stop("can only copy from 'windows' devices")
+#: R/windows/windows.R:0
+msgid "can only copy from 'windows' devices"
+msgstr " 'windows' デバイスからしかコピーできません "
+
+#. R/windows/windows.R: stop("can only manipulate windows devices")
+#: R/windows/windows.R:0
+msgid "can only manipulate windows devices"
+msgstr " windows デバイスだけを操作できます "
+
+#. R/device.R: stop("can only print from a screen device")
+#. R/device.R: stop("can only print from a screen device")
+#. R/device.R: stop("can only print from a screen device")
+#. R/unix/quartz.R: stop("can only print from a screen device")
+#: R/device.R:0 R/unix/quartz.R:0
+msgid "can only print from a screen device"
+msgstr " スクリーンデバイスからは印刷しか出来ません "
+
+#. R/device.R: stop("cannot copy device to itself")
+#: R/device.R:0
+msgid "cannot copy device to itself"
+msgstr " デバイスを同じデバイスにコピーすることは出来ません "
+
+#. R/device.R: stop("cannot copy from the null device")
+#: R/device.R:0
+msgid "cannot copy from the null device"
+msgstr " nullデバイスからコピーすることは出来ません "
+
+#. R/device.R: stop("cannot copy to the null device")
+#: R/device.R:0
+msgid "cannot copy to the null device"
+msgstr " NULL デバイスにコピーすることは出来ません "
+
+#. R/postscript.R: gettextf("cannot reset non-existent '%s'", name.opt)
+#: R/postscript.R:0
+msgid "cannot reset non-existent '%s'"
+msgstr " 存在しない '%s' をリセットすることは出来ません "
+
+#. R/device.R: stop("cannot shut down device 1 (the null device)")
+#: R/device.R:0
+msgid "cannot shut down device 1 (the null device)"
+msgstr " デバイス 1 をシャットダウンすることが出来ません（NULL デバイスです） "
+
+#. R/device.R: stop("cannot supply 'which' and 'device' at the same time")
+#: R/device.R:0
+msgid "cannot supply 'which' and 'device' at the same time"
+msgstr " 同時に 'which' と 'device' を与えることは出来ません "
+
+#. R/convertColor.R: warning("color spaces use different reference whites")
+#: R/convertColor.R:0
+#, fuzzy
+msgid "color spaces use different reference whites"
+msgstr " 色空間(color spaces)は異なった基準白色を使っています "
+
+#. R/device.R: gettextf("dev.new(): using '%s'", paste("pdf(file=\"", tmp[!fe][1L], "\")", collapse = ""))
+#. R/device.R: gettextf("dev.new(): using '%s'", paste("postscript(file=\"", tmp[!fe][1L], "\")",     collapse = ""))
+#: R/device.R:0
+#, fuzzy
+msgid "dev.new(): using '%s'"
+msgstr " dev.new(): pdf(file=\"%s\")を使用します "
+
+#. R/unix/dev2bitmap.R: gettextf("device '%s' is not available\n", type)
+#. R/windows/dev2bitmap.R: gettextf("device '%s' is not available\n", type)
+#: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
+#, fuzzy
+msgid "device '%s' is not available"
+msgstr " デバイス '%s' は利用可能ではありません "
+
+#. R/device.R: gettextf("device '%s' was not found", dev)
+#: R/device.R:0
+#, fuzzy
+msgid "device '%s' was not found"
+msgstr " デバイス '%s' が見つかりません "
+
+#. R/calc.R: stop("dimensions of 'x', 'y' and 'z' do not match")
+#: R/calc.R:0
+msgid "dimensions of 'x', 'y' and 'z' do not match"
+msgstr ""
+
+#. R/convertColor.R: gettextf("display gamma = %s", format(x$gamma), domain = "R-grDevices")
+#: R/convertColor.R:0
+#, fuzzy
+msgid "display gamma = %s"
+msgstr " ガンマ補正 "
+
+#. R/calc.R: stop("finite coordinates are required")
+#: R/calc.R:0
+msgid "finite coordinates are required"
+msgstr ""
+
+#. R/postscript.R: gettextf("font %s already in use", sQuote(i))
+#: R/postscript.R:0
+msgid "font %s already in use"
+msgstr " フォント %s は既に使われています "
+
+#. R/postscript.R: gettextf("font encoding mismatch '%s'/'%s'", font$encoding, encoding)
+#: R/postscript.R:0
+msgid "font encoding mismatch '%s'/'%s'"
+msgstr " フォントエンコーディングがミスマッチです '%s'/'%s' "
+
+#. R/calc.R: stop("increasing 'x' and 'y' values expected")
+#: R/calc.R:0
+msgid "increasing 'x' and 'y' values expected"
+msgstr " 'x' と 'y' の値は昇順でなければなりません "
+
+#. R/cairo.R: gettextf("invalid '%s' argument", "filename")
+#. R/cairo.R: gettextf("invalid '%s' argument", "filename")
+#. R/cairo.R: gettextf("invalid '%s' argument", "filename")
+#. R/postscript.R: gettextf("invalid '%s' argument", "family")
+#. R/postscript.R: gettextf("invalid '%s' argument", "family")
+#. R/unix/png.R: gettextf("invalid '%s' argument", "filename")
+#. R/unix/png.R: gettextf("invalid '%s' argument", "filename")
+#. R/unix/png.R: gettextf("invalid '%s' argument", "filename")
+#. R/unix/png.R: gettextf("invalid '%s' argument", "filename")
+#. R/unix/quartz.R: gettextf("invalid '%s' argument", "title")
+#. R/unix/quartz.R: gettextf("invalid '%s' argument", "file")
+#. R/unix/x11.R: gettextf("invalid '%s' argument", "title")
+#. R/windows/cairo.R: gettextf("invalid '%s' argument", "filename")
+#. R/windows/cairo.R: gettextf("invalid '%s' argument", "filename")
+#. R/windows/cairo.R: gettextf("invalid '%s' argument", "filename")
+#. R/windows/cairo.R: gettextf("invalid '%s' argument", "filename")
+#. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
+#. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
+#. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
+#. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
+#. R/windows/windows.R: gettextf("invalid '%s' argument", "filename")
+#: R/cairo.R:0 R/postscript.R:0 R/unix/png.R:0 R/unix/quartz.R:0
+#: R/unix/x11.R:0 R/windows/cairo.R:0 R/windows/png.R:0 R/windows/windows.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr " 最初の引数が無効です "
+
+#. R/postscript.R: stop("invalid 'cmapEncoding' in font specification")
+#: R/postscript.R:0
+msgid "invalid 'cmapEncoding' in font specification"
+msgstr " フォント指定中に不正な 'cmapEncoding' があります "
+
+#. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
+#. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
+#. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
+#: R/postscript.R:0
+#, fuzzy
+msgid "invalid 'file' argument '%s'"
+msgstr " 不正な 'family' 引数です "
+
+#. R/postscript.R: stop("invalid CMap name in font specification")
+#: R/postscript.R:0
+msgid "invalid CMap name in font specification"
+msgstr " フォント指定中に不正な CMap 名があります "
+
+#. R/postscript.R: stop("invalid PDF resource in font specification")
+#: R/postscript.R:0
+msgid "invalid PDF resource in font specification"
+msgstr " フォント指定中に不正な PDF resource があります "
+
+#. R/postscript.R: stop("invalid PDF version")
+#: R/postscript.R:0
+msgid "invalid PDF version"
+msgstr " 不正な PDF のバージョンです "
+
+#. R/unix/quartz.R: stop("invalid Quartz font:  must be 4 strings")
+#: R/unix/quartz.R:0
+msgid "invalid Quartz font:  must be 4 strings"
+msgstr " 不正な Quartz font です: 4 つの文字列でなければなりません "
+
+#. R/windows/windows.R: stop("invalid Windows font:  must be a single font family name")
+#: R/windows/windows.R:0
+msgid "invalid Windows font:  must be a single font family name"
+msgstr ""
+" 不正な Windows フォントです: 単一のフォントファミリー名でなければなりません "
+
+#. R/unix/x11.R: stop("invalid X11 font specification: ", errDesc)
+#: R/unix/x11.R:0
+#, fuzzy
+msgid "invalid X11 font specification:"
+msgstr " 不正な X11 フォントの指定方法です "
+
+#. R/postscript.R: gettext("invalid arguments in %s (must be font names)", domain = "R-grDevices")
+#. R/postscript.R: gettext("invalid arguments in %s (must be font names)", domain = "R-grDevices")
+#. R/unix/quartz.R: gettextf("invalid arguments in %s (must be font names)", sQuote("quartzFonts"))
+#. R/unix/x11.R: gettextf("invalid arguments in %s (must be font names)", sQuote("X11Fonts"))
+#. R/windows/windows.R: gettextf("invalid arguments in %s (must be font names)", sQuote("windowsFonts"))
+#: R/postscript.R:0 R/unix/quartz.R:0 R/unix/x11.R:0 R/windows/windows.R:0
+#, fuzzy
+msgid "invalid arguments in %s (must be font names)"
+msgstr " '%s' 中の不正な引数です（フォント名が必要です） "
+
+#. R/postscript.R: gettextf("invalid arguments in %s (need named args)", sQuote(deparse(sys.call(sys.parent()))))
+#. R/postscript.R: gettext("invalid arguments in %s (need named args)", domain = "R-grDevices")
+#. R/postscript.R: gettext("invalid arguments in %s (need named args)", domain = "R-grDevices")
+#. R/unix/quartz.R: gettextf("invalid arguments in %s (need named args)", sQuote("quartzFonts"))
+#. R/unix/x11.R: gettextf("invalid arguments in %s (need named args)", sQuote("X11Fonts"))
+#. R/windows/windows.R: gettextf("invalid arguments in %s (need named args)", sQuote("windowsFonts"))
+#: R/postscript.R:0 R/unix/quartz.R:0 R/unix/x11.R:0 R/windows/windows.R:0
+#, fuzzy
+msgid "invalid arguments in %s (need named args)"
+msgstr " '%s' 中に不正な引数があります（名前付き引数が必要です） "
+
+#. R/postscript.R: stop("invalid encoding in font specification")
+#: R/postscript.R:0
+msgid "invalid encoding in font specification"
+msgstr " フォント指定中に不正なエンコーディングがあります "
+
+#. R/postscript.R: stop("invalid family name in font specification")
+#. R/postscript.R: stop("invalid family name in font specification")
+#: R/postscript.R:0
+msgid "invalid family name in font specification"
+msgstr " フォント指定中に不正なファミリ名があります "
+
+#. R/xyz.coords.R: stop("invalid first argument")
+#: R/xyz.coords.R:0
+msgid "invalid first argument"
+msgstr " 最初の引数が無効です "
+
+#. R/xyz.coords.R: stop("invalid first argument [bad language object]")
+#: R/xyz.coords.R:0
+msgid "invalid first argument [bad language object]"
+msgstr " 最初の引数が無効です [誤った言語オブジェクトです] "
+
+#. R/postscript.R: stop("invalid metric information in font specification")
+#. R/postscript.R: stop("invalid metric information in font specification")
+#: R/postscript.R:0
+msgid "invalid metric information in font specification"
+msgstr " フォント指定中に不正なメトリック指定があります "
+
+#. R/postscript.R: gettextf("invalid options in '%s'", name.opt)
+#: R/postscript.R:0
+msgid "invalid options in '%s'"
+msgstr " '%s' 中に不正なオプションがあります  "
+
+#. R/postscript.R: stop("invalid output format")
+#: R/postscript.R:0
+#, fuzzy
+msgid "invalid output format"
+msgstr " 不正な出力書式です "
+
+#. R/raster.R: stop("invalid raster subassignment")
+#: R/raster.R:0
+msgid "invalid raster subassignment"
+msgstr " 無効なラスターの部分代入 "
+
+#. R/raster.R: stop("invalid raster subsetting")
+#: R/raster.R:0
+msgid "invalid raster subsetting"
+msgstr " 無効なラスターの部分設定 "
+
+#. R/device.R: stop("invalid setting for 'getOption(\"device\")'")
+#: R/device.R:0
+msgid "invalid setting for 'getOption(\"device\")'"
+msgstr " 'getOption(\"device\")'の設定が不正です "
+
+#. R/windows/windows.R: stop("invalid value for 'rescale'")
+#: R/windows/windows.R:0
+msgid "invalid value for 'rescale'"
+msgstr " 'rescale' の値が不正です "
+
+#. R/recordplot.R: stop("loading snapshot from a different session")
+#: R/recordplot.R:0
+#, fuzzy
+msgid "loading snapshot from a different session"
+msgstr " 異なった R バージョンからのスナップショットが読み込まれています "
+
+#. R/device.R: warning("need to specify one of 'width' and 'height'")
+#: R/device.R:0
+msgid "need to specify one of 'width' and 'height'"
+msgstr " 'width' と 'height' のどちらか一つを指定する必要があります "
+
+#. R/calc.R: stop("no 'z' matrix specified")
+#: R/calc.R:0
+msgid "no 'z' matrix specified"
+msgstr " 'z' 行列が指定されていません "
+
+#. R/recordplot.R: stop("no current device to record from")
+#: R/recordplot.R:0
+msgid "no current device to record from"
+msgstr " 現在，以下のものから記録することが出来るデバイスはありません:  "
+
+#. R/device.R: stop("no device to print from")
+#. R/device.R: stop("no device to print from")
+#. R/device.R: stop("no device to print from")
+#. R/unix/quartz.R: stop("no device to print from")
+#: R/device.R:0 R/unix/quartz.R:0
+msgid "no device to print from"
+msgstr " 以下からプリントするためのデバイスがありません:  "
+
+#. R/calc.R: stop("no proper 'z' matrix specified")
+#: R/calc.R:0
+msgid "no proper 'z' matrix specified"
+msgstr " 適切な 'z' 行列が指定されていません "
+
+#. R/unix/x11.R: stop("no such device")
+#. R/windows/windows.R: stop("no such device")
+#: R/unix/x11.R:0 R/windows/windows.R:0
+msgid "no such device"
+msgstr " そのようなデバイスはありません "
+
+#. R/device.R: gettextf("no suitable unused file name for '%s'", "pdf()")
+#. R/device.R: gettextf("no suitable unused file name for '%s'", "postscript()")
+#: R/device.R:0
+#, fuzzy
+msgid "no suitable unused file name for '%s'"
+msgstr " pdf()に適した未使用のファイル名がありません "
+
+#. R/colorstuff.R: stop("numerical color values must be positive")
+#: R/colorstuff.R:0
+#, fuzzy
+msgid "numerical color values must be positive"
+msgstr " 'bias' は正の値でなければなりません "
+
+#. R/raster.R: stop("operator not meaningful for raster objects")
+#: R/raster.R:0
+#, fuzzy
+msgid "operator not meaningful for raster objects"
+msgstr " ラスターオブジェクトには無意味な操作です "
+
+#. R/prettyDate.R: stop("range too small for 'min.n'")
+#: R/prettyDate.R:0
+#, fuzzy
+msgid "range too small for 'min.n'"
+msgstr " min.n に対しては小さすぎるレンジです "
+
+#. R/colorstuff.R: stop("rgb matrix must be numeric")
+#: R/colorstuff.R:0
+msgid "rgb matrix must be numeric"
+msgstr " rgb 行列は数値でなければなりません "
+
+#. R/colorstuff.R: stop("rgb matrix must have 3 rows")
+#: R/colorstuff.R:0
+msgid "rgb matrix must have 3 rows"
+msgstr " rgb 行列の行数は 3 行でなければなりません "
+
+#. R/unix/quartz.R: stop("screen devices should not be used in examples etc", domain = "R-grDevices")
+#. R/unix/quartz.R: warning("screen devices should not be used in examples etc", immediate. = TRUE, noBreaks. = TRUE,     domain = "R-grDevices")
+#. R/unix/x11.R: stop("screen devices should not be used in examples etc", domain = "R-grDevices")
+#. R/unix/x11.R: warning("screen devices should not be used in examples etc", immediate. = TRUE, noBreaks. = TRUE,     domain = "R-grDevices")
+#. R/windows/windows.R: stop("screen devices should not be used in examples etc", domain = "R-grDevices")
+#. R/windows/windows.R: warning("screen devices should not be used in examples etc", immediate. = TRUE, noBreaks. = TRUE,     domain = "R-grDevices")
+#: R/unix/quartz.R:0 R/unix/x11.R:0 R/windows/windows.R:0
+msgid "screen devices should not be used in examples etc"
+msgstr ""
+
+#. R/postscript.R: gettextf("status %d in running command '%s'", ret, cmd)
+#: R/postscript.R:0
+msgid "status %d in running command '%s'"
+msgstr " 状態 %d が命令 '%s' 実行中に起きました "
+
+#. R/windows/windows.R: stop("subscript is out of range")
+#: R/windows/windows.R:0
+#, fuzzy
+msgid "subscript is out of range"
+msgstr " 添え字が範囲外です "
+
+#. R/postscript.R: gettextf("unknown family '%s'", family)
+#. R/postscript.R: gettextf("unknown family '%s'", family)
+#: R/postscript.R:0
+msgid "unknown family '%s'"
+msgstr " フォントファミリー'%s'は未知です "
+
+#. R/unix/x11.R: stop("unknown family for 'X11(type = \"XLib\")'")
+#: R/unix/x11.R:0
+#, fuzzy
+msgid "unknown family for 'X11(type = \"XLib\")'"
+msgstr "X11(type = \"XLib\")に対して、未知のファミリーです "
+
+#. R/postscript.R: stop("unknown font")
+#: R/postscript.R:0
+msgid "unknown font"
+msgstr " 未知のフォントです "
+
+#. R/unix/dev2bitmap.R: warning("unrecognized format of gs -help")
+#. R/windows/dev2bitmap.R: warning("unrecognized format of gs -help")
+#: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
+#, fuzzy
+msgid "unrecognized format of gs -help"
+msgstr " gs -help の意味不明な書式です "
+
+#. R/windows/windows.R: stop("windows devices should not be used in examples etc", domain = "R-grDevices")
+#. R/windows/windows.R: stop("windows devices should not be used in examples etc", domain = "R-grDevices")
+#: R/windows/windows.R:0
+msgid "windows devices should not be used in examples etc"
+msgstr ""
+
+#. R/xyz.coords.R: ngettext(n, "%d x value <= 0 omitted from logarithmic plot", "%d x values <= 0 omitted from logarithmic plot",     domain = "R-grDevices")
+#. R/xyz.coords.R: ngettext(n, "%d x value <= 0 omitted from logarithmic plot", "%d x values <= 0 omitted from logarithmic plot",     domain = "R-grDevices")
+#: R/xyz.coords.R:0
+msgid "%d x value <= 0 omitted from logarithmic plot"
+msgid_plural "%d x values <= 0 omitted from logarithmic plot"
+msgstr[0] " %d 個の正でない x の値が対数プロットから除かれました "
+
+#. R/xyz.coords.R: ngettext(n, "%d y value <= 0 omitted from logarithmic plot", "%d y values <= 0 omitted from logarithmic plot",     domain = "R-grDevices")
+#. R/xyz.coords.R: ngettext(n, "%d y value <= 0 omitted from logarithmic plot", "%d y values <= 0 omitted from logarithmic plot",     domain = "R-grDevices")
+#: R/xyz.coords.R:0
+msgid "%d y value <= 0 omitted from logarithmic plot"
+msgid_plural "%d y values <= 0 omitted from logarithmic plot"
+msgstr[0] " %d 個の正でない y の値が対数プロットから除かれました "
+
+#. R/xyz.coords.R: ngettext(n, "%d z value <= 0 omitted from logarithmic plot", "%d z values <= 0 omitted from logarithmic plot",     domain = "R-grDevices")
+#: R/xyz.coords.R:0
+msgid "%d z value <= 0 omitted from logarithmic plot"
+msgid_plural "%d z values <= 0 omitted from logarithmic plot"
+msgstr[0] " %d 個の正でない x の値が対数プロットから除かれました "
+
+#. R/postscript.R: ngettext(as.integer(sum(ii)), "%s differs between new and previous", "%s differ between new and previous",     domain = "R-grDevices")
+#: R/postscript.R:0
+#, fuzzy
+msgid "%s differs between new and previous"
+msgid_plural "%s differ between new and previous"
+msgstr[0] " が新しいものと前のもので異なります "
+
+#. R/postscript.R: ngettext(as.integer(sum(ii)), "%s differs between new and previous\n\t ==> NOT changing %s",     "%s differ between new and previous\n\t ==> NOT changing %s", domain = "R-grDevices")
+#: R/postscript.R:0
+#, fuzzy
+msgid ""
+"%s differs between new and previous\n"
+"\t ==> NOT changing %s"
+msgid_plural ""
+"%s differ between new and previous\n"
+"\t ==> NOT changing %s"
+msgstr[0] " が新しいものと前のもので異なります "
+
+#. R/postscript.R: ngettext(as.integer(sum(is.na(matches))), "invalid argument name %s in '%s'", "invalid argument names %s in '%s'",     domain = "R-grDevices")
+#: R/postscript.R:0
+msgid "invalid argument name %s in '%s'"
+msgid_plural "invalid argument names %s in '%s'"
+msgstr[0] " %2$s 中の %1$s は不正な引数名です "
+
+#, fuzzy
+#~ msgid "sorry, 'gs' command cannot be found"
+#~ msgstr " すみません，'gs' が見つかりません "
+
+#, fuzzy
+#~ msgid "'bias' must be positive"
+#~ msgstr " 'bandwidth' は正の値でなければなりません "
+
+#, fuzzy
+#~ msgid "loading snapshot from pre-3.0.0 R version"
+#~ msgstr " R2.0.0以前のバージョンからのスナップショットが読み込まれています "
+
+#~ msgid "invalid 'filename'"
+#~ msgstr " 不正な 'filename' 引数です "
+
+#, fuzzy
+#~ msgid "'font' argument is not an object of class %s"
+#~ msgstr " 引数はクラス \"recordedplot\" ではありません "
+
+#~ msgid "Not a CID font"
+#~ msgstr "  CID フォントではありません "
+
+#~ msgid "'file' is missing with no default"
+#~ msgstr " 'file' はデフォルトなしで欠損となっています "
+
+#, fuzzy
+#~ msgid "'to.ref.white' disagrees with definition of %s"
+#~ msgstr " 'to.ref.white' が以下の定義と一致しません： "
+
+#~ msgid "invalid arguments in '%s' (need named args)"
+#~ msgstr " '%s' 中に不正な引数があります（名前付き引数が必要です） "
+
+#~ msgid "invalid 'file'"
+#~ msgstr " 不正な 'file' です "
+
+#~ msgid "invalid arguments in '%s' (must be font names)"
+#~ msgstr " '%s' 中の不正な引数です（フォント名が必要です） "
+
+#, fuzzy
+#~ msgid "no suitable unused file name for 'postscript()'"
+#~ msgstr " postscript()に適した未使用のファイル名がありません "
+
+#, fuzzy
+#~ msgid "'from' must be a \"colorConverter\" object or a string"
+#~ msgstr " 'from' は colorConverter または文字列でなければなりません "
+
+#, fuzzy
+#~ msgid "'to' must be a \"colorConverter\" object or a string"
+#~ msgstr " 'to' は colorConverter または文字列でなければなりません "
+
+#~ msgid "dev.displaylist() called without an open graphics device"
+#~ msgstr ""
+#~ " dev.displaylist() が開かれたグラフィックスデバイスがないのに呼び出されま"
+#~ "した "
+
+#~ msgid "dev.new(): using postscript(file=\"%s\")"
+#~ msgstr " dev.new(): postscript(file=\"%s\")を使用します "
+
+#, fuzzy
+#~ msgid "invalid arguments in 'quartzFonts' (must be font names)"
+#~ msgstr " quartzFonts 中の不正な引数です（フォント名が必要です） "
+
+#, fuzzy
+#~ msgid "invalid arguments in 'quartzFonts' (need named args)"
+#~ msgstr " quartzFonts 中の不正な引数です（名前がついた引数が必要です） "
+
+#, fuzzy
+#~ msgid "invalid arguments in 'X11Fonts' (must be font names)"
+#~ msgstr " '%s' 中の不正な引数です（フォント名が必要です） "
+
+#, fuzzy
+#~ msgid "invalid arguments in 'X11Fonts' (need named args)"
+#~ msgstr " '%s' 中に不正な引数があります（名前付き引数が必要です） "
+
+#~ msgid "invalid arguments in 'windowsFonts' (must be font names)"
+#~ msgstr " 'windowsFonts' 中の引数が不正です（フォント名が必要です） "
+
+#~ msgid "invalid arguments in 'windowsFonts' (need named args)"
+#~ msgstr " 'windowsFonts' 中の不正な引数です（名前がついた引数が必要です） "
+
+#~ msgid "'bandwidth' must be numeric"
+#~ msgstr " 'bandwidth'は数値でなければなりません "
+
+#~ msgid "invalid 'title'"
+#~ msgstr " 不正な 'title' です "
+
+#, fuzzy
+#~ msgid "NOT changing %s"
+#~ msgstr " 変更しません "
+
+#~ msgid "can only print from screen device"
+#~ msgstr " スクリーンデバイスからしかプリントすることが出来ません "
+
+#~ msgid "'maxRasters' is no longer needed, and will be ignored"
+#~ msgstr " 'maxRasters'はもう不要です。今後は無視されます。 "
+
+#~ msgid "The 'gamma' argument is deprecated and has no effect"
+#~ msgstr " 引数 'gamma' は廃止予定です、適用されません "
+
+#~ msgid "invalid value for 'antialias'"
+#~ msgstr " 'antialias'の値が不正です "
+
+#~ msgid "quartz() device interactivity reduced without an event loop manager"
+#~ msgstr ""
+#~ " quartz() デバイスは event loop manager なしに対話的に減らされました "

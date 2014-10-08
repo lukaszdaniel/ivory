@@ -1,0 +1,280 @@
+Tylko w R-recommended-moje/lattice/inst/po: ko
+Tylko w R-recommended-moje/lattice/inst/po: pl
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/man/rfs.Rd R-recommended-moje/lattice/man/rfs.Rd
+9c9
+< rfs(model, layout=c(2, 1), xlab="f-value", ylab=NULL,
+---
+> rfs(model, layout=c(2, 1), xlab = gettext("f-value", domain = "R-lattice"), ylab=NULL,
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/axis.R R-recommended-moje/lattice/R/axis.R
+357c357
+<             else stop("Invalid value of 'log'")
+---
+>             else stop(gettextf("invalid '%s' value", "log"))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/bwplot.R R-recommended-moje/lattice/R/bwplot.R
+43c43
+<                 y <- factor(y, levels = 1:nlevels)
+---
+>                 y <- factor(y, levels = seq_len(nlevels))
+70c70
+<                 x <- factor(x, levels = 1:nlevels)
+---
+>                 x <- factor(x, levels = seq_len(nlevels))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/cloud.R R-recommended-moje/lattice/R/cloud.R
+393c393
+<         else col.regions[floor(1+(1:numcol-1)*(numcol.r-1)/(numcol-1))]
+---
+>         else col.regions[floor(1+(seq_len(numcol)-1)*(numcol.r-1)/(numcol-1))]
+511c511
+<             grid.polygon(x = pol.x[1:(count * 3)], y = pol.y[1:(count * 3)],
+---
+>             grid.polygon(x = pol.x[seq_len(count * 3)], y = pol.y[seq_len(count * 3)],
+625c625
+<             grid.polygon(x = pol.x[1:(count * 4)], y = pol.y[1:(count * 4)],
+---
+>             grid.polygon(x = pol.x[seq_len(count * 4)], y = pol.y[seq_len(count * 4)],
+1013c1013
+<         for (face in 1:6)
+---
+>         for (face in seq_len(6))
+1017c1017
+<         #for (j in 1:12)
+---
+>         #for (j in seq_len(12))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/common.R R-recommended-moje/lattice/R/common.R
+668c668
+<         else  stop("Invalid value of perm.cond")
+---
+>         else  stop(gettextf("invalid '%s' value", "perm.cond"))
+754c754
+<                 stop("invalid value for layout")
+---
+>                 stop(gettextf("invalid '%s' value", "layout"))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/histogram.R R-recommended-moje/lattice/R/histogram.R
+44c44
+<     ##     warning(gettextf("type='%s' can be misleading in this context", type))
+---
+>     ##     warning(gettextf("'type = %s' can be misleading in this context", type))
+72c72
+<                 warning(gettextf("type='%s' can be misleading in this context", type))
+---
+>                 warning(gettextf("'type = %s' can be misleading in this context", type))
+354c354
+<         warning(gettextf("type='%s' can be misleading in this context", type))
+---
+>         warning(gettextf("'type = %s' can be misleading in this context", type))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/interaction.R R-recommended-moje/lattice/R/interaction.R
+83c83
+<             warning("no observations within ", threshold, " points")
+---
+>             warning(gettextf("no observations within %d points", threshold))
+149c149
+<             warning("no observations within ", threshold, " points")
+---
+>             warning(gettextf("no observations within %d points", threshold))
+756c756
+<         if (verbose) warning("no points within ", threshold, " points of click")
+---
+>         if (verbose) warning(gettextf("no points within %d points of click", threshold))
+765,766c765,766
+<         for (row in 1:nvars)
+<         for (column in 1:nvars)
+---
+>         for (row in seq_len(nvars))
+>         for (column in seq_len(nvars))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/layout.R R-recommended-moje/lattice/R/layout.R
+36c36
+<         unit.c(x[1:(pos-1)], u)
+---
+>         unit.c(x[seq_len(pos-1)], u)
+38c38
+<         unit.c(x[1:(pos-1)], u, x[(pos+1):lx])
+---
+>         unit.c(x[seq_len(pos-1)], u, x[(pos+1):lx])
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/legend.R R-recommended-moje/lattice/R/legend.R
+139c139
+<     if (!is.list(key)) stop("key must be a list")
+---
+>     if (!is.list(key)) stop(gettextf("'%s' must be a list", "key"))
+239c239
+<     for(i in 1:key.length)
+---
+>     for(i in seq_len(key.length))
+266c266
+<             for (j in 1:length(pars))
+---
+>             for (j in seq_len(length(pars)))
+419c419
+<         for (i in 1:column.blocks)
+---
+>         for (i in seq_len(column.blocks))
+421,426c421
+<             widths.x[(1:number.of.components-1)*3+1 +
+<                      (i-1)*3*number.of.components + i-1] <-
+<                          key$between/2
+<             widths.x[(1:number.of.components-1)*3+1 +
+<                      (i-1)*3*number.of.components + i+1] <-
+<                          key$between/2
+---
+>             widths.x[(seq_len(number.of.components)-1)*3+1 + (i-1)*3*number.of.components + i-1] <- key$between/2
+429c424
+<         for (i in 1:number.of.components)
+---
+>         for (i in seq_len(number.of.components))
+432,433c427
+<             id <- (1:column.blocks - 1) *
+<                 (number.of.components * 3 + 1) + i * 3 - 1
+---
+>             id <- (seq_len(column.blocks) - 1) * (number.of.components * 3 + 1) + i * 3 - 1
+436c430
+<                 for (j in 1:cur$length)
+---
+>                 for (j in seq_len(cur$length))
+494c488
+<         for (i in 1:n.col)
+---
+>         for (i in seq_len(n.col))
+554c548
+<         for (i in 1:number.of.components)
+---
+>         for (i in seq_len(number.of.components))
+685c679
+<                                           pointsGrob(x = (1:key$divide-1)/(key$divide-1),
+---
+>                                           pointsGrob(x = (seq_len(key$divide)-1)/(key$divide-1),
+743c737
+<     else stop("Sorry, align=FALSE is not supported")
+---
+>     else stop("Sorry, 'align = FALSE' is not supported")
+758c752
+<     if (!is.list(key)) stop("key must be a list")
+---
+>     if (!is.list(key)) stop(gettextf("'%s' must be a list", "key"))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/levelplot.R R-recommended-moje/lattice/R/levelplot.R
+367c367
+<                     else stop("Invalid label.style")
+---
+>                     else stop(gettextf("invalid '%s' value", "label.style"))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/miscellaneous.R R-recommended-moje/lattice/R/miscellaneous.R
+640,643c640,643
+<                    xx[2*1:n-1] <- x[ord]
+<                    yy[2*1:n-1] <- y[ord]
+<                    xx[2*1:(n-1)] <- x[ord][if (type=="s") -1 else -n]
+<                    yy[2*1:(n-1)] <- y[ord][if (type=="s") -n else -1]
+---
+>                    xx[2*seq_len(n)-1] <- x[ord]
+>                    yy[2*seq_len(n)-1] <- y[ord]
+>                    xx[2*seq_len(n-1)] <- x[ord][if (type=="s") -1 else -n]
+>                    yy[2*seq_len(n-1)] <- y[ord][if (type=="s") -n else -1]
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/panels.R R-recommended-moje/lattice/R/panels.R
+388,389c388,389
+<         grid.segments(y0 = 1:h / (h+1),
+<                       y1 = 1:h / (h+1),
+---
+>         grid.segments(y0 = seq_len(h) / (h+1),
+>                       y1 = seq_len(h) / (h+1),
+396,397c396,397
+<         grid.segments(x0 = 1:v / (v+1),
+<                       x1 = 1:v / (v+1),
+---
+>         grid.segments(x0 = seq_len(v) / (v+1),
+>                       x1 = seq_len(v) / (v+1),
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/rfs.R R-recommended-moje/lattice/R/rfs.R
+4c4
+<     function(model, layout = c(2,1), xlab = "f-value", ylab = NULL,
+---
+>     function(model, layout = c(2,1), xlab = gettext("f-value", domain = "R-lattice"), ylab = NULL,
+19,20c19,20
+<                  f = c( rep(gettext("Fitted Values minus Mean"), nf),
+<                  rep(gettext("Residuals"), nr)))
+---
+>                  f = c( rep(gettext("Fitted Values minus Mean", domain = "R-lattice"), nf),
+>                  rep(gettext("Residuals", domain = "R-lattice"), nr)))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/scales.R R-recommended-moje/lattice/R/scales.R
+30,31c30,33
+<             warning("Invalid or ambiguous component names: ",
+<                      paste(names(x)[which(is.na(pid))], collapse = ", ") )
+---
+> 	   {
+> 		tmp_n <- paste(names(x)[which(is.na(pid))], collapse = ", ")
+>             warning("Invalid or ambiguous component names: ", tmp_n, sep = "")
+> 	   }
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/shingle.R R-recommended-moje/lattice/R/shingle.R
+27c27
+<     if (!is.shingle(x)) stop("x must be a shingle")
+---
+>     if (!is.shingle(x)) stop("'x' argument is not an object of class \"shingle\"")
+49c49
+<     if (ncol(x) != 2) stop("x must be matrix with 2 columns")
+---
+>     if (ncol(x) != 2) stop("'x' must be matrix with 2 columns")
+122c122
+<         cat(gettext("\nData:\n"))
+---
+>         cat("\n", gettext("Data:", domain = "R-lattice"), "\n", sep = "")
+127c127
+<     if (n < 1) cat(gettext("\nno intervals\n"))
+---
+>     if (n < 1) cat("\n", gettext("no intervals", domain = "R-lattice"), "\n", sep = "")
+130c130
+<         for (i in 1:n) {
+---
+>         for (i in seq_len(n)) {
+135c135
+<         cat(gettext("\nIntervals:\n"))
+---
+>         cat("\n", gettext("Intervals:", domain = "R-lattice"), "\n", sep = "")
+142c142
+<         cat(gettext("\nOverlap between adjacent intervals:\n"))
+---
+>         cat("\n", gettext("Overlap between adjacent intervals:", domain = "R-lattice"), "\n", sep = "")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/splom.R R-recommended-moje/lattice/R/splom.R
+183,184c183,184
+<         for(i in 1:n.var)     ## i = row, j = col
+<             for(j in 1:n.var)
+---
+>         for(i in seq_len(n.var))     ## i = row, j = col
+>             for(j in seq_len(n.var))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/summary.trellis.R R-recommended-moje/lattice/R/summary.trellis.R
+37c37
+<     cat(gettext("\nCall:\n"))
+---
+>     cat("\n", gettext("Call:", domain = "R-lattice"), "\n", sep = "")
+39c39
+<     cat(gettext("\nNumber of observations:\n"))
+---
+>     cat("\n", gettext("Number of observations:", domain = "R-lattice"), "\n", sep = "")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/update.trellis.R R-recommended-moje/lattice/R/update.trellis.R
+180c180
+<         else warning("'par.strip.text' must be a list")
+---
+>         else warning(gettextf("'%s' must be a list", "par.strip.text"))
+205c205
+<         else warning("'par.settings' must be a list")
+---
+>         else warning(gettextf("'%s' must be a list", "par.settings"))
+213c213
+<         else warning("'plot.args' must be a list")
+---
+>         else warning(gettextf("'%s' must be a list", "plot.args"))
+221c221
+<         else warning("'lattice.options' must be a list")
+---
+>         else warning(gettextf("'%s' must be a list", "lattice.options"))
+237c237
+<         else stop("Invalid value of 'perm.cond'")
+---
+>         else stop(gettextf("invalid '%s' value", "perm.cond"))
+449c449
+<         else warning("Invalid value of 'aspect'")
+---
+>         else warning(gettextf("invalid '%s' value", "aspect"))
+Tylko w R-recommended-moje/lattice/src: localization.h
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/src/threeDplot.c R-recommended-moje/lattice/src/threeDplot.c
+2c2
+< 
+---
+> #include "localization.h"
+154c154
+< 	error("bug in wireframe calculations: cosines supposed to be non-negative but not");
+---
+> 	error(_("bug in wireframe calculations: cosines supposed to be non-negative but not"));

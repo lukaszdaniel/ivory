@@ -1,0 +1,605 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: rpart 4.1-8\n"
+"POT-Creation-Date: 2014-07-13 09:15\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+
+#: R/meanvar.rpart.R: 0
+#: R/path.rpart.R: 0
+#: R/plot.rpart.R: 0
+#: R/plotcp.R: 0
+#: R/predict.rpart.R: 0
+#: R/print.rpart.R: 0
+#: R/printcp.R: 0
+#: R/residuals.rpart.R: 0
+#: R/rsq.rpart.R: 0
+#: R/snip.rpart.R: 0
+#: R/summary.rpart.R: 0
+#: R/text.rpart.R: 0
+#. R/meanvar.rpart.R: gettextf("'%s' argument is not an object of class %s", "tree", dQuote("rpart"))
+#. R/path.rpart.R: gettextf("'%s' argument is not an object of class %s", "tree", dQuote("rpart"))
+#. R/plot.rpart.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("rpart"))
+#. R/plotcp.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("rpart"))
+#. R/predict.rpart.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("rpart"))
+#. R/print.rpart.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("rpart"))
+#. R/printcp.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("rpart"))
+#. R/residuals.rpart.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("rpart"))
+#. R/rsq.rpart.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("rpart"))
+#. R/snip.rpart.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("rpart"))
+#. R/summary.rpart.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("rpart"))
+#. R/text.rpart.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("rpart"))
+
+msgid "'%s' argument is not an object of class %s"
+msgstr ""
+
+
+#: R/plotcp.R: 0
+#. R/plotcp.R: stop("'cptable' component does not contain cross-validation results")
+
+msgid "'cptable' component does not contain cross-validation results"
+msgstr ""
+
+
+#: R/roc.rpart.R: 0
+#. R/roc.rpart.R: stop("'object' argument is not an object of class \"rpart\" or endpoint is not a 2 level-factor")
+
+msgid "'object' argument is not an object of class \"rpart\" or endpoint is not a 2 level-factor"
+msgstr ""
+
+
+#: R/rpart.class.R: 0
+#: R/rpart.exp.R: 0
+#: R/rpart.poisson.R: 0
+#. R/rpart.class.R: gettextf("'parms' component not matched: %s", names(parms)[temp == 0L])
+#. R/rpart.exp.R: gettextf("'parms' component not matched: %s", names(parms)[indx == 0L])
+#. R/rpart.poisson.R: gettextf("'parms' component not matched: %s", names(parms)[indx == 0L])
+
+msgid "'parms' component not matched: %s"
+msgstr ""
+
+
+#: R/formatg.R: 0
+#. R/formatg.R: stop("'x' must be a numeric vector")
+
+msgid "'x' must be a numeric vector"
+msgstr ""
+
+
+#: R/rpart.exp.R: 0
+#. R/rpart.exp.R: stop("'y' argument must be an object of class \"survival\" - use the 'Surv()' function")
+
+msgid "'y' argument must be an object of class \"survival\" - use the 'Surv()' function"
+msgstr ""
+
+
+#: R/roc.rpart.R: 0
+#. R/roc.rpart.R: gettext("1-Specificity", domain = "R-rpart")
+
+msgid "1-Specificity"
+msgstr ""
+
+
+#: R/rpart.R: 0
+#. R/rpart.R: gettextf("Argument %s not matched", names(extraArgs)[indx == 0L])
+
+msgid "Argument %s not matched"
+msgstr ""
+
+
+#: R/printcp.R: 0
+#. R/printcp.R: gettext("\nClassification tree:\n", domain = "R-rpart")
+
+msgid "Classification tree:"
+msgstr ""
+
+
+#: R/rpart.R: 0
+#. R/rpart.R: stop("Cost vector is of the wrong length")
+
+msgid "Cost vector is of the wrong length"
+msgstr ""
+
+
+#: R/rpart.R: 0
+#. R/rpart.R: stop("Cost vector must be positive")
+
+msgid "Cost vector must be positive"
+msgstr ""
+
+
+#: R/post.rpart.R: 0
+#. R/post.rpart.R: gettextf("Endpoint = %s", paste(temp, collapse = " "), domain = "R-rpart")
+
+msgid "Endpoint = %s"
+msgstr ""
+
+
+#: R/rpart.R: 0
+#. R/rpart.R: stop("Initialization routine is missing the 'summary' function")
+
+msgid "Initialization routine is missing the 'summary' function"
+msgstr ""
+
+
+#: R/rpart.exp.R: 0
+#: R/rpart.poisson.R: 0
+#. R/rpart.exp.R: stop("Invalid error method for Poisson")
+#. R/rpart.poisson.R: stop("Invalid error method for Poisson")
+
+msgid "Invalid error method for Poisson"
+msgstr ""
+
+
+#: R/xpred.rpart.R: 0
+#. R/xpred.rpart.R: stop("Invalid fit object")
+
+msgid "Invalid fit object"
+msgstr ""
+
+
+#: R/rpart.R: 0
+#. R/rpart.R: stop("Invalid method")
+
+msgid "Invalid method"
+msgstr ""
+
+
+#: R/predict.rpart.R: 0
+#. R/predict.rpart.R: stop("Invalid prediction for \"rpart\" object")
+
+msgid "Invalid prediction for \"rpart\" object"
+msgstr ""
+
+
+#: R/rpartcallback.R: 0
+#. R/rpartcallback.R: stop("Invalid return from categorical 'split' function")
+#. R/rpartcallback.R: stop("Invalid return from categorical 'split' function")
+
+msgid "Invalid return from categorical 'split' function"
+msgstr ""
+
+
+#: R/rpart.exp.R: 0
+#: R/rpart.poisson.R: 0
+#. R/rpart.exp.R: stop("Invalid shrinkage value")
+#. R/rpart.poisson.R: stop("Invalid shrinkage value")
+
+msgid "Invalid shrinkage value"
+msgstr ""
+
+
+#: R/rpart.class.R: 0
+#. R/rpart.class.R: stop("Invalid splitting rule")
+
+msgid "Invalid splitting rule"
+msgstr ""
+
+
+#: R/residuals.rpart.R: 0
+#. R/residuals.rpart.R: stop("Invalid type of residual")
+
+msgid "Invalid type of residual"
+msgstr ""
+
+
+#: R/rpart.class.R: 0
+#. R/rpart.class.R: stop("Loss matrix cannot have negative elements")
+
+msgid "Loss matrix cannot have negative elements"
+msgstr ""
+
+
+#: R/rpart.class.R: 0
+#. R/rpart.class.R: stop("Loss matrix has a row of zeros")
+
+msgid "Loss matrix has a row of zeros"
+msgstr ""
+
+
+#: R/rpart.class.R: 0
+#. R/rpart.class.R: stop("Loss matrix must have zero on diagonals")
+
+msgid "Loss matrix must have zero on diagonals"
+msgstr ""
+
+
+#: R/rpart.control.R: 0
+#. R/rpart.control.R: stop("Maximum depth is 30")
+
+msgid "Maximum depth is 30"
+msgstr ""
+
+
+#: R/rpart.control.R: 0
+#. R/rpart.control.R: stop("Maximum depth must be at least 1")
+
+msgid "Maximum depth must be at least 1"
+msgstr ""
+
+
+#: R/rpart.exp.R: 0
+#. R/rpart.exp.R: stop("No deaths in data set")
+
+msgid "No deaths in data set"
+msgstr ""
+
+
+#: R/rpart.class.R: 0
+#. R/rpart.class.R: stop("No offset allowed in classification models")
+
+msgid "No offset allowed in classification models"
+msgstr ""
+
+
+#: R/snip.rpart.R: 0
+#. R/snip.rpart.R: gettextf("Nodes %s are not in this tree", toss[toss.idx == 0L])
+
+msgid "Nodes %s are not in this tree"
+msgstr ""
+
+
+#: R/rpart.poisson.R: 0
+#. R/rpart.poisson.R: stop("Number of events must be >= 0")
+
+msgid "Number of events must be >= 0"
+msgstr ""
+
+
+#: R/rpart.exp.R: 0
+#: R/rpart.poisson.R: 0
+#. R/rpart.exp.R: stop("Observation time must be > 0")
+#. R/rpart.poisson.R: stop("Observation time must be > 0")
+
+msgid "Observation time must be > 0"
+msgstr ""
+
+
+#: R/rpart.class.R: 0
+#. R/rpart.class.R: stop("Parameter argument must be a list")
+
+msgid "Parameter argument must be a list"
+msgstr ""
+
+
+#: R/meanvar.rpart.R: 0
+#. R/meanvar.rpart.R: stop("Plot is not useful for classification or poisson trees")
+
+msgid "Plot is not useful for classification or poisson trees"
+msgstr ""
+
+
+#: R/rpart.class.R: 0
+#. R/rpart.class.R: stop("Priors must be >= 0")
+
+msgid "Priors must be >= 0"
+msgstr ""
+
+
+#: R/rpart.class.R: 0
+#. R/rpart.class.R: stop("Priors must sum to 1")
+
+msgid "Priors must sum to 1"
+msgstr ""
+
+
+#: R/printcp.R: 0
+#. R/printcp.R: gettext("\nRates regression tree:\n", domain = "R-rpart")
+
+msgid "Rates regression tree:"
+msgstr ""
+
+
+#: R/printcp.R: 0
+#. R/printcp.R: gettext("\nRegression tree:\n", domain = "R-rpart")
+
+msgid "Regression tree:"
+msgstr ""
+
+
+#: R/printcp.R: 0
+#. R/printcp.R: gettext("Root node error: ", domain = "R-rpart")
+
+msgid "Root node error:"
+msgstr ""
+
+
+#: R/roc.rpart.R: 0
+#. R/roc.rpart.R: gettext("Sensitivity", domain = "R-rpart")
+#. R/roc.rpart.R: gettext("Sensitivity", domain = "R-rpart")
+
+msgid "Sensitivity"
+msgstr ""
+
+
+#: R/roc.rpart.R: 0
+#. R/roc.rpart.R: gettext("Specificity", domain = "R-rpart")
+
+msgid "Specificity"
+msgstr ""
+
+
+#: R/printcp.R: 0
+#. R/printcp.R: gettext("\nSurvival regression tree:\n", domain = "R-rpart")
+
+msgid "Survival regression tree:"
+msgstr ""
+
+
+#: R/rpart.class.R: 0
+#. R/rpart.class.R: stop("The parms list must have names")
+
+msgid "The parms list must have names"
+msgstr ""
+
+
+#: R/rpart.control.R: 0
+#. R/rpart.control.R: gettextf("The value of '%s' supplied is < 0; the value 0 was used instead", "maxcomplete")
+#. R/rpart.control.R: gettextf("The value of '%s' supplied is < 0; the value 0 was used instead", "xval")
+
+msgid "The value of '%s' supplied is < 0; the value 0 was used instead"
+msgstr ""
+
+
+#: R/rpart.control.R: 0
+#. R/rpart.control.R: gettextf("The value of '%s' supplied was out of range, the default value of %d is used instead",     "usesurrogate", 2)
+#. R/rpart.control.R: gettextf("The value of '%s' supplied was out of range, the default value of %d is used instead",     "surrogatestyle", 0)
+
+msgid "The value of '%s' supplied was out of range, the default value of %d is used instead"
+msgstr ""
+
+
+#: R/pred.rpart.R: 0
+#. R/pred.rpart.R: stop("Tree has variables not found in new data")
+
+msgid "Tree has variables not found in new data"
+msgstr ""
+
+
+#: R/rpart.R: 0
+#. R/rpart.R: stop("Trees cannot handle interaction terms")
+
+msgid "Trees cannot handle interaction terms"
+msgstr ""
+
+
+#: R/rpartcallback.R: 0
+#. R/rpartcallback.R: stop("User 'eval' function returned invalid deviance")
+#. R/rpartcallback.R: stop("User 'eval' function returned invalid deviance")
+
+msgid "User 'eval' function returned invalid deviance"
+msgstr ""
+
+
+#: R/rpartcallback.R: 0
+#. R/rpartcallback.R: stop("User 'eval' function returned invalid label")
+#. R/rpartcallback.R: stop("User 'eval' function returned invalid label")
+
+msgid "User 'eval' function returned invalid label"
+msgstr ""
+
+
+#: R/rpartcallback.R: 0
+#. R/rpartcallback.R: stop("User 'split' function returned invalid direction")
+#. R/rpartcallback.R: stop("User 'split' function returned invalid direction")
+
+msgid "User 'split' function returned invalid direction"
+msgstr ""
+
+
+#: R/rpartcallback.R: 0
+#. R/rpartcallback.R: stop("User 'split' function returned invalid goodness")
+#. R/rpartcallback.R: stop("User 'split' function returned invalid goodness")
+
+msgid "User 'split' function returned invalid goodness"
+msgstr ""
+
+
+#: R/rpartcallback.R: 0
+#. R/rpartcallback.R: gettextf("User written method does not contain a %s function", sQuote("split()"))
+
+msgid "User written method does not contain a %s function"
+msgstr ""
+
+
+#: R/rpartcallback.R: 0
+#. R/rpartcallback.R: gettextf("User written method does not contain an %s function", sQuote("init()"))
+#. R/rpartcallback.R: gettextf("User written method does not contain an %s function", sQuote("eval()"))
+
+msgid "User written method does not contain an %s function"
+msgstr ""
+
+
+#: R/rpartcallback.R: 0
+#. R/rpartcallback.R: stop("User written methods must have 3 functions")
+
+msgid "User written methods must have 3 functions"
+msgstr ""
+
+
+#: R/summary.rpart.R: 0
+#. R/summary.rpart.R: gettext("\nVariable importance\n", domain = "R-rpart")
+
+msgid "Variable importance"
+msgstr ""
+
+
+#: R/printcp.R: 0
+#. R/printcp.R: gettext("Variables actually used in tree construction:\n", domain = "R-rpart")
+
+msgid "Variables actually used in tree construction:"
+msgstr ""
+
+
+#: R/rpart.R: 0
+#: R/xpred.rpart.R: 0
+#: R/xpred.rpart.R: 0
+#. R/rpart.R: stop("Wrong length for 'xval'")
+#. R/rpart.R: stop("Wrong length for 'xval'")
+#. R/xpred.rpart.R: stop("Wrong length for 'xval'")
+#. R/xpred.rpart.R: stop("Wrong length for 'xval'")
+
+msgid "Wrong length for 'xval'"
+msgstr ""
+
+
+#: R/rpart.class.R: 0
+#. R/rpart.class.R: stop("Wrong length for loss matrix")
+
+msgid "Wrong length for loss matrix"
+msgstr ""
+
+
+#: R/rpart.class.R: 0
+#. R/rpart.class.R: stop("Wrong length for priors")
+
+msgid "Wrong length for priors"
+msgstr ""
+
+
+#: R/plotcp.R: 0
+#. R/plotcp.R: gettext("X-val Relative Error", domain = "R-rpart")
+
+msgid "X-val Relative Error"
+msgstr ""
+
+
+#: R/rpart.exp.R: 0
+#: R/rpart.poisson.R: 0
+#. R/rpart.exp.R: stop("You must input a named list for parms")
+#. R/rpart.poisson.R: stop("You must input a named list for parms")
+
+msgid "You must input a named list for parms"
+msgstr ""
+
+
+#: R/rpart.R: 0
+#. R/rpart.R: stop("a 'formula' argument is required")
+
+msgid "a 'formula' argument is required"
+msgstr ""
+
+
+#: R/text.rpart.R: 0
+#. R/text.rpart.R: warning("argument 'label' is no longer used")
+
+msgid "argument 'label' is no longer used"
+msgstr ""
+
+
+#: R/meanvar.rpart.R: 0
+#. R/meanvar.rpart.R: gettext("ave(deviance)")
+
+msgid "ave(deviance)"
+msgstr ""
+
+
+#: R/meanvar.rpart.R: 0
+#. R/meanvar.rpart.R: gettext("ave(y)")
+
+msgid "ave(y)"
+msgstr ""
+
+
+#: R/plot.rpart.R: 0
+#: R/text.rpart.R: 0
+#. R/plot.rpart.R: stop("fit is not a tree, just a root")
+#. R/text.rpart.R: stop("fit is not a tree, just a root")
+
+msgid "fit is not a tree, just a root"
+msgstr ""
+
+
+#: R/rsq.rpart.R: 0
+#. R/rsq.rpart.R: warning("may not be applicable for this method")
+
+msgid "may not be applicable for this method"
+msgstr ""
+
+
+#: R/rpart.anova.R: 0
+#. R/rpart.anova.R: gettextf("  mean=%s, MSE=%s", formatg(yval, digits), formatg(dev/wt, digits), domain = "R-rpart")
+
+msgid "mean=%s, MSE=%s"
+msgstr ""
+
+
+#: R/labels.rpart.R: 0
+#. R/labels.rpart.R: warning("more than 52 levels in a predicting factor, truncated for printout", domain = "R-rpart")
+
+msgid "more than 52 levels in a predicting factor, truncated for printout"
+msgstr ""
+
+
+#: R/rpart.R: 0
+#. R/rpart.R: stop("negative weights not allowed")
+
+msgid "negative weights not allowed"
+msgstr ""
+
+
+#: R/rpart.branch.R: 0
+#: R/rpartco.R: 0
+#: R/snip.rpart.mouse.R: 0
+#. R/rpart.branch.R: stop("no information available on parameters from previous call to 'plot()'")
+#. R/rpartco.R: stop("no information available on parameters from previous call to 'plot()'")
+#. R/snip.rpart.mouse.R: stop("no information available on parameters from previous call to 'plot()'")
+
+msgid "no information available on parameters from previous call to 'plot()'"
+msgstr ""
+
+
+#: R/path.rpart.R: 0
+#. R/path.rpart.R: gettext("node number: ", domain = "R-rpart")
+#. R/path.rpart.R: gettext("node number: ", domain = "R-rpart")
+
+msgid "node number:"
+msgstr ""
+
+
+#: R/plotcp.R: 0
+#. R/plotcp.R: gettext("number of splits", domain = "R-rpart")
+
+msgid "number of splits"
+msgstr ""
+
+
+#: R/rpart.poisson.R: 0
+#. R/rpart.poisson.R: stop("response must be a 2 column matrix or a vector")
+
+msgid "response must be a 2 column matrix or a vector"
+msgstr ""
+
+
+#: R/plotcp.R: 0
+#. R/plotcp.R: gettext("size of tree", domain = "R-rpart")
+
+msgid "size of tree"
+msgstr ""
+
+
+#: R/zzz.R: 0
+#. R/zzz.R: gettext("supplied nodes %s are leaves", domain = "R-rpart")
+
+msgid "supplied nodes %s are leaves"
+msgstr ""
+
+
+#: R/zzz.R: 0
+#. R/zzz.R: gettext("supplied nodes %s are not in this tree", domain = "R-rpart")
+
+msgid "supplied nodes %s are not in this tree"
+msgstr ""
+
+
+#: R/predict.rpart.R: 0
+#. R/predict.rpart.R: stop("type 'class' is only appropriate for classification")
+
+msgid "type 'class' is only appropriate for classification"
+msgstr ""

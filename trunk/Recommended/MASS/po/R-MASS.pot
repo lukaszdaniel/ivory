@@ -1,0 +1,1714 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MASS 7.3-34\n"
+"POT-Creation-Date: 2014-08-23 08:32\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+
+#: R/negbin.R: 0
+#. R/negbin.R: gettextf("\"%s\" link not available for negative binomial family; available links are \"identity\", \"log\" and \"sqrt\"",     linktemp)
+
+msgid "\"%s\" link not available for negative binomial family; available links are \"identity\", \"log\" and \"sqrt\""
+msgstr ""
+
+
+#: R/rms.curv.R: 0
+#. R/rms.curv.R: gettextf("%s attribute is missing", dQuote("gradient"))
+#. R/rms.curv.R: gettextf("%s attribute is missing", dQuote("hessian"))
+
+msgid "%s attribute is missing"
+msgstr ""
+
+
+#: R/boxcox.R: 0
+#: R/logtrans.R: 0
+#. R/boxcox.R: gettextf("%s does not have both 'qr' and 'y' components", sQuote(deparse(substitute(object))))
+#. R/logtrans.R: gettextf("%s does not have both 'qr' and 'y' components", sQuote(deparse(substitute(object))))
+
+msgid "%s does not have both 'qr' and 'y' components"
+msgstr ""
+
+
+#: R/corresp.R: 0
+#. R/corresp.R: gettextf("%s scores:", rcn[1L], domain = "R-MASS")
+#. R/corresp.R: gettextf("%s scores:", rcn[2L], domain = "R-MASS")
+
+msgid "%s scores:"
+msgstr ""
+
+
+#: R/isoMDS.R: 0
+#: R/lda.R: 0
+#: R/qda.R: 0
+#: R/sammon.R: 0
+#. R/isoMDS.R: gettextf("'%s' argument is not a matrix", "y")
+#. R/lda.R: gettextf("'%s' argument is not a matrix", "x")
+#. R/qda.R: gettextf("'%s' argument is not a matrix", "x")
+#. R/sammon.R: gettextf("'%s' argument is not a matrix", "y")
+
+msgid "'%s' argument is not a matrix"
+msgstr ""
+
+
+#: R/lda.R: 0
+#: R/polr.R: 0
+#: R/qda.R: 0
+#. R/lda.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("lda"), domain = "R-MASS")
+#. R/polr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("polr"),     domain = "R-MASS")
+#. R/qda.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("qda"))
+
+msgid "'%s' argument is not an object of class %s"
+msgstr ""
+
+
+#: R/lm.gls.R: 0
+#: R/mvrnorm.R: 0
+#. R/lm.gls.R: gettextf("'%s' argument is not positive definite", "W")
+#. R/mvrnorm.R: gettextf("'%s' argument is not positive definite", "Sigma")
+
+msgid "'%s' argument is not positive definite"
+msgstr ""
+
+
+#: R/cov.trob.R: 0
+#: R/lda.R: 0
+#: R/lda.R: 0
+#: R/mca.R: 0
+#: R/polr.R: 0
+#: R/qda.R: 0
+#: R/qda.R: 0
+#. R/cov.trob.R: gettextf("'%s' argument is of the wrong length", "center")
+#. R/lda.R: gettextf("'%s' argument is of the wrong length", "prior")
+#. R/lda.R: gettextf("'%s' argument is of the wrong length", "prior")
+#. R/mca.R: gettextf("'%s' argument is of the wrong length", "newdata")
+#. R/polr.R: gettextf("'%s' argument is of the wrong length", "start")
+#. R/qda.R: gettextf("'%s' argument is of the wrong length", "prior")
+#. R/qda.R: gettextf("'%s' argument is of the wrong length", "prior")
+
+msgid "'%s' argument is of the wrong length"
+msgstr ""
+
+
+#: R/misc.R: 0
+#. R/misc.R: stop("'X' argument must be a numeric or complex matrix")
+
+msgid "'X' argument must be a numeric or complex matrix"
+msgstr ""
+
+
+#: R/polr.R: 0
+#. R/polr.R: stop("'anova()' function is not implemented for a single object of class \"polr\"")
+
+msgid "'anova()' function is not implemented for a single object of class \"polr\""
+msgstr ""
+
+
+#: R/glmmPQL.R: 0
+#. R/glmmPQL.R: stop("'anova()' is not available for PQL fits")
+
+msgid "'anova()' is not available for PQL fits"
+msgstr ""
+
+
+#: R/lda.R: 0
+#: R/truehist.R: 0
+#. R/lda.R: stop("'breaks' argument do not cover the data")
+#. R/truehist.R: stop("'breaks' argument do not cover the data")
+
+msgid "'breaks' argument do not cover the data"
+msgstr ""
+
+
+#: R/lda.R: 0
+#: R/truehist.R: 0
+#. R/lda.R: stop("'breaks' argument must be strictly increasing")
+#. R/truehist.R: stop("'breaks' argument must be strictly increasing")
+
+msgid "'breaks' argument must be strictly increasing"
+msgstr ""
+
+
+#: R/rlm.R: 0
+#. R/rlm.R: warning("'c' must be at least 1.548 and has been ignored")
+
+msgid "'c' must be at least 1.548 and has been ignored"
+msgstr ""
+
+
+#: R/rlm.R: 0
+#. R/rlm.R: stop("'coef' must define a contrast, i.e., sum to 0")
+
+msgid "'coef' must define a contrast, i.e., sum to 0"
+msgstr ""
+
+
+#: R/rlm.R: 0
+#. R/rlm.R: stop("'coef' must have same length as 'contrast.obj'")
+
+msgid "'coef' must have same length as 'contrast.obj'"
+msgstr ""
+
+
+#: R/loglm.R: 0
+#. R/loglm.R: stop("'data' has no 'terms' attribute")
+#. R/loglm.R: stop("'data' has no 'terms' attribute")
+
+msgid "'data' has no 'terms' attribute"
+msgstr ""
+
+
+#: R/fitdistr.R: 0
+#. R/fitdistr.R: stop("'densfun' argument must be supplied as a function or name")
+
+msgid "'densfun' argument must be supplied as a function or name"
+msgstr ""
+
+
+#: R/lm.gls.R: 0
+#. R/lm.gls.R: stop("'dim(W)' is not correct")
+
+msgid "'dim(W)' is not correct"
+msgstr ""
+
+
+#: R/add.R: 0
+#. R/add.R: stop("'dropterm' not implemented for \"mlm\" fits")
+
+msgid "'dropterm' not implemented for \"mlm\" fits"
+msgstr ""
+
+
+#: R/glmmPQL.R: 0
+#. R/glmmPQL.R: stop("'family' argument was not recognized")
+
+msgid "'family' argument was not recognized"
+msgstr ""
+
+
+#: R/truehist.R: 0
+#. R/truehist.R: stop("'h' argument must be strictly positive")
+
+msgid "'h' argument must be strictly positive"
+msgstr ""
+
+
+#: R/rlm.R: 0
+#. R/rlm.R: stop("'init()' method is unknown")
+
+msgid "'init()' method is unknown"
+msgstr ""
+
+
+#: R/lqs.R: 0
+#. R/lqs.R: stop("'lqs' failed: all the samples were singular", call. = FALSE)
+
+msgid "'lqs' failed: all the samples were singular"
+msgstr ""
+
+
+#: R/rlm.R: 0
+#. R/rlm.R: stop("'method' is unknown")
+
+msgid "'method' is unknown"
+msgstr ""
+
+
+#: R/truehist.R: 0
+#. R/truehist.R: stop("'nbins' argument must result in a positive integer")
+
+msgid "'nbins' argument must result in a positive integer"
+msgstr ""
+
+
+#: R/lda.R: 0
+#: R/qda.R: 0
+#. R/lda.R: stop("'nrow(x)' and 'length(grouping)' are different")
+#. R/qda.R: stop("'nrow(x)' and 'length(grouping)' are different")
+
+msgid "'nrow(x)' and 'length(grouping)' are different"
+msgstr ""
+
+
+#: R/lda.R: 0
+#: R/qda.R: 0
+#. R/lda.R: stop("'nu' argument must exceed 2")
+#. R/qda.R: stop("'nu' argument must exceed 2")
+
+msgid "'nu' argument must exceed 2"
+msgstr ""
+
+
+#: R/loglm.R: 0
+#. R/loglm.R: stop("'object' argument has no 'call' component. Updating not possible")
+
+msgid "'object' argument has no 'call' component. Updating not possible"
+msgstr ""
+
+
+#: R/lqs.R: 0
+#. R/lqs.R: warning("'ps' must be at least 'p'")
+
+msgid "'ps' must be at least 'p'"
+msgstr ""
+
+
+#: R/lqs.R: 0
+#. R/lqs.R: gettextf("'quantile' must be at least %d", p + 1)
+
+msgid "'quantile' must be at least %d"
+msgstr ""
+
+
+#: R/lqs.R: 0
+#. R/lqs.R: gettextf("'quantile' must be at most %d", n - 1)
+#. R/lqs.R: gettextf("'quantile' must be at most %d", n - 1)
+
+msgid "'quantile' must be at most %d"
+msgstr ""
+
+
+#: R/rlm.R: 0
+#. R/rlm.R: gettextf("'rlm' failed to converge in %d steps", maxit)
+
+msgid "'rlm' failed to converge in %d steps"
+msgstr ""
+
+
+#: R/fitdistr.R: 0
+#. R/fitdistr.R: stop("'start' must be a named list")
+
+msgid "'start' must be a named list"
+msgstr ""
+
+
+#: R/fitdistr.R: 0
+#. R/fitdistr.R: stop("'start' specifies names which are not arguments to 'densfun'")
+
+msgid "'start' specifies names which are not arguments to 'densfun'"
+msgstr ""
+
+
+#: R/neg.bin.R: 0
+#: R/negbin.R: 0
+#: R/negbin.R: 0
+#. R/neg.bin.R: stop("'theta' argument must be specified")
+#. R/negbin.R: stop("'theta' argument must be specified")
+#. R/negbin.R: stop("'theta' argument must be specified")
+
+msgid "'theta' argument must be specified"
+msgstr ""
+
+
+#: R/eqscplot.R: 0
+#. R/eqscplot.R: stop("'uin' argument is too large to fit plot in")
+
+msgid "'uin' argument is too large to fit plot in"
+msgstr ""
+
+
+#: R/stepAIC.R: 0
+#. R/stepAIC.R: warning("'use.start' argument cannot be used with R's version of 'glm'")
+
+msgid "'use.start' argument cannot be used with R's version of 'glm'"
+msgstr ""
+
+
+#: R/lqs.R: 0
+#. R/lqs.R: stop("'x' and 'y' must have the same number of rows")
+
+msgid "'x' and 'y' must have the same number of rows"
+msgstr ""
+
+
+#: R/fitdistr.R: 0
+#. R/fitdistr.R: stop("'x' argument contains missing or infinite values")
+
+msgid "'x' argument contains missing or infinite values"
+msgstr ""
+
+
+#: R/ucv.R: 0
+#. R/ucv.R: stop("'x' argument has length zero")
+#. R/ucv.R: stop("'x' argument has length zero")
+#. R/ucv.R: stop("'x' argument has length zero")
+
+msgid "'x' argument has length zero"
+msgstr ""
+
+
+#: R/lqs.R: 0
+#. R/lqs.R: stop("'x' argument is probably collinear")
+
+msgid "'x' argument is probably collinear"
+msgstr ""
+
+
+#: R/fitdistr.R: 0
+#. R/fitdistr.R: stop("'x' argument must be a non-empty numeric vector")
+
+msgid "'x' argument must be a non-empty numeric vector"
+msgstr ""
+
+
+#: R/rlm.R: 0
+#. R/rlm.R: stop("'x' is singular: singular fits are not implemented in 'rlm()'")
+
+msgid "'x' is singular: singular fits are not implemented in 'rlm()'"
+msgstr ""
+
+
+#: R/stepAIC.R: 0
+#. R/stepAIC.R: warning("0 df terms are changing AIC")
+
+msgid "0 df terms are changing AIC"
+msgstr ""
+
+
+#: R/negbin.R: 0
+#. R/negbin.R: gettextf("\n 2 x log-likelihood: %s", paste(format(round(x$twologlik, 3), nsmall = dp),     collapse = " "), domain = "R-MASS")
+
+msgid "2 x log-likelihood: %s"
+msgstr ""
+
+
+#: R/stepAIC.R: 0
+#. R/stepAIC.R: stop("AIC is -infinity for this model, so 'stepAIC' cannot proceed")
+
+msgid "AIC is -infinity for this model, so 'stepAIC' cannot proceed"
+msgstr ""
+
+
+#: R/stepAIC.R: 0
+#. R/stepAIC.R: stop("AIC is not defined for this model, so 'stepAIC' cannot proceed")
+
+msgid "AIC is not defined for this model, so 'stepAIC' cannot proceed"
+msgstr ""
+
+
+#: R/stepAIC.R: 0
+#. R/stepAIC.R: stop("AIC undefined for REML fit")
+#. R/stepAIC.R: stop("AIC undefined for REML fit")
+
+msgid "AIC undefined for REML fit"
+msgstr ""
+
+
+#: R/polr.R: 0
+#. R/polr.R: gettextf("AIC: %s", format(x$deviance + 2 * x$edf, nsmall = 2L), domain = "R-MASS")
+#. R/polr.R: gettextf("AIC: %s", format(x$deviance + 2 * x$edf, nsmall = 2L), domain = "R-MASS")
+
+msgid "AIC: %s"
+msgstr ""
+
+
+#: R/lda.R: 0
+#: R/loglm.R: 0
+#: R/lqs.R: 0
+#: R/mca.R: 0
+#: R/polr.R: 0
+#: R/polr.R: 0
+#: R/qda.R: 0
+#: R/rlm.R: 0
+#: R/rlm.R: 0
+#. R/lda.R: gettext("Call:", domain = "R-MASS")
+#. R/loglm.R: gettext("Call:", domain = "R-MASS")
+#. R/lqs.R: gettext("Call:", domain = "R-MASS")
+#. R/mca.R: gettext("Call:", domain = "R-MASS")
+#. R/polr.R: gettext("Call:", domain = "R-MASS")
+#. R/polr.R: gettext("Call:", domain = "R-MASS")
+#. R/qda.R: gettext("Call:", domain = "R-MASS")
+#. R/rlm.R: gettext("Call:", domain = "R-MASS")
+#. R/rlm.R: gettext("\nCall: ", domain = "R-MASS")
+
+msgid "Call:"
+msgstr ""
+
+
+#: R/lda.R: 0
+#. R/lda.R: gettext("Coefficients of linear discriminants:", domain = "R-MASS")
+
+msgid "Coefficients of linear discriminants:"
+msgstr ""
+
+
+#: R/lqs.R: 0
+#: R/polr.R: 0
+#: R/polr.R: 0
+#: R/rlm.R: 0
+#: R/rlm.R: 0
+#. R/lqs.R: gettext("Coefficients:", domain = "R-MASS")
+#. R/polr.R: gettext("Coefficients:", domain = "R-MASS")
+#. R/polr.R: gettext("Coefficients:", domain = "R-MASS")
+#. R/rlm.R: gettext("Coefficients:", domain = "R-MASS")
+#. R/rlm.R: gettext("Coefficients:", domain = "R-MASS")
+
+msgid "Coefficients:"
+msgstr ""
+
+
+#: R/rlm.R: 0
+#. R/rlm.R: gettextf("Coefficients: (%d not defined because of singularities)", nsingular, domain = "R-MASS")
+
+msgid "Coefficients: (%d not defined because of singularities)"
+msgstr ""
+
+
+#: R/rlm.R: 0
+#. R/rlm.R: gettextf("Converged in %d iterations", length(x$conv), domain = "R-MASS")
+
+msgid "Converged in %d iterations"
+msgstr ""
+
+
+#: R/polr.R: 0
+#: R/rlm.R: 0
+#. R/polr.R: gettext("Correlation of Coefficients:", domain = "R-MASS")
+#. R/rlm.R: gettext("Correlation of Coefficients:", domain = "R-MASS")
+
+msgid "Correlation of Coefficients:"
+msgstr ""
+
+
+#: R/mca.R: 0
+#. R/mca.R: gettextf("Correlations %s  cumulative %% explained %s", paste(format(round(x$d, 3),     ...), collapse = " "), paste(format(round(p, 2), ...), collapse = " "), domain = "R-MASS")
+
+msgid "Correlations %s  cumulative %% explained %s"
+msgstr ""
+
+
+#: R/rlm.R: 0
+#. R/rlm.R: gettextf("Degrees of freedom: %d total; %d residual", nobs, rdf, domain = "R-MASS")
+
+msgid "Degrees of freedom: %d total; %d residual"
+msgstr ""
+
+
+#: R/fitdistr.R: 0
+#. R/fitdistr.R: stop("Exponential values must be >= 0")
+
+msgid "Exponential values must be >= 0"
+msgstr ""
+
+
+#: R/add.R: 0
+#. R/add.R: gettextf("F test assumes 'quasi%s' family", fam)
+#. R/add.R: gettextf("F test assumes 'quasi%s' family", fam)
+
+msgid "F test assumes 'quasi%s' family"
+msgstr ""
+
+
+#: R/stepAIC.R: 0
+#. R/stepAIC.R: gettext("Final Model:", domain = "R-MASS")
+
+msgid "Final Model:"
+msgstr ""
+
+
+#: R/corresp.R: 0
+#. R/corresp.R: gettext("First canonical correlation(s):", domain = "R-MASS")
+
+msgid "First canonical correlation(s):"
+msgstr ""
+
+
+#: R/loglm.R: 0
+#. R/loglm.R: gettext("Formula:", domain = "R-MASS")
+
+msgid "Formula:"
+msgstr ""
+
+
+#: R/lda.R: 0
+#: R/qda.R: 0
+#. R/lda.R: gettext("Group means:", domain = "R-MASS")
+#. R/qda.R: gettext("Group means:", domain = "R-MASS")
+
+msgid "Group means:"
+msgstr ""
+
+
+#: R/sammon.R: 0
+#. R/sammon.R: stop("Infs not allowed in 'd'")
+
+msgid "Infs not allowed in 'd'"
+msgstr ""
+
+
+#: R/stepAIC.R: 0
+#. R/stepAIC.R: gettext("Initial Model:", domain = "R-MASS")
+
+msgid "Initial Model:"
+msgstr ""
+
+
+#: R/gamma.shape.R: 0
+#. R/gamma.shape.R: gettextf("Initial estimate: %s", format(alpha))
+
+msgid "Initial estimate: %s"
+msgstr ""
+
+
+#: R/negbin.R: 0
+#. R/negbin.R: message("Initial fit:")
+
+msgid "Initial fit:"
+msgstr ""
+
+
+#: R/negbin.R: 0
+#. R/negbin.R: gettextf("Initial value for 'theta': %f", signif(th))
+
+msgid "Initial value for 'theta': %f"
+msgstr ""
+
+
+#: R/polr.R: 0
+#. R/polr.R: gettext("Intercepts:", domain = "R-MASS")
+#. R/polr.R: gettext("Intercepts:", domain = "R-MASS")
+
+msgid "Intercepts:"
+msgstr ""
+
+
+#: R/rms.curv.R: 0
+#. R/rms.curv.R: gettextf("Intrinsic: c^iota  x sqrt(F) = %s", round(x$ic, 4), domain = "R-MASS")
+
+msgid "Intrinsic: c^iota  x sqrt(F) = %s"
+msgstr ""
+
+
+#: R/gamma.shape.R: 0
+#. R/gamma.shape.R: gettextf("Iter. %d Alpha: %s", itr, format(alpha))
+
+msgid "Iter. %d Alpha: %s"
+msgstr ""
+
+
+#: R/loglm.R: 0
+#. R/loglm.R: gettext("LR tests for hierarchical log-linear models", domain = "R-MASS")
+
+msgid "LR tests for hierarchical log-linear models"
+msgstr ""
+
+
+#: R/negbin.R: 0
+#. R/negbin.R: gettext("Likelihood ratio tests of Negative Binomial Models", domain = "R-MASS")
+
+msgid "Likelihood ratio tests of Negative Binomial Models"
+msgstr ""
+
+
+#: R/polr.R: 0
+#. R/polr.R: gettext("Likelihood ratio tests of ordinal regression models", domain = "R-MASS")
+
+msgid "Likelihood ratio tests of ordinal regression models"
+msgstr ""
+
+
+#: R/loglm.R: 0
+#. R/loglm.R: gettextf("Model %d:", i, domain = "R-MASS")
+
+msgid "Model %d:"
+msgstr ""
+
+
+#: R/add.R: 0
+#. R/add.R: gettext("Model:", domain = "R-MASS")
+#. R/add.R: gettext("Model:", domain = "R-MASS")
+#. R/add.R: gettext("Model:", domain = "R-MASS")
+#. R/add.R: gettext("Model:", domain = "R-MASS")
+#. R/add.R: gettext("Model:", domain = "R-MASS")
+#. R/add.R: gettext("Model:", domain = "R-MASS")
+#. R/add.R: gettext("Model:", domain = "R-MASS")
+#. R/add.R: gettext("Model:", domain = "R-MASS")
+#. R/add.R: gettext("Model:", domain = "R-MASS")
+#. R/add.R: gettext("Model:", domain = "R-MASS")
+#. R/add.R: gettext("Model:", domain = "R-MASS")
+#. R/add.R: gettext("Model:", domain = "R-MASS")
+
+msgid "Model:"
+msgstr ""
+
+
+#: R/mca.R: 0
+#. R/mca.R: gettextf("Multiple correspondence analysis of %d cases of %d factors", nrow(x$rs),     x$p, domain = "R-MASS")
+
+msgid "Multiple correspondence analysis of %d cases of %d factors"
+msgstr ""
+
+
+#: R/polr.R: 0
+#. R/polr.R: gettext("No coefficients", domain = "R-MASS")
+#. R/polr.R: gettext("No coefficients", domain = "R-MASS")
+
+msgid "No coefficients"
+msgstr ""
+
+
+#: R/loglm.R: 0
+#. R/loglm.R: gettext("Observed (Expected):", domain = "R-MASS")
+
+msgid "Observed (Expected):"
+msgstr ""
+
+
+#: R/rms.curv.R: 0
+#. R/rms.curv.R: gettextf("Parameter effects: c^theta x sqrt(F) = %s", round(x$pe, 4), domain = "R-MASS")
+
+msgid "Parameter effects: c^theta x sqrt(F) = %s"
+msgstr ""
+
+
+#: R/polr.R: 0
+#: R/profiles.R: 0
+#. R/polr.R: gettextf("Parameter: %s down", pi)
+#. R/profiles.R: gettextf("Parameter: %s down", pi)
+
+msgid "Parameter: %s down"
+msgstr ""
+
+
+#: R/polr.R: 0
+#: R/profiles.R: 0
+#. R/polr.R: gettextf("Parameter: %s up", pi)
+#. R/profiles.R: gettextf("Parameter: %s up", pi)
+
+msgid "Parameter: %s up"
+msgstr ""
+
+
+#: R/lda.R: 0
+#: R/qda.R: 0
+#. R/lda.R: gettext("Prior probabilities of groups:", domain = "R-MASS")
+#. R/qda.R: gettext("Prior probabilities of groups:", domain = "R-MASS")
+
+msgid "Prior probabilities of groups:"
+msgstr ""
+
+
+#: R/cov.trob.R: 0
+#. R/cov.trob.R: warning("Probable convergence failure")
+
+msgid "Probable convergence failure"
+msgstr ""
+
+
+#: R/lda.R: 0
+#. R/lda.R: gettext("Proportion of trace:", domain = "R-MASS")
+
+msgid "Proportion of trace:"
+msgstr ""
+
+
+#: R/rlm.R: 0
+#. R/rlm.R: gettextf("Ran %d iterations without convergence", length(x$conv), domain = "R-MASS")
+
+msgid "Ran %d iterations without convergence"
+msgstr ""
+
+
+#: R/loglm.R: 0
+#. R/loglm.R: gettext("Re-fitting to calculate missing coefficients", domain = "R-MASS")
+
+msgid "Re-fitting to calculate missing coefficients"
+msgstr ""
+
+
+#: R/loglm.R: 0
+#. R/loglm.R: gettext("Re-fitting to find fitted values", domain = "R-MASS")
+
+msgid "Re-fitting to find fitted values"
+msgstr ""
+
+
+#: R/polr.R: 0
+#. R/polr.R: message("\n", "Re-fitting to get Hessian", "\n", sep = "")
+
+msgid "Re-fitting to get Hessian"
+msgstr ""
+
+
+#: R/loglm.R: 0
+#. R/loglm.R: gettext("Re-fitting to get fitted values", domain = "R-MASS")
+
+msgid "Re-fitting to get fitted values"
+msgstr ""
+
+
+#: R/loglm.R: 0
+#. R/loglm.R: gettext("Re-fitting to get frequencies and fitted values", domain = "R-MASS")
+
+msgid "Re-fitting to get frequencies and fitted values"
+msgstr ""
+
+
+#: R/polr.R: 0
+#. R/polr.R: gettextf("Residual Deviance: %s", format(x$deviance, nsmall = 2L), domain = "R-MASS")
+#. R/polr.R: gettextf("Residual Deviance: %s", format(x$deviance, nsmall = 2L), domain = "R-MASS")
+
+msgid "Residual Deviance: %s"
+msgstr ""
+
+
+#: R/rlm.R: 0
+#. R/rlm.R: gettextf("Residual standard error: %s on %d degrees of freedom", format(signif(x$sigma,     digits)), rdf, domain = "R-MASS")
+
+msgid "Residual standard error: %s on %d degrees of freedom"
+msgstr ""
+
+
+#: R/rlm.R: 0
+#. R/rlm.R: gettext("Residuals:\n", domain = "R-MASS")
+
+msgid "Residuals:"
+msgstr ""
+
+
+#: R/logtrans.R: 0
+#. R/logtrans.R: stop("Response variable must be positive after additions")
+
+msgid "Response variable must be positive after additions"
+msgstr ""
+
+
+#: R/rlm.R: 0
+#. R/rlm.R: gettextf("Scale estimate: %s", format(signif(x$s, 3)), domain = "R-MASS")
+
+msgid "Scale estimate: %s"
+msgstr ""
+
+
+#: R/lqs.R: 0
+#. R/lqs.R: gettextf("Scale estimates %s", paste(format(x$scale, digits = digits), collapse = " "),     domain = "R-MASS")
+
+msgid "Scale estimates %s"
+msgstr ""
+
+
+#: R/add.R: 0
+#. R/add.R: gettext("Single term additions", domain = "R-MASS")
+#. R/add.R: gettext("Single term additions", domain = "R-MASS")
+#. R/add.R: gettext("Single term additions", domain = "R-MASS")
+#. R/add.R: gettext("Single term additions", domain = "R-MASS")
+#. R/add.R: gettext("Single term additions", domain = "R-MASS")
+#. R/add.R: gettext("Single term additions", domain = "R-MASS")
+
+msgid "Single term additions"
+msgstr ""
+
+
+#: R/add.R: 0
+#. R/add.R: gettext("Single term deletions", domain = "R-MASS")
+#. R/add.R: gettext("Single term deletions", domain = "R-MASS")
+#. R/add.R: gettext("Single term deletions", domain = "R-MASS")
+#. R/add.R: gettext("Single term deletions", domain = "R-MASS")
+#. R/add.R: gettext("Single term deletions", domain = "R-MASS")
+#. R/add.R: gettext("Single term deletions", domain = "R-MASS")
+
+msgid "Single term deletions"
+msgstr ""
+
+
+#: R/stepAIC.R: 0
+#. R/stepAIC.R: gettextf("Start:  AIC=%s", format(round(bAIC, 2)), domain = "R-MASS")
+
+msgid "Start:  AIC=%s"
+msgstr ""
+
+
+#: R/loglm.R: 0
+#. R/loglm.R: gettext("Statistics:", domain = "R-MASS")
+#. R/loglm.R: gettext("Statistics:", domain = "R-MASS")
+
+msgid "Statistics:"
+msgstr ""
+
+
+#: R/stepAIC.R: 0
+#. R/stepAIC.R: gettextf("Step:  AIC=%s", format(round(bAIC, 2)), domain = "R-MASS")
+
+msgid "Step:  AIC=%s"
+msgstr ""
+
+
+#: R/stepAIC.R: 0
+#. R/stepAIC.R: gettext("Stepwise Model Path \nAnalysis of Deviance Table", domain = "R-MASS")
+
+msgid "Stepwise Model Path \nAnalysis of Deviance Table"
+msgstr ""
+
+
+#: R/confint.R: 0
+#: R/polr.R: 0
+#. R/confint.R: message("Waiting for profiling to be done...")
+#. R/confint.R: message("Waiting for profiling to be done...")
+#. R/polr.R: message("Waiting for profiling to be done...")
+
+msgid "Waiting for profiling to be done..."
+msgstr ""
+
+
+#: R/negbin.R: 0
+#. R/negbin.R: gettext("Warning while fitting theta: ", domain = "R-MASS")
+
+msgid "Warning while fitting theta:"
+msgstr ""
+
+
+#: R/polr.R: 0
+#. R/polr.R: gettext("Warning: did not converge as iteration limit reached", domain = "R-MASS")
+
+msgid "Warning: did not converge as iteration limit reached"
+msgstr ""
+
+
+#: R/fitdistr.R: 0
+#. R/fitdistr.R: stop("Weibull values must be > 0")
+
+msgid "Weibull values must be > 0"
+msgstr ""
+
+
+#: R/rlm.R: 0
+#. R/rlm.R: gettext("Weighted Residuals:", domain = "R-MASS")
+
+msgid "Weighted Residuals:"
+msgstr ""
+
+
+#: R/corresp.R: 0
+#. R/corresp.R: stop("all frequencies are zero")
+
+msgid "all frequencies are zero"
+msgstr ""
+
+
+#: R/mca.R: 0
+#. R/mca.R: stop("all variables must be factors")
+#. R/mca.R: stop("all variables must be factors")
+
+msgid "all variables must be factors"
+msgstr ""
+
+
+#: R/negbin.R: 0
+#. R/negbin.R: warning("alternation limit reached")
+#. R/negbin.R: gettext("alternation limit reached", domain = "R-MASS")
+
+msgid "alternation limit reached"
+msgstr ""
+
+
+#: R/sammon.R: 0
+#. R/sammon.R: stop("an initial configuration must be supplied if there are NAs in 'd'")
+
+msgid "an initial configuration must be supplied if there are NAs in 'd'"
+msgstr ""
+
+
+#: R/isoMDS.R: 0
+#. R/isoMDS.R: stop("an initial configuration must be supplied with NA/Infs in 'd'")
+
+msgid "an initial configuration must be supplied with NA/Infs in 'd'"
+msgstr ""
+
+
+#: R/polr.R: 0
+#. R/polr.R: warning("an intercept is needed and assumed")
+
+msgid "an intercept is needed and assumed"
+msgstr ""
+
+
+#: R/lqs.R: 0
+#. R/lqs.R: gettextf("at least %d cases are needed", p + 1)
+
+msgid "at least %d cases are needed"
+msgstr ""
+
+
+#: R/negexp.R: 0
+#. R/negexp.R: stop("at least 3 distinct 'x' values are needed")
+
+msgid "at least 3 distinct 'x' values are needed"
+msgstr ""
+
+
+#: R/lqs.R: 0
+#. R/lqs.R: stop("at least one column has IQR 0")
+
+msgid "at least one column has IQR 0"
+msgstr ""
+
+
+#: R/polr.R: 0
+#. R/polr.R: stop("attempt to find suitable starting values failed")
+
+msgid "attempt to find suitable starting values failed"
+msgstr ""
+
+
+#: R/kde2d.R: 0
+#. R/kde2d.R: stop("bandwidths must be strictly positive")
+
+msgid "bandwidths must be strictly positive"
+msgstr ""
+
+
+#: R/corresp.R: 0
+#. R/corresp.R: stop("biplot is only possible if 'nf >= 2'")
+
+msgid "biplot is only possible if 'nf >= 2'"
+msgstr ""
+
+
+#: R/huber.R: 0
+#. R/huber.R: stop("cannot estimate scale: MAD is zero for this sample")
+
+msgid "cannot estimate scale: MAD is zero for this sample"
+msgstr ""
+
+
+#: R/qda.R: 0
+#. R/qda.R: stop("cannot have leave-one-out CV with 'newdata'")
+
+msgid "cannot have leave-one-out CV with 'newdata'"
+msgstr ""
+
+
+#: R/lda.R: 0
+#: R/qda.R: 0
+#: R/qda.R: 0
+#. R/lda.R: gettext("cannot use leave-one-out CV with method %s", sQuote(method))
+#. R/qda.R: gettext("cannot use leave-one-out CV with method %s", sQuote(method))
+#. R/qda.R: gettext("cannot use leave-one-out CV with method %s", sQuote(mt), domain = "R-MASS")
+
+msgid "cannot use leave-one-out CV with method %s"
+msgstr ""
+
+
+#: R/rlm.R: 0
+#. R/rlm.R: stop("columns of 'contrast.obj' must define a contrast (sum to zero)")
+
+msgid "columns of 'contrast.obj' must define a contrast (sum to zero)"
+msgstr ""
+
+
+#: R/kde2d.R: 0
+#. R/kde2d.R: stop("data vectors must be the same length")
+
+msgid "data vectors must be the same length"
+msgstr ""
+
+
+#: R/polr.R: 0
+#. R/polr.R: warning("design appears to be rank-deficient, so dropping some coefs")
+
+msgid "design appears to be rank-deficient, so dropping some coefs"
+msgstr ""
+
+
+#: R/isoMDS.R: 0
+#: R/sammon.R: 0
+#. R/isoMDS.R: stop("distances must be result of 'dist' or a square matrix")
+#. R/sammon.R: stop("distances must be result of 'dist' or a square matrix")
+
+msgid "distances must be result of 'dist' or a square matrix"
+msgstr ""
+
+
+#: R/rlm.R: 0
+#. R/rlm.R: gettextf("each element of '%s' must be logical", substitute(contrasts.list))
+
+msgid "each element of '%s' must be logical"
+msgstr ""
+
+
+#: R/corresp.R: 0
+#. R/corresp.R: stop("empty row or column in table")
+
+msgid "empty row or column in table"
+msgstr ""
+
+
+#: R/negbin.R: 0
+#. R/negbin.R: warning("estimate truncated at zero")
+#. R/negbin.R: gettext("estimate truncated at zero", domain = "R-MASS")
+#. R/negbin.R: warning("estimate truncated at zero")
+#. R/negbin.R: gettext("estimate truncated at zero", domain = "R-MASS")
+#. R/negbin.R: warning("estimate truncated at zero")
+#. R/negbin.R: gettext("estimate truncated at zero", domain = "R-MASS")
+
+msgid "estimate truncated at zero"
+msgstr ""
+
+
+#: R/negbin.R: 0
+#. R/negbin.R: warning("extra arguments discarded")
+
+msgid "extra arguments discarded"
+msgstr ""
+
+
+#: R/mca.R: 0
+#. R/mca.R: stop("factors in 'newdata' do not match those for 'object'")
+
+msgid "factors in 'newdata' do not match those for 'object'"
+msgstr ""
+
+
+#: R/loglm.R: 0
+#. R/loglm.R: stop("formula specifies no response")
+
+msgid "formula specifies no response"
+msgstr ""
+
+
+#: R/corresp.R: 0
+#. R/corresp.R: gettextf("frequency table is %d-dimensional", m)
+
+msgid "frequency table is %d-dimensional"
+msgstr ""
+
+
+#: R/fitdistr.R: 0
+#. R/fitdistr.R: stop("gamma values must be >= 0")
+
+msgid "gamma values must be >= 0"
+msgstr ""
+
+
+#: R/lda.R: 0
+#. R/lda.R: stop("group means are numerically identical")
+
+msgid "group means are numerically identical"
+msgstr ""
+
+
+#: R/corresp.R: 0
+#. R/corresp.R: stop("higher-way table requested. Only 2-way allowed")
+
+msgid "higher-way table requested. Only 2-way allowed"
+msgstr ""
+
+
+#: R/mvrnorm.R: 0
+#. R/mvrnorm.R: stop("incompatible arguments")
+
+msgid "incompatible arguments"
+msgstr ""
+
+
+#: R/lda.R: 0
+#: R/qda.R: 0
+#. R/lda.R: stop("infinite, NA or NaN values in 'x'")
+#. R/qda.R: stop("infinite, NA or NaN values in 'x'")
+
+msgid "infinite, NA or NaN values in 'x'"
+msgstr ""
+
+
+#: R/isoMDS.R: 0
+#: R/sammon.R: 0
+#. R/isoMDS.R: stop("initial configuration must be complete")
+#. R/sammon.R: stop("initial configuration must be complete")
+
+msgid "initial configuration must be complete"
+msgstr ""
+
+
+#: R/lda.R: 0
+#: R/qda.R: 0
+#: R/qda.R: 0
+#: R/rlm.R: 0
+#. R/lda.R: gettextf("invalid '%s' argument", "prior")
+#. R/lda.R: gettextf("invalid '%s' argument", "prior")
+#. R/qda.R: gettextf("invalid '%s' argument", "prior")
+#. R/qda.R: gettextf("invalid '%s' argument", "prior")
+#. R/rlm.R: gettextf("invalid '%s' argument", "test.vec")
+
+msgid "invalid '%s' argument"
+msgstr ""
+
+
+#: R/isoMDS.R: 0
+#. R/isoMDS.R: gettextf("invalid '%s' value", "row(x)")
+#. R/isoMDS.R: gettextf("invalid '%s' value", "length(d)")
+
+msgid "invalid '%s' value"
+msgstr ""
+
+
+#: R/isoMDS.R: 0
+#: R/sammon.R: 0
+#. R/isoMDS.R: stop("invalid initial configuration")
+#. R/sammon.R: stop("invalid initial configuration")
+
+msgid "invalid initial configuration"
+msgstr ""
+
+
+#: R/contr.sdif.R: 0
+#. R/contr.sdif.R: stop("invalid number of levels")
+#. R/contr.sdif.R: stop("invalid number of levels")
+
+msgid "invalid number of levels"
+msgstr ""
+
+
+#: R/isoMDS.R: 0
+#: R/sammon.R: 0
+#. R/isoMDS.R: stop("invalid size")
+#. R/sammon.R: stop("invalid size")
+
+msgid "invalid size"
+msgstr ""
+
+
+#: R/corresp.R: 0
+#. R/corresp.R: stop("invalid table specification")
+
+msgid "invalid table specification"
+msgstr ""
+
+
+#: R/glmmPQL.R: 0
+#. R/glmmPQL.R: gettextf("iteration %d", i)
+
+msgid "iteration %d"
+msgstr ""
+
+
+#: R/gamma.shape.R: 0
+#: R/negbin.R: 0
+#: R/negbin.R: 0
+#. R/gamma.shape.R: warning("iteration limit reached")
+#. R/negbin.R: warning("iteration limit reached")
+#. R/negbin.R: gettext("iteration limit reached", domain = "R-MASS")
+
+msgid "iteration limit reached"
+msgstr ""
+
+
+#: R/area.R: 0
+#. R/area.R: gettextf("iteration limit reached near 'x = %f'", d)
+
+msgid "iteration limit reached near 'x = %f'"
+msgstr ""
+
+
+#: R/cov.trob.R: 0
+#: R/rlm.R: 0
+#. R/cov.trob.R: gettextf("length of '%s' argument must equal number of observations", "wt")
+#. R/rlm.R: gettextf("length of '%s' argument must equal number of observations", "weights")
+
+msgid "length of '%s' argument must equal number of observations"
+msgstr ""
+
+
+#: R/boxcox.R: 0
+#: R/logtrans.R: 0
+#. R/boxcox.R: gettext("log-Likelihood", domain = "R-MASS")
+#. R/boxcox.R: gettext("log-Likelihood", domain = "R-MASS")
+#. R/boxcox.R: gettext("log-Likelihood", domain = "R-MASS")
+#. R/logtrans.R: gettext("log-Likelihood", domain = "R-MASS")
+
+msgid "log-Likelihood"
+msgstr ""
+
+
+#: R/ucv.R: 0
+#. R/ucv.R: warning("minimum occurred at one end of the range")
+#. R/ucv.R: warning("minimum occurred at one end of the range")
+
+msgid "minimum occurred at one end of the range"
+msgstr ""
+
+
+#: R/cov.trob.R: 0
+#. R/cov.trob.R: stop("missing or infinite values in 'x'")
+
+msgid "missing or infinite values in 'x'"
+msgstr ""
+
+
+#: R/kde2d.R: 0
+#: R/lqs.R: 0
+#. R/kde2d.R: stop("missing or infinite values in the data are not allowed")
+#. R/lqs.R: stop("missing or infinite values in the data are not allowed")
+
+msgid "missing or infinite values in the data are not allowed"
+msgstr ""
+
+
+#: R/lqs.R: 0
+#. R/lqs.R: stop("missing values are not allowed")
+
+msgid "missing values are not allowed"
+msgstr ""
+
+
+#: R/polr.R: 0
+#. R/polr.R: stop("models were not all fitted to the same size of dataset")
+
+msgid "models were not all fitted to the same size of dataset"
+msgstr ""
+
+
+#: R/lm.ridge.R: 0
+#. R/lm.ridge.R: gettextf("modified HKB estimator is %s", format(obj$kHKB), domain = "R-MASS")
+
+msgid "modified HKB estimator is %s"
+msgstr ""
+
+
+#: R/lm.ridge.R: 0
+#. R/lm.ridge.R: gettextf("modified L-W estimator is %s", format(obj$kLW), domain = "R-MASS")
+
+msgid "modified L-W estimator is %s"
+msgstr ""
+
+
+#: R/fitdistr.R: 0
+#. R/fitdistr.R: stop("need positive values to fit a log-Normal")
+
+msgid "need positive values to fit a log-Normal"
+msgstr ""
+
+
+#: R/rlm.R: 0
+#. R/rlm.R: stop("negative 'weights' value")
+
+msgid "negative 'weights' value"
+msgstr ""
+
+
+#: R/corresp.R: 0
+#. R/corresp.R: warning("negative or non-integer entries in table")
+
+msgid "negative or non-integer entries in table"
+msgstr ""
+
+
+#: R/neg.bin.R: 0
+#: R/negbin.R: 0
+#. R/neg.bin.R: stop("negative values not allowed for the negative binomial family")
+#. R/negbin.R: stop("negative values not allowed for the negative binomial family")
+
+msgid "negative values not allowed for the negative binomial family"
+msgstr ""
+
+
+#: R/cov.trob.R: 0
+#: R/negbin.R: 0
+#. R/cov.trob.R: stop("negative weights are not allowed")
+#. R/negbin.R: stop("negative weights are not allowed")
+
+msgid "negative weights are not allowed"
+msgstr ""
+
+
+#: R/add.R: 0
+#. R/add.R: stop("no 'addterm' method implemented for \"mlm\" models")
+
+msgid "no 'addterm' method implemented for \"mlm\" models"
+msgstr ""
+
+
+#: R/cov.trob.R: 0
+#. R/cov.trob.R: stop("no positive weights")
+
+msgid "no positive weights"
+msgstr ""
+
+
+#: R/ucv.R: 0
+#. R/ucv.R: stop("no solution in the specified range of bandwidths")
+
+msgid "no solution in the specified range of bandwidths"
+msgstr ""
+
+
+#: R/add.R: 0
+#. R/add.R: stop("no terms in scope")
+#. R/add.R: stop("no terms in scope")
+#. R/add.R: stop("no terms in scope")
+
+msgid "no terms in scope"
+msgstr ""
+
+
+#: R/add.R: 0
+#. R/add.R: stop("no terms in scope for adding to object")
+#. R/add.R: stop("no terms in scope for adding to object")
+
+msgid "no terms in scope for adding to object"
+msgstr ""
+
+
+#: R/negbin.R: 0
+#: R/polr.R: 0
+#. R/negbin.R: gettextf("not all objects are of class %s", dQuote("negbin"))
+#. R/polr.R: gettextf("not all objects are of class %s", dQuote("polr"))
+
+msgid "not all objects are of class %s"
+msgstr ""
+
+
+#: R/isoMDS.R: 0
+#: R/sammon.R: 0
+#. R/isoMDS.R: stop("not enough non-missing data")
+#. R/sammon.R: stop("not enough non-missing data")
+
+msgid "not enough non-missing data"
+msgstr ""
+
+
+#: R/add.R: 0
+#: R/stepAIC.R: 0
+#. R/add.R: stop("number of rows in use has changed: remove missing values?")
+#. R/add.R: stop("number of rows in use has changed: remove missing values?")
+#. R/stepAIC.R: stop("number of rows in use has changed: remove missing values?")
+
+msgid "number of rows in use has changed: remove missing values?"
+msgstr ""
+
+
+#: R/fitdistr.R: 0
+#. R/fitdistr.R: stop("only 'REML = FALSE' is implemented")
+
+msgid "only 'REML = FALSE' is implemented"
+msgstr ""
+
+
+#: R/negbin.R: 0
+#. R/negbin.R: warning("only Chi-squared LR tests are implemented")
+
+msgid "only Chi-squared LR tests are implemented"
+msgstr ""
+
+
+#: R/kde2d.R: 0
+#. R/kde2d.R: stop("only finite values are allowed in 'lims'")
+
+msgid "only finite values are allowed in 'lims'"
+msgstr ""
+
+
+#: R/fitdistr.R: 0
+#. R/fitdistr.R: stop("optimization failed")
+
+msgid "optimization failed"
+msgstr ""
+
+
+#: R/glmmPQL.R: 0
+#. R/glmmPQL.R: stop("package 'nlme' is essential")
+
+msgid "package 'nlme' is essential"
+msgstr ""
+
+
+#: R/polr.R: 0
+#: R/profiles.R: 0
+#. R/polr.R: stop("profiling has found a better solution, so original fit had not converged")
+#. R/profiles.R: stop("profiling has found a better solution, so original fit had not converged")
+
+msgid "profiling has found a better solution, so original fit had not converged"
+msgstr ""
+
+
+#: R/lda.R: 0
+#. R/lda.R: stop("rank = 0: variables are numerically constant")
+#. R/lda.R: stop("rank = 0: variables are numerically constant")
+#. R/lda.R: stop("rank = 0: variables are numerically constant")
+
+msgid "rank = 0: variables are numerically constant"
+msgstr ""
+
+
+#: R/qda.R: 0
+#. R/qda.R: gettextf("rank deficiency in group %s", lev[i])
+#. R/qda.R: gettextf("rank deficiency in group %s", lev[i])
+
+msgid "rank deficiency in group %s"
+msgstr ""
+
+
+#: R/rms.curv.R: 0
+#. R/rms.curv.R: warning("regression is apparently linear")
+
+msgid "regression is apparently linear"
+msgstr ""
+
+
+#: R/polr.R: 0
+#. R/polr.R: stop("response must be a factor")
+
+msgid "response must be a factor"
+msgstr ""
+
+
+#: R/polr.R: 0
+#. R/polr.R: stop("response must have 3 or more levels")
+#. R/polr.R: stop("response must have 3 or more levels")
+
+msgid "response must have 3 or more levels"
+msgstr ""
+
+
+#: R/boxcox.R: 0
+#. R/boxcox.R: stop("response variable must be positive")
+
+msgid "response variable must be positive"
+msgstr ""
+
+
+#: R/add.R: 0
+#. R/add.R: gettext("scale: ", domain = "R-MASS")
+#. R/add.R: gettext("scale: ", domain = "R-MASS")
+#. R/add.R: gettext("scale: ", domain = "R-MASS")
+#. R/add.R: gettext("scale: ", domain = "R-MASS")
+#. R/add.R: gettext("scale: ", domain = "R-MASS")
+#. R/add.R: gettext("scale: ", domain = "R-MASS")
+
+msgid "scale:"
+msgstr ""
+
+
+#: R/add.R: 0
+#. R/add.R: stop("scope is not a subset of term labels")
+#. R/add.R: stop("scope is not a subset of term labels")
+
+msgid "scope is not a subset of term labels"
+msgstr ""
+
+
+#: R/lm.ridge.R: 0
+#. R/lm.ridge.R: gettextf("smallest value of GCV at %s", format(obj$lambda[k]), domain = "R-MASS")
+
+msgid "smallest value of GCV at %s"
+msgstr ""
+
+
+#: R/qda.R: 0
+#. R/qda.R: stop("some group is too small for 'qda'")
+
+msgid "some group is too small for 'qda'"
+msgstr ""
+
+
+#: R/rlm.R: 0
+#. R/rlm.R: warning("some of '...' do not match")
+
+msgid "some of '...' do not match"
+msgstr ""
+
+
+#: R/fitdistr.R: 0
+#. R/fitdistr.R: gettext("supplying pars for the Normal distribution is not supported")
+
+msgid "supplying pars for the Normal distribution is not supported"
+msgstr ""
+
+
+#: R/fitdistr.R: 0
+#. R/fitdistr.R: gettext("supplying pars for the Poisson distribution is not supported")
+
+msgid "supplying pars for the Poisson distribution is not supported"
+msgstr ""
+
+
+#: R/fitdistr.R: 0
+#. R/fitdistr.R: gettext("supplying pars for the exponential distribution is not supported")
+
+msgid "supplying pars for the exponential distribution is not supported"
+msgstr ""
+
+
+#: R/fitdistr.R: 0
+#. R/fitdistr.R: gettext("supplying pars for the geometric distribution is not supported")
+
+msgid "supplying pars for the geometric distribution is not supported"
+msgstr ""
+
+
+#: R/fitdistr.R: 0
+#. R/fitdistr.R: gettext("supplying pars for the log-Normal distribution is not supported")
+
+msgid "supplying pars for the log-Normal distribution is not supported"
+msgstr ""
+
+
+#: R/negbin.R: 0
+#. R/negbin.R: warning("tests made without re-estimating 'theta'")
+
+msgid "tests made without re-estimating 'theta'"
+msgstr ""
+
+
+#: R/rlm.R: 0
+#. R/rlm.R: stop("the contrast defined is empty (has no TRUE elements)")
+
+msgid "the contrast defined is empty (has no TRUE elements)"
+msgstr ""
+
+
+#: R/negbin.R: 0
+#. R/negbin.R: sprintf("theta.ml: iter %d 'theta = %f'", it, signif(t0))
+#. R/negbin.R: gettextf("theta.ml: iter %d 'theta = %f'", it, signif(t0))
+
+msgid "theta.ml: iter %d 'theta = %f'"
+msgstr ""
+
+
+#: R/add.R: 0
+#. R/add.R: gettextf("trying + %s", tt)
+#. R/add.R: gettextf("trying + %s", tt)
+
+msgid "trying + %s"
+msgstr ""
+
+
+#: R/add.R: 0
+#. R/add.R: gettextf("trying - %s", tt)
+#. R/add.R: gettextf("trying - %s", scope[i])
+
+msgid "trying - %s"
+msgstr ""
+
+
+#: R/truehist.R: 0
+#. R/truehist.R: warning("uneven breaks with 'prob = FALSE' will give a misleading plot")
+
+msgid "uneven breaks with 'prob = FALSE' will give a misleading plot"
+msgstr ""
+
+
+#: R/negbin.R: 0
+#. R/negbin.R: gettextf("unimplemented method: %s", sQuote(method))
+
+msgid "unimplemented method: %s"
+msgstr ""
+
+
+#: R/fitdistr.R: 0
+#. R/fitdistr.R: stop("unsupported distribution")
+
+msgid "unsupported distribution"
+msgstr ""
+
+
+#: R/lda.R: 0
+#: R/qda.R: 0
+#. R/lda.R: warning("variable names in 'newdata' do not match those in 'object'")
+#. R/qda.R: warning("variable names in 'newdata' do not match those in 'object'")
+
+msgid "variable names in 'newdata' do not match those in 'object'"
+msgstr ""
+
+
+#: R/lda.R: 0
+#. R/lda.R: warning("variables are collinear")
+#. R/lda.R: warning("variables are collinear")
+#. R/lda.R: warning("variables are collinear")
+
+msgid "variables are collinear"
+msgstr ""
+
+
+#: R/polr.R: 0
+#. R/polr.R: stop("weighted fits are not supported")
+
+msgid "weighted fits are not supported"
+msgstr ""
+
+
+#: R/lda.R: 0
+#: R/qda.R: 0
+#. R/lda.R: stop("wrong number of variables")
+#. R/qda.R: stop("wrong number of variables")
+
+msgid "wrong number of variables"
+msgstr ""
+
+
+#: R/isoMDS.R: 0
+#: R/sammon.R: 0
+#. R/isoMDS.R: gettextf("zero or negative distance between objects %d and %d", aa[1, 1], aa[1, 2])
+#. R/sammon.R: gettextf("zero or negative distance between objects %d and %d", aa[1, 1], aa[1, 2])
+
+msgid "zero or negative distance between objects %d and %d"
+msgstr ""
+
+
+#: R/stdres.R: 0
+#. R/stdres.R: ngettext(n.miss, "%d missing observation deleted", "%d missing observations deleted",     domain = "R-MASS")
+
+msgid        "%d missing observation deleted"
+msgid_plural "%d missing observations deleted"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/stdres.R: 0
+#. R/stdres.R: ngettext(sum(excl), "%d row with zero weights not counted", "%d rows with zero weights not counted",     domain = "R-MASS")
+
+msgid        "%d row with zero weights not counted"
+msgid_plural "%d rows with zero weights not counted"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/lqs.R: 0
+#. R/lqs.R: ngettext(z$sing, "%d singular sample of size %d out of %d", "%d singular samples of size %d out of %d",     domain = "R-MASS")
+#. R/lqs.R: ngettext(z$sing, "%d singular sample of size %d out of %d", "%d singular samples of size %d out of %d",     domain = "R-MASS")
+
+msgid        "%d singular sample of size %d out of %d"
+msgid_plural "%d singular samples of size %d out of %d"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/lda.R: 0
+#. R/lda.R: ngettext(length(empty), "group %s is empty", "groups %s are empty", domain = "R-MASS")
+
+msgid        "group %s is empty"
+msgid_plural "groups %s are empty"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/lqs.R: 0
+#. R/lqs.R: ngettext(nexact, "only %d set, so all sets will be tried", "only %d sets, so all sets will be tried",     domain = "R-MASS")
+#. R/lqs.R: ngettext(nexact, "only %d set, so all sets will be tried", "only %d sets, so all sets will be tried",     domain = "R-MASS")
+
+msgid        "only %d set, so all sets will be tried"
+msgid_plural "only %d sets, so all sets will be tried"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/add.R: 0
+#. R/add.R: ngettext(newn, "using the %d/%d row from a combined fit", "using the %d/%d rows from a combined fit",     domain = "R-MASS")
+
+msgid        "using the %d/%d row from a combined fit"
+msgid_plural "using the %d/%d rows from a combined fit"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/lda.R: 0
+#. R/lda.R: ngettext(length(const), "variable %s appears to be constant within groups", "variables %s appear to be constant within groups",     domain = "R-MASS")
+
+msgid        "variable %s appears to be constant within groups"
+msgid_plural "variables %s appear to be constant within groups"
+msgstr[0]    ""
+msgstr[1]    ""

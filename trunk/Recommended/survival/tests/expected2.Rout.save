@@ -1,0 +1,46 @@
+
+R Under development (unstable) (2014-09-30 r594) -- "Unsuffered Consequences"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-unknown-linux-gnu (64-bit)
+
+This version of R supports extended localization
+See README-ELS file for details
+R-ELS Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
+
+R-ELS is not part of the R project, so please do not report bugs
+via r-bugs or the R website - instead refer to the author.
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(survival)
+Loading required package: 'splines'
+> #
+> # A Cox model with a factor, followed by survexp.  
+> #
+> pfit2 <- coxph(Surv(time, status > 0) ~ trt + log(bili) +
++           log(protime) + age + platelet + sex, data = pbc)
+> esurv <- survexp(~ trt, ratetable = pfit2, data = pbc)
+> 
+> temp <- pbc
+> temp$sex2 <- factor(as.numeric(pbc$sex), levels=2:0,
++                     labels=c("f", "m", "unknown"))
+> esurv2 <- survexp(~ trt, ratetable = pfit2, data = temp, 
++                   rmap=list(sex=sex2))
+> 
+> # The call components won't match, which happen to be first
+> all.equal(unclass(esurv)[-1], unclass(esurv2)[-1])
+[1] TRUE
+> 
+> proc.time()
+   user  system elapsed 
+  0.352   0.028   0.367 

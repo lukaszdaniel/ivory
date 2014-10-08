@@ -1,0 +1,163 @@
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nnet/R/multinom.R R-recommended-moje/nnet/R/multinom.R
+73c73
+<                                      "groups %s are empty"),
+---
+>                                      "groups %s are empty", domain = "R-nnet"),
+175c175
+<     if(!inherits(object, "multinom")) stop("not a \"multinom\" fit")
+---
+>     if(!inherits(object, "multinom")) stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("multinom")))
+209c209
+<         cat("Call:\n")
+---
+>         cat(gettext("Call:", domain = "R-nnet"), "\n", sep = "")
+212c212
+<     cat("\nCoefficients:\n")
+---
+>     cat("\n", gettext("Coefficients:", domain = "R-nnet"), "\n", sep = "")
+214,215c214,215
+<     cat("\nResidual Deviance:", format(x$deviance), "\n")
+<     cat("AIC:", format(x$AIC), "\n")
+---
+>     cat("\n", gettext("Residual Deviance: ", domain = "R-nnet"), format(x$deviance), "\n", sep = "")
+>     cat(gettext("AIC: ", domain = "R-nnet"), format(x$AIC), "\n", sep = "")
+236c236
+<     if(!inherits(object, "multinom")) stop("not a \"multinom\" fit")
+---
+>     if(!inherits(object, "multinom")) stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("multinom")))
+252,254c252,253
+<         cat("trying -", tt,"\n")
+<         nobject <- update(object, paste("~ . -", tt), trace = trace,
+<                           evaluate = FALSE)
+---
+>         cat(gettextf("trying - %s", tt, domain = "R-nnet"), "\n" ,sep = "")
+>         nobject <- update(object, paste("~ . -", tt), trace = trace, evaluate = FALSE)
+268c267
+<     if(!inherits(object, "multinom")) stop("not a \"multinom\" fit")
+---
+>     if(!inherits(object, "multinom")) stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("multinom")))
+282,284c281,282
+<         cat("trying +", tt,"\n")
+<         nobject <- update(object, as.formula(paste("~ . +", tt)), trace = trace,
+<                           evaluate = FALSE)
+---
+>         cat(gettextf("trying + %s", tt, domain = "R-nnet"), "\n", sep = "")
+>         nobject <- update(object, as.formula(paste("~ . +", tt)), trace = trace, evaluate = FALSE)
+348c346
+<         cat("Call:\n")
+---
+>         cat(gettext("Call:", domain = "R-nnet"), "\n", sep = "")
+351c349
+<     cat("\nCoefficients:\n")
+---
+>     cat("\n", gettext("Coefficients:", domain = "R-nnet"), "\n", sep = "")
+359c357
+<         cat("\nStd. Errors:\n")
+---
+>         cat("\n", gettext("Std. Errors:", domain = "R-nnet"), "\n", sep = "")
+362c360
+<             cat("\nValue/SE (Wald statistics):\n")
+---
+>             cat("\n", gettext("Value/SE (Wald statistics):", domain = "R-nnet"), "\n", sep = "")
+366,367c364,365
+<     cat("\nResidual Deviance:", format(x$deviance), "\n")
+<     cat("AIC:", format(x$AIC), "\n")
+---
+>     cat("\n", gettext("Residual Deviance: ", domain = "R-nnet"), format(x$deviance), "\n", sep = "")
+>     cat(gettext("AIC: ", domain = "R-nnet"), format(x$AIC), "\n", sep = "")
+371c369
+<             cat("\nCorrelation of Coefficients:\n")
+---
+>             cat("\n", gettext("Correlation of Coefficients:", domain = "R-nnet"), "\n", sep = "")
+386c384
+<         stop('anova is not implemented for a single "multinom" object')
+---
+>         stop("anova is not implemented for a single \"multinom\" object")
+395c393
+<         stop('not all objects are of class "multinom"')
+---
+>         stop("not all objects are of class \"multinom\"")
+410,411c408
+<     names(out) <- c("Model", "Resid. df", "Resid. Dev", "Test",
+<                     "   Df", "LR stat.", "Pr(Chi)")
+---
+>     names(out) <- c("Model", "Resid. df", "Resid. Dev", "Test", "   Df", "LR stat.", "Pr(Chi)")
+415,416c412,413
+<         c("Likelihood ratio tests of Multinomial Models\n",
+<           paste("Response:", rsp))
+---
+>         c(gettext("Likelihood ratio tests of Multinomial Models\n", domain = "R-nnet"),
+>           gettextf("Response: %s", paste(rsp, collapse = ""), domain = "R-nnet"))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nnet/R/nnet.R R-recommended-moje/nnet/R/nnet.R
+51c51
+<                                      "groups %s are empty"),
+---
+>                                      "groups %s are empty", domain = "R-nnet"),
+106c106
+<         stop(gettextf("too many (%d) weights", nwts), domain=NA)
+---
+>         stop(gettextf("too many (%d) weights", nwts), domain = "R-nnet")
+181c181
+<     if(!inherits(object, "nnet")) stop("object not of class \"nnet\"")
+---
+>     if(!inherits(object, "nnet")) stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("nnet")))
+319,324c319,322
+<     if(!inherits(x, "nnet")) stop("not a legitimate neural net fit")
+<     cat("a ",x$n[1L],"-",x$n[2L],"-",x$n[3L]," network", sep="")
+<     cat(" with", length(x$wts),"weights\n")
+<     if(length(x$coefnames))  cat("inputs:", x$coefnames, "\noutput(s):",
+<                                  deparse(formula(x)[[2L]], backtick=TRUE), "\n")
+<     cat("options were -")
+---
+>     if(!inherits(x, "nnet")) stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("nnet")))
+>     cat(gettextf("a %s network with %d weights", paste(x$n[1L],"-",x$n[2L],"-",x$n[3L], collapse = ""), length(x$wts), domain = "R-nnet"), "\n", sep = "")
+>     if(length(x$coefnames))  cat(gettextf("inputs: %s\noutput(s): %s", x$coefnames, deparse(formula(x)[[2L]], backtick=TRUE), domain = "R-nnet"), "\n", sep = "")
+>     cat(gettext("options were:", domain = "R-nnet"))
+326,330c324,328
+<     if(tconn[length(tconn)] > x$n[2L]+1L) cat(" skip-layer connections ")
+<     if(x$nunits > x$nsunits && !x$softmax) cat(" linear output units ")
+<     if(x$entropy) cat(" entropy fitting ")
+<     if(x$softmax) cat(" softmax modelling ")
+<     if(x$decay[1L] > 0) cat(" decay=", x$decay[1L], sep="")
+---
+>     if(tconn[length(tconn)] > x$n[2L]+1L) cat(gettext(" skip-layer connections ", domain = "R-nnet"))
+>     if(x$nunits > x$nsunits && !x$softmax) cat(gettext(" linear output units ", domain = "R-nnet"))
+>     if(x$entropy) cat(gettext(" entropy fitting ", domain = "R-nnet"))
+>     if(x$softmax) cat(gettext(" softmax modelling ", domain = "R-nnet"))
+>     if(x$decay[1L] > 0) cat(gettextf(" decay=%s", x$decay[1L], domain = "R-nnet"), sep = "")
+360,362c358,359
+<     cat("a ",x$n[1L],"-",x$n[2L],"-",x$n[3L]," network", sep="")
+<     cat(" with", length(x$wts),"weights\n")
+<     cat("options were -")
+---
+>     cat(gettextf("a %s network with %d weights", paste(x$n[1L],"-",x$n[2L],"-",x$n[3L], collapse = ""), length(x$wts), domain = "R-nnet"), "\n", sep = "")
+>     cat(gettext("options were:", domain = "R-nnet"))
+364,368c361,365
+<     if(tconn[length(tconn)] > x$n[2L]+1L) cat(" skip-layer connections ")
+<     if(x$nunits > x$nsunits && !x$softmax) cat(" linear output units ")
+<     if(x$entropy) cat(" entropy fitting ")
+<     if(x$softmax) cat(" softmax modelling ")
+<     if(x$decay[1L] > 0) cat(" decay=", x$decay[1L], sep="")
+---
+>     if(tconn[length(tconn)] > x$n[2L]+1L) cat(gettext(" skip-layer connections ", domain = "R-nnet"))
+>     if(x$nunits > x$nsunits && !x$softmax) cat(gettext(" linear output units ", domain = "R-nnet"))
+>     if(x$entropy) cat(gettext(" entropy fitting ", domain = "R-nnet"))
+>     if(x$softmax) cat(gettext(" softmax modelling ", domain = "R-nnet"))
+>     if(x$decay[1L] > 0) cat(gettextf(" decay=%s", x$decay[1L], domain = "R-nnet"), sep="")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nnet/R/vcovmultinom.R R-recommended-moje/nnet/R/vcovmultinom.R
+45c45
+<     for (i in 1L:n){
+---
+>     for (i in seq_len(n)){
+48c48
+<         for (j in 1L:(k+1)){
+---
+>         for (j in seq_len(k+1)){
+Tylko w R-recommended-moje/nnet/src: localization.h
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nnet/src/nnet.c R-recommended-moje/nnet/src/nnet.c
+27a28
+> #include "localization.h"
+124c125
+< 	error("No model set");
+---
+> 	error(_("No model set"));

@@ -1,0 +1,118 @@
+# Translation of src/library/Recommended/class/R-class.pot to German
+# Copyright (C) 2007-2009 The R Foundation
+# This file is distributed under the same license as the lattice R package.
+# Chris Leick <c.leick@vollbio.de>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: R 2.15.2 / class 7.3-1\n"
+"Report-Msgid-Bugs-To: bugs@r-project.org\n"
+"POT-Creation-Date: 2014-06-30 21:39\n"
+"PO-Revision-Date: 2012-09-30 12:25+0100\n"
+"Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
+"Language-Team: German <debian-l10n-german@lists.debian.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. R/SOM.R: stop("'SOM' called with no data")
+#: R/SOM.R:0
+msgid "'SOM' called with no data"
+msgstr "»SOM« ohne Daten aufgerufen"
+
+#. R/SOM.R: stop("'alpha' and 'radii' arguments do not have the same lengths")
+#: R/SOM.R:0
+#, fuzzy
+msgid "'alpha' and 'radii' arguments do not have the same lengths"
+msgstr "»alpha« und »radii« haben nicht die gleiche Länge"
+
+#. R/SOM.R: stop("'alpha' and 'radii' arguments do not match")
+#: R/SOM.R:0
+#, fuzzy
+msgid "'alpha' and 'radii' arguments do not match"
+msgstr "»alpha« und »radii« passen nicht zusammen"
+
+#. R/lvq.R: stop("'prior' argument is of incorrect length")
+#: R/lvq.R:0
+#, fuzzy
+msgid "'prior' argument is of incorrect length"
+msgstr "»prior« hat falsche Länge"
+
+#. R/SOM.R: stop("'radii' must be a list of the same length as 'alpha'")
+#: R/SOM.R:0
+msgid "'radii' must be a list of the same length as 'alpha'"
+msgstr "»radii« muss eine Liste mit der gleichen Länge wie »alpha« sein"
+
+#. R/knn.R: stop("'train' and 'class' have different lengths")
+#. R/knn.R: stop("'train' and 'class' have different lengths")
+#. R/knn.R: stop("'train' and 'class' have different lengths")
+#: R/knn.R:0
+msgid "'train' and 'class' have different lengths"
+msgstr "»train« und »class« haben unterschiedliche Längen"
+
+#. R/lvq.R: stop("'x' and 'cl' arguments have different lengths")
+#. R/lvq.R: stop("'x' and 'cl' arguments have different lengths")
+#. R/lvq.R: stop("'x' and 'cl' arguments have different lengths")
+#. R/lvq.R: stop("'x' and 'cl' arguments have different lengths")
+#. R/lvq.R: stop("'x' and 'cl' arguments have different lengths")
+#: R/lvq.R:0
+#, fuzzy
+msgid "'x' and 'cl' arguments have different lengths"
+msgstr "»x« und »cl« haben unterschiedliche Längen"
+
+#. R/knn.R: stop("dims of 'test' and 'train' differ")
+#. R/knn.R: stop("dims of 'test' and 'train' differ")
+#: R/knn.R:0
+msgid "dims of 'test' and 'train' differ"
+msgstr "Abmessungen von »test« und »train« sind unterschiedlich"
+
+#. R/lvq.R: stop("invalid 'prior' argument")
+#: R/lvq.R:0
+#, fuzzy
+msgid "invalid 'prior' argument"
+msgstr "ungültiges »prior«"
+
+#. R/knn.R: gettextf("k = %d exceeds number %d of patterns", k, ntr)
+#. R/knn.R: gettextf("k = %d exceeds number %d of patterns", k, ntr - 1)
+#: R/knn.R:0
+msgid "k = %d exceeds number %d of patterns"
+msgstr "k = %d überschreitet die Zahl %d der Muster"
+
+#. R/knn.R: gettextf("k = %d must be at least 1", k)
+#. R/knn.R: gettextf("k = %d must be at least 1", k)
+#: R/knn.R:0
+msgid "k = %d must be at least 1"
+msgstr "k = %d muss mindestens 1 sein"
+
+#. R/knn.R: stop("no missing values are allowed")
+#. R/knn.R: stop("no missing values are allowed")
+#. R/knn.R: stop("no missing values are allowed")
+#. R/lvq.R: stop("no missing values are allowed")
+#. R/lvq.R: stop("no missing values are allowed")
+#. R/lvq.R: stop("no missing values are allowed")
+#. R/lvq.R: stop("no missing values are allowed")
+#. R/lvq.R: stop("no missing values are allowed")
+#: R/knn.R:0 R/lvq.R:0
+msgid "no missing values are allowed"
+msgstr "fehlende Werte sind nicht erlaubt"
+
+#. R/multiedit.R: gettextf("pass %s size %d", pass, n2)
+#: R/multiedit.R:0
+msgid "pass %s size %d"
+msgstr "%s übergeben, Größe %d"
+
+#. R/multiedit.R: warning("retained set is now too small to proceed")
+#: R/multiedit.R:0
+msgid "retained set is now too small to proceed"
+msgstr "verbliebene Menge ist nun zu klein, um fortzufahren"
+
+#. R/SOM.R: stop("wrong plot method used")
+#. R/SOM.R: stop("wrong plot method used")
+#: R/SOM.R:0
+msgid "wrong plot method used"
+msgstr "falsche Ausgabemethode benutzt"
+
+#~ msgid "dims of 'test' and 'train differ"
+#~ msgstr "Abmessungen von »test« und »train« sind unterschiedlich"

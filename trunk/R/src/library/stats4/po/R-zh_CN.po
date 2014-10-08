@@ -1,0 +1,85 @@
+# Chinese translations for R package
+# Copyright (C) 2006 The R Foundation
+# This file is distributed under the same license as the PACKAGE package.
+# 陈斐 <feic@avaya.com>, 2007.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: R 2.4.0\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2014-07-19 18:11\n"
+"PO-Revision-Date: 2005-02-04 08:37+0000\n"
+"Last-Translator: 陈斐 <feic@avaya.com>\n"
+"Language-Team: Chinese\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. R/mle.R: stop("'start' must be a named list")
+#: R/mle.R:0
+msgid "'start' must be a named list"
+msgstr "'start'必需是带名串列"
+
+#. R/mle.R: gettext("Call:", domain = "R-stats4")
+#. R/mle.R: gettext("Call:", domain = "R-stats4")
+#: R/mle.R:0
+msgid "Call:"
+msgstr ""
+
+#. R/mle.R: gettext("Coefficients:", domain = "R-stats4")
+#. R/mle.R: gettext("Coefficients:", domain = "R-stats4")
+#: R/mle.R:0
+msgid "Coefficients:"
+msgstr ""
+
+#. R/mle.R: gettext("Maximum likelihood estimation", domain = "R-stats4")
+#: R/mle.R:0
+msgid "Maximum likelihood estimation"
+msgstr ""
+
+#. R/mle.R: gettextf("Parameter: %s down", pi, domain = "R-stats4")
+#: R/mle.R:0
+msgid "Parameter: %s down"
+msgstr ""
+
+#. R/mle.R: gettextf("Parameter: %s up", pi, domain = "R-stats4")
+#: R/mle.R:0
+msgid "Parameter: %s up"
+msgstr ""
+
+#. R/mle.R: gettext("Profiling...", domain = "R-stats4")
+#: R/mle.R:0
+msgid "Profiling..."
+msgstr ""
+
+#. R/mle.R: warning("extra arguments discarded")
+#: R/mle.R:0
+msgid "extra arguments discarded"
+msgstr "多余的参数略过不用"
+
+#. R/mle.R: warning("levels truncated to positive values only")
+#: R/mle.R:0
+msgid "levels truncated to positive values only"
+msgstr "阶层截为正数值"
+
+#. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
+#: R/mle.R:0
+msgid ""
+"profiling has found a better solution, so original fit had not converged"
+msgstr "通过靠模切削找到了一个更好的答案，因此原来的拟合没有收敛"
+
+#. R/mle.R: stop("some named arguments in 'fixed' are not arguments to the supplied log-likelihood")
+#: R/mle.R:0
+msgid ""
+"some named arguments in 'fixed' are not arguments to the supplied log-"
+"likelihood"
+msgstr "'fixed'里的一些带名参数不是给所提供的对数似然作为参数来用的"
+
+#. R/mle.R: stop("some named arguments in 'start' are not arguments to the supplied log-likelihood")
+#: R/mle.R:0
+msgid ""
+"some named arguments in 'start' are not arguments to the supplied log-"
+"likelihood"
+msgstr "'start'里的一些带名参数不是给所提供的对数似然作为参数来用的"

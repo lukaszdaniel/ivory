@@ -1,0 +1,174 @@
+# Translation of rpart.pot to French
+# Copyright (C) 2005 The R Foundation
+# This file is distributed under the same license as the rpart R package.
+# Philippe Grosjean <phgrosjean@sciviews.org>, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: rpart 3.1-24\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-07 16:58+0100\n"
+"PO-Revision-Date: 2005-12-07 02:43+0100\n"
+"Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
+"Language-Team: French <R-core@r-project.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: poisson.c:35
+msgid "Invalid time point"
+msgstr "Point temporel incorrect"
+
+#: poisson.c:39
+msgid "Invalid event count"
+msgstr "Dénombrement d'événements incorrect"
+
+#: poisson.c:69
+msgid "Invalid error rule"
+msgstr ""
+
+#: print_tree.c:61
+#, c-format
+msgid "Node number %d: %d observation"
+msgid_plural "Node number %d: %d observations"
+msgstr[0] ""
+msgstr[1] ""
+
+#: print_tree.c:63
+#, c-format
+msgid ""
+"Complexity param= %f\n"
+"  response estimate=%f,  risk/n= %f\n"
+msgstr ""
+
+#: print_tree.c:66
+#, c-format
+msgid "  left son=%d (%d observation)"
+msgid_plural "  left son=%d (%d observations)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: print_tree.c:68
+#, c-format
+msgid " right son=%d (%d observation)"
+msgid_plural " right son=%d (%d observations)"
+msgstr[0] ""
+msgstr[1] ""
+
+#: print_tree.c:75
+#, c-format
+msgid "%d observation does not split\n"
+msgid_plural "%d observations do not split\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#: print_tree.c:80
+msgid "  Primary splits:\n"
+msgstr ""
+
+#: print_tree.c:87
+#, c-format
+msgid "var%d < %5g to the left, improve=%5.3f,  (%d missing)\n"
+msgid_plural "var%d < %5g to the left, improve=%5.3f,  (%d missing)\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#: print_tree.c:91
+#, c-format
+msgid "var%d > %5g to the left, improve=%5.3f, (%d missing)\n"
+msgid_plural "var%d > %5g to the left, improve=%5.3f, (%d missing)\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#: print_tree.c:95 print_tree.c:140
+#, c-format
+msgid "var%d splits as: "
+msgstr ""
+
+#: print_tree.c:110 print_tree.c:115
+#, c-format
+msgid "improve=%5.3f, (%d missing)\n"
+msgid_plural "improve=%5.3f, (%d missing)\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#: print_tree.c:125
+msgid "  Surrogate splits:\n"
+msgstr ""
+
+#: print_tree.c:132
+#, c-format
+msgid "var%d < %5g to the left, agree=%5.3f, (%d split)\n"
+msgid_plural "var%d < %5g to the left, agree=%5.3f, (%d split)\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#: print_tree.c:136
+#, c-format
+msgid "var%d > %5g to the left, agree=%5.3f, (%d split)\n"
+msgid_plural "var%d > %5g to the left, agree=%5.3f, (%d split)\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#: print_tree.c:155 print_tree.c:160
+#, c-format
+msgid "agree=%5.3f, (%d split)\n"
+msgid_plural "agree=%5.3f, (%d split)\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#: rpart.c:92 xpred.c:90
+#, fuzzy
+msgid "Invalid value for 'method'"
+msgstr "valeur incorrecte pour 'method'"
+
+#: rpart.c:194
+msgid "unknown error"
+msgstr ""
+
+#: rpart_callback.c:39
+msgid "'yback' not found"
+msgstr "'yback' non trouvé"
+
+#: rpart_callback.c:43
+msgid "'wback' not found"
+msgstr "'wback' non trouvé"
+
+#: rpart_callback.c:47
+msgid "'xback' not found"
+msgstr "'xback' non trouvé"
+
+#: rpart_callback.c:51
+msgid "'nback' not found"
+msgstr "'nback' non trouvé"
+
+#: rpart_callback.c:97
+msgid "return value not a vector"
+msgstr "la valeur renvoyée n'est pas un vecteur"
+
+#: rpart_callback.c:99
+msgid "returned value is the wrong length"
+msgstr "la valeur renvoyée n'a pas la bonne longueur"
+
+#: rpart_callback.c:131
+msgid "the expression expr1 did not return a vector!"
+msgstr "l'expression 'expr1' n'a pas renvoyé un vecteur!"
+
+#: rpart_callback.c:141
+#, c-format
+msgid "the expression expr1 returned a list of %d elements, %d required"
+msgstr ""
+"l'expression 'expr1' a renvoyé une liste de %d éléments, %d sont requis"
+
+#: rundown.c:49
+msgid "Warning message--see rundown.c"
+msgstr ""
+
+#: rundown2.c:49
+msgid "Warning message--see rundown2.c"
+msgstr ""
+
+#~ msgid "Out of memory"
+#~ msgstr "Mémoire saturée"

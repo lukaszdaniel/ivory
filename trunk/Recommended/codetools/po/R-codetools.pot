@@ -1,0 +1,227 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: codetools 0.2-9\n"
+"POT-Creation-Date: 2014-08-23 08:31\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettextf("%s is not a valid function in complex assignments", sQuote(deparse(fun)),     domain = "R-codetools")
+
+msgid "%s is not a valid function in complex assignments"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettextf("%s may be used in an incorrect context", sQuote("..."), domain = "R-codetools")
+#. R/codetools.R: gettextf("%s may be used in an incorrect context", sQuote(v), domain = "R-codetools")
+#. R/codetools.R: gettextf("%s may be used in an incorrect context", sQuote("..."), domain = "R-codetools")
+#. R/codetools.R: gettextf("%s may be used in an incorrect context", sQuote(v), domain = "R-codetools")
+
+msgid "%s may be used in an incorrect context"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettextf("%s may be used in an incorrect context: %s", sQuote(a), pasteExpr(e), domain = "R-codetools")
+
+msgid "%s may be used in an incorrect context: %s"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettext("bad argument to '.Internal':", domain = "R-codetools")
+
+msgid "bad argument to '.Internal':"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettext("bad assignment:", domain = "R-codetools")
+#. R/codetools.R: gettext("bad assignment:", domain = "R-codetools")
+#. R/codetools.R: gettext("bad assignment:", domain = "R-codetools")
+#. R/codetools.R: gettext("bad assignment:", domain = "R-codetools")
+
+msgid "bad assignment:"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: stop("bad local variable entry")
+
+msgid "bad local variable entry"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: stop("constant folding cannot continue")
+
+msgid "constant folding cannot continue"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettextf("link %s not available for %s", sQuote(e[[2]]), sQuote(family), domain = "R-codetools")
+
+msgid "link %s not available for %s"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettext("local assignments to syntactic functions:", domain = "R-codetools")
+
+msgid "local assignments to syntactic functions:"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettextf("local variable %s assigned but may not be used", sQuote(v), domain = "R-codetools")
+
+msgid "local variable %s assigned but may not be used"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettextf("local variable %s used as function with no apparent local function definition",     sQuote(v), domain = "R-codetools")
+
+msgid "local variable %s used as function with no apparent local function definition"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettextf("missing arguments not allowed in calls to %s", sQuote(fn), domain = "R-codetools")
+
+msgid "missing arguments not allowed in calls to %s"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettextf("multiple local function definitions for %s with different formal arguments",     sQuote(v), domain = "R-codetools")
+
+msgid "multiple local function definitions for %s with different formal arguments"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: stop("no local variable entry")
+
+msgid "no local variable entry"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettextf("no visible binding for '<<-' assignment to %s", sQuote(n), domain = "R-codetools")
+
+msgid "no visible binding for '<<-' assignment to %s"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettextf("no visible binding for global variable %s", sQuote(n), domain = "R-codetools")
+
+msgid "no visible binding for global variable %s"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettextf("no visible global function definition for %s", sQuote(n), domain = "R-codetools")
+
+msgid "no visible global function definition for %s"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettext("not a foldable expression:", domain = "R-codetools")
+
+msgid "not a foldable expression:"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettext("not a symbol or string", domain = "R-codetools")
+
+msgid "not a symbol or string"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: stop("only works for closures")
+
+msgid "only works for closures"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: stop("package must be loaded")
+
+msgid "package must be loaded"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettextf("parameter %s changed by assignment", sQuote(v), domain = "R-codetools")
+
+msgid "parameter %s changed by assignment"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettextf("parameter %s may not be used", sQuote(v), domain = "R-codetools")
+
+msgid "parameter %s may not be used"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettextf("possible error in %s: ", sQuote(deparse(call, width.cutoff = 500)), domain = "R-codetools")
+
+msgid "possible error in %s:"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: stop("sanity check on local usage frame failed")
+
+msgid "sanity check on local usage frame failed"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettextf("warning in %s: ", sQuote(deparse(call, width.cutoff = 500)), domain = "R-codetools")
+
+msgid "warning in %s:"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettextf("wrong number of arguments to %s", sQuote(fn), domain = "R-codetools")
+
+msgid "wrong number of arguments to %s"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettext("wrong number of arguments to '.Internal':", domain = "R-codetools")
+
+msgid "wrong number of arguments to '.Internal':"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettext("wrong number of arguments to 'bquote'", domain = "R-codetools")
+
+msgid "wrong number of arguments to 'bquote'"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettext("wrong number of arguments to 'substitute'", domain = "R-codetools")
+
+msgid "wrong number of arguments to 'substitute'"
+msgstr ""

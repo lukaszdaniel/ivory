@@ -1,0 +1,94 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: class 7.3-3\n"
+"Report-Msgid-Bugs-To: bugs@r-project.org\n"
+"POT-Creation-Date: 2014-06-30 21:39\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
+"Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"na-Revision-Date: 2012-05-29 07:55+0100\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Generator: Poedit 1.5.4\n"
+#. R/SOM.R: stop("'SOM' called with no data")
+#: R/SOM.R:0
+msgid "'SOM' called with no data"
+msgstr "'SOM' zostało wywołane bez danych"
+#. R/SOM.R: stop("'alpha' and 'radii' arguments do not have the same lengths")
+#: R/SOM.R:0
+msgid "'alpha' and 'radii' arguments do not have the same lengths"
+msgstr "argumenty 'alpha' oraz 'radii' nie posiadają tych samych długości"
+#. R/SOM.R: stop("'alpha' and 'radii' arguments do not match")
+#: R/SOM.R:0
+msgid "'alpha' and 'radii' arguments do not match"
+msgstr "argumenty 'alpha' oraz 'radii' nie zgadzają się"
+#. R/lvq.R: stop("'prior' argument is of incorrect length")
+#: R/lvq.R:0
+msgid "'prior' argument is of incorrect length"
+msgstr "argument 'prior' posiada niepoprawną długość"
+#. R/SOM.R: stop("'radii' must be a list of the same length as 'alpha'")
+#: R/SOM.R:0
+msgid "'radii' must be a list of the same length as 'alpha'"
+msgstr "argument 'radii' musi być listą tej samej długości co argument 'alpha'"
+#. R/knn.R: stop("'train' and 'class' have different lengths")
+#. R/knn.R: stop("'train' and 'class' have different lengths")
+#. R/knn.R: stop("'train' and 'class' have different lengths")
+#: R/knn.R:0
+msgid "'train' and 'class' have different lengths"
+msgstr "argumenty 'train' oraz 'class' mają różne długości"
+#. R/lvq.R: stop("'x' and 'cl' arguments have different lengths")
+#. R/lvq.R: stop("'x' and 'cl' arguments have different lengths")
+#. R/lvq.R: stop("'x' and 'cl' arguments have different lengths")
+#. R/lvq.R: stop("'x' and 'cl' arguments have different lengths")
+#. R/lvq.R: stop("'x' and 'cl' arguments have different lengths")
+#: R/lvq.R:0
+msgid "'x' and 'cl' arguments have different lengths"
+msgstr "argumenty 'x' oraz 'cl' mają różne długości"
+#. R/knn.R: stop("dims of 'test' and 'train' differ")
+#. R/knn.R: stop("dims of 'test' and 'train' differ")
+#: R/knn.R:0
+msgid "dims of 'test' and 'train' differ"
+msgstr "wymiary argumentów 'test' oraz 'train' różnią się"
+#. R/lvq.R: stop("invalid 'prior' argument")
+#: R/lvq.R:0
+msgid "invalid 'prior' argument"
+msgstr "niepoprawny argument 'prior'"
+#. R/knn.R: gettextf("k = %d exceeds number %d of patterns", k, ntr)
+#. R/knn.R: gettextf("k = %d exceeds number %d of patterns", k, ntr - 1)
+#: R/knn.R:0
+msgid "k = %d exceeds number %d of patterns"
+msgstr "k = %d przekracza liczbę %d ścieżek"
+#. R/knn.R: gettextf("k = %d must be at least 1", k)
+#. R/knn.R: gettextf("k = %d must be at least 1", k)
+#: R/knn.R:0
+msgid "k = %d must be at least 1"
+msgstr "k = %d musi być co najmniej 1"
+#. R/knn.R: stop("no missing values are allowed")
+#. R/knn.R: stop("no missing values are allowed")
+#. R/knn.R: stop("no missing values are allowed")
+#. R/lvq.R: stop("no missing values are allowed")
+#. R/lvq.R: stop("no missing values are allowed")
+#. R/lvq.R: stop("no missing values are allowed")
+#. R/lvq.R: stop("no missing values are allowed")
+#. R/lvq.R: stop("no missing values are allowed")
+#: R/knn.R:0 R/lvq.R:0
+msgid "no missing values are allowed"
+msgstr "żadne brakujące wartości nie są dozwolone"
+#. R/multiedit.R: gettextf("pass %s size %d", pass, n2)
+#: R/multiedit.R:0
+msgid "pass %s size %d"
+msgstr "przekazano %s rozmiar %d"
+#. R/multiedit.R: warning("retained set is now too small to proceed")
+#: R/multiedit.R:0
+msgid "retained set is now too small to proceed"
+msgstr "zachowany zbiór jest teraz zbyt mały aby kontynuować"
+#. R/SOM.R: stop("wrong plot method used")
+#. R/SOM.R: stop("wrong plot method used")
+#: R/SOM.R:0
+msgid "wrong plot method used"
+msgstr "błędnie użyta metoda rysowania wykresu"

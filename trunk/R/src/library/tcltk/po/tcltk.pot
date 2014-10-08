@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: tcltk 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-19 18:11+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: tcltk.c:61
+msgid "parse error in R expression"
+msgstr ""
+
+#: tcltk.c:163 tcltk.c:240
+msgid "tcl error.\n"
+msgstr ""
+
+#: tcltk.c:192 tcltk.c:737
+msgid "invalid argument"
+msgstr ""
+
+#: tcltk.c:296 tcltk.c:314 tcltk.c:387 tcltk.c:450 tcltk.c:502
+msgid "invalid object of type tclObj -- perhaps saved from another session?"
+msgstr ""
+
+#: tcltk.c:612
+msgid "argument list is too long in tcltk internal function 'callback_closure'"
+msgstr ""
+
+#: tcltk.c:645
+msgid "argument is not of correct type"
+msgstr ""
+
+#: tcltk.c:696
+msgid "no DISPLAY variable so Tk is not available"
+msgstr ""
+
+#: tcltk_unix.c:88
+msgid "Tcl is not loaded"
+msgstr ""
+
+#: tcltk_unix.c:92
+msgid "Tcl is not last loaded handler"
+msgstr ""

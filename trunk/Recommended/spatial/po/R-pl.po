@@ -1,0 +1,128 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: spatial 7.3-4\n"
+"Report-Msgid-Bugs-To: bugs@r-project.org\n"
+"POT-Creation-Date: 2014-07-13 09:15\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
+"Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"na-Revision-Date: 2012-05-29 07:55+0100\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "obj", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "obj", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "obj", dQuote("trgls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "obj", dQuote("trgls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "fit", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("trls"))
+#: R/kr.R:0
+msgid "'%s' argument is not an object of class %s"
+msgstr "argument '%s' nie jest obiektem klasy %s"
+
+#. R/kr.R: stop("'n' argument is too large")
+#. R/kr.R: stop("'n' argument is too large")
+#: R/kr.R:0
+msgid "'n' argument is too large"
+msgstr "argument 'n' jest zbyt duży"
+
+#. R/kr.R: stop("'np' argument exceeds 6")
+#. R/kr.R: stop("'np' argument exceeds 6")
+#: R/kr.R:0
+msgid "'np' argument exceeds 6"
+msgstr "argument 'np' przekracza 6"
+
+#. R/kr.R: stop("'x' and 'y' differ in length")
+#: R/kr.R:0
+msgid "'x' and 'y' differ in length"
+msgstr "'x' oraz 'y' różnią się długością"
+
+#. R/kr.R: stop("'x' does not have columns 'x', 'y' and 'z'")
+#. R/kr.R: stop("'x' does not have columns 'x', 'y' and 'z'")
+#: R/kr.R:0
+msgid "'x' does not have columns 'x', 'y' and 'z'"
+msgstr "'x' nie zawiera kolumn 'x', 'y' oraz 'z'"
+
+#. R/kr.R: gettextf("AIC: (df = %s) %s", AIC[1L], round(AIC[2L], 4), domain = "R-spatial")
+#: R/kr.R:0
+msgid "AIC: (df = %s) %s"
+msgstr "AIC: (st.swobody = %s) %s"
+
+#. R/kr.R: gettext("Adjusted R-squared:", domain = "R-spatial")
+#: R/kr.R:0
+msgid "Adjusted R-squared:"
+msgstr "Dostosowany R-kwadrat:"
+
+#. R/kr.R: gettext("Analysis of Variance Table", domain = "R-spatial")
+#. R/kr.R: gettext("Analysis of Variance Table")
+#: R/kr.R:0
+msgid "Analysis of Variance Table"
+msgstr "Tablica analizy wariancji"
+
+#. R/kr.R: warning("Device is not active")
+#. R/kr.R: warning("Device is not active")
+#: R/kr.R:0
+msgid "Device is not active"
+msgstr "Urządzenie nie jest aktywne"
+
+#. R/kr.R: gettext("Fitted:", domain = "R-spatial")
+#: R/kr.R:0
+msgid "Fitted:"
+msgstr "Dopasowania:"
+
+#. R/kr.R: gettextf("Model %s: %s", format(1L:nmodels), models)
+#: R/kr.R:0
+msgid "Model %s: %s"
+msgstr "Model %s: %s"
+
+#. R/kr.R: gettext("Model: ", domain = "R-spatial")
+#: R/kr.R:0
+msgid "Model:"
+msgstr "Model:"
+
+#. R/kr.R: gettext("Multiple R-Squared:", domain = "R-spatial")
+#: R/kr.R:0
+msgid "Multiple R-Squared:"
+msgstr "Wielokrotny R-kwadrat:"
+
+#. R/kr.R: gettext("Residuals:", domain = "R-spatial")
+#: R/kr.R:0
+msgid "Residuals:"
+msgstr "Reszty:"
+
+#. R/pp.R: stop("invalid input")
+#. R/pp.R: stop("invalid input")
+#. R/pp.R: stop("invalid input")
+#: R/pp.R:0
+msgid "invalid input"
+msgstr "niepoprawne wejście"
+
+#. R/kr.R: stop("rank failure in Choleski decomposition")
+#: R/kr.R:0
+msgid "rank failure in Choleski decomposition"
+msgstr "niepowodzenie pozycjonowania w dekompozycji Cholesky'ego"
+
+#. R/kr.R: warning("some of '...' do not match")
+#: R/kr.R:0
+msgid "some of '...' do not match"
+msgstr "niektóre z '...' nie pasują"
+
+#. R/pp.R: stop("some points outside region")
+#: R/pp.R:0
+msgid "some points outside region"
+msgstr "niektóre punkty są poza obszarem"
