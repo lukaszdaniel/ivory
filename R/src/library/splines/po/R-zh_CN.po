@@ -1,0 +1,151 @@
+# Chinese translations for R package
+# Copyright (C) 2006 The R Foundation
+# This file is distributed under the same license as the PACKAGE package.
+# 陈斐 <feic@avaya.com>, 2007.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: R 2.4.0\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2014-07-19 18:10\n"
+"PO-Revision-Date: 2005-02-04 08:37+0000\n"
+"Last-Translator: 陈斐 <feic@avaya.com>\n"
+"Language-Team: Chinese\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. R/splineClasses.R: gettextf("%s needs package 'Matrix' correctly installed", "splineDesign(*, sparse=TRUE)",     domain = "R-splines")
+#: R/splineClasses.R:0
+msgid "%s needs package 'Matrix' correctly installed"
+msgstr ""
+
+#. R/splines.R: stop("'degree' must be integer >= 1")
+#: R/splines.R:0
+msgid "'degree' must be integer >= 1"
+msgstr "'degree'必需大于等于一的整数"
+
+#. R/splineClasses.R: gettextf("'deriv' must be between 0 and %d", ord - 1)
+#. R/splineClasses.R: gettextf("'deriv' must be between 0 and %d", ord - 1)
+#: R/splineClasses.R:0
+msgid "'deriv' must be between 0 and %d"
+msgstr "'deriv'的值必需在零和%d之间"
+
+#. R/splines.R: gettextf("'df' was too small; have used %d", ord - (1L - intercept))
+#. R/splines.R: gettextf("'df' was too small; have used %d", 1L + intercept)
+#: R/splines.R:0
+#, fuzzy
+msgid "'df' was too small; have used %d"
+msgstr "'df'太小了；用过了的值为"
+
+#. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
+#. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
+#: R/splineClasses.R:0
+msgid "'formula' must be of the form \"y ~ x\""
+msgstr "'formula'的格式必需为\"y ~ x\""
+
+#. R/splineClasses.R: stop("'ord' must be >= 2")
+#: R/splineClasses.R:0
+msgid "'ord' must be >= 2"
+msgstr "'ord'的值必需大于等于二"
+
+#. R/splineClasses.R: stop("'ord' must be positive integer, at most the number of knots")
+#: R/splineClasses.R:0
+msgid "'ord' must be positive integer, at most the number of knots"
+msgstr "'ord'必需为正整数，最多不能超过结的数目"
+
+#. R/splineClasses.R: gettext("Period:", domain = "R-splines")
+#: R/splineClasses.R:0
+msgid "Period:"
+msgstr ""
+
+#. R/splineClasses.R: gettext("bSpline representation of spline", domain = "R-splines")
+#: R/splineClasses.R:0
+msgid "bSpline representation of spline"
+msgstr ""
+
+#. R/splineClasses.R: gettextf("bSpline representation of spline for %s", deparse(as.vector(form)), domain = "R-splines")
+#: R/splineClasses.R:0
+msgid "bSpline representation of spline for %s"
+msgstr ""
+
+#. R/splineClasses.R: stop("knot positions must be non-decreasing")
+#. R/splineClasses.R: stop("knot positions must be non-decreasing")
+#: R/splineClasses.R:0
+msgid "knot positions must be non-decreasing"
+msgstr "结的位置值必需为非递减"
+
+#. R/splineClasses.R: stop("knot positions must be strictly increasing")
+#: R/splineClasses.R:0
+msgid "knot positions must be strictly increasing"
+msgstr "结的位置值必需严格递增"
+
+#. R/splineClasses.R: stop("length of 'derivs' must match length of 'x'")
+#: R/splineClasses.R:0
+msgid "length of 'derivs' must match length of 'x'"
+msgstr "'derivs'和'x'的长度必需匹配"
+
+#. R/splineClasses.R: stop("lengths of 'x' and 'y' must be the same")
+#: R/splineClasses.R:0
+msgid "lengths of 'x' and 'y' must be the same"
+msgstr "'x'和'y'的长度必需一样"
+
+#. R/splineClasses.R: stop("lengths of 'x' and 'y' must match")
+#: R/splineClasses.R:0
+msgid "lengths of 'x' and 'y' must match"
+msgstr "'x'和'y'的长度必需相匹配"
+
+#. R/splineClasses.R: stop("must have at least 'ord' knots")
+#: R/splineClasses.R:0
+msgid "must have at least 'ord' knots"
+msgstr "至少需要有'ord'个结"
+
+#. R/splineClasses.R: gettextf("need at least %s (=%d) knots", "2*ord -1", 2 * ord - 1, domain = "R-splines")
+#: R/splineClasses.R:0
+#, fuzzy
+msgid "need at least %s (=%d) knots"
+msgstr "至少需要2*ord-1(=%d) 个结"
+
+#. R/splineClasses.R: gettext("polynomial representation of spline", domain = "R-splines")
+#: R/splineClasses.R:0
+msgid "polynomial representation of spline"
+msgstr ""
+
+#. R/splineClasses.R: gettextf("polynomial representation of spline for %s", deparse(as.vector(form)),     domain = "R-splines")
+#: R/splineClasses.R:0
+msgid "polynomial representation of spline for %s"
+msgstr ""
+
+#. R/splines.R: warning("some 'x' values beyond boundary knots may cause ill-conditioned bases")
+#: R/splines.R:0
+msgid "some 'x' values beyond boundary knots may cause ill-conditioned bases"
+msgstr "一些在结值界外的'x'数据有可能会引起病态底数"
+
+#. R/splineClasses.R: stop("spline must be monotone")
+#: R/splineClasses.R:0
+msgid "spline must be monotone"
+msgstr "样条必需是单凋的"
+
+#. R/splineClasses.R: gettextf("the 'x' data must be in the range %g to %g unless you set '%s'", knots[ord],     knots[nk - o1], "outer.ok = TRUE", domain = "R-splines")
+#: R/splineClasses.R:0
+#, fuzzy
+msgid "the 'x' data must be in the range %g to %g unless you set '%s'"
+msgstr "除非你设定'outer.ok = TRUE'，'x'数据值必需在%g到%g范围之间"
+
+#. R/splineClasses.R: stop("the range of 'x' values exceeds one period")
+#: R/splineClasses.R:0
+msgid "the range of 'x' values exceeds one period"
+msgstr "'x'值的范围超过了一个周期"
+
+#. R/splineClasses.R: stop("values of 'x' must be distinct")
+#. R/splineClasses.R: stop("values of 'x' must be distinct")
+#: R/splineClasses.R:0
+msgid "values of 'x' must be distinct"
+msgstr "'x'的值不能有重复"
+
+#. R/splineClasses.R: stop("values of 'x' must be strictly increasing")
+#: R/splineClasses.R:0
+msgid "values of 'x' must be strictly increasing"
+msgstr "'x'的值必需严格递增"

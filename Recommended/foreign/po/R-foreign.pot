@@ -1,0 +1,345 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: foreign 0.8-61\n"
+"POT-Creation-Date: 2014-07-13 09:15\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+
+#: R/read.dta.R: 0
+#. R/read.dta.R: gettextf("'%s' argument is not an object of class %s", "dataframe", dQuote("data.frame"))
+
+msgid "'%s' argument is not an object of class %s"
+msgstr ""
+
+
+#: R/R_systat.R: 0
+#. R/R_systat.R: gettextf("'%s' argument must be a character string", "file")
+
+msgid "'%s' argument must be a character string"
+msgstr ""
+
+
+#: R/arff.R: 0
+#: R/read.epiinfo.R: 0
+#. R/arff.R: gettextf("'%s' argument must be a character string or connection", "file")
+#. R/arff.R: gettextf("'%s' argument must be a character string or connection", "file")
+#. R/read.epiinfo.R: gettextf("'%s' argument must be a character string or connection", "file")
+
+msgid "'%s' argument must be a character string or connection"
+msgstr ""
+
+
+#: R/read.dta.R: 0
+#. R/read.dta.R: warning("'missing.type' only applicable to version >= 8 files")
+
+msgid "'missing.type' only applicable to version >= 8 files"
+msgstr ""
+
+
+#: R/Sread.R: 0
+#. R/Sread.R: gettextf("Argument %s is missing", sQuote(name), domain = "R-foreign")
+
+msgid "Argument %s is missing"
+msgstr ""
+
+
+#: R/Sread.R: 0
+#. R/Sread.R: gettext("Argument is missing", domain = "R-foreign")
+
+msgid "Argument is missing"
+msgstr ""
+
+
+#: R/writeForeignCode.R: 0
+#. R/writeForeignCode.R: stop("Cannot handle character variables longer than 255")
+
+msgid "Cannot handle character variables longer than 255"
+msgstr ""
+
+
+#: R/writeForeignSAS.R: 0
+#. R/writeForeignSAS.R: stop("Cannot uniquely abbreviate format names to conform to eight-character limit and not ending in a digit")
+
+msgid "Cannot uniquely abbreviate format names to conform to eight-character limit and not ending in a digit"
+msgstr ""
+
+
+#: R/writeForeignSAS.R: 0
+#. R/writeForeignSAS.R: gettextf("Cannot uniquely abbreviate the variable names to %d or fewer characters",     nmax)
+
+msgid "Cannot uniquely abbreviate the variable names to %d or fewer characters"
+msgstr ""
+
+
+#: R/dbf.R: 0
+#. R/dbf.R: gettextf("Field name: %s changed to: %s", sQuote(onames[i]), sQuote(inames[i]))
+
+msgid "Field name: %s changed to: %s"
+msgstr ""
+
+
+#: R/writeForeignCode.R: 0
+#. R/writeForeignCode.R: stop("I cannot abbreviate the variable names to eight or fewer letters")
+
+msgid "I cannot abbreviate the variable names to eight or fewer letters"
+msgstr ""
+
+
+#: R/arff.R: 0
+#. R/arff.R: stop("Invalid attribute specification.")
+
+msgid "Invalid attribute specification."
+msgstr ""
+
+
+#: R/arff.R: 0
+#. R/arff.R: stop("Invalid type specification.")
+
+msgid "Invalid type specification."
+msgstr ""
+
+
+#: R/arff.R: 0
+#. R/arff.R: stop("Missing attribute section.")
+
+msgid "Missing attribute section."
+msgstr ""
+
+
+#: R/arff.R: 0
+#. R/arff.R: stop("Missing data section.")
+
+msgid "Missing data section."
+msgstr ""
+
+
+#: R/dbf.R: 0
+#. R/dbf.R: stop("NA in precision")
+
+msgid "NA in precision"
+msgstr ""
+
+
+#: R/dbf.R: 0
+#. R/dbf.R: stop("NA in scale")
+
+msgid "NA in scale"
+msgstr ""
+
+
+#: R/Sread.R: 0
+#. R/Sread.R: gettextf("S mode %s (near byte offset %s) not supported", sQuote(code), seek(dump))
+
+msgid "S mode %s (near byte offset %s) not supported"
+msgstr ""
+
+
+#: R/read.ssd.R: 0
+#. R/read.ssd.R: gettextf("SAS failed. SAS program at %s", tmpProg, domain = "R-foreign")
+
+msgid "SAS failed. SAS program at %s"
+msgstr ""
+
+
+#: R/read.ssd.R: 0
+#. R/read.ssd.R: gettextf("SAS return code was %d", sysret)
+
+msgid "SAS return code was %d"
+msgstr ""
+
+
+#: R/writeForeignSAS.R: 0
+#. R/writeForeignSAS.R: message("Some variable names were abbreviated or otherwise altered.")
+
+msgid "Some variable names were abbreviated or otherwise altered."
+msgstr ""
+
+
+#: R/read.ssd.R: 0
+#. R/read.ssd.R: gettextf("The log file will be %s in the current directory", paste(basename(tmpProgLoc),     ".log", sep = ""), domain = "R-foreign")
+
+msgid "The log file will be %s in the current directory"
+msgstr ""
+
+
+#: R/arff.R: 0
+#. R/arff.R: stop("Type 'relational' currently not implemented.")
+
+msgid "Type 'relational' currently not implemented."
+msgstr ""
+
+
+#: R/Sread.R: 0
+#. R/Sread.R: gettextf("Unrecognized S mode %s is not supported", code, domain = "R-foreign")
+
+msgid "Unrecognized S mode %s is not supported"
+msgstr ""
+
+
+#: R/read.dta.R: 0
+#. R/read.dta.R: stop("Version must be between 6 and 12")
+
+msgid "Version must be between 6 and 12"
+msgstr ""
+
+
+#: R/read.dta.R: 0
+#. R/read.dta.R: warning("Version must be between 6 and 12: using 7")
+
+msgid "Version must be between 6 and 12: using 7"
+msgstr ""
+
+
+#: R/read.ssd.R: 0
+#. R/read.ssd.R: gettext("a log and other error products should be in the vicinity", domain = "R-foreign")
+
+msgid "a log and other error products should be in the vicinity"
+msgstr ""
+
+
+#: R/read.dta.R: 0
+#. R/read.dta.R: warning("abbreviating variable names")
+
+msgid "abbreviating variable names"
+msgstr ""
+
+
+#: R/dbf.R: 0
+#. R/dbf.R: stop("cannot handle matrix/array columns")
+
+msgid "cannot handle matrix/array columns"
+msgstr ""
+
+
+#: R/read.dta.R: 0
+#. R/read.dta.R: stop("cannot handle multicolumn columns")
+
+msgid "cannot handle multicolumn columns"
+msgstr ""
+
+
+#: R/octave.R: 0
+#. R/octave.R: gettextf("cannot handle unknown type %s", sQuote(type))
+
+msgid "cannot handle unknown type %s"
+msgstr ""
+
+
+#: R/read.dta.R: 0
+#. R/read.dta.R: warning("cannot read factor labels from Stata 5 files")
+
+msgid "cannot read factor labels from Stata 5 files"
+msgstr ""
+
+
+#: R/read.dta.R: 0
+#. R/read.dta.R: stop("cannot uniquely abbreviate variable names")
+
+msgid "cannot uniquely abbreviate variable names"
+msgstr ""
+
+
+#: R/dbf.R: 0
+#. R/dbf.R: gettextf("character column %d will be truncated to %d bytes", i, max_nchar)
+
+msgid "character column %d will be truncated to %d bytes"
+msgstr ""
+
+
+#: R/read.epiinfo.R: 0
+#. R/read.epiinfo.R: stop("file has zero or fewer variables: probably not an EpiInfo file")
+
+msgid "file has zero or fewer variables: probably not an EpiInfo file"
+msgstr ""
+
+
+#: R/Sread.R: 0
+#. R/Sread.R: stop("internal error - illegal S code value")
+
+msgid "internal error - illegal S code value"
+msgstr ""
+
+
+#: R/spss.R: 0
+#. R/spss.R: gettextf("missingness type %s is not handled", tp)
+
+msgid "missingness type %s is not handled"
+msgstr ""
+
+
+#: R/read.epiinfo.R: 0
+#. R/read.epiinfo.R: stop("no records in file")
+
+msgid "no records in file"
+msgstr ""
+
+
+#: R/Sread.R: 0
+#. R/Sread.R: stop("not an S object")
+
+msgid "not an S object"
+msgstr ""
+
+
+#: R/R_systat.R: 0
+#. R/R_systat.R: stop("only one file")
+
+msgid "only one file"
+msgstr ""
+
+
+#: R/spss.R: 0
+#. R/spss.R: gettextf("re-encoding from %s", cp)
+
+msgid "re-encoding from %s"
+msgstr ""
+
+
+#: R/read.ssd.R: 0
+#. R/read.ssd.R: gettextf("sectionname %s not found", sn[i])
+
+msgid "sectionname %s not found"
+msgstr ""
+
+
+#: R/writeForeignCode.R: 0
+#. R/writeForeignCode.R: warning("some variable names were abbreviated")
+
+msgid "some variable names were abbreviated"
+msgstr ""
+
+
+#: R/dbf.R: 0
+#. R/dbf.R: stop("unknown column type in data frame")
+
+msgid "unknown column type in data frame"
+msgstr ""
+
+
+#: R/read.dta.R: 0
+#. R/read.dta.R: gettextf("value labels (%s) for %s are missing", sQuote(ll[v]), sQuote(names(rval)[v]))
+
+msgid "value labels (%s) for %s are missing"
+msgstr ""
+
+
+#: R/read.epiinfo.R: 0
+#. R/read.epiinfo.R: warning("wrong number of records")
+
+msgid "wrong number of records"
+msgstr ""
+
+
+#: R/dbf.R: 0
+#. R/dbf.R: ngettext(length(cl0), "data frame contains columns of unsupported class %s", "data frame contains columns of unsupported classes %s",     domain = "R-foreign")
+
+msgid        "data frame contains columns of unsupported class %s"
+msgid_plural "data frame contains columns of unsupported classes %s"
+msgstr[0]    ""
+msgstr[1]    ""

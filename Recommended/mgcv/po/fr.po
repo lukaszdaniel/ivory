@@ -1,0 +1,237 @@
+# Translation of mgcv.pot to French
+# Copyright (C) 2005 The R Foundation
+# This file is distributed under the same license as the mgcv R package.
+# Philippe Grosjean <phgrosjean@sciviews.org>, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mgcv 1.3-10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-06-26 08:16+0200\n"
+"PO-Revision-Date: 2005-12-08 00:40+0100\n"
+"Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
+"Language-Team: French <R-core@r-project.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: magic.c:440
+msgid "magic requires smoothing parameter starting values if L supplied"
+msgstr ""
+
+#: magic.c:558
+msgid "magic, the gcv/ubre optimizer, failed to converge after 400 iterations."
+msgstr "magic, l'optimisateur gcv/ubre, n'a pas convergé après 400 itérations."
+
+#: mat.c:28 mat.c:50
+msgid ""
+"\n"
+"Failed to open file\n"
+msgstr ""
+
+#: mat.c:58
+msgid ""
+"\n"
+"file dim problem\n"
+msgstr ""
+
+#: mat.c:1425
+#, c-format
+msgid "Non orthogonal eigenvectors %d %g\n"
+msgstr ""
+
+#: mat.c:1430
+#, c-format
+msgid "Eigenvectors not normalized %d %g\n"
+msgstr ""
+
+#: matrix.c:83
+msgid "Failed to initialize memory for matrix."
+msgstr "L'initialisation de la mémoire pour une matrice a échoué."
+
+#: matrix.c:145 matrix.c:207
+msgid "An out of bound write to matrix has occurred!"
+msgstr "Une écrite hors des limites de la matrice s'est produite !"
+
+#: matrix.c:151
+msgid "INTEGRITY PROBLEM in the extant matrix list."
+msgstr "PROBLEME D'INTEGRITE dans la liste de la matrice étendue."
+
+#: matrix.c:183
+msgid "You are trying to check matrix integrity without defining RANGECHECK."
+msgstr ""
+"Vous essayez de vérifier l'intégrité de la matrice sans avoir défini "
+"RANGECHECK."
+
+#: matrix.c:245
+msgid "Target matrix too small in mcopy"
+msgstr "Matrice cible trop petite dans mcopy"
+
+#: matrix.c:265 matrix.c:273 matrix.c:286 matrix.c:294
+msgid "Incompatible matrices in matmult."
+msgstr "Matrices incompatibles dans matmult."
+
+#: matrix.c:381
+msgid "Attempt to invert() non-square matrix"
+msgstr "Tentative d'inversion d'une matrice non carrée"
+
+#: matrix.c:403
+msgid "Singular Matrix passed to invert()"
+msgstr "Matrice singulière passée à invert()"
+
+#: matrix.c:1324
+msgid "svd() not converged"
+msgstr "svd() n'a pas convergé"
+
+#: matrix.c:1400
+#, c-format
+msgid "svdroot matrix not +ve semi def. %g"
+msgstr "la matrice svdroot n'est pas +ve semi def. %g"
+
+#: matrix.c:1428
+msgid "Sort failed"
+msgstr "Le tri a échoué"
+
+#: qp.c:60
+msgid "ERROR in addconQT."
+msgstr "ERREUR dans addconQT."
+
+#: qp.c:466
+msgid "QPCLS - Rank deficiency in model"
+msgstr "QPCLS - Déficience de rang dans le modèle"
+
+#: sparse-smooth.c:143
+msgid "More than 2 points in a box!!\n"
+msgstr ""
+
+#: sparse-smooth.c:148
+#, c-format
+msgid "point %d in %d boxes!\n"
+msgstr ""
+
+#: sparse-smooth.c:310 sparse-smooth.c:326
+msgid "too many boxes!!"
+msgstr ""
+
+#: sparse-smooth.c:342
+#, c-format
+msgid "bi not equal to nb-1 %d %d\n"
+msgstr ""
+
+#: sparse-smooth.c:442
+msgid "child boundary problem\n"
+msgstr ""
+
+#: sparse-smooth.c:551
+msgid ""
+"\n"
+" 'star()' function is useful only in 2D\n"
+msgstr ""
+
+#: sparse-smooth.c:608
+msgid "indexing error in 'p_area()' function!\n"
+msgstr ""
+
+#: sparse-smooth.c:1054
+msgid "hello\n"
+msgstr ""
+
+#: sparse-smooth.c:1086
+#, c-format
+msgid "%d upper neighbour claimed to be self d=%d!\n"
+msgstr ""
+
+#: sparse-smooth.c:1149
+msgid "lower neighbour claimed to be self!\n"
+msgstr ""
+
+#: tprs.c:46 tprs.c:81
+msgid "You must have 2m>d for a thin plate spline."
+msgstr "Vous devez avoir 2m > d pour une 'thin plate spline'"
+
+#: tprs.c:417 tprs.c:425
+msgid ""
+"A term has fewer unique covariate combinations than specified maximum "
+"degrees of freedom"
+msgstr ""
+"Un terme a moins de combinaisons de covariables uniques que le degré de "
+"liberté maximum spécifié"
+
+#~ msgid ""
+#~ "Overall smoothing parameter estimate on upper boundary.\n"
+#~ "Boundary GCV score change: %g. Largest change: %g"
+#~ msgstr ""
+#~ "Estimation du paramètre général de lissage dans la limite supérieure.\n"
+#~ "Changement du score GCV : %g. Plus grand changement : %g"
+
+#~ msgid "resetting -ve inf"
+#~ msgstr "réinitilisation -ve inf"
+
+#~ msgid "resetting +ve inf"
+#~ msgstr "réinitialisation +ve inf"
+
+#~ msgid ""
+#~ "Multiple GCV didn't improve autoinitialized relative smoothing parameters"
+#~ msgstr ""
+#~ "Des GCV multiples n'ont pas amélioré les paramètres relatifs de lissage "
+#~ "autoinitialisés"
+
+#~ msgid ""
+#~ "\n"
+#~ "%s not found, nothing read ! "
+#~ msgstr ""
+#~ "\n"
+#~ "%s introuvable, rien n'est lu !"
+
+#~ msgid "Not a +ve def. matrix in choleski()."
+#~ msgstr "Ceci n'est pas une matrice +ve def. dans choleski()."
+
+#~ msgid "Error in Covariance(a,b) - a,b not same length."
+#~ msgstr "Erreur dans Covariance(a, b) - a et b n'ont pas la même longueur."
+
+#~ msgid "%s not found by routine gettextmatrix().\n"
+#~ msgstr "%s introuvable pour la routine gettextmatrix().\n"
+
+#~ msgid "eigen_tri() failed to converge"
+#~ msgstr "eigen_tri() n'a pas convergé"
+
+#~ msgid "eigenvv_tri() Eigen vector %d of %d failure. Error = %g > %g"
+#~ msgstr "eigenvv_tri() vecteur propre %d de %d. Erreur = %g > %g"
+
+#~ msgid "Lanczos failed"
+#~ msgstr "Lanczos a échoué"
+
+#~ msgid ""
+#~ "Numerical difficulties obtaining tr(A) - apparently resolved. Apply some "
+#~ "caution to results."
+#~ msgstr ""
+#~ "Difficultés numériques pour obtenir tr(A) - apparemment résolue. Faites "
+#~ "tout de même attention aux résultats."
+
+#~ msgid "tr(A) utter garbage and situation un-resolvable."
+#~ msgstr "situation irrésoluble dans 'tr(A) utter garbage'"
+
+#~ msgid ""
+#~ "Numerical difficulties calculating tr(A). Not completely resolved. Use "
+#~ "results with care!"
+#~ msgstr ""
+#~ "Difficultés numériques lors du calcul de tr(A). Pas résolues "
+#~ "complètement. Utilisez les résultats avec précautions !"
+
+#~ msgid "Termwise estimate degrees of freedom are unreliable"
+#~ msgstr ""
+#~ "L'estimation des degrés de liberté en fonction des termes n'est pas fiable"
+
+#~ msgid "You must have 2m > d"
+#~ msgstr "Vous devez avoir 2m > d"
+
+# tprs.c
+#~ msgid ""
+#~ "Too many knots for t.p.r.s term: see `gam.control' to increase limit, or "
+#~ "use a different basis, or see large data set help for `gam'."
+#~ msgstr ""
+#~ "Trop de noeuds pour le terme t.p.r.s : voir `gam.control' pour augmenter "
+#~ "la limite, ou utiliser une base différente ; Ou voir l'aide sur les gros "
+#~ "jeux de données pour `gam'."

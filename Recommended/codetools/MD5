@@ -1,0 +1,13 @@
+838118aa4116e6b2d66e393dae8e4073 *tests/tests.R
+d7d4587719d6cbb3083123501ec23dd3 *NAMESPACE
+7915e973bb95db1197db9152d339f2c8 *man/showTree.Rd
+31aabac379a9264e4ce819755b95b601 *man/findGlobals.Rd
+215ca204e6c7206111e585206cee095c *man/codetools.Rd
+2af77179b93b37abb2717ba0dacd60a3 *man/checkUsage.Rd
+ddba649a3219d0dc40af2902f867a640 *R/codetools.R
+46536b11875852da1e929f5df2c5c52f *po/R-codetools.pot
+965f67cc4d583191f8dc7ca68ea6322a *DESCRIPTION
+3839c1f42ea40dcc80c1f35349326730 *Changes
+c5bf92ec7e55e5e75890e4d1b89add60 *po/R-pl.po
+9fa35c4cb056930d29678741564585d9 *inst/po/pl/LC_MESSAGES/R-codetools.mo
+e29c6c4e95821905d27cc45190337ae6 *inst/po/en@quot/LC_MESSAGES/R-codetools.mo

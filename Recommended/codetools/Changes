@@ -1,0 +1,168 @@
+Tylko w R-recommended-moje/codetools: inst
+Tylko w R-recommended-moje/codetools: po
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/codetools/R/codetools.R R-recommended-moje/codetools/R/codetools.R
+92,93c92
+<                                   stop0(paste("not a foldable expression:",
+<                                         deparse(e, width.cutoff = 500))),
+---
+>                                   stop(paste(gettext("not a foldable expression:", domain = "R-codetools"), deparse(e, width.cutoff = 500))),
+104c103
+<     stop0("constant folding cannot continue")
+---
+>     stop("constant folding cannot continue")
+243c242
+<     else signal("not a symbol or string")
+---
+>     else signal(gettext("not a symbol or string", domain = "R-codetools"))
+273,274c272
+<                 warning0(paste("local assignments to syntactic functions:",
+<                                vals[rdsf]))
+---
+>                 warning(paste(gettext("local assignments to syntactic functions:", domain = "R-codetools"), vals[rdsf]))
+305c303
+<         stop0(paste("bad assignment:", pasteExpr(e)))
+---
+>         stop0(paste(gettext("bad assignment:", domain = "R-codetools"), pasteExpr(e)))
+311c309
+<                 stop0(paste("bad assignment:", pasteExpr(e)))
+---
+>                 stop(paste(gettext("bad assignment:", domain = "R-codetools"), pasteExpr(e)))
+314c312
+<                 stop0(paste("bad assignment:", pasteExpr(e)))
+---
+>                 stop(paste(gettext("bad assignment:", domain = "R-codetools"), pasteExpr(e)))
+317c315
+<             stop0(paste("bad assignment:", pasteExpr(e)))
+---
+>             stop(paste(gettext("bad assignment:", domain = "R-codetools"), pasteExpr(e)))
+357,358c355
+<             stop(sQuote(deparse(fun)),
+<                  " is not a valid function in complex assignments")
+---
+>             stop(gettextf("%s is not a valid function in complex assignments", sQuote(deparse(fun)), domain = "R-codetools"))
+409c406
+<             w$signal("... may be used in an incorrect context", w)
+---
+>             w$signal(gettextf("%s may be used in an incorrect context", sQuote("..."), domain = "R-codetools"), w)
+414c411
+<                 w$signal(paste(v, "may be used in an incorrect context"), w)
+---
+>                 w$signal(gettextf("%s may be used in an incorrect context", sQuote(v), domain = "R-codetools"), w)
+429,430c426
+<                 w$signal(paste(a, "may be used in an incorrect context:",
+<                                pasteExpr(e)), w)
+---
+>                 w$signal(gettextf("%s may be used in an incorrect context: %s", sQuote(a), pasteExpr(e), domain = "R-codetools"), w)
+524c520
+<         w$signal("... may be used in an incorrect context", w)
+---
+>         w$signal(gettextf("%s may be used in an incorrect context", sQuote("..."), domain = "R-codetools"), w)
+528c524
+<         w$signal(paste(v, "may be used in an incorrect context"), w)
+---
+>         w$signal(gettextf("%s may be used in an incorrect context", sQuote(v), domain = "R-codetools"), w)
+658,659c654
+<         w$signal(paste("wrong number of arguments to '.Internal':",
+<                        pasteExpr(e)), w)
+---
+>         w$signal(paste(gettext("wrong number of arguments to '.Internal':", domain = "R-codetools"), pasteExpr(e)), w)
+664c659
+<     else w$signal(paste("bad argument to '.Internal':", pasteExpr(e[[2]])), w)
+---
+>     else w$signal(paste(gettext("bad argument to '.Internal':", domain = "R-codetools"), pasteExpr(e[[2]])), w)
+670c665
+<         w$signal("wrong number of arguments to 'substitute'", w)
+---
+>         w$signal(gettext("wrong number of arguments to 'substitute'", domain = "R-codetools"), w)
+680c675
+<         w$signal("wrong number of arguments to 'bquote'", w)
+---
+>         w$signal(gettext("wrong number of arguments to 'bquote'", domain = "R-codetools"), w)
+705,706c700
+<                     w$signal(paste("link", sQuote(e[[2]]), "not available for",
+<                                    sQuote(family)), w)
+---
+>                     w$signal(gettextf("link %s not available for %s", sQuote(e[[2]]), sQuote(family), domain = "R-codetools"), w)
+881,882c875
+<                     w$signal(paste("parameter", sQuote(v),
+<                                    "changed by assignment"), w)
+---
+>                     w$signal(gettextf("parameter %s changed by assignment", sQuote(v), domain = "R-codetools"), w)
+885,886c878
+<                     w$signal(paste("parameter", sQuote(v), "may not be used"),
+<                              w)
+---
+>                     w$signal(gettextf("parameter %s may not be used", sQuote(v), domain = "R-codetools"), w)
+891,892c883
+<                         w$signal(paste("local variable", sQuote(v),
+<                                        "assigned but may not be used"), w)
+---
+>                         w$signal(gettextf("local variable %s assigned but may not be used", sQuote(v), domain = "R-codetools"), w)
+896,898c887
+<                         w$signal(paste("local variable", sQuote(v),
+<                                        "used as function with no apparent",
+<                                        "local function definition"), w)
+---
+>                         w$signal(gettextf("local variable %s used as function with no apparent local function definition", sQuote(v), domain = "R-codetools"), w)
+908,910c897
+<                         w$signal(paste("multiple local function",
+<                                        "definitions for", sQuote(v),
+<                                        "with different formal arguments"), w)
+---
+>                         w$signal(gettextf("multiple local function definitions for %s with different formal arguments", sQuote(v), domain = "R-codetools"), w)
+933,934c920
+<             w$signal(paste("no visible global function definition for",
+<                            sQuote(n)), w)
+---
+>             w$signal(gettextf("no visible global function definition for %s", sQuote(n), domain = "R-codetools"), w)
+938,939c924
+<             w$signal(paste("no visible binding for global variable",
+<                            sQuote(n)), w)
+---
+>             w$signal(gettextf("no visible binding for global variable %s", sQuote(n), domain = "R-codetools"), w)
+943,944c928
+<             w$signal(paste("no visible binding for '<<-' assignment to",
+<                            sQuote(n)), w)
+---
+>             w$signal(gettextf("no visible binding for '<<-' assignment to %s", sQuote(n), domain = "R-codetools"), w)
+988c972
+<                          report(paste0(name, ": Error while checking: ",
+---
+>                          report(paste0(name, ": Error while checking: ", #LUKI
+1014c998
+<     for (i in 1:length(args)) {
+---
+>     for (i in seq_len(length(args))) {
+1026,1027c1010
+<             signal(paste("missing arguments not allowed in calls to",
+<                          sQuote(fn)))
+---
+>             signal(gettextf("missing arguments not allowed in calls to %s", sQuote(fn), domain = "R-codetools"))
+1040c1023
+<             signal(paste("wrong number of arguments to", sQuote(fn)))
+---
+>             signal(gettextf("wrong number of arguments to %s", sQuote(fn), domain = "R-codetools"))
+1102,1104c1085
+<                 signal(paste("warning in ",
+<                              deparse(call, width.cutoff = 500),
+<                              ": ", msg, sep=""))
+---
+>                 signal(paste(gettextf("warning in %s: ", sQuote(deparse(call, width.cutoff = 500)), domain = "R-codetools"), msg, sep=""))
+1107,1108c1088
+<     msg <- tryCatch({testMatch(); NULL},
+<                     error = function(e) conditionMessage(e))
+---
+>     msg <- tryCatch({testMatch(); NULL}, error = function(e) conditionMessage(e))
+1110,1111c1090
+<         emsg <- paste("possible error in ", deparse(call, width.cutoff = 500),
+<                       ": ", msg, sep="")
+---
+>         emsg <- paste(gettextf("possible error in %s: ", sQuote(deparse(call, width.cutoff = 500)), domain = "R-codetools"), msg, sep = "")
+1130c1109
+<     for (i in 1:length(args)) {
+---
+>     for (i in seq_len(length(args))) {
+1139c1118
+<     for (i in 1:length(args)) {
+---
+>     for (i in seq_len(length(args))) {

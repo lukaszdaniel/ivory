@@ -1,0 +1,709 @@
+# Korean translation for R lattice package
+# Recommended/lattice/po/R-ko.po
+# Maintainer: Deepayan Sarkar <deepayan.sarkar@r-project.org>
+# Copyright (C) 1995-2013 The R Core Team
+# This file is distributed under the same license as the R lattice package.
+# R Development Translation Team - Korean
+# Chel Hee Lee <gnustats@korea.gnu.org>, 2013.
+# Chel Hee Lee <gnustats@gmail.com>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: R 3.1.0\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2014-07-13 09:15\n"
+"PO-Revision-Date: 2013-08-16 18:13-0600\n"
+"Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
+"Language-Team: R Development Translation Teams (Korean) <gnustats@korea.gnu."
+"org>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. R/legend.R: gettextf("'%s' must be a list", "key")
+#. R/legend.R: gettextf("'%s' must be a list", "key")
+#. R/update.trellis.R: gettextf("'%s' must be a list", "par.strip.text")
+#. R/update.trellis.R: gettextf("'%s' must be a list", "par.settings")
+#. R/update.trellis.R: gettextf("'%s' must be a list", "plot.args")
+#. R/update.trellis.R: gettextf("'%s' must be a list", "lattice.options")
+#: R/legend.R:0 R/update.trellis.R:0
+#, fuzzy
+msgid "'%s' must be a list"
+msgstr "key는 반드시 리스트이어야 합니다"
+
+#. R/panels.R: warning("'a' and 'b' are overridden by 'coef'")
+#: R/panels.R:0
+msgid "'a' and 'b' are overridden by 'coef'"
+msgstr ""
+
+#. R/panels.R: warning("'a' is overridden by 'reg'")
+#: R/panels.R:0
+msgid "'a' is overridden by 'reg'"
+msgstr ""
+
+#. R/scales.R: warning("'aspect=\"iso\"' approximate since 'relation=\"free\"'")
+#: R/scales.R:0
+msgid "'aspect=\"iso\"' approximate since 'relation=\"free\"'"
+msgstr ""
+
+#. R/axis.R: stop("'at' missing or incompatible with 'labels'")
+#: R/axis.R:0
+msgid "'at' missing or incompatible with 'labels'"
+msgstr "'at'이 빠져있거나 'labels'과 함께 사용될 수 없습니다"
+
+#. R/legend.R: warning("'at' values are not equispaced; output may be wrong")
+#: R/legend.R:0
+msgid "'at' values are not equispaced; output may be wrong"
+msgstr ""
+
+#. R/panel.smoothscatter.R: stop("'bandwidth' must be numeric")
+#: R/panel.smoothscatter.R:0
+msgid "'bandwidth' must be numeric"
+msgstr ""
+
+#. R/update.trellis.R: warning("'drop=TRUE' ignored")
+#: R/update.trellis.R:0
+msgid "'drop=TRUE' ignored"
+msgstr "'drop=TRUE'이 무시되었습니다"
+
+#. R/panels.R: stop("'expr' must be a function or an expression containing 'x'")
+#: R/panels.R:0
+msgid "'expr' must be a function or an expression containing 'x'"
+msgstr ""
+
+#. R/interaction.R: warning("'f.value' not supported; ignoring")
+#: R/interaction.R:0
+msgid "'f.value' not supported; ignoring"
+msgstr ""
+
+#. R/common.R: stop("'length' and 'prop' cannot both be specified")
+#: R/common.R:0
+msgid "'length' and 'prop' cannot both be specified"
+msgstr "'length'와 'prop'는 함께 지정될 수 없습니다"
+
+#. R/common.R: stop("'length' must be positive")
+#: R/common.R:0
+msgid "'length' must be positive"
+msgstr "'length'는 반드시 양수이어야 합니다"
+
+#. R/common.R: warning("'multiple=TRUE' ignored ('groups' non-null with 'outer=FALSE')")
+#: R/common.R:0
+msgid "'multiple=TRUE' ignored ('groups' non-null with 'outer=FALSE')"
+msgstr ""
+
+#. R/panel.smoothscatter.R: stop("'nbin' must be numeric of length 1 or 2")
+#: R/panel.smoothscatter.R:0
+msgid "'nbin' must be numeric of length 1 or 2"
+msgstr ""
+
+#. R/panel.smoothscatter.R: stop("'nrpoints' should be numeric scalar with value >= 0.")
+#: R/panel.smoothscatter.R:0
+msgid "'nrpoints' should be numeric scalar with value >= 0."
+msgstr ""
+
+#. R/bwplot.R: warning("'origin' forced to 0 for stacked bars")
+#. R/bwplot.R: warning("'origin' forced to 0 for stacked bars")
+#: R/bwplot.R:0
+msgid "'origin' forced to 0 for stacked bars"
+msgstr ""
+
+#. R/qqmath.R: stop("'probs' outside [0,1]")
+#: R/qqmath.R:0
+msgid "'probs' outside [0,1]"
+msgstr "'probs'가 [0,1] 범위외에 있습니다"
+
+#. R/settings.R: warning("'trellis.device' has changed, 'bg' may not be doing what you think it is")
+#: R/settings.R:0
+msgid ""
+"'trellis.device' has changed, 'bg' may not be doing what you think it is"
+msgstr ""
+
+#. R/interaction.R: stop("'trellis.switchFocus' cannot be used to switch to a different 'prefix'.  Use 'trellis.focus' first")
+#: R/interaction.R:0
+msgid ""
+"'trellis.switchFocus' cannot be used to switch to a different 'prefix'.  Use "
+"'trellis.focus' first"
+msgstr ""
+
+#. R/histogram.R: gettextf("'type = %s' can be misleading in this context", type)
+#. R/histogram.R: gettextf("'type = %s' can be misleading in this context", type)
+#: R/histogram.R:0
+msgid "'type = %s' can be misleading in this context"
+msgstr ""
+
+#. R/cloud.R: warning("'type' has unsupported values")
+#: R/cloud.R:0
+msgid "'type' has unsupported values"
+msgstr "'type'은 지원되지 않는 값들을 가지고 있습니다"
+
+#. R/parallel.R: stop("'varnames' has wrong length.")
+#. R/splom.R: stop("'varnames' has wrong length.")
+#: R/parallel.R:0 R/splom.R:0
+msgid "'varnames' has wrong length."
+msgstr ""
+
+#. R/shingle.R: stop("'x' argument is not an object of class \"shingle\"")
+#: R/shingle.R:0
+msgid "'x' argument is not an object of class \"shingle\""
+msgstr ""
+
+#. R/shingle.R: stop("'x' must be matrix with 2 columns")
+#: R/shingle.R:0
+#, fuzzy
+msgid "'x' must be matrix with 2 columns"
+msgstr "x는 반드시 2개의 열을 가진 행렬이어야 합니다"
+
+#. R/levelplot.R: warning("'x' values are not equispaced; output may be wrong")
+#: R/levelplot.R:0
+msgid "'x' values are not equispaced; output may be wrong"
+msgstr ""
+
+#. R/levelplot.R: warning("'y' values are not equispaced; output may be wrong")
+#: R/levelplot.R:0
+msgid "'y' values are not equispaced; output may be wrong"
+msgstr ""
+
+#. R/panel.smoothscatter.R: message("(loaded the KernSmooth namespace)")
+#: R/panel.smoothscatter.R:0
+msgid "(loaded the KernSmooth namespace)"
+msgstr ""
+
+#. R/summary.trellis.R: gettext("Call:", domain = "R-lattice")
+#: R/summary.trellis.R:0
+msgid "Call:"
+msgstr "호출:"
+
+#. R/qqmath.R: warning("Can't have log X-scale")
+#: R/qqmath.R:0
+msgid "Can't have log X-scale"
+msgstr ""
+
+#. R/densityplot.R: warning("Can't have log Y-scale")
+#. R/histogram.R: warning("Can't have log Y-scale")
+#: R/densityplot.R:0 R/histogram.R:0
+msgid "Can't have log Y-scale"
+msgstr ""
+
+#. R/interaction.R: message("Click on panel to focus")
+#: R/interaction.R:0
+msgid "Click on panel to focus"
+msgstr ""
+
+#. R/interaction.R: message("Click to choose one point to highlight")
+#: R/interaction.R:0
+msgid "Click to choose one point to highlight"
+msgstr ""
+
+#. R/settings.R: gettextf("Could not find device function '%s'", device)
+#: R/settings.R:0
+msgid "Could not find device function '%s'"
+msgstr ""
+
+#. R/histogram.R: gettext("Count")
+#: R/histogram.R:0
+msgid "Count"
+msgstr ""
+
+#. R/shingle.R: gettext("Data:", domain = "R-lattice")
+#: R/shingle.R:0
+msgid "Data:"
+msgstr "데이터:"
+
+#. R/densityplot.R: gettext("Density")
+#. R/densityplot.R: gettext("Density")
+#. R/histogram.R: gettext("Density")
+#: R/densityplot.R:0 R/histogram.R:0
+msgid "Density"
+msgstr ""
+
+#. R/print.trellis.R: gettextf("Error using packet %g\n%s", panel.number(), conditionMessage(e))
+#: R/print.trellis.R:0
+msgid ""
+"Error using packet %g\n"
+"%s"
+msgstr ""
+
+#. R/scales.R: warning("Explicitly specified limits ignored")
+#: R/scales.R:0
+msgid "Explicitly specified limits ignored"
+msgstr ""
+
+#. R/rfs.R: gettext("Fitted Values minus Mean", domain = "R-lattice")
+#: R/rfs.R:0
+msgid "Fitted Values minus Mean"
+msgstr ""
+
+#. R/common.R: stop("Inadmissible value of layout.")
+#: R/common.R:0
+msgid "Inadmissible value of layout."
+msgstr ""
+
+#. R/common.R: stop("Inappropriate arguments")
+#: R/common.R:0
+msgid "Inappropriate arguments"
+msgstr "잘못된 인자들입니다"
+
+#. R/update.trellis.R: warning("Inappropriate value of 'as.table'")
+#: R/update.trellis.R:0
+msgid "Inappropriate value of 'as.table'"
+msgstr "'as.table'의 값이 부적절합니다."
+
+#. R/shingle.R: gettext("Intervals:", domain = "R-lattice")
+#: R/shingle.R:0
+msgid "Intervals:"
+msgstr "구간:"
+
+#. R/levelplot.R: warning("Invalid 'shrink' parameter ignored")
+#: R/levelplot.R:0
+msgid "Invalid 'shrink' parameter ignored"
+msgstr ""
+
+#. R/settings.R: warning("Invalid 'theme' specified")
+#. R/settings.R: warning("Invalid 'theme' specified")
+#: R/settings.R:0
+msgid "Invalid 'theme' specified"
+msgstr ""
+
+#. R/update.trellis.R: stop("Invalid indices")
+#: R/update.trellis.R:0
+msgid "Invalid indices"
+msgstr "잘못된 인덱스입니다"
+
+#. R/legend.R: stop("Invalid key, need at least one component named lines, text, rect or points")
+#: R/legend.R:0
+msgid ""
+"Invalid key, need at least one component named lines, text, rect or points"
+msgstr ""
+
+#. R/scales.R: warning("Invalid or ambiguous component names: ", tmp_n, sep = "")
+#: R/scales.R:0
+msgid "Invalid or ambiguous component names:"
+msgstr ""
+
+#. R/miscellaneous.R: warning("Invalid value of 'pos' ignored.")
+#: R/miscellaneous.R:0
+msgid "Invalid value of 'pos' ignored."
+msgstr ""
+
+#. R/common.R: stop("Invalid value of index.cond")
+#: R/common.R:0
+msgid "Invalid value of index.cond"
+msgstr "index.cond의 값이 잘못되었습니다"
+
+#. R/common.R: stop("Length check mismatch; you have found a bug!")
+#: R/common.R:0
+msgid "Length check mismatch; you have found a bug!"
+msgstr ""
+
+#. R/common.R: warning("More pages in layout than seem to be necessary.")
+#: R/common.R:0
+msgid "More pages in layout than seem to be necessary."
+msgstr ""
+
+#. R/scales.R: stop("Multiple matches to component name")
+#: R/scales.R:0
+msgid "Multiple matches to component name"
+msgstr ""
+
+#. R/interaction.R: warning("No panels available")
+#: R/interaction.R:0
+msgid "No panels available"
+msgstr "이용가능한 패널이 없습니다"
+
+#. R/common.R: stop("Non matching lengths")
+#. R/common.R: stop("Non matching lengths")
+#: R/common.R:0
+msgid "Non matching lengths"
+msgstr ""
+
+#. R/update.trellis.R: message("Note: 'auto.key' ignored since legend already present.\nUse 'update(..., legend = NULL)' to remove existing legend(s)")
+#: R/update.trellis.R:0
+msgid ""
+"Note: 'auto.key' ignored since legend already present.\n"
+"Use 'update(..., legend = NULL)' to remove existing legend(s)"
+msgstr ""
+
+#. R/settings.R: warning("Note: The default device has been opened to honour attempt to modify trellis settings")
+#: R/settings.R:0
+msgid ""
+"Note: The default device has been opened to honour attempt to modify trellis "
+"settings"
+msgstr ""
+
+#. R/summary.trellis.R: gettext("Number of observations:", domain = "R-lattice")
+#: R/summary.trellis.R:0
+msgid "Number of observations:"
+msgstr ""
+
+#. R/shingle.R: gettext("Overlap between adjacent intervals:", domain = "R-lattice")
+#: R/shingle.R:0
+msgid "Overlap between adjacent intervals:"
+msgstr ""
+
+#. R/shingle.R: gettext("Panel")
+#: R/shingle.R:0
+msgid "Panel"
+msgstr "패널"
+
+#. R/parallel.R: gettext("Parallel Coordinate Plot")
+#: R/parallel.R:0
+msgid "Parallel Coordinate Plot"
+msgstr ""
+
+#. R/histogram.R: gettext("Percent of Total")
+#: R/histogram.R:0
+msgid "Percent of Total"
+msgstr ""
+
+#. R/interaction.R: stop("Plot object was not saved, cannot retrieve panel data")
+#: R/interaction.R:0
+msgid "Plot object was not saved, cannot retrieve panel data"
+msgstr ""
+
+#. R/interaction.R: warning("Plot spans multiple pages, only last page can be updated")
+#: R/interaction.R:0
+msgid "Plot spans multiple pages, only last page can be updated"
+msgstr ""
+
+#. R/shingle.R: gettext("Range")
+#: R/shingle.R:0
+msgid "Range"
+msgstr "범위"
+
+#. R/update.trellis.R: warning("Requested 'trellis' object was not saved")
+#: R/update.trellis.R:0
+msgid "Requested 'trellis' object was not saved"
+msgstr ""
+
+#. R/rfs.R: gettext("Residuals", domain = "R-lattice")
+#: R/rfs.R:0
+msgid "Residuals"
+msgstr "잔차"
+
+#. R/splom.R: gettext("Scatter Plot Matrix")
+#. R/splom.R: gettext("Scatter Plot Matrix")
+#: R/splom.R:0
+msgid "Scatter Plot Matrix"
+msgstr ""
+
+#. R/interaction.R: sprintf("Selecting panel at position (%g, %g)", focusRow, focusCol)
+#: R/interaction.R:0
+msgid "Selecting panel at position (%g, %g)"
+msgstr ""
+
+#. R/legend.R: stop("Sorry, 'align = FALSE' is not supported")
+#: R/legend.R:0
+msgid "Sorry, 'align = FALSE' is not supported"
+msgstr ""
+
+#. R/update.trellis.R: gettextf("Unrecognized value of 'aspect': '%s'", as.character(aspect))
+#: R/update.trellis.R:0
+msgid "Unrecognized value of 'aspect': '%s'"
+msgstr "다음에 인식할 수 없는 'aspect'의 값이 있습니다: '%s'"
+
+#. R/interaction.R: stop("You have to first select a panel using trellis.focus()")
+#: R/interaction.R:0
+msgid "You have to first select a panel using trellis.focus()"
+msgstr ""
+
+#. R/shingle.R: stop("bad value of 'intervals'")
+#: R/shingle.R:0
+msgid "bad value of 'intervals'"
+msgstr ""
+
+#. R/parallel.R: warning("cannot have log y-scale")
+#: R/parallel.R:0
+msgid "cannot have log y-scale"
+msgstr ""
+
+#. R/interaction.R: stop("column must be specified")
+#: R/interaction.R:0
+msgid "column must be specified"
+msgstr "열이 반드시 지정되어야 합니다"
+
+#. R/legend.R: gettextf("component '%s' duplicated in key and legend", space)
+#: R/legend.R:0
+msgid "component '%s' duplicated in key and legend"
+msgstr ""
+
+#. R/levelplot.R: warning("device does not support raster images with NA, ignoring 'raster=TRUE'")
+#: R/levelplot.R:0
+msgid "device does not support raster images with NA, ignoring 'raster=TRUE'"
+msgstr ""
+
+#. R/levelplot.R: warning("device has no raster support, ignoring 'raster=TRUE'")
+#: R/levelplot.R:0
+msgid "device has no raster support, ignoring 'raster=TRUE'"
+msgstr ""
+
+#. R/levelplot.R: warning("device support for raster images unknown, ignoring 'raster=TRUE'")
+#: R/levelplot.R:0
+msgid "device support for raster images unknown, ignoring 'raster=TRUE'"
+msgstr ""
+
+#. R/tmd.R: gettext("difference")
+#: R/tmd.R:0
+msgid "difference"
+msgstr "차이"
+
+#. R/miscellaneous.R: stop("error")
+#: R/miscellaneous.R:0
+msgid "error"
+msgstr ""
+
+#. R/bwplot.R: warning("explicit 'data' specification ignored")
+#. R/bwplot.R: warning("explicit 'data' specification ignored")
+#. R/bwplot.R: warning("explicit 'data' specification ignored")
+#. R/bwplot.R: warning("explicit 'data' specification ignored")
+#. R/bwplot.R: warning("explicit 'data' specification ignored")
+#. R/bwplot.R: warning("explicit 'data' specification ignored")
+#. R/cloud.R: warning("explicit 'data' specification ignored")
+#. R/cloud.R: warning("explicit 'data' specification ignored")
+#. R/densityplot.R: warning("explicit 'data' specification ignored")
+#. R/histogram.R: warning("explicit 'data' specification ignored")
+#. R/levelplot.R: warning("explicit 'data' specification ignored")
+#. R/levelplot.R: warning("explicit 'data' specification ignored")
+#. R/levelplot.R: warning("explicit 'data' specification ignored")
+#. R/levelplot.R: warning("explicit 'data' specification ignored")
+#. R/levelplot.R: warning("explicit 'data' specification ignored")
+#. R/levelplot.R: warning("explicit 'data' specification ignored")
+#. R/parallel.R: warning("explicit 'data' specification ignored")
+#. R/qqmath.R: warning("explicit 'data' specification ignored")
+#. R/splom.R: warning("explicit 'data' specification ignored")
+#: R/bwplot.R:0 R/cloud.R:0 R/densityplot.R:0 R/histogram.R:0 R/levelplot.R:0
+#: R/parallel.R:0 R/qqmath.R:0 R/splom.R:0
+msgid "explicit 'data' specification ignored"
+msgstr ""
+
+#. R/rfs.R: gettext("f-value", domain = "R-lattice")
+#: R/rfs.R:0
+msgid "f-value"
+msgstr ""
+
+#. R/legend.R: stop("first component of text must be vector of labels")
+#: R/legend.R:0
+msgid "first component of text must be vector of labels"
+msgstr ""
+
+#. R/common.R: stop("improper length of 'lim'")
+#: R/common.R:0
+msgid "improper length of 'lim'"
+msgstr ""
+
+#. R/axis.R: gettextf("invalid '%s' value", "log")
+#. R/common.R: gettextf("invalid '%s' value", "perm.cond")
+#. R/common.R: gettextf("invalid '%s' value", "layout")
+#. R/levelplot.R: gettextf("invalid '%s' value", "label.style")
+#. R/update.trellis.R: gettextf("invalid '%s' value", "perm.cond")
+#. R/update.trellis.R: gettextf("invalid '%s' value", "aspect")
+#: R/axis.R:0 R/common.R:0 R/levelplot.R:0 R/update.trellis.R:0
+#, fuzzy
+msgid "invalid '%s' value"
+msgstr "'log'의 값이 잘못되었습니다"
+
+#. R/common.R: gettextf("invalid dimension '%s'", as.character(dimension))
+#: R/common.R:0
+msgid "invalid dimension '%s'"
+msgstr ""
+
+#. R/common.R: stop("invalid model")
+#: R/common.R:0
+msgid "invalid model"
+msgstr "잘못된 모델입니다"
+
+#. R/common.R: stop("layout must have at least 2 elements")
+#: R/common.R:0
+msgid "layout must have at least 2 elements"
+msgstr ""
+
+#. R/scales.R: stop("limits cannot be a list when relation = same")
+#: R/scales.R:0
+msgid "limits cannot be a list when relation = same"
+msgstr ""
+
+#. R/update.trellis.R: warning("log scales cannot be changed via 'update'")
+#: R/update.trellis.R:0
+msgid "log scales cannot be changed via 'update'"
+msgstr ""
+
+#. R/legend.R: stop("malformed colorkey")
+#: R/legend.R:0
+msgid "malformed colorkey"
+msgstr ""
+
+#. R/tmd.R: gettext("mean")
+#: R/tmd.R:0
+msgid "mean"
+msgstr "평균"
+
+#. R/bwplot.R: stop("mismatch in number of packets")
+#. R/cloud.R: stop("mismatch in number of packets")
+#. R/densityplot.R: stop("mismatch in number of packets")
+#. R/histogram.R: stop("mismatch in number of packets")
+#. R/levelplot.R: stop("mismatch in number of packets")
+#. R/parallel.R: stop("mismatch in number of packets")
+#. R/qq.R: stop("mismatch in number of packets")
+#. R/qqmath.R: stop("mismatch in number of packets")
+#. R/splom.R: stop("mismatch in number of packets")
+#. R/xyplot.R: stop("mismatch in number of packets")
+#: R/bwplot.R:0 R/cloud.R:0 R/densityplot.R:0 R/histogram.R:0 R/levelplot.R:0
+#: R/parallel.R:0 R/qq.R:0 R/qqmath.R:0 R/splom.R:0 R/xyplot.R:0
+msgid "mismatch in number of packets"
+msgstr ""
+
+#. R/qqmath.R: stop("missing values and NaN's not allowed if 'na.rm' is FALSE")
+#: R/qqmath.R:0
+msgid "missing values and NaN's not allowed if 'na.rm' is FALSE"
+msgstr ""
+
+#. R/common.R: stop("model must be a formula object")
+#: R/common.R:0
+msgid "model must be a formula object"
+msgstr "model은 반드시 formula 객체이어야 합니다"
+
+#. R/interaction.R: warning("nearest observation already identified")
+#. R/interaction.R: warning("nearest observation already identified")
+#: R/interaction.R:0
+msgid "nearest observation already identified"
+msgstr ""
+
+#. R/scales.R: stop("need at least one panel")
+#: R/scales.R:0
+msgid "need at least one panel"
+msgstr "최소한 하나 이상의 패널이 필요합니다"
+
+#. R/common.R: stop("newFactor != NULL && groups == NULL does not hold; you have found a bug!")
+#: R/common.R:0
+msgid ""
+"newFactor != NULL && groups == NULL does not hold; you have found a bug!"
+msgstr ""
+
+#. R/common.R: stop("newFactor cannot be NULL; you have found a bug!")
+#: R/common.R:0
+msgid "newFactor cannot be NULL; you have found a bug!"
+msgstr ""
+
+#. R/shingle.R: gettext("no intervals", domain = "R-lattice")
+#: R/shingle.R:0
+msgid "no intervals"
+msgstr "구간이 없습니다"
+
+#. R/interaction.R: gettextf("no observations within %d points", threshold)
+#. R/interaction.R: gettextf("no observations within %d points", threshold)
+#: R/interaction.R:0
+msgid "no observations within %d points"
+msgstr ""
+
+#. R/interaction.R: gettextf("no points within %d points of click", threshold)
+#: R/interaction.R:0
+msgid "no points within %d points of click"
+msgstr ""
+
+#. R/legend.R: warning("not enough rows for columns")
+#: R/legend.R:0
+msgid "not enough rows for columns"
+msgstr ""
+
+#. R/panels.R: warning("only using the first two of ", p, "regression coefficients")
+#: R/panels.R:0
+msgid "only using the first two of"
+msgstr ""
+
+#. R/interaction.R: stop("panel position unspecified or invalid")
+#: R/interaction.R:0
+msgid "panel position unspecified or invalid"
+msgstr ""
+
+#. R/panel.smoothscatter.R: stop("panel.smoothScatter() requires the KernSmooth package, but unable to load KernSmooth namespace")
+#: R/panel.smoothscatter.R:0
+msgid ""
+"panel.smoothScatter() requires the KernSmooth package, but unable to load "
+"KernSmooth namespace"
+msgstr ""
+
+#. R/histogram.R: warning("problem with 'hist' computations")
+#: R/histogram.R:0
+msgid "problem with 'hist' computations"
+msgstr ""
+
+#. R/axis.R: stop("range too small for min.n")
+#: R/axis.R:0
+msgid "range too small for min.n"
+msgstr "min.n에 대한 범위가 너무 작습니다"
+
+#. R/panels.R: warning("only using the first two of ", p, "regression coefficients")
+#: R/panels.R:0
+msgid "regression coefficients"
+msgstr "회귀 계수들"
+
+#. R/interaction.R: stop("row must be specified")
+#: R/interaction.R:0
+msgid "row must be specified"
+msgstr "행이 반드시 지정되어야 합니다"
+
+#. R/common.R: stop("shingles can not be concatenated")
+#: R/common.R:0
+msgid "shingles can not be concatenated"
+msgstr ""
+
+#. R/common.R: stop("skip cannot be all TRUE")
+#: R/common.R:0
+msgid "skip cannot be all TRUE"
+msgstr ""
+
+#. R/summary.trellis.R: stop("some components of supplied 'dimnames' have wrong length")
+#: R/summary.trellis.R:0
+msgid "some components of supplied 'dimnames' have wrong length"
+msgstr ""
+
+#. R/summary.trellis.R: stop("supplied 'dimnames' have wrong length")
+#: R/summary.trellis.R:0
+msgid "supplied 'dimnames' have wrong length"
+msgstr ""
+
+#. R/scales.R: stop("the 'at' and 'labels' components of 'scales' may not be lists when 'relation = \"same\"'")
+#. R/scales.R: stop("the 'at' and 'labels' components of 'scales' may not be lists when 'relation = \"same\"'")
+#: R/scales.R:0
+msgid ""
+"the 'at' and 'labels' components of 'scales' may not be lists when 'relation "
+"= \"same\"'"
+msgstr ""
+
+#. R/update.trellis.R: stop("the at and labels components of scales may not be lists when relation = same")
+#. R/update.trellis.R: stop("the at and labels components of scales may not be lists when relation = same")
+#: R/update.trellis.R:0
+msgid ""
+"the at and labels components of scales may not be lists when relation = same"
+msgstr ""
+
+#. R/miscellaneous.R: stop("x must be (coercible to be) a factor")
+#: R/miscellaneous.R:0
+msgid "x must be (coercible to be) a factor"
+msgstr ""
+
+#. R/qq.R: stop("y must have exactly 2 levels")
+#: R/qq.R:0
+msgid "y must have exactly 2 levels"
+msgstr ""
+
+#~ msgid "Invalid value of perm.cond"
+#~ msgstr "perm.cond의 값이 잘못되었습니다"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "'par.strip.text' must be a list"
+#~ msgstr "'par.strip.text'는 반드시 리스트이어야 합니다"
+
+#~ msgid "'par.settings' must be a list"
+#~ msgstr "'par.settings'는 반드시 리스트이어야 합니다"
+
+#~ msgid "'plot.args' must be a list"
+#~ msgstr "'plot.args'는 반드시 리스트이어야 합니다"
+
+#~ msgid "Invalid value of 'aspect'"
+#~ msgstr "'aspect'의 값이 잘못되었습니다"

@@ -1,0 +1,225 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 2.13.0\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2014-07-19 18:10\n"
+"PO-Revision-Date: 2011-03-26 08:55-0300\n"
+"Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
+"Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Pootle 2.0.5\n"
+
+#. R/cmp.R: gettextf("%s may be used in an incorrect context", var)
+#: R/cmp.R:0
+msgid "%s may be used in an incorrect context"
+msgstr ""
+
+#. R/cmp.R: gettextf("%s may be used in wrong context: no loop is visible", fun)
+#: R/cmp.R:0
+msgid "%s may be used in wrong context: no loop is visible"
+msgstr ""
+
+#. R/cmp.R: gettextf("'%s' is not a valid compiler option", n)
+#: R/cmp.R:0
+msgid "'%s' is not a valid compiler option"
+msgstr "'%s' não é uma opção válida de compilação"
+
+#. R/cmp.R: stop("'env' must be a top level environment")
+#: R/cmp.R:0
+msgid "'env' must be a top level environment"
+msgstr "'env' deve ser um ambiente em primeiro nível"
+
+#. R/cmp.R: stop("'ns' argument must be a namespace or a namespace imports environment")
+#: R/cmp.R:0
+#, fuzzy
+msgid "'ns' argument must be a namespace or a namespace imports environment"
+msgstr ""
+"'ns' deve ser um espaço de nomes ou um ambiente importado de espaço de nomes"
+
+#. R/cmp.R: gettext("Note: ", domain = "R-compiler")
+#: R/cmp.R:0
+msgid "Note:"
+msgstr ""
+
+#. R/cmp.R: stop("bad assignment 1")
+#: R/cmp.R:0
+#, fuzzy
+msgid "bad assignment 1"
+msgstr "atribuição inválida 1"
+
+#. R/cmp.R: stop("bad assignment 2")
+#: R/cmp.R:0
+msgid "bad assignment 2"
+msgstr "atribuição inválida 2"
+
+#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
+#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
+#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
+#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
+#: R/cmp.R:0
+msgid "bad assignment: %s"
+msgstr "atribuição não apropriada: %s"
+
+#. R/cmp.R: gettext("bad namespace import frame")
+#: R/cmp.R:0
+msgid "bad namespace import frame"
+msgstr "nome de espaço inválido no quadro de importação"
+
+#. R/cmp.R: stop("cannot compile a non-function")
+#: R/cmp.R:0
+msgid "cannot compile a non-function"
+msgstr "não é possível compilar algo que não seja uma função"
+
+#. R/cmp.R: gettext("cannot compile byte code literals in code")
+#. R/cmp.R: gettext("cannot compile byte code literals in code")
+#. R/cmp.R: gettext("cannot compile byte code literals in code")
+#: R/cmp.R:0
+msgid "cannot compile byte code literals in code"
+msgstr "não é possível compilar literais de byte code no código"
+
+#. R/cmp.R: gettext("cannot compile promise literals in code")
+#. R/cmp.R: gettext("cannot compile promise literals in code")
+#. R/cmp.R: gettext("cannot compile promise literals in code")
+#: R/cmp.R:0
+msgid "cannot compile promise literals in code"
+msgstr "não é possível compilar promessas literais em código"
+
+#. R/cmp.R: gettext("cannot constant fold literal bytecode objects")
+#: R/cmp.R:0
+msgid "cannot constant fold literal bytecode objects"
+msgstr "não é possível dobrar objetos literais bytecode"
+
+#. R/cmp.R: gettext("cannot constant fold literal promises")
+#: R/cmp.R:0
+msgid "cannot constant fold literal promises"
+msgstr "não é possível dobrar de maneira constante promessas literais"
+
+#. R/cmp.R: gettextf("compiling %s", sQuote(f), domain = "R-compiler")
+#: R/cmp.R:0
+#, fuzzy
+msgid "compiling %s"
+msgstr "compilando '%s'"
+
+#. R/cmp.R: gettextf("compiling expression %s ...", sQuote(deparse(e, 20)[1]), domain = "R-compiler")
+#: R/cmp.R:0
+msgid "compiling expression %s ..."
+msgstr ""
+
+#. R/cmp.R: gettextf("compiling function %s", sQuote(e[[2]]), domain = "R-compiler")
+#: R/cmp.R:0
+#, fuzzy
+msgid "compiling function %s"
+msgstr "compilando '%s'"
+
+#. R/cmp.R: gettext("done", domain = "R-compiler")
+#. R/cmp.R: gettext("done", domain = "R-compiler")
+#: R/cmp.R:0
+msgid "done"
+msgstr "pronto"
+
+#. R/cmp.R: stop("empty alternative in numeric switch")
+#: R/cmp.R:0
+msgid "empty alternative in numeric switch"
+msgstr "alternativa vazia em switch numérico"
+
+#. R/cmp.R: warning("empty input file; no output written")
+#: R/cmp.R:0
+msgid "empty input file; no output written"
+msgstr "arquivo de entrada vazio; nenhuma saída escrita"
+
+#. R/cmp.R: gettextf("file '%s' does not exist", file)
+#: R/cmp.R:0
+msgid "file '%s' does not exist"
+msgstr "arquivo '%s' não existe"
+
+#. R/cmp.R: stop("function is not compiled")
+#: R/cmp.R:0
+msgid "function is not compiled"
+msgstr "função não está compilada"
+
+#. R/cmp.R: gettextf("handler for '%s' is already defined for another package", name)
+#. R/cmp.R: gettextf("handler for '%s' is already defined for another package", name)
+#. R/cmp.R: gettextf("handler for '%s' is already defined for another package", name)
+#: R/cmp.R:0
+msgid "handler for '%s' is already defined for another package"
+msgstr ""
+
+#. R/cmp.R: stop("input and output file names are the same")
+#: R/cmp.R:0
+msgid "input and output file names are the same"
+msgstr "nomes de entrada e saida são os mesmos"
+
+#. R/cmp.R: gettext("invalid function in complex assignment")
+#. R/cmp.R: gettext("invalid function in complex assignment")
+#: R/cmp.R:0
+msgid "invalid function in complex assignment"
+msgstr "função inválida em atribuição complexa"
+
+#. R/cmp.R: gettext("missing arguments are not allowed")
+#: R/cmp.R:0
+msgid "missing arguments are not allowed"
+msgstr "argumentos faltantes não são permitidos"
+
+#. R/cmp.R: gettext("more than one default provided in switch() call")
+#: R/cmp.R:0
+#, fuzzy
+msgid "more than one default provided in switch() call"
+msgstr "mais de um valor default fornecido na chamada de switch"
+
+#. R/cmp.R: gettextf("no offset recorded for label \"%s\"", lbl)
+#: R/cmp.R:0
+msgid "no offset recorded for label \"%s\""
+msgstr "nenhuma compensação registrada para o rótulo \"%s\""
+
+#. R/cmp.R: gettextf("no visible binding for '<<-' assignment to '%s'", as.character(symbol))
+#: R/cmp.R:0
+msgid "no visible binding for '<<-' assignment to '%s'"
+msgstr "nenhuma associação para atribuição '<<-' para '%s'"
+
+#. R/cmp.R: gettextf("no visible binding for global variable '%s'", as.character(var))
+#: R/cmp.R:0
+msgid "no visible binding for global variable '%s'"
+msgstr "nenhuma associação visível para variável global '%s'"
+
+#. R/cmp.R: gettextf("no visible global function definition for '%s'", as.character(fun))
+#: R/cmp.R:0
+msgid "no visible global function definition for '%s'"
+msgstr "nenhuma definição de função global visível para '%s'"
+
+#. R/cmp.R: gettextf("possible error in '%s': %s", deparse(call, 20)[1], msg)
+#: R/cmp.R:0
+msgid "possible error in '%s': %s"
+msgstr "possível erro em '%s': %s"
+
+#. R/cmp.R: gettextf("saving to file %s ... ", sQuote(file), domain = "R-compiler")
+#. R/cmp.R: gettextf("saving to file %s ... ", sQuote(outfile), domain = "R-compiler")
+#: R/cmp.R:0
+#, fuzzy
+msgid "saving to file %s ..."
+msgstr "salvando para o arquivo \"%s\" ..."
+
+#. R/cmp.R: stop("supplied 'env' argument is not a proper evaluation environment")
+#. R/cmp.R: stop("supplied 'env' argument is not a proper evaluation environment")
+#: R/cmp.R:0
+#, fuzzy
+msgid "supplied 'env' argument is not a proper evaluation environment"
+msgstr "não é um ambiente apropriado para avaliação"
+
+#. R/cmp.R: gettextf("wrong number of arguments to '%s'", as.character(fun))
+#: R/cmp.R:0
+msgid "wrong number of arguments to '%s'"
+msgstr "número de argumentos inválidos para '%s'"
+
+#. R/cmp.R: ngettext(sum(rdsf), "local assignment to syntactic function: ", "local assignments to syntactic functions: ",     domain = "R-compiler")
+#: R/cmp.R:0
+msgid "local assignment to syntactic function: "
+msgid_plural "local assignments to syntactic functions: "
+msgstr[0] "atribuição local para função sintática: "
+msgstr[1] "atribuições locais para funções sintáticas: "
+
+#~ msgid "expected a single logical value for the S4 state flag"
+#~ msgstr "esperado somente um valor lógico para a flag de estado S4"

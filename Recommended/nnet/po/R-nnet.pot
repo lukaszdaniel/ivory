@@ -1,0 +1,329 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: nnet 7.3-8\n"
+"POT-Creation-Date: 2014-07-13 09:15\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+
+#: R/multinom.R: 0
+#: R/nnet.R: 0
+#: R/nnet.R: 0
+#. R/multinom.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("multinom"))
+#. R/multinom.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("multinom"))
+#. R/multinom.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("multinom"))
+#. R/nnet.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("nnet"))
+#. R/nnet.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("nnet"))
+
+msgid "'%s' argument is not an object of class %s"
+msgstr ""
+
+
+#: R/multinom.R: 0
+#. R/multinom.R: stop("'scope' is not a subset of term labels")
+
+msgid "'scope' is not a subset of term labels"
+msgstr ""
+
+
+#: R/nnet.R: 0
+#. R/nnet.R: stop("'softmax = TRUE' requires at least two response categories")
+
+msgid "'softmax = TRUE' requires at least two response categories"
+msgstr ""
+
+
+#: R/multinom.R: 0
+#. R/multinom.R: gettext("AIC: ", domain = "R-nnet")
+#. R/multinom.R: gettext("AIC: ", domain = "R-nnet")
+
+msgid "AIC:"
+msgstr ""
+
+
+#: R/multinom.R: 0
+#. R/multinom.R: gettext("Call:", domain = "R-nnet")
+#. R/multinom.R: gettext("Call:", domain = "R-nnet")
+
+msgid "Call:"
+msgstr ""
+
+
+#: R/multinom.R: 0
+#. R/multinom.R: gettext("Coefficients:", domain = "R-nnet")
+#. R/multinom.R: gettext("Coefficients:", domain = "R-nnet")
+
+msgid "Coefficients:"
+msgstr ""
+
+
+#: R/multinom.R: 0
+#. R/multinom.R: gettext("Correlation of Coefficients:", domain = "R-nnet")
+
+msgid "Correlation of Coefficients:"
+msgstr ""
+
+
+#: R/multinom.R: 0
+#. R/multinom.R: gettext("Likelihood ratio tests of Multinomial Models\n", domain = "R-nnet")
+
+msgid "Likelihood ratio tests of Multinomial Models"
+msgstr ""
+
+
+#: R/multinom.R: 0
+#. R/multinom.R: gettext("Residual Deviance: ", domain = "R-nnet")
+#. R/multinom.R: gettext("Residual Deviance: ", domain = "R-nnet")
+
+msgid "Residual Deviance:"
+msgstr ""
+
+
+#: R/multinom.R: 0
+#. R/multinom.R: gettextf("Response: %s", paste(rsp, collapse = ""), domain = "R-nnet")
+
+msgid "Response: %s"
+msgstr ""
+
+
+#: R/multinom.R: 0
+#. R/multinom.R: gettext("Std. Errors:", domain = "R-nnet")
+
+msgid "Std. Errors:"
+msgstr ""
+
+
+#: R/multinom.R: 0
+#. R/multinom.R: gettext("Value/SE (Wald statistics):", domain = "R-nnet")
+
+msgid "Value/SE (Wald statistics):"
+msgstr ""
+
+
+#: R/nnet.R: 0
+#. R/nnet.R: gettextf("a %s network with %d weights", paste(x$n[1L], "-", x$n[2L], "-", x$n[3L],     collapse = ""), length(x$wts), domain = "R-nnet")
+#. R/nnet.R: gettextf("a %s network with %d weights", paste(x$n[1L], "-", x$n[2L], "-", x$n[3L],     collapse = ""), length(x$wts), domain = "R-nnet")
+
+msgid "a %s network with %d weights"
+msgstr ""
+
+
+#: R/multinom.R: 0
+#. R/multinom.R: stop("anova is not implemented for a single \"multinom\" object")
+
+msgid "anova is not implemented for a single \"multinom\" object"
+msgstr ""
+
+
+#: R/nnet.R: 0
+#. R/nnet.R: gettextf(" decay=%s", x$decay[1L], domain = "R-nnet")
+#. R/nnet.R: gettextf(" decay=%s", x$decay[1L], domain = "R-nnet")
+
+msgid "decay=%s"
+msgstr ""
+
+
+#: R/nnet.R: 0
+#. R/nnet.R: stop("dims of 'x' and 'y' must match")
+
+msgid "dims of 'x' and 'y' must match"
+msgstr ""
+
+
+#: R/nnet.R: 0
+#. R/nnet.R: stop("entropy fit only for logistic units")
+
+msgid "entropy fit only for logistic units"
+msgstr ""
+
+
+#: R/nnet.R: 0
+#. R/nnet.R: gettext(" entropy fitting ", domain = "R-nnet")
+#. R/nnet.R: gettext(" entropy fitting ", domain = "R-nnet")
+
+msgid "entropy fitting"
+msgstr ""
+
+
+#: R/nnet.R: 0
+#. R/nnet.R: stop("inappropriate fit for class")
+
+msgid "inappropriate fit for class"
+msgstr ""
+
+
+#: R/nnet.R: 0
+#. R/nnet.R: stop("incorrect length of 'mask'")
+
+msgid "incorrect length of 'mask'"
+msgstr ""
+
+
+#: R/nnet.R: 0
+#. R/nnet.R: gettextf("inputs: %s\noutput(s): %s", x$coefnames, deparse(formula(x)[[2L]], backtick = TRUE),     domain = "R-nnet")
+
+msgid "inputs: %s\noutput(s): %s"
+msgstr ""
+
+
+#: R/nnet.R: 0
+#. R/nnet.R: stop("invalid weights vector")
+#. R/nnet.R: stop("invalid weights vector")
+
+msgid "invalid weights vector"
+msgstr ""
+
+
+#: R/nnet.R: 0
+#. R/nnet.R: gettext(" linear output units ", domain = "R-nnet")
+#. R/nnet.R: gettext(" linear output units ", domain = "R-nnet")
+
+msgid "linear output units"
+msgstr ""
+
+
+#: R/nnet.R: 0
+#. R/nnet.R: stop("missing values in 'x'")
+#. R/nnet.R: stop("missing values in 'x'")
+
+msgid "missing values in 'x'"
+msgstr ""
+
+
+#: R/nnet.R: 0
+#. R/nnet.R: stop("missing values in 'y'")
+
+msgid "missing values in 'y'"
+msgstr ""
+
+
+#: R/multinom.R: 0
+#. R/multinom.R: stop("models were not all fitted to the same size of dataset")
+
+msgid "models were not all fitted to the same size of dataset"
+msgstr ""
+
+
+#: R/multinom.R: 0
+#. R/multinom.R: stop("ncol(offset) is wrong")
+
+msgid "ncol(offset) is wrong"
+msgstr ""
+
+
+#: R/multinom.R: 0
+#. R/multinom.R: stop("need two or more classes to fit a multinom model")
+
+msgid "need two or more classes to fit a multinom model"
+msgstr ""
+
+
+#: R/multinom.R: 0
+#. R/multinom.R: stop("no terms in 'scope' for adding to object")
+
+msgid "no terms in 'scope' for adding to object"
+msgstr ""
+
+
+#: R/nnet.R: 0
+#. R/nnet.R: stop("no weights to fit")
+
+msgid "no weights to fit"
+msgstr ""
+
+
+#: R/multinom.R: 0
+#. R/multinom.R: stop("not all objects are of class \"multinom\"")
+
+msgid "not all objects are of class \"multinom\""
+msgstr ""
+
+
+#: R/nnet.R: 0
+#. R/nnet.R: stop("nrows of 'x' and 'y' must match")
+
+msgid "nrows of 'x' and 'y' must match"
+msgstr ""
+
+
+#: R/multinom.R: 0
+#. R/multinom.R: stop("number of rows in use has changed: remove missing values?")
+#. R/multinom.R: stop("number of rows in use has changed: remove missing values?")
+
+msgid "number of rows in use has changed: remove missing values?"
+msgstr ""
+
+
+#: R/nnet.R: 0
+#. R/nnet.R: gettext("options were:", domain = "R-nnet")
+#. R/nnet.R: gettext("options were:", domain = "R-nnet")
+
+msgid "options were:"
+msgstr ""
+
+
+#: R/nnet.R: 0
+#. R/nnet.R: gettext(" skip-layer connections ", domain = "R-nnet")
+#. R/nnet.R: gettext(" skip-layer connections ", domain = "R-nnet")
+
+msgid "skip-layer connections"
+msgstr ""
+
+
+#: R/nnet.R: 0
+#. R/nnet.R: gettext(" softmax modelling ", domain = "R-nnet")
+#. R/nnet.R: gettext(" softmax modelling ", domain = "R-nnet")
+
+msgid "softmax modelling"
+msgstr ""
+
+
+#: R/multinom.R: 0
+#. R/multinom.R: stop("some case has no observations")
+
+msgid "some case has no observations"
+msgstr ""
+
+
+#: R/nnet.R: 0
+#. R/nnet.R: gettextf("too many (%d) weights", nwts)
+
+msgid "too many (%d) weights"
+msgstr ""
+
+
+#: R/multinom.R: 0
+#. R/multinom.R: gettextf("trying + %s", tt, domain = "R-nnet")
+
+msgid "trying + %s"
+msgstr ""
+
+
+#: R/multinom.R: 0
+#. R/multinom.R: gettextf("trying - %s", tt, domain = "R-nnet")
+
+msgid "trying - %s"
+msgstr ""
+
+
+#: R/nnet.R: 0
+#. R/nnet.R: stop("weights vector of incorrect length")
+
+msgid "weights vector of incorrect length"
+msgstr ""
+
+
+#: R/multinom.R: 0
+#: R/nnet.R: 0
+#. R/multinom.R: ngettext(length(empty), "group %s is empty", "groups %s are empty", domain = "R-nnet")
+#. R/nnet.R: ngettext(length(empty), "group %s is empty", "groups %s are empty", domain = "R-nnet")
+
+msgid        "group %s is empty"
+msgid_plural "groups %s are empty"
+msgstr[0]    ""
+msgstr[1]    ""

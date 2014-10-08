@@ -1,0 +1,178 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: R 2.3.0 \n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2014-07-19 18:11\n"
+"PO-Revision-Date: 2009-03-31 21:00+0900 \n"
+"Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
+"Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
+"Language: \n"
+"MIME-Version: 1.0 \n"
+"Content-Type: text/plain; charset=UTF-8 \n"
+"Content-Transfer-Encoding: 8bit \n"
+"X-Generator: Pootle 1.1.0 \n"
+
+#. R/utils.R: stop("'filters' must be a 2-column character matrix")
+#: R/utils.R:0
+msgid "'filters' must be a 2-column character matrix"
+msgstr " 'filter' は二つの列を持つ文字行列でなければなりません "
+
+#. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
+#. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
+#: R/utils.R:0
+#, fuzzy
+msgid "'pb' is not from class %s"
+msgstr " 'pb'はクラス\"tkProgressBar\"由来ではありません "
+
+#. R/utils.R: gettext("Cancel")
+#: R/utils.R:0
+msgid "Cancel"
+msgstr " キャンセル "
+
+#. R/tkGUI.R: gettext("Demos")
+#: R/tkGUI.R:0
+msgid "Demos"
+msgstr " デモ "
+
+#. R/tkGUI.R: gettext("Density")
+#: R/tkGUI.R:0
+msgid "Density"
+msgstr " 密度 "
+
+#. R/tkGUI.R: gettext("Don't save workspace")
+#: R/tkGUI.R:0
+msgid "Don't save workspace"
+msgstr " 作業スペースを保存しないでください "
+
+#. R/tkGUI.R: gettext("File")
+#: R/tkGUI.R:0
+msgid "File"
+msgstr " ファイル "
+
+#. R/tkGUI.R: gettext("Go get them!")
+#: R/tkGUI.R:0
+msgid "Go get them!"
+msgstr " それを入手してください! "
+
+#. R/tkGUI.R: gettext("Help")
+#: R/tkGUI.R:0
+msgid "Help"
+msgstr " ヘルプ "
+
+#. R/tkGUI.R: gettext("Help topic:")
+#: R/tkGUI.R:0
+msgid "Help topic:"
+msgstr " ヘルプのトピック： "
+
+#. R/tkGUI.R: gettext("Install packages from CRAN")
+#: R/tkGUI.R:0
+msgid "Install packages from CRAN"
+msgstr "CRANからパッケージをインストールしてください "
+
+#. R/tkGUI.R: gettext("Interactive linear fitting")
+#: R/tkGUI.R:0
+msgid "Interactive linear fitting"
+msgstr " 対話的な線形当てはめ "
+
+#. R/tkGUI.R: gettext("Load")
+#: R/tkGUI.R:0
+msgid "Load"
+msgstr " ロード "
+
+#. R/tkGUI.R: gettext("Load packages")
+#: R/tkGUI.R:0
+msgid "Load packages"
+msgstr " パッケージをロードしてください "
+
+#. R/tkGUI.R: gettext("Manuals in PDF format")
+#: R/tkGUI.R:0
+msgid "Manuals in PDF format"
+msgstr "PDF形式のマニュアル "
+
+#. R/utils.R: gettext("OK")
+#: R/utils.R:0
+msgid "OK"
+msgstr "OK "
+
+#. R/tkGUI.R: gettext("Packages")
+#: R/tkGUI.R:0
+msgid "Packages"
+msgstr " パッケージ "
+
+#. R/tkGUI.R: gettext("Quit")
+#: R/tkGUI.R:0
+msgid "Quit"
+msgstr " 終了 "
+
+#. R/tkGUI.R: gettext("R FAQ")
+#: R/tkGUI.R:0
+msgid "R FAQ"
+msgstr "RのFAQ "
+
+#. R/tkGUI.R: gettext("Save workspace")
+#: R/tkGUI.R:0
+msgid "Save workspace"
+msgstr " 作業スペースを保存してください "
+
+#. R/tkGUI.R: gettext("Source R code")
+#: R/tkGUI.R:0
+msgid "Source R code"
+msgstr "Rのソースコード "
+
+#. R/tclsearch.R: gettextf("Tcl package '%s' not found", package)
+#: R/tclsearch.R:0
+msgid "Tcl package '%s' not found"
+msgstr "Tcl パッケージ '%s' が見つかりません "
+
+#. R/unix/zzz.R: stop("Tcl/Tk libraries are missing: install the Tcl/Tk component from the R installer")
+#: R/unix/zzz.R:0
+msgid ""
+"Tcl/Tk libraries are missing: install the Tcl/Tk component from the R "
+"installer"
+msgstr ""
+
+#. R/windows/zzz.R: stop("Tcl/Tk support files were not installed", call. = FALSE)
+#: R/windows/zzz.R:0
+msgid "Tcl/Tk support files were not installed"
+msgstr "Tcl/Tk サポートファイルはインストールされていません "
+
+#. R/unix/zzzstub.R: stop("Tcl/Tk support is not available on this system", domain = "R-tcltk")
+#: R/unix/zzzstub.R:0
+msgid "Tcl/Tk support is not available on this system"
+msgstr "Tcl/Tk サポートファイルはこのシステムでは利用できません "
+
+#. R/tkGUI.R: stop("The tkGUI is not available under Windows")
+#: R/tkGUI.R:0
+msgid "The tkGUI is not available under Windows"
+msgstr " tkGUIは、Windowsでは利用できません "
+
+#. R/unix/zzz.R: stop("X11 library is missing: install XQuartz from xquartz.macosforge.org")
+#: R/unix/zzz.R:0
+msgid "X11 library is missing: install XQuartz from xquartz.macosforge.org"
+msgstr ""
+
+#. R/tclarray.R: stop("cannot change names on Tcl array")
+#: R/tclarray.R:0
+msgid "cannot change names on Tcl array"
+msgstr "Tcl array 上で名前を変更することは出来ません "
+
+#. R/Tk.R: gettextf("cannot handle object of mode '%s'", storage.mode(x))
+#: R/Tk.R:0
+msgid "cannot handle object of mode '%s'"
+msgstr " モード '%s' のオブジェクトは処理できません "
+
+#. R/tclarray.R: stop("cannot set length of Tcl array")
+#: R/tclarray.R:0
+msgid "cannot set length of Tcl array"
+msgstr "Tcl array の長さを設定することは出来ません "
+
+#. R/tkGUI.R: gettext("t test")
+#: R/tkGUI.R:0
+msgid "t test"
+msgstr " ｔ 検定 "
+
+#~ msgid "Loading Tcl/Tk interface ..."
+#~ msgstr "Tcl/Tkインターフェースのロード中 "
+
+#~ msgid "done"
+#~ msgstr " 終了済 "

@@ -1,0 +1,2827 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: survival 2.37-7\n"
+"POT-Creation-Date: 2014-07-13 09:15\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+
+#: R/print.aareg.S: 0
+#. R/print.aareg.S: gettextf("%d out of %d unique event times used", summ$n[2], x$n[3], domain = "R-survival")
+
+msgid "%d out of %d unique event times used"
+msgstr ""
+
+
+#: R/survreg.S: 0
+#. R/survreg.S: gettextf("%s distribution has a fixed scale, user specified value ignored", sQuote(dlist$name))
+
+msgid "%s distribution has a fixed scale, user specified value ignored"
+msgstr ""
+
+
+#: R/survreg.S: 0
+#. R/survreg.S: gettextf("%s distribution has no optional parameters", sQuote(dlist$name))
+
+msgid "%s distribution has no optional parameters"
+msgstr ""
+
+
+#: R/dsurvreg.S: 0
+#: R/survreg.S: 0
+#. R/dsurvreg.S: gettextf("%s distribution was not found", sQuote(distribution))
+#. R/dsurvreg.S: gettextf("%s distribution was not found", sQuote(distribution))
+#. R/dsurvreg.S: gettextf("%s distribution was not found", sQuote(distribution))
+#. R/survreg.S: gettextf("%s distribution was not found", sQuote(dist))
+
+msgid "%s distribution was not found"
+msgstr ""
+
+
+#: R/anova.survreg.S: 0
+#. R/anova.survreg.S: gettextf("%s distribution with %s link", sQuote(family.obj[1]), sQuote(family.obj[2]))
+
+msgid "%s distribution with %s link"
+msgstr ""
+
+
+#: R/summary.ratetable.S: 0
+#. R/summary.ratetable.S: gettextf("%s has levels of: %s", att$dimid[i], paste(att$dimnames[[i]], collapse = " "),     domain = "R-survival")
+#. R/summary.ratetable.S: gettextf("%s has levels of: %s", att$dimid[i], paste(att$dimnames[[i]], collapse = " "),     domain = "R-survival")
+
+msgid "%s has levels of: %s"
+msgstr ""
+
+
+#: R/coxpenal.fit.R: 0
+#. R/coxpenal.fit.R: gettextf("%s not matched", (cargs[[i]])[is.na(temp)])
+
+msgid "%s not matched"
+msgstr ""
+
+
+#: R/summary.ratetable.S: 0
+#. R/summary.ratetable.S: gettextf("%s ranges from %s to %s; with %d categories\n", att$dimid[i], format(min(att$cutpoints[[i]])),     format(max(att$cutpoints[[i]])), att$dim[i], domain = "R-survival")
+#. R/summary.ratetable.S: gettextf("%s ranges from %s to %s; with %d categories\n", att$dimid[i], format(as.Date(min(att$cutpoints[[i]]),     origin = "1960/01/01")), format(as.Date(max(att$cutpoints[[i]]), origin = "1960/01/01")),     att$dim[i], domain = "R-survival")
+#. R/summary.ratetable.S: gettextf("%s ranges from %s to %s; with %d categories\n", att$dimid[i], format(min(att$cutpoints[[i]])),     format(max(att$cutpoints[[i]])), att$dim[i], domain = "R-survival")
+
+msgid "%s ranges from %s to %s; with %d categories"
+msgstr ""
+
+
+#: R/summary.ratetable.S: 0
+#. R/summary.ratetable.S: gettextf("%s ranges from %s to %s; with %d categories linearly interpolated in %d steps per division\n",     att$dimid[i], format(min(att$cutpoints[[i]])), format(max(att$cutpoints[[i]])),     att$dim[i], att$factor[i], domain = "R-survival")
+
+msgid "%s ranges from %s to %s; with %d categories linearly interpolated in %d steps per division"
+msgstr ""
+
+
+#: R/survpenal.fit.S: 0
+#. R/survpenal.fit.S: gettextf("%s was not matched", sQuote(cargs[[i]][is.na(temp)]))
+
+msgid "%s was not matched"
+msgstr ""
+
+
+#: R/tcut.S: 0
+#. R/tcut.S: gettextf("%s+ thru %s", format(breaks[-length(breaks)]), format(breaks[-1]))
+
+msgid "%s+ thru %s"
+msgstr ""
+
+
+#: R/Surv.S: 0
+#: R/coxph.wtest.S: 0
+#: R/coxph.wtest.S: 0
+#: R/coxph.wtest.S: 0
+#: R/frailty.brent.S: 0
+#. R/Surv.S: gettextf("'%s' and '%s' arguments are of different lengths", "time", "event")
+#. R/Surv.S: gettextf("'%s' and '%s' arguments are of different lengths", "time", "time2")
+#. R/Surv.S: gettextf("'%s' and '%s' arguments are of different lengths", "time", "event")
+#. R/Surv.S: gettextf("'%s' and '%s' arguments are of different lengths", "time", "time2")
+#. R/coxph.wtest.S: gettextf("'%s' and '%s' arguments are of different lengths", "var", "b")
+#. R/coxph.wtest.S: gettextf("'%s' and '%s' arguments are of different lengths", "var", "b")
+#. R/coxph.wtest.S: gettextf("'%s' and '%s' arguments are of different lengths", "var", "b")
+#. R/frailty.brent.S: gettextf("'%s' and '%s' arguments are of different lengths", "x", "y")
+
+msgid "'%s' and '%s' arguments are of different lengths"
+msgstr ""
+
+
+#: R/aareg.S: 0
+#: R/anova.coxph.S: 0
+#: R/attrassign.R: 0
+#: R/basehaz.S: 0
+#: R/cox.zph.S: 0
+#: R/coxph.rvar.S: 0
+#: R/is.ratetable.S: 0
+#: R/lines.aareg.S: 0
+#: R/plot.aareg.S: 0
+#: R/predict.coxph.R: 0
+#: R/print.aareg.S: 0
+#: R/print.coxph.penal.S: 0
+#: R/print.survdiff.S: 0
+#: R/print.survexp.S: 0
+#: R/print.survreg.penal.S: 0
+#: R/pspline.S: 0
+#: R/quantile.survfit.R: 0
+#: R/summary.aareg.S: 0
+#: R/summary.ratetable.S: 0
+#: R/summary.survexp.R: 0
+#: R/survexp.R: 0
+#: R/survfitKM.S: 0
+#: R/survfitTurnbull.S: 0
+#: R/survfitms.R: 0
+#: R/survfitms.R: 0
+#. R/aareg.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("aareg"))
+#. R/anova.coxph.S: gettextf("'%s' argument is not an object of class %s", "object", dQuote("coxph"))
+#. R/attrassign.R: gettextf("'%s' argument is not an object of class %s", "tt", dQuote("terms"))
+#. R/basehaz.S: gettextf("'%s' argument is not an object of class %s", "fit", dQuote("coxph"))
+#. R/cox.zph.S: gettextf("'%s' argument is not an object of class %s", "fit", dQuote("coxph"))
+#. R/coxph.rvar.S: gettextf("'%s' argument is not an object of class %s", "fit", dQuote("coxph"))
+#. R/is.ratetable.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("ratetable"))
+#. R/lines.aareg.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("aareg"))
+#. R/plot.aareg.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("aareg"))
+#. R/predict.coxph.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("coxph"))
+#. R/print.aareg.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("aareg"))
+#. R/print.coxph.penal.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("coxph.penal"))
+#. R/print.survdiff.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("survdiff"))
+#. R/print.survexp.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("survexp"))
+#. R/print.survreg.penal.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("servreg.penal"))
+#. R/pspline.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("pspline"))
+#. R/quantile.survfit.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("survfit"))
+#. R/summary.aareg.S: gettextf("'%s' argument is not an object of class %s", "object", dQuote("aareg"))
+#. R/summary.ratetable.S: gettextf("'%s' argument is not an object of class %s", "object", dQuote("ratetable"))
+#. R/summary.survexp.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("survexp"))
+#. R/survexp.R: gettextf("'%s' argument is not an object of class %s", "ratetable", dQuote("ratetable"))
+#. R/survfitKM.S: gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
+#. R/survfitTurnbull.S: gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
+#. R/survfitms.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("survfit"))
+#. R/survfitms.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("survfitms"))
+
+msgid "'%s' argument is not an object of class %s"
+msgstr ""
+
+
+#: R/coxpenal.fit.R: 0
+#. R/coxpenal.fit.R: gettextf("'%s' argument is of length 0", "x")
+
+msgid "'%s' argument is of length 0"
+msgstr ""
+
+
+#: R/survfitKM.S: 0
+#: R/survfitTurnbull.S: 0
+#. R/survfitKM.S: gettextf("'%s' argument must be a factor", "x")
+#. R/survfitTurnbull.S: gettextf("'%s' argument must be a factor", "x")
+
+msgid "'%s' argument must be a factor"
+msgstr ""
+
+
+#: R/Surv.S: 0
+#. R/Surv.S: gettextf("'%s' argument must be numeric", "time")
+#. R/Surv.S: gettextf("'%s' argument must be numeric", "time")
+#. R/Surv.S: gettextf("'%s' argument must be numeric", "time")
+#. R/Surv.S: gettextf("'%s' argument must be numeric", "time2")
+#. R/Surv.S: gettextf("'%s' argument must be numeric", "time2")
+
+msgid "'%s' argument must be numeric"
+msgstr ""
+
+
+#: R/match.ratetable.S: 0
+#. R/match.ratetable.S: gettextf("'%s' argument needed by the ratetable was not found in the data", dimid[is.na(ord)])
+
+msgid "'%s' argument needed by the ratetable was not found in the data"
+msgstr ""
+
+
+#: R/is.ratetable.S: 0
+#. R/is.ratetable.S: gettextf("'%s' component is not a list", "dimnames")
+#. R/is.ratetable.S: gettextf("'%s' component is not a list", "cutpoints")
+
+msgid "'%s' component is not a list"
+msgstr ""
+
+
+#: R/frailty.gamma.S: 0
+#: R/frailty.gaussian.S: 0
+#: R/frailty.t.S: 0
+#. R/frailty.gamma.S: gettextf("'%s' option is set but '%s' argument is specified", "method != df", "df")
+#. R/frailty.gamma.S: gettextf("'%s' option is set but '%s' argument is specified", "method != fixed",     "theta")
+#. R/frailty.gaussian.S: gettextf("'%s' option is set but '%s' argument is specified", "method != fixed",     "theta")
+#. R/frailty.t.S: gettextf("'%s' option is set but '%s' argument is specified", "method != fixed",     "theta")
+
+msgid "'%s' option is set but '%s' argument is specified"
+msgstr ""
+
+
+#: R/frailty.gamma.S: 0
+#: R/frailty.gaussian.S: 0
+#: R/frailty.gaussian.S: 0
+#: R/frailty.t.S: 0
+#: R/frailty.t.S: 0
+#. R/frailty.gamma.S: gettextf("'%s' option is set but no '%s' argument", "method = df", "df")
+#. R/frailty.gamma.S: gettextf("'%s' option is set but no '%s' argument", "method = fixed", "theta")
+#. R/frailty.gaussian.S: gettextf("'%s' option is set but no '%s' argument", "method = df", "df")
+#. R/frailty.gaussian.S: gettextf("'%s' option is set but no '%s' argument", "method = fixed", "theta")
+#. R/frailty.t.S: gettextf("'%s' option is set but no '%s' argument", "method = df", "df")
+#. R/frailty.t.S: gettextf("'%s' option is set but no '%s' argument", "method = fixed", "theta")
+
+msgid "'%s' option is set but no '%s' argument"
+msgstr ""
+
+
+#: R/residuals.coxph.S: 0
+#. R/residuals.coxph.S: gettextf("'%s' residuals are not available for the exact method", type)
+
+msgid "'%s' residuals are not available for the exact method"
+msgstr ""
+
+
+#: R/residuals.coxph.null.S: 0
+#. R/residuals.coxph.null.S: gettextf("'%s' residuals are not defined for a null model", type)
+
+msgid "'%s' residuals are not defined for a null model"
+msgstr ""
+
+
+#: R/tcut.S: 0
+#. R/tcut.S: stop("'breaks' argument must specify at least one interval")
+
+msgid "'breaks' argument must specify at least one interval"
+msgstr ""
+
+
+#: R/cch.R: 0
+#. R/cch.R: stop("'cohort.size' and 'stratum' levels lengths do not match")
+
+msgid "'cohort.size' and 'stratum' levels lengths do not match"
+msgstr ""
+
+
+#: R/survregDtest.S: 0
+#. R/survregDtest.S: gettext("'dtrans()' component must be a 1-1 function")
+
+msgid "'dtrans()' component must be a 1-1 function"
+msgstr ""
+
+
+#: R/survfit.R: 0
+#: R/survfit.formula.S: 0
+#. R/survfit.R: stop("'etype' argument incompatable with survival type")
+#. R/survfit.formula.S: stop("'etype' argument incompatable with survival type")
+
+msgid "'etype' argument incompatable with survival type"
+msgstr ""
+
+
+#: R/survdiff.S: 0
+#. R/survdiff.S: stop("'formula' argument is not a formula")
+
+msgid "'formula' argument is not a formula"
+msgstr ""
+
+
+#: R/clogit.R: 0
+#: R/coxph.R: 0
+#: R/survobrien.S: 0
+#: R/survreg.S: 0
+#. R/clogit.R: stop("'formula' argument is required")
+#. R/coxph.R: stop("'formula' argument is required")
+#. R/survobrien.S: stop("'formula' argument is required")
+#. R/survreg.S: stop("'formula' argument is required")
+
+msgid "'formula' argument is required"
+msgstr ""
+
+
+#: R/survfitCI.R: 0
+#. R/survfitCI.R: stop("'id' argument is required for start:stop data")
+
+msgid "'id' argument is required for start:stop data"
+msgstr ""
+
+
+#: R/survfit.coxph.R: 0
+#. R/survfit.coxph.R: stop("'individual=TRUE' is only valid for counting process data")
+
+msgid "'individual=TRUE' is only valid for counting process data"
+msgstr ""
+
+
+#: R/survfitCI.R: 0
+#. R/survfitCI.R: stop("'istate' argument should be a vector of integers or a factor")
+
+msgid "'istate' argument should be a vector of integers or a factor"
+msgstr ""
+
+
+#: R/survfit.coxph.R: 0
+#. R/survfit.coxph.R: stop("'newdata' argument cannot be used when a model has frailty terms")
+
+msgid "'newdata' argument cannot be used when a model has frailty terms"
+msgstr ""
+
+
+#: R/survfit.coxph.R: 0
+#. R/survfit.coxph.R: stop("'newdata' argument must be a data frame")
+#. R/survfit.coxph.R: stop("'newdata' argument must be a data frame")
+
+msgid "'newdata' argument must be a data frame"
+msgstr ""
+
+
+#: R/survfit.coxph.R: 0
+#. R/survfit.coxph.R: stop("'newdata' argument must be present when 'individual=TRUE'")
+
+msgid "'newdata' argument must be present when 'individual=TRUE'"
+msgstr ""
+
+
+#: R/pspline.S: 0
+#. R/pspline.S: gettextf("'nterm' argument is too small for df=%s", df)
+
+msgid "'nterm' argument is too small for df=%s"
+msgstr ""
+
+
+#: R/anova.coxphlist.S: 0
+#. R/anova.coxphlist.S: stop("'object' argument is not a list")
+
+msgid "'object' argument is not a list"
+msgstr ""
+
+
+#: R/anova.coxmelist.R: 0
+#. R/anova.coxmelist.R: stop("'object' argument must be a list of objects of class \"coxme\" or \"coxph\"")
+
+msgid "'object' argument must be a list of objects of class \"coxme\" or \"coxph\""
+msgstr ""
+
+
+#: R/anova.coxphlist.S: 0
+#. R/anova.coxphlist.S: stop("'object' argument must be a list of objects of class \"coxph\"")
+
+msgid "'object' argument must be a list of objects of class \"coxph\""
+msgstr ""
+
+
+#: R/coxpenal.fit.R: 0
+#: R/survcallback.S: 0
+#: R/survpenal.fit.S: 0
+#. R/coxpenal.fit.R: stop("'pcols' and 'assign' arguments disagree")
+#. R/survcallback.S: stop("'pcols' and 'assign' arguments disagree")
+#. R/survpenal.fit.S: stop("'pcols' and 'assign' arguments disagree")
+
+msgid "'pcols' and 'assign' arguments disagree"
+msgstr ""
+
+
+#: R/pyears.R: 0
+#. R/pyears.R: stop("'pyears()' cannot handle stratified Cox models")
+
+msgid "'pyears()' cannot handle stratified Cox models"
+msgstr ""
+
+
+#: R/pyears.R: 0
+#. R/pyears.R: stop("'pyears()' cannot have interaction terms")
+
+msgid "'pyears()' cannot have interaction terms"
+msgstr ""
+
+
+#: R/match.ratetable.S: 0
+#. R/match.ratetable.S: stop("'ratetable' argument appears twice in the data")
+
+msgid "'ratetable' argument appears twice in the data"
+msgstr ""
+
+
+#: R/pyears.R: 0
+#: R/survexp.R: 0
+#. R/pyears.R: stop("'ratetable()' call in a formula is deprecated")
+#. R/survexp.R: stop("'ratetable()' call in a formula is deprecated")
+
+msgid "'ratetable()' call in a formula is deprecated"
+msgstr ""
+
+
+#: R/cch.R: 0
+#. R/cch.R: gettextf("'robust' argument ignored for method (%s)", method)
+
+msgid "'robust' argument ignored for method (%s)"
+msgstr ""
+
+
+#: R/cch.R: 0
+#. R/cch.R: warning("'robust' argument is not implemented for stratified analysis")
+
+msgid "'robust' argument is not implemented for stratified analysis"
+msgstr ""
+
+
+#: R/cch.R: 0
+#. R/cch.R: gettextf("'stratum' argument ignored for method (%s)", method)
+
+msgid "'stratum' argument ignored for method (%s)"
+msgstr ""
+
+
+#: R/survexp.R: 0
+#. R/survexp.R: stop("'survexp()' cannot have interaction terms")
+
+msgid "'survexp()' cannot have interaction terms"
+msgstr ""
+
+
+#: R/survfitTurnbull.S: 0
+#. R/survfitTurnbull.S: stop("'survfitTurnbull()' is not appropriate for counting process data")
+
+msgid "'survfitTurnbull()' is not appropriate for counting process data"
+msgstr ""
+
+
+#: R/Surv.S: 0
+#. R/Surv.S: stop("'time' (start time) and 'event' arguments are of different lengths")
+
+msgid "'time' (start time) and 'event' arguments are of different lengths"
+msgstr ""
+
+
+#: R/Surv.S: 0
+#. R/Surv.S: stop("'time' and 'time2' arguments (start and stop time) are of different lengths")
+
+msgid "'time' and 'time2' arguments (start and stop time) are of different lengths"
+msgstr ""
+
+
+#: R/Surv.S: 0
+#. R/Surv.S: gettextf("'time' argument (start time) must be numeric", "time")
+
+msgid "'time' argument (start time) must be numeric"
+msgstr ""
+
+
+#: R/Surv.S: 0
+#. R/Surv.S: stop("'time' argument is required")
+
+msgid "'time' argument is required"
+msgstr ""
+
+
+#: R/Surv.S: 0
+#. R/Surv.S: gettextf("'time2' argument (stop time) must be numeric", "time2")
+
+msgid "'time2' argument (stop time) must be numeric"
+msgstr ""
+
+
+#: R/coxph.control.S: 0
+#. R/coxph.control.S: stop("'toler.inf' argument must be >0")
+
+msgid "'toler.inf' argument must be >0"
+msgstr ""
+
+
+#: R/survregDtest.S: 0
+#. R/survregDtest.S: gettext("'trans' and 'itrans' components must be inverses of each other")
+
+msgid "'trans' and 'itrans' components must be inverses of each other"
+msgstr ""
+
+
+#: R/survobrien.S: 0
+#. R/survobrien.S: stop("'transform' function must be 1 to 1")
+
+msgid "'transform' function must be 1 to 1"
+msgstr ""
+
+
+#: R/coxph.R: 0
+#: R/model.matrix.coxph.R: 0
+#: R/model.matrix.coxph.R: 0
+#. R/coxph.R: stop("'tt' argument must contain a function or list of functions")
+#. R/coxph.R: stop("'tt' argument must contain a function or list of functions")
+#. R/model.matrix.coxph.R: stop("'tt' argument must contain a function or list of functions")
+#. R/model.matrix.coxph.R: stop("'tt' argument must contain a function or list of functions")
+
+msgid "'tt' argument must contain a function or list of functions"
+msgstr ""
+
+
+#: R/is.ratetable.S: 0
+#. R/is.ratetable.S: gettext("'type' attribute must be 1, 2, 3, or 4")
+
+msgid "'type' attribute must be 1, 2, 3, or 4"
+msgstr ""
+
+
+#: R/coxph.wtest.S: 0
+#. R/coxph.wtest.S: stop("'var' argument is not a square matrix")
+
+msgid "'var' argument is not a square matrix"
+msgstr ""
+
+
+#: R/agexact.fit.S: 0
+#: R/coxexact.fit.R: 0
+#: R/survexp.fit.S: 0
+#: R/survpenal.fit.S: 0
+#: R/survreg.fit.S: 0
+#. R/agexact.fit.S: stop("'x' argument is not a matrix")
+#. R/coxexact.fit.R: stop("'x' argument is not a matrix")
+#. R/survexp.fit.S: stop("'x' argument is not a matrix")
+#. R/survpenal.fit.S: stop("'x' argument is not a matrix")
+#. R/survreg.fit.S: stop("'x' argument is not a matrix")
+
+msgid "'x' argument is not a matrix"
+msgstr ""
+
+
+#: R/survexp.fit.S: 0
+#. R/survexp.fit.S: stop("'x' matrix does not match the rate table")
+
+msgid "'x' matrix does not match the rate table"
+msgstr ""
+
+
+#: R/print.summary.survreg.S: 0
+#. R/print.summary.survreg.S: gettext("(Loglikelihood assumes independent observations)", domain = "R-survival")
+
+msgid "(Loglikelihood assumes independent observations)"
+msgstr ""
+
+
+#: R/print.summary.coxph.S: 0
+#. R/print.summary.coxph.S: gettext("  (Note: the likelihood ratio and score tests assume independence of\n     observations within a cluster, the Wald and robust score tests do not).",     domain = "R-survival")
+
+msgid "(Note: the likelihood ratio and score tests assume independence of\n     observations within a cluster, the Wald and robust score tests do not)."
+msgstr ""
+
+
+#: R/print.survfit.S: 0
+#. R/print.survfit.S: gettextf("    * restricted mean with upper limit = %s", format(temp$end.time[1]),     domain = "R-survival")
+
+msgid "* restricted mean with upper limit = %s"
+msgstr ""
+
+
+#: R/print.survfit.S: 0
+#. R/print.survfit.S: gettext("   * restricted mean with variable upper limit\n", domain = "R-survival")
+
+msgid "* restricted mean with variable upper limit"
+msgstr ""
+
+
+#: R/aareg.S: 0
+#. R/aareg.S: gettextf("Aalen model doesn't support \"%s\" survival data", type)
+
+msgid "Aalen model doesn't support \"%s\" survival data"
+msgstr ""
+
+
+#: R/ratetable.S: 0
+#. R/ratetable.S: gettextf("Aguments do not all have the same length (arg %d)", i)
+
+msgid "Aguments do not all have the same length (arg %d)"
+msgstr ""
+
+
+#: R/anova.coxmelist.R: 0
+#: R/anova.coxph.S: 0
+#: R/anova.coxphlist.S: 0
+#: R/anova.survreg.S: 0
+#: R/anova.survreglist.S: 0
+#. R/anova.coxmelist.R: gettext("Analysis of Deviance Table")
+#. R/anova.coxph.S: gettext("Analysis of Deviance Table")
+#. R/anova.coxphlist.S: gettext("Analysis of Deviance Table")
+#. R/anova.survreg.S: gettext("Analysis of Deviance Table")
+#. R/anova.survreglist.S: gettext("Analysis of Deviance Table")
+
+msgid "Analysis of Deviance Table"
+msgstr ""
+
+
+#: R/plot.cox.zph.S: 0
+#. R/plot.cox.zph.S: gettextf("Beta(t) for %s", dimnames(yy)[[2]])
+
+msgid "Beta(t) for %s"
+msgstr ""
+
+
+#: R/cch.R: 0
+#: R/print.aareg.S: 0
+#: R/print.coxph.S: 0
+#: R/print.coxph.null.S: 0
+#: R/print.coxph.penal.S: 0
+#: R/print.summary.coxph.S: 0
+#: R/print.summary.coxph.penal.S: 0
+#: R/print.summary.survexp.R: 0
+#: R/print.summary.survfit.S: 0
+#: R/print.summary.survfitms.S: 0
+#: R/print.summary.survreg.S: 0
+#: R/print.summary.survreg.S: 0
+#: R/print.survdiff.S: 0
+#: R/print.survexp.S: 0
+#: R/print.survfit.S: 0
+#: R/print.survreg.S: 0
+#: R/print.survreg.penal.S: 0
+#: R/summary.pyears.S: 0
+#: R/survConcordance.R: 0
+#. R/cch.R: gettext("Call: ", domain = "R-survival")
+#. R/cch.R: gettext("Call: ", domain = "R-survival")
+#. R/print.aareg.S: gettext("Call:", domain = "R-survival")
+#. R/print.coxph.S: gettext("Call:", domain = "R-survival")
+#. R/print.coxph.null.S: gettext("Call: ", domain = "R-survival")
+#. R/print.coxph.penal.S: gettext("Call:", domain = "R-survival")
+#. R/print.summary.coxph.S: gettext("Call:", domain = "R-survival")
+#. R/print.summary.coxph.penal.S: gettext("Call:", domain = "R-survival")
+#. R/print.summary.survexp.R: gettext("Call: ", domain = "R-survival")
+#. R/print.summary.survfit.S: gettext("Call: ", domain = "R-survival")
+#. R/print.summary.survfitms.S: gettext("Call: ", domain = "R-survival")
+#. R/print.summary.survreg.S: gettext("Call:", domain = "R-survival")
+#. R/print.summary.survreg.S: gettext("Call:", domain = "R-survival")
+#. R/print.survdiff.S: gettext("Call:", domain = "R-survival")
+#. R/print.survexp.S: gettext("Call:", domain = "R-survival")
+#. R/print.survfit.S: gettext("Call: ", domain = "R-survival")
+#. R/print.survreg.S: gettext("Call:", domain = "R-survival")
+#. R/print.survreg.penal.S: gettext("Call:", domain = "R-survival")
+#. R/summary.pyears.S: gettext("Call:", domain = "R-survival")
+#. R/survConcordance.R: gettext("Call:", domain = "R-survival")
+
+msgid "Call:"
+msgstr ""
+
+
+#: R/cch.R: 0
+#. R/cch.R: gettextf("Case-cohort analysis, x$method, %s with subcohort of %s from cohort of %s",     x$method, x$subcohort.size, x$cohort.size, domain = "R-survival")
+#. R/cch.R: gettextf("Case-cohort analysis, x$method, %s with subcohort of %s from cohort of %s",     x$method, x$subcohort.size, x$cohort.size, domain = "R-survival")
+
+msgid "Case-cohort analysis, x$method, %s with subcohort of %s from cohort of %s"
+msgstr ""
+
+
+#: R/print.summary.survreg.S: 0
+#: R/print.survdiff.S: 0
+#: R/print.survreg.S: 0
+#. R/print.summary.survreg.S: gettextf("Chisq= %s on %d degrees of freedom, p= %s", format(round(x$chi, 2)), round(df,     1), format(signif(1 - pchisq(x$chi, df), 2)), domain = "R-survival")
+#. R/print.survdiff.S: gettext("Chisq= %s on %d degrees of freedom, p= %s", domain = "R-survival")
+#. R/print.survreg.S: gettextf("Chisq= %s on %d degrees of freedom, p= %s", format(round(chi, 2)), round(df,     1), format(signif(1 - pchisq(chi, df), 2)), domain = "R-survival")
+
+msgid "Chisq= %s on %d degrees of freedom, p= %s"
+msgstr ""
+
+
+#: R/print.aareg.S: 0
+#: R/summary.aareg.S: 0
+#. R/print.aareg.S: gettext("Chisq= %s on %d df, p=%s; test weights= %s", domain = "R-survival")
+#. R/summary.aareg.S: gettextf("Chisq= %s on %d df, p=%s; test weights= %s", format(round(chi, 2)), df,     signif(1 - pchisq(chi, df), 2), x$test, domain = "R-survival")
+
+msgid "Chisq= %s on %d df, p=%s; test weights= %s"
+msgstr ""
+
+
+#: R/cch.R: 0
+#: R/print.survreg.S: 0
+#. R/cch.R: gettext("Coefficients:", domain = "R-survival")
+#. R/cch.R: gettext("Coefficients:", domain = "R-survival")
+#. R/print.survreg.S: gettext("Coefficients:", domain = "R-survival")
+
+msgid "Coefficients:"
+msgstr ""
+
+
+#: R/predict.coxph.R: 0
+#: R/predict.coxph.penal.S: 0
+#. R/predict.coxph.R: stop("Collapse vector is the wrong length")
+#. R/predict.coxph.penal.S: stop("Collapse vector is the wrong length")
+
+msgid "Collapse vector is the wrong length"
+msgstr ""
+
+
+#: R/print.summary.coxph.S: 0
+#: R/print.summary.coxph.penal.S: 0
+#: R/survConcordance.R: 0
+#. R/print.summary.coxph.S: gettextf("Concordance= %s (se = %s)", format(round(x$concordance[1], 3)), format(round(x$concordance[2],     3)), domain = "R-survival")
+#. R/print.summary.coxph.penal.S: gettextf("Concordance= %s (se = %s)", format(round(x$concordance[1], 3)), format(round(x$concordance[2],     3)), domain = "R-survival")
+#. R/survConcordance.R: gettextf("Concordance= %s (se = %s)", format(x$concordance), format(x$std.err), domain = "R-survival")
+
+msgid "Concordance= %s (se = %s)"
+msgstr ""
+
+
+#: R/print.summary.survreg.S: 0
+#. R/print.summary.survreg.S: gettext("Correlation of Coefficients:", domain = "R-survival")
+
+msgid "Correlation of Coefficients:"
+msgstr ""
+
+
+#: R/survfit.coxph.R: 0
+#. R/survfit.coxph.R: stop("Could not reconstruct the y vector")
+
+msgid "Could not reconstruct the y vector"
+msgstr ""
+
+
+#: R/coxph.R: 0
+#. R/coxph.R: gettextf("Cox model doesn't support \"%s\" survival data", type)
+
+msgid "Cox model doesn't support \"%s\" survival data"
+msgstr ""
+
+
+#: R/anova.coxmelist.R: 0
+#: R/anova.coxph.S: 0
+#: R/anova.coxphlist.S: 0
+#. R/anova.coxmelist.R: gettextf("Cox model: response is %s", responses[1])
+#. R/anova.coxph.S: gettextf("Cox model: response is %s", deparse(object$terms[[2]]), domain = "R-survival")
+#. R/anova.coxphlist.S: gettextf("Cox model: response is %s", responses[1])
+
+msgid "Cox model: response is %s"
+msgstr ""
+
+
+#: R/print.coxph.S: 0
+#: R/print.coxph.penal.S: 0
+#. R/print.coxph.S: gettext(" Coxph failed. ", domain = "R-survival")
+#. R/print.coxph.penal.S: gettext(" Coxph failed. ", domain = "R-survival")
+
+msgid "Coxph failed."
+msgstr ""
+
+
+#: R/print.summary.coxph.S: 0
+#: R/print.summary.coxph.penal.S: 0
+#. R/print.summary.coxph.S: gettext(" Coxreg failed. ", domain = "R-survival")
+#. R/print.summary.coxph.penal.S: gettext(" Coxreg failed. ", domain = "R-survival")
+
+msgid "Coxreg failed."
+msgstr ""
+
+
+#: R/predict.coxph.R: 0
+#. R/predict.coxph.R: stop("Data is not the same size as it was in the original fit")
+
+msgid "Data is not the same size as it was in the original fit"
+msgstr ""
+
+
+#: R/print.coxph.penal.S: 0
+#: R/print.summary.coxph.penal.S: 0
+#: R/print.survreg.penal.S: 0
+#. R/print.coxph.penal.S: gettextf("Degrees of freedom for terms= %s", paste(format(round(x$df, 1)), collapse = " "),     domain = "R-survival")
+#. R/print.summary.coxph.penal.S: gettextf("Degrees of freedom for terms= %s", paste(format(round(x$df, 1)), collapse = " "),     domain = "R-survival")
+#. R/print.survreg.penal.S: gettextf("Degrees of freedom for terms= %s", paste(format(round(x$df, 1)), collapse = " "),     domain = "R-survival")
+
+msgid "Degrees of freedom for terms= %s"
+msgstr ""
+
+
+#: R/print.survdiff.S: 0
+#. R/print.survdiff.S: gettext("Expected")
+#. R/print.survdiff.S: gettext("Expected")
+
+msgid "Expected"
+msgstr ""
+
+
+#: R/cch.R: 0
+#. R/cch.R: gettextf("Exposure-stratified case-cohort analysis, %s method.", x$method, domain = "R-survival")
+#. R/cch.R: gettextf("Exposure-stratified case-cohort analysis, %s method.", x$method, domain = "R-survival")
+
+msgid "Exposure-stratified case-cohort analysis, %s method."
+msgstr ""
+
+
+#: R/survfit.coxph.R: 0
+#. R/survfit.coxph.R: stop("Failed to reconstruct the original data set")
+
+msgid "Failed to reconstruct the original data set"
+msgstr ""
+
+
+#: R/anova.coxmelist.R: 0
+#. R/anova.coxmelist.R: stop("First argument must be a list")
+
+msgid "First argument must be a list"
+msgstr ""
+
+
+#: R/match.ratetable.S: 0
+#. R/match.ratetable.S: gettextf("In 'ratetable()', %s must be a continuous variable", dimid[i])
+
+msgid "In 'ratetable()', %s must be a continuous variable"
+msgstr ""
+
+
+#: R/survfit.coxph.R: 0
+#. R/survfit.coxph.R: stop("Individual survival but no variables")
+
+msgid "Individual survival but no variables"
+msgstr ""
+
+
+#: R/survfit.R: 0
+#: R/survfit.formula.S: 0
+#. R/survfit.R: stop("Interaction terms are not valid for this function")
+#. R/survfit.formula.S: stop("Interaction terms are not valid for this function")
+
+msgid "Interaction terms are not valid for this function"
+msgstr ""
+
+
+#: R/survConcordance.fit.R: 0
+#. R/survConcordance.fit.R: stop("Invalid survival type for concordance")
+
+msgid "Invalid survival type for concordance"
+msgstr ""
+
+
+#: R/print.survfit.S: 0
+#. R/print.survfit.S: stop("Invalid value for rmean option")
+
+msgid "Invalid value for rmean option"
+msgstr ""
+
+
+#: R/plot.cox.zph.S: 0
+#. R/plot.cox.zph.S: stop("Invalid variable requested")
+
+msgid "Invalid variable requested"
+msgstr ""
+
+
+#: R/survfitTurnbull.S: 0
+#. R/survfitTurnbull.S: gettextf("Iteration = %d", iter, domain = "R-survival")
+
+msgid "Iteration = %d"
+msgstr ""
+
+
+#: R/print.coxph.penal.S: 0
+#: R/print.summary.coxph.penal.S: 0
+#: R/print.survreg.penal.S: 0
+#. R/print.coxph.penal.S: gettextf("Iterations: %d outer, %d Newton-Raphson", x$iter[1], x$iter[2], domain = "R-survival")
+#. R/print.summary.coxph.penal.S: gettextf("Iterations: %d outer, %d Newton-Raphson", x$iter[1], x$iter[2], domain = "R-survival")
+#. R/print.survreg.penal.S: gettextf("Iterations: %d outer, %d Newton-Raphson", x$iter[1], x$iter[2], domain = "R-survival")
+
+msgid "Iterations: %d outer, %d Newton-Raphson"
+msgstr ""
+
+
+#: R/print.coxph.S: 0
+#: R/print.summary.coxph.S: 0
+#: R/print.summary.coxph.penal.S: 0
+#: R/print.survreg.penal.S: 0
+#. R/print.coxph.S: gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(logtest, 2)),     df, format(1 - pchisq(logtest, df)), domain = "R-survival")
+#. R/print.summary.coxph.S: gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(x$logtest["test"],     2)), x$logtest["df"], format(x$logtest["pvalue"]), domain = "R-survival")
+#. R/print.summary.coxph.penal.S: gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(logtest, 2)),     df, format(1 - pchisq(logtest, df)), domain = "R-survival")
+#. R/print.survreg.penal.S: gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(logtest, 2)),     round(df, 1), format(1 - pchisq(logtest, df)), domain = "R-survival")
+
+msgid "Likelihood ratio test = %s on %s df, p=%s"
+msgstr ""
+
+
+#: R/print.coxph.penal.S: 0
+#. R/print.coxph.penal.S: gettextf("Likelihood ratio test=%s on %s df, p=%s n=%d", format(round(logtest, 2)),     format(round(df, 2)), format(1 - pchisq(logtest, df)), x$n, domain = "R-survival")
+#. R/print.coxph.penal.S: gettextf("Likelihood ratio test=%s on %s df, p=%s n=%d", format(round(logtest, 2)),     format(round(df, 2)), format(1 - pchisq(logtest, df)), x$n, domain = "R-survival")
+
+msgid "Likelihood ratio test=%s on %s df, p=%s n=%d"
+msgstr ""
+
+
+#: R/agexact.fit.S: 0
+#: R/agreg.fit.R: 0
+#: R/coxexact.fit.R: 0
+#: R/coxph.fit.S: 0
+#. R/agexact.fit.S: gettext("Loglik converged before variable %s; beta may be infinite.", domain = "R-survival")
+#. R/agreg.fit.R: gettextf("Loglik converged before variable %s; beta may be infinite.", tmp_n)
+#. R/coxexact.fit.R: gettextf("Loglik converged before variable %s; beta may be infinite.", tmp_n)
+#. R/coxph.fit.S: gettext("Loglik converged before variable %s; beta may be infinite.", domain = "R-survival")
+
+msgid "Loglik converged before variable %s; beta may be infinite."
+msgstr ""
+
+
+#: R/print.summary.survreg.S: 0
+#: R/print.survreg.S: 0
+#. R/print.summary.survreg.S: gettextf("Loglik(model)= %s   Loglik(intercept only)= %s", format(round(x$loglik[2],     1)), format(round(x$loglik[1], 1)), domain = "R-survival")
+#. R/print.survreg.S: gettextf("Loglik(model)= %s   Loglik(intercept only)= %s", format(round(x$loglik[2],     1)), format(round(x$loglik[1], 1)), domain = "R-survival")
+
+msgid "Loglik(model)= %s   Loglik(intercept only)= %s"
+msgstr ""
+
+
+#: R/summary.pyears.S: 0
+#. R/summary.pyears.S: gettextf("Matches to the chosen rate table:\n  %s", object$summary)
+
+msgid "Matches to the chosen rate table:\n  %s"
+msgstr ""
+
+
+#: R/anova.coxmelist.R: 0
+#: R/anova.coxphlist.S: 0
+#. R/anova.coxmelist.R: gettextf(" Model %s:", format(seq_len(nmodels)))
+#. R/anova.coxphlist.S: gettextf(" Model %s:", format(seq_len(nmodels)))
+
+msgid "Model %s:"
+msgstr ""
+
+
+#: R/survfit.coxph.R: 0
+#. R/survfit.coxph.R: stop("Models with strata by covariate interaction terms require newdata")
+
+msgid "Models with strata by covariate interaction terms require newdata"
+msgstr ""
+
+
+#: R/predict.coxph.R: 0
+#. R/predict.coxph.R: stop("New data has a different survival type than the model")
+
+msgid "New data has a different survival type than the model"
+msgstr ""
+
+
+#: R/predict.coxph.R: 0
+#. R/predict.coxph.R: stop("New data has a strata not found in the original model")
+
+msgid "New data has a strata not found in the original model"
+msgstr ""
+
+
+#: R/survfit.coxph.R: 0
+#. R/survfit.coxph.R: stop("New data set has strata levels not found in the original")
+
+msgid "New data set has strata levels not found in the original"
+msgstr ""
+
+
+#: R/pyears.R: 0
+#. R/pyears.R: stop("No rate table specified")
+
+msgid "No rate table specified"
+msgstr ""
+
+
+#: R/summary.survreg.S: 0
+#. R/summary.survreg.S: gettext("   No summary provided\n")
+
+msgid "No summary provided"
+msgstr ""
+
+
+#: R/print.coxph.null.S: 0
+#: R/print.summary.coxph.S: 0
+#. R/print.coxph.null.S: gettext("Null model", domain = "R-survival")
+#. R/print.summary.coxph.S: gettext("Null model", domain = "R-survival")
+
+msgid "Null model"
+msgstr ""
+
+
+#: R/print.summary.survreg.S: 0
+#. R/print.summary.survreg.S: gettext("Number of Newton-Raphson Iterations: ", domain = "R-survival")
+
+msgid "Number of Newton-Raphson Iterations:"
+msgstr ""
+
+
+#: R/print.survdiff.S: 0
+#. R/print.survdiff.S: gettext("Observed")
+#. R/print.survdiff.S: gettext("Observed")
+
+msgid "Observed"
+msgstr ""
+
+
+#: R/print.coxph.penal.S: 0
+#. R/print.coxph.penal.S: stop("Penalized print function can't be used for a null model")
+
+msgid "Penalized print function can't be used for a null model"
+msgstr ""
+
+
+#: R/predict.survreg.penal.S: 0
+#. R/predict.survreg.penal.S: stop("Predictions are not available for sparse models")
+
+msgid "Predictions are not available for sparse models"
+msgstr ""
+
+
+#: R/agexact.fit.S: 0
+#: R/agreg.fit.R: 0
+#: R/coxexact.fit.R: 0
+#: R/coxph.fit.S: 0
+#: R/survreg.fit.S: 0
+#. R/agexact.fit.S: warning("Ran out of iterations and did not converge")
+#. R/agreg.fit.R: warning("Ran out of iterations and did not converge")
+#. R/coxexact.fit.R: warning("Ran out of iterations and did not converge")
+#. R/coxph.fit.S: warning("Ran out of iterations and did not converge")
+#. R/survreg.fit.S: warning("Ran out of iterations and did not converge")
+
+msgid "Ran out of iterations and did not converge"
+msgstr ""
+
+
+#: R/summary.ratetable.S: 0
+#. R/summary.ratetable.S: gettextf(" Rate table with %d dimensions:\n", ncat, domain = "R-survival")
+
+msgid "Rate table with %d dimensions:"
+msgstr ""
+
+
+#: R/survexp.fit.S: 0
+#. R/survexp.fit.S: stop("Ratetable does not have expected shape")
+
+msgid "Ratetable does not have expected shape"
+msgstr ""
+
+
+#: R/residuals.survreg.penal.S: 0
+#. R/residuals.survreg.penal.S: stop("Residuals are not available for sparse models")
+
+msgid "Residuals are not available for sparse models"
+msgstr ""
+
+
+#: R/anova.survreg.S: 0
+#: R/anova.survreglist.S: 0
+#. R/anova.survreg.S: gettext("Response: ")
+#. R/anova.survreglist.S: gettext("Response: ")
+
+msgid "Response:"
+msgstr ""
+
+
+#: R/print.summary.coxph.S: 0
+#: R/print.summary.coxph.penal.S: 0
+#. R/print.summary.coxph.S: gettextf("Robust = %s p=%s", format(round(x$robscore["test"], 2)), format(x$robscore["pvalue"]),     domain = "R-survival")
+#. R/print.summary.coxph.penal.S: gettextf("Robust = %s p=%s", format(round(x$rscore, 2)), format(1 - pchisq(x$rscore,     df)), domain = "R-survival")
+
+msgid "Robust = %s p=%s"
+msgstr ""
+
+
+#: R/print.summary.coxph.S: 0
+#. R/print.summary.coxph.S: gettextf("Rsquare= %s  (max possible=%s)", format(round(x$rsq["rsq"], 3)), format(round(x$rsq["maxrsq"],     3)), domain = "R-survival")
+
+msgid "Rsquare= %s  (max possible=%s)"
+msgstr ""
+
+
+#: R/anova.survreg.S: 0
+#: R/print.summary.survreg.S: 0
+#: R/print.survreg.S: 0
+#: R/print.survreg.penal.S: 0
+#. R/anova.survreg.S: gettextf("Scale fixed at %s", format(object$scale, digits = getOption("digits")))
+#. R/print.summary.survreg.S: gettextf("Scale fixed at %s", format(x$scale, digits = digits), domain = "R-survival")
+#. R/print.survreg.S: gettextf("Scale fixed at %s", format(x$scale), domain = "R-survival")
+#. R/print.survreg.penal.S: gettextf("Scale fixed at %s", format(x$scale), domain = "R-survival")
+
+msgid "Scale fixed at %s"
+msgstr ""
+
+
+#: R/print.survreg.S: 0
+#: R/print.survreg.penal.S: 0
+#. R/print.survreg.S: gettext("Scale:", domain = "R-survival")
+#. R/print.survreg.penal.S: gettext("Scale:", domain = "R-survival")
+
+msgid "Scale:"
+msgstr ""
+
+
+#: R/print.summary.survreg.S: 0
+#: R/print.survreg.S: 0
+#: R/print.survreg.penal.S: 0
+#. R/print.summary.survreg.S: gettextf("Scale= %s", format(x$scale, digits = digits), domain = "R-survival")
+#. R/print.survreg.S: gettextf("Scale= %s", format(x$scale), domain = "R-survival")
+#. R/print.survreg.penal.S: gettextf("Scale= %s", format(x$scale), domain = "R-survival")
+
+msgid "Scale= %s"
+msgstr ""
+
+
+#: R/print.summary.coxph.S: 0
+#: R/print.summary.coxph.penal.S: 0
+#. R/print.summary.coxph.S: gettextf("Score (logrank) test = %s on %s df, p=%s", format(round(x$sctest["test"],     2)), x$sctest["df"], format(x$sctest["pvalue"]), domain = "R-survival")
+#. R/print.summary.coxph.penal.S: gettextf("Score (logrank) test = %s on %s df, p=%s", format(round(sctest, 2)), df,     format(1 - pchisq(sctest, df)), domain = "R-survival")
+
+msgid "Score (logrank) test = %s on %s df, p=%s"
+msgstr ""
+
+
+#: R/plot.cox.zph.S: 0
+#. R/plot.cox.zph.S: stop("Spline fit is singular, try a smaller degrees of freedom")
+
+msgid "Spline fit is singular, try a smaller degrees of freedom"
+msgstr ""
+
+
+#: R/aareg.S: 0
+#. R/aareg.S: stop("Subsripting impossible, coefficient component not a matrix")
+
+msgid "Subsripting impossible, coefficient component not a matrix"
+msgstr ""
+
+
+#: R/survfit.R: 0
+#: R/survfitms.R: 0
+#. R/survfit.R: warning("Survfit object has only a single survival curve")
+#. R/survfitms.R: warning("Survfit object has only a single survival curve")
+
+msgid "Survfit object has only a single survival curve"
+msgstr ""
+
+
+#: R/print.survexp.S: 0
+#. R/print.survexp.S: gettextf(" Survival at time %s", x$time, domain = "R-survival")
+
+msgid "Survival at time %s"
+msgstr ""
+
+
+#: R/survfit.coxph.R: 0
+#. R/survfit.coxph.R: stop("Survival type of 'newdata' argument does not match the fitted model")
+
+msgid "Survival type of 'newdata' argument does not match the fitted model"
+msgstr ""
+
+
+#: R/print.survreg.S: 0
+#: R/print.survreg.penal.S: 0
+#: R/summary.survreg.S: 0
+#. R/print.survreg.S: gettext(" Survreg failed. ", domain = "R-survival")
+#. R/print.survreg.penal.S: gettext(" Survreg failed. ", domain = "R-survival")
+#. R/summary.survreg.S: gettext(" Survreg failed.")
+
+msgid "Survreg failed."
+msgstr ""
+
+
+#: R/anova.coxph.S: 0
+#: R/anova.survreg.S: 0
+#. R/anova.coxph.S: gettext("Terms added sequentially (first to last)")
+#. R/anova.survreg.S: gettext("Terms added sequentially (first to last)")
+
+msgid "Terms added sequentially (first to last)"
+msgstr ""
+
+
+#: R/model.frame.survreg.R: 0
+#: R/model.matrix.coxph.R: 0
+#. R/model.frame.survreg.R: stop("The coxph call is missing a formula!")
+#. R/model.matrix.coxph.R: stop("The coxph call is missing a formula!")
+
+msgid "The coxph call is missing a formula!"
+msgstr ""
+
+
+#: R/anova.survreglist.S: 0
+#. R/anova.survreglist.S: stop("The first model has a different response from the rest")
+
+msgid "The first model has a different response from the rest"
+msgstr ""
+
+
+#: R/plot.survfit.R: 0
+#. R/plot.survfit.R: stop("The graphical argument 'type' is not allowed")
+
+msgid "The graphical argument 'type' is not allowed"
+msgstr ""
+
+
+#: R/survfit.coxph.R: 0
+#. R/survfit.coxph.R: stop("The survfit function can not yet process coxph models with a tt term")
+
+msgid "The survfit function can not yet process coxph models with a tt term"
+msgstr ""
+
+
+#: R/aareg.S: 0
+#. R/aareg.S: stop("The threshold 'nmin' is too high, no model can be fit")
+
+msgid "The threshold 'nmin' is too high, no model can be fit"
+msgstr ""
+
+
+#: R/print.summary.survfit.S: 0
+#: R/print.summary.survfitms.S: 0
+#. R/print.summary.survfit.S: stop("There are no events to print. Please use the option censored=TRUE with the summary function to see the censored observations.")
+#. R/print.summary.survfitms.S: stop("There are no events to print. Please use the option censored=TRUE with the summary function to see the censored observations.")
+
+msgid "There are no events to print. Please use the option censored=TRUE with the summary function to see the censored observations."
+msgstr ""
+
+
+#: R/summary.survreg.S: 0
+#. R/summary.survreg.S: warning("This model has zero rank --- no summary is provided")
+
+msgid "This model has zero rank --- no summary is provided"
+msgstr ""
+
+
+#: R/ratetable.S: 0
+#. R/ratetable.S: stop("This should never be called!")
+
+msgid "This should never be called!"
+msgstr ""
+
+
+#: R/frailty.brent.S: 0
+#. R/frailty.brent.S: stop("Ties for 'max(y)', I surrender")
+
+msgid "Ties for 'max(y)', I surrender"
+msgstr ""
+
+
+#: R/lines.aareg.S: 0
+#: R/plot.aareg.S: 0
+#: R/plot.aareg.S: 0
+#: R/plot.aareg.S: 0
+#: R/plot.cox.zph.S: 0
+#: R/plot.cox.zph.S: 0
+#: R/plot.cox.zph.S: 0
+#. R/lines.aareg.S: gettext("Time")
+#. R/plot.aareg.S: gettext("Time")
+#. R/plot.aareg.S: gettext("Time")
+#. R/plot.aareg.S: gettext("Time")
+#. R/plot.cox.zph.S: gettext("Time")
+#. R/plot.cox.zph.S: gettext("Time")
+#. R/plot.cox.zph.S: gettext("Time")
+
+msgid "Time"
+msgstr ""
+
+
+#: R/coxph.R: 0
+#. R/coxph.R: stop("Time transform + model frame: code incomplete")
+
+msgid "Time transform + model frame: code incomplete"
+msgstr ""
+
+
+#: R/summary.pyears.S: 0
+#. R/summary.pyears.S: gettextf("Total number of person-years tabulated: %s\nTotal number of person-years off table: %s",     format(sum(object$data$pyears)), format(object$offtable), domain = "R-survival")
+
+msgid "Total number of person-years tabulated: %s\nTotal number of person-years off table: %s"
+msgstr ""
+
+
+#: R/print.survfit.S: 0
+#. R/print.survfit.S: stop("Truncation point for the mean is < smallest survival")
+#. R/print.survfit.S: stop("Truncation point for the mean is < smallest survival")
+
+msgid "Truncation point for the mean is < smallest survival"
+msgstr ""
+
+
+#: R/survexp.fit.S: 0
+#. R/survexp.fit.S: stop("Two columns marked for special handling as a US rate table")
+
+msgid "Two columns marked for special handling as a US rate table"
+msgstr ""
+
+
+#: R/survexp.R: 0
+#. R/survexp.R: stop("Variable not found in the ratetable:", (names(rcall))[is.na(temp)])
+
+msgid "Variable not found in the ratetable:"
+msgstr ""
+
+
+#: R/print.summary.coxph.S: 0
+#: R/print.summary.coxph.penal.S: 0
+#. R/print.summary.coxph.S: gettextf("Wald test = %s on %s df, p=%s", format(round(x$waldtest["test"], 2)), x$waldtest["df"],     format(x$waldtest["pvalue"]), domain = "R-survival")
+#. R/print.summary.coxph.penal.S: gettextf("Wald test = %s on %s df, p=%s", format(round(x$wald.test, 2)), df, format(1 -     pchisq(x$wald.test, df)), domain = "R-survival")
+
+msgid "Wald test = %s on %s df, p=%s"
+msgstr ""
+
+
+#: R/agreg.fit.R: 0
+#. R/agreg.fit.R: stop("Wrong length for inital values")
+
+msgid "Wrong length for inital values"
+msgstr ""
+
+
+#: R/coxph.R: 0
+#. R/coxph.R: gettextf("X matrix deemed to be singular; variable %s", paste(vars, collapse = " "))
+
+msgid "X matrix deemed to be singular; variable %s"
+msgstr ""
+
+
+#: R/pyears.R: 0
+#. R/pyears.R: stop("Y has too many columns")
+
+msgid "Y has too many columns"
+msgstr ""
+
+
+#: R/survexp.R: 0
+#. R/survexp.R: stop("a 'response' is required in the formula unless method='ederer'")
+
+msgid "a 'response' is required in the formula unless method='ederer'"
+msgstr ""
+
+
+#: R/survfit.R: 0
+#. R/survfit.R: stop("a formula argument is required")
+
+msgid "a formula argument is required"
+msgstr ""
+
+
+#: R/predict.coxph.R: 0
+#. R/predict.coxph.R: stop("a name given in the terms argument was not found in the model")
+
+msgid "a name given in the terms argument was not found in the model"
+msgstr ""
+
+
+#: R/anova.coxph.S: 0
+#. R/anova.coxph.S: stop("all arguments must be an objects of class \"coxph\" or \"coxme\"")
+
+msgid "all arguments must be an objects of class \"coxph\" or \"coxme\""
+msgstr ""
+
+
+#: R/survfitCI.R: 0
+#. R/survfitCI.R: warning("an observation transitions to it's starting state, transition ignored")
+
+msgid "an observation transitions to it's starting state, transition ignored"
+msgstr ""
+
+
+#: R/coxph.R: 0
+#. R/coxph.R: gettextf("argument %s not matched", names(extraArgs)[indx == 0L])
+
+msgid "argument %s not matched"
+msgstr ""
+
+
+#: R/attrassign.R: 0
+#. R/attrassign.R: stop("argument is not really a model matrix")
+
+msgid "argument is not really a model matrix"
+msgstr ""
+
+
+#: R/frailty.controldf.S: 0
+#. R/frailty.controldf.S: gettextf("bisect:new theta= %s", format(mean(x[b1 + 0:1])), domain = "R-survival")
+
+msgid "bisect:new theta= %s"
+msgstr ""
+
+
+#: R/tcut.S: 0
+#. R/tcut.S: stop("breaks must be given in ascending order and contain no NA's")
+
+msgid "breaks must be given in ascending order and contain no NA's"
+msgstr ""
+
+
+#: R/pyears.R: 0
+#: R/survexp.R: 0
+#. R/pyears.R: stop("can have only 1 'ratetable()' call in a formula")
+#. R/survexp.R: stop("can have only 1 'ratetable()' call in a formula")
+
+msgid "can have only 1 'ratetable()' call in a formula"
+msgstr ""
+
+
+#: R/survobrien.S: 0
+#. R/survobrien.S: stop("can have only 1 cluster term")
+
+msgid "can have only 1 cluster term"
+msgstr ""
+
+
+#: R/survfit.R: 0
+#: R/survfit.formula.S: 0
+#. R/survfit.R: stop("can not have two cluster terms")
+#. R/survfit.formula.S: stop("can not have two cluster terms")
+
+msgid "can not have two cluster terms"
+msgstr ""
+
+
+#: R/survfitKM.S: 0
+#. R/survfitKM.S: stop("can only handle right censored or counting data")
+
+msgid "can only handle right censored or counting data"
+msgstr ""
+
+
+#: R/pyears.R: 0
+#. R/pyears.R: stop("cannot deal with models that contain an offset")
+
+msgid "cannot deal with models that contain an offset"
+msgstr ""
+
+
+#: R/anova.coxph.S: 0
+#: R/anova.coxphlist.S: 0
+#. R/anova.coxph.S: stop("cannot do anova tables with robust variances")
+#. R/anova.coxphlist.S: stop("cannot do anova tables with robust variances")
+
+msgid "cannot do anova tables with robust variances"
+msgstr ""
+
+
+#: R/pyears.R: 0
+#: R/survexp.fit.S: 0
+#. R/pyears.R: stop("cannot find an appropriate date class")
+#. R/survexp.fit.S: stop("cannot find an appropriate date class")
+
+msgid "cannot find an appropriate date class"
+msgstr ""
+
+
+#: R/agreg.fit.R: 0
+#. R/agreg.fit.R: stop("cannot fit a Cox model with 0 failures")
+
+msgid "cannot fit a Cox model with 0 failures"
+msgstr ""
+
+
+#: R/survcallback.S: 0
+#: R/survpenal.fit.S: 0
+#. R/survcallback.S: stop("cannot fit a model with no coefficients other than sparse ones")
+#. R/survpenal.fit.S: stop("cannot fit a model with no coefficients other than sparse ones")
+
+msgid "cannot fit a model with no coefficients other than sparse ones"
+msgstr ""
+
+
+#: R/frailty.gamma.S: 0
+#: R/frailty.gaussian.S: 0
+#: R/frailty.gaussian.S: 0
+#: R/frailty.t.S: 0
+#. R/frailty.gamma.S: stop("cannot give both a 'df' and 'theta' argument")
+#. R/frailty.gaussian.S: stop("cannot give both a 'df' and 'theta' argument")
+#. R/frailty.gaussian.S: stop("cannot give both a 'df' and 'theta' argument")
+#. R/frailty.t.S: stop("cannot give both a 'df' and 'theta' argument")
+
+msgid "cannot give both a 'df' and 'theta' argument"
+msgstr ""
+
+
+#: R/survfit.coxph.R: 0
+#. R/survfit.coxph.R: gettextf("cannot handle \"%s\" type survival data", type)
+
+msgid "cannot handle \"%s\" type survival data"
+msgstr ""
+
+
+#: R/agexact.fit.S: 0
+#: R/coxexact.fit.R: 0
+#. R/agexact.fit.S: stop("cannot handle a null model + exact calculation (yet)")
+#. R/coxexact.fit.R: stop("cannot handle a null model + exact calculation (yet)")
+
+msgid "cannot handle a null model + exact calculation (yet)"
+msgstr ""
+
+
+#: R/survfit.R: 0
+#: R/survfit.formula.S: 0
+#. R/survfit.R: stop("cannot have both a cluster term and an id variable")
+#. R/survfit.formula.S: stop("cannot have both a cluster term and an id variable")
+
+msgid "cannot have both a cluster term and an id variable"
+msgstr ""
+
+
+#: R/survpenal.fit.S: 0
+#: R/survreg.fit.S: 0
+#. R/survpenal.fit.S: stop("cannot have both a fixed scale and strata")
+#. R/survreg.fit.S: stop("cannot have both a fixed scale and strata")
+
+msgid "cannot have both a fixed scale and strata"
+msgstr ""
+
+
+#: R/survdiff.S: 0
+#. R/survdiff.S: stop("cannot have both an offset and groups")
+
+msgid "cannot have both an offset and groups"
+msgstr ""
+
+
+#: R/frailty.t.S: 0
+#. R/frailty.t.S: stop("cannot have df <3 for the t-frailty")
+
+msgid "cannot have df <3 for the t-frailty"
+msgstr ""
+
+
+#: R/survfitCI.R: 0
+#. R/survfitCI.R: stop("cannot have duplicate 'id' values with (time, status) data")
+
+msgid "cannot have duplicate 'id' values with (time, status) data"
+msgstr ""
+
+
+#: R/survfitCI.R: 0
+#. R/survfitCI.R: stop("cannot have start time == stop time")
+
+msgid "cannot have start time == stop time"
+msgstr ""
+
+
+#: R/survfit.R: 0
+#: R/survfit.formula.S: 0
+#. R/survfit.R: stop("cannot use both the 'etype' and 'istate' arguments")
+#. R/survfit.formula.S: stop("cannot use both the 'etype' and 'istate' arguments")
+
+msgid "cannot use both the 'etype' and 'istate' arguments"
+msgstr ""
+
+
+#: R/survfit.R: 0
+#. R/survfit.R: stop("cannot use both the 'etype' argument and 'mstate' survival type")
+
+msgid "cannot use both the 'etype' argument and 'mstate' survival type"
+msgstr ""
+
+
+#: R/survfit.formula.S: 0
+#. R/survfit.formula.S: stop("cannot use both the 'etype' argument and mstate survival type")
+
+msgid "cannot use both the 'etype' argument and mstate survival type"
+msgstr ""
+
+
+#: R/survexp.R: 0
+#. R/survexp.R: stop("cannot use tcut variables in expected survival")
+
+msgid "cannot use tcut variables in expected survival"
+msgstr ""
+
+
+#: R/agexact.fit.S: 0
+#: R/coxexact.fit.R: 0
+#. R/agexact.fit.S: stop("case weights are not supported for the exact method")
+#. R/coxexact.fit.R: stop("case weights are not supported for the exact method")
+
+msgid "case weights are not supported for the exact method"
+msgstr ""
+
+
+#: R/aareg.S: 0
+#: R/coxph.R: 0
+#: R/survreg.S: 0
+#. R/aareg.S: stop("cluster can not be used in an interaction")
+#. R/coxph.R: stop("cluster can not be used in an interaction")
+#. R/survreg.S: stop("cluster can not be used in an interaction")
+
+msgid "cluster can not be used in an interaction"
+msgstr ""
+
+
+#: R/cch.R: 0
+#. R/cch.R: stop("cohort size must be a scalar for unstratified analysis")
+
+msgid "cohort size must be a scalar for unstratified analysis"
+msgstr ""
+
+
+#: R/cch.R: 0
+#. R/cch.R: gettextf("cox model doesn't support \"%s\" survival data", type)
+
+msgid "cox model doesn't support \"%s\" survival data"
+msgstr ""
+
+
+#: R/survfitCI.R: 0
+#. R/survfitCI.R: gettextf("cumulative incidence computation doesn't support \"%s\" survival data",     type)
+
+msgid "cumulative incidence computation doesn't support \"%s\" survival data"
+msgstr ""
+
+
+#: R/match.ratetable.S: 0
+#. R/match.ratetable.S: gettextf("data has a date type variable, but the reference ratetable is not a date for variable %s",     dimid[indx])
+
+msgid "data has a date type variable, but the reference ratetable is not a date for variable %s"
+msgstr ""
+
+
+#: R/survdiff.fit.S: 0
+#. R/survdiff.fit.S: stop("data length mismatch")
+#. R/survdiff.fit.S: stop("data length mismatch")
+
+msgid "data length mismatch"
+msgstr ""
+
+
+#: R/pyears.R: 0
+#. R/pyears.R: stop("data set has 0 observations")
+
+msgid "data set has 0 observations"
+msgstr ""
+
+
+#: R/survexp.R: 0
+#. R/survexp.R: stop("data set has 0 rows")
+
+msgid "data set has 0 rows"
+msgstr ""
+
+
+#: R/survreg.S: 0
+#. R/survreg.S: stop("default parameters must be a numeric vector")
+
+msgid "default parameters must be a numeric vector"
+msgstr ""
+
+
+#: R/survregDtest.S: 0
+#. R/survregDtest.S: gettext("density function must return a 5 column matrix")
+
+msgid "density function must return a 5 column matrix"
+msgstr ""
+
+
+#: R/survpenal.fit.S: 0
+#: R/survreg.fit.S: 0
+#. R/survpenal.fit.S: stop("density function returned an invalid matrix")
+#. R/survreg.fit.S: stop("density function returned an invalid matrix")
+
+msgid "density function returned an invalid matrix"
+msgstr ""
+
+
+#: R/coxph.detail.S: 0
+#. R/coxph.detail.S: gettextf("detailed output is not available for the %s method", method)
+
+msgid "detailed output is not available for the %s method"
+msgstr ""
+
+
+#: R/is.ratetable.S: 0
+#. R/is.ratetable.S: gettextf("dimname %d is the wrong length", i)
+
+msgid "dimname %d is the wrong length"
+msgstr ""
+
+
+#: R/survexp.R: 0
+#. R/survexp.R: stop("either a 'times' argument or a 'response' is needed")
+
+msgid "either a 'times' argument or a 'response' is needed"
+msgstr ""
+
+
+#: R/pyears.R: 0
+#. R/pyears.R: stop("follow-up time must appear in the formula")
+
+msgid "follow-up time must appear in the formula"
+msgstr ""
+
+
+#: R/survexp.R: 0
+#. R/survexp.R: stop("for individual survival an observation time must be given")
+
+msgid "for individual survival an observation time must be given"
+msgstr ""
+
+
+#: R/coxph.control.S: 0
+#. R/coxph.control.S: warning("for numerical accuracy, tolerance should be < eps")
+
+msgid "for numerical accuracy, tolerance should be < eps"
+msgstr ""
+
+
+#: R/frailty.S: 0
+#. R/frailty.S: gettextf("function %s was not found", sQuote(temp))
+
+msgid "function %s was not found"
+msgstr ""
+
+
+#: R/survfitCI.R: 0
+#. R/survfitCI.R: gettextf("gap in follow-up, id %s", (id[indx1])[who])
+
+msgid "gap in follow-up, id %s"
+msgstr ""
+
+
+#: R/survfit.coxph.R: 0
+#. R/survfit.coxph.R: stop("id=NULL is an invalid argument")
+
+msgid "id=NULL is an invalid argument"
+msgstr ""
+
+
+#: R/is.ratetable.S: 0
+#. R/is.ratetable.S: gettext("illegal 'factor' attribute of <0")
+
+msgid "illegal 'factor' attribute of <0"
+msgstr ""
+
+
+#: R/is.ratetable.S: 0
+#. R/is.ratetable.S: gettext("illegal 'factor' level of NA")
+
+msgid "illegal 'factor' level of NA"
+msgstr ""
+
+
+#: R/survexp.R: 0
+#. R/survexp.R: stop("illegal response value")
+
+msgid "illegal response value"
+msgstr ""
+
+
+#: R/coxpenal.fit.R: 0
+#: R/survcallback.S: 0
+#: R/survpenal.fit.S: 0
+#. R/coxpenal.fit.R: stop("incorrect length in 'coxlist1' object")
+#. R/survcallback.S: stop("incorrect length in 'coxlist1' object")
+#. R/survpenal.fit.S: stop("incorrect length in 'coxlist1' object")
+
+msgid "incorrect length in 'coxlist1' object"
+msgstr ""
+
+
+#: R/coxpenal.fit.R: 0
+#: R/survpenal.fit.S: 0
+#. R/coxpenal.fit.R: gettextf("inner loop failed to coverge for iterations %s", paste(iterfail, collapse = " "))
+#. R/survpenal.fit.S: gettextf("inner loop failed to coverge for iterations %s", paste(sQuote(iterfail),     collapse = ", "))
+
+msgid "inner loop failed to coverge for iterations %s"
+msgstr ""
+
+
+#: R/print.coxph.S: 0
+#: R/summary.coxph.S: 0
+#: R/summary.coxph.penal.S: 0
+#. R/print.coxph.S: stop("input is not valid")
+#. R/summary.coxph.S: stop("input is not valid")
+#. R/summary.coxph.penal.S: stop("input is not valid")
+
+msgid "input is not valid"
+msgstr ""
+
+
+#: R/aareg.taper.S: 0
+#: R/lines.survfit.coxph.S: 0
+#: R/plot.survfit.R: 0
+#: R/plot.survfit.R: 0
+#: R/plot.survfit.R: 0
+#: R/plot.survfit.R: 0
+#: R/plot.survfit.R: 0
+#: R/predict.coxph.R: 0
+#: R/pspline.S: 0
+#: R/pspline.S: 0
+#: R/pyears.R: 0
+#: R/survexp.R: 0
+#: R/survexp.fit.S: 0
+#: R/survpenal.fit.S: 0
+#: R/survreg.fit.S: 0
+#: R/survreg.fit.S: 0
+#. R/aareg.taper.S: gettextf("invalid '%s' argument", "taper")
+#. R/lines.survfit.coxph.S: gettextf("invalid '%s' argument", "mark.time")
+#. R/plot.survfit.R: gettextf("invalid '%s' argument", "fun")
+#. R/plot.survfit.R: gettextf("invalid '%s' argument", "conf.int")
+#. R/plot.survfit.R: gettextf("invalid '%s' argument", "fun")
+#. R/plot.survfit.R: gettextf("invalid '%s' argument", "conf.int")
+#. R/plot.survfit.R: gettextf("invalid '%s' argument", "fun")
+#. R/predict.coxph.R: gettextf("invalid '%s' argument", "terms")
+#. R/pspline.S: gettextf("invalid '%s' argument", "theta")
+#. R/pspline.S: gettextf("invalid '%s' argument", "Boundary.knots")
+#. R/pyears.R: gettextf("invalid '%s' argument", "rmap")
+#. R/survexp.R: gettextf("invalid '%s' argument", "rmap")
+#. R/survexp.fit.S: gettextf("invalid '%s' argument", "death")
+#. R/survpenal.fit.S: gettextf("invalid '%s' argument", "scale")
+#. R/survreg.fit.S: gettextf("invalid '%s' argument", "scale")
+#. R/survreg.fit.S: gettextf("invalid '%s' argument", "strata")
+
+msgid "invalid '%s' argument"
+msgstr ""
+
+
+#: R/coxpenal.fit.R: 0
+#: R/survcallback.S: 0
+#: R/survpenal.fit.S: 0
+#: R/survpenal.fit.S: 0
+#. R/coxpenal.fit.R: gettextf("invalid '%s' or '%s' argument", "pcols", "pattr")
+#. R/survcallback.S: gettextf("invalid '%s' or '%s' argument", "pcols", "pattr")
+#. R/survpenal.fit.S: gettextf("invalid '%s' or '%s' argument", "strata", "nstrat")
+#. R/survpenal.fit.S: gettextf("invalid '%s' or '%s' argument", "pcols", "pattr")
+
+msgid "invalid '%s' or '%s' argument"
+msgstr ""
+
+
+#: R/survcallback.S: 0
+#: R/survpenal.fit.S: 0
+#. R/survcallback.S: stop("invalid 'coxlist1' object")
+#. R/survpenal.fit.S: stop("invalid 'coxlist1' object")
+
+msgid "invalid 'coxlist1' object"
+msgstr ""
+
+
+#: R/survpenal.fit.S: 0
+#: R/survreg.fit.S: 0
+#. R/survpenal.fit.S: stop("invalid 'weights' argument, must be >0")
+#. R/survreg.fit.S: stop("invalid 'weights' argument, must be >0")
+
+msgid "invalid 'weights' argument, must be >0"
+msgstr ""
+
+
+#: R/survdiff.fit.S: 0
+#. R/survdiff.fit.S: stop("invalid 'y' matrix")
+
+msgid "invalid 'y' matrix"
+msgstr ""
+
+
+#: R/coxph.control.S: 0
+#. R/coxph.control.S: stop("invalid convergence criteria")
+
+msgid "invalid convergence criteria"
+msgstr ""
+
+
+#: R/survregDtest.S: 0
+#. R/survregDtest.S: gettext("invalid distribution name")
+
+msgid "invalid distribution name"
+msgstr ""
+
+
+#: R/survreg.S: 0
+#. R/survreg.S: stop("invalid distribution object")
+#. R/survreg.S: stop("invalid distribution object")
+
+msgid "invalid distribution object"
+msgstr ""
+
+
+#: R/Surv.S: 0
+#. R/Surv.S: warning("invalid interval: start > stop, NA created")
+#. R/Surv.S: warning("invalid interval: start > stop, NA created")
+
+msgid "invalid interval: start > stop, NA created"
+msgstr ""
+
+
+#: R/Surv.S: 0
+#. R/Surv.S: stop("invalid operation on a survival time")
+#. R/Surv.S: stop("invalid operation on a survival time")
+#. R/Surv.S: stop("invalid operation on a survival time")
+
+msgid "invalid operation on a survival time"
+msgstr ""
+
+
+#: R/survreg.S: 0
+#. R/survreg.S: stop("invalid parameter names")
+
+msgid "invalid parameter names"
+msgstr ""
+
+
+#: R/quantile.survfit.R: 0
+#. R/quantile.survfit.R: stop("invalid probability")
+#. R/quantile.survfit.R: stop("invalid probability")
+#. R/quantile.survfit.R: stop("invalid probability")
+#. R/quantile.survfit.R: stop("invalid probability")
+
+msgid "invalid probability"
+msgstr ""
+
+
+#: R/match.ratetable.S: 0
+#: R/pyears.R: 0
+#: R/pyears.R: 0
+#: R/survexp.R: 0
+#. R/match.ratetable.S: stop("invalid rate table")
+#. R/pyears.R: stop("invalid rate table")
+#. R/pyears.R: stop("invalid rate table")
+#. R/survexp.R: stop("invalid rate table")
+
+msgid "invalid rate table"
+msgstr ""
+
+
+#: R/survreg.S: 0
+#. R/survreg.S: stop("invalid scale value")
+
+msgid "invalid scale value"
+msgstr ""
+
+
+#: R/Surv.S: 0
+#. R/Surv.S: stop("invalid status value")
+
+msgid "invalid status value"
+msgstr ""
+
+
+#: R/Surv.S: 0
+#. R/Surv.S: warning("invalid status value, converted to NA")
+#. R/Surv.S: warning("invalid status value, converted to NA")
+
+msgid "invalid status value, converted to NA"
+msgstr ""
+
+
+#: R/Surv.S: 0
+#. R/Surv.S: stop("invalid status value, must be logical or numeric")
+#. R/Surv.S: stop("invalid status value, must be logical or numeric")
+
+msgid "invalid status value, must be logical or numeric"
+msgstr ""
+
+
+#: R/survreg.S: 0
+#. R/survreg.S: stop("invalid survival times for this distribution")
+
+msgid "invalid survival times for this distribution"
+msgstr ""
+
+
+#: R/survreg.S: 0
+#. R/survreg.S: stop("invalid survival type")
+
+msgid "invalid survival type"
+msgstr ""
+
+
+#: R/coxph.getdata.S: 0
+#. R/coxph.getdata.S: stop("invalid terms component of fit")
+
+msgid "invalid terms component of fit"
+msgstr ""
+
+
+#: R/coxph.detail.S: 0
+#: R/predict.survreg.S: 0
+#: R/residuals.coxph.S: 0
+#: R/residuals.survreg.S: 0
+#. R/coxph.detail.S: stop("invalid terms component of object")
+#. R/predict.survreg.S: stop("invalid terms component of object")
+#. R/residuals.coxph.S: stop("invalid terms component of object")
+#. R/residuals.survreg.S: stop("invalid terms component of object")
+
+msgid "invalid terms component of object"
+msgstr ""
+
+
+#: R/survexp.R: 0
+#. R/survexp.R: stop("invalid time point requested")
+
+msgid "invalid time point requested"
+msgstr ""
+
+
+#: R/coxph.control.S: 0
+#. R/coxph.control.S: stop("invalid value for iterations")
+
+msgid "invalid value for iterations"
+msgstr ""
+
+
+#: R/agreg.fit.R: 0
+#: R/coxpenal.fit.R: 0
+#: R/coxph.fit.S: 0
+#. R/agreg.fit.R: stop("invalid weights, must be >0")
+#. R/coxpenal.fit.R: stop("invalid weights, must be >0")
+#. R/coxph.fit.S: stop("invalid weights, must be >0")
+
+msgid "invalid weights, must be >0"
+msgstr ""
+
+
+#: R/survConcordance.R: 0
+#. R/survConcordance.R: gettextf("left hand side of the formula must be a numeric vector or an object of class %s",     dQuote("Surv"))
+
+msgid "left hand side of the formula must be a numeric vector or an object of class %s"
+msgstr ""
+
+
+#: R/coxpenal.fit.R: 0
+#: R/survcallback.S: 0
+#: R/survpenal.fit.S: 0
+#. R/coxpenal.fit.R: stop("length error in 'coxlist2' object")
+#. R/survcallback.S: stop("length error in 'coxlist2' object")
+#. R/survpenal.fit.S: stop("length error in 'coxlist2' object")
+
+msgid "length error in 'coxlist2' object"
+msgstr ""
+
+
+#: R/is.ratetable.S: 0
+#. R/is.ratetable.S: gettext("length of the data does not match 'prod(dim)'")
+
+msgid "length of the data does not match 'prod(dim)'"
+msgstr ""
+
+
+#: R/match.ratetable.S: 0
+#. R/match.ratetable.S: gettextf("levels do not match for 'ratetable()' variable %s", dimid[i])
+
+msgid "levels do not match for 'ratetable()' variable %s"
+msgstr ""
+
+
+#: R/print.coxph.null.S: 0
+#. R/print.coxph.null.S: gettextf("log likelihood=%s", format(x$loglik), domain = "R-survival")
+
+msgid "log likelihood=%s"
+msgstr ""
+
+
+#: R/cch.R: 0
+#. R/cch.R: gettextf("method (%s) requires 'stratum'", method)
+
+msgid "method (%s) requires 'stratum'"
+msgstr ""
+
+
+#: R/survregDtest.S: 0
+#. R/survregDtest.S: gettext("missing a distribution name")
+
+msgid "missing a distribution name"
+msgstr ""
+
+
+#: R/is.ratetable.S: 0
+#. R/is.ratetable.S: gettext("missing attribute:")
+
+msgid "missing attribute:"
+msgstr ""
+
+
+#: R/survreg.fit.S: 0
+#. R/survreg.fit.S: stop("missing density function in the definition of the distribution")
+
+msgid "missing density function in the definition of the distribution"
+msgstr ""
+
+
+#: R/survregDtest.S: 0
+#. R/survregDtest.S: gettextf("missing or invalid '%s' component", "trans")
+#. R/survregDtest.S: gettextf("missing or invalid '%s' component", "itrans")
+#. R/survregDtest.S: gettextf("missing or invalid '%s' component", "dtrans")
+
+msgid "missing or invalid '%s' component"
+msgstr ""
+
+
+#: R/survregDtest.S: 0
+#. R/survregDtest.S: gettextf("missing or invalid '%s' function", "init")
+#. R/survregDtest.S: gettextf("missing or invalid '%s' function", "deviance")
+#. R/survregDtest.S: gettextf("missing or invalid '%s' function", "density")
+#. R/survregDtest.S: gettextf("missing or invalid '%s' function", "quantile")
+
+msgid "missing or invalid '%s' function"
+msgstr ""
+
+
+#: R/is.ratetable.S: 0
+#. R/is.ratetable.S: gettext("missing the 'type' attribute")
+
+msgid "missing the 'type' attribute"
+msgstr ""
+
+
+#: R/anova.coxmelist.R: 0
+#. R/anova.coxmelist.R: stop("models do not have the same number of events")
+
+msgid "models do not have the same number of events"
+msgstr ""
+
+
+#: R/anova.coxmelist.R: 0
+#. R/anova.coxmelist.R: stop("models do not have the same size of dataset")
+
+msgid "models do not have the same size of dataset"
+msgstr ""
+
+
+#: R/anova.coxphlist.S: 0
+#. R/anova.coxphlist.S: stop("models were not all fitted to the same size of dataset")
+
+msgid "models were not all fitted to the same size of dataset"
+msgstr ""
+
+
+#: R/anova.coxmelist.R: 0
+#: R/anova.coxphlist.S: 0
+#. R/anova.coxmelist.R: gettextf("models with response %s removed because response differs from model 1",     deparse(responses[!sameresp]))
+#. R/anova.coxphlist.S: gettextf("models with response %s removed because response differs from model 1",     deparse(responses[!sameresp]))
+
+msgid "models with response %s removed because response differs from model 1"
+msgstr ""
+
+
+#: R/cch.R: 0
+#. R/cch.R: stop("multiple records per id not allowed")
+
+msgid "multiple records per id not allowed"
+msgstr ""
+
+
+#: R/pyears.R: 0
+#: R/survexp.R: 0
+#. R/pyears.R: stop("negative follow up time")
+#. R/survexp.R: stop("negative follow up time")
+
+msgid "negative follow up time"
+msgstr ""
+
+
+#: R/pyears.R: 0
+#. R/pyears.R: stop("negative survival time")
+
+msgid "negative survival time"
+msgstr ""
+
+
+#: R/survexp.fit.S: 0
+#. R/survexp.fit.S: stop("negative time point requested")
+
+msgid "negative time point requested"
+msgstr ""
+
+
+#: R/frailty.controlaic.S: 0
+#: R/frailty.controldf.S: 0
+#: R/frailty.controlgam.S: 0
+#: R/frailty.controlgam.S: 0
+#: R/frailty.controlgauss.S: 0
+#: R/frailty.controlgauss.S: 0
+#. R/frailty.controlaic.S: gettextf("new theta= %s", format(newtheta), domain = "R-survival")
+#. R/frailty.controldf.S: gettextf("new theta= %s", format(x[b1] + exp(newx)), domain = "R-survival")
+#. R/frailty.controlgam.S: gettextf("new theta= %s", theta, domain = "R-survival")
+#. R/frailty.controlgam.S: gettextf("new theta= %s", format(newtheta), domain = "R-survival")
+#. R/frailty.controlgauss.S: gettextf("new theta= %s", theta, domain = "R-survival")
+#. R/frailty.controlgauss.S: gettextf("new theta= %s", format(newtheta), domain = "R-survival")
+
+msgid "new theta= %s"
+msgstr ""
+
+
+#: R/coxph.R: 0
+#: R/survobrien.S: 0
+#. R/coxph.R: stop("no (non-missing) observations")
+#. R/survobrien.S: stop("no (non-missing) observations")
+
+msgid "no (non-missing) observations"
+msgstr ""
+
+
+#: R/survobrien.S: 0
+#. R/survobrien.S: stop("no continuous variables to modify")
+
+msgid "no continuous variables to modify"
+msgstr ""
+
+
+#: R/survdiff.S: 0
+#. R/survdiff.S: stop("no groups to test")
+
+msgid "no groups to test"
+msgstr ""
+
+
+#: R/print.summary.survfit.S: 0
+#: R/print.summary.survfitms.S: 0
+#. R/print.summary.survfit.S: gettextf("no information available using start.time = %s.", x$start.time)
+#. R/print.summary.survfitms.S: gettextf("no information available using start.time = %s.", x$start.time)
+
+msgid "no information available using start.time = %s."
+msgstr ""
+
+
+#: R/Surv.S: 0
+#. R/Surv.S: stop("no time variable!")
+
+msgid "no time variable!"
+msgstr ""
+
+
+#: R/match.ratetable.S: 0
+#. R/match.ratetable.S: gettextf("non-unique ratetable match for variable %s", dimid[i])
+
+msgid "non-unique ratetable match for variable %s"
+msgstr ""
+
+
+#: R/survreg.distributions.S: 0
+#. R/survreg.distributions.S: stop("number of degrees of freedom must be >=3")
+
+msgid "number of degrees of freedom must be >=3"
+msgstr ""
+
+
+#: R/print.coxph.S: 0
+#: R/print.summary.coxph.S: 0
+#: R/print.summary.coxph.penal.S: 0
+#. R/print.coxph.S: gettextf("number of events= %d", x$nevent, domain = "R-survival")
+#. R/print.summary.coxph.S: gettextf("number of events= %d", x$nevent, domain = "R-survival")
+#. R/print.summary.coxph.penal.S: gettextf("number of events= %d", x$nevent, domain = "R-survival")
+
+msgid "number of events= %d"
+msgstr ""
+
+
+#: R/tcut.S: 0
+#. R/tcut.S: stop("number of labels must be 1 less than number of break points")
+
+msgid "number of labels must be 1 less than number of break points"
+msgstr ""
+
+
+#: R/tcut.S: 0
+#. R/tcut.S: stop("number of labels must equal number of intervals")
+
+msgid "number of labels must equal number of intervals"
+msgstr ""
+
+
+#: R/cch.R: 0
+#. R/cch.R: stop("number of records greater than cohort size")
+
+msgid "number of records greater than cohort size"
+msgstr ""
+
+
+#: R/survfit.R: 0
+#: R/survfit.formula.S: 0
+#. R/survfit.R: warning("offset term ignored")
+#. R/survfit.formula.S: warning("offset term ignored")
+
+msgid "offset term ignored"
+msgstr ""
+
+
+#: R/survConcordance.R: 0
+#. R/survConcordance.R: stop("offset terms not allowed")
+
+msgid "offset terms not allowed"
+msgstr ""
+
+
+#: R/ridge.S: 0
+#. R/ridge.S: stop("only one of 'df' or 'theta' arguments can be specified")
+
+msgid "only one of 'df' or 'theta' arguments can be specified"
+msgstr ""
+
+
+#: R/survConcordance.R: 0
+#. R/survConcordance.R: stop("only one predictor variable allowed")
+
+msgid "only one predictor variable allowed"
+msgstr ""
+
+
+#: R/coxpenal.fit.R: 0
+#: R/survcallback.S: 0
+#: R/survpenal.fit.S: 0
+#. R/coxpenal.fit.R: stop("only one sparse penalty term allowed")
+#. R/survcallback.S: stop("only one sparse penalty term allowed")
+#. R/survpenal.fit.S: stop("only one sparse penalty term allowed")
+
+msgid "only one sparse penalty term allowed"
+msgstr ""
+
+
+#: R/pyears.R: 0
+#. R/pyears.R: stop("only right-censored and counting process survival types are supported")
+
+msgid "only right-censored and counting process survival types are supported"
+msgstr ""
+
+
+#: R/is.ratetable.S: 0
+#. R/is.ratetable.S: gettext("only the last dimension can be interpolated")
+
+msgid "only the last dimension can be interpolated"
+msgstr ""
+
+
+#: R/print.survreg.penal.S: 0
+#. R/print.survreg.penal.S: stop("penalized fits must have an intercept!")
+
+msgid "penalized fits must have an intercept!"
+msgstr ""
+
+
+#: R/summary.coxph.penal.S: 0
+#. R/summary.coxph.penal.S: stop("penalized summary function can't be used for a null model")
+
+msgid "penalized summary function can't be used for a null model"
+msgstr ""
+
+
+#: R/coxph.R: 0
+#: R/survreg.S: 0
+#. R/coxph.R: stop("penalty terms cannot be in an interaction")
+#. R/survreg.S: stop("penalty terms cannot be in an interaction")
+
+msgid "penalty terms cannot be in an interaction"
+msgstr ""
+
+
+#: R/cch.R: 0
+#. R/cch.R: stop("permissible values for subcohort indicator are 0/1 or TRUE/FALSE")
+
+msgid "permissible values for subcohort indicator are 0/1 or TRUE/FALSE"
+msgstr ""
+
+
+#: R/cch.R: 0
+#. R/cch.R: stop("population smaller than sample in some strata")
+
+msgid "population smaller than sample in some strata"
+msgstr ""
+
+
+#: R/pyears.R: 0
+#. R/pyears.R: stop("ratetable does not have expected shape")
+
+msgid "ratetable does not have expected shape"
+msgstr ""
+
+
+#: R/survregDtest.S: 0
+#. R/survregDtest.S: gettext("reference distribution was not found")
+
+msgid "reference distribution was not found"
+msgstr ""
+
+
+#: R/aareg.S: 0
+#: R/anova.survreg.S: 0
+#: R/cch.R: 0
+#: R/coxph.R: 0
+#: R/survdiff.S: 0
+#: R/survfit.R: 0
+#: R/survfit.R: 0
+#: R/survfit.formula.S: 0
+#: R/survfit.formula.S: 0
+#: R/survobrien.S: 0
+#: R/survreg.S: 0
+#. R/aareg.S: gettextf("response is not an object of class %s", dQuote("Surv"))
+#. R/anova.survreg.S: gettextf("response is not an object of class %s", dQuote("Surv"))
+#. R/cch.R: gettextf("response is not an object of class %s", dQuote("Surv"))
+#. R/coxph.R: gettextf("response is not an object of class %s", dQuote("Surv"))
+#. R/survdiff.S: gettextf("response is not an object of class %s", dQuote("Surv"))
+#. R/survfit.R: gettextf("response is not an object of class %s", dQuote("Surv"))
+#. R/survfit.R: gettextf("response is not an object of class %s", dQuote("Surv"))
+#. R/survfit.formula.S: gettextf("response is not an object of class %s", dQuote("Surv"))
+#. R/survfit.formula.S: gettextf("response is not an object of class %s", dQuote("Surv"))
+#. R/survobrien.S: gettextf("response is not an object of class %s", dQuote("Surv"))
+#. R/survreg.S: gettextf("response is not an object of class %s", dQuote("Surv"))
+
+msgid "response is not an object of class %s"
+msgstr ""
+
+
+#: R/survobrien.S: 0
+#. R/survobrien.S: stop("response must be right censored or (start, stop] data")
+
+msgid "response must be right censored or (start, stop] data"
+msgstr ""
+
+
+#: R/survdiff.S: 0
+#. R/survdiff.S: stop("right censored data only")
+
+msgid "right censored data only"
+msgstr ""
+
+
+#: R/survexp.R: 0
+#. R/survexp.R: warning("se.fit value ignored")
+
+msgid "se.fit value ignored"
+msgstr ""
+
+
+#: R/anova.survreglist.S: 0
+#. R/anova.survreglist.S: warning("some fit objects deleted because response differs from the first model")
+
+msgid "some fit objects deleted because response differs from the first model"
+msgstr ""
+
+
+#: R/coxpenal.fit.R: 0
+#: R/survcallback.S: 0
+#: R/survpenal.fit.S: 0
+#. R/coxpenal.fit.R: stop("sparse term must be single column")
+#. R/survcallback.S: stop("sparse term must be single column")
+#. R/survpenal.fit.S: stop("sparse term must be single column")
+
+msgid "sparse term must be single column"
+msgstr ""
+
+
+#: R/survfitKM.S: 0
+#: R/survfitTurnbull.S: 0
+#. R/survfitKM.S: gettextf("start.time = %s is greater than all time points.", start.time)
+#. R/survfitTurnbull.S: gettextf("start.time = %s is greater than all time points.", start.time)
+
+msgid "start.time = %s is greater than all time points."
+msgstr ""
+
+
+#: R/Surv.S: 0
+#. R/Surv.S: warning("status must be 0, 1, 2 or 3; converted to NA")
+
+msgid "status must be 0, 1, 2 or 3; converted to NA"
+msgstr ""
+
+
+#: R/pyears.R: 0
+#. R/pyears.R: stop("stop time must be > start time")
+
+msgid "stop time must be > start time"
+msgstr ""
+
+
+#: R/Surv.S: 0
+#. R/Surv.S: warning("stop time must be > start time, NA created")
+
+msgid "stop time must be > start time, NA created"
+msgstr ""
+
+
+#: R/survfit.R: 0
+#: R/survfitms.R: 0
+#. R/survfit.R: gettextf("strata %s not matched", paste(i[is.na(indx)], collapse = " "), domain = "R-survival")
+#. R/survfitms.R: gettextf("strata %s not matched", paste(i[is.na(indx)], collapse = " "))
+
+msgid "strata %s not matched"
+msgstr ""
+
+
+#: R/aareg.S: 0
+#. R/aareg.S: stop("strata terms not allowed")
+
+msgid "strata terms not allowed"
+msgstr ""
+
+
+#: R/cch.R: 0
+#. R/cch.R: warning("stratum levels and names(cohort.size) do not agree")
+
+msgid "stratum levels and names(cohort.size) do not agree"
+msgstr ""
+
+
+#: R/survfitCI.R: 0
+#. R/survfitCI.R: gettextf("subject changes case weights, id %s", (id[indx1])[who])
+
+msgid "subject changes case weights, id %s"
+msgstr ""
+
+
+#: R/survfitCI.R: 0
+#. R/survfitCI.R: gettextf("subject changes to the same state, id %s", (id[indx1])[who])
+
+msgid "subject changes to the same state, id %s"
+msgstr ""
+
+
+#: R/survfitCI.R: 0
+#. R/survfitCI.R: gettextf("subject is in two different groups, id %s", (id[indx1])[who])
+
+msgid "subject is in two different groups, id %s"
+msgstr ""
+
+
+#: R/survfit.R: 0
+#. R/survfit.R: stop("survfit object does not have 2 dimensions")
+
+msgid "survfit object does not have 2 dimensions"
+msgstr ""
+
+
+#: R/cox.zph.S: 0
+#. R/cox.zph.S: stop("the are no score residuals for a Null model")
+
+msgid "the are no score residuals for a Null model"
+msgstr ""
+
+
+#: R/anova.coxph.S: 0
+#. R/anova.coxph.S: gettextf("the following arguments passed to 'anova.coxph()' are invalid and dropped: %s",     tmp_n)
+
+msgid "the following arguments passed to 'anova.coxph()' are invalid and dropped: %s"
+msgstr ""
+
+
+#: R/survfit.coxph.R: 0
+#. R/survfit.coxph.R: stop("the id and/or individual options only make sense with new data")
+
+msgid "the id and/or individual options only make sense with new data"
+msgstr ""
+
+
+#: R/survfit.coxph.R: 0
+#. R/survfit.coxph.R: stop("the individual option is only valid for start-stop data")
+
+msgid "the individual option is only valid for start-stop data"
+msgstr ""
+
+
+#: R/survdiff.S: 0
+#. R/survdiff.S: stop("the offset must be a survival probability")
+
+msgid "the offset must be a survival probability"
+msgstr ""
+
+
+#: R/survreg.S: 0
+#. R/survreg.S: stop("the scale argument is not valid with multiple strata")
+
+msgid "the scale argument is not valid with multiple strata"
+msgstr ""
+
+
+#: R/match.ratetable.S: 0
+#. R/match.ratetable.S: gettextf("the variable %s is out of range", dimid[i])
+
+msgid "the variable %s is out of range"
+msgstr ""
+
+
+#: R/print.summary.survexp.R: 0
+#. R/print.summary.survexp.R: stop("there are no observations to print.")
+
+msgid "there are no observations to print."
+msgstr ""
+
+
+#: R/survdiff.fit.S: 0
+#. R/survdiff.fit.S: stop("there is only 1 group")
+
+msgid "there is only 1 group"
+msgstr ""
+
+
+#: R/survobrien.S: 0
+#. R/survobrien.S: stop("this function cannot deal with iteraction terms")
+
+msgid "this function cannot deal with iteraction terms"
+msgstr ""
+
+
+#: R/survexp.R: 0
+#. R/survexp.R: stop("times must be in increasing order")
+
+msgid "times must be in increasing order"
+msgstr ""
+
+
+#: R/pspline.S: 0
+#. R/pspline.S: stop("too few basis functions")
+
+msgid "too few basis functions"
+msgstr ""
+
+
+#: R/pspline.S: 0
+#. R/pspline.S: stop("too few degrees of freedom")
+
+msgid "too few degrees of freedom"
+msgstr ""
+
+
+#: R/is.ratetable.S: 0
+#. R/is.ratetable.S: gettextf("type[ %d ] is 1; cutpoint should be null", i)
+
+msgid "type[ %d ] is 1; cutpoint should be null"
+msgstr ""
+
+
+#: R/pyears.R: 0
+#: R/survexp.R: 0
+#. R/pyears.R: stop("unable to match new data to old formula")
+#. R/survexp.R: stop("unable to match new data to old formula")
+
+msgid "unable to match new data to old formula"
+msgstr ""
+
+
+#: R/coxph.R: 0
+#. R/coxph.R: gettextf("unknown method %s", method)
+
+msgid "unknown method %s"
+msgstr ""
+
+
+#: R/survfitms.R: 0
+#. R/survfitms.R: gettextf("unmatched subscript %s", j[is.na(indx)])
+#. R/survfitms.R: gettextf("unmatched subscript %s", j[indx])
+
+msgid "unmatched subscript %s"
+msgstr ""
+
+
+#: R/plot.survfit.R: 0
+#. R/plot.survfit.R: stop("unrecognized 'fun' argument")
+#. R/plot.survfit.R: stop("unrecognized 'fun' argument")
+#. R/plot.survfit.R: stop("unrecognized 'fun' argument")
+
+msgid "unrecognized 'fun' argument"
+msgstr ""
+
+
+#: R/survpenal.fit.S: 0
+#: R/survreg.fit.S: 0
+#. R/survpenal.fit.S: stop("unrecognized distribution")
+#. R/survreg.fit.S: stop("unrecognized distribution")
+
+msgid "unrecognized distribution"
+msgstr ""
+
+
+#: R/survfit.R: 0
+#: R/survfit.formula.S: 0
+#. R/survfit.R: stop("unrecognized survival type")
+#. R/survfit.formula.S: stop("unrecognized survival type")
+
+msgid "unrecognized survival type"
+msgstr ""
+
+
+#: R/cox.zph.S: 0
+#. R/cox.zph.S: stop("unrecognized transform")
+
+msgid "unrecognized transform"
+msgstr ""
+
+
+#: R/is.ratetable.S: 0
+#. R/is.ratetable.S: gettextf("unsorted cutpoints for dimension %d", i)
+
+msgid "unsorted cutpoints for dimension %d"
+msgstr ""
+
+
+#: R/pyears.R: 0
+#. R/pyears.R: stop("variable not found in the ratetable:", (names(rcall))[is.na(temp)])
+
+msgid "variable not found in the ratetable:"
+msgstr ""
+
+
+#: R/frailty.gaussian.S: 0
+#: R/frailty.t.S: 0
+#. R/frailty.gaussian.S: gettextf("variance of random effect= %s", format(theta))
+#. R/frailty.t.S: gettextf("variance of random effect= %s", format(theta))
+
+msgid "variance of random effect= %s"
+msgstr ""
+
+
+#: R/frailty.gamma.S: 0
+#. R/frailty.gamma.S: gettextf("variance of random effect= %s  I-likelihood = %s", format(theta), format(round(clog,     1), digits = 10))
+
+msgid "variance of random effect= %s  I-likelihood = %s"
+msgstr ""
+
+
+#: R/clogit.R: 0
+#. R/clogit.R: warning("weights are ignored in 'clogit()'")
+
+msgid "weights are ignored in 'clogit()'"
+msgstr ""
+
+
+#: R/survexp.R: 0
+#. R/survexp.R: warning("weights ignored")
+
+msgid "weights ignored"
+msgstr ""
+
+
+#: R/coxph.R: 0
+#: R/model.matrix.coxph.R: 0
+#: R/residuals.coxph.S: 0
+#: R/residuals.survreg.S: 0
+#: R/survfitCI.R: 0
+#. R/coxph.R: gettextf("wrong length for '%s' argument", "tt")
+#. R/model.matrix.coxph.R: gettextf("wrong length for '%s' argument", "tt")
+#. R/residuals.coxph.S: gettextf("wrong length for '%s' argument", "collapse")
+#. R/residuals.survreg.S: gettextf("wrong length for '%s' argument", "collapse")
+#. R/survfitCI.R: gettextf("wrong length for '%s' argument", "istate")
+
+msgid "wrong length for '%s' argument"
+msgstr ""
+
+
+#: R/is.ratetable.S: 0
+#. R/is.ratetable.S: gettextf("wrong length for '%s' component", "dimnames")
+#. R/is.ratetable.S: gettextf("wrong length for '%s' component", "dimid")
+#. R/is.ratetable.S: gettextf("wrong length for '%s' component", "cutpoints")
+#. R/is.ratetable.S: gettextf("wrong length for '%s' component", "factor")
+
+msgid "wrong length for '%s' component"
+msgstr ""
+
+
+#: R/is.ratetable.S: 0
+#. R/is.ratetable.S: gettext("wrong length for 'type' attribute")
+
+msgid "wrong length for 'type' attribute"
+msgstr ""
+
+
+#: R/is.ratetable.S: 0
+#. R/is.ratetable.S: gettextf("wrong length for cutpoints %d", i)
+
+msgid "wrong length for cutpoints %d"
+msgstr ""
+
+
+#: R/agexact.fit.S: 0
+#: R/agreg.fit.R: 0
+#: R/coxexact.fit.R: 0
+#: R/coxpenal.fit.R: 0
+#: R/coxph.fit.S: 0
+#: R/survpenal.fit.S: 0
+#. R/agexact.fit.S: stop("wrong length for inital values")
+#. R/agreg.fit.R: stop("wrong length for inital values")
+#. R/coxexact.fit.R: stop("wrong length for inital values")
+#. R/coxpenal.fit.R: stop("wrong length for inital values")
+#. R/coxph.fit.S: stop("wrong length for inital values")
+#. R/survpenal.fit.S: stop("wrong length for inital values")
+
+msgid "wrong length for inital values"
+msgstr ""
+
+
+#: R/survreg.fit.S: 0
+#. R/survreg.fit.S: stop("wrong length for initial parameters")
+
+msgid "wrong length for initial parameters"
+msgstr ""
+
+
+#: R/Surv.S: 0
+#. R/Surv.S: stop("wrong number of arguments for this type of survival data")
+#. R/Surv.S: stop("wrong number of arguments for this type of survival data")
+
+msgid "wrong number of arguments for this type of survival data"
+msgstr ""
+
+
+#: R/cch.R: 0
+#. R/cch.R: ngettext(sum(!subcoh & !cens), "%d censored observation not in subcohort", "%d censored observations not in subcohort",     domain = "R-survival")
+
+msgid        "%d censored observation not in subcohort"
+msgid_plural "%d censored observations not in subcohort"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/pyears.R: 0
+#. R/pyears.R: ngettext(nzero, "%d observation with an event and 0 follow-up time, any rate calculations are statistically questionable",     "%d observations with an event and 0 follow-up time, any rate calculations are statistically questionable",     domain = "R-survival")
+
+msgid        "%d observation with an event and 0 follow-up time, any rate calculations are statistically questionable"
+msgid_plural "%d observations with an event and 0 follow-up time, any rate calculations are statistically questionable"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/print.survreg.S: 0
+#. R/print.survreg.S: ngettext(sum(nas), "Coefficients: (%d not defined because of singularity)", "Coefficients: (%d not defined because of singularities)",     domain = "R-survival")
+
+msgid        "Coefficients: (%d not defined because of singularity)"
+msgid_plural "Coefficients: (%d not defined because of singularities)"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/print.ratetable.S: 0
+#. R/print.ratetable.S: ngettext(length(attr(x, "dimid")), "Rate table with dimension: ", "Rate table with dimensions: ",     domain = "R-survival")
+
+msgid        "Rate table with dimension: "
+msgid_plural "Rate table with dimensions: "
+msgstr[0]    ""
+msgstr[1]    ""

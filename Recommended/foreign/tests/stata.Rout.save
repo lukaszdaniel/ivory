@@ -1,0 +1,412 @@
+
+R Under development (unstable) (2014-09-30 r594) -- "Unsuffered Consequences"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-unknown-linux-gnu (64-bit)
+
+This version of R supports extended localization
+See README-ELS file for details
+R-ELS Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
+
+R-ELS is not part of the R project, so please do not report bugs
+via r-bugs or the R website - instead refer to the author.
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(foreign)
+> pc5 <- read.dta("pc5.dta")
+Warning message:
+In command 'read.dta("pc5.dta")': cannot read factor labels from Stata 5 files
+> summary(pc5)
+      age             alb           alkphos         ascites      
+ Min.   :26.28   Min.   :1.960   Min.   :   -9   Min.   :-9.000  
+ 1st Qu.:42.71   1st Qu.:3.330   1st Qu.:  423   1st Qu.: 0.000  
+ Median :50.47   Median :3.570   Median : 1009   Median : 0.000  
+ Mean   :50.45   Mean   :3.543   Mean   : 1525   Mean   :-2.074  
+ 3rd Qu.:56.99   3rd Qu.:3.820   3rd Qu.: 1677   3rd Qu.: 0.000  
+ Max.   :78.44   Max.   :4.640   Max.   :13862   Max.   : 1.000  
+      bili             chol            edema            edemarx       
+ Min.   : 0.300   Min.   :  -9.0   Min.   :0.00000   Min.   :0.00000  
+ 1st Qu.: 0.700   1st Qu.:  -9.0   1st Qu.:0.00000   1st Qu.:0.00000  
+ Median : 1.200   Median : 256.0   Median :0.00000   Median :0.00000  
+ Mean   : 2.688   Mean   : 245.8   Mean   :0.09256   Mean   :0.07815  
+ 3rd Qu.: 3.000   3rd Qu.: 346.0   3rd Qu.:0.00000   3rd Qu.:0.00000  
+ Max.   :28.000   Max.   :1775.0   Max.   :1.00000   Max.   :1.00000  
+     hepmeg           time          plate        protime           sex        
+ Min.   :-9.00   Min.   :  41   Min.   : -9   Min.   : 9.00   Min.   :-9.000  
+ 1st Qu.: 0.00   1st Qu.:1434   1st Qu.:181   1st Qu.:10.00   1st Qu.: 0.000  
+ Median : 0.00   Median :1487   Median :249   Median :10.60   Median : 1.000  
+ Mean   :-1.75   Mean   :1760   Mean   :252   Mean   :10.67   Mean   :-1.434  
+ 3rd Qu.: 1.00   3rd Qu.:2153   3rd Qu.:321   3rd Qu.:11.00   3rd Qu.: 1.000  
+ Max.   : 1.00   Max.   :4795   Max.   :721   Max.   :18.00   Max.   : 1.000  
+      sgot           spiders           stage              cens       
+ Min.   : -9.00   Min.   :-9.000   Min.   :-9.0000   Min.   :0.0000  
+ 1st Qu.: 44.20   1st Qu.: 0.000   1st Qu.: 1.0000   1st Qu.:0.0000  
+ Median : 88.35   Median : 0.000   Median : 3.0000   Median :0.0000  
+ Mean   : 88.22   Mean   :-1.914   Mean   : 0.1351   Mean   :0.2443  
+ 3rd Qu.:130.20   3rd Qu.: 0.000   3rd Qu.: 3.0000   3rd Qu.:0.0000  
+ Max.   :457.25   Max.   : 1.000   Max.   : 4.0000   Max.   :1.0000  
+       rx               trig            copper             id       
+ Min.   :-9.0000   Min.   : -9.00   Min.   : -9.00   Min.   :  1.0  
+ 1st Qu.: 1.0000   1st Qu.: -9.00   1st Qu.: 10.00   1st Qu.: 99.5  
+ Median : 1.0000   Median : 85.00   Median : 48.00   Median :195.0  
+ Mean   :-0.9788   Mean   : 81.44   Mean   : 65.26   Mean   :199.6  
+ 3rd Qu.: 2.0000   3rd Qu.:126.00   3rd Qu.: 88.00   3rd Qu.:302.5  
+ Max.   : 2.0000   Max.   :598.00   Max.   :588.00   Max.   :418.0  
+     first             late              t0        
+ Min.   :0.0000   Min.   :0.0000   Min.   :   0.0  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:   0.0  
+ Median :0.0000   Median :0.0000   Median :   0.0  
+ Mean   :0.3657   Mean   :0.3657   Mean   : 543.8  
+ 3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1487.0  
+ Max.   :1.0000   Max.   :1.0000   Max.   :1487.0  
+> str(pc5)
+'data.frame':	659 observations of 24 variables:
+ $ age    : numeric  58.8 56.4 56.4 70.1 54.7 ...
+ $ alb    : numeric  2.6 4.14 4.14 3.48 2.54 ...
+ $ alkphos: numeric  1718 7395 7395 516 6122 ...
+ $ ascites: numeric  1 0 0 0 0 0 0 0 0 0 ...
+ $ bili   : numeric  14.5 1.1 1.1 1.4 1.8 ...
+ $ chol   : numeric  261 302 302 176 244 244 279 279 248 248 ...
+ $ edema  : numeric  1 0 0 1 1 1 0 0 0 0 ...
+ $ edemarx: numeric  1 0 0 0.5 0.5 0.5 0 0 0 0 ...
+ $ hepmeg : numeric  1 1 1 0 1 1 1 1 1 1 ...
+ $ time   : numeric  400 1487 4500 1012 1487 ...
+ $ plate  : numeric  190 221 221 151 183 183 136 136 -9 -9 ...
+ $ protime: numeric  12.2 10.6 10.6 12 10.3 ...
+ $ sex    : numeric  1 1 1 0 1 1 1 1 1 1 ...
+ $ sgot   : numeric  137.9 113.5 113.5 96.1 60.6 ...
+ $ spiders: numeric  1 1 1 0 1 1 1 1 0 0 ...
+ $ stage  : numeric  4 3 3 4 4 4 3 3 3 3 ...
+ $ cens   : numeric  1 0 0 1 0 1 0 0 0 1 ...
+ $ rx     : numeric  1 1 1 1 1 1 2 2 2 2 ...
+ $ trig   : numeric  172 88 88 55 92 92 72 72 63 63 ...
+ $ copper : numeric  156 54 54 210 64 64 143 143 50 50 ...
+ $ id     : numeric  1 2 2 3 4 4 5 5 6 6 ...
+ $ first  : numeric  0 1 0 0 1 0 1 0 1 0 ...
+ $ late   : numeric  0 0 1 0 0 1 0 1 0 1 ...
+ $ t0     : numeric  0 0 1487 0 0 ...
+ - attr(*, "datalabel")= character ""
+ - attr(*, "time.stamp")= character "14 Feb 1997 14:22"
+ - attr(*, "formats")= character  "%9.0g" "%9.0g" "%9.0g" "%9.0g" ...
+ - attr(*, "types")= integer  102 102 102 102 102 102 102 102 102 102 ...
+ - attr(*, "val.labels")= character  "" "" "" "" ...
+ - attr(*, "var.labels")= character  "" "" "" "" ...
+ - attr(*, "version")= integer 5
+> compressed <- read.dta("compressed.dta")
+> summary(compressed)
+      age             alb           alkphos         ascites      
+ Min.   :26.28   Min.   :1.960   Min.   :   -9   Min.   :-9.000  
+ 1st Qu.:42.71   1st Qu.:3.330   1st Qu.:  423   1st Qu.: 0.000  
+ Median :50.47   Median :3.570   Median : 1009   Median : 0.000  
+ Mean   :50.45   Mean   :3.543   Mean   : 1525   Mean   :-2.074  
+ 3rd Qu.:56.99   3rd Qu.:3.820   3rd Qu.: 1677   3rd Qu.: 0.000  
+ Max.   :78.44   Max.   :4.640   Max.   :13862   Max.   : 1.000  
+      bili             chol            edema            edemarx       
+ Min.   : 0.300   Min.   :  -9.0   Min.   :0.00000   Min.   :0.00000  
+ 1st Qu.: 0.700   1st Qu.:  -9.0   1st Qu.:0.00000   1st Qu.:0.00000  
+ Median : 1.200   Median : 256.0   Median :0.00000   Median :0.00000  
+ Mean   : 2.688   Mean   : 245.8   Mean   :0.09256   Mean   :0.07815  
+ 3rd Qu.: 3.000   3rd Qu.: 346.0   3rd Qu.:0.00000   3rd Qu.:0.00000  
+ Max.   :28.000   Max.   :1775.0   Max.   :1.00000   Max.   :1.00000  
+     hepmeg           time          plate        protime           sex        
+ Min.   :-9.00   Min.   :  41   Min.   : -9   Min.   : 9.00   Min.   :-9.000  
+ 1st Qu.: 0.00   1st Qu.:1434   1st Qu.:181   1st Qu.:10.00   1st Qu.: 0.000  
+ Median : 0.00   Median :1487   Median :249   Median :10.60   Median : 1.000  
+ Mean   :-1.75   Mean   :1760   Mean   :252   Mean   :10.67   Mean   :-1.434  
+ 3rd Qu.: 1.00   3rd Qu.:2153   3rd Qu.:321   3rd Qu.:11.00   3rd Qu.: 1.000  
+ Max.   : 1.00   Max.   :4795   Max.   :721   Max.   :18.00   Max.   : 1.000  
+      sgot           spiders           stage              cens       
+ Min.   : -9.00   Min.   :-9.000   Min.   :-9.0000   Min.   :0.0000  
+ 1st Qu.: 44.20   1st Qu.: 0.000   1st Qu.: 1.0000   1st Qu.:0.0000  
+ Median : 88.35   Median : 0.000   Median : 3.0000   Median :0.0000  
+ Mean   : 88.22   Mean   :-1.914   Mean   : 0.1351   Mean   :0.2443  
+ 3rd Qu.:130.20   3rd Qu.: 0.000   3rd Qu.: 3.0000   3rd Qu.:0.0000  
+ Max.   :457.25   Max.   : 1.000   Max.   : 4.0000   Max.   :1.0000  
+       rx               trig            copper             id       
+ Min.   :-9.0000   Min.   : -9.00   Min.   : -9.00   Min.   :  1.0  
+ 1st Qu.: 1.0000   1st Qu.: -9.00   1st Qu.: 10.00   1st Qu.: 99.5  
+ Median : 1.0000   Median : 85.00   Median : 48.00   Median :195.0  
+ Mean   :-0.9788   Mean   : 81.44   Mean   : 65.26   Mean   :199.6  
+ 3rd Qu.: 2.0000   3rd Qu.:126.00   3rd Qu.: 88.00   3rd Qu.:302.5  
+ Max.   : 2.0000   Max.   :598.00   Max.   :588.00   Max.   :418.0  
+     first             late              t0        
+ Min.   :0.0000   Min.   :0.0000   Min.   :   0.0  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:   0.0  
+ Median :0.0000   Median :0.0000   Median :   0.0  
+ Mean   :0.3657   Mean   :0.3657   Mean   : 543.8  
+ 3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1487.0  
+ Max.   :1.0000   Max.   :1.0000   Max.   :1487.0  
+> all.equal(summary(pc5), summary(compressed))
+[1] TRUE
+> sun6 <- read.dta("sun6.dta")
+> summary(sun6)
+      age             alb           alkphos         ascites      
+ Min.   :26.28   Min.   :1.960   Min.   :   -9   Min.   :-9.000  
+ 1st Qu.:42.71   1st Qu.:3.330   1st Qu.:  423   1st Qu.: 0.000  
+ Median :50.47   Median :3.570   Median : 1009   Median : 0.000  
+ Mean   :50.45   Mean   :3.543   Mean   : 1525   Mean   :-2.074  
+ 3rd Qu.:56.99   3rd Qu.:3.820   3rd Qu.: 1677   3rd Qu.: 0.000  
+ Max.   :78.44   Max.   :4.640   Max.   :13862   Max.   : 1.000  
+      bili             chol            edema            edemarx       
+ Min.   : 0.300   Min.   :  -9.0   Min.   :0.00000   Min.   :0.00000  
+ 1st Qu.: 0.700   1st Qu.:  -9.0   1st Qu.:0.00000   1st Qu.:0.00000  
+ Median : 1.200   Median : 256.0   Median :0.00000   Median :0.00000  
+ Mean   : 2.688   Mean   : 245.8   Mean   :0.09256   Mean   :0.07815  
+ 3rd Qu.: 3.000   3rd Qu.: 346.0   3rd Qu.:0.00000   3rd Qu.:0.00000  
+ Max.   :28.000   Max.   :1775.0   Max.   :1.00000   Max.   :1.00000  
+     hepmeg           time          plate        protime           sex        
+ Min.   :-9.00   Min.   :  41   Min.   : -9   Min.   : 9.00   Min.   :-9.000  
+ 1st Qu.: 0.00   1st Qu.:1434   1st Qu.:181   1st Qu.:10.00   1st Qu.: 0.000  
+ Median : 0.00   Median :1487   Median :249   Median :10.60   Median : 1.000  
+ Mean   :-1.75   Mean   :1760   Mean   :252   Mean   :10.67   Mean   :-1.434  
+ 3rd Qu.: 1.00   3rd Qu.:2153   3rd Qu.:321   3rd Qu.:11.00   3rd Qu.: 1.000  
+ Max.   : 1.00   Max.   :4795   Max.   :721   Max.   :18.00   Max.   : 1.000  
+      sgot           spiders           stage              cens       
+ Min.   : -9.00   Min.   :-9.000   Min.   :-9.0000   Min.   :0.0000  
+ 1st Qu.: 44.20   1st Qu.: 0.000   1st Qu.: 1.0000   1st Qu.:0.0000  
+ Median : 88.35   Median : 0.000   Median : 3.0000   Median :0.0000  
+ Mean   : 88.22   Mean   :-1.914   Mean   : 0.1351   Mean   :0.2443  
+ 3rd Qu.:130.20   3rd Qu.: 0.000   3rd Qu.: 3.0000   3rd Qu.:0.0000  
+ Max.   :457.25   Max.   : 1.000   Max.   : 4.0000   Max.   :1.0000  
+       rx               trig            copper             id       
+ Min.   :-9.0000   Min.   : -9.00   Min.   : -9.00   Min.   :  1.0  
+ 1st Qu.: 1.0000   1st Qu.: -9.00   1st Qu.: 10.00   1st Qu.: 99.5  
+ Median : 1.0000   Median : 85.00   Median : 48.00   Median :195.0  
+ Mean   :-0.9788   Mean   : 81.44   Mean   : 65.26   Mean   :199.6  
+ 3rd Qu.: 2.0000   3rd Qu.:126.00   3rd Qu.: 88.00   3rd Qu.:302.5  
+ Max.   : 2.0000   Max.   :598.00   Max.   :588.00   Max.   :418.0  
+     first             late              t0        
+ Min.   :0.0000   Min.   :0.0000   Min.   :   0.0  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:   0.0  
+ Median :0.0000   Median :0.0000   Median :   0.0  
+ Mean   :0.3657   Mean   :0.3657   Mean   : 543.8  
+ 3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1487.0  
+ Max.   :1.0000   Max.   :1.0000   Max.   :1487.0  
+> str(sun6)
+'data.frame':	659 observations of 24 variables:
+ $ age    : numeric  58.8 56.4 56.4 70.1 54.7 ...
+ $ alb    : numeric  2.6 4.14 4.14 3.48 2.54 ...
+ $ alkphos: numeric  1718 7395 7395 516 6122 ...
+ $ ascites: integer  1 0 0 0 0 0 0 0 0 0 ...
+ $ bili   : numeric  14.5 1.1 1.1 1.4 1.8 ...
+ $ chol   : integer  261 302 302 176 244 244 279 279 248 248 ...
+ $ edema  : integer  1 0 0 1 1 1 0 0 0 0 ...
+ $ edemarx: numeric  1 0 0 0.5 0.5 0.5 0 0 0 0 ...
+ $ hepmeg : integer  1 1 1 0 1 1 1 1 1 1 ...
+ $ time   : integer  400 1487 4500 1012 1487 1925 1487 1504 1487 2503 ...
+ $ plate  : integer  190 221 221 151 183 183 136 136 -9 -9 ...
+ $ protime: numeric  12.2 10.6 10.6 12 10.3 ...
+ $ sex    : integer  1 1 1 0 1 1 1 1 1 1 ...
+ $ sgot   : numeric  137.9 113.5 113.5 96.1 60.6 ...
+ $ spiders: integer  1 1 1 0 1 1 1 1 0 0 ...
+ $ stage  : integer  4 3 3 4 4 4 3 3 3 3 ...
+ $ cens   : integer  1 0 0 1 0 1 0 0 0 1 ...
+ $ rx     : integer  1 1 1 1 1 1 2 2 2 2 ...
+ $ trig   : integer  172 88 88 55 92 92 72 72 63 63 ...
+ $ copper : integer  156 54 54 210 64 64 143 143 50 50 ...
+ $ id     : integer  1 2 2 3 4 4 5 5 6 6 ...
+ $ first  : integer  0 1 0 0 1 0 1 0 1 0 ...
+ $ late   : integer  0 0 1 0 0 1 0 1 0 1 ...
+ $ t0     : integer  0 0 1487 0 0 1487 0 1487 0 1487 ...
+ - attr(*, "datalabel")= character ""
+ - attr(*, "time.stamp")= character "14 Sep 2000 10:40"
+ - attr(*, "formats")= character  "%9.0g" "%9.0g" "%9.0g" "%9.0g" ...
+ - attr(*, "types")= integer  102 102 102 98 102 105 98 102 98 105 ...
+ - attr(*, "val.labels")= character  "" "" "" "" ...
+ - attr(*, "var.labels")= character  "" "" "" "" ...
+ - attr(*, "version")= integer 6
+> all.equal(summary(sun6),summary(pc5))
+[1] TRUE
+> df <- read.dta("datefactor.dta")
+> summary(df)
+      hlth159         id            adate           
+ EXCELLENT: 0   Min.   : 1.00   Min.   :1960-01-02  
+ VERY GOOD: 6   1st Qu.: 8.25   1st Qu.:1960-01-09  
+ GOOD     : 8   Median :15.50   Median :1960-01-16  
+ FAIR     : 4   Mean   :15.50   Mean   :1960-01-16  
+ POOR     : 1   3rd Qu.:22.75   3rd Qu.:1960-01-23  
+ NA's     :11   Max.   :30.00   Max.   :1960-01-31  
+> data(esoph)
+> write.dta(esoph,esophile <- tempfile())
+> esoph2 <- read.dta(esophile)
+> all.equal(ordered(esoph2$alcgp),esoph$alcgp)
+[1] TRUE
+> write.dta(esoph,esophile,convert.factors="string")
+> esoph2 <- read.dta(esophile)
+> all.equal(as.character(esoph$alcgp),esoph2$alcgp)
+[1] TRUE
+> write.dta(esoph,esophile,convert.factors="code")
+> esoph2 <- read.dta(esophile)
+> all.equal(as.numeric(esoph$alcgp),as.numeric(esoph2$alcgp))
+[1] TRUE
+> 
+> se <- read.dta("stata7se.dta")
+> print(se)
+      race number
+1    white      2
+2    asian      5
+3 hispanic      5
+4    white      4
+5    black      5
+6    white      6
+7    black      7
+> v8 <- read.dta("stata8mac.dta")
+> print(v8)
+      race number
+1    white      2
+2    asian      5
+3 hispanic      5
+4    white      4
+5    black      5
+6    white      6
+7    black      7
+> 
+> stata8 <- read.dta("auto8.dta",missing.type=TRUE,convert.underscore=FALSE)
+> str(stata8)
+'data.frame':	74 observations of 13 variables:
+ $ make        : character  "AMC Concord" "AMC Pacer" "AMC Spirit" "Buick Century" ...
+ $ price       : integer  4099 4749 3799 4816 7827 5788 4453 5189 10372 4082 ...
+ $ mpg         : integer  22 17 22 20 15 18 26 20 16 19 ...
+ $ rep78       : integer  3 3 NA 3 4 3 NA 3 3 3 ...
+ $ headroom    : numeric  2.5 3 3 4.5 4 4 3 2 3.5 3.5 ...
+ $ trunk       : integer  11 11 12 16 20 21 10 16 17 13 ...
+ $ weight      : integer  2930 3350 2640 3250 4080 3670 2230 3280 3880 3400 ...
+ $ length      : integer  186 173 168 196 222 218 170 200 207 200 ...
+ $ turn        : integer  40 40 35 40 43 43 34 42 43 42 ...
+ $ displacement: integer  121 258 121 196 350 231 304 196 231 231 ...
+ $ gear_ratio  : numeric  3.58 2.53 3.08 2.93 2.41 ...
+ $ foreign     : Factor w/ 2 levels "Domestic","Foreign": 1 1 1 1 1 1 1 1 1 1 ...
+ $ testmiss    : numeric  NA NA NA NA NA NA NA NA NA NA ...
+ - attr(*, "datalabel")= character "1978 Automobile Data"
+ - attr(*, "time.stamp")= character "20 May 2003 14:39"
+ - attr(*, "formats")= character  "%-18s" "%8.0gc" "%8.0g" "%8.0g" ...
+ - attr(*, "types")= integer  18 252 252 252 254 252 252 252 252 252 ...
+ - attr(*, "val.labels")= character  "" "" "" "" ...
+ - attr(*, "var.labels")= character  "Make and Model" "Price" "Mileage (mpg)" "Repair Record 1978" ...
+ - attr(*, "version")= integer 8
+ - attr(*, "label.table")=List of 1 component
+  ..$ origin: Named integer  0 1
+  .. ..- attr(*, "names")= character  "Domestic" "Foreign"
+ - attr(*, "missing")=List of 13 components
+  ..$ make        : NULL
+  ..$ price       : numeric  NA NA NA NA NA NA NA NA NA NA ...
+  ..$ mpg         : numeric  NA NA NA NA NA NA NA NA NA NA ...
+  ..$ rep78       : numeric  NA NA 0 NA NA NA 0 NA NA NA ...
+  ..$ headroom    : numeric  NA NA NA NA NA NA NA NA NA NA ...
+  ..$ trunk       : numeric  NA NA NA NA NA NA NA NA NA NA ...
+  ..$ weight      : numeric  NA NA NA NA NA NA NA NA NA NA ...
+  ..$ length      : numeric  NA NA NA NA NA NA NA NA NA NA ...
+  ..$ turn        : numeric  NA NA NA NA NA NA NA NA NA NA ...
+  ..$ displacement: numeric  NA NA NA NA NA NA NA NA NA NA ...
+  ..$ gear_ratio  : numeric  NA NA NA NA NA NA NA NA NA NA ...
+  ..$ foreign     : numeric  NA NA NA NA NA NA NA NA NA NA ...
+  ..$ testmiss    : numeric  18 18 18 18 18 18 18 18 18 18 ...
+> 
+> bq <- read.dta("MLLabelsWithNotesChar.dta")
+> str(bq)
+'data.frame':	0 observations of 1 variable:
+ $ female: Factor w/ 2 levels "No","Yes": 
+ - attr(*, "datalabel")= character "datalabelBQ"
+ - attr(*, "time.stamp")= character "27 Apr 2013 16:16"
+ - attr(*, "formats")= character "%8.0g"
+ - attr(*, "types")= integer 251
+ - attr(*, "val.labels")= character "female_lbl_def"
+ - attr(*, "var.labels")= character "Is it female"
+ - attr(*, "expansion.fields")=List of 11 components
+  ..$ : character  "female" "question" "Are you Female?"
+  ..$ : character  "_dta" "_lang_c" "default"
+  ..$ : character  "_dta" "_lang_v_spanish" "etiqdataBQ"
+  ..$ : character  "female" "_lang_l_spanish" "female_lbl_es"
+  ..$ : character  "female" "_lang_v_spanish" "Femenino"
+  ..$ : character  "_dta" "note1" "datasetNoteTxt"
+  ..$ : character  "_dta" "note0" "1"
+  ..$ : character  "female" "note2" "FemaleNote2Txt"
+  ..$ : character  "female" "note0" "2"
+  ..$ : character  "female" "note1" "FemaleNoteTxt"
+  ..$ : character  "_dta" "_lang_list" "default spanish"
+ - attr(*, "version")= integer 12
+ - attr(*, "label.table")=List of 2 components
+  ..$ female_lbl_es : Named integer  0 1
+  .. ..- attr(*, "names")= character  "No" "Si"
+  ..$ female_lbl_def: Named integer  0 1
+  .. ..- attr(*, "names")= character  "No" "Yes"
+> write.dta(bq, "bq.dta", version = 12)
+> str(read.dta('bq.dta'))
+'data.frame':	0 observations of 1 variable:
+ $ female: Factor w/ 2 levels "No","Yes": 
+ - attr(*, "datalabel")= character "datalabelBQ"
+ - attr(*, "time.stamp")= character ""
+ - attr(*, "formats")= character "%9.0g"
+ - attr(*, "types")= integer 253
+ - attr(*, "val.labels")= character "female_lbl_def"
+ - attr(*, "var.labels")= character "Is it female"
+ - attr(*, "expansion.fields")=List of 11 components
+  ..$ : character  "female" "question" "Are you Female?"
+  ..$ : character  "_dta" "_lang_c" "default"
+  ..$ : character  "_dta" "_lang_v_spanish" "etiqdataBQ"
+  ..$ : character  "female" "_lang_l_spanish" "female_lbl_es"
+  ..$ : character  "female" "_lang_v_spanish" "Femenino"
+  ..$ : character  "_dta" "note1" "datasetNoteTxt"
+  ..$ : character  "_dta" "note0" "1"
+  ..$ : character  "female" "note2" "FemaleNote2Txt"
+  ..$ : character  "female" "note0" "2"
+  ..$ : character  "female" "note1" "FemaleNoteTxt"
+  ..$ : character  "_dta" "_lang_list" "default spanish"
+ - attr(*, "version")= integer 12
+ - attr(*, "label.table")=List of 2 components
+  ..$ female_lbl_def: Named integer  1 2
+  .. ..- attr(*, "names")= character  "No" "Yes"
+  ..$ female_lbl_es : Named integer  0 1
+  .. ..- attr(*, "names")= character  "No" "Si"
+> unlink("bq.dta")
+> 
+> ## PR#15290
+> bq <- read.dta("OneVarTwoValLabels.dta")
+> str(bq)
+'data.frame':	0 observations of 1 variable:
+ $ female: Factor w/ 2 levels "Male","Female": 
+ - attr(*, "datalabel")= character ""
+ - attr(*, "time.stamp")= character "25 Apr 2013 21:40"
+ - attr(*, "formats")= character "%9.0g"
+ - attr(*, "types")= integer 251
+ - attr(*, "val.labels")= character "fem_lbl_val_en"
+ - attr(*, "var.labels")= character ""
+ - attr(*, "expansion.fields")=List of 3 components
+  ..$ : character  "_dta" "_lang_c" "default"
+  ..$ : character  "female" "_lang_l_spanish" "fem_lbl_val_es"
+  ..$ : character  "_dta" "_lang_list" "default spanish"
+ - attr(*, "version")= integer 12
+ - attr(*, "label.table")=List of 2 components
+  ..$ fem_lbl_val_es: Named integer  0 1
+  .. ..- attr(*, "names")= character  "Masculino" "Femenino"
+  ..$ fem_lbl_val_en: Named integer  0 1
+  .. ..- attr(*, "names")= character  "Male" "Female"
+> 
+> ## Dates and date-times in Stata12
+> read.dta("xxx12.dta")
+                     x                  xc               xbigc      xdate
+1  2014-01-23 20:07:16 2014-01-23 21:07:16 2014-01-23 21:07:16 2014-01-23
+2  2014-01-23 20:07:17 2014-01-23 21:07:17 2014-01-23 21:07:17 2014-01-23
+3  2014-01-23 20:07:18 2014-01-23 21:07:18 2014-01-23 21:07:18 2014-01-23
+4  2014-01-23 20:07:19 2014-01-23 21:07:19 2014-01-23 21:07:19 2014-01-23
+5  2014-01-23 20:07:20 2014-01-23 21:07:20 2014-01-23 21:07:20 2014-01-23
+6  2014-01-23 20:07:21 2014-01-23 21:07:21 2014-01-23 21:07:21 2014-01-23
+7  2014-01-23 20:07:22 2014-01-23 21:07:22 2014-01-23 21:07:22 2014-01-23
+8  2014-01-23 20:07:23 2014-01-23 21:07:23 2014-01-23 21:07:23 2014-01-23
+9  2014-01-23 20:07:24 2014-01-23 21:07:24 2014-01-23 21:07:24 2014-01-23
+10 2014-01-23 20:07:25 2014-01-23 21:07:25 2014-01-23 21:07:25 2014-01-23
+> 
+> q()
+> proc.time()
+   user  system elapsed 
+  0.459   0.059   0.509 

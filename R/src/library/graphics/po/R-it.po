@@ -1,0 +1,851 @@
+# Italian translations for R graphics package
+# Copyright (C) 2005 The R Foundation for Statistical Computing
+# This file is distributed under the same license as the R package.
+# Stefano M. Iacus <Stefano.Iacus@R-Project.org>, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: R 2.3.0\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2014-07-19 18:10\n"
+"PO-Revision-Date: 2005-02-26 22:56+0100\n"
+"Last-Translator: Stefano M. Iacus <Stefano.Iacus@R-project.org>\n"
+"Language-Team: Italian\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. R/image.R: gettextf("%s can only be used with a regular grid", sQuote("useRaster = TRUE"))
+#: R/image.R:0
+msgid "%s can only be used with a regular grid"
+msgstr ""
+
+#. R/datetime.R: gettextf("'%s' argument is not of class %s", "x", dQuote("POSIXt"))
+#. R/datetime.R: gettextf("'%s' argument is not of class %s", "x", dQuote("Date"))
+#: R/datetime.R:0
+msgid "'%s' argument is not of class %s"
+msgstr ""
+
+#. R/hist.R: gettextf("'%s' argument must be numeric", "x")
+#: R/hist.R:0
+#, fuzzy
+msgid "'%s' argument must be numeric"
+msgstr "'x' deve essere numeric"
+
+#. R/abline.R: warning("'a' and 'b' are overridden by 'coef'")
+#: R/abline.R:0
+msgid "'a' and 'b' are overridden by 'coef'"
+msgstr ""
+
+#. R/abline.R: warning("'a' is overridden by 'reg'")
+#: R/abline.R:0
+msgid "'a' is overridden by 'reg'"
+msgstr ""
+
+#. R/curve.R: warning("'add' will be ignored as there is no existing plot")
+#: R/curve.R:0
+msgid "'add' will be ignored as there is no existing plot"
+msgstr ""
+
+#. R/stripchart.R: gettextf("'at' argument must have length equal to the number %d of groups", n)
+#: R/stripchart.R:0
+#, fuzzy
+msgid "'at' argument must have length equal to the number %d of groups"
+msgstr "'at' deve avere lunghezza pari al numero di %d gruppi"
+
+#. R/boxplot.R: gettextf("'at' must have same length as 'z$n', i.e. %d", n)
+#: R/boxplot.R:0
+#, fuzzy
+msgid "'at' must have same length as 'z$n', i.e. %d"
+msgstr "'at' deve avere la stessa lunghezza di 'z$n', ovvero"
+
+#. R/hist.R: stop("'breaks' are not strictly increasing")
+#: R/hist.R:0
+msgid "'breaks' are not strictly increasing"
+msgstr "'breaks' non sono strettamente crescenti"
+
+#. R/datetime.R: stop("'breaks' argument must be specified")
+#. R/datetime.R: stop("'breaks' argument must be specified")
+#: R/datetime.R:0
+#, fuzzy
+msgid "'breaks' argument must be specified"
+msgstr "i breaks devono essere tutti finiti"
+
+#. R/image.R: stop("'breaks' must all be finite")
+#: R/image.R:0
+#, fuzzy
+msgid "'breaks' must all be finite"
+msgstr "i breaks devono essere tutti finiti"
+
+#. R/fourfoldplot.R: stop("'conf.level' must be a single number between 0 and 1")
+#: R/fourfoldplot.R:0
+#, fuzzy
+msgid "'conf.level' must be a single number between 0 and 1"
+msgstr "'conf.level' deve essere un singolo numero tra 0 e 1"
+
+#. R/curve.R: stop("'expr' did not evaluate to an object of length 'n'")
+#: R/curve.R:0
+msgid "'expr' did not evaluate to an object of length 'n'"
+msgstr ""
+
+#. R/curve.R: gettextf("'expr' must be a function, or a call or an expression containing '%s'",     xname)
+#: R/curve.R:0
+#, fuzzy
+msgid "'expr' must be a function, or a call or an expression containing '%s'"
+msgstr "'expr' deve essere una funzione o un'espressione contenent 'x'"
+
+#. R/screen.R: stop("'figs' must be a vector or a matrix with 4 columns")
+#: R/screen.R:0
+msgid "'figs' must be a vector or a matrix with 4 columns"
+msgstr "'figs' deve essere un vettore o una matrice con 4 colonne"
+
+#. R/screen.R: stop("'figs' must specify at least one screen")
+#: R/screen.R:0
+msgid "'figs' must specify at least one screen"
+msgstr "'figs' deve specificare almeno uno schermo"
+
+#. R/boxplot.R: stop("'formula' missing or incorrect")
+#: R/boxplot.R:0
+msgid "'formula' missing or incorrect"
+msgstr "'formula' mancante o sbagliata"
+
+#. R/cdplot.R: stop("'formula' should specify exactly two variables")
+#. R/spineplot.R: stop("'formula' should specify exactly two variables")
+#. R/sunflowerplot.R: stop("'formula' should specify exactly two variables")
+#: R/cdplot.R:0 R/spineplot.R:0 R/sunflowerplot.R:0
+msgid "'formula' should specify exactly two variables"
+msgstr ""
+
+#. R/curve.R: stop("'from' and 'to' must be > 0 with log=\"x\"")
+#: R/curve.R:0
+msgid "'from' and 'to' must be > 0 with log=\"x\""
+msgstr "'from' e 'to' devono esser >0 con log=\"x\""
+
+#. R/barplot.R: stop("'height' must be a vector or a matrix")
+#: R/barplot.R:0
+msgid "'height' must be a vector or a matrix"
+msgstr "'height' deve essere un vettore o una matrice"
+
+#. R/hist.R: warning("'include.lowest' ignored as 'breaks' is not a vector")
+#: R/hist.R:0
+msgid "'include.lowest' ignored as 'breaks' is not a vector"
+msgstr "'include.lowest' ignorato poiché 'breaks' non è un vettore"
+
+#. R/legend.R: stop("'legend' argument is of length 0")
+#: R/legend.R:0
+msgid "'legend' argument is of length 0"
+msgstr ""
+
+#. R/stars.R: stop("'locations' must be a 2-column matrix.")
+#: R/stars.R:0
+msgid "'locations' must be a 2-column matrix."
+msgstr "'locations' deve essere una matrice di 2 colonne"
+
+#. R/legend.R: warning("'merge = TRUE' has no effect when no line segments are drawn")
+#: R/legend.R:0
+msgid "'merge = TRUE' has no effect when no line segments are drawn"
+msgstr ""
+
+#. R/hist.R: warning("'nclass' not used when 'breaks' is specified")
+#: R/hist.R:0
+msgid "'nclass' not used when 'breaks' is specified"
+msgstr "'nclass' non viene usata quando viene specificato 'breaks'"
+
+#. R/stars.R: stop("'nrow * ncol' is less than the number of observations")
+#: R/stars.R:0
+#, fuzzy
+msgid "'nrow * ncol' is less than the number of observations"
+msgstr "nrow * ncol < numero delle osservazioni"
+
+#. R/smoothScatter.R: stop("'nrpoints' should be numeric scalar with value >= 0.")
+#: R/smoothScatter.R:0
+msgid "'nrpoints' should be numeric scalar with value >= 0."
+msgstr ""
+
+#. R/coplot.R: stop("'number' must be integer >= 1")
+#: R/coplot.R:0
+#, fuzzy
+msgid "'number' must be integer >= 1"
+msgstr "'number' deve essere un intero >= 1"
+
+#. R/sunflowerplot.R: stop("'number' must have same length as 'x' and 'y'")
+#: R/sunflowerplot.R:0
+msgid "'number' must have same length as 'x' and 'y'"
+msgstr "'number' deve avere la stessa lunghezza di 'x' e 'y'"
+
+#. R/coplot.R: stop("'overlap' must be < 1 (and typically >= 0).")
+#: R/coplot.R:0
+msgid "'overlap' must be < 1 (and typically >= 0)."
+msgstr "'overlap' deve essere < 1 (e solitamente >= 0)."
+
+#. R/plot.R: stop("'plot.data.frame' applied to non data frame")
+#: R/plot.R:0
+msgid "'plot.data.frame' applied to non data frame"
+msgstr "'plot.data.frame' applicato a un non data frame"
+
+#. R/hist.R: stop("'probability' is an alias for '!freq', however they differ.")
+#: R/hist.R:0
+msgid "'probability' is an alias for '!freq', however they differ."
+msgstr "'probability' è un alisa per '!freq', comunque sono differenti."
+
+#. R/layout.R: stop("'respect' must be logical or matrix with same dimension as 'mat'")
+#: R/layout.R:0
+msgid "'respect' must be logical or matrix with same dimension as 'mat'"
+msgstr ""
+"'respect' deve essere booleano o una matrice delle stesse dimensioni di 'mat'"
+
+#. R/stem.R: stop("'scale' argument must be positive")
+#: R/stem.R:0
+#, fuzzy
+msgid "'scale' argument must be positive"
+msgstr "'scale' deve essere positivo"
+
+#. R/axis.R: stop("'side' argument must be in {1:4}")
+#: R/axis.R:0
+#, fuzzy
+msgid "'side' argument must be in {1:4}"
+msgstr "'side' deve essere in {1:4}"
+
+#. R/legend.R: stop("'text.width' argument must be numeric, >= 0")
+#: R/legend.R:0
+#, fuzzy
+msgid "'text.width' argument must be numeric, >= 0"
+msgstr "'text.width' deve essere numeric, >= 0"
+
+#. R/matplot.R: stop("'x' and 'y' must have only 1 or the same number of columns")
+#: R/matplot.R:0
+msgid "'x' and 'y' must have only 1 or the same number of columns"
+msgstr "'x' e 'y' devono avere solo 1 o lo stesso numero di colonne"
+
+#. R/matplot.R: stop("'x' and 'y' must have same number of rows")
+#: R/matplot.R:0
+msgid "'x' and 'y' must have same number of rows"
+msgstr "'x' ed 'y' devono avere lo stesso numero di righe"
+
+#. R/image.R: stop("'x' and 'y' values must be finite and non-missing")
+#: R/image.R:0
+msgid "'x' and 'y' values must be finite and non-missing"
+msgstr ""
+
+#. R/stem.R: stop("'x' argument must be numeric")
+#: R/stem.R:0
+#, fuzzy
+msgid "'x' argument must be numeric"
+msgstr "'x' deve essere numeric"
+
+#. R/mosaicplot.R: stop("'x' argument must not have 0 dimensionality")
+#: R/mosaicplot.R:0
+#, fuzzy
+msgid "'x' argument must not have 0 dimensionality"
+msgstr "'x' non deve avere dimensione 0"
+
+#. R/dotchart.R: warning("'x' is neither a vector nor a matrix: using as.numeric(x)")
+#: R/dotchart.R:0
+msgid "'x' is neither a vector nor a matrix: using as.numeric(x)"
+msgstr ""
+
+#. R/hist.R: stop("'x' is wrongly structured")
+#: R/hist.R:0
+msgid "'x' is wrongly structured"
+msgstr "'x' è strutturata in modo errato"
+
+#. R/fourfoldplot.R: stop("'x' must be 2- or 3-dimensional")
+#: R/fourfoldplot.R:0
+msgid "'x' must be 2- or 3-dimensional"
+msgstr "'x' deve essere bi o tri-dimensionale"
+
+#. R/assocplot.R: stop("'x' must be a 2-d contingency table")
+#: R/assocplot.R:0
+msgid "'x' must be a 2-d contingency table"
+msgstr "'x' deve essere una tabella di contigenza a 2 vie"
+
+#. R/plot.design.R: stop("'x' must be a data frame")
+#: R/plot.design.R:0
+msgid "'x' must be a data frame"
+msgstr "'x' deve essere un data frame"
+
+#. R/plot.design.R: stop("'x' must be a dataframe or a formula")
+#: R/plot.design.R:0
+msgid "'x' must be a dataframe or a formula"
+msgstr "'x' deve essere un data frame o una formula"
+
+#. R/stars.R: stop("'x' must be a matrix or a data frame")
+#: R/stars.R:0
+msgid "'x' must be a matrix or a data frame"
+msgstr "'x' deve essere una matrice o un data frame"
+
+#. R/dotchart.R: stop("'x' must be a numeric vector or matrix")
+#: R/dotchart.R:0
+#, fuzzy
+msgid "'x' must be a numeric vector or matrix"
+msgstr "'y' deve essere un vettore numerico"
+
+#. R/fourfoldplot.R: stop("'x' must be an array")
+#: R/fourfoldplot.R:0
+msgid "'x' must be an array"
+msgstr "'x' deve essere un array"
+
+#. R/pie.R: stop("'x' values must be positive")
+#: R/pie.R:0
+#, fuzzy
+msgid "'x' values must be positive"
+msgstr "i valori di 'x' devono essere positiv"
+
+#. R/plot.design.R: stop("'y' must be a numeric vector")
+#: R/plot.design.R:0
+msgid "'y' must be a numeric vector"
+msgstr "'y' deve essere un vettore numerico"
+
+#. R/image.R: stop("'z' must be a matrix")
+#: R/image.R:0
+msgid "'z' must be a matrix"
+msgstr "'z' deve essere una matrice"
+
+#. R/barplot.R: stop("Cannot use shading lines in bars when log scale is used")
+#: R/barplot.R:0
+msgid "Cannot use shading lines in bars when log scale is used"
+msgstr ""
+
+#. R/hist.R: gettext("Density", domain = "R-graphics")
+#: R/hist.R:0
+msgid "Density"
+msgstr ""
+
+#. R/hist.R: gettext("Frequency", domain = "R-graphics")
+#: R/hist.R:0
+msgid "Frequency"
+msgstr ""
+
+#. R/hist.R: gettextf("Histogram of %s", xname, domain = "R-graphics")
+#. R/hist.R: gettextf("Histogram of %s", paste(x$xname, collapse = "\n"), domain = "R-graphics")
+#: R/hist.R:0
+msgid "Histogram of %s"
+msgstr ""
+
+#. R/hist.R: gettextf("Invalid breakpoints produced by 'breaks(x)': %s", format(breaks))
+#: R/hist.R:0
+msgid "Invalid breakpoints produced by 'breaks(x)': %s"
+msgstr ""
+
+#. R/polygon.R: stop("Invalid fill rule for graphics path")
+#: R/polygon.R:0
+msgid "Invalid fill rule for graphics path"
+msgstr ""
+
+#. R/coplot.R: gettextf("Missing rows: %s", paste0(missingrows, collapse = ", "), domain = "R-graphics")
+#: R/coplot.R:0
+#, fuzzy
+msgid "Missing rows: %s"
+msgstr "Righe mancanti"
+
+#. R/mosaicplot.R: gettext("Standardized\nResiduals:")
+#: R/mosaicplot.R:0
+msgid ""
+"Standardized\n"
+"Residuals:"
+msgstr ""
+
+#. R/spineplot.R: stop("a 2-way table has to be specified")
+#: R/spineplot.R:0
+msgid "a 2-way table has to be specified"
+msgstr ""
+
+#. R/plot.design.R: stop("a variable in 'y' is not numeric")
+#: R/plot.design.R:0
+msgid "a variable in 'y' is not numeric"
+msgstr "una variabile in 'y' non è numerica"
+
+#. R/plot.design.R: stop("all columns/components of 'x' must be factors")
+#: R/plot.design.R:0
+msgid "all columns/components of 'x' must be factors"
+msgstr "tutte le colonne/componenti di 'x' devono essere di tipo factor"
+
+#. R/assocplot.R: stop("all entries of 'x' must be nonnegative and finite")
+#: R/assocplot.R:0
+msgid "all entries of 'x' must be nonnegative and finite"
+msgstr "tutti i termini di 'x' devono essere non negativi e finiti"
+
+#. R/image.R: stop("argument must be matrix-like")
+#: R/image.R:0
+msgid "argument must be matrix-like"
+msgstr "l'argomento deve essere una matrice o simile"
+
+#. R/assocplot.R: stop("at least one entry of 'x' must be positive")
+#: R/assocplot.R:0
+msgid "at least one entry of 'x' must be positive"
+msgstr "almeno un termine di 'x' deve essere positivo"
+
+#. R/plot.R: stop("cannot handle more than one 'x' coordinate")
+#. R/plot.R: stop("cannot handle more than one 'x' coordinate")
+#. R/plot.R: stop("cannot handle more than one 'x' coordinate")
+#: R/plot.R:0
+msgid "cannot handle more than one 'x' coordinate"
+msgstr "non possono lavorare con piu' di una coordinata 'x'"
+
+#. R/polygon.R: warning("cannot hatch with logarithmic scale active")
+#: R/polygon.R:0
+msgid "cannot hatch with logarithmic scale active"
+msgstr "non posso usare il tratteggio in scala logaritmica"
+
+#. R/stars.R: stop("data in 'x' must be numeric")
+#: R/stars.R:0
+msgid "data in 'x' must be numeric"
+msgstr "i dati in 'x' devoo essere numeric"
+
+#. R/matplot.R: warning("default 'pch' is smaller than number of columns and hence recycled")
+#: R/matplot.R:0
+msgid "default 'pch' is smaller than number of columns and hence recycled"
+msgstr ""
+
+#. R/cdplot.R: stop("dependent variable should be a factor")
+#. R/cdplot.R: stop("dependent variable should be a factor")
+#. R/spineplot.R: stop("dependent variable should be a factor")
+#. R/spineplot.R: stop("dependent variable should be a factor")
+#: R/cdplot.R:0 R/spineplot.R:0
+msgid "dependent variable should be a factor"
+msgstr ""
+
+#. R/image.R: stop("dimensions of z are not length(x)(-1) times length(y)(-1)")
+#: R/image.R:0
+#, fuzzy
+msgid "dimensions of z are not length(x)(-1) times length(y)(-1)"
+msgstr "le dimensioni di z non sono length(z)(+1) volte length(y)(+1)"
+
+#. R/symbols.R: stop("exactly one symbol type must be specified")
+#: R/symbols.R:0
+msgid "exactly one symbol type must be specified"
+msgstr "esattamente un tipo di symbol deve essere specificato"
+
+#. R/stripchart.R: stop("formula missing or incorrect")
+#. R/sunflowerplot.R: stop("formula missing or incorrect")
+#: R/stripchart.R:0 R/sunflowerplot.R:0
+#, fuzzy
+msgid "formula missing or incorrect"
+msgstr "'formula' mancante o sbagliata"
+
+#. R/hist.R: gettextf("hist.default: pretty() error, breaks=%s", format(breaks))
+#: R/hist.R:0
+#, fuzzy
+msgid "hist.default: pretty() error, breaks=%s"
+msgstr "hist.default: errore in pretty(), breaks="
+
+#. R/legend.R: gettextf("horizontal specification overrides: Number of columns := %d", n.leg)
+#: R/legend.R:0
+#, fuzzy
+msgid "horizontal specification overrides: Number of columns := %d"
+msgstr "la specificazione orizzontale eccede: Numero di colonne :="
+
+#. R/coplot.R: stop("incompatible variable lengths")
+#: R/coplot.R:0
+msgid "incompatible variable lengths"
+msgstr "lunghezza delle variabili incompatibile"
+
+#. R/assocplot.R: stop("incorrect 'col': must be length 2")
+#: R/assocplot.R:0
+#, fuzzy
+msgid "incorrect 'col': must be length 2"
+msgstr "'col' non valido: deve essere di lunghezza 2"
+
+#. R/fourfoldplot.R: stop("incorrect 'margin' specification")
+#: R/fourfoldplot.R:0
+msgid "incorrect 'margin' specification"
+msgstr "'margin' non correttamente specificate"
+
+#. R/fourfoldplot.R: stop("incorrect geometry specification")
+#: R/fourfoldplot.R:0
+msgid "incorrect geometry specification"
+msgstr "geometry non specificato correttamente"
+
+#. R/barplot.R: stop("incorrect number of names")
+#: R/barplot.R:0
+msgid "incorrect number of names"
+msgstr "numero di nomi non corretto"
+
+#. R/contour.R: stop("increasing 'x' and 'y' values expected")
+#. R/filled.contour.R: stop("increasing 'x' and 'y' values expected")
+#. R/image.R: stop("increasing 'x' and 'y' values expected")
+#. R/persp.R: stop("increasing 'x' and 'y' values expected")
+#: R/contour.R:0 R/filled.contour.R:0 R/image.R:0 R/persp.R:0
+msgid "increasing 'x' and 'y' values expected"
+msgstr "i valori di 'x' e 'y' devono essere crescenti"
+
+#. R/image.R: stop("integer colors must be non-negative")
+#: R/image.R:0
+msgid "integer colors must be non-negative"
+msgstr ""
+
+#. R/axis.R: gettextf("invalid '%s' argument", "axp")
+#. R/axis.R: gettextf("invalid '%s' argument", "log")
+#. R/axis.R: gettextf("invalid '%s' argument", "usr")
+#. R/coplot.R: gettextf("invalid '%s' argument", "given.values")
+#. R/datetime.R: gettextf("invalid '%s' argument", "breaks")
+#. R/datetime.R: gettextf("invalid '%s' argument", "breaks")
+#. R/datetime.R: gettextf("invalid '%s' argument", "breaks")
+#. R/datetime.R: gettextf("invalid '%s' argument", "breaks")
+#. R/legend.R: gettextf("invalid '%s' argument", "title")
+#. R/mosaicplot.R: gettextf("invalid '%s' argument", "shade")
+#. R/pairs.R: gettextf("invalid '%s' argument", "hordInd")
+#. R/pairs.R: gettextf("invalid '%s' argument", "verInd")
+#: R/axis.R:0 R/coplot.R:0 R/datetime.R:0 R/legend.R:0 R/mosaicplot.R:0
+#: R/pairs.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "primo argomento non valido"
+
+#. R/hist.R: gettextf("invalid '%s' value", "length(x)")
+#. R/hist.R: gettextf("invalid '%s' value", "length(breaks)")
+#. R/stem.R: gettextf("invalid '%s' value", "length(x)")
+#: R/hist.R:0 R/stem.R:0
+#, fuzzy
+msgid "invalid '%s' value"
+msgstr "primo argomento non valido"
+
+#. R/boxplot.R: stop("invalid boxplot widths")
+#: R/boxplot.R:0
+msgid "invalid boxplot widths"
+msgstr "larghezza boxplot non valida"
+
+#. R/coplot.R: stop("invalid conditioning formula")
+#: R/coplot.R:0
+msgid "invalid conditioning formula"
+msgstr "formula di condizionamento non valida"
+
+#. R/legend.R: stop("invalid coordinate lengths")
+#: R/legend.R:0
+msgid "invalid coordinate lengths"
+msgstr "lunghezza delle coordinate non valida"
+
+#. R/boxplot.R: stop("invalid first argument")
+#. R/boxplot.R: stop("invalid first argument")
+#. R/stripchart.R: stop("invalid first argument")
+#: R/boxplot.R:0 R/stripchart.R:0
+msgid "invalid first argument"
+msgstr "primo argomento non valido"
+
+#. R/hist.R: stop("invalid number of 'breaks'")
+#: R/hist.R:0
+msgid "invalid number of 'breaks'"
+msgstr "numero di 'breaks' non valido"
+
+#. R/stripchart.R: stop("invalid plotting method")
+#: R/stripchart.R:0
+msgid "invalid plotting method"
+msgstr "metodo di disegno non valido"
+
+#. R/axis.R: stop("invalid positive 'axp[3]'")
+#: R/axis.R:0
+#, fuzzy
+msgid "invalid positive 'axp[3]'"
+msgstr "valore positivo 'axp[3]' non valido"
+
+#. R/rect.R: stop("invalid rectangle specification")
+#: R/rect.R:0
+msgid "invalid rectangle specification"
+msgstr "specificazione del rettangolo non valida"
+
+#. R/screen.R: stop("invalid screen number")
+#. R/screen.R: stop("invalid screen number")
+#. R/screen.R: stop("invalid screen number")
+#: R/screen.R:0
+msgid "invalid screen number"
+msgstr "numero schermo non valido"
+
+#. R/plot.R: stop("invalid table 'x'")
+#: R/plot.R:0
+msgid "invalid table 'x'"
+msgstr "table 'x' non valida"
+
+#. R/image.R: stop("invalid z limits")
+#: R/image.R:0
+msgid "invalid z limits"
+msgstr "limits di z non validi"
+
+#. R/stars.R: warning("labels do not make sense for a single location")
+#: R/stars.R:0
+msgid "labels do not make sense for a single location"
+msgstr "non ha senso specificare 'labels' per una singola 'location'"
+
+#. R/layout.R: gettextf("layout matrix must contain at least one reference\nto each of the values {1 ... %d}",     num.figures)
+#: R/layout.R:0
+#, fuzzy
+msgid ""
+"layout matrix must contain at least one reference\n"
+"to each of the values {1 ... %d}"
+msgstr ""
+"la matrice di layout deve contenere almeno un riferimento\n"
+"a ciascuno dei valori {1..n}; qui n ="
+
+#. R/stars.R: stop("length of 'angles' must equal 'ncol(x)'")
+#: R/stars.R:0
+msgid "length of 'angles' must equal 'ncol(x)'"
+msgstr "lunghezza di 'angles' deve essere pari a 'ncol(x)'"
+
+#. R/mosaicplot.R: stop("length of 'sort' does not conform to 'dim(x)'")
+#: R/mosaicplot.R:0
+msgid "length of 'sort' does not conform to 'dim(x)'"
+msgstr "lunghezza di 'sort' non conforme a 'dim(x)'"
+
+#. R/barplot.R: gettextf("log scale error: '%s' <= 0", "xlim")
+#. R/barplot.R: gettextf("log scale error: '%s' <= 0", "ylim")
+#: R/barplot.R:0
+msgid "log scale error: '%s' <= 0"
+msgstr ""
+
+#. R/barplot.R: stop("log scale error: at least one 'height + offset' value <= 0")
+#: R/barplot.R:0
+msgid "log scale error: at least one 'height + offset' value <= 0"
+msgstr ""
+
+#. R/units.R: warning("log scale:  xyinch() is nonsense")
+#: R/units.R:0
+#, fuzzy
+msgid "log scale:  xyinch() is nonsense"
+msgstr "log scale: xyinch() è non-sense"
+
+#. R/matplot.R: gettextf("matplot: doing %d plots with %s %s ...", k, paste0(" col= (", paste.ch(col),     ")"), paste0(" pch= (", paste.ch(pch), ")"))
+#: R/matplot.R:0
+msgid "matplot: doing %d plots with %s %s ..."
+msgstr ""
+
+#. R/mosaicplot.R: stop("missing values in contingency table")
+#: R/mosaicplot.R:0
+msgid "missing values in contingency table"
+msgstr "valori mancanti nella tabella di contingenza"
+
+#. R/plot.R: stop("must have a response variable")
+#. R/plot.R: stop("must have a response variable")
+#. R/plot.R: stop("must have a response variable")
+#: R/plot.R:0
+msgid "must have a response variable"
+msgstr "deve avere una variabile risposta"
+
+#. R/image.R: stop("must have one more break than colour")
+#: R/image.R:0
+msgid "must have one more break than colour"
+msgstr "deve avere un break in più di colour"
+
+#. R/matplot.R: stop("must specify at least one of 'x' and 'y'")
+#: R/matplot.R:0
+msgid "must specify at least one of 'x' and 'y'"
+msgstr "si deve specificare almeno uno tra 'x' e 'y'"
+
+#. R/hist.R: stop("negative 'counts'. Internal Error.", domain = "R-graphics")
+#: R/hist.R:0
+#, fuzzy
+msgid "negative 'counts'. Internal Error."
+msgstr "'counts' negativi. Errore interno nel codice C oer \"bincount\""
+
+#. R/contour.R: stop("no 'z' matrix specified")
+#. R/filled.contour.R: stop("no 'z' matrix specified")
+#. R/image.R: stop("no 'z' matrix specified")
+#. R/persp.R: stop("no 'z' matrix specified")
+#: R/contour.R:0 R/filled.contour.R:0 R/image.R:0 R/persp.R:0
+msgid "no 'z' matrix specified"
+msgstr "la matrice 'z' non è stata specificata"
+
+#. R/stem.R: stop("no finite and non-missing values")
+#: R/stem.R:0
+#, fuzzy
+msgid "no finite and non-missing values"
+msgstr "nessun valore non missing"
+
+#. R/contour.R: stop("no proper 'z' matrix specified")
+#. R/filled.contour.R: stop("no proper 'z' matrix specified")
+#: R/contour.R:0 R/filled.contour.R:0
+msgid "no proper 'z' matrix specified"
+msgstr "nessuna matrice 'z' opportuna specificata"
+
+#. R/pairs.R: stop("non-numeric argument to 'pairs'")
+#. R/pairs.R: stop("non-numeric argument to 'pairs'")
+#: R/pairs.R:0
+msgid "non-numeric argument to 'pairs'"
+msgstr "argomento non numerico a 'pairs'"
+
+#. R/legend.R: warning("not using pch[2..] since pch[1L] has multiple chars")
+#: R/legend.R:0
+#, fuzzy
+msgid "not using pch[2..] since pch[1L] has multiple chars"
+msgstr "non uso pch[2..] poiché pch[1] contiene più caratteri"
+
+#. R/stars.R: stop("number of rows of 'locations' and 'x' must be equal.")
+#: R/stars.R:0
+msgid "number of rows of 'locations' and 'x' must be equal."
+msgstr "il numero di righe in 'locations' e 'x' deve essere uguale"
+
+#. R/arrows.R: stop("one of 'x1' and 'y1' must be given")
+#. R/segments.R: stop("one of 'x1' and 'y1' must be given")
+#: R/arrows.R:0 R/segments.R:0
+msgid "one of 'x1' and 'y1' must be given"
+msgstr ""
+
+#. R/axis.R: stop("only for 1-D table")
+#. R/lines.R: stop("only for 1-D table")
+#. R/points.R: stop("only for 1-D table")
+#: R/axis.R:0 R/lines.R:0 R/points.R:0
+msgid "only for 1-D table"
+msgstr ""
+
+#. R/pairs.R: stop("only one column in the argument to 'pairs'")
+#: R/pairs.R:0
+msgid "only one column in the argument to 'pairs'"
+msgstr "solo una colonna come argomento di 'pairs'"
+
+#. R/abline.R: gettextf("only using the first two of %d regression coefficients", p)
+#: R/abline.R:0
+msgid "only using the first two of %d regression coefficients"
+msgstr ""
+
+#. R/coplot.R: stop("rows * columns too small")
+#: R/coplot.R:0
+msgid "rows * columns too small"
+msgstr "righe * colonne troppo piccolo"
+
+#. R/hist.R: stop("some 'x' not counted; maybe 'breaks' do not span range of 'x'")
+#: R/hist.R:0
+msgid "some 'x' not counted; maybe 'breaks' do not span range of 'x'"
+msgstr ""
+"alcuni valori di 'x' non considerati; forse 'breaks' non copre tutto il "
+"range di 'x'"
+
+#. R/plot.design.R: warning("some levels of the factors are empty", call. = FALSE)
+#: R/plot.design.R:0
+msgid "some levels of the factors are empty"
+msgstr "alcuni livelli dei factor sono vuoti"
+
+#. R/boxplot.R: warning("some notches went outside hinges ('box'): maybe set notch=FALSE")
+#: R/boxplot.R:0
+msgid "some notches went outside hinges ('box'): maybe set notch=FALSE"
+msgstr ""
+
+#. R/rug.R: warning("some values will be clipped")
+#: R/rug.R:0
+msgid "some values will be clipped"
+msgstr "alcuni valori saranno tagliati"
+
+#. R/persp.R: warning("surface extends beyond the box")
+#: R/persp.R:0
+msgid "surface extends beyond the box"
+msgstr ""
+
+#. R/fourfoldplot.R: stop("table for each stratum must be 2 by 2")
+#: R/fourfoldplot.R:0
+#, fuzzy
+msgid "table for each stratum must be 2 by 2"
+msgstr "la table di ogni strato deve essere 2 per 2"
+
+#. R/pairs.R: stop("the 'panel' function made a new plot")
+#: R/pairs.R:0
+msgid "the 'panel' function made a new plot"
+msgstr "La funzione 'panel' ha generato un nuovo grafico"
+
+#. R/hist.R: warning("the AREAS in the plot are wrong -- rather use 'freq = FALSE'")
+#: R/hist.R:0
+#, fuzzy
+msgid "the AREAS in the plot are wrong -- rather use 'freq = FALSE'"
+msgstr "le AREE nel grafico sono sbagliate -- usare piuttosto freq=FALSE"
+
+#. R/plot.design.R: stop("there must be at least one numeric variable!")
+#: R/plot.design.R:0
+msgid "there must be at least one numeric variable!"
+msgstr "ci deve essere almeno una variabile numerica!"
+
+#. R/hist.R: stop("unknown 'breaks' algorithm")
+#: R/hist.R:0
+msgid "unknown 'breaks' algorithm"
+msgstr "algoritmo per 'breaks' sconosciuto"
+
+#. R/image.R: warning("unsorted 'breaks' will be sorted before use")
+#: R/image.R:0
+msgid "unsorted 'breaks' will be sorted before use"
+msgstr ""
+
+#. R/spineplot.R: warning("x axis is on a cumulative probability scale, 'xlim' must be in [0,1]")
+#: R/spineplot.R:0
+msgid "x axis is on a cumulative probability scale, 'xlim' must be in [0,1]"
+msgstr ""
+
+#. R/units.R: warning("x log scale:  xinch() is nonsense")
+#: R/units.R:0
+#, fuzzy
+msgid "x log scale:  xinch() is nonsense"
+msgstr "x log scale: xinch() è non-sense"
+
+#. R/cdplot.R: warning("y axis is on a cumulative probability scale, 'ylim' must be in [0,1]")
+#. R/spineplot.R: warning("y axis is on a cumulative probability scale, 'ylim' must be in [0,1]")
+#: R/cdplot.R:0 R/spineplot.R:0
+msgid "y axis is on a cumulative probability scale, 'ylim' must be in [0,1]"
+msgstr ""
+
+#. R/units.R: warning("y log scale:  yinch() is nonsense")
+#: R/units.R:0
+#, fuzzy
+msgid "y log scale:  yinch() is nonsense"
+msgstr "y log scale: yinch() è non-sense"
+
+#. R/boxplot.R: ngettext(length(unique(out[inf])), "Outlier (%s) in boxplot %d is not drawn", "Outliers (%s) in boxplot %d are not drawn",     domain = "R-graphics")
+#: R/boxplot.R:0
+msgid "Outlier (%s) in boxplot %d is not drawn"
+msgid_plural "Outliers (%s) in boxplot %d are not drawn"
+msgstr[0] "Dato anomale (%s) nel boxplot %d non disegnato"
+msgstr[1] "Dati anomali (%s) nel boxplot %d non disegnati"
+
+#. R/hist.R: ngettext(sum(not.miss), "argument %s is not made use of", "arguments %s are not made use of",     domain = "R-graphics")
+#: R/hist.R:0
+msgid "argument %s is not made use of"
+msgid_plural "arguments %s are not made use of"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/mosaicplot.R: ngettext(length(list(...)), "extra argument %s will be disregarded", "extra arguments %s will be disregarded",     domain = "R-graphics")
+#: R/mosaicplot.R:0
+#, fuzzy
+msgid "extra argument %s will be disregarded"
+msgid_plural "extra arguments %s will be disregarded"
+msgstr[0] "gli argomenti in eccesso %s verranno ignorati"
+msgstr[1] "gli argomenti in eccesso %s verranno ignorati"
+
+#~ msgid "'x' must be numeric"
+#~ msgstr "'x' deve essere numeric"
+
+#, fuzzy
+#~ msgid "invalid length(x)"
+#~ msgstr "'log' non valido"
+
+#, fuzzy
+#~ msgid "invalid length(breaks)"
+#~ msgstr "lunghezza delle coordinate non valida"
+
+#, fuzzy
+#~ msgid "invalid length(x) value"
+#~ msgstr "'log' non valido"
+
+#~ msgid "invalid 'axp'"
+#~ msgstr "'axp' non valido"
+
+#~ msgid "invalid 'log'"
+#~ msgstr "'log' non valido"
+
+#~ msgid "invalid 'usr'"
+#~ msgstr "'usr' non valido"
+
+#~ msgid "invalid 'given.values'"
+#~ msgstr "'given.values' non valido"
+
+#~ msgid "wrong method"
+#~ msgstr "metodo errato"
+
+#~ msgid "invalid specification of 'breaks'"
+#~ msgstr "specificazine di 'breaks' non valida"
+
+#, fuzzy
+#~ msgid "invalid 'title'"
+#~ msgstr "'title' non valido"
+
+#~ msgid "invalid 'shade' specification"
+#~ msgstr "specificazione di 'shade' non valida"
+
+#, fuzzy
+#~ msgid "explanatory variable should be numeric"
+#~ msgstr "una variabile in 'y' non è numerica"
