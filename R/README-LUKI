@@ -1,44 +1,26 @@
-
-			README-ELS
+			README-LUKI
 
 
 1. HISTORY
 
-Extended Localization Support (ELS) jest jednoosobowym eksperymentalnym
-projektem, który ma na celu zwiększenie wykorzystania mechanizmu
-lokalizacji platformy. R w pewnym zakresie już umożliwia wyświetlanie
-komunikatów w języku innym niż angielski, aczkolwiek wykorzystanie
-to nie jest pełne. Prace rozpoczęły się od wersji R 3.0.0 i trwają nadal.
+LUKI is one-person experimental project focused on increasing the usage of
+i18n in R. Original R already has some i18n support but still not close to 100%.
 
-Czynnikiem, który spowodował zapoczątkowanie projektu ELS był fakt, że
-niektóre przetłumaczalne komunikaty, wyświetlane użytkownikowi końcowego
-wymagały od nie-angielskich tłumaczeń wprowadzania świadomych błędów
-gramatycznych. Błędy te były nieuniknione, z uwagi na sposób udostępnienia
-komunikatu do tłumaczenia (tzn. komunikaty były porozdzielane na
-fragmenty, które z kolei były współdzielone przez pozostałe komunikaty).
+Work began since R 3.0.0 and is being continued.
 
-W ramach prac, udostępnione komunikaty zostały zdefragmentowane oraz
-zostały udostępnione pozostałe.
-
-Modified R (i.e. R with ELS) is free software distributed under a GNU-style copyleft.
+This modified version of R along with its recommended packages is free
+software distributed under a GNU-style copyleft.
 
 
-2. BASICS
+2. CHANGES MADE TO R CORE AND RECOMMENDED PACKAGES
 
-Aby udostępniony komunikat mógł być poprawnie przetłumaczony na
-dowolny język, musi mieć określoną formę (lub mówiąc prościej
-musi być pełnym zdaniem).
+See 'ChangeLog' for R-core, and 'Changes' for each recommended package
 
 
-3. CHANGES MADE TO R CORE AND RECOMMENDED PACKAGES
+3. GOALS
 
-See 'ChangeLog' for R-core, and 'Changes' for each recommended packages
-
-
-4. GOALS
-
-Celem projektu jest uzyskanie pełnej lokalizacji platformy R wraz z jej
-polecanymi pakietami.
+The aim of this project is to deliver full i18n for R and its recommended packages
+while retaining its full functionality.
 
 
 Best regards,
