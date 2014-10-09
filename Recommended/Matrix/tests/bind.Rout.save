@@ -1,13 +1,13 @@
 
-R Under development (unstable) (2014-09-30 r594) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-10-09 r5) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
 This version of R supports extended localization
-See README-ELS file for details
-R-ELS Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-LUKI file for details
+Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
 
-R-ELS is not part of the R project, so please do not report bugs
+This modified version of R is not part of the R project, so please do not report bugs
 via r-bugs or the R website - instead refer to the author.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -132,7 +132,7 @@ A 1 4 7 10 100 1 4 7 10
 B 2 5 8 11 100 2 5 8 11
 C 3 6 9 12 100 3 6 9 12
 > showProc.time()
-Time elapsed:  0.068 0.008 0.075 
+Time elapsed:  0.079 0 0.08 
 > 
 > ### --- Diagonal / Sparse - had bugs
 > 
@@ -163,7 +163,7 @@ Time elapsed:  0.068 0.008 0.075
 + 	  identical(t(d4), cBind(Diagonal(4),     0:3)),
 + 	  identical(t(m4), rBind(Diagonal(x=-1:2), 0:3)))
 > showProc.time()
-Time elapsed:  0.147 0 0.148 
+Time elapsed:  0.161 0.004 0.167 
 > 
 > ### --- Sparse Matrices ---
 > 
@@ -213,7 +213,7 @@ rBind (m, v= 2 ), class(m) : dgeMatrix ,. dgCMatrix ,. dgTMatrix ,.
 cBind (m, v= c(1L, 0L) ), class(m) : dgeMatrix ,. dgCMatrix ,. dgTMatrix ,.
 rBind (m, v= c(1L, 0L) ), class(m) : dgeMatrix ,. dgCMatrix ,. dgTMatrix ,.
 > showProc.time()
-Time elapsed:  0.107 0.008 0.114 
+Time elapsed:  0.106 0.011 0.119 
 > 
 > cBind(0, mC); cBind(mC, 0)
 4 x 7 sparse Matrix of class "dgCMatrix"
@@ -384,8 +384,8 @@ v5 . | . | .
 [5,]    6    1    0    0    0    0   50    1
 > 
 > showProc.time()
-Time elapsed:  0.24 0.02 0.261 
+Time elapsed:  0.261 0.02 0.284 
 > 
 > proc.time()
    user  system elapsed 
-  2.478   0.132   2.594 
+  2.631   0.072   2.736 
