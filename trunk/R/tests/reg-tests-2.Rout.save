@@ -1,13 +1,13 @@
 
-R Under development (unstable) (2014-09-30 r594) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-10-09 r5) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
 This version of R supports extended localization
-See README-ELS file for details
-R-ELS Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-LUKI file for details
+Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
 
-R-ELS is not part of the R project, so please do not report bugs
+This modified version of R is not part of the R project, so please do not report bugs
 via r-bugs or the R website - instead refer to the author.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -6403,15 +6403,15 @@ function ()
 > print.function
 function (x, ...)  
  - attr(*, "srcref")=Class 'srcref' atomic [1:8] 1 19 1 63 19 63 1 1
-  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x449cb78> 
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x3addde8> 
 > f
 function ()  
  - attr(*, "srcref")=Class 'srcref' atomic [1:8] 1 17 1 28 17 28 1 1
-  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x44a5cc0> 
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x3ae8558> 
  - attr(*, "note")= character "just a note"
  - attr(*, "yada")=function ()  
   ..- attr(*, "srcref")=Class 'srcref' atomic [1:8] 2 24 2 48 24 48 2 2
-  .. .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x44a5cc0> 
+  .. .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x3ae8558> 
 > rm(print.function)
 > ## auto-printing and printing differed up to R 2.9.x
 > 

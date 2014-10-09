@@ -1,13 +1,13 @@
 
-R Under development (unstable) (2014-09-30 r594) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-10-09 r5) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
 This version of R supports extended localization
-See README-ELS file for details
-R-ELS Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-LUKI file for details
+Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
 
-R-ELS is not part of the R project, so please do not report bugs
+This modified version of R is not part of the R project, so please do not report bugs
 via r-bugs or the R website - instead refer to the author.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -2033,7 +2033,7 @@ N
 > points.default # to see how it calls "plot.xy(xy.coords(x, y), ...)"
 function (x, y = NULL, type = "p", ...) 
 plot.xy(xy.coords(x, y), type = type, ...)
-<bytecode: 0x2cac960>
+<bytecode: 0x2a34578>
 <environment: namespace:graphics>
 > 
 > 
@@ -2904,7 +2904,7 @@ function (xy = 1, warn.log = TRUE)
     u <- par("usr")
     xy * c(u[2L] - u[1L], u[4L] - u[3L])/par("pin")
 }
-<bytecode: 0x39d99a0>
+<bytecode: 0x2fe6350>
 <environment: namespace:graphics>
 > 
 > ## plot labels offset 0.12 inches to the right
@@ -2984,7 +2984,7 @@ function (xy = 1, warn.log = TRUE)
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  2.518 0.14 2.677 0 0 
+Time elapsed:  2.662 0.172 2.838 0 0 
 > grDevices::dev.off()
 null device 
           1 

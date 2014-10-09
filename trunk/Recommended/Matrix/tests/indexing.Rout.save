@@ -1,13 +1,13 @@
 
-R Under development (unstable) (2014-09-30 r594) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-10-09 r5) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
 This version of R supports extended localization
-See README-ELS file for details
-R-ELS Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-LUKI file for details
+Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
 
-R-ELS is not part of the R project, so please do not report bugs
+This modified version of R is not part of the R project, so please do not report bugs
 via r-bugs or the R website - instead refer to the author.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -88,7 +88,7 @@ doExtras: FALSE
      [,1] [,2] [,3] [,4]
 > m[2:4, numeric(0)] #-> 3 x 0 Matrix
 3 x 0 Matrix of class "dgeMatrix"
-
+    
 [1,]
 [2,]
 [3,]
@@ -134,7 +134,7 @@ diagnosing replTmat(x,i,j,v): nargs()= 3; missing (i,j) = (0,1)
 + 	  identical(a.m, array(v, dim=dim(mn), dimnames=dimnames(mn)))
 + 	  )
 > showProc.time()
-Time elapsed:  0.298 0.004 0.308 
+Time elapsed:  0.317 0.008 0.325 
 > 
 > ## Printing sparse colnames:
 > ms[sample(28, 20)] <- 0
@@ -191,7 +191,7 @@ diagnosing replTmat(x,i,j,v): nargs()= 3; missing (i,j) = (0,1)
 + 	  identical3(m[!sel],  m[!ssel], as.matrix(m)[as.matrix(!ssel)])
 + 	  )
 > showProc.time()
-Time elapsed:  0.06 0 0.06 
+Time elapsed:  0.073 0 0.074 
 > 
 > ## more sparse Matrices --------------------------------------
 > 
@@ -527,7 +527,7 @@ ok( d )
 == ###======================================================================
 
 > showProc.time()
-Time elapsed:  1.107 0.015 1.123 
+Time elapsed:  1.27 0.027 1.372 
 > 
 > if(doExtras) {### {was ./AAA_index.R, MM-only}
 +     ## an nsparse-example
@@ -686,7 +686,7 @@ Time elapsed:  1.107 0.015 1.123
 +     assert.EQ.mat(T[i,i], ss[i,i])
 + }
 > showProc.time()
-Time elapsed:  0.208 0.008 0.215 
+Time elapsed:  0.235 0.016 0.254 
 > 
 > stopifnot(all.equal(mC[,3], mm[,3]),
 + 	  identical(mC[ij], mC[ij + 0.4]),
@@ -896,7 +896,7 @@ diagnosing replTmat(x,i,j,v): nargs()= 3; missing (i,j) = (0,1)
 + 	  all(sm[,-(1:3)] == 0)
 + 	  )
 > showProc.time()
-Time elapsed:  0.198 0.009 0.206 
+Time elapsed:  0.211 0.013 0.226 
 > 
 > ##---  "nsparse*" sub-assignment :----------
 > M <- Matrix(c(1, rep(0,7), 1:4), 3,4)
@@ -953,7 +953,7 @@ Time elapsed:  0.198 0.009 0.206
 ,k.,k.,k.,k.,k.,k.,k.,k.,k.,k.
 ,k.,k.,k.,k.,k.,k.,k.,k.,k.,k.
 ,k.,k.,k.,k.,k.> showProc.time()
-Time elapsed:  0.271 0 0.271 
+Time elapsed:  0.297 0 0.298 
 > Nn <- Nn0
 > ## Check that  NA is interpreted as TRUE (with a warning), for "nsparseMatrix":
 > assertWarning(Nn[ii <-     3  ] <- NA); stopifnot(isValid(Nn,"nsparseMatrix"), Nn[ii])
@@ -1128,7 +1128,7 @@ as(<triangular (ge)matrix>, dtCMatrix): valid: TRUE
 > stopifnot(is(T, "dtCMatrix"), identical(T[,3], c(10,10,10,0,0)),
 + 	  Qidentical(as(Z, "matrix"), z))
 > showProc.time()
-Time elapsed:  0.924 0.016 0.948 
+Time elapsed:  0.992 0.024 1.018 
 > 
 > 
 > ## "Vector indices" -------------------
@@ -1332,7 +1332,7 @@ Warning in command '`[<-`(`*tmp*`, i, value = 1:7)':
 > ## mixing of negative and positive must give error
 > assertError(mT[-1:1,])
 > showProc.time()
-Time elapsed:  0.234 0.02 0.255 
+Time elapsed:  0.259 0.004 0.263 
 > 
 > ## Sub *Assignment* ---- now works (partially):
 > mt0 <- mt
@@ -1440,7 +1440,7 @@ r5   .   2  4   .  6  .  .
 r2  2
 r4  .
 > showProc.time()
-Time elapsed:  0.18 0.012 0.192 
+Time elapsed:  0.21 0.012 0.222 
 > options(Matrix.verbose = TRUE)
 > 
 > mc # no longer has non-structural zeros
@@ -1661,7 +1661,7 @@ M[i,j] <- v :  coercing symmetric M[] into non-symmetric
 > assert.EQ.mat(t2, m)# ok
 > assert.EQ.mat(s2, m)# failed in 0.9975-8
 > showProc.time()
-Time elapsed:  0.781 0.012 0.793 
+Time elapsed:  0.896 0.016 0.913 
 > 
 > 
 > ## m[cbind(i,j)] <- value: (2-column matrix subassignment):
@@ -1804,7 +1804,7 @@ r5  TRUE TRUE FALSE TRUE TRUE TRUE TRUE
 > 
 > cc <- capture.output(show(dLrg))# show(<diag>) used to error for large n
 > showProc.time()
-Time elapsed:  0.851 0.012 0.862 
+Time elapsed:  0.933 0.011 0.946 
 > 
 > ## Large Matrix indexing / subassignment
 > ## ------------------------------------- (from ex. by Imran Rashid)
@@ -1877,4 +1877,4 @@ NULL
 > 
 > proc.time()
    user  system elapsed 
-  8.300   0.317   8.614 
+  9.236   0.295   9.624 

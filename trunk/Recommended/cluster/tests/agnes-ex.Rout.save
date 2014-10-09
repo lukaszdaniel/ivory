@@ -1,13 +1,13 @@
 
-R Under development (unstable) (2014-09-30 r594) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-10-09 r5) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
 This version of R supports extended localization
-See README-ELS file for details
-R-ELS Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-LUKI file for details
+Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
 
-R-ELS is not part of the R project, so please do not report bugs
+This modified version of R is not part of the R project, so please do not report bugs
 via r-bugs or the R website - instead refer to the author.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -496,7 +496,7 @@ List of 9 components
  - attr(*, "class")= character [1:2] "agnes" "twins"
 > 
 > showProc.time()
-Time elapsed:  0.065 0.024 0.09 
+Time elapsed:  0.054 0.028 0.081 
 > 
 > summary(ar2 <- agnes(ruspini, metric="manhattan", method = "weighted"))
 Object of class 'agnes' from call:
@@ -621,7 +621,7 @@ Available components:
 > stopifnot(all.equal(ar2[1:4], ar3[1:4], tol=1e-12))
 > 
 > showProc.time()
-Time elapsed:  0.006 0.008 0.014 
+Time elapsed:  0.005 0.008 0.014 
 > 
 > ## Small example, testing "flexible" vs "single"
 > i8 <- -c(1:2, 9:10)
@@ -766,8 +766,8 @@ C agnes(n=75, method = 5, ..): 74 merging steps
 C agnes(n=75, method = 6, ..): 74 merging steps
 > 
 > showProc.time()
-Time elapsed:  0.056 0 0.056 
+Time elapsed:  0.049 0.004 0.053 
 > 
 > proc.time()
    user  system elapsed 
-  0.360   0.070   0.416 
+  0.295   0.071   0.359 
