@@ -2687,7 +2687,7 @@ $residual.scale
 
 > predict(fit, type="terms", se=TRUE)
 $fit
-
+     
  [1,]
  [2,]
  [3,]
@@ -2702,7 +2702,7 @@ attr(,"constant")
 [1] 0
 
 $se.fit
-
+     
  [1,]
  [2,]
  [3,]
@@ -2723,7 +2723,7 @@ $residual.scale
 > variable.names(fit) #should be empty
 character(0)
 > model.matrix(fit)
-
+  
 1 
 2 
 3 
@@ -2896,7 +2896,7 @@ $residual.scale
 
 > predict(fit, type="terms", se=TRUE)
 $fit
-
+     
  [1,]
  [2,]
  [3,]
@@ -2911,7 +2911,7 @@ attr(,"constant")
 [1] 0
 
 $se.fit
-
+     
  [1,]
  [2,]
  [3,]
@@ -3088,7 +3088,7 @@ b d e f g h i j
 0 0 0 0 0 0 0 0 
 
 $coefficients
-
+ 
 b
 d
 e
@@ -3114,7 +3114,7 @@ b d c e f g h i j
 0 0 0 0 0 0 0 0 0 
 
 $coefficients
-
+ 
 b
 d
 c
@@ -3143,7 +3143,7 @@ b d e f g h i j
 0 0 0 0 0 0 0 0 
 
 $coefficients
-
+ 
 b
 d
 e
@@ -3169,7 +3169,7 @@ b d c e f g h i j
 0 0 0 0 0 0 0 0 0 
 
 $coefficients
-
+ 
 b
 d
 c
@@ -3198,7 +3198,7 @@ a b c d e f g h i j
 0 0 0 0 0 0 0 0 0 0 
 
 $coefficients
-
+ 
 a
 b
 c
@@ -5483,10 +5483,11 @@ character(0)
 > ## apply on arrays with zero extents
 > ## Robin Hankin, R-help, 2006-02-13
 > A <- array(0, c(3, 0, 4))
-> dimnames(A) <- list(a = letters[1:3], b = NULL, c = LETTERS[1:4])
+> dimnames(A) <- list(D1 = letters[1:3], D2 = NULL, D3 = LETTERS[1:4])
 > f <- function(x) 5
 > apply(A, 1:2, f)
-
+   D2
+D1 
   a
   b
   c
@@ -6923,7 +6924,7 @@ Error in command 'array(1, integer(), list(1, 2))':
 > ## is.na() on an empty dataframe (PR#14059)
 > DF <- data.frame(row.names=1:3)
 > is.na(DF); str(.Last.value)
-
+ 
 1
 2
 3
@@ -7556,4 +7557,89 @@ Slot "\\C":
 numeric(0)
 
 > ## the last two lines printed wrongly in R <= 3.1.1
+> 
+> 
+> ## Printing of arrays where last dim(.) == 0 :
+> r <- matrix(,0,4, dimnames=list(Row=NULL, Col=paste0("c",1:4)))
+> r
+      Col
+Row    c1 c2 c3 c4
+> t(r) # did not print "Row", "Col"
+    Row
+Col 
+  c1
+  c2
+  c3
+  c4
+> A <- array(dim=3:0, dimnames=list(D1=c("a","b","c"), D2=c("X","Y"), D3="I", D4=NULL))
+> A ## did not print *anything*
+<3 x 2 x 1 x 0 array of logical>
+   D2
+D1  X Y
+  a
+  b
+  c
+
+> A[,,"I",] # ditto
+<3 x 2 x 0 array of logical>
+   D2
+D1  X Y
+  a
+  b
+  c
+
+> A[,,0,]   # ditto
+<3 x 2 x 0 x 0 array of logical>
+   D2
+D1  X Y
+  a
+  b
+  c
+
+> aperm(A, c(3:1,4))   # ditto
+<1 x 2 x 3 x 0 array of logical>
+   D2
+D3  X Y
+  I
+
+> aperm(A, c(1:2, 4:3))# ditto
+<3 x 2 x 0 x 1 array of logical>
+   D2
+D1  X Y
+  a
+  b
+  c
+
+> aperm(A, 4:1)     # was ok, unchanged
+, , D2 = X, D1 = a
+
+      D3
+D4     I
+
+, , D2 = Y, D1 = a
+
+      D3
+D4     I
+
+, , D2 = X, D1 = b
+
+      D3
+D4     I
+
+, , D2 = Y, D1 = b
+
+      D3
+D4     I
+
+, , D2 = X, D1 = c
+
+      D3
+D4     I
+
+, , D2 = Y, D1 = c
+
+      D3
+D4     I
+
+> ## sometimes not printing anything in R <= 3.1.1
 > 

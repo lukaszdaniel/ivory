@@ -1,4 +1,4 @@
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/class/R/knn.R R-recommended-moje/class/R/knn.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/class/R/knn.R Recommended/class/R/knn.R
 58,59c58
 <             warning(gettextf("k = %d exceeds number %d of patterns", k, ntr),
 <                     domain = NA)
@@ -17,7 +17,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <             stop(gettextf("k = %d must be at least 1", k), domain = NA)
 ---
 >             stop(gettextf("k = %d must be at least 1", k), domain = "R-class")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/class/R/lvq.R R-recommended-moje/class/R/lvq.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/class/R/lvq.R Recommended/class/R/lvq.R
 23c23
 <     if(length(cl) != n) stop("'x' and 'cl' have different lengths")
 ---
@@ -48,7 +48,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     if(length(cl) != n) stop("'x' and 'cl' have different lengths")
 ---
 >     if(length(cl) != n) stop("'x' and 'cl' arguments have different lengths")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/class/R/multiedit.R R-recommended-moje/class/R/multiedit.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/class/R/multiedit.R Recommended/class/R/multiedit.R
 32c32
 < 	 for (i in 1L:V){
 ---
@@ -58,7 +58,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <                            domain = NA)
 ---
 > 	 if(trace) message(gettextf("pass %s size %d", pass, n2), domain = "R-class")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/class/R/SOM.R R-recommended-moje/class/R/SOM.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/class/R/SOM.R Recommended/class/R/SOM.R
 24c24
 <         init <- data[sample(1L:nd, ng, replace = FALSE), , drop = FALSE]
 ---
@@ -89,11 +89,11 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <                 stop("'alpha' and 'radii' do not match")
 ---
 >                 stop("'alpha' and 'radii' arguments do not match")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/class/src/class.c R-recommended-moje/class/src/class.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/class/src/class.c Recommended/class/src/class.c
 21a22
 > #include "localization.h"
 135c136
 < 				error("too many ties in knn");
 ---
 > 				error(_("too many ties in knn"));
-Tylko w R-recommended-moje/class/src: localization.h
+Tylko w Recommended/class/src: localization.h

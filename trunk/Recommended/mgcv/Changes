@@ -1,5 +1,5 @@
-Tylko w R-recommended-moje/mgcv/inst: po
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/bam.r R-recommended-moje/mgcv/R/bam.r
+Tylko w Recommended/mgcv/inst: po
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/bam.r Recommended/mgcv/R/bam.r
 13c13
 <  for (i in 1:n) sz[i] <- object.size(x[[i]])
 ---
@@ -146,7 +146,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <   if (control$trace) cat("Fit complete. Finishing gam object.\n")
 ---
 >   if (control$trace) cat(gettext("Fit complete. Finishing gam object.", domain = "R-mgcv"), "\n", sep = "")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/coxph.r R-recommended-moje/mgcv/R/coxph.r
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/coxph.r Recommended/mgcv/R/coxph.r
 18c18
 <         else stop(linktemp, " link not available for coxph family; available link is \"identity\" ")
 ---
@@ -159,7 +159,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <         for (i in 1:M) { 
 ---
 >         for (i in seq_len(M)) { 
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/efam.r R-recommended-moje/mgcv/R/efam.r
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/efam.r Recommended/mgcv/R/efam.r
 57c57
 <     } else stop(linktemp, " link not available for ordered categorical family; available links are \"identity\"")
 ---
@@ -207,7 +207,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <   } else  stop(linktemp, " link not available for zero inflated; available link for `lambda' is only  \"loga\"")
 ---
 >   } else  stop(gettextf("\"%s\" link not available for zero inflated; available link for `lambda' is only  \"loga\"", linktemp))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/fast-REML.r R-recommended-moje/mgcv/R/fast-REML.r
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/fast-REML.r Recommended/mgcv/R/fast-REML.r
 32,34c32,34
 <     off <- unique(G$off[1:G$n.paraPen]) ## unique offset lists relating to paraPen
 <     for (i in 1:length(off)) { ## loop over blocks
@@ -368,7 +368,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     for (i in 1:ncol(d1b)) d1b[,i] <- Sl.initial.repara(Sl,as.numeric(d1b[,i]),inverse=TRUE) ## d beta / d rho matrix
 ---
 >     for (i in seq_len(ncol(d1b))) d1b[,i] <- Sl.initial.repara(Sl,as.numeric(d1b[,i]),inverse=TRUE) ## d beta / d rho matrix
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/gamlss.r R-recommended-moje/mgcv/R/gamlss.r
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/gamlss.r Recommended/mgcv/R/gamlss.r
 324c324
 <   if (length(link)!=2) stop("gaulss requires 2 links specified as character strings")
 ---
@@ -389,7 +389,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     stop(link[[i]]," link not available for ",param.names[i]," parameter of ziplss")
 ---
 >     stop(gettextf("\"%s\" link not available for parameter of ziplss %s", param.names[i], link[[i]]))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/gamm.r R-recommended-moje/mgcv/R/gamm.r
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/gamm.r Recommended/mgcv/R/gamm.r
 134c134
 <   if (sum(is.na(value))>0) warning("NA's in pdTens factor")
 ---
@@ -648,7 +648,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <   cat("testing equivalence of gam and gamm with same sp ... ")
 ---
 >   cat(gettext("testing equivalence of gam and gamm with same sp ... ", domain = "R-mgcv"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/mgcv.r R-recommended-moje/mgcv/R/mgcv.r
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/mgcv.r Recommended/mgcv/R/mgcv.r
 32c32
 <    if (k<0) stop("argument k must be positive.")
 ---
@@ -1364,7 +1364,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <   hello <- paste("This is mgcv ",version,". For overview type 'help(\"mgcv-package\")'.",sep="")
 ---
 >   hello <- gettextf("This is mgcv %s. For overview type 'help(\"mgcv-package\")'", paste(version, collapse = ""), domain = "R-mgcv")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/misc.r R-recommended-moje/mgcv/R/misc.r
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/misc.r Recommended/mgcv/R/misc.r
 118,119c118,119
 <     if (is.matrix(a)) { if (nrow(a) != x$r) stop("a has wrong number of rows") }
 <     else if (length(a) != x$r) stop("a has wrong number of rows")
@@ -1377,7 +1377,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 >     if (is.matrix(a)) { if (nrow(a) != x$c) stop("'a' argument has wrong number of rows") }
 >     else if (length(a) != x$c)  stop("'a' argument has wrong number of rows")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/plots.r R-recommended-moje/mgcv/R/plots.r
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/plots.r Recommended/mgcv/R/plots.r
 26c26
 <         stop("fam not a family object")
 ---
@@ -1575,7 +1575,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 >   if (type=="link") zlab<-gettext("linear predictor", domain = "R-mgcv")
 >   else if (type=="response") zlab<-gettext("response", domain = "R-mgcv")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/smooth.r R-recommended-moje/mgcv/R/smooth.r
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/smooth.r Recommended/mgcv/R/smooth.r
 42c42
 <     E <- rep(1,ncol(X));E[1:rank] <- sqrt(er$value[1:rank])
 ---
@@ -2295,7 +2295,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <             X[,indi[1:nz]]<-t(qr.qty(qrc,t(X[,indi,drop=FALSE]))[(nc+1):nx,,drop=FALSE])
 ---
 >             X[,indi[seq_len(nz)]]<-t(qr.qty(qrc,t(X[,indi,drop=FALSE]))[(nc+1):nx,,drop=FALSE])
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/soap.r R-recommended-moje/mgcv/R/soap.r
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/soap.r Recommended/mgcv/R/soap.r
 14c14
 <     for (i in 1:length(beta.full)) {
 ---
@@ -2428,7 +2428,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <           for (i in 1:length(P$bnd)) lines(P$bnd[[i]],lwd=2)
 ---
 >           for (i in seq_len(length(P$bnd))) lines(P$bnd[[i]],lwd=2)
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/sparse.r R-recommended-moje/mgcv/R/sparse.r
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/R/sparse.r Recommended/mgcv/R/sparse.r
 14c14
 <   ## ni[1:off[1]] gives neighbours of point 1. 
 ---
@@ -2493,7 +2493,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     ind[[1]] <- 1:n
 ---
 >     ind[[1]] <- seq_len(n)
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/src/general.h R-recommended-moje/mgcv/src/general.h
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/src/general.h Recommended/mgcv/src/general.h
 3,9d2
 < #ifdef ENABLE_NLS
 < #include <libintl.h>
@@ -2502,11 +2502,11 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < #define _(String) (String)
 < #endif
 < 
-Tylko w R-recommended-moje/mgcv/src: localization.h
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/src/magic.c R-recommended-moje/mgcv/src/magic.c
+Tylko w Recommended/mgcv/src: localization.h
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/src/magic.c Recommended/mgcv/src/magic.c
 28a29
 > #include "localization.h"
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/src/mat.c R-recommended-moje/mgcv/src/mat.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/src/mat.c Recommended/mgcv/src/mat.c
 19a20
 > #include "localization.h"
 27c28
@@ -2529,13 +2529,13 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     if (k) Rprintf("Eigenvectors not normalized %d %g\n",k,x/k);
 ---
 >     if (k) Rprintf(_("Eigenvectors not normalized %d %g\n"), k,x/k);
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/src/matrix.c R-recommended-moje/mgcv/src/matrix.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/src/matrix.c Recommended/mgcv/src/matrix.c
 30a31
 > #include "localization.h"
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/src/qp.c R-recommended-moje/mgcv/src/qp.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/src/qp.c Recommended/mgcv/src/qp.c
 28a29
 > #include "localization.h"
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/src/sparse-smooth.c R-recommended-moje/mgcv/src/sparse-smooth.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/src/sparse-smooth.c Recommended/mgcv/src/sparse-smooth.c
 23a24
 > #include "localization.h"
 142c143
@@ -2582,6 +2582,6 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <           Rprintf("lower neighbour claimed to be self!\n");
 ---
 >           Rprintf(_("lower neighbour claimed to be self!\n"));
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/src/tprs.c R-recommended-moje/mgcv/src/tprs.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/mgcv/src/tprs.c Recommended/mgcv/src/tprs.c
 25a26
 > #include "localization.h"
