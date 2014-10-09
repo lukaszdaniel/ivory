@@ -1,6 +1,6 @@
 c6cd666e9d07520c38a7bec12a21d116 *src/localization.h
-6e6f6f4509647b193354c38b8160613b *po/nnet.pot
 d5a68e4c6e67b5f5598259873de7abee *src/nnet.c
+6e6f6f4509647b193354c38b8160613b *po/nnet.pot
 e4442deb244efa4fb5c44b7e3217246e *po/R-nnet.pot
 e72767dc4c2d4ec5f8b548b3fe2595bf *po/pl.po
 6b96ad351bbe9b362354550534e0755b *po/R-de.po
@@ -19,12 +19,12 @@ d805c54530cb5e52e54755f1110e0c7a *R/multinom.R
 a0419413e3e882ea707de25a2b8b658c *inst/po/pl/LC_MESSAGES/R-nnet.mo
 4e306e0c0d081ab9e90fb6c96b0bf6b8 *inst/po/fr/LC_MESSAGES/R-nnet.mo
 3293ed7425a7101de161f9afd25df904 *inst/po/de/LC_MESSAGES/R-nnet.mo
+6b963a6c4a9de62f79a95b13006b36df *po/R-ko.po
 9d77bb2b63277c75a8d766987e232ca5 *inst/po/ko/LC_MESSAGES/R-nnet.mo
+baab2a51919a73493683e7c1d5bc60bb *po/R-pl.po
 adff602cf0959e0d0edc22c064d4ed08 *inst/po/en@quot/LC_MESSAGES/R-nnet.mo
-4729791c0e3f51b8bfe12b92b1ecfaf2 *inst/NEWS
 aea650cb108dfd007ba5b35ad6ff7226 *inst/CITATION
+4729791c0e3f51b8bfe12b92b1ecfaf2 *inst/NEWS
 9576449163564dda7aea833b9f0e4de1 *DESCRIPTION
 79c657d10970dd53babf8cdffbc19142 *Changes
-6b963a6c4a9de62f79a95b13006b36df *po/R-ko.po
-baab2a51919a73493683e7c1d5bc60bb *po/R-pl.po
 bde47cf67615a78401f4a47f0fe41d0b *po/R-fr.po
