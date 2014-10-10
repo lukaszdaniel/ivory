@@ -538,7 +538,7 @@ typedef struct RCNTXT {
     SEXP srcref;	        /* The source line in effect */
     int browserfinish;     /* should browser finish this context without stopping */
     SEXP returnValue;			/* only set during on.exit calls */
-} RCNTXT	;
+} RCNTXT;
 RCNTXT *context;
 /* The Various Context Types.
 
