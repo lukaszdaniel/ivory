@@ -179,7 +179,7 @@ plot.histogram <-
 	if (missing(ylab))
 	    ylab <- if (!freq) gettext("Density", domain = "R-graphics") else gettext("Frequency", domain = "R-graphics")
 	plot.new()
-	plot.window(xlim, ylim, "")	#-> ylim's default from 'y'
+	plot.window(xlim, ylim, "", ...)	#-> ylim's default from 'y'
 	if(ann) title(main = main, sub = sub, xlab = xlab, ylab = ylab, ...)
 	if(axes) {
 	    axis(1, ...)
