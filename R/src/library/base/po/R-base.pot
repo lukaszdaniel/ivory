@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.2.0\n"
-"POT-Creation-Date: 2014-10-11 11:59\n"
+"POT-Creation-Date: 2014-10-11 13:45\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1355,9 +1355,16 @@ msgstr ""
 
 
 #: R/all.equal.R: 0
-#. R/all.equal.R: gettextf("Class definitions are not identical%s", if (isTRUE(ae)) "" else paste(":",     ae, collapse = " "))
+#. R/all.equal.R: gettext("Class definitions are not identical")
 
-msgid "Class definitions are not identical%s"
+msgid "Class definitions are not identical"
+msgstr ""
+
+
+#: R/all.equal.R: 0
+#. R/all.equal.R: gettextf("Class definitions are not identical: %s", paste(ae, collapse = " "))
+
+msgid "Class definitions are not identical: %s"
 msgstr ""
 
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-11 12:00\n"
+"POT-Creation-Date: 2014-10-11 13:46\n"
 "PO-Revision-Date: 2011-10-18 19:28-0600\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
+
+#. R/cmp.R: gettextf("%s is not a registered math1 function", sQuote(name))
+#: R/cmp.R:0
+msgid "%s is not a registered math1 function"
+msgstr ""
 
 #. R/cmp.R: gettextf("%s may be used in an incorrect context", var)
 #: R/cmp.R:0
@@ -170,11 +175,6 @@ msgstr "имя входного и выходного файлов совпад�
 #: R/cmp.R:0
 msgid "invalid function in complex assignment"
 msgstr "неверная функция в сложном назначении"
-
-#. R/cmp.R: stop(sQuote(name), "is not a registered math1 function")
-#: R/cmp.R:0
-msgid "is not a registered math1 function"
-msgstr ""
 
 #. R/cmp.R: gettext("missing arguments are not allowed")
 #: R/cmp.R:0

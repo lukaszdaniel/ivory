@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: compiler 3.2.0\n"
-"POT-Creation-Date: 2014-10-11 12:00\n"
+"POT-Creation-Date: 2014-10-11 13:46\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9,6 +9,13 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+
+
+#: R/cmp.R: 0
+#. R/cmp.R: gettextf("%s is not a registered math1 function", sQuote(name))
+
+msgid "%s is not a registered math1 function"
+msgstr ""
 
 
 #: R/cmp.R: 0
@@ -211,13 +218,6 @@ msgstr ""
 #. R/cmp.R: gettext("invalid function in complex assignment")
 
 msgid "invalid function in complex assignment"
-msgstr ""
-
-
-#: R/cmp.R: 0
-#. R/cmp.R: stop(sQuote(name), "is not a registered math1 function")
-
-msgid "is not a registered math1 function"
 msgstr ""
 
 

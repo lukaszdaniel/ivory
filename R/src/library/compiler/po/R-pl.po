@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-11 12:00\n"
+"POT-Creation-Date: 2014-10-11 13:46\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -15,6 +15,11 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 1.5.4\n"
+
+#. R/cmp.R: gettextf("%s is not a registered math1 function", sQuote(name))
+#: R/cmp.R:0
+msgid "%s is not a registered math1 function"
+msgstr "%s nie jest zarejestrowaną funkcją 'math1'"
 
 #. R/cmp.R: gettextf("%s may be used in an incorrect context", var)
 #: R/cmp.R:0
@@ -165,11 +170,6 @@ msgstr "nazwy plików wejścia i wyjścia są takie same"
 #: R/cmp.R:0
 msgid "invalid function in complex assignment"
 msgstr "niepoprawna funkcja w zespolonym przypisaniu"
-
-#. R/cmp.R: stop(sQuote(name), "is not a registered math1 function")
-#: R/cmp.R:0
-msgid "is not a registered math1 function"
-msgstr ""
 
 #. R/cmp.R: gettext("missing arguments are not allowed")
 #: R/cmp.R:0

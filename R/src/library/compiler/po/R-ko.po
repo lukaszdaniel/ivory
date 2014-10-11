@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-11 12:00\n"
+"POT-Creation-Date: 2014-10-11 13:46\n"
 "PO-Revision-Date: 2012-09-27 21:45-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team:  <gnustats@gmail.com>\n"
@@ -21,6 +21,11 @@ msgstr ""
 "X-Poedit-Language: Korean\n"
 "X-Poedit-Country: KOREA, REPUBLIC OF\n"
 "X-Poedit-SourceCharset: utf-8\n"
+
+#. R/cmp.R: gettextf("%s is not a registered math1 function", sQuote(name))
+#: R/cmp.R:0
+msgid "%s is not a registered math1 function"
+msgstr ""
 
 #. R/cmp.R: gettextf("%s may be used in an incorrect context", var)
 #: R/cmp.R:0
@@ -176,11 +181,6 @@ msgstr "입력과 출력 파일 이름들은 서로 같아야 합니다"
 #: R/cmp.R:0
 msgid "invalid function in complex assignment"
 msgstr "invalid function in complex assignment"
-
-#. R/cmp.R: stop(sQuote(name), "is not a registered math1 function")
-#: R/cmp.R:0
-msgid "is not a registered math1 function"
-msgstr ""
 
 #. R/cmp.R: gettext("missing arguments are not allowed")
 #: R/cmp.R:0

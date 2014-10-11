@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-11 12:00\n"
+"POT-Creation-Date: 2014-10-11 13:46\n"
 "PO-Revision-Date: 2011-03-26 08:55-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -12,6 +12,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 2.0.5\n"
+
+#. R/cmp.R: gettextf("%s is not a registered math1 function", sQuote(name))
+#: R/cmp.R:0
+msgid "%s is not a registered math1 function"
+msgstr ""
 
 #. R/cmp.R: gettextf("%s may be used in an incorrect context", var)
 #: R/cmp.R:0
@@ -167,11 +172,6 @@ msgstr "nomes de entrada e saida são os mesmos"
 #: R/cmp.R:0
 msgid "invalid function in complex assignment"
 msgstr "função inválida em atribuição complexa"
-
-#. R/cmp.R: stop(sQuote(name), "is not a registered math1 function")
-#: R/cmp.R:0
-msgid "is not a registered math1 function"
-msgstr ""
 
 #. R/cmp.R: gettext("missing arguments are not allowed")
 #: R/cmp.R:0

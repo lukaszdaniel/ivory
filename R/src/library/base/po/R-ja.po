@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-11 11:59\n"
+"POT-Creation-Date: 2014-10-11 13:45\n"
 "PO-Revision-Date: 2012-02-26 14:09+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -1169,9 +1169,14 @@ msgstr ""
 msgid "Class"
 msgstr ""
 
-#. R/all.equal.R: gettextf("Class definitions are not identical%s", if (isTRUE(ae)) "" else paste(":",     ae, collapse = " "))
+#. R/all.equal.R: gettext("Class definitions are not identical")
 #: R/all.equal.R:0
-msgid "Class definitions are not identical%s"
+msgid "Class definitions are not identical"
+msgstr ""
+
+#. R/all.equal.R: gettextf("Class definitions are not identical: %s", paste(ae, collapse = " "))
+#: R/all.equal.R:0
+msgid "Class definitions are not identical: %s"
 msgstr ""
 
 #. R/all.equal.R: gettextf("Classes differ: %s", paste(ae, collapse = " "))

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-11 12:00\n"
+"POT-Creation-Date: 2014-10-11 13:46\n"
 "PO-Revision-Date: 2005-03-15 08:37+0000\n"
 "Last-Translator: 陈斐 <FeiChen@FairIsaac.com>\n"
 "Language-Team: Chinese\n"
@@ -16,6 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=0;\n"
+
+#. R/cmp.R: gettextf("%s is not a registered math1 function", sQuote(name))
+#: R/cmp.R:0
+msgid "%s is not a registered math1 function"
+msgstr ""
 
 #. R/cmp.R: gettextf("%s may be used in an incorrect context", var)
 #: R/cmp.R:0
@@ -170,11 +175,6 @@ msgstr "输入和输出文件的文件名是一样的"
 #: R/cmp.R:0
 msgid "invalid function in complex assignment"
 msgstr "复杂分配里的函数不对"
-
-#. R/cmp.R: stop(sQuote(name), "is not a registered math1 function")
-#: R/cmp.R:0
-msgid "is not a registered math1 function"
-msgstr ""
 
 #. R/cmp.R: gettext("missing arguments are not allowed")
 #: R/cmp.R:0
