@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2014-10-11 12:00\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -89,6 +89,14 @@ msgstr "nie można skompilować dosłownych bajtów kodu w kod"
 msgid "cannot compile promise literals in code"
 msgstr "nie można skompilować dosłownych obietnic w kod"
 
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#: R/cmp.R:0
+msgid "cannot compile this expression"
+msgstr "nie można skompilować tego wyrażenia"
+
 #. R/cmp.R: gettext("cannot constant fold literal bytecode objects")
 #: R/cmp.R:0
 msgid "cannot constant fold literal bytecode objects"
@@ -157,6 +165,11 @@ msgstr "nazwy plików wejścia i wyjścia są takie same"
 #: R/cmp.R:0
 msgid "invalid function in complex assignment"
 msgstr "niepoprawna funkcja w zespolonym przypisaniu"
+
+#. R/cmp.R: stop(sQuote(name), "is not a registered math1 function")
+#: R/cmp.R:0
+msgid "is not a registered math1 function"
+msgstr ""
 
 #. R/cmp.R: gettext("missing arguments are not allowed")
 #: R/cmp.R:0

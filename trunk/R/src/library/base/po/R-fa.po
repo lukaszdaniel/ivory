@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-08-10 17:27\n"
+"POT-Creation-Date: 2014-10-11 11:59\n"
 "PO-Revision-Date: 2012-11-27 01:11+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -116,12 +116,6 @@ msgstr ""
 msgid "%s value was converted to character string"
 msgstr ""
 
-#. R/namespace.R: gettextf("%s value was not found", sQuote(name))
-#. R/namespace.R: gettextf("%s value was not found", sQuote(name))
-#: R/namespace.R:0
-msgid "%s value was not found"
-msgstr ""
-
 #. R/library.R: gettextf("%sPackages in library %s:\n", sep, sQuote(lib))
 #: R/library.R:0
 msgid "%sPackages in library %s:"
@@ -203,6 +197,12 @@ msgstr ""
 #. R/table.R: gettextf("'%s' argument is not an array", "x")
 #: R/table.R:0
 msgid "'%s' argument is not an array"
+msgstr ""
+
+#. R/all.equal.R: gettextf("'%s' argument is not an envRefClass", "target", domain = "R-base")
+#. R/all.equal.R: gettextf("'%s' argument is not an envRefClass", "current", domain = "R-base")
+#: R/all.equal.R:0
+msgid "'%s' argument is not an envRefClass"
 msgstr ""
 
 #. R/datetime.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("POSIXlt"))
@@ -493,6 +493,11 @@ msgstr ""
 #. R/RNG.R: gettextf("'%s' value is not a valid choice", normal.kind)
 #: R/RNG.R:0
 msgid "'%s' value is not a valid choice"
+msgstr ""
+
+#. R/namespace.R: gettextf("'%s' was not found", sQuote(x))
+#: R/namespace.R:0
+msgid "'%s' was not found"
 msgstr ""
 
 #. R/rm.R: stop("'...' must contain names or character strings")
@@ -1003,6 +1008,16 @@ msgstr ""
 #. R/summary.R: gettext("Class")
 #: R/summary.R:0
 msgid "Class"
+msgstr ""
+
+#. R/all.equal.R: gettextf("Class definitions are not identical%s", if (isTRUE(ae)) "" else paste(":",     ae, collapse = " "))
+#: R/all.equal.R:0
+msgid "Class definitions are not identical%s"
+msgstr ""
+
+#. R/all.equal.R: gettextf("Classes differ: %s", paste(ae, collapse = " "))
+#: R/all.equal.R:0
+msgid "Classes differ: %s"
 msgstr ""
 
 #. R/all.equal.R: gettextf("Complex: lengths (%d, %d) differ", lt, lc)
@@ -2520,7 +2535,7 @@ msgstr ""
 msgid "not all elements of 'MARGIN' are names of dimensions"
 msgstr ""
 
-#. R/namespace.R: stop("not loading a namespace", domain = "R-base")
+#. R/namespace.R: stop("not loading a namespace")
 #: R/namespace.R:0
 msgid "not loading a namespace"
 msgstr ""

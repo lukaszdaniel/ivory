@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-19 18:11\n"
+"POT-Creation-Date: 2014-10-11 12:00\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -765,6 +765,11 @@ msgstr "argumenty 'merge' oraz 'height' nie pasują!"
 #: R/hclust.R:0
 msgid "'merge' component in dendrogram must be integer"
 msgstr "komponent 'merge' w drzewie celu musi być liczbą całkowitą"
+
+#. R/hclust.R: stop("'merge' matrix has invalid contents")
+#: R/hclust.R:0
+msgid "'merge' matrix has invalid contents"
+msgstr "macierz 'merge' posiada niepoprawną zawartość"
 
 #. R/dendrogram.R: warning("'midcache()' of non-binary dendrograms only partly implemented")
 #: R/dendrogram.R:0
@@ -3632,6 +3637,15 @@ msgstr "dane muszą być niezerowe dla multiplikatywnego modelu Holta-Wintersa"
 msgid "data: %s"
 msgstr "dane: %s"
 
+#. R/dendrogram.R: gettextf("dendrogram entries must be 1,2,..,%d (in any order), to be coercible to an object of class \"hclust\"",     n)
+#: R/dendrogram.R:0
+msgid ""
+"dendrogram entries must be 1,2,..,%d (in any order), to be coercible to an "
+"object of class \"hclust\""
+msgstr ""
+"wpisy dendrogramu muszą wynosić 1, 2, ..., %d (w dowolnej kolejności), aby "
+"były przekształcalne na obiekt klasy \"hclust\""
+
 #. R/dendrogram.R: gettextf("dendrogram leaf '%s', at height %s", format(attr(x, "label"), digits = digits),     format(attr(x, "height"), digits = digits), domain = "R-stats")
 #: R/dendrogram.R:0
 msgid "dendrogram leaf '%s', at height %s"
@@ -3647,7 +3661,11 @@ msgstr "węzeł drzewa celów z wartościami nie-dodatnimi #{gałęziami}"
 msgid "dendrogram non-leaf node with non-positive #{branches}"
 msgstr "bezliściowy węzeł drzewa celu z wartościami nie-dodatnimi #{gałęziami}"
 
-#. R/dendrogram.R: gettextf("dendrogram with %d branches and %d members, at height %s", length(x), attr(x,     "members"), format(attr(x, "height"), digits = digits), domain = "R-stats")
+#. R/dendrogram.R: gettextf("dendrogram with %d branches and %d members total, at height %s", length(x),     attr(x, "members"), format(attr(x, "height"), digits = digits), domain = "R-stats")
+#: R/dendrogram.R:0
+msgid "dendrogram with %d branches and %d members total, at height %s"
+msgstr "dendrogram z %d gałęziami oraz %d członkami, na wysokości %s"
+
 #. R/dendrogram.R: gettextf("dendrogram with %d branches and %d members, at height %s", le, memb, format(hgt,     digits = digits.d), domain = "R-stats")
 #: R/dendrogram.R:0
 msgid "dendrogram with %d branches and %d members, at height %s"
@@ -6979,9 +6997,6 @@ msgstr[2] "używanie %d/%d wierszy z połączonego dopasowania"
 
 #~ msgid "lengths of '%s' and '%s' must match"
 #~ msgstr "długości '%s' oraz '%s' muszą się zgadzać"
-
-#~ msgid "dendrogram with %d branches and %d members total, at height %s"
-#~ msgstr "dendrogram z %d gałęziami oraz %d członkami, na wysokości %s"
 
 #~ msgid "'x' has rank 0"
 #~ msgstr "'x' ma zerową rangę"

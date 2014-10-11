@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-08-10 17:27\n"
+"POT-Creation-Date: 2014-10-11 11:59\n"
 "PO-Revision-Date: 2005-02-04 08:37+0000\n"
 "Last-Translator: 陈斐 <FeiChen@FairIsaac.com>\n"
 "Language-Team: Chinese\n"
@@ -138,13 +138,6 @@ msgstr "'%s' 参数现在还没有用"
 msgid "%s value was converted to character string"
 msgstr "转换成字符串"
 
-#. R/namespace.R: gettextf("%s value was not found", sQuote(name))
-#. R/namespace.R: gettextf("%s value was not found", sQuote(name))
-#: R/namespace.R:0
-#, fuzzy
-msgid "%s value was not found"
-msgstr "没有'%s'文件"
-
 #. R/library.R: gettextf("%sPackages in library %s:\n", sep, sQuote(lib))
 #: R/library.R:0
 #, fuzzy
@@ -240,6 +233,13 @@ msgstr "不是数据框"
 #: R/table.R:0
 #, fuzzy
 msgid "'%s' argument is not an array"
+msgstr "不是数据框"
+
+#. R/all.equal.R: gettextf("'%s' argument is not an envRefClass", "target", domain = "R-base")
+#. R/all.equal.R: gettextf("'%s' argument is not an envRefClass", "current", domain = "R-base")
+#: R/all.equal.R:0
+#, fuzzy
+msgid "'%s' argument is not an envRefClass"
 msgstr "不是数据框"
 
 #. R/datetime.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("POSIXlt"))
@@ -573,6 +573,12 @@ msgstr "'%s'不是正当的RNG缩写"
 #, fuzzy
 msgid "'%s' value is not a valid choice"
 msgstr "%s'不是正当的选择"
+
+#. R/namespace.R: gettextf("'%s' was not found", sQuote(x))
+#: R/namespace.R:0
+#, fuzzy
+msgid "'%s' was not found"
+msgstr "没有'%s'文件"
 
 #. R/rm.R: stop("'...' must contain names or character strings")
 #: R/rm.R:0
@@ -1148,6 +1154,16 @@ msgstr ""
 #. R/summary.R: gettext("Class")
 #: R/summary.R:0
 msgid "Class"
+msgstr ""
+
+#. R/all.equal.R: gettextf("Class definitions are not identical%s", if (isTRUE(ae)) "" else paste(":",     ae, collapse = " "))
+#: R/all.equal.R:0
+msgid "Class definitions are not identical%s"
+msgstr ""
+
+#. R/all.equal.R: gettextf("Classes differ: %s", paste(ae, collapse = " "))
+#: R/all.equal.R:0
+msgid "Classes differ: %s"
 msgstr ""
 
 #. R/all.equal.R: gettextf("Complex: lengths (%d, %d) differ", lt, lc)
@@ -2774,7 +2790,7 @@ msgstr "范数'%s'现在总是用exact = FALSE"
 msgid "not all elements of 'MARGIN' are names of dimensions"
 msgstr "所有'MARGIN'的元素都必需是维的名字不是'缘'的所有元素都是尺寸名称"
 
-#. R/namespace.R: stop("not loading a namespace", domain = "R-base")
+#. R/namespace.R: stop("not loading a namespace")
 #: R/namespace.R:0
 msgid "not loading a namespace"
 msgstr "不载入名字空间"
@@ -3495,6 +3511,10 @@ msgstr[0] "不存在叫%s这个名字的程辑包"
 msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "用T代替TRUE"
+
+#, fuzzy
+#~ msgid "%s value was not found"
+#~ msgstr "没有'%s'文件"
 
 #~ msgid "wrong argument"
 #~ msgstr "参数不对"

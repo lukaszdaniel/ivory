@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 3.2.0\n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2014-10-11 12:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1109,6 +1109,13 @@ msgid "Pretend we inserted class %s"
 msgstr ""
 
 
+#: R/refClass.R: 0
+#. R/refClass.R: gettext("Prototypical reference class object", domain = "R-methods")
+
+msgid "Prototypical reference class object"
+msgstr ""
+
+
 #: R/methodsTable.R: 0
 #. R/methodsTable.R: stop(gettextf("invalid or unset methods table in generic function %s", sQuote(fdef@generic)),     damain = "R-methods")
 
@@ -1197,7 +1204,7 @@ msgstr ""
 #: R/show.R: 0
 #: R/show.R: 0
 #. R/BasicClasses.R: gettextf("Slot %s:", dQuote(what), domain = "R-methods")
-#. R/show.R: gettextf("Slot %s:", dQuote(what), domain = "R-methods")
+#. R/show.R: gettextf("Slot %s:", deparse(what), domain = "R-methods")
 #. R/show.R: gettextf("Slot %s:", dQuote(s), domain = "R-methods")
 
 msgid "Slot %s:"

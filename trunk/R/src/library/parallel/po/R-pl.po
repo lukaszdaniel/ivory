@@ -159,9 +159,8 @@ msgstr "nie wszystkie elementy 'MARGIN' są nazwami wymiarów"
 
 #. R/snowSOCK.R: stop("numeric 'names' must be >= 1")
 #: R/snowSOCK.R:0
-#, fuzzy
 msgid "numeric 'names' must be >= 1"
-msgstr "argument 'mc.cores' musi być >= 1"
+msgstr "liczbowe 'names' musi być >= 1"
 
 #. R/unix/pvec.R: warning("some results may be missing, folded or caused an error")
 #: R/unix/pvec.R:0

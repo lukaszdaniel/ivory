@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2014-10-11 12:00\n"
 "PO-Revision-Date: 2005-03-15 08:37+0000\n"
 "Last-Translator: 陈斐 <FeiChen@FairIsaac.com>\n"
 "Language-Team: Chinese\n"
@@ -91,6 +91,15 @@ msgstr "不能在编码里编译代码的字节码字面值"
 msgid "cannot compile promise literals in code"
 msgstr "不能编译代码中的承诺文字"
 
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#: R/cmp.R:0
+#, fuzzy
+msgid "cannot compile this expression"
+msgstr "不能编译代码中的承诺文字"
+
 #. R/cmp.R: gettext("cannot constant fold literal bytecode objects")
 #: R/cmp.R:0
 msgid "cannot constant fold literal bytecode objects"
@@ -161,6 +170,11 @@ msgstr "输入和输出文件的文件名是一样的"
 #: R/cmp.R:0
 msgid "invalid function in complex assignment"
 msgstr "复杂分配里的函数不对"
+
+#. R/cmp.R: stop(sQuote(name), "is not a registered math1 function")
+#: R/cmp.R:0
+msgid "is not a registered math1 function"
+msgstr ""
 
 #. R/cmp.R: gettext("missing arguments are not allowed")
 #: R/cmp.R:0

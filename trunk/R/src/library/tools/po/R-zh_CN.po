@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-09-09 19:02\n"
+"POT-Creation-Date: 2014-10-11 12:00\n"
 "PO-Revision-Date: 2005-02-04 08:37+0000\n"
 "Last-Translator: 陈斐 <feic@avaya.com>\n"
 "Language-Team: Chinese\n"
@@ -209,10 +209,9 @@ msgstr ""
 msgid "'DESCRIPTION' file seems to be a bundle -- and they are defunct"
 msgstr "这看起来好象是捆绑软件--已经不存在了"
 
-#. R/check.R: gettext("'DUP = FALSE' is deprecated and may be disabled in future versions of R.",     domain = "R-tools")
+#. R/check.R: gettext("'DUP' option is no longer supported and will be ignored.", domain = "R-tools")
 #: R/check.R:0
-msgid ""
-"'DUP = FALSE' is deprecated and may be disabled in future versions of R."
+msgid "'DUP' option is no longer supported and will be ignored."
 msgstr ""
 
 #. R/QC.R: gettextf("'LinkingTo' field is unused: package has no 'src' directory", domain = "R-tools")
@@ -813,12 +812,6 @@ msgstr "文件目录'%s'不含R编码"
 #, fuzzy
 msgid "Demos with non-ASCII characters:"
 msgstr "域内有非-ASCII的值values:"
-
-#. R/checktools.R: gettextf("Depends: %s", meta["Depends"], domain = "R-tools")
-#: R/checktools.R:0
-#, fuzzy
-msgid "Depends: %s"
-msgstr "文件: %s"
 
 #. R/QC.R: gettext("Depends: includes the non-default packages:", domain = "R-tools")
 #: R/QC.R:0
@@ -1561,12 +1554,6 @@ msgstr "这是基本程辑包名."
 msgid "Hmm ... looks like a package from the R distribution"
 msgstr ""
 
-#. R/checktools.R: gettextf("Imports: %s", meta["Imports"], domain = "R-tools")
-#: R/checktools.R:0
-#, fuzzy
-msgid "Imports: %s"
-msgstr "文件: %s"
-
 #. R/check.R: gettext("\nIn addition to the above warning(s), found the following notes:\n", domain = "R-tools")
 #. R/check.R: gettext("In addition to the above warning(s), found the following notes:", domain = "R-tools")
 #: R/check.R:0
@@ -1947,9 +1934,8 @@ msgstr ""
 msgid "NONE"
 msgstr ""
 
-#. R/checktools.R: gettext("NOTE", domain = "R-tools")
 #. R/logging.R: gettext("NOTE", domain = "R-tools")
-#: R/checktools.R:0 R/logging.R:0
+#: R/logging.R:0
 msgid "NOTE"
 msgstr ""
 
@@ -2345,11 +2331,6 @@ msgstr ""
 msgid "PDF header was not found"
 msgstr "找不到PDF字头"
 
-#. R/checktools.R: gettext("PROBLEM", domain = "R-tools")
-#: R/checktools.R:0
-msgid "PROBLEM"
-msgstr ""
-
 #. R/pkgDepends.R: gettextf("Package %s had its dependencies reduced to a minimal set.", sQuote(pkgMtrx[1,     ]))
 #: R/pkgDepends.R:0
 #, fuzzy
@@ -2469,12 +2450,6 @@ msgstr "程序包启动函数应该用%s来生成消息"
 #: R/QC.R:0
 msgid "Package was archived on CRAN"
 msgstr ""
-
-#. R/checktools.R: gettextf("Package: %s", meta["Package"], domain = "R-tools")
-#: R/checktools.R:0
-#, fuzzy
-msgid "Package: %s"
-msgstr "展开%s"
 
 #. R/check.R: gettext("Packages should not call .Internal(): it is not part of the API, for use only by R itself and subject to change without notice.",     domain = "R-tools")
 #: R/check.R:0
@@ -5825,10 +5800,10 @@ msgid_plural ""
 "Depends. Please remove these calls from your code."
 msgstr[0] ""
 
-#. R/QC.R: ngettext(length(z3), "Call with 'DUP = FALSE':", "Calls with 'DUP = FALSE':", domain = "R-tools")
+#. R/QC.R: ngettext(length(z3), "Call with 'DUP':", "Calls with 'DUP':", domain = "R-tools")
 #: R/QC.R:0
-msgid "Call with 'DUP = FALSE':"
-msgid_plural "Calls with 'DUP = FALSE':"
+msgid "Call with 'DUP':"
+msgid_plural "Calls with 'DUP':"
 msgstr[0] ""
 
 #. R/install.R: ngettext(length(miss), "ERROR: dependency %s is not available for package %s", "ERROR: dependencies %s are not available for package %s",     domain = "R-tools")
@@ -6478,6 +6453,18 @@ msgstr[0] "%s里不能有T/F这样的值"
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "无法重新编码'%s'%s行"
+
+#, fuzzy
+#~ msgid "Depends: %s"
+#~ msgstr "文件: %s"
+
+#, fuzzy
+#~ msgid "Imports: %s"
+#~ msgstr "文件: %s"
+
+#, fuzzy
+#~ msgid "Package: %s"
+#~ msgstr "展开%s"
 
 #, fuzzy
 #~ msgid " OK"

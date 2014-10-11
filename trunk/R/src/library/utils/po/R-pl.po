@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-09 19:02\n"
+"POT-Creation-Date: 2014-10-11 12:00\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -168,9 +168,7 @@ msgstr "argument '%s' musi być wektorem tekstowym"
 
 #. R/help.start.R: gettextf("'%s' argument must be a non-empty character string", "url")
 #. R/help.start.R: gettextf("'%s' argument must be a non-empty character string", "browser")
-#. R/windows/help.start.R: gettextf("'%s' argument must be a non-empty character string", "url")
-#. R/windows/help.start.R: gettextf("'%s' argument must be a non-empty character string", "browser")
-#: R/help.start.R:0 R/windows/help.start.R:0
+#: R/help.start.R:0
 msgid "'%s' argument must be a non-empty character string"
 msgstr "argument '%s' musi być niepustym łańcuchem tekstowym"
 
@@ -216,9 +214,8 @@ msgstr "funkcja '%s' wymaga nazwy"
 #. R/edit.R: gettextf("'%s' function should not be used in examples etc", "dataentry()", domain = "R-utils")
 #. R/edit.R: gettextf("'%s' function should not be used in examples etc", "View()", domain = "R-utils")
 #: R/edit.R:0
-#, fuzzy
 msgid "'%s' function should not be used in examples etc"
-msgstr "funkcja 'menu()' nie może zostać użyta nieinteraktywnie"
+msgstr "funkcja '%s' nie powinna być użyta w przykładach, itp."
 
 #. R/indices.R: warning("'DESCRIPTION' file has an 'Encoding' field and re-encoding is not possible",     call. = FALSE)
 #: R/indices.R:0
@@ -751,8 +748,7 @@ msgid "Help on topic %s was found in the following packages:"
 msgstr "Pomoc na temat %s została znaleziona w następujących pakietach:"
 
 #. R/help.start.R: gettextf("If nothing happens, you should open\n%s yourself\n", sQuote(url))
-#. R/windows/help.start.R: gettextf("If nothing happens, you should open\n%s yourself", sQuote(url))
-#: R/help.start.R:0 R/windows/help.start.R:0
+#: R/help.start.R:0
 msgid ""
 "If nothing happens, you should open\n"
 "%s yourself"
@@ -1101,6 +1097,11 @@ msgstr "Przetwarzanie fragmentów kodu z opcjami ..."
 #: R/aspell.R:0 R/rtags.R:0
 msgid "Processing file %s"
 msgstr "Przetwarzanie pliku %s"
+
+#. R/str.R: gettextf("Prototypical reference class %s [package %s]", paste(dQuote(cl), collapse = ", "),     sQuote(attr(cl, "package")), domain = "R-tools")
+#: R/str.R:0
+msgid "Prototypical reference class %s [package %s]"
+msgstr "Prototypowa klasa referencyjna %s [pakiet %s]"
 
 #. R/help.R: gettextf("R Help on %s", sQuote(topic))
 #: R/help.R:0
@@ -1975,8 +1976,7 @@ msgid "header and 'col.names' argument are of different lengths"
 msgstr "nagłówek oraz argument 'col.names' mają różne długości"
 
 #. R/help.start.R: stop("help.start() requires the HTTP server to be running", call. = FALSE)
-#. R/windows/help.start.R: stop("help.start() requires the HTTP server to be running", call. = FALSE)
-#: R/help.start.R:0 R/windows/help.start.R:0
+#: R/help.start.R:0
 msgid "help.start() requires the HTTP server to be running"
 msgstr "'help.start()' wymaga aby serwer HTTP był uruchomiony"
 

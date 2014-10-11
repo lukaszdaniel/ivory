@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2014-10-11 12:00\n"
 "PO-Revision-Date: 2011-10-18 19:28-0600\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -91,6 +91,15 @@ msgstr "не могу скомпилировать байткодовые сим
 msgid "cannot compile promise literals in code"
 msgstr "не могу скомпилировать обещанные символы в коде"
 
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#: R/cmp.R:0
+#, fuzzy
+msgid "cannot compile this expression"
+msgstr "не могу скомпилировать обещанные символы в коде"
+
 #. R/cmp.R: gettext("cannot constant fold literal bytecode objects")
 #: R/cmp.R:0
 msgid "cannot constant fold literal bytecode objects"
@@ -161,6 +170,11 @@ msgstr "имя входного и выходного файлов совпад�
 #: R/cmp.R:0
 msgid "invalid function in complex assignment"
 msgstr "неверная функция в сложном назначении"
+
+#. R/cmp.R: stop(sQuote(name), "is not a registered math1 function")
+#: R/cmp.R:0
+msgid "is not a registered math1 function"
+msgstr ""
 
 #. R/cmp.R: gettext("missing arguments are not allowed")
 #: R/cmp.R:0

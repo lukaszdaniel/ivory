@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-07-19 18:11\n"
+"POT-Creation-Date: 2014-10-11 12:00\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -823,6 +823,11 @@ msgstr "'merge' ve 'height' uymuyor!"
 #. R/hclust.R: stop("'merge' component in dendrogram must be integer")
 #: R/hclust.R:0
 msgid "'merge' component in dendrogram must be integer"
+msgstr ""
+
+#. R/hclust.R: stop("'merge' matrix has invalid contents")
+#: R/hclust.R:0
+msgid "'merge' matrix has invalid contents"
 msgstr ""
 
 #. R/dendrogram.R: warning("'midcache()' of non-binary dendrograms only partly implemented")
@@ -3697,6 +3702,13 @@ msgstr ""
 msgid "data: %s"
 msgstr ""
 
+#. R/dendrogram.R: gettextf("dendrogram entries must be 1,2,..,%d (in any order), to be coercible to an object of class \"hclust\"",     n)
+#: R/dendrogram.R:0
+msgid ""
+"dendrogram entries must be 1,2,..,%d (in any order), to be coercible to an "
+"object of class \"hclust\""
+msgstr ""
+
 #. R/dendrogram.R: gettextf("dendrogram leaf '%s', at height %s", format(attr(x, "label"), digits = digits),     format(attr(x, "height"), digits = digits), domain = "R-stats")
 #: R/dendrogram.R:0
 msgid "dendrogram leaf '%s', at height %s"
@@ -3712,7 +3724,11 @@ msgstr ""
 msgid "dendrogram non-leaf node with non-positive #{branches}"
 msgstr ""
 
-#. R/dendrogram.R: gettextf("dendrogram with %d branches and %d members, at height %s", length(x), attr(x,     "members"), format(attr(x, "height"), digits = digits), domain = "R-stats")
+#. R/dendrogram.R: gettextf("dendrogram with %d branches and %d members total, at height %s", length(x),     attr(x, "members"), format(attr(x, "height"), digits = digits), domain = "R-stats")
+#: R/dendrogram.R:0
+msgid "dendrogram with %d branches and %d members total, at height %s"
+msgstr ""
+
 #. R/dendrogram.R: gettextf("dendrogram with %d branches and %d members, at height %s", le, memb, format(hgt,     digits = digits.d), domain = "R-stats")
 #: R/dendrogram.R:0
 msgid "dendrogram with %d branches and %d members, at height %s"

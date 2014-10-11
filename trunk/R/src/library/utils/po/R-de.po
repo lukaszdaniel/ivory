@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-09-09 19:02\n"
+"POT-Creation-Date: 2014-10-11 12:00\n"
 "PO-Revision-Date: 2012-09-10 14:39+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -174,9 +174,7 @@ msgstr "'url' muss eine nicht-leere Zeichenkette sein"
 
 #. R/help.start.R: gettextf("'%s' argument must be a non-empty character string", "url")
 #. R/help.start.R: gettextf("'%s' argument must be a non-empty character string", "browser")
-#. R/windows/help.start.R: gettextf("'%s' argument must be a non-empty character string", "url")
-#. R/windows/help.start.R: gettextf("'%s' argument must be a non-empty character string", "browser")
-#: R/help.start.R:0 R/windows/help.start.R:0
+#: R/help.start.R:0
 #, fuzzy
 msgid "'%s' argument must be a non-empty character string"
 msgstr "'url' muss eine nicht-leere Zeichenkette sein"
@@ -771,8 +769,7 @@ msgid "Help on topic %s was found in the following packages:"
 msgstr "Hilfe zum Thema %s in den folgenden Paketen gefunden:"
 
 #. R/help.start.R: gettextf("If nothing happens, you should open\n%s yourself\n", sQuote(url))
-#. R/windows/help.start.R: gettextf("If nothing happens, you should open\n%s yourself", sQuote(url))
-#: R/help.start.R:0 R/windows/help.start.R:0
+#: R/help.start.R:0
 msgid ""
 "If nothing happens, you should open\n"
 "%s yourself"
@@ -1112,6 +1109,11 @@ msgstr ""
 #: R/aspell.R:0 R/rtags.R:0
 msgid "Processing file %s"
 msgstr "Verarbeite Datei %s"
+
+#. R/str.R: gettextf("Prototypical reference class %s [package %s]", paste(dQuote(cl), collapse = ", "),     sQuote(attr(cl, "package")), domain = "R-tools")
+#: R/str.R:0
+msgid "Prototypical reference class %s [package %s]"
+msgstr ""
 
 #. R/help.R: gettextf("R Help on %s", sQuote(topic))
 #: R/help.R:0
@@ -2002,8 +2004,7 @@ msgid "header and 'col.names' argument are of different lengths"
 msgstr "Kopfzeile und 'col.names' sind unterschiedlich lang"
 
 #. R/help.start.R: stop("help.start() requires the HTTP server to be running", call. = FALSE)
-#. R/windows/help.start.R: stop("help.start() requires the HTTP server to be running", call. = FALSE)
-#: R/help.start.R:0 R/windows/help.start.R:0
+#: R/help.start.R:0
 msgid "help.start() requires the HTTP server to be running"
 msgstr "help.start() benötigt den laufenden HTTP Server"
 

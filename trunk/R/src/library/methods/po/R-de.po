@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2014-10-11 12:00\n"
 "PO-Revision-Date: 2012-03-05 22:07+0100\n"
 "Last-Translator: Detlef Steuer <detlef.steuer@hsu-hh.de>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -1034,6 +1034,12 @@ msgstr ""
 msgid "Pretend we inserted class %s"
 msgstr "Gebe vor Klasse eingefügt zu haben"
 
+#. R/refClass.R: gettext("Prototypical reference class object", domain = "R-methods")
+#: R/refClass.R:0
+#, fuzzy
+msgid "Prototypical reference class object"
+msgstr "Keine Referenzklasse"
+
 #. R/methodsTable.R: stop(gettextf("invalid or unset methods table in generic function %s", sQuote(fdef@generic)),     damain = "R-methods")
 #: R/methodsTable.R:0
 msgid "R-methods"
@@ -1115,7 +1121,7 @@ msgid "Skeleton of method written to connection"
 msgstr "Skelett der Methode geschrieben in"
 
 #. R/BasicClasses.R: gettextf("Slot %s:", dQuote(what), domain = "R-methods")
-#. R/show.R: gettextf("Slot %s:", dQuote(what), domain = "R-methods")
+#. R/show.R: gettextf("Slot %s:", deparse(what), domain = "R-methods")
 #. R/show.R: gettextf("Slot %s:", dQuote(s), domain = "R-methods")
 #: R/BasicClasses.R:0 R/show.R:0
 msgid "Slot %s:"

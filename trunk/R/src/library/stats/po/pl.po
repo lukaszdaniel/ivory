@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-09 19:02+0200\n"
+"POT-Creation-Date: 2014-10-11 12:00+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -48,15 +48,15 @@ msgstr "approx(): niepoprawna metoda interpolacji"
 msgid "approx(): attempted to interpolate NA values"
 msgstr "approx(): próbowano interpolować wartości NA"
 
-#: arima.c:82 arima.c:193 arima.c:378 arima.c:609
+#: arima.c:77 arima.c:188 arima.c:373 arima.c:604
 msgid "invalid argument type"
 msgstr "niepoprawny typ argumentu"
 
-#: arima.c:445 arima.c:531 pacf.c:328 pacf.c:367
+#: arima.c:440 arima.c:526 pacf.c:323 pacf.c:362
 msgid "can only transform 100 pars in arima0"
 msgstr "można przekształcić tylko do 100 par w 'arima0'"
 
-#: arima.c:1017
+#: arima.c:1012
 msgid "maximum supported lag is 350"
 msgstr "maksymalne obsługiwane opóźnienie wynosi 350"
 
@@ -247,7 +247,7 @@ msgstr "Zabrakło obszaru roboczego."
 msgid "This should never occur."
 msgstr "Nie nigdy nie powinno się pojawić."
 
-#: filter.c:42 filter.c:45 filter.c:93 lowess.c:283 lowess.c:285
+#: filter.c:39 filter.c:42 filter.c:90 lowess.c:283 lowess.c:285
 msgid "invalid input"
 msgstr "niepoprawne wejście"
 
@@ -350,7 +350,7 @@ msgstr ""
 "'k>d2MAX' w 'ehg136'. Konieczna rekompilacja ze zwiększonymi wymiarami."
 
 #: loessc.c:349 loessc.c:350 optim.c:364 optimize.c:254 optimize.c:261
-#: optimize.c:270 optimize.c:344 optimize.c:349 optimize.c:365 pacf.c:470
+#: optimize.c:270 optimize.c:344 optimize.c:349 optimize.c:365 pacf.c:465
 #, c-format
 msgid "invalid '%s' value"
 msgstr "niepoprawna wartość '%s'"
@@ -630,62 +630,62 @@ msgstr "macierz wymaga %.0g kolumn"
 msgid "problem with term %d in model.matrix(): no columns are assigned"
 msgstr "problem z członem %d w 'model.matrix()': brak przypisanych kolumn"
 
-#: model.c:615 model.c:620 model.c:626 model.c:637 model.c:643 model.c:649
+#: model.c:614 model.c:619 model.c:625 model.c:636 model.c:642 model.c:648
 msgid "term names will be truncated"
 msgstr "nazwy członów będą przycięte"
 
-#: model.c:629
+#: model.c:628
 msgid "complex variables are not currently allowed in model matrices"
 msgstr "zmienne zespolone nie są aktualnie dozwolone w macierzach modelu"
 
-#: model.c:653
+#: model.c:652
 #, c-format
 msgid "variables of type '%s' are not allowed in model matrices"
 msgstr "zmienne typu '%s' nie są dozwolone w macierzach modelu"
 
-#: model.c:874
+#: model.c:873
 msgid "invalid formula in 'update'"
 msgstr "niepoprawna formuła w 'update'"
 
-#: model.c:908
+#: model.c:907
 msgid "formula expected"
 msgstr "oczekiwano formuły"
 
-#: model.c:1039
+#: model.c:1038
 msgid "invalid term in model formula"
 msgstr "niepoprawny człon w formule modelu"
 
-#: model.c:1114
+#: model.c:1113
 msgid "invalid model formula"
 msgstr "niepoprawna formuła modelu"
 
-#: model.c:1140 model.c:1388
+#: model.c:1139 model.c:1387
 msgid "invalid power in formula"
 msgstr "niepoprawna potęga w formule"
 
-#: model.c:1176 model.c:1568
+#: model.c:1175 model.c:1567
 #, c-format
 msgid "invalid model formula in '%s' function"
 msgstr "niepoprawna formuła modelu w funkcji '%s'"
 
-#: model.c:1511
+#: model.c:1510
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "powtórzona nazwa '%s' w ramce danych używając '.'"
 
-#: model.c:1654
+#: model.c:1653
 msgid "argument is not a valid model"
 msgstr "argument nie jest poprawnym modelem"
 
-#: model.c:1664
+#: model.c:1663
 msgid "'specials' must be NULL or a character vector"
 msgstr "'specials' musi być wektorem tekstowym lub wartością 'NULL'"
 
-#: model.c:1676
+#: model.c:1675
 msgid "'data' argument is of the wrong type"
 msgstr "argument 'data' posiada niepoprawny typ"
 
-#: model.c:1946
+#: model.c:1945
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' w formule oraz brak argumentu 'data'"
 
@@ -982,16 +982,16 @@ msgstr ""
 "dostarczony gradient posiada niepoprawną długość lub tryb, tak więc został "
 "zignorowany"
 
-#: pacf.c:91
+#: pacf.c:86
 msgid "bad Starma struct"
 msgstr "zła struktura 'Starma'"
 
-#: pacf.c:237
+#: pacf.c:232
 #, c-format
 msgid "starma error code %d"
 msgstr "starma: kod błędu %d"
 
-#: pacf.c:297
+#: pacf.c:292
 #, c-format
 msgid "forkal error code %d"
 msgstr "forkal: kod błędu %d"
@@ -1090,32 +1090,32 @@ msgstr "'scal' musi być kwadratową, rzeczywistą macierzą"
 msgid "'scal' matrix is not positive-definite"
 msgstr "macierz 'scal' nie jest dodatnio określona"
 
-#: random.c:54 random.c:127 random.c:199 random.c:283
+#: random.c:54 random.c:129 random.c:201 random.c:285
 msgid "NA values produced"
 msgstr "wyprodukowano wartości NA"
 
-#: random.c:61 random.c:67 random.c:73 random.c:91 random.c:160 random.c:241
-#: random.c:375
+#: random.c:61 random.c:67 random.c:73 random.c:91 random.c:162 random.c:243
+#: random.c:377
 msgid "invalid arguments"
 msgstr "niepoprawne argumenty"
 
-#: random.c:309
+#: random.c:311
 msgid "NA value in probability vector"
 msgstr "wartość NA w wektorze prawdopodobieństwa"
 
-#: random.c:311
+#: random.c:313
 msgid "negative probability"
 msgstr "ujemne prawdopodobieństwo"
 
-#: random.c:317
+#: random.c:319
 msgid "no positive probabilities"
 msgstr "brak dodatnich prawdopodobieństw"
 
-#: random.c:329
+#: random.c:331
 msgid "invalid first argument 'n'"
 msgstr "niepoprawny pierwszy argument 'n'"
 
-#: random.c:331
+#: random.c:333
 msgid "invalid second argument 'size'"
 msgstr "niepoprawny drugi argument 'size'"
 
@@ -1138,12 +1138,12 @@ msgstr "niepoprawna końcowa reguła dla ruchomiej mediany 3: %d"
 msgid "inputs of different lengths"
 msgstr "wejścia o różnych długościach"
 
-#: starma.c:366
+#: starma.c:360
 #, c-format
 msgid "missing value in last %d observations"
 msgstr "brakuje wartości w ostatnich %d obserwacjach"
 
-#: swilk.c:208
+#: swilk.c:206
 #, c-format
 msgid "ifault=%d. This should not happen"
 msgstr "ifault=%d. To nie powinno się wydarzyć"

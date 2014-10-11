@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2014-10-11 12:00\n"
 "PO-Revision-Date: 2011-04-01 13:28+0900 \n"
 "Last-Translator: Masafumi OKADA <mokada@mail.ne.jp> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -89,6 +89,15 @@ msgstr " コード中のバイトコードリテラルをコンパイルでき�
 msgid "cannot compile promise literals in code"
 msgstr " コード中のプロミスリテラルをコンパイルできません "
 
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#: R/cmp.R:0
+#, fuzzy
+msgid "cannot compile this expression"
+msgstr " コード中のプロミスリテラルをコンパイルできません "
+
 #. R/cmp.R: gettext("cannot constant fold literal bytecode objects")
 #: R/cmp.R:0
 msgid "cannot constant fold literal bytecode objects"
@@ -159,6 +168,11 @@ msgstr " 入力ファイルと出力ファイルの名前が同じです "
 #: R/cmp.R:0
 msgid "invalid function in complex assignment"
 msgstr " complexの付値に不正な関数があります "
+
+#. R/cmp.R: stop(sQuote(name), "is not a registered math1 function")
+#: R/cmp.R:0
+msgid "is not a registered math1 function"
+msgstr ""
 
 #. R/cmp.R: gettext("missing arguments are not allowed")
 #: R/cmp.R:0

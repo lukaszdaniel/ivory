@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-08-10 17:27\n"
+"POT-Creation-Date: 2014-10-11 11:59\n"
 "PO-Revision-Date: 2011-03-26 08:54-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -138,13 +138,6 @@ msgstr "argumento '%s' (ainda) não é usado"
 msgid "%s value was converted to character string"
 msgstr "convertido para cadeia de caracteres"
 
-#. R/namespace.R: gettextf("%s value was not found", sQuote(name))
-#. R/namespace.R: gettextf("%s value was not found", sQuote(name))
-#: R/namespace.R:0
-#, fuzzy
-msgid "%s value was not found"
-msgstr "arquivo '%s' não encontrado"
-
 #. R/library.R: gettextf("%sPackages in library %s:\n", sep, sQuote(lib))
 #: R/library.R:0
 #, fuzzy
@@ -240,6 +233,13 @@ msgstr "não é um data frame"
 #: R/table.R:0
 #, fuzzy
 msgid "'%s' argument is not an array"
+msgstr "não é um data frame"
+
+#. R/all.equal.R: gettextf("'%s' argument is not an envRefClass", "target", domain = "R-base")
+#. R/all.equal.R: gettextf("'%s' argument is not an envRefClass", "current", domain = "R-base")
+#: R/all.equal.R:0
+#, fuzzy
+msgid "'%s' argument is not an envRefClass"
 msgstr "não é um data frame"
 
 #. R/datetime.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("POSIXlt"))
@@ -574,6 +574,12 @@ msgstr "'%s' não é uma abreviação válida de RNG"
 #, fuzzy
 msgid "'%s' value is not a valid choice"
 msgstr "'%s' não é uma escolha válida"
+
+#. R/namespace.R: gettextf("'%s' was not found", sQuote(x))
+#: R/namespace.R:0
+#, fuzzy
+msgid "'%s' was not found"
+msgstr "arquivo '%s' não encontrado"
 
 #. R/rm.R: stop("'...' must contain names or character strings")
 #: R/rm.R:0
@@ -1150,6 +1156,16 @@ msgstr ""
 #. R/summary.R: gettext("Class")
 #: R/summary.R:0
 msgid "Class"
+msgstr ""
+
+#. R/all.equal.R: gettextf("Class definitions are not identical%s", if (isTRUE(ae)) "" else paste(":",     ae, collapse = " "))
+#: R/all.equal.R:0
+msgid "Class definitions are not identical%s"
+msgstr ""
+
+#. R/all.equal.R: gettextf("Classes differ: %s", paste(ae, collapse = " "))
+#: R/all.equal.R:0
+msgid "Classes differ: %s"
 msgstr ""
 
 #. R/all.equal.R: gettextf("Complex: lengths (%d, %d) differ", lt, lc)
@@ -2810,7 +2826,7 @@ msgstr "norma '%s' atualmente sempre usa exact = FALSE"
 msgid "not all elements of 'MARGIN' are names of dimensions"
 msgstr "nem todos elementos de 'MARGIN'  são nomes de dimensões"
 
-#. R/namespace.R: stop("not loading a namespace", domain = "R-base")
+#. R/namespace.R: stop("not loading a namespace")
 #: R/namespace.R:0
 #, fuzzy
 msgid "not loading a namespace"
@@ -3583,6 +3599,10 @@ msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "T usado ao invés de TRUE"
 msgstr[1] "T usado ao invés de TRUE"
+
+#, fuzzy
+#~ msgid "%s value was not found"
+#~ msgstr "arquivo '%s' não encontrado"
 
 #~ msgid "wrong argument"
 #~ msgstr "argumento errado"
