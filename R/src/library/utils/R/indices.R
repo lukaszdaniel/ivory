@@ -176,9 +176,7 @@ function(x, ...)
     out <- if(nrow(db) == 0L)
          NULL
     else
-        #lapply(split(1 : nrow(db), db[, "Package"]), LUKI
         lapply(split(1 : nrow(db), db[, 1L]),
-               #function(ind) db[ind, c("Item", "Title"), LUKI
                function(ind) db[ind, 3L:4L, drop = FALSE])
     outFile <- tempfile("RpackageIQR")
     outConn <- file(outFile, open = "w")
@@ -188,7 +186,6 @@ function(x, ...)
         writeLines(paste(gettextf("%s in package %s:", x$title, sQuote(pkg), domain = "R-utils"), "\n", sep = ""), outConn)
 	else
         writeLines(paste("\n", gettextf("%s in package %s:", x$title, sQuote(pkg), domain = "R-utils"), "\n", sep = ""), outConn)
-        #writeLines(formatDL(out[[pkg]][, "Item"], out[[pkg]][, "Title"]), outConn) #LUKI
         writeLines(formatDL(out[[pkg]][, 1L], out[[pkg]][, 2L]), outConn)
         first <- FALSE
     }

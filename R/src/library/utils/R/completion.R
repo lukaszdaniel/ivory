@@ -749,7 +749,6 @@ specialFunctionArgs <- function(fun, text)
                if (.CompletionEnv$settings[["data"]])
                {
                    findMatches(sprintf("^%s", makeRegexpSafe(text)),
-                               #data()$results[, "Item"]) #LUKI
                                data()$results[, 3L])
                }
                else character()

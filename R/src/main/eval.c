@@ -4899,15 +4899,6 @@ static R_INLINE void checkForMissings(SEXP args, SEXP call)
 	SET_NAMED(var, 1);				\
     }							\
 } while (0)
-//static R_INLINE void GET_VEC_LOOP_VALUE(SEXP var, int pos) { //LUKI
-//     SEXP seq = GETSTACK(-4);
-//     var = GETSTACK(pos);
-//    if (MAYBE_SHARED(var)) {
-//        var = allocVector(TYPEOF(seq), 1);
-//        SETSTACK(pos, var);
-//        SET_NAMED(var, 1);
-//    }
-// }
 
 /* The CALLBUILTIN instruction handles calls to both true BUILTINs and
    to .Internals of type BUILTIN. To handle profiling in a way that is
