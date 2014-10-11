@@ -16,7 +16,7 @@
 #  A copy of the GNU General Public License is available at
 #  http://www.r-project.org/Licenses/
 
-MARC_relator_db <- #LUKI
+MARC_relator_db <-
 structure(list(term = c("Abridger", "Actor", "Adapter", "Addressee", 
 "Analyst", "Animator", "Annotator", "Appellant", "Appellee", 
 "Applicant", "Architect", "Arranger", "Art copyist", "Art director", 
