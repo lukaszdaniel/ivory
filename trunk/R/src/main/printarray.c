@@ -456,10 +456,38 @@ void printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 		    k *= dims[j];
 		}
 		Rprintf("\n\n");
-	    } else { // nb == 0 -- e.g. <2 x 3 x 0 array of logical>
-		for (i = 0; i < ndim; i++) //LUKI
-		    Rprintf("%s%d", (i == 0) ? "<" : " x ", dims[i]);
-		Rprintf(" array of %s>\n", CHAR(type2str_nowarn(TYPEOF(x))));
+	    } else { // nb == 0 -- e.g. <logical array of size 2 x 3 x 0>
+	    	const int bufsize = 100;
+	    	char buf[bufsize];
+	    	int cx = 0;
+	    	int dx = 0;
+	    	for (i = 0; i < ndim; i++)  {
+	    		if(i == 0) cx = snprintf(buf, bufsize, "%d", dims[i]);
+	    		else {
+	    			dx = snprintf(buf+cx, bufsize-cx, " x %d", dims[i]);
+	    			cx += dx;
+	    		}
+	    	}
+		    switch (TYPEOF(x)) {
+		    case LGLSXP:
+		    	Rprintf(_("<logical array of size %s>"), buf);
+			break;
+		    case INTSXP:
+		    	Rprintf(_("<integer array of size %s>"), buf);
+			break;
+		    case REALSXP:
+		    	Rprintf(_("<real array of size %s>"), buf);
+			break;
+		    case CPLXSXP:
+		    	Rprintf(_("<complex array of size %s>"), buf);
+			break;
+		    case STRSXP:
+		    	Rprintf(_("<character array of size %s>"), buf);
+			break;
+		    default: //should never happen!
+		    	Rprintf("<%s array of size %s>", CHAR(type2str_nowarn(TYPEOF(x))), buf);
+		    }
+		    	Rprintf("\n");
 	    }
 	    switch (TYPEOF(x)) {
 	    case LGLSXP:
