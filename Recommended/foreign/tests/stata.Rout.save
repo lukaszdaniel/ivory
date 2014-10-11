@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-10-09 r5) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-10-10 r8) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -409,4 +409,4 @@ In command 'read.dta("pc5.dta")': cannot read factor labels from Stata 5 files
 > q()
 > proc.time()
    user  system elapsed 
-  0.425   0.058   0.482 
+  0.457   0.066   0.508 

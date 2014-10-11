@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-10-09 r5) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-10-10 r8) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -933,4 +933,4 @@ Number of objects: 20
 > 
 > proc.time()
    user  system elapsed 
-  0.416   0.073   0.473 
+  0.358   0.050   0.401 

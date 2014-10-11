@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-10-09 r5) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-10-10 r8) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -6403,15 +6403,15 @@ function ()
 > print.function
 function (x, ...)  
  - attr(*, "srcref")=Class 'srcref' atomic [1:8] 1 19 1 63 19 63 1 1
-  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x3addde8> 
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x46a1178> 
 > f
 function ()  
  - attr(*, "srcref")=Class 'srcref' atomic [1:8] 1 17 1 28 17 28 1 1
-  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x3ae8558> 
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x46ab8e8> 
  - attr(*, "note")= character "just a note"
  - attr(*, "yada")=function ()  
   ..- attr(*, "srcref")=Class 'srcref' atomic [1:8] 2 24 2 48 24 48 2 2
-  .. .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x3ae8558> 
+  .. .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x46ab8e8> 
 > rm(print.function)
 > ## auto-printing and printing differed up to R 2.9.x
 > 
@@ -7573,7 +7573,7 @@ Col
   c4
 > A <- array(dim=3:0, dimnames=list(D1=c("a","b","c"), D2=c("X","Y"), D3="I", D4=NULL))
 > A ## did not print *anything*
-<3 x 2 x 1 x 0 array of logical>
+<logical array of size 3 x 2 x 1 x 0>
    D2
 D1  X Y
   a
@@ -7581,7 +7581,7 @@ D1  X Y
   c
 
 > A[,,"I",] # ditto
-<3 x 2 x 0 array of logical>
+<logical array of size 3 x 2 x 0>
    D2
 D1  X Y
   a
@@ -7589,7 +7589,7 @@ D1  X Y
   c
 
 > A[,,0,]   # ditto
-<3 x 2 x 0 x 0 array of logical>
+<logical array of size 3 x 2 x 0 x 0>
    D2
 D1  X Y
   a
@@ -7597,13 +7597,13 @@ D1  X Y
   c
 
 > aperm(A, c(3:1,4))   # ditto
-<1 x 2 x 3 x 0 array of logical>
+<logical array of size 1 x 2 x 3 x 0>
    D2
 D3  X Y
   I
 
 > aperm(A, c(1:2, 4:3))# ditto
-<3 x 2 x 0 x 1 array of logical>
+<logical array of size 3 x 2 x 0 x 1>
    D2
 D1  X Y
   a
@@ -7611,14 +7611,14 @@ D1  X Y
   c
 
 > unname(A)            # ditto
-<3 x 2 x 1 x 0 array of logical>
+<logical array of size 3 x 2 x 1 x 0>
      [,1] [,2]
 [1,]
 [2,]
 [3,]
 
 > format(A[,,1,])	     # ditto
-<3 x 2 x 0 array of character>
+<character array of size 3 x 2 x 0>
    D2
 D1  X Y
   a
