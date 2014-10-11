@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-104\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-07 16:58+0100\n"
+"POT-Creation-Date: 2014-10-11 12:11+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -16,48 +16,48 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: corStruct.c:445
+#: corStruct.c:446
 msgid "All parameters must be less than 1 in absolute value"
 msgstr "Wszystkie parametry muszą być na moduł mniejsze niż 1"
 
-#: corStruct.c:556
+#: corStruct.c:557
 msgid "Coefficient matrix not invertible"
 msgstr "Macierz współczynników nie jest odwracalna"
 
-#: corStruct.c:908 corStruct.c:963 corStruct.c:1030 corStruct.c:1072
+#: corStruct.c:909 corStruct.c:964 corStruct.c:1031 corStruct.c:1073
 msgid "Unknown spatial correlation class"
 msgstr "Nieznana klasa przestrzennej korelacji"
 
-#: nlme.c:499
+#: nlme.c:500
 msgid "First observation on an individual must have a dose"
 msgstr "Pierwsza obserwacja jednostki musi mieć zamknięcie"
 
-#: nlmefit.c:370
+#: nlmefit.c:371
 #, c-format
 msgid "Singular precision matrix in level %ld, block %ld"
 msgstr "Macierz pojedynczej precyzji w poziomie %ld, blok %ld"
 
-#: nlmefit.c:401
+#: nlmefit.c:402
 #, c-format
 msgid "Singularity in backsolve at level %ld, block %ld"
 msgstr "Osobliwość w 'backsolve' na poziomie %ld, blok %ld"
 
-#: nlmefit.c:558
+#: nlmefit.c:559
 msgid "analytic gradient is not available with matrix logarithm"
 msgstr "gradient analityczny nie jest dostępny z algorytmem macierzowym"
 
-#: nlmefit.c:581
+#: nlmefit.c:582
 msgid "analytic gradient is not available with compound symmetry"
 msgstr "gradient analityczny nie jest dostępny dla złożonej symetrii"
 
-#: nlmefit.c:861
+#: nlmefit.c:862
 msgid "Unable to form eigenvalue-eigenvector decomposition"
 msgstr "Nie można uformować dekompozycji wartość własna-wektor własny"
 
-#: nlmefit.c:893
+#: nlmefit.c:894
 msgid "Unable to form Cholesky decomposition"
 msgstr "Nie można uformować dekompozycji Cholesky'ego"
 
-#: nlmefit.c:924
+#: nlmefit.c:925
 msgid "Haven't written the compound symmetry case for this yet"
 msgstr "Jak na razie nie została napisany przypadek dla tej złożonej symetrii"

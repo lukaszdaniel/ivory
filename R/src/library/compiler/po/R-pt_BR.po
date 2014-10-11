@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2014-10-11 12:00\n"
 "PO-Revision-Date: 2011-03-26 08:55-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -88,6 +88,15 @@ msgstr "não é possível compilar literais de byte code no código"
 msgid "cannot compile promise literals in code"
 msgstr "não é possível compilar promessas literais em código"
 
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#: R/cmp.R:0
+#, fuzzy
+msgid "cannot compile this expression"
+msgstr "não é possível compilar promessas literais em código"
+
 #. R/cmp.R: gettext("cannot constant fold literal bytecode objects")
 #: R/cmp.R:0
 msgid "cannot constant fold literal bytecode objects"
@@ -158,6 +167,11 @@ msgstr "nomes de entrada e saida são os mesmos"
 #: R/cmp.R:0
 msgid "invalid function in complex assignment"
 msgstr "função inválida em atribuição complexa"
+
+#. R/cmp.R: stop(sQuote(name), "is not a registered math1 function")
+#: R/cmp.R:0
+msgid "is not a registered math1 function"
+msgstr ""
 
 #. R/cmp.R: gettext("missing arguments are not allowed")
 #: R/cmp.R:0

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-09 19:02\n"
+"POT-Creation-Date: 2014-10-11 12:00\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -197,13 +197,10 @@ msgstr ""
 msgid "'DESCRIPTION' file seems to be a bundle -- and they are defunct"
 msgstr "plik 'DESCRIPTION' wygląda to na paczkę -- a one zostały zlikwidowane"
 
-#. R/check.R: gettext("'DUP = FALSE' is deprecated and may be disabled in future versions of R.",     domain = "R-tools")
+#. R/check.R: gettext("'DUP' option is no longer supported and will be ignored.", domain = "R-tools")
 #: R/check.R:0
-msgid ""
-"'DUP = FALSE' is deprecated and may be disabled in future versions of R."
-msgstr ""
-"opcja 'DUP = FALSE' jest przestarzała i może zostać wyłączona w przyszłych "
-"wersjach R."
+msgid "'DUP' option is no longer supported and will be ignored."
+msgstr "'DUP' nie jest już dłużej wspierane i będzie ignorowane."
 
 #. R/QC.R: gettextf("'LinkingTo' field is unused: package has no 'src' directory", domain = "R-tools")
 #: R/QC.R:0
@@ -780,9 +777,8 @@ msgstr "RÓŻNICE"
 
 #. R/check.R: gettext("DONE", domain = "R-tools")
 #: R/check.R:0
-#, fuzzy
 msgid "DONE"
-msgstr "WYKONANO (%s)"
+msgstr "WYKONANO"
 
 #. R/install.R: gettextf("DONE (%s)", pkg_name)
 #: R/install.R:0
@@ -818,11 +814,6 @@ msgstr "Dema które nie posiadają poprawnego kodu R:"
 #: R/check.R:0
 msgid "Demos with non-ASCII characters:"
 msgstr "Dema ze znakami innymi niż ASCII:"
-
-#. R/checktools.R: gettextf("Depends: %s", meta["Depends"], domain = "R-tools")
-#: R/checktools.R:0
-msgid "Depends: %s"
-msgstr "Zależności: %s"
 
 #. R/QC.R: gettext("Depends: includes the non-default packages:", domain = "R-tools")
 #: R/QC.R:0
@@ -1553,11 +1544,6 @@ msgstr "Hmm ... wygląda na to, że jest to pakiet"
 msgid "Hmm ... looks like a package from the R distribution"
 msgstr "Hmm ... wygląda na to, że jest to pakiet z dystrybucji R"
 
-#. R/checktools.R: gettextf("Imports: %s", meta["Imports"], domain = "R-tools")
-#: R/checktools.R:0
-msgid "Imports: %s"
-msgstr "Importy: %s"
-
 #. R/check.R: gettext("\nIn addition to the above warning(s), found the following notes:\n", domain = "R-tools")
 #. R/check.R: gettext("In addition to the above warning(s), found the following notes:", domain = "R-tools")
 #: R/check.R:0
@@ -1951,9 +1937,8 @@ msgstr "NIE"
 msgid "NONE"
 msgstr "BRAK"
 
-#. R/checktools.R: gettext("NOTE", domain = "R-tools")
 #. R/logging.R: gettext("NOTE", domain = "R-tools")
-#: R/checktools.R:0 R/logging.R:0
+#: R/logging.R:0
 msgid "NOTE"
 msgstr "UWAGA"
 
@@ -2351,11 +2336,6 @@ msgstr "dokument PDF (plik %s, %d bajtów, %d obiektów)"
 msgid "PDF header was not found"
 msgstr "nie znaleziono nagłówka PDF"
 
-#. R/checktools.R: gettext("PROBLEM", domain = "R-tools")
-#: R/checktools.R:0
-msgid "PROBLEM"
-msgstr "PROBLEM"
-
 #. R/pkgDepends.R: gettextf("Package %s had its dependencies reduced to a minimal set.", sQuote(pkgMtrx[1,     ]))
 #: R/pkgDepends.R:0
 msgid "Package %s had its dependencies reduced to a minimal set."
@@ -2483,11 +2463,6 @@ msgstr "Funkcje startowe pakietu powinny używać %s do generowania wiadomości.
 #: R/QC.R:0
 msgid "Package was archived on CRAN"
 msgstr "Pakiet został zarchiwizowany w repozytorium CRAN"
-
-#. R/checktools.R: gettextf("Package: %s", meta["Package"], domain = "R-tools")
-#: R/checktools.R:0
-msgid "Package: %s"
-msgstr "Pakiet: %s"
 
 #. R/check.R: gettext("Packages should not call .Internal(): it is not part of the API, for use only by R itself and subject to change without notice.",     domain = "R-tools")
 #: R/check.R:0
@@ -5751,13 +5726,13 @@ msgstr[2] ""
 "wywołanie 'library' lub 'require' do pakietów %s, które były już dołączone "
 "przez 'Depends'. Proszę usunąć te wywołania ze swojego kodu."
 
-#. R/QC.R: ngettext(length(z3), "Call with 'DUP = FALSE':", "Calls with 'DUP = FALSE':", domain = "R-tools")
+#. R/QC.R: ngettext(length(z3), "Call with 'DUP':", "Calls with 'DUP':", domain = "R-tools")
 #: R/QC.R:0
-msgid "Call with 'DUP = FALSE':"
-msgid_plural "Calls with 'DUP = FALSE':"
-msgstr[0] "Wywołanie z 'DUP = FALSE':"
-msgstr[1] "Wywołania z 'DUP = FALSE':"
-msgstr[2] "Wywołania z 'DUP = FALSE':"
+msgid "Call with 'DUP':"
+msgid_plural "Calls with 'DUP':"
+msgstr[0] "Wywołanie z 'DUP':"
+msgstr[1] "Wywołania z 'DUP':"
+msgstr[2] "Wywołania z 'DUP':"
 
 #. R/install.R: ngettext(length(miss), "ERROR: dependency %s is not available for package %s", "ERROR: dependencies %s are not available for package %s",     domain = "R-tools")
 #: R/install.R:0
@@ -6713,6 +6688,24 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "nie można przekodować %s linia %s"
 msgstr[1] "nie można przekodować %s linie %s"
 msgstr[2] "nie można przekodować %s linie %s"
+
+#~ msgid ""
+#~ "'DUP = FALSE' is deprecated and may be disabled in future versions of R."
+#~ msgstr ""
+#~ "opcja 'DUP = FALSE' jest przestarzała i może zostać wyłączona w "
+#~ "przyszłych wersjach R."
+
+#~ msgid "Depends: %s"
+#~ msgstr "Zależności: %s"
+
+#~ msgid "Imports: %s"
+#~ msgstr "Importy: %s"
+
+#~ msgid "PROBLEM"
+#~ msgstr "PROBLEM"
+
+#~ msgid "Package: %s"
+#~ msgstr "Pakiet: %s"
 
 #, fuzzy
 #~ msgid ""

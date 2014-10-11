@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-09-09 19:02\n"
+"POT-Creation-Date: 2014-10-11 12:00\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -216,10 +216,9 @@ msgstr ""
 msgid "'DESCRIPTION' file seems to be a bundle -- and they are defunct"
 msgstr " バンドルされているようですが、現在は用いられていません "
 
-#. R/check.R: gettext("'DUP = FALSE' is deprecated and may be disabled in future versions of R.",     domain = "R-tools")
+#. R/check.R: gettext("'DUP' option is no longer supported and will be ignored.", domain = "R-tools")
 #: R/check.R:0
-msgid ""
-"'DUP = FALSE' is deprecated and may be disabled in future versions of R."
+msgid "'DUP' option is no longer supported and will be ignored."
 msgstr ""
 
 #. R/QC.R: gettextf("'LinkingTo' field is unused: package has no 'src' directory", domain = "R-tools")
@@ -829,12 +828,6 @@ msgstr " ディレクトリ '%s' は R コードを含んでいません "
 #, fuzzy
 msgid "Demos with non-ASCII characters:"
 msgstr " ASCII値でないフィールドです： "
-
-#. R/checktools.R: gettextf("Depends: %s", meta["Depends"], domain = "R-tools")
-#: R/checktools.R:0
-#, fuzzy
-msgid "Depends: %s"
-msgstr " ドキュメント: %s "
 
 #. R/QC.R: gettext("Depends: includes the non-default packages:", domain = "R-tools")
 #: R/QC.R:0
@@ -1598,12 +1591,6 @@ msgstr " これはbaseパッケージの名前です "
 msgid "Hmm ... looks like a package from the R distribution"
 msgstr ""
 
-#. R/checktools.R: gettextf("Imports: %s", meta["Imports"], domain = "R-tools")
-#: R/checktools.R:0
-#, fuzzy
-msgid "Imports: %s"
-msgstr " ドキュメント: %s "
-
 #. R/check.R: gettext("\nIn addition to the above warning(s), found the following notes:\n", domain = "R-tools")
 #. R/check.R: gettext("In addition to the above warning(s), found the following notes:", domain = "R-tools")
 #: R/check.R:0
@@ -1988,9 +1975,8 @@ msgstr ""
 msgid "NONE"
 msgstr ""
 
-#. R/checktools.R: gettext("NOTE", domain = "R-tools")
 #. R/logging.R: gettext("NOTE", domain = "R-tools")
-#: R/checktools.R:0 R/logging.R:0
+#: R/logging.R:0
 msgid "NOTE"
 msgstr ""
 
@@ -2394,11 +2380,6 @@ msgstr ""
 msgid "PDF header was not found"
 msgstr "PDFヘッダが見つかりませんでした "
 
-#. R/checktools.R: gettext("PROBLEM", domain = "R-tools")
-#: R/checktools.R:0
-msgid "PROBLEM"
-msgstr ""
-
 #. R/pkgDepends.R: gettextf("Package %s had its dependencies reduced to a minimal set.", sQuote(pkgMtrx[1,     ]))
 #: R/pkgDepends.R:0
 #, fuzzy
@@ -2524,12 +2505,6 @@ msgstr ""
 #: R/QC.R:0
 msgid "Package was archived on CRAN"
 msgstr ""
-
-#. R/checktools.R: gettextf("Package: %s", meta["Package"], domain = "R-tools")
-#: R/checktools.R:0
-#, fuzzy
-msgid "Package: %s"
-msgstr " %s を展開中 "
 
 #. R/check.R: gettext("Packages should not call .Internal(): it is not part of the API, for use only by R itself and subject to change without notice.",     domain = "R-tools")
 #: R/check.R:0
@@ -5941,10 +5916,10 @@ msgid_plural ""
 "Depends. Please remove these calls from your code."
 msgstr[0] ""
 
-#. R/QC.R: ngettext(length(z3), "Call with 'DUP = FALSE':", "Calls with 'DUP = FALSE':", domain = "R-tools")
+#. R/QC.R: ngettext(length(z3), "Call with 'DUP':", "Calls with 'DUP':", domain = "R-tools")
 #: R/QC.R:0
-msgid "Call with 'DUP = FALSE':"
-msgid_plural "Calls with 'DUP = FALSE':"
+msgid "Call with 'DUP':"
+msgid_plural "Calls with 'DUP':"
 msgstr[0] ""
 
 #. R/install.R: ngettext(length(miss), "ERROR: dependency %s is not available for package %s", "ERROR: dependencies %s are not available for package %s",     domain = "R-tools")
@@ -6604,6 +6579,18 @@ msgstr[0] " %s 中に T/F が見つかりました "
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] " '%s' ('%s'行')を再エンコード出来ません "
+
+#, fuzzy
+#~ msgid "Depends: %s"
+#~ msgstr " ドキュメント: %s "
+
+#, fuzzy
+#~ msgid "Imports: %s"
+#~ msgstr " ドキュメント: %s "
+
+#, fuzzy
+#~ msgid "Package: %s"
+#~ msgstr " %s を展開中 "
 
 #, fuzzy
 #~ msgid " OK"

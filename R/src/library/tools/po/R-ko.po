@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-09-09 19:02\n"
+"POT-Creation-Date: 2014-10-11 12:00\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -208,10 +208,9 @@ msgstr ""
 msgid "'DESCRIPTION' file seems to be a bundle -- and they are defunct"
 msgstr ""
 
-#. R/check.R: gettext("'DUP = FALSE' is deprecated and may be disabled in future versions of R.",     domain = "R-tools")
+#. R/check.R: gettext("'DUP' option is no longer supported and will be ignored.", domain = "R-tools")
 #: R/check.R:0
-msgid ""
-"'DUP = FALSE' is deprecated and may be disabled in future versions of R."
+msgid "'DUP' option is no longer supported and will be ignored."
 msgstr ""
 
 #. R/QC.R: gettextf("'LinkingTo' field is unused: package has no 'src' directory", domain = "R-tools")
@@ -813,12 +812,6 @@ msgstr "디렉토리 '%s'는 R 코드를 포함하지 않습니다"
 #, fuzzy
 msgid "Demos with non-ASCII characters:"
 msgstr "ASCII가 아닌 값을 가지는 항목들:"
-
-#. R/checktools.R: gettextf("Depends: %s", meta["Depends"], domain = "R-tools")
-#: R/checktools.R:0
-#, fuzzy
-msgid "Depends: %s"
-msgstr "문서: %s"
 
 #. R/QC.R: gettext("Depends: includes the non-default packages:", domain = "R-tools")
 #: R/QC.R:0
@@ -1553,12 +1546,6 @@ msgstr ""
 msgid "Hmm ... looks like a package from the R distribution"
 msgstr ""
 
-#. R/checktools.R: gettextf("Imports: %s", meta["Imports"], domain = "R-tools")
-#: R/checktools.R:0
-#, fuzzy
-msgid "Imports: %s"
-msgstr "문서: %s"
-
 #. R/check.R: gettext("\nIn addition to the above warning(s), found the following notes:\n", domain = "R-tools")
 #. R/check.R: gettext("In addition to the above warning(s), found the following notes:", domain = "R-tools")
 #: R/check.R:0
@@ -1934,9 +1921,8 @@ msgstr ""
 msgid "NONE"
 msgstr ""
 
-#. R/checktools.R: gettext("NOTE", domain = "R-tools")
 #. R/logging.R: gettext("NOTE", domain = "R-tools")
-#: R/checktools.R:0 R/logging.R:0
+#: R/logging.R:0
 msgid "NOTE"
 msgstr ""
 
@@ -2332,11 +2318,6 @@ msgstr ""
 msgid "PDF header was not found"
 msgstr "PDF 헤더를 찾을 수 없습니다"
 
-#. R/checktools.R: gettext("PROBLEM", domain = "R-tools")
-#: R/checktools.R:0
-msgid "PROBLEM"
-msgstr ""
-
 #. R/pkgDepends.R: gettextf("Package %s had its dependencies reduced to a minimal set.", sQuote(pkgMtrx[1,     ]))
 #: R/pkgDepends.R:0
 msgid "Package %s had its dependencies reduced to a minimal set."
@@ -2456,11 +2437,6 @@ msgstr ""
 #. R/QC.R: gettext("Package was archived on CRAN", domain = "R-tools")
 #: R/QC.R:0
 msgid "Package was archived on CRAN"
-msgstr ""
-
-#. R/checktools.R: gettextf("Package: %s", meta["Package"], domain = "R-tools")
-#: R/checktools.R:0
-msgid "Package: %s"
 msgstr ""
 
 #. R/check.R: gettext("Packages should not call .Internal(): it is not part of the API, for use only by R itself and subject to change without notice.",     domain = "R-tools")
@@ -5788,10 +5764,10 @@ msgid_plural ""
 msgstr[0] ""
 "Depends에 의하여 이미 부착된 %s로의 'library' 또는 'require' 호출입니다."
 
-#. R/QC.R: ngettext(length(z3), "Call with 'DUP = FALSE':", "Calls with 'DUP = FALSE':", domain = "R-tools")
+#. R/QC.R: ngettext(length(z3), "Call with 'DUP':", "Calls with 'DUP':", domain = "R-tools")
 #: R/QC.R:0
-msgid "Call with 'DUP = FALSE':"
-msgid_plural "Calls with 'DUP = FALSE':"
+msgid "Call with 'DUP':"
+msgid_plural "Calls with 'DUP':"
 msgstr[0] ""
 
 #. R/install.R: ngettext(length(miss), "ERROR: dependency %s is not available for package %s", "ERROR: dependencies %s are not available for package %s",     domain = "R-tools")
@@ -6435,6 +6411,14 @@ msgstr[0] "%s 내에서 T/F를 찾았습니다"
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "코드 파일들을 기록할 수 없습니다"
+
+#, fuzzy
+#~ msgid "Depends: %s"
+#~ msgstr "문서: %s"
+
+#, fuzzy
+#~ msgid "Imports: %s"
+#~ msgstr "문서: %s"
 
 #, fuzzy
 #~ msgid " OK"

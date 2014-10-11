@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-09-09 19:02\n"
+"POT-Creation-Date: 2014-10-11 12:00\n"
 "PO-Revision-Date: 2012-02-26 14:23+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -168,9 +168,7 @@ msgstr " 'url' は空でない文字列でなければなりません "
 
 #. R/help.start.R: gettextf("'%s' argument must be a non-empty character string", "url")
 #. R/help.start.R: gettextf("'%s' argument must be a non-empty character string", "browser")
-#. R/windows/help.start.R: gettextf("'%s' argument must be a non-empty character string", "url")
-#. R/windows/help.start.R: gettextf("'%s' argument must be a non-empty character string", "browser")
-#: R/help.start.R:0 R/windows/help.start.R:0
+#: R/help.start.R:0
 #, fuzzy
 msgid "'%s' argument must be a non-empty character string"
 msgstr " 'url' は空でない文字列でなければなりません "
@@ -768,8 +766,7 @@ msgid "Help on topic %s was found in the following packages:"
 msgstr " トピック %s に対するヘルプが以下のパッケージ中にありました： "
 
 #. R/help.start.R: gettextf("If nothing happens, you should open\n%s yourself\n", sQuote(url))
-#. R/windows/help.start.R: gettextf("If nothing happens, you should open\n%s yourself", sQuote(url))
-#: R/help.start.R:0 R/windows/help.start.R:0
+#: R/help.start.R:0
 msgid ""
 "If nothing happens, you should open\n"
 "%s yourself"
@@ -1113,6 +1110,11 @@ msgstr ""
 #: R/aspell.R:0 R/rtags.R:0
 msgid "Processing file %s"
 msgstr " ファイル %s を処理中 "
+
+#. R/str.R: gettextf("Prototypical reference class %s [package %s]", paste(dQuote(cl), collapse = ", "),     sQuote(attr(cl, "package")), domain = "R-tools")
+#: R/str.R:0
+msgid "Prototypical reference class %s [package %s]"
+msgstr ""
 
 #. R/help.R: gettextf("R Help on %s", sQuote(topic))
 #: R/help.R:0
@@ -2010,8 +2012,7 @@ msgid "header and 'col.names' argument are of different lengths"
 msgstr " ヘッダと 'col.names' は異なった長さです "
 
 #. R/help.start.R: stop("help.start() requires the HTTP server to be running", call. = FALSE)
-#. R/windows/help.start.R: stop("help.start() requires the HTTP server to be running", call. = FALSE)
-#: R/help.start.R:0 R/windows/help.start.R:0
+#: R/help.start.R:0
 msgid "help.start() requires the HTTP server to be running"
 msgstr " help.start()にはHTTPサーバが実行されている必要があります "
 

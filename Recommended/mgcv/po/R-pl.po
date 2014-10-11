@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.8-0\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2014-07-22 16:15\n"
+"POT-Creation-Date: 2014-10-11 12:11\n"
 "PO-Revision-Date: 2014-07-06 07:58+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1395,6 +1395,11 @@ msgstr "nie można wygładzić 'soap' bez granicy"
 msgid "cannot find valid starting values: please specify some"
 msgstr ""
 "Nie mnżna znaleźć poprawnych wartości startowych: proszę określić kilka"
+
+#. R/bam.r: gettextf("chunk.size < number of coefficients. Reset to %d", chunk.size)
+#: R/bam.r:0
+msgid "chunk.size < number of coefficients. Reset to %d"
+msgstr ""
 
 #. R/soap.r: stop("coefficient vector wrong length")
 #: R/soap.r:0

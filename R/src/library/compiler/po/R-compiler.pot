@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: compiler 3.2.0\n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2014-10-11 12:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -110,6 +110,16 @@ msgstr ""
 
 
 #: R/cmp.R: 0
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+#. R/cmp.R: gettext("cannot compile this expression")
+
+msgid "cannot compile this expression"
+msgstr ""
+
+
+#: R/cmp.R: 0
 #. R/cmp.R: gettext("cannot constant fold literal bytecode objects")
 
 msgid "cannot constant fold literal bytecode objects"
@@ -201,6 +211,13 @@ msgstr ""
 #. R/cmp.R: gettext("invalid function in complex assignment")
 
 msgid "invalid function in complex assignment"
+msgstr ""
+
+
+#: R/cmp.R: 0
+#. R/cmp.R: stop(sQuote(name), "is not a registered math1 function")
+
+msgid "is not a registered math1 function"
 msgstr ""
 
 

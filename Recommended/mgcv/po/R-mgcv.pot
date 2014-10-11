@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: mgcv 1.8-2\n"
-"POT-Creation-Date: 2014-07-22 16:15\n"
+"Project-Id-Version: mgcv 1.8-3\n"
+"POT-Creation-Date: 2014-10-11 12:11\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1808,6 +1808,13 @@ msgstr ""
 #. R/bam.r: stop("cannot find valid starting values: please specify some")
 
 msgid "cannot find valid starting values: please specify some"
+msgstr ""
+
+
+#: R/bam.r: 0
+#. R/bam.r: gettextf("chunk.size < number of coefficients. Reset to %d", chunk.size)
+
+msgid "chunk.size < number of coefficients. Reset to %d"
 msgstr ""
 
 

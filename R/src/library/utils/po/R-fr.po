@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-09-09 19:02\n"
+"POT-Creation-Date: 2014-10-11 12:00\n"
 "PO-Revision-Date: 2012-03-06 22:16+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -175,9 +175,7 @@ msgstr "'url' doit être une chaîne de caractères non vide"
 
 #. R/help.start.R: gettextf("'%s' argument must be a non-empty character string", "url")
 #. R/help.start.R: gettextf("'%s' argument must be a non-empty character string", "browser")
-#. R/windows/help.start.R: gettextf("'%s' argument must be a non-empty character string", "url")
-#. R/windows/help.start.R: gettextf("'%s' argument must be a non-empty character string", "browser")
-#: R/help.start.R:0 R/windows/help.start.R:0
+#: R/help.start.R:0
 #, fuzzy
 msgid "'%s' argument must be a non-empty character string"
 msgstr "'url' doit être une chaîne de caractères non vide"
@@ -772,8 +770,7 @@ msgid "Help on topic %s was found in the following packages:"
 msgstr "L'aide sur le thème %s a été trouvée dans les packages suivants :"
 
 #. R/help.start.R: gettextf("If nothing happens, you should open\n%s yourself\n", sQuote(url))
-#. R/windows/help.start.R: gettextf("If nothing happens, you should open\n%s yourself", sQuote(url))
-#: R/help.start.R:0 R/windows/help.start.R:0
+#: R/help.start.R:0
 msgid ""
 "If nothing happens, you should open\n"
 "%s yourself"
@@ -1122,6 +1119,11 @@ msgstr ""
 #: R/aspell.R:0 R/rtags.R:0
 msgid "Processing file %s"
 msgstr "Traitement du fichier %s"
+
+#. R/str.R: gettextf("Prototypical reference class %s [package %s]", paste(dQuote(cl), collapse = ", "),     sQuote(attr(cl, "package")), domain = "R-tools")
+#: R/str.R:0
+msgid "Prototypical reference class %s [package %s]"
+msgstr ""
 
 #. R/help.R: gettextf("R Help on %s", sQuote(topic))
 #: R/help.R:0
@@ -2026,8 +2028,7 @@ msgid "header and 'col.names' argument are of different lengths"
 msgstr "l'entête et 'col.names' sont de longueurs différentes"
 
 #. R/help.start.R: stop("help.start() requires the HTTP server to be running", call. = FALSE)
-#. R/windows/help.start.R: stop("help.start() requires the HTTP server to be running", call. = FALSE)
-#: R/help.start.R:0 R/windows/help.start.R:0
+#: R/help.start.R:0
 msgid "help.start() requires the HTTP server to be running"
 msgstr "help.start() nécessite que le serveur HTTP soit en cours d'exécution"
 

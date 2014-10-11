@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.2.0\n"
-"POT-Creation-Date: 2014-08-10 17:27\n"
+"POT-Creation-Date: 2014-10-11 11:59\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -142,14 +142,6 @@ msgid "%s value was converted to character string"
 msgstr ""
 
 
-#: R/namespace.R: 0
-#. R/namespace.R: gettextf("%s value was not found", sQuote(name))
-#. R/namespace.R: gettextf("%s value was not found", sQuote(name))
-
-msgid "%s value was not found"
-msgstr ""
-
-
 #: R/library.R: 0
 #. R/library.R: gettextf("%sPackages in library %s:\n", sep, sQuote(lib))
 
@@ -260,6 +252,14 @@ msgstr ""
 #. R/table.R: gettextf("'%s' argument is not an array", "x")
 
 msgid "'%s' argument is not an array"
+msgstr ""
+
+
+#: R/all.equal.R: 0
+#. R/all.equal.R: gettextf("'%s' argument is not an envRefClass", "target", domain = "R-base")
+#. R/all.equal.R: gettextf("'%s' argument is not an envRefClass", "current", domain = "R-base")
+
+msgid "'%s' argument is not an envRefClass"
 msgstr ""
 
 
@@ -674,6 +674,13 @@ msgstr ""
 #. R/RNG.R: gettextf("'%s' value is not a valid choice", normal.kind)
 
 msgid "'%s' value is not a valid choice"
+msgstr ""
+
+
+#: R/namespace.R: 0
+#. R/namespace.R: gettextf("'%s' was not found", sQuote(x))
+
+msgid "'%s' was not found"
 msgstr ""
 
 
@@ -1344,6 +1351,20 @@ msgstr ""
 #. R/summary.R: gettext("Class")
 
 msgid "Class"
+msgstr ""
+
+
+#: R/all.equal.R: 0
+#. R/all.equal.R: gettextf("Class definitions are not identical%s", if (isTRUE(ae)) "" else paste(":",     ae, collapse = " "))
+
+msgid "Class definitions are not identical%s"
+msgstr ""
+
+
+#: R/all.equal.R: 0
+#. R/all.equal.R: gettextf("Classes differ: %s", paste(ae, collapse = " "))
+
+msgid "Classes differ: %s"
 msgstr ""
 
 
@@ -3404,7 +3425,7 @@ msgstr ""
 
 
 #: R/namespace.R: 0
-#. R/namespace.R: stop("not loading a namespace", domain = "R-base")
+#. R/namespace.R: stop("not loading a namespace")
 
 msgid "not loading a namespace"
 msgstr ""

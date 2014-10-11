@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.2.0\n"
-"POT-Creation-Date: 2014-09-09 19:02\n"
+"POT-Creation-Date: 2014-10-11 12:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -197,12 +197,8 @@ msgstr ""
 
 
 #: R/help.start.R: 0
-#: R/windows/help.start.R: 0
-#: R/windows/help.start.R: 0
 #. R/help.start.R: gettextf("'%s' argument must be a non-empty character string", "url")
 #. R/help.start.R: gettextf("'%s' argument must be a non-empty character string", "browser")
-#. R/windows/help.start.R: gettextf("'%s' argument must be a non-empty character string", "url")
-#. R/windows/help.start.R: gettextf("'%s' argument must be a non-empty character string", "browser")
 
 msgid "'%s' argument must be a non-empty character string"
 msgstr ""
@@ -936,9 +932,7 @@ msgstr ""
 
 
 #: R/help.start.R: 0
-#: R/windows/help.start.R: 0
 #. R/help.start.R: gettextf("If nothing happens, you should open\n%s yourself\n", sQuote(url))
-#. R/windows/help.start.R: gettextf("If nothing happens, you should open\n%s yourself", sQuote(url))
 
 msgid "If nothing happens, you should open\n%s yourself"
 msgstr ""
@@ -1364,6 +1358,13 @@ msgstr ""
 #. R/rtags.R: gettextf("Processing file %s", s)
 
 msgid "Processing file %s"
+msgstr ""
+
+
+#: R/str.R: 0
+#. R/str.R: gettextf("Prototypical reference class %s [package %s]", paste(dQuote(cl), collapse = ", "),     sQuote(attr(cl, "package")), domain = "R-tools")
+
+msgid "Prototypical reference class %s [package %s]"
 msgstr ""
 
 
@@ -2477,9 +2478,7 @@ msgstr ""
 
 
 #: R/help.start.R: 0
-#: R/windows/help.start.R: 0
 #. R/help.start.R: stop("help.start() requires the HTTP server to be running", call. = FALSE)
-#. R/windows/help.start.R: stop("help.start() requires the HTTP server to be running", call. = FALSE)
 
 msgid "help.start() requires the HTTP server to be running"
 msgstr ""

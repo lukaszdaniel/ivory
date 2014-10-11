@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.2.0\n"
-"POT-Creation-Date: 2014-09-09 19:02\n"
+"POT-Creation-Date: 2014-10-11 12:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -242,9 +242,9 @@ msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettext("'DUP = FALSE' is deprecated and may be disabled in future versions of R.",     domain = "R-tools")
+#. R/check.R: gettext("'DUP' option is no longer supported and will be ignored.", domain = "R-tools")
 
-msgid "'DUP = FALSE' is deprecated and may be disabled in future versions of R."
+msgid "'DUP' option is no longer supported and will be ignored."
 msgstr ""
 
 
@@ -975,13 +975,6 @@ msgstr ""
 #. R/check.R: gettext("Demos with non-ASCII characters:", domain = "R-tools")
 
 msgid "Demos with non-ASCII characters:"
-msgstr ""
-
-
-#: R/checktools.R: 0
-#. R/checktools.R: gettextf("Depends: %s", meta["Depends"], domain = "R-tools")
-
-msgid "Depends: %s"
 msgstr ""
 
 
@@ -1874,13 +1867,6 @@ msgid "Hmm ... looks like a package from the R distribution"
 msgstr ""
 
 
-#: R/checktools.R: 0
-#. R/checktools.R: gettextf("Imports: %s", meta["Imports"], domain = "R-tools")
-
-msgid "Imports: %s"
-msgstr ""
-
-
 #: R/check.R: 0
 #. R/check.R: gettext("\nIn addition to the above warning(s), found the following notes:\n", domain = "R-tools")
 #. R/check.R: gettext("In addition to the above warning(s), found the following notes:", domain = "R-tools")
@@ -2337,9 +2323,7 @@ msgid "NONE"
 msgstr ""
 
 
-#: R/checktools.R: 0
 #: R/logging.R: 0
-#. R/checktools.R: gettext("NOTE", domain = "R-tools")
 #. R/logging.R: gettext("NOTE", domain = "R-tools")
 
 msgid "NOTE"
@@ -2902,13 +2886,6 @@ msgid "PDF header was not found"
 msgstr ""
 
 
-#: R/checktools.R: 0
-#. R/checktools.R: gettext("PROBLEM", domain = "R-tools")
-
-msgid "PROBLEM"
-msgstr ""
-
-
 #: R/pkgDepends.R: 0
 #. R/pkgDepends.R: gettextf("Package %s had its dependencies reduced to a minimal set.", sQuote(pkgMtrx[1,     ]))
 
@@ -3047,13 +3024,6 @@ msgstr ""
 #. R/QC.R: gettext("Package was archived on CRAN", domain = "R-tools")
 
 msgid "Package was archived on CRAN"
-msgstr ""
-
-
-#: R/checktools.R: 0
-#. R/checktools.R: gettextf("Package: %s", meta["Package"], domain = "R-tools")
-
-msgid "Package: %s"
 msgstr ""
 
 
@@ -7194,10 +7164,10 @@ msgstr[1]    ""
 
 
 #: R/QC.R: 0
-#. R/QC.R: ngettext(length(z3), "Call with 'DUP = FALSE':", "Calls with 'DUP = FALSE':", domain = "R-tools")
+#. R/QC.R: ngettext(length(z3), "Call with 'DUP':", "Calls with 'DUP':", domain = "R-tools")
 
-msgid        "Call with 'DUP = FALSE':"
-msgid_plural "Calls with 'DUP = FALSE':"
+msgid        "Call with 'DUP':"
+msgid_plural "Calls with 'DUP':"
 msgstr[0]    ""
 msgstr[1]    ""
 

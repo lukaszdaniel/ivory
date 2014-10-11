@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-23 06:12+0200\n"
+"POT-Creation-Date: 2014-10-11 12:00+0200\n"
 "PO-Revision-Date: 2014-03-27 09:07-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -97,7 +97,7 @@ msgstr ""
 msgid "no direct or inherited method for function '%s' for this call"
 msgstr "이 호출을 위해 함수 '%s'에 대한 직접적 또는 상속적인 메소드가 없습니다"
 
-#: methods_list_dispatch.c:512 methods_list_dispatch.c:1045
+#: methods_list_dispatch.c:512 methods_list_dispatch.c:1046
 msgid "invalid object (non-function) used as method"
 msgstr "메소드로서 사용된 유효하지 않은 객체입니다"
 
@@ -160,7 +160,7 @@ msgstr ""
 "반드시 R environment이어야 하는데, 클래스 \"%2$s\"를 얻습니다"
 
 #: methods_list_dispatch.c:602 methods_list_dispatch.c:614
-#: methods_list_dispatch.c:998
+#: methods_list_dispatch.c:999
 #, c-format
 msgid ""
 "error in evaluating the argument '%s' in selecting a method for function "
@@ -182,13 +182,13 @@ msgid ""
 "recursive use of function '%s' in method selection, with no default method"
 msgstr "메소드 선택시 기본 메소드가 없는 함수 '%s'의 재귀적 사용입니다"
 
-#: methods_list_dispatch.c:661
+#: methods_list_dispatch.c:662
 msgid ""
 "internal error in 'callNextMethod': '.nextMethod' was not assigned in the "
 "frame of the method call"
 msgstr ""
 
-#: methods_list_dispatch.c:692
+#: methods_list_dispatch.c:693
 msgid ""
 "in processing 'callNextMethod', found a '...' in the matched call, but no "
 "corresponding '...' argument"
@@ -196,52 +196,52 @@ msgstr ""
 "'callNextMethod'를 처리중, 일치하는 호출에서 '...'를 찾았지만, 상응하느느 "
 "'...' 인자는 없었습니다"
 
-#: methods_list_dispatch.c:705
+#: methods_list_dispatch.c:706
 #, c-format
 msgid "error in evaluating a 'primitive' next method: %s"
 msgstr "'primitive' 다음 메소드를 평가하는 중에 에러가 발생했습니다:%s"
 
-#: methods_list_dispatch.c:800
+#: methods_list_dispatch.c:801
 #, c-format
 msgid "'%s' must be a single string (got a character vector of length %d)"
 msgstr ""
 "'%s'는 반드시 단일 문자열이어야 합니다 (길이가 %d인 문자형 벡터를 얻습니다)"
 
-#: methods_list_dispatch.c:804
+#: methods_list_dispatch.c:805
 #, c-format
 msgid "'%s' must be a non-empty string; got an empty string"
 msgstr "'%s'는 반드시 빈 문자열이어야 하는데, 빈 문자열을 얻었습니다"
 
-#: methods_list_dispatch.c:808
+#: methods_list_dispatch.c:809
 #, c-format
 msgid "'%s' must be a single string (got an object of class \"%s\")"
 msgstr ""
 "'%s'는 반드시 단일 문자열이어야 합니다 (클래스 \"%s\"의 객체를 얻었습니다)"
 
-#: methods_list_dispatch.c:836
+#: methods_list_dispatch.c:837
 msgid "The internal prefix (e.g., \"C\") for a meta-data object"
 msgstr ""
 
-#: methods_list_dispatch.c:838
+#: methods_list_dispatch.c:839
 msgid ""
 "The name of the object (e.g,. a class or generic function) to find in the "
 "meta-data"
 msgstr ""
 
-#: methods_list_dispatch.c:840
+#: methods_list_dispatch.c:841
 msgid "The name of the package for a meta-data object"
 msgstr ""
 
-#: methods_list_dispatch.c:879
+#: methods_list_dispatch.c:880
 msgid "class should be either a character-string name or a class definition"
 msgstr "클래스는 문자열 이름 또는 클래스 정의 중 하나 이어야 합니다"
 
-#: methods_list_dispatch.c:958
+#: methods_list_dispatch.c:959
 #, c-format
 msgid "failed to get the generic for the primitive \"%s\""
 msgstr "프리미티브 \"%s\"를 위한 제네릭을 얻는데 실패했습니다"
 
-#: methods_list_dispatch.c:964
+#: methods_list_dispatch.c:965
 #, c-format
 msgid ""
 "expected a generic function or a primitive for dispatch, got an object of "
@@ -250,14 +250,14 @@ msgstr ""
 "제네릭 함수 또는 디스패치를 위한 프리미티브가 와야 하는데, 클래스 \"%s\"의 객"
 "체를 얻었습니다"
 
-#: methods_list_dispatch.c:976
+#: methods_list_dispatch.c:977
 #, c-format
 msgid ""
 "generic \"%s\" seems not to have been initialized for table dispatch---need "
 "to have '.SigArgs' and '.AllMtable' assigned in its environment"
 msgstr ""
 
-#: methods_list_dispatch.c:980
+#: methods_list_dispatch.c:981
 msgid "'.SigArgs' is shorter than '.SigLength' says it should be"
 msgstr ""
 

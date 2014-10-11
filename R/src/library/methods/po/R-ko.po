@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2014-10-11 12:00\n"
 "PO-Revision-Date: 2014-03-27 13:32-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -984,6 +984,12 @@ msgstr ""
 msgid "Pretend we inserted class %s"
 msgstr "다음의 상속된 클래스에 대한 정의를 찾을 수 없습니다: %s"
 
+#. R/refClass.R: gettext("Prototypical reference class object", domain = "R-methods")
+#: R/refClass.R:0
+#, fuzzy
+msgid "Prototypical reference class object"
+msgstr "다음은 레퍼런스 클래스가 아닙니다: %s"
+
 #. R/methodsTable.R: stop(gettextf("invalid or unset methods table in generic function %s", sQuote(fdef@generic)),     damain = "R-methods")
 #: R/methodsTable.R:0
 msgid "R-methods"
@@ -1057,7 +1063,7 @@ msgid "Skeleton of method written to connection"
 msgstr "%s에 쓰여진 메소드의 구조"
 
 #. R/BasicClasses.R: gettextf("Slot %s:", dQuote(what), domain = "R-methods")
-#. R/show.R: gettextf("Slot %s:", dQuote(what), domain = "R-methods")
+#. R/show.R: gettextf("Slot %s:", deparse(what), domain = "R-methods")
 #. R/show.R: gettextf("Slot %s:", dQuote(s), domain = "R-methods")
 #: R/BasicClasses.R:0 R/show.R:0
 msgid "Slot %s:"
