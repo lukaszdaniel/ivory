@@ -174,9 +174,12 @@ all.equal.envRefClass <- function (target, current, ...) {
 	ae <-
 	    if(hasCA) all.equal(cld, c2, ...)
 	    else all.equal(cld, c2, check.attributes=FALSE, ...)
-        if(isTRUE(ae) && !hasCA) ae <- all.equal(cld, c2, ...) #LUKI
-	return(gettextf("Class definitions are not identical%s",
-		       if(isTRUE(ae)) "" else paste(":", ae, collapse=" ")))
+        if(isTRUE(ae) && !hasCA) ae <- all.equal(cld, c2, ...)
+        if(isTRUE(ae)) {
+        	return(gettextf("Class definitions are not identical: %s", paste(ae, collapse=" ")))
+        } else {
+			return(gettext("Class definitions are not identical"))
+		}
     }
     if(!isS4(cld)) ## prototype / incomplete
 	return(if(identical(target, current)) TRUE
