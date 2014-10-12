@@ -2266,8 +2266,7 @@ qqnorm.lme <-
   } else {
     if (!is.null(labs) && ((labs == gettext("Standardized residuals", domain = "R-nlme")) ||
                            (labs == gettext("Normalized residuals", domain = "R-nlme")) ||
-                           #(substring(labs, 1, 9) == "Residuals"))) { #LUKI: TODO
-                           (labs == gettext("Residuals", domain = "R-nlme")))) { #LUKI: TODO
+                           (labs == gettext("Residuals", domain = "R-nlme")))) {
       type <- "res"                     # residuals
     } else {
       stop("only residuals and random effects allowed")

@@ -969,7 +969,7 @@ checkUsage <- function(fun, name = "<anonymous>",
                           suppressUndefined = suppressUndefined,
                           suppressPartialMatchArgs = suppressPartialMatchArgs),
              error = function(e) {
-                         report(paste0(name, ": Error while checking: ", #LUKI
+                         report(paste0(name, ": ", gettextf("Error while checking: ", domain = "R-codetools"),
                                        conditionMessage(e), "\n"))
                      })
     invisible(NULL)         

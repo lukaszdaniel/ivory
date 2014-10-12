@@ -1,5 +1,4 @@
-Tylko w Recommended/nlme/inst/po: ko
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/corStruct.R Recommended/nlme/R/corStruct.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nlme/R/corStruct.R Recommended/nlme/R/corStruct.R
 62,63c62
 <       stop(gettextf("do not know how to calculate correlation matrix of %s object",
 <                     dQuote(class(object)[1])), domain = NA)
@@ -400,7 +399,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <   function(object, structName = "Spherical spatial correlation", ...)
 ---
 >   function(object, structName = gettext("Spherical spatial correlation", domain = "R-nlme"), ...)
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/gls.R Recommended/nlme/R/gls.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nlme/R/gls.R Recommended/nlme/R/gls.R
 45c45
 <         stop("\nmodel must be a formula of the form \"resp ~ pred\"")
 ---
@@ -703,7 +702,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     row.names(val) <- 1:nrow(val)
 ---
 >     row.names(val) <- seq_len(nrow(val))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/gnls.R Recommended/nlme/R/gnls.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nlme/R/gnls.R Recommended/nlme/R/gnls.R
 68c68
 <     stop("'object' must be a formula")
 ---
@@ -786,7 +785,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < 	stop("need an object with call component")
 ---
 > 	stop("an object with 'call' component is required")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/groupedData.R Recommended/nlme/R/groupedData.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nlme/R/groupedData.R Recommended/nlme/R/groupedData.R
 32c32
 <     stop("first argument to 'groupedData' must be a two-sided formula")
 ---
@@ -837,7 +836,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     stop("'asTable' can only be used with balanced 'groupedData' objects")
 ---
 >     stop("'asTable()' function can only be used with balanced object of class \"groupedData\"")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/lme.R Recommended/nlme/R/lme.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nlme/R/lme.R Recommended/nlme/R/lme.R
 68c68
 <     stop("can only fit \"lmList\" objects with single grouping variable")
 ---
@@ -1240,103 +1239,102 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 >                               "%s was not found in data",
 >                               "%s were not found in data", domain = "R-nlme"),
-2262,2264c2267,2270
+2262,2264c2267,2269
 <     if (!is.null(labs) && ((labs == "Standardized residuals") ||
 <                            (labs == "Normalized residuals") ||
 <                            (substring(labs, 1, 9) == "Residuals"))) {
 ---
 >     if (!is.null(labs) && ((labs == gettext("Standardized residuals", domain = "R-nlme")) ||
 >                            (labs == gettext("Normalized residuals", domain = "R-nlme")) ||
->                            #(substring(labs, 1, 9) == "Residuals"))) { #LUKI: TODO
->                            (labs == gettext("Residuals", domain = "R-nlme")))) { #LUKI: TODO
-2271c2277
+>                            (labs == gettext("Residuals", domain = "R-nlme")))) {
+2271c2276
 <   if (is.null(args$ylab)) args$ylab <- "Quantiles of standard normal"
 ---
 >   if (is.null(args$ylab)) args$ylab <- gettext("Quantiles of standard normal", domain = "R-nlme")
-2285c2291
+2285c2290
 <                    stop("'Id' must be between 0 and 1")
 ---
 >                    stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
-2287,2289c2293,2294
+2287,2289c2292,2293
 <                  if (labs == "Normalized residuals") {
 <                    as.logical(abs(resid(object, type="normalized"))
 <                               > -qnorm(id / 2))
 ---
 >                  if (labs == gettext("Normalized residuals", domain = "R-nlme")) {
 >                    as.logical(abs(resid(object, type="normalized")) > -qnorm(id / 2))
-2291,2292c2296
+2291,2292c2295
 <                    as.logical(abs(resid(object, type="pearson"))
 <                               > -qnorm(id / 2))
 ---
 >                    as.logical(abs(resid(object, type="pearson")) > -qnorm(id / 2))
-2296c2300
+2296c2299
 <                stop("'id' can only be a formula or numeric")
 ---
 >                stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
-2308c2312
+2308c2311
 <             stop("'idLabels' of incorrect length")
 ---
 >             stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
-2312c2316
+2312c2315
 <           stop("'idLabels' can only be a formula or a vector")
 ---
 >           stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
-2343c2347
+2343c2346
 <                    stop("'id' must be between 0 and 1")
 ---
 >                    stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
-2349c2353
+2349c2352
 <                stop("'id' can only be a formula or numeric")
 ---
 >                stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
-2364c2368
+2364c2367
 <             stop("'idLabels' of incorrect length")
 ---
 >             stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
-2368c2372
+2368c2371
 <           stop("'idLabels' can only be a formula or a vector")
 ---
 >           stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
-2483,2484c2487
+2483,2484c2486
 < 	data[, is.na(match(names(data), names(object$modelStruct$reStruct))),
 < 	      drop = FALSE]
 ---
 > 	data[, is.na(match(names(data), names(object$modelStruct$reStruct))), drop = FALSE]
-2500c2503
+2500c2502
 <       "Standardized random effects"
 ---
 >       gettext("Standardized random effects", domain = "R-nlme")
-2502c2505
+2502c2504
 <       "Random effects"
 ---
 >       gettext("Random effects", domain = "R-nlme")
-2524c2527
+2524c2526
 <                               "nonexistent levels %s"),
 ---
 >                               "nonexistent levels %s", domain = "R-nlme"),
-2557c2560
+2557c2559
 <                lab <- "Residuals"
 ---
 >                lab <- gettext("Residuals", domain = "R-nlme")
-2563,2564c2566,2567
+2563,2564c2565,2566
 <              pearson = "Standardized residuals",
 <              normalized = "Normalized residuals"
 ---
 >              pearson = gettext("Standardized residuals", domain = "R-nlme"),
 >              normalized = gettext("Normalized residuals", domain = "R-nlme")
-2616c2619
+2616c2618
 < 	stop("need an object with call component")
 ---
 > 	stop("an object with 'call' component is required")
-2752c2755
+2752c2754
 <         stop("'nint' is not consistent with 'breaks'")
 ---
 >         stop(gettextf("'%s' is not consistent with '%s'", "nint", "breaks"))
-2844c2847
+2844c2846
 <   for(i in 1:Q) {
 ---
 >   for(i in seq_len(Q)) {
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/lmList.R Recommended/nlme/R/lmList.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nlme/R/lmList.R Recommended/nlme/R/lmList.R
 66c66
 <       stop ("'data' must be a \"groupedData\" object if 'groups' argument is missing")
 ---
@@ -1506,91 +1504,90 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 >                               "%s was not found in data",
 >                               "%s were not found in data", domain = "R-nlme"),
-1075,1076c1068,1070
+1075,1076c1068,1069
 <     if (!is.null(labs) && ((labs == "Standardized residuals") ||
 <                            (substring(labs, 1, 9) == "Residuals"))) {
 ---
 >     if (!is.null(labs) && ((labs == gettext("Standardized residuals", domain = "R-nlme")) ||
->                            #(substring(labs, 1, 9) == "Residuals"))) {
->                            (labs == gettext("Residuals", domain = "R-nlme")))) { #LUKI: TODO
-1083c1077
+>                            (labs == gettext("Residuals", domain = "R-nlme")))) {
+1083c1076
 <   if (is.null(args$ylab)) args$ylab <- "Quantiles of standard normal"
 ---
 >   if (is.null(args$ylab)) args$ylab <- gettext("Quantiles of standard normal", domain = "R-nlme")
-1097c1091
+1097c1090
 <                    stop("'id' must be between 0 and 1")
 ---
 > 		   stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
-1103c1097
+1103c1096
 <                stop("'id' can only be a formula or numeric")
 ---
 >                stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
-1115c1109
+1115c1108
 <             stop("'idLabels' of incorrect length")
 ---
 >             stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
-1119c1113
+1119c1112
 <           stop("'idLabels' can only be a formula or a vector")
 ---
 > 	  stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
-1150c1144
+1150c1143
 <                    stop("'id' must be between 0 and 1")
 ---
 > 		   stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
-1156c1150
+1156c1149
 <                stop("'id' can only be a formula or numeric")
 ---
 >                stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
-1171c1165
+1171c1164
 <             stop("'idLabels' of incorrect length")
 ---
 >             stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
-1175c1169
+1175c1168
 <           stop("'idLabels' can only be a formula or a vector")
 ---
 > 	  stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
-1250c1244
+1250c1243
 <     attr(val, "label") <- "Standardized random effects"
 ---
 >     attr(val, "label") <- gettext("Standardized random effects", domain = "R-nlme")
-1252c1246
+1252c1245
 <     attr(val, "label") <- "Random effects"
 ---
 >     attr(val, "label") <- gettext("Random effects", domain = "R-nlme")
-1271c1265
+1271c1264
 <         stop("nonexistent groups requested in 'subset'")
 ---
 >         stop("nonexistent groups requested in 'subset' argument")
-1276c1270
+1276c1269
 <           stop("nonexistent groups requested in 'subset'")
 ---
 >           stop("nonexistent groups requested in 'subset' argument")
-1279c1273
+1279c1272
 <         stop("'subset' can only be character or integer")
 ---
 >         stop(gettextf("'%s' argument can only be character or integer", "subset"))
-1322c1316
+1322c1315
 <     lab <- "Residuals"
 ---
 >     lab <- gettext("Residuals", domain = "R-nlme")
-1326c1320
+1326c1319
 <   } else lab <- "Standardized residuals"
 ---
 >   } else lab <- gettext("Standardized residuals", domain = "R-nlme")
-1348c1342
+1348c1341
 < 		for (ii in 1:length(lst))
 ---
 > 		for (ii in seq_len(length(lst)))
-1358c1352
+1358c1351
 < 		for (ii in 1:length(lst))
 ---
 > 		for (ii in seq_len(length(lst)))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/modelStruct.R Recommended/nlme/R/modelStruct.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nlme/R/modelStruct.R Recommended/nlme/R/modelStruct.R
 63c63
 <       cat(paste(i, " parameters:\n"))
 ---
 >       cat(gettextf("%s parameters:", i, domain = "R-nlme"), "\n", sep = "")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/newFunc.R Recommended/nlme/R/newFunc.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nlme/R/newFunc.R Recommended/nlme/R/newFunc.R
 136c136
 <     stop("object must inherit from \"data.frame\"")
 ---
@@ -1650,7 +1647,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     stop("no degrees of freedom for estimating std. dev.")
 ---
 >     stop("no degrees of freedom for estimating standard deviation")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/newMethods.R Recommended/nlme/R/newMethods.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nlme/R/newMethods.R Recommended/nlme/R/newMethods.R
 16c16
 <     stop("'form' must be a formula")
 ---
@@ -1739,44 +1736,43 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 >                               "%s was not found in data",
 >                               "%s were not found in data", domain = "R-nlme"),
-732,734c728,731
+732,734c728,730
 <   if (is.null(labs) || ((labs != "Standardized residuals") &&
 <                         (labs != "Normalized residuals") &&
 <                         (substring(labs, 1, 9) != "Residuals"))) {
 ---
 >   if (is.null(labs) || ((labs != gettext("Standardized residuals", domain = "R-nlme")) &&
 >                         (labs != gettext("Normalized residuals", domain = "R-nlme")) &&
->                         #(substring(labs, 1, 9) != "Residuals"))) {
->                         (labs != gettext("Residuals", domain = "R-nlme")))) { # LUKI: TODO
-738c735
+>                         (labs != gettext("Residuals", domain = "R-nlme")))) {
+738c734
 <   if (is.null(args$ylab)) args$ylab <- "Quantiles of standard normal"
 ---
 >   if (is.null(args$ylab)) args$ylab <- gettext("Quantiles of standard normal", domain = "R-nlme")
-751c748
+751c747
 <                  stop("'id' must be between 0 and 1")
 ---
 > 		 stop(gettextf("'%s' argument must be between %d and %d", "id", 0, 1))
-753c750
+753c749
 <                if (labs == "Normalized residuals") {
 ---
 >                if (labs == gettext("Normalized residuals", domain = "R-nlme")) {
-762c759
+762c758
 <              stop("'id' can only be a formula or numeric")
 ---
 >              stop(gettextf("'%s' argument can only be a formula or numeric", "id"))
-774c771
+774c770
 <           stop("'idLabels' of incorrect length")
 ---
 >           stop(gettextf("'%s' argument is of incorrect length", "idLabels"))
-778c775
+778c774
 <         stop("'idLabels' can only be a formula or a vector")
 ---
 >         stop(gettextf("'%s' argument can only be a formula or a vector", "idLabels"))
-820c817
+820c816
 <     stop("'distance' and 'object' have incompatible lengths")
 ---
 >     stop(gettextf("'%s' and '%s' arguments have incompatible lengths", "distance", "object"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/nlme.R Recommended/nlme/R/nlme.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nlme/R/nlme.R Recommended/nlme/R/nlme.R
 62,64c62,63
 <   if (any(!is.na(match(names(thisCall),
 < 		       c("fixed", "data", "start"))))) {
@@ -1968,7 +1964,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <   for(i in 1:length(level)) {
 ---
 >   for(i in seq_len(length(level))) {
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/nlsList.R Recommended/nlme/R/nlsList.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nlme/R/nlsList.R Recommended/nlme/R/nlsList.R
 32c32
 <     stop("second argument must be a groupedData object")
 ---
@@ -1981,7 +1977,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <       stop("old-style self-starting model functions\nare no longer supported.\nNew selfStart functions are available.\nUse\n  SSfpl instead of fpl,\n  SSfol instead of first.order.log,\n  SSbiexp instead of biexp,\n  SSlogis instead of logistic.\nIf writing your own selfStart model, see\n  \"help(selfStart)\"\nfor the new form of the \"initial\" attribute.")
 ---
 >       stop("old-style self-starting model functions\nare no longer supported.\nNew selfStart functions are available.\nUse\n  SSfpl instead of fpl,\n  SSfol instead of first.order.log,\n  SSbiexp instead of biexp,\n  SSlogis instead of logistic.\nIf writing your own selfStart model, see\n  \"help(selfStart)\"\nfor the new form of the \"initial\" attribute.", domain = "R-nlme")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/pdMat.R Recommended/nlme/R/pdMat.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nlme/R/pdMat.R Recommended/nlme/R/pdMat.R
 91c91
 < 	warning("ignoring argument 'form'")
 ---
@@ -2150,7 +2146,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     stop("cannot change parameter length of initialized \"pdMat\" object")
 ---
 >     stop(gettextf("cannot change parameter length of initialized object of class %s", dQuote("pdMat")))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/reStruct.R Recommended/nlme/R/reStruct.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nlme/R/reStruct.R Recommended/nlme/R/reStruct.R
 67c67
 <       stop("\"pdMat\" element must have a formula")
 ---
@@ -2195,7 +2191,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     cat("Uninitialized random effects structure\n")
 ---
 >     cat(gettext("Uninitialized random effects structure", domain = "R-nlme"), "\n", sep = "")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/simulate.R Recommended/nlme/R/simulate.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nlme/R/simulate.R Recommended/nlme/R/simulate.R
 27c27
 <         stop("\nfixed-effects model must be a formula of the form \"resp ~ pred\"")
 ---
@@ -2220,7 +2216,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <         for(j in 1:Q) {
 ---
 >         for(j in seq_len(Q)) {
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/VarCov.R Recommended/nlme/R/VarCov.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nlme/R/VarCov.R Recommended/nlme/R/VarCov.R
 28c28
 <         stop("not implemented for \"nlme\" objects")
 ---
@@ -2255,7 +2251,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <             cat(attr(x,"group.levels"),nm,"\n")
 ---
 >             cat(attr(x,"group.levels"), " ", nm, "\n", sep = "")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/R/varFunc.R Recommended/nlme/R/varFunc.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nlme/R/varFunc.R Recommended/nlme/R/varFunc.R
 81,82c81
 <       stop(gettextf("do not know how to get coefficients for %s object",
 <                     dQuote(class(object)[1])), domain = NA)
@@ -2478,7 +2474,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <   function(object, structName = "Combination of variance functions:", ...)
 ---
 >   function(object, structName = gettext("Combination of variance functions:", domain = "R-nlme"), ...)
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/src/base.h Recommended/nlme/src/base.h
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nlme/src/base.h Recommended/nlme/src/base.h
 36,41d35
 < #ifdef ENABLE_NLS
 < #include <libintl.h>
@@ -2486,16 +2482,16 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < #else
 < #define _(String) (String)
 < #endif
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/src/corStruct.c Recommended/nlme/src/corStruct.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nlme/src/corStruct.c Recommended/nlme/src/corStruct.c
 28c28
 < 
 ---
 > #include "localization.h"
 Tylko w Recommended/nlme/src: localization.h
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/src/nlme.c Recommended/nlme/src/nlme.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nlme/src/nlme.c Recommended/nlme/src/nlme.c
 28a29
 > #include "localization.h"
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/nlme/src/nlmefit.c Recommended/nlme/src/nlmefit.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nlme/src/nlmefit.c Recommended/nlme/src/nlmefit.c
 29a30
 > #include "localization.h"
 370c371

@@ -1,4 +1,4 @@
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/spatial/R/kr.R Recommended/spatial/R/kr.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/spatial/R/kr.R Recommended/spatial/R/kr.R
 33c33
 <     if (np > 6L) stop("'np' exceeds 6")
 ---
@@ -130,7 +130,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 >         stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("trls")))
 Tylko w Recommended/spatial/src: localization.h
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/spatial/src/pps.c Recommended/spatial/src/pps.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/spatial/src/pps.c Recommended/spatial/src/pps.c
 26a27
 > #include "localization.h"
 40c41

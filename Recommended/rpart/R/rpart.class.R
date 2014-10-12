@@ -88,13 +88,12 @@ rpart.class <- function(y, offset, parms, wt)
                                 paste, collapse = " ")
              }
              dev <- dev/(wt[1L] * nodeprob)
-	     paste0("  predicted class=", format(group, justify = "left"),
-                    "  expected loss=", formatg(dev, digits),
-                    "  P(node) =", formatg(nodeprob, digits), "\n",
-                    "    class counts: ", temp1, "\n",
-                    "   probabilities: ", temp2)
-	     #TODO LUKI: temp1 oraz temp2 wyswietlaja sie niepoprawnie
-	     #gettextf("  predicted class=%s  expected loss=%s  P(node) =%s\n    class counts: %s\n   probabilities: %s", format(group, justify = "left"), formatg(dev, digits), formatg(nodeprob, digits), paste(temp1, collapse = " "), paste(temp2, collapse = " "), domain = "R-rpart")
+	     #paste0("  predicted class=", format(group, justify = "left"),
+             #       "  expected loss=", formatg(dev, digits),
+             #       "  P(node) =", formatg(nodeprob, digits), "\n",
+             #       "    class counts: ", temp1, "\n",
+             #       "   probabilities: ", temp2)
+	     gettextf("  predicted class=%s  expected loss=%s  P(node) =%s\n    class counts: %s\n   probabilities: %s", format(group, justify = "left"), formatg(dev, digits), formatg(nodeprob, digits), temp1, temp2, domain = "R-rpart")
          },
 	 text = function(yval, dev, wt, ylevel, digits, n, use.n) {
 	     nclass <- (ncol(yval) - 2L)/2L

@@ -1,4 +1,4 @@
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/KernSmooth/R/all.R Recommended/KernSmooth/R/all.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/KernSmooth/R/all.R Recommended/KernSmooth/R/all.R
 53c53
 <         warning("Binning grid too coarse for current (small) bandwidth: consider increasing 'gridsize'")
 ---

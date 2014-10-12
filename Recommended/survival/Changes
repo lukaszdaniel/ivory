@@ -1,6 +1,6 @@
 Tylko w Recommended/survival/inst: po
 Tylko w Recommended/survival: po
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/aareg.S Recommended/survival/R/aareg.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/aareg.S Recommended/survival/R/aareg.S
 29c29
 <     if (!inherits(Y, "Surv")) stop("Response must be a survival object")
 ---
@@ -52,7 +52,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     if (!inherits(x, 'aareg')) stop ("Must be an aareg object")
 ---
 >     if (!inherits(x, 'aareg')) stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("aareg")))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/aareg.taper.S Recommended/survival/R/aareg.taper.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/aareg.taper.S Recommended/survival/R/aareg.taper.S
 8c8
 <         stop("Invalid taper vector")
 ---
@@ -67,13 +67,13 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 >         for (i in seq_len(ntaper)) 
 >             smoother[seq_len(i), i] <- taper[seq(to=ntaper, length=i)]/tsum[i]
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/agsurv.R Recommended/survival/R/agsurv.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/agsurv.R Recommended/survival/R/agsurv.R
 22,23c22
 <         indx  <- approx(etime, 1:length(etime), time, method='constant',
 <                         rule=2, f=1)$y   
 ---
 >         indx  <- approx(etime, seq_len(length(etime)), time, method='constant', rule = 2, f = 1)$y   
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/anova.coxmelist.R Recommended/survival/R/anova.coxmelist.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/anova.coxmelist.R Recommended/survival/R/anova.coxmelist.R
 10c10
 < 	     stop("Argument must be a list of coxme or coxph models")
 ---
@@ -112,7 +112,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 >     if (is.R()) structure(table, heading = c(title, topnote), class = c("anova", "data.frame"))
 >     else structure(table, heading = c(title, topnote), class = "anova")	     
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/anova.coxphlist.S Recommended/survival/R/anova.coxphlist.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/anova.coxphlist.S Recommended/survival/R/anova.coxphlist.S
 5c5
 <     if (!is.list(object)) stop("First argument must be a list")
 ---
@@ -150,7 +150,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 >     if (is.R()) structure(table, heading = c(title, topnote), class = c("anova", "data.frame"))
 >     else structure(table, heading = c(title, topnote), class = "anova")	     
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/anova.coxph.S Recommended/survival/R/anova.coxph.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/anova.coxph.S Recommended/survival/R/anova.coxph.S
 5c5
 <         stop ("argument must be a cox model")
 ---
@@ -180,17 +180,17 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 >     title <- paste(gettext("Analysis of Deviance Table"), "\n ", gettextf("Cox model: response is %s", deparse(object$terms[[2]]), domain = "R-survival"), "\n", 
 > 		   gettext("Terms added sequentially (first to last)"), "\n", sep = "")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/attrassign.R Recommended/survival/R/attrassign.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/attrassign.R Recommended/survival/R/attrassign.R
 27c27
 <                 stop("need terms object")
 ---
 >                 stop(gettextf("'%s' argument is not an object of class %s", "tt", dQuote("terms")))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/basehaz.S Recommended/survival/R/basehaz.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/basehaz.S Recommended/survival/R/basehaz.S
 7c7
 <         stop("must be a coxph object")
 ---
 >         stop(gettextf("'%s' argument is not an object of class %s", "fit", dQuote("coxph")))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/cch.R Recommended/survival/R/cch.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/cch.R Recommended/survival/R/cch.R
 20c20
 <         stop("Multiple records per id not allowed")
 ---
@@ -298,7 +298,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 >                   "(95%"=exp(x$coefficients[,1] - qnorm(0.975)*x$coefficients[,2]),
 >                   "CI)"=exp(x$coefficients[,1] + qnorm(0.975)*x$coefficients[,2]),
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/clogit.R Recommended/survival/R/clogit.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/clogit.R Recommended/survival/R/clogit.R
 16c16
 <     if (indx[1]==0) stop("A formula argument is required")
 ---
@@ -307,7 +307,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <         warning("Weights are ignored in clogit")
 ---
 >         warning("weights are ignored in 'clogit()'")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/coxph.control.S Recommended/survival/R/coxph.control.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/coxph.control.S Recommended/survival/R/coxph.control.S
 8,9c8,9
 <     if (iter.max <0) stop("Invalid value for iterations")
 <     if (eps <=0) stop ("Invalid convergence criteria")
@@ -320,7 +320,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 > 	    warning("for numerical accuracy, tolerance should be < eps")
 >     if (toler.inf <=0) stop("'toler.inf' argument must be >0")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/coxph.R Recommended/survival/R/coxph.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/coxph.R Recommended/survival/R/coxph.R
 16c16
 <     if (indx[1] ==0) stop("A formula argument is required")
 ---
@@ -384,12 +384,12 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <                           init[1:length(fit$coefficients)])[nabeta]
 ---
 >                           init[seq_len(length(fit$coefficients))])[nabeta]
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/coxph.rvar.S Recommended/survival/R/coxph.rvar.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/coxph.rvar.S Recommended/survival/R/coxph.rvar.S
 5c5
 < 	stop ("First argument must be a fitted Cox model")
 ---
 > 	stop(gettextf("'%s' argument is not an object of class %s", "fit", dQuote("coxph")))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/coxph.wtest.S Recommended/survival/R/coxph.wtest.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/coxph.wtest.S Recommended/survival/R/coxph.wtest.S
 18c18
 < 	else stop("Argument lengths do not match")
 ---
@@ -408,7 +408,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     else          list(test=temp$tests[1:ntest], df=temp$df, 
 ---
 >     else          list(test=temp$tests[seq_len(ntest)], df=temp$df, 
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/dsurvreg.S Recommended/survival/R/dsurvreg.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/dsurvreg.S Recommended/survival/R/dsurvreg.S
 6c6
 <     if (is.null(dist)) stop("Distribution not found")
 ---
@@ -421,7 +421,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     if (is.null(dist)) stop("Distribution not found")
 ---
 >     if (is.null(dist)) stop(gettextf("%s distribution was not found", sQuote(distribution)))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/frailty.brent.S Recommended/survival/R/frailty.brent.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/frailty.brent.S Recommended/survival/R/frailty.brent.S
 9c9
 <     if (length(y) != n) stop ("Length mismatch for x and y")
 ---
@@ -437,7 +437,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < 	      ( (n>4) && (new-x[n]) > .5*abs(x[n-1]-x[n-2]))) {
 ---
 >     if (new < xx[1] || new > xx[3] || ( (n>4) && (new-x[n]) > .5*abs(x[n-1]-x[n-2]))) {
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/frailty.controlaic.S Recommended/survival/R/frailty.controlaic.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/frailty.controlaic.S Recommended/survival/R/frailty.controlaic.S
 21,22c21
 < 	history <- c(theta=old$theta, loglik=loglik,
 < 		     df=df, aic=loglik-df, aicc=loglik - dfc)
@@ -457,7 +457,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < 	cat("    new theta=", format(newtheta), "\n\n")
 ---
 > 	cat("    ", gettextf("new theta= %s", format(newtheta), domain = "R-survival"), "\n\n", sep = "")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/frailty.controldf.S Recommended/survival/R/frailty.controldf.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/frailty.controldf.S Recommended/survival/R/frailty.controldf.S
 17,18c17
 < 	return(list(theta=theta, done=FALSE, 
 < 		    history=cbind(thetas=parms$thetas, dfs=parms$dfs)))
@@ -498,7 +498,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < 	     history=cbind(thetas=thetas, dfs=dfs), half=0)
 ---
 > 	list(theta = x[b1] + exp(newx), done = done, history = cbind(thetas = thetas, dfs = dfs), half = 0)
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/frailty.controlgam.S Recommended/survival/R/frailty.controlgam.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/frailty.controlgam.S Recommended/survival/R/frailty.controlgam.S
 26c26
 < 	    if (is.matrix(group)) group <- c(group %*% 1:ncol(group))
 ---
@@ -521,7 +521,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < 		     c.loglik = loglik + correct)
 ---
 > 		list(theta = newtheta, done = done, history = history, c.loglik = loglik + correct)
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/frailty.controlgauss.S Recommended/survival/R/frailty.controlgauss.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/frailty.controlgauss.S Recommended/survival/R/frailty.controlgauss.S
 44c44
 < 		    cat("    new theta=", theta, "\n\n")
 ---
@@ -534,12 +534,12 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < 		    cat("    new theta=", format(newtheta), "\n\n")
 ---
 > 		    cat("    ", gettextf("new theta= %s", format(newtheta), domain = "R-survival"), "\n\n", sep = "")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/frailty.S Recommended/survival/R/frailty.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/frailty.S Recommended/survival/R/frailty.S
 12c12
 < 	    stop(paste("Function '", temp, "' not found", sep=""))
 ---
 > 	    stop(gettextf("function %s was not found", sQuote(temp)))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/frailty.t.S Recommended/survival/R/frailty.t.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/frailty.t.S Recommended/survival/R/frailty.t.S
 20c20
 <     if (tdf <=2) stop("Cannot have df <3 for the t-frailty")
 ---
@@ -564,7 +564,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < 		 history=paste("Variance of random effect=", format(theta)))
 ---
 > 		 history=gettextf("variance of random effect= %s", format(theta)))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/is.ratetable.S Recommended/survival/R/is.ratetable.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/is.ratetable.S Recommended/survival/R/is.ratetable.S
 14,15c14
 < 	if (length(att$dimnames)!=nd ||
 < 			 length(att$cutpoints)!=nd) return(FALSE)
@@ -657,7 +657,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < 		msg <- c(msg, 'only the last dimension can be interpolated')
 ---
 > 		msg <- c(msg, gettext("only the last dimension can be interpolated"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/match.ratetable.S Recommended/survival/R/match.ratetable.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/match.ratetable.S Recommended/survival/R/match.ratetable.S
 10c10
 <     if (!is.ratetable(ratetable)) stop("Invalid rate table")
 ---
@@ -706,7 +706,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 > 		if (any(floor(temp)!=temp) || any(temp<=0) || max(temp) > length(dtemp[[i]]))
 > 		stop(gettextf("the variable %s is out of range", dimid[i]))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/predict.coxph.R Recommended/survival/R/predict.coxph.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/predict.coxph.R Recommended/survival/R/predict.coxph.R
 8c8
 <         stop("Primary argument much be a coxph object")
 ---
@@ -719,7 +719,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <            stop("a name given in the terms argument not found in the model")
 ---
 >            stop("a name given in the terms argument was not found in the model")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/print.coxph.null.S Recommended/survival/R/print.coxph.null.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/print.coxph.null.S Recommended/survival/R/print.coxph.null.S
 6c6
 < 	cat("Call:  ")
 ---
@@ -735,7 +735,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 > 	cat("  n=", x$n, " (", naprint(omit), ")\n", sep = "")
 >     else cat("  n=", x$n, "\n", sep = "")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/print.coxph.S Recommended/survival/R/print.coxph.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/print.coxph.S Recommended/survival/R/print.coxph.S
 6c6
 < 	cat("Call:\n")
 ---
@@ -757,12 +757,12 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     if (!is.null(x$nevent)) cat(", number of events=", x$nevent, "\n")
 ---
 >     if (!is.null(x$nevent)) cat(", ", gettextf("number of events= %d", x$nevent, domain = "R-survival"), "\n", sep = "")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/print.ratetable.S Recommended/survival/R/print.ratetable.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/print.ratetable.S Recommended/survival/R/print.ratetable.S
 4c4
 <   cat ("Rate table with dimension(s):", attr(x, 'dimid'), "\n")
 ---
 >   cat(ngettext(length(attr(x, 'dimid')), "Rate table with dimension: ", "Rate table with dimensions: ", domain = "R-survival"), paste(attr(x, 'dimid'), collapse = ", "), "\n", sep = "")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/pspline.S Recommended/survival/R/pspline.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/pspline.S Recommended/survival/R/pspline.S
 9c9
 < 	if (theta <=0 || theta >=1) stop("Invalid value for theta")
 ---
@@ -787,7 +787,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <         stop("Argment must be the result of a call to pspline")
 ---
 >         stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("pspline")))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/pyears.R Recommended/survival/R/pyears.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/pyears.R Recommended/survival/R/pyears.R
 10,11c10
 <     m <- m[c(1, match(c('formula', 'data', 'weights', 'subset', 'na.action'),
 <                       names(m), nomatch=0))]
@@ -887,7 +887,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <         row.names(df) <- 1:nrow(df)
 ---
 >         row.names(df) <- seq_len(nrow(df))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/ratetable.S Recommended/survival/R/ratetable.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/ratetable.S Recommended/survival/R/ratetable.S
 34c34
 <     for (i in 1:nargs) {
 ---
@@ -901,13 +901,13 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <         if (inherits(args[[i]], 'cateogory') || is.character(args[[i]]))
 ---
 >         if (inherits(args[[i]], 'category') || is.character(args[[i]]))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/residuals.coxph.null.S Recommended/survival/R/residuals.coxph.null.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/residuals.coxph.null.S Recommended/survival/R/residuals.coxph.null.S
 8,9c8
 <     else stop(paste("\'", type, "\' residuals are not defined for a null model",
 < 			sep=""))
 ---
 >     else stop(gettextf("'%s' residuals are not defined for a null model", type))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/residuals.coxph.S Recommended/survival/R/residuals.coxph.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/residuals.coxph.S Recommended/survival/R/residuals.coxph.S
 26c26
 < 	stop(paste(type, 'residuals are not available for the exact method'))
 ---
@@ -916,17 +916,17 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < 	if (length(collapse) !=n) stop("Wrong length for 'collapse'")
 ---
 > 	if (length(collapse) !=n) stop(gettextf("wrong length for '%s' argument", "collapse"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/ridge.S Recommended/survival/R/ridge.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/ridge.S Recommended/survival/R/ridge.S
 10c10
 < 	    stop("Only one of df or theta can be specified")
 ---
 > 	    stop("only one of 'df' or 'theta' arguments can be specified")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/summary.coxph.S Recommended/survival/R/summary.coxph.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/summary.coxph.S Recommended/survival/R/summary.coxph.S
 11c11
 <          stop("Input is not valid")
 ---
 >          stop("input is not valid")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/summary.ratetable.S Recommended/survival/R/summary.ratetable.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/summary.ratetable.S Recommended/survival/R/summary.ratetable.S
 7c7
 <     if (!inherits(rtable, 'ratetable')) stop("Argument is not a rate table")
 ---
@@ -978,7 +978,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 >                 cat("\t", gettextf("%s ranges from %s to %s; with %d categories\n", att$dimid[i], format(min(att$cutpoints[[i]])),
 > 		format(max(att$cutpoints[[i]])), att$dim[i], domain = "R-survival"), sep = '')
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/survcallback.S Recommended/survival/R/survcallback.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/survcallback.S Recommended/survival/R/survcallback.S
 13c13
 < 	    stop("Invalid pcols or pattr arg")
 ---
@@ -1011,7 +1011,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < 		    stop("Length error in coxlist2")
 ---
 > 		    stop("length error in 'coxlist2' object")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/survConcordance.R Recommended/survival/R/survConcordance.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/survConcordance.R Recommended/survival/R/survConcordance.R
 16c16
 <         else stop("left hand side of the formula  must be a numeric vector or a surival")
 ---
@@ -1033,7 +1033,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <         '\n', sep='')
 ---
 >     cat(gettextf("Concordance= %s (se = %s)", format(x$concordance), format(x$std.err), domain = "R-survival"), "\n", sep = "")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/survdiff.S Recommended/survival/R/survdiff.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/survdiff.S Recommended/survival/R/survdiff.S
 7c7
 <         stop("The 'formula' argument is not a formula")
 ---
@@ -1056,7 +1056,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < 	if (length(ll) == 0) stop("No groups to test")
 ---
 > 	if (length(ll) == 0) stop("no groups to test")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/survexp.cfit.R Recommended/survival/R/survexp.cfit.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/survexp.cfit.R Recommended/survival/R/survexp.cfit.R
 44c44
 <     for (i in 1:ncurve) {
 ---
@@ -1075,7 +1075,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <             for (i in 1:ntime) {
 ---
 >             for (i in seq_len(ntime)) {
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/survexp.R Recommended/survival/R/survexp.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/survexp.R Recommended/survival/R/survexp.R
 21c21
 <             stop("Can have only 1 ratetable() call in a formula")
 ---
@@ -1161,7 +1161,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <                            method='constant', f=0, rule=2)$y
 ---
 >             keep <- approx(temp$time, seq_len(n), xout = times, yleft = 0, method = 'constant', f = 0, rule = 2)$y
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/survfitCI.R Recommended/survival/R/survfitCI.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/survfitCI.R Recommended/survival/R/survfitCI.R
 23,26c23,24
 <     if (type !='mright' && type!='mcounting' && 
 <         type != "right" && type != "counting")
@@ -1202,7 +1202,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <             stop("subject changes case weights, id ", (id[indx1])[who])
 ---
 >             stop(gettextf("subject changes case weights, id %s", (id[indx1])[who]))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/survfit.coxph.R Recommended/survival/R/survfit.coxph.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/survfit.coxph.R Recommended/survival/R/survfit.coxph.R
 71c71
 <         stop("Cannot handle \"", type, "\" type survival data")
 ---
@@ -1235,7 +1235,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <             stop("Individual=TRUE is only valid for counting process data")
 ---
 >             stop("'individual=TRUE' is only valid for counting process data")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/survfitKM.S Recommended/survival/R/survfitKM.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/survfitKM.S Recommended/survival/R/survfitKM.S
 23,24c23,24
 <     if (!is.Surv(y)) stop("y must be a Surv object")
 <     if (!is.factor(x)) stop("x must be a factor")
@@ -1259,7 +1259,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < 	zz <- 1:length(events)
 ---
 > 	zz <- seq_len(length(events))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/survfitms.R Recommended/survival/R/survfitms.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/survfitms.R Recommended/survival/R/survfitms.R
 9c9
 <             stop("summary.survfit can only be used for survfit objects")
 ---
@@ -1283,7 +1283,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <                     stop("unmatched subscript", j[indx])
 ---
 >                     stop(gettextf("unmatched subscript %s", j[indx]))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/survfit.R Recommended/survival/R/survfit.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/survfit.R Recommended/survival/R/survfit.R
 42c42
 <         else warning("survfit object has only a single survival curve")
 ---
@@ -1323,7 +1323,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <         else stop("etype argument incompatable with survival type")
 ---
 >         else stop("'etype' argument incompatable with survival type")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/survfitTurnbull.S Recommended/survival/R/survfitTurnbull.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/survfitTurnbull.S Recommended/survival/R/survfitTurnbull.S
 26,27c26,27
 <     if (!is.Surv(y)) stop("y must be a Surv object")
 <     if (!is.factor(x)) stop("x must be a factor")
@@ -1346,7 +1346,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 >                 cat("\n ", gettextf("Iteration = %d", iter, domain = "R-survival"), "\n", sep = "")
 > 		cat("survival=", format(round(tfit$surv[tfit$n.event>0],3)),  "\n")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/survobrien.S Recommended/survival/R/survobrien.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/survobrien.S Recommended/survival/R/survobrien.S
 16c16
 <         stop("Transform function must be 1 to 1")
 ---
@@ -1379,7 +1379,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     if (all(keepers)) stop ("No continuous variables to modify")
 ---
 >     if (all(keepers)) stop("no continuous variables to modify")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/survregDtest.S Recommended/survival/R/survregDtest.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/survregDtest.S Recommended/survival/R/survregDtest.S
 13c13
 <     if (is.null(dlist$name)) errlist <- c(errlist, "Missing a name")
 ---
@@ -1432,7 +1432,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < 	    errlist <- c(errlist, "Missing or invalid quantile function")
 ---
 > 	    errlist <- c(errlist, gettextf("missing or invalid '%s' function", "quantile"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/survreg.S Recommended/survival/R/survreg.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/survreg.S Recommended/survival/R/survreg.S
 10c10
 <     if (indx[1] ==0) stop("A formula argument is required")
 ---
@@ -1495,7 +1495,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < 	if (any(ord>1)) stop ('Penalty terms cannot be in an interaction')
 ---
 > 	if (any(ord>1)) stop("penalty terms cannot be in an interaction")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/Surv.S Recommended/survival/R/Surv.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/Surv.S Recommended/survival/R/Surv.S
 9,10c9,10
 <     if (missing(time)) stop ("Must have a time argument")
 <     if (!is.numeric(time)) stop ("Time variable is not numeric")
@@ -1600,7 +1600,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 > Math.Surv <- function(...)  stop("invalid operation on a survival time")
 > Ops.Surv  <- function(...)  stop("invalid operation on a survival time")
 > Summary.Surv<-function(...) stop("invalid operation on a survival time")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/R/tcut.S Recommended/survival/R/tcut.S
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/R/tcut.S Recommended/survival/R/tcut.S
 8c8
 < 		stop("Must specify at least one interval")
 ---
@@ -1623,7 +1623,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < 	   stop("Number of labels must be 1 less than number of break points")
 ---
 > 	   stop("number of labels must be 1 less than number of break points")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/survival/src/cox_Rcallback.c Recommended/survival/src/cox_Rcallback.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/survival/src/cox_Rcallback.c Recommended/survival/src/cox_Rcallback.c
 8c8
 < 
 ---
