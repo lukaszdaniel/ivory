@@ -727,8 +727,7 @@ qqnorm.nls <-
   labs <- attr(.x, "label")
   if (is.null(labs) || ((labs != gettext("Standardized residuals", domain = "R-nlme")) &&
                         (labs != gettext("Normalized residuals", domain = "R-nlme")) &&
-                        #(substring(labs, 1, 9) != "Residuals"))) {
-                        (labs != gettext("Residuals", domain = "R-nlme")))) { # LUKI: TODO
+                        (labs != gettext("Residuals", domain = "R-nlme")))) {
     stop("only residuals allowed")
   }
   if (is.null(args$xlab)) args$xlab <- labs

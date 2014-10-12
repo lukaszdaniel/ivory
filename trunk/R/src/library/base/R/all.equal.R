@@ -176,9 +176,9 @@ all.equal.envRefClass <- function (target, current, ...) {
 	    else all.equal(cld, c2, check.attributes=FALSE, ...)
         if(isTRUE(ae) && !hasCA) ae <- all.equal(cld, c2, ...)
         if(isTRUE(ae)) {
-        	return(gettextf("Class definitions are not identical: %s", paste(ae, collapse=" ")))
+		return(gettext("Class definitions are not identical"))
         } else {
-			return(gettext("Class definitions are not identical"))
+        	return(gettextf("Class definitions are not identical: %s", paste(ae, collapse=" ")))
 		}
     }
     if(!isS4(cld)) ## prototype / incomplete

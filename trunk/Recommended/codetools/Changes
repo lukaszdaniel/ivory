@@ -1,6 +1,6 @@
 Tylko w Recommended/codetools: inst
 Tylko w Recommended/codetools: po
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/codetools/R/codetools.R Recommended/codetools/R/codetools.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/codetools/R/codetools.R Recommended/codetools/R/codetools.R
 92,93c92
 <                                   stop0(paste("not a foldable expression:",
 <                                         deparse(e, width.cutoff = 500))),
@@ -128,7 +128,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 988c972
 <                          report(paste0(name, ": Error while checking: ",
 ---
->                          report(paste0(name, ": Error while checking: ", #LUKI
+>                          report(paste0(name, ": ", gettextf("Error while checking: ", domain = "R-codetools"),
 1014c998
 <     for (i in 1:length(args)) {
 ---

@@ -1,4 +1,4 @@
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/man/boxcox.Rd Recommended/MASS/man/boxcox.Rd
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/man/boxcox.Rd Recommended/MASS/man/boxcox.Rd
 21c21
 <        ylab = "log-Likelihood", \dots)
 ---
@@ -11,27 +11,27 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <        ylab = "log-Likelihood", \dots)
 ---
 >        ylab = gettext("log-Likelihood", domain = "R-MASS"), \dots)
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/man/logtrans.Rd Recommended/MASS/man/logtrans.Rd
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/man/logtrans.Rd Recommended/MASS/man/logtrans.Rd
 21c21
 <          ylab = "log Likelihood")
 ---
 >          ylab = gettext("log-Likelihood", domain = "R-MASS"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/man/MASS-internal.Rd Recommended/MASS/man/MASS-internal.Rd
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/man/MASS-internal.Rd Recommended/MASS/man/MASS-internal.Rd
 21c21
 < neg.bin(theta = stop("'theta' must be given"))
 ---
 > neg.bin(theta = stop("'theta' argument must be specified"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/man/negative.binomial.Rd Recommended/MASS/man/negative.binomial.Rd
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/man/negative.binomial.Rd Recommended/MASS/man/negative.binomial.Rd
 14c14
 < negative.binomial(theta = stop("'theta' must be specified"), link = "log")
 ---
 > negative.binomial(theta = stop("'theta' argument must be specified"), link = "log")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/man/rnegbin.Rd Recommended/MASS/man/rnegbin.Rd
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/man/rnegbin.Rd Recommended/MASS/man/rnegbin.Rd
 14c14
 < rnegbin(n, mu = n, theta = stop("'theta' must be specified"))
 ---
 > rnegbin(n, mu = n, theta = stop("'theta' argument must be specified"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/add.R Recommended/MASS/R/add.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/add.R Recommended/MASS/R/add.R
 56c56
 <             message(gettextf("trying + %s", tt), domain = NA)
 ---
@@ -122,13 +122,13 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 >     } else {
 > 	head <- paste(gettext("Single term deletions", domain = "R-MASS"), "\n\n", gettext("Model:", domain = "R-MASS"), "\n", paste(deparse(formula(object)), collapse = ""), sep = "", collapse = "")
 >     }
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/area.R Recommended/MASS/R/area.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/area.R Recommended/MASS/R/area.R
 29,30c29
 <         warning(gettextf("iteration limit reached near 'x = %f'", d),
 <                 doman = NA)
 ---
 >         warning(gettextf("iteration limit reached near 'x = %f'", d))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/boxcox.R Recommended/MASS/R/boxcox.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/boxcox.R Recommended/MASS/R/boxcox.R
 22c22
 <          xlab = expression(lambda), ylab = "log-Likelihood", ...)
 ---
@@ -158,7 +158,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <         ind <- range((1L:m)[loglik > lim])
 ---
 >         ind <- range(seq_len(m)[loglik > lim])
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/corresp.R Recommended/MASS/R/corresp.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/corresp.R Recommended/MASS/R/corresp.R
 22c22
 <     stop(gettextf("frequency table is %d-dimensional", m), domain = NA)
 ---
@@ -197,7 +197,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <         if(length(olab) != n) olab <- as.character(1L:n)
 ---
 >         if(length(olab) != n) olab <- as.character(seq_len(n))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/cov.trob.R Recommended/MASS/R/cov.trob.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/cov.trob.R Recommended/MASS/R/cov.trob.R
 36,37c36,37
 <             stop("length of 'wt' must equal number of observations")
 <         if(any(wt < 0)) stop("negative weights not allowed")
@@ -212,12 +212,12 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     for(iter in 1L:maxit) {
 ---
 >     for(iter in seq_len(maxit)) {
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/eqscplot.R Recommended/MASS/R/eqscplot.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/eqscplot.R Recommended/MASS/R/eqscplot.R
 57c57
 <     if(any(c(xuin, yuin) < uin)) stop("'uin' is too large to fit plot in")
 ---
 >     if(any(c(xuin, yuin) < uin)) stop("'uin' argument is too large to fit plot in")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/fitdistr.R Recommended/MASS/R/fitdistr.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/fitdistr.R Recommended/MASS/R/fitdistr.R
 29,30c29,30
 <         stop("'x' must be a non-empty numeric vector")
 <     if(any(!is.finite(x))) stop("'x' contains missing or infinite values")
@@ -257,7 +257,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <                   paste("parm[", 1L:l, "]", collapse = ", "),
 ---
 >                   paste("parm[", seq_len(l), "]", collapse = ", "),
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/glmmPQL.R Recommended/MASS/R/glmmPQL.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/glmmPQL.R Recommended/MASS/R/glmmPQL.R
 26c26
 < 	stop("'family' not recognized")
 ---
@@ -270,12 +270,12 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     stop("'anova' is not available for PQL fits")
 ---
 >     stop("'anova()' is not available for PQL fits")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/hubers.R Recommended/MASS/R/hubers.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/hubers.R Recommended/MASS/R/hubers.R
 36c36
 <     for(i in 1:30) { # avoid infinite loop
 ---
 >     for(i in seq_len(30)) { # avoid infinite loop
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/isoMDS.R Recommended/MASS/R/isoMDS.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/isoMDS.R Recommended/MASS/R/isoMDS.R
 22c22
 <     if(!is.matrix(y)) stop("'y' must be a matrix")
 ---
@@ -293,7 +293,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <   if (is.na(nd)) stop("invalid length(d)")
 ---
 >   if (is.na(nd)) stop(gettextf("invalid '%s' value", "length(d)"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/lda.R Recommended/MASS/R/lda.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/lda.R Recommended/MASS/R/lda.R
 78c78
 <     if(is.null(dim(x))) stop("'x' is not a matrix")
 ---
@@ -444,7 +444,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     if(!missing(dimen) && dimen < ncol(X)) X <- X[, 1L:dimen]
 ---
 >     if(!missing(dimen) && dimen < ncol(X)) X <- X[, seq_len(dimen)]
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/lm.ridge.R Recommended/MASS/R/lm.ridge.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/lm.ridge.R Recommended/MASS/R/lm.ridge.R
 74,75c74,75
 <     cat("modified HKB estimator is", format(obj$kHKB), "\n")
 <     cat("modified L-W estimator is", format(obj$kLW), "\n")
@@ -456,7 +456,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <             format(obj$lambda[k]), "\n")
 ---
 >         cat(gettextf("smallest value of GCV at %s", format(obj$lambda[k]), domain = "R-MASS"), "\n", sep = "")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/loglm.R Recommended/MASS/R/loglm.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/loglm.R Recommended/MASS/R/loglm.R
 198c198
 <     for(j in 1L:5L) {
 ---
@@ -513,7 +513,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     cat("Re-fitting to calculate missing coefficients\n")
 ---
 >     cat(gettext("Re-fitting to calculate missing coefficients", domain = "R-MASS"), "\n", sep = "")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/logtrans.R Recommended/MASS/R/logtrans.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/logtrans.R Recommended/MASS/R/logtrans.R
 22c22
 < 	100)), xlab = "alpha", ylab = "log Likelihood")
 ---
@@ -535,7 +535,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <         ind <- range((1L:m)[loglik > lim])
 ---
 >         ind <- range(seq_len(m)[loglik > lim])
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/lqs.R Recommended/MASS/R/lqs.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/lqs.R Recommended/MASS/R/lqs.R
 70c70
 < 	nm <- if(p > 1) paste("X", 1L:p, sep="") else if(p == 1) "X" else NULL
 ---
@@ -599,7 +599,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <         if(!length(best)) stop("'x' is probably collinear")
 ---
 >         if(!length(best)) stop("'x' argument is probably collinear")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/mca.R Recommended/MASS/R/mca.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/mca.R Recommended/MASS/R/mca.R
 23c23
 <     x[(1L:n) + n * (unclass(cl) - 1)] <- 1
 ---
@@ -652,22 +652,22 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <       stop("'newdata' is not of the right length")
 ---
 >       stop(gettextf("'%s' argument is of the wrong length", "newdata"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/misc.R Recommended/MASS/R/misc.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/misc.R Recommended/MASS/R/misc.R
 36c36
 <         stop("'X' must be a numeric or complex matrix")
 ---
 >         stop("'X' argument must be a numeric or complex matrix")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/mvrnorm.R Recommended/MASS/R/mvrnorm.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/mvrnorm.R Recommended/MASS/R/mvrnorm.R
 25c25
 <     if(!all(ev >= -tol*abs(ev[1L]))) stop("'Sigma' is not positive definite")
 ---
 >     if(!all(ev >= -tol*abs(ev[1L]))) stop(gettextf("'%s' argument is not positive definite", "Sigma"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/neg.bin.R Recommended/MASS/R/neg.bin.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/neg.bin.R Recommended/MASS/R/neg.bin.R
 17c17
 < neg.bin <- function(theta = stop("'theta' must be given"))
 ---
 > neg.bin <- function(theta = stop("'theta' argument must be specified"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/negbin.R Recommended/MASS/R/negbin.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/negbin.R Recommended/MASS/R/negbin.R
 23c23
 <       stop("not all objects are of class \"negbin\"")
 ---
@@ -744,7 +744,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <         attr(t0, "warn") <- gettext("estimate truncated at zero")
 ---
 >         attr(t0, "warn") <- gettext("estimate truncated at zero", domain = "R-MASS")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/parcoord.R Recommended/MASS/R/parcoord.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/parcoord.R Recommended/MASS/R/parcoord.R
 23c23
 <     matplot(1L:ncol(x), t(x), type = "l", col = col, lty = lty,
 ---
@@ -755,7 +755,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 >     axis(1, at = seq_len(ncol(x)), labels = colnames(x))
 >     for(i in seq_len(ncol(x))) {
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/polr.R Recommended/MASS/R/polr.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/polr.R Recommended/MASS/R/polr.R
 74c74
 <         spacing <- logit((1L:q)/(q+1L)) # just a guess
 ---
@@ -848,7 +848,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 >                 } else {
 >                 message("\n", gettextf("Parameter: %s up", pi))
 >                 }
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/profiles.R Recommended/MASS/R/profiles.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/profiles.R Recommended/MASS/R/profiles.R
 20c20
 < profile.glm <- function(fitted, which = 1:p, alpha = 0.01,
 ---
@@ -873,7 +873,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <         for(j in 1L:npar) {
 ---
 >         for(j in seq_len(npar)) {
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/qda.R Recommended/MASS/R/qda.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/qda.R Recommended/MASS/R/qda.R
 78c78
 <     if(is.null(dim(x))) stop("'x' is not a matrix")
 ---
@@ -984,7 +984,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     cat("\nGroup means:\n")
 ---
 >     cat("\n", gettext("Group means:", domain = "R-MASS"), "\n", sep = "")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/rlm.R Recommended/MASS/R/rlm.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/rlm.R Recommended/MASS/R/rlm.R
 95c95
 <         stop("'x' is singular: singular fits are not implemented in 'rlm'")
 ---
@@ -1076,7 +1076,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <                             domain = NA)
 ---
 >                        stop(gettextf("each element of '%s' must be logical", substitute(contrasts.list)), domain = "R-MASS")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/rms.curv.R Recommended/MASS/R/rms.curv.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/rms.curv.R Recommended/MASS/R/rms.curv.R
 22c22
 <   if(is.null(v)) stop("\"gradient\" attribute missing")
 ---
@@ -1115,7 +1115,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 >   cat(gettextf("Parameter effects: c^theta x sqrt(F) = %s", round(x$pe, 4), domain = "R-MASS"), "\n",
 >       "       ", gettextf("Intrinsic: c^iota  x sqrt(F) = %s", round(x$ic, 4), domain = "R-MASS"), "\n",
 >       ..., sep = "")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/sammon.R Recommended/MASS/R/sammon.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/sammon.R Recommended/MASS/R/sammon.R
 24c24
 <     if(!is.matrix(y)) stop("'y' must be a matrix")
 ---
@@ -1125,7 +1125,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <                       aa[1,1], aa[1,2]), domain = NA)
 ---
 >         stop(gettextf("zero or negative distance between objects %d and %d", aa[1,1], aa[1,2]), domain = "R-MASS")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/stdres.R Recommended/MASS/R/stdres.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/stdres.R Recommended/MASS/R/stdres.R
 27c27
 <                                  "%d missing observations deleted"),
 ---
@@ -1134,7 +1134,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <                                      "%d rows with zero weights not counted"),
 ---
 >                                      "%d rows with zero weights not counted", domain = "R-MASS"),
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/stepAIC.R Recommended/MASS/R/stepAIC.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/stepAIC.R Recommended/MASS/R/stepAIC.R
 52,54c52,54
 <         heading <- c("Stepwise Model Path \nAnalysis of Deviance Table",
 <                      "\nInitial Model:", deparse(formula(object)),
@@ -1155,7 +1155,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <             cat("\nStep:  AIC=", format(round(bAIC, 2)), "\n",
 ---
 >             cat("\n", gettextf("Step:  AIC=%s", format(round(bAIC, 2)), domain = "R-MASS"), "\n",
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/truehist.R Recommended/MASS/R/truehist.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/truehist.R Recommended/MASS/R/truehist.R
 46c46
 < 		stop("'nbins' must result in a positive integer")
 ---
@@ -1172,7 +1172,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <         stop("'breaks' do not cover the data")
 ---
 >         stop("'breaks' argument do not cover the data")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/R/ucv.R Recommended/MASS/R/ucv.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/ucv.R Recommended/MASS/R/ucv.R
 42c42
 <     if(!n) stop("'x' has length zero")
 ---
@@ -1186,7 +1186,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 >     if(!n) stop("'x' argument has length zero")
 Tylko w Recommended/MASS/src: localization.h
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/MASS/src/MASS.c Recommended/MASS/src/MASS.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/src/MASS.c Recommended/MASS/src/MASS.c
 19a20
 > #include "localization.h"
 62c63

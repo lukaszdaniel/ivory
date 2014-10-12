@@ -1,16 +1,14 @@
-Tylko w Recommended/lattice/inst/po: ko
-Tylko w Recommended/lattice/inst/po: pl
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/man/rfs.Rd Recommended/lattice/man/rfs.Rd
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/lattice/man/rfs.Rd Recommended/lattice/man/rfs.Rd
 9c9
 < rfs(model, layout=c(2, 1), xlab="f-value", ylab=NULL,
 ---
 > rfs(model, layout=c(2, 1), xlab = gettext("f-value", domain = "R-lattice"), ylab=NULL,
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/axis.R Recommended/lattice/R/axis.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/lattice/R/axis.R Recommended/lattice/R/axis.R
 357c357
 <             else stop("Invalid value of 'log'")
 ---
 >             else stop(gettextf("invalid '%s' value", "log"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/bwplot.R Recommended/lattice/R/bwplot.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/lattice/R/bwplot.R Recommended/lattice/R/bwplot.R
 43c43
 <                 y <- factor(y, levels = 1:nlevels)
 ---
@@ -19,7 +17,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <                 x <- factor(x, levels = 1:nlevels)
 ---
 >                 x <- factor(x, levels = seq_len(nlevels))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/cloud.R Recommended/lattice/R/cloud.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/lattice/R/cloud.R Recommended/lattice/R/cloud.R
 393c393
 <         else col.regions[floor(1+(1:numcol-1)*(numcol.r-1)/(numcol-1))]
 ---
@@ -40,7 +38,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <         #for (j in 1:12)
 ---
 >         #for (j in seq_len(12))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/common.R Recommended/lattice/R/common.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/lattice/R/common.R Recommended/lattice/R/common.R
 668c668
 <         else  stop("Invalid value of perm.cond")
 ---
@@ -49,7 +47,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <                 stop("invalid value for layout")
 ---
 >                 stop(gettextf("invalid '%s' value", "layout"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/histogram.R Recommended/lattice/R/histogram.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/lattice/R/histogram.R Recommended/lattice/R/histogram.R
 44c44
 <     ##     warning(gettextf("type='%s' can be misleading in this context", type))
 ---
@@ -62,7 +60,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <         warning(gettextf("type='%s' can be misleading in this context", type))
 ---
 >         warning(gettextf("'type = %s' can be misleading in this context", type))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/interaction.R Recommended/lattice/R/interaction.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/lattice/R/interaction.R Recommended/lattice/R/interaction.R
 83c83
 <             warning("no observations within ", threshold, " points")
 ---
@@ -81,7 +79,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 >         for (row in seq_len(nvars))
 >         for (column in seq_len(nvars))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/layout.R Recommended/lattice/R/layout.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/lattice/R/layout.R Recommended/lattice/R/layout.R
 36c36
 <         unit.c(x[1:(pos-1)], u)
 ---
@@ -90,7 +88,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <         unit.c(x[1:(pos-1)], u, x[(pos+1):lx])
 ---
 >         unit.c(x[seq_len(pos-1)], u, x[(pos+1):lx])
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/legend.R Recommended/lattice/R/legend.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/lattice/R/legend.R Recommended/lattice/R/legend.R
 139c139
 <     if (!is.list(key)) stop("key must be a list")
 ---
@@ -149,12 +147,12 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     if (!is.list(key)) stop("key must be a list")
 ---
 >     if (!is.list(key)) stop(gettextf("'%s' must be a list", "key"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/levelplot.R Recommended/lattice/R/levelplot.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/lattice/R/levelplot.R Recommended/lattice/R/levelplot.R
 367c367
 <                     else stop("Invalid label.style")
 ---
 >                     else stop(gettextf("invalid '%s' value", "label.style"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/miscellaneous.R Recommended/lattice/R/miscellaneous.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/lattice/R/miscellaneous.R Recommended/lattice/R/miscellaneous.R
 640,643c640,643
 <                    xx[2*1:n-1] <- x[ord]
 <                    yy[2*1:n-1] <- y[ord]
@@ -165,7 +163,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 >                    yy[2*seq_len(n)-1] <- y[ord]
 >                    xx[2*seq_len(n-1)] <- x[ord][if (type=="s") -1 else -n]
 >                    yy[2*seq_len(n-1)] <- y[ord][if (type=="s") -n else -1]
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/panels.R Recommended/lattice/R/panels.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/lattice/R/panels.R Recommended/lattice/R/panels.R
 388,389c388,389
 <         grid.segments(y0 = 1:h / (h+1),
 <                       y1 = 1:h / (h+1),
@@ -178,7 +176,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 >         grid.segments(x0 = seq_len(v) / (v+1),
 >                       x1 = seq_len(v) / (v+1),
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/rfs.R Recommended/lattice/R/rfs.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/lattice/R/rfs.R Recommended/lattice/R/rfs.R
 4c4
 <     function(model, layout = c(2,1), xlab = "f-value", ylab = NULL,
 ---
@@ -189,7 +187,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 >                  f = c( rep(gettext("Fitted Values minus Mean", domain = "R-lattice"), nf),
 >                  rep(gettext("Residuals", domain = "R-lattice"), nr)))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/scales.R Recommended/lattice/R/scales.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/lattice/R/scales.R Recommended/lattice/R/scales.R
 30,31c30,33
 <             warning("Invalid or ambiguous component names: ",
 <                      paste(names(x)[which(is.na(pid))], collapse = ", ") )
@@ -198,7 +196,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 > 		tmp_n <- paste(names(x)[which(is.na(pid))], collapse = ", ")
 >             warning("Invalid or ambiguous component names: ", tmp_n, sep = "")
 > 	   }
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/shingle.R Recommended/lattice/R/shingle.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/lattice/R/shingle.R Recommended/lattice/R/shingle.R
 27c27
 <     if (!is.shingle(x)) stop("x must be a shingle")
 ---
@@ -227,14 +225,14 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <         cat(gettext("\nOverlap between adjacent intervals:\n"))
 ---
 >         cat("\n", gettext("Overlap between adjacent intervals:", domain = "R-lattice"), "\n", sep = "")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/splom.R Recommended/lattice/R/splom.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/lattice/R/splom.R Recommended/lattice/R/splom.R
 183,184c183,184
 <         for(i in 1:n.var)     ## i = row, j = col
 <             for(j in 1:n.var)
 ---
 >         for(i in seq_len(n.var))     ## i = row, j = col
 >             for(j in seq_len(n.var))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/summary.trellis.R Recommended/lattice/R/summary.trellis.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/lattice/R/summary.trellis.R Recommended/lattice/R/summary.trellis.R
 37c37
 <     cat(gettext("\nCall:\n"))
 ---
@@ -243,7 +241,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     cat(gettext("\nNumber of observations:\n"))
 ---
 >     cat("\n", gettext("Number of observations:", domain = "R-lattice"), "\n", sep = "")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/R/update.trellis.R Recommended/lattice/R/update.trellis.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/lattice/R/update.trellis.R Recommended/lattice/R/update.trellis.R
 180c180
 <         else warning("'par.strip.text' must be a list")
 ---
@@ -269,7 +267,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 >         else warning(gettextf("invalid '%s' value", "aspect"))
 Tylko w Recommended/lattice/src: localization.h
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended-frozen/lattice/src/threeDplot.c Recommended/lattice/src/threeDplot.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/lattice/src/threeDplot.c Recommended/lattice/src/threeDplot.c
 2c2
 < 
 ---
