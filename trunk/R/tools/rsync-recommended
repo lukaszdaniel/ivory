@@ -21,6 +21,7 @@ fi
     sed 's/.*=//'`
   cd src/library/Recommended
 
+    #"${CRAN_RSYNC}"/src/contrib/${version}/Recommended/ . || \
   ## The purpose of the rsync options is to get the timestamps on the
   ## downloaded files to reflect time of download.
   ## We can't use '-t' because then we could download a changed file
@@ -35,7 +36,7 @@ fi
   rsync -rcIz --timeout=60 --verbose --delete --include="*.tar.gz" \
     --exclude=Makefile.in --exclude=Makefile.win --exclude=Makefile --exclude=".svn" \
     --exclude="CVS*" --exclude=.cvsignore --exclude="*.tgz" \
-    "${CRAN_RSYNC}"/src/contrib/${version}/Recommended/ . || \
+    https://code.google.com/p/luki/source/browse/#svn/trunk/Recommended/ . || \
     { echo "*** rsync failed to update Recommended files ***" && exit 1; }
 
   ## Link each package to a simplified name so that Make has an easier
