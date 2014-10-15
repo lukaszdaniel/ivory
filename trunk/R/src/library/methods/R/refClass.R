@@ -963,7 +963,6 @@ refClassMethods <- function(Class) {
 
 showClassMethod <- function(object) {
     cl <- class(object)
-
     if(!.identC(cl, "refMethodDef")) {
      cat(gettextf("Class method definition (class %s) for method %s", dQuote(cl), sQuote(paste(object@name, "()", collapse = "")), domain = "R-methods"), "\n", sep = "")
     } else {
@@ -975,13 +974,15 @@ showClassMethod <- function(object) {
 }
 
 .printNames <- function(header, names, separateLine = TRUE) {
-    if(separateLine)
+    names <- sQuote(names)
+    if(separateLine) {
         cat("\n", header, "\n    ", sep = "")
-    else
-        cat(header, ": ", sep = "")
-    cat(sQuote(names), sep = ", ", fill = TRUE)
-    cat("\n")
+    } else {
+        cat("\n", header, ": ", sep = "")
+        cat(names, sep = ", ", fill = TRUE)
     }
+    cat("\n")
+}
 
 showRefClassDef <- function(object, title = gettext("Reference Class", domain = "R-methods")) {
     cat(title," ", dQuote(object@className),":\n", sep = "")
@@ -1011,7 +1012,7 @@ showRefClassDef <- function(object, title = gettext("Reference Class", domain = 
 ## because it also screws up on, e.g., externalptr objects
 if(FALSE) {
 all.equal.environment <- function(target, current, ...) {
-    nt <- sort(objects(target, all.names = TRUE))
+        .printNames("Methods used: ", object@mayCall)
     nc <- sort(objects(current, all.names = TRUE))
     tmp <- all.equal(nt, nc, ...)
     if(!identical(tmp, TRUE))

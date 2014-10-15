@@ -341,7 +341,7 @@ static SEXP installAttrib(SEXP vec, SEXP name, SEXP val)
 	}
 	t = s; // record last attribute, if any
     }
-    /* The usual convention is that the caller protects, 
+    /* The usual convention is that the caller protects,
        so this is historical over-cautiousness */
     PROTECT(vec); PROTECT(name); PROTECT(val);
     SEXP s = CONS(val, R_NilValue);
@@ -482,7 +482,8 @@ SEXP attribute_hidden do_comment(SEXP call, SEXP op, SEXP args, SEXP env)
 SEXP classgets(SEXP vec, SEXP klass)
 {
     if (isNull(klass) || isString(klass)) {
-	if (length(klass) <= 0) {
+	int ncl = length(klass);
+	if (ncl <= 0) {
 	    SET_ATTRIB(vec, stripAttrib(R_ClassSymbol, ATTRIB(vec)));
 	    SET_OBJECT(vec, 0);
             // problems when package building:  UNSET_S4_OBJECT(vec);
@@ -495,13 +496,12 @@ SEXP classgets(SEXP vec, SEXP klass)
 
 	    /* HOWEVER, it is the way that the object bit gets set/unset */
 
-	    int i;
 	    Rboolean isfactor = FALSE;
 
 	    if (vec == R_NilValue)
 		error(_("attempt to set an attribute on NULL"));
 
-	    for(i = 0; i < length(klass); i++)
+	    for(int i = 0; i < ncl; i++)
 		if(streql(CHAR(STRING_ELT(klass, i)), "factor")) { /* ASCII */
 		    isfactor = TRUE;
 		    break;
@@ -513,6 +513,29 @@ SEXP classgets(SEXP vec, SEXP klass)
 
 	    installAttrib(vec, R_ClassSymbol, klass);
 	    SET_OBJECT(vec, 1);
+
+#ifdef R_classgets_copy_S4
+// not ok -- fails at installation around byte-compiling methods
+	    if(ncl == 1 && R_has_methods_attached()) { // methods: do not act too early
+		SEXP cld = R_getClassDef_R(klass);
+		if(!isNull(cld)) {
+		    PROTECT(cld);
+		    /* More efficient? can we protect? -- rather *assign* in method-ns?
+		       static SEXP oldCl = NULL;
+		       if(!oldCl) oldCl = R_getClassDef("oldClass");
+		       if(!oldCl) oldCl = mkString("oldClass");
+		       PROTECT(oldCl);
+		    */
+		    if(!R_isVirtualClass(cld, R_MethodsNamespace) &&
+		       !R_extends(cld, mkString("oldClass"), R_MethodsNamespace)) // set S4 bit :
+			// !R_extends(cld, oldCl, R_MethodsNamespace)) // set S4 bit :
+
+			SET_S4_OBJECT(vec);
+
+		    UNPROTECT(1); // UNPROTECT(2);
+		}
+	    }
+#endif
 	}
 	return R_NilValue;
     }
@@ -628,7 +651,7 @@ static SEXP s_dot_S3Class = 0;
 
 static SEXP R_S4_extends_table = 0;
 
- 
+
 static SEXP cache_class(const char *class, SEXP klass)
 {
     if(!R_S4_extends_table) {
@@ -644,7 +667,7 @@ static SEXP cache_class(const char *class, SEXP klass)
     return klass;
 }
 
-static SEXP S4_extends(SEXP klass) 
+static SEXP S4_extends(SEXP klass)
 {
     static SEXP s_extends = 0, s_extendsForS3;
     SEXP e, val; const char *class;
@@ -738,9 +761,9 @@ void InitS3DefaultTypes()
 
 	Type2DefaultClass[type].vector =
 	    createDefaultClass(R_NilValue, part2, part3);
-	Type2DefaultClass[type].matrix = 
+	Type2DefaultClass[type].matrix =
 	    createDefaultClass(mkChar("matrix"), part2, part3);
-	Type2DefaultClass[type].array = 
+	Type2DefaultClass[type].array =
 	    createDefaultClass(mkChar("array"), part2, part3);
 	UNPROTECT(nprotected);
     }
@@ -793,11 +816,11 @@ SEXP attribute_hidden R_data_class2 (SEXP obj)
     }
 }
 
-/* class() : */
+// class() & .cache_class() :
 SEXP attribute_hidden R_do_data_class(SEXP call, SEXP op, SEXP args, SEXP env)
 {
   checkArity(op, args);
-  if(PRIMVAL(op) == 1) {
+  if(PRIMVAL(op) == 1) { // .cache_class() :
       const char *class; SEXP klass;
       check1arg(args, call, "class");
       klass = CAR(args);
@@ -806,6 +829,7 @@ SEXP attribute_hidden R_do_data_class(SEXP call, SEXP op, SEXP args, SEXP env)
       class = translateChar(STRING_ELT(klass, 0));
       return cache_class(class, CADR(args));
   }
+  // class():
   check1arg(args, call, "x");
   return R_data_class(CAR(args), FALSE);
 }
@@ -1024,7 +1048,7 @@ SEXP dimnamesgets(SEXP vec, SEXP val)
 	newval = shallow_duplicate(val);
 	UNPROTECT(1);
 	PROTECT(val = newval);
-    }	
+    }
     if (k != length(val))
 	error(_("length of 'dimnames' [%d] must match that of 'dims' [%d]"),
 	      length(val), k);
@@ -1431,13 +1455,13 @@ SEXP attribute_hidden do_attr(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
-static void check_slot_assign(SEXP obj, SEXP input, SEXP value, SEXP env) 
+static void check_slot_assign(SEXP obj, SEXP input, SEXP value, SEXP env)
 {
     SEXP valueClass, objClass, e;
 
     valueClass = PROTECT(R_data_class(value, FALSE));
     objClass = PROTECT(R_data_class(obj, FALSE));
-    e = PROTECT(lang4(install("checkAtAssignment"), 
+    e = PROTECT(lang4(install("checkAtAssignment"),
 		      objClass, input, valueClass));
     eval(e, env);
     UNPROTECT(3);
@@ -1702,7 +1726,7 @@ SEXP R_do_slot_assign(SEXP obj, SEXP name, SEXP value) {
     } else {
 	if(isNull(value))		/* Slots, but not attributes, can be NULL.*/
 	    value = pseudo_NULL;	/* Store a special symbol instead. */
-	    
+
 #ifdef _R_ver_le_2_11_x_
 	setAttrib(obj, name, value);
 #else
