@@ -1845,10 +1845,9 @@ static void yyerror(const char *s)
     /* the left column are strings coming from bison, the right
        column are translations for users.
        The first YYENGLISH from the right column are English to be translated,
-       the rest are to be copied literally.  The #if 0 block below allows xgettext
-       to see these.
+       the rest are to be copied literally.
     */
-#define YYENGLISH 8
+#define YYENGLISH 10
 	"$undefined",	"input",
 	"END_OF_INPUT",	"end of input",
 	"ERROR",	"input",
@@ -1925,16 +1924,22 @@ static void yyerror(const char *s)
                 case 7:
                         snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, _("unexpected end of line"));
                                 break;
-                default:
-                  snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, _("unexpected %s"),
+                case 8:
+                        snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, _("unexpected '%s' value"), "NULL");
+                                break;
+                case 9:
+                        snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, _("unexpected '%s' value"), "function");
+                                break;
+                default: //should never happen
+                  snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, _("unexpected statement %s"),
                            yytname_translations[i+1]);
                                 break;
                 }
-                
+
 		return;
 	    }
 	}
-	snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE - 1, _("unexpected %s"),
+	snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE - 1, _("unexpected statement %s"),
                  s + sizeof yyunexpected - 1);
     } else {
 	strncpy(R_ParseErrorMsg, s, PARSE_ERROR_SIZE - 1);

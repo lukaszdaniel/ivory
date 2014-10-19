@@ -137,7 +137,7 @@ void parseError(SEXP call, int linenum)
     if (linenum) {
 	getParseFilename(filename, sizeof(filename)-2);
 	if (strlen(filename)) strcpy(filename + strlen(filename), ":");
-
+    //R_ParseErrorMsg comes from gram.[cy]'s 'yyerror(const char *s)'
 	switch (len) {
 	case 0:
 	    error("%s%d:%d: %s",
@@ -165,7 +165,7 @@ void parseError(SEXP call, int linenum)
 	    error("%s", R_ParseErrorMsg);
 	    break;
 	case 1:
-	    error(_("%s in \"%s\""), R_ParseErrorMsg, CHAR(STRING_ELT(context, 0)));
+	    error(_("%s in command \"%s\""), R_ParseErrorMsg, CHAR(STRING_ELT(context, 0)));
 	    break;
 	default:
 	    error(_("%s in:\n\"%s\n%s\""),  R_ParseErrorMsg, CHAR(STRING_ELT(context, len-2)), CHAR(STRING_ELT(context, len-1)));
