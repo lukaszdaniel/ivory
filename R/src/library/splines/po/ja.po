@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.1 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-07 16:52+0100\n"
+"POT-Creation-Date: 2014-10-19 16:13+0200\n"
 "PO-Revision-Date: 2005-06-02 16:10+0900 \n"
 "Last-Translator: Nobuo Funao \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8 \n"
 "Content-Transfer-Encoding: 8bit \n"
 
-#: splines.c:150
-msgid "'ord' must be a positive integer"
+#: splines.c:142
+#, fuzzy, c-format
+msgid "'%s' argument must be a positive integer"
 msgstr " 'ord' は正の値でなければいけません "

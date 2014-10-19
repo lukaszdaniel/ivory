@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: splines 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-16 20:19+0100\n"
+"POT-Creation-Date: 2014-10-19 16:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: splines.c:150
-msgid "'ord' must be a positive integer"
+#: splines.c:142
+#, c-format
+msgid "'%s' argument must be a positive integer"
 msgstr ""
