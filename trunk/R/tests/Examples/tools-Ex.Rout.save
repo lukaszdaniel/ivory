@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-10-10 r8) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-10-19 r20) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -195,7 +195,7 @@ Error in command 'assertWarning(ff())':
 > bibstyle("unsorted", sortKeys = function(refs) seq_along(refs),
 +     fmtPrefix = function(paper) paste0("[", paper$.index, "]"),
 +        .init = TRUE)
-<environment: 0x20225a0>
+<environment: 0xe6c448>
 > print(refs, .bibstyle = "unsorted")
 [1] R Core Team (2013). _R: A Language and Environment for Statistical
 Computing_. R Foundation for Statistical Computing, Vienna, Austria.
@@ -511,10 +511,15 @@ attr(,"match.length")
 > ## there are few dependencies in a vanilla R installation:
 > ## lattice may not be installed
 > dependsOnPkgs("lattice")
- [1] "effects"         "Hmisc"           "latticeExtra"    "zoo"            
- [5] "Matrix"          "nlme"            "igraph"          "lmtest"         
- [9] "sandwich"        "mgcv"            "FrF2"            "multcomp"       
-[13] "DoE.wrapper"     "RcmdrPlugin.DoE"
+ [1] "effects"                   "Hmisc"                    
+ [3] "latticeExtra"              "zoo"                      
+ [5] "Matrix"                    "nlme"                     
+ [7] "igraph"                    "lmtest"                   
+ [9] "RcmdrMisc"                 "sandwich"                 
+[11] "mgcv"                      "FrF2"                     
+[13] "multcomp"                  "Rcmdr"                    
+[15] "RcmdrPlugin.DoE"           "DoE.wrapper"              
+[17] "RcmdrPlugin.Scoring"       "RcmdrPlugin.TeachingDemos"
 > 
 > 
 > 
@@ -596,7 +601,7 @@ attr(,"match.length")
 > 
 > ### Name: find_gs_cmd
 > ### Title: Find a GhostScript Executable
-> ### Aliases: find_gs_cmd
+> ### Aliases: find_gs_cmd R_GSCMD GSC
 > 
 > ### ** Examples
 > ## Don't run: 
@@ -1019,7 +1024,7 @@ List of 6 components
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.473 0.052 0.833 0 0 
+Time elapsed:  0.489 0.037 0.536 0 0 
 > grDevices::dev.off()
 null device 
           1 

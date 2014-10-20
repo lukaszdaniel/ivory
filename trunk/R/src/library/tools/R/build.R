@@ -198,7 +198,7 @@ get_exclude_patterns <- function()
     prepare_pkg <- function(pkgdir, desc, Log)
     {
         owd <- setwd(pkgdir); on.exit(setwd(owd))
-        pkgname <- basename(pkgdir)
+##        pkgname <- basename(pkgdir)
         checkingLog(Log, gettext("checking DESCRIPTION meta-information ...", domain = "R-tools"))
         res <- try(.check_package_description("DESCRIPTION"))
         if (inherits(res, "try-error")) {
@@ -702,7 +702,7 @@ get_exclude_patterns <- function()
     vignettes <- TRUE
     manual <- TRUE  # Install the manual if Rds contain \Sexprs
     with_md5 <- FALSE
-    INSTALL_opts <- character()
+##    INSTALL_opts <- character()
     pkgs <- character()
     options(showErrorCalls = FALSE, warn = 1)
 
@@ -790,8 +790,8 @@ get_exclude_patterns <- function()
     startdir <- getwd()
     if (is.null(startdir))
         stop("current working directory cannot be ascertained", domain = "R-tools")
-    R_platform <- Sys.getenv("R_PLATFORM", "unknown-binary")
-    libdir <- tempfile("Rinst")
+##    R_platform <- Sys.getenv("R_PLATFORM", "unknown-binary")
+##    libdir <- tempfile("Rinst")
 
     if (WINDOWS) {
         ## Some people have *assumed* that R_HOME uses / in Makefiles

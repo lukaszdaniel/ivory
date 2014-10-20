@@ -2552,7 +2552,6 @@ setRlibs <-
 
             checkingLog(Log, gettext("checking running R code from vignettes ...", domain = "R-tools"))
             vigns <- pkgVignettes(dir = pkgdir)
-            problems <- list()
             res <- character()
             cat("\n")
             def_enc <- desc["Encoding"]
@@ -2976,7 +2975,7 @@ setRlibs <-
                 } else {
                     ## record in the log what options were used
                     cat(gettextf("* install options %s", sQuote(INSTALL_opts), domain = "R-tools"), "\n\n", sep = "", file = outfile)
-                    env <- ""
+##                    env <- ""
                     ## Normal use of R CMD INSTALL
                     t1 <- proc.time()
                     install_error <- run_Rcmd(args, outfile)

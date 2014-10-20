@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-10-10 r8) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-10-19 r20) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -583,7 +583,7 @@ attr(,"class")
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.203 0.016 0.219 0 0 
+Time elapsed:  0.191 0.016 0.207 0 0 
 > grDevices::dev.off()
 null device 
           1 

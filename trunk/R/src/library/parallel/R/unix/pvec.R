@@ -23,7 +23,6 @@ pvec <- function(v, FUN, ..., mc.set.seed = TRUE, mc.silent = FALSE,
 {
     if (!is.vector(v)) stop("'v' argument must be a vector")
 
-    env <- parent.frame()
     cores <- as.integer(mc.cores)
     if(cores < 1L) stop(gettextf("'%s' argument must be >= 1", "mc.cores"))
     if(cores == 1L) return(FUN(v, ...))
