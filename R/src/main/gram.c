@@ -4312,7 +4312,7 @@ static void yyerror(const char *s) //output used in source.c method 'parseError(
                 case 9:
                         snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, _("unexpected '%s' value"), "function");
                                 break;
-                default: //should never happen
+                default:
                   snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, _("unexpected statement %s"),
                            yytname_translations[i+1]);
                                 break;

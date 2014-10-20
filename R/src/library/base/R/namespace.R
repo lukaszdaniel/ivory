@@ -876,8 +876,6 @@ namespaceImportMethods <- function(self, ns, vars, from = NULL)
                 domain = "R-base")
         vars <- vars[vars %in% allFuns]
     }
-    tPrefix <- methods:::.TableMetaPrefix()
-    allMethodTables <- methods:::.getGenerics(ns, tPrefix)
     if(any(is.na(match(vars, allFuns))))
         stop(gettextf("requested methods were not found in environment/package %s: %s",
                       sQuote(pkg),

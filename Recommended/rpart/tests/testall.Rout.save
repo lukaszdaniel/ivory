@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-10-10 r8) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-10-19 r20) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -945,4 +945,4 @@ Node number 23: 8 observations
 > 
 > proc.time()
    user  system elapsed 
-  0.371   0.022   0.382 
+  0.355   0.042   0.386 

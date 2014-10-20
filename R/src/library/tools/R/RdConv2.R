@@ -121,7 +121,7 @@ RweaveRdOptions <- function(options)
     options
 }
 
-tagged <- function(x, tag, srcref = NULL) 
+tagged <- function(x, tag, srcref = NULL)
     structure(x, Rd_tag = tag, srcref = srcref)
 
 evalWithOpt <- function(expr, options, env)
@@ -610,8 +610,6 @@ checkRd <- function(Rd, defines=.Platform$OS.type, stages = "render",
         msg <- sprintf("checkRd: (%d) %s", level, msg)
         .messages <<- c(.messages, msg)
     }
-
-    checkWrapped <- function(tag, block) checkContent(block, tag)
 
     checkLink <- function(tag, block) {
     	option <- attr(block, "Rd_option")
