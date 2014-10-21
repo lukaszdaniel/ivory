@@ -933,7 +933,8 @@ validDetails.beziergrob <- function(x) {
             stop("must have exactly 4 control points")
     } else {
         if (is.null(x$id)) {
-            id <- rep(1L:n, x$id.lengths)
+            n <- length(x$id.lengths)
+            id <- rep(seq_len(n), x$id.lengths)
         } else {
             id <- x$id
         }
