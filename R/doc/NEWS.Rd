@@ -196,6 +196,12 @@
     }
   }
 
+  \subsection{DEPRECATED AND DEFUNCT}{
+    \itemize{
+      \item \code{download.file(method = "lynx")} is defunct.
+    }
+  }
+  
   \subsection{BUG FIXES}{
     \itemize{
       \item Fixed two obscure bugs in pairlist subassignment, reported by
@@ -204,12 +210,12 @@
       \item Fixes for bugs in handling empty arguments and argument
       matching by name in \code{log()}.
 
-      \item \code{all.equal()} gains a method for \code{environment}s and
+      \item \code{all.equal()} gains methods for \code{environment}s and
       \code{refClass}es.
     }
   }
 }
-\section{\Rlogo CHANGES IN R 3.1.1 patched}{
+\section{\Rlogo CHANGES IN R 3.1.2}{
   \subsection{NEW FEATURES}{
     \itemize{
       \item \code{embedFonts()} now defaults to
@@ -266,6 +272,8 @@
       \item The \command{configure} script reports on the more important
       capabilities/options which will not be compiled in.
 
+      More types of external BLAS are recognized by name in that report.
+      
       \item When building \R as a shared library, the
       \option{-L${R_HOME}/lib${R_ARCH}} flag is placed earlier in the
       link commands used during installation and when packages are
@@ -282,7 +290,7 @@
       installed, the \file{bin/R.exe} and \file{bin/Rscript.exe} executables
       now run 64 bit \R.  (To run 32 bit \R, overwrite these files
       with copies of \file{bin/i386/Rfe.exe}.)
-    }
+     }
   }
 
   \subsection{UTILITIES}{
@@ -413,6 +421,11 @@
       
       \item \command{R CMD Rd2pdf} unintentionally ignored its
       \option{--os} option.
+      
+      \item The internal method of \code{download.file()} was not
+      reporting file sizes and progress correctly on files larger than
+      2GB (inherited from \code{libxml2}).  This is corrected for 64-bit
+      builds (32-bit platforms may not support such files).
     }
   }
 }
