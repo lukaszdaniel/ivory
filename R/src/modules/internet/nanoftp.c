@@ -34,8 +34,6 @@
 #endif
 
 
-#include <sys/types.h> // for ssize_t
-
 #include <Localization.h>
 
 extern void R_ProcessEvents(void);
@@ -146,7 +144,7 @@ typedef struct RxmlNanoFTPCtxt {
     SOCKET dataFd;	/* the file descriptor for the data socket */
     int state;		/* WRITE / READ / CLOSED */
     int returnValue;	/* the protocol return value */
-    ssize_t contentLength;
+    DLsize_t contentLength;
     /* buffer for data received from the control connection */
     char controlBuf[FTP_BUF_SIZE + 1];
     int controlBufIndex;
@@ -598,11 +596,11 @@ static void RxmlFindLength(void *ctxt, char *ptr)
 	p++;
 	q = strchr(p, 'b');
 	if(!q || strncmp(q, "bytes)", 6) != 0) return;
-	// was atoi, but ssize_t may be > long, let alone int.
+	// was atoi, but DLsize_t may be > long, let alone int.
 	char *endp;
 	double len = strtod(p, &endp);
 	if(len >= 0)
-	    ((RxmlNanoFTPCtxtPtr) ctxt)->contentLength = (ssize_t) len;
+	    ((RxmlNanoFTPCtxtPtr) ctxt)->contentLength = (DLsize_t) len;
     }
 }
 
@@ -813,7 +811,7 @@ RxmlNanoFTPConnect(void *ctx) {
     RxmlNanoFTPCtxtPtr ctxt = (RxmlNanoFTPCtxtPtr) ctx;
     struct hostent *hp;
     int port;
-    ssize_t res;
+    int res;
 
     if (ctxt == NULL)
 	return(-1);
@@ -920,12 +918,12 @@ RxmlNanoFTPConnect(void *ctx) {
 	    buf[sizeof(buf) - 1] = 0;
 	    len = (int) strlen(buf);
 	    RxmlMessage(0, "%s", buf);
-	    res = send(ctxt->controlFd, buf, len, 0);
+	    res = (int) send(ctxt->controlFd, buf, len, 0);
 	    if (res < 0) {
 		RxmlMessage(1, _("send failed"));
 		closesocket(ctxt->controlFd);
 		ctxt->controlFd = -1;
-		return((int) res);
+		return(res);
 	    }
 	    res = RxmlNanoFTPGetResponse(ctxt);
 	    switch (res) {
@@ -940,12 +938,12 @@ RxmlNanoFTPConnect(void *ctx) {
 		    buf[sizeof(buf) - 1] = 0;
 		    len = (int) strlen(buf);
 		    RxmlMessage(0, "%s", buf);
-		    res = send(ctxt->controlFd, buf, len, 0);
+		    res = (int) send(ctxt->controlFd, buf, len, 0);
 		    if (res < 0) {
 			RxmlMessage(1, _("send failed"));
 			closesocket(ctxt->controlFd);
 			ctxt->controlFd = -1;
-			return((int) res);
+			return(res);
 		    }
 		    res = RxmlNanoFTPGetResponse(ctxt);
 		    if (res > 3) {
@@ -979,12 +977,12 @@ RxmlNanoFTPConnect(void *ctx) {
 		buf[sizeof(buf) - 1] = 0;
 		len = (int) strlen(buf);
 		RxmlMessage(0, "%s", buf);
-		res = send(ctxt->controlFd, buf, len, 0);
+		res = (int) send(ctxt->controlFd, buf, len, 0);
 		if (res < 0) {
 		    RxmlMessage(1, _("send failed"));
 		    closesocket(ctxt->controlFd); ctxt->controlFd = -1;
 		    ctxt->controlFd = -1;
-		    return((int) res);
+		    return(res);
 		}
 		res = RxmlNanoFTPGetResponse(ctxt);
 		if (res == 2) {
@@ -1008,12 +1006,12 @@ RxmlNanoFTPConnect(void *ctx) {
 		buf[sizeof(buf) - 1] = 0;
 		len = (int) strlen(buf);
 		RxmlMessage(0, "%s", buf);
-		res = send(ctxt->controlFd, buf, len, 0);
+		res = (int) send(ctxt->controlFd, buf, len, 0);
 		if (res < 0) {
 		    RxmlMessage(1, _("send failed"));
 		    closesocket(ctxt->controlFd); ctxt->controlFd = -1;
 		    ctxt->controlFd = -1;
-		    return((int) res);
+		    return(res);
 		}
 		res = RxmlNanoFTPGetResponse(ctxt);
 		if ((res == 1) || (res == 2)) {
@@ -1029,12 +1027,12 @@ RxmlNanoFTPConnect(void *ctx) {
 		buf[sizeof(buf) - 1] = 0;
 		len = (int) strlen(buf);
 		RxmlMessage(0, "%s", buf);
-		res = send(ctxt->controlFd, buf, len, 0);
+		res = (int) send(ctxt->controlFd, buf, len, 0);
 		if (res < 0) {
 		    RxmlMessage(1, _("send failed"));
 		    closesocket(ctxt->controlFd); ctxt->controlFd = -1;
 		    ctxt->controlFd = -1;
-		    return((int) res);
+		    return(res);
 		}
 		res = RxmlNanoFTPGetResponse(ctxt);
 		if ((res == 1) || (res == 2)) {
@@ -1460,7 +1458,7 @@ RxmlNanoFTPTimeout(int delay) {
     timeout = (unsigned int) delay;
 }
 
-ssize_t
+DLsize_t
 RxmlNanoFTPContentLength(void *ctx)
 {
     RxmlNanoFTPCtxtPtr ctxt = (RxmlNanoFTPCtxtPtr) ctx;
