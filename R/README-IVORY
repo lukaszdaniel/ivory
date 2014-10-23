@@ -3,7 +3,7 @@
 
 1. HISTORY
 
-LUKI is one-person experimental project focused on increasing the usage of
+IVoRy (Internationalized Version Of R) is one-person experimental project focused on increasing the usage of
 i18n in R. Original R already has some i18n support but still not close to 100%.
 
 Work began since R 3.0.0 and is being continued.
