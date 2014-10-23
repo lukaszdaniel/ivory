@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-10-19 r20) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-10-22 r23) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -195,4 +195,4 @@ Score (logrank) test = 1.58 on 1 df, p=0.2094
 > 
 > proc.time()
    user  system elapsed 
-  0.268   0.039   0.290 
+  0.287   0.030   0.300 
