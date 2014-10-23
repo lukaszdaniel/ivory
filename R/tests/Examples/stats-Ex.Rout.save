@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-10-19 r20) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-10-22 r23) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -3765,7 +3765,7 @@ sigma^2 estimated as 0.4566:  log likelihood = -101.2,  aic = 212.4
 > 
 > asOneSidedFormula("age")
 ~age
-<environment: 0x47fdce0>
+<environment: 0x3dc7868>
 > asOneSidedFormula(~ age)
 ~age
 > 
@@ -4728,7 +4728,7 @@ function (V)
     r[cbind(seq_len(p), seq_len(p))] <- 1
     r
 }
-<bytecode: 0x45255c0>
+<bytecode: 0x3a04020>
 <environment: namespace:stats>
 > stopifnot(all.equal(Cl, cov2cor(cov(longley))),
 +           all.equal(cor(longley, method = "kendall"),
@@ -7241,7 +7241,7 @@ attr(,".Environment")
 > environment(as.formula("y ~ x"))
 <environment: R_GlobalEnv>
 > environment(as.formula("y ~ x", env = new.env()))
-<environment: 0x4c07a00>
+<environment: 0x4aadc58>
 > 
 > 
 > ## Create a formula for a model with a large number of variables:
@@ -7756,7 +7756,7 @@ Number of Fisher Scoring iterations: 3
 > plot(hc)
 > plot(hc, hang = -1)
 > 
-> ## Do the same with centroid clustering and squared Euclidean distance,
+> ## Do the same with centroid clustering and *squared* Euclidean distance,
 > ## cut the tree into ten clusters and reconstruct the upper part of the
 > ## tree from the cluster centers.
 > hc <- hclust(dist(USArrests)^2, "cen")
@@ -11718,14 +11718,14 @@ attr(,"class")
 $linkfun
 function (mu) 
 mu^lambda
-<bytecode: 0x50b1798>
-<environment: 0x50a3110>
+<bytecode: 0x45009f8>
+<environment: 0x3f71640>
 
 $linkinv
 function (eta) 
 pmax(eta^(1/lambda), .Machine$double.eps)
-<bytecode: 0x50b19c8>
-<environment: 0x50a3110>
+<bytecode: 0x4500b10>
+<environment: 0x3f71640>
 
 > 
 > 
@@ -15506,8 +15506,8 @@ Step function with continuity 'f'=0.2, 3 knots at:
 > unclass(sfun0)
 function (v) 
 .approxfun(x, y, v, method, yleft, yright, f)
-<bytecode: 0x25e4068>
-<environment: 0x52561d8>
+<bytecode: 0x1a296d0>
+<environment: 0x46cbea8>
 attr(,"call")
 stepfun(1:3, y0, f = 0)
 > ls(envir = environment(sfun0))
@@ -17797,7 +17797,7 @@ Number of Fisher Scoring iterations: 6
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  8.359 0.788 9.232 0 0 
+Time elapsed:  6.822 0.739 7.651 0 0 
 > grDevices::dev.off()
 null device 
           1 
