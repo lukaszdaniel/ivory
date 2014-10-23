@@ -114,20 +114,21 @@ hclust <- function(d, method="complete", members=NULL)
 
 ##' @title Check hclust() object for validity
 ##' @param x "hclust" object
+##' @param merge (= x$merge, passing it may save memory)
+##' @param order logical indicating if 'x$order' should be checked, too
 ##' @return character vector with message or TRUE
 ##' @author Martin Maechler
-.validity.hclust <- function(x, merge = x$merge) {
+.validity.hclust <- function(x, merge = x$merge, order = TRUE) {
     if (!is.matrix(merge) || ncol(merge) != 2)
 	return(gettext("invalid dendrogram", domain = "R-stats"))
     ## merge should be integer but might not be after dump/restore.
     if (any(as.integer(merge) != merge))
 	return(gettext("'merge' component in dendrogram must be integer", domain = "R-stats"))
-    storage.mode(merge) <- "integer"
     n1 <- nrow(merge) # == #{obs} - 1
     n <- n1+1L
-    if(length(x$order ) != n ) return(gettextf("'%s' argument is of wrong length", "order", domain = "R-stats"))
     if(length(x$height) != n1) return(gettextf("'%s' argument is of wrong length", "height", domain = "R-stats"))
-    if(identical(sort(merge), c(-(n:1L), +seq_len(n-2L))))
+    if(order && length(x$order ) != n ) return(gettextf("'%s' argument is of wrong length", "order", domain = "R-stats"))
+    if(identical(sort(as.integer(merge)), c(-(n:1L), +seq_len(n-2L))))
 	TRUE
     else
 	gettext("'merge' matrix has invalid contents", domain = "R-stats")
