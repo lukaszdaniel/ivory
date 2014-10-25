@@ -364,16 +364,22 @@ httpd <- function(path, query, ...)
         up <- paste0("/library/", pkg, "/html/00Index.html")
         if(!nzchar(docdir))
             return(error_page(gettextf("No docs found for package %s",
-                                       mono(pkg))))
+                                       sQuote(mono(pkg)), domain = "R-tools")))
         if(nzchar(rest) && rest != "/") {
-            ## FIXME should we check existence here?
             file <- paste0(docdir, rest)
+            exists <- file.exists(file)
+            if (!exists && rest == "/index.html") {
+                rest <- ""
+            	file <- docdir
+            }
             if(dir.exists(file))
                 return(.HTMLdirListing(file,
                                        paste0("/library/", pkg, "/doc", rest),
                                        up))
-            else
+            else if (exists)
                 return(list(file = file, "content-type" = mime_type(rest)))
+            else 
+            	return(error_page(gettextf("URL '%s' was not found", mono(path), domain = "R-tools")))
         } else {
             ## request to list <pkg>/doc
             return(.HTMLdirListing(docdir,
