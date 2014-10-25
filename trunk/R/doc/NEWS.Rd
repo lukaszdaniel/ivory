@@ -228,6 +228,14 @@
       (tested on 32-bit \R running on 64-bit Windows).
     }
   }
+
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item (Windows.) 64-bit \command{Rcmd.exe} and
+      \command{Rscript.exe} were missing a manifest specifying the style
+      for common controls.
+    }
+  }
 }
   
 \section{\Rlogo CHANGES IN R 3.1.2}{
