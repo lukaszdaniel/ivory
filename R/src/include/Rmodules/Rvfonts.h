@@ -23,4 +23,4 @@ void R_GE_setVFontRoutines(R_GE_VStrWidthRoutine vwidth,
 			   R_GE_VTextRoutine vtext);
 
 
-#endif /* ifndef R_VFONTS_MODULE_H */
+#endif /* R_VFONTS_MODULE_H */

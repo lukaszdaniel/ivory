@@ -71,4 +71,4 @@ void R_WaitEvent(void);
 }
 #endif
 
-#endif /* !R_R_H */
+#endif /* R_R_H */

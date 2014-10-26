@@ -104,4 +104,4 @@ void setup_Rmainloop(void); // also in Rembedded.h
 }
 #endif
 
-#endif
+#endif /* R_EXT_RSTARTUP_H_ */

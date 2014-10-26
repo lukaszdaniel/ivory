@@ -44,4 +44,4 @@ SEXP R_ParseVector(SEXP, int, ParseStatus *, SEXP);
 }
 #endif
 
-#endif
+#endif /* R_EXT_PARSE_H_ */

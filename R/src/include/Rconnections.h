@@ -78,5 +78,6 @@ int Rsockselect(int nsock, int *insockfd, int *ready, int *write, double timeout
 
 #define set_iconv Rf_set_iconv
 void set_iconv(Rconnection con);
-#endif
+
+#endif /* R_CONNECTIONS_H_ */
 

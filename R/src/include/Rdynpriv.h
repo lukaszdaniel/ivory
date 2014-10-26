@@ -211,4 +211,4 @@ SEXP R_doDotCall(DL_FUNC, int, SEXP *, SEXP);
 }
 #endif
 
-#endif /* ifdef R_DYNPRIV_H */
+#endif /* R_DYNPRIV_H */

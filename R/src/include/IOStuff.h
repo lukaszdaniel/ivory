@@ -81,4 +81,4 @@ int R_TextBufferInit(TextBuffer*, SEXP);
 int R_TextBufferFree(TextBuffer*);
 int R_TextBufferGetc(TextBuffer*);
 
-#endif /* not R_IOSTUFF_H */
+#endif /* R_IOSTUFF_H */
