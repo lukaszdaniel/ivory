@@ -28,12 +28,12 @@
 
 
 
-#define COUNTING
+//#define COUNTING
 
-#define BYTECODE
+//#define BYTECODE
 
 /* probably no longer needed */
-#define NEW_CONDITION_HANDLING
+//#define NEW_CONDITION_HANDLING
 
 /* To test the write barrier used by the generational collector,
    define TESTING_WRITE_BARRIER.  This makes the internal structure of
@@ -1319,7 +1319,7 @@ void set_rl_word_breaks(const char *str);
 extern const char *locale2charset(const char *);
 
 /* Localization */
-//R-ELS UPDATE: localization moved to a separate file 'Localization.h'.
+//IVORY UPDATE: localization moved to a separate file 'Localization.h'.
 // From now on it must be included separately.
 
 

@@ -80,4 +80,4 @@ typedef struct {
 }
 #endif
 
-#endif /* !R_S_H */
+#endif /* R_S_H */

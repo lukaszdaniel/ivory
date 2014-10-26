@@ -57,4 +57,4 @@ typedef struct {
 
 R_InternetRoutines *R_setInternetRoutines(R_InternetRoutines *routines);
 
-#endif /* ifndef R_INTERNET_MODULE_H */
+#endif /* R_INTERNET_MODULE_H */

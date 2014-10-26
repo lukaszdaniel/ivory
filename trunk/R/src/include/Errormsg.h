@@ -57,5 +57,5 @@ typedef enum {
 } R_WARNING;
 
 
-#endif
+#endif /* ERRORMSG_H */
 

@@ -19,10 +19,9 @@
  */
 
 #ifndef RFILEIO_H_
-
 #define RFILEIO_H_
 
 int	R_fgetc(FILE*);
 FILE *	R_fopen(const char *filename, const char *mode);
 
-#endif
+#endif /* RFILEIO_H_ */
