@@ -40,8 +40,8 @@ seq.default <-
             warning("first element used of 'length.out' argument")
             length.out <- length.out[1L]
         }
-	#length.out <- ceiling(length.out)
-	length.out <- as.integer(length.out) #added in order to have: seq_len(12.3) == seq(length.out=12.3)
+	length.out <- ceiling(length.out)
+	#length.out <- as.integer(length.out) #IVORY: maybe we should have this line in order to have: seq_len(12.3) == seq(length.out=12.3)
     }
     if(!missing(...))
         warning(sprintf(ngettext(length(list(...)),
