@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.2.0\n"
-"POT-Creation-Date: 2014-10-11 12:00\n"
+"POT-Creation-Date: 2014-11-01 13:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -362,6 +362,8 @@ msgstr ""
 #: R/arma0.R: 0
 #: R/arma0.R: 0
 #: R/contr.poly.R: 0
+#: R/hclust.R: 0
+#: R/hclust.R: 0
 #: R/kernel.R: 0
 #: R/nls-profile.R: 0
 #: R/nls-profile.R: 0
@@ -372,6 +374,8 @@ msgstr ""
 #. R/arma0.R: gettextf("'%s' argument is of the wrong length", "fixed")
 #. R/arma0.R: gettextf("'%s' argument is of the wrong length", "init")
 #. R/contr.poly.R: gettextf("'%s' argument is of the wrong length", "scores")
+#. R/hclust.R: gettextf("'%s' argument is of the wrong length", "height", domain = "R-stats")
+#. R/hclust.R: gettextf("'%s' argument is of the wrong length", "order", domain = "R-stats")
 #. R/kernel.R: gettextf("'%s' argument is of the wrong length", "coef")
 #. R/nls-profile.R: gettextf("'%s' argument is of the wrong length", "params")
 #. R/nls-profile.R: gettextf("'%s' argument is of the wrong length", "varying")
@@ -1053,22 +1057,15 @@ msgid "'margins' must be a numeric vector of length 2"
 msgstr ""
 
 
-#: R/dendrogram.R: 0
-#. R/dendrogram.R: stop("'merge' and 'height' arguments do not fit!")
-
-msgid "'merge' and 'height' arguments do not fit!"
-msgstr ""
-
-
 #: R/hclust.R: 0
-#. R/hclust.R: stop("'merge' component in dendrogram must be integer")
+#. R/hclust.R: gettext("'merge' component in dendrogram must be integer", domain = "R-stats")
 
 msgid "'merge' component in dendrogram must be integer"
 msgstr ""
 
 
 #: R/hclust.R: 0
-#. R/hclust.R: stop("'merge' matrix has invalid contents")
+#. R/hclust.R: gettext("'merge' matrix has invalid contents", domain = "R-stats")
 
 msgid "'merge' matrix has invalid contents"
 msgstr ""
@@ -1597,10 +1594,24 @@ msgid "'x' argument has entries too large to be integer"
 msgstr ""
 
 
+#: R/kruskal.test.R: 0
+#. R/kruskal.test.R: warning("'x' argument is a list, so ignoring argument 'g'")
+
+msgid "'x' argument is a list, so ignoring argument 'g'"
+msgstr ""
+
+
 #: R/cor.R: 0
 #. R/cor.R: stop("'x' argument is empty")
 
 msgid "'x' argument is empty"
+msgstr ""
+
+
+#: R/kruskal.test.R: 0
+#. R/kruskal.test.R: stop("'x' argument must be a list with at least 2 elements")
+
+msgid "'x' argument must be a list with at least 2 elements"
 msgstr ""
 
 
@@ -1669,10 +1680,8 @@ msgstr ""
 
 #: R/bartlett.test.R: 0
 #: R/fligner.test.R: 0
-#: R/kruskal.test.R: 0
 #. R/bartlett.test.R: stop("'x' must be a list with at least 2 elements")
 #. R/fligner.test.R: stop("'x' must be a list with at least 2 elements")
-#. R/kruskal.test.R: stop("'x' must be a list with at least 2 elements")
 
 msgid "'x' must be a list with at least 2 elements"
 msgstr ""
@@ -5657,7 +5666,7 @@ msgstr ""
 
 
 #: R/hclust.R: 0
-#. R/hclust.R: stop("invalid dendrogram")
+#. R/hclust.R: gettext("invalid dendrogram", domain = "R-stats")
 
 msgid "invalid dendrogram"
 msgstr ""
@@ -7486,6 +7495,13 @@ msgstr ""
 #. R/reshape.R: gettextf("some constant variables (%s) are really varying", tmp_N)
 
 msgid "some constant variables (%s) are really varying"
+msgstr ""
+
+
+#: R/kruskal.test.R: 0
+#. R/kruskal.test.R: warning("some elements of 'x' argument are not numeric and will be coerced to numeric")
+
+msgid "some elements of 'x' argument are not numeric and will be coerced to numeric"
 msgstr ""
 
 

@@ -1788,12 +1788,12 @@ msgstr "oba argumenty operatora '%s' nie mogą być obiektami klasy %s"
 #. R/RNG.R: stop("buggy version of Kinderman-Ramage generator is not allowed", domain = "R-base")
 #: R/RNG.R:0
 msgid "buggy version of Kinderman-Ramage generator is not allowed"
-msgstr ""
+msgstr "wersja 'buggy' generatora Kinderman'a-Ramage'a nie jest dozwolona"
 
 #. R/RNG.R: warning("buggy version of Kinderman-Ramage generator used", domain = "R-base")
 #: R/RNG.R:0
 msgid "buggy version of Kinderman-Ramage generator used"
-msgstr ""
+msgstr "użyto wersji 'buggy' generatora Kinderman'a-Ramage'a"
 
 #. R/load.R: stop("can only save to a binary connection")
 #: R/load.R:0

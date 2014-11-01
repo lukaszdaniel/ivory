@@ -126,8 +126,8 @@ hclust <- function(d, method="complete", members=NULL)
 	return(gettext("'merge' component in dendrogram must be integer", domain = "R-stats"))
     n1 <- nrow(merge) # == #{obs} - 1
     n <- n1+1L
-    if(length(x$height) != n1) return(gettextf("'%s' argument is of wrong length", "height", domain = "R-stats"))
-    if(order && length(x$order ) != n ) return(gettextf("'%s' argument is of wrong length", "order", domain = "R-stats"))
+    if(length(x$height) != n1) return(gettextf("'%s' argument is of the wrong length", "height", domain = "R-stats"))
+    if(order && length(x$order ) != n ) return(gettextf("'%s' argument is of the wrong length", "order", domain = "R-stats"))
     if(identical(sort(as.integer(merge)), c(-(n:1L), +seq_len(n-2L))))
 	TRUE
     else

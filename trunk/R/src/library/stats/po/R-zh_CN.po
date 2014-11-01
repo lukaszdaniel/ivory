@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-11 12:00\n"
+"POT-Creation-Date: 2014-11-01 13:00\n"
 "PO-Revision-Date: 2005-04-08 08:37+0000\n"
 "Last-Translator: 陈斐 <FeiChen@FairIsaac.com>\n"
 "Language-Team: Chinese\n"
@@ -279,12 +279,14 @@ msgstr "'split'参数必需是串列"
 #. R/arma0.R: gettextf("'%s' argument is of the wrong length", "fixed")
 #. R/arma0.R: gettextf("'%s' argument is of the wrong length", "init")
 #. R/contr.poly.R: gettextf("'%s' argument is of the wrong length", "scores")
+#. R/hclust.R: gettextf("'%s' argument is of the wrong length", "height", domain = "R-stats")
+#. R/hclust.R: gettextf("'%s' argument is of the wrong length", "order", domain = "R-stats")
 #. R/kernel.R: gettextf("'%s' argument is of the wrong length", "coef")
 #. R/nls-profile.R: gettextf("'%s' argument is of the wrong length", "params")
 #. R/nls-profile.R: gettextf("'%s' argument is of the wrong length", "varying")
 #. R/reshape.R: gettextf("'%s' argument is of the wrong length", "times")
-#: R/arima.R:0 R/arma0.R:0 R/contr.poly.R:0 R/kernel.R:0 R/nls-profile.R:0
-#: R/reshape.R:0
+#: R/arima.R:0 R/arma0.R:0 R/contr.poly.R:0 R/hclust.R:0 R/kernel.R:0
+#: R/nls-profile.R:0 R/reshape.R:0
 #, fuzzy
 msgid "'%s' argument is of the wrong length"
 msgstr "'scores'参数长度对对"
@@ -812,18 +814,12 @@ msgstr ""
 msgid "'margins' must be a numeric vector of length 2"
 msgstr "'margins'必需是长度为二的数值矢量"
 
-#. R/dendrogram.R: stop("'merge' and 'height' arguments do not fit!")
-#: R/dendrogram.R:0
-#, fuzzy
-msgid "'merge' and 'height' arguments do not fit!"
-msgstr "'merge'和'height'不合!"
-
-#. R/hclust.R: stop("'merge' component in dendrogram must be integer")
+#. R/hclust.R: gettext("'merge' component in dendrogram must be integer", domain = "R-stats")
 #: R/hclust.R:0
 msgid "'merge' component in dendrogram must be integer"
 msgstr "系統樹圖的'merge'组件必需是整数"
 
-#. R/hclust.R: stop("'merge' matrix has invalid contents")
+#. R/hclust.R: gettext("'merge' matrix has invalid contents", domain = "R-stats")
 #: R/hclust.R:0
 msgid "'merge' matrix has invalid contents"
 msgstr ""
@@ -1246,11 +1242,23 @@ msgstr "'x'捨入成正数:"
 msgid "'x' argument has entries too large to be integer"
 msgstr "'x'的正数值太大"
 
+#. R/kruskal.test.R: warning("'x' argument is a list, so ignoring argument 'g'")
+#: R/kruskal.test.R:0
+#, fuzzy
+msgid "'x' argument is a list, so ignoring argument 'g'"
+msgstr "没有'col.vars'值或它设定得不对"
+
 #. R/cor.R: stop("'x' argument is empty")
 #: R/cor.R:0
 #, fuzzy
 msgid "'x' argument is empty"
 msgstr "'x'是空的"
+
+#. R/kruskal.test.R: stop("'x' argument must be a list with at least 2 elements")
+#: R/kruskal.test.R:0
+#, fuzzy
+msgid "'x' argument must be a list with at least 2 elements"
+msgstr "'x'必需是至少有两个单元的串列"
 
 #. R/anova.R: stop("'x' argument must be coefficient matrix or data frame")
 #: R/anova.R:0
@@ -1304,8 +1312,7 @@ msgstr "'x'必需是三维陣列"
 
 #. R/bartlett.test.R: stop("'x' must be a list with at least 2 elements")
 #. R/fligner.test.R: stop("'x' must be a list with at least 2 elements")
-#. R/kruskal.test.R: stop("'x' must be a list with at least 2 elements")
-#: R/bartlett.test.R:0 R/fligner.test.R:0 R/kruskal.test.R:0
+#: R/bartlett.test.R:0 R/fligner.test.R:0
 msgid "'x' must be a list with at least 2 elements"
 msgstr "'x'必需是至少有两个单元的串列"
 
@@ -4273,7 +4280,7 @@ msgstr "'getProfile'参数不对"
 msgid "invalid clustering method %s"
 msgstr "群集方法不对"
 
-#. R/hclust.R: stop("invalid dendrogram")
+#. R/hclust.R: gettext("invalid dendrogram", domain = "R-stats")
 #: R/hclust.R:0
 msgid "invalid dendrogram"
 msgstr "系統樹圖不对"
@@ -5685,6 +5692,12 @@ msgstr "一些ARMA参数是固定的：把transform.pars设成FALSE"
 msgid "some constant variables (%s) are really varying"
 msgstr "某些恆量变量(%s)其实在变动"
 
+#. R/kruskal.test.R: warning("some elements of 'x' argument are not numeric and will be coerced to numeric")
+#: R/kruskal.test.R:0
+msgid ""
+"some elements of 'x' argument are not numeric and will be coerced to numeric"
+msgstr ""
+
 #. R/dummy.coef.R: warning("some terms will have NAs due to the limits of the method")
 #: R/dummy.coef.R:0
 msgid "some terms will have NAs due to the limits of the method"
@@ -6789,6 +6802,14 @@ msgstr[0] "模型里下範疇没有这些词条%s"
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "在组合拟合中用%d/%d行"
+
+#, fuzzy
+#~ msgid "'%s' argument is of wrong length"
+#~ msgstr "'scores'参数长度对对"
+
+#, fuzzy
+#~ msgid "'merge' and 'height' arguments do not fit!"
+#~ msgstr "'merge'和'height'不合!"
 
 #, fuzzy
 #~ msgid "probabilities cannot be negative nor all 0"

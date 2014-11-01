@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-11 12:00\n"
+"POT-Creation-Date: 2014-11-01 08:37\n"
 "PO-Revision-Date: 2012-12-30 23:32+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -2074,10 +2074,10 @@ msgstr ""
 msgid "metadata of package '%s' is corrupt"
 msgstr ""
 
-#. R/unix/download.file.R: warning("method 'lynx' is untested and deprecated as from R 3.1.0")
-#. R/windows/download.file.R: warning("method 'lynx' is untested and deprecated as from R 3.1.0")
+#. R/unix/download.file.R: stop("method 'lynx' is defunct as from R 3.1.0", domain = "R-utils")
+#. R/windows/download.file.R: stop("method 'lynx' is defunct as from R 3.1.0", domain = "R-utils")
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
-msgid "method 'lynx' is untested and deprecated as from R 3.1.0"
+msgid "method 'lynx' is defunct as from R 3.1.0"
 msgstr ""
 
 #. R/windows/create.post.R: stop("method 'mailx' is Unix-only")

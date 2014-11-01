@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.2.0\n"
-"POT-Creation-Date: 2014-10-11 12:00\n"
+"POT-Creation-Date: 2014-11-01 08:37\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2373,7 +2373,7 @@ msgstr ""
 
 
 #: R/dynamicHelp.R: 0
-#. R/dynamicHelp.R: gettextf("No docs found for package %s", mono(pkg))
+#. R/dynamicHelp.R: gettextf("No docs found for package %s", sQuote(mono(pkg)), domain = "R-tools")
 
 msgid "No docs found for package %s"
 msgstr ""
@@ -3896,6 +3896,13 @@ msgstr ""
 #. R/dynamicHelp.R: gettextf("URL %s was not found", mono(path))
 
 msgid "URL %s was not found"
+msgstr ""
+
+
+#: R/dynamicHelp.R: 0
+#. R/dynamicHelp.R: gettextf("URL '%s' was not found", mono(path), domain = "R-tools")
+
+msgid "URL '%s' was not found"
 msgstr ""
 
 
