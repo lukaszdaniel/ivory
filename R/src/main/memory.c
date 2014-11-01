@@ -2155,13 +2155,17 @@ long double *R_allocLD(size_t nelem)
     size_t ld_align = alignof(long double);
 #elif __GNUC__
     // This is C99, but do not rely on it.
-    size_t ld_align = offsetof(struct { char __a; type __b; }, __b);
+    size_t ld_align = offsetof(struct { char __a; long double __b; }, __b);
 #else
-    size_t ld_align 0x0F; // value of x86_64, known others are 4 or 8
+    size_t ld_align = 0x0F; // value of x86_64, known others are 4 or 8
 #endif
-    uintptr_t tmp = (uintptr_t) R_alloc(nelem + 1, sizeof(long double));
-    tmp = (tmp + ld_align - 1) & ~ld_align;
-    return (long double *) tmp;
+    if (ld_align > 8) {
+	uintptr_t tmp = (uintptr_t) R_alloc(nelem + 1, sizeof(long double));
+	tmp = (tmp + ld_align - 1) & ~ld_align;
+	return (long double *) tmp;
+    } else {
+	return (long double *) R_alloc(nelem, sizeof(long double));
+    }
 }
 
 

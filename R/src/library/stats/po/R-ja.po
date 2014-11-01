@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-11 12:00\n"
+"POT-Creation-Date: 2014-11-01 13:00\n"
 "PO-Revision-Date: 2012-02-26 14:13+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -277,12 +277,14 @@ msgstr " 'split' 引数はリストでなければなりません "
 #. R/arma0.R: gettextf("'%s' argument is of the wrong length", "fixed")
 #. R/arma0.R: gettextf("'%s' argument is of the wrong length", "init")
 #. R/contr.poly.R: gettextf("'%s' argument is of the wrong length", "scores")
+#. R/hclust.R: gettextf("'%s' argument is of the wrong length", "height", domain = "R-stats")
+#. R/hclust.R: gettextf("'%s' argument is of the wrong length", "order", domain = "R-stats")
 #. R/kernel.R: gettextf("'%s' argument is of the wrong length", "coef")
 #. R/nls-profile.R: gettextf("'%s' argument is of the wrong length", "params")
 #. R/nls-profile.R: gettextf("'%s' argument is of the wrong length", "varying")
 #. R/reshape.R: gettextf("'%s' argument is of the wrong length", "times")
-#: R/arima.R:0 R/arma0.R:0 R/contr.poly.R:0 R/kernel.R:0 R/nls-profile.R:0
-#: R/reshape.R:0
+#: R/arima.R:0 R/arma0.R:0 R/contr.poly.R:0 R/hclust.R:0 R/kernel.R:0
+#: R/nls-profile.R:0 R/reshape.R:0
 #, fuzzy
 msgid "'%s' argument is of the wrong length"
 msgstr " 'scores' 引数は 誤った長さです "
@@ -816,18 +818,12 @@ msgstr ""
 msgid "'margins' must be a numeric vector of length 2"
 msgstr " 'margins' は長さ 2 の数値ベクトルでなければなりません "
 
-#. R/dendrogram.R: stop("'merge' and 'height' arguments do not fit!")
-#: R/dendrogram.R:0
-#, fuzzy
-msgid "'merge' and 'height' arguments do not fit!"
-msgstr " 'merge' と 'height' が合致していません! "
-
-#. R/hclust.R: stop("'merge' component in dendrogram must be integer")
+#. R/hclust.R: gettext("'merge' component in dendrogram must be integer", domain = "R-stats")
 #: R/hclust.R:0
 msgid "'merge' component in dendrogram must be integer"
 msgstr " dendrogram の 'merge' 成分は整数でなければなりません "
 
-#. R/hclust.R: stop("'merge' matrix has invalid contents")
+#. R/hclust.R: gettext("'merge' matrix has invalid contents", domain = "R-stats")
 #: R/hclust.R:0
 msgid "'merge' matrix has invalid contents"
 msgstr ""
@@ -1251,11 +1247,23 @@ msgstr " 'x' は整数に丸められました "
 msgid "'x' argument has entries too large to be integer"
 msgstr " 'x' は整数とするにはあまりに多くの項目を持っています "
 
+#. R/kruskal.test.R: warning("'x' argument is a list, so ignoring argument 'g'")
+#: R/kruskal.test.R:0
+#, fuzzy
+msgid "'x' argument is a list, so ignoring argument 'g'"
+msgstr " 'col.vars' が無いか不正確です "
+
 #. R/cor.R: stop("'x' argument is empty")
 #: R/cor.R:0
 #, fuzzy
 msgid "'x' argument is empty"
 msgstr " x は空です "
+
+#. R/kruskal.test.R: stop("'x' argument must be a list with at least 2 elements")
+#: R/kruskal.test.R:0
+#, fuzzy
+msgid "'x' argument must be a list with at least 2 elements"
+msgstr " 'x' は少なくとも 2 つの要素を持つリストでなければ なりません "
 
 #. R/anova.R: stop("'x' argument must be coefficient matrix or data frame")
 #: R/anova.R:0
@@ -1309,8 +1317,7 @@ msgstr " 'x' は 3 次元配列でなければなりません "
 
 #. R/bartlett.test.R: stop("'x' must be a list with at least 2 elements")
 #. R/fligner.test.R: stop("'x' must be a list with at least 2 elements")
-#. R/kruskal.test.R: stop("'x' must be a list with at least 2 elements")
-#: R/bartlett.test.R:0 R/fligner.test.R:0 R/kruskal.test.R:0
+#: R/bartlett.test.R:0 R/fligner.test.R:0
 msgid "'x' must be a list with at least 2 elements"
 msgstr " 'x' は少なくとも 2 つの要素を持つリストでなければ なりません "
 
@@ -4288,7 +4295,7 @@ msgstr " 'getProfile' への無効な引数です "
 msgid "invalid clustering method %s"
 msgstr " 無効なクラスタリング法です "
 
-#. R/hclust.R: stop("invalid dendrogram")
+#. R/hclust.R: gettext("invalid dendrogram", domain = "R-stats")
 #: R/hclust.R:0
 msgid "invalid dendrogram"
 msgstr " 無効なデンドログラムです "
@@ -5732,6 +5739,12 @@ msgstr ""
 msgid "some constant variables (%s) are really varying"
 msgstr " 定数変数 (%s) は実際は変化しています "
 
+#. R/kruskal.test.R: warning("some elements of 'x' argument are not numeric and will be coerced to numeric")
+#: R/kruskal.test.R:0
+msgid ""
+"some elements of 'x' argument are not numeric and will be coerced to numeric"
+msgstr ""
+
 #. R/dummy.coef.R: warning("some terms will have NAs due to the limits of the method")
 #: R/dummy.coef.R:0
 msgid "some terms will have NAs due to the limits of the method"
@@ -6842,6 +6855,14 @@ msgstr[0] " 下位のスコープはモデル中に含まれない項 %s を持�
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] " 同時当てはめから %d/%d 行を使用します。 "
+
+#, fuzzy
+#~ msgid "'%s' argument is of wrong length"
+#~ msgstr " 'scores' 引数は 誤った長さです "
+
+#, fuzzy
+#~ msgid "'merge' and 'height' arguments do not fit!"
+#~ msgstr " 'merge' と 'height' が合致していません! "
 
 #, fuzzy
 #~ msgid "probabilities cannot be negative nor all 0"

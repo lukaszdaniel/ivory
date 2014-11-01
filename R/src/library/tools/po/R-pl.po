@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-11 12:00\n"
+"POT-Creation-Date: 2014-11-01 08:37\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1978,7 +1978,7 @@ msgstr "Nowe wprowadzenie"
 msgid "No Rd macros in package %s"
 msgstr "Brak makr Rd w pakiecie %s"
 
-#. R/dynamicHelp.R: gettextf("No docs found for package %s", mono(pkg))
+#. R/dynamicHelp.R: gettextf("No docs found for package %s", sQuote(mono(pkg)), domain = "R-tools")
 #: R/dynamicHelp.R:0
 msgid "No docs found for package %s"
 msgstr "Nie znaleziono dokumentów dla pakietu '%s'"
@@ -3266,6 +3266,11 @@ msgstr "Całkowita liczba sekund: czas spędzony w funkcjach i wywołaniach."
 #: R/dynamicHelp.R:0
 msgid "URL %s was not found"
 msgstr "adres URL %s nie został znaleziony"
+
+#. R/dynamicHelp.R: gettextf("URL '%s' was not found", mono(path), domain = "R-tools")
+#: R/dynamicHelp.R:0
+msgid "URL '%s' was not found"
+msgstr "adres URL '%s' nie został znaleziony"
 
 #. R/check.R: gettext("Unable to find GhostScript executable to run checks on size reduction\n",     domain = "R-tools")
 #: R/check.R:0

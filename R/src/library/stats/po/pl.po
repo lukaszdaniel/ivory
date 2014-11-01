@@ -63,7 +63,7 @@ msgstr "maksymalne obsługiwane opóźnienie wynosi 350"
 #: bandwidths.c:110
 #, c-format
 msgid "non-finite x[%d] in bandwidth calculation"
-msgstr ""
+msgstr "nieskończone x[%d] podczas wyliczania pasma"
 
 #: complete_cases.c:27
 #, c-format

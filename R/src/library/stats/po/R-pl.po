@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-11 12:00\n"
+"POT-Creation-Date: 2014-11-01 13:00\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -261,12 +261,14 @@ msgstr "argument '%s' nie jest dodatni"
 #. R/arma0.R: gettextf("'%s' argument is of the wrong length", "fixed")
 #. R/arma0.R: gettextf("'%s' argument is of the wrong length", "init")
 #. R/contr.poly.R: gettextf("'%s' argument is of the wrong length", "scores")
+#. R/hclust.R: gettextf("'%s' argument is of the wrong length", "height", domain = "R-stats")
+#. R/hclust.R: gettextf("'%s' argument is of the wrong length", "order", domain = "R-stats")
 #. R/kernel.R: gettextf("'%s' argument is of the wrong length", "coef")
 #. R/nls-profile.R: gettextf("'%s' argument is of the wrong length", "params")
 #. R/nls-profile.R: gettextf("'%s' argument is of the wrong length", "varying")
 #. R/reshape.R: gettextf("'%s' argument is of the wrong length", "times")
-#: R/arima.R:0 R/arma0.R:0 R/contr.poly.R:0 R/kernel.R:0 R/nls-profile.R:0
-#: R/reshape.R:0
+#: R/arima.R:0 R/arma0.R:0 R/contr.poly.R:0 R/hclust.R:0 R/kernel.R:0
+#: R/nls-profile.R:0 R/reshape.R:0
 msgid "'%s' argument is of the wrong length"
 msgstr "argument '%s' ma niepoprawną długość"
 
@@ -756,17 +758,12 @@ msgstr ""
 msgid "'margins' must be a numeric vector of length 2"
 msgstr "argument 'margins' musi być wektorem liczbowym o długości 2"
 
-#. R/dendrogram.R: stop("'merge' and 'height' arguments do not fit!")
-#: R/dendrogram.R:0
-msgid "'merge' and 'height' arguments do not fit!"
-msgstr "argumenty 'merge' oraz 'height' nie pasują!"
-
-#. R/hclust.R: stop("'merge' component in dendrogram must be integer")
+#. R/hclust.R: gettext("'merge' component in dendrogram must be integer", domain = "R-stats")
 #: R/hclust.R:0
 msgid "'merge' component in dendrogram must be integer"
 msgstr "komponent 'merge' w drzewie celu musi być liczbą całkowitą"
 
-#. R/hclust.R: stop("'merge' matrix has invalid contents")
+#. R/hclust.R: gettext("'merge' matrix has invalid contents", domain = "R-stats")
 #: R/hclust.R:0
 msgid "'merge' matrix has invalid contents"
 msgstr "macierz 'merge' posiada niepoprawną zawartość"
@@ -1166,10 +1163,20 @@ msgstr "argument 'x' został zaokrąglony do wartości całkowitej: %s"
 msgid "'x' argument has entries too large to be integer"
 msgstr "argument 'x' posiada wpisy zbyt duże aby były liczbami całkowitymi"
 
+#. R/kruskal.test.R: warning("'x' argument is a list, so ignoring argument 'g'")
+#: R/kruskal.test.R:0
+msgid "'x' argument is a list, so ignoring argument 'g'"
+msgstr "argument 'x' jest listą, więc ignorowanie argumentu 'g'"
+
 #. R/cor.R: stop("'x' argument is empty")
 #: R/cor.R:0
 msgid "'x' argument is empty"
 msgstr "argument 'x' jest pusty"
+
+#. R/kruskal.test.R: stop("'x' argument must be a list with at least 2 elements")
+#: R/kruskal.test.R:0
+msgid "'x' argument must be a list with at least 2 elements"
+msgstr "argument 'x' musi być listą z co najmniej 2 elementami"
 
 #. R/anova.R: stop("'x' argument must be coefficient matrix or data frame")
 #: R/anova.R:0
@@ -1218,8 +1225,7 @@ msgstr "'x' musi być 3-wymiarową tablicą"
 
 #. R/bartlett.test.R: stop("'x' must be a list with at least 2 elements")
 #. R/fligner.test.R: stop("'x' must be a list with at least 2 elements")
-#. R/kruskal.test.R: stop("'x' must be a list with at least 2 elements")
-#: R/bartlett.test.R:0 R/fligner.test.R:0 R/kruskal.test.R:0
+#: R/bartlett.test.R:0 R/fligner.test.R:0
 msgid "'x' must be a list with at least 2 elements"
 msgstr "'x' musi być listą z co najmniej 2 elementami"
 
@@ -4177,7 +4183,7 @@ msgstr "niepoprawny argument przekazany do funkcji 'getProfile()'"
 msgid "invalid clustering method %s"
 msgstr "niepoprawna metoda grupowania %s"
 
-#. R/hclust.R: stop("invalid dendrogram")
+#. R/hclust.R: gettext("invalid dendrogram", domain = "R-stats")
 #: R/hclust.R:0
 msgid "invalid dendrogram"
 msgstr "niepoprawne drzewo celów"
@@ -5563,6 +5569,14 @@ msgstr ""
 msgid "some constant variables (%s) are really varying"
 msgstr "niektóre zmienne o stałej wartości (%s) tak naprawdę się zmieniają"
 
+#. R/kruskal.test.R: warning("some elements of 'x' argument are not numeric and will be coerced to numeric")
+#: R/kruskal.test.R:0
+msgid ""
+"some elements of 'x' argument are not numeric and will be coerced to numeric"
+msgstr ""
+"niektóre elementy argumentu 'x' nie są liczbami i zostaną przekształcone na "
+"liczby"
+
 #. R/dummy.coef.R: warning("some terms will have NAs due to the limits of the method")
 #: R/dummy.coef.R:0
 msgid "some terms will have NAs due to the limits of the method"
@@ -6734,6 +6748,12 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "używanie %d/%d wiersza z połączonego dopasowania"
 msgstr[1] "używanie %d/%d wierszy z połączonego dopasowania"
 msgstr[2] "używanie %d/%d wierszy z połączonego dopasowania"
+
+#~ msgid "'%s' argument is of wrong length"
+#~ msgstr "argument '%s' ma niepoprawną długość"
+
+#~ msgid "'merge' and 'height' arguments do not fit!"
+#~ msgstr "argumenty 'merge' oraz 'height' nie pasują!"
 
 #~ msgid "probabilities cannot be negative nor all 0"
 #~ msgstr ""

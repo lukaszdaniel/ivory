@@ -14,9 +14,9 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.3\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: splines.c:142
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' argument must be a positive integer"
-msgstr "'ord' musi być dodatnią liczbą całkowitą"
+msgstr "argument '%s' musi być dodatnią liczbą całkowitą"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-11 12:00\n"
+"POT-Creation-Date: 2014-11-01 08:37\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -1960,7 +1960,7 @@ msgstr ""
 msgid "No Rd macros in package %s"
 msgstr "패키지 %s에 대한 문서를 찾을 수 없습니다"
 
-#. R/dynamicHelp.R: gettextf("No docs found for package %s", mono(pkg))
+#. R/dynamicHelp.R: gettextf("No docs found for package %s", sQuote(mono(pkg)), domain = "R-tools")
 #: R/dynamicHelp.R:0
 msgid "No docs found for package %s"
 msgstr "패키지 %s에 대한 문서를 찾을 수 없습니다"
@@ -3220,6 +3220,12 @@ msgstr ""
 #. R/dynamicHelp.R: gettextf("URL %s was not found", mono(path))
 #: R/dynamicHelp.R:0
 msgid "URL %s was not found"
+msgstr "URL %s을 찾을 수 없습니다"
+
+#. R/dynamicHelp.R: gettextf("URL '%s' was not found", mono(path), domain = "R-tools")
+#: R/dynamicHelp.R:0
+#, fuzzy
+msgid "URL '%s' was not found"
 msgstr "URL %s을 찾을 수 없습니다"
 
 #. R/check.R: gettext("Unable to find GhostScript executable to run checks on size reduction\n",     domain = "R-tools")

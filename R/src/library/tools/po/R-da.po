@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-11 12:00\n"
+"POT-Creation-Date: 2014-11-01 08:37\n"
 "PO-Revision-Date: 2012-01-07 22:11+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1888,7 +1888,7 @@ msgstr ""
 msgid "No Rd macros in package %s"
 msgstr "fortolkningsfejl i fil »%s«:"
 
-#. R/dynamicHelp.R: gettextf("No docs found for package %s", mono(pkg))
+#. R/dynamicHelp.R: gettextf("No docs found for package %s", sQuote(mono(pkg)), domain = "R-tools")
 #: R/dynamicHelp.R:0
 msgid "No docs found for package %s"
 msgstr ""
@@ -3082,6 +3082,12 @@ msgstr ""
 #: R/dynamicHelp.R:0
 msgid "URL %s was not found"
 msgstr ""
+
+#. R/dynamicHelp.R: gettextf("URL '%s' was not found", mono(path), domain = "R-tools")
+#: R/dynamicHelp.R:0
+#, fuzzy
+msgid "URL '%s' was not found"
+msgstr "Vignette afhængigheder ikke krævet:"
 
 #. R/check.R: gettext("Unable to find GhostScript executable to run checks on size reduction\n",     domain = "R-tools")
 #: R/check.R:0

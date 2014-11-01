@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-19 19:51+0200\n"
+"POT-Creation-Date: 2014-11-01 08:36+0100\n"
 "PO-Revision-Date: 2012-02-26 14:21+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: R-core <R-core@R-project.org> \n"
@@ -693,7 +693,7 @@ msgstr " '%s'の表示に問題があります "
 #: src/main/grep.c:2342 src/main/grep.c:2640 src/main/grep.c:2645
 #: src/main/internet.c:240 src/main/internet.c:254 src/main/internet.c:272
 #: src/main/internet.c:284 src/main/internet.c:296 src/main/internet.c:315
-#: src/main/memory.c:3811 src/main/names.c:1288 src/main/names.c:1291
+#: src/main/memory.c:3836 src/main/names.c:1288 src/main/names.c:1291
 #: src/main/objects.c:1595 src/main/objects.c:1597 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
 #: src/main/paste.c:411 src/main/paste.c:416 src/main/paste.c:421
@@ -2862,7 +2862,7 @@ msgid "there is no connection %d"
 msgstr " %d というコネクションはありません "
 
 #: src/main/connections.c:5077 src/modules/internet/internet.c:116
-#: src/modules/internet/internet.c:566
+#: src/modules/internet/internet.c:576
 msgid "unsupported URL scheme"
 msgstr " サポートされていないURLスキームです "
 
@@ -4914,9 +4914,9 @@ msgstr " モジュール中でインターネットルーチンがアクセス�
 msgid "internet routines cannot be loaded"
 msgstr " インターネットルーチンがロードできません "
 
-#: src/main/internet.c:115 src/main/memory.c:3500 src/main/memory.c:3510
-#: src/main/memory.c:3522 src/main/memory.c:3536 src/main/memory.c:3552
-#: src/main/memory.c:3570
+#: src/main/internet.c:115 src/main/memory.c:3525 src/main/memory.c:3535
+#: src/main/memory.c:3547 src/main/memory.c:3561 src/main/memory.c:3577
+#: src/main/memory.c:3595
 msgid "bad value"
 msgstr " 不適切な値です "
 
@@ -5389,221 +5389,221 @@ msgstr " サイズ %0.1f Gb のメモリブロックを割り当てることが�
 msgid "cannot allocate memory block of size %0.1f Gb"
 msgstr " サイズ %0.1f Gb のメモリブロックを割り当てることができません "
 
-#: src/main/memory.c:2469
+#: src/main/memory.c:2494
 #, fuzzy
 msgid "vector is too large"
 msgstr " 指定されたベクトルのサイズが長すぎます "
 
-#: src/main/memory.c:2472
+#: src/main/memory.c:2497
 msgid "negative length vectors are not allowed"
 msgstr " 負の長さのベクトルは許されません "
 
-#: src/main/memory.c:2484
+#: src/main/memory.c:2509
 msgid "use of allocVector(CHARSXP ...) is defunct\n"
 msgstr ""
 
-#: src/main/memory.c:2498 src/main/memory.c:2511 src/main/memory.c:2524
-#: src/main/memory.c:2539
+#: src/main/memory.c:2523 src/main/memory.c:2536 src/main/memory.c:2549
+#: src/main/memory.c:2564
 #, c-format
 msgid "cannot allocate vector of length %d"
 msgstr " 長さ %d のベクトルを割り当てることができません "
 
-#: src/main/memory.c:2549 src/main/memory.c:2556
+#: src/main/memory.c:2574 src/main/memory.c:2581
 #, fuzzy
 msgid "invalid length for pairlist"
 msgstr " 長さが0の引数は不正です "
 
-#: src/main/memory.c:2560
+#: src/main/memory.c:2585
 #, c-format
 msgid "invalid type/length (%s/%d) in vector allocation"
 msgstr " ベクトル割り当てにおいて，型か長さ (%s か %d) が不正です "
 
-#: src/main/memory.c:2663
+#: src/main/memory.c:2688
 #, c-format
 msgid "cannot allocate vector of size %0.1f Gb"
 msgstr " サイズ %0.1f Gb のベクトルを割り当てることができません "
 
-#: src/main/memory.c:2667
+#: src/main/memory.c:2692
 #, c-format
 msgid "cannot allocate vector of size %0.1f Mb"
 msgstr " サイズ %0.1f Mb のベクトルを割り当てることができません "
 
-#: src/main/memory.c:2671
+#: src/main/memory.c:2696
 #, c-format
 msgid "cannot allocate vector of size %0.f Kb"
 msgstr " サイズ %0.f Kb のベクトルを割り当てることができません "
 
-#: src/main/memory.c:2911
+#: src/main/memory.c:2936
 #, c-format
 msgid ""
 "\n"
 "%.1f Mbytes of cons cells used (%d%%)\n"
 msgstr ""
 
-#: src/main/memory.c:2916
+#: src/main/memory.c:2941
 #, c-format
 msgid "%.1f Mbytes of vectors used (%d%%)\n"
 msgstr ""
 
-#: src/main/memory.c:2939
+#: src/main/memory.c:2964
 #, c-format
 msgid "GC encountered a node (%p) with type FREESXP (was %s) at memory.c:%d"
 msgstr ""
 
-#: src/main/memory.c:2944 src/main/memory.c:2949
+#: src/main/memory.c:2969 src/main/memory.c:2974
 #, c-format
 msgid "GC encountered a node (%p) with an unknown SEXP type: %s at memory.c:%d"
 msgstr ""
 
-#: src/main/memory.c:2959
+#: src/main/memory.c:2984
 msgid "internal TRUE value has been modified"
 msgstr ""
 
-#: src/main/memory.c:2963
+#: src/main/memory.c:2988
 msgid "internal FALSE value has been modified"
 msgstr ""
 
-#: src/main/memory.c:2968
+#: src/main/memory.c:2993
 msgid "internal logical NA value has been modified"
 msgstr ""
 
-#: src/main/memory.c:3065
+#: src/main/memory.c:3090
 msgid "protect(): protection stack overflow"
 msgstr " protect()：プロテクションスタックが溢れました "
 
-#: src/main/memory.c:3072
+#: src/main/memory.c:3097
 #, fuzzy, c-format
 msgid "unprotect(): only %d protected item"
 msgid_plural "unprotect(): only %d protected items"
 msgstr[0] " unprotect(): %d 個の保護された項目  "
 
-#: src/main/memory.c:3107
+#: src/main/memory.c:3132
 msgid "unprotect_ptr: pointer not found"
 msgstr " unprotect_ptr：ポインターがありません "
 
-#: src/main/memory.c:3145
+#: src/main/memory.c:3170
 #, fuzzy, c-format
 msgid "R_Reprotect: only %d protected items, can't reprotect index %d"
 msgid_plural "R_Reprotect: only %d protected items, can't reprotect index %d"
 msgstr[0] " unprotect(): %d 個の保護された項目  "
 
-#: src/main/memory.c:3197
+#: src/main/memory.c:3222
 #, fuzzy, c-format
 msgid "'Calloc()' function could not allocate memory (%.0f of %u bytes)"
 msgstr " Calloc がメモリー (%2$u バイトの %1$.0f) を割りあてられませんでした "
 
-#: src/main/memory.c:3207
+#: src/main/memory.c:3232
 #, fuzzy, c-format
 msgid "'Realloc()' function could not re-allocate memory (%.0f bytes)"
 msgstr " Realloc がメモリーを再確保できません (%.0f バイト)  "
 
-#: src/main/memory.c:3338
+#: src/main/memory.c:3363
 #, c-format
 msgid "value of 'SET_ATTRIB' must be a pairlist or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3371
+#: src/main/memory.c:3396
 #, c-format
 msgid "LENGTH or similar applied to %s object"
 msgstr ""
 
-#: src/main/memory.c:3386
+#: src/main/memory.c:3411
 #, c-format
 msgid "'CHAR()' function can only be applied to a 'CHARSXP', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3393
+#: src/main/memory.c:3418
 #, c-format
 msgid ""
 "'STRING_ELT()' function can only be applied to a 'character vector', not a "
 "'%s'"
 msgstr ""
 
-#: src/main/memory.c:3403
+#: src/main/memory.c:3428
 #, c-format
 msgid "'VECTOR_ELT()' function can only be applied to a 'list', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3410
+#: src/main/memory.c:3435
 #, c-format
 msgid "'LOGICAL()' function can only be applied to a 'logical', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3418
+#: src/main/memory.c:3443
 #, c-format
 msgid "'INTEGER()' function can only be applied to a 'integer', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3425
+#: src/main/memory.c:3450
 #, fuzzy, c-format
 msgid "'RAW()' function can only be applied to a 'raw', not a '%s'"
 msgstr " nsl 関数はホスト '%s' を解決できませんでした "
 
-#: src/main/memory.c:3432
+#: src/main/memory.c:3457
 #, c-format
 msgid "'REAL()' function can only be applied to a 'numeric', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3439
+#: src/main/memory.c:3464
 #, fuzzy, c-format
 msgid "'COMPLEX()' function can only be applied to a 'complex', not a '%s'"
 msgstr " nsl 関数はホスト '%s' を解決できませんでした "
 
-#: src/main/memory.c:3448
+#: src/main/memory.c:3473
 msgid "not safe to return vector pointer"
 msgstr " ベクトルのポインタを返すのは安全ではありません "
 
-#: src/main/memory.c:3454
+#: src/main/memory.c:3479
 #, c-format
 msgid ""
 "'SET_STRING_ELT()' function can only be applied to a 'character vector', not "
 "a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3457
+#: src/main/memory.c:3482
 #, c-format
 msgid "value of 'SET_STRING_ELT()' function must be a 'CHARSXP' not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3460
+#: src/main/memory.c:3485
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_STRING_ELT()' function"
 msgstr ""
 
-#: src/main/memory.c:3471
+#: src/main/memory.c:3496
 #, c-format
 msgid "'SET_VECTOR_ELT()' function can only be applied to a 'list', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3475
+#: src/main/memory.c:3500
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_VECTOR_ELT()' function"
 msgstr ""
 
-#: src/main/memory.c:3652
+#: src/main/memory.c:3677
 #, c-format
 msgid "value of 'SET_CXTAIL()' function must be a 'char' or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3733
+#: src/main/memory.c:3758
 msgid "memory profiling is not available on this system"
 msgstr " メモリプロファリングはこのシステムでは使えません "
 
-#: src/main/memory.c:3798
+#: src/main/memory.c:3823
 #, fuzzy, c-format
 msgid "'Rprofmem()': cannot open output file '%s'"
 msgstr " Rprofmem: ファイル '%s' を開くことができません "
 
-#: src/main/memory.c:3834
+#: src/main/memory.c:3859
 msgid "R_AllocStringBuffer(-1) used: please report"
 msgstr ""
 
-#: src/main/memory.c:3854
+#: src/main/memory.c:3879
 #, fuzzy, c-format
 msgid "could not allocate memory (%u Mb) in 'R_AllocStringBuffer()' function"
 msgstr " 'read.dcf' のためのメモリを割り当てられませんでした "
 
-#: src/main/memory.c:3906
+#: src/main/memory.c:3931
 #, c-format
 msgid "long vectors not supported yet: %s:%d"
 msgstr ""
@@ -6969,7 +6969,7 @@ msgstr " xdr 複素数データの入力エラーが起きました "
 
 #: src/main/saveload.c:1780 src/main/serialize.c:1987
 #: src/main/serialize.c:2603 src/modules/internet/internet.c:349
-#: src/modules/internet/internet.c:406 src/modules/internet/internet.c:510
+#: src/modules/internet/internet.c:410 src/modules/internet/internet.c:519
 msgid "write failed"
 msgstr " 書き込みに失敗しました "
 
@@ -8430,8 +8430,8 @@ msgstr " コネクションは読み込みのために開かれていません "
 msgid "allocation of url connection failed"
 msgstr " url 接続の割り当てに失敗しました "
 
-#: src/modules/internet/internet.c:318 src/modules/internet/internet.c:395
-#: src/modules/internet/internet.c:496
+#: src/modules/internet/internet.c:318 src/modules/internet/internet.c:399
+#: src/modules/internet/internet.c:505
 msgid "Download progress"
 msgstr " ダウンロード実行中です "
 
@@ -8440,201 +8440,201 @@ msgstr " ダウンロード実行中です "
 msgid "cannot open URL '%s', reason '%s'"
 msgstr "URL '%s' を開くことができません, 理由は '%s' です "
 
-#: src/modules/internet/internet.c:345 src/modules/internet/internet.c:370
-#: src/modules/internet/internet.c:470
+#: src/modules/internet/internet.c:345 src/modules/internet/internet.c:373
+#: src/modules/internet/internet.c:478
 #, c-format
 msgid "cannot open destfile '%s', reason '%s'"
 msgstr " 目標ファイル '%s' を開くことができません, 理由は '%s' です "
 
-#: src/modules/internet/internet.c:374 src/modules/internet/internet.c:475
+#: src/modules/internet/internet.c:377 src/modules/internet/internet.c:483
 #, c-format
 msgid "trying URL '%s'\n"
 msgstr " URL '%s' を試しています \n"
 
-#: src/modules/internet/internet.c:381 src/modules/internet/internet.c:482
+#: src/modules/internet/internet.c:384 src/modules/internet/internet.c:490
 msgid "opened URL\n"
 msgstr " 開かれた URL \n"
 
-#: src/modules/internet/internet.c:418 src/modules/internet/internet.c:522
+#: src/modules/internet/internet.c:423 src/modules/internet/internet.c:532
 #, c-format
 msgid "%d%% downloaded"
 msgstr ""
 
-#: src/modules/internet/internet.c:437 src/modules/internet/internet.c:541
+#: src/modules/internet/internet.c:442 src/modules/internet/internet.c:551
 #, c-format
 msgid "downloaded %0.1f MB"
 msgstr ""
 
-#: src/modules/internet/internet.c:439 src/modules/internet/internet.c:544
+#: src/modules/internet/internet.c:444 src/modules/internet/internet.c:554
 #, c-format
 msgid "downloaded %d KB"
 msgstr ""
 
-#: src/modules/internet/internet.c:441 src/modules/internet/internet.c:546
+#: src/modules/internet/internet.c:446 src/modules/internet/internet.c:556
 #, c-format
 msgid "downloaded %d byte"
 msgid_plural "downloaded %d bytes"
 msgstr[0] ""
 
-#: src/modules/internet/internet.c:452 src/modules/internet/internet.c:557
-#, c-format
-msgid "downloaded length %d != reported length %d"
+#: src/modules/internet/internet.c:457 src/modules/internet/internet.c:567
+#, fuzzy, c-format
+msgid "downloaded length %0.f != reported length %0.f"
 msgstr " ダウンロードされた長さ %d != 報告された長さ %d です "
 
-#: src/modules/internet/internet.c:456 src/modules/internet/internet.c:562
+#: src/modules/internet/internet.c:461 src/modules/internet/internet.c:572
 #, c-format
 msgid "cannot open URL '%s'"
 msgstr " URL '%s' を開けません "
 
-#: src/modules/internet/internet.c:590 src/modules/internet/internet.c:829
+#: src/modules/internet/internet.c:600 src/modules/internet/internet.c:840
 #, c-format
 msgid "cannot open: HTTP status was '%d %s'"
 msgstr " 開けません：HTTP ステータスは '%d %s' です "
 
-#: src/modules/internet/internet.c:599 src/modules/internet/internet.c:843
+#: src/modules/internet/internet.c:610 src/modules/internet/internet.c:855
 #, c-format
-msgid "Content type '%s' length %d byte (%0.1f MB)\n"
-msgid_plural "Content type '%s' length %d bytes (%0.1f MB)\n"
+msgid "Content type '%s' length %0.0f byte (%0.1f MB)\n"
+msgid_plural "Content type '%s' length %0.0f bytes (%0.1f MB)\n"
 msgstr[0] ""
 
-#: src/modules/internet/internet.c:603 src/modules/internet/internet.c:845
+#: src/modules/internet/internet.c:614 src/modules/internet/internet.c:857
 #, c-format
 msgid "Content type '%s' length %d byte (%d KB)\n"
 msgid_plural "Content type '%s' length %d bytes (%d KB)\n"
 msgstr[0] ""
 
-#: src/modules/internet/internet.c:607 src/modules/internet/internet.c:847
+#: src/modules/internet/internet.c:618 src/modules/internet/internet.c:859
 #, c-format
 msgid "Content type '%s' length %d byte\n"
 msgid_plural "Content type '%s' length %d bytes\n"
 msgstr[0] ""
 
-#: src/modules/internet/internet.c:610
+#: src/modules/internet/internet.c:621
 #, c-format
 msgid "Content type '%s' length unknown\n"
 msgstr ""
 
-#: src/modules/internet/internet.c:653
+#: src/modules/internet/internet.c:664
 #, c-format
-msgid "ftp data connection made, file length %d bytes\n"
+msgid "ftp data connection made, file length %ld bytes\n"
 msgstr ""
 
-#: src/modules/internet/internet.c:655
+#: src/modules/internet/internet.c:666
 msgid "ftp data connection made, file length unknown\n"
 msgstr ""
 
-#: src/modules/internet/internet.c:773 src/modules/internet/internet.c:934
+#: src/modules/internet/internet.c:784 src/modules/internet/internet.c:946
 msgid "InternetOpenUrl timed out"
 msgstr " InternetOpenUrl はタイムアウトしました "
 
-#: src/modules/internet/internet.c:800 src/modules/internet/internet.c:814
-#: src/modules/internet/internet.c:956 src/modules/internet/internet.c:965
+#: src/modules/internet/internet.c:811 src/modules/internet/internet.c:825
+#: src/modules/internet/internet.c:968 src/modules/internet/internet.c:977
 #, c-format
 msgid "InternetOpenUrl failed: '%s'"
 msgstr " InternetOpenUrl の失敗： '%s'  "
 
-#: src/modules/internet/internet.c:869
+#: src/modules/internet/internet.c:881
 msgid "Internet read timed out"
 msgstr " インターネット読み込みのタイムアウト "
 
-#: src/modules/internet/internet.c:914
+#: src/modules/internet/internet.c:926
 #, c-format
 msgid "using Asynchronous WinInet calls, timeout %d sec\n"
 msgid_plural "using Asynchronous WinInet calls, timeout %d secs\n"
 msgstr[0] ""
 
-#: src/modules/internet/internet.c:942
+#: src/modules/internet/internet.c:954
 msgid "using Synchronous WinInet calls\n"
 msgstr ""
 
-#: src/modules/internet/nanoftp.c:283 src/modules/internet/nanoftp.c:296
-#: src/modules/internet/nanoftp.c:307 src/modules/internet/nanoftp.c:341
-#: src/modules/internet/nanoftp.c:351
+#: src/modules/internet/nanoftp.c:285 src/modules/internet/nanoftp.c:298
+#: src/modules/internet/nanoftp.c:309 src/modules/internet/nanoftp.c:343
+#: src/modules/internet/nanoftp.c:353
 msgid "RxmlNanoFTPScanURL: overlong (invalid?) URL"
 msgstr " RxmlNanoFTPScanURL: 長すぎる (不正な？) URL "
 
-#: src/modules/internet/nanoftp.c:384
+#: src/modules/internet/nanoftp.c:386
 msgid "removing FTP proxy info"
 msgstr " FTP プロキシの情報を取り除いています "
 
-#: src/modules/internet/nanoftp.c:386
+#: src/modules/internet/nanoftp.c:388
 #, c-format
 msgid "using FTP proxy '%s'"
 msgstr " FTP プロキシ '%s' を使います "
 
-#: src/modules/internet/nanoftp.c:397 src/modules/internet/nanoftp.c:426
+#: src/modules/internet/nanoftp.c:399 src/modules/internet/nanoftp.c:428
 msgid "RxmlNanoFTPScanProxy: overlong (invalid?) URL"
 msgstr " RxmlNanoFTPScanProxy: 長すぎる (不正な？) URL "
 
-#: src/modules/internet/nanoftp.c:446
+#: src/modules/internet/nanoftp.c:448
 #, fuzzy
 msgid "error allocating FTP context"
 msgstr " コネクションへの書き込みエラーが発生しました "
 
-#: src/modules/internet/nanoftp.c:566
+#: src/modules/internet/nanoftp.c:568
 #, c-format
 msgid "RxmlNanoFTPGetMore : buffer full %d"
 msgstr ""
 
-#: src/modules/internet/nanoftp.c:575
+#: src/modules/internet/nanoftp.c:577
 #, fuzzy
 msgid "recv failed"
 msgstr " 読み込みに失敗しました "
 
-#: src/modules/internet/nanoftp.c:580
+#: src/modules/internet/nanoftp.c:582
 #, c-format
 msgid "RxmlNanoFTPGetMore : read %d [%d - %d]"
 msgstr ""
 
-#: src/modules/internet/nanoftp.c:664
+#: src/modules/internet/nanoftp.c:668
 #, c-format
 msgid "Got %d"
 msgstr ""
 
-#: src/modules/internet/nanoftp.c:739 src/modules/internet/nanoftp.c:765
-#: src/modules/internet/nanoftp.c:919 src/modules/internet/nanoftp.c:939
-#: src/modules/internet/nanoftp.c:978 src/modules/internet/nanoftp.c:1007
-#: src/modules/internet/nanoftp.c:1028 src/modules/internet/nanoftp.c:1144
-#: src/modules/internet/nanoftp.c:1208 src/modules/internet/nanoftp.c:1255
-#: src/modules/internet/nanoftp.c:1275
+#: src/modules/internet/nanoftp.c:743 src/modules/internet/nanoftp.c:769
+#: src/modules/internet/nanoftp.c:923 src/modules/internet/nanoftp.c:943
+#: src/modules/internet/nanoftp.c:982 src/modules/internet/nanoftp.c:1011
+#: src/modules/internet/nanoftp.c:1032 src/modules/internet/nanoftp.c:1148
+#: src/modules/internet/nanoftp.c:1212 src/modules/internet/nanoftp.c:1259
+#: src/modules/internet/nanoftp.c:1279
 #, fuzzy
 msgid "send failed"
 msgstr " 読み込みに失敗しました "
 
-#: src/modules/internet/nanoftp.c:825
+#: src/modules/internet/nanoftp.c:829
 msgid "cannot resolve host"
 msgstr " ホストの名前解決が出来ません "
 
-#: src/modules/internet/nanoftp.c:855
+#: src/modules/internet/nanoftp.c:859
 msgid "failed to connect to server"
 msgstr " サーバーに接続することができませんでした "
 
-#: src/modules/internet/nanoftp.c:866
+#: src/modules/internet/nanoftp.c:870
 msgid "failed to get response from server"
 msgstr " サーバーからの応答を受け取れませんでした "
 
-#: src/modules/internet/nanoftp.c:1090
+#: src/modules/internet/nanoftp.c:1094
 msgid "FTP server asking for ACCNT on anonymous"
 msgstr ""
 
-#: src/modules/internet/nanoftp.c:1129
+#: src/modules/internet/nanoftp.c:1133
 msgid "RxmlNanoFTPGetConnection: failed to create socket"
 msgstr " RxmlNanoFTPGetConnection: ソケットの作成に失敗しました "
 
-#: src/modules/internet/nanoftp.c:1165
+#: src/modules/internet/nanoftp.c:1169
 #, fuzzy
 msgid "Invalid answer to PASV"
 msgstr " 区切り文字が不正です "
 
-#: src/modules/internet/nanoftp.c:1175
+#: src/modules/internet/nanoftp.c:1179
 msgid "failed to create a data connection"
 msgstr " データコネクションを作成できませんでした "
 
-#: src/modules/internet/nanoftp.c:1183
+#: src/modules/internet/nanoftp.c:1187
 msgid "failed to bind a port"
 msgstr " ポートのバインドに失敗しました "
 
-#: src/modules/internet/nanoftp.c:1190
+#: src/modules/internet/nanoftp.c:1194
 #, c-format
 msgid "could not listen on port %d"
 msgstr " ポート %d から listen できませんでした "
@@ -8657,47 +8657,47 @@ msgstr " HTTP プロキシ '%s' を使います "
 msgid "RxmlNanoHTTPScanProxy: overlong (invalid?) URL"
 msgstr " RxmlNanoHTTPScanProxy: 長すぎる(不正な？) URL "
 
-#: src/modules/internet/nanohttp.c:1097
+#: src/modules/internet/nanohttp.c:1102
 #, c-format
 msgid "unable to resolve '%s'"
 msgstr " '%s' を解決することができません "
 
-#: src/modules/internet/nanohttp.c:1124
+#: src/modules/internet/nanohttp.c:1135
 #, c-format
 msgid "connected to '%s' on port %d."
 msgstr " '%s' にポート %d で接続しました "
 
-#: src/modules/internet/nanohttp.c:1129
+#: src/modules/internet/nanohttp.c:1140
 #, c-format
 msgid "unable to connect to '%s' on port %d."
 msgstr " '%s' をポート %d でコネクトできません "
 
-#: src/modules/internet/nanohttp.c:1393
+#: src/modules/internet/nanohttp.c:1404
 #, c-format
 msgid "ERROR: overflowed buffer by %d byte\n"
 msgid_plural "ERROR: overflowed buffer by %d bytes\n"
 msgstr[0] ""
 
-#: src/modules/internet/nanohttp.c:1420
+#: src/modules/internet/nanohttp.c:1431
 msgid ""
 "Proxy authentication failed:\tplease re-enter the credentials or hit Cancel"
 msgstr ""
 
-#: src/modules/internet/nanohttp.c:1434
+#: src/modules/internet/nanohttp.c:1445
 #, c-format
 msgid "redirect to: '%s'"
 msgstr " \"%s\" へリダイレクトされます "
 
-#: src/modules/internet/nanohttp.c:1445
+#: src/modules/internet/nanohttp.c:1456
 msgid "too many redirects, aborting ..."
 msgstr " リダイレクトの数が多すぎます、放棄します… "
 
-#: src/modules/internet/nanohttp.c:1458
+#: src/modules/internet/nanohttp.c:1469
 #, c-format
 msgid "Code %d, content-type '%s'"
 msgstr ""
 
-#: src/modules/internet/nanohttp.c:1461
+#: src/modules/internet/nanohttp.c:1472
 #, c-format
 msgid "Code %d, no content-type"
 msgstr ""

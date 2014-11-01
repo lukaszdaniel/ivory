@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-19 18:10+0200\n"
+"POT-Creation-Date: 2014-11-01 08:36+0100\n"
 "PO-Revision-Date: 2010-10-01 20:58+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -23,60 +23,60 @@ msgstr ""
 msgid "cannot clip to rotated viewport"
 msgstr "Impossible de couper une vue pivotée"
 
-#: grid.c:511 grid.c:655
+#: grid.c:518 grid.c:662
 #, c-format
 msgid "Viewport '%s' was not found"
 msgstr ""
 
-#: grid.c:690 grid.c:695 grid.c:784 grid.c:789
+#: grid.c:697 grid.c:702 grid.c:791 grid.c:796
 #, fuzzy
 msgid "cannot pop the top-level viewport ('grid' and 'graphics' output mixed?)"
 msgstr ""
 "Impossible de rendre la vue de plus haut niveau active (grid et sorties "
 "graphiques mixées ?)"
 
-#: grid.c:969
+#: grid.c:976
 msgid "attempt to plot on null device"
 msgstr "tentative de dessin dans un périphérique 'null'"
 
-#: grid.c:1301
+#: grid.c:1308
 #, fuzzy
 msgid "there is no layout defined"
 msgstr "Aucune mise en page définie"
 
-#: grid.c:1521
+#: grid.c:1528
 #, fuzzy
 msgid "polygon edge not found (zero-width or zero-height?)"
 msgstr "Polygône non trouvé (longueur ou largeur nulle?)"
 
-#: grid.c:1530
+#: grid.c:1537
 #, fuzzy
 msgid "polygon edge not found"
 msgstr "Extrémités de polygône non trouvées"
 
-#: grid.c:1684
+#: grid.c:1691
 #, fuzzy
 msgid "require at least two points to draw arrow"
 msgstr "Il faut au moins deux points pour tracer une flêche"
 
-#: grid.c:2000
+#: grid.c:2007
 #, fuzzy
 msgid "non-finite control point in Xspline"
 msgstr "Point de contrôle non fini dans Xspline"
 
-#: grid.c:2865
+#: grid.c:2872
 msgid "non-finite x or y in graphics path"
 msgstr "x ou y infinis dans le chemin graphique"
 
-#: grid.c:2906
+#: grid.c:2913
 msgid "Empty raster"
 msgstr ""
 
-#: grid.c:3358
+#: grid.c:3365
 msgid "invalid plotting symbol"
 msgstr "symboles graphiques incorrects"
 
-#: grid.c:3444
+#: grid.c:3451
 #, fuzzy
 msgid "unable to clip to rotated rectangle"
 msgstr "Impossible de couper au rectangle pivoté"
