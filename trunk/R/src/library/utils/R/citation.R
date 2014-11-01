@@ -1074,7 +1074,7 @@ function(package = "base", lib.loc = NULL, auto = NULL)
     if((!is.null(meta$Priority)) && (meta$Priority == "base")) {
     	cit <- citation("base", auto = FALSE)
     	attr(cit, "mheader")[1L] <-
-	    paste0("The ", sQuote(package), " package is part of R.  ",
+	    paste0(gettextf("The %s package is part of R.", sQuote(package), domain = "R-utils"), "  ",
 		   attr(cit, "mheader")[1L])
         return(.citation(cit))
     }
