@@ -1,13 +1,12 @@
 
-R Under development (unstable) (2014-10-22 r23) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-11-04 r43) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
-This version of R supports extended localization
-See README-LUKI file for details
+Ivory is a modified version of R. See README-IVORY file for details.
 Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
 
-This modified version of R is not part of the R project, so please do not report bugs
+Ivory is not part of the R project, so please do not report bugs
 via r-bugs or the R website - instead refer to the author.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -189,7 +188,7 @@ Available components:
 [1] "order"     "height"    "dc"        "merge"     "diss"      "call"     
 [7] "order.lab"
 > cat('Time elapsed: ', proc.time() - .p00,'\n')
-Time elapsed:  0.015 0.004 0.018 0 0 
+Time elapsed:  0.009 0.008 0.017 0 0 
 > 
 > data(agriculture)
 > data(ruspini)
@@ -199,7 +198,7 @@ Time elapsed:  0.015 0.004 0.018 0 0
 > drusp0  <- diana(ruspini, keep.diss=FALSE, keep.data=FALSE)
 > drusp1  <- diana(ruspini, metric = "manhattan")
 > cat('Time elapsed: ', proc.time() - .p0,'\n')
-Time elapsed:  0 0 0.003 0 0 
+Time elapsed:  0 0.001 0.003 0 0 
 > 
 > summary(dia.agr)
 Merge:
@@ -551,4 +550,4 @@ Time elapsed:  0.001 0 0.001 0 0
 > 
 > proc.time()
    user  system elapsed 
-  0.428   0.091   0.488 
+  0.227   0.052   0.269 
