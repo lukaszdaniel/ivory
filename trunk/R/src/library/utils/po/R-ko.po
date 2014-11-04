@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-11-01 08:37\n"
+"POT-Creation-Date: 2014-11-04 06:49\n"
 "PO-Revision-Date: 2012-03-09 06:16+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -1255,6 +1255,11 @@ msgstr ""
 msgid ""
 "The %s is being opened in your default mail program\n"
 "for you to complete and send."
+msgstr ""
+
+#. R/citation.R: gettextf("The %s package is part of R.", sQuote(package), domain = "R-utils")
+#: R/citation.R:0
+msgid "The %s package is part of R."
 msgstr ""
 
 #. R/relist.R: stop("The 'flesh' argument does not contain a skeleton attribute.\nEither ensure you unlist a relistable object, or specify the skeleton separately.")
@@ -2540,7 +2545,7 @@ msgid "package %s in library %s will not be updated"
 msgstr "패키지 '%s' 는 라이브러리 '%s' 내에서 업데이트 되지 않을 것입니다"
 
 #. R/citation.R: gettextf("package %s not found", sQuote(package))
-#. R/indices.R: gettextf("package %s not found", sQuote(pkg))
+#. R/indices.R: gettextf("package %s not found", sQuote(pkg), domain = "R-utils")
 #: R/citation.R:0 R/indices.R:0
 msgid "package %s not found"
 msgstr "패키지 %s 를 찾을 수 없습니다 "

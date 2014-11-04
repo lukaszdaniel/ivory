@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.2.0\n"
-"POT-Creation-Date: 2014-11-01 08:37\n"
+"POT-Creation-Date: 2014-11-04 06:49\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4988,16 +4988,16 @@ msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettext("checking for unstated dependencies in examples ...", domain = "R-tools")
+#. R/check.R: gettextf("checking for unstated dependencies in %s directory ...", sQuote(test_dir),     domain = "R-tools")
 
-msgid "checking for unstated dependencies in examples ..."
+msgid "checking for unstated dependencies in %s directory ..."
 msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettext("checking for unstated dependencies in tests ...", domain = "R-tools")
+#. R/check.R: gettext("checking for unstated dependencies in examples ...", domain = "R-tools")
 
-msgid "checking for unstated dependencies in tests ..."
+msgid "checking for unstated dependencies in examples ..."
 msgstr ""
 
 
@@ -5148,6 +5148,13 @@ msgstr ""
 #. R/check.R: gettext("checking tests ...", domain = "R-tools")
 
 msgid "checking tests ..."
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettextf("checking tests in %s directory ...", sQuote(test_dir), domain = "R-tools")
+
+msgid "checking tests in %s directory ..."
 msgstr ""
 
 
@@ -5480,6 +5487,13 @@ msgstr ""
 #. R/index.R: gettextf("directory %s does not exist", sQuote(demoDir))
 
 msgid "directory %s does not exist"
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettextf("directory %s was not found\n", sQuote(test_dir), domain = "R-tools")
+
+msgid "directory %s was not found"
 msgstr ""
 
 

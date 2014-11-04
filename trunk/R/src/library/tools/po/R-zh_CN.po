@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-11-01 08:37\n"
+"POT-Creation-Date: 2014-11-04 06:49\n"
 "PO-Revision-Date: 2005-02-04 08:37+0000\n"
 "Last-Translator: 陈斐 <feic@avaya.com>\n"
 "Language-Team: Chinese\n"
@@ -4067,14 +4067,15 @@ msgstr ""
 msgid "checking for sufficient/correct file permissions ..."
 msgstr ""
 
+#. R/check.R: gettextf("checking for unstated dependencies in %s directory ...", sQuote(test_dir),     domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking for unstated dependencies in %s directory ..."
+msgstr "安装至"
+
 #. R/check.R: gettext("checking for unstated dependencies in examples ...", domain = "R-tools")
 #: R/check.R:0
 msgid "checking for unstated dependencies in examples ..."
-msgstr ""
-
-#. R/check.R: gettext("checking for unstated dependencies in tests ...", domain = "R-tools")
-#: R/check.R:0
-msgid "checking for unstated dependencies in tests ..."
 msgstr ""
 
 #. R/check.R: gettext("checking for unstated dependencies in vignettes ...", domain = "R-tools")
@@ -4194,6 +4195,12 @@ msgstr ""
 #, fuzzy
 msgid "checking tests ..."
 msgstr "制造DLL…"
+
+#. R/check.R: gettextf("checking tests in %s directory ...", sQuote(test_dir), domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking tests in %s directory ..."
+msgstr "空的'data'目录"
 
 #. R/check.R: gettext("checking top-level files ...", domain = "R-tools")
 #: R/check.R:0
@@ -4461,6 +4468,12 @@ msgstr "目录'%s'没有Rd对象"
 #, fuzzy
 msgid "directory %s does not exist"
 msgstr "不存在'%s'这个文件目录"
+
+#. R/check.R: gettextf("directory %s was not found\n", sQuote(test_dir), domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "directory %s was not found"
+msgstr "找不到'%s'这个文件"
 
 #. R/RdConv2.R: gettextf("docType %s is unrecognized", sQuote(docTypes[i]))
 #: R/RdConv2.R:0

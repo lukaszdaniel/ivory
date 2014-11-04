@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-11 13:45\n"
+"POT-Creation-Date: 2014-11-04 06:48\n"
 "PO-Revision-Date: 2012-09-28 22:18+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -3180,7 +3180,7 @@ msgstr "trimma snitt er ikkje definerte for komplekse tal"
 msgid "unable to find a plausible encoding"
 msgstr "klarte ikkje finna ei sannsynleg teiknkoding"
 
-#. R/namespace.R: gettextf("unable to load R code in package %s", sQuote(package))
+#. R/namespace.R: gettextf("unable to load R code in package %s", sQuote(package), domain = "R-base")
 #: R/namespace.R:0
 msgid "unable to load R code in package %s"
 msgstr "klarte ikkje lasta R-kode i pakken «%s»"

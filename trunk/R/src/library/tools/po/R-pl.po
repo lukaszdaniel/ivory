@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-01 08:37\n"
+"POT-Creation-Date: 2014-11-04 06:49\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -4074,15 +4074,15 @@ msgstr "szukanie przenośnego użycia $(BLAS_LIBS) oraz $(LAPACK_LIBS) ..."
 msgid "checking for sufficient/correct file permissions ..."
 msgstr "szukanie wystarczających/poprawnych uprawnień do pliku ..."
 
+#. R/check.R: gettextf("checking for unstated dependencies in %s directory ...", sQuote(test_dir),     domain = "R-tools")
+#: R/check.R:0
+msgid "checking for unstated dependencies in %s directory ..."
+msgstr "szukanie niezadeklarowanych zależności w katalogu %s ..."
+
 #. R/check.R: gettext("checking for unstated dependencies in examples ...", domain = "R-tools")
 #: R/check.R:0
 msgid "checking for unstated dependencies in examples ..."
 msgstr "szukanie niezadeklarowanych zależności w przykładach ..."
-
-#. R/check.R: gettext("checking for unstated dependencies in tests ...", domain = "R-tools")
-#: R/check.R:0
-msgid "checking for unstated dependencies in tests ..."
-msgstr "szukanie niezadeklarowanych zależności w testach ..."
 
 #. R/check.R: gettext("checking for unstated dependencies in vignettes ...", domain = "R-tools")
 #: R/check.R:0
@@ -4193,6 +4193,11 @@ msgstr "sprawdzanie rozmiarów plików PDF w 'inst/doc' ..."
 #: R/check.R:0
 msgid "checking tests ..."
 msgstr "sprawdzanie testów ..."
+
+#. R/check.R: gettextf("checking tests in %s directory ...", sQuote(test_dir), domain = "R-tools")
+#: R/check.R:0
+msgid "checking tests in %s directory ..."
+msgstr "sprawdzanie testów w katalogu %s ..."
 
 #. R/check.R: gettext("checking top-level files ...", domain = "R-tools")
 #: R/check.R:0
@@ -4444,6 +4449,11 @@ msgstr "katalog %s nie zawiera obiektów Rd"
 #: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0 R/admin.R:0 R/index.R:0
 msgid "directory %s does not exist"
 msgstr "katalog %s nie istnieje"
+
+#. R/check.R: gettextf("directory %s was not found\n", sQuote(test_dir), domain = "R-tools")
+#: R/check.R:0
+msgid "directory %s was not found"
+msgstr "nie znaleziono katalogu %s"
 
 #. R/RdConv2.R: gettextf("docType %s is unrecognized", sQuote(docTypes[i]))
 #: R/RdConv2.R:0

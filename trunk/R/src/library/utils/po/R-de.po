@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-11-01 08:37\n"
+"POT-Creation-Date: 2014-11-04 06:49\n"
 "PO-Revision-Date: 2012-09-10 14:39+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -1259,6 +1259,11 @@ msgstr ""
 msgid ""
 "The %s is being opened in your default mail program\n"
 "for you to complete and send."
+msgstr ""
+
+#. R/citation.R: gettextf("The %s package is part of R.", sQuote(package), domain = "R-utils")
+#: R/citation.R:0
+msgid "The %s package is part of R."
 msgstr ""
 
 #. R/relist.R: stop("The 'flesh' argument does not contain a skeleton attribute.\nEither ensure you unlist a relistable object, or specify the skeleton separately.")
@@ -2546,7 +2551,7 @@ msgid "package %s in library %s will not be updated"
 msgstr "Paket '%s' in der Bibliothek '%s' wird nicht aktualisiert"
 
 #. R/citation.R: gettextf("package %s not found", sQuote(package))
-#. R/indices.R: gettextf("package %s not found", sQuote(pkg))
+#. R/indices.R: gettextf("package %s not found", sQuote(pkg), domain = "R-utils")
 #: R/citation.R:0 R/indices.R:0
 msgid "package %s not found"
 msgstr "Paket %s nicht gefunden"

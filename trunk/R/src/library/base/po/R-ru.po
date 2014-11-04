@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-11 13:45\n"
+"POT-Creation-Date: 2014-11-04 06:48\n"
 "PO-Revision-Date: 2012-03-15 11:24-0500\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -3187,7 +3187,7 @@ msgstr "обрезанные средние не определены для комплексных данных"
 msgid "unable to find a plausible encoding"
 msgstr "не могу найти правдоподобную кодировку"
 
-#. R/namespace.R: gettextf("unable to load R code in package %s", sQuote(package))
+#. R/namespace.R: gettextf("unable to load R code in package %s", sQuote(package), domain = "R-base")
 #: R/namespace.R:0
 msgid "unable to load R code in package %s"
 msgstr "не могу загрузить код R пакета %s"

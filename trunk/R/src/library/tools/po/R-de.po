@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-11-01 08:37\n"
+"POT-Creation-Date: 2014-11-04 06:49\n"
 "PO-Revision-Date: 2012-09-10 14:11+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -4134,14 +4134,15 @@ msgstr ""
 msgid "checking for sufficient/correct file permissions ..."
 msgstr ""
 
+#. R/check.R: gettextf("checking for unstated dependencies in %s directory ...", sQuote(test_dir),     domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking for unstated dependencies in %s directory ..."
+msgstr "installiert nach"
+
 #. R/check.R: gettext("checking for unstated dependencies in examples ...", domain = "R-tools")
 #: R/check.R:0
 msgid "checking for unstated dependencies in examples ..."
-msgstr ""
-
-#. R/check.R: gettext("checking for unstated dependencies in tests ...", domain = "R-tools")
-#: R/check.R:0
-msgid "checking for unstated dependencies in tests ..."
 msgstr ""
 
 #. R/check.R: gettext("checking for unstated dependencies in vignettes ...", domain = "R-tools")
@@ -4261,6 +4262,12 @@ msgstr ""
 #, fuzzy
 msgid "checking tests ..."
 msgstr "erzuege DLL"
+
+#. R/check.R: gettextf("checking tests in %s directory ...", sQuote(test_dir), domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking tests in %s directory ..."
+msgstr "leeres 'data' Verzeichnis"
 
 #. R/check.R: gettext("checking top-level files ...", domain = "R-tools")
 #: R/check.R:0
@@ -4529,6 +4536,12 @@ msgstr "Verzeichnis '%s' enthält keine Rd-Objekte"
 #, fuzzy
 msgid "directory %s does not exist"
 msgstr "Verzeichnis '%s' existiert nicht"
+
+#. R/check.R: gettextf("directory %s was not found\n", sQuote(test_dir), domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "directory %s was not found"
+msgstr "Datei '%s' nicht gefunden"
 
 #. R/RdConv2.R: gettextf("docType %s is unrecognized", sQuote(docTypes[i]))
 #: R/RdConv2.R:0

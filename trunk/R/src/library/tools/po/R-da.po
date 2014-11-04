@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-11-01 08:37\n"
+"POT-Creation-Date: 2014-11-04 06:49\n"
 "PO-Revision-Date: 2012-01-07 22:11+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3897,14 +3897,15 @@ msgstr ""
 msgid "checking for sufficient/correct file permissions ..."
 msgstr ""
 
+#. R/check.R: gettextf("checking for unstated dependencies in %s directory ...", sQuote(test_dir),     domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking for unstated dependencies in %s directory ..."
+msgstr "Argumentnavne i kode men ikke i dokumenter:"
+
 #. R/check.R: gettext("checking for unstated dependencies in examples ...", domain = "R-tools")
 #: R/check.R:0
 msgid "checking for unstated dependencies in examples ..."
-msgstr ""
-
-#. R/check.R: gettext("checking for unstated dependencies in tests ...", domain = "R-tools")
-#: R/check.R:0
-msgid "checking for unstated dependencies in tests ..."
 msgstr ""
 
 #. R/check.R: gettext("checking for unstated dependencies in vignettes ...", domain = "R-tools")
@@ -4018,6 +4019,12 @@ msgstr ""
 #: R/check.R:0
 msgid "checking tests ..."
 msgstr ""
+
+#. R/check.R: gettextf("checking tests in %s directory ...", sQuote(test_dir), domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking tests in %s directory ..."
+msgstr "kan ikke oprette"
 
 #. R/check.R: gettext("checking top-level files ...", domain = "R-tools")
 #: R/check.R:0
@@ -4274,6 +4281,12 @@ msgstr "mappe »%s« indeholder ikke Rd-objekter"
 #, fuzzy
 msgid "directory %s does not exist"
 msgstr "mappe »%s« findes ikke"
+
+#. R/check.R: gettextf("directory %s was not found\n", sQuote(test_dir), domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "directory %s was not found"
+msgstr "Vignette afhængigheder ikke krævet:"
 
 #. R/RdConv2.R: gettextf("docType %s is unrecognized", sQuote(docTypes[i]))
 #: R/RdConv2.R:0

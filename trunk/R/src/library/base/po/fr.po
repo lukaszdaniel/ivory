@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-01 08:36+0100\n"
+"POT-Creation-Date: 2014-11-04 06:48+0100\n"
 "PO-Revision-Date: 2014-01-23 07:50+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -1297,9 +1297,9 @@ msgstr "argument incorrect pour un opérateur unitaire"
 msgid "invalid unary operator"
 msgstr "opérateur unitaire incorrect"
 
-#: src/main/arithmetic.c:1181 src/main/arithmetic.c:1467
-#: src/main/arithmetic.c:1857 src/main/arithmetic.c:2028
-#: src/main/arithmetic.c:2130
+#: src/main/arithmetic.c:1181 src/main/arithmetic.c:1468
+#: src/main/arithmetic.c:1858 src/main/arithmetic.c:2029
+#: src/main/arithmetic.c:2131
 #, fuzzy, c-format
 msgid "unimplemented real function of %d numeric argument"
 msgid_plural "unimplemented real function of %d numeric arguments"
@@ -1310,7 +1310,7 @@ msgstr[1] "fonction réelle de %d arguments numériques non implémentée"
 msgid "unimplemented complex function"
 msgstr "fonction complexe non implémentée"
 
-#: src/main/arithmetic.c:1494
+#: src/main/arithmetic.c:1495
 #, fuzzy, c-format
 msgid "%d argument passed to '%s' function which requires 1 or 2 arguments"
 msgid_plural ""
@@ -1318,20 +1318,20 @@ msgid_plural ""
 msgstr[0] "%d argument passés à '%s' qui en exige %d"
 msgstr[1] "%d arguments passés à '%s' qui en exige %d"
 
-#: src/main/arithmetic.c:1512
+#: src/main/arithmetic.c:1513
 msgid "invalid second argument of length 0"
 msgstr "second argument de taille nulle incorrect"
 
-#: src/main/arithmetic.c:1606 src/main/arithmetic.c:1624
+#: src/main/arithmetic.c:1607 src/main/arithmetic.c:1625
 #, fuzzy, c-format
 msgid "argument '%s' is missing, with no default"
 msgstr "l'argument \"%s\" est manquant, avec aucune valeur par défaut"
 
-#: src/main/arithmetic.c:1630
+#: src/main/arithmetic.c:1631
 msgid "invalid argument 'base' of length 0"
 msgstr "argument 'base' de taille nulle incorrect"
 
-#: src/main/arithmetic.c:2147
+#: src/main/arithmetic.c:2148
 #, fuzzy
 msgid "bad arithmetic function index"
 msgstr "mauvaise fonction"
@@ -4819,38 +4819,46 @@ msgstr ""
 "impossible d'allouer de la mémoire pour une longue chaîne de caractères à la "
 "ligne %d"
 
-#: gram.y:2363 gram.y:2392 gram.y:2426 src/main/gram.y:2364
-#: src/main/gram.y:2393 src/main/gram.y:2427
+#: gram.y:2349 gram.y:2372 gram.y:2408 gram.y:2444 src/main/gram.y:2350
+#: src/main/gram.y:2373 src/main/gram.y:2409 src/main/gram.y:2445
+#, fuzzy, c-format
+msgid "nul character is not allowed (line %d)"
+msgstr ""
+"caractères multioctets incorrects dans l'analyse de code (parser) à la ligne "
+"%d"
+
+#: gram.y:2365 gram.y:2396 gram.y:2432 src/main/gram.y:2366
+#: src/main/gram.y:2397 src/main/gram.y:2433
 #, fuzzy, c-format
 msgid "'%s' used without hex digits in character string starting \"%s\""
 msgstr ""
 "'\\x' non suivi de chiffres hexadécimaux dans la chaîne de caractères "
 "débutant \"%s\""
 
-#: gram.y:2377 gram.y:2411 src/main/gram.y:2378 src/main/gram.y:2412
+#: gram.y:2381 gram.y:2417 src/main/gram.y:2382 src/main/gram.y:2418
 #, fuzzy, c-format
 msgid "'%s' sequences not supported inside backticks (line %d)"
 msgstr "\\uxxxx séquences non supportées dans les 'backticks' (ligne %d)"
 
-#: gram.y:2400 gram.y:2434 src/main/gram.y:2401 src/main/gram.y:2435
+#: gram.y:2404 gram.y:2440 src/main/gram.y:2405 src/main/gram.y:2441
 #, fuzzy, c-format
 msgid "invalid %s sequence (line %d)"
 msgstr "séquence \\u{xxxx} incorrecte (ligne %d)"
 
-#: gram.y:2475 src/main/gram.y:2476
+#: gram.y:2483 src/main/gram.y:2484
 #, c-format
 msgid "'\\%c' is an unrecognized escape in character string starting \"%s\""
 msgstr ""
 "'\\%c' est un code escape non reconnu dans une chaîne de caractères débutant "
 "\"%s\""
 
-#: gram.y:2534 src/main/gram.y:2535
+#: gram.y:2542 src/main/gram.y:2543
 msgid "mixing Unicode and octal/hex escapes in a string is not allowed"
 msgstr ""
 "le mélange de texte Unicode et des caractères à échappement octaux ou "
 "décimaux n'est pas autorisée dans une chaîne de caractères"
 
-#: gram.y:2538 src/main/gram.y:2539
+#: gram.y:2546 src/main/gram.y:2547
 #, c-format
 msgid ""
 "string at line %d containing Unicode escapes not in this locale\n"
@@ -4860,13 +4868,13 @@ msgstr ""
 "Unicode absents de cet environnement linguistique\n"
 "est trop longue (1000 caractères maximum)"
 
-#: gram.y:3136 gram.y:3143 gram.y:3149 gram.y:3156 src/main/gram.y:3137
-#: src/main/gram.y:3144 src/main/gram.y:3150 src/main/gram.y:3157
+#: gram.y:3144 gram.y:3151 gram.y:3157 gram.y:3164 src/main/gram.y:3145
+#: src/main/gram.y:3152 src/main/gram.y:3158 src/main/gram.y:3165
 #, c-format
 msgid "contextstack overflow at line %d"
 msgstr "pile d'entiers débordée vers le haut à la ligne %d"
 
-#: gram.y:3251 src/main/gram.y:3252
+#: gram.y:3259 src/main/gram.y:3260
 #, fuzzy, c-format
 msgid "internal parser error at line %d"
 msgstr "débordement vers le haut du tampon d'entrée à la ligne %d"
