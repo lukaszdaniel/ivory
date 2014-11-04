@@ -1,13 +1,12 @@
 
-R Under development (unstable) (2014-10-22 r23) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-11-04 r43) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
-This version of R supports extended localization
-See README-LUKI file for details
+Ivory is a modified version of R. See README-IVORY file for details.
 Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
 
-This modified version of R is not part of the R project, so please do not report bugs
+Ivory is not part of the R project, so please do not report bugs
 via r-bugs or the R website - instead refer to the author.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -195,7 +194,7 @@ Error in command 'assertWarning(ff())':
 > bibstyle("unsorted", sortKeys = function(refs) seq_along(refs),
 +     fmtPrefix = function(paper) paste0("[", paper$.index, "]"),
 +        .init = TRUE)
-<environment: 0x116c070>
+<environment: 0xe59280>
 > print(refs, .bibstyle = "unsorted")
 [1] R Core Team (2013). _R: A Language and Environment for Statistical
 Computing_. R Foundation for Statistical Computing, Vienna, Austria.
@@ -511,15 +510,17 @@ attr(,"match.length")
 > ## there are few dependencies in a vanilla R installation:
 > ## lattice may not be installed
 > dependsOnPkgs("lattice")
- [1] "effects"                   "Hmisc"                    
- [3] "latticeExtra"              "zoo"                      
- [5] "Matrix"                    "nlme"                     
- [7] "igraph"                    "lmtest"                   
- [9] "RcmdrMisc"                 "sandwich"                 
-[11] "mgcv"                      "FrF2"                     
-[13] "multcomp"                  "Rcmdr"                    
-[15] "RcmdrPlugin.DoE"           "DoE.wrapper"              
-[17] "RcmdrPlugin.Scoring"       "RcmdrPlugin.TeachingDemos"
+ [1] "effects"                   "hexbin"                   
+ [3] "Hmisc"                     "latticeExtra"             
+ [5] "maptools"                  "sp"                       
+ [7] "zoo"                       "Matrix"                   
+ [9] "nlme"                      "igraph"                   
+[11] "lmtest"                    "RcmdrMisc"                
+[13] "sandwich"                  "mgcv"                     
+[15] "FrF2"                      "multcomp"                 
+[17] "Rcmdr"                     "RcmdrPlugin.DoE"          
+[19] "DoE.wrapper"               "RcmdrPlugin.Scoring"      
+[21] "RcmdrPlugin.TeachingDemos"
 > 
 > 
 > 
@@ -1024,7 +1025,7 @@ List of 6 components
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.475 0.048 0.536 0 0 
+Time elapsed:  0.521 0.012 0.534 0 0 
 > grDevices::dev.off()
 null device 
           1 
