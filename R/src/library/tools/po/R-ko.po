@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-11-01 08:37\n"
+"POT-Creation-Date: 2014-11-04 06:49\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -4055,14 +4055,15 @@ msgstr ""
 msgid "checking for sufficient/correct file permissions ..."
 msgstr ""
 
+#. R/check.R: gettextf("checking for unstated dependencies in %s directory ...", sQuote(test_dir),     domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking for unstated dependencies in %s directory ..."
+msgstr "비어있는 'data' 디렉토리입니다"
+
 #. R/check.R: gettext("checking for unstated dependencies in examples ...", domain = "R-tools")
 #: R/check.R:0
 msgid "checking for unstated dependencies in examples ..."
-msgstr ""
-
-#. R/check.R: gettext("checking for unstated dependencies in tests ...", domain = "R-tools")
-#: R/check.R:0
-msgid "checking for unstated dependencies in tests ..."
 msgstr ""
 
 #. R/check.R: gettext("checking for unstated dependencies in vignettes ...", domain = "R-tools")
@@ -4175,6 +4176,12 @@ msgstr ""
 #, fuzzy
 msgid "checking tests ..."
 msgstr "%s를 확인합니다 ..."
+
+#. R/check.R: gettextf("checking tests in %s directory ...", sQuote(test_dir), domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking tests in %s directory ..."
+msgstr "비어있는 'data' 디렉토리입니다"
 
 #. R/check.R: gettext("checking top-level files ...", domain = "R-tools")
 #: R/check.R:0
@@ -4434,6 +4441,12 @@ msgstr "디렉퇴 '%s'는 Rd 객체들을 포함하지 않습니다"
 #, fuzzy
 msgid "directory %s does not exist"
 msgstr "디렉토리 '%s'는 존재하지 않습니다"
+
+#. R/check.R: gettextf("directory %s was not found\n", sQuote(test_dir), domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "directory %s was not found"
+msgstr "파일 '%s'를 찾을 수 없습니다"
 
 #. R/RdConv2.R: gettextf("docType %s is unrecognized", sQuote(docTypes[i]))
 #: R/RdConv2.R:0

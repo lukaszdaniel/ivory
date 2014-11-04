@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-01 08:36+0100\n"
+"POT-Creation-Date: 2014-11-04 06:48+0100\n"
 "PO-Revision-Date: 2005-01-25 12:01+0000\n"
 "Last-Translator: Brian Ripley <Brian.Ripley@R-project.org>\n"
 "Language-Team: R-core <R-core@R-project.org>\n"
@@ -1242,9 +1242,9 @@ msgstr ""
 msgid "invalid unary operator"
 msgstr ""
 
-#: src/main/arithmetic.c:1181 src/main/arithmetic.c:1467
-#: src/main/arithmetic.c:1857 src/main/arithmetic.c:2028
-#: src/main/arithmetic.c:2130
+#: src/main/arithmetic.c:1181 src/main/arithmetic.c:1468
+#: src/main/arithmetic.c:1858 src/main/arithmetic.c:2029
+#: src/main/arithmetic.c:2131
 #, c-format
 msgid "unimplemented real function of %d numeric argument"
 msgid_plural "unimplemented real function of %d numeric arguments"
@@ -1255,7 +1255,7 @@ msgstr[1] ""
 msgid "unimplemented complex function"
 msgstr ""
 
-#: src/main/arithmetic.c:1494
+#: src/main/arithmetic.c:1495
 #, c-format
 msgid "%d argument passed to '%s' function which requires 1 or 2 arguments"
 msgid_plural ""
@@ -1263,20 +1263,20 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/main/arithmetic.c:1512
+#: src/main/arithmetic.c:1513
 msgid "invalid second argument of length 0"
 msgstr ""
 
-#: src/main/arithmetic.c:1606 src/main/arithmetic.c:1624
+#: src/main/arithmetic.c:1607 src/main/arithmetic.c:1625
 #, c-format
 msgid "argument '%s' is missing, with no default"
 msgstr ""
 
-#: src/main/arithmetic.c:1630
+#: src/main/arithmetic.c:1631
 msgid "invalid argument 'base' of length 0"
 msgstr ""
 
-#: src/main/arithmetic.c:2147
+#: src/main/arithmetic.c:2148
 msgid "bad arithmetic function index"
 msgstr ""
 
@@ -4495,45 +4495,51 @@ msgstr ""
 msgid "unable to allocate buffer for long string at line %d"
 msgstr ""
 
-#: gram.y:2363 gram.y:2392 gram.y:2426 src/main/gram.y:2364
-#: src/main/gram.y:2393 src/main/gram.y:2427
+#: gram.y:2349 gram.y:2372 gram.y:2408 gram.y:2444 src/main/gram.y:2350
+#: src/main/gram.y:2373 src/main/gram.y:2409 src/main/gram.y:2445
+#, c-format
+msgid "nul character is not allowed (line %d)"
+msgstr ""
+
+#: gram.y:2365 gram.y:2396 gram.y:2432 src/main/gram.y:2366
+#: src/main/gram.y:2397 src/main/gram.y:2433
 #, c-format
 msgid "'%s' used without hex digits in character string starting \"%s\""
 msgstr ""
 
-#: gram.y:2377 gram.y:2411 src/main/gram.y:2378 src/main/gram.y:2412
+#: gram.y:2381 gram.y:2417 src/main/gram.y:2382 src/main/gram.y:2418
 #, c-format
 msgid "'%s' sequences not supported inside backticks (line %d)"
 msgstr ""
 
-#: gram.y:2400 gram.y:2434 src/main/gram.y:2401 src/main/gram.y:2435
+#: gram.y:2404 gram.y:2440 src/main/gram.y:2405 src/main/gram.y:2441
 #, c-format
 msgid "invalid %s sequence (line %d)"
 msgstr ""
 
-#: gram.y:2475 src/main/gram.y:2476
+#: gram.y:2483 src/main/gram.y:2484
 #, c-format
 msgid "'\\%c' is an unrecognized escape in character string starting \"%s\""
 msgstr ""
 
-#: gram.y:2534 src/main/gram.y:2535
+#: gram.y:2542 src/main/gram.y:2543
 msgid "mixing Unicode and octal/hex escapes in a string is not allowed"
 msgstr ""
 
-#: gram.y:2538 src/main/gram.y:2539
+#: gram.y:2546 src/main/gram.y:2547
 #, c-format
 msgid ""
 "string at line %d containing Unicode escapes not in this locale\n"
 "is too long (max 10000 chars)"
 msgstr ""
 
-#: gram.y:3136 gram.y:3143 gram.y:3149 gram.y:3156 src/main/gram.y:3137
-#: src/main/gram.y:3144 src/main/gram.y:3150 src/main/gram.y:3157
+#: gram.y:3144 gram.y:3151 gram.y:3157 gram.y:3164 src/main/gram.y:3145
+#: src/main/gram.y:3152 src/main/gram.y:3158 src/main/gram.y:3165
 #, c-format
 msgid "contextstack overflow at line %d"
 msgstr ""
 
-#: gram.y:3251 src/main/gram.y:3252
+#: gram.y:3259 src/main/gram.y:3260
 #, c-format
 msgid "internal parser error at line %d"
 msgstr ""

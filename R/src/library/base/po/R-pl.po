@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-11 13:45\n"
+"POT-Creation-Date: 2014-11-04 06:48\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -3005,7 +3005,7 @@ msgstr "przycięte średnie nie są zdefiniowane dla danych złożonych"
 msgid "unable to find a plausible encoding"
 msgstr "nie można znaleźć wiarygodnego kodowania"
 
-#. R/namespace.R: gettextf("unable to load R code in package %s", sQuote(package))
+#. R/namespace.R: gettextf("unable to load R code in package %s", sQuote(package), domain = "R-base")
 #: R/namespace.R:0
 msgid "unable to load R code in package %s"
 msgstr "nie można załadować kodu R w pakiecie %s"

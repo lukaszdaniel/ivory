@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-01 08:36+0100\n"
+"POT-Creation-Date: 2014-11-04 06:48+0100\n"
 "PO-Revision-Date: 2011-10-13 17:30+0800\n"
 "Last-Translator: Wei-Lun Chao <chaoweilun@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -1273,9 +1273,9 @@ msgstr "一元運算子的引數不正確"
 msgid "invalid unary operator"
 msgstr "一元運算子不正確"
 
-#: src/main/arithmetic.c:1181 src/main/arithmetic.c:1467
-#: src/main/arithmetic.c:1857 src/main/arithmetic.c:2028
-#: src/main/arithmetic.c:2130
+#: src/main/arithmetic.c:1181 src/main/arithmetic.c:1468
+#: src/main/arithmetic.c:1858 src/main/arithmetic.c:2029
+#: src/main/arithmetic.c:2131
 #, fuzzy, c-format
 msgid "unimplemented real function of %d numeric argument"
 msgid_plural "unimplemented real function of %d numeric arguments"
@@ -1285,27 +1285,27 @@ msgstr[0] "%d 個數值引數的實數函數尚未實作"
 msgid "unimplemented complex function"
 msgstr "尚未實作複數功能"
 
-#: src/main/arithmetic.c:1494
+#: src/main/arithmetic.c:1495
 #, fuzzy, c-format
 msgid "%d argument passed to '%s' function which requires 1 or 2 arguments"
 msgid_plural ""
 "%d arguments passed to '%s' function which requires 1 or 2 arguments"
 msgstr[0] "傳遞了 %d 個引數給 '%s' 但它需要 %d 個"
 
-#: src/main/arithmetic.c:1512
+#: src/main/arithmetic.c:1513
 msgid "invalid second argument of length 0"
 msgstr "第二引數長度為 0，不正確"
 
-#: src/main/arithmetic.c:1606 src/main/arithmetic.c:1624
+#: src/main/arithmetic.c:1607 src/main/arithmetic.c:1625
 #, fuzzy, c-format
 msgid "argument '%s' is missing, with no default"
 msgstr "缺少引數 \"%s\"，也沒有預設值"
 
-#: src/main/arithmetic.c:1630
+#: src/main/arithmetic.c:1631
 msgid "invalid argument 'base' of length 0"
 msgstr "長度為 0 的無效引數 '基底'"
 
-#: src/main/arithmetic.c:2147
+#: src/main/arithmetic.c:2148
 #, fuzzy
 msgid "bad arithmetic function index"
 msgstr "不當的函數"
@@ -4671,32 +4671,38 @@ msgstr "整數實文 %sL 含有非必要的十進小數點"
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "無法配置緩衝區給第 %d 列的長字串"
 
-#: gram.y:2363 gram.y:2392 gram.y:2426 src/main/gram.y:2364
-#: src/main/gram.y:2393 src/main/gram.y:2427
+#: gram.y:2349 gram.y:2372 gram.y:2408 gram.y:2444 src/main/gram.y:2350
+#: src/main/gram.y:2373 src/main/gram.y:2409 src/main/gram.y:2445
+#, fuzzy, c-format
+msgid "nul character is not allowed (line %d)"
+msgstr "在剖析器的第 %d 列中有無效的多位元組字元"
+
+#: gram.y:2365 gram.y:2396 gram.y:2432 src/main/gram.y:2366
+#: src/main/gram.y:2397 src/main/gram.y:2433
 #, fuzzy, c-format
 msgid "'%s' used without hex digits in character string starting \"%s\""
 msgstr "在起始 \"%s\" 的字串中使用了 '\\x' 卻無十六進位數字"
 
-#: gram.y:2377 gram.y:2411 src/main/gram.y:2378 src/main/gram.y:2412
+#: gram.y:2381 gram.y:2417 src/main/gram.y:2382 src/main/gram.y:2418
 #, fuzzy, c-format
 msgid "'%s' sequences not supported inside backticks (line %d)"
 msgstr "在反引號內部不支援 \\uxxxx 序列 (第 %d 列)"
 
-#: gram.y:2400 gram.y:2434 src/main/gram.y:2401 src/main/gram.y:2435
+#: gram.y:2404 gram.y:2440 src/main/gram.y:2405 src/main/gram.y:2441
 #, fuzzy, c-format
 msgid "invalid %s sequence (line %d)"
 msgstr "無效的 \\u{xxxx} 序列 (第 %d 列)"
 
-#: gram.y:2475 src/main/gram.y:2476
+#: gram.y:2483 src/main/gram.y:2484
 #, c-format
 msgid "'\\%c' is an unrecognized escape in character string starting \"%s\""
 msgstr "在起始 \"%2$s\" 的字串中 '\\%1$c' 是無法辨識的跳脫字元"
 
-#: gram.y:2534 src/main/gram.y:2535
+#: gram.y:2542 src/main/gram.y:2543
 msgid "mixing Unicode and octal/hex escapes in a string is not allowed"
 msgstr "不允許在字串中混合萬國碼和八進位/十六進位跳脫字元"
 
-#: gram.y:2538 src/main/gram.y:2539
+#: gram.y:2546 src/main/gram.y:2547
 #, c-format
 msgid ""
 "string at line %d containing Unicode escapes not in this locale\n"
@@ -4705,13 +4711,13 @@ msgstr ""
 "第 %d 列的字串包含不存在這個語區的萬國碼跳脫字元\n"
 "長度太長 (最大 10000 字元)"
 
-#: gram.y:3136 gram.y:3143 gram.y:3149 gram.y:3156 src/main/gram.y:3137
-#: src/main/gram.y:3144 src/main/gram.y:3150 src/main/gram.y:3157
+#: gram.y:3144 gram.y:3151 gram.y:3157 gram.y:3164 src/main/gram.y:3145
+#: src/main/gram.y:3152 src/main/gram.y:3158 src/main/gram.y:3165
 #, c-format
 msgid "contextstack overflow at line %d"
 msgstr "contextstack 於第 %d 列溢位"
 
-#: gram.y:3251 src/main/gram.y:3252
+#: gram.y:3259 src/main/gram.y:3260
 #, fuzzy, c-format
 msgid "internal parser error at line %d"
 msgstr "輸入緩衝區溢位於第 %d 列"

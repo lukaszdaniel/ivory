@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-11 13:45\n"
+"POT-Creation-Date: 2014-11-04 06:48\n"
 "PO-Revision-Date: 2011-11-30 14:20+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3110,7 +3110,7 @@ msgstr ""
 msgid "unable to find a plausible encoding"
 msgstr ""
 
-#. R/namespace.R: gettextf("unable to load R code in package %s", sQuote(package))
+#. R/namespace.R: gettextf("unable to load R code in package %s", sQuote(package), domain = "R-base")
 #: R/namespace.R:0
 msgid "unable to load R code in package %s"
 msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-11 13:45\n"
+"POT-Creation-Date: 2014-11-04 06:48\n"
 "PO-Revision-Date: 2014-01-23 22:09+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -3237,7 +3237,7 @@ msgstr "les moyennes tronquées ne sont pas définies pour des données complexes"
 msgid "unable to find a plausible encoding"
 msgstr "impossible de trouver un encodage plausible"
 
-#. R/namespace.R: gettextf("unable to load R code in package %s", sQuote(package))
+#. R/namespace.R: gettextf("unable to load R code in package %s", sQuote(package), domain = "R-base")
 #: R/namespace.R:0
 msgid "unable to load R code in package %s"
 msgstr "impossible de charger le code R depuis le package %s"

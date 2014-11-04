@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-01 08:36+0100\n"
+"POT-Creation-Date: 2014-11-04 06:48+0100\n"
 "PO-Revision-Date: 2012-02-26 14:21+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: R-core <R-core@R-project.org> \n"
@@ -1277,9 +1277,9 @@ msgstr " 単項演算子に対する引数が不正です "
 msgid "invalid unary operator"
 msgstr " 不正な単項演算子です "
 
-#: src/main/arithmetic.c:1181 src/main/arithmetic.c:1467
-#: src/main/arithmetic.c:1857 src/main/arithmetic.c:2028
-#: src/main/arithmetic.c:2130
+#: src/main/arithmetic.c:1181 src/main/arithmetic.c:1468
+#: src/main/arithmetic.c:1858 src/main/arithmetic.c:2029
+#: src/main/arithmetic.c:2131
 #, fuzzy, c-format
 msgid "unimplemented real function of %d numeric argument"
 msgid_plural "unimplemented real function of %d numeric arguments"
@@ -1289,27 +1289,27 @@ msgstr[0] " %d 個の数値引数を持つ未実装の数値関数 "
 msgid "unimplemented complex function"
 msgstr " 未実装の複素関数です "
 
-#: src/main/arithmetic.c:1494
+#: src/main/arithmetic.c:1495
 #, fuzzy, c-format
 msgid "%d argument passed to '%s' function which requires 1 or 2 arguments"
 msgid_plural ""
 "%d arguments passed to '%s' function which requires 1 or 2 arguments"
 msgstr[0] " '%d' 個の引数が '%s' に渡されましたが，%d が必要とされています "
 
-#: src/main/arithmetic.c:1512
+#: src/main/arithmetic.c:1513
 msgid "invalid second argument of length 0"
 msgstr " 二番目の長さ 0 の引数が不正です "
 
-#: src/main/arithmetic.c:1606 src/main/arithmetic.c:1624
+#: src/main/arithmetic.c:1607 src/main/arithmetic.c:1625
 #, fuzzy, c-format
 msgid "argument '%s' is missing, with no default"
 msgstr " 引数 \"%s\" がありませんし、省略時既定値もありません "
 
-#: src/main/arithmetic.c:1630
+#: src/main/arithmetic.c:1631
 msgid "invalid argument 'base' of length 0"
 msgstr " 長さ 0 の 'base ' 引数です "
 
-#: src/main/arithmetic.c:2147
+#: src/main/arithmetic.c:2148
 #, fuzzy
 msgid "bad arithmetic function index"
 msgstr " 不正な関数です "
@@ -4729,33 +4729,39 @@ msgstr " 整数リテラル %sL は不要な小数点を含んでいます "
 msgid "unable to allocate buffer for long string at line %d"
 msgstr " 文字列が長すぎるためメモリ確保ができません  (%d行) "
 
-#: gram.y:2363 gram.y:2392 gram.y:2426 src/main/gram.y:2364
-#: src/main/gram.y:2393 src/main/gram.y:2427
+#: gram.y:2349 gram.y:2372 gram.y:2408 gram.y:2444 src/main/gram.y:2350
+#: src/main/gram.y:2373 src/main/gram.y:2409 src/main/gram.y:2445
+#, fuzzy, c-format
+msgid "nul character is not allowed (line %d)"
+msgstr " 構文解析中に不正なマルチバイト文字列がありました (%d行) "
+
+#: gram.y:2365 gram.y:2396 gram.y:2432 src/main/gram.y:2366
+#: src/main/gram.y:2397 src/main/gram.y:2433
 #, fuzzy, c-format
 msgid "'%s' used without hex digits in character string starting \"%s\""
 msgstr " \"%s\"で始まる文字列の中で8進文字なしに'\\x'が使われています "
 
-#: gram.y:2377 gram.y:2411 src/main/gram.y:2378 src/main/gram.y:2412
+#: gram.y:2381 gram.y:2417 src/main/gram.y:2382 src/main/gram.y:2418
 #, fuzzy, c-format
 msgid "'%s' sequences not supported inside backticks (line %d)"
 msgstr " \\uxxxx シーケンスはバックチック内ではサポートされません   (%d 行) "
 
-#: gram.y:2400 gram.y:2434 src/main/gram.y:2401 src/main/gram.y:2435
+#: gram.y:2404 gram.y:2440 src/main/gram.y:2405 src/main/gram.y:2441
 #, fuzzy, c-format
 msgid "invalid %s sequence (line %d)"
 msgstr " 不正な \\u{xxxx} 系列です  (%d行) "
 
-#: gram.y:2475 src/main/gram.y:2476
+#: gram.y:2483 src/main/gram.y:2484
 #, c-format
 msgid "'\\%c' is an unrecognized escape in character string starting \"%s\""
 msgstr ""
 " \"%2$s\"で始まる文字列の中で '\\%1$c' は文字列で認識されないエスケープです "
 
-#: gram.y:2534 src/main/gram.y:2535
+#: gram.y:2542 src/main/gram.y:2543
 msgid "mixing Unicode and octal/hex escapes in a string is not allowed"
 msgstr " 文字列中にユニコードや8進・16進エスケープ文字は許されません "
 
-#: gram.y:2538 src/main/gram.y:2539
+#: gram.y:2546 src/main/gram.y:2547
 #, c-format
 msgid ""
 "string at line %d containing Unicode escapes not in this locale\n"
@@ -4764,13 +4770,13 @@ msgstr ""
 " このロケールにはないUnicodeエスケープを含む %d 行の文字列は \n"
 " 長すぎます(最大1000文字です)  "
 
-#: gram.y:3136 gram.y:3143 gram.y:3149 gram.y:3156 src/main/gram.y:3137
-#: src/main/gram.y:3144 src/main/gram.y:3150 src/main/gram.y:3157
+#: gram.y:3144 gram.y:3151 gram.y:3157 gram.y:3164 src/main/gram.y:3145
+#: src/main/gram.y:3152 src/main/gram.y:3158 src/main/gram.y:3165
 #, c-format
 msgid "contextstack overflow at line %d"
 msgstr " コンテクストスタックが溢れました  (%d行) "
 
-#: gram.y:3251 src/main/gram.y:3252
+#: gram.y:3259 src/main/gram.y:3260
 #, fuzzy, c-format
 msgid "internal parser error at line %d"
 msgstr " 入力バッファが溢れました  (%d行) "

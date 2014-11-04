@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.2.0\n"
-"POT-Creation-Date: 2014-11-01 08:37\n"
+"POT-Creation-Date: 2014-11-04 06:49\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1546,6 +1546,13 @@ msgstr ""
 #. R/windows/create.post.R: gettextf("The %s is being opened in your default mail program\nfor you to complete and send.",     description, domain = "R-utils")
 
 msgid "The %s is being opened in your default mail program\nfor you to complete and send."
+msgstr ""
+
+
+#: R/citation.R: 0
+#. R/citation.R: gettextf("The %s package is part of R.", sQuote(package), domain = "R-utils")
+
+msgid "The %s package is part of R."
 msgstr ""
 
 
@@ -3194,7 +3201,7 @@ msgstr ""
 #: R/citation.R: 0
 #: R/indices.R: 0
 #. R/citation.R: gettextf("package %s not found", sQuote(package))
-#. R/indices.R: gettextf("package %s not found", sQuote(pkg))
+#. R/indices.R: gettextf("package %s not found", sQuote(pkg), domain = "R-utils")
 
 msgid "package %s not found"
 msgstr ""
