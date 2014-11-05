@@ -219,6 +219,10 @@
 
       \item \code{all.equal()} gains methods for \code{environment}s and
       \code{refClass}es.
+      
+      \item (Windows.) The command completion in \command{Rgui.exe}
+      messed up the console.  This is an experimental fix; if it is reported
+      to work it will be kept, otherwise it will be removed. (\PR{15791})
     }
   }
 }
@@ -255,6 +259,12 @@
       
       \item \code{abs()} failed with named arguments when the argument
       was complex.  (\PR{16047})
+      
+      \item \code{"noquote"} objects may now be used as columns in 
+      dataframes.  (\PR{15997})
+      
+      \item Some values with extremely long names were printed 
+      incorrectly.  (\PR{15999})
     }
   }
 }
