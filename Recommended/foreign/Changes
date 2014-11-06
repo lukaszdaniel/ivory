@@ -1,50 +1,9 @@
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/R/arff.R Recommended/foreign/R/arff.R
-32c32
-<         stop("Argument 'file' must be a character string or connection.")
----
->         stop(gettextf("'%s' argument must be a character string or connection", "file"))
-108c108
-<         stop("Argument 'file' must be a character string or connection.")
----
->         stop(gettextf("'%s' argument must be a character string or connection", "file"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/R/dbf.R Recommended/foreign/R/dbf.R
-28,30c28
-<                 message(gettextf("Field name: %s changed to: %s",
-<                                  sQuote(onames[i]), sQuote(inames[i])),
-<                         domain = NA)
----
->                 message(gettextf("Field name: %s changed to: %s", sQuote(onames[i]), sQuote(inames[i])), domain = "R-foreign")
-59,60c57
-<                               "data frame contains columns of unsupported classes %s"),
-< 
----
->                               "data frame contains columns of unsupported classes %s", domain = "R-foreign"),
-100c97
-<                 warning(gettextf("character column %d will be truncated to %d bytes", i, max_nchar), domain = NA)
----
->                 warning(gettextf("character column %d will be truncated to %d bytes", i, max_nchar), domain = "R-foreign")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/R/octave.R Recommended/foreign/R/octave.R
-169,170c169
-<         warning(gettextf("cannot handle unknown type %s", sQuote(type)),
-<                 domain = NA)
----
->         warning(gettextf("cannot handle unknown type %s", sQuote(type)), domain = "R-foreign")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/R/R_systat.R Recommended/foreign/R/R_systat.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/R/R_systat.R Recommended/foreign/R/R_systat.R
 22c22
 <     if (!is.character(file)) stop("'file' must be character")
 ---
 >     if (!is.character(file)) stop(gettextf("'%s' argument must be a character string", "file"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/R/spss.R Recommended/foreign/R/spss.R
-87c87
-<             message(gettextf("re-encoding from %s", cp), domain = NA)
----
->             message(gettextf("re-encoding from %s", cp), domain = "R-foreign")
-153,154c153
-<                     warning(gettextf("missingness type %s is not handled", tp),
-<                             domain = NA)
----
->                     warning(gettextf("missingness type %s is not handled", tp), domain = "R-foreign")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/R/Sread.R Recommended/foreign/R/Sread.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/R/Sread.R Recommended/foreign/R/Sread.R
 66c66
 < 		for (i in 1L:len) {
 ---
@@ -67,7 +26,48 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <                           sQuote(code), seek(dump)), domain = NA)
 ---
 >             stop(gettextf("S mode %s (near byte offset %s) not supported", sQuote(code), seek(dump)), domain = "R-foreign")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/R/writeForeignSAS.R Recommended/foreign/R/writeForeignSAS.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/R/arff.R Recommended/foreign/R/arff.R
+32c32
+<         stop("Argument 'file' must be a character string or connection.")
+---
+>         stop(gettextf("'%s' argument must be a character string or connection", "file"))
+108c108
+<         stop("Argument 'file' must be a character string or connection.")
+---
+>         stop(gettextf("'%s' argument must be a character string or connection", "file"))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/R/dbf.R Recommended/foreign/R/dbf.R
+28,30c28
+<                 message(gettextf("Field name: %s changed to: %s",
+<                                  sQuote(onames[i]), sQuote(inames[i])),
+<                         domain = NA)
+---
+>                 message(gettextf("Field name: %s changed to: %s", sQuote(onames[i]), sQuote(inames[i])), domain = "R-foreign")
+59,60c57
+<                               "data frame contains columns of unsupported classes %s"),
+< 
+---
+>                               "data frame contains columns of unsupported classes %s", domain = "R-foreign"),
+100c97
+<                 warning(gettextf("character column %d will be truncated to %d bytes", i, max_nchar), domain = NA)
+---
+>                 warning(gettextf("character column %d will be truncated to %d bytes", i, max_nchar), domain = "R-foreign")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/R/octave.R Recommended/foreign/R/octave.R
+169,170c169
+<         warning(gettextf("cannot handle unknown type %s", sQuote(type)),
+<                 domain = NA)
+---
+>         warning(gettextf("cannot handle unknown type %s", sQuote(type)), domain = "R-foreign")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/R/spss.R Recommended/foreign/R/spss.R
+87c87
+<             message(gettextf("re-encoding from %s", cp), domain = NA)
+---
+>             message(gettextf("re-encoding from %s", cp), domain = "R-foreign")
+153,154c153
+<                     warning(gettextf("missingness type %s is not handled", tp),
+<                             domain = NA)
+---
+>                     warning(gettextf("missingness type %s is not handled", tp), domain = "R-foreign")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/R/writeForeignSAS.R Recommended/foreign/R/writeForeignSAS.R
 28c28
 <       stop(gettextf("Cannot uniquely abbreviate the variable names to %d or fewer characters", nmax), domain = NA)
 ---
@@ -93,7 +93,44 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <         for (f in 1L:length(fmtnames))
 ---
 >         for (f in seq_len(length(fmtnames)))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/avl.c Recommended/foreign/src/avl.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/R_systat.c Recommended/foreign/src/R_systat.c
+100a101
+> #include "localization.h"
+131,132c132
+< 	sprintf(msg, _("not a rectangular data file (%s mtype is %d)"),
+< 		CHAR(STRING_ELT(file, 0)), getmtype(use));
+---
+> 	sprintf(msg, _("not a rectangular data file (%s mtype is %d)"), CHAR(STRING_ELT(file, 0)), getmtype(use));
+334c334
+< 	    sprintf(tmp, "Getuse: failure reading byte %d", end);
+---
+> 	    sprintf(tmp, _("Getuse: failure reading byte %d"), end);
+346c346
+< 	sprintf(tmp, "Getuse: last byte = %o octal", k);
+---
+> 	sprintf(tmp, _("Getuse: last byte = %o octal"), k);
+503,504c503
+< 	    sprintf(tmp1, _("getlab: byte lab[%d]0 = %o, nv=%d"),
+< 		    j, o, u->h.nv);
+---
+> 	    sprintf(tmp1, _("getlab: byte lab[%d]0 = %o, nv=%d"), j, o, u->h.nv);
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/Rdbfread.c Recommended/foreign/src/Rdbfread.c
+29a30
+> #include "localization.h"
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/Rdbfwrite.c Recommended/foreign/src/Rdbfwrite.c
+30c30
+< 
+---
+> #include "localization.h"
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/SASxport.c Recommended/foreign/src/SASxport.c
+29a30
+> #include "localization.h"
+610,611c611
+< 	error(_("problem reading SAS XPORT file '%s'"),
+< 	      CHAR(STRING_ELT(xportFile, 0)));
+---
+> 	error(_("problem reading SAS XPORT file '%s'"), CHAR(STRING_ELT(xportFile, 0)));
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/avl.c Recommended/foreign/src/avl.c
 28a29
 > #include "localization.h"
 56c57
@@ -204,7 +241,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <   if (!(tree != NULL)) error("assert failed : tree != NULL");
 ---
 >   if (!(tree != NULL)) error(_("assert failed : tree != NULL"));
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/dbfopen.c Recommended/foreign/src/dbfopen.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/dbfopen.c Recommended/foreign/src/dbfopen.c
 196a197
 > #include "localization.h"
 276c277
@@ -255,10 +292,10 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < 		   1, psDBF->fp ) != 1) error("binary read error");
 ---
 > 		   1, psDBF->fp ) != 1) error(_("binary read error"));
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/file-handle.c Recommended/foreign/src/file-handle.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/file-handle.c Recommended/foreign/src/file-handle.c
 27a28
 > #include "localization.h"
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/foreign.h Recommended/foreign/src/foreign.h
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/foreign.h Recommended/foreign/src/foreign.h
 32,40d31
 < #ifdef ENABLE_NLS
 < #include <libintl.h>
@@ -269,7 +306,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < #define gettext_noop(String) (String)
 < #endif
 < 
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/format.c Recommended/foreign/src/format.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/format.c Recommended/foreign/src/format.c
 24a25
 > #include "localization.h"
 221c222
@@ -284,8 +321,8 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <       error("convert_fmt_ItoO : invalid input->type : %d", input->type);
 ---
 >       error(_("convert_fmt_ItoO: invalid input->type: %d"), input->type);
-Tylko w Recommended/foreign/src: localization.h
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/minitab.c Recommended/foreign/src/minitab.c
+Only in Recommended/foreign/src: localization.h
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/minitab.c Recommended/foreign/src/minitab.c
 28a29
 > #include "localization.h"
 121,122c122
@@ -293,7 +330,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < 	      CHAR(fname));
 ---
 > 	error(_("file '%s' is not in Minitab Portable Worksheet format"), CHAR(fname));
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/pfm-read.c Recommended/foreign/src/pfm-read.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/pfm-read.c Recommended/foreign/src/pfm-read.c
 34a35
 > #include "localization.h"
 100c101
@@ -380,44 +417,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <   "reading as a portable file",
 ---
 >   N_("reading as a portable file"),
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/Rdbfread.c Recommended/foreign/src/Rdbfread.c
-29a30
-> #include "localization.h"
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/Rdbfwrite.c Recommended/foreign/src/Rdbfwrite.c
-30c30
-< 
----
-> #include "localization.h"
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/R_systat.c Recommended/foreign/src/R_systat.c
-100a101
-> #include "localization.h"
-131,132c132
-< 	sprintf(msg, _("not a rectangular data file (%s mtype is %d)"),
-< 		CHAR(STRING_ELT(file, 0)), getmtype(use));
----
-> 	sprintf(msg, _("not a rectangular data file (%s mtype is %d)"), CHAR(STRING_ELT(file, 0)), getmtype(use));
-334c334
-< 	    sprintf(tmp, "Getuse: failure reading byte %d", end);
----
-> 	    sprintf(tmp, _("Getuse: failure reading byte %d"), end);
-346c346
-< 	sprintf(tmp, "Getuse: last byte = %o octal", k);
----
-> 	sprintf(tmp, _("Getuse: last byte = %o octal"), k);
-503,504c503
-< 	    sprintf(tmp1, _("getlab: byte lab[%d]0 = %o, nv=%d"),
-< 		    j, o, u->h.nv);
----
-> 	    sprintf(tmp1, _("getlab: byte lab[%d]0 = %o, nv=%d"), j, o, u->h.nv);
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/SASxport.c Recommended/foreign/src/SASxport.c
-29a30
-> #include "localization.h"
-610,611c611
-< 	error(_("problem reading SAS XPORT file '%s'"),
-< 	      CHAR(STRING_ELT(xportFile, 0)));
----
-> 	error(_("problem reading SAS XPORT file '%s'"), CHAR(STRING_ELT(xportFile, 0)));
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/sfm-read.c Recommended/foreign/src/sfm-read.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/sfm-read.c Recommended/foreign/src/sfm-read.c
 32a33
 > #include "localization.h"
 135c136
@@ -547,7 +547,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <   "reading as a system file",
 ---
 >   N_("reading as a system file"),
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/spss.c Recommended/foreign/src/spss.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/spss.c Recommended/foreign/src/spss.c
 28a29
 > #include "localization.h"
 681,682c682
@@ -555,7 +555,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < 		  filename);
 ---
 > 	    error(_("file '%s' is not in any supported SPSS format"), filename);
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/stataread.c Recommended/foreign/src/stataread.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/stataread.c Recommended/foreign/src/stataread.c
 45a46
 > #include "localization.h"
 459c460

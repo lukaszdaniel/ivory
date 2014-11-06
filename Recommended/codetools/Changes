@@ -1,6 +1,4 @@
-Tylko w Recommended/codetools: inst
-Tylko w Recommended/codetools: po
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/codetools/R/codetools.R Recommended/codetools/R/codetools.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/codetools/R/codetools.R Recommended/codetools/R/codetools.R
 92,93c92
 <                                   stop0(paste("not a foldable expression:",
 <                                         deparse(e, width.cutoff = 500))),
@@ -166,3 +164,5 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     for (i in 1:length(args)) {
 ---
 >     for (i in seq_len(length(args))) {
+Only in Recommended/codetools: inst
+Only in Recommended/codetools: po

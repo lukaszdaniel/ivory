@@ -1,16 +1,4 @@
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/man/bannerplot.Rd Recommended/cluster/man/bannerplot.Rd
-11c11
-<            main=NULL, sub=NULL, xlab = "Height",  adj = 0,
----
->            main=NULL, sub=NULL, xlab = gettext("Height", domain = "R-cluster"),  adj = 0,
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/man/pltree.twins.Rd Recommended/cluster/man/pltree.twins.Rd
-10,11c10,11
-< \method{pltree}{twins}(x, main = paste("Dendrogram of ", deparse(x$call)),
-<              labels = NULL, ylab = "Height", \dots)
----
-> \method{pltree}{twins}(x, main = gettextf("Dendrogram of \%s", paste(deparse(x$call), collapse = ""), domain = "R-cluster"),
->              labels = NULL, ylab = gettext("Height", domain = "R-cluster"), \dots)
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/agnes.q Recommended/cluster/R/agnes.q
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/agnes.q Recommended/cluster/R/agnes.q
 8a9
 >    dataname <- sQuote(deparse(substitute(x)))
 43c44
@@ -61,7 +49,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     cat("\nAvailable components:\n");	print(names(x), ...)
 ---
 >     cat("\n", gettext("Available components:", domain = "R-cluster"), "\n", sep = "");	print(names(x), ...)
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/clara.q Recommended/cluster/R/clara.q
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/clara.q Recommended/cluster/R/clara.q
 9a10
 >     dataname <- sQuote(deparse(substitute(x)))
 12c13
@@ -158,7 +146,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     cat("\nAvailable components:\n");	print(names(x), ...)
 ---
 >     cat("\n", gettext("Available components:", domain = "R-cluster"), "\n", sep = "");	print(names(x), ...)
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/clusGap.R Recommended/cluster/R/clusGap.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/clusGap.R Recommended/cluster/R/clusGap.R
 33,34c33,34
 <     if(verbose) cat("Clustering k = 1,2,..., K.max (= ",K.max,"): .. ", sep='')
 <     for(k in 1:K.max)
@@ -195,12 +183,12 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 >     cat(gettextf(" --> Number of clusters (method '%s', SE.factor=%g): %d", method, SE.factor, nc, domain = "R-cluster"), "\n", sep = "")
 > 	else
 > 	cat(gettextf(" --> Number of clusters (method '%s'): %d", method, nc, domain = "R-cluster"), "\n", sep = "")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/coef.R Recommended/cluster/R/coef.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/coef.R Recommended/cluster/R/coef.R
 23c23
 <     ## stopifnot(all.equal(1:n, sort(-mrg[mrg < 0])))
 ---
 >     ## stopifnot(all.equal(seq_len(n), sort(-mrg[mrg < 0])))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/daisy.q Recommended/cluster/R/daisy.q
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/daisy.q Recommended/cluster/R/daisy.q
 4a5
 >     dataname <- sQuote(deparse(substitute(x)))
 7c8
@@ -272,7 +260,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < 	cat("Warning : ", x $ NA.message, "\n")
 ---
 > 	cat(gettext("Warning: ", domain = "R-cluster"), x$NA.message, "\n", sep = "")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/diana.q Recommended/cluster/R/diana.q
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/diana.q Recommended/cluster/R/diana.q
 7a8
 >     dataname <- sQuote(deparse(substitute(x)))
 17c18
@@ -319,7 +307,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     cat("\nAvailable components:\n");	print(names(x), ...)
 ---
 >     cat("\n", gettext("Available components:", domain = "R-cluster"), "\n", sep = "");	print(names(x), ...)
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/ellipsoidhull.R Recommended/cluster/R/ellipsoidhull.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/ellipsoidhull.R Recommended/cluster/R/ellipsoidhull.R
 37,38c37
 <         cat("Error in Fortran routine computing the spanning ellipsoid,",
 <             "\n probably collinear data\n", sep="")
@@ -351,7 +339,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < ##   Return (x[i],y[i]) points, i = 1:n, on boundary of ellipse, given
 ---
 > ##   Return (x[i],y[i]) points, i = seq_len(n), on boundary of ellipse, given
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/fanny.q Recommended/cluster/R/fanny.q
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/fanny.q Recommended/cluster/R/fanny.q
 8a9
 >     dataname <- sQuote(deparse(substitute(x)))
 18c19
@@ -412,7 +400,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 >     if(any(u != seq_len(k))) clustering <- match(clustering, u)
 >     r[cbind(seq_len(n), clustering)] <- 1L
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/internal.R Recommended/cluster/R/internal.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/internal.R Recommended/cluster/R/internal.R
 18c18
 <     if(n1 < 1) stop("'n' must be >= 2")
 ---
@@ -425,7 +413,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     if((n2 <- as.integer(n - 2)) < 0) stop("'n' must be >= 2")
 ---
 >     if((n2 <- as.integer(n - 2)) < 0) stop("'n' argument must be >= 2")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/mona.q Recommended/cluster/R/mona.q
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/mona.q Recommended/cluster/R/mona.q
 6c6
 <         stop("x must be a matrix or data frame.")
 ---
@@ -454,7 +442,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     cat("\nAvailable components:\n")
 ---
 >     cat("\n", gettext("Available components:", domain = "R-cluster"), "\n", sep = "")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/pam.q Recommended/cluster/R/pam.q
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/pam.q Recommended/cluster/R/pam.q
 9a10
 >     dataname <- sQuote(deparse(substitute(x)))
 19c20
@@ -517,7 +505,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     cat("\nAvailable components:\n");	print(names(x), ...)
 ---
 >     cat("\n", gettext("Available components:", domain = "R-cluster"), "\n", sep = "");	print(names(x), ...)
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/plothier.q Recommended/cluster/R/plothier.q
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/plothier.q Recommended/cluster/R/plothier.q
 6,7c6,7
 < pltree.twins <- function(x, main = paste("Dendrogram of ", deparse(x$call)),
 < 			 labels = NULL, ylab = "Height", ...)
@@ -566,7 +554,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <     text(w, 1:length(names) - 0.5, names, adj = 0, col = col[1], ...)
 ---
 >     text(w, seq_len(length(names)) - 0.5, names, adj = 0, col = col[1], ...)
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/plotpart.q Recommended/cluster/R/plotpart.q
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/plotpart.q Recommended/cluster/R/plotpart.q
 20,21c20,21
 < 	tmenu <- paste("plot ", ## choices :
 < 		       c("All", "Clusplot", "Silhouette Plot"))
@@ -671,7 +659,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < 	else stop("no diss nor data found for clusplot()'")
 ---
 > 	else stop("no diss nor data found for 'clusplot()' function")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/silhouette.R Recommended/cluster/R/silhouette.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/silhouette.R Recommended/cluster/R/silhouette.R
 53c53
 <     for(j in 1:k) { # j-th cluster:
 ---
@@ -733,10 +721,15 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < 	for(j in 1:k) {
 ---
 > 	for(j in seq_len(k)) {
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/src/clara.c Recommended/cluster/src/clara.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/man/bannerplot.Rd Recommended/cluster/man/bannerplot.Rd
+11c11
+<            main=NULL, sub=NULL, xlab = "Height",  adj = 0,
+---
+>            main=NULL, sub=NULL, xlab = gettext("Height", domain = "R-cluster"),  adj = 0,
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/src/clara.c Recommended/cluster/src/clara.c
 19a20
 > #include "localization.h"
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/src/cluster.h Recommended/cluster/src/cluster.h
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/src/cluster.h Recommended/cluster/src/cluster.h
 6,11d5
 < #ifdef ENABLE_NLS
 < #include <libintl.h>
@@ -744,7 +737,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < #else
 < #define _(String) (String)
 < #endif
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/src/fanny.c Recommended/cluster/src/fanny.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/src/fanny.c Recommended/cluster/src/fanny.c
 11a12
 > #include "localization.h"
 250c251
@@ -762,8 +755,8 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 >      else
 > 	Rprintf(_("%sNOT converged after %d iterations,  obj = %#20.*g\n"),
 > 		trace_lev >=2 ? "\n" : "",
-Tylko w Recommended/cluster/src: localization.h
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/src/pam.c Recommended/cluster/src/pam.c
+Only in Recommended/cluster/src: localization.h
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/src/pam.c Recommended/cluster/src/pam.c
 14a15
 > #include "localization.h"
 42c43
@@ -794,6 +787,6 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < 		Rprintf( "   swp new %*d <-> %*d old; decreasing diss. %7g by %g\n",
 ---
 > 		Rprintf(_("   swp new %*d <-> %*d old; decreasing diss. %7g by %g\n"),
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/src/twins.c Recommended/cluster/src/twins.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/src/twins.c Recommended/cluster/src/twins.c
 14a15
 > #include "localization.h"
