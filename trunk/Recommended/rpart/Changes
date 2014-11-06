@@ -1,15 +1,10 @@
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/man/meanvar.rpart.Rd Recommended/rpart/man/meanvar.rpart.Rd
-15c15
-< \method{meanvar}{rpart}(tree, xlab = "ave(y)", ylab = "ave(deviance)", \dots)
----
-> \method{meanvar}{rpart}(tree, xlab = gettext("ave(y)"), ylab = gettext("ave(deviance)"), \dots)
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/labels.rpart.R Recommended/rpart/R/labels.rpart.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/labels.rpart.R Recommended/rpart/R/labels.rpart.R
 66,67c66
 < 		warning("more than 52 levels in a predicting factor, truncated for printout",
 <                         domain = NA)
 ---
 > 		warning("more than 52 levels in a predicting factor, truncated for printout", domain = "R-rpart")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/meanvar.rpart.R Recommended/rpart/R/meanvar.rpart.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/meanvar.rpart.R Recommended/rpart/R/meanvar.rpart.R
 1c1
 < meanvar.rpart <- function(tree, xlab = "ave(y)", ylab = "ave(deviance)", ...)
 ---
@@ -22,7 +17,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <         stop("Plot not useful for classification or poisson trees")
 ---
 >         stop("Plot is not useful for classification or poisson trees")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/path.rpart.R Recommended/rpart/R/path.rpart.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/path.rpart.R Recommended/rpart/R/path.rpart.R
 6c6
 <         stop("Not a legitimate \"rpart\" object")
 ---
@@ -35,7 +30,12 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <                 cat("\n", "node number:", n[i], "\n")
 ---
 >                 cat("\n", gettext("node number: ", domain = "R-rpart"), n[i], "\n", sep = "")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/plotcp.R Recommended/rpart/R/plotcp.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/plot.rpart.R Recommended/rpart/R/plot.rpart.R
+4c4
+<     if (!inherits(x, "rpart")) stop("Not a legitimate \"rpart\" object")
+---
+>     if (!inherits(x, "rpart")) stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("rpart")))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/plotcp.R Recommended/rpart/R/plotcp.R
 7c7
 <     if (!inherits(x, "rpart")) stop("Not a legitimate \"rpart\" object")
 ---
@@ -56,22 +56,22 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <                mtext("number of splits", side = 3, line = 3)
 ---
 >                mtext(gettext("number of splits", domain = "R-rpart"), side = 3, line = 3)
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/plot.rpart.R Recommended/rpart/R/plot.rpart.R
-4c4
-<     if (!inherits(x, "rpart")) stop("Not a legitimate \"rpart\" object")
----
->     if (!inherits(x, "rpart")) stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("rpart")))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/post.rpart.R Recommended/rpart/R/post.rpart.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/post.rpart.R Recommended/rpart/R/post.rpart.R
 22c22
 <         title(paste("Endpoint =", temp), cex = 0.8)
 ---
 >         title(gettextf("Endpoint = %s", paste(temp, collapse = " "), domain = "R-rpart"), cex = 0.8)
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/predict.rpart.R Recommended/rpart/R/predict.rpart.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/predict.rpart.R Recommended/rpart/R/predict.rpart.R
 5c5
 <     if (!inherits(object, "rpart")) stop("Not a legitimate \"rpart\" object")
 ---
 >     if (!inherits(object, "rpart")) stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("rpart")))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/printcp.R Recommended/rpart/R/printcp.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/print.rpart.R Recommended/rpart/R/print.rpart.R
+4c4
+<     if (!inherits(x, "rpart")) stop("Not a legitimate \"rpart\" object")
+---
+>     if (!inherits(x, "rpart")) stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("rpart")))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/printcp.R Recommended/rpart/R/printcp.R
 4c4
 <     if (!inherits(x, "rpart")) stop ("'x' must be an \"rpart\" object")
 ---
@@ -97,17 +97,12 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <         "\n\n", sep = "")
 ---
 >     cat(gettext("Root node error: ", domain = "R-rpart"), format(frame$dev[1L], digits = digits), "/", frame$n[1L], " = ", format(frame$dev[1L]/frame$n[1L], digits = digits), "\n\n", sep = "")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/print.rpart.R Recommended/rpart/R/print.rpart.R
-4c4
-<     if (!inherits(x, "rpart")) stop("Not a legitimate \"rpart\" object")
----
->     if (!inherits(x, "rpart")) stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("rpart")))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/residuals.rpart.R Recommended/rpart/R/residuals.rpart.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/residuals.rpart.R Recommended/rpart/R/residuals.rpart.R
 5c5
 <         stop("Not a legitimate \"rpart\" object")
 ---
 >         stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("rpart")))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/roc.rpart.R Recommended/rpart/R/roc.rpart.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/roc.rpart.R Recommended/rpart/R/roc.rpart.R
 4,6c4,5
 <     if (!inherits(object, "rpart") || object$method != "class" ||
 <        length(attr(object, "ylevels")) != 2L)
@@ -127,25 +122,27 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <                  ylim = c(0, 1), ylab = "Sensitivity", xlab = "Specificity")
 ---
 >                  ylim = c(0, 1), ylab = gettext("Sensitivity", domain = "R-rpart"), xlab = gettext("Specificity", domain = "R-rpart"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/rpart.branch.R Recommended/rpart/R/rpart.branch.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/rpart.R Recommended/rpart/R/rpart.R
+96,98c96
+<             stop(gettextf("Argument %s not matched",
+<                           names(extraArgs)[indx == 0L]),
+<                  domain = NA)
+---
+>             stop(gettextf("Argument %s not matched", names(extraArgs)[indx == 0L]), domain = "R-rpart")
+133c131
+<             stop("Cost vector is the wrong length")
+---
+>             stop("Cost vector is of the wrong length")
+193c191
+< 	for (i in 1L:nadd) {
+---
+> 	for (i in seq_len(nadd)) {
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/rpart.branch.R Recommended/rpart/R/rpart.branch.R
 10c10
 <             stop("no information available on parameters from previous call to plot()")
 ---
 >             stop("no information available on parameters from previous call to 'plot()'")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/rpartcallback.R Recommended/rpart/R/rpartcallback.R
-9c9
-<         stop("User written method does not contain an 'init' function")
----
->         stop(gettextf("User written method does not contain an %s function", sQuote("init()")))
-11c11
-<         stop("User written method does not contain a 'split' function")
----
->         stop(gettextf("User written method does not contain a %s function", sQuote("split()")))
-13c13
-<         stop("User written method does not contain an 'eval' function")
----
->         stop(gettextf("User written method does not contain an %s function", sQuote("eval()")))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/rpart.class.R Recommended/rpart/R/rpart.class.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/rpart.class.R Recommended/rpart/R/rpart.class.R
 21c21
 <                           names(parms)[temp == 0L]), domain = NA)
 ---
@@ -167,7 +164,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 >              #       "    class counts: ", temp1, "\n",
 >              #       "   probabilities: ", temp2)
 > 	     gettextf("  predicted class=%s  expected loss=%s  P(node) =%s\n    class counts: %s\n   probabilities: %s", format(group, justify = "left"), formatg(dev, digits), formatg(nodeprob, digits), temp1, temp2, domain = "R-rpart")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/rpart.control.R Recommended/rpart/R/rpart.control.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/rpart.control.R Recommended/rpart/R/rpart.control.R
 8c8
 <         warning("The value of 'maxcompete' supplied is < 0; the value 0 was used instead")
 ---
@@ -184,32 +181,30 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <         warning("The value of 'surrogatestyle' supplied was out of range, the default value of 0 is used instead.")
 ---
 >         warning(gettextf("The value of '%s' supplied was out of range, the default value of %d is used instead", "surrogatestyle", 0))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/rpartco.R Recommended/rpart/R/rpartco.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/rpartcallback.R Recommended/rpart/R/rpartcallback.R
+9c9
+<         stop("User written method does not contain an 'init' function")
+---
+>         stop(gettextf("User written method does not contain an %s function", sQuote("init()")))
+11c11
+<         stop("User written method does not contain a 'split' function")
+---
+>         stop(gettextf("User written method does not contain a %s function", sQuote("split()")))
+13c13
+<         stop("User written method does not contain an 'eval' function")
+---
+>         stop(gettextf("User written method does not contain an %s function", sQuote("eval()")))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/rpartco.R Recommended/rpart/R/rpartco.R
 7c7
 <             stop("no information available on parameters from previous call to plot()")
 ---
 >             stop("no information available on parameters from previous call to 'plot()'")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/rpart.R Recommended/rpart/R/rpart.R
-96,98c96
-<             stop(gettextf("Argument %s not matched",
-<                           names(extraArgs)[indx == 0L]),
-<                  domain = NA)
----
->             stop(gettextf("Argument %s not matched", names(extraArgs)[indx == 0L]), domain = "R-rpart")
-133c131
-<             stop("Cost vector is the wrong length")
----
->             stop("Cost vector is of the wrong length")
-193c191
-< 	for (i in 1L:nadd) {
----
-> 	for (i in seq_len(nadd)) {
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/rsq.rpart.R Recommended/rpart/R/rsq.rpart.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/rsq.rpart.R Recommended/rpart/R/rsq.rpart.R
 7c7
 <     if (!inherits(x, "rpart")) stop("Not a legitimate \"rpart\" object")
 ---
 >     if (!inherits(x, "rpart")) stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("rpart")))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/snip.rpart.R Recommended/rpart/R/snip.rpart.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/snip.rpart.R Recommended/rpart/R/snip.rpart.R
 6c6
 <     if (!inherits(x, "rpart")) stop("Not an \"rpart\" object")
 ---
@@ -220,7 +215,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 ---
 >         warning(gettextf("Nodes %s are not in this tree", toss[toss.idx == 0L]),
 >                 domain = "R-rpart")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/summary.rpart.R Recommended/rpart/R/summary.rpart.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/summary.rpart.R Recommended/rpart/R/summary.rpart.R
 4c4
 <     if (!inherits(object, "rpart")) stop("Not a legitimate \"rpart\" object")
 ---
@@ -229,12 +224,12 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <             cat("\nVariable importance\n")
 ---
 >             cat(gettext("\nVariable importance\n", domain = "R-rpart"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/text.rpart.R Recommended/rpart/R/text.rpart.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/text.rpart.R Recommended/rpart/R/text.rpart.R
 11c11
 <     if (!inherits(x, "rpart")) stop("Not a legitimate \"rpart\" object")
 ---
 >     if (!inherits(x, "rpart")) stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("rpart")))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/zzz.R Recommended/rpart/R/zzz.R
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/R/zzz.R Recommended/rpart/R/zzz.R
 25,26c25
 <         warning(gettextf("supplied nodes %s are not in this tree",
 <                          paste(bad, collapse = ",")), domain = NA)
@@ -245,11 +240,16 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 <                 paste(good[leaves], collapse = ",")), domain = NA)
 ---
 >         warning(sprintf(gettext("supplied nodes %s are leaves", domain = "R-rpart"), paste(good[leaves], collapse = ", ")), domain = NA)
-Tylko w Recommended/rpart/src: localization.h
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/src/poisson.c Recommended/rpart/src/poisson.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/man/meanvar.rpart.Rd Recommended/rpart/man/meanvar.rpart.Rd
+15c15
+< \method{meanvar}{rpart}(tree, xlab = "ave(y)", ylab = "ave(deviance)", \dots)
+---
+> \method{meanvar}{rpart}(tree, xlab = gettext("ave(y)"), ylab = gettext("ave(deviance)"), \dots)
+Only in Recommended/rpart/src: localization.h
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/src/poisson.c Recommended/rpart/src/poisson.c
 5a6
 > #include "localization.h"
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/src/print_tree.c Recommended/rpart/src/print_tree.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/src/print_tree.c Recommended/rpart/src/print_tree.c
 17a18
 > #include "localization.h"
 59,62c60,63
@@ -350,10 +350,19 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 > 		Rprintf(ngettext("agree=%5.3f, (%d split)\n", "agree=%5.3f, (%d split)\n", ss->count),
 147a162
 > 	    }
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/src/rpart.c Recommended/rpart/src/rpart.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/src/rpart.c Recommended/rpart/src/rpart.c
 38a39
 > #include "localization.h"
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/src/rpart_callback.c Recommended/rpart/src/rpart_callback.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/src/rpart.h Recommended/rpart/src/rpart.h
+9,15d8
+< #ifdef ENABLE_NLS
+< #include <libintl.h>
+< #define _(String) dgettext ("rpart", String)
+< #else
+< #define _(String) (String)
+< #endif
+< 
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/src/rpart_callback.c Recommended/rpart/src/rpart_callback.c
 7,14c7
 < 
 < #ifdef ENABLE_NLS
@@ -369,33 +378,24 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Chang
 < 	    error("the expression expr1 returned a list of %d elements, %d required",
 ---
 > 	    error(_("the expression expr1 returned a list of %d elements, %d required"),
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/src/rpart.h Recommended/rpart/src/rpart.h
-9,15d8
-< #ifdef ENABLE_NLS
-< #include <libintl.h>
-< #define _(String) dgettext ("rpart", String)
-< #else
-< #define _(String) (String)
-< #endif
-< 
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/src/rundown2.c Recommended/rpart/src/rundown2.c
-8a9
-> #include "localization.h"
-48c49
-<     warning("Warning message--see rundown2.c");
----
->     warning(_("Warning message--see rundown2.c"));
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/src/rundown.c Recommended/rpart/src/rundown.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/src/rundown.c Recommended/rpart/src/rundown.c
 8a9
 > #include "localization.h"
 48c49
 <     warning("Warning message--see rundown.c");
 ---
 >     warning(_("Warning message--see rundown.c"));
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/src/xpred.c Recommended/rpart/src/xpred.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/src/rundown2.c Recommended/rpart/src/rundown2.c
+8a9
+> #include "localization.h"
+48c49
+<     warning("Warning message--see rundown2.c");
+---
+>     warning(_("Warning message--see rundown2.c"));
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/src/xpred.c Recommended/rpart/src/xpred.c
 31a32
 > #include "localization.h"
-diff -rEZbwB '--exclude=*.[pdf,mo,po,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/src/xval.c Recommended/rpart/src/xval.c
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/src/xval.c Recommended/rpart/src/xval.c
 160,161c160
 < 		    Rprintf("  cp=%f, pred=%f, xtemp=%f\n",
 < 			    cp[jj] / old_wt, xpred[jj], xtemp[jj]);
