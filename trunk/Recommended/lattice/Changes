@@ -1,3 +1,8 @@
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/lattice/man/rfs.Rd Recommended/lattice/man/rfs.Rd
+9c9
+< rfs(model, layout=c(2, 1), xlab="f-value", ylab=NULL,
+---
+> rfs(model, layout=c(2, 1), xlab = gettext("f-value", domain = "R-lattice"), ylab=NULL,
 diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/lattice/R/axis.R Recommended/lattice/R/axis.R
 357c357
 <             else stop("Invalid value of 'log'")
@@ -227,11 +232,6 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 ---
 >         for(i in seq_len(n.var))     ## i = row, j = col
 >             for(j in seq_len(n.var))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/lattice/man/rfs.Rd Recommended/lattice/man/rfs.Rd
-9c9
-< rfs(model, layout=c(2, 1), xlab="f-value", ylab=NULL,
----
-> rfs(model, layout=c(2, 1), xlab = gettext("f-value", domain = "R-lattice"), ylab=NULL,
 Only in Recommended/lattice/src: localization.h
 diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/lattice/src/threeDplot.c Recommended/lattice/src/threeDplot.c
 2c2

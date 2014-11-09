@@ -1,3 +1,36 @@
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/man/boxcox.Rd Recommended/MASS/man/boxcox.Rd
+21c21
+<        ylab = "log-Likelihood", \dots)
+---
+>        ylab = gettext("log-Likelihood", domain = "R-MASS"), \dots)
+25c25
+<        ylab = "log-Likelihood", \dots)
+---
+>        ylab = gettext("log-Likelihood", domain = "R-MASS"), \dots)
+29c29
+<        ylab = "log-Likelihood", \dots)
+---
+>        ylab = gettext("log-Likelihood", domain = "R-MASS"), \dots)
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/man/logtrans.Rd Recommended/MASS/man/logtrans.Rd
+21c21
+<          ylab = "log Likelihood")
+---
+>          ylab = gettext("log-Likelihood", domain = "R-MASS"))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/man/MASS-internal.Rd Recommended/MASS/man/MASS-internal.Rd
+21c21
+< neg.bin(theta = stop("'theta' must be given"))
+---
+> neg.bin(theta = stop("'theta' argument must be specified"))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/man/negative.binomial.Rd Recommended/MASS/man/negative.binomial.Rd
+14c14
+< negative.binomial(theta = stop("'theta' must be specified"), link = "log")
+---
+> negative.binomial(theta = stop("'theta' argument must be specified"), link = "log")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/man/rnegbin.Rd Recommended/MASS/man/rnegbin.Rd
+14c14
+< rnegbin(n, mu = n, theta = stop("'theta' must be specified"))
+---
+> rnegbin(n, mu = n, theta = stop("'theta' argument must be specified"))
 diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/R/add.R Recommended/MASS/R/add.R
 56c56
 <             message(gettextf("trying + %s", tt), domain = NA)
@@ -1137,39 +1170,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 <     if(!n) stop("'x' has length zero")
 ---
 >     if(!n) stop("'x' argument has length zero")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/man/MASS-internal.Rd Recommended/MASS/man/MASS-internal.Rd
-21c21
-< neg.bin(theta = stop("'theta' must be given"))
----
-> neg.bin(theta = stop("'theta' argument must be specified"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/man/boxcox.Rd Recommended/MASS/man/boxcox.Rd
-21c21
-<        ylab = "log-Likelihood", \dots)
----
->        ylab = gettext("log-Likelihood", domain = "R-MASS"), \dots)
-25c25
-<        ylab = "log-Likelihood", \dots)
----
->        ylab = gettext("log-Likelihood", domain = "R-MASS"), \dots)
-29c29
-<        ylab = "log-Likelihood", \dots)
----
->        ylab = gettext("log-Likelihood", domain = "R-MASS"), \dots)
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/man/logtrans.Rd Recommended/MASS/man/logtrans.Rd
-21c21
-<          ylab = "log Likelihood")
----
->          ylab = gettext("log-Likelihood", domain = "R-MASS"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/man/negative.binomial.Rd Recommended/MASS/man/negative.binomial.Rd
-14c14
-< negative.binomial(theta = stop("'theta' must be specified"), link = "log")
----
-> negative.binomial(theta = stop("'theta' argument must be specified"), link = "log")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/man/rnegbin.Rd Recommended/MASS/man/rnegbin.Rd
-14c14
-< rnegbin(n, mu = n, theta = stop("'theta' must be specified"))
----
-> rnegbin(n, mu = n, theta = stop("'theta' argument must be specified"))
+Only in Recommended/MASS/src: localization.h
 diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/MASS/src/MASS.c Recommended/MASS/src/MASS.c
 19a20
 > #include "localization.h"
@@ -1189,4 +1190,3 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 < 		Rprintf("stress after %3d iters: %7.5f, magic = %5.3f\n", i, e, magic);
 ---
 > 		Rprintf(_("stress after %3d iters: %7.5f, magic = %5.3f\n"), i, e, magic);
-Only in Recommended/MASS/src: localization.h

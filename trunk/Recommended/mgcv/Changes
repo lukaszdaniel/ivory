@@ -1,3 +1,4 @@
+Only in Recommended/mgcv/inst: po
 diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/mgcv/R/bam.r Recommended/mgcv/R/bam.r
 13c13
 <  for (i in 1:n) sz[i] <- object.size(x[[i]])
@@ -2492,7 +2493,6 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 <     ind[[1]] <- 1:n
 ---
 >     ind[[1]] <- seq_len(n)
-Only in Recommended/mgcv/inst: po
 diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/mgcv/src/general.h Recommended/mgcv/src/general.h
 3,9d2
 < #ifdef ENABLE_NLS

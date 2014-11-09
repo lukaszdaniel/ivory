@@ -1,3 +1,8 @@
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/man/bannerplot.Rd Recommended/cluster/man/bannerplot.Rd
+11c11
+<            main=NULL, sub=NULL, xlab = "Height",  adj = 0,
+---
+>            main=NULL, sub=NULL, xlab = gettext("Height", domain = "R-cluster"),  adj = 0,
 diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/R/agnes.q Recommended/cluster/R/agnes.q
 8a9
 >    dataname <- sQuote(deparse(substitute(x)))
@@ -721,11 +726,6 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 < 	for(j in 1:k) {
 ---
 > 	for(j in seq_len(k)) {
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/man/bannerplot.Rd Recommended/cluster/man/bannerplot.Rd
-11c11
-<            main=NULL, sub=NULL, xlab = "Height",  adj = 0,
----
->            main=NULL, sub=NULL, xlab = gettext("Height", domain = "R-cluster"),  adj = 0,
 diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/cluster/src/clara.c Recommended/cluster/src/clara.c
 19a20
 > #include "localization.h"

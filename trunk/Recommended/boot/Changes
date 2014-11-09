@@ -1,3 +1,18 @@
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/boot/man/boot.ci.Rd Recommended/boot/man/boot.ci.Rd
+16c16
+<         index = 1:min(2,length(boot.out$t0)), var.t0 = NULL, 
+---
+>         index = seq_len(min(2,length(boot.out$t0))), var.t0 = NULL, 
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/boot/man/envelope.Rd Recommended/boot/man/envelope.Rd
+12c12
+< envelope(boot.out = NULL, mat = NULL, level = 0.95, index = 1:ncol(mat))
+---
+> envelope(boot.out = NULL, mat = NULL, level = 0.95, index = seq_len(ncol(mat)))
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/boot/man/print.boot.Rd Recommended/boot/man/print.boot.Rd
+11c11
+<       index = 1:ncol(boot.out$t), \dots)
+---
+>       index = seq_len(ncol(boot.out$t)), \dots)
 diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/boot/R/bootfuns.q Recommended/boot/R/bootfuns.q
 337c337
 <         print(paste("All values of t* are equal to ", mean(t, na.rm=TRUE)))
@@ -616,18 +631,3 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 <     i <- rep(1L:n,round(n*w))
 ---
 >     i <- rep(seq_len(n), round(n * w))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/boot/man/boot.ci.Rd Recommended/boot/man/boot.ci.Rd
-16c16
-<         index = 1:min(2,length(boot.out$t0)), var.t0 = NULL, 
----
->         index = seq_len(min(2,length(boot.out$t0))), var.t0 = NULL, 
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/boot/man/envelope.Rd Recommended/boot/man/envelope.Rd
-12c12
-< envelope(boot.out = NULL, mat = NULL, level = 0.95, index = 1:ncol(mat))
----
-> envelope(boot.out = NULL, mat = NULL, level = 0.95, index = seq_len(ncol(mat)))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/boot/man/print.boot.Rd Recommended/boot/man/print.boot.Rd
-11c11
-<       index = 1:ncol(boot.out$t), \dots)
----
->       index = seq_len(ncol(boot.out$t)), \dots)

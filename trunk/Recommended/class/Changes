@@ -1,34 +1,3 @@
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/class/R/SOM.R Recommended/class/R/SOM.R
-24c24
-<         init <- data[sample(1L:nd, ng, replace = FALSE), , drop = FALSE]
----
->         init <- data[sample(seq_len(nd), ng, replace = FALSE), , drop = FALSE]
-27c27
-<         cl <- as.numeric(knn1(init, data, 1L:ng))
----
->         cl <- as.numeric(knn1(init, data, seq_len(ng)))
-38,39c38,39
-<     x <- 1L:xdim
-<     y <- 1L:ydim
----
->     x <- seq_len(xdim)
->     y <- seq_len(ydim)
-86c86
-<         init <- data[sample(1L:nd, ng, replace = FALSE), , drop = FALSE]
----
->         init <- data[sample(seq_len(nd), ng, replace = FALSE), , drop = FALSE]
-92c92
-<             stop("'alpha' and 'radii' do not have the same lengths")
----
->             stop("'alpha' and 'radii' arguments do not have the same lengths")
-105c105
-<         for(k in 1L:nphases) {
----
->         for(k in seq_len(nphases)) {
-108c108
-<                 stop("'alpha' and 'radii' do not match")
----
->                 stop("'alpha' and 'radii' arguments do not match")
 diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/class/R/knn.R Recommended/class/R/knn.R
 58,59c58
 <             warning(gettextf("k = %d exceeds number %d of patterns", k, ntr),
@@ -89,6 +58,37 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 <                            domain = NA)
 ---
 > 	 if(trace) message(gettextf("pass %s size %d", pass, n2), domain = "R-class")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/class/R/SOM.R Recommended/class/R/SOM.R
+24c24
+<         init <- data[sample(1L:nd, ng, replace = FALSE), , drop = FALSE]
+---
+>         init <- data[sample(seq_len(nd), ng, replace = FALSE), , drop = FALSE]
+27c27
+<         cl <- as.numeric(knn1(init, data, 1L:ng))
+---
+>         cl <- as.numeric(knn1(init, data, seq_len(ng)))
+38,39c38,39
+<     x <- 1L:xdim
+<     y <- 1L:ydim
+---
+>     x <- seq_len(xdim)
+>     y <- seq_len(ydim)
+86c86
+<         init <- data[sample(1L:nd, ng, replace = FALSE), , drop = FALSE]
+---
+>         init <- data[sample(seq_len(nd), ng, replace = FALSE), , drop = FALSE]
+92c92
+<             stop("'alpha' and 'radii' do not have the same lengths")
+---
+>             stop("'alpha' and 'radii' arguments do not have the same lengths")
+105c105
+<         for(k in 1L:nphases) {
+---
+>         for(k in seq_len(nphases)) {
+108c108
+<                 stop("'alpha' and 'radii' do not match")
+---
+>                 stop("'alpha' and 'radii' arguments do not match")
 diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/class/src/class.c Recommended/class/src/class.c
 21a22
 > #include "localization.h"

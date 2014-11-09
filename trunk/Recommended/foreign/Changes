@@ -1,31 +1,3 @@
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/R/R_systat.R Recommended/foreign/R/R_systat.R
-22c22
-<     if (!is.character(file)) stop("'file' must be character")
----
->     if (!is.character(file)) stop(gettextf("'%s' argument must be a character string", "file"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/R/Sread.R Recommended/foreign/R/Sread.R
-66c66
-< 		for (i in 1L:len) {
----
-> 		for (i in seq_len(len)) {
-110c110
-< 		result <- call("stop", "Argument is missing")
----
-> 		result <- call("stop", gettext("Argument is missing", domain = "R-foreign"))
-114c114
-< 	    return(paste("Unrecognized S mode", code, "not supported"))
----
-> 	    return(gettextf("Unrecognized S mode %s is not supported", code, domain = "R-foreign"))
-164,165c164
-< 			     paste("Argument ", sQuote(name), " is missing",
-<                                    sep=""))
----
-> 			     gettextf("Argument %s is missing", sQuote(name), domain = "R-foreign"))
-208,209c207
-<             stop(gettextf("S mode %s (near byte offset %s) not supported",
-<                           sQuote(code), seek(dump)), domain = NA)
----
->             stop(gettextf("S mode %s (near byte offset %s) not supported", sQuote(code), seek(dump)), domain = "R-foreign")
 diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/R/arff.R Recommended/foreign/R/arff.R
 32c32
 <         stop("Argument 'file' must be a character string or connection.")
@@ -57,6 +29,11 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 <                 domain = NA)
 ---
 >         warning(gettextf("cannot handle unknown type %s", sQuote(type)), domain = "R-foreign")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/R/R_systat.R Recommended/foreign/R/R_systat.R
+22c22
+<     if (!is.character(file)) stop("'file' must be character")
+---
+>     if (!is.character(file)) stop(gettextf("'%s' argument must be a character string", "file"))
 diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/R/spss.R Recommended/foreign/R/spss.R
 87c87
 <             message(gettextf("re-encoding from %s", cp), domain = NA)
@@ -67,6 +44,29 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 <                             domain = NA)
 ---
 >                     warning(gettextf("missingness type %s is not handled", tp), domain = "R-foreign")
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/R/Sread.R Recommended/foreign/R/Sread.R
+66c66
+< 		for (i in 1L:len) {
+---
+> 		for (i in seq_len(len)) {
+110c110
+< 		result <- call("stop", "Argument is missing")
+---
+> 		result <- call("stop", gettext("Argument is missing", domain = "R-foreign"))
+114c114
+< 	    return(paste("Unrecognized S mode", code, "not supported"))
+---
+> 	    return(gettextf("Unrecognized S mode %s is not supported", code, domain = "R-foreign"))
+164,165c164
+< 			     paste("Argument ", sQuote(name), " is missing",
+<                                    sep=""))
+---
+> 			     gettextf("Argument %s is missing", sQuote(name), domain = "R-foreign"))
+208,209c207
+<             stop(gettextf("S mode %s (near byte offset %s) not supported",
+<                           sQuote(code), seek(dump)), domain = NA)
+---
+>             stop(gettextf("S mode %s (near byte offset %s) not supported", sQuote(code), seek(dump)), domain = "R-foreign")
 diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/R/writeForeignSAS.R Recommended/foreign/R/writeForeignSAS.R
 28c28
 <       stop(gettextf("Cannot uniquely abbreviate the variable names to %d or fewer characters", nmax), domain = NA)
@@ -93,43 +93,6 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 <         for (f in 1L:length(fmtnames))
 ---
 >         for (f in seq_len(length(fmtnames)))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/R_systat.c Recommended/foreign/src/R_systat.c
-100a101
-> #include "localization.h"
-131,132c132
-< 	sprintf(msg, _("not a rectangular data file (%s mtype is %d)"),
-< 		CHAR(STRING_ELT(file, 0)), getmtype(use));
----
-> 	sprintf(msg, _("not a rectangular data file (%s mtype is %d)"), CHAR(STRING_ELT(file, 0)), getmtype(use));
-334c334
-< 	    sprintf(tmp, "Getuse: failure reading byte %d", end);
----
-> 	    sprintf(tmp, _("Getuse: failure reading byte %d"), end);
-346c346
-< 	sprintf(tmp, "Getuse: last byte = %o octal", k);
----
-> 	sprintf(tmp, _("Getuse: last byte = %o octal"), k);
-503,504c503
-< 	    sprintf(tmp1, _("getlab: byte lab[%d]0 = %o, nv=%d"),
-< 		    j, o, u->h.nv);
----
-> 	    sprintf(tmp1, _("getlab: byte lab[%d]0 = %o, nv=%d"), j, o, u->h.nv);
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/Rdbfread.c Recommended/foreign/src/Rdbfread.c
-29a30
-> #include "localization.h"
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/Rdbfwrite.c Recommended/foreign/src/Rdbfwrite.c
-30c30
-< 
----
-> #include "localization.h"
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/SASxport.c Recommended/foreign/src/SASxport.c
-29a30
-> #include "localization.h"
-610,611c611
-< 	error(_("problem reading SAS XPORT file '%s'"),
-< 	      CHAR(STRING_ELT(xportFile, 0)));
----
-> 	error(_("problem reading SAS XPORT file '%s'"), CHAR(STRING_ELT(xportFile, 0)));
 diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/avl.c Recommended/foreign/src/avl.c
 28a29
 > #include "localization.h"
@@ -417,6 +380,43 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 <   "reading as a portable file",
 ---
 >   N_("reading as a portable file"),
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/Rdbfread.c Recommended/foreign/src/Rdbfread.c
+29a30
+> #include "localization.h"
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/Rdbfwrite.c Recommended/foreign/src/Rdbfwrite.c
+30c30
+< 
+---
+> #include "localization.h"
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/R_systat.c Recommended/foreign/src/R_systat.c
+100a101
+> #include "localization.h"
+131,132c132
+< 	sprintf(msg, _("not a rectangular data file (%s mtype is %d)"),
+< 		CHAR(STRING_ELT(file, 0)), getmtype(use));
+---
+> 	sprintf(msg, _("not a rectangular data file (%s mtype is %d)"), CHAR(STRING_ELT(file, 0)), getmtype(use));
+334c334
+< 	    sprintf(tmp, "Getuse: failure reading byte %d", end);
+---
+> 	    sprintf(tmp, _("Getuse: failure reading byte %d"), end);
+346c346
+< 	sprintf(tmp, "Getuse: last byte = %o octal", k);
+---
+> 	sprintf(tmp, _("Getuse: last byte = %o octal"), k);
+503,504c503
+< 	    sprintf(tmp1, _("getlab: byte lab[%d]0 = %o, nv=%d"),
+< 		    j, o, u->h.nv);
+---
+> 	    sprintf(tmp1, _("getlab: byte lab[%d]0 = %o, nv=%d"), j, o, u->h.nv);
+diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/SASxport.c Recommended/foreign/src/SASxport.c
+29a30
+> #include "localization.h"
+610,611c611
+< 	error(_("problem reading SAS XPORT file '%s'"),
+< 	      CHAR(STRING_ELT(xportFile, 0)));
+---
+> 	error(_("problem reading SAS XPORT file '%s'"), CHAR(STRING_ELT(xportFile, 0)));
 diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/foreign/src/sfm-read.c Recommended/foreign/src/sfm-read.c
 32a33
 > #include "localization.h"
