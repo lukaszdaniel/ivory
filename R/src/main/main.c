@@ -974,7 +974,7 @@ void setup_Rmainloop(void)
 	    warning(deferred_warnings[i]);
     }
     if (R_CollectWarnings) {
-	PrintWarnings(2);
+	PrintWarnings(ngettext("Warning message during startup:", "Warning messages during startup:", R_CollectWarnings));
     }
 
     /* trying to do this earlier seems to run into bootstrapping issues. */

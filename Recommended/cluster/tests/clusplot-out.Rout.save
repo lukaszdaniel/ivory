@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-11-04 r43) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-11-10 r52) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -126,4 +126,4 @@ $Shading
 > 
 > proc.time()
    user  system elapsed 
-  0.480   0.052   0.510 
+  0.798   0.063   0.854 

@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-11-04 r43) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-11-10 r52) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -120,4 +120,4 @@ In command 'ks.test(round(ds2, 1), "pnorm", exact = TRUE)':
 > 
 > proc.time()
    user  system elapsed 
-  0.175   0.024   0.190 
+  0.297   0.038   0.325 

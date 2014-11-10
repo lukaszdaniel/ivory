@@ -440,7 +440,7 @@ static void cleanup_PrintWarnings(void *data)
 
 
 attribute_hidden
-void PrintWarnings_warg(int h)
+void PrintWarnings_warg(char *hdr)
 {
     int i;
     char *header;
@@ -463,8 +463,7 @@ void PrintWarnings_warg(int h)
     cntxt.cend = &cleanup_PrintWarnings;
 
     inPrintWarnings = 1;
-    if(h == 1) header = ngettext("Additional warning message:", "Additional warning messages:", R_CollectWarnings);
-    else if (h == 2) header = ngettext("Warning message during startup:", "Warning messages during startup:", R_CollectWarnings);
+    if(hdr != NULL) header = hdr;
     else header = ngettext("Warning message:", "Warning messages:", R_CollectWarnings);
     if( R_CollectWarnings == 1 ) {
 	REprintf("%s\n", header);
@@ -705,7 +704,7 @@ verrorcall_dflt(SEXP call, const char *format, va_list ap)
     if (R_ShowErrorMessages) REprintf("%s", errbuf);
 
     if( R_ShowErrorMessages && R_CollectWarnings ) {
-	PrintWarnings(1);
+	PrintWarnings(ngettext("Additional warning message:", "Additional warning messages:", R_CollectWarnings));
     }
 
     jump_to_top_ex(TRUE, TRUE, TRUE, TRUE, FALSE);
@@ -1331,7 +1330,7 @@ static void R_SetErrmessage(const char *s)
 static void R_PrintDeferredWarnings(void)
 {
     if( R_ShowErrorMessages && R_CollectWarnings ) {
-	PrintWarnings(1);
+	PrintWarnings(ngettext("Additional warning message:", "Additional warning messages:", R_CollectWarnings));
     }
 }
 
