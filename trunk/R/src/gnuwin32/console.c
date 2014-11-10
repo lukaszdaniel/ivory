@@ -999,12 +999,9 @@ static void performCompletion(control c)
 	    consolewrites(c, CHAR(STRING_ELT(VECTOR_ELT(ans, POSSIBLE), i)));
 	}
 	if (alen > max_show) {
-	consolewrites(c, "\n");
-	    char *trunc = _("[... truncated]");
-	    const int bufsize = strlen(trunc);
-            char result [bufsize];
-            snprintf(result, bufsize, "%s", trunc);
-	    consolewrites(c, result);
+		consolewrites(c, "\n");
+	    const char *trunc = _("[... truncated]");
+	    consolewrites(c, trunc);
 	}
 	consolewrites(c, "\n");
 	p->wipe_completion = 1;
