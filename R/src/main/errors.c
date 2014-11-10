@@ -45,6 +45,8 @@
 /* Total line length, in chars, before splitting in warnings/errors */
 #define LONGWARN (GetOptionWidth()-5)
 
+
+
 /*
 Different values of inError are used to indicate different places
 in the error handling.
@@ -180,7 +182,7 @@ RETSIGTYPE attribute_hidden onsigusr1(int dummy)
 
     inError = 1;
 
-    if(R_CollectWarnings) PrintWarnings(0);
+    if(R_CollectWarnings) PrintWarnings();
 
     R_ResetConsole();
     R_FlushConsole();
@@ -215,7 +217,7 @@ RETSIGTYPE attribute_hidden onsigusr2(int dummy)
 	return;
     }
 
-    if(R_CollectWarnings) PrintWarnings(0);
+    if(R_CollectWarnings) PrintWarnings();
 
     R_ResetConsole();
     R_FlushConsole();
@@ -435,8 +437,10 @@ static void cleanup_PrintWarnings(void *data)
     inPrintWarnings = 0;
 }
 
+
+
 attribute_hidden
-void PrintWarnings(int h)
+void PrintWarnings_warg(int h)
 {
     int i;
     char *header;
@@ -840,7 +844,7 @@ static void jump_to_top_ex(Rboolean traceback,
 
     /* print warnings if there are any left to be printed */
     if( processWarnings && R_CollectWarnings )
-	PrintWarnings(0);
+	PrintWarnings();
 
     /* reset some stuff--not sure (all) this belongs here */
     if (resetConsole) {

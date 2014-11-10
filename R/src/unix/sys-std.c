@@ -1098,7 +1098,7 @@ void attribute_hidden Rstd_CleanUp(SA_TYPE saveact, int status, int runLast)
     if(saveact != SA_SUICIDE) KillAllDevices();
     R_CleanTempDir();
     if(saveact != SA_SUICIDE && R_CollectWarnings)
-	PrintWarnings(0);	/* from device close and (if run) .Last */
+	PrintWarnings();	/* from device close and (if run) .Last */
     if(ifp) fclose(ifp);        /* input file from -f or --file= */
     fpu_setup(FALSE);
 

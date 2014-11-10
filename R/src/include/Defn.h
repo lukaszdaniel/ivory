@@ -26,7 +26,7 @@
 
 #define isRaw(x) (TYPEOF(x) == RAWSXP)
 
-
+#define PrintWarnings(...) PrintWarnings_warg( (0, ##__VA_ARGS__) )
 
 //#define COUNTING
 
@@ -932,7 +932,7 @@ LibExtern SEXP R_LogicalNAValue INI_as(NULL);
 # define PrintVersion		Rf_PrintVersion
 # define PrintVersion_part_1	Rf_PrintVersion_part_1
 # define PrintVersionString    	Rf_PrintVersionString
-# define PrintWarnings		Rf_PrintWarnings
+# define PrintWarnings_warg		Rf_PrintWarnings_warg
 # define promiseArgs		Rf_promiseArgs
 # define RealFromComplex	Rf_RealFromComplex
 # define RealFromInteger	Rf_RealFromInteger
@@ -1130,7 +1130,7 @@ void PrintValueRec(SEXP, SEXP);
 void PrintVersion(char *, size_t len);
 void PrintVersion_part_1(char *, size_t len);
 void PrintVersionString(char *, size_t len);
-void PrintWarnings(int h);
+void PrintWarnings_warg(int h);
 void process_site_Renviron(void);
 void process_system_Renviron(void);
 void process_user_Renviron(void);
