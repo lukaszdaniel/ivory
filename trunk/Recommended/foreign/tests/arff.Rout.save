@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-11-04 r43) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-11-10 r52) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -42,4 +42,4 @@ Type 'q()' to quit R.
 > q()
 > proc.time()
    user  system elapsed 
-  0.199   0.014   0.206 
+  0.308   0.040   0.338 

@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-11-04 r43) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-11-10 r52) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -495,7 +495,7 @@ List of 9 components
  - attr(*, "class")= character [1:2] "agnes" "twins"
 > 
 > showProc.time()
-Time elapsed:  0.059 0.024 0.083 
+Time elapsed:  0.102 0.009 0.111 
 > 
 > summary(ar2 <- agnes(ruspini, metric="manhattan", method = "weighted"))
 Object of class 'agnes' from call:
@@ -620,7 +620,7 @@ Available components:
 > stopifnot(all.equal(ar2[1:4], ar3[1:4], tol=1e-12))
 > 
 > showProc.time()
-Time elapsed:  0.011 0.004 0.016 
+Time elapsed:  0.014 0.002 0.016 
 > 
 > ## Small example, testing "flexible" vs "single"
 > i8 <- -c(1:2, 9:10)
@@ -765,8 +765,8 @@ C agnes(n=75, method = 5, ..): 74 merging steps
 C agnes(n=75, method = 6, ..): 74 merging steps
 > 
 > showProc.time()
-Time elapsed:  0.047 0.008 0.054 
+Time elapsed:  0.079 0.003 0.083 
 > 
 > proc.time()
    user  system elapsed 
-  0.337   0.075   0.398 
+  0.496   0.057   0.546 

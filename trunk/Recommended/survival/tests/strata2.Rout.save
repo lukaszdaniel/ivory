@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-11-04 r43) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-11-10 r52) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -54,4 +54,4 @@ In command 'coxph(Surv(time, status) ~ age + sex:strata(ph.ecog), tdata)':
 > 
 > proc.time()
    user  system elapsed 
-  0.205   0.018   0.215 
+  0.387   0.047   0.422 
