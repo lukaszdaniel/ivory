@@ -30,7 +30,7 @@
 #endif
 
 #include <Defn.h>
-
+#include <Localization.h>
 /* rint is C99 */
 #ifdef HAVE_RINT
 #define R_rint(x) rint(x)
