@@ -102,7 +102,7 @@ static void R_ReplFile(FILE *fp, SEXP rho)
 	    if (R_Visible)
 		PrintValueEnv(R_CurrentExpr, rho);
 	    if( R_CollectWarnings )
-		PrintWarnings();
+		PrintWarnings(NULL);
 	    break;
 	case PARSE_ERROR:
 	    R_FinalizeSrcRefState();
@@ -262,7 +262,7 @@ Rf_ReplIteration(SEXP rho, int savestack, int browselevel, R_ReplState *state)
 	if (R_Visible)
 	    PrintValueEnv(value, rho);
 	if (R_CollectWarnings)
-	    PrintWarnings();
+	    PrintWarnings(NULL);
 	Rf_callToplevelHandlers(thisExpr, value, TRUE, wasDisplayed);
 	R_CurrentExpr = value; /* Necessary? Doubt it. */
 	UNPROTECT(1);
@@ -368,7 +368,7 @@ int R_ReplDLLdo1(void)
 	if (R_Visible)
 	    PrintValueEnv(R_CurrentExpr, rho);
 	if (R_CollectWarnings)
-	    PrintWarnings();
+	    PrintWarnings(NULL);
 	Rf_callToplevelHandlers(lastExpr, R_CurrentExpr, TRUE, wasDisplayed);
 	UNPROTECT(1);
 	R_IoBufferWriteReset(&R_ConsoleIob);
@@ -1472,7 +1472,7 @@ Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
 	again = (h->cb)(expr, value, succeeded, visible, h->data);
 	if(R_CollectWarnings) {
 	    REprintf(_("warning messages from top-level task callback '%s'\n"), h->name);
-	    PrintWarnings();
+	    PrintWarnings(NULL);
 	}
 	if(again) {
 	    prev = h;

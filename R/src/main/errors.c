@@ -182,7 +182,7 @@ RETSIGTYPE attribute_hidden onsigusr1(int dummy)
 
     inError = 1;
 
-    if(R_CollectWarnings) PrintWarnings();
+    if(R_CollectWarnings) PrintWarnings(NULL);
 
     R_ResetConsole();
     R_FlushConsole();
@@ -217,7 +217,7 @@ RETSIGTYPE attribute_hidden onsigusr2(int dummy)
 	return;
     }
 
-    if(R_CollectWarnings) PrintWarnings();
+    if(R_CollectWarnings) PrintWarnings(NULL);
 
     R_ResetConsole();
     R_FlushConsole();
@@ -440,10 +440,10 @@ static void cleanup_PrintWarnings(void *data)
 
 
 attribute_hidden
-void PrintWarnings_warg(char *hdr)
+void PrintWarnings(const char *hdr)
 {
     int i;
-    char *header;
+    const char *header = hdr? hdr: ngettext("Warning message:", "Warning messages:", R_CollectWarnings);
     SEXP names, s, t;
     RCNTXT cntxt;
 
@@ -463,8 +463,8 @@ void PrintWarnings_warg(char *hdr)
     cntxt.cend = &cleanup_PrintWarnings;
 
     inPrintWarnings = 1;
-    if(hdr != NULL) header = hdr;
-    else header = ngettext("Warning message:", "Warning messages:", R_CollectWarnings);
+//    if(hdr != NULL) header = hdr;
+//    else header = ngettext("Warning message:", "Warning messages:", R_CollectWarnings);
     if( R_CollectWarnings == 1 ) {
 	REprintf("%s\n", header);
 	names = CAR(ATTRIB(R_Warnings));
@@ -843,7 +843,7 @@ static void jump_to_top_ex(Rboolean traceback,
 
     /* print warnings if there are any left to be printed */
     if( processWarnings && R_CollectWarnings )
-	PrintWarnings();
+	PrintWarnings(NULL);
 
     /* reset some stuff--not sure (all) this belongs here */
     if (resetConsole) {

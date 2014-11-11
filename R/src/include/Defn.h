@@ -26,18 +26,6 @@
 
 #define isRaw(x) (TYPEOF(x) == RAWSXP)
 
-/* IVORY:
- * In order to deliver translations for "Warning message during startup" or
- * "Additional warning message" messages 'PrintWarnings' function had to be modified.
- * Solution was to pass translatable text to 'PrintWarnings' via function argument but
- * without changing existing calls such as 'PrintWarnings()'.
- * Default value for an argument couldn't be set since C99 doesn't operate on default values for arguments like c++.
- * The fix below mimics such c++ behaviour:
- * 1. Original 'PrintWarnings' were changed to 'PrintWarnings_warg (i.e. with argument).
- * 2. Macro 'PrintWarnings took place of the former function.
- * 3. Empty argument in 'PrintWarnings()' is treated as NULL in 'PrintWarnings_warg'
-*/
-#define PrintWarnings(...) PrintWarnings_warg( (NULL, ##__VA_ARGS__) )
 
 //#define COUNTING
 
@@ -59,13 +47,7 @@
 # define USE_RINTERNALS
 #endif
 
-#ifdef HAVE_VISIBILITY_ATTRIBUTE
-# define attribute_visible __attribute__ ((visibility ("default")))
-# define attribute_hidden __attribute__ ((visibility ("hidden")))
-#else
-# define attribute_visible
-# define attribute_hidden
-#endif
+#include <R_ext/Visibility.h>
 
 #ifdef __MAIN__
 # define extern0 attribute_hidden
@@ -943,7 +925,7 @@ LibExtern SEXP R_LogicalNAValue INI_as(NULL);
 # define PrintVersion		Rf_PrintVersion
 # define PrintVersion_part_1	Rf_PrintVersion_part_1
 # define PrintVersionString    	Rf_PrintVersionString
-# define PrintWarnings_warg		Rf_PrintWarnings_warg
+# define PrintWarnings		Rf_PrintWarnings
 # define promiseArgs		Rf_promiseArgs
 # define RealFromComplex	Rf_RealFromComplex
 # define RealFromInteger	Rf_RealFromInteger
@@ -1141,7 +1123,7 @@ void PrintValueRec(SEXP, SEXP);
 void PrintVersion(char *, size_t len);
 void PrintVersion_part_1(char *, size_t len);
 void PrintVersionString(char *, size_t len);
-void PrintWarnings_warg(char *);
+void PrintWarnings(const char *);
 void process_site_Renviron(void);
 void process_system_Renviron(void);
 void process_user_Renviron(void);
