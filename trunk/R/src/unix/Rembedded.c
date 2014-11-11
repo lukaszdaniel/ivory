@@ -72,6 +72,6 @@ void Rf_endEmbeddedR(int fatal)
     if(!fatal) KillAllDevices();
     R_CleanTempDir();
     if(!fatal && R_CollectWarnings)
-	PrintWarnings();	/* from device close and .Last */
+	PrintWarnings(NULL);	/* from device close and .Last */
     fpu_setup(FALSE);
 }
