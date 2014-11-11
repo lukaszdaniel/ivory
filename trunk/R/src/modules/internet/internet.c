@@ -441,9 +441,9 @@ static SEXP in_do_download(SEXP args)
 		if(nbytes > 1024*1024)
 		    REprintf(_("downloaded %0.1f MB"), (double)nbytes/1024/1024, url);
 		else if(nbytes > 10240)
-		    REprintf(_("downloaded %d KB"), nbytes/1024, url);
+		    REprintf(_("downloaded %d KB"), (int) nbytes/1024, url);
 		else
-		    REprintf(ngettext("downloaded %d byte", "downloaded %d bytes", nbytes), nbytes, url);
+		    REprintf(ngettext("downloaded %d byte", "downloaded %d bytes", (int) nbytes), (int) nbytes, url);
 		REprintf("\n\n");
 	    }
 #ifdef Win32
@@ -551,9 +551,9 @@ static SEXP in_do_download(SEXP args)
 		    REprintf(_("downloaded %0.1f MB"),
 			     (double)nbytes/1024/1024, url);
 		else if(nbytes > 10240)
-		    REprintf(_("downloaded %d KB"), nbytes/1024, url);
+		    REprintf(_("downloaded %d KB"), (int) nbytes/1024, url);
 		else
-		    REprintf(ngettext("downloaded %d byte", "downloaded %d bytes", nbytes), nbytes, url);
+		    REprintf(ngettext("downloaded %d byte", "downloaded %d bytes", (int) nbytes), (int) nbytes, url);
 			REprintf("\n\n");
 	    }
 #ifdef Win32

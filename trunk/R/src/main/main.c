@@ -1471,7 +1471,8 @@ Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
     while(h) {
 	again = (h->cb)(expr, value, succeeded, visible, h->data);
 	if(R_CollectWarnings) {
-	    REprintf(_("warning messages from top-level task callback '%s'\n"), h->name);
+	    REprintf(_("warning messages from top-level task callback '%s'"), h->name);
+	    REprintf("\n");
 	    PrintWarnings(NULL);
 	}
 	if(again) {
