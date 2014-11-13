@@ -3238,13 +3238,13 @@ msgid_plural ""
 "versions are later"
 msgstr[0] ""
 "Dostępna jest wersja binarna (i ona zostanie zainstalowana) ale wersja z "
-"kodem źródłowym jest późniejsza"
+"kodem źródłowym jest nowsza"
 msgstr[1] ""
 "Dostępne są wersje binarne (i one zostaną zainstalowane) ale wersje z kodem "
-"źródłowym są późniejsze"
+"źródłowym są nowsze"
 msgstr[2] ""
 "Dostępne są wersje binarne (i one zostaną zainstalowane) ale wersje z kodem "
-"źródłowym są późniejsze"
+"źródłowym są nowsze"
 
 #. R/packages2.R: ngettext(sum(later), "There is a binary version available but the source version is later",     "There are binary versions available but the source versions are later", domain = "R-utils")
 #: R/packages2.R:0
