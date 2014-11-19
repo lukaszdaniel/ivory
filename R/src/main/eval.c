@@ -1331,8 +1331,10 @@ static R_INLINE Rboolean asLogicalNoNA(SEXP s, SEXP call)
 }
 
 
-//#define BodyHasBraces(body) \
-//    ((isLanguage(body) && CAR(body) == R_BraceSymbol) ? 1 : 0)
+/*
+#define BodyHasBraces(body) \
+    ((isLanguage(body) && CAR(body) == R_BraceSymbol) ? 1 : 0)
+*/
 static R_INLINE Rboolean BodyHasBraces(SEXP body) {
  return (isLanguage(body) && CAR(body) == R_BraceSymbol);
  }
@@ -1789,16 +1791,18 @@ static void tmp_cleanup(void *data)
    1. The SET_CAR is intended to protect against possible GC in
    R_SetVarLocValue; this might occur it the binding is an active
    binding. */
-//#define SET_TEMPVARLOC_FROM_CAR(loc, lhs) do { \
-//	SEXP __lhs__ = (lhs); \
-//	SEXP __v__ = CAR(__lhs__); \
-//	if (MAYBE_SHARED(__v__)) { \
-//	    __v__ = shallow_duplicate(__v__); \
-//	    SET_NAMED(__v__, 1); \
-//	    SETCAR(__lhs__, __v__); \
-//	} \
-//	R_SetVarLocValue(loc, __v__); \
-//    } while(0)
+/*
+#define SET_TEMPVARLOC_FROM_CAR(loc, lhs) do { \
+	SEXP __lhs__ = (lhs); \
+	SEXP __v__ = CAR(__lhs__); \
+	if (MAYBE_SHARED(__v__)) { \
+	    __v__ = shallow_duplicate(__v__); \
+	    SET_NAMED(__v__, 1); \
+	    SETCAR(__lhs__, __v__); \
+	} \
+	R_SetVarLocValue(loc, __v__); \
+    } while(0)
+*/
 static R_INLINE void SET_TEMPVARLOC_FROM_CAR(R_varloc_t loc, SEXP lhs) {
         SEXP v = CAR(lhs);
         if (MAYBE_SHARED(v)) {
@@ -1812,11 +1816,13 @@ static R_INLINE void SET_TEMPVARLOC_FROM_CAR(R_varloc_t loc, SEXP lhs) {
    necessary to make sure the RHS value returned by the assignment
    expression is correct when the RHS value is part of the LHS
    object. */
-//#define FIXUP_RHS_NAMED(r) do { \
-//	SEXP __rhs__ = (r); \
-//	if (NAMED(__rhs__) && NAMED(__rhs__) <= 1) \
-//	    SET_NAMED(__rhs__, 2); \
-//    } while (0)
+/*
+#define FIXUP_RHS_NAMED(r) do { \
+	SEXP __rhs__ = (r); \
+	if (NAMED(__rhs__) && NAMED(__rhs__) <= 1) \
+	    SET_NAMED(__rhs__, 2); \
+    } while (0)
+*/
 static R_INLINE void FIXUP_RHS_NAMED(SEXP rhs) {
         if (NAMED(rhs) && NAMED(rhs) <= 1)
             SET_NAMED(rhs, 2);
@@ -2058,10 +2064,12 @@ SEXP attribute_hidden do_set(SEXP call, SEXP op, SEXP args, SEXP rho)
    and because it is a little more efficient.
 */
 
-//#define COPY_TAG(to, from) do { \
-//  SEXP __tag__ = TAG(from); \
-//  if (__tag__ != R_NilValue) SET_TAG(to, __tag__); \
-//} while (0)
+/*
+#define COPY_TAG(to, from) do { \
+  SEXP __tag__ = TAG(from); \
+  if (__tag__ != R_NilValue) SET_TAG(to, __tag__); \
+} while (0)
+*/
 static R_INLINE void COPY_TAG(SEXP to, SEXP from) {
   SEXP tag = TAG(from);
   if (tag != R_NilValue) SET_TAG(to, tag);
@@ -4006,8 +4014,10 @@ static void MISSING_ARGUMENT_ERROR(SEXP symbol)
     else error(_("'%s' argument is missing, with no default"), "expr");
 }
 
-//#define MAYBE_MISSING_ARGUMENT_ERROR(symbol, keepmiss) \
-//    do { if (! keepmiss) MISSING_ARGUMENT_ERROR(symbol); } while (0)
+/*
+#define MAYBE_MISSING_ARGUMENT_ERROR(symbol, keepmiss) \
+    do { if (! keepmiss) MISSING_ARGUMENT_ERROR(symbol); } while (0)
+*/
 static R_INLINE void MAYBE_MISSING_ARGUMENT_ERROR(SEXP symbol, Rboolean keepmiss) {
     if (! keepmiss) MISSING_ARGUMENT_ERROR(symbol);
  }
@@ -4173,14 +4183,16 @@ static R_INLINE SEXP getvar(SEXP symbol, SEXP rho,
 } while (0)
 
 /* place a tag on the most recently pushed call argument */
-//#define SETCALLARG_TAG(t) do {			\
-//	SEXP __tag__ = (t);			\
-//	if (__tag__ != R_NilValue) {		\
-//	    SEXP __cell__ = GETSTACK(-1);	\
-//	    if (__cell__ != R_NilValue)		   \
-//		SET_TAG(__cell__, CreateTag(__tag__));	\
-//	}						\
-//    } while (0)
+/*
+#define SETCALLARG_TAG(t) do {			\
+	SEXP __tag__ = (t);			\
+	if (__tag__ != R_NilValue) {		\
+	    SEXP __cell__ = GETSTACK(-1);	\
+	    if (__cell__ != R_NilValue)		   \
+		SET_TAG(__cell__, CreateTag(__tag__));	\
+	}						\
+    } while (0)
+*/
 static R_INLINE void SETCALLARG_TAG(SEXP tag) {
         if (tag != R_NilValue) {
             SEXP cell = GETSTACK(-1);
@@ -4190,11 +4202,13 @@ static R_INLINE void SETCALLARG_TAG(SEXP tag) {
  }
 
 /* same, but tag is known to be a symbol */
-//#define SETCALLARG_TAG_SYMBOL(t) do {			\
-//	SEXP __cell__ = GETSTACK(-1);			\
-//	if (__cell__ != R_NilValue)			\
-//	    SET_TAG(__cell__, t);			\
-//    } while (0)
+/*
+#define SETCALLARG_TAG_SYMBOL(t) do {			\
+	SEXP __cell__ = GETSTACK(-1);			\
+	if (__cell__ != R_NilValue)			\
+	    SET_TAG(__cell__, t);			\
+    } while (0)
+*/
 static R_INLINE void SETCALLARG_TAG_SYMBOL(SEXP tag) {
         SEXP cell = GETSTACK(-1);
         if (cell != R_NilValue)

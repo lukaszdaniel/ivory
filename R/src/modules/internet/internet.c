@@ -25,6 +25,11 @@
 
 #define R_USE_SIGNALS 1
 #include <Localization.h>
+#ifdef Win32
+ #undef _
+ #define _(String) libintl_gettext (String)
+ #undef gettext /* needed for graphapp */
+#endif
 #include <Defn.h>
 #include <Fileio.h>
 #include <Rconnections.h>
