@@ -35,6 +35,11 @@
 
 
 #include <Localization.h>
+#ifdef Win32
+ #undef _
+ #define _(String) libintl_gettext (String)
+ #undef gettext /* needed for graphapp */
+#endif
 
 extern void R_ProcessEvents(void);
 #if !defined(Unix) || defined(HAVE_BSD_NETWORKING)

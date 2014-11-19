@@ -150,17 +150,19 @@ static R_INLINE Rboolean SYMBOL_HAS_BINDING(SEXP s) {
  return IS_ACTIVE_BINDING(s) || (SYMVALUE(s) != R_UnboundValue);
  }
 
-//#define SET_BINDING_VALUE(b,val) do { \
-//  SEXP __b__ = (b); \
-//  SEXP __val__ = (val); \
-//  if (BINDING_IS_LOCKED(__b__)) \
-//    error(_("cannot change value of locked binding for '%s'"), \
-//	  CHAR(PRINTNAME(TAG(__b__)))); \
-//  if (IS_ACTIVE_BINDING(__b__)) \
-//    setActiveValue(CAR(__b__), __val__); \
-//  else \
-//    SETCAR(__b__, __val__); \
-//} while (0)
+/*
+#define SET_BINDING_VALUE(b,val) do { \
+  SEXP __b__ = (b); \
+  SEXP __val__ = (val); \
+  if (BINDING_IS_LOCKED(__b__)) \
+    error(_("cannot change value of locked binding for '%s'"), \
+	  CHAR(PRINTNAME(TAG(__b__)))); \
+  if (IS_ACTIVE_BINDING(__b__)) \
+    setActiveValue(CAR(__b__), __val__); \
+  else \
+    SETCAR(__b__, __val__); \
+} while (0)
+*/
 static R_INLINE void SET_BINDING_VALUE(SEXP b, SEXP val) {
   if (BINDING_IS_LOCKED(b)) 
     error(_("cannot change value of locked binding for '%s'"), 
@@ -171,17 +173,19 @@ static R_INLINE void SET_BINDING_VALUE(SEXP b, SEXP val) {
     SETCAR(b, val); 
 }
 
-//#define SET_SYMBOL_BINDING_VALUE(sym, val) do { \
-//  SEXP __sym__ = (sym); \
-//  SEXP __val__ = (val); \
-//  if (BINDING_IS_LOCKED(__sym__)) \
-//    error(_("cannot change value of locked binding for '%s'"), \
-//	  CHAR(PRINTNAME(__sym__))); \
-//  if (IS_ACTIVE_BINDING(__sym__)) \
-//    setActiveValue(SYMVALUE(__sym__), __val__); \
-//  else \
-//    SET_SYMVALUE(__sym__, __val__); \
-//} while (0)
+/*
+#define SET_SYMBOL_BINDING_VALUE(sym, val) do { \
+  SEXP __sym__ = (sym); \
+  SEXP __val__ = (val); \
+  if (BINDING_IS_LOCKED(__sym__)) \
+    error(_("cannot change value of locked binding for '%s'"), \
+	  CHAR(PRINTNAME(__sym__))); \
+  if (IS_ACTIVE_BINDING(__sym__)) \
+    setActiveValue(SYMVALUE(__sym__), __val__); \
+  else \
+    SET_SYMVALUE(__sym__, __val__); \
+} while (0)
+*/
 static R_INLINE void SET_SYMBOL_BINDING_VALUE(SEXP sym, SEXP val) {
   if (BINDING_IS_LOCKED(sym)) 
     error(_("cannot change value of locked binding for '%s'"), 
@@ -695,13 +699,17 @@ static SEXP R_HashProfile(SEXP table)
 static R_INLINE Rboolean IS_GLOBAL_FRAME(SEXP e) {
  return ENVFLAGS(e) & GLOBAL_FRAME_MASK;
  }
-//#define MARK_AS_GLOBAL_FRAME(e) \
-//  SET_ENVFLAGS(e, ENVFLAGS(e) | GLOBAL_FRAME_MASK)
+/*
+#define MARK_AS_GLOBAL_FRAME(e) \
+  SET_ENVFLAGS(e, ENVFLAGS(e) | GLOBAL_FRAME_MASK)
+*/
 static R_INLINE void MARK_AS_GLOBAL_FRAME(SEXP e) {
  SET_ENVFLAGS(e, ENVFLAGS(e) | GLOBAL_FRAME_MASK);
  }
-//#define MARK_AS_LOCAL_FRAME(e) \
-//  SET_ENVFLAGS(e, ENVFLAGS(e) & (~ GLOBAL_FRAME_MASK))
+/*
+#define MARK_AS_LOCAL_FRAME(e) \
+  SET_ENVFLAGS(e, ENVFLAGS(e) & (~ GLOBAL_FRAME_MASK))
+*/
 static R_INLINE void MARK_AS_LOCAL_FRAME(SEXP e) {
  SET_ENVFLAGS(e, ENVFLAGS(e) & (~ GLOBAL_FRAME_MASK));
  }
@@ -3111,7 +3119,6 @@ void R_LockEnvironment(SEXP env, Rboolean bindings)
     }
 
     if (TYPEOF(env) != ENVSXP)
-	//error(_("%s is not an environment"), CHAR(PRINTNAME(env)));
 	error(_("'%s' argument is not an environment"), "env");
     if (bindings) {
 	if (IS_HASHED(env)) {
@@ -3140,7 +3147,6 @@ Rboolean R_EnvironmentIsLocked(SEXP env)
 	error(_("use of NULL environment is defunct"));
     if (TYPEOF(env) != ENVSXP &&
 	TYPEOF((env = simple_as_environment(env))) != ENVSXP)
-	//error(_("%s is not an environment"), CHAR(PRINTNAME(env)));
 	error(_("'%s' argument is not an environment"), "env");
     return FRAME_IS_LOCKED(env) != 0;
 }
@@ -3165,13 +3171,11 @@ SEXP attribute_hidden do_envIsLocked(SEXP call, SEXP op, SEXP args, SEXP rho)
 void R_LockBinding(SEXP sym, SEXP env)
 {
     if (TYPEOF(sym) != SYMSXP)
-	//error(_("%s is not a symbol"), CHAR(PRINTNAME(sym)));
 	error(_("'%s' argument is not a symbol"), "sym");
     if (TYPEOF(env) == NILSXP)
 	error(_("use of NULL environment is defunct"));
     if (TYPEOF(env) != ENVSXP &&
 	TYPEOF((env = simple_as_environment(env))) != ENVSXP)
-	//error(_("%s is not an environment"), CHAR(PRINTNAME(env)));
 	error(_("'%s' argument is not an environment"), "env");
     if (env == R_BaseEnv || env == R_BaseNamespace)
 	/* It is a symbol, so must have a binding even if it is

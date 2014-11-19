@@ -1,5 +1,6 @@
 #include <R_ext/Boolean.h>
 #include <R_ext/Error.h>
+#include <Localization.h>
 
 /*
  * Copyright (C) 1991, 1992, 1993 by Chris Thewalt (thewalt@ce.berkeley.edu)
