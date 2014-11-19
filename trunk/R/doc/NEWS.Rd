@@ -170,6 +170,9 @@
       \option{--with-system-valgrind-headers}: note the possible
       incompatibility of such headers discussed in the 'R Installation
       and Administration' manual. (Wish of \PR{16808}.)
+
+      \item The included version of \code{lzmautils} has been updated to
+      \code{xz-utils} 5.0.7 (minor bug fixes from 5.0.5).
     }
   }
 
@@ -304,6 +307,10 @@
 
       \item (Windows.) The command completion in \command{Rgui.exe}
       messed up the console.  (\PR{15791})
+      
+      \item (Windows.) The \code{choose.files()} command returned a 
+      blank string when the user asked for a single file but cancelled
+      the request.  (\PR{16074})
     }
   }
 }
