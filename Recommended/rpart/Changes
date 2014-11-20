@@ -259,24 +259,24 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 < 	    me->risk / me->num_obs);
 ---
 >     Rprintf("\n\n");
->     Rprintf(ngettext("Node number %d: %d observation", "Node number %d: %d observations", me->num_obs), id, me->num_obs);
+>     Rprintf(dngettext("rpart", "Node number %d: %d observation", "Node number %d: %d observations", me->num_obs), id, me->num_obs);
 >     Rprintf("\t   ");
 >     Rprintf(_("Complexity param= %f\n  response estimate=%f,  risk/n= %f\n"), me->complexity, *(me->response_est), me->risk / me->num_obs);
 65c66
 < 	Rprintf("  left son=%d (%d obs)", 2 * id, (me->leftson)->num_obs);
 ---
-> 	Rprintf(ngettext("  left son=%d (%d observation)", "  left son=%d (%d observations)", (me->leftson)->num_obs), 2 * id, (me->leftson)->num_obs);
+> 	Rprintf(dngettext("rpart", "  left son=%d (%d observation)", "  left son=%d (%d observations)", (me->leftson)->num_obs), 2 * id, (me->leftson)->num_obs);
 67c68
 < 	Rprintf(" right son=%d (%d obs)", 2 * id + 1, (me->rightson)->num_obs);
 ---
-> 	Rprintf(ngettext(" right son=%d (%d observation)", " right son=%d (%d observations)", (me->rightson)->num_obs), 2 * id + 1, (me->rightson)->num_obs);
+> 	Rprintf(dngettext("rpart", " right son=%d (%d observation)", " right son=%d (%d observations)", (me->rightson)->num_obs), 2 * id + 1, (me->rightson)->num_obs);
 72,73c73,76
 < 	else
 < 	    Rprintf(", %d obs do not split\n", i);
 ---
 > 	else {
 > 	    Rprintf(", ");
-> 	    Rprintf(ngettext("%d observation does not split\n", "%d observations do not split\n", i), i);
+> 	    Rprintf(dngettext("rpart", "%d observation does not split\n", "%d observations do not split\n", i), i);
 >         }
 77c80
 <     Rprintf("  Primary splits:\n");
@@ -287,11 +287,11 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 83c87
 < 		    ("\tvar%d < %5g to the left, improve=%5.3f,  (%d missing)\n",
 ---
-> 		    (ngettext("var%d < %5g to the left, improve=%5.3f,  (%d missing)\n", "var%d < %5g to the left, improve=%5.3f,  (%d missing)\n", me->num_obs - ss->count),
+> 		    (dngettext("rpart", "var%d < %5g to the left, improve=%5.3f,  (%d missing)\n", "var%d < %5g to the left, improve=%5.3f,  (%d missing)\n", me->num_obs - ss->count),
 87c91
 < 		    ("\tvar%d > %5g to the left, improve=%5.3f, (%d missing)\n",
 ---
-> 		    (ngettext("var%d > %5g to the left, improve=%5.3f, (%d missing)\n", "var%d > %5g to the left, improve=%5.3f, (%d missing)\n", me->num_obs - ss->count),
+> 		    (dngettext("rpart", "var%d > %5g to the left, improve=%5.3f, (%d missing)\n", "var%d > %5g to the left, improve=%5.3f, (%d missing)\n", me->num_obs - ss->count),
 90c94,95
 < 	    Rprintf("\tvar%d splits as ", j);
 ---
@@ -303,7 +303,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 ---
 > 	    if (rp.numcat[j] < 7) {
 > 		Rprintf(",\t");
-> 		Rprintf(ngettext("improve=%5.3f, (%d missing)\n", "improve=%5.3f, (%d missing)\n", (me->num_obs - ss->count)),
+> 		Rprintf(dngettext("rpart", "improve=%5.3f, (%d missing)\n", "improve=%5.3f, (%d missing)\n", (me->num_obs - ss->count)),
 106,107c112,115
 < 	    else
 < 		Rprintf(", improve=%5.3f, (%d missing)\n",
@@ -311,7 +311,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 > 	    }
 > 	    else {
 > 		Rprintf(", ");
-> 		Rprintf(ngettext("improve=%5.3f, (%d missing)\n", "improve=%5.3f, (%d missing)\n", (me->num_obs - ss->count)),
+> 		Rprintf(dngettext("rpart", "improve=%5.3f, (%d missing)\n", "improve=%5.3f, (%d missing)\n", (me->num_obs - ss->count)),
 110a119
 >     }
 116c125
@@ -323,11 +323,11 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 122c132
 < 		    ("\tvar%d < %5g to the left, agree=%5.3f, (%d split)\n",
 ---
-> 		    (ngettext("var%d < %5g to the left, agree=%5.3f, (%d split)\n", "var%d < %5g to the left, agree=%5.3f, (%d split)\n", ss->count),
+> 		    (dngettext("rpart", "var%d < %5g to the left, agree=%5.3f, (%d split)\n", "var%d < %5g to the left, agree=%5.3f, (%d split)\n", ss->count),
 126c136
 < 		    ("\tvar%d > %5g to the left, agree=%5.3f, (%d split)\n",
 ---
-> 		    (ngettext("var%d > %5g to the left, agree=%5.3f, (%d split)\n", "var%d > %5g to the left, agree=%5.3f, (%d split)\n", ss->count),
+> 		    (dngettext("rpart", "var%d > %5g to the left, agree=%5.3f, (%d split)\n", "var%d > %5g to the left, agree=%5.3f, (%d split)\n", ss->count),
 129c139,140
 < 	    Rprintf("\tvar%d splits as ", j);
 ---
@@ -339,7 +339,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 ---
 > 	    if (rp.numcat[j] < 7) {
 > 		Rprintf(",\t");
-> 		Rprintf(ngettext("agree=%5.3f, (%d split)\n", "agree=%5.3f, (%d split)\n", ss->count),
+> 		Rprintf(dngettext("rpart", "agree=%5.3f, (%d split)\n", "agree=%5.3f, (%d split)\n", ss->count),
 145,146c157,160
 < 	    else
 < 		Rprintf(", agree=%5.3f, (%d split)\n",
@@ -347,7 +347,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 > 	    }
 > 	    else {
 > 		Rprintf(", ");
-> 		Rprintf(ngettext("agree=%5.3f, (%d split)\n", "agree=%5.3f, (%d split)\n", ss->count),
+> 		Rprintf(dngettext("rpart", "agree=%5.3f, (%d split)\n", "agree=%5.3f, (%d split)\n", ss->count),
 147a162
 > 	    }
 diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/rpart/src/rpart.c Recommended/rpart/src/rpart.c

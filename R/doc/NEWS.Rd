@@ -154,7 +154,7 @@
       with a default such that \code{example(..)} in help examples will
       run \code{\\dontcheck} code only if used interactively.
 
-      \item \code{rbind.data.frame()} gets optional argument
+      \item \code{rbind.data.frame()} gains an optional argument
       \code{make.row.names}, for potential speedup.
     }
   }
@@ -166,7 +166,7 @@
       \command{make check TEST_DONTTEST=TRUE}.
 
       \item It is possible to request the use of system
-      \command{valgrind} headers \emph{via} option
+      \command{valgrind} headers \emph{via} \command{configure} option
       \option{--with-system-valgrind-headers}: note the possible
       incompatibility of such headers discussed in the 'R Installation
       and Administration' manual. (Wish of \PR{16808}.)
@@ -191,12 +191,12 @@
       \code{tools::toHTML()} methods is now
       \sQuote{\acronym{XHTML} 1.0 Strict}.
 
-      \item The compiler utility function \code{setCompilerOptions()}
-      now returns the old values invisibly. The initial optimization
-      level can also be set with the environment variable
-      \env{R_COMPILER_OPTIMIZE}.
+      \item The \pkg{compiler} package has a new utility function
+      \code{setCompilerOptions()} now returns the old values
+      invisibly. The initial optimization level can also be set with the
+      environment variable \env{R_COMPILER_OPTIMIZE}.
 
-      \item \command{R CMD check} gains option \option{--test-dir=} to
+      \item \command{R CMD check} gains option \option{--test-dir} to
       specify an alternative set of tests to run.
     }
   }
@@ -206,8 +206,8 @@
       \item New C API utility \code{logspace_sum(logx[], n)}.
 
       \item Entry points \code{rbinom_mu}, \code{rnbinom_mu} and
-      \code{rmultinom} are remapped (by default).  This requires
-      packages using them to be re-installed.
+      \code{rmultinom} are remapped (by default) to \code{Rf_rbinom_mu}
+      etc.  This requires packages using them to be re-installed.
 
       \item \code{.C(DUP = FALSE)} and \code{.Fortran(DUP = FALSE)} are
       now ignored, so arguments are duplicated if \code{DUP = TRUE}
@@ -236,10 +236,6 @@
 
       \item \code{all.equal()} gains methods for \code{environment}s and
       \code{refClass}es.
-
-      \item \code{nlm()} no longer modifies the callback argument in place (a
-      new vector is allocated for each invocation, which mimics the
-      implicit duplication that occurred in R < 3.1.0). (\PR{15958})
     }
   }
 }
@@ -256,6 +252,16 @@
       \item The \code{as.dendrogram} method for \code{"hclust"} objects
       gets a \code{check} argument protecting against memory explosion for
       invalid inputs.
+
+      \item \code{capabilities()} has a new item \code{long.double}
+      which indicates if the build uses a \code{long double} type which
+      is longer than \code{double}.
+
+      \item \code{nlm()} no longer modifies the callback argument in
+      place (a new vector is allocated for each invocation, which mimics
+      the implicit duplication that occurred in R < 3.1.0); note that
+      this is a change from the previously documented
+      behavior. (\PR{15958})
     }
   }
 
@@ -291,10 +297,6 @@
 
       \item Extremely large exponents on zero expressed in scientific
       notation (e.g. \code{0.0e50000}) could give \code{NaN}.  (\PR{15976})
-
-      \item \code{nlm()} no longer modifies the callback argument in place (a
-      new vector is allocated for each invocation, which mimics the
-      implicit duplication that occurred in R < 3.1.0). (\PR{15958})
 
       \item \code{download.file()} reported downloaded sizes as 0KB if
       less than 1MB, only for \R 3.1.2 and only on big-endian platforms.
