@@ -13,7 +13,7 @@
   Put up a Windows progress bar widget.
 }
 \usage{
-winProgressBar(title = "R progress bar", label = "",
+winProgressBar(title = gettext("R progress bar", domain = "R-utils"), label = "",
                min = 0, max = 1, initial = 0, width = 300)
 
 getWinProgressBar(pb)

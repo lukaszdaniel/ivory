@@ -10,7 +10,7 @@
   Use a Windows shell folder widget to choose a folder interactively.
 }
 \usage{
-choose.dir(default = "", caption = "Select folder")
+choose.dir(default = "", caption = gettext("Select folder", domain = "R-utils"))
 }
 \arguments{
   \item{default}{which folder to show initially.}
