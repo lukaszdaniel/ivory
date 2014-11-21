@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-11-10 r52) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-11-20 r73) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -29,17 +29,13 @@ Type 'q()' to quit R.
 +     warning("no internet capabilities")
 +     q()
 + }
-Warning message:
-In command 'doTryCatch(return(expr), name, parentenv, handler)':
-  unable to load shared object '/home/monia/ivory/R/modules//R_X11.so':
-  /home/monia/ivory/R/modules//R_X11.so: undefined symbol: _
 > 
 > if(.Platform$OS.type == "unix" &&
 +    is.null(nsl("cran.r-project.org"))) q()
 > 
 > # test do_download.
 > nrow(available.packages(contrib.url("http://cran.r-project.org")))
-[1] 6043
+[1] 6080
 > 
 > # test url connections on http
 > zz <- url("http://cran.r-project.org/")

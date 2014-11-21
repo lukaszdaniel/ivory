@@ -8,16 +8,16 @@ a0419413e3e882ea707de25a2b8b658c *inst/po/pl/LC_MESSAGES/R-nnet.mo
 3293ed7425a7101de161f9afd25df904 *inst/po/de/LC_MESSAGES/R-nnet.mo
 adff602cf0959e0d0edc22c064d4ed08 *inst/po/en@quot/LC_MESSAGES/R-nnet.mo
 4e306e0c0d081ab9e90fb6c96b0bf6b8 *inst/po/fr/LC_MESSAGES/R-nnet.mo
-9d77bb2b63277c75a8d766987e232ca5 *inst/po/ko/LC_MESSAGES/R-nnet.mo
 a14861d4c76b0028b6dc635163b00297 *LICENCE.note
-c6cd666e9d07520c38a7bec12a21d116 *src/localization.h
-c7ec610d2b882cc2d335534c150e580f *man/multinom.Rd
+9d77bb2b63277c75a8d766987e232ca5 *inst/po/ko/LC_MESSAGES/R-nnet.mo
 d5a68e4c6e67b5f5598259873de7abee *src/nnet.c
+c7ec610d2b882cc2d335534c150e580f *man/multinom.Rd
 658e8411d785b785db614690f26710b0 *man/class.ind.Rd
-c7c8e6b1a1aee45883904ef3309dc852 *man/which.is.max.Rd
 5549369cf450981481c450ff31720fe7 *man/nnet.Rd
+c6cd666e9d07520c38a7bec12a21d116 *src/localization.h
 cd6a3761edca3e8aa4c84b873f48f9ff *man/nnet.Hess.Rd
 a3b762d16d720130f354292ec6e5d3ad *man/predict.nnet.Rd
+c7c8e6b1a1aee45883904ef3309dc852 *man/which.is.max.Rd
 6b63278a92236d85fbc16016a817d781 *NAMESPACE
 f0236f62a586e0c052cef4b11861cfa5 *Changes
 e72767dc4c2d4ec5f8b548b3fe2595bf *po/pl.po
@@ -26,5 +26,5 @@ e4442deb244efa4fb5c44b7e3217246e *po/R-nnet.pot
 baab2a51919a73493683e7c1d5bc60bb *po/R-pl.po
 bde47cf67615a78401f4a47f0fe41d0b *po/R-fr.po
 6b96ad351bbe9b362354550534e0755b *po/R-de.po
-6b963a6c4a9de62f79a95b13006b36df *po/R-ko.po
 9576449163564dda7aea833b9f0e4de1 *DESCRIPTION
+6b963a6c4a9de62f79a95b13006b36df *po/R-ko.po

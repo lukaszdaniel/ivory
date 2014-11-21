@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-11-10 r52) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-11-20 r73) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -116,4 +116,4 @@ Likelihood ratio test=25.2 on 7.06 df, p=0.000726 n=213 (15 observations deleted
 > 
 > proc.time()
    user  system elapsed 
-  0.482   0.043   0.516 
+  0.507   0.047   0.544 
