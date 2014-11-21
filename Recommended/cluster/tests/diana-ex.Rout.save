@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-11-10 r52) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-11-20 r73) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -188,7 +188,7 @@ Available components:
 [1] "order"     "height"    "dc"        "merge"     "diss"      "call"     
 [7] "order.lab"
 > cat('Time elapsed: ', proc.time() - .p00,'\n')
-Time elapsed:  0.018 0.003 0.021 0 0 
+Time elapsed:  0.02 0.003 0.023 0 0 
 > 
 > data(agriculture)
 > data(ruspini)
@@ -198,7 +198,7 @@ Time elapsed:  0.018 0.003 0.021 0 0
 > drusp0  <- diana(ruspini, keep.diss=FALSE, keep.data=FALSE)
 > drusp1  <- diana(ruspini, metric = "manhattan")
 > cat('Time elapsed: ', proc.time() - .p0,'\n')
-Time elapsed:  0.005 0 0.005 0 0 
+Time elapsed:  0.005 0 0.006 0 0 
 > 
 > summary(dia.agr)
 Merge:
@@ -452,7 +452,7 @@ List of 8 components
 > .p1 <- proc.time()
 > dCH <- diana(swiss.x)
 > cat('Time elapsed: ', proc.time() - .p1,'\n')
-Time elapsed:  0.002 0 0.001 0 0 
+Time elapsed:  0.001 0 0.002 0 0 
 > str(as.dendrogram(as.hclust(dCH)))# keep back-compatible
 --[dendrogram with 2 branches and 47 members, at height 127]
   |--[dendrogram with 2 branches and 31 members, at height 99.2]
@@ -550,4 +550,4 @@ Time elapsed:  0.002 0 0.001 0 0
 > 
 > proc.time()
    user  system elapsed 
-  0.433   0.050   0.473 
+  0.415   0.051   0.481 

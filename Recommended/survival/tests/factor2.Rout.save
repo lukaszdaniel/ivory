@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-11-10 r52) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-11-20 r73) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -57,4 +57,4 @@ Loading required package: 'splines'
 > 
 > proc.time()
    user  system elapsed 
-  0.365   0.041   0.397 
+  0.380   0.042   0.427 

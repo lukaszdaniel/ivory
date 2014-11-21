@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-11-10 r52) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-11-20 r73) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -67,4 +67,4 @@ List of 13 components
 > q()
 > proc.time()
    user  system elapsed 
-  0.318   0.041   0.351 
+  0.312   0.039   0.341 

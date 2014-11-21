@@ -5,11 +5,15 @@
 
 #ifdef ENABLE_NLS
  #include <libintl.h>
- #define _(String) libintl_dgettext ("utils", String)
- #undef gettext /* needed for graphapp */
+ #ifdef Win32
+  #define _(String) libintl_dgettext ("utils", String)
+  #undef gettext /* needed for graphapp */
+  #define G_(String) libintl_dgettext("RGui", String)
+ #else
+  #define _(String) dgettext ("utils", String)
+ #endif
  #define gettext_noop(String) String
  #define N_(String) gettext_noop (String)
- #define G_(String) libintl_dgettext("RGui", String)
  #define GN_(String) gettext_noop (String)
 #else /* not NLS */
  #define _(String) (String)
