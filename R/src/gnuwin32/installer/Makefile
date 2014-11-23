@@ -21,7 +21,7 @@ HelpStyle = 1
 Internet = 0
 
 ## Used to set Registry entries
-Producer = R-core
+Producer = Lukasz Daniel (lukasz.daniel@gmail.com)
 
 ifeq "$(WIN)" "64"
 ifneq ($(strip $(HOME32)),)

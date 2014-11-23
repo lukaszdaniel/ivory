@@ -30,7 +30,7 @@
     Rver <- sub("Under .*$", "Pre-release", Rver)
     ## This is now over 2^16, so truncate
     SVN <- sub("Revision: ", "", readLines("../../../SVN-REVISION"))[1L]
-    SVN <- as.character(as.numeric(SVN) - 50000L)
+    #SVN <- as.character(as.numeric(SVN) - 50000L)
     Rver0 <- paste(sub(" .*$", "", Rver), SVN, sep = ".")
 
 
@@ -48,8 +48,8 @@
     suffix <- "win"
 
     cat(paste("OutputBaseFilename=", RW, "-", suffix, sep = ""),
-        paste("AppName=R for Windows ", Rver, sep = ""),
-        paste("AppVerName=R for Windows ", Rver, sep = ""),
+        paste("AppName=R for Windows (IVORY edition)", Rver, sep = ""),
+        paste("AppVerName=R for Windows (IVORY edition)", Rver, sep = ""),
         paste("AppVersion=", Rver, sep = ""),
         paste("VersionInfoVersion=", Rver0, sep = ""),
         paste("DefaultDirName={code:UserPF}\\R\\", RW, sep = ""),
