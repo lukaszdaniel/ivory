@@ -160,7 +160,7 @@
       \item New function \code{extSoftVersion()} to report on the
       versions of third-party software in use in this session.
       Currently reports versions of \code{zlib}, \code{bzlib}, the
-      \code{liblzma} from \code{xz}, PCRE, ICU and \code{tre}.
+      \code{liblzma} from \code{xz}, PCRE, ICU and TRE.
     }
   }
 
@@ -176,8 +176,18 @@
       incompatibility of such headers discussed in the 'R Installation
       and Administration' manual. (Wish of \PR{16808}.)
 
-      \item The included version of \code{lzmautils} has been updated to
+      \item The included version of \code{liblzma} has been updated to
       \code{xz-utils} 5.0.7 (minor bug fixes from 5.0.5).
+      
+      \item \command{configure} options \option{--with-system-zlib},
+       \option{--with-system-bzlib} and \option{--with-system-pcre} are
+       now the default.  For the time being there is fallback to the
+       versions included in the \R sources if no system versions are
+       found or (unlikely) if they are too old.
+
+       Linux users should check that the \code{-devel} or \code{-dev}
+       versions of packages \pkg{zlib}, \pkg{bzip2}/\pkg{libbz2} and
+       \code{pcre} (or similar names) are installed.
     }
   }
 
@@ -228,6 +238,10 @@
   \subsection{DEPRECATED AND DEFUNCT}{
     \itemize{
       \item \code{download.file(method = "lynx")} is defunct.
+
+      \item Use of the included versions of \code{zlib}, \code{bzlib},
+      \code{xz} and PCRE is deprecated: these are frozen and will
+      eventually be removed.
     }
   }
 
