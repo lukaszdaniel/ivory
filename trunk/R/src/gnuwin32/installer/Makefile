@@ -21,7 +21,7 @@ HelpStyle = 1
 Internet = 0
 
 ## Used to set Registry entries
-Producer = Lukasz Daniel
+Producer = "Lukasz Daniel"
 
 ifeq "$(WIN)" "64"
 ifneq ($(strip $(HOME32)),)
