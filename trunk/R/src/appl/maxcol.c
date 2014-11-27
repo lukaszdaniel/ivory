@@ -88,7 +88,7 @@ void R_max_col(double *matrix, int *nr, int *nc, int *maxes, int *ties_meth)
 			a = b; m = c;
 		    }
 		}
-	    else error(_("invalid 'ties_meth' {should not happen}"));
+	    else error(_("invalid '%s' argument {should not happen}"), "ties_meth");
 	}
 	maxes[r] = m + 1;
     }

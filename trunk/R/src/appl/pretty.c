@@ -55,11 +55,7 @@
 # include <R_ext/Print.h>
 #endif
 
-#ifdef HAVE_VISIBILITY_ATTRIBUTE
-# define attribute_hidden __attribute__ ((visibility ("hidden")))
-#else
-# define attribute_hidden
-#endif
+#include <R_ext/Visibility.h>
 
 attribute_hidden
 double R_pretty(double *lo, double *up, int *ndiv, int min_n,
