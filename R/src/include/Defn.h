@@ -27,13 +27,6 @@
 #define isRaw(x) (TYPEOF(x) == RAWSXP)
 
 
-//#define COUNTING
-
-//#define BYTECODE
-
-/* probably no longer needed */
-//#define NEW_CONDITION_HANDLING
-
 /* To test the write barrier used by the generational collector,
    define TESTING_WRITE_BARRIER.  This makes the internal structure of
    SEXPRECs visible only inside of files that explicitly define
