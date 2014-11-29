@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.7-19\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-26 08:16+0200\n"
+"POT-Creation-Date: 2014-11-28 17:44+0100\n"
 "PO-Revision-Date: 2013-09-12 17:38+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,94 +14,119 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 1.5.4\n"
+
 #: magic.c:440
 msgid "magic requires smoothing parameter starting values if L supplied"
 msgstr ""
 "'magic' wymaga wartości startowych dla parametru wygładzającego jeśli L "
 "zostało dostarczone"
+
 #: magic.c:558
 msgid "magic, the gcv/ubre optimizer, failed to converge after 400 iterations."
 msgstr ""
 "'magic', omptymalizator gcv/ubre, nie zdodał uzbieżnić się po 400 iteracjach."
-#: mat.c:28 mat.c:50
+
+#: mat.c:42 mat.c:64
 msgid ""
 "\n"
 "Failed to open file\n"
 msgstr ""
 "\n"
 "Nie udało się otworzyć pliku\n"
-#: mat.c:58
+
+#: mat.c:72
 msgid ""
 "\n"
 "file dim problem\n"
 msgstr ""
 "\n"
 "problem z wymiarem pliku\n"
-#: mat.c:1425
+
+#: mat.c:2228
 #, c-format
 msgid "Non orthogonal eigenvectors %d %g\n"
 msgstr "Nieortogonalne wektory własne %d %g\n"
-#: mat.c:1430
+
+#: mat.c:2233
 #, c-format
 msgid "Eigenvectors not normalized %d %g\n"
 msgstr "Wektory własne nie są znormalizowane %d %g\n"
+
 #: matrix.c:83
 msgid "Failed to initialize memory for matrix."
 msgstr "Nie udało się zainicjalizować pamięci dla macierzy."
+
 #: matrix.c:145 matrix.c:207
 msgid "An out of bound write to matrix has occurred!"
 msgstr "Nastąpił zapis poza zakresem macierzy!"
+
 #: matrix.c:151
 msgid "INTEGRITY PROBLEM in the extant matrix list."
 msgstr "PROBLEM SPÓJNOŚCI w istniejącej liście macierzy."
+
 #: matrix.c:183
 msgid "You are trying to check matrix integrity without defining RANGECHECK."
 msgstr "Próbujesz sprawdzić integralność macierzy bez określania 'RANGECHECK'"
+
 #: matrix.c:245
 msgid "Target matrix too small in mcopy"
 msgstr "Docelowa macierz jest zbyt mała, aby wykonać 'mcopy'"
+
 #: matrix.c:265 matrix.c:273 matrix.c:286 matrix.c:294
 msgid "Incompatible matrices in matmult."
 msgstr "Niespójne macierze w 'matmult'."
+
 #: matrix.c:381
 msgid "Attempt to invert() non-square matrix"
 msgstr "Próba odwrócenia metodą 'invert()' niekwadratowej macierzy"
+
 #: matrix.c:403
 msgid "Singular Matrix passed to invert()"
 msgstr "Przekazano osobliwą macierz do 'invert()'"
+
 #: matrix.c:1324
 msgid "svd() not converged"
 msgstr "'svd()' nie uzbieżnił się"
+
 #: matrix.c:1400
 #, c-format
 msgid "svdroot matrix not +ve semi def. %g"
 msgstr "macierz 'svdroot' nie jest dodatnio określona %g"
+
 #: matrix.c:1428
 msgid "Sort failed"
 msgstr "Sortowanie nie powiodło się"
+
 #: qp.c:60
 msgid "ERROR in addconQT."
 msgstr "BŁĄD w addconQT."
+
 #: qp.c:466
 msgid "QPCLS - Rank deficiency in model"
 msgstr "QPCLS - Niedobór rang w modelu"
+
 #: sparse-smooth.c:143
 msgid "More than 2 points in a box!!\n"
 msgstr "Więcej niż 2 punkty w pudełku!!\n"
+
 #: sparse-smooth.c:148
 #, c-format
 msgid "point %d in %d boxes!\n"
 msgstr "punkt %d w %d pudełkach!\n"
+
 #: sparse-smooth.c:310 sparse-smooth.c:326
 msgid "too many boxes!!"
 msgstr "zbyt dużo pudełek!!"
+
 #: sparse-smooth.c:342
 #, c-format
 msgid "bi not equal to nb-1 %d %d\n"
 msgstr "'bi' nie jest równe 'nb-1' %d %d\n"
+
 #: sparse-smooth.c:442
 msgid "child boundary problem\n"
 msgstr "problem brzegu dziecka\n"
+
 #: sparse-smooth.c:551
 msgid ""
 "\n"
@@ -109,22 +134,28 @@ msgid ""
 msgstr ""
 "\n"
 "funkcja 'star()' jest przydatna jedynie w 2D\n"
+
 #: sparse-smooth.c:608
 msgid "indexing error in 'p_area()' function!\n"
 msgstr "indeksowanie błędu w funkcji 'p_area()'!\n"
+
 #: sparse-smooth.c:1054
 msgid "hello\n"
 msgstr "witaj\n"
+
 #: sparse-smooth.c:1086
 #, c-format
 msgid "%d upper neighbour claimed to be self d=%d!\n"
 msgstr "%d górny sąsiad twierdzi, że jest samym sobą d=%d!\n"
+
 #: sparse-smooth.c:1149
 msgid "lower neighbour claimed to be self!\n"
 msgstr "niższy sąsiad twierdzi że jest samym sobą!\n"
+
 #: tprs.c:46 tprs.c:81
 msgid "You must have 2m>d for a thin plate spline."
 msgstr "Musisz mieć 2m>d dla cienkiej płyty splajnu."
+
 #: tprs.c:417 tprs.c:425
 msgid ""
 "A term has fewer unique covariate combinations than specified maximum "
@@ -132,58 +163,75 @@ msgid ""
 msgstr ""
 "Człon posiada mniej unikalnych kombinacji zmiennych niezależnych niż "
 "określona maksymalna liczba stopni swobody"
+
 #~ msgid "kd tree sanity checks\n"
 #~ msgstr "sprawdzanie drzewa 'kd'\n"
+
 #~ msgid ""
 #~ "Overall smoothing parameter estimate on upper boundary.\n"
 #~ "Boundary GCV score change: %g. Largest change: %g"
 #~ msgstr ""
 #~ "Ogólne oszacowanie parametru wygładzającego na górnej granicy.\n"
 #~ "Punktacja granicy GCV zmieniła się: %g. Największa zmiana: %g"
+
 #~ msgid "resetting -ve inf"
 #~ msgstr "czyszczenie minus nieskończoności"
+
 #~ msgid "resetting +ve inf"
 #~ msgstr "czyszczenie plus nieskończoności"
+
 #~ msgid ""
 #~ "Multiple GCV didn't improve autoinitialized relative smoothing parameters"
 #~ msgstr ""
 #~ "Wielokrotne GCV nie poprawiło automatycznie zainicjowanych względnych "
 #~ "parametrów wygładzania"
+
 #~ msgid ""
 #~ "\n"
 #~ "%s not found, nothing read!"
 #~ msgstr ""
 #~ "\n"
 #~ "%s nie znaleziono, nic nie odczytano!"
+
 #~ msgid "Not a +ve def. matrix in choleski()."
 #~ msgstr "Macierz nie jest dodatnio określona w 'choleski()'."
+
 #~ msgid "Error in Covariance(a,b) - a,b not same length."
 #~ msgstr "Błąd w 'Covariance(a,b)' - a, b nie są tej samej długości."
+
 #~ msgid "%s not found by routine gettextmatrix().\n"
 #~ msgstr "%s nie został znaleziony przez procedurę 'gettextmatrix()'.\n"
+
 #~ msgid "eigen_tri() failed to converge"
 #~ msgstr "'eigen_tri()' nie uzbieżnił się"
+
 #~ msgid "eigenvv_tri() Eigen vector %d of %d failure. Error = %g > %g"
 #~ msgstr ""
 #~ "eigenvv_tri(): Niepowodzenie wyznaczania wektora własnego %d z %d. Błąd = "
 #~ "%g > %g"
+
 #~ msgid "Lanczos failed"
 #~ msgstr "Lanczos nie powiódł się"
+
 #~ msgid ""
 #~ "Numerical difficulties obtaining tr(A) - apparently resolved. Apply some "
 #~ "caution to results."
 #~ msgstr ""
 #~ "Trudności numeryczne podczas uzyskiwania tr(A) - najwyrażniej rozwiązane. "
 #~ "Podejdź ostrożnie do wyników."
+
 #~ msgid "tr(A) utter garbage and situation un-resolvable."
 #~ msgstr "całkowite oczyszczenie tr(A) oraz sytuacja nie są rozwiązane."
+
 #~ msgid ""
 #~ "Numerical difficulties calculating tr(A). Not completely resolved. Use "
 #~ "results with care!"
 #~ msgstr ""
 #~ "Problemy numeryczne podczas wyliczania śladu macierzy A. Nie udało się "
 #~ "kompletnie wykonać. Wyniku używaj ostrożnie!"
+
 #~ msgid "Termwise estimate degrees of freedom are unreliable"
 #~ msgstr "Szacowanie stopni swobody z członów nie jest wiarygodne"
+
 #~ msgid "You must have 2m > d"
 #~ msgstr "Musisz mieć 2m > d"

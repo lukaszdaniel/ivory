@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: codetools 0.2-9\n"
-"POT-Creation-Date: 2014-08-23 08:31\n"
+"POT-Creation-Date: 2014-11-28 19:29\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,6 +32,20 @@ msgstr ""
 #. R/codetools.R: gettextf("%s may be used in an incorrect context: %s", sQuote(a), pasteExpr(e), domain = "R-codetools")
 
 msgid "%s may be used in an incorrect context: %s"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: stop("'makeUsageCollector()' function only works for closures")
+
+msgid "'makeUsageCollector()' function only works for closures"
+msgstr ""
+
+
+#: R/codetools.R: 0
+#. R/codetools.R: gettextf("Error while checking: ", domain = "R-codetools")
+
+msgid "Error while checking:"
 msgstr ""
 
 
@@ -144,20 +158,6 @@ msgstr ""
 
 
 #: R/codetools.R: 0
-#. R/codetools.R: gettext("not a symbol or string", domain = "R-codetools")
-
-msgid "not a symbol or string"
-msgstr ""
-
-
-#: R/codetools.R: 0
-#. R/codetools.R: stop("only works for closures")
-
-msgid "only works for closures"
-msgstr ""
-
-
-#: R/codetools.R: 0
 #. R/codetools.R: stop("package must be loaded")
 
 msgid "package must be loaded"
@@ -193,6 +193,13 @@ msgstr ""
 
 
 #: R/codetools.R: 0
+#. R/codetools.R: gettext("type of 'e' argument is not a symbol or string", domain = "R-codetools")
+
+msgid "type of 'e' argument is not a symbol or string"
+msgstr ""
+
+
+#: R/codetools.R: 0
 #. R/codetools.R: gettextf("warning in %s: ", sQuote(deparse(call, width.cutoff = 500)), domain = "R-codetools")
 
 msgid "warning in %s:"
@@ -200,6 +207,8 @@ msgstr ""
 
 
 #: R/codetools.R: 0
+#. R/codetools.R: gettextf("wrong number of arguments to %s", sQuote("substitute()"), domain = "R-codetools")
+#. R/codetools.R: gettextf("wrong number of arguments to %s", sQuote("bquote()"), domain = "R-codetools")
 #. R/codetools.R: gettextf("wrong number of arguments to %s", sQuote(fn), domain = "R-codetools")
 
 msgid "wrong number of arguments to %s"
@@ -207,21 +216,7 @@ msgstr ""
 
 
 #: R/codetools.R: 0
-#. R/codetools.R: gettext("wrong number of arguments to '.Internal':", domain = "R-codetools")
+#. R/codetools.R: gettextf("wrong number of arguments to %s:", sQuote(".Internal()"), domain = "R-codetools")
 
-msgid "wrong number of arguments to '.Internal':"
-msgstr ""
-
-
-#: R/codetools.R: 0
-#. R/codetools.R: gettext("wrong number of arguments to 'bquote'", domain = "R-codetools")
-
-msgid "wrong number of arguments to 'bquote'"
-msgstr ""
-
-
-#: R/codetools.R: 0
-#. R/codetools.R: gettext("wrong number of arguments to 'substitute'", domain = "R-codetools")
-
-msgid "wrong number of arguments to 'substitute'"
+msgid "wrong number of arguments to %s:"
 msgstr ""
