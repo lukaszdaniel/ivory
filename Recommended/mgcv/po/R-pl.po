@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.8-0\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2014-10-11 12:11\n"
-"PO-Revision-Date: 2014-07-06 07:58+0100\n"
+"POT-Creation-Date: 2014-11-28 17:44\n"
+"PO-Revision-Date: 2014-11-28 18:05+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -879,6 +879,11 @@ msgstr ""
 msgid "Must supply theta or R to ocat"
 msgstr ""
 
+#. R/coxph.r: stop("NA times supplied for cox.ph prediction")
+#: R/coxph.r:0
+msgid "NA times supplied for cox.ph prediction"
+msgstr ""
+
 #. R/mgcv.r: stop("NA values in 'min.sp' argument")
 #: R/mgcv.r:0
 msgid "NA values in 'min.sp' argument"
@@ -986,8 +991,9 @@ msgstr "Nieskończone odchylenie"
 
 #. R/bam.r: stop("Not enough (non-NA) data to do anything meaningful")
 #. R/gamm.r: stop("Not enough (non-NA) data to do anything meaningful")
+#. R/jagam.r: stop("Not enough (non-NA) data to do anything meaningful")
 #. R/mgcv.r: stop("Not enough (non-NA) data to do anything meaningful")
-#: R/bam.r:0 R/gamm.r:0 R/mgcv.r:0
+#: R/bam.r:0 R/gamm.r:0 R/jagam.r:0 R/mgcv.r:0
 msgid "Not enough (non-NA) data to do anything meaningful"
 msgstr ""
 "Brak wystarczającej (nie NA) liczby danych, aby wykonać cokolwiek sensownego"
@@ -1310,6 +1316,12 @@ msgstr "parametryczna kara ma niepoprawny wymiar"
 msgid "all elements of random list must be named"
 msgstr "wszystkie elementy listy 'random' muszą być nazwane"
 
+#. R/jagam.r: stop("all.terms argument not supported")
+#: R/jagam.r:0
+#, fuzzy
+msgid "all.terms argument not supported"
+msgstr "argument 'test' został zignorowany"
+
 #. R/mgcv.r: stop("argument 'k' must be positive")
 #: R/mgcv.r:0
 msgid "argument 'k' must be positive"
@@ -1377,6 +1389,17 @@ msgstr "'bnd' musi być listą"
 msgid "bnd must be a list of boundary loops"
 msgstr "'bnd' musi być listą pętel granic"
 
+#. R/jagam.r: warning("burnin too large, reset")
+#: R/jagam.r:0
+msgid "burnin too large, reset"
+msgstr ""
+
+#. R/jagam.r: stop("by.resids argument not supported")
+#: R/jagam.r:0
+#, fuzzy
+msgid "by.resids argument not supported"
+msgstr "argument 'test' został zignorowany"
+
 #. R/gam.fit3.r: gettext("calling gdi...", domain = "R-mgcv")
 #: R/gam.fit3.r:0
 msgid "calling gdi..."
@@ -1399,6 +1422,11 @@ msgstr ""
 #. R/bam.r: gettextf("chunk.size < number of coefficients. Reset to %d", chunk.size)
 #: R/bam.r:0
 msgid "chunk.size < number of coefficients. Reset to %d"
+msgstr ""
+
+#. R/jagam.r: stop("coefficient simulation data is missing")
+#: R/jagam.r:0
+msgid "coefficient simulation data is missing"
 msgstr ""
 
 #. R/soap.r: stop("coefficient vector wrong length")
@@ -1502,12 +1530,19 @@ msgstr "puste modele nie są dostępne"
 msgid "factor 'by' variables can not be used with matrix arguments"
 msgstr "faktoryzacja zmiennych 'by' nie może być użyta z argumentami macierzy"
 
+#. R/jagam.r: stop("family not implemented yet")
+#: R/jagam.r:0
+#, fuzzy
+msgid "family not implemented yet"
+msgstr "'family' nie został jeszcze zaimplementowany"
+
 #. R/bam.r: stop("family not recognized")
 #. R/gam.fit3.r: stop("family not recognized")
 #. R/gam.fit3.r: stop("family not recognized")
 #. R/gamm.r: stop("family not recognized")
+#. R/jagam.r: stop("family not recognized")
 #. R/mgcv.r: stop("family not recognized")
-#: R/bam.r:0 R/gam.fit3.r:0 R/gamm.r:0 R/mgcv.r:0
+#: R/bam.r:0 R/gam.fit3.r:0 R/gamm.r:0 R/jagam.r:0 R/mgcv.r:0
 msgid "family not recognized"
 msgstr "'family' nie został rozpoznany"
 
@@ -1686,6 +1721,11 @@ msgid ""
 msgstr ""
 "iteracyjne wagi lub nieskończone dane w 'gam.fit' - regularyzacja może "
 "pomóc. Zobacz '?gam.control'"
+
+#. R/jagam.r: stop("jagam requires a file for the JAGS model specification")
+#: R/jagam.r:0
+msgid "jagam requires a file for the JAGS model specification"
+msgstr ""
 
 #. R/soap.r: gettextf("knot %d is on or outside boundary", k)
 #: R/soap.r:0
@@ -2097,6 +2137,13 @@ msgstr "losowe efekty nie działają z 'ids'"
 msgid "reparameterization unstable for margin: not done"
 msgstr "ponowna parametryzacja nie jest stabilna dla marginesu: nie wykonano"
 
+#. R/jagam.r: stop("residuals argument not supported")
+#: R/jagam.r:0
+#, fuzzy
+msgid "residuals argument not supported"
+msgstr ""
+"argument reszt przekazywany do 'plot.gam' ma niepoprawną długość: zignorowano"
+
 #. R/plots.r: warning("residuals argument to plot.gam is wrong length: ignored")
 #: R/plots.r:0
 msgid "residuals argument to plot.gam is wrong length: ignored"
@@ -2107,6 +2154,11 @@ msgstr ""
 #: R/plots.r:0
 msgid "response"
 msgstr "zmienna zależna"
+
+#. R/jagam.r: warning("rho missing from simulation data edf.type reset to 2")
+#: R/jagam.r:0
+msgid "rho missing from simulation data edf.type reset to 2"
+msgstr ""
 
 #. R/smooth.r: warning("s value increased")
 #: R/smooth.r:0
@@ -2181,6 +2233,11 @@ msgstr "osobliwe wartości nie zostały zwrócone w w sposób uporządkowany"
 msgid "smooth objects should not have a qrc attribute"
 msgstr "gładkie obiekty nie powinny mieć atrybutu 'qrc'"
 
+#. R/jagam.r: warning("smoothing parameter prior choise not recognised, reset to gamma")
+#: R/jagam.r:0
+msgid "smoothing parameter prior choise not recognised, reset to gamma"
+msgstr ""
+
 #. R/soap.r: stop("soap films are bivariate only")
 #. R/soap.r: stop("soap films are bivariate only")
 #. R/soap.r: stop("soap films are bivariate only")
@@ -2193,6 +2250,11 @@ msgstr "filmy 'soap' są tylko dwuwymiarowe"
 #: R/smooth.r:0
 msgid "something wrong with argument 'd'"
 msgstr "coś nie tak z argumentem 'd'"
+
+#. R/jagam.r: stop("sorry link not yet handled")
+#: R/jagam.r:0
+msgid "sorry link not yet handled"
+msgstr ""
 
 #. R/plots.r: warning("sorry no option for contouring with errors: try plot.gam")
 #: R/plots.r:0
@@ -2305,6 +2367,13 @@ msgstr "typ 'items' nie jest dostępny dla przypadków z wieloma predyktorami"
 msgid "type must be \"link\" or \"response\""
 msgstr "'type' musi mieć wartość \"link\" lub \"response\""
 
+#. R/jagam.r: stop("unconditional argument not meaningful here")
+#. R/jagam.r: warning("unconditional argument not meaningful here")
+#: R/jagam.r:0
+#, fuzzy
+msgid "unconditional argument not meaningful here"
+msgstr "początkowe parametry nie mają zastosowana"
+
 #. R/smooth.r: stop("unimplemented sparse constraint type requested")
 #: R/smooth.r:0
 msgid "unimplemented sparse constraint type requested"
@@ -2370,6 +2439,11 @@ msgstr "funkcja wariancji nie została rozpoznana dla kwazi"
 #: R/plots.r:0
 msgid "view variables must be one of %s"
 msgstr "zmienne podglądu muszą jednym z %s"
+
+#. R/jagam.r: warning("weights ignored")
+#: R/jagam.r:0
+msgid "weights ignored"
+msgstr ""
 
 #. R/gamm.r: stop("weights must be like glm weights for generalized case")
 #: R/gamm.r:0

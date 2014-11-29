@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.10.0 / mgcv 1.5-5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-26 08:16+0200\n"
+"POT-Creation-Date: 2014-11-28 17:44+0100\n"
 "PO-Revision-Date: 2009-10-08 16:16+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -26,24 +26,24 @@ msgid "magic, the gcv/ubre optimizer, failed to converge after 400 iterations."
 msgstr ""
 "magic, der gcv/ubre-Optimierer, konvergierte nach 400 Iterationen noch nicht."
 
-#: mat.c:28 mat.c:50
+#: mat.c:42 mat.c:64
 msgid ""
 "\n"
 "Failed to open file\n"
 msgstr ""
 
-#: mat.c:58
+#: mat.c:72
 msgid ""
 "\n"
 "file dim problem\n"
 msgstr ""
 
-#: mat.c:1425
+#: mat.c:2228
 #, c-format
 msgid "Non orthogonal eigenvectors %d %g\n"
 msgstr ""
 
-#: mat.c:1430
+#: mat.c:2233
 #, c-format
 msgid "Eigenvectors not normalized %d %g\n"
 msgstr ""

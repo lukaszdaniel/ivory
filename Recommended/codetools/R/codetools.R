@@ -239,7 +239,7 @@ collectLocalsForHandler <- function(e, w) {
 checkSymOrString <- function(e, signal = stop) {
     type <- typeof(e)
     if (type == "symbol" || type == "character") e
-    else signal(gettext("not a symbol or string", domain = "R-codetools"))
+    else signal(gettext("type of 'e' argument is not a symbol or string", domain = "R-codetools"))
 }
 collectLocalsLocalHandler <- function(e, w) {
     if (length(e) == 2) # no explicit env
@@ -374,7 +374,7 @@ makeUsageCollector <- function(fun, ..., name = NULL,
                                warn = warning0,
                                signal = signalUsageIssue) {
     if (typeof(fun) != "closure")
-        stop("only works for closures")
+        stop("'makeUsageCollector()' function only works for closures")
     makeCodeWalker(..., name = name,
                    enterLocal = enterLocal,
                    enterGlobal = enterGlobal,
@@ -651,7 +651,7 @@ local({
 addCollectUsageHandler(".Internal", "base", function(e, w) {
     w$enterGlobal("function", ".Internal", e, w)
     if (length(e) != 2)
-        w$signal(paste(gettext("wrong number of arguments to '.Internal':", domain = "R-codetools"), pasteExpr(e)), w)
+        w$signal(paste(gettextf("wrong number of arguments to %s:", sQuote(".Internal()"), domain = "R-codetools"), pasteExpr(e)), w)
     else if (typeof(e[[2]]) == "language") {
         w$enterInternal(e[[2]][[1]], e[[2]], w)
         collectUsageArgs(e[[2]], w)
@@ -662,7 +662,7 @@ addCollectUsageHandler(".Internal", "base", function(e, w) {
 addCollectUsageHandler("substitute", "base", function(e, w) {
     w$enterGlobal("function", "substitute", e, w)
     if (length(e) > 3)
-        w$signal(gettext("wrong number of arguments to 'substitute'", domain = "R-codetools"), w)
+        w$signal(gettextf("wrong number of arguments to %s", sQuote("substitute()"), domain = "R-codetools"), w)
     if (length(e) == 3) {
         a <- e[[3]]
         if (! missing(a)) walkCode(a, w)
@@ -672,7 +672,7 @@ addCollectUsageHandler("substitute", "base", function(e, w) {
 addCollectUsageHandler("bquote", "base", function(e, w) {
     w$enterGlobal("function", "bquote", e, w)
     if (length(e) > 3)
-        w$signal(gettext("wrong number of arguments to 'bquote'", domain = "R-codetools"), w)
+        w$signal(gettextf("wrong number of arguments to %s", sQuote("bquote()"), domain = "R-codetools"), w)
     if (length(e) == 3) {
         a <- e[[3]]
         if (! missing(a)) walkCode(a, w)

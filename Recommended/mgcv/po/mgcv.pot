@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: mgcv 1.8-3\n"
+"Project-Id-Version: mgcv 1.8-4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-11 12:11+0200\n"
+"POT-Creation-Date: 2014-11-28 17:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,24 +25,24 @@ msgstr ""
 msgid "magic, the gcv/ubre optimizer, failed to converge after 400 iterations."
 msgstr ""
 
-#: mat.c:28 mat.c:50
+#: mat.c:42 mat.c:64
 msgid ""
 "\n"
 "Failed to open file\n"
 msgstr ""
 
-#: mat.c:58
+#: mat.c:72
 msgid ""
 "\n"
 "file dim problem\n"
 msgstr ""
 
-#: mat.c:1425
+#: mat.c:2228
 #, c-format
 msgid "Non orthogonal eigenvectors %d %g\n"
 msgstr ""
 
-#: mat.c:1430
+#: mat.c:2233
 #, c-format
 msgid "Eigenvectors not normalized %d %g\n"
 msgstr ""

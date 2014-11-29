@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rpart 3.1-24\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2014-07-13 09:15\n"
+"POT-Creation-Date: 2014-11-28 17:45\n"
 "PO-Revision-Date: 2012-10-03 14:18+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -433,6 +433,14 @@ msgstr ""
 #. R/plotcp.R: gettext("number of splits", domain = "R-rpart")
 #: R/plotcp.R:0
 msgid "number of splits"
+msgstr ""
+
+#. R/rpart.class.R: gettextf("  predicted class=%s  expected loss=%s  P(node) =%s\n    class counts: %s\n   probabilities: %s",     format(group, justify = "left"), formatg(dev, digits), formatg(nodeprob, digits),     temp1, temp2, domain = "R-rpart")
+#: R/rpart.class.R:0
+msgid ""
+"predicted class=%s  expected loss=%s  P(node) =%s\n"
+"    class counts: %s\n"
+"   probabilities: %s"
 msgstr ""
 
 #. R/rpart.poisson.R: stop("response must be a 2 column matrix or a vector")

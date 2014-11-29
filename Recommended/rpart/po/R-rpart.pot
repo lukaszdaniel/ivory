@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: rpart 4.1-8\n"
-"POT-Creation-Date: 2014-07-13 09:15\n"
+"POT-Creation-Date: 2014-11-28 17:45\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -567,6 +567,13 @@ msgstr ""
 #. R/plotcp.R: gettext("number of splits", domain = "R-rpart")
 
 msgid "number of splits"
+msgstr ""
+
+
+#: R/rpart.class.R: 0
+#. R/rpart.class.R: gettextf("  predicted class=%s  expected loss=%s  P(node) =%s\n    class counts: %s\n   probabilities: %s",     format(group, justify = "left"), formatg(dev, digits), formatg(nodeprob, digits),     temp1, temp2, domain = "R-rpart")
+
+msgid "predicted class=%s  expected loss=%s  P(node) =%s\n    class counts: %s\n   probabilities: %s"
 msgstr ""
 
 

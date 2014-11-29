@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: codetools 0.2-8\n"
-"POT-Creation-Date: 2014-07-13 09:15\n"
-"PO-Revision-Date: 2013-08-13 23:26+0100\n"
+"POT-Creation-Date: 2014-11-28 19:29\n"
+"PO-Revision-Date: 2014-11-28 19:30+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -31,6 +31,16 @@ msgstr "%s może być użyte w niepoprawnym kontekście"
 #: R/codetools.R:0
 msgid "%s may be used in an incorrect context: %s"
 msgstr "%s może być użyte w niepoprawnym kontekście: %s"
+
+#. R/codetools.R: stop("'makeUsageCollector()' function only works for closures")
+#: R/codetools.R:0
+msgid "'makeUsageCollector()' function only works for closures"
+msgstr "funkcja 'makeUsageCollector()' działa tylko dla zamknięć"
+
+#. R/codetools.R: gettextf("Error while checking: ", domain = "R-codetools")
+#: R/codetools.R:0
+msgid "Error while checking:"
+msgstr "Błąd podczas sprawdzania: "
 
 #. R/codetools.R: gettext("bad argument to '.Internal':", domain = "R-codetools")
 #: R/codetools.R:0
@@ -116,16 +126,6 @@ msgstr "brak widocznej globalnej definicji funkcji dla %s"
 msgid "not a foldable expression:"
 msgstr "to nie jest składalne wyrażenie:"
 
-#. R/codetools.R: gettext("not a symbol or string", domain = "R-codetools")
-#: R/codetools.R:0
-msgid "not a symbol or string"
-msgstr "to nie jest symbol lub też łańcuch"
-
-#. R/codetools.R: stop("only works for closures")
-#: R/codetools.R:0
-msgid "only works for closures"
-msgstr "działa tylko dla zamknięć"
-
 #. R/codetools.R: stop("package must be loaded")
 #: R/codetools.R:0
 msgid "package must be loaded"
@@ -151,27 +151,36 @@ msgstr "prawdopodobny błąd w %s:"
 msgid "sanity check on local usage frame failed"
 msgstr "sprawdzenie na lokalnie używanej ramce nie powiodło się"
 
+#. R/codetools.R: gettext("type of 'e' argument is not a symbol or string", domain = "R-codetools")
+#: R/codetools.R:0
+msgid "type of 'e' argument is not a symbol or string"
+msgstr "typ argumentu 'e' nie jest symbolem ani też tekstem"
+
 #. R/codetools.R: gettextf("warning in %s: ", sQuote(deparse(call, width.cutoff = 500)), domain = "R-codetools")
 #: R/codetools.R:0
 msgid "warning in %s:"
 msgstr "ostrzeżenie w %s:"
 
+#. R/codetools.R: gettextf("wrong number of arguments to %s", sQuote("substitute()"), domain = "R-codetools")
+#. R/codetools.R: gettextf("wrong number of arguments to %s", sQuote("bquote()"), domain = "R-codetools")
 #. R/codetools.R: gettextf("wrong number of arguments to %s", sQuote(fn), domain = "R-codetools")
 #: R/codetools.R:0
 msgid "wrong number of arguments to %s"
 msgstr "błędna liczba argumentów przekazanych do %s"
 
-#. R/codetools.R: gettext("wrong number of arguments to '.Internal':", domain = "R-codetools")
+#. R/codetools.R: gettextf("wrong number of arguments to %s:", sQuote(".Internal()"), domain = "R-codetools")
 #: R/codetools.R:0
-msgid "wrong number of arguments to '.Internal':"
-msgstr "błędna liczba argumentów przekazanych do '.Internal':"
+msgid "wrong number of arguments to %s:"
+msgstr "błędna liczba argumentów przekazanych do %s:"
 
-#. R/codetools.R: gettext("wrong number of arguments to 'bquote'", domain = "R-codetools")
-#: R/codetools.R:0
-msgid "wrong number of arguments to 'bquote'"
-msgstr "błędna liczba argumentów przekazanych do 'bquote'"
+#~ msgid "only works for closures"
+#~ msgstr "działa tylko dla zamknięć"
 
-#. R/codetools.R: gettext("wrong number of arguments to 'substitute'", domain = "R-codetools")
-#: R/codetools.R:0
-msgid "wrong number of arguments to 'substitute'"
-msgstr "błędna liczba argumentów przekazanych do 'substitute'"
+#~ msgid "wrong number of arguments to '.Internal':"
+#~ msgstr "błędna liczba argumentów przekazanych do '.Internal':"
+
+#~ msgid "wrong number of arguments to 'bquote'"
+#~ msgstr "błędna liczba argumentów przekazanych do 'bquote'"
+
+#~ msgid "wrong number of arguments to 'substitute'"
+#~ msgstr "błędna liczba argumentów przekazanych do 'substitute'"
