@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-11-04 06:48\n"
+"POT-Creation-Date: 2014-11-30 14:48\n"
 "PO-Revision-Date: 2012-02-26 14:09+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -2635,7 +2635,7 @@ msgstr " 名前が以前の名前と一致しません "
 msgid "names for '%s' argument but not for '%s' argument"
 msgstr " 'scale' の長さは 'x' の列数に等しくなければなりません; "
 
-#. R/namespace.R: gettextf("namespace %s %s is already loaded, but %s %s is required", sQuote(package),     current, z$op, z$version)
+#. R/namespace.R: gettextf("namespace %s %s is already loaded, but %s %s is required", sQuote(package),     current, zop, zversion)
 #: R/namespace.R:0
 #, fuzzy
 msgid "namespace %s %s is already loaded, but %s %s is required"
@@ -2643,7 +2643,7 @@ msgstr ""
 " パッケージ '%s' %s はロードされましたが、%s %s が '%s' によって要求されてい"
 "ます "
 
-#. R/namespace.R: gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package),     version, z$op, z$version)
+#. R/namespace.R: gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package),     version, zop, zversion)
 #: R/namespace.R:0
 #, fuzzy
 msgid "namespace %s %s is being loaded, but %s %s is required"

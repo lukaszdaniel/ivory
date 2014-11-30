@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-11 12:00+0200\n"
+"POT-Creation-Date: 2014-11-30 14:48+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -130,7 +130,7 @@ msgstr "nieznana paleta (potrzeba >= 2 kolory)"
 msgid "maximum number of colors is %d"
 msgstr "maksymalna liczba kolorów wynosi %d"
 
-#: devCairo.c:45 devCairo.c:53
+#: devCairo.c:47 devCairo.c:56
 msgid "failed to load cairo DLL"
 msgstr "nie udało się załadować pliku DLL cairo"
 
@@ -768,7 +768,7 @@ msgstr "to nie jest wspierany schemat, nie zapisano danych obrazka"
 msgid "Quartz R Device"
 msgstr "Urządzenie R Quartz"
 
-#: stubs.c:100
+#: stubs.c:105
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"

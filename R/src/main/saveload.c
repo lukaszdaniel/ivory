@@ -2066,7 +2066,7 @@ SEXP attribute_hidden do_load(SEXP call, SEXP op, SEXP args, SEXP env)
 
     /* Process the saved file to obtain a list of saved objects. */
     fp = RC_fopen(STRING_ELT(fname, 0), "rb", TRUE);
-    if (!fp) error(_("unable to open file"));
+    if (!fp) error(_("unable to open file '%s'"), translateChar(STRING_ELT(fname, 0)));
 
     /* set up a context which will close the file if there is an error */
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,

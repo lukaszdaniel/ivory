@@ -194,7 +194,12 @@
        Linux users should check that the \code{-devel} or \code{-dev}
        versions of packages \pkg{zlib}, \pkg{bzip2}/\pkg{libbz2} and
        \code{pcre} (or similar names) are installed.
-    }
+       
+       \item (Windows.) Installation using external binary distributions
+       of \pkg{zlib}, \pkg{bzip}, \pkg{liblzma}, \pkg{pcre},
+       \pkg{libpng}, \pkg{jpeglib} and \pkg{libtiff} is now supported
+       and likely to be the preferred or only way before release.
+     }
   }
 
   \subsection{UTILITIES}{
@@ -300,6 +305,10 @@
       the implicit duplication that occurred in R < 3.1.0); note that
       this is a change from the previously documented
       behavior. (\PR{15958})
+      
+      \item \code{icuSetCollate()} now accepts \code{locale = "ASCII"}
+      which uses the basic C function \code{strcmp} and so collates
+      strings byte-by-byte in numerical order.
     }
   }
 
@@ -357,6 +366,9 @@
       
       \item \code{loadNamespace()} imposed undocumented restrictions
       on the \code{versionCheck} parameter.  (Reported by Geoff Lee.)
+      
+      \item Rare over-runs detected by AddressSanitizer in
+      \code{substr()} and its replacement version have been avoided.
     }
   }
 }

@@ -488,7 +488,7 @@ static void advancerect(DEstruct DE, int which)
 	    DE->ccol--;
 	break;
     default:
-	UNIMPLEMENTED("advancerect");
+	UNIMPLEMENTED("advancerect()");
     }
 
     highlightrect(DE);

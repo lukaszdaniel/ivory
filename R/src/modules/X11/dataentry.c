@@ -733,7 +733,7 @@ static void advancerect(DEstruct DE, DE_DIRECTION which)
 	    DE->ccol--;
 	break;
     default:
-	UNIMPLEMENTED("advancerect");
+	UNIMPLEMENTED("advancerect()");
     }
 
     highlightrect(DE);

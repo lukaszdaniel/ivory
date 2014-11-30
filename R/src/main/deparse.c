@@ -1111,7 +1111,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 		    break;
 		default:
 		    d->sourceable = FALSE;
-		    UNIMPLEMENTED("deparse2buff");
+		    UNIMPLEMENTED("deparse2buff()");
 		}
 	    }
 	    else {

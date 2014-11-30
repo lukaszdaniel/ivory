@@ -179,14 +179,14 @@ void R_SizeFromEnv(Rstart Rp)
     if((p = getenv("R_VSIZE"))) {
 	value = R_Decode2Long(p, &ierr);
 	if(ierr != 0 || value > Max_Vsize || value < Min_Vsize)
-	    R_ShowMessage(_("WARNING: invalid R_VSIZE ignored\n"));
+	    R_ShowMessage(_("WARNING: invalid 'R_VSIZE' ignored\n"));
 	else
 	    Rp->vsize = value;
     }
     if((p = getenv("R_NSIZE"))) {
 	value = R_Decode2Long(p, &ierr);
 	if(ierr != 0 || value > Max_Nsize || value < Min_Nsize)
-	    R_ShowMessage(_("WARNING: invalid R_NSIZE ignored\n"));
+	    R_ShowMessage(_("WARNING: invalid 'R_NSIZE' ignored\n"));
 	else
 	    Rp->nsize = value;
     }
@@ -198,18 +198,18 @@ static void SetSize(R_size_t vsize, R_size_t nsize)
 
     /* vsize > 0 to catch long->int overflow */
     if (vsize < 1000 && vsize > 0) {
-	R_ShowMessage(_("WARNING: vsize ridiculously low, Megabytes assumed\n"));
+	R_ShowMessage(_("WARNING: 'vsize' argument is ridiculously low, Megabytes assumed\n"));
 	vsize *= (R_size_t) Mega;
     }
     if(vsize < Min_Vsize || vsize > Max_Vsize) {
-	snprintf(msg, 1024, _("WARNING: invalid v(ector heap)size `%lu' ignored\nusing default = %gM\n"), (unsigned long) vsize,
+	snprintf(msg, 1024, _("WARNING: invalid (vector heap) 'vsize' argument '%lu' ignored\nusing default = %gM\n"), (unsigned long) vsize,
 		R_VSIZE / Mega);
 	R_ShowMessage(msg);
 	R_VSize = R_VSIZE;
     } else
 	R_VSize = vsize;
     if(nsize < Min_Nsize || nsize > Max_Nsize) {
-	snprintf(msg, 1024, _("WARNING: invalid language heap (n)size `%lu' ignored, using default = %ld\n"), (unsigned long) nsize, R_NSIZE);
+	snprintf(msg, 1024, _("WARNING: invalid language heap (n)size '%lu' ignored, using default = %ld\n"), (unsigned long) nsize, R_NSIZE);
 	R_ShowMessage(msg);
 	R_NSize = R_NSIZE;
     } else

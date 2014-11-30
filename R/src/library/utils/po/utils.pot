@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-19 18:11+0200\n"
+"POT-Creation-Date: 2014-11-30 14:49+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -133,7 +133,7 @@ msgid "invalid '%s' specification"
 msgstr ""
 
 #: utils.c:62 windows/util.c:396 windows/util.c:405 windows/widgets.c:182
-#: windows/widgets.c:188 windows/widgets.c:252 windows/widgets.c:258
+#: windows/widgets.c:188 windows/widgets.c:247 windows/widgets.c:253
 #, c-format
 msgid "'%s' argument must be a character string"
 msgstr ""
@@ -244,7 +244,7 @@ msgstr ""
 msgid "Select one"
 msgstr ""
 
-#: windows/widgets.c:184 windows/widgets.c:254
+#: windows/widgets.c:184 windows/widgets.c:249
 msgid "'default' argument is overlong"
 msgstr ""
 

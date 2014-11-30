@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-11-04 06:48\n"
+"POT-Creation-Date: 2014-11-30 14:48\n"
 "PO-Revision-Date: 2012-03-15 11:24-0500\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -2624,13 +2624,13 @@ msgstr "имена не соответствуют прежним именам"
 msgid "names for '%s' argument but not for '%s' argument"
 msgstr "длина 'scale' должна равняться числу колонок 'x'"
 
-#. R/namespace.R: gettextf("namespace %s %s is already loaded, but %s %s is required", sQuote(package),     current, z$op, z$version)
+#. R/namespace.R: gettextf("namespace %s %s is already loaded, but %s %s is required", sQuote(package),     current, zop, zversion)
 #: R/namespace.R:0
 #, fuzzy
 msgid "namespace %s %s is already loaded, but %s %s is required"
 msgstr "пакет %s %s загружен, но %s %s требуется для %s"
 
-#. R/namespace.R: gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package),     version, z$op, z$version)
+#. R/namespace.R: gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package),     version, zop, zversion)
 #: R/namespace.R:0
 #, fuzzy
 msgid "namespace %s %s is being loaded, but %s %s is required"

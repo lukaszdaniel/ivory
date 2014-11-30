@@ -1189,7 +1189,7 @@ SEXP R_execMethod(SEXP op, SEXP rho)
 			break;
 		}
 		if(deflt == R_NilValue)
-		    error(_("symbol \"%s\" not in environment of method"),
+		    error(_("symbol \"%s\" is not in environment of method"),
 			  CHAR(PRINTNAME(symbol)));
 		SET_PRCODE(val, CAR(deflt));
 	    }
@@ -1670,7 +1670,7 @@ SEXP attribute_hidden do_function(SEXP call, SEXP op, SEXP args, SEXP rho)
 	op = forcePromise(op);
 	SET_NAMED(op, 2);
     }
-    if (length(args) < 2) WrongArgCount("function");
+    if (length(args) < 2) WrongArgCount("function()");
     CheckFormals(CAR(args));
     rval = mkCLOSXP(CAR(args), CADR(args), rho);
     srcref = CADDR(args);
