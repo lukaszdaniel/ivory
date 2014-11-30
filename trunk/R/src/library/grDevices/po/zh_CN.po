@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-11 12:00+0200\n"
+"POT-Creation-Date: 2014-11-30 14:48+0100\n"
 "PO-Revision-Date: 2005-02-04 08:37+0000\n"
 "Last-Translator: 陈斐 <feic@avaya.com>\n"
 "Language-Team: Chinese\n"
@@ -135,7 +135,7 @@ msgstr ""
 msgid "maximum number of colors is %d"
 msgstr ""
 
-#: devCairo.c:45 devCairo.c:53
+#: devCairo.c:47 devCairo.c:56
 #, fuzzy
 msgid "failed to load cairo DLL"
 msgstr "无法分配栅格"
@@ -794,7 +794,7 @@ msgstr "不支持这个规划，因此没有写任何图象数据"
 msgid "Quartz R Device"
 msgstr ""
 
-#: stubs.c:100
+#: stubs.c:105
 #, fuzzy, c-format
 msgid "invalid '%s' argument"
 msgstr "'file'参数不对"

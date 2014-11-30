@@ -320,8 +320,9 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 
     s = GetOption1(install("warning.expression"));
     if( s != R_NilValue ) {
-	if( !isLanguage(s) &&  ! isExpression(s) )
-	    error(_("invalid option \"warning.expression\""));
+	if( !isLanguage(s) &&  ! isExpression(s) ) {
+	    error(_("invalid \"%s\" option"), "warning.expression");
+	}
 	cptr = R_GlobalContext;
 	while ( !(cptr->callflag & CTXT_FUNCTION) && cptr->callflag )
 	    cptr = cptr->nextcontext;
@@ -431,7 +432,8 @@ static void cleanup_PrintWarnings(void *data)
     if (R_CollectWarnings) {
 	R_CollectWarnings = 0;
 	R_Warnings = R_NilValue;
-	REprintf(_("Lost warning messages\n"));
+    REprintf(_("Lost warning messages"));
+    REprintf("\n");
     }
     inPrintWarnings = 0;
 }
@@ -452,7 +454,8 @@ void PrintWarnings(const char *hdr)
 	if (R_CollectWarnings) {
 	    R_CollectWarnings = 0;
 	    R_Warnings = R_NilValue;
-	    REprintf(_("Lost warning messages\n"));
+	    REprintf(_("Lost warning messages"));
+	    REprintf("\n");
 	}
 	return;
     }
@@ -608,7 +611,8 @@ verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	if (R_Warnings != R_NilValue) {
 	    R_CollectWarnings = 0;
 	    R_Warnings = R_NilValue;
-	    REprintf(_("Lost warning messages\n"));
+	    REprintf(_("Lost warning messages"));
+	    REprintf("\n");
 	}
 	R_Expressions = R_Expressions_keep;
 	jump_to_top_ex(FALSE, FALSE, FALSE, FALSE, FALSE);
@@ -820,9 +824,10 @@ static void jump_to_top_ex(Rboolean traceback,
 	s = GetOption1(install("error"));
 	haveHandler = ( s != R_NilValue );
 	if (haveHandler) {
-	    if( !isLanguage(s) &&  ! isExpression(s) )  /* shouldn't happen */
-		REprintf(_("invalid \"error\" option\n"));
-	    else {
+	    if( !isLanguage(s) &&  ! isExpression(s) ) { /* shouldn't happen */
+		REprintf(_("invalid \"%s\" option"), "error");
+		REprintf("\n");
+	    } else {
 		inError = 3;
 		if (isLanguage(s))
 		    eval(s, R_GlobalEnv);

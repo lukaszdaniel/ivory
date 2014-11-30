@@ -63,7 +63,7 @@ static Rboolean isum(int *x, R_xlen_t n, int *value, Rboolean narm, SEXP call)
 		if (s > 9000000000000000L || s < -9000000000000000L) {
 		    if(!updated) updated = TRUE;
 		    *value = NA_INTEGER;
-		    warningcall(call, _("integer overflow - use sum(as.numeric(.))"));
+		    warningcall(call, _("integer overflow in '%s' function; use '%s'"), "isum()", "sum(as.numeric(.))");
 		    return updated;
 		}
 	    }
@@ -75,7 +75,7 @@ static Rboolean isum(int *x, R_xlen_t n, int *value, Rboolean narm, SEXP call)
 	}
     }
     if(s > INT_MAX || s < R_INT_MIN){
-	warningcall(call, _("integer overflow - use sum(as.numeric(.))"));
+	warningcall(call, _("integer overflow in '%s' function; use '%s'"), "isum()", "sum(as.numeric(.))");
 	*value = NA_INTEGER;
     }
     else *value = (int) s;
@@ -100,7 +100,7 @@ static Rboolean isum(int *x, R_xlen_t n, int *value, Rboolean narm, SEXP call)
 	}
     }
     if(s > INT_MAX || s < R_INT_MIN){
-	warningcall(call, _("integer overflow - use sum(as.numeric(.))"));
+	warningcall(call, _("integer overflow in '%s' function; use '%s'"), "isum()", "sum(as.numeric(.))");
 	*value = NA_INTEGER;
     }
     else *value = (int) s;
@@ -620,7 +620,7 @@ SEXP attribute_hidden do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 			if(ans_type == INTSXP) {
 			    s = (double) icum + (double) itmp;
 			    if(s > INT_MAX || s < R_INT_MIN){
-				warningcall(call,_("integer overflow - use 'sum(as.numeric(.))'"));
+				warningcall(call,_("integer overflow in '%s' function; use '%s'"), "do_summary()", "sum(as.numeric(.))");
 				goto na_answer;
 			    }
 			    else icum += itmp;
@@ -731,9 +731,9 @@ SEXP attribute_hidden do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 	    warningcall(call, _("no non-missing arguments, returning NA"));
 	} else {
 	    if(iop == 2)
-		warningcall(call, _("no non-missing arguments to min; returning Inf"));
+		warningcall(call, _("no non-missing arguments passed to 'min()' function; returning Inf"));
 	    else
-		warningcall(call, _("no non-missing arguments to max; returning -Inf"));
+		warningcall(call, _("no non-missing arguments passed to 'max()' function; returning -Inf"));
 	    ans_type = REALSXP;
 	}
     }

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-11 12:00\n"
+"POT-Creation-Date: 2014-11-30 14:48\n"
 "PO-Revision-Date: 2012-03-05 22:07+0100\n"
 "Last-Translator: Detlef Steuer <detlef.steuer@hsu-hh.de>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -245,15 +245,6 @@ msgid "'callGeneric' must be called from a generic function or method"
 msgstr ""
 "'callGeneric' muss von einer generischen Funktion oder Methode aufgerufen "
 "werden"
-
-#. R/Methods.R: stop("'callGeneric' with a primitive needs explicit arguments (no formal args defined)")
-#: R/Methods.R:0
-msgid ""
-"'callGeneric' with a primitive needs explicit arguments (no formal args "
-"defined)"
-msgstr ""
-"'callGeneric' mit einem Primitiv benötigt explizite Argumente (keine "
-"formalen Argumente definiert)"
 
 #. R/RClassUtils.R: stop("'class' is a reserved slot name and cannot be redefined")
 #: R/RClassUtils.R:0
@@ -3945,6 +3936,13 @@ msgstr[1] ""
 "die formalen Argumente der generischen Funktion für \"%s\" (%s) "
 "unterscheiden sich von denen der nicht-generischen Funktion, die als "
 "Standard genutzt wird (%s)"
+
+#~ msgid ""
+#~ "'callGeneric' with a primitive needs explicit arguments (no formal args "
+#~ "defined)"
+#~ msgstr ""
+#~ "'callGeneric' mit einem Primitiv benötigt explizite Argumente (keine "
+#~ "formalen Argumente definiert)"
 
 #~ msgid ""
 #~ "could not find superclass %s to clean up when removing subclass "

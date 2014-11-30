@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-11 12:00\n"
+"POT-Creation-Date: 2014-11-30 14:48\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -234,15 +234,6 @@ msgstr ""
 msgid "'callGeneric' must be called from a generic function or method"
 msgstr ""
 "'callGeneric' deve ser chamada a partir de uma função ou método genérico"
-
-#. R/Methods.R: stop("'callGeneric' with a primitive needs explicit arguments (no formal args defined)")
-#: R/Methods.R:0
-msgid ""
-"'callGeneric' with a primitive needs explicit arguments (no formal args "
-"defined)"
-msgstr ""
-"'callGeneric' com uma primitiva requer argumentos explícitos (nenhum "
-"argumento formal definido)"
 
 #. R/RClassUtils.R: stop("'class' is a reserved slot name and cannot be redefined")
 #: R/RClassUtils.R:0
@@ -3721,6 +3712,13 @@ msgid_plural ""
 "of the non-generic to be used as the default (%s)"
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid ""
+#~ "'callGeneric' with a primitive needs explicit arguments (no formal args "
+#~ "defined)"
+#~ msgstr ""
+#~ "'callGeneric' com uma primitiva requer argumentos explícitos (nenhum "
+#~ "argumento formal definido)"
 
 #~ msgid "no class %s found as expected in removing subclass %s"
 #~ msgstr ""

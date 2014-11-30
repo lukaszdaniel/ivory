@@ -337,7 +337,7 @@ static SEXP binaryLogic(int code, SEXP s1, SEXP s2)
 	}
 	break;
     case 3:
-	error(_("Unary operator `!' called with two arguments"));
+	error(_("Unary operator '!' called with two arguments"));
 	break;
     }
     return ans;

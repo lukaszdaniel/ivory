@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-11-04 06:48\n"
+"POT-Creation-Date: 2014-11-30 14:48\n"
 "PO-Revision-Date: 2005-02-04 08:37+0000\n"
 "Last-Translator: 陈斐 <FeiChen@FairIsaac.com>\n"
 "Language-Team: Chinese\n"
@@ -2604,13 +2604,13 @@ msgstr "名字同原来已有的名字不相对"
 msgid "names for '%s' argument but not for '%s' argument"
 msgstr "'scale'的长度必需和'x'列的数目相同"
 
-#. R/namespace.R: gettextf("namespace %s %s is already loaded, but %s %s is required", sQuote(package),     current, z$op, z$version)
+#. R/namespace.R: gettextf("namespace %s %s is already loaded, but %s %s is required", sQuote(package),     current, zop, zversion)
 #: R/namespace.R:0
 #, fuzzy
 msgid "namespace %s %s is already loaded, but %s %s is required"
 msgstr "载入了程辑包%1$s %2$s，但%5$s需要%3$s %4$s "
 
-#. R/namespace.R: gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package),     version, z$op, z$version)
+#. R/namespace.R: gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package),     version, zop, zversion)
 #: R/namespace.R:0
 #, fuzzy
 msgid "namespace %s %s is being loaded, but %s %s is required"

@@ -119,7 +119,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (x != R_NilValue) {
 	if((fp=R_fopen(R_ExpandFileName(filename), "w")) == NULL)
-	    errorcall(call, _("unable to open file"));
+	    errorcall(call, _("unable to open file '%s'"), filename);
 	if (LENGTH(STRING_ELT(fn, 0)) == 0) EdFileUsed++;
 	src = deparse1(x, 0, FORSOURCING); /* deparse for sourcing, not for display */
 	for (i = 0; i < LENGTH(src); i++)

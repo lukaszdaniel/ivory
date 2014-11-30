@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-11 12:00+0200\n"
+"POT-Creation-Date: 2014-11-30 14:48+0100\n"
 "PO-Revision-Date: 2011-03-26 08:54-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -132,7 +132,7 @@ msgstr ""
 msgid "maximum number of colors is %d"
 msgstr ""
 
-#: devCairo.c:45 devCairo.c:53
+#: devCairo.c:47 devCairo.c:56
 #, fuzzy
 msgid "failed to load cairo DLL"
 msgstr "falha ao alocar lista de fonte"
@@ -776,7 +776,7 @@ msgstr ""
 msgid "Quartz R Device"
 msgstr ""
 
-#: stubs.c:100
+#: stubs.c:105
 #, c-format
 msgid "invalid '%s' argument"
 msgstr ""

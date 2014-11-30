@@ -446,10 +446,10 @@ static void win32_segv(int signum)
     }
     num_caught++;
     if(num_caught < 10) signal(signum, win32_segv);
-    if(signum == SIGILL)
+//    if(signum == SIGILL)
 	error(_("caught access violation - continue with care"));
-    else
-	error(_("caught access violation - continue with care"));
+//    else
+//	error(_("caught access violation - continue with care"));
 }
 #endif
 

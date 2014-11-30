@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-11 12:00\n"
+"POT-Creation-Date: 2014-11-30 14:48\n"
 "PO-Revision-Date: 2012-02-26 14:07+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -239,15 +239,6 @@ msgstr ""
 #: R/Methods.R:0
 msgid "'callGeneric' must be called from a generic function or method"
 msgstr " 'callGeneric' は総称的関数かメソッドから呼び出されなくてはなりません "
-
-#. R/Methods.R: stop("'callGeneric' with a primitive needs explicit arguments (no formal args defined)")
-#: R/Methods.R:0
-msgid ""
-"'callGeneric' with a primitive needs explicit arguments (no formal args "
-"defined)"
-msgstr ""
-" プリミティブを伴う 'callGeneric' は明示的な引数(形式的引数が定義されていな"
-"い)を必要とします "
 
 #. R/RClassUtils.R: stop("'class' is a reserved slot name and cannot be redefined")
 #: R/RClassUtils.R:0
@@ -3877,6 +3868,13 @@ msgid_plural ""
 msgstr[0] ""
 " \"%s\" (%s) に対する総称的関数の形式的引数は、既定 (%s) として使われる非総称"
 "的なそれの引数と異なります "
+
+#~ msgid ""
+#~ "'callGeneric' with a primitive needs explicit arguments (no formal args "
+#~ "defined)"
+#~ msgstr ""
+#~ " プリミティブを伴う 'callGeneric' は明示的な引数(形式的引数が定義されてい"
+#~ "ない)を必要とします "
 
 #~ msgid ""
 #~ "could not find superclass %s to clean up when removing subclass "

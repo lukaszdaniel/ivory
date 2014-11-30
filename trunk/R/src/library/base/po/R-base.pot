@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.2.0\n"
-"POT-Creation-Date: 2014-11-04 06:48\n"
+"POT-Creation-Date: 2014-11-30 14:48\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3188,14 +3188,14 @@ msgstr ""
 
 
 #: R/namespace.R: 0
-#. R/namespace.R: gettextf("namespace %s %s is already loaded, but %s %s is required", sQuote(package),     current, z$op, z$version)
+#. R/namespace.R: gettextf("namespace %s %s is already loaded, but %s %s is required", sQuote(package),     current, zop, zversion)
 
 msgid "namespace %s %s is already loaded, but %s %s is required"
 msgstr ""
 
 
 #: R/namespace.R: 0
-#. R/namespace.R: gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package),     version, z$op, z$version)
+#. R/namespace.R: gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package),     version, zop, zversion)
 
 msgid "namespace %s %s is being loaded, but %s %s is required"
 msgstr ""

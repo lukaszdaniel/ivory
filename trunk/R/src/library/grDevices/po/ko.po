@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-11 12:00+0200\n"
+"POT-Creation-Date: 2014-11-30 14:48+0100\n"
 "PO-Revision-Date: 2005-05-31 10:31+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -136,7 +136,7 @@ msgstr ""
 msgid "maximum number of colors is %d"
 msgstr ""
 
-#: devCairo.c:45 devCairo.c:53
+#: devCairo.c:47 devCairo.c:56
 #, fuzzy
 msgid "failed to load cairo DLL"
 msgstr "font 리스트를 할당하는데 실패되었습니다"
@@ -816,7 +816,7 @@ msgstr ""
 msgid "Quartz R Device"
 msgstr ""
 
-#: stubs.c:100
+#: stubs.c:105
 #, fuzzy, c-format
 msgid "invalid '%s' argument"
 msgstr "무효의 문자열 인수입니다"

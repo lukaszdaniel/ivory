@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-11-04 06:48\n"
+"POT-Creation-Date: 2014-11-30 14:48\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -2471,12 +2471,12 @@ msgstr "nazwy nie zgadzają się z poprzednimi nazwami"
 msgid "names for '%s' argument but not for '%s' argument"
 msgstr "nazwy dla argumentu '%s', ale nie dla argumentu '%s'"
 
-#. R/namespace.R: gettextf("namespace %s %s is already loaded, but %s %s is required", sQuote(package),     current, z$op, z$version)
+#. R/namespace.R: gettextf("namespace %s %s is already loaded, but %s %s is required", sQuote(package),     current, zop, zversion)
 #: R/namespace.R:0
 msgid "namespace %s %s is already loaded, but %s %s is required"
 msgstr "przestrzeń nazw %s %s jest już załadowana, ale %s %s jest wymagana"
 
-#. R/namespace.R: gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package),     version, z$op, z$version)
+#. R/namespace.R: gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package),     version, zop, zversion)
 #: R/namespace.R:0
 msgid "namespace %s %s is being loaded, but %s %s is required"
 msgstr "przestrzeń nazw %s %s jest ładowana, ale %s %s jest wymagana"

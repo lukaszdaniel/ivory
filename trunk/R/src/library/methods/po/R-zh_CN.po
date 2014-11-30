@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-11 12:00\n"
+"POT-Creation-Date: 2014-11-30 14:48\n"
 "PO-Revision-Date: 2005-03-15 08:37+0000\n"
 "Last-Translator: 陈斐 <FeiChen@FairIsaac.com>\n"
 "Language-Team: Chinese\n"
@@ -221,13 +221,6 @@ msgstr "'as'方法必需有一个参数，或同coerce()相对应，得到的却
 #: R/Methods.R:0
 msgid "'callGeneric' must be called from a generic function or method"
 msgstr "'callGeneric'只能由泛型函数或方法来調用"
-
-#. R/Methods.R: stop("'callGeneric' with a primitive needs explicit arguments (no formal args defined)")
-#: R/Methods.R:0
-msgid ""
-"'callGeneric' with a primitive needs explicit arguments (no formal args "
-"defined)"
-msgstr "带基元的'callGeneric'需要明确的参数(没有设定正式参数)"
 
 #. R/RClassUtils.R: stop("'class' is a reserved slot name and cannot be redefined")
 #: R/RClassUtils.R:0
@@ -3573,6 +3566,11 @@ msgid_plural ""
 msgstr[0] ""
 "用于'%s'泛型函数(%s)的正式参数与将作为默認值(%s)来用的非泛型的正式参数不相符"
 "合"
+
+#~ msgid ""
+#~ "'callGeneric' with a primitive needs explicit arguments (no formal args "
+#~ "defined)"
+#~ msgstr "带基元的'callGeneric'需要明确的参数(没有设定正式参数)"
 
 #~ msgid ""
 #~ "could not find superclass %s to clean up when removing subclass "

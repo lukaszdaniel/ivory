@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-11 12:00+0200\n"
+"POT-Creation-Date: 2014-11-30 14:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -131,7 +131,7 @@ msgstr ""
 msgid "maximum number of colors is %d"
 msgstr ""
 
-#: devCairo.c:45 devCairo.c:53
+#: devCairo.c:47 devCairo.c:56
 msgid "failed to load cairo DLL"
 msgstr ""
 
@@ -749,7 +749,7 @@ msgstr ""
 msgid "Quartz R Device"
 msgstr ""
 
-#: stubs.c:100
+#: stubs.c:105
 #, c-format
 msgid "invalid '%s' argument"
 msgstr ""
