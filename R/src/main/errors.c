@@ -31,7 +31,6 @@
 #include <Rinterface.h>
 #include <R_ext/GraphicsEngine.h> /* for GEonExit */
 #include <R_ext/Minmax.h>
-#include <Rmath.h> /* for imax2 */
 #include <R_ext/Print.h>
 
 
@@ -463,8 +462,6 @@ void PrintWarnings(const char *hdr)
     cntxt.cend = &cleanup_PrintWarnings;
 
     inPrintWarnings = 1;
-//    if(hdr != NULL) header = hdr;
-//    else header = ngettext("Warning message:", "Warning messages:", R_CollectWarnings);
     if( R_CollectWarnings == 1 ) {
 	REprintf("%s\n", header);
 	names = CAR(ATTRIB(R_Warnings));
