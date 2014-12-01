@@ -2338,7 +2338,7 @@ setRlibs <-
 	    checkingLog(Log, gettext("checking tests ...", domain = "R-tools"))
 	else
 	    checkingLog(Log, gettextf("checking tests in %s directory ...", sQuote(test_dir), domain = "R-tools"))
-	    
+
         run_one_arch <- function(arch = "")
         {
             testsrcdir <- file.path(pkgdir, test_dir)
@@ -3623,7 +3623,7 @@ setRlibs <-
             "      --use-valgrind    use 'valgrind' when running examples/tests/vignettes",
             "      --timings         record timings for examples",
             "      --install-args=	command-line args to be passed to INSTALL",
-	    "      --test-dir=       look in this subdirectory for test scripts (default tests)",	    
+	    "      --test-dir=       look in this subdirectory for test scripts (default tests)",
             "      --check-subdirs=default|yes|no",
             "			run checks on the package subdirectories",
             "			(default is yes for a tarball, no otherwise)",
