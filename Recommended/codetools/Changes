@@ -13,7 +13,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 243c242
 <     else signal("not a symbol or string")
 ---
->     else signal(gettext("not a symbol or string", domain = "R-codetools"))
+>     else signal(gettext("type of 'e' argument is not a symbol or string", domain = "R-codetools"))
 273,274c272
 <                 warning0(paste("local assignments to syntactic functions:",
 <                                vals[rdsf]))
@@ -40,6 +40,10 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 <                  " is not a valid function in complex assignments")
 ---
 >             stop(gettextf("%s is not a valid function in complex assignments", sQuote(deparse(fun)), domain = "R-codetools"))
+380c377
+<         stop("only works for closures")
+---
+>         stop("'makeUsageCollector()' function only works for closures")
 409c406
 <             w$signal("... may be used in an incorrect context", w)
 ---
@@ -65,7 +69,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 <         w$signal(paste("wrong number of arguments to '.Internal':",
 <                        pasteExpr(e)), w)
 ---
->         w$signal(paste(gettext("wrong number of arguments to '.Internal':", domain = "R-codetools"), pasteExpr(e)), w)
+>         w$signal(paste(gettextf("wrong number of arguments to %s:", sQuote(".Internal()"), domain = "R-codetools"), pasteExpr(e)), w)
 664c659
 <     else w$signal(paste("bad argument to '.Internal':", pasteExpr(e[[2]])), w)
 ---
@@ -73,11 +77,11 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 670c665
 <         w$signal("wrong number of arguments to 'substitute'", w)
 ---
->         w$signal(gettext("wrong number of arguments to 'substitute'", domain = "R-codetools"), w)
+>         w$signal(gettextf("wrong number of arguments to %s", sQuote("substitute()"), domain = "R-codetools"), w)
 680c675
 <         w$signal("wrong number of arguments to 'bquote'", w)
 ---
->         w$signal(gettext("wrong number of arguments to 'bquote'", domain = "R-codetools"), w)
+>         w$signal(gettextf("wrong number of arguments to %s", sQuote("bquote()"), domain = "R-codetools"), w)
 705,706c700
 <                     w$signal(paste("link", sQuote(e[[2]]), "not available for",
 <                                    sQuote(family)), w)

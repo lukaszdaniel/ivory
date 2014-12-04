@@ -9,10 +9,9 @@ dc34b63e948e3ba0667d43b3fde24c58 *inst/po/pl/LC_MESSAGES/R-class.mo
 41a14f2150064ddff743e39d111a870a *inst/po/de/LC_MESSAGES/R-class.mo
 42a1ca9994fac694a8880283a281ddd7 *inst/po/en@quot/LC_MESSAGES/R-class.mo
 b888e2521f30a9912d9687777b1aa478 *inst/po/fr/LC_MESSAGES/R-class.mo
-c687e9e61b8a98aeb166d71ec57742b9 *inst/po/ko/LC_MESSAGES/R-class.mo
 a14861d4c76b0028b6dc635163b00297 *LICENCE.note
 ddb7940a9b3b3f00fb4b9b1d6c3f115d *src/class.c
-fda21cfda59357cb9b2b2a61d4f054ed *src/localization.h
+c687e9e61b8a98aeb166d71ec57742b9 *inst/po/ko/LC_MESSAGES/R-class.mo
 7ffe67ce0c67d938298e46b08818f9cb *man/knn1.Rd
 e8e077536af8608b6d5d366410bae87a *man/lvqtest.Rd
 396eec671f1bddd185fa79831dd47ee3 *man/lvq3.Rd
@@ -30,11 +29,12 @@ fdfb3a7e3ed8116278a8f4fd067a8045 *man/lvq2.Rd
 04d8b8fb49626fa41093f3b19ce5edbf *man/somgrid.Rd
 018ec39aa0218512d0e6493b9003f7eb *NAMESPACE
 cbc30ab00ca2a36546c4936da476b09c *Changes
+fda21cfda59357cb9b2b2a61d4f054ed *src/localization.h
 8a155b310774ebeba1ca457b93de1671 *po/class.pot
-d2ee9bbecc78fd62f581ddbfcf0fd88b *po/R-class.pot
 aadb26c42868ea3128ff9946ba01a80a *po/pl.po
+d2ee9bbecc78fd62f581ddbfcf0fd88b *po/R-class.pot
 bb58b22589d23aa5601fda9610bba5f9 *po/R-pl.po
 a90e18606f5d74d5d7877bac601293c3 *po/R-fr.po
 bd0ea343c607f617e751e941b8ca32f5 *po/R-de.po
-bfe26112bae2b66f1f3a98bfee2ad7ce *po/R-ko.po
 565fec498b3cf34d8175740d3c2f9123 *DESCRIPTION
+bfe26112bae2b66f1f3a98bfee2ad7ce *po/R-ko.po
