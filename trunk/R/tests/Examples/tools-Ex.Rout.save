@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-11-20 r73) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-12-04 r98) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -194,7 +194,7 @@ Error in command 'assertWarning(ff())':
 > bibstyle("unsorted", sortKeys = function(refs) seq_along(refs),
 +     fmtPrefix = function(paper) paste0("[", paper$.index, "]"),
 +        .init = TRUE)
-<environment: 0x21ac878>
+<environment: 0x20fcb90>
 > print(refs, .bibstyle = "unsorted")
 [1] R Core Team (2013). _R: A Language and Environment for Statistical
 Computing_. R Foundation for Statistical Computing, Vienna, Austria.
@@ -512,15 +512,16 @@ attr(,"match.length")
 > dependsOnPkgs("lattice")
  [1] "effects"                   "hexbin"                   
  [3] "Hmisc"                     "latticeExtra"             
- [5] "maptools"                  "sp"                       
- [7] "zoo"                       "Matrix"                   
- [9] "nlme"                      "igraph"                   
-[11] "lmtest"                    "RcmdrMisc"                
-[13] "sandwich"                  "mgcv"                     
-[15] "FrF2"                      "multcomp"                 
-[17] "Rcmdr"                     "RcmdrPlugin.DoE"          
-[19] "DoE.wrapper"               "RcmdrPlugin.Scoring"      
-[21] "RcmdrPlugin.TeachingDemos"
+ [5] "lme4"                      "maptools"                 
+ [7] "sp"                        "zoo"                      
+ [9] "Matrix"                    "nlme"                     
+[11] "igraph"                    "lmtest"                   
+[13] "pbkrtest"                  "RcmdrMisc"                
+[15] "RcppEigen"                 "sandwich"                 
+[17] "mgcv"                      "FrF2"                     
+[19] "multcomp"                  "Rcmdr"                    
+[21] "RcmdrPlugin.DoE"           "DoE.wrapper"              
+[23] "RcmdrPlugin.Scoring"       "RcmdrPlugin.TeachingDemos"
 > 
 > 
 > 
@@ -1025,7 +1026,7 @@ List of 6 components
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.78 0.037 0.864 0 0 
+Time elapsed:  0.748 0.034 0.814 0 0 
 > grDevices::dev.off()
 null device 
           1 

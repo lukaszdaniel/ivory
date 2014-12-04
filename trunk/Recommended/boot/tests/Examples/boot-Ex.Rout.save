@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-11-20 r73) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-12-04 r98) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -535,57 +535,57 @@ The following object is masked from ‘package:boot’:
 + }
 > aml.case <- censboot(aml, aml.fun, R = 499, strata = aml$group)
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 > 
 > # Now we will look at the same statistic using the conditional 
 > # bootstrap and the weird bootstrap.  For the conditional bootstrap 
@@ -597,61 +597,61 @@ Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
 > aml.cond <- censboot(aml, aml.fun, R = 499, strata = aml$group,
 +      F.surv = aml.s1, G.surv = aml.s2, sim = "cond")
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 > 
 > 
 > # For the weird bootstrap we must redefine our function slightly since
@@ -671,21 +671,21 @@ Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
 > aml.wei <- censboot(cbind(aml$time, aml$cens), aml.fun1, R = 499,
 +      strata = aml$group,  F.surv = aml.s1, sim = "weird")
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
-  no non-missing arguments to min; returning Inf
+  no non-missing arguments passed to 'min()' function; returning Inf
 > 
 > # Now for an example where a cox regression model has been fitted
 > # the data we will look at the melanoma data of Example 7.6 from 
@@ -2030,7 +2030,7 @@ t3* 0.000000 -0.8862944    2.208945
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  40.479 0.456 41.753 0 0 
+Time elapsed:  40.709 0.377 41.946 0 0 
 > grDevices::dev.off()
 null device 
           1 
