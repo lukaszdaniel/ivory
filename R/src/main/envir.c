@@ -3433,7 +3433,8 @@ SEXP R_FindPackageEnv(SEXP info)
 {
     SEXP expr, val;
     PROTECT(info);
-    PROTECT(expr = LCONS(install("findPackageEnv"), LCONS(info, R_NilValue)));
+    SEXP s_findPackageEnv = install("findPackageEnv");
+    PROTECT(expr = LCONS(s_findPackageEnv, LCONS(info, R_NilValue)));
     val = eval(expr, R_GlobalEnv);
     UNPROTECT(2);
     return val;
@@ -3491,7 +3492,8 @@ SEXP R_FindNamespace(SEXP info)
 {
     SEXP expr, val;
     PROTECT(info);
-    PROTECT(expr = LCONS(install("getNamespace"), LCONS(info, R_NilValue)));
+    SEXP s_getNamespace = install("getNamespace");
+    PROTECT(expr = LCONS(s_getNamespace, LCONS(info, R_NilValue)));
     val = eval(expr, R_GlobalEnv);
     UNPROTECT(2);
     return val;

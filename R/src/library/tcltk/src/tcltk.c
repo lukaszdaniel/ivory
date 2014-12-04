@@ -111,7 +111,8 @@ static int R_call(ClientData clientData,
     sscanf(argv[1], "%p", &fun);
 
     expr = LCONS( (SEXP)fun, alist);
-    expr = LCONS(install("try"), LCONS(expr, R_NilValue));
+    SEXP s_try = install("try");
+    expr = LCONS(s_try, LCONS(expr, R_NilValue));
 
     R_Busy(1);
     ans = eval(expr, R_GlobalEnv);
@@ -135,7 +136,8 @@ static int R_call_lang(ClientData clientData,
     sscanf(argv[1], "%p", &expr);
     sscanf(argv[2], "%p", &env);
 
-    expr = LCONS(install("try"), LCONS(expr, R_NilValue));
+    SEXP s_try = install("try");
+    expr = LCONS(s_try, LCONS(expr, R_NilValue));
 
     R_Busy(1);
     ans = eval((SEXP)expr, (SEXP)env);
