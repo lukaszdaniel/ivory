@@ -45,7 +45,9 @@
 #include <Localization.h>
 #ifdef Win32
  #undef _
+ #undef ngettext
  #define _(String) libintl_gettext (String)
+ #define ngettext(String, StringP, N) libintl_dngettext ("R", String, StringP, N)
  #undef gettext /* needed for graphapp */
 #endif
 
