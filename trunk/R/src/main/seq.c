@@ -160,12 +160,12 @@ SEXP attribute_hidden do_colon(SEXP call, SEXP op, SEXP args, SEXP rho)
 	errorcall(call, _("argument is of length 0"));
     if (n1 > 1)
 	warningcall(call, 
-		    ngettext("numerical expression has %d element: only the first used",
+		    n_("numerical expression has %d element: only the first used",
 			     "numerical expression has %d elements: only the first used",
 			     (int) n1), (int) n1);
     if (n2 > 1)
 	warningcall(call, 
-		    ngettext("numerical expression has %d element: only the first used", 
+		    n_("numerical expression has %d element: only the first used",
 			     "numerical expression has %d elements: only the first used", 
 			     (int) n2), (int) n2);
     n1 = asReal(s1);

@@ -43,13 +43,7 @@
 #undef HAVE_ZLIB_H
 
 #include <Localization.h>
-#ifdef Win32
- #undef _
- #undef ngettext
- #define _(String) libintl_gettext (String)
- #define ngettext(String, StringP, N) libintl_dngettext ("R", String, StringP, N)
- #undef gettext /* needed for graphapp */
-#endif
+
 
 extern void R_ProcessEvents(void);
 #if !defined(Unix) || defined(HAVE_BSD_NETWORKING)
@@ -1408,7 +1402,7 @@ RxmlNanoHTTPMethod(const char *URL, const char *method, const char *input,
 	snprintf(p, blen - (p - bp), "\r\n");
     RxmlMessage(0, "-> %s%s", proxy? "(Proxy) " : "", bp);
     if ((blen -= (int) strlen(bp)+1) < 0)
-	RxmlMessage(0, ngettext("ERROR: overflowed buffer by %d byte\n",
+	RxmlMessage(0, n_("ERROR: overflowed buffer by %d byte\n",
 				"ERROR: overflowed buffer by %d bytes\n",
 				-blen), -blen);
     ctxt->outptr = ctxt->out = bp;

@@ -466,7 +466,7 @@ void nmmin(int n, double *Bvec, double *X, double *Fmin, optimfn fminfn,
     if (trace) {
 	Rprintf(_("Exiting from Nelder Mead minimizer"));
 	Rprintf("\n    ");
-	Rprintf(ngettext("%d function evaluation used", "%d function evaluations used", funcount), funcount);
+	Rprintf(n_("%d function evaluation used", "%d function evaluations used", funcount), funcount);
 	Rprintf("\n");
     }
     *Fmin = P[n1 - 1][L - 1];
@@ -643,9 +643,9 @@ void cgmin(int n, double *Bvec, double *X, double *Fmin,
     if (trace) {
 	Rprintf(_("Exiting from conjugate gradients minimizer"));
 	Rprintf("\n    ");
-	Rprintf(ngettext("%d function evaluation used", "%d function evaluations used", funcount), funcount);
+	Rprintf(n_("%d function evaluation used", "%d function evaluations used", funcount), funcount);
 	Rprintf("\n    ");
-	Rprintf(ngettext("%d gradient evaluation used", "%d gradient evaluations used", gradcount), gradcount);
+	Rprintf(n_("%d gradient evaluation used", "%d gradient evaluations used", gradcount), gradcount);
 	Rprintf("\n");
     }
     *fncount = funcount;

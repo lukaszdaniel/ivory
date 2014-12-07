@@ -488,7 +488,7 @@ static void PrintGenericVector(SEXP s, SEXP env)
 	    }
 	    Rprintf("\n");
 	    if(n_pr < ns) {
-		Rprintf(ngettext(" [ reached 'getOption(\"max.print\")' -- omitted %d entry ]", " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", ns - n_pr), ns - n_pr);
+		Rprintf(n_(" [ reached 'getOption(\"max.print\")' -- omitted %d entry ]", " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", ns - n_pr), ns - n_pr);
 		Rprintf("\n");
 		}
 	}

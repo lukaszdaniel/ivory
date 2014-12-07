@@ -5,12 +5,8 @@
 
 #ifdef ENABLE_NLS
  #include <libintl.h>
-  #ifdef Win32
-   #define _(String) libintl_dgettext ("grid", String)
-   #undef gettext /* needed for graphapp */
-  #else
-   #define _(String) dgettext ("grid", String)
-  #endif
+ #define _(String) dgettext("grid", String)
+ #define n_(String, StringP, N) dngettext("grid", String, StringP, N)
  #define gettext_noop(String) String
  #define N_(String) gettext_noop (String)
 #else /* not NLS */
@@ -18,6 +14,7 @@
  #define N_(String) String
  #define ngettext(String, StringP, N) (N > 1 ? StringP: String)
  #define dngettext(Domain, String, StringP, N) ngettext(String, StringP, N)
+ #define n_(String, StringP, N) ngettext(String, StringP, N)
 #endif
 
 #endif /* LOCALIZATION_H */

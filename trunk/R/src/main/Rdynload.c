@@ -977,7 +977,7 @@ Rf_MakeRegisteredNativeSymbol(R_RegisteredNativeSymbol *symbol)
     R_RegisteredNativeSymbol *copy;
     copy = (R_RegisteredNativeSymbol *) malloc(1 * sizeof(R_RegisteredNativeSymbol));
     if(!copy) {
-        error(ngettext("cannot allocate memory for registered native symbol (%d byte)",
+        error(n_("cannot allocate memory for registered native symbol (%d byte)",
 		       "cannot allocate memory for registered native symbol (%d bytes)",
                       (int) sizeof(R_RegisteredNativeSymbol)),
                       (int) sizeof(R_RegisteredNativeSymbol));

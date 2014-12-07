@@ -107,9 +107,9 @@ stem_leaf(double *x, int n, double scale, int width, double atom)
     else
 	{
 	if(pdigits > 0)
-		Rprintf(dngettext("graphics", "  The decimal point is %d digit to the right of the |\n\n", "  The decimal point is %d digits to the right of the |\n\n", pdigits), pdigits);
+		Rprintf(n_("  The decimal point is %d digit to the right of the |\n\n", "  The decimal point is %d digits to the right of the |\n\n", pdigits), pdigits);
 	else
-		Rprintf(dngettext("graphics", "  The decimal point is %d digit to the left of the |\n\n", "  The decimal point is %d digits to the left of the |\n\n", -pdigits), -pdigits);
+		Rprintf(n_("  The decimal point is %d digit to the left of the |\n\n", "  The decimal point is %d digits to the left of the |\n\n", -pdigits), -pdigits);
 	}
     i = 0;
     do {

@@ -55,7 +55,7 @@ SEXP attribute_hidden do_identical(SEXP call, SEXP op, SEXP args, SEXP env)
            const int bufsize = strlen(".Internal()") + strlen(primname);
            char result [bufsize];
            snprintf(result, bufsize, ".Internal(%s)", primname);
-            error(ngettext("%d argument passed to '%s' function which requires %d",
+            error(n_("%d argument passed to '%s' function which requires %d",
                      "%d arguments passed to '%s' function which requires %d",
                            (unsigned long) length(args)),
                   length(args), result, PRIMARITY(op));
