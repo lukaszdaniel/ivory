@@ -375,7 +375,7 @@ SEXP attribute_hidden matchArgs(SEXP formals, SEXP supplied, SEXP call)
                 }
             }
 	    errorcall(call /* R_GlobalContext->call */,
-		      ngettext("unused argument %s",
+		      n_("unused argument %s",
 			       "unused arguments %s",
 			       (unsigned long) length(unusedForError)),
 		      CHAR(STRING_ELT(deparse1line(unusedForError, 0), 0)) + 4);

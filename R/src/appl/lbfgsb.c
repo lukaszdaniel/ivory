@@ -1025,7 +1025,7 @@ static void active(int n, double *l, double *u,
 	if (!*cnstnd) { Rprintf(_("This problem is unconstrained.")); Rprintf("\n"); }
     }
     if (iprint > 0) {
-	Rprintf(ngettext("At X0, %d variable is exactly at the bounds", "At X0, %d variables are exactly at the bounds", nbdd), nbdd);
+	Rprintf(n_("At X0, %d variable is exactly at the bounds", "At X0, %d variables are exactly at the bounds", nbdd), nbdd);
 		Rprintf("\n");
 	}
 
@@ -1512,7 +1512,7 @@ static void cauchy(int n, double *x, double *l, double *u, int *nbd,
     tsum = 0.;
     *nint = 1;
     if (iprint >= 99) {
-		Rprintf(ngettext("There is %d breakpoint", "There are %d breakpoints", nbreak), nbreak);
+		Rprintf(n_("There is %d breakpoint", "There are %d breakpoints", nbreak), nbreak);
 		Rprintf("\n");
 	}
 
@@ -2316,9 +2316,9 @@ static void freev(int n, int *nfree, int *indx,
 		}
 	    }
          if (iprint >= 100) {
-	     Rprintf(ngettext("%d variable leave", "%d variables leave", n + 1 - *ileave), n + 1 - *ileave);
+	     Rprintf(n_("%d variable leave", "%d variables leave", n + 1 - *ileave), n + 1 - *ileave);
 	     Rprintf("; ");
-	     Rprintf(ngettext("%d variable enter", "%d variables enter", *nenter), *nenter);
+	     Rprintf(n_("%d variable enter", "%d variables enter", *nenter), *nenter);
 		 Rprintf("\n");
 	 }
 	}
@@ -2337,7 +2337,7 @@ static void freev(int n, int *nfree, int *indx,
 	}
     }
     if (iprint >= 99) {
-	Rprintf(ngettext("%d variable is free at GCP on iteration %d", "%d variables are free at GCP on iteration %d", *nfree), *nfree, *iter + 1);
+	Rprintf(n_("%d variable is free at GCP on iteration %d", "%d variables are free at GCP on iteration %d", *nfree), *nfree, *iter + 1);
 	Rprintf("\n");
 	}
     return;

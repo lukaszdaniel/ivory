@@ -308,7 +308,7 @@ void fallbackSort ( UInt32* fmap,
       }
 
       if (verb >= 4) 
-         VPrintf1 ( ngettext("%6d unresolved string\n", "%6d unresolved strings\n", nNotDone), nNotDone );
+         VPrintf1 ( n_("%6d unresolved string\n", "%6d unresolved strings\n", nNotDone), nNotDone );
 
       H *= 2;
       if (H > nblock || nNotDone == 0) break;

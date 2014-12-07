@@ -365,7 +365,7 @@ void printMatrix(SEXP x, int offset, SEXP dim, int quote, int right,
     }
 //#ifdef ENABLE_NLS
     if(r_pr < r) { // number of formats must be consistent here
-	Rprintf(ngettext(" [ reached 'getOption(\"max.print\")' -- omitted %d row ]",
+	Rprintf(n_(" [ reached 'getOption(\"max.print\")' -- omitted %d row ]",
 			 " [ reached 'getOption(\"max.print\")' -- omitted %d rows ]",
 			 r - r_pr),
 		r - r_pr);
@@ -516,13 +516,13 @@ void printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 
 	if(max_reached && nb_pr < nb) {
 	    if(nr_last < nr) {
-	    Rprintf(ngettext(" [ reached 'getOption(\"max.print\")' -- omitted %d row and %d matrix slice ]",
+	    Rprintf(n_(" [ reached 'getOption(\"max.print\")' -- omitted %d row and %d matrix slice ]",
 			     " [ reached 'getOption(\"max.print\")' -- omitted %d rows and %d matrix slices ]",
 			     nr - nr_last), nr - nr_last, nb - nb_pr);
 	   Rprintf("\n");
 		}
 	    else {
-	    Rprintf(ngettext(" [ reached 'getOption(\"max.print\")' -- omitted %d matrix slice ]",
+	    Rprintf(n_(" [ reached 'getOption(\"max.print\")' -- omitted %d matrix slice ]",
 			     " [ reached 'getOption(\"max.print\")' -- omitted %d matrix slices ]",
 			     nb - nb_pr), nb - nb_pr);
 	   Rprintf("\n");

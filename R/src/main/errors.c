@@ -444,7 +444,7 @@ attribute_hidden
 void PrintWarnings(const char *hdr)
 {
     int i;
-    const char *header = hdr? hdr: ngettext("Warning message:", "Warning messages:", R_CollectWarnings);
+    const char *header = hdr? hdr: n_("Warning message:", "Warning messages:", R_CollectWarnings);
     SEXP names, s, t;
     RCNTXT cntxt;
 
@@ -526,7 +526,7 @@ void PrintWarnings(const char *hdr)
 	}
     } else {
 	if (R_CollectWarnings < R_nwarnings)
-	    REprintf(ngettext("There was %d warning (use 'warnings()' to see it)", 
+	    REprintf(n_("There was %d warning (use 'warnings()' to see it)",
 			      "There were %d warnings (use 'warnings()' to see them)", 
 			      R_CollectWarnings), 
 		     R_CollectWarnings);
@@ -707,7 +707,7 @@ verrorcall_dflt(SEXP call, const char *format, va_list ap)
     if (R_ShowErrorMessages) REprintf("%s", errbuf);
 
     if( R_ShowErrorMessages && R_CollectWarnings ) {
-	PrintWarnings(ngettext("Additional warning message:", "Additional warning messages:", R_CollectWarnings));
+	PrintWarnings(n_("Additional warning message:", "Additional warning messages:", R_CollectWarnings));
     }
 
     jump_to_top_ex(TRUE, TRUE, TRUE, TRUE, FALSE);
@@ -1334,7 +1334,7 @@ static void R_SetErrmessage(const char *s)
 static void R_PrintDeferredWarnings(void)
 {
     if( R_ShowErrorMessages && R_CollectWarnings ) {
-	PrintWarnings(ngettext("Additional warning message:", "Additional warning messages:", R_CollectWarnings));
+	PrintWarnings(n_("Additional warning message:", "Additional warning messages:", R_CollectWarnings));
     }
 }
 

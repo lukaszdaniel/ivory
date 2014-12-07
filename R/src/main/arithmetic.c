@@ -1178,7 +1178,7 @@ SEXP attribute_hidden do_math1(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
 
     default:
-	errorcall(call, ngettext("unimplemented real function of %d numeric argument", "unimplemented real function of %d numeric arguments", 1), 1);
+	errorcall(call, n_("unimplemented real function of %d numeric argument", "unimplemented real function of %d numeric arguments", 1), 1);
     }
     return s; /* never used; to keep -Wall happy */
 }
@@ -1465,7 +1465,7 @@ SEXP attribute_hidden do_math2(SEXP call, SEXP op, SEXP args, SEXP env)
     case 26: return Math2(args, psigamma);
 
     default:
-	errorcall(call, ngettext("unimplemented real function of %d numeric argument", "unimplemented real function of %d numeric arguments", 2), 2);
+	errorcall(call, n_("unimplemented real function of %d numeric argument", "unimplemented real function of %d numeric arguments", 2), 2);
     }
     return op;			/* never used; to keep -Wall happy */
 }
@@ -1492,7 +1492,7 @@ SEXP attribute_hidden do_Math2(SEXP call, SEXP op, SEXP args, SEXP env)
 
     n = length(args);
     if (n != 1 && n != 2)
-	error(ngettext("%d argument passed to '%s' function which requires 1 or 2 arguments", "%d arguments passed to '%s' function which requires 1 or 2 arguments", n),
+	error(n_("%d argument passed to '%s' function which requires 1 or 2 arguments", "%d arguments passed to '%s' function which requires 1 or 2 arguments", n),
 	      n, PRIMNAME(op));
 
     if (! DispatchGroup("Math", call2, op, args, env, &res)) {
@@ -1855,7 +1855,7 @@ SEXP attribute_hidden do_math3(SEXP call, SEXP op, SEXP args, SEXP env)
     case 47:  return Math3_2(args, qnbinom_mu);
 
     default:
-	errorcall(call, ngettext("unimplemented real function of %d numeric argument", "unimplemented real function of %d numeric arguments", 3), 3);
+	errorcall(call, n_("unimplemented real function of %d numeric argument", "unimplemented real function of %d numeric arguments", 3), 3);
     }
     return op;			/* never used; to keep -Wall happy */
 } /* do_math3() */
@@ -2026,7 +2026,7 @@ SEXP attribute_hidden do_math4(SEXP call, SEXP op, SEXP args, SEXP env)
     case 11: return Math4_2(args, ptukey);
     case 12: return Math4_2(args, qtukey);
     default:
-	errorcall(call, ngettext("unimplemented real function of %d numeric argument", "unimplemented real function of %d numeric arguments", 4), 4);
+	errorcall(call, n_("unimplemented real function of %d numeric argument", "unimplemented real function of %d numeric arguments", 4), 4);
     }
     return op;			/* never used; to keep -Wall happy */
 }
@@ -2128,7 +2128,7 @@ SEXP attribute_hidden do_math5(SEXP call, SEXP op, SEXP args, SEXP env)
     case  3: return Math5(args, q...);
 #endif
     default:
-	errorcall(call, ngettext("unimplemented real function of %d numeric argument", "unimplemented real function of %d numeric arguments", 5), 5);
+	errorcall(call, n_("unimplemented real function of %d numeric argument", "unimplemented real function of %d numeric arguments", 5), 5);
     }
     return op;			/* never used; to keep -Wall happy */
 } /* do_math5() */

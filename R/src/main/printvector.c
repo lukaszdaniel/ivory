@@ -206,7 +206,7 @@ void printVector(SEXP x, int indx, int quote)
 	    break;
 	}
 	if(n_pr < n) {
-		Rprintf(ngettext(" [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",
+		Rprintf(n_(" [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",
 			" [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", n - n_pr), n - n_pr);
 		Rprintf("\n");
 	}
@@ -350,7 +350,7 @@ void printNamedVector(SEXP x, SEXP names, int quote, const char *title)
 	    break;
 	}
 	if(n_pr < n) {
-		Rprintf(ngettext(" [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",
+		Rprintf(n_(" [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",
 			" [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", n - n_pr), n - n_pr);
 		Rprintf("\n");
 	}

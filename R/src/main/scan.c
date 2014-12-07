@@ -610,7 +610,7 @@ static SEXP scanVector(SEXPTYPE type, int maxitems, int maxlines,
 	    bch = c;
 	}
     }
-    if (!d->quiet) REprintf(ngettext("Read %d item\n", "Read %d items\n", n), n );
+    if (!d->quiet) REprintf(n_("Read %d item\n", "Read %d items\n", n), n );
     if (d->ttyflag) ConsolePrompt[0] = '\0';
 
     if (n == 0) {
@@ -779,7 +779,7 @@ static SEXP scanFrame(SEXP what, int maxitems, int maxlines, int flush,
 	}
 	n++;
     }
-    if (!d->quiet) REprintf(ngettext("Read %d record\n", "Read %d records\n", n), n);
+    if (!d->quiet) REprintf(n_("Read %d record\n", "Read %d records\n", n), n);
     if (d->ttyflag) ConsolePrompt[0] = '\0';
 
     for (i = 0; i < nc; i++) {
