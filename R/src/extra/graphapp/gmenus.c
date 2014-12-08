@@ -24,7 +24,7 @@
    ga.h)
  */
 
-#include "win-nls.h"
+#include <Localization.h>
 #include "internal.h"
 
 static void mdimenu(menuitem m)
