@@ -2264,7 +2264,7 @@ setRlibs <-
         if (!do_examples) resultLog(Log, gettext("SKIPPED", domain = "R-tools"))
         else {
             pkgtopdir <- file.path(libdir, pkgname)
-            cmd <- sprintf('tools:::.createExdotR("%s", "%s", silent = TRUE, use_gct = %s, addTiming = %s, commentDontrun = %s, commentDontest = %s)',
+            cmd <- sprintf('tools:::.createExdotR("%s", "%s", silent = TRUE, use_gct = %s, addTiming = %s, commentDontrun = %s, commentDonttest = %s)',
                            pkgname, pkgtopdir, use_gct, do_timings,
                            !run_dontrun, !run_donttest)
             Rout <- tempfile("Rout")
@@ -3796,6 +3796,8 @@ setRlibs <-
         opts <- c(opts, "--install=no")
         do_install_arg <- FALSE
     }
+    if (run_dontrun) opts <- c(opts, "--run-dontrun")
+    if (run_donttest) opts <- c(opts, "--run-donttest")
 
     if (install == "fake") {
         ## If we fake installation, then we cannot *run* any code.

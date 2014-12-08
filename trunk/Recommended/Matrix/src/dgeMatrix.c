@@ -11,8 +11,7 @@ SEXP dMatrix_validate(SEXP obj)
 	return mkString(_("'Dim' slot must have length 2"));
     m = INTEGER(Dim)[0]; n = INTEGER(Dim)[1];
     if (m < 0 || n < 0)
-	return mkString(dngettext("Matrix",
-				  "Negative value in 'Dim' slot",
+	return mkString(n_("Negative value in 'Dim' slot",
 				  "Negative values in 'Dim' slot",
 				  (m*n > 0) ? 2 : 1));
     if (!isReal(x))

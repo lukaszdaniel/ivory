@@ -177,7 +177,7 @@
     \itemize{
       \item The \code{\\donttest} sections of \R's help files can be
       tested by\cr
-      \command{make check TEST_DONTTEST=TRUE}.
+      \command{make check TEST_DONTTEST=TRUE} .
 
       \item It is possible to request the use of system
       \command{valgrind} headers \emph{via} \command{configure} option
@@ -200,8 +200,8 @@
 
        \item (Windows.) Installation using external binary distributions
        of \pkg{zlib}, \pkg{bzip}, \pkg{liblzma}, \pkg{pcre},
-       \pkg{libpng}, \pkg{jpeglib} and \pkg{libtiff} is now supported
-       and likely to be the preferred or only way before release.
+       \pkg{libpng}, \pkg{jpeglib} and \pkg{libtiff} is now preferred
+       and likely to become the only way before release.
      }
   }
 
@@ -227,6 +227,10 @@
 
       \item \command{R CMD check} gains option \option{--test-dir} to
       specify an alternative set of tests to run.
+      
+      \item \command{R CMD check} now checks the packages used in
+      \code{\\donttest} sections of the examples.  (These will be needed
+      to run the examples interactively.)
     }
   }
 
@@ -266,6 +270,11 @@
       \item Use of the included versions of \code{zlib}, \code{bzip2},
       \code{xz} and PCRE is deprecated: these are essentially frozen and
       will eventually be removed.
+
+      \item The \command{configure} option
+      \option{--with-valgrind-instrumentation=3} has been withdrawn, as
+      it did not work with recent \command{valgrind} headers: it is now
+      treated as level \code{2}.
     }
   }
 
@@ -321,6 +330,14 @@
     }
   }
 
+  \subsection{DEPRECATED AND DEFUNCT}{
+    \itemize{
+      \item The \command{configure} option
+      \option{--with-valgrind-instrumentation=3} is deprecated and will
+      be removed in \R 3.2.0.
+    }
+  }
+  
   \subsection{BUG FIXES}{
     \itemize{
       \item (Windows.) \command{Rscript.exe} was missing a
