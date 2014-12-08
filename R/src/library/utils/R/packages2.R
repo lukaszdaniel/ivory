@@ -221,8 +221,8 @@ install.packages <-
         lib <- .libPaths()[1L]
 	if(!quiet && length(.libPaths()) > 1L)
 	    message(sprintf(ngettext(length(pkgs),
-                                     "Installing package into %s\n(as %s is unspecified)",
-                                     "Installing packages into %s\n(as %s is unspecified)", domain = "R-utils"),
+                                     "Installing package into %s directory\n(as %s directory is unspecified)",
+                                     "Installing packages into %s directory\n(as %s directory is unspecified)", domain = "R-utils"),
                             sQuote(lib), sQuote("lib")), domain = NA)
     }
 
@@ -253,7 +253,7 @@ install.packages <-
 	if(interactive()) {
 	    ask.yes.no <- function(msg) {
                 ##' returns "no" for "no",  otherwise 'ans', a string
-		msg <- gettext(msg)
+		#msg <- gettext(msg)
 		if(.Platform$OS.type == "windows") {
                     flush.console() # so warning is seen
 		    ans <- winDialog("yesno", sprintf(msg, sQuote(userdir)))
@@ -263,12 +263,12 @@ install.packages <-
 		    if(substr(ans, 1L, 1L) == "n") "no" else ans
 		}
 	    }
-	    ans <- ask.yes.no("Would you like to use a personal library instead?")
+	    ans <- ask.yes.no(gettext("Would you like to use a personal library instead?", domain = "R-utils"))
 	    if(identical(ans, "no")) stop("unable to install packages")
 
 	    lib <- userdir
 	    if(!file.exists(userdir)) {
-		ans <- ask.yes.no("Would you like to create a personal library\n%s\nto install packages into?")
+		ans <- ask.yes.no(gettext("Would you like to create a personal library\n%s\nto install packages into?", domain = "R-utils"))
 		if(identical(ans, "no")) stop("unable to install packages")
 		if(!dir.create(userdir, recursive = TRUE))
                     stop(gettextf("unable to create %s", sQuote(userdir)),
@@ -725,7 +725,7 @@ install.packages <-
             }
         }
         if(!quiet && nonlocalrepos && !is.null(tmpd) && is.null(destdir))
-            cat("\n", gettextf("The downloaded source packages are in\n\t%s", sQuote(normalizePath(tmpd, mustWork = FALSE)), domain = "R-utils"), "\n", sep = "")
+            cat("\n", gettext("The downloaded source packages are in:", domain = "R-utils"), "\n\t",sQuote(normalizePath(tmpd, mustWork = FALSE)), "\n", sep = "")
         ## update packages.html on Unix only if .Library was installed into
         libs_used <- unique(update[, 2L])
         if(.Platform$OS.type == "unix" && .Library %in% libs_used) {
