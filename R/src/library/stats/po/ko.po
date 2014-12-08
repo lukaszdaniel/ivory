@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-19 16:13+0200\n"
+"POT-Creation-Date: 2014-12-08 18:29+0100\n"
 "PO-Revision-Date: 2012-03-08 20:50+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -744,7 +744,7 @@ msgstr "'rho' 는 반드시 환경이어야 합니다 "
 msgid "'dir' is not a numeric vector of the correct length"
 msgstr "'dir' 은 올바른 길이를 가진 수치형 벡터가 아닙니다 "
 
-#: nls.c:309 nls.c:342
+#: nls.c:309 nls.c:344
 msgid "Missing value or an infinity produced when evaluating the model"
 msgstr "모델 평가시 결측치 혹은 무한값이 생성되었습니다 "
 

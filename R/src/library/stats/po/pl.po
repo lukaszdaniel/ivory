@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-19 16:13+0200\n"
+"POT-Creation-Date: 2014-12-08 18:29+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -759,7 +759,7 @@ msgstr "argument '%s' powinien być środowiskiem"
 msgid "'dir' is not a numeric vector of the correct length"
 msgstr "'dir' nie jest wektorem liczbowym o poprawnej długości"
 
-#: nls.c:309 nls.c:342
+#: nls.c:309 nls.c:344
 msgid "Missing value or an infinity produced when evaluating the model"
 msgstr ""
 "Brakuje wartości lub wyprodukowano wartości nieskończone podczas wyliczania "

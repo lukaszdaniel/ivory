@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-11-04 06:49\n"
+"POT-Creation-Date: 2014-12-08 18:29\n"
 "PO-Revision-Date: 2012-02-26 14:23+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -1278,21 +1278,19 @@ msgstr ""
 " 再リスト化可能なオブジェクトを非リスト化したのか確認するか、スケルトンを別"
 "個  に指定してください。 "
 
-#. R/unix/mac.install.R: gettextf("The downloaded binary packages are in\n\t%s", tmpd)
-#. R/windows/install.packages.R: gettextf("The downloaded binary packages are in\n\t%s", normalizePath(tmpd, mustWork = FALSE),     domain = "R-utils")
+#. R/unix/mac.install.R: gettext("The downloaded binary packages are in:", domain = "R-utils")
+#. R/windows/install.packages.R: gettext("The downloaded binary packages are in:", domain = "R-utils")
 #: R/unix/mac.install.R:0 R/windows/install.packages.R:0
-msgid ""
-"The downloaded binary packages are in\n"
-"\t%s"
+#, fuzzy
+msgid "The downloaded binary packages are in:"
 msgstr ""
 " ダウンロードされたパッケージは、以下にあります \n"
 " \t%s "
 
-#. R/packages2.R: gettextf("The downloaded source packages are in\n\t%s", sQuote(normalizePath(tmpd,     mustWork = FALSE)), domain = "R-utils")
+#. R/packages2.R: gettext("The downloaded source packages are in:", domain = "R-utils")
 #: R/packages2.R:0
-msgid ""
-"The downloaded source packages are in\n"
-"\t%s"
+#, fuzzy
+msgid "The downloaded source packages are in:"
 msgstr ""
 " ダウンロードされたパッケージは、以下にあります \n"
 " \t%s "
@@ -1499,6 +1497,26 @@ msgstr " 警告：　未知のオプション "
 #: R/windows/choose.files.R:0
 msgid "Windows bitmap files (*.bmp)"
 msgstr ""
+
+#. R/packages2.R: gettext("Would you like to create a personal library\n%s\nto install packages into?",     domain = "R-utils")
+#: R/packages2.R:0
+msgid ""
+"Would you like to create a personal library\n"
+"%s\n"
+"to install packages into?"
+msgstr ""
+" パッケージをインストールするために個人的なライブラリ \n"
+" '%s' \n"
+" を作りたいのですか？ "
+
+#. R/packages2.R: gettext("Would you like to use a personal library instead?", domain = "R-utils")
+#: R/packages2.R:0
+#, fuzzy
+msgid "Would you like to use a personal library instead?"
+msgstr ""
+" パッケージをインストールするために個人的なライブラリ \n"
+" '%s' \n"
+" を作りたいのですか？ "
 
 #. R/SweaveDrivers.R: gettext("Writing chunks to files ...", domain = "R-utils")
 #: R/SweaveDrivers.R:0
@@ -3137,15 +3155,15 @@ msgid "Formal class %s [package %s] with %d slot"
 msgid_plural "Formal class %s [package %s] with %d slots"
 msgstr[0] ""
 
-#. R/packages2.R: ngettext(length(pkgs), "Installing package into %s\n(as %s is unspecified)", "Installing packages into %s\n(as %s is unspecified)",     domain = "R-utils")
+#. R/packages2.R: ngettext(length(pkgs), "Installing package into %s directory\n(as %s directory is unspecified)",     "Installing packages into %s directory\n(as %s directory is unspecified)", domain = "R-utils")
 #: R/packages2.R:0
 #, fuzzy
 msgid ""
-"Installing package into %s\n"
-"(as %s is unspecified)"
+"Installing package into %s directory\n"
+"(as %s directory is unspecified)"
 msgid_plural ""
-"Installing packages into %s\n"
-"(as %s is unspecified)"
+"Installing packages into %s directory\n"
+"(as %s directory is unspecified)"
 msgstr[0] ""
 " パッケージを %s 中にインストールします \n"
 " (%s が指定されていないので) "
@@ -3476,15 +3494,6 @@ msgstr[0] " パッケージ %s が利用できません "
 
 #~ msgid "'pb' is not from class \"winProgressBar\""
 #~ msgstr " 'pb'は\"winProgressBar\"クラスを継承していません "
-
-#~ msgid ""
-#~ "Would you like to create a personal library\n"
-#~ "%s\n"
-#~ "to install packages into?"
-#~ msgstr ""
-#~ " パッケージをインストールするために個人的なライブラリ \n"
-#~ " '%s' \n"
-#~ " を作りたいのですか？ "
 
 #~ msgid "Postscript offline help is deprecated"
 #~ msgstr "Postscript のオフラインヘルプは廃止されました  "

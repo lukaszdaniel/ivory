@@ -227,10 +227,6 @@
 
       \item \command{R CMD check} gains option \option{--test-dir} to
       specify an alternative set of tests to run.
-      
-      \item \command{R CMD check} now checks the packages used in
-      \code{\\donttest} sections of the examples.  (These will be needed
-      to run the examples interactively.)
     }
   }
 
@@ -255,11 +251,11 @@
 
   \subsection{PACKAGE INSTALLATION}{
     \itemize{
-      \item  (Windows) The use of macro \code{ZLIB_LIBS} (which has not
-      been documented for a long time) now requires an external
-      \file{libz.a} to be available (it is part of the \sQuote{goodies} used
-      to compile Windows binary packages).  It would be simplest to use
-      \code{-lz} directly.
+      \item  (Windows) The use of macro \code{ZLIB_LIBS} in file
+      \file{src/Makevars.win} (which has not been documented for a long
+      time) now requires an external \file{libz.a} to be available (it is
+      part of the \sQuote{goodies} used to compile Windows binary
+      packages).  It would be simpler to use \code{-lz} instead.
     }
   }
 
@@ -329,7 +325,15 @@
       \item The included version of PCRE has been updated to 8.36.
     }
   }
-
+  
+  \subsection{UTILITIES}{
+    \itemize{
+      \item \command{R CMD check} now checks the packages used in
+      \code{\\donttest} sections of the examples are specified in the
+      \file{DESCRIPTION} file.
+      (These are needed to run the examples interactively.)
+    }
+  }
   \subsection{DEPRECATED AND DEFUNCT}{
     \itemize{
       \item The \command{configure} option

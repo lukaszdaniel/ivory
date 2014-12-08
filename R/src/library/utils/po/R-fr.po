@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-11-04 06:49\n"
+"POT-Creation-Date: 2014-12-08 18:29\n"
 "PO-Revision-Date: 2012-03-06 22:16+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -1288,21 +1288,19 @@ msgstr ""
 "Faites en sorte de délister un objet relistable, ou spécifiez le squelette "
 "séparément."
 
-#. R/unix/mac.install.R: gettextf("The downloaded binary packages are in\n\t%s", tmpd)
-#. R/windows/install.packages.R: gettextf("The downloaded binary packages are in\n\t%s", normalizePath(tmpd, mustWork = FALSE),     domain = "R-utils")
+#. R/unix/mac.install.R: gettext("The downloaded binary packages are in:", domain = "R-utils")
+#. R/windows/install.packages.R: gettext("The downloaded binary packages are in:", domain = "R-utils")
 #: R/unix/mac.install.R:0 R/windows/install.packages.R:0
-msgid ""
-"The downloaded binary packages are in\n"
-"\t%s"
+#, fuzzy
+msgid "The downloaded binary packages are in:"
 msgstr ""
 "Les packages binaires téléchargés sont dans\n"
 "\t%s"
 
-#. R/packages2.R: gettextf("The downloaded source packages are in\n\t%s", sQuote(normalizePath(tmpd,     mustWork = FALSE)), domain = "R-utils")
+#. R/packages2.R: gettext("The downloaded source packages are in:", domain = "R-utils")
 #: R/packages2.R:0
-msgid ""
-"The downloaded source packages are in\n"
-"\t%s"
+#, fuzzy
+msgid "The downloaded source packages are in:"
 msgstr ""
 "Les packages source téléchargés sont dans\n"
 "\t%s"
@@ -1512,6 +1510,26 @@ msgstr "Avis : option inconnue"
 #: R/windows/choose.files.R:0
 msgid "Windows bitmap files (*.bmp)"
 msgstr ""
+
+#. R/packages2.R: gettext("Would you like to create a personal library\n%s\nto install packages into?",     domain = "R-utils")
+#: R/packages2.R:0
+msgid ""
+"Would you like to create a personal library\n"
+"%s\n"
+"to install packages into?"
+msgstr ""
+"Voulez-vous créer une bibliothèque personnelle\n"
+"%s\n"
+"pour y installer les packages ?"
+
+#. R/packages2.R: gettext("Would you like to use a personal library instead?", domain = "R-utils")
+#: R/packages2.R:0
+#, fuzzy
+msgid "Would you like to use a personal library instead?"
+msgstr ""
+"Voulez-vous créer une bibliothèque personnelle\n"
+"%s\n"
+"pour y installer les packages ?"
 
 #. R/SweaveDrivers.R: gettext("Writing chunks to files ...", domain = "R-utils")
 #: R/SweaveDrivers.R:0
@@ -3178,15 +3196,15 @@ msgid_plural "Formal class %s [package %s] with %d slots"
 msgstr[0] ""
 msgstr[1] ""
 
-#. R/packages2.R: ngettext(length(pkgs), "Installing package into %s\n(as %s is unspecified)", "Installing packages into %s\n(as %s is unspecified)",     domain = "R-utils")
+#. R/packages2.R: ngettext(length(pkgs), "Installing package into %s directory\n(as %s directory is unspecified)",     "Installing packages into %s directory\n(as %s directory is unspecified)", domain = "R-utils")
 #: R/packages2.R:0
 #, fuzzy
 msgid ""
-"Installing package into %s\n"
-"(as %s is unspecified)"
+"Installing package into %s directory\n"
+"(as %s directory is unspecified)"
 msgid_plural ""
-"Installing packages into %s\n"
-"(as %s is unspecified)"
+"Installing packages into %s directory\n"
+"(as %s directory is unspecified)"
 msgstr[0] ""
 "Installation d(es) package(s) dans %s\n"
 "(car %s n'est pas spécifié)"
@@ -3545,15 +3563,6 @@ msgstr[1] "les packages '%s' ne sont pas disponibles (pour %s)"
 
 #~ msgid "'pb' is not from class \"winProgressBar\""
 #~ msgstr "'pb' n'est pas un objet de classe \"winProgressBar\""
-
-#~ msgid ""
-#~ "Would you like to create a personal library\n"
-#~ "%s\n"
-#~ "to install packages into?"
-#~ msgstr ""
-#~ "Voulez-vous créer une bibliothèque personnelle\n"
-#~ "%s\n"
-#~ "pour y installer les packages ?"
 
 #~ msgid "%s produced no output file: sent to printer?"
 #~ msgstr ""

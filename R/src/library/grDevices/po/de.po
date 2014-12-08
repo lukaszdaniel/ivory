@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-30 14:48+0100\n"
+"POT-Creation-Date: 2014-12-08 18:28+0100\n"
 "PO-Revision-Date: 2012-03-05 21:58+0100\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-Core <R-core@r-project.org>\n"
@@ -65,71 +65,71 @@ msgstr ""
 msgid "bad hsv to rgb color conversion"
 msgstr ""
 
-#: colors.c:216 colors.c:230
+#: colors.c:219 colors.c:233
 msgid "invalid hsv color"
 msgstr ""
 
-#: colors.c:342 colors.c:362
+#: colors.c:345 colors.c:365
 msgid "invalid hcl color"
 msgstr ""
 
-#: colors.c:394
+#: colors.c:397
 #, fuzzy
 msgid "invalid value of 'maxColorValue'"
 msgstr "unzulässiger Wert von '%s'"
 
-#: colors.c:422
+#: colors.c:425
 #, fuzzy
 msgid "invalid 'names' vector"
 msgstr "unzulässiges 'file' Argument"
 
-#: colors.c:481 colors.c:490
+#: colors.c:484 colors.c:493
 msgid "invalid gray level, must be in [0,1]."
 msgstr ""
 
-#: colors.c:546
+#: colors.c:549
 #, fuzzy, c-format
 msgid "invalid '%s' value"
 msgstr "unzulässiges 'file' Argument"
 
-#: colors.c:1338
+#: colors.c:1341
 msgid "invalid hex digit in 'color' or 'lty'"
 msgstr ""
 
-#: colors.c:1348 colors.c:1358
+#: colors.c:1351 colors.c:1361
 #, fuzzy
 msgid "invalid RGB specification"
 msgstr "Unzulässige Zeichensatzspezifikation"
 
-#: colors.c:1391
+#: colors.c:1394
 #, fuzzy, c-format
 msgid "invalid color name '%s'"
 msgstr "ungültige Zeichenkette in '%s'"
 
-#: colors.c:1441 colors.c:1450
+#: colors.c:1444 colors.c:1453
 #, fuzzy, c-format
 msgid "invalid color specification \"%s\""
 msgstr "Unzulässige Zeichensatzspezifikation"
 
-#: colors.c:1478
+#: colors.c:1481
 msgid "supplied color is neither numeric nor character"
 msgstr ""
 
-#: colors.c:1482
+#: colors.c:1485
 #, c-format
 msgid "numerical color values must be >= 0, found %d"
 msgstr ""
 
-#: colors.c:1493
+#: colors.c:1496
 #, fuzzy
 msgid "invalid argument type"
 msgstr "unzulässiges 'file' Argument"
 
-#: colors.c:1504
+#: colors.c:1507
 msgid "unknown palette (need >= 2 colors)"
 msgstr ""
 
-#: colors.c:1508 colors.c:1530
+#: colors.c:1511 colors.c:1533
 #, c-format
 msgid "maximum number of colors is %d"
 msgstr ""

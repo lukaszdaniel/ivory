@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.2.0\n"
-"POT-Creation-Date: 2014-11-04 06:49\n"
+"POT-Creation-Date: 2014-12-08 18:29\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1565,17 +1565,17 @@ msgstr ""
 
 #: R/unix/mac.install.R: 0
 #: R/windows/install.packages.R: 0
-#. R/unix/mac.install.R: gettextf("The downloaded binary packages are in\n\t%s", tmpd)
-#. R/windows/install.packages.R: gettextf("The downloaded binary packages are in\n\t%s", normalizePath(tmpd, mustWork = FALSE),     domain = "R-utils")
+#. R/unix/mac.install.R: gettext("The downloaded binary packages are in:", domain = "R-utils")
+#. R/windows/install.packages.R: gettext("The downloaded binary packages are in:", domain = "R-utils")
 
-msgid "The downloaded binary packages are in\n\t%s"
+msgid "The downloaded binary packages are in:"
 msgstr ""
 
 
 #: R/packages2.R: 0
-#. R/packages2.R: gettextf("The downloaded source packages are in\n\t%s", sQuote(normalizePath(tmpd,     mustWork = FALSE)), domain = "R-utils")
+#. R/packages2.R: gettext("The downloaded source packages are in:", domain = "R-utils")
 
-msgid "The downloaded source packages are in\n\t%s"
+msgid "The downloaded source packages are in:"
 msgstr ""
 
 
@@ -1812,6 +1812,20 @@ msgstr ""
 #. R/windows/choose.files.R: gettext("Windows bitmap files (*.bmp)", domain = "R-utils")
 
 msgid "Windows bitmap files (*.bmp)"
+msgstr ""
+
+
+#: R/packages2.R: 0
+#. R/packages2.R: gettext("Would you like to create a personal library\n%s\nto install packages into?",     domain = "R-utils")
+
+msgid "Would you like to create a personal library\n%s\nto install packages into?"
+msgstr ""
+
+
+#: R/packages2.R: 0
+#. R/packages2.R: gettext("Would you like to use a personal library instead?", domain = "R-utils")
+
+msgid "Would you like to use a personal library instead?"
 msgstr ""
 
 
@@ -3917,10 +3931,10 @@ msgstr[1]    ""
 
 
 #: R/packages2.R: 0
-#. R/packages2.R: ngettext(length(pkgs), "Installing package into %s\n(as %s is unspecified)", "Installing packages into %s\n(as %s is unspecified)",     domain = "R-utils")
+#. R/packages2.R: ngettext(length(pkgs), "Installing package into %s directory\n(as %s directory is unspecified)",     "Installing packages into %s directory\n(as %s directory is unspecified)", domain = "R-utils")
 
-msgid        "Installing package into %s\n(as %s is unspecified)"
-msgid_plural "Installing packages into %s\n(as %s is unspecified)"
+msgid        "Installing package into %s directory\n(as %s directory is unspecified)"
+msgid_plural "Installing packages into %s directory\n(as %s directory is unspecified)"
 msgstr[0]    ""
 msgstr[1]    ""
 
