@@ -2312,6 +2312,12 @@ setRlibs <-
                     Log$stars <<-  "*"
                     if (!res) do_exit(1L)
                 }
+                cntFile <- paste0(exfile, "-cnt")
+                if (file.exists(cntFile)) {
+                    unlink(cntFile)
+                    if (as_cran)
+                        printLog(Log, gettext("** found \\donttest examples: check also with --run-donttest\n", domain = "R-tools"))
+                }
             } else {
                 resultLog(Log, gettext("NONE", domain = "R-tools"))
                 no_examples <<- TRUE
