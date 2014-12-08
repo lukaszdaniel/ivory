@@ -49,7 +49,7 @@
 #include "Startup.h"
 #include <stdlib.h>		/* for exit */
 
-#include "win-nls.h"
+#include <Localization.h>
 
 void R_CleanTempDir(void);		/* from platform.c */
 void editorcleanall(void);                  /* from editor.c */

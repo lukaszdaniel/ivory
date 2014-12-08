@@ -22,7 +22,7 @@
 #include <config.h>
 #endif
 
-//#include "win-nls.h"
+
 
 
 #include "Defn.h"

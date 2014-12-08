@@ -27,7 +27,7 @@
 #include <Defn.h>
 #include <windows.h>
 
-#include "win-nls.h"
+#include "localization.h"
 
 typedef void (WINAPI *PGNSI)(LPSYSTEM_INFO);
 

@@ -27,7 +27,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include "win-nls.h"
+#include "localization.h"
 
 #include <wchar.h>
 #include <rlocale.h>

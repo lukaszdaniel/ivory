@@ -24,7 +24,7 @@
 #include <config.h>
 #endif
 
-#include "win-nls.h"
+#include <Localization.h>
 #include <R_ext/Boolean.h>
 extern Rboolean mbcslocale;
 
