@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.7.1\n"
 "X-Poedit-Bookmarks: -1,203,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #. R/unix/create.post.R: gettextf("# Your mailer is set to \"none\",\n# hence we cannot send the, %s directly from R.\n# Please copy the %s (after finishing it) to\n# your favorite email program and send it to\n#\n#       %s",     description, description, address)
@@ -1267,7 +1267,7 @@ msgid ""
 "The downloaded binary packages are in\n"
 "\t%s"
 msgstr ""
-"Pobrane pakiety binarne są w\n"
+"Pobrane pakiety binarne zapisane są w katalogu:\n"
 "\t%s"
 
 #. R/packages2.R: gettextf("The downloaded source packages are in\n\t%s", sQuote(normalizePath(tmpd,     mustWork = FALSE)), domain = "R-utils")
@@ -3158,14 +3158,14 @@ msgid_plural ""
 "Installing packages into %s\n"
 "(as %s is unspecified)"
 msgstr[0] ""
-"Instalowanie pakietu w %s\n"
-"(ponieważ %s nie jest określony)"
+"Instalowanie pakietu w katalogu %s\n"
+"(ponieważ katalog %s nie jest określony)"
 msgstr[1] ""
-"Instalowanie pakietów w %s\n"
-"(ponieważ %s nie jest określony)"
+"Instalowanie pakietów w katalogu %s\n"
+"(ponieważ katalog %s nie jest określony)"
 msgstr[2] ""
-"Instalowanie pakietów w %s\n"
-"(ponieważ %s nie jest określony)"
+"Instalowanie pakietów w katalogu %s\n"
+"(ponieważ katalog %s nie jest określony)"
 
 #. R/citation.R: ngettext(length(role), "Invalid role specification: %s", "Invalid role specifications: %s",     domain = "R-utils")
 #. R/citation.R: ngettext(length(pos[ind]), "Invalid role specification: %s", "Invalid role specifications: %s",     domain = "R-utils")
