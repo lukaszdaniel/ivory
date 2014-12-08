@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-19 16:13+0200\n"
+"POT-Creation-Date: 2014-12-08 18:29+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -730,7 +730,7 @@ msgstr ""
 msgid "'dir' is not a numeric vector of the correct length"
 msgstr ""
 
-#: nls.c:309 nls.c:342
+#: nls.c:309 nls.c:344
 msgid "Missing value or an infinity produced when evaluating the model"
 msgstr ""
 
