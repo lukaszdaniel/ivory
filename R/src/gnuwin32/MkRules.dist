@@ -5,21 +5,21 @@
 
 ## =========== configuration macros for building packages ================
 # Absolute path to '/usr/local' software collection.  The versions used
-# on CRAN can be found under http://www.stats.ox.ac.uk/pub/Rtools/goodies
+# on CRAN can be found at http://www.stats.ox.ac.uk/pub/Rtools/libs.html
 # It can be interrogated by 'R CMD config LOCAL_SOFT'
 LOCAL_SOFT =
 
 ## ============== configuration macros for building R ===================
 
 # External library directory, containing zlib, bzlib, liblzma, pcre,
-# libpng, libjpeg, libtiff.  No spaces in the path.
+# libpng, libjpeg, libtiff.
+# A suitable version can be found at
+# http://www.stats.ox.ac.uk/pub/Rtools/libs.html
+# No spaces in the path.
 # EXT_LIBS =
 
 # an alternative is to use -gstabs here, if the debugger supports only stabs.
 G_FLAG = -gdwarf-2
-
-# Comment out if the msvcrt.dll malloc/free is required (not tested recently)
-LEA_MALLOC = YES
 
 # Set to YES and specify the path if you want to use the ATLAS BLAS.
 USE_ATLAS = NO
@@ -99,7 +99,6 @@ MIKTEX = TRUE
 MAKEINFO = makeinfo
 # for texinfo >= 5.0.  Might also need -I/path/to/modules
 # MAKEINFO = /path/to/perl /path/to/texi2any
-# or perhaps something like
 
 # additional optimization flags (use -mtune=native for a private build)
 EOPTS = -mtune=core2

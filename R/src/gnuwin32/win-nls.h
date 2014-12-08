@@ -19,16 +19,19 @@
  */
 
 #ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) libintl_gettext (String)
-#undef gettext /* needed for graphapp */
-#define gettext_noop(String) String
-#define N_(String) gettext_noop (String)
-#define G_(String) libintl_dgettext("RGui", String)
-#define GN_(String) gettext_noop (String)
+ #include <libintl.h>
+ #define _(String) dgettext("R", String)
+ #define n_(String, StringP, N) dngettext("R", String, StringP, N)
+ #define gettext_noop(String) String
+ #define N_(String) gettext_noop (String)
+ #define G_(String) dgettext("RGui", String)
+ #define GN_(String) gettext_noop (String)
 #else /* not NLS */
-#define _(String) (String)
-#define N_(String) String
-#define G_(String) (String)
-#define GN_(String) String
+ #define _(String) (String)
+ #define N_(String) String
+ #define G_(String) (String)
+ #define GN_(String) String
+ #define ngettext(String, StringP, N) (N > 1 ? StringP: String)
+ #define dngettext(Domain, String, StringP, N) ngettext(String, StringP, N)
+ #define n_(String, StringP, N) ngettext(String, StringP, N)
 #endif
