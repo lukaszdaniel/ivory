@@ -41,7 +41,7 @@
 #include <stdlib.h>
 #include <Rinternals.h>
 #include <R_ext/Parse.h>  /* parsing is used in handling escape codes */
-
+#include <R_ext/Minmax.h>
 
 #ifndef _Xconst
 #define _Xconst const
@@ -222,12 +222,6 @@ static XIMStyle status_styles[] = {
 };
 static XIC ioic = NULL;
 
-#ifndef max
-#define max(a, b) (((a)>(b))?(a):(b))
-#endif
-#ifndef min
-#define min(a, b) (((a)<(b))?(a):(b))
-#endif
 #define BOXW(x) (min(((x<100 && DE->nboxchars==0)?DE->boxw[x]:DE->box_w), DE->fullwindowWidth-DE->boxw[0]-2*DE->bwidth-2))
 
 /*

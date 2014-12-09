@@ -34,6 +34,8 @@
 #include <config.h>
 #endif /* HAVE_CONFIG_H */
 
+#include <R_ext/Minmax.h>
+
 #ifdef TRE_USE_ALLOCA
 /* AIX requires this to be the first thing in the file.	 */
 #ifndef __GNUC__
@@ -194,8 +196,6 @@ typedef struct tre_backtrack_struct {
     }									      \
   while (/*CONSTCOND*/(void)0,0)
 
-#undef MIN
-#define MIN(a, b) ((a) <= (b) ? (a) : (b))
 
 reg_errcode_t
 tre_tnfa_run_backtrack(const tre_tnfa_t *tnfa, const void *string,
@@ -438,7 +438,7 @@ tre_tnfa_run_backtrack(const tre_tnfa_t *tnfa, const void *string,
 	    if (len < 0)
 	      slen = bt_len;
 	    else
-	      slen = MIN(bt_len, len - pos);
+	      slen = min(bt_len, len - pos);
 
 	    if (type == STR_BYTE)
 	      {
