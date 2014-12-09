@@ -26,13 +26,11 @@
 
 #include <R.h>
 #include <Rinternals.h>
+#include <R_ext/Minmax.h>
 #include <stdlib.h>
 #include <float.h>
 #include "nls.h"
 #include "localization.h"
-#ifndef MIN
-#define MIN(a,b) (((a)<(b))?(a):(b))
-#endif
 
 /*
  * get the list element named str. names is the name attribute of list
@@ -236,7 +234,7 @@ nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
 		Rprintf(" new dev = %g\n", newDev);
 	    if(newDev <= dev) {
 		dev = newDev;
-		fac = MIN(2*fac, 1);
+		fac = min(2*fac, 1);
 		tmp = newPars;
 		newPars = pars;
 		pars = tmp;

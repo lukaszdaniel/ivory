@@ -308,7 +308,7 @@ tre_parse_bracket_items(tre_parse_ctx_t *ctx, int negate,
 		endptr++;
 	      if (endptr != ctx->re_end)
 		{
-		  len = MIN(endptr - re - 2, 63);
+		  len = min(endptr - re - 2, 63);
 #ifdef TRE_WCHAR
 		  {
 		    tre_char_t tmp_wcs[64];
@@ -453,27 +453,27 @@ tre_parse_bracket(tre_parse_ctx_t *ctx, tre_ast_node_t **result)
   /* Build a union of the items in the array, negated if necessary. */
   for (j = 0; j < i && status == REG_OK; j++)
     {
-      int min, max;
+      int minn, maxx;
       tre_literal_t *l = items[j]->obj;
-      min = (int) l->code_min;
-      max = (int) l->code_max;
+      minn = (int) l->code_min;
+      maxx = (int) l->code_max;
 
       DPRINT(("item: %d - %d, class %p, curr_max = %d\n",
 	      (int)l->code_min, (int)l->code_max, (void *)l->u.class, curr_max));
 
       if (negate)
 	{
-	  if (min < curr_max)
+	  if (minn < curr_max)
 	    {
 	      /* Overlap. */
-	      curr_max = MAX(max + 1, curr_max);
+	      curr_max = max(maxx + 1, curr_max);
 	      DPRINT(("overlap, curr_max = %d\n", curr_max));
 	      l = NULL;
 	    }
 	  else
 	    {
 	      /* No overlap. */
-	      curr_max = min - 1;
+	      curr_max = minn - 1;
 	      if (curr_max >= curr_min)
 		{
 		  DPRINT(("no overlap\n"));
@@ -485,7 +485,7 @@ tre_parse_bracket(tre_parse_ctx_t *ctx, tre_ast_node_t **result)
 		  DPRINT(("no overlap, zero room\n"));
 		  l = NULL;
 		}
-	      curr_min = curr_max = max + 1;
+	      curr_min = curr_max = maxx + 1;
 	    }
 	}
 
@@ -1515,7 +1515,7 @@ tre_parse(tre_parse_ctx_t *ctx)
 		      if (result == NULL)
 			return REG_ESPACE;
 		      ctx->position++;
-		      ctx->max_backref = MAX(val, ctx->max_backref);
+		      ctx->max_backref = max(val, ctx->max_backref);
 		      ctx->re++;
 		    }
 		  else

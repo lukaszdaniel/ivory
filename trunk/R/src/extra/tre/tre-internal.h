@@ -21,6 +21,7 @@
 #include "tre.h"
 
 #include <Localization.h>
+#include <R_ext/Minmax.h>
 
 #ifdef TRE_DEBUG
 #include <stdio.h>
@@ -135,10 +136,6 @@ typedef enum { STR_WIDE, STR_BYTE, STR_MBS, STR_USER } tre_str_type_t;
    ? (sizeof(type) - (((size_t)ptr) % sizeof(type))) \
    : 0)
 
-#undef MAX
-#undef MIN
-#define MAX(a, b) (((a) >= (b)) ? (a) : (b))
-#define MIN(a, b) (((a) <= (b)) ? (a) : (b))
 
 /* Define STRF to the correct printf formatter for strings. */
 #ifdef TRE_WCHAR
