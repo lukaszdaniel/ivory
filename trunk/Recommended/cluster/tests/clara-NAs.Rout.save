@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-12-04 r98) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-12-09 r112) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -636,4 +636,4 @@ Error in command 'clara(xclara, k = 3)':
 > 
 > proc.time()
    user  system elapsed 
-  0.367   0.054   0.407 
+  0.358   0.052   0.397 

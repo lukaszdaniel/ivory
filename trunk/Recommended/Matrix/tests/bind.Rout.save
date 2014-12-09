@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-12-04 r98) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-12-09 r112) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -131,7 +131,7 @@ A 1 4 7 10 100 1 4 7 10
 B 2 5 8 11 100 2 5 8 11
 C 3 6 9 12 100 3 6 9 12
 > showProc.time()
-Time elapsed:  0.114 0.007 0.12 
+Time elapsed:  0.122 0.007 0.13 
 > 
 > ### --- Diagonal / Sparse - had bugs
 > 
@@ -162,7 +162,7 @@ Time elapsed:  0.114 0.007 0.12
 + 	  identical(t(d4), cBind(Diagonal(4),     0:3)),
 + 	  identical(t(m4), rBind(Diagonal(x=-1:2), 0:3)))
 > showProc.time()
-Time elapsed:  0.23 0.003 0.235 
+Time elapsed:  0.254 0.002 0.258 
 > 
 > ### --- Sparse Matrices ---
 > 
@@ -212,7 +212,7 @@ rBind (m, v= 2 ), class(m) : dgeMatrix ,. dgCMatrix ,. dgTMatrix ,.
 cBind (m, v= c(1L, 0L) ), class(m) : dgeMatrix ,. dgCMatrix ,. dgTMatrix ,.
 rBind (m, v= c(1L, 0L) ), class(m) : dgeMatrix ,. dgCMatrix ,. dgTMatrix ,.
 > showProc.time()
-Time elapsed:  0.165 0.007 0.172 
+Time elapsed:  0.178 0.007 0.186 
 > 
 > cBind(0, mC); cBind(mC, 0)
 4 x 7 sparse Matrix of class "dgCMatrix"
@@ -383,8 +383,8 @@ v5 . | . | .
 [5,]    6    1    0    0    0    0   50    1
 > 
 > showProc.time()
-Time elapsed:  0.383 0.014 0.397 
+Time elapsed:  0.409 0.015 0.425 
 > 
 > proc.time()
    user  system elapsed 
-  3.901   0.141   4.040 
+  4.143   0.146   4.342 
