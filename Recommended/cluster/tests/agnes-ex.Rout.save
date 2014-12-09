@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-12-04 r98) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-12-09 r112) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -495,7 +495,7 @@ List of 9 components
  - attr(*, "class")= character [1:2] "agnes" "twins"
 > 
 > showProc.time()
-Time elapsed:  0.107 0.009 0.116 
+Time elapsed:  0.105 0.009 0.113 
 > 
 > summary(ar2 <- agnes(ruspini, metric="manhattan", method = "weighted"))
 Object of class 'agnes' from call:
@@ -765,8 +765,8 @@ C agnes(n=75, method = 5, ..): 74 merging steps
 C agnes(n=75, method = 6, ..): 74 merging steps
 > 
 > showProc.time()
-Time elapsed:  0.083 0.004 0.086 
+Time elapsed:  0.082 0.003 0.086 
 > 
 > proc.time()
    user  system elapsed 
-  0.510   0.055   0.552 
+  0.500   0.055   0.541 

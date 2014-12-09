@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-12-04 r98) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-12-09 r112) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -259,4 +259,4 @@ Call: survfit(formula = fit, newdata = list(x = 2))
 > 
 > proc.time()
    user  system elapsed 
-  0.431   0.046   0.473 
+  0.422   0.044   0.451 

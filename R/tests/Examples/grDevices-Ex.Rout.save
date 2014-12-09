@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-12-04 r98) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-12-09 r112) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -2541,7 +2541,6 @@ Sturges   Scott      FD
 > 
 > 
 > 
-> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
 > cleanEx()
 > nameEx("pdf.options")
 > ### * pdf.options
@@ -3777,7 +3776,7 @@ $zlab
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  19.688 0.892 20.805 0 0 
+Time elapsed:  18.189 0.678 19.342 0 0 
 > grDevices::dev.off()
 null device 
           1 

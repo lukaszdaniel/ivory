@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-12-04 r98) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-12-09 r112) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -291,7 +291,6 @@ lm2  6 336.3417
 > 
 > 
 > 
-> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
 > cleanEx()
 > nameEx("Exponential")
 > ### * Exponential
@@ -2524,7 +2523,6 @@ Frequency = 1
 > ### ** Examples
 > 
 > 
-> base::options(contrasts = c(unordered = "contr.treatment",ordered = "contr.poly"))
 > cleanEx()
 > nameEx("anova.glm")
 > ### * anova.glm
@@ -3748,7 +3746,6 @@ sigma^2 estimated as 0.4566:  log likelihood = -101.2,  aic = 212.4
 > 
 > 
 > 
-> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
 > cleanEx()
 > nameEx("asOneSidedFormula")
 > ### * asOneSidedFormula
@@ -3764,7 +3761,7 @@ sigma^2 estimated as 0.4566:  log likelihood = -101.2,  aic = 212.4
 > 
 > asOneSidedFormula("age")
 ~age
-<environment: 0x3594920>
+<environment: 0x42fcd60>
 > asOneSidedFormula(~ age)
 ~age
 > 
@@ -4727,7 +4724,7 @@ function (V)
     r[cbind(seq_len(p), seq_len(p))] <- 1
     r
 }
-<bytecode: 0x3c43718>
+<bytecode: 0x4a3eb18>
 <environment: namespace:stats>
 > stopifnot(all.equal(Cl, cov2cor(cov(longley))),
 +           all.equal(cor(longley, method = "kendall"),
@@ -7240,7 +7237,7 @@ attr(,".Environment")
 > environment(as.formula("y ~ x"))
 <environment: R_GlobalEnv>
 > environment(as.formula("y ~ x", env = new.env()))
-<environment: 0x37918c0>
+<environment: 0x44d29e8>
 > 
 > 
 > ## Create a formula for a model with a large number of variables:
@@ -9975,7 +9972,6 @@ b4                    3  0  0  0  0  3
 > ### ** Examples
 > 
 > 
-> base::options(contrasts = c(unordered = "contr.treatment",ordered = "contr.poly"))
 > cleanEx()
 > nameEx("monthplot")
 > ### * monthplot
@@ -11717,14 +11713,14 @@ attr(,"class")
 $linkfun
 function (mu) 
 mu^lambda
-<bytecode: 0x4c10b68>
-<environment: 0x3d72180>
+<bytecode: 0x5964c28>
+<environment: 0x533b258>
 
 $linkinv
 function (eta) 
 pmax(eta^(1/lambda), .Machine$double.eps)
-<bytecode: 0x4c10c80>
-<environment: 0x3d72180>
+<bytecode: 0x5963dd8>
+<environment: 0x533b258>
 
 > 
 > 
@@ -15505,8 +15501,8 @@ Step function with continuity 'f'=0.2, 3 knots at:
 > unclass(sfun0)
 function (v) 
 .approxfun(x, y, v, method, yleft, yright, f)
-<bytecode: 0x3613d30>
-<environment: 0x4cc6af8>
+<bytecode: 0x434f238>
+<environment: 0x58e1838>
 attr(,"call")
 stepfun(1:3, y0, f = 0)
 > ls(envir = environment(sfun0))
@@ -17796,7 +17792,7 @@ Number of Fisher Scoring iterations: 6
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  12.675 0.577 13.387 0 0 
+Time elapsed:  11.808 0.466 12.755 0 0 
 > grDevices::dev.off()
 null device 
           1 

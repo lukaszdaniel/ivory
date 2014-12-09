@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2014-12-04 r98) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-12-09 r112) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -170,4 +170,4 @@ Rate table with dimensions: age, sex, year
 > 
 > proc.time()
    user  system elapsed 
-  0.615   0.050   0.663 
+  0.601   0.050   0.637 
