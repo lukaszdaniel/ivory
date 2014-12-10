@@ -17,12 +17,8 @@
 
 #include <R.h>
 #include <R_ext/Applic.h>
+#include <R_ext/Minmax.h>
 #include "localization.h"
-
-#ifndef max
-#  define max(a,b) ((a) > (b) ? (a) : (b))
-#  define min(a,b) ((a) < (b) ? (a) : (b))
-#endif
 
 #define abs9(a) (a > 0 ? a:-a)
 

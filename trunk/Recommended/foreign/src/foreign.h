@@ -27,6 +27,7 @@
 #define FOREIGN_H
 
 #include <R.h>
+#include <R_ext/Minmax.h>
 #include <Rinternals.h>
 
 #define CN_TYPE_BIG     1
@@ -55,14 +56,5 @@ typedef double R_flt64;
 
 #define FPREP_IEEE754 754
 #define FPREP FPREP_IEEE754
-
-#ifdef max
-# undef max
-#endif
-#ifdef min
-# undef min
-#endif
-#define max(a,b) ((a) >= (b) ? (a) : (b))
-#define min(a,b) ((a) <= (b) ? (a) : (b))
 
 #endif /* FOREIGN_H */

@@ -24,6 +24,7 @@
 
 #include <R.h>
 #include <R_ext/Applic.h>
+#include <R_ext/Minmax.h>
 #include <math.h>
 #include "localization.h"
 
@@ -591,9 +592,6 @@ pHessian(Sdata *input, Sdata *goal, Sdata wx, int nr)
     }
 }
 
-#define max9(a,b) a>b?a:b
-#define min9(a,b) a<b?a:b
-
 void
 VR_nnHessian(Sint *ntr, Sdata *train, Sdata *weights,
 	     double *inwts, Sdata *Hess)
@@ -629,7 +627,7 @@ VR_nnHessian(Sint *ntr, Sdata *train, Sdata *weights,
 
     for (i = 0; i < Nweights; i++)
 	for (j = 0; j < Nweights; j++)
-	    *Hess++ = H[max9(i, j)][min9(i, j)];
+	    *Hess++ = H[max(i, j)][min(i, j)];
     free_Lmatrix(H, Nweights);
     free_vect(h);
     free_vect(h1);
