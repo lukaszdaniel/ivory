@@ -36,7 +36,6 @@
  *
  */
 
-#include <localization.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <setjmp.h>
@@ -79,7 +78,6 @@ static void my_png_warning(png_structp png_ptr, png_const_charp msg)
     warning("libpng: %s",(char *) msg);
 }
 
-__declspec(dllexport)
 int R_SaveAsPng(void  *d, int width, int height,
 		unsigned int (*gp)(void *, int, int),
 		int bgr, FILE *fp, unsigned int transparent, int res)
@@ -337,7 +335,6 @@ static void my_output_message (j_common_ptr cinfo)
 
 
 
-__declspec(dllexport)
 int R_SaveAsJpeg(void  *d, int width, int height,
 		unsigned int (*gp)(void *, int, int),
 		int bgr, int quality, FILE *outfile, int res)
@@ -436,7 +433,6 @@ int R_SaveAsJpeg(void  *d, int width, int height,
 #ifdef HAVE_TIFF
 #include <tiffio.h>
 
-__declspec(dllexport)
 int R_SaveAsTIFF(void  *d, int width, int height,
 		unsigned int (*gp)(void *, int, int),
 		int bgr, const char *outfile, int res, int compression)
@@ -462,7 +458,7 @@ int R_SaveAsTIFF(void  *d, int width, int height,
 
     out = TIFFOpen(outfile, "w");
     if (!out) {
-	warning(_("unable to open TIFF file '%s'"), outfile);
+	warning("unable to open TIFF file '%s'", outfile);
 	return 0;
     }
     TIFFSetField(out, TIFFTAG_IMAGEWIDTH, width);
@@ -535,7 +531,6 @@ int R_SaveAsTIFF(void  *d, int width, int height,
 #define BMPPUTC(a) if(fputc(a,fp)==EOF) BMPERROR;
 #define HEADERSIZE 54
 
-__declspec(dllexport)
 int R_SaveAsBmp(void  *d, int width, int height,
 		unsigned int (*gp)(void *, int, int), int bgr, FILE *fp,
 		int res)
@@ -659,7 +654,7 @@ int R_SaveAsBmp(void  *d, int width, int height,
     return 1;
 }
 
-__declspec(dllexport) const char * R_pngVersion(void)
+const char * R_pngVersion(void)
 {
 #ifdef HAVE_PNG
     return png_get_header_ver(NULL /*ignored*/);
@@ -667,7 +662,7 @@ __declspec(dllexport) const char * R_pngVersion(void)
     return "";
 #endif
 }
-__declspec(dllexport) const char * R_jpegVersion(void)
+const char * R_jpegVersion(void)
 {
 #ifdef HAVE_JPEG
     static char ans[10];
@@ -681,7 +676,7 @@ __declspec(dllexport) const char * R_jpegVersion(void)
     return "";
 #endif
 }
-__declspec(dllexport) const char * R_tiffVersion(void)
+const char * R_tiffVersion(void)
 {
 #ifdef HAVE_TIFF
     return TIFFGetVersion();
