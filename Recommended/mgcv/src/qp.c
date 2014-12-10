@@ -27,13 +27,11 @@ USA.*/
 #include "qp.h"
 #include "general.h"
 #include "localization.h"
+#include <R_ext/Minmax.h>
 
 #define DELMAX 35
 
 void ErrorMessage(char *msg,int fatal);
-
-#define max(a,b)    (((a) > (b)) ? (a) : (b))
-#define min(a,b)    (((a) < (b)) ? (a) : (b))
 
 #define round(a) ((a)-floor(a) <0.5 ? (int)floor(a):(int) floor(a)+1)
 

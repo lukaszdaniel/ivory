@@ -17,12 +17,9 @@
  */
 
 #include <R.h>
+#include <R_ext/Minmax.h>
 
 #include "spatial.h"
-
-#ifndef max
-#  define max(a,b) ((a) > (b) ? (a) : (b))
-#endif
 
 /* defines  gls ls fmat frset alset valn pred prvar correlogram variogram */
 

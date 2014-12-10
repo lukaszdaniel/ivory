@@ -17,6 +17,7 @@
  */
 
 #include <R.h>
+#include <R_ext/Minmax.h>
 #include <math.h>
 #include <float.h>
 #include "localization.h"
@@ -204,7 +205,6 @@ VR_knn(Sint *kin, Sint *lin, Sint *pntr, Sint *pnte, Sint *p,
 }
 
 
-#define min9(a,b) ((a < b)?a:b)
 
 void
 VR_olvq(double *alpha, Sint *pn, Sint *p, double *x, Sint *cl,
@@ -236,7 +236,7 @@ VR_olvq(double *alpha, Sint *pn, Sint *p, double *x, Sint *cl,
 	for (k = 0; k < *p; k++)
 	    xc[index + k * ncodes] += s * al[index] *
 		(x[npat + k * n] - xc[index + k * ncodes]);
-	al[index] = min9(*alpha, al[index] / (1 + s * al[index]));
+	al[index] = min(*alpha, al[index] / (1 + s * al[index]));
     }
     Free(al);
 }

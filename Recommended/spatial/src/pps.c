@@ -18,6 +18,7 @@
 
 #include <R.h>
 #include <Rmath.h> /* for M_PI */
+#include <R_ext/Minmax.h>
 
 #define RANDIN  GetRNGstate()
 #define RANDOUT PutRNGstate()
@@ -25,11 +26,6 @@
 
 #include "spatial.h"
 #include "localization.h"
-
-#ifndef max
-#  define max(a,b) ((a) > (b) ? (a) : (b))
-#  define min(a,b) ((a) < (b) ? (a) : (b))
-#endif
 
 static Sfloat xl0, yl0, xu0, yu0;
 
