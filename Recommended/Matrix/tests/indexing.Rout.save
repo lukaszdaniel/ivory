@@ -1,9 +1,10 @@
 
-R Under development (unstable) (2014-12-09 r112) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-12-13 r121) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
-Ivory is a modified version of R. See README-IVORY file for details.
+This is Ivory - a modified version of R-devel (revision 67162).
+See README-IVORY file for details.
 Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
 
 Ivory is not part of the R project, so please do not report bugs
@@ -133,7 +134,7 @@ diagnosing replTmat(x,i,j,v): nargs()= 3; missing (i,j) = (0,1)
 + 	  identical(a.m, array(v, dim=dim(mn), dimnames=dimnames(mn)))
 + 	  )
 > showProc.time()
-Time elapsed:  0.502 0.015 0.52 
+Time elapsed:  0.478 0.014 0.494 
 > 
 > ## Printing sparse colnames:
 > ms[sample(28, 20)] <- 0
@@ -190,7 +191,7 @@ diagnosing replTmat(x,i,j,v): nargs()= 3; missing (i,j) = (0,1)
 + 	  identical3(m[!sel],  m[!ssel], as.matrix(m)[as.matrix(!ssel)])
 + 	  )
 > showProc.time()
-Time elapsed:  0.106 0.003 0.11 
+Time elapsed:  0.096 0.002 0.099 
 > 
 > ## more sparse Matrices --------------------------------------
 > 
@@ -526,7 +527,7 @@ ok( d )
 == ###======================================================================
 
 > showProc.time()
-Time elapsed:  1.98 0.03 2.042 
+Time elapsed:  1.848 0.027 1.883 
 > 
 > if(doExtras) {### {was ./AAA_index.R, MM-only}
 +     ## an nsparse-example
@@ -685,7 +686,7 @@ Time elapsed:  1.98 0.03 2.042
 +     assert.EQ.mat(T[i,i], ss[i,i])
 + }
 > showProc.time()
-Time elapsed:  0.374 0.008 0.394 
+Time elapsed:  0.361 0.006 0.367 
 > 
 > stopifnot(all.equal(mC[,3], mm[,3]),
 + 	  identical(mC[ij], mC[ij + 0.4]),
@@ -895,7 +896,7 @@ diagnosing replTmat(x,i,j,v): nargs()= 3; missing (i,j) = (0,1)
 + 	  all(sm[,-(1:3)] == 0)
 + 	  )
 > showProc.time()
-Time elapsed:  0.346 0.008 0.355 
+Time elapsed:  0.328 0.007 0.336 
 > 
 > ##---  "nsparse*" sub-assignment :----------
 > M <- Matrix(c(1, rep(0,7), 1:4), 3,4)
@@ -952,7 +953,7 @@ Time elapsed:  0.346 0.008 0.355
 ,k.,k.,k.,k.,k.,k.,k.,k.,k.,k.
 ,k.,k.,k.,k.,k.,k.,k.,k.,k.,k.
 ,k.,k.,k.,k.,k.> showProc.time()
-Time elapsed:  0.458 0.007 0.468 
+Time elapsed:  0.44 0.005 0.447 
 > Nn <- Nn0
 > ## Check that  NA is interpreted as TRUE (with a warning), for "nsparseMatrix":
 > assertWarning(Nn[ii <-     3  ] <- NA); stopifnot(isValid(Nn,"nsparseMatrix"), Nn[ii])
@@ -1127,7 +1128,7 @@ as(<triangular (ge)matrix>, dtCMatrix): valid: TRUE
 > stopifnot(is(T, "dtCMatrix"), identical(T[,3], c(10,10,10,0,0)),
 + 	  Qidentical(as(Z, "matrix"), z))
 > showProc.time()
-Time elapsed:  1.609 0.023 1.639 
+Time elapsed:  1.519 0.016 1.54 
 > 
 > 
 > ## "Vector indices" -------------------
@@ -1331,7 +1332,7 @@ Warning in command '`[<-`(`*tmp*`, i, value = 1:7)':
 > ## mixing of negative and positive must give error
 > assertError(mT[-1:1,])
 > showProc.time()
-Time elapsed:  0.39 0.01 0.402 
+Time elapsed:  0.369 0.008 0.378 
 > 
 > ## Sub *Assignment* ---- now works (partially):
 > mt0 <- mt
@@ -1439,7 +1440,7 @@ r5   .   2  4   .  6  .  .
 r2  2
 r4  .
 > showProc.time()
-Time elapsed:  0.339 0.009 0.348 
+Time elapsed:  0.327 0.006 0.334 
 > options(Matrix.verbose = TRUE)
 > 
 > mc # no longer has non-structural zeros
@@ -1660,7 +1661,7 @@ M[i,j] <- v :  coercing symmetric M[] into non-symmetric
 > assert.EQ.mat(t2, m)# ok
 > assert.EQ.mat(s2, m)# failed in 0.9975-8
 > showProc.time()
-Time elapsed:  1.495 0.022 1.557 
+Time elapsed:  1.396 0.016 1.417 
 > 
 > 
 > ## m[cbind(i,j)] <- value: (2-column matrix subassignment):
@@ -1803,7 +1804,7 @@ r5  TRUE TRUE FALSE TRUE TRUE TRUE TRUE
 > 
 > cc <- capture.output(show(dLrg))# show(<diag>) used to error for large n
 > showProc.time()
-Time elapsed:  1.356 0.024 1.385 
+Time elapsed:  1.309 0.019 1.343 
 > 
 > ## Large Matrix indexing / subassignment
 > ## ------------------------------------- (from ex. by Imran Rashid)
@@ -1876,4 +1877,4 @@ NULL
 > 
 > proc.time()
    user  system elapsed 
- 14.567   0.532  15.225 
+ 14.118   0.486  14.657 

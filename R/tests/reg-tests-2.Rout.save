@@ -1,9 +1,10 @@
 
-R Under development (unstable) (2014-12-09 r112) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-12-13 r121) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
-Ivory is a modified version of R. See README-IVORY file for details.
+This is Ivory - a modified version of R-devel (revision 67162).
+See README-IVORY file for details.
 Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
 
 Ivory is not part of the R project, so please do not report bugs
@@ -6404,15 +6405,15 @@ function ()
 > print.function
 function (x, ...)  
  - attr(*, "srcref")=Class 'srcref' atomic [1:8] 1 19 1 63 19 63 1 1
-  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x3486048> 
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x38543d0> 
 > f
 function ()  
  - attr(*, "srcref")=Class 'srcref' atomic [1:8] 1 17 1 28 17 28 1 1
-  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x3493f10> 
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x3862340> 
  - attr(*, "note")= character "just a note"
  - attr(*, "yada")=function ()  
   ..- attr(*, "srcref")=Class 'srcref' atomic [1:8] 2 24 2 48 24 48 2 2
-  .. .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x3493f10> 
+  .. .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x3862340> 
 > rm(print.function)
 > ## auto-printing and printing differed up to R 2.9.x
 > 

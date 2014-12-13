@@ -1,9 +1,10 @@
 
-R Under development (unstable) (2014-12-09 r112) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-12-13 r121) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
-Ivory is a modified version of R. See README-IVORY file for details.
+This is Ivory - a modified version of R-devel (revision 67162).
+See README-IVORY file for details.
 Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
 
 Ivory is not part of the R project, so please do not report bugs
@@ -1512,5 +1513,5 @@ sm     3    3    3    3    4    4    4    4    2     2     2
 > par(op)
 > 
 > cat("Time elapsed: ", proc.time() - .ptime, "\n")
-Time elapsed:  2.522 0.101 2.731 0 0 
+Time elapsed:  2.549 0.114 2.801 0 0 
 > 

@@ -1,9 +1,10 @@
 
-R Under development (unstable) (2014-12-09 r112) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-12-13 r121) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
-Ivory is a modified version of R. See README-IVORY file for details.
+This is Ivory - a modified version of R-devel (revision 67162).
+See README-IVORY file for details.
 Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
 
 Ivory is not part of the R project, so please do not report bugs
@@ -284,6 +285,6 @@ f(df1 = 10, df2 = 2, ncp = 3) PASSED
 > 
 > 
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  3.11 0.026 3.191 0 0 
+Time elapsed:  3.103 0.068 3.19 0 0 
 > 
 > 

@@ -1,9 +1,10 @@
 
-R Under development (unstable) (2014-12-09 r112) -- "Unsuffered Consequences"
+R Under development (unstable) (2014-12-13 r121) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
-Ivory is a modified version of R. See README-IVORY file for details.
+This is Ivory - a modified version of R-devel (revision 67162).
+See README-IVORY file for details.
 Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
 
 Ivory is not part of the R project, so please do not report bugs
@@ -131,7 +132,7 @@ A 1 4 7 10 100 1 4 7 10
 B 2 5 8 11 100 2 5 8 11
 C 3 6 9 12 100 3 6 9 12
 > showProc.time()
-Time elapsed:  0.122 0.007 0.13 
+Time elapsed:  0.119 0.008 0.127 
 > 
 > ### --- Diagonal / Sparse - had bugs
 > 
@@ -162,7 +163,7 @@ Time elapsed:  0.122 0.007 0.13
 + 	  identical(t(d4), cBind(Diagonal(4),     0:3)),
 + 	  identical(t(m4), rBind(Diagonal(x=-1:2), 0:3)))
 > showProc.time()
-Time elapsed:  0.254 0.002 0.258 
+Time elapsed:  0.231 0.003 0.234 
 > 
 > ### --- Sparse Matrices ---
 > 
@@ -212,7 +213,7 @@ rBind (m, v= 2 ), class(m) : dgeMatrix ,. dgCMatrix ,. dgTMatrix ,.
 cBind (m, v= c(1L, 0L) ), class(m) : dgeMatrix ,. dgCMatrix ,. dgTMatrix ,.
 rBind (m, v= c(1L, 0L) ), class(m) : dgeMatrix ,. dgCMatrix ,. dgTMatrix ,.
 > showProc.time()
-Time elapsed:  0.178 0.007 0.186 
+Time elapsed:  0.166 0.007 0.174 
 > 
 > cBind(0, mC); cBind(mC, 0)
 4 x 7 sparse Matrix of class "dgCMatrix"
@@ -383,8 +384,8 @@ v5 . | . | .
 [5,]    6    1    0    0    0    0   50    1
 > 
 > showProc.time()
-Time elapsed:  0.409 0.015 0.425 
+Time elapsed:  0.381 0.014 0.396 
 > 
 > proc.time()
    user  system elapsed 
-  4.143   0.146   4.342 
+  3.895   0.137   4.035 

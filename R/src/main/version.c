@@ -142,6 +142,6 @@ void attribute_hidden PrintVersion_part_1(char *s, size_t len)
     SPRINTF_2("Platform: %s", R_PLATFORM);
     if(strlen(R_ARCH)) { SPRINTF_2("/%s", R_ARCH); }
     SPRINTF_2(" (%d-bit)\n", 8*(int)sizeof(void *));
-    strcat(s, "\nIvory is a modified version of R. See README-IVORY file for details.\n");
-    strcat(s, "Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)\n");
+    SPRINTF_2("\nThis is Ivory - a modified version of R-devel (revision %d).\nSee README-IVORY file for details.\n", R_SVN_BASEREVISION);
+    SPRINTF_2("Copyright (C) 2013-%s Lukasz Daniel (lukasz.daniel@gmail.com)\n", R_YEAR);
 }
