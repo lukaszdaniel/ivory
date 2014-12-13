@@ -173,6 +173,9 @@
 
       \item \code{as.table()} now allows tables with one or more
       dimensions of length 0 (as with \code{as.table(integer())}).
+
+      \item \code{names(x) <- NULL} now clears the names of call
+      and \code{\dots} objects.
     }
   }
 
@@ -249,6 +252,8 @@
       \item New entry point \code{R_allocLD}, like \code{R_alloc} but
       guaranteed to have sufficient alignment for \code{long double}
       pointers.
+
+      \item \code{isPairList} now returns \code{TRUE} for DOTSXP.
     }
   }
 
@@ -293,6 +298,9 @@
 
       \code{callNextMethod()} should now work within a \code{.local}
       call when \code{\dots} is absent from \code{formals(.local)}.
+
+      \code{dput(pairlist(x))} generates a call to the \code{pairlist}
+      constructor, instead of the \code{list} constructor.
     }
   }
 }

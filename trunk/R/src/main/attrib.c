@@ -356,7 +356,7 @@ static SEXP removeAttrib(SEXP vec, SEXP name)
     SEXP t;
     if(TYPEOF(vec) == CHARSXP)
 	error(_("cannot set attribute on a 'CHARSXP'"));
-    if (name == R_NamesSymbol && isList(vec)) {
+    if (name == R_NamesSymbol && isPairList(vec)) {
 	for (t = vec; t != R_NilValue; t = CDR(t))
 	    SET_TAG(t, R_NilValue);
 	return R_NilValue;
