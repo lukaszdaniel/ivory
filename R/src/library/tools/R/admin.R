@@ -510,8 +510,7 @@ function(dir, outDir, encoding = "")
             if (!is.null(vigns$sources) && !is.null(vigns$sources[file][[1]]))
             	next
             file <- basename(file)
-            enc <- getVignetteEncoding(file, TRUE)
-            if(enc %in% c("non-ASCII", "unknown")) enc <- encoding
+            enc <- vigns$encodings[i]
 
             if(nzchar(enc)) cat("  ", gettextf("%s is using %s encoding", sQuote(basename(file)), sQuote(enc), domain = "R-tools"), "\n", sep = "")
             else cat("  ", sQuote(basename(file)), "\n", sep = "")

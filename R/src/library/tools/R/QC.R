@@ -786,7 +786,7 @@ function(x, ...)
             s <- paste(deparse(s), collapse = "")
             s <- gsub(" = ([,\\)])", "\\1", s)
             s <- gsub("<unescaped bksl>", "\\", s, fixed = TRUE)
-            gsub("^list", "function", s)
+            gsub("^pairlist", "function", s)
         }
     }
 
