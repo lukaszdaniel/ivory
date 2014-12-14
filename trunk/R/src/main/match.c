@@ -378,8 +378,7 @@ SEXP attribute_hidden matchArgs(SEXP formals, SEXP supplied, SEXP call)
 		      n_("unused argument %s",
 			       "unused arguments %s",
 			       (unsigned long) length(unusedForError)),
-		      CHAR(STRING_ELT(deparse1line(unusedForError, 0), 0)) + 4);
-                      /* '+ 4' is to remove 'list' from 'list(badTag1,...)' */
+		      strchr(CHAR(asChar(deparse1line(unusedForError, 0))), '('));
 	}
     }
     UNPROTECT(1);

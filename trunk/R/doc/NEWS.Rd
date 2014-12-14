@@ -233,6 +233,10 @@
 
       \item \command{R CMD check} gains option \option{--test-dir} to
       specify an alternative set of tests to run.
+      
+      \item \command{R CMD check} will now continue with testing after
+      many types of errors, and will output a summary count of errors at
+      the end if any have occurred.
     }
   }
 
@@ -293,14 +297,17 @@
       \item \code{all.equal()} gains methods for \code{environment}s and
       \code{refClass}es.
 
-      \code{[<-} and \code{[[<-} gain S4 \code{data.frame} methods to
+      \item \code{[<-} and \code{[[<-} gain S4 \code{data.frame} methods to
       avoid corruption of S4 class information by the S3 methods.
 
-      \code{callNextMethod()} should now work within a \code{.local}
+      \item \code{callNextMethod()} should now work within a \code{.local}
       call when \code{\dots} is absent from \code{formals(.local)}.
 
-      \code{dput(pairlist(x))} generates a call to the \code{pairlist}
+      \item \code{dput(pairlist(x))} generates a call to the \code{pairlist}
       constructor, instead of the \code{list} constructor.
+
+      \item Fix \code{missing()} when arguments are propagated through
+      \code{\dots}; see \PR{15707}.
     }
   }
 }
@@ -411,6 +418,9 @@
       \item Loading packages incorrectly defining an S4 generic followed
       by a function of the same name caused an erroneous cyclic
       namespace dependency error.
+      
+      \item Declared vignette encodings are now always passed to the
+      vignette engine.
     }
   }
 }

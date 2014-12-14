@@ -27,6 +27,7 @@ function(filename = "")
     Log$con <- con
     Log$filename <- filename
     Log$stars <- "*"
+    Log$errors <- 0L
     Log$warnings <- 0L
     Log$notes <- 0L
 
@@ -78,6 +79,7 @@ function(Log, ...)
     resultLog(Log, gettext("ERROR", domain = "R-tools"))
     text <- paste0(...)
     if (length(text) && nzchar(text)) printLog(Log, ..., "\n")
+    Log$errors <- Log$errors + 1L
 }
 
 ## <NOTE>
@@ -104,11 +106,13 @@ function(Log, text = "")
 summaryLog <-
 function(Log)
 {
-    if((Log$warnings > 0L) || (Log$notes > 0L)) {
-	if(Log$warnings >= 1L)
-	    printLog(Log, sprintf(ngettext(Log$warnings, "WARNING: There was %d warning.\n", "WARNING: There were %d warnings.\n", domain = "R-tools"), Log$warnings))
-        if(Log$notes >= 1L)
-            printLog(Log, sprintf(ngettext(Log$notes, "NOTE: There was %d note.\n", "NOTE: There were %d notes.\n", domain = "R-tools"), Log$notes))
-        cat(gettextf("See\n  %s\nfor details.\n", sQuote(Log$filename), domain = "R-tools"))
+    if((Log$errors > 0L) || (Log$warnings > 0L) || (Log$notes > 0L)) {
+        if(Log$errors > 0L)
+          printLog(Log, sprintf(ngettext(Log$errors,"WARNING: There was %d error.\n", "WARNING: There were %d errors.\n", domain = "R-tools"), Log$errors))
+		if(Log$warnings > 0L)
+	  	  printLog(Log, sprintf(ngettext(Log$warnings, "WARNING: There was %d warning.\n", "WARNING: There were %d warnings.\n", domain = "R-tools"), Log$warnings))
+    	if(Log$notes > 0L)
+      	  printLog(Log, sprintf(ngettext(Log$notes, "NOTE: There was %d note.\n", "NOTE: There were %d notes.\n", domain = "R-tools"), Log$notes))
+    	cat(gettextf("See\n  %s\nfor details.\n", sQuote(Log$filename), domain = "R-tools"))
     }
 }
