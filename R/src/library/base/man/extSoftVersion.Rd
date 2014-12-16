@@ -30,16 +30,23 @@ extSoftVersion()
   \item{PCRE}{The version of \code{PCRE} in use.}
   \item{ICU}{The version of \code{ICU} in use (if any).}
   \item{TRE}{The version of \code{libtre} in use.}
+  \item{iconv}{The version of the \code{iconv} library in use (if known).}
 
   All are character strings.  Note that the values for \code{bzlib} and
   \code{pcre} normally contain a date as well as the version number, and
   that for \code{tre} includes several items separated by spaces, the
   version number being the second.
+
+  For \code{iconv} this will give the implementation as well as the
+  version, for example \code{"GNU libiconv 1.14"}, \code{"glibc
+  2.18"} or \code{"win_iconv"} (which has no version number).
 }
 \seealso{
   \code{\link{La_version}} for the version of LAPACK in use.
 
   \code{\link{grSoftVersion}} for third-party graphics software.
+
+  \code{\link{tclVersion}} for the version of Tcl/Tk.
 }
 \examples{
 extSoftVersion()
