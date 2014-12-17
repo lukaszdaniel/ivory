@@ -110,18 +110,18 @@ void attribute_hidden PrintVersion(char *s, size_t len)
 
 void attribute_hidden PrintVersionString(char *s, size_t len)
 {
-    if(R_SVN_REVISION <= 0) {// 'svn info' failed in ../../Makefile.in
+    if(R_SVN_BASEREVISION <= 0) {// 'svn info' failed in ../../Makefile.in
 	snprintf(s, len, "R version %s.%s %s (%s-%s-%s)",
-		R_MAJOR, R_MINOR, R_STATUS, R_YEAR, R_MONTH, R_DAY);
+		R_MAJOR, R_MINOR, R_STATUS, R_BASEYEAR, R_BASEMONTH, R_BASEDAY);
     } else if(strlen(R_STATUS) == 0) {
 	snprintf(s, len, "R version %s.%s (%s-%s-%s)",
-		R_MAJOR, R_MINOR, R_YEAR, R_MONTH, R_DAY);
+		R_MAJOR, R_MINOR, R_BASEYEAR, R_BASEMONTH, R_BASEDAY);
     } else if(strcmp(R_STATUS, "Under development (unstable)") == 0) {
 	snprintf(s, len, "R %s (%s-%s-%s r%d)",
-		R_STATUS, R_YEAR, R_MONTH, R_DAY, R_SVN_BASEREVISION);
+		R_STATUS, R_BASEYEAR, R_BASEMONTH, R_BASEDAY, R_SVN_BASEREVISION);
     } else {
 	snprintf(s, len, "R version %s.%s %s (%s-%s-%s r%d)",
-		R_MAJOR, R_MINOR, R_STATUS, R_YEAR, R_MONTH, R_DAY,
+		R_MAJOR, R_MINOR, R_STATUS, R_BASEYEAR, R_BASEMONTH, R_BASEDAY,
 		R_SVN_BASEREVISION);
     }
 }
