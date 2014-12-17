@@ -475,7 +475,7 @@ static R_INLINE int isNAstring(const char *buf, int mode, LocalData *d)
     return 0;
 }
 
-static R_INLINE void expected(LocalData *d)
+static R_INLINE void NORET expected(LocalData *d)
 {
     int c;
     if (d->ttyflag) { /* This is safe in a MBCS */

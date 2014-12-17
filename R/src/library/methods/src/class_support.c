@@ -28,10 +28,9 @@ SEXP R_MakeExternalPtrFn(DL_FUNC p, SEXP tag, SEXP prot);
 #include "methods.h"
 #include "localization.h"
 
-SEXP R_dummy_extern_place()
+SEXP NORET R_dummy_extern_place()
 {
     error(_("calling the C routine used as an initializer for 'externalptr' objects"));
-    return R_NilValue; /* -Wall */
 }
 
 SEXP R_externalptr_prototype_object()

@@ -161,7 +161,7 @@
       versions of third-party software in use in this session.
       Currently reports versions of \code{zlib}, \code{bzlib}, the
       \code{liblzma} from \code{xz}, PCRE, ICU, TRE and the \code{iconv}
-      library.
+      implementation.
 
       A similar function \code{grSoftVersion()} in package \pkg{grDevices}
       reports on third-party graphics software.
@@ -175,10 +175,14 @@
       for large \code{length(FUN.VALUE)}; as extension of \PR{16061}.
 
       \item \code{as.table()} now allows tables with one or more
-      dimensions of length 0 (as with \code{as.table(integer())}).
+      dimensions of length 0 (such as \code{as.table(integer())}).
 
       \item \code{names(x) <- NULL} now clears the names of call
       and \code{\dots} objects.
+
+      \item \code{library()} will report a warning when an insufficient
+      dependency version is masking a sufficient one later on the
+      library search path.
     }
   }
 
@@ -237,9 +241,12 @@
       \item \command{R CMD check} gains option \option{--test-dir} to
       specify an alternative set of tests to run.
       
-      \item \command{R CMD check} will now continue with testing after
-      many types of errors, and will output a summary count of errors at
-      the end if any have occurred.
+      \item \command{R CMD check} will now by default continue with
+      testing after many types of errors, and will output a summary
+      count of errors at the end if any have occurred.      
+      
+      \item \command{R CMD check --as-cran} checks a \file{README.md}
+      file can be processed: this needs \command{pandoc} installed.
     }
   }
 
@@ -311,6 +318,9 @@
 
       \item Fix \code{missing()} when arguments are propagated through
       \code{\dots}; see \PR{15707}.
+
+      \item \code{library()} now considers its \code{lib.loc} parameter
+      when searching for dependencies.
     }
   }
 }
@@ -324,9 +334,9 @@
 
       \item \code{kruskal.test()} warns on more types of suspicious input.
 
-      \item The \code{as.dendrogram} method for \code{"hclust"} objects
-      gets a \code{check} argument protecting against memory explosion for
-      invalid inputs.
+      \item The \code{as.dendrogram()} method for \code{"hclust"}
+      objects gains a \code{check} argument protecting against memory
+      explosion for invalid inputs.
 
       \item \code{capabilities()} has a new item \code{long.double}
       which indicates if the build uses a \code{long double} type which
@@ -409,8 +419,8 @@
       blank string when the user asked for a single file but cancelled
       the request.  (\PR{16074})
 
-      \item \code{Math2} group generics failed to correctly dispatch
-      \code{"structure"} and \code{"nonStructure"}-derived classes.
+      \item \code{Math2} S4 group generics failed to correctly dispatch
+      \code{"structure"}- and \code{"nonStructure"}-derived classes.
 
       \item \code{loadNamespace()} imposed undocumented restrictions
       on the \code{versionCheck} parameter.  (Reported by Geoff Lee.)
