@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-11-30 14:48\n"
+"POT-Creation-Date: 2014-12-17 19:07\n"
 "PO-Revision-Date: 2014-01-23 22:09+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -1989,7 +1989,6 @@ msgstr ""
 "données (data.frame)"
 
 #. R/table.R: stop("cannot coerce to a table")
-#. R/table.R: stop("cannot coerce to a table")
 #: R/table.R:0
 #, fuzzy
 msgid "cannot coerce to a table"
@@ -2934,18 +2933,6 @@ msgstr "les seuls appels valides sont x[[j]] <- valeur ou x[[i,j]] <- valeur"
 msgid "operation is not allowed on base namespace"
 msgstr "opération non tolérée sur l'espace de noms de base"
 
-#. R/library.R: gettextf("package %s %s is loaded, but %s %s is required by package %s", sQuote(pkg),     current, z$op, target, sQuote(pkgname))
-#: R/library.R:0
-#, fuzzy
-msgid "package %s %s is loaded, but %s %s is required by package %s"
-msgstr "le package %s %s est chargé, mais %s %s est requis par %s"
-
-#. R/library.R: gettextf("package %s %s was found, but %s %s is required by package %s", sQuote(pkg),     current, z$op, target, sQuote(pkgname))
-#: R/library.R:0
-#, fuzzy
-msgid "package %s %s was found, but %s %s is required by package %s"
-msgstr "le package %s %s est trouvé, mais %s %s est réquis par %s"
-
 #. R/library.R: gettextf("package %s already present in 'search()'", sQuote(package))
 #: R/library.R:0
 #, fuzzy
@@ -3027,6 +3014,22 @@ msgstr ""
 #, fuzzy
 msgid "package %s required by package %s could not be found"
 msgstr "le package %s nécessaire pour %s, mais est introuvable"
+
+#. R/library.R: gettextf("package %s version %s is loaded, but package %s version %s is required by package %s",     sQuote(pkg), current, dep$op, target, sQuote(pkgname))
+#: R/library.R:0
+#, fuzzy
+msgid ""
+"package %s version %s is loaded, but package %s version %s is required by "
+"package %s"
+msgstr "le package %s %s est chargé, mais %s %s est requis par %s"
+
+#. R/library.R: gettextf("package %s version %s was found, but package %s version %s is required by package %s",     sQuote(pkg), current, dep$op, target, sQuote(pkgname))
+#: R/library.R:0
+#, fuzzy
+msgid ""
+"package %s version %s was found, but package %s version %s is required by "
+"package %s"
+msgstr "le package %s %s est trouvé, mais %s %s est réquis par %s"
 
 #. R/library.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(pkgname))
 #. R/namespace.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(basename(pkgpath)))
@@ -3333,6 +3336,11 @@ msgstr "valeur pour '"
 #, fuzzy
 msgid "values in 'breaks' argument are not unique"
 msgstr "'breaks' ne sont pas des valeurs uniques"
+
+#. R/library.R: gettextf("version %s of %s masked by %s in %s", versions[which(sufficient)[1L]],     sQuote(pkg), current, lib.loc[which(sufficient)[1L] - 1L])
+#: R/library.R:0
+msgid "version %s of %s masked by %s in %s"
+msgstr ""
 
 #. R/seq.R: stop("wrong sign in 'by' argument")
 #: R/seq.R:0

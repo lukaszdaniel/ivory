@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-08 18:29+0100\n"
+"POT-Creation-Date: 2014-12-17 19:08+0100\n"
 "PO-Revision-Date: 2012-03-15 12:00-0500\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -242,11 +242,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#: fexact.c:1844
+#: fexact.c:1843
 msgid "Out of workspace."
 msgstr ""
 
-#: fexact.c:1923
+#: fexact.c:1922
 msgid "This should never occur."
 msgstr ""
 
@@ -699,64 +699,64 @@ msgstr "length(m) должна быть по меньшей мере 2"
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr "Аргумент Sx должен быть числовым вектором короче m[]"
 
-#: nls.c:96 nls.c:98 port.c:550
+#: nls.c:94 nls.c:96 port.c:550
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'m' должен быть списком"
 
-#: nls.c:104 nls.c:109 nls.c:114 nls.c:119 nls.c:124 nls.c:165 nls.c:170
-#: nls.c:175 nls.c:180 nls.c:185 nls.c:190
+#: nls.c:102 nls.c:107 nls.c:112 nls.c:117 nls.c:122 nls.c:163 nls.c:168
+#: nls.c:173 nls.c:178 nls.c:183 nls.c:188
 #, fuzzy, c-format
 msgid "'%s' is absent"
 msgstr "'%s' отсутствует"
 
-#: nls.c:230
+#: nls.c:228
 msgid "singular gradient"
 msgstr "сингулярный градиент"
 
-#: nls.c:251
+#: nls.c:249
 #, c-format
 msgid "step factor %g reduced below 'minFactor' of %g"
 msgstr "фактор шага %g стал меньше 'minFactor' %g"
 
-#: nls.c:260
+#: nls.c:258
 #, c-format
 msgid "number of iterations exceeded maximum of %d"
 msgstr "число итераций превысило максимум = %d"
 
-#: nls.c:265
+#: nls.c:263
 msgid "converged"
 msgstr "сошлось"
 
-#: nls.c:286
+#: nls.c:284
 #, fuzzy, c-format
 msgid "'%s' argument should be of type character"
 msgstr "'theta' должна быть текстового типа"
 
-#: nls.c:288 port.c:377
+#: nls.c:286 port.c:377
 msgid "use of NULL environment is defunct"
 msgstr "использование окружения NULL больше не работает"
 
-#: nls.c:292
+#: nls.c:290
 #, fuzzy, c-format
 msgid "'%s' argument should be an environment"
 msgstr "'rho' должно быть окружением"
 
-#: nls.c:295
+#: nls.c:293
 msgid "'dir' is not a numeric vector of the correct length"
 msgstr "'dir' не является числовым вектором вектор правильной длины длина"
 
-#: nls.c:309 nls.c:344
+#: nls.c:307 nls.c:342
 msgid "Missing value or an infinity produced when evaluating the model"
 msgstr ""
 "Пропущенное значение или неопределенность получено при вычислении модели"
 
-#: nls.c:316
+#: nls.c:314
 #, c-format
 msgid "variable '%s' is integer, not numeric"
 msgstr "переменная '%s' -- целое число, не 'numeric'"
 
-#: nls.c:318
+#: nls.c:316
 #, c-format
 msgid "variable '%s' is not numeric"
 msgstr "переменная '%s' не является числовой"

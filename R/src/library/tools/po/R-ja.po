@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-11-04 06:49\n"
+"POT-Creation-Date: 2014-12-17 19:08\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -295,6 +295,11 @@ msgstr " 以下の中にあるコードを実行中 "
 #, fuzzy
 msgid "* loading checks for arch %s"
 msgstr " '%s' のロードに失敗しました "
+
+#. R/check.R: gettext("** found \\donttest examples: check also with --run-donttest\n", domain = "R-tools")
+#: R/check.R:0
+msgid "** found \\donttest examples: check also with --run-donttest"
+msgstr ""
 
 #. R/check.R: gettextf("** running examples for arch %s ...", sQuote(arch), domain = "R-tools")
 #: R/check.R:0
@@ -1344,6 +1349,11 @@ msgstr ""
 msgid "File NAMESPACE does not exist but there is a case-insensitive match."
 msgstr ""
 
+#. R/check.R: gettext("File README.md cannot be checked without 'pandoc' being installed.\n", domain = "R-tools")
+#: R/check.R:0
+msgid "File README.md cannot be checked without 'pandoc' being installed."
+msgstr ""
+
 #. R/check.R: gettext("File names must not differ just by case to be usable on all R platforms.\nPlease rename the files and try again.\nSee section 'Package structure' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
@@ -1609,11 +1619,6 @@ msgstr ""
 #, fuzzy
 msgid "Inconsistent arg count for %s"
 msgstr " 以下に対する不整合な引数の数 "
-
-#. R/Vignettes.R: gettextf("Inconsistent encoding specifications: %s with %%\\SweaveUTF8", result1)
-#: R/Vignettes.R:0
-msgid "Inconsistent encoding specifications: %s with %%\\SweaveUTF8"
-msgstr ""
 
 #. R/check.R: gettext("Incorrect (un)loading of package shared object.\n", domain = "R-tools")
 #: R/check.R:0
@@ -1978,6 +1983,11 @@ msgstr ""
 #. R/logging.R: gettext("NOTE", domain = "R-tools")
 #: R/logging.R:0
 msgid "NOTE"
+msgstr ""
+
+#. R/check.R: gettext("NOTE: Quitting check on first error.\n", domain = "R-tools")
+#: R/check.R:0
+msgid "NOTE: Quitting check on first error."
 msgstr ""
 
 #. R/QC.R: gettextf("    Name: %s\n    Code: %s\n    Docs: %s", sQuote(nms[i]), cv, dv, domain = "R-tools")
@@ -3462,6 +3472,13 @@ msgstr ""
 #. R/Vignettes.R: gettextf("Vignette %s overwrites the following %s output by vignette %s:", sQuote(basename(names(resultsT)[j])),     sQuote(name), sQuote(basename(names(resultsT)[i])), domain = "R-tools")
 #: R/Vignettes.R:0
 msgid "Vignette %s overwrites the following %s output by vignette %s:"
+msgstr ""
+
+#. R/Vignettes.R: gettextf("Vignette '%s' is non-ASCII but has no declared encoding", name)
+#. R/Vignettes.R: gettextf("Vignette '%s' is non-ASCII but has no declared encoding", file)
+#. R/Vignettes.R: gettextf("Vignette '%s' is non-ASCII but has no declared encoding", name)
+#: R/Vignettes.R:0
+msgid "Vignette '%s' is non-ASCII but has no declared encoding"
 msgstr ""
 
 #. R/QC.R: gettextf("Vignette dependencies (%s entries) must be contained in the DESCRIPTION Depends/Suggests/Imports entries.",     sQuote("\\VignetteDepends{}"), domain = "R-tools")
@@ -6492,6 +6509,12 @@ msgid "VignetteBuilder package required for checking but not available:"
 msgid_plural ""
 "VignetteBuilder packages required for checking but not available:"
 msgstr[0] " パッケージが必要ですが，利用可能ではありません "
+
+#. R/logging.R: ngettext(Log$errors, "WARNING: There was %d error.\n", "WARNING: There were %d errors.\n",     domain = "R-tools")
+#: R/logging.R:0
+msgid "WARNING: There was %d error.\n"
+msgid_plural "WARNING: There were %d errors.\n"
+msgstr[0] ""
 
 #. R/logging.R: ngettext(Log$warnings, "WARNING: There was %d warning.\n", "WARNING: There were %d warnings.\n",     domain = "R-tools")
 #: R/logging.R:0

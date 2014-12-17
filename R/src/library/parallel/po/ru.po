@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-23 06:12+0200\n"
+"POT-Creation-Date: 2014-12-17 19:07+0100\n"
 "PO-Revision-Date: 2011-10-18 22:15-0600\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -166,18 +166,18 @@ msgstr "дочерний процесс %d не существует"
 
 #: fork.c:726
 #, fuzzy
-msgid "'mcexit' failed"
+msgid "'mcexit()' function failed"
 msgstr "mcexit не удался"
 
-#: fork.c:756 fork.c:765
+#: fork.c:755 fork.c:764
 msgid "invalid CPU affinity specification"
 msgstr ""
 
-#: fork.c:776
+#: fork.c:775
 msgid "requested CPU set is too large for this system"
 msgstr ""
 
-#: fork.c:799
+#: fork.c:798
 msgid "retrieving CPU affinity set failed"
 msgstr ""
 

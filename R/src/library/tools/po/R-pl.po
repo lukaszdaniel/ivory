@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-04 06:49\n"
+"POT-Creation-Date: 2014-12-17 19:08\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -281,6 +281,13 @@ msgstr "* opcje instalacji %s"
 #: R/check.R:0
 msgid "* loading checks for arch %s"
 msgstr "* ładowanie sprawdzeń dla architektury %s"
+
+#. R/check.R: gettext("** found \\donttest examples: check also with --run-donttest\n", domain = "R-tools")
+#: R/check.R:0
+msgid "** found \\donttest examples: check also with --run-donttest"
+msgstr ""
+"** znaleziono przykłady '\\donttest': sprawdź również z opcją '--run-"
+"donttest'"
 
 #. R/check.R: gettextf("** running examples for arch %s ...", sQuote(arch), domain = "R-tools")
 #: R/check.R:0
@@ -1294,6 +1301,13 @@ msgstr ""
 "Plik 'NAMESPACE' nie istnieje, ale istnieje plik o tej samej nazwie, ale "
 "różnej wielkości liter."
 
+#. R/check.R: gettext("File README.md cannot be checked without 'pandoc' being installed.\n", domain = "R-tools")
+#: R/check.R:0
+msgid "File README.md cannot be checked without 'pandoc' being installed."
+msgstr ""
+"Plik 'README.md' nie może być sprawdzony bez zainstalowanego programu "
+"'pandoc'"
+
 #. R/check.R: gettext("File names must not differ just by case to be usable on all R platforms.\nPlease rename the files and try again.\nSee section 'Package structure' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
 #: R/check.R:0
 msgid ""
@@ -1559,11 +1573,6 @@ msgstr "W katalogu %s ilustracje %s oraz %s mają te same nazwy ilustracji"
 #: R/parseLatex.R:0
 msgid "Inconsistent arg count for %s"
 msgstr "Niespójny licznik argumentów dla %s"
-
-#. R/Vignettes.R: gettextf("Inconsistent encoding specifications: %s with %%\\SweaveUTF8", result1)
-#: R/Vignettes.R:0
-msgid "Inconsistent encoding specifications: %s with %%\\SweaveUTF8"
-msgstr "Niespójna specyfikacja kodowania: %s z %%\\SweaveUTF8"
 
 #. R/check.R: gettext("Incorrect (un)loading of package shared object.\n", domain = "R-tools")
 #: R/check.R:0
@@ -1941,6 +1950,11 @@ msgstr "BRAK"
 #: R/logging.R:0
 msgid "NOTE"
 msgstr "UWAGA"
+
+#. R/check.R: gettext("NOTE: Quitting check on first error.\n", domain = "R-tools")
+#: R/check.R:0
+msgid "NOTE: Quitting check on first error."
+msgstr "UWAGA: Pomijanie sprawdzania przy pierwszym błędzie."
 
 #. R/QC.R: gettextf("    Name: %s\n    Code: %s\n    Docs: %s", sQuote(nms[i]), cv, dv, domain = "R-tools")
 #: R/QC.R:0
@@ -3413,6 +3427,14 @@ msgstr ""
 #: R/Vignettes.R:0
 msgid "Vignette %s overwrites the following %s output by vignette %s:"
 msgstr "Ilustracja %s nadpisuje poniższe wyjście %s ilustracji %s:"
+
+#. R/Vignettes.R: gettextf("Vignette '%s' is non-ASCII but has no declared encoding", name)
+#. R/Vignettes.R: gettextf("Vignette '%s' is non-ASCII but has no declared encoding", file)
+#. R/Vignettes.R: gettextf("Vignette '%s' is non-ASCII but has no declared encoding", name)
+#: R/Vignettes.R:0
+msgid "Vignette '%s' is non-ASCII but has no declared encoding"
+msgstr ""
+"Ilustracja '%s' nie jest w formacie ASCII, a brak zadeklarowanego kodowania"
 
 #. R/QC.R: gettextf("Vignette dependencies (%s entries) must be contained in the DESCRIPTION Depends/Suggests/Imports entries.",     sQuote("\\VignetteDepends{}"), domain = "R-tools")
 #: R/QC.R:0
@@ -6573,6 +6595,14 @@ msgstr[1] ""
 msgstr[2] ""
 "Pakiety 'VignetteBuilder' są wymagane do sprawdzenia, ale nie są dostępne:"
 
+#. R/logging.R: ngettext(Log$errors, "WARNING: There was %d error.\n", "WARNING: There were %d errors.\n",     domain = "R-tools")
+#: R/logging.R:0
+msgid "WARNING: There was %d error.\n"
+msgid_plural "WARNING: There were %d errors.\n"
+msgstr[0] "OSTRZEŻENIE: Było %d ostrzeżenie.\n"
+msgstr[1] "OSTRZEŻENIE: Były %d ostrzeżenia.\n"
+msgstr[2] "OSTRZEŻENIE: Było %d ostrzeżeń.\n"
+
 #. R/logging.R: ngettext(Log$warnings, "WARNING: There was %d warning.\n", "WARNING: There were %d warnings.\n",     domain = "R-tools")
 #: R/logging.R:0
 msgid "WARNING: There was %d warning.\n"
@@ -6703,6 +6733,9 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "nie można przekodować %s linia %s"
 msgstr[1] "nie można przekodować %s linie %s"
 msgstr[2] "nie można przekodować %s linie %s"
+
+#~ msgid "Inconsistent encoding specifications: %s with %%\\SweaveUTF8"
+#~ msgstr "Niespójna specyfikacja kodowania: %s z %%\\SweaveUTF8"
 
 #~ msgid ""
 #~ "'DUP = FALSE' is deprecated and may be disabled in future versions of R."

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.2.0\n"
-"POT-Creation-Date: 2014-11-04 06:49\n"
+"POT-Creation-Date: 2014-12-17 19:08\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -329,6 +329,13 @@ msgstr ""
 #. R/check.R: gettextf("* loading checks for arch %s\n", sQuote(arch), domain = "R-tools")
 
 msgid "* loading checks for arch %s"
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("** found \\donttest examples: check also with --run-donttest\n", domain = "R-tools")
+
+msgid "** found \\donttest examples: check also with --run-donttest"
 msgstr ""
 
 
@@ -1599,6 +1606,13 @@ msgstr ""
 
 
 #: R/check.R: 0
+#. R/check.R: gettext("File README.md cannot be checked without 'pandoc' being installed.\n", domain = "R-tools")
+
+msgid "File README.md cannot be checked without 'pandoc' being installed."
+msgstr ""
+
+
+#: R/check.R: 0
 #. R/check.R: gettext("File names must not differ just by case to be usable on all R platforms.\nPlease rename the files and try again.\nSee section 'Package structure' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
 
 msgid "File names must not differ just by case to be usable on all R platforms.\nPlease rename the files and try again.\nSee section 'Package structure' in the 'Writing R Extensions' manual."
@@ -1886,13 +1900,6 @@ msgstr ""
 #. R/parseLatex.R: gettextf("Inconsistent arg count for %s", sQuote(macro))
 
 msgid "Inconsistent arg count for %s"
-msgstr ""
-
-
-#: R/Vignettes.R: 0
-#. R/Vignettes.R: gettextf("Inconsistent encoding specifications: %s with %%\\SweaveUTF8", result1)
-
-msgid "Inconsistent encoding specifications: %s with %%\\SweaveUTF8"
 msgstr ""
 
 
@@ -2327,6 +2334,13 @@ msgstr ""
 #. R/logging.R: gettext("NOTE", domain = "R-tools")
 
 msgid "NOTE"
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("NOTE: Quitting check on first error.\n", domain = "R-tools")
+
+msgid "NOTE: Quitting check on first error."
 msgstr ""
 
 
@@ -4089,6 +4103,15 @@ msgstr ""
 #. R/Vignettes.R: gettextf("Vignette %s overwrites the following %s output by vignette %s:", sQuote(basename(names(resultsT)[j])),     sQuote(name), sQuote(basename(names(resultsT)[i])), domain = "R-tools")
 
 msgid "Vignette %s overwrites the following %s output by vignette %s:"
+msgstr ""
+
+
+#: R/Vignettes.R: 0
+#. R/Vignettes.R: gettextf("Vignette '%s' is non-ASCII but has no declared encoding", name)
+#. R/Vignettes.R: gettextf("Vignette '%s' is non-ASCII but has no declared encoding", file)
+#. R/Vignettes.R: gettextf("Vignette '%s' is non-ASCII but has no declared encoding", name)
+
+msgid "Vignette '%s' is non-ASCII but has no declared encoding"
 msgstr ""
 
 
@@ -7804,6 +7827,15 @@ msgstr[1]    ""
 
 msgid        "VignetteBuilder package required for checking but not available:"
 msgid_plural "VignetteBuilder packages required for checking but not available:"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/logging.R: 0
+#. R/logging.R: ngettext(Log$errors, "WARNING: There was %d error.\n", "WARNING: There were %d errors.\n",     domain = "R-tools")
+
+msgid        "WARNING: There was %d error.\n"
+msgid_plural "WARNING: There were %d errors.\n"
 msgstr[0]    ""
 msgstr[1]    ""
 
