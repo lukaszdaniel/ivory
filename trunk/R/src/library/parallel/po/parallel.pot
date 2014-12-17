@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: parallel 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-23 06:12+0200\n"
+"POT-Creation-Date: 2014-12-17 19:07+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -161,18 +161,18 @@ msgid "child %d: exiting\n"
 msgstr ""
 
 #: fork.c:726
-msgid "'mcexit' failed"
+msgid "'mcexit()' function failed"
 msgstr ""
 
-#: fork.c:756 fork.c:765
+#: fork.c:755 fork.c:764
 msgid "invalid CPU affinity specification"
 msgstr ""
 
-#: fork.c:776
+#: fork.c:775
 msgid "requested CPU set is too large for this system"
 msgstr ""
 
-#: fork.c:799
+#: fork.c:798
 msgid "retrieving CPU affinity set failed"
 msgstr ""
 

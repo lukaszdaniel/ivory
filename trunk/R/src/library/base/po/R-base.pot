@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.2.0\n"
-"POT-Creation-Date: 2014-11-30 14:48\n"
+"POT-Creation-Date: 2014-12-17 19:07\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2353,7 +2353,6 @@ msgstr ""
 
 #: R/table.R: 0
 #. R/table.R: stop("cannot coerce to a table")
-#. R/table.R: stop("cannot coerce to a table")
 
 msgid "cannot coerce to a table"
 msgstr ""
@@ -3532,20 +3531,6 @@ msgstr ""
 
 
 #: R/library.R: 0
-#. R/library.R: gettextf("package %s %s is loaded, but %s %s is required by package %s", sQuote(pkg),     current, z$op, target, sQuote(pkgname))
-
-msgid "package %s %s is loaded, but %s %s is required by package %s"
-msgstr ""
-
-
-#: R/library.R: 0
-#. R/library.R: gettextf("package %s %s was found, but %s %s is required by package %s", sQuote(pkg),     current, z$op, target, sQuote(pkgname))
-
-msgid "package %s %s was found, but %s %s is required by package %s"
-msgstr ""
-
-
-#: R/library.R: 0
 #. R/library.R: gettextf("package %s already present in 'search()'", sQuote(package))
 
 msgid "package %s already present in 'search()'"
@@ -3635,6 +3620,20 @@ msgstr ""
 #. R/library.R: gettextf("package %s required by package %s could not be found", sQuote(pkg), sQuote(pkgname))
 
 msgid "package %s required by package %s could not be found"
+msgstr ""
+
+
+#: R/library.R: 0
+#. R/library.R: gettextf("package %s version %s is loaded, but package %s version %s is required by package %s",     sQuote(pkg), current, dep$op, target, sQuote(pkgname))
+
+msgid "package %s version %s is loaded, but package %s version %s is required by package %s"
+msgstr ""
+
+
+#: R/library.R: 0
+#. R/library.R: gettextf("package %s version %s was found, but package %s version %s is required by package %s",     sQuote(pkg), current, dep$op, target, sQuote(pkgname))
+
+msgid "package %s version %s was found, but package %s version %s is required by package %s"
 msgstr ""
 
 
@@ -4006,6 +4005,13 @@ msgstr ""
 #. R/cut.R: stop("values in 'breaks' argument are not unique")
 
 msgid "values in 'breaks' argument are not unique"
+msgstr ""
+
+
+#: R/library.R: 0
+#. R/library.R: gettextf("version %s of %s masked by %s in %s", versions[which(sufficient)[1L]],     sQuote(pkg), current, lib.loc[which(sufficient)[1L] - 1L])
+
+msgid "version %s of %s masked by %s in %s"
 msgstr ""
 
 
