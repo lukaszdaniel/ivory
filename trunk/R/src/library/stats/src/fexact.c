@@ -64,7 +64,7 @@ static double f9xact(int n, int ntot, int *ir, double *fact);
 static Rboolean f10act(int nrow, int *irow, int ncol, int *icol, double *val,
 		       double *fact, int *nd, int *ne, int *m);
 static void f11act(int *irow, int i1, int i2, int *new);
-static void prterr(int icode, const char *mes);
+static void NORET prterr(int icode, const char *mes);
 static int iwork(int iwkmax, int *iwkpt, int number, int itype);
 
 #ifdef USING_R
@@ -1793,7 +1793,7 @@ void f11act(int *irow, int i1, int i2, int *new)
 }
 
 
-void prterr(int icode, const char *mes)
+void NORET prterr(int icode, const char *mes)
 {
 /*
   -----------------------------------------------------------------------
@@ -1806,7 +1806,6 @@ void prterr(int icode, const char *mes)
   -----------------------------------------------------------------------
   */
     PROBLEM _("FEXACT error %d.\n%s"), icode, mes RECOVER(NULL_ENTRY);
-    return;
 }
 
 int iwork(int iwkmax, int *iwkpt, int number, int itype)

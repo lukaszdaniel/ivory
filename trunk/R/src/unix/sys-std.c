@@ -109,7 +109,7 @@ static RETSIGTYPE (*oldSigintHandler)(int) = SIG_DFL;
 
 typedef void (*sel_intr_handler_t)(void);
 
-static RETSIGTYPE handleSelectInterrupt(int dummy)
+static RETSIGTYPE NORET handleSelectInterrupt(int dummy)
 {
     signal(SIGINT, oldSigintHandler);
     SIGLONGJMP(seljmpbuf, 1);
@@ -1034,7 +1034,7 @@ void R_CleanTempDir(void)
 }
 
 
-void attribute_hidden Rstd_CleanUp(SA_TYPE saveact, int status, int runLast)
+void attribute_hidden NORET Rstd_CleanUp(SA_TYPE saveact, int status, int runLast)
 {
     if(saveact == SA_DEFAULT) /* The normal case apart from R_Suicide */
 	saveact = SaveAction;
