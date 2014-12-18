@@ -34,14 +34,13 @@ src/gnuwin32/run.c
 src/gnuwin32/shext.c
 src/gnuwin32/system.c
 src/gnuwin32/sys-win32.c
-src/gnuwin32/win-nls.h
-src/gnuwin32/bitmap/rbitmap.c
 src/gnuwin32/front-ends/rcmdfn.c
 src/gnuwin32/getline/getline.c
 src/gnuwin32/getline/wc_history.c
 src/gnuwin32/windlgs/src/ttest.c
 src/include/Defn.h
 src/include/Errormsg.h
+src/include/Localization.h
 src/include/Rdefines.h
 src/include/Rinlinedfuns.h
 src/include/Rinterface.h
@@ -94,11 +93,11 @@ src/main/objects.c
 src/main/options.c
 src/main/paste.c
 src/main/platform.c
-src/main/plot3d.c
 src/main/plot.c
+src/main/plot3d.c
 src/main/plotmath.c
-src/main/printarray.c
 src/main/print.c
+src/main/printarray.c
 src/main/printutils.c
 src/main/printvector.c
 src/main/qsort.c
@@ -126,7 +125,6 @@ src/main/sysutils.c
 src/main/unique.c
 src/main/util.c
 src/main/version.c
-src/main/vfonts.c
 src/main/xspline.c
 src/modules/internet/internet.c
 src/modules/internet/nanoftp.c
@@ -142,6 +140,7 @@ src/nmath/bessel_j.c
 src/nmath/bessel_k.c
 src/nmath/bessel_y.c
 src/nmath/choose.c
+src/nmath/dpq.h
 src/nmath/nmath.h
 src/nmath/pbeta.c
 src/nmath/pbinom.c
