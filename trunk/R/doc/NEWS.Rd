@@ -318,9 +318,6 @@
 
       \item Fix \code{missing()} when arguments are propagated through
       \code{\dots}; see \PR{15707}.
-
-      \item \code{library()} now considers its \code{lib.loc} parameter
-      when searching for dependencies.
     }
   }
 }

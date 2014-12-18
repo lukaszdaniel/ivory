@@ -260,7 +260,7 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
                     pos <- 2
                 } else pos <- npos
             }
-            .getRequiredPackages2(pkgInfo, quietly = quietly, lib.loc = lib.loc)
+            .getRequiredPackages2(pkgInfo, quietly = quietly)
             deps <- unique(names(pkgInfo$Depends))
 
             ## If the namespace mechanism is available and the package
