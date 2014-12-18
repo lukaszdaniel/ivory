@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-18 13:06+0100\n"
+"POT-Creation-Date: 2014-12-18 16:09+0100\n"
 "PO-Revision-Date: 2012-03-07 02:34+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -581,14 +581,20 @@ msgstr ""
 msgid ""
 "  The decimal point is %d digit to the right of the |\n"
 "\n"
-msgstr ""
+msgid_plural ""
+"  The decimal point is %d digits to the right of the |\n"
+"\n"
+msgstr[0] ""
 
 #: stem.c:112
 #, c-format
 msgid ""
 "  The decimal point is %d digit to the left of the |\n"
 "\n"
-msgstr ""
+msgid_plural ""
+"  The decimal point is %d digits to the left of the |\n"
+"\n"
+msgstr[0] ""
 
 #: stem.c:150
 #, fuzzy

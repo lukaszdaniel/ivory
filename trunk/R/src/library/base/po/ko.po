@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-18 13:06+0100\n"
+"POT-Creation-Date: 2014-12-18 16:08+0100\n"
 "PO-Revision-Date: 2012-03-07 02:34+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -48,7 +48,8 @@ msgstr ""
 #: src/appl/lbfgsb.c:1028
 #, c-format
 msgid "At X0, %d variable is exactly at the bounds"
-msgstr ""
+msgid_plural "At X0, %d variables are exactly at the bounds"
+msgstr[0] ""
 
 #: src/appl/lbfgsb.c:1397
 msgid "CAUCHY entered"
@@ -57,7 +58,8 @@ msgstr ""
 #: src/appl/lbfgsb.c:1515
 #, c-format
 msgid "There is %d breakpoint"
-msgstr ""
+msgid_plural "There are %d breakpoints"
+msgstr[0] ""
 
 #: src/appl/lbfgsb.c:1556 src/appl/lbfgsb.c:1643
 #, c-format
@@ -100,17 +102,20 @@ msgstr ""
 #: src/appl/lbfgsb.c:2319
 #, fuzzy, c-format
 msgid "%d variable leave"
-msgstr "잘못된 변수명입니다"
+msgid_plural "%d variables leave"
+msgstr[0] "잘못된 변수명입니다"
 
 #: src/appl/lbfgsb.c:2321
 #, fuzzy, c-format
 msgid "%d variable enter"
-msgstr "잘못된 변수명입니다"
+msgid_plural "%d variables enter"
+msgstr[0] "잘못된 변수명입니다"
 
 #: src/appl/lbfgsb.c:2340
 #, c-format
 msgid "%d variable is free at GCP on iteration %d"
-msgstr ""
+msgid_plural "%d variables are free at GCP on iteration %d"
+msgstr[0] ""
 
 #: src/appl/lbfgsb.c:3586
 #, c-format
@@ -247,7 +252,8 @@ msgstr ""
 #: src/appl/optim.c:469 src/appl/optim.c:646
 #, fuzzy, c-format
 msgid "%d function evaluation used"
-msgstr "실행이 정지되었습니다\n"
+msgid_plural "%d function evaluations used"
+msgstr[0] "실행이 정지되었습니다\n"
 
 #: src/appl/optim.c:502
 msgid "  Conjugate gradients function minimizer"
@@ -286,7 +292,8 @@ msgstr ""
 #: src/appl/optim.c:648
 #, fuzzy, c-format
 msgid "%d gradient evaluation used"
-msgstr "실행이 정지되었습니다\n"
+msgid_plural "%d gradient evaluations used"
+msgstr[0] "실행이 정지되었습니다\n"
 
 #: src/appl/optim.c:678
 msgid "REPORT must be > 0 (method = \"L-BFGS-B\")"
@@ -356,7 +363,8 @@ msgstr ""
 #: src/extra/bzip2/blocksort.c:311
 #, c-format
 msgid "%6d unresolved string\n"
-msgstr ""
+msgid_plural "%6d unresolved strings\n"
+msgstr[0] ""
 
 #: src/extra/bzip2/blocksort.c:323
 msgid "        reconstructing block ...\n"
@@ -1270,7 +1278,8 @@ msgstr "잘못된 단항 연산자입니다"
 #: src/main/arithmetic.c:2131
 #, fuzzy, c-format
 msgid "unimplemented real function of %d numeric argument"
-msgstr "%d 개의 수치 인수를 가지는 구현되지 않은 수학 함수"
+msgid_plural "unimplemented real function of %d numeric arguments"
+msgstr[0] "%d 개의 수치 인수를 가지는 구현되지 않은 수학 함수"
 
 #: src/main/arithmetic.c:1195 src/main/complex.c:644 src/main/complex.c:714
 msgid "unimplemented complex function"
@@ -1279,7 +1288,9 @@ msgstr "구현되지 않은 복소 함수"
 #: src/main/arithmetic.c:1495
 #, fuzzy, c-format
 msgid "%d argument passed to '%s' function which requires 1 or 2 arguments"
-msgstr "%d arguments passed to '%s' which requires %d"
+msgid_plural ""
+"%d arguments passed to '%s' function which requires 1 or 2 arguments"
+msgstr[0] "%d arguments passed to '%s' which requires %d"
 
 #: src/main/arithmetic.c:1513
 msgid "invalid second argument of length 0"
@@ -4050,7 +4061,8 @@ msgstr "경고 메시지가 손실되었습니다\n"
 #: src/main/errors.c:440
 #, fuzzy
 msgid "Warning message:"
-msgstr "경고 메시지가 손실되었습니다\n"
+msgid_plural "Warning messages:"
+msgstr[0] "경고 메시지가 손실되었습니다\n"
 
 #: src/main/errors.c:469 src/main/errors.c:497
 #, fuzzy, c-format
@@ -4062,7 +4074,8 @@ msgstr ""
 #: src/main/errors.c:522
 #, fuzzy, c-format
 msgid "There was %d warning (use 'warnings()' to see it)"
-msgstr "%d 개의 경고가있었습니다 (경고를 보려면 warnings()를 사용하세요)\n"
+msgid_plural "There were %d warnings (use 'warnings()' to see them)"
+msgstr[0] "%d 개의 경고가있었습니다 (경고를 보려면 warnings()를 사용하세요)\n"
 
 #: src/main/errors.c:527
 #, fuzzy, c-format
@@ -4098,7 +4111,8 @@ msgstr "에러:"
 #: src/main/errors.c:703 src/main/errors.c:1330
 #, fuzzy
 msgid "Additional warning message:"
-msgstr "경고 메시지가 손실되었습니다\n"
+msgid_plural "Additional warning messages:"
+msgstr[0] "경고 메시지가 손실되었습니다\n"
 
 #: src/main/errors.c:906
 msgid "Execution halted\n"
@@ -4848,7 +4862,8 @@ msgstr "지정된 벡터의 크기가 너무 큽니다"
 #: src/main/identical.c:58 src/main/util.c:495 src/main/util.c:501
 #, fuzzy, c-format
 msgid "%d argument passed to '%s' function which requires %d"
-msgstr "%d arguments passed to '%s' which requires %d"
+msgid_plural "%d arguments passed to '%s' function which requires %d"
+msgstr[0] "%d arguments passed to '%s' which requires %d"
 
 #: src/main/identical.c:128
 msgid "ignoring non-pairlist attributes"
@@ -5119,7 +5134,8 @@ msgstr "%s 에 저장된 데이터를 복구할 수 없습니다 \n"
 #: src/main/main.c:977
 #, fuzzy
 msgid "Warning message during startup:"
-msgstr "시작하고 있습니다 - "
+msgid_plural "Warning messages during startup:"
+msgstr[0] "시작하고 있습니다 - "
 
 #: src/main/main.c:1024
 #, c-format
@@ -5220,7 +5236,8 @@ msgstr "'%s'의 '%s'에 대한 인자는 부분적으로 일치합니다"
 #: src/main/match.c:378
 #, fuzzy, c-format
 msgid "unused argument %s"
-msgstr "사용되지 않은 인수 %s"
+msgid_plural "unused arguments %s"
+msgstr[0] "사용되지 않은 인수 %s"
 
 #: src/main/memory.c:165
 #, c-format
@@ -5439,7 +5456,8 @@ msgstr "protect () : 보호 스택이 가득 찼습니다"
 #: src/main/memory.c:3056
 #, fuzzy, c-format
 msgid "unprotect(): only %d protected item"
-msgstr "unprotect () : %d 개의 보호된 항목"
+msgid_plural "unprotect(): only %d protected items"
+msgstr[0] "unprotect () : %d 개의 보호된 항목"
 
 #: src/main/memory.c:3091
 msgid "unprotect_ptr: pointer not found"
@@ -5448,7 +5466,8 @@ msgstr "unprotect_ptr : 포인터가 없습니다"
 #: src/main/memory.c:3129
 #, fuzzy, c-format
 msgid "R_Reprotect: only %d protected items, can't reprotect index %d"
-msgstr "unprotect () : %d 개의 보호된 항목"
+msgid_plural "R_Reprotect: only %d protected items, can't reprotect index %d"
+msgstr[0] "unprotect () : %d 개의 보호된 항목"
 
 #: src/main/memory.c:3181
 #, fuzzy, c-format
@@ -6277,7 +6296,8 @@ msgstr ""
 #: src/main/print.c:491 src/main/printvector.c:209 src/main/printvector.c:353
 #, fuzzy, c-format
 msgid " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]"
-msgstr ""
+msgid_plural " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]"
+msgstr[0] ""
 "[getOption(\\\"max.print\\\")에 도달했습니다 -- %d 행을 생략합니다]] \n"
 
 #: src/main/print.c:512
@@ -6357,7 +6377,8 @@ msgstr ""
 #: src/main/printarray.c:368
 #, fuzzy, c-format
 msgid " [ reached 'getOption(\"max.print\")' -- omitted %d row ]"
-msgstr ""
+msgid_plural " [ reached 'getOption(\"max.print\")' -- omitted %d rows ]"
+msgstr[0] ""
 "[getOption(\\\"max.print\\\")에 도달했습니다 -- %d 행을 생략합니다]] \n"
 
 #: src/main/printarray.c:473
@@ -6389,13 +6410,18 @@ msgstr ""
 #, fuzzy, c-format
 msgid ""
 " [ reached 'getOption(\"max.print\")' -- omitted %d row and %d matrix slice ]"
-msgstr ""
+msgid_plural ""
+" [ reached 'getOption(\"max.print\")' -- omitted %d rows and %d matrix "
+"slices ]"
+msgstr[0] ""
 "[getOption(\\\"max.print\\\")에 도달했습니다 -- %d 행을 생략합니다]] \n"
 
 #: src/main/printarray.c:525
 #, fuzzy, c-format
 msgid " [ reached 'getOption(\"max.print\")' -- omitted %d matrix slice ]"
-msgstr ""
+msgid_plural ""
+" [ reached 'getOption(\"max.print\")' -- omitted %d matrix slices ]"
+msgstr[0] ""
 "[getOption(\\\"max.print\\\")에 도달했습니다 -- %d 행을 생략합니다]] \n"
 
 #: src/main/printutils.c:155 src/main/printutils.c:157
@@ -6538,7 +6564,8 @@ msgstr "공유 라이브러리 '%s'는 로드되지 않았습니다"
 #: src/main/Rdynload.c:980
 #, fuzzy, c-format
 msgid "cannot allocate memory for registered native symbol (%d byte)"
-msgstr "등록된 네이티브 심볼을 위해 메모리를 할당할 수 없습니다 (%d bytes)"
+msgid_plural "cannot allocate memory for registered native symbol (%d bytes)"
+msgstr[0] "등록된 네이티브 심볼을 위해 메모리를 할당할 수 없습니다 (%d bytes)"
 
 #: src/main/Rdynload.c:1103 src/main/Rdynload.c:1324
 msgid "must pass package name or DllInfo reference"
@@ -7030,7 +7057,8 @@ msgstr "scan 함수는 '%s'를 기대하는데, '%s'를 받았습니다"
 #: src/main/scan.c:613
 #, c-format
 msgid "Read %d item\n"
-msgstr ""
+msgid_plural "Read %d items\n"
+msgstr[0] ""
 
 #: src/main/scan.c:671
 msgid "empty 'what' specified"
@@ -7048,7 +7076,8 @@ msgstr "읽어들인 항목의 수가 열 수의 배수가 아닙니다"
 #: src/main/scan.c:782
 #, c-format
 msgid "Read %d record\n"
-msgstr ""
+msgid_plural "Read %d records\n"
+msgstr[0] ""
 
 #: src/main/scan.c:869
 msgid "invalid 'strip.white' length"
@@ -7086,7 +7115,8 @@ msgstr "결과 벡터가 너무 깁니다"
 #: src/main/seq.c:163 src/main/seq.c:168
 #, fuzzy, c-format
 msgid "numerical expression has %d element: only the first used"
-msgstr "수치식이 %d 요소를 가지고 있습니다: 최초 요소만 사용될 것입니다"
+msgid_plural "numerical expression has %d elements: only the first used"
+msgstr[0] "수치식이 %d 요소를 가지고 있습니다: 최초 요소만 사용될 것입니다"
 
 #: src/main/seq.c:174
 msgid "NA/NaN argument"
@@ -8377,7 +8407,8 @@ msgstr ""
 #: src/modules/internet/internet.c:448 src/modules/internet/internet.c:558
 #, c-format
 msgid "downloaded %d byte"
-msgstr ""
+msgid_plural "downloaded %d bytes"
+msgstr[0] ""
 
 #: src/modules/internet/internet.c:459 src/modules/internet/internet.c:569
 #, fuzzy, c-format
@@ -8397,17 +8428,20 @@ msgstr "열 수 없습니다 : HTTP 상태는 '%d %s'였습니다"
 #: src/modules/internet/internet.c:612 src/modules/internet/internet.c:857
 #, c-format
 msgid "Content type '%s' length %0.0f byte (%0.1f MB)\n"
-msgstr ""
+msgid_plural "Content type '%s' length %0.0f bytes (%0.1f MB)\n"
+msgstr[0] ""
 
 #: src/modules/internet/internet.c:616 src/modules/internet/internet.c:859
 #, c-format
 msgid "Content type '%s' length %d byte (%d KB)\n"
-msgstr ""
+msgid_plural "Content type '%s' length %d bytes (%d KB)\n"
+msgstr[0] ""
 
 #: src/modules/internet/internet.c:620 src/modules/internet/internet.c:861
 #, c-format
 msgid "Content type '%s' length %d byte\n"
-msgstr ""
+msgid_plural "Content type '%s' length %d bytes\n"
+msgstr[0] ""
 
 #: src/modules/internet/internet.c:623
 #, c-format
@@ -8440,7 +8474,8 @@ msgstr "Internet read timed out"
 #: src/modules/internet/internet.c:928
 #, c-format
 msgid "using Asynchronous WinInet calls, timeout %d sec\n"
-msgstr ""
+msgid_plural "using Asynchronous WinInet calls, timeout %d secs\n"
+msgstr[0] ""
 
 #: src/modules/internet/internet.c:956
 msgid "using Synchronous WinInet calls\n"
@@ -8574,7 +8609,8 @@ msgstr "'%s'에 포트 %d로 연결할 수 없습니다"
 #: src/modules/internet/nanohttp.c:1405
 #, c-format
 msgid "ERROR: overflowed buffer by %d byte\n"
-msgstr ""
+msgid_plural "ERROR: overflowed buffer by %d bytes\n"
+msgstr[0] ""
 
 #: src/modules/internet/nanohttp.c:1432
 msgid ""

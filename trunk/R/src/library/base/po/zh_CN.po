@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-18 13:06+0100\n"
+"POT-Creation-Date: 2014-12-18 16:08+0100\n"
 "PO-Revision-Date: 2005-05-20 18:26+0800\n"
 "Last-Translator: ronggui\n"
 "Language-Team: Chinese\n"
@@ -45,7 +45,8 @@ msgstr ""
 #: src/appl/lbfgsb.c:1028
 #, c-format
 msgid "At X0, %d variable is exactly at the bounds"
-msgstr ""
+msgid_plural "At X0, %d variables are exactly at the bounds"
+msgstr[0] ""
 
 #: src/appl/lbfgsb.c:1397
 msgid "CAUCHY entered"
@@ -54,7 +55,8 @@ msgstr ""
 #: src/appl/lbfgsb.c:1515
 #, c-format
 msgid "There is %d breakpoint"
-msgstr ""
+msgid_plural "There are %d breakpoints"
+msgstr[0] ""
 
 #: src/appl/lbfgsb.c:1556 src/appl/lbfgsb.c:1643
 #, c-format
@@ -97,17 +99,20 @@ msgstr ""
 #: src/appl/lbfgsb.c:2319
 #, fuzzy, c-format
 msgid "%d variable leave"
-msgstr "变数名字不对"
+msgid_plural "%d variables leave"
+msgstr[0] "变数名字不对"
 
 #: src/appl/lbfgsb.c:2321
 #, fuzzy, c-format
 msgid "%d variable enter"
-msgstr "变数名字不对"
+msgid_plural "%d variables enter"
+msgstr[0] "变数名字不对"
 
 #: src/appl/lbfgsb.c:2340
 #, c-format
 msgid "%d variable is free at GCP on iteration %d"
-msgstr ""
+msgid_plural "%d variables are free at GCP on iteration %d"
+msgstr[0] ""
 
 #: src/appl/lbfgsb.c:3586
 #, c-format
@@ -244,7 +249,8 @@ msgstr ""
 #: src/appl/optim.c:469 src/appl/optim.c:646
 #, fuzzy, c-format
 msgid "%d function evaluation used"
-msgstr "停止执行\n"
+msgid_plural "%d function evaluations used"
+msgstr[0] "停止执行\n"
 
 #: src/appl/optim.c:502
 msgid "  Conjugate gradients function minimizer"
@@ -283,7 +289,8 @@ msgstr ""
 #: src/appl/optim.c:648
 #, fuzzy, c-format
 msgid "%d gradient evaluation used"
-msgstr "停止执行\n"
+msgid_plural "%d gradient evaluations used"
+msgstr[0] "停止执行\n"
 
 #: src/appl/optim.c:678
 msgid "REPORT must be > 0 (method = \"L-BFGS-B\")"
@@ -353,7 +360,8 @@ msgstr ""
 #: src/extra/bzip2/blocksort.c:311
 #, c-format
 msgid "%6d unresolved string\n"
-msgstr ""
+msgid_plural "%6d unresolved strings\n"
+msgstr[0] ""
 
 #: src/extra/bzip2/blocksort.c:323
 msgid "        reconstructing block ...\n"
@@ -1265,7 +1273,8 @@ msgstr "一进列运算符不对"
 #: src/main/arithmetic.c:2131
 #, fuzzy, c-format
 msgid "unimplemented real function of %d numeric argument"
-msgstr "%d数值参数的实数函数目前没有实现"
+msgid_plural "unimplemented real function of %d numeric arguments"
+msgstr[0] "%d数值参数的实数函数目前没有实现"
 
 #: src/main/arithmetic.c:1195 src/main/complex.c:644 src/main/complex.c:714
 msgid "unimplemented complex function"
@@ -1274,7 +1283,9 @@ msgstr "目前没有实现复数功能"
 #: src/main/arithmetic.c:1495
 #, fuzzy, c-format
 msgid "%d argument passed to '%s' function which requires 1 or 2 arguments"
-msgstr "%d个参数给'%s'，但它只需要%d个"
+msgid_plural ""
+"%d arguments passed to '%s' function which requires 1 or 2 arguments"
+msgstr[0] "%d个参数给'%s'，但它只需要%d个"
 
 #: src/main/arithmetic.c:1513
 msgid "invalid second argument of length 0"
@@ -4014,7 +4025,8 @@ msgstr "警告信息丢失\n"
 #: src/main/errors.c:440
 #, fuzzy
 msgid "Warning message:"
-msgstr "警告信息：\n"
+msgid_plural "Warning messages:"
+msgstr[0] "警告信息：\n"
 
 #: src/main/errors.c:469 src/main/errors.c:497
 #, fuzzy, c-format
@@ -4026,7 +4038,8 @@ msgstr ""
 #: src/main/errors.c:522
 #, fuzzy, c-format
 msgid "There was %d warning (use 'warnings()' to see it)"
-msgstr "共有%d个警告 (用warnings()来显示)\n"
+msgid_plural "There were %d warnings (use 'warnings()' to see them)"
+msgstr[0] "共有%d个警告 (用warnings()来显示)\n"
 
 #: src/main/errors.c:527
 #, fuzzy, c-format
@@ -4060,7 +4073,8 @@ msgstr "错误: "
 #: src/main/errors.c:703 src/main/errors.c:1330
 #, fuzzy
 msgid "Additional warning message:"
-msgstr "警告信息丢失\n"
+msgid_plural "Additional warning messages:"
+msgstr[0] "警告信息丢失\n"
 
 #: src/main/errors.c:906
 msgid "Execution halted\n"
@@ -4805,7 +4819,8 @@ msgstr "矢量size设得太大了"
 #: src/main/identical.c:58 src/main/util.c:495 src/main/util.c:501
 #, fuzzy, c-format
 msgid "%d argument passed to '%s' function which requires %d"
-msgstr "%d个参数给'%s'，但它只需要%d个"
+msgid_plural "%d arguments passed to '%s' function which requires %d"
+msgstr[0] "%d个参数给'%s'，但它只需要%d个"
 
 #: src/main/identical.c:128
 msgid "ignoring non-pairlist attributes"
@@ -5076,7 +5091,8 @@ msgstr "无法復原保存在%s里的数据\n"
 #: src/main/main.c:977
 #, fuzzy
 msgid "Warning message during startup:"
-msgstr "在启动过程中 - "
+msgid_plural "Warning messages during startup:"
+msgstr[0] "在启动过程中 - "
 
 #: src/main/main.c:1024
 #, c-format
@@ -5176,7 +5192,8 @@ msgstr "'%s'部分匹配为'%s'"
 #: src/main/match.c:378
 #, fuzzy, c-format
 msgid "unused argument %s"
-msgstr "参数(%s) 没有用"
+msgid_plural "unused arguments %s"
+msgstr[0] "参数(%s) 没有用"
 
 #: src/main/memory.c:165
 #, c-format
@@ -5395,7 +5412,8 @@ msgstr "protect()：防护堆叠上溢"
 #: src/main/memory.c:3056
 #, fuzzy, c-format
 msgid "unprotect(): only %d protected item"
-msgstr "unprotect():只有%d个保护项"
+msgid_plural "unprotect(): only %d protected items"
+msgstr[0] "unprotect():只有%d个保护项"
 
 #: src/main/memory.c:3091
 msgid "unprotect_ptr: pointer not found"
@@ -5404,7 +5422,8 @@ msgstr "unprotect_ptr: 找不到指针"
 #: src/main/memory.c:3129
 #, fuzzy, c-format
 msgid "R_Reprotect: only %d protected items, can't reprotect index %d"
-msgstr "unprotect():只有%d个保护项"
+msgid_plural "R_Reprotect: only %d protected items, can't reprotect index %d"
+msgstr[0] "unprotect():只有%d个保护项"
 
 #: src/main/memory.c:3181
 #, fuzzy, c-format
@@ -6225,7 +6244,8 @@ msgstr ""
 #: src/main/print.c:491 src/main/printvector.c:209 src/main/printvector.c:353
 #, fuzzy, c-format
 msgid " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]"
-msgstr "[到达getOption(\"max.print\") -- 略过%d行]]\n"
+msgid_plural " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]"
+msgstr[0] "[到达getOption(\"max.print\") -- 略过%d行]]\n"
 
 #: src/main/print.c:512
 #, c-format
@@ -6304,7 +6324,8 @@ msgstr ""
 #: src/main/printarray.c:368
 #, fuzzy, c-format
 msgid " [ reached 'getOption(\"max.print\")' -- omitted %d row ]"
-msgstr "[到达getOption(\"max.print\") -- 略过%d行]]\n"
+msgid_plural " [ reached 'getOption(\"max.print\")' -- omitted %d rows ]"
+msgstr[0] "[到达getOption(\"max.print\") -- 略过%d行]]\n"
 
 #: src/main/printarray.c:473
 #, c-format
@@ -6335,12 +6356,17 @@ msgstr ""
 #, fuzzy, c-format
 msgid ""
 " [ reached 'getOption(\"max.print\")' -- omitted %d row and %d matrix slice ]"
-msgstr "[到达getOption(\"max.print\") -- 略过%d行]]\n"
+msgid_plural ""
+" [ reached 'getOption(\"max.print\")' -- omitted %d rows and %d matrix "
+"slices ]"
+msgstr[0] "[到达getOption(\"max.print\") -- 略过%d行]]\n"
 
 #: src/main/printarray.c:525
 #, fuzzy, c-format
 msgid " [ reached 'getOption(\"max.print\")' -- omitted %d matrix slice ]"
-msgstr "[到达getOption(\"max.print\") -- 略过%d行]]\n"
+msgid_plural ""
+" [ reached 'getOption(\"max.print\")' -- omitted %d matrix slices ]"
+msgstr[0] "[到达getOption(\"max.print\") -- 略过%d行]]\n"
 
 #: src/main/printutils.c:155 src/main/printutils.c:157
 #: src/main/printutils.c:159 src/main/printutils.c:161
@@ -6484,7 +6510,8 @@ msgstr "没有载入共享目标对象'%s'"
 #: src/main/Rdynload.c:980
 #, fuzzy, c-format
 msgid "cannot allocate memory for registered native symbol (%d byte)"
-msgstr "无法给注册了的原始符号分配内存(%d字节)"
+msgid_plural "cannot allocate memory for registered native symbol (%d bytes)"
+msgstr[0] "无法给注册了的原始符号分配内存(%d字节)"
 
 #: src/main/Rdynload.c:1103 src/main/Rdynload.c:1324
 msgid "must pass package name or DllInfo reference"
@@ -6970,7 +6997,8 @@ msgstr "scan()需要'%s', 而不是'%s'"
 #: src/main/scan.c:613
 #, c-format
 msgid "Read %d item\n"
-msgstr ""
+msgid_plural "Read %d items\n"
+msgstr[0] ""
 
 #: src/main/scan.c:671
 msgid "empty 'what' specified"
@@ -6988,7 +7016,8 @@ msgstr "读取的项目数必需是列数的倍数"
 #: src/main/scan.c:782
 #, c-format
 msgid "Read %d record\n"
-msgstr ""
+msgid_plural "Read %d records\n"
+msgstr[0] ""
 
 #: src/main/scan.c:869
 msgid "invalid 'strip.white' length"
@@ -7026,7 +7055,8 @@ msgstr "答案矢量会太长"
 #: src/main/seq.c:163 src/main/seq.c:168
 #, fuzzy, c-format
 msgid "numerical expression has %d element: only the first used"
-msgstr "数值表达式一共有%d元素: 只用了第一个"
+msgid_plural "numerical expression has %d elements: only the first used"
+msgstr[0] "数值表达式一共有%d元素: 只用了第一个"
 
 #: src/main/seq.c:174
 msgid "NA/NaN argument"
@@ -8309,7 +8339,8 @@ msgstr ""
 #: src/modules/internet/internet.c:448 src/modules/internet/internet.c:558
 #, c-format
 msgid "downloaded %d byte"
-msgstr ""
+msgid_plural "downloaded %d bytes"
+msgstr[0] ""
 
 #: src/modules/internet/internet.c:459 src/modules/internet/internet.c:569
 #, fuzzy, c-format
@@ -8329,17 +8360,20 @@ msgstr "无法打开: HTTP状态是'%d%s'"
 #: src/modules/internet/internet.c:612 src/modules/internet/internet.c:857
 #, c-format
 msgid "Content type '%s' length %0.0f byte (%0.1f MB)\n"
-msgstr ""
+msgid_plural "Content type '%s' length %0.0f bytes (%0.1f MB)\n"
+msgstr[0] ""
 
 #: src/modules/internet/internet.c:616 src/modules/internet/internet.c:859
 #, c-format
 msgid "Content type '%s' length %d byte (%d KB)\n"
-msgstr ""
+msgid_plural "Content type '%s' length %d bytes (%d KB)\n"
+msgstr[0] ""
 
 #: src/modules/internet/internet.c:620 src/modules/internet/internet.c:861
 #, c-format
 msgid "Content type '%s' length %d byte\n"
-msgstr ""
+msgid_plural "Content type '%s' length %d bytes\n"
+msgstr[0] ""
 
 #: src/modules/internet/internet.c:623
 #, c-format
@@ -8372,7 +8406,8 @@ msgstr "互联网读取超时"
 #: src/modules/internet/internet.c:928
 #, c-format
 msgid "using Asynchronous WinInet calls, timeout %d sec\n"
-msgstr ""
+msgid_plural "using Asynchronous WinInet calls, timeout %d secs\n"
+msgstr[0] ""
 
 #: src/modules/internet/internet.c:956
 msgid "using Synchronous WinInet calls\n"
@@ -8506,7 +8541,8 @@ msgstr "无法通过通訊埠%2$d连接到'%1$s'."
 #: src/modules/internet/nanohttp.c:1405
 #, c-format
 msgid "ERROR: overflowed buffer by %d byte\n"
-msgstr ""
+msgid_plural "ERROR: overflowed buffer by %d bytes\n"
+msgstr[0] ""
 
 #: src/modules/internet/nanohttp.c:1432
 msgid ""
