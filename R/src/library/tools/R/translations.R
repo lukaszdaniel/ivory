@@ -174,7 +174,7 @@ update_pkg_po <- function(pkgdir, pkg = NULL, version = NULL, copyright, bugs)
         od <- setwd("../../..")
         cfiles <- grep("^#", readLines("po/POTFILES"), value = TRUE, invert = TRUE)
     }
-    cmd <- sprintf("xgettext --keyword=_ --keyword=N_ --keyword=n_ -o %s", shQuote(ofile))
+    cmd <- sprintf("xgettext --keyword=_ --keyword=N_ --keyword=n_:1,2 -o %s", shQuote(ofile))
     cmd <- c(cmd, paste("--package-name", name, sep = "="),
              paste("--package-version", version, sep = "="),
              "--add-comments=TRANSLATORS:",

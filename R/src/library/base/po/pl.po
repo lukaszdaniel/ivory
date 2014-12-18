@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-18 13:06+0100\n"
+"POT-Creation-Date: 2014-12-18 16:08+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -45,7 +45,10 @@ msgstr "Ten problem nie jest ograniczony."
 #: src/appl/lbfgsb.c:1028
 #, c-format
 msgid "At X0, %d variable is exactly at the bounds"
-msgstr "W 'X0', %d zmienna jest dokładnie na brzegu"
+msgid_plural "At X0, %d variables are exactly at the bounds"
+msgstr[0] "W 'X0', %d zmienna jest dokładnie na brzegu"
+msgstr[1] "W 'X0', %d zmienne są dokładnie na brzegu"
+msgstr[2] "W 'X0', %d zmiennych jest dokładnie na brzegu"
 
 #: src/appl/lbfgsb.c:1397
 msgid "CAUCHY entered"
@@ -54,7 +57,10 @@ msgstr "wejście do CAUCHY"
 #: src/appl/lbfgsb.c:1515
 #, c-format
 msgid "There is %d breakpoint"
-msgstr "Jest %d przerwa"
+msgid_plural "There are %d breakpoints"
+msgstr[0] "Jest %d przerwa"
+msgstr[1] "Są %d przerwy"
+msgstr[2] "Jest %d przerw"
 
 #: src/appl/lbfgsb.c:1556 src/appl/lbfgsb.c:1643
 #, c-format
@@ -97,17 +103,26 @@ msgstr "Zmienna %d wchodzi do zbioru wolnych zmiennych"
 #: src/appl/lbfgsb.c:2319
 #, c-format
 msgid "%d variable leave"
-msgstr "%d zmienna wychodzi"
+msgid_plural "%d variables leave"
+msgstr[0] "%d zmienna wychodzi"
+msgstr[1] "%d zmienne wychodzą"
+msgstr[2] "%d zmiennych wychodzi"
 
 #: src/appl/lbfgsb.c:2321
 #, c-format
 msgid "%d variable enter"
-msgstr "%d zmienna wchodzi"
+msgid_plural "%d variables enter"
+msgstr[0] "%d zmienna wchodzi"
+msgstr[1] "%d zmienne wchodzą"
+msgstr[2] "%d zmiennych wchodzi"
 
 #: src/appl/lbfgsb.c:2340
 #, c-format
 msgid "%d variable is free at GCP on iteration %d"
-msgstr "%d zmienna jest wolna w GCP w iteracji %d"
+msgid_plural "%d variables are free at GCP on iteration %d"
+msgstr[0] "%d zmienna jest wolna w GCP w iteracji %d"
+msgstr[1] "%d zmienne są wolne w GCP w iteracji %d"
+msgstr[2] "%d zmiennych jest wolnych w GCP w iteracji %d"
 
 #: src/appl/lbfgsb.c:3586
 #, c-format
@@ -260,7 +275,10 @@ msgstr "Wychodzenie z minimalizera Nelder'a Mead'a"
 #: src/appl/optim.c:469 src/appl/optim.c:646
 #, c-format
 msgid "%d function evaluation used"
-msgstr "wykonano %d obliczenie funkcji"
+msgid_plural "%d function evaluations used"
+msgstr[0] "wykonano %d obliczenie funkcji"
+msgstr[1] "wykonano %d obliczenia funkcji"
+msgstr[2] "wykonano %d obliczeń funkcji"
 
 #: src/appl/optim.c:502
 msgid "  Conjugate gradients function minimizer"
@@ -298,7 +316,10 @@ msgstr "Wychodzenie z minimalizatora metodą sprzężonych gradientów"
 #: src/appl/optim.c:648
 #, c-format
 msgid "%d gradient evaluation used"
-msgstr "wykonano %d obliczenie gradientu"
+msgid_plural "%d gradient evaluations used"
+msgstr[0] "wykonano %d obliczenie gradientu"
+msgstr[1] "wykonano %d obliczenia gradientu"
+msgstr[2] "wykonano %d obliczeń gradientu"
 
 #: src/appl/optim.c:678
 msgid "REPORT must be > 0 (method = \"L-BFGS-B\")"
@@ -367,7 +388,10 @@ msgstr "        sortowanie kubełkowe ...\n"
 #: src/extra/bzip2/blocksort.c:311
 #, c-format
 msgid "%6d unresolved string\n"
-msgstr "%6d nierozwiązany łańcuch\n"
+msgid_plural "%6d unresolved strings\n"
+msgstr[0] "%6d nierozwiązany łańcuch\n"
+msgstr[1] "%6d nierozwiązane łańcuchy\n"
+msgstr[2] "%6d nierozwiązanych łańcuchów\n"
 
 #: src/extra/bzip2/blocksort.c:323
 msgid "        reconstructing block ...\n"
@@ -1275,7 +1299,10 @@ msgstr "niepoprawny operator jednoargumentowy"
 #: src/main/arithmetic.c:2131
 #, c-format
 msgid "unimplemented real function of %d numeric argument"
-msgstr "niezaimplementowana rzeczywista funkcja %d argumentu liczbowego"
+msgid_plural "unimplemented real function of %d numeric arguments"
+msgstr[0] "niezaimplementowana rzeczywista funkcja %d argumentu liczbowego"
+msgstr[1] "niezaimplementowana rzeczywista funkcja %d argumentów liczbowych"
+msgstr[2] "niezaimplementowana rzeczywista funkcja %d argumentów liczbowych"
 
 #: src/main/arithmetic.c:1195 src/main/complex.c:644 src/main/complex.c:714
 msgid "unimplemented complex function"
@@ -1284,8 +1311,14 @@ msgstr "niezaimplementowana funkcja zespolona"
 #: src/main/arithmetic.c:1495
 #, c-format
 msgid "%d argument passed to '%s' function which requires 1 or 2 arguments"
-msgstr ""
+msgid_plural ""
+"%d arguments passed to '%s' function which requires 1 or 2 arguments"
+msgstr[0] ""
 "przekazano %d argument do funkcji '%s', która wymaga 1 lub 2 argumentów"
+msgstr[1] ""
+"przekazano %d argumenty do funkcji '%s', która wymaga 1 lub 2 argumentów"
+msgstr[2] ""
+"przekazano %d argumentów do funkcji '%s', która wymaga 1 lub 2 argumentów"
 
 #: src/main/arithmetic.c:1513
 msgid "invalid second argument of length 0"
@@ -3980,7 +4013,10 @@ msgstr "Utracono komunikaty ostrzegawcze"
 
 #: src/main/errors.c:440
 msgid "Warning message:"
-msgstr "Komunikat ostrzegawczy:"
+msgid_plural "Warning messages:"
+msgstr[0] "Komunikat ostrzegawczy:"
+msgstr[1] "Komunikaty ostrzegawcze:"
+msgstr[2] "Komunikaty ostrzegawcze:"
 
 #: src/main/errors.c:469 src/main/errors.c:497
 #, c-format
@@ -3990,7 +4026,10 @@ msgstr "W poleceniu '%s':"
 #: src/main/errors.c:522
 #, c-format
 msgid "There was %d warning (use 'warnings()' to see it)"
-msgstr "Było %d ostrzeżenie (użyj 'warnings()' aby je zobaczyć)"
+msgid_plural "There were %d warnings (use 'warnings()' to see them)"
+msgstr[0] "Było %d ostrzeżenie (użyj 'warnings()' aby je zobaczyć)"
+msgstr[1] "Były %d ostrzeżenia (użyj 'warnings()' aby je zobaczyć)"
+msgstr[2] "Było %d ostrzeżeń (użyj 'warnings()' aby je zobaczyć)"
 
 #: src/main/errors.c:527
 #, c-format
@@ -4023,7 +4062,10 @@ msgstr "BŁĄD: "
 
 #: src/main/errors.c:703 src/main/errors.c:1330
 msgid "Additional warning message:"
-msgstr "Dodatkowy komunikat ostrzegawczy:"
+msgid_plural "Additional warning messages:"
+msgstr[0] "Dodatkowy komunikat ostrzegawczy:"
+msgstr[1] "Dodatkowe komunikaty ostrzegawcze:"
+msgstr[2] "Dodatkowe komunikaty ostrzegawcze:"
 
 #: src/main/errors.c:906
 msgid "Execution halted\n"
@@ -4765,7 +4807,10 @@ msgstr "wektor jest zbyt duży"
 #: src/main/identical.c:58 src/main/util.c:495 src/main/util.c:501
 #, c-format
 msgid "%d argument passed to '%s' function which requires %d"
-msgstr "przekazano %d argument do funkcji '%s', która wymaga %d"
+msgid_plural "%d arguments passed to '%s' function which requires %d"
+msgstr[0] "przekazano %d argument do funkcji '%s', która wymaga %d"
+msgstr[1] "przekazano %d argumenty do funkcji '%s', która wymaga %d"
+msgstr[2] "przekazano %d argumentów do funkcji '%s', która wymaga %d"
 
 #: src/main/identical.c:128
 msgid "ignoring non-pairlist attributes"
@@ -5044,7 +5089,10 @@ msgstr "nie można odtworzyć zapisanych danych w '%s'\n"
 
 #: src/main/main.c:977
 msgid "Warning message during startup:"
-msgstr "Komunikat ostrzegawczy podczas uruchamiania:"
+msgid_plural "Warning messages during startup:"
+msgstr[0] "Komunikat ostrzegawczy podczas uruchamiania:"
+msgstr[1] "Komunikaty ostrzegawcze podczas uruchamiania:"
+msgstr[2] "Komunikaty ostrzegawcze podczas uruchamiania:"
 
 #: src/main/main.c:1024
 #, c-format
@@ -5141,7 +5189,10 @@ msgstr "częściowa zgodność pomiędzy argumentami '%s' oraz '%s'"
 #: src/main/match.c:378
 #, c-format
 msgid "unused argument %s"
-msgstr "nieużywany argument %s"
+msgid_plural "unused arguments %s"
+msgstr[0] "nieużywany argument %s"
+msgstr[1] "nieużywane argumenty %s"
+msgstr[2] "nieużywane argumenty %s"
 
 #: src/main/memory.c:165
 #, c-format
@@ -5360,7 +5411,10 @@ msgstr "protect(): zabezpieczenie stosu przed przepełnieniem"
 #: src/main/memory.c:3056
 #, c-format
 msgid "unprotect(): only %d protected item"
-msgstr "unprotect(): tylko %d zabezpieczona pozycja"
+msgid_plural "unprotect(): only %d protected items"
+msgstr[0] "unprotect(): tylko %d zabezpieczona pozycja"
+msgstr[1] "unprotect(): tylko %d zabezpieczone pozycje"
+msgstr[2] "unprotect(): tylko %d zabezpieczonych pozycji"
 
 #: src/main/memory.c:3091
 msgid "unprotect_ptr: pointer not found"
@@ -5369,9 +5423,16 @@ msgstr "unprotect_ptr: wskaźnik nie został znaleziony"
 #: src/main/memory.c:3129
 #, c-format
 msgid "R_Reprotect: only %d protected items, can't reprotect index %d"
-msgstr ""
+msgid_plural "R_Reprotect: only %d protected items, can't reprotect index %d"
+msgstr[0] ""
 "R_Reprotect: tylko %d zabezpieczona pozycja, nie można ponownie zabezpieczyć "
 "indeksu %d"
+msgstr[1] ""
+"R_Reprotect: tylko %d zabezpieczone pozycje, nie można ponownie zabezpieczyć "
+"indeksu %d"
+msgstr[2] ""
+"R_Reprotect: tylko %d zabezpieczonych pozycji, nie można ponownie "
+"zabezpieczyć indeksu %d"
 
 #: src/main/memory.c:3181
 #, c-format
@@ -6205,7 +6266,10 @@ msgstr " [przycięte]"
 #: src/main/print.c:491 src/main/printvector.c:209 src/main/printvector.c:353
 #, c-format
 msgid " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]"
-msgstr " [ osiągnięto 'getOption(\"max.print\")' -- pominięto %d wiersz ]"
+msgid_plural " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]"
+msgstr[0] " [ osiągnięto 'getOption(\"max.print\")' -- pominięto %d wpis ]"
+msgstr[1] " [ osiągnięto 'getOption(\"max.print\")' -- pominięto %d wpisy ]"
+msgstr[2] " [ osiągnięto 'getOption(\"max.print\")' -- pominięto %d wpisów ]"
 
 #: src/main/print.c:512
 #, c-format
@@ -6282,7 +6346,10 @@ msgstr "<macierz 0 x 0>"
 #: src/main/printarray.c:368
 #, c-format
 msgid " [ reached 'getOption(\"max.print\")' -- omitted %d row ]"
-msgstr " [ osiągnięto 'getOption(\"max.print\")' -- pominięto %d wiersz]"
+msgid_plural " [ reached 'getOption(\"max.print\")' -- omitted %d rows ]"
+msgstr[0] " [ osiągnięto 'getOption(\"max.print\")' -- pominięto %d wiersz ]"
+msgstr[1] " [ osiągnięto 'getOption(\"max.print\")' -- pominięto %d wiersze ]"
+msgstr[2] " [ osiągnięto 'getOption(\"max.print\")' -- pominięto %d wierszy ]"
 
 #: src/main/printarray.c:473
 #, c-format
@@ -6313,16 +6380,32 @@ msgstr "<tekstowa tablica o rozmiarze %s>"
 #, c-format
 msgid ""
 " [ reached 'getOption(\"max.print\")' -- omitted %d row and %d matrix slice ]"
-msgstr ""
+msgid_plural ""
+" [ reached 'getOption(\"max.print\")' -- omitted %d rows and %d matrix "
+"slices ]"
+msgstr[0] ""
 " [ osiągnięto 'getOption(\"max.print\")' -- pominięto %d wiersz, przecięć "
+"macierzy %d ]"
+msgstr[1] ""
+" [ osiągnięto 'getOption(\"max.print\")' -- pominięto %d wiersze, przecięć "
+"macierzy %d ]"
+msgstr[2] ""
+" [ osiągnięto 'getOption(\"max.print\")' -- pominięto %d wierszy, przecięć "
 "macierzy %d ]"
 
 #: src/main/printarray.c:525
 #, c-format
 msgid " [ reached 'getOption(\"max.print\")' -- omitted %d matrix slice ]"
-msgstr ""
+msgid_plural ""
+" [ reached 'getOption(\"max.print\")' -- omitted %d matrix slices ]"
+msgstr[0] ""
 " [ osiągnięto 'getOption(\"max.print\")' -- pominięto %d przecięcie "
 "macierzy ]"
+msgstr[1] ""
+" [ osiągnięto 'getOption(\"max.print\")' -- pominięto %d przecięcia "
+"macierzy ]"
+msgstr[2] ""
+" [ osiągnięto 'getOption(\"max.print\")' -- pominięto %d przecięć macierzy ]"
 
 #: src/main/printutils.c:155 src/main/printutils.c:157
 #: src/main/printutils.c:159 src/main/printutils.c:161
@@ -6460,9 +6543,16 @@ msgstr "współdzielony obiekt '%s' nie został załadowany"
 #: src/main/Rdynload.c:980
 #, c-format
 msgid "cannot allocate memory for registered native symbol (%d byte)"
-msgstr ""
+msgid_plural "cannot allocate memory for registered native symbol (%d bytes)"
+msgstr[0] ""
 "nie można przydzielić pamięci dla zarejestrowanego naturalnego znaku (%d "
 "bajt)"
+msgstr[1] ""
+"nie można przydzielić pamięci dla zarejestrowanego naturalnego znaku (%d "
+"bajty)"
+msgstr[2] ""
+"nie można przydzielić pamięci dla zarejestrowanego naturalnego znaku (%d "
+"bajtów)"
 
 #: src/main/Rdynload.c:1103 src/main/Rdynload.c:1324
 msgid "must pass package name or DllInfo reference"
@@ -6951,7 +7041,10 @@ msgstr "'scan()' oczekiwał zmiennej surowej, otrzymał '%s'"
 #: src/main/scan.c:613
 #, c-format
 msgid "Read %d item\n"
-msgstr "Przeczytano %d pozycję\n"
+msgid_plural "Read %d items\n"
+msgstr[0] "Przeczytano %d pozycję\n"
+msgstr[1] "Przeczytano %d pozycje\n"
+msgstr[2] "Przeczytano %d pozycji\n"
 
 #: src/main/scan.c:671
 msgid "empty 'what' specified"
@@ -6969,7 +7062,10 @@ msgstr "ilość odczytanych pozycji nie jest wielokrotnością liczby kolumn"
 #: src/main/scan.c:782
 #, c-format
 msgid "Read %d record\n"
-msgstr "Przeczytano %d wiersz\n"
+msgid_plural "Read %d records\n"
+msgstr[0] "Przeczytano %d wiersz\n"
+msgstr[1] "Przeczytano %d wiersze\n"
+msgstr[2] "Przeczytano %d wierszy\n"
 
 #: src/main/scan.c:869
 msgid "invalid 'strip.white' length"
@@ -7006,7 +7102,10 @@ msgstr "wynikiem byłby zbyt długi wektor"
 #: src/main/seq.c:163 src/main/seq.c:168
 #, c-format
 msgid "numerical expression has %d element: only the first used"
-msgstr "wyrażenie liczbowe posiada %d element: użyto tylko pierwszego"
+msgid_plural "numerical expression has %d elements: only the first used"
+msgstr[0] "wyrażenie liczbowe posiada %d element: użyto tylko pierwszego"
+msgstr[1] "wyrażenie liczbowe posiada %d elementy: użyto tylko pierwszego"
+msgstr[2] "wyrażenie liczbowe posiada %d elementów: użyto tylko pierwszego"
 
 #: src/main/seq.c:174
 msgid "NA/NaN argument"
@@ -8261,7 +8360,10 @@ msgstr "pobrano %d KB"
 #: src/modules/internet/internet.c:448 src/modules/internet/internet.c:558
 #, c-format
 msgid "downloaded %d byte"
-msgstr "pobrano %d bajt"
+msgid_plural "downloaded %d bytes"
+msgstr[0] "pobrano %d bajt"
+msgstr[1] "pobrano %d bajty"
+msgstr[2] "pobrano %d bajtów"
 
 #: src/modules/internet/internet.c:459 src/modules/internet/internet.c:569
 #, c-format
@@ -8281,17 +8383,26 @@ msgstr "nie można otworzyć: uzyskany status HTTP to '%d %s'"
 #: src/modules/internet/internet.c:612 src/modules/internet/internet.c:857
 #, c-format
 msgid "Content type '%s' length %0.0f byte (%0.1f MB)\n"
-msgstr "Typ zawartości '%s' długość %0.0f bajt (%0.1f MB)\n"
+msgid_plural "Content type '%s' length %0.0f bytes (%0.1f MB)\n"
+msgstr[0] "Typ zawartości '%s' długość %0.0f bajt (%0.1f MB)\n"
+msgstr[1] "Typ zawartości '%s' długość %0.0f bajty (%0.1f MB)\n"
+msgstr[2] "Typ zawartości '%s' długość %0.0f bajtów (%0.1f MB)\n"
 
 #: src/modules/internet/internet.c:616 src/modules/internet/internet.c:859
 #, c-format
 msgid "Content type '%s' length %d byte (%d KB)\n"
-msgstr "Typ zawartości '%s' długość %d bajt (%d KB)\n"
+msgid_plural "Content type '%s' length %d bytes (%d KB)\n"
+msgstr[0] "Typ zawartości '%s' długość %d bajt (%d KB)\n"
+msgstr[1] "Typ zawartości '%s' długość %d bajty (%d KB)\n"
+msgstr[2] "Typ zawartości '%s' długość %d bajtów (%d KB)\n"
 
 #: src/modules/internet/internet.c:620 src/modules/internet/internet.c:861
 #, c-format
 msgid "Content type '%s' length %d byte\n"
-msgstr "Typ zawartości '%s' długość %d bajt\n"
+msgid_plural "Content type '%s' length %d bytes\n"
+msgstr[0] "Typ zawartości '%s' długość %d bajt\n"
+msgstr[1] "Typ zawartości '%s' długość %d bajty\n"
+msgstr[2] "Typ zawartości '%s' długość %d bajtów\n"
 
 #: src/modules/internet/internet.c:623
 #, c-format
@@ -8324,8 +8435,13 @@ msgstr "przekroczono czas odczytu z sieci Internet"
 #: src/modules/internet/internet.c:928
 #, c-format
 msgid "using Asynchronous WinInet calls, timeout %d sec\n"
-msgstr ""
+msgid_plural "using Asynchronous WinInet calls, timeout %d secs\n"
+msgstr[0] ""
 "używanie asynchronicznych wywołań WinInet, przekroczenie czasu %d sekunda\n"
+msgstr[1] ""
+"używanie asynchronicznych wywołań WinInet, przekroczenie czasu %d sekundy\n"
+msgstr[2] ""
+"używanie asynchronicznych wywołań WinInet, przekroczenie czasu %d sekund\n"
 
 #: src/modules/internet/internet.c:956
 msgid "using Synchronous WinInet calls\n"
@@ -8455,7 +8571,10 @@ msgstr "nie można połączyć się z '%s' na porcie %d."
 #: src/modules/internet/nanohttp.c:1405
 #, c-format
 msgid "ERROR: overflowed buffer by %d byte\n"
-msgstr "BŁĄD: bufor przepełniony o %d bajt\n"
+msgid_plural "ERROR: overflowed buffer by %d bytes\n"
+msgstr[0] "BŁĄD: bufor przepełniony o %d bajt\n"
+msgstr[1] "BŁĄD: bufor przepełniony o %d bajty\n"
+msgstr[2] "BŁĄD: bufor przepełniony o %d bajtów\n"
 
 #: src/modules/internet/nanohttp.c:1432
 msgid ""
