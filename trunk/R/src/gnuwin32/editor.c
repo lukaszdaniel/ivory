@@ -45,6 +45,7 @@
 void reEnc2(const char *x, char *y, int ny,
 	    cetype_t ce_in, cetype_t ce_out, int subst);
 
+#undef gettext
 #define gettext GA_gettext
 
 #define MCHECK(a) if (!(a)) {del(c); return NULL;}

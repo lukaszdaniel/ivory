@@ -42,6 +42,7 @@
 #include <Fileio.h>
 void R_fixbackslash(char *s);
 
+#undef gettext
 #define gettext GA_gettext
 
 extern char fontname[LF_FACESIZE+4]; /* from console.c */
