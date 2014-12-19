@@ -7655,7 +7655,7 @@ ASAN_OPTIONS='detect_leaks=1'
 However, this is the default on @command{clang} 3.5 and pre-releases of
 @command{gcc} 5.0.0.
 
-When LSan is enabled, leaks give the process a failure error implementation (by
+When LSan is enabled, leaks give the process a failure error status (by
 default @code{23}).  For an @R{} package this means the @R{} process,
 and as the parser retains some memory to the end of the process, if @R{}
 itself was built against ASan, all runs will have a failure error status
@@ -10265,7 +10265,7 @@ code.  In this example the special values are no problem, as
 implementation this is also true of @code{NA} as it is a type of
 @code{NaN}, but it is unwise to rely on such details.  Thus we will
 re-write the code to handle @code{NA}s using macros defined in
-@file{R_exts/Arith.h} included by @file{R.h}.
+@file{R_ext/Arith.h} included by @file{R.h}.
 
 The code changes are the same in any of the versions of @code{convolve2}
 or @code{convolveE}:
