@@ -1966,6 +1966,41 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 > 
 > graphics::par(get("par.postscript", pos = 'CheckExEnv'))
 > cleanEx()
+> nameEx("plot.raster")
+> ### * plot.raster
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: plot.raster
+> ### Title: Plotting Raster Images
+> ### Aliases: plot.raster
+> ### Keywords: hplot
+> 
+> ### ** Examples
+> 
+> require(grDevices)
+> r <- as.raster(c(0.5, 1, 0.5))
+> plot(r)
+> # additional arguments to rasterImage()
+> plot(r, interpolate=FALSE)
+> # distort
+> plot(r, asp=NA)
+> # fill page
+> op <- par(mar=rep(0, 4))
+> plot(r, asp=NA)
+> par(op)
+> # normal annotations work
+> plot(r, asp=NA)
+> box()
+> title(main="This is my raster")
+> # add to existing plot
+> plot(1)
+> plot(r, add=TRUE)
+> 
+> 
+> 
+> graphics::par(get("par.postscript", pos = 'CheckExEnv'))
+> cleanEx()
 > nameEx("plot.table")
 > ### * plot.table
 > 
