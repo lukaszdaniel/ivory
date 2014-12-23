@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-12-17 19:08\n"
+"POT-Creation-Date: 2014-12-23 14:20\n"
 "PO-Revision-Date: 2012-09-10 14:11+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -393,6 +393,11 @@ msgid ""
 "selectively is preferable."
 msgstr ""
 
+#. R/QC.R: gettext("Additional repositories with no packages:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Additional repositories with no packages:"
+msgstr ""
+
 #. R/QC.R: gettext("All field tags must be ASCII.", domain = "R-tools")
 #. R/QC.R: gettext("All field tags must be ASCII.", domain = "R-tools")
 #: R/QC.R:0
@@ -639,6 +644,12 @@ msgstr "Änderungen benötigen den angegebenen 'style'"
 #: R/checktools.R:0
 msgid "Check results for packages in dir '%s':"
 msgstr ""
+
+#. R/CRANtools.R: gettextf("Checking %s", m, domain = "R-tools")
+#: R/CRANtools.R:0
+#, fuzzy
+msgid "Checking %s"
+msgstr "erzuege DLL"
 
 #. R/news.R: gettextf("\nChunk %s:\n%s", format(seq_along(bad)), bad)
 #: R/news.R:0
@@ -2665,6 +2676,25 @@ msgstr ""
 msgid "Re-running with no redirection of stdout/stderr."
 msgstr ""
 
+#. R/CRANtools.R: gettextf("Reading %s%s failed with message: %s", mirror, path_ts1, conditionMessage(mirror_ts1),     domain = "R-tools")
+#. R/CRANtools.R: gettextf("Reading %s%s failed with message: %s", mirror, path_ts2, conditionMessage(mirror_ts2),     domain = "R-tools")
+#: R/CRANtools.R:0
+#, fuzzy
+msgid "Reading %s%s failed with message: %s"
+msgstr ""
+"Sweave auf der Vignette '%s' auszuführen mit folgender Diagnose "
+"fehlgeschlagen:\n"
+"%s"
+
+#. R/CRANtools.R: gettextf("Reading %ssrc/contrib/PACKAGES.gz failed with message: %s", mirror, conditionMessage(mirror_packages),     domain = "R-tools")
+#: R/CRANtools.R:0
+#, fuzzy
+msgid "Reading %ssrc/contrib/PACKAGES.gz failed with message: %s"
+msgstr ""
+"Sweave auf der Vignette '%s' auszuführen mit folgender Diagnose "
+"fehlgeschlagen:\n"
+"%s"
+
 #. R/build.R: gettextf("Removed empty directory %s\n", sQuote(d), domain = "R-tools")
 #: R/build.R:0
 #, fuzzy
@@ -2942,6 +2972,11 @@ msgstr "Zu standardisieren: %s"
 #: R/QC.R:0
 msgid "Standardized license specification:"
 msgstr "Standardisierte Lizenzspezifikation:"
+
+#. R/QC.R: gettext("Strong dependencies not in mainstream repositories:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Strong dependencies not in mainstream repositories:"
+msgstr ""
 
 #. R/check.R: gettextf("Subdirectory %s contains apparent object files/libraries\n", sQuote(file.path(pkgname,     "src")), domain = "R-tools")
 #: R/check.R:0
@@ -6819,10 +6854,6 @@ msgstr[1] "kann '%s' Zeile(n) %s nicht rekodieren"
 
 #~ msgid "you must specify 'package' or 'dir'"
 #~ msgstr "'package' oder 'dir' muss angegeben werden"
-
-#, fuzzy
-#~ msgid "checking %s ..."
-#~ msgstr "erzuege DLL"
 
 #, fuzzy
 #~ msgid "removing %s"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-18 16:08+0100\n"
+"POT-Creation-Date: 2014-12-23 14:19+0100\n"
 "PO-Revision-Date: 2012-03-07 02:34+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -558,7 +558,7 @@ msgstr ""
 msgid "[... truncated]"
 msgstr ""
 
-#: src/gnuwin32/console.c:2084 src/gnuwin32/editor.c:258
+#: src/gnuwin32/console.c:2084 src/gnuwin32/editor.c:259
 #, c-format
 msgid "Page %d"
 msgstr ""
@@ -576,7 +576,7 @@ msgstr "DLL 이 FPU 컨트롤 단어를 %x 에서 %x 으로 변경하려 했습�
 msgid "cannot get working directory"
 msgstr "작업디렉토리를 가져올 수 없습니다"
 
-#: src/gnuwin32/editor.c:320
+#: src/gnuwin32/editor.c:321
 #, c-format
 msgid "File \"%s\" has been modified. Do you want to save the changes?"
 msgstr ""

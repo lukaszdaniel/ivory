@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-18 16:08+0100\n"
+"POT-Creation-Date: 2014-12-23 14:19+0100\n"
 "PO-Revision-Date: 2012-03-15 11:17-0500\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -576,7 +576,7 @@ msgstr ""
 msgid "[... truncated]"
 msgstr ""
 
-#: src/gnuwin32/console.c:2084 src/gnuwin32/editor.c:258
+#: src/gnuwin32/console.c:2084 src/gnuwin32/editor.c:259
 #, c-format
 msgid "Page %d"
 msgstr ""
@@ -594,7 +594,7 @@ msgstr "DLL пыталась изменить контрольное слово 
 msgid "cannot get working directory"
 msgstr "не могу попасть в рабочую папку"
 
-#: src/gnuwin32/editor.c:320
+#: src/gnuwin32/editor.c:321
 #, c-format
 msgid "File \"%s\" has been modified. Do you want to save the changes?"
 msgstr ""

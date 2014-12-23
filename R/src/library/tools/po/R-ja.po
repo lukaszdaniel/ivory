@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-12-17 19:08\n"
+"POT-Creation-Date: 2014-12-23 14:20\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -398,6 +398,11 @@ msgid ""
 "selectively is preferable."
 msgstr ""
 
+#. R/QC.R: gettext("Additional repositories with no packages:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Additional repositories with no packages:"
+msgstr ""
+
 #. R/QC.R: gettext("All field tags must be ASCII.", domain = "R-tools")
 #. R/QC.R: gettext("All field tags must be ASCII.", domain = "R-tools")
 #: R/QC.R:0
@@ -642,6 +647,12 @@ msgstr " 指定された 'style' の変更が必要です "
 #: R/checktools.R:0
 msgid "Check results for packages in dir '%s':"
 msgstr ""
+
+#. R/CRANtools.R: gettextf("Checking %s", m, domain = "R-tools")
+#: R/CRANtools.R:0
+#, fuzzy
+msgid "Checking %s"
+msgstr "DLLの作成中... "
 
 #. R/news.R: gettextf("\nChunk %s:\n%s", format(seq_along(bad)), bad)
 #: R/news.R:0
@@ -2689,6 +2700,23 @@ msgstr ""
 msgid "Re-running with no redirection of stdout/stderr."
 msgstr ""
 
+#. R/CRANtools.R: gettextf("Reading %s%s failed with message: %s", mirror, path_ts1, conditionMessage(mirror_ts1),     domain = "R-tools")
+#. R/CRANtools.R: gettextf("Reading %s%s failed with message: %s", mirror, path_ts2, conditionMessage(mirror_ts2),     domain = "R-tools")
+#: R/CRANtools.R:0
+#, fuzzy
+msgid "Reading %s%s failed with message: %s"
+msgstr ""
+" ビニエット '%s' の処理に失敗しました。診断は以下の通りです: \n"
+" %s "
+
+#. R/CRANtools.R: gettextf("Reading %ssrc/contrib/PACKAGES.gz failed with message: %s", mirror, conditionMessage(mirror_packages),     domain = "R-tools")
+#: R/CRANtools.R:0
+#, fuzzy
+msgid "Reading %ssrc/contrib/PACKAGES.gz failed with message: %s"
+msgstr ""
+" ビニエット '%s' の処理に失敗しました。診断は以下の通りです: \n"
+" %s "
+
 #. R/build.R: gettextf("Removed empty directory %s\n", sQuote(d), domain = "R-tools")
 #: R/build.R:0
 #, fuzzy
@@ -2970,6 +2998,11 @@ msgstr " 標準化可能：%s "
 #: R/QC.R:0
 msgid "Standardized license specification:"
 msgstr " 標準ではないライセンス指定: "
+
+#. R/QC.R: gettext("Strong dependencies not in mainstream repositories:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Strong dependencies not in mainstream repositories:"
+msgstr ""
 
 #. R/check.R: gettextf("Subdirectory %s contains apparent object files/libraries\n", sQuote(file.path(pkgname,     "src")), domain = "R-tools")
 #: R/check.R:0
@@ -6758,10 +6791,6 @@ msgstr[0] " '%s' ('%s'行')を再エンコード出来ません "
 
 #~ msgid "you must specify 'package' or 'dir'"
 #~ msgstr " 'package' 又は 'dir' を指定する必要があります "
-
-#, fuzzy
-#~ msgid "checking %s ..."
-#~ msgstr "DLLの作成中... "
 
 #, fuzzy
 #~ msgid "removing %s"

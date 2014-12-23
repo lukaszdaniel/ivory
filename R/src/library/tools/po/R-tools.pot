@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.2.0\n"
-"POT-Creation-Date: 2014-12-17 19:08\n"
+"POT-Creation-Date: 2014-12-23 14:20\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -460,6 +460,13 @@ msgstr ""
 
 
 #: R/QC.R: 0
+#. R/QC.R: gettext("Additional repositories with no packages:", domain = "R-tools")
+
+msgid "Additional repositories with no packages:"
+msgstr ""
+
+
+#: R/QC.R: 0
 #. R/QC.R: gettext("All field tags must be ASCII.", domain = "R-tools")
 #. R/QC.R: gettext("All field tags must be ASCII.", domain = "R-tools")
 
@@ -757,6 +764,13 @@ msgstr ""
 #. R/checktools.R: gettextf("Check results for packages in dir '%s':", dir, domain = "R-tools")
 
 msgid "Check results for packages in dir '%s':"
+msgstr ""
+
+
+#: R/CRANtools.R: 0
+#. R/CRANtools.R: gettextf("Checking %s", m, domain = "R-tools")
+
+msgid "Checking %s"
 msgstr ""
 
 
@@ -3233,6 +3247,21 @@ msgid "Re-running with no redirection of stdout/stderr."
 msgstr ""
 
 
+#: R/CRANtools.R: 0
+#. R/CRANtools.R: gettextf("Reading %s%s failed with message: %s", mirror, path_ts1, conditionMessage(mirror_ts1),     domain = "R-tools")
+#. R/CRANtools.R: gettextf("Reading %s%s failed with message: %s", mirror, path_ts2, conditionMessage(mirror_ts2),     domain = "R-tools")
+
+msgid "Reading %s%s failed with message: %s"
+msgstr ""
+
+
+#: R/CRANtools.R: 0
+#. R/CRANtools.R: gettextf("Reading %ssrc/contrib/PACKAGES.gz failed with message: %s", mirror, conditionMessage(mirror_packages),     domain = "R-tools")
+
+msgid "Reading %ssrc/contrib/PACKAGES.gz failed with message: %s"
+msgstr ""
+
+
 #: R/build.R: 0
 #. R/build.R: gettextf("Removed empty directory %s\n", sQuote(d), domain = "R-tools")
 
@@ -3526,6 +3555,13 @@ msgstr ""
 #. R/QC.R: gettext("Standardized license specification:", domain = "R-tools")
 
 msgid "Standardized license specification:"
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettext("Strong dependencies not in mainstream repositories:", domain = "R-tools")
+
+msgid "Strong dependencies not in mainstream repositories:"
 msgstr ""
 
 
