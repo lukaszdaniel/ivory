@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: r-2-15-branch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-18 16:08+0100\n"
+"POT-Creation-Date: 2014-12-23 14:19+0100\n"
 "PO-Revision-Date: 2011-11-29 21:34+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -559,7 +559,7 @@ msgstr ""
 msgid "[... truncated]"
 msgstr ""
 
-#: src/gnuwin32/console.c:2084 src/gnuwin32/editor.c:258
+#: src/gnuwin32/console.c:2084 src/gnuwin32/editor.c:259
 #, c-format
 msgid "Page %d"
 msgstr ""
@@ -577,7 +577,7 @@ msgstr "DLL forsøgte at ændre FPU-kontrolord fra %x til %x"
 msgid "cannot get working directory"
 msgstr "kan ikke indhente arbejdsmappe"
 
-#: src/gnuwin32/editor.c:320
+#: src/gnuwin32/editor.c:321
 #, c-format
 msgid "File \"%s\" has been modified. Do you want to save the changes?"
 msgstr ""

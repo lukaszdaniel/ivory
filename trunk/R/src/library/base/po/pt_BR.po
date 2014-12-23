@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-18 16:08+0100\n"
+"POT-Creation-Date: 2014-12-23 14:19+0100\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -565,7 +565,7 @@ msgstr ""
 msgid "[... truncated]"
 msgstr ""
 
-#: src/gnuwin32/console.c:2084 src/gnuwin32/editor.c:258
+#: src/gnuwin32/console.c:2084 src/gnuwin32/editor.c:259
 #, c-format
 msgid "Page %d"
 msgstr ""
@@ -583,7 +583,7 @@ msgstr "tentativa de DLL mudar a chave de controle FPU de %x para %x"
 msgid "cannot get working directory"
 msgstr "não foi possível obter o diretório de trabalho"
 
-#: src/gnuwin32/editor.c:320
+#: src/gnuwin32/editor.c:321
 #, c-format
 msgid "File \"%s\" has been modified. Do you want to save the changes?"
 msgstr ""

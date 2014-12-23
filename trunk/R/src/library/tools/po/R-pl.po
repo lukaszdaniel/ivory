@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-17 19:08\n"
+"POT-Creation-Date: 2014-12-23 14:20\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -392,6 +392,11 @@ msgstr ""
 "Dodawanie tak wielu pakietów do ścieżki wyszukiwania jest przesadą. "
 "Preferowane jest selektywne importowanie."
 
+#. R/QC.R: gettext("Additional repositories with no packages:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Additional repositories with no packages:"
+msgstr "Dodatkowe repozytoria bez pakietów:"
+
 #. R/QC.R: gettext("All field tags must be ASCII.", domain = "R-tools")
 #. R/QC.R: gettext("All field tags must be ASCII.", domain = "R-tools")
 #: R/QC.R:0
@@ -634,6 +639,11 @@ msgstr "Zmiany wymagają określonego 'style'"
 #: R/checktools.R:0
 msgid "Check results for packages in dir '%s':"
 msgstr "Wyniki sprawdzenia dla pakietów w katalogu '%s':"
+
+#. R/CRANtools.R: gettextf("Checking %s", m, domain = "R-tools")
+#: R/CRANtools.R:0
+msgid "Checking %s"
+msgstr "Sprawdzanie %s"
 
 #. R/news.R: gettextf("\nChunk %s:\n%s", format(seq_along(bad)), bad)
 #: R/news.R:0
@@ -2657,6 +2667,17 @@ msgstr "Wymagany jest obiekt Rd"
 msgid "Re-running with no redirection of stdout/stderr."
 msgstr "Ponowne uruchamianie bez przekierowania stdout/stderr."
 
+#. R/CRANtools.R: gettextf("Reading %s%s failed with message: %s", mirror, path_ts1, conditionMessage(mirror_ts1),     domain = "R-tools")
+#. R/CRANtools.R: gettextf("Reading %s%s failed with message: %s", mirror, path_ts2, conditionMessage(mirror_ts2),     domain = "R-tools")
+#: R/CRANtools.R:0
+msgid "Reading %s%s failed with message: %s"
+msgstr "Czytanie %s%s nie powiodło się z wynikiem: %s"
+
+#. R/CRANtools.R: gettextf("Reading %ssrc/contrib/PACKAGES.gz failed with message: %s", mirror, conditionMessage(mirror_packages),     domain = "R-tools")
+#: R/CRANtools.R:0
+msgid "Reading %ssrc/contrib/PACKAGES.gz failed with message: %s"
+msgstr "Czytanie %ssrc/contrib/PACKAGES.gz nie powiodło się z wynikiem: %s"
+
 #. R/build.R: gettextf("Removed empty directory %s\n", sQuote(d), domain = "R-tools")
 #: R/build.R:0
 msgid "Removed empty directory %s"
@@ -2915,6 +2936,11 @@ msgstr "Standaryzowalne: TRUE"
 #: R/QC.R:0
 msgid "Standardized license specification:"
 msgstr "Ustandaryzowana specyfikacja licencji:"
+
+#. R/QC.R: gettext("Strong dependencies not in mainstream repositories:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Strong dependencies not in mainstream repositories:"
+msgstr "Silne zależności niebędące w głównych repozytoriach:"
 
 #. R/check.R: gettextf("Subdirectory %s contains apparent object files/libraries\n", sQuote(file.path(pkgname,     "src")), domain = "R-tools")
 #: R/check.R:0
@@ -7025,9 +7051,6 @@ msgstr[2] "nie można przekodować %s linie %s"
 
 #~ msgid "you must specify 'package' or 'dir'"
 #~ msgstr "musisz określić 'package' lub 'dir'"
-
-#~ msgid "checking %s ..."
-#~ msgstr "sprawdzanie %s ..."
 
 #~ msgid "removing %s"
 #~ msgstr "usuwanie %s"

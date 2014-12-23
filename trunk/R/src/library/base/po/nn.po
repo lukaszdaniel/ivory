@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-18 16:08+0100\n"
+"POT-Creation-Date: 2014-12-23 14:19+0100\n"
 "PO-Revision-Date: 2011-02-18 09:09+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -564,7 +564,7 @@ msgstr ""
 msgid "[... truncated]"
 msgstr ""
 
-#: src/gnuwin32/console.c:2084 src/gnuwin32/editor.c:258
+#: src/gnuwin32/console.c:2084 src/gnuwin32/editor.c:259
 #, c-format
 msgid "Page %d"
 msgstr ""
@@ -582,7 +582,7 @@ msgstr "DLL prøvde å endra FPU-kontrollord frå %x til %x"
 msgid "cannot get working directory"
 msgstr "klarte ikkje opna arbeidsmappe"
 
-#: src/gnuwin32/editor.c:320
+#: src/gnuwin32/editor.c:321
 #, c-format
 msgid "File \"%s\" has been modified. Do you want to save the changes?"
 msgstr ""
