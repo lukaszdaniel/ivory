@@ -11804,7 +11804,7 @@ NOTE: 'n' is number in each group
 > 
 > ### ** Examples
 > 
->  power.prop.test(n = 50, p1 = .50, p2 = .75)
+> power.prop.test(n = 50, p1 = .50, p2 = .75)      ## => power = 0.740
 
      Two-sample comparison of proportions power calculation 
 
@@ -11817,7 +11817,7 @@ NOTE: 'n' is number in each group
 
 NOTE: n is number in *each* group
 
->  power.prop.test(p1 = .50, p2 = .75, power = .90)
+> power.prop.test(p1 = .50, p2 = .75, power = .90) ## =>     n = 76.7
 
      Two-sample comparison of proportions power calculation 
 
@@ -11830,7 +11830,7 @@ NOTE: n is number in *each* group
 
 NOTE: n is number in *each* group
 
->  power.prop.test(n = 50, p1 = .5, power = .90)
+> power.prop.test(n = 50, p1 = .5, power = .90)    ## =>    p2 = 0.8026
 
      Two-sample comparison of proportions power calculation 
 
@@ -11843,6 +11843,34 @@ NOTE: n is number in *each* group
 
 NOTE: n is number in *each* group
 
+> power.prop.test(n = 50, p1 = .5, p2 = 0.9, power = .90, sig.level=NULL)
+
+     Two-sample comparison of proportions power calculation 
+
+              n = 50
+             p1 = 0.5
+             p2 = 0.9
+      sig.level = 0.001318068
+          power = 0.9
+    alternative = two.sided
+
+NOTE: n is number in *each* group
+
+>                                                  ## => sig.l = 0.00131
+> power.prop.test(p1 = .5, p2 = 0.501, sig.level=.001, power=0.90)
+
+     Two-sample comparison of proportions power calculation 
+
+              n = 10451937
+             p1 = 0.5
+             p2 = 0.501
+      sig.level = 0.001
+          power = 0.9
+    alternative = two.sided
+
+NOTE: n is number in *each* group
+
+>                                                  ## => n = 10451937
 > 
 > 
 > 
