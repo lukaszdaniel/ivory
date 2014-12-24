@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-12-23 14:20\n"
+"POT-Creation-Date: 2014-12-24 16:51\n"
 "PO-Revision-Date: 2005-02-04 08:37+0000\n"
 "Last-Translator: 陈斐 <feic@avaya.com>\n"
 "Language-Team: Chinese\n"
@@ -1137,9 +1137,8 @@ msgstr ""
 msgid "ERROR: unable to create installation directory %s"
 msgstr "错误：无法建锁住的目录"
 
-#. R/build.R: gettext("EXISTS but not correct format", domain = "R-tools")
 #. R/check.R: gettext("EXISTS but not correct format", domain = "R-tools")
-#: R/build.R:0 R/check.R:0
+#: R/check.R:0
 msgid "EXISTS but not correct format"
 msgstr ""
 
@@ -4681,9 +4680,10 @@ msgstr ""
 msgid "file %s: non-ASCII input and no declared encoding"
 msgstr ""
 
-#. R/check.R: gettext("file EXISTS but not correct format", domain = "R-tools")
-#: R/check.R:0
-msgid "file EXISTS but not correct format"
+#. R/build.R: gettext("file EXISTS but is not of correct format", domain = "R-tools")
+#. R/check.R: gettext("file EXISTS but is not of correct format", domain = "R-tools")
+#: R/build.R:0 R/check.R:0
+msgid "file EXISTS but is not of correct format"
 msgstr ""
 
 #. R/Rd2HTML.R: gettextf("file link %s in package %s does not exist and so has been treated as a topic",     sQuote(parts$targetfile), sQuote(parts$pkg))

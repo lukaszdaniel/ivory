@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-12-17 19:07\n"
+"POT-Creation-Date: 2014-12-24 16:39\n"
 "PO-Revision-Date: 2005-02-04 08:37+0000\n"
 "Last-Translator: 陈斐 <FeiChen@FairIsaac.com>\n"
 "Language-Team: Chinese\n"
@@ -1215,23 +1215,6 @@ msgstr "描述："
 msgid "Documentation for package %s"
 msgstr "关于这个程辑包%s的说明书"
 
-#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: cannot cd to directory %s", sQuote(lib))
-#: R/../../../../share/R/REMOVE.R:0
-#, fuzzy
-msgid "ERROR: cannot cd to directory %s"
-msgstr "错误：无法更换到目录"
-
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", domain = "R-base", call. = FALSE)
-#: R/../../../../share/R/REMOVE.R:0
-msgid "ERROR: no packages specified"
-msgstr "错误：没有设定程辑包"
-
-#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: no permission to remove from directory %s", sQuote(lib))
-#: R/../../../../share/R/REMOVE.R:0
-#, fuzzy
-msgid "ERROR: no permission to remove from directory %s"
-msgstr "错误：没有从目录里删除的许可"
-
 #. R/srcfile.R: gettextf("Encoding: %s", dQuote(object$encoding), domain = "R-base")
 #: R/srcfile.R:0
 #, fuzzy
@@ -1259,6 +1242,24 @@ msgstr ""
 #: R/New-Internal.R:0 R/conditions.R:0
 msgid "Error:"
 msgstr ""
+
+#. R/../../../../share/R/REMOVE.R: gettextf("Error: cannot cd to directory %s", sQuote(lib))
+#: R/../../../../share/R/REMOVE.R:0
+#, fuzzy
+msgid "Error: cannot cd to directory %s"
+msgstr "错误：无法更换到目录"
+
+#. R/../../../../share/R/REMOVE.R: stop("Error: no packages specified", domain = "R-base", call. = FALSE)
+#: R/../../../../share/R/REMOVE.R:0
+#, fuzzy
+msgid "Error: no packages specified"
+msgstr "错误：没有设定程辑包"
+
+#. R/../../../../share/R/REMOVE.R: gettextf("Error: no permission to remove from directory %s", sQuote(lib))
+#: R/../../../../share/R/REMOVE.R:0
+#, fuzzy
+msgid "Error: no permission to remove from directory %s"
+msgstr "错误：没有从目录里删除的许可"
 
 #. R/../../../../share/R/examples-header.R: stop("F used instead of FALSE", domain = "R-base")
 #: R/../../../../share/R/examples-header.R:0

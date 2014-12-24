@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-12-17 19:07\n"
+"POT-Creation-Date: 2014-12-24 16:39\n"
 "PO-Revision-Date: 2012-03-15 11:24-0500\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -1229,23 +1229,6 @@ msgstr "Определение:"
 msgid "Documentation for package %s"
 msgstr "Документация для пакета %s"
 
-#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: cannot cd to directory %s", sQuote(lib))
-#: R/../../../../share/R/REMOVE.R:0
-#, fuzzy
-msgid "ERROR: cannot cd to directory %s"
-msgstr "ОШИБКА: не могу зайти в каталог"
-
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", domain = "R-base", call. = FALSE)
-#: R/../../../../share/R/REMOVE.R:0
-msgid "ERROR: no packages specified"
-msgstr "ОШИБКА: пакеты не указаны"
-
-#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: no permission to remove from directory %s", sQuote(lib))
-#: R/../../../../share/R/REMOVE.R:0
-#, fuzzy
-msgid "ERROR: no permission to remove from directory %s"
-msgstr "ОШИБКА: нет прав на удаление каталога"
-
 #. R/srcfile.R: gettextf("Encoding: %s", dQuote(object$encoding), domain = "R-base")
 #: R/srcfile.R:0
 #, fuzzy
@@ -1273,6 +1256,24 @@ msgstr ""
 #: R/New-Internal.R:0 R/conditions.R:0
 msgid "Error:"
 msgstr ""
+
+#. R/../../../../share/R/REMOVE.R: gettextf("Error: cannot cd to directory %s", sQuote(lib))
+#: R/../../../../share/R/REMOVE.R:0
+#, fuzzy
+msgid "Error: cannot cd to directory %s"
+msgstr "ОШИБКА: не могу зайти в каталог"
+
+#. R/../../../../share/R/REMOVE.R: stop("Error: no packages specified", domain = "R-base", call. = FALSE)
+#: R/../../../../share/R/REMOVE.R:0
+#, fuzzy
+msgid "Error: no packages specified"
+msgstr "ОШИБКА: пакеты не указаны"
+
+#. R/../../../../share/R/REMOVE.R: gettextf("Error: no permission to remove from directory %s", sQuote(lib))
+#: R/../../../../share/R/REMOVE.R:0
+#, fuzzy
+msgid "Error: no permission to remove from directory %s"
+msgstr "ОШИБКА: нет прав на удаление каталога"
 
 #. R/../../../../share/R/examples-header.R: stop("F used instead of FALSE", domain = "R-base")
 #: R/../../../../share/R/examples-header.R:0

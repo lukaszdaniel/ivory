@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-12-17 19:07\n"
+"POT-Creation-Date: 2014-12-24 16:39\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -1228,23 +1228,6 @@ msgstr "Description:"
 msgid "Documentation for package %s"
 msgstr "패키지 %s 를 위한 문서"
 
-#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: cannot cd to directory %s", sQuote(lib))
-#: R/../../../../share/R/REMOVE.R:0
-#, fuzzy
-msgid "ERROR: cannot cd to directory %s"
-msgstr "에러: 디렉토리로 들어갈 수 없습니다 "
-
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", domain = "R-base", call. = FALSE)
-#: R/../../../../share/R/REMOVE.R:0
-msgid "ERROR: no packages specified"
-msgstr "에러: 지정된 패키지들이 없습니다 "
-
-#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: no permission to remove from directory %s", sQuote(lib))
-#: R/../../../../share/R/REMOVE.R:0
-#, fuzzy
-msgid "ERROR: no permission to remove from directory %s"
-msgstr "에러: 삭제할 수 있는 권한이 해당 디렉토리에 없습니다 "
-
 #. R/srcfile.R: gettextf("Encoding: %s", dQuote(object$encoding), domain = "R-base")
 #: R/srcfile.R:0
 #, fuzzy
@@ -1272,6 +1255,24 @@ msgstr ""
 #: R/New-Internal.R:0 R/conditions.R:0
 msgid "Error:"
 msgstr ""
+
+#. R/../../../../share/R/REMOVE.R: gettextf("Error: cannot cd to directory %s", sQuote(lib))
+#: R/../../../../share/R/REMOVE.R:0
+#, fuzzy
+msgid "Error: cannot cd to directory %s"
+msgstr "에러: 디렉토리로 들어갈 수 없습니다 "
+
+#. R/../../../../share/R/REMOVE.R: stop("Error: no packages specified", domain = "R-base", call. = FALSE)
+#: R/../../../../share/R/REMOVE.R:0
+#, fuzzy
+msgid "Error: no packages specified"
+msgstr "에러: 지정된 패키지들이 없습니다 "
+
+#. R/../../../../share/R/REMOVE.R: gettextf("Error: no permission to remove from directory %s", sQuote(lib))
+#: R/../../../../share/R/REMOVE.R:0
+#, fuzzy
+msgid "Error: no permission to remove from directory %s"
+msgstr "에러: 삭제할 수 있는 권한이 해당 디렉토리에 없습니다 "
 
 #. R/../../../../share/R/examples-header.R: stop("F used instead of FALSE", domain = "R-base")
 #: R/../../../../share/R/examples-header.R:0

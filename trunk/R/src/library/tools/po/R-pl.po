@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-23 14:20\n"
+"POT-Creation-Date: 2014-12-24 16:51\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1114,9 +1114,8 @@ msgstr "BŁĄD: nie można zebrać i zparsować plików R dla pakietu %s"
 msgid "ERROR: unable to create installation directory %s"
 msgstr "BŁĄD: nie udało się utworzyć katalogu instalacyjnego %s"
 
-#. R/build.R: gettext("EXISTS but not correct format", domain = "R-tools")
 #. R/check.R: gettext("EXISTS but not correct format", domain = "R-tools")
-#: R/build.R:0 R/check.R:0
+#: R/check.R:0
 msgid "EXISTS but not correct format"
 msgstr "ISTNIEJE ale nie posiada poprawnego formatu"
 
@@ -4649,9 +4648,10 @@ msgstr "plik %s: wielokrotne linie '\\encoding', używanie pierwszej"
 msgid "file %s: non-ASCII input and no declared encoding"
 msgstr "plik %s: wejście nie-ASCII, a brak zadeklarowanego kodowania"
 
-#. R/check.R: gettext("file EXISTS but not correct format", domain = "R-tools")
-#: R/check.R:0
-msgid "file EXISTS but not correct format"
+#. R/build.R: gettext("file EXISTS but is not of correct format", domain = "R-tools")
+#. R/check.R: gettext("file EXISTS but is not of correct format", domain = "R-tools")
+#: R/build.R:0 R/check.R:0
+msgid "file EXISTS but is not of correct format"
 msgstr "plik ISTNIEJE ale nie posiada poprawnego formatu"
 
 #. R/Rd2HTML.R: gettextf("file link %s in package %s does not exist and so has been treated as a topic",     sQuote(parts$targetfile), sQuote(parts$pkg))
@@ -6759,6 +6759,9 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "nie można przekodować %s linia %s"
 msgstr[1] "nie można przekodować %s linie %s"
 msgstr[2] "nie można przekodować %s linie %s"
+
+#~ msgid "file EXISTS but not correct format"
+#~ msgstr "plik ISTNIEJE ale nie posiada poprawnego formatu"
 
 #~ msgid "Inconsistent encoding specifications: %s with %%\\SweaveUTF8"
 #~ msgstr "Niespójna specyfikacja kodowania: %s z %%\\SweaveUTF8"

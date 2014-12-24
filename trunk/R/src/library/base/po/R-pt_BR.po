@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-12-17 19:07\n"
+"POT-Creation-Date: 2014-12-24 16:39\n"
 "PO-Revision-Date: 2011-03-26 08:54-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -1219,23 +1219,6 @@ msgstr "Descrição:"
 msgid "Documentation for package %s"
 msgstr "Documentação para o pacote '%s'"
 
-#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: cannot cd to directory %s", sQuote(lib))
-#: R/../../../../share/R/REMOVE.R:0
-#, fuzzy
-msgid "ERROR: cannot cd to directory %s"
-msgstr "ERRO: não é possível entrar no diretório"
-
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", domain = "R-base", call. = FALSE)
-#: R/../../../../share/R/REMOVE.R:0
-msgid "ERROR: no packages specified"
-msgstr "ERRO: nenhum pacote especificado"
-
-#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: no permission to remove from directory %s", sQuote(lib))
-#: R/../../../../share/R/REMOVE.R:0
-#, fuzzy
-msgid "ERROR: no permission to remove from directory %s"
-msgstr "ERRO: sem permissão para remover diretório"
-
 #. R/srcfile.R: gettextf("Encoding: %s", dQuote(object$encoding), domain = "R-base")
 #: R/srcfile.R:0
 #, fuzzy
@@ -1263,6 +1246,24 @@ msgstr ""
 #: R/New-Internal.R:0 R/conditions.R:0
 msgid "Error:"
 msgstr ""
+
+#. R/../../../../share/R/REMOVE.R: gettextf("Error: cannot cd to directory %s", sQuote(lib))
+#: R/../../../../share/R/REMOVE.R:0
+#, fuzzy
+msgid "Error: cannot cd to directory %s"
+msgstr "ERRO: não é possível entrar no diretório"
+
+#. R/../../../../share/R/REMOVE.R: stop("Error: no packages specified", domain = "R-base", call. = FALSE)
+#: R/../../../../share/R/REMOVE.R:0
+#, fuzzy
+msgid "Error: no packages specified"
+msgstr "ERRO: nenhum pacote especificado"
+
+#. R/../../../../share/R/REMOVE.R: gettextf("Error: no permission to remove from directory %s", sQuote(lib))
+#: R/../../../../share/R/REMOVE.R:0
+#, fuzzy
+msgid "Error: no permission to remove from directory %s"
+msgstr "ERRO: sem permissão para remover diretório"
 
 #. R/../../../../share/R/examples-header.R: stop("F used instead of FALSE", domain = "R-base")
 #: R/../../../../share/R/examples-header.R:0
