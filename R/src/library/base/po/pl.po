@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-23 14:19+0100\n"
+"POT-Creation-Date: 2014-12-24 16:39+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -8335,12 +8335,12 @@ msgstr "nie można otworzyć docelowego pliku '%s', powód '%s'"
 
 #: src/modules/internet/internet.c:379 src/modules/internet/internet.c:485
 #, c-format
-msgid "trying URL '%s'\n"
-msgstr "próbowanie adresu URL '%s'\n"
+msgid "Trying URL '%s'\n"
+msgstr "Sprawdzanie adresu URL '%s'\n"
 
 #: src/modules/internet/internet.c:386 src/modules/internet/internet.c:492
-msgid "opened URL\n"
-msgstr "otwarty adres URL\n"
+msgid "Opened URL\n"
+msgstr "Otwarty adres URL\n"
 
 #: src/modules/internet/internet.c:425 src/modules/internet/internet.c:534
 #, c-format
@@ -8349,21 +8349,21 @@ msgstr "pobrano %d%%"
 
 #: src/modules/internet/internet.c:444 src/modules/internet/internet.c:553
 #, c-format
-msgid "downloaded %0.1f MB"
-msgstr "pobrano %0.1f MB"
+msgid "Downloaded %0.1f MB"
+msgstr "Pobrano %0.1f MB"
 
 #: src/modules/internet/internet.c:446 src/modules/internet/internet.c:556
 #, c-format
-msgid "downloaded %d KB"
-msgstr "pobrano %d KB"
+msgid "Downloaded %d KB"
+msgstr "Pobrano %d KB"
 
 #: src/modules/internet/internet.c:448 src/modules/internet/internet.c:558
 #, c-format
-msgid "downloaded %d byte"
-msgid_plural "downloaded %d bytes"
-msgstr[0] "pobrano %d bajt"
-msgstr[1] "pobrano %d bajty"
-msgstr[2] "pobrano %d bajtów"
+msgid "Downloaded %d byte"
+msgid_plural "Downloaded %d bytes"
+msgstr[0] "Pobrano %d bajt"
+msgstr[1] "Pobrano %d bajty"
+msgstr[2] "Pobrano %d bajtów"
 
 #: src/modules/internet/internet.c:459 src/modules/internet/internet.c:569
 #, c-format
@@ -8570,11 +8570,11 @@ msgstr "nie można połączyć się z '%s' na porcie %d."
 
 #: src/modules/internet/nanohttp.c:1405
 #, c-format
-msgid "ERROR: overflowed buffer by %d byte\n"
-msgid_plural "ERROR: overflowed buffer by %d bytes\n"
-msgstr[0] "BŁĄD: bufor przepełniony o %d bajt\n"
-msgstr[1] "BŁĄD: bufor przepełniony o %d bajty\n"
-msgstr[2] "BŁĄD: bufor przepełniony o %d bajtów\n"
+msgid "Error: overflowed buffer by %d byte\n"
+msgid_plural "Error: overflowed buffer by %d bytes\n"
+msgstr[0] "Błąd: bufor przepełniony o %d bajt\n"
+msgstr[1] "Błąd: bufor przepełniony o %d bajty\n"
+msgstr[2] "Błąd: bufor przepełniony o %d bajtów\n"
 
 #: src/modules/internet/nanohttp.c:1432
 msgid ""
@@ -8945,7 +8945,7 @@ msgstr "brakuje czcionki dla zestawu znaków %s."
 #: src/modules/X11/devX11.c:937
 #, c-format
 msgid "trying face %d size %d\n"
-msgstr "próbowanie kroju %d rozmiar %d\n"
+msgstr "sprawdzanie kroju %d rozmiar %d\n"
 
 #: src/modules/X11/devX11.c:991 src/modules/X11/devX11.c:1045
 #: src/modules/X11/devX11.c:1065

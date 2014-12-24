@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-23 14:19+0100\n"
+"POT-Creation-Date: 2014-12-24 16:39+0100\n"
 "PO-Revision-Date: 2011-02-18 09:09+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -8432,12 +8432,13 @@ msgid "cannot open destfile '%s', reason '%s'"
 msgstr "klarte ikkje opna målfila «%s», av grunnen «%s»"
 
 #: src/modules/internet/internet.c:379 src/modules/internet/internet.c:485
-#, c-format
-msgid "trying URL '%s'\n"
+#, fuzzy, c-format
+msgid "Trying URL '%s'\n"
 msgstr "prøver adressa «%s»\n"
 
 #: src/modules/internet/internet.c:386 src/modules/internet/internet.c:492
-msgid "opened URL\n"
+#, fuzzy
+msgid "Opened URL\n"
 msgstr "opna adressa\n"
 
 #: src/modules/internet/internet.c:425 src/modules/internet/internet.c:534
@@ -8447,18 +8448,18 @@ msgstr ""
 
 #: src/modules/internet/internet.c:444 src/modules/internet/internet.c:553
 #, c-format
-msgid "downloaded %0.1f MB"
+msgid "Downloaded %0.1f MB"
 msgstr ""
 
 #: src/modules/internet/internet.c:446 src/modules/internet/internet.c:556
 #, c-format
-msgid "downloaded %d KB"
+msgid "Downloaded %d KB"
 msgstr ""
 
 #: src/modules/internet/internet.c:448 src/modules/internet/internet.c:558
 #, c-format
-msgid "downloaded %d byte"
-msgid_plural "downloaded %d bytes"
+msgid "Downloaded %d byte"
+msgid_plural "Downloaded %d bytes"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -8664,8 +8665,8 @@ msgstr "klarte ikkje kopla til «%s» på port %d."
 
 #: src/modules/internet/nanohttp.c:1405
 #, c-format
-msgid "ERROR: overflowed buffer by %d byte\n"
-msgid_plural "ERROR: overflowed buffer by %d bytes\n"
+msgid "Error: overflowed buffer by %d byte\n"
+msgid_plural "Error: overflowed buffer by %d bytes\n"
 msgstr[0] ""
 msgstr[1] ""
 

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-12-17 19:07\n"
+"POT-Creation-Date: 2014-12-24 16:39\n"
 "PO-Revision-Date: 2012-09-28 22:18+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -1219,23 +1219,6 @@ msgstr "Skildring:"
 msgid "Documentation for package %s"
 msgstr "Dokumentasjon for pakken «%s»"
 
-#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: cannot cd to directory %s", sQuote(lib))
-#: R/../../../../share/R/REMOVE.R:0
-#, fuzzy
-msgid "ERROR: cannot cd to directory %s"
-msgstr "FEIL: kan ikkje gå inn i mappe"
-
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", domain = "R-base", call. = FALSE)
-#: R/../../../../share/R/REMOVE.R:0
-msgid "ERROR: no packages specified"
-msgstr "FEIL: ingen pakkar valde"
-
-#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: no permission to remove from directory %s", sQuote(lib))
-#: R/../../../../share/R/REMOVE.R:0
-#, fuzzy
-msgid "ERROR: no permission to remove from directory %s"
-msgstr "FEIL: manglar løyve til å fjerna frå mappe"
-
 #. R/srcfile.R: gettextf("Encoding: %s", dQuote(object$encoding), domain = "R-base")
 #: R/srcfile.R:0
 #, fuzzy
@@ -1263,6 +1246,24 @@ msgstr ""
 #: R/New-Internal.R:0 R/conditions.R:0
 msgid "Error:"
 msgstr ""
+
+#. R/../../../../share/R/REMOVE.R: gettextf("Error: cannot cd to directory %s", sQuote(lib))
+#: R/../../../../share/R/REMOVE.R:0
+#, fuzzy
+msgid "Error: cannot cd to directory %s"
+msgstr "FEIL: kan ikkje gå inn i mappe"
+
+#. R/../../../../share/R/REMOVE.R: stop("Error: no packages specified", domain = "R-base", call. = FALSE)
+#: R/../../../../share/R/REMOVE.R:0
+#, fuzzy
+msgid "Error: no packages specified"
+msgstr "FEIL: ingen pakkar valde"
+
+#. R/../../../../share/R/REMOVE.R: gettextf("Error: no permission to remove from directory %s", sQuote(lib))
+#: R/../../../../share/R/REMOVE.R:0
+#, fuzzy
+msgid "Error: no permission to remove from directory %s"
+msgstr "FEIL: manglar løyve til å fjerna frå mappe"
 
 #. R/../../../../share/R/examples-header.R: stop("F used instead of FALSE", domain = "R-base")
 #: R/../../../../share/R/examples-header.R:0

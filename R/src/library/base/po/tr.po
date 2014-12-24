@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-23 14:19+0100\n"
+"POT-Creation-Date: 2014-12-24 16:39+0100\n"
 "PO-Revision-Date: 2011-04-02 18:24+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -8393,12 +8393,13 @@ msgid "cannot open destfile '%s', reason '%s'"
 msgstr "hedefdosya '%s' açılamıyor, sebep: '%s'"
 
 #: src/modules/internet/internet.c:379 src/modules/internet/internet.c:485
-#, c-format
-msgid "trying URL '%s'\n"
+#, fuzzy, c-format
+msgid "Trying URL '%s'\n"
 msgstr "URL '%s' deneniyor\n"
 
 #: src/modules/internet/internet.c:386 src/modules/internet/internet.c:492
-msgid "opened URL\n"
+#, fuzzy
+msgid "Opened URL\n"
 msgstr "URL açıldı\n"
 
 #: src/modules/internet/internet.c:425 src/modules/internet/internet.c:534
@@ -8408,18 +8409,18 @@ msgstr ""
 
 #: src/modules/internet/internet.c:444 src/modules/internet/internet.c:553
 #, c-format
-msgid "downloaded %0.1f MB"
+msgid "Downloaded %0.1f MB"
 msgstr ""
 
 #: src/modules/internet/internet.c:446 src/modules/internet/internet.c:556
 #, c-format
-msgid "downloaded %d KB"
+msgid "Downloaded %d KB"
 msgstr ""
 
 #: src/modules/internet/internet.c:448 src/modules/internet/internet.c:558
 #, c-format
-msgid "downloaded %d byte"
-msgid_plural "downloaded %d bytes"
+msgid "Downloaded %d byte"
+msgid_plural "Downloaded %d bytes"
 msgstr[0] ""
 
 #: src/modules/internet/internet.c:459 src/modules/internet/internet.c:569
@@ -8620,8 +8621,8 @@ msgstr "'%s' adresine %d numaralı porttan bağlanılamadı"
 
 #: src/modules/internet/nanohttp.c:1405
 #, c-format
-msgid "ERROR: overflowed buffer by %d byte\n"
-msgid_plural "ERROR: overflowed buffer by %d bytes\n"
+msgid "Error: overflowed buffer by %d byte\n"
+msgid_plural "Error: overflowed buffer by %d bytes\n"
 msgstr[0] ""
 
 #: src/modules/internet/nanohttp.c:1432

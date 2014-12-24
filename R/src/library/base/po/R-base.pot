@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.2.0\n"
-"POT-Creation-Date: 2014-12-17 19:07\n"
+"POT-Creation-Date: 2014-12-24 16:39\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1431,27 +1431,6 @@ msgid "Documentation for package %s"
 msgstr ""
 
 
-#: R/../../../../share/R/REMOVE.R: 0
-#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: cannot cd to directory %s", sQuote(lib))
-
-msgid "ERROR: cannot cd to directory %s"
-msgstr ""
-
-
-#: R/../../../../share/R/REMOVE.R: 0
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", domain = "R-base", call. = FALSE)
-
-msgid "ERROR: no packages specified"
-msgstr ""
-
-
-#: R/../../../../share/R/REMOVE.R: 0
-#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: no permission to remove from directory %s", sQuote(lib))
-
-msgid "ERROR: no permission to remove from directory %s"
-msgstr ""
-
-
 #: R/srcfile.R: 0
 #. R/srcfile.R: gettextf("Encoding: %s", dQuote(object$encoding), domain = "R-base")
 
@@ -1488,6 +1467,27 @@ msgstr ""
 #. R/conditions.R: gettext("Error:", domain = "R-base")
 
 msgid "Error:"
+msgstr ""
+
+
+#: R/../../../../share/R/REMOVE.R: 0
+#. R/../../../../share/R/REMOVE.R: gettextf("Error: cannot cd to directory %s", sQuote(lib))
+
+msgid "Error: cannot cd to directory %s"
+msgstr ""
+
+
+#: R/../../../../share/R/REMOVE.R: 0
+#. R/../../../../share/R/REMOVE.R: stop("Error: no packages specified", domain = "R-base", call. = FALSE)
+
+msgid "Error: no packages specified"
+msgstr ""
+
+
+#: R/../../../../share/R/REMOVE.R: 0
+#. R/../../../../share/R/REMOVE.R: gettextf("Error: no permission to remove from directory %s", sQuote(lib))
+
+msgid "Error: no permission to remove from directory %s"
 msgstr ""
 
 

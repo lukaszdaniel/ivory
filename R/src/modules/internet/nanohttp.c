@@ -1402,8 +1402,8 @@ RxmlNanoHTTPMethod(const char *URL, const char *method, const char *input,
 	snprintf(p, blen - (p - bp), "\r\n");
     RxmlMessage(0, "-> %s%s", proxy? "(Proxy) " : "", bp);
     if ((blen -= (int) strlen(bp)+1) < 0)
-	RxmlMessage(0, n_("ERROR: overflowed buffer by %d byte\n",
-				"ERROR: overflowed buffer by %d bytes\n",
+	RxmlMessage(0, n_("Error: overflowed buffer by %d byte\n",
+				"Error: overflowed buffer by %d bytes\n",
 				-blen), -blen);
     ctxt->outptr = ctxt->out = bp;
     ctxt->state = XML_NANO_HTTP_WRITE;

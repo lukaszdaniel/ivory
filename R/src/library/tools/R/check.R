@@ -3309,7 +3309,7 @@ setRlibs <-
             f <- file.path(pkgdir, "DESCRIPTION")
             desc <- try(.read_description(f))
             if (inherits(desc, "try-error") || !length(desc)) {
-                resultLog(Log, gettext("file EXISTS but not correct format", domain = "R-tools"))
+                resultLog(Log, gettext("file EXISTS but is not of correct format", domain = "R-tools"))
                 summaryLog(Log)
                 do_exit(1L)
             }

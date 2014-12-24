@@ -376,14 +376,14 @@ static SEXP in_do_download(SEXP args)
 	}
 
 	R_Busy(1);
-	if(!quiet) REprintf(_("trying URL '%s'\n"), url);
+	if(!quiet) REprintf(_("Trying URL '%s'\n"), url);
 #ifdef Win32
 	R_FlushConsole();
 #endif
 	ctxt = in_R_HTTPOpen(url, headers, cacheOK);
 	if(ctxt == NULL) status = 1;
 	else {
-	    if(!quiet) REprintf(_("opened URL\n"), url);
+	    if(!quiet) REprintf(_("Opened URL\n"), url);
 	    guess = total = ((inetconn *)ctxt)->length;
 #ifdef Win32
 	    if (guess <= 0) guess = 100 * 1024;
@@ -441,11 +441,11 @@ static SEXP in_do_download(SEXP args)
 		REprintf("\n");
 #endif
 		if(nbytes > 1024*1024)
-		    REprintf(_("downloaded %0.1f MB"), (double)nbytes/1024/1024, url);
+		    REprintf(_("Downloaded %0.1f MB"), (double)nbytes/1024/1024, url);
 		else if(nbytes > 10240)
-		    REprintf(_("downloaded %d KB"), (int) nbytes/1024, url);
+		    REprintf(_("Downloaded %d KB"), (int) nbytes/1024, url);
 		else
-		    REprintf(n_("downloaded %d byte", "downloaded %d bytes", (int) nbytes), (int) nbytes, url);
+		    REprintf(n_("Downloaded %d byte", "Downloaded %d bytes", (int) nbytes), (int) nbytes, url);
 		REprintf("\n\n");
 	    }
 #ifdef Win32
@@ -482,14 +482,14 @@ static SEXP in_do_download(SEXP args)
 	}
 
 	R_Busy(1);
-	if(!quiet) REprintf(_("trying URL '%s'\n"), url);
+	if(!quiet) REprintf(_("Trying URL '%s'\n"), url);
 #ifdef Win32
 	R_FlushConsole();
 #endif
 	ctxt = in_R_FTPOpen(url);
 	if(ctxt == NULL) status = 1;
 	else {
-	    if(!quiet) REprintf(_("opened URL\n"), url);
+	    if(!quiet) REprintf(_("Opened URL\n"), url);
 	    guess = total = ((inetconn *)ctxt)->length;
 #ifdef Win32
 	    if (guess <= 0) guess = 100 * 1024;
@@ -550,12 +550,12 @@ static SEXP in_do_download(SEXP args)
 		REprintf("\n");
 #endif
 		if(nbytes > 1024*1024)
-		    REprintf(_("downloaded %0.1f MB"),
+		    REprintf(_("Downloaded %0.1f MB"),
 			     (double)nbytes/1024/1024, url);
 		else if(nbytes > 10240)
-		    REprintf(_("downloaded %d KB"), (int) nbytes/1024, url);
+		    REprintf(_("Downloaded %d KB"), (int) nbytes/1024, url);
 		else
-		    REprintf(n_("downloaded %d byte", "downloaded %d bytes", (int) nbytes), (int) nbytes, url);
+		    REprintf(n_("Downloaded %d byte", "Downloaded %d bytes", (int) nbytes), (int) nbytes, url);
 			REprintf("\n\n");
 	    }
 #ifdef Win32

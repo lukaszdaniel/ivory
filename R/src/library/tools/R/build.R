@@ -820,7 +820,7 @@ get_exclude_patterns <- function()
         if (file.exists(f)) {
             desc <- try(.read_description(f))
             if (inherits(desc, "try-error") || !length(desc)) {
-                resultLog(Log, gettext("EXISTS but not correct format", domain = "R-tools"))
+                resultLog(Log, gettext("file EXISTS but is not of correct format", domain = "R-tools"))
                 do_exit(1L)
             }
             resultLog(Log, gettext("OK", domain = "R-tools"))

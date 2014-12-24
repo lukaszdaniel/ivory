@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-12-17 19:07\n"
+"POT-Creation-Date: 2014-12-24 16:39\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1123,21 +1123,6 @@ msgstr "Opis:"
 msgid "Documentation for package %s"
 msgstr "Dokumentacja dla pakietu %s"
 
-#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: cannot cd to directory %s", sQuote(lib))
-#: R/../../../../share/R/REMOVE.R:0
-msgid "ERROR: cannot cd to directory %s"
-msgstr "BŁĄD: nie można wejść do katalogu %s"
-
-#. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", domain = "R-base", call. = FALSE)
-#: R/../../../../share/R/REMOVE.R:0
-msgid "ERROR: no packages specified"
-msgstr "BŁĄD: nie określono pakietów"
-
-#. R/../../../../share/R/REMOVE.R: gettextf("ERROR: no permission to remove from directory %s", sQuote(lib))
-#: R/../../../../share/R/REMOVE.R:0
-msgid "ERROR: no permission to remove from directory %s"
-msgstr "BŁĄD: brak uprawnień aby usunąć z katalogu %s"
-
 #. R/srcfile.R: gettextf("Encoding: %s", dQuote(object$encoding), domain = "R-base")
 #: R/srcfile.R:0
 msgid "Encoding: %s"
@@ -1164,6 +1149,21 @@ msgstr "Błąd w poleceniu '%s':"
 #: R/New-Internal.R:0 R/conditions.R:0
 msgid "Error:"
 msgstr "Błąd:"
+
+#. R/../../../../share/R/REMOVE.R: gettextf("Error: cannot cd to directory %s", sQuote(lib))
+#: R/../../../../share/R/REMOVE.R:0
+msgid "Error: cannot cd to directory %s"
+msgstr "Błąd: nie można wejść do katalogu %s"
+
+#. R/../../../../share/R/REMOVE.R: stop("Error: no packages specified", domain = "R-base", call. = FALSE)
+#: R/../../../../share/R/REMOVE.R:0
+msgid "Error: no packages specified"
+msgstr "Błąd: nie określono pakietów"
+
+#. R/../../../../share/R/REMOVE.R: gettextf("Error: no permission to remove from directory %s", sQuote(lib))
+#: R/../../../../share/R/REMOVE.R:0
+msgid "Error: no permission to remove from directory %s"
+msgstr "Błąd: brak uprawnień aby usunąć z katalogu %s"
 
 #. R/../../../../share/R/examples-header.R: stop("F used instead of FALSE", domain = "R-base")
 #: R/../../../../share/R/examples-header.R:0

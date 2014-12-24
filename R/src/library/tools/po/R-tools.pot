@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.2.0\n"
-"POT-Creation-Date: 2014-12-23 14:20\n"
+"POT-Creation-Date: 2014-12-24 16:51\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1366,9 +1366,7 @@ msgid "ERROR: unable to create installation directory %s"
 msgstr ""
 
 
-#: R/build.R: 0
 #: R/check.R: 0
-#. R/build.R: gettext("EXISTS but not correct format", domain = "R-tools")
 #. R/check.R: gettext("EXISTS but not correct format", domain = "R-tools")
 
 msgid "EXISTS but not correct format"
@@ -5761,10 +5759,12 @@ msgid "file %s: non-ASCII input and no declared encoding"
 msgstr ""
 
 
+#: R/build.R: 0
 #: R/check.R: 0
-#. R/check.R: gettext("file EXISTS but not correct format", domain = "R-tools")
+#. R/build.R: gettext("file EXISTS but is not of correct format", domain = "R-tools")
+#. R/check.R: gettext("file EXISTS but is not of correct format", domain = "R-tools")
 
-msgid "file EXISTS but not correct format"
+msgid "file EXISTS but is not of correct format"
 msgstr ""
 
 
