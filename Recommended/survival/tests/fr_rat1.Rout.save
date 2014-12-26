@@ -1,11 +1,11 @@
 
-R Under development (unstable) (2014-12-13 r121) -- "Unsuffered Consequences"
+Ivory Under development (unstable) (2014-12-24 r143) -- "Internationalized Version of R"
+Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
+
+R Under development (unstable) (2014-12-24 r67210) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
-
-This is Ivory - a modified version of R-devel (revision 67162).
-See README-IVORY file for details.
-Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
 
 Ivory is not part of the R project, so please do not report bugs
 via r-bugs or the R website - instead refer to the author.
@@ -114,4 +114,4 @@ Likelihood ratio test=30 on 14.6 df, p=0.0101 n=150
 > 
 > proc.time()
    user  system elapsed 
-  0.404   0.049   0.439 
+  0.516   0.057   0.558 

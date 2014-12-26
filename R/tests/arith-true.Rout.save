@@ -1,11 +1,11 @@
 
-R Under development (unstable) (2014-12-13 r121) -- "Unsuffered Consequences"
+Ivory Under development (unstable) (2014-12-24 r143) -- "Internationalized Version of R"
+Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
+
+R Under development (unstable) (2014-12-24 r67210) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
-
-This is Ivory - a modified version of R-devel (revision 67162).
-See README-IVORY file for details.
-Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
 
 Ivory is not part of the R project, so please do not report bugs
 via r-bugs or the R website - instead refer to the author.
@@ -330,5 +330,5 @@ Warning messages:
 > 
 > ## Last Line:
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  0.48 0.012 0.532 0 0 
+Time elapsed:  0.495 0.011 0.508 0 0 
 > 

@@ -1,11 +1,11 @@
 
-R Under development (unstable) (2014-12-13 r121) -- "Unsuffered Consequences"
+Ivory Under development (unstable) (2014-12-24 r143) -- "Internationalized Version of R"
+Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
+
+R Under development (unstable) (2014-12-24 r67210) -- "Unsuffered Consequences"
 Copyright (C) 2014 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
-
-This is Ivory - a modified version of R-devel (revision 67162).
-See README-IVORY file for details.
-Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
 
 Ivory is not part of the R project, so please do not report bugs
 via r-bugs or the R website - instead refer to the author.
@@ -195,7 +195,7 @@ Error in command 'assertWarning(ff())':
 > bibstyle("unsorted", sortKeys = function(refs) seq_along(refs),
 +     fmtPrefix = function(paper) paste0("[", paper$.index, "]"),
 +        .init = TRUE)
-<environment: 0x28f1770>
+<environment: 0x20e30a8>
 > print(refs, .bibstyle = "unsorted")
 [1] R Core Team (2013). _R: A Language and Environment for Statistical
 Computing_. R Foundation for Statistical Computing, Vienna, Austria.
@@ -444,7 +444,7 @@ _Journal of the Royal Statistical Society, Series B_, *26*, pp.
 > ### Title: Check Source Packages and Their Reverse Dependencies
 > ### Aliases: check_packages_in_dir summarize_check_packages_in_dir_depends
 > ###   summarize_check_packages_in_dir_results
-> ###   summarize_check_packages_in_dir_timings
+> ###   summarize_check_packages_in_dir_timings check_packages_in_dir_changes
 > ### Keywords: utilities
 > 
 > ### ** Examples
@@ -1027,7 +1027,7 @@ List of 6 components
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.754 0.033 0.821 0 0 
+Time elapsed:  0.797 0.035 0.862 0 0 
 > grDevices::dev.off()
 null device 
           1 

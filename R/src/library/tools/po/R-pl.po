@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-24 16:51\n"
+"POT-Creation-Date: 2014-12-26 12:21\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -62,7 +62,8 @@ msgid "%s is of class %s"
 msgstr "%s jest obiektem klasy %s"
 
 #. R/admin.R: gettextf("%s is using %s encoding", sQuote(basename(file)), sQuote(enc), domain = "R-tools")
-#: R/admin.R:0
+#. R/check.R: gettextf("%s is using %s encoding", sQuote(basename(file)), sQuote(enc), domain = "R-tools")
+#: R/admin.R:0 R/check.R:0
 msgid "%s is using %s encoding"
 msgstr "%s używa kodowania %s"
 
@@ -2666,16 +2667,11 @@ msgstr "Wymagany jest obiekt Rd"
 msgid "Re-running with no redirection of stdout/stderr."
 msgstr "Ponowne uruchamianie bez przekierowania stdout/stderr."
 
-#. R/CRANtools.R: gettextf("Reading %s%s failed with message: %s", mirror, path_ts1, conditionMessage(mirror_ts1),     domain = "R-tools")
-#. R/CRANtools.R: gettextf("Reading %s%s failed with message: %s", mirror, path_ts2, conditionMessage(mirror_ts2),     domain = "R-tools")
+#. R/CRANtools.R: gettextf("Reading %s failed with message: %s", path, conditionMessage(db), domain = "R-tools")
+#. R/CRANtools.R: gettextf("Reading %s failed with message: %s", path, conditionMessage(ts), domain = "R-tools")
 #: R/CRANtools.R:0
-msgid "Reading %s%s failed with message: %s"
-msgstr "Czytanie %s%s nie powiodło się z wynikiem: %s"
-
-#. R/CRANtools.R: gettextf("Reading %ssrc/contrib/PACKAGES.gz failed with message: %s", mirror, conditionMessage(mirror_packages),     domain = "R-tools")
-#: R/CRANtools.R:0
-msgid "Reading %ssrc/contrib/PACKAGES.gz failed with message: %s"
-msgstr "Czytanie %ssrc/contrib/PACKAGES.gz nie powiodło się z wynikiem: %s"
+msgid "Reading %s failed with message: %s"
+msgstr "Czytanie %s nie powiodło się z wynikiem: %s"
 
 #. R/build.R: gettextf("Removed empty directory %s\n", sQuote(d), domain = "R-tools")
 #: R/build.R:0
@@ -2935,6 +2931,16 @@ msgstr "Standaryzowalne: TRUE"
 #: R/QC.R:0
 msgid "Standardized license specification:"
 msgstr "Ustandaryzowana specyfikacja licencji:"
+
+#. R/logging.R: gettextf("Status: %s\n", m, domain = "R-tools")
+#: R/logging.R:0
+msgid "Status: %s"
+msgstr "Status: %s"
+
+#. R/logging.R: gettext("Status: OK\n", domain = "R-tools")
+#: R/logging.R:0
+msgid "Status: OK"
+msgstr "Status: OK"
 
 #. R/QC.R: gettext("Strong dependencies not in mainstream repositories:", domain = "R-tools")
 #: R/QC.R:0
@@ -5593,7 +5599,6 @@ msgstr "użycie opcji '--use-zip-data' zostało zlikwidowane"
 msgid "use of '--use-zip-data' is deprecated"
 msgstr "użycie opcji '--use-zip-data' jest przestarzałe"
 
-#. R/check.R: gettextf("using %s", sQuote(enc), domain = "R-tools")
 #. R/check.R: gettextf("using %s", R.version.string, domain = "R-tools")
 #: R/check.R:0
 msgid "using %s"
@@ -5696,6 +5701,30 @@ msgid_plural "  \\%s lines wider than %d characters:"
 msgstr[0] "linie \\%s szersze niż %d znak:"
 msgstr[1] "linie \\%s szersze niż %d znaki:"
 msgstr[2] "linie \\%s szersze niż %d znaków:"
+
+#. R/logging.R: ngettext(counts["ERROR"], "%d ERROR", "%d ERRORS", domain = "R-tools")
+#: R/logging.R:0
+msgid "%d ERROR"
+msgid_plural "%d ERRORS"
+msgstr[0] "%d BŁĄD"
+msgstr[1] "%d BŁĘDY"
+msgstr[2] "%d BŁĘDÓW"
+
+#. R/logging.R: ngettext(counts["NOTE"], "%d NOTE", "%d NOTES", domain = "R-tools")
+#: R/logging.R:0
+msgid "%d NOTE"
+msgid_plural "%d NOTES"
+msgstr[0] "%d UWAGA"
+msgstr[1] "%d UWAGI"
+msgstr[2] "%d UWAG"
+
+#. R/logging.R: ngettext(counts["WARNING"], "%d WARNING", "%d WARNINGS", domain = "R-tools")
+#: R/logging.R:0
+msgid "%d WARNING"
+msgid_plural "%d WARNINGS"
+msgstr[0] "%d OSTRZEŻENIE"
+msgstr[1] "%d OSTRZEŻENIA"
+msgstr[2] "%d OSTRZEŻEŃ"
 
 #. R/pdftools.R: ngettext(doc$size, "%d byte", "%d bytes", domain = "R-tools")
 #. R/pdftools.R: ngettext(length(bytes), "%d byte", "%d bytes")
@@ -6219,14 +6248,6 @@ msgstr[0] "Brakujący lub niewyeksportowany obiekt: %s"
 msgstr[1] "Brakujące lub niewyeksportowane obiekty: %s"
 msgstr[2] "Brakujące lub niewyeksportowane obiekty: %s"
 
-#. R/logging.R: ngettext(Log$notes, "NOTE: There was %d note.\n", "NOTE: There were %d notes.\n",     domain = "R-tools")
-#: R/logging.R:0
-msgid "NOTE: There was %d note.\n"
-msgid_plural "NOTE: There were %d notes.\n"
-msgstr[0] "UWAGA: Była %d uwaga.\n"
-msgstr[1] "UWAGA: Były %d uwagi.\n"
-msgstr[2] "UWAGA: Było %d uwag.\n"
-
 #. R/QC.R: ngettext(length(bad), "Namespace dependency not required:", "Namespace dependencies not required:",     domain = "R-tools")
 #: R/QC.R:0
 msgid "Namespace dependency not required:"
@@ -6621,22 +6642,6 @@ msgstr[1] ""
 msgstr[2] ""
 "Pakiety 'VignetteBuilder' są wymagane do sprawdzenia, ale nie są dostępne:"
 
-#. R/logging.R: ngettext(Log$errors, "WARNING: There was %d error.\n", "WARNING: There were %d errors.\n",     domain = "R-tools")
-#: R/logging.R:0
-msgid "WARNING: There was %d error.\n"
-msgid_plural "WARNING: There were %d errors.\n"
-msgstr[0] "OSTRZEŻENIE: Było %d ostrzeżenie.\n"
-msgstr[1] "OSTRZEŻENIE: Były %d ostrzeżenia.\n"
-msgstr[2] "OSTRZEŻENIE: Było %d ostrzeżeń.\n"
-
-#. R/logging.R: ngettext(Log$warnings, "WARNING: There was %d warning.\n", "WARNING: There were %d warnings.\n",     domain = "R-tools")
-#: R/logging.R:0
-msgid "WARNING: There was %d warning.\n"
-msgid_plural "WARNING: There were %d warnings.\n"
-msgstr[0] "OSTRZEŻENIE: Było %d ostrzeżenie.\n"
-msgstr[1] "OSTRZEŻENIE: Były %d ostrzeżenia.\n"
-msgstr[2] "OSTRZEŻENIE: Było %d ostrzeżeń.\n"
-
 #. R/QC.R: ngettext(len, "Warning in file %s:", "Warnings in file %s:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Warning in file %s:"
@@ -6759,6 +6764,30 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "nie można przekodować %s linia %s"
 msgstr[1] "nie można przekodować %s linie %s"
 msgstr[2] "nie można przekodować %s linie %s"
+
+#~ msgid "%s is using %s"
+#~ msgstr "%s używa kodowania %s"
+
+#~ msgid "Reading %ssrc/contrib/PACKAGES.gz failed with message: %s"
+#~ msgstr "Czytanie %ssrc/contrib/PACKAGES.gz nie powiodło się z wynikiem: %s"
+
+#~ msgid "NOTE: There was %d note.\n"
+#~ msgid_plural "NOTE: There were %d notes.\n"
+#~ msgstr[0] "UWAGA: Była %d uwaga.\n"
+#~ msgstr[1] "UWAGA: Były %d uwagi.\n"
+#~ msgstr[2] "UWAGA: Było %d uwag.\n"
+
+#~ msgid "WARNING: There was %d error.\n"
+#~ msgid_plural "WARNING: There were %d errors.\n"
+#~ msgstr[0] "OSTRZEŻENIE: Było %d ostrzeżenie.\n"
+#~ msgstr[1] "OSTRZEŻENIE: Były %d ostrzeżenia.\n"
+#~ msgstr[2] "OSTRZEŻENIE: Było %d ostrzeżeń.\n"
+
+#~ msgid "WARNING: There was %d warning.\n"
+#~ msgid_plural "WARNING: There were %d warnings.\n"
+#~ msgstr[0] "OSTRZEŻENIE: Było %d ostrzeżenie.\n"
+#~ msgstr[1] "OSTRZEŻENIE: Były %d ostrzeżenia.\n"
+#~ msgstr[2] "OSTRZEŻENIE: Było %d ostrzeżeń.\n"
 
 #~ msgid "file EXISTS but not correct format"
 #~ msgstr "plik ISTNIEJE ale nie posiada poprawnego formatu"

@@ -67,8 +67,8 @@ fe6ad576aaf42cf0941b7d90495c124c  man/boot.array.Rd
 6b3007848528061e27f16481c574e296  man/bigcity.Rd
 6a2d8014403301b0cab61c34d06af3d1  man/claridge.Rd
 1c7ab7bd19cb7d8c92a035df51812bfb  man/corr.Rd
-356ff75d96126a70ee3351c941d09c56  man/cloth.Rd
 956d104f3dfc94de7a01d63c4ede6869  man/imp.weights.Rd
+356ff75d96126a70ee3351c941d09c56  man/cloth.Rd
 78eba4ec430712d0b4e349db20529407  man/freq.array.Rd
 46e101fae60869b1db42ebd19eed6b24  man/polar.Rd
 31134456f3f3105174fca2291431aa79  man/fir.Rd
@@ -149,8 +149,8 @@ a51320555e514596e7daa274dd19d7ac  man/tsboot.Rd
 0af456aa727375a99ac438531a10804d  man/downs.bc.Rd
 c3ef56695f8b6e66b4a3030cf13a9708  man/darwin.Rd
 4d2fd92d1e05d98b196dc614c6d20d5e  NAMESPACE
-0ccf83db3b68a20f40e9291d2d50232a  po/R-boot.pot
 32526c175787cf5a2512cb37954eebf8  po/R-ru.po
+0ccf83db3b68a20f40e9291d2d50232a  po/R-boot.pot
 30c3cc767708f1c9b034085235c19670  po/R-pl.po
 680a6eed274aabf3b7166aab2f7189e2  po/R-fr.po
 4f66d5bf3600bb4179ba3a5d676f54ed  po/R-de.po

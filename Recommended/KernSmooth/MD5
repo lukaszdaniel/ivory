@@ -21,12 +21,12 @@ e3fdf390097e7bcab19d73285c8cee66  po/R-ko.po
 84461730024234dcc17218b6b11f83fb  inst/po/fr/LC_MESSAGES/R-KernSmooth.mo
 c0da69901ee4ec65d71d584cb4cd0847  PORTING
 4d37c68f063852a93ff686e654a0b4fd  src/init.c
-8290d2e9740414e315237f0d5d4024bb  src/Makevars
 eb3d453421ea2c85fe71697c9f826271  R/all.R
+8290d2e9740414e315237f0d5d4024bb  src/Makevars
 99da5301640f94f5edefda25b72c5699  src/sstdiag.f
 3e1727a65548c074666c70c328c7fb18  src/dgesl.f
-dd2dfdeab74b70230d0e6abadd1a55aa  src/sdiag.f
 03c87599eaa7875fb31ca4d4ea8b1770  src/locpoly.f
+dd2dfdeab74b70230d0e6abadd1a55aa  src/sdiag.f
 8b2926ed1798f467078e3bed97658367  src/linbin2D.f
 3518477f0489855c005d4c9d9e48de5d  src/cp.f
 fbf478a29898539e563ca19df62372fe  src/blkest.f

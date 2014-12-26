@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-12-24 16:51\n"
+"POT-Creation-Date: 2014-12-26 12:21\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -70,7 +70,8 @@ msgid "%s is of class %s"
 msgstr "클래스 '%s'에 대한 슬롯들"
 
 #. R/admin.R: gettextf("%s is using %s encoding", sQuote(basename(file)), sQuote(enc), domain = "R-tools")
-#: R/admin.R:0
+#. R/check.R: gettextf("%s is using %s encoding", sQuote(basename(file)), sQuote(enc), domain = "R-tools")
+#: R/admin.R:0 R/check.R:0
 msgid "%s is using %s encoding"
 msgstr ""
 
@@ -2625,20 +2626,11 @@ msgstr ""
 msgid "Re-running with no redirection of stdout/stderr."
 msgstr ""
 
-#. R/CRANtools.R: gettextf("Reading %s%s failed with message: %s", mirror, path_ts1, conditionMessage(mirror_ts1),     domain = "R-tools")
-#. R/CRANtools.R: gettextf("Reading %s%s failed with message: %s", mirror, path_ts2, conditionMessage(mirror_ts2),     domain = "R-tools")
+#. R/CRANtools.R: gettextf("Reading %s failed with message: %s", path, conditionMessage(db), domain = "R-tools")
+#. R/CRANtools.R: gettextf("Reading %s failed with message: %s", path, conditionMessage(ts), domain = "R-tools")
 #: R/CRANtools.R:0
 #, fuzzy
-msgid "Reading %s%s failed with message: %s"
-msgstr ""
-"비니에트 '%2$s'에서 %1$s을 실행하는데 실패했으며 다음과 같은 메시지가 반환되"
-"었습니다:\n"
-"%3$s"
-
-#. R/CRANtools.R: gettextf("Reading %ssrc/contrib/PACKAGES.gz failed with message: %s", mirror, conditionMessage(mirror_packages),     domain = "R-tools")
-#: R/CRANtools.R:0
-#, fuzzy
-msgid "Reading %ssrc/contrib/PACKAGES.gz failed with message: %s"
+msgid "Reading %s failed with message: %s"
 msgstr ""
 "비니에트 '%2$s'에서 %1$s을 실행하는데 실패했으며 다음과 같은 메시지가 반환되"
 "었습니다:\n"
@@ -2917,6 +2909,16 @@ msgstr ""
 #: R/QC.R:0
 msgid "Standardized license specification:"
 msgstr "표준화된 라이센스 지정입니다:"
+
+#. R/logging.R: gettextf("Status: %s\n", m, domain = "R-tools")
+#: R/logging.R:0
+msgid "Status: %s"
+msgstr ""
+
+#. R/logging.R: gettext("Status: OK\n", domain = "R-tools")
+#: R/logging.R:0
+msgid "Status: OK"
+msgstr ""
 
 #. R/QC.R: gettext("Strong dependencies not in mainstream repositories:", domain = "R-tools")
 #: R/QC.R:0
@@ -5663,7 +5665,6 @@ msgstr ""
 msgid "use of '--use-zip-data' is deprecated"
 msgstr ""
 
-#. R/check.R: gettextf("using %s", sQuote(enc), domain = "R-tools")
 #. R/check.R: gettextf("using %s", R.version.string, domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
@@ -5770,6 +5771,24 @@ msgstr[0] ""
 #: R/QC.R:0
 msgid "  \\%s lines wider than %d character:"
 msgid_plural "  \\%s lines wider than %d characters:"
+msgstr[0] ""
+
+#. R/logging.R: ngettext(counts["ERROR"], "%d ERROR", "%d ERRORS", domain = "R-tools")
+#: R/logging.R:0
+msgid "%d ERROR"
+msgid_plural "%d ERRORS"
+msgstr[0] ""
+
+#. R/logging.R: ngettext(counts["NOTE"], "%d NOTE", "%d NOTES", domain = "R-tools")
+#: R/logging.R:0
+msgid "%d NOTE"
+msgid_plural "%d NOTES"
+msgstr[0] ""
+
+#. R/logging.R: ngettext(counts["WARNING"], "%d WARNING", "%d WARNINGS", domain = "R-tools")
+#: R/logging.R:0
+msgid "%d WARNING"
+msgid_plural "%d WARNINGS"
 msgstr[0] ""
 
 #. R/pdftools.R: ngettext(doc$size, "%d byte", "%d bytes", domain = "R-tools")
@@ -6113,12 +6132,6 @@ msgid "Missing or unexported object: %s"
 msgid_plural "Missing or unexported objects: %s"
 msgstr[0] "다음은 누락되거나 예상하지 못한 객체입니다: %s"
 
-#. R/logging.R: ngettext(Log$notes, "NOTE: There was %d note.\n", "NOTE: There were %d notes.\n",     domain = "R-tools")
-#: R/logging.R:0
-msgid "NOTE: There was %d note.\n"
-msgid_plural "NOTE: There were %d notes.\n"
-msgstr[0] ""
-
 #. R/QC.R: ngettext(length(bad), "Namespace dependency not required:", "Namespace dependencies not required:",     domain = "R-tools")
 #: R/QC.R:0
 msgid "Namespace dependency not required:"
@@ -6382,18 +6395,6 @@ msgid_plural ""
 "VignetteBuilder packages required for checking but not available:"
 msgstr[0] ""
 
-#. R/logging.R: ngettext(Log$errors, "WARNING: There was %d error.\n", "WARNING: There were %d errors.\n",     domain = "R-tools")
-#: R/logging.R:0
-msgid "WARNING: There was %d error.\n"
-msgid_plural "WARNING: There were %d errors.\n"
-msgstr[0] ""
-
-#. R/logging.R: ngettext(Log$warnings, "WARNING: There was %d warning.\n", "WARNING: There were %d warnings.\n",     domain = "R-tools")
-#: R/logging.R:0
-msgid "WARNING: There was %d warning.\n"
-msgid_plural "WARNING: There were %d warnings.\n"
-msgstr[0] ""
-
 #. R/QC.R: ngettext(len, "Warning in file %s:", "Warnings in file %s:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Warning in file %s:"
@@ -6489,6 +6490,17 @@ msgstr[0] "%s 내에서 T/F를 찾았습니다"
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "코드 파일들을 기록할 수 없습니다"
+
+#, fuzzy
+#~ msgid "%s is using %s"
+#~ msgstr "%s를 실행중입니다"
+
+#, fuzzy
+#~ msgid "Reading %ssrc/contrib/PACKAGES.gz failed with message: %s"
+#~ msgstr ""
+#~ "비니에트 '%2$s'에서 %1$s을 실행하는데 실패했으며 다음과 같은 메시지가 반환"
+#~ "되었습니다:\n"
+#~ "%3$s"
 
 #, fuzzy
 #~ msgid "Inconsistent encoding specifications: %s with %%\\SweaveUTF8"
