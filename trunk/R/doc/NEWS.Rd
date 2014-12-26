@@ -185,6 +185,10 @@
       library search path.
 
       \item A new \code{plot.raster()} method has been added.
+
+      \item New \code{check_packages_in_dir_changes()} function in
+      package \pkg{tools} for conveniently analyzing how changing
+      sources impacts the check results of their reverse dependencies.
     }
   }
 
@@ -269,7 +273,7 @@
       guaranteed to have sufficient alignment for \code{long double}
       pointers.
 
-      \item \code{isPairList} now returns \code{TRUE} for DOTSXP.
+      \item \code{isPairList()} now returns \code{TRUE} for DOTSXP.
     }
   }
 
@@ -350,6 +354,10 @@
       \item \code{icuSetCollate()} now accepts \code{locale = "ASCII"}
       which uses the basic C function \code{strcmp} and so collates
       strings byte-by-byte in numerical order.
+      
+      \item \code{sessionInfo()} tries to report the OS version in use
+      (not just that compiled under, and including details of Linux
+      distributions).
     }
   }
 

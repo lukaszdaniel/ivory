@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-12-08 18:29\n"
+"POT-Creation-Date: 2014-12-26 12:18\n"
 "PO-Revision-Date: 2012-01-09 20:51+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1132,6 +1132,11 @@ msgid ""
 msgstr ""
 "Kørsel af aspell mislykkedes med diagnosen:\n"
 "%s"
+
+#. R/sessionInfo.R: gettext("Running under:", domain = "R-utils")
+#: R/sessionInfo.R:0
+msgid "Running under:"
+msgstr ""
 
 #. R/objects.R: gettextf("S3 method '%s' not found", method)
 #: R/objects.R:0

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-12-24 16:51\n"
+"POT-Creation-Date: 2014-12-26 12:21\n"
 "PO-Revision-Date: 2012-03-15 12:03-0500\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -71,7 +71,8 @@ msgid "%s is of class %s"
 msgstr "аргумент 'pkg' должен быть единичной длины"
 
 #. R/admin.R: gettextf("%s is using %s encoding", sQuote(basename(file)), sQuote(enc), domain = "R-tools")
-#: R/admin.R:0
+#. R/check.R: gettextf("%s is using %s encoding", sQuote(basename(file)), sQuote(enc), domain = "R-tools")
+#: R/admin.R:0 R/check.R:0
 msgid "%s is using %s encoding"
 msgstr ""
 
@@ -2672,19 +2673,11 @@ msgstr ""
 msgid "Re-running with no redirection of stdout/stderr."
 msgstr ""
 
-#. R/CRANtools.R: gettextf("Reading %s%s failed with message: %s", mirror, path_ts1, conditionMessage(mirror_ts1),     domain = "R-tools")
-#. R/CRANtools.R: gettextf("Reading %s%s failed with message: %s", mirror, path_ts2, conditionMessage(mirror_ts2),     domain = "R-tools")
+#. R/CRANtools.R: gettextf("Reading %s failed with message: %s", path, conditionMessage(db), domain = "R-tools")
+#. R/CRANtools.R: gettextf("Reading %s failed with message: %s", path, conditionMessage(ts), domain = "R-tools")
 #: R/CRANtools.R:0
 #, fuzzy
-msgid "Reading %s%s failed with message: %s"
-msgstr ""
-"выполнение Sweave в очерке '%s' не удалось с диагностикой:\n"
-"%s"
-
-#. R/CRANtools.R: gettextf("Reading %ssrc/contrib/PACKAGES.gz failed with message: %s", mirror, conditionMessage(mirror_packages),     domain = "R-tools")
-#: R/CRANtools.R:0
-#, fuzzy
-msgid "Reading %ssrc/contrib/PACKAGES.gz failed with message: %s"
+msgid "Reading %s failed with message: %s"
 msgstr ""
 "выполнение Sweave в очерке '%s' не удалось с диагностикой:\n"
 "%s"
@@ -2966,6 +2959,16 @@ msgstr "Стандартизируемо:: %s"
 #: R/QC.R:0
 msgid "Standardized license specification:"
 msgstr "Стандартизованная спецификация лицензии:"
+
+#. R/logging.R: gettextf("Status: %s\n", m, domain = "R-tools")
+#: R/logging.R:0
+msgid "Status: %s"
+msgstr ""
+
+#. R/logging.R: gettext("Status: OK\n", domain = "R-tools")
+#: R/logging.R:0
+msgid "Status: OK"
+msgstr ""
 
 #. R/QC.R: gettext("Strong dependencies not in mainstream repositories:", domain = "R-tools")
 #: R/QC.R:0
@@ -5769,7 +5772,6 @@ msgstr "'--use-zip-data' не работает"
 msgid "use of '--use-zip-data' is deprecated"
 msgstr "'--use-zip-data' не работает"
 
-#. R/check.R: gettextf("using %s", sQuote(enc), domain = "R-tools")
 #. R/check.R: gettextf("using %s", R.version.string, domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
@@ -5879,6 +5881,31 @@ msgstr[2] ""
 #: R/QC.R:0
 msgid "  \\%s lines wider than %d character:"
 msgid_plural "  \\%s lines wider than %d characters:"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/logging.R: ngettext(counts["ERROR"], "%d ERROR", "%d ERRORS", domain = "R-tools")
+#: R/logging.R:0
+#, fuzzy
+msgid "%d ERROR"
+msgid_plural "%d ERRORS"
+msgstr[0] "ОШИБКА:"
+msgstr[1] "ОШИБКА:"
+msgstr[2] "ОШИБКА:"
+
+#. R/logging.R: ngettext(counts["NOTE"], "%d NOTE", "%d NOTES", domain = "R-tools")
+#: R/logging.R:0
+msgid "%d NOTE"
+msgid_plural "%d NOTES"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/logging.R: ngettext(counts["WARNING"], "%d WARNING", "%d WARNINGS", domain = "R-tools")
+#: R/logging.R:0
+msgid "%d WARNING"
+msgid_plural "%d WARNINGS"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
@@ -6317,14 +6344,6 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#. R/logging.R: ngettext(Log$notes, "NOTE: There was %d note.\n", "NOTE: There were %d notes.\n",     domain = "R-tools")
-#: R/logging.R:0
-msgid "NOTE: There was %d note.\n"
-msgid_plural "NOTE: There were %d notes.\n"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
 #. R/QC.R: ngettext(length(bad), "Namespace dependency not required:", "Namespace dependencies not required:",     domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
@@ -6654,22 +6673,6 @@ msgstr[0] "Пакет требуется, но недоступен:"
 msgstr[1] "Пакет требуется, но недоступен:"
 msgstr[2] "Пакет требуется, но недоступен:"
 
-#. R/logging.R: ngettext(Log$errors, "WARNING: There was %d error.\n", "WARNING: There were %d errors.\n",     domain = "R-tools")
-#: R/logging.R:0
-msgid "WARNING: There was %d error.\n"
-msgid_plural "WARNING: There were %d errors.\n"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-#. R/logging.R: ngettext(Log$warnings, "WARNING: There was %d warning.\n", "WARNING: There were %d warnings.\n",     domain = "R-tools")
-#: R/logging.R:0
-msgid "WARNING: There was %d warning.\n"
-msgid_plural "WARNING: There were %d warnings.\n"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
 #. R/QC.R: ngettext(len, "Warning in file %s:", "Warnings in file %s:", domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
@@ -6795,6 +6798,16 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "не могу перекодировать '%s' строк(и) %s"
 msgstr[1] "не могу перекодировать '%s' строк(и) %s"
 msgstr[2] "не могу перекодировать '%s' строк(и) %s"
+
+#, fuzzy
+#~ msgid "%s is using %s"
+#~ msgstr "Запускаю"
+
+#, fuzzy
+#~ msgid "Reading %ssrc/contrib/PACKAGES.gz failed with message: %s"
+#~ msgstr ""
+#~ "выполнение Sweave в очерке '%s' не удалось с диагностикой:\n"
+#~ "%s"
 
 #, fuzzy
 #~ msgid "Depends: %s"

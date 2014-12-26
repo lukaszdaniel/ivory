@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-12-08 18:29\n"
+"POT-Creation-Date: 2014-12-26 12:18\n"
 "PO-Revision-Date: 2012-12-30 23:32+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -1106,6 +1106,11 @@ msgstr ""
 msgid ""
 "Running aspell failed with diagnostics:\n"
 "%s"
+msgstr ""
+
+#. R/sessionInfo.R: gettext("Running under:", domain = "R-utils")
+#: R/sessionInfo.R:0
+msgid "Running under:"
 msgstr ""
 
 #. R/objects.R: gettextf("S3 method '%s' not found", method)

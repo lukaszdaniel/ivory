@@ -106,13 +106,25 @@ function(Log, text = "")
 summaryLog <-
 function(Log)
 {
-    if((Log$errors > 0L) || (Log$warnings > 0L) || (Log$notes > 0L)) {
-        if(Log$errors > 0L)
-          printLog(Log, sprintf(ngettext(Log$errors,"WARNING: There was %d error.\n", "WARNING: There were %d errors.\n", domain = "R-tools"), Log$errors))
-		if(Log$warnings > 0L)
-	  	  printLog(Log, sprintf(ngettext(Log$warnings, "WARNING: There was %d warning.\n", "WARNING: There were %d warnings.\n", domain = "R-tools"), Log$warnings))
-    	if(Log$notes > 0L)
-      	  printLog(Log, sprintf(ngettext(Log$notes, "NOTE: There was %d note.\n", "NOTE: There were %d notes.\n", domain = "R-tools"), Log$notes))
-    	cat(gettextf("See\n  %s\nfor details.\n", sQuote(Log$filename), domain = "R-tools"))
+    counts <- c(ERROR = Log$errors,
+                WARNING = Log$warnings,
+                NOTE = Log$notes)
+    counts <- counts[counts > 0L]
+    if(!length(counts))
+        printLog(Log,
+                 gettext("Status: OK\n", domain = "R-tools"))
+    else {
+      m <- c()
+      for(n in names(counts)){
+        switch(n, 
+               "NOTE" = m <- c(m, (sprintf(ngettext(counts["NOTE"], "%d NOTE", "%d NOTES", domain = "R-tools"), counts["NOTE"]))),
+               "ERROR" = m <- c(m, (sprintf(ngettext(counts["ERROR"], "%d ERROR", "%d ERRORS", domain = "R-tools"), counts["ERROR"]))),
+               "WARNING" = m <- c(m, (sprintf(ngettext(counts["WARNING"], "%d WARNING", "%d WARNINGS", domain = "R-tools"), counts["WARNING"])))
+        )
+      }
+      m <- paste(m, sep = "", collapse = ", ")
+        printLog(Log,
+                 gettextf("Status: %s\n", m, domain = "R-tools"))
+        cat(gettextf("See\n  %s\nfor details.\n", sQuote(Log$filename), domain = "R-tools"))
     }
 }

@@ -2568,8 +2568,9 @@ setRlibs <-
         ## If the vignettes declare an encoding, are they actually in it?
         ## (We don't check the .tex, though)
         bad_vignettes <- character()
-        for (v in vigns$docs) {
-            enc <- getVignetteEncoding(v, TRUE)
+        for (i in seq_along(vigns$docs)) {
+	    v <- vigns$docs[i]
+            enc <- vigns$encodings[i]
             if (enc %in% c("", "non-ASCII", "unknown")) next
             lines <- readLines(v, warn = FALSE) # some miss final NA
             lines2 <- iconv(lines, enc, "UTF-16LE", toRaw = TRUE)
@@ -2605,7 +2606,8 @@ setRlibs <-
                 file <- vigns$docs[i]
                 name <- vigns$names[i]
                 enc <- vigns$encodings[i]
-                cat("  ", sQuote(basename(file)), if(nzchar(enc)) gettextf("using %s", sQuote(enc), domain = "R-tools"), "...", sep = "")
+                if(nzchar(enc)) cat("   ", gettextf("%s is using %s encoding", sQuote(basename(file)), sQuote(enc), domain = "R-tools"), " ...", sep = "")
+                else cat("   ", sQuote(basename(file)), " ...", sep = "")
                 Rcmd <- paste0("options(warn=1)\ntools:::.run_one_vignette('",
                                basename(file), "', '", vigns$dir, "'",
                                if (nzchar(enc))
@@ -3854,6 +3856,7 @@ setRlibs <-
     }
     if (run_dontrun) opts <- c(opts, "--run-dontrun")
     if (run_donttest) opts <- c(opts, "--run-donttest")
+    opts0 <- opts # other options are added later.
 
     if (install == "fake") {
         ## If we fake installation, then we cannot *run* any code.
@@ -4153,6 +4156,7 @@ setRlibs <-
         .unpack.time <- Sys.time()
 
         ## report options used
+        opts <- opts0
         if (!do_codoc) opts <- c(opts, "--no-codoc")
         if (!do_examples && !spec_install) opts <- c(opts, "--no-examples")
         if (!do_tests && !spec_install) opts <- c(opts, "--no-tests")
@@ -4342,11 +4346,10 @@ setRlibs <-
             }
         }
         messageLog(Log, gettext("DONE", domain = "R-tools"))
-        if ((Log$errors > 0L) || (Log$warnings > 0L) || (Log$notes > 0L)) {
-            message(""); summaryLog(Log)
-	    if (Log$errors > 0L)
-		do_exit(1L)
-        }
+        message("")
+        summaryLog(Log)
+        if (Log$errors > 0L)
+            do_exit(1L)
 
         if(config_val_to_logical(Sys.getenv("_R_CHECK_CRAN_STATUS_SUMMARY_",
                                             "FALSE"))) {

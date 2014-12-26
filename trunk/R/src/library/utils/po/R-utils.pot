@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.2.0\n"
-"POT-Creation-Date: 2014-12-08 18:29\n"
+"POT-Creation-Date: 2014-12-26 12:18\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1463,6 +1463,13 @@ msgstr ""
 #. R/aspell.R: gettextf("Running aspell failed with diagnostics:\n%s", paste(out$stderr, collapse = "\n"))
 
 msgid "Running aspell failed with diagnostics:\n%s"
+msgstr ""
+
+
+#: R/sessionInfo.R: 0
+#. R/sessionInfo.R: gettext("Running under:", domain = "R-utils")
+
+msgid "Running under:"
 msgstr ""
 
 
