@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-12-24 16:39\n"
+"POT-Creation-Date: 2014-12-27 08:30\n"
 "PO-Revision-Date: 2012-09-28 22:18+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -134,12 +134,6 @@ msgstr "argumentet «%s» er ikkje brukt (enno)"
 #, fuzzy
 msgid "%s value was converted to character string"
 msgstr "gjort om til teiknstreng"
-
-#. R/library.R: gettextf("%sPackages in library %s:\n", sep, sQuote(lib))
-#: R/library.R:0
-#, fuzzy
-msgid "%sPackages in library %s:"
-msgstr "«%s» pakkar i biblioteket «%s»:"
 
 #. R/match.R: gettextf("'%s' and '%s' arguments must be character vectors", "input", "target")
 #: R/match.R:0
@@ -1567,6 +1561,18 @@ msgstr ""
 #, fuzzy
 msgid "Numeric: lengths (%d, %d) differ"
 msgstr "argumentlengda er forskjellige"
+
+#. R/library.R: gettextf("Package %s version %s cannot be unloaded", dQuote(package), oldversion,     domain = "R-base")
+#: R/library.R:0
+#, fuzzy
+msgid "Package %s version %s cannot be unloaded"
+msgstr "pakken «%s» er ikkje lasta"
+
+#. R/library.R: gettextf("Packages in library %s:\n", sQuote(lib))
+#: R/library.R:0
+#, fuzzy
+msgid "Packages in library %s:"
+msgstr "«%s» pakkar i biblioteket «%s»:"
 
 #. R/dataframe.R: gettextf("Partial match of '%s' to '%s' in data frame", name, names[pmatch(name,     names)])
 #: R/dataframe.R:0
