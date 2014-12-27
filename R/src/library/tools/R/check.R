@@ -683,6 +683,15 @@ setRlibs <-
             }
         }
 
+        if(!is.na(ncomp <- db["NeedsCompilation"])) {
+            if (!ncomp %in% c("yes", "no")) {
+                if(!any) noteLog(Log)
+                any <- TRUE
+                printLog(Log, gettext("'NeedsCompilation' field must take value 'yes' or 'no'", domain = "R-tools"), "\n")
+            }
+        }
+
+
         out <- format(tools:::.check_package_description2(dfile))
         if (length(out)) {
             if(!any) noteLog(Log)
