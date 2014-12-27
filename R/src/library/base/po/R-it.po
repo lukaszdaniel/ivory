@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-12-24 16:39\n"
+"POT-Creation-Date: 2014-12-27 08:30\n"
 "PO-Revision-Date: 2005-02-16 08:34\n"
 "Last-Translator: Stefano M. Iacus <Stefano.Iacus@R-project.org>\n"
 "Language-Team: Italian\n"
@@ -129,12 +129,6 @@ msgstr "argomento '%s' non (ancora) usato"
 #, fuzzy
 msgid "%s value was converted to character string"
 msgstr "'file' deve essere NULL, una connessione o una stringa di caratteri"
-
-#. R/library.R: gettextf("%sPackages in library %s:\n", sep, sQuote(lib))
-#: R/library.R:0
-#, fuzzy
-msgid "%sPackages in library %s:"
-msgstr "%sPacchetti nella libreria '%s':"
 
 #. R/match.R: gettextf("'%s' and '%s' arguments must be character vectors", "input", "target")
 #: R/match.R:0
@@ -1524,6 +1518,18 @@ msgstr ""
 #, fuzzy
 msgid "Numeric: lengths (%d, %d) differ"
 msgstr "la lunghezza degli argomenti differisce"
+
+#. R/library.R: gettextf("Package %s version %s cannot be unloaded", dQuote(package), oldversion,     domain = "R-base")
+#: R/library.R:0
+#, fuzzy
+msgid "Package %s version %s cannot be unloaded"
+msgstr "pacchetto %s non caricato"
+
+#. R/library.R: gettextf("Packages in library %s:\n", sQuote(lib))
+#: R/library.R:0
+#, fuzzy
+msgid "Packages in library %s:"
+msgstr "%sPacchetti nella libreria '%s':"
 
 #. R/dataframe.R: gettextf("Partial match of '%s' to '%s' in data frame", name, names[pmatch(name,     names)])
 #: R/dataframe.R:0

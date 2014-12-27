@@ -267,6 +267,17 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
             ## has a namespace, then the namespace loading mechanism
             ## takes over.
             if (packageHasNamespace(package, which.lib.loc)) {
+                if (package %in% loadedNamespaces()) {
+                    # Already loaded.  Does the version match?
+                    newversion <- as.numeric_version(pkgInfo$DESCRIPTION["Version"])
+                    oldversion <- as.numeric_version(getNamespaceVersion(package))
+                    if (newversion != oldversion) {
+                    	# No, so try to unload the previous one
+                    	res <- try(unloadNamespace(package))
+                    	if (inherits(res, "try-error"))
+                    	    stop(gettextf("Package %s version %s cannot be unloaded", sQuote(package), oldversion, domain = "R-base"))
+                    }
+                }
                 tt <- try({
                     ns <- loadNamespace(package, c(which.lib.loc, lib.loc))
                     env <- attachNamespace(ns, pos = pos, deps)
@@ -414,7 +425,7 @@ function(x, ...)
                   function(ind) db[ind, c("Package", "Title"),
                                    drop = FALSE])
     c(unlist(Map(function(lib, sep) {
-        c(gettextf("%sPackages in library %s:\n", sep, sQuote(lib)),
+        c(paste(sep, gettextf("Packages in library %s:\n", sQuote(lib)), sep = "", collapse = ""),
           formatDL(out[[lib]][, "Package"],
                    out[[lib]][, "Title"]))
     },

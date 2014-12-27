@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-12-24 16:39\n"
+"POT-Creation-Date: 2014-12-27 08:30\n"
 "PO-Revision-Date: 2011-04-01 04:29+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -122,11 +122,6 @@ msgstr "isim alanı"
 #. R/attach.R: gettextf("%s value was converted to character string", sQuote(name))
 #: R/attach.R:0
 msgid "%s value was converted to character string"
-msgstr ""
-
-#. R/library.R: gettextf("%sPackages in library %s:\n", sep, sQuote(lib))
-#: R/library.R:0
-msgid "%sPackages in library %s:"
 msgstr ""
 
 #. R/match.R: gettextf("'%s' and '%s' arguments must be character vectors", "input", "target")
@@ -1446,6 +1441,16 @@ msgstr ""
 #. R/all.equal.R: gettextf("Numeric: lengths (%d, %d) differ", lt, lc)
 #: R/all.equal.R:0
 msgid "Numeric: lengths (%d, %d) differ"
+msgstr ""
+
+#. R/library.R: gettextf("Package %s version %s cannot be unloaded", dQuote(package), oldversion,     domain = "R-base")
+#: R/library.R:0
+msgid "Package %s version %s cannot be unloaded"
+msgstr ""
+
+#. R/library.R: gettextf("Packages in library %s:\n", sQuote(lib))
+#: R/library.R:0
+msgid "Packages in library %s:"
 msgstr ""
 
 #. R/dataframe.R: gettextf("Partial match of '%s' to '%s' in data frame", name, names[pmatch(name,     names)])
