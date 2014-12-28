@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-11-01 13:00\n"
+"POT-Creation-Date: 2014-12-28 16:59\n"
 "PO-Revision-Date: 2005-04-08 08:37+0000\n"
 "Last-Translator: 陈斐 <FeiChen@FairIsaac.com>\n"
 "Language-Team: Chinese\n"
@@ -3674,6 +3674,12 @@ msgstr "对比只适用于因子"
 #. R/contrast.R: stop("contrasts can be applied only to factors with 2 or more levels")
 #: R/contrast.R:0
 msgid "contrasts can be applied only to factors with 2 or more levels"
+msgstr "对比只适用于有两个或多于两个层次的因子"
+
+#. R/models.R: gettextf("contrasts dropped from factor %s due to missing levels", nm, domain = "R-stats")
+#: R/models.R:0
+#, fuzzy
+msgid "contrasts dropped from factor %s due to missing levels"
 msgstr "对比只适用于有两个或多于两个层次的因子"
 
 #. R/contr.poly.R: gettextf("contrasts not defined for %d degrees of freedom", n - 1)

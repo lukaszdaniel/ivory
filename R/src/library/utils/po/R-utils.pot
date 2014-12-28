@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.2.0\n"
-"POT-Creation-Date: 2014-12-26 12:18\n"
+"POT-Creation-Date: 2014-12-28 17:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3966,9 +3966,9 @@ msgstr[1]    ""
 
 
 #: R/packages2.R: 0
-#. R/packages2.R: ngettext(length(s2), "Package which are only available in source form, and may need compilation of C/C++/Fortran",     "Packages which are only available in source form, and may need compilation of C/C++/Fortran",     domain = "R-utils")
+#. R/packages2.R: ngettext(length(s2), "Package which is only available in source form, and may need compilation of C/C++/Fortran",     "Packages which are only available in source form, and may need compilation of C/C++/Fortran",     domain = "R-utils")
 
-msgid        "Package which are only available in source form, and may need compilation of C/C++/Fortran"
+msgid        "Package which is only available in source form, and may need compilation of C/C++/Fortran"
 msgid_plural "Packages which are only available in source form, and may need compilation of C/C++/Fortran"
 msgstr[0]    ""
 msgstr[1]    ""
@@ -4096,6 +4096,15 @@ msgstr[1]    ""
 
 msgid        "package %s is in use and will not be installed"
 msgid_plural "packages %s are in use and will not be installed"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/packages2.R: 0
+#. R/packages2.R: ngettext(sum(miss), "package %s is not available (as a binary package for %s)", "packages %s are not available (as a binary packages for %s)",     domain = "R-utils")
+
+msgid        "package %s is not available (as a binary package for %s)"
+msgid_plural "packages %s are not available (as a binary packages for %s)"
 msgstr[0]    ""
 msgstr[1]    ""
 

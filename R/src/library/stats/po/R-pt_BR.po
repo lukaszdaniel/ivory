@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-11-01 13:00\n"
+"POT-Creation-Date: 2014-12-28 16:59\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -3685,6 +3685,12 @@ msgstr "contrastes aplicam-se apenas a fatores"
 #. R/contrast.R: stop("contrasts can be applied only to factors with 2 or more levels")
 #: R/contrast.R:0
 msgid "contrasts can be applied only to factors with 2 or more levels"
+msgstr "contrastes podem ser aplicados apenas a fatores com 2 ou mais níveis"
+
+#. R/models.R: gettextf("contrasts dropped from factor %s due to missing levels", nm, domain = "R-stats")
+#: R/models.R:0
+#, fuzzy
+msgid "contrasts dropped from factor %s due to missing levels"
 msgstr "contrastes podem ser aplicados apenas a fatores com 2 ou mais níveis"
 
 #. R/contr.poly.R: gettextf("contrasts not defined for %d degrees of freedom", n - 1)

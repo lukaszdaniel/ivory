@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-11-01 13:00\n"
+"POT-Creation-Date: 2014-12-28 16:59\n"
 "PO-Revision-Date: 2012-02-26 14:13+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -3686,6 +3686,12 @@ msgstr " 対比は因子にしか適用できません "
 #. R/contrast.R: stop("contrasts can be applied only to factors with 2 or more levels")
 #: R/contrast.R:0
 msgid "contrasts can be applied only to factors with 2 or more levels"
+msgstr " 対比は二つ以上の水準を持つ因子にしか適用できません "
+
+#. R/models.R: gettextf("contrasts dropped from factor %s due to missing levels", nm, domain = "R-stats")
+#: R/models.R:0
+#, fuzzy
+msgid "contrasts dropped from factor %s due to missing levels"
 msgstr " 対比は二つ以上の水準を持つ因子にしか適用できません "
 
 #. R/contr.poly.R: gettextf("contrasts not defined for %d degrees of freedom", n - 1)

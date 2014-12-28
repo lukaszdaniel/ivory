@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.2.0\n"
-"POT-Creation-Date: 2014-12-26 12:21\n"
+"POT-Creation-Date: 2014-12-28 17:05\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -254,6 +254,13 @@ msgstr ""
 #. R/QC.R: gettextf("'LinkingTo' field is unused: package has no 'src' directory", domain = "R-tools")
 
 msgid "'LinkingTo' field is unused: package has no 'src' directory"
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("'NeedsCompilation' field must take value 'yes' or 'no'", domain = "R-tools")
+
+msgid "'NeedsCompilation' field must take value 'yes' or 'no'"
 msgstr ""
 
 
@@ -1853,6 +1860,13 @@ msgid "Functions with \\usage entries need to have the appropriate \\alias entri
 msgstr ""
 
 
+#: R/check.R: 0
+#. R/check.R: gettext("GNU make is a SystemRequirements.", domain = "R-tools")
+
+msgid "GNU make is a SystemRequirements."
+msgstr ""
+
+
 #: R/QC.R: 0
 #. R/QC.R: gettextf("Generics 'g' in 'env' %s where %s errors: %s\nMay need something like\n\n%s\nin NAMESPACE.",     format(env), sQuote("hasMethods(g, env)"), paste(sQuote(rErr), collapse = ", "),     paste0("  importFrom(", paste(dq(pkgs), dq(rErr), sep = ", "), ")\n"))
 
@@ -2679,6 +2693,7 @@ msgstr ""
 #: R/check.R: 0
 #: R/check.R: 0
 #: R/check.R: 0
+#: R/check.R: 0
 #: R/checktools.R: 0
 #: R/testing.R: 0
 #: R/testing.R: 0
@@ -2693,6 +2708,7 @@ msgstr ""
 #. R/build.R: gettext("OK")
 #. R/build.R: gettext("OK", domain = "R-tools")
 #. R/build.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
@@ -3109,6 +3125,13 @@ msgstr ""
 #. R/check.R: gettext("Please remove or rename the files.\nSee section 'Package subdirectories' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
 
 msgid "Please remove or rename the files.\nSee section 'Package subdirectories' in the 'Writing R Extensions' manual."
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("Portable Makefiles do not use GNU extensions such as +=, :=, $(shell), $(wildcard), ifeq ... endif. See section 'Writing portable packages' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+
+msgid "Portable Makefiles do not use GNU extensions such as +=, :=, $(shell), $(wildcard), ifeq ... endif. See section 'Writing portable packages' in the 'Writing R Extensions' manual."
 msgstr ""
 
 
@@ -4950,6 +4973,13 @@ msgstr ""
 #. R/check.R: gettext("checking for .dll and .exe files ...", domain = "R-tools")
 
 msgid "checking for .dll and .exe files ..."
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("checking for GNU extensions in Makefiles ...", domain = "R-tools")
+
+msgid "checking for GNU extensions in Makefiles ..."
 msgstr ""
 
 
@@ -7508,6 +7538,15 @@ msgstr[1]    ""
 
 msgid        "Found the following executable file:"
 msgid_plural "Found the following executable files:"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/check.R: 0
+#. R/check.R: ngettext(length(bad_files), "Found the following file containing GNU extensions:",     "Found the following files containing GNU extensions:", domain = "R-tools")
+
+msgid        "Found the following file containing GNU extensions:"
+msgid_plural "Found the following files containing GNU extensions:"
 msgstr[0]    ""
 msgstr[1]    ""
 
