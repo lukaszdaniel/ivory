@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-11-01 13:00\n"
+"POT-Creation-Date: 2014-12-28 16:59\n"
 "PO-Revision-Date: 2012-03-06 09:25+0100\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -3696,6 +3696,13 @@ msgstr "Kontraste arbeiten nur auf Faktoren"
 #. R/contrast.R: stop("contrasts can be applied only to factors with 2 or more levels")
 #: R/contrast.R:0
 msgid "contrasts can be applied only to factors with 2 or more levels"
+msgstr ""
+"Kontraste können nur auf Faktoren mit 2 oder mehr Stufen angewendet werden"
+
+#. R/models.R: gettextf("contrasts dropped from factor %s due to missing levels", nm, domain = "R-stats")
+#: R/models.R:0
+#, fuzzy
+msgid "contrasts dropped from factor %s due to missing levels"
 msgstr ""
 "Kontraste können nur auf Faktoren mit 2 oder mehr Stufen angewendet werden"
 

@@ -2007,6 +2007,30 @@ setRlibs <-
                 printLog(Log, paste(c(out, ""), collapse = "\n"))
             } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
+        ## Check GNUisms in src/Make{vars,file}[.in]
+        if (length(all_files)) {
+            checkingLog(Log, gettext("checking for GNU extensions in Makefiles ...", domain = "R-tools"))
+            bad_files <- character()
+            for(f in all_files) {
+                contents <- readLines(f, warn = FALSE)
+                contents <- grep("^ *#", contents, value = TRUE, invert = TRUE)
+                ## Things like $(SUBDIRS:=.a)
+                contents <- grep("[$][(].+:=.+[)]", contents,
+                                 value = TRUE, invert = TRUE)
+                if (any(grepl("([+]=|:=|[$][(]wildcard|[$][(]shell|[$][(]eval|^ifeq|^ifneq)", contents)))
+                    bad_files <- c(bad_files, f)
+            }
+            SysReq <- desc["SystemRequirements"]
+            if (length(bad_files)) {
+                if(!is.na(SysReq) && grepl("GNU [Mm]ake", SysReq)) {
+                    noteLog(Log, gettext("GNU make is a SystemRequirements.", domain = "R-tools"))
+                } else {
+                    warningLog(Log, ngettext(length(bad_files), "Found the following file containing GNU extensions:", "Found the following files containing GNU extensions:", domain = "R-tools"))
+                    printLog0(Log, .format_lines_with_indent(bad_files), "\n")
+                    wrapLog(gettext("Portable Makefiles do not use GNU extensions such as +=, :=, $(shell), $(wildcard), ifeq ... endif. See section 'Writing portable packages' in the 'Writing R Extensions' manual.\n", domain = "R-tools"))
+                }
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
+        }
 
         ## check src/Makevar*, src/Makefile* for correct use of BLAS_LIBS
         ## FLIBS is not needed on Windows, at least currently (as it is

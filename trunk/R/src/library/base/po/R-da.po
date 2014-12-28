@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-12-27 08:30\n"
+"POT-Creation-Date: 2014-12-28 16:58\n"
 "PO-Revision-Date: 2011-11-30 14:20+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1524,7 +1524,7 @@ msgstr ""
 msgid "Numeric: lengths (%d, %d) differ"
 msgstr ""
 
-#. R/library.R: gettextf("Package %s version %s cannot be unloaded", dQuote(package), oldversion,     domain = "R-base")
+#. R/library.R: gettextf("Package %s version %s cannot be unloaded", sQuote(package), oldversion,     domain = "R-base")
 #: R/library.R:0
 #, fuzzy
 msgid "Package %s version %s cannot be unloaded"

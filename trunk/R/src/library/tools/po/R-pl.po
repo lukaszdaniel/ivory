@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-26 12:21\n"
+"POT-Creation-Date: 2014-12-28 17:05\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -207,6 +207,11 @@ msgstr "'DUP' nie jest już dłużej wspierane i będzie ignorowane."
 #: R/QC.R:0
 msgid "'LinkingTo' field is unused: package has no 'src' directory"
 msgstr "Pole 'LinkingTo' jest nieużywane: pakiet nie posiada katalogu 'src'"
+
+#. R/check.R: gettext("'NeedsCompilation' field must take value 'yes' or 'no'", domain = "R-tools")
+#: R/check.R:0
+msgid "'NeedsCompilation' field must take value 'yes' or 'no'"
+msgstr "Pole 'NeedsCompilation' musi przyjmować wartości 'yes' lub 'no'"
 
 #. R/translations.R: stop("'R CMD build' failed")
 #: R/translations.R:0
@@ -1528,6 +1533,11 @@ msgstr ""
 "ich argumenty muszą być udokumentowane.\n"
 "Wpisy \\usage muszą odpowiadać składniowo poprawnemu kodowi R."
 
+#. R/check.R: gettext("GNU make is a SystemRequirements.", domain = "R-tools")
+#: R/check.R:0
+msgid "GNU make is a SystemRequirements."
+msgstr "GNU make jest wymaganiem systemowym."
+
 #. R/QC.R: gettextf("Generics 'g' in 'env' %s where %s errors: %s\nMay need something like\n\n%s\nin NAMESPACE.",     format(env), sQuote("hasMethods(g, env)"), paste(sQuote(rErr), collapse = ", "),     paste0("  importFrom(", paste(dq(pkgs), dq(rErr), sep = ", "), ")\n"))
 #: R/QC.R:0
 msgid ""
@@ -2222,6 +2232,7 @@ msgstr "Liczba aktualizacji w ostatnich 6 miesiącach: %d"
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext(" OK\n", domain = "R-tools")
 #. R/check.R: gettext(" OK\n", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
@@ -2555,6 +2566,17 @@ msgid ""
 msgstr ""
 "Proszę usunąć pliki lub zmienić ich nazwę.\n"
 "Zobacz sekcję 'Packages subdirectories' w podręczniku 'Writing R Extensions'."
+
+#. R/check.R: gettext("Portable Makefiles do not use GNU extensions such as +=, :=, $(shell), $(wildcard), ifeq ... endif. See section 'Writing portable packages' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"Portable Makefiles do not use GNU extensions such as +=, :=, $(shell), "
+"$(wildcard), ifeq ... endif. See section 'Writing portable packages' in the "
+"'Writing R Extensions' manual."
+msgstr ""
+"Przenośne pliki Makefile nie korzystają z rozszerzeń takich jak +=, :=, "
+"$(shell), $(wildcard), ifeq ... endif. Zobacz sekcję 'Writing portable "
+"packages' w podręczniku 'Writing R Extensions'."
 
 #. R/check.R: gettext("Portable packages must use only ASCII characters in their R code,\nexcept perhaps in comments.\nUse \\uxxxx escapes for other characters.\n",     domain = "R-tools")
 #: R/check.R:0
@@ -4055,6 +4077,11 @@ msgstr "sprawdzanie plików w katalogu 'vignettes' ..."
 #: R/check.R:0
 msgid "checking for .dll and .exe files ..."
 msgstr "szukanie plików .dll oraz .exe ..."
+
+#. R/check.R: gettext("checking for GNU extensions in Makefiles ...", domain = "R-tools")
+#: R/check.R:0
+msgid "checking for GNU extensions in Makefiles ..."
+msgstr "szukanie rozszerzeń GNU w plikach Makefile ..."
 
 #. R/build.R: gettext("checking for LF line-endings in source and make files", domain = "R-tools")
 #: R/build.R:0
@@ -6182,6 +6209,14 @@ msgid_plural "Found the following executable files:"
 msgstr[0] "Znaleziono następujący plik wykonywalny:"
 msgstr[1] "Znaleziono następujące pliki wykonywalne:"
 msgstr[2] "Znaleziono następujące pliki wykonywalne:"
+
+#. R/check.R: ngettext(length(bad_files), "Found the following file containing GNU extensions:",     "Found the following files containing GNU extensions:", domain = "R-tools")
+#: R/check.R:0
+msgid "Found the following file containing GNU extensions:"
+msgid_plural "Found the following files containing GNU extensions:"
+msgstr[0] "Znaleziono następujący plik zawierający rozszerzenia GNU:"
+msgstr[1] "Znaleziono następujące pliki zawierające rozszerzenia GNU:"
+msgstr[2] "Znaleziono następujące pliki zawierające rozszerzenia GNU:"
 
 #. R/check.R: ngettext(nb, "Found the following file with a non-portable file name:\n", "Found the following files with non-portable file names:\n",     domain = "R-tools")
 #. R/check.R: ngettext(nb, "Found the following file with a non-portable file name:\n", "Found the following files with non-portable file names:\n",     domain = "R-tools")

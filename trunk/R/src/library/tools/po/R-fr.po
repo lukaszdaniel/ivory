@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-12-26 12:21\n"
+"POT-Creation-Date: 2014-12-28 17:05\n"
 "PO-Revision-Date: 2013-06-02 11:39+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -230,6 +230,11 @@ msgstr ""
 #. R/QC.R: gettextf("'LinkingTo' field is unused: package has no 'src' directory", domain = "R-tools")
 #: R/QC.R:0
 msgid "'LinkingTo' field is unused: package has no 'src' directory"
+msgstr ""
+
+#. R/check.R: gettext("'NeedsCompilation' field must take value 'yes' or 'no'", domain = "R-tools")
+#: R/check.R:0
+msgid "'NeedsCompilation' field must take value 'yes' or 'no'"
 msgstr ""
 
 #. R/translations.R: stop("'R CMD build' failed")
@@ -1593,6 +1598,11 @@ msgid ""
 "The \\usage entries must correspond to syntactically valid R code."
 msgstr ""
 
+#. R/check.R: gettext("GNU make is a SystemRequirements.", domain = "R-tools")
+#: R/check.R:0
+msgid "GNU make is a SystemRequirements."
+msgstr ""
+
 #. R/QC.R: gettextf("Generics 'g' in 'env' %s where %s errors: %s\nMay need something like\n\n%s\nin NAMESPACE.",     format(env), sQuote("hasMethods(g, env)"), paste(sQuote(rErr), collapse = ", "),     paste0("  importFrom(", paste(dq(pkgs), dq(rErr), sep = ", "), ")\n"))
 #: R/QC.R:0
 msgid ""
@@ -2273,6 +2283,7 @@ msgstr ""
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext(" OK\n", domain = "R-tools")
 #. R/check.R: gettext(" OK\n", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
@@ -2602,6 +2613,14 @@ msgid ""
 msgstr ""
 "Voyez l'information dans la section 'Croos-references' du manuel 'Writing R "
 "Extensions'."
+
+#. R/check.R: gettext("Portable Makefiles do not use GNU extensions such as +=, :=, $(shell), $(wildcard), ifeq ... endif. See section 'Writing portable packages' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"Portable Makefiles do not use GNU extensions such as +=, :=, $(shell), "
+"$(wildcard), ifeq ... endif. See section 'Writing portable packages' in the "
+"'Writing R Extensions' manual."
+msgstr ""
 
 #. R/check.R: gettext("Portable packages must use only ASCII characters in their R code,\nexcept perhaps in comments.\nUse \\uxxxx escapes for other characters.\n",     domain = "R-tools")
 #: R/check.R:0
@@ -4158,6 +4177,12 @@ msgstr "Avis dans le fichier '%s' :"
 #: R/check.R:0
 msgid "checking for .dll and .exe files ..."
 msgstr ""
+
+#. R/check.R: gettext("checking for GNU extensions in Makefiles ...", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking for GNU extensions in Makefiles ..."
+msgstr "création de la DLL ..."
 
 #. R/build.R: gettext("checking for LF line-endings in source and make files", domain = "R-tools")
 #: R/build.R:0
@@ -6305,6 +6330,18 @@ msgstr[1] ""
 #, fuzzy
 msgid "Found the following executable file:"
 msgid_plural "Found the following executable files:"
+msgstr[0] ""
+"L'utilisation globale possible de 'T' ou 'F' est trouvées dans l'exemple du "
+"fichier Rd suivant :"
+msgstr[1] ""
+"L'utilisation globale possible de 'T' ou 'F' est trouvées dans l'exemple du "
+"fichier Rd suivant :"
+
+#. R/check.R: ngettext(length(bad_files), "Found the following file containing GNU extensions:",     "Found the following files containing GNU extensions:", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "Found the following file containing GNU extensions:"
+msgid_plural "Found the following files containing GNU extensions:"
 msgstr[0] ""
 "L'utilisation globale possible de 'T' ou 'F' est trouvées dans l'exemple du "
 "fichier Rd suivant :"

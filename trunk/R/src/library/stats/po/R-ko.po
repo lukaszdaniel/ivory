@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-11-01 13:00\n"
+"POT-Creation-Date: 2014-12-28 16:59\n"
 "PO-Revision-Date: 2014-03-27 13:33-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -3646,6 +3646,14 @@ msgstr "contrasts는 요인들에만 적용합니다"
 #. R/contrast.R: stop("contrasts can be applied only to factors with 2 or more levels")
 #: R/contrast.R:0
 msgid "contrasts can be applied only to factors with 2 or more levels"
+msgstr ""
+"contrasts는 오로지 2 또는 그 이상의 level들을 가진 요인들에만 적용할 수 있습"
+"니다"
+
+#. R/models.R: gettextf("contrasts dropped from factor %s due to missing levels", nm, domain = "R-stats")
+#: R/models.R:0
+#, fuzzy
+msgid "contrasts dropped from factor %s due to missing levels"
 msgstr ""
 "contrasts는 오로지 2 또는 그 이상의 level들을 가진 요인들에만 적용할 수 있습"
 "니다"

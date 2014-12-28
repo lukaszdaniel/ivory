@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.2.0\n"
-"POT-Creation-Date: 2014-11-01 13:00\n"
+"POT-Creation-Date: 2014-12-28 16:59\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4849,6 +4849,13 @@ msgstr ""
 #. R/contrast.R: stop("contrasts can be applied only to factors with 2 or more levels")
 
 msgid "contrasts can be applied only to factors with 2 or more levels"
+msgstr ""
+
+
+#: R/models.R: 0
+#. R/models.R: gettextf("contrasts dropped from factor %s due to missing levels", nm, domain = "R-stats")
+
+msgid "contrasts dropped from factor %s due to missing levels"
 msgstr ""
 
 
