@@ -46,17 +46,25 @@ getDependencies <-
     p0 <- unique(pkgs)
     miss <-  !p0 %in% row.names(available)
     if(sum(miss)) {
+      msg <- sub(" *\\(.*","", R.version.string)
+        if(binary) {
+	warning(sprintf(ngettext(sum(miss),
+				 "package %s is not available (as a binary package for %s)",
+				 "packages %s are not available (as a binary packages for %s)", domain = "R-utils"),
+			paste(sQuote(p0[miss]), collapse = ", "), msg),
+                domain = NA, call. = FALSE)
+        } else {
 	warning(sprintf(ngettext(sum(miss),
 				 "package %s is not available (for %s)",
 				 "packages %s are not available (for %s)", domain = "R-utils"),
-			paste(sQuote(p0[miss]), collapse=", "),
-			sub(" *\\(.*","", R.version.string)),
+			paste(sQuote(p0[miss]), collapse = ", "), msg),
                 domain = NA, call. = FALSE)
+        }
         if (sum(miss) == 1L &&
             !is.na(w <- match(tolower(p0[miss]),
                               tolower(row.names(available))))) {
             warning(gettextf("Perhaps you meant %s?",
-                            sQuote( row.names(available)[w])),
+                            sQuote(row.names(available)[w])),
                     call. = FALSE, domain = "R-utils")
         }
         flush.console()
@@ -438,7 +446,6 @@ install.packages <-
                 ## so a package might only be available as source,
                 ## or it might be later in source.
                 ## FIXME: might only want to check on the same repository,
-                ## allowing for CRANextras.
                 na <- srcpkgs[!srcpkgs %in% bins]
                 if (length(na)) {
                     msg <-
