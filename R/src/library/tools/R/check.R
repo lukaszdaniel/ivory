@@ -302,7 +302,7 @@ setRlibs <-
 
         check_data() # 'data' dir and sysdata.rda
 
-        if (!is_base_pkg && dir.exists("src") && !extra_arch) check_src_dir()
+        if (!is_base_pkg && dir.exists("src") && !extra_arch) check_src_dir(desc)
 
         if(do_install &&
            dir.exists("src") &&
@@ -1578,9 +1578,9 @@ setRlibs <-
                 warningLog(Log)
                 printLog0(Log, paste(c(out, ""), collapse = "\n"))
                 if (any(grepl("^Undocumented S4", out)))
-                wrapLog(gettext("All user-level objects in a package (including S4 classes and methods) should have documentation entries.\n", domain = "R-tools"))
-		else
-                wrapLog(gettext("All user-level objects in a package should have documentation entries.\n", domain = "R-tools"))
+                 wrapLog(gettext("All user-level objects in a package (including S4 classes and methods) should have documentation entries.\n", domain = "R-tools"))
+		        else
+                 wrapLog(gettext("All user-level objects in a package should have documentation entries.\n", domain = "R-tools"))
                 wrapLog(msg_writing_Rd)
             } else resultLog(Log, "OK")
         }
@@ -1945,7 +1945,7 @@ setRlibs <-
         }
     }
 
-    check_src_dir <- function()
+    check_src_dir <- function(desc)
     {
         ## Check C/C++/Fortran sources/headers for CRLF line endings.
         ## <FIXME>
@@ -1974,7 +1974,7 @@ setRlibs <-
 
         ## Check src/Make* for LF line endings, as Sun make does not accept CRLF
         checkingLog(Log, gettext("checking line endings in Makefiles ...", domain = "R-tools"))
-        bad_files <- character()
+        bad_files <- noEOL<- character()
         ## .win files are not checked, as CR/CRLF work there
         all_files <-
             dir("src",
@@ -1985,6 +1985,8 @@ setRlibs <-
             contents <- readChar(f, file.size(f), useBytes = TRUE)
             if (grepl("\r", contents, fixed = TRUE, useBytes = TRUE))
                 bad_files <- c(bad_files, f)
+            if (!grepl("\n$", contents, useBytes = TRUE))
+                noEOL <- c(noEOL, f)
         }
         if (length(bad_files)) {
             warningLog(Log, gettext("Found the following Makefiles with CR or CRLF line endings:", domain = "R-tools"))

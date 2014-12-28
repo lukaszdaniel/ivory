@@ -252,6 +252,10 @@
       
       \item \command{R CMD build} adds a \samp{NeedsCompilation} field
       if one is not already present in the DESCRIPTION file.
+      
+      \item \command{R CMD check} checks for the undeclared use of GNU
+      extensions in Makefiles under \file{src}, and for such files with
+      a missing final linefeed.
     }
   }
 
@@ -374,6 +378,10 @@
       \item \code{sessionInfo()} tries to report the OS version in use
       (not just that compiled under, and including details of Linux
       distributions).
+      
+      \item \code{model.frame()} (used by \code{lm()} and many other 
+      modelling functions) now warns when it drops contrasts
+      from factors.  (Wish of \PR{16119})
     }
   }
 
