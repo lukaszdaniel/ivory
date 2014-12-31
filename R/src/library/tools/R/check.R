@@ -302,7 +302,7 @@ setRlibs <-
 
         check_data() # 'data' dir and sysdata.rda
 
-        if (!is_base_pkg && dir.exists("src") && !extra_arch) check_src_dir(desc)
+        if (!is_base_pkg && !extra_arch) check_src_dir(desc)
 
         if(do_install &&
            dir.exists("src") &&
@@ -1954,46 +1954,58 @@ setRlibs <-
         ## will not accept CRLF or CR line endings.
         ## (Sun Studio 12 definitely objects to CR in both C and Fortran).
         ## </FIXME>
-        checkingLog(Log, gettext("checking line endings in C/C++/Fortran sources/headers ...", domain = "R-tools"))
-        ## pattern is "([cfh]|cc|cpp)"
-        files <- dir("src", pattern = "\\.([cfh]|cc|cpp)$",
-                     full.names = TRUE, recursive = TRUE)
-        ## exclude dirs starting src/win, e.g for tiff
-        files <- grep("^src/[Ww]in", files, invert = TRUE, value = TRUE)
-        bad_files <- character()
-        for(f in files) {
-            contents <- readChar(f, file.size(f), useBytes = TRUE)
-            if (grepl("\r", contents, fixed = TRUE, useBytes = TRUE))
-                bad_files <- c(bad_files, f)
+        if(dir.exists("src")) {
+            checkingLog(Log, gettext("checking line endings in C/C++/Fortran sources/headers ...", domain = "R-tools"))
+            ## pattern is "([cfh]|cc|cpp)"
+            files <- dir("src", pattern = "\\.([cfh]|cc|cpp)$",
+                         full.names = TRUE, recursive = TRUE)
+            ## exclude dirs starting src/win, e.g for tiff
+            files <- grep("^src/[Ww]in", files, invert = TRUE, value = TRUE)
+            bad_files <- character()
+            for(f in files) {
+                contents <- readChar(f, file.size(f), useBytes = TRUE)
+                if (grepl("\r", contents, fixed = TRUE, useBytes = TRUE))
+                    bad_files <- c(bad_files, f)
+            }
+            if (length(bad_files)) {
+                warningLog(Log, gettext("Found the following sources/headers with CR or CRLF line endings:", domain = "R-tools"))
+                printLog0(Log, .format_lines_with_indent(bad_files), "\n")
+                printLog(Log, gettext("Some Unix compilers require LF line endings.\n", domain = "R-tools"))
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
-        if (length(bad_files)) {
-            warningLog(Log, gettext("Found the following sources/headers with CR or CRLF line endings:", domain = "R-tools"))
-            printLog(Log, .format_lines_with_indent(bad_files), "\n")
-            printLog(Log, gettext("Some Unix compilers require LF line endings.\n", domain = "R-tools"))
-        } else resultLog(Log, gettext("OK", domain = "R-tools"))
 
         ## Check src/Make* for LF line endings, as Sun make does not accept CRLF
-        checkingLog(Log, gettext("checking line endings in Makefiles ...", domain = "R-tools"))
-        bad_files <- noEOL<- character()
         ## .win files are not checked, as CR/CRLF work there
         all_files <-
             dir("src",
                 pattern = "^(Makevars|Makevars.in|Makefile|Makefile.in)$",
                 full.names = TRUE, recursive = TRUE)
-        for(f in all_files) {
-            if (!file.exists(f)) next
-            contents <- readChar(f, file.size(f), useBytes = TRUE)
-            if (grepl("\r", contents, fixed = TRUE, useBytes = TRUE))
-                bad_files <- c(bad_files, f)
-            if (!grepl("\n$", contents, useBytes = TRUE))
-                noEOL <- c(noEOL, f)
+        all_files <- c(all_files,
+                       dir(".", pattern = "^Makefile$",
+                           full.names = TRUE, recursive = TRUE))
+        all_files <- sub("^[.]/", "", all_files)
+        all_files <- unique(sort(all_files))
+        if(length(all_files)) {
+        checkingLog(Log, gettext("checking line endings in Makefiles ...", domain = "R-tools"))
+            bad_files <- noEOL<- character()
+            for(f in all_files) {
+                if (!file.exists(f)) next
+                contents <- readChar(f, file.size(f), useBytes = TRUE)
+                if (grepl("\r", contents, fixed = TRUE, useBytes = TRUE))
+                    bad_files <- c(bad_files, f)
+                if (!grepl("\n$", contents, useBytes = TRUE))
+                    noEOL <- c(noEOL, f)
+            }
+            if (length(bad_files)) {
+                warningLog(Log, gettext("Found the following Makefiles with CR or CRLF line endings:", domain = "R-tools"))
+                printLog(Log, .format_lines_with_indent(bad_files), "\n")
+                printLog(Log, gettext("Some Unix 'make' programs require LF line endings.\n", domain = "R-tools"))
+            } else if (length(noEOL)) {
+                noteLog(Log, gettext("Found the following Makefile(s) without a final LF:", domain = "R-tools"))
+                printLog0(Log, .format_lines_with_indent(noEOL), "\n")
+                printLog(Log, gettext("Some 'make' programs ignore lines not ending in LF.\n", domain = "R-tools"))
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
-        if (length(bad_files)) {
-            warningLog(Log, gettext("Found the following Makefiles with CR or CRLF line endings:", domain = "R-tools"))
-            printLog(Log, .format_lines_with_indent(bad_files), "\n")
-            printLog(Log, gettext("Some Unix 'make' programs require LF line endings.\n", domain = "R-tools"))
-        } else resultLog(Log, gettext("OK", domain = "R-tools"))
-
         ## Check src/Makevars[.in] compilation flags.
         if (length(makevars)) {
             checkingLog(Log, gettext("checking compilation flags in Makevars", domain = "R-tools"))
@@ -2007,7 +2019,7 @@ setRlibs <-
                 printLog(Log, paste(c(out, ""), collapse = "\n"))
             } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
-        ## Check GNUisms in src/Make{vars,file}[.in]
+        ## Check GNUisms
         if (length(all_files)) {
             checkingLog(Log, gettext("checking for GNU extensions in Makefiles ...", domain = "R-tools"))
             bad_files <- character()
@@ -2017,7 +2029,7 @@ setRlibs <-
                 ## Things like $(SUBDIRS:=.a)
                 contents <- grep("[$][(].+:=.+[)]", contents,
                                  value = TRUE, invert = TRUE)
-                if (any(grepl("([+]=|:=|[$][(]wildcard|[$][(]shell|[$][(]eval|^ifeq|^ifneq)", contents)))
+                if (any(grepl("([+]=|:=|[$][(]wildcard|[$][(]shell|[$][(]eval|^ifeq|^ifneq|^ifdef|^ifndef|^endif)", contents)))
                     bad_files <- c(bad_files, f)
             }
             SysReq <- desc["SystemRequirements"]
@@ -2035,40 +2047,42 @@ setRlibs <-
         ## check src/Makevar*, src/Makefile* for correct use of BLAS_LIBS
         ## FLIBS is not needed on Windows, at least currently (as it is
         ## statically linked).
-        checkingLog(Log, gettext("checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ...", domain = "R-tools"))
         makefiles <- Sys.glob(file.path("src",
                                         c("Makevars", "Makevars.in",
                                           "Makefile", "Makefile.win")))
-        any <- FALSE
-        for (f in makefiles) {
-            lines <- readLines(f, warn = FALSE)
-            ## Combine lines ending in escaped newlines.
-            if(any(ind <- grepl("[\\]$", lines, useBytes = TRUE))) {
-                ## Eliminate escape.
-                lines[ind] <-
-                    sub("[\\]$", "", lines[ind], useBytes = TRUE)
-                ## Determine ids of blocks that need to be joined.
-                ind <- seq_along(ind) - c(0, cumsum(ind)[-length(ind)])
-                ## And join.
-                lines <- unlist(lapply(split(lines, ind), paste,
-                                       collapse = " "))
+        if(length(makefiles)) {
+            checkingLog(Log, gettext("checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ...", domain = "R-tools"))
+            any <- FALSE
+            for (f in makefiles) {
+                lines <- readLines(f, warn = FALSE)
+                ## Combine lines ending in escaped newlines.
+                if(any(ind <- grepl("[\\]$", lines, useBytes = TRUE))) {
+                    ## Eliminate escape.
+                    lines[ind] <-
+                        sub("[\\]$", "", lines[ind], useBytes = TRUE)
+                    ## Determine ids of blocks that need to be joined.
+                    ind <- seq_along(ind) - c(0, cumsum(ind)[-length(ind)])
+                    ## And join.
+                    lines <- unlist(lapply(split(lines, ind), paste,
+                                           collapse = " "))
+                }
+                c1 <- grepl("^[[:space:]]*PKG_LIBS", lines, useBytes = TRUE)
+                c2l <- grepl("\\$[{(]{0,1}LAPACK_LIBS", lines, useBytes = TRUE)
+                c2b <- grepl("\\$[{(]{0,1}BLAS_LIBS", lines, useBytes = TRUE)
+                c3 <- grepl("\\$[{(]{0,1}FLIBS", lines, useBytes = TRUE)
+                if (any(c1 & c2l & !c2b)) {
+                    if (!any) warningLog(Log)
+                    any <- TRUE
+                    printLog(Log, gettextf("  apparently using $(LAPACK_LIBS) without $(BLAS_LIBS) in %s\n", sQuote(f), domain = "R-tools"))
+                }
+                if (any(c1 & (c2b | c2l) & !c3)) {
+                    if (!any) warningLog(Log)
+                    any <- TRUE
+                    printLog(Log, gettextf("  apparently PKG_LIBS is missing $(FLIBS) in %s\n", sQuote(f), domain = "R-tools"))
+                }
             }
-            c1 <- grepl("^[[:space:]]*PKG_LIBS", lines, useBytes = TRUE)
-            c2l <- grepl("\\$[{(]{0,1}LAPACK_LIBS", lines, useBytes = TRUE)
-            c2b <- grepl("\\$[{(]{0,1}BLAS_LIBS", lines, useBytes = TRUE)
-            c3 <- grepl("\\$[{(]{0,1}FLIBS", lines, useBytes = TRUE)
-            if (any(c1 & c2l & !c2b)) {
-                if (!any) warningLog(Log)
-                any <- TRUE
-                printLog(Log, gettextf("  apparently using $(LAPACK_LIBS) without $(BLAS_LIBS) in %s\n", sQuote(f), domain = "R-tools"))
-            }
-            if (any(c1 & (c2b | c2l) & !c3)) {
-                if (!any) warningLog(Log)
-                any <- TRUE
-                printLog(Log, gettextf("  apparently PKG_LIBS is missing $(FLIBS) in %s\n", sQuote(f), domain = "R-tools"))
-            }
+            if (!any) resultLog(Log, gettext("OK", domain = "R-tools"))
         }
-        if (!any) resultLog(Log, gettext("OK", domain = "R-tools"))
     }
 
     check_sos <- function() {
@@ -2082,7 +2096,6 @@ setRlibs <-
             ## This will be a note about symbols.rds not being available
             if(!is_base_pkg) {
                 noteLog(Log)
-                #printLog0(Log, c(out, "\n"))
                 printLog0(Log, c(gettext(out, domain = "R-tools"), "\n"))
             } else resultLog(Log, gettext("OK", domain = "R-tools"))
         } else if(length(out)) {
