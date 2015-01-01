@@ -343,18 +343,20 @@ in the following format:
 @smallexample
 Package: pkgname
 Version: 0.5-1
-Date: 2004-01-01
+Date: 2015-01-01
 Title: My First Collection of Functions
 Authors@@R: c(person("Joe", "Developer", role = c("aut", "cre"),
 		     email = "Joe.Developer@@some.domain.net"),
 	      person("Pat", "Developer", role = "aut"),
 	      person("A.", "User", role = "ctb",
 		     email = "A.User@@whereever.net"))
-Author: Joe Developer and Pat Developer, with contributions from A. User
+Author: Joe Developer [aut, cre],
+  Pat Developer [aut],
+  A. User [ctb]
 Maintainer: Joe Developer <Joe.Developer@@some.domain.net>
-Depends: R (>= 1.8.0), nlme
+Depends: R (>= 3.1.0), nlme
 Suggests: MASS
-Description: A short (one paragraph) description of what
+Description: A (one paragraph) description of what
   the package does and why it may be useful.
 License: GPL (>= 2)
 URL: http://www.r-project.org, http://www.another.url
@@ -407,9 +409,11 @@ The mandatory @samp{License} field is discussed in the next subsection.
 
 
 @c DESCRIPTION field Description
-The mandatory @samp{Description} field should give a comprehensive
-description of what the package does.  One can use several (complete)
-sentences, but only one paragraph.
+The mandatory @samp{Description} field should give a
+@emph{comprehensive} description of what the package does.  One can use
+several (complete) sentences, but only one paragraph. It should be
+intelligible to all the intended readership (e.g.@: for a @acronym{CRAN}
+package to all @acronym{CRAN} users).
 
 @c DESCRIPTION field Title
 The mandatory @samp{Title} field should give a short description of the
@@ -446,15 +450,17 @@ Both @samp{Author} and @samp{Maintainer} fields can be omitted if a
 suitable @samp{Authors@@R} field is given.  This field can be used to
 provide a refined and machine-readable description of the package
 ``authors'' (in particular specifying their precise @emph{roles}), via
-suitable @R{} code.  The roles can include @samp{"aut"} (author) for
-full authors, @samp{"cre"} (creator) for the package maintainer, and
-@samp{"ctb"} (contributor) for other contributors, @samp{"cph"}
-(copyright holder), among others.  See @code{?person} for more
-information.  Note that no role is assumed by default.  Auto-generated
-package citation information takes advantage of this specification. The
-@samp{Author} and @samp{Maintainer} fields are auto-generated from it if
-needed when building@footnote{at least if this is done in a locale which
-matches the package encoding.} or installing.
+suitable @R{} code. It should be either a call to @code{person} or a
+series of calls (one per ``author'') concatenated by @code{c()}): see the
+example @file{DESCRIPTION} file above.  The roles can include
+@samp{"aut"} (author) for full authors, @samp{"cre"} (creator) for the
+package maintainer, and @samp{"ctb"} (contributor) for other
+contributors, @samp{"cph"} (copyright holder), among others.  See
+@code{?person} for more information.  Note that no role is assumed by
+default.  Auto-generated package citation information takes advantage of
+this specification. The @samp{Author} and @samp{Maintainer} fields are
+auto-generated from it if needed when building@footnote{at least if this
+is done in a locale which matches the package encoding.} or installing.
 
 @findex COPYRIGHTS
 @c DESCRIPTION field Copyright
@@ -2809,12 +2815,13 @@ source control systems@footnote{called @file{CVS} or @file{.svn} or
 @file{.arch-ids} or @file{.bzr} or @file{.git} (but not files called
 @file{.git}) or @file{.hg}.} or from @command{eclipse}@footnote{called
 @file{.metadata}.}, directories with names ending @file{.Rcheck} or
-@file{Old} or @file{old} and files @file{GNUMakefile},
-@file{Read-and-delete-me} or with base names starting with @samp{.#}, or
-starting and ending with @samp{#}, or ending in @samp{~}, @samp{.bak} or
-@samp{.swp}, are excluded by default.  In addition, those files in the
-@file{R}, @file{demo} and @file{man} directories which are flagged by
-@command{R CMD check} as having invalid names will be excluded.
+@file{Old} or @file{old} and files @file{GNUMakefile}@footnote{which is
+an error: GNU make uses @file{GNUmakefile}.}, @file{Read-and-delete-me}
+or with base names starting with @samp{.#}, or starting and ending with
+@samp{#}, or ending in @samp{~}, @samp{.bak} or @samp{.swp}, are
+excluded by default.  In addition, those files in the @file{R},
+@file{demo} and @file{man} directories which are flagged by @command{R
+CMD check} as having invalid names will be excluded.
 
 Use @kbd{R CMD build --help} to obtain more information about the usage
 of the @R{} package builder.
@@ -3926,6 +3933,12 @@ file by
 @example
 SystemRequirements: GNU make
 @end example
+
+@noindent
+If you only need GNU make for parts of the package which are rarely
+needed (for example to create bibliography files under
+@file{vignettes}), use a file called @file{GNUmakefile} rather than
+@file{Makefile} as GNU make (only) will use the former.
 
 Since the only viable make for Windows is GNU make, it is permissible to
 use GNU extensions in files @file{Makevars.win} or @file{Makefile.win}.
