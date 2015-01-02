@@ -285,11 +285,11 @@
       \pkg{libpng}, \pkg{jpeglib} and \pkg{libtiff} is now required,
       and the build instructions have been revised.      
       
-      \item The \file{MkRules.local} file is now optional, with defaults
-      described in \file{MkRules.dist}.
-      
       \item A new \command{make} target \code{rsync-extsoft} has been
       added to obtain copies of the external libraries from \acronym{CRAN}.
+      
+      \item It is possible to build without \command{makeinfo}: see the
+      comments in file \file{MkRules.dist}.
     }
   }
   
@@ -480,6 +480,10 @@
       
       \item \code{tools:::.Rdconv()} didn't accept \code{--encoding=} due
       to miscalculated string length.  (\PR{16121}) 
+      
+      \item Unix-alike builds without a suitable \command{makeinfo} were
+      documented to link the missing HTML manuals to CRAN, but did not.
+      
     }
   }
 }
