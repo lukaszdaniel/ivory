@@ -1,7 +1,7 @@
 #  File src/library/tools/R/dynamicHelp.R
 #  Part of the R package, http://www.R-project.org
 #
-#  Copyright (C) 1995-2014 The R Core Team
+#  Copyright (C) 1995-2015 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -182,7 +182,8 @@ httpd <- function(path, query, ...)
     }
 
     charsetSetting <- function(pkg) {
-    	encoding <-read.dcf(system.file("DESCRIPTION", package=pkg), "Encoding")
+    	encoding <- read.dcf(system.file("DESCRIPTION", package=pkg),
+                             "Encoding")
 	if (is.na(encoding))
 	    ""
         else
@@ -378,7 +379,7 @@ httpd <- function(path, query, ...)
                                        up))
             else if (exists)
                 return(list(file = file, "content-type" = mime_type(rest)))
-            else 
+            else
             	return(error_page(gettextf("URL '%s' was not found", mono(path), domain = "R-tools")))
         } else {
             ## request to list <pkg>/doc
@@ -456,10 +457,41 @@ httpd <- function(path, query, ...)
         ## remake as needed
         utils::make.packages.html(temp = TRUE)
         list(file = file.path(tempdir(), ".R", path))
+    } else if(path == "/doc/html/rw-FAQ.html") {
+        file <- file.path(R.home("doc"), sub("^/doc", "", path))
+        if(file.exists(file))
+            list(file = file, "content-type" = mime_type(path))
+        else {
+            url <- "http://cran.r-project.org/bin/windows/base/rw-FAQ.html"
+	    return(list(payload = paste0('Redirect to <a href="', url, '">"',
+                                         url, '"</a>'),
+	    		"content-type" = 'text/html',
+	    		header = paste0('Location: ', url),
+	    		"status code" = 302L)) # temporary redirect
+         }
     } else if(grepl("doc/html/.*html$" , path) &&
               file.exists(tmp <- file.path(tempdir(), ".R", path))) {
         ## use updated version, e.g. of packages.html
         list(file = tmp)
+    } else if(grepl("doc/manual/.*html$" , path)) {
+        file <- file.path(R.home("doc"), sub("^/doc", "", path))
+        if(file.exists(file))
+            list(file = file, "content-type" = mime_type(path))
+        else if(file.exists(file <- sub("/manual/", "/html/", file))) {
+            ## tarball has pre-built version of R-admin.html
+            list(file = file, "content-type" = mime_type(path))
+        } else {
+            ## url <- "http://cran.r-project.org/manuals.html"
+            version <-
+                if(grepl("unstable", R.version$status)) "r-devel" else "r-patched"
+            url <- file.path("http://cran.r-project.org/doc/manuals",
+                             version, basename(path))
+	    return(list(payload = paste0('Redirect to <a href="', url, '">"',
+                                         url, '"</a>'),
+	    		"content-type" = 'text/html',
+	    		header = paste0('Location: ', url),
+	    		"status code" = 302L)) # temporary redirect
+        }
     } else {
         if(grepl("^/doc/", path)) {
             ## /doc/AUTHORS and so on.
