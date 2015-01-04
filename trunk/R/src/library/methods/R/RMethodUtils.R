@@ -1236,7 +1236,7 @@ metaNameUndo <- function(strings, prefix, searchForm = FALSE)
     paste(paste0(snames, "=\"", signature, "\""), collapse = ", ")
 }
 
-.ChangeFormals <- function(def, defForArgs, msg = "<unidentified context>")
+.ChangeFormals <- function(def, defForArgs, msg = "<unidentified context>") #IVORY: basically untranslatable due to 'msg' argument
 {
     if(!is(def, "function"))
         stop(gettextf("trying to change the formal arguments in %s in an object of class %s; expected a function definition",
