@@ -1,7 +1,7 @@
 #  File src/library/tools/R/QC.R
 #  Part of the R package, http://www.R-project.org
 #
-#  Copyright (C) 1995-2014 The R Core Team
+#  Copyright (C) 1995-2015 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -4943,12 +4943,13 @@ function(package, dir, lib.loc = NULL)
     ## we just have a stop list here.
     common_names <- c("pkg", "pkgName", "package", "pos", "dep_name")
 
-    bad_exprs <- bad_deps <- bad_imps <- character()
+    bad_exprs <- bad_deps <- bad_imps <- bad_prac <- character()
     bad_imports <- all_imports <- imp2 <- imp2f <- imp3 <- imp3f <- character()
     uses_methods <- FALSE
     find_bad_exprs <- function(e) {
         if(is.call(e) || is.expression(e)) {
             Call <- deparse(e[[1L]])[1L]
+            if(Call %in% c("clusterEvalQ", "parallel::clusterEvalQ")) return()
             if((Call %in%
                 c("library", "require", "loadNamespace", "requireNamespace"))
                && (length(e) >= 2L)) {
@@ -4983,6 +4984,9 @@ function(package, dir, lib.loc = NULL)
                                 bad_exprs <<- c(bad_exprs, pkg)
                             if(pkg %in% depends)
                                 bad_deps <<- c(bad_deps, pkg)
+                           ## assume calls to itself are to clusterEvalQ etc
+                           else if (pkg != package)
+                               bad_prac <<- c(bad_prac, pkg)
                         }
                     }
                 }
@@ -5178,6 +5182,7 @@ function(package, dir, lib.loc = NULL)
         }
     } else imp32 <- imp3f <- imp3ff <- unknown <- character()
     res <- list(others = unique(bad_exprs),
+                bad_practice = unique(bad_prac),
                 imports = unique(bad_imports),
                 imps = unique(bad_imps),
                 in_depends = unique(bad_deps),
@@ -5223,6 +5228,10 @@ function(x, ...)
  "'library' or 'require' call to packages %s which were already attached by Depends. Please remove these calls from your code.", domain = "R-tools"),
  .pretty_format(sort(xx)))
       },
+      if(length(xx <- x$bad_practice)) {
+          sprintf(ngettext(length(xx), "brary' or 'require' call in package code: %s\n  Please use :: or requireNamespace() instead: see 'Suggested Packages'.", "'library' or 'require' calls in package code: %s\n  Please use :: or requireNamespace() instead: see 'Suggested Packages'.",domain = "R-tools"), .pretty_format(sort(xx)))
+      },
+
       if(length(xx <- x$unused_imports)) {
 	  sprintf(ngettext(length(xx),
  "Namespace in Imports field not imported from: %s\nAll declared Imports should be used.",

@@ -252,6 +252,11 @@
       
       \item \command{R CMD build} adds a \samp{NeedsCompilation} field
       if one is not already present in the DESCRIPTION file.
+  
+      \item \command{R CMD check} notes uses of \code{library()} and
+      \code{require()} in package code: see the section
+      \sQuote{Suggested packages} of \sQuote{Writing R Extensions} for
+      good practice.
     }
   }
 
@@ -384,6 +389,10 @@
   \subsection{INSTALLATION and INCLUDED SOFTWARE}{
     \itemize{
       \item The included version of PCRE has been updated to 8.36.
+      
+      \item \command{configure} accepts \samp{MAKEINFO=texi2any} as
+      another way to ensure \pkg{texinfo} 5.x is used when both 5.x and
+      4.x are installed.
     }
   }
 
@@ -397,6 +406,9 @@
       \item \command{R CMD check} checks for the undeclared use of GNU
       extensions in makefiles, and for makefiles with a missing final
       linefeed.
+
+      \command{R CMD build} will correct line endings in all Makefiles,
+      not just those in the \file{src} directory.
     }
   }
   \subsection{DEPRECATED AND DEFUNCT}{
