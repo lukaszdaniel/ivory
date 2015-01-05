@@ -3588,10 +3588,8 @@ msgstr ""
 
 #. R/models.R: gettextf("contrasts dropped from factor %s due to missing levels", nm, domain = "R-stats")
 #: R/models.R:0
-#, fuzzy
 msgid "contrasts dropped from factor %s due to missing levels"
-msgstr ""
-"kontrasty można zastosować jedynie do czynników z dwoma lub więcej poziomami"
+msgstr "kontrasty zostały usunięte z czynnika %s z uwagi na brakujące poziomy"
 
 #. R/contr.poly.R: gettextf("contrasts not defined for %d degrees of freedom", n - 1)
 #. R/contrast.R: gettextf("contrasts not defined for %d degrees of freedom", n - 1L)

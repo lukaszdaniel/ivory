@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-12-28 17:05\n"
+"POT-Creation-Date: 2015-01-05 20:46\n"
 "PO-Revision-Date: 2012-03-15 12:03-0500\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -1463,6 +1463,12 @@ msgid ""
 "Found subdirectory 'r'.\n"
 "Most likely, this should be 'R'."
 msgstr ""
+
+#. R/check.R: gettext("Found the following Makefile(s) without a final LF:", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "Found the following Makefile(s) without a final LF:"
+msgstr "Найдены возможные глобальные T или F в следующем Rd-файле примеров:"
 
 #. R/check.R: gettext("Found the following Makefiles with CR or CRLF line endings:", domain = "R-tools")
 #: R/check.R:0
@@ -2936,6 +2942,11 @@ msgstr ""
 #, fuzzy
 msgid "Slots for class %s"
 msgstr "Слоты для класса '%s'"
+
+#. R/check.R: gettext("Some 'make' programs ignore lines not ending in LF.\n", domain = "R-tools")
+#: R/check.R:0
+msgid "Some 'make' programs ignore lines not ending in LF."
+msgstr ""
 
 #. R/check.R: gettext("Some Unix 'make' programs require LF line endings.\n", domain = "R-tools")
 #: R/check.R:0
@@ -5991,6 +6002,18 @@ msgid_plural "'data(package=)' calls not declared from: %s"
 msgstr[0] "вызов 'data(package=)' не объявлен: %s"
 msgstr[1] "вызов 'data(package=)' не объявлен: %s"
 msgstr[2] "вызов 'data(package=)' не объявлен: %s"
+
+#. R/QC.R: ngettext(length(xx), "'library' or 'require' call in package code: %s\n  Please use :: or requireNamespace() instead: see 'Suggested Packages'.",     "'library' or 'require' calls in package code: %s\n  Please use :: or requireNamespace() instead: see 'Suggested Packages'.",     domain = "R-tools")
+#: R/QC.R:0
+msgid ""
+"'library' or 'require' call in package code: %s\n"
+"  Please use :: or requireNamespace() instead: see 'Suggested Packages'."
+msgid_plural ""
+"'library' or 'require' calls in package code: %s\n"
+"  Please use :: or requireNamespace() instead: see 'Suggested Packages'."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #. R/QC.R: ngettext(length(xx), "'library' or 'require' call not declared from: %s", "'library' or 'require' calls not declared from: %s",     domain = "R-tools")
 #: R/QC.R:0

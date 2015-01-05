@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-28 17:05\n"
+"POT-Creation-Date: 2015-01-05 20:46\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1435,6 +1435,11 @@ msgid ""
 msgstr ""
 "Znaleziono podkatalog 'r'.\n"
 "Prawdopodobnie powinien nosić nazwę 'R'."
+
+#. R/check.R: gettext("Found the following Makefile(s) without a final LF:", domain = "R-tools")
+#: R/check.R:0
+msgid "Found the following Makefile(s) without a final LF:"
+msgstr "Znaleziono poniższe pliki Makefile bez końcowego LF:"
 
 #. R/check.R: gettext("Found the following Makefiles with CR or CRLF line endings:", domain = "R-tools")
 #: R/check.R:0
@@ -2913,6 +2918,11 @@ msgstr "Własna liczba sekund: czas spędzony w samej funkcji."
 #: R/QC.R:0
 msgid "Slots for class %s"
 msgstr "Gniazda dla klasy %s"
+
+#. R/check.R: gettext("Some 'make' programs ignore lines not ending in LF.\n", domain = "R-tools")
+#: R/check.R:0
+msgid "Some 'make' programs ignore lines not ending in LF."
+msgstr "Niektóre programy 'make' ignorują linie nie kończące się LF."
 
 #. R/check.R: gettext("Some Unix 'make' programs require LF line endings.\n", domain = "R-tools")
 #: R/check.R:0
@@ -5818,6 +5828,27 @@ msgid_plural "'data(package=)' calls not declared from: %s"
 msgstr[0] "wywołanie 'data(package=)' nie zostało zadeklarowane z: %s"
 msgstr[1] "wywołania 'data(package=)' nie zostały zadeklarowane z: %s"
 msgstr[2] "wywołania 'data(package=)' nie zostały zadeklarowane z: %s"
+
+#. R/QC.R: ngettext(length(xx), "'library' or 'require' call in package code: %s\n  Please use :: or requireNamespace() instead: see 'Suggested Packages'.",     "'library' or 'require' calls in package code: %s\n  Please use :: or requireNamespace() instead: see 'Suggested Packages'.",     domain = "R-tools")
+#: R/QC.R:0
+msgid ""
+"'library' or 'require' call in package code: %s\n"
+"  Please use :: or requireNamespace() instead: see 'Suggested Packages'."
+msgid_plural ""
+"'library' or 'require' calls in package code: %s\n"
+"  Please use :: or requireNamespace() instead: see 'Suggested Packages'."
+msgstr[0] ""
+"wywołanie 'library' lub 'require' w kodzie pakietu: %s\n"
+"  Proszę zamiast tego użyć '::' lub funkcji 'requireNamespace()': zobacz "
+"'Suggested Packages'."
+msgstr[1] ""
+"wywołania 'library' lub 'require' w kodzie pakietu: %s\n"
+"  Proszę zamiast nich użyć '::' lub funkcji 'requireNamespace()': zobacz "
+"'Suggested Packages'."
+msgstr[2] ""
+"wywołania 'library' lub 'require' w kodzie pakietu: %s\n"
+"  Proszę zamiast nich użyć '::' lub funkcji 'requireNamespace()': zobacz "
+"'Suggested Packages'."
 
 #. R/QC.R: ngettext(length(xx), "'library' or 'require' call not declared from: %s", "'library' or 'require' calls not declared from: %s",     domain = "R-tools")
 #: R/QC.R:0
