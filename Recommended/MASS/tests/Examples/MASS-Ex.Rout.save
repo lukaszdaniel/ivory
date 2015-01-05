@@ -1617,7 +1617,6 @@ Number of Fisher Scoring iterations: 5
 > summary(glmmPQL(y ~ lbase*trt + lage + V4,
 +                 random = ~ 1 | subject,
 +                 family = poisson, data = epil))
-Loading required package: ‘nlme’
 iteration 1
 iteration 2
 iteration 3
@@ -1701,9 +1700,6 @@ Number of Groups: 59
 > 
 > 
 > cleanEx()
-
-detaching ‘package:nlme’
-
 > nameEx("farms")
 > ### * farms
 > 
@@ -2746,10 +2742,8 @@ Sat ~ Infl + Type + Cont + Infl:Type + Type:Cont
 Stepwise Model Path 
 Analysis of Deviance Table
 
-
 Initial Model:
 Sat ~ Infl + Type + Cont
-
 
 Final Model:
 Sat ~ Infl + Type + Cont + Infl:Type + Type:Cont
@@ -4119,10 +4113,8 @@ Sat ~ Infl + Type + Cont + Infl:Type + Type:Cont
 Stepwise Model Path 
 Analysis of Deviance Table
 
-
 Initial Model:
 Sat ~ Infl + Type + Cont
-
 
 Final Model:
 Sat ~ Infl + Type + Cont + Infl:Type + Type:Cont
@@ -4174,7 +4166,6 @@ ContHigh       0.1733589  0.54792854
 > 
 > fit <- glmmPQL(y ~ trt + I(week > 2), random = ~1 |  ID,
 +                family = binomial, data = bacteria)
-Loading required package: ‘nlme’
 iteration 1
 iteration 2
 iteration 3
@@ -4279,9 +4270,6 @@ attr(,"label")
 > 
 > 
 > cleanEx()
-
-detaching ‘package:nlme’
-
 > nameEx("predict.lda")
 > ### * predict.lda
 > 
@@ -4616,7 +4604,6 @@ stress after  30 iters: 0.00383, magic = 0.500
 Stepwise Model Path 
 Analysis of Deviance Table
 
-
 Initial Model:
 log(Days + 2.5) ~ Eth + Sex + Age + Lrn + Eth:Sex + Eth:Age + Eth:Lrn + Sex:Age + 
     Sex:Lrn + Age:Lrn + Eth:Sex:Age + Eth:Sex:Lrn + Eth:Age:Lrn + Sex:Age:Lrn
@@ -4644,10 +4631,8 @@ log(Days + 2.5) ~ Eth + Sex + Age + Lrn + Eth:Sex + Eth:Age + Eth:Lrn + Sex:Age 
 Stepwise Model Path 
 Analysis of Deviance Table
 
-
 Initial Model:
 log10(perf) ~ syct + mmin + mmax + cach + chmin + chmax
-
 
 Final Model:
 log10(perf) ~ mmax + cach + chmax
@@ -4691,10 +4676,8 @@ Residual Deviance: 195.5	AIC: 217.5
 Stepwise Model Path 
 Analysis of Deviance Table
 
-
 Initial Model:
 low ~ age + lwt + race + smoke + ptd + ht + ui + ftv
-
 
 Final Model:
 low ~ lwt + race + smoke + ptd + ht + ui
@@ -4710,10 +4693,8 @@ low ~ lwt + race + smoke + ptd + ht + ui
 Stepwise Model Path 
 Analysis of Deviance Table
 
-
 Initial Model:
 low ~ age + lwt + race + smoke + ptd + ht + ui + ftv
-
 
 Final Model:
 low ~ age + lwt + smoke + ptd + ht + ui + ftv + age:ftv + smoke:ui
@@ -4758,10 +4739,8 @@ Days ~ Eth + Sex + Age + Lrn + Eth:Sex + Eth:Age + Eth:Lrn + Sex:Age + Sex:Lrn +
 Stepwise Model Path 
 Analysis of Deviance Table
 
-
 Initial Model:
 Days ~ (Eth + Sex + Age + Lrn)^4
-
 
 Final Model:
 Days ~ Eth + Sex + Age + Lrn + Eth:Sex + Eth:Age + Eth:Lrn + Sex:Age + Sex:Lrn + 
