@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-12-28 17:05\n"
+"POT-Creation-Date: 2015-01-05 20:46\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -1439,6 +1439,12 @@ msgid ""
 "Found subdirectory 'r'.\n"
 "Most likely, this should be 'R'."
 msgstr ""
+
+#. R/check.R: gettext("Found the following Makefile(s) without a final LF:", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "Found the following Makefile(s) without a final LF:"
+msgstr "다음은 중복된 이름 '%s'를 가진 Rd 파일들입니다:"
 
 #. R/check.R: gettext("Found the following Makefiles with CR or CRLF line endings:", domain = "R-tools")
 #: R/check.R:0
@@ -2888,6 +2894,11 @@ msgstr ""
 #, fuzzy
 msgid "Slots for class %s"
 msgstr "클래스 '%s'에 대한 슬롯들"
+
+#. R/check.R: gettext("Some 'make' programs ignore lines not ending in LF.\n", domain = "R-tools")
+#: R/check.R:0
+msgid "Some 'make' programs ignore lines not ending in LF."
+msgstr ""
 
 #. R/check.R: gettext("Some Unix 'make' programs require LF line endings.\n", domain = "R-tools")
 #: R/check.R:0
@@ -5860,6 +5871,16 @@ msgstr[0] ""
 msgid "'data(package=)' call not declared from: %s"
 msgid_plural "'data(package=)' calls not declared from: %s"
 msgstr[0] "다음으로부터 선언되지 않은 'data(package=)' 호출입니다: %s"
+
+#. R/QC.R: ngettext(length(xx), "'library' or 'require' call in package code: %s\n  Please use :: or requireNamespace() instead: see 'Suggested Packages'.",     "'library' or 'require' calls in package code: %s\n  Please use :: or requireNamespace() instead: see 'Suggested Packages'.",     domain = "R-tools")
+#: R/QC.R:0
+msgid ""
+"'library' or 'require' call in package code: %s\n"
+"  Please use :: or requireNamespace() instead: see 'Suggested Packages'."
+msgid_plural ""
+"'library' or 'require' calls in package code: %s\n"
+"  Please use :: or requireNamespace() instead: see 'Suggested Packages'."
+msgstr[0] ""
 
 #. R/QC.R: ngettext(length(xx), "'library' or 'require' call not declared from: %s", "'library' or 'require' calls not declared from: %s",     domain = "R-tools")
 #: R/QC.R:0

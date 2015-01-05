@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-12-28 17:00\n"
+"POT-Creation-Date: 2015-01-05 20:11\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -2933,9 +2933,10 @@ msgid_plural "Classes %s hidden list of %s components"
 msgstr[0] ""
 msgstr[1] ""
 
-#. R/packages2.R: ngettext(sum(later & hasSrc), "Do you want to install from sources the package which need compilation?",     "Do you want to install from sources the packages which need compilation?", domain = "R-utils")
+#. R/packages2.R: ngettext(sum(later & hasSrc), "Do you want to install from sources the package which needs compilation?",     "Do you want to install from sources the packages which need compilation?", domain = "R-utils")
 #: R/packages2.R:0
-msgid "Do you want to install from sources the package which need compilation?"
+msgid ""
+"Do you want to install from sources the package which needs compilation?"
 msgid_plural ""
 "Do you want to install from sources the packages which need compilation?"
 msgstr[0] ""
