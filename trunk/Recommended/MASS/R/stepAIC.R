@@ -50,8 +50,8 @@ stepAIC <-
         ddf <- c(NA, abs(diff(rdf)))
         AIC <- sapply(models, "[[", "AIC")
         heading <- c(gettext("Stepwise Model Path \nAnalysis of Deviance Table", domain = "R-MASS"),
-                     "\n", gettext("Initial Model:", domain = "R-MASS"), deparse(formula(object)),
-                     "\n", gettext("Final Model:", domain = "R-MASS"), deparse(formula(fit)),
+                     "", gettext("Initial Model:", domain = "R-MASS"), deparse(formula(object)),
+                     "", gettext("Final Model:", domain = "R-MASS"), deparse(formula(fit)),
                      "\n")
         aod <-
             if(usingCp)

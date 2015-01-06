@@ -145,8 +145,8 @@ Rdiff <- function(from, to, useDiff = FALSE, forEx = FALSE,
     {
         if(!length(txt)) return(txt)
         ## remove R header
-        if(length(top <- grep("^(R version|R : Copyright|R Under development)",
-                              txt, perl = TRUE, useBytes = TRUE)) &&
+        #if(length(top <- grep("^(R version|R : Copyright|R Under development)",
+        if(length(top <- grep("^(Ivory)", txt, perl = TRUE, useBytes = TRUE)) &&
            length(bot <- grep("quit R.$", txt, perl = TRUE, useBytes = TRUE)))
             txt <- txt[-(top[1L]:bot[1L])]
         ## for massageExamples()
