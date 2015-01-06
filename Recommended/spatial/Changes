@@ -1,4 +1,4 @@
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/spatial/R/kr.R Recommended/spatial/R/kr.R
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/spatial/R/kr.R Recommended/spatial/R/kr.R
 33c33
 <     if (np > 6L) stop("'np' exceeds 6")
 ---
@@ -129,11 +129,27 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 <         stop("'x' not a fitted trend surface")
 ---
 >         stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("trls")))
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/spatial/src/krc.c Recommended/spatial/src/krc.c
+19a20
+> #include <R_ext/Minmax.h>
+22,25d22
+< 
+< #ifndef max
+< #  define max(a,b) ((a) > (b) ? (a) : (b))
+< #endif
 Only in Recommended/spatial/src: localization.h
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/spatial/src/pps.c Recommended/spatial/src/pps.c
-26a27
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/spatial/src/pps.c Recommended/spatial/src/pps.c
+20a21
+> #include <R_ext/Minmax.h>
+27,31c28
+< 
+< #ifndef max
+< #  define max(a,b) ((a) > (b) ? (a) : (b))
+< #  define min(a,b) ((a) < (b) ? (a) : (b))
+< #endif
+---
 > #include "localization.h"
-40c41
+40c37
 < 	error("not initialized -- use ppregion");
 ---
 > 	error(_("not initialized -- use ppregion"));

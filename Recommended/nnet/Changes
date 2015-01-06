@@ -1,4 +1,4 @@
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nnet/R/multinom.R Recommended/nnet/R/multinom.R
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/nnet/R/multinom.R Recommended/nnet/R/multinom.R
 73c73
 <                                      "groups %s are empty"),
 ---
@@ -88,7 +88,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 ---
 >         c(gettext("Likelihood ratio tests of Multinomial Models\n", domain = "R-nnet"),
 >           gettextf("Response: %s", paste(rsp, collapse = ""), domain = "R-nnet"))
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nnet/R/nnet.R Recommended/nnet/R/nnet.R
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/nnet/R/nnet.R Recommended/nnet/R/nnet.R
 51c51
 <                                      "groups %s are empty"),
 ---
@@ -144,7 +144,7 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 >     if(x$entropy) cat(gettext(" entropy fitting ", domain = "R-nnet"))
 >     if(x$softmax) cat(gettext(" softmax modelling ", domain = "R-nnet"))
 >     if(x$decay[1L] > 0) cat(gettextf(" decay=%s", x$decay[1L], domain = "R-nnet"), sep="")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nnet/R/vcovmultinom.R Recommended/nnet/R/vcovmultinom.R
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/nnet/R/vcovmultinom.R Recommended/nnet/R/vcovmultinom.R
 45c45
 <     for (i in 1L:n){
 ---
@@ -154,10 +154,20 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 ---
 >         for (j in seq_len(k+1)){
 Only in Recommended/nnet/src: localization.h
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/nnet/src/nnet.c Recommended/nnet/src/nnet.c
-27a28
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/nnet/src/nnet.c Recommended/nnet/src/nnet.c
+26a27
+> #include <R_ext/Minmax.h>
+27a29
 > #include "localization.h"
-124c125
+124c126
 < 	error("No model set");
 ---
 > 	error(_("No model set"));
+593,595d594
+< #define max9(a,b) a>b?a:b
+< #define min9(a,b) a<b?a:b
+< 
+631c630
+< 	    *Hess++ = H[max9(i, j)][min9(i, j)];
+---
+> 	    *Hess++ = H[max(i, j)][min(i, j)];

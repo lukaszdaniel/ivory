@@ -1,64 +1,4 @@
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/class/R/knn.R Recommended/class/R/knn.R
-58,59c58
-<             warning(gettextf("k = %d exceeds number %d of patterns", k, ntr),
-<                     domain = NA)
----
->             warning(gettextf("k = %d exceeds number %d of patterns", k, ntr), domain = "R-class")
-63c62
-<             stop(gettextf("k = %d must be at least 1", k), domain = NA)
----
->             stop(gettextf("k = %d must be at least 1", k), domain = "R-class")
-98,99c97
-<             warning(gettextf("k = %d exceeds number %d of patterns", k, ntr-1),
-<                     domain = NA)
----
->             warning(gettextf("k = %d exceeds number %d of patterns", k, ntr-1), domain = "R-class")
-103c101
-<             stop(gettextf("k = %d must be at least 1", k), domain = NA)
----
->             stop(gettextf("k = %d must be at least 1", k), domain = "R-class")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/class/R/lvq.R Recommended/class/R/lvq.R
-23c23
-<     if(length(cl) != n) stop("'x' and 'cl' have different lengths")
----
->     if(length(cl) != n) stop("'x' and 'cl' arguments have different lengths")
-33,34c33,34
-<         stop("invalid 'prior'")
-<     if(length(prior) != np) stop("'prior' is of incorrect length")
----
->         stop("invalid 'prior' argument")
->     if(length(prior) != np) stop("'prior' argument is of incorrect length")
-38c38
-<     for(i in 1L:np){
----
->     for(i in seq_len(np)){
-55c55
-<     if(length(cl) != n) stop("'x' and 'cl' have different lengths")
----
->     if(length(cl) != n) stop("'x' and 'cl' arguments have different lengths")
-82c82
-<     if(length(cl) != n) stop("'x' and 'cl' have different lengths")
----
->     if(length(cl) != n) stop("'x' and 'cl' arguments have different lengths")
-110c110
-<     if(length(cl) != n) stop("'x' and 'cl' have different lengths")
----
->     if(length(cl) != n) stop("'x' and 'cl' arguments have different lengths")
-139c139
-<     if(length(cl) != n) stop("'x' and 'cl' have different lengths")
----
->     if(length(cl) != n) stop("'x' and 'cl' arguments have different lengths")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/class/R/multiedit.R Recommended/class/R/multiedit.R
-32c32
-< 	 for (i in 1L:V){
----
-> 	 for (i in seq_len(V)){
-43,44c43
-< 	 if(trace) message(gettextf("pass %s size %d", pass, n2),
-<                            domain = NA)
----
-> 	 if(trace) message(gettextf("pass %s size %d", pass, n2), domain = "R-class")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/class/R/SOM.R Recommended/class/R/SOM.R
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/class/R/SOM.R Recommended/class/R/SOM.R
 24c24
 <         init <- data[sample(1L:nd, ng, replace = FALSE), , drop = FALSE]
 ---
@@ -89,11 +29,79 @@ diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=C
 <                 stop("'alpha' and 'radii' do not match")
 ---
 >                 stop("'alpha' and 'radii' arguments do not match")
-diff -rEZbwB '--exclude=*.[pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Changes' R-recommended/class/src/class.c Recommended/class/src/class.c
-21a22
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/class/R/knn.R Recommended/class/R/knn.R
+58,59c58
+<             warning(gettextf("k = %d exceeds number %d of patterns", k, ntr),
+<                     domain = NA)
+---
+>             warning(gettextf("k = %d exceeds number %d of patterns", k, ntr), domain = "R-class")
+63c62
+<             stop(gettextf("k = %d must be at least 1", k), domain = NA)
+---
+>             stop(gettextf("k = %d must be at least 1", k), domain = "R-class")
+98,99c97
+<             warning(gettextf("k = %d exceeds number %d of patterns", k, ntr-1),
+<                     domain = NA)
+---
+>             warning(gettextf("k = %d exceeds number %d of patterns", k, ntr-1), domain = "R-class")
+103c101
+<             stop(gettextf("k = %d must be at least 1", k), domain = NA)
+---
+>             stop(gettextf("k = %d must be at least 1", k), domain = "R-class")
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/class/R/lvq.R Recommended/class/R/lvq.R
+23c23
+<     if(length(cl) != n) stop("'x' and 'cl' have different lengths")
+---
+>     if(length(cl) != n) stop("'x' and 'cl' arguments have different lengths")
+33,34c33,34
+<         stop("invalid 'prior'")
+<     if(length(prior) != np) stop("'prior' is of incorrect length")
+---
+>         stop("invalid 'prior' argument")
+>     if(length(prior) != np) stop("'prior' argument is of incorrect length")
+38c38
+<     for(i in 1L:np){
+---
+>     for(i in seq_len(np)){
+55c55
+<     if(length(cl) != n) stop("'x' and 'cl' have different lengths")
+---
+>     if(length(cl) != n) stop("'x' and 'cl' arguments have different lengths")
+82c82
+<     if(length(cl) != n) stop("'x' and 'cl' have different lengths")
+---
+>     if(length(cl) != n) stop("'x' and 'cl' arguments have different lengths")
+110c110
+<     if(length(cl) != n) stop("'x' and 'cl' have different lengths")
+---
+>     if(length(cl) != n) stop("'x' and 'cl' arguments have different lengths")
+139c139
+<     if(length(cl) != n) stop("'x' and 'cl' have different lengths")
+---
+>     if(length(cl) != n) stop("'x' and 'cl' arguments have different lengths")
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/class/R/multiedit.R Recommended/class/R/multiedit.R
+32c32
+< 	 for (i in 1L:V){
+---
+> 	 for (i in seq_len(V)){
+43,44c43
+< 	 if(trace) message(gettextf("pass %s size %d", pass, n2),
+<                            domain = NA)
+---
+> 	 if(trace) message(gettextf("pass %s size %d", pass, n2), domain = "R-class")
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/class/src/class.c Recommended/class/src/class.c
+19a20
+> #include <R_ext/Minmax.h>
+21a23
 > #include "localization.h"
-135c136
+135c137
 < 				error("too many ties in knn");
 ---
 > 				error(_("too many ties in knn"));
+206d207
+< #define min9(a,b) ((a < b)?a:b)
+238c239
+< 	al[index] = min9(*alpha, al[index] / (1 + s * al[index]));
+---
+> 	al[index] = min(*alpha, al[index] / (1 + s * al[index]));
 Only in Recommended/class/src: localization.h
