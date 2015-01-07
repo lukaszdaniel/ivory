@@ -190,8 +190,9 @@
       package \pkg{tools} for conveniently analyzing how changing
       sources impacts the check results of their reverse dependencies.
 
-      \item Speedup from Peter Hagerty for \code{ls()} and \pkg{methods}'s
-      \code{.requirePackage()} speeding up S4 dispatch. (\PR{16133})
+      \item Speed-up from Peter Hagerty for \code{ls()} and
+      \code{methods:::.requirePackage()} speeding up S4 dispatch.
+      (\PR{16133})
     }
   }
 
@@ -203,7 +204,7 @@
 
       \item It is possible to request the use of system
       \command{valgrind} headers \emph{via} \command{configure} option
-      \option{--with-system-valgrind-headers}: note the possible
+      \option{--with-system-valgrind-headers}: note the possible future
       incompatibility of such headers discussed in the 'R Installation
       and Administration' manual. (Wish of \PR{16068}.)
 
@@ -221,8 +222,9 @@
        \code{pcre} (or similar names) are installed.
 
        \item \command{configure} requires the \command{texi2any} script
-       from \pkg{texinfo} 5.1 or later, in place of the \command{makeinfo}
-       program.
+       from \pkg{texinfo} 5.1 or later, replacing the \command{makeinfo}
+       program.  (\command{makeinfo} is a link to the Perl script
+       \command{texi2any} in \pkg{texinfo} 5.x.)
      }
   }
 
@@ -299,8 +301,12 @@
       \item A new \command{make} target \code{rsync-extsoft} has been
       added to obtain copies of the external libraries from \acronym{CRAN}.
 
-      \item It is possible to build without \command{makeinfo}: see the
-      comments in file \file{MkRules.dist}.
+      \item Building the manuals now requires \command{texi2any} from
+      \pkg{texinfo} 5.1 or later.  \acronym{CRAN} binary builds
+      include the manuals, but by default builds from source will not, and
+      they will be accessed from \acronym{CRAN}. See the comments in
+      \file{src/gnuwin32/MkRules.dist} for how to specify the location
+      of \command{texi2any}.      
     }
   }
 

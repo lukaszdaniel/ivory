@@ -1342,7 +1342,7 @@ run in parallel.
 @node Building the manuals, Building the Inno Setup installer, Checking the build, Building from source
 @subsection Building the manuals
 
-The PDF manuals can be made by
+The PDF manuals require @pkg{texinfo} 5.1 or later, and can be made by
 
 @example
 make manuals
@@ -1364,15 +1364,13 @@ in your path).
 See the @ref{Making the manuals} section in the Unix-alike section for setting
 options such as the paper size and the fonts used.
 
-Version 4.13 of @command{makeinfo} from Rtools is assumed by default.
-In version 5.x of @pkg{texinfo}, @command{makeinfo} has been replaced by
-a @command{Perl} script @command{texi2any}: the comments in file
-@file{MkRules.dist} contains alternative settings to allow that to be
-used (edit the copy @file{MkRules.local}).  A package of @pkg{texinfo}
-5.x for use on Windows is available at
+By default it is assumed that @pkg{texinfo} is not installed, and the
+manuals will not be built.  The comments in file @file{MkRules.dist}
+describe settings to build them.  (Copy that file to
+@file{MkRules.local} and edit it.)  The @pkg{texinfo} 5.x package
+for use on Windows is available at
 @uref{http://www.stats.ox.ac.uk/pub/Rtools/}: you will also need to
-install @command{Perl}.  Its use is recommended as the manuals are
-rendered by @command{texi2any} on non-Windows systems.
+install @command{Perl}.  
 
 @node Building the Inno Setup installer, Building the MSI installer, Building the manuals, Building from source
 @subsection Building the Inno Setup installer
@@ -3144,13 +3142,14 @@ suitable versions), system versions of @code{zlib} (version 1.2.5 or
 later),, @code{libbz2} (version 1.0.6 or later: called
 @pkg{bzip2-libs}/@pkg{bzip2-devel} or @pkg{libbz2-1.0}/@pkg{libbz2-dev}
 by some Linux distributions) and PCRE (version 8.10 or later, preferably
-8.32 or later@footnote{PCRE must be built with UTF-8 support (not the
-default) and support for Unicode properties is assumed by some @R{}
-packages.  Neither are tested by @command{configure}. JIT support is
-desirable.}): will be used, otherwise versions in the @R{} sources will
-be compiled in.  The external versions can be avoided by configure
-options @option{--without-system-zlib}, @option{--without-system-bzlib}
-and or @option{--without-system-pcre}.
+8.32 or later@footnote{and not PCRE2, which started at version
+10.0. PCRE must be built with UTF-8 support (not the default) and
+support for Unicode properties is assumed by some @R{} packages.
+Neither are tested by @command{configure}. JIT support is desirable.}):
+will be used, otherwise versions in the @R{} sources will be compiled
+in.  The external versions can be avoided by configure options
+@option{--without-system-zlib}, @option{--without-system-bzlib} and or
+@option{--without-system-pcre}.
 
 Option @option{--with-system-tre} is also available: it needs a recent
 version of TRE. (The current sources are in the @command{git} repository
