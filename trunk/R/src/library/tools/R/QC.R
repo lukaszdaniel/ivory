@@ -3165,7 +3165,7 @@ function(x, ...)
                      strwrap(gettext("Packages with priorities 'base' or 'recommended' or 'defunct-base' must already be known to R.", domain = "R-tools")), ""))
 
     if(any(as.integer(sapply(x, length)) > 0L))
-        writeLines(c(strwrap(gettext("See the information on DESCRIPTION files in section 'Creating R packages' of the 'Writing R Extensions' manual.", domain = "R-tools")), ""))
+        writeLines(c(strwrap(gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.", domain = "R-tools")), ""))
 
     invisible(x)
 }
@@ -3358,7 +3358,7 @@ function(x, ...)
           c(gettext("Fields with non-ASCII values:", domain = "R-tools"), .pretty_format(x$fields_with_non_ASCII_values))
       },
       if(any(as.integer(sapply(x, length)) > 0L)) {
-          c(strwrap(gettextf("See the information on DESCRIPTION files in section 'Creating R packages' of the 'Writing R Extensions' manual.", domain = "R-tools")), "")
+          c(strwrap(gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.", domain = "R-tools")), "")
       })
 }
 
@@ -3906,6 +3906,12 @@ function(package, dir, lib.loc = NULL)
     unknown <- unknown[!obsolete]
     if (length(unknown)) {
         repos <- .get_standard_repository_URLs()
+        ## Also allow for additionally specified repositories.
+        aurls <- pkgInfo[["DESCRIPTION"]]["Additional_repositories"]
+        if(!is.na(aurls)) {
+            repos <- c(repos,
+                       unique(unlist(strsplit(aurls, ",[[:space:]]*"))))
+        }
         known <-
             try(suppressWarnings(utils::available.packages(utils::contrib.url(repos, "source"),
                filters = c("R_version", "duplicates"))[, "Package"]))
@@ -3942,7 +3948,7 @@ function(x, ...)
               .pretty_format(unique(xx[[i]])), "")
         }
         c(unlist(lapply(seq_along(xx), .fmt)),
-          strwrap(gettext("See the information in section 'Cross-references' of the 'Writing R Extensions' manual.", domain = "R-tools")), "")
+          strwrap(gettext("See section 'Cross-references' in the 'Writing R Extensions' manual.", domain = "R-tools")), "")
     } else {
         character()
     }
@@ -6453,6 +6459,55 @@ function(dir)
         if(length(dotjava)) out$dotjava <- dotjava
     }
 
+    ## Check CITATION file for CRAN needs.
+    ## For publishing on CRAN, we need to be able to process package
+    ## CITATION files without having the package installed, which we
+    ## cannot perfectly emulate when checking.
+    ## Hence, if the package is not installed, check directly;
+    ## otherwise, check for offending calls likely to cause trouble.
+    if(file.exists(cfile <- file.path(dir, "inst", "CITATION"))) {
+        if(system.file(package = meta["Package"]) != "") {
+            ccalls <- .find_calls_in_file(cfile, recursive = TRUE)
+            cnames <-
+                intersect(unique(.call_names(ccalls)),
+                          c("packageDescription", "library", "require"))
+            if(length(cnames))
+                out$citation_calls <- cnames
+        } else {
+            pdmeta <- as.list(meta)
+            ## citation(auto = meta) needs:
+            class(pdmeta) <- "packageDescription"
+            cinfo <-
+                .eval_with_capture(tryCatch(utils::readCitationFile(cfile,
+                                                                    pdmeta),
+                                            error = identity))$value
+            if(inherits(cinfo, "error"))
+                out$citation_error <- conditionMessage(cinfo)
+        }
+    }
+
+    ## Check Authors@R.
+    if(!is.na(aar <- meta["Authors@R"]) &&
+       ## DESCRIPTION is fully checked lateron, so be careful.
+       !inherits(aar <- tryCatch(parse(text = aar), error = identity),
+                 "error")) {
+        bad <- ((length(aar) != 1L) || !is.call(aar <- aar[[1L]]))
+        if(!bad) {
+            cname <- as.character(aar[[1L]])
+            bad <-
+                ((cname != "person") &&
+                 ((cname != "c") ||
+                  !all(vapply(aar[-1L],
+                              function(e) {
+                                  (is.call(e) &&
+                                       (as.character(e[[1L]]) == "person"))
+                              },
+                              FALSE))))
+        }
+        if(bad)
+            out$authors_at_R_calls <- aar
+    }
+
     ## Is this an update for a package already on CRAN?
     db <- db[(packages == package) &
              (db[, "Repository"] == CRAN) &
@@ -6674,6 +6729,9 @@ function(x, ...)
 		"Uses the non-portable packages:", domain = "R-tools"),
                 paste(sQuote(y), collapse = ", "))
       },
+      if(length(y <- x$authors_at_R_calls)) {
+          c(gettext("Authors@R field should be a call to person(), or combine such calls.", domain = "R-tools"))
+      },
       if(length(y <- x$vignette_sources_only_in_inst_doc)) {
           if(identical(x$have_vignettes_dir, FALSE))
               c(gettext("Vignette sources in 'inst/doc' with no 'vignettes' directory:", domain = "R-tools"),
@@ -6699,6 +6757,14 @@ function(x, ...)
       },
       if(length(y <- x$javafiles)) {
           gettext("Package has FOSS license, installs .class/.jar but has no 'java' directory.", domain = "R-tools")
+      },
+      if(length(y <- x$citation_calls)) {
+          c(gettext("Package CITATION file contains call(s) to:", domain = "R-tools"),
+            strwrap(paste(y, collapse = ", "), indent = 2L, exdent = 4L))
+      },
+      if(length(y <- x$citation_error)) {
+          c(gettextf("Reading CITATION file fails with\n%s\nwhen package is not installed.",
+            paste(" ", y), domain = "R-tools"))
       }
       )
 }

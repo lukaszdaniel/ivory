@@ -66,16 +66,16 @@ save <- function(..., list = character(),
         warning("Use of save versions prior to 2 is deprecated", domain = "R-base")
 
     names <- as.character(substitute(list(...)))[-1L]
-     if(missing(list) && !length(names))
+    if(missing(list) && !length(names))
 	warning("nothing specified to be saved")
-   list <- c(list, names)
+    list <- c(list, names)
     if (!is.null(version) && version == 1)
         .Internal(save(list, file, ascii, version, envir, eval.promises))
     else {
         if (precheck) {
             ## check for existence of objects before opening connection
             ## (and e.g. clobering file)
-            ok <- unlist(lapply(list, exists, envir=envir))
+	    ok <- vapply(list, exists, NA, envir=envir)
             if(!all(ok)) {
                 n <- sum(!ok)
                 stop(sprintf(ngettext(n,
@@ -115,7 +115,7 @@ save <- function(..., list = character(),
 	else if (inherits(file, "connection"))
 	    con <- file
 	else stop(gettextf("invalid '%s' argument", "file"))
-	if(isOpen(con) && summary(con)$text != "binary")
+	if(isOpen(con) && !ascii && summary(con)$text != "binary")
 	    stop("can only save to a binary connection")
 	.Internal(saveToConn(list, con, ascii, version, envir, eval.promises))
     }
