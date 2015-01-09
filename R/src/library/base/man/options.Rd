@@ -573,6 +573,10 @@ getOption(x, default = NULL)
       \code{"win.binary"}. (\code{"mac.binary.leopard"} and
       \code{"mac.binary.universal"} are no longer in use.)
 #endif
+      Value \code{"binary"} is a synonym for the native binary type (if
+      there is one), and \code{"both"} is used by
+      \code{\link{install.packages}} to choose between source and binary
+      installs.
     }
 
     \item{\code{repos}:}{URLs of the repositories for use by
@@ -587,10 +591,12 @@ getOption(x, default = NULL)
       Omegahat, R-Forge, Rforge.net \dots)
       using \code{\link{setRepositories}}.
     }
-    \item{\code{SweaveHooks}, \code{SweaveSyntax}:}{see \code{\link{Sweave}}.}
+    \item{\code{SweaveHooks}, \code{SweaveSyntax}:}{
+      see \code{\link{Sweave}}.
+    }
 
-    \item{\code{unzip}:}{a character string, the path of the command
-      used for unzipping help files, or \code{"internal"}.
+    \item{\code{unzip}:}{a character string used by \code{\link{unzip}}:
+      the path of the external program \command{unzip} or \code{"internal"}.
 #ifdef unix
       Defaults to the value of \env{R_UNZIPCMD}, which is set in
       \file{etc/Renviron} if an \code{unzip} command was found during

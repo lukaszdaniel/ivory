@@ -190,9 +190,12 @@
       package \pkg{tools} for conveniently analyzing how changing
       sources impacts the check results of their reverse dependencies.
 
-      \item Speed-up from Peter Hagerty for \code{ls()} and
-      \code{methods:::.requirePackage()} speeding up S4 dispatch.
+      \item Speed-up from Peter Haverty for \code{ls()} and
+      \code{methods:::.requirePackage()} speeding up package loading.
       (\PR{16133})
+
+      \item New (somewhat experimental) \code{get0()} function, combining
+      \code{exists()} and \code{get()} in one call.
     }
   }
 
@@ -306,7 +309,7 @@
       include the manuals, but by default builds from source will not, and
       they will be accessed from \acronym{CRAN}. See the comments in
       \file{src/gnuwin32/MkRules.dist} for how to specify the location
-      of \command{texi2any}.      
+      of \command{texi2any}.
     }
   }
 
@@ -395,6 +398,14 @@
       \item \code{model.frame()} (used by \code{lm()} and many other
       modelling functions) now warns when it drops contrasts
       from factors.  (Wish of \PR{16119})
+
+      \item \code{install.packages()} and friends now accept the value
+      \code{type = "binary"} as a synonym for the native binary type on
+      the platform (if it has one).
+
+      \item Single source or binary files can be supplied for
+      \code{install.packages(type = "both")} and the approporiate type
+      and \code{repos = NULL} will be inferred.
     }
   }
 
@@ -508,6 +519,8 @@
       \item Unix-alike builds without a suitable \command{makeinfo} were
       documented to link the missing HTML manuals to CRAN, but did not.
 
+      \item \code{save(*, ascii=TRUE)} and \code{load()} now correctly
+      deal with \code{NaN}'s.  (\PR{16137})
     }
   }
 }

@@ -1,7 +1,7 @@
 #  File src/library/utils/R/packages2.R
 #  Part of the R package, http://www.R-project.org
 #
-#  Copyright (C) 1995-2014 The R Core Team
+#  Copyright (C) 1995-2015 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -132,6 +132,12 @@ install.packages <-
              keep_outputs = FALSE,
              ...)
 {
+    type2 <- .Platform$pkgType
+    if (type == "binary") {
+        if (type2 == "source")
+            stop("type 'binary' is not supported on this platform")
+        else type <- type2
+    }
     if (is.logical(clean) && clean)
         clean <- "--clean"
     if(is.logical(dependencies) && is.na(dependencies))
@@ -290,13 +296,27 @@ install.packages <-
 
     ## check if we should infer repos = NULL
     if(length(pkgs) == 1L && missing(repos) && missing(contriburl)) {
-        if((type == "source" &&
-            any(grepl("[.]tar[.](gz|bz2|xz)$", pkgs))) ||
+        if((type == "source" && any(grepl("[.]tar[.](gz|bz2|xz)$", pkgs))) ||
            (type %in% "win.binary" && length(grep("[.]zip$", pkgs))) ||
-           (substr(type, 1L, 10L) == "mac.binary"
-            && length(grep("[.]tgz$", pkgs)))) {
+           (substr(type, 1L, 10L) == "mac.binary" && grepl("[.]tgz$", pkgs))) {
             repos <- NULL
             message("inferring 'repos = NULL' from 'pkgs'")
+        }
+        if (type == "both") {
+            if (type2 %in% "win.binary" && grepl("[.]zip$", pkgs)) {
+                repos <- NULL
+                type <- type2
+                message("inferring 'repos = NULL' from 'pkgs'")
+            } else if (substr(type2, 1L, 10L) == "mac.binary"
+                       && grepl("[.]tgz$", pkgs)) {
+                repos <- NULL
+                type <- type2
+                message("inferring 'repos = NULL' from 'pkgs'")
+            } else if (grepl("[.]tar[.](gz|bz2|xz)$", pkgs)) {
+                repos <- NULL
+                type <- "source"
+                message("inferring 'repos = NULL' from 'pkgs'")
+           }
         }
     }
 
@@ -329,15 +349,16 @@ install.packages <-
 
 # for testing .Platform$pkgType <- "mac.binary"
     ## Look at type == "both"
+    ## NB it is only safe to use binary packages with a Mac OS X
+    ## build that uses the same R foundation layout as CRAN since
+    ## paths in DSOs are hard-coded.
     if (type == "both") {
-        ## NB it is only safe to use binary packages with a Mac OS X
-        ## build that uses the same R foundation layout as CRAN since
-        ## paths in DSOs are hard-coded.
-        type2 <- .Platform$pkgType
         if (type2 == "source")
             stop("type == \"both\" can only be used on Windows or a CRAN build for Mac OS X")
-        if(!missing(contriburl) || !is.null(available))
-            stop("type == \"both\" cannot be used if 'available' or 'contriburl' is specified")
+        if (!missing(contriburl) || !is.null(available)) type <- type2
+    }
+
+    if (type == "both") {
         if(is.null(repos))
             stop("type == \"both\" cannot be used with 'repos = NULL'")
         type <- "source"

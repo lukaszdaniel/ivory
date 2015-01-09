@@ -3056,6 +3056,9 @@ caddr_t hello() {
               [r_cv_zlib_mmap=yes])])
 ])# _R_ZLIB_MMAP
 
+## Notes on PCRE2 support (in the future).
+## The header is pcre2.h, and the 8-bit lib is libpcre2-8.
+## There is a pcre2-config script, and a pkgconfig file.
 ## R_PCRE
 ## ------
 ## If selected, try finding system pcre library and headers.
@@ -3075,7 +3078,7 @@ else
   have_pcre=no
 fi
 if test "x${have_pcre}" = xyes; then
-AC_CACHE_CHECK([if PCRE version >= 8.10], [r_cv_have_pcre810],
+AC_CACHE_CHECK([if PCRE version >= 8.10 and < 10.0], [r_cv_have_pcre810],
 [AC_RUN_IFELSE([AC_LANG_SOURCE([[
 #ifdef HAVE_PCRE_PCRE_H
 #include <pcre/pcre.h>
@@ -3087,7 +3090,7 @@ AC_CACHE_CHECK([if PCRE version >= 8.10], [r_cv_have_pcre810],
 int main() {
 #ifdef PCRE_MAJOR
 #if PCRE_MAJOR > 8
-  exit(0);
+  exit(1);
 #elif PCRE_MAJOR == 8 && PCRE_MINOR >= 10
   exit(0);
 #else

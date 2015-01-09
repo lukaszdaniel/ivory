@@ -901,7 +901,7 @@ setRlibs <-
             }
         }
         if (any)
-            wrapLog(gettext("See the information on INDEX files and package subdirectories in the chapter 'Creating R packages' of the 'Writing R Extensions' manual.", domain = "R-tools"))
+            wrapLog(gettext("See sections 'The INDEX file' and 'Package subdirectories' in the 'Writing R Extensions' manual.\n", domain = "R-tools"))
         else  resultLog(Log, gettext("OK", domain = "R-tools"))
     }
 
@@ -1225,7 +1225,7 @@ setRlibs <-
                     if(any(grepl("(not declared from|Including base/recommended)", out))) warningLog(Log)
                     else noteLog(Log)
                     printLog0(Log, paste(c(out, ""), collapse = "\n"))
-                    wrapLog(msg_DESCRIPTION)
+                    ## wrapLog(msg_DESCRIPTION)
                 } else resultLog(Log, gettext("OK", domain = "R-tools"))
             } else {
                 ## this needs to read the package code, and will fail on
@@ -1237,7 +1237,7 @@ setRlibs <-
                     if(any(grepl("not declared from", out))) warningLog(Log)
                     else noteLog(Log)
                     printLog0(Log, paste(c(out, ""), collapse = "\n"))
-                    wrapLog(msg_DESCRIPTION)
+                    ## wrapLog(msg_DESCRIPTION)
                 } else resultLog(Log, gettext("OK", domain = "R-tools"))
             }
         }
@@ -1255,7 +1255,7 @@ setRlibs <-
         if (length(out)) {
             warningLog(Log)
             printLog0(Log, paste(c(out, ""), collapse = "\n"))
-            wrapLog(gettext("See section 'Generic functions and methods' of the 'Writing R Extensions' manual.\n", domain = "R-tools"))
+            wrapLog(gettext("See section 'Generic functions and methods' in the 'Writing R Extensions' manual.\n", domain = "R-tools"))
         } else resultLog(Log, gettext("OK", domain = "R-tools"))
 
         ## Check whether replacement functions have their final argument
@@ -1313,7 +1313,7 @@ setRlibs <-
                 else if(any(grepl("with 'DUP':", out)))
                     wrapLog(gettext("'DUP' option is no longer supported and will be ignored.", domain = "R-tools"))
                 else
-                    wrapLog(gettext("See the chapter 'System and foreign language interfaces' of the 'Writing R Extensions' manual.\n", domain = "R-tools"))
+                    wrapLog(gettext("See chapter 'System and foreign language interfaces' in the 'Writing R Extensions' manual.\n", domain = "R-tools"))
             } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
     }
@@ -1465,7 +1465,7 @@ setRlibs <-
     check_Rd_files <- function(haveR)
     {
         msg_writing_Rd <-
-            gettext("See the chapter 'Writing R documentation files' in the 'Writing R Extensions' manual.\n", domain = "R-tools")
+            gettext("See chapter 'Writing R documentation files' in the 'Writing R Extensions' manual.\n", domain = "R-tools")
 
         if (dir.exists("man") && !extra_arch) {
             checkingLog(Log, gettext("checking Rd files ...", domain = "R-tools"))
@@ -3486,7 +3486,7 @@ setRlibs <-
                          printLog0(Log,
                                    gettextf("Invalid 'NAMESPACE' file, parsing gives:\n%s\n", as.character(e), domain = "R-tools"))
             msg_NAMESPACE <-
-                gettext("See section 'Package namespaces' of the 'Writing R Extensions' manual.\n", domain = "R-tools")
+                gettext("See section 'Package namespaces' in the 'Writing R Extensions' manual.\n", domain = "R-tools")
                          wrapLog(msg_NAMESPACE)
                          summaryLog(Log)
                          do_exit(1L)
@@ -4108,7 +4108,7 @@ setRlibs <-
     R_opts4 <- "--no-site-file --no-init-file --no-save --no-restore --slave"
     env0 <- if(WINDOWS) "R_ENVIRON_USER='no_such_file'" else "R_ENVIRON_USER=''"
 
-    msg_DESCRIPTION <- gettext("See the information on DESCRIPTION files in the chapter 'Creating R packages' of the 'Writing R Extensions' manual.", domain = "R-tools")
+    msg_DESCRIPTION <- gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.", domain = "R-tools")
 
     if (!length(pkgs)) {
         message("Error: no packages were specified")
