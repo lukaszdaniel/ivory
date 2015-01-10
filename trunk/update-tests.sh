@@ -1,14 +1,12 @@
 #!/bin/bash
 
-#source conf.sh
+source conf-names.sh
 
 cmd="meld"
 
 if test "$2" = "cp"; then
  cmd="cp"
 fi;
-IVORY="R"
-RECIVORY="Recommended"
 
 cd $IVORY/tests
 
