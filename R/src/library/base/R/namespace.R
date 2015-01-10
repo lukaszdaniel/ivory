@@ -1386,12 +1386,11 @@ registerS3methods <- function(info, package, env)
 .mergeImportMethods <- function(impenv, expenv, metaname)
 {
     expMethods <- get(metaname, envir = expenv)
-    if(exists(metaname, envir = impenv, inherits = FALSE)) {
-        impMethods <- get(metaname, envir = impenv)
-        assign(metaname,
-               methods:::.mergeMethodsTable2(impMethods,
-                                             expMethods, expenv, metaname),
-               envir = impenv)
-        impMethods
-    } else NULL
+    if(!is.null(impMethods <- get0(metaname, envir = impenv, inherits = FALSE))) {
+	assign(metaname,
+	       methods:::.mergeMethodsTable2(impMethods,
+					     expMethods, expenv, metaname),
+	       envir = impenv)
+	impMethods
+    } ## else NULL
 }
