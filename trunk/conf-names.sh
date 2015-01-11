@@ -13,6 +13,7 @@ RECDEVEL="R-recommended";
 RECBASE="R-recommended-frozen";
 RECIVORY="Recommended";
 
+BASEPKGS="base compiler graphics grDevices grid methods parallel splines stats stats4 tcltk tools utils"
 RECPKGS="boot class cluster codetools foreign KernSmooth lattice MASS Matrix mgcv nlme nnet rpart spatial survival"
 
 # terminal colors
@@ -25,3 +26,5 @@ txtpur=$(tput setaf 5) # Purple
 txtcyn=$(tput setaf 6) # Cyan
 txtwht=$(tput setaf 7) # White
 txtrst=$(tput sgr0)    # Text reset.
+
+RANDSTRING=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 6 | head -n 1)
