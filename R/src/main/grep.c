@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
- *  Copyright (C) 1997--2014  The R Core Team
+ *  Copyright (C) 1997--2015  The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Pulic License as published by
@@ -136,7 +136,6 @@ SEXP attribute_hidden do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
     int fixed_opt, perl_opt, useBytes;
     char *pt = NULL; wchar_t *wpt = NULL;
     const char *buf, *split = "", *bufp;
-    const unsigned char *tables = NULL;
     Rboolean use_UTF8 = FALSE, haveBytes = FALSE;
     const void *vmax, *vmax2;
     int nwarn = 0;
@@ -390,9 +389,7 @@ SEXP attribute_hidden do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		    error(_("'split' string %d is invalid in this locale"), itok+1);
 	    }
 
-	    if (!tables) tables = pcre_maketables();
-	    re_pcre = pcre_compile(split, options,
-				   &errorptr, &erroffset, tables);
+	    re_pcre = pcre_compile(split, options, &errorptr, &erroffset, NULL);
 	    if (!re_pcre) {
 		if (errorptr)
 		    warning(_("PCRE pattern compilation error\n\t'%s'\n\tat '%s'\n"),
@@ -632,7 +629,6 @@ SEXP attribute_hidden do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 	namesgets(ans, getAttrib(x, R_NamesSymbol));
     UNPROTECT(1);
     Free(pt); Free(wpt);
-    if (tables) pcre_free((void *)tables);
     return ans;
 }
 
@@ -743,7 +739,6 @@ SEXP attribute_hidden do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
     const char *spat = NULL;
     pcre *re_pcre = NULL /* -Wall */;
     pcre_extra *re_pe = NULL;
-    const unsigned char *tables = NULL /* -Wall */;
     Rboolean use_UTF8 = FALSE, use_WC =  FALSE;
     const void *vmax;
     int nwarn = 0;
@@ -853,8 +848,7 @@ SEXP attribute_hidden do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 	const char *errorptr;
 	if (igcase_opt) cflags |= PCRE_CASELESS;
 	if (!useBytes && use_UTF8) cflags |= PCRE_UTF8;
-	tables = pcre_maketables();
-	re_pcre = pcre_compile(spat, cflags, &errorptr, &erroffset, tables);
+	re_pcre = pcre_compile(spat, cflags, &errorptr, &erroffset, NULL);
 	if (!re_pcre) {
 	    if (errorptr)
 		warning(_("PCRE pattern compilation error\n\t'%s'\n\tat '%s'\n"),
@@ -924,7 +918,6 @@ SEXP attribute_hidden do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
     else if (perl_opt) {
 	if (re_pe) pcre_free(re_pe);
 	pcre_free(re_pcre);
-	pcre_free((void *)tables);
     } else
 	tre_regfree(&reg);
 
@@ -1492,7 +1485,6 @@ SEXP attribute_hidden do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
     const wchar_t *wrep = NULL;
     pcre *re_pcre = NULL;
     pcre_extra *re_pe  = NULL;
-    const unsigned char *tables = NULL;
     const void *vmax = vmaxget();
 
     checkArity(op, args);
@@ -1606,8 +1598,7 @@ SEXP attribute_hidden do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 	const char *errorptr;
 	if (use_UTF8) cflags |= PCRE_UTF8;
 	if (igcase_opt) cflags |= PCRE_CASELESS;
-	tables = pcre_maketables();
-	re_pcre = pcre_compile(spat, cflags, &errorptr, &erroffset, tables);
+	re_pcre = pcre_compile(spat, cflags, &errorptr, &erroffset, NULL);
 	if (!re_pcre) {
 	    if (errorptr)
 		warning(_("PCRE pattern compilation error\n\t'%s'\n\tat '%s'\n"),
@@ -1904,7 +1895,6 @@ SEXP attribute_hidden do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
     else if (perl_opt) {
 	if (re_pe) pcre_free(re_pe);
 	pcre_free(re_pcre);
-	pcre_free((void *)tables);
     } else tre_regfree(&reg);
     DUPLICATE_ATTRIB(ans, text);
     /* This copied the class, if any */
@@ -2305,7 +2295,6 @@ SEXP attribute_hidden do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
     const char *s = NULL;
     pcre *re_pcre = NULL /* -Wall */;
     pcre_extra *re_pe = NULL;
-    const unsigned char *tables = NULL /* -Wall */;
     Rboolean use_UTF8 = FALSE, use_WC = FALSE;
     const void *vmax;
     int capture_count, *ovector = NULL, ovector_size = 0, /* -Wall */
@@ -2403,8 +2392,7 @@ SEXP attribute_hidden do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 	const char *errorptr;
 	if (igcase_opt) cflags |= PCRE_CASELESS;
 	if (!useBytes && use_UTF8) cflags |= PCRE_UTF8;
-	tables = pcre_maketables();
-	re_pcre = pcre_compile(spat, cflags, &errorptr, &erroffset, tables);
+	re_pcre = pcre_compile(spat, cflags, &errorptr, &erroffset, NULL);
 	if (!re_pcre) {
 	    if (errorptr)
 		warning(_("PCRE pattern compilation error\n\t'%s'\n\tat '%s'\n"),
@@ -2589,7 +2577,6 @@ SEXP attribute_hidden do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
     else if (perl_opt) {
 	if (re_pe) pcre_free(re_pe);
 	pcre_free(re_pcre);
-	pcre_free((void *)tables);
 	UNPROTECT(1);
 	free(ovector);
     } else
@@ -2754,5 +2741,24 @@ SEXP attribute_hidden do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 
     UNPROTECT(1);
 
+    return ans;
+}
+
+SEXP attribute_hidden do_pcre_config(SEXP call, SEXP op, SEXP args, SEXP env)
+{
+    int res;
+
+    checkArity(op, args);
+    SEXP ans = PROTECT(allocVector(LGLSXP, 3));
+    int *lans = LOGICAL(ans);
+    SEXP nm = allocVector(STRSXP, 3);
+    setAttrib(ans, R_NamesSymbol, nm);
+    SET_STRING_ELT(nm, 0, mkChar("UTF-8"));
+    pcre_config(PCRE_CONFIG_UTF8, &res); lans[0] = res;
+    SET_STRING_ELT(nm, 1, mkChar("Unicode properties"));
+    pcre_config(PCRE_CONFIG_UNICODE_PROPERTIES, &res); lans[1] = res;
+    SET_STRING_ELT(nm, 2, mkChar("JIT"));
+    pcre_config(PCRE_CONFIG_JIT, &res); lans[2] = res;
+    UNPROTECT(1);
     return ans;
 }
