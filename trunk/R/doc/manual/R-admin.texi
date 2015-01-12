@@ -1367,17 +1367,20 @@ options such as the paper size and the fonts used.
 By default it is assumed that @pkg{texinfo} is not installed, and the
 manuals will not be built.  The comments in file @file{MkRules.dist}
 describe settings to build them.  (Copy that file to
-@file{MkRules.local} and edit it.)  The @pkg{texinfo} 5.x package
-for use on Windows is available at
+@file{MkRules.local} and edit it.)  The @pkg{texinfo} 5.x package for
+use on Windows is available at
 @uref{http://www.stats.ox.ac.uk/pub/Rtools/}: you will also need to
-install @command{Perl}.  
+install @command{Perl}@footnote{Suitable distributions include
+Strawberry Perl, @uref{http://strawberryperl.com/} and ActivePerl,
+@uref{http://www.activestate.com/activeperl}.}
 
 @node Building the Inno Setup installer, Building the MSI installer, Building the manuals, Building from source
 @subsection Building the Inno Setup installer
 
 You need to have the files for a complete R build, including bitmap and
-Tcl/Tk support and the manuals, as well as the recommended packages and
-Inno Setup (@pxref{The Inno Setup installer}).
+Tcl/Tk support and the manuals (which requires @pkg{texinfo} installed),
+as well as the recommended packages and Inno Setup (@pxref{The Inno
+Setup installer}).
 
 Once everything is set up
 
@@ -3154,12 +3157,13 @@ later),, @code{libbz2} (version 1.0.6 or later: called
 by some Linux distributions) and PCRE (version 8.10 or later, preferably
 8.32 or later@footnote{and not PCRE2, which started at version
 10.0. PCRE must be built with UTF-8 support (not the default) and
-support for Unicode properties is assumed by some @R{} packages.
-Neither are tested by @command{configure}. JIT support is desirable.}):
-will be used, otherwise versions in the @R{} sources will be compiled
-in.  The external versions can be avoided by configure options
-@option{--without-system-zlib}, @option{--without-system-bzlib} and or
-@option{--without-system-pcre}.
+support for Unicode properties is assumed by some @R{} packages.  Only
+the first is tested by @command{configure}, but both can be checked at
+run-time by calling @code{pcre_config()}. JIT support is desirable for
+the best performance.}): will be used, otherwise versions in the @R{}
+sources will be compiled in.  The external versions can be avoided by
+configure options @option{--without-system-zlib},
+@option{--without-system-bzlib} and or @option{--without-system-pcre}.
 
 Option @option{--with-system-tre} is also available: it needs a recent
 version of TRE. (The current sources are in the @command{git} repository
