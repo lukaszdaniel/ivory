@@ -1173,7 +1173,7 @@ Age scores:
 Eth scores:
          A          N 
 -1.0563816  0.9466276 
-> ## Don't run: plot(ct)
+> plot(ct)
 > 
 > corresp(caith)
 First canonical correlation(s): 0.4463684
@@ -1305,7 +1305,7 @@ $iter
 > 
 > denumerate(~(1+2+3)^3 + a/b)
 ~(.v1 + .v2 + .v3)^3 + a/b
-> ## Don't run: ~ (.v1 + .v2 + .v3)^3 + a/b
+> ## which gives ~ (.v1 + .v2 + .v3)^3 + a/b
 > 
 > 
 > 

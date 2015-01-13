@@ -6,10 +6,10 @@ dc34b63e948e3ba0667d43b3fde24c58  inst/po/pl/LC_MESSAGES/R-class.mo
 41a14f2150064ddff743e39d111a870a  inst/po/de/LC_MESSAGES/R-class.mo
 42a1ca9994fac694a8880283a281ddd7  inst/po/en@quot/LC_MESSAGES/R-class.mo
 b888e2521f30a9912d9687777b1aa478  inst/po/fr/LC_MESSAGES/R-class.mo
-a14861d4c76b0028b6dc635163b00297  LICENCE.note
-7ffe67ce0c67d938298e46b08818f9cb  man/knn1.Rd
-e8e077536af8608b6d5d366410bae87a  man/lvqtest.Rd
 c687e9e61b8a98aeb166d71ec57742b9  inst/po/ko/LC_MESSAGES/R-class.mo
+a14861d4c76b0028b6dc635163b00297  LICENCE.note
+e8e077536af8608b6d5d366410bae87a  man/lvqtest.Rd
+7ffe67ce0c67d938298e46b08818f9cb  man/knn1.Rd
 396eec671f1bddd185fa79831dd47ee3  man/lvq3.Rd
 e70f2c5c23ddf839b5e3b1457fc6fdbd  man/lvqinit.Rd
 4088862ce7d73759a8a754d490575c55  man/SOM.Rd
@@ -30,11 +30,11 @@ aadb26c42868ea3128ff9946ba01a80a  po/pl.po
 bb58b22589d23aa5601fda9610bba5f9  po/R-pl.po
 a90e18606f5d74d5d7877bac601293c3  po/R-fr.po
 bd0ea343c607f617e751e941b8ca32f5  po/R-de.po
-ddf83a10c93a38ef5b111508890d011b  R/lvq.R
 bfe26112bae2b66f1f3a98bfee2ad7ce  po/R-ko.po
+ddf83a10c93a38ef5b111508890d011b  R/lvq.R
 ff5ef05ff4bc09abeca6fe0000416d05  R/SOM.R
 dec31ffc0e9a73c8117dd85cb18453d7  R/knn.R
-6eeaac5a4afe30bedaff5567311dc342  R/zzz.R
 951ec3571a83bc462ea45c8664efe1d9  R/multiedit.R
+6eeaac5a4afe30bedaff5567311dc342  R/zzz.R
 fbb78de96939a522b12bc95a70c7c59e  src/class.c
 e4553dea0e4862d80ac13fa87b70465c  src/localization.h

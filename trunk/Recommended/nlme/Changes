@@ -1,34 +1,3 @@
-diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/nlme/ChangeLog Recommended/nlme/ChangeLog
-1,10d0
-< 2015-01-09  Brian Ripley
-< 
-< 	* DESCRIPTION: version is 3.1-119
-< 
-< 	* man/bdf.Rd: update URL.
-< 
-< 2014-10-20  Brian Ripleyx
-< 
-< 	* R/*.R: remove unused assignments.
-< 
-17c7
-< 	* R/nlme.R: nlme with self-starting model incorrectly required 'start'.
----
-> 	* R/nlme.R: nlme with self-starting model required 'start'.
-diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/nlme/DESCRIPTION Recommended/nlme/DESCRIPTION
-2,3c2,3
-< Version: 3.1-119
-< Date: 2015-01-10
----
-> Version: 3.1-118
-> Date: 2014-10-07
-22c22
-< Packaged: 2015-01-10 08:38:47 UTC; ripley
----
-> Packaged: 2014-10-07 07:57:10 UTC; ripley
-32c32
-< Date/Publication: 2015-01-10 09:41:12
----
-> Date/Publication: 2014-10-07 18:53:03
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/nlme/R/VarCov.R Recommended/nlme/R/VarCov.R
 28c28
 <         stop("not implemented for \"nlme\" objects")
@@ -843,10 +812,6 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >                                 "level %s is not allowed for %s",
 >                                 "levels %s are not allowed for %s", domain = "R-nlme"),
-742c742
-< ##  pn <- names(prs)
----
->   pn <- names(prs)
 753c753
 <   lab <- "Predicted values"
 ---
@@ -1508,11 +1473,9 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     } else {
 >      cat(gettext("Linear mixed-effects model fit by maximum likelihood", domain = "R-nlme"), "\n", sep = "")
 >     }
-2162,2163c2170,2171
-< ##  method <- x$method
+2163c2171
 <   cat(" Data:", deparse( x$call$data ), "\n")
 ---
->   method <- x$method
 >   cat(gettext(" Data: ", domain = "R-nlme"), deparse( x$call$data ), "\n", sep = "")
 2165c2173
 <     cat("  Subset:", deparse(asOneSidedFormula(x$call$subset)[[2L]]),"\n")
@@ -1794,10 +1757,6 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <            xlab = "Distance", ylab = "Semivariogram", type = "p", ylim,
 ---
 >            xlab = gettext("Distance", domain = "R-nlme"), ylab = gettext("Semivariogram", domain = "R-nlme"), type = "p", ylim,
-614c610
-< ##  coll <- attr(object, "collapse")
----
->   coll <- attr(object, "collapse")
 674c670
 <   function(x, title = " Correlation:", rdig = 3, ...)
 ---
@@ -2011,10 +1970,6 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <       cat("\nConvergence:\n")
 ---
 >       cat("\n", gettext("Convergence:", domain = "R-nlme"), "\n", sep = "")
-1109c1101
-< ##    nlmeSt <- nlmeStruct(reStruct = reSt)
----
->     nlmeSt <- nlmeStruct(reStruct = reSt)
 1183,1186c1175,1177
 <                                 "level %s not allowed for %s",
 <                                 "levels %s not allowed for %s"),
@@ -2024,18 +1979,10 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >                                 "level %s is not allowed for %s",
 >                                 "levels %s ares not allowed for %s", domain = "R-nlme"),
 >                        paste(levs[wch], collapse = ", ")), domain = NA)
-1230c1221
-< ##  fn <- names(fix)
----
->   fn <- names(fix)
 1244c1235
 <     for(i in 1:length(ranForm)) {
 ---
 >     for(i in seq_len(length(ranForm))) {
-1253c1244
-< ##    rn <- lapply(ran[whichQ], names)
----
->     rn <- lapply(ran[whichQ], names)
 1289c1280
 <   for(i in 1:nlev) {
 ---
@@ -2142,10 +2089,6 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <                     length(val)), domain = NA)
 ---
 >       stop(gettextf("an object of length %d does not match a Cholesky factor", length(val)), domain = "R-nlme")
-766c762
-< #  Ncol <- (-1 + sqrt(1 + 8 * length(a))) / 2
----
->   Ncol <- (-1 + sqrt(1 + 8 * length(a))) / 2
 1045c1041
 < #    for(i in 1:(q-1)) {
 ---
@@ -2271,10 +2214,6 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <     stop("cannot change the length of 'object'")
 ---
 >     stop("cannot change the length of 'object' argument")
-392c392
-<     if (is.null(names(x))) names(x) <- nobj:1
----
->     if (is.null(namx <- names(x))) names(x) <- nobj:1
 398c398
 <     cat("Random effects:\n")
 ---
@@ -2535,12 +2474,6 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <   function(object, structName = "Combination of variance functions:", ...)
 ---
 >   function(object, structName = gettext("Combination of variance functions:", domain = "R-nlme"), ...)
-diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/nlme/man/bdf.Rd Recommended/nlme/man/bdf.Rd
-47,48c47
-<   \url{http://stat.gamma.rug.nl/snijders/multilevel.htm}, the first
-<   edition of \url{http://www.stats.ox.ac.uk/~snijders/mlbook.htm}.
----
->   \url{http://stat.gamma.rug.nl/snijders/multilevel.htm}
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/nlme/src/base.h Recommended/nlme/src/base.h
 36,41d35
 < #ifdef ENABLE_NLS
@@ -2565,4 +2498,3 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 		warning("Singular precision matrix in level %ld, block %ld",
 ---
 > 		warning(_("Singular precision matrix in level %ld, block %ld"),
-Only in R-recommended/nlme/tests: nlme2.R

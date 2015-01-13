@@ -1,20 +1,3 @@
-diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/MASS/DESCRIPTION Recommended/MASS/DESCRIPTION
-3,5c3,5
-< Version: 7.3-37
-< Date: 2015-01-10
-< Revision: $Rev: 3420 $
----
-> Version: 7.3-36
-> Date: 2015-01-04
-> Revision: $Rev: 3412 $
-24c24
-< Packaged: 2015-01-10 08:31:05 UTC; ripley
----
-> Packaged: 2015-01-04 16:30:44 UTC; ripley
-34c34
-< Date/Publication: 2015-01-10 09:41:00
----
-> Date/Publication: 2015-01-04 21:19:27
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/MASS/R/add.R Recommended/MASS/R/add.R
 56c56
 <             message(gettextf("trying + %s", tt), domain = NA)
@@ -1154,50 +1137,11 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <     if(!n) stop("'x' has length zero")
 ---
 >     if(!n) stop("'x' argument has length zero")
-diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/MASS/inst/scripts/ch10.R Recommended/MASS/inst/scripts/ch10.R
-235,237c235
-< if(FALSE) { # slow
-< ## package available from http://www.stats.ox.ac.uk/pub/RWin
-< ## but these examples fail
----
-> if(FALSE) { # very slow
-261,268c259,270
-< ## modified for YAGS >= 3.21-3
-< ## package available from http://www.stats.ox.ac.uk/pub/RWin
-< if(require(yags)) {
-< print(yags(y == "y" ~ trt + I(week > 2), family = binomial, alphainit=0,
-<            id = ID, corstr = "exchangeable", data = bacteria))
-< 
-< print(yags(y ~ lbase*trt + lage + V4, family = poisson, alphainit=0,
-<            id = subject, corstr = "exchangeable", data = epil))
----
-> if(FALSE) {
-> ## modified for YAGS 3.21-3
-> library(yags)
-> attach(bacteria)
-> yags(y == "y" ~ trt + I(week > 2), family = binomial, alphainit=0,
->      id = ID, corstr = "exchangeable")
-> detach("bacteria")
-> 
-> attach(epil)
-> yags(y ~ lbase*trt + lage + V4, family = poisson, alphainit=0,
->      id = subject, corstr = "exchangeable")
-> detach("epil")
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/MASS/man/MASS-internal.Rd Recommended/MASS/man/MASS-internal.Rd
 21c21
 < neg.bin(theta = stop("'theta' must be given"))
 ---
 > neg.bin(theta = stop("'theta' argument must be specified"))
-diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/MASS/man/bacteria.Rd Recommended/MASS/man/bacteria.Rd
-38c38,39
-<   Dr Amanda Leach \emph{via} Mr James McBroom.
----
->   Menzies School of Health Research 1999--2000 Annual Report pp. 18--21
->   (\url{http://www.menzies.edu.au/publications/anreps/MSHR00.pdf}).
-41,43d41
-<   Menzies School of Health Research 1999--2000 Annual Report. p.20.
-<   \url{http://www.menzies.edu.au/icms_docs/172302_2000_Annual_report.pdf}.
-<   
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/MASS/man/boxcox.Rd Recommended/MASS/man/boxcox.Rd
 21c21
 <        ylab = "log-Likelihood", \dots)
@@ -1211,16 +1155,6 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <        ylab = "log-Likelihood", \dots)
 ---
 >        ylab = gettext("log-Likelihood", domain = "R-MASS"), \dots)
-diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/MASS/man/corresp.Rd Recommended/MASS/man/corresp.Rd
-90c90
-< plot(ct)
----
-> \dontrun{plot(ct)}
-diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/MASS/man/denumerate.Rd Recommended/MASS/man/denumerate.Rd
-49c49
-< ## which gives ~ (.v1 + .v2 + .v3)^3 + a/b
----
-> \dontrun{~ (.v1 + .v2 + .v3)^3 + a/b}
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/MASS/man/logtrans.Rd Recommended/MASS/man/logtrans.Rd
 21c21
 <          ylab = "log Likelihood")
