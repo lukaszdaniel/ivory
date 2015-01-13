@@ -35,7 +35,7 @@ isSymmetric.matrix <- function(object, tol = 100*.Machine$double.eps, ...)
 
 eigen <- function(x, symmetric, only.values = FALSE, EISPACK = FALSE)
 {
-    x <- as.matrix(x)
+    x <- unname(as.matrix(x))
     n <- nrow(x)
     if (!n) stop(gettextf("'%s' argument is a 0 x 0 matrix", "x"))
     if (n != ncol(x)) stop("non-square matrix in 'eigen()' function")
