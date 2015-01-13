@@ -203,14 +203,20 @@
       (or at least undesirable) when the \code{definition} argument was
       a function.
             
-      \item Work on progress on optional use of \code{libcurl} for
-      Internet access:
+      \item Work in progress on optional use of \code{libcurl} for
+      Internet access (including on Windows):
       \itemize{
 	\item \code{capabilities("libcurl")} reports if this is
 	available.
 
-	\item \code{curlVersion()} reports the version in use, and
+	\item \code{libcurlVersion()} reports the version in use, and
 	other details.
+
+	\item \code{curlGetHeaders()} retrieves the headers for
+	\code{http://}, \code{ftp://} and \code{https://} URLs.
+
+	\item \code{download.file()} has a new method \code{"libcurl"}
+	(prelimary version).
       }
 
     }
