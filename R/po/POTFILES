@@ -79,10 +79,12 @@ src/main/gram.c
 src/main/gram.y
 src/main/graphics.c
 src/main/grep.c
+src/main/gzio.h
 src/main/identical.c
 src/main/inspect.c
 src/main/internet.c
 src/main/lapack.c
+src/main/libcurl.c
 src/main/logic.c
 src/main/main.c
 src/main/mapply.c
@@ -93,11 +95,11 @@ src/main/objects.c
 src/main/options.c
 src/main/paste.c
 src/main/platform.c
-src/main/plot.c
 src/main/plot3d.c
+src/main/plot.c
 src/main/plotmath.c
-src/main/print.c
 src/main/printarray.c
+src/main/print.c
 src/main/printutils.c
 src/main/printvector.c
 src/main/qsort.c
