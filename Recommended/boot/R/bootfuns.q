@@ -834,7 +834,6 @@ cv.glm <- function(data, glmfit, cost=function(y,yhat) mean((y-yhat)^2),
     if (!exists(".Random.seed", envir=.GlobalEnv, inherits = FALSE)) runif(1)
     seed <- get(".Random.seed", envir=.GlobalEnv, inherits = FALSE)
     n <- nrow(data)
-    out <- NULL
     if ((K > n) || (K <= 1))
         stop("'K' outside allowable range")
     K.o <- K
@@ -1570,7 +1569,6 @@ cens.resamp <- function(data, R, F.surv, G.surv, strata, index = c(1,2),
     Gstart <- 1
     Gstr <- G.surv$strata
     if (is.null(Gstr)) Gstr <- length(G.surv$time)
-    out <- array(NA, c(R, n, 2))
     y0 <- matrix(NA, R, n)
     for (s in seq_along(table(strata[, 1L]))) {
 # Find the resampled failure times within strata for failures
@@ -1883,7 +1881,6 @@ envelope <-
         sort(x ,partial = sort(c(k1, k2)))[c(k1, k2)]
     if (!is.null(boot.out) && isMatrix(boot.out$t)) mat <- boot.out$t
     if (!isMatrix(mat)) stop("bootstrap output matrix missing")
-    n <- ncol(mat)
     if (length(index) < 2L) stop("use 'boot.ci' for scalar parameters")
     mat <- mat[,index]
     rmat <- apply(mat,2L,rank)
@@ -3467,7 +3464,6 @@ scramble <- function(ts, norm = TRUE)
 #  used otherwise exact empirical margins are used.
 #
 {
-    cl <- class(ts)
     if (isMatrix(ts)) stop("multivariate time series not allowed")
     st <- start(ts)
     dt <- deltat(ts)

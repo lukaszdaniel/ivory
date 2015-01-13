@@ -2167,7 +2167,7 @@ print.summary.lme <-
      cat(gettext("Linear mixed-effects model fit by maximum likelihood", domain = "R-nlme"), "\n", sep = "")
     }
   }
-  method <- x$method
+##  method <- x$method
   cat(gettext(" Data: ", domain = "R-nlme"), deparse( x$call$data ), "\n", sep = "")
   if (!is.null(x$call$subset)) {
     cat(gettext("  Subset: ", domain = "R-nlme"), deparse(asOneSidedFormula(x$call$subset)[[2L]]), "\n", sep = "")

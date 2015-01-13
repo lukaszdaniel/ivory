@@ -1,3 +1,8 @@
+version 1.3-13 2015-01-10
+
+	Update URL in ?EEF.profile.
+	remove some unused assignments.
+
 version 1.3-12 2014-09-13
 
 	Reduce print precision for abc.ci and boot examples (noLD testing)

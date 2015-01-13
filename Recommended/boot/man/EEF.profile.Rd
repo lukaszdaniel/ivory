@@ -33,7 +33,7 @@ The functions are not intended for general use and are not supported
 as part of the \code{boot}package.  For more general and more robust
 code to calculate empirical likelihoods see Professor A. B. Owen's 
 empirical likelihood home page at the URL
-\url{http://www-stat.stanford.edu/~owen/empirical/}.}
+\url{http://statistics.stanford.edu/~owen/empirical/}.}
 \value{
 A matrix with \code{n.t} rows.  The first column contains the
 values of the parameter used.  The second column of the output

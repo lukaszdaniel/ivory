@@ -43,7 +43,7 @@ EEF.profile <- function(y, tmin = min(y)+0.1, tmax = max(y) - 0.1, n.t = 25,
     for (it in 0:n.t) {
         t <- tmin + (tmax-tmin)*it/n.t
         psi <- as.vector(u( y, t ))
-        fit <- glm(zero~psi -1,poisson(log))
+        fit <- glm(zero ~ psi -1,poisson(log))
         f <- fitted(fit)
         EEF.paras[1+it,] <- c(t, sum(log(f)-log(sum(f))), sum(f-1),
                               coefficients(fit))
