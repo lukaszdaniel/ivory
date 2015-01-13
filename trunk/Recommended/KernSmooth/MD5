@@ -1,12 +1,12 @@
 d41d8cd98f00b204e9800998ecf8427e  Changes
 5a626ee8a5c1a57d6a7711971ea80446  DESCRIPTION
 33ce388f9130481dcfb6bafc37e58087  inst/po/pl/LC_MESSAGES/R-KernSmooth.mo
-1fe83f9e1cd73afef129aa0b1c4db76d  inst/po/de/LC_MESSAGES/R-KernSmooth.mo
 470981c5ab01ecc836626641069ea43d  inst/po/en@quot/LC_MESSAGES/R-KernSmooth.mo
+1fe83f9e1cd73afef129aa0b1c4db76d  inst/po/de/LC_MESSAGES/R-KernSmooth.mo
 84461730024234dcc17218b6b11f83fb  inst/po/fr/LC_MESSAGES/R-KernSmooth.mo
 4a39ab255fed86dd361ce9d83f876488  LICENCE.note
-2cdc0085930d42760d8f9ae4c0d4557f  man/dpih.Rd
 987c88c639c31e61d8b38d66e831dfce  inst/po/ko/LC_MESSAGES/R-KernSmooth.mo
+2cdc0085930d42760d8f9ae4c0d4557f  man/dpih.Rd
 e7ddab232fd0c2c20b6eac503229ca89  man/dpill.Rd
 5f6ef1beea4f7680cea94e63dd715bcb  man/bkde.Rd
 e9d58f063bb33cd05bb14a80fb6bfcbd  man/dpik.Rd
@@ -23,8 +23,8 @@ e3fdf390097e7bcab19d73285c8cee66  po/R-ko.po
 4d37c68f063852a93ff686e654a0b4fd  src/init.c
 8290d2e9740414e315237f0d5d4024bb  src/Makevars
 99da5301640f94f5edefda25b72c5699  src/sstdiag.f
-eb3d453421ea2c85fe71697c9f826271  R/all.R
 3e1727a65548c074666c70c328c7fb18  src/dgesl.f
+eb3d453421ea2c85fe71697c9f826271  R/all.R
 dd2dfdeab74b70230d0e6abadd1a55aa  src/sdiag.f
 03c87599eaa7875fb31ca4d4ea8b1770  src/locpoly.f
 8b2926ed1798f467078e3bed97658367  src/linbin2D.f

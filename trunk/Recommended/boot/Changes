@@ -1,3 +1,25 @@
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/boot/ChangeLog Recommended/boot/ChangeLog
+1,5d0
+< version 1.3-13 2015-01-10
+< 
+< 	Update URL in ?EEF.profile.
+< 	remove some unused assignments.
+< 
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/boot/DESCRIPTION Recommended/boot/DESCRIPTION
+3,4c3,4
+< Version: 1.3-14
+< Date: 2015-01-10
+---
+> Version: 1.3-13
+> Date: 2014-09-29
+22c22
+< Packaged: 2015-01-10 08:31:54 UTC; ripley
+---
+> Packaged: 2014-09-29 09:08:42 UTC; ripley
+27c27
+< Date/Publication: 2015-01-10 09:41:07
+---
+> Date/Publication: 2014-09-30 08:59:55
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/boot/R/bootfuns.q Recommended/boot/R/bootfuns.q
 337c337
 <         print(paste("All values of t* are equal to ", mean(t, na.rm=TRUE)))
@@ -229,61 +251,63 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 
 > 
 > 	
-830c846
+820a837
+>     out <- NULL
+829c846
 <     if (K!=K.o) warning(gettextf("'K' has been set to %f", K), domain = NA)
 ---
 >     if (K!=K.o) warning(gettextf("'K' has been set to %f", K), domain = "R-boot")
-832c848
+831c848
 <     s <- sample0(rep(1L:K, f), n)
 ---
 >     s <- sample0(rep(seq_len(K), f), n)
-861c877
+860c877
 < 		    index = 1L:min(2L, length(boot.out$t0)),
 ---
 > 		    index = seq_len(min(2L, length(boot.out$t0))),
-900,901c916,917
+899,900c916,917
 <         print(paste("All values of t are equal to ", mean(t, na.rm=TRUE),
 <                     "\n Cannot calculate confidence intervals"))
 ---
 >         print(paste(gettextf("All values of t are equal to %s", mean(t, na.rm=TRUE), domain = "R-boot"),
 >                     "\n ", gettext("Cannot calculate confidence intervals", domain = "R-boot")))
-905c921
+904c921
 <         stop(gettextf("'t' must of length %d", boot.out$R), domain = NA)
 ---
 >         stop(gettextf("'t' must of length %d", boot.out$R), domain = "R-boot")
-966c982
+965c982
 <         intlabs <- c(intlabs,"     Normal        ")
 ---
 >         intlabs <- c(intlabs, gettext("     Normal        ", domain = "R-boot"))
-968c984
+967c984
 <         intlabs <- c(intlabs,"     Basic         ")
 ---
 >         intlabs <- c(intlabs, gettext("     Basic         ", domain = "R-boot"))
-971c987
+970c987
 <         intlabs <- c(intlabs,"   Studentized     ")
 ---
 >         intlabs <- c(intlabs, gettext("   Studentized     ", domain = "R-boot"))
-974c990
+973c990
 <         intlabs <- c(intlabs,"    Percentile     ")
 ---
 >         intlabs <- c(intlabs, gettext("    Percentile     ", domain = "R-boot"))
-977c993
+976c993
 <         intlabs <- c(intlabs,"      BCa          ")
 ---
 >         intlabs <- c(intlabs, gettext("      BCa          ", domain = "R-boot"))
-998,999c1014,1015
+997,998c1014,1015
 <     ints1[,2*(1L:n1)] <- paste("(",ints1[,2*(1L:n1)],",",sep="")
 <     ints1[,2*(1L:n1)+1L] <- paste(ints1[,2*(1L:n1)+1L],")  ")
 ---
 >     ints1[, 2*seq_len(n1)] <- paste("(",ints1[,2*seq_len(n1)], ", ", sep = "")
 >     ints1[, 2*seq_len(n1) + 1L] <- paste(ints1[, 2*seq_len(n1) + 1L], ")  ")
-1012,1013c1028,1029
+1011,1012c1028,1029
 <         ints2[,2*(1L:n2)] <- paste("(",ints2[,2*(1L:n2)],",",sep="")
 <         ints2[,2*(1L:n2)+1L] <- paste(ints2[,2*(1L:n2)+1L],")  ")
 ---
 >         ints2[, 2*seq_len(n2)] <- paste("(", ints2[, 2*seq_len(n2)], ", ", sep = "")
 >         ints2[, 2*seq_len(n2) + 1L] <- paste(ints2[, 2*seq_len(n2) + 1L], ")  ")
-1017,1019c1033,1035
+1016,1018c1033,1035
 <     cat("BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS\n")
 <     cat(paste("Based on",R,"bootstrap replicates\n\n"))
 <     cat("CALL : \n")
@@ -291,17 +315,17 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     cat(gettext("BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS", domain = "R-boot"), "\n", sep = "")
 >     cat(gettextf("Based on %d bootstrap replicates", R, domain = "R-boot"), "\n\n", sep = "")
 >     cat(gettext("CALL:", domain = "R-boot"), "\n", sep = "")
-1021,1022c1037,1038
+1020,1021c1037,1038
 <     cat("\nIntervals : ")
 <     cat("\nLevel",intlabs[1L:n1])
 ---
 >     cat("\n", gettext("Intervals:", domain = "R-boot"), sep = "")
 >     cat("\n", gettext("Level", domain = "R-boot"), intlabs[seq_len(n1)])
-1025c1041
+1024c1041
 <         cat("\n\nLevel",intlabs[(n1+1):(n1+n2)])
 ---
 >         cat("\n\n", gettext("Level", domain = "R-boot"), intlabs[(n1+1):(n1+n2)])
-1030,1033c1046,1047
+1029,1032c1046,1047
 <             cat("\nCalculations and Intervals on ",
 <                 "Transformed Scale\n")
 <         else	cat("\nCalculations on Transformed Scale;",
@@ -309,290 +333,296 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >             cat("\n", gettext("Calculations and Intervals on Transformed Scale", domain = "R-boot"), "\n", sep = "")
 >         else	cat("\n", gettext("Calculations on Transformed Scale; Intervals on Original Scale", domain = "R-boot"), "\n", sep = "")
-1036,1038c1050,1051
+1035,1037c1050,1051
 <         cat("\nCalculations and Intervals on Original Scale\n")
 <     else 	cat("\nCalculations on Original Scale",
 <                     " but Intervals Transformed\n")#
 ---
 >         cat("\n", gettext("Calculations and Intervals on Original Scale", domain = "R-boot"), "\n", sep = "")
 >     else 	cat("\n", gettext("Calculations on Original Scale but Intervals Transformed", domain = "R-boot"), "\n", sep = "")#
-1042c1055
+1041c1055
 <             cat("Warning : Basic Intervals used Extreme Quantiles\n")
 ---
 >             cat(gettext("Warning: Basic Intervals used Extreme Quantiles", domain = "R-boot"), "\n", sep = "")
-1044c1057
+1043c1057
 <             cat("Some basic intervals may be unstable\n")
 ---
 > 		    cat(gettext("Some basic intervals may be unstable", domain = "R-boot"), "\n", sep = "")
-1048c1061
+1047c1061
 <             cat("Warning : Studentized Intervals used Extreme Quantiles\n")
 ---
 >             cat(gettext("Warning: Studentized Intervals used Extreme Quantiles", domain = "R-boot"), "\n", sep = "")
-1050c1063
+1049c1063
 <             cat("Some studentized intervals may be unstable\n")
 ---
 >             cat(gettext("Some studentized intervals may be unstable", domain = "R-boot"), "\n", sep = "")
-1054c1067
+1053c1067
 <             cat("Warning : Percentile Intervals used Extreme Quantiles\n")
 ---
 >             cat(gettext("Warning: Percentile Intervals used Extreme Quantiles", domain = "R-boot"), "\n", sep = "")
-1056c1069
+1055c1069
 <             cat("Some percentile intervals may be unstable\n")
 ---
 >             cat(gettext("Some percentile intervals may be unstable", domain = "R-boot"), "\n", sep = "")
-1060c1073
+1059c1073
 <             cat("Warning : BCa Intervals used Extreme Quantiles\n")
 ---
 >             cat(gettext("Warning: BCa Intervals used Extreme Quantiles", domain = "R-boot"), "\n", sep = "")
-1062c1075
+1061c1075
 <             cat("Some BCa intervals may be unstable\n")
 ---
 >             cat(gettext("Some BCa intervals may be unstable", domain = "R-boot"), "\n", sep = "")
-1222c1235
+1221c1235
 <     for (s in 1L:S) {
 ---
 >     for (s in seq_len(S)) {
-1314,1315c1327
+1313,1314c1327
 <             warning(gettextf("only columns %s and %s of 'data' used",
 <                              index[1L], index[2L]), domain = NA)
 ---
 >             warning(gettextf("only columns %s and %s of 'data' used", index[1L], index[2L]), domain = "R-boot")
-1443c1455
+1442c1455
 <         str <- rep(1L:nstr, surv$strata)
 ---
 >         str <- rep(seq_len(nstr), surv$strata)
-1451c1463
+1450c1463
 <     for (s in 1L:nstr) {
 ---
 >     for (s in seq_len(nstr)) {
-1843c1855
+1559a1573
+>     out <- array(NA, c(R, n, 2))
+1841c1855
 <     for(s in 1L:S) {
 ---
 >     for(s in seq_len(S)) {
-1851c1863
+1849c1863
 <     function(boot.out = NULL, mat = NULL, level = 0.95, index = 1L:ncol(mat))
 ---
 >     function(boot.out = NULL, mat = NULL, level = 0.95, index = seq_len(ncol(mat)))
-1955c1967
+1871a1886
+>     n <- ncol(mat)
+1952c1967
 <         subset <- (1L:(length(subset)+length(glmdiag$h)))[subset]
 ---
 >         subset <- seq_len(length(subset)+length(glmdiag$h))[subset]
-1966c1978
+1963c1978
 <     plot(x1, glmdiag$res, xlab = "Linear predictor", ylab = "Residuals")
 ---
 >     plot(x1, glmdiag$res, xlab = gettext("Linear predictor", domain = "R-boot"), ylab = gettext("Residuals", domain = "R-boot"))
-1973,1974c1985,1986
+1970,1971c1985,1986
 <     plot(x2, y2, ylab = "Quantiles of standard normal",
 <          xlab = "Ordered deviance residuals")
 ---
 >     plot(x2, y2, ylab = gettext("Quantiles of standard normal"),
 >          xlab = gettext("Ordered deviance residuals"))
-1981c1993
+1978c1993
 <     plot(hh, glmdiag$cook, xlab = "h/(1-h)", ylab = "Cook statistic")
 ---
 >     plot(hh, glmdiag$cook, xlab = "h/(1-h)", ylab = gettext("Cook statistic", domain = "R-boot"))
-1994c2006
+1991c2006
 <     plot(subset, glmdiag$cook, xlab = "Case", ylab = "Cook statistic")
 ---
 >     plot(subset, glmdiag$cook, xlab = gettext("Case", domain = "R-boot"), ylab = gettext("Cook statistic", domain = "R-boot"))
-2007,2008c2019,2020
+2004,2005c2019,2020
 <         cat("Please Input a screen number (1,2,3 or 4)\n")
 <         cat("0 will terminate the function \n")
 ---
 >         cat(gettext("Please Input a screen number (1,2,3 or 4)", domain = "R-boot"), "\n", sep = "")
 >         cat(gettext("0 will terminate the function", domain = "R-boot"), "\n", sep = "")
-2013,2015c2025,2026
+2010,2012c2025,2026
 <             cat(paste("Interactive Identification for screen",
 <                       num,"\n"))
 <             cat("left button = Identify, center button = Exit\n")
 ---
 >             cat(gettextf("Interactive Identification for screen %d", num, domain = "R-boot"), "\n", sep = "")
 >             cat(gettext("left button = Identify, center button = Exit", domain = "R-boot"), "\n", sep = "")
-2055c2066
+2052c2066
 <         for (i in 1L:m)
 ---
 >         for (i in seq_len(m))
-2068c2079
+2065c2079
 <         for (i in 1L:m) {
 ---
 >         for (i in seq_len(m)) {
-2075,2076c2086
+2072,2073c2086
 <                 stop(gettextf("unable to find multiplier for %f", theta[i]),
 <                      domain = NA)
 ---
 >                 stop(gettextf("unable to find multiplier for %f", theta[i]), domain = "R-boot")
-2119c2129
+2116c2129
 <     for(i in 1L:np) {
 ---
 >     for(i in seq_len(np)) {
-2290c2300
+2287c2300
 <         for (i in 1L:m)
 ---
 >         for (i in seq_len(m))
-2453c2463
+2450c2463
 <                                   alpha = (1L:R)/(R + 1),
 ---
 >                                   alpha = seq_len(R)/(R + 1),
-2458c2468
+2455c2468
 <         else	dist.q <- predict(distn, x=qnorm((1L:R)/(R+1)))$y#
 ---
 >         else	dist.q <- predict(distn, x=qnorm(seq_len(R)/(R+1)))$y#
-2478c2488
+2475c2488
 <     for(s in 1L:S) {
 ---
 >     for(s in seq_len(S)) {
-2494c2504
+2491c2504
 <     for(s in 1L:S) {
 ---
 >     for(s in seq_len(S)) {
-2584c2594
+2581c2594
 <                         c(rep(0,m1),b1), n+(1L:m1), eps=eps)
 ---
 >                         c(rep(0,m1),b1), n+seq_len(m1), eps=eps)
-2596c2606
+2593c2606
 <                              c(n+(1L:m1),(n+m1+m2)+(1L:(m2+m3))),
 ---
 >                              c(n+seq_len(m1),(n+m1+m2)+seq_len(m2+m3)),
-2605c2615
+2602c2615
 <                              n+(1L:(m1+m3)), stage=1, n1=n+m1,
 ---
 >                              n+seq_len(m1+m3), stage=1, n1=n+m1,
-2615,2616c2625,2626
+2612,2613c2625,2626
 <         else	out <- simplex1(out1$a[1L:(n+m1+m2)],
 <                                 out1$A[,1L:(n+m1+m2)],
 ---
 >         else	out <- simplex1(out1$a[seq_len(n+m1+m2)],
 >                                 out1$A[, seq_len(n+m1+m2)],
-2618c2628
+2615c2628
 <                                 out1$soln[1L:(n+m1+m2)],
 ---
 >                                 out1$soln[seq_len(n+m1+m2)],
-2626c2636
+2623c2636
 <         out$slack <- out$soln[n+(1L:m1)]
 ---
 >         out$slack <- out$soln[n + seq_len(m1)]
-2628c2638
+2625c2638
 <         out$surplus <- out$soln[n+m1+(1L:m2)]
 ---
 >         out$surplus <- out$soln[n + m1 + seq_len(m2)]
-2630c2640
+2627c2640
 <         out$artificial <- out$soln[-(1L:n+m1+m2)]
 ---
 >         out$artificial <- out$soln[ -seq_len(n+m1+m2)]
-2663c2673
+2660c2673
 <     nonbasic <- (1L:N)[-basic]
 ---
 >     nonbasic <- seq_len(N)[-basic]
-2684,2685c2694,2695
+2681,2682c2694,2695
 <             neg <- (1L:M)[tableau[1L:M,pcol]< -eps]
 <         else 	neg <- 1+ (1L:M)[tableau[2:(M+1),pcol] < -eps]
 ---
 >             neg <- seq_len(M)[tableau[seq_len(M), pcol]< -eps]
 >         else 	neg <- 1 + seq_len(M)[tableau[2:(M+1),pcol] < -eps]
-2709c2719
+2706c2719
 <             ar <- (1L:M)[basic>n1]
 ---
 >             ar <- seq_len(M)[basic>n1]
-2735c2745
+2732c2745
 <         soln[basic] <- tableau[1L:M,1L]
 ---
 >         soln[basic] <- tableau[seq_len(M), 1L]
-2739c2749
+2736c2749
 <         A.out[,nonbasic] <- tableau[1L:M,-1L]
 ---
 >         A.out[, nonbasic] <- tableau[seq_len(M), -1L]
-2754c2764
+2751c2764
 <     cat("\nLinear Programming Results\n\n")
 ---
 >     cat("\n", gettext("Linear Programming Results", domain = "R-boot"), "\n\n", sep = "")
-2756c2766
+2753c2766
 <     cat("Call : ")
 ---
 >     cat(gettext("Call: ", domain = "R-boot"))
-2758,2760c2768,2769
+2755,2757c2768,2769
 <     if (simp.out$maxi) cat("\nMaximization ")
 <     else cat("\nMinimization ")
 <     cat("Problem with Objective Function Coefficients\n")
 ---
 >     if (simp.out$maxi) cat("\n", gettext("Maximization Problem with Objective Function Coefficients", domain = "R-boot"), "\n", sep = "")
 >     else cat("\n", gettext("Minimization Problem with Objective Function Coefficients", domain = "R-boot"), "\n", sep = "")
-2763c2772
+2760c2772
 <         cat("\n\nOptimal solution has the following values\n")
 ---
 >         cat("\n\n", gettext("Optimal solution has the following values", domain = "R-boot"), "\n", sep = "")
-2765,2766c2774
+2762,2763c2774
 <         cat(paste("The optimal value of the objective ",
 <                   " function is ",simp.out$value,".\n",sep=""))
 ---
 >         cat(gettextf("The optimal value of the objective function is %s.", simp.out$value, domain = "R-boot"), "\n", sep = "")
-2769,2770c2777,2778
+2766,2767c2777,2778
 <         cat("\n\nIteration limit exceeded without finding solution\n")
 <         cat("The coefficient values at termination were\n")
 ---
 >         cat("\n\n", gettext("Iteration limit exceeded without finding solution", domain = "R-boot"), "\n", sep = "")
 >         cat(gettext("The coefficient values at termination were", domain = "R-boot"), "\n", sep = "")
-2772,2773c2780
+2769,2770c2780
 <         cat(paste("The objective function value was ",simp.out$value,
 <                   ".\n",sep=""))
 ---
 >         cat(gettextf("The objective function value was %s.",simp.out$value, domain = "R-boot"), "\n", sep = "")
-2775c2782
+2772c2782
 <     else cat("\nNo feasible solution could be found\n")
 ---
 >     else cat("\n", gettext("No feasible solution could be found", domain = "R-boot"), "\n", sep = "")
-2806,2807c2813
+2803,2804c2813
 <             stop(gettextf("number of columns of 'A' (%d) not equal to length of 'u' (%d)",
 <                           d, length(u)), domain = NA)
 ---
 >             stop(gettextf("number of columns of 'A' (%d) not equal to length of 'u' (%d)", d, length(u)), domain = "R-boot")
-2898,2899c2904,2905
+2895,2896c2904,2905
 <                 A1 <- A[,1L:d1]
 <                 A2 <- A[,-(1L:d1)]
 ---
 >                 A1 <- A[, seq_len(d1)]
 >                 A2 <- A[, -seq_len(d1)]
-2932,2933c2938,2939
+2929,2930c2938,2939
 <                 A1 <- A[, 1L:d1]
 <                 A2 <- A[, -(1L:d1)]
 ---
 >                 A1 <- A[, seq_len(d1)]
 >                 A2 <- A[, -seq_len(d1)]
-3235,3236c3241
+3232,3233c3241
 <     pts.in <- (1L:npts)[(abs(zeta[,1L]) > 1e-6) &
 <                        (abs(spa[, 2L] - 0.5) < 0.5 - 1e-10)]
 ---
 >     pts.in <- seq_len(npts)[(abs(zeta[,1L]) > 1e-6) & (abs(spa[, 2L] - 0.5) < 0.5 - 1e-10)]
-3250c3255
+3247c3255
 < 		for (j in 1L:d) anames[j] <- paste("zeta1.", j ,sep = "")
 ---
 > 		for (j in seq_len(d)) anames[j] <- paste("zeta1.", j ,sep = "")
-3276,3277c3281,3282
+3273,3274c3281,3282
 <     cat("\nSaddlepoint Distribution Approximations\n\n")
 <     cat("Call : \n")
 ---
 >     cat("\n", gettext("Saddlepoint Distribution Approximations", domain = "R-boot"), "\n\n", sep = "")
 >     cat(gettext("Call:", domain = "R-boot"), "\n", sep = "")
-3279c3284
+3276c3284
 <     cat("\nQuantiles of the Distribution\n")
 ---
 >     cat("\n", gettext("Quantiles of the Distribution", domain = "R-boot"), "\n", sep = "")
-3281,3282c3286
+3278,3279c3286
 <     cat(paste("\n\nSmoothing spline used ", nrow(sad.d$points),
 <               " points in the range ", rg[1L]," to ", rg[2L], ".\n", sep=""))
 ---
 >     cat("\n\n", gettextf("Smoothing spline used %d points in the range %s to %s.", nrow(sad.d$points), rg[1L], rg[2L], domain = "R-boot"), "\n", sep="")
-3284c3288
+3281c3288
 <         cat("Lugananni-Rice approximations used\n")
 ---
 >         cat(gettext("Lugananni-Rice approximations used", domain = "R-boot"), "\n", sep = "")
-3336c3340
+3333c3340
 < #            inds <- (1L:R)[len.tot < n.sim]
 ---
 > #            inds <- seq_len(R)[len.tot < n.sim]
-3428c3432
+3425c3432
 <             inds <- if (is.list(inds)) matrix(unlist(inds)[1L:n.sim], n.sim, 1L)
 ---
 >             inds <- if (is.list(inds)) matrix(unlist(inds)[seq_len(n.sim)], n.sim, 1L)
+3462a3470
+>     cl <- class(ts)
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/boot/R/bootpracs.q Recommended/boot/R/bootpracs.q
 69,72c69,71
 < 	i <- min(c(1L:n)[L > lim])

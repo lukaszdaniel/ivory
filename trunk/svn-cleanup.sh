@@ -2,20 +2,19 @@
 
 source conf-names.sh
 
-  tidy=`rm tests/?? &> /dev/null;`
 
   case $1 in
-  $DEVEL)    X=$DEVEL; $tidy ;;
-  $IVORY)    X=$IVORY; $tidy ;;
-  $RECIVORY) X=$RECIVORY     ;;
+  $DEVEL)    W=$DEVEL ;;
+  $IVORY)    W=$IVORY ;;
+  $RECIVORY) W=$RECIVORY     ;;
   *) echo "Invalid argument" && exit 1 ;;
   esac
 
-  cd $X
+  cd $W
 
-  svn status --no-ignore | egrep '^[?I]' | cut -c9- | xargs -d \\n rm -r &> /dev/null
-  if test $X = $DEVEL; then
+  svn status --no-ignore | egrep '^[?I]' | cut -c9- | sed -n -e '/.\+/p' | xargs -d \\n rm -r &> /dev/null
+  if test $W = $DEVEL; then
    tools/rsync-recommended
   fi;
   cd ..
-  svn update $X
+  svn update $W
