@@ -196,6 +196,23 @@
 
       \item New (somewhat experimental) \code{get0()} function, combining
       \code{exists()} and \code{get()} in one call.
+
+      \item \code{match.call()} gains an \code{envir} argument for
+      specifying the environment from which to retrieve
+      the \code{\dots} in the call, if any; this environment was wrong
+      (or at least undesirable) when the \code{definition} argument was
+      a function.
+            
+      \item Work on progress on optional use of \code{libcurl} for
+      Internet access:
+      \itemize{
+	\item \code{capabilities("libcurl")} reports if this is
+	available.
+
+	\item \code{curlVersion()} reports the version in use, and
+	other details.
+      }
+
     }
   }
 
@@ -371,6 +388,9 @@
 
       \item Fix \code{missing()} when arguments are propagated through
       \code{\dots}; see \PR{15707}.
+
+      \item \code{eigen(m)} now defaults to \code{symmetric=TRUE} even when
+      the dimnames are asymmetric if the matrix is otherwise symmetric;  \PR{16151}.
     }
   }
 }
@@ -417,7 +437,7 @@
       \item Single source or binary files can be supplied for
       \code{install.packages(type = "both")} and the approporiate type
       and \code{repos = NULL} will be inferred.
-      
+
       \item New function \code{pcre_config()} to report on some of the
       configuration options of the version of PCRE in use.  In
       particular, this reports if regular expressions using
