@@ -5245,7 +5245,7 @@ function(x, ...)
  .pretty_format(sort(xx)))
       },
       if(length(xx <- x$bad_practice)) {
-          sprintf(ngettext(length(xx), "'library' or 'require' call in package code: %s\n  Please use :: or requireNamespace() instead: see 'Suggested Packages'.", "'library' or 'require' calls in package code: %s\n  Please use :: or requireNamespace() instead: see 'Suggested Packages'.",domain = "R-tools"), .pretty_format(sort(xx)))
+          sprintf(ngettext(length(xx), "'library' or 'require' call in package code: %s\n  Please use :: or requireNamespace() instead.\n  See section 'Suggested packages' in the 'Writing R Extensions' manual.", "'library' or 'require' calls in package code: %s\n  Please use :: or requireNamespace() instead.\n  See section 'Suggested packages' in the 'Writing R Extensions' manual.",domain = "R-tools"), .pretty_format(sort(xx)))
       },
 
       if(length(xx <- x$unused_imports)) {

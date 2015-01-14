@@ -8,8 +8,8 @@ dc34b63e948e3ba0667d43b3fde24c58  inst/po/pl/LC_MESSAGES/R-class.mo
 b888e2521f30a9912d9687777b1aa478  inst/po/fr/LC_MESSAGES/R-class.mo
 c687e9e61b8a98aeb166d71ec57742b9  inst/po/ko/LC_MESSAGES/R-class.mo
 a14861d4c76b0028b6dc635163b00297  LICENCE.note
-e8e077536af8608b6d5d366410bae87a  man/lvqtest.Rd
 7ffe67ce0c67d938298e46b08818f9cb  man/knn1.Rd
+e8e077536af8608b6d5d366410bae87a  man/lvqtest.Rd
 396eec671f1bddd185fa79831dd47ee3  man/lvq3.Rd
 e70f2c5c23ddf839b5e3b1457fc6fdbd  man/lvqinit.Rd
 4088862ce7d73759a8a754d490575c55  man/SOM.Rd
