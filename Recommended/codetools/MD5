@@ -1,10 +1,10 @@
 322e205ba893a13c12820cdfca4e6211  Changes
+965f67cc4d583191f8dc7ca68ea6322a  DESCRIPTION
 0438fc6a50ed6b6522adcda98dc4fe32  inst/po/pl/LC_MESSAGES/R-codetools.mo
 a95f07f7094ed4912a1aaf3afddb2816  inst/po/en@quot/LC_MESSAGES/R-codetools.mo
-965f67cc4d583191f8dc7ca68ea6322a  DESCRIPTION
 215ca204e6c7206111e585206cee095c  man/codetools.Rd
-2af77179b93b37abb2717ba0dacd60a3  man/checkUsage.Rd
 31aabac379a9264e4ce819755b95b601  man/findGlobals.Rd
+2af77179b93b37abb2717ba0dacd60a3  man/checkUsage.Rd
 7915e973bb95db1197db9152d339f2c8  man/showTree.Rd
 d7d4587719d6cbb3083123501ec23dd3  NAMESPACE
 afc8d045035f8f6e86d07677d343f502  po/R-pl.po
