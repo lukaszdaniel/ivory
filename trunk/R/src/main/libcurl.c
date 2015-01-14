@@ -72,13 +72,6 @@ rcvHeaders(void *buffer, size_t size, size_t nmemb, void *userp)
     return result;      
 }
 
-static size_t 
-rcvData(void *buffer, size_t size, size_t nmemb, void *userp) 
-{
-    return size *nmemb;      
-}
-
-
 SEXP attribute_hidden do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
@@ -90,23 +83,24 @@ SEXP attribute_hidden do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
        error("invalid %s argument", "url");
     const char *url = translateChar(STRING_ELT(CAR(args), 0));
     used = 0;
-    int redirect = asLogical(CADDR(args));
+    int redirect = asLogical(CADR(args));
     if(redirect == NA_LOGICAL)
        error(_("invalid '%s' argument"), "redirect");
 
     CURL *hnd = curl_easy_init();
     curl_easy_setopt(hnd, CURLOPT_URL, url);
+    const char *capath = getenv("CURL_CA_BUNDLE");
+    if (capath && capath[0])
+	curl_easy_setopt(hnd, CURLOPT_CAINFO, capath);
 #ifdef Win32
-    // pro tem turn off certificate verification: location is too tricky
-    curl_easy_setopt(hnd, CURLOPT_SSL_VERIFYPEER, FALSE);
+    else
+	curl_easy_setopt(hnd, CURLOPT_SSL_VERIFYPEER, 0L);
 #endif
     curl_easy_setopt(hnd, CURLOPT_NOPROGRESS, 1L);
     curl_easy_setopt(hnd, CURLOPT_NOBODY, 1L);
-    curl_easy_setopt(hnd, CURLOPT_HEADER, 1L);
     curl_easy_setopt(hnd, CURLOPT_HEADERFUNCTION, &rcvHeaders);
     curl_easy_setopt(hnd, CURLOPT_WRITEHEADER, &headers);
-    curl_easy_setopt(hnd, CURLOPT_WRITEFUNCTION, &rcvData); // unused
-    const char *ua = translateChar(STRING_ELT(CADR(args), 0));
+    const char *ua = CHAR(STRING_ELT(GetOption1(install("HTTPUserAgent")),0));
     curl_easy_setopt(hnd, CURLOPT_USERAGENT, ua);
     if(redirect) curl_easy_setopt(hnd, CURLOPT_FOLLOWLOCATION, 1L);
     curl_easy_setopt(hnd, CURLOPT_MAXREDIRS, 50L);
@@ -140,7 +134,7 @@ SEXP attribute_hidden do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 #ifndef HAVE_CURL_CURL_H
-    error(_("'curlDownload()' function is not supported on this platform"));
+    error(_("download.file(method = \"libcurl\") is not supported on this platform"));
     return R_NilValue;
 #else
     SEXP scmd, sfile, smode;
@@ -188,11 +182,15 @@ SEXP attribute_hidden do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     int still_running, repeats = 0;
  
     curl_easy_setopt(hnd, CURLOPT_URL, url);
+    const char *capath = getenv("CURL_CA_BUNDLE");
+    if (capath && capath[0])
+	curl_easy_setopt(hnd, CURLOPT_CAINFO, capath);
 #ifdef Win32
-    curl_easy_setopt(hnd, CURLOPT_SSL_VERIFYPEER, FALSE);
+    else
+	curl_easy_setopt(hnd, CURLOPT_SSL_VERIFYPEER, 0L);
 #endif
     if(!quiet) curl_easy_setopt(hnd, CURLOPT_NOPROGRESS, 0L);
-    const char *ua = translateChar(STRING_ELT(CADR(args), 0));
+    const char *ua = CHAR(STRING_ELT(GetOption1(install("HTTPUserAgent")),0));
     curl_easy_setopt(hnd, CURLOPT_USERAGENT, ua);
     /* Users will normally expect to follow redirections, although 
        that is not the default in either curl or libcurl.
