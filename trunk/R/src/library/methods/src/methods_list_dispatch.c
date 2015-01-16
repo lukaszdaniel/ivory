@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2001-2014   The R Core Team.
+ *  Copyright (C) 2001-2015   The R Core Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -660,7 +660,7 @@ SEXP R_M_setPrimitiveMethods(SEXP fname, SEXP op, SEXP code_vec,
 
 SEXP R_nextMethodCall(SEXP matched_call, SEXP ev)
 {
-    SEXP e, val, args, argsp, this_sym, op;
+    SEXP e, val, args, this_sym, op;
     int nprotect = 0, i, nargs = length(matched_call)-1, error_flag;
     Rboolean prim_case;
     /* for primitive .nextMethod's, suppress further dispatch to avoid
@@ -679,7 +679,7 @@ SEXP R_nextMethodCall(SEXP matched_call, SEXP ev)
     }
     else
 	SETCAR(e, R_dot_nextMethod); /* call .nextMethod instead */
-    args = CDR(e); argsp = e;
+    args = CDR(e);
     /* e is a copy of a match.call, with expand.dots=FALSE.  Turn each
     <TAG>=value into <TAG> = <TAG>, except  ...= is skipped (if it
     appears) in which case ... was appended. */
@@ -687,7 +687,7 @@ SEXP R_nextMethodCall(SEXP matched_call, SEXP ev)
 	this_sym = TAG(args);
         if(CAR(args) != R_MissingArg) /* "missing" only possible in primitive */
 	    SETCAR(args, this_sym);
-	argsp = args; args = CDR(args);
+	args = CDR(args);
     }
     if(prim_case) {
 	val = R_tryEvalSilent(e, ev, &error_flag);
