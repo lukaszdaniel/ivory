@@ -29,6 +29,14 @@
 
 #ifdef HAVE_CURL_CURL_H
 # include <curl/curl.h>
+/*
+  This need libcurl >= 7.28.0 (Oct 2012) for curl_multi_wait.
+  There is a configure test but it is not used on Windows and system
+  software can change.
+*/
+# if LIBCURL_VERSION_MAJOR < 7 || (LIBCURL_VERSION_MAJOR == 7 && LIBCURL_VERSION_MINOR < 28)
+# error libcurl 7.28.0 or later is required.
+# endif
 #endif
 
 SEXP attribute_hidden do_curlVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -57,7 +65,36 @@ SEXP attribute_hidden do_curlVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-static char headers[100][2048];
+
+#ifdef HAVE_CURL_CURL_H
+// extract some common code
+static void curlCommon(CURL *hnd, int redirect)
+{
+    const char *capath = getenv("CURL_CA_BUNDLE");
+    if (capath && capath[0])
+	curl_easy_setopt(hnd, CURLOPT_CAINFO, capath);
+#ifdef Win32
+    else
+	curl_easy_setopt(hnd, CURLOPT_SSL_VERIFYPEER, 0L);
+#endif
+    const char *ua = CHAR(STRING_ELT(GetOption1(install("HTTPUserAgent")),0));
+    curl_easy_setopt(hnd, CURLOPT_USERAGENT, ua);
+    int timeout0 = asInteger(GetOption1(install("timeout")));
+    long timeout = timeout0 = NA_INTEGER ? 0 : 1000L * timeout0;
+    curl_easy_setopt(hnd, CURLOPT_CONNECTTIMEOUT_MS, timeout);
+    curl_easy_setopt(hnd, CURLOPT_TIMEOUT_MS, timeout);
+    if(redirect) {
+	curl_easy_setopt(hnd, CURLOPT_FOLLOWLOCATION, 1L);
+	curl_easy_setopt(hnd, CURLOPT_MAXREDIRS, 20L);
+    }
+    int verbosity = asInteger(GetOption1(install("internet.info")));
+    if(verbosity < 2) curl_easy_setopt(hnd, CURLOPT_VERBOSE, 1L);
+
+    // enable the cookie engine, keep cookies in memory
+    curl_easy_setopt(hnd, CURLOPT_COOKIEFILE, "");
+}
+
+static char headers[500][2048];
 static int used;
 
 static size_t 
@@ -65,12 +102,13 @@ rcvHeaders(void *buffer, size_t size, size_t nmemb, void *userp)
 {
     char *d = (char*)buffer;
     size_t result = size * nmemb, res = result > 2048 ? 2048 : result;
-    if(used > 100) return result;
+    if(used >= 500) return result;
     strncpy(headers[used], d, res);
     headers[used][res] = '\0';
     used++;
     return result;      
 }
+#endif
 
 SEXP attribute_hidden do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -89,25 +127,12 @@ SEXP attribute_hidden do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     CURL *hnd = curl_easy_init();
     curl_easy_setopt(hnd, CURLOPT_URL, url);
-    const char *capath = getenv("CURL_CA_BUNDLE");
-    if (capath && capath[0])
-	curl_easy_setopt(hnd, CURLOPT_CAINFO, capath);
-#ifdef Win32
-    else
-	curl_easy_setopt(hnd, CURLOPT_SSL_VERIFYPEER, 0L);
-#endif
     curl_easy_setopt(hnd, CURLOPT_NOPROGRESS, 1L);
     curl_easy_setopt(hnd, CURLOPT_NOBODY, 1L);
     curl_easy_setopt(hnd, CURLOPT_HEADERFUNCTION, &rcvHeaders);
     curl_easy_setopt(hnd, CURLOPT_WRITEHEADER, &headers);
-    const char *ua = CHAR(STRING_ELT(GetOption1(install("HTTPUserAgent")),0));
-    curl_easy_setopt(hnd, CURLOPT_USERAGENT, ua);
-    if(redirect) curl_easy_setopt(hnd, CURLOPT_FOLLOWLOCATION, 1L);
-    curl_easy_setopt(hnd, CURLOPT_MAXREDIRS, 50L);
+    curlCommon(hnd, redirect);
 
-    int timeout0 = asInteger(GetOption1(install("timeout")));
-    long timeout = timeout0 = NA_INTEGER ? 0 : 1000L * timeout0;
-    curl_easy_setopt(hnd, CURLOPT_CONNECTTIMEOUT_MS, timeout);
     char errbuf[CURL_ERROR_SIZE];
     curl_easy_setopt(hnd, CURLOPT_ERRORBUFFER, errbuf);
     CURLcode ret = curl_easy_perform(hnd);
@@ -120,7 +145,7 @@ SEXP attribute_hidden do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP ans = PROTECT(allocVector(STRSXP, used));
     for (int i = 0; i < used; i++)
 	SET_STRING_ELT(ans, i, mkChar(headers[i]));
-    setAttrib(ans, install("status"), ScalarInteger((int)http_code));
+    setAttrib(ans, install("status"), ScalarInteger((int) http_code));
     UNPROTECT(1);
     return ans;
 #endif
@@ -128,7 +153,7 @@ SEXP attribute_hidden do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 extern void Rsleep(double timeint);
 
-/* download(url, destfile, quiet, mode, headers, cacheOK, ua) */
+/* download(url, destfile, quiet, mode, headers, cacheOK) */
 
 SEXP attribute_hidden do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
@@ -165,8 +190,6 @@ SEXP attribute_hidden do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     cacheOK = asLogical(CAR(args));
     if(cacheOK == NA_LOGICAL)
 	error(_("invalid '%s' argument"), "cacheOK");
-    int timeout0 = asInteger(GetOption1(install("timeout")));
-    long timeout = timeout0 = NA_INTEGER ? 0 : 1000L * timeout0;
 
     /* This comes mainly from curl --libcurl on the call used by
        download.file(method = "curl").
@@ -182,30 +205,25 @@ SEXP attribute_hidden do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     int still_running, repeats = 0;
  
     curl_easy_setopt(hnd, CURLOPT_URL, url);
-    const char *capath = getenv("CURL_CA_BUNDLE");
-    if (capath && capath[0])
-	curl_easy_setopt(hnd, CURLOPT_CAINFO, capath);
-#ifdef Win32
-    else
-	curl_easy_setopt(hnd, CURLOPT_SSL_VERIFYPEER, 0L);
-#endif
+    curl_easy_setopt(hnd, CURLOPT_HEADER, 0L);
     if(!quiet) curl_easy_setopt(hnd, CURLOPT_NOPROGRESS, 0L);
-    const char *ua = CHAR(STRING_ELT(GetOption1(install("HTTPUserAgent")),0));
-    curl_easy_setopt(hnd, CURLOPT_USERAGENT, ua);
     /* Users will normally expect to follow redirections, although 
-       that is not the default in either curl or libcurl.
-
-       What this does not cope with is sites which want to set a cookie. */
-    curl_easy_setopt(hnd, CURLOPT_FOLLOWLOCATION, 1L);
-    curl_easy_setopt(hnd, CURLOPT_MAXREDIRS, 50L);
+       that is not the default in either curl or libcurl. */
+    curlCommon(hnd, 1);
     curl_easy_setopt(hnd, CURLOPT_TCP_KEEPALIVE, 1L);
-    curl_easy_setopt(hnd, CURLOPT_CONNECTTIMEOUT_MS, timeout);
-    curl_easy_setopt(hnd, CURLOPT_TIMEOUT_MS, timeout);
+
+    /* This allows the negotiation of compressed HTTP transfers,
+       but it is not clear it is always a good idea.
+
+    curl_easy_setopt(hnd, CURLOPT_ACCEPT_ENCODING, "gzip, deflate");
+    */
+
     if (!cacheOK) {
+	/* This _is_ the right way to do this: see §14.9 of
+	   http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html */
 	slist1 = curl_slist_append(slist1, "Pragma: no-cache");
 	curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, slist1);
     }
-    curl_easy_setopt(hnd, CURLOPT_HEADER, 0L);
 
     out = R_fopen(R_ExpandFileName(file), mode);
     if(!out)
