@@ -39,7 +39,7 @@
 # endif
 #endif
 
-SEXP attribute_hidden do_curlVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
+SEXP attribute_hidden in_do_curlVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP ans = PROTECT(allocVector(STRSXP, 1));
@@ -110,7 +110,7 @@ rcvHeaders(void *buffer, size_t size, size_t nmemb, void *userp)
 }
 #endif
 
-SEXP attribute_hidden do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
+SEXP attribute_hidden in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 #ifndef HAVE_CURL_CURL_H
@@ -118,7 +118,7 @@ SEXP attribute_hidden do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue;
 #else
     if(!isString(CAR(args)) || LENGTH(CAR(args)) != 1)
-       error("invalid %s argument", "url");
+       error(_("invalid %s argument"), "url");
     const char *url = translateChar(STRING_ELT(CAR(args), 0));
     used = 0;
     int redirect = asLogical(CADR(args));
@@ -155,7 +155,8 @@ extern void Rsleep(double timeint);
 
 /* download(url, destfile, quiet, mode, headers, cacheOK) */
 
-SEXP attribute_hidden do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
+SEXP attribute_hidden 
+in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 #ifndef HAVE_CURL_CURL_H
@@ -239,7 +240,7 @@ SEXP attribute_hidden do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 	int numfds; // This needs curl >= 7.28.0
  	CURLMcode mc = curl_multi_wait(multi_handle, NULL, 0, 100, &numfds); 
 	if(mc != CURLM_OK)
-	    error("curl_multi_wait() failed, code %d", mc);
+	    error(_("'curl_multi_wait()' function failed, code %d"), mc);
 	if(!numfds) {
 	    /* 'numfds' being zero means either a timeout or no file
 	       descriptors to wait for. Try timeout on first
