@@ -5,17 +5,19 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: R 2.1.1 \n"
+"Project-Id-Version: R 2.1.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-01 08:36+0100\n"
-"PO-Revision-Date: 2010-09-29 20:36+0900 \n"
-"Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
-"Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
-"Language: \n"
-"MIME-Version: 1.0 \n"
-"Content-Type: text/plain; charset=UTF-8 \n"
-"Content-Transfer-Encoding: 8bit \n"
-"X-Generator: Pootle 1.1.0 \n"
+"PO-Revision-Date: 2015-01-17 15:12+0100\n"
+"Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
+"Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: grid.c:213
 #, fuzzy

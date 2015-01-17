@@ -1,5 +1,5 @@
 # Russian translations for R
-# Русский перевод для R
+# п═я┐я│я│п╨п╦п╧ п©п╣я─п╣п╡п╬п╢ п╢п╩я▐ R
 #
 # Copyright (C) 2008 The R Foundation
 # This file is distributed under the same license as the R package.
@@ -10,21 +10,22 @@ msgstr ""
 "Project-Id-Version: R 2.9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-01 08:36+0100\n"
-"PO-Revision-Date: 2011-10-18 19:36-0600\n"
-"Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
+"PO-Revision-Date: 2015-01-17 15:12+0100\n"
+"Last-Translator: е│ukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
-"Language: \n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=KOI8-R\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Russian\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: grid.c:213
 #, fuzzy
 msgid "cannot clip to rotated viewport"
-msgstr "Не могу обрезать для повернутой оконницы"
+msgstr "п²п╣ п╪п╬пЁя┐ п╬п╠я─п╣п╥п╟я┌я▄ п╢п╩я▐ п©п╬п╡п╣я─п╫я┐я┌п╬п╧ п╬п╨п╬п╫п╫п╦я├я▀"
 
 #: grid.c:518 grid.c:662
 #, c-format
@@ -35,40 +36,40 @@ msgstr ""
 #, fuzzy
 msgid "cannot pop the top-level viewport ('grid' and 'graphics' output mixed?)"
 msgstr ""
-"Не могу извлечь оконницу верхнего уровня (выводы grid и graphics смешались?)"
+"п²п╣ п╪п╬пЁя┐ п╦п╥п╡п╩п╣я┤я▄ п╬п╨п╬п╫п╫п╦я├я┐ п╡п╣я─я┘п╫п╣пЁп╬ я┐я─п╬п╡п╫я▐ (п╡я▀п╡п╬п╢я▀ grid п╦ graphics я│п╪п╣я┬п╟п╩п╦я│я▄?)"
 
 #: grid.c:976
 msgid "attempt to plot on null device"
-msgstr "попытка чертить на нулевом устройстве"
+msgstr "п©п╬п©я▀я┌п╨п╟ я┤п╣я─я┌п╦я┌я▄ п╫п╟ п╫я┐п╩п╣п╡п╬п╪ я┐я│я┌я─п╬п╧я│я┌п╡п╣"
 
 #: grid.c:1308
 #, fuzzy
 msgid "there is no layout defined"
-msgstr "Нет заданного эскиза"
+msgstr "п²п╣я┌ п╥п╟п╢п╟п╫п╫п╬пЁп╬ я█я│п╨п╦п╥п╟"
 
 #: grid.c:1528
 #, fuzzy
 msgid "polygon edge not found (zero-width or zero-height?)"
-msgstr "Край многоугольника не найден (нулевая ширина или высота?)"
+msgstr "п я─п╟п╧ п╪п╫п╬пЁп╬я┐пЁп╬п╩я▄п╫п╦п╨п╟ п╫п╣ п╫п╟п╧п╢п╣п╫ (п╫я┐п╩п╣п╡п╟я▐ я┬п╦я─п╦п╫п╟ п╦п╩п╦ п╡я▀я│п╬я┌п╟?)"
 
 #: grid.c:1537
 #, fuzzy
 msgid "polygon edge not found"
-msgstr "Край многоугольника не найден"
+msgstr "п я─п╟п╧ п╪п╫п╬пЁп╬я┐пЁп╬п╩я▄п╫п╦п╨п╟ п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #: grid.c:1691
 #, fuzzy
 msgid "require at least two points to draw arrow"
-msgstr "Надо как минимум две точки, чтобы нарисовать стрелку"
+msgstr "п²п╟п╢п╬ п╨п╟п╨ п╪п╦п╫п╦п╪я┐п╪ п╢п╡п╣ я┌п╬я┤п╨п╦, я┤я┌п╬п╠я▀ п╫п╟я─п╦я│п╬п╡п╟я┌я▄ я│я┌я─п╣п╩п╨я┐"
 
 #: grid.c:2007
 #, fuzzy
 msgid "non-finite control point in Xspline"
-msgstr "Не-конечная контрольная точка в Xspline"
+msgstr "п²п╣-п╨п╬п╫п╣я┤п╫п╟я▐ п╨п╬п╫я┌я─п╬п╩я▄п╫п╟я▐ я┌п╬я┤п╨п╟ п╡ Xspline"
 
 #: grid.c:2872
 msgid "non-finite x or y in graphics path"
-msgstr "бесконечный x или y в кривой крафика"
+msgstr "п╠п╣я│п╨п╬п╫п╣я┤п╫я▀п╧ x п╦п╩п╦ y п╡ п╨я─п╦п╡п╬п╧ п╨я─п╟я└п╦п╨п╟"
 
 #: grid.c:2913
 msgid "Empty raster"
@@ -76,31 +77,31 @@ msgstr ""
 
 #: grid.c:3365
 msgid "invalid plotting symbol"
-msgstr "неправильный символ графика"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я│п╦п╪п╡п╬п╩ пЁя─п╟я└п╦п╨п╟"
 
 #: grid.c:3451
 #, fuzzy
 msgid "unable to clip to rotated rectangle"
-msgstr "Не могу обрезать повернутый четырехугольник"
+msgstr "п²п╣ п╪п╬пЁя┐ п╬п╠я─п╣п╥п╟я┌я▄ п©п╬п╡п╣я─п╫я┐я┌я▀п╧ я┤п╣я┌я▀я─п╣я┘я┐пЁп╬п╩я▄п╫п╦п╨"
 
 #: layout.c:590
 #, fuzzy
 msgid "invalid 'layout.pos.row'"
-msgstr "неправильный layout.pos.row"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ layout.pos.row"
 
 #: layout.c:594
 #, fuzzy
 msgid "invalid 'layout.pos.col'"
-msgstr "неправильный layout.pos.col"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ layout.pos.col"
 
 #: matrix.c:50
 msgid "singular transformation matrix"
-msgstr "сингулярная трансформационная матрица"
+msgstr "я│п╦п╫пЁя┐п╩я▐я─п╫п╟я▐ я┌я─п╟п╫я│я└п╬я─п╪п╟я├п╦п╬п╫п╫п╟я▐ п╪п╟я┌я─п╦я├п╟"
 
 #: state.c:170
 #, fuzzy
 msgid "unable to store 'grid' state.  Too many devices open?"
-msgstr "Не могу сохранить состояние grid. Открыто слишком много устройств?"
+msgstr "п²п╣ п╪п╬пЁя┐ я│п╬я┘я─п╟п╫п╦я┌я▄ я│п╬я│я┌п╬я▐п╫п╦п╣ grid. п·я┌п╨я─я▀я┌п╬ я│п╩п╦я┬п╨п╬п╪ п╪п╫п╬пЁп╬ я┐я│я┌я─п╬п╧я│я┌п╡?"
 
 #: unit.c:86
 msgid "unit attribute 'data' is of incorrect type"
@@ -109,12 +110,12 @@ msgstr ""
 #: unit.c:261 unit.c:411 unit.c:1211 unit.c:1291 unit.c:1371 unit.c:1451
 #, fuzzy
 msgid "unimplemented unit function"
-msgstr "Не разработанная единичная функция"
+msgstr "п²п╣ я─п╟п╥я─п╟п╠п╬я┌п╟п╫п╫п╟я▐ п╣п╢п╦п╫п╦я┤п╫п╟я▐ я└я┐п╫п╨я├п╦я▐"
 
 #: unit.c:894 unit.c:1646
 #, fuzzy
 msgid "invalid unit or unit not yet implemented"
-msgstr "Неправильная или не разработанная единица"
+msgstr "п²п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ п╦п╩п╦ п╫п╣ я─п╟п╥я─п╟п╠п╬я┌п╟п╫п╫п╟я▐ п╣п╢п╦п╫п╦я├п╟"
 
 #: unit.c:1703 unit.c:1734
 msgid "Viewport has zero dimensions"
@@ -126,17 +127,17 @@ msgstr ""
 
 #: unit.c:1899
 msgid "Invalid unit"
-msgstr "Неправильная единица"
+msgstr "п²п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ п╣п╢п╦п╫п╦я├п╟"
 
 #: unit.c:1915
 #, fuzzy
 msgid "'units' must be character"
-msgstr "Единицы должен быть буквами"
+msgstr "п∙п╢п╦п╫п╦я├я▀ п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╠я┐п╨п╡п╟п╪п╦"
 
 #: unit.c:1918
 #, fuzzy
 msgid "'units' must be of length > 0"
-msgstr "Единицы должны быть длиной > 0"
+msgstr "п∙п╢п╦п╫п╦я├я▀ п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ > 0"
 
 #: util.c:273 util.c:285
 msgid "grid grob object is empty"
@@ -145,7 +146,7 @@ msgstr ""
 #: viewport.c:316
 #, fuzzy
 msgid "non-finite location and/or size for viewport"
-msgstr "Не-конечное положение и/или размер оконницы"
+msgstr "п²п╣-п╨п╬п╫п╣я┤п╫п╬п╣ п©п╬п╩п╬п╤п╣п╫п╦п╣ п╦/п╦п╩п╦ я─п╟п╥п╪п╣я─ п╬п╨п╬п╫п╫п╦я├я▀"
 
 #~ msgid "Invalid circle radius (must be non-negative)"
-#~ msgstr "Неправильный радиус круга (должен быть неотрицательным)"
+#~ msgstr "п²п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я─п╟п╢п╦я┐я│ п╨я─я┐пЁп╟ (п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╫п╣п╬я┌я─п╦я├п╟я┌п╣п╩я▄п╫я▀п╪)"

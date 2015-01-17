@@ -1,5 +1,5 @@
 # Russian translations for R
-# Русский перевод для R
+# п═я┐я│я│п╨п╦п╧ п©п╣я─п╣п╡п╬п╢ п╢п╩я▐ R
 #
 # This file is distributed under the same license as the R package.
 # Copyright (C) 2009 Alexey Shipunov <dactylorhiza at gmail>
@@ -10,16 +10,17 @@ msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2014-12-28 16:58\n"
-"PO-Revision-Date: 2012-03-15 11:24-0500\n"
-"Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
+"PO-Revision-Date: 2015-01-17 13:32+0100\n"
+"Last-Translator: е│ukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
-"Language: \n"
+"Language: ru_RU\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=koi8-r\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Russian\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/New-Internal.R: stop("\"hexNumeric\" and \"digits17\" are mutually exclusive")
 #: R/New-Internal.R:0
@@ -35,9 +36,9 @@ msgid ""
 "  call: %s\n"
 "  error: %s"
 msgstr ""
-"%s не удалось в %s() для '%s', подробности:\n"
-"  вызов: %s\n"
-"  ошибка: %s"
+"%s п╫п╣ я┐п╢п╟п╩п╬я│я▄ п╡ %s() п╢п╩я▐ '%s', п©п╬п╢я─п╬п╠п╫п╬я│я┌п╦:\n"
+"  п╡я▀п╥п╬п╡: %s\n"
+"  п╬я┬п╦п╠п╨п╟: %s"
 
 #. R/attach.R: gettextf("%s failed in %s function for package %s, details:\n  call: %s\n  error: %s",     sQuote(".onDetach"), sQuote("detach()"), sQuote(pkgname), deparse(conditionCall(res))[1L],     conditionMessage(res), domain = "R-base")
 #. R/attach.R: gettextf("%s failed in %s function for package %s, details:\n  call: %s\n  error: %s",     sQuote(".Last.lib"), sQuote("detach()"), sQuote(pkgname), deparse(conditionCall(res))[1L],     conditionMessage(res), domain = "R-base")
@@ -49,9 +50,9 @@ msgid ""
 "  call: %s\n"
 "  error: %s"
 msgstr ""
-"%s не удалось в %s() для '%s', подробности:\n"
-"  вызов: %s\n"
-"  ошибка: %s"
+"%s п╫п╣ я┐п╢п╟п╩п╬я│я▄ п╡ %s() п╢п╩я▐ '%s', п©п╬п╢я─п╬п╠п╫п╬я│я┌п╦:\n"
+"  п╡я▀п╥п╬п╡: %s\n"
+"  п╬я┬п╦п╠п╨п╟: %s"
 
 #. R/factor.R: gettextf("%s function is not meaningful for factors", sQuote(.Generic))
 #. R/factor.R: gettextf("%s function is not meaningful for factors", sQuote(.Generic))
@@ -59,13 +60,13 @@ msgstr ""
 #: R/factor.R:0
 #, fuzzy
 msgid "%s function is not meaningful for factors"
-msgstr "не значимо для факторов"
+msgstr "п╫п╣ п╥п╫п╟я┤п╦п╪п╬ п╢п╩я▐ я└п╟п╨я┌п╬я─п╬п╡"
 
 #. R/dataframe.R: gettextf("%s function is only defined for equally-sized data frames", sQuote(.Generic))
 #: R/dataframe.R:0
 #, fuzzy
 msgid "%s function is only defined for equally-sized data frames"
-msgstr "определено только для таблиц данных одинаковых размеров"
+msgstr "п╬п©я─п╣п╢п╣п╩п╣п╫п╬ я┌п╬п╩я▄п╨п╬ п╢п╩я▐ я┌п╟п╠п╩п╦я├ п╢п╟п╫п╫я▀я┘ п╬п╢п╦п╫п╟п╨п╬п╡я▀я┘ я─п╟п╥п╪п╣я─п╬п╡"
 
 #. R/conditions.R: gettextf("%s in %s: %s", cl, deparse(call), msg, domain = "R-base")
 #. R/conditions.R: gettextf("%s in %s: %s", cl, deparse(call)[1L], msg, domain = "R-base")
@@ -77,13 +78,13 @@ msgstr ""
 #: R/source.R:0
 #, fuzzy
 msgid "%s is not an existing file"
-msgstr "'%s' не является существующим файлом"
+msgstr "'%s' п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ я│я┐я┴п╣я│я┌п╡я┐я▌я┴п╦п╪ я└п╟п╧п╩п╬п╪"
 
 #. R/namespace.R: gettextf("%s is not an exported object from 'namespace:%s'", sQuote(name), getNamespaceName(ns))
 #: R/namespace.R:0
 #, fuzzy
 msgid "%s is not an exported object from 'namespace:%s'"
-msgstr "'%s' не является объектом, экспортированным из 'namespace:%s'"
+msgstr "'%s' п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п╬п╠я┼п╣п╨я┌п╬п╪, я█п╨я│п©п╬я─я┌п╦я─п╬п╡п╟п╫п╫я▀п╪ п╦п╥ 'namespace:%s'"
 
 #. R/dates.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Date"))
 #. R/dates.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Dates"))
@@ -92,68 +93,68 @@ msgstr "'%s' не является объектом, экспортированным из 'namespace:%s'"
 #: R/dates.R:0 R/datetime.R:0
 #, fuzzy
 msgid "%s is not an object of class %s"
-msgstr "не определено для объектов 'Date'"
+msgstr "п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫п╬ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╬п╡ 'Date'"
 
 #. R/version.R: gettextf("%s is not defined for objects of class %s", .Generic, dQuote("numeric_version"),     domain = "R-base")
 #: R/version.R:0
 #, fuzzy
 msgid "%s is not defined for objects of class %s"
-msgstr "не определено для объектов 'Date'"
+msgstr "п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫п╬ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╬п╡ 'Date'"
 
 #. R/attach.R: gettextf("%s namespace cannot be unloaded:", sQuote(pkgname), domain = "R-base")
 #: R/attach.R:0
 #, fuzzy
 msgid "%s namespace cannot be unloaded:"
-msgstr "пространство имен нельзя выгрузить:"
+msgstr "п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬ п╦п╪п╣п╫ п╫п╣п╩я▄п╥я▐ п╡я▀пЁя─я┐п╥п╦я┌я▄:"
 
 #. R/library.R: gettextf("%s package is not a valid installed package", sQuote(package), domain = "R-base")
 #: R/library.R:0
 #, fuzzy
 msgid "%s package is not a valid installed package"
-msgstr "%s не является правильным установленным пакетом"
+msgstr "%s п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п©я─п╟п╡п╦п╩я▄п╫я▀п╪ я┐я│я┌п╟п╫п╬п╡п╩п╣п╫п╫я▀п╪ п©п╟п╨п╣я┌п╬п╪"
 
 #. R/library.R: gettextf("%s package was not found on search path, using 'pos = 2'", sQuote(pos))
 #: R/library.R:0
 #, fuzzy
 msgid "%s package was not found on search path, using 'pos = 2'"
-msgstr "%s не найден в пути поиска, использую pos = 2"
+msgstr "%s п╫п╣ п╫п╟п╧п╢п╣п╫ п╡ п©я┐я┌п╦ п©п╬п╦я│п╨п╟, п╦я│п©п╬п╩я▄п╥я┐я▌ pos = 2"
 
 #. R/notyet.R: gettextf("%s value is not implemented yet", sQuote(as.character(sys.call(sys.parent())[[1L]])))
 #: R/notyet.R:0
 #, fuzzy
 msgid "%s value is not implemented yet"
-msgstr "'%s' пока не разработан"
+msgstr "'%s' п©п╬п╨п╟ п╫п╣ я─п╟п╥я─п╟п╠п╬я┌п╟п╫"
 
 #. R/mean.R: gettextf("%s value is not numeric or logical: returning NA", sQuote(deparse(substitute(x))))
 #: R/mean.R:0
 #, fuzzy
 msgid "%s value is not numeric or logical: returning NA"
-msgstr "аргумент не является числовым или логическим: возвращаю NA"
+msgstr "п╟я─пЁя┐п╪п╣п╫я┌ п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ я┤п╦я│п╩п╬п╡я▀п╪ п╦п╩п╦ п╩п╬пЁп╦я┤п╣я│п╨п╦п╪: п╡п╬п╥п╡я─п╟я┴п╟я▌ NA"
 
 #. R/notyet.R: gettextf("%s value is not used (yet)", sQuote(arg), domain = "R-base")
 #: R/notyet.R:0
 #, fuzzy
 msgid "%s value is not used (yet)"
-msgstr "аргумент '%s' не используется (пока)"
+msgstr "п╟я─пЁя┐п╪п╣п╫я┌ '%s' п╫п╣ п╦я│п©п╬п╩я▄п╥я┐п╣я┌я│я▐ (п©п╬п╨п╟)"
 
 #. R/attach.R: gettextf("%s value was converted to character string", sQuote(name))
 #: R/attach.R:0
 #, fuzzy
 msgid "%s value was converted to character string"
-msgstr "конвертирован в текстовую строку"
+msgstr "п╨п╬п╫п╡п╣я─я┌п╦я─п╬п╡п╟п╫ п╡ я┌п╣п╨я│я┌п╬п╡я┐я▌ я│я┌я─п╬п╨я┐"
 
 #. R/match.R: gettextf("'%s' and '%s' arguments must be character vectors", "input", "target")
 #: R/match.R:0
 #, fuzzy
 msgid "'%s' and '%s' arguments must be character vectors"
-msgstr "'input' и 'target' должны быть текстовыми векторами"
+msgstr "'input' п╦ 'target' п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡я▀п╪п╦ п╡п╣п╨я┌п╬я─п╟п╪п╦"
 
 #. R/grep.R: gettextf("'%s' and '%s' arguments must have the same length", "x", "m", domain = "R-base")
 #. R/strwrap.R: gettextf("'%s' and '%s' arguments must have the same length", "x", "y")
 #: R/grep.R:0 R/strwrap.R:0
 #, fuzzy
 msgid "'%s' and '%s' arguments must have the same length"
-msgstr "все аргументы должны иметь одинаковую длину"
+msgstr "п╡я│п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╢п╬п╩п╤п╫я▀ п╦п╪п╣я┌я▄ п╬п╢п╦п╫п╟п╨п╬п╡я┐я▌ п╢п╩п╦п╫я┐"
 
 #. R/seq.R: gettextf("'%s' argument cannot be NA, NaN or infinite", "from")
 #. R/seq.R: gettextf("'%s' argument cannot be NA, NaN or infinite", "from")
@@ -161,51 +162,51 @@ msgstr "все аргументы должны иметь одинаковую длину"
 #: R/seq.R:0
 #, fuzzy
 msgid "'%s' argument cannot be NA, NaN or infinite"
-msgstr "'from' должен быть raw либо текстовой строкой"
+msgstr "'from' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ raw п╩п╦п╠п╬ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧"
 
 #. R/octhex.R: gettextf("'%s' argument cannot be coerced to an object of class %s", "x", dQuote("octmode"))
 #. R/octhex.R: gettextf("'%s' argument cannot be coerced to an object of class %s", "x", dQuote("hexmode"))
 #: R/octhex.R:0
 #, fuzzy
 msgid "'%s' argument cannot be coerced to an object of class %s"
-msgstr "не определено для объектов 'Date'"
+msgstr "п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫п╬ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╬п╡ 'Date'"
 
 #. R/array.R: gettextf("'%s' argument cannot be of length 0", "dims")
 #: R/array.R:0
 #, fuzzy
 msgid "'%s' argument cannot be of length 0"
-msgstr "'arg' должен быть длиной 1"
+msgstr "'arg' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #. R/format.R: gettextf("'%s' argument has length > 1", "zero.print")
 #: R/format.R:0
 #, fuzzy
 msgid "'%s' argument has length > 1"
-msgstr "'arg' должен быть длиной 1"
+msgstr "'arg' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #. R/dates.R: gettextf("'%s' argument is NA", "by")
 #. R/datetime.R: gettextf("'%s' argument is NA", "by")
 #: R/dates.R:0 R/datetime.R:0
 #, fuzzy
 msgid "'%s' argument is NA"
-msgstr "'k' слишком велик"
+msgstr "'k' я│п╩п╦я┬п╨п╬п╪ п╡п╣п╩п╦п╨"
 
 #. R/eigen.R: gettextf("'%s' argument is a 0 x 0 matrix", "x")
 #: R/eigen.R:0
 #, fuzzy
 msgid "'%s' argument is a 0 x 0 matrix"
-msgstr "0 x 0 матрица"
+msgstr "0 x 0 п╪п╟я┌я─п╦я├п╟"
 
 #. R/diag.R: gettextf("'%s' argument is an array, but not one-dimensional.", "x")
 #: R/diag.R:0
 #, fuzzy
 msgid "'%s' argument is an array, but not one-dimensional."
-msgstr "'x' -- это не одномерная, а многомерная матрица (array)"
+msgstr "'x' -- я█я┌п╬ п╫п╣ п╬п╢п╫п╬п╪п╣я─п╫п╟я▐, п╟ п╪п╫п╬пЁп╬п╪п╣я─п╫п╟я▐ п╪п╟я┌я─п╦я├п╟ (array)"
 
 #. R/seq.R: gettextf("'%s' argument is much too small", "by")
 #: R/seq.R:0
 #, fuzzy
 msgid "'%s' argument is much too small"
-msgstr "'by' аргумент много меньше чем надо"
+msgstr "'by' п╟я─пЁя┐п╪п╣п╫я┌ п╪п╫п╬пЁп╬ п╪п╣п╫я▄я┬п╣ я┤п╣п╪ п╫п╟п╢п╬"
 
 #. R/qr.R: gettextf("'%s' argument is not a QR decomposition", "qr")
 #. R/qr.R: gettextf("'%s' argument is not a QR decomposition", "qr")
@@ -218,27 +219,27 @@ msgstr "'by' аргумент много меньше чем надо"
 #: R/qr.R:0
 #, fuzzy
 msgid "'%s' argument is not a QR decomposition"
-msgstr "первый аргумент должен быть результатом QR разложения"
+msgstr "п©п╣я─п╡я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌ п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я─п╣п╥я┐п╩я▄я┌п╟я┌п╬п╪ QR я─п╟п╥п╩п╬п╤п╣п╫п╦я▐"
 
 #. R/all.equal.R: gettextf("'%s' argument is not a factor", "target")
 #. R/all.equal.R: gettextf("'%s' argument is not a factor", "current")
 #: R/all.equal.R:0
 #, fuzzy
 msgid "'%s' argument is not a factor"
-msgstr "не таблица данных"
+msgstr "п╫п╣ я┌п╟п╠п╩п╦я├п╟ п╢п╟п╫п╫я▀я┘"
 
 #. R/table.R: gettextf("'%s' argument is not an array", "x")
 #: R/table.R:0
 #, fuzzy
 msgid "'%s' argument is not an array"
-msgstr "не таблица данных"
+msgstr "п╫п╣ я┌п╟п╠п╩п╦я├п╟ п╢п╟п╫п╫я▀я┘"
 
 #. R/all.equal.R: gettextf("'%s' argument is not an envRefClass", "target", domain = "R-base")
 #. R/all.equal.R: gettextf("'%s' argument is not an envRefClass", "current", domain = "R-base")
 #: R/all.equal.R:0
 #, fuzzy
 msgid "'%s' argument is not an envRefClass"
-msgstr "не таблица данных"
+msgstr "п╫п╣ я┌п╟п╠п╩п╦я├п╟ п╢п╟п╫п╫я▀я┘"
 
 #. R/datetime.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("POSIXlt"))
 #. R/datetime.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("POSIXct"))
@@ -247,44 +248,44 @@ msgstr "не таблица данных"
 #: R/datetime.R:0 R/library.R:0 R/version.R:0
 #, fuzzy
 msgid "'%s' argument is not an object of class %s"
-msgstr "не определено для объектов 'Date'"
+msgstr "п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫п╬ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╬п╡ 'Date'"
 
 #. R/conflicts.R: gettextf("'%s' argument is of length 0", "where")
 #. R/tapply.R: gettextf("'%s' argument is of length 0", "INDEX")
 #: R/conflicts.R:0 R/tapply.R:0
 #, fuzzy
 msgid "'%s' argument is of length 0"
-msgstr "'arg' должен быть длиной 1"
+msgstr "'arg' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #. R/dataframe.R: gettextf("'%s' argument is of the wrong length", "value")
 #: R/dataframe.R:0
 #, fuzzy
 msgid "'%s' argument is of the wrong length"
-msgstr "предложенные имена строк неправильной длины"
+msgstr "п©я─п╣п╢п╩п╬п╤п╣п╫п╫я▀п╣ п╦п╪п╣п╫п╟ я│я┌я─п╬п╨ п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╧ п╢п╩п╦п╫я▀"
 
 #. R/qr.R: gettextf("'%s' argument is too large", "k")
 #: R/qr.R:0
 #, fuzzy
 msgid "'%s' argument is too large"
-msgstr "'k' слишком велик"
+msgstr "'k' я│п╩п╦я┬п╨п╬п╪ п╡п╣п╩п╦п╨"
 
 #. R/sort.R: gettextf("'%s' argument is valid only for 'na.last = NA' option", "index.return")
 #: R/sort.R:0
 #, fuzzy
 msgid "'%s' argument is valid only for 'na.last = NA' option"
-msgstr "'index.return' -- только для не-факторов"
+msgstr "'index.return' -- я┌п╬п╩я▄п╨п╬ п╢п╩я▐ п╫п╣-я└п╟п╨я┌п╬я─п╬п╡"
 
 #. R/sort.R: gettextf("'%s' argument is valid only for non-factors", "index.return")
 #: R/sort.R:0
 #, fuzzy
 msgid "'%s' argument is valid only for non-factors"
-msgstr "'index.return' -- только для не-факторов"
+msgstr "'index.return' -- я┌п╬п╩я▄п╨п╬ п╢п╩я▐ п╫п╣-я└п╟п╨я┌п╬я─п╬п╡"
 
 #. R/match.R: gettextf("'%s' argument must be NULL or a character vector", "arg")
 #: R/match.R:0
 #, fuzzy
 msgid "'%s' argument must be NULL or a character vector"
-msgstr "'arg' должен быть NULL либо текстовой строкой"
+msgstr "'arg' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ NULL п╩п╦п╠п╬ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧"
 
 #. R/unix/system.unix.R: gettextf("'%s' argument must be TRUE or FALSE", "intern")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be TRUE or FALSE", "ignore.stdout")
@@ -304,35 +305,35 @@ msgstr "'arg' должен быть NULL либо текстовой строкой"
 #: R/unix/system.unix.R:0 R/windows/system.R:0
 #, fuzzy
 msgid "'%s' argument must be TRUE or FALSE"
-msgstr "'wait' должен быть TRUE или FALSE"
+msgstr "'wait' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ TRUE п╦п╩п╦ FALSE"
 
 #. R/RNG.R: gettextf("'%s' argument must be a character string of length 1", "normal.kind")
 #. R/RNG.R: gettextf("'%s' argument must be a character string of length 1", "normal.kind")
 #: R/RNG.R:0
 #, fuzzy
 msgid "'%s' argument must be a character string of length 1"
-msgstr "'file' должен быть текстовой строкой или соединением"
+msgstr "'file' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧ п╦п╩п╦ я│п╬п╣п╢п╦п╫п╣п╫п╦п╣п╪"
 
 #. R/RNG.R: gettextf("'%s' argument must be a character string of length 1 (RNG to be used).",     "kind")
 #. R/RNG.R: gettextf("'%s' argument must be a character string of length 1 (RNG to be used).",     "kind")
 #: R/RNG.R:0
 #, fuzzy
 msgid "'%s' argument must be a character string of length 1 (RNG to be used)."
-msgstr "'kind' должен быть текстовой строкой длины 1 (будет использован RNG)."
+msgstr "'kind' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧ п╢п╩п╦п╫я▀ 1 (п╠я┐п╢п╣я┌ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫ RNG)."
 
 #. R/dcf.R: gettextf("'%s' argument must be a character string or connection", "file")
 #. R/dcf.R: gettextf("'%s' argument must be a character string or connection", "file")
 #: R/dcf.R:0
 #, fuzzy
 msgid "'%s' argument must be a character string or connection"
-msgstr "'file' должен быть текстовой строкой или соединением"
+msgstr "'file' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧ п╦п╩п╦ я│п╬п╣п╢п╦п╫п╣п╫п╦п╣п╪"
 
 #. R/unix/system.unix.R: gettextf("'%s' argument must be a character vector or 'NULL'", "input")
 #. R/unix/system.unix.R: gettextf("'%s' argument must be a character vector or 'NULL'", "input")
 #: R/unix/system.unix.R:0
 #, fuzzy
 msgid "'%s' argument must be a character vector or 'NULL'"
-msgstr "'input' должен быть текстовым вектором либо 'NULL'"
+msgstr "'input' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡я▀п╪ п╡п╣п╨я┌п╬я─п╬п╪ п╩п╦п╠п╬ 'NULL'"
 
 #. R/New-Internal.R: gettextf("'%s' argument must be a list", "args")
 #. R/attr.R: gettextf("'%s' argument must be a list", "value")
@@ -340,19 +341,19 @@ msgstr "'input' должен быть текстовым вектором либо 'NULL'"
 #: R/New-Internal.R:0 R/attr.R:0 R/lapply.R:0
 #, fuzzy
 msgid "'%s' argument must be a list"
-msgstr "второй аргумент должен быть списком"
+msgstr "п╡я┌п╬я─п╬п╧ п╟я─пЁя┐п╪п╣п╫я┌ п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я│п©п╦я│п╨п╬п╪"
 
 #. R/det.R: gettextf("'%s' argument must be a square matrix", "x")
 #: R/det.R:0
 #, fuzzy
 msgid "'%s' argument must be a square matrix"
-msgstr "'x' должен быть квадратной матрицей"
+msgstr "'x' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╨п╡п╟п╢я─п╟я┌п╫п╬п╧ п╪п╟я┌я─п╦я├п╣п╧"
 
 #. R/rle.R: gettextf("'%s' argument must be a vector of an atomic type", "x")
 #: R/rle.R:0
 #, fuzzy
 msgid "'%s' argument must be a vector of an atomic type"
-msgstr "'x' должен быть атомарным вектором"
+msgstr "'x' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╟я┌п╬п╪п╟я─п╫я▀п╪ п╡п╣п╨я┌п╬я─п╬п╪"
 
 #. R/dates.R: gettextf("'%s' argument must be an object of class %s", "from", dQuote("Date"))
 #. R/dates.R: gettextf("'%s' argument must be an object of class %s", "to", dQuote("Date"))
@@ -363,19 +364,19 @@ msgstr "'x' должен быть атомарным вектором"
 #: R/dates.R:0 R/datetime.R:0
 #, fuzzy
 msgid "'%s' argument must be an object of class %s"
-msgstr "не определено для объектов 'Date'"
+msgstr "п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫п╬ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╬п╡ 'Date'"
 
 #. R/sort.R: gettextf("'%s' argument must be atomic", "x")
 #: R/sort.R:0
 #, fuzzy
 msgid "'%s' argument must be atomic"
-msgstr "'arg' должен быть длиной 1"
+msgstr "'arg' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #. R/format.R: gettextf("'%s' argument must be character, logical or NULL", "zero.print")
 #: R/format.R:0
 #, fuzzy
 msgid "'%s' argument must be character, logical or NULL"
-msgstr "'input' должен быть текстовым вектором либо 'NULL'"
+msgstr "'input' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡я▀п╪ п╡п╣п╨я┌п╬я─п╬п╪ п╩п╦п╠п╬ 'NULL'"
 
 #. R/all.equal.R: gettextf("'%s' argument must be logical", "check.attributes")
 #. R/all.equal.R: gettextf("'%s' argument must be logical", "check.attributes")
@@ -391,13 +392,13 @@ msgstr "'input' должен быть текстовым вектором либо 'NULL'"
 #: R/all.equal.R:0 R/frametools.R:0 R/source.R:0
 #, fuzzy
 msgid "'%s' argument must be logical"
-msgstr "второй аргумент должен быть списком"
+msgstr "п╡я┌п╬я─п╬п╧ п╟я─пЁя┐п╪п╣п╫я┌ п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я│п©п╦я│п╨п╬п╪"
 
 #. R/load.R: gettextf("'%s' argument must be logical or character", "compress")
 #: R/load.R:0
 #, fuzzy
 msgid "'%s' argument must be logical or character"
-msgstr "'from' должен быть raw либо текстовой строкой"
+msgstr "'from' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ raw п╩п╦п╠п╬ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧"
 
 #. R/load.R: gettextf("'%s' argument must be non-empty character string", "file")
 #. R/load.R: gettextf("'%s' argument must be non-empty character string", "file")
@@ -405,13 +406,13 @@ msgstr "'from' должен быть raw либо текстовой строкой"
 #: R/load.R:0 R/serialize.R:0
 #, fuzzy
 msgid "'%s' argument must be non-empty character string"
-msgstr "'from' должен быть raw либо текстовой строкой"
+msgstr "'from' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ raw п╩п╦п╠п╬ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧"
 
 #. R/seq.R: gettextf("'%s' argument must be non-negative number", "length.out")
 #: R/seq.R:0
 #, fuzzy
 msgid "'%s' argument must be non-negative number"
-msgstr "длина должна быть неотрицательным числом"
+msgstr "п╢п╩п╦п╫п╟ п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ п╫п╣п╬я┌я─п╦я├п╟я┌п╣п╩я▄п╫я▀п╪ я┤п╦я│п╩п╬п╪"
 
 #. R/cut.R: gettextf("'%s' argument must be numeric", "x")
 #. R/jitter.R: gettextf("'%s' argument must be numeric", "x")
@@ -419,13 +420,13 @@ msgstr "длина должна быть неотрицательным числом"
 #: R/cut.R:0 R/jitter.R:0 R/rowsum.R:0
 #, fuzzy
 msgid "'%s' argument must be numeric"
-msgstr "'arg' должен быть длиной 1"
+msgstr "'arg' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #. R/mean.R: gettextf("'%s' argument must be numeric of length 1", "trim")
 #: R/mean.R:0
 #, fuzzy
 msgid "'%s' argument must be numeric of length 1"
-msgstr "'arg' должен быть длиной 1"
+msgstr "'arg' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #. R/dates.R: gettextf("'%s' argument must be of length 1", "from")
 #. R/dates.R: gettextf("'%s' argument must be of length 1", "to")
@@ -450,19 +451,19 @@ msgstr "'arg' должен быть длиной 1"
 #: R/unix/system.unix.R:0
 #, fuzzy
 msgid "'%s' argument must be of length 1"
-msgstr "'arg' должен быть длиной 1"
+msgstr "'arg' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #. R/match.R: gettextf("'%s' argument must be of length greater or equal to 1", "arg")
 #: R/match.R:0
 #, fuzzy
 msgid "'%s' argument must be of length greater or equal to 1"
-msgstr "'lag' и 'differences' должны быть целыми >= 1"
+msgstr "'lag' п╦ 'differences' п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ я├п╣п╩я▀п╪п╦ >= 1"
 
 #. R/toString.R: gettextf("'%s' argument must be positive", "width")
 #: R/toString.R:0
 #, fuzzy
 msgid "'%s' argument must be positive"
-msgstr "'width' должна быть положительной"
+msgstr "'width' п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ п©п╬п╩п╬п╤п╦я┌п╣п╩я▄п╫п╬п╧"
 
 #. R/dates.R: gettextf("'%s' argument must be specified", "origin")
 #. R/dates.R: gettextf("'%s' argument must be specified", "from")
@@ -473,53 +474,53 @@ msgstr "'width' должна быть положительной"
 #: R/dates.R:0 R/datetime.R:0 R/load.R:0
 #, fuzzy
 msgid "'%s' argument must be specified"
-msgstr "должен быть указан 'from'"
+msgstr "п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┐п╨п╟п╥п╟п╫ 'from'"
 
 #. R/table.R: gettextf("'%s' argument must inherit from class %s", "object", dQuote("table"), domain = "R-base")
 #. R/table.R: gettextf("'%s' argument must inherit from class %s", "x", dQuote("summary.table"),     domain = "R-base")
 #: R/table.R:0
 #, fuzzy
 msgid "'%s' argument must inherit from class %s"
-msgstr "'x' должен наследовать классу \"summary.table\""
+msgstr "'x' п╢п╬п╩п╤п╣п╫ п╫п╟я│п╩п╣п╢п╬п╡п╟я┌я▄ п╨п╩п╟я│я│я┐ \"summary.table\""
 
 #. R/all.equal.R: gettextf("'%s' argument should be numeric", "tolerance")
 #: R/all.equal.R:0
 #, fuzzy
 msgid "'%s' argument should be numeric"
-msgstr "'arg' должен быть длиной 1"
+msgstr "'arg' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #. R/all.equal.R: gettextf("'%s' argument should be numeric or NULL", "scale")
 #: R/all.equal.R:0
 #, fuzzy
 msgid "'%s' argument should be numeric or NULL"
-msgstr "'arg' должен быть длиной 1"
+msgstr "'arg' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #. R/match.R: gettextf("'%s' argument should be one of %s", "arg", paste(dQuote(choices), collapse = ", "),     domain = "R-base")
 #: R/match.R:0
 #, fuzzy
 msgid "'%s' argument should be one of %s"
-msgstr "'arg' должен быть длиной 1"
+msgstr "'arg' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #. R/windows/system.R: gettextf("'%s' command could not be run", cmd0)
 #. R/windows/system.R: gettextf("'%s' command could not be run", cmd0)
 #: R/windows/system.R:0
 #, fuzzy
 msgid "'%s' command could not be run"
-msgstr "'%s' не запускается"
+msgstr "'%s' п╫п╣ п╥п╟п©я┐я│п╨п╟п╣я┌я│я▐"
 
 #. R/windows/system.R: gettextf("'%s' command execution failed with error code %d", cmd0, res)
 #. R/windows/system.R: gettextf("'%s' command execution failed with error code %d", cmd0, res)
 #: R/windows/system.R:0
 #, fuzzy
 msgid "'%s' command execution failed with error code %d"
-msgstr "выполнение '%s' прекращено: ошибка с кодом %d"
+msgstr "п╡я▀п©п╬п╩п╫п╣п╫п╦п╣ '%s' п©я─п╣п╨я─п╟я┴п╣п╫п╬: п╬я┬п╦п╠п╨п╟ я│ п╨п╬п╢п╬п╪ %d"
 
 #. R/dates.R: gettextf("'%s' function is not defined for objects of class %s", .Generic, dQuote("Date"))
 #. R/dates.R: gettextf("'%s' function is not defined for objects of class %s", .Generic, dQuote("Date"))
 #: R/dates.R:0
 #, fuzzy
 msgid "'%s' function is not defined for objects of class %s"
-msgstr "'%s' не определен для объектов \"POSIXt\""
+msgstr "'%s' п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╬п╡ \"POSIXt\""
 
 #. R/datetime.R: gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt"))
 #. R/datetime.R: gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt"))
@@ -530,19 +531,19 @@ msgstr "'%s' не определен для объектов \"POSIXt\""
 #: R/datetime.R:0
 #, fuzzy
 msgid "'%s' operator is not defined for objects of class %s"
-msgstr "унарный '-' не определен для объектов \"POSIXt\""
+msgstr "я┐п╫п╟я─п╫я▀п╧ '-' п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╬п╡ \"POSIXt\""
 
 #. R/factor.R: gettextf("'%s' operator is not defined for ordered factors", .Generic)
 #: R/factor.R:0
 #, fuzzy
 msgid "'%s' operator is not defined for ordered factors"
-msgstr "'%s' не определен для упорядоченных факторов"
+msgstr "'%s' п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫ п╢п╩я▐ я┐п©п╬я─я▐п╢п╬я┤п╣п╫п╫я▀я┘ я└п╟п╨я┌п╬я─п╬п╡"
 
 #. R/factor.R: gettextf("'%s' operator is not meaningful for ordered factors", .Generic)
 #: R/factor.R:0
 #, fuzzy
 msgid "'%s' operator is not meaningful for ordered factors"
-msgstr "'%s' не значим для упорядоченных факторов"
+msgstr "'%s' п╫п╣ п╥п╫п╟я┤п╦п╪ п╢п╩я▐ я┐п©п╬я─я▐п╢п╬я┤п╣п╫п╫я▀я┘ я└п╟п╨я┌п╬я─п╬п╡"
 
 #. R/factor.R: gettextf("'%s' operator is only meaningful for ordered factors if all arguments have the same level sets",     .Generic)
 #: R/factor.R:0
@@ -551,40 +552,40 @@ msgid ""
 "'%s' operator is only meaningful for ordered factors if all arguments have "
 "the same level sets"
 msgstr ""
-"'%s' имеет смысл только для упорядоченных факторов если все аргументы имеют "
-"одинаковые наборы градаций"
+"'%s' п╦п╪п╣п╣я┌ я│п╪я▀я│п╩ я┌п╬п╩я▄п╨п╬ п╢п╩я▐ я┐п©п╬я─я▐п╢п╬я┤п╣п╫п╫я▀я┘ я└п╟п╨я┌п╬я─п╬п╡ п╣я│п╩п╦ п╡я│п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╦п╪п╣я▌я┌ "
+"п╬п╢п╦п╫п╟п╨п╬п╡я▀п╣ п╫п╟п╠п╬я─я▀ пЁя─п╟п╢п╟я├п╦п╧"
 
 #. R/match.fun.R: gettextf("'%s' value is not a function, character or symbol", deparse(FUN))
 #: R/match.fun.R:0
 #, fuzzy
 msgid "'%s' value is not a function, character or symbol"
-msgstr "'%s' не является функцией, буквой или символом"
+msgstr "'%s' п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ я└я┐п╫п╨я├п╦п╣п╧, п╠я┐п╨п╡п╬п╧ п╦п╩п╦ я│п╦п╪п╡п╬п╩п╬п╪"
 
 #. R/RNG.R: gettextf("'%s' value is not a valid abbreviation of an RNG", kind)
 #. R/RNG.R: gettextf("'%s' value is not a valid abbreviation of an RNG", kind)
 #: R/RNG.R:0
 #, fuzzy
 msgid "'%s' value is not a valid abbreviation of an RNG"
-msgstr "'%s' не является правильным сокращением RNG"
+msgstr "'%s' п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п©я─п╟п╡п╦п╩я▄п╫я▀п╪ я│п╬п╨я─п╟я┴п╣п╫п╦п╣п╪ RNG"
 
 #. R/RNG.R: gettextf("'%s' value is not a valid choice", normal.kind)
 #. R/RNG.R: gettextf("'%s' value is not a valid choice", normal.kind)
 #: R/RNG.R:0
 #, fuzzy
 msgid "'%s' value is not a valid choice"
-msgstr "'%s' не является правильным выбором"
+msgstr "'%s' п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п©я─п╟п╡п╦п╩я▄п╫я▀п╪ п╡я▀п╠п╬я─п╬п╪"
 
 #. R/namespace.R: gettextf("'%s' was not found", sQuote(x))
 #: R/namespace.R:0
 #, fuzzy
 msgid "'%s' was not found"
-msgstr "файл '%s' не найден"
+msgstr "я└п╟п╧п╩ '%s' п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #. R/rm.R: stop("'...' must contain names or character strings")
 #: R/rm.R:0
 #, fuzzy
 msgid "'...' must contain names or character strings"
-msgstr "... должен содержать имена или текстовые строки"
+msgstr "... п╢п╬п╩п╤п╣п╫ я│п╬п╢п╣я─п╤п╟я┌я▄ п╦п╪п╣п╫п╟ п╦п╩п╦ я┌п╣п╨я│я┌п╬п╡я▀п╣ я│я┌я─п╬п╨п╦"
 
 #. R/library.R: warning("'DESCRIPTION' file has an 'Encoding' field and re-encoding is not possible",     call. = FALSE)
 #. R/library.R: warning("'DESCRIPTION' file has an 'Encoding' field and re-encoding is not possible",     call. = FALSE)
@@ -592,24 +593,24 @@ msgstr "... должен содержать имена или текстовые строки"
 #, fuzzy
 msgid ""
 "'DESCRIPTION' file has an 'Encoding' field and re-encoding is not possible"
-msgstr "У 'DESCRIPTION' есть поле 'Encoding', перекодировка невозможна"
+msgstr "пё 'DESCRIPTION' п╣я│я┌я▄ п©п╬п╩п╣ 'Encoding', п©п╣я─п╣п╨п╬п╢п╦я─п╬п╡п╨п╟ п╫п╣п╡п╬п╥п╪п╬п╤п╫п╟"
 
 #. R/sweep.R: warning("'STATS' argument does not recycle exactly across 'MARGIN' argument")
 #: R/sweep.R:0
 #, fuzzy
 msgid "'STATS' argument does not recycle exactly across 'MARGIN' argument"
-msgstr "STATS не самоповторяется в точности в MARGIN"
+msgstr "STATS п╫п╣ я│п╟п╪п╬п©п╬п╡я┌п╬я─я▐п╣я┌я│я▐ п╡ я┌п╬я┤п╫п╬я│я┌п╦ п╡ MARGIN"
 
 #. R/sweep.R: warning("'STATS' argument is longer than the extent of 'dim(x)[MARGIN]'")
 #: R/sweep.R:0
 #, fuzzy
 msgid "'STATS' argument is longer than the extent of 'dim(x)[MARGIN]'"
-msgstr "STATS длиннее чем протяженность 'dim(x)[MARGIN]'"
+msgstr "STATS п╢п╩п╦п╫п╫п╣п╣ я┤п╣п╪ п©я─п╬я┌я▐п╤п╣п╫п╫п╬я│я┌я▄ 'dim(x)[MARGIN]'"
 
 #. R/apply.R: stop("'X' must have named dimnames")
 #: R/apply.R:0
 msgid "'X' must have named dimnames"
-msgstr "'x' должен иметь именованные измерения"
+msgstr "'x' п╢п╬п╩п╤п╣п╫ п╦п╪п╣я┌я▄ п╦п╪п╣п╫п╬п╡п╟п╫п╫я▀п╣ п╦п╥п╪п╣я─п╣п╫п╦я▐"
 
 #. R/datetime.R: stop("'as.difftime()' function needs explicit 'units' argument for numeric conversion")
 #: R/datetime.R:0
@@ -617,7 +618,7 @@ msgstr "'x' должен иметь именованные измерения"
 msgid ""
 "'as.difftime()' function needs explicit 'units' argument for numeric "
 "conversion"
-msgstr "для числовой конверсии нужно прямо указать единицы"
+msgstr "п╢п╩я▐ я┤п╦я│п╩п╬п╡п╬п╧ п╨п╬п╫п╡п╣я─я│п╦п╦ п╫я┐п╤п╫п╬ п©я─я▐п╪п╬ я┐п╨п╟п╥п╟я┌я▄ п╣п╢п╦п╫п╦я├я▀"
 
 #. R/format.R: gettextf("'big.mark' and 'decimal.mark' arguments are both set to '%s', which could be confusing",     big.mark)
 #: R/format.R:0
@@ -630,14 +631,14 @@ msgstr ""
 #: R/tabulate.R:0
 #, fuzzy
 msgid "'bin' argument must be numeric or a factor"
-msgstr "'bin' должен быть числом или фактором"
+msgstr "'bin' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┤п╦я│п╩п╬п╪ п╦п╩п╦ я└п╟п╨я┌п╬я─п╬п╪"
 
 #. R/merge.R: stop("'by' argument must match number of columns")
 #. R/merge.R: stop("'by' argument must match number of columns")
 #: R/merge.R:0
 #, fuzzy
 msgid "'by' argument must match number of columns"
-msgstr "'by' должен соответствовать числу колонок"
+msgstr "'by' п╢п╬п╩п╤п╣п╫ я│п╬п╬я┌п╡п╣я┌я│я┌п╡п╬п╡п╟я┌я▄ я┤п╦я│п╩я┐ п╨п╬п╩п╬п╫п╬п╨"
 
 #. R/merge.R: stop("'by' argument must specify one or more columns as numbers, names or logical")
 #: R/merge.R:0
@@ -645,50 +646,50 @@ msgstr "'by' должен соответствовать числу колонок"
 msgid ""
 "'by' argument must specify one or more columns as numbers, names or logical"
 msgstr ""
-"'by' должен определять колонк(и) как числа, имена или логические данные"
+"'by' п╢п╬п╩п╤п╣п╫ п╬п©я─п╣п╢п╣п╩я▐я┌я▄ п╨п╬п╩п╬п╫п╨(п╦) п╨п╟п╨ я┤п╦я│п╩п╟, п╦п╪п╣п╫п╟ п╦п╩п╦ п╩п╬пЁп╦я┤п╣я│п╨п╦п╣ п╢п╟п╫п╫я▀п╣"
 
 #. R/merge.R: stop("'by.x' and 'by.y' arguments specify different numbers of columns")
 #: R/merge.R:0
 #, fuzzy
 msgid "'by.x' and 'by.y' arguments specify different numbers of columns"
-msgstr "'by.x' и 'by.y' определяют разные номера колонок"
+msgstr "'by.x' п╦ 'by.y' п╬п©я─п╣п╢п╣п╩я▐я▌я┌ я─п╟п╥п╫я▀п╣ п╫п╬п╪п╣я─п╟ п╨п╬п╩п╬п╫п╬п╨"
 
 #. R/source.R: warning("'chdir = TRUE' option makes no sense for a connection")
 #: R/source.R:0
 #, fuzzy
 msgid "'chdir = TRUE' option makes no sense for a connection"
-msgstr "'chdir = TRUE' не имеет смысла для соединения"
+msgstr "'chdir = TRUE' п╫п╣ п╦п╪п╣п╣я┌ я│п╪я▀я│п╩п╟ п╢п╩я▐ я│п╬п╣п╢п╦п╫п╣п╫п╦я▐"
 
 #. R/source.R: warning("'chdir = TRUE' option makes no sense for an URL")
 #: R/source.R:0
 #, fuzzy
 msgid "'chdir = TRUE' option makes no sense for an URL"
-msgstr "'chdir = TRUE' не имеет смысла для URL"
+msgstr "'chdir = TRUE' п╫п╣ п╦п╪п╣п╣я┌ я│п╪я▀я│п╩п╟ п╢п╩я▐ URL"
 
 #. R/load.R: gettextf("'compress = \"%s\"' option is invalid", compress)
 #: R/load.R:0
 #, fuzzy
 msgid "'compress = \"%s\"' option is invalid"
-msgstr "'compress = \"%s\"' неправилен"
+msgstr "'compress = \"%s\"' п╫п╣п©я─п╟п╡п╦п╩п╣п╫"
 
 #. R/serialize.R: warning("'compress' argument is ignored unless 'file' argument is a file name")
 #: R/serialize.R:0
 #, fuzzy
 msgid "'compress' argument is ignored unless 'file' argument is a file name"
-msgstr "'compress' игнорируется если 'file' не является именем файла"
+msgstr "'compress' п╦пЁп╫п╬я─п╦я─я┐п╣я┌я│я▐ п╣я│п╩п╦ 'file' п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п╦п╪п╣п╫п╣п╪ я└п╟п╧п╩п╟"
 
 #. R/serialize.R: stop("'connection' argument must be a connection")
 #. R/serialize.R: stop("'connection' argument must be a connection")
 #: R/serialize.R:0
 #, fuzzy
 msgid "'connection' argument must be a connection"
-msgstr "'connection' должно быть соединением"
+msgstr "'connection' п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ я│п╬п╣п╢п╦п╫п╣п╫п╦п╣п╪"
 
 #. R/all.equal.R: gettext("'current' argument is a subset of 'target' argument")
 #: R/all.equal.R:0
 #, fuzzy
 msgid "'current' argument is a subset of 'target' argument"
-msgstr "цель %s, текущая %s"
+msgstr "я├п╣п╩я▄ %s, я┌п╣п╨я┐я┴п╟я▐ %s"
 
 #. R/all.equal.R: gettext("'current' argument's class is not list-like")
 #: R/all.equal.R:0
@@ -702,44 +703,44 @@ msgid ""
 "'decreasing' argument must be a logical vector of length 1.\n"
 "Did you intend to set 'partial'?"
 msgstr ""
-"'decreasing' должен быть логическим вектором длины-1.\n"
-"Вы собирались указать 'partial'?"
+"'decreasing' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╩п╬пЁп╦я┤п╣я│п╨п╦п╪ п╡п╣п╨я┌п╬я─п╬п╪ п╢п╩п╦п╫я▀-1.\n"
+"п▓я▀ я│п╬п╠п╦я─п╟п╩п╦я│я▄ я┐п╨п╟п╥п╟я┌я▄ 'partial'?"
 
 #. R/det.R: stop("'determinant()' function not currently defined for complex matrices")
 #: R/det.R:0
 #, fuzzy
 msgid "'determinant()' function not currently defined for complex matrices"
-msgstr "в настоящее время детерминант для комплексных матриц не определен"
+msgstr "п╡ п╫п╟я│я┌п╬я▐я┴п╣п╣ п╡я─п╣п╪я▐ п╢п╣я┌п╣я─п╪п╦п╫п╟п╫я┌ п╢п╩я▐ п╨п╬п╪п©п╩п╣п╨я│п╫я▀я┘ п╪п╟я┌я─п╦я├ п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫"
 
 #. R/format.R: gettextf("'digits' argument reduced to %d", maxDigits)
 #: R/format.R:0
 #, fuzzy
 msgid "'digits' argument reduced to %d"
-msgstr "'digits' сокращено до"
+msgstr "'digits' я│п╬п╨я─п╟я┴п╣п╫п╬ п╢п╬"
 
 #. R/array.R: stop("'dim' argument specifies too large array")
 #: R/array.R:0
 #, fuzzy
 msgid "'dim' argument specifies too large array"
-msgstr "'dim' определяет слишком большую многомерную матрицу"
+msgstr "'dim' п╬п©я─п╣п╢п╣п╩я▐п╣я┌ я│п╩п╦я┬п╨п╬п╪ п╠п╬п╩я▄я┬я┐я▌ п╪п╫п╬пЁп╬п╪п╣я─п╫я┐я▌ п╪п╟я┌я─п╦я├я┐"
 
 #. R/apply.R: stop("'dim(X)' value must have a positive length")
 #: R/apply.R:0
 #, fuzzy
 msgid "'dim(X)' value must have a positive length"
-msgstr "dim(X) должен иметь положительную длину"
+msgstr "dim(X) п╢п╬п╩п╤п╣п╫ п╦п╪п╣я┌я▄ п©п╬п╩п╬п╤п╦я┌п╣п╩я▄п╫я┐я▌ п╢п╩п╦п╫я┐"
 
 #. R/dataframe.R: warning("'drop' argument will be ignored")
 #: R/dataframe.R:0
 #, fuzzy
 msgid "'drop' argument will be ignored"
-msgstr "аргумент 'drop' не будет учтен"
+msgstr "п╟я─пЁя┐п╪п╣п╫я┌ 'drop' п╫п╣ п╠я┐п╢п╣я┌ я┐я┤я┌п╣п╫"
 
 #. R/source.R: gettextf("'encoding = \"%s\"' chosen", encoding, domain = "R-base")
 #: R/source.R:0
 #, fuzzy
 msgid "'encoding = \"%s\"' chosen"
-msgstr "выбрана кодировка = \"%s\""
+msgstr "п╡я▀п╠я─п╟п╫п╟ п╨п╬п╢п╦я─п╬п╡п╨п╟ = \"%s\""
 
 #. R/source.R: gettext("'envir' chosen:", domain = "R-base")
 #: R/source.R:0
@@ -753,29 +754,29 @@ msgid ""
 "'exportClassPattern' specified in 'NAMESPACE' file but no matching classes "
 "in package %s"
 msgstr ""
-"в NAMESPACE указан 'exportClassPattern', но отсутствуют соответствующие "
-"классы в %s"
+"п╡ NAMESPACE я┐п╨п╟п╥п╟п╫ 'exportClassPattern', п╫п╬ п╬я┌я│я┐я┌я│я┌п╡я┐я▌я┌ я│п╬п╬я┌п╡п╣я┌я│я┌п╡я┐я▌я┴п╦п╣ "
+"п╨п╩п╟я│я│я▀ п╡ %s"
 
 #. R/sink.R: stop("'file' must be NULL or an already open connection")
 #: R/sink.R:0
 msgid "'file' must be NULL or an already open connection"
-msgstr "'file' должен быть NULL или уже открытым соединением"
+msgstr "'file' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ NULL п╦п╩п╦ я┐п╤п╣ п╬я┌п╨я─я▀я┌я▀п╪ я│п╬п╣п╢п╦п╫п╣п╫п╦п╣п╪"
 
 #. R/sink.R: stop("'file' must be NULL, a connection or a character string")
 #: R/sink.R:0
 msgid "'file' must be NULL, a connection or a character string"
-msgstr "'file' должен быть NULL, соединением или текстовой строкой"
+msgstr "'file' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ NULL, я│п╬п╣п╢п╦п╫п╣п╫п╦п╣п╪ п╦п╩п╦ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧"
 
 #. R/scan.R: stop("'file' must be a character string or connection")
 #: R/scan.R:0
 msgid "'file' must be a character string or connection"
-msgstr "'file' должен быть текстовой строкой или соединением"
+msgstr "'file' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧ п╦п╩п╦ я│п╬п╣п╢п╦п╫п╣п╫п╦п╣п╪"
 
 #. R/format.R: stop("'flag' argument can contain only '0+- #'")
 #: R/format.R:0
 #, fuzzy
 msgid "'flag' argument can contain only '0+- #'"
-msgstr "'flag' может содержать лишь '0+- #'"
+msgstr "'flag' п╪п╬п╤п╣я┌ я│п╬п╢п╣я─п╤п╟я┌я▄ п╩п╦я┬я▄ '0+- #'"
 
 #. R/format.R: stop("'format' argument must be one of {\"f\",\"e\",\"E\",\"g\",\"G\",\"fg\",\"s\"}")
 #: R/format.R:0
@@ -783,27 +784,27 @@ msgstr "'flag' может содержать лишь '0+- #'"
 msgid ""
 "'format' argument must be one of {\"f\",\"e\",\"E\",\"g\",\"G\",\"fg\",\"s\"}"
 msgstr ""
-"'format' должен быть одним из {\"f\",\"e\",\"E\",\"g\",\"G\", \"fg\", \"s\"}"
+"'format' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╬п╢п╫п╦п╪ п╦п╥ {\"f\",\"e\",\"E\",\"g\",\"G\", \"fg\", \"s\"}"
 
 #. R/connections.R: stop("'from' argument must be raw or character")
 #: R/connections.R:0
 #, fuzzy
 msgid "'from' argument must be raw or character"
-msgstr "'from' должен быть raw либо текстовой строкой"
+msgstr "'from' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ raw п╩п╦п╠п╬ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧"
 
 #. R/New-Internal.R: stop("'iconvlist()' function is not available on this system")
 #. R/New-Internal.R: stop("'iconvlist()' function is not available on this system")
 #: R/New-Internal.R:0
 #, fuzzy
 msgid "'iconvlist()' function is not available on this system"
-msgstr "'iconvlist' недоступен в этой системе"
+msgstr "'iconvlist' п╫п╣п╢п╬я│я┌я┐п©п╣п╫ п╡ я█я┌п╬п╧ я│п╦я│я┌п╣п╪п╣"
 
 #. R/merge.R: stop("'incomparables' argument is supported only for merging on a single column")
 #: R/merge.R:0
 #, fuzzy
 msgid ""
 "'incomparables' argument is supported only for merging on a single column"
-msgstr "'compress' игнорируется если 'file' не является именем файла"
+msgstr "'compress' п╦пЁп╫п╬я─п╦я─я┐п╣я┌я│я▐ п╣я│п╩п╦ 'file' п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п╦п╪п╣п╫п╣п╪ я└п╟п╧п╩п╟"
 
 #. R/all.equal.R: gettextf("'is.NA' value mismatch: %d in 'current' argument, %d in 'target' argument",     sum(is.na(current)), sum(out))
 #. R/all.equal.R: gettextf("'is.NA' value mismatch: %d in 'current' argument, %d in 'target' argument",     sum(nasc), sum(nas))
@@ -819,37 +820,37 @@ msgstr ""
 #: R/dates.R:0 R/datetime.R:0 R/diff.R:0
 #, fuzzy
 msgid "'lag' and 'differences' arguments must be integers >= 1"
-msgstr "'lag' и 'differences' должны быть целыми >= 1"
+msgstr "'lag' п╦ 'differences' п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ я├п╣п╩я▀п╪п╦ >= 1"
 
 #. R/sweep.R: warning("'length(STATS)' or 'dim(STATS)' do not match 'dim(x)[MARGIN]'")
 #: R/sweep.R:0
 #, fuzzy
 msgid "'length(STATS)' or 'dim(STATS)' do not match 'dim(x)[MARGIN]'"
-msgstr "length(STATS) или dim(STATS) не соответствует dim(x)[MARGIN]"
+msgstr "length(STATS) п╦п╩п╦ dim(STATS) п╫п╣ я│п╬п╬я┌п╡п╣я┌я│я┌п╡я┐п╣я┌ dim(x)[MARGIN]"
 
 #. R/library.R: gettextf("'library()' function failed with error: %s", sQuote(msg), domain = "R-base")
 #: R/library.R:0
 #, fuzzy
 msgid "'library()' function failed with error: %s"
-msgstr "выполнение '%s' прекращено: ошибка с кодом %d"
+msgstr "п╡я▀п©п╬п╩п╫п╣п╫п╦п╣ '%s' п©я─п╣п╨я─п╟я┴п╣п╫п╬: п╬я┬п╦п╠п╨п╟ я│ п╨п╬п╢п╬п╪ %d"
 
 #. R/source.R: stop("'local' argument must be TRUE, FALSE or an environment")
 #: R/source.R:0
 #, fuzzy
 msgid "'local' argument must be TRUE, FALSE or an environment"
-msgstr "'local' должен быть TRUE, FALSE, или environment"
+msgstr "'local' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ TRUE, FALSE, п╦п╩п╦ environment"
 
 #. R/sort.R: stop("'method = \"quick\"' option is only for numeric 'x'")
 #: R/sort.R:0
 #, fuzzy
 msgid "'method = \"quick\"' option is only for numeric 'x'"
-msgstr "method=\"quick\" -- только для числовых 'x'"
+msgstr "method=\"quick\" -- я┌п╬п╩я▄п╨п╬ п╢п╩я▐ я┤п╦я│п╩п╬п╡я▀я┘ 'x'"
 
 #. R/sort.R: stop("'method = \"radix\"' option is only for integer 'x'")
 #: R/sort.R:0
 #, fuzzy
 msgid "'method = \"radix\"' option is only for integer 'x'"
-msgstr "method=\"radix\" -- только для целых 'x'"
+msgstr "method=\"radix\" -- я┌п╬п╩я▄п╨п╬ п╢п╩я▐ я├п╣п╩я▀я┘ 'x'"
 
 #. R/format.R: stop("'mode' argument must be \"double\" (\"real\"), \"integer\" or \"character\"")
 #: R/format.R:0
@@ -857,30 +858,30 @@ msgstr "method=\"radix\" -- только для целых 'x'"
 msgid ""
 "'mode' argument must be \"double\" (\"real\"), \"integer\" or \"character\""
 msgstr ""
-"'mode' должна быть \"double\" (\"real\"), \"integer\" или \"character\""
+"'mode' п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ \"double\" (\"real\"), \"integer\" п╦п╩п╦ \"character\""
 
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 #: R/diag.R:0
 msgid "'nrow' or 'ncol' cannot be specified when 'x' is a matrix"
-msgstr "'nrow' или 'ncol' нельзя определять, если 'x' -- матрица"
+msgstr "'nrow' п╦п╩п╦ 'ncol' п╫п╣п╩я▄п╥я▐ п╬п©я─п╣п╢п╣п╩я▐я┌я▄, п╣я│п╩п╦ 'x' -- п╪п╟я┌я─п╦я├п╟"
 
 #. R/namespace.R: stop("'ns' argument is not a namespace")
 #: R/namespace.R:0
 #, fuzzy
 msgid "'ns' argument is not a namespace"
-msgstr "это не пространство имен"
+msgstr "я█я┌п╬ п╫п╣ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬ п╦п╪п╣п╫"
 
 #. R/dataframe.R: stop("'options(\"stringsAsFactors\")' is not set to TRUE or FALSE")
 #: R/dataframe.R:0
 #, fuzzy
 msgid "'options(\"stringsAsFactors\")' is not set to TRUE or FALSE"
-msgstr "options('stringsAsFactors') не установлены в 'TRUE' или 'FALSE'"
+msgstr "options('stringsAsFactors') п╫п╣ я┐я│я┌п╟п╫п╬п╡п╩п╣п╫я▀ п╡ 'TRUE' п╦п╩п╦ 'FALSE'"
 
 #. R/connections.R: stop("'origin' argument must be one of 'start', 'current' or 'end'")
 #: R/connections.R:0
 #, fuzzy
 msgid "'origin' argument must be one of 'start', 'current' or 'end'"
-msgstr "'origin' должен быть одним из: 'start', 'current' или 'end'"
+msgstr "'origin' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╬п╢п╫п╦п╪ п╦п╥: 'start', 'current' п╦п╩п╦ 'end'"
 
 #. R/qr.R: stop("'qr' and 'y' arguments must have the same number of rows")
 #. R/qr.R: stop("'qr' and 'y' arguments must have the same number of rows")
@@ -890,21 +891,21 @@ msgstr "'origin' должен быть одним из: 'start', 'current' или 'end'"
 #: R/qr.R:0
 #, fuzzy
 msgid "'qr' and 'y' arguments must have the same number of rows"
-msgstr "'qr' и 'y' должны иметь одинаковое количество строк"
+msgstr "'qr' п╦ 'y' п╢п╬п╩п╤п╫я▀ п╦п╪п╣я┌я▄ п╬п╢п╦п╫п╟п╨п╬п╡п╬п╣ п╨п╬п╩п╦я┤п╣я│я┌п╡п╬ я│я┌я─п╬п╨"
 
 #. R/qr.R: stop("'qr()' function is not implemented for complex 'qr' argument")
 #. R/qr.R: stop("'qr()' function is not implemented for complex 'qr' argument")
 #: R/qr.R:0
 #, fuzzy
 msgid "'qr()' function is not implemented for complex 'qr' argument"
-msgstr "не реализован для комплексных 'qr'"
+msgstr "п╫п╣ я─п╣п╟п╩п╦п╥п╬п╡п╟п╫ п╢п╩я▐ п╨п╬п╪п©п╩п╣п╨я│п╫я▀я┘ 'qr'"
 
 #. R/qr.R: stop("'qr()' function is not supported for LAPACK QR")
 #. R/qr.R: stop("'qr()' function is not supported for LAPACK QR")
 #: R/qr.R:0
 #, fuzzy
 msgid "'qr()' function is not supported for LAPACK QR"
-msgstr "не поддерживается LAPACK QR"
+msgstr "п╫п╣ п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣я┌я│я▐ LAPACK QR"
 
 #. R/files.R: warning("'recursive' argument will be ignored as 'to' argument is not a single existing directory")
 #: R/files.R:0
@@ -913,14 +914,14 @@ msgid ""
 "'recursive' argument will be ignored as 'to' argument is not a single "
 "existing directory"
 msgstr ""
-"'recursive' будет проигнорирован, так как 'to' не является одиночным "
-"каталогом"
+"'recursive' п╠я┐п╢п╣я┌ п©я─п╬п╦пЁп╫п╬я─п╦я─п╬п╡п╟п╫, я┌п╟п╨ п╨п╟п╨ 'to' п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п╬п╢п╦п╫п╬я┤п╫я▀п╪ "
+"п╨п╟я┌п╟п╩п╬пЁп╬п╪"
 
 #. R/dataframe.R: stop("'row.names' argument should specify one of the variables")
 #: R/dataframe.R:0
 #, fuzzy
 msgid "'row.names' argument should specify one of the variables"
-msgstr "'row.names' должны определять одну из переменных"
+msgstr "'row.names' п╢п╬п╩п╤п╫я▀ п╬п©я─п╣п╢п╣п╩я▐я┌я▄ п╬п╢п╫я┐ п╦п╥ п©п╣я─п╣п╪п╣п╫п╫я▀я┘"
 
 #. R/solve.R: warning("'solve.default()' function called with an object of class \"qr\": use 'qr.solve()' function")
 #: R/solve.R:0
@@ -928,7 +929,7 @@ msgstr "'row.names' должны определять одну из переменных"
 msgid ""
 "'solve.default()' function called with an object of class \"qr\": use 'qr."
 "solve()' function"
-msgstr "объект \"qr\" передан в solve.default: используйте 'qr.solve'"
+msgstr "п╬п╠я┼п╣п╨я┌ \"qr\" п©п╣я─п╣п╢п╟п╫ п╡ solve.default: п╦я│п©п╬п╩я▄п╥я┐п╧я┌п╣ 'qr.solve'"
 
 #. R/dataframe.R: stop("'summary()' function is only defined on a data frame with all numeric variables")
 #: R/dataframe.R:0
@@ -936,7 +937,7 @@ msgstr "объект \"qr\" передан в solve.default: используйте 'qr.solve'"
 msgid ""
 "'summary()' function is only defined on a data frame with all numeric "
 "variables"
-msgstr "определено только для таблиц данных со всеми числовыми переменными"
+msgstr "п╬п©я─п╣п╢п╣п╩п╣п╫п╬ я┌п╬п╩я▄п╨п╬ п╢п╩я▐ я┌п╟п╠п╩п╦я├ п╢п╟п╫п╫я▀я┘ я│п╬ п╡я│п╣п╪п╦ я┤п╦я│п╩п╬п╡я▀п╪п╦ п©п╣я─п╣п╪п╣п╫п╫я▀п╪п╦"
 
 #. R/all.equal.R: gettextf("'target' and 'current' arguments differ in having response: %s, %s", length(target) ==     3L, length(current) == 3L)
 #: R/all.equal.R:0
@@ -952,7 +953,7 @@ msgstr ""
 #: R/all.equal.R:0
 #, fuzzy
 msgid "'target' argument is a subset of 'current' argument"
-msgstr "цель %s, текущая %s"
+msgstr "я├п╣п╩я▄ %s, я┌п╣п╨я┐я┴п╟я▐ %s"
 
 #. R/all.equal.R: gettextf("'target' argument's class is %s, 'current' argument's class is %s", data.class(target),     data.class(current))
 #. R/all.equal.R: gettextf("'target' argument's class is %s, 'current' argument's class is %s", data.class(target),     data.class(current))
@@ -966,48 +967,48 @@ msgstr ""
 #: R/all.equal.R:0
 #, fuzzy
 msgid "'target' argument's class is not list-like"
-msgstr "цель %s, текущая %s"
+msgstr "я├п╣п╩я▄ %s, я┌п╣п╨я┐я┴п╟я▐ %s"
 
 #. R/datetime.R: stop("'tim' argument is not character or numeric")
 #: R/datetime.R:0
 #, fuzzy
 msgid "'tim' argument is not character or numeric"
-msgstr "'tim' не является функцией или буквой"
+msgstr "'tim' п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ я└я┐п╫п╨я├п╦п╣п╧ п╦п╩п╦ п╠я┐п╨п╡п╬п╧"
 
 #. R/connections.R: stop("'timeout' argument must be NULL or a non-negative number")
 #: R/connections.R:0
 #, fuzzy
 msgid "'timeout' argument must be NULL or a non-negative number"
-msgstr "предложенный тайм-аут должен быть или NULL, или неотрицательным числом"
+msgstr "п©я─п╣п╢п╩п╬п╤п╣п╫п╫я▀п╧ я┌п╟п╧п╪-п╟я┐я┌ п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╦п╩п╦ NULL, п╦п╩п╦ п╫п╣п╬я┌я─п╦я├п╟я┌п╣п╩я▄п╫я▀п╪ я┤п╦я│п╩п╬п╪"
 
 #. R/connections.R: stop("'truncate.connection()' function can only truncate an open connection")
 #: R/connections.R:0
 #, fuzzy
 msgid "'truncate.connection()' function can only truncate an open connection"
-msgstr "могу обрезать только открытое соединение"
+msgstr "п╪п╬пЁя┐ п╬п╠я─п╣п╥п╟я┌я▄ я┌п╬п╩я▄п╨п╬ п╬я┌п╨я─я▀я┌п╬п╣ я│п╬п╣п╢п╦п╫п╣п╫п╦п╣"
 
 #. R/datetime.R: warning("'tzone' attributes are inconsistent")
 #: R/datetime.R:0
 msgid "'tzone' attributes are inconsistent"
-msgstr "противоречивые атрибуты 'tzone'"
+msgstr "п©я─п╬я┌п╦п╡п╬я─п╣я┤п╦п╡я▀п╣ п╟я┌я─п╦п╠я┐я┌я▀ 'tzone'"
 
 #. R/findInt.R: stop("'vec' argument contains NA values")
 #: R/findInt.R:0
 #, fuzzy
 msgid "'vec' argument contains NA values"
-msgstr "'vec' содержит NA"
+msgstr "'vec' я│п╬п╢п╣я─п╤п╦я┌ NA"
 
 #. R/findInt.R: stop("'vec' argument must be sorted non-decreasingly")
 #: R/findInt.R:0
 #, fuzzy
 msgid "'vec' argument must be sorted non-decreasingly"
-msgstr "'vec' должен быть сортирован не по уменьшению"
+msgstr "'vec' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я│п╬я─я┌п╦я─п╬п╡п╟п╫ п╫п╣ п©п╬ я┐п╪п╣п╫я▄я┬п╣п╫п╦я▌"
 
 #. R/library.R: message("'verbose' and 'quietly' arguments are both true; being verbose then ..")
 #: R/library.R:0
 #, fuzzy
 msgid "'verbose' and 'quietly' arguments are both true; being verbose then .."
-msgstr "'verbose' и 'quietly' -- оба true; значит, будем verbose..."
+msgstr "'verbose' п╦ 'quietly' -- п╬п╠п╟ true; п╥п╫п╟я┤п╦я┌, п╠я┐п╢п╣п╪ verbose..."
 
 #. R/source.R: warning("'verbose' argument is TRUE, 'echo' argument is not; ... coercing 'echo <- TRUE'")
 #: R/source.R:0
@@ -1016,25 +1017,25 @@ msgid ""
 "'verbose' argument is TRUE, 'echo' argument is not; ... coercing 'echo <- "
 "TRUE'"
 msgstr ""
-"'verbose' является TRUE, а 'echo' -- нет; ... преобразую 'echo <- TRUE'"
+"'verbose' я▐п╡п╩я▐п╣я┌я│я▐ TRUE, п╟ 'echo' -- п╫п╣я┌; ... п©я─п╣п╬п╠я─п╟п╥я┐я▌ 'echo <- TRUE'"
 
 #. R/unix/system.unix.R: warning("'which' command was not found on this platform")
 #: R/unix/system.unix.R:0
 #, fuzzy
 msgid "'which' command was not found on this platform"
-msgstr "'which' для этой платформы не найдена"
+msgstr "'which' п╢п╩я▐ я█я┌п╬п╧ п©п╩п╟я┌я└п╬я─п╪я▀ п╫п╣ п╫п╟п╧п╢п╣п╫п╟"
 
 #. R/connections.R: stop("'writeChar()' can only write character objects")
 #: R/connections.R:0
 #, fuzzy
 msgid "'writeChar()' can only write character objects"
-msgstr "могу записать только текстовые объекты"
+msgstr "п╪п╬пЁя┐ п╥п╟п©п╦я│п╟я┌я▄ я┌п╬п╩я▄п╨п╬ я┌п╣п╨я│я┌п╬п╡я▀п╣ п╬п╠я┼п╣п╨я┌я▀"
 
 #. R/rowsum.R: stop("'x' argument is not a data frame")
 #: R/rowsum.R:0
 #, fuzzy
 msgid "'x' argument is not a data frame"
-msgstr "не таблица данных"
+msgstr "п╫п╣ я┌п╟п╠п╩п╦я├п╟ п╢п╟п╫п╫я▀я┘"
 
 #. R/colSums.R: stop("'x' argument must be an array of at least two dimensions")
 #. R/colSums.R: stop("'x' argument must be an array of at least two dimensions")
@@ -1043,7 +1044,7 @@ msgstr "не таблица данных"
 #: R/colSums.R:0
 #, fuzzy
 msgid "'x' argument must be an array of at least two dimensions"
-msgstr "'x' должен быть матрицей по крайней мере с двумя измерениями"
+msgstr "'x' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╪п╟я┌я─п╦я├п╣п╧ п©п╬ п╨я─п╟п╧п╫п╣п╧ п╪п╣я─п╣ я│ п╢п╡я┐п╪я▐ п╦п╥п╪п╣я─п╣п╫п╦я▐п╪п╦"
 
 #. R/sort.R: stop("'x' argument must be atomic for 'sort.list()' function.\nHave you called 'sort()' function on a list?")
 #: R/sort.R:0
@@ -1052,8 +1053,8 @@ msgid ""
 "'x' argument must be atomic for 'sort.list()' function.\n"
 "Have you called 'sort()' function on a list?"
 msgstr ""
-"'x' для 'sort.list' должен быть атомарным\n"
-"Вы вызывали 'sort' на этот список?"
+"'x' п╢п╩я▐ 'sort.list' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╟я┌п╬п╪п╟я─п╫я▀п╪\n"
+"п▓я▀ п╡я▀п╥я▀п╡п╟п╩п╦ 'sort' п╫п╟ я█я┌п╬я┌ я│п©п╦я│п╬п╨?"
 
 #. R/summary.R: gettext("(Other)")
 #: R/summary.R:0
@@ -1063,28 +1064,28 @@ msgstr ""
 #. R/methodsSupport.R: message("(loaded the methods namespace)", domain = "R-base")
 #: R/methodsSupport.R:0
 msgid "(loaded the methods namespace)"
-msgstr "(загружено пространство имен методов)"
+msgstr "(п╥п╟пЁя─я┐п╤п╣п╫п╬ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬ п╦п╪п╣п╫ п╪п╣я┌п╬п╢п╬п╡)"
 
 #. R/library.R: gettext(" ** No title available ** ")
 #: R/library.R:0
 #, fuzzy
 msgid "** No title available **"
-msgstr "Трассировка недоступна"
+msgstr "п╒я─п╟я│я│п╦я─п╬п╡п╨п╟ п╫п╣п╢п╬я│я┌я┐п©п╫п╟"
 
 #. R/attach.R: warning("*** 'pos=1' is not possible; setting 'pos=2' for now.", "\n", "*** Note that 'pos=1' will give an error in the future",     sep = "")
 #: R/attach.R:0
 msgid "*** 'pos=1' is not possible; setting 'pos=2' for now."
-msgstr "*** 'pos=1' невозможна; использую 'pos=2'."
+msgstr "*** 'pos=1' п╫п╣п╡п╬п╥п╪п╬п╤п╫п╟; п╦я│п©п╬п╩я▄п╥я┐я▌ 'pos=2'."
 
 #. R/attach.R: warning("*** 'pos=1' is not possible; setting 'pos=2' for now.", "\n", "*** Note that 'pos=1' will give an error in the future",     sep = "")
 #: R/attach.R:0
 msgid "*** Note that 'pos=1' will give an error in the future"
-msgstr "*** Заметьте, что в будущем 'pos=1' будет приводить к ошибке"
+msgstr "*** п≈п╟п╪п╣я┌я▄я┌п╣, я┤я┌п╬ п╡ п╠я┐п╢я┐я┴п╣п╪ 'pos=1' п╠я┐п╢п╣я┌ п©я─п╦п╡п╬п╢п╦я┌я▄ п╨ п╬я┬п╦п╠п╨п╣"
 
 #. R/../../../../share/R/REMOVE.R: stop("-l option without value", call. = FALSE)
 #: R/../../../../share/R/REMOVE.R:0
 msgid "-l option without value"
-msgstr "опция -l без значения"
+msgstr "п╬п©я├п╦я▐ -l п╠п╣п╥ п╥п╫п╟я┤п╣п╫п╦я▐"
 
 #. R/summary.R: gettext("1st Qu.")
 #. R/summary.R: gettext("1st Qu.")
@@ -1114,29 +1115,29 @@ msgstr ""
 #. R/version.R: gettext("<0 elements>")
 #: R/version.R:0
 msgid "<0 elements>"
-msgstr "<0 элементов>"
+msgstr "<0 я█п╩п╣п╪п╣п╫я┌п╬п╡>"
 
 #. R/dataframe.R: gettext("<0 rows> (or 0-length row.names)", domain = "R-base")
 #: R/dataframe.R:0
 msgid "<0 rows> (or 0-length row.names)"
-msgstr "<0 строк> (или 'row.names' нулевой длины)"
+msgstr "<0 я│я┌я─п╬п╨> (п╦п╩п╦ 'row.names' п╫я┐п╩п╣п╡п╬п╧ п╢п╩п╦п╫я▀)"
 
 #. R/conditions.R: gettextf("<restart: %s>", x[[1L]], domain = "R-base")
 #: R/conditions.R:0
 #, fuzzy
 msgid "<restart: %s>"
-msgstr "ВременнАя маска '"
+msgstr "п▓я─п╣п╪п╣п╫п╫п░я▐ п╪п╟я│п╨п╟ '"
 
 #. R/library.R: gettextf("\nAttaching package: %s\n", sQuote(package))
 #: R/library.R:0
 #, fuzzy
 msgid "Attaching package: %s"
-msgstr "Присоединяю пакет: %s"
+msgstr "п÷я─п╦я│п╬п╣п╢п╦п╫я▐я▌ п©п╟п╨п╣я┌: %s"
 
 #. R/load.R: gettextf("Attempting to load the environment %s", sQuote(info))
 #: R/load.R:0
 msgid "Attempting to load the environment %s"
-msgstr "Пытаюсь загрузить окружение %s"
+msgstr "п÷я▀я┌п╟я▌я│я▄ п╥п╟пЁя─я┐п╥п╦я┌я▄ п╬п╨я─я┐п╤п╣п╫п╦п╣ %s"
 
 #. R/all.equal.R: gettext("Attributes:", domain = "R-base")
 #: R/all.equal.R:0
@@ -1183,7 +1184,7 @@ msgstr ""
 #: R/all.equal.R:0
 #, fuzzy
 msgid "Complex: lengths (%d, %d) differ"
-msgstr "длины аргументов различаются"
+msgstr "п╢п╩п╦п╫я▀ п╟я─пЁя┐п╪п╣п╫я┌п╬п╡ я─п╟п╥п╩п╦я┤п╟я▌я┌я│я▐"
 
 #. R/print.R: gettextf("Component %d", seq.int(ll), domain = "R-base")
 #: R/print.R:0
@@ -1194,40 +1195,40 @@ msgstr ""
 #: R/library.R:0
 #, fuzzy
 msgid "DLL %s is already loaded"
-msgstr "DLL %s уже загружена"
+msgstr "DLL %s я┐п╤п╣ п╥п╟пЁя─я┐п╤п╣п╫п╟"
 
 #. R/library.R: gettextf("DLL %s was not found", sQuote(chname1))
 #: R/library.R:0
 #, fuzzy
 msgid "DLL %s was not found"
-msgstr "DLL %s не найден"
+msgstr "DLL %s п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #. R/library.R: gettextf("DLL %s was not found: maybe not installed for this architecture?", sQuote(chname))
 #: R/library.R:0
 #, fuzzy
 msgid "DLL %s was not found: maybe not installed for this architecture?"
-msgstr "DLL %s не найден: может быть, не установлен в этой архитектуре?"
+msgstr "DLL %s п╫п╣ п╫п╟п╧п╢п╣п╫: п╪п╬п╤п╣я┌ п╠я▀я┌я▄, п╫п╣ я┐я│я┌п╟п╫п╬п╡п╩п╣п╫ п╡ я█я┌п╬п╧ п╟я─я┘п╦я┌п╣п╨я┌я┐я─п╣?"
 
 #. R/library.R: gettextf("DLL %s was not loaded", sQuote(chname1))
 #: R/library.R:0
 msgid "DLL %s was not loaded"
-msgstr "DLL %s не загружен"
+msgstr "DLL %s п╫п╣ п╥п╟пЁя─я┐п╤п╣п╫"
 
 #. R/library.R: gettext("Description:")
 #: R/library.R:0
 msgid "Description:"
-msgstr "Определение:"
+msgstr "п·п©я─п╣п╢п╣п╩п╣п╫п╦п╣:"
 
 #. R/library.R: gettextf("Documentation for package %s", sQuote(x$name), domain = "R-base")
 #: R/library.R:0
 msgid "Documentation for package %s"
-msgstr "Документация для пакета %s"
+msgstr "п■п╬п╨я┐п╪п╣п╫я┌п╟я├п╦я▐ п╢п╩я▐ п©п╟п╨п╣я┌п╟ %s"
 
 #. R/srcfile.R: gettextf("Encoding: %s", dQuote(object$encoding), domain = "R-base")
 #: R/srcfile.R:0
 #, fuzzy
 msgid "Encoding: %s"
-msgstr "выбрана кодировка = \"%s\""
+msgstr "п╡я▀п╠я─п╟п╫п╟ п╨п╬п╢п╦я─п╬п╡п╨п╟ = \"%s\""
 
 #. R/srcfile.R: gettextf("Encoding: %s, re-encoded to %s", dQuote(object$encoding), dQuote(object$Enc),     domain = "R-base")
 #: R/srcfile.R:0
@@ -1255,36 +1256,36 @@ msgstr ""
 #: R/../../../../share/R/REMOVE.R:0
 #, fuzzy
 msgid "Error: cannot cd to directory %s"
-msgstr "ОШИБКА: не могу зайти в каталог"
+msgstr "п·п╗п≤п▒п п░: п╫п╣ п╪п╬пЁя┐ п╥п╟п╧я┌п╦ п╡ п╨п╟я┌п╟п╩п╬пЁ"
 
 #. R/../../../../share/R/REMOVE.R: stop("Error: no packages specified", domain = "R-base", call. = FALSE)
 #: R/../../../../share/R/REMOVE.R:0
 #, fuzzy
 msgid "Error: no packages specified"
-msgstr "ОШИБКА: пакеты не указаны"
+msgstr "п·п╗п≤п▒п п░: п©п╟п╨п╣я┌я▀ п╫п╣ я┐п╨п╟п╥п╟п╫я▀"
 
 #. R/../../../../share/R/REMOVE.R: gettextf("Error: no permission to remove from directory %s", sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
 #, fuzzy
 msgid "Error: no permission to remove from directory %s"
-msgstr "ОШИБКА: нет прав на удаление каталога"
+msgstr "п·п╗п≤п▒п п░: п╫п╣я┌ п©я─п╟п╡ п╫п╟ я┐п╢п╟п╩п╣п╫п╦п╣ п╨п╟я┌п╟п╩п╬пЁп╟"
 
 #. R/../../../../share/R/examples-header.R: stop("F used instead of FALSE", domain = "R-base")
 #: R/../../../../share/R/examples-header.R:0
 msgid "F used instead of FALSE"
-msgstr "F использовано вместо FALSE"
+msgstr "F п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╬ п╡п╪п╣я│я┌п╬ FALSE"
 
 #. R/namespace.R: gettextf("Failed with error:  %s", sQuote(conditionMessage(value)), domain = "R-base")
 #: R/namespace.R:0
 #, fuzzy
 msgid "Failed with error:  %s"
-msgstr "выполнение '%s' прекращено: ошибка с кодом %d"
+msgstr "п╡я▀п©п╬п╩п╫п╣п╫п╦п╣ '%s' п©я─п╣п╨я─п╟я┴п╣п╫п╬: п╬я┬п╦п╠п╨п╟ я│ п╨п╬п╢п╬п╪ %d"
 
 #. R/Defunct.R: gettextf("Function %s is defunct.\n", sQuote(as.character(sys.call(sys.parent())[[1L]])))
 #: R/Defunct.R:0
 #, fuzzy
 msgid "Function %s is defunct."
-msgstr "'%s' больше не существует."
+msgstr "'%s' п╠п╬п╩я▄я┬п╣ п╫п╣ я│я┐я┴п╣я│я┌п╡я┐п╣я┌."
 
 #. R/Defunct.R: gettextf("Function %s is defunct.\nUse function %s instead.\n", sQuote(as.character(sys.call(sys.parent())[[1L]])),     sQuote(new))
 #: R/Defunct.R:0
@@ -1292,13 +1293,13 @@ msgstr "'%s' больше не существует."
 msgid ""
 "Function %s is defunct.\n"
 "Use function %s instead."
-msgstr "'%s' больше не существует."
+msgstr "'%s' п╠п╬п╩я▄я┬п╣ п╫п╣ я│я┐я┴п╣я│я┌п╡я┐п╣я┌."
 
 #. R/Deprecated.R: gettextf("Function %s is deprecated.\n", sQuote(old))
 #: R/Deprecated.R:0
 #, fuzzy
 msgid "Function %s is deprecated."
-msgstr "'%s' устарел"
+msgstr "'%s' я┐я│я┌п╟я─п╣п╩"
 
 #. R/Deprecated.R: gettextf("Function %s is deprecated.\nUse function %s instead.\n", sQuote(old), sQuote(new))
 #: R/Deprecated.R:0
@@ -1306,13 +1307,13 @@ msgstr "'%s' устарел"
 msgid ""
 "Function %s is deprecated.\n"
 "Use function %s instead."
-msgstr "'%s' устарел"
+msgstr "'%s' я┐я│я┌п╟я─п╣п╩"
 
 #. R/library.R: gettextf("Further information is available in the following vignettes in directory %s:",     sQuote(file.path(x$path, "doc")))
 #: R/library.R:0
 msgid ""
 "Further information is available in the following vignettes in directory %s:"
-msgstr "Дальнейшая информация доступна в следующих миниатюрах из папки %s:"
+msgstr "п■п╟п╩я▄п╫п╣п╧я┬п╟я▐ п╦п╫я└п╬я─п╪п╟я├п╦я▐ п╢п╬я│я┌я┐п©п╫п╟ п╡ я│п╩п╣п╢я┐я▌я┴п╦я┘ п╪п╦п╫п╦п╟я┌я▌я─п╟я┘ п╦п╥ п©п╟п©п╨п╦ %s:"
 
 #. R/warnings.R: gettextf("In command %s", sQuote(temp[1L]), domain = "R-base")
 #: R/warnings.R:0
@@ -1322,12 +1323,12 @@ msgstr ""
 #. R/library.R: gettext("Index:")
 #: R/library.R:0
 msgid "Index:"
-msgstr "Индекс:"
+msgstr "п≤п╫п╢п╣п╨я│:"
 
 #. R/library.R: gettextf("Information on package %s", sQuote(x$name), domain = "R-base")
 #: R/library.R:0
 msgid "Information on package %s"
-msgstr "Информация по пакету %s"
+msgstr "п≤п╫я└п╬я─п╪п╟я├п╦я▐ п©п╬ п©п╟п╨п╣я┌я┐ %s"
 
 #. R/dcf.R: gettextf("Invalid DCF format.\nContinuation lines must not start a record.\nOffending lines start with:\n%s",     paste0("  ", lines, collapse = "\n"))
 #: R/dcf.R:0
@@ -1337,9 +1338,9 @@ msgid ""
 "Offending lines start with:\n"
 "%s"
 msgstr ""
-"Неправильный формат DCF.\n"
-"Продолжающиеся строки не должны начинать запись.\n"
-"Неподходящие строки начинаются с:\n"
+"п²п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я└п╬я─п╪п╟я┌ DCF.\n"
+"п÷я─п╬п╢п╬п╩п╤п╟я▌я┴п╦п╣я│я▐ я│я┌я─п╬п╨п╦ п╫п╣ п╢п╬п╩п╤п╫я▀ п╫п╟я┤п╦п╫п╟я┌я▄ п╥п╟п©п╦я│я▄.\n"
+"п²п╣п©п╬п╢я┘п╬п╢я▐я┴п╦п╣ я│я┌я─п╬п╨п╦ п╫п╟я┤п╦п╫п╟я▌я┌я│я▐ я│:\n"
 "%s"
 
 #. R/dcf.R: gettextf("Invalid DCF format.\nRegular lines must have a tag.\nOffending lines start with:\n%s",     paste0("  ", lines, collapse = "\n"))
@@ -1350,9 +1351,9 @@ msgid ""
 "Offending lines start with:\n"
 "%s"
 msgstr ""
-"Неправильный формат DCF.\n"
-"Обычные строки должны иметь тег.\n"
-"Неподходящие строки начинаются с:\n"
+"п²п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я└п╬я─п╪п╟я┌ DCF.\n"
+"п·п╠я▀я┤п╫я▀п╣ я│я┌я─п╬п╨п╦ п╢п╬п╩п╤п╫я▀ п╦п╪п╣я┌я▄ я┌п╣пЁ.\n"
+"п²п╣п©п╬п╢я┘п╬п╢я▐я┴п╦п╣ я│я┌я─п╬п╨п╦ п╫п╟я┤п╦п╫п╟я▌я┌я│я▐ я│:\n"
 "%s"
 
 #. R/summary.R: gettext("Length", domain = "R-base")
@@ -1390,7 +1391,7 @@ msgstr ""
 #: R/library.R:0
 #, fuzzy
 msgid "License for %s"
-msgstr "Лицензия"
+msgstr "п⌡п╦я├п╣п╫п╥п╦я▐"
 
 #. R/load.R: gettext("Loading objects:", domain = "R-base")
 #: R/load.R:0
@@ -1400,13 +1401,13 @@ msgstr ""
 #. R/namespace.R: gettextf("Loading required namespace: %s", sQuote(package), domain = "R-base")
 #: R/namespace.R:0
 msgid "Loading required namespace: %s"
-msgstr "Загрузка требуемого пакета: %s"
+msgstr "п≈п╟пЁя─я┐п╥п╨п╟ я┌я─п╣п╠я┐п╣п╪п╬пЁп╬ п©п╟п╨п╣я┌п╟: %s"
 
 #. R/library.R: gettextf("Loading required package: %s", sQuote(package), domain = "R-base")
 #. R/library.R: gettextf("Loading required package: %s", sQuote(pkg), domain = "R-base")
 #: R/library.R:0
 msgid "Loading required package: %s"
-msgstr "Загрузка требуемого пакета: %s"
+msgstr "п≈п╟пЁя─я┐п╥п╨п╟ я┌я─п╣п╠я┐п╣п╪п╬пЁп╬ п©п╟п╨п╣я┌п╟: %s"
 
 #. R/duplicated.R: gettextf("MARGIN = %d is invalid for dim = %d", MARGIN, dx)
 #. R/duplicated.R: gettextf("MARGIN = %d is invalid for dim = %d", MARGIN, dx)
@@ -1414,7 +1415,7 @@ msgstr "Загрузка требуемого пакета: %s"
 #: R/duplicated.R:0
 #, fuzzy
 msgid "MARGIN = %d is invalid for dim = %d"
-msgstr "это неправильно для dim ="
+msgstr "я█я┌п╬ п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬ п╢п╩я▐ dim ="
 
 #. R/summary.R: gettext("Max.")
 #. R/summary.R: gettext("Max.")
@@ -1498,7 +1499,7 @@ msgstr ""
 #: R/all.equal.R:0
 #, fuzzy
 msgid "Modes of 'target' and 'current' arguments:"
-msgstr "цель %s, текущая %s"
+msgstr "я├п╣п╩я▄ %s, я┌п╣п╨я┐я┴п╟я▐ %s"
 
 #. R/all.equal.R: gettext("Modes: ", domain = "R-base")
 #: R/all.equal.R:0
@@ -1527,13 +1528,13 @@ msgstr ""
 #: R/dynload.R:0
 #, fuzzy
 msgid "No DLL currently loaded with name or path %s"
-msgstr "Сейчас не было загружено DLL с именем или путем"
+msgstr "п║п╣п╧я┤п╟я│ п╫п╣ п╠я▀п╩п╬ п╥п╟пЁя─я┐п╤п╣п╫п╬ DLL я│ п╦п╪п╣п╫п╣п╪ п╦п╩п╦ п©я┐я┌п╣п╪"
 
 #. R/interaction.R: stop("No factors specified")
 #: R/interaction.R:0
 #, fuzzy
 msgid "No factors specified"
-msgstr "не определена DLL"
+msgstr "п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫п╟ DLL"
 
 #. R/namespace.R: gettextf("No generic function was found corresponding to requested imported methods for function %s from package %s (malformed exports?)",     sQuote(g), sQuote(pkg))
 #: R/namespace.R:0
@@ -1542,19 +1543,19 @@ msgid ""
 "No generic function was found corresponding to requested imported methods "
 "for function %s from package %s (malformed exports?)"
 msgstr ""
-"Не найдено общей функции, соответствующей запрошенным методам импорта для "
-"\"%s\" из пакета \"%s\" (испорчен вывод?)"
+"п²п╣ п╫п╟п╧п╢п╣п╫п╬ п╬п╠я┴п╣п╧ я└я┐п╫п╨я├п╦п╦, я│п╬п╬я┌п╡п╣я┌я│я┌п╡я┐я▌я┴п╣п╧ п╥п╟п©я─п╬я┬п╣п╫п╫я▀п╪ п╪п╣я┌п╬п╢п╟п╪ п╦п╪п©п╬я─я┌п╟ п╢п╩я▐ "
+"\"%s\" п╦п╥ п©п╟п╨п╣я┌п╟ \"%s\" (п╦я│п©п╬я─я┤п╣п╫ п╡я▀п╡п╬п╢?)"
 
 #. R/namespace.R: gettextf("No methods were found in package %s for requests: %s", sQuote(pkg), paste(vars[is.na(match(vars,     allFuns))], collapse = ", "))
 #: R/namespace.R:0
 #, fuzzy
 msgid "No methods were found in package %s for requests: %s"
-msgstr "В \"%s\" не найдено методов для запросов: %s"
+msgstr "п▓ \"%s\" п╫п╣ п╫п╟п╧п╢п╣п╫п╬ п╪п╣я┌п╬п╢п╬п╡ п╢п╩я▐ п╥п╟п©я─п╬я│п╬п╡: %s"
 
 #. R/traceback.R: gettext("No traceback available", domain = "R-base")
 #: R/traceback.R:0
 msgid "No traceback available"
-msgstr "Трассировка недоступна"
+msgstr "п╒я─п╟я│я│п╦я─п╬п╡п╨п╟ п╫п╣п╢п╬я│я┌я┐п©п╫п╟"
 
 #. R/table.R: gettext("Number of cases in table: ", domain = "R-base")
 #: R/table.R:0
@@ -1570,25 +1571,25 @@ msgstr ""
 #: R/all.equal.R:0
 #, fuzzy
 msgid "Numeric: lengths (%d, %d) differ"
-msgstr "длины аргументов различаются"
+msgstr "п╢п╩п╦п╫я▀ п╟я─пЁя┐п╪п╣п╫я┌п╬п╡ я─п╟п╥п╩п╦я┤п╟я▌я┌я│я▐"
 
 #. R/library.R: gettextf("Package %s version %s cannot be unloaded", sQuote(package), oldversion,     domain = "R-base")
 #: R/library.R:0
 #, fuzzy
 msgid "Package %s version %s cannot be unloaded"
-msgstr "пакет %s не загружен"
+msgstr "п©п╟п╨п╣я┌ %s п╫п╣ п╥п╟пЁя─я┐п╤п╣п╫"
 
 #. R/library.R: gettextf("Packages in library %s:\n", sQuote(lib))
 #: R/library.R:0
 #, fuzzy
 msgid "Packages in library %s:"
-msgstr "%sПакеты в библиотеке %s:"
+msgstr "%sп÷п╟п╨п╣я┌я▀ п╡ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╣ %s:"
 
 #. R/dataframe.R: gettextf("Partial match of '%s' to '%s' in data frame", name, names[pmatch(name,     names)])
 #: R/dataframe.R:0
 #, fuzzy
 msgid "Partial match of '%s' to '%s' in data frame"
-msgstr "нечисловая переменная переменная в таблице данных:"
+msgstr "п╫п╣я┤п╦я│п╩п╬п╡п╟я▐ п©п╣я─п╣п╪п╣п╫п╫п╟я▐ п©п╣я─п╣п╪п╣п╫п╫п╟я▐ п╡ я┌п╟п╠п╩п╦я├п╣ п╢п╟п╫п╫я▀я┘:"
 
 #. R/files.R: gettext("R Information", domain = "R-base")
 #: R/files.R:0
@@ -1608,25 +1609,25 @@ msgstr ""
 #. R/library.R: gettext("R packages available")
 #: R/library.R:0
 msgid "R packages available"
-msgstr "доступные R-пакеты"
+msgstr "п╢п╬я│я┌я┐п©п╫я▀п╣ R-п©п╟п╨п╣я┌я▀"
 
 #. R/taskCallback.R: gettext("Registering 'evaluate' as low-level callback", domain = "R-base")
 #: R/taskCallback.R:0
 #, fuzzy
 msgid "Registering 'evaluate' as low-level callback"
-msgstr "Регистрация подсчитывает низкоуровневый обратный вызов"
+msgstr "п═п╣пЁп╦я│я┌я─п╟я├п╦я▐ п©п╬п╢я│я┤п╦я┌я▀п╡п╟п╣я┌ п╫п╦п╥п╨п╬я┐я─п╬п╡п╫п╣п╡я▀п╧ п╬п╠я─п╟я┌п╫я▀п╧ п╡я▀п╥п╬п╡"
 
 #. R/taskCallback.R: gettextf("Removing %s", paste(discard, collapse = ", "), domain = "R-base")
 #: R/taskCallback.R:0
 #, fuzzy
 msgid "Removing %s"
-msgstr "Удаление"
+msgstr "пёп╢п╟п╩п╣п╫п╦п╣"
 
 #. R/../../../../share/R/REMOVE.R: gettextf("Removing from library %s", sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
 #, fuzzy
 msgid "Removing from library %s"
-msgstr "Удаляю из библиотеки"
+msgstr "пёп╢п╟п╩я▐я▌ п╦п╥ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╦"
 
 #. R/rle.R: gettext("Run Length Encoding", domain = "R-base")
 #: R/rle.R:0
@@ -1637,38 +1638,38 @@ msgstr ""
 #: R/namespace.R:0
 #, fuzzy
 msgid "S3 method %s was declared but was not found"
-msgstr "S3 метод %s объявлен, но не найден"
+msgstr "S3 п╪п╣я┌п╬п╢ %s п╬п╠я┼я▐п╡п╩п╣п╫, п╫п╬ п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #. R/Defunct.R: gettext("See help(\"Defunct\")")
 #: R/Defunct.R:0
 msgid "See help(\"Defunct\")"
-msgstr "См. help(\"Defunct\")"
+msgstr "п║п╪. help(\"Defunct\")"
 
 #. R/Defunct.R: gettextf("See help(\"Defunct\") and help(\"%s-defunct\").", package)
 #: R/Defunct.R:0
 msgid "See help(\"Defunct\") and help(\"%s-defunct\")."
-msgstr "См. help(\"Defunct\") и help(\"%s-defunct\")."
+msgstr "п║п╪. help(\"Defunct\") п╦ help(\"%s-defunct\")."
 
 #. R/Deprecated.R: gettext("See help(\"Deprecated\")")
 #: R/Deprecated.R:0
 msgid "See help(\"Deprecated\")"
-msgstr "См. help(\"Deprecated\")"
+msgstr "п║п╪. help(\"Deprecated\")"
 
 #. R/Deprecated.R: gettextf("See help(\"Deprecated\") and help(\"%s-deprecated\").", package)
 #: R/Deprecated.R:0
 msgid "See help(\"Deprecated\") and help(\"%s-deprecated\")."
-msgstr "См. help(\"Deprecated\") и help(\"%s-deprecated\")."
+msgstr "п║п╪. help(\"Deprecated\") п╦ help(\"%s-deprecated\")."
 
 #. R/load.R: message("Specified environment not found: using '.GlobalEnv' instead")
 #: R/load.R:0
 #, fuzzy
 msgid "Specified environment not found: using '.GlobalEnv' instead"
-msgstr "не найдено: использую .GlobalEnv"
+msgstr "п╫п╣ п╫п╟п╧п╢п╣п╫п╬: п╦я│п©п╬п╩я▄п╥я┐я▌ .GlobalEnv"
 
 #. R/../../../../share/R/examples-header.R: stop("T used instead of TRUE", domain = "R-base")
 #: R/../../../../share/R/examples-header.R:0
 msgid "T used instead of TRUE"
-msgstr "T использовано вместо TRUE"
+msgstr "T п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╬ п╡п╪п╣я│я┌п╬ TRUE"
 
 #. R/table.R: gettext("Test for independence of all factors:", domain = "R-base")
 #: R/table.R:0
@@ -1678,7 +1679,7 @@ msgstr ""
 #. R/library.R: gettextf("This is R %s, package %s needs %s %s", current, sQuote(pkgname), dep$op,     target)
 #: R/library.R:0
 msgid "This is R %s, package %s needs %s %s"
-msgstr "Это -- R версии %s, а пакету %s нужен %s %s"
+msgstr "п╜я┌п╬ -- R п╡п╣я─я│п╦п╦ %s, п╟ п©п╟п╨п╣я┌я┐ %s п╫я┐п╤п╣п╫ %s %s"
 
 #. R/datetime.R: gettextf("Time difference of %s days", format(unclass(x), digits = digits), domain = "R-base")
 #: R/datetime.R:0
@@ -1734,19 +1735,19 @@ msgstr ""
 #: R/../../../../share/R/examples-footer.R:0
 #, fuzzy
 msgid "Time elapsed:"
-msgstr "прошло"
+msgstr "п©я─п╬я┬п╩п╬"
 
 #. R/srcfile.R: gettextf("Timestamp of %s has changed", sQuote(srcfile$filename))
 #: R/srcfile.R:0
 #, fuzzy
 msgid "Timestamp of %s has changed"
-msgstr "ВременнАя маска '"
+msgstr "п▓я─п╣п╪п╣п╫п╫п░я▐ п╪п╟я│п╨п╟ '"
 
 #. R/srcfile.R: gettextf("Timestamp: %s", format(object$timestamp, usetz = TRUE), domain = "R-base")
 #: R/srcfile.R:0
 #, fuzzy
 msgid "Timestamp: %s"
-msgstr "ВременнАя маска '"
+msgstr "п▓я─п╣п╪п╣п╫п╫п░я▐ п╪п╟я│п╨п╟ '"
 
 #. R/time.R: gettextf("Timing stopped at: %s", ppt(proc.time() - time), domain = "R-base")
 #: R/time.R:0
@@ -1762,12 +1763,12 @@ msgstr ""
 #. R/load.R: warning("Use of save versions prior to 2 is deprecated", domain = "R-base")
 #: R/load.R:0
 msgid "Use of save versions prior to 2 is deprecated"
-msgstr "Использование сохраненных версий, более ранних чем 2, не одобряется"
+msgstr "п≤я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦п╣ я│п╬я┘я─п╟п╫п╣п╫п╫я▀я┘ п╡п╣я─я│п╦п╧, п╠п╬п╩п╣п╣ я─п╟п╫п╫п╦я┘ я┤п╣п╪ 2, п╫п╣ п╬п╢п╬п╠я─я▐п╣я┌я│я▐"
 
 #. R/load.R: message("[Previously saved workspace restored]", "\n", sep = "")
 #: R/load.R:0
 msgid "[Previously saved workspace restored]"
-msgstr "[Загружено ранее сохраненное рабочее пространство]"
+msgstr "[п≈п╟пЁя─я┐п╤п╣п╫п╬ я─п╟п╫п╣п╣ я│п╬я┘я─п╟п╫п╣п╫п╫п╬п╣ я─п╟п╠п╬я┤п╣п╣ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬]"
 
 #. R/source.R: gettext("[TRUNCATED] ", domain = "R-base")
 #: R/source.R:0
@@ -1785,17 +1786,17 @@ msgstr ""
 #: R/message.R:0 R/stop.R:0
 #, fuzzy
 msgid "additional arguments ignored in '%s' function"
-msgstr "дополнительные аргументы пропущены в stop()"
+msgstr "п╢п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п©я─п╬п©я┐я┴п╣п╫я▀ п╡ stop()"
 
 #. R/getenv.R: stop("all arguments must be named")
 #: R/getenv.R:0
 msgid "all arguments must be named"
-msgstr "все аргументы должны быть именованы"
+msgstr "п╡я│п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ п╦п╪п╣п╫п╬п╡п╟п╫я▀"
 
 #. R/table.R: stop("all arguments must have the same length")
 #: R/table.R:0
 msgid "all arguments must have the same length"
-msgstr "все аргументы должны иметь одинаковую длину"
+msgstr "п╡я│п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╢п╬п╩п╤п╫я▀ п╦п╪п╣я┌я▄ п╬п╢п╦п╫п╟п╨п╬п╡я┐я▌ п╢п╩п╦п╫я┐"
 
 #. R/pmax.R: warning("an argument will be fractionally recycled")
 #. R/pmax.R: warning("an argument will be fractionally recycled")
@@ -1803,34 +1804,34 @@ msgstr "все аргументы должны иметь одинаковую длину"
 #. R/pmax.R: warning("an argument will be fractionally recycled")
 #: R/pmax.R:0
 msgid "an argument will be fractionally recycled"
-msgstr "аргумент будет частично зациклен"
+msgstr "п╟я─пЁя┐п╪п╣п╫я┌ п╠я┐п╢п╣я┌ я┤п╟я│я┌п╦я┤п╫п╬ п╥п╟я├п╦п╨п╩п╣п╫"
 
 #. R/autoload.R: stop("an object with that name already exists")
 #: R/autoload.R:0
 msgid "an object with that name already exists"
-msgstr "объект с таким именем уже есть"
+msgstr "п╬п╠я┼п╣п╨я┌ я│ я┌п╟п╨п╦п╪ п╦п╪п╣п╫п╣п╪ я┐п╤п╣ п╣я│я┌я▄"
 
 #. R/connections.R: stop("argument 'object' must deparse to a single character string")
 #: R/connections.R:0
 msgid "argument 'object' must deparse to a single character string"
-msgstr "аргумент 'object' должно быть возможно сконвертировать в строку"
+msgstr "п╟я─пЁя┐п╪п╣п╫я┌ 'object' п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ п╡п╬п╥п╪п╬п╤п╫п╬ я│п╨п╬п╫п╡п╣я─я┌п╦я─п╬п╡п╟я┌я▄ п╡ я│я┌я─п╬п╨я┐"
 
 #. R/sort.R: stop("argument lengths differ")
 #: R/sort.R:0
 msgid "argument lengths differ"
-msgstr "длины аргументов различаются"
+msgstr "п╢п╩п╦п╫я▀ п╟я─пЁя┐п╪п╣п╫я┌п╬п╡ я─п╟п╥п╩п╦я┤п╟я▌я┌я│я▐"
 
 #. R/LAPACK.R: stop("argument passed to 'La.svd()' function must be logical, numeric or complex")
 #: R/LAPACK.R:0
 #, fuzzy
 msgid ""
 "argument passed to 'La.svd()' function must be logical, numeric or complex"
-msgstr "аргумент 'La.svd' должен быть действительным или комплексным числом"
+msgstr "п╟я─пЁя┐п╪п╣п╫я┌ 'La.svd' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╣п╧я│я┌п╡п╦я┌п╣п╩я▄п╫я▀п╪ п╦п╩п╦ п╨п╬п╪п©п╩п╣п╨я│п╫я▀п╪ я┤п╦я│п╩п╬п╪"
 
 #. R/unix/system.unix.R: message("arguments 'minimized' and 'invisible' are for Windows only")
 #: R/unix/system.unix.R:0
 msgid "arguments 'minimized' and 'invisible' are for Windows only"
-msgstr "аргументы у 'minimized' и 'invisible' -- только для Windows"
+msgstr "п╟я─пЁя┐п╪п╣п╫я┌я▀ я┐ 'minimized' п╦ 'invisible' -- я┌п╬п╩я▄п╨п╬ п╢п╩я▐ Windows"
 
 #. R/unix/system.unix.R: message("arguments 'show.output.on.console', 'minimized' and 'invisible' are for Windows only")
 #: R/unix/system.unix.R:0
@@ -1838,19 +1839,19 @@ msgid ""
 "arguments 'show.output.on.console', 'minimized' and 'invisible' are for "
 "Windows only"
 msgstr ""
-"аргументы у 'show.output.on.console', 'minimized' и 'invisible' только для "
+"п╟я─пЁя┐п╪п╣п╫я┌я▀ я┐ 'show.output.on.console', 'minimized' п╦ 'invisible' я┌п╬п╩я▄п╨п╬ п╢п╩я▐ "
 "Windows"
 
 #. R/dataframe.R: gettextf("arguments imply differing number of rows: %s", paste(unique(nrows), collapse = ", "))
 #: R/dataframe.R:0
 #, fuzzy
 msgid "arguments imply differing number of rows: %s"
-msgstr "аргументы подразумевают разные количества строк:"
+msgstr "п╟я─пЁя┐п╪п╣п╫я┌я▀ п©п╬п╢я─п╟п╥я┐п╪п╣п╡п╟я▌я┌ я─п╟п╥п╫я▀п╣ п╨п╬п╩п╦я┤п╣я│я┌п╡п╟ я│я┌я─п╬п╨:"
 
 #. R/tapply.R: stop("arguments must have same length")
 #: R/tapply.R:0
 msgid "arguments must have same length"
-msgstr "аргументы должны иметь одинаковую длину"
+msgstr "п╟я─пЁя┐п╪п╣п╫я┌я▀ п╢п╬п╩п╤п╫я▀ п╦п╪п╣я┌я▄ п╬п╢п╦п╫п╟п╨п╬п╡я┐я▌ п╢п╩п╦п╫я┐"
 
 #. R/LAPACK.R: gettextf("at least one dimension of '%s' argument is 0", "x")
 #. R/svd.R: gettextf("at least one dimension of '%s' argument is 0", "x")
@@ -1862,13 +1863,13 @@ msgstr ""
 #: R/files.R:0
 #, fuzzy
 msgid "attempt to copy a directory to itself"
-msgstr "не удалось создать папку для ссылки %s"
+msgstr "п╫п╣ я┐п╢п╟п╩п╬я│я▄ я│п╬п╥п╢п╟я┌я▄ п©п╟п©п╨я┐ п╢п╩я▐ я│я│я▀п╩п╨п╦ %s"
 
 #. R/table.R: stop("attempt to make a table with >= 2^31 elements")
 #. R/tabulate.R: stop("attempt to make a table with >= 2^31 elements")
 #: R/table.R:0 R/tabulate.R:0
 msgid "attempt to make a table with >= 2^31 elements"
-msgstr "попытка создания таблицы с >= 2^31 элементов"
+msgstr "п©п╬п©я▀я┌п╨п╟ я│п╬п╥п╢п╟п╫п╦я▐ я┌п╟п╠п╩п╦я├я▀ я│ >= 2^31 я█п╩п╣п╪п╣п╫я┌п╬п╡"
 
 #. R/matrix.R: stop("attempt to set 'colnames' on an object with less than two dimensions")
 #. R/matrix.R: stop("attempt to set 'colnames' on an object with less than two dimensions")
@@ -1876,31 +1877,31 @@ msgstr "попытка создания таблицы с >= 2^31 элементов"
 #, fuzzy
 msgid "attempt to set 'colnames' on an object with less than two dimensions"
 msgstr ""
-"попытка установить имена колонок для объекта с менее чем двумя измерениями"
+"п©п╬п©я▀я┌п╨п╟ я┐я│я┌п╟п╫п╬п╡п╦я┌я▄ п╦п╪п╣п╫п╟ п╨п╬п╩п╬п╫п╬п╨ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╟ я│ п╪п╣п╫п╣п╣ я┤п╣п╪ п╢п╡я┐п╪я▐ п╦п╥п╪п╣я─п╣п╫п╦я▐п╪п╦"
 
 #. R/matrix.R: stop("attempt to set 'rownames' on an object with no dimensions")
 #. R/matrix.R: stop("attempt to set 'rownames' on an object with no dimensions")
 #: R/matrix.R:0
 #, fuzzy
 msgid "attempt to set 'rownames' on an object with no dimensions"
-msgstr "попытка установить имена строк для объекта без измерений"
+msgstr "п©п╬п©я▀я┌п╨п╟ я┐я│я┌п╟п╫п╬п╡п╦я┌я▄ п╦п╪п╣п╫п╟ я│я┌я─п╬п╨ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╟ п╠п╣п╥ п╦п╥п╪п╣я─п╣п╫п╦п╧"
 
 #. R/autoload.R: gettextf("autoloader did not find '%s' in package %s", name, sQuote(package), domain = "R-base")
 #: R/autoload.R:0
 #, fuzzy
 msgid "autoloader did not find '%s' in package %s"
-msgstr "автозагрузчик не нашел '%s' в '%s'"
+msgstr "п╟п╡я┌п╬п╥п╟пЁя─я┐п╥я┤п╦п╨ п╫п╣ п╫п╟я┬п╣п╩ '%s' п╡ '%s'"
 
 #. R/namespace.R: gettextf("bad 'S3method' directive: %s", deparse(e))
 #: R/namespace.R:0
 msgid "bad 'S3method' directive: %s"
-msgstr "неправильная директива 'S3method': %s"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ п╢п╦я─п╣п╨я┌п╦п╡п╟ 'S3method': %s"
 
 #. R/conditions.R: stop("bad handler specification")
 #. R/conditions.R: stop("bad handler specification")
 #: R/conditions.R:0
 msgid "bad handler specification"
-msgstr "неправильное указание обработчика"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ я┐п╨п╟п╥п╟п╫п╦п╣ п╬п╠я─п╟п╠п╬я┌я┤п╦п╨п╟"
 
 #. R/dates.R: gettextf("binary '%s' operator is not defined for objects of class %s", "+", dQuote("Date"))
 #. R/dates.R: gettextf("binary '%s' operator is not defined for objects of class %s", .Generic,     dQuote("Date"))
@@ -1910,106 +1911,106 @@ msgstr "неправильное указание обработчика"
 #: R/dates.R:0 R/datetime.R:0 R/version.R:0
 #, fuzzy
 msgid "binary '%s' operator is not defined for objects of class %s"
-msgstr "бинарный '+' не определен для объектов \"POSIXt\""
+msgstr "п╠п╦п╫п╟я─п╫я▀п╧ '+' п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╬п╡ \"POSIXt\""
 
 #. R/datetime.R: gettextf("both arguments of '%s' operator cannot be objects of class %s", "*", dQuote("difftime"))
 #: R/datetime.R:0
 #, fuzzy
 msgid "both arguments of '%s' operator cannot be objects of class %s"
-msgstr "бинарный '+' не определен для объектов \"POSIXt\""
+msgstr "п╠п╦п╫п╟я─п╫я▀п╧ '+' п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╬п╡ \"POSIXt\""
 
 #. R/RNG.R: stop("buggy version of Kinderman-Ramage generator is not allowed", domain = "R-base")
 #: R/RNG.R:0
 #, fuzzy
 msgid "buggy version of Kinderman-Ramage generator is not allowed"
-msgstr "Ошибочная версия генератора Kinderman-Ramage не разрешена"
+msgstr "п·я┬п╦п╠п╬я┤п╫п╟я▐ п╡п╣я─я│п╦я▐ пЁп╣п╫п╣я─п╟я┌п╬я─п╟ Kinderman-Ramage п╫п╣ я─п╟п╥я─п╣я┬п╣п╫п╟"
 
 #. R/RNG.R: warning("buggy version of Kinderman-Ramage generator used", domain = "R-base")
 #: R/RNG.R:0
 #, fuzzy
 msgid "buggy version of Kinderman-Ramage generator used"
-msgstr "Использована ошибочная версия генератора Kinderman-Ramage"
+msgstr "п≤я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╟ п╬я┬п╦п╠п╬я┤п╫п╟я▐ п╡п╣я─я│п╦я▐ пЁп╣п╫п╣я─п╟я┌п╬я─п╟ Kinderman-Ramage"
 
 #. R/load.R: stop("can only save to a binary connection")
 #: R/load.R:0
 msgid "can only save to a binary connection"
-msgstr "могу сохранить только в бинарное соединение"
+msgstr "п╪п╬пЁя┐ я│п╬я┘я─п╟п╫п╦я┌я▄ я┌п╬п╩я▄п╨п╬ п╡ п╠п╦п╫п╟я─п╫п╬п╣ я│п╬п╣п╢п╦п╫п╣п╫п╦п╣"
 
 #. R/dates.R: gettextf("can only subtract from objects of class %s", dQuote("date"))
 #. R/datetime.R: gettextf("can only subtract from objects of class %s", dQuote("POSIXt"))
 #: R/dates.R:0 R/datetime.R:0
 #, fuzzy
 msgid "can only subtract from objects of class %s"
-msgstr "Могу лишь вычитать из объектов 'Date'"
+msgstr "п°п╬пЁя┐ п╩п╦я┬я▄ п╡я▀я┤п╦я┌п╟я┌я▄ п╦п╥ п╬п╠я┼п╣п╨я┌п╬п╡ 'Date'"
 
 #. R/dates.R: gettextf("can only subtract numbers from objects of class %s", dQuote("Date"))
 #. R/datetime.R: gettextf("can only subtract numbers from objects of class %s", dQuote("POSIXt"))
 #: R/dates.R:0 R/datetime.R:0
 #, fuzzy
 msgid "can only subtract numbers from objects of class %s"
-msgstr "могу вычитать лишь числа из объектов 'Date'"
+msgstr "п╪п╬пЁя┐ п╡я▀я┤п╦я┌п╟я┌я▄ п╩п╦я┬я▄ я┤п╦я│п╩п╟ п╦п╥ п╬п╠я┼п╣п╨я┌п╬п╡ 'Date'"
 
 #. R/connections.R: stop("can only write vector objects")
 #: R/connections.R:0
 msgid "can only write vector objects"
-msgstr "могу записать только векторные объекты"
+msgstr "п╪п╬пЁя┐ п╥п╟п©п╦я│п╟я┌я▄ я┌п╬п╩я▄п╨п╬ п╡п╣п╨я┌п╬я─п╫я▀п╣ п╬п╠я┼п╣п╨я┌я▀"
 
 #. R/source.R: stop("cannot 'chdir' as current directory is unknown")
 #. R/source.R: stop("cannot 'chdir' as current directory is unknown")
 #: R/source.R:0
 msgid "cannot 'chdir' as current directory is unknown"
-msgstr "не могу 'chdir', поскольку текущая папка неизвестна"
+msgstr "п╫п╣ п╪п╬пЁя┐ 'chdir', п©п╬я│п╨п╬п╩я▄п╨я┐ я┌п╣п╨я┐я┴п╟я▐ п©п╟п©п╨п╟ п╫п╣п╦п╥п╡п╣я│я┌п╫п╟"
 
 #. R/namespace.R: stop("cannot add to exports of a sealed namespace")
 #: R/namespace.R:0
 msgid "cannot add to exports of a sealed namespace"
-msgstr "не могу добавить к экспорту из запечатанного пространства имен"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╢п╬п╠п╟п╡п╦я┌я▄ п╨ я█п╨я│п©п╬я─я┌я┐ п╦п╥ п╥п╟п©п╣я┤п╟я┌п╟п╫п╫п╬пЁп╬ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╟ п╦п╪п╣п╫"
 
 #. R/mode.R: stop("cannot change the storage mode of a factor")
 #: R/mode.R:0
 #, fuzzy
 msgid "cannot change the storage mode of a factor"
-msgstr "неправильно менять тип хранения фактора"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬ п╪п╣п╫я▐я┌я▄ я┌п╦п© я┘я─п╟п╫п╣п╫п╦я▐ я└п╟п╨я┌п╬я─п╟"
 
 #. R/dataframe.R: gettextf("cannot coerce class %s to a \"data.frame\" class", dQuote(class(x)))
 #: R/dataframe.R:0
 #, fuzzy
 msgid "cannot coerce class %s to a \"data.frame\" class"
-msgstr "не могу перевести класс '%s' в data.frame"
+msgstr "п╫п╣ п╪п╬пЁя┐ п©п╣я─п╣п╡п╣я│я┌п╦ п╨п╩п╟я│я│ '%s' п╡ data.frame"
 
 #. R/table.R: stop("cannot coerce to a table")
 #: R/table.R:0
 #, fuzzy
 msgid "cannot coerce to a table"
-msgstr "не могу преобразовать в таблицу"
+msgstr "п╫п╣ п╪п╬пЁя┐ п©я─п╣п╬п╠я─п╟п╥п╬п╡п╟я┌я▄ п╡ я┌п╟п╠п╩п╦я├я┐"
 
 #. R/../../../../share/R/nspackloader.R: gettextf("cannot find namespace environment for package %s", sQuote(pkg))
 #: R/../../../../share/R/nspackloader.R:0
 #, fuzzy
 msgid "cannot find namespace environment for package %s"
-msgstr "не могу найти окружение пространства имен"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╫п╟п╧я┌п╦ п╬п╨я─я┐п╤п╣п╫п╦п╣ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╟ п╦п╪п╣п╫"
 
 #. R/namespace.R: stop("cannot import into a sealed namespace")
 #: R/namespace.R:0
 msgid "cannot import into a sealed namespace"
-msgstr "не могу импортировать в запечатанное пространство имен"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╦п╪п©п╬я─я┌п╦я─п╬п╡п╟я┌я▄ п╡ п╥п╟п©п╣я┤п╟я┌п╟п╫п╫п╬п╣ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬ п╦п╪п╣п╫"
 
 #. R/sink.R: stop("cannot split the message connection")
 #: R/sink.R:0
 msgid "cannot split the message connection"
-msgstr "не могу разделить соединение-сообщение"
+msgstr "п╫п╣ п╪п╬пЁя┐ я─п╟п╥п╢п╣п╩п╦я┌я▄ я│п╬п╣п╢п╦п╫п╣п╫п╦п╣-я│п╬п╬п╠я┴п╣п╫п╦п╣"
 
 #. R/dates.R: stop("character string is not in a standard unambiguous format")
 #. R/datetime.R: stop("character string is not in a standard unambiguous format")
 #: R/dates.R:0 R/datetime.R:0
 msgid "character string is not in a standard unambiguous format"
-msgstr "текстовая строка не относится к стандартному однозначному формату"
+msgstr "я┌п╣п╨я│я┌п╬п╡п╟я▐ я│я┌я─п╬п╨п╟ п╫п╣ п╬я┌п╫п╬я│п╦я┌я│я▐ п╨ я│я┌п╟п╫п╢п╟я─я┌п╫п╬п╪я┐ п╬п╢п╫п╬п╥п╫п╟я┤п╫п╬п╪я┐ я└п╬я─п╪п╟я┌я┐"
 
 #. R/format.R: warning("class of 'x' argument was discarded")
 #: R/format.R:0
 #, fuzzy
 msgid "class of 'x' argument was discarded"
-msgstr "именованные аргументы не допускаются"
+msgstr "п╦п╪п╣п╫п╬п╡п╟п╫п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╫п╣ п╢п╬п©я┐я│п╨п╟я▌я┌я│я▐"
 
 #. R/format.R: warning("coercing argument to an object of class \"character\" for 'format=\"s\"' option")
 #: R/format.R:0
@@ -2017,29 +2018,29 @@ msgstr "именованные аргументы не допускаются"
 msgid ""
 "coercing argument to an object of class \"character\" for 'format=\"s\"' "
 "option"
-msgstr "преобразую аргумент в \"character\" для format=\"s\""
+msgstr "п©я─п╣п╬п╠я─п╟п╥я┐я▌ п╟я─пЁя┐п╪п╣п╫я┌ п╡ \"character\" п╢п╩я▐ format=\"s\""
 
 #. R/dataframe.R: stop("column name \"\" cannot match any column")
 #. R/dataframe.R: stop("column name \"\" cannot match any column")
 #: R/dataframe.R:0
 msgid "column name \"\" cannot match any column"
-msgstr "имя колонки \"\" не соответствует ни одной из колонок"
+msgstr "п╦п╪я▐ п╨п╬п╩п╬п╫п╨п╦ \"\" п╫п╣ я│п╬п╬я┌п╡п╣я┌я│я┌п╡я┐п╣я┌ п╫п╦ п╬п╢п╫п╬п╧ п╦п╥ п╨п╬п╩п╬п╫п╬п╨"
 
 #. R/chol.R: stop("complex matrices not permitted at present")
 #: R/chol.R:0
 msgid "complex matrices not permitted at present"
-msgstr "в настоящее время комплексные матрицы не разрешены"
+msgstr "п╡ п╫п╟я│я┌п╬я▐я┴п╣п╣ п╡я─п╣п╪я▐ п╨п╬п╪п©п╩п╣п╨я│п╫я▀п╣ п╪п╟я┌я─п╦я├я▀ п╫п╣ я─п╟п╥я─п╣я┬п╣п╫я▀"
 
 #. R/format.R: warning("corrupt data frame: columns will be truncated or padded with NA values")
 #: R/format.R:0
 #, fuzzy
 msgid "corrupt data frame: columns will be truncated or padded with NA values"
-msgstr "поврежденная таблица данных: колонки будут обрезаны или заполнены NA"
+msgstr "п©п╬п╡я─п╣п╤п╢п╣п╫п╫п╟я▐ я┌п╟п╠п╩п╦я├п╟ п╢п╟п╫п╫я▀я┘: п╨п╬п╩п╬п╫п╨п╦ п╠я┐п╢я┐я┌ п╬п╠я─п╣п╥п╟п╫я▀ п╦п╩п╦ п╥п╟п©п╬п╩п╫п╣п╫я▀ NA"
 
 #. R/grep.R: stop("cost components must be non-negative")
 #: R/grep.R:0
 msgid "cost components must be non-negative"
-msgstr "компоненты платы должны быть неотрицательными"
+msgstr "п╨п╬п╪п©п╬п╫п╣п╫я┌я▀ п©п╩п╟я┌я▀ п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ п╫п╣п╬я┌я─п╦я├п╟я┌п╣п╩я▄п╫я▀п╪п╦"
 
 #. R/namespace.R: gettextf("cyclic namespace dependency detected when loading package %s, already loading %s",     sQuote(package), paste(sQuote(loading), collapse = ", "))
 #: R/namespace.R:0
@@ -2059,64 +2060,64 @@ msgstr ""
 #: R/dates.R:0 R/datetime.R:0
 #, fuzzy
 msgid "do not know how to convert %s to class %s"
-msgstr "не знаю как конвертировать '%s' в класс \"Date\""
+msgstr "п╫п╣ п╥п╫п╟я▌ п╨п╟п╨ п╨п╬п╫п╡п╣я─я┌п╦я─п╬п╡п╟я┌я▄ '%s' п╡ п╨п╩п╟я│я│ \"Date\""
 
 #. R/namespace.R: gettextf("duplicate import names %s", paste(sQuote(impnames[duplicated(impnames)]),     collapse = ", "))
 #: R/namespace.R:0
 #, fuzzy
 msgid "duplicate import names %s"
-msgstr "одинаковые импортированные имена"
+msgstr "п╬п╢п╦п╫п╟п╨п╬п╡я▀п╣ п╦п╪п©п╬я─я┌п╦я─п╬п╡п╟п╫п╫я▀п╣ п╦п╪п╣п╫п╟"
 
 #. R/dataframe.R: gettextf("duplicate row.names: %s", paste(unique(row.names[duplicated(row.names)]),     collapse = ", "))
 #. R/dataframe.R: gettextf("duplicate row.names: %s", paste(unique(row.names[duplicated(row.names)]),     collapse = ", "))
 #: R/dataframe.R:0
 #, fuzzy
 msgid "duplicate row.names: %s"
-msgstr "одинаковые имена строк:"
+msgstr "п╬п╢п╦п╫п╟п╨п╬п╡я▀п╣ п╦п╪п╣п╫п╟ я│я┌я─п╬п╨:"
 
 #. R/dataframe.R: stop("duplicate subscripts for columns")
 #: R/dataframe.R:0
 msgid "duplicate subscripts for columns"
-msgstr "одинаковые индексы колонок"
+msgstr "п╬п╢п╦п╫п╟п╨п╬п╡я▀п╣ п╦п╫п╢п╣п╨я│я▀ п╨п╬п╩п╬п╫п╬п╨"
 
 #. R/namespace.R: gettextf("duplicate symbol names %s in useDynLib(\"%s\")", paste(sQuote(names(symNames)[dup]),     collapse = ", "), dyl)
 #: R/namespace.R:0
 #, fuzzy
 msgid "duplicate symbol names %s in useDynLib(\"%s\")"
-msgstr "повторяющиеся имена символов %s в useDynlib(\"%s\")"
+msgstr "п©п╬п╡я┌п╬я─я▐я▌я┴п╦п╣я│я▐ п╦п╪п╣п╫п╟ я│п╦п╪п╡п╬п╩п╬п╡ %s п╡ useDynlib(\"%s\")"
 
 #. R/dataframe.R: stop("duplicate values in 'row.names' are not allowed")
 #: R/dataframe.R:0
 #, fuzzy
 msgid "duplicate values in 'row.names' are not allowed"
-msgstr "одинаковые 'row.names' не разрешены"
+msgstr "п╬п╢п╦п╫п╟п╨п╬п╡я▀п╣ 'row.names' п╫п╣ я─п╟п╥я─п╣я┬п╣п╫я▀"
 
 #. R/scan.R: stop("either specify 'nmax' or 'n', but not both.")
 #: R/scan.R:0
 msgid "either specify 'nmax' or 'n', but not both."
-msgstr "укажите либо 'nmax', либо 'n', но не оба."
+msgstr "я┐п╨п╟п╤п╦я┌п╣ п╩п╦п╠п╬ 'nmax', п╩п╦п╠п╬ 'n', п╫п╬ п╫п╣ п╬п╠п╟."
 
 #. R/time.R: gettext("elapsed")
 #: R/time.R:0
 msgid "elapsed"
-msgstr "прошло"
+msgstr "п©я─п╬я┬п╩п╬"
 
 #. R/load.R: stop("empty (zero-byte) input file")
 #: R/load.R:0
 msgid "empty (zero-byte) input file"
-msgstr "пустой (ноль бит) входной файл"
+msgstr "п©я┐я│я┌п╬п╧ (п╫п╬п╩я▄ п╠п╦я┌) п╡я┘п╬п╢п╫п╬п╧ я└п╟п╧п╩"
 
 #. R/namespace.R: gettextf("empty name in directive %s in 'NAMESPACE' file", sQuote(as.character(e[[1L]])))
 #: R/namespace.R:0
 #, fuzzy
 msgid "empty name in directive %s in 'NAMESPACE' file"
-msgstr "пустое имя в директиве '%s' из файла NAMESPACE"
+msgstr "п©я┐я│я┌п╬п╣ п╦п╪я▐ п╡ п╢п╦я─п╣п╨я┌п╦п╡п╣ '%s' п╦п╥ я└п╟п╧п╩п╟ NAMESPACE"
 
 #. R/qr.R: stop("exact singularity in 'qr.coef()' function")
 #: R/qr.R:0
 #, fuzzy
 msgid "exact singularity in 'qr.coef()' function"
-msgstr "точная сингулярность в 'qr.coef'"
+msgstr "я┌п╬я┤п╫п╟я▐ я│п╦п╫пЁя┐п╩я▐я─п╫п╬я│я┌я▄ п╡ 'qr.coef'"
 
 #. R/dates.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' arguments must be specified")
 #: R/dates.R:0
@@ -2125,14 +2126,14 @@ msgid ""
 "exactly two of 'to', 'by' and 'length.out' / 'along.with' arguments must be "
 "specified"
 msgstr ""
-"нужно указать в точности два из: 'to', 'by' и 'length.out' / 'along.with'"
+"п╫я┐п╤п╫п╬ я┐п╨п╟п╥п╟я┌я▄ п╡ я┌п╬я┤п╫п╬я│я┌п╦ п╢п╡п╟ п╦п╥: 'to', 'by' п╦ 'length.out' / 'along.with'"
 
 #. R/datetime.R: stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
 #: R/datetime.R:0
 msgid ""
 "exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified"
 msgstr ""
-"нужно указать в точности два из: 'to', 'by' и 'length.out' / 'along.with'"
+"п╫я┐п╤п╫п╬ я┐п╨п╟п╥п╟я┌я▄ п╡ я┌п╬я┤п╫п╬я│я┌п╦ п╢п╡п╟ п╦п╥: 'to', 'by' п╦ 'length.out' / 'along.with'"
 
 #. R/namespace.R: gettextf("failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace",     sQuote(origVarName), sQuote(varName), sQuote(package))
 #: R/namespace.R:0
@@ -2154,22 +2155,22 @@ msgstr ""
 msgid ""
 "failed to assign RegisteredNativeSymbol for %s to %s since %s is already "
 "defined in the %s namespace"
-msgstr "не удалось присвоить RegisteredNativeSymbol для"
+msgstr "п╫п╣ я┐п╢п╟п╩п╬я│я▄ п©я─п╦я│п╡п╬п╦я┌я▄ RegisteredNativeSymbol п╢п╩я▐"
 
 #. R/windows/junctions.R: gettextf("failed to create directory for link '%s", link)
 #: R/windows/junctions.R:0
 msgid "failed to create directory for link '%s"
-msgstr "не удалось создать папку для ссылки %s"
+msgstr "п╫п╣ я┐п╢п╟п╩п╬я│я▄ я│п╬п╥п╢п╟я┌я▄ п©п╟п©п╨я┐ п╢п╩я▐ я│я│я▀п╩п╨п╦ %s"
 
 #. R/namespace.R: gettextf("failed to find metadata object for %s", sQuote(mi))
 #: R/namespace.R:0
 msgid "failed to find metadata object for %s"
-msgstr "не удалось найти объект метаданных для %s"
+msgstr "п╫п╣ я┐п╢п╟п╩п╬я│я▄ п╫п╟п╧я┌п╦ п╬п╠я┼п╣п╨я┌ п╪п╣я┌п╟п╢п╟п╫п╫я▀я┘ п╢п╩я▐ %s"
 
 #. R/windows/junctions.R: stop("fewer 'from' files than 'to' files")
 #: R/windows/junctions.R:0
 msgid "fewer 'from' files than 'to' files"
-msgstr "меньше файлов 'from', чем 'to'"
+msgstr "п╪п╣п╫я▄я┬п╣ я└п╟п╧п╩п╬п╡ 'from', я┤п╣п╪ 'to'"
 
 #. R/load.R: gettextf("file %s has magic number '%s'", sQuote(basename(file)), mn)
 #: R/load.R:0
@@ -2180,23 +2181,23 @@ msgstr ""
 #: R/attach.R:0
 #, fuzzy
 msgid "file '%s' was not found"
-msgstr "файл '%s' не найден"
+msgstr "я└п╟п╧п╩ '%s' п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #. R/files.R: stop("file can not be copied both 'from' and 'to'")
 #: R/files.R:0
 msgid "file can not be copied both 'from' and 'to'"
-msgstr "файл не может быть скопирован одновременно 'from' и 'to'"
+msgstr "я└п╟п╧п╩ п╫п╣ п╪п╬п╤п╣я┌ п╠я▀я┌я▄ я│п╨п╬п©п╦я─п╬п╡п╟п╫ п╬п╢п╫п╬п╡я─п╣п╪п╣п╫п╫п╬ 'from' п╦ 'to'"
 
 #. R/seq.R: warning("first element used of 'length.out' argument")
 #: R/seq.R:0
 msgid "first element used of 'length.out' argument"
-msgstr "только первый элемент аргумента 'length.out' использован"
+msgstr "я┌п╬п╩я▄п╨п╬ п©п╣я─п╡я▀п╧ я█п╩п╣п╪п╣п╫я┌ п╟я─пЁя┐п╪п╣п╫я┌п╟ 'length.out' п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫"
 
 #. R/srcfile.R: gettext("forcing class on", domain = "R-base")
 #: R/srcfile.R:0
 #, fuzzy
 msgid "forcing class on"
-msgstr "неправильный класс"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╨п╩п╟я│я│"
 
 #. R/all.equal.R: gettext("formulas differ in contents")
 #: R/all.equal.R:0
@@ -2206,53 +2207,53 @@ msgstr ""
 #. R/namespace.R: gettextf("found methods to import for function %s but not the generic itself", sQuote(genName))
 #: R/namespace.R:0
 msgid "found methods to import for function %s but not the generic itself"
-msgstr "найдены методы импорта для функции %s но они сами не общие"
+msgstr "п╫п╟п╧п╢п╣п╫я▀ п╪п╣я┌п╬п╢я▀ п╦п╪п©п╬я─я┌п╟ п╢п╩я▐ я└я┐п╫п╨я├п╦п╦ %s п╫п╬ п╬п╫п╦ я│п╟п╪п╦ п╫п╣ п╬п╠я┴п╦п╣"
 
 #. R/match.fun.R: gettextf("found non-function '%s'", FUN)
 #: R/match.fun.R:0
 msgid "found non-function '%s'"
-msgstr "найдена не-функция '%s'"
+msgstr "п╫п╟п╧п╢п╣п╫п╟ п╫п╣-я└я┐п╫п╨я├п╦я▐ '%s'"
 
 #. R/dynload.R: stop("function is not in a namespace, so cannot locate associated DLL")
 #: R/dynload.R:0
 msgid "function is not in a namespace, so cannot locate associated DLL"
-msgstr "функция не в пространстве имен, поэтому не могу найти связанный DLL"
+msgstr "я└я┐п╫п╨я├п╦я▐ п╫п╣ п╡ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╣ п╦п╪п╣п╫, п©п╬я█я┌п╬п╪я┐ п╫п╣ п╪п╬пЁя┐ п╫п╟п╧я┌п╦ я│п╡я▐п╥п╟п╫п╫я▀п╧ DLL"
 
 #. R/taskCallback.R: stop("handler must be a function")
 #: R/taskCallback.R:0
 msgid "handler must be a function"
-msgstr "обработчик должен быть функцией"
+msgstr "п╬п╠я─п╟п╠п╬я┌я┤п╦п╨ п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я└я┐п╫п╨я├п╦п╣п╧"
 
 #. R/load.R: gettextf("image could not be renamed and is left in %s", outfile)
 #: R/load.R:0
 #, fuzzy
 msgid "image could not be renamed and is left in %s"
-msgstr "изображение нельзя переименовать; оставлено в"
+msgstr "п╦п╥п╬п╠я─п╟п╤п╣п╫п╦п╣ п╫п╣п╩я▄п╥я▐ п©п╣я─п╣п╦п╪п╣п╫п╬п╡п╟я┌я▄; п╬я│я┌п╟п╡п╩п╣п╫п╬ п╡"
 
 #. R/namespace.R: gettextf("in %s methods for export were not found: %s", sQuote(package), paste(expMethods[missingMethods],     collapse = ", "))
 #: R/namespace.R:0
 #, fuzzy
 msgid "in %s methods for export were not found: %s"
-msgstr "в %s не найдены методы для экспорта: %s"
+msgstr "п╡ %s п╫п╣ п╫п╟п╧п╢п╣п╫я▀ п╪п╣я┌п╬п╢я▀ п╢п╩я▐ я█п╨я│п©п╬я─я┌п╟: %s"
 
 #. R/namespace.R: gettextf("in package %s classes %s were specified for export but were not defined",     sQuote(package), paste(dQuote(expClasses[missingClasses]), collapse = ", "))
 #: R/namespace.R:0
 #, fuzzy
 msgid "in package %s classes %s were specified for export but were not defined"
-msgstr "в пакете '%s' классы %s указаны для экспорта, но не определены"
+msgstr "п╡ п©п╟п╨п╣я┌п╣ '%s' п╨п╩п╟я│я│я▀ %s я┐п╨п╟п╥п╟п╫я▀ п╢п╩я▐ я█п╨я│п©п╬я─я┌п╟, п╫п╬ п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫я▀"
 
 #. R/namespace.R: gettextf("in package %s methods %s were specified for export but were not defined",     sQuote(package), paste(sQuote(expMethods), collapse = ", "))
 #: R/namespace.R:0
 #, fuzzy
 msgid "in package %s methods %s were specified for export but were not defined"
-msgstr "в пакете '%s' указаны методы %s для экспорта, но не определены"
+msgstr "п╡ п©п╟п╨п╣я┌п╣ '%s' я┐п╨п╟п╥п╟п╫я▀ п╪п╣я┌п╬п╢я▀ %s п╢п╩я▐ я█п╨я│п©п╬я─я┌п╟, п╫п╬ п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫я▀"
 
 #. R/rowsum.R: stop("incorrect length for 'group' argument")
 #. R/rowsum.R: stop("incorrect length for 'group' argument")
 #: R/rowsum.R:0
 #, fuzzy
 msgid "incorrect length for 'group' argument"
-msgstr "неправильная длина 'group'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ п╢п╩п╦п╫п╟ 'group'"
 
 #. R/array.R: gettextf("incorrect value for '%s' argument", "MARGIN")
 #. R/strwrap.R: gettextf("incorrect value for '%s' argument", "x")
@@ -2260,13 +2261,13 @@ msgstr "неправильная длина 'group'"
 #: R/array.R:0 R/strwrap.R:0
 #, fuzzy
 msgid "incorrect value for '%s' argument"
-msgstr "неправильное значение 'MARGIN'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ 'MARGIN'"
 
 #. R/strwrap.R: stop("incorrect values of 'indent' and 'width' arguments")
 #: R/strwrap.R:0
 #, fuzzy
 msgid "incorrect values of 'indent' and 'width' arguments"
-msgstr "неправильные значения 'indent' и 'width'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╥п╫п╟я┤п╣п╫п╦я▐ 'indent' п╦ 'width'"
 
 #. R/LAPACK.R: gettextf("infinite or missing values in '%s' argument", "x")
 #. R/eigen.R: gettextf("infinite or missing values in '%s' argument", "x")
@@ -2274,12 +2275,12 @@ msgstr "неправильные значения 'indent' и 'width'"
 #: R/LAPACK.R:0 R/eigen.R:0 R/svd.R:0
 #, fuzzy
 msgid "infinite or missing values in '%s' argument"
-msgstr "неопределенные или пропущенные значения в 'x'"
+msgstr "п╫п╣п╬п©я─п╣п╢п╣п╩п╣п╫п╫я▀п╣ п╦п╩п╦ п©я─п╬п©я┐я┴п╣п╫п╫я▀п╣ п╥п╫п╟я┤п╣п╫п╦я▐ п╡ 'x'"
 
 #. R/load.R: stop("input has been corrupted, with LF replaced by CR")
 #: R/load.R:0
 msgid "input has been corrupted, with LF replaced by CR"
-msgstr "ввод поврежден, LF заменен на CR"
+msgstr "п╡п╡п╬п╢ п©п╬п╡я─п╣п╤п╢п╣п╫, LF п╥п╟п╪п╣п╫п╣п╫ п╫п╟ CR"
 
 #. R/attach.R: gettextf("invalid '%s' argument", "name")
 #. R/colSums.R: gettextf("invalid '%s' argument", "dims")
@@ -2299,7 +2300,7 @@ msgstr "ввод поврежден, LF заменен на CR"
 #: R/serialize.R:0 R/zapsmall.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
-msgstr "неправильный аргумент 'time'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌ 'time'"
 
 #. R/eigen.R: gettextf("invalid '%s' value", "nrow(x)")
 #. R/kappa.R: gettextf("invalid '%s' value", "nrow(x)")
@@ -2325,100 +2326,100 @@ msgstr "неправильный аргумент 'time'"
 #: R/eigen.R:0 R/kappa.R:0 R/qr.R:0 R/tabulate.R:0 R/version.R:0
 #, fuzzy
 msgid "invalid '%s' value"
-msgstr "неправильное значение 'n'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ 'n'"
 
 #. R/seq.R: stop("invalid '(to - from)/by' in 'seq(.)' function")
 #: R/seq.R:0
 #, fuzzy
 msgid "invalid '(to - from)/by' in 'seq(.)' function"
-msgstr "неправильный (to - from)/by в seq(.)"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ (to - from)/by п╡ seq(.)"
 
 #. R/dates.R: stop("invalid 'by' string")
 #: R/dates.R:0
 msgid "invalid 'by' string"
-msgstr "неправильная строка 'by'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ я│я┌я─п╬п╨п╟ 'by'"
 
 #. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
 #. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
 #: R/dataframe.R:0
 msgid "invalid 'dimnames' given for data frame"
-msgstr "для таблицы данных предложены неправильные 'dimnames'"
+msgstr "п╢п╩я▐ я┌п╟п╠п╩п╦я├я▀ п╢п╟п╫п╫я▀я┘ п©я─п╣п╢п╩п╬п╤п╣п╫я▀ п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ 'dimnames'"
 
 #. R/factor.R: gettextf("invalid 'labels'; length %d should be 1 or %d", nl, nL)
 #: R/factor.R:0
 #, fuzzy
 msgid "invalid 'labels'; length %d should be 1 or %d"
-msgstr "неправильные метки; длина %d должна быть 1 или %d"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╪п╣я┌п╨п╦; п╢п╩п╦п╫п╟ %d п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ 1 п╦п╩п╦ %d"
 
 #. R/rle.R: stop("invalid 'rle' structure")
 #: R/rle.R:0
 msgid "invalid 'rle' structure"
-msgstr "неправильная структура 'rle'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ я│я┌я─я┐п╨я┌я┐я─п╟ 'rle'"
 
 #. R/dataframe.R: stop("invalid 'row.names' length")
 #. R/dataframe.R: stop("invalid 'row.names' length")
 #: R/dataframe.R:0
 msgid "invalid 'row.names' length"
-msgstr "неправильная длина 'row.names'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ п╢п╩п╦п╫п╟ 'row.names'"
 
 #. R/datetime.R: stop("invalid 'units' specified")
 #. R/datetime.R: stop("invalid 'units' specified")
 #: R/datetime.R:0
 #, fuzzy
 msgid "invalid 'units' specified"
-msgstr "неправильное указание единиц"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ я┐п╨п╟п╥п╟п╫п╦п╣ п╣п╢п╦п╫п╦я├"
 
 #. R/version.R: stop("invalid 'value'")
 #: R/version.R:0
 #, fuzzy
 msgid "invalid 'value'"
-msgstr "неправильное значение"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣"
 
 #. R/factor.R: warning("invalid factor level, NA value generated")
 #. R/factor.R: warning("invalid factor level, NA value generated")
 #: R/factor.R:0
 #, fuzzy
 msgid "invalid factor level, NA value generated"
-msgstr "неправильный уровень фактора, получились NA"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я┐я─п╬п╡п╣п╫я▄ я└п╟п╨я┌п╬я─п╟, п©п╬п╩я┐я┤п╦п╩п╦я│я▄ NA"
 
 #. R/lazyload.R: gettext("invalid file name")
 #: R/lazyload.R:0
 #, fuzzy
 msgid "invalid file name"
-msgstr "неправильный файловый аргумент"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я└п╟п╧п╩п╬п╡я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌"
 
 #. R/namespace.R: stop("invalid import target")
 #: R/namespace.R:0
 msgid "invalid import target"
-msgstr "неправильное место назначения для импорта"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╪п╣я│я┌п╬ п╫п╟п╥п╫п╟я┤п╣п╫п╦я▐ п╢п╩я▐ п╦п╪п©п╬я─я┌п╟"
 
 #. R/dataframe.R: stop("invalid list argument: all variables should have the same length")
 #: R/dataframe.R:0
 msgid "invalid list argument: all variables should have the same length"
-msgstr "неправильный аргумент списка: длины всех переменных должны быть равны"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌ я│п©п╦я│п╨п╟: п╢п╩п╦п╫я▀ п╡я│п╣я┘ п©п╣я─п╣п╪п╣п╫п╫я▀я┘ п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ я─п╟п╡п╫я▀"
 
 #. R/namespace.R: stop("invalid method")
 #: R/namespace.R:0
 #, fuzzy
 msgid "invalid method"
-msgstr "неправильный метод"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╪п╣я┌п╬п╢"
 
 #. R/dates.R: stop("invalid mode for 'by' argument")
 #. R/datetime.R: stop("invalid mode for 'by' argument")
 #: R/dates.R:0 R/datetime.R:0
 #, fuzzy
 msgid "invalid mode for 'by' argument"
-msgstr "неправильный тип для 'by'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я┌п╦п© п╢п╩я▐ 'by'"
 
 #. R/cut.R: stop("invalid number of intervals")
 #: R/cut.R:0
 msgid "invalid number of intervals"
-msgstr "неправильное количество интервалов"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╨п╬п╩п╦я┤п╣я│я┌п╡п╬ п╦п╫я┌п╣я─п╡п╟п╩п╬п╡"
 
 #. R/library.R: stop("invalid package name")
 #: R/library.R:0
 msgid "invalid package name"
-msgstr "неправильное имя пакета"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╦п╪я▐ п©п╟п╨п╣я┌п╟"
 
 #. R/dates.R: stop("invalid specification of 'breaks'")
 #. R/dates.R: stop("invalid specification of 'breaks'")
@@ -2428,7 +2429,7 @@ msgstr "неправильное имя пакета"
 #. R/datetime.R: stop("invalid specification of 'breaks'")
 #: R/dates.R:0 R/datetime.R:0
 msgid "invalid specification of 'breaks'"
-msgstr "неправильное указание 'breaks'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ я┐п╨п╟п╥п╟п╫п╦п╣ 'breaks'"
 
 #. R/dates.R: stop("invalid string for 'by' argument")
 #. R/datetime.R: stop("invalid string for 'by' argument")
@@ -2436,19 +2437,19 @@ msgstr "неправильное указание 'breaks'"
 #: R/dates.R:0 R/datetime.R:0
 #, fuzzy
 msgid "invalid string for 'by' argument"
-msgstr "неправильная строка для 'by'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ я│я┌я─п╬п╨п╟ п╢п╩я▐ 'by'"
 
 #. R/version.R: gettextf("invalid version specification %s", paste(sQuote(unique(x[!ok])), collapse = ", "),     domain = "R-base")
 #: R/version.R:0
 #, fuzzy
 msgid "invalid version specification %s"
-msgstr "неправильное указание версии"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ я┐п╨п╟п╥п╟п╫п╦п╣ п╡п╣я─я│п╦п╦"
 
 #. R/../../../../share/R/examples-header.R: gettextf("items %s have been removed from the search path", paste(missitems, collapse = ", "))
 #: R/../../../../share/R/examples-header.R:0
 #, fuzzy
 msgid "items %s have been removed from the search path"
-msgstr "удален из пути поиска"
+msgstr "я┐п╢п╟п╩п╣п╫ п╦п╥ п©я┐я┌п╦ п©п╬п╦я│п╨п╟"
 
 #. R/scale.R: gettextf("length of '%s' argument must equal the number of columns of '%s' argument",     "center", "x")
 #. R/scale.R: gettextf("length of '%s' argument must equal the number of columns of '%s' argument",     "scale", "x")
@@ -2456,7 +2457,7 @@ msgstr "удален из пути поиска"
 #, fuzzy
 msgid ""
 "length of '%s' argument must equal the number of columns of '%s' argument"
-msgstr "длина 'scale' должна равняться числу колонок 'x'"
+msgstr "п╢п╩п╦п╫п╟ 'scale' п╢п╬п╩п╤п╫п╟ я─п╟п╡п╫я▐я┌я▄я│я▐ я┤п╦я│п╩я┐ п╨п╬п╩п╬п╫п╬п╨ 'x'"
 
 #. R/cut.R: stop("lengths of 'breaks' and 'labels' arguments differ")
 #: R/cut.R:0
@@ -2472,25 +2473,25 @@ msgstr ""
 #. R/factor.R: stop("level sets of factors are different")
 #: R/factor.R:0
 msgid "level sets of factors are different"
-msgstr "установки уровней для факторов различны"
+msgstr "я┐я│я┌п╟п╫п╬п╡п╨п╦ я┐я─п╬п╡п╫п╣п╧ п╢п╩я▐ я└п╟п╨я┌п╬я─п╬п╡ я─п╟п╥п╩п╦я┤п╫я▀"
 
 #. R/library.R: gettextf("license for package %s was not accepted", sQuote(package))
 #: R/library.R:0
 #, fuzzy
 msgid "license for package %s was not accepted"
-msgstr "Лицензия для пакета %s не принята"
+msgstr "п⌡п╦я├п╣п╫п╥п╦я▐ п╢п╩я▐ п©п╟п╨п╣я┌п╟ %s п╫п╣ п©я─п╦п╫я▐я┌п╟"
 
 #. R/windows/junctions.R: gettextf("link '%s' already exists", link)
 #: R/windows/junctions.R:0
 msgid "link '%s' already exists"
-msgstr "ссылка '%s' уже есть"
+msgstr "я│я│я▀п╩п╨п╟ '%s' я┐п╤п╣ п╣я│я┌я▄"
 
 #. R/dataframe.R: gettextf("list of length %d is not meaningful", length(e2))
 #. R/dataframe.R: gettextf("list of length %d is not meaningful", length(e1))
 #: R/dataframe.R:0
 #, fuzzy
 msgid "list of length %d is not meaningful"
-msgstr "список длины %d не значим"
+msgstr "я│п©п╦я│п╬п╨ п╢п╩п╦п╫я▀ %d п╫п╣ п╥п╫п╟я┤п╦п╪"
 
 #. R/merge.R: stop("long vectors are not supported")
 #: R/merge.R:0
@@ -2502,18 +2503,18 @@ msgstr ""
 msgid ""
 "looking for DLL for native routine call, but no DLLs in namespace of call"
 msgstr ""
-"ищу DLL для данного внутреннего вызова, но в пространстве имен вызова его нет"
+"п╦я┴я┐ DLL п╢п╩я▐ п╢п╟п╫п╫п╬пЁп╬ п╡п╫я┐я┌я─п╣п╫п╫п╣пЁп╬ п╡я▀п╥п╬п╡п╟, п╫п╬ п╡ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╣ п╦п╪п╣п╫ п╡я▀п╥п╬п╡п╟ п╣пЁп╬ п╫п╣я┌"
 
 #. R/RNG.R: stop("malformed version string")
 #: R/RNG.R:0
 msgid "malformed version string"
-msgstr "неправильно сформирована строка версии"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬ я│я└п╬я─п╪п╦я─п╬п╡п╟п╫п╟ я│я┌я─п╬п╨п╟ п╡п╣я─я│п╦п╦"
 
 #. R/grep.R: stop("match distance components must be non-negative")
 #. R/grep.R: stop("match distance components must be non-negative")
 #: R/grep.R:0
 msgid "match distance components must be non-negative"
-msgstr "компоненты соответствий расстояний должны быть неотрицательными"
+msgstr "п╨п╬п╪п©п╬п╫п╣п╫я┌я▀ я│п╬п╬я┌п╡п╣я┌я│я┌п╡п╦п╧ я─п╟я│я│я┌п╬я▐п╫п╦п╧ п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ п╫п╣п╬я┌я─п╦я├п╟я┌п╣п╩я▄п╫я▀п╪п╦"
 
 #. R/qr.R: gettextf("matrix %s is too large for LINPACK", dataname <- sQuote(deparse(substitute(x))))
 #: R/qr.R:0
@@ -2524,13 +2525,13 @@ msgstr ""
 #: R/dataframe.R:0
 #, fuzzy
 msgid "mismatch of row names in arguments of 'data.frame()' function, item %d"
-msgstr "несоответствие имен строк в аргументах 'data.frame', позиция %d"
+msgstr "п╫п╣я│п╬п╬я┌п╡п╣я┌я│я┌п╡п╦п╣ п╦п╪п╣п╫ я│я┌я─п╬п╨ п╡ п╟я─пЁя┐п╪п╣п╫я┌п╟я┘ 'data.frame', п©п╬п╥п╦я├п╦я▐ %d"
 
 #. R/grep.R: stop("missing replacement values are not allowed")
 #. R/grep.R: stop("missing replacement values are not allowed")
 #: R/grep.R:0
 msgid "missing replacement values are not allowed"
-msgstr "пропущенные значения для замены не разрешены"
+msgstr "п©я─п╬п©я┐я┴п╣п╫п╫я▀п╣ п╥п╫п╟я┤п╣п╫п╦я▐ п╢п╩я▐ п╥п╟п╪п╣п╫я▀ п╫п╣ я─п╟п╥я─п╣я┬п╣п╫я▀"
 
 #. R/dataframe.R: stop("missing values are not allowed in subscripted assignments of data frames")
 #. R/dataframe.R: stop("missing values are not allowed in subscripted assignments of data frames")
@@ -2538,57 +2539,57 @@ msgstr "пропущенные значения для замены не разрешены"
 msgid ""
 "missing values are not allowed in subscripted assignments of data frames"
 msgstr ""
-"пропущенные значения не разрешены в индексированных присвоениях таблиц данных"
+"п©я─п╬п©я┐я┴п╣п╫п╫я▀п╣ п╥п╫п╟я┤п╣п╫п╦я▐ п╫п╣ я─п╟п╥я─п╣я┬п╣п╫я▀ п╡ п╦п╫п╢п╣п╨я│п╦я─п╬п╡п╟п╫п╫я▀я┘ п©я─п╦я│п╡п╬п╣п╫п╦я▐я┘ я┌п╟п╠п╩п╦я├ п╢п╟п╫п╫я▀я┘"
 
 #. R/rowsum.R: warning("missing values for 'group' argument")
 #. R/rowsum.R: warning("missing values for 'group' argument")
 #: R/rowsum.R:0
 #, fuzzy
 msgid "missing values for 'group' argument"
-msgstr "пропущенные значения в 'group'"
+msgstr "п©я─п╬п©я┐я┴п╣п╫п╫я▀п╣ п╥п╫п╟я┤п╣п╫п╦я▐ п╡ 'group'"
 
 #. R/dataframe.R: stop("missing values in 'row.names' are not allowed")
 #: R/dataframe.R:0
 msgid "missing values in 'row.names' are not allowed"
-msgstr "пропущенные значения в 'row.names' не разрешены"
+msgstr "п©я─п╬п©я┐я┴п╣п╫п╫я▀п╣ п╥п╫п╟я┤п╣п╫п╦я▐ п╡ 'row.names' п╫п╣ я─п╟п╥я─п╣я┬п╣п╫я▀"
 
 #. R/files.R: stop("more 'from' files than 'to' files")
 #. R/windows/junctions.R: stop("more 'from' files than 'to' files")
 #: R/files.R:0 R/windows/junctions.R:0
 msgid "more 'from' files than 'to' files"
-msgstr "больше файлов 'from', чем 'to'"
+msgstr "п╠п╬п╩я▄я┬п╣ я└п╟п╧п╩п╬п╡ 'from', я┤п╣п╪ 'to'"
 
 #. R/dynload.R: gettextf("multiple DLL files match %s. Using file %s", sQuote(dll), sQuote(dll[["path"]]))
 #: R/dynload.R:0
 #, fuzzy
 msgid "multiple DLL files match %s. Using file %s"
-msgstr "несколько DLL соответствуют '%s'. Использую '%s'"
+msgstr "п╫п╣я│п╨п╬п╩я▄п╨п╬ DLL я│п╬п╬я┌п╡п╣я┌я│я┌п╡я┐я▌я┌ '%s'. п≤я│п©п╬п╩я▄п╥я┐я▌ '%s'"
 
 #. R/namespace.R: gettextf("multiple methods tables found for %s", sQuote(mi))
 #: R/namespace.R:0
 msgid "multiple methods tables found for %s"
-msgstr "множественные таблицы методов найдены для %s"
+msgstr "п╪п╫п╬п╤п╣я│я┌п╡п╣п╫п╫я▀п╣ я┌п╟п╠п╩п╦я├я▀ п╪п╣я┌п╬п╢п╬п╡ п╫п╟п╧п╢п╣п╫я▀ п╢п╩я▐ %s"
 
 #. R/grep.R: stop("must have replacement values for matches")
 #: R/grep.R:0
 msgid "must have replacement values for matches"
-msgstr "для соответствий нужны значения на замену"
+msgstr "п╢п╩я▐ я│п╬п╬я┌п╡п╣я┌я│я┌п╡п╦п╧ п╫я┐п╤п╫я▀ п╥п╫п╟я┤п╣п╫п╦я▐ п╫п╟ п╥п╟п╪п╣п╫я┐"
 
 #. R/grep.R: stop("must have replacements for matches")
 #: R/grep.R:0
 msgid "must have replacements for matches"
-msgstr "нужны замены для соответствий"
+msgstr "п╫я┐п╤п╫я▀ п╥п╟п╪п╣п╫я▀ п╢п╩я▐ я│п╬п╬я┌п╡п╣я┌я│я┌п╡п╦п╧"
 
 #. R/grep.R: stop("must have replacements for non-matches")
 #: R/grep.R:0
 msgid "must have replacements for non-matches"
-msgstr "нужны замены для несоответствующих значений"
+msgstr "п╫я┐п╤п╫я▀ п╥п╟п╪п╣п╫я▀ п╢п╩я▐ п╫п╣я│п╬п╬я┌п╡п╣я┌я│я┌п╡я┐я▌я┴п╦я┘ п╥п╫п╟я┤п╣п╫п╦п╧"
 
 #. R/dynload.R: gettextf("must pass a package name, %s or %s object", dQuote("DLLInfo"), dQuote("DllInfoReference"),     domain = "R-base")
 #: R/dynload.R:0
 #, fuzzy
 msgid "must pass a package name, %s or %s object"
-msgstr "должен передать имя пакета, DLLInfo или объект DllInfoReference"
+msgstr "п╢п╬п╩п╤п╣п╫ п©п╣я─п╣п╢п╟я┌я▄ п╦п╪я▐ п©п╟п╨п╣я┌п╟, DLLInfo п╦п╩п╦ п╬п╠я┼п╣п╨я┌ DllInfoReference"
 
 #. R/dynload.R: gettextf("must specify DLL file via an object of class %s. See 'getLoadedDLLs()' function",     dQuote("DLLInfo"))
 #: R/dynload.R:0
@@ -2596,62 +2597,62 @@ msgstr "должен передать имя пакета, DLLInfo или объект DllInfoReference"
 msgid ""
 "must specify DLL file via an object of class %s. See 'getLoadedDLLs()' "
 "function"
-msgstr "надо определить DLL через объект DLLInfo. См. getLoadedDLLs()"
+msgstr "п╫п╟п╢п╬ п╬п©я─п╣п╢п╣п╩п╦я┌я▄ DLL я┤п╣я─п╣п╥ п╬п╠я┼п╣п╨я┌ DLLInfo. п║п╪. getLoadedDLLs()"
 
 #. R/mapply.R: stop("must specify names of formal arguments for 'vectorize'")
 #: R/mapply.R:0
 #, fuzzy
 msgid "must specify names of formal arguments for 'vectorize'"
-msgstr "для векторизации надо указать формальные имена аргументов"
+msgstr "п╢п╩я▐ п╡п╣п╨я┌п╬я─п╦п╥п╟я├п╦п╦ п╫п╟п╢п╬ я┐п╨п╟п╥п╟я┌я▄ я└п╬я─п╪п╟п╩я▄п╫я▀п╣ п╦п╪п╣п╫п╟ п╟я─пЁя┐п╪п╣п╫я┌п╬п╡"
 
 #. R/dataframe.R: warning("named arguments are discouraged")
 #. R/dataframe.R: warning("named arguments are discouraged")
 #: R/dataframe.R:0
 msgid "named arguments are discouraged"
-msgstr "именованные аргументы не допускаются"
+msgstr "п╦п╪п╣п╫п╬п╡п╟п╫п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╫п╣ п╢п╬п©я┐я│п╨п╟я▌я┌я│я▐"
 
 #. R/dataframe.R: gettextf("named arguments other than '%s' are discouraged", "drop")
 #. R/dataframe.R: gettextf("named arguments other than '%s' are discouraged", "exact")
 #: R/dataframe.R:0
 #, fuzzy
 msgid "named arguments other than '%s' are discouraged"
-msgstr "именованные аргументы иные, чем 'drop', не допускаются"
+msgstr "п╦п╪п╣п╫п╬п╡п╟п╫п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╦п╫я▀п╣, я┤п╣п╪ 'drop', п╫п╣ п╢п╬п©я┐я│п╨п╟я▌я┌я│я▐"
 
 #. R/dataframe.R: stop("names do not match previous names")
 #. R/dataframe.R: stop("names do not match previous names")
 #: R/dataframe.R:0
 msgid "names do not match previous names"
-msgstr "имена не соответствуют прежним именам"
+msgstr "п╦п╪п╣п╫п╟ п╫п╣ я│п╬п╬я┌п╡п╣я┌я│я┌п╡я┐я▌я┌ п©я─п╣п╤п╫п╦п╪ п╦п╪п╣п╫п╟п╪"
 
 #. R/all.equal.R: gettextf("names for '%s' argument but not for '%s' argument", "target", "current",     domain = "R-base")
 #. R/all.equal.R: gettextf("names for '%s' argument but not for '%s' argument", "current", "target",     domain = "R-base")
 #: R/all.equal.R:0
 #, fuzzy
 msgid "names for '%s' argument but not for '%s' argument"
-msgstr "длина 'scale' должна равняться числу колонок 'x'"
+msgstr "п╢п╩п╦п╫п╟ 'scale' п╢п╬п╩п╤п╫п╟ я─п╟п╡п╫я▐я┌я▄я│я▐ я┤п╦я│п╩я┐ п╨п╬п╩п╬п╫п╬п╨ 'x'"
 
 #. R/namespace.R: gettextf("namespace %s %s is already loaded, but %s %s is required", sQuote(package),     current, zop, zversion)
 #: R/namespace.R:0
 #, fuzzy
 msgid "namespace %s %s is already loaded, but %s %s is required"
-msgstr "пакет %s %s загружен, но %s %s требуется для %s"
+msgstr "п©п╟п╨п╣я┌ %s %s п╥п╟пЁя─я┐п╤п╣п╫, п╫п╬ %s %s я┌я─п╣п╠я┐п╣я┌я│я▐ п╢п╩я▐ %s"
 
 #. R/namespace.R: gettextf("namespace %s %s is being loaded, but %s %s is required", sQuote(package),     version, zop, zversion)
 #: R/namespace.R:0
 #, fuzzy
 msgid "namespace %s %s is being loaded, but %s %s is required"
-msgstr "пакет %s %s загружен, но %s %s требуется для %s"
+msgstr "п©п╟п╨п╣я┌ %s %s п╥п╟пЁя─я┐п╤п╣п╫, п╫п╬ %s %s я┌я─п╣п╠я┐п╣я┌я│я▐ п╢п╩я▐ %s"
 
 #. R/namespace.R: gettextf("namespace %s is already sealed in 'loadNamespace()' function", sQuote(getNamespaceName(ns)))
 #: R/namespace.R:0
 #, fuzzy
 msgid "namespace %s is already sealed in 'loadNamespace()' function"
-msgstr "пространство имен %s уже запечатано в loadNamespace"
+msgstr "п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬ п╦п╪п╣п╫ %s я┐п╤п╣ п╥п╟п©п╣я┤п╟я┌п╟п╫п╬ п╡ loadNamespace"
 
 #. R/namespace.R: gettextf("namespace %s is imported by %s so cannot be unloaded", sQuote(getNamespaceName(ns)),     paste(sQuote(users), collapse = ", "))
 #: R/namespace.R:0
 msgid "namespace %s is imported by %s so cannot be unloaded"
-msgstr "пространство имен %s импортировано из %s и потому его нельзя выгрузить"
+msgstr "п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬ п╦п╪п╣п╫ %s п╦п╪п©п╬я─я┌п╦я─п╬п╡п╟п╫п╬ п╦п╥ %s п╦ п©п╬я┌п╬п╪я┐ п╣пЁп╬ п╫п╣п╩я▄п╥я▐ п╡я▀пЁя─я┐п╥п╦я┌я▄"
 
 #. R/namespace.R: gettextf("namespace %s is not available and has been replaced by '.GlobalEnv' when processing object %s",     sQuote(name)[1L], sQuote(where))
 #: R/namespace.R:0
@@ -2663,191 +2664,191 @@ msgstr ""
 #. R/namespace.R: stop("namespace is already attached")
 #: R/namespace.R:0
 msgid "namespace is already attached"
-msgstr "пространство имен уже присоединено"
+msgstr "п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬ п╦п╪п╣п╫ я┐п╤п╣ п©я─п╦я│п╬п╣п╢п╦п╫п╣п╫п╬"
 
 #. R/dataframe.R: stop("need 0, 1, or 2 subscripts")
 #: R/dataframe.R:0
 msgid "need 0, 1, or 2 subscripts"
-msgstr "нужны 0, 1, или 2 индекса"
+msgstr "п╫я┐п╤п╫я▀ 0, 1, п╦п╩п╦ 2 п╦п╫п╢п╣п╨я│п╟"
 
 #. R/qr.R: stop("need larger value of 'ncol' as pivoting occurred")
 #: R/qr.R:0
 msgid "need larger value of 'ncol' as pivoting occurred"
 msgstr ""
-"нужно большее значение 'ncol', так как происходит выбор ведущего элемента"
+"п╫я┐п╤п╫п╬ п╠п╬п╩я▄я┬п╣п╣ п╥п╫п╟я┤п╣п╫п╦п╣ 'ncol', я┌п╟п╨ п╨п╟п╨ п©я─п╬п╦я│я┘п╬п╢п╦я┌ п╡я▀п╠п╬я─ п╡п╣п╢я┐я┴п╣пЁп╬ я█п╩п╣п╪п╣п╫я┌п╟"
 
 #. R/grep.R: gettextf("need non-overlapping matches for %s", sQuote("invert = TRUE"), domain = "R-base")
 #: R/grep.R:0
 msgid "need non-overlapping matches for %s"
-msgstr "для %s нужны неперекрывающиеся соответствия"
+msgstr "п╢п╩я▐ %s п╫я┐п╤п╫я▀ п╫п╣п©п╣я─п╣п╨я─я▀п╡п╟я▌я┴п╦п╣я│я▐ я│п╬п╬я┌п╡п╣я┌я│я┌п╡п╦я▐"
 
 #. R/dataframe.R: stop("new columns would leave holes after existing columns")
 #: R/dataframe.R:0
 msgid "new columns would leave holes after existing columns"
-msgstr "новые колонки создадут дыры после существующих колонок"
+msgstr "п╫п╬п╡я▀п╣ п╨п╬п╩п╬п╫п╨п╦ я│п╬п╥п╢п╟п╢я┐я┌ п╢я▀я─я▀ п©п╬я│п╩п╣ я│я┐я┴п╣я│я┌п╡я┐я▌я┴п╦я┘ п╨п╬п╩п╬п╫п╬п╨"
 
 #. R/conditions.R: gettextf("no 'restart' '%s' found", as.character(r))
 #. R/conditions.R: gettextf("no 'restart' '%s' found", as.character(r))
 #: R/conditions.R:0
 msgid "no 'restart' '%s' found"
-msgstr "не найдено 'restart' '%s'"
+msgstr "п╫п╣ п╫п╟п╧п╢п╣п╫п╬ 'restart' '%s'"
 
 #. R/library.R: stop("no DLL was specified")
 #: R/library.R:0
 msgid "no DLL was specified"
-msgstr "не определена DLL"
+msgstr "п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫п╟ DLL"
 
 #. R/datetime.R: warning("no Olson database found")
 #: R/datetime.R:0
 #, fuzzy
 msgid "no Olson database found"
-msgstr "файл не найден"
+msgstr "я└п╟п╧п╩ п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #. R/pmax.R: gettextf("no arguments passed to '%s' function", "pmax()")
 #. R/pmax.R: gettextf("no arguments passed to '%s' function", "pmin()")
 #: R/pmax.R:0
 #, fuzzy
 msgid "no arguments passed to '%s' function"
-msgstr "найдена не-функция '%s'"
+msgstr "п╫п╟п╧п╢п╣п╫п╟ п╫п╣-я└я┐п╫п╨я├п╦я▐ '%s'"
 
 #. R/files.R: stop("no file found")
 #: R/files.R:0
 msgid "no file found"
-msgstr "файл не найден"
+msgstr "я└п╟п╧п╩ п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #. R/files.R: stop("no files to copy to")
 #: R/files.R:0
 msgid "no files to copy to"
-msgstr "нет файлов, чтобы скопировать на"
+msgstr "п╫п╣я┌ я└п╟п╧п╩п╬п╡, я┤я┌п╬п╠я▀ я│п╨п╬п©п╦я─п╬п╡п╟я┌я▄ п╫п╟"
 
 #. R/files.R: stop("no files to link from")
 #. R/files.R: stop("no files to link from")
 #: R/files.R:0
 msgid "no files to link from"
-msgstr "нет файлов для ссылки с"
+msgstr "п╫п╣я┌ я└п╟п╧п╩п╬п╡ п╢п╩я▐ я│я│я▀п╩п╨п╦ я│"
 
 #. R/files.R: stop("no files to link to")
 #. R/windows/junctions.R: stop("no files to link to")
 #: R/files.R:0 R/windows/junctions.R:0
 msgid "no files to link to"
-msgstr "нет файлов для ссылки на"
+msgstr "п╫п╣я┌ я└п╟п╧п╩п╬п╡ п╢п╩я▐ я│я│я▀п╩п╨п╦ п╫п╟"
 
 #. R/files.R: stop("no files/directory to link to")
 #: R/files.R:0
 msgid "no files/directory to link to"
-msgstr "нет файлов/папок для ссылки на"
+msgstr "п╫п╣я┌ я└п╟п╧п╩п╬п╡/п©п╟п©п╬п╨ п╢п╩я▐ я│я│я▀п╩п╨п╦ п╫п╟"
 
 #. R/namespace.R: gettextf("no function found corresponding to methods exports from namespace %s for: %s",     sQuote(package), paste(sQuote(sort(unique(addGenerics[nowhere]))), collapse = ", "))
 #: R/namespace.R:0
 #, fuzzy
 msgid ""
 "no function found corresponding to methods exports from namespace %s for: %s"
-msgstr "Нет подходящей функции для методов экспорта из %s для: %s"
+msgstr "п²п╣я┌ п©п╬п╢я┘п╬п╢я▐я┴п╣п╧ я└я┐п╫п╨я├п╦п╦ п╢п╩я▐ п╪п╣я┌п╬п╢п╬п╡ я█п╨я│п©п╬я─я┌п╟ п╦п╥ %s п╢п╩я▐: %s"
 
 #. R/library.R: gettext("no library trees found in 'lib.loc'", domain = "R-base")
 #: R/library.R:0
 msgid "no library trees found in 'lib.loc'"
-msgstr "деревья библиотеки не найдены в 'lib.loc'"
+msgstr "п╢п╣я─п╣п╡я▄я▐ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╦ п╫п╣ п╫п╟п╧п╢п╣п╫я▀ п╡ 'lib.loc'"
 
 #. R/match.R: stop("no match in 'char.expand()' function")
 #: R/match.R:0
 #, fuzzy
 msgid "no match in 'char.expand()' function"
-msgstr "неквадратная матрица в 'eigen'"
+msgstr "п╫п╣п╨п╡п╟п╢я─п╟я┌п╫п╟я▐ п╪п╟я┌я─п╦я├п╟ п╡ 'eigen'"
 
 #. R/library.R: message("no packages were found")
 #: R/library.R:0
 #, fuzzy
 msgid "no packages were found"
-msgstr "пакеты не найдены"
+msgstr "п©п╟п╨п╣я┌я▀ п╫п╣ п╫п╟п╧п╢п╣п╫я▀"
 
 #. R/library.R: stop("no shared object was specified")
 #: R/library.R:0
 msgid "no shared object was specified"
-msgstr "разделяемый объект не указан"
+msgstr "я─п╟п╥п╢п╣п╩я▐п╣п╪я▀п╧ п╬п╠я┼п╣п╨я┌ п╫п╣ я┐п╨п╟п╥п╟п╫"
 
 #. R/taskCallback.R: gettextf("no such element '%s'", which)
 #: R/taskCallback.R:0
 msgid "no such element '%s'"
-msgstr "нет такого элемента '%s'"
+msgstr "п╫п╣я┌ я┌п╟п╨п╬пЁп╬ я█п╩п╣п╪п╣п╫я┌п╟ '%s'"
 
 #. R/dynload.R: gettextf("no such symbol %s", id)
 #: R/dynload.R:0
 #, fuzzy
 msgid "no such symbol %s"
-msgstr "нет такого элемента '%s'"
+msgstr "п╫п╣я┌ я┌п╟п╨п╬пЁп╬ я█п╩п╣п╪п╣п╫я┌п╟ '%s'"
 
 #. R/dynload.R: gettextf("no such symbol %s in package %s", id, pkgName)
 #: R/dynload.R:0
 #, fuzzy
 msgid "no such symbol %s in package %s"
-msgstr "Информация по пакету %s"
+msgstr "п≤п╫я└п╬я─п╪п╟я├п╦я▐ п©п╬ п©п╟п╨п╣я┌я┐ %s"
 
 #. R/dataframe.R: stop("non-existent rows not allowed")
 #. R/dataframe.R: stop("non-existent rows not allowed")
 #: R/dataframe.R:0
 msgid "non-existent rows not allowed"
-msgstr "несуществующие строки не разрешены"
+msgstr "п╫п╣я│я┐я┴п╣я│я┌п╡я┐я▌я┴п╦п╣ я│я┌я─п╬п╨п╦ п╫п╣ я─п╟п╥я─п╣я┬п╣п╫я▀"
 
 #. R/sort.R: stop("non-finite 'partial'")
 #: R/sort.R:0
 msgid "non-finite 'partial'"
-msgstr "не конечная 'partial'"
+msgstr "п╫п╣ п╨п╬п╫п╣я┤п╫п╟я▐ 'partial'"
 
 #. R/dataframe.R: stop("non-numeric variable in data frame: ", vnames[!mode.ok])
 #: R/dataframe.R:0
 #, fuzzy
 msgid "non-numeric variable in data frame:"
-msgstr "нечисловая переменная переменная в таблице данных:"
+msgstr "п╫п╣я┤п╦я│п╩п╬п╡п╟я▐ п©п╣я─п╣п╪п╣п╫п╫п╟я▐ п©п╣я─п╣п╪п╣п╫п╫п╟я▐ п╡ я┌п╟п╠п╩п╦я├п╣ п╢п╟п╫п╫я▀я┘:"
 
 #. R/eigen.R: stop("non-square matrix in 'eigen()' function")
 #: R/eigen.R:0
 #, fuzzy
 msgid "non-square matrix in 'eigen()' function"
-msgstr "неквадратная матрица в 'eigen'"
+msgstr "п╫п╣п╨п╡п╟п╢я─п╟я┌п╫п╟я▐ п╪п╟я┌я─п╦я├п╟ п╡ 'eigen'"
 
 #. R/library.R: stop("none of the packages are loaded")
 #: R/library.R:0
 msgid "none of the packages are loaded"
-msgstr "ни один из пакетов не загружен"
+msgstr "п╫п╦ п╬п╢п╦п╫ п╦п╥ п©п╟п╨п╣я┌п╬п╡ п╫п╣ п╥п╟пЁя─я┐п╤п╣п╫"
 
 #. R/kappa.R: gettextf("norm '%s' currently always uses 'exact = FALSE' option", norm)
 #: R/kappa.R:0
 #, fuzzy
 msgid "norm '%s' currently always uses 'exact = FALSE' option"
-msgstr "norm '%s' сейчас всегда использует exact = FALSE"
+msgstr "norm '%s' я│п╣п╧я┤п╟я│ п╡я│п╣пЁп╢п╟ п╦я│п©п╬п╩я▄п╥я┐п╣я┌ exact = FALSE"
 
 #. R/apply.R: stop("not all elements of 'MARGIN' are names of dimensions")
 #: R/apply.R:0
 msgid "not all elements of 'MARGIN' are names of dimensions"
-msgstr "не все элементы 'MARGIN' есть имена измерений"
+msgstr "п╫п╣ п╡я│п╣ я█п╩п╣п╪п╣п╫я┌я▀ 'MARGIN' п╣я│я┌я▄ п╦п╪п╣п╫п╟ п╦п╥п╪п╣я─п╣п╫п╦п╧"
 
 #. R/namespace.R: stop("not loading a namespace")
 #: R/namespace.R:0
 msgid "not loading a namespace"
-msgstr "не загружаю пространство имен"
+msgstr "п╫п╣ п╥п╟пЁя─я┐п╤п╟я▌ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬ п╦п╪п╣п╫"
 
 #. R/load.R: warning("nothing specified to be saved")
 #: R/load.R:0
 #, fuzzy
 msgid "nothing specified to be saved"
-msgstr "ничего не задано для save()d"
+msgstr "п╫п╦я┤п╣пЁп╬ п╫п╣ п╥п╟п╢п╟п╫п╬ п╢п╩я▐ save()d"
 
 #. R/table.R: stop("nothing to tabulate")
 #: R/table.R:0
 msgid "nothing to tabulate"
-msgstr "нечего табулировать"
+msgstr "п╫п╣я┤п╣пЁп╬ я┌п╟п╠я┐п╩п╦я─п╬п╡п╟я┌я▄"
 
 #. R/library.R: gettextf("now dyn.load(\"%s\") ...", file)
 #: R/library.R:0
 msgid "now dyn.load(\"%s\") ..."
-msgstr "сейчас dyn.load(\"%s\") ..."
+msgstr "я│п╣п╧я┤п╟я│ dyn.load(\"%s\") ..."
 
 #. R/library.R: gettextf("now running dyn.unload(\"%s\") ...", file)
 #: R/library.R:0
 #, fuzzy
 msgid "now running dyn.unload(\"%s\") ..."
-msgstr "сейчас dyn.unload(\"%s\") ..."
+msgstr "я│п╣п╧я┤п╟я│ dyn.unload(\"%s\") ..."
 
 #. R/dataframe.R: warning("number of items to replace is not a multiple of replacement length")
 #: R/dataframe.R:0
@@ -2857,83 +2858,83 @@ msgstr ""
 #. R/factor.R: stop("number of levels differs")
 #: R/factor.R:0
 msgid "number of levels differs"
-msgstr "число уровней различается"
+msgstr "я┤п╦я│п╩п╬ я┐я─п╬п╡п╫п╣п╧ я─п╟п╥п╩п╦я┤п╟п╣я┌я│я▐"
 
 #. R/dataframe.R: stop("numbers of columns of arguments do not match")
 #. R/dataframe.R: stop("numbers of columns of arguments do not match")
 #: R/dataframe.R:0
 msgid "numbers of columns of arguments do not match"
-msgstr "количество колонок аргументов не соответствует друг другу"
+msgstr "п╨п╬п╩п╦я┤п╣я│я┌п╡п╬ п╨п╬п╩п╬п╫п╬п╨ п╟я─пЁя┐п╪п╣п╫я┌п╬п╡ п╫п╣ я│п╬п╬я┌п╡п╣я┌я│я┌п╡я┐п╣я┌ п╢я─я┐пЁ п╢я─я┐пЁя┐"
 
 #. R/namespace.R: gettextf("object %s was not found whilst loading namespace %s", sQuote(genname),     sQuote(package))
 #: R/namespace.R:0
 #, fuzzy
 msgid "object %s was not found whilst loading namespace %s"
-msgstr "в процессе загрузки пространства имен '%s' объект '%s' не найден"
+msgstr "п╡ п©я─п╬я├п╣я│я│п╣ п╥п╟пЁя─я┐п╥п╨п╦ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╟ п╦п╪п╣п╫ '%s' п╬п╠я┼п╣п╨я┌ '%s' п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #. R/dataframe.R: stop("only a single element should be replaced")
 #: R/dataframe.R:0
 msgid "only a single element should be replaced"
-msgstr "только одиночный элемент можно заменить"
+msgstr "я┌п╬п╩я▄п╨п╬ п╬п╢п╦п╫п╬я┤п╫я▀п╧ я█п╩п╣п╪п╣п╫я┌ п╪п╬п╤п╫п╬ п╥п╟п╪п╣п╫п╦я┌я▄"
 
 #. R/diag.R: stop("only matrix diagonals can be replaced")
 #: R/diag.R:0
 msgid "only matrix diagonals can be replaced"
-msgstr "только диагонали матрицы могут быть заменены"
+msgstr "я┌п╬п╩я▄п╨п╬ п╢п╦п╟пЁп╬п╫п╟п╩п╦ п╪п╟я┌я─п╦я├я▀ п╪п╬пЁя┐я┌ п╠я▀я┌я▄ п╥п╟п╪п╣п╫п╣п╫я▀"
 
 #. R/solve.R: stop("only square matrices can be inverted")
 #. R/solve.R: stop("only square matrices can be inverted")
 #: R/solve.R:0
 msgid "only square matrices can be inverted"
-msgstr "только квадратные матрицы можно инвертировать"
+msgstr "я┌п╬п╩я▄п╨п╬ п╨п╡п╟п╢я─п╟я┌п╫я▀п╣ п╪п╟я┌я─п╦я├я▀ п╪п╬п╤п╫п╬ п╦п╫п╡п╣я─я┌п╦я─п╬п╡п╟я┌я▄"
 
 #. R/dataframe.R: stop("only valid calls are x[[j]] <- value or x[[i,j]] <- value")
 #: R/dataframe.R:0
 msgid "only valid calls are x[[j]] <- value or x[[i,j]] <- value"
 msgstr ""
-"правильны лишь такие вызовы: x[[j]] <- значение или x[[i,j]] <- значение"
+"п©я─п╟п╡п╦п╩я▄п╫я▀ п╩п╦я┬я▄ я┌п╟п╨п╦п╣ п╡я▀п╥п╬п╡я▀: x[[j]] <- п╥п╫п╟я┤п╣п╫п╦п╣ п╦п╩п╦ x[[i,j]] <- п╥п╫п╟я┤п╣п╫п╦п╣"
 
 #. R/namespace.R: stop("operation is not allowed on base namespace")
 #: R/namespace.R:0
 #, fuzzy
 msgid "operation is not allowed on base namespace"
-msgstr "в базовом пространстве имен эта операция не разрешена"
+msgstr "п╡ п╠п╟п╥п╬п╡п╬п╪ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╣ п╦п╪п╣п╫ я█я┌п╟ п╬п©п╣я─п╟я├п╦я▐ п╫п╣ я─п╟п╥я─п╣я┬п╣п╫п╟"
 
 #. R/library.R: gettextf("package %s already present in 'search()'", sQuote(package))
 #: R/library.R:0
 #, fuzzy
 msgid "package %s already present in 'search()'"
-msgstr "пакет %s уже есть в search()"
+msgstr "п©п╟п╨п╣я┌ %s я┐п╤п╣ п╣я│я┌я▄ п╡ search()"
 
 #. R/library.R: gettextf("package %s could not be loaded", sQuote(pkg))
 #: R/library.R:0
 msgid "package %s could not be loaded"
-msgstr "пакет %s нельзя загрузить"
+msgstr "п©п╟п╨п╣я┌ %s п╫п╣п╩я▄п╥я▐ п╥п╟пЁя─я┐п╥п╦я┌я▄"
 
 #. R/namespace.R: gettextf("package %s does not have a namespace", sQuote(package), domain = "R-base")
 #: R/namespace.R:0
 msgid "package %s does not have a namespace"
-msgstr "пакет %s не имеет пространства имен"
+msgstr "п©п╟п╨п╣я┌ %s п╫п╣ п╦п╪п╣п╣я┌ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╟ п╦п╪п╣п╫"
 
 #. R/library.R: gettextf("package %s does not have a namespace and should be re-installed", sQuote(package))
 #: R/library.R:0
 #, fuzzy
 msgid "package %s does not have a namespace and should be re-installed"
 msgstr ""
-"пакет '%s' не имеет пространства имен и должен быть инсталлирован заново"
+"п©п╟п╨п╣я┌ '%s' п╫п╣ п╦п╪п╣п╣я┌ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╟ п╦п╪п╣п╫ п╦ п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╦п╫я│я┌п╟п╩п╩п╦я─п╬п╡п╟п╫ п╥п╟п╫п╬п╡п╬"
 
 #. R/library.R: gettextf("package %s has a license that you need to accept after viewing", sQuote(pkg))
 #: R/library.R:0
 #, fuzzy
 msgid "package %s has a license that you need to accept after viewing"
-msgstr "Пакет %s имеет лицензию, которую Вам нужно принять после просмотра"
+msgstr "п÷п╟п╨п╣я┌ %s п╦п╪п╣п╣я┌ п╩п╦я├п╣п╫п╥п╦я▌, п╨п╬я┌п╬я─я┐я▌ п▓п╟п╪ п╫я┐п╤п╫п╬ п©я─п╦п╫я▐я┌я▄ п©п╬я│п╩п╣ п©я─п╬я│п╪п╬я┌я─п╟"
 
 #. R/library.R: gettextf("package %s has a license that you need to accept in an interactive session",     sQuote(pkg))
 #: R/library.R:0
 msgid ""
 "package %s has a license that you need to accept in an interactive session"
 msgstr ""
-"у пакета %s есть лицензия, которую Вам нужно принять в инерактивной сессии"
+"я┐ п©п╟п╨п╣я┌п╟ %s п╣я│я┌я▄ п╩п╦я├п╣п╫п╥п╦я▐, п╨п╬я┌п╬я─я┐я▌ п▓п╟п╪ п╫я┐п╤п╫п╬ п©я─п╦п╫я▐я┌я▄ п╡ п╦п╫п╣я─п╟п╨я┌п╦п╡п╫п╬п╧ я│п╣я│я│п╦п╦"
 
 #. R/library.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is %s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"], domain = "R-base")
 #: R/library.R:0
@@ -2942,42 +2943,42 @@ msgid ""
 "package %s has a license that you need to accept:\n"
 "according to the DESCRIPTION file it is %s"
 msgstr ""
-"Пакет %s имеет лицензию, которую надо принять::\n"
-"в соответствии с файлом DESCRIPTION это"
+"п÷п╟п╨п╣я┌ %s п╦п╪п╣п╣я┌ п╩п╦я├п╣п╫п╥п╦я▌, п╨п╬я┌п╬я─я┐я▌ п╫п╟п╢п╬ п©я─п╦п╫я▐я┌я▄::\n"
+"п╡ я│п╬п╬я┌п╡п╣я┌я│я┌п╡п╦п╦ я│ я└п╟п╧п╩п╬п╪ DESCRIPTION я█я┌п╬"
 
 #. R/namespace.R: gettextf("package %s has no 'NAMESPACE' file", sQuote(package))
 #: R/namespace.R:0
 #, fuzzy
 msgid "package %s has no 'NAMESPACE' file"
-msgstr "у пакета %s нет файла NAMESPACE"
+msgstr "я┐ п©п╟п╨п╣я┌п╟ %s п╫п╣я┌ я└п╟п╧п╩п╟ NAMESPACE"
 
 #. R/library.R: gettextf("package %s has not been installed properly", sQuote(pkgname))
 #. R/namespace.R: gettextf("package %s has not been installed properly\n", sQuote(basename(pkgpath)))
 #: R/library.R:0 R/namespace.R:0
 msgid "package %s has not been installed properly"
-msgstr "пакет %s как следует не установлен"
+msgstr "п©п╟п╨п╣я┌ %s п╨п╟п╨ я│п╩п╣п╢я┐п╣я┌ п╫п╣ я┐я│я┌п╟п╫п╬п╡п╩п╣п╫"
 
 #. R/library.R: gettextf("package %s is not installed for 'arch = %s'", sQuote(pkgname), r_arch)
 #: R/library.R:0
 #, fuzzy
 msgid "package %s is not installed for 'arch = %s'"
-msgstr "пакет %s не установлен для 'arch=%s'"
+msgstr "п©п╟п╨п╣я┌ %s п╫п╣ я┐я│я┌п╟п╫п╬п╡п╩п╣п╫ п╢п╩я▐ 'arch=%s'"
 
 #. R/attach.R: gettextf("package %s is required by %s so will not be detached", sQuote(pkgname),     sQuote(sub("^package:", "", pkg)), domain = "R-base")
 #: R/attach.R:0
 msgid "package %s is required by %s so will not be detached"
-msgstr "пакет '%s' требуется для '%s', и поэтому не будет отсоединен"
+msgstr "п©п╟п╨п╣я┌ '%s' я┌я─п╣п╠я┐п╣я┌я│я▐ п╢п╩я▐ '%s', п╦ п©п╬я█я┌п╬п╪я┐ п╫п╣ п╠я┐п╢п╣я┌ п╬я┌я│п╬п╣п╢п╦п╫п╣п╫"
 
 #. R/attach.R: gettextf("package %s is required by %s, which may no longer work correctly", sQuote(pkgname),     sQuote(sub("^package:", "", pkg)), domain = "R-base")
 #: R/attach.R:0
 msgid "package %s is required by %s, which may no longer work correctly"
-msgstr "пакет '%s' требуется для %s, что может не работать правильно"
+msgstr "п©п╟п╨п╣я┌ '%s' я┌я─п╣п╠я┐п╣я┌я│я▐ п╢п╩я▐ %s, я┤я┌п╬ п╪п╬п╤п╣я┌ п╫п╣ я─п╟п╠п╬я┌п╟я┌я▄ п©я─п╟п╡п╦п╩я▄п╫п╬"
 
 #. R/library.R: gettextf("package %s required by package %s could not be found", sQuote(pkg), sQuote(pkgname))
 #: R/library.R:0
 #, fuzzy
 msgid "package %s required by package %s could not be found"
-msgstr "пакет %s, требуемый для %s, не найден"
+msgstr "п©п╟п╨п╣я┌ %s, я┌я─п╣п╠я┐п╣п╪я▀п╧ п╢п╩я▐ %s, п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #. R/library.R: gettextf("package %s version %s is loaded, but package %s version %s is required by package %s",     sQuote(pkg), current, dep$op, target, sQuote(pkgname))
 #: R/library.R:0
@@ -2985,7 +2986,7 @@ msgstr "пакет %s, требуемый для %s, не найден"
 msgid ""
 "package %s version %s is loaded, but package %s version %s is required by "
 "package %s"
-msgstr "пакет %s %s загружен, но %s %s требуется для %s"
+msgstr "п©п╟п╨п╣я┌ %s %s п╥п╟пЁя─я┐п╤п╣п╫, п╫п╬ %s %s я┌я─п╣п╠я┐п╣я┌я│я▐ п╢п╩я▐ %s"
 
 #. R/library.R: gettextf("package %s version %s was found, but package %s version %s is required by package %s",     sQuote(pkg), current, dep$op, target, sQuote(pkgname))
 #: R/library.R:0
@@ -2993,40 +2994,40 @@ msgstr "пакет %s %s загружен, но %s %s требуется для %s"
 msgid ""
 "package %s version %s was found, but package %s version %s is required by "
 "package %s"
-msgstr "пакет %s %s найден, но %s %s требуется для %s"
+msgstr "п©п╟п╨п╣я┌ %s %s п╫п╟п╧п╢п╣п╫, п╫п╬ %s %s я┌я─п╣п╠я┐п╣я┌я│я▐ п╢п╩я▐ %s"
 
 #. R/library.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(pkgname))
 #. R/namespace.R: gettextf("package %s was built before R 3.0.0: please re-install it", sQuote(basename(pkgpath)))
 #: R/library.R:0 R/namespace.R:0
 #, fuzzy
 msgid "package %s was built before R 3.0.0: please re-install it"
-msgstr "пакет %s был собран до R 2.10.0: пожалуйста, инсталлируйте его заново"
+msgstr "п©п╟п╨п╣я┌ %s п╠я▀п╩ я│п╬п╠я─п╟п╫ п╢п╬ R 2.10.0: п©п╬п╤п╟п╩я┐п╧я│я┌п╟, п╦п╫я│я┌п╟п╩п╩п╦я─я┐п╧я┌п╣ п╣пЁп╬ п╥п╟п╫п╬п╡п╬"
 
 #. R/library.R: gettextf("package %s was built for platform %s", sQuote(pkgname), platform)
 #. R/library.R: gettextf("package %s was built for platform %s", sQuote(pkgname), platform)
 #: R/library.R:0
 #, fuzzy
 msgid "package %s was built for platform %s"
-msgstr "пакет %s был собран для %s"
+msgstr "п©п╟п╨п╣я┌ %s п╠я▀п╩ я│п╬п╠я─п╟п╫ п╢п╩я▐ %s"
 
 #. R/library.R: gettextf("package %s was built under R version %s", sQuote(pkgname), as.character(built$R))
 #: R/library.R:0
 msgid "package %s was built under R version %s"
-msgstr "пакет %s был собран под R версии %s"
+msgstr "п©п╟п╨п╣я┌ %s п╠я▀п╩ я│п╬п╠я─п╟п╫ п©п╬п╢ R п╡п╣я─я│п╦п╦ %s"
 
 #. R/library.R: gettextf("package %s was found more than once. Using the one found in %s", sQuote(pkg),     sQuote(paths))
 #: R/library.R:0
 #, fuzzy
 msgid "package %s was found more than once. Using the one found in %s"
 msgstr ""
-"пакет %s найден больше одного раза,\n"
-"использую тот, который найден в %s"
+"п©п╟п╨п╣я┌ %s п╫п╟п╧п╢п╣п╫ п╠п╬п╩я▄я┬п╣ п╬п╢п╫п╬пЁп╬ я─п╟п╥п╟,\n"
+"п╦я│п©п╬п╩я▄п╥я┐я▌ я┌п╬я┌, п╨п╬я┌п╬я─я▀п╧ п╫п╟п╧п╢п╣п╫ п╡ %s"
 
 #. R/library.R: gettextf("package or namespace load failed for package %s", sQuote(package))
 #: R/library.R:0
 #, fuzzy
 msgid "package or namespace load failed for package %s"
-msgstr "не удалась загрузка пакета/пространства имен для %s"
+msgstr "п╫п╣ я┐п╢п╟п╩п╟я│я▄ п╥п╟пЁя─я┐п╥п╨п╟ п©п╟п╨п╣я┌п╟/п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╟ п╦п╪п╣п╫ п╢п╩я▐ %s"
 
 #. R/library.R: gettext("press RETURN to view license")
 #: R/library.R:0
@@ -3037,130 +3038,130 @@ msgstr ""
 #: R/summary.R:0
 #, fuzzy
 msgid "probably wrong encoding in 'names(.)' of column %s"
-msgstr "возможно, неправильная кодировка в names(.) колонки"
+msgstr "п╡п╬п╥п╪п╬п╤п╫п╬, п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ п╨п╬п╢п╦я─п╬п╡п╨п╟ п╡ names(.) п╨п╬п╩п╬п╫п╨п╦"
 
 #. R/attach.R: warning("replaced '[<-' by '\\\\[<-' in regular expression pattern")
 #: R/attach.R:0
 msgid "replaced '[<-' by '\\\\[<-' in regular expression pattern"
-msgstr "образец регулярного выражения '[<-' заменен на '\\\\[<-'"
+msgstr "п╬п╠я─п╟п╥п╣я├ я─п╣пЁя┐п╩я▐я─п╫п╬пЁп╬ п╡я▀я─п╟п╤п╣п╫п╦я▐ '[<-' п╥п╟п╪п╣п╫п╣п╫ п╫п╟ '\\\\[<-'"
 
 #. R/attach.R: warning("replaced regular expression pattern '[' by  '\\\\['")
 #: R/attach.R:0
 msgid "replaced regular expression pattern '[' by  '\\\\['"
-msgstr "образец регулярного выражения '[' заменен на  '\\\\['"
+msgstr "п╬п╠я─п╟п╥п╣я├ я─п╣пЁя┐п╩я▐я─п╫п╬пЁп╬ п╡я▀я─п╟п╤п╣п╫п╦я▐ '[' п╥п╟п╪п╣п╫п╣п╫ п╫п╟  '\\\\['"
 
 #. R/diag.R: stop("replacement diagonal has wrong length")
 #: R/diag.R:0
 msgid "replacement diagonal has wrong length"
-msgstr "у замены диагонали -- неправильная длина"
+msgstr "я┐ п╥п╟п╪п╣п╫я▀ п╢п╦п╟пЁп╬п╫п╟п╩п╦ -- п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ п╢п╩п╦п╫п╟"
 
 #. R/dataframe.R: gettextf("replacing element in non-existent column: %s", j[is.na(jseq)])
 #. R/dataframe.R: gettextf("replacing element in non-existent column: %s", jseq[jseq > nvars])
 #: R/dataframe.R:0
 #, fuzzy
 msgid "replacing element in non-existent column: %s"
-msgstr "замена элемента в несуществующей колонке:"
+msgstr "п╥п╟п╪п╣п╫п╟ я█п╩п╣п╪п╣п╫я┌п╟ п╡ п╫п╣я│я┐я┴п╣я│я┌п╡я┐я▌я┴п╣п╧ п╨п╬п╩п╬п╫п╨п╣:"
 
 #. R/namespace.R: gettext("replacing local value with import %s when loading namespace %s")
 #. R/namespace.R: gettext("replacing local value with import %s when loading namespace %s")
 #: R/namespace.R:0
 #, fuzzy
 msgid "replacing local value with import %s when loading namespace %s"
-msgstr "заменяю локальное значение на импортированное %s во время загрузки %s"
+msgstr "п╥п╟п╪п╣п╫я▐я▌ п╩п╬п╨п╟п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ п╫п╟ п╦п╪п©п╬я─я┌п╦я─п╬п╡п╟п╫п╫п╬п╣ %s п╡п╬ п╡я─п╣п╪я▐ п╥п╟пЁя─я┐п╥п╨п╦ %s"
 
 #. R/namespace.R: gettext("replacing previous import by %s when loading namespace %s")
 #: R/namespace.R:0
 #, fuzzy
 msgid "replacing previous import by %s when loading namespace %s"
-msgstr "заменяю предыдущий импорт %s во время загрузки %s"
+msgstr "п╥п╟п╪п╣п╫я▐я▌ п©я─п╣п╢я▀п╢я┐я┴п╦п╧ п╦п╪п©п╬я─я┌ %s п╡п╬ п╡я─п╣п╪я▐ п╥п╟пЁя─я┐п╥п╨п╦ %s"
 
 #. R/namespace.R: gettextf("requested methods were not found in environment/package %s: %s", sQuote(pkg),     paste(vars[is.na(match(vars, allFuns))], collapse = ", "))
 #: R/namespace.R:0
 #, fuzzy
 msgid "requested methods were not found in environment/package %s: %s"
-msgstr "запрошенные методы не найдены в окружении/пакете %s: %s"
+msgstr "п╥п╟п©я─п╬я┬п╣п╫п╫я▀п╣ п╪п╣я┌п╬п╢я▀ п╫п╣ п╫п╟п╧п╢п╣п╫я▀ п╡ п╬п╨я─я┐п╤п╣п╫п╦п╦/п©п╟п╨п╣я┌п╣ %s: %s"
 
 #. R/dataframe.R: stop("row names contain missing values")
 #. R/dataframe.R: stop("row names contain missing values")
 #: R/dataframe.R:0
 msgid "row names contain missing values"
-msgstr "имена строк содержат пропущенные значения"
+msgstr "п╦п╪п╣п╫п╟ я│я┌я─п╬п╨ я│п╬п╢п╣я─п╤п╟я┌ п©я─п╬п©я┐я┴п╣п╫п╫я▀п╣ п╥п╫п╟я┤п╣п╫п╦я▐"
 
 #. R/dataframe.R: stop("row names supplied are of the wrong length")
 #: R/dataframe.R:0
 msgid "row names supplied are of the wrong length"
-msgstr "предложенные имена строк неправильной длины"
+msgstr "п©я─п╣п╢п╩п╬п╤п╣п╫п╫я▀п╣ п╦п╪п╣п╫п╟ я│я┌я─п╬п╨ п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╧ п╢п╩п╦п╫я▀"
 
 #. R/dataframe.R: warning("row names were found from a short variable and have been discarded")
 #: R/dataframe.R:0
 msgid "row names were found from a short variable and have been discarded"
-msgstr "имена строк взяты из короткой переменной и поэтому сброшены"
+msgstr "п╦п╪п╣п╫п╟ я│я┌я─п╬п╨ п╡п╥я▐я┌я▀ п╦п╥ п╨п╬я─п╬я┌п╨п╬п╧ п©п╣я─п╣п╪п╣п╫п╫п╬п╧ п╦ п©п╬я█я┌п╬п╪я┐ я│п╠я─п╬я┬п╣п╫я▀"
 
 #. R/datetime.R: gettextf("second argument of '/' operator cannot be an object of class %s", dQuote("difftime"))
 #: R/datetime.R:0
 #, fuzzy
 msgid "second argument of '/' operator cannot be an object of class %s"
-msgstr "второй аргумент / не может быть объектом \"difftime\""
+msgstr "п╡я┌п╬я─п╬п╧ п╟я─пЁя┐п╪п╣п╫я┌ / п╫п╣ п╪п╬п╤п╣я┌ п╠я▀я┌я▄ п╬п╠я┼п╣п╨я┌п╬п╪ \"difftime\""
 
 #. R/unix/system.unix.R: warning("setting 'stdout = TRUE'")
 #: R/unix/system.unix.R:0
 #, fuzzy
 msgid "setting 'stdout = TRUE'"
-msgstr "устанавливаем stdout = TRUE"
+msgstr "я┐я│я┌п╟п╫п╟п╡п╩п╦п╡п╟п╣п╪ stdout = TRUE"
 
 #. R/library.R: gettextf("shared object %s is already loaded", sQuote(chname1))
 #: R/library.R:0
 #, fuzzy
 msgid "shared object %s is already loaded"
-msgstr "разделяемый объект '%s' уже загружен"
+msgstr "я─п╟п╥п╢п╣п╩я▐п╣п╪я▀п╧ п╬п╠я┼п╣п╨я┌ '%s' я┐п╤п╣ п╥п╟пЁя─я┐п╤п╣п╫"
 
 #. R/library.R: gettextf("shared object %s was not found", sQuote(chname1))
 #. R/library.R: gettextf("shared object %s was not found", sQuote(chname1))
 #: R/library.R:0
 #, fuzzy
 msgid "shared object %s was not found"
-msgstr "разделяемый объект %s не найден"
+msgstr "я─п╟п╥п╢п╣п╩я▐п╣п╪я▀п╧ п╬п╠я┼п╣п╨я┌ %s п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #. R/library.R: gettextf("shared object %s was not loaded", sQuote(chname1))
 #: R/library.R:0
 msgid "shared object %s was not loaded"
-msgstr "разделяемый объект %s не загружен"
+msgstr "я─п╟п╥п╢п╣п╩я▐п╣п╪я▀п╧ п╬п╠я┼п╣п╨я┌ %s п╫п╣ п╥п╟пЁя─я┐п╤п╣п╫"
 
 #. R/solve.R: stop("singular matrix 'a' in 'solve()' function")
 #. R/solve.R: stop("singular matrix 'a' in 'solve()' function")
 #: R/solve.R:0
 #, fuzzy
 msgid "singular matrix 'a' in 'solve()' function"
-msgstr "сингулярная матрица 'a' в 'solve'"
+msgstr "я│п╦п╫пЁя┐п╩я▐я─п╫п╟я▐ п╪п╟я┌я─п╦я├п╟ 'a' п╡ 'solve'"
 
 #. R/dataframe.R: gettextf("some row.names duplicated: %s --> row.names NOT used", paste(which(duplicated(new)),     collapse = ", "))
 #: R/dataframe.R:0
 #, fuzzy
 msgid "some row.names duplicated: %s --> row.names NOT used"
-msgstr "некоторые имена строк одинаковы:"
+msgstr "п╫п╣п╨п╬я┌п╬я─я▀п╣ п╦п╪п╣п╫п╟ я│я┌я─п╬п╨ п╬п╢п╦п╫п╟п╨п╬п╡я▀:"
 
 #. R/time.R: gettext("system")
 #: R/time.R:0
 msgid "system"
-msgstr "система"
+msgstr "я│п╦я│я┌п╣п╪п╟"
 
 #. R/match.R: stop("there is more than one match in 'match.arg()' function")
 #: R/match.R:0
 #, fuzzy
 msgid "there is more than one match in 'match.arg()' function"
-msgstr "более одного соответствия для 'match.arg'"
+msgstr "п╠п╬п╩п╣п╣ п╬п╢п╫п╬пЁп╬ я│п╬п╬я┌п╡п╣я┌я│я┌п╡п╦я▐ п╢п╩я▐ 'match.arg'"
 
 #. R/conditions.R: stop("this is not a valid restart specification")
 #: R/conditions.R:0
 #, fuzzy
 msgid "this is not a valid restart specification"
-msgstr "неправильное указание 'restart'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ я┐п╨п╟п╥п╟п╫п╦п╣ 'restart'"
 
 #. R/solve.R: stop("this is the 'qr' method for the generic function 'solve()'")
 #: R/solve.R:0
 #, fuzzy
 msgid "this is the 'qr' method for the generic function 'solve()'"
-msgstr "это метод \"qr\" для общей функции solve()"
+msgstr "я█я┌п╬ п╪п╣я┌п╬п╢ \"qr\" п╢п╩я▐ п╬п╠я┴п╣п╧ я└я┐п╫п╨я├п╦п╦ solve()"
 
 #. R/conditions.R: stop("this session is not interactive")
 #: R/conditions.R:0
@@ -3170,7 +3171,7 @@ msgstr ""
 #. R/seq.R: stop("too many arguments")
 #: R/seq.R:0
 msgid "too many arguments"
-msgstr "слишком много аргументов"
+msgstr "я│п╩п╦я┬п╨п╬п╪ п╪п╫п╬пЁп╬ п╟я─пЁя┐п╪п╣п╫я┌п╬п╡"
 
 #. R/methodsSupport.R: stop("tracing functions requires the 'methods' package, but unable to load the 'methods' namespace")
 #: R/methodsSupport.R:0
@@ -3179,28 +3180,28 @@ msgid ""
 "tracing functions requires the 'methods' package, but unable to load the "
 "'methods' namespace"
 msgstr ""
-"Трассировка функций требует пакета 'methods', но я не могу загрузить его "
-"пространство имен"
+"п╒я─п╟я│я│п╦я─п╬п╡п╨п╟ я└я┐п╫п╨я├п╦п╧ я┌я─п╣п╠я┐п╣я┌ п©п╟п╨п╣я┌п╟ 'methods', п╫п╬ я▐ п╫п╣ п╪п╬пЁя┐ п╥п╟пЁя─я┐п╥п╦я┌я▄ п╣пЁп╬ "
+"п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬ п╦п╪п╣п╫"
 
 #. R/kappa.R: stop("triangular matrix should be square")
 #: R/kappa.R:0
 msgid "triangular matrix should be square"
-msgstr "треугольная матрица должна быть квадратной"
+msgstr "я┌я─п╣я┐пЁп╬п╩я▄п╫п╟я▐ п╪п╟я┌я─п╦я├п╟ п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ п╨п╡п╟п╢я─п╟я┌п╫п╬п╧"
 
 #. R/mean.R: stop("trimmed means are not defined for complex data")
 #: R/mean.R:0
 msgid "trimmed means are not defined for complex data"
-msgstr "обрезанные средние не определены для комплексных данных"
+msgstr "п╬п╠я─п╣п╥п╟п╫п╫я▀п╣ я│я─п╣п╢п╫п╦п╣ п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫я▀ п╢п╩я▐ п╨п╬п╪п©п╩п╣п╨я│п╫я▀я┘ п╢п╟п╫п╫я▀я┘"
 
 #. R/source.R: stop("unable to find a plausible encoding")
 #: R/source.R:0
 msgid "unable to find a plausible encoding"
-msgstr "не могу найти правдоподобную кодировку"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╫п╟п╧я┌п╦ п©я─п╟п╡п╢п╬п©п╬п╢п╬п╠п╫я┐я▌ п╨п╬п╢п╦я─п╬п╡п╨я┐"
 
 #. R/namespace.R: gettextf("unable to load R code in package %s", sQuote(package), domain = "R-base")
 #: R/namespace.R:0
 msgid "unable to load R code in package %s"
-msgstr "не могу загрузить код R пакета %s"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╥п╟пЁя─я┐п╥п╦я┌я▄ п╨п╬п╢ R п©п╟п╨п╣я┌п╟ %s"
 
 #. R/dates.R: gettextf("unary '%s' operator is not defined for objects of class %s", "-", dQuote("Date"))
 #. R/dates.R: gettextf("unary '%s' operator is not defined for objects of class %s", .Generic,     dQuote("Date"))
@@ -3211,7 +3212,7 @@ msgstr "не могу загрузить код R пакета %s"
 #: R/dates.R:0 R/datetime.R:0 R/version.R:0
 #, fuzzy
 msgid "unary '%s' operator is not defined for objects of class %s"
-msgstr "унарный '-' не определен для объектов \"POSIXt\""
+msgstr "я┐п╫п╟я─п╫я▀п╧ '-' п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╬п╡ \"POSIXt\""
 
 #. R/dataframe.R: stop("undefined columns selected")
 #. R/dataframe.R: stop("undefined columns selected")
@@ -3220,44 +3221,44 @@ msgstr "унарный '-' не определен для объектов \"POSIXt\""
 #. R/dataframe.R: stop("undefined columns selected")
 #: R/dataframe.R:0
 msgid "undefined columns selected"
-msgstr "выбраны не определенные колонки"
+msgstr "п╡я▀п╠я─п╟п╫я▀ п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫п╫я▀п╣ п╨п╬п╩п╬п╫п╨п╦"
 
 #. R/namespace.R: gettextf("undefined exports: %s", undef)
 #: R/namespace.R:0
 #, fuzzy
 msgid "undefined exports: %s"
-msgstr "неопределенные экспорты:"
+msgstr "п╫п╣п╬п©я─п╣п╢п╣п╩п╣п╫п╫я▀п╣ я█п╨я│п©п╬я─я┌я▀:"
 
 #. R/grep.R: warning("unknown cost components ignored")
 #: R/grep.R:0
 msgid "unknown cost components ignored"
-msgstr "неизвестные компоненты платы пропущены"
+msgstr "п╫п╣п╦п╥п╡п╣я│я┌п╫я▀п╣ п╨п╬п╪п©п╬п╫п╣п╫я┌я▀ п©п╩п╟я┌я▀ п©я─п╬п©я┐я┴п╣п╫я▀"
 
 #. R/grep.R: warning("unknown match distance components ignored")
 #: R/grep.R:0
 msgid "unknown match distance components ignored"
-msgstr "компоненты расстояния с неизвестным соответствием пропущены"
+msgstr "п╨п╬п╪п©п╬п╫п╣п╫я┌я▀ я─п╟я│я│я┌п╬я▐п╫п╦я▐ я│ п╫п╣п╦п╥п╡п╣я│я┌п╫я▀п╪ я│п╬п╬я┌п╡п╣я┌я│я┌п╡п╦п╣п╪ п©я─п╬п©я┐я┴п╣п╫я▀"
 
 #. R/namespace.R: gettextf("unknown namespace directive: %s", deparse(e, nlines = 1L))
 #: R/namespace.R:0
 msgid "unknown namespace directive: %s"
-msgstr "неизвестная директива пространства имен: %s"
+msgstr "п╫п╣п╦п╥п╡п╣я│я┌п╫п╟я▐ п╢п╦я─п╣п╨я┌п╦п╡п╟ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╟ п╦п╪п╣п╫: %s"
 
 #. R/dataframe.R: stop("unsupported matrix index in replacement")
 #: R/dataframe.R:0
 #, fuzzy
 msgid "unsupported matrix index in replacement"
-msgstr "только логические матричные индексы разрешены для замены"
+msgstr "я┌п╬п╩я▄п╨п╬ п╩п╬пЁп╦я┤п╣я│п╨п╦п╣ п╪п╟я┌я─п╦я┤п╫я▀п╣ п╦п╫п╢п╣п╨я│я▀ я─п╟п╥я─п╣я┬п╣п╫я▀ п╢п╩я▐ п╥п╟п╪п╣п╫я▀"
 
 #. R/sort.R: stop("unsupported options for partial sorting")
 #: R/sort.R:0
 msgid "unsupported options for partial sorting"
-msgstr "неподдерживаемые опции для частичной сортировки"
+msgstr "п╫п╣п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣п╪я▀п╣ п╬п©я├п╦п╦ п╢п╩я▐ я┤п╟я│я┌п╦я┤п╫п╬п╧ я│п╬я─я┌п╦я─п╬п╡п╨п╦"
 
 #. R/time.R: gettext("user")
 #: R/time.R:0
 msgid "user"
-msgstr "пользователь"
+msgstr "п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▄"
 
 #. R/outer.R: stop("using '...' with 'FUN = \"*\"' option is an error")
 #: R/outer.R:0
@@ -3268,30 +3269,30 @@ msgstr ""
 #: R/formals.R:0
 #, fuzzy
 msgid "using the first element of 'value' of type \"expression\""
-msgstr "использую первый элемент 'value' типа выражения"
+msgstr "п╦я│п©п╬п╩я▄п╥я┐я▌ п©п╣я─п╡я▀п╧ я█п╩п╣п╪п╣п╫я┌ 'value' я┌п╦п©п╟ п╡я▀я─п╟п╤п╣п╫п╦я▐"
 
 #. R/grep.R: stop("value does not provide any replacement values")
 #: R/grep.R:0
 msgid "value does not provide any replacement values"
-msgstr "значение не дает никаких замен"
+msgstr "п╥п╫п╟я┤п╣п╫п╦п╣ п╫п╣ п╢п╟п╣я┌ п╫п╦п╨п╟п╨п╦я┘ п╥п╟п╪п╣п╫"
 
 #. R/get.R: gettextf("value for %s not found", sQuote(x))
 #: R/get.R:0
 #, fuzzy
 msgid "value for %s not found"
-msgstr "файл '%s' не найден"
+msgstr "я└п╟п╧п╩ '%s' п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #. R/rle.R: gettext("  values :", domain = "R-base")
 #: R/rle.R:0
 #, fuzzy
 msgid "values :"
-msgstr "значение для '"
+msgstr "п╥п╫п╟я┤п╣п╫п╦п╣ п╢п╩я▐ '"
 
 #. R/cut.R: stop("values in 'breaks' argument are not unique")
 #: R/cut.R:0
 #, fuzzy
 msgid "values in 'breaks' argument are not unique"
-msgstr "'breaks' не уникальны"
+msgstr "'breaks' п╫п╣ я┐п╫п╦п╨п╟п╩я▄п╫я▀"
 
 #. R/library.R: gettextf("version %s of %s masked by %s in %s", versions[which(sufficient)[1L]],     sQuote(pkg), current, lib.loc[which(sufficient)[1L] - 1L])
 #: R/library.R:0
@@ -3301,12 +3302,12 @@ msgstr ""
 #. R/seq.R: stop("wrong sign in 'by' argument")
 #: R/seq.R:0
 msgid "wrong sign in 'by' argument"
-msgstr "неправильный знак в 'by' аргумент"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╥п╫п╟п╨ п╡ 'by' п╟я─пЁя┐п╪п╣п╫я┌"
 
 #. R/as.R: stop("you cannot be serious", domain = "R-base")
 #: R/as.R:0
 msgid "you cannot be serious"
-msgstr "Вы шутите"
+msgstr "п▓я▀ я┬я┐я┌п╦я┌п╣"
 
 #. R/dates.R: ngettext(as.integer(length(x) - max), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
 #. R/datetime.R: ngettext(as.integer(length(x) - max), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
@@ -3331,9 +3332,9 @@ msgstr[2] ""
 #, fuzzy
 msgid "%d row in value to replace %d rows"
 msgid_plural "%d rows in value to replace %d rows"
-msgstr[0] "%d строк собираются заменить %d строк"
-msgstr[1] "%d строк собираются заменить %d строк"
-msgstr[2] "%d строк собираются заменить %d строк"
+msgstr[0] "%d я│я┌я─п╬п╨ я│п╬п╠п╦я─п╟я▌я┌я│я▐ п╥п╟п╪п╣п╫п╦я┌я▄ %d я│я┌я─п╬п╨"
+msgstr[1] "%d я│я┌я─п╬п╨ я│п╬п╠п╦я─п╟я▌я┌я│я▐ п╥п╟п╪п╣п╫п╦я┌я▄ %d я│я┌я─п╬п╨"
+msgstr[2] "%d я│я┌я─п╬п╨ я│п╬п╠п╦я─п╟я▌я┌я│я▐ п╥п╟п╪п╣п╫п╦я┌я▄ %d я│я┌я─п╬п╨"
 
 #. R/all.equal.R: ngettext(sum(ne), "%d string mismatch", "%d string mismatches")
 #: R/all.equal.R:0
@@ -3349,9 +3350,9 @@ msgstr[2] ""
 #, fuzzy
 msgid "'by' argument must specify a uniquely valid column"
 msgid_plural "'by' argument must specify uniquely valid columns"
-msgstr[0] "'by' должен определять правильные колонк(и)"
-msgstr[1] "'by' должен определять правильные колонк(и)"
-msgstr[2] "'by' должен определять правильные колонк(и)"
+msgstr[0] "'by' п╢п╬п╩п╤п╣п╫ п╬п©я─п╣п╢п╣п╩я▐я┌я▄ п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╨п╬п╩п╬п╫п╨(п╦)"
+msgstr[1] "'by' п╢п╬п╩п╤п╣п╫ п╬п©я─п╣п╢п╣п╩я▐я┌я▄ п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╨п╬п╩п╬п╫п╨(п╦)"
+msgstr[2] "'by' п╢п╬п╩п╤п╣п╫ п╬п©я─п╣п╢п╣п╩я▐я┌я▄ п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╨п╬п╩п╬п╫п╨(п╦)"
 
 #. R/source.R: ngettext(Ne, "--> parsed %d expression; now evaluating them:", "--> parsed %d expressions; now evaluating them:",     domain = "R-base")
 #: R/source.R:0
@@ -3370,11 +3371,11 @@ msgid_plural ""
 "Functions found when exporting methods from the namespace %s which are not "
 "S4 generic: %s"
 msgstr[0] ""
-"Во время экспорта из пространства имен %s найдена не S4-общая функция: %s"
+"п▓п╬ п╡я─п╣п╪я▐ я█п╨я│п©п╬я─я┌п╟ п╦п╥ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╟ п╦п╪п╣п╫ %s п╫п╟п╧п╢п╣п╫п╟ п╫п╣ S4-п╬п╠я┴п╟я▐ я└я┐п╫п╨я├п╦я▐: %s"
 msgstr[1] ""
-"Во время экспорта из пространства имен %s найдены не S4-общие функции: %s"
+"п▓п╬ п╡я─п╣п╪я▐ я█п╨я│п©п╬я─я┌п╟ п╦п╥ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╟ п╦п╪п╣п╫ %s п╫п╟п╧п╢п╣п╫я▀ п╫п╣ S4-п╬п╠я┴п╦п╣ я└я┐п╫п╨я├п╦п╦: %s"
 msgstr[2] ""
-"Во время экспорта из пространства имен %s найдены не S4-общие функции: %s"
+"п▓п╬ п╡я─п╣п╪я▐ я█п╨я│п©п╬я─я┌п╟ п╦п╥ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╟ п╦п╪п╣п╫ %s п╫п╟п╧п╢п╣п╫я▀ п╫п╣ S4-п╬п╠я┴п╦п╣ я└я┐п╫п╨я├п╦п╦: %s"
 
 #. R/namespace.R: ngettext(sum(notex), "S3 method %s was declared in 'NAMESPACE' file but was not found",     "S3 methods %s were declared in 'NAMESPACE' file but was not found", domain = "R-base")
 #: R/namespace.R:0
@@ -3382,9 +3383,9 @@ msgstr[2] ""
 msgid "S3 method %s was declared in 'NAMESPACE' file but was not found"
 msgid_plural ""
 "S3 methods %s were declared in 'NAMESPACE' file but was not found"
-msgstr[0] "S3 метод %s объявлен в NAMESPACE но не найден"
-msgstr[1] "S3 методы %s объявлены в NAMESPACE но не найдены"
-msgstr[2] "S3 методы %s объявлены в NAMESPACE но не найдены"
+msgstr[0] "S3 п╪п╣я┌п╬п╢ %s п╬п╠я┼я▐п╡п╩п╣п╫ п╡ NAMESPACE п╫п╬ п╫п╣ п╫п╟п╧п╢п╣п╫"
+msgstr[1] "S3 п╪п╣я┌п╬п╢я▀ %s п╬п╠я┼я▐п╡п╩п╣п╫я▀ п╡ NAMESPACE п╫п╬ п╫п╣ п╫п╟п╧п╢п╣п╫я▀"
+msgstr[2] "S3 п╪п╣я┌п╬п╢я▀ %s п╬п╠я┼я▐п╡п╩п╣п╫я▀ п╡ NAMESPACE п╫п╬ п╫п╣ п╫п╟п╧п╢п╣п╫я▀"
 
 #. R/attach.R: ngettext(length(same), "The following object is masked _by_ %s:\n\n%s\n", "The following objects are masked _by_ %s:\n\n%s\n",     domain = "R-base")
 #: R/attach.R:0
@@ -3419,17 +3420,17 @@ msgstr[2] ""
 #, fuzzy
 msgid "Warning message:"
 msgid_plural "Warning messages:"
-msgstr[0] "Предупреждение:\n"
-msgstr[1] "Предупреждения:\n"
-msgstr[2] "Предупреждения:\n"
+msgstr[0] "п÷я─п╣п╢я┐п©я─п╣п╤п╢п╣п╫п╦п╣:\n"
+msgstr[1] "п÷я─п╣п╢я┐п©я─п╣п╤п╢п╣п╫п╦я▐:\n"
+msgstr[2] "п÷я─п╣п╢я┐п©я─п╣п╤п╢п╣п╫п╦я▐:\n"
 
 #. R/namespace.R: ngettext(length(miss), "class %s is not exported by 'namespace:%s'", "classes %s are not exported by 'namespace:%s'",     domain = "R-base")
 #: R/namespace.R:0
 msgid "class %s is not exported by 'namespace:%s'"
 msgid_plural "classes %s are not exported by 'namespace:%s'"
-msgstr[0] "класс %s не экспортирован из 'namespace:%s'"
-msgstr[1] "классы %s не экспортированы из 'namespace:%s'"
-msgstr[2] "классы %s не экспортированы из 'namespace:%s'"
+msgstr[0] "п╨п╩п╟я│я│ %s п╫п╣ я█п╨я│п©п╬я─я┌п╦я─п╬п╡п╟п╫ п╦п╥ 'namespace:%s'"
+msgstr[1] "п╨п╩п╟я│я│я▀ %s п╫п╣ я█п╨я│п©п╬я─я┌п╦я─п╬п╡п╟п╫я▀ п╦п╥ 'namespace:%s'"
+msgstr[2] "п╨п╩п╟я│я│я▀ %s п╫п╣ я█п╨я│п©п╬я─я┌п╦я─п╬п╡п╟п╫я▀ п╦п╥ 'namespace:%s'"
 
 #. R/merge.R: ngettext(sum(d), "column name %s is duplicated in the result", "column names %s are duplicated in the result",     domain = "R-base")
 #: R/merge.R:0
@@ -3444,17 +3445,17 @@ msgstr[2] ""
 #, fuzzy
 msgid "data frame with 0 columns and %d row"
 msgid_plural "data frame with 0 columns and %d rows"
-msgstr[0] "таблица данных с 0 колонок и %d строк"
-msgstr[1] "таблица данных с 0 колонок и %d строк"
-msgstr[2] "таблица данных с 0 колонок и %d строк"
+msgstr[0] "я┌п╟п╠п╩п╦я├п╟ п╢п╟п╫п╫я▀я┘ я│ 0 п╨п╬п╩п╬п╫п╬п╨ п╦ %d я│я┌я─п╬п╨"
+msgstr[1] "я┌п╟п╠п╩п╦я├п╟ п╢п╟п╫п╫я▀я┘ я│ 0 п╨п╬п╩п╬п╫п╬п╨ п╦ %d я│я┌я─п╬п╨"
+msgstr[2] "я┌п╟п╠п╩п╦я├п╟ п╢п╟п╫п╫я▀я┘ я│ 0 п╨п╬п╩п╬п╫п╬п╨ п╦ %d я│я┌я─п╬п╨"
 
 #. R/New-Internal.R: ngettext(as.integer(sum(is.na(opts))), "deparse option %s is not recognized", "deparse options %s are not recognized",     domain = "R-base")
 #: R/New-Internal.R:0
 msgid "deparse option %s is not recognized"
 msgid_plural "deparse options %s are not recognized"
-msgstr[0] "опция разбора %s не распознана"
-msgstr[1] "опции разбора %s не распознаны"
-msgstr[2] "опции разбора %s не распознаны"
+msgstr[0] "п╬п©я├п╦я▐ я─п╟п╥п╠п╬я─п╟ %s п╫п╣ я─п╟я│п©п╬п╥п╫п╟п╫п╟"
+msgstr[1] "п╬п©я├п╦п╦ я─п╟п╥п╠п╬я─п╟ %s п╫п╣ я─п╟я│п©п╬п╥п╫п╟п╫я▀"
+msgstr[2] "п╬п©я├п╦п╦ я─п╟п╥п╠п╬я─п╟ %s п╫п╣ я─п╟я│п©п╬п╥п╫п╟п╫я▀"
 
 #. R/qr.R: ngettext(length(list(...)), "extra argument %s will be disregarded", "extra arguments %s will be disregarded",     domain = "R-base")
 #. R/seq.R: ngettext(length(list(...)), "extra argument %s will be disregarded", "extra arguments %s will be disregarded",     domain = "R-base")
@@ -3462,9 +3463,9 @@ msgstr[2] "опции разбора %s не распознаны"
 #, fuzzy
 msgid "extra argument %s will be disregarded"
 msgid_plural "extra arguments %s will be disregarded"
-msgstr[0] "дополнительные аргументы %s не будут учтены"
-msgstr[1] "дополнительные аргументы %s не будут учтены"
-msgstr[2] "дополнительные аргументы %s не будут учтены"
+msgstr[0] "п╢п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ %s п╫п╣ п╠я┐п╢я┐я┌ я┐я┤я┌п╣п╫я▀"
+msgstr[1] "п╢п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ %s п╫п╣ п╠я┐п╢я┐я┌ я┐я┤я┌п╣п╫я▀"
+msgstr[2] "п╢п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ %s п╫п╣ п╠я┐п╢я┐я┌ я┐я┤я┌п╣п╫я▀"
 
 #. R/dataframe.R: ngettext(nr, "invalid 'row.names', length %d for a data frame with %d row", "invalid 'row.names', length %d for a data frame with %d rows",     domain = "R-base")
 #: R/dataframe.R:0
@@ -3472,19 +3473,19 @@ msgstr[2] "дополнительные аргументы %s не будут учтены"
 msgid "invalid 'row.names', length %d for a data frame with %d row"
 msgid_plural "invalid 'row.names', length %d for a data frame with %d rows"
 msgstr[0] ""
-"неправильные 'row.names', длиной %d для таблицы данных с %d строками"
+"п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ 'row.names', п╢п╩п╦п╫п╬п╧ %d п╢п╩я▐ я┌п╟п╠п╩п╦я├я▀ п╢п╟п╫п╫я▀я┘ я│ %d я│я┌я─п╬п╨п╟п╪п╦"
 msgstr[1] ""
-"неправильные 'row.names', длиной %d для таблицы данных с %d строками"
+"п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ 'row.names', п╢п╩п╦п╫п╬п╧ %d п╢п╩я▐ я┌п╟п╠п╩п╦я├я▀ п╢п╟п╫п╫я▀я┘ я│ %d я│я┌я─п╬п╨п╟п╪п╦"
 msgstr[2] ""
-"неправильные 'row.names', длиной %d для таблицы данных с %d строками"
+"п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ 'row.names', п╢п╩п╦п╫п╬п╧ %d п╢п╩я▐ я┌п╟п╠п╩п╦я├я▀ п╢п╟п╫п╫я▀я┘ я│ %d я│я┌я─п╬п╨п╟п╪п╦"
 
 #. R/library.R: ngettext(length(nopkgs), "library %s contains no packages", "libraries %s contain no packages",     domain = "R-base")
 #: R/library.R:0
 msgid "library %s contains no packages"
 msgid_plural "libraries %s contain no packages"
-msgstr[0] "библиотека %s не содержит пакетов"
-msgstr[1] "библиотеки %s не содержат пакетов"
-msgstr[2] "библиотеки %s не содержат пакетов"
+msgstr[0] "п╠п╦п╠п╩п╦п╬я┌п╣п╨п╟ %s п╫п╣ я│п╬п╢п╣я─п╤п╦я┌ п©п╟п╨п╣я┌п╬п╡"
+msgstr[1] "п╠п╦п╠п╩п╦п╬я┌п╣п╨п╦ %s п╫п╣ я│п╬п╢п╣я─п╤п╟я┌ п©п╟п╨п╣я┌п╬п╡"
+msgstr[2] "п╠п╦п╠п╩п╦п╬я┌п╣п╨п╦ %s п╫п╣ я│п╬п╢п╣я─п╤п╟я┌ п©п╟п╨п╣я┌п╬п╡"
 
 #. R/dataframe.R: ngettext(length(nonuniq), "non-unique value when setting 'row.names': %s", "non-unique values when setting 'row.names': %s",     domain = "R-base")
 #: R/dataframe.R:0
@@ -3498,71 +3499,71 @@ msgstr[2] ""
 #: R/namespace.R:0
 msgid "object %s is not exported by 'namespace:%s'"
 msgid_plural "objects %s are not exported by 'namespace:%s'"
-msgstr[0] "объект %s не экспортирован из 'namespace:%s'"
-msgstr[1] "объекты %s не экспортированы из 'namespace:%s'"
-msgstr[2] "объекты %s не экспортированы из 'namespace:%s'"
+msgstr[0] "п╬п╠я┼п╣п╨я┌ %s п╫п╣ я█п╨я│п©п╬я─я┌п╦я─п╬п╡п╟п╫ п╦п╥ 'namespace:%s'"
+msgstr[1] "п╬п╠я┼п╣п╨я┌я▀ %s п╫п╣ я█п╨я│п©п╬я─я┌п╦я─п╬п╡п╟п╫я▀ п╦п╥ 'namespace:%s'"
+msgstr[2] "п╬п╠я┼п╣п╨я┌я▀ %s п╫п╣ я█п╨я│п©п╬я─я┌п╦я─п╬п╡п╟п╫я▀ п╦п╥ 'namespace:%s'"
 
 #. R/load.R: ngettext(n, "object %s was not found", "objects %s were not found", domain = "R-base")
 #: R/load.R:0
 #, fuzzy
 msgid "object %s was not found"
 msgid_plural "objects %s were not found"
-msgstr[0] "%s не найден"
-msgstr[1] "%s не найден"
-msgstr[2] "%s не найден"
+msgstr[0] "%s п╫п╣ п╫п╟п╧п╢п╣п╫"
+msgstr[1] "%s п╫п╣ п╫п╟п╧п╢п╣п╫"
+msgstr[2] "%s п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #. R/library.R: ngettext(as.integer(sum(m)), "package %s is not loaded", "packages %s are not loaded",     domain = "R-base")
 #: R/library.R:0
 msgid "package %s is not loaded"
 msgid_plural "packages %s are not loaded"
-msgstr[0] "пакет %s не загружен"
-msgstr[1] "пакеты %s не загружены"
-msgstr[2] "пакеты %s не загружены"
+msgstr[0] "п©п╟п╨п╣я┌ %s п╫п╣ п╥п╟пЁя─я┐п╤п╣п╫"
+msgstr[1] "п©п╟п╨п╣я┌я▀ %s п╫п╣ п╥п╟пЁя─я┐п╤п╣п╫я▀"
+msgstr[2] "п©п╟п╨п╣я┌я▀ %s п╫п╣ п╥п╟пЁя─я┐п╤п╣п╫я▀"
 
 #. R/namespace.R: ngettext(sum(ex), "previous export %s is being replaced", "previous exports %s are being replaced",     domain = "R-base")
 #: R/namespace.R:0
 #, fuzzy
 msgid "previous export %s is being replaced"
 msgid_plural "previous exports %s are being replaced"
-msgstr[0] "предыдущий экспорт %s заменяется"
-msgstr[1] "предыдущие экспорты %s заменяются"
-msgstr[2] "предыдущие экспорты %s заменяются"
+msgstr[0] "п©я─п╣п╢я▀п╢я┐я┴п╦п╧ я█п╨я│п©п╬я─я┌ %s п╥п╟п╪п╣п╫я▐п╣я┌я│я▐"
+msgstr[1] "п©я─п╣п╢я▀п╢я┐я┴п╦п╣ я█п╨я│п©п╬я─я┌я▀ %s п╥п╟п╪п╣п╫я▐я▌я┌я│я▐"
+msgstr[2] "п©я─п╣п╢я▀п╢я┐я┴п╦п╣ я█п╨я│п©п╬я─я┌я▀ %s п╥п╟п╪п╣п╫я▐я▌я┌я│я▐"
 
 #. R/dataframe.R: ngettext(ncolv, "provided %d variable to replace %d variables", "provided %d variables to replace %d variables",     domain = "R-base")
 #: R/dataframe.R:0
 #, fuzzy
 msgid "provided %d variable to replace %d variables"
 msgid_plural "provided %d variables to replace %d variables"
-msgstr[0] "предложено %d переменных для замены %d переменных"
-msgstr[1] "предложено %d переменных для замены %d переменных"
-msgstr[2] "предложено %d переменных для замены %d переменных"
+msgstr[0] "п©я─п╣п╢п╩п╬п╤п╣п╫п╬ %d п©п╣я─п╣п╪п╣п╫п╫я▀я┘ п╢п╩я▐ п╥п╟п╪п╣п╫я▀ %d п©п╣я─п╣п╪п╣п╫п╫я▀я┘"
+msgstr[1] "п©я─п╣п╢п╩п╬п╤п╣п╫п╬ %d п©п╣я─п╣п╪п╣п╫п╫я▀я┘ п╢п╩я▐ п╥п╟п╪п╣п╫я▀ %d п©п╣я─п╣п╪п╣п╫п╫я▀я┘"
+msgstr[2] "п©я─п╣п╢п╩п╬п╤п╣п╫п╬ %d п©п╣я─п╣п╪п╣п╫п╫я▀я┘ п╢п╩я▐ п╥п╟п╪п╣п╫я▀ %d п©п╣я─п╣п╪п╣п╫п╫я▀я┘"
 
 #. R/dataframe.R: ngettext(nrowv, "replacement data has %d row to replace %d rows", "replacement data has %d rows to replace %d rows",     domain = "R-base")
 #: R/dataframe.R:0
 #, fuzzy
 msgid "replacement data has %d row to replace %d rows"
 msgid_plural "replacement data has %d rows to replace %d rows"
-msgstr[0] "у данных замены -- %d строк, чтобы заменить %d строк"
-msgstr[1] "у данных замены -- %d строк, чтобы заменить %d строк"
-msgstr[2] "у данных замены -- %d строк, чтобы заменить %d строк"
+msgstr[0] "я┐ п╢п╟п╫п╫я▀я┘ п╥п╟п╪п╣п╫я▀ -- %d я│я┌я─п╬п╨, я┤я┌п╬п╠я▀ п╥п╟п╪п╣п╫п╦я┌я▄ %d я│я┌я─п╬п╨"
+msgstr[1] "я┐ п╢п╟п╫п╫я▀я┘ п╥п╟п╪п╣п╫я▀ -- %d я│я┌я─п╬п╨, я┤я┌п╬п╠я▀ п╥п╟п╪п╣п╫п╦я┌я▄ %d я│я┌я─п╬п╨"
+msgstr[2] "я┐ п╢п╟п╫п╫я▀я┘ п╥п╟п╪п╣п╫я▀ -- %d я│я┌я─п╬п╨, я┤я┌п╬п╠я▀ п╥п╟п╪п╣п╫п╦я┌я▄ %d я│я┌я─п╬п╨"
 
 #. R/dataframe.R: ngettext(N, "replacement element %d has %d row to replace %d rows", "replacement element %d has %d rows to replace %d rows",     domain = "R-base")
 #: R/dataframe.R:0
 #, fuzzy
 msgid "replacement element %d has %d row to replace %d rows"
 msgid_plural "replacement element %d has %d rows to replace %d rows"
-msgstr[0] "у элемента замены %d -- %d строк, чтобы заменить %d строк"
-msgstr[1] "у элемента замены %d -- %d строк, чтобы заменить %d строк"
-msgstr[2] "у элемента замены %d -- %d строк, чтобы заменить %d строк"
+msgstr[0] "я┐ я█п╩п╣п╪п╣п╫я┌п╟ п╥п╟п╪п╣п╫я▀ %d -- %d я│я┌я─п╬п╨, я┤я┌п╬п╠я▀ п╥п╟п╪п╣п╫п╦я┌я▄ %d я│я┌я─п╬п╨"
+msgstr[1] "я┐ я█п╩п╣п╪п╣п╫я┌п╟ п╥п╟п╪п╣п╫я▀ %d -- %d я│я┌я─п╬п╨, я┤я┌п╬п╠я▀ п╥п╟п╪п╣п╫п╦я┌я▄ %d я│я┌я─п╬п╨"
+msgstr[2] "я┐ я█п╩п╣п╪п╣п╫я┌п╟ п╥п╟п╪п╣п╫я▀ %d -- %d я│я┌я─п╬п╨, я┤я┌п╬п╠я▀ п╥п╟п╪п╣п╫п╦я┌я▄ %d я│я┌я─п╬п╨"
 
 #. R/dataframe.R: ngettext(N, "replacement element %d has %d row, need %d", "replacement element %d has %d rows, need %d",     domain = "R-base")
 #: R/dataframe.R:0
 #, fuzzy
 msgid "replacement element %d has %d row, need %d"
 msgid_plural "replacement element %d has %d rows, need %d"
-msgstr[0] "у элемента замены %d -- %d строк, а надо %d"
-msgstr[1] "у элемента замены %d -- %d строк, а надо %d"
-msgstr[2] "у элемента замены %d -- %d строк, а надо %d"
+msgstr[0] "я┐ я█п╩п╣п╪п╣п╫я┌п╟ п╥п╟п╪п╣п╫я▀ %d -- %d я│я┌я─п╬п╨, п╟ п╫п╟п╢п╬ %d"
+msgstr[1] "я┐ я█п╩п╣п╪п╣п╫я┌п╟ п╥п╟п╪п╣п╫я▀ %d -- %d я│я┌я─п╬п╨, п╟ п╫п╟п╢п╬ %d"
+msgstr[2] "я┐ я█п╩п╣п╪п╣п╫я┌п╟ п╥п╟п╪п╣п╫я▀ %d -- %d я│я┌я─п╬п╨, п╟ п╫п╟п╢п╬ %d"
 
 #. R/dataframe.R: ngettext(N, "replacement element %d is a matrix/data frame of %d row, need %d", "replacement element %d is a matrix/data frame of %d rows, need %d",     domain = "R-base")
 #: R/dataframe.R:0
@@ -3570,18 +3571,18 @@ msgstr[2] "у элемента замены %d -- %d строк, а надо %d"
 msgid "replacement element %d is a matrix/data frame of %d row, need %d"
 msgid_plural ""
 "replacement element %d is a matrix/data frame of %d rows, need %d"
-msgstr[0] "элемент замены %d -- матрица/таблица данных из %d строк, а надо %d"
-msgstr[1] "элемент замены %d -- матрица/таблица данных из %d строк, а надо %d"
-msgstr[2] "элемент замены %d -- матрица/таблица данных из %d строк, а надо %d"
+msgstr[0] "я█п╩п╣п╪п╣п╫я┌ п╥п╟п╪п╣п╫я▀ %d -- п╪п╟я┌я─п╦я├п╟/я┌п╟п╠п╩п╦я├п╟ п╢п╟п╫п╫я▀я┘ п╦п╥ %d я│я┌я─п╬п╨, п╟ п╫п╟п╢п╬ %d"
+msgstr[1] "я█п╩п╣п╪п╣п╫я┌ п╥п╟п╪п╣п╫я▀ %d -- п╪п╟я┌я─п╦я├п╟/я┌п╟п╠п╩п╦я├п╟ п╢п╟п╫п╫я▀я┘ п╦п╥ %d я│я┌я─п╬п╨, п╟ п╫п╟п╢п╬ %d"
+msgstr[2] "я█п╩п╣п╪п╣п╫я┌ п╥п╟п╪п╣п╫я▀ %d -- п╪п╟я┌я─п╦я├п╟/я┌п╟п╠п╩п╦я├п╟ п╢п╟п╫п╫я▀я┘ п╦п╥ %d я│я┌я─п╬п╨, п╟ п╫п╟п╢п╬ %d"
 
 #. R/dataframe.R: ngettext(m, "replacement has %d item, need %d", "replacement has %d items, need %d",     domain = "R-base")
 #: R/dataframe.R:0
 #, fuzzy
 msgid "replacement has %d item, need %d"
 msgid_plural "replacement has %d items, need %d"
-msgstr[0] "у замены %d элементов, а надо %d"
-msgstr[1] "у замены %d элементов, а надо %d"
-msgstr[2] "у замены %d элементов, а надо %d"
+msgstr[0] "я┐ п╥п╟п╪п╣п╫я▀ %d я█п╩п╣п╪п╣п╫я┌п╬п╡, п╟ п╫п╟п╢п╬ %d"
+msgstr[1] "я┐ п╥п╟п╪п╣п╫я▀ %d я█п╩п╣п╪п╣п╫я┌п╬п╡, п╟ п╫п╟п╢п╬ %d"
+msgstr[2] "я┐ п╥п╟п╪п╣п╫я▀ %d я█п╩п╣п╪п╣п╫я┌п╬п╡, п╟ п╫п╟п╢п╬ %d"
 
 #. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d",     domain = "R-base")
 #. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d",     domain = "R-base")
@@ -3593,9 +3594,9 @@ msgstr[2] "у замены %d элементов, а надо %d"
 #, fuzzy
 msgid "replacement has %d row, data has %d"
 msgid_plural "replacement has %d rows, data has %d"
-msgstr[0] "у замены %d строк, у данных -- %d"
-msgstr[1] "у замены %d строк, у данных -- %d"
-msgstr[2] "у замены %d строк, у данных -- %d"
+msgstr[0] "я┐ п╥п╟п╪п╣п╫я▀ %d я│я┌я─п╬п╨, я┐ п╢п╟п╫п╫я▀я┘ -- %d"
+msgstr[1] "я┐ п╥п╟п╪п╣п╫я▀ %d я│я┌я─п╬п╨, я┐ п╢п╟п╫п╫я▀я┘ -- %d"
+msgstr[2] "я┐ п╥п╟п╪п╣п╫я▀ %d я│я┌я─п╬п╨, я┐ п╢п╟п╫п╫я▀я┘ -- %d"
 
 #. R/dataframe.R: ngettext(length(row.names), "supplied %d row name for %d rows", "supplied %d row names for %d rows",     domain = "R-base")
 #. R/dataframe.R: ngettext(length(row.names), "supplied %d row name for %d rows", "supplied %d row names for %d rows",     domain = "R-base")
@@ -3603,9 +3604,9 @@ msgstr[2] "у замены %d строк, у данных -- %d"
 #, fuzzy
 msgid "supplied %d row name for %d rows"
 msgid_plural "supplied %d row names for %d rows"
-msgstr[0] "предложено %d имен для %d строк"
-msgstr[1] "предложено %d имен для %d строк"
-msgstr[2] "предложено %d имен для %d строк"
+msgstr[0] "п©я─п╣п╢п╩п╬п╤п╣п╫п╬ %d п╦п╪п╣п╫ п╢п╩я▐ %d я│я┌я─п╬п╨"
+msgstr[1] "п©я─п╣п╢п╩п╬п╤п╣п╫п╬ %d п╦п╪п╣п╫ п╢п╩я▐ %d я│я┌я─п╬п╨"
+msgstr[2] "п©я─п╣п╢п╩п╬п╤п╣п╫п╬ %d п╦п╪п╣п╫ п╢п╩я▐ %d я│я┌я─п╬п╨"
 
 #. R/library.R: ngettext(1L, "there is no package called %s", "there are no packages called %s",     domain = "R-base")
 #. R/library.R: ngettext(length(bad), "there is no package called %s", "there are no packages called %s",     domain = "R-base")
@@ -3615,672 +3616,672 @@ msgstr[2] "предложено %d имен для %d строк"
 #, fuzzy
 msgid "there is no package called %s"
 msgid_plural "there are no packages called %s"
-msgstr[0] "нет пакета под названием %s"
-msgstr[1] "нет пакета под названием %s"
-msgstr[2] "нет пакета под названием %s"
+msgstr[0] "п╫п╣я┌ п©п╟п╨п╣я┌п╟ п©п╬п╢ п╫п╟п╥п╡п╟п╫п╦п╣п╪ %s"
+msgstr[1] "п╫п╣я┌ п©п╟п╨п╣я┌п╟ п©п╬п╢ п╫п╟п╥п╡п╟п╫п╦п╣п╪ %s"
+msgstr[2] "п╫п╣я┌ п©п╟п╨п╣я┌п╟ п©п╬п╢ п╫п╟п╥п╡п╟п╫п╦п╣п╪ %s"
 
 #. R/stop.R: ngettext(length(r), "variable %s is not TRUE", "variables %s are not all TRUE", domain = "R-base")
 #: R/stop.R:0
 #, fuzzy
 msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
-msgstr[0] "T использовано вместо TRUE"
-msgstr[1] "T использовано вместо TRUE"
-msgstr[2] "T использовано вместо TRUE"
+msgstr[0] "T п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╬ п╡п╪п╣я│я┌п╬ TRUE"
+msgstr[1] "T п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╬ п╡п╪п╣я│я┌п╬ TRUE"
+msgstr[2] "T п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╬ п╡п╪п╣я│я┌п╬ TRUE"
 
 #, fuzzy
 #~ msgid "%s value was not found"
-#~ msgstr "файл '%s' не найден"
+#~ msgstr "я└п╟п╧п╩ '%s' п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #~ msgid "wrong argument"
-#~ msgstr "неправильный аргумент"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌"
 
 #, fuzzy
 #~ msgid "package %s has not been installed properly\n"
-#~ msgstr "пакет %s как следует не установлен"
+#~ msgstr "п©п╟п╨п╣я┌ %s п╨п╟п╨ я│п╩п╣п╢я┐п╣я┌ п╫п╣ я┐я│я┌п╟п╫п╬п╡п╩п╣п╫"
 
 #~ msgid "'by' is NA"
-#~ msgstr "'by' является NA"
+#~ msgstr "'by' я▐п╡п╩я▐п╣я┌я│я▐ NA"
 
 #~ msgid "wrong class"
-#~ msgstr "неправильный класс"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╨п╩п╟я│я│"
 
 #~ msgid "second argument must be a list"
-#~ msgstr "второй аргумент должен быть списком"
+#~ msgstr "п╡я┌п╬я─п╬п╧ п╟я─пЁя┐п╪п╣п╫я┌ п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я│п©п╦я│п╨п╬п╪"
 
 #~ msgid "not an interactive session"
-#~ msgstr "не интерактивная сессия"
+#~ msgstr "п╫п╣ п╦п╫я┌п╣я─п╟п╨я┌п╦п╡п╫п╟я▐ я│п╣я│я│п╦я▐"
 
 #, fuzzy
 #~ msgid "'origin' argument must be supplied"
-#~ msgstr "надо указать 'origin'"
+#~ msgstr "п╫п╟п╢п╬ я┐п╨п╟п╥п╟я┌я▄ 'origin'"
 
 #~ msgid "'zero.print' has length > 1"
-#~ msgstr "'zero.print' имеет длину > 1"
+#~ msgstr "'zero.print' п╦п╪п╣п╣я┌ п╢п╩п╦п╫я┐ > 1"
 
 #~ msgid "'zero.print' must be character, logical or NULL"
-#~ msgstr "'zero.print' должен быть символом, логическим или NULL"
+#~ msgstr "'zero.print' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я│п╦п╪п╡п╬п╩п╬п╪, п╩п╬пЁп╦я┤п╣я│п╨п╦п╪ п╦п╩п╦ NULL"
 
 #, fuzzy
 #~ msgid "'from' argument must be specified"
-#~ msgstr "должен быть указан 'from'"
+#~ msgstr "п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┐п╨п╟п╥п╟п╫ 'from'"
 
 #~ msgid "'index.return' only for 'na.last = NA'"
-#~ msgstr "'index.return' -- только для 'na.last = NA'"
+#~ msgstr "'index.return' -- я┌п╬п╩я▄п╨п╬ п╢п╩я▐ 'na.last = NA'"
 
 #~ msgid "'normal.kind' must be a character string of length 1"
-#~ msgstr "'normal.kind' должен быть текстовой строкой длины 1"
+#~ msgstr "'normal.kind' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧ п╢п╩п╦п╫я▀ 1"
 
 #, fuzzy
 #~ msgid "'x' and 'y' arguments must have the same length"
-#~ msgstr "все аргументы должны иметь одинаковую длину"
+#~ msgstr "п╡я│п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╢п╬п╩п╤п╫я▀ п╦п╪п╣я┌я▄ п╬п╢п╦п╫п╟п╨п╬п╡я┐я▌ п╢п╩п╦п╫я┐"
 
 #~ msgid "'subset' must be logical"
-#~ msgstr "'subset' должен быть логическим"
+#~ msgstr "'subset' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╩п╬пЁп╦я┤п╣я│п╨п╦п╪"
 
 #~ msgid "'x' and 'y' must have the same length"
-#~ msgstr "'x' и 'y' должны иметь одинаковую длину"
+#~ msgstr "'x' п╦ 'y' п╢п╬п╩п╤п╫я▀ п╦п╪п╣я┌я▄ п╬п╢п╦п╫п╟п╨п╬п╡я┐я▌ п╢п╩п╦п╫я┐"
 
 #, fuzzy
 #~ msgid "'x' argument must be numeric"
-#~ msgstr "'arg' должен быть длиной 1"
+#~ msgstr "'arg' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #, fuzzy
 #~ msgid "'dims' cannot be of length 0"
-#~ msgstr "'x' должен быть длиной 1"
+#~ msgstr "'x' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #, fuzzy
 #~ msgid "infinite or missing values in 'x' argument"
-#~ msgstr "неопределенные или пропущенные значения в 'x'"
+#~ msgstr "п╫п╣п╬п©я─п╣п╢п╣п╩п╣п╫п╫я▀п╣ п╦п╩п╦ п©я─п╬п©я┐я┴п╣п╫п╫я▀п╣ п╥п╫п╟я┤п╣п╫п╦я▐ п╡ 'x'"
 
 #, fuzzy
 #~ msgid "'INDEX' argument is of length 0"
-#~ msgstr "'x' должен быть длиной 1"
+#~ msgstr "'x' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #, fuzzy
 #~ msgid "%s is not a factor"
-#~ msgstr "'x' не является многомерной матрицей"
+#~ msgstr "'x' п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п╪п╫п╬пЁп╬п╪п╣я─п╫п╬п╧ п╪п╟я┌я─п╦я├п╣п╧"
 
 #, fuzzy
 #~ msgid "argument 'where' is of length 0"
-#~ msgstr "аргумент 'where' нулевой длины"
+#~ msgstr "п╟я─пЁя┐п╪п╣п╫я┌ 'where' п╫я┐п╩п╣п╡п╬п╧ п╢п╩п╦п╫я▀"
 
 #, fuzzy
 #~ msgid "%s must be numeric"
-#~ msgstr "'x' должен быть числом"
+#~ msgstr "'x' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┤п╦я│п╩п╬п╪"
 
 #, fuzzy
 #~ msgid "%s should be one of %s"
-#~ msgstr "'arg' должен быть одним из %s"
+#~ msgstr "'arg' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╬п╢п╫п╦п╪ п╦п╥ %s"
 
 #, fuzzy
 #~ msgid "%s must be of length 1"
-#~ msgstr "'to' должен быть длиной 1"
+#~ msgstr "'to' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #, fuzzy
 #~ msgid "'%s' cannot be coerced to class %s"
-#~ msgstr "'x' нельзя преобразовать в 'octmode'"
+#~ msgstr "'x' п╫п╣п╩я▄п╥я▐ п©я─п╣п╬п╠я─п╟п╥п╬п╡п╟я┌я▄ п╡ 'octmode'"
 
 #, fuzzy
 #~ msgid "object %s is not a QR decomposition"
-#~ msgstr "аргумент не является результатом QR разложения"
+#~ msgstr "п╟я─пЁя┐п╪п╣п╫я┌ п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ я─п╣п╥я┐п╩я▄я┌п╟я┌п╬п╪ QR я─п╟п╥п╩п╬п╤п╣п╫п╦я▐"
 
 #, fuzzy
 #~ msgid "'from' argument cannot be NA, NaN or infinite"
-#~ msgstr "'from' должен быть raw либо текстовой строкой"
+#~ msgstr "'from' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ raw п╩п╦п╠п╬ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧"
 
 #, fuzzy
 #~ msgid "there are no packages called %s"
-#~ msgstr "нет пакета под названием %s"
+#~ msgstr "п╫п╣я┌ п©п╟п╨п╣я┌п╟ п©п╬п╢ п╫п╟п╥п╡п╟п╫п╦п╣п╪ %s"
 
 #, fuzzy
 #~ msgid "'%s' argument must be equal to 0, 'nrow(x)' or 'ncol(x)'"
-#~ msgstr "'nu' должен быть 0, nrow(x) или ncol(x)"
+#~ msgstr "'nu' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ 0, nrow(x) п╦п╩п╦ ncol(x)"
 
 #, fuzzy
 #~ msgid "In function %s"
-#~ msgstr "найдена не-функция '%s'"
+#~ msgstr "п╫п╟п╧п╢п╣п╫п╟ п╫п╣-я└я┐п╫п╨я├п╦я▐ '%s'"
 
 #~ msgid "named arguments other than 'exact' are discouraged"
-#~ msgstr "именованные аргументы иные, чем 'exact', не допускаются"
+#~ msgstr "п╦п╪п╣п╫п╬п╡п╟п╫п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╦п╫я▀п╣, я┤п╣п╪ 'exact', п╫п╣ п╢п╬п©я┐я│п╨п╟я▌я┌я│я▐"
 
 #~ msgid "list of length %d not meaningful"
-#~ msgstr "список длины %d не значим"
+#~ msgstr "я│п©п╦я│п╬п╨ п╢п╩п╦п╫я▀ %d п╫п╣ п╥п╫п╟я┤п╦п╪"
 
 #, fuzzy
 #~ msgid "%s argument must be of length 1"
-#~ msgstr "'arg' должен быть длиной 1"
+#~ msgstr "'arg' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #, fuzzy
 #~ msgid "'object' must inherit from class %s"
-#~ msgstr "'объект' должен наследовать классу \"table\""
+#~ msgstr "'п╬п╠я┼п╣п╨я┌' п╢п╬п╩п╤п╣п╫ п╫п╟я│п╩п╣п╢п╬п╡п╟я┌я▄ п╨п╩п╟я│я│я┐ \"table\""
 
 #~ msgid "too many 'S3method' directives"
-#~ msgstr "слишком много директив 'S3method'"
+#~ msgstr "я│п╩п╦я┬п╨п╬п╪ п╪п╫п╬пЁп╬ п╢п╦я─п╣п╨я┌п╦п╡ 'S3method'"
 
 #~ msgid "'x' must be numeric"
-#~ msgstr "'x' должен быть числом"
+#~ msgstr "'x' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┤п╦я│п╩п╬п╪"
 
 #~ msgid "'x' must be atomic"
-#~ msgstr "'x' должен быть элементарным"
+#~ msgstr "'x' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я█п╩п╣п╪п╣п╫я┌п╟я─п╫я▀п╪"
 
 #~ msgid "'x' is not an array"
-#~ msgstr "'x' не является многомерной матрицей"
+#~ msgstr "'x' п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п╪п╫п╬пЁп╬п╪п╣я─п╫п╬п╧ п╪п╟я┌я─п╦я├п╣п╧"
 
 #~ msgid "invalid 'digits'"
-#~ msgstr "неправильные 'digits'"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ 'digits'"
 
 #~ msgid "'%s' not defined for \"POSIXt\" objects"
-#~ msgstr "'%s' не определен для объектов \"POSIXt\""
+#~ msgstr "'%s' п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╬п╡ \"POSIXt\""
 
 #, fuzzy
 #~ msgid "both arguments of '*' cannot be \"difftime\" objects"
-#~ msgstr "оба аргумента * не могут быть объектами \"difftime\""
+#~ msgstr "п╬п╠п╟ п╟я─пЁя┐п╪п╣п╫я┌п╟ * п╫п╣ п╪п╬пЁя┐я┌ п╠я▀я┌я▄ п╬п╠я┼п╣п╨я┌п╟п╪п╦ \"difftime\""
 
 #~ msgid "'from' must be specified"
-#~ msgstr "должен быть указан 'from'"
+#~ msgstr "п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┐п╨п╟п╥п╟п╫ 'from'"
 
 #, fuzzy
 #~ msgid "'%s' must be an object of class %s"
-#~ msgstr "не определено для объектов 'Date'"
+#~ msgstr "п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫п╬ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╬п╡ 'Date'"
 
 #~ msgid "'x' must be a date-time object"
-#~ msgstr "'x' должен быть объектом 'date-time'"
+#~ msgstr "'x' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╬п╠я┼п╣п╨я┌п╬п╪ 'date-time'"
 
 #~ msgid ""
 #~ "%s failed in %s() for '%s', details:\n"
 #~ "  call: %s\n"
 #~ "  error: %s"
 #~ msgstr ""
-#~ "%s не удалось в %s() для '%s', подробности:\n"
-#~ "  вызов: %s\n"
-#~ "  ошибка: %s"
+#~ "%s п╫п╣ я┐п╢п╟п╩п╬я│я▄ п╡ %s() п╢п╩я▐ '%s', п©п╬п╢я─п╬п╠п╫п╬я│я┌п╦:\n"
+#~ "  п╡я▀п╥п╬п╡: %s\n"
+#~ "  п╬я┬п╦п╠п╨п╟: %s"
 
 #, fuzzy
 #~ msgid "bad '%s' argument"
-#~ msgstr "неправильный аргумент 'file'"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌ 'file'"
 
 #~ msgid "invalid 'category' argument"
-#~ msgstr "неправильный аргумент 'category'"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌ 'category'"
 
 #, fuzzy
 #~ msgid "%s must have length 1"
-#~ msgstr "'input' должен иметь длину 1"
+#~ msgstr "'input' п╢п╬п╩п╤п╣п╫ п╦п╪п╣я┌я▄ п╢п╩п╦п╫я┐ 1"
 
 #, fuzzy
 #~ msgid "invalid ncol(qr$rank) value"
-#~ msgstr "неправильное имя"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╦п╪я▐"
 
 #~ msgid "length of 'center' must equal the number of columns of 'x'"
-#~ msgstr "длина 'center' должна равняться числу колонок 'x'"
+#~ msgstr "п╢п╩п╦п╫п╟ 'center' п╢п╬п╩п╤п╫п╟ я─п╟п╡п╫я▐я┌я▄я│я▐ я┤п╦я│п╩я┐ п╨п╬п╩п╬п╫п╬п╨ 'x'"
 
 #, fuzzy
 #~ msgid "'%s' must be non-empty character string"
-#~ msgstr "'file' должен быть непустой строкой"
+#~ msgstr "'file' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╫п╣п©я┐я│я┌п╬п╧ я│я┌я─п╬п╨п╬п╧"
 
 #~ msgid "'echo' must be logical"
-#~ msgstr "'echo' должно быть логическим"
+#~ msgstr "'echo' п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ п╩п╬пЁп╦я┤п╣я│п╨п╦п╪"
 
 #~ msgid "%s not found"
-#~ msgstr "%s не найден"
+#~ msgstr "%s п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #, fuzzy
 #~ msgid "argument 'nv' must be equal to 0, nrow(x) or ncol(x)"
-#~ msgstr "'nv' должен быть 0, nrow(x) или ncol(x)"
+#~ msgstr "'nv' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ 0, nrow(x) п╦п╩п╦ ncol(x)"
 
 #, fuzzy
 #~ msgid "'value' must be a list"
-#~ msgstr "'object' должен быть списком"
+#~ msgstr "'object' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я│п©п╦я│п╨п╬п╪"
 
 #, fuzzy
 #~ msgid "do not know how to convert '%s' to class %s"
-#~ msgstr "не знаю как конвертировать '%s' в класс \"Date\""
+#~ msgstr "п╫п╣ п╥п╫п╟я▌ п╨п╟п╨ п╨п╬п╫п╡п╣я─я┌п╦я─п╬п╡п╟я┌я▄ '%s' п╡ п╨п╩п╟я│я│ \"Date\""
 
 #, fuzzy
 #~ msgid "'from' must be a \"POSIXt\" object"
-#~ msgstr "'from' должен быть объектом POSIXt"
+#~ msgstr "'from' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╬п╠я┼п╣п╨я┌п╬п╪ POSIXt"
 
 #, fuzzy
 #~ msgid "'to' must be a \"POSIXt\" object"
-#~ msgstr "'to' должен быть объектом POSIXt"
+#~ msgstr "'to' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╬п╠я┼п╣п╨я┌п╬п╪ POSIXt"
 
 #~ msgid "'lag' and 'differences' must be integers >= 1"
-#~ msgstr "'lag' и 'differences' должны быть целыми >= 1"
+#~ msgstr "'lag' п╦ 'differences' п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ я├п╣п╩я▀п╪п╦ >= 1"
 
 #, fuzzy
 #~ msgid "'lag' and 'differences' must be integers greater or equal to 1"
-#~ msgstr "'lag' и 'differences' должны быть целыми >= 1"
+#~ msgstr "'lag' п╦ 'differences' п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ я├п╣п╩я▀п╪п╦ >= 1"
 
 #, fuzzy
 #~ msgid "invalid 'nrow(x)' value"
-#~ msgstr "неправильное имя"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╦п╪я▐"
 
 #, fuzzy
 #~ msgid "invalid nrow(x)"
-#~ msgstr "неправильное имя"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╦п╪я▐"
 
 #~ msgid "'object' must be a list"
-#~ msgstr "'object' должен быть списком"
+#~ msgstr "'object' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я│п©п╦я│п╨п╬п╪"
 
 #~ msgid "'trim' must be numeric of length one"
-#~ msgstr "'trim' должен быть числовым объектом длины 1"
+#~ msgstr "'trim' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┤п╦я│п╩п╬п╡я▀п╪ п╬п╠я┼п╣п╨я┌п╬п╪ п╢п╩п╦п╫я▀ 1"
 
 #~ msgid "additional arguments ignored in message()"
-#~ msgstr "дополнительные аргументы пропущены в message()"
+#~ msgstr "п╢п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п©я─п╬п©я┐я┴п╣п╫я▀ п╡ message()"
 
 #, fuzzy
 #~ msgid "invalid ncol(x) value"
-#~ msgstr "неправильное имя"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╦п╪я▐"
 
 #, fuzzy
 #~ msgid "invalid nrow(x) value"
-#~ msgstr "неправильное имя"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╦п╪я▐"
 
 #, fuzzy
 #~ msgid "invalid nrow(qr$qr) value"
-#~ msgstr "неправильное имя"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╦п╪я▐"
 
 #, fuzzy
 #~ msgid "invalid ncol(qr$qr) value"
-#~ msgstr "неправильное имя"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╦п╪я▐"
 
 #, fuzzy
 #~ msgid "invalid ncol(y) value"
-#~ msgstr "неправильное имя"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╦п╪я▐"
 
 #, fuzzy
 #~ msgid "invalid NCOL(y) value"
-#~ msgstr "неправильное имя"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╦п╪я▐"
 
 #, fuzzy
 #~ msgid "invalid NCOL(R) value"
-#~ msgstr "неправильное имя"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╦п╪я▐"
 
 #~ msgid "singular matrix 'a' in solve"
-#~ msgstr "сингулярная матрица 'a' в 'solve'"
+#~ msgstr "я│п╦п╫пЁя┐п╩я▐я─п╫п╟я▐ п╪п╟я┌я─п╦я├п╟ 'a' п╡ 'solve'"
 
 #, fuzzy
 #~ msgid "additional arguments ignored in 'warning()'"
-#~ msgstr "дополнительные аргументы пропущены в warning()"
+#~ msgstr "п╢п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п©я─п╬п©я┐я┴п╣п╫я▀ п╡ warning()"
 
 #~ msgid "incorrect value for 'x'"
-#~ msgstr "неправильное значение для 'x'"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ п╢п╩я▐ 'x'"
 
 #, fuzzy
 #~ msgid "invalid value of 'nbins'"
-#~ msgstr "неправильное значение"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣"
 
 #~ msgid "there is no package called"
 #~ msgid_plural "there are no packages called"
-#~ msgstr[0] "нет пакета под названием"
-#~ msgstr[1] "нет пакетов под названиями"
-#~ msgstr[2] "нет пакетов под названиями"
+#~ msgstr[0] "п╫п╣я┌ п©п╟п╨п╣я┌п╟ п©п╬п╢ п╫п╟п╥п╡п╟п╫п╦п╣п╪"
+#~ msgstr[1] "п╫п╣я┌ п©п╟п╨п╣я┌п╬п╡ п©п╬п╢ п╫п╟п╥п╡п╟п╫п╦я▐п╪п╦"
+#~ msgstr[2] "п╫п╣я┌ п©п╟п╨п╣я┌п╬п╡ п©п╬п╢ п╫п╟п╥п╡п╟п╫п╦я▐п╪п╦"
 
 #, fuzzy
 #~ msgid "'from' must be a \"Date\" object"
-#~ msgstr "'from' должен быть объектом 'Date'"
+#~ msgstr "'from' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╬п╠я┼п╣п╨я┌п╬п╪ 'Date'"
 
 #, fuzzy
 #~ msgid "'to' must be a \"Date\" object"
-#~ msgstr "'to' должен быть объектом 'Date'"
+#~ msgstr "'to' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╬п╠я┼п╣п╨я┌п╬п╪ 'Date'"
 
 #~ msgid "'origin' must be of length one"
-#~ msgstr "'origin' должен быть длиной 1"
+#~ msgstr "'origin' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #, fuzzy
 #~ msgid "can only subtract from \"POSIXt\" objects"
-#~ msgstr "Могу лишь вычитать из объектов 'POSIXt'"
+#~ msgstr "п°п╬пЁя┐ п╩п╦я┬я▄ п╡я▀я┤п╦я┌п╟я┌я▄ п╦п╥ п╬п╠я┼п╣п╨я┌п╬п╡ 'POSIXt'"
 
 #, fuzzy
 #~ msgid "can only subtract numbers from \"POSIXt\" objects"
-#~ msgstr "могу вычитать лишь числа из объектов 'POSIXt'"
+#~ msgstr "п╪п╬пЁя┐ п╡я▀я┤п╦я┌п╟я┌я▄ п╩п╦я┬я▄ я┤п╦я│п╩п╟ п╦п╥ п╬п╠я┼п╣п╨я┌п╬п╡ 'POSIXt'"
 
 #~ msgid "'package' must be of length 1"
-#~ msgstr "'пакет' должен быть длиной 1"
+#~ msgstr "'п©п╟п╨п╣я┌' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #~ msgid "shared object '%s' not found"
-#~ msgstr "разделяемый объект '%s' не найден"
+#~ msgstr "я─п╟п╥п╢п╣п╩я▐п╣п╪я▀п╧ п╬п╠я┼п╣п╨я┌ '%s' п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #, fuzzy
 #~ msgid "'x' cannot be coerced to class \"hexmode\""
-#~ msgstr "'x' нельзя преобразовать в 'hexmode'"
+#~ msgstr "'x' п╫п╣п╩я▄п╥я▐ п©я─п╣п╬п╠я─п╟п╥п╬п╡п╟я┌я▄ п╡ 'hexmode'"
 
 #~ msgid "'intern' must be TRUE or FALSE"
-#~ msgstr "'intern' должен быть TRUE или FALSE"
+#~ msgstr "'intern' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ TRUE п╦п╩п╦ FALSE"
 
 #~ msgid "'ignore.stdout' must be TRUE or FALSE"
-#~ msgstr "'ignore.stdout' должен быть TRUE или FALSE"
+#~ msgstr "'ignore.stdout' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ TRUE п╦п╩п╦ FALSE"
 
 #~ msgid "'ignore.stderr' must be TRUE or FALSE"
-#~ msgstr "'ignore.stderr' должен быть TRUE или FALSE"
+#~ msgstr "'ignore.stderr' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ TRUE п╦п╩п╦ FALSE"
 
 #~ msgid "'stdout' must be of length 1"
-#~ msgstr "'stdout' должен быть длиной 1"
+#~ msgstr "'stdout' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #~ msgid "'stderr' must be of length 1"
-#~ msgstr "'stderr' должен быть длиной 1"
+#~ msgstr "'stderr' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #~ msgid "'show.output.on.console' must be TRUE or FALSE"
-#~ msgstr "'show.output.on.console' должен быть TRUE или FALSE"
+#~ msgstr "'show.output.on.console' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ TRUE п╦п╩п╦ FALSE"
 
 #~ msgid "'minimized' must be TRUE or FALSE"
-#~ msgstr "'minimized' должен быть TRUE или FALSE"
+#~ msgstr "'minimized' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ TRUE п╦п╩п╦ FALSE"
 
 #~ msgid "'invisible' must be TRUE or FALSE"
-#~ msgstr "'invisible' должен быть TRUE или FALSE"
+#~ msgstr "'invisible' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ TRUE п╦п╩п╦ FALSE"
 
 #, fuzzy
 #~ msgid "%s is not a \"Date\" object"
-#~ msgstr "'%s' не является объектом \"date\""
+#~ msgstr "'%s' п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п╬п╠я┼п╣п╨я┌п╬п╪ \"date\""
 
 #, fuzzy
 #~ msgid "%s is not a \"Dates\" object"
-#~ msgstr "'%s' не является объектом \"dates\""
+#~ msgstr "'%s' п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п╬п╠я┼п╣п╨я┌п╬п╪ \"dates\""
 
 #~ msgid "'%s' not defined for \"difftime\" objects"
-#~ msgstr "'%s' не определен для объектов \"difftime\""
+#~ msgstr "'%s' п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╬п╡ \"difftime\""
 
 #~ msgid "'by' must match numbers of columns"
-#~ msgstr "'by' должен соответствовать номерам колонок"
+#~ msgstr "'by' п╢п╬п╩п╤п╣п╫ я│п╬п╬я┌п╡п╣я┌я│я┌п╡п╬п╡п╟я┌я▄ п╫п╬п╪п╣я─п╟п╪ п╨п╬п╩п╬п╫п╬п╨"
 
 #, fuzzy
 #~ msgid "'%s' must be of length 1"
-#~ msgstr "'to' должен быть длиной 1"
+#~ msgstr "'to' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #~ msgid "invalid 'name' argument"
-#~ msgstr "неправильный аргумент 'name'"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌ 'name'"
 
 #, fuzzy
 #~ msgid "binary + is not defined for \"Date\" objects"
-#~ msgstr "бинарный '+' не определен для объектов 'Date'"
+#~ msgstr "п╠п╦п╫п╟я─п╫я▀п╧ '+' п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╬п╡ 'Date'"
 
 #, fuzzy
 #~ msgid "unary - is not defined for \"Date\" objects"
-#~ msgstr "унарный '-' не определен для объектов 'Date'"
+#~ msgstr "я┐п╫п╟я─п╫я▀п╧ '-' п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╬п╡ 'Date'"
 
 #, fuzzy
 #~ msgid "unary %s not defined for \"Date\" objects"
-#~ msgstr "унарный '-' не определен для объектов 'Date'"
+#~ msgstr "я┐п╫п╟я─п╫я▀п╧ '-' п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╬п╡ 'Date'"
 
 #~ msgid "invalid string for 'by'"
-#~ msgstr "неправильная строка для 'by'"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ я│я┌я─п╬п╨п╟ п╢п╩я▐ 'by'"
 
 #~ msgid "invalid mode for 'by'"
-#~ msgstr "неправильный тип для 'by'"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я┌п╦п© п╢п╩я▐ 'by'"
 
 #, fuzzy
 #~ msgid "unary '%s' not defined for \"POSIXt\" objects"
-#~ msgstr "унарный '-' не определен для объектов \"POSIXt\""
+#~ msgstr "я┐п╫п╟я─п╫я▀п╧ '-' п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╬п╡ \"POSIXt\""
 
 #~ msgid "unary '%s' not defined for \"difftime\" objects"
-#~ msgstr "унарный '%s' не определен для объектов \"difftime\""
+#~ msgstr "я┐п╫п╟я─п╫я▀п╧ '%s' п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╬п╡ \"difftime\""
 
 #~ msgid "invalid 'path' argument"
-#~ msgstr "неправильный аргумент 'path'"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌ 'path'"
 
 #~ msgid "invalid 'time' argument"
-#~ msgstr "неправильный аргумент 'time'"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌ 'time'"
 
 #~ msgid "'file' must be specified"
-#~ msgstr "должен быть указан 'file'"
+#~ msgstr "п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┐п╨п╟п╥п╟п╫ 'file'"
 
 #~ msgid "'compress' must be logical or character"
-#~ msgstr "'compress' должен быть логическим либо текстовой строкой"
+#~ msgstr "'compress' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╩п╬пЁп╦я┤п╣я│п╨п╦п╪ п╩п╦п╠п╬ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧"
 
 #~ msgid "bad file argument"
-#~ msgstr "неправильный файловый аргумент"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я└п╟п╧п╩п╬п╡я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌"
 
 #~ msgid "unary '%s' not defined for \"numeric_version\" objects"
-#~ msgstr "унарное '%s' не определено для \"numeric_version\" объектов"
+#~ msgstr "я┐п╫п╟я─п╫п╬п╣ '%s' п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫п╬ п╢п╩я▐ \"numeric_version\" п╬п╠я┼п╣п╨я┌п╬п╡"
 
 #~ msgid "'%s' not defined for \"numeric_version\" objects"
-#~ msgstr "'%s' не определено для объектов \"numeric_version\""
+#~ msgstr "'%s' п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫п╬ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╬п╡ \"numeric_version\""
 
 #, fuzzy
 #~ msgid "%s not defined for \"numeric_version\" objects"
-#~ msgstr "'%s' не определено для объектов \"numeric_version\""
+#~ msgstr "'%s' п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫п╬ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╬п╡ \"numeric_version\""
 
 #~ msgid "'from' must be of length 1"
-#~ msgstr "'from' должен быть длиной 1"
+#~ msgstr "'from' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #~ msgid "'to' must be of length 1"
-#~ msgstr "'to' должен быть длиной 1"
+#~ msgstr "'to' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #~ msgid "'length.out' must be of length 1"
-#~ msgstr "'length.out' должен быть длиной 1"
+#~ msgstr "'length.out' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #~ msgid "'by' must be of length 1"
-#~ msgstr "'by' должен быть длиной 1"
+#~ msgstr "'by' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #~ msgid "%s and %s must have the same length"
-#~ msgstr "%s и %s должны иметь одинаковую длину"
+#~ msgstr "%s п╦ %s п╢п╬п╩п╤п╫я▀ п╦п╪п╣я┌я▄ п╬п╢п╦п╫п╟п╨п╬п╡я┐я▌ п╢п╩п╦п╫я┐"
 
 #~ msgid "argument 'length.out' must be of length 1"
-#~ msgstr "аргумент 'length.out' должен быть длиной 1"
+#~ msgstr "п╟я─пЁя┐п╪п╣п╫я┌ 'length.out' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #~ msgid "invalid 'dims'"
-#~ msgstr "неправильные 'dims'"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ 'dims'"
 
 #~ msgid "'%s' is not a \"dates\" object"
-#~ msgstr "'%s' не является объектом \"dates\""
+#~ msgstr "'%s' п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п╬п╠я┼п╣п╨я┌п╬п╪ \"dates\""
 
 #~ msgid ","
 #~ msgstr ","
 
 #~ msgid "'arg' must be of length >= 1"
-#~ msgstr "'arg' должен быть длиной >= 1"
+#~ msgstr "'arg' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ >= 1"
 
 #~ msgid "no match"
-#~ msgstr "нет соответствия"
+#~ msgstr "п╫п╣я┌ я│п╬п╬я┌п╡п╣я┌я│я┌п╡п╦я▐"
 
 #~ msgid "no arguments"
-#~ msgstr "нет аргументов"
+#~ msgstr "п╫п╣я┌ п╟я─пЁя┐п╪п╣п╫я┌п╬п╡"
 
 #~ msgid "target is %s, current is %s"
-#~ msgstr "цель %s, текущая %s"
+#~ msgstr "я├п╣п╩я▄ %s, я┌п╣п╨я┐я┴п╟я▐ %s"
 
 #, fuzzy
 #~ msgid "'current' is not a factor"
-#~ msgstr "'x' не является многомерной матрицей"
+#~ msgstr "'x' п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п╪п╫п╬пЁп╬п╪п╣я─п╫п╬п╧ п╪п╟я┌я─п╦я├п╣п╧"
 
 #, fuzzy
 #~ msgid "invalid ncol(x)"
-#~ msgstr "неправильное имя"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╦п╪я▐"
 
 #, fuzzy
 #~ msgid "invalid ncol(y)"
-#~ msgstr "неправильное имя"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╦п╪я▐"
 
 #~ msgid "Use '%s' instead."
-#~ msgstr "Используйте '%s'."
+#~ msgstr "п≤я│п©п╬п╩я▄п╥я┐п╧я┌п╣ '%s'."
 
 #~ msgid "non-square matrix in 'chol'"
-#~ msgstr "не квадратная матрица в 'chol'"
+#~ msgstr "п╫п╣ п╨п╡п╟п╢я─п╟я┌п╫п╟я▐ п╪п╟я┌я─п╦я├п╟ п╡ 'chol'"
 
 #~ msgid "non-matrix argument to 'chol'"
-#~ msgstr "нематричный аргумент для 'chol'"
+#~ msgstr "п╫п╣п╪п╟я┌я─п╦я┤п╫я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌ п╢п╩я▐ 'chol'"
 
 #~ msgid "matrix not positive definite"
-#~ msgstr "матрица не является положительно определенной"
+#~ msgstr "п╪п╟я┌я─п╦я├п╟ п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п©п╬п╩п╬п╤п╦я┌п╣п╩я▄п╫п╬ п╬п©я─п╣п╢п╣п╩п╣п╫п╫п╬п╧"
 
 #~ msgid "'keep.source' is deprecated and will be ignored"
-#~ msgstr "'keep.source' устарел и будет пропущен"
+#~ msgstr "'keep.source' я┐я│я┌п╟я─п╣п╩ п╦ п╠я┐п╢п╣я┌ п©я─п╬п©я┐я┴п╣п╫"
 
 #~ msgid "non-positive definite matrix in 'chol'"
-#~ msgstr "не положительно определенная матрица в 'chol'"
+#~ msgstr "п╫п╣ п©п╬п╩п╬п╤п╦я┌п╣п╩я▄п╫п╬ п╬п©я─п╣п╢п╣п╩п╣п╫п╫п╟я▐ п╪п╟я┌я─п╦я├п╟ п╡ 'chol'"
 
 #~ msgid "non-numeric argument to 'chol2inv'"
-#~ msgstr "нечисловой аргумент для 'chol2inv'"
+#~ msgstr "п╫п╣я┤п╦я│п╩п╬п╡п╬п╧ п╟я─пЁя┐п╪п╣п╫я┌ п╢п╩я▐ 'chol2inv'"
 
 #~ msgid "invalid 'size' argument in 'chol2inv'"
-#~ msgstr "неправильный аргумент 'size' в 'chol2inv'"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌ 'size' п╡ 'chol2inv'"
 
 #~ msgid "singular matrix in 'chol2inv'"
-#~ msgstr "сингулярная матрица в 'chol2inv'"
+#~ msgstr "я│п╦п╫пЁя┐п╩я▐я─п╫п╟я▐ п╪п╟я┌я─п╦я├п╟ п╡ 'chol2inv'"
 
 #, fuzzy
 #~ msgid "'%s' returned code %d in 'eigen'"
-#~ msgstr "'rs' возвратил код %d в 'eigen'"
+#~ msgstr "'rs' п╡п╬п╥п╡я─п╟я┌п╦п╩ п╨п╬п╢ %d п╡ 'eigen'"
 
 #~ msgid "'nv' must be 0 or ncol(x)"
-#~ msgstr "'nv' должен быть 0 или ncol(x)"
+#~ msgstr "'nv' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ 0 п╦п╩п╦ ncol(x)"
 
 #, fuzzy
 #~ msgid "error %d in LINPACK subroutine 'dsvdc'"
-#~ msgstr "ошибка %d в 'dsvdc'"
+#~ msgstr "п╬я┬п╦п╠п╨п╟ %d п╡ 'dsvdc'"
 
 #~ msgid "found an S4 version of %s so it has not been imported correctly"
-#~ msgstr "найдена S4-версия %s и поэтому она не загружена правильно"
+#~ msgstr "п╫п╟п╧п╢п╣п╫п╟ S4-п╡п╣я─я│п╦я▐ %s п╦ п©п╬я█я┌п╬п╪я┐ п╬п╫п╟ п╫п╣ п╥п╟пЁя─я┐п╤п╣п╫п╟ п©я─п╟п╡п╦п╩я▄п╫п╬"
 
 #~ msgid "items"
-#~ msgstr "элементы"
+#~ msgstr "я█п╩п╣п╪п╣п╫я┌я▀"
 
 #~ msgid "0 extent dimensions"
-#~ msgstr "нулевая протяженность измерений"
+#~ msgstr "п╫я┐п╩п╣п╡п╟я▐ п©я─п╬я┌я▐п╤п╣п╫п╫п╬я│я┌я▄ п╦п╥п╪п╣я─п╣п╫п╦п╧"
 
 #~ msgid "RHS must be list"
-#~ msgstr "правая сторона присваивания должна быть списком"
+#~ msgstr "п©я─п╟п╡п╟я▐ я│я┌п╬я─п╬п╫п╟ п©я─п╦я│п╡п╟п╦п╡п╟п╫п╦я▐ п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ я│п©п╦я│п╨п╬п╪"
 
 #~ msgid "labels/breaks length conflict"
-#~ msgstr "длины labels/breaks конфликтуют"
+#~ msgstr "п╢п╩п╦п╫я▀ labels/breaks п╨п╬п╫я└п╩п╦п╨я┌я┐я▌я┌"
 
 #~ msgid "--> row.names NOT used"
-#~ msgstr "--> 'row.names' НЕ использованы"
+#~ msgstr "--> 'row.names' п²п∙ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫я▀"
 
 #~ msgid "'ch' returned code %d in 'eigen'"
-#~ msgstr "'ch' возвратил код %d в 'eigen'"
+#~ msgstr "'ch' п╡п╬п╥п╡я─п╟я┌п╦п╩ п╨п╬п╢ %d п╡ 'eigen'"
 
 #~ msgid "'cg' returned code %d in 'eigen'"
-#~ msgstr "'cg' возвратил код %d в 'eigen'"
+#~ msgstr "'cg' п╡п╬п╥п╡я─п╟я┌п╦п╩ п╨п╬п╢ %d п╡ 'eigen'"
 
 #~ msgid "'rg' returned code %d in 'eigen'"
-#~ msgstr "'rg' возвратил код %d в 'eigen'"
+#~ msgstr "'rg' п╡п╬п╥п╡я─п╟я┌п╦п╩ п╨п╬п╢ %d п╡ 'eigen'"
 
 #~ msgid "invalid factor level, NAs generated"
-#~ msgstr "неправильный уровень фактора, получились NA"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я┐я─п╬п╡п╣п╫я▄ я└п╟п╨я┌п╬я─п╟, п©п╬п╩я┐я┤п╦п╩п╦я│я▄ NA"
 
 #~ msgid "'subset' must evaluate to logical"
-#~ msgstr "вычисление 'subset' должен приводить к булевому значению"
+#~ msgstr "п╡я▀я┤п╦я│п╩п╣п╫п╦п╣ 'subset' п╢п╬п╩п╤п╣п╫ п©я─п╦п╡п╬п╢п╦я┌я▄ п╨ п╠я┐п╩п╣п╡п╬п╪я┐ п╥п╫п╟я┤п╣п╫п╦я▌"
 
 #~ msgid ""
 #~ "file %s has magic number '%s'\n"
 #~ "   Use of save versions prior to 2 is deprecated"
 #~ msgstr ""
-#~ "файл %s имеет магическое число '%s'\n"
-#~ "   Использование сохраненных версий, более ранних чем 2, не одобряется"
+#~ "я└п╟п╧п╩ %s п╦п╪п╣п╣я┌ п╪п╟пЁп╦я┤п╣я│п╨п╬п╣ я┤п╦я│п╩п╬ '%s'\n"
+#~ "   п≤я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦п╣ я│п╬я┘я─п╟п╫п╣п╫п╫я▀я┘ п╡п╣я─я│п╦п╧, п╠п╬п╩п╣п╣ я─п╟п╫п╫п╦я┘ я┤п╣п╪ 2, п╫п╣ п╬п╢п╬п╠я─я▐п╣я┌я│я▐"
 
 #~ msgid "doc"
-#~ msgstr "документ"
+#~ msgstr "п╢п╬п╨я┐п╪п╣п╫я┌"
 
 #~ msgid "'by' must specify valid column(s)"
-#~ msgstr "'by' должен определять правильные колонк(и)"
+#~ msgstr "'by' п╢п╬п╩п╤п╣п╫ п╬п©я─п╣п╢п╣п╩я▐я┌я▄ п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╨п╬п╩п╬п╫п╨(п╦)"
 
 #, fuzzy
 #~ msgid "%s not defined for numeric_version objects"
-#~ msgstr "не определено для объектов numeric_version"
+#~ msgstr "п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫п╬ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╬п╡ numeric_version"
 
 #~ msgid "unary"
-#~ msgstr "унарный"
+#~ msgstr "я┐п╫п╟я─п╫я▀п╧"
 
 #~ msgid "MARGIN ="
 #~ msgstr "MARGIN ="
 
 #~ msgid "' not found"
-#~ msgstr "' не найдено"
+#~ msgstr "' п╫п╣ п╫п╟п╧п╢п╣п╫п╬"
 
 #~ msgid "to"
-#~ msgstr "в"
+#~ msgstr "п╡"
 
 #~ msgid "since"
-#~ msgstr "так как"
+#~ msgstr "я┌п╟п╨ п╨п╟п╨"
 
 #~ msgid "is already defined in the"
-#~ msgstr "уже определено в"
+#~ msgstr "я┐п╤п╣ п╬п©я─п╣п╢п╣п╩п╣п╫п╬ п╡"
 
 #~ msgid "namespace"
-#~ msgstr "пространство имен"
+#~ msgstr "п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬ п╦п╪п╣п╫"
 
 #~ msgid "failed to assign NativeSymbolInfo for"
-#~ msgstr "не удалось присвоить NativeSymbolInfo для"
+#~ msgstr "п╫п╣ я┐п╢п╟п╩п╬я│я▄ п©я─п╦я│п╡п╬п╦я┌я▄ NativeSymbolInfo п╢п╩я▐"
 
 #~ msgid "not found"
-#~ msgstr "не найден"
+#~ msgstr "п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #~ msgid "' has changed"
-#~ msgstr "' сменилась"
+#~ msgstr "' я│п╪п╣п╫п╦п╩п╟я│я▄"
 
 #~ msgid "is not"
-#~ msgstr "не является"
+#~ msgstr "п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐"
 
 #~ msgid "all"
-#~ msgstr "все"
+#~ msgstr "п╡я│п╣"
 
 #~ msgid "TRUE"
 #~ msgstr "TRUE"
 
 #~ msgid "non-numeric argument to 'chol'"
-#~ msgstr "нечисловой аргумент для 'chol'"
+#~ msgstr "п╫п╣я┤п╦я│п╩п╬п╡п╬п╧ п╟я─пЁя┐п╪п╣п╫я┌ п╢п╩я▐ 'chol'"
 
 #~ msgid "do not know how to convert '%s' to class \"POSIXlt\""
-#~ msgstr "не знаю как конвертировать '%s' в класс \"POSIXlt\""
+#~ msgstr "п╫п╣ п╥п╫п╟я▌ п╨п╟п╨ п╨п╬п╫п╡п╣я─я┌п╦я─п╬п╡п╟я┌я▄ '%s' п╡ п╨п╩п╟я│я│ \"POSIXlt\""
 
 #~ msgid "do not know how to convert '%s' to class \"POSIXct\""
-#~ msgstr "не знаю как конвертировать '%s' в класс \"POSIXct\""
+#~ msgstr "п╫п╣ п╥п╫п╟я▌ п╨п╟п╨ п╨п╬п╫п╡п╣я─я┌п╦я─п╬п╡п╟я┌я▄ '%s' п╡ п╨п╩п╟я│я│ \"POSIXct\""
 
 #~ msgid "'shrink.sml' must be numeric > 0"
-#~ msgstr "'shrink.sml' должен быть числом > 0"
+#~ msgstr "'shrink.sml' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┤п╦я│п╩п╬п╪ > 0"
 
 #~ msgid "'min.n' must be non-negative integer <= n"
-#~ msgstr "'min.n' должен быть неотрицательным целым <= n"
+#~ msgstr "'min.n' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╫п╣п╬я┌я─п╦я├п╟я┌п╣п╩я▄п╫я▀п╪ я├п╣п╩я▀п╪ <= n"
 
 #~ msgid "'high.u.bias' must be non-negative numeric"
-#~ msgstr "'high.u.bias' должен быть неотрицательным числом"
+#~ msgstr "'high.u.bias' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╫п╣п╬я┌я─п╦я├п╟я┌п╣п╩я▄п╫я▀п╪ я┤п╦я│п╩п╬п╪"
 
 #~ msgid "'u5.bias' must be non-negative numeric"
-#~ msgstr "'u5.bias' должен быть неотрицательным числом"
+#~ msgstr "'u5.bias' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╫п╣п╬я┌я─п╦я├п╟я┌п╣п╩я▄п╫я▀п╪ я┤п╦я│п╩п╬п╪"
 
 #~ msgid "'eps.correct' must be 0, 1, or 2"
-#~ msgstr "'eps.correct' должен быть 0, 1, или 2"
+#~ msgstr "'eps.correct' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ 0, 1, п╦п╩п╦ 2"
 
 #~ msgid "'b' must be compatible with 'a'"
-#~ msgstr "'b' должен быть совместим с 'a'"
+#~ msgstr "'b' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я│п╬п╡п╪п╣я│я┌п╦п╪ я│ 'a'"
 
 #~ msgid "invalid argument values in 'backsolve'"
-#~ msgstr "неправильные значения аргумента в 'backsolve'"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╥п╫п╟я┤п╣п╫п╦я▐ п╟я─пЁя┐п╪п╣п╫я┌п╟ п╡ 'backsolve'"
 
 #, fuzzy
 #~ msgid "invalid value of ncol(x)"
-#~ msgstr "неправильное значение"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣"
 
 #~ msgid "singular matrix in 'backsolve'. First zero in diagonal [%d]"
-#~ msgstr "сингулярная матрица в 'backsolve'. Первый ноль на диагонали [%d]"
+#~ msgstr "я│п╦п╫пЁя┐п╩я▐я─п╫п╟я▐ п╪п╟я┌я─п╦я├п╟ п╡ 'backsolve'. п÷п╣я─п╡я▀п╧ п╫п╬п╩я▄ п╫п╟ п╢п╦п╟пЁп╬п╫п╟п╩п╦ [%d]"
 
 #, fuzzy
 #~ msgid "invalid value of nrow(x)"
-#~ msgstr "неправильное значение"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣"
 
 #~ msgid "Expected a single logical value for the S4 state flag"
-#~ msgstr "Ожидается простое логическое значение для флага состояния S4"
+#~ msgstr "п·п╤п╦п╢п╟п╣я┌я│я▐ п©я─п╬я│я┌п╬п╣ п╩п╬пЁп╦я┤п╣я│п╨п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ п╢п╩я▐ я└п╩п╟пЁп╟ я│п╬я│я┌п╬я▐п╫п╦я▐ S4"
 
 #~ msgid "Expected a single logical value for the S3 state flag"
-#~ msgstr "Ожидается простое логическое значение для флага состояния S3"
+#~ msgstr "п·п╤п╦п╢п╟п╣я┌я│я▐ п©я─п╬я│я┌п╬п╣ п╩п╬пЁп╦я┤п╣я│п╨п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ п╢п╩я▐ я└п╩п╟пЁп╟ я│п╬я│я┌п╬я▐п╫п╦я▐ S3"
 
 #, fuzzy
 #~ msgid "invalid value of length(x)"
-#~ msgstr "неправильное значение"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣"
 
 #, fuzzy
 #~ msgid "invalid value of length(breaks)"
-#~ msgstr "неправильное значение"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣"
 
 #, fuzzy
 #~ msgid "invalid length(x)"
-#~ msgstr "неправильное значение"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣"
 
 #, fuzzy
 #~ msgid "invalid length(vec)"
-#~ msgstr "неправильное значение"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣"
 
 #, fuzzy
 #~ msgid "invalid value of length(bin)"
-#~ msgstr "неправильное значение"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣"

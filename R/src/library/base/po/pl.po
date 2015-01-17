@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 20:02+0100\n"
+"POT-Creation-Date: 2015-01-17 13:25+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -8345,6 +8345,7 @@ msgid "cannot open destfile '%s', reason '%s'"
 msgstr "nie można otworzyć docelowego pliku '%s', powód '%s'"
 
 #: src/modules/internet/internet.c:382 src/modules/internet/internet.c:488
+#: src/modules/internet/libcurl.c:235
 #, c-format
 msgid "Trying URL '%s'\n"
 msgstr "Sprawdzanie adresu URL '%s'\n"
@@ -8488,11 +8489,6 @@ msgstr "tylko pierwszy element argumentu 'url' został użyty"
 #: src/modules/internet/libcurl.c:182
 msgid "only first element of 'destfile' argument used"
 msgstr "tylko pierwszy element argumentu 'destfile' został użyty"
-
-#: src/modules/internet/libcurl.c:235
-#, c-format
-msgid "trying URL '%s'\n"
-msgstr "Sprawdzanie adresu URL '%s'\n"
 
 #: src/modules/internet/libcurl.c:243
 #, c-format
@@ -9627,6 +9623,9 @@ msgstr "moduł X11 nie może zostać załadowany"
 #: src/unix/X11.c:145 src/unix/X11.c:151 src/unix/X11.c:157 src/unix/X11.c:163
 msgid "X11 is not available"
 msgstr "X11 nie jest dostępne"
+
+#~ msgid "trying URL '%s'\n"
+#~ msgstr "Sprawdzanie adresu URL '%s'\n"
 
 #~ msgid "'match.call()' function was called from outside a function"
 #~ msgstr "funkcja 'match.call()' została wywołana spoza funkcji"

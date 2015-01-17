@@ -10,17 +10,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 20:02+0100\n"
-"PO-Revision-Date: 2012-03-15 11:17-0500\n"
-"Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
+"POT-Creation-Date: 2015-01-17 13:25+0100\n"
+"PO-Revision-Date: 2015-01-17 13:37+0100\n"
+"Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
-"Language: \n"
+"Language: ru_RU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "First-Translator: Dmitri I GOULIAEV <dmitri.gouliaev@telkel.net\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: src/appl/lbfgsb.c:683 src/appl/lbfgsb.c:755
 msgid "Singular triangular system detected."
@@ -8480,6 +8482,7 @@ msgid "cannot open destfile '%s', reason '%s'"
 msgstr "не могу открыть файл назначения '%s' по причине '%s'"
 
 #: src/modules/internet/internet.c:382 src/modules/internet/internet.c:488
+#: src/modules/internet/libcurl.c:235
 #, fuzzy, c-format
 msgid "Trying URL '%s'\n"
 msgstr "пробую URL '%s'\n"
@@ -8620,11 +8623,6 @@ msgstr "использован только первый элемент аргу
 #: src/modules/internet/libcurl.c:182
 msgid "only first element of 'destfile' argument used"
 msgstr "использован только первый элемент аргумента 'destfile'"
-
-#: src/modules/internet/libcurl.c:235
-#, fuzzy, c-format
-msgid "trying URL '%s'\n"
-msgstr "пробую URL '%s'\n"
 
 #: src/modules/internet/libcurl.c:243
 #, c-format
@@ -9787,6 +9785,10 @@ msgstr "модуль X11 нельзя загрузить"
 #: src/unix/X11.c:145 src/unix/X11.c:151 src/unix/X11.c:157 src/unix/X11.c:163
 msgid "X11 is not available"
 msgstr "X11 недоступен"
+
+#, fuzzy
+#~ msgid "trying URL '%s'\n"
+#~ msgstr "пробую URL '%s'\n"
 
 #, fuzzy
 #~ msgid "'match.call()' function was called from outside a function"
