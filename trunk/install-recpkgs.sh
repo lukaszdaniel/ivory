@@ -26,6 +26,7 @@ fi;
   tar rf $tar $pkg
   gzip $tar
  done
+cd ..
  source $IVORY/tools/link-recommended
 
 

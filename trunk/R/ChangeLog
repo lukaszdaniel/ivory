@@ -65,26 +65,26 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > src/main/gzio.h
 51a84
 > src/main/inspect.c
-53a87
-> src/main/libcurl.c
-64a99
+64a98
 > src/main/plot.c
-66d100
+66d99
 < src/main/print.c
-67a102
+67a101
 > src/main/print.c
-68a104
+68a103
 > src/main/printvector.c
-71a108
+71a107
 > src/main/Rdynload.c
-72a110,112
+72a109,111
 > src/main/Renviron.c
 > src/main/RNG.c
 > src/main/Rstrptime.h
-91,93d130
+91,93d129
 < src/modules/X11/dataentry.c
 < src/modules/X11/devX11.c
 < src/modules/internet/Rhttpd.c
+94a131
+> src/modules/internet/libcurl.c
 96a134
 > src/modules/internet/Rhttpd.c
 99,100c137,139
@@ -1601,7 +1601,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > #define M_EC            0.57721566490153286060651209008240243104215933593992 /* euler's constant */
 > #endif
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=ChangeLog' R-devel/src/include/Rmodules/Rinternet.h R/src/include/Rmodules/Rinternet.h
-60c60
+66c66
 < #endif /* ifndef R_INTERNET_MODULE_H */
 ---
 > #endif /* R_INTERNET_MODULE_H */
@@ -1945,23 +1945,23 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >     if(length(where) < 1L) stop(gettextf("'%s' argument is of length 0", "where"))
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=ChangeLog' R-devel/src/library/base/R/connections.R R/src/library/base/R/connections.R
-142c142
+143c143
 <         stop("'origin' must be one of 'start', 'current' or 'end'")
 ---
 >         stop("'origin' argument must be one of 'start', 'current' or 'end'")
-151c151
+152c152
 <     if(!isOpen(con)) stop("can only truncate an open connection")
 ---
 >     if(!isOpen(con)) stop("'truncate.connection()' function can only truncate an open connection")
-255c255
+256c256
 <         stop("can only write character objects")
 ---
 >         stop("'writeChar()' can only write character objects")
-270c270
+271c271
 <         stop("'timeout' must be NULL or a non-negative number")
 ---
 >         stop("'timeout' argument must be NULL or a non-negative number")
-281c281
+282c282
 <     else if(!is.raw(from)) stop("'from' must be raw or character")
 ---
 >     else if(!is.raw(from)) stop("'from' argument must be raw or character")
@@ -7040,55 +7040,59 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <               stop(MSG, domain = NA),
 ---
 >               stop(MSG, domain = "R-methods"),
-1317c1320
+1214c1217
+<         stop("callGeneric() must be called from within a method body")
+---
+>         stop("'callGeneric()' function must be called from within a method body")
+1306c1309
 <         stop(gettextf('expected a non-empty character string for argument name'), domain = NA)
 ---
 >         stop(gettextf("expected a non-empty character string for argument name"), domain = "R-methods")
-1319c1322
+1308c1311
 <         stop(gettextf('generic function supplied was not created for %s',
 ---
 >         stop(gettextf("generic function supplied was not created for %s",
-1321c1324
+1310c1313
 <              domain = NA)
 ---
 >              domain = "R-methods")
-1334c1337
+1323c1326
 <                        domain = NA)
 ---
 >                        domain = "R-methods")
-1366c1369
+1355c1358
 <                 domain = NA)
 ---
 >                 domain = "R-methods")
-1389c1392
+1378c1381
 <                       dQuote(class(what))), domain = NA)
 ---
 >                       dQuote(class(what))), domain = "R-methods")
-1454c1457
+1443c1446
 < 	    return(gettextf("formal arguments differ: (%s), (%s)",
 ---
 > 	    return(sprintf(gettext("formal arguments differ: (%s), (%s)", domain = "R-methods"),
-1465c1468
+1454c1457
 < 	return(gettextf("signatures differ:  (%s), (%s)",
 ---
 > 	return(sprintf(gettext("signatures differ:  (%s), (%s)", domain = "R-methods"),
-1519c1522
+1508c1511
 <              domain = NA)
 ---
 >              domain = "R-methods")
-1526c1529
+1515c1518
 <                 domain = NA)
 ---
 >                 domain = "R-methods")
-1535c1538
+1524c1527
 <           stop(gettextf("only FALSE is meaningful for 'inherited', when 'where' is supplied (got %s)", inherited), domain = NA)
 ---
 >           stop(gettextf("only FALSE is meaningful for 'inherited', when 'where' is supplied (got %s)", inherited))
-1599c1602
+1588c1591
 <                       .notSingleString(f)), domain = NA)
 ---
 >                       .notSingleString(f)), domain = "R-methods")
-1615c1618
+1604c1607
 < 		     domain = NA)
 ---
 > 		     domain = "R-methods")
@@ -7265,11 +7269,11 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >                                sQuote(object@package), domain = "R-methods"), "\n", sep = "")
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=ChangeLog' R-devel/src/library/methods/R/NextMethod.R R/src/library/methods/R/NextMethod.R
-64c64
+66c66
 <                  domain = NA)
 ---
 >                  domain = "R-methods")
-98c98
+100c100
 <                       dQuote(class(method))), domain = NA)
 ---
 >                       dQuote(class(method))), domain = "R-methods")
@@ -9247,23 +9251,23 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	error("internal error in 'callNextMethod': '.nextMethod' was not assigned in the frame of the method call");
 ---
 > 	error(_("internal error in 'callNextMethod': '.nextMethod' was not assigned in the frame of the method call"));
-850c849
+833c832
 < 				       "The internal prefix (e.g., \"C\") for a meta-data object");
 ---
 > 				       _("The internal prefix (e.g., \"C\") for a meta-data object"));
-852c851
+835c834
 < 				     "The name of the object (e.g,. a class or generic function) to find in the meta-data");
 ---
 > 				     _("The name of the object (e.g,. a class or generic function) to find in the meta-data"));
-854c853
+837c836
 < 				   "The name of the package for a meta-data object");
 ---
 > 				   _("The name of the package for a meta-data object"));
-990c989
+973c972
 < 	error("generic \"%s\" seems not to have been initialized for table dispatch---need to have '.SigArgs' and '.AllMtable' assigned in its environment");
 ---
 > 	error(_("generic \"%s\" seems not to have been initialized for table dispatch---need to have '.SigArgs' and '.AllMtable' assigned in its environment"));
-994c993
+977c976
 < 	error("'.SigArgs' is shorter than '.SigLength' says it should be");
 ---
 > 	error(_("'.SigArgs' is shorter than '.SigLength' says it should be"));
@@ -16430,128 +16434,132 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <                             "[[:space:]]*,[[:space:]]*"))
 ---
 >     opts <- unlist(strsplit(Sys.getenv("_R_CHECK_CODETOOLS_PROFILE_"), "[[:space:]]*,[[:space:]]*"))
-4045,4046c3849
+3964c3768
+<         ind <- grepl("... used in a situation where it does not exist",
+---
+>         ind <- grepl("'...' used in a situation where it does not exist",
+4055,4056c3859
 <         config_val_to_logical(Sys.getenv("_R_CHECK_XREFS_USE_ALIASES_FROM_CRAN_",
 <                                          FALSE))
 ---
 >         config_val_to_logical(Sys.getenv("_R_CHECK_XREFS_USE_ALIASES_FROM_CRAN_", FALSE))
-4059,4060c3862
+4069,4070c3872
 <                 message(gettextf("package %s exists but was not installed under R >= 2.10.0 so xrefs cannot be checked", sQuote(pkg)),
 <                         domain = NA)
 ---
 >                 message(gettextf("package %s exists but was not installed under R >= 2.10.0 so xrefs cannot be checked", sQuote(pkg)), domain = "R-tools")
-4100c3902
+4110c3912
 <                                  "Obsolete packages %s in Rd xrefs"),
 ---
 >                                  "Obsolete packages %s in Rd xrefs", domain = "R-tools"),
-4122c3924
+4132c3934
 <                                      "Packages unavailable to check Rd xrefs: %s"),
 ---
 >                                      "Packages unavailable to check Rd xrefs: %s", domain = "R-tools"),
-4128c3930
+4138c3940
 <                                      "Unknown packages %s in Rd xrefs"),
 ---
 >                                      "Unknown packages %s in Rd xrefs", domain = "R-tools"),
-4144,4145c3946
+4154,4155c3956
 <             c(gettextf("Missing link or links in documentation object '%s':",
 <                        names(xx)[i]),
 ---
 >             c(gettextf("Missing link or links in documentation object %s:", sQuote(names(xx)[i]), domain = "R-tools"),
-4147,4148c3948
+4157,4158c3958
 <               .pretty_format(unique(xx[[i]])),
 <               "")
 ---
 >               .pretty_format(unique(xx[[i]])), "")
-4151,4152c3951
+4161,4162c3961
 <           strwrap(gettextf("See section 'Cross-references' in the 'Writing R Extensions' manual.")),
 <           "")
 ---
 >           strwrap(gettext("See section 'Cross-references' in the 'Writing R Extensions' manual.", domain = "R-tools")), "")
-4200,4201c3999
+4210,4211c4009
 <         .try_quietly(utils::data(list = f, package = character(),
 <                                  envir = dataEnv))
 ---
 >         .try_quietly(utils::data(list = f, package = character(), envir = dataEnv))
-4229c4027
+4239c4037
 <                    "Note: found %d marked Latin-1 strings"), n)
 ---
 >                    "Note: found %d marked Latin-1 strings", domain = "R-tools"), n)
-4235c4033
+4245c4043
 <                            "Note: found %d marked UTF-8 strings"), n)
 ---
 >                            "Note: found %d marked UTF-8 strings", domain = "R-tools"), n)
-4241c4039
+4251c4049
 <                            "Note: found %d strings marked as \"bytes\""), n)
 ---
 >                            "Note: found %d strings marked as \"bytes\"", domain = "R-tools"), n)
-4247c4045
+4257c4055
 <                           domain = NA)
 ---
 >                           domain = "R-tools")
-4249,4250c4047
+4259,4260c4057
 <             paste0(iconv0(x$unknown[, 1L], "", "ASCII", sub = "byte"),
 <                    " in object '", x$unknown[, 2L], "'"))
 ---
 >             gettextf("%s in object %s", iconv0(x$unknown[, 1L], "", "ASCII", sub = "byte"), sQuote(x$unknown[, 2L]), domain = "R-tools"))
-4270c4067
+4280c4077
 <         if(!OK) msg <- "Warning: package needs dependence on R (>= 2.10)"
 ---
 >         if(!OK) msg <- gettext("Warning: package needs dependence on R (>= 2.10)", domain = "R-tools")
-4319c4116
+4329c4126
 <                         domain = NA)
 ---
 >                         domain = "R-tools")
-4328,4330c4125
+4338,4340c4135
 <         writeLines(c("",
 <                      "Note: significantly better compression could be obtained",
 <                      "      by using R CMD build --resave-data"))
 ---
 >         writeLines(c("", gettext("Note: significantly better compression could be obtained by using R CMD build --resave-data", domain = "R-tools")))
-4356c4151
+4366c4161
 <         if(!OK) msg <- "Warning: package needs dependence on R (>= 2.10)"
 ---
 >         if(!OK) msg <- gettext("Warning: package needs dependence on R (>= 2.10)", domain = "R-tools")
-4408c4203
+4418c4213
 <         stop(gettextf("directory '%s' does not exist", dir), domain = NA)
 ---
 >         stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
-4449,4450c4244
+4459,4460c4254
 <         demo_files <- list_files_with_type(demo_dir, "demo",
 <                                            full.names = FALSE)
 ---
 >         demo_files <- list_files_with_type(demo_dir, "demo", full.names = FALSE)
-4488,4490c4282
+4498,4500c4292
 <         c(sprintf("Subdirectory '%s' contains invalid file names:",
 <                   tag),
 <           .pretty_format(x[[i]]))
 ---
 >         c(gettextf("Subdirectory %s contains invalid file names:", sQuote(tag), domain = "R-tools"), .pretty_format(x[[i]]))
-4503c4295
+4513c4305
 <         stop(gettextf("directory '%s' does not exist", dir), domain = NA)
 ---
 >         stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
-4529c4321
+4539c4331
 <         stop(gettextf("directory '%s' does not exist", dir), domain = NA)
 ---
 >         stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
-4586,4587c4378
+4596,4597c4388
 <             lines <- iconv(readLines(file, warn = FALSE), from = enc, to = "",
 <                            sub = "byte")
 ---
 >             lines <- iconv(readLines(file, warn = FALSE), from = enc, to = "", sub = "byte")
-4615,4618c4406
+4625,4628c4416
 <     out <-
 <         lapply(list_files_with_type(dir, "code", full.names = FALSE,
 <                                     OS_subdirs = c("unix", "windows")),
 <                collect_parse_woes)
 ---
 >     out <- lapply(list_files_with_type(dir, "code", full.names = FALSE, OS_subdirs = c("unix", "windows")), collect_parse_woes)
-4620,4621c4408
+4630,4631c4418
 <     structure(out[sapply(out, length) > 0L],
 <               class = "check_package_code_syntax")
 ---
 >     structure(out[sapply(out, length) > 0L], class = "check_package_code_syntax")
-4632,4635c4419,4420
+4642,4645c4429,4430
 <             msg <- gsub("\n", "\n  ", sub("[^:]*: *", "", xi$Error),
 < 			perl = TRUE, useBytes = TRUE)
 <             writeLines(c(sprintf("Error in file '%s':", xi$File),
@@ -16559,32 +16567,32 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >             msg <- gsub("\n", "\n  ", sub("[^:]*: *", "", xi$Error), perl = TRUE, useBytes = TRUE)
 >             writeLines(c(gettextf("Error in file %s:", sQuote(xi$File), domain = "R-tools"), paste(" ", msg)))
-4640c4425
+4650c4435
 <                                           "Warnings in file %s:"),
 ---
 >                                           "Warnings in file %s:", domain = "R-tools"),
-4642,4643c4427
+4652,4653c4437
 <                          paste(" ", gsub("\n\n", "\n  ", xi$Warnings,
 < 					 perl = TRUE, useBytes = TRUE))))
 ---
 >                          paste(" ", gsub("\n\n", "\n  ", xi$Warnings, perl = TRUE, useBytes = TRUE))))
-4661,4663c4445
+4671,4673c4455
 <     x <- Filter(length,
 <                 .find_calls_in_package_code(dir, predicate,
 <                                             recursive = TRUE))
 ---
 >     x <- Filter(length, .find_calls_in_package_code(dir, predicate, recursive = TRUE))
-4668,4669c4450
+4678,4679c4460
 <         writeLines(c(unlist(Map(.format_calls_in_file, x, names(x))),
 <                      ""))
 ---
 >         writeLines(c(unlist(Map(.format_calls_in_file, x, names(x))), ""))
-4680,4681c4461
+4690,4691c4471
 <     bad_call_names <-
 <         unlist(.bad_call_names_in_startup_functions)
 ---
 >     bad_call_names <- unlist(.bad_call_names_in_startup_functions)
-4743c4523,4527
+4753c4533,4537
 <     res <- if(!is.null(attr(x, ".First.lib"))) "NB: .First.lib is obsolete and will not be used in R >= 3.0.0" else character()
 ---
 >     if(!is.null(attr(x, ".First.lib"))) {
@@ -16592,7 +16600,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >    } else {
 > 	res <- character()
 >    }
-4750,4760c4534,4538
+4760,4770c4544,4548
 <         has_bad_wrong_args <-
 <             "bad_arg_names" %in% unlist(lapply(y, names))
 <         calls <-
@@ -16610,37 +16618,37 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >         has_bad_calls_for_load <- any(calls %in% .bad_call_names_in_startup_functions$load)
 >         has_bad_calls_for_output <- any(calls %in% .bad_call_names_in_startup_functions$output)
 >         has_unsafe_calls <- any(calls %in% .bad_call_names_in_startup_functions$unsafe)
-4763c4541
+4773c4551
 <             c(gettextf("File %s:", sQuote(f)),
 ---
 >             c(gettextf("File %s:", sQuote(f), domain = "R-tools"),
-4770,4771c4548
+4780,4781c4558
 <                 gettextf("  %s has wrong argument list %s",
 <                          f, sQuote(paste(bad, collapse = ", ")))
 ---
 >                 gettextf("  %s has wrong argument list %s", sQuote(f), sQuote(paste(bad, collapse = ", ")), domain = "R-tools")
-4774c4551
+4784c4561
 <                   c(gettextf("  %s calls:", f),
 ---
 >                   c(gettextf("  %s calls:", sQuote(f), domain = "R-tools"),
-4786,4788c4563
+4796,4798c4573
 <               strwrap(gettextf("Package startup functions should have two arguments with names starting with %s and %s, respectively.",
 <                                sQuote("lib"), sQuote("pkg")),
 <                       exdent = 2L),
 ---
 >               strwrap(gettextf("Package startup functions should have two arguments with names starting with %s and %s, respectively.", sQuote("lib"), sQuote("pkg"), domain = "R-tools"), exdent = 2L),
-4790,4791c4565
+4800,4801c4575
 <               strwrap(gettextf("Package startup functions should not change the search path."),
 <                       exdent = 2L),
 ---
 >               strwrap(gettext("Package startup functions should not change the search path.", domain = "R-tools"), exdent = 2L),
-4793,4795c4567
+4803,4805c4577
 <               strwrap(gettextf("Package startup functions should use %s to generate messages.",
 <                                sQuote("packageStartupMessage")),
 <                       exdent = 2L),
 ---
 >               strwrap(gettextf("Package startup functions should use %s to generate messages.", sQuote("packageStartupMessage"), domain = "R-tools"), exdent = 2L),
-4797,4802c4569,4570
+4807,4812c4579,4580
 <               strwrap(gettextf("Package startup functions should not call %s.",
 <                                sQuote("installed.packages")),
 <                       exdent = 2L),
@@ -16650,7 +16658,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >               strwrap(gettextf("Package startup functions should not call %s.", sQuote("installed.packages"), domain = "R-tools"), exdent = 2L),
 >               gettextf("See section %s in %s.", sQuote("Good practice"), sQuote("?.onAttach"), domain = "R-tools")
-4896c4664,4668
+4906c4674,4678
 <     res <- if(!is.null(attr(x, ".Last.lib"))) "NB: .Last.lib will not be used unless it is exported" else character()
 ---
 >     if(!is.null(attr(x, ".Last.lib"))) {
@@ -16658,24 +16666,24 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     } else {
 > 	res <- character()
 >     }
-4909c4681
+4919c4691
 <             c(gettextf("File %s:", sQuote(f)),
 ---
 >             c(gettextf("File %s:", sQuote(f), domain = "R-tools"),
-4917c4689
+4927c4699
 <                          f, sQuote(paste(bad, collapse = ", ")))
 ---
 >                          sQuote(f), sQuote(paste(bad, collapse = ", ")), domain = "R-tools")
-4920c4692
+4930c4702
 <                   c(gettextf("  %s calls:", f),
 ---
 >                   c(gettextf("  %s calls:", sQuote(f), domain = "R-tools"),
-4932,4933c4704
+4942,4943c4714
 <               strwrap(gettextf("Package detach functions should have one argument with name starting with %s.", sQuote("lib")),
 <                       exdent = 2L),
 ---
 >               strwrap(gettextf("Package detach functions should have one arguments with names starting with %s.", sQuote("lib"), domain = "R-tools"), exdent = 2L),
-4935,4939c4706,4707
+4945,4949c4716,4717
 <               strwrap(gettextf("Package detach functions should not call %s.",
 <                                sQuote("library.dynam.unload")),
 <                       exdent = 2L),
@@ -16684,68 +16692,68 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >               strwrap(gettextf("Package detach functions should not call %s.", sQuote("library.dynam.unload"), domain = "R-tools"), exdent = 2L),
 >               gettextf("See section %s in %s.", sQuote("Good practice"), sQuote("?.Last.lib"), domain = "R-tools")
-5025,5028c4793
+5035,5038c4803
 <         if(!is.null(env <- mc$envir) &&
 <            identical(tryCatch(eval(env),
 <                               error = identity),
 <                      globalenv()))
 ---
 >         if(!is.null(env <- mc$envir) && identical(tryCatch(eval(env), error = identity), globalenv()))
-5030,5033c4795
+5040,5043c4805
 <         if(!is.null(pos <- mc$pos) &&
 <            identical(tryCatch(eval(call("as.environment", pos)),
 <                               error = identity),
 <                      globalenv()))
 ---
 >         if(!is.null(pos <- mc$pos) && identical(tryCatch(eval(call("as.environment", pos)), error = identity), globalenv()))
-5050c4812
+5060c4822
 <     c("Found the following assignments to the global environment:",
 ---
 >     c(gettext("Found the following assignments to the global environment:", domain = "R-tools"),
-5074c4836
+5084c4846
 <     c("Found the following calls to attach():",
 ---
 >     c(gettext("Found the following calls passed to 'attach()':", domain = "R-tools"),
-5113c4875
+5123c4885
 <     c("Found the following calls to data() loading into the global environment:",
 ---
 >     c(gettext("Found the following calls passed to 'data()' loading into the global environment:", domain = "R-tools"),
-5126c4888
+5136c4898
 <             stop("argument 'package' must be of length 1")
 ---
 >             stop(gettextf("'%s' argument must be of length 1", "package"))
-5131,5133c4893
+5141,5143c4903
 <             stop(gettextf("directory '%s' does not contain R code",
 <                           dir),
 <                  domain = NA)
 ---
 >             stop(gettextf("directory %s does not contain R code", sQuote(dir)), domain = "R-tools")
-5154,5155c4914
+5164,5165c4924
 <             stop(gettextf("directory '%s' does not exist", dir),
 <                  domain = NA)
 ---
 >             stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
-5167c4926
+5177c4936
 <             if(!file.create(file)) stop("unable to create ", file)
 ---
 >             if(!file.create(file)) stop(gettextf("unable to create file %s", sQuote(file)))
-5181,5183c4940
+5191,5193c4950
 <     standard_package_names <-
 <         setdiff(.get_standard_package_names()$base,
 <                 c("methods", "stats4"))
 ---
 >     standard_package_names <- setdiff(.get_standard_package_names()$base, c("methods", "stats4"))
-5190,5191c4947
+5200,5201c4957
 <     imports <- c(imports, depends, suggests, enhances, pkg_name,
 <                  standard_package_names)
 ---
 >     imports <- c(imports, depends, suggests, enhances, pkg_name, standard_package_names)
-5271,5272c5027
+5281,5282c5037
 <         if(length(objects(code_env, all.names = TRUE,
 <                           pattern = "^[.]__[CT]_")))
 ---
 >         if(length(objects(code_env, all.names = TRUE, pattern = "^[.]__[CT]_")))
-5300,5303c5055,5057
+5310,5313c5065,5067
 <                      stop(gettextf("parse error in file '%s':\n%s",
 <                                    file,
 <                                    .massage_file_parse_error_message(conditionMessage(e))),
@@ -16754,23 +16762,23 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >                      stop(gettextf("parse error in file %s:", sQuote(file)), "\n",
 >                                    .massage_file_parse_error_message(conditionMessage(e)),
 >                                domain = "R-tools", call. = FALSE))
-5322c5076
+5332c5086
 <             gettext("package 'methods' is used but not declared")
 ---
 >             gettext("package 'methods' is used but not declared", domain = "R-tools")
-5407,5408c5161
+5417,5418c5171
 <                  exps <- c(ls(envir = getNamespaceInfo(p, "exports"),
 <                               all.names = TRUE), extras[[p]])
 ---
 >                  exps <- c(ls(envir = getNamespaceInfo(p, "exports"), all.names = TRUE), extras[[p]])
-5459,5462c5212
+5469,5472c5222
 <     incoming <-
 <         identical(Sys.getenv("_R_CHECK_PACKAGES_USED_CRAN_INCOMING_NOTES_",
 <                              "FALSE"),
 <                   "TRUE")
 ---
 >     incoming <- identical(Sys.getenv("_R_CHECK_PACKAGES_USED_CRAN_INCOMING_NOTES_", "FALSE"), "TRUE")
-5465,5470c5215,5219
+5475,5480c5225,5229
 <           if(length(xx) > 1L) {
 <               c(gettext("'::' or ':::' imports not declared from:"),
 <                 .pretty_format(sort(xx)))
@@ -16783,7 +16791,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >  "'::' or ':::' imports not declared from: %s", domain = "R-tools"),
 >  .pretty_format(sort(xx))),
 >  collapse = "")
-5473,5479c5222,5226
+5483,5489c5232,5236
 <           if(length(xx) > 1L) {
 <               c(gettext("'library' or 'require' calls not declared from:"),
 <                 .pretty_format(sort(xx)))
@@ -16797,7 +16805,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >  "'library' or 'require' calls not declared from: %s", domain = "R-tools"),
 >  .pretty_format(sort(xx))),
 >  collapse = "")
-5482,5488c5229
+5492,5498c5239
 <           if(length(xx) > 1L) {
 <               c(gettext("'loadNamespace' or 'requireNamespace' calls not declared from:"),
 <                 .pretty_format(sort(xx)))
@@ -16807,7 +16815,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <           }
 ---
 >           sprintf(ngettext("'loadNamespace' or 'requireNamespace' call not declared from: %s", "'loadNamespace' or 'requireNamespace' calls not declared from: %s", domain = "R-tools"), .pretty_format(sort(xx)))
-5491,5498c5232,5235
+5501,5508c5242,5245
 <           msg <- "  Please remove these calls from your code."
 <           if(length(xx) > 1L) {
 <               c(gettext("'library' or 'require' calls to packages already attached by Depends:"),
@@ -16821,7 +16829,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >  "'library' or 'require' call to package %s which was already attached by Depends. Please remove these calls from your code.",
 >  "'library' or 'require' call to packages %s which were already attached by Depends. Please remove these calls from your code.", domain = "R-tools"),
 >  .pretty_format(sort(xx)))
-5501,5509c5238
+5511,5519c5248
 <           msg <-
 <               "  Please use :: or requireNamespace() instead.\n  See section 'Suggested packages' in the 'Writing R Extensions' manual."
 <           if(length(xx) > 1L) {
@@ -16832,8 +16840,8 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <                          sQuote(xx)), msg)
 <           }
 ---
->           sprintf(ngettext(length(xx), "'library' or 'require' call in package code: %s\n  Please use :: or requireNamespace() instead: see 'Suggested Packages'.", "'library' or 'require' calls in package code: %s\n  Please use :: or requireNamespace() instead: see 'Suggested Packages'.",domain = "R-tools"), .pretty_format(sort(xx)))
-5513,5520c5242,5245
+>           sprintf(ngettext(length(xx), "'library' or 'require' call in package code: %s\n  Please use :: or requireNamespace() instead.\n  See section 'Suggested packages' in the 'Writing R Extensions' manual.", "'library' or 'require' calls in package code: %s\n  Please use :: or requireNamespace() instead.\n  See section 'Suggested packages' in the 'Writing R Extensions' manual.",domain = "R-tools"), .pretty_format(sort(xx)))
+5523,5530c5252,5255
 <           msg <- "  All declared Imports should be used."
 <           if(length(xx) > 1L) {
 <               c(gettext("Namespaces in Imports field not imported from:"),
@@ -16847,7 +16855,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >  "Namespace in Imports field not imported from: %s\nAll declared Imports should be used.",
 >  "Namespaces in Imports field not imported from: %s\nAll declared Imports should be used.", domain = "R-tools"),
 >  .pretty_format(sort(xx)))
-5523,5531c5248,5251
+5533,5541c5258,5261
 <           msg <- c("  These packages need to be imported from (in the NAMESPACE file)",
 <                    "  for when this namespace is loaded but not attached.")
 <           if(length(xx) > 1L) {
@@ -16862,18 +16870,18 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >  "Package in Depends field not imported from: %s\nThese packages needs to imported from for the case when this namespace is loaded but not attached.",
 >  "Packages in Depends field not imported from: %s\nThese packages needs to imported from for the case when this namespace is loaded but not attached.", domain = "R-tools"),
 >  .pretty_format(sort(xx)))
-5534,5535c5254,5256
+5544,5545c5264,5266
 <           if(length(xx) > 1L) {
 <               c(gettext("Missing or unexported objects:"),
 ---
 >       sprintf(ngettext(length(xx),
 >  "Missing or unexported object: %s",
 >  "Missing or unexported objects: %s", domain = "R-tools"),
-5537,5539d5257
+5547,5549d5267
 <           } else {
 <               gettextf("Missing or unexported object: %s", sQuote(xx))
 <           }
-5542,5550c5260,5263
+5552,5560c5270,5273
 <           msg <- "See the note in ?`:::` about the use of this operator."
 <           msg <- strwrap(paste(msg, collapse = " "), indent = 2L, exdent = 2L)
 <           if(length(xx) > 1L) {
@@ -16888,22 +16896,22 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >  "':::' call which should be '::': %s\nSee the note in ?`:::` about the use of this operator.",
 >  "':::' calls which should be '::': %s\nSee the note in ?`:::` about the use of this operator.", domain = "R-tools"),
 >  .pretty_format(sort(xx)))
-5553,5554c5266,5268
+5563,5564c5276,5278
 <            if(length(xx) > 1L) {
 <               c(gettext("Missing objects imported by ':::' calls:"),
 ---
 >       sprintf(ngettext(length(xx),
 >  "Missing object imported by a ':::' call: %s",
 >  "Missing objects imported by a ':::' calls: %s", domain = "R-tools"),
-5556,5559d5269
+5566,5569d5279
 <           } else {
 <               gettextf("Missing object imported by a ':::' call: %s",
 <                        sQuote(xx))
 <           }
-5562,5563d5271
+5572,5573d5281
 <           msg <- "See the note in ?`:::` about the use of this operator."
 <           msg <- strwrap(paste(msg, collapse = " "), indent = 2L, exdent = 2L)
-5567,5577c5275,5285
+5577,5587c5285,5295
 <               if (any(z %in% base))
 <                   msg <- c(msg,
 <                            "  Including base/recommended package(s):",
@@ -16927,7 +16935,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >  "Unexported object imported by a ':::' call: %s\nSee the note in ?`:::` about the use of this operator.",
 >  "Unexported objects imported by ':::' calls: %s\nSee the note in ?`:::` about the use of this operator.", domain = "R-tools"),
 >  .pretty_format(sort(xxx)))
-5581,5585c5289
+5591,5595c5299
 <           msg <-
 <               c("There are ::: calls to the package's namespace in its code.",
 <                 "A package almost never needs to use ::: for its own objects:")
@@ -16935,7 +16943,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <             .pretty_format(sort(x$imp3selfcalls)))
 ---
 >               gettextf("There are ::: calls to the package's namespace in its code. A package almost never needs to use ::: for its own objects: %s", .pretty_format(sort(x$imp3selfcalls)), domain = "R-tools")
-5588,5596c5292,5295
+5598,5606c5302,5305
 <           msg <- "See the note in ?`:::` about the use of this operator."
 <           msg <- strwrap(paste(msg, collapse = " "), indent = 2L, exdent = 2L)
 <           if(length(xx) > 1L) {
@@ -16950,7 +16958,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >  "Unavailable namespace imported from by a ':::' call: %s\nSee the note in ?`:::` about the use of this operator.",
 >  "Unavailable namespaces imported from by ':::' calls: %s\nSee the note in ?`:::` about the use of this operator.", domain = "R-tools"),
 >  .pretty_format(sort(xx)))
-5599,5605c5298,5301
+5609,5615c5308,5311
 <           if(length(xx) > 1L) {
 <               c(gettext("'data(package=)' calls not declared from:"),
 <                 .pretty_format(sort(xx)))
@@ -16963,7 +16971,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >  "'data(package=)' call not declared from: %s",
 >  "'data(package=)' calls not declared from: %s", domain = "R-tools"),
 >  .pretty_format(sort(xx))), collapse = "")
-5692,5694c5388,5390
+5702,5704c5398,5400
 <                      warning(gettextf("parse error in file '%s':\n%s", f,
 <                                       .massage_file_parse_error_message(conditionMessage(e))),
 <                              domain = NA, call. = FALSE))
@@ -16971,7 +16979,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >                      warning(gettextf("parse error in file %s:", sQuote(f)), "\n",
 >                                       .massage_file_parse_error_message(conditionMessage(e)),
 >                              domain = "R-tools", call. = FALSE))
-5703,5706c5399,5402
+5713,5716c5409,5412
 <                  warning(gettextf("parse error in file '%s':\n%s",
 <                                   summary(files)$description,
 <                                   .massage_file_parse_error_message(conditionMessage(e))),
@@ -16981,36 +16989,36 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >                                   sQuote(summary(files)$description)), "\n",
 >                                   .massage_file_parse_error_message(conditionMessage(e)),
 >                          domain = "R-tools", call. = FALSE))
-5723c5419
+5733c5429
 <             stop("argument 'package' must be of length 1")
 ---
 >             stop(gettextf("'%s' argument must be of length 1", "package"))
-5727,5728c5423
+5737,5738c5433
 <     }
 <     else if(!missing(dir)) {
 ---
 >     } else if(!missing(dir)) {
-5732c5427
+5742c5437
 <             stop(gettextf("directory '%s' does not exist", dir), domain = NA)
 ---
 >             stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
-5764c5459
+5774c5469
 <         stop(gettextf("directory '%s' does not exist", dir), domain = NA)
 ---
 >         stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
-5785c5480
+5795c5490
 <         stop("argument 'package' must be of length 1")
 ---
 >         stop(gettextf("'%s' argument must be of length 1", "package"))
-5876c5571
+5886c5581
 <             stop("argument 'package' must be of length 1")
 ---
 >             stop(gettextf("'%s' argument must be of length 1", "package"))
-5891c5586
+5901c5596
 <             stop("you must specify 'package' or 'dir'")
 ---
 >             stop("you must specify 'package' or 'dir' argument")
-5944,5947c5639,5640
+5954,5957c5649,5650
 <                           "Found possibly global 'T' or 'F' in the following functions:"
 <                           )
 <           c(strwrap(msg),
@@ -17018,7 +17026,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >                           "Found possibly global 'T' or 'F' in the following functions:", domain = "R-tools")
 >           c(strwrap(msg), .pretty_format(x$bad_closures))
-5952,5955c5645,5646
+5962,5965c5655,5656
 <                           "Found possibly global 'T' or 'F' in the examples of the following Rd files:"
 <                           )
 <           c(strwrap(msg),
@@ -17026,22 +17034,22 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >                           "Found possibly global 'T' or 'F' in the examples of the following Rd files:", domain = "R-tools")
 >           c(strwrap(msg), paste(" ", x$bad_examples))
-6001c5692
+6011c5702
 <             stop("argument 'package' must be of length 1")
 ---
 >             stop(gettextf("'%s' argument must be of length 1", "package"))
-6019c5710
+6029c5720
 <             stop("you must specify 'package' or 'dir'")
 ---
 >             stop("you must specify 'package' or 'dir' argument")
-6058,6060c5749,5750
+6068,6070c5759,5760
 <                         "Found a .Internal call in the following function:",
 <                         "Found .Internal calls in the following functions:"
 <                         )
 ---
 >                         "Found an .Internal call in the following function:",
 >                         "Found .Internal calls in the following functions:", domain = "R-tools")
-6062,6064c5752,5759
+6072,6074c5762,5769
 <         if (length(unique(x$internals)))
 <             out <- c(out, "with calls to .Internal functions",
 <                      .pretty_format(sort(unique(x$internals))))
@@ -17054,44 +17062,44 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 
 >         out <- c(strwrap(msg))
 > 	}
-6069,6071c5764,5765
+6079,6081c5774,5775
 <                         "Found a.Internal call in methods for the following S4 generic:",
 <                         "Found .Internal calls in methods for the following S4 generics:"
 <                         )
 ---
 >                         "Found an .Internal call in methods for the following S4 generic:",
 >                         "Found .Internal calls in methods for the following S4 generics:", domain = "R-tools")
-6076,6078c5770,5771
+6086,6088c5780,5781
 <                         "Found a .Internal call in methods for the following reference class:",
 <                         "Found .Internal calls in methods for the following reference classes:"
 <                         )
 ---
 >                         "Found an .Internal call in methods for the following reference class:",
 >                         "Found .Internal calls in methods for the following reference classes:", domain = "R-tools")
-6092c5785
+6102c5795
 <                            writeLines("Invalid NAMESPACE file, parsing gives:")
 ---
 >                            writeLines(gettext("Invalid NAMESPACE file, parsing gives:", domain = "R-tools"))
-6113c5806
+6123c5816
 <                 msg <- c("Error: ", msg)
 ---
 >                 msg <- c(gettext("Error: ", domain = "R-tools"), msg)
-6115c5808
+6125c5818
 <                 msg <- c("Error in ", deparse(call), ": ", msg)
 ---
 >                 msg <- c(gettextf("Error in %s: ", sQuote(deparse(call)), domain = "R-tools"), msg)
-6145,6147c5838,5839
+6155,6157c5848,5849
 <                    paste(substring(entries, 1L, 20L), "[TRUNCATED]"))
 <         writeLines(sprintf("entry %d: invalid type %s",
 <                            pos, sQuote(entries)))
 ---
 >                    paste(substring(entries, 1L, 20L), gettext("[TRUNCATED]", domain = "R-tools")))
 >         writeLines(gettextf("entry %d: invalid type %s", pos, sQuote(entries), domain = "R-tools"))
-6151c5843
+6161c5853
 <         writeLines(strwrap(sprintf("entry %d (%s): missing required field(s) %s",
 ---
 >         writeLines(strwrap(gettextf("entry %d (%s): missing required field(s) %s",
-6154,6158c5846,5847
+6164,6168c5856,5857
 <                                    sapply(bad[pos],
 <                                           function(s)
 <                                           paste(sQuote(s),
@@ -17100,13 +17108,13 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >                                    paste(sQuote(bad[pos]), collapse = ", ") #sapply(bad[pos], function(s) paste(sQuote(s), collapse = ", "))
 > 				, domain = "R-tools"), indent = 0L, exdent = 2L))
-6184,6186c5873
+6194,6196c5883
 < 	tmp <- tryCatch(suppressMessages(checkRd(f, encoding = enc,
 < 						 def_enc = def_enc)),
 < 			error = function(e)e)
 ---
 > 	tmp <- tryCatch(suppressMessages(checkRd(f, encoding = enc, def_enc = def_enc)), error = function(e) e)
-6193,6196c5880,5881
+6203,6206c5890,5891
 <     if(length(bad) > 1L)
 <         cat("problems found in ", paste(bad, collapse=", "), "\n", sep = "")
 <     else if(length(bad))
@@ -17114,51 +17122,51 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >     if(length(bad) > 0L)
 >       cat(sprintf(ngettext(length(bad), "problem found in %s", "problems found in %s", domain = "R-tools"), paste(sQuote(bad), collapse = ", ")), "\n", sep = "")
-6281c5966
+6291c5976
 <             stop("argument 'package' must be of length 1")
 ---
 >             stop(gettextf("'%s' argument must be of length 1", "package"))
-6299c5984
+6309c5994
 <             stop("you must specify 'package' or 'dir'")
 ---
 >             stop("you must specify 'package' or 'dir' argument")
-6331,6332c6016
+6341,6342c6026
 <                         "Found an obsolete/platform-specific call in the following functions:"
 <                         )
 ---
 >                         "Found an obsolete/platform-specific call in the following functions:", domain = "R-tools")
-6338,6339c6022
+6348,6349c6032
 <                         "Found an obsolete/platform-specific call in methods for the following S4 generics:"
 <                         )
 ---
 >                         "Found an obsolete/platform-specific call in methods for the following S4 generics:", domain = "R-tools")
-6345,6346c6028
+6355,6356c6038
 <                         "Found an obsolete/platform-specific call in methods for the following reference classes:"
 <                         )
 ---
 >                         "Found an obsolete/platform-specific call in methods for the following reference classes:", domain = "R-tools")
-6352,6353c6034
+6362,6363c6044
 <                         "Found the deprecated functions:"
 <                         )
 ---
 >                         "Found the deprecated functions:", domain = "R-tools")
-6359,6360c6040
+6369,6370c6050
 <                         "Found the defunct/removed functions:"
 <                         )
 ---
 >                         "Found the defunct/removed functions:", domain = "R-tools")
-6366,6367c6046
+6376,6377c6056
 <                         "Found the platform-specific devices:"
 <                         )
 ---
 >                         "Found the platform-specific devices:", domain = "R-tools")
-6369,6371c6048
+6379,6381c6058
 <                  strwrap(paste("dev.new() is the preferred way to open a new device,",
 <                                "in the unlikely event one is needed.",
 <                                collapse = " ")))
 ---
 >                  gettext("dev.new() is the preferred way to open a new device, in the unlikely event one is needed.", domain = "R-tools"))
-6933,6962c6610,6649
+6943,6972c6620,6659
 <       if(length(x$Maintainer))
 <           sprintf("Maintainer: %s", sQuote(paste(x$Maintainer, collapse = " ")))
 <       else "No maintainer field in DESCRIPTION file",
@@ -17230,7 +17238,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >       },
 >       if(length(y <- x$new_maintainer)) {
 >           c(gettext("New maintainer:", domain = "R-tools"),
-6964,6970c6651,6659
+6974,6980c6661,6669
 <             "Old maintainer(s):",
 <             strwrap(y[[2L]], indent = 2L, exdent = 4L)),
 <       if(length(y <- x$bad_license))
@@ -17248,23 +17256,23 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >       if(length(y <- x$new_license)) {
 >           c(gettext("Change to non-FOSS package license.", domain = "R-tools"),
 >             gettext("New license:", domain = "R-tools"),
-6972,6973c6661,6663
+6982,6983c6671,6673
 <             "Old license:",
 <             strwrap(y[[2L]], indent = 2L, exdent = 4L)),
 ---
 >             gettext("Old license:", domain = "R-tools"),
 >             strwrap(y[[2L]], indent = 2L, exdent = 4L))
 >       },
-6975,6976c6665
+6985,6986c6675
 <           c("Components with restrictions and base license permitting such:",
 <             paste(" ", y),
 ---
 >           c(gettext("Components with restrictions and base license permitting such:", domain = "R-tools"), paste(" ", y),
-6979c6668
+6989c6678
 <                               c(sprintf("File '%s':", e[1L]),
 ---
 >                               c(gettextf("File '%s':", e[1L], domain = "R-tools"),
-6985,6988c6674,6675
+6995,6998c6684,6685
 <           c("Possibly mis-spelled words in DESCRIPTION:",
 <             sprintf("  %s (%s)",
 <                     names(s),
@@ -17272,34 +17280,34 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >           c(gettext("Possibly mis-spelled words in DESCRIPTION:", domain = "R-tools"),
 >             sprintf("  %s (%s)", names(s), lapply(s, paste, collapse = ", ")))
-6991c6678
+7001c6688
 <           "FOSS licence with BuildVignettes: false"
 ---
 >           gettext("FOSS licence with BuildVignettes: false", domain = "R-tools")
-6994c6681
+7004c6691
 <           c("Unknown, possibly mis-spelled, fields in DESCRIPTION:",
 ---
 >           c(gettext("Possibly mis-spelled fields in DESCRIPTION:", domain = "R-tools"),
-6998c6685
+7008c6695
 <           c("CRAN repository db overrides:", y)
 ---
 >           c(gettextf("CRAN repository db overrides: %s", sQuote(y), domain = "R-tools"))
-7001,7002c6688
+7011,7012c6698
 <           sprintf("CRAN repository db conflicts: %s",
 <                   sQuote(y))
 ---
 >           gettextf("CRAN repository db conflicts: %s", sQuote(y), domain = "R-tools")
-7005,7006c6691
+7015,7016c6701
 <           sprintf("Package license conflicts with %s override",
 <                   sQuote(paste("License_is_FOSS:", y)))
 ---
 >           gettextf("Package license conflicts with %s override", sQuote(paste("License_is_FOSS:", y)), domain = "R-tools")
-7009,7010c6694
+7019,7020c6704
 <           sprintf("Package license conflicts with %s override",
 <                   sQuote(paste("License_restricts_use:", y)))
 ---
 >           gettextf("Package license conflicts with %s override", sQuote(paste("License_restricts_use:", y)), domain = "R-tools")
-7013,7016c6697,6699
+7023,7026c6707,6709
 <           c("Package has a FOSS license but eventually depends on the following",
 < 	    if(length(y) > 1L)
 < 	    "packages which restrict use:" else
@@ -17308,7 +17316,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >           c(ngettext(length(y),
 > 		"Package has a FOSS license but eventually depends on the following package which restricts use:",
 >                 "Package has a FOSS license but eventually depends on the following packages which restrict use:", domain = "R-tools"),
-7020,7023c6703,6705
+7030,7033c6713,6715
 <           c("Package has a FOSS license but eventually depends on the following",
 < 	    if(length(y) > 1L)
 <             "packages which may restrict use:" else
@@ -17317,162 +17325,162 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >           c(ngettext(length(y),
 > 		"Package has a FOSS license but eventually depends on the following package which may restrict use:",
 >                 "Package has a FOSS license but eventually depends on the following packages which may restrict use:", domain = "R-tools"),
-7027c6709
+7037c6719
 <           c("Strong dependencies not in mainstream repositories:",
 ---
 >           c(gettext("Strong dependencies not in mainstream repositories:", domain = "R-tools"),
-7032c6714
+7042c6724
 <           c("Suggests or Enhances not in mainstream repositories:",
 ---
 >           c(gettext("'Suggests' or 'Enhances' packages are not in mainstream repositories:", domain = "R-tools"),
-7037c6719
+7047c6729
 <           c("Using Additional_repositories specification failed with:",
 ---
 >           c(gettext("Using 'Additional_repositories specification' failed with packages:", domain = "R-tools"),
-7041c6723
+7051c6733
 <           c("Availability using Additional_repositories specification:",
 ---
 >           c(gettext("Availability using 'Additional_repositories' specification:", domain = "R-tools"),
-7048c6730
+7058c6740
 <           c("Additional repositories with no packages:",
 ---
 >           c(gettext("Additional repositories with no packages:", domain = "R-tools"),
-7052,7053c6734
+7062,7063c6744
 <           paste(if(length(y) > 1L)
 < 		"Uses the superseded packages:" else
 ---
 >           paste(ngettext(length(y),
-7054a6736
+7064a6746
 >                        "Uses the superseded packages:", domain = "R-tools"),
-7058,7059c6740
+7068,7069c6750
 <           paste(if(length(y) > 1L)
 < 		"Uses the non-portable packages:" else
 ---
 >           paste(ngettext(length(y),
-7060a6742
+7070a6752
 > 		"Uses the non-portable packages:", domain = "R-tools"),
-7064c6746
+7074c6756
 <           c("Authors@R field should be a call to person(), or combine such calls.")
 ---
 >           c(gettext("Authors@R field should be a call to person(), or combine such calls.", domain = "R-tools"))
-7068c6750
+7078c6760
 <               c("Vignette sources in 'inst/doc' with no 'vignettes' directory:",
 ---
 >               c(gettext("Vignette sources in 'inst/doc' with no 'vignettes' directory:", domain = "R-tools"),
-7071c6753
+7081c6763
 <                 "A 'vignettes' directory is required as from R 3.1.0")
 ---
 >                 gettext("A 'vignettes' directory is required as from R 3.1.0", domain = "R-tools"))
-7073c6755
+7083c6765
 <               c("Vignette sources in 'inst/doc' missing from the 'vignettes' directory:",
 ---
 >               c(gettext("Vignette sources in 'inst/doc' missing from the 'vignettes' directory:", domain = "R-tools"),
-7078c6760
+7088c6770
 <           "Package has a VignetteBuilder field but no prebuilt vignette index."
 ---
 >           gettext("Package has a VignetteBuilder field but no prebuilt vignette index.", domain = "R-tools")
-7081c6763
+7091c6773
 <           "Package has help file(s) containing build-stage \\Sexpr{} expresssons but no build/partial.rdb."
 ---
 >           gettext("Package has help file(s) containing build-stage \\Sexpr{} expresssons but no build/partial.rdb.", domain = "R-tools")
-7084c6766
+7094c6776
 <           "Package has help file(s) containing install/render-stage \\Sexpr{} expresssons but no prebuilt PDF manual."
 ---
 >           gettext("Package has help file(s) containing install/render-stage \\Sexpr{} expresssons but no prebuilt PDF manual.", domain = "R-tools")
-7087c6769
+7097c6779
 <           "Package installs .java files."
 ---
 >           gettext("Package installs .java files.", domain = "R-tools")
-7090c6772
+7100c6782
 <           "Package has FOSS license, installs .class/.jar but has no 'java' directory."
 ---
 >           gettext("Package has FOSS license, installs .class/.jar but has no 'java' directory.", domain = "R-tools")
-7093c6775
+7103c6785
 <           c("Package CITATION file contains call(s) to:",
 ---
 >           c(gettext("Package CITATION file contains call(s) to:", domain = "R-tools"),
-7097,7099c6779,6780
+7107,7109c6789,6790
 <           c("Reading CITATION file fails with",
 <             paste(" ", y),
 <             "when package is not installed.")
 ---
 >           c(gettextf("Reading CITATION file fails with\n%s\nwhen package is not installed.",
 >             paste(" ", y), domain = "R-tools"))
-7120c6801
+7130c6811
 <             stop("argument 'package' must be of length 1")
 ---
 >             stop(gettextf("'%s' argument must be of length 1", "package"))
-7176,7177c6857
+7186,7187c6867
 <                      c(gettextf("Rd files with duplicated name '%s':",
 <                                 nm),
 ---
 >                      c(gettextf("Rd files with duplicated name %s:", sQuote(nm), domain = "R-tools"),
-7184,7186c6864
+7194,7196c6874
 <                      c(gettextf("Rd files with duplicated alias '%s':",
 <                                 nm),
 <                        .pretty_format(bad[[nm]]))
 ---
 >                      c(gettextf("Rd files with duplicated alias %s:", sQuote(nm), domain = "R-tools"), .pretty_format(bad[[nm]]))
-7202c6880
+7212c6890
 <             stop("argument 'package' must be of length 1")
 ---
 >             stop(gettextf("'%s' argument must be of length 1", "package"))
-7208c6886
+7218c6896
 <             stop("you must specify 'package' or 'dir'")
 ---
 >             stop("you must specify 'package' or 'dir' argument")
-7211,7212c6889
+7221,7222c6899
 <             stop(gettextf("directory '%s' does not exist", dir),
 <                  domain = NA)
 ---
 >             stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
-7263,7264c6940
+7273,7274c6950
 <               c(gettextf("Argument items with no description in Rd object '%s':",
 <                          nm),
 ---
 >               c(gettextf("Argument items with no description in Rd object %s:", sQuote(nm), domain = "R-tools"),
-7269,7270c6945
+7279,7280c6955
 <               c(gettextf("Auto-generated content requiring editing in Rd object '%s':",
 <                          nm),
 ---
 >               c(gettextf("Auto-generated content requiring editing in Rd object %s:", sQuote(nm), domain = "R-tools"),
-7302c6977
+7312c6987
 <                      "... [TRUNCATED]"),
 ---
 >                      gettext("... [TRUNCATED]", domain = "R-tools")),
-7319c6994
+7329c7004
 <         c(sprintf("Rd file '%s':", nm),
 ---
 >         c(gettextf("Rd file %s:", sQuote(nm), domain = "R-tools"),
-7324,7326c6999
+7334,7336c7009
 <                                 c(sprintf("  \\%s lines wider than %d characters:",
 <                                           s, limit[s]),
 <                                   .truncate(lines))
 ---
 >                                 c(sprintf(ngettext(limit[s], "  \\%s lines wider than %d character:", "  \\%s lines wider than %d characters:", domain = "R-tools"), s, limit[s]), .truncate(lines))
-7442,7443c7115
+7452,7453c7125
 <         out <- sprintf("%s%s\"%s\"", out,
 <                        substring(txt, 1L, ipos - 1L), str)
 ---
 >         out <- sprintf("%s%s\"%s\"", out, substring(txt, 1L, ipos - 1L), str)
-7454c7126
+7464c7136
 <     c(gettextf("File %s:", sQuote(f)),
 ---
 >     c(gettextf("File %s:", sQuote(f), domain = "R-tools"),
-7468,7469c7140
+7478,7479c7150
 <       c("(", "{", "function", "if", "for", "while", "repeat",
 <         "Math", "Ops", "Summary", "Complex"),
 ---
 >       c("(", "{", "function", "if", "for", "while", "repeat", "Math", "Ops", "Summary", "Complex"),
-7496c7167
+7506c7177
 < 	    warning(gettextf("Generics 'g' in 'env' %s where '%s' errors: %s\nMay need something like\n\n%s\nin NAMESPACE.",
 ---
 > 	    warning(gettextf("Generics 'g' in 'env' %s where %s errors: %s\nMay need something like\n\n%s\nin NAMESPACE.",
-7498c7169
+7508c7179
 <                              "hasMethods(g, env)",
 ---
 >                              sQuote("hasMethods(g, env)"),
-7500,7504c7171
+7510,7514c7181
 <                              paste0("  importFrom(",
 <                                     paste(dq(pkgs), dq(rErr), sep =", "),
 <                                     ")\n")
@@ -17480,64 +17488,64 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <                     domain = NA)
 ---
 >                              paste0("  importFrom(", paste(dq(pkgs), dq(rErr), sep = ", "), ")\n")), domain = "R-tools")
-7512,7513c7179,7180
+7522,7523c7189,7190
 <                                      "Generics without any methods in %s: %s"),
 <                             format(env),
 ---
 >                                      "Generics without any methods in %s: %s", domain = "R-tools"),
 >                             sQuote(format(env)),
-7628,7629c7295
+7638,7639c7305
 <     package <-
 <         sub(".*:([^_]*).*", "\\1", attr(env, "name", exact = TRUE))
 ---
 >     package <- sub(".*:([^_]*).*", "\\1", attr(env, "name", exact = TRUE))
-7692,7694c7358
+7702,7704c7368
 <         while(inherits(yy <- tryCatch(parse(text = txt),
 <                                       error = identity),
 <                        "error")
 ---
 >         while(inherits(yy <- tryCatch(parse(text = txt), error = identity), "error")
-7722,7723c7386
+7732,7733c7396
 <     txt <- .Rd_deparse(.Rd_drop_nodes_with_tags(x, "\\special"),
 <                        tag = FALSE)
 ---
 >     txt <- .Rd_deparse(.Rd_drop_nodes_with_tags(x, "\\special"), tag = FALSE)
-7740,7741c7403
+7750,7751c7413
 <     txt <- gsub("(^|[^\\])\\\\($|[^abfnrtuUvx0-9'\"\\])",
 <                 "\\1<unescaped bksl>\\2", txt)
 ---
 >     txt <- gsub("(^|[^\\])\\\\($|[^abfnrtuUvx0-9'\"\\])", "\\1<unescaped bksl>\\2", txt)
-7743,7744c7405
+7753,7754c7415
 <     txt <- gsub("(^|[^\\])\\\\($|[^abfnrtuUvx0-9'\"\\])",
 <                 "\\1<unescaped bksl>\\2", txt)
 ---
 >     txt <- gsub("(^|[^\\])\\\\($|[^abfnrtuUvx0-9'\"\\])", "\\1<unescaped bksl>\\2", txt)
-7753,7754c7414
+7763,7764c7424
 <     strwrap(paste(sQuote(x), collapse = " "),
 <             indent = 2L, exdent = 2L)
 ---
 >     strwrap(paste(sQuote(x), collapse = " "), indent = 2L, exdent = 2L)
-7760c7420
+7770c7430
 <     if (length(xx) > 1L || (nchar(msg) + nchar(xx) + 1L > 75L))
 ---
 >     if (length(xx) > 1L || (nchar(msg) + nchar(xx) + 1L > options("width")$width))
-7770,7771c7430
+7780,7781c7440
 <     writeLines(strwrap(paste(x, collapse = " "),
 <                        indent = 2L, exdent = 2L))
 ---
 >     writeLines(strwrap(paste(x, collapse = " "), indent = 2L, exdent = 2L))
-7903,7904c7562
+7913,7914c7572
 <     sprintf("^[[:space:]]*(.*<%s>|ORPHANED)[[:space:]]*$",
 <             .make_RFC_2822_email_address_regexp())
 ---
 >     sprintf("^[[:space:]]*(.*<%s>|ORPHANED)[[:space:]]*$", .make_RFC_2822_email_address_regexp())
-7959,7961c7617
+7969,7971c7627
 <                          cbind(sprintf("\\arguments, description of item '%s'",
 <                                        tab[ind, 1L]),
 <                                tab[ind, 2L]))
 ---
 >                          cbind(gettextf("\\arguments, description of item %s", sQuote(tab[ind, 1L]), domain = "R-tools"), tab[ind, 2L]))
-7974,7976c7630
+7984,7986c7640
 <                          cbind(sprintf("section 'Methods', description of item '%s'",
 <                                        tab[ind, 1L]),
 <                                tab[ind, 2L]))
@@ -24037,110 +24045,110 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <                      domain = NA)
 ---
 >                      domain = "R-utils")
-382c389
+384c391
 <                             "There are binary versions available but the source versions are later")
 ---
 >                             "There are binary versions available but the source versions are later", domain = "R-utils")
-397c404
+399c406
 <                                  "Do you want to install from sources the packages which need compilation?")
 ---
 >                                  "Do you want to install from sources the packages which need compilation?", domain = "R-utils")
-402c409
+404c411
 <                     cat("  Binaries will be installed\n")
 ---
 >                     cat("  ", gettext("Binaries will be installed", domain = "R-utils"), "\n", sep = "")
-415c422
+417c424
 <                              "Packages which are only available in source form, and may need compilation of C/C++/Fortran")
 ---
 >                              "Packages which are only available in source form, and may need compilation of C/C++/Fortran", domain = "R-utils")
-424c431
+426c433
 <                     cat("  These will not be installed\n")
 ---
 >                     cat("  ", gettext("These will not be installed", domain = "R-utils"), "\n", sep = "")
-449c456
+451c458
 <                                      "installing the source packages %s"),
 ---
 >                                      "installing the source packages %s", domain = "R-utils"),
-480c487
+483c490
 <                                          "packages %s are available as source packages but not as binaries"),
 ---
 >                                          "packages %s are available as source packages but not as binaries", domain = "R-utils"),
-492c499
+495c502
 <                                     "There are binary versions available (and will be installed) but the source versions are later")
 ---
 >                                     "There are binary versions available (and will be installed) but the source versions are later", domain = "R-utils")
-571,572c578
+574,575c581
 <             stop(gettextf("unable to create %s", sQuote(keep_outputs)),
 <                  domain = NA)
 ---
 >             stop(gettextf("unable to create %s", sQuote(keep_outputs)), domain = "R-utils")
-576,577c582
+579,580c585
 <         stop(gettextf("invalid %s argument", sQuote("keep_outputs")),
 <              domain = NA)
 ---
 >         stop(gettextf("invalid '%s' argument", "keep_outputs"), domain = "R-utils")
-609,611c614
+612,614c617
 <         message(gettextf("system (cmd0): %s",
 <                          paste(c(cmd0, args0), collapse = " ")),
 <                 domain = NA)
 ---
 >         message(gettextf("system (cmd0): %s", paste(c(cmd0, args0), collapse = " ")), domain = "R-utils")
-628,630c631
+631,633c634
 <                warning(gettextf("installation of package %s had non-zero exit status",
 <                                 sQuote(update[i, 1L])),
 <                        domain = NA)
 ---
 >                warning(gettextf("installation of package %s had non-zero exit status", sQuote(update[i, 1L]), domain = "R-utils"))
-633c634
+636c637
 <                message(sprintf("%d): succeeded '%s'", i, cmd), domain = NA)
 ---
 >                message(gettextf("%d): succeeded '%s'", i, cmd), domain = "R-utils")
-644,646c645
+647,649c648
 <             stop(gettextf("unable to create temporary directory %s",
 <                           sQuote(tmpd)),
 <                  domain = NA)
 ---
 >             stop(gettextf("unable to create temporary directory %s", sQuote(tmpd)), domain = "R-utils")
-661,663c660
+665,667c664
 < 	if(verbose) message(gettextf("foundpkgs: %s",
 <                                      paste(foundpkgs, collapse=", ")),
 <                             domain = NA)
 ---
 > 	if(verbose) message(gettextf("foundpkgs: %s", paste(foundpkgs, collapse=", ")), domain = "R-utils")
-668,670c665
+672,674c669
 < 	if(verbose) message(gettextf("files: %s",
 <                                      paste(files, collapse=", \n\t")),
 <                             domain = NA)
 ---
 > 	if(verbose) message(gettextf("files: %s", paste(files, collapse=", \n\t")), domain = "R-utils")
-686,688c681
+690,692c685
 <                 stop(gettextf("unable to create temporary directory %s",
 <                               sQuote(tmpd)),
 <                      domain = NA)
 ---
 >                 stop(gettextf("unable to create temporary directory %s", sQuote(tmpd)), domain = "R-utils")
-723c716
+727c720
 <                     paste("\t@echo begin installing package", sQuote(pkg)),
 ---
 >                     paste("\t@echo ", gettextf("begin installing package %s", sQuote(pkg), domain = "R-utils"), sep = ""),
-742,744c735
+746,748c739
 <                 warning(gettextf("installation of one or more packages failed,\n  probably %s",
 <                                  paste(sQuote(failed), collapse = ", ")),
 <                         domain = NA)
 ---
 >                 warning(gettextf("installation of one or more packages failed,\n  probably %s", paste(sQuote(failed), collapse = ", ")), domain = "R-utils")
-765,767c756
+769,771c760
 <                     warning(gettextf("installation of package %s had non-zero exit status",
 <                                      sQuote(update[i, 1L])),
 <                             domain = NA)
 ---
 >                     warning(gettextf("installation of package %s had non-zero exit status", sQuote(update[i, 1L]), domain = "R-utils"))
-770,771c759
+774,775c763
 <                     message(sprintf("%d): succeeded '%s'", i, cmd),
 <                             domain = NA)
 ---
 >                     message(gettextf("%d): succeeded '%s'", i, cmd, domain = "R-utils"))
-780,782c768
+784,786c772
 <             cat("\n", gettextf("The downloaded source packages are in\n\t%s",
 <                                sQuote(normalizePath(tmpd, mustWork = FALSE))),
 <                 "\n", sep = "")
@@ -30710,25 +30718,6 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=ChangeLog' R-devel/src/main/lapack.c R/src/main/lapack.c
 23a24
 > #include <Localization.h>
-diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=ChangeLog' R-devel/src/main/libcurl.c R/src/main/libcurl.c
-24a25
-> #include <Localization.h>
-85c86
-<     error("curlGetHeaders is not supported on this platform");
----
->     error(_("'curlGetHeaders()' function is not supported on this platform"));
-94c95
-<        error("invalid %s argument", "redirect");
----
->        error(_("invalid '%s' argument"), "redirect");
-120c121
-< 	error("libcurl error code %d\n\t%s\n", ret, errbuf);
----
-> 	error(_("libcurl error code %d\n\t%s\n"), ret, errbuf);
-142c143
-<     error("curlDownload is not supported on this platform");
----
->     error(_("'curlDownload()' function is not supported on this platform"));
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=ChangeLog' R-devel/src/main/logic.c R/src/main/logic.c
 24a25
 > #include <Localization.h>
@@ -32665,114 +32654,97 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < #define R_assert(e) ((e) ? (void) 0 : error("assertion '%s' failed: file '%s', line %d\n", #e, __FILE__, __LINE__))
 ---
 > #define R_assert(e) ((e) ? (void) 0 : error(_("assertion '%s' failed: file '%s', line %d\n"), #e, __FILE__, __LINE__))
-235c237
-< 	    if (ISNA(d))
----
-> 	    if (ISNAN(d))
-237,238d238
-< 	    else if (ISNAN(d))
-< 		Rsnprintf(buf, sizeof(buf), "NaN\n");
-251c251
-< 	    if (ISNA(d))
----
-> 	    if (ISNAN(d))
-253,254d252
-< 	    else if (ISNAN(d))
-< 		Rsnprintf(buf, sizeof(buf), "NaN\n");
-405,406d402
-< 	else if (strcmp(buf, "NaN") == 0)
-< 	    return R_NaN;
-844d839
+844d845
 < #define min2(a, b) ((a) < (b)) ? (a) : (b)
-857c852
+857c858
 < 	    this = min2(CHUNK_SIZE, length - done);
 ---
 > 	    this = min(CHUNK_SIZE, length - done);
-872c867
+872c873
 < 	    this = min2(CHUNK_SIZE, length - done);
 ---
 > 	    this = min(CHUNK_SIZE, length - done);
-894c889
+894c895
 < 	    this = min2(CHUNK_SIZE, length - done);
 ---
 > 	    this = min(CHUNK_SIZE, length - done);
-908c903
+908c909
 < 	    this = min2(CHUNK_SIZE, length - done);
 ---
 > 	    this = min(CHUNK_SIZE, length - done);
-931c926
+931c932
 < 	    this = min2(CHUNK_SIZE, length - done);
 ---
 > 	    this = min(CHUNK_SIZE, length - done);
-947c942
+947c948
 < 	    this = min2(CHUNK_SIZE, length - done);
 ---
 > 	    this = min(CHUNK_SIZE, length - done);
-1119c1114
+1119c1120
 < 		    this = min2(CHUNK_SIZE, len - done);
 ---
 > 		    this = min(CHUNK_SIZE, len - done);
-1391c1386
+1391c1392
 < 	    this = min2(CHUNK_SIZE, length - done);
 ---
 > 	    this = min(CHUNK_SIZE, length - done);
-1405c1400
+1405c1406
 < 	    this = min2(CHUNK_SIZE, length - done);
 ---
 > 	    this = min(CHUNK_SIZE, length - done);
-1427c1422
+1427c1428
 < 	    this = min2(CHUNK_SIZE, length - done);
 ---
 > 	    this = min(CHUNK_SIZE, length - done);
-1441c1436
+1441c1442
 < 	    this = min2(CHUNK_SIZE, length - done);
 ---
 > 	    this = min(CHUNK_SIZE, length - done);
-1464c1459
+1464c1465
 < 	    this = min2(CHUNK_SIZE, length - done);
 ---
 > 	    this = min(CHUNK_SIZE, length - done);
-1480c1475
+1480c1481
 < 	    this = min2(CHUNK_SIZE, length - done);
 ---
 > 	    this = min(CHUNK_SIZE, length - done);
-1671c1666
+1671c1672
 < 		    warning(_("unrecognized internal function name \"%s\""), cbuf); 
 ---
 > 		    warning(_("unrecognized internal function name '%s'"), cbuf); 
-1751c1746
+1751c1752
 < 		    this = min2(CHUNK_SIZE, len - done);
 ---
 > 		    this = min(CHUNK_SIZE, len - done);
-2185c2180
+2185c2186
 < 	error(_("'ascii' must be logical"));
 ---
 > 	error(_("'%s' argument must be logical"), "ascii");
-2223c2218
+2223c2224
 < 	error(_("connection not open for writing"));
 ---
 > 	error(_("connection is not open for writing"));
-2271c2266
+2271c2272
 <     if(!con->canread) error(_("connection not open for reading"));
 ---
 >     if(!con->canread) error(_("connection is not open for reading"));
-2551c2546
+2551c2552
 < 	error("character vectors are no longer accepted by unserialize()");
 ---
 > 	error(_("character vectors are no longer accepted by unserialize()"));
-2587c2582
+2587c2588
 < 	error(_("not a proper file name"));
 ---
 > 	error(_("'%s' argument is not a proper file name"), "file");
-2589c2584
+2589c2590
 < 	error(_("not a proper raw vector"));
 ---
 > 	error(_("'%s' argument is not a proper raw vector"), "bytes");
-2768c2763
+2768c2769
 < 	    error(_("object '%s' not found"), EncodeChar(STRING_ELT(vars, i)));
 ---
 > 	    error(_("object '%s' was not found"), EncodeChar(STRING_ELT(vars, i)));
-2846,2847c2841
+2846,2847c2847
 <     if (err) error("lazy-load database '%s' is corrupt",
 < 		   CHAR(STRING_ELT(file, 0)));
 ---
@@ -33243,13 +33215,13 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 	error(_("'...' used in a situation where it does not exist"));
 1242c1240
-<         error(_("... is not a pairlist"));
+< 	error(_("... is not a pairlist"));
 ---
->         error(_("'...' is not a pairlist"));
+>     error(_("'...' is not a pairlist"));
 1284c1282
-<         error(_("'envir' must be an environment"));
+< 	error(_("'envir' must be an environment"));
 ---
->         error(_("'%s' argument must be an environment"), "envir");
+>     error(_("'%s' argument must be an environment"), "envir");
 1386c1384
 <     if(narm == NA_LOGICAL) error("'na.rm' must be TRUE or FALSE");
 ---
@@ -33988,61 +33960,61 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 26a27,28
 > #include <Localization.h>
 > 
-67c69
+70c72
 <     UrlScheme type = ((Rurlconn)(con->private))->type;
 ---
 >     UrlScheme type = ((Rurlconn)(con->conprivate))->type;
-70c72
+73c75
 < 	REprintf("can only open URLs for reading");
 ---
 > 	REprintf(_("can only open URLs for reading"));
-102c104
+105c107
 < 	((Rurlconn)(con->private))->ctxt = ctxt;
 ---
 > 	((Rurlconn)(con->conprivate))->ctxt = ctxt;
-113c115
+116c118
 < 	((Rurlconn)(con->private))->ctxt = ctxt;
 ---
 > 	((Rurlconn)(con->conprivate))->ctxt = ctxt;
-132c134
+135c137
 <     UrlScheme type = ((Rurlconn)(con->private))->type;
 ---
 >     UrlScheme type = ((Rurlconn)(con->conprivate))->type;
-136c138
+139c141
 < 	in_R_HTTPClose(((Rurlconn)(con->private))->ctxt);
 ---
 > 	in_R_HTTPClose(((Rurlconn)(con->conprivate))->ctxt);
-139c141
+142c144
 < 	in_R_FTPClose(((Rurlconn)(con->private))->ctxt);
 ---
 > 	in_R_FTPClose(((Rurlconn)(con->conprivate))->ctxt);
-147,148c149,150
+150,151c152,153
 <     UrlScheme type = ((Rurlconn)(con->private))->type;
 <     void * ctxt = ((Rurlconn)(con->private))->ctxt;
 ---
 >     UrlScheme type = ((Rurlconn)(con->conprivate))->type;
 >     void * ctxt = ((Rurlconn)(con->conprivate))->ctxt;
-167,168c169,170
+170,171c172,173
 <     UrlScheme type = ((Rurlconn)(con->private))->type;
 <     void * ctxt = ((Rurlconn)(con->private))->ctxt;
 ---
 >     UrlScheme type = ((Rurlconn)(con->conprivate))->type;
 >     void * ctxt = ((Rurlconn)(con->conprivate))->ctxt;
-190,191c192,193
+193,194c195,196
 <     new->class = (char *) malloc(strlen("url") + 1);
 <     if(!new->class) {
 ---
 >     new->conclass = (char *) malloc(strlen("url") + 1);
 >     if(!new->conclass) {
-195c197
+198c200
 <     strcpy(new->class, "url");
 ---
 >     strcpy(new->conclass, "url");
-198c200
+201c203
 < 	free(new->class); free(new);
 ---
 > 	free(new->conclass); free(new);
-208,210c210,212
+211,213c213,215
 <     new->private = (void *) malloc(sizeof(struct urlconn));
 <     if(!new->private) {
 < 	free(new->description); free(new->class); free(new);
@@ -34050,115 +34022,115 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     new->conprivate = (void *) malloc(sizeof(struct urlconn));
 >     if(!new->conprivate) {
 > 	free(new->description); free(new->conclass); free(new);
-287c289
+290c292
 < 	warning(_("only first element of 'url' argument used"));
 ---
 > 	warning(_("only first element of '%s' argument will be used"), "url");
-293c295
+296c298
 < 	warning(_("only first element of 'destfile' argument used"));
 ---
 > 	warning(_("only first element of '%s' argument will be used"), "destfile");
-318,319c320
+321,322c323
 < 	pbar.wprog = newwindow(_("Download progress"), rect(0, 0, 540, 100),
 < 			       Titlebar | Centered);
 ---
 > 	pbar.wprog = newwindow(_("Download progress"), rect(0, 0, 540, 100), Titlebar | Centered);
-340,341c341
+343,344c344
 < 	    error(_("cannot open URL '%s', reason '%s'"),
 < 		  url, strerror(errno));
 ---
 > 	    error(_("cannot open URL '%s', reason '%s'"), url, strerror(errno));
-347,348c347
+350,351c350
 < 	    error(_("cannot open destfile '%s', reason '%s'"),
 < 		  file, strerror(errno));
 ---
 > 	    error(_("cannot open destfile '%s', reason '%s'"), file, strerror(errno));
-376,377c375
+379,380c378
 < 	    error(_("cannot open destfile '%s', reason '%s'"),
 < 		  file, strerror(errno));
 ---
 > 	    error(_("cannot open destfile '%s', reason '%s'"), file, strerror(errno));
-381c379
+384c382
 < 	if(!quiet) REprintf(_("trying URL '%s'\n"), url);
 ---
 > 	if(!quiet) REprintf(_("Trying URL '%s'\n"), url);
-388c386
+391c389
 < 	    if(!quiet) REprintf(_("opened URL\n"), url);
 ---
 > 	    if(!quiet) REprintf(_("Opened URL\n"), url);
-403c401
+406c404
 < 		settext(pbar.wprog, "Download progress");
 ---
 > 		settext(pbar.wprog, _("Download progress"));
-427c425
+430c428
 < 			    snprintf(pbuf, 30, "%d%% downloaded", pc);
 ---
 > 			    snprintf(pbuf, 30, _("%d%% downloaded"), pc);
-446,447c444
+449,450c447
 < 		    REprintf("downloaded %0.1f MB\n\n",
 < 			     (double)nbytes/1024/1024, url);
 ---
 > 		    REprintf(_("Downloaded %0.1f MB"), (double)nbytes/1024/1024, url);
-449c446
+452c449
 < 		    REprintf("downloaded %d KB\n\n", (int) nbytes/1024, url);
 ---
 > 		    REprintf(_("Downloaded %d KB"), (int) nbytes/1024, url);
-451c448,449
+454c451,452
 < 		    REprintf("downloaded %d bytes\n\n", (int) nbytes, url);
 ---
 > 		    REprintf(n_("Downloaded %d byte", "Downloaded %d bytes", (int) nbytes), (int) nbytes, url);
 > 		REprintf("\n\n");
-461,462c459
+464,465c462
 < 		warning(_("downloaded length %0.f != reported length %0.f"),
 < 			(double)nbytes, (double)total);
 ---
 > 		warning(_("downloaded length %0.f != reported length %0.f"), (double)nbytes, (double)total);
-488c485
+491c488
 < 	if(!quiet) REprintf(_("trying URL '%s'\n"), url);
 ---
 > 	if(!quiet) REprintf(_("Trying URL '%s'\n"), url);
-495c492
+498c495
 < 	    if(!quiet) REprintf(_("opened URL\n"), url);
 ---
 > 	    if(!quiet) REprintf(_("Opened URL\n"), url);
-510c507
+513c510
 < 		settext(pbar.wprog, "Download progress");
 ---
 > 		settext(pbar.wprog, _("Download progress"));
-537c534
+540c537
 < 			    snprintf(pbuf, 30, "%d%% downloaded", pc);
 ---
 > 			    snprintf(pbuf, 30, _("%d%% downloaded"), pc);
-556c553
+559c556
 < 		    REprintf("downloaded %0.1f MB\n\n",
 ---
 > 		    REprintf(_("Downloaded %0.1f MB"),
-559c556
+562c559
 < 		    REprintf("downloaded %d KB\n\n", (int) nbytes/1024, url);
 ---
 > 		    REprintf(_("Downloaded %d KB"), (int) nbytes/1024, url);
-561c558,559
+564c561,562
 < 		    REprintf("downloaded %d bytes\n\n", (int) nbytes, url);
 ---
 > 		    REprintf(n_("Downloaded %d byte", "Downloaded %d bytes", (int) nbytes), (int) nbytes, url);
 > 			REprintf("\n\n");
-612d609
+615d612
 < 		REprintf("Content type '%s'", type ? type : "unknown");
-615,616c612,614
+618,619c615,617
 < 		    REprintf(" length %0.0f bytes (%0.1f MB)\n", (double)len,
 < 			len/1024.0/1024.0);
 ---
 > 		    REprintf(n_("Content type '%s' length %0.0f byte (%0.1f MB)\n",
 > 				      "Content type '%s' length %0.0f bytes (%0.1f MB)\n",
 > 				      len), type ? type : "unknown", (double)len, len/1024.0/1024.0);
-618,619c616,618
+621,622c619,621
 < 		    REprintf(" length %d bytes (%d KB)\n", 
 < 			     (int)len, (int)(len/1024));
 ---
 > 		    REprintf(n_("Content type '%s' length %d byte (%d KB)\n",
 > 				      "Content type '%s' length %d bytes (%d KB)\n",
 > 				      (int)len), type ? type : "unknown", (int)len, (int)(len/1024));
-621,622c620,623
+624,625c623,626
 < 		    REprintf(" length %d bytes\n", (int)len);
 < 		else REprintf(" length unknown\n", len);
 ---
@@ -34166,36 +34138,67 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 				      "Content type '%s' length %d bytes\n",
 > 				      (int)len), type ? type : "unknown", (int)len);
 > 		else REprintf(_("Content type '%s' length unknown\n"), type ? type : "unknown", len);
-665c666
+668c669
 < 	    REprintf("ftp data connection made, file length %ld bytes\n", len);
 ---
 > 	    REprintf(_("ftp data connection made, file length %ld bytes\n"), len);
-667c668
+670c671
 < 	    REprintf("ftp data connection made, file length unknown\n");
 ---
 > 	    REprintf(_("ftp data connection made, file length unknown\n"));
-856,857c857
+859,860c860
 < 	    REprintf("Content type '%s' length %0.0f bytes (%0.1f MB)\n",
 < 		     buf, (double) status, status/1024.0/1024.0);
 ---
 > 	    REprintf(n_("Content type '%s' length %0.0f byte (%0.1f MB)\n", "Content type '%s' length %0.0f bytes (%0.1f MB)\n", status), buf, (double) status, status/1024.0/1024.0);
-859,860c859
+862,863c862
 < 	    REprintf("Content type '%s' length %d bytes (%d KB)\n",
 < 		     buf, (int) status, (int) (status/1024));
 ---
 > 	    REprintf(n_("Content type '%s' length %d byte (%d KB)\n", "Content type '%s' length %d bytes (%d KB)\n", (int)status), buf, (int) status, (int) (status/1024));
-862c861
+865c864
 < 	    REprintf("Content type '%s' length %d bytes\n", buf, (int) status);
 ---
 > 	    REprintf(n_("Content type '%s' length %d byte\n", "Content type '%s' length %d bytes\n", (int)status), buf, (int) status);
-929c928
+932c931
 < 	REprintf("using Asynchronous WinInet calls, timeout %d secs\n",
 ---
 > 	REprintf(n_("using Asynchronous WinInet calls, timeout %d sec\n", "using Asynchronous WinInet calls, timeout %d secs\n", timeout),
-957c956
+960c959
 < 	REprintf("using Synchronous WinInet calls\n");
 ---
 > 	REprintf(_("using Synchronous WinInet calls\n"));
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=ChangeLog' R-devel/src/modules/internet/libcurl.c R/src/modules/internet/libcurl.c
+24a25
+> #include <Localization.h>
+116c117
+<     error("curlGetHeaders is not supported on this platform");
+---
+>     error(_("'curlGetHeaders()' function is not supported on this platform"));
+120c121
+<        error("invalid %s argument", "url");
+---
+>        error(_("invalid %s argument"), "url");
+125c126
+<        error("invalid %s argument", "redirect");
+---
+>        error(_("invalid '%s' argument"), "redirect");
+139c140
+< 	error("libcurl error code %d\n\t%s\n", ret, errbuf);
+---
+> 	error(_("libcurl error code %d\n\t%s\n"), ret, errbuf);
+162c163
+<     error("download.file(method = \"libcurl\") is not supported on this platform");
+---
+>     error(_("download.file(method = \"libcurl\") is not supported on this platform"));
+234c235
+<     if(!quiet) REprintf(_("trying URL '%s'\n"), url);
+---
+>     if(!quiet) REprintf(_("Trying URL '%s'\n"), url);
+242c243
+< 	    error("curl_multi_wait() failed, code %d", mc);
+---
+> 	    error(_("'curl_multi_wait()' function failed, code %d"), mc);
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=ChangeLog' R-devel/src/modules/internet/nanoftp.c R/src/modules/internet/nanoftp.c
 37,42c37,38
 < #ifdef ENABLE_NLS
