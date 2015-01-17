@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 3.2.0\n"
-"POT-Creation-Date: 2014-11-30 14:48\n"
+"POT-Creation-Date: 2015-01-16 19:56\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -219,9 +219,9 @@ msgstr ""
 
 
 #: R/Methods.R: 0
-#. R/Methods.R: stop("'callGeneric' must be called from a generic function or method")
+#. R/Methods.R: stop("'callGeneric()' function must be called from within a method body")
 
-msgid "'callGeneric' must be called from a generic function or method"
+msgid "'callGeneric()' function must be called from within a method body"
 msgstr ""
 
 

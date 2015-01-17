@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.2.0\n"
-"POT-Creation-Date: 2015-01-05 20:11\n"
+"POT-Creation-Date: 2015-01-16 19:57\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -560,6 +560,13 @@ msgstr ""
 #. R/packageStatus.R: gettext("Available packages:", domain = "R-utils")
 
 msgid "Available packages:"
+msgstr ""
+
+
+#: R/packages2.R: 0
+#. R/packages2.R: gettext("Binaries will be installed", domain = "R-utils")
+
+msgid "Binaries will be installed"
 msgstr ""
 
 
@@ -1618,6 +1625,13 @@ msgid "The unsent %s can be found in file %s"
 msgstr ""
 
 
+#: R/packages2.R: 0
+#. R/packages2.R: gettext("These will not be installed", domain = "R-utils")
+
+msgid "These will not be installed"
+msgstr ""
+
+
 #: R/bug.report.R: 0
 #. R/bug.report.R: gettextf("This package has a bug submission web page, which we will now attempt to open. The information above may be useful in your report. If the web page doesn't work, you should send email to the maintainer, %s.",     DESC$Maintainer)
 
@@ -2550,6 +2564,9 @@ msgstr ""
 
 
 #: R/packages2.R: 0
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
 #. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
 
 msgid "inferring 'repos = NULL' from 'pkgs'"
@@ -3511,16 +3528,16 @@ msgstr ""
 
 
 #: R/packages2.R: 0
-#. R/packages2.R: stop("type == \"both\" can only be used on Windows or a CRAN build for Mac OS X")
+#. R/packages2.R: stop("type 'binary' is not supported on this platform")
 
-msgid "type == \"both\" can only be used on Windows or a CRAN build for Mac OS X"
+msgid "type 'binary' is not supported on this platform"
 msgstr ""
 
 
 #: R/packages2.R: 0
-#. R/packages2.R: stop("type == \"both\" cannot be used if 'available' or 'contriburl' is specified")
+#. R/packages2.R: stop("type == \"both\" can only be used on Windows or a CRAN build for Mac OS X")
 
-msgid "type == \"both\" cannot be used if 'available' or 'contriburl' is specified"
+msgid "type == \"both\" can only be used on Windows or a CRAN build for Mac OS X"
 msgstr ""
 
 

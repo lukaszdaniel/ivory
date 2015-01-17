@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-30 14:48\n"
+"POT-Creation-Date: 2015-01-16 19:56\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -212,10 +212,10 @@ msgstr ""
 "metod 'as()' powinna mieć jeden argument lub zgadzać się z argumentami "
 "'coerce()': otrzymano (%s)"
 
-#. R/Methods.R: stop("'callGeneric' must be called from a generic function or method")
+#. R/Methods.R: stop("'callGeneric()' function must be called from within a method body")
 #: R/Methods.R:0
-msgid "'callGeneric' must be called from a generic function or method"
-msgstr "'callGeneric' musi być wywołana z ogólnej funkcji lub metody"
+msgid "'callGeneric()' function must be called from within a method body"
+msgstr "funkcja 'callGeneric()' musi być wywołana z wewnątrz metody"
 
 #. R/RClassUtils.R: stop("'class' is a reserved slot name and cannot be redefined")
 #: R/RClassUtils.R:0

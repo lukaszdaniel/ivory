@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nnet 7.3-1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-07 16:58+0100\n"
+"POT-Creation-Date: 2015-01-16 19:59+0100\n"
 "PO-Revision-Date: 2013-08-24 16:24+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,6 +14,7 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 1.5.4\n"
-#: nnet.c:125
+
+#: nnet.c:126
 msgid "No model set"
 msgstr "Nie ustawiono modelu"

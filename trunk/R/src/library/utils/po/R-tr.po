@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-05 20:11\n"
+"POT-Creation-Date: 2015-01-16 19:57\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -429,6 +429,11 @@ msgstr ""
 #, fuzzy
 msgid "Available packages:"
 msgstr "paketler yüklenemedi"
+
+#. R/packages2.R: gettext("Binaries will be installed", domain = "R-utils")
+#: R/packages2.R:0
+msgid "Binaries will be installed"
+msgstr ""
 
 #. R/debugger.R: gettext("Browsing in the environment with call:", domain = "R-utils")
 #: R/debugger.R:0
@@ -1238,6 +1243,11 @@ msgstr ""
 msgid "The unsent %s can be found in file %s"
 msgstr ""
 
+#. R/packages2.R: gettext("These will not be installed", domain = "R-utils")
+#: R/packages2.R:0
+msgid "These will not be installed"
+msgstr ""
+
 #. R/bug.report.R: gettextf("This package has a bug submission web page, which we will now attempt to open. The information above may be useful in your report. If the web page doesn't work, you should send email to the maintainer, %s.",     DESC$Maintainer)
 #: R/bug.report.R:0
 msgid ""
@@ -1929,6 +1939,9 @@ msgstr ""
 msgid "incorrect type specification"
 msgstr ""
 
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
 #. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
 #: R/packages2.R:0
 msgid "inferring 'repos = NULL' from 'pkgs'"
@@ -2624,16 +2637,15 @@ msgstr ""
 msgid "trying to use CRAN without setting a mirror"
 msgstr ""
 
+#. R/packages2.R: stop("type 'binary' is not supported on this platform")
+#: R/packages2.R:0
+msgid "type 'binary' is not supported on this platform"
+msgstr ""
+
 #. R/packages2.R: stop("type == \"both\" can only be used on Windows or a CRAN build for Mac OS X")
 #: R/packages2.R:0
 msgid ""
 "type == \"both\" can only be used on Windows or a CRAN build for Mac OS X"
-msgstr ""
-
-#. R/packages2.R: stop("type == \"both\" cannot be used if 'available' or 'contriburl' is specified")
-#: R/packages2.R:0
-msgid ""
-"type == \"both\" cannot be used if 'available' or 'contriburl' is specified"
 msgstr ""
 
 #. R/packages2.R: stop("type == \"both\" cannot be used with 'repos = NULL'")

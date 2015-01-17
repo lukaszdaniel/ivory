@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-05 20:11\n"
+"POT-Creation-Date: 2015-01-16 19:57\n"
 "PO-Revision-Date: 2012-02-26 14:23+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -466,6 +466,11 @@ msgstr " 利用可能な環境は以下の呼び出しを含んでいました�
 #, fuzzy
 msgid "Available packages:"
 msgstr " パッケージ %s を見付けることが出来ませんでした "
+
+#. R/packages2.R: gettext("Binaries will be installed", domain = "R-utils")
+#: R/packages2.R:0
+msgid "Binaries will be installed"
+msgstr ""
 
 #. R/debugger.R: gettext("Browsing in the environment with call:", domain = "R-utils")
 #: R/debugger.R:0
@@ -1327,6 +1332,12 @@ msgstr " 結果ページはまもなくブラウザーで開かれるでしょ�
 msgid "The unsent %s can be found in file %s"
 msgstr ""
 
+#. R/packages2.R: gettext("These will not be installed", domain = "R-utils")
+#: R/packages2.R:0
+#, fuzzy
+msgid "These will not be installed"
+msgstr " パッケージ '%s' は使用中ですから、インストールされません "
+
 #. R/bug.report.R: gettextf("This package has a bug submission web page, which we will now attempt to open. The information above may be useful in your report. If the web page doesn't work, you should send email to the maintainer, %s.",     DESC$Maintainer)
 #: R/bug.report.R:0
 msgid ""
@@ -2073,6 +2084,9 @@ msgid "incorrect type specification"
 msgstr " 不正確なタイプ指定です "
 
 #. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
 #: R/packages2.R:0
 #, fuzzy
 msgid "inferring 'repos = NULL' from 'pkgs'"
@@ -2816,6 +2830,11 @@ msgstr " 移行(transfer)の失敗 "
 msgid "trying to use CRAN without setting a mirror"
 msgstr " ミラーを設定することなくCRANを使おうとしています "
 
+#. R/packages2.R: stop("type 'binary' is not supported on this platform")
+#: R/packages2.R:0
+msgid "type 'binary' is not supported on this platform"
+msgstr ""
+
 #. R/packages2.R: stop("type == \"both\" can only be used on Windows or a CRAN build for Mac OS X")
 #: R/packages2.R:0
 msgid ""
@@ -2823,14 +2842,6 @@ msgid ""
 msgstr ""
 " type == \"both\" はWindows か Mac OS X に対する CRAN build に対してだけ使え"
 "ます "
-
-#. R/packages2.R: stop("type == \"both\" cannot be used if 'available' or 'contriburl' is specified")
-#: R/packages2.R:0
-msgid ""
-"type == \"both\" cannot be used if 'available' or 'contriburl' is specified"
-msgstr ""
-" type == \"both\" は 'available' か 'contriburl' が指定された時は使用出来ませ"
-"ん "
 
 #. R/packages2.R: stop("type == \"both\" cannot be used with 'repos = NULL'")
 #: R/packages2.R:0
@@ -3312,6 +3323,13 @@ msgstr[0] " パッケージ %s が利用できません "
 msgid "package %s is not available (for %s)"
 msgid_plural "packages %s are not available (for %s)"
 msgstr[0] " パッケージ %s が利用できません "
+
+#~ msgid ""
+#~ "type == \"both\" cannot be used if 'available' or 'contriburl' is "
+#~ "specified"
+#~ msgstr ""
+#~ " type == \"both\" は 'available' か 'contriburl' が指定された時は使用出来"
+#~ "ません "
 
 #, fuzzy
 #~ msgid ""

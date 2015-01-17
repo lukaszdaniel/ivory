@@ -232,7 +232,7 @@ in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 	      file, strerror(errno));
     curl_easy_setopt(hnd, CURLOPT_WRITEDATA, out);
 
-    if(!quiet) REprintf(_("trying URL '%s'\n"), url);
+    if(!quiet) REprintf(_("Trying URL '%s'\n"), url);
 
     R_Busy(1);
     curl_multi_perform(multi_handle, &still_running);

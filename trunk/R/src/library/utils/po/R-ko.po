@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-05 20:11\n"
+"POT-Creation-Date: 2015-01-16 19:57\n"
 "PO-Revision-Date: 2012-03-09 06:16+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -465,6 +465,11 @@ msgstr "이용가능한 환경이 다음을 호출했습니다: "
 #, fuzzy
 msgid "Available packages:"
 msgstr "패키지 %s 를 찾을 수 없습니다 "
+
+#. R/packages2.R: gettext("Binaries will be installed", domain = "R-utils")
+#: R/packages2.R:0
+msgid "Binaries will be installed"
+msgstr ""
 
 #. R/debugger.R: gettext("Browsing in the environment with call:", domain = "R-utils")
 #: R/debugger.R:0
@@ -1322,6 +1327,12 @@ msgstr "브라우저에서 결과를 확인할 수 있습니다"
 msgid "The unsent %s can be found in file %s"
 msgstr ""
 
+#. R/packages2.R: gettext("These will not be installed", domain = "R-utils")
+#: R/packages2.R:0
+#, fuzzy
+msgid "These will not be installed"
+msgstr "패키지 %s 는 사용중이며 설치되지 않을 것입니다 "
+
 #. R/bug.report.R: gettextf("This package has a bug submission web page, which we will now attempt to open. The information above may be useful in your report. If the web page doesn't work, you should send email to the maintainer, %s.",     DESC$Maintainer)
 #: R/bug.report.R:0
 msgid ""
@@ -2049,6 +2060,9 @@ msgstr "올바르지 않은 필드 정보입니다 "
 msgid "incorrect type specification"
 msgstr "올바르지 않은 유형정보입니다 "
 
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
 #. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
 #: R/packages2.R:0
 #, fuzzy
@@ -2785,20 +2799,17 @@ msgstr "전송실패 "
 msgid "trying to use CRAN without setting a mirror"
 msgstr "미러 설정 없이 CRAN 을 사용하려고 합니다 "
 
+#. R/packages2.R: stop("type 'binary' is not supported on this platform")
+#: R/packages2.R:0
+msgid "type 'binary' is not supported on this platform"
+msgstr ""
+
 #. R/packages2.R: stop("type == \"both\" can only be used on Windows or a CRAN build for Mac OS X")
 #: R/packages2.R:0
 msgid ""
 "type == \"both\" can only be used on Windows or a CRAN build for Mac OS X"
 msgstr ""
 "type == \"both\" can only be used on Windows or a CRAN build for Mac OS X"
-
-#. R/packages2.R: stop("type == \"both\" cannot be used if 'available' or 'contriburl' is specified")
-#: R/packages2.R:0
-msgid ""
-"type == \"both\" cannot be used if 'available' or 'contriburl' is specified"
-msgstr ""
-"type == \"both\" 은 'available' 혹은 'contriburl' 이 지정되었다면 사용될 수 "
-"없습니다"
 
 #. R/packages2.R: stop("type == \"both\" cannot be used with 'repos = NULL'")
 #: R/packages2.R:0
@@ -3278,6 +3289,13 @@ msgstr[0] "패키지 %s 는 (%s 에 대하여) 이용가능하지 않습니다 "
 msgid "package %s is not available (for %s)"
 msgid_plural "packages %s are not available (for %s)"
 msgstr[0] "패키지 %s 는 (%s 에 대하여) 이용가능하지 않습니다 "
+
+#~ msgid ""
+#~ "type == \"both\" cannot be used if 'available' or 'contriburl' is "
+#~ "specified"
+#~ msgstr ""
+#~ "type == \"both\" 은 'available' 혹은 'contriburl' 이 지정되었다면 사용될 "
+#~ "수 없습니다"
 
 #, fuzzy
 #~ msgid ""

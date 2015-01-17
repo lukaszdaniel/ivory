@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-11-30 14:48\n"
+"POT-Creation-Date: 2015-01-16 19:56\n"
 "PO-Revision-Date: 2011-12-01 22:45+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -190,9 +190,9 @@ msgid ""
 "function: got (%s)"
 msgstr ""
 
-#. R/Methods.R: stop("'callGeneric' must be called from a generic function or method")
+#. R/Methods.R: stop("'callGeneric()' function must be called from within a method body")
 #: R/Methods.R:0
-msgid "'callGeneric' must be called from a generic function or method"
+msgid "'callGeneric()' function must be called from within a method body"
 msgstr ""
 
 #. R/RClassUtils.R: stop("'class' is a reserved slot name and cannot be redefined")

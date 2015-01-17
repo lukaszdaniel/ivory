@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-05 20:46\n"
+"POT-Creation-Date: 2015-01-16 19:57\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -532,6 +532,11 @@ msgstr "Authors@Rにメインテナの役割とe-mailアドレスを持った人
 #, fuzzy
 msgid "Authors@R field gives persons with no valid roles:"
 msgstr "Authors@Rフィールドに役割が明示された人がいません "
+
+#. R/QC.R: gettext("Authors@R field should be a call to person(), or combine such calls.", domain = "R-tools")
+#: R/QC.R:0
+msgid "Authors@R field should be a call to person(), or combine such calls."
+msgstr ""
 
 #. R/check.R: gettext("  Authors@R: ", domain = "R-tools")
 #. R/check.R: gettext("  Authors@R:  ", domain = "R-tools")
@@ -2425,6 +2430,11 @@ msgstr "PDFヘッダが見つかりませんでした "
 msgid "Package %s had its dependencies reduced to a minimal set."
 msgstr " パッケージ '%s' は最小のセットに縮小された依存関係を持ちます "
 
+#. R/QC.R: gettext("Package CITATION file contains call(s) to:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Package CITATION file contains call(s) to:"
+msgstr ""
+
 #. R/QC.R: gettextf("Package detach functions should have one arguments with names starting with %s.",     sQuote("lib"), domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
@@ -2735,6 +2745,14 @@ msgstr ""
 " ビニエット '%s' の処理に失敗しました。診断は以下の通りです: \n"
 " %s "
 
+#. R/QC.R: gettextf("Reading CITATION file fails with\n%s\nwhen package is not installed.",     paste(" ", y), domain = "R-tools")
+#: R/QC.R:0
+msgid ""
+"Reading CITATION file fails with\n"
+"%s\n"
+"when package is not installed."
+msgstr ""
+
 #. R/build.R: gettextf("Removed empty directory %s\n", sQuote(d), domain = "R-tools")
 #: R/build.R:0
 #, fuzzy
@@ -2865,6 +2883,26 @@ msgstr ""
 " マニュアル 'Writing R Extensions' の節 'Cross-references' 中の情報を参照して"
 "ください． "
 
+#. R/check.R: gettext("See chapter 'System and foreign language interfaces' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid ""
+"See chapter 'System and foreign language interfaces' in the 'Writing R "
+"Extensions' manual."
+msgstr ""
+" マニュアル 'Writing R Extensions' の節 'Cross-references' 中の情報を参照して"
+"ください． "
+
+#. R/check.R: gettext("See chapter 'Writing R documentation files' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid ""
+"See chapter 'Writing R documentation files' in the 'Writing R Extensions' "
+"manual."
+msgstr ""
+" マニュアル 'Writing R Extensions' 中の章 'Writing R documentation' を参照し"
+"てください． "
+
 #. R/Rd.R: gettext("See chapter 'Writing R documentation' in manual 'Writing R Extensions'.",     domain = "R-tools")
 #. R/Rd.R: gettext("See chapter 'Writing R documentation' in manual 'Writing R Extensions'.",     domain = "R-tools")
 #: R/Rd.R:0
@@ -2887,82 +2925,52 @@ msgstr " ?.onAttachのセクション%sを見てください。 "
 msgid "See section %s in '%s'."
 msgstr " ?.onAttachのセクション%sを見てください。 "
 
-#. R/check.R: gettext("See section 'Generic functions and methods' of the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+#. R/QC.R: gettext("See section 'Cross-references' in the 'Writing R Extensions' manual.", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "See section 'Cross-references' in the 'Writing R Extensions' manual."
+msgstr ""
+" マニュアル 'Writing R Extensions' の節 'Cross-references' 中の情報を参照して"
+"ください． "
+
+#. R/check.R: gettext("See section 'Generic functions and methods' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
 msgid ""
-"See section 'Generic functions and methods' of the 'Writing R Extensions' "
+"See section 'Generic functions and methods' in the 'Writing R Extensions' "
 "manual."
 msgstr ""
 " マニュアル 'Writing R Extensions' の節 'Cross-references' 中の情報を参照して"
 "ください． "
 
-#. R/check.R: gettext("See section 'Package namespaces' of the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+#. R/check.R: gettext("See section 'Package namespaces' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
-msgid "See section 'Package namespaces' of the 'Writing R Extensions' manual."
+msgid "See section 'Package namespaces' in the 'Writing R Extensions' manual."
 msgstr ""
 " マニュアル 'Writing R Extensions' の節 'Cross-references' 中の情報を参照して"
 "ください． "
 
-#. R/check.R: gettext("See the chapter 'System and foreign language interfaces' of the 'Writing R Extensions' manual.\n",     domain = "R-tools")
-#: R/check.R:0
+#. R/QC.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.",     domain = "R-tools")
+#. R/QC.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.",     domain = "R-tools")
+#. R/check.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.",     domain = "R-tools")
+#: R/QC.R:0 R/check.R:0
 #, fuzzy
 msgid ""
-"See the chapter 'System and foreign language interfaces' of the 'Writing R "
-"Extensions' manual."
+"See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual."
 msgstr ""
 " マニュアル 'Writing R Extensions' の節 'Cross-references' 中の情報を参照して"
 "ください． "
 
-#. R/check.R: gettext("See the chapter 'Writing R documentation files' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+#. R/check.R: gettext("See sections 'The INDEX file' and 'Package subdirectories' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
 msgid ""
-"See the chapter 'Writing R documentation files' in the 'Writing R "
-"Extensions' manual."
-msgstr ""
-" マニュアル 'Writing R Extensions' 中の章 'Writing R documentation' を参照し"
-"てください． "
-
-#. R/QC.R: gettext("See the information in section 'Cross-references' of the 'Writing R Extensions' manual.",     domain = "R-tools")
-#: R/QC.R:0
-msgid ""
-"See the information in section 'Cross-references' of the 'Writing R "
+"See sections 'The INDEX file' and 'Package subdirectories' in the 'Writing R "
 "Extensions' manual."
 msgstr ""
 " マニュアル 'Writing R Extensions' の節 'Cross-references' 中の情報を参照して"
 "ください． "
-
-#. R/QC.R: gettext("See the information on DESCRIPTION files in section 'Creating R packages' of the 'Writing R Extensions' manual.",     domain = "R-tools")
-#. R/QC.R: gettextf("See the information on DESCRIPTION files in section 'Creating R packages' of the 'Writing R Extensions' manual.",     domain = "R-tools")
-#: R/QC.R:0
-msgid ""
-"See the information on DESCRIPTION files in section 'Creating R packages' of "
-"the 'Writing R Extensions' manual."
-msgstr ""
-" マニュアル'Writing R Extensions' の章'Creating R packages'中のDESCRIPTION"
-"ファイルにある情報を参照してください． "
-
-#. R/check.R: gettext("See the information on DESCRIPTION files in the chapter 'Creating R packages' of the 'Writing R Extensions' manual.",     domain = "R-tools")
-#: R/check.R:0
-#, fuzzy
-msgid ""
-"See the information on DESCRIPTION files in the chapter 'Creating R "
-"packages' of the 'Writing R Extensions' manual."
-msgstr ""
-" マニュアル'Writing R Extensions' の章'Creating R packages'中のDESCRIPTION"
-"ファイルにある情報を参照してください． "
-
-#. R/check.R: gettext("See the information on INDEX files and package subdirectories in the chapter 'Creating R packages' of the 'Writing R Extensions' manual.",     domain = "R-tools")
-#: R/check.R:0
-#, fuzzy
-msgid ""
-"See the information on INDEX files and package subdirectories in the chapter "
-"'Creating R packages' of the 'Writing R Extensions' manual."
-msgstr ""
-" マニュアル'Writing R Extensions' の章'Creating R packages'中のDESCRIPTION"
-"ファイルにある情報を参照してください． "
 
 #. R/Rprof.R: gettext("Self seconds: time spent in function alone.", domain = "R-tools")
 #: R/Rprof.R:0
@@ -6025,15 +6033,20 @@ msgid "'data(package=)' call not declared from: %s"
 msgid_plural "'data(package=)' calls not declared from: %s"
 msgstr[0] " 'data(package=)' コールは以下から宣言されていません: %s "
 
-#. R/QC.R: ngettext(length(xx), "'library' or 'require' call in package code: %s\n  Please use :: or requireNamespace() instead: see 'Suggested Packages'.",     "'library' or 'require' calls in package code: %s\n  Please use :: or requireNamespace() instead: see 'Suggested Packages'.",     domain = "R-tools")
+#. R/QC.R: ngettext(length(xx), "'library' or 'require' call in package code: %s\n  Please use :: or requireNamespace() instead.\n  See section 'Suggested packages' in the 'Writing R Extensions' manual.",     "'library' or 'require' calls in package code: %s\n  Please use :: or requireNamespace() instead.\n  See section 'Suggested packages' in the 'Writing R Extensions' manual.",     domain = "R-tools")
 #: R/QC.R:0
+#, fuzzy
 msgid ""
 "'library' or 'require' call in package code: %s\n"
-"  Please use :: or requireNamespace() instead: see 'Suggested Packages'."
+"  Please use :: or requireNamespace() instead.\n"
+"  See section 'Suggested packages' in the 'Writing R Extensions' manual."
 msgid_plural ""
 "'library' or 'require' calls in package code: %s\n"
-"  Please use :: or requireNamespace() instead: see 'Suggested Packages'."
+"  Please use :: or requireNamespace() instead.\n"
+"  See section 'Suggested packages' in the 'Writing R Extensions' manual."
 msgstr[0] ""
+" マニュアル'Writing R Extensions' の章'Creating R packages'中のDESCRIPTION"
+"ファイルにある情報を参照してください． "
 
 #. R/QC.R: ngettext(length(xx), "'library' or 'require' call not declared from: %s", "'library' or 'require' calls not declared from: %s",     domain = "R-tools")
 #: R/QC.R:0
@@ -6712,6 +6725,29 @@ msgstr[0] " %s 中に T/F が見つかりました "
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] " '%s' ('%s'行')を再エンコード出来ません "
+
+#~ msgid ""
+#~ "See the information on DESCRIPTION files in section 'Creating R packages' "
+#~ "of the 'Writing R Extensions' manual."
+#~ msgstr ""
+#~ " マニュアル'Writing R Extensions' の章'Creating R packages'中のDESCRIPTION"
+#~ "ファイルにある情報を参照してください． "
+
+#, fuzzy
+#~ msgid ""
+#~ "See the information on DESCRIPTION files in the chapter 'Creating R "
+#~ "packages' of the 'Writing R Extensions' manual."
+#~ msgstr ""
+#~ " マニュアル'Writing R Extensions' の章'Creating R packages'中のDESCRIPTION"
+#~ "ファイルにある情報を参照してください． "
+
+#, fuzzy
+#~ msgid ""
+#~ "See the information on INDEX files and package subdirectories in the "
+#~ "chapter 'Creating R packages' of the 'Writing R Extensions' manual."
+#~ msgstr ""
+#~ " マニュアル'Writing R Extensions' の章'Creating R packages'中のDESCRIPTION"
+#~ "ファイルにある情報を参照してください． "
 
 #, fuzzy
 #~ msgid "%s is using %s"

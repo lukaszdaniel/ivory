@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-11-30 14:48\n"
+"POT-Creation-Date: 2015-01-16 19:56\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -229,9 +229,10 @@ msgid ""
 "function: got (%s)"
 msgstr ""
 
-#. R/Methods.R: stop("'callGeneric' must be called from a generic function or method")
+#. R/Methods.R: stop("'callGeneric()' function must be called from within a method body")
 #: R/Methods.R:0
-msgid "'callGeneric' must be called from a generic function or method"
+#, fuzzy
+msgid "'callGeneric()' function must be called from within a method body"
 msgstr ""
 "'callGeneric' deve ser chamada a partir de uma função ou método genérico"
 

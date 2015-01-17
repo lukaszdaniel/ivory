@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MASS 7.3-21\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-07 16:58+0100\n"
+"POT-Creation-Date: 2015-01-16 19:59+0100\n"
 "PO-Revision-Date: 2013-06-30 20:08+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,18 +14,22 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 1.5.4\n"
-#: MASS.c:63
+
+#: MASS.c:59
 msgid "initial configuration has duplicates"
 msgstr "początkowa konfiguracja posiada duplikaty"
-#: MASS.c:67
+
+#: MASS.c:63
 #, c-format
 msgid "Initial stress        : %7.5f\n"
 msgstr "Początkowe naprężenie        : %7.5f\n"
-#: MASS.c:122
+
+#: MASS.c:118
 #, c-format
 msgid "stress after %3d iters: %7.5f\n"
 msgstr "naprężenie po %3d iteracjach: %7.5f\n"
-#: MASS.c:142
+
+#: MASS.c:138
 #, c-format
 msgid "stress after %3d iters: %7.5f, magic = %5.3f\n"
 msgstr "naprężenie po %3d iteracjach: %7.5f, liczba magiczna = %5.3f\n"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-11-30 14:48\n"
+"POT-Creation-Date: 2015-01-16 19:56\n"
 "PO-Revision-Date: 2012-03-05 22:07+0100\n"
 "Last-Translator: Detlef Steuer <detlef.steuer@hsu-hh.de>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -239,9 +239,10 @@ msgstr ""
 "'as' Methode sollte ein Argument haben oder mit coerce() übereinstimmen:\n"
 " bekam (%s)"
 
-#. R/Methods.R: stop("'callGeneric' must be called from a generic function or method")
+#. R/Methods.R: stop("'callGeneric()' function must be called from within a method body")
 #: R/Methods.R:0
-msgid "'callGeneric' must be called from a generic function or method"
+#, fuzzy
+msgid "'callGeneric()' function must be called from within a method body"
 msgstr ""
 "'callGeneric' muss von einer generischen Funktion oder Methode aufgerufen "
 "werden"
