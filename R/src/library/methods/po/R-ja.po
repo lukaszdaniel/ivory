@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-11-30 14:48\n"
+"POT-Creation-Date: 2015-01-16 19:56\n"
 "PO-Revision-Date: 2012-02-26 14:07+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -235,9 +235,10 @@ msgstr ""
 " 'as' メソッドはひとつの引数を持つか、coerce()の引数に対応している必要があり"
 "ます: (%s) "
 
-#. R/Methods.R: stop("'callGeneric' must be called from a generic function or method")
+#. R/Methods.R: stop("'callGeneric()' function must be called from within a method body")
 #: R/Methods.R:0
-msgid "'callGeneric' must be called from a generic function or method"
+#, fuzzy
+msgid "'callGeneric()' function must be called from within a method body"
 msgstr " 'callGeneric' は総称的関数かメソッドから呼び出されなくてはなりません "
 
 #. R/RClassUtils.R: stop("'class' is a reserved slot name and cannot be redefined")

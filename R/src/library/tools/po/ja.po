@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-08 18:29+0100\n"
+"POT-Creation-Date: 2015-01-16 19:57+0100\n"
 "PO-Revision-Date: 2011-10-22 21:52+0900 \n"
 "Last-Translator: takahashi <takahashi.kohske@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -53,12 +53,12 @@ msgstr ""
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr ""
 
-#: gramLatex.c:2370 gramRd.c:3887
+#: gramLatex.c:2370 gramRd.c:3890
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr ""
 
-#: gramLatex.c:2607 gramRd.c:4376 gramRd.c:4382
+#: gramLatex.c:2607 gramRd.c:4379 gramRd.c:4385
 #, fuzzy, c-format
 msgid "invalid '%s' value"
 msgstr " 不正な引数の型です "
@@ -102,32 +102,32 @@ msgstr ""
 msgid "Unable to find macro %s"
 msgstr ""
 
-#: gramRd.c:3947
+#: gramRd.c:3950
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr ""
 
-#: gramRd.c:4389
+#: gramRd.c:4392
 msgid "cannot open the connection"
 msgstr ""
 
-#: gramRd.c:4396
+#: gramRd.c:4399
 msgid "cannot read from this connection"
 msgstr ""
 
-#: gramRd.c:4404
+#: gramRd.c:4407
 msgid "invalid Rd file"
 msgstr ""
 
-#: gramRd.c:4423
+#: gramRd.c:4426
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr ""
 
-#: gramRd.c:4426
+#: gramRd.c:4429
 msgid "bad state"
 msgstr ""
 
-#: gramRd.c:4439
+#: gramRd.c:4442
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr ""

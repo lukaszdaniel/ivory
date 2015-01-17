@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-05 20:11\n"
+"POT-Creation-Date: 2015-01-16 19:57\n"
 "PO-Revision-Date: 2012-03-06 22:16+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -471,6 +471,11 @@ msgstr "Les environnements disponibles avaient les appels suivants :"
 #, fuzzy
 msgid "Available packages:"
 msgstr "impossible de trouver le packages %s"
+
+#. R/packages2.R: gettext("Binaries will be installed", domain = "R-utils")
+#: R/packages2.R:0
+msgid "Binaries will be installed"
+msgstr ""
 
 #. R/debugger.R: gettext("Browsing in the environment with call:", domain = "R-utils")
 #: R/debugger.R:0
@@ -1337,6 +1342,12 @@ msgstr "La page de résultats devrait s'ouvrir dans votre navigateur"
 msgid "The unsent %s can be found in file %s"
 msgstr ""
 
+#. R/packages2.R: gettext("These will not be installed", domain = "R-utils")
+#: R/packages2.R:0
+#, fuzzy
+msgid "These will not be installed"
+msgstr "le package %s est en cours d'utilisation et ne sera pas installé"
+
 #. R/bug.report.R: gettextf("This package has a bug submission web page, which we will now attempt to open. The information above may be useful in your report. If the web page doesn't work, you should send email to the maintainer, %s.",     DESC$Maintainer)
 #: R/bug.report.R:0
 msgid ""
@@ -2089,6 +2100,9 @@ msgid "incorrect type specification"
 msgstr "spécification de type incorrecte"
 
 #. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
+#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
 #: R/packages2.R:0
 #, fuzzy
 msgid "inferring 'repos = NULL' from 'pkgs'"
@@ -2831,6 +2845,11 @@ msgstr "erreur de transfert"
 msgid "trying to use CRAN without setting a mirror"
 msgstr "essai d'utilisation de CRAN sans fixer un miroir"
 
+#. R/packages2.R: stop("type 'binary' is not supported on this platform")
+#: R/packages2.R:0
+msgid "type 'binary' is not supported on this platform"
+msgstr ""
+
 #. R/packages2.R: stop("type == \"both\" can only be used on Windows or a CRAN build for Mac OS X")
 #: R/packages2.R:0
 msgid ""
@@ -2838,14 +2857,6 @@ msgid ""
 msgstr ""
 "type == \"both\" peut seulement être utilisé sous Windows ou une compilation "
 "Mac OS X CRAN"
-
-#. R/packages2.R: stop("type == \"both\" cannot be used if 'available' or 'contriburl' is specified")
-#: R/packages2.R:0
-msgid ""
-"type == \"both\" cannot be used if 'available' or 'contriburl' is specified"
-msgstr ""
-"type == \"both\" ne peut être utilisé si 'available' ou 'contriburl' est "
-"fourni"
 
 #. R/packages2.R: stop("type == \"both\" cannot be used with 'repos = NULL'")
 #: R/packages2.R:0
@@ -3377,6 +3388,13 @@ msgid "package %s is not available (for %s)"
 msgid_plural "packages %s are not available (for %s)"
 msgstr[0] "le package %s n'est pas disponible (pour %s)"
 msgstr[1] "les packages '%s' ne sont pas disponibles (pour %s)"
+
+#~ msgid ""
+#~ "type == \"both\" cannot be used if 'available' or 'contriburl' is "
+#~ "specified"
+#~ msgstr ""
+#~ "type == \"both\" ne peut être utilisé si 'available' ou 'contriburl' est "
+#~ "fourni"
 
 #, fuzzy
 #~ msgid ""

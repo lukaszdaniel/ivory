@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.8-4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-28 17:44+0100\n"
+"POT-Creation-Date: 2015-01-16 19:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -92,11 +92,11 @@ msgstr ""
 msgid "Sort failed"
 msgstr ""
 
-#: qp.c:60
+#: qp.c:58
 msgid "ERROR in addconQT."
 msgstr ""
 
-#: qp.c:466
+#: qp.c:464
 msgid "QPCLS - Rank deficiency in model"
 msgstr ""
 

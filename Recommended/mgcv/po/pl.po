@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.7-19\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-28 17:44+0100\n"
+"POT-Creation-Date: 2015-01-16 19:59+0100\n"
 "PO-Revision-Date: 2013-09-12 17:38+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -97,11 +97,11 @@ msgstr "macierz 'svdroot' nie jest dodatnio określona %g"
 msgid "Sort failed"
 msgstr "Sortowanie nie powiodło się"
 
-#: qp.c:60
+#: qp.c:58
 msgid "ERROR in addconQT."
 msgstr "BŁĄD w addconQT."
 
-#: qp.c:466
+#: qp.c:464
 msgid "QPCLS - Rank deficiency in model"
 msgstr "QPCLS - Niedobór rang w modelu"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-05 20:46\n"
+"POT-Creation-Date: 2015-01-16 19:57\n"
 "PO-Revision-Date: 2013-06-02 11:39+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -538,6 +538,11 @@ msgstr ""
 #, fuzzy
 msgid "Authors@R field gives persons with no valid roles:"
 msgstr "Le champ 'Authors@R' ne renvoie aucune personne avec un rôle d'auteur."
+
+#. R/QC.R: gettext("Authors@R field should be a call to person(), or combine such calls.", domain = "R-tools")
+#: R/QC.R:0
+msgid "Authors@R field should be a call to person(), or combine such calls."
+msgstr ""
 
 #. R/check.R: gettext("  Authors@R: ", domain = "R-tools")
 #. R/check.R: gettext("  Authors@R:  ", domain = "R-tools")
@@ -2443,6 +2448,11 @@ msgstr "Entête PDF introuvable"
 msgid "Package %s had its dependencies reduced to a minimal set."
 msgstr "Le package '%s' a ses dépendances réduites à un ensemble minimal."
 
+#. R/QC.R: gettext("Package CITATION file contains call(s) to:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Package CITATION file contains call(s) to:"
+msgstr ""
+
 #. R/QC.R: gettextf("Package detach functions should have one arguments with names starting with %s.",     sQuote("lib"), domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
@@ -2752,6 +2762,14 @@ msgstr ""
 "diagnostic :\n"
 "%s"
 
+#. R/QC.R: gettextf("Reading CITATION file fails with\n%s\nwhen package is not installed.",     paste(" ", y), domain = "R-tools")
+#: R/QC.R:0
+msgid ""
+"Reading CITATION file fails with\n"
+"%s\n"
+"when package is not installed."
+msgstr ""
+
 #. R/build.R: gettextf("Removed empty directory %s\n", sQuote(d), domain = "R-tools")
 #: R/build.R:0
 #, fuzzy
@@ -2881,6 +2899,26 @@ msgstr ""
 "Voyez l'information dans la section 'Croos-references' du manuel 'Writing R "
 "Extensions'."
 
+#. R/check.R: gettext("See chapter 'System and foreign language interfaces' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid ""
+"See chapter 'System and foreign language interfaces' in the 'Writing R "
+"Extensions' manual."
+msgstr ""
+"Voyez l'information dans la section 'Croos-references' du manuel 'Writing R "
+"Extensions'."
+
+#. R/check.R: gettext("See chapter 'Writing R documentation files' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid ""
+"See chapter 'Writing R documentation files' in the 'Writing R Extensions' "
+"manual."
+msgstr ""
+"Voir le chapitre 'Writing R documentation' dans le manuel 'Writing R "
+"Extensions'."
+
 #. R/Rd.R: gettext("See chapter 'Writing R documentation' in manual 'Writing R Extensions'.",     domain = "R-tools")
 #. R/Rd.R: gettext("See chapter 'Writing R documentation' in manual 'Writing R Extensions'.",     domain = "R-tools")
 #: R/Rd.R:0
@@ -2903,82 +2941,52 @@ msgstr "Voir section %s dans ?.onAttach."
 msgid "See section %s in '%s'."
 msgstr "Voir section %s dans ?.onAttach."
 
-#. R/check.R: gettext("See section 'Generic functions and methods' of the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+#. R/QC.R: gettext("See section 'Cross-references' in the 'Writing R Extensions' manual.", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "See section 'Cross-references' in the 'Writing R Extensions' manual."
+msgstr ""
+"Voyez l'information dans la section 'Croos-references' du manuel 'Writing R "
+"Extensions'."
+
+#. R/check.R: gettext("See section 'Generic functions and methods' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
 msgid ""
-"See section 'Generic functions and methods' of the 'Writing R Extensions' "
+"See section 'Generic functions and methods' in the 'Writing R Extensions' "
 "manual."
 msgstr ""
 "Voyez l'information dans la section 'Croos-references' du manuel 'Writing R "
 "Extensions'."
 
-#. R/check.R: gettext("See section 'Package namespaces' of the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+#. R/check.R: gettext("See section 'Package namespaces' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
-msgid "See section 'Package namespaces' of the 'Writing R Extensions' manual."
+msgid "See section 'Package namespaces' in the 'Writing R Extensions' manual."
 msgstr ""
 "Voyez l'information dans la section 'Croos-references' du manuel 'Writing R "
 "Extensions'."
 
-#. R/check.R: gettext("See the chapter 'System and foreign language interfaces' of the 'Writing R Extensions' manual.\n",     domain = "R-tools")
-#: R/check.R:0
+#. R/QC.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.",     domain = "R-tools")
+#. R/QC.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.",     domain = "R-tools")
+#. R/check.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.",     domain = "R-tools")
+#: R/QC.R:0 R/check.R:0
 #, fuzzy
 msgid ""
-"See the chapter 'System and foreign language interfaces' of the 'Writing R "
-"Extensions' manual."
+"See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual."
 msgstr ""
 "Voyez l'information dans la section 'Croos-references' du manuel 'Writing R "
 "Extensions'."
 
-#. R/check.R: gettext("See the chapter 'Writing R documentation files' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+#. R/check.R: gettext("See sections 'The INDEX file' and 'Package subdirectories' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
 msgid ""
-"See the chapter 'Writing R documentation files' in the 'Writing R "
-"Extensions' manual."
-msgstr ""
-"Voir le chapitre 'Writing R documentation' dans le manuel 'Writing R "
-"Extensions'."
-
-#. R/QC.R: gettext("See the information in section 'Cross-references' of the 'Writing R Extensions' manual.",     domain = "R-tools")
-#: R/QC.R:0
-msgid ""
-"See the information in section 'Cross-references' of the 'Writing R "
+"See sections 'The INDEX file' and 'Package subdirectories' in the 'Writing R "
 "Extensions' manual."
 msgstr ""
 "Voyez l'information dans la section 'Croos-references' du manuel 'Writing R "
 "Extensions'."
-
-#. R/QC.R: gettext("See the information on DESCRIPTION files in section 'Creating R packages' of the 'Writing R Extensions' manual.",     domain = "R-tools")
-#. R/QC.R: gettextf("See the information on DESCRIPTION files in section 'Creating R packages' of the 'Writing R Extensions' manual.",     domain = "R-tools")
-#: R/QC.R:0
-msgid ""
-"See the information on DESCRIPTION files in section 'Creating R packages' of "
-"the 'Writing R Extensions' manual."
-msgstr ""
-"Voyez l'information à propos des fichiers DESCRIPTION dans la section "
-"'Creating R packages' du manuel 'Writing R Extensions'."
-
-#. R/check.R: gettext("See the information on DESCRIPTION files in the chapter 'Creating R packages' of the 'Writing R Extensions' manual.",     domain = "R-tools")
-#: R/check.R:0
-#, fuzzy
-msgid ""
-"See the information on DESCRIPTION files in the chapter 'Creating R "
-"packages' of the 'Writing R Extensions' manual."
-msgstr ""
-"Voyez l'information à propos des fichiers DESCRIPTION dans la section "
-"'Creating R packages' du manuel 'Writing R Extensions'."
-
-#. R/check.R: gettext("See the information on INDEX files and package subdirectories in the chapter 'Creating R packages' of the 'Writing R Extensions' manual.",     domain = "R-tools")
-#: R/check.R:0
-#, fuzzy
-msgid ""
-"See the information on INDEX files and package subdirectories in the chapter "
-"'Creating R packages' of the 'Writing R Extensions' manual."
-msgstr ""
-"Voyez l'information à propos des fichiers DESCRIPTION dans la section "
-"'Creating R packages' du manuel 'Writing R Extensions'."
 
 #. R/Rprof.R: gettext("Self seconds: time spent in function alone.", domain = "R-tools")
 #: R/Rprof.R:0
@@ -6048,16 +6056,23 @@ msgid_plural "'data(package=)' calls not declared from: %s"
 msgstr[0] "appel 'data(package=)' non déclaré depuis : %s"
 msgstr[1] "appel 'data(package=)' non déclaré depuis : %s"
 
-#. R/QC.R: ngettext(length(xx), "'library' or 'require' call in package code: %s\n  Please use :: or requireNamespace() instead: see 'Suggested Packages'.",     "'library' or 'require' calls in package code: %s\n  Please use :: or requireNamespace() instead: see 'Suggested Packages'.",     domain = "R-tools")
+#. R/QC.R: ngettext(length(xx), "'library' or 'require' call in package code: %s\n  Please use :: or requireNamespace() instead.\n  See section 'Suggested packages' in the 'Writing R Extensions' manual.",     "'library' or 'require' calls in package code: %s\n  Please use :: or requireNamespace() instead.\n  See section 'Suggested packages' in the 'Writing R Extensions' manual.",     domain = "R-tools")
 #: R/QC.R:0
+#, fuzzy
 msgid ""
 "'library' or 'require' call in package code: %s\n"
-"  Please use :: or requireNamespace() instead: see 'Suggested Packages'."
+"  Please use :: or requireNamespace() instead.\n"
+"  See section 'Suggested packages' in the 'Writing R Extensions' manual."
 msgid_plural ""
 "'library' or 'require' calls in package code: %s\n"
-"  Please use :: or requireNamespace() instead: see 'Suggested Packages'."
+"  Please use :: or requireNamespace() instead.\n"
+"  See section 'Suggested packages' in the 'Writing R Extensions' manual."
 msgstr[0] ""
+"Voyez l'information à propos des fichiers DESCRIPTION dans la section "
+"'Creating R packages' du manuel 'Writing R Extensions'."
 msgstr[1] ""
+"Voyez l'information à propos des fichiers DESCRIPTION dans la section "
+"'Creating R packages' du manuel 'Writing R Extensions'."
 
 #. R/QC.R: ngettext(length(xx), "'library' or 'require' call not declared from: %s", "'library' or 'require' calls not declared from: %s",     domain = "R-tools")
 #: R/QC.R:0
@@ -6853,6 +6868,29 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "impossible de réencoder la (les) ligne(s) %2$s de '%1$s'"
 msgstr[1] "impossible de réencoder la (les) ligne(s) %2$s de '%1$s'"
+
+#~ msgid ""
+#~ "See the information on DESCRIPTION files in section 'Creating R packages' "
+#~ "of the 'Writing R Extensions' manual."
+#~ msgstr ""
+#~ "Voyez l'information à propos des fichiers DESCRIPTION dans la section "
+#~ "'Creating R packages' du manuel 'Writing R Extensions'."
+
+#, fuzzy
+#~ msgid ""
+#~ "See the information on DESCRIPTION files in the chapter 'Creating R "
+#~ "packages' of the 'Writing R Extensions' manual."
+#~ msgstr ""
+#~ "Voyez l'information à propos des fichiers DESCRIPTION dans la section "
+#~ "'Creating R packages' du manuel 'Writing R Extensions'."
+
+#, fuzzy
+#~ msgid ""
+#~ "See the information on INDEX files and package subdirectories in the "
+#~ "chapter 'Creating R packages' of the 'Writing R Extensions' manual."
+#~ msgstr ""
+#~ "Voyez l'information à propos des fichiers DESCRIPTION dans la section "
+#~ "'Creating R packages' du manuel 'Writing R Extensions'."
 
 #, fuzzy
 #~ msgid "%s is using %s"

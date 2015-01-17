@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.10.0 / mgcv 1.5-5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-28 17:44+0100\n"
+"POT-Creation-Date: 2015-01-16 19:59+0100\n"
 "PO-Revision-Date: 2009-10-08 16:16+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -95,11 +95,11 @@ msgstr "svdroot-Matrix nicht +ve def. %g"
 msgid "Sort failed"
 msgstr "Sortieren fehlgeschlagen"
 
-#: qp.c:60
+#: qp.c:58
 msgid "ERROR in addconQT."
 msgstr "FEHLER in addconQT."
 
-#: qp.c:466
+#: qp.c:464
 msgid "QPCLS - Rank deficiency in model"
 msgstr "QPCLS - Rang-Defizit im Modell"
 
