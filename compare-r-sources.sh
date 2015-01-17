@@ -37,5 +37,5 @@ if test `wc -l $RANDSTRING | cut -d" " -f1` -ne 0; then
    sed -n -e "s/Only in $Y\([^: ]*\): \(.*\)/+ $Y\1\/\2/p" $RANDSTRING | cut -d" " -f1,2
    rm $RANDSTRING
 else
-   echo "'"$X"' and '" $Y"' are identical"
+   echo "'"$X"' and '"$Y"' are identical"
 fi;
