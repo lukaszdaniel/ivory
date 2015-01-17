@@ -1,5 +1,5 @@
 # Russian translations for R
-# Русский перевод для R
+# п═я┐я│я│п╨п╦п╧ п©п╣я─п╣п╡п╬п╢ п╢п╩я▐ R
 #
 # Copyright (C) 2007 The R Foundation
 # This file is distributed under the same license as the R package.
@@ -10,76 +10,77 @@ msgstr ""
 "Project-Id-Version: R 2.10.0\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
 "POT-Creation-Date: 2014-07-13 09:15\n"
-"PO-Revision-Date: 2012-09-30 14:28-0600\n"
-"Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
+"PO-Revision-Date: 2015-01-17 16:02+0100\n"
+"Last-Translator: е│ukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
-"Language: \n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=KOI8-R\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Russian\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/bootfuns.q: gettextf("%s distribution not supported: using normal instead", sQuote(qdist))
 #: R/bootfuns.q:0
 #, fuzzy
 msgid "%s distribution not supported: using normal instead"
-msgstr "распределение не поддерживается, использую нормальное"
+msgstr "я─п╟я│п©я─п╣п╢п╣п╩п╣п╫п╦п╣ п╫п╣ п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣я┌я│я▐, п╦я│п©п╬п╩я▄п╥я┐я▌ п╫п╬я─п╪п╟п╩я▄п╫п╬п╣"
 
 #. R/bootfuns.q: stop("'F.surv' is required but missing")
 #: R/bootfuns.q:0
 msgid "'F.surv' is required but missing"
-msgstr "'F.surv' требуется, но пропущен"
+msgstr "'F.surv' я┌я─п╣п╠я┐п╣я┌я│я▐, п╫п╬ п©я─п╬п©я┐я┴п╣п╫"
 
 #. R/bootfuns.q: stop("'G.surv' is required but missing")
 #: R/bootfuns.q:0
 msgid "'G.surv' is required but missing"
-msgstr "'G.surv' требуется, но пропущен"
+msgstr "'G.surv' я┌я─п╣п╠я┐п╣я┌я│я▐, п╫п╬ п©я─п╬п©я┐я┴п╣п╫"
 
 #. R/bootfuns.q: gettextf("'K' has been set to %f", K)
 #: R/bootfuns.q:0
 msgid "'K' has been set to %f"
-msgstr "'K' установлен в %f"
+msgstr "'K' я┐я│я┌п╟п╫п╬п╡п╩п╣п╫ п╡ %f"
 
 #. R/bootfuns.q: stop("'K' outside allowable range")
 #: R/bootfuns.q:0
 msgid "'K' outside allowable range"
-msgstr "'K' вне допустимого промежутка"
+msgstr "'K' п╡п╫п╣ п╢п╬п©я┐я│я┌п╦п╪п╬пЁп╬ п©я─п╬п╪п╣п╤я┐я┌п╨п╟"
 
 #. R/bootfuns.q: stop("'R' and 'alpha' have incompatible lengths")
 #: R/bootfuns.q:0
 msgid "'R' and 'alpha' have incompatible lengths"
-msgstr "'R' и 'alpha' должны иметь совместимые длины"
+msgstr "'R' п╦ 'alpha' п╢п╬п╩п╤п╫я▀ п╦п╪п╣я┌я▄ я│п╬п╡п╪п╣я│я┌п╦п╪я▀п╣ п╢п╩п╦п╫я▀"
 
 #. R/bootfuns.q: stop("'R' and 'theta' have incompatible lengths")
 #: R/bootfuns.q:0
 msgid "'R' and 'theta' have incompatible lengths"
-msgstr "у 'R' и 'theta' -- несовместимые длины"
+msgstr "я┐ 'R' п╦ 'theta' -- п╫п╣я│п╬п╡п╪п╣я│я┌п╦п╪я▀п╣ п╢п╩п╦п╫я▀"
 
 #. R/bootfuns.q: stop("'R' must be positive")
 #: R/bootfuns.q:0
 msgid "'R' must be positive"
-msgstr "'R' должен быть положительным"
+msgstr "'R' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п©п╬п╩п╬п╤п╦я┌п╣п╩я▄п╫я▀п╪"
 
 #. R/bootfuns.q: warning("'alpha' ignored; R[1L] = 0")
 #: R/bootfuns.q:0
 #, fuzzy
 msgid "'alpha' ignored; R[1L] = 0"
-msgstr "'alpha' пропущен; R[1L]=0"
+msgstr "'alpha' п©я─п╬п©я┐я┴п╣п╫; R[1L]=0"
 
 #. R/bootfuns.q: stop("'data' must be a matrix with at least 2 columns")
 #. R/bootfuns.q: stop("'data' must be a matrix with at least 2 columns")
 #: R/bootfuns.q:0
 #, fuzzy
 msgid "'data' must be a matrix with at least 2 columns"
-msgstr "данные должны быть матрицей по меньшей мере из 2 колонок"
+msgstr "п╢п╟п╫п╫я▀п╣ п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ п╪п╟я┌я─п╦я├п╣п╧ п©п╬ п╪п╣п╫я▄я┬п╣п╧ п╪п╣я─п╣ п╦п╥ 2 п╨п╬п╩п╬п╫п╬п╨"
 
 #. R/bootfuns.q: stop("'index' must contain 2 elements")
 #: R/bootfuns.q:0
 #, fuzzy
 msgid "'index' must contain 2 elements"
-msgstr "индекс должен содержать 2 элемента"
+msgstr "п╦п╫п╢п╣п╨я│ п╢п╬п╩п╤п╣п╫ я│п╬п╢п╣я─п╤п╟я┌я▄ 2 я█п╩п╣п╪п╣п╫я┌п╟"
 
 #. R/bootfuns.q: warning("'simple=TRUE' is only valid for 'sim=\"ordinary\", stype=\"i\", n=0', so ignored")
 #: R/bootfuns.q:0
@@ -87,49 +88,49 @@ msgid ""
 "'simple=TRUE' is only valid for 'sim=\"ordinary\", stype=\"i\", n=0', so "
 "ignored"
 msgstr ""
-"'simple=TRUE' правильно только для 'sim=\"ordinary\", stype=\"i\", n=0, "
-"поэтому пропускается"
+"'simple=TRUE' п©я─п╟п╡п╦п╩я▄п╫п╬ я┌п╬п╩я▄п╨п╬ п╢п╩я▐ 'sim=\"ordinary\", stype=\"i\", n=0, "
+"п©п╬я█я┌п╬п╪я┐ п©я─п╬п©я┐я│п╨п╟п╣я┌я│я▐"
 
 #. R/bootfuns.q: stop("'strata' of wrong length")
 #: R/bootfuns.q:0
 msgid "'strata' of wrong length"
-msgstr "'strata' неправильной длины"
+msgstr "'strata' п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╧ п╢п╩п╦п╫я▀"
 
 #. R/bootfuns.q: stop("'stype' must be \"w\" for type=\"inf\"")
 #: R/bootfuns.q:0
 msgid "'stype' must be \"w\" for type=\"inf\""
-msgstr "'stype' должен быть \"w\" для type=\"inf\""
+msgstr "'stype' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ \"w\" п╢п╩я▐ type=\"inf\""
 
 #. R/bootfuns.q: stop("'t' and 't0' must be supplied together")
 #: R/bootfuns.q:0
 msgid "'t' and 't0' must be supplied together"
-msgstr "'t' и 't0' должны быть указаны вместе"
+msgstr "'t' п╦ 't0' п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ я┐п╨п╟п╥п╟п╫я▀ п╡п╪п╣я│я┌п╣"
 
 #. R/bootfuns.q: gettextf("'t' must of length %d", boot.out$R)
 #: R/bootfuns.q:0
 msgid "'t' must of length %d"
-msgstr "'t' должен быть длиной %d"
+msgstr "'t' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ %d"
 
 #. R/bootfuns.q: stop("'theta' must be supplied if R[1L] = 0")
 #: R/bootfuns.q:0
 #, fuzzy
 msgid "'theta' must be supplied if R[1L] = 0"
-msgstr "надо указать 'theta', если R[1L] = 0"
+msgstr "п╫п╟п╢п╬ я┐п╨п╟п╥п╟я┌я▄ 'theta', п╣я│п╩п╦ R[1L] = 0"
 
 #. R/bootfuns.q: stop("'theta' or 'lambda' required")
 #: R/bootfuns.q:0
 msgid "'theta' or 'lambda' required"
-msgstr "требуется 'theta' или 'lambda'"
+msgstr "я┌я─п╣п╠я┐п╣я┌я│я▐ 'theta' п╦п╩п╦ 'lambda'"
 
 #. R/bootfuns.q: stop("'u' must be a function")
 #: R/bootfuns.q:0
 msgid "'u' must be a function"
-msgstr "'u' должна быть функцией"
+msgstr "'u' п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ я└я┐п╫п╨я├п╦п╣п╧"
 
 #. R/bootfuns.q: stop("0 elements not allowed in 'q'")
 #: R/bootfuns.q:0
 msgid "0 elements not allowed in 'q'"
-msgstr "0 элементов в 'q' не разрешено"
+msgstr "0 я█п╩п╣п╪п╣п╫я┌п╬п╡ п╡ 'q' п╫п╣ я─п╟п╥я─п╣я┬п╣п╫п╬"
 
 #. R/bootfuns.q: gettext("0 will terminate the function", domain = "R-boot")
 #: R/bootfuns.q:0
@@ -185,7 +186,7 @@ msgstr ""
 #: R/bootfuns.q:0
 #, fuzzy
 msgid "BCa intervals not defined for time series bootstraps"
-msgstr "BCa интервалы не определены для бутстрепа временных рядов."
+msgstr "BCa п╦п╫я┌п╣я─п╡п╟п╩я▀ п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫я▀ п╢п╩я▐ п╠я┐я┌я│я┌я─п╣п©п╟ п╡я─п╣п╪п╣п╫п╫я▀я┘ я─я▐п╢п╬п╡."
 
 #. R/bootfuns.q: gettext("BLOCK BOOTSTRAP FOR TIME SERIES", domain = "R-boot")
 #: R/bootfuns.q:0
@@ -444,7 +445,7 @@ msgstr ""
 #. R/bootfuns.q: stop("R[1L] must be positive for frequency smoothing")
 #: R/bootfuns.q:0
 msgid "R[1L] must be positive for frequency smoothing"
-msgstr "R[1L] должен быть положительным для частотного сглаживания"
+msgstr "R[1L] п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п©п╬п╩п╬п╤п╦я┌п╣п╩я▄п╫я▀п╪ п╢п╩я▐ я┤п╟я│я┌п╬я┌п╫п╬пЁп╬ я│пЁп╩п╟п╤п╦п╡п╟п╫п╦я▐"
 
 #. R/bootfuns.q: gettext("Residuals", domain = "R-boot")
 #: R/bootfuns.q:0
@@ -609,12 +610,12 @@ msgstr ""
 #. R/bootfuns.q: stop("arguments are not all the same type of \"boot\" object")
 #: R/bootfuns.q:0
 msgid "arguments are not all the same type of \"boot\" object"
-msgstr "не все аргументы объекта \"boot\" одного типа"
+msgstr "п╫п╣ п╡я│п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╬п╠я┼п╣п╨я┌п╟ \"boot\" п╬п╢п╫п╬пЁп╬ я┌п╦п©п╟"
 
 #. R/bootfuns.q: stop("array cannot be found for parametric bootstrap")
 #: R/bootfuns.q:0
 msgid "array cannot be found for parametric bootstrap"
-msgstr "не могу найти матрицу для параметрического бутстрепа"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╫п╟п╧я┌п╦ п╪п╟я┌я─п╦я├я┐ п╢п╩я▐ п©п╟я─п╟п╪п╣я┌я─п╦я┤п╣я│п╨п╬пЁп╬ п╠я┐я┌я│я┌я─п╣п©п╟"
 
 #. R/bootfuns.q: gettext(" bias  ", domain = "R-boot")
 #. R/bootfuns.q: gettext(" bias  ", domain = "R-boot")
@@ -625,97 +626,97 @@ msgstr ""
 #. R/bootfuns.q: stop("boot.array not implemented for this object")
 #: R/bootfuns.q:0
 msgid "boot.array not implemented for this object"
-msgstr "'boot.array' для этого объекта не разработан"
+msgstr "'boot.array' п╢п╩я▐ я█я┌п╬пЁп╬ п╬п╠я┼п╣п╨я┌п╟ п╫п╣ я─п╟п╥я─п╟п╠п╬я┌п╟п╫"
 
 #. R/bootfuns.q: stop("bootstrap object needed for type=\"reg\"")
 #: R/bootfuns.q:0
 msgid "bootstrap object needed for type=\"reg\""
-msgstr "для type=\"reg\" нужен бутстреп-объект"
+msgstr "п╢п╩я▐ type=\"reg\" п╫я┐п╤п╣п╫ п╠я┐я┌я│я┌я─п╣п©-п╬п╠я┼п╣п╨я┌"
 
 #. R/bootfuns.q: stop("bootstrap output matrix missing")
 #: R/bootfuns.q:0
 msgid "bootstrap output matrix missing"
-msgstr "пропущена матрица бутстреп-вывода"
+msgstr "п©я─п╬п©я┐я┴п╣п╫п╟ п╪п╟я┌я─п╦я├п╟ п╠я┐я┌я│я┌я─п╣п©-п╡я▀п╡п╬п╢п╟"
 
 #. R/bootfuns.q: stop("bootstrap output object or 't0' required")
 #: R/bootfuns.q:0
 msgid "bootstrap output object or 't0' required"
-msgstr "требуется объект вывода бутстрепа либо 't0'"
+msgstr "я┌я─п╣п╠я┐п╣я┌я│я▐ п╬п╠я┼п╣п╨я┌ п╡я▀п╡п╬п╢п╟ п╠я┐я┌я│я┌я─п╣п©п╟ п╩п╦п╠п╬ 't0'"
 
 #. R/bootfuns.q: stop("bootstrap replicates must be supplied")
 #. R/bootfuns.q: stop("bootstrap replicates must be supplied")
 #. R/bootfuns.q: stop("bootstrap replicates must be supplied")
 #: R/bootfuns.q:0
 msgid "bootstrap replicates must be supplied"
-msgstr "надо указать бутстреп-репликаты"
+msgstr "п╫п╟п╢п╬ я┐п╨п╟п╥п╟я┌я▄ п╠я┐я┌я│я┌я─п╣п©-я─п╣п©п╩п╦п╨п╟я┌я▀"
 
 #. R/bootfuns.q: warning("bootstrap variances needed for studentized intervals")
 #: R/bootfuns.q:0
 msgid "bootstrap variances needed for studentized intervals"
-msgstr "бутстреп-вариансы нужны для интервалов Стьюдент-типа"
+msgstr "п╠я┐я┌я│я┌я─п╣п©-п╡п╟я─п╦п╟п╫я│я▀ п╫я┐п╤п╫я▀ п╢п╩я▐ п╦п╫я┌п╣я─п╡п╟п╩п╬п╡ п║я┌я▄я▌п╢п╣п╫я┌-я┌п╦п©п╟"
 
 #. R/bootfuns.q: stop("control methods undefined when 'boot.out' has weights")
 #: R/bootfuns.q:0
 msgid "control methods undefined when 'boot.out' has weights"
-msgstr "методы контроля не определены в то время как у 'boot.out' есть веса"
+msgstr "п╪п╣я┌п╬п╢я▀ п╨п╬п╫я┌я─п╬п╩я▐ п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫я▀ п╡ я┌п╬ п╡я─п╣п╪я▐ п╨п╟п╨ я┐ 'boot.out' п╣я│я┌я▄ п╡п╣я│п╟"
 
 #. R/bootfuns.q: stop("dimensions of 'R' and 'weights' do not match")
 #: R/bootfuns.q:0
 msgid "dimensions of 'R' and 'weights' do not match"
-msgstr "измерения 'R' и 'weights' не соответствуют"
+msgstr "п╦п╥п╪п╣я─п╣п╫п╦я▐ 'R' п╦ 'weights' п╫п╣ я│п╬п╬я┌п╡п╣я┌я│я┌п╡я┐я▌я┌"
 
 #. R/bootfuns.q: stop("either 'A' and 'u' or 'K.adj' and 'K2' must be supplied")
 #: R/bootfuns.q:0
 msgid "either 'A' and 'u' or 'K.adj' and 'K2' must be supplied"
-msgstr "надо указать либо 'A' и 'u', либо 'K.adj' и 'K2'"
+msgstr "п╫п╟п╢п╬ я┐п╨п╟п╥п╟я┌я▄ п╩п╦п╠п╬ 'A' п╦ 'u', п╩п╦п╠п╬ 'K.adj' п╦ 'K2'"
 
 #. R/bootfuns.q: stop("either 'boot.out' or 'w' must be specified.")
 #. R/bootfuns.q: stop("either 'boot.out' or 'w' must be specified.")
 #. R/bootfuns.q: stop("either 'boot.out' or 'w' must be specified.")
 #: R/bootfuns.q:0
 msgid "either 'boot.out' or 'w' must be specified."
-msgstr "надо указать либо 'boot.out', либо 'w'."
+msgstr "п╫п╟п╢п╬ я┐п╨п╟п╥п╟я┌я▄ п╩п╦п╠п╬ 'boot.out', п╩п╦п╠п╬ 'w'."
 
 #. R/bootfuns.q: stop("estimated adjustment 'a' is NA")
 #: R/bootfuns.q:0
 msgid "estimated adjustment 'a' is NA"
-msgstr "предполагаемая корректировка 'a' -- это NA"
+msgstr "п©я─п╣п╢п©п╬п╩п╟пЁп╟п╣п╪п╟я▐ п╨п╬я─я─п╣п╨я┌п╦я─п╬п╡п╨п╟ 'a' -- я█я┌п╬ NA"
 
 #. R/bootfuns.q: stop("estimated adjustment 'w' is infinite")
 #: R/bootfuns.q:0
 msgid "estimated adjustment 'w' is infinite"
-msgstr "предполагаемая корректировка 'w' -- infinite"
+msgstr "п©я─п╣п╢п©п╬п╩п╟пЁп╟п╣п╪п╟я▐ п╨п╬я─я─п╣п╨я┌п╦я─п╬п╡п╨п╟ 'w' -- infinite"
 
 #. R/bootfuns.q: warning("extreme order statistics used as endpoints")
 #: R/bootfuns.q:0
 msgid "extreme order statistics used as endpoints"
-msgstr "'extreme order statistics' использована в конечных точках"
+msgstr "'extreme order statistics' п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╟ п╡ п╨п╬п╫п╣я┤п╫я▀я┘ я┌п╬я┤п╨п╟я┘"
 
 #. R/bootfuns.q: warning("extreme values used for quantiles")
 #: R/bootfuns.q:0
 msgid "extreme values used for quantiles"
-msgstr "экстремальные значения использованы для квантилей"
+msgstr "я█п╨я│я┌я─п╣п╪п╟п╩я▄п╫я▀п╣ п╥п╫п╟я┤п╣п╫п╦я▐ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫я▀ п╢п╩я▐ п╨п╡п╟п╫я┌п╦п╩п╣п╧"
 
 #. R/bootfuns.q: stop("function 'u' missing")
 #: R/bootfuns.q:0
 msgid "function 'u' missing"
-msgstr "функция 'u' пропущена"
+msgstr "я└я┐п╫п╨я├п╦я▐ 'u' п©я─п╬п©я┐я┴п╣п╫п╟"
 
 #. R/bootfuns.q: stop("index array not defined for model-based resampling")
 #: R/bootfuns.q:0
 msgid "index array not defined for model-based resampling"
-msgstr "для основанного на модели ресэмплинга не определена матрица индексов"
+msgstr "п╢п╩я▐ п╬я│п╫п╬п╡п╟п╫п╫п╬пЁп╬ п╫п╟ п╪п╬п╢п╣п╩п╦ я─п╣я│я█п╪п©п╩п╦п╫пЁп╟ п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫п╟ п╪п╟я┌я─п╦я├п╟ п╦п╫п╢п╣п╨я│п╬п╡"
 
 #. R/bootfuns.q: warning("index out of bounds; minimum index only used.")
 #: R/bootfuns.q:0
 msgid "index out of bounds; minimum index only used."
-msgstr "индекс вне границ; использован лишь минимальный индекс."
+msgstr "п╦п╫п╢п╣п╨я│ п╡п╫п╣ пЁя─п╟п╫п╦я├; п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫ п╩п╦я┬я▄ п╪п╦п╫п╦п╪п╟п╩я▄п╫я▀п╧ п╦п╫п╢п╣п╨я│."
 
 #. R/bootfuns.q: stop("indices are incompatible with 'ncol(data)'")
 #: R/bootfuns.q:0
 #, fuzzy
 msgid "indices are incompatible with 'ncol(data)'"
-msgstr "индексы несовместимы с ncol(data)"
+msgstr "п╦п╫п╢п╣п╨я│я▀ п╫п╣я│п╬п╡п╪п╣я│я┌п╦п╪я▀ я│ ncol(data)"
 
 #. R/bootfuns.q: gettext("infinitesimal jackknife value", domain = "R-boot")
 #: R/bootfuns.q:0
@@ -725,37 +726,37 @@ msgstr ""
 #. R/bootfuns.q: stop("influence values cannot be found from a parametric bootstrap")
 #: R/bootfuns.q:0
 msgid "influence values cannot be found from a parametric bootstrap"
-msgstr "значения влияния нельзя найти при помощи параметрического бутстрепа"
+msgstr "п╥п╫п╟я┤п╣п╫п╦я▐ п╡п╩п╦я▐п╫п╦я▐ п╫п╣п╩я▄п╥я▐ п╫п╟п╧я┌п╦ п©я─п╦ п©п╬п╪п╬я┴п╦ п©п╟я─п╟п╪п╣я┌я─п╦я┤п╣я│п╨п╬пЁп╬ п╠я┐я┌я│я┌я─п╣п©п╟"
 
 #. R/bootfuns.q: warning("input 't' ignored; type=\"inf\"")
 #: R/bootfuns.q:0
 msgid "input 't' ignored; type=\"inf\""
-msgstr "ввод 't' пропущен; type=\"inf\""
+msgstr "п╡п╡п╬п╢ 't' п©я─п╬п©я┐я┴п╣п╫; type=\"inf\""
 
 #. R/bootfuns.q: warning("input 't' ignored; type=\"jack\"")
 #: R/bootfuns.q:0
 msgid "input 't' ignored; type=\"jack\""
-msgstr "ввод 't' пропущен; type=\"jack\""
+msgstr "п╡п╡п╬п╢ 't' п©я─п╬п©я┐я┴п╣п╫; type=\"jack\""
 
 #. R/bootfuns.q: warning("input 't' ignored; type=\"pos\"")
 #: R/bootfuns.q:0
 msgid "input 't' ignored; type=\"pos\""
-msgstr "ввод 't' пропущен; type=\"pos\""
+msgstr "п╡п╡п╬п╢ 't' п©я─п╬п©я┐я┴п╣п╫; type=\"pos\""
 
 #. R/bootfuns.q: warning("input 't0' ignored: neither 't' nor 'L' supplied")
 #: R/bootfuns.q:0
 msgid "input 't0' ignored: neither 't' nor 'L' supplied"
-msgstr "ввод 't0' пропущен: не указано ни 't', ни 'L'"
+msgstr "п╡п╡п╬п╢ 't0' п©я─п╬п©я┐я┴п╣п╫: п╫п╣ я┐п╨п╟п╥п╟п╫п╬ п╫п╦ 't', п╫п╦ 'L'"
 
 #. R/bootfuns.q: stop("invalid value of 'l'")
 #: R/bootfuns.q:0
 msgid "invalid value of 'l'"
-msgstr "неправильное значение 'l'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ 'l'"
 
 #. R/bootfuns.q: stop("invalid value of 'sim' supplied")
 #: R/bootfuns.q:0
 msgid "invalid value of 'sim' supplied"
-msgstr "указано неправильное значение 'sim'"
+msgstr "я┐п╨п╟п╥п╟п╫п╬ п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ 'sim'"
 
 #. R/bootfuns.q: gettext("jackknife value")
 #. R/bootfuns.q: gettext("jackknife value", domain = "R-boot")
@@ -771,17 +772,17 @@ msgstr ""
 #. R/bootfuns.q: stop("length of 'm' incompatible with 'strata'")
 #: R/bootfuns.q:0
 msgid "length of 'm' incompatible with 'strata'"
-msgstr "длина 'm' несовместима со 'strata'"
+msgstr "п╢п╩п╦п╫п╟ 'm' п╫п╣я│п╬п╡п╪п╣я│я┌п╦п╪п╟ я│п╬ 'strata'"
 
 #. R/bootpracs.q: gettextf("likelihood exceeds %f at only one point", lim)
 #: R/bootpracs.q:0
 msgid "likelihood exceeds %f at only one point"
-msgstr "правдоподобие превышает %f только в одной точке"
+msgstr "п©я─п╟п╡п╢п╬п©п╬п╢п╬п╠п╦п╣ п©я─п╣п╡я▀я┬п╟п╣я┌ %f я┌п╬п╩я▄п╨п╬ п╡ п╬п╢п╫п╬п╧ я┌п╬я┤п╨п╣"
 
 #. R/bootpracs.q: gettextf("likelihood never exceeds %f", lim)
 #: R/bootpracs.q:0
 msgid "likelihood never exceeds %f"
-msgstr "правдоподобие никогда не превышает %f"
+msgstr "п©я─п╟п╡п╢п╬п©п╬п╢п╬п╠п╦п╣ п╫п╦п╨п╬пЁп╢п╟ п╫п╣ п©я─п╣п╡я▀я┬п╟п╣я┌ %f"
 
 #. R/bootfuns.q: gettext("mean")
 #: R/bootfuns.q:0
@@ -797,66 +798,66 @@ msgstr ""
 #: R/bootfuns.q:0
 #, fuzzy
 msgid "missing values not allowed in 'data'"
-msgstr "пропущенные значения в данных не разрешены"
+msgstr "п©я─п╬п©я┐я┴п╣п╫п╫я▀п╣ п╥п╫п╟я┤п╣п╫п╦я▐ п╡ п╢п╟п╫п╫я▀я┘ п╫п╣ я─п╟п╥я─п╣я┬п╣п╫я▀"
 
 #. R/bootfuns.q: stop("multivariate time series not allowed")
 #: R/bootfuns.q:0
 msgid "multivariate time series not allowed"
-msgstr "многомерные временные ряды не разрешены"
+msgstr "п╪п╫п╬пЁп╬п╪п╣я─п╫я▀п╣ п╡я─п╣п╪п╣п╫п╫я▀п╣ я─я▐п╢я▀ п╫п╣ я─п╟п╥я─п╣я┬п╣п╫я▀"
 
 #. R/bootfuns.q: stop("negative value of 'm' supplied")
 #: R/bootfuns.q:0
 msgid "negative value of 'm' supplied"
-msgstr "указано отрицательное значение 'm'"
+msgstr "я┐п╨п╟п╥п╟п╫п╬ п╬я┌я─п╦я├п╟я┌п╣п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ 'm'"
 
 #. R/bootfuns.q: stop("neither 'data' nor bootstrap object specified")
 #: R/bootfuns.q:0
 #, fuzzy
 msgid "neither 'data' nor bootstrap object specified"
-msgstr "нет данных или указан бутстреп-объект"
+msgstr "п╫п╣я┌ п╢п╟п╫п╫я▀я┘ п╦п╩п╦ я┐п╨п╟п╥п╟п╫ п╠я┐я┌я│я┌я─п╣п©-п╬п╠я┼п╣п╨я┌"
 
 #. R/bootfuns.q: stop("neither 'statistic' nor bootstrap object specified")
 #: R/bootfuns.q:0
 msgid "neither 'statistic' nor bootstrap object specified"
-msgstr "нет 'statistic' или указан бутстреп-объект"
+msgstr "п╫п╣я┌ 'statistic' п╦п╩п╦ я┐п╨п╟п╥п╟п╫ п╠я┐я┌я│я┌я─п╣п©-п╬п╠я┼п╣п╨я┌"
 
 #. R/bootfuns.q: warning("no coefficients in Cox model -- model ignored")
 #: R/bootfuns.q:0
 msgid "no coefficients in Cox model -- model ignored"
-msgstr "в модели 'Cox' нет коэффициентов -- модель пропущена"
+msgstr "п╡ п╪п╬п╢п╣п╩п╦ 'Cox' п╫п╣я┌ п╨п╬я█я└я└п╦я├п╦п╣п╫я┌п╬п╡ -- п╪п╬п╢п╣п╩я▄ п©я─п╬п©я┐я┴п╣п╫п╟"
 
 #. R/bootfuns.q: stop("no data in call to 'boot'")
 #: R/bootfuns.q:0
 msgid "no data in call to 'boot'"
-msgstr "нет данных в вызове 'boot'"
+msgstr "п╫п╣я┌ п╢п╟п╫п╫я▀я┘ п╡ п╡я▀п╥п╬п╡п╣ 'boot'"
 
 #. R/bootfuns.q: gettextf("number of columns of 'A' (%d) not equal to length of 'u' (%d)", d, length(u))
 #: R/bootfuns.q:0
 #, fuzzy
 msgid "number of columns of 'A' (%d) not equal to length of 'u' (%d)"
-msgstr ") не равно длине u ("
+msgstr ") п╫п╣ я─п╟п╡п╫п╬ п╢п╩п╦п╫п╣ u ("
 
 #. R/bootfuns.q: stop("one of 't' or 't0' required")
 #: R/bootfuns.q:0
 msgid "one of 't' or 't0' required"
-msgstr "требуется одно 't' или 't0'"
+msgstr "я┌я─п╣п╠я┐п╣я┌я│я▐ п╬п╢п╫п╬ 't' п╦п╩п╦ 't0'"
 
 #. R/bootfuns.q: gettextf("only columns %s and %s of 'data' used", index[1L], index[2L])
 #: R/bootfuns.q:0
 #, fuzzy
 msgid "only columns %s and %s of 'data' used"
-msgstr "использована только первая колонка t"
+msgstr "п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╟ я┌п╬п╩я▄п╨п╬ п©п╣я─п╡п╟я▐ п╨п╬п╩п╬п╫п╨п╟ t"
 
 #. R/bootfuns.q: warning("only first 2 elements of 'index' used")
 #: R/bootfuns.q:0
 #, fuzzy
 msgid "only first 2 elements of 'index' used"
-msgstr "лишь первые 2 элемента индекса использованы"
+msgstr "п╩п╦я┬я▄ п©п╣я─п╡я▀п╣ 2 я█п╩п╣п╪п╣п╫я┌п╟ п╦п╫п╢п╣п╨я│п╟ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫я▀"
 
 #. R/bootfuns.q: warning("only first column of 't' used")
 #: R/bootfuns.q:0
 msgid "only first column of 't' used"
-msgstr "использована только первая колонка 't'"
+msgstr "п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╟ я┌п╬п╩я▄п╨п╬ п©п╣я─п╡п╟я▐ п╨п╬п╩п╬п╫п╨п╟ 't'"
 
 #. R/bootfuns.q: warning("only first element of 'index' used")
 #. R/bootfuns.q: warning("only first element of 'index' used")
@@ -873,13 +874,13 @@ msgstr "использована только первая колонка 't'"
 #: R/bootfuns.q:0
 #, fuzzy
 msgid "only first element of 'index' used"
-msgstr "использован лишь первый элемент индекса"
+msgstr "п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫ п╩п╦я┬я▄ п©п╣я─п╡я▀п╧ я█п╩п╣п╪п╣п╫я┌ п╦п╫п╢п╣п╨я│п╟"
 
 #. R/bootfuns.q: warning("only first element of 'index' used in 'abc.ci'")
 #: R/bootfuns.q:0
 #, fuzzy
 msgid "only first element of 'index' used in 'abc.ci'"
-msgstr "лишь первый элемент индекса использован в abc.ci"
+msgstr "п╩п╦я┬я▄ п©п╣я─п╡я▀п╧ я█п╩п╣п╪п╣п╫я┌ п╦п╫п╢п╣п╨я│п╟ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫ п╡ abc.ci"
 
 #. R/bootfuns.q: gettext("original", domain = "R-boot")
 #. R/bootfuns.q: gettext("original", domain = "R-boot")
@@ -896,7 +897,7 @@ msgstr ""
 #: R/bootfuns.q:0
 #, fuzzy
 msgid "sim = \"weird\" cannot be used with a \"coxph\" object"
-msgstr "sim=\"weird\" не может быть использован для объекта coxph"
+msgstr "sim=\"weird\" п╫п╣ п╪п╬п╤п╣я┌ п╠я▀я┌я▄ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╟ coxph"
 
 #. R/bootfuns.q: gettext("standardized infinitesimal jackknife value", domain = "R-boot")
 #: R/bootfuns.q:0
@@ -923,29 +924,29 @@ msgstr ""
 #. R/bootfuns.q: stop("this type not implemented for Binary")
 #: R/bootfuns.q:0
 msgid "this type not implemented for Binary"
-msgstr "этот тип не разработан для бинарного распределения"
+msgstr "я█я┌п╬я┌ я┌п╦п© п╫п╣ я─п╟п╥я─п╟п╠п╬я┌п╟п╫ п╢п╩я▐ п╠п╦п╫п╟я─п╫п╬пЁп╬ я─п╟я│п©я─п╣п╢п╣п╩п╣п╫п╦я▐"
 
 #. R/bootfuns.q: stop("this type not implemented for Poisson")
 #: R/bootfuns.q:0
 msgid "this type not implemented for Poisson"
-msgstr "этот тип не разработан для распределения Пуассона"
+msgstr "я█я┌п╬я┌ я┌п╦п© п╫п╣ я─п╟п╥я─п╟п╠п╬я┌п╟п╫ п╢п╩я▐ я─п╟я│п©я─п╣п╢п╣п╩п╣п╫п╦я▐ п÷я┐п╟я│я│п╬п╫п╟"
 
 #. R/bootfuns.q: warning("unable to achieve requested overall error rate")
 #: R/bootfuns.q:0
 #, fuzzy
 msgid "unable to achieve requested overall error rate"
-msgstr "не могу достичь требуемого общего соотношения ошибок."
+msgstr "п╫п╣ п╪п╬пЁя┐ п╢п╬я│я┌п╦я┤я▄ я┌я─п╣п╠я┐п╣п╪п╬пЁп╬ п╬п╠я┴п╣пЁп╬ я│п╬п╬я┌п╫п╬я┬п╣п╫п╦я▐ п╬я┬п╦п╠п╬п╨."
 
 #. R/bootfuns.q: stop("unable to calculate 'var.t0'")
 #: R/bootfuns.q:0
 msgid "unable to calculate 'var.t0'"
-msgstr "не могу посчитать 'var.t0'"
+msgstr "п╫п╣ п╪п╬пЁя┐ п©п╬я│я┤п╦я┌п╟я┌я▄ 'var.t0'"
 
 #. R/bootfuns.q: gettextf("unable to find multiplier for %f", theta[i])
 #: R/bootfuns.q:0
 #, fuzzy
 msgid "unable to find multiplier for %f"
-msgstr "не могу найти множитель для"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╫п╟п╧я┌п╦ п╪п╫п╬п╤п╦я┌п╣п╩я▄ п╢п╩я▐"
 
 #. R/bootfuns.q: stop("unable to find range")
 #. R/bootfuns.q: stop("unable to find range")
@@ -953,28 +954,28 @@ msgstr "не могу найти множитель для"
 #. R/bootfuns.q: stop("unable to find range")
 #: R/bootfuns.q:0
 msgid "unable to find range"
-msgstr "не могу найти размах"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╫п╟п╧я┌п╦ я─п╟п╥п╪п╟я┘"
 
 #. R/bootfuns.q: stop("unknown value of 'sim'")
 #: R/bootfuns.q:0
 msgid "unknown value of 'sim'"
-msgstr "неизвестное значение 'sim'"
+msgstr "п╫п╣п╦п╥п╡п╣я│я┌п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ 'sim'"
 
 #. R/bootfuns.q: stop("unrecognized value of 'sim'")
 #: R/bootfuns.q:0
 msgid "unrecognized value of 'sim'"
-msgstr "нераспознанное значение 'sim'"
+msgstr "п╫п╣я─п╟я│п©п╬п╥п╫п╟п╫п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ 'sim'"
 
 #. R/bootfuns.q: stop("use 'boot.ci' for scalar parameters")
 #: R/bootfuns.q:0
 msgid "use 'boot.ci' for scalar parameters"
-msgstr "использую 'boot.ci' для скалярных параметров"
+msgstr "п╦я│п©п╬п╩я▄п╥я┐я▌ 'boot.ci' п╢п╩я▐ я│п╨п╟п╩я▐я─п╫я▀я┘ п©п╟я─п╟п╪п╣я┌я─п╬п╡"
 
 #. R/bootfuns.q: warning("variance required for studentized intervals")
 #: R/bootfuns.q:0
 #, fuzzy
 msgid "variance required for studentized intervals"
-msgstr "для CI Стьюдент-типа нужна варианса"
+msgstr "п╢п╩я▐ CI п║я┌я▄я▌п╢п╣п╫я┌-я┌п╦п©п╟ п╫я┐п╤п╫п╟ п╡п╟я─п╦п╟п╫я│п╟"
 
 #. R/bootfuns.q: ngettext(R[2L], "First %d replicate tilted to %s", "First %d replicates tilted to %s")
 #: R/bootfuns.q:0
@@ -1001,25 +1002,25 @@ msgstr[1] ""
 msgstr[2] ""
 
 #~ msgid "only columns"
-#~ msgstr "только колонки"
+#~ msgstr "я┌п╬п╩я▄п╨п╬ п╨п╬п╩п╬п╫п╨п╦"
 
 #~ msgid "and"
-#~ msgstr "и"
+#~ msgstr "п╦"
 
 #~ msgid "of data used"
-#~ msgstr "данных использованы"
+#~ msgstr "п╢п╟п╫п╫я▀я┘ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫я▀"
 
 #~ msgid "number of columns of A ("
-#~ msgstr "количество колонок A ("
+#~ msgstr "п╨п╬п╩п╦я┤п╣я│я┌п╡п╬ п╨п╬п╩п╬п╫п╬п╨ A ("
 
 #~ msgid ")"
 #~ msgstr ")"
 
 #~ msgid "at only one point"
-#~ msgstr "только в одной точке"
+#~ msgstr "я┌п╬п╩я▄п╨п╬ п╡ п╬п╢п╫п╬п╧ я┌п╬я┤п╨п╣"
 
 #~ msgid "invalid proportions input"
-#~ msgstr "неправильный ввод пропорций"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╡п╡п╬п╢ п©я─п╬п©п╬я─я├п╦п╧"
 
 #~ msgid "irregular time series not allowed"
-#~ msgstr "нерегулярные временные ряды не разрешены"
+#~ msgstr "п╫п╣я─п╣пЁя┐п╩я▐я─п╫я▀п╣ п╡я─п╣п╪п╣п╫п╫я▀п╣ я─я▐п╢я▀ п╫п╣ я─п╟п╥я─п╣я┬п╣п╫я▀"

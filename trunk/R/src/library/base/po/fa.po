@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 20:02+0100\n"
+"POT-Creation-Date: 2015-01-17 13:25+0100\n"
 "PO-Revision-Date: 2012-10-26 22:30+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -8019,6 +8019,7 @@ msgid "cannot open destfile '%s', reason '%s'"
 msgstr ""
 
 #: src/modules/internet/internet.c:382 src/modules/internet/internet.c:488
+#: src/modules/internet/libcurl.c:235
 #, c-format
 msgid "Trying URL '%s'\n"
 msgstr ""
@@ -8150,11 +8151,6 @@ msgstr ""
 
 #: src/modules/internet/libcurl.c:182
 msgid "only first element of 'destfile' argument used"
-msgstr ""
-
-#: src/modules/internet/libcurl.c:235
-#, c-format
-msgid "trying URL '%s'\n"
 msgstr ""
 
 #: src/modules/internet/libcurl.c:243

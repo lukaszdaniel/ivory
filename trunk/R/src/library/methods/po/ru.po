@@ -1,5 +1,5 @@
 # Russian translations for R
-# Русский перевод для R
+# п═я┐я│я│п╨п╦п╧ п©п╣я─п╣п╡п╬п╢ п╢п╩я▐ R
 #
 # Copyright (C) 2008 The R Foundation
 # This file is distributed under the same license as the R package.
@@ -10,32 +10,34 @@ msgstr ""
 "Project-Id-Version: R 2.9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-01-16 19:57+0100\n"
-"PO-Revision-Date: 2011-03-30 02:18+0300\n"
-"Last-Translator: Anton Korobeynikov <asl at math dot spbu dot ru>\n"
+"PO-Revision-Date: 2015-01-17 15:44+0100\n"
+"Last-Translator: е│ukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian <dactylorhiza at gmail>\n"
-"Language: \n"
+"Language: re\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=KOI8-R\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: class_support.c:33
 msgid "calling the C routine used as an initializer for 'externalptr' objects"
 msgstr ""
-"вызываю C процедуру, используемую как инициатор для 'externalptr' объектов"
+"п╡я▀п╥я▀п╡п╟я▌ C п©я─п╬я├п╣п╢я┐я─я┐, п╦я│п©п╬п╩я▄п╥я┐п╣п╪я┐я▌ п╨п╟п╨ п╦п╫п╦я├п╦п╟я┌п╬я─ п╢п╩я▐ 'externalptr' п╬п╠я┼п╣п╨я┌п╬п╡"
 
 #: do_substitute_direct.c:41
 msgid "invalid list for substitution"
-msgstr "неверный список для подстановки"
+msgstr "п╫п╣п╡п╣я─п╫я▀п╧ я│п©п╦я│п╬п╨ п╢п╩я▐ п©п╬п╢я│я┌п╟п╫п╬п╡п╨п╦"
 
 #: methods_list_dispatch.c:148
 msgid ""
 "could not find the skeleton calls for 'methods' (package detached?): expect "
 "very bad things to happen"
 msgstr ""
-"не могу найти основные вызовы для 'methods' (пакет отключен?): очевидно "
-"случилось что-то очень плохое"
+"п╫п╣ п╪п╬пЁя┐ п╫п╟п╧я┌п╦ п╬я│п╫п╬п╡п╫я▀п╣ п╡я▀п╥п╬п╡я▀ п╢п╩я▐ 'methods' (п©п╟п╨п╣я┌ п╬я┌п╨п╩я▌я┤п╣п╫?): п╬я┤п╣п╡п╦п╢п╫п╬ "
+"я│п╩я┐я┤п╦п╩п╬я│я▄ я┤я┌п╬-я┌п╬ п╬я┤п╣п╫я▄ п©п╩п╬я┘п╬п╣"
 
 #: methods_list_dispatch.c:214
 #, fuzzy, c-format
@@ -43,8 +45,8 @@ msgid ""
 "no 'allMethods' slot found in object of class \"%s\" used as methods list "
 "for function '%s'"
 msgstr ""
-"не найден \"allMethods\" слот в объекте класса \"%s\", использовавшийся как "
-"список методов для функции '%s'"
+"п╫п╣ п╫п╟п╧п╢п╣п╫ \"allMethods\" я│п╩п╬я┌ п╡ п╬п╠я┼п╣п╨я┌п╣ п╨п╩п╟я│я│п╟ \"%s\", п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╡я┬п╦п╧я│я▐ п╨п╟п╨ "
+"я│п©п╦я│п╬п╨ п╪п╣я┌п╬п╢п╬п╡ п╢п╩я▐ я└я┐п╫п╨я├п╦п╦ '%s'"
 
 #: methods_list_dispatch.c:367
 #, c-format
@@ -52,8 +54,8 @@ msgid ""
 "S language method selection got an error when called from internal dispatch "
 "for function '%s'"
 msgstr ""
-"выбор метода языка S вызвал ошибку, когда был вызван из внутренней отправки "
-"для функции '%s'"
+"п╡я▀п╠п╬я─ п╪п╣я┌п╬п╢п╟ я▐п╥я▀п╨п╟ S п╡я▀п╥п╡п╟п╩ п╬я┬п╦п╠п╨я┐, п╨п╬пЁп╢п╟ п╠я▀п╩ п╡я▀п╥п╡п╟п╫ п╦п╥ п╡п╫я┐я┌я─п╣п╫п╫п╣п╧ п╬я┌п©я─п╟п╡п╨п╦ "
+"п╢п╩я▐ я└я┐п╫п╨я├п╦п╦ '%s'"
 
 #: methods_list_dispatch.c:369
 msgid "Function name for method selection called internally"
@@ -74,14 +76,14 @@ msgstr ""
 #: methods_list_dispatch.c:442
 #, c-format
 msgid "no generic function definition found for '%s'"
-msgstr "не найдено определения общей функции для '%s'"
+msgstr "п╫п╣ п╫п╟п╧п╢п╣п╫п╬ п╬п©я─п╣п╢п╣п╩п╣п╫п╦я▐ п╬п╠я┴п╣п╧ я└я┐п╫п╨я├п╦п╦ п╢п╩я▐ '%s'"
 
 #: methods_list_dispatch.c:445
 #, fuzzy, c-format
 msgid ""
 "no generic function definition found for '%s' in the supplied environment"
 msgstr ""
-"Не найдено определения общей функции для '%s' в предоставленном окружении"
+"п²п╣ п╫п╟п╧п╢п╣п╫п╬ п╬п©я─п╣п╢п╣п╩п╣п╫п╦я▐ п╬п╠я┴п╣п╧ я└я┐п╫п╨я├п╦п╦ п╢п╩я▐ '%s' п╡ п©я─п╣п╢п╬я│я┌п╟п╡п╩п╣п╫п╫п╬п╪ п╬п╨я─я┐п╤п╣п╫п╦п╦"
 
 #: methods_list_dispatch.c:466
 msgid "The function name in the call to standardGeneric"
@@ -93,18 +95,18 @@ msgid ""
 "invalid generic function object for method selection for function '%s': "
 "expected a function or a primitive, got an object of class \"%s\""
 msgstr ""
-"не верный объект общей функции для выбора метода для функции '%s': ожидалась "
-"функция или примитив, получен объект класса \"%s\""
+"п╫п╣ п╡п╣я─п╫я▀п╧ п╬п╠я┼п╣п╨я┌ п╬п╠я┴п╣п╧ я└я┐п╫п╨я├п╦п╦ п╢п╩я▐ п╡я▀п╠п╬я─п╟ п╪п╣я┌п╬п╢п╟ п╢п╩я▐ я└я┐п╫п╨я├п╦п╦ '%s': п╬п╤п╦п╢п╟п╩п╟я│я▄ "
+"я└я┐п╫п╨я├п╦я▐ п╦п╩п╦ п©я─п╦п╪п╦я┌п╦п╡, п©п╬п╩я┐я┤п╣п╫ п╬п╠я┼п╣п╨я┌ п╨п╩п╟я│я│п╟ \"%s\""
 
 #: methods_list_dispatch.c:495
 #, c-format
 msgid "no direct or inherited method for function '%s' for this call"
 msgstr ""
-"нет прямого или наследованного метода для функции '%s' для данного вызова"
+"п╫п╣я┌ п©я─я▐п╪п╬пЁп╬ п╦п╩п╦ п╫п╟я│п╩п╣п╢п╬п╡п╟п╫п╫п╬пЁп╬ п╪п╣я┌п╬п╢п╟ п╢п╩я▐ я└я┐п╫п╨я├п╦п╦ '%s' п╢п╩я▐ п╢п╟п╫п╫п╬пЁп╬ п╡я▀п╥п╬п╡п╟"
 
 #: methods_list_dispatch.c:521 methods_list_dispatch.c:1041
 msgid "invalid object (non-function) used as method"
-msgstr "не верный объект (не функция) использован как метод"
+msgstr "п╫п╣ п╡п╣я─п╫я▀п╧ п╬п╠я┼п╣п╨я┌ (п╫п╣ я└я┐п╫п╨я├п╦я▐) п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫ п╨п╟п╨ п╪п╣я┌п╬п╢"
 
 #: methods_list_dispatch.c:539
 msgid "'symbol' must be a SYMSXP expression"
@@ -113,7 +115,7 @@ msgstr ""
 #: methods_list_dispatch.c:542
 #, c-format
 msgid "could not find symbol '%s' in frame of call"
-msgstr "не найден символ '%s' в структуре вызова"
+msgstr "п╫п╣ п╫п╟п╧п╢п╣п╫ я│п╦п╪п╡п╬п╩ '%s' п╡ я│я┌я─я┐п╨я┌я┐я─п╣ п╡я▀п╥п╬п╡п╟"
 
 #: methods_list_dispatch.c:550
 #, c-format
@@ -121,12 +123,12 @@ msgid ""
 "invalid symbol in checking for missing argument in method dispatch: expected "
 "a name, got an object of class \"%s\""
 msgstr ""
-"при проверки отсутствующего аргумента в отправке метода найден недопустимый "
-"символ: ожидалось имя, получен объект класса \"%s\""
+"п©я─п╦ п©я─п╬п╡п╣я─п╨п╦ п╬я┌я│я┐я┌я│я┌п╡я┐я▌я┴п╣пЁп╬ п╟я─пЁя┐п╪п╣п╫я┌п╟ п╡ п╬я┌п©я─п╟п╡п╨п╣ п╪п╣я┌п╬п╢п╟ п╫п╟п╧п╢п╣п╫ п╫п╣п╢п╬п©я┐я│я┌п╦п╪я▀п╧ "
+"я│п╦п╪п╡п╬п╩: п╬п╤п╦п╢п╟п╩п╬я│я▄ п╦п╪я▐, п©п╬п╩я┐я┤п╣п╫ п╬п╠я┼п╣п╨я┌ п╨п╩п╟я│я│п╟ \"%s\""
 
 #: methods_list_dispatch.c:553
 msgid "use of NULL environment is defunct"
-msgstr "использование NULL окружения более не поддерживается"
+msgstr "п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦п╣ NULL п╬п╨я─я┐п╤п╣п╫п╦я▐ п╠п╬п╩п╣п╣ п╫п╣ п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣я┌я│я▐"
 
 #: methods_list_dispatch.c:557
 #, c-format
@@ -134,8 +136,8 @@ msgid ""
 "invalid environment in checking for missing argument, '%s', in methods "
 "dispatch: got an object of class \"%s\""
 msgstr ""
-"при проверке отсутствующего аргумента обнаружено неверное окружение, '%s', в "
-"методах отправки: получен объект класса \"%s\""
+"п©я─п╦ п©я─п╬п╡п╣я─п╨п╣ п╬я┌я│я┐я┌я│я┌п╡я┐я▌я┴п╣пЁп╬ п╟я─пЁя┐п╪п╣п╫я┌п╟ п╬п╠п╫п╟я─я┐п╤п╣п╫п╬ п╫п╣п╡п╣я─п╫п╬п╣ п╬п╨я─я┐п╤п╣п╫п╦п╣, '%s', п╡ "
+"п╪п╣я┌п╬п╢п╟я┘ п╬я┌п©я─п╟п╡п╨п╦: п©п╬п╩я┐я┤п╣п╫ п╬п╠я┼п╣п╨я┌ п╨п╩п╟я│я│п╟ \"%s\""
 
 #: methods_list_dispatch.c:583
 #, c-format
@@ -143,8 +145,8 @@ msgid ""
 "object of class \"%s\" used as methods list for function '%s' ( no "
 "'argument' slot)"
 msgstr ""
-"объект класса \"%s\" использован как список методов для функции '%s' ( нет "
-"слота 'argument' )"
+"п╬п╠я┼п╣п╨я┌ п╨п╩п╟я│я│п╟ \"%s\" п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫ п╨п╟п╨ я│п©п╦я│п╬п╨ п╪п╣я┌п╬п╢п╬п╡ п╢п╩я▐ я└я┐п╫п╨я├п╦п╦ '%s' ( п╫п╣я┌ "
+"я│п╩п╬я┌п╟ 'argument' )"
 
 #: methods_list_dispatch.c:594
 #, c-format
@@ -152,8 +154,8 @@ msgid ""
 "(in selecting a method for function '%s') '...' and related variables cannot "
 "be used for methods dispatch"
 msgstr ""
-"(при выборе метода для функции '%s') '...' и родственные переменные не могут "
-"быть использованы для отправки методов"
+"(п©я─п╦ п╡я▀п╠п╬я─п╣ п╪п╣я┌п╬п╢п╟ п╢п╩я▐ я└я┐п╫п╨я├п╦п╦ '%s') '...' п╦ я─п╬п╢я│я┌п╡п╣п╫п╫я▀п╣ п©п╣я─п╣п╪п╣п╫п╫я▀п╣ п╫п╣ п╪п╬пЁя┐я┌ "
+"п╠я▀я┌я▄ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫я▀ п╢п╩я▐ п╬я┌п©я─п╟п╡п╨п╦ п╪п╣я┌п╬п╢п╬п╡"
 
 #: methods_list_dispatch.c:597
 #, c-format
@@ -161,8 +163,8 @@ msgid ""
 "(in selecting a method for function '%s') the 'environment' argument for "
 "dispatch must be an R environment; got an object of class \"%s\""
 msgstr ""
-"(при выборе метода для функции '%s') аргумент 'environment' для отправки "
-"должен быть R окружением; получен объект класса \"%s\""
+"(п©я─п╦ п╡я▀п╠п╬я─п╣ п╪п╣я┌п╬п╢п╟ п╢п╩я▐ я└я┐п╫п╨я├п╦п╦ '%s') п╟я─пЁя┐п╪п╣п╫я┌ 'environment' п╢п╩я▐ п╬я┌п©я─п╟п╡п╨п╦ "
+"п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ R п╬п╨я─я┐п╤п╣п╫п╦п╣п╪; п©п╬п╩я┐я┤п╣п╫ п╬п╠я┼п╣п╨я┌ п╨п╩п╟я│я│п╟ \"%s\""
 
 #: methods_list_dispatch.c:611 methods_list_dispatch.c:623
 #: methods_list_dispatch.c:994
@@ -171,13 +173,13 @@ msgid ""
 "error in evaluating the argument '%s' in selecting a method for function "
 "'%s': %s"
 msgstr ""
-"ошибка при оценке аргумента '%s' при выборе метода для функции '%s': %s"
+"п╬я┬п╦п╠п╨п╟ п©я─п╦ п╬я├п╣п╫п╨п╣ п╟я─пЁя┐п╪п╣п╫я┌п╟ '%s' п©я─п╦ п╡я▀п╠п╬я─п╣ п╪п╣я┌п╬п╢п╟ п╢п╩я▐ я└я┐п╫п╨я├п╦п╦ '%s': %s"
 
 #: methods_list_dispatch.c:631
 #, c-format
 msgid "no matching method for function '%s' (argument '%s', with class \"%s\")"
 msgstr ""
-"нет соответствующего метода для функции '%s' (аргумент '%s', с классом \"%s"
+"п╫п╣я┌ я│п╬п╬я┌п╡п╣я┌я│я┌п╡я┐я▌я┴п╣пЁп╬ п╪п╣я┌п╬п╢п╟ п╢п╩я▐ я└я┐п╫п╨я├п╦п╦ '%s' (п╟я─пЁя┐п╪п╣п╫я┌ '%s', я│ п╨п╩п╟я│я│п╬п╪ \"%s"
 "\")"
 
 #: methods_list_dispatch.c:638
@@ -185,37 +187,37 @@ msgstr ""
 msgid ""
 "recursive use of function '%s' in method selection, with no default method"
 msgstr ""
-"рекурсивное использование функции '%s' в выборе метода, с отсутствием метода "
-"по-умолчанию"
+"я─п╣п╨я┐я─я│п╦п╡п╫п╬п╣ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦п╣ я└я┐п╫п╨я├п╦п╦ '%s' п╡ п╡я▀п╠п╬я─п╣ п╪п╣я┌п╬п╢п╟, я│ п╬я┌я│я┐я┌я│я┌п╡п╦п╣п╪ п╪п╣я┌п╬п╢п╟ "
+"п©п╬-я┐п╪п╬п╩я┤п╟п╫п╦я▌"
 
 #: methods_list_dispatch.c:671
 msgid ""
 "internal error in 'callNextMethod': '.nextMethod' was not assigned in the "
 "frame of the method call"
 msgstr ""
-"внутренняя ошибка в 'callNextMethod': '.nextMethod' не был назначен в  "
-"структуре вызова метода"
+"п╡п╫я┐я┌я─п╣п╫п╫я▐я▐ п╬я┬п╦п╠п╨п╟ п╡ 'callNextMethod': '.nextMethod' п╫п╣ п╠я▀п╩ п╫п╟п╥п╫п╟я┤п╣п╫ п╡  "
+"я│я┌я─я┐п╨я┌я┐я─п╣ п╡я▀п╥п╬п╡п╟ п╪п╣я┌п╬п╢п╟"
 
 #: methods_list_dispatch.c:698
 #, c-format
 msgid "error in evaluating a 'primitive' next method: %s"
-msgstr "ошибка при оценке 'primitive' следующего метода: %s"
+msgstr "п╬я┬п╦п╠п╨п╟ п©я─п╦ п╬я├п╣п╫п╨п╣ 'primitive' я│п╩п╣п╢я┐я▌я┴п╣пЁп╬ п╪п╣я┌п╬п╢п╟: %s"
 
 #: methods_list_dispatch.c:796
 #, c-format
 msgid "'%s' must be a single string (got a character vector of length %d)"
 msgstr ""
-"'%s' должна быть одиночной строкой (получен символьный вектор длины %d)"
+"'%s' п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ п╬п╢п╦п╫п╬я┤п╫п╬п╧ я│я┌я─п╬п╨п╬п╧ (п©п╬п╩я┐я┤п╣п╫ я│п╦п╪п╡п╬п╩я▄п╫я▀п╧ п╡п╣п╨я┌п╬я─ п╢п╩п╦п╫я▀ %d)"
 
 #: methods_list_dispatch.c:800
 #, c-format
 msgid "'%s' must be a non-empty string; got an empty string"
-msgstr "'%s' должна быть не пустой строкой; получена пустая строка"
+msgstr "'%s' п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ п╫п╣ п©я┐я│я┌п╬п╧ я│я┌я─п╬п╨п╬п╧; п©п╬п╩я┐я┤п╣п╫п╟ п©я┐я│я┌п╟я▐ я│я┌я─п╬п╨п╟"
 
 #: methods_list_dispatch.c:804
 #, c-format
 msgid "'%s' must be a single string (got an object of class \"%s\")"
-msgstr "'%s' должна быть одиночной строкой (получен объект класса \"%s\")"
+msgstr "'%s' п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ п╬п╢п╦п╫п╬я┤п╫п╬п╧ я│я┌я─п╬п╨п╬п╧ (п©п╬п╩я┐я┤п╣п╫ п╬п╠я┼п╣п╨я┌ п╨п╩п╟я│я│п╟ \"%s\")"
 
 #: methods_list_dispatch.c:832
 msgid "The internal prefix (e.g., \"C\") for a meta-data object"
@@ -235,12 +237,12 @@ msgstr ""
 #, fuzzy
 msgid "class should be either a character-string name or a class definition"
 msgstr ""
-"Класс должен быть либо именем-текстовой строкой либо определением класса"
+"п п╩п╟я│я│ п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╩п╦п╠п╬ п╦п╪п╣п╫п╣п╪-я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧ п╩п╦п╠п╬ п╬п©я─п╣п╢п╣п╩п╣п╫п╦п╣п╪ п╨п╩п╟я│я│п╟"
 
 #: methods_list_dispatch.c:954
 #, fuzzy, c-format
 msgid "failed to get the generic for the primitive \"%s\""
-msgstr "не могу найти общую функцию для примитива \"%s\""
+msgstr "п╫п╣ п╪п╬пЁя┐ п╫п╟п╧я┌п╦ п╬п╠я┴я┐я▌ я└я┐п╫п╨я├п╦я▌ п╢п╩я▐ п©я─п╦п╪п╦я┌п╦п╡п╟ \"%s\""
 
 #: methods_list_dispatch.c:960
 #, fuzzy, c-format
@@ -248,7 +250,7 @@ msgid ""
 "expected a generic function or a primitive for dispatch, got an object of "
 "class \"%s\""
 msgstr ""
-"Ожидалась общая функция либо примитив для отправки, получен объект класса "
+"п·п╤п╦п╢п╟п╩п╟я│я▄ п╬п╠я┴п╟я▐ я└я┐п╫п╨я├п╦я▐ п╩п╦п╠п╬ п©я─п╦п╪п╦я┌п╦п╡ п╢п╩я▐ п╬я┌п©я─п╟п╡п╨п╦, п©п╬п╩я┐я┤п╣п╫ п╬п╠я┼п╣п╨я┌ п╨п╩п╟я│я│п╟ "
 "\"%s\""
 
 #: methods_list_dispatch.c:972
@@ -257,8 +259,8 @@ msgid ""
 "generic \"%s\" seems not to have been initialized for table dispatch---need "
 "to have '.SigArgs' and '.AllMtable' assigned in its environment"
 msgstr ""
-"Общая \"%s\", кажется, не была инициализирована для таблицы отправки---"
-"необходимо иметь .SigArgs и .AllMtable установленными в этом окружении"
+"п·п╠я┴п╟я▐ \"%s\", п╨п╟п╤п╣я┌я│я▐, п╫п╣ п╠я▀п╩п╟ п╦п╫п╦я├п╦п╟п╩п╦п╥п╦я─п╬п╡п╟п╫п╟ п╢п╩я▐ я┌п╟п╠п╩п╦я├я▀ п╬я┌п©я─п╟п╡п╨п╦---"
+"п╫п╣п╬п╠я┘п╬п╢п╦п╪п╬ п╦п╪п╣я┌я▄ .SigArgs п╦ .AllMtable я┐я│я┌п╟п╫п╬п╡п╩п╣п╫п╫я▀п╪п╦ п╡ я█я┌п╬п╪ п╬п╨я─я┐п╤п╣п╫п╦п╦"
 
 #: methods_list_dispatch.c:976
 msgid "'.SigArgs' is shorter than '.SigLength' says it should be"
@@ -272,5 +274,5 @@ msgstr ""
 #~ "in processing 'callNextMethod', found a '...' in the matched call, but no "
 #~ "corresponding '...' argument"
 #~ msgstr ""
-#~ "при разборе 'callNextMethod', найден '...' в совпадающем вызове, но нет "
-#~ "соответствующего аргумента '...'"
+#~ "п©я─п╦ я─п╟п╥п╠п╬я─п╣ 'callNextMethod', п╫п╟п╧п╢п╣п╫ '...' п╡ я│п╬п╡п©п╟п╢п╟я▌я┴п╣п╪ п╡я▀п╥п╬п╡п╣, п╫п╬ п╫п╣я┌ "
+#~ "я│п╬п╬я┌п╡п╣я┌я│я┌п╡я┐я▌я┴п╣пЁп╬ п╟я─пЁя┐п╪п╣п╫я┌п╟ '...'"

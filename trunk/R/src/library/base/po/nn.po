@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 20:02+0100\n"
+"POT-Creation-Date: 2015-01-17 13:25+0100\n"
 "PO-Revision-Date: 2011-02-18 09:09+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -8447,6 +8447,7 @@ msgid "cannot open destfile '%s', reason '%s'"
 msgstr "klarte ikkje opna målfila «%s», av grunnen «%s»"
 
 #: src/modules/internet/internet.c:382 src/modules/internet/internet.c:488
+#: src/modules/internet/libcurl.c:235
 #, fuzzy, c-format
 msgid "Trying URL '%s'\n"
 msgstr "prøver adressa «%s»\n"
@@ -8582,11 +8583,6 @@ msgstr "berre det første elementet i «url»-argumentet vert brukt"
 #: src/modules/internet/libcurl.c:182
 msgid "only first element of 'destfile' argument used"
 msgstr "berre det første elementet i «destfile»-argumentet vert brukt"
-
-#: src/modules/internet/libcurl.c:235
-#, fuzzy, c-format
-msgid "trying URL '%s'\n"
-msgstr "prøver adressa «%s»\n"
 
 #: src/modules/internet/libcurl.c:243
 #, c-format
@@ -9746,6 +9742,10 @@ msgstr "X11-modulen kan ikkje lastast"
 #: src/unix/X11.c:145 src/unix/X11.c:151 src/unix/X11.c:157 src/unix/X11.c:163
 msgid "X11 is not available"
 msgstr "X11 er ikkje tilgjengeleg"
+
+#, fuzzy
+#~ msgid "trying URL '%s'\n"
+#~ msgstr "prøver adressa «%s»\n"
 
 #, fuzzy
 #~ msgid "'match.call()' function was called from outside a function"

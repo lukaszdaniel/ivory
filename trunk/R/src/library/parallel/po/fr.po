@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-01-16 19:57+0100\n"
-"PO-Revision-Date: 2011-10-15 18:02+0100\n"
-"Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
+"PO-Revision-Date: 2015-01-17 15:45+0100\n"
+"Last-Translator: ≈Åukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: French <R-core@r-project.org>\n"
-"Language: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2;plural=(n > 1);\n"
-"X-Poedit-Language: French\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: fork.c:80
 #, c-format
@@ -45,7 +46,7 @@ msgstr "le processus fils %d n'existe pas"
 
 #: fork.c:251 fork.c:254
 msgid "unable to create a pipe"
-msgstr "impossible de crÈer un canal (pipe)"
+msgstr "impossible de cr√©er un canal (pipe)"
 
 #: fork.c:257
 #, c-format
@@ -55,7 +56,7 @@ msgstr ""
 #: fork.c:272
 #, c-format
 msgid "unable to fork, possible reason: %s"
-msgstr "impossible de crÈer une nouvelle branche, raison possible : %s"
+msgstr "impossible de cr√©er une nouvelle branche, raison possible : %s"
 
 #: fork.c:299
 #, c-format
@@ -69,7 +70,7 @@ msgstr ""
 
 #: fork.c:318
 msgid "memory allocation error"
-msgstr "erreur d'allocation mÈmoire"
+msgstr "erreur d'allocation m√©moire"
 
 #: fork.c:359
 msgid "descriptors must be integers"
@@ -78,15 +79,15 @@ msgstr ""
 #: fork.c:371
 msgid "only children can send data to the master process"
 msgstr ""
-"seuls des processus enfants peuvent envoyer des donnÈes ‡ un processus maÓtre"
+"seuls des processus enfants peuvent envoyer des donn√©es √† un processus ma√Ætre"
 
 #: fork.c:373
 msgid "there is no pipe to the master process"
-msgstr "aucun canal vers le processus maÓtre"
+msgstr "aucun canal vers le processus ma√Ætre"
 
 #: fork.c:375
 msgid "content to send must be RAW, use serialize() if needed"
-msgstr "le contenu ‡ envoyer doit Ítre RAW, utilisez serialize() si nÈcessaire"
+msgstr "le contenu √† envoyer doit √™tre RAW, utilisez serialize() si n√©cessaire"
 
 #: fork.c:379
 #, c-format
@@ -95,12 +96,12 @@ msgstr ""
 
 #: fork.c:384 fork.c:391 fork.c:715
 msgid "write error, closing pipe to the master"
-msgstr "erreur d'Ècriture, fermeture du canal vers le processus maÓtre"
+msgstr "erreur d'√©criture, fermeture du canal vers le processus ma√Ætre"
 
 #: fork.c:404
 msgid "only the master process can send data to a child process"
 msgstr ""
-"seul le processus maÓtre peut envoyer des donnÈes vers un processus fils"
+"seul le processus ma√Ætre peut envoyer des donn√©es vers un processus fils"
 
 #: fork.c:405
 msgid "what must be a raw vector"
@@ -113,12 +114,12 @@ msgstr "le processus fils %d n'existe pas"
 
 #: fork.c:417
 msgid "write error"
-msgstr "erreur d'Ècriture"
+msgstr "erreur d'√©criture"
 
 #: fork.c:485 fork.c:609
 #, c-format
 msgid "error '%s' in select"
-msgstr "erreur '%s' lors de la sÈlection"
+msgstr "erreur '%s' lors de la s√©lection"
 
 #: fork.c:499
 #, c-format
@@ -143,17 +144,17 @@ msgstr ""
 #: fork.c:697
 #, fuzzy
 msgid "'mckill' failed"
-msgstr "mckill a ÈchouÈ"
+msgstr "mckill a √©chou√©"
 
 #: fork.c:705
 #, fuzzy, c-format
 msgid "child %d: 'mcexit' called\n"
-msgstr "mcexit a ÈchouÈ"
+msgstr "mcexit a √©chou√©"
 
 #: fork.c:707
 #, fuzzy
 msgid "'mcexit' can only be used in a child process"
-msgstr "mcexit peut seulement Ítre utilisÈ avec un processus fils"
+msgstr "mcexit peut seulement √™tre utilis√© avec un processus fils"
 
 #: fork.c:719
 #, c-format
@@ -168,7 +169,7 @@ msgstr "le processus fils %d n'existe pas"
 #: fork.c:728
 #, fuzzy
 msgid "'mcexit()' function failed"
-msgstr "mcexit a ÈchouÈ"
+msgstr "mcexit a √©chou√©"
 
 #: fork.c:757 fork.c:766
 msgid "invalid CPU affinity specification"

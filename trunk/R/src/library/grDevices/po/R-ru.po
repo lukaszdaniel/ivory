@@ -1,5 +1,5 @@
 # Russian translations for R
-# Русский перевод для R
+# п═я┐я│я│п╨п╦п╧ п©п╣я─п╣п╡п╬п╢ п╢п╩я▐ R
 #
 # Copyright (C) 2008 The R Foundation
 # This file is distributed under the same license as the R package.
@@ -10,16 +10,17 @@ msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2014-08-10 17:28\n"
-"PO-Revision-Date: 2011-10-18 19:29-0600\n"
-"Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
+"PO-Revision-Date: 2015-01-17 15:02+0100\n"
+"Last-Translator: е│ukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
-"Language: \n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=KOI8-R\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Russian\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/windows/windows.R: gettext("  #plot calls are:", domain = "R-grDevices")
 #: R/windows/windows.R:0
@@ -31,7 +32,7 @@ msgstr ""
 #: R/convertColor.R:0
 #, fuzzy
 msgid "'%s' argument disagrees with definition of '%s'"
-msgstr "'from.ref.white' не согласуется с определением"
+msgstr "'from.ref.white' п╫п╣ я│п╬пЁп╩п╟я│я┐п╣я┌я│я▐ я│ п╬п©я─п╣п╢п╣п╩п╣п╫п╦п╣п╪"
 
 #. R/postscript.R: gettextf("'%s' argument is not an object of class %s", "font", dQuote("CIDFont"))
 #. R/recordplot.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("recordedplot"))
@@ -39,34 +40,34 @@ msgstr "'from.ref.white' не согласуется с определением"
 #: R/postscript.R:0 R/recordplot.R:0 R/windows/windows.R:0
 #, fuzzy
 msgid "'%s' argument is not an object of class %s"
-msgstr "аргумент не принадлежит к классу \"recordedplot\""
+msgstr "п╟я─пЁя┐п╪п╣п╫я┌ п╫п╣ п©я─п╦п╫п╟п╢п╩п╣п╤п╦я┌ п╨ п╨п╩п╟я│я│я┐ \"recordedplot\""
 
 #. R/convertColor.R: gettextf("'%s' argument must be an object of class %s or a string", "from", dQuote("colorConverter"))
 #. R/convertColor.R: gettextf("'%s' argument must be an object of class %s or a string", "to", dQuote("colorConverter"))
 #: R/convertColor.R:0
 #, fuzzy
 msgid "'%s' argument must be an object of class %s or a string"
-msgstr "'nbin' должен быть числовым вектором длиной 1 или 2"
+msgstr "'nbin' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┤п╦я│п╩п╬п╡я▀п╪ п╡п╣п╨я┌п╬я─п╬п╪ п╢п╩п╦п╫п╬п╧ 1 п╦п╩п╦ 2"
 
 #. R/smooth2d.R: gettextf("'%s' argument must be numeric", "bandwidth")
 #: R/smooth2d.R:0
 #, fuzzy
 msgid "'%s' argument must be numeric"
-msgstr "rgb-матрица должна быть числовой"
+msgstr "rgb-п╪п╟я┌я─п╦я├п╟ п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ я┤п╦я│п╩п╬п╡п╬п╧"
 
 #. R/colorRamp.R: gettextf("'%s' argument must be positive", "bias")
 #. R/smooth2d.R: gettextf("'%s' argument must be positive", "bandwidth")
 #: R/colorRamp.R:0 R/smooth2d.R:0
 #, fuzzy
 msgid "'%s' argument must be positive"
-msgstr "'bias' должен быть положительным"
+msgstr "'bias' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п©п╬п╩п╬п╤п╦я┌п╣п╩я▄п╫я▀п╪"
 
 #. R/device.R: gettextf("'%s' function called without an open graphics device", "dev.control()")
 #. R/device.R: gettextf("'%s' function called without an open graphics device", "dev.displaylist()")
 #: R/device.R:0
 #, fuzzy
 msgid "'%s' function called without an open graphics device"
-msgstr "dev.control() вызван без открытия графического устройства"
+msgstr "dev.control() п╡я▀п╥п╡п╟п╫ п╠п╣п╥ п╬я┌п╨я─я▀я┌п╦я▐ пЁя─п╟я└п╦я┤п╣я│п╨п╬пЁп╬ я┐я│я┌я─п╬п╧я│я┌п╡п╟"
 
 #. R/colorRamp.R: stop("'alpha' must be false if 'space' is specified")
 #: R/colorRamp.R:0
@@ -76,17 +77,17 @@ msgstr ""
 #. R/calc.R: stop("'coef' must not be negative")
 #: R/calc.R:0
 msgid "'coef' must not be negative"
-msgstr "'coef'  не должен быть отрицательным"
+msgstr "'coef'  п╫п╣ п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╬я┌я─п╦я├п╟я┌п╣п╩я▄п╫я▀п╪"
 
 #. R/device.R: stop("'device' should be a function")
 #: R/device.R:0
 msgid "'device' should be a function"
-msgstr "'устройство' должно быть функцией"
+msgstr "'я┐я│я┌я─п╬п╧я│я┌п╡п╬' п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ я└я┐п╫п╨я├п╦п╣п╧"
 
 #. R/raster.R: warning("'drop' is always implicitly FALSE in '[.raster'")
 #: R/raster.R:0
 msgid "'drop' is always implicitly FALSE in '[.raster'"
-msgstr "'drop' всегда неявно выставлен в FALSE в '[.raster'"
+msgstr "'drop' п╡я│п╣пЁп╢п╟ п╫п╣я▐п╡п╫п╬ п╡я▀я│я┌п╟п╡п╩п╣п╫ п╡ FALSE п╡ '[.raster'"
 
 #. R/unix/dev2bitmap.R: stop("'file' argument is missing with no default")
 #. R/unix/dev2bitmap.R: stop("'file' argument is missing with no default")
@@ -95,7 +96,7 @@ msgstr "'drop' всегда неявно выставлен в FALSE в '[.raster'"
 #: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
 #, fuzzy
 msgid "'file' argument is missing with no default"
-msgstr "аргумент пропущен, умолчания нет"
+msgstr "п╟я─пЁя┐п╪п╣п╫я┌ п©я─п╬п©я┐я┴п╣п╫, я┐п╪п╬п╩я┤п╟п╫п╦я▐ п╫п╣я┌"
 
 #. R/postscript.R: stop("'file' argument must be a non-empty character string")
 #. R/unix/dev2bitmap.R: stop("'file' argument must be a non-empty character string")
@@ -105,42 +106,42 @@ msgstr "аргумент пропущен, умолчания нет"
 #: R/postscript.R:0 R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
 #, fuzzy
 msgid "'file' argument must be a non-empty character string"
-msgstr "'file' должен быть непустой символьной строкой"
+msgstr "'file' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╫п╣п©я┐я│я┌п╬п╧ я│п╦п╪п╡п╬п╩я▄п╫п╬п╧ я│я┌я─п╬п╨п╬п╧"
 
 #. R/convertColor.R: stop("'gamma' argument must be a scalar or 'sRGB' value")
 #: R/convertColor.R:0
 #, fuzzy
 msgid "'gamma' argument must be a scalar or 'sRGB' value"
-msgstr "'gamma' должна быть скаляром или 'sRGB'"
+msgstr "'gamma' п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ я│п╨п╟п╩я▐я─п╬п╪ п╦п╩п╦ 'sRGB'"
 
 #. R/device.R: stop("'name' must be a character vector")
 #: R/device.R:0
 msgid "'name' must be a character vector"
-msgstr "'name' должен быть непустой текстовой строкой"
+msgstr "'name' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╫п╣п©я┐я│я┌п╬п╧ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧"
 
 #. R/postscript.R: stop("'name.opt' argument must be character, name of an existing list")
 #: R/postscript.R:0
 #, fuzzy
 msgid "'name.opt' argument must be character, name of an existing list"
-msgstr "'name.opt' должен быть символом, именем существующего списка"
+msgstr "'name.opt' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я│п╦п╪п╡п╬п╩п╬п╪, п╦п╪п╣п╫п╣п╪ я│я┐я┴п╣я│я┌п╡я┐я▌я┴п╣пЁп╬ я│п©п╦я│п╨п╟"
 
 #. R/smooth2d.R: stop("'nbin' argument must be numeric of length 1 or 2")
 #: R/smooth2d.R:0
 #, fuzzy
 msgid "'nbin' argument must be numeric of length 1 or 2"
-msgstr "'nbin' должен быть числовым вектором длиной 1 или 2"
+msgstr "'nbin' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┤п╦я│п╩п╬п╡я▀п╪ п╡п╣п╨я┌п╬я─п╬п╪ п╢п╩п╦п╫п╬п╧ 1 п╦п╩п╦ 2"
 
 #. R/utils.R: stop("'r' must be a 'range()' result, hence of length 2")
 #: R/utils.R:0
 #, fuzzy
 msgid "'r' must be a 'range()' result, hence of length 2"
-msgstr "'r' должен быть \"range\", то есть длины 2"
+msgstr "'r' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ \"range\", я┌п╬ п╣я│я┌я▄ п╢п╩п╦п╫я▀ 2"
 
 #. R/colorstuff.R: stop("'r', 'g', and 'b' arguments must be in [0, maxColorValue]")
 #: R/colorstuff.R:0
 #, fuzzy
 msgid "'r', 'g', and 'b' arguments must be in [0, maxColorValue]"
-msgstr "rgb-значения должны быть в пределах [0, maxColorValue]"
+msgstr "rgb-п╥п╫п╟я┤п╣п╫п╦я▐ п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ п╡ п©я─п╣п╢п╣п╩п╟я┘ [0, maxColorValue]"
 
 #. R/unix/png.R: stop("'res' must be specified unless 'units = \"px\"'")
 #. R/windows/cairo.R: stop("'res' must be specified unless 'units = \"px\"'")
@@ -150,37 +151,37 @@ msgstr "rgb-значения должны быть в пределах [0, maxColorValue]"
 #. R/windows/png.R: stop("'res' must be specified unless 'units = \"px\"'")
 #: R/unix/png.R:0 R/windows/cairo.R:0 R/windows/png.R:0
 msgid "'res' must be specified unless 'units = \"px\"'"
-msgstr "'res' должен быть определен до тех пор пока 'units = \"px\"'"
+msgstr "'res' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╬п©я─п╣п╢п╣п╩п╣п╫ п╢п╬ я┌п╣я┘ п©п╬я─ п©п╬п╨п╟ 'units = \"px\"'"
 
 #. R/colorstuff.R: stop("'start' and 'end' must be distinct and in [0, 1].")
 #: R/colorstuff.R:0
 msgid "'start' and 'end' must be distinct and in [0, 1]."
-msgstr "'start' и 'end' должны быть различными и в пределах [0, 1]."
+msgstr "'start' п╦ 'end' п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ я─п╟п╥п╩п╦я┤п╫я▀п╪п╦ п╦ п╡ п©я─п╣п╢п╣п╩п╟я┘ [0, 1]."
 
 #. R/windows/windows.R: stop("'type' not applicable to the R console")
 #: R/windows/windows.R:0
 msgid "'type' not applicable to the R console"
-msgstr "'type' неприменим к консоли R"
+msgstr "'type' п╫п╣п©я─п╦п╪п╣п╫п╦п╪ п╨ п╨п╬п╫я│п╬п╩п╦ R"
 
 #. R/xyz.coords.R: stop("'x' and 'y' lengths differ")
 #: R/xyz.coords.R:0
 msgid "'x' and 'y' lengths differ"
-msgstr "длины 'x' и 'y' различаются"
+msgstr "п╢п╩п╦п╫я▀ 'x' п╦ 'y' я─п╟п╥п╩п╦я┤п╟я▌я┌я│я▐"
 
 #. R/xyz.coords.R: stop("'x' is a list, but does not have components 'x' and 'y'")
 #: R/xyz.coords.R:0
 msgid "'x' is a list, but does not have components 'x' and 'y'"
-msgstr "'x' является списком, но не содержит компонент 'x' и 'y'"
+msgstr "'x' я▐п╡п╩я▐п╣я┌я│я▐ я│п©п╦я│п╨п╬п╪, п╫п╬ п╫п╣ я│п╬п╢п╣я─п╤п╦я┌ п╨п╬п╪п©п╬п╫п╣п╫я┌ 'x' п╦ 'y'"
 
 #. R/xyz.coords.R: stop("'x' is a list, but does not have components 'x', 'y'  and 'z'")
 #: R/xyz.coords.R:0
 msgid "'x' is a list, but does not have components 'x', 'y'  and 'z'"
-msgstr "'x' является списком, но не содержит компонент 'x', 'y' и 'z'"
+msgstr "'x' я▐п╡п╩я▐п╣я┌я│я▐ я│п©п╦я│п╨п╬п╪, п╫п╬ п╫п╣ я│п╬п╢п╣я─п╤п╦я┌ п╨п╬п╪п©п╬п╫п╣п╫я┌ 'x', 'y' п╦ 'z'"
 
 #. R/xyz.coords.R: stop("'x', 'y' and 'z' lengths differ")
 #: R/xyz.coords.R:0
 msgid "'x', 'y' and 'z' lengths differ"
-msgstr "длины 'x', 'y' и 'z' различаются"
+msgstr "п╢п╩п╦п╫я▀ 'x', 'y' п╦ 'z' я─п╟п╥п╩п╦я┤п╟я▌я┌я│я▐"
 
 #. R/unix/dev2bitmap.R: gettextf("Available devices are:\n%s", paste(gsdevs, collapse = "\n"))
 #. R/windows/dev2bitmap.R: gettextf("Available devices are:\n%s", paste(gsdevs, collapse = "\n"))
@@ -189,13 +190,13 @@ msgstr "длины 'x', 'y' и 'z' различаются"
 msgid ""
 "Available devices are:\n"
 "%s"
-msgstr "Доступные устройства: %s"
+msgstr "п■п╬я│я┌я┐п©п╫я▀п╣ я┐я│я┌я─п╬п╧я│я┌п╡п╟: %s"
 
 #. R/convertColor.R: gettextf("Color space converter: %s", x$name, domain = "R-grDevices")
 #: R/convertColor.R:0
 #, fuzzy
 msgid "Color space converter: %s"
-msgstr "Конвертер цветового пространства:"
+msgstr "п п╬п╫п╡п╣я─я┌п╣я─ я├п╡п╣я┌п╬п╡п╬пЁп╬ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╟:"
 
 #. R/windows/windows.R: gettextf("  Contains %d out of a maximum %d plots", x[[2L]], x[[3L]], domain = "R-grDevices")
 #: R/windows/windows.R:0
@@ -215,23 +216,23 @@ msgstr ""
 #: R/postscript.R:0 R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
 #, fuzzy
 msgid "GhostScript was not found"
-msgstr "устройство '%s' не найдено"
+msgstr "я┐я│я┌я─п╬п╧я│я┌п╡п╬ '%s' п╫п╣ п╫п╟п╧п╢п╣п╫п╬"
 
 #. R/postscript.R: stop("Invalid font database name")
 #: R/postscript.R:0
 msgid "Invalid font database name"
-msgstr "Неправильное имя базы данных шрифтов"
+msgstr "п²п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╦п╪я▐ п╠п╟п╥я▀ п╢п╟п╫п╫я▀я┘ я┬я─п╦я└я┌п╬п╡"
 
 #. R/postscript.R: stop("Invalid font type")
 #: R/postscript.R:0
 msgid "Invalid font type"
-msgstr "Неправильный тип шрифта"
+msgstr "п²п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я┌п╦п© я┬я─п╦я└я┌п╟"
 
 #. R/convertColor.R: gettextf("Reference white: %s", x$reference.white, domain = "R-grDevices")
 #: R/convertColor.R:0
 #, fuzzy
 msgid "Reference white: %s"
-msgstr "Стандартный белый:"
+msgstr "п║я┌п╟п╫п╢п╟я─я┌п╫я▀п╧ п╠п╣п╩я▀п╧:"
 
 #. R/windows/windows.R: gettext("Saved Plots from R version 1.4.0 or later", domain = "R-grDevices")
 #: R/windows/windows.R:0
@@ -252,77 +253,77 @@ msgstr ""
 #: R/raster.R:0
 #, fuzzy
 msgid "a raster array must be numeric"
-msgstr "Растровая многомерная матрица должна быть числовой"
+msgstr "п═п╟я│я┌я─п╬п╡п╟я▐ п╪п╫п╬пЁп╬п╪п╣я─п╫п╟я▐ п╪п╟я┌я─п╦я├п╟ п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ я┤п╦я│п╩п╬п╡п╬п╧"
 
 #. R/raster.R: stop("a raster array must have exactly 3 dimensions")
 #: R/raster.R:0
 #, fuzzy
 msgid "a raster array must have exactly 3 dimensions"
-msgstr "Растровая многомерная матрица должна быть в точности трехмерной"
+msgstr "п═п╟я│я┌я─п╬п╡п╟я▐ п╪п╫п╬пЁп╬п╪п╣я─п╫п╟я▐ п╪п╟я┌я─п╦я├п╟ п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ п╡ я┌п╬я┤п╫п╬я│я┌п╦ я┌я─п╣я┘п╪п╣я─п╫п╬п╧"
 
 #. R/raster.R: stop("a raster array must have exactly 3 or 4 planes")
 #: R/raster.R:0
 #, fuzzy
 msgid "a raster array must have exactly 3 or 4 planes"
 msgstr ""
-"Растровая многомерная матрица должна иметь в точности 3 или 4 плоскости "
+"п═п╟я│я┌я─п╬п╡п╟я▐ п╪п╫п╬пЁп╬п╪п╣я─п╫п╟я▐ п╪п╟я┌я─п╦я├п╟ п╢п╬п╩п╤п╫п╟ п╦п╪п╣я┌я▄ п╡ я┌п╬я┤п╫п╬я│я┌п╦ 3 п╦п╩п╦ 4 п©п╩п╬я│п╨п╬я│я┌п╦ "
 
 #. R/raster.R: stop("a raster matrix must be character, or numeric, or logical")
 #: R/raster.R:0
 #, fuzzy
 msgid "a raster matrix must be character, or numeric, or logical"
 msgstr ""
-"Растровая матрица должна быть символом, числом или логическим выражением"
+"п═п╟я│я┌я─п╬п╡п╟я▐ п╪п╟я┌я─п╦я├п╟ п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ я│п╦п╪п╡п╬п╩п╬п╪, я┤п╦я│п╩п╬п╪ п╦п╩п╦ п╩п╬пЁп╦я┤п╣я│п╨п╦п╪ п╡я▀я─п╟п╤п╣п╫п╦п╣п╪"
 
 #. R/postscript.R: warning("argument 'append' is for back-compatibility and will be ignored", immediate. = TRUE)
 #: R/postscript.R:0
 msgid "argument 'append' is for back-compatibility and will be ignored"
 msgstr ""
-"аргумент 'append' предназначен для обратной совместимости и будет пропущен"
+"п╟я─пЁя┐п╪п╣п╫я┌ 'append' п©я─п╣п╢п╫п╟п╥п╫п╟я┤п╣п╫ п╢п╩я▐ п╬п╠я─п╟я┌п╫п╬п╧ я│п╬п╡п╪п╣я│я┌п╦п╪п╬я│я┌п╦ п╦ п╠я┐п╢п╣я┌ п©я─п╬п©я┐я┴п╣п╫"
 
 #. R/device.R: stop("argument is missing with no default")
 #: R/device.R:0
 msgid "argument is missing with no default"
-msgstr "аргумент пропущен, умолчания нет"
+msgstr "п╟я─пЁя┐п╪п╣п╫я┌ п©я─п╬п©я┐я┴п╣п╫, я┐п╪п╬п╩я┤п╟п╫п╦я▐ п╫п╣я┌"
 
 #. R/xyz.coords.R: stop("at least 2 columns are needed")
 #: R/xyz.coords.R:0
 #, fuzzy
 msgid "at least 2 columns are needed"
-msgstr "нужны по крайней мере 2 колонки"
+msgstr "п╫я┐п╤п╫я▀ п©п╬ п╨я─п╟п╧п╫п╣п╧ п╪п╣я─п╣ 2 п╨п╬п╩п╬п╫п╨п╦"
 
 #. R/colorstuff.R: stop("at least 3 columns are needed")
 #: R/colorstuff.R:0
 #, fuzzy
 msgid "at least 3 columns are needed"
-msgstr "нужны по крайней мере 3 колонки"
+msgstr "п╫я┐п╤п╫я▀ п©п╬ п╨я─п╟п╧п╫п╣п╧ п╪п╣я─п╣ 3 п╨п╬п╩п╬п╫п╨п╦"
 
 #. R/unix/x11.R: warning("cairo-based types are not supported on this build - using \"Xlib\"")
 #: R/unix/x11.R:0
 msgid "cairo-based types are not supported on this build - using \"Xlib\""
 msgstr ""
-"типы, основанные на cairo, в этой сборке не поддерживаются -- использую "
+"я┌п╦п©я▀, п╬я│п╫п╬п╡п╟п╫п╫я▀п╣ п╫п╟ cairo, п╡ я█я┌п╬п╧ я│п╠п╬я─п╨п╣ п╫п╣ п©п╬п╢п╢п╣я─п╤п╦п╡п╟я▌я┌я│я▐ -- п╦я│п©п╬п╩я▄п╥я┐я▌ "
 "\"Xlib\""
 
 #. R/windows/windows.R: stop("can only bring windows devices to the front")
 #: R/windows/windows.R:0
 msgid "can only bring windows devices to the front"
-msgstr "могу лишь переместить устройства windows на первый план"
+msgstr "п╪п╬пЁя┐ п╩п╦я┬я▄ п©п╣я─п╣п╪п╣я│я┌п╦я┌я▄ я┐я│я┌я─п╬п╧я│я┌п╡п╟ windows п╫п╟ п©п╣я─п╡я▀п╧ п©п╩п╟п╫"
 
 #. R/unix/x11.R: stop("can only copy from 'X11(type=\"*cairo\")' devices")
 #: R/unix/x11.R:0
 msgid "can only copy from 'X11(type=\"*cairo\")' devices"
-msgstr "могу копировать лишь с 'X11(type=\"*cairo\")'-устройств"
+msgstr "п╪п╬пЁя┐ п╨п╬п©п╦я─п╬п╡п╟я┌я▄ п╩п╦я┬я▄ я│ 'X11(type=\"*cairo\")'-я┐я│я┌я─п╬п╧я│я┌п╡"
 
 #. R/windows/windows.R: stop("can only copy from 'windows' devices")
 #: R/windows/windows.R:0
 msgid "can only copy from 'windows' devices"
-msgstr "могу копировать лишь с 'windows'-устройств"
+msgstr "п╪п╬пЁя┐ п╨п╬п©п╦я─п╬п╡п╟я┌я▄ п╩п╦я┬я▄ я│ 'windows'-я┐я│я┌я─п╬п╧я│я┌п╡"
 
 #. R/windows/windows.R: stop("can only manipulate windows devices")
 #: R/windows/windows.R:0
 msgid "can only manipulate windows devices"
-msgstr "могу работать только с 'windows'-устройствами"
+msgstr "п╪п╬пЁя┐ я─п╟п╠п╬я┌п╟я┌я▄ я┌п╬п╩я▄п╨п╬ я│ 'windows'-я┐я│я┌я─п╬п╧я│я┌п╡п╟п╪п╦"
 
 #. R/device.R: stop("can only print from a screen device")
 #. R/device.R: stop("can only print from a screen device")
@@ -330,63 +331,63 @@ msgstr "могу работать только с 'windows'-устройствами"
 #. R/unix/quartz.R: stop("can only print from a screen device")
 #: R/device.R:0 R/unix/quartz.R:0
 msgid "can only print from a screen device"
-msgstr "могу печатать только с экранного устройства"
+msgstr "п╪п╬пЁя┐ п©п╣я┤п╟я┌п╟я┌я▄ я┌п╬п╩я▄п╨п╬ я│ я█п╨я─п╟п╫п╫п╬пЁп╬ я┐я│я┌я─п╬п╧я│я┌п╡п╟"
 
 #. R/device.R: stop("cannot copy device to itself")
 #: R/device.R:0
 msgid "cannot copy device to itself"
-msgstr "не могу скопировать устройство в само себя"
+msgstr "п╫п╣ п╪п╬пЁя┐ я│п╨п╬п©п╦я─п╬п╡п╟я┌я▄ я┐я│я┌я─п╬п╧я│я┌п╡п╬ п╡ я│п╟п╪п╬ я│п╣п╠я▐"
 
 #. R/device.R: stop("cannot copy from the null device")
 #: R/device.R:0
 msgid "cannot copy from the null device"
-msgstr "не могу копировать с null-устройства"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╨п╬п©п╦я─п╬п╡п╟я┌я▄ я│ null-я┐я│я┌я─п╬п╧я│я┌п╡п╟"
 
 #. R/device.R: stop("cannot copy to the null device")
 #: R/device.R:0
 msgid "cannot copy to the null device"
-msgstr "не могу копировать на null-устройство"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╨п╬п©п╦я─п╬п╡п╟я┌я▄ п╫п╟ null-я┐я│я┌я─п╬п╧я│я┌п╡п╬"
 
 #. R/postscript.R: gettextf("cannot reset non-existent '%s'", name.opt)
 #: R/postscript.R:0
 msgid "cannot reset non-existent '%s'"
-msgstr "не могу перегрузить несуществующий '%s'"
+msgstr "п╫п╣ п╪п╬пЁя┐ п©п╣я─п╣пЁя─я┐п╥п╦я┌я▄ п╫п╣я│я┐я┴п╣я│я┌п╡я┐я▌я┴п╦п╧ '%s'"
 
 #. R/device.R: stop("cannot shut down device 1 (the null device)")
 #: R/device.R:0
 msgid "cannot shut down device 1 (the null device)"
-msgstr "не могу отключить устройство 1 (null-устройство)"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╬я┌п╨п╩я▌я┤п╦я┌я▄ я┐я│я┌я─п╬п╧я│я┌п╡п╬ 1 (null-я┐я│я┌я─п╬п╧я│я┌п╡п╬)"
 
 #. R/device.R: stop("cannot supply 'which' and 'device' at the same time")
 #: R/device.R:0
 msgid "cannot supply 'which' and 'device' at the same time"
-msgstr "не могу использовать 'which' и 'устройство' одновременно"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ 'which' п╦ 'я┐я│я┌я─п╬п╧я│я┌п╡п╬' п╬п╢п╫п╬п╡я─п╣п╪п╣п╫п╫п╬"
 
 #. R/convertColor.R: warning("color spaces use different reference whites")
 #: R/convertColor.R:0
 #, fuzzy
 msgid "color spaces use different reference whites"
-msgstr "цветовые пространства используют разные стандарты белого."
+msgstr "я├п╡п╣я┌п╬п╡я▀п╣ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╟ п╦я│п©п╬п╩я▄п╥я┐я▌я┌ я─п╟п╥п╫я▀п╣ я│я┌п╟п╫п╢п╟я─я┌я▀ п╠п╣п╩п╬пЁп╬."
 
 #. R/device.R: gettextf("dev.new(): using '%s'", paste("pdf(file=\"", tmp[!fe][1L], "\")", collapse = ""))
 #. R/device.R: gettextf("dev.new(): using '%s'", paste("postscript(file=\"", tmp[!fe][1L], "\")",     collapse = ""))
 #: R/device.R:0
 #, fuzzy
 msgid "dev.new(): using '%s'"
-msgstr "dev.new(): использую pdf(file=\"%s\")"
+msgstr "dev.new(): п╦я│п©п╬п╩я▄п╥я┐я▌ pdf(file=\"%s\")"
 
 #. R/unix/dev2bitmap.R: gettextf("device '%s' is not available\n", type)
 #. R/windows/dev2bitmap.R: gettextf("device '%s' is not available\n", type)
 #: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
 #, fuzzy
 msgid "device '%s' is not available"
-msgstr "устройство '%s' недоступно"
+msgstr "я┐я│я┌я─п╬п╧я│я┌п╡п╬ '%s' п╫п╣п╢п╬я│я┌я┐п©п╫п╬"
 
 #. R/device.R: gettextf("device '%s' was not found", dev)
 #: R/device.R:0
 #, fuzzy
 msgid "device '%s' was not found"
-msgstr "устройство '%s' не найдено"
+msgstr "я┐я│я┌я─п╬п╧я│я┌п╡п╬ '%s' п╫п╣ п╫п╟п╧п╢п╣п╫п╬"
 
 #. R/calc.R: stop("dimensions of 'x', 'y' and 'z' do not match")
 #: R/calc.R:0
@@ -397,7 +398,7 @@ msgstr ""
 #: R/convertColor.R:0
 #, fuzzy
 msgid "display gamma = %s"
-msgstr "отразить гамму"
+msgstr "п╬я┌я─п╟п╥п╦я┌я▄ пЁп╟п╪п╪я┐"
 
 #. R/calc.R: stop("finite coordinates are required")
 #: R/calc.R:0
@@ -407,17 +408,17 @@ msgstr ""
 #. R/postscript.R: gettextf("font %s already in use", sQuote(i))
 #: R/postscript.R:0
 msgid "font %s already in use"
-msgstr "шрифт %s уже используется"
+msgstr "я┬я─п╦я└я┌ %s я┐п╤п╣ п╦я│п©п╬п╩я▄п╥я┐п╣я┌я│я▐"
 
 #. R/postscript.R: gettextf("font encoding mismatch '%s'/'%s'", font$encoding, encoding)
 #: R/postscript.R:0
 msgid "font encoding mismatch '%s'/'%s'"
-msgstr "несоответствие кодировки шрифта '%s'/'%s'"
+msgstr "п╫п╣я│п╬п╬я┌п╡п╣я┌я│я┌п╡п╦п╣ п╨п╬п╢п╦я─п╬п╡п╨п╦ я┬я─п╦я└я┌п╟ '%s'/'%s'"
 
 #. R/calc.R: stop("increasing 'x' and 'y' values expected")
 #: R/calc.R:0
 msgid "increasing 'x' and 'y' values expected"
-msgstr "ожидается увеличение значений 'x' и 'y'"
+msgstr "п╬п╤п╦п╢п╟п╣я┌я│я▐ я┐п╡п╣п╩п╦я┤п╣п╫п╦п╣ п╥п╫п╟я┤п╣п╫п╦п╧ 'x' п╦ 'y'"
 
 #. R/cairo.R: gettextf("invalid '%s' argument", "filename")
 #. R/cairo.R: gettextf("invalid '%s' argument", "filename")
@@ -444,12 +445,12 @@ msgstr "ожидается увеличение значений 'x' и 'y'"
 #: R/unix/x11.R:0 R/windows/cairo.R:0 R/windows/png.R:0 R/windows/windows.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
-msgstr "неправильный первый аргумент"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п©п╣я─п╡я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌"
 
 #. R/postscript.R: stop("invalid 'cmapEncoding' in font specification")
 #: R/postscript.R:0
 msgid "invalid 'cmapEncoding' in font specification"
-msgstr "неправильная 'cmapEncoding' в определении шрифта"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ 'cmapEncoding' п╡ п╬п©я─п╣п╢п╣п╩п╣п╫п╦п╦ я┬я─п╦я└я┌п╟"
 
 #. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
 #. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
@@ -457,38 +458,38 @@ msgstr "неправильная 'cmapEncoding' в определении шрифта"
 #: R/postscript.R:0
 #, fuzzy
 msgid "invalid 'file' argument '%s'"
-msgstr "неправильный аргумент 'family'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌ 'family'"
 
 #. R/postscript.R: stop("invalid CMap name in font specification")
 #: R/postscript.R:0
 msgid "invalid CMap name in font specification"
-msgstr "неправильное имя CMap в определении шрифта"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╦п╪я▐ CMap п╡ п╬п©я─п╣п╢п╣п╩п╣п╫п╦п╦ я┬я─п╦я└я┌п╟"
 
 #. R/postscript.R: stop("invalid PDF resource in font specification")
 #: R/postscript.R:0
 msgid "invalid PDF resource in font specification"
-msgstr "неправильный PDF-ресурс в определении шрифта"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ PDF-я─п╣я│я┐я─я│ п╡ п╬п©я─п╣п╢п╣п╩п╣п╫п╦п╦ я┬я─п╦я└я┌п╟"
 
 #. R/postscript.R: stop("invalid PDF version")
 #: R/postscript.R:0
 msgid "invalid PDF version"
-msgstr "неправильная версия PDF"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ п╡п╣я─я│п╦я▐ PDF"
 
 #. R/unix/quartz.R: stop("invalid Quartz font:  must be 4 strings")
 #: R/unix/quartz.R:0
 msgid "invalid Quartz font:  must be 4 strings"
-msgstr "неправильный шрифт Quartz:  должно быть 4 строки"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я┬я─п╦я└я┌ Quartz:  п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ 4 я│я┌я─п╬п╨п╦"
 
 #. R/windows/windows.R: stop("invalid Windows font:  must be a single font family name")
 #: R/windows/windows.R:0
 msgid "invalid Windows font:  must be a single font family name"
-msgstr "неправильный шрифт Windows:  должно быть простое имя семейства"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я┬я─п╦я└я┌ Windows:  п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ п©я─п╬я│я┌п╬п╣ п╦п╪я▐ я│п╣п╪п╣п╧я│я┌п╡п╟"
 
 #. R/unix/x11.R: stop("invalid X11 font specification: ", errDesc)
 #: R/unix/x11.R:0
 #, fuzzy
 msgid "invalid X11 font specification:"
-msgstr "неправильное указание шрифта X11:"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ я┐п╨п╟п╥п╟п╫п╦п╣ я┬я─п╦я└я┌п╟ X11:"
 
 #. R/postscript.R: gettext("invalid arguments in %s (must be font names)", domain = "R-grDevices")
 #. R/postscript.R: gettext("invalid arguments in %s (must be font names)", domain = "R-grDevices")
@@ -498,7 +499,7 @@ msgstr "неправильное указание шрифта X11:"
 #: R/postscript.R:0 R/unix/quartz.R:0 R/unix/x11.R:0 R/windows/windows.R:0
 #, fuzzy
 msgid "invalid arguments in %s (must be font names)"
-msgstr "неправильные аргументы в '%s' (должны быть имена шрифтов)"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╡ '%s' (п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ п╦п╪п╣п╫п╟ я┬я─п╦я└я┌п╬п╡)"
 
 #. R/postscript.R: gettextf("invalid arguments in %s (need named args)", sQuote(deparse(sys.call(sys.parent()))))
 #. R/postscript.R: gettext("invalid arguments in %s (need named args)", domain = "R-grDevices")
@@ -509,86 +510,86 @@ msgstr "неправильные аргументы в '%s' (должны быть имена шрифтов)"
 #: R/postscript.R:0 R/unix/quartz.R:0 R/unix/x11.R:0 R/windows/windows.R:0
 #, fuzzy
 msgid "invalid arguments in %s (need named args)"
-msgstr "неправильные аргументы в '%s' (нужны именованные аргументы)"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╡ '%s' (п╫я┐п╤п╫я▀ п╦п╪п╣п╫п╬п╡п╟п╫п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀)"
 
 #. R/postscript.R: stop("invalid encoding in font specification")
 #: R/postscript.R:0
 msgid "invalid encoding in font specification"
-msgstr "неправильная кодировка в определении шрифта"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ п╨п╬п╢п╦я─п╬п╡п╨п╟ п╡ п╬п©я─п╣п╢п╣п╩п╣п╫п╦п╦ я┬я─п╦я└я┌п╟"
 
 #. R/postscript.R: stop("invalid family name in font specification")
 #. R/postscript.R: stop("invalid family name in font specification")
 #: R/postscript.R:0
 msgid "invalid family name in font specification"
-msgstr "неправильное имя семейства в определении шрифта"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╦п╪я▐ я│п╣п╪п╣п╧я│я┌п╡п╟ п╡ п╬п©я─п╣п╢п╣п╩п╣п╫п╦п╦ я┬я─п╦я└я┌п╟"
 
 #. R/xyz.coords.R: stop("invalid first argument")
 #: R/xyz.coords.R:0
 msgid "invalid first argument"
-msgstr "неправильный первый аргумент"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п©п╣я─п╡я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌"
 
 #. R/xyz.coords.R: stop("invalid first argument [bad language object]")
 #: R/xyz.coords.R:0
 msgid "invalid first argument [bad language object]"
-msgstr "неправильный первый аргумент [неправильный объект языка]"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п©п╣я─п╡я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌ [п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╬п╠я┼п╣п╨я┌ я▐п╥я▀п╨п╟]"
 
 #. R/postscript.R: stop("invalid metric information in font specification")
 #. R/postscript.R: stop("invalid metric information in font specification")
 #: R/postscript.R:0
 msgid "invalid metric information in font specification"
-msgstr "неправильная метрическая информация в определении шрифта"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ п╪п╣я┌я─п╦я┤п╣я│п╨п╟я▐ п╦п╫я└п╬я─п╪п╟я├п╦я▐ п╡ п╬п©я─п╣п╢п╣п╩п╣п╫п╦п╦ я┬я─п╦я└я┌п╟"
 
 #. R/postscript.R: gettextf("invalid options in '%s'", name.opt)
 #: R/postscript.R:0
 msgid "invalid options in '%s'"
-msgstr "неправильные опции в '%s'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╬п©я├п╦п╦ п╡ '%s'"
 
 #. R/postscript.R: stop("invalid output format")
 #: R/postscript.R:0
 #, fuzzy
 msgid "invalid output format"
-msgstr "Неправильный формат вывода"
+msgstr "п²п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я└п╬я─п╪п╟я┌ п╡я▀п╡п╬п╢п╟"
 
 #. R/raster.R: stop("invalid raster subassignment")
 #: R/raster.R:0
 msgid "invalid raster subassignment"
-msgstr "неправильная замена жлемента растра"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ п╥п╟п╪п╣п╫п╟ п╤п╩п╣п╪п╣п╫я┌п╟ я─п╟я│я┌я─п╟"
 
 #. R/raster.R: stop("invalid raster subsetting")
 #: R/raster.R:0
 msgid "invalid raster subsetting"
-msgstr "неправильное извлечение элемента растра"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╦п╥п╡п╩п╣я┤п╣п╫п╦п╣ я█п╩п╣п╪п╣п╫я┌п╟ я─п╟я│я┌я─п╟"
 
 #. R/device.R: stop("invalid setting for 'getOption(\"device\")'")
 #: R/device.R:0
 msgid "invalid setting for 'getOption(\"device\")'"
-msgstr "неправильный установки для 'getOption(\"device\")'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я┐я│я┌п╟п╫п╬п╡п╨п╦ п╢п╩я▐ 'getOption(\"device\")'"
 
 #. R/windows/windows.R: stop("invalid value for 'rescale'")
 #: R/windows/windows.R:0
 msgid "invalid value for 'rescale'"
-msgstr "неправильное значение 'rescale'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ 'rescale'"
 
 #. R/recordplot.R: stop("loading snapshot from a different session")
 #: R/recordplot.R:0
 #, fuzzy
 msgid "loading snapshot from a different session"
-msgstr "загрузка снимка из другой версии R"
+msgstr "п╥п╟пЁя─я┐п╥п╨п╟ я│п╫п╦п╪п╨п╟ п╦п╥ п╢я─я┐пЁп╬п╧ п╡п╣я─я│п╦п╦ R"
 
 #. R/device.R: warning("need to specify one of 'width' and 'height'")
 #: R/device.R:0
 msgid "need to specify one of 'width' and 'height'"
-msgstr "надо указать либо 'width', либо 'height'"
+msgstr "п╫п╟п╢п╬ я┐п╨п╟п╥п╟я┌я▄ п╩п╦п╠п╬ 'width', п╩п╦п╠п╬ 'height'"
 
 #. R/calc.R: stop("no 'z' matrix specified")
 #: R/calc.R:0
 msgid "no 'z' matrix specified"
-msgstr "не указана 'z'-матрица"
+msgstr "п╫п╣ я┐п╨п╟п╥п╟п╫п╟ 'z'-п╪п╟я┌я─п╦я├п╟"
 
 #. R/recordplot.R: stop("no current device to record from")
 #: R/recordplot.R:0
 msgid "no current device to record from"
-msgstr "нет устройства, которое надо записывать"
+msgstr "п╫п╣я┌ я┐я│я┌я─п╬п╧я│я┌п╡п╟, п╨п╬я┌п╬я─п╬п╣ п╫п╟п╢п╬ п╥п╟п©п╦я│я▀п╡п╟я┌я▄"
 
 #. R/device.R: stop("no device to print from")
 #. R/device.R: stop("no device to print from")
@@ -596,53 +597,53 @@ msgstr "нет устройства, которое надо записывать"
 #. R/unix/quartz.R: stop("no device to print from")
 #: R/device.R:0 R/unix/quartz.R:0
 msgid "no device to print from"
-msgstr "нет устройства, с которого печатать"
+msgstr "п╫п╣я┌ я┐я│я┌я─п╬п╧я│я┌п╡п╟, я│ п╨п╬я┌п╬я─п╬пЁп╬ п©п╣я┤п╟я┌п╟я┌я▄"
 
 #. R/calc.R: stop("no proper 'z' matrix specified")
 #: R/calc.R:0
 msgid "no proper 'z' matrix specified"
-msgstr "не указана подходящая 'z'-матрица"
+msgstr "п╫п╣ я┐п╨п╟п╥п╟п╫п╟ п©п╬п╢я┘п╬п╢я▐я┴п╟я▐ 'z'-п╪п╟я┌я─п╦я├п╟"
 
 #. R/unix/x11.R: stop("no such device")
 #. R/windows/windows.R: stop("no such device")
 #: R/unix/x11.R:0 R/windows/windows.R:0
 msgid "no such device"
-msgstr "нет такого устройства"
+msgstr "п╫п╣я┌ я┌п╟п╨п╬пЁп╬ я┐я│я┌я─п╬п╧я│я┌п╡п╟"
 
 #. R/device.R: gettextf("no suitable unused file name for '%s'", "pdf()")
 #. R/device.R: gettextf("no suitable unused file name for '%s'", "postscript()")
 #: R/device.R:0
 #, fuzzy
 msgid "no suitable unused file name for '%s'"
-msgstr "для pdf() не нашлось подходящего неиспользованного имени файла"
+msgstr "п╢п╩я▐ pdf() п╫п╣ п╫п╟я┬п╩п╬я│я▄ п©п╬п╢я┘п╬п╢я▐я┴п╣пЁп╬ п╫п╣п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╫п╬пЁп╬ п╦п╪п╣п╫п╦ я└п╟п╧п╩п╟"
 
 #. R/colorstuff.R: stop("numerical color values must be positive")
 #: R/colorstuff.R:0
 #, fuzzy
 msgid "numerical color values must be positive"
-msgstr "'bias' должен быть положительным"
+msgstr "'bias' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п©п╬п╩п╬п╤п╦я┌п╣п╩я▄п╫я▀п╪"
 
 #. R/raster.R: stop("operator not meaningful for raster objects")
 #: R/raster.R:0
 #, fuzzy
 msgid "operator not meaningful for raster objects"
-msgstr "Оператор не имеет смысла для объектов растра"
+msgstr "п·п©п╣я─п╟я┌п╬я─ п╫п╣ п╦п╪п╣п╣я┌ я│п╪я▀я│п╩п╟ п╢п╩я▐ п╬п╠я┼п╣п╨я┌п╬п╡ я─п╟я│я┌я─п╟"
 
 #. R/prettyDate.R: stop("range too small for 'min.n'")
 #: R/prettyDate.R:0
 #, fuzzy
 msgid "range too small for 'min.n'"
-msgstr "размах слишком мал для min.m"
+msgstr "я─п╟п╥п╪п╟я┘ я│п╩п╦я┬п╨п╬п╪ п╪п╟п╩ п╢п╩я▐ min.m"
 
 #. R/colorstuff.R: stop("rgb matrix must be numeric")
 #: R/colorstuff.R:0
 msgid "rgb matrix must be numeric"
-msgstr "rgb-матрица должна быть числовой"
+msgstr "rgb-п╪п╟я┌я─п╦я├п╟ п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ я┤п╦я│п╩п╬п╡п╬п╧"
 
 #. R/colorstuff.R: stop("rgb matrix must have 3 rows")
 #: R/colorstuff.R:0
 msgid "rgb matrix must have 3 rows"
-msgstr "у rgb-матрицы должно быть 3 строки"
+msgstr "я┐ rgb-п╪п╟я┌я─п╦я├я▀ п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ 3 я│я┌я─п╬п╨п╦"
 
 #. R/unix/quartz.R: stop("screen devices should not be used in examples etc", domain = "R-grDevices")
 #. R/unix/quartz.R: warning("screen devices should not be used in examples etc", immediate. = TRUE, noBreaks. = TRUE,     domain = "R-grDevices")
@@ -657,37 +658,37 @@ msgstr ""
 #. R/postscript.R: gettextf("status %d in running command '%s'", ret, cmd)
 #: R/postscript.R:0
 msgid "status %d in running command '%s'"
-msgstr "статус %d выполняющейся команды '%s'"
+msgstr "я│я┌п╟я┌я┐я│ %d п╡я▀п©п╬п╩п╫я▐я▌я┴п╣п╧я│я▐ п╨п╬п╪п╟п╫п╢я▀ '%s'"
 
 #. R/windows/windows.R: stop("subscript is out of range")
 #: R/windows/windows.R:0
 #, fuzzy
 msgid "subscript is out of range"
-msgstr "индекс вне пределов"
+msgstr "п╦п╫п╢п╣п╨я│ п╡п╫п╣ п©я─п╣п╢п╣п╩п╬п╡"
 
 #. R/postscript.R: gettextf("unknown family '%s'", family)
 #. R/postscript.R: gettextf("unknown family '%s'", family)
 #: R/postscript.R:0
 msgid "unknown family '%s'"
-msgstr "неизвестное семейство '%s'"
+msgstr "п╫п╣п╦п╥п╡п╣я│я┌п╫п╬п╣ я│п╣п╪п╣п╧я│я┌п╡п╬ '%s'"
 
 #. R/unix/x11.R: stop("unknown family for 'X11(type = \"XLib\")'")
 #: R/unix/x11.R:0
 #, fuzzy
 msgid "unknown family for 'X11(type = \"XLib\")'"
-msgstr "неизвестное семейство X11(type = \"XLib\")"
+msgstr "п╫п╣п╦п╥п╡п╣я│я┌п╫п╬п╣ я│п╣п╪п╣п╧я│я┌п╡п╬ X11(type = \"XLib\")"
 
 #. R/postscript.R: stop("unknown font")
 #: R/postscript.R:0
 msgid "unknown font"
-msgstr "неизвестный шрифт"
+msgstr "п╫п╣п╦п╥п╡п╣я│я┌п╫я▀п╧ я┬я─п╦я└я┌"
 
 #. R/unix/dev2bitmap.R: warning("unrecognized format of gs -help")
 #. R/windows/dev2bitmap.R: warning("unrecognized format of gs -help")
 #: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
 #, fuzzy
 msgid "unrecognized format of gs -help"
-msgstr "неподдерживаемый формат gs -help"
+msgstr "п╫п╣п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣п╪я▀п╧ я└п╬я─п╪п╟я┌ gs -help"
 
 #. R/windows/windows.R: stop("windows devices should not be used in examples etc", domain = "R-grDevices")
 #. R/windows/windows.R: stop("windows devices should not be used in examples etc", domain = "R-grDevices")
@@ -700,35 +701,35 @@ msgstr ""
 #: R/xyz.coords.R:0
 msgid "%d x value <= 0 omitted from logarithmic plot"
 msgid_plural "%d x values <= 0 omitted from logarithmic plot"
-msgstr[0] "%d значение x <= 0 пропущено на логарифмическом графике"
-msgstr[1] "%d значения x <= 0 пропущены на логарифмическом графике"
-msgstr[2] "%d значения x <= 0 пропущены на логарифмическом графике"
+msgstr[0] "%d п╥п╫п╟я┤п╣п╫п╦п╣ x <= 0 п©я─п╬п©я┐я┴п╣п╫п╬ п╫п╟ п╩п╬пЁп╟я─п╦я└п╪п╦я┤п╣я│п╨п╬п╪ пЁя─п╟я└п╦п╨п╣"
+msgstr[1] "%d п╥п╫п╟я┤п╣п╫п╦я▐ x <= 0 п©я─п╬п©я┐я┴п╣п╫я▀ п╫п╟ п╩п╬пЁп╟я─п╦я└п╪п╦я┤п╣я│п╨п╬п╪ пЁя─п╟я└п╦п╨п╣"
+msgstr[2] "%d п╥п╫п╟я┤п╣п╫п╦я▐ x <= 0 п©я─п╬п©я┐я┴п╣п╫я▀ п╫п╟ п╩п╬пЁп╟я─п╦я└п╪п╦я┤п╣я│п╨п╬п╪ пЁя─п╟я└п╦п╨п╣"
 
 #. R/xyz.coords.R: ngettext(n, "%d y value <= 0 omitted from logarithmic plot", "%d y values <= 0 omitted from logarithmic plot",     domain = "R-grDevices")
 #. R/xyz.coords.R: ngettext(n, "%d y value <= 0 omitted from logarithmic plot", "%d y values <= 0 omitted from logarithmic plot",     domain = "R-grDevices")
 #: R/xyz.coords.R:0
 msgid "%d y value <= 0 omitted from logarithmic plot"
 msgid_plural "%d y values <= 0 omitted from logarithmic plot"
-msgstr[0] "%d значение y <= 0 пропущено на логарифмическом графике"
-msgstr[1] "%d значения y <= 0 пропущены на логарифмическом графике"
-msgstr[2] "%d значения y <= 0 пропущены на логарифмическом графике"
+msgstr[0] "%d п╥п╫п╟я┤п╣п╫п╦п╣ y <= 0 п©я─п╬п©я┐я┴п╣п╫п╬ п╫п╟ п╩п╬пЁп╟я─п╦я└п╪п╦я┤п╣я│п╨п╬п╪ пЁя─п╟я└п╦п╨п╣"
+msgstr[1] "%d п╥п╫п╟я┤п╣п╫п╦я▐ y <= 0 п©я─п╬п©я┐я┴п╣п╫я▀ п╫п╟ п╩п╬пЁп╟я─п╦я└п╪п╦я┤п╣я│п╨п╬п╪ пЁя─п╟я└п╦п╨п╣"
+msgstr[2] "%d п╥п╫п╟я┤п╣п╫п╦я▐ y <= 0 п©я─п╬п©я┐я┴п╣п╫я▀ п╫п╟ п╩п╬пЁп╟я─п╦я└п╪п╦я┤п╣я│п╨п╬п╪ пЁя─п╟я└п╦п╨п╣"
 
 #. R/xyz.coords.R: ngettext(n, "%d z value <= 0 omitted from logarithmic plot", "%d z values <= 0 omitted from logarithmic plot",     domain = "R-grDevices")
 #: R/xyz.coords.R:0
 msgid "%d z value <= 0 omitted from logarithmic plot"
 msgid_plural "%d z values <= 0 omitted from logarithmic plot"
-msgstr[0] "%d значение z <= 0 пропущено на логарифмическом графике"
-msgstr[1] "%d значения z <= 0 пропущены на логарифмическом графике"
-msgstr[2] "%d значения z <= 0 пропущены на логарифмическом графике"
+msgstr[0] "%d п╥п╫п╟я┤п╣п╫п╦п╣ z <= 0 п©я─п╬п©я┐я┴п╣п╫п╬ п╫п╟ п╩п╬пЁп╟я─п╦я└п╪п╦я┤п╣я│п╨п╬п╪ пЁя─п╟я└п╦п╨п╣"
+msgstr[1] "%d п╥п╫п╟я┤п╣п╫п╦я▐ z <= 0 п©я─п╬п©я┐я┴п╣п╫я▀ п╫п╟ п╩п╬пЁп╟я─п╦я└п╪п╦я┤п╣я│п╨п╬п╪ пЁя─п╟я└п╦п╨п╣"
+msgstr[2] "%d п╥п╫п╟я┤п╣п╫п╦я▐ z <= 0 п©я─п╬п©я┐я┴п╣п╫я▀ п╫п╟ п╩п╬пЁп╟я─п╦я└п╪п╦я┤п╣я│п╨п╬п╪ пЁя─п╟я└п╦п╨п╣"
 
 #. R/postscript.R: ngettext(as.integer(sum(ii)), "%s differs between new and previous", "%s differ between new and previous",     domain = "R-grDevices")
 #: R/postscript.R:0
 #, fuzzy
 msgid "%s differs between new and previous"
 msgid_plural "%s differ between new and previous"
-msgstr[0] "отличие между старым и новым"
-msgstr[1] "отличия между старыми и новыми"
-msgstr[2] "отличия между старыми и новыми"
+msgstr[0] "п╬я┌п╩п╦я┤п╦п╣ п╪п╣п╤п╢я┐ я│я┌п╟я─я▀п╪ п╦ п╫п╬п╡я▀п╪"
+msgstr[1] "п╬я┌п╩п╦я┤п╦я▐ п╪п╣п╤п╢я┐ я│я┌п╟я─я▀п╪п╦ п╦ п╫п╬п╡я▀п╪п╦"
+msgstr[2] "п╬я┌п╩п╦я┤п╦я▐ п╪п╣п╤п╢я┐ я│я┌п╟я─я▀п╪п╦ п╦ п╫п╬п╡я▀п╪п╦"
 
 #. R/postscript.R: ngettext(as.integer(sum(ii)), "%s differs between new and previous\n\t ==> NOT changing %s",     "%s differ between new and previous\n\t ==> NOT changing %s", domain = "R-grDevices")
 #: R/postscript.R:0
@@ -739,121 +740,121 @@ msgid ""
 msgid_plural ""
 "%s differ between new and previous\n"
 "\t ==> NOT changing %s"
-msgstr[0] "отличие между старым и новым"
-msgstr[1] "отличия между старыми и новыми"
-msgstr[2] "отличия между старыми и новыми"
+msgstr[0] "п╬я┌п╩п╦я┤п╦п╣ п╪п╣п╤п╢я┐ я│я┌п╟я─я▀п╪ п╦ п╫п╬п╡я▀п╪"
+msgstr[1] "п╬я┌п╩п╦я┤п╦я▐ п╪п╣п╤п╢я┐ я│я┌п╟я─я▀п╪п╦ п╦ п╫п╬п╡я▀п╪п╦"
+msgstr[2] "п╬я┌п╩п╦я┤п╦я▐ п╪п╣п╤п╢я┐ я│я┌п╟я─я▀п╪п╦ п╦ п╫п╬п╡я▀п╪п╦"
 
 #. R/postscript.R: ngettext(as.integer(sum(is.na(matches))), "invalid argument name %s in '%s'", "invalid argument names %s in '%s'",     domain = "R-grDevices")
 #: R/postscript.R:0
 msgid "invalid argument name %s in '%s'"
 msgid_plural "invalid argument names %s in '%s'"
-msgstr[0] "неправильное имя аргумента %s в '%s'"
-msgstr[1] "неправильные имена аргументов %s в '%s'"
-msgstr[2] "неправильные имена аргументов %s в '%s'"
+msgstr[0] "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╦п╪я▐ п╟я─пЁя┐п╪п╣п╫я┌п╟ %s п╡ '%s'"
+msgstr[1] "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╦п╪п╣п╫п╟ п╟я─пЁя┐п╪п╣п╫я┌п╬п╡ %s п╡ '%s'"
+msgstr[2] "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╦п╪п╣п╫п╟ п╟я─пЁя┐п╪п╣п╫я┌п╬п╡ %s п╡ '%s'"
 
 #, fuzzy
 #~ msgid "sorry, 'gs' command cannot be found"
-#~ msgstr "извините, не могу найти 'gs'"
+#~ msgstr "п╦п╥п╡п╦п╫п╦я┌п╣, п╫п╣ п╪п╬пЁя┐ п╫п╟п╧я┌п╦ 'gs'"
 
 #, fuzzy
 #~ msgid "'bias' must be positive"
-#~ msgstr "'bandwidth' должна быть положительной"
+#~ msgstr "'bandwidth' п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ п©п╬п╩п╬п╤п╦я┌п╣п╩я▄п╫п╬п╧"
 
 #, fuzzy
 #~ msgid "loading snapshot from pre-3.0.0 R version"
-#~ msgstr "загрузка снимка из версии R до 2.0.0"
+#~ msgstr "п╥п╟пЁя─я┐п╥п╨п╟ я│п╫п╦п╪п╨п╟ п╦п╥ п╡п╣я─я│п╦п╦ R п╢п╬ 2.0.0"
 
 #~ msgid "invalid 'filename'"
-#~ msgstr "неправильное 'filename'"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ 'filename'"
 
 #, fuzzy
 #~ msgid "'font' argument is not an object of class %s"
-#~ msgstr "аргумент не принадлежит к классу \"recordedplot\""
+#~ msgstr "п╟я─пЁя┐п╪п╣п╫я┌ п╫п╣ п©я─п╦п╫п╟п╢п╩п╣п╤п╦я┌ п╨ п╨п╩п╟я│я│я┐ \"recordedplot\""
 
 #~ msgid "Not a CID font"
-#~ msgstr "Не CID-шрифт"
+#~ msgstr "п²п╣ CID-я┬я─п╦я└я┌"
 
 #~ msgid "'file' is missing with no default"
-#~ msgstr "пропущен 'file', умолчания нет"
+#~ msgstr "п©я─п╬п©я┐я┴п╣п╫ 'file', я┐п╪п╬п╩я┤п╟п╫п╦я▐ п╫п╣я┌"
 
 #, fuzzy
 #~ msgid "'to.ref.white' disagrees with definition of %s"
-#~ msgstr "'to.ref.white' не согласуется с определением"
+#~ msgstr "'to.ref.white' п╫п╣ я│п╬пЁп╩п╟я│я┐п╣я┌я│я▐ я│ п╬п©я─п╣п╢п╣п╩п╣п╫п╦п╣п╪"
 
 #~ msgid "invalid arguments in '%s' (need named args)"
-#~ msgstr "неправильные аргументы в '%s' (нужны именованные аргументы)"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╡ '%s' (п╫я┐п╤п╫я▀ п╦п╪п╣п╫п╬п╡п╟п╫п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀)"
 
 #~ msgid "invalid 'file'"
-#~ msgstr "неправильный 'file'"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ 'file'"
 
 #~ msgid "invalid arguments in '%s' (must be font names)"
-#~ msgstr "неправильные аргументы в '%s' (должны быть имена шрифтов)"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╡ '%s' (п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ п╦п╪п╣п╫п╟ я┬я─п╦я└я┌п╬п╡)"
 
 #, fuzzy
 #~ msgid "no suitable unused file name for 'postscript()'"
 #~ msgstr ""
-#~ "для postscript() не нашлось подходящего неиспользованного имени файла"
+#~ "п╢п╩я▐ postscript() п╫п╣ п╫п╟я┬п╩п╬я│я▄ п©п╬п╢я┘п╬п╢я▐я┴п╣пЁп╬ п╫п╣п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╫п╬пЁп╬ п╦п╪п╣п╫п╦ я└п╟п╧п╩п╟"
 
 #, fuzzy
 #~ msgid "'from' must be a \"colorConverter\" object or a string"
-#~ msgstr "'from' должен быть colorConverter или строкой"
+#~ msgstr "'from' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ colorConverter п╦п╩п╦ я│я┌я─п╬п╨п╬п╧"
 
 #, fuzzy
 #~ msgid "'to' must be a \"colorConverter\" object or a string"
-#~ msgstr "'to' должен быть colorConverter или строкой"
+#~ msgstr "'to' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ colorConverter п╦п╩п╦ я│я┌я─п╬п╨п╬п╧"
 
 #~ msgid "dev.displaylist() called without an open graphics device"
-#~ msgstr "dev.displaylist() вызван без открытия графического устройства"
+#~ msgstr "dev.displaylist() п╡я▀п╥п╡п╟п╫ п╠п╣п╥ п╬я┌п╨я─я▀я┌п╦я▐ пЁя─п╟я└п╦я┤п╣я│п╨п╬пЁп╬ я┐я│я┌я─п╬п╧я│я┌п╡п╟"
 
 #~ msgid "dev.new(): using postscript(file=\"%s\")"
-#~ msgstr "dev.new(): использую postscript(file=\"%s\")"
+#~ msgstr "dev.new(): п╦я│п©п╬п╩я▄п╥я┐я▌ postscript(file=\"%s\")"
 
 #, fuzzy
 #~ msgid "invalid arguments in 'quartzFonts' (must be font names)"
-#~ msgstr "неправильные аргументы в quartzFonts (должен быть имена шрифтов)"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╡ quartzFonts (п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╦п╪п╣п╫п╟ я┬я─п╦я└я┌п╬п╡)"
 
 #, fuzzy
 #~ msgid "invalid arguments in 'quartzFonts' (need named args)"
-#~ msgstr "неправильные аргументы в quartzFonts (нужны именованные аргументы)"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╡ quartzFonts (п╫я┐п╤п╫я▀ п╦п╪п╣п╫п╬п╡п╟п╫п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀)"
 
 #, fuzzy
 #~ msgid "invalid arguments in 'X11Fonts' (must be font names)"
-#~ msgstr "неправильные аргументы в '%s' (должны быть имена шрифтов)"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╡ '%s' (п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ п╦п╪п╣п╫п╟ я┬я─п╦я└я┌п╬п╡)"
 
 #, fuzzy
 #~ msgid "invalid arguments in 'X11Fonts' (need named args)"
-#~ msgstr "неправильные аргументы в '%s' (нужны именованные аргументы)"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╡ '%s' (п╫я┐п╤п╫я▀ п╦п╪п╣п╫п╬п╡п╟п╫п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀)"
 
 #~ msgid "invalid arguments in 'windowsFonts' (must be font names)"
-#~ msgstr "неправильные аргументы в 'windowsFonts' (должен быть имена шрифтов)"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╡ 'windowsFonts' (п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╦п╪п╣п╫п╟ я┬я─п╦я└я┌п╬п╡)"
 
 #~ msgid "invalid arguments in 'windowsFonts' (need named args)"
 #~ msgstr ""
-#~ "неправильные аргументы в 'windowsFonts' (нужны именованные аргументы)"
+#~ "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╡ 'windowsFonts' (п╫я┐п╤п╫я▀ п╦п╪п╣п╫п╬п╡п╟п╫п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀)"
 
 #~ msgid "'bandwidth' must be numeric"
-#~ msgstr "'bandwidth' должна быть числовой"
+#~ msgstr "'bandwidth' п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ я┤п╦я│п╩п╬п╡п╬п╧"
 
 #~ msgid "invalid 'title'"
-#~ msgstr "неправильный 'title'"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ 'title'"
 
 #, fuzzy
 #~ msgid "NOT changing %s"
-#~ msgstr "НЕ изменяется"
+#~ msgstr "п²п∙ п╦п╥п╪п╣п╫я▐п╣я┌я│я▐"
 
 #~ msgid "can only print from screen device"
-#~ msgstr "могу печатать только с экранного устройства"
+#~ msgstr "п╪п╬пЁя┐ п©п╣я┤п╟я┌п╟я┌я▄ я┌п╬п╩я▄п╨п╬ я│ я█п╨я─п╟п╫п╫п╬пЁп╬ я┐я│я┌я─п╬п╧я│я┌п╡п╟"
 
 #~ msgid "'maxRasters' is no longer needed, and will be ignored"
-#~ msgstr "'maxRasters' больше не нужны и будут пропущены"
+#~ msgstr "'maxRasters' п╠п╬п╩я▄я┬п╣ п╫п╣ п╫я┐п╤п╫я▀ п╦ п╠я┐п╢я┐я┌ п©я─п╬п©я┐я┴п╣п╫я▀"
 
 #~ msgid "The 'gamma' argument is deprecated and has no effect"
-#~ msgstr "Аргумент 'gamma' устарел и не возымеем никакого эффекта"
+#~ msgstr "п░я─пЁя┐п╪п╣п╫я┌ 'gamma' я┐я│я┌п╟я─п╣п╩ п╦ п╫п╣ п╡п╬п╥я▀п╪п╣п╣п╪ п╫п╦п╨п╟п╨п╬пЁп╬ я█я└я└п╣п╨я┌п╟"
 
 #~ msgid "invalid value for 'antialias'"
-#~ msgstr "неправильное значение 'antialias'"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ 'antialias'"
 
 #~ msgid "quartz() device interactivity reduced without an event loop manager"
 #~ msgstr ""
-#~ "устройство quartz() интерактивно сокращено без использования обработчика "
-#~ "циклов"
+#~ "я┐я│я┌я─п╬п╧я│я┌п╡п╬ quartz() п╦п╫я┌п╣я─п╟п╨я┌п╦п╡п╫п╬ я│п╬п╨я─п╟я┴п╣п╫п╬ п╠п╣п╥ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦я▐ п╬п╠я─п╟п╠п╬я┌я┤п╦п╨п╟ "
+#~ "я├п╦п╨п╩п╬п╡"
