@@ -119,7 +119,7 @@ static Rboolean url_open(Rconnection con)
 	((Rurlconn)(con->conprivate))->ctxt = ctxt;
 	break;
     default:
-	warning(_("unsupported URL scheme"));
+	warning(_("URL scheme unsupported by this method"));
 	return FALSE;
     }
 
@@ -584,7 +584,12 @@ static SEXP in_do_download(SEXP args)
 #endif
 
     } else
-	error(_("unsupported URL scheme"));
+#ifdef Win32
+	if(strncmp(url, "https://", 8) == 0)
+	    error(_("for https:// URLs use setInternet2(TRUE)"));
+	else
+#endif
+	    error(_("unsupported URL scheme"));
 
     UNPROTECT(1);
     return ScalarInteger(status);
