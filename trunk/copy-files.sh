@@ -3,8 +3,8 @@
 source conf.sh
 
 
-  cp -f $filedev $filefroz
-  cp -f $filedev $filemine
+  cp -rf $filedev $filefroz
+  cp -rf $filedev $filemine
 
   cmd=`svn status $filemine | sed -n -e "/^?/p"`
 

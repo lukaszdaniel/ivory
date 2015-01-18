@@ -33,8 +33,8 @@ fi;
 LC_ALL=C diff -qr --exclude=".svn" --exclude="translations" $X $Y | sort > $RANDSTRING
 if test `wc -l $RANDSTRING | cut -d" " -f1` -ne 0; then
    sed -n -e "s/Files \(.*\)* .*/o \1/p" $RANDSTRING | cut -d" " -f1,2
-   sed -n -e "s/Only in $X\([^: ]*\): \(.*\)/+ $X\1\/\2/p" $RANDSTRING | cut -d" " -f1,2
-   sed -n -e "s/Only in $Y\([^: ]*\): \(.*\)/+ $Y\1\/\2/p" $RANDSTRING | cut -d" " -f1,2
+   sed -n -e "s/Only in $X\/\([^: ]*\): \(.*\)/+ $X\/\1\/\2/p" $RANDSTRING | cut -d" " -f1,2
+   sed -n -e "s/Only in $Y\/\([^: ]*\): \(.*\)/- $Y\/\1\/\2/p" $RANDSTRING | cut -d" " -f1,2
    rm $RANDSTRING
 else
    echo "'"$X"' and '"$Y"' are identical"
