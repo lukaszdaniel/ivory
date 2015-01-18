@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: foreign 0.8-62\n"
-"POT-Creation-Date: 2015-01-16 19:59\n"
+"POT-Creation-Date: 2015-01-18 21:31\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,7 +12,7 @@ msgstr ""
 
 
 #: R/read.dta.R: 0
-#. R/read.dta.R: gettextf("'%s' argument is not an object of class %s", "dataframe", dQuote("data.frame"))
+#. R/read.dta.R: gettextf("'%s' argument is not an object of class %s", "dataframe",     dQuote("data.frame"))
 
 msgid "'%s' argument is not an object of class %s"
 msgstr ""
@@ -27,9 +27,9 @@ msgstr ""
 
 #: R/arff.R: 0
 #: R/read.epiinfo.R: 0
-#. R/arff.R: gettextf("'%s' argument must be a character string or connection", "file")
-#. R/arff.R: gettextf("'%s' argument must be a character string or connection", "file")
-#. R/read.epiinfo.R: gettextf("'%s' argument must be a character string or connection", "file")
+#. R/arff.R: gettextf("'%s' argument must be a character string or connection",     "file")
+#. R/arff.R: gettextf("'%s' argument must be a character string or connection",     "file")
+#. R/read.epiinfo.R: gettextf("'%s' argument must be a character string or connection",     "file")
 
 msgid "'%s' argument must be a character string or connection"
 msgstr ""
@@ -78,7 +78,7 @@ msgstr ""
 
 
 #: R/dbf.R: 0
-#. R/dbf.R: gettextf("Field name: %s changed to: %s", sQuote(onames[i]), sQuote(inames[i]))
+#. R/dbf.R: gettextf("Field name: %s changed to: %s", sQuote(onames[i]),     sQuote(inames[i]))
 
 msgid "Field name: %s changed to: %s"
 msgstr ""
@@ -134,7 +134,7 @@ msgstr ""
 
 
 #: R/Sread.R: 0
-#. R/Sread.R: gettextf("S mode %s (near byte offset %s) not supported", sQuote(code), seek(dump))
+#. R/Sread.R: gettextf("S mode %s (near byte offset %s) not supported", sQuote(code),     seek(dump))
 
 msgid "S mode %s (near byte offset %s) not supported"
 msgstr ""
@@ -162,7 +162,7 @@ msgstr ""
 
 
 #: R/read.ssd.R: 0
-#. R/read.ssd.R: gettextf("The log file will be %s in the current directory", paste(basename(tmpProgLoc),     ".log", sep = ""), domain = "R-foreign")
+#. R/read.ssd.R: gettextf("The log file will be %s in the current directory",     paste(basename(tmpProgLoc), ".log", sep = ""), domain = "R-foreign")
 
 msgid "The log file will be %s in the current directory"
 msgstr ""
@@ -197,7 +197,7 @@ msgstr ""
 
 
 #: R/read.ssd.R: 0
-#. R/read.ssd.R: gettext("a log and other error products should be in the vicinity", domain = "R-foreign")
+#. R/read.ssd.R: gettext("a log and other error products should be in the vicinity",     domain = "R-foreign")
 
 msgid "a log and other error products should be in the vicinity"
 msgstr ""
@@ -246,7 +246,7 @@ msgstr ""
 
 
 #: R/dbf.R: 0
-#. R/dbf.R: gettextf("character column %d will be truncated to %d bytes", i, max_nchar)
+#. R/dbf.R: gettextf("character column %d will be truncated to %d bytes",     i, max_nchar)
 
 msgid "character column %d will be truncated to %d bytes"
 msgstr ""
@@ -323,7 +323,7 @@ msgstr ""
 
 
 #: R/read.dta.R: 0
-#. R/read.dta.R: gettextf("value labels (%s) for %s are missing", sQuote(ll[v]), sQuote(names(rval)[v]))
+#. R/read.dta.R: gettextf("value labels (%s) for %s are missing", sQuote(ll[v]),     sQuote(names(rval)[v]))
 
 msgid "value labels (%s) for %s are missing"
 msgstr ""
@@ -337,7 +337,7 @@ msgstr ""
 
 
 #: R/dbf.R: 0
-#. R/dbf.R: ngettext(length(cl0), "data frame contains columns of unsupported class %s", "data frame contains columns of unsupported classes %s",     domain = "R-foreign")
+#. R/dbf.R: ngettext(length(cl0), "data frame contains columns of unsupported class %s",     "data frame contains columns of unsupported classes %s",     domain = "R-foreign")
 
 msgid        "data frame contains columns of unsupported class %s"
 msgid_plural "data frame contains columns of unsupported classes %s"
