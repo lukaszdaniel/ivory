@@ -202,7 +202,10 @@
       the \code{\dots} in the call, if any; this environment was wrong
       (or at least undesirable) when the \code{definition} argument was
       a function.
-            
+
+      \item \code{topenv()} has been made \code{.Internal()} for
+      speedup, based on Peter Haverty's proposal in \PR{16140}.
+
       \item Work in progress on optional use of \code{libcurl} (version
       7.28.0 or later) for Internet access (including on Windows):
       \itemize{
@@ -223,7 +226,7 @@
 	\code{"libcurl"} which should handle \code{https://} and
 	\code{ftps://} URLs, follow redirections, and allows
 	simultaneous downloads of multiple URLs.
-	
+
 	\item \code{url()} has a new method \code{"libcurl"} (unfinished).
       }
     }
@@ -390,24 +393,25 @@
       \item \code{all.equal()} gains methods for \code{environment}s and
       \code{refClass}es.
 
-      \item \code{[<-} and \code{[[<-} gain S4 \code{data.frame} methods to
-      avoid corruption of S4 class information by the S3 methods.
+      \item \code{[<-} and \code{[[<-} gain S4 \code{data.frame} methods
+      to avoid corruption of S4 class information by the S3 methods.
 
       \item \code{callNextMethod()} should now work within a \code{.local}
       call when \code{\dots} is absent from \code{formals(.local)}.
 
-      \item \code{dput(pairlist(x))} generates a call to the \code{pairlist}
-      constructor, instead of the \code{list} constructor.
+      \item \code{dput(pairlist(x))} generates a call to the
+      \code{pairlist} constructor instead of the \code{list}
+      constructor.
 
       \item Fix \code{missing()} when arguments are propagated through
-      \code{\dots}; see \PR{15707}.
+      \code{\dots}. (\PR{15707})
 
-      \item \code{eigen(m)} now defaults to \code{symmetric=TRUE} even when
-      the dimnames are asymmetric if the matrix is otherwise symmetric;
-      \PR{16151}.
+      \item \code{eigen(m)} now defaults to \code{symmetric = TRUE} even
+      when the dimnames are asymmetric if the matrix is otherwise
+      symmetric.  (\PR{16151})
 
       \item Fix issues with forwarding \code{\dots} through
-      \code{callGeneric} and \code{callNextMethod}; see \PR{16141}.
+      \code{callGeneric()} and \code{callNextMethod()}.  (\PR{16141})
     }
   }
 }
@@ -452,7 +456,7 @@
       the platform (if it has one).
 
       \item Single source or binary files can be supplied for
-      \code{install.packages(type = "both")} and the approporiate type
+      \code{install.packages(type = "both")} and the appropriate type
       and \code{repos = NULL} will be inferred.
 
       \item New function \code{pcre_config()} to report on some of the
@@ -577,10 +581,13 @@
 
       \item \code{split.Date()} retains fractional representations while
       avoiding incomplete class propagation.
-      
+
       \item \file{R_ext/Lapack.h} had not been updated for changes to
       the argument lists of the (largely internal) functions
       \code{dlaed2} and \code{dlaed3}.  (\PR{16157})
+
+      \item \code{RShowDoc("NEWS", "txt")} had not been updated for the
+      layout changes of \R 3.1.0.
     }
   }
 }
