@@ -21,6 +21,9 @@
 # include <config.h>
 #endif
 
+#ifdef Win32
+# define R_USE_SIGNALS 1
+#endif
 #include <Defn.h>
 #include <Localization.h>
 #include <Internal.h>
@@ -46,12 +49,12 @@ SEXP attribute_hidden in_do_curlVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
 #ifdef HAVE_CURL_CURL_H
     curl_version_info_data *d = curl_version_info(CURLVERSION_NOW);
     SET_STRING_ELT(ans, 0, mkChar(d->version));
-    setAttrib(ans, install("ssl_version"), 
+    setAttrib(ans, install("ssl_version"),
 	      mkString(d->ssl_version ? d->ssl_version : "none"));
-    setAttrib(ans, install("libssh_version"), 
+    setAttrib(ans, install("libssh_version"),
 	      mkString(((d->age >= 3) && d->libssh_version) ? d->libssh_version : ""));
     const char * const *p;
-    int n, i; 
+    int n, i;
     for(p = d->protocols, n = 0; *p; p++, n++) ;
     SEXP protocols = PROTECT(allocVector(STRSXP, n));
     for(p = d->protocols, i = 0; i < n; i++, p++)
@@ -97,8 +100,8 @@ static void curlCommon(CURL *hnd, int redirect)
 static char headers[500][2048];
 static int used;
 
-static size_t 
-rcvHeaders(void *buffer, size_t size, size_t nmemb, void *userp) 
+static size_t
+rcvHeaders(void *buffer, size_t size, size_t nmemb, void *userp)
 {
     char *d = (char*)buffer;
     size_t result = size * nmemb, res = result > 2048 ? 2048 : result;
@@ -106,11 +109,12 @@ rcvHeaders(void *buffer, size_t size, size_t nmemb, void *userp)
     strncpy(headers[used], d, res);
     headers[used][res] = '\0';
     used++;
-    return result;      
+    return result;
 }
 #endif
 
-SEXP attribute_hidden 
+
+SEXP attribute_hidden
 in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
@@ -151,6 +155,99 @@ in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 #endif
 }
+#ifdef Win32
+#include <ga.h>
+
+typedef struct {
+    window wprog;
+    progressbar pb;
+    label l_url;
+    RCNTXT cntxt;
+    int pc;
+} winprogressbar;
+
+static winprogressbar pbar = {NULL, NULL, NULL};
+
+static void doneprogressbar(void *data)
+{
+    winprogressbar *pbar = data;
+    hide(pbar->wprog);
+}
+static double total;
+
+static
+int progress(void *clientp, double dltotal, double dlnow,
+	     double ultotal, double ulnow)
+{
+    static int factor = 1;
+    // we only use downloads.  dltotal may be zero.
+    if(dltotal > 0.) {
+	if(total == 0.) {
+	    total = dltotal;
+	    if(total > 1024.0*1024.0)
+		// might be longer than long, and is on 64-bit windows
+		REprintf(n_("Content length %0.0f byte (%0.1f MB)\n", "Content length %0.0f bytes (%0.1f MB)\n", total),
+			 total, total/1024.0/1024.0);
+	    else if(total > 10240)
+		REprintf(n_("Content length %d byte (%d KB)\n", "Content length %d bytes (%d KB)\n", (int)total),
+			 (int)total, (int)(total/1024));
+	    else
+		REprintf(n_("Content length %d byte\n", "Content length %d bytes\n",(int)total), (int)total);
+	    R_FlushConsole();
+	    if (total > 1e9) factor = total/1e6; else factor = 1;
+	    setprogressbarrange(pbar.pb, 0, total/factor);
+	    show(pbar.wprog);
+	}
+	setprogressbar(pbar.pb, dlnow/factor);
+	if (total > 0) {
+	    static char pbuf[30];
+	    int pc = 0.499 + 100.0*dlnow/total;
+	    if (pc > pbar.pc) {
+		snprintf(pbuf, 30, _("%d%% downloaded"), pc);
+		settext(pbar.wprog, pbuf);
+		pbar.pc = pc;
+	    }
+	}
+
+    }
+    return 0;
+}
+
+#else
+static double total, nbytes;
+static int ndashes;
+static void putdashes(int *pold, int new)
+{
+    int i, old = *pold;
+    *pold = new;
+    for(i = old; i < new; i++)  REprintf("=");
+    if(R_Consolefile) fflush(R_Consolefile);
+}
+
+static
+int progress(void *clientp, double dltotal, double dlnow,
+	     double ultotal, double ulnow)
+{
+    // we only use downloads.  dltotal may be zero.
+    if(dltotal > 0.) {
+	if(total == 0.) {
+	    total = dltotal;
+	    if(total > 1024.0*1024.0)
+		// might be longer than long, and is on 64-bit windows
+		REprintf(n_("Content length %0.0f byte (%0.1f MB)\n", "Content length %0.0f bytes (%0.1f MB)\n", total),
+			 total, total/1024.0/1024.0);
+	    else if(total > 10240)
+		REprintf(n_("Content length %d byte (%d KB)\n", "Content length %d bytes (%d KB)\n",(int)total),
+			 (int)total, (int)(total/1024));
+	    else
+		REprintf(n_("Content length %d byte\n", "Content length %d bytes\n", (int)total), (int)total);
+	    if(R_Consolefile) fflush(R_Consolefile);
+	}
+	putdashes(&ndashes, (int)(50*dlnow/total));
+    }
+    return 0;
+}
+#endif
 
 extern void Rsleep(double timeint);
 
