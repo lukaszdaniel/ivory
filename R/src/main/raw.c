@@ -124,7 +124,7 @@ SEXP attribute_hidden do_intToBits(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP ans, x;
     R_xlen_t i, j = 0;
     unsigned int tmp;
-    
+
     PROTECT(x = coerceVector(CAR(args), INTSXP));
     if (!isInteger(x))
 	error(_("'%s' argument must be an integer vector"), "x");

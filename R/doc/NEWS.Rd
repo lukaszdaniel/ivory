@@ -206,6 +206,9 @@
       \item \code{topenv()} has been made \code{.Internal()} for
       speedup, based on Peter Haverty's proposal in \PR{16140}.
 
+      \item \code{getOption()} no longer calls \code{options()} in the main
+      case.
+
       \item Work in progress on optional use of \code{libcurl} (version
       7.28.0 or later) for Internet access (including on Windows):
       \itemize{
@@ -229,6 +232,9 @@
 
 	\item \code{url()} has a new method \code{"libcurl"} (unfinished).
       }
+
+      \item Internet download progress bars are now only shown in
+      interactive sessions.
     }
   }
 

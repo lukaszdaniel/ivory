@@ -333,7 +333,7 @@ static SEXP in_do_download(SEXP args)
     else
 	headers = CHAR(STRING_ELT(sheaders, 0));
 #ifdef Win32
-    if (!quiet && !pbar.wprog) {
+    if (!quiet && R_Interactive && !pbar.wprog) {
 	pbar.wprog = newwindow(_("Download progress"), rect(0, 0, 540, 100), Titlebar | Centered);
 	setbackground(pbar.wprog, dialog_bg());
 	pbar.l_url = newlabel(" ", rect(10, 15, 520, 25), AlignCenter);
@@ -411,7 +411,7 @@ static SEXP in_do_download(SEXP args)
 		strcat(buf, "... ");
 		strcat(buf, url + (strlen(url) - 60));
 	    } else strcat(buf, url);
-	    if(!quiet) {
+	    if(!quiet && R_Interactive) {
 		settext(pbar.l_url, buf);
 		setprogressbarrange(pbar.pb, 0, guess/factor);
 		setprogressbar(pbar.pb, 0);
@@ -429,7 +429,7 @@ static SEXP in_do_download(SEXP args)
 		if(res != len) error(_("write failed"));
 		nbytes += len;
 #ifdef Win32
-		if(!quiet) {
+		if(!quiet && R_Interactive) {
 		    if(nbytes > guess) {
 			guess *= 2;
 			if (guess > 1e9) factor = guess/1e6;
@@ -446,7 +446,7 @@ static SEXP in_do_download(SEXP args)
 		    }
 		}
 #else
-		if(!quiet) {
+		if(!quiet && R_Interactive) {
 		    if(guess <= 0) putdots(&ndots, nbytes/1024);
 		    else putdashes(&ndashes, (int)(50*nbytes/guess));
 		}
@@ -455,19 +455,19 @@ static SEXP in_do_download(SEXP args)
 	    in_R_HTTPClose(ctxt);
 	    if(!quiet) {
 #ifndef Win32
-		REprintf("\n");
+		if(R_Interactive) REprintf("\n");
 #endif
 		if(nbytes > 1024*1024)
-		    REprintf(_("Downloaded %0.1f MB"), (double)nbytes/1024/1024, url);
+		    REprintf(_("Downloaded %0.1f MB"), (double)nbytes/1024/1024);
 		else if(nbytes > 10240)
-		    REprintf(_("Downloaded %d KB"), (int) nbytes/1024, url);
+		    REprintf(_("Downloaded %d KB"), (int) nbytes/1024);
 		else
-		    REprintf(n_("Downloaded %d byte", "Downloaded %d bytes", (int) nbytes), (int) nbytes, url);
+		    REprintf(n_("Downloaded %d byte", "Downloaded %d bytes", (int) nbytes), (int) nbytes);
 		REprintf("\n\n");
 	    }
 #ifdef Win32
 	    R_FlushConsole();
-	    if(!quiet) {
+	    if(!quiet && R_Interactive) {
 		endcontext(&(pbar.cntxt));
 		doneprogressbar(&pbar);
 	    }
@@ -517,7 +517,7 @@ static SEXP in_do_download(SEXP args)
 		strcat(buf, "... ");
 		strcat(buf, url + (strlen(url) - 60));
 	    } else strcat(buf, url);
-	    if(!quiet) {
+	    if(!quiet && R_Interactive) {
 		settext(pbar.l_url, buf);
 		setprogressbarrange(pbar.pb, 0, guess/factor);
 		setprogressbar(pbar.pb, 0);
@@ -538,7 +538,7 @@ static SEXP in_do_download(SEXP args)
 		if(res != len) error(_("write failed"));
 		nbytes += len;
 #ifdef Win32
-		if(!quiet) {
+		if(!quiet && R_Interactive) {
 		    if(nbytes > guess) {
 			guess *= 2;
 			if (guess > 1e9) factor = guess/1e6;
@@ -555,7 +555,7 @@ static SEXP in_do_download(SEXP args)
 		    }
 		}
 #else
-		if(!quiet) {
+		if(!quiet && R_Interactive) {
 		    if(guess <= 0) putdots(&ndots, nbytes/1024);
 		    else putdashes(&ndashes, (int)(50*nbytes/guess));
 		}
@@ -564,20 +564,20 @@ static SEXP in_do_download(SEXP args)
 	    in_R_FTPClose(ctxt);
 	    if(!quiet) {
 #ifndef Win32
-		REprintf("\n");
+		if(R_Interactive) REprintf("\n");
 #endif
 		if(nbytes > 1024*1024)
 		    REprintf(_("Downloaded %0.1f MB"),
-			     (double)nbytes/1024/1024, url);
+			     (double)nbytes/1024/1024);
 		else if(nbytes > 10240)
-		    REprintf(_("Downloaded %d KB"), (int) nbytes/1024, url);
+		    REprintf(_("Downloaded %d KB"), (int) nbytes/1024);
 		else
-		    REprintf(n_("Downloaded %d byte", "Downloaded %d bytes", (int) nbytes), (int) nbytes, url);
+		    REprintf(n_("Downloaded %d byte", "Downloaded %d bytes", (int) nbytes), (int) nbytes);
 			REprintf("\n\n");
 	    }
 #ifdef Win32
 	    R_FlushConsole();
-	    if(!quiet) {
+	    if(!quiet && R_Interactive) {
 		endcontext(&(pbar.cntxt));
 		doneprogressbar(&pbar);
 	    }
@@ -717,7 +717,7 @@ static void in_R_FTPClose(void *ctx)
 #include <windows.h>
 #include <wininet.h>
 typedef struct wictxt {
-    int length;
+    DLsize_t length;
     char * type;
     HINTERNET hand;
     HINTERNET session;
@@ -807,10 +807,10 @@ static void *in_R_HTTPOpen(const char *url, const char *headers,
 
     wictxt->session = (HINTERNET) callback_res->dwResult;
 #else
-/*    if(!IDquiet) {
+    /* if(!IDquiet) {
 	REprintf("using Synchronous WinInet calls\n");
 	R_FlushConsole();
-	} */
+    } */
     wictxt->session = InternetOpenUrl(wictxt->hand, url,
 				      NULL, 0,
 	INTERNET_FLAG_KEEP_CONNECTION | INTERNET_FLAG_NO_CACHE_WRITE,
@@ -863,6 +863,7 @@ static void *in_R_HTTPOpen(const char *url, const char *headers,
     HttpQueryInfo(wictxt->session,
 		  HTTP_QUERY_CONTENT_TYPE, &buf, &d3, &d2);
     d2 = 0;
+    // NB: this can only retrieve in a DWORD, so up to 2GB or 4GB?
     HttpQueryInfo(wictxt->session,
 		  HTTP_QUERY_CONTENT_LENGTH | HTTP_QUERY_FLAG_NUMBER,
 		  &status, &d1, &d2);
@@ -870,7 +871,6 @@ static void *in_R_HTTPOpen(const char *url, const char *headers,
     wictxt->type = strdup(buf);
     if(!IDquiet) {
 	if(status > 1024*1024)
-	    // might be longer than long, and is on 64-bit windows
 	    REprintf(n_("Content type '%s' length %0.0f byte (%0.1f MB)\n", "Content type '%s' length %0.0f bytes (%0.1f MB)\n", status), buf, (double) status, status/1024.0/1024.0);
 	else if(status > 10240)
 	    REprintf(n_("Content type '%s' length %d byte (%d KB)\n", "Content type '%s' length %d bytes (%d KB)\n", (int)status), buf, (int) status, (int) (status/1024));
