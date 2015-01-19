@@ -626,18 +626,19 @@ void *in_R_HTTPOpen(const char *url, const char *headers, const int cacheOK)
 	    if(!IDquiet){
 		if(len > 1024*1024)
 		    // might be longer than long, and is on 64-bit windows
-		    REprintf(n_("Content type '%s' length %0.0f byte (%0.1f MB)\n",
-				      "Content type '%s' length %0.0f bytes (%0.1f MB)\n",
+		    REprintf(n_("Content type '%s' length %0.0f byte (%0.1f MB)",
+				      "Content type '%s' length %0.0f bytes (%0.1f MB)",
 				      len), type ? type : "unknown", (double)len, len/1024.0/1024.0);
 		else if(len > 10240)
-		    REprintf(n_("Content type '%s' length %d byte (%d KB)\n",
-				      "Content type '%s' length %d bytes (%d KB)\n",
+		    REprintf(n_("Content type '%s' length %d byte (%d KB)",
+				      "Content type '%s' length %d bytes (%d KB)",
 				      (int)len), type ? type : "unknown", (int)len, (int)(len/1024));
 		else if(len >= 0)
-		    REprintf(n_("Content type '%s' length %d byte\n",
-				      "Content type '%s' length %d bytes\n",
+		    REprintf(n_("Content type '%s' length %d byte",
+				      "Content type '%s' length %d bytes",
 				      (int)len), type ? type : "unknown", (int)len);
-		else REprintf(_("Content type '%s' length unknown\n"), type ? type : "unknown", len);
+		else REprintf(_("Content type '%s' length unknown"), type ? type : "unknown", len);
+		REprintf("\n");
 #ifdef Win32
 		R_FlushConsole();
 #endif
@@ -871,11 +872,12 @@ static void *in_R_HTTPOpen(const char *url, const char *headers,
     wictxt->type = strdup(buf);
     if(!IDquiet) {
 	if(status > 1024*1024)
-	    REprintf(n_("Content type '%s' length %0.0f byte (%0.1f MB)\n", "Content type '%s' length %0.0f bytes (%0.1f MB)\n", status), buf, (double) status, status/1024.0/1024.0);
+	    REprintf(n_("Content type '%s' length %0.0f byte (%0.1f MB)", "Content type '%s' length %0.0f bytes (%0.1f MB)", status), buf, (double) status, status/1024.0/1024.0);
 	else if(status > 10240)
-	    REprintf(n_("Content type '%s' length %d byte (%d KB)\n", "Content type '%s' length %d bytes (%d KB)\n", (int)status), buf, (int) status, (int) (status/1024));
+	    REprintf(n_("Content type '%s' length %d byte (%d KB)", "Content type '%s' length %d bytes (%d KB)", (int)status), buf, (int) status, (int) (status/1024));
 	else
-	    REprintf(n_("Content type '%s' length %d byte\n", "Content type '%s' length %d bytes\n", (int)status), buf, (int) status);
+	    REprintf(n_("Content type '%s' length %d byte", "Content type '%s' length %d bytes", (int)status), buf, (int) status);
+	    REprintf("\n");
 	R_FlushConsole();
     }
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-17 13:25+0100\n"
+"POT-Creation-Date: 2015-01-19 20:30+0100\n"
 "PO-Revision-Date: 2011-10-13 17:30+0800\n"
 "Last-Translator: Wei-Lun Chao <chaoweilun@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -510,7 +510,7 @@ msgid "End of file"
 msgstr "列尾"
 
 #: src/extra/trio/trio.c:7618 src/main/builtin.c:897 src/main/builtin.c:907
-#: src/main/options.c:642 src/modules/X11/dataentry.c:315
+#: src/main/options.c:652 src/modules/X11/dataentry.c:315
 #: src/modules/X11/dataentry.c:470 src/modules/X11/dataentry.c:473
 #: src/modules/X11/dataentry.c:503
 msgid "invalid argument"
@@ -669,9 +669,9 @@ msgstr "顯示'%s' 時發生問題"
 #: src/main/connections.c:4665 src/main/connections.c:4669
 #: src/main/connections.c:4797 src/main/connections.c:4799
 #: src/main/connections.c:4801 src/main/connections.c:4829
-#: src/main/connections.c:4959 src/main/connections.c:4985
-#: src/main/connections.c:4989 src/main/connections.c:4993
-#: src/main/connections.c:4997 src/main/context.c:607 src/main/context.c:616
+#: src/main/connections.c:4964 src/main/connections.c:4993
+#: src/main/connections.c:4997 src/main/connections.c:5001
+#: src/main/connections.c:5005 src/main/context.c:607 src/main/context.c:616
 #: src/main/context.c:620 src/main/datetime.c:776 src/main/datetime.c:866
 #: src/main/datetime.c:868 src/main/datetime.c:872 src/main/datetime.c:1028
 #: src/main/datetime.c:1030 src/main/datetime.c:1235 src/main/debug.c:241
@@ -686,13 +686,13 @@ msgstr "顯示'%s' 時發生問題"
 #: src/main/envir.c:3035 src/main/envir.c:3049 src/main/envir.c:3056
 #: src/main/envir.c:3072 src/main/envir.c:3644 src/main/errors.c:1042
 #: src/main/eval.c:394 src/main/eval.c:403 src/main/eval.c:406
-#: src/main/grep.c:769 src/main/grep.c:774 src/main/grep.c:1065
-#: src/main/grep.c:1067 src/main/grep.c:1069 src/main/grep.c:1513
-#: src/main/grep.c:1517 src/main/grep.c:1522 src/main/grep.c:2326
-#: src/main/grep.c:2331 src/main/grep.c:2627 src/main/grep.c:2632
+#: src/main/grep.c:775 src/main/grep.c:780 src/main/grep.c:1074
+#: src/main/grep.c:1076 src/main/grep.c:1078 src/main/grep.c:1523
+#: src/main/grep.c:1527 src/main/grep.c:1532 src/main/grep.c:2340
+#: src/main/grep.c:2345 src/main/grep.c:2644 src/main/grep.c:2649
 #: src/main/internet.c:240 src/main/internet.c:254 src/main/internet.c:272
 #: src/main/internet.c:284 src/main/internet.c:296 src/main/internet.c:315
-#: src/main/memory.c:3793 src/main/names.c:1295 src/main/names.c:1298
+#: src/main/memory.c:3793 src/main/names.c:1301 src/main/names.c:1304
 #: src/main/objects.c:1547 src/main/objects.c:1549 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
 #: src/main/paste.c:411 src/main/paste.c:416 src/main/paste.c:421
@@ -737,12 +737,12 @@ msgstr "顯示'%s' 時發生問題"
 #: src/main/util.c:2207 src/main/util.c:2209 src/main/util.c:2234
 #: src/main/util.c:2236 src/main/util.c:2238 src/main/util.c:2241
 #: src/main/util.c:2244 src/main/util.c:2248 src/main/util.c:2250
-#: src/modules/internet/internet.c:290 src/modules/internet/internet.c:296
-#: src/modules/internet/internet.c:302 src/modules/internet/internet.c:305
-#: src/modules/internet/internet.c:309 src/modules/internet/libcurl.c:126
-#: src/modules/internet/libcurl.c:174 src/modules/internet/libcurl.c:180
-#: src/modules/internet/libcurl.c:186 src/modules/internet/libcurl.c:189
-#: src/modules/internet/libcurl.c:193 src/modules/lapack/Lapack.c:156
+#: src/modules/internet/internet.c:304 src/modules/internet/internet.c:310
+#: src/modules/internet/internet.c:316 src/modules/internet/internet.c:319
+#: src/modules/internet/internet.c:323 src/modules/internet/libcurl.c:132
+#: src/modules/internet/libcurl.c:283 src/modules/internet/libcurl.c:287
+#: src/modules/internet/libcurl.c:292 src/modules/internet/libcurl.c:295
+#: src/modules/internet/libcurl.c:299 src/modules/lapack/Lapack.c:156
 #: src/modules/lapack/Lapack.c:262 src/modules/lapack/Lapack.c:709
 #: src/modules/lapack/Lapack.c:818 src/modules/lapack/Lapack.c:880
 #: src/modules/lapack/Lapack.c:1205 src/modules/X11/devX11.c:3230
@@ -777,11 +777,11 @@ msgstr "第一引數必須是字元向量"
 
 #: src/gnuwin32/extra.c:415 src/main/edit.c:141 src/main/errors.c:1044
 #: src/main/errors.c:1046 src/main/objects.c:411 src/main/objects.c:1128
-#: src/main/raw.c:151 src/main/Renviron.c:311 src/main/unique.c:1575
-#: src/modules/lapack/Lapack.c:85 src/modules/lapack/Lapack.c:328
-#: src/modules/lapack/Lapack.c:358 src/modules/lapack/Lapack.c:406
-#: src/modules/lapack/Lapack.c:442 src/modules/lapack/Lapack.c:499
-#: src/modules/lapack/Lapack.c:743
+#: src/main/options.c:337 src/main/raw.c:151 src/main/Renviron.c:311
+#: src/main/unique.c:1575 src/modules/lapack/Lapack.c:85
+#: src/modules/lapack/Lapack.c:328 src/modules/lapack/Lapack.c:358
+#: src/modules/lapack/Lapack.c:406 src/modules/lapack/Lapack.c:442
+#: src/modules/lapack/Lapack.c:499 src/modules/lapack/Lapack.c:743
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string"
 msgstr "'norm' 必須是字串"
@@ -1112,8 +1112,8 @@ msgid "cycle detected"
 msgstr ""
 
 #: src/main/agrep.c:134 src/main/agrep.c:776 src/main/character.c:1040
-#: src/main/character.c:1044 src/main/grep.c:771 src/main/grep.c:1515
-#: src/main/grep.c:1519 src/main/grep.c:2328 src/main/grep.c:2629
+#: src/main/character.c:1044 src/main/grep.c:777 src/main/grep.c:1525
+#: src/main/grep.c:1529 src/main/grep.c:2342 src/main/grep.c:2646
 #, c-format
 msgid "argument '%s' has length > 1 and only the first element will be used"
 msgstr "引數 '%s' 長度 > 1 且只有第一個元素將被使用"
@@ -1124,29 +1124,29 @@ msgstr "引數 '%s' 長度 > 1 且只有第一個元素將被使用"
 msgid "'%s' argument must be a non-empty character string"
 msgstr "'pattern' 必須是非空字串"
 
-#: src/main/agrep.c:202 src/main/agrep.c:827 src/main/grep.c:842
-#: src/main/grep.c:2386 src/main/grep.c:2668
+#: src/main/agrep.c:202 src/main/agrep.c:827 src/main/grep.c:848
+#: src/main/grep.c:2400 src/main/grep.c:2685
 msgid "regular expression is invalid in this locale"
 msgstr "正規表示式不適用於此語言環境"
 
 #: src/main/agrep.c:208 src/main/agrep.c:624 src/main/agrep.c:833
-#: src/main/grep.c:2674
+#: src/main/grep.c:2691
 #, c-format
 msgid "regcomp error: '%s'"
 msgstr "正規表示式編譯錯誤：'%s'"
 
-#: src/main/agrep.c:240 src/main/agrep.c:872 src/main/grep.c:227
-#: src/main/grep.c:317 src/main/grep.c:425 src/main/grep.c:581
-#: src/main/grep.c:894 src/main/grep.c:1648 src/main/grep.c:2486
-#: src/main/grep.c:2555 src/main/grep.c:2705
+#: src/main/agrep.c:240 src/main/agrep.c:872 src/main/grep.c:228
+#: src/main/grep.c:318 src/main/grep.c:429 src/main/grep.c:585
+#: src/main/grep.c:902 src/main/grep.c:1660 src/main/grep.c:2502
+#: src/main/grep.c:2571 src/main/grep.c:2722
 #, c-format
 msgid "input string %d is invalid in this locale"
 msgstr "輸入的字串 %d 不適用於此語言環境"
 
-#: src/main/agrep.c:527 src/main/agrep.c:765 src/main/grep.c:153
-#: src/main/grep.c:762 src/main/grep.c:764 src/main/grep.c:1051
-#: src/main/grep.c:1059 src/main/grep.c:1506 src/main/grep.c:1508
-#: src/main/grep.c:2318 src/main/grep.c:2320 src/main/grep.c:2617
+#: src/main/agrep.c:527 src/main/agrep.c:765 src/main/grep.c:154
+#: src/main/grep.c:768 src/main/grep.c:770 src/main/grep.c:1060
+#: src/main/grep.c:1068 src/main/grep.c:1516 src/main/grep.c:1518
+#: src/main/grep.c:2332 src/main/grep.c:2334 src/main/grep.c:2634
 #, c-format
 msgid "argument '%s' will be ignored"
 msgstr "引數 '%s' 將被忽略"
@@ -1429,7 +1429,7 @@ msgstr "perm[%d] 不符合維度名稱"
 msgid "value is out of range in 'perm' argument"
 msgstr "'perm' 的值在範圍外"
 
-#: src/main/array.c:1236 src/main/connections.c:5410 src/main/debug.c:112
+#: src/main/array.c:1236 src/main/connections.c:5455 src/main/debug.c:112
 #: src/main/objects.c:996 src/main/raw.c:57 src/main/raw.c:331
 #: src/main/sort.c:327 src/main/sort.c:1229 src/main/sort.c:1397
 #: src/main/unique.c:670 src/main/unique.c:1384 src/main/unique.c:1456
@@ -1720,8 +1720,8 @@ msgstr "正式引數 'recursive' 出現重複"
 msgid "argument is not a list"
 msgstr "引數不是串列"
 
-#: src/main/bind.c:1039 src/main/names.c:1261 src/main/names.c:1266
-#: src/main/names.c:1271 src/main/names.c:1276
+#: src/main/bind.c:1039 src/main/names.c:1267 src/main/names.c:1272
+#: src/main/names.c:1277 src/main/names.c:1282
 #, fuzzy, c-format
 msgid "class name is too long in '%s'"
 msgstr "'%s' 中的類別名稱太長"
@@ -1818,7 +1818,7 @@ msgstr "引數不是環境物件"
 #: src/main/connections.c:4064 src/main/connections.c:4098
 #: src/main/connections.c:4476 src/main/connections.c:4546
 #: src/main/connections.c:4755 src/main/connections.c:4759
-#: src/main/connections.c:5119 src/main/deparse.c:363 src/main/deparse.c:451
+#: src/main/connections.c:5164 src/main/deparse.c:363 src/main/deparse.c:451
 #: src/main/serialize.c:2042
 msgid "cannot write to this connection"
 msgstr "無法寫入此連結"
@@ -1937,7 +1937,7 @@ msgstr "abbreviate 不適用於非 ASCII 字元"
 msgid "non-character names"
 msgstr "不能有非字元名稱"
 
-#: src/main/character.c:699 src/main/grep.c:157
+#: src/main/character.c:699 src/main/grep.c:158
 msgid "non-character argument"
 msgstr "非字元引數"
 
@@ -2314,8 +2314,8 @@ msgstr "無法開啟連結"
 #: src/main/connections.c:1521 src/main/connections.c:1531
 #: src/main/connections.c:1650 src/main/connections.c:1710
 #: src/main/connections.c:2237 src/main/connections.c:2254
-#: src/main/connections.c:2563 src/main/connections.c:5300
-#: src/main/connections.c:5364
+#: src/main/connections.c:2563 src/main/connections.c:5345
+#: src/main/connections.c:5409
 #, fuzzy
 msgid "specified block is too large"
 msgstr "指定的向量大小太大"
@@ -2352,13 +2352,13 @@ msgstr "先進先出連結配置失敗"
 
 #: src/main/connections.c:1208 src/main/connections.c:1366
 #: src/main/connections.c:1988 src/main/connections.c:3204
-#: src/main/connections.c:4961 src/modules/internet/internet.c:292
-#: src/modules/internet/internet.c:298
+#: src/main/connections.c:4966 src/modules/internet/internet.c:306
+#: src/modules/internet/internet.c:312
 #, fuzzy, c-format
 msgid "only first element of '%s' argument will be used"
 msgstr "只用了 'description' 引數的第一個元素"
 
-#: src/main/connections.c:1225 src/main/connections.c:5023
+#: src/main/connections.c:1225 src/main/connections.c:5068
 #, fuzzy, c-format
 msgid ""
 "'%s' only supports 'open = \"w+\"' and 'open = \"w+b\"': using the former"
@@ -2370,7 +2370,7 @@ msgstr "fifo (\"\") 只有支援開啟= \"w+\" 和開啟= \"w+b\"：使用前項
 #: src/main/connections.c:3560 src/main/connections.c:3675
 #: src/main/connections.c:3837 src/main/connections.c:4091
 #: src/main/connections.c:4419 src/main/connections.c:4539
-#: src/main/connections.c:4751 src/main/connections.c:5100 src/main/dcf.c:95
+#: src/main/connections.c:4751 src/main/connections.c:5145 src/main/dcf.c:95
 #: src/main/deparse.c:355 src/main/deparse.c:443 src/main/saveload.c:2259
 #: src/main/saveload.c:2340 src/main/scan.c:933 src/main/serialize.c:2213
 #: src/main/serialize.c:2264 src/main/source.c:268
@@ -2440,13 +2440,13 @@ msgstr "檔案 '%s' 有尾隨的內容，看起來並非由 bzip2 壓縮過"
 msgid "allocation of bzfile connection failed"
 msgstr "配置 bz 檔案連結失敗"
 
-#: src/main/connections.c:1794 src/main/connections.c:5956
+#: src/main/connections.c:1794 src/main/connections.c:6001
 #, c-format
 msgid "cannot initialize lzma decoder, error %d"
 msgstr "無法初始化 lzma 解碼器，錯誤 %d"
 
-#: src/main/connections.c:1803 src/main/connections.c:5682
-#: src/main/connections.c:5849
+#: src/main/connections.c:1803 src/main/connections.c:5727
+#: src/main/connections.c:5894
 #, fuzzy
 msgid "problem with setting presets"
 msgstr "設定時區時發生問題"
@@ -2569,7 +2569,7 @@ msgstr "原始連接的配置失敗"
 #: src/main/connections.c:3313 src/main/connections.c:3360
 #: src/main/connections.c:3385 src/main/connections.c:3408
 #: src/main/connections.c:3420 src/main/connections.c:3536
-#: src/main/connections.c:3660 src/main/connections.c:5403
+#: src/main/connections.c:3660 src/main/connections.c:5448
 #, fuzzy, c-format
 msgid "'%s' argument is not an object of class %s"
 msgstr "'con' 不是個輸出的 rawConnection"
@@ -2648,8 +2648,8 @@ msgstr "無法關閉輸出匯集連結"
 msgid "cannot close 'message' sink connection"
 msgstr "無法關閉訊息匯集連結"
 
-#: src/main/connections.c:3387 src/main/connections.c:5118
-#: src/main/connections.c:5126 src/main/serialize.c:2032
+#: src/main/connections.c:3387 src/main/connections.c:5163
+#: src/main/connections.c:5171 src/main/serialize.c:2032
 #: src/main/serialize.c:2040
 msgid "connection is not open"
 msgstr "連結沒有開啟"
@@ -2661,7 +2661,7 @@ msgstr "列長大於緩衝區"
 
 #: src/main/connections.c:3567 src/main/connections.c:3569
 #: src/main/connections.c:3845 src/main/connections.c:4402
-#: src/main/connections.c:4427 src/main/connections.c:5127 src/main/dcf.c:102
+#: src/main/connections.c:4427 src/main/connections.c:5172 src/main/dcf.c:102
 #: src/main/scan.c:936 src/main/scan.c:940 src/main/serialize.c:2034
 #: src/main/source.c:275
 msgid "cannot read from this connection"
@@ -2832,124 +2832,155 @@ msgstr "沒有任何連接 %d"
 msgid "there is no connection %d"
 msgstr "沒有任何連接 %d"
 
-#: src/main/connections.c:5077 src/modules/internet/internet.c:121
-#: src/modules/internet/internet.c:581
-msgid "unsupported URL scheme"
-msgstr "不支援這種 URL 方案"
+#: src/main/connections.c:5016
+msgid ""
+"ftps:// URLs are not supported by the default method:\n"
+"   consider url(method = \"libcurl\")"
+msgstr ""
 
-#: src/main/connections.c:5168
+#: src/main/connections.c:5018
+#, fuzzy
+msgid "ftps:// URLs are not supported"
+msgstr "類型 '%s' 未被支援"
+
+#: src/main/connections.c:5023 src/modules/internet/internet.c:124
+msgid "for https:// URLs use setInternet2(TRUE)"
+msgstr ""
+
+#: src/main/connections.c:5028
+msgid ""
+"https:// URLs are not supported by the default method:\n"
+"  consider url(method = \"libcurl\")"
+msgstr ""
+
+#: src/main/connections.c:5030
+#, fuzzy
+msgid "https:// URLs are not supported"
+msgstr "類型 '%s' 未被支援"
+
+#: src/main/connections.c:5055 src/modules/internet/libcurl.c:646
+#, fuzzy
+msgid "'url(method = \"libcurl\")' is not supported on this platform"
+msgstr "這個平臺不支援 'dirmark = TRUE'"
+
+#: src/main/connections.c:5122 src/modules/internet/internet.c:129
+#, fuzzy
+msgid "URL scheme unsupported by this method"
+msgstr "這個組建不支援 ICU"
+
+#: src/main/connections.c:5213
 msgid "file stream does not have gzip magic number"
 msgstr "檔案串流沒有 gzip 魔術數字"
 
-#: src/main/connections.c:5179
+#: src/main/connections.c:5224
 msgid "file stream does not have valid gzip header"
 msgstr "檔案串流的 gzip 表頭不正確"
 
-#: src/main/connections.c:5244
+#: src/main/connections.c:5289
 #, fuzzy
 msgid "writing error while flushing gzcon connection"
 msgstr "清除 'gzcon' 連結時寫入發生錯誤"
 
-#: src/main/connections.c:5346
+#: src/main/connections.c:5391
 #, c-format
 msgid "crc error %x %x\n"
 msgstr "crc 錯誤 %x %x\n"
 
-#: src/main/connections.c:5373
+#: src/main/connections.c:5418
 #, fuzzy
 msgid "write error on gzcon connection"
 msgstr "'gzcon' 連結寫入發生錯誤"
 
-#: src/main/connections.c:5407
+#: src/main/connections.c:5452
 #, fuzzy
 msgid "'level' argument must be one of 0 ... 9"
 msgstr "'level' 必須是 0...9 之一"
 
-#: src/main/connections.c:5413
+#: src/main/connections.c:5458
 #, fuzzy
 msgid "this is already a gzcon connection"
 msgstr "這已經是 gzcon 連結"
 
-#: src/main/connections.c:5419
+#: src/main/connections.c:5464
 msgid "can only use read- or write- binary connections"
 msgstr "只用讀或寫的二元連結"
 
-#: src/main/connections.c:5422
+#: src/main/connections.c:5467
 msgid "using a text-mode 'file' connection may not work correctly"
 msgstr "使用某個文字模式 'file' 連結可能不會正確作用"
 
-#: src/main/connections.c:5425
+#: src/main/connections.c:5470
 #, fuzzy
 msgid ""
 "cannot create a gzcon connection from a writable textConnection; maybe use "
 "rawConnection"
 msgstr "無法從可寫入的 textConnection 建立 gzcon 連接；也許使用 rawConnection"
 
-#: src/main/connections.c:5428 src/main/connections.c:5432
-#: src/main/connections.c:5439 src/main/connections.c:5453
+#: src/main/connections.c:5473 src/main/connections.c:5477
+#: src/main/connections.c:5484 src/main/connections.c:5498
 #, fuzzy
 msgid "allocation of gzcon connection failed"
 msgstr "配置 'gzcon' 連結失敗"
 
-#: src/main/connections.c:5510 src/main/connections.c:5535
-#: src/main/connections.c:5561 src/main/connections.c:5594
-#: src/main/connections.c:5704 src/main/connections.c:5744
+#: src/main/connections.c:5555 src/main/connections.c:5580
+#: src/main/connections.c:5606 src/main/connections.c:5639
+#: src/main/connections.c:5749 src/main/connections.c:5789
 #, fuzzy, c-format
 msgid "'%s' function requires a raw vector"
 msgstr "'%s' 需要字元向量"
 
-#: src/main/connections.c:5517 src/main/connections.c:5541
-#: src/main/connections.c:5571 src/main/connections.c:5602
-#: src/main/connections.c:5611 src/main/connections.c:5714
-#: src/main/connections.c:5721 src/main/connections.c:5755
-#: src/main/connections.c:5775 src/main/connections.c:5783
-#: src/main/connections.c:5820 src/main/connections.c:5833
-#: src/main/connections.c:5855 src/main/connections.c:5865
+#: src/main/connections.c:5562 src/main/connections.c:5586
+#: src/main/connections.c:5616 src/main/connections.c:5647
+#: src/main/connections.c:5656 src/main/connections.c:5759
+#: src/main/connections.c:5766 src/main/connections.c:5800
+#: src/main/connections.c:5820 src/main/connections.c:5828
+#: src/main/connections.c:5865 src/main/connections.c:5878
+#: src/main/connections.c:5900 src/main/connections.c:5910
 #, fuzzy, c-format
 msgid "internal error %d in '%s' function"
 msgstr "內部錯誤 'do_sys'"
 
-#: src/main/connections.c:5618 src/main/connections.c:5790
+#: src/main/connections.c:5663 src/main/connections.c:5835
 #, fuzzy, c-format
 msgid "unknown type in '%s' function"
 msgstr "不明的 cumxxx 功能"
 
-#: src/main/connections.c:5640
+#: src/main/connections.c:5685
 #, fuzzy, c-format
 msgid "'%s' argument is not a list of sockets"
 msgstr "非插槽串列"
 
-#: src/main/connections.c:5645
+#: src/main/connections.c:5690
 msgid "bad write indicators"
 msgstr "寫入指示器不正確"
 
-#: src/main/connections.c:5656
+#: src/main/connections.c:5701
 #, fuzzy
 msgid "this is not a socket connection"
 msgstr "非插槽連結"
 
-#: src/main/connections.c:5765 src/main/connections.c:5919
-#: src/main/connections.c:5935
+#: src/main/connections.c:5810 src/main/connections.c:5964
+#: src/main/connections.c:5980
 #, fuzzy, c-format
 msgid "internal error %d in '%s' function (%d)"
 msgstr "內部錯誤 'do_sys'"
 
-#: src/main/connections.c:5808 src/main/connections.c:5888
+#: src/main/connections.c:5853 src/main/connections.c:5933
 #, fuzzy
 msgid "'from' argument must be raw or character"
 msgstr "'norm' 必須是字串"
 
-#: src/main/connections.c:5900
+#: src/main/connections.c:5945
 msgid "unknown compression, assuming none"
 msgstr "不明壓縮，假設為沒有"
 
-#: src/main/connections.c:5981
+#: src/main/connections.c:6026
 #, fuzzy, c-format
 msgid "internal error %d in '%s' function (%d) at %d"
 msgstr "do_random1 產生了內部錯誤"
 
-#: src/main/connections.c:6017 src/main/connections.c:6021
-#: src/main/connections.c:6027
+#: src/main/connections.c:6062 src/main/connections.c:6066
+#: src/main/connections.c:6072
 #, fuzzy, c-format
 msgid "allocation of %s connection failed"
 msgstr "原始連接的配置失敗"
@@ -4428,7 +4459,7 @@ msgstr "位元組碼版本不符"
 msgid "invalid sequence argument in 'for()' loop"
 msgstr "迴圈中的序列引數不正確"
 
-#: src/main/eval.c:5305 src/main/names.c:1300
+#: src/main/eval.c:5305 src/main/names.c:1306
 #, fuzzy, c-format
 msgid "there is no '.Internal' function '%s'"
 msgstr "沒有 \"%s\" 這個內部函數"
@@ -4740,24 +4771,24 @@ msgstr "無效的正規表示式 '%s' ，原因是 '%s'"
 msgid "invalid regular expression, reason '%s'"
 msgstr "無效的正規表示式，原因是 '%s'"
 
-#: src/main/grep.c:219 src/main/grep.c:309 src/main/grep.c:417
-#: src/main/grep.c:887 src/main/grep.c:1644 src/main/grep.c:2478
+#: src/main/grep.c:220 src/main/grep.c:310 src/main/grep.c:421
+#: src/main/grep.c:895 src/main/grep.c:1656 src/main/grep.c:2494
 #, c-format
 msgid "input string %d is invalid UTF-8"
 msgstr "輸入字串 %d 是無效的 UTF-8"
 
-#: src/main/grep.c:286 src/main/grep.c:385
+#: src/main/grep.c:287 src/main/grep.c:386
 #, c-format
 msgid "'split' string %d is invalid UTF-8"
 msgstr "'split' 字串 %d 是無效的 UTF-8"
 
-#: src/main/grep.c:290 src/main/grep.c:389 src/main/grep.c:562
+#: src/main/grep.c:291 src/main/grep.c:390 src/main/grep.c:566
 #, c-format
 msgid "'split' string %d is invalid in this locale"
 msgstr "'split' 字串 %d 在這個語區中無效"
 
-#: src/main/grep.c:395 src/main/grep.c:854 src/main/grep.c:1604
-#: src/main/grep.c:2398
+#: src/main/grep.c:399 src/main/grep.c:862 src/main/grep.c:1616
+#: src/main/grep.c:2414
 #, c-format
 msgid ""
 "PCRE pattern compilation error\n"
@@ -4768,13 +4799,13 @@ msgstr ""
 "\t'%s'\n"
 "\t於 '%s'\n"
 
-#: src/main/grep.c:397
+#: src/main/grep.c:401
 #, c-format
 msgid "invalid split pattern '%s'"
 msgstr "split 的胚騰 '%s' 不正確"
 
-#: src/main/grep.c:401 src/main/grep.c:860 src/main/grep.c:1611
-#: src/main/grep.c:2405
+#: src/main/grep.c:405 src/main/grep.c:868 src/main/grep.c:1623
+#: src/main/grep.c:2421
 #, c-format
 msgid ""
 "PCRE pattern study error\n"
@@ -4783,50 +4814,50 @@ msgstr ""
 "PCRE 胚騰檢查錯誤\n"
 "\t'%s'\n"
 
-#: src/main/grep.c:838 src/main/grep.c:2382
+#: src/main/grep.c:844 src/main/grep.c:2396
 msgid "regular expression is invalid UTF-8"
 msgstr "正規表示式是無效的 UTF-8"
 
-#: src/main/grep.c:856 src/main/grep.c:1606 src/main/grep.c:2400
+#: src/main/grep.c:864 src/main/grep.c:1618 src/main/grep.c:2416
 #, c-format
 msgid "invalid regular expression '%s'"
 msgstr "正規表示式 '%s' 不正確"
 
-#: src/main/grep.c:1268
+#: src/main/grep.c:1277
 msgid "pattern matches an empty string infinitely, returning first match only"
 msgstr "胚騰符合無限大的空字串，只回傳第一個符合者"
 
-#: src/main/grep.c:1580
+#: src/main/grep.c:1590
 msgid "'pattern' is invalid UTF-8"
 msgstr "'pattern' 是無效的 UTF-8"
 
-#: src/main/grep.c:1582
+#: src/main/grep.c:1592
 msgid "'replacement' is invalid UTF-8"
 msgstr "'replacement' 是無效的 UTF-8"
 
-#: src/main/grep.c:1586
+#: src/main/grep.c:1596
 msgid "'pattern' is invalid in this locale"
 msgstr "'pattern' 的值在本語言環境下不正確"
 
-#: src/main/grep.c:1589
+#: src/main/grep.c:1599
 msgid "'replacement' is invalid in this locale"
 msgstr "'replacement' 的值在本語言環境下不正確"
 
-#: src/main/grep.c:1594
+#: src/main/grep.c:1604
 msgid "zero-length pattern"
 msgstr "胚騰長度為零"
 
-#: src/main/grep.c:1736 src/main/grep.c:1752 src/main/grep.c:1800
-#: src/main/grep.c:1816 src/main/grep.c:1863 src/main/grep.c:1879
+#: src/main/grep.c:1748 src/main/grep.c:1764 src/main/grep.c:1812
+#: src/main/grep.c:1828 src/main/grep.c:1875 src/main/grep.c:1891
 msgid "result string is too long"
 msgstr "結果字串太長"
 
-#: src/main/grep.c:2415
+#: src/main/grep.c:2431
 #, fuzzy, c-format
 msgid "'pcre_fullinfo' returned '%d' "
 msgstr "pcre_fullinfo 已回傳 '%d'"
 
-#: src/main/grep.c:2449
+#: src/main/grep.c:2465
 #, fuzzy
 msgid "vector is too long"
 msgstr "指定的向量大小太大"
@@ -4869,7 +4900,7 @@ msgstr "無法讀寫模組中的網際網路例行程式"
 #: src/main/internet.c:162 src/main/internet.c:173 src/main/internet.c:184
 #: src/main/internet.c:193 src/main/internet.c:204 src/main/internet.c:215
 #: src/main/internet.c:224 src/main/internet.c:234 src/main/internet.c:348
-#: src/main/internet.c:359 src/main/internet.c:370
+#: src/main/internet.c:359 src/main/internet.c:370 src/main/internet.c:382
 msgid "internet routines cannot be loaded"
 msgstr "無法載入網際網路例行程式"
 
@@ -5571,34 +5602,34 @@ msgstr "無法為 'read.dcf' 配置記憶體"
 msgid "long vectors not supported yet: %s:%d"
 msgstr ""
 
-#: src/main/names.c:1014
+#: src/main/names.c:1016
 msgid "string argument required"
 msgstr "需要字串引數"
 
-#: src/main/names.c:1017
+#: src/main/names.c:1019
 msgid "no such primitive function"
 msgstr "沒有此一原始函數"
 
-#: src/main/names.c:1136
+#: src/main/names.c:1142
 #, fuzzy
 msgid "couldn't allocate memory for symbol table"
 msgstr "無法為 'read.dcf' 配置記憶體"
 
-#: src/main/names.c:1202 src/main/names.c:1232
+#: src/main/names.c:1208 src/main/names.c:1238
 msgid "attempt to use zero-length variable name"
 msgstr "不能用零長度的變數名"
 
-#: src/main/names.c:1204 src/main/names.c:1234
+#: src/main/names.c:1210 src/main/names.c:1240
 #, c-format
 msgid "variable names are limited to %d bytes"
 msgstr "變數名稱受限為 %d 位元組"
 
-#: src/main/names.c:1321
+#: src/main/names.c:1327
 #, fuzzy, c-format
 msgid "'.Internal(%s())' not called from a base namespace\n"
 msgstr "無法從基本名稱空間刪除變數"
 
-#: src/main/names.c:1328
+#: src/main/names.c:1334
 #, fuzzy, c-format
 msgid "'.Internal(%s())' called from namespace '%s'\n"
 msgstr "無法從基本名稱空間刪除變數"
@@ -5828,39 +5859,39 @@ msgstr ""
 msgid "invalid value for \"device.ask.default\", using FALSE"
 msgstr "用於 \"device.ask.default\" 的值無效，使用 FALSE"
 
-#: src/main/options.c:403
+#: src/main/options.c:413
 msgid "list argument has no valid names"
 msgstr "串列引數沒有任何有效名稱"
 
-#: src/main/options.c:432
+#: src/main/options.c:442
 #, c-format
 msgid "invalid 'width' parameter, allowed %d...%d"
 msgstr "無效的 'width' 參數，允許 %d...%d"
 
-#: src/main/options.c:443
+#: src/main/options.c:453
 #, c-format
 msgid "invalid 'digits' parameter, allowed %d...%d"
 msgstr "無效的 'digits' 參數，允許 %d...%d"
 
-#: src/main/options.c:450
+#: src/main/options.c:460
 #, c-format
 msgid "'expressions' parameter invalid, allowed %d...%d"
 msgstr "'expressions' 參數無效，允許 %d...%d"
 
-#: src/main/options.c:457 src/main/options.c:465 src/main/options.c:471
-#: src/main/options.c:479 src/main/options.c:486 src/main/options.c:491
-#: src/main/options.c:498 src/main/options.c:504 src/main/options.c:510
-#: src/main/options.c:515 src/main/options.c:520 src/main/options.c:529
-#: src/main/options.c:535 src/main/options.c:541 src/main/options.c:551
-#: src/main/options.c:561 src/main/options.c:567 src/main/options.c:575
-#: src/main/options.c:582 src/main/options.c:589 src/main/options.c:596
-#: src/main/options.c:603 src/main/options.c:611 src/main/options.c:620
-#: src/main/options.c:623 src/main/options.c:629
+#: src/main/options.c:467 src/main/options.c:475 src/main/options.c:481
+#: src/main/options.c:489 src/main/options.c:496 src/main/options.c:501
+#: src/main/options.c:508 src/main/options.c:514 src/main/options.c:520
+#: src/main/options.c:525 src/main/options.c:530 src/main/options.c:539
+#: src/main/options.c:545 src/main/options.c:551 src/main/options.c:561
+#: src/main/options.c:571 src/main/options.c:577 src/main/options.c:585
+#: src/main/options.c:592 src/main/options.c:599 src/main/options.c:606
+#: src/main/options.c:613 src/main/options.c:621 src/main/options.c:630
+#: src/main/options.c:633 src/main/options.c:639
 #, c-format
 msgid "invalid value for '%s'"
 msgstr "無效的值用於 '%s'"
 
-#: src/main/options.c:616 src/main/options.c:645
+#: src/main/options.c:626 src/main/options.c:655
 msgid "\"par.ask.default\" has been replaced by \"device.ask.default\""
 msgstr "\"par.ask.default\" 已被 \"device.ask.default\" 所置換"
 
@@ -6901,8 +6932,8 @@ msgid "an xdr complex data read error occurred"
 msgstr "發生了 xdr 複數資料讀取錯誤"
 
 #: src/main/saveload.c:1780 src/main/serialize.c:1994
-#: src/main/serialize.c:2610 src/modules/internet/internet.c:354
-#: src/modules/internet/internet.c:415 src/modules/internet/internet.c:524
+#: src/main/serialize.c:2610 src/modules/internet/internet.c:368
+#: src/modules/internet/internet.c:429 src/modules/internet/internet.c:538
 msgid "write failed"
 msgstr "寫入失敗"
 
@@ -7543,31 +7574,52 @@ msgstr "不支援此一類型"
 msgid "R_LibraryFileName: buffer too small"
 msgstr "R_LibraryFileName: 緩衝區太小"
 
-#: src/main/startup.c:182
+#: src/main/startup.c:183
 #, fuzzy
 msgid "WARNING: invalid 'R_VSIZE' ignored\n"
 msgstr "警告：'%s' 值無效：已忽略"
 
-#: src/main/startup.c:189
+#: src/main/startup.c:186
+#, fuzzy, c-format
+msgid "WARNING: R_VSIZE smaller than Min_Vsize = %lu is ignored\n"
+msgstr "警告：'%s' 值無效：已忽略"
+
+#: src/main/startup.c:196
 #, fuzzy
 msgid "WARNING: invalid 'R_NSIZE' ignored\n"
 msgstr "警告：'%s' 值無效：已忽略"
 
-#: src/main/startup.c:201
+#: src/main/startup.c:199
+#, fuzzy, c-format
+msgid "WARNING: R_NSIZE smaller than Min_Nsize = %lu is ignored\n"
+msgstr "警告：'%s' 值無效：已忽略"
+
+#: src/main/startup.c:214
 msgid "WARNING: 'vsize' argument is ridiculously low, Megabytes assumed\n"
 msgstr ""
 
-#: src/main/startup.c:205
+#: src/main/startup.c:220
 #, c-format
 msgid ""
-"WARNING: invalid (vector heap) 'vsize' argument '%lu' ignored\n"
-"using default = %gM\n"
+"WARNING: too small v(ector heap)size '%lu' ignored, using default = %gM\n"
 msgstr ""
 
-#: src/main/startup.c:212
+#: src/main/startup.c:224
 #, c-format
 msgid ""
-"WARNING: invalid language heap (n)size '%lu' ignored, using default = %ld\n"
+"WARNING: too large v(ector heap)size '%lu' ignored, using default = %gM\n"
+msgstr ""
+
+#: src/main/startup.c:233
+#, c-format
+msgid ""
+"WARNING: too small language heap (n)size '%lu' ignored, using default = %ld\n"
+msgstr ""
+
+#: src/main/startup.c:237
+#, c-format
+msgid ""
+"WARNING: too large language heap (n)size '%lu' ignored, using default = %ld\n"
 msgstr ""
 
 #: src/main/subassign.c:118
@@ -8307,166 +8359,197 @@ msgstr "至少必須有四個控制點"
 msgid "there must be at least three control points"
 msgstr "至少必須有三個控制點"
 
-#: src/modules/internet/internet.c:75
+#: src/modules/internet/internet.c:76
 #, fuzzy
 msgid "can only open URLs for reading"
 msgstr "連接未開啟而無法讀取"
 
-#: src/modules/internet/internet.c:194 src/modules/internet/internet.c:198
-#: src/modules/internet/internet.c:204 src/modules/internet/internet.c:216
+#: src/modules/internet/internet.c:208 src/modules/internet/internet.c:212
+#: src/modules/internet/internet.c:218 src/modules/internet/internet.c:230
+#: src/modules/internet/libcurl.c:612 src/modules/internet/libcurl.c:616
+#: src/modules/internet/libcurl.c:622 src/modules/internet/libcurl.c:634
+#: src/modules/internet/libcurl.c:642
 msgid "allocation of url connection failed"
 msgstr "url 連結配置失敗"
 
-#: src/modules/internet/internet.c:323 src/modules/internet/internet.c:404
-#: src/modules/internet/internet.c:510
+#: src/modules/internet/internet.c:337 src/modules/internet/internet.c:418
+#: src/modules/internet/internet.c:524 src/modules/internet/libcurl.c:332
+#: src/modules/internet/libcurl.c:342
 msgid "Download progress"
 msgstr "正在下載"
 
-#: src/modules/internet/internet.c:344
+#: src/modules/internet/internet.c:358
 #, c-format
 msgid "cannot open URL '%s', reason '%s'"
 msgstr "無法開啟網址 '%s' ，原因是 '%s'"
 
-#: src/modules/internet/internet.c:350 src/modules/internet/internet.c:378
-#: src/modules/internet/internet.c:483 src/modules/internet/libcurl.c:231
+#: src/modules/internet/internet.c:364 src/modules/internet/internet.c:392
+#: src/modules/internet/internet.c:497 src/modules/internet/libcurl.c:371
 #, c-format
 msgid "cannot open destfile '%s', reason '%s'"
 msgstr "無法開啟目標檔案 '%s' ，原因是 '%s'"
 
-#: src/modules/internet/internet.c:382 src/modules/internet/internet.c:488
-#: src/modules/internet/libcurl.c:235
+#: src/modules/internet/internet.c:396 src/modules/internet/internet.c:502
+#: src/modules/internet/libcurl.c:375
 #, fuzzy, c-format
 msgid "Trying URL '%s'\n"
 msgstr "嘗試 URL '%s'\n"
 
-#: src/modules/internet/internet.c:389 src/modules/internet/internet.c:495
+#: src/modules/internet/internet.c:403 src/modules/internet/internet.c:509
 #, fuzzy
 msgid "Opened URL\n"
 msgstr "開啟了 URL\n"
 
-#: src/modules/internet/internet.c:428 src/modules/internet/internet.c:537
+#: src/modules/internet/internet.c:442 src/modules/internet/internet.c:551
+#: src/modules/internet/libcurl.c:214
 #, c-format
 msgid "%d%% downloaded"
 msgstr ""
 
-#: src/modules/internet/internet.c:447 src/modules/internet/internet.c:556
+#: src/modules/internet/internet.c:461 src/modules/internet/internet.c:570
+#: src/modules/internet/libcurl.c:412
 #, c-format
 msgid "Downloaded %0.1f MB"
 msgstr ""
 
-#: src/modules/internet/internet.c:449 src/modules/internet/internet.c:559
+#: src/modules/internet/internet.c:463 src/modules/internet/internet.c:573
+#: src/modules/internet/libcurl.c:414
 #, c-format
 msgid "Downloaded %d KB"
 msgstr ""
 
-#: src/modules/internet/internet.c:451 src/modules/internet/internet.c:561
+#: src/modules/internet/internet.c:465 src/modules/internet/internet.c:575
+#: src/modules/internet/libcurl.c:416
 #, c-format
 msgid "Downloaded %d byte"
 msgid_plural "Downloaded %d bytes"
 msgstr[0] ""
 
-#: src/modules/internet/internet.c:462 src/modules/internet/internet.c:572
+#: src/modules/internet/internet.c:476 src/modules/internet/internet.c:586
+#: src/modules/internet/libcurl.c:421
 #, fuzzy, c-format
 msgid "downloaded length %0.f != reported length %0.f"
 msgstr "下載的長度 %d != 報告的長度 %d"
 
-#: src/modules/internet/internet.c:466 src/modules/internet/internet.c:577
+#: src/modules/internet/internet.c:480 src/modules/internet/internet.c:591
 #, c-format
 msgid "cannot open URL '%s'"
 msgstr "無法開啟 URL '%s'"
 
-#: src/modules/internet/internet.c:605 src/modules/internet/internet.c:845
+#: src/modules/internet/internet.c:595
+msgid "unsupported URL scheme"
+msgstr "不支援這種 URL 方案"
+
+#: src/modules/internet/internet.c:619 src/modules/internet/internet.c:860
 #, c-format
 msgid "cannot open: HTTP status was '%d %s'"
 msgstr "無法開啟: HTTP 狀態是 '%d%s'"
 
-#: src/modules/internet/internet.c:615 src/modules/internet/internet.c:860
+#: src/modules/internet/internet.c:629 src/modules/internet/internet.c:875
+#: src/modules/internet/libcurl.c:247
 #, c-format
-msgid "Content type '%s' length %0.0f byte (%0.1f MB)\n"
-msgid_plural "Content type '%s' length %0.0f bytes (%0.1f MB)\n"
+msgid "Content type '%s' length %0.0f byte (%0.1f MB)"
+msgid_plural "Content type '%s' length %0.0f bytes (%0.1f MB)"
 msgstr[0] ""
 
-#: src/modules/internet/internet.c:619 src/modules/internet/internet.c:862
+#: src/modules/internet/internet.c:633 src/modules/internet/internet.c:877
+#: src/modules/internet/libcurl.c:250
 #, c-format
-msgid "Content type '%s' length %d byte (%d KB)\n"
-msgid_plural "Content type '%s' length %d bytes (%d KB)\n"
+msgid "Content type '%s' length %d byte (%d KB)"
+msgid_plural "Content type '%s' length %d bytes (%d KB)"
 msgstr[0] ""
 
-#: src/modules/internet/internet.c:623 src/modules/internet/internet.c:864
+#: src/modules/internet/internet.c:637 src/modules/internet/internet.c:879
+#: src/modules/internet/libcurl.c:253
 #, c-format
-msgid "Content type '%s' length %d byte\n"
-msgid_plural "Content type '%s' length %d bytes\n"
+msgid "Content type '%s' length %d byte"
+msgid_plural "Content type '%s' length %d bytes"
 msgstr[0] ""
 
-#: src/modules/internet/internet.c:626
+#: src/modules/internet/internet.c:640
 #, c-format
-msgid "Content type '%s' length unknown\n"
+msgid "Content type '%s' length unknown"
 msgstr ""
 
-#: src/modules/internet/internet.c:669
+#: src/modules/internet/internet.c:684
 #, c-format
 msgid "ftp data connection made, file length %ld bytes\n"
 msgstr ""
 
-#: src/modules/internet/internet.c:671
+#: src/modules/internet/internet.c:686
 msgid "ftp data connection made, file length unknown\n"
 msgstr ""
 
-#: src/modules/internet/internet.c:789 src/modules/internet/internet.c:951
+#: src/modules/internet/internet.c:804 src/modules/internet/internet.c:967
 msgid "InternetOpenUrl timed out"
 msgstr "InternetOpenUrl 已經逾時"
 
-#: src/modules/internet/internet.c:816 src/modules/internet/internet.c:830
-#: src/modules/internet/internet.c:973 src/modules/internet/internet.c:982
+#: src/modules/internet/internet.c:831 src/modules/internet/internet.c:845
+#: src/modules/internet/internet.c:989 src/modules/internet/internet.c:998
 #, c-format
 msgid "InternetOpenUrl failed: '%s'"
 msgstr "InternetOpenUrl 失敗: '%s'"
 
-#: src/modules/internet/internet.c:886
+#: src/modules/internet/internet.c:902
 msgid "Internet read timed out"
 msgstr "網際網路讀取逾時"
 
-#: src/modules/internet/internet.c:931
+#: src/modules/internet/internet.c:947
 #, c-format
 msgid "using Asynchronous WinInet calls, timeout %d sec\n"
 msgid_plural "using Asynchronous WinInet calls, timeout %d secs\n"
 msgstr[0] ""
 
-#: src/modules/internet/internet.c:959
+#: src/modules/internet/internet.c:975
 msgid "using Synchronous WinInet calls\n"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:117
+#: src/modules/internet/libcurl.c:123
 #, fuzzy
 msgid "'curlGetHeaders()' function is not supported on this platform"
 msgstr "本平臺不支援 nsl()"
 
-#: src/modules/internet/libcurl.c:121
+#: src/modules/internet/libcurl.c:127
 #, fuzzy, c-format
 msgid "invalid %s argument"
 msgstr "'%s' 引數不正確"
 
-#: src/modules/internet/libcurl.c:140
+#: src/modules/internet/libcurl.c:146
 #, c-format
 msgid ""
 "libcurl error code %d\n"
 "\t%s\n"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:163
+#: src/modules/internet/libcurl.c:196
+#, c-format
+msgid "Content length %0.0f byte (%0.1f MB)"
+msgid_plural "Content length %0.0f bytes (%0.1f MB)"
+msgstr[0] ""
+
+#: src/modules/internet/libcurl.c:199
+#, c-format
+msgid "Content length %d byte (%d KB)"
+msgid_plural "Content length %d bytes (%d KB)"
+msgstr[0] ""
+
+#: src/modules/internet/libcurl.c:202
+#, c-format
+msgid "Content length %d byte"
+msgid_plural "Content length %d bytes"
+msgstr[0] ""
+
+#: src/modules/internet/libcurl.c:273
 #, fuzzy
-msgid "download.file(method = \"libcurl\") is not supported on this platform"
+msgid "'download.file(method = \"libcurl\")' is not supported on this platform"
 msgstr "這個平臺不支援 'dirmark = TRUE'"
 
-#: src/modules/internet/libcurl.c:176
-msgid "only first element of 'url' argument used"
-msgstr "只用 'url' 引數的第一個元素"
+#: src/modules/internet/libcurl.c:289
+#, fuzzy
+msgid "lengths of 'url' and 'destfile' arguments must match"
+msgstr "導入和導出名稱的長度必須相等"
 
-#: src/modules/internet/libcurl.c:182
-msgid "only first element of 'destfile' argument used"
-msgstr "只用 'destfile' 引數的第一個元素"
-
-#: src/modules/internet/libcurl.c:243
+#: src/modules/internet/libcurl.c:385 src/modules/internet/libcurl.c:519
 #, c-format
 msgid "'curl_multi_wait()' function failed, code %d"
 msgstr ""
@@ -9601,6 +9684,12 @@ msgstr "無法載入 X11 模組"
 #: src/unix/X11.c:145 src/unix/X11.c:151 src/unix/X11.c:157 src/unix/X11.c:163
 msgid "X11 is not available"
 msgstr "無法使用 X11"
+
+#~ msgid "only first element of 'url' argument used"
+#~ msgstr "只用 'url' 引數的第一個元素"
+
+#~ msgid "only first element of 'destfile' argument used"
+#~ msgstr "只用 'destfile' 引數的第一個元素"
 
 #, fuzzy
 #~ msgid "trying URL '%s'\n"
