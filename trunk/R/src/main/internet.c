@@ -77,12 +77,7 @@ R_setInternetRoutines(R_InternetRoutines *routines)
 static void internet_Init(void)
 {
     int res;
-#ifdef Win32
-    res = UseInternet2 ? R_moduleCdynload("internet2", 1, 1) :
-	R_moduleCdynload("internet", 1, 1);
-#else
     res = R_moduleCdynload("internet", 1, 1);
-#endif
     initialized = -1;
     if(!res) return;
     if(!ptr->download)
@@ -117,23 +112,19 @@ SEXP attribute_hidden do_setInternet2(SEXP call, SEXP op, SEXP args, SEXP env)
     
     if (newUseInternet2 != NA_LOGICAL) {
     	R_Visible = FALSE;
-    	if (newUseInternet2 != UseInternet2) {
-    	    if (initialized) warning(_("internet routines were already initialized"));
-    	    UseInternet2 = newUseInternet2;
-    	    initialized = 0;
-    	}
+	UseInternet2 = newUseInternet2;
     }
     UNPROTECT(1);
     return retval;
 }
 #endif
 
-Rconnection attribute_hidden R_newurl(const char *description,
-				      const char * const mode)
+Rconnection attribute_hidden 
+R_newurl(const char *description, const char * const mode, int type)
 {
     if(!initialized) internet_Init();
     if(initialized > 0)
-	return (*ptr->newurl)(description, mode);
+	return (*ptr->newurl)(description, mode, type);
     else {
 	error(_("internet routines cannot be loaded"));
 	return (Rconnection)0;
@@ -373,11 +364,11 @@ SEXP attribute_hidden do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 Rconnection attribute_hidden
-R_newCurlUrl(const char *description, const char * const mode)
+R_newCurlUrl(const char *description, const char * const mode, int type)
 {
     if(!initialized) internet_Init();
     if(initialized > 0)
-	return (*ptr->newcurlurl)(description, mode);
+	return (*ptr->newcurlurl)(description, mode, type);
     else {
 	error(_("internet routines cannot be loaded"));
 	return (Rconnection)0;
