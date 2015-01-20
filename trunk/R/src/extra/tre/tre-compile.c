@@ -718,7 +718,7 @@ tre_copy_ast(tre_mem_t mem, tre_stack_t *stack, tre_ast_node_t *ast,
 		if (*result == NULL)
 		  status = REG_ESPACE;
 
-                ((tre_literal_t*)(*result)->obj)->u.class = lit->u.class;  
+                ((tre_literal_t*)(*result)->obj)->u.classs = lit->u.classs;
 		if (pos > *max_pos)
 		  *max_pos = pos;
 		break;
@@ -1068,7 +1068,7 @@ tre_set_empty(tre_mem_t mem)
 
 static tre_pos_and_tags_t *
 tre_set_one(tre_mem_t mem, int position, int code_min, int code_max,
-	    tre_ctype_t class, tre_ctype_t *neg_classes, int backref)
+	    tre_ctype_t classs, tre_ctype_t *neg_classes, int backref)
 {
   tre_pos_and_tags_t *new_set;
 
@@ -1079,7 +1079,7 @@ tre_set_one(tre_mem_t mem, int position, int code_min, int code_max,
   new_set[0].position = position;
   new_set[0].code_min = code_min;
   new_set[0].code_max = code_max;
-  new_set[0].class = class;
+  new_set[0].classs = classs;
   new_set[0].neg_classes = neg_classes;
   new_set[0].backref = backref;
   new_set[1].position = -1;
@@ -1111,7 +1111,7 @@ tre_set_union(tre_mem_t mem, tre_pos_and_tags_t *set1, tre_pos_and_tags_t *set2,
       new_set[s1].code_min = set1[s1].code_min;
       new_set[s1].code_max = set1[s1].code_max;
       new_set[s1].assertions = set1[s1].assertions | assertions;
-      new_set[s1].class = set1[s1].class;
+      new_set[s1].classs = set1[s1].classs;
       new_set[s1].neg_classes = set1[s1].neg_classes;
       new_set[s1].backref = set1[s1].backref;
       if (set1[s1].tags == NULL && tags == NULL)
@@ -1156,7 +1156,7 @@ tre_set_union(tre_mem_t mem, tre_pos_and_tags_t *set1, tre_pos_and_tags_t *set2,
       new_set[s1 + s2].code_max = set2[s2].code_max;
       /* XXX - why not | assertions here as well? */
       new_set[s1 + s2].assertions = set2[s2].assertions;
-      new_set[s1 + s2].class = set2[s2].class;
+      new_set[s1 + s2].classs = set2[s2].classs;
       new_set[s1 + s2].neg_classes = set2[s2].neg_classes;
       new_set[s1 + s2].backref = set2[s2].backref;
       if (set2[s2].tags == NULL)
@@ -1381,7 +1381,7 @@ tre_compute_nfl(tre_mem_t mem, tre_stack_t *stack, tre_ast_node_t *tree)
 		    node->lastpos = tre_set_one(mem, lit->position,
 						(int)lit->code_min,
 						(int)lit->code_max,
-						lit->u.class, lit->neg_classes,
+						lit->u.classs, lit->neg_classes,
 						-1);
 		    if (!node->lastpos)
 		      return REG_ESPACE;
@@ -1627,7 +1627,7 @@ tre_make_trans(tre_pos_and_tags_t *p1, tre_pos_and_tags_t *p2,
 	    trans->state = transitions + offs[p2->position];
 	    trans->state_id = p2->position;
 	    trans->assertions = p1->assertions | p2->assertions
-	      | (p1->class ? ASSERT_CHAR_CLASS : 0)
+	      | (p1->classs ? ASSERT_CHAR_CLASS : 0)
 	      | (p1->neg_classes != NULL ? ASSERT_CHAR_CLASS_NEG : 0);
 	    if (p1->backref >= 0)
 	      {
@@ -1637,7 +1637,7 @@ tre_make_trans(tre_pos_and_tags_t *p1, tre_pos_and_tags_t *p2,
 		trans->assertions |= ASSERT_BACKREF;
 	      }
 	    else
-	      trans->u.class = p1->class;
+	      trans->u.classs = p1->classs;
 	    if (p1->neg_classes != NULL)
 	      {
 		for (i = 0; p1->neg_classes[i] != (tre_ctype_t)0; i++);
