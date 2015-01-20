@@ -224,11 +224,11 @@ int progress(void *clientp, double dltotal, double dlnow,
 // ------- Unix-alike progress bar -----------
 
 static int ndashes;
-static void putdashes(int *pold, int new)
+static void putdashes(int *pold, int newi)
 {
-    for (int i = *pold; i < new; i++)  REprintf("=");
+    for (int i = *pold; i < newi; i++)  REprintf("=");
     if (R_Consolefile) fflush(R_Consolefile);
-    *pold = new;
+    *pold = newi;
 }
 
 static
@@ -605,7 +605,10 @@ static int Curl_fgetc_internal(Rconnection con)
 }
 #endif
 
-Rconnection in_newCurlUrl(const char *description, const char * const mode)
+
+// 'type' is unused.
+Rconnection 
+in_newCurlUrl(const char *description, const char * const mode, int type)
 {
 #ifdef HAVE_CURL_CURL_H
     Rconnection newcon = (Rconnection) malloc(sizeof(struct Rconn));
