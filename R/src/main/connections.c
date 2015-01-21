@@ -4953,7 +4953,7 @@ SEXP attribute_hidden do_url(SEXP call, SEXP op, SEXP args, SEXP env)
     const char *url, *open;
     int ncon, block, raw = 0, meth = 0;
 #ifdef Win32
-    urlmeth = UseInternet2;
+    int urlmeth = UseInternet2;
 #endif
     cetype_t ienc = CE_NATIVE;
     Rconnection con = NULL;
@@ -5021,22 +5021,47 @@ SEXP attribute_hidden do_url(SEXP call, SEXP op, SEXP args, SEXP env)
 #ifdef Win32
 	else if (streql(cmeth, "internal")) urlmeth = 0;
 #endif
+    } else { // file(), look at option.
+	SEXP opt = GetOption1(install("url.method"));
+	if (isString(opt) && LENGTH(opt) >= 1) {
+	    const char *val = CHAR(STRING_ELT(opt, 0));
+	    if (streql(val, "libcurl")) meth = 1;
+#ifdef Win32
+	    if (streql(val, "wininet")) urlmeth = 1;
+#endif
+	}
     }
 
     if(!meth) {
 	if (strncmp(url, "ftps://", 7) == 0)
 #ifdef HAVE_CURL_CURL_H
-	error(_("ftps:// URLs are not supported by the default method:\n   consider url(method = \"libcurl\")"));
+	{
+	    // this is slightly optimistic: we did not check the libcurl build
+	    REprintf(_("ftps:// URLs are not supported by the default method: trying \"libcurl\"\n"));
+	    R_FlushConsole();
+	    meth = 1;
+	}
+//	error("ftps:// URLs are not supported by the default method:\n   consider url(method = \"libcurl\")");
 #else
 	error(_("ftps:// URLs are not supported"));
 #endif
 #ifdef Win32
-	if (!urlmeth && strncmp(url, "https://", 8) == 0)
-	    error(_("for https:// URLs use setInternet2(TRUE)"));
+	if (!urlmeth && strncmp(url, "https://", 8) == 0) {
+	    REprintf(_("https:// URLs are not supported by the default method: using \"wininet\"\n"));
+	    R_FlushConsole();
+	    urlmeth = 1;
+	}
+	//   error("for https:// URLs use setInternet2(TRUE)");
 #else
 	if (strncmp(url, "https://", 8) == 0)
 # ifdef HAVE_CURL_CURL_H
-	    error(_("https:// URLs are not supported by the default method:\n  consider url(method = \"libcurl\")"));
+	{
+	    // this is slightly optimistic: we did not check the libcurl build
+	    REprintf(_("https:// URLs are not supported by the default method: trying \"libcurl\"\n"));
+	    R_FlushConsole();
+	    meth = 1;
+	}
+//	    error("https:// URLs are not supported by the default method:\n  consider url(method = \"libcurl\")");
 # else
 	error(_("https:// URLs are not supported"));
 # endif
