@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-16 19:57\n"
+"POT-Creation-Date: 2015-01-22 20:13\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -664,6 +664,14 @@ msgstr ""
 #, fuzzy
 msgid "Checking %s"
 msgstr "DLLの作成中... "
+
+#. R/QC.R: gettext("Checking URLs failed with message:", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Checking URLs failed with message:"
+msgstr ""
+" ビニエット '%s' の処理に失敗しました。診断は以下の通りです: \n"
+" %s "
 
 #. R/news.R: gettextf("\nChunk %s:\n%s", format(seq_along(bad)), bad)
 #: R/news.R:0
@@ -1471,6 +1479,13 @@ msgid ""
 "Found subdirectory 'r'.\n"
 "Most likely, this should be 'R'."
 msgstr ""
+
+#. R/QC.R: gettext("Found the following (possibly) invalid URLs:", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Found the following (possibly) invalid URLs:"
+msgstr ""
+" 以下の Rd 例示ファイル中に大局的かもしれない 'T' もしくは 'F' がありました: "
 
 #. R/check.R: gettext("Found the following Makefile(s) without a final LF:", domain = "R-tools")
 #: R/check.R:0
@@ -5335,7 +5350,9 @@ msgid "preparing package for lazy loading"
 msgstr ""
 
 #. R/pdftools.R: gettextf("processing %s", sQuote(paste(names(entry), entry, collapse = " ")))
-#: R/pdftools.R:0
+#. R/urltools.R: gettextf("processing %s", p)
+#. R/urltools.R: sprintf("processing %s", u)
+#: R/pdftools.R:0 R/urltools.R:0
 msgid "processing %s"
 msgstr " %s を処理中 "
 
@@ -6726,6 +6743,9 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] " '%s' ('%s'行')を再エンコード出来ません "
 
+#~ msgid ":"
+#~ msgstr " ： "
+
 #~ msgid ""
 #~ "See the information on DESCRIPTION files in section 'Creating R packages' "
 #~ "of the 'Writing R Extensions' manual."
@@ -6988,9 +7008,6 @@ msgstr[0] " '%s' ('%s'行')を再エンコード出来ません "
 #~ msgstr ""
 #~ " ファイル '%s' 中に構文解析エラー : \n"
 #~ " %s "
-
-#~ msgid ":"
-#~ msgstr " ： "
 
 #~ msgid ","
 #~ msgstr " , "

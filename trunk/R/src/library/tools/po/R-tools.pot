@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.2.0\n"
-"POT-Creation-Date: 2015-01-16 19:57\n"
+"POT-Creation-Date: 2015-01-22 20:13\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -787,6 +787,13 @@ msgstr ""
 #. R/CRANtools.R: gettextf("Checking %s", m, domain = "R-tools")
 
 msgid "Checking %s"
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettext("Checking URLs failed with message:", domain = "R-tools")
+
+msgid "Checking URLs failed with message:"
 msgstr ""
 
 
@@ -1749,6 +1756,13 @@ msgstr ""
 #. R/check.R: gettext("Found subdirectory 'r'.\nMost likely, this should be 'R'.\n", domain = "R-tools")
 
 msgid "Found subdirectory 'r'.\nMost likely, this should be 'R'."
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettext("Found the following (possibly) invalid URLs:", domain = "R-tools")
+
+msgid "Found the following (possibly) invalid URLs:"
 msgstr ""
 
 
@@ -6448,7 +6462,11 @@ msgstr ""
 
 
 #: R/pdftools.R: 0
+#: R/urltools.R: 0
+#: R/urltools.R: 0
 #. R/pdftools.R: gettextf("processing %s", sQuote(paste(names(entry), entry, collapse = " ")))
+#. R/urltools.R: gettextf("processing %s", p)
+#. R/urltools.R: sprintf("processing %s", u)
 
 msgid "processing %s"
 msgstr ""

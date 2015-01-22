@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 19:56+0100\n"
+"POT-Creation-Date: 2015-01-22 19:58+0100\n"
 "PO-Revision-Date: 2015-01-17 15:08+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -146,6 +146,16 @@ msgstr "无法分配栅格"
 #, c-format
 msgid "afm file '%s' could not be opened"
 msgstr "无法打开afm文本'%s'"
+
+#: devPS.c:589
+#, fuzzy
+msgid "'FontBBox' could not be parsed"
+msgstr "无法对字体BBox作句法分析"
+
+#: devPS.c:597
+#, fuzzy
+msgid "'CharInfo' could not be parsed"
+msgstr "无法对字符信息作句法分析"
 
 #: devPS.c:627
 msgid "unknown AFM entity encountered"
@@ -811,12 +821,6 @@ msgstr "'file'参数不对"
 
 #~ msgid "Unable to load winCairo.dll: was it built?"
 #~ msgstr "无法载入winCairo.dll: 构建了这个动态链接库没有？"
-
-#~ msgid "FontBBox could not be parsed"
-#~ msgstr "无法对字体BBox作句法分析"
-
-#~ msgid "CharInfo could not be parsed"
-#~ msgstr "无法对字符信息作句法分析"
 
 #~ msgid "unable to start NULL device"
 #~ msgstr "无法启动NULL装置"

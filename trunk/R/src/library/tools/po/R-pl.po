@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 19:57\n"
+"POT-Creation-Date: 2015-01-22 20:13\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -657,6 +657,12 @@ msgstr "Wyniki sprawdzenia dla pakietów w katalogu '%s':"
 #: R/CRANtools.R:0
 msgid "Checking %s"
 msgstr "Sprawdzanie %s"
+
+#. R/QC.R: gettext("Checking URLs failed with message:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Checking URLs failed with message:"
+msgstr ""
+"Sprawdzanie adresów URL zakończyło się niepowodzeniem zwracając komunikat:"
 
 #. R/news.R: gettextf("\nChunk %s:\n%s", format(seq_along(bad)), bad)
 #: R/news.R:0
@@ -1442,6 +1448,11 @@ msgid ""
 msgstr ""
 "Znaleziono podkatalog 'r'.\n"
 "Prawdopodobnie powinien nosić nazwę 'R'."
+
+#. R/QC.R: gettext("Found the following (possibly) invalid URLs:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Found the following (possibly) invalid URLs:"
+msgstr "Znaleziono następujące (prawdopodobnie) niepoprawne adresy URL:"
 
 #. R/check.R: gettext("Found the following Makefile(s) without a final LF:", domain = "R-tools")
 #: R/check.R:0
@@ -5165,7 +5176,9 @@ msgid "preparing package for lazy loading"
 msgstr "przygotowywanie pakietu do leniwego ładowania"
 
 #. R/pdftools.R: gettextf("processing %s", sQuote(paste(names(entry), entry, collapse = " ")))
-#: R/pdftools.R:0
+#. R/urltools.R: gettextf("processing %s", p)
+#. R/urltools.R: sprintf("processing %s", u)
+#: R/pdftools.R:0 R/urltools.R:0
 msgid "processing %s"
 msgstr "przetwarzanie %s"
 
@@ -6842,6 +6855,13 @@ msgstr[0] "nie można przekodować %s linia %s"
 msgstr[1] "nie można przekodować %s linie %s"
 msgstr[2] "nie można przekodować %s linie %s"
 
+#~ msgid ":"
+#~ msgstr ":"
+
+#, fuzzy
+#~ msgid "byte"
+#~ msgstr "%d bajt"
+
 #~ msgid ""
 #~ "See the information on DESCRIPTION files in section 'Creating R packages' "
 #~ "of the 'Writing R Extensions' manual."
@@ -7260,9 +7280,6 @@ msgstr[2] "nie można przekodować %s linie %s"
 #~ msgstr[0] "pakiet który może ograniczyć użycie:"
 #~ msgstr[1] "pakiety które mogą ograniczyć użycie:"
 #~ msgstr[2] "pakiety które mogą ograniczyć użycie:"
-
-#~ msgid ":"
-#~ msgstr ":"
 
 #~ msgid ","
 #~ msgstr ","

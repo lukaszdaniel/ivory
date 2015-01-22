@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-16 19:57\n"
+"POT-Creation-Date: 2015-01-22 20:13\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -609,6 +609,11 @@ msgstr ""
 #. R/CRANtools.R: gettextf("Checking %s", m, domain = "R-tools")
 #: R/CRANtools.R:0
 msgid "Checking %s"
+msgstr ""
+
+#. R/QC.R: gettext("Checking URLs failed with message:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Checking URLs failed with message:"
 msgstr ""
 
 #. R/news.R: gettextf("\nChunk %s:\n%s", format(seq_along(bad)), bad)
@@ -1338,6 +1343,11 @@ msgstr ""
 msgid ""
 "Found subdirectory 'r'.\n"
 "Most likely, this should be 'R'."
+msgstr ""
+
+#. R/QC.R: gettext("Found the following (possibly) invalid URLs:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Found the following (possibly) invalid URLs:"
 msgstr ""
 
 #. R/check.R: gettext("Found the following Makefile(s) without a final LF:", domain = "R-tools")
@@ -4840,7 +4850,9 @@ msgid "preparing package for lazy loading"
 msgstr ""
 
 #. R/pdftools.R: gettextf("processing %s", sQuote(paste(names(entry), entry, collapse = " ")))
-#: R/pdftools.R:0
+#. R/urltools.R: gettextf("processing %s", p)
+#. R/urltools.R: sprintf("processing %s", u)
+#: R/pdftools.R:0 R/urltools.R:0
 msgid "processing %s"
 msgstr ""
 
