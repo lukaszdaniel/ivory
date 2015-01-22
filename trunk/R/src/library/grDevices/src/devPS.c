@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
- *  Copyright (C) 1998--2013  The R Core Team
+ *  Copyright (C) 1998--2015  The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -586,7 +586,7 @@ PostScriptLoadFontMetrics(const char * const fontpath,
 
 	case FontBBox:
 	    if (!GetFontBBox(buf, metrics)) {
-		warning("'FontBBox' could not be parsed");
+		warning(_("'FontBBox' could not be parsed"));
 		goto pserror;
 	    }
 	    break;
@@ -594,7 +594,7 @@ PostScriptLoadFontMetrics(const char * const fontpath,
 	case C:
 	    if (mode != StartFontMetrics) goto pserror;
 	    if (!GetCharInfo(buf, metrics, charnames, encnames, reencode)) {
-		warning("'CharInfo' could not be parsed");
+		warning(_("'CharInfo' could not be parsed"));
 		goto pserror;
 	    }
 	    break;

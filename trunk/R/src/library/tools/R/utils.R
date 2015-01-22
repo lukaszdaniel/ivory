@@ -1,7 +1,7 @@
 #  File src/library/tools/R/utils.R
 #  Part of the R package, http://www.R-project.org
 #
-#  Copyright (C) 1995-2014 The R Core Team
+#  Copyright (C) 1995-2015 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -161,8 +161,9 @@ function(x)
     asc <- iconv(x, "latin1", "ASCII")
     ind <- is.na(asc) | asc != x
     if(any(ind))
-        cat(paste0(which(ind), ": ", iconv(x[ind], "latin1", "ASCII", sub = "byte")),
-            sep = "\n")
+        message(paste0(which(ind), ": ",
+                       iconv(x[ind], "latin1", "ASCII", sub = "byte"),
+                       collapse = "\n"))
     invisible(x[ind])
 }
 
@@ -1613,7 +1614,7 @@ function(file, envir, enc = NA)
     exprs <- parse(n = -1L, file = con)
     if(!length(exprs))
         return(invisible())
-    for(e in exprs) {
+    for(e in Filter(length, exprs)) {
         if(e[[1L]] == assignmentSymbolLM || e[[1L]] == assignmentSymbolEq)
             eval(e, envir)
     }

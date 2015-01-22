@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2001--2012 The R Core Team
+ *  Copyright (C) 2001--2015 The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Pulic License as published by
@@ -25,7 +25,6 @@
 #include <Defn.h>
 #include <Internal.h>
 
-//#define isRaw(x) (TYPEOF(x) == RAWSXP)
 
 /* charToRaw works at byte level, ignores encoding */
 SEXP attribute_hidden do_charToRaw(SEXP call, SEXP op, SEXP args, SEXP env)
