@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 19:56+0100\n"
+"POT-Creation-Date: 2015-01-22 19:58+0100\n"
 "PO-Revision-Date: 2005-05-31 10:31+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -144,6 +144,16 @@ msgstr "font 리스트를 할당하는데 실패되었습니다"
 #: devPS.c:559
 #, fuzzy, c-format
 msgid "afm file '%s' could not be opened"
+msgstr "'%s' metafile 하는것을 작성할 수 없습니다"
+
+#: devPS.c:589
+#, fuzzy
+msgid "'FontBBox' could not be parsed"
+msgstr "'%s' metafile 하는것을 작성할 수 없습니다"
+
+#: devPS.c:597
+#, fuzzy
+msgid "'CharInfo' could not be parsed"
 msgstr "'%s' metafile 하는것을 작성할 수 없습니다"
 
 #: devPS.c:627
@@ -832,10 +842,6 @@ msgstr "무효의 문자열 인수입니다"
 #, fuzzy
 #~ msgid "Unable to load winCairo.dll: was it built?"
 #~ msgstr "Rbitmap.dll를 적재 할수가 없습니다"
-
-#, fuzzy
-#~ msgid "CharInfo could not be parsed"
-#~ msgstr "'%s' metafile 하는것을 작성할 수 없습니다"
 
 #~ msgid "unable to start NULL device"
 #~ msgstr "NULL 디바이스를 시작할수가 없습니다"

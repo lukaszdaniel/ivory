@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-16 19:57\n"
+"POT-Creation-Date: 2015-01-22 20:13\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -663,6 +663,15 @@ msgstr ""
 #, fuzzy
 msgid "Checking %s"
 msgstr "erzuege DLL"
+
+#. R/QC.R: gettext("Checking URLs failed with message:", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Checking URLs failed with message:"
+msgstr ""
+"Sweave auf der Vignette '%s' auszuführen mit folgender Diagnose "
+"fehlgeschlagen:\n"
+"%s"
 
 #. R/news.R: gettextf("\nChunk %s:\n%s", format(seq_along(bad)), bad)
 #: R/news.R:0
@@ -1464,6 +1473,12 @@ msgid ""
 "Found subdirectory 'r'.\n"
 "Most likely, this should be 'R'."
 msgstr ""
+
+#. R/QC.R: gettext("Found the following (possibly) invalid URLs:", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Found the following (possibly) invalid URLs:"
+msgstr "Evtl. globales 'T' oder 'F' in folgender Rd Beispieldatei gefunden:"
 
 #. R/check.R: gettext("Found the following Makefile(s) without a final LF:", domain = "R-tools")
 #: R/check.R:0
@@ -5305,7 +5320,9 @@ msgid "preparing package for lazy loading"
 msgstr ""
 
 #. R/pdftools.R: gettextf("processing %s", sQuote(paste(names(entry), entry, collapse = " ")))
-#: R/pdftools.R:0
+#. R/urltools.R: gettextf("processing %s", p)
+#. R/urltools.R: sprintf("processing %s", u)
+#: R/pdftools.R:0 R/urltools.R:0
 msgid "processing %s"
 msgstr "bearbeite %s'"
 
@@ -6796,6 +6813,9 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "kann '%s' Zeile(n) %s nicht rekodieren"
 msgstr[1] "kann '%s' Zeile(n) %s nicht rekodieren"
 
+#~ msgid ":"
+#~ msgstr ":"
+
 #~ msgid ""
 #~ "See the information on DESCRIPTION files in section 'Creating R packages' "
 #~ "of the 'Writing R Extensions' manual."
@@ -7057,9 +7077,6 @@ msgstr[1] "kann '%s' Zeile(n) %s nicht rekodieren"
 #~ msgstr ""
 #~ "Parse-Fehler in Datei '%s':\n"
 #~ "%s"
-
-#~ msgid ":"
-#~ msgstr ":"
 
 #~ msgid ","
 #~ msgstr ","

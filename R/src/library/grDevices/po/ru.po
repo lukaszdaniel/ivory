@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 19:56+0100\n"
+"POT-Creation-Date: 2015-01-22 19:58+0100\n"
 "PO-Revision-Date: 2015-01-17 15:07+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -149,6 +149,16 @@ msgstr "не могу разместить растры"
 #, c-format
 msgid "afm file '%s' could not be opened"
 msgstr "afm-файл '%s' не открывается"
+
+#: devPS.c:589
+#, fuzzy
+msgid "'FontBBox' could not be parsed"
+msgstr "FontBBox не разбирается"
+
+#: devPS.c:597
+#, fuzzy
+msgid "'CharInfo' could not be parsed"
+msgstr "CharInfo не разбирается"
 
 #: devPS.c:627
 msgid "unknown AFM entity encountered"
@@ -821,12 +831,6 @@ msgstr "неправильный аргумент 'file'"
 
 #~ msgid "Unable to load winCairo.dll: was it built?"
 #~ msgstr "Не могу загрузить winCairo.dll: его действительно собрали?"
-
-#~ msgid "FontBBox could not be parsed"
-#~ msgstr "FontBBox не разбирается"
-
-#~ msgid "CharInfo could not be parsed"
-#~ msgstr "CharInfo не разбирается"
 
 #~ msgid "unable to start NULL device"
 #~ msgstr "не могу запустить NULL-устройство"

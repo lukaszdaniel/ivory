@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-16 19:56\n"
+"POT-Creation-Date: 2015-01-22 19:58\n"
 "PO-Revision-Date: 2011-12-01 22:45+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1017,11 +1017,6 @@ msgstr ""
 msgid "Warning: Tracing only in the namespace; to untrace you will need:"
 msgstr ""
 
-#. R/Methods.R: message("Warning: using defunct methods list search", domain = "R-methods")
-#: R/Methods.R:0
-msgid "Warning: using defunct methods list search"
-msgstr ""
-
 #. R/as.R: gettextf("a 'replace' method definition in 'setAs' function must be a function of two arguments, got %d",     length(args))
 #: R/as.R:0
 msgid ""
@@ -1090,13 +1085,6 @@ msgstr ""
 #. R/as.R: warning("ambiguous object (length != 1) to coerce to \"name\"")
 #: R/as.R:0
 msgid "ambiguous object (length != 1) to coerce to \"name\""
-msgstr ""
-
-#. R/Methods.R: sprintf("apparent inconsistency in the methods for function %s; argument %s in the signature corresponds to %s in the methods list object",     sQuote(.genericName(f)), sQuote(argNames[[i]]), sQuote(as.character(mlist@argument)))
-#: R/Methods.R:0
-msgid ""
-"apparent inconsistency in the methods for function %s; argument %s in the "
-"signature corresponds to %s in the methods list object"
 msgstr ""
 
 #. R/Methods.R: sprintf("apparent internal error: a generic function was found for \"%s\", but no corresponding object was found searching from \"%s\"",     f, getPackageName(where))
@@ -1553,6 +1541,11 @@ msgstr ""
 msgid ""
 "default method must be a method definition, a primitive or NULL: got an "
 "object of class %s"
+msgstr ""
+
+#. R/Methods.R: stop("defunct methods list search", domain = "R-Methods")
+#: R/Methods.R:0
+msgid "defunct methods list search"
 msgstr ""
 
 #. R/refClass.R: stop("direct calls to 'callSuper()' are invalid: should only be called from another method")
@@ -2237,13 +2230,6 @@ msgstr ""
 "ingen 'replace'-metode blev defineret for as(x, \"%s\") <- værdi for klasse "
 "%s"
 
-#. R/Methods.R: sprintf("no S4 method for function %s and signature %s; consider getS3method() if you wanted the S3 method",     sQuote(.genericName(f)), Classes)
-#: R/Methods.R:0
-msgid ""
-"no S4 method for function %s and signature %s; consider getS3method() if you "
-"wanted the S3 method"
-msgstr ""
-
 #. R/Methods.R: gettext("no applicable functions", domain = "R-methods")
 #: R/Methods.R:0
 msgid "no applicable functions"
@@ -2353,12 +2339,6 @@ msgstr ""
 msgid ""
 "no generic version of %s on package %s is allowed; a new generic will be "
 "assigned for the global environment"
-msgstr ""
-
-#. R/Methods.R: gettextf("no method defined in methods list object for function %s and signature %s",     sQuote(.genericName(f)), Classes)
-#: R/Methods.R:0
-msgid ""
-"no method defined in methods list object for function %s and signature %s"
 msgstr ""
 
 #. R/Methods.R: gettextf("no method for %s matches class %s", sQuote("..."), dQuote(signature))

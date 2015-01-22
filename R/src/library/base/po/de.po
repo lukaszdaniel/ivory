@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.15.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-19 20:30+0100\n"
+"POT-Creation-Date: 2015-01-22 19:58+0100\n"
 "PO-Revision-Date: 2015-01-17 13:34+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -523,7 +523,7 @@ msgstr "interner Fehler in do_random1"
 msgid "End of file"
 msgstr "Zeilenende"
 
-#: src/extra/trio/trio.c:7618 src/main/builtin.c:897 src/main/builtin.c:907
+#: src/extra/trio/trio.c:7618 src/main/builtin.c:919 src/main/builtin.c:929
 #: src/main/options.c:652 src/modules/X11/dataentry.c:315
 #: src/modules/X11/dataentry.c:470 src/modules/X11/dataentry.c:473
 #: src/modules/X11/dataentry.c:503
@@ -646,9 +646,9 @@ msgstr "Problem bei der Anzeige von '%s'"
 #: src/main/array.c:1284 src/main/array.c:1285 src/main/array.c:1625
 #: src/main/array.c:1627 src/main/array.c:1629 src/main/attrib.c:195
 #: src/main/builtin.c:89 src/main/builtin.c:98 src/main/builtin.c:117
-#: src/main/builtin.c:119 src/main/builtin.c:149 src/main/builtin.c:536
-#: src/main/builtin.c:552 src/main/builtin.c:739 src/main/builtin.c:741
-#: src/main/builtin.c:743 src/main/character.c:140 src/main/character.c:143
+#: src/main/builtin.c:119 src/main/builtin.c:149 src/main/builtin.c:558
+#: src/main/builtin.c:574 src/main/builtin.c:761 src/main/builtin.c:763
+#: src/main/builtin.c:765 src/main/character.c:140 src/main/character.c:143
 #: src/main/character.c:204 src/main/character.c:1038
 #: src/main/character.c:1042 src/main/character.c:1045
 #: src/main/character.c:1277 src/main/character.c:1281
@@ -683,9 +683,9 @@ msgstr "Problem bei der Anzeige von '%s'"
 #: src/main/connections.c:4665 src/main/connections.c:4669
 #: src/main/connections.c:4797 src/main/connections.c:4799
 #: src/main/connections.c:4801 src/main/connections.c:4829
-#: src/main/connections.c:4964 src/main/connections.c:4993
-#: src/main/connections.c:4997 src/main/connections.c:5001
-#: src/main/connections.c:5005 src/main/context.c:607 src/main/context.c:616
+#: src/main/connections.c:4967 src/main/connections.c:4996
+#: src/main/connections.c:5000 src/main/connections.c:5004
+#: src/main/connections.c:5008 src/main/context.c:607 src/main/context.c:616
 #: src/main/context.c:620 src/main/datetime.c:776 src/main/datetime.c:866
 #: src/main/datetime.c:868 src/main/datetime.c:872 src/main/datetime.c:1028
 #: src/main/datetime.c:1030 src/main/datetime.c:1235 src/main/debug.c:241
@@ -704,8 +704,8 @@ msgstr "Problem bei der Anzeige von '%s'"
 #: src/main/grep.c:1076 src/main/grep.c:1078 src/main/grep.c:1523
 #: src/main/grep.c:1527 src/main/grep.c:1532 src/main/grep.c:2340
 #: src/main/grep.c:2345 src/main/grep.c:2644 src/main/grep.c:2649
-#: src/main/internet.c:240 src/main/internet.c:254 src/main/internet.c:272
-#: src/main/internet.c:284 src/main/internet.c:296 src/main/internet.c:315
+#: src/main/internet.c:231 src/main/internet.c:245 src/main/internet.c:263
+#: src/main/internet.c:275 src/main/internet.c:287 src/main/internet.c:306
 #: src/main/memory.c:3793 src/main/names.c:1301 src/main/names.c:1304
 #: src/main/objects.c:1547 src/main/objects.c:1549 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
@@ -751,12 +751,13 @@ msgstr "Problem bei der Anzeige von '%s'"
 #: src/main/util.c:2207 src/main/util.c:2209 src/main/util.c:2234
 #: src/main/util.c:2236 src/main/util.c:2238 src/main/util.c:2241
 #: src/main/util.c:2244 src/main/util.c:2248 src/main/util.c:2250
-#: src/modules/internet/internet.c:304 src/modules/internet/internet.c:310
-#: src/modules/internet/internet.c:316 src/modules/internet/internet.c:319
-#: src/modules/internet/internet.c:323 src/modules/internet/libcurl.c:132
-#: src/modules/internet/libcurl.c:283 src/modules/internet/libcurl.c:287
-#: src/modules/internet/libcurl.c:292 src/modules/internet/libcurl.c:295
-#: src/modules/internet/libcurl.c:299 src/modules/lapack/Lapack.c:156
+#: src/modules/internet/internet.c:462 src/modules/internet/internet.c:468
+#: src/modules/internet/internet.c:474 src/modules/internet/internet.c:477
+#: src/modules/internet/internet.c:481 src/modules/internet/libcurl.c:142
+#: src/modules/internet/libcurl.c:147 src/modules/internet/libcurl.c:150
+#: src/modules/internet/libcurl.c:304 src/modules/internet/libcurl.c:308
+#: src/modules/internet/libcurl.c:313 src/modules/internet/libcurl.c:316
+#: src/modules/internet/libcurl.c:320 src/modules/lapack/Lapack.c:156
 #: src/modules/lapack/Lapack.c:262 src/modules/lapack/Lapack.c:709
 #: src/modules/lapack/Lapack.c:818 src/modules/lapack/Lapack.c:880
 #: src/modules/lapack/Lapack.c:1205 src/modules/X11/devX11.c:3230
@@ -791,7 +792,7 @@ msgstr "erstes Argument muss ein Charaktervektor sein"
 
 #: src/gnuwin32/extra.c:415 src/main/edit.c:141 src/main/errors.c:1044
 #: src/main/errors.c:1046 src/main/objects.c:411 src/main/objects.c:1128
-#: src/main/options.c:337 src/main/raw.c:151 src/main/Renviron.c:311
+#: src/main/options.c:337 src/main/raw.c:150 src/main/Renviron.c:311
 #: src/main/unique.c:1575 src/modules/lapack/Lapack.c:85
 #: src/modules/lapack/Lapack.c:328 src/modules/lapack/Lapack.c:358
 #: src/modules/lapack/Lapack.c:406 src/modules/lapack/Lapack.c:442
@@ -1452,8 +1453,8 @@ msgstr "perm[%d] passt zu keinem Dimensionsnamen"
 msgid "value is out of range in 'perm' argument"
 msgstr "Wert außerhalb des Bereichs in 'perm'"
 
-#: src/main/array.c:1236 src/main/connections.c:5455 src/main/debug.c:112
-#: src/main/objects.c:996 src/main/raw.c:57 src/main/raw.c:331
+#: src/main/array.c:1236 src/main/connections.c:5495 src/main/debug.c:112
+#: src/main/objects.c:996 src/main/raw.c:56 src/main/raw.c:330
 #: src/main/sort.c:327 src/main/sort.c:1229 src/main/sort.c:1397
 #: src/main/unique.c:670 src/main/unique.c:1384 src/main/unique.c:1456
 #: src/main/util.c:646 src/main/util.c:648
@@ -1799,13 +1800,13 @@ msgstr "Vektorgröße kann nicht NA/NaN sein"
 msgid "vector size cannot be infinite"
 msgstr "Vektorgröße kann nicht unendlich sein"
 
-#: src/main/builtin.c:52 src/main/builtin.c:60 src/main/builtin.c:916
+#: src/main/builtin.c:52 src/main/builtin.c:60 src/main/builtin.c:938
 #: src/main/sort.c:1306
 msgid "vector size specified is too large"
 msgstr "angegebene Vektorgröße ist zu groß"
 
 #: src/main/builtin.c:85 src/main/builtin.c:94 src/main/builtin.c:295
-#: src/main/builtin.c:328 src/main/builtin.c:367 src/main/builtin.c:377
+#: src/main/builtin.c:328 src/main/builtin.c:385 src/main/builtin.c:399
 #: src/main/coerce.c:1504 src/main/connections.c:3057 src/main/engine.c:2966
 #: src/main/envir.c:1068 src/main/envir.c:1121 src/main/envir.c:1277
 #: src/main/envir.c:1816 src/main/envir.c:1940 src/main/envir.c:2006
@@ -1829,7 +1830,7 @@ msgstr "Ersatzobjekt ist keine Umgebung"
 msgid "'%s' argument must be an environment"
 msgstr "'env' Argument muss eine Umgebung sein"
 
-#: src/main/builtin.c:354 src/main/builtin.c:372
+#: src/main/builtin.c:354 src/main/builtin.c:390
 msgid "argument is not an environment"
 msgstr "Argument ist keine Umgebung"
 
@@ -1837,89 +1838,99 @@ msgstr "Argument ist keine Umgebung"
 msgid "the empty environment has no parent"
 msgstr "die leere Umgebung hat keinen Parent"
 
-#: src/main/builtin.c:374
+#: src/main/builtin.c:392
 msgid "can not set parent of the empty environment"
 msgstr "kann keinen Parent für die leere Umgebung setzen"
 
-#: src/main/builtin.c:382 src/main/envir.c:3170 src/main/envir.c:3198
+#: src/main/builtin.c:394
+#, fuzzy
+msgid "can not set the parent environment of a namespace"
+msgstr "kann keinen Parent für die leere Umgebung setzen"
+
+#: src/main/builtin.c:396
+#, fuzzy
+msgid "can not set the parent environment of package imports"
+msgstr "kann keinen Parent für die leere Umgebung setzen"
+
+#: src/main/builtin.c:404 src/main/envir.c:3170 src/main/envir.c:3198
 #: src/main/envir.c:3227 src/main/envir.c:3248 src/main/envir.c:3270
 #: src/main/envir.c:3304 src/main/envir.c:3324
 #, fuzzy, c-format
 msgid "'%s' argument is not an environment"
 msgstr "Argument ist keine Umgebung"
 
-#: src/main/builtin.c:523 src/main/connections.c:3683
+#: src/main/builtin.c:545 src/main/connections.c:3683
 #: src/main/connections.c:4064 src/main/connections.c:4098
 #: src/main/connections.c:4476 src/main/connections.c:4546
 #: src/main/connections.c:4755 src/main/connections.c:4759
-#: src/main/connections.c:5164 src/main/deparse.c:363 src/main/deparse.c:451
+#: src/main/connections.c:5204 src/main/deparse.c:363 src/main/deparse.c:451
 #: src/main/serialize.c:2042
 msgid "cannot write to this connection"
 msgstr "kann auf diese Verbindung nicht schreiben"
 
-#: src/main/builtin.c:528 src/main/builtin.c:558 src/main/platform.c:305
+#: src/main/builtin.c:550 src/main/builtin.c:580 src/main/platform.c:305
 #: src/main/platform.c:323 src/main/print.c:149 src/main/print.c:254
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "ungültige '%s' Spezifikation"
 
-#: src/main/builtin.c:545
+#: src/main/builtin.c:567
 msgid "non-positive 'fill' argument will be ignored"
 msgstr "nicht-positives Argument für 'fill' wird ignoriert"
 
-#: src/main/builtin.c:619
+#: src/main/builtin.c:641
 #, fuzzy, c-format
 msgid "argument %d (type '%s') cannot be handled by 'cat()' function"
 msgstr "Argument %d (Typ '%s') wird nicht von 'cat' beherrscht"
 
-#: src/main/builtin.c:759
+#: src/main/builtin.c:781
 msgid "too long for a pairlist"
 msgstr ""
 
-#: src/main/builtin.c:763
+#: src/main/builtin.c:785
 #, fuzzy, c-format
 msgid "'vector()': cannot make a vector of mode '%s'."
 msgstr "vector: kann keinen Vektor vom Mode '%s' erzeugen."
 
-#: src/main/builtin.c:789
+#: src/main/builtin.c:811
 msgid "cannot set length of non-vector"
 msgstr "kann Länge eines Nicht-Vektors nicht setzen"
 
-#: src/main/builtin.c:899 src/main/builtin.c:909 src/main/builtin.c:911
+#: src/main/builtin.c:921 src/main/builtin.c:931 src/main/builtin.c:933
 #: src/main/character.c:369 src/main/coerce.c:2785
 msgid "invalid value"
 msgstr "ungültiger Wert"
 
-#: src/main/builtin.c:942 src/main/coerce.c:2498 src/main/coerce.c:2539
+#: src/main/builtin.c:964 src/main/coerce.c:2498 src/main/coerce.c:2539
 #: src/main/eval.c:557 src/main/eval.c:676 src/main/eval.c:2115
 #: src/main/eval.c:2192 src/main/eval.c:2252 src/main/eval.c:2585
 #: src/main/eval.c:5364 src/main/eval.c:5482
 msgid "'...' used in an incorrect context"
 msgstr "'...' in falschem Kontext benutzt"
 
-#: src/main/builtin.c:963
+#: src/main/builtin.c:985
 #, fuzzy, c-format
 msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "doppelter Default für switch: '%s' und '%s'"
 
-#: src/main/builtin.c:996 src/main/coerce.c:2381
+#: src/main/builtin.c:1018 src/main/coerce.c:2381
 #, fuzzy, c-format
 msgid "'%s' argument is missing"
 msgstr "Argument %d ist leer"
 
-#: src/main/builtin.c:1000 src/main/eval.c:5837
+#: src/main/builtin.c:1022 src/main/eval.c:5837
 #, fuzzy, c-format
 msgid "'%s' argument must be a vector of length 1"
 msgstr "'hostname' muss eine Charaktervektor der Länge 1 sein"
 
-#: src/main/builtin.c:1003
+#: src/main/builtin.c:1025
 #, c-format
 msgid ""
 "'EXPR' is a \"factor\", treated as integer.\n"
 " Consider using '%s' instead."
 msgstr ""
 
-#: src/main/builtin.c:1050
+#: src/main/builtin.c:1072
 msgid "empty alternative in numeric switch"
 msgstr ""
 
@@ -2363,8 +2374,8 @@ msgstr "kann Verbindung nicht öffnen"
 #: src/main/connections.c:1521 src/main/connections.c:1531
 #: src/main/connections.c:1650 src/main/connections.c:1710
 #: src/main/connections.c:2237 src/main/connections.c:2254
-#: src/main/connections.c:2563 src/main/connections.c:5345
-#: src/main/connections.c:5409
+#: src/main/connections.c:2563 src/main/connections.c:5385
+#: src/main/connections.c:5449
 #, fuzzy
 msgid "specified block is too large"
 msgstr "angegebene Vektorgröße ist zu groß"
@@ -2401,13 +2412,13 @@ msgstr "Allokation der fifo Verbindung fehlgeschlagen"
 
 #: src/main/connections.c:1208 src/main/connections.c:1366
 #: src/main/connections.c:1988 src/main/connections.c:3204
-#: src/main/connections.c:4966 src/modules/internet/internet.c:306
-#: src/modules/internet/internet.c:312
+#: src/main/connections.c:4969 src/modules/internet/internet.c:464
+#: src/modules/internet/internet.c:470
 #, fuzzy, c-format
 msgid "only first element of '%s' argument will be used"
 msgstr "nur das erste Element von 'description' benutzt"
 
-#: src/main/connections.c:1225 src/main/connections.c:5068
+#: src/main/connections.c:1225 src/main/connections.c:5108
 #, fuzzy, c-format
 msgid ""
 "'%s' only supports 'open = \"w+\"' and 'open = \"w+b\"': using the former"
@@ -2421,7 +2432,7 @@ msgstr ""
 #: src/main/connections.c:3560 src/main/connections.c:3675
 #: src/main/connections.c:3837 src/main/connections.c:4091
 #: src/main/connections.c:4419 src/main/connections.c:4539
-#: src/main/connections.c:4751 src/main/connections.c:5145 src/main/dcf.c:95
+#: src/main/connections.c:4751 src/main/connections.c:5185 src/main/dcf.c:95
 #: src/main/deparse.c:355 src/main/deparse.c:443 src/main/saveload.c:2259
 #: src/main/saveload.c:2340 src/main/scan.c:933 src/main/serialize.c:2213
 #: src/main/serialize.c:2264 src/main/source.c:268
@@ -2493,13 +2504,13 @@ msgstr ""
 msgid "allocation of bzfile connection failed"
 msgstr "Allokation einer bzfile Verbindung fehlgeschlagen"
 
-#: src/main/connections.c:1794 src/main/connections.c:6001
+#: src/main/connections.c:1794 src/main/connections.c:6041
 #, c-format
 msgid "cannot initialize lzma decoder, error %d"
 msgstr "kann den lzma Dekodierer nicht initialisieren, Fehler %d"
 
-#: src/main/connections.c:1803 src/main/connections.c:5727
-#: src/main/connections.c:5894
+#: src/main/connections.c:1803 src/main/connections.c:5767
+#: src/main/connections.c:5934
 #, fuzzy
 msgid "problem with setting presets"
 msgstr "Problem beim Setzen der Zeitzone"
@@ -2624,7 +2635,7 @@ msgstr "Allokation einer raw-Verbindung fehlgeschlagen"
 #: src/main/connections.c:3313 src/main/connections.c:3360
 #: src/main/connections.c:3385 src/main/connections.c:3408
 #: src/main/connections.c:3420 src/main/connections.c:3536
-#: src/main/connections.c:3660 src/main/connections.c:5448
+#: src/main/connections.c:3660 src/main/connections.c:5488
 #, fuzzy, c-format
 msgid "'%s' argument is not an object of class %s"
 msgstr "'con' ist keine Ausgabe-Verbindung vom raw Typ"
@@ -2702,8 +2713,8 @@ msgstr "kann die Ausgaben-sink-Verbindung nicht schließen"
 msgid "cannot close 'message' sink connection"
 msgstr "kann die Nachrichten-sink-Verbindung nicht schließen"
 
-#: src/main/connections.c:3387 src/main/connections.c:5163
-#: src/main/connections.c:5171 src/main/serialize.c:2032
+#: src/main/connections.c:3387 src/main/connections.c:5203
+#: src/main/connections.c:5211 src/main/serialize.c:2032
 #: src/main/serialize.c:2040
 msgid "connection is not open"
 msgstr "Verbindung ist nicht geöffnet"
@@ -2715,7 +2726,7 @@ msgstr "Zeile länger als Buffergröße"
 
 #: src/main/connections.c:3567 src/main/connections.c:3569
 #: src/main/connections.c:3845 src/main/connections.c:4402
-#: src/main/connections.c:4427 src/main/connections.c:5172 src/main/dcf.c:102
+#: src/main/connections.c:4427 src/main/connections.c:5212 src/main/dcf.c:102
 #: src/main/scan.c:936 src/main/scan.c:940 src/main/serialize.c:2034
 #: src/main/source.c:275
 msgid "cannot read from this connection"
@@ -2890,85 +2901,92 @@ msgstr "Es gibt keine Verbindung NA"
 msgid "there is no connection %d"
 msgstr "Es gibt keine Verbindung %d"
 
-#: src/main/connections.c:5016
+#: src/main/connections.c:5018
+#, fuzzy
+msgid "'method = \"wininet\"' is only supported on Windows"
+msgstr "'dirmark = TRUE' wird auf dieser Plattform nicht unterstützt"
+
+#: src/main/connections.c:5040
 msgid ""
-"ftps:// URLs are not supported by the default method:\n"
-"   consider url(method = \"libcurl\")"
+"ftps:// URLs are not supported by the default method: trying \"libcurl\"\n"
 msgstr ""
 
-#: src/main/connections.c:5018
+#: src/main/connections.c:5046
 #, fuzzy
 msgid "ftps:// URLs are not supported"
 msgstr "Typ '%s' wird nicht unterstützt"
 
-#: src/main/connections.c:5023 src/modules/internet/internet.c:124
-msgid "for https:// URLs use setInternet2(TRUE)"
-msgstr ""
-
-#: src/main/connections.c:5028
+#: src/main/connections.c:5050
+#, fuzzy
 msgid ""
-"https:// URLs are not supported by the default method:\n"
-"  consider url(method = \"libcurl\")"
-msgstr ""
+"https:// URLs are not supported by the default method: using \"wininet\"\n"
+msgstr "Typ '%s' wird nicht unterstützt"
 
-#: src/main/connections.c:5030
+#: src/main/connections.c:5060
+#, fuzzy
+msgid ""
+"https:// URLs are not supported by the default method: trying \"libcurl\"\n"
+msgstr "Typ '%s' wird nicht unterstützt"
+
+#: src/main/connections.c:5066
 #, fuzzy
 msgid "https:// URLs are not supported"
 msgstr "Typ '%s' wird nicht unterstützt"
 
-#: src/main/connections.c:5055 src/modules/internet/libcurl.c:646
+#: src/main/connections.c:5091 src/modules/internet/libcurl.c:670
 #, fuzzy
 msgid "'url(method = \"libcurl\")' is not supported on this platform"
 msgstr "'dirmark = TRUE' wird auf dieser Plattform nicht unterstützt"
 
-#: src/main/connections.c:5122 src/modules/internet/internet.c:129
+#: src/main/connections.c:5162 src/modules/internet/internet.c:161
+#: src/modules/internet/internet.c:282
 #, fuzzy
 msgid "URL scheme unsupported by this method"
 msgstr "ICU wird in diesem Binary nicht unterstützt"
 
-#: src/main/connections.c:5213
+#: src/main/connections.c:5253
 msgid "file stream does not have gzip magic number"
 msgstr "Dateistrom hat nicht die magic number von gzip"
 
-#: src/main/connections.c:5224
+#: src/main/connections.c:5264
 msgid "file stream does not have valid gzip header"
 msgstr "Dateistrom hat keinen gültigen gzip header"
 
-#: src/main/connections.c:5289
+#: src/main/connections.c:5329
 #, fuzzy
 msgid "writing error while flushing gzcon connection"
 msgstr "Schreibfehler während flush auf 'gzcon' Verbindung"
 
-#: src/main/connections.c:5391
+#: src/main/connections.c:5431
 #, c-format
 msgid "crc error %x %x\n"
 msgstr "Checksummenfehler %x %x\n"
 
-#: src/main/connections.c:5418
+#: src/main/connections.c:5458
 #, fuzzy
 msgid "write error on gzcon connection"
 msgstr "Schreibfehler auf 'gzcon' Verbindung"
 
-#: src/main/connections.c:5452
+#: src/main/connections.c:5492
 #, fuzzy
 msgid "'level' argument must be one of 0 ... 9"
 msgstr "'level' muss aus 0..9 sein"
 
-#: src/main/connections.c:5458
+#: src/main/connections.c:5498
 #, fuzzy
 msgid "this is already a gzcon connection"
 msgstr "dies ist bereits eine gzcon Verbindung"
 
-#: src/main/connections.c:5464
+#: src/main/connections.c:5504
 msgid "can only use read- or write- binary connections"
 msgstr "kann nur entweder read- oder write- binäre Verbindungen benutzen"
 
-#: src/main/connections.c:5467
+#: src/main/connections.c:5507
 msgid "using a text-mode 'file' connection may not work correctly"
 msgstr ""
 "Benutzung einer text-mode 'file' connection arbeitet evtl. nicht korrekt"
 
-#: src/main/connections.c:5470
+#: src/main/connections.c:5510
 #, fuzzy
 msgid ""
 "cannot create a gzcon connection from a writable textConnection; maybe use "
@@ -2977,71 +2995,71 @@ msgstr ""
 "kann aus einer schreibbaren textConnection keine gzcon erzeugen; evtl. "
 "\"rawconnection\" benutzen"
 
-#: src/main/connections.c:5473 src/main/connections.c:5477
-#: src/main/connections.c:5484 src/main/connections.c:5498
+#: src/main/connections.c:5513 src/main/connections.c:5517
+#: src/main/connections.c:5524 src/main/connections.c:5538
 #, fuzzy
 msgid "allocation of gzcon connection failed"
 msgstr "Allokation einer 'gzcon' Verbindung fehlgeschlagen"
 
-#: src/main/connections.c:5555 src/main/connections.c:5580
-#: src/main/connections.c:5606 src/main/connections.c:5639
-#: src/main/connections.c:5749 src/main/connections.c:5789
+#: src/main/connections.c:5595 src/main/connections.c:5620
+#: src/main/connections.c:5646 src/main/connections.c:5679
+#: src/main/connections.c:5789 src/main/connections.c:5829
 #, fuzzy, c-format
 msgid "'%s' function requires a raw vector"
 msgstr "'%s' benötigt einen Charakter-Vektor"
 
-#: src/main/connections.c:5562 src/main/connections.c:5586
-#: src/main/connections.c:5616 src/main/connections.c:5647
-#: src/main/connections.c:5656 src/main/connections.c:5759
-#: src/main/connections.c:5766 src/main/connections.c:5800
-#: src/main/connections.c:5820 src/main/connections.c:5828
-#: src/main/connections.c:5865 src/main/connections.c:5878
-#: src/main/connections.c:5900 src/main/connections.c:5910
+#: src/main/connections.c:5602 src/main/connections.c:5626
+#: src/main/connections.c:5656 src/main/connections.c:5687
+#: src/main/connections.c:5696 src/main/connections.c:5799
+#: src/main/connections.c:5806 src/main/connections.c:5840
+#: src/main/connections.c:5860 src/main/connections.c:5868
+#: src/main/connections.c:5905 src/main/connections.c:5918
+#: src/main/connections.c:5940 src/main/connections.c:5950
 #, fuzzy, c-format
 msgid "internal error %d in '%s' function"
 msgstr "interner Fehler in 'do_sys'"
 
-#: src/main/connections.c:5663 src/main/connections.c:5835
+#: src/main/connections.c:5703 src/main/connections.c:5875
 #, fuzzy, c-format
 msgid "unknown type in '%s' function"
 msgstr "unbekannte cumxxx Funktion"
 
-#: src/main/connections.c:5685
+#: src/main/connections.c:5725
 #, fuzzy, c-format
 msgid "'%s' argument is not a list of sockets"
 msgstr "keine Liste von Sockets"
 
-#: src/main/connections.c:5690
+#: src/main/connections.c:5730
 msgid "bad write indicators"
 msgstr "unbrauchbare Schreibindikatoren"
 
-#: src/main/connections.c:5701
+#: src/main/connections.c:5741
 #, fuzzy
 msgid "this is not a socket connection"
 msgstr "keine Socket Verbindung"
 
-#: src/main/connections.c:5810 src/main/connections.c:5964
-#: src/main/connections.c:5980
+#: src/main/connections.c:5850 src/main/connections.c:6004
+#: src/main/connections.c:6020
 #, fuzzy, c-format
 msgid "internal error %d in '%s' function (%d)"
 msgstr "interner Fehler in 'do_sys'"
 
-#: src/main/connections.c:5853 src/main/connections.c:5933
+#: src/main/connections.c:5893 src/main/connections.c:5973
 #, fuzzy
 msgid "'from' argument must be raw or character"
 msgstr "'norm' muss eine Zeichenkette sein"
 
-#: src/main/connections.c:5945
+#: src/main/connections.c:5985
 msgid "unknown compression, assuming none"
 msgstr "unbekannte Kompression, vermute keine"
 
-#: src/main/connections.c:6026
+#: src/main/connections.c:6066
 #, fuzzy, c-format
 msgid "internal error %d in '%s' function (%d) at %d"
 msgstr "interner Fehler in do_random1"
 
-#: src/main/connections.c:6062 src/main/connections.c:6066
-#: src/main/connections.c:6072
+#: src/main/connections.c:6102 src/main/connections.c:6106
+#: src/main/connections.c:6112
 #, fuzzy, c-format
 msgid "allocation of %s connection failed"
 msgstr "Allokation einer raw-Verbindung fehlgeschlagen"
@@ -4974,31 +4992,27 @@ msgstr ""
 msgid "\"%s\" (has value)"
 msgstr "unbrauchbarer Wert"
 
-#: src/main/internet.c:89
+#: src/main/internet.c:84
 msgid "internet routines cannot be accessed in module"
 msgstr "Internetroutinen können nicht im Modul angesprochen werden"
 
-#: src/main/internet.c:100 src/main/internet.c:138 src/main/internet.c:151
-#: src/main/internet.c:162 src/main/internet.c:173 src/main/internet.c:184
-#: src/main/internet.c:193 src/main/internet.c:204 src/main/internet.c:215
-#: src/main/internet.c:224 src/main/internet.c:234 src/main/internet.c:348
-#: src/main/internet.c:359 src/main/internet.c:370 src/main/internet.c:382
+#: src/main/internet.c:95 src/main/internet.c:129 src/main/internet.c:142
+#: src/main/internet.c:153 src/main/internet.c:164 src/main/internet.c:175
+#: src/main/internet.c:184 src/main/internet.c:195 src/main/internet.c:206
+#: src/main/internet.c:215 src/main/internet.c:225 src/main/internet.c:339
+#: src/main/internet.c:350 src/main/internet.c:361 src/main/internet.c:373
 msgid "internet routines cannot be loaded"
 msgstr "Internet Routinen können nicht geladen werden"
 
-#: src/main/internet.c:115 src/main/memory.c:3483 src/main/memory.c:3493
+#: src/main/internet.c:110 src/main/memory.c:3483 src/main/memory.c:3493
 #: src/main/memory.c:3505 src/main/memory.c:3519 src/main/memory.c:3535
 #: src/main/memory.c:3553
 msgid "bad value"
 msgstr "unbrauchbarer Wert"
 
-#: src/main/internet.c:121
-msgid "internet routines were already initialized"
-msgstr "Internet Routinen sind bereits initialisiert"
-
-#: src/main/internet.c:248 src/main/internet.c:262 src/main/internet.c:278
-#: src/main/internet.c:290 src/main/internet.c:304 src/main/internet.c:324
-#: src/main/internet.c:337
+#: src/main/internet.c:239 src/main/internet.c:253 src/main/internet.c:269
+#: src/main/internet.c:281 src/main/internet.c:295 src/main/internet.c:315
+#: src/main/internet.c:328
 msgid "socket routines cannot be loaded"
 msgstr "Socket Routinen können nicht geladen werden"
 
@@ -6164,7 +6178,7 @@ msgstr ""
 "OS meldet: Anfrage Lokilisierung auf \"%s\" zu setzen kann nicht beachtet "
 "werden"
 
-#: src/main/platform.c:2137 src/main/raw.c:38 src/main/raw.c:274
+#: src/main/platform.c:2137 src/main/raw.c:37 src/main/raw.c:273
 #, fuzzy, c-format
 msgid "'%s' argument must be a character vector of length 1"
 msgstr "'hostname' muss eine Charaktervektor der Länge 1 sein"
@@ -6611,7 +6625,7 @@ msgstr "falsche Anzahl von Wahrscheinlichkeiten"
 msgid "n >= 2^31, replace = FALSE is only supported on 64-bit platforms"
 msgstr "'dirmark = TRUE' wird auf dieser Plattform nicht unterstützt"
 
-#: src/main/raw.c:40 src/main/raw.c:276
+#: src/main/raw.c:39 src/main/raw.c:275
 #, fuzzy
 msgid ""
 "argument should be a character vector of length 1.\n"
@@ -6619,37 +6633,37 @@ msgid ""
 msgstr ""
 "Argument '%s' hat einen Länge > 1 und nur das erste Element wird benutzt"
 
-#: src/main/raw.c:54 src/main/raw.c:90 src/main/raw.c:111
+#: src/main/raw.c:53 src/main/raw.c:89 src/main/raw.c:110
 #, fuzzy, c-format
 msgid "'%s' argument must be a raw vector"
 msgstr "erstes Argument muss ein Vektor sein"
 
-#: src/main/raw.c:92
+#: src/main/raw.c:91
 #, fuzzy
 msgid "argument 'shift' must be a small integer"
 msgstr "Argument 'size' muss positive ganze Zahl sein"
 
-#: src/main/raw.c:130 src/main/raw.c:328
+#: src/main/raw.c:129 src/main/raw.c:327
 #, fuzzy, c-format
 msgid "'%s' argument must be an integer vector"
 msgstr "'list' Argument muss eine Liste sein"
 
-#: src/main/raw.c:149
+#: src/main/raw.c:148
 #, fuzzy, c-format
 msgid "'%s' argument must be raw, integer or logical"
 msgstr "Argument 'logarithm' muss boolesch sein"
 
-#: src/main/raw.c:155
+#: src/main/raw.c:154
 #, fuzzy, c-format
 msgid "argument 'x' must be a multiple of %d long"
 msgstr "Argument muss eine Funktion sein"
 
-#: src/main/raw.c:168 src/main/raw.c:182
+#: src/main/raw.c:167 src/main/raw.c:181
 #, fuzzy
 msgid "argument 'x' must not contain NA values"
 msgstr "Argument darf keine Funktion sein"
 
-#: src/main/raw.c:286
+#: src/main/raw.c:285
 #, fuzzy
 msgid "invalid UTF-8 string"
 msgstr "ungültige UTF-8 Zeichenkette 'old'"
@@ -6873,7 +6887,7 @@ msgstr "ungültiger Normalverteilungstyp Typ in RNGkind"
 msgid "supplied seed is not a valid integer"
 msgstr "angegebener Startwert ist keine gültige ganze Zahl"
 
-#: src/main/RNG.c:770
+#: src/main/RNG.c:773
 msgid "function '.TAOCP1997init' is missing"
 msgstr ""
 
@@ -7065,8 +7079,8 @@ msgid "an xdr complex data read error occurred"
 msgstr "xdr Lesefehler bei complex aufgetreten"
 
 #: src/main/saveload.c:1780 src/main/serialize.c:1994
-#: src/main/serialize.c:2610 src/modules/internet/internet.c:368
-#: src/modules/internet/internet.c:429 src/modules/internet/internet.c:538
+#: src/main/serialize.c:2610 src/modules/internet/internet.c:526
+#: src/modules/internet/internet.c:587 src/modules/internet/internet.c:696
 msgid "write failed"
 msgstr "Schreibfehler"
 
@@ -8512,205 +8526,185 @@ msgstr "Es muss mindestens vier Kontrollpunkte geben"
 msgid "there must be at least three control points"
 msgstr "es muss mindestens drei Kontrollpunkte geben"
 
-#: src/modules/internet/internet.c:76
+#: src/modules/internet/internet.c:117 src/modules/internet/internet.c:242
 #, fuzzy
 msgid "can only open URLs for reading"
 msgstr "Verbindung nicht zum Lesen geöffnet"
 
-#: src/modules/internet/internet.c:208 src/modules/internet/internet.c:212
-#: src/modules/internet/internet.c:218 src/modules/internet/internet.c:230
-#: src/modules/internet/libcurl.c:612 src/modules/internet/libcurl.c:616
-#: src/modules/internet/libcurl.c:622 src/modules/internet/libcurl.c:634
-#: src/modules/internet/libcurl.c:642
+#: src/modules/internet/internet.c:124
+msgid "for https:// URLs use setInternet2(TRUE)"
+msgstr ""
+
+#: src/modules/internet/internet.c:356 src/modules/internet/internet.c:360
+#: src/modules/internet/internet.c:366 src/modules/internet/internet.c:388
+#: src/modules/internet/libcurl.c:636 src/modules/internet/libcurl.c:640
+#: src/modules/internet/libcurl.c:646 src/modules/internet/libcurl.c:658
+#: src/modules/internet/libcurl.c:666
 msgid "allocation of url connection failed"
 msgstr "Allokation einer URL-Verbindung fehlgeschlagen"
 
-#: src/modules/internet/internet.c:337 src/modules/internet/internet.c:418
-#: src/modules/internet/internet.c:524 src/modules/internet/libcurl.c:332
-#: src/modules/internet/libcurl.c:342
+#: src/modules/internet/internet.c:495 src/modules/internet/internet.c:576
+#: src/modules/internet/internet.c:682 src/modules/internet/libcurl.c:353
+#: src/modules/internet/libcurl.c:363
 msgid "Download progress"
 msgstr "Downloadfortschritt"
 
-#: src/modules/internet/internet.c:358
+#: src/modules/internet/internet.c:516
 #, c-format
 msgid "cannot open URL '%s', reason '%s'"
 msgstr "kann URL '%s' nicht öffnen. Grund '%s'"
 
-#: src/modules/internet/internet.c:364 src/modules/internet/internet.c:392
-#: src/modules/internet/internet.c:497 src/modules/internet/libcurl.c:371
+#: src/modules/internet/internet.c:522 src/modules/internet/internet.c:550
+#: src/modules/internet/internet.c:655 src/modules/internet/libcurl.c:392
 #, c-format
 msgid "cannot open destfile '%s', reason '%s'"
 msgstr "kann Zieldatei '%s' nicht öffnen. Grund '%s'"
 
-#: src/modules/internet/internet.c:396 src/modules/internet/internet.c:502
-#: src/modules/internet/libcurl.c:375
+#: src/modules/internet/internet.c:554 src/modules/internet/internet.c:660
+#: src/modules/internet/libcurl.c:396
 #, fuzzy, c-format
 msgid "Trying URL '%s'\n"
 msgstr "versuche URL '%s'\n"
 
-#: src/modules/internet/internet.c:403 src/modules/internet/internet.c:509
+#: src/modules/internet/internet.c:561 src/modules/internet/internet.c:667
 #, fuzzy
 msgid "Opened URL\n"
 msgstr "URL geöffnet\n"
 
-#: src/modules/internet/internet.c:442 src/modules/internet/internet.c:551
-#: src/modules/internet/libcurl.c:214
+#: src/modules/internet/internet.c:600 src/modules/internet/internet.c:709
+#: src/modules/internet/libcurl.c:235
 #, c-format
 msgid "%d%% downloaded"
 msgstr ""
 
-#: src/modules/internet/internet.c:461 src/modules/internet/internet.c:570
-#: src/modules/internet/libcurl.c:412
+#: src/modules/internet/internet.c:619 src/modules/internet/internet.c:728
+#: src/modules/internet/libcurl.c:433
 #, c-format
 msgid "Downloaded %0.1f MB"
 msgstr ""
 
-#: src/modules/internet/internet.c:463 src/modules/internet/internet.c:573
-#: src/modules/internet/libcurl.c:414
+#: src/modules/internet/internet.c:621 src/modules/internet/internet.c:731
+#: src/modules/internet/libcurl.c:435
 #, c-format
 msgid "Downloaded %d KB"
 msgstr ""
 
-#: src/modules/internet/internet.c:465 src/modules/internet/internet.c:575
-#: src/modules/internet/libcurl.c:416
+#: src/modules/internet/internet.c:623 src/modules/internet/internet.c:733
+#: src/modules/internet/libcurl.c:437
 #, c-format
 msgid "Downloaded %d byte"
 msgid_plural "Downloaded %d bytes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/modules/internet/internet.c:476 src/modules/internet/internet.c:586
-#: src/modules/internet/libcurl.c:421
+#: src/modules/internet/internet.c:634 src/modules/internet/internet.c:744
+#: src/modules/internet/libcurl.c:442
 #, fuzzy, c-format
 msgid "downloaded length %0.f != reported length %0.f"
 msgstr "heruntergeladene Länge %d != angegebener Länge %d"
 
-#: src/modules/internet/internet.c:480 src/modules/internet/internet.c:591
+#: src/modules/internet/internet.c:638 src/modules/internet/internet.c:749
 #, c-format
 msgid "cannot open URL '%s'"
 msgstr "kann URL '%s' nicht öffnen"
 
-#: src/modules/internet/internet.c:595
+#: src/modules/internet/internet.c:753
 msgid "unsupported URL scheme"
 msgstr "nicht unterstütztes URL Schema"
 
-#: src/modules/internet/internet.c:619 src/modules/internet/internet.c:860
+#: src/modules/internet/internet.c:777 src/modules/internet/internet.c:946
 #, c-format
 msgid "cannot open: HTTP status was '%d %s'"
 msgstr "Öffnen fehlgeschlagen: HTTP Status war '%d %s'"
 
-#: src/modules/internet/internet.c:629 src/modules/internet/internet.c:875
-#: src/modules/internet/libcurl.c:247
+#: src/modules/internet/internet.c:787 src/modules/internet/internet.c:961
+#: src/modules/internet/libcurl.c:268
 #, c-format
 msgid "Content type '%s' length %0.0f byte (%0.1f MB)"
 msgid_plural "Content type '%s' length %0.0f bytes (%0.1f MB)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/modules/internet/internet.c:633 src/modules/internet/internet.c:877
-#: src/modules/internet/libcurl.c:250
+#: src/modules/internet/internet.c:791 src/modules/internet/internet.c:963
+#: src/modules/internet/libcurl.c:271
 #, c-format
 msgid "Content type '%s' length %d byte (%d KB)"
 msgid_plural "Content type '%s' length %d bytes (%d KB)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/modules/internet/internet.c:637 src/modules/internet/internet.c:879
-#: src/modules/internet/libcurl.c:253
+#: src/modules/internet/internet.c:795 src/modules/internet/internet.c:965
+#: src/modules/internet/libcurl.c:274
 #, c-format
 msgid "Content type '%s' length %d byte"
 msgid_plural "Content type '%s' length %d bytes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/modules/internet/internet.c:640
+#: src/modules/internet/internet.c:798
 #, c-format
 msgid "Content type '%s' length unknown"
 msgstr ""
 
-#: src/modules/internet/internet.c:684
+#: src/modules/internet/internet.c:842
 #, c-format
 msgid "ftp data connection made, file length %ld bytes\n"
 msgstr ""
 
-#: src/modules/internet/internet.c:686
+#: src/modules/internet/internet.c:844
 msgid "ftp data connection made, file length unknown\n"
 msgstr ""
 
-#: src/modules/internet/internet.c:804 src/modules/internet/internet.c:967
-msgid "InternetOpenUrl timed out"
-msgstr "InternetOpenUrl Time-Out"
-
-#: src/modules/internet/internet.c:831 src/modules/internet/internet.c:845
-#: src/modules/internet/internet.c:989 src/modules/internet/internet.c:998
+#: src/modules/internet/internet.c:917 src/modules/internet/internet.c:931
+#: src/modules/internet/internet.c:1017 src/modules/internet/internet.c:1026
 #, c-format
 msgid "InternetOpenUrl failed: '%s'"
 msgstr "InternetOpenUrl fehlgeschlagen: '%s'"
 
-#: src/modules/internet/internet.c:902
-msgid "Internet read timed out"
-msgstr "Lesen vom Internet: Time-Out"
-
-#: src/modules/internet/internet.c:947
-#, c-format
-msgid "using Asynchronous WinInet calls, timeout %d sec\n"
-msgid_plural "using Asynchronous WinInet calls, timeout %d secs\n"
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/modules/internet/internet.c:975
-msgid "using Synchronous WinInet calls\n"
-msgstr ""
-
-#: src/modules/internet/libcurl.c:123
+#: src/modules/internet/libcurl.c:138
 #, fuzzy
 msgid "'curlGetHeaders()' function is not supported on this platform"
 msgstr "nsl() wird auf dieser Plattform nicht unterstützt"
 
-#: src/modules/internet/libcurl.c:127
-#, fuzzy, c-format
-msgid "invalid %s argument"
-msgstr "ungültiges '%s' Argument"
-
-#: src/modules/internet/libcurl.c:146
+#: src/modules/internet/libcurl.c:167
 #, c-format
 msgid ""
 "libcurl error code %d\n"
 "\t%s\n"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:196
+#: src/modules/internet/libcurl.c:217
 #, c-format
 msgid "Content length %0.0f byte (%0.1f MB)"
 msgid_plural "Content length %0.0f bytes (%0.1f MB)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/modules/internet/libcurl.c:199
+#: src/modules/internet/libcurl.c:220
 #, c-format
 msgid "Content length %d byte (%d KB)"
 msgid_plural "Content length %d bytes (%d KB)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/modules/internet/libcurl.c:202
+#: src/modules/internet/libcurl.c:223
 #, c-format
 msgid "Content length %d byte"
 msgid_plural "Content length %d bytes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/modules/internet/libcurl.c:273
+#: src/modules/internet/libcurl.c:294
 #, fuzzy
 msgid "'download.file(method = \"libcurl\")' is not supported on this platform"
 msgstr "'dirmark = TRUE' wird auf dieser Plattform nicht unterstützt"
 
-#: src/modules/internet/libcurl.c:289
+#: src/modules/internet/libcurl.c:310
 #, fuzzy
 msgid "lengths of 'url' and 'destfile' arguments must match"
 msgstr "Länge von Import- und Exportnamen muss übereinstimmen"
 
-#: src/modules/internet/libcurl.c:385 src/modules/internet/libcurl.c:519
+#: src/modules/internet/libcurl.c:406 src/modules/internet/libcurl.c:540
 #, c-format
 msgid "'curl_multi_wait()' function failed, code %d"
 msgstr ""
@@ -9873,6 +9867,19 @@ msgstr "X11 Modul kann nicht geladen werden"
 #: src/unix/X11.c:145 src/unix/X11.c:151 src/unix/X11.c:157 src/unix/X11.c:163
 msgid "X11 is not available"
 msgstr "X11 nicht verfügbar"
+
+#~ msgid "internet routines were already initialized"
+#~ msgstr "Internet Routinen sind bereits initialisiert"
+
+#~ msgid "InternetOpenUrl timed out"
+#~ msgstr "InternetOpenUrl Time-Out"
+
+#~ msgid "Internet read timed out"
+#~ msgstr "Lesen vom Internet: Time-Out"
+
+#, fuzzy
+#~ msgid "invalid %s argument"
+#~ msgstr "ungültiges '%s' Argument"
 
 #~ msgid "only first element of 'url' argument used"
 #~ msgstr "nur das erste Element des 'url' Arguments wird benutzt"

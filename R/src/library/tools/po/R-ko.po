@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-16 19:57\n"
+"POT-Creation-Date: 2015-01-22 20:13\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -650,6 +650,15 @@ msgstr ""
 #, fuzzy
 msgid "Checking %s"
 msgstr "%s를 실행중입니다"
+
+#. R/QC.R: gettext("Checking URLs failed with message:", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Checking URLs failed with message:"
+msgstr ""
+"비니에트 '%2$s'에서 %1$s을 실행하는데 실패했으며 다음과 같은 메시지가 반환되"
+"었습니다:\n"
+"%3$s"
 
 #. R/news.R: gettextf("\nChunk %s:\n%s", format(seq_along(bad)), bad)
 #: R/news.R:0
@@ -1444,6 +1453,12 @@ msgid ""
 "Found subdirectory 'r'.\n"
 "Most likely, this should be 'R'."
 msgstr ""
+
+#. R/QC.R: gettext("Found the following (possibly) invalid URLs:", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Found the following (possibly) invalid URLs:"
+msgstr "다음의 함수로부터 .Internal 호출을 찾았습니다:"
 
 #. R/check.R: gettext("Found the following Makefile(s) without a final LF:", domain = "R-tools")
 #: R/check.R:0
@@ -5188,7 +5203,9 @@ msgid "preparing package for lazy loading"
 msgstr ""
 
 #. R/pdftools.R: gettextf("processing %s", sQuote(paste(names(entry), entry, collapse = " ")))
-#: R/pdftools.R:0
+#. R/urltools.R: gettextf("processing %s", p)
+#. R/urltools.R: sprintf("processing %s", u)
+#: R/pdftools.R:0 R/urltools.R:0
 msgid "processing %s"
 msgstr "%s를 처리중입니다"
 

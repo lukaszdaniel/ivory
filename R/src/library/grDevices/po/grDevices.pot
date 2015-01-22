@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 19:56+0100\n"
+"POT-Creation-Date: 2015-01-22 19:58+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -138,6 +138,14 @@ msgstr ""
 #: devPS.c:559
 #, c-format
 msgid "afm file '%s' could not be opened"
+msgstr ""
+
+#: devPS.c:589
+msgid "'FontBBox' could not be parsed"
+msgstr ""
+
+#: devPS.c:597
+msgid "'CharInfo' could not be parsed"
 msgstr ""
 
 #: devPS.c:627

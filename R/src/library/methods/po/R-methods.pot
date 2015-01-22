@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 3.2.0\n"
-"POT-Creation-Date: 2015-01-16 19:56\n"
+"POT-Creation-Date: 2015-01-22 19:58\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1267,13 +1267,6 @@ msgid "Warning: Tracing only in the namespace; to untrace you will need:"
 msgstr ""
 
 
-#: R/Methods.R: 0
-#. R/Methods.R: message("Warning: using defunct methods list search", domain = "R-methods")
-
-msgid "Warning: using defunct methods list search"
-msgstr ""
-
-
 #: R/as.R: 0
 #. R/as.R: gettextf("a 'replace' method definition in 'setAs' function must be a function of two arguments, got %d",     length(args))
 
@@ -1350,13 +1343,6 @@ msgstr ""
 #. R/as.R: warning("ambiguous object (length != 1) to coerce to \"name\"")
 
 msgid "ambiguous object (length != 1) to coerce to \"name\""
-msgstr ""
-
-
-#: R/Methods.R: 0
-#. R/Methods.R: sprintf("apparent inconsistency in the methods for function %s; argument %s in the signature corresponds to %s in the methods list object",     sQuote(.genericName(f)), sQuote(argNames[[i]]), sQuote(as.character(mlist@argument)))
-
-msgid "apparent inconsistency in the methods for function %s; argument %s in the signature corresponds to %s in the methods list object"
 msgstr ""
 
 
@@ -1890,6 +1876,13 @@ msgstr ""
 #. R/MethodsList.R: gettextf("default method must be a method definition, a primitive or NULL: got an object of class %s",     dQuote(class(method)))
 
 msgid "default method must be a method definition, a primitive or NULL: got an object of class %s"
+msgstr ""
+
+
+#: R/Methods.R: 0
+#. R/Methods.R: stop("defunct methods list search", domain = "R-Methods")
+
+msgid "defunct methods list search"
 msgstr ""
 
 
@@ -2704,13 +2697,6 @@ msgstr ""
 
 
 #: R/Methods.R: 0
-#. R/Methods.R: sprintf("no S4 method for function %s and signature %s; consider getS3method() if you wanted the S3 method",     sQuote(.genericName(f)), Classes)
-
-msgid "no S4 method for function %s and signature %s; consider getS3method() if you wanted the S3 method"
-msgstr ""
-
-
-#: R/Methods.R: 0
 #. R/Methods.R: gettext("no applicable functions", domain = "R-methods")
 
 msgid "no applicable functions"
@@ -2851,13 +2837,6 @@ msgstr ""
 #. R/Methods.R: gettextf("no generic version of %s on package %s is allowed; a new generic will be assigned for the global environment",     sQuote(name), sQuote(package))
 
 msgid "no generic version of %s on package %s is allowed; a new generic will be assigned for the global environment"
-msgstr ""
-
-
-#: R/Methods.R: 0
-#. R/Methods.R: gettextf("no method defined in methods list object for function %s and signature %s",     sQuote(.genericName(f)), Classes)
-
-msgid "no method defined in methods list object for function %s and signature %s"
 msgstr ""
 
 

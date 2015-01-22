@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-16 19:56\n"
+"POT-Creation-Date: 2015-01-22 19:58\n"
 "PO-Revision-Date: 2012-03-06 21:42+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -1184,12 +1184,6 @@ msgstr "ceci n'est pas un nom de package : %s"
 msgid "Warning: Tracing only in the namespace; to untrace you will need:"
 msgstr ""
 
-#. R/Methods.R: message("Warning: using defunct methods list search", domain = "R-methods")
-#: R/Methods.R:0
-#, fuzzy
-msgid "Warning: using defunct methods list search"
-msgstr "Avis : la recherche dans une liste de méthodes n'est plus supportée"
-
 #. R/as.R: gettextf("a 'replace' method definition in 'setAs' function must be a function of two arguments, got %d",     length(args))
 #: R/as.R:0
 #, fuzzy
@@ -1285,15 +1279,6 @@ msgid "ambiguous object (length != 1) to coerce to \"name\""
 msgstr ""
 "objet ambigu (longueur supérieure à un) à convertir automatiquement en \"name"
 "\""
-
-#. R/Methods.R: sprintf("apparent inconsistency in the methods for function %s; argument %s in the signature corresponds to %s in the methods list object",     sQuote(.genericName(f)), sQuote(argNames[[i]]), sQuote(as.character(mlist@argument)))
-#: R/Methods.R:0
-msgid ""
-"apparent inconsistency in the methods for function %s; argument %s in the "
-"signature corresponds to %s in the methods list object"
-msgstr ""
-"inconsistence apparente pour les méthodes de la fonction %s ; L'argument %s "
-"dans la signature correspond à %s dans la liste des méthodes de l'objet"
 
 #. R/Methods.R: sprintf("apparent internal error: a generic function was found for \"%s\", but no corresponding object was found searching from \"%s\"",     f, getPackageName(where))
 #: R/Methods.R:0
@@ -1876,6 +1861,12 @@ msgid ""
 msgstr ""
 "La méthode par défaut doit être une définition de méthode, une primitive ou "
 "NULL ; c'est un objet de classe %s"
+
+#. R/Methods.R: stop("defunct methods list search", domain = "R-Methods")
+#: R/Methods.R:0
+#, fuzzy
+msgid "defunct methods list search"
+msgstr "Avis : la recherche dans une liste de méthodes n'est plus supportée"
 
 #. R/refClass.R: stop("direct calls to 'callSuper()' are invalid: should only be called from another method")
 #: R/refClass.R:0
@@ -2744,15 +2735,6 @@ msgstr ""
 "pas de méthode 'replace' définie pour as(x, \"%s\") <- value pour la classe "
 "%s"
 
-#. R/Methods.R: sprintf("no S4 method for function %s and signature %s; consider getS3method() if you wanted the S3 method",     sQuote(.genericName(f)), Classes)
-#: R/Methods.R:0
-msgid ""
-"no S4 method for function %s and signature %s; consider getS3method() if you "
-"wanted the S3 method"
-msgstr ""
-"pas de méthode S4 pour la fonction %s et la signature %s ; Considérez "
-"getS3method() si vous recherchez une méthode S3"
-
 #. R/Methods.R: gettext("no applicable functions", domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
@@ -2884,14 +2866,6 @@ msgid ""
 msgstr ""
 "Pas de version du générique de %s permise dans le package %s ;\n"
 "    un nouveau générique sera attribué pour %s"
-
-#. R/Methods.R: gettextf("no method defined in methods list object for function %s and signature %s",     sQuote(.genericName(f)), Classes)
-#: R/Methods.R:0
-msgid ""
-"no method defined in methods list object for function %s and signature %s"
-msgstr ""
-"pas de méthode définie dans l'objet de liste des méthodes pour la fonction "
-"%s et la signature %s"
 
 #. R/Methods.R: gettextf("no method for %s matches class %s", sQuote("..."), dQuote(signature))
 #: R/Methods.R:0
@@ -4013,6 +3987,26 @@ msgstr[0] ""
 msgstr[1] ""
 "les arguments formels de la fonction générique pour \"%s\" (%s) diffèrent de "
 "ceux de la fonction non générique à utiliser par défaut (%s)"
+
+#~ msgid ""
+#~ "apparent inconsistency in the methods for function %s; argument %s in the "
+#~ "signature corresponds to %s in the methods list object"
+#~ msgstr ""
+#~ "inconsistence apparente pour les méthodes de la fonction %s ; L'argument "
+#~ "%s dans la signature correspond à %s dans la liste des méthodes de l'objet"
+
+#~ msgid ""
+#~ "no S4 method for function %s and signature %s; consider getS3method() if "
+#~ "you wanted the S3 method"
+#~ msgstr ""
+#~ "pas de méthode S4 pour la fonction %s et la signature %s ; Considérez "
+#~ "getS3method() si vous recherchez une méthode S3"
+
+#~ msgid ""
+#~ "no method defined in methods list object for function %s and signature %s"
+#~ msgstr ""
+#~ "pas de méthode définie dans l'objet de liste des méthodes pour la "
+#~ "fonction %s et la signature %s"
 
 #~ msgid ""
 #~ "'callGeneric' with a primitive needs explicit arguments (no formal args "

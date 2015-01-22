@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 19:56+0100\n"
+"POT-Creation-Date: 2015-01-22 19:58+0100\n"
 "PO-Revision-Date: 2012-02-26 14:10+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -146,6 +146,16 @@ msgstr " ラスターを割り当てることができませんでした "
 #, c-format
 msgid "afm file '%s' could not be opened"
 msgstr " afm ファイル '%s' を開くことができませんでした "
+
+#: devPS.c:589
+#, fuzzy
+msgid "'FontBBox' could not be parsed"
+msgstr " FontBBox を構文解析できませんでした "
+
+#: devPS.c:597
+#, fuzzy
+msgid "'CharInfo' could not be parsed"
+msgstr " CharInfo を構文解析できませんでした "
 
 #: devPS.c:627
 msgid "unknown AFM entity encountered"
@@ -829,12 +839,6 @@ msgstr " 不正な 'file' 引数 "
 
 #~ msgid "Unable to load winCairo.dll: was it built?"
 #~ msgstr " winCairo.dllをロードできませんでした。ビルドされていますか? "
-
-#~ msgid "FontBBox could not be parsed"
-#~ msgstr " FontBBox を構文解析できませんでした "
-
-#~ msgid "CharInfo could not be parsed"
-#~ msgstr " CharInfo を構文解析できませんでした "
 
 #~ msgid "unable to start NULL device"
 #~ msgstr " Null デバイスは開始できません "

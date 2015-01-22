@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 19:56+0100\n"
+"POT-Creation-Date: 2015-01-22 19:58+0100\n"
 "PO-Revision-Date: 2015-01-17 15:03+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-Core <R-core@r-project.org>\n"
@@ -145,6 +145,16 @@ msgstr "konnte Raster nicht allozieren"
 #, c-format
 msgid "afm file '%s' could not be opened"
 msgstr "afm Datei '%s' konnte nicht geöffnet werden"
+
+#: devPS.c:589
+#, fuzzy
+msgid "'FontBBox' could not be parsed"
+msgstr "Die FontBBox konnte nicht geparsed werden"
+
+#: devPS.c:597
+#, fuzzy
+msgid "'CharInfo' could not be parsed"
+msgstr "CharInfo konnte nicht geparsed werden"
 
 #: devPS.c:627
 msgid "unknown AFM entity encountered"
@@ -824,12 +834,6 @@ msgstr "unzulässiges 'file' Argument"
 
 #~ msgid "Unable to load winCairo.dll: was it built?"
 #~ msgstr "Kann winCairo.dll nicht laden: wurde sie erstellt?"
-
-#~ msgid "FontBBox could not be parsed"
-#~ msgstr "Die FontBBox konnte nicht geparsed werden"
-
-#~ msgid "CharInfo could not be parsed"
-#~ msgstr "CharInfo konnte nicht geparsed werden"
 
 #~ msgid "unable to start NULL device"
 #~ msgstr "kann das NULL Device nicht starten"

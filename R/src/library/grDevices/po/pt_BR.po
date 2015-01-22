@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 19:56+0100\n"
+"POT-Creation-Date: 2015-01-22 19:58+0100\n"
 "PO-Revision-Date: 2015-01-17 15:07+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -142,6 +142,16 @@ msgstr "falha ao alocar lista de fonte"
 #, c-format
 msgid "afm file '%s' could not be opened"
 msgstr "arquivo afm '%s' não pode ser aberto"
+
+#: devPS.c:589
+#, fuzzy
+msgid "'FontBBox' could not be parsed"
+msgstr "FontBBox não pode ser analisada"
+
+#: devPS.c:597
+#, fuzzy
+msgid "'CharInfo' could not be parsed"
+msgstr "CharInfo não pode ser analisado"
 
 #: devPS.c:627
 msgid "unknown AFM entity encountered"
@@ -777,12 +787,6 @@ msgstr ""
 #, c-format
 msgid "invalid '%s' argument"
 msgstr ""
-
-#~ msgid "FontBBox could not be parsed"
-#~ msgstr "FontBBox não pode ser analisada"
-
-#~ msgid "CharInfo could not be parsed"
-#~ msgstr "CharInfo não pode ser analisado"
 
 #~ msgid "unable to start NULL device"
 #~ msgstr "não é possível iniciar dispositivo NULL"

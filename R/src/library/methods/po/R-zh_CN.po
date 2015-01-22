@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-16 19:56\n"
+"POT-Creation-Date: 2015-01-22 19:58\n"
 "PO-Revision-Date: 2015-01-17 15:43+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1118,12 +1118,6 @@ msgstr "不是程輯包名: %s"
 msgid "Warning: Tracing only in the namespace; to untrace you will need:"
 msgstr ""
 
-#. R/Methods.R: message("Warning: using defunct methods list search", domain = "R-methods")
-#: R/Methods.R:0
-#, fuzzy
-msgid "Warning: using defunct methods list search"
-msgstr "警告：你用的串列搜索方法已经不现存了"
-
 #. R/as.R: gettextf("a 'replace' method definition in 'setAs' function must be a function of two arguments, got %d",     length(args))
 #: R/as.R:0
 #, fuzzy
@@ -1203,13 +1197,6 @@ msgstr "特殊函数%s不可以有方法"
 #, fuzzy
 msgid "ambiguous object (length != 1) to coerce to \"name\""
 msgstr "对象不明确(长度!=1) 因此无法强制转换成\"name\""
-
-#. R/Methods.R: sprintf("apparent inconsistency in the methods for function %s; argument %s in the signature corresponds to %s in the methods list object",     sQuote(.genericName(f)), sQuote(argNames[[i]]), sQuote(as.character(mlist@argument)))
-#: R/Methods.R:0
-msgid ""
-"apparent inconsistency in the methods for function %s; argument %s in the "
-"signature corresponds to %s in the methods list object"
-msgstr "函数%s的方法相互有矛盾；标记里的%s参数与方法串列对象里的%s相对应"
 
 #. R/Methods.R: sprintf("apparent internal error: a generic function was found for \"%s\", but no corresponding object was found searching from \"%s\"",     f, getPackageName(where))
 #: R/Methods.R:0
@@ -1718,6 +1705,12 @@ msgid ""
 "default method must be a method definition, a primitive or NULL: got an "
 "object of class %s"
 msgstr "缺省方法必需是方法定义，原始方法或NULL，得到的却是类别为%s的对象"
+
+#. R/Methods.R: stop("defunct methods list search", domain = "R-Methods")
+#: R/Methods.R:0
+#, fuzzy
+msgid "defunct methods list search"
+msgstr "警告：你用的串列搜索方法已经不现存了"
 
 #. R/refClass.R: stop("direct calls to 'callSuper()' are invalid: should only be called from another method")
 #: R/refClass.R:0
@@ -2472,13 +2465,6 @@ msgid ""
 "no 'replace' method was defined for 'as(x, \"%s\") <- value' for class %s"
 msgstr "不存在%2$s这一类别用于as(x, \"%1$s\") <- value函数的'replace'方法"
 
-#. R/Methods.R: sprintf("no S4 method for function %s and signature %s; consider getS3method() if you wanted the S3 method",     sQuote(.genericName(f)), Classes)
-#: R/Methods.R:0
-msgid ""
-"no S4 method for function %s and signature %s; consider getS3method() if you "
-"wanted the S3 method"
-msgstr "函数%s和标记%s没有设定S4方法；如果你要用S3方法的话，请用getS3method()"
-
 #. R/Methods.R: gettext("no applicable functions", domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
@@ -2602,12 +2588,6 @@ msgid ""
 "assigned for the global environment"
 msgstr ""
 "程序包%2$s不允许泛型版本的%1$s；一个新的泛型函数将会同程序包%3$s一起被分配"
-
-#. R/Methods.R: gettextf("no method defined in methods list object for function %s and signature %s",     sQuote(.genericName(f)), Classes)
-#: R/Methods.R:0
-msgid ""
-"no method defined in methods list object for function %s and signature %s"
-msgstr "函数%s和标记%s方法串列对象里没有设定方法"
 
 #. R/Methods.R: gettextf("no method for %s matches class %s", sQuote("..."), dQuote(signature))
 #: R/Methods.R:0
@@ -3569,6 +3549,21 @@ msgid_plural ""
 msgstr[0] ""
 "用于'%s'泛型函数(%s)的正式参数与将作为默認值(%s)来用的非泛型的正式参数不相符"
 "合"
+
+#~ msgid ""
+#~ "apparent inconsistency in the methods for function %s; argument %s in the "
+#~ "signature corresponds to %s in the methods list object"
+#~ msgstr "函数%s的方法相互有矛盾；标记里的%s参数与方法串列对象里的%s相对应"
+
+#~ msgid ""
+#~ "no S4 method for function %s and signature %s; consider getS3method() if "
+#~ "you wanted the S3 method"
+#~ msgstr ""
+#~ "函数%s和标记%s没有设定S4方法；如果你要用S3方法的话，请用getS3method()"
+
+#~ msgid ""
+#~ "no method defined in methods list object for function %s and signature %s"
+#~ msgstr "函数%s和标记%s方法串列对象里没有设定方法"
 
 #~ msgid ""
 #~ "'callGeneric' with a primitive needs explicit arguments (no formal args "
