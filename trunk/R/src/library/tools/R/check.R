@@ -1251,8 +1251,14 @@ setRlibs <-
                       sprintf("tools::checkS3methods(dir = \"%s\")\n", pkgdir))
         out <- R_runR2(Rcmd)
         if (length(out)) {
-            warningLog(Log)
+            only_about_methods_not_registered <-
+               grepl("^Found the following apparent S3 methods", out[1L])
+            if(only_about_methods_not_registered)
+                noteLog(Log)
+            else
+                warningLog(Log)
             printLog0(Log, paste(c(out, ""), collapse = "\n"))
+            if(!only_about_methods_not_registered)
             wrapLog(gettext("See section 'Generic functions and methods' in the 'Writing R Extensions' manual.\n", domain = "R-tools"))
         } else resultLog(Log, gettext("OK", domain = "R-tools"))
 
@@ -2344,6 +2350,7 @@ setRlibs <-
             ## any arch will do here
             status <- R_runR(cmd, R_opts2, "LC_ALL=C",
                              stdout = Rout, stderr = Rout)
+            exfile <- paste0(pkgname, "-Ex.R")
             if (status) {
                 errorLog(Log, gettextf("Running massageExamples to create %s failed", sQuote(exfile), domain = "R-tools"))
                 printLog(Log, paste(readLines(Rout, warn = FALSE),
@@ -2351,7 +2358,6 @@ setRlibs <-
 		maybe_exit(1L)
             }
             ## It ran, but did it create any examples?
-            exfile <- paste0(pkgname, "-Ex.R")
             if (file.exists(exfile)) {
                 enc <- if (!is.na(e <- desc["Encoding"])) {
                     paste("--encoding", e, sep="=")
@@ -4046,6 +4052,7 @@ setRlibs <-
         prev <- Sys.getenv("_R_CHECK_SCREEN_DEVICE_", NA)
         if(is.na(prev)) Sys.setenv("_R_CHECK_SCREEN_DEVICE_" = "stop")
         Sys.setenv("_R_CHECK_CODE_USAGE_VIA_NAMESPACES_" = "TRUE")
+        Sys.setenv("_R_CHECK_S3_METHODS_NOT_REGISTERED_" = "TRUE")
         R_check_vc_dirs <- TRUE
         R_check_executables_exclusions <- FALSE
         R_check_doc_sizes2 <- TRUE

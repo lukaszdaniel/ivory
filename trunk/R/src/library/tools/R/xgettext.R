@@ -304,7 +304,7 @@ checkPoFile <- function(f, strictPlural = FALSE)
 		    }
 		}
 
-		if (s2 != "" &&
+		if (nzchar(s2) &&
 		     !(identical(f1, f2) || identical(f1_plural, f2))) {
 		    location <- paste0(f, ":", j)
 		    if (inherits(f2, "error"))
@@ -320,7 +320,7 @@ checkPoFile <- function(f, strictPlural = FALSE)
 			    diff <- ""
 			diffs <- which(f1 != f2)
 			if (length(diffs)) {
-			    if (diff != "") {
+			    if (nzchar(diff)) {
 				diff <- paste(diff, ", ", sprintf(ngettext(length(diffs),
 								"difference in entry %s",
 								"differences in entries %s", domain = "R-tools"),
