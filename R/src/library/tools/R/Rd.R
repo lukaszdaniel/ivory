@@ -677,7 +677,7 @@ function(x)
     result <- character()
     if(length(title)) {
         result <- .Rd_get_text(title)
-        result <- result[result != ""]
+        result <- result[nzchar(result)]
     }
     paste(result, collapse=" ")
 }
