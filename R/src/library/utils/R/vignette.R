@@ -56,8 +56,11 @@ vignette <-
         title <- if(nrow(vinfo)) {
             paste(vinfo[, "Title"],
                   paste0(rep.int("(source", nrow(vinfo)),
-                        ifelse(vinfo[, "PDF"] != "",
-                               paste0(", ", tools::file_ext(vinfo[, "PDF"])), ""), ")"))
+                        ifelse(nzchar(vinfo[, "PDF"]),
+                               paste0(", ",
+                                      tools::file_ext(vinfo[, "PDF"])),
+                               ""),
+                         ")"))
         }
         else
             character()

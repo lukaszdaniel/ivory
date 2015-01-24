@@ -6860,7 +6860,7 @@ function(x, ...)
               c(gettext("Checking URLs failed with message:", domain = "R-tools"),
                 conditionMessage(y))
           else
-              c(gettext("Found the following (possibly) invalid URLs:", domain = "R-tools"),
+              c(ngettext(length(y), "Found the following (possibly) invalid URL:", "Found the following (possibly) invalid URLs:", domain = "R-tools"),
                 paste(" ", gsub("\n", "\n    ", format(y))))
       },
       if(length(y <- x$no_url_checks) && y) {
