@@ -37,40 +37,6 @@ function()
     db
 }
 
-## Ideally this would be in sysdata.rda.
-## For now, re-create using
-##   dput(get_IANA_URI_scheme_db()$URI_Scheme)
-## if necessary ...
-IANA_URI_schemes <-
-c("aaa", "aaas", "about", "acap", "acct", "cap", "cid", "coap",
-"coaps", "crid", "data", "dav", "dict", "dns", "file", "ftp",
-"geo", "go", "gopher", "h323", "http", "https", "iax", "icap",
-"im", "imap", "info", "ipp", "ipps", "iris", "iris.beep", "iris.xpc",
-"iris.xpcs", "iris.lwz", "jabber", "ldap", "mailto", "mid", "msrp",
-"msrps", "mtqp", "mupdate", "news", "nfs", "ni", "nih", "nntp",
-"opaquelocktoken", "pop", "pres", "reload", "rtsp", "rtsps",
-"rtspu", "service", "session", "shttp", "sieve", "sip", "sips",
-"sms", "snmp", "soap.beep", "soap.beeps", "stun", "stuns", "tag",
-"tel", "telnet", "tftp", "thismessage", "tn3270", "tip", "turn",
-"turns", "tv", "urn", "vemmi", "ws", "wss", "xcon", "xcon-userid",
-"xmlrpc.beep", "xmlrpc.beeps", "xmpp", "z39.50r", "z39.50s",
-"acr", "adiumxtra", "afp", "afs", "aim", "apt", "attachment",
-"aw", "barion", "beshare", "bitcoin", "bolo", "callto", "chrome",
-"chrome-extension", "com-eventbrite-attendee", "content", "cvs",
-"dlna-playsingle", "dlna-playcontainer", "dtn", "dvb", "ed2k",
-"facetime", "feed", "feedready", "finger", "fish", "gg", "git",
-"gizmoproject", "gtalk", "ham", "hcp", "icon", "ipn", "irc",
-"irc6", "ircs", "itms", "jar", "jms", "keyparc", "lastfm", "ldaps",
-"magnet", "maps", "market", "message", "mms", "ms-help", "ms-settings-power",
-"msnim", "mumble", "mvn", "notes", "oid", "palm", "paparazzi",
-"pkcs11", "platform", "proxy", "psyc", "query", "res", "resource",
-"rmi", "rsync", "rtmfp", "rtmp", "secondlife", "sftp", "sgn",
-"skype", "smb", "smtp", "soldat", "spotify", "ssh", "steam",
-"submit", "svn", "teamspeak", "teliaeid", "things", "udp", "unreal",
-"ut2004", "ventrilo", "view-source", "webcal", "wtai", "wyciwyg",
-"xfire", "xri", "ymsgr", "fax", "mailserver", "modem", "pack",
-"prospero", "snews", "videotex", "wais", "z39.50")
-
 parse_URL_reference <-
 function(x)
 {
@@ -198,73 +164,6 @@ function()
     db[db$Description != "Unassigned", ]
 }
 
-## Ideally this would be in sysdata.rda.
-## For now, use something based on
-##   IANA_HTTP_status_code_db <- get_IANA_HTTP_status_code_db()
-##   writeLines(sprintf("      \"%s\" = \"%s\",",
-##                      IANA_HTTP_status_code_db$Value,
-##                      IANA_HTTP_status_code_db$Description))
-## See <http://en.wikipedia.org/wiki/List_of_HTTP_status_codes>.
-table_of_HTTP_status_codes <-
-    c("100" = "Continue",
-      "101" = "Switching Protocols",
-      "102" = "Processing",
-      "200" = "OK",
-      "201" = "Created",
-      "202" = "Accepted",
-      "203" = "Non-Authoritative Information",
-      "204" = "No Content",
-      "205" = "Reset Content",
-      "206" = "Partial Content",
-      "207" = "Multi-Status",
-      "208" = "Already Reported",
-      "226" = "IM Used",
-      "300" = "Multiple Choices",
-      "301" = "Moved Permanently",
-      "302" = "Found",
-      "303" = "See Other",
-      "304" = "Not Modified",
-      "305" = "Use Proxy",
-      "306" = "(Unused)",
-      "307" = "Temporary Redirect",
-      "308" = "Permanent Redirect",
-      "400" = "Bad Request",
-      "401" = "Unauthorized",
-      "402" = "Payment Required",
-      "403" = "Forbidden",
-      "404" = "Not Found",
-      "405" = "Method Not Allowed",
-      "406" = "Not Acceptable",
-      "407" = "Proxy Authentication Required",
-      "408" = "Request Timeout",
-      "409" = "Conflict",
-      "410" = "Gone",
-      "411" = "Length Required",
-      "412" = "Precondition Failed",
-      "413" = "Payload Too Large",
-      "414" = "URI Too Long",
-      "415" = "Unsupported Media Type",
-      "416" = "Range Not Satisfiable",
-      "417" = "Expectation Failed",
-      "422" = "Unprocessable Entity",
-      "423" = "Locked",
-      "424" = "Failed Dependency",
-      "426" = "Upgrade Required",
-      "428" = "Precondition Required",
-      "429" = "Too Many Requests",
-      "431" = "Request Header Fields Too Large",
-      "500" = "Internal Server Error",
-      "501" = "Not Implemented",
-      "502" = "Bad Gateway",
-      "503" = "Service Unavailable",
-      "504" = "Gateway Timeout",
-      "505" = "HTTP Version Not Supported",
-      "506" = "Variant Also Negotiates",
-      "507" = "Insufficient Storage",
-      "508" = "Loop Detected",
-      "510" = "Not Extended",
-      "511" = "Network Authentication Required")
-
 ## See <http://en.wikipedia.org/wiki/List_of_FTP_server_return_codes>
 ## and <http://tools.ietf.org/html/rfc959>,
 ## Section 4.2.2 "Numeric Order List of Reply Codes",
@@ -318,27 +217,45 @@ function(db, verbose = FALSE)
 
     .fetch <- function(u) {
         if(verbose) message(sprintf("processing %s", u))
-        tryCatch(curlGetHeaders(u), error = identity)
+        h <- tryCatch(curlGetHeaders(u), error = identity)
+        if(inherits(h, "error")) {
+            msg <- conditionMessage(h)
+            if (grepl("libcurl error code (51|60)", msg)) {
+                h2 <- tryCatch(curlGetHeaders(u, verify = FALSE),
+                               error = identity)
+                attr(h, "no-verify") <- h2
+            }
+        }
+        h
     }
 
     .check_ftp <- function(u) {
         h <- .fetch(u)
-        if(inherits(h, "error"))
-            c("-1", sub("[[:space:]]*$", "", conditionMessage(h)))
-        else {
+        if(inherits(h, "error")) {
+            s <- "-1"
+            msg <- sub("[[:space:]]*$", "", conditionMessage(h))
+        } else {
             s <- as.character(attr(h, "status"))
-            c(s, table_of_FTP_server_return_codes[s])
+            msg <- table_of_FTP_server_return_codes[s]
         }
+        c(s, msg)
     }
 
     .check_http <- function(u) {
         h <- .fetch(u)
-        if(inherits(h, "error"))
-            c("-1", sub("[[:space:]]*$", "", conditionMessage(h)))
-        else {
+        if(inherits(h, "error")) {
+            s <- "-1"
+            msg <- sub("[[:space:]]*$", "", conditionMessage(h))
+            if (!is.null(v <- attr(h, "no-verify"))) {
+                s2 <- as.character(attr(v, "status"))
+                msg <- paste0(msg, "\n\t(Status without verification: ",
+                              table_of_HTTP_status_codes[s2], ")")
+            }
+        } else {
             s <- as.character(attr(h, "status"))
-            c(s, table_of_HTTP_status_codes[s])
+            msg <- table_of_HTTP_status_codes[s]
         }
+        c(s, msg)
     }
 
     bad <- .gather()
@@ -362,7 +279,7 @@ function(db, verbose = FALSE)
 
     ## Invalid URI schemes.
     schemes <- parts[, 1L]
-    ind <- is.na(match(schemes, c("", IANA_URI_schemes)))
+    ind <- is.na(match(schemes, c("", IANA_URI_scheme_db$URI_Scheme)))
     if(any(ind)) {
         len <- sum(ind)
         bad <- rbind(bad,
@@ -373,7 +290,6 @@ function(db, verbose = FALSE)
     }
 
     ## ftp.
-
     pos <- which(schemes == "ftp")
     if(length(pos)) {
         results <- do.call(rbind, lapply(urls[pos], .check_ftp))
@@ -395,8 +311,7 @@ function(db, verbose = FALSE)
         results <- do.call(rbind, lapply(urls[pos], .check_http))
         status <- as.numeric(results[, 1L])
         ## 405 is HTTP not allowing HEAD requests
-        ## also skip 500, 503, 504 as likely to be temporary issues
-        ## but would need to confine to HTTP requests.
+        ## maybe also skip 500, 503, 504 as likely to be temporary issues
         ind <- !(status %in% c (200L, 405L))
         if(any(ind)) {
             pos <- pos[ind]

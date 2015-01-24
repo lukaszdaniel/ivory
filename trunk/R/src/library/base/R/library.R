@@ -1,7 +1,7 @@
 #  File src/library/base/R/library.R
 #  Part of the R package, http://www.R-project.org
 #
-#  Copyright (C) 1995-2013 The R Core Team
+#  Copyright (C) 1995-2014 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -346,7 +346,7 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
                                         txt$File)),
                           paste(txt$Title,
                                 paste0(rep.int("(source", NROW(txt)),
-                                       ifelse(txt$PDF != "",
+                                       ifelse(nzchar(txt$PDF),
                                               ", pdf",
                                               ""),
                                        ")")))
@@ -374,7 +374,7 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
                 ## 'package.rds' but we have not checked.
                 file <- system.file("Meta", "package.rds", package = i,
                                     lib.loc = lib)
-                title <- if(file != "") {
+                title <- if(nzchar(file)) {
                     txt <- readRDS(file)
                     if(is.list(txt)) txt <- txt$DESCRIPTION
                     ## we may need to re-encode here.
@@ -784,7 +784,7 @@ function(pkgInfo, quietly = FALSE, lib.loc = NULL, useImports = FALSE)
         pfile <- system.file("Meta", "package.rds",
                              package = pkg, lib.loc = lib.loc)
         if (nzchar(pfile))
-            as.numeric_version(readRDS(pfile)$DESCRIPTION["Version"])  
+            as.numeric_version(readRDS(pfile)$DESCRIPTION["Version"])
         else
             NULL
     }
