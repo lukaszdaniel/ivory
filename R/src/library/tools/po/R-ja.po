@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-22 20:13\n"
+"POT-Creation-Date: 2015-01-23 19:54\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -672,6 +672,11 @@ msgid "Checking URLs failed with message:"
 msgstr ""
 " ビニエット '%s' の処理に失敗しました。診断は以下の通りです: \n"
 " %s "
+
+#. R/QC.R: gettext("Checking URLs requires 'libcurl' support in the R build", domain = "R-tools")
+#: R/QC.R:0
+msgid "Checking URLs requires 'libcurl' support in the R build"
+msgstr ""
 
 #. R/news.R: gettextf("\nChunk %s:\n%s", format(seq_along(bad)), bad)
 #: R/news.R:0
@@ -1506,6 +1511,13 @@ msgid "Found the following additional warnings:"
 msgstr ""
 " 以下の Rd 例示ファイル中に大局的かもしれない 'T' もしくは 'F' がありました: "
 
+#. R/QC.R: gettext("Found the following apparent S3 methods exported but not registered:", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Found the following apparent S3 methods exported but not registered:"
+msgstr ""
+" 以下の Rd 例示ファイル中に大局的かもしれない 'T' もしくは 'F' がありました: "
+
 #. R/check.R: gettext("Found the following apparent object files/libraries:", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
@@ -2131,6 +2143,11 @@ msgid "No news found in given file using package default format."
 msgstr ""
 "  ペッケージの既定の書式を使ったニュースは与えられたファイル中にはありませ"
 "ん． "
+
+#. R/QC.R: gettext("No package encoding and non-ASCII characters in the following R files:",     domain = "R-tools")
+#: R/QC.R:0
+msgid "No package encoding and non-ASCII characters in the following R files:"
+msgstr ""
 
 #. R/dynamicHelp.R: gettextf("No package index found for package %s", mono(pkg))
 #: R/dynamicHelp.R:0

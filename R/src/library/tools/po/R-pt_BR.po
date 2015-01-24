@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-22 20:13\n"
+"POT-Creation-Date: 2015-01-23 19:54\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Colin Robert <beasley@ufpa.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -625,6 +625,11 @@ msgstr ""
 #. R/QC.R: gettext("Checking URLs failed with message:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Checking URLs failed with message:"
+msgstr ""
+
+#. R/QC.R: gettext("Checking URLs requires 'libcurl' support in the R build", domain = "R-tools")
+#: R/QC.R:0
+msgid "Checking URLs requires 'libcurl' support in the R build"
 msgstr ""
 
 #. R/news.R: gettextf("\nChunk %s:\n%s", format(seq_along(bad)), bad)
@@ -1397,6 +1402,11 @@ msgstr ""
 msgid "Found the following additional warnings:"
 msgstr ""
 
+#. R/QC.R: gettext("Found the following apparent S3 methods exported but not registered:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Found the following apparent S3 methods exported but not registered:"
+msgstr ""
+
 #. R/check.R: gettext("Found the following apparent object files/libraries:", domain = "R-tools")
 #: R/check.R:0
 msgid "Found the following apparent object files/libraries:"
@@ -1973,6 +1983,11 @@ msgstr ""
 #. R/news.R: stop("No news found in given file using package default format.")
 #: R/news.R:0
 msgid "No news found in given file using package default format."
+msgstr ""
+
+#. R/QC.R: gettext("No package encoding and non-ASCII characters in the following R files:",     domain = "R-tools")
+#: R/QC.R:0
+msgid "No package encoding and non-ASCII characters in the following R files:"
 msgstr ""
 
 #. R/dynamicHelp.R: gettextf("No package index found for package %s", mono(pkg))

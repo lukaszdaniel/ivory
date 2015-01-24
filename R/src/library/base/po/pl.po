@@ -1835,14 +1835,12 @@ msgid "can not set parent of the empty environment"
 msgstr "nie można ustawić rodzica pustego środowiska"
 
 #: src/main/builtin.c:394
-#, fuzzy
 msgid "can not set the parent environment of a namespace"
-msgstr "nie można ustawić rodzica pustego środowiska"
+msgstr "nie można ustawić nadrzędnego środowiska przestrzeni nazw"
 
 #: src/main/builtin.c:396
-#, fuzzy
 msgid "can not set the parent environment of package imports"
-msgstr "nie można ustawić rodzica pustego środowiska"
+msgstr "nie można ustawić nadrzędnego środowiska importowanych pakietów"
 
 #: src/main/builtin.c:404 src/main/envir.c:3170 src/main/envir.c:3198
 #: src/main/envir.c:3227 src/main/envir.c:3248 src/main/envir.c:3270
@@ -2895,9 +2893,8 @@ msgstr ""
 
 #: src/main/connections.c:5162 src/modules/internet/internet.c:161
 #: src/modules/internet/internet.c:282
-#, fuzzy
 msgid "URL scheme unsupported by this method"
-msgstr "ICU nie jest wspierany w tej kompilacji"
+msgstr "schemat adresu URL nie jest wspierany przez tę metodę"
 
 #: src/main/connections.c:5253
 msgid "file stream does not have gzip magic number"
@@ -7657,37 +7654,36 @@ msgstr ""
 "OSTRZEŻENIE: argument 'vsize' jest wyjątkowo niski, założono Megabajty\n"
 
 #: src/main/startup.c:220
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "WARNING: too small v(ector heap)size '%lu' ignored, using default = %gM\n"
 msgstr ""
-"OSTRZEŻENIE: niepoprawny argument 'vsize' (rozmiar stosu wektora) '%lu' "
-"został zignorowany\n"
-"używanie domyślnego = %gM\n"
+"OSTRZEŻENIE: zbyt mała wartość argumentu 'vsize' (rozmiar stosu wektora) "
+"'%lu' została zignorowana, używanie domyślnej = %gM\n"
 
 #: src/main/startup.c:224
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "WARNING: too large v(ector heap)size '%lu' ignored, using default = %gM\n"
 msgstr ""
-"OSTRZEŻENIE: niepoprawny argument 'nsize' (rozmiar stosu języka) '%lu' "
-"został zignorowany, używanie domyślnego = %ld\n"
+"OSTRZEŻENIE: zbyt duża wartość argumentu 'vsize' (rozmiar stosu wektora) "
+"'%lu' została zignorowana, używanie domyślnej = %gM\n"
 
 #: src/main/startup.c:233
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "WARNING: too small language heap (n)size '%lu' ignored, using default = %ld\n"
 msgstr ""
-"OSTRZEŻENIE: niepoprawny argument 'nsize' (rozmiar stosu języka) '%lu' "
-"został zignorowany, używanie domyślnego = %ld\n"
+"OSTRZEŻENIE: zbyt mała wartość argumentu 'nsize' (rozmiar stosu języka) "
+"'%lu' została zignorowana, używanie domyślnej = %ld\n"
 
 #: src/main/startup.c:237
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "WARNING: too large language heap (n)size '%lu' ignored, using default = %ld\n"
 msgstr ""
-"OSTRZEŻENIE: niepoprawny argument 'nsize' (rozmiar stosu języka) '%lu' "
-"został zignorowany, używanie domyślnego = %ld\n"
+"OSTRZEŻENIE: zbyt duża wartość argumentu 'nsize' (rozmiar stosu języka) "
+"'%lu' została zignorowana, używanie domyślnej = %ld\n"
 
 #: src/main/subassign.c:118
 msgid "attempt to enlarge non-vector"
@@ -8575,9 +8571,8 @@ msgstr ""
 "platformie"
 
 #: src/modules/internet/libcurl.c:310
-#, fuzzy
 msgid "lengths of 'url' and 'destfile' arguments must match"
-msgstr "długości nazw importu oraz eksportu muszą się zgadzać"
+msgstr "długości argumentów 'url' oraz 'destfile' muszą się zgadzać"
 
 #: src/modules/internet/libcurl.c:406 src/modules/internet/libcurl.c:540
 #, c-format

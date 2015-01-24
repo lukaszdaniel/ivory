@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-22 20:13\n"
+"POT-Creation-Date: 2015-01-23 19:54\n"
 "PO-Revision-Date: 2015-01-17 15:54+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -676,6 +676,11 @@ msgid "Checking URLs failed with message:"
 msgstr ""
 "выполнение Sweave в очерке '%s' не удалось с диагностикой:\n"
 "%s"
+
+#. R/QC.R: gettext("Checking URLs requires 'libcurl' support in the R build", domain = "R-tools")
+#: R/QC.R:0
+msgid "Checking URLs requires 'libcurl' support in the R build"
+msgstr ""
 
 #. R/news.R: gettextf("\nChunk %s:\n%s", format(seq_along(bad)), bad)
 #: R/news.R:0
@@ -1502,6 +1507,12 @@ msgstr ""
 msgid "Found the following additional warnings:"
 msgstr "Найдены возможные глобальные T или F в следующем Rd-файле примеров:"
 
+#. R/QC.R: gettext("Found the following apparent S3 methods exported but not registered:", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Found the following apparent S3 methods exported but not registered:"
+msgstr "Найдены возможные глобальные T или F в следующем Rd-файле примеров:"
+
 #. R/check.R: gettext("Found the following apparent object files/libraries:", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
@@ -2111,6 +2122,11 @@ msgstr "В используемом формате, похожем на стар
 msgid "No news found in given file using package default format."
 msgstr ""
 "В полученном файле нет новостей, если использовать формат по умолчанию."
+
+#. R/QC.R: gettext("No package encoding and non-ASCII characters in the following R files:",     domain = "R-tools")
+#: R/QC.R:0
+msgid "No package encoding and non-ASCII characters in the following R files:"
+msgstr ""
 
 #. R/dynamicHelp.R: gettextf("No package index found for package %s", mono(pkg))
 #: R/dynamicHelp.R:0

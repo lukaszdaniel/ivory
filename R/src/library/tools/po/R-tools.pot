@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.2.0\n"
-"POT-Creation-Date: 2015-01-22 20:13\n"
+"POT-Creation-Date: 2015-01-23 19:54\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -794,6 +794,13 @@ msgstr ""
 #. R/QC.R: gettext("Checking URLs failed with message:", domain = "R-tools")
 
 msgid "Checking URLs failed with message:"
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettext("Checking URLs requires 'libcurl' support in the R build", domain = "R-tools")
+
+msgid "Checking URLs requires 'libcurl' support in the R build"
 msgstr ""
 
 
@@ -1787,6 +1794,13 @@ msgid "Found the following additional warnings:"
 msgstr ""
 
 
+#: R/QC.R: 0
+#. R/QC.R: gettext("Found the following apparent S3 methods exported but not registered:", domain = "R-tools")
+
+msgid "Found the following apparent S3 methods exported but not registered:"
+msgstr ""
+
+
 #: R/check.R: 0
 #. R/check.R: gettext("Found the following apparent object files/libraries:", domain = "R-tools")
 
@@ -2516,6 +2530,13 @@ msgstr ""
 #. R/news.R: stop("No news found in given file using package default format.")
 
 msgid "No news found in given file using package default format."
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettext("No package encoding and non-ASCII characters in the following R files:",     domain = "R-tools")
+
+msgid "No package encoding and non-ASCII characters in the following R files:"
 msgstr ""
 
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-22 20:13\n"
+"POT-Creation-Date: 2015-01-23 19:54\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -663,6 +663,13 @@ msgstr "Sprawdzanie %s"
 msgid "Checking URLs failed with message:"
 msgstr ""
 "Sprawdzanie adresów URL zakończyło się niepowodzeniem zwracając komunikat:"
+
+#. R/QC.R: gettext("Checking URLs requires 'libcurl' support in the R build", domain = "R-tools")
+#: R/QC.R:0
+msgid "Checking URLs requires 'libcurl' support in the R build"
+msgstr ""
+"Sprawdzanie adresów URL wymaga wsparcia przez bibliotekę 'libcurl' w "
+"dystrybucji R"
 
 #. R/news.R: gettextf("\nChunk %s:\n%s", format(seq_along(bad)), bad)
 #: R/news.R:0
@@ -1470,6 +1477,13 @@ msgstr ""
 msgid "Found the following additional warnings:"
 msgstr "Znaleziono następujące dodatkowe ostrzeżenia:"
 
+#. R/QC.R: gettext("Found the following apparent S3 methods exported but not registered:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Found the following apparent S3 methods exported but not registered:"
+msgstr ""
+"Znaleziono następujące widoczne eksportowane metody S3, które nie są "
+"zarejestrowane:"
+
 #. R/check.R: gettext("Found the following apparent object files/libraries:", domain = "R-tools")
 #: R/check.R:0
 msgid "Found the following apparent object files/libraries:"
@@ -2093,6 +2107,12 @@ msgid "No news found in given file using package default format."
 msgstr ""
 "Nie znaleziono wiadomości w podanym pliku używając domyślnego formatu "
 "pakietu."
+
+#. R/QC.R: gettext("No package encoding and non-ASCII characters in the following R files:",     domain = "R-tools")
+#: R/QC.R:0
+msgid "No package encoding and non-ASCII characters in the following R files:"
+msgstr ""
+"Brak strony kodowej pakietu oraz znaki nie-ASCII w następujących plikach R:"
 
 #. R/dynamicHelp.R: gettextf("No package index found for package %s", mono(pkg))
 #: R/dynamicHelp.R:0
