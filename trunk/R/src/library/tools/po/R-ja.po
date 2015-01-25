@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-23 19:54\n"
+"POT-Creation-Date: 2015-01-25 06:40\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -1484,13 +1484,6 @@ msgid ""
 "Found subdirectory 'r'.\n"
 "Most likely, this should be 'R'."
 msgstr ""
-
-#. R/QC.R: gettext("Found the following (possibly) invalid URLs:", domain = "R-tools")
-#: R/QC.R:0
-#, fuzzy
-msgid "Found the following (possibly) invalid URLs:"
-msgstr ""
-" 以下の Rd 例示ファイル中に大局的かもしれない 'T' もしくは 'F' がありました: "
 
 #. R/check.R: gettext("Found the following Makefile(s) without a final LF:", domain = "R-tools")
 #: R/check.R:0
@@ -2979,6 +2972,15 @@ msgstr ""
 #: R/check.R:0
 #, fuzzy
 msgid "See section 'Package namespaces' in the 'Writing R Extensions' manual."
+msgstr ""
+" マニュアル 'Writing R Extensions' の節 'Cross-references' 中の情報を参照して"
+"ください． "
+
+#. R/check.R: gettext("See section 'Registering S3 methods' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid ""
+"See section 'Registering S3 methods' in the 'Writing R Extensions' manual."
 msgstr ""
 " マニュアル 'Writing R Extensions' の節 'Cross-references' 中の情報を参照して"
 "ください． "
@@ -6262,6 +6264,14 @@ msgstr[0] ""
 msgid "Found the deprecated function:"
 msgid_plural "Found the deprecated functions:"
 msgstr[0] ""
+
+#. R/QC.R: ngettext(length(y), "Found the following (possibly) invalid URL:", "Found the following (possibly) invalid URLs:",     domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Found the following (possibly) invalid URL:"
+msgid_plural "Found the following (possibly) invalid URLs:"
+msgstr[0] ""
+" 以下の Rd 例示ファイル中に大局的かもしれない 'T' もしくは 'F' がありました: "
 
 #. R/check.R: ngettext(length(files), "Found the following CITATION file in a non-standard place:\n%s\nMost likely 'inst/CITATION' should be used instead.\n",     "Found the following CITATION files in a non-standard place:\n%s\nMost likely 'inst/CITATION' should be used instead.\n",     domain = "R-tools")
 #: R/check.R:0

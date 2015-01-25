@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-23 19:54\n"
+"POT-Creation-Date: 2015-01-25 06:40\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -1459,12 +1459,6 @@ msgid ""
 "Most likely, this should be 'R'."
 msgstr ""
 
-#. R/QC.R: gettext("Found the following (possibly) invalid URLs:", domain = "R-tools")
-#: R/QC.R:0
-#, fuzzy
-msgid "Found the following (possibly) invalid URLs:"
-msgstr "다음의 함수로부터 .Internal 호출을 찾았습니다:"
-
 #. R/check.R: gettext("Found the following Makefile(s) without a final LF:", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
@@ -2897,6 +2891,15 @@ msgstr ""
 #: R/check.R:0
 #, fuzzy
 msgid "See section 'Package namespaces' in the 'Writing R Extensions' manual."
+msgstr ""
+"'Writing R Extensions' 매뉴얼에서 'Cross-references' 섹션의 내용을 살펴보세"
+"요."
+
+#. R/check.R: gettext("See section 'Registering S3 methods' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid ""
+"See section 'Registering S3 methods' in the 'Writing R Extensions' manual."
 msgstr ""
 "'Writing R Extensions' 매뉴얼에서 'Cross-references' 섹션의 내용을 살펴보세"
 "요."
@@ -6105,6 +6108,13 @@ msgstr[0] "다음은 더 이상 지원되지 않거나 제거된 함수들입니
 msgid "Found the deprecated function:"
 msgid_plural "Found the deprecated functions:"
 msgstr[0] "다음은 더 이상 지원되지 않는 함수들입니다:"
+
+#. R/QC.R: ngettext(length(y), "Found the following (possibly) invalid URL:", "Found the following (possibly) invalid URLs:",     domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Found the following (possibly) invalid URL:"
+msgid_plural "Found the following (possibly) invalid URLs:"
+msgstr[0] "다음의 함수로부터 .Internal 호출을 찾았습니다:"
 
 #. R/check.R: ngettext(length(files), "Found the following CITATION file in a non-standard place:\n%s\nMost likely 'inst/CITATION' should be used instead.\n",     "Found the following CITATION files in a non-standard place:\n%s\nMost likely 'inst/CITATION' should be used instead.\n",     domain = "R-tools")
 #: R/check.R:0

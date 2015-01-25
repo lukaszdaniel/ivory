@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.2.0\n"
-"POT-Creation-Date: 2015-01-23 19:54\n"
+"POT-Creation-Date: 2015-01-25 06:40\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1763,13 +1763,6 @@ msgstr ""
 #. R/check.R: gettext("Found subdirectory 'r'.\nMost likely, this should be 'R'.\n", domain = "R-tools")
 
 msgid "Found subdirectory 'r'.\nMost likely, this should be 'R'."
-msgstr ""
-
-
-#: R/QC.R: 0
-#. R/QC.R: gettext("Found the following (possibly) invalid URLs:", domain = "R-tools")
-
-msgid "Found the following (possibly) invalid URLs:"
 msgstr ""
 
 
@@ -3549,6 +3542,13 @@ msgstr ""
 #. R/check.R: gettext("See section 'Package namespaces' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
 
 msgid "See section 'Package namespaces' in the 'Writing R Extensions' manual."
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("See section 'Registering S3 methods' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+
+msgid "See section 'Registering S3 methods' in the 'Writing R Extensions' manual."
 msgstr ""
 
 
@@ -7562,6 +7562,15 @@ msgstr[1]    ""
 
 msgid        "Found the deprecated function:"
 msgid_plural "Found the deprecated functions:"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: ngettext(length(y), "Found the following (possibly) invalid URL:", "Found the following (possibly) invalid URLs:",     domain = "R-tools")
+
+msgid        "Found the following (possibly) invalid URL:"
+msgid_plural "Found the following (possibly) invalid URLs:"
 msgstr[0]    ""
 msgstr[1]    ""
 
