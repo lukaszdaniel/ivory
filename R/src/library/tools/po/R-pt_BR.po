@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-23 19:54\n"
+"POT-Creation-Date: 2015-01-25 06:40\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Colin Robert <beasley@ufpa.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -1382,11 +1382,6 @@ msgid ""
 "Most likely, this should be 'R'."
 msgstr ""
 
-#. R/QC.R: gettext("Found the following (possibly) invalid URLs:", domain = "R-tools")
-#: R/QC.R:0
-msgid "Found the following (possibly) invalid URLs:"
-msgstr ""
-
 #. R/check.R: gettext("Found the following Makefile(s) without a final LF:", domain = "R-tools")
 #: R/check.R:0
 msgid "Found the following Makefile(s) without a final LF:"
@@ -2751,6 +2746,12 @@ msgstr ""
 #. R/check.R: gettext("See section 'Package namespaces' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
 #: R/check.R:0
 msgid "See section 'Package namespaces' in the 'Writing R Extensions' manual."
+msgstr ""
+
+#. R/check.R: gettext("See section 'Registering S3 methods' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"See section 'Registering S3 methods' in the 'Writing R Extensions' manual."
 msgstr ""
 
 #. R/QC.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.",     domain = "R-tools")
@@ -5842,6 +5843,13 @@ msgstr[1] ""
 #: R/QC.R:0
 msgid "Found the deprecated function:"
 msgid_plural "Found the deprecated functions:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/QC.R: ngettext(length(y), "Found the following (possibly) invalid URL:", "Found the following (possibly) invalid URLs:",     domain = "R-tools")
+#: R/QC.R:0
+msgid "Found the following (possibly) invalid URL:"
+msgid_plural "Found the following (possibly) invalid URLs:"
 msgstr[0] ""
 msgstr[1] ""
 

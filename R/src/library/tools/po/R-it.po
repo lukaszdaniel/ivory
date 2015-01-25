@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-23 19:54\n"
+"POT-Creation-Date: 2015-01-25 06:40\n"
 "PO-Revision-Date: 2005-04-17 16:57+0200\n"
 "Last-Translator: stefano iacus <>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -1422,12 +1422,6 @@ msgid ""
 "Most likely, this should be 'R'."
 msgstr ""
 
-#. R/QC.R: gettext("Found the following (possibly) invalid URLs:", domain = "R-tools")
-#: R/QC.R:0
-#, fuzzy
-msgid "Found the following (possibly) invalid URLs:"
-msgstr "I file Rd devono avere \\title non vuoto."
-
 #. R/check.R: gettext("Found the following Makefile(s) without a final LF:", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
@@ -2845,6 +2839,15 @@ msgstr ""
 #: R/check.R:0
 #, fuzzy
 msgid "See section 'Package namespaces' in the 'Writing R Extensions' manual."
+msgstr ""
+"Si veda il capitolo 'Writing R documentation' nel manuale 'Writing R "
+"Extensions'."
+
+#. R/check.R: gettext("See section 'Registering S3 methods' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid ""
+"See section 'Registering S3 methods' in the 'Writing R Extensions' manual."
 msgstr ""
 "Si veda il capitolo 'Writing R documentation' nel manuale 'Writing R "
 "Extensions'."
@@ -6078,6 +6081,14 @@ msgid "Found the deprecated function:"
 msgid_plural "Found the deprecated functions:"
 msgstr[0] ""
 msgstr[1] ""
+
+#. R/QC.R: ngettext(length(y), "Found the following (possibly) invalid URL:", "Found the following (possibly) invalid URLs:",     domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Found the following (possibly) invalid URL:"
+msgid_plural "Found the following (possibly) invalid URLs:"
+msgstr[0] "I file Rd devono avere \\title non vuoto."
+msgstr[1] "I file Rd devono avere \\title non vuoto."
 
 #. R/check.R: ngettext(length(files), "Found the following CITATION file in a non-standard place:\n%s\nMost likely 'inst/CITATION' should be used instead.\n",     "Found the following CITATION files in a non-standard place:\n%s\nMost likely 'inst/CITATION' should be used instead.\n",     domain = "R-tools")
 #: R/check.R:0
