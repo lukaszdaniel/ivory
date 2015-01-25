@@ -1452,6 +1452,16 @@ function(con)
     .try_quietly(readLines(con, warn=FALSE))
 }
 
+### ** .read_citation_quietly
+
+.read_citation_quietly <-
+function(cfile, meta)
+{
+    tryCatch(suppressMessages(suppressWarnings(utils::readCitationFile(cfile,
+                                                                       meta))),
+             error = identity)
+}
+
 ### ** .read_collate_field
 
 .read_collate_field <-
