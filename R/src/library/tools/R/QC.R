@@ -2322,14 +2322,16 @@ function(package, dir, lib.loc = NULL)
                     if (typeof(genfun) == "closure") environment(genfun)
                     else .BaseNamespaceEnv
                 }
-            if(!exists(".__S3MethodsTable__.", envir = defenv, inherits = FALSE)) {
+            if(!exists(".__S3MethodsTable__.", envir = defenv,
+                       inherits = FALSE)) {
                 ## Happens e.g. if for some reason, we get "plot" as
                 ## standardGeneric for "plot" defined from package
                 ## "graphics" with its own environment which does not
                 ## contain an S3 methods table ...
                 return(NULL)
             }
-            S3Table <- get(".__S3MethodsTable__.", envir = defenv, inherits = FALSE)
+            S3Table <- get(".__S3MethodsTable__.", envir = defenv,
+                           inherits = FALSE)
             if(!exists(m, envir = S3Table)) {
                 warning(gettextf("declared S3 method %s not found", sQuote(m)), domain = "R-tools", call. = FALSE)
                 return(NULL)
@@ -2358,7 +2360,9 @@ function(package, dir, lib.loc = NULL)
         margMatchOK <- all(mArgs %in% c("...", gArgs)) || "..." %in% ogArgs
         if(posMatchOK && argMatchOK && margMatchOK)
             NULL
-        else if (g %in% c("+", "-", "*", "/", "^", "%%", "%/%", "&", "|", "!", "==", "!=", "<", "<=", ">=", ">") && (length(ogArgs) == length(omArgs)) )
+        else if (g %in% c("+", "-", "*", "/", "^", "%%", "%/%", "&", "|",
+                          "!", "==", "!=", "<", "<=", ">=", ">")
+                 && (length(ogArgs) == length(omArgs)) )
             NULL
         else {
             l <- list(ogArgs, omArgs)
@@ -2370,7 +2374,10 @@ function(package, dir, lib.loc = NULL)
     all_S3_generics <-
         unique(c(Filter(function(f) .is_S3_generic(f, envir = code_env),
                         functions_in_code),
-                 .get_S3_generics_as_seen_from_package(dir, !missing(package), FALSE), S3_group_generics, S3_primitive_generics))
+                 .get_S3_generics_as_seen_from_package(dir,
+                                                       !missing(package),
+                                                       FALSE),
+                 S3_group_generics, S3_primitive_generics))
     ## <FIXME>
     ## Not yet:
     code_env <- .make_S3_group_generic_env(parent = code_env)
@@ -2381,6 +2388,11 @@ function(package, dir, lib.loc = NULL)
     ## package.
     bad_methods <- list()
     methods_stop_list <- .make_S3_methods_stop_list(basename(dir))
+    ## some packages export S4 generics derived from other packages ....
+    methods_stop_list <- c(methods_stop_list, "all.equal",
+        "all.names", "all.vars", "fitted.values", "qr.Q", "qr.R",
+        "qr.X", "qr.coef", "qr.fitted", "qr.qty", "qr.qy", "qr.resid",
+        "qr.solve", "rep.int", "seq.int", "sort.int", "sort.list", "t.test")
     methods_not_registered_but_exported <- character()
     methods_not_registered_not_exported <- character()
     for(g in all_S3_generics) {
@@ -2394,7 +2406,8 @@ function(package, dir, lib.loc = NULL)
         ## of the generic function ... hence substr().
         name <- paste0(g, ".")
         methods <-
-            functions_in_code[substr(functions_in_code, 1L, nchar(name, type="c")) == name]
+            functions_in_code[substr(functions_in_code, 1L,
+                                     nchar(name, type="c")) == name]
         ## </FIXME>
         methods <- setdiff(methods, methods_stop_list)
         if(has_namespace) {
