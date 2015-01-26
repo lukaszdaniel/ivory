@@ -3756,7 +3756,7 @@ function(package, lib.loc = NULL)
 	pname <- paste("package", pack, sep = ":")
 	if (!pname %in% search())
 	    stop("package must be loaded", domain = "R-tools")
-	checkMethodUsageEnv(if (pack %in% loadedNamespaces())
+	checkMethodUsageEnv(if (isLoadedNamespace(pack))
 			    getNamespace(pack) else as.environment(pname), ...)
     }
 
@@ -3767,7 +3767,8 @@ function(package, lib.loc = NULL)
     args <- list(skipWith = TRUE,
                  suppressPartialMatchArgs = FALSE,
                  suppressLocalUnused = TRUE)
-    opts <- unlist(strsplit(Sys.getenv("_R_CHECK_CODETOOLS_PROFILE_"), "[[:space:]]*,[[:space:]]*"))
+    opts <- unlist(strsplit(Sys.getenv("_R_CHECK_CODETOOLS_PROFILE_"),
+                            "[[:space:]]*,[[:space:]]*"))
     if(length(opts)) {
         args[sub("[[:space:]]*=.*", "", opts)] <-
             lapply(sub(".*=[[:space:]]*", "", opts),

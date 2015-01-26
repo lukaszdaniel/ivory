@@ -1,7 +1,7 @@
 #  File src/library/utils/R/indices.R
 #  Part of the R package, http://www.R-project.org
 #
-#  Copyright (C) 1995-2013 The R Core Team
+#  Copyright (C) 1995-2015 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ packageDescription <-
 	if(is.null(lib.loc)) {
 	    if(pkg == "base")
 		file.path(.Library, "base")
-	    else if(pkg %in% loadedNamespaces())
+	    else if(isLoadedNamespace(pkg))
 		getNamespaceInfo(pkg, "path")
 	    else if((envname <- paste0("package:", pkg)) %in% search()) {
 		attr(as.environment(envname), "path")
@@ -168,16 +168,13 @@ index.search <- function(topic, paths, firstOnly = FALSE)
     res
 }
 
-print.packageIQR <-
-function(x, ...)
+print.packageIQR <- function(x, ...)
 {
     db <- x$results
     ## Split according to Package.
-    out <- if(nrow(db) == 0L)
-         NULL
-    else
-        lapply(split(1 : nrow(db), db[, 1L]),
-               function(ind) db[ind, 3L:4L, drop = FALSE])
+    out <- if(nrow(db) > 0L)
+	       lapply(split(seq_len(nrow(db)), db[, 1L]),
+		      function(ind) db[ind, 3L:4L, drop = FALSE])
     outFile <- tempfile("RpackageIQR")
     outConn <- file(outFile, open = "w")
     first <- TRUE
