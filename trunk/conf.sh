@@ -29,7 +29,5 @@ else
 fi;
 
   filedev=$1;
-  #filefroz=`echo $1 | sed -e "s/$X/$Y/"`;
   filefroz=`echo $1 | sed -e "s/[^\/]*\//$Y\//"`;
-  #filemine=`echo $1 | sed -e "s/$X/$Z/"`;
   filemine=`echo $1 | sed -e "s/[^\/]*\//$Z\//"`;

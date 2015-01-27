@@ -12,7 +12,7 @@ source conf-names.sh
 
   cd $W
 
-  svn status --no-ignore | egrep '^[?I]' | cut -c9- | sed -n -e '/.\+/p' | xargs -d \\n rm -r &> /dev/null
+  svn status --no-ignore | egrep '^[?I]' | cut -c9- | xargs -d \\n rm -r &> /dev/null
   if test $W = $DEVEL; then
    tools/rsync-recommended
   fi;
