@@ -137,6 +137,8 @@ install.packages <-
         if (type2 == "source")
             stop("type 'binary' is not supported on this platform")
         else type <- type2
+        if(!missing(contriburl) || !is.null(available))
+           stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
     }
     if (is.logical(clean) && clean)
         clean <- "--clean"
@@ -320,7 +322,7 @@ install.packages <-
         }
     }
 
-    if(is.null(repos) & missing(contriburl)) {
+    if(is.null(repos) && missing(contriburl)) {
         tmpd <- destdir
         nonlocalrepos <- any(web <- grepl("^(http|https|ftp)://", pkgs))
         if(is.null(destdir) && nonlocalrepos) {
