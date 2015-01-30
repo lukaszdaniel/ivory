@@ -49,39 +49,30 @@ Rconnection
 in_newCurlUrl(const char *description, const char * const mode, int type);
 
 #ifdef Win32
-
 static void *in_R_HTTPOpen2(const char *url, const char *headers, const int cacheOK);
 static int   in_R_HTTPRead2(void *ctx, char *dest, int len);
 static void  in_R_HTTPClose2(void *ctx);
 static void *in_R_FTPOpen2(const char *url);
 
-static void *Ri_HTTPOpen(const char *url, const char *headers, const int cacheOK)
-{
-    return UseInternet2 ? in_R_HTTPOpen2(url, headers, cacheOK) :
-	in_R_HTTPOpen(url, headers, cacheOK);
-}
-static int Ri_HTTPRead(void *ctx, char *dest, int len)
-{
-    return UseInternet2 ? in_R_HTTPRead2(ctx, dest, len) :
-	in_R_HTTPRead(ctx, dest, len);
-}
-static void  Ri_HTTPClose(void *ctx) {
-    if(UseInternet2) in_R_HTTPClose2(ctx); else in_R_HTTPClose(ctx);
-}
+#define Ri_HTTPOpen(url, headers, cacheOK) \
+    (meth ? in_R_HTTPOpen2(url, headers, cacheOK) : \
+	in_R_HTTPOpen(url, headers, cacheOK));
 
-static void *Ri_FTPOpen(const char *url)
-{
-    return UseInternet2 ? in_R_FTPOpen2(url) : in_R_FTPOpen(url);
-}
-static int Ri_FTPRead(void *ctx, char *dest, int len)
-{
-    return UseInternet2 ? in_R_HTTPRead2(ctx, dest, len) :
-	in_R_FTPRead(ctx, dest, len);
-}
-static void Ri_FTPClose(void *ctx)
-{
-    if(UseInternet2) in_R_HTTPClose2(ctx); else in_R_FTPClose(ctx);
-}
+#define Ri_HTTPRead(ctx, dest, len) \
+    (meth ? in_R_HTTPRead2(ctx, dest, len) : in_R_HTTPRead(ctx, dest, len))
+
+#define Ri_HTTPClose(ctx) \
+    if(meth) in_R_HTTPClose2(ctx); else in_R_HTTPClose(ctx);
+
+#define Ri_FTPOpen(url) \
+    (meth ? in_R_FTPOpen2(url) : in_R_FTPOpen(url));
+
+#define Ri_FTPRead(ctx, dest, len) \
+    (meth ? in_R_HTTPRead2(ctx, dest, len) : in_R_FTPRead(ctx, dest, len))
+
+#define Ri_FTPClose(ctx) \
+    if(meth) in_R_HTTPClose2(ctx); else in_R_FTPClose(ctx);
+
 #else
 #define Ri_HTTPOpen in_R_HTTPOpen
 #define Ri_HTTPRead in_R_HTTPRead
@@ -449,8 +440,8 @@ static void doneprogressbar(void *data)
 #define IBUFSIZE 4096
 static SEXP in_do_download(SEXP args)
 {
-    SEXP scmd, sfile, smode, sheaders, agentFun;
-    const char *url, *file, *mode, *headers;
+    SEXP scmd, sfile, smode;
+    const char *url, *file, *mode;
     int quiet, status = 0, cacheOK;
 #ifdef Win32
     char pbuf[30];
@@ -479,20 +470,14 @@ static SEXP in_do_download(SEXP args)
     cacheOK = asLogical(CAR(args));
     if(cacheOK == NA_LOGICAL)
 	error(_("invalid '%s' argument"), "cacheOK");
-#ifdef USE_WININET
-    PROTECT(agentFun = lang2(install("makeUserAgent"), ScalarLogical(0)));
-#else
-    PROTECT(agentFun = lang1(install("makeUserAgent")));
-#endif
-    PROTECT(sheaders = eval(agentFun, R_FindNamespace(mkString("utils"))));
-    UNPROTECT(1);
-    if(TYPEOF(sheaders) == NILSXP)
-	headers = NULL;
-    else
-	headers = CHAR(STRING_ELT(sheaders, 0));
 #ifdef Win32
-    if (!quiet && R_Interactive && !pbar.wprog) {
-	pbar.wprog = newwindow(_("Download progress"), rect(0, 0, 540, 100), Titlebar | Centered);
+    int meth = asLogical(CADR(args));
+    if(meth == NA_LOGICAL)
+	error(_("invalid '%s' argument"), "method");
+    if(meth == 0) meth = UseInternet2;
+    if (!quiet && !pbar.wprog) {
+	pbar.wprog = newwindow(_("Download progress"), rect(0, 0, 540, 100),
+			       Titlebar | Centered);
 	setbackground(pbar.wprog, dialog_bg());
 	pbar.l_url = newlabel(" ", rect(10, 15, 520, 25), AlignCenter);
 	pbar.pb = newprogressbar(rect(20, 50, 500, 20), 0, 1024, 1024, 1);
@@ -530,7 +515,7 @@ static SEXP in_do_download(SEXP args)
 #ifdef HAVE_INTERNET
     } else if (strncmp(url, "http://", 7) == 0
 #ifdef Win32
-	       || ((strncmp(url, "https://", 8) == 0) && UseInternet2)
+	       || ((strncmp(url, "https://", 8) == 0) && meth)
 #endif
 	) {
 
@@ -552,10 +537,21 @@ static SEXP in_do_download(SEXP args)
 
 	R_Busy(1);
 	if(!quiet) REprintf(_("Trying URL '%s'\n"), url);
+	SEXP agentFun, sheaders;
 #ifdef Win32
 	R_FlushConsole();
+	if(meth)
+	    agentFun = PROTECT(lang2(install("makeUserAgent"), ScalarLogical(0)));
+	else
+	    agentFun = PROTECT(lang1(install("makeUserAgent")));
+#else
+	agentFun = PROTECT(lang1(install("makeUserAgent")));
 #endif
+	sheaders = PROTECT(eval(agentFun, R_FindNamespace(mkString("utils"))));
+	const char *headers = (TYPEOF(sheaders) == NILSXP) ?
+	    NULL : CHAR(STRING_ELT(sheaders, 0));
 	ctxt = Ri_HTTPOpen(url, headers, cacheOK);
+	UNPROTECT(2);
 	if(ctxt == NULL) status = 1;
 	else {
 	    if(!quiet) REprintf(_("Opened URL\n"), url);
@@ -569,7 +565,7 @@ static SEXP in_do_download(SEXP args)
 		strcat(buf, "... ");
 		strcat(buf, url + (strlen(url) - 60));
 	    } else strcat(buf, url);
-	    if(!quiet && R_Interactive) {
+	    if(!quiet) {
 		settext(pbar.l_url, buf);
 		setprogressbarrange(pbar.pb, 0, guess/factor);
 		setprogressbar(pbar.pb, 0);
@@ -587,7 +583,7 @@ static SEXP in_do_download(SEXP args)
 		if(res != len) error(_("write failed"));
 		nbytes += len;
 #ifdef Win32
-		if(!quiet && R_Interactive) {
+		if(!quiet) {
 		    if(nbytes > guess) {
 			guess *= 2;
 			if (guess > 1e9) factor = guess/1e6;
@@ -604,7 +600,7 @@ static SEXP in_do_download(SEXP args)
 		    }
 		}
 #else
-		if(!quiet && R_Interactive) {
+		if(!quiet) {
 		    if(guess <= 0) putdots(&ndots, nbytes/1024);
 		    else putdashes(&ndashes, (int)(50*nbytes/guess));
 		}
@@ -613,7 +609,7 @@ static SEXP in_do_download(SEXP args)
 	    Ri_HTTPClose(ctxt);
 	    if(!quiet) {
 #ifndef Win32
-		if(R_Interactive) REprintf("\n");
+		REprintf("\n");
 #endif
 		if(nbytes > 1024*1024)
 		    REprintf(_("Downloaded %0.1f MB"), (double)nbytes/1024/1024);
@@ -625,7 +621,7 @@ static SEXP in_do_download(SEXP args)
 	    }
 #ifdef Win32
 	    R_FlushConsole();
-	    if(!quiet && R_Interactive) {
+	    if(!quiet) {
 		endcontext(&(pbar.cntxt));
 		doneprogressbar(&pbar);
 	    }
@@ -675,7 +671,7 @@ static SEXP in_do_download(SEXP args)
 		strcat(buf, "... ");
 		strcat(buf, url + (strlen(url) - 60));
 	    } else strcat(buf, url);
-	    if(!quiet && R_Interactive) {
+	    if(!quiet) {
 		settext(pbar.l_url, buf);
 		setprogressbarrange(pbar.pb, 0, guess/factor);
 		setprogressbar(pbar.pb, 0);
@@ -696,7 +692,7 @@ static SEXP in_do_download(SEXP args)
 		if(res != len) error(_("write failed"));
 		nbytes += len;
 #ifdef Win32
-		if(!quiet && R_Interactive) {
+		if(!quiet) {
 		    if(nbytes > guess) {
 			guess *= 2;
 			if (guess > 1e9) factor = guess/1e6;
@@ -713,7 +709,7 @@ static SEXP in_do_download(SEXP args)
 		    }
 		}
 #else
-		if(!quiet && R_Interactive) {
+		if(!quiet) {
 		    if(guess <= 0) putdots(&ndots, nbytes/1024);
 		    else putdashes(&ndashes, (int)(50*nbytes/guess));
 		}
@@ -722,7 +718,7 @@ static SEXP in_do_download(SEXP args)
 	    Ri_FTPClose(ctxt);
 	    if(!quiet) {
 #ifndef Win32
-		if(R_Interactive) REprintf("\n");
+		REprintf("\n");
 #endif
 		if(nbytes > 1024*1024)
 		    REprintf(_("Downloaded %0.1f MB"),
@@ -735,7 +731,7 @@ static SEXP in_do_download(SEXP args)
 	    }
 #ifdef Win32
 	    R_FlushConsole();
-	    if(!quiet && R_Interactive) {
+	    if(!quiet) {
 		endcontext(&(pbar.cntxt));
 		doneprogressbar(&pbar);
 	    }
@@ -752,7 +748,6 @@ static SEXP in_do_download(SEXP args)
     } else
 	error(_("unsupported URL scheme"));
 
-    UNPROTECT(1);
     return ScalarInteger(status);
 }
 

@@ -244,9 +244,6 @@
 	available.
       }
 
-      \item Internet download progress bars are now only shown in
-      interactive sessions.
-
       \item (Windows.) The DLLs \file{internet.dll} and
       \file{internet2.dll} have been merged.  In this version it is safe
       to switch (repeatedly) between the internal and Windows internet
@@ -257,11 +254,23 @@
       overridden for an \code{url()} connection \emph{via} its new
       \code{method} argument.
 
+      \code{download.file()} has new method \code{"wininet"}.
+
       \item \code{parent.env<-} can no longer modify the parent of a
       locked namespace or namespace imports environment.  Contributed by
       Karl Millar.
 
       \item New function \code{isLoadedNamespace()} for readability and speed.
+
+      \item \code{names(env)} now returns all the object names of an
+      \code{environment} \code{env}, equivalently to \code{ls(env,
+	all.names=TRUE, sorted=FALSE)} and also to the names of the
+      corresponding list, \code{names(as.list(env, all.names=TRUE))}.
+
+      \item The memory manager now grows the heap more aggressively. This
+      reduces the number of garbage collections, in particular while
+      data or code are loaded, at the expense of slightly increasing the
+      memory footprint.
     }
   }
 
@@ -462,6 +471,8 @@
 
       \item Fix issues with forwarding \code{\dots} through
       \code{callGeneric()} and \code{callNextMethod()}.  (\PR{16141})
+
+      \item \code{callGeneric()} now works after a \code{callNextMethod()}.
     }
   }
 }

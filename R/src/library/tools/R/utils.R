@@ -1280,7 +1280,7 @@ function(parent = parent.frame(), fixup = FALSE)
     ## Create an environment with pseudo-definitions for the S3 primitive
     ## generics
     env <- new.env(hash = TRUE, parent = parent)
-    for(f in ls(base::.GenericArgsEnv))
+    for(f in names(base::.GenericArgsEnv))
         assign(f, get(f, envir=base::.GenericArgsEnv), envir = env)
     if(fixup) {
         ## now fixup the operators
@@ -1302,7 +1302,7 @@ function(parent = parent.frame())
     ## Create an environment with pseudo-definitions
     ## for the S3 primitive non-generics
     env <- new.env(hash = TRUE, parent = parent)
-    for(f in ls(base::.ArgsEnv))
+    for(f in names(base::.ArgsEnv))
         assign(f, get(f, envir=base::.ArgsEnv), envir = env)
     env
 }
@@ -1430,8 +1430,9 @@ function(file, encoding = NA)
             ## Previous use of con <- file(file, encoding = encoding)
             ## was intolerant so do what .install_package_code_files()
             ## does.
-            lines <- iconv(readLines(file, warn = FALSE),
-                           from = encoding, to = "", sub = "byte")
+            lines <- c(paste0("#line 1 \"", file, "\""),
+                       iconv(readLines(file, warn = FALSE),
+                             from = encoding, to = "", sub = "byte"))
             parse(text = lines)
         } else parse(file)
     })
