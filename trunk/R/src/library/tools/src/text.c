@@ -157,7 +157,7 @@ check_nonASCII(SEXP text, SEXP ignore_quotes)
     if(ign == NA_LOGICAL) error(_("'%s' argument must be TRUE or FALSE"), "ignore_quotes");
 
     for (i = 0; i < LENGTH(text); i++) {
-	p = CHAR(STRING_ELT(text, i)); /* ASCII or not not affected by charset */
+	p = CHAR(STRING_ELT(text, i)); // ASCII or not not affected by charset
 	inquote = FALSE; /* avoid runaway quotes */
 	for(; *p; p++) {
 	    if(!inquote && *p == '#') break;
@@ -168,7 +168,7 @@ check_nonASCII(SEXP text, SEXP ignore_quotes)
 		    return ScalarLogical(TRUE);
 		}
 	    }
-	    if(nbslash % 2 && (*p == '"' || *p == '\'')) {
+	    if((nbslash % 2 == 0) && (*p == '"' || *p == '\'')) {
 		if(inquote && *p == quote) {
 		    inquote = FALSE;
 		} else if(!inquote) {

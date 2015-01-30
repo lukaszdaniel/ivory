@@ -52,7 +52,7 @@
         }
         fdef <- fdefault
         body(fdef) <- substitute(standardGeneric(NAME), list(NAME = f))
-        environment(fdef) <- .methodsNamespace
+        environment(fdef) <- asNamespace(package)
     }
     ## give the function a new environment, to cache methods later
     ev <- new.env()
@@ -189,33 +189,26 @@ makeGeneric <-
     value
 }
 
-
+### FIXME: Not used by methods, but exposed through namespace. Deprecate?
 makeStandardGeneric <-
-  ## a utility function that makes a valid function calling standardGeneric for name f
-  ## Works (more or less) even if the actual definition, fdef, is not a proper function,
-  ## that is, it is a primitive or internal
+  ## a utility function that makes a valid function calling
+  ## standardGeneric for name f Works (more or less) even if the
+  ## actual definition, fdef, is not a proper function, that is, it is
+  ## a primitive or internal
   function(f, fdef)
 {
     fgen <- fdef
     body(fgen) <- substitute(standardGeneric(FNAME), list(FNAME=f))
     ## detect R specials and builtins:  these don't provide an argument list
     if(typeof(fdef) != "closure") {
-        ## Look in a list of pre-defined functions (and also of functions for which
-        ## methods are prohibited)
+        ## Look in a list of pre-defined functions (and also of
+        ## functions for which methods are prohibited)
         fgen <- genericForPrimitive(f)
-        if(identical(fgen, FALSE))
-            stop(gettextf("special function %s is not permitted to have methods", sQuote(f)), domain = "R-methods")
-        if(is.null(fgen)) {
-            warning(gettextf("special function %s has no known argument list; will assume '(x, ...)'", sQuote(f)), domain = "R-methods")
-            ## unknown
-            fgen <- function(x, ...) {}
-        }
-        else {
-            message(gettextf("making a generic for special function %s", sQuote(f), domain = "R-methods"), domain = NA)
-            setPrimitiveMethods(f, fdef, "reset", fgen, NULL)
-        }
-        ## Note that the body of the function comes from the list.  In a few cases ("$"),
-        ## this body is not just a call to standardGeneric
+        message(gettextf("making a generic for special function %s", sQuote(f), domain = "R-methods"), domain = NA)
+        setPrimitiveMethods(f, fdef, "reset", fgen, NULL)
+        ## Note that the body of the function comes from the list.  In
+        ## a few cases ("$"), this body is not just a call to
+        ## standardGeneric
     }
     fgen
 }
@@ -286,7 +279,7 @@ doPrimitiveMethod <-
     cat(gettext("called 'doPrimitiveMethod()'", domain = "R-methods"), "\n\n", sep = "")
     ## Store a local version of function 'name' back where the current version was
     ## called.  Restore the previous state there on exit, either removing or re-assigning.
-    if(!is.null(prev <- get0(name, envir=ev, inherits=FALSE))) {
+    if(!is.null(prev <- ev[[name]])) {
         on.exit(assign(name, prev, envir = ev))
     }
     else
@@ -438,15 +431,14 @@ getGeneric <-
         if(is(f, "genericFunction"))
             return(f)
         else if(is.primitive(f))
-            return(genericForPrimitive(.primname(f)))
+            return(genericForPrimitive(.primname(f), mustFind=mustFind))
         else
             stop("argument 'f' must be a string, generic function, or primitive: got an ordinary function")
     }
     value <- if(missing(where))
 		  .getGeneric(f,      , package)
 	     else .getGeneric(f, where, package)
-    if(is.null(value) && !is.null(baseDef <-
-        get0(f, envir = baseenv(), inherits = FALSE))) {
+    if(is.null(value) && !is.null(baseDef <- baseenv()[[f]])) {
         ## check for primitives
         if(is.primitive(baseDef)) {
             value <- genericForPrimitive(f)
@@ -522,7 +514,7 @@ getGeneric <-
 .cacheGenericTable <- function(name, def, table)
 {
     fdef <- def
-    if(!is.null(prev <- get0(name, envir = table, inherits = FALSE))) {
+    if(!is.null(prev <- table[[name]])) {
         newpkg <- def@package
         if(is.function(prev)) {
             if(identical(prev, def))

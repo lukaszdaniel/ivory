@@ -84,41 +84,68 @@
         ++i)
 
 #define MOD_ITERATE_CORE(n, n1, n2, i, i1, i2, loop_body) do {	\
-	mod_iterate(n1,n2,i1,i2) {							\
+	for (; i < n;							\
+	     i1 = (++i1 == n1) ? 0 : i1,				\
+		 i2 = (++i2 == n2) ? 0 : i2,				\
+		 ++i) {							\
 	    loop_body							\
 		}							\
     } while (0)
 
+#define MOD_ITERATE(n, n1, n2, i, i1, i2, loop_body) do {	\
+	i = i1 = i2 = 0;					\
+	MOD_ITERATE_CORE(n, n1, n2, i, i1, i2, loop_body);	\
+    } while (0)
 
 #define MOD_ITERATE_CHECK(ncheck, n, n1, n2, i, i1, i2, loop_body) do {	\
+	i = i1 = i2 = 0;						\
 	LOOP_WITH_INTERRUPT_CHECK(MOD_ITERATE_CORE, ncheck, n,		\
 				  n1, n2, i, i1, i2, loop_body);	\
     } while (0)
 
 #define MOD_ITERATE3_CORE(n, n1, n2, n3, i, i1, i2, i3, loop_body) do {	\
-	mod_iterate3(n1,n2,n3,i1,i2,i3) {							\
+	for (; i < n;							\
+	     i1 = (++i1 == n1) ? 0 : i1,				\
+		 i2 = (++i2 == n2) ? 0 : i2,				\
+		 i3 = (++i3 == n3) ? 0 : i3,				\
+		 ++i) {							\
 	    loop_body							\
 		}							\
     } while (0)
 
+#define MOD_ITERATE3(n, n1, n2, n3, i, i1, i2, i3, loop_body) do {	\
+	i = i1 = i2 = i3 = 0;						\
+	MOD_ITERATE3_CORE(n, n1, n2, n3, i, i1, i2, i3, loop_body);	\
+    } while (0)
 
 #define MOD_ITERATE3_CHECK(ncheck, n, n1, n2, n3, i, i1, i2, i3, loop_body) \
     do {								\
+	i = i1 = i2 = i3 = 0;						\
 	LOOP_WITH_INTERRUPT_CHECK(MOD_ITERATE3_CORE, ncheck, n,		\
 				  n1, n2, n3, i, i1, i2, i3, loop_body); \
     } while (0)
 
 #define MOD_ITERATE4_CORE(n, n1, n2, n3, n4, i, i1, i2, i3, i4, loop_body) \
     do {								\
-	mod_iterate4(n1,n2,n3,n4,i1,i2,i3,i4) {							\
+	for (; i < n;							\
+	     i1 = (++i1 == n1) ? 0 : i1,				\
+		 i2 = (++i2 == n2) ? 0 : i2,				\
+		 i3 = (++i3 == n3) ? 0 : i3,				\
+		 i4 = (++i4 == n4) ? 0 : i4,				\
+		 ++i) {							\
 	    loop_body							\
 		}							\
     } while (0)
 
+#define MOD_ITERATE4(n, n1, n2, n3, n4, i, i1, i2, i3, i4, loop_body) do { \
+	i = i1 = i2 = i3 = i4 = 0;					\
+	MOD_ITERATE4_CORE(n, n1, n2, n3, n4, i, i1, i2, i3, i4, loop_body); \
+    } while (0)
 
 #define MOD_ITERATE4_CHECK(ncheck, n, n1, n2, n3, n4, i, i1, i2, i3, i4, \
 			   loop_body)					\
     do {								\
+	i = i1 = i2 = i3 = i4 = 0;					\
 	LOOP_WITH_INTERRUPT_CHECK(MOD_ITERATE4_CORE, ncheck, n,	\
 				  n1, n2, n3, n4,			\
 				  i, i1, i2, i3, i4, loop_body);	\
@@ -127,16 +154,29 @@
 #define MOD_ITERATE5_CORE(n, n1, n2, n3, n4, n5, i, i1, i2, i3, i4, i5, \
 			  loop_body)					\
     do {								\
-	mod_iterate5(n1,n2,n3,n4,n5, i1,i2,i3,i4,i5) {							\
+	for (; i < n;							\
+	     i1 = (++i1 == n1) ? 0 : i1,				\
+		 i2 = (++i2 == n2) ? 0 : i2,				\
+		 i3 = (++i3 == n3) ? 0 : i3,				\
+		 i4 = (++i4 == n4) ? 0 : i4,				\
+		 i5 = (++i5 == n5) ? 0 : i5,				\
+		 ++i) {							\
 	    loop_body							\
 		}							\
     } while (0)
 
+#define MOD_ITERATE5(n, n1, n2, n3, n4, n5, i, i1, i2, i3, i4, i5, loop_body) \
+    do {								\
+	i = i1 = i2 = i3 = i4 = i5 = 0;					\
+	MOD_ITERATE5_CORE(n, n1, n2, n3, n4, n5, i, i1, i2, i3, i4, i5, \
+			  loop_body);					\
+    } while (0)
 
 #define MOD_ITERATE5_CHECK(ncheck, n, n1, n2, n3, n4, n5, \
 			   i, i1, i2, i3, i4, i5,			\
 			   loop_body)					\
     do {								\
+	i = i1 = i2 = i3 = i4 = i5 = 0;					\
 	LOOP_WITH_INTERRUPT_CHECK(MOD_ITERATE5_CORE, ncheck, n,	\
 				  n1, n2, n3, n4, n5,			\
 				  i, i1, i2, i3, i4, i5, loop_body);	\
