@@ -137,7 +137,8 @@ print.help_files_with_topic <- function(x, ...)
             out <- c(out, "</table>\n</p>\n<hr>\n</body></html>")
             writeLines(out, file.path(path, "all.available.html"))
             browseURL(paste0("http://127.0.0.1:", port,
-                             "/doc/html/all.available.html"), browser)
+                             "/doc/html/all.available.html"),
+                      browser)
         } else {
             writeLines(c(strwrap(msg), "",
                          paste(" ",
@@ -149,7 +150,9 @@ print.help_files_with_topic <- function(x, ...)
         if(length(paths) > 1L) {
             if (type == "html" && port > 0L) { # Redo the search if dynamic help is running
 		browseURL(paste0("http://127.0.0.1:", port,
-                                 "/library/NULL/help/", topic), browser)
+                                 "/library/NULL/help/",
+                                 URLencode(topic, reserved = TRUE)),
+                          browser)
 		return(invisible(x))
 	    }
             file <- paths[1L]
@@ -191,7 +194,8 @@ print.help_files_with_topic <- function(x, ...)
 		pkgname <- basename(dirpath)
 		browseURL(paste0("http://127.0.0.1:", port,
                                  "/library/", pkgname, "/html/", basename(file),
-                                 ".html"), browser)
+                                 ".html"),
+                          browser)
             } else {
                 warning("HTML help is unavailable", call. = FALSE)
                 att <- attributes(x)
