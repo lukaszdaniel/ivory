@@ -1,12 +1,12 @@
 d41d8cd98f00b204e9800998ecf8427e  Changes
-5a626ee8a5c1a57d6a7711971ea80446  DESCRIPTION
 33ce388f9130481dcfb6bafc37e58087  inst/po/pl/LC_MESSAGES/R-KernSmooth.mo
 1fe83f9e1cd73afef129aa0b1c4db76d  inst/po/de/LC_MESSAGES/R-KernSmooth.mo
+5a626ee8a5c1a57d6a7711971ea80446  DESCRIPTION
 470981c5ab01ecc836626641069ea43d  inst/po/en@quot/LC_MESSAGES/R-KernSmooth.mo
 84461730024234dcc17218b6b11f83fb  inst/po/fr/LC_MESSAGES/R-KernSmooth.mo
-987c88c639c31e61d8b38d66e831dfce  inst/po/ko/LC_MESSAGES/R-KernSmooth.mo
 4a39ab255fed86dd361ce9d83f876488  LICENCE.note
 2cdc0085930d42760d8f9ae4c0d4557f  man/dpih.Rd
+987c88c639c31e61d8b38d66e831dfce  inst/po/ko/LC_MESSAGES/R-KernSmooth.mo
 e7ddab232fd0c2c20b6eac503229ca89  man/dpill.Rd
 5f6ef1beea4f7680cea94e63dd715bcb  man/bkde.Rd
 e9d58f063bb33cd05bb14a80fb6bfcbd  man/dpik.Rd
@@ -33,5 +33,5 @@ fbf478a29898539e563ca19df62372fe  src/blkest.f
 ca3d59ad1312b0ab54f7a390d9d74295  src/linbin.f
 9f041860a6b30af57e640675a17e75eb  src/dgedi.f
 987035a0236cffd57de5afc6594119ed  src/rlbin.f
-1e0b337c43b717d91cd92720b8eb0cff  tests/bkfe.R
 0a954d67dd2bc16afd7fe901666b5108  src/dgefa.f
+1e0b337c43b717d91cd92720b8eb0cff  tests/bkfe.R
