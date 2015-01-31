@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2015-01-21 r219) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2015-01-30 r240) -- "Internationalized Version of R"
 Copyright (C) 2013-2015 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2015-01-21 r67559) -- "Unsuffered Consequences"
+R Under development (unstable) (2015-01-30 r67668) -- "Unsuffered Consequences"
 Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -2575,6 +2575,6 @@ In command 'as.dist.default(x)': 'm' argument is not a square matrix
 > f <- try(as.ts( x ), silent = TRUE)
 >   if(!inherits(f, 'try-error')) report(identical(f, as.ts( f )))
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  0.342 0.024 0.367 0 0 
+Time elapsed:  0.345 0.02 0.362 0 0 
 > 
 > 
