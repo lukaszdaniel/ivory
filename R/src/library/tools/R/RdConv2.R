@@ -719,8 +719,9 @@ checkRd <- function(Rd, defines=.Platform$OS.type, stages = "render",
     		   if (!all(tags %in% c("TEXT", "\\Sexpr")))
     		       stopRd(block, Rdfile, gettext("Condition must be \\Sexpr or plain text"))
     		   condition <- condition[tags == "TEXT"]
-    		   allow <- .strip_whitespace(strsplit(paste(condition, collapse=""), ",")[[1L]])
-    		   unknown <- allow[!(allow %in% c("", "latex", "example", "text", "html", "TRUE", "FALSE"))]
+    		   allow <- trimws(strsplit(paste(condition, collapse=""), ",")[[1L]])
+    		   unknown <- allow[!(allow %in%
+    		          c("", "latex", "example", "text", "html", "TRUE", "FALSE"))]
     		   if (length(unknown))
     		       warnRd(block, Rdfile, gettextf("Unrecognized format: %s", unknown))
                    checkContent(block[[2L]])
@@ -978,7 +979,7 @@ testRdConditional <- function(format, conditional, Rdfile) {
     tags <- RdTags(condition)
     if (!all(tags == "TEXT")) stopRd(conditional, Rdfile, gettext("condition must be plain text"))
 
-    allow <- .strip_whitespace(strsplit(paste(condition, collapse=""), ",")[[1L]])
+    allow <- trimws(strsplit(paste(condition, collapse=""), ",")[[1L]])
     any(c("TRUE", format) %in% allow)
 }
 

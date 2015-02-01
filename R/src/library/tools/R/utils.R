@@ -1279,9 +1279,8 @@ function(parent = parent.frame(), fixup = FALSE)
 {
     ## Create an environment with pseudo-definitions for the S3 primitive
     ## generics
-    env <- new.env(hash = TRUE, parent = parent)
-    for(f in names(base::.GenericArgsEnv))
-        assign(f, get(f, envir=base::.GenericArgsEnv), envir = env)
+    env <- list2env(as.list(base::.GenericArgsEnv, all.names=TRUE),
+                    hash=TRUE, parent=parent)
     if(fixup) {
         ## now fixup the operators
         for(f in c('+', '-', '*', '/', '^', '%%', '%/%', '&', '|',
@@ -1301,10 +1300,8 @@ function(parent = parent.frame())
 {
     ## Create an environment with pseudo-definitions
     ## for the S3 primitive non-generics
-    env <- new.env(hash = TRUE, parent = parent)
-    for(f in names(base::.ArgsEnv))
-        assign(f, get(f, envir=base::.ArgsEnv), envir = env)
-    env
+    list2env(as.list(base::.ArgsEnv, all.names=TRUE),
+             hash=TRUE, parent=parent)
 }
 
 ### ** .make_S3_methods_stop_list
@@ -1421,7 +1418,7 @@ function(packages = NULL, FUN, ...)
 ### .parse_code_file
 
 .parse_code_file <-
-function(file, encoding = NA)
+function(file, encoding = NA, keep.source = getOption("keep.source"))
 {
     if(!file.size(file)) return()
     suppressWarnings({
@@ -1434,8 +1431,11 @@ function(file, encoding = NA)
             ## directive though as this will confuse getParseData().
             lines <- iconv(readLines(file, warn = FALSE),
                            from = encoding, to = "", sub = "byte")
-            parse(text = lines, srcfile = srcfile(file))
-        } else parse(file)
+            parse(text = lines, srcfile = srcfile(file),
+                  keep.source = keep.source)
+        } else
+            parse(file,
+                  keep.source = keep.source)
     })
 }
 
@@ -1698,6 +1698,10 @@ function(x)
     } else list(name = x1)
 }
 
+## <FIXME>
+## We now have base::trimws(), so this is no longer needed.
+## Remove eventually.
+
 ### ** .strip_whitespace
 
 ## <NOTE>
@@ -1716,6 +1720,8 @@ function(x)
     x <- sub("[[:space:]]+$", "", x)
     x
 }
+
+## </FIXME>
 
 ### ** .system_with_capture
 
