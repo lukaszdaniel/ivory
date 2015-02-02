@@ -987,7 +987,7 @@ SEXP attribute_hidden do_unlist(SEXP call, SEXP op, SEXP args, SEXP env)
 /* This is a special .Internal */
 SEXP attribute_hidden do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP a, t, obj, method, classmethod, rho, ans;
+    SEXP a, t, obj, method, rho, ans;
     const char *generic;
     int mode, deparse_level;
     Rboolean compatible = TRUE, anyS4 = FALSE;
@@ -1068,7 +1068,7 @@ SEXP attribute_hidden do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 	UNPROTECT(1);
     }
-    if (method == R_NilValue && anyS4) {
+    if (!compatible && anyS4) {
         method = findFun(install(generic), R_MethodsNamespace);
     }
     if (method != R_NilValue) {
