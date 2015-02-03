@@ -744,11 +744,7 @@ setRlibs <-
         if (file.exists("README.md") && check_incoming) {
             if (nzchar(Sys.which("pandoc"))) {
                 rfile <- file.path(tempdir(), "README.html")
-                out <- .system_with_capture("pandoc",
-                                            paste("README.md", "-s",
-                                                  "--email-obfuscation=references",
-                                                  "--css=../../CRAN_web.css",
-                                                  "-o", rfile))
+                out <- .pandoc_README_md_for_CRAN("README.md", rfile)
                 if(out$status) {
                     if(!any) warningLog(Log)
                     any <- TRUE
@@ -3015,7 +3011,7 @@ setRlibs <-
         alldirs <- sub("^./","", alldirs)
         alldirs <- alldirs[alldirs != "."]
         bases <- basename(alldirs)
-        dots <- c(dots, alldirs[grepl("^[.]", bases)])
+        dots <- c(dots, setdiff(alldirs[grepl("^[.]", bases)], ".aspell"))
         if (length(dots)) {
             noteLog(Log, gettext("Found the following hidden files and directories:", domain = "R-tools"))
             printLog(Log, .format_lines_with_indent(dots), "\n")
