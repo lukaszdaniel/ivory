@@ -159,13 +159,8 @@ function(pattern, fields = c("alias", "concept", "title"),
     lib.loc <- attr(db, "LibPaths")
 
     ### Matching.
-    if(verbose >= 2L) { #IVORY
-	message("Database of ",
-                NROW(db$Base), " help objects (",
-                NROW(db$Aliases), " aliases, ",
-                NROW(db$Concepts), " concepts, ",
-                NROW(db$Keywords), " keywords)",
-                domain = NA)
+    if(verbose >= 2L) {
+        message(gettextf("Database of %d help objects (%d aliases, %d concepts, %d keywords)", NROW(db$Base),     NROW(db$Aliases), NROW(db$Concepts), NROW(db$Keywords), domain = "R-utils"), domain = NA)
         flush.console()
     }
     if(!is.null(package)) {
@@ -630,13 +625,13 @@ function(x, ...)
     if(NROW(db) == 0) {
     	typenames <- paste(tolower(typenames[types]), collapse = ", ")
 	if(matchtype == "fuzzy") {
-	if(!is.na(match("demo", types))) writeLines(gettextf("No demos found with %s fields matching %s using fuzzy matching.", fields$help, sQuote(x$pattern), domain = "R-utils"))
-	if(!is.na(match("help", types))) writeLines(gettextf("No help files found with %s fields matching %s using fuzzy matching.", fields$help, sQuote(x$pattern), domain = "R-utils"))
-	if(!is.na(match("vignette", types))) writeLines(gettextf("No vignettes found with %s fields matching %s using fuzzy matching.", fields$help, sQuote(x$pattern), domain = "R-utils"))
+	if(!is.na(match("demo", types))) writeLines(gettextf("No demos found with %s fields matching %s using fuzzy matching.", fields_used$help, sQuote(x$pattern), domain = "R-utils"))
+	if(!is.na(match("help", types))) writeLines(gettextf("No help files found with %s fields matching %s using fuzzy matching.", fields_used$help, sQuote(x$pattern), domain = "R-utils"))
+	if(!is.na(match("vignette", types))) writeLines(gettextf("No vignettes found with %s fields matching %s using fuzzy matching.", fields_used$help, sQuote(x$pattern), domain = "R-utils"))
 	} else {
-	if(!is.na(match("demo", types))) writeLines(gettextf("No demos found with %s fields matching %s using regular expression matching.", fields$help, sQuote(x$pattern), domain = "R-utils"))
-	if(!is.na(match("help", types))) writeLines(gettextf("No help files found with %s fields matching %s using regular expression matching.", fields$help, sQuote(x$pattern), domain = "R-utils"))
-	if(!is.na(match("vignette", types))) writeLines(gettextf("No vignettes found with %s fields matching %s using regular expression matching.", fields$help, sQuote(x$pattern), domain = "R-utils"))
+	if(!is.na(match("demo", types))) writeLines(gettextf("No demos found with %s fields matching %s using regular expression matching.", fields_used$help, sQuote(x$pattern), domain = "R-utils"))
+	if(!is.na(match("help", types))) writeLines(gettextf("No help files found with %s fields matching %s using regular expression matching.", fields_used$help, sQuote(x$pattern), domain = "R-utils"))
+	if(!is.na(match("vignette", types))) writeLines(gettextf("No vignettes found with %s fields matching %s using regular expression matching.", fields_used$help, sQuote(x$pattern), domain = "R-utils"))
 	}
         return(invisible(x))
     }
@@ -650,13 +645,13 @@ function(x, ...)
     for (type in types) {
 	if(NROW(dbtemp <- db[db[,"Type"] == type,,drop=FALSE]) > 0) {
 	    if(matchtype == "fuzzy") {
-	if(type == "demo") writeLines(c(strwrap(gettextf("Demos with %s fields matching %s using fuzzy matching:", fields[[type]], sQuote(x$pattern), domain = "R-utils")), "\n"), outConn)
-	else if(type == "help") writeLines(c(strwrap(gettextf("Help files with %s fields matching %s using fuzzy matching:", fields[[type]], sQuote(x$pattern), domain = "R-utils")), "\n"), outConn)
-	else if(type == "vignette") writeLines(c(strwrap(gettextf("Vignettes with %s fields matching %s using fuzzy matching:", fields[[type]], sQuote(x$pattern), domain = "R-utils")), "\n"), outConn)
+	if(type == "demo") writeLines(c(strwrap(gettextf("Demos with %s fields matching %s using fuzzy matching:", fields_used[[type]], sQuote(x$pattern), domain = "R-utils")), "\n"), outConn)
+	else if(type == "help") writeLines(c(strwrap(gettextf("Help files with %s fields matching %s using fuzzy matching:", fields_used[[type]], sQuote(x$pattern), domain = "R-utils")), "\n"), outConn)
+	else if(type == "vignette") writeLines(c(strwrap(gettextf("Vignettes with %s fields matching %s using fuzzy matching:", fields_used[[type]], sQuote(x$pattern), domain = "R-utils")), "\n"), outConn)
 	    } else {
-	if(type == "demo") writeLines(c(strwrap(gettextf("Demos with %s fields matching %s using regular expression matching:", fields[[type]], sQuote(x$pattern), domain = "R-utils")), "\n"), outConn)
-	else if(type == "help") writeLines(c(strwrap(gettextf("Help files with %s fields matching %s using regular expression matching:", fields[[type]], sQuote(x$pattern), domain = "R-utils")), "\n"), outConn)
-	else if(type == "vignette") writeLines(c(strwrap(gettextf("Vignettes with %s fields matching %s using regular expression matching:", fields[[type]], sQuote(x$pattern), domain = "R-utils")), "\n"), outConn)
+	if(type == "demo") writeLines(c(strwrap(gettextf("Demos with %s fields matching %s using regular expression matching:", fields_used[[type]], sQuote(x$pattern), domain = "R-utils")), "\n"), outConn)
+	else if(type == "help") writeLines(c(strwrap(gettextf("Help files with %s fields matching %s using regular expression matching:", fields_used[[type]], sQuote(x$pattern), domain = "R-utils")), "\n"), outConn)
+	else if(type == "vignette") writeLines(c(strwrap(gettextf("Vignettes with %s fields matching %s using regular expression matching:", fields_used[[type]], sQuote(x$pattern), domain = "R-utils")), "\n"), outConn)
 	}
 	    dbnam <- paste0(dbtemp[, "Package"], "::", dbtemp[ , "topic"])
 	    dbtit <- paste0(dbtemp[ , "title"])
