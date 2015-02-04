@@ -51,7 +51,7 @@ installClassMethod <- function(def, self, me, selfEnv, thisClass) {
         warning(sprintf("method %s from class %s was not processed into a class method until being installed.  Possible corruption of the methods in the class.",
                          me, thisClass@className),
                 domain = "R-methods")
-        def <- makeClassMethod(def, me, thisClass@className, "", objects(thisClass@refMethods, all.names = TRUE))
+        def <- makeClassMethod(def, me, thisClass@className, "", names(thisClass@refMethods))
         .checkFieldsInMethod(def, names(thisClass@fieldClasses))
         ## cache the analysed method definition
         assign(me, def, envir = thisClass@refMethods)
@@ -61,8 +61,8 @@ installClassMethod <- function(def, self, me, selfEnv, thisClass) {
     assign(me, def, envir = selfEnv)
     ## process those that are not in the instance environment, now that
     ## this method has been assigned.
-    done <- objects(selfEnv, all.names = TRUE)
-    notDone <- depends[is.na(match(depends, done))]
+    done <- names(selfEnv)
+    notDone <- setdiff(depends, done)
     superCase <- match("callSuper", notDone, 0)
     if(superCase > 0) {
         if(nzchar(def@superClassMethod))
@@ -487,7 +487,7 @@ getRefSuperClasses <- function(classes, classDefs) {
 .GeneratorMethods <- list(methods =  function(...) {
     methodsEnv <- def@refMethods
     if(nargs() == 0)
-        return(objects(methodsEnv, all.names = TRUE))
+        return(names(methodsEnv))
     if(methods:::.classDefIsLocked(def))
         stop(gettextf("the definition of class %s in package %s is locked, methods may not be redefined",
                       dQuote(def@className),
@@ -997,7 +997,7 @@ showRefClassDef <- function(object, title = gettext("Reference Class", domain = 
     }
     else
         cat("\n", gettext("No fields defined", domain = "R-methods"), "\n", sep = "")
-    methods <- objects(object@refMethods, all.names = TRUE)
+    methods <- names(object@refMethods)
     if(length(methods))
         .printNames(gettext("Class Methods: ", domain = "R-methods"), methods)
     else
@@ -1007,31 +1007,6 @@ showRefClassDef <- function(object, title = gettext("Reference Class", domain = 
         .printNames(gettext("Reference Superclasses: ", domain = "R-methods"), supers)
 }
 
-
-## all.equal and identical both screw up on environments
-## but a bigger change is needed to all.equal than the following
-## because it also screws up on, e.g., externalptr objects
-if(FALSE) {
-all.equal.environment <- function(target, current, ...) {
-        .printNames("Methods used: ", object@mayCall)
-    nc <- sort(objects(current, all.names = TRUE))
-    tmp <- all.equal(nt, nc, ...)
-    if(!identical(tmp, TRUE))
-        return(paste("Different objects in target, current:", tmp))
-    if(length(nt) == 0)
-        return(TRUE)
-    differ <- sapply(nt, function(what) {
-        tmp <- all.equal(get(what, envir = target),
-                         get(what, envir = current), ...)
-        if(identical(tmp, TRUE)) FALSE
-        else TRUE
-    })
-    if(any(differ))
-        paste("Objects differ: ", paste(nt[differ], collapse = ", "))
-    else
-        TRUE
-}
-}
 
 .assignExpr <- function(e) {
     value <- list()
@@ -1186,7 +1161,7 @@ all.equal.environment <- function(target, current, ...) {
 ## declare field and method names global to avoid spurious
 ## messages from codetools
 .declareVariables <- function(def, env) {
-    utils::globalVariables(c(names(def@fieldClasses), objects(def@refMethods)),
+    utils::globalVariables(c(names(def@fieldClasses), names(def@refMethods)),
                            env)
 }
 
@@ -1245,8 +1220,7 @@ getMethodsAndAccessors <- function(Class) {
         locals <- list()
     ## the object should be assigned in environment where=
     what <- NULL
-    for(objName in objects(envir = where, all.names = TRUE)) {
-        obj <- get(objName, envir = where)
+    for(obj in as.list(where, all.names=TRUE)) {
         if(is(obj, "envRefClass") && identical(selfEnv, as.environment(obj))) {
             what <- obj
             break
@@ -1264,9 +1238,7 @@ getMethodsAndAccessors <- function(Class) {
 ## a shallow copy of a reference object
 ## This code depends on knowledge of how classes extend "environment"
 .shallowCopy <- function(object, selfEnv) {
-    newEnv <- new.env()
-    for(what in objects(envir = selfEnv, all.names = TRUE))
-        assign(what, get(what, envir = selfEnv), envir = newEnv)
+    newEnv <- list2env(as.list(selfEnv, all.names=TRUE), hash=TRUE)
     attr(object, ".xData") <- newEnv
     assign(".self", object, envir = newEnv)
     object

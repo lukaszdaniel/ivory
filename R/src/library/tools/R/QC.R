@@ -328,7 +328,7 @@ function(package, dir, lib.loc = NULL,
             .load_package_quietly(package, lib.loc)
         code_env <- .package_env(package)
 
-        objects_in_code <- objects(envir = code_env, all.names = TRUE)
+        objects_in_code <- names(code_env)
 
         ## Does the package have a namespace?
         if(packageHasNamespace(package, dirname(dir))) {
@@ -337,7 +337,7 @@ function(package, dir, lib.loc = NULL,
             S3Table <- get(".__S3MethodsTable__.", envir = ns_env)
             functions_in_S3Table <- ls(S3Table, all.names = TRUE)
             objects_in_ns <-
-                setdiff(objects(envir = ns_env, all.names = TRUE),
+                setdiff(names(ns_env),
                         c(".__NAMESPACE__.", ".__S3MethodsTable__."))
             objects_in_code_or_namespace <-
                 unique(c(objects_in_code, objects_in_ns))
@@ -374,7 +374,7 @@ function(package, dir, lib.loc = NULL,
         sys_data_file <- file.path(code_dir, "sysdata.rda")
         if(file_test("-f", sys_data_file)) load(sys_data_file, code_env)
 
-        objects_in_code <- objects(envir = code_env, all.names = TRUE)
+        objects_in_code <- names(code_env)
         objects_in_code_or_namespace <- objects_in_code
 
         ## Does the package have a NAMESPACE file?  Note that when
@@ -418,7 +418,7 @@ function(package, dir, lib.loc = NULL,
     ## As from R 2.5.0 we do for most generics.
     if(is_base) {
         objects_in_base <-
-            objects(envir = baseenv(), all.names = TRUE)
+            names(baseenv())
         objects_in_code <-
             c(objects_in_code,
               Filter(.is_primitive_in_base, objects_in_base),
@@ -1523,7 +1523,7 @@ function(package, dir, lib.loc = NULL)
             .load_package_quietly(package, lib.loc)
         code_env <- .package_env(package)
 
-        objects_in_code <- objects(envir = code_env, all.names = TRUE)
+        objects_in_code <- names(code_env)
 
         ## Does the package have a namespace?
         ## These days all packages have namespaces, but some are
@@ -1563,7 +1563,7 @@ function(package, dir, lib.loc = NULL)
         sys_data_file <- file.path(code_dir, "sysdata.rda")
         if(file_test("-f", sys_data_file)) load(sys_data_file, code_env)
 
-        objects_in_code <- objects(envir = code_env, all.names = TRUE)
+        objects_in_code <- names(code_env)
 
         ## Do the package sources have a NAMESPACE file?
         if(file.exists(file.path(dir, "NAMESPACE"))) {
@@ -2231,7 +2231,7 @@ function(package, dir, lib.loc = NULL)
             .load_package_quietly(package, lib.loc)
         code_env <- .package_env(package)
 
-        objects_in_code <- objects(envir = code_env, all.names = TRUE)
+        objects_in_code <- sort(names(code_env))
 
         ## Does the package have a namespace?
         if(packageHasNamespace(package, dirname(dir))) {
@@ -2270,7 +2270,7 @@ function(package, dir, lib.loc = NULL)
         sys_data_file <- file.path(code_dir, "sysdata.rda")
         if(file_test("-f", sys_data_file)) load(sys_data_file, code_env)
 
-        objects_in_code <- objects(envir = code_env, all.names = TRUE)
+        objects_in_code <- names(code_env)
 
         ## Does the package have a NAMESPACE file?
         if(file.exists(file.path(dir, "NAMESPACE"))) {
@@ -2464,7 +2464,7 @@ function(x, ...)
       if(report_S3_methods_not_registered &&
          length(methods <- attr(x, "methods_not_registered_but_exported"))) {
           c(gettext("Found the following apparent S3 methods exported but not registered:", domain = "R-tools"),
-            strwrap(paste(methods, collapse = " "),
+            strwrap(paste(sort(methods), collapse = " "),
                     exdent = 2L, indent = 2L))
       }
       )
@@ -2537,7 +2537,7 @@ function(package, dir, lib.loc = NULL)
         }
     }
 
-    objects_in_code <- objects(envir = code_env, all.names = TRUE)
+    objects_in_code <- names(code_env)
     replace_funs <- character()
 
     if(has_namespace) {
@@ -5591,15 +5591,13 @@ function(package, dir, lib.loc = NULL)
     bad_examples <- character()
 
     find_bad_closures <- function(env) {
-        objects_in_env <- objects(env, all.names = TRUE)
-        x <- lapply(objects_in_env,
-                    function(o) {
-                        v <- get(o, envir = env)
+        objects_in_env <- names(env)
+        x <- lapply(as.list(env, all.names=TRUE),
+                    function(v) {
                         if (typeof(v) == "closure")
                             codetools::findGlobals(v)
                     })
-        objects_in_env[sapply(x,
-                              function(s) any(s %in% c("T", "F")))]
+        names(x)[sapply(x, function(s) any(s %in% c("T", "F")))]
     }
 
     find_bad_examples <- function(txts) {
@@ -5709,14 +5707,13 @@ function(package, dir, lib.loc = NULL, details = TRUE)
     bad_closures <- character()
 
     find_bad_closures <- function(env) {
-        objects_in_env <- objects(env, all.names = TRUE)
+        objects_in_env <- as.list(env, all.names = TRUE)
         x <- lapply(objects_in_env,
-                    function(o) {
-                        v <- get(o, envir = env)
+                    function(v) {
                         if (typeof(v) == "closure")
                             codetools::findGlobals(v)
                     })
-        objects_in_env[sapply(x, function(s) any(s %in% ".Internal"))]
+        names(x)[sapply(x, function(s) any(s %in% ".Internal"))]
     }
 
     find_bad_S4methods <- function(env) {
@@ -5965,14 +5962,13 @@ function(package, dir, lib.loc = NULL, WINDOWS = FALSE)
     found <- character()
 
     find_bad_closures <- function(env) {
-        objects_in_env <- objects(env, all.names = TRUE)
+        objects_in_env <- as.list(env, all.names = TRUE)
         x <- lapply(objects_in_env,
-                    function(o) {
-                        v <- get(o, envir = env)
+                    function(v) {
                         if (typeof(v) == "closure")
                             codetools::findGlobals(v)
                     })
-        objects_in_env[sapply(x, function(s) {
+        names(x)[sapply(x, function(s) {
             res <- any(s %in% bad)
             if(res) found <<- c(found, s)
             res
@@ -7343,9 +7339,7 @@ function(f, env)
     ## This will return a listOfMethods object: turn this into a simple
     ## list of methods named by hash-collapsed signatures.
     tab <- get(methods:::.TableMetaName(f, attr(f, "package")), envir = env)
-    nms <- objects(tab, all.names = TRUE)
-    mlist <- lapply(nms, get, envir = tab)
-    names(mlist) <- nms
+    mlist <- as.list(tab, all.names = TRUE)
     ## </FIXME>
 
     ## First, derived default methods (signature w/ "ANY").
