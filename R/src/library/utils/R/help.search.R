@@ -545,6 +545,7 @@ function(package = NULL, lib.loc = NULL,
         attr(db, "mtime") <- Sys.time()
         attr(db, "ctype") <- Sys.getlocale("LC_CTYPE")
         attr(db, "Types") <- unique(c("help", types))
+        class(db) <- "hsearch_db"
         .hsearch_db(db)
         if(verbose >= 2L) {
             message(" ", "done", domain = "R-utils")
@@ -554,7 +555,7 @@ function(package = NULL, lib.loc = NULL,
             message("... database rebuilt", domain = "R-utils")
             if(WINDOWS) {
                 close(pb)
-                on.exit() # clear closing of progress bar
+                on.exit()               # clear closing of progress bar
             }
             flush.console()
         }
@@ -563,7 +564,6 @@ function(package = NULL, lib.loc = NULL,
     db
 }
              
-
 ## this extra indirection allows the Mac GUI to replace this
 ## yet call the printhsearchInternal function.
 print.hsearch <-
@@ -579,26 +579,36 @@ function(x, ...)
         browser <- getOption("browser")
         port <- tools::startDynamicHelp(NA)
 	if (port > 0L) {
-	    url <-
-                paste0("http://127.0.0.1:", port,
-                       "/doc/html/Search?pattern=",
-                       tools:::escapeAmpersand(x$pattern),
-                       paste0("&fields.", x$fields, "=1",
-                              collapse = ""),
-                       if (!is.null(x$agrep)) paste0("&agrep=", x$agrep),
-                       if (!x$ignore.case) "&ignore.case=0",
-                       if (!identical(types,
-                                      getOption("help.search.types")))
-                           
-                           paste0("&types.", types, "=1",
-                                  collapse = ""),
-                       if (!is.null(x$package))
-                           paste0("&package=",
-                                  paste(x$package, collapse=";")),
-                       if (!identical(x$lib.loc, .libPaths()))
-                           paste0("&lib.loc=",
-                                  paste(x$lib.loc, collapse=";"))
-                       )
+            .hsearch_results(x)
+            url <- paste0("http://127.0.0.1:", port,
+                          "/doc/html/Search?results=1")
+            ## <NOTE>
+            ## Older versions used the following, which invokes the
+            ## dynamic HTML help system in a way that this calls
+            ## help.search() to give the results to be displayed.
+            ## This is now avoided by passing the (already available)
+            ## results to the dynamic help system using the dynamic
+            ## variable .hsearch_results().
+	    ## url <-
+            ##     paste0("http://127.0.0.1:", port,
+            ##            "/doc/html/Search?pattern=",
+            ##            tools:::escapeAmpersand(x$pattern),
+            ##            paste0("&fields.", x$fields, "=1",
+            ##                   collapse = ""),
+            ##            if (!is.null(x$agrep)) paste0("&agrep=", x$agrep),
+            ##            if (!x$ignore.case) "&ignore.case=0",
+            ##            if (!identical(types,
+            ##                           getOption("help.search.types")))
+            ##                paste0("&types.", types, "=1",
+            ##                       collapse = ""),
+            ##            if (!is.null(x$package))
+            ##                paste0("&package=",
+            ##                       paste(x$package, collapse=";")),
+            ##            if (!identical(x$lib.loc, .libPaths()))
+            ##                paste0("&lib.loc=",
+            ##                       paste(x$lib.loc, collapse=";"))
+            ##            )
+            ## </NOTE>
             browseURL(url, browser)
             return(invisible(x))
         }
@@ -667,10 +677,19 @@ function(x, ...)
     invisible(x)
 }
 
+.hsearch_results <- local({
+    res <- NULL
+    function(new) {
+	if(!missing(new))
+	    res <<- new
+	else
+	    res
+    }
+})
+
 hsearch_db_concepts <-
-function()
+function(db = hsearch_db())
 {
-    db <- hsearch_db()
     pos <- match(db$Concepts[, "ID"], db$Base[, "ID"])
     entries <- split(as.data.frame(db$Base[pos, ],
                                    stringsAsFactors = FALSE),
@@ -686,9 +705,8 @@ function()
 }
 
 hsearch_db_keywords <-
-function()
+function(db = hsearch_db())
 {
-    db <- hsearch_db()
     pos <- match(db$Keywords[, "ID"], db$Base[, "ID"])
     entries <- split(as.data.frame(db$Base[pos, ],
                                    stringsAsFactors = FALSE),
@@ -701,4 +719,16 @@ function()
                Packages = pnums[pos],
                stringsAsFactors = FALSE,
                row.names = NULL)
+}
+
+print.hsearch_db <- 
+function(x, ...)
+{
+    writeLines(c(gettext("A help search database:", domain = "R-utils"),
+                 gettextf("Objects: %d, Aliases: %d, Keywords: %d, Concepts: %d",
+                         NROW(x$Base),
+                         NROW(x$Aliases),
+                         NROW(x$Keywords),
+                         NROW(x$Concepts), domain = "R-utils")))
+    invisible(x)
 }

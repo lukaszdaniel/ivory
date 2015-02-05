@@ -63,9 +63,11 @@ httpd <- function(path, query, ...)
     .HTMLsearch <- function(query)
     {
     	bool <- function(x) as.logical(as.numeric(x))
-        res <- if(identical(names(query), "category"))
+        res <- if(identical(names(query), "category")) {
             help.search(keyword = query, verbose = 1L, use_UTF8 = TRUE)
-        else {
+        } else if(identical(names(query), "results")) {
+            utils:::.hsearch_results()
+        } else {
             fields <- types <- character()
             args <- list(pattern = ".")
             for (i in seq_along(query))
@@ -96,7 +98,7 @@ httpd <- function(path, query, ...)
                        types.demo =
                            if(bool(query[i]))
                                types <- c(types, "demo"),
-                       ## Not sure how to get these ...
+                       ## Possibly passed from utils:::printhsearchInternal().
                        package = args$package <- strsplit(query[i], ";")[[1L]],
                        lib.loc = args$lib.loc <- strsplit(query[i], ";")[[1L]],
                        warning("Unrecognized search field: ", names(query)[i],
