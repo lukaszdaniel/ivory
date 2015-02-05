@@ -24,7 +24,7 @@
 ##  2) We use  ':::' instead of '::' inside the code below, for efficiency only
 
 getNamespace <- function(name) {
-    ns <- .Internal(getRegisteredNamespace(as.name(name)))
+    ns <- .Internal(getRegisteredNamespace(name))
     if (! is.null(ns)) ns
     else tryCatch(loadNamespace(name), error = function(e) stop(e))
 }
@@ -84,28 +84,36 @@ getNamespaceUsers <- function(ns) {
 }
 
 getExportedValue <- function(ns, name) {
-    getInternalExportName <- function(name, ns) {
-        exports <- getNamespaceInfo(ns, "exports")
-	if (!is.null(oNam <- get0(name, envir = exports, inherits = FALSE)))
-	    get(oNam, envir = ns)
-        else {
-            ld <- getNamespaceInfo(ns, "lazydata")
+    ns <- asNamespace(ns)
+    if (isBaseNamespace(ns))
+	get(name, envir = ns, inherits = FALSE) # incl. error
+    else {
+	if (!is.null(getNamespaceInfo(ns, "exports")[[name]])) {
+	    ns[[name]]
+	} else { ##  <pkg> :: <dataset>  for lazydata :
+	    ld <- getNamespaceInfo(ns, "lazydata")
 	    if (!is.null(obj <- get0(name, envir = ld, inherits = FALSE)))
 		obj
-            else
-                stop(gettextf("%s is not an exported object from 'namespace:%s'", sQuote(name), getNamespaceName(ns)), call. = FALSE, domain = "R-base")
-        }
+	    else { ## if there's a lazydata object with value NULL:
+		if(exists(name, envir = ld, inherits = FALSE))
+		    NULL
+		else
+		    stop(gettextf("'%s' is not an exported object from 'namespace:%s'",
+				  name, getNamespaceName(ns)),
+			 call. = FALSE, domain = "R-base")
+	    }
+	}
     }
-    ns <- asNamespace(ns)
-    if (isBaseNamespace(ns)) get(name, envir = ns, inherits = FALSE)
-    else getInternalExportName(name, ns)
 }
+
 
 `::` <- function(pkg, name) {
     pkg <- as.character(substitute(pkg))
     name <- as.character(substitute(name))
     getExportedValue(pkg, name)
 }
+
+## NOTE: Both "::" and ":::" must signal an error for non existing objects
 
 `:::` <- function(pkg, name) {
     pkg <- as.character(substitute(pkg))
@@ -191,7 +199,7 @@ loadNamespace <- function (package, lib.loc = NULL,
              sQuote(package), paste(sQuote(loading), collapse = ", ")), domain = "R-base")
     "__NameSpacesLoading__" <- c(package, loading)
 
-    ns <- .Internal(getRegisteredNamespace(as.name(package)))
+    ns <- .Internal(getRegisteredNamespace(package))
     if (! is.null(ns)) {
         if(!is.null(zop <- versionCheck[["op"]]) &&
            !is.null(zversion <- versionCheck[["version"]])) {
@@ -631,7 +639,7 @@ loadNamespace <- function (package, lib.loc = NULL,
 requireNamespace <- function (package, ..., quietly = FALSE)
 {
     package <- as.character(package)[[1L]] # like loadNamespace
-    ns <- .Internal(getRegisteredNamespace(as.name(package)))
+    ns <- .Internal(getRegisteredNamespace(package))
     res <- TRUE
     if (is.null(ns)) {
         packageStartupMessage(gettextf("Loading required namespace: %s", sQuote(package), domain = "R-base"))
@@ -712,14 +720,13 @@ isBaseNamespace <- function(ns) identical(ns, .BaseNamespaceEnv)
 
 getNamespaceInfo <- function(ns, which) {
     ns <- asNamespace(ns, base.OK = FALSE)
-    info <- get(".__NAMESPACE__.", envir = ns, inherits = FALSE)
-    get(which, envir = info, inherits = FALSE)
+    ns[[".__NAMESPACE__."]][[which]]
 }
 
 setNamespaceInfo <- function(ns, which, val) {
     ns <- asNamespace(ns, base.OK = FALSE)
-    info <- get(".__NAMESPACE__.", envir = ns, inherits = FALSE)
-    assign(which, val, envir = info)
+    info <- ns[[".__NAMESPACE__."]]
+    info[[which]] <- val
 }
 
 asNamespace <- function(ns, base.OK = TRUE) {
@@ -1394,11 +1401,11 @@ registerS3methods <- function(info, package, env)
         overwrite <- overwrite[overwrite[, 2L] %in% std, , drop = FALSE]
        if(nr <- nrow(overwrite)) {
            msg <- ngettext(nr,
-                           "Registered S3 method in a standard package overwritten by '%s':",
-                           "Registered S3 methods in standard package(s) overwritten by '%s':",
+                           "Registered S3 method from a standard package overwritten by '%s':",
+                           "Registered S3 methods from standard package(s) overwritten by '%s':",
                            domain = "R-base")
            message(sprintf(msg, package))
-           colnames(overwrite) <- c("method", "package")
+           colnames(overwrite) <- c("method", "from")
            print(as.data.frame(overwrite), row.names = FALSE, right = FALSE)
        }
     }
