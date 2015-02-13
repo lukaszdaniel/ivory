@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-117\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-01-18 21:31\n"
+"POT-Creation-Date: 2015-02-13 16:25\n"
 "PO-Revision-Date: 2014-07-05 16:08+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-Bookmarks: -1,-1,-1,72,-1,-1,-1,-1,-1,-1\n"
 
-#. R/gls.R: gettextf("%s and %s must have the same group levels", sQuote(c1),     sQuote(c2))
+#. R/gls.R: gettextf("%s and %s must have the same group levels", sQuote(c1), sQuote(c2))
 #: R/gls.R:0
 msgid "%s and %s must have the same group levels"
 msgstr "%s oraz %s muszą mieć te same poziomy grup"
@@ -56,7 +56,7 @@ msgstr "%s musi posiadać nazwy grup w funkcji 'varConstPower()'"
 msgid "%s parameters:"
 msgstr "parametry %s:"
 
-#. R/lme.R: gettextf("%s problem, convergence error code = %s\n  message = %s",     controlvals$opt, optRes$convergence, paste(optRes$message,         collapse = ""))
+#. R/lme.R: gettextf("%s problem, convergence error code = %s\n  message = %s", controlvals$opt,     optRes$convergence, paste(optRes$message, collapse = ""))
 #: R/lme.R:0
 msgid ""
 "%s problem, convergence error code = %s\n"
@@ -75,16 +75,16 @@ msgstr ""
 "%s bez \"primary\" może być użyte jedynie z dopasowaniami obiektów "
 "\"groupedData\""
 
-#. R/newMethods.R: gettextf("'%s' and '%s' arguments have incompatible lengths",     "distance", "object")
-#. R/pdMat.R: gettextf("'%s' and '%s' arguments have incompatible lengths",     "form", "nam")
-#. R/pdMat.R: gettextf("'%s' and '%s' arguments have incompatible lengths",     "form", "pdClass")
-#. R/pdMat.R: gettextf("'%s' and '%s' arguments have incompatible lengths",     "nam", "pdClass")
+#. R/newMethods.R: gettextf("'%s' and '%s' arguments have incompatible lengths", "distance", "object")
+#. R/pdMat.R: gettextf("'%s' and '%s' arguments have incompatible lengths", "form", "nam")
+#. R/pdMat.R: gettextf("'%s' and '%s' arguments have incompatible lengths", "form", "pdClass")
+#. R/pdMat.R: gettextf("'%s' and '%s' arguments have incompatible lengths", "nam", "pdClass")
 #: R/newMethods.R:0 R/pdMat.R:0
 msgid "'%s' and '%s' arguments have incompatible lengths"
 msgstr "argumenty '%s' oraz '%s' mają niezgodne długości"
 
-#. R/newMethods.R: gettextf("'%s' argument can only be a formula or a list of formulae",     "form")
-#. R/pdMat.R: gettextf("'%s' argument can only be a formula or a list of formulae",     "form")
+#. R/newMethods.R: gettextf("'%s' argument can only be a formula or a list of formulae", "form")
+#. R/pdMat.R: gettextf("'%s' argument can only be a formula or a list of formulae", "form")
 #: R/newMethods.R:0 R/pdMat.R:0
 msgid "'%s' argument can only be a formula or a list of formulae"
 msgstr "argument '%s' może być jedynie formułą lub listą formuł"
@@ -115,7 +115,7 @@ msgstr "argument '%s' może być jedynie formułą lub wektorem"
 msgid "'%s' argument can only be a formula or numeric"
 msgstr "argument '%s' może być jedynie formułą lub liczbą"
 
-#. R/newFunc.R: gettextf("'%s' argument can only be a function or a list of functions",     "FUN")
+#. R/newFunc.R: gettextf("'%s' argument can only be a function or a list of functions", "FUN")
 #: R/newFunc.R:0
 msgid "'%s' argument can only be a function or a list of functions"
 msgstr "argument '%s' może być jedynie funkcją lub listą funkcji"
@@ -127,26 +127,26 @@ msgstr "argument '%s' może być jedynie funkcją lub listą funkcji"
 msgid "'%s' argument can only be character or integer"
 msgstr "argument '%s' może być jedynie znakiem lub liczbą całkowitą"
 
-#. R/gls.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("gls"))
-#. R/gnls.R: gettextf("'%s' argument is not an object of class %s", "model",     dQuote("formula"))
-#. R/lmList.R: gettextf("'%s' argument is not an object of class %s", "form",     dQuote("formula"))
-#. R/lmList.R: gettextf("'%s' argument is not an object of class %s", "form",     dQuote("formula"))
-#. R/lmList.R: gettextf("'%s' argument is not an object of class %s", "form",     dQuote("formula"))
-#. R/lme.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("lme"))
-#. R/lme.R: gettextf("'%s' argument is not an object of class %s", "form",     dQuote("formula"))
-#. R/lme.R: gettextf("'%s' argument is not an object of class %s", "form",     dQuote("formula"))
-#. R/newFunc.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("data.frame"))
-#. R/newFunc.R: gettextf("'%s' argument is not an object of class %s", "form",     dQuote("formula"))
-#. R/newFunc.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("formula"))
-#. R/newFunc.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("data.frame"))
-#. R/newFunc.R: gettextf("'%s' argument is not an object of class %s", "form",     dQuote("fomrula"))
-#. R/newFunc.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("lmList"))
-#. R/newMethods.R: gettextf("'%s' argument is not an object of class %s", "form",     dQuote("formula"))
-#. R/newMethods.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("formula"))
-#. R/newMethods.R: gettextf("'%s' argument is not an object of class %s", "form",     dQuote("formula"))
-#. R/newMethods.R: gettextf("'%s' argument is not an object of class %s", "form",     dQuote("formula"))
-#. R/nlme.R: gettextf("'%s' argument is not an object of class %s", "model",     dQuote("formula"))
-#. R/varFunc.R: gettextf("'%s' argument is not an object of class %s", "value",     dQuote("formula"))
+#. R/gls.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("gls"))
+#. R/gnls.R: gettextf("'%s' argument is not an object of class %s", "model", dQuote("formula"))
+#. R/lmList.R: gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula"))
+#. R/lmList.R: gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula"))
+#. R/lmList.R: gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula"))
+#. R/lme.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("lme"))
+#. R/lme.R: gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula"))
+#. R/lme.R: gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula"))
+#. R/newFunc.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("data.frame"))
+#. R/newFunc.R: gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula"))
+#. R/newFunc.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("formula"))
+#. R/newFunc.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("data.frame"))
+#. R/newFunc.R: gettextf("'%s' argument is not an object of class %s", "form", dQuote("fomrula"))
+#. R/newFunc.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("lmList"))
+#. R/newMethods.R: gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula"))
+#. R/newMethods.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("formula"))
+#. R/newMethods.R: gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula"))
+#. R/newMethods.R: gettextf("'%s' argument is not an object of class %s", "form", dQuote("formula"))
+#. R/nlme.R: gettextf("'%s' argument is not an object of class %s", "model", dQuote("formula"))
+#. R/varFunc.R: gettextf("'%s' argument is not an object of class %s", "value", dQuote("formula"))
 #: R/gls.R:0 R/gnls.R:0 R/lmList.R:0 R/lme.R:0 R/newFunc.R:0 R/newMethods.R:0
 #: R/nlme.R:0 R/varFunc.R:0
 msgid "'%s' argument is not an object of class %s"
@@ -175,8 +175,8 @@ msgstr ""
 "wymagany jest argument '%s' w celu obliczenia zmiennej wyjaśniającej obiektu "
 "klasy %s"
 
-#. R/corStruct.R: gettextf("'%s' argument must be > 0 in %s initial value", "range",     dQuote("corSpatial"))
-#. R/corStruct.R: gettextf("'%s' argument must be > 0 in %s initial value", "range",     dQuote("corLin"))
+#. R/corStruct.R: gettextf("'%s' argument must be > 0 in %s initial value", "range", dQuote("corSpatial"))
+#. R/corStruct.R: gettextf("'%s' argument must be > 0 in %s initial value", "range", dQuote("corLin"))
 #: R/corStruct.R:0
 msgid "'%s' argument must be > 0 in %s initial value"
 msgstr "argument '%s' musi być > 0 w początkowej wartości %s"
@@ -186,9 +186,9 @@ msgstr "argument '%s' musi być > 0 w początkowej wartości %s"
 msgid "'%s' argument must be a character vector"
 msgstr "argument '%s' musi być wektorem tekstowym"
 
-#. R/gnls.R: gettextf("'%s' argument must be a formula or list of formulae",     "params")
-#. R/nlme.R: gettextf("'%s' argument must be a formula or list of formulae",     "fixed")
-#. R/nlme.R: gettextf("'%s' argument must be a formula or list of formulae",     "random")
+#. R/gnls.R: gettextf("'%s' argument must be a formula or list of formulae", "params")
+#. R/nlme.R: gettextf("'%s' argument must be a formula or list of formulae", "fixed")
+#. R/nlme.R: gettextf("'%s' argument must be a formula or list of formulae", "random")
 #: R/gnls.R:0 R/nlme.R:0
 msgid "'%s' argument must be a formula or list of formulae"
 msgstr "argument '%s' musi być formułą lub listą formuł"
@@ -223,7 +223,7 @@ msgstr "argument '%s' musi być jednostronną formułą"
 msgid "'%s' argument must be a two-sided formula"
 msgstr "argument '%s' musi być dwustronną formułą"
 
-#. R/nlsList.R: gettextf("'%s' argument must be an object of class %s", "data",     dQuote("groupedData"))
+#. R/nlsList.R: gettextf("'%s' argument must be an object of class %s", "data", dQuote("groupedData"))
 #: R/nlsList.R:0
 msgid "'%s' argument must be an object of class %s"
 msgstr "argument '%s' musi być obiektem klasy %s"
@@ -244,23 +244,23 @@ msgid ""
 msgstr ""
 "argument '%s' musi być obiektem klasy %s jeśli brakuje argumentu 'groups'"
 
-#. R/gls.R: gettextf("'%s' argument must be between %d and %d", "Terms",     1, nTerms)
-#. R/lmList.R: gettextf("'%s' argument must be between %d and %d", "id", 0,     1)
-#. R/lmList.R: gettextf("'%s' argument must be between %d and %d", "id", 0,     1)
-#. R/lmList.R: gettextf("'%s' argument must be between %d and %d", "id", 0,     1)
-#. R/lmList.R: gettextf("'%s' argument must be between %d and %d", "id", 0,     1)
-#. R/lme.R: gettextf("'%s' argument must be between %d and %d", "Terms",     1, nTerms)
-#. R/lme.R: gettextf("'%s' argument must be between %d and %d", "id", 0,     1)
-#. R/lme.R: gettextf("'%s' argument must be between %d and %d", "id", 0,     1)
-#. R/lme.R: gettextf("'%s' argument must be between %d and %d", "id", 0,     1)
-#. R/newFunc.R: gettextf("'%s' argument must be between %d and %d", "which",     1, ncol(object))
-#. R/newMethods.R: gettextf("'%s' argument must be between %d and %d", "id", 0,     1)
-#. R/newMethods.R: gettextf("'%s' argument must be between %d and %d", "id", 0,     1)
+#. R/gls.R: gettextf("'%s' argument must be between %d and %d", "Terms", 1, nTerms)
+#. R/lmList.R: gettextf("'%s' argument must be between %d and %d", "id", 0, 1)
+#. R/lmList.R: gettextf("'%s' argument must be between %d and %d", "id", 0, 1)
+#. R/lmList.R: gettextf("'%s' argument must be between %d and %d", "id", 0, 1)
+#. R/lmList.R: gettextf("'%s' argument must be between %d and %d", "id", 0, 1)
+#. R/lme.R: gettextf("'%s' argument must be between %d and %d", "Terms", 1, nTerms)
+#. R/lme.R: gettextf("'%s' argument must be between %d and %d", "id", 0, 1)
+#. R/lme.R: gettextf("'%s' argument must be between %d and %d", "id", 0, 1)
+#. R/lme.R: gettextf("'%s' argument must be between %d and %d", "id", 0, 1)
+#. R/newFunc.R: gettextf("'%s' argument must be between %d and %d", "which", 1, ncol(object))
+#. R/newMethods.R: gettextf("'%s' argument must be between %d and %d", "id", 0, 1)
+#. R/newMethods.R: gettextf("'%s' argument must be between %d and %d", "id", 0, 1)
 #: R/gls.R:0 R/lmList.R:0 R/lme.R:0 R/newFunc.R:0 R/newMethods.R:0
 msgid "'%s' argument must be between %d and %d"
 msgstr "argument '%s' musi być pomiędzy %d a %d"
 
-#. R/nlme.R: gettextf("'%s' argument must be given explicitly to use %s function",     "data", sQuote("nlsList()"))
+#. R/nlme.R: gettextf("'%s' argument must be given explicitly to use %s function", "data", sQuote("nlsList()"))
 #: R/nlme.R:0
 msgid "'%s' argument must be given explicitly to use %s function"
 msgstr "argument '%s' musi być podany bezpośrednio aby użyć funkcji %s"
@@ -288,19 +288,19 @@ msgstr "argument '%s' musi posiadać zmienną niezależną"
 msgid "'%s' argument must have a formula"
 msgstr "argument '%s' musi posiadać formułę"
 
-#. R/newMethods.R: gettextf("'%s' argument must have all components as formulae",     "form")
+#. R/newMethods.R: gettextf("'%s' argument must have all components as formulae", "form")
 #: R/newMethods.R:0
 msgid "'%s' argument must have all components as formulae"
 msgstr ""
 "argument '%s' musi mieć wszystkie komponenty przedstawione jako formuły"
 
-#. R/VarCov.R: gettextf("'%s' function is not implemented for multiple levels of nesting",     "getVarCov.lme()")
+#. R/VarCov.R: gettextf("'%s' function is not implemented for multiple levels of nesting", "getVarCov.lme()")
 #: R/VarCov.R:0
 msgid "'%s' function is not implemented for multiple levels of nesting"
 msgstr ""
 "funkcja '%s' nie jest zaimplementowana dla wielu poziomów zagnieżdżenia"
 
-#. R/VarCov.R: gettextf("'%s' function is not implemented for objects of class %s",     "getVarCov.lme()", dQuote("nlme"))
+#. R/VarCov.R: gettextf("'%s' function is not implemented for objects of class %s", "getVarCov.lme()",     dQuote("nlme"))
 #: R/VarCov.R:0
 msgid "'%s' function is not implemented for objects of class %s"
 msgstr "funkcja '%s' nie jest zaimplementowana dla obiektów klasy %s"
@@ -408,15 +408,15 @@ msgstr ""
 "Dopasowanie lm nie powiodło się, prawdopodobnie dlatego, że czynnik miał "
 "tylko jeden poziom"
 
-#. R/gls.R: gettextf("Approximate %s %% confidence intervals", attr(x, "level") *     100, domain = "R-nlme")
-#. R/lme.R: gettextf("Approximate %s %% confidence intervals", attr(x, "level") *     100, domain = "R-nlme")
+#. R/gls.R: gettextf("Approximate %s %% confidence intervals", attr(x, "level") * 100, domain = "R-nlme")
+#. R/lme.R: gettextf("Approximate %s %% confidence intervals", attr(x, "level") * 100, domain = "R-nlme")
 #: R/gls.R:0 R/lme.R:0
 msgid "Approximate %s %% confidence intervals"
 msgstr "Przybliżone %s %% przedziały ufności"
 
-#. R/gls.R: gettext("Approximate variance-covariance matrix not available",     domain = "R-nlme")
-#. R/gnls.R: gettext("Approximate variance-covariance matrix not available",     domain = "R-nlme")
-#. R/lme.R: gettext("Approximate variance-covariance matrix not available",     domain = "R-nlme")
+#. R/gls.R: gettext("Approximate variance-covariance matrix not available", domain = "R-nlme")
+#. R/gnls.R: gettext("Approximate variance-covariance matrix not available", domain = "R-nlme")
+#. R/lme.R: gettext("Approximate variance-covariance matrix not available", domain = "R-nlme")
 #: R/gls.R:0 R/gnls.R:0 R/lme.R:0
 msgid "Approximate variance-covariance matrix not available"
 msgstr "Przybliżona macierz wariancji-kowiariancji nie jest dostępna"
@@ -502,8 +502,8 @@ msgstr "Zbieżność:"
 msgid "Correlation Structure: General"
 msgstr "Struktura korelacji: Ogólna"
 
-#. R/corStruct.R: gettextf("Correlation structure of class %s representing", dQuote(class(x)[1]),     domain = "R-nlme")
-#. R/corStruct.R: gettextf("Correlation structure of class %s representing", dQuote("corSymm"),     domain = "R-nlme")
+#. R/corStruct.R: gettextf("Correlation structure of class %s representing", dQuote(class(x)[1]), domain = "R-nlme")
+#. R/corStruct.R: gettextf("Correlation structure of class %s representing", dQuote("corSymm"), domain = "R-nlme")
 #. R/corStruct.R: gettextf("Correlation structure of class %s representing", dQuote("corNatural"),     domain = "R-nlme")
 #: R/corStruct.R:0
 msgid "Correlation structure of class %s representing"
@@ -533,9 +533,9 @@ msgstr "Korelacja:"
 msgid "Data:"
 msgstr "Dane:"
 
-#. R/gls.R: gettextf("Degrees of freedom: %s total; %s residual", dd[["N"]],     dd[["N"]] - dd[["p"]], domain = "R-nlme")
-#. R/gls.R: gettextf("Degrees of freedom: %s total; %s residual", dd[["N"]],     dd[["N"]] - dd[["p"]], domain = "R-nlme")
-#. R/lmList.R: gettextf("Degrees of freedom: %s total; %s residual", length(unlist(lapply(x,     fitted))), dfRes, domain = "R-nlme")
+#. R/gls.R: gettextf("Degrees of freedom: %s total; %s residual", dd[["N"]], dd[["N"]] - dd[["p"]],     domain = "R-nlme")
+#. R/gls.R: gettextf("Degrees of freedom: %s total; %s residual", dd[["N"]], dd[["N"]] - dd[["p"]],     domain = "R-nlme")
+#. R/lmList.R: gettextf("Degrees of freedom: %s total; %s residual", length(unlist(lapply(x, fitted))),     dfRes, domain = "R-nlme")
 #: R/gls.R:0 R/lmList.R:0
 msgid "Degrees of freedom: %s total; %s residual"
 msgstr "Stopnie swobody: całość %s, %s reszt"
@@ -616,7 +616,7 @@ msgstr "Gaussowska korelacja przestrzenna"
 msgid "General correlation"
 msgstr "Ogólna korelacja"
 
-#. R/corStruct.R: gettext("General correlation, with natural parametrization",     domain = "R-nlme")
+#. R/corStruct.R: gettext("General correlation, with natural parametrization", domain = "R-nlme")
 #: R/corStruct.R:0
 msgid "General correlation, with natural parametrization"
 msgstr "Ogólna korelacja z naturalną parametryzacją"
@@ -628,8 +628,8 @@ msgid "Generalized least squares fit by REML"
 msgstr ""
 "Uogólnione dopasowanie metodą najmniejszych kwadratów ze względu na REML"
 
-#. R/gls.R: gettext("Generalized least squares fit by maximum likelihood",     domain = "R-nlme")
-#. R/gls.R: gettext("Generalized least squares fit by maximum likelihood",     domain = "R-nlme")
+#. R/gls.R: gettext("Generalized least squares fit by maximum likelihood", domain = "R-nlme")
+#. R/gls.R: gettext("Generalized least squares fit by maximum likelihood", domain = "R-nlme")
 #: R/gls.R:0
 msgid "Generalized least squares fit by maximum likelihood"
 msgstr ""
@@ -670,7 +670,7 @@ msgstr ""
 "'L' może zawierać jedynie stałe efekty z tą samą liczbą stopni swobody "
 "mianownika"
 
-#. R/nlme.R: gettextf("LME step: Loglik: %s, nlm iterations: %d", format(nlmeFit$logLik),     convIter, domain = "R-nlme")
+#. R/nlme.R: gettextf("LME step: Loglik: %s, nlm iterations: %d", format(nlmeFit$logLik), convIter,     domain = "R-nlme")
 #: R/nlme.R:0
 msgid "LME step: Loglik: %s, nlm iterations: %d"
 msgstr "krok LME: Logarytm funkcji wiarygodności: %s, iteracje nlm: %d"
@@ -706,8 +706,8 @@ msgstr "Poziom:"
 msgid "Linear mixed-effects model fit by REML"
 msgstr "Liniowe dopasowanie modelu mieszanych efektów ze względnu na REML"
 
-#. R/lme.R: gettext("Linear mixed-effects model fit by maximum likelihood",     domain = "R-nlme")
-#. R/lme.R: gettext("Linear mixed-effects model fit by maximum likelihood",     domain = "R-nlme")
+#. R/lme.R: gettext("Linear mixed-effects model fit by maximum likelihood", domain = "R-nlme")
+#. R/lme.R: gettext("Linear mixed-effects model fit by maximum likelihood", domain = "R-nlme")
 #: R/lme.R:0
 msgid "Linear mixed-effects model fit by maximum likelihood"
 msgstr ""
@@ -747,9 +747,9 @@ msgstr "Model:"
 msgid "NLS step: RSS = %s"
 msgstr "krok NLS: RSS = %s"
 
-#. R/gls.R: gettext("Non-positive definite approximate variance-covariance",     domain = "R-nlme")
-#. R/gnls.R: gettext("Non-positive definite approximate variance-covariance",     domain = "R-nlme")
-#. R/lme.R: gettext("Non-positive definite approximate variance-covariance",     domain = "R-nlme")
+#. R/gls.R: gettext("Non-positive definite approximate variance-covariance", domain = "R-nlme")
+#. R/gnls.R: gettext("Non-positive definite approximate variance-covariance", domain = "R-nlme")
+#. R/lme.R: gettext("Non-positive definite approximate variance-covariance", domain = "R-nlme")
 #: R/gls.R:0 R/gnls.R:0 R/lme.R:0
 msgid "Non-positive definite approximate variance-covariance"
 msgstr "Niedodatnio określona przybliżona macierz wariancji-kowariancji"
@@ -760,8 +760,8 @@ msgstr "Niedodatnio określona przybliżona macierz wariancji-kowariancji"
 msgid "Nonlinear mixed-effects model fit by REML"
 msgstr "Nieliniowe dopasowanie modelu mieszanych efektów ze względu na REML"
 
-#. R/lme.R: gettext("Nonlinear mixed-effects model fit by maximum likelihood",     domain = "R-nlme")
-#. R/lme.R: gettext("Nonlinear mixed-effects model fit by maximum likelihood",     domain = "R-nlme")
+#. R/lme.R: gettext("Nonlinear mixed-effects model fit by maximum likelihood", domain = "R-nlme")
+#. R/lme.R: gettext("Nonlinear mixed-effects model fit by maximum likelihood", domain = "R-nlme")
 #: R/lme.R:0
 msgid "Nonlinear mixed-effects model fit by maximum likelihood"
 msgstr ""
@@ -808,7 +808,7 @@ msgstr "krok PNLS: RSS = %s"
 msgid "Parameter estimates:"
 msgstr "Oszacowania parametrów:"
 
-#. R/pdMat.R: gettextf("Positive definite matrix structure of class %s representing",     dQuote(class(x)[1]), domain = "R-nlme")
+#. R/pdMat.R: gettextf("Positive definite matrix structure of class %s representing", dQuote(class(x)[1]),     domain = "R-nlme")
 #: R/pdMat.R:0
 msgid "Positive definite matrix structure of class %s representing"
 msgstr "Struktura dodatnio określonej macierzy klasy reprezentującej %s"
@@ -866,7 +866,7 @@ msgstr "Wymierna kwadratowa korelacja przestrzenna"
 msgid "Residual standard error:"
 msgstr "Standardowy błąd reszt:"
 
-#. R/lmList.R: gettextf("Residual standard error: %s on %s degrees of freedom",     format(x$RSE), x$df.residual, domain = "R-nlme")
+#. R/lmList.R: gettextf("Residual standard error: %s on %s degrees of freedom", format(x$RSE), x$df.residual,     domain = "R-nlme")
 #: R/lmList.R:0
 msgid "Residual standard error: %s on %s degrees of freedom"
 msgstr "Standardowy błąd reszt: %s dla %s stopni swobody"
@@ -942,15 +942,15 @@ msgid "Subset:"
 msgstr "Podzbiór:"
 
 #. R/corStruct.R: gettextf("Uninitialized correlation structure of class %s", dQuote(class(x)[1]),     domain = "R-nlme")
-#. R/corStruct.R: gettextf("Uninitialized correlation structure of class %s", dQuote("corSymm"),     domain = "R-nlme")
-#. R/corStruct.R: gettextf("Uninitialized correlation structure of class %s", dQuote("corSymm"),     domain = "R-nlme")
+#. R/corStruct.R: gettextf("Uninitialized correlation structure of class %s", dQuote("corSymm"), domain = "R-nlme")
+#. R/corStruct.R: gettextf("Uninitialized correlation structure of class %s", dQuote("corSymm"), domain = "R-nlme")
 #. R/corStruct.R: gettextf("Uninitialized correlation structure of class %s", dQuote("corNatural"),     domain = "R-nlme")
 #. R/corStruct.R: gettextf("Uninitialized correlation structure of class %s", dQuote("corNatural"),     domain = "R-nlme")
 #: R/corStruct.R:0
 msgid "Uninitialized correlation structure of class %s"
 msgstr "Niezainicjalizowana struktura korelacji klasy %s"
 
-#. R/pdMat.R: gettextf("Uninitialized positive definite matrix structure of class %s.",     dQuote(class(x)[1]), domain = "R-nlme")
+#. R/pdMat.R: gettextf("Uninitialized positive definite matrix structure of class %s.", dQuote(class(x)[1]),     domain = "R-nlme")
 #: R/pdMat.R:0
 msgid "Uninitialized positive definite matrix structure of class %s."
 msgstr "Niezainicjalizowana struktura dodatnio określonej macierzy klasy  %s"
@@ -960,7 +960,7 @@ msgstr "Niezainicjalizowana struktura dodatnio określonej macierzy klasy  %s"
 msgid "Uninitialized random effects structure"
 msgstr "Niezainicjalizowana struktura efektów losowych"
 
-#. R/varFunc.R: gettextf("Variance function structure of class %s representing",     dQuote(class(x)[1]), domain = "R-nlme")
+#. R/varFunc.R: gettextf("Variance function structure of class %s representing", dQuote(class(x)[1]),     domain = "R-nlme")
 #: R/varFunc.R:0
 msgid "Variance function structure of class %s representing"
 msgstr "Struktura funkcji wariancji klasy reprezentującej %s"
@@ -994,7 +994,7 @@ msgstr ""
 "wszystkie argumenty przekazywane do funkcji 'varComb()' muszą być klasy "
 "\"varFunc\""
 
-#. R/pdMat.R: gettextf("all elements in the argument must generate objects of class %s",     dQuote("pdMat"))
+#. R/pdMat.R: gettextf("all elements in the argument must generate objects of class %s", dQuote("pdMat"))
 #: R/pdMat.R:0
 msgid "all elements in the argument must generate objects of class %s"
 msgstr "wszystkie elementy w argumencie muszą tworzyć obiekty klasy %s"
@@ -1019,7 +1019,7 @@ msgstr "wszystkie elementy muszą mieć nazwy, gdy którykolwiek posiada"
 msgid "all elements of 'form' list must be two-sided formulas"
 msgstr "wszystkie elementy listy 'form' muszą być dwustronnymi formułami"
 
-#. R/reStruct.R: gettextf("all elements of an object of class %s must have a non-zero size",     dQuote("reStruct"))
+#. R/reStruct.R: gettextf("all elements of an object of class %s must have a non-zero size", dQuote("reStruct"))
 #: R/reStruct.R:0
 msgid "all elements of an object of class %s must have a non-zero size"
 msgstr "wszystkie elementy obiektu klasy %s muszą mieć niezerowy rozmiar"
@@ -1049,16 +1049,16 @@ msgid "all variables used in 'object' argument must be in 'data' argument"
 msgstr ""
 "wszystkie zmienne użyte w argumencie 'object' muszą być w argumencie 'data'"
 
-#. R/pdMat.R: gettextf("an object of length %d does not match a Cholesky factor",     length(val))
+#. R/pdMat.R: gettextf("an object of length %d does not match a Cholesky factor", length(val))
 #: R/pdMat.R:0
 msgid "an object of length %d does not match a Cholesky factor"
 msgstr "obiekt o długości %d nie zgadza się z czynnikiem Cholesky'ego"
 
-#. R/pdMat.R: gettextf("an object of length %d does not match the required parameter size",     length(val))
-#. R/pdMat.R: gettextf("an object of length %d does not match the required parameter size",     length(val))
-#. R/pdMat.R: gettextf("an object of length %d does not match the required parameter size",     length(val))
-#. R/pdMat.R: gettextf("an object of length %d does not match the required parameter size",     length(val))
-#. R/pdMat.R: gettextf("an object of length %d does not match the required parameter size",     length(val))
+#. R/pdMat.R: gettextf("an object of length %d does not match the required parameter size", length(val))
+#. R/pdMat.R: gettextf("an object of length %d does not match the required parameter size", length(val))
+#. R/pdMat.R: gettextf("an object of length %d does not match the required parameter size", length(val))
+#. R/pdMat.R: gettextf("an object of length %d does not match the required parameter size", length(val))
+#. R/pdMat.R: gettextf("an object of length %d does not match the required parameter size", length(val))
 #: R/pdMat.R:0
 msgid "an object of length %d does not match the required parameter size"
 msgstr "obiekt o długości %d nie zgadza się z wymaganym rozmiarem parametru"
@@ -1108,9 +1108,9 @@ msgstr ""
 "można stworzyć jedynie obiekt klasy \"varFunc\" z innego obiektu klasy "
 "\"varFunc\", formuły lub łańcucha tekstowego"
 
-#. R/lme.R: gettextf("can only fit objects of class %s with single grouping variable",     dQuote("lmList"))
-#. R/lme.R: gettextf("can only fit objects of class %s with single grouping variable",     dQuote("lmList"))
-#. R/nlme.R: gettextf("can only fit objects of class %s with single grouping variable",     dQuote("nlsList"))
+#. R/lme.R: gettextf("can only fit objects of class %s with single grouping variable", dQuote("lmList"))
+#. R/lme.R: gettextf("can only fit objects of class %s with single grouping variable", dQuote("lmList"))
+#. R/nlme.R: gettextf("can only fit objects of class %s with single grouping variable", dQuote("nlsList"))
 #: R/lme.R:0 R/nlme.R:0
 msgid "can only fit objects of class %s with single grouping variable"
 msgstr ""
@@ -1167,9 +1167,9 @@ msgstr ""
 msgid "cannot change dimensions on an initialized \"pdMat\" object"
 msgstr "nie można zmienić wymiarów zainicjalizowanego obiektu klasy \"pdMat\""
 
-#. R/pdMat.R: gettextf("cannot change parameter length of initialized object of class %s",     dQuote("pdMat"))
-#. R/reStruct.R: gettextf("cannot change parameter length of initialized object of class %s",     dQuote("reStruct"))
-#. R/varFunc.R: gettextf("cannot change parameter length of initialized object of class %s",     dQuote("varComb"))
+#. R/pdMat.R: gettextf("cannot change parameter length of initialized object of class %s", dQuote("pdMat"))
+#. R/reStruct.R: gettextf("cannot change parameter length of initialized object of class %s", dQuote("reStruct"))
+#. R/varFunc.R: gettextf("cannot change parameter length of initialized object of class %s", dQuote("varComb"))
 #: R/pdMat.R:0 R/reStruct.R:0 R/varFunc.R:0
 msgid "cannot change parameter length of initialized object of class %s"
 msgstr "nie można zmienić długości parametru zainicjowanych obiektów klasy %s"
@@ -1185,9 +1185,9 @@ msgid "cannot change the length of covariate in \"varFunc\" object"
 msgstr ""
 "nie można zmienić długości zmiennej niezależnej w obiekcie klasy \"varFunc\""
 
-#. R/varFunc.R: gettextf("cannot change the length of the %s parameter after initialization",     dQuote("varIdent"))
-#. R/varFunc.R: gettextf("cannot change the length of the %s parameter after initialization",     dQuote("varStruct"))
-#. R/varFunc.R: gettextf("cannot change the length of the %s parameter after initialization",     dQuote("varExp"))
+#. R/varFunc.R: gettextf("cannot change the length of the %s parameter after initialization", dQuote("varIdent"))
+#. R/varFunc.R: gettextf("cannot change the length of the %s parameter after initialization", dQuote("varStruct"))
+#. R/varFunc.R: gettextf("cannot change the length of the %s parameter after initialization", dQuote("varExp"))
 #: R/varFunc.R:0
 msgid "cannot change the length of the %s parameter after initialization"
 msgstr "nie można zmienić długości parametru %s po jego zainicjowaniu"
@@ -1199,13 +1199,13 @@ msgstr "nie można zmienić długości parametru %s po jego zainicjowaniu"
 msgid "cannot change the length of the parameter after initialization"
 msgstr "nie można zmienić długości parametru po jego zainicjowaniu"
 
-#. R/corStruct.R: gettextf("cannot change the length of the parameter of an object of class %s",     dQuote("corStruct"))
-#. R/corStruct.R: gettextf("cannot change the length of the parameter of an object of class %s",     dQuote("corSymm"))
-#. R/corStruct.R: gettextf("cannot change the length of the parameter of an object of class %s",     dQuote("corNatural"))
-#. R/corStruct.R: gettextf("cannot change the length of the parameter of an object of class %s",     dQuote("corAR1"))
-#. R/corStruct.R: gettextf("cannot change the length of the parameter of an object of class %s",     dQuote("corCAR1"))
-#. R/corStruct.R: gettextf("cannot change the length of the parameter of an object of class %s",     dQuote("corARMA"))
-#. R/corStruct.R: gettextf("cannot change the length of the parameter of an object of class %s",     dQuote("corCompSymm"))
+#. R/corStruct.R: gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corStruct"))
+#. R/corStruct.R: gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corSymm"))
+#. R/corStruct.R: gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corNatural"))
+#. R/corStruct.R: gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corAR1"))
+#. R/corStruct.R: gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corCAR1"))
+#. R/corStruct.R: gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corARMA"))
+#. R/corStruct.R: gettextf("cannot change the length of the parameter of an object of class %s", dQuote("corCompSymm"))
 #: R/corStruct.R:0
 msgid "cannot change the length of the parameter of an object of class %s"
 msgstr "nie można zmienić długości parametru obiektu klasy %s"
@@ -1276,11 +1276,11 @@ msgid "cannot extract the log of the determinant from an uninitialized object"
 msgstr ""
 "nie można wyodrębnić logarytmu macierzy z niezainicjalizowanego obiektu"
 
-#. R/pdMat.R: gettextf("cannot extract the matrix from an uninitialized object of class %s",     dQuote("pdDiag"))
-#. R/pdMat.R: gettextf("cannot extract the matrix from an uninitialized object of class %s",     dQuote("pdIdent"))
-#. R/pdMat.R: gettextf("cannot extract the matrix from an uninitialized object of class %s",     dQuote("pdIdent"))
-#. R/pdMat.R: gettextf("cannot extract the matrix from an uninitialized object of class %s",     dQuote("pdCompSymm"))
-#. R/pdMat.R: gettextf("cannot extract the matrix from an uninitialized object of class %s",     dQuote("pdCompSymm"))
+#. R/pdMat.R: gettextf("cannot extract the matrix from an uninitialized object of class %s", dQuote("pdDiag"))
+#. R/pdMat.R: gettextf("cannot extract the matrix from an uninitialized object of class %s", dQuote("pdIdent"))
+#. R/pdMat.R: gettextf("cannot extract the matrix from an uninitialized object of class %s", dQuote("pdIdent"))
+#. R/pdMat.R: gettextf("cannot extract the matrix from an uninitialized object of class %s", dQuote("pdCompSymm"))
+#. R/pdMat.R: gettextf("cannot extract the matrix from an uninitialized object of class %s", dQuote("pdCompSymm"))
 #: R/pdMat.R:0
 msgid "cannot extract the matrix from an uninitialized object of class %s"
 msgstr "nie można wyodrębnić macierzy z niezainicjalizowanego obiektu klasy %s"
@@ -1298,8 +1298,8 @@ msgstr "nie można wyodrębnić macierzy z niezainicjalizowanymi wymiarami"
 msgid "cannot fix variances in all groups"
 msgstr "nie można ustalić wariancji we wszystkich grupach"
 
-#. R/gls.R: gettextf("cannot get confidence intervals on var-cov components: %s",     aV)
-#. R/lme.R: gettextf("cannot get confidence intervals on var-cov components: %s",     aV)
+#. R/gls.R: gettextf("cannot get confidence intervals on var-cov components: %s", aV)
+#. R/lme.R: gettextf("cannot get confidence intervals on var-cov components: %s", aV)
 #: R/gls.R:0 R/lme.R:0
 msgid "cannot get confidence intervals on var-cov components: %s"
 msgstr "nie można uzyskać przedziałów ufności na komponentach var-cov: %s"
@@ -1425,12 +1425,12 @@ msgstr "stopnie swobody oraz wagi muszą mieć tę samą długość"
 msgid "dimnames of 'value' must match or be NULL"
 msgstr "nazwy wymiarów 'value' muszą się zgadzać lub być wartością NULL"
 
-#. R/corStruct.R: gettextf("do not know how to calculate correlation matrix of %s object",     dQuote(class(object)[1]))
+#. R/corStruct.R: gettextf("do not know how to calculate correlation matrix of %s object", dQuote(class(object)[1]))
 #: R/corStruct.R:0
 msgid "do not know how to calculate correlation matrix of %s object"
 msgstr "nie wiadomo jak policzyć macierz korelacji obiektu %s"
 
-#. R/varFunc.R: gettextf("do not know how to get coefficients for %s object",     dQuote(class(object)[1]))
+#. R/varFunc.R: gettextf("do not know how to get coefficients for %s object", dQuote(class(object)[1]))
 #: R/varFunc.R:0
 msgid "do not know how to get coefficients for %s object"
 msgstr "nie wiadomo jak uzyskać współczynniki dla obiektu %s"
@@ -1440,7 +1440,7 @@ msgstr "nie wiadomo jak uzyskać współczynniki dla obiektu %s"
 msgid "do not know how to obtain constrained coefficients"
 msgstr "nie wiadomo jak uzyskać ograniczone współczynniki"
 
-#. R/corStruct.R: gettextf("do not know how to obtain parameters of %s object",     dQuote(class(object)[1]))
+#. R/corStruct.R: gettextf("do not know how to obtain parameters of %s object", dQuote(class(object)[1]))
 #: R/corStruct.R:0
 msgid "do not know how to obtain parameters of %s object"
 msgstr "nie wiadomo jak uzyskać parametry obiektu %s"
@@ -1453,16 +1453,16 @@ msgstr ""
 "elementy w argumencie 'object' muszą być formułami lub obiektami klasy "
 "\"pdMat\""
 
-#. R/lme.R: gettextf("fewer observations than random effects in all level %s groups",     Q)
-#. R/nlme.R: gettextf("fewer observations than random effects in all level %s groups",     Q)
+#. R/lme.R: gettextf("fewer observations than random effects in all level %s groups", Q)
+#. R/nlme.R: gettextf("fewer observations than random effects in all level %s groups", Q)
 #: R/lme.R:0 R/nlme.R:0
 msgid "fewer observations than random effects in all level %s groups"
 msgstr ""
 "mniej obserwacji niż losowych efektów we wszystkich grupach w poziomie %s"
 
-#. R/groupedData.R: gettextf("first argument passed to %s function must be a two-sided formula",     sQuote("GroupedData()"))
-#. R/groupedData.R: gettextf("first argument passed to %s function must be a two-sided formula",     sQuote("nfGroupedData()"))
-#. R/groupedData.R: gettextf("first argument passed to %s function must be a two-sided formula",     sQuote("nmGroupedData()"))
+#. R/groupedData.R: gettextf("first argument passed to %s function must be a two-sided formula", sQuote("GroupedData()"))
+#. R/groupedData.R: gettextf("first argument passed to %s function must be a two-sided formula", sQuote("nfGroupedData()"))
+#. R/groupedData.R: gettextf("first argument passed to %s function must be a two-sided formula", sQuote("nmGroupedData()"))
 #: R/groupedData.R:0
 msgid "first argument passed to %s function must be a two-sided formula"
 msgstr ""
@@ -1491,11 +1491,11 @@ msgstr ""
 "ustalone nazwy parametrów w funkcji 'varIdent()' muszą być podzbiorem nazw "
 "grup"
 
-#. R/varFunc.R: gettextf("fixed parameters must have group names in %s function",     sQuote("varPower()"))
-#. R/varFunc.R: gettextf("fixed parameters must have group names in %s function",     sQuote("Initialize.varPower()"))
-#. R/varFunc.R: gettextf("fixed parameters must have group names in %s function",     sQuote("varExp()"))
-#. R/varFunc.R: gettextf("fixed parameters must have group names in %s function",     sQuote("Initialize.varExp()"))
-#. R/varFunc.R: gettextf("fixed parameters must have group names in %s function",     sQuote("Initialize.varConstPower()"))
+#. R/varFunc.R: gettextf("fixed parameters must have group names in %s function", sQuote("varPower()"))
+#. R/varFunc.R: gettextf("fixed parameters must have group names in %s function", sQuote("Initialize.varPower()"))
+#. R/varFunc.R: gettextf("fixed parameters must have group names in %s function", sQuote("varExp()"))
+#. R/varFunc.R: gettextf("fixed parameters must have group names in %s function", sQuote("Initialize.varExp()"))
+#. R/varFunc.R: gettextf("fixed parameters must have group names in %s function", sQuote("Initialize.varConstPower()"))
 #: R/varFunc.R:0
 msgid "fixed parameters must have group names in %s function"
 msgstr "ustalone parametry muszą posiadać nazwy grup w funkcji %s"
@@ -1513,12 +1513,12 @@ msgstr ""
 "model stałych efektów musi być formułą o formie \"zmienna zależna ~ zmienna "
 "niezależna\""
 
-#. R/gnls.R: gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"",     "params")
-#. R/gnls.R: gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"",     "params")
-#. R/nlme.R: gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"",     "fixed")
-#. R/nlme.R: gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"",     "fixed")
-#. R/nlme.R: gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"",     "random")
-#. R/nlme.R: gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"",     "random")
+#. R/gnls.R: gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "params")
+#. R/gnls.R: gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "params")
+#. R/nlme.R: gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "fixed")
+#. R/nlme.R: gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "fixed")
+#. R/nlme.R: gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "random")
+#. R/nlme.R: gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "random")
 #: R/gnls.R:0 R/nlme.R:0
 msgid "formulae in '%s' must be of the form \"parameter ~ expr\""
 msgstr "formuły w '%s' muszą mieć formę \"parametr ~ wyrażenie\""
@@ -1570,23 +1570,23 @@ msgstr "niezgodne długości dla nazw obiektu"
 msgid "individual %s was not used in the fit"
 msgstr "jednostka %s nie została użyta w dopasowaniu"
 
-#. R/corStruct.R: gettextf("initial value for %s parameters of wrong dimension",     dQuote("corSymm"))
-#. R/corStruct.R: gettextf("initial value for %s parameters of wrong dimension",     dQuote("corNatural"))
-#. R/corStruct.R: gettextf("initial value for %s parameters of wrong dimension",     dQuote("corSpatial"))
-#. R/corStruct.R: gettextf("initial value for %s parameters of wrong dimension",     dQuote("corSpatial"))
-#. R/corStruct.R: gettextf("initial value for %s parameters of wrong dimension",     dQuote("corLin"))
-#. R/corStruct.R: gettextf("initial value for %s parameters of wrong dimension",     dQuote("corLin"))
-#. R/corStruct.R: gettextf("initial value for %s parameters of wrong dimension",     dQuote("corSpher"))
-#. R/corStruct.R: gettextf("initial value for %s parameters of wrong dimension",     dQuote("corSpher"))
+#. R/corStruct.R: gettextf("initial value for %s parameters of wrong dimension", dQuote("corSymm"))
+#. R/corStruct.R: gettextf("initial value for %s parameters of wrong dimension", dQuote("corNatural"))
+#. R/corStruct.R: gettextf("initial value for %s parameters of wrong dimension", dQuote("corSpatial"))
+#. R/corStruct.R: gettextf("initial value for %s parameters of wrong dimension", dQuote("corSpatial"))
+#. R/corStruct.R: gettextf("initial value for %s parameters of wrong dimension", dQuote("corLin"))
+#. R/corStruct.R: gettextf("initial value for %s parameters of wrong dimension", dQuote("corLin"))
+#. R/corStruct.R: gettextf("initial value for %s parameters of wrong dimension", dQuote("corSpher"))
+#. R/corStruct.R: gettextf("initial value for %s parameters of wrong dimension", dQuote("corSpher"))
 #: R/corStruct.R:0
 msgid "initial value for %s parameters of wrong dimension"
 msgstr "początkowa wartość parametrów %s ma niepoprawny wymiar"
 
-#. R/varFunc.R: gettextf("initial value for %s should be of length %d", dQuote("varIdent"),     len)
-#. R/varFunc.R: gettextf("initial value for %s should be of length %d", dQuote("varPower"),     nStratVar)
-#. R/varFunc.R: gettextf("initial value for %s should be of length %d", dQuote("varPower"),     1)
-#. R/varFunc.R: gettextf("initial value for %s should be of length %d", dQuote("varExp"),     nStratVar)
-#. R/varFunc.R: gettextf("initial value for %s should be of length %d", dQuote("varExp"),     1)
+#. R/varFunc.R: gettextf("initial value for %s should be of length %d", dQuote("varIdent"), len)
+#. R/varFunc.R: gettextf("initial value for %s should be of length %d", dQuote("varPower"), nStratVar)
+#. R/varFunc.R: gettextf("initial value for %s should be of length %d", dQuote("varPower"), 1)
+#. R/varFunc.R: gettextf("initial value for %s should be of length %d", dQuote("varExp"), nStratVar)
+#. R/varFunc.R: gettextf("initial value for %s should be of length %d", dQuote("varExp"), 1)
 #: R/varFunc.R:0
 msgid "initial value for %s should be of length %d"
 msgstr "początkowa wartość dla %s powinna być długości %d"
@@ -1601,8 +1601,8 @@ msgstr ""
 "początkowa wartość 'range' mniejsza niż minimalna odległość. Ustawianie jej "
 "na '1.1 * min(distance)'"
 
-#. R/lme.R: gettextf("initial value for 'reStruct' overwritten in %s function",     sQuote("lme.lmList()"))
-#. R/nlme.R: gettextf("initial value for 'reStruct' overwritten in %s function",     sQuote("nlme.nlsList()"))
+#. R/lme.R: gettextf("initial value for 'reStruct' overwritten in %s function", sQuote("lme.lmList()"))
+#. R/nlme.R: gettextf("initial value for 'reStruct' overwritten in %s function", sQuote("nlme.nlsList()"))
 #: R/lme.R:0 R/nlme.R:0
 msgid "initial value for 'reStruct' overwritten in %s function"
 msgstr "początkowa wartość dla 'reStruct' nadpisana w funkcji %s"
@@ -1612,7 +1612,7 @@ msgstr "początkowa wartość dla 'reStruct' nadpisana w funkcji %s"
 msgid "initial value for parameter of wrong length"
 msgstr "początkowa wartość parametru posiada niepoprawną długość"
 
-#. R/corStruct.R: gettext("initial value in \"corCompSymm\" must be greater than %s",     domain = "R-nlme")
+#. R/corStruct.R: gettext("initial value in \"corCompSymm\" must be greater than %s", domain = "R-nlme")
 #: R/corStruct.R:0
 msgid "initial value in \"corCompSymm\" must be greater than %s"
 msgstr "początkowa wartość w \"corCompSymm\" musi być większa niż %s"
@@ -1639,7 +1639,7 @@ msgstr ""
 "początkowe wartości dla %s nie definiują dodatnio określonej struktury "
 "korelacji"
 
-#. R/corStruct.R: gettextf("initial values for %s must be between %d and %d", dQuote("corSymm"),     -1, 1)
+#. R/corStruct.R: gettextf("initial values for %s must be between %d and %d", dQuote("corSymm"), -1,     1)
 #. R/corStruct.R: gettextf("initial values for %s must be between %d and %d", dQuote("corNatural"),     -1, 1)
 #: R/corStruct.R:0
 msgid "initial values for %s must be between %d and %d"
@@ -1650,9 +1650,9 @@ msgstr "początkowe wartości dla %s muszą być pomiędzy %d a %d"
 msgid "initial values for 'varIdent()' function must be > 0"
 msgstr "początkowe wartości dla funkcji  'varIdent()' muszą być > 0"
 
-#. R/varFunc.R: gettextf("initial values must have group names in %s function",     sQuote("varIdent()"))
-#. R/varFunc.R: gettextf("initial values must have group names in %s function",     sQuote("varPower()"))
-#. R/varFunc.R: gettextf("initial values must have group names in %s function",     sQuote("varExp()"))
+#. R/varFunc.R: gettextf("initial values must have group names in %s function", sQuote("varIdent()"))
+#. R/varFunc.R: gettextf("initial values must have group names in %s function", sQuote("varPower()"))
+#. R/varFunc.R: gettextf("initial values must have group names in %s function", sQuote("varExp()"))
 #: R/varFunc.R:0
 msgid "initial values must have group names in %s function"
 msgstr "początkowe wartości muszą posiadać nazwy grupy w funkcji %s"
@@ -1678,8 +1678,8 @@ msgstr "iteracje:"
 msgid "length of 'nam' is not consistent with dimensions of initial value"
 msgstr "długość 'nam' nie jest spójna z wymiarami początkowej wartości"
 
-#. R/newMethods.R: gettextf("level of %s does not match formula %s", level[aux],     sQuote(deparse(form)))
-#. R/newMethods.R: gettextf("level of %s does not match formula %s", level[aux],     sQuote(deparse(form)))
+#. R/newMethods.R: gettextf("level of %s does not match formula %s", level[aux], sQuote(deparse(form)))
+#. R/newMethods.R: gettextf("level of %s does not match formula %s", level[aux], sQuote(deparse(form)))
 #: R/newMethods.R:0
 msgid "level of %s does not match formula %s"
 msgstr "poziom %s nie zgadza się z formułą %s"
@@ -1878,10 +1878,10 @@ msgstr "brak dostępnego modelu wariogramu w 'showModel = TRUE'"
 msgid "nonexistent group in 'newdata'"
 msgstr "nieistniejąca grupa w 'newdata'"
 
-#. R/varFunc.R: gettextf("nonexistent group names for initial values in %s function",     sQuote("varIdent()"))
-#. R/varFunc.R: gettextf("nonexistent group names for initial values in %s function",     sQuote("varPower()"))
-#. R/varFunc.R: gettextf("nonexistent group names for initial values in %s function",     sQuote("varExp()"))
-#. R/varFunc.R: gettextf("nonexistent group names for initial values in %s function",     sQuote("varConstPower()"))
+#. R/varFunc.R: gettextf("nonexistent group names for initial values in %s function", sQuote("varIdent()"))
+#. R/varFunc.R: gettextf("nonexistent group names for initial values in %s function", sQuote("varPower()"))
+#. R/varFunc.R: gettextf("nonexistent group names for initial values in %s function", sQuote("varExp()"))
+#. R/varFunc.R: gettextf("nonexistent group names for initial values in %s function", sQuote("varConstPower()"))
 #: R/varFunc.R:0
 msgid "nonexistent group names for initial values in %s function"
 msgstr "nieistniejące nazwy grup dla początkowych wartości w funkcji %s"
@@ -1913,7 +1913,7 @@ msgstr ""
 "liczba wierszy w wartościach początkowych dla losowego komponentu na "
 "poziomie %s powinna wynosić %d"
 
-#. R/corStruct.R: gettextf("object of class %s must have a \"fixed\" attribute",     dQuote("corStruct"))
+#. R/corStruct.R: gettextf("object of class %s must have a \"fixed\" attribute", dQuote("corStruct"))
 #: R/corStruct.R:0
 msgid "object of class %s must have a \"fixed\" attribute"
 msgstr "obiekt klasy %s musi posiadać atrybut \"fixed\"."
@@ -1928,7 +1928,7 @@ msgstr "obiekty muszą mieć komponent \"call\" lub atrybut"
 msgid "objects must have coefficients with same row names"
 msgstr "obiekty muszą mieć współczynniki z tymi samymi nazwami wierszy"
 
-#. R/lme.R: gettextf("objects must inherit from at least one of the following classes: %s",     paste(dQuote(valid.classes), collapse = ", "))
+#. R/lme.R: gettextf("objects must inherit from at least one of the following classes: %s", paste(dQuote(valid.classes),     collapse = ", "))
 #: R/lme.R:0
 msgid "objects must inherit from at least one of the following classes: %s"
 msgstr ""
@@ -2012,14 +2012,14 @@ msgstr ""
 "kolejność argumentów w funkcji 'simulate.lme()' zmieniła się aby pasowała z "
 "funkcjami ogólnymi w R-2.2.0"
 
-#. R/corStruct.R: gettextf("parameter in %s structure must be between %d and %d",     dQuote("AR(1)"), -1, 1)
-#. R/corStruct.R: gettextf("parameter in %s structure must be between %d and %d",     dQuote("CAR(1)"), 0, 1)
-#. R/corStruct.R: gettextf("parameter in %s structure must be between %d and %d",     dQuote("corCompSymm"), -1, 1)
+#. R/corStruct.R: gettextf("parameter in %s structure must be between %d and %d", dQuote("AR(1)"),     -1, 1)
+#. R/corStruct.R: gettextf("parameter in %s structure must be between %d and %d", dQuote("CAR(1)"),     0, 1)
+#. R/corStruct.R: gettextf("parameter in %s structure must be between %d and %d", dQuote("corCompSymm"),     -1, 1)
 #: R/corStruct.R:0
 msgid "parameter in %s structure must be between %d and %d"
 msgstr "parametr w strukturze %s musi być pomiędzy %d a %d"
 
-#. R/corStruct.R: gettextf("parameters in %s structure must be between %d and %d",     dQuote("ARMA"), -1, 1)
+#. R/corStruct.R: gettextf("parameters in %s structure must be between %d and %d", dQuote("ARMA"),     -1, 1)
 #: R/corStruct.R:0
 msgid "parameters in %s structure must be between %d and %d"
 msgstr "parametry w strukturze %s muszą być pomiędzy %d a %d"
@@ -2119,7 +2119,7 @@ msgstr "człony mogą być tylko liczbami całkowitymi lub tekstami"
 msgid "terms must all have the same denominator DF"
 msgstr "wszystkie człony muszą mieć ten sam mianownik DF"
 
-#. R/groupedData.R: gettextf("undefined collapsing level %s for %s", collapseLevel,     sQuote(substitute(object)))
+#. R/groupedData.R: gettextf("undefined collapsing level %s for %s", collapseLevel, sQuote(substitute(object)))
 #: R/groupedData.R:0
 msgid "undefined collapsing level %s for %s"
 msgstr "niezdefiniowany poziom %s zapadania dla %s"
@@ -2169,7 +2169,7 @@ msgstr[0] "%s nie jest dostępne do rysowania"
 msgstr[1] "%s nie są dostępne do rysowania"
 msgstr[2] "%s nie są dostępne do rysowania"
 
-#. R/newFunc.R: ngettext(sum(wchNot), "%s value was not matched", "%s values were not matched",     domain = "R-nlme")
+#. R/newFunc.R: ngettext(sum(wchNot), "%s value was not matched", "%s values were not matched", domain = "R-nlme")
 #: R/newFunc.R:0
 msgid "%s value was not matched"
 msgid_plural "%s values were not matched"
@@ -2177,13 +2177,13 @@ msgstr[0] "wartość %s nie została dopasowana"
 msgstr[1] "wartości %s nie zostały dopasowane"
 msgstr[2] "wartości %s nie zostały dopasowane"
 
-#. R/lmList.R: ngettext(sum(naV), "%s was not found in data", "%s were not found in data",     domain = "R-nlme")
-#. R/lmList.R: ngettext(sum(naV), "%s was not found in data", "%s were not found in data",     domain = "R-nlme")
-#. R/lmList.R: ngettext(sum(naV), "%s was not found in data", "%s were not found in data",     domain = "R-nlme")
-#. R/lme.R: ngettext(sum(naV), "%s was not found in data", "%s were not found in data",     domain = "R-nlme")
-#. R/lme.R: ngettext(sum(naV), "%s was not found in data", "%s were not found in data",     domain = "R-nlme")
-#. R/newMethods.R: ngettext(sum(naV), "%s was not found in data", "%s were not found in data",     domain = "R-nlme")
-#. R/newMethods.R: ngettext(sum(naV), "%s was not found in data", "%s were not found in data",     domain = "R-nlme")
+#. R/lmList.R: ngettext(sum(naV), "%s was not found in data", "%s were not found in data", domain = "R-nlme")
+#. R/lmList.R: ngettext(sum(naV), "%s was not found in data", "%s were not found in data", domain = "R-nlme")
+#. R/lmList.R: ngettext(sum(naV), "%s was not found in data", "%s were not found in data", domain = "R-nlme")
+#. R/lme.R: ngettext(sum(naV), "%s was not found in data", "%s were not found in data", domain = "R-nlme")
+#. R/lme.R: ngettext(sum(naV), "%s was not found in data", "%s were not found in data", domain = "R-nlme")
+#. R/newMethods.R: ngettext(sum(naV), "%s was not found in data", "%s were not found in data", domain = "R-nlme")
+#. R/newMethods.R: ngettext(sum(naV), "%s was not found in data", "%s were not found in data", domain = "R-nlme")
 #: R/lmList.R:0 R/lme.R:0 R/newMethods.R:0
 msgid "%s was not found in data"
 msgid_plural "%s were not found in data"
@@ -2209,7 +2209,7 @@ msgstr[0] "efekt %s nie został dopasowany"
 msgstr[1] "efekty %s nie zostały dopasowane"
 msgstr[2] "efekty %s nie zostały dopasowane"
 
-#. R/nlme.R: ngettext(sum(noMatch), "group name not matched in starting values for random effects: %s",     "group names not matched in starting values for random effects: %s",     domain = "R-nlme")
+#. R/nlme.R: ngettext(sum(noMatch), "group name not matched in starting values for random effects: %s",     "group names not matched in starting values for random effects: %s", domain = "R-nlme")
 #: R/nlme.R:0
 msgid "group name not matched in starting values for random effects: %s"
 msgid_plural ""
@@ -2235,8 +2235,8 @@ msgstr[0] "poziom %s nie jest dozwolony dla %s"
 msgstr[1] "poziomy %s nie są dozwolone dla %s"
 msgstr[2] "poziomy %s nie są dozwolone dla %s"
 
-#. R/lme.R: ngettext(sum(aux), "nonexistent level %s", "nonexistent levels %s",     domain = "R-nlme")
-#. R/lme.R: ngettext(sum(aux), "nonexistent level %s", "nonexistent levels %s",     domain = "R-nlme")
+#. R/lme.R: ngettext(sum(aux), "nonexistent level %s", "nonexistent levels %s", domain = "R-nlme")
+#. R/lme.R: ngettext(sum(aux), "nonexistent level %s", "nonexistent levels %s", domain = "R-nlme")
 #: R/lme.R:0
 msgid "nonexistent level %s"
 msgid_plural "nonexistent levels %s"
@@ -2244,8 +2244,8 @@ msgstr[0] "nieistniejący poziom %s"
 msgstr[1] "nieistniejące poziomy %s"
 msgstr[2] "nieistniejące poziomy %s"
 
-#. R/gls.R: ngettext(sum(noMatch), "term %s was not matched", "terms %s were not matched",     domain = "R-nlme")
-#. R/lme.R: ngettext(sum(noMatch), "term %s was not matched", "terms %s were not matched",     domain = "R-nlme")
+#. R/gls.R: ngettext(sum(noMatch), "term %s was not matched", "terms %s were not matched", domain = "R-nlme")
+#. R/lme.R: ngettext(sum(noMatch), "term %s was not matched", "terms %s were not matched", domain = "R-nlme")
 #: R/gls.R:0 R/lme.R:0
 msgid "term %s was not matched"
 msgid_plural "terms %s were not matched"

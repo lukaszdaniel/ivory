@@ -146,6 +146,14 @@ setOldClass <- function(Classes, prototype = NULL,
     if(anyDuplicated(names(ext)))
         ext <- .resolveSuperclasses(def, ext, where)
     def@contains <- ext
+    oldSupers <- setdiff(names(def@contains), names(curDef@contains))
+    addSubclass <- function(super) {
+      superDef <- getClassDef(super, where)
+      superWhere <- .findOrCopyClass(super, superDef, where, "subclass")
+      superDef@subclasses[[Class]] <- def@contains[[super]]
+      assignClassDef(super, superDef, superWhere, TRUE)
+    }
+    lapply(oldSupers, addSubclass)
     subcls <- curDef@subclasses
     if(length(subcls) > 0) {
       def@subclasses[names(subcls)]  <- subcls
@@ -295,7 +303,7 @@ S3Class <- function(object) {
 ## name are added, other than the className slot and the super/sub class names
 ## in the contains, subclasses slots respectively.
 .renameClassDef <- function(def, className) {
-    oldName <- def@className
+##    oldName <- def@className
     validObject(def) # to catch any non-SClassExtension objects
     def@className <- className
     comp <- def@contains

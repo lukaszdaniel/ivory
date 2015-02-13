@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-19 20:34\n"
+"POT-Creation-Date: 2015-02-13 16:27\n"
 "PO-Revision-Date: 2015-01-17 15:55+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -453,6 +453,12 @@ msgid ""
 "%s"
 msgstr ""
 
+#. R/help.search.R: gettext("A help search database:", domain = "R-utils")
+#: R/help.search.R:0
+#, fuzzy
+msgid "A help search database:"
+msgstr "Перестройка базы данных help.search() "
+
 #. R/RSiteSearch.R: gettextf("A search query has been submitted to %s", "http://search.r-project.org",     domain = "R-utils")
 #: R/RSiteSearch.R:0
 #, fuzzy
@@ -613,12 +619,12 @@ msgstr ""
 msgid "Demos"
 msgstr ""
 
-#. R/help.search.R: gettextf("Demos with %s fields matching %s using fuzzy matching:", fields[[type]],     sQuote(x$pattern), domain = "R-utils")
+#. R/help.search.R: gettextf("Demos with %s fields matching %s using fuzzy matching:", fields_used[[type]],     sQuote(x$pattern), domain = "R-utils")
 #: R/help.search.R:0
 msgid "Demos with %s fields matching %s using fuzzy matching:"
 msgstr ""
 
-#. R/help.search.R: gettextf("Demos with %s fields matching %s using regular expression matching:", fields[[type]],     sQuote(x$pattern), domain = "R-utils")
+#. R/help.search.R: gettextf("Demos with %s fields matching %s using regular expression matching:", fields_used[[type]],     sQuote(x$pattern), domain = "R-utils")
 #: R/help.search.R:0
 msgid "Demos with %s fields matching %s using regular expression matching:"
 msgstr ""
@@ -765,12 +771,12 @@ msgstr "Дальнейшее указано в '%s'."
 msgid "HTML help is unavailable"
 msgstr "Помощь HTML недоступна"
 
-#. R/help.search.R: gettextf("Help files with %s fields matching %s using fuzzy matching:", fields[[type]],     sQuote(x$pattern), domain = "R-utils")
+#. R/help.search.R: gettextf("Help files with %s fields matching %s using fuzzy matching:", fields_used[[type]],     sQuote(x$pattern), domain = "R-utils")
 #: R/help.search.R:0
 msgid "Help files with %s fields matching %s using fuzzy matching:"
 msgstr ""
 
-#. R/help.search.R: gettextf("Help files with %s fields matching %s using regular expression matching:",     fields[[type]], sQuote(x$pattern), domain = "R-utils")
+#. R/help.search.R: gettextf("Help files with %s fields matching %s using regular expression matching:",     fields_used[[type]], sQuote(x$pattern), domain = "R-utils")
 #: R/help.search.R:0
 msgid ""
 "Help files with %s fields matching %s using regular expression matching:"
@@ -966,12 +972,12 @@ msgstr "В буфере обмена нет DIF-данных"
 msgid "No demo found for topic %s"
 msgstr "Для темы %s не найден демо"
 
-#. R/help.search.R: gettextf("No demos found with %s fields matching %s using fuzzy matching.", fields$help,     sQuote(x$pattern), domain = "R-utils")
+#. R/help.search.R: gettextf("No demos found with %s fields matching %s using fuzzy matching.", fields_used$help,     sQuote(x$pattern), domain = "R-utils")
 #: R/help.search.R:0
 msgid "No demos found with %s fields matching %s using fuzzy matching."
 msgstr ""
 
-#. R/help.search.R: gettextf("No demos found with %s fields matching %s using regular expression matching.",     fields$help, sQuote(x$pattern), domain = "R-utils")
+#. R/help.search.R: gettextf("No demos found with %s fields matching %s using regular expression matching.",     fields_used$help, sQuote(x$pattern), domain = "R-utils")
 #: R/help.search.R:0
 msgid ""
 "No demos found with %s fields matching %s using regular expression matching."
@@ -985,12 +991,12 @@ msgid ""
 "You could try %s"
 msgstr "В указанных пакетах и библиотеках нет документации для %s:"
 
-#. R/help.search.R: gettextf("No help files found with %s fields matching %s using fuzzy matching.",     fields$help, sQuote(x$pattern), domain = "R-utils")
+#. R/help.search.R: gettextf("No help files found with %s fields matching %s using fuzzy matching.",     fields_used$help, sQuote(x$pattern), domain = "R-utils")
 #: R/help.search.R:0
 msgid "No help files found with %s fields matching %s using fuzzy matching."
 msgstr ""
 
-#. R/help.search.R: gettextf("No help files found with %s fields matching %s using regular expression matching.",     fields$help, sQuote(x$pattern), domain = "R-utils")
+#. R/help.search.R: gettextf("No help files found with %s fields matching %s using regular expression matching.",     fields_used$help, sQuote(x$pattern), domain = "R-utils")
 #: R/help.search.R:0
 msgid ""
 "No help files found with %s fields matching %s using regular expression "
@@ -1024,12 +1030,12 @@ msgstr "Не найдено подходящей программы провер
 msgid "No vignettes found by %s"
 msgstr "Не найдено миниатюр в"
 
-#. R/help.search.R: gettextf("No vignettes found with %s fields matching %s using fuzzy matching.", fields$help,     sQuote(x$pattern), domain = "R-utils")
+#. R/help.search.R: gettextf("No vignettes found with %s fields matching %s using fuzzy matching.", fields_used$help,     sQuote(x$pattern), domain = "R-utils")
 #: R/help.search.R:0
 msgid "No vignettes found with %s fields matching %s using fuzzy matching."
 msgstr ""
 
-#. R/help.search.R: gettextf("No vignettes found with %s fields matching %s using regular expression matching.",     fields$help, sQuote(x$pattern), domain = "R-utils")
+#. R/help.search.R: gettextf("No vignettes found with %s fields matching %s using regular expression matching.",     fields_used$help, sQuote(x$pattern), domain = "R-utils")
 #: R/help.search.R:0
 msgid ""
 "No vignettes found with %s fields matching %s using regular expression "
@@ -1065,6 +1071,11 @@ msgstr ""
 #, fuzzy
 msgid "Number of installed packages:"
 msgstr "не могу установить пакеты"
+
+#. R/help.search.R: gettextf("Objects: %d, Aliases: %d, Keywords: %d, Concepts: %d", NROW(x$Base), NROW(x$Aliases),     NROW(x$Keywords), NROW(x$Concepts), domain = "R-utils")
+#: R/help.search.R:0
+msgid "Objects: %d, Aliases: %d, Keywords: %d, Concepts: %d"
+msgstr ""
 
 #. R/help.start.R: gettext("Otherwise, be patient ...")
 #: R/help.start.R:0
@@ -1506,12 +1517,12 @@ msgstr "Использую первое совпадение..."
 msgid "Version"
 msgstr ""
 
-#. R/help.search.R: gettextf("Vignettes with %s fields matching %s using fuzzy matching:", fields[[type]],     sQuote(x$pattern), domain = "R-utils")
+#. R/help.search.R: gettextf("Vignettes with %s fields matching %s using fuzzy matching:", fields_used[[type]],     sQuote(x$pattern), domain = "R-utils")
 #: R/help.search.R:0
 msgid "Vignettes with %s fields matching %s using fuzzy matching:"
 msgstr ""
 
-#. R/help.search.R: gettextf("Vignettes with %s fields matching %s using regular expression matching:",     fields[[type]], sQuote(x$pattern), domain = "R-utils")
+#. R/help.search.R: gettextf("Vignettes with %s fields matching %s using regular expression matching:",     fields_used[[type]], sQuote(x$pattern), domain = "R-utils")
 #: R/help.search.R:0
 msgid "Vignettes with %s fields matching %s using regular expression matching:"
 msgstr ""
@@ -2748,6 +2759,15 @@ msgstr "сокет не создан"
 msgid "source repository is unavailable to check versions"
 msgstr ""
 
+#. R/packages.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
+#. R/packages.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
+#. R/packages2.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
+#: R/packages.R:0 R/packages2.R:0
+msgid ""
+"specifying 'contriburl' or 'available' requires a single type, not type = "
+"\"both\""
+msgstr ""
+
 #. R/tar.R: gettextf("storing paths of more than 100 bytes is not portable:\n  %s", sQuote(f))
 #: R/tar.R:0
 msgid ""
@@ -3370,7 +3390,7 @@ msgstr[0] "последняя запись неполная, %d строк не 
 msgstr[1] "последняя запись неполная, %d строк не обработано"
 msgstr[2] "последняя запись неполная, %d строк не обработано"
 
-#. R/help.search.R: ngettext(NROW(db), "matched %d object.", "matched %d objects.", domain = "R-utils")
+#. R/help.search.R: ngettext(n_of_objects_matched, "matched %d object.", "matched %d objects.", domain = "R-utils")
 #: R/help.search.R:0
 #, fuzzy
 msgid "matched %d object."

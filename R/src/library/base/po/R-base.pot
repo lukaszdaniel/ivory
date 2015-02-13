@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.2.0\n"
-"POT-Creation-Date: 2014-12-28 16:58\n"
+"POT-Creation-Date: 2015-02-13 16:26\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,13 +64,6 @@ msgstr ""
 #. R/source.R: gettextf("%s is not an existing file", sQuote(file))
 
 msgid "%s is not an existing file"
-msgstr ""
-
-
-#: R/namespace.R: 0
-#. R/namespace.R: gettextf("%s is not an exported object from 'namespace:%s'", sQuote(name), getNamespaceName(ns))
-
-msgid "%s is not an exported object from 'namespace:%s'"
 msgstr ""
 
 
@@ -611,6 +604,13 @@ msgstr ""
 #. R/dates.R: gettextf("'%s' function is not defined for objects of class %s", .Generic, dQuote("Date"))
 
 msgid "'%s' function is not defined for objects of class %s"
+msgstr ""
+
+
+#: R/namespace.R: 0
+#. R/namespace.R: gettextf("'%s' is not an exported object from 'namespace:%s'", name, getNamespaceName(ns))
+
+msgid "'%s' is not an exported object from 'namespace:%s'"
 msgstr ""
 
 
@@ -4100,6 +4100,15 @@ msgstr[1]    ""
 
 msgid        "Function found when exporting methods from the namespace %s which is not S4 generic: %s"
 msgid_plural "Functions found when exporting methods from the namespace %s which are not S4 generic: %s"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/namespace.R: 0
+#. R/namespace.R: ngettext(nr, "Registered S3 method from a standard package overwritten by '%s':",     "Registered S3 methods from standard package(s) overwritten by '%s':", domain = "R-base")
+
+msgid        "Registered S3 method from a standard package overwritten by '%s':"
+msgid_plural "Registered S3 methods from standard package(s) overwritten by '%s':"
 msgstr[0]    ""
 msgstr[1]    ""
 

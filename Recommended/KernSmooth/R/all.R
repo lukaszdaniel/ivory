@@ -340,7 +340,7 @@ dpih <- function(x, scalest = "minim", level = 2L, gridsize = 401L,
 
     gpoints <- seq(sa, sb, length = M)
     gcounts <- linbin(sx, gpoints, truncate)
-    delta <- (sb-sa)/(M - 1)
+##    delta <- (sb-sa)/(M - 1)
 
     ## Perform plug-in steps
 
@@ -433,7 +433,7 @@ dpik <- function(x, scalest = "minim", level = 2L, kernel = "normal",
     ## Set up grid points and bin the data:
     gpoints <- seq(sa, sb, length = M)
     gcounts <- linbin(sx, gpoints, truncate)
-    delta <- (sb-sa)/(M-1)
+##    delta <- (sb-sa)/(M-1)
 
     ## Perform plug-in steps:
 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: codetools 0.2-10\n"
-"POT-Creation-Date: 2015-01-18 21:31\n"
+"POT-Creation-Date: 2015-02-13 16:25\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,24 +12,24 @@ msgstr ""
 
 
 #: R/codetools.R: 0
-#. R/codetools.R: gettextf("%s is not a valid function in complex assignments",     sQuote(deparse(fun)), domain = "R-codetools")
+#. R/codetools.R: gettextf("%s is not a valid function in complex assignments", sQuote(deparse(fun)),     domain = "R-codetools")
 
 msgid "%s is not a valid function in complex assignments"
 msgstr ""
 
 
 #: R/codetools.R: 0
-#. R/codetools.R: gettextf("%s may be used in an incorrect context", sQuote("..."),     domain = "R-codetools")
-#. R/codetools.R: gettextf("%s may be used in an incorrect context", sQuote(v),     domain = "R-codetools")
-#. R/codetools.R: gettextf("%s may be used in an incorrect context", sQuote("..."),     domain = "R-codetools")
-#. R/codetools.R: gettextf("%s may be used in an incorrect context", sQuote(v),     domain = "R-codetools")
+#. R/codetools.R: gettextf("%s may be used in an incorrect context", sQuote("..."), domain = "R-codetools")
+#. R/codetools.R: gettextf("%s may be used in an incorrect context", sQuote(v), domain = "R-codetools")
+#. R/codetools.R: gettextf("%s may be used in an incorrect context", sQuote("..."), domain = "R-codetools")
+#. R/codetools.R: gettextf("%s may be used in an incorrect context", sQuote(v), domain = "R-codetools")
 
 msgid "%s may be used in an incorrect context"
 msgstr ""
 
 
 #: R/codetools.R: 0
-#. R/codetools.R: gettextf("%s may be used in an incorrect context: %s", sQuote(a),     pasteExpr(e), domain = "R-codetools")
+#. R/codetools.R: gettextf("%s may be used in an incorrect context: %s", sQuote(a), pasteExpr(e), domain = "R-codetools")
 
 msgid "%s may be used in an incorrect context: %s"
 msgstr ""
@@ -81,7 +81,7 @@ msgstr ""
 
 
 #: R/codetools.R: 0
-#. R/codetools.R: gettextf("link %s not available for %s", sQuote(e[[2]]), sQuote(family),     domain = "R-codetools")
+#. R/codetools.R: gettextf("link %s not available for %s", sQuote(e[[2]]), sQuote(family), domain = "R-codetools")
 
 msgid "link %s not available for %s"
 msgstr ""
@@ -95,7 +95,7 @@ msgstr ""
 
 
 #: R/codetools.R: 0
-#. R/codetools.R: gettextf("local variable %s assigned but may not be used", sQuote(v),     domain = "R-codetools")
+#. R/codetools.R: gettextf("local variable %s assigned but may not be used", sQuote(v), domain = "R-codetools")
 
 msgid "local variable %s assigned but may not be used"
 msgstr ""
@@ -109,7 +109,7 @@ msgstr ""
 
 
 #: R/codetools.R: 0
-#. R/codetools.R: gettextf("missing arguments not allowed in calls to %s", sQuote(fn),     domain = "R-codetools")
+#. R/codetools.R: gettextf("missing arguments not allowed in calls to %s", sQuote(fn), domain = "R-codetools")
 
 msgid "missing arguments not allowed in calls to %s"
 msgstr ""
@@ -130,21 +130,21 @@ msgstr ""
 
 
 #: R/codetools.R: 0
-#. R/codetools.R: gettextf("no visible binding for '<<-' assignment to %s", sQuote(n),     domain = "R-codetools")
+#. R/codetools.R: gettextf("no visible binding for '<<-' assignment to %s", sQuote(n), domain = "R-codetools")
 
 msgid "no visible binding for '<<-' assignment to %s"
 msgstr ""
 
 
 #: R/codetools.R: 0
-#. R/codetools.R: gettextf("no visible binding for global variable %s", sQuote(n),     domain = "R-codetools")
+#. R/codetools.R: gettextf("no visible binding for global variable %s", sQuote(n), domain = "R-codetools")
 
 msgid "no visible binding for global variable %s"
 msgstr ""
 
 
 #: R/codetools.R: 0
-#. R/codetools.R: gettextf("no visible global function definition for %s", sQuote(n),     domain = "R-codetools")
+#. R/codetools.R: gettextf("no visible global function definition for %s", sQuote(n), domain = "R-codetools")
 
 msgid "no visible global function definition for %s"
 msgstr ""
@@ -179,7 +179,7 @@ msgstr ""
 
 
 #: R/codetools.R: 0
-#. R/codetools.R: gettextf("possible error in %s: ", sQuote(deparse(call, width.cutoff = 500)),     domain = "R-codetools")
+#. R/codetools.R: gettextf("possible error in %s: ", sQuote(deparse(call, width.cutoff = 500)), domain = "R-codetools")
 
 msgid "possible error in %s:"
 msgstr ""
@@ -200,15 +200,15 @@ msgstr ""
 
 
 #: R/codetools.R: 0
-#. R/codetools.R: gettextf("warning in %s: ", sQuote(deparse(call, width.cutoff = 500)),     domain = "R-codetools")
+#. R/codetools.R: gettextf("warning in %s: ", sQuote(deparse(call, width.cutoff = 500)), domain = "R-codetools")
 
 msgid "warning in %s:"
 msgstr ""
 
 
 #: R/codetools.R: 0
-#. R/codetools.R: gettextf("wrong number of arguments to %s", sQuote("substitute()"),     domain = "R-codetools")
-#. R/codetools.R: gettextf("wrong number of arguments to %s", sQuote("bquote()"),     domain = "R-codetools")
+#. R/codetools.R: gettextf("wrong number of arguments to %s", sQuote("substitute()"), domain = "R-codetools")
+#. R/codetools.R: gettextf("wrong number of arguments to %s", sQuote("bquote()"), domain = "R-codetools")
 #. R/codetools.R: gettextf("wrong number of arguments to %s", sQuote(fn), domain = "R-codetools")
 
 msgid "wrong number of arguments to %s"
@@ -216,7 +216,7 @@ msgstr ""
 
 
 #: R/codetools.R: 0
-#. R/codetools.R: gettextf("wrong number of arguments to %s:", sQuote(".Internal()"),     domain = "R-codetools")
+#. R/codetools.R: gettextf("wrong number of arguments to %s:", sQuote(".Internal()"), domain = "R-codetools")
 
 msgid "wrong number of arguments to %s:"
 msgstr ""

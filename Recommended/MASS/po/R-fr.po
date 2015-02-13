@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MASS 7.2-20\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-01-18 21:31\n"
+"POT-Creation-Date: 2015-02-13 16:25\n"
 "PO-Revision-Date: 2012-10-03 14:30+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -55,9 +55,9 @@ msgstr ""
 msgid "'%s' argument is not a matrix"
 msgstr "'x' n'est pas une matrice"
 
-#. R/lda.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("lda"), domain = "R-MASS")
-#. R/polr.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("polr"), domain = "R-MASS")
-#. R/qda.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("qda"))
+#. R/lda.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("lda"), domain = "R-MASS")
+#. R/polr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("polr"),     domain = "R-MASS")
+#. R/qda.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("qda"))
 #: R/lda.R:0 R/polr.R:0 R/qda.R:0
 msgid "'%s' argument is not an object of class %s"
 msgstr ""
@@ -302,7 +302,7 @@ msgstr ""
 msgid "0 df terms are changing AIC"
 msgstr "les termes à 0 ddl changent l'AIC"
 
-#. R/negbin.R: gettextf("\n 2 x log-likelihood: %s", paste(format(round(x$twologlik,     3), nsmall = dp), collapse = " "), domain = "R-MASS")
+#. R/negbin.R: gettextf("\n 2 x log-likelihood: %s", paste(format(round(x$twologlik, 3), nsmall = dp),     collapse = " "), domain = "R-MASS")
 #: R/negbin.R:0
 msgid "2 x log-likelihood: %s"
 msgstr ""
@@ -324,8 +324,8 @@ msgstr "AIC n'est pas défini pour ce modèle, 'stepAIC' ne peut poursuivre"
 msgid "AIC undefined for REML fit"
 msgstr "AIC non défini pour un ajustement REML"
 
-#. R/polr.R: gettextf("AIC: %s", format(x$deviance + 2 * x$edf, nsmall = 2L),     domain = "R-MASS")
-#. R/polr.R: gettextf("AIC: %s", format(x$deviance + 2 * x$edf, nsmall = 2L),     domain = "R-MASS")
+#. R/polr.R: gettextf("AIC: %s", format(x$deviance + 2 * x$edf, nsmall = 2L), domain = "R-MASS")
+#. R/polr.R: gettextf("AIC: %s", format(x$deviance + 2 * x$edf, nsmall = 2L), domain = "R-MASS")
 #: R/polr.R:0
 msgid "AIC: %s"
 msgstr ""
@@ -357,7 +357,7 @@ msgstr ""
 msgid "Coefficients:"
 msgstr ""
 
-#. R/rlm.R: gettextf("Coefficients: (%d not defined because of singularities)",     nsingular, domain = "R-MASS")
+#. R/rlm.R: gettextf("Coefficients: (%d not defined because of singularities)", nsingular, domain = "R-MASS")
 #: R/rlm.R:0
 msgid "Coefficients: (%d not defined because of singularities)"
 msgstr ""
@@ -373,12 +373,12 @@ msgstr ""
 msgid "Correlation of Coefficients:"
 msgstr ""
 
-#. R/mca.R: gettextf("Correlations %s  cumulative %% explained %s", paste(format(round(x$d,     3), ...), collapse = " "), paste(format(round(p, 2), ...),     collapse = " "), domain = "R-MASS")
+#. R/mca.R: gettextf("Correlations %s  cumulative %% explained %s", paste(format(round(x$d, 3),     ...), collapse = " "), paste(format(round(p, 2), ...), collapse = " "), domain = "R-MASS")
 #: R/mca.R:0
 msgid "Correlations %s  cumulative %% explained %s"
 msgstr ""
 
-#. R/rlm.R: gettextf("Degrees of freedom: %d total; %d residual", nobs, rdf,     domain = "R-MASS")
+#. R/rlm.R: gettextf("Degrees of freedom: %d total; %d residual", nobs, rdf, domain = "R-MASS")
 #: R/rlm.R:0
 msgid "Degrees of freedom: %d total; %d residual"
 msgstr ""
@@ -448,7 +448,7 @@ msgstr "Valeur initiale pour 'theta' : %f"
 msgid "Intercepts:"
 msgstr ""
 
-#. R/rms.curv.R: gettextf("Intrinsic: c^iota  x sqrt(F) = %s", round(x$ic, 4),     domain = "R-MASS")
+#. R/rms.curv.R: gettextf("Intrinsic: c^iota  x sqrt(F) = %s", round(x$ic, 4), domain = "R-MASS")
 #: R/rms.curv.R:0
 msgid "Intrinsic: c^iota  x sqrt(F) = %s"
 msgstr ""
@@ -463,12 +463,12 @@ msgstr "Itér. %d Alpha : %s"
 msgid "LR tests for hierarchical log-linear models"
 msgstr ""
 
-#. R/negbin.R: gettext("Likelihood ratio tests of Negative Binomial Models",     domain = "R-MASS")
+#. R/negbin.R: gettext("Likelihood ratio tests of Negative Binomial Models", domain = "R-MASS")
 #: R/negbin.R:0
 msgid "Likelihood ratio tests of Negative Binomial Models"
 msgstr ""
 
-#. R/polr.R: gettext("Likelihood ratio tests of ordinal regression models",     domain = "R-MASS")
+#. R/polr.R: gettext("Likelihood ratio tests of ordinal regression models", domain = "R-MASS")
 #: R/polr.R:0
 msgid "Likelihood ratio tests of ordinal regression models"
 msgstr ""
@@ -495,7 +495,7 @@ msgstr ""
 msgid "Model:"
 msgstr "Ajustement initial :"
 
-#. R/mca.R: gettextf("Multiple correspondence analysis of %d cases of %d factors",     nrow(x$rs), x$p, domain = "R-MASS")
+#. R/mca.R: gettextf("Multiple correspondence analysis of %d cases of %d factors", nrow(x$rs),     x$p, domain = "R-MASS")
 #: R/mca.R:0
 msgid "Multiple correspondence analysis of %d cases of %d factors"
 msgstr ""
@@ -511,7 +511,7 @@ msgstr ""
 msgid "Observed (Expected):"
 msgstr ""
 
-#. R/rms.curv.R: gettextf("Parameter effects: c^theta x sqrt(F) = %s", round(x$pe,     4), domain = "R-MASS")
+#. R/rms.curv.R: gettextf("Parameter effects: c^theta x sqrt(F) = %s", round(x$pe, 4), domain = "R-MASS")
 #: R/rms.curv.R:0
 msgid "Parameter effects: c^theta x sqrt(F) = %s"
 msgstr ""
@@ -546,7 +546,7 @@ msgstr "Absence probable de convergence"
 msgid "Proportion of trace:"
 msgstr ""
 
-#. R/rlm.R: gettextf("Ran %d iterations without convergence", length(x$conv),     domain = "R-MASS")
+#. R/rlm.R: gettextf("Ran %d iterations without convergence", length(x$conv), domain = "R-MASS")
 #: R/rlm.R:0
 msgid "Ran %d iterations without convergence"
 msgstr ""
@@ -579,13 +579,13 @@ msgstr "Réajustement pour obtenir le Hessien"
 msgid "Re-fitting to get frequencies and fitted values"
 msgstr "Réajustement pour obtenir le Hessien"
 
-#. R/polr.R: gettextf("Residual Deviance: %s", format(x$deviance, nsmall = 2L),     domain = "R-MASS")
-#. R/polr.R: gettextf("Residual Deviance: %s", format(x$deviance, nsmall = 2L),     domain = "R-MASS")
+#. R/polr.R: gettextf("Residual Deviance: %s", format(x$deviance, nsmall = 2L), domain = "R-MASS")
+#. R/polr.R: gettextf("Residual Deviance: %s", format(x$deviance, nsmall = 2L), domain = "R-MASS")
 #: R/polr.R:0
 msgid "Residual Deviance: %s"
 msgstr ""
 
-#. R/rlm.R: gettextf("Residual standard error: %s on %d degrees of freedom",     format(signif(x$sigma, digits)), rdf, domain = "R-MASS")
+#. R/rlm.R: gettextf("Residual standard error: %s on %d degrees of freedom", format(signif(x$sigma,     digits)), rdf, domain = "R-MASS")
 #: R/rlm.R:0
 msgid "Residual standard error: %s on %d degrees of freedom"
 msgstr ""
@@ -606,7 +606,7 @@ msgstr "La variable de réponse doit être positive après les additions"
 msgid "Scale estimate: %s"
 msgstr "Estimations initiales : %s"
 
-#. R/lqs.R: gettextf("Scale estimates %s", paste(format(x$scale, digits = digits),     collapse = " "), domain = "R-MASS")
+#. R/lqs.R: gettextf("Scale estimates %s", paste(format(x$scale, digits = digits), collapse = " "),     domain = "R-MASS")
 #: R/lqs.R:0
 #, fuzzy
 msgid "Scale estimates %s"
@@ -667,7 +667,7 @@ msgstr "Attente de la réalisation du profilage..."
 msgid "Warning while fitting theta:"
 msgstr ""
 
-#. R/polr.R: gettext("Warning: did not converge as iteration limit reached",     domain = "R-MASS")
+#. R/polr.R: gettext("Warning: did not converge as iteration limit reached", domain = "R-MASS")
 #: R/polr.R:0
 #, fuzzy
 msgid "Warning: did not converge as iteration limit reached"
@@ -762,7 +762,7 @@ msgstr "VC par eustachage impossible avec 'newdata'"
 
 #. R/lda.R: gettext("cannot use leave-one-out CV with method %s", sQuote(method))
 #. R/qda.R: gettext("cannot use leave-one-out CV with method %s", sQuote(method))
-#. R/qda.R: gettext("cannot use leave-one-out CV with method %s", sQuote(mt),     domain = "R-MASS")
+#. R/qda.R: gettext("cannot use leave-one-out CV with method %s", sQuote(mt), domain = "R-MASS")
 #: R/lda.R:0 R/qda.R:0
 msgid "cannot use leave-one-out CV with method %s"
 msgstr "impossible d'utiliser la VC par eustachage pouri %s"
@@ -922,8 +922,8 @@ msgstr "nombre limite d'iterations atteint"
 msgid "iteration limit reached near 'x = %f'"
 msgstr "nombre limite d'iterations atteint vers x = %f"
 
-#. R/cov.trob.R: gettextf("length of '%s' argument must equal number of observations",     "wt")
-#. R/rlm.R: gettextf("length of '%s' argument must equal number of observations",     "weights")
+#. R/cov.trob.R: gettextf("length of '%s' argument must equal number of observations", "wt")
+#. R/rlm.R: gettextf("length of '%s' argument must equal number of observations", "weights")
 #: R/cov.trob.R:0 R/rlm.R:0
 #, fuzzy
 msgid "length of '%s' argument must equal number of observations"
@@ -1138,7 +1138,7 @@ msgid "scope is not a subset of term labels"
 msgstr ""
 "la portée de la formule n'est pas un sous-ensemble des étiquettes des termes"
 
-#. R/lm.ridge.R: gettextf("smallest value of GCV at %s", format(obj$lambda[k]),     domain = "R-MASS")
+#. R/lm.ridge.R: gettextf("smallest value of GCV at %s", format(obj$lambda[k]), domain = "R-MASS")
 #: R/lm.ridge.R:0
 msgid "smallest value of GCV at %s"
 msgstr ""
@@ -1254,8 +1254,8 @@ msgstr "les ajustements pondérés ne sont pas supportés"
 msgid "wrong number of variables"
 msgstr "nombre de variables incorrect"
 
-#. R/isoMDS.R: gettextf("zero or negative distance between objects %d and %d",     aa[1, 1], aa[1, 2])
-#. R/sammon.R: gettextf("zero or negative distance between objects %d and %d",     aa[1, 1], aa[1, 2])
+#. R/isoMDS.R: gettextf("zero or negative distance between objects %d and %d", aa[1, 1], aa[1, 2])
+#. R/sammon.R: gettextf("zero or negative distance between objects %d and %d", aa[1, 1], aa[1, 2])
 #: R/isoMDS.R:0 R/sammon.R:0
 msgid "zero or negative distance between objects %d and %d"
 msgstr "distance négative ou nulle entre les objets %d et %d"
@@ -1282,7 +1282,7 @@ msgid_plural "%d singular samples of size %d out of %d"
 msgstr[0] ""
 msgstr[1] ""
 
-#. R/lda.R: ngettext(length(empty), "group %s is empty", "groups %s are empty",     domain = "R-MASS")
+#. R/lda.R: ngettext(length(empty), "group %s is empty", "groups %s are empty", domain = "R-MASS")
 #: R/lda.R:0
 msgid "group %s is empty"
 msgid_plural "groups %s are empty"
@@ -1304,7 +1304,7 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "utilisation de %d/%d ligne pour un ajustement combiné"
 msgstr[1] "utilisation des %d/%d lignes pour un ajustement combiné"
 
-#. R/lda.R: ngettext(length(const), "variable %s appears to be constant within groups",     "variables %s appear to be constant within groups", domain = "R-MASS")
+#. R/lda.R: ngettext(length(const), "variable %s appears to be constant within groups", "variables %s appear to be constant within groups",     domain = "R-MASS")
 #: R/lda.R:0
 msgid "variable %s appears to be constant within groups"
 msgid_plural "variables %s appear to be constant within groups"

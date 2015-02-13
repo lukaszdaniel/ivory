@@ -295,21 +295,20 @@ function(x, value, ns, pos = -1, envir = as.environment(pos))
             stop("environment specified is not a package")
         ns <- asNamespace(substring(nm, 9L))
     } else ns <- asNamespace(ns)
+    ns_name <- getNamespaceName(ns)
     if (nf > 1L) {
-        if(getNamespaceName(ns) %in% tools:::.get_standard_package_names()$base)
+        if(ns_name %in% tools:::.get_standard_package_names()$base)
             stop(gettextf("locked binding of %s cannot be changed", sQuote(x), domain = "R-utils"), domain = "R-utils")
     }
     if(bindingIsLocked(x, ns)) {
         in_load <- Sys.getenv("_R_NS_LOAD_")
         if (nzchar(in_load)) {
-            ns_name <- getNamespaceName(ns)
             if(in_load != ns_name) {
                 msg <- gettextf("changing locked binding for %s in %s whilst loading %s", sQuote(x), sQuote(ns_name), sQuote(in_load))
                 if (! in_load %in% c("Matrix", "SparseM"))
                     warning(msg, call. = FALSE, domain = "R-utils", immediate. = TRUE)
             }
         } else if (nzchar(Sys.getenv("_R_WARN_ON_LOCKED_BINDINGS_"))) {
-            ns_name <- getNamespaceName(ns)
             warning(gettextf("changing locked binding for %s in %s", sQuote(x), sQuote(ns_name)),
                     call. = FALSE, domain = "R-utils", immediate. = TRUE)
         }
@@ -324,7 +323,7 @@ function(x, value, ns, pos = -1, envir = as.environment(pos))
     }
     if(!isBaseNamespace(ns)) {
         ## now look for possible copy as a registered S3 method
-        S3 <- getNamespaceInfo(ns, "S3methods")
+	S3 <- .getNamespaceInfo(ns, "S3methods")
         if(!length(S3)) return(invisible(NULL))
         S3names <- S3[, 3L]
         if(x %in% S3names) {
@@ -333,7 +332,7 @@ function(x, value, ns, pos = -1, envir = as.environment(pos))
             if(.isMethodsDispatchOn() && methods::is(genfun, "genericFunction"))
                 genfun <- methods::slot(genfun, "default")@methods$ANY
             defenv <- if (typeof(genfun) == "closure") environment(genfun)
-            else .BaseNamespaceEnv
+		      else .BaseNamespaceEnv
             S3Table <- get(".__S3MethodsTable__.", envir = defenv)
             remappedName <- paste(S3[i, 1L], S3[i, 2L], sep = ".")
             if(exists(remappedName, envir = S3Table, inherits = FALSE))

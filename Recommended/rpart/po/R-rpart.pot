@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: rpart 4.1-8\n"
-"POT-Creation-Date: 2015-01-18 21:31\n"
+"Project-Id-Version: rpart 4.1-9\n"
+"POT-Creation-Date: 2015-02-13 16:25\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,17 +23,17 @@ msgstr ""
 #: R/snip.rpart.R: 0
 #: R/summary.rpart.R: 0
 #: R/text.rpart.R: 0
-#. R/meanvar.rpart.R: gettextf("'%s' argument is not an object of class %s", "tree",     dQuote("rpart"))
-#. R/path.rpart.R: gettextf("'%s' argument is not an object of class %s", "tree",     dQuote("rpart"))
+#. R/meanvar.rpart.R: gettextf("'%s' argument is not an object of class %s", "tree", dQuote("rpart"))
+#. R/path.rpart.R: gettextf("'%s' argument is not an object of class %s", "tree", dQuote("rpart"))
 #. R/plot.rpart.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("rpart"))
 #. R/plotcp.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("rpart"))
-#. R/predict.rpart.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("rpart"))
+#. R/predict.rpart.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("rpart"))
 #. R/print.rpart.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("rpart"))
 #. R/printcp.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("rpart"))
-#. R/residuals.rpart.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("rpart"))
+#. R/residuals.rpart.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("rpart"))
 #. R/rsq.rpart.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("rpart"))
 #. R/snip.rpart.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("rpart"))
-#. R/summary.rpart.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("rpart"))
+#. R/summary.rpart.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("rpart"))
 #. R/text.rpart.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("rpart"))
 
 msgid "'%s' argument is not an object of class %s"
@@ -57,9 +57,9 @@ msgstr ""
 #: R/rpart.class.R: 0
 #: R/rpart.exp.R: 0
 #: R/rpart.poisson.R: 0
-#. R/rpart.class.R: gettextf("'parms' component not matched: %s", names(parms)[temp ==     0L])
-#. R/rpart.exp.R: gettextf("'parms' component not matched: %s", names(parms)[indx ==     0L])
-#. R/rpart.poisson.R: gettextf("'parms' component not matched: %s", names(parms)[indx ==     0L])
+#. R/rpart.class.R: gettextf("'parms' component not matched: %s", names(parms)[temp == 0L])
+#. R/rpart.exp.R: gettextf("'parms' component not matched: %s", names(parms)[indx == 0L])
+#. R/rpart.poisson.R: gettextf("'parms' component not matched: %s", names(parms)[indx == 0L])
 
 msgid "'parms' component not matched: %s"
 msgstr ""
@@ -87,7 +87,7 @@ msgstr ""
 
 
 #: R/rpart.R: 0
-#. R/rpart.R: gettextf("Argument %s not matched", names(extraArgs)[indx ==     0L])
+#. R/rpart.R: gettextf("Argument %s not matched", names(extraArgs)[indx == 0L])
 
 msgid "Argument %s not matched"
 msgstr ""
@@ -340,8 +340,8 @@ msgstr ""
 
 
 #: R/rpart.control.R: 0
-#. R/rpart.control.R: gettextf("The value of '%s' supplied is < 0; the value 0 was used instead",     "maxcomplete")
-#. R/rpart.control.R: gettextf("The value of '%s' supplied is < 0; the value 0 was used instead",     "xval")
+#. R/rpart.control.R: gettextf("The value of '%s' supplied is < 0; the value 0 was used instead", "maxcomplete")
+#. R/rpart.control.R: gettextf("The value of '%s' supplied is < 0; the value 0 was used instead", "xval")
 
 msgid "The value of '%s' supplied is < 0; the value 0 was used instead"
 msgstr ""
@@ -402,15 +402,15 @@ msgstr ""
 
 
 #: R/rpartcallback.R: 0
-#. R/rpartcallback.R: gettextf("User written method does not contain a %s function",     sQuote("split()"))
+#. R/rpartcallback.R: gettextf("User written method does not contain a %s function", sQuote("split()"))
 
 msgid "User written method does not contain a %s function"
 msgstr ""
 
 
 #: R/rpartcallback.R: 0
-#. R/rpartcallback.R: gettextf("User written method does not contain an %s function",     sQuote("init()"))
-#. R/rpartcallback.R: gettextf("User written method does not contain an %s function",     sQuote("eval()"))
+#. R/rpartcallback.R: gettextf("User written method does not contain an %s function", sQuote("init()"))
+#. R/rpartcallback.R: gettextf("User written method does not contain an %s function", sQuote("eval()"))
 
 msgid "User written method does not contain an %s function"
 msgstr ""
@@ -524,14 +524,14 @@ msgstr ""
 
 
 #: R/rpart.anova.R: 0
-#. R/rpart.anova.R: gettextf("  mean=%s, MSE=%s", formatg(yval, digits), formatg(dev/wt,     digits), domain = "R-rpart")
+#. R/rpart.anova.R: gettextf("  mean=%s, MSE=%s", formatg(yval, digits), formatg(dev/wt, digits), domain = "R-rpart")
 
 msgid "mean=%s, MSE=%s"
 msgstr ""
 
 
 #: R/labels.rpart.R: 0
-#. R/labels.rpart.R: warning("more than 52 levels in a predicting factor, truncated for printout",     domain = "R-rpart")
+#. R/labels.rpart.R: warning("more than 52 levels in a predicting factor, truncated for printout", domain = "R-rpart")
 
 msgid "more than 52 levels in a predicting factor, truncated for printout"
 msgstr ""
@@ -571,7 +571,7 @@ msgstr ""
 
 
 #: R/rpart.class.R: 0
-#. R/rpart.class.R: gettextf("  predicted class=%s  expected loss=%s  P(node) =%s\n    class counts: %s\n   probabilities: %s",     format(group, justify = "left"), formatg(dev, digits), formatg(nodeprob,         digits), temp1, temp2, domain = "R-rpart")
+#. R/rpart.class.R: gettextf("  predicted class=%s  expected loss=%s  P(node) =%s\n    class counts: %s\n   probabilities: %s",     format(group, justify = "left"), formatg(dev, digits), formatg(nodeprob, digits),     temp1, temp2, domain = "R-rpart")
 
 msgid "predicted class=%s  expected loss=%s  P(node) =%s\n    class counts: %s\n   probabilities: %s"
 msgstr ""

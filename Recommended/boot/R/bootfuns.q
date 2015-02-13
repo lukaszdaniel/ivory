@@ -2862,13 +2862,14 @@ saddle <-
             para <- list(p,A,u,strata,ns)
             K <- function(al) {
                 w <- para[[1L]]*exp(al%*%t(para[[2L]]))
-                sum(para[[5]]*log(tapply(w,para[[4L]],sum))) -
+                ## avoid matrix methods
+                sum(para[[5]]*log(tapply(c(w), para[[4L]], sum))) -
                     sum(al*para[[3L]])
             }
             speq <- suppressWarnings(optim(init, K))
             ahat <- speq$par
             w <- p*exp(ahat%*%t(A))
-            Khat <- sum(ns*log(tapply(w,strata,sum)))-sum(ahat*u)
+            Khat <- sum(ns*log(tapply(w,strata,sum))) - sum(ahat*u)
             temp <- matrix(0,d,d)
             for (s in seq_along(ns)) {
                 gp <- seq_len(n)[strata == s]

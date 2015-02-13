@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-22 19:58\n"
+"POT-Creation-Date: 2015-02-13 16:26\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -897,6 +897,11 @@ msgstr ""
 #, fuzzy
 msgid "No fields defined"
 msgstr "\"%s\" não tem métodos definidos"
+
+#. R/NextMethod.R: stop("No next method available")
+#: R/NextMethod.R:0
+msgid "No next method available"
+msgstr ""
 
 #. R/methodsTable.R: gettextf("No simply inherited methods found for function %s; using non-simple method",     sQuote(fdef@generic))
 #: R/methodsTable.R:0
@@ -3034,16 +3039,6 @@ msgstr ""
 msgid ""
 "something weird: inconsistent number of args in methods table strings: %s "
 "(using the largest value)"
-msgstr ""
-
-#. R/RMethodUtils.R: gettextf("special function %s has no known argument list; will assume '(x, ...)'",     sQuote(f))
-#: R/RMethodUtils.R:0
-msgid "special function %s has no known argument list; will assume '(x, ...)'"
-msgstr ""
-
-#. R/RMethodUtils.R: gettextf("special function %s is not permitted to have methods", sQuote(f))
-#: R/RMethodUtils.R:0
-msgid "special function %s is not permitted to have methods"
 msgstr ""
 
 #. R/RClassUtils.R: gettextf("subclass %s of class %s is not local and cannot be updated for new inheritance information; consider setClassUnion()",     .dQ(what), .dQ(class))

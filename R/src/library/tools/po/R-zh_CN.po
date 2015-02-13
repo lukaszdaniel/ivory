@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-25 06:40\n"
+"POT-Creation-Date: 2015-02-13 16:27\n"
 "PO-Revision-Date: 2015-01-17 15:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -101,6 +101,7 @@ msgid "'%s' argument must be a character string or connection"
 msgstr "参数'%s'必需是字符串或联结"
 
 #. R/utils.R: gettextf("'%s' argument must be a character vector", "x")
+#. R/utils.R: gettextf("'%s' argument must be a character vector", "text")
 #: R/utils.R:0
 #, fuzzy
 msgid "'%s' argument must be a character vector"
@@ -509,14 +510,23 @@ msgstr ""
 msgid "Authors information should be in file inst/AUTHORS"
 msgstr ""
 
+#. R/QC.R: gettext("Authors@R field gives more than one person with maintainer role:", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Authors@R field gives more than one person with maintainer role:"
+msgstr "Authors@R域没有提供有作者作用的人"
+
 #. R/QC.R: gettext("Authors@R field gives no person with author role.", domain = "R-tools")
 #: R/QC.R:0
 msgid "Authors@R field gives no person with author role."
 msgstr "Authors@R域没有提供有作者作用的人"
 
-#. R/QC.R: gettext("Authors@R field gives no person with maintainer role and email address.",     domain = "R-tools")
+#. R/QC.R: gettext("Authors@R field gives no person with maintainer role, valid email address and non-empty name.",     domain = "R-tools")
 #: R/QC.R:0
-msgid "Authors@R field gives no person with maintainer role and email address."
+#, fuzzy
+msgid ""
+"Authors@R field gives no person with maintainer role, valid email address "
+"and non-empty name."
 msgstr "Authors@R域没有提供有维修作用的人和他的email"
 
 #. R/QC.R: gettext("Authors@R field gives persons with no valid roles:", domain = "R-tools")
@@ -1843,6 +1853,12 @@ msgstr "畸形Authors@R域."
 msgid "Malformed Depends or Suggests or Imports or Enhances field."
 msgstr "Depends/Suggests/Imports/Enhances这些域中有些是畸形的."
 
+#. R/QC.R: gettext("Malformed Description field: should contain one or more complete sentences.",     domain = "R-tools")
+#: R/QC.R:0
+msgid ""
+"Malformed Description field: should contain one or more complete sentences."
+msgstr ""
+
 #. R/news.R: gettextf("Malformed NEWS.Rd file:\nChunk starting\n  %s\ncontains more than one \\itemize.\nUsing the first one.",     substring(sub("^[[:space:]]*", "", .Rd_deparse(x)), 1L, 60L))
 #: R/news.R:0
 msgid ""
@@ -1869,6 +1885,11 @@ msgstr ""
 "开始块\n"
 "  %s\n"
 "没有\\itemize."
+
+#. R/QC.R: gettext("Malformed Title field: should not end in a period.", domain = "R-tools")
+#: R/QC.R:0
+msgid "Malformed Title field: should not end in a period."
+msgstr ""
 
 #. R/QC.R: gettext("Malformed maintainer field.", domain = "R-tools")
 #: R/QC.R:0
@@ -2211,6 +2232,7 @@ msgstr ""
 #. R/build.R: gettext("OK")
 #. R/build.R: gettext("OK", domain = "R-tools")
 #. R/build.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
@@ -3112,6 +3134,34 @@ msgstr "试验程序包范例"
 #. R/news.R: gettext("Text")
 #: R/news.R:0
 msgid "Text"
+msgstr ""
+
+#. R/QC.R: gettext("The Description field should not start with the package name,\n  'This package' or 'The package'.",     domain = "R-tools")
+#: R/QC.R:0
+msgid ""
+"The Description field should not start with the package name,\n"
+"  'This package' or 'The package'."
+msgstr ""
+
+#. R/QC.R: gettext("The Description field should start with a capital letter.", domain = "R-tools")
+#: R/QC.R:0
+msgid "The Description field should start with a capital letter."
+msgstr ""
+
+#. R/QC.R: gettext("The Title field is just the package name: provide a real title.", domain = "R-tools")
+#: R/QC.R:0
+msgid "The Title field is just the package name: provide a real title."
+msgstr ""
+
+#. R/QC.R: gettext("The Title field should be in title case, current version then in title case:",     domain = "R-tools")
+#: R/QC.R:0
+msgid ""
+"The Title field should be in title case, current version then in title case:"
+msgstr ""
+
+#. R/QC.R: gettext("The Title field starts with the package name.", domain = "R-tools")
+#: R/QC.R:0
+msgid "The Title field starts with the package name."
 msgstr ""
 
 #. R/check.R: gettext("The \\usage entries for S3 methods should use the \\method markup and not their full name.\n",     domain = "R-tools")
@@ -4334,6 +4384,12 @@ msgstr "空的'data'目录"
 #: R/check.R:0
 #, fuzzy
 msgid "checking top-level files ..."
+msgstr "制造DLL…"
+
+#. R/check.R: gettext("checking use of S3 registration ...", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "checking use of S3 registration ..."
 msgstr "制造DLL…"
 
 #. R/build.R: gettext("checking vignette meta-information ...", domain = "R-tools")

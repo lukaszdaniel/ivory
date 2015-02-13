@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreign 0.8-10\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-01-18 21:31\n"
+"POT-Creation-Date: 2015-02-13 16:25\n"
 "PO-Revision-Date: 2012-10-03 15:02+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.5.3\n"
 
-#. R/read.dta.R: gettextf("'%s' argument is not an object of class %s", "dataframe",     dQuote("data.frame"))
+#. R/read.dta.R: gettextf("'%s' argument is not an object of class %s", "dataframe", dQuote("data.frame"))
 #: R/read.dta.R:0
 #, fuzzy
 msgid "'%s' argument is not an object of class %s"
@@ -30,9 +30,9 @@ msgstr "l'argument 'file' doit être une chaîne de caractères ou une connexion
 msgid "'%s' argument must be a character string"
 msgstr "l'argument 'file' doit être une chaîne de caractères ou une connexion"
 
-#. R/arff.R: gettextf("'%s' argument must be a character string or connection",     "file")
-#. R/arff.R: gettextf("'%s' argument must be a character string or connection",     "file")
-#. R/read.epiinfo.R: gettextf("'%s' argument must be a character string or connection",     "file")
+#. R/arff.R: gettextf("'%s' argument must be a character string or connection", "file")
+#. R/arff.R: gettextf("'%s' argument must be a character string or connection", "file")
+#. R/read.epiinfo.R: gettextf("'%s' argument must be a character string or connection", "file")
 #: R/arff.R:0 R/read.epiinfo.R:0
 #, fuzzy
 msgid "'%s' argument must be a character string or connection"
@@ -79,7 +79,7 @@ msgstr ""
 "Impossible d'abbréger de manière unique les noms de variables vers %d ou "
 "moins de caractères"
 
-#. R/dbf.R: gettextf("Field name: %s changed to: %s", sQuote(onames[i]),     sQuote(inames[i]))
+#. R/dbf.R: gettextf("Field name: %s changed to: %s", sQuote(onames[i]), sQuote(inames[i]))
 #: R/dbf.R:0
 msgid "Field name: %s changed to: %s"
 msgstr "Nom de champ : %s modifié en : %s"
@@ -119,7 +119,7 @@ msgstr "NA dans précision"
 msgid "NA in scale"
 msgstr "NA dans scale"
 
-#. R/Sread.R: gettextf("S mode %s (near byte offset %s) not supported", sQuote(code),     seek(dump))
+#. R/Sread.R: gettextf("S mode %s (near byte offset %s) not supported", sQuote(code), seek(dump))
 #: R/Sread.R:0
 msgid "S mode %s (near byte offset %s) not supported"
 msgstr "mode S %s (dans les environs du décalage d'octet %s) non supporté"
@@ -139,7 +139,7 @@ msgstr "Le code renvoyé par SAS est %d"
 msgid "Some variable names were abbreviated or otherwise altered."
 msgstr "Quelques noms de variables on été abbrégées ou altérées."
 
-#. R/read.ssd.R: gettextf("The log file will be %s in the current directory",     paste(basename(tmpProgLoc), ".log", sep = ""), domain = "R-foreign")
+#. R/read.ssd.R: gettextf("The log file will be %s in the current directory", paste(basename(tmpProgLoc),     ".log", sep = ""), domain = "R-foreign")
 #: R/read.ssd.R:0
 msgid "The log file will be %s in the current directory"
 msgstr ""
@@ -166,7 +166,7 @@ msgstr "La version doit être 6-12"
 msgid "Version must be between 6 and 12: using 7"
 msgstr "La version doit être 6-12 : la version 7 est utilisée"
 
-#. R/read.ssd.R: gettext("a log and other error products should be in the vicinity",     domain = "R-foreign")
+#. R/read.ssd.R: gettext("a log and other error products should be in the vicinity", domain = "R-foreign")
 #: R/read.ssd.R:0
 msgid "a log and other error products should be in the vicinity"
 msgstr ""
@@ -203,7 +203,7 @@ msgstr ""
 msgid "cannot uniquely abbreviate variable names"
 msgstr "impossible d'abbréger de manière unique les noms de variables"
 
-#. R/dbf.R: gettextf("character column %d will be truncated to %d bytes",     i, max_nchar)
+#. R/dbf.R: gettextf("character column %d will be truncated to %d bytes", i, max_nchar)
 #: R/dbf.R:0
 msgid "character column %d will be truncated to %d bytes"
 msgstr "la colonne de chaîne de caractères %d sera tronquée à %d octets"
@@ -260,7 +260,7 @@ msgstr "quelques noms de variables ont été abbrégées"
 msgid "unknown column type in data frame"
 msgstr "type inconnu pour une colonne dans le tableau de données"
 
-#. R/read.dta.R: gettextf("value labels (%s) for %s are missing", sQuote(ll[v]),     sQuote(names(rval)[v]))
+#. R/read.dta.R: gettextf("value labels (%s) for %s are missing", sQuote(ll[v]), sQuote(names(rval)[v]))
 #: R/read.dta.R:0
 msgid "value labels (%s) for %s are missing"
 msgstr "valeurs de libellé (%s) manquantes pour %s"
@@ -270,7 +270,7 @@ msgstr "valeurs de libellé (%s) manquantes pour %s"
 msgid "wrong number of records"
 msgstr "nombre d'enregistrements incorrect"
 
-#. R/dbf.R: ngettext(length(cl0), "data frame contains columns of unsupported class %s",     "data frame contains columns of unsupported classes %s",     domain = "R-foreign")
+#. R/dbf.R: ngettext(length(cl0), "data frame contains columns of unsupported class %s", "data frame contains columns of unsupported classes %s",     domain = "R-foreign")
 #: R/dbf.R:0
 msgid "data frame contains columns of unsupported class %s"
 msgid_plural "data frame contains columns of unsupported classes %s"

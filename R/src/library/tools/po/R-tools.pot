@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.2.0\n"
-"POT-Creation-Date: 2015-01-25 06:40\n"
+"POT-Creation-Date: 2015-02-13 16:27\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -112,6 +112,7 @@ msgstr ""
 
 #: R/utils.R: 0
 #. R/utils.R: gettextf("'%s' argument must be a character vector", "x")
+#. R/utils.R: gettextf("'%s' argument must be a character vector", "text")
 
 msgid "'%s' argument must be a character vector"
 msgstr ""
@@ -606,6 +607,13 @@ msgstr ""
 
 
 #: R/QC.R: 0
+#. R/QC.R: gettext("Authors@R field gives more than one person with maintainer role:", domain = "R-tools")
+
+msgid "Authors@R field gives more than one person with maintainer role:"
+msgstr ""
+
+
+#: R/QC.R: 0
 #. R/QC.R: gettext("Authors@R field gives no person with author role.", domain = "R-tools")
 
 msgid "Authors@R field gives no person with author role."
@@ -613,9 +621,9 @@ msgstr ""
 
 
 #: R/QC.R: 0
-#. R/QC.R: gettext("Authors@R field gives no person with maintainer role and email address.",     domain = "R-tools")
+#. R/QC.R: gettext("Authors@R field gives no person with maintainer role, valid email address and non-empty name.",     domain = "R-tools")
 
-msgid "Authors@R field gives no person with maintainer role and email address."
+msgid "Authors@R field gives no person with maintainer role, valid email address and non-empty name."
 msgstr ""
 
 
@@ -2221,6 +2229,13 @@ msgid "Malformed Depends or Suggests or Imports or Enhances field."
 msgstr ""
 
 
+#: R/QC.R: 0
+#. R/QC.R: gettext("Malformed Description field: should contain one or more complete sentences.",     domain = "R-tools")
+
+msgid "Malformed Description field: should contain one or more complete sentences."
+msgstr ""
+
+
 #: R/news.R: 0
 #. R/news.R: gettextf("Malformed NEWS.Rd file:\nChunk starting\n  %s\ncontains more than one \\itemize.\nUsing the first one.",     substring(sub("^[[:space:]]*", "", .Rd_deparse(x)), 1L, 60L))
 
@@ -2232,6 +2247,13 @@ msgstr ""
 #. R/news.R: gettextf("Malformed NEWS.Rd file:\nChunk starting\n  %s\ncontains no \\itemize.",     substring(sub("^[[:space:]]*", "", .Rd_deparse(x)), 1L, 60L))
 
 msgid "Malformed NEWS.Rd file:\nChunk starting\n  %s\ncontains no \\itemize."
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettext("Malformed Title field: should not end in a period.", domain = "R-tools")
+
+msgid "Malformed Title field: should not end in a period."
 msgstr ""
 
 
@@ -2736,6 +2758,7 @@ msgstr ""
 #: R/check.R: 0
 #: R/check.R: 0
 #: R/check.R: 0
+#: R/check.R: 0
 #: R/checktools.R: 0
 #: R/testing.R: 0
 #: R/testing.R: 0
@@ -2750,6 +2773,7 @@ msgstr ""
 #. R/build.R: gettext("OK")
 #. R/build.R: gettext("OK", domain = "R-tools")
 #. R/build.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
@@ -3808,6 +3832,41 @@ msgstr ""
 #. R/news.R: gettext("Text")
 
 msgid "Text"
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettext("The Description field should not start with the package name,\n  'This package' or 'The package'.",     domain = "R-tools")
+
+msgid "The Description field should not start with the package name,\n  'This package' or 'The package'."
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettext("The Description field should start with a capital letter.", domain = "R-tools")
+
+msgid "The Description field should start with a capital letter."
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettext("The Title field is just the package name: provide a real title.", domain = "R-tools")
+
+msgid "The Title field is just the package name: provide a real title."
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettext("The Title field should be in title case, current version then in title case:",     domain = "R-tools")
+
+msgid "The Title field should be in title case, current version then in title case:"
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettext("The Title field starts with the package name.", domain = "R-tools")
+
+msgid "The Title field starts with the package name."
 msgstr ""
 
 
@@ -5323,6 +5382,13 @@ msgstr ""
 #. R/check.R: gettext("checking top-level files ...", domain = "R-tools")
 
 msgid "checking top-level files ..."
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("checking use of S3 registration ...", domain = "R-tools")
+
+msgid "checking use of S3 registration ..."
 msgstr ""
 
 
