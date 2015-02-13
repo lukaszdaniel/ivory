@@ -10,7 +10,7 @@
 }
 \usage{
 pltree(x, \dots)
-\method{pltree}{twins}(x, main = paste("Dendrogram of ", deparse(x$call)),
+\method{pltree}{twins}(x, main = gettextf("Dendrogram of \%s", paste(deparse(x$call), collapse = ""), domain = "R-cluster"),
              labels = NULL, ylab = "Height", \dots)
 }
 \arguments{

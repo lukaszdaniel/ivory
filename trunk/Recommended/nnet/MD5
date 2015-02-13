@@ -1,3 +1,4 @@
+dde2ed1c21f0e4397d60f292732d3f26  Changes
 dbc7f40f2faa8c64abe370e26b558238  DESCRIPTION
 aea650cb108dfd007ba5b35ad6ff7226  inst/CITATION
 4729791c0e3f51b8bfe12b92b1ecfaf2  inst/NEWS
@@ -26,5 +27,4 @@ d805c54530cb5e52e54755f1110e0c7a  R/multinom.R
 6e89a35c30d458f779f2b579c2692585  R/vcovmultinom.R
 91cbc73bd6fed6d715f20cd97e7a47ac  R/zzz.R
 f5521e9560bbf0245437ea754526aafe  src/nnet.c
-dde2ed1c21f0e4397d60f292732d3f26  Changes
 eae59db10cf87860fa447235ed25f945  src/localization.h
