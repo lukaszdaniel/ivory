@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: boot 1.3-14\n"
-"POT-Creation-Date: 2015-01-18 21:31\n"
+"Project-Id-Version: boot 1.3-15\n"
+"POT-Creation-Date: 2015-02-13 16:25\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,7 +12,7 @@ msgstr ""
 
 
 #: R/bootfuns.q: 0
-#. R/bootfuns.q: gettextf("%s distribution not supported: using normal instead",     sQuote(qdist))
+#. R/bootfuns.q: gettextf("%s distribution not supported: using normal instead", sQuote(qdist))
 
 msgid "%s distribution not supported: using normal instead"
 msgstr ""
@@ -174,7 +174,7 @@ msgstr ""
 
 
 #: R/bootfuns.q: 0
-#. R/bootfuns.q: gettextf("All values of t are equal to %s", mean(t, na.rm = TRUE),     domain = "R-boot")
+#. R/bootfuns.q: gettextf("All values of t are equal to %s", mean(t, na.rm = TRUE), domain = "R-boot")
 
 msgid "All values of t are equal to %s"
 msgstr ""
@@ -307,14 +307,14 @@ msgstr ""
 
 
 #: R/bootfuns.q: 0
-#. R/bootfuns.q: gettext("Calculations on Original Scale but Intervals Transformed",     domain = "R-boot")
+#. R/bootfuns.q: gettext("Calculations on Original Scale but Intervals Transformed", domain = "R-boot")
 
 msgid "Calculations on Original Scale but Intervals Transformed"
 msgstr ""
 
 
 #: R/bootfuns.q: 0
-#. R/bootfuns.q: gettext("Calculations on Transformed Scale; Intervals on Original Scale",     domain = "R-boot")
+#. R/bootfuns.q: gettext("Calculations on Transformed Scale; Intervals on Original Scale", domain = "R-boot")
 
 msgid "Calculations on Transformed Scale; Intervals on Original Scale"
 msgstr ""
@@ -394,7 +394,7 @@ msgstr ""
 
 
 #: R/bootfuns.q: 0
-#. R/bootfuns.q: gettext("Iteration limit exceeded without finding solution",     domain = "R-boot")
+#. R/bootfuns.q: gettext("Iteration limit exceeded without finding solution", domain = "R-boot")
 
 msgid "Iteration limit exceeded without finding solution"
 msgstr ""
@@ -444,14 +444,14 @@ msgstr ""
 
 
 #: R/bootfuns.q: 0
-#. R/bootfuns.q: gettext("Maximization Problem with Objective Function Coefficients",     domain = "R-boot")
+#. R/bootfuns.q: gettext("Maximization Problem with Objective Function Coefficients", domain = "R-boot")
 
 msgid "Maximization Problem with Objective Function Coefficients"
 msgstr ""
 
 
 #: R/bootfuns.q: 0
-#. R/bootfuns.q: gettext("Minimization Problem with Objective Function Coefficients",     domain = "R-boot")
+#. R/bootfuns.q: gettext("Minimization Problem with Objective Function Coefficients", domain = "R-boot")
 
 msgid "Minimization Problem with Objective Function Coefficients"
 msgstr ""
@@ -528,7 +528,7 @@ msgstr ""
 
 
 #: R/bootfuns.q: 0
-#. R/bootfuns.q: gettext("POST-BLACKENED STATIONARY BOOTSTRAP FOR TIME SERIES",     domain = "R-boot")
+#. R/bootfuns.q: gettext("POST-BLACKENED STATIONARY BOOTSTRAP FOR TIME SERIES", domain = "R-boot")
 
 msgid "POST-BLACKENED STATIONARY BOOTSTRAP FOR TIME SERIES"
 msgstr ""
@@ -626,21 +626,21 @@ msgstr ""
 
 
 #: R/bootfuns.q: 0
-#. R/bootfuns.q: gettext("STRATIFIED CASE RESAMPLING BOOTSTRAP FOR CENSORED DATA",     domain = "R-boot")
+#. R/bootfuns.q: gettext("STRATIFIED CASE RESAMPLING BOOTSTRAP FOR CENSORED DATA", domain = "R-boot")
 
 msgid "STRATIFIED CASE RESAMPLING BOOTSTRAP FOR CENSORED DATA"
 msgstr ""
 
 
 #: R/bootfuns.q: 0
-#. R/bootfuns.q: gettext("STRATIFIED CONDITIONAL BOOTSTRAP FOR CENSORED DATA",     domain = "R-boot")
+#. R/bootfuns.q: gettext("STRATIFIED CONDITIONAL BOOTSTRAP FOR CENSORED DATA", domain = "R-boot")
 
 msgid "STRATIFIED CONDITIONAL BOOTSTRAP FOR CENSORED DATA"
 msgstr ""
 
 
 #: R/bootfuns.q: 0
-#. R/bootfuns.q: gettext("STRATIFIED CONDITIONAL BOOTSTRAP FOR COX REGRESSION MODEL",     domain = "R-boot")
+#. R/bootfuns.q: gettext("STRATIFIED CONDITIONAL BOOTSTRAP FOR COX REGRESSION MODEL", domain = "R-boot")
 
 msgid "STRATIFIED CONDITIONAL BOOTSTRAP FOR COX REGRESSION MODEL"
 msgstr ""
@@ -654,7 +654,7 @@ msgstr ""
 
 
 #: R/bootfuns.q: 0
-#. R/bootfuns.q: gettext("STRATIFIED MODEL BASED BOOTSTRAP FOR COX REGRESSION MODEL",     domain = "R-boot")
+#. R/bootfuns.q: gettext("STRATIFIED MODEL BASED BOOTSTRAP FOR COX REGRESSION MODEL", domain = "R-boot")
 
 msgid "STRATIFIED MODEL BASED BOOTSTRAP FOR COX REGRESSION MODEL"
 msgstr ""
@@ -689,7 +689,7 @@ msgstr ""
 
 
 #: R/bootfuns.q: 0
-#. R/bootfuns.q: gettextf("Smoothing spline used %d points in the range %s to %s.",     nrow(sad.d$points), rg[1L], rg[2L], domain = "R-boot")
+#. R/bootfuns.q: gettextf("Smoothing spline used %d points in the range %s to %s.", nrow(sad.d$points),     rg[1L], rg[2L], domain = "R-boot")
 
 msgid "Smoothing spline used %d points in the range %s to %s."
 msgstr ""
@@ -752,21 +752,21 @@ msgstr ""
 
 
 #: R/bootfuns.q: 0
-#. R/bootfuns.q: gettextf("The objective function value was %s.", simp.out$value,     domain = "R-boot")
+#. R/bootfuns.q: gettextf("The objective function value was %s.", simp.out$value, domain = "R-boot")
 
 msgid "The objective function value was %s."
 msgstr ""
 
 
 #: R/bootfuns.q: 0
-#. R/bootfuns.q: gettextf("The optimal value of the objective function is %s.",     simp.out$value, domain = "R-boot")
+#. R/bootfuns.q: gettextf("The optimal value of the objective function is %s.", simp.out$value, domain = "R-boot")
 
 msgid "The optimal value of the objective function is %s."
 msgstr ""
 
 
 #: R/bootfuns.q: 0
-#. R/bootfuns.q: gettextf("WARNING: All values of %s are NA", paste("t", j, "*",     sep = ""), domain = "R-boot")
+#. R/bootfuns.q: gettextf("WARNING: All values of %s are NA", paste("t", j, "*", sep = ""), domain = "R-boot")
 
 msgid "WARNING: All values of %s are NA"
 msgstr ""
@@ -801,14 +801,14 @@ msgstr ""
 
 
 #: R/bootfuns.q: 0
-#. R/bootfuns.q: gettext("Warning: Percentile Intervals used Extreme Quantiles",     domain = "R-boot")
+#. R/bootfuns.q: gettext("Warning: Percentile Intervals used Extreme Quantiles", domain = "R-boot")
 
 msgid "Warning: Percentile Intervals used Extreme Quantiles"
 msgstr ""
 
 
 #: R/bootfuns.q: 0
-#. R/bootfuns.q: gettext("Warning: Studentized Intervals used Extreme Quantiles",     domain = "R-boot")
+#. R/bootfuns.q: gettext("Warning: Studentized Intervals used Extreme Quantiles", domain = "R-boot")
 
 msgid "Warning: Studentized Intervals used Extreme Quantiles"
 msgstr ""
@@ -1122,7 +1122,7 @@ msgstr ""
 
 
 #: R/bootfuns.q: 0
-#. R/bootfuns.q: gettextf("number of columns of 'A' (%d) not equal to length of 'u' (%d)",     d, length(u))
+#. R/bootfuns.q: gettextf("number of columns of 'A' (%d) not equal to length of 'u' (%d)", d, length(u))
 
 msgid "number of columns of 'A' (%d) not equal to length of 'u' (%d)"
 msgstr ""
@@ -1136,7 +1136,7 @@ msgstr ""
 
 
 #: R/bootfuns.q: 0
-#. R/bootfuns.q: gettextf("only columns %s and %s of 'data' used", index[1L],     index[2L])
+#. R/bootfuns.q: gettextf("only columns %s and %s of 'data' used", index[1L], index[2L])
 
 msgid "only columns %s and %s of 'data' used"
 msgstr ""

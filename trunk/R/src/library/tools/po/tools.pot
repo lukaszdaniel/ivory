@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 19:57+0100\n"
+"POT-Creation-Date: 2015-02-13 16:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -164,4 +164,8 @@ msgstr ""
 
 #: text.c:224 text.c:246
 msgid "out of memory"
+msgstr ""
+
+#: text.c:266 text.c:268
+msgid "first arg must be a single character string"
 msgstr ""

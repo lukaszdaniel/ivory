@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 19:57+0100\n"
+"POT-Creation-Date: 2015-02-13 16:27+0100\n"
 "PO-Revision-Date: 2015-01-17 15:54+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -166,3 +166,7 @@ msgstr ""
 #: text.c:224 text.c:246
 msgid "out of memory"
 msgstr "falta de memória"
+
+#: text.c:266 text.c:268
+msgid "first arg must be a single character string"
+msgstr ""

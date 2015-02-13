@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-22 19:58+0100\n"
+"POT-Creation-Date: 2015-02-13 16:26+0100\n"
 "PO-Revision-Date: 2012-02-26 14:21+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: R-core <R-core@R-project.org> \n"
@@ -629,9 +629,9 @@ msgstr " '%s'の表示に問題があります "
 #: src/gnuwin32/extra.c:558 src/gnuwin32/extra.c:583 src/main/agrep.c:132
 #: src/main/agrep.c:136 src/main/agrep.c:774 src/main/agrep.c:779
 #: src/main/apply.c:324 src/main/apply.c:326 src/main/apply.c:329
-#: src/main/array.c:87 src/main/array.c:1156 src/main/array.c:1282
-#: src/main/array.c:1284 src/main/array.c:1285 src/main/array.c:1625
-#: src/main/array.c:1627 src/main/array.c:1629 src/main/attrib.c:195
+#: src/main/array.c:87 src/main/array.c:1219 src/main/array.c:1345
+#: src/main/array.c:1347 src/main/array.c:1348 src/main/array.c:1688
+#: src/main/array.c:1690 src/main/array.c:1692 src/main/attrib.c:195
 #: src/main/builtin.c:89 src/main/builtin.c:98 src/main/builtin.c:117
 #: src/main/builtin.c:119 src/main/builtin.c:149 src/main/builtin.c:558
 #: src/main/builtin.c:574 src/main/builtin.c:761 src/main/builtin.c:763
@@ -685,7 +685,7 @@ msgstr " '%s'の表示に問題があります "
 #: src/main/envir.c:2147 src/main/envir.c:2154 src/main/envir.c:2165
 #: src/main/envir.c:2390 src/main/envir.c:2511 src/main/envir.c:2793
 #: src/main/envir.c:3035 src/main/envir.c:3049 src/main/envir.c:3056
-#: src/main/envir.c:3072 src/main/envir.c:3644 src/main/errors.c:1042
+#: src/main/envir.c:3072 src/main/envir.c:3653 src/main/errors.c:1042
 #: src/main/eval.c:394 src/main/eval.c:403 src/main/eval.c:406
 #: src/main/grep.c:775 src/main/grep.c:780 src/main/grep.c:1074
 #: src/main/grep.c:1076 src/main/grep.c:1078 src/main/grep.c:1523
@@ -693,7 +693,7 @@ msgstr " '%s'の表示に問題があります "
 #: src/main/grep.c:2345 src/main/grep.c:2644 src/main/grep.c:2649
 #: src/main/internet.c:231 src/main/internet.c:245 src/main/internet.c:263
 #: src/main/internet.c:275 src/main/internet.c:287 src/main/internet.c:306
-#: src/main/memory.c:3793 src/main/names.c:1301 src/main/names.c:1304
+#: src/main/memory.c:3793 src/main/names.c:1303 src/main/names.c:1306
 #: src/main/objects.c:1547 src/main/objects.c:1549 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
 #: src/main/paste.c:411 src/main/paste.c:416 src/main/paste.c:421
@@ -738,19 +738,19 @@ msgstr " '%s'の表示に問題があります "
 #: src/main/util.c:2207 src/main/util.c:2209 src/main/util.c:2234
 #: src/main/util.c:2236 src/main/util.c:2238 src/main/util.c:2241
 #: src/main/util.c:2244 src/main/util.c:2248 src/main/util.c:2250
-#: src/modules/internet/internet.c:462 src/modules/internet/internet.c:468
-#: src/modules/internet/internet.c:474 src/modules/internet/internet.c:477
-#: src/modules/internet/internet.c:481 src/modules/internet/libcurl.c:142
-#: src/modules/internet/libcurl.c:147 src/modules/internet/libcurl.c:150
-#: src/modules/internet/libcurl.c:304 src/modules/internet/libcurl.c:308
-#: src/modules/internet/libcurl.c:313 src/modules/internet/libcurl.c:316
-#: src/modules/internet/libcurl.c:320 src/modules/lapack/Lapack.c:156
-#: src/modules/lapack/Lapack.c:262 src/modules/lapack/Lapack.c:709
-#: src/modules/lapack/Lapack.c:818 src/modules/lapack/Lapack.c:880
-#: src/modules/lapack/Lapack.c:1205 src/modules/X11/devX11.c:3230
-#: src/modules/X11/devX11.c:3233 src/modules/X11/devX11.c:3236
-#: src/modules/X11/devX11.c:3260 src/unix/sys-std.c:1218
-#: src/unix/sys-std.c:1241
+#: src/modules/internet/internet.c:451 src/modules/internet/internet.c:457
+#: src/modules/internet/internet.c:463 src/modules/internet/internet.c:466
+#: src/modules/internet/internet.c:470 src/modules/internet/internet.c:474
+#: src/modules/internet/libcurl.c:142 src/modules/internet/libcurl.c:147
+#: src/modules/internet/libcurl.c:150 src/modules/internet/libcurl.c:312
+#: src/modules/internet/libcurl.c:316 src/modules/internet/libcurl.c:321
+#: src/modules/internet/libcurl.c:324 src/modules/internet/libcurl.c:328
+#: src/modules/lapack/Lapack.c:156 src/modules/lapack/Lapack.c:262
+#: src/modules/lapack/Lapack.c:709 src/modules/lapack/Lapack.c:818
+#: src/modules/lapack/Lapack.c:880 src/modules/lapack/Lapack.c:1205
+#: src/modules/X11/devX11.c:3230 src/modules/X11/devX11.c:3233
+#: src/modules/X11/devX11.c:3236 src/modules/X11/devX11.c:3260
+#: src/unix/sys-std.c:1218 src/unix/sys-std.c:1241
 #, c-format
 msgid "invalid '%s' argument"
 msgstr " '%s' 引数が不正です "
@@ -1092,9 +1092,9 @@ msgstr " ファイルを開くことができません "
 msgid "invalid call %s"
 msgstr " 値が不正です "
 
-#: src/include/Errormsg.h:25 src/main/subscript.c:380 src/main/subscript.c:398
-#: src/main/subscript.c:422 src/main/subscript.c:461 src/main/subscript.c:589
-#: src/main/subscript.c:628 src/main/subscript.c:771
+#: src/include/Errormsg.h:25 src/main/subscript.c:385 src/main/subscript.c:403
+#: src/main/subscript.c:427 src/main/subscript.c:466 src/main/subscript.c:645
+#: src/main/subscript.c:684 src/main/subscript.c:827
 #, fuzzy
 msgid "subscript is out of bounds"
 msgstr " 添え字が許される範囲外です "
@@ -1123,7 +1123,7 @@ msgstr ""
 msgid "argument '%s' has length > 1 and only the first element will be used"
 msgstr " 引数 '%s' は 1を超える長さなので, 最初の要素だけが使われます "
 
-#: src/main/agrep.c:191 src/main/agrep.c:818 src/main/attrib.c:1524
+#: src/main/agrep.c:191 src/main/agrep.c:818 src/main/attrib.c:1526
 #: src/main/coerce.c:2776 src/main/saveload.c:1939
 #, fuzzy, c-format
 msgid "'%s' argument must be a non-empty character string"
@@ -1313,7 +1313,7 @@ msgstr " 長さ 0 の 'base ' 引数です "
 msgid "bad arithmetic function index"
 msgstr " 不正な関数です "
 
-#: src/main/array.c:80 src/main/array.c:1460
+#: src/main/array.c:80 src/main/array.c:1523
 #, fuzzy, c-format
 msgid "'data' argument must be of a vector type, was '%s'"
 msgstr " 'data' はベクトル型でなくてはなりません "
@@ -1322,14 +1322,14 @@ msgstr " 'data' はベクトル型でなくてはなりません "
 msgid "non-numeric matrix extent"
 msgstr " 行列の大きさが数値ではありません "
 
-#: src/main/array.c:97 src/main/array.c:105 src/main/array.c:1568
-#: src/main/array.c:1573
+#: src/main/array.c:97 src/main/array.c:105 src/main/array.c:1631
+#: src/main/array.c:1636
 #, fuzzy, c-format
 msgid "invalid '%s' value (too large or NA)"
 msgstr " 'nrow' の値が不正です（大きすぎるか NA です） "
 
-#: src/main/array.c:99 src/main/array.c:107 src/main/array.c:1570
-#: src/main/array.c:1575
+#: src/main/array.c:99 src/main/array.c:107 src/main/array.c:1633
+#: src/main/array.c:1638
 #, fuzzy, c-format
 msgid "invalid '%s' value (< 0)"
 msgstr " 'nrow' の値が不正です（負の値です） "
@@ -1366,7 +1366,7 @@ msgstr ""
 msgid "data length exceeds size of matrix"
 msgstr " データの長さが行列の大きさを超えています "
 
-#: src/main/array.c:147 src/main/array.c:1471 src/main/array.c:1582
+#: src/main/array.c:147 src/main/array.c:1534 src/main/array.c:1645
 msgid "too many elements specified"
 msgstr " 指定された要素数が多すぎます "
 
@@ -1395,48 +1395,54 @@ msgstr " alloc３Darray : 指定された要素数が多すぎます "
 msgid "'allocArray()': too many elements specified by 'dims' argument"
 msgstr " allocArray：'dims' によって指定された要素数が多すぎます "
 
-#: src/main/array.c:448
+#: src/main/array.c:479 src/main/attrib.c:1025 src/main/coerce.c:2428
+#: src/main/engine.c:2964
+#, fuzzy, c-format
+msgid "'%s' argument must be a list"
+msgstr " 'list' 引数はリストでなくてはなりません "
+
+#: src/main/array.c:511
 #, fuzzy, c-format
 msgid "a matrix-like object is required as argument passed to '%s'"
 msgstr " 'row/col' への引数としては行列風のオブジェクトが必要とされます "
 
-#: src/main/array.c:661
+#: src/main/array.c:724
 #, fuzzy
 msgid "numeric/complex matrix/vector arguments are required"
 msgstr " 数値/複素数/行列またはベクトルが要求されます "
 
-#: src/main/array.c:771 src/main/array.c:775 src/main/array.c:779
+#: src/main/array.c:834 src/main/array.c:838 src/main/array.c:842
 msgid "non-conformable arguments"
 msgstr " 適切な引数ではありません "
 
-#: src/main/array.c:1077
+#: src/main/array.c:1140
 msgid "argument is not a matrix"
 msgstr " 引数が行列ではありません "
 
-#: src/main/array.c:1112
+#: src/main/array.c:1175
 msgid "invalid first argument, must be an array"
 msgstr " 一番目の引数が不正です。配列でなくてはなりません "
 
-#: src/main/array.c:1126
+#: src/main/array.c:1189
 #, fuzzy, c-format
 msgid "'perm' is of wrong length %d (!= %d)"
 msgstr " 'perm' の長さが誤っています "
 
-#: src/main/array.c:1131 src/main/array.c:1134
+#: src/main/array.c:1194 src/main/array.c:1197
 msgid "'a' does not have named dimnames"
 msgstr " 'a' は名前付きの次元名を持ちません "
 
-#: src/main/array.c:1141
+#: src/main/array.c:1204
 #, fuzzy, c-format
 msgid "'perm[%d]' does not match a dimension name"
 msgstr " perm[%d] は次元名にマッチしません "
 
-#: src/main/array.c:1154
+#: src/main/array.c:1217
 #, fuzzy
 msgid "value is out of range in 'perm' argument"
 msgstr " 'perm' 中の値が範囲を超えています "
 
-#: src/main/array.c:1236 src/main/connections.c:5495 src/main/debug.c:112
+#: src/main/array.c:1299 src/main/connections.c:5495 src/main/debug.c:112
 #: src/main/objects.c:996 src/main/raw.c:56 src/main/raw.c:330
 #: src/main/sort.c:327 src/main/sort.c:1229 src/main/sort.c:1397
 #: src/main/unique.c:670 src/main/unique.c:1384 src/main/unique.c:1456
@@ -1445,22 +1451,22 @@ msgstr " 'perm' 中の値が範囲を超えています "
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr " 'resize' は TRUE か FALSE でなければなりません "
 
-#: src/main/array.c:1294
+#: src/main/array.c:1357
 #, fuzzy, c-format
 msgid "'%s' must be numeric"
 msgstr " 'x' は数値でなければなりません "
 
-#: src/main/array.c:1467
+#: src/main/array.c:1530
 #, fuzzy, c-format
 msgid "'%s' argument cannot be of length 0"
 msgstr " 'hadj' は長さ1でなくてはなりません "
 
-#: src/main/array.c:1578
+#: src/main/array.c:1641
 #, fuzzy, c-format
 msgid "'%s' must have positive length"
 msgstr " 'value' は正の長さを持たないといけません "
 
-#: src/main/array.c:1638
+#: src/main/array.c:1701
 #, c-format
 msgid "singular matrix in 'backsolve()'. First zero in diagonal [%d]"
 msgstr ""
@@ -1570,137 +1576,132 @@ msgstr " 'names' 引数に互換性がありません "
 msgid "invalid type (%s) to set 'names' attribute"
 msgstr " 'names' 属性として設定するには不正な型(%s)です "
 
-#: src/main/attrib.c:1018
+#: src/main/attrib.c:1020
 #, fuzzy
 msgid "'dimnames()' applied to non-array"
 msgstr " 'dimnames' が配列以外に適用されました "
 
-#: src/main/attrib.c:1023 src/main/coerce.c:2428 src/main/engine.c:2964
-#, fuzzy, c-format
-msgid "'%s' argument must be a list"
-msgstr " 'list' 引数はリストでなくてはなりません "
-
-#: src/main/attrib.c:1026 src/main/attrib.c:1053
+#: src/main/attrib.c:1028 src/main/attrib.c:1055
 #, c-format
 msgid "length of 'dimnames' [%d] must match that of 'dims' [%d]"
 msgstr ""
 " 'dimnames' の長さ [%d] は 'dims' の長さ [%d] と同じでなくてはなりません "
 
-#: src/main/attrib.c:1059
+#: src/main/attrib.c:1061
 #, c-format
 msgid "invalid type (%s) for 'dimnames' (must be a vector)"
 msgstr " 'dimnames' の型(%s)が不正です（ベクトルでなければなりません） "
 
-#: src/main/attrib.c:1061
+#: src/main/attrib.c:1063
 #, c-format
 msgid "length of 'dimnames' [%d] not equal to array extent"
 msgstr " 'dimnames' の長さ [%d] が配列の大きさと違っています "
 
-#: src/main/attrib.c:1132 src/main/builtin.c:76 src/main/builtin.c:113
+#: src/main/attrib.c:1134 src/main/builtin.c:76 src/main/builtin.c:113
 #: src/main/envir.c:1807 src/main/envir.c:1935 src/main/envir.c:1995
 #: src/main/envir.c:2125 src/main/paste.c:74 src/main/paste.c:293
 #: src/main/random.c:477 src/main/random.c:506 src/main/unique.c:1681
 msgid "invalid first argument"
 msgstr " 一番目の引数が不正です "
 
-#: src/main/attrib.c:1135
+#: src/main/attrib.c:1137
 msgid "invalid second argument"
 msgstr " 二番目の引数が不正です "
 
-#: src/main/attrib.c:1143
+#: src/main/attrib.c:1145
 msgid "length-0 dimension vector is invalid"
 msgstr " 長さ 0 の次元のベクトルは無効です "
 
-#: src/main/attrib.c:1148
+#: src/main/attrib.c:1150
 #, fuzzy
 msgid "the dimensions contain missing values"
 msgstr " dims 変数は欠損値を含みます "
 
-#: src/main/attrib.c:1150
+#: src/main/attrib.c:1152
 #, fuzzy
 msgid "the dimensions contain negative values"
 msgstr " dims 変数は負の値を含みます "
 
-#: src/main/attrib.c:1155
+#: src/main/attrib.c:1157
 #, fuzzy
 msgid "dimensions do not match the length of object"
 msgstr " dims [product %d] はオブジェクト  [%d] の長さに整合しません "
 
-#: src/main/attrib.c:1157
+#: src/main/attrib.c:1159
 #, fuzzy, c-format
 msgid "dimensions [product %d] do not match the length of object [%d]"
 msgstr " dims [product %d] はオブジェクト  [%d] の長さに整合しません "
 
-#: src/main/attrib.c:1229
+#: src/main/attrib.c:1231
 #, fuzzy
 msgid "duplicated levels in factors are deprecated"
 msgstr " 因子では重複する水準はもはや許されません "
 
-#: src/main/attrib.c:1259
+#: src/main/attrib.c:1261
 msgid "attributes must be a list or NULL"
 msgstr " 属性はリストもしくはNULLでなければなりません "
 
-#: src/main/attrib.c:1264
+#: src/main/attrib.c:1266
 msgid "attributes must be named"
 msgstr " 属性は名前が付けられていなければなりません "
 
-#: src/main/attrib.c:1268
+#: src/main/attrib.c:1270
 #, c-format
 msgid "all attributes must have names [%d does not]"
 msgstr " 全ての属性は名前を持っていなければなりません[%d が持っていません] "
 
-#: src/main/attrib.c:1361
+#: src/main/attrib.c:1363
 #, fuzzy
 msgid "either 2 or 3 arguments are required"
 msgstr " 文字列引数が要求されています "
 
-#: src/main/attrib.c:1368
+#: src/main/attrib.c:1370
 #, fuzzy
 msgid "'which' attribute must be of mode character"
 msgstr " 'which' は文字列モードでなくてはなりません "
 
-#: src/main/attrib.c:1370
+#: src/main/attrib.c:1372
 msgid "exactly one attribute 'which' must be given"
 msgstr " 性格に一つの属性 'which' が与えらなければなりません "
 
-#: src/main/attrib.c:1428 src/main/attrib.c:1451 src/main/subscript.c:241
-#: src/main/subscript.c:245 src/main/subset.c:1205 src/main/subset.c:1256
+#: src/main/attrib.c:1430 src/main/attrib.c:1453 src/main/subscript.c:246
+#: src/main/subscript.c:250 src/main/subset.c:1205 src/main/subset.c:1256
 #, c-format
 msgid "partial match of '%s' to '%s'"
 msgstr " '%s' の '%s'　への部分的マッチ "
 
-#: src/main/attrib.c:1489
+#: src/main/attrib.c:1491
 #, fuzzy, c-format
 msgid "invalid type '%s' for slot name"
 msgstr " スロット名の型または長さが不正です "
 
-#: src/main/attrib.c:1648 src/main/attrib.c:1719 src/main/attrib.c:1756
+#: src/main/attrib.c:1650 src/main/attrib.c:1721 src/main/attrib.c:1758
 msgid "invalid type or length for slot name"
 msgstr " スロット名の型または長さが不正です "
 
-#: src/main/attrib.c:1682
+#: src/main/attrib.c:1684
 #, c-format
 msgid "cannot get a slot (\"%s\") from an object of type \"%s\""
 msgstr ""
 " 型 \"%s\" のオブジェクトからはスロット (\"%s\") を得ることは出来ません "
 
-#: src/main/attrib.c:1693
+#: src/main/attrib.c:1695
 #, c-format
 msgid "no slot of name \"%s\" for this object of class \"%s\""
 msgstr ""
 " 名前 \"%s\" というスロットが、クラス \"%s\" のこのオブジェクトには存在しませ"
 "ん "
 
-#: src/main/attrib.c:1710
+#: src/main/attrib.c:1712
 msgid "attempt to set slot on NULL object"
 msgstr " NULL オブジェクトに対して スロットを設定しようとしました "
 
-#: src/main/attrib.c:1751
+#: src/main/attrib.c:1753
 #, fuzzy
 msgid "formal classes cannot be used without the 'methods' package"
 msgstr " メソッドパッケージなしにフォーマルクラス（formal class）は使えません "
 
-#: src/main/attrib.c:1763
+#: src/main/attrib.c:1765
 #, c-format
 msgid ""
 "trying to get slot \"%s\" from an object of a basic class (\"%s\") with no "
@@ -1709,7 +1710,7 @@ msgstr ""
 " スロット \"%s\"を、スロットを持たない基本クラス(\"%s\")のオブジェクトから得"
 "ようとしました "
 
-#: src/main/attrib.c:1767
+#: src/main/attrib.c:1769
 #, fuzzy, c-format
 msgid ""
 "trying to get slot \"%s\" from an object (class \"%s\") that is not an S4 "
@@ -1739,34 +1740,34 @@ msgstr " 'recursive' 仮引数が繰り返されました "
 msgid "argument is not a list"
 msgstr " 引数はリストではありません "
 
-#: src/main/bind.c:1039 src/main/names.c:1267 src/main/names.c:1272
-#: src/main/names.c:1277 src/main/names.c:1282
+#: src/main/bind.c:1043 src/main/names.c:1269 src/main/names.c:1274
+#: src/main/names.c:1279 src/main/names.c:1284
 #, fuzzy, c-format
 msgid "class name is too long in '%s'"
 msgstr " '%s' のクラス名が長すぎます "
 
-#: src/main/bind.c:1115
+#: src/main/bind.c:1122
 #, fuzzy, c-format
 msgid "cannot create a matrix from type '%s'"
 msgstr " このようなタイプからは行列は作れません "
 
-#: src/main/bind.c:1185
+#: src/main/bind.c:1191
 #, fuzzy, c-format
 msgid "number of rows of matrices must match (see argument %d)"
 msgstr " 行列の行数は一致していなければなりません（%d 番目の引数を参照） "
 
-#: src/main/bind.c:1212
+#: src/main/bind.c:1218
 #, fuzzy, c-format
 msgid ""
 "number of rows of result is not a multiple of vector length (argument %d)"
 msgstr " 置き換えるべき項目数が，置き換える数の倍数ではありませんでした "
 
-#: src/main/bind.c:1429
+#: src/main/bind.c:1434
 #, fuzzy, c-format
 msgid "number of columns of matrices must match (see argument %d)"
 msgstr " 行列の列数は一致していなければなりません（%d 番目の引数を参照） "
 
-#: src/main/bind.c:1458
+#: src/main/bind.c:1463
 #, fuzzy, c-format
 msgid ""
 "number of columns of result is not a multiple of vector length (argument %d)"
@@ -1797,7 +1798,7 @@ msgstr " 指定されたベクトルのサイズが長すぎます "
 #: src/main/envir.c:2132 src/main/envir.c:2829 src/main/envir.c:2915
 #: src/main/envir.c:3195 src/main/envir.c:3224 src/main/envir.c:3245
 #: src/main/envir.c:3268 src/main/envir.c:3302 src/main/envir.c:3322
-#: src/main/envir.c:3634 src/main/envir.c:3639 src/main/eval.c:6019
+#: src/main/envir.c:3643 src/main/envir.c:3648 src/main/eval.c:6019
 #: src/main/objects.c:192 src/main/objects.c:200 src/main/saveload.c:2063
 #: src/main/saveload.c:2354 src/main/serialize.c:2751
 msgid "use of NULL environment is defunct"
@@ -2391,8 +2392,8 @@ msgstr " fifo 接続の割り当てに失敗しました "
 
 #: src/main/connections.c:1208 src/main/connections.c:1366
 #: src/main/connections.c:1988 src/main/connections.c:3204
-#: src/main/connections.c:4969 src/modules/internet/internet.c:464
-#: src/modules/internet/internet.c:470
+#: src/main/connections.c:4969 src/modules/internet/internet.c:453
+#: src/modules/internet/internet.c:459
 #, fuzzy, c-format
 msgid "only first element of '%s' argument will be used"
 msgstr " 'description' 引数の最初の要素だけが使われました "
@@ -2910,13 +2911,13 @@ msgstr " '%s' という型はサポートされていません "
 msgid "https:// URLs are not supported"
 msgstr " '%s' という型はサポートされていません "
 
-#: src/main/connections.c:5091 src/modules/internet/libcurl.c:670
+#: src/main/connections.c:5091 src/modules/internet/libcurl.c:685
 #, fuzzy
 msgid "'url(method = \"libcurl\")' is not supported on this platform"
 msgstr " 'dirmark  = TRUE' はこのプラットフォームではサポートされていません "
 
-#: src/main/connections.c:5162 src/modules/internet/internet.c:161
-#: src/modules/internet/internet.c:282
+#: src/main/connections.c:5162 src/modules/internet/internet.c:152
+#: src/modules/internet/internet.c:273
 #, fuzzy
 msgid "URL scheme unsupported by this method"
 msgstr " このビルドではICUはサポートされていません "
@@ -4006,7 +4007,7 @@ msgstr ""
 " バインディングがロックされているならば、アクティブなバインディングを変更する"
 "ことはできません "
 
-#: src/main/envir.c:3377
+#: src/main/envir.c:3377 src/main/envir.c:3615
 msgid "unknown op"
 msgstr " 未知の演算子です "
 
@@ -4032,64 +4033,64 @@ msgstr " ネームスペースはすでに登録されています "
 msgid "namespace is not registered"
 msgstr " ネームスペースは登録されていません "
 
-#: src/main/envir.c:3637
+#: src/main/envir.c:3646
 msgid "bad import environment argument"
 msgstr " インポートしようとしている環境引数が不正です "
 
-#: src/main/envir.c:3642
+#: src/main/envir.c:3651
 msgid "bad export environment argument"
 msgstr " エクスポートしようとしている環境引数が不正です "
 
-#: src/main/envir.c:3646
+#: src/main/envir.c:3655
 msgid "length of import and export names must match"
 msgstr " インポートとエクスポート名の長さは一致しなければなりません "
 
-#: src/main/envir.c:3669
+#: src/main/envir.c:3678
 #, c-format
 msgid "exported symbol '%s' has no value"
 msgstr " エクスポートされたシンボル \"%s\" が値を持っていません "
 
-#: src/main/envir.c:3700
+#: src/main/envir.c:3709
 #, fuzzy, c-format
 msgid "'%s' argument must be a hashed environment"
 msgstr " 引数は環境でなければなりません "
 
-#: src/main/envir.c:3708 src/main/envir.c:3722 src/main/grep.c:108
+#: src/main/envir.c:3717 src/main/envir.c:3731 src/main/grep.c:108
 #, fuzzy
 msgid "R character strings are limited to 2^31-1 bytes"
 msgstr " 変数名は%dバイトが上限です "
 
-#: src/main/envir.c:3806
+#: src/main/envir.c:3815
 #, c-format
 msgid "Resized: size %d => %d\tpri %d => %d\n"
 msgstr ""
 
-#: src/main/envir.c:3833
+#: src/main/envir.c:3842
 #, c-format
 msgid "unknown encoding: %d"
 msgstr " 未知のエンコーディングです: '%d' "
 
-#: src/main/envir.c:3853
+#: src/main/envir.c:3862
 #, c-format
 msgid "embedded nul in string: '%s'"
 msgstr " 文字列の中にnulが埋め込まれています: '%s' "
 
-#: src/main/envir.c:3896
+#: src/main/envir.c:3905
 #, fuzzy, c-format
 msgid "unknown encoding mask: %d"
 msgstr " 未知のエンコーディングです: '%d' "
 
-#: src/main/envir.c:3932 src/main/envir.c:3959
+#: src/main/envir.c:3941 src/main/envir.c:3968
 #, c-format
 msgid "Cache size: %d\n"
 msgstr ""
 
-#: src/main/envir.c:3933 src/main/envir.c:3960
+#: src/main/envir.c:3942 src/main/envir.c:3969
 #, c-format
 msgid "Cache pri:  %d\n"
 msgstr ""
 
-#: src/main/envir.c:3937 src/main/envir.c:3964
+#: src/main/envir.c:3946 src/main/envir.c:3973
 #, c-format
 msgid "Line %d: "
 msgstr ""
@@ -4531,7 +4532,7 @@ msgstr " バイトコードのバージョンが不一致です "
 msgid "invalid sequence argument in 'for()' loop"
 msgstr " for ループの範囲引数が不正です "
 
-#: src/main/eval.c:5305 src/main/names.c:1306
+#: src/main/eval.c:5305 src/main/names.c:1308
 #, fuzzy, c-format
 msgid "there is no '.Internal' function '%s'"
 msgstr " 内部関数 \"%s\" がありません "
@@ -5678,34 +5679,34 @@ msgstr " 'read.dcf' のためのメモリを割り当てられませんでした
 msgid "long vectors not supported yet: %s:%d"
 msgstr ""
 
-#: src/main/names.c:1016
+#: src/main/names.c:1018
 msgid "string argument required"
 msgstr " 文字列引数が要求されています "
 
-#: src/main/names.c:1019
+#: src/main/names.c:1021
 msgid "no such primitive function"
 msgstr " そのようなプリミティブ関数はありません "
 
-#: src/main/names.c:1142
+#: src/main/names.c:1144
 #, fuzzy
 msgid "couldn't allocate memory for symbol table"
 msgstr " 'read.dcf' のためのメモリを割り当てられませんでした "
 
-#: src/main/names.c:1208 src/main/names.c:1238
+#: src/main/names.c:1210 src/main/names.c:1240
 msgid "attempt to use zero-length variable name"
 msgstr " 長さ0の変数名を使おうとしました "
 
-#: src/main/names.c:1210 src/main/names.c:1240
+#: src/main/names.c:1212 src/main/names.c:1242
 #, c-format
 msgid "variable names are limited to %d bytes"
 msgstr " 変数名は%dバイトが上限です "
 
-#: src/main/names.c:1327
+#: src/main/names.c:1329
 #, fuzzy, c-format
 msgid "'.Internal(%s())' not called from a base namespace\n"
 msgstr " base 名前空間からは変数を取り除くことはできません "
 
-#: src/main/names.c:1334
+#: src/main/names.c:1336
 #, fuzzy, c-format
 msgid "'.Internal(%s())' called from namespace '%s'\n"
 msgstr " base 名前空間からは変数を取り除くことはできません "
@@ -6330,7 +6331,7 @@ msgstr " %d は不正なマルチバイト文字です "
 msgid "invalid character in current multibyte locale"
 msgstr " dblepr の文字列の長さが不正です "
 
-#: src/main/plotmath.c:1261 src/main/plotmath.c:1366 src/main/plotmath.c:2664
+#: src/main/plotmath.c:1261 src/main/plotmath.c:1366 src/main/plotmath.c:2655
 msgid "invalid mathematical annotation"
 msgstr " 数式の注釈が不正です "
 
@@ -6342,15 +6343,15 @@ msgstr " accentが不正です "
 msgid "invalid group delimiter"
 msgstr " 区切り(delimiter)が不正です  "
 
-#: src/main/plotmath.c:1991 src/main/plotmath.c:2137
+#: src/main/plotmath.c:1991 src/main/plotmath.c:2128
 msgid "invalid group specification"
 msgstr " グループの指定が不正です "
 
-#: src/main/plotmath.c:2062
+#: src/main/plotmath.c:2053
 msgid "group is incomplete"
 msgstr " グループが不完全です "
 
-#: src/main/plotmath.c:3190
+#: src/main/plotmath.c:3181
 msgid "Metric information not available for this family/device"
 msgstr " このfamily/deviceに対してメトリック情報は利用できません "
 
@@ -7038,8 +7039,8 @@ msgid "an xdr complex data read error occurred"
 msgstr " xdr 複素数データの入力エラーが起きました "
 
 #: src/main/saveload.c:1780 src/main/serialize.c:1994
-#: src/main/serialize.c:2610 src/modules/internet/internet.c:526
-#: src/modules/internet/internet.c:587 src/modules/internet/internet.c:696
+#: src/main/serialize.c:2610 src/modules/internet/internet.c:509
+#: src/modules/internet/internet.c:582 src/modules/internet/internet.c:692
 msgid "write failed"
 msgstr " 書き込みに失敗しました "
 
@@ -7855,9 +7856,9 @@ msgstr " [[ ]] の添え字（%d）が範囲外です "
 msgid "incompatible types (from %s to %s) in '[[' assignment"
 msgstr " [[ による代入に両立しない型があります(%s から %s)  "
 
-#: src/main/subassign.c:1909 src/main/subscript.c:144 src/main/subscript.c:146
-#: src/main/subscript.c:275 src/main/subscript.c:277 src/main/subscript.c:831
-#: src/main/subscript.c:833 src/main/subscript.c:924 src/main/subscript.c:926
+#: src/main/subassign.c:1909 src/main/subscript.c:149 src/main/subscript.c:151
+#: src/main/subscript.c:280 src/main/subscript.c:282 src/main/subscript.c:887
+#: src/main/subscript.c:889 src/main/subscript.c:980 src/main/subscript.c:982
 #: src/main/subset.c:1126
 #, c-format
 msgid "invalid subscript type '%s'"
@@ -7872,69 +7873,69 @@ msgstr " この S4 クラスのサブセットを付値するメソッドはあ�
 msgid "coercing LHS to a list"
 msgstr " 左辺をリストに変換しました "
 
-#: src/main/subscript.c:54 src/main/subscript.c:76 src/main/subscript.c:181
-#: src/main/subscript.c:205
+#: src/main/subscript.c:59 src/main/subscript.c:81 src/main/subscript.c:186
+#: src/main/subscript.c:210
 msgid "attempt to select less than one element"
 msgstr " 一つ未満の要素を選択しようとしました "
 
-#: src/main/subscript.c:58 src/main/subscript.c:73 src/main/subscript.c:179
-#: src/main/subscript.c:209 src/main/subscript.c:305
+#: src/main/subscript.c:63 src/main/subscript.c:78 src/main/subscript.c:184
+#: src/main/subscript.c:214 src/main/subscript.c:310
 msgid "attempt to select more than one element"
 msgstr " 二つ以上の要素を選択しようとしました "
 
-#: src/main/subscript.c:185
+#: src/main/subscript.c:190
 msgid "internal error in use of recursive indexing"
 msgstr " 再帰的インデックスの使用中に，内部エラーが起きました "
 
-#: src/main/subscript.c:253
+#: src/main/subscript.c:258
 #, c-format
 msgid "further partial match of '%s' to '%s'"
 msgstr " '%s' の '%s' への更なる部分マッチ "
 
-#: src/main/subscript.c:298
+#: src/main/subscript.c:303
 msgid "should only be called in an assignment context."
 msgstr ""
 
-#: src/main/subscript.c:303
+#: src/main/subscript.c:308
 #, c-format
 msgid "recursive indexing failed at level %d\n"
 msgstr " 再帰的な添字操作がレベル %d で失敗しました \n"
 
-#: src/main/subscript.c:310
+#: src/main/subscript.c:315
 #, c-format
 msgid "no such index at level %d\n"
 msgstr " レベル %d にはそのようなインデックスはありません \n"
 
-#: src/main/subscript.c:314 src/main/subset.c:133 src/main/subset.c:1030
+#: src/main/subscript.c:319 src/main/subset.c:133 src/main/subset.c:1030
 #, fuzzy
 msgid "invalid subscript for pairlist"
 msgstr " リストへの付値の添字が不正です "
 
-#: src/main/subscript.c:357
+#: src/main/subscript.c:362
 msgid "incorrect number of columns in matrix subscript"
 msgstr " 添え字の数が正しくありません "
 
-#: src/main/subscript.c:376 src/main/subscript.c:394 src/main/subscript.c:418
+#: src/main/subscript.c:381 src/main/subscript.c:399 src/main/subscript.c:423
 msgid "negative values are not allowed in a matrix subscript"
 msgstr " 負の長さのベクトルは許されません "
 
-#: src/main/subscript.c:497
+#: src/main/subscript.c:502
 msgid "(subscript) logical subscript too long"
 msgstr "  (subscript) 論理値添え字が長すぎます "
 
-#: src/main/subscript.c:595 src/main/subscript.c:650
+#: src/main/subscript.c:651 src/main/subscript.c:706
 msgid "only 0's may be mixed with negative subscripts"
 msgstr " 負の添字と混在できるのは 0 という添字だけです "
 
-#: src/main/subscript.c:623
+#: src/main/subscript.c:679
 msgid "subscript too large for 32-bit R"
 msgstr ""
 
-#: src/main/subscript.c:822
+#: src/main/subscript.c:878
 msgid "no 'dimnames' attribute for array"
 msgstr " 配列に 'dimnames' 属性がありません "
 
-#: src/main/subscript.c:862
+#: src/main/subscript.c:918
 msgid "subscripting on non-vector"
 msgstr " ベクトルでないものへの添え字操作 "
 
@@ -8488,133 +8489,128 @@ msgstr " 少なくとも四つの制御点が必要です "
 msgid "there must be at least three control points"
 msgstr " 少なくとも三つの制御点が必要です "
 
-#: src/modules/internet/internet.c:117 src/modules/internet/internet.c:242
+#: src/modules/internet/internet.c:108 src/modules/internet/internet.c:233
 #, fuzzy
 msgid "can only open URLs for reading"
 msgstr " コネクションは読み込みのために開かれていません "
 
-#: src/modules/internet/internet.c:124
+#: src/modules/internet/internet.c:115
 msgid "for https:// URLs use setInternet2(TRUE)"
 msgstr ""
 
-#: src/modules/internet/internet.c:356 src/modules/internet/internet.c:360
-#: src/modules/internet/internet.c:366 src/modules/internet/internet.c:388
-#: src/modules/internet/libcurl.c:636 src/modules/internet/libcurl.c:640
-#: src/modules/internet/libcurl.c:646 src/modules/internet/libcurl.c:658
-#: src/modules/internet/libcurl.c:666
+#: src/modules/internet/internet.c:347 src/modules/internet/internet.c:351
+#: src/modules/internet/internet.c:357 src/modules/internet/internet.c:379
+#: src/modules/internet/libcurl.c:651 src/modules/internet/libcurl.c:655
+#: src/modules/internet/libcurl.c:661 src/modules/internet/libcurl.c:673
+#: src/modules/internet/libcurl.c:681
 msgid "allocation of url connection failed"
 msgstr " url 接続の割り当てに失敗しました "
 
-#: src/modules/internet/internet.c:495 src/modules/internet/internet.c:576
-#: src/modules/internet/internet.c:682 src/modules/internet/libcurl.c:353
-#: src/modules/internet/libcurl.c:363
+#: src/modules/internet/internet.c:477 src/modules/internet/internet.c:570
+#: src/modules/internet/internet.c:679 src/modules/internet/libcurl.c:363
+#: src/modules/internet/libcurl.c:376
 msgid "Download progress"
 msgstr " ダウンロード実行中です "
 
-#: src/modules/internet/internet.c:516
+#: src/modules/internet/internet.c:499
 #, c-format
 msgid "cannot open URL '%s', reason '%s'"
 msgstr "URL '%s' を開くことができません, 理由は '%s' です "
 
-#: src/modules/internet/internet.c:522 src/modules/internet/internet.c:550
-#: src/modules/internet/internet.c:655 src/modules/internet/libcurl.c:392
+#: src/modules/internet/internet.c:505 src/modules/internet/internet.c:532
+#: src/modules/internet/internet.c:652 src/modules/internet/libcurl.c:404
 #, c-format
 msgid "cannot open destfile '%s', reason '%s'"
 msgstr " 目標ファイル '%s' を開くことができません, 理由は '%s' です "
 
-#: src/modules/internet/internet.c:554 src/modules/internet/internet.c:660
-#: src/modules/internet/libcurl.c:396
+#: src/modules/internet/internet.c:536 src/modules/internet/internet.c:657
+#: src/modules/internet/libcurl.c:408
 #, fuzzy, c-format
 msgid "Trying URL '%s'\n"
 msgstr " URL '%s' を試しています \n"
 
-#: src/modules/internet/internet.c:561 src/modules/internet/internet.c:667
-#, fuzzy
-msgid "Opened URL\n"
-msgstr " 開かれた URL \n"
-
-#: src/modules/internet/internet.c:600 src/modules/internet/internet.c:709
-#: src/modules/internet/libcurl.c:235
+#: src/modules/internet/internet.c:596 src/modules/internet/internet.c:706
+#: src/modules/internet/libcurl.c:249
 #, c-format
 msgid "%d%% downloaded"
 msgstr ""
 
-#: src/modules/internet/internet.c:619 src/modules/internet/internet.c:728
-#: src/modules/internet/libcurl.c:433
+#: src/modules/internet/internet.c:617 src/modules/internet/internet.c:727
+#: src/modules/internet/libcurl.c:448
 #, c-format
 msgid "Downloaded %0.1f MB"
 msgstr ""
 
-#: src/modules/internet/internet.c:621 src/modules/internet/internet.c:731
-#: src/modules/internet/libcurl.c:435
+#: src/modules/internet/internet.c:619 src/modules/internet/internet.c:730
+#: src/modules/internet/libcurl.c:450
 #, c-format
 msgid "Downloaded %d KB"
 msgstr ""
 
-#: src/modules/internet/internet.c:623 src/modules/internet/internet.c:733
-#: src/modules/internet/libcurl.c:437
+#: src/modules/internet/internet.c:621 src/modules/internet/internet.c:732
+#: src/modules/internet/libcurl.c:452
 #, c-format
 msgid "Downloaded %d byte"
 msgid_plural "Downloaded %d bytes"
 msgstr[0] ""
 
-#: src/modules/internet/internet.c:634 src/modules/internet/internet.c:744
-#: src/modules/internet/libcurl.c:442
+#: src/modules/internet/internet.c:632 src/modules/internet/internet.c:743
+#: src/modules/internet/libcurl.c:457
 #, fuzzy, c-format
 msgid "downloaded length %0.f != reported length %0.f"
 msgstr " ダウンロードされた長さ %d != 報告された長さ %d です "
 
-#: src/modules/internet/internet.c:638 src/modules/internet/internet.c:749
+#: src/modules/internet/internet.c:636 src/modules/internet/internet.c:748
 #, c-format
 msgid "cannot open URL '%s'"
 msgstr " URL '%s' を開けません "
 
-#: src/modules/internet/internet.c:753
+#: src/modules/internet/internet.c:752
 msgid "unsupported URL scheme"
 msgstr " サポートされていないURLスキームです "
 
-#: src/modules/internet/internet.c:777 src/modules/internet/internet.c:946
+#: src/modules/internet/internet.c:775 src/modules/internet/internet.c:945
 #, c-format
 msgid "cannot open: HTTP status was '%d %s'"
 msgstr " 開けません：HTTP ステータスは '%d %s' です "
 
-#: src/modules/internet/internet.c:787 src/modules/internet/internet.c:961
-#: src/modules/internet/libcurl.c:268
+#: src/modules/internet/internet.c:785 src/modules/internet/internet.c:960
+#: src/modules/internet/libcurl.c:276
 #, c-format
 msgid "Content type '%s' length %0.0f byte (%0.1f MB)"
 msgid_plural "Content type '%s' length %0.0f bytes (%0.1f MB)"
 msgstr[0] ""
 
-#: src/modules/internet/internet.c:791 src/modules/internet/internet.c:963
-#: src/modules/internet/libcurl.c:271
+#: src/modules/internet/internet.c:789 src/modules/internet/internet.c:962
+#: src/modules/internet/libcurl.c:279
 #, c-format
 msgid "Content type '%s' length %d byte (%d KB)"
 msgid_plural "Content type '%s' length %d bytes (%d KB)"
 msgstr[0] ""
 
-#: src/modules/internet/internet.c:795 src/modules/internet/internet.c:965
-#: src/modules/internet/libcurl.c:274
+#: src/modules/internet/internet.c:793 src/modules/internet/internet.c:964
+#: src/modules/internet/libcurl.c:282
 #, c-format
 msgid "Content type '%s' length %d byte"
 msgid_plural "Content type '%s' length %d bytes"
 msgstr[0] ""
 
-#: src/modules/internet/internet.c:798
+#: src/modules/internet/internet.c:796
 #, c-format
 msgid "Content type '%s' length unknown"
 msgstr ""
 
-#: src/modules/internet/internet.c:842
+#: src/modules/internet/internet.c:840
 #, c-format
 msgid "ftp data connection made, file length %ld bytes\n"
 msgstr ""
 
-#: src/modules/internet/internet.c:844
+#: src/modules/internet/internet.c:842
 msgid "ftp data connection made, file length unknown\n"
 msgstr ""
 
-#: src/modules/internet/internet.c:917 src/modules/internet/internet.c:931
-#: src/modules/internet/internet.c:1017 src/modules/internet/internet.c:1026
+#: src/modules/internet/internet.c:916 src/modules/internet/internet.c:930
+#: src/modules/internet/internet.c:1016 src/modules/internet/internet.c:1025
 #, c-format
 msgid "InternetOpenUrl failed: '%s'"
 msgstr " InternetOpenUrl の失敗： '%s'  "
@@ -8631,35 +8627,35 @@ msgid ""
 "\t%s\n"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:217
+#: src/modules/internet/libcurl.c:228
 #, c-format
 msgid "Content length %0.0f byte (%0.1f MB)"
 msgid_plural "Content length %0.0f bytes (%0.1f MB)"
 msgstr[0] ""
 
-#: src/modules/internet/libcurl.c:220
+#: src/modules/internet/libcurl.c:231
 #, c-format
 msgid "Content length %d byte (%d KB)"
 msgid_plural "Content length %d bytes (%d KB)"
 msgstr[0] ""
 
-#: src/modules/internet/libcurl.c:223
+#: src/modules/internet/libcurl.c:234
 #, c-format
 msgid "Content length %d byte"
 msgid_plural "Content length %d bytes"
 msgstr[0] ""
 
-#: src/modules/internet/libcurl.c:294
+#: src/modules/internet/libcurl.c:302
 #, fuzzy
 msgid "'download.file(method = \"libcurl\")' is not supported on this platform"
 msgstr " 'dirmark  = TRUE' はこのプラットフォームではサポートされていません "
 
-#: src/modules/internet/libcurl.c:310
+#: src/modules/internet/libcurl.c:318
 #, fuzzy
 msgid "lengths of 'url' and 'destfile' arguments must match"
 msgstr " インポートとエクスポート名の長さは一致しなければなりません "
 
-#: src/modules/internet/libcurl.c:406 src/modules/internet/libcurl.c:540
+#: src/modules/internet/libcurl.c:418 src/modules/internet/libcurl.c:555
 #, c-format
 msgid "'curl_multi_wait()' function failed, code %d"
 msgstr ""
@@ -9816,6 +9812,10 @@ msgstr " X11 モジュールをロードできません "
 #: src/unix/X11.c:145 src/unix/X11.c:151 src/unix/X11.c:157 src/unix/X11.c:163
 msgid "X11 is not available"
 msgstr " X11 が利用できません "
+
+#, fuzzy
+#~ msgid "Opened URL\n"
+#~ msgstr " 開かれた URL \n"
 
 #~ msgid "internet routines were already initialized"
 #~ msgstr " インターネットルーチンは既に初期化されています "

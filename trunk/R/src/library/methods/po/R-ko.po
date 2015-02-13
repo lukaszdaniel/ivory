@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-01-22 19:58\n"
+"POT-Creation-Date: 2015-02-13 16:26\n"
 "PO-Revision-Date: 2014-03-27 13:32-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -888,6 +888,11 @@ msgstr ""
 #, fuzzy
 msgid "No fields defined"
 msgstr "%s는 정의된 메소드들을 가지고 있지 않습니다"
+
+#. R/NextMethod.R: stop("No next method available")
+#: R/NextMethod.R:0
+msgid "No next method available"
+msgstr ""
 
 #. R/methodsTable.R: gettextf("No simply inherited methods found for function %s; using non-simple method",     sQuote(fdef@generic))
 #: R/methodsTable.R:0
@@ -2929,18 +2934,6 @@ msgid ""
 "(using the largest value)"
 msgstr ""
 
-#. R/RMethodUtils.R: gettextf("special function %s has no known argument list; will assume '(x, ...)'",     sQuote(f))
-#: R/RMethodUtils.R:0
-msgid "special function %s has no known argument list; will assume '(x, ...)'"
-msgstr ""
-"특이 함수 %s는 알려진 인자 목록을 가지고 있지 않습니다; 따라서 '(x, ...)'를 "
-"가진다고 가정됩니다"
-
-#. R/RMethodUtils.R: gettextf("special function %s is not permitted to have methods", sQuote(f))
-#: R/RMethodUtils.R:0
-msgid "special function %s is not permitted to have methods"
-msgstr "특이 함수 %s는 메소드를 가질 수 없습니다"
-
 #. R/RClassUtils.R: gettextf("subclass %s of class %s is not local and cannot be updated for new inheritance information; consider setClassUnion()",     .dQ(what), .dQ(class))
 #: R/RClassUtils.R:0
 msgid ""
@@ -3547,6 +3540,15 @@ msgid_plural ""
 "of the non-generic to be used as the default (%s)"
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid ""
+#~ "special function %s has no known argument list; will assume '(x, ...)'"
+#~ msgstr ""
+#~ "특이 함수 %s는 알려진 인자 목록을 가지고 있지 않습니다; 따라서 "
+#~ "'(x, ...)'를 가진다고 가정됩니다"
+
+#~ msgid "special function %s is not permitted to have methods"
+#~ msgstr "특이 함수 %s는 메소드를 가질 수 없습니다"
 
 #, fuzzy
 #~ msgid ""

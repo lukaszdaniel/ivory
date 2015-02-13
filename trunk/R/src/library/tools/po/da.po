@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 19:57+0100\n"
+"POT-Creation-Date: 2015-02-13 16:27+0100\n"
 "PO-Revision-Date: 2011-11-28 22:24+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -165,3 +165,7 @@ msgstr ""
 #: text.c:224 text.c:246
 msgid "out of memory"
 msgstr "ikke nok hukommelse"
+
+#: text.c:266 text.c:268
+msgid "first arg must be a single character string"
+msgstr ""

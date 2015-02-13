@@ -202,3 +202,10 @@ Version 2.23-13
 Changes to reduce noise from R CMD check --as-cran:
 put message in .onAttach and remove orig.
 
+
+Version 2.23-14
+===============
+
+Removed unused assignments.
+Improve DESCRIPTION file.
+

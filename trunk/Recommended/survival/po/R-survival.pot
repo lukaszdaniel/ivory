@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: survival 2.37-7\n"
-"POT-Creation-Date: 2015-01-18 21:31\n"
+"POT-Creation-Date: 2015-02-13 16:25\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,14 +12,14 @@ msgstr ""
 
 
 #: R/print.aareg.S: 0
-#. R/print.aareg.S: gettextf("%d out of %d unique event times used", summ$n[2], x$n[3],     domain = "R-survival")
+#. R/print.aareg.S: gettextf("%d out of %d unique event times used", summ$n[2], x$n[3], domain = "R-survival")
 
 msgid "%d out of %d unique event times used"
 msgstr ""
 
 
 #: R/survreg.S: 0
-#. R/survreg.S: gettextf("%s distribution has a fixed scale, user specified value ignored",     sQuote(dlist$name))
+#. R/survreg.S: gettextf("%s distribution has a fixed scale, user specified value ignored", sQuote(dlist$name))
 
 msgid "%s distribution has a fixed scale, user specified value ignored"
 msgstr ""
@@ -44,15 +44,15 @@ msgstr ""
 
 
 #: R/anova.survreg.S: 0
-#. R/anova.survreg.S: gettextf("%s distribution with %s link", sQuote(family.obj[1]),     sQuote(family.obj[2]))
+#. R/anova.survreg.S: gettextf("%s distribution with %s link", sQuote(family.obj[1]), sQuote(family.obj[2]))
 
 msgid "%s distribution with %s link"
 msgstr ""
 
 
 #: R/summary.ratetable.S: 0
-#. R/summary.ratetable.S: gettextf("%s has levels of: %s", att$dimid[i], paste(att$dimnames[[i]],     collapse = " "), domain = "R-survival")
-#. R/summary.ratetable.S: gettextf("%s has levels of: %s", att$dimid[i], paste(att$dimnames[[i]],     collapse = " "), domain = "R-survival")
+#. R/summary.ratetable.S: gettextf("%s has levels of: %s", att$dimid[i], paste(att$dimnames[[i]], collapse = " "),     domain = "R-survival")
+#. R/summary.ratetable.S: gettextf("%s has levels of: %s", att$dimid[i], paste(att$dimnames[[i]], collapse = " "),     domain = "R-survival")
 
 msgid "%s has levels of: %s"
 msgstr ""
@@ -66,9 +66,9 @@ msgstr ""
 
 
 #: R/summary.ratetable.S: 0
-#. R/summary.ratetable.S: gettextf("%s ranges from %s to %s; with %d categories\n", att$dimid[i],     format(min(att$cutpoints[[i]])), format(max(att$cutpoints[[i]])),     att$dim[i], domain = "R-survival")
-#. R/summary.ratetable.S: gettextf("%s ranges from %s to %s; with %d categories\n", att$dimid[i],     format(as.Date(min(att$cutpoints[[i]]), origin = "1960/01/01")),     format(as.Date(max(att$cutpoints[[i]]), origin = "1960/01/01")),     att$dim[i], domain = "R-survival")
-#. R/summary.ratetable.S: gettextf("%s ranges from %s to %s; with %d categories\n", att$dimid[i],     format(min(att$cutpoints[[i]])), format(max(att$cutpoints[[i]])),     att$dim[i], domain = "R-survival")
+#. R/summary.ratetable.S: gettextf("%s ranges from %s to %s; with %d categories\n", att$dimid[i], format(min(att$cutpoints[[i]])),     format(max(att$cutpoints[[i]])), att$dim[i], domain = "R-survival")
+#. R/summary.ratetable.S: gettextf("%s ranges from %s to %s; with %d categories\n", att$dimid[i], format(as.Date(min(att$cutpoints[[i]]),     origin = "1960/01/01")), format(as.Date(max(att$cutpoints[[i]]), origin = "1960/01/01")),     att$dim[i], domain = "R-survival")
+#. R/summary.ratetable.S: gettextf("%s ranges from %s to %s; with %d categories\n", att$dimid[i], format(min(att$cutpoints[[i]])),     format(max(att$cutpoints[[i]])), att$dim[i], domain = "R-survival")
 
 msgid "%s ranges from %s to %s; with %d categories"
 msgstr ""
@@ -100,14 +100,14 @@ msgstr ""
 #: R/coxph.wtest.S: 0
 #: R/coxph.wtest.S: 0
 #: R/frailty.brent.S: 0
-#. R/Surv.S: gettextf("'%s' and '%s' arguments are of different lengths",     "time", "event")
-#. R/Surv.S: gettextf("'%s' and '%s' arguments are of different lengths",     "time", "time2")
-#. R/Surv.S: gettextf("'%s' and '%s' arguments are of different lengths",     "time", "event")
-#. R/Surv.S: gettextf("'%s' and '%s' arguments are of different lengths",     "time", "time2")
-#. R/coxph.wtest.S: gettextf("'%s' and '%s' arguments are of different lengths",     "var", "b")
-#. R/coxph.wtest.S: gettextf("'%s' and '%s' arguments are of different lengths",     "var", "b")
-#. R/coxph.wtest.S: gettextf("'%s' and '%s' arguments are of different lengths",     "var", "b")
-#. R/frailty.brent.S: gettextf("'%s' and '%s' arguments are of different lengths",     "x", "y")
+#. R/Surv.S: gettextf("'%s' and '%s' arguments are of different lengths", "time", "event")
+#. R/Surv.S: gettextf("'%s' and '%s' arguments are of different lengths", "time", "time2")
+#. R/Surv.S: gettextf("'%s' and '%s' arguments are of different lengths", "time", "event")
+#. R/Surv.S: gettextf("'%s' and '%s' arguments are of different lengths", "time", "time2")
+#. R/coxph.wtest.S: gettextf("'%s' and '%s' arguments are of different lengths", "var", "b")
+#. R/coxph.wtest.S: gettextf("'%s' and '%s' arguments are of different lengths", "var", "b")
+#. R/coxph.wtest.S: gettextf("'%s' and '%s' arguments are of different lengths", "var", "b")
+#. R/frailty.brent.S: gettextf("'%s' and '%s' arguments are of different lengths", "x", "y")
 
 msgid "'%s' and '%s' arguments are of different lengths"
 msgstr ""
@@ -139,15 +139,15 @@ msgstr ""
 #: R/survfitms.R: 0
 #: R/survfitms.R: 0
 #. R/aareg.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("aareg"))
-#. R/anova.coxph.S: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("coxph"))
-#. R/attrassign.R: gettextf("'%s' argument is not an object of class %s", "tt",     dQuote("terms"))
-#. R/basehaz.S: gettextf("'%s' argument is not an object of class %s", "fit",     dQuote("coxph"))
-#. R/cox.zph.S: gettextf("'%s' argument is not an object of class %s", "fit",     dQuote("coxph"))
-#. R/coxph.rvar.S: gettextf("'%s' argument is not an object of class %s", "fit",     dQuote("coxph"))
+#. R/anova.coxph.S: gettextf("'%s' argument is not an object of class %s", "object", dQuote("coxph"))
+#. R/attrassign.R: gettextf("'%s' argument is not an object of class %s", "tt", dQuote("terms"))
+#. R/basehaz.S: gettextf("'%s' argument is not an object of class %s", "fit", dQuote("coxph"))
+#. R/cox.zph.S: gettextf("'%s' argument is not an object of class %s", "fit", dQuote("coxph"))
+#. R/coxph.rvar.S: gettextf("'%s' argument is not an object of class %s", "fit", dQuote("coxph"))
 #. R/is.ratetable.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("ratetable"))
 #. R/lines.aareg.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("aareg"))
 #. R/plot.aareg.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("aareg"))
-#. R/predict.coxph.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("coxph"))
+#. R/predict.coxph.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("coxph"))
 #. R/print.aareg.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("aareg"))
 #. R/print.coxph.penal.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("coxph.penal"))
 #. R/print.survdiff.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("survdiff"))
@@ -155,14 +155,14 @@ msgstr ""
 #. R/print.survreg.penal.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("servreg.penal"))
 #. R/pspline.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("pspline"))
 #. R/quantile.survfit.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("survfit"))
-#. R/summary.aareg.S: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("aareg"))
-#. R/summary.ratetable.S: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("ratetable"))
-#. R/summary.survexp.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("survexp"))
-#. R/survexp.R: gettextf("'%s' argument is not an object of class %s", "ratetable",     dQuote("ratetable"))
+#. R/summary.aareg.S: gettextf("'%s' argument is not an object of class %s", "object", dQuote("aareg"))
+#. R/summary.ratetable.S: gettextf("'%s' argument is not an object of class %s", "object", dQuote("ratetable"))
+#. R/summary.survexp.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("survexp"))
+#. R/survexp.R: gettextf("'%s' argument is not an object of class %s", "ratetable", dQuote("ratetable"))
 #. R/survfitKM.S: gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
 #. R/survfitTurnbull.S: gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
-#. R/survfitms.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("survfit"))
-#. R/survfitms.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("survfitms"))
+#. R/survfitms.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("survfit"))
+#. R/survfitms.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("survfitms"))
 
 msgid "'%s' argument is not an object of class %s"
 msgstr ""
@@ -196,7 +196,7 @@ msgstr ""
 
 
 #: R/match.ratetable.S: 0
-#. R/match.ratetable.S: gettextf("'%s' argument needed by the ratetable was not found in the data",     dimid[is.na(ord)])
+#. R/match.ratetable.S: gettextf("'%s' argument needed by the ratetable was not found in the data", dimid[is.na(ord)])
 
 msgid "'%s' argument needed by the ratetable was not found in the data"
 msgstr ""
@@ -213,10 +213,10 @@ msgstr ""
 #: R/frailty.gamma.S: 0
 #: R/frailty.gaussian.S: 0
 #: R/frailty.t.S: 0
-#. R/frailty.gamma.S: gettextf("'%s' option is set but '%s' argument is specified",     "method != df", "df")
-#. R/frailty.gamma.S: gettextf("'%s' option is set but '%s' argument is specified",     "method != fixed", "theta")
-#. R/frailty.gaussian.S: gettextf("'%s' option is set but '%s' argument is specified",     "method != fixed", "theta")
-#. R/frailty.t.S: gettextf("'%s' option is set but '%s' argument is specified",     "method != fixed", "theta")
+#. R/frailty.gamma.S: gettextf("'%s' option is set but '%s' argument is specified", "method != df", "df")
+#. R/frailty.gamma.S: gettextf("'%s' option is set but '%s' argument is specified", "method != fixed",     "theta")
+#. R/frailty.gaussian.S: gettextf("'%s' option is set but '%s' argument is specified", "method != fixed",     "theta")
+#. R/frailty.t.S: gettextf("'%s' option is set but '%s' argument is specified", "method != fixed",     "theta")
 
 msgid "'%s' option is set but '%s' argument is specified"
 msgstr ""
@@ -227,19 +227,19 @@ msgstr ""
 #: R/frailty.gaussian.S: 0
 #: R/frailty.t.S: 0
 #: R/frailty.t.S: 0
-#. R/frailty.gamma.S: gettextf("'%s' option is set but no '%s' argument", "method = df",     "df")
-#. R/frailty.gamma.S: gettextf("'%s' option is set but no '%s' argument", "method = fixed",     "theta")
-#. R/frailty.gaussian.S: gettextf("'%s' option is set but no '%s' argument", "method = df",     "df")
-#. R/frailty.gaussian.S: gettextf("'%s' option is set but no '%s' argument", "method = fixed",     "theta")
-#. R/frailty.t.S: gettextf("'%s' option is set but no '%s' argument", "method = df",     "df")
-#. R/frailty.t.S: gettextf("'%s' option is set but no '%s' argument", "method = fixed",     "theta")
+#. R/frailty.gamma.S: gettextf("'%s' option is set but no '%s' argument", "method = df", "df")
+#. R/frailty.gamma.S: gettextf("'%s' option is set but no '%s' argument", "method = fixed", "theta")
+#. R/frailty.gaussian.S: gettextf("'%s' option is set but no '%s' argument", "method = df", "df")
+#. R/frailty.gaussian.S: gettextf("'%s' option is set but no '%s' argument", "method = fixed", "theta")
+#. R/frailty.t.S: gettextf("'%s' option is set but no '%s' argument", "method = df", "df")
+#. R/frailty.t.S: gettextf("'%s' option is set but no '%s' argument", "method = fixed", "theta")
 
 msgid "'%s' option is set but no '%s' argument"
 msgstr ""
 
 
 #: R/residuals.coxph.S: 0
-#. R/residuals.coxph.S: gettextf("'%s' residuals are not available for the exact method",     type)
+#. R/residuals.coxph.S: gettextf("'%s' residuals are not available for the exact method", type)
 
 msgid "'%s' residuals are not available for the exact method"
 msgstr ""
@@ -582,14 +582,14 @@ msgstr ""
 
 
 #: R/aareg.S: 0
-#. R/aareg.S: gettextf("Aalen model doesn't support \"%s\" survival data",     type)
+#. R/aareg.S: gettextf("Aalen model doesn't support \"%s\" survival data", type)
 
 msgid "Aalen model doesn't support \"%s\" survival data"
 msgstr ""
 
 
 #: R/ratetable.S: 0
-#. R/ratetable.S: gettextf("Aguments do not all have the same length (arg %d)",     i)
+#. R/ratetable.S: gettextf("Aguments do not all have the same length (arg %d)", i)
 
 msgid "Aguments do not all have the same length (arg %d)"
 msgstr ""
@@ -672,9 +672,9 @@ msgstr ""
 #: R/print.summary.survreg.S: 0
 #: R/print.survdiff.S: 0
 #: R/print.survreg.S: 0
-#. R/print.summary.survreg.S: gettextf("Chisq= %s on %d degrees of freedom, p= %s", format(round(x$chi,     2)), round(df, 1), format(signif(1 - pchisq(x$chi, df), 2)),     domain = "R-survival")
+#. R/print.summary.survreg.S: gettextf("Chisq= %s on %d degrees of freedom, p= %s", format(round(x$chi, 2)), round(df,     1), format(signif(1 - pchisq(x$chi, df), 2)), domain = "R-survival")
 #. R/print.survdiff.S: gettext("Chisq= %s on %d degrees of freedom, p= %s", domain = "R-survival")
-#. R/print.survreg.S: gettextf("Chisq= %s on %d degrees of freedom, p= %s", format(round(chi,     2)), round(df, 1), format(signif(1 - pchisq(chi, df), 2)),     domain = "R-survival")
+#. R/print.survreg.S: gettextf("Chisq= %s on %d degrees of freedom, p= %s", format(round(chi, 2)), round(df,     1), format(signif(1 - pchisq(chi, df), 2)), domain = "R-survival")
 
 msgid "Chisq= %s on %d degrees of freedom, p= %s"
 msgstr ""
@@ -683,7 +683,7 @@ msgstr ""
 #: R/print.aareg.S: 0
 #: R/summary.aareg.S: 0
 #. R/print.aareg.S: gettext("Chisq= %s on %d df, p=%s; test weights= %s", domain = "R-survival")
-#. R/summary.aareg.S: gettextf("Chisq= %s on %d df, p=%s; test weights= %s", format(round(chi,     2)), df, signif(1 - pchisq(chi, df), 2), x$test, domain = "R-survival")
+#. R/summary.aareg.S: gettextf("Chisq= %s on %d df, p=%s; test weights= %s", format(round(chi, 2)), df,     signif(1 - pchisq(chi, df), 2), x$test, domain = "R-survival")
 
 msgid "Chisq= %s on %d df, p=%s; test weights= %s"
 msgstr ""
@@ -711,9 +711,9 @@ msgstr ""
 #: R/print.summary.coxph.S: 0
 #: R/print.summary.coxph.penal.S: 0
 #: R/survConcordance.R: 0
-#. R/print.summary.coxph.S: gettextf("Concordance= %s (se = %s)", format(round(x$concordance[1],     3)), format(round(x$concordance[2], 3)), domain = "R-survival")
-#. R/print.summary.coxph.penal.S: gettextf("Concordance= %s (se = %s)", format(round(x$concordance[1],     3)), format(round(x$concordance[2], 3)), domain = "R-survival")
-#. R/survConcordance.R: gettextf("Concordance= %s (se = %s)", format(x$concordance),     format(x$std.err), domain = "R-survival")
+#. R/print.summary.coxph.S: gettextf("Concordance= %s (se = %s)", format(round(x$concordance[1], 3)), format(round(x$concordance[2],     3)), domain = "R-survival")
+#. R/print.summary.coxph.penal.S: gettextf("Concordance= %s (se = %s)", format(round(x$concordance[1], 3)), format(round(x$concordance[2],     3)), domain = "R-survival")
+#. R/survConcordance.R: gettextf("Concordance= %s (se = %s)", format(x$concordance), format(x$std.err), domain = "R-survival")
 
 msgid "Concordance= %s (se = %s)"
 msgstr ""
@@ -744,7 +744,7 @@ msgstr ""
 #: R/anova.coxph.S: 0
 #: R/anova.coxphlist.S: 0
 #. R/anova.coxmelist.R: gettextf("Cox model: response is %s", responses[1])
-#. R/anova.coxph.S: gettextf("Cox model: response is %s", deparse(object$terms[[2]]),     domain = "R-survival")
+#. R/anova.coxph.S: gettextf("Cox model: response is %s", deparse(object$terms[[2]]), domain = "R-survival")
 #. R/anova.coxphlist.S: gettextf("Cox model: response is %s", responses[1])
 
 msgid "Cox model: response is %s"
@@ -779,9 +779,9 @@ msgstr ""
 #: R/print.coxph.penal.S: 0
 #: R/print.summary.coxph.penal.S: 0
 #: R/print.survreg.penal.S: 0
-#. R/print.coxph.penal.S: gettextf("Degrees of freedom for terms= %s", paste(format(round(x$df,     1)), collapse = " "), domain = "R-survival")
-#. R/print.summary.coxph.penal.S: gettextf("Degrees of freedom for terms= %s", paste(format(round(x$df,     1)), collapse = " "), domain = "R-survival")
-#. R/print.survreg.penal.S: gettextf("Degrees of freedom for terms= %s", paste(format(round(x$df,     1)), collapse = " "), domain = "R-survival")
+#. R/print.coxph.penal.S: gettextf("Degrees of freedom for terms= %s", paste(format(round(x$df, 1)), collapse = " "),     domain = "R-survival")
+#. R/print.summary.coxph.penal.S: gettextf("Degrees of freedom for terms= %s", paste(format(round(x$df, 1)), collapse = " "),     domain = "R-survival")
+#. R/print.survreg.penal.S: gettextf("Degrees of freedom for terms= %s", paste(format(round(x$df, 1)), collapse = " "),     domain = "R-survival")
 
 msgid "Degrees of freedom for terms= %s"
 msgstr ""
@@ -796,8 +796,8 @@ msgstr ""
 
 
 #: R/cch.R: 0
-#. R/cch.R: gettextf("Exposure-stratified case-cohort analysis, %s method.",     x$method, domain = "R-survival")
-#. R/cch.R: gettextf("Exposure-stratified case-cohort analysis, %s method.",     x$method, domain = "R-survival")
+#. R/cch.R: gettextf("Exposure-stratified case-cohort analysis, %s method.", x$method, domain = "R-survival")
+#. R/cch.R: gettextf("Exposure-stratified case-cohort analysis, %s method.", x$method, domain = "R-survival")
 
 msgid "Exposure-stratified case-cohort analysis, %s method."
 msgstr ""
@@ -818,7 +818,7 @@ msgstr ""
 
 
 #: R/match.ratetable.S: 0
-#. R/match.ratetable.S: gettextf("In 'ratetable()', %s must be a continuous variable",     dimid[i])
+#. R/match.ratetable.S: gettextf("In 'ratetable()', %s must be a continuous variable", dimid[i])
 
 msgid "In 'ratetable()', %s must be a continuous variable"
 msgstr ""
@@ -871,9 +871,9 @@ msgstr ""
 #: R/print.coxph.penal.S: 0
 #: R/print.summary.coxph.penal.S: 0
 #: R/print.survreg.penal.S: 0
-#. R/print.coxph.penal.S: gettextf("Iterations: %d outer, %d Newton-Raphson", x$iter[1],     x$iter[2], domain = "R-survival")
-#. R/print.summary.coxph.penal.S: gettextf("Iterations: %d outer, %d Newton-Raphson", x$iter[1],     x$iter[2], domain = "R-survival")
-#. R/print.survreg.penal.S: gettextf("Iterations: %d outer, %d Newton-Raphson", x$iter[1],     x$iter[2], domain = "R-survival")
+#. R/print.coxph.penal.S: gettextf("Iterations: %d outer, %d Newton-Raphson", x$iter[1], x$iter[2], domain = "R-survival")
+#. R/print.summary.coxph.penal.S: gettextf("Iterations: %d outer, %d Newton-Raphson", x$iter[1], x$iter[2], domain = "R-survival")
+#. R/print.survreg.penal.S: gettextf("Iterations: %d outer, %d Newton-Raphson", x$iter[1], x$iter[2], domain = "R-survival")
 
 msgid "Iterations: %d outer, %d Newton-Raphson"
 msgstr ""
@@ -883,18 +883,18 @@ msgstr ""
 #: R/print.summary.coxph.S: 0
 #: R/print.summary.coxph.penal.S: 0
 #: R/print.survreg.penal.S: 0
-#. R/print.coxph.S: gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(logtest,     2)), df, format(1 - pchisq(logtest, df)), domain = "R-survival")
+#. R/print.coxph.S: gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(logtest, 2)),     df, format(1 - pchisq(logtest, df)), domain = "R-survival")
 #. R/print.summary.coxph.S: gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(x$logtest["test"],     2)), x$logtest["df"], format(x$logtest["pvalue"]), domain = "R-survival")
-#. R/print.summary.coxph.penal.S: gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(logtest,     2)), df, format(1 - pchisq(logtest, df)), domain = "R-survival")
-#. R/print.survreg.penal.S: gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(logtest,     2)), round(df, 1), format(1 - pchisq(logtest, df)), domain = "R-survival")
+#. R/print.summary.coxph.penal.S: gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(logtest, 2)),     df, format(1 - pchisq(logtest, df)), domain = "R-survival")
+#. R/print.survreg.penal.S: gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(logtest, 2)),     round(df, 1), format(1 - pchisq(logtest, df)), domain = "R-survival")
 
 msgid "Likelihood ratio test = %s on %s df, p=%s"
 msgstr ""
 
 
 #: R/print.coxph.penal.S: 0
-#. R/print.coxph.penal.S: gettextf("Likelihood ratio test=%s on %s df, p=%s n=%d", format(round(logtest,     2)), format(round(df, 2)), format(1 - pchisq(logtest, df)),     x$n, domain = "R-survival")
-#. R/print.coxph.penal.S: gettextf("Likelihood ratio test=%s on %s df, p=%s n=%d", format(round(logtest,     2)), format(round(df, 2)), format(1 - pchisq(logtest, df)),     x$n, domain = "R-survival")
+#. R/print.coxph.penal.S: gettextf("Likelihood ratio test=%s on %s df, p=%s n=%d", format(round(logtest, 2)),     format(round(df, 2)), format(1 - pchisq(logtest, df)), x$n, domain = "R-survival")
+#. R/print.coxph.penal.S: gettextf("Likelihood ratio test=%s on %s df, p=%s n=%d", format(round(logtest, 2)),     format(round(df, 2)), format(1 - pchisq(logtest, df)), x$n, domain = "R-survival")
 
 msgid "Likelihood ratio test=%s on %s df, p=%s n=%d"
 msgstr ""
@@ -904,10 +904,10 @@ msgstr ""
 #: R/agreg.fit.R: 0
 #: R/coxexact.fit.R: 0
 #: R/coxph.fit.S: 0
-#. R/agexact.fit.S: gettext("Loglik converged before variable %s; beta may be infinite.",     domain = "R-survival")
-#. R/agreg.fit.R: gettextf("Loglik converged before variable %s; beta may be infinite.",     tmp_n)
-#. R/coxexact.fit.R: gettextf("Loglik converged before variable %s; beta may be infinite.",     tmp_n)
-#. R/coxph.fit.S: gettext("Loglik converged before variable %s; beta may be infinite.",     domain = "R-survival")
+#. R/agexact.fit.S: gettext("Loglik converged before variable %s; beta may be infinite.", domain = "R-survival")
+#. R/agreg.fit.R: gettextf("Loglik converged before variable %s; beta may be infinite.", tmp_n)
+#. R/coxexact.fit.R: gettextf("Loglik converged before variable %s; beta may be infinite.", tmp_n)
+#. R/coxph.fit.S: gettext("Loglik converged before variable %s; beta may be infinite.", domain = "R-survival")
 
 msgid "Loglik converged before variable %s; beta may be infinite."
 msgstr ""
@@ -1065,15 +1065,15 @@ msgstr ""
 
 #: R/print.summary.coxph.S: 0
 #: R/print.summary.coxph.penal.S: 0
-#. R/print.summary.coxph.S: gettextf("Robust = %s p=%s", format(round(x$robscore["test"],     2)), format(x$robscore["pvalue"]), domain = "R-survival")
-#. R/print.summary.coxph.penal.S: gettextf("Robust = %s p=%s", format(round(x$rscore, 2)), format(1 -     pchisq(x$rscore, df)), domain = "R-survival")
+#. R/print.summary.coxph.S: gettextf("Robust = %s p=%s", format(round(x$robscore["test"], 2)), format(x$robscore["pvalue"]),     domain = "R-survival")
+#. R/print.summary.coxph.penal.S: gettextf("Robust = %s p=%s", format(round(x$rscore, 2)), format(1 - pchisq(x$rscore,     df)), domain = "R-survival")
 
 msgid "Robust = %s p=%s"
 msgstr ""
 
 
 #: R/print.summary.coxph.S: 0
-#. R/print.summary.coxph.S: gettextf("Rsquare= %s  (max possible=%s)", format(round(x$rsq["rsq"],     3)), format(round(x$rsq["maxrsq"], 3)), domain = "R-survival")
+#. R/print.summary.coxph.S: gettextf("Rsquare= %s  (max possible=%s)", format(round(x$rsq["rsq"], 3)), format(round(x$rsq["maxrsq"],     3)), domain = "R-survival")
 
 msgid "Rsquare= %s  (max possible=%s)"
 msgstr ""
@@ -1084,7 +1084,7 @@ msgstr ""
 #: R/print.survreg.S: 0
 #: R/print.survreg.penal.S: 0
 #. R/anova.survreg.S: gettextf("Scale fixed at %s", format(object$scale, digits = getOption("digits")))
-#. R/print.summary.survreg.S: gettextf("Scale fixed at %s", format(x$scale, digits = digits),     domain = "R-survival")
+#. R/print.summary.survreg.S: gettextf("Scale fixed at %s", format(x$scale, digits = digits), domain = "R-survival")
 #. R/print.survreg.S: gettextf("Scale fixed at %s", format(x$scale), domain = "R-survival")
 #. R/print.survreg.penal.S: gettextf("Scale fixed at %s", format(x$scale), domain = "R-survival")
 
@@ -1115,7 +1115,7 @@ msgstr ""
 #: R/print.summary.coxph.S: 0
 #: R/print.summary.coxph.penal.S: 0
 #. R/print.summary.coxph.S: gettextf("Score (logrank) test = %s on %s df, p=%s", format(round(x$sctest["test"],     2)), x$sctest["df"], format(x$sctest["pvalue"]), domain = "R-survival")
-#. R/print.summary.coxph.penal.S: gettextf("Score (logrank) test = %s on %s df, p=%s", format(round(sctest,     2)), df, format(1 - pchisq(sctest, df)), domain = "R-survival")
+#. R/print.summary.coxph.penal.S: gettextf("Score (logrank) test = %s on %s df, p=%s", format(round(sctest, 2)), df,     format(1 - pchisq(sctest, df)), domain = "R-survival")
 
 msgid "Score (logrank) test = %s on %s df, p=%s"
 msgstr ""
@@ -1272,7 +1272,7 @@ msgstr ""
 
 
 #: R/summary.pyears.S: 0
-#. R/summary.pyears.S: gettextf("Total number of person-years tabulated: %s\nTotal number of person-years off table: %s",     format(sum(object$data$pyears)), format(object$offtable),     domain = "R-survival")
+#. R/summary.pyears.S: gettextf("Total number of person-years tabulated: %s\nTotal number of person-years off table: %s",     format(sum(object$data$pyears)), format(object$offtable), domain = "R-survival")
 
 msgid "Total number of person-years tabulated: %s\nTotal number of person-years off table: %s"
 msgstr ""
@@ -1302,8 +1302,8 @@ msgstr ""
 
 #: R/print.summary.coxph.S: 0
 #: R/print.summary.coxph.penal.S: 0
-#. R/print.summary.coxph.S: gettextf("Wald test = %s on %s df, p=%s", format(round(x$waldtest["test"],     2)), x$waldtest["df"], format(x$waldtest["pvalue"]), domain = "R-survival")
-#. R/print.summary.coxph.penal.S: gettextf("Wald test = %s on %s df, p=%s", format(round(x$wald.test,     2)), df, format(1 - pchisq(x$wald.test, df)), domain = "R-survival")
+#. R/print.summary.coxph.S: gettextf("Wald test = %s on %s df, p=%s", format(round(x$waldtest["test"], 2)), x$waldtest["df"],     format(x$waldtest["pvalue"]), domain = "R-survival")
+#. R/print.summary.coxph.penal.S: gettextf("Wald test = %s on %s df, p=%s", format(round(x$wald.test, 2)), df, format(1 -     pchisq(x$wald.test, df)), domain = "R-survival")
 
 msgid "Wald test = %s on %s df, p=%s"
 msgstr ""
@@ -1317,7 +1317,7 @@ msgstr ""
 
 
 #: R/coxph.R: 0
-#. R/coxph.R: gettextf("X matrix deemed to be singular; variable %s", paste(vars,     collapse = " "))
+#. R/coxph.R: gettextf("X matrix deemed to be singular; variable %s", paste(vars, collapse = " "))
 
 msgid "X matrix deemed to be singular; variable %s"
 msgstr ""
@@ -1366,7 +1366,7 @@ msgstr ""
 
 
 #: R/coxph.R: 0
-#. R/coxph.R: gettextf("argument %s not matched", names(extraArgs)[indx ==     0L])
+#. R/coxph.R: gettextf("argument %s not matched", names(extraArgs)[indx == 0L])
 
 msgid "argument %s not matched"
 msgstr ""
@@ -1665,7 +1665,7 @@ msgstr ""
 
 
 #: R/coxph.detail.S: 0
-#. R/coxph.detail.S: gettextf("detailed output is not available for the %s method",     method)
+#. R/coxph.detail.S: gettextf("detailed output is not available for the %s method", method)
 
 msgid "detailed output is not available for the %s method"
 msgstr ""
@@ -1761,7 +1761,7 @@ msgstr ""
 
 #: R/coxpenal.fit.R: 0
 #: R/survpenal.fit.S: 0
-#. R/coxpenal.fit.R: gettextf("inner loop failed to coverge for iterations %s", paste(iterfail,     collapse = " "))
+#. R/coxpenal.fit.R: gettextf("inner loop failed to coverge for iterations %s", paste(iterfail, collapse = " "))
 #. R/survpenal.fit.S: gettextf("inner loop failed to coverge for iterations %s", paste(sQuote(iterfail),     collapse = ", "))
 
 msgid "inner loop failed to coverge for iterations %s"
@@ -2038,7 +2038,7 @@ msgstr ""
 
 
 #: R/match.ratetable.S: 0
-#. R/match.ratetable.S: gettextf("levels do not match for 'ratetable()' variable %s",     dimid[i])
+#. R/match.ratetable.S: gettextf("levels do not match for 'ratetable()' variable %s", dimid[i])
 
 msgid "levels do not match for 'ratetable()' variable %s"
 msgstr ""
@@ -2441,8 +2441,8 @@ msgstr ""
 
 #: R/survfitKM.S: 0
 #: R/survfitTurnbull.S: 0
-#. R/survfitKM.S: gettextf("start.time = %s is greater than all time points.",     start.time)
-#. R/survfitTurnbull.S: gettextf("start.time = %s is greater than all time points.",     start.time)
+#. R/survfitKM.S: gettextf("start.time = %s is greater than all time points.", start.time)
+#. R/survfitTurnbull.S: gettextf("start.time = %s is greater than all time points.", start.time)
 
 msgid "start.time = %s is greater than all time points."
 msgstr ""
@@ -2471,7 +2471,7 @@ msgstr ""
 
 #: R/survfit.R: 0
 #: R/survfitms.R: 0
-#. R/survfit.R: gettextf("strata %s not matched", paste(i[is.na(indx)], collapse = " "),     domain = "R-survival")
+#. R/survfit.R: gettextf("strata %s not matched", paste(i[is.na(indx)], collapse = " "), domain = "R-survival")
 #. R/survfitms.R: gettextf("strata %s not matched", paste(i[is.na(indx)], collapse = " "))
 
 msgid "strata %s not matched"
@@ -2700,7 +2700,7 @@ msgstr ""
 
 
 #: R/frailty.gamma.S: 0
-#. R/frailty.gamma.S: gettextf("variance of random effect= %s  I-likelihood = %s",     format(theta), format(round(clog, 1), digits = 10))
+#. R/frailty.gamma.S: gettextf("variance of random effect= %s  I-likelihood = %s", format(theta), format(round(clog,     1), digits = 10))
 
 msgid "variance of random effect= %s  I-likelihood = %s"
 msgstr ""
@@ -2792,7 +2792,7 @@ msgstr ""
 
 
 #: R/cch.R: 0
-#. R/cch.R: ngettext(sum(!subcoh & !cens), "%d censored observation not in subcohort",     "%d censored observations not in subcohort", domain = "R-survival")
+#. R/cch.R: ngettext(sum(!subcoh & !cens), "%d censored observation not in subcohort", "%d censored observations not in subcohort",     domain = "R-survival")
 
 msgid        "%d censored observation not in subcohort"
 msgid_plural "%d censored observations not in subcohort"
@@ -2810,7 +2810,7 @@ msgstr[1]    ""
 
 
 #: R/print.survreg.S: 0
-#. R/print.survreg.S: ngettext(sum(nas), "Coefficients: (%d not defined because of singularity)",     "Coefficients: (%d not defined because of singularities)",     domain = "R-survival")
+#. R/print.survreg.S: ngettext(sum(nas), "Coefficients: (%d not defined because of singularity)", "Coefficients: (%d not defined because of singularities)",     domain = "R-survival")
 
 msgid        "Coefficients: (%d not defined because of singularity)"
 msgid_plural "Coefficients: (%d not defined because of singularities)"
@@ -2819,7 +2819,7 @@ msgstr[1]    ""
 
 
 #: R/print.ratetable.S: 0
-#. R/print.ratetable.S: ngettext(length(attr(x, "dimid")), "Rate table with dimension: ",     "Rate table with dimensions: ", domain = "R-survival")
+#. R/print.ratetable.S: ngettext(length(attr(x, "dimid")), "Rate table with dimension: ", "Rate table with dimensions: ",     domain = "R-survival")
 
 msgid        "Rate table with dimension: "
 msgid_plural "Rate table with dimensions: "

@@ -254,7 +254,8 @@
       overridden for an \code{url()} connection \emph{via} its new
       \code{method} argument.
 
-      \code{download.file()} has new method \code{"wininet"}.
+      \code{download.file()} has new method \code{"wininet"}, selected
+      as the default by \option{--internet2} or \code{setInternet2()}.
 
       \item \code{parent.env<-} can no longer modify the parent of a
       locked namespace or namespace imports environment.  Contributed by
@@ -282,14 +283,33 @@
       to \code{methods::cbind2} (\code{methods::rbind2}) when at least
       one argument is an S4 object and S3 dispatch fails (due to
       ambiguity).
-      
+
       \item (Windows.)  \code{download.file(quiet = FALSE)} now uses
       text rather than Windows progress bars in non-interactive use.
 
-      \item New function \code{hsearch_db()} in package \pkg{utils} for 
+      \item New function \code{hsearch_db()} in package \pkg{utils} for
       building and retrieving the help search database used by
       \code{help.search()}, along with functions for inspecting the
       concepts and keywords in the help search database.
+
+      \item New \code{.getNamespaceInfo()} as no-check version of
+      \code{getNamespaceInfo()} mostly for internal speedup.
+
+      \item The help search system now takes \samp{\keyword} entries in
+      Rd files which are not standard keywords (as given in
+      \file{KEYWORDS} in the \R documentation directory) as concepts.
+      For standard keyword entries the corresponding descriptions are
+      additionally taken as concepts.
+
+      \item Add lengths() function for getting the length of every
+      element in a list.
+      
+      \item New function \code{toTitleCase()} in package \pkg{tools},
+      tailored to package titles.
+      
+      \item The matrix methods of \code{cbind()} and \code{rbind()}
+      allow matrices as inputs which have 2^31 or more elements.
+      (For \code{cbind()}, wish of \PR{16198}.)
     }
   }
 
@@ -372,18 +392,26 @@
       and \file{NEWS.Rd} files and in the help files.
 
       \item \command{R CMD check --as-cran} reports non-ASCII characters
-      in R source files in case there is no declared package encoding.
+      in R source files when there is no declared package encoding.
 
       \item \command{R CMD check --as-cran} reports (apparent) S3
       methods exported but not registered.
 
-      It reports overwriting registered S3 methods in base/recommended
+      It reports overwriting registered S3 methods from base/recommended
       packages.  (Such methods are replaced in the affected package for
       the rest of the session, even if the replacing namespace is
       unloaded.)
 
       These checks can also be selected by environment variables: see
       the \sQuote{R Internals} manual.
+
+      \item \command{R CMD check} now checks that the \samp{Title} and
+      \samp{Description} fields are correctly terminated.
+
+      \item \command{R CMD check --as-cran} reports if the \code{Title}
+      field does not appear to be in title case (see \sQuote{Writing R
+      Extensions}: there may be false positives, especially from
+      technical words).
     }
   }
 
@@ -442,8 +470,9 @@
       tried if binary versions are not available or not up to date.
 
       There are options for what \code{install.packages(type = "both")}
-      will do if compilation of a source package is desirable: see
-      \code{?options} (under \pkg{utils}).
+      (possibly called \emph{via} \code{update.packages()}) will do if
+      compilation of a source package is desirable: see \code{?options}
+      (under \pkg{utils}).
 
       If you intend not to accept updates as source packages, you should
       use \code{update.packages(type = "binary")}.
@@ -497,6 +526,13 @@
       \code{callGeneric()} and \code{callNextMethod()}.  (\PR{16141})
 
       \item \code{callGeneric()} now works after a \code{callNextMethod()}.
+
+      \item Subclass information is kept consistent when replacing an
+      ordinary S4 class with an "old class" via the \code{S4Class}
+      argument to \code{setOldClass()}. Thus, for example, a
+      \code{data.frame} is valid for a \code{list} argument in the
+      signature, and a \code{factor} is valid for \code{vector}
+      arguments.
     }
   }
 }
@@ -548,6 +584,10 @@
       configuration options of the version of PCRE in use.  In
       particular, this reports if regular expressions using
       \samp{\p{xx}} are supported.
+      
+      \item (Windows.) \code{download.file(cacheOK = FALSE)} is now
+      supported when \file{internet2.dll} is used.
+      
     }
   }
 
@@ -673,6 +713,9 @@
 
       \item \code{RShowDoc("NEWS", "txt")} had not been updated for the
       layout changes of \R 3.1.0.
+
+      \item The \code{xtfrm()} method for class \code{"Surv"} has been
+      corrected and its description expanded.
     }
   }
 }

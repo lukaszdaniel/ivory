@@ -581,17 +581,24 @@ setRlibs <-
 
         checkingLog(Log, gettext("checking DESCRIPTION meta-information ...", domain = "R-tools"))
         dfile <- if (is_base_pkg) "DESCRIPTION.in" else "DESCRIPTION"
+        any <- FALSE
+
         ## FIXME: this does not need to be run in another process
         ## but that needs conversion to format().
         Rcmd <- sprintf("tools:::.check_package_description(\"%s\", TRUE)", dfile)
         out <- R_runR(Rcmd, R_opts2, "R_DEFAULT_PACKAGES=NULL")
         if (length(out)) {
-            errorLog(Log)
-            printLog0(Log, paste(out, collapse = "\n"), "\n")
-            summaryLog(Log)
-            do_exit(1L)
+            if(any(!grepl("^Malformed (Title|Description)", out))) {
+                errorLog(Log)
+                printLog0(Log, paste(out, collapse = "\n"), "\n")
+                summaryLog(Log)
+                do_exit(1L)
+            } else {
+                noteLog(Log)
+                any <- TRUE
+                printLog0(Log, paste(out, collapse = "\n"), "\n")
+            }
         }
-        any <- FALSE
         ## Check the encoding.
         Rcmd <- sprintf("tools:::.check_package_description_encoding(\"%s\")", dfile)
         out <- R_runR(Rcmd, R_opts2, "R_DEFAULT_PACKAGES=NULL")
@@ -3475,7 +3482,7 @@ setRlibs <-
                 printLog(Log, paste(c(out, ""), collapse = "\n"))
 		maybe_exit(1L)
             } else if(length(res$bad_version) ||
-                      identical(res$foss_with_BuildVigettes, TRUE) ||
+                      identical(res$foss_with_BuildVignettes, TRUE) ||
                       res$empty_Maintainer_name ||
                       res$Maintainer_needs_quotes)
                 warningLog(Log)
@@ -4002,6 +4009,11 @@ setRlibs <-
         config_val_to_logical(Sys.getenv("_R_CHECK_RD_XREFS_", "TRUE"))
     R_check_use_codetools <-
         config_val_to_logical(Sys.getenv("_R_CHECK_USE_CODETOOLS_", "TRUE"))
+    ## Howver, we cannot use this if we did not install the recommended packages
+    if(R_check_use_codetools) {
+        tmp <- tryCatch(find.package('codetools'), error = identity)
+        if(inherits(tmp, "error")) R_check_use_codetools <- FALSE
+    }
     R_check_executables <-
         config_val_to_logical(Sys.getenv("_R_CHECK_EXECUTABLES_", "TRUE"))
     R_check_executables_exclusions <-

@@ -62,7 +62,7 @@ makePrototypeFromClassDef <-
     snames <- names(slots)
     ## try for a single superclass that is not virtual
     supers <- names(extends)
-    virtual <- NA
+##    virtual <- NA
     dataPartClass <- elNamed(slots, ".Data")
     prototype <- ClassDef@prototype
     dataPartDone <- is.null(dataPartClass)  || is(prototype, dataPartClass)# don't look for data part in supreclasses
@@ -81,10 +81,10 @@ makePrototypeFromClassDef <-
         exti <- extends[[i]]
         if(identical(exti@simple, FALSE))
             next ## only simple contains rel'ns give slots
-        if(identical(what, "VIRTUAL"))
+        if(identical(what, "VIRTUAL")) {
             ## the class is virtual, and the prototype usually NULL
-            virtual <- TRUE
-        else if(isClass(what, where = where)) {
+##            virtual <- TRUE
+        } else if(isClass(what, where = where)) {
             cli <- getClass(what, where = where)
             slotsi <- names(cli@slots)
             pri <- cli@prototype
@@ -92,7 +92,7 @@ makePrototypeFromClassDef <-
             if(is.null(prototype)) {
                 prototype <- pri
                 pnames <- names(attributes(prototype))
-                fromClass <- what
+##                fromClass <- what
             }
             else if(length(slots)) {
                 for(slotName in slotsi) {
@@ -220,9 +220,9 @@ completeClassDefinition <-
     properties <- ClassDef@slots
     prototype <- makePrototypeFromClassDef(properties, ClassDef, immediate, where)
     virtual <- ClassDef@virtual
-    validity <- ClassDef@validity
-    access <- ClassDef@access
-    package <- ClassDef@package
+#    validity <- ClassDef@validity
+#    access <- ClassDef@access
+#    package <- ClassDef@package
     extends    <- if(doExtends) completeExtends   (ClassDef, where = where) else ClassDef@contains
     subclasses <- if(doExtends) completeSubclasses(ClassDef, where = where) else ClassDef@subclasses
     if(is.na(virtual))
@@ -251,9 +251,9 @@ completeClassDefinition <-
 
 .completeClassSlots <- function(ClassDef, where) {
         properties <- ClassDef@slots
-        simpleContains <- ClassDef@contains
-        Class <- ClassDef@className
-        package <- ClassDef@package
+##        simpleContains <- ClassDef@contains
+##        Class <- ClassDef@className
+##        package <- ClassDef@package
         ext <- getAllSuperClasses(ClassDef, TRUE)
         ## ext has the names of all the direct and indirect superClasses but NOT those that do
         ## an explicit coerce (we can't conclude anything about slots, etc. from them)
@@ -702,7 +702,7 @@ reconcilePropertiesAndPrototype <-
                                 dQuote(elNamed(properties, ".Data")),
                                 dQuote(dataPartClass)),
                        domain = "R-methods")
-              pslots <- NULL
+##              pslots <- NULL
               if(is.null(prototype)) {
                   if(dataPartValue)
                       prototype <- newObject
@@ -1528,7 +1528,7 @@ setDataPart <- function(object, value, check = TRUE) {
 }
 
 .transitiveSubclasses <- function(by, to, toExt, moreExts, strictBy) {
-    what <- names(moreExts)
+##    what <- names(moreExts)
 ###    if(!strictBy) message(gettextf("Subclasses: %s: ",by), paste(what, collapse = ", "), domain = NA)
     for(i in seq_along(moreExts)) {
         byExt <- moreExts[[i]]

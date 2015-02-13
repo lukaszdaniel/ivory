@@ -2498,7 +2498,7 @@ function(package, dir, lib.loc = NULL)
         if(packageHasNamespace(package, dirname(dir))) {
             has_namespace <- TRUE
             code_env <- asNamespace(package)
-            ns_S3_methods_db <- getNamespaceInfo(package, "S3methods")
+            ns_S3_methods_db <- .getNamespaceInfo(code_env, "S3methods")
         }
         else
             code_env <- .package_env(package)
@@ -3136,6 +3136,15 @@ function(dfile, strict = FALSE)
        && !(package_name %in% unlist(standard_package_names)))
         out$bad_priority <- val
 
+    ## Minimal check (so far) of Title and Description.
+    if(strict && !is.na(val <- db["Title"])
+       && grepl("[.]$", val) && !grepl(" [.][.][.]", trimws(val)))
+        out$bad_Title <- TRUE
+    ## some people put punctuation inside quotes, some outside.
+    if(strict && !is.na(val <- db["Description"])
+       && !grepl("[.!?]['\")]?$", trimws(val)))
+        out$bad_Description <- TRUE
+
     class(out) <- "check_package_description"
 
     out
@@ -3211,7 +3220,15 @@ function(x, ...)
         writeLines(c(gettext("Invalid Priority field.", domain = "R-tools"),
                      strwrap(gettext("Packages with priorities 'base' or 'recommended' or 'defunct-base' must already be known to R.", domain = "R-tools")), ""))
 
-    if(any(as.integer(sapply(x, length)) > 0L))
+    if(identical(x$bad_Title, TRUE))
+        writeLines(gettext("Malformed Title field: should not end in a period.", domain = "R-tools"))
+
+    if(identical(x$bad_Description, TRUE))
+        writeLines(gettext("Malformed Description field: should contain one or more complete sentences.", domain = "R-tools"))
+
+    xx<- x; xx$bad_Title <- xx$bad_Description <- NULL
+
+    if(any(as.integer(sapply(xx, length)) > 0L))
         writeLines(c(strwrap(gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.", domain = "R-tools")), ""))
 
     invisible(x)
@@ -5203,9 +5220,10 @@ function(package, dir, lib.loc = NULL)
                          error = function(e) e)
             } else NULL
             if (!inherits(value, "error")) {
-                exps <- c(ls(envir = getNamespaceInfo(p, "exports"),
+		ns <- asNamespace(p)
+                exps <- c(ls(envir = .getNamespaceInfo(ns, "exports"),
                              all.names = TRUE),
-                          ls(envir = getNamespaceInfo(p, "lazydata"),
+                          ls(envir = .getNamespaceInfo(ns, "lazydata"),
                              all.names = TRUE),
                           extras[[p]])
                 this2 <- setdiff(this, exps)
@@ -6599,6 +6617,31 @@ function(dir)
             out$authors_at_R_calls <- aar
     }
 
+    ## Check Title field.
+    title <- trimws(as.vector(meta[["Title"]]))
+    title <- gsub("[\n\t]", " ", title)
+    package <- meta["Package"]
+    if (title == package) {
+        out$title_is_name <- TRUE
+    } else {
+        if(grepl(paste0("^", package), title))
+            out$title_includes_name <- TRUE
+        title2 <- toTitleCase(title)
+        if(title != title2)
+            out$title_case <- c(title, title2)
+    }
+
+    ## Check Description field.
+    descr <- trimws(as.vector(meta[["Description"]]))
+    descr <- gsub("[\n\t]", " ", descr)
+    package <- meta["Package"]
+    if(grepl(paste0("^['\"]?", package), descr))
+        out$descr_bad_start <- TRUE
+    if(grepl("^(The|This) package", descr))
+        out$descr_bad_start <- TRUE
+    if(!isTRUE(out$descr_bad_start) && !grepl("^['\"]?[[:upper:]]", descr))
+       out$descr_bad_initial <- TRUE
+
     ## Check URLs.
     if(capabilities("libcurl")) {
         ## Be defensive about building the package URL db.
@@ -6914,8 +6957,23 @@ function(x, ...)
             paste0("  ", names(y), "\n    ",
                    sapply(y, paste, collapse = "\n    "),
                    collapse = "\n"))
+      },
+      if(length(x$title_is_name)) {
+          gettext("The Title field is just the package name: provide a real title.", domain = "R-tools")
+      },
+      if(length(x$title_includes_name)) {
+          gettext("The Title field starts with the package name.", domain = "R-tools")
+      },
+      if(length(y <- x$title_case)) {
+          c(gettext("The Title field should be in title case, current version then in title case:", domain = "R-tools"), sQuote(y))
+      },
+      if(length(x$descr_bad_initial)) {
+          gettext("The Description field should start with a capital letter.", domain = "R-tools")
+      },
+      if(length(x$descr_bad_start)) {
+          gettext("The Description field should not start with the package name,\n  'This package' or 'The package'.", domain = "R-tools")
       }
-      )
+     )
 }
 
 ### * .check_Rd_metadata

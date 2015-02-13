@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-22 19:58+0100\n"
+"POT-Creation-Date: 2015-02-13 16:26+0100\n"
 "PO-Revision-Date: 2006-01-16 09:11+0100\n"
 "Last-Translator: Daniele Medri <daniele.medri2@unibo.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -643,9 +643,9 @@ msgstr "è sorto un problema nel lanciare l'editor %s"
 #: src/gnuwin32/extra.c:558 src/gnuwin32/extra.c:583 src/main/agrep.c:132
 #: src/main/agrep.c:136 src/main/agrep.c:774 src/main/agrep.c:779
 #: src/main/apply.c:324 src/main/apply.c:326 src/main/apply.c:329
-#: src/main/array.c:87 src/main/array.c:1156 src/main/array.c:1282
-#: src/main/array.c:1284 src/main/array.c:1285 src/main/array.c:1625
-#: src/main/array.c:1627 src/main/array.c:1629 src/main/attrib.c:195
+#: src/main/array.c:87 src/main/array.c:1219 src/main/array.c:1345
+#: src/main/array.c:1347 src/main/array.c:1348 src/main/array.c:1688
+#: src/main/array.c:1690 src/main/array.c:1692 src/main/attrib.c:195
 #: src/main/builtin.c:89 src/main/builtin.c:98 src/main/builtin.c:117
 #: src/main/builtin.c:119 src/main/builtin.c:149 src/main/builtin.c:558
 #: src/main/builtin.c:574 src/main/builtin.c:761 src/main/builtin.c:763
@@ -699,7 +699,7 @@ msgstr "è sorto un problema nel lanciare l'editor %s"
 #: src/main/envir.c:2147 src/main/envir.c:2154 src/main/envir.c:2165
 #: src/main/envir.c:2390 src/main/envir.c:2511 src/main/envir.c:2793
 #: src/main/envir.c:3035 src/main/envir.c:3049 src/main/envir.c:3056
-#: src/main/envir.c:3072 src/main/envir.c:3644 src/main/errors.c:1042
+#: src/main/envir.c:3072 src/main/envir.c:3653 src/main/errors.c:1042
 #: src/main/eval.c:394 src/main/eval.c:403 src/main/eval.c:406
 #: src/main/grep.c:775 src/main/grep.c:780 src/main/grep.c:1074
 #: src/main/grep.c:1076 src/main/grep.c:1078 src/main/grep.c:1523
@@ -707,7 +707,7 @@ msgstr "è sorto un problema nel lanciare l'editor %s"
 #: src/main/grep.c:2345 src/main/grep.c:2644 src/main/grep.c:2649
 #: src/main/internet.c:231 src/main/internet.c:245 src/main/internet.c:263
 #: src/main/internet.c:275 src/main/internet.c:287 src/main/internet.c:306
-#: src/main/memory.c:3793 src/main/names.c:1301 src/main/names.c:1304
+#: src/main/memory.c:3793 src/main/names.c:1303 src/main/names.c:1306
 #: src/main/objects.c:1547 src/main/objects.c:1549 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
 #: src/main/paste.c:411 src/main/paste.c:416 src/main/paste.c:421
@@ -752,19 +752,19 @@ msgstr "è sorto un problema nel lanciare l'editor %s"
 #: src/main/util.c:2207 src/main/util.c:2209 src/main/util.c:2234
 #: src/main/util.c:2236 src/main/util.c:2238 src/main/util.c:2241
 #: src/main/util.c:2244 src/main/util.c:2248 src/main/util.c:2250
-#: src/modules/internet/internet.c:462 src/modules/internet/internet.c:468
-#: src/modules/internet/internet.c:474 src/modules/internet/internet.c:477
-#: src/modules/internet/internet.c:481 src/modules/internet/libcurl.c:142
-#: src/modules/internet/libcurl.c:147 src/modules/internet/libcurl.c:150
-#: src/modules/internet/libcurl.c:304 src/modules/internet/libcurl.c:308
-#: src/modules/internet/libcurl.c:313 src/modules/internet/libcurl.c:316
-#: src/modules/internet/libcurl.c:320 src/modules/lapack/Lapack.c:156
-#: src/modules/lapack/Lapack.c:262 src/modules/lapack/Lapack.c:709
-#: src/modules/lapack/Lapack.c:818 src/modules/lapack/Lapack.c:880
-#: src/modules/lapack/Lapack.c:1205 src/modules/X11/devX11.c:3230
-#: src/modules/X11/devX11.c:3233 src/modules/X11/devX11.c:3236
-#: src/modules/X11/devX11.c:3260 src/unix/sys-std.c:1218
-#: src/unix/sys-std.c:1241
+#: src/modules/internet/internet.c:451 src/modules/internet/internet.c:457
+#: src/modules/internet/internet.c:463 src/modules/internet/internet.c:466
+#: src/modules/internet/internet.c:470 src/modules/internet/internet.c:474
+#: src/modules/internet/libcurl.c:142 src/modules/internet/libcurl.c:147
+#: src/modules/internet/libcurl.c:150 src/modules/internet/libcurl.c:312
+#: src/modules/internet/libcurl.c:316 src/modules/internet/libcurl.c:321
+#: src/modules/internet/libcurl.c:324 src/modules/internet/libcurl.c:328
+#: src/modules/lapack/Lapack.c:156 src/modules/lapack/Lapack.c:262
+#: src/modules/lapack/Lapack.c:709 src/modules/lapack/Lapack.c:818
+#: src/modules/lapack/Lapack.c:880 src/modules/lapack/Lapack.c:1205
+#: src/modules/X11/devX11.c:3230 src/modules/X11/devX11.c:3233
+#: src/modules/X11/devX11.c:3236 src/modules/X11/devX11.c:3260
+#: src/unix/sys-std.c:1218 src/unix/sys-std.c:1241
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argomento '%s' non valido"
@@ -1112,9 +1112,9 @@ msgstr "impossibile aprire file"
 msgid "invalid call %s"
 msgstr "valore '%s' non valido"
 
-#: src/include/Errormsg.h:25 src/main/subscript.c:380 src/main/subscript.c:398
-#: src/main/subscript.c:422 src/main/subscript.c:461 src/main/subscript.c:589
-#: src/main/subscript.c:628 src/main/subscript.c:771
+#: src/include/Errormsg.h:25 src/main/subscript.c:385 src/main/subscript.c:403
+#: src/main/subscript.c:427 src/main/subscript.c:466 src/main/subscript.c:645
+#: src/main/subscript.c:684 src/main/subscript.c:827
 #, fuzzy
 msgid "subscript is out of bounds"
 msgstr "indice fuori limite"
@@ -1144,7 +1144,7 @@ msgid "argument '%s' has length > 1 and only the first element will be used"
 msgstr ""
 "la condizione la lunghezza > 1 e solo il promo elemento verrà utilizzato"
 
-#: src/main/agrep.c:191 src/main/agrep.c:818 src/main/attrib.c:1524
+#: src/main/agrep.c:191 src/main/agrep.c:818 src/main/attrib.c:1526
 #: src/main/coerce.c:2776 src/main/saveload.c:1939
 #, fuzzy, c-format
 msgid "'%s' argument must be a non-empty character string"
@@ -1336,7 +1336,7 @@ msgstr "secondo argomento di lunghezza 0 non valido"
 msgid "bad arithmetic function index"
 msgstr "funzione sbagliata"
 
-#: src/main/array.c:80 src/main/array.c:1460
+#: src/main/array.c:80 src/main/array.c:1523
 #, fuzzy, c-format
 msgid "'data' argument must be of a vector type, was '%s'"
 msgstr "'path' deve essere un vettore di tipo character"
@@ -1345,14 +1345,14 @@ msgstr "'path' deve essere un vettore di tipo character"
 msgid "non-numeric matrix extent"
 msgstr "limite matrice non numerico"
 
-#: src/main/array.c:97 src/main/array.c:105 src/main/array.c:1568
-#: src/main/array.c:1573
+#: src/main/array.c:97 src/main/array.c:105 src/main/array.c:1631
+#: src/main/array.c:1636
 #, fuzzy, c-format
 msgid "invalid '%s' value (too large or NA)"
 msgstr "matrix: valore di 'nrow' non ammissibile (troppo grande o NA)"
 
-#: src/main/array.c:99 src/main/array.c:107 src/main/array.c:1570
-#: src/main/array.c:1575
+#: src/main/array.c:99 src/main/array.c:107 src/main/array.c:1633
+#: src/main/array.c:1638
 #, fuzzy, c-format
 msgid "invalid '%s' value (< 0)"
 msgstr "matrix:valore 'nrow' non valido (< 0)"
@@ -1391,7 +1391,7 @@ msgstr ""
 msgid "data length exceeds size of matrix"
 msgstr "la lunghezza dei dati supera la dimensione della matrice"
 
-#: src/main/array.c:147 src/main/array.c:1471 src/main/array.c:1582
+#: src/main/array.c:147 src/main/array.c:1534 src/main/array.c:1645
 #, fuzzy
 msgid "too many elements specified"
 msgstr "matrix: troppi elementi specificati"
@@ -1421,48 +1421,54 @@ msgstr "allocMatrix: troppi elementi specificati"
 msgid "'allocArray()': too many elements specified by 'dims' argument"
 msgstr "allocArray: troppi elementi specificati in 'dims'"
 
-#: src/main/array.c:448
+#: src/main/array.c:479 src/main/attrib.c:1025 src/main/coerce.c:2428
+#: src/main/engine.c:2964
+#, fuzzy, c-format
+msgid "'%s' argument must be a list"
+msgstr "l'argomento 'list' deve essere una lista"
+
+#: src/main/array.c:511
 #, fuzzy, c-format
 msgid "a matrix-like object is required as argument passed to '%s'"
 msgstr "'row/col' richiedono come argomento un oggetto matrix"
 
-#: src/main/array.c:661
+#: src/main/array.c:724
 #, fuzzy
 msgid "numeric/complex matrix/vector arguments are required"
 msgstr "richiesti argomenti numerici per matrix/vector"
 
-#: src/main/array.c:771 src/main/array.c:775 src/main/array.c:779
+#: src/main/array.c:834 src/main/array.c:838 src/main/array.c:842
 msgid "non-conformable arguments"
 msgstr "gli argomenti non sono compatibili"
 
-#: src/main/array.c:1077
+#: src/main/array.c:1140
 msgid "argument is not a matrix"
 msgstr "l'argomento non è di tipo matrix"
 
-#: src/main/array.c:1112
+#: src/main/array.c:1175
 msgid "invalid first argument, must be an array"
 msgstr "primo argomento non valido, deve essere di tipo array"
 
-#: src/main/array.c:1126
+#: src/main/array.c:1189
 #, fuzzy, c-format
 msgid "'perm' is of wrong length %d (!= %d)"
 msgstr "'perm' ha una lunghezza non ammissibile"
 
-#: src/main/array.c:1131 src/main/array.c:1134
+#: src/main/array.c:1194 src/main/array.c:1197
 msgid "'a' does not have named dimnames"
 msgstr ""
 
-#: src/main/array.c:1141
+#: src/main/array.c:1204
 #, c-format
 msgid "'perm[%d]' does not match a dimension name"
 msgstr ""
 
-#: src/main/array.c:1154
+#: src/main/array.c:1217
 #, fuzzy
 msgid "value is out of range in 'perm' argument"
 msgstr "valore fuori limite in 'perm'"
 
-#: src/main/array.c:1236 src/main/connections.c:5495 src/main/debug.c:112
+#: src/main/array.c:1299 src/main/connections.c:5495 src/main/debug.c:112
 #: src/main/objects.c:996 src/main/raw.c:56 src/main/raw.c:330
 #: src/main/sort.c:327 src/main/sort.c:1229 src/main/sort.c:1397
 #: src/main/unique.c:670 src/main/unique.c:1384 src/main/unique.c:1456
@@ -1471,22 +1477,22 @@ msgstr "valore fuori limite in 'perm'"
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr "'decreasing' deve essere TRUE o FALSE"
 
-#: src/main/array.c:1294
+#: src/main/array.c:1357
 #, fuzzy, c-format
 msgid "'%s' must be numeric"
 msgstr "'x' deve essere di tipo numeric"
 
-#: src/main/array.c:1467
+#: src/main/array.c:1530
 #, fuzzy, c-format
 msgid "'%s' argument cannot be of length 0"
 msgstr "'hadj' deve essere di lunghezza 1"
 
-#: src/main/array.c:1578
+#: src/main/array.c:1641
 #, fuzzy, c-format
 msgid "'%s' must have positive length"
 msgstr "l'argomento deve avere lunghezza positiva"
 
-#: src/main/array.c:1638
+#: src/main/array.c:1701
 #, c-format
 msgid "singular matrix in 'backsolve()'. First zero in diagonal [%d]"
 msgstr ""
@@ -1593,140 +1599,135 @@ msgstr "argomento 'names' incompatibile"
 msgid "invalid type (%s) to set 'names' attribute"
 msgstr "tipo non valido per assegnare l'attributo 'names'"
 
-#: src/main/attrib.c:1018
+#: src/main/attrib.c:1020
 #, fuzzy
 msgid "'dimnames()' applied to non-array"
 msgstr "'dimnames' usata su oggetti non array"
 
-#: src/main/attrib.c:1023 src/main/coerce.c:2428 src/main/engine.c:2964
-#, fuzzy, c-format
-msgid "'%s' argument must be a list"
-msgstr "l'argomento 'list' deve essere una lista"
-
-#: src/main/attrib.c:1026 src/main/attrib.c:1053
+#: src/main/attrib.c:1028 src/main/attrib.c:1055
 #, c-format
 msgid "length of 'dimnames' [%d] must match that of 'dims' [%d]"
 msgstr "la lunghezza di 'dimnames' [%d] non coincide con quella di 'dims' [%d]"
 
-#: src/main/attrib.c:1059
+#: src/main/attrib.c:1061
 #, fuzzy, c-format
 msgid "invalid type (%s) for 'dimnames' (must be a vector)"
 msgstr "tipo non valido per 'dimnames' (deve essere di tipo vector)"
 
-#: src/main/attrib.c:1061
+#: src/main/attrib.c:1063
 #, c-format
 msgid "length of 'dimnames' [%d] not equal to array extent"
 msgstr ""
 "la lunghezza di 'dimnames' [%d] non coincide con l'estensione dell'array"
 
-#: src/main/attrib.c:1132 src/main/builtin.c:76 src/main/builtin.c:113
+#: src/main/attrib.c:1134 src/main/builtin.c:76 src/main/builtin.c:113
 #: src/main/envir.c:1807 src/main/envir.c:1935 src/main/envir.c:1995
 #: src/main/envir.c:2125 src/main/paste.c:74 src/main/paste.c:293
 #: src/main/random.c:477 src/main/random.c:506 src/main/unique.c:1681
 msgid "invalid first argument"
 msgstr "primo argomento non valido"
 
-#: src/main/attrib.c:1135
+#: src/main/attrib.c:1137
 msgid "invalid second argument"
 msgstr "secondo argomento non valido"
 
-#: src/main/attrib.c:1143
+#: src/main/attrib.c:1145
 #, fuzzy
 msgid "length-0 dimension vector is invalid"
 msgstr "dim: vettori di dimensione di lunghezza 0 non ammissibili"
 
-#: src/main/attrib.c:1148
+#: src/main/attrib.c:1150
 #, fuzzy
 msgid "the dimensions contain missing values"
 msgstr "dim: vettori di dimensione di lunghezza 0 non ammissibili"
 
-#: src/main/attrib.c:1150
+#: src/main/attrib.c:1152
 #, fuzzy
 msgid "the dimensions contain negative values"
 msgstr "dim: vettori di dimensione di lunghezza 0 non ammissibili"
 
-#: src/main/attrib.c:1155
+#: src/main/attrib.c:1157
 #, fuzzy
 msgid "dimensions do not match the length of object"
 msgstr ""
 "dim<- : dims [prodotto %d] non conformi alla lunghezza dell'oggetto [%d]"
 
-#: src/main/attrib.c:1157
+#: src/main/attrib.c:1159
 #, fuzzy, c-format
 msgid "dimensions [product %d] do not match the length of object [%d]"
 msgstr ""
 "dim<- : dims [prodotto %d] non conformi alla lunghezza dell'oggetto [%d]"
 
-#: src/main/attrib.c:1229
+#: src/main/attrib.c:1231
 msgid "duplicated levels in factors are deprecated"
 msgstr ""
 
-#: src/main/attrib.c:1259
+#: src/main/attrib.c:1261
 #, fuzzy
 msgid "attributes must be a list or NULL"
 msgstr "gli attributi devono essere un oggetto di tipo list"
 
-#: src/main/attrib.c:1264
+#: src/main/attrib.c:1266
 msgid "attributes must be named"
 msgstr "gli attributi devono avere un nome"
 
-#: src/main/attrib.c:1268
+#: src/main/attrib.c:1270
 #, c-format
 msgid "all attributes must have names [%d does not]"
 msgstr "tutti gli attributi devono avere dei nomi [%d non ce l'ha]"
 
-#: src/main/attrib.c:1361
+#: src/main/attrib.c:1363
 #, fuzzy
 msgid "either 2 or 3 arguments are required"
 msgstr "necessario argomento stringa"
 
-#: src/main/attrib.c:1368
+#: src/main/attrib.c:1370
 #, fuzzy
 msgid "'which' attribute must be of mode character"
 msgstr "l'attributo 'name' deve essere in modalità character"
 
-#: src/main/attrib.c:1370
+#: src/main/attrib.c:1372
 #, fuzzy
 msgid "exactly one attribute 'which' must be given"
 msgstr "deve essere specificato solo un attributo 'name'"
 
-#: src/main/attrib.c:1428 src/main/attrib.c:1451 src/main/subscript.c:241
-#: src/main/subscript.c:245 src/main/subset.c:1205 src/main/subset.c:1256
+#: src/main/attrib.c:1430 src/main/attrib.c:1453 src/main/subscript.c:246
+#: src/main/subscript.c:250 src/main/subset.c:1205 src/main/subset.c:1256
 #, c-format
 msgid "partial match of '%s' to '%s'"
 msgstr ""
 
-#: src/main/attrib.c:1489
+#: src/main/attrib.c:1491
 #, fuzzy, c-format
 msgid "invalid type '%s' for slot name"
 msgstr "typo o lunghezza non ammissibile per il nome dello slot"
 
-#: src/main/attrib.c:1648 src/main/attrib.c:1719 src/main/attrib.c:1756
+#: src/main/attrib.c:1650 src/main/attrib.c:1721 src/main/attrib.c:1758
 msgid "invalid type or length for slot name"
 msgstr "typo o lunghezza non ammissibile per il nome dello slot"
 
-#: src/main/attrib.c:1682
+#: src/main/attrib.c:1684
 #, c-format
 msgid "cannot get a slot (\"%s\") from an object of type \"%s\""
 msgstr "non è possibile ottenere lo slot (\"%s\") da un oggetto di tipo \"%s\""
 
-#: src/main/attrib.c:1693
+#: src/main/attrib.c:1695
 #, c-format
 msgid "no slot of name \"%s\" for this object of class \"%s\""
 msgstr "nessuno slot di nome \"%s\" per questo oggetto di classe \"%s\""
 
-#: src/main/attrib.c:1710
+#: src/main/attrib.c:1712
 #, fuzzy
 msgid "attempt to set slot on NULL object"
 msgstr "tentativo di impostare un attributo a NULL"
 
-#: src/main/attrib.c:1751
+#: src/main/attrib.c:1753
 #, fuzzy
 msgid "formal classes cannot be used without the 'methods' package"
 msgstr ""
 "classi formali non possono essere utilizzati senza il pacchetto methods"
 
-#: src/main/attrib.c:1763
+#: src/main/attrib.c:1765
 #, c-format
 msgid ""
 "trying to get slot \"%s\" from an object of a basic class (\"%s\") with no "
@@ -1735,7 +1736,7 @@ msgstr ""
 "tentativo di ottenre lo slot \"%s\" da un oggetto di classe base (\"%s\") "
 "senza slots"
 
-#: src/main/attrib.c:1767
+#: src/main/attrib.c:1769
 #, fuzzy, c-format
 msgid ""
 "trying to get slot \"%s\" from an object (class \"%s\") that is not an S4 "
@@ -1765,23 +1766,23 @@ msgstr "argomento formale 'recursive' ripetuto"
 msgid "argument is not a list"
 msgstr "l'argomento non è di tipo list"
 
-#: src/main/bind.c:1039 src/main/names.c:1267 src/main/names.c:1272
-#: src/main/names.c:1277 src/main/names.c:1282
+#: src/main/bind.c:1043 src/main/names.c:1269 src/main/names.c:1274
+#: src/main/names.c:1279 src/main/names.c:1284
 #, fuzzy, c-format
 msgid "class name is too long in '%s'"
 msgstr "nome class troppo lungo in '%s'"
 
-#: src/main/bind.c:1115
+#: src/main/bind.c:1122
 #, fuzzy, c-format
 msgid "cannot create a matrix from type '%s'"
 msgstr "non posso creare una matrice a partire da questo tipo di dati"
 
-#: src/main/bind.c:1185
+#: src/main/bind.c:1191
 #, fuzzy, c-format
 msgid "number of rows of matrices must match (see argument %d)"
 msgstr "il numero di righe delle matrici deve coincidere (si veda arg %d)"
 
-#: src/main/bind.c:1212
+#: src/main/bind.c:1218
 #, fuzzy, c-format
 msgid ""
 "number of rows of result is not a multiple of vector length (argument %d)"
@@ -1789,12 +1790,12 @@ msgstr ""
 "il numero di elementi da sostituire non è un multiplo della lunghezza di "
 "sostituzione"
 
-#: src/main/bind.c:1429
+#: src/main/bind.c:1434
 #, fuzzy, c-format
 msgid "number of columns of matrices must match (see argument %d)"
 msgstr "il numero di colonne delle matrici deve coincidere (si veda arg %d)"
 
-#: src/main/bind.c:1458
+#: src/main/bind.c:1463
 #, fuzzy, c-format
 msgid ""
 "number of columns of result is not a multiple of vector length (argument %d)"
@@ -1829,7 +1830,7 @@ msgstr "dimensione troppo grande per il vettore indicato"
 #: src/main/envir.c:2132 src/main/envir.c:2829 src/main/envir.c:2915
 #: src/main/envir.c:3195 src/main/envir.c:3224 src/main/envir.c:3245
 #: src/main/envir.c:3268 src/main/envir.c:3302 src/main/envir.c:3322
-#: src/main/envir.c:3634 src/main/envir.c:3639 src/main/eval.c:6019
+#: src/main/envir.c:3643 src/main/envir.c:3648 src/main/eval.c:6019
 #: src/main/objects.c:192 src/main/objects.c:200 src/main/saveload.c:2063
 #: src/main/saveload.c:2354 src/main/serialize.c:2751
 msgid "use of NULL environment is defunct"
@@ -2430,8 +2431,8 @@ msgstr "allocazione della connessione 'fifo' fallita"
 
 #: src/main/connections.c:1208 src/main/connections.c:1366
 #: src/main/connections.c:1988 src/main/connections.c:3204
-#: src/main/connections.c:4969 src/modules/internet/internet.c:464
-#: src/modules/internet/internet.c:470
+#: src/main/connections.c:4969 src/modules/internet/internet.c:453
+#: src/modules/internet/internet.c:459
 #, fuzzy, c-format
 msgid "only first element of '%s' argument will be used"
 msgstr "solo il primo elemento del parametro 'descrizione' viene utilizzato"
@@ -2954,13 +2955,13 @@ msgstr "modalità '%s' non supportata in call_R"
 msgid "https:// URLs are not supported"
 msgstr "modalità '%s' non supportata in call_R"
 
-#: src/main/connections.c:5091 src/modules/internet/libcurl.c:670
+#: src/main/connections.c:5091 src/modules/internet/libcurl.c:685
 #, fuzzy
 msgid "'url(method = \"libcurl\")' is not supported on this platform"
 msgstr "'recursive = TRUE' non è supportato su questa piattaforma"
 
-#: src/main/connections.c:5162 src/modules/internet/internet.c:161
-#: src/modules/internet/internet.c:282
+#: src/main/connections.c:5162 src/modules/internet/internet.c:152
+#: src/modules/internet/internet.c:273
 #, fuzzy
 msgid "URL scheme unsupported by this method"
 msgstr "nls() non è supportato in questa piattaforma"
@@ -4060,7 +4061,7 @@ msgstr "il simbolo ha già un collegamento regolare"
 msgid "cannot change active binding if binding is locked"
 msgstr "non posso cambiare un valore con un legame bloccato"
 
-#: src/main/envir.c:3377
+#: src/main/envir.c:3377 src/main/envir.c:3615
 msgid "unknown op"
 msgstr "op sconosciuto"
 
@@ -4087,63 +4088,63 @@ msgstr "namespace già registrato"
 msgid "namespace is not registered"
 msgstr "namespace non registrato"
 
-#: src/main/envir.c:3637
+#: src/main/envir.c:3646
 msgid "bad import environment argument"
 msgstr "argoment importazione environment sbagliato"
 
-#: src/main/envir.c:3642
+#: src/main/envir.c:3651
 msgid "bad export environment argument"
 msgstr "argomento esportazione environment sbagliato"
 
-#: src/main/envir.c:3646
+#: src/main/envir.c:3655
 msgid "length of import and export names must match"
 msgstr "le lunghezze dei nomi di import e export devono conincidere"
 
-#: src/main/envir.c:3669
+#: src/main/envir.c:3678
 #, c-format
 msgid "exported symbol '%s' has no value"
 msgstr "il simbolo esportato '%s' non ha un valore"
 
-#: src/main/envir.c:3700
+#: src/main/envir.c:3709
 #, fuzzy, c-format
 msgid "'%s' argument must be a hashed environment"
 msgstr "l'argomento deve essere di tipo environment"
 
-#: src/main/envir.c:3708 src/main/envir.c:3722 src/main/grep.c:108
+#: src/main/envir.c:3717 src/main/envir.c:3731 src/main/grep.c:108
 msgid "R character strings are limited to 2^31-1 bytes"
 msgstr ""
 
-#: src/main/envir.c:3806
+#: src/main/envir.c:3815
 #, c-format
 msgid "Resized: size %d => %d\tpri %d => %d\n"
 msgstr ""
 
-#: src/main/envir.c:3833
+#: src/main/envir.c:3842
 #, fuzzy, c-format
 msgid "unknown encoding: %d"
 msgstr "codifica '%s' non supportata"
 
-#: src/main/envir.c:3853
+#: src/main/envir.c:3862
 #, c-format
 msgid "embedded nul in string: '%s'"
 msgstr ""
 
-#: src/main/envir.c:3896
+#: src/main/envir.c:3905
 #, fuzzy, c-format
 msgid "unknown encoding mask: %d"
 msgstr "codifica '%s' non supportata"
 
-#: src/main/envir.c:3932 src/main/envir.c:3959
+#: src/main/envir.c:3941 src/main/envir.c:3968
 #, c-format
 msgid "Cache size: %d\n"
 msgstr ""
 
-#: src/main/envir.c:3933 src/main/envir.c:3960
+#: src/main/envir.c:3942 src/main/envir.c:3969
 #, c-format
 msgid "Cache pri:  %d\n"
 msgstr ""
 
-#: src/main/envir.c:3937 src/main/envir.c:3964
+#: src/main/envir.c:3946 src/main/envir.c:3973
 #, c-format
 msgid "Line %d: "
 msgstr ""
@@ -4584,7 +4585,7 @@ msgstr "versione bytecode non coincidente"
 msgid "invalid sequence argument in 'for()' loop"
 msgstr "argomento 'sequence' non valido nel ciclo 'for'"
 
-#: src/main/eval.c:5305 src/main/names.c:1306
+#: src/main/eval.c:5305 src/main/names.c:1308
 #, fuzzy, c-format
 msgid "there is no '.Internal' function '%s'"
 msgstr "nessuna funzione interna \"%s\""
@@ -5739,34 +5740,34 @@ msgstr "non è possibile allocare memoria per 'read.dcf'"
 msgid "long vectors not supported yet: %s:%d"
 msgstr ""
 
-#: src/main/names.c:1016
+#: src/main/names.c:1018
 msgid "string argument required"
 msgstr "necessario argomento stringa"
 
-#: src/main/names.c:1019
+#: src/main/names.c:1021
 msgid "no such primitive function"
 msgstr "funzione primitiva non esistente"
 
-#: src/main/names.c:1142
+#: src/main/names.c:1144
 #, fuzzy
 msgid "couldn't allocate memory for symbol table"
 msgstr "non è possibile allocare memoria per 'read.dcf'"
 
-#: src/main/names.c:1208 src/main/names.c:1238
+#: src/main/names.c:1210 src/main/names.c:1240
 msgid "attempt to use zero-length variable name"
 msgstr "tentativo di utilizzo di un nome variabile di lunghezza zero"
 
-#: src/main/names.c:1210 src/main/names.c:1240
+#: src/main/names.c:1212 src/main/names.c:1242
 #, c-format
 msgid "variable names are limited to %d bytes"
 msgstr ""
 
-#: src/main/names.c:1327
+#: src/main/names.c:1329
 #, fuzzy, c-format
 msgid "'.Internal(%s())' not called from a base namespace\n"
 msgstr "impossibile rimuovere variabili dal namespace base"
 
-#: src/main/names.c:1334
+#: src/main/names.c:1336
 #, fuzzy, c-format
 msgid "'.Internal(%s())' called from namespace '%s'\n"
 msgstr "impossibile rimuovere variabili dal namespace base"
@@ -6388,7 +6389,7 @@ msgstr "stringa mulibyte %d non valida"
 msgid "invalid character in current multibyte locale"
 msgstr "lunghezza carattere non valida in dblepr"
 
-#: src/main/plotmath.c:1261 src/main/plotmath.c:1366 src/main/plotmath.c:2664
+#: src/main/plotmath.c:1261 src/main/plotmath.c:1366 src/main/plotmath.c:2655
 #, fuzzy
 msgid "invalid mathematical annotation"
 msgstr "funzione interna non valida"
@@ -6403,17 +6404,17 @@ msgstr "argomento non valido"
 msgid "invalid group delimiter"
 msgstr "limiti 'x' non validi"
 
-#: src/main/plotmath.c:1991 src/main/plotmath.c:2137
+#: src/main/plotmath.c:1991 src/main/plotmath.c:2128
 #, fuzzy
 msgid "invalid group specification"
 msgstr "specificazione font non valida"
 
-#: src/main/plotmath.c:2062
+#: src/main/plotmath.c:2053
 #, fuzzy
 msgid "group is incomplete"
 msgstr "Aggiornamento del grafico incompleto"
 
-#: src/main/plotmath.c:3190
+#: src/main/plotmath.c:3181
 #, fuzzy
 msgid "Metric information not available for this family/device"
 msgstr "'truncation' non disponibile per questa connessione"
@@ -7112,8 +7113,8 @@ msgstr ""
 "si è verificato un errore in lettura di un numero complesso in formato xdr"
 
 #: src/main/saveload.c:1780 src/main/serialize.c:1994
-#: src/main/serialize.c:2610 src/modules/internet/internet.c:526
-#: src/modules/internet/internet.c:587 src/modules/internet/internet.c:696
+#: src/main/serialize.c:2610 src/modules/internet/internet.c:509
+#: src/modules/internet/internet.c:582 src/modules/internet/internet.c:692
 msgid "write failed"
 msgstr "scrittura non riuscita"
 
@@ -7940,9 +7941,9 @@ msgstr "[[ ]] indice (%d) fuori limiti"
 msgid "incompatible types (from %s to %s) in '[[' assignment"
 msgstr "tipi incompatibili (da %s a %s) nell'assegnazione [["
 
-#: src/main/subassign.c:1909 src/main/subscript.c:144 src/main/subscript.c:146
-#: src/main/subscript.c:275 src/main/subscript.c:277 src/main/subscript.c:831
-#: src/main/subscript.c:833 src/main/subscript.c:924 src/main/subscript.c:926
+#: src/main/subassign.c:1909 src/main/subscript.c:149 src/main/subscript.c:151
+#: src/main/subscript.c:280 src/main/subscript.c:282 src/main/subscript.c:887
+#: src/main/subscript.c:889 src/main/subscript.c:980 src/main/subscript.c:982
 #: src/main/subset.c:1126
 #, fuzzy, c-format
 msgid "invalid subscript type '%s'"
@@ -7957,69 +7958,69 @@ msgstr ""
 msgid "coercing LHS to a list"
 msgstr "Trasformo il membro di sinistra in una lista"
 
-#: src/main/subscript.c:54 src/main/subscript.c:76 src/main/subscript.c:181
-#: src/main/subscript.c:205
+#: src/main/subscript.c:59 src/main/subscript.c:81 src/main/subscript.c:186
+#: src/main/subscript.c:210
 msgid "attempt to select less than one element"
 msgstr "tentativo di selezione meno di un elemento"
 
-#: src/main/subscript.c:58 src/main/subscript.c:73 src/main/subscript.c:179
-#: src/main/subscript.c:209 src/main/subscript.c:305
+#: src/main/subscript.c:63 src/main/subscript.c:78 src/main/subscript.c:184
+#: src/main/subscript.c:214 src/main/subscript.c:310
 msgid "attempt to select more than one element"
 msgstr "tentativo di selezionare più di un elemnto"
 
-#: src/main/subscript.c:185
+#: src/main/subscript.c:190
 msgid "internal error in use of recursive indexing"
 msgstr "errore interno nell'uso dell'indicizzazione ricorsiva"
 
-#: src/main/subscript.c:253
+#: src/main/subscript.c:258
 #, c-format
 msgid "further partial match of '%s' to '%s'"
 msgstr ""
 
-#: src/main/subscript.c:298
+#: src/main/subscript.c:303
 msgid "should only be called in an assignment context."
 msgstr ""
 
-#: src/main/subscript.c:303
+#: src/main/subscript.c:308
 #, c-format
 msgid "recursive indexing failed at level %d\n"
 msgstr "indicizzazione ricorsiva non avvenuta a livello %d\n"
 
-#: src/main/subscript.c:310
+#: src/main/subscript.c:315
 #, c-format
 msgid "no such index at level %d\n"
 msgstr "indice non trovato a livello %d\n"
 
-#: src/main/subscript.c:314 src/main/subset.c:133 src/main/subset.c:1030
+#: src/main/subscript.c:319 src/main/subset.c:133 src/main/subset.c:1030
 #, fuzzy
 msgid "invalid subscript for pairlist"
 msgstr "numero di indici non valido in assegnamento di lista"
 
-#: src/main/subscript.c:357
+#: src/main/subscript.c:362
 msgid "incorrect number of columns in matrix subscript"
 msgstr "numero di colonne non valido nell'indice della matrice"
 
-#: src/main/subscript.c:376 src/main/subscript.c:394 src/main/subscript.c:418
+#: src/main/subscript.c:381 src/main/subscript.c:399 src/main/subscript.c:423
 msgid "negative values are not allowed in a matrix subscript"
 msgstr "valori negativi non ammessi come indici di matrice"
 
-#: src/main/subscript.c:497
+#: src/main/subscript.c:502
 msgid "(subscript) logical subscript too long"
 msgstr "(subscript) indice logicol troppo lungo"
 
-#: src/main/subscript.c:595 src/main/subscript.c:650
+#: src/main/subscript.c:651 src/main/subscript.c:706
 msgid "only 0's may be mixed with negative subscripts"
 msgstr "solo gli 0 si possono usare contemporaneamente con indici negativi"
 
-#: src/main/subscript.c:623
+#: src/main/subscript.c:679
 msgid "subscript too large for 32-bit R"
 msgstr ""
 
-#: src/main/subscript.c:822
+#: src/main/subscript.c:878
 msgid "no 'dimnames' attribute for array"
 msgstr "attributo 'dimnames' mancante per l'array"
 
-#: src/main/subscript.c:862
+#: src/main/subscript.c:918
 msgid "subscripting on non-vector"
 msgstr "indicizzazione su un non vettore"
 
@@ -8580,137 +8581,132 @@ msgstr "deve esserci un primo argomento"
 msgid "there must be at least three control points"
 msgstr "deve esserci un primo argomento"
 
-#: src/modules/internet/internet.c:117 src/modules/internet/internet.c:242
+#: src/modules/internet/internet.c:108 src/modules/internet/internet.c:233
 #, fuzzy
 msgid "can only open URLs for reading"
 msgstr "connessione non aperta in lettura"
 
-#: src/modules/internet/internet.c:124
+#: src/modules/internet/internet.c:115
 msgid "for https:// URLs use setInternet2(TRUE)"
 msgstr ""
 
-#: src/modules/internet/internet.c:356 src/modules/internet/internet.c:360
-#: src/modules/internet/internet.c:366 src/modules/internet/internet.c:388
-#: src/modules/internet/libcurl.c:636 src/modules/internet/libcurl.c:640
-#: src/modules/internet/libcurl.c:646 src/modules/internet/libcurl.c:658
-#: src/modules/internet/libcurl.c:666
+#: src/modules/internet/internet.c:347 src/modules/internet/internet.c:351
+#: src/modules/internet/internet.c:357 src/modules/internet/internet.c:379
+#: src/modules/internet/libcurl.c:651 src/modules/internet/libcurl.c:655
+#: src/modules/internet/libcurl.c:661 src/modules/internet/libcurl.c:673
+#: src/modules/internet/libcurl.c:681
 msgid "allocation of url connection failed"
 msgstr "allocazione della connessione 'url' fallita"
 
-#: src/modules/internet/internet.c:495 src/modules/internet/internet.c:576
-#: src/modules/internet/internet.c:682 src/modules/internet/libcurl.c:353
-#: src/modules/internet/libcurl.c:363
+#: src/modules/internet/internet.c:477 src/modules/internet/internet.c:570
+#: src/modules/internet/internet.c:679 src/modules/internet/libcurl.c:363
+#: src/modules/internet/libcurl.c:376
 msgid "Download progress"
 msgstr "Progressione caricamento"
 
-#: src/modules/internet/internet.c:516
+#: src/modules/internet/internet.c:499
 #, fuzzy, c-format
 msgid "cannot open URL '%s', reason '%s'"
 msgstr "impossibile aprire il file '%s' perché '%s'"
 
-#: src/modules/internet/internet.c:522 src/modules/internet/internet.c:550
-#: src/modules/internet/internet.c:655 src/modules/internet/libcurl.c:392
+#: src/modules/internet/internet.c:505 src/modules/internet/internet.c:532
+#: src/modules/internet/internet.c:652 src/modules/internet/libcurl.c:404
 #, fuzzy, c-format
 msgid "cannot open destfile '%s', reason '%s'"
 msgstr "impossibile aprire il file '%s' perché '%s'"
 
-#: src/modules/internet/internet.c:554 src/modules/internet/internet.c:660
-#: src/modules/internet/libcurl.c:396
+#: src/modules/internet/internet.c:536 src/modules/internet/internet.c:657
+#: src/modules/internet/libcurl.c:408
 #, fuzzy, c-format
 msgid "Trying URL '%s'\n"
 msgstr "provo con l'URL '%s'\n"
 
-#: src/modules/internet/internet.c:561 src/modules/internet/internet.c:667
-#, fuzzy
-msgid "Opened URL\n"
-msgstr "URL aperto\n"
-
-#: src/modules/internet/internet.c:600 src/modules/internet/internet.c:709
-#: src/modules/internet/libcurl.c:235
+#: src/modules/internet/internet.c:596 src/modules/internet/internet.c:706
+#: src/modules/internet/libcurl.c:249
 #, c-format
 msgid "%d%% downloaded"
 msgstr ""
 
-#: src/modules/internet/internet.c:619 src/modules/internet/internet.c:728
-#: src/modules/internet/libcurl.c:433
+#: src/modules/internet/internet.c:617 src/modules/internet/internet.c:727
+#: src/modules/internet/libcurl.c:448
 #, c-format
 msgid "Downloaded %0.1f MB"
 msgstr ""
 
-#: src/modules/internet/internet.c:621 src/modules/internet/internet.c:731
-#: src/modules/internet/libcurl.c:435
+#: src/modules/internet/internet.c:619 src/modules/internet/internet.c:730
+#: src/modules/internet/libcurl.c:450
 #, c-format
 msgid "Downloaded %d KB"
 msgstr ""
 
-#: src/modules/internet/internet.c:623 src/modules/internet/internet.c:733
-#: src/modules/internet/libcurl.c:437
+#: src/modules/internet/internet.c:621 src/modules/internet/internet.c:732
+#: src/modules/internet/libcurl.c:452
 #, c-format
 msgid "Downloaded %d byte"
 msgid_plural "Downloaded %d bytes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/modules/internet/internet.c:634 src/modules/internet/internet.c:744
-#: src/modules/internet/libcurl.c:442
+#: src/modules/internet/internet.c:632 src/modules/internet/internet.c:743
+#: src/modules/internet/libcurl.c:457
 #, fuzzy, c-format
 msgid "downloaded length %0.f != reported length %0.f"
 msgstr "lunghezza caricamento %d != lunghezza prevista %d"
 
-#: src/modules/internet/internet.c:638 src/modules/internet/internet.c:749
+#: src/modules/internet/internet.c:636 src/modules/internet/internet.c:748
 #, c-format
 msgid "cannot open URL '%s'"
 msgstr "impossibile aprire URL '%s'"
 
-#: src/modules/internet/internet.c:753
+#: src/modules/internet/internet.c:752
 msgid "unsupported URL scheme"
 msgstr "schema URL non supportato"
 
-#: src/modules/internet/internet.c:777 src/modules/internet/internet.c:946
+#: src/modules/internet/internet.c:775 src/modules/internet/internet.c:945
 #, c-format
 msgid "cannot open: HTTP status was '%d %s'"
 msgstr "apertura non riuscita: stato HTTP '%d %s'"
 
-#: src/modules/internet/internet.c:787 src/modules/internet/internet.c:961
-#: src/modules/internet/libcurl.c:268
+#: src/modules/internet/internet.c:785 src/modules/internet/internet.c:960
+#: src/modules/internet/libcurl.c:276
 #, c-format
 msgid "Content type '%s' length %0.0f byte (%0.1f MB)"
 msgid_plural "Content type '%s' length %0.0f bytes (%0.1f MB)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/modules/internet/internet.c:791 src/modules/internet/internet.c:963
-#: src/modules/internet/libcurl.c:271
+#: src/modules/internet/internet.c:789 src/modules/internet/internet.c:962
+#: src/modules/internet/libcurl.c:279
 #, c-format
 msgid "Content type '%s' length %d byte (%d KB)"
 msgid_plural "Content type '%s' length %d bytes (%d KB)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/modules/internet/internet.c:795 src/modules/internet/internet.c:965
-#: src/modules/internet/libcurl.c:274
+#: src/modules/internet/internet.c:793 src/modules/internet/internet.c:964
+#: src/modules/internet/libcurl.c:282
 #, c-format
 msgid "Content type '%s' length %d byte"
 msgid_plural "Content type '%s' length %d bytes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/modules/internet/internet.c:798
+#: src/modules/internet/internet.c:796
 #, c-format
 msgid "Content type '%s' length unknown"
 msgstr ""
 
-#: src/modules/internet/internet.c:842
+#: src/modules/internet/internet.c:840
 #, c-format
 msgid "ftp data connection made, file length %ld bytes\n"
 msgstr ""
 
-#: src/modules/internet/internet.c:844
+#: src/modules/internet/internet.c:842
 msgid "ftp data connection made, file length unknown\n"
 msgstr ""
 
-#: src/modules/internet/internet.c:917 src/modules/internet/internet.c:931
-#: src/modules/internet/internet.c:1017 src/modules/internet/internet.c:1026
+#: src/modules/internet/internet.c:916 src/modules/internet/internet.c:930
+#: src/modules/internet/internet.c:1016 src/modules/internet/internet.c:1025
 #, c-format
 msgid "InternetOpenUrl failed: '%s'"
 msgstr "InternetOpenUrl non riuscita: '%s'"
@@ -8727,38 +8723,38 @@ msgid ""
 "\t%s\n"
 msgstr ""
 
-#: src/modules/internet/libcurl.c:217
+#: src/modules/internet/libcurl.c:228
 #, c-format
 msgid "Content length %0.0f byte (%0.1f MB)"
 msgid_plural "Content length %0.0f bytes (%0.1f MB)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/modules/internet/libcurl.c:220
+#: src/modules/internet/libcurl.c:231
 #, c-format
 msgid "Content length %d byte (%d KB)"
 msgid_plural "Content length %d bytes (%d KB)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/modules/internet/libcurl.c:223
+#: src/modules/internet/libcurl.c:234
 #, c-format
 msgid "Content length %d byte"
 msgid_plural "Content length %d bytes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/modules/internet/libcurl.c:294
+#: src/modules/internet/libcurl.c:302
 #, fuzzy
 msgid "'download.file(method = \"libcurl\")' is not supported on this platform"
 msgstr "'recursive = TRUE' non è supportato su questa piattaforma"
 
-#: src/modules/internet/libcurl.c:310
+#: src/modules/internet/libcurl.c:318
 #, fuzzy
 msgid "lengths of 'url' and 'destfile' arguments must match"
 msgstr "le lunghezze dei nomi di import e export devono conincidere"
 
-#: src/modules/internet/libcurl.c:406 src/modules/internet/libcurl.c:540
+#: src/modules/internet/libcurl.c:418 src/modules/internet/libcurl.c:555
 #, c-format
 msgid "'curl_multi_wait()' function failed, code %d"
 msgstr ""
@@ -9922,6 +9918,10 @@ msgstr "il modulo X11 non può essere caricato"
 #: src/unix/X11.c:145 src/unix/X11.c:151 src/unix/X11.c:157 src/unix/X11.c:163
 msgid "X11 is not available"
 msgstr "X11 non disponibile"
+
+#, fuzzy
+#~ msgid "Opened URL\n"
+#~ msgstr "URL aperto\n"
 
 #, fuzzy
 #~ msgid "internet routines were already initialized"

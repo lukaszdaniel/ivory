@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-12-28 16:58\n"
+"POT-Creation-Date: 2015-02-13 16:26\n"
 "PO-Revision-Date: 2012-09-28 22:18+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -71,12 +71,6 @@ msgstr ""
 #, fuzzy
 msgid "%s is not an existing file"
 msgstr "«%s» er ikkje ei fil som finst"
-
-#. R/namespace.R: gettextf("%s is not an exported object from 'namespace:%s'", sQuote(name), getNamespaceName(ns))
-#: R/namespace.R:0
-#, fuzzy
-msgid "%s is not an exported object from 'namespace:%s'"
-msgstr "«%s» er ikkje eit eksportert objekt frå «namespace:%s»"
 
 #. R/dates.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Date"))
 #. R/dates.R: gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Dates"))
@@ -515,6 +509,12 @@ msgstr "feil ved køyring av «%s» – feilkode %d"
 #, fuzzy
 msgid "'%s' function is not defined for objects of class %s"
 msgstr "«%s» er ikkje definert for «POSIXt»-objekt"
+
+#. R/namespace.R: gettextf("'%s' is not an exported object from 'namespace:%s'", name, getNamespaceName(ns))
+#: R/namespace.R:0
+#, fuzzy
+msgid "'%s' is not an exported object from 'namespace:%s'"
+msgstr "«%s» er ikkje eit eksportert objekt frå «namespace:%s»"
 
 #. R/datetime.R: gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt"))
 #. R/datetime.R: gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt"))
@@ -3361,6 +3361,14 @@ msgstr[0] ""
 msgstr[1] ""
 "Fann funksjonar som ikkje er S4-generiske ved eksportering av metodar frå "
 "namnerommet «%s»: %s"
+
+#. R/namespace.R: ngettext(nr, "Registered S3 method from a standard package overwritten by '%s':",     "Registered S3 methods from standard package(s) overwritten by '%s':", domain = "R-base")
+#: R/namespace.R:0
+msgid "Registered S3 method from a standard package overwritten by '%s':"
+msgid_plural ""
+"Registered S3 methods from standard package(s) overwritten by '%s':"
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/namespace.R: ngettext(sum(notex), "S3 method %s was declared in 'NAMESPACE' file but was not found",     "S3 methods %s were declared in 'NAMESPACE' file but was not found", domain = "R-base")
 #: R/namespace.R:0

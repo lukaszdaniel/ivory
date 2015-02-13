@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 3.2.0\n"
-"POT-Creation-Date: 2015-01-22 19:58\n"
+"POT-Creation-Date: 2015-02-13 16:26\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1015,6 +1015,13 @@ msgstr ""
 #. R/refClass.R: gettext("No fields defined", domain = "R-methods")
 
 msgid "No fields defined"
+msgstr ""
+
+
+#: R/NextMethod.R: 0
+#. R/NextMethod.R: stop("No next method available")
+
+msgid "No next method available"
 msgstr ""
 
 
@@ -3210,20 +3217,6 @@ msgstr ""
 #. R/methodsTable.R: gettext("something weird: inconsistent number of args in methods table strings: %s (using the largest value)",     domain = "R-methods")
 
 msgid "something weird: inconsistent number of args in methods table strings: %s (using the largest value)"
-msgstr ""
-
-
-#: R/RMethodUtils.R: 0
-#. R/RMethodUtils.R: gettextf("special function %s has no known argument list; will assume '(x, ...)'",     sQuote(f))
-
-msgid "special function %s has no known argument list; will assume '(x, ...)'"
-msgstr ""
-
-
-#: R/RMethodUtils.R: 0
-#. R/RMethodUtils.R: gettextf("special function %s is not permitted to have methods", sQuote(f))
-
-msgid "special function %s is not permitted to have methods"
 msgstr ""
 
 

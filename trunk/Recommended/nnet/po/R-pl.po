@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nnet 7.3-1\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-01-18 21:31\n"
+"POT-Creation-Date: 2015-02-13 16:25\n"
 "PO-Revision-Date: 2014-06-28 13:59+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -15,10 +15,10 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#. R/multinom.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("multinom"))
-#. R/multinom.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("multinom"))
-#. R/multinom.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("multinom"))
-#. R/nnet.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("nnet"))
+#. R/multinom.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("multinom"))
+#. R/multinom.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("multinom"))
+#. R/multinom.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("multinom"))
+#. R/nnet.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("nnet"))
 #. R/nnet.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("nnet"))
 #: R/multinom.R:0 R/nnet.R:0
 msgid "'%s' argument is not an object of class %s"
@@ -83,8 +83,8 @@ msgstr "Błędy standardowe:"
 msgid "Value/SE (Wald statistics):"
 msgstr "Wartość/Błąd standardowy (statystyka Wald'a):"
 
-#. R/nnet.R: gettextf("a %s network with %d weights", paste(x$n[1L], "-",     x$n[2L], "-", x$n[3L], collapse = ""), length(x$wts), domain = "R-nnet")
-#. R/nnet.R: gettextf("a %s network with %d weights", paste(x$n[1L], "-",     x$n[2L], "-", x$n[3L], collapse = ""), length(x$wts), domain = "R-nnet")
+#. R/nnet.R: gettextf("a %s network with %d weights", paste(x$n[1L], "-", x$n[2L], "-", x$n[3L],     collapse = ""), length(x$wts), domain = "R-nnet")
+#. R/nnet.R: gettextf("a %s network with %d weights", paste(x$n[1L], "-", x$n[2L], "-", x$n[3L],     collapse = ""), length(x$wts), domain = "R-nnet")
 #: R/nnet.R:0
 msgid "a %s network with %d weights"
 msgstr "sieć %s z %d wagami"
@@ -126,7 +126,7 @@ msgstr "niepoprawne dopasowanie dla klasy"
 msgid "incorrect length of 'mask'"
 msgstr "niepoprawna długość 'mask'"
 
-#. R/nnet.R: gettextf("inputs: %s\noutput(s): %s", x$coefnames, deparse(formula(x)[[2L]],     backtick = TRUE), domain = "R-nnet")
+#. R/nnet.R: gettextf("inputs: %s\noutput(s): %s", x$coefnames, deparse(formula(x)[[2L]], backtick = TRUE),     domain = "R-nnet")
 #: R/nnet.R:0
 msgid ""
 "inputs: %s\n"
@@ -243,8 +243,8 @@ msgstr "próbowanie - %s"
 msgid "weights vector of incorrect length"
 msgstr "wektor wag o niepoprawnej długości"
 
-#. R/multinom.R: ngettext(length(empty), "group %s is empty", "groups %s are empty",     domain = "R-nnet")
-#. R/nnet.R: ngettext(length(empty), "group %s is empty", "groups %s are empty",     domain = "R-nnet")
+#. R/multinom.R: ngettext(length(empty), "group %s is empty", "groups %s are empty", domain = "R-nnet")
+#. R/nnet.R: ngettext(length(empty), "group %s is empty", "groups %s are empty", domain = "R-nnet")
 #: R/multinom.R:0 R/nnet.R:0
 msgid "group %s is empty"
 msgid_plural "groups %s are empty"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: spatial 7.3-4\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-01-18 21:31\n"
+"POT-Creation-Date: 2015-02-13 16:25\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -16,20 +16,20 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("trls"))
-#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "obj",     dQuote("trls"))
-#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "obj",     dQuote("trls"))
-#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "obj",     dQuote("trgls"))
-#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "obj",     dQuote("trgls"))
-#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("trls"))
-#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("trls"))
-#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("trls"))
-#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("trls"))
-#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "fit",     dQuote("trls"))
-#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("trls"))
-#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("trls"))
-#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("trls"))
-#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "obj", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "obj", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "obj", dQuote("trgls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "obj", dQuote("trgls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "fit", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
+#. R/kr.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls"))
 #. R/kr.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("trls"))
 #: R/kr.R:0
 msgid "'%s' argument is not an object of class %s"

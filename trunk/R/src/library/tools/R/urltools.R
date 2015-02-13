@@ -60,16 +60,15 @@ function(x)
         tag <- attr(e, "Rd_tag")
         if(identical(tag, "\\url")) {
             urls <<-
-                c(urls,
-                  if(length(e))
-                      trimws(as.character(e[[1L]]))
-                  else "")
-            ## There could be \url{} ...
-        }
-        if(is.list(e)) lapply(e, recurse)
+                c(urls, .Rd_deparse(e, tag = FALSE))
+        } else if(identical(tag, "\\href")) {
+            urls <<-
+                c(urls, .Rd_deparse(e[[1L]], tag = FALSE))
+        } else if(is.list(e))
+              lapply(e, recurse)
     }
     lapply(x, recurse)
-    unique(urls)
+    unique(trimws(urls))
 }
 
 .get_urls_from_HTML_file <-
@@ -79,10 +78,19 @@ function(f)
     XML::htmlParse(f,
                    handlers =
                        list(a = function(node) {
-                           hrefs <<- c(hrefs, XML::xmlAttrs(node, "href"))
+                           href <- XML::xmlAttrs(node)["href"]
+                           ## <FIXME>
+                           ## ? XML::xmlAttrs says the value is always a
+                           ## named character vector, but
+                           ##   XML::xmlAttrs(XML::xmlNode("a", "foobar"))
+                           ## gives NULL ...
+                           ## Hence, use an extra is.null() test.
+                           if(!is.null(href) && !is.na(href))
+                               hrefs <<- c(hrefs, href)
+                           ## </FIXME>
                        })
                    )
-    unname(hrefs[!grepl("^#", hrefs)])
+    unique(unname(hrefs[!grepl("^#", hrefs)]))
 }
 
 url_db <-
@@ -187,7 +195,7 @@ function(dir, installed = FALSE)
 }
 
 url_db_from_package_README_md <-
-function(dir)    
+function(dir)
 {
     urls <- character()
     if(file.exists(rfile <- file.path(dir, "README.md")) &&
@@ -206,7 +214,6 @@ function(dir)
 url_db_from_package_sources <-
 function(dir, add = FALSE) {
     meta <- .read_description(file.path(dir, "DESCRIPTION"))
-    cfile <- file.path(dir, "inst", "CITATION")
     db <- rbind(url_db_from_package_metadata(meta),
                 url_db_from_package_Rd_db(Rd_db(dir = dir)),
                 url_db_from_package_citation(dir, meta),
@@ -232,7 +239,6 @@ function(packages, lib.loc = NULL, verbose = FALSE)
         if(dir == "") return()
         meta <- .read_description(file.path(dir, "DESCRIPTION"))
         rddb <- Rd_db(p, lib.loc = dirname(dir))
-        cfile <- file.path(dir, "CITATION")
         db <- rbind(url_db_from_package_metadata(meta),
                     url_db_from_package_Rd_db(rddb),
                     url_db_from_package_citation(dir, meta,

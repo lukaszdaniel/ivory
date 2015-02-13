@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.3-10\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-01-18 21:31\n"
+"POT-Creation-Date: 2015-02-13 16:25\n"
 "PO-Revision-Date: 2005-12-09 09:13+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -30,7 +30,7 @@ msgid ""
 "\"%s\" link not available for coxph family; available link is \"identity\""
 msgstr ""
 
-#. R/gamlss.r: gettextf("\"%s\" link not available for mu parameter of gaulss",     link[[1]])
+#. R/gamlss.r: gettextf("\"%s\" link not available for mu parameter of gaulss", link[[1]])
 #: R/gamlss.r:0
 msgid "\"%s\" link not available for mu parameter of gaulss"
 msgstr ""
@@ -50,12 +50,12 @@ msgid ""
 "are \"identity\""
 msgstr ""
 
-#. R/gamlss.r: gettextf("\"%s\" link not available for parameter of ziplss %s",     param.names[i], link[[i]])
+#. R/gamlss.r: gettextf("\"%s\" link not available for parameter of ziplss %s", param.names[i],     link[[i]])
 #: R/gamlss.r:0
 msgid "\"%s\" link not available for parameter of ziplss %s"
 msgstr ""
 
-#. R/gamlss.r: gettextf("\"%s\" link not available for precision parameter of gaulss",     link[[2]])
+#. R/gamlss.r: gettextf("\"%s\" link not available for precision parameter of gaulss", link[[2]])
 #: R/gamlss.r:0
 msgid "\"%s\" link not available for precision parameter of gaulss"
 msgstr ""
@@ -84,12 +84,12 @@ msgstr ""
 msgid "\"fs\" terms can not be fixed here"
 msgstr ""
 
-#. R/smooth.r: gettextf("%s has insufficient unique values to support %d knots: reduce k",     object$term, nk)
+#. R/smooth.r: gettextf("%s has insufficient unique values to support %d knots: reduce k", object$term,     nk)
 #: R/smooth.r:0
 msgid "%s has insufficient unique values to support %d knots: reduce k"
 msgstr ""
 
-#. R/mgcv.r: gettextf("%s not in original fit", paste(levn[!levn %in% levm],     collapse = ", "), domain = "R-mgcv")
+#. R/mgcv.r: gettextf("%s not in original fit", paste(levn[!levn %in% levm], collapse = ", "),     domain = "R-mgcv")
 #: R/mgcv.r:0
 msgid "%s not in original fit"
 msgstr ""
@@ -99,13 +99,13 @@ msgstr ""
 msgid "%s score = %s"
 msgstr ""
 
-#. R/mgcv.r: gettextf("'%s' and '%s' arguments should have the same length",     "lambda", "h")
+#. R/mgcv.r: gettextf("'%s' and '%s' arguments should have the same length", "lambda", "h")
 #: R/mgcv.r:0
 #, fuzzy
 msgid "'%s' and '%s' arguments should have the same length"
 msgstr "arguments supplmentaires limins"
 
-#. R/mgcv.r: gettextf("'%s' and '%s' components should have the same length",     "M$S", "M$off")
+#. R/mgcv.r: gettextf("'%s' and '%s' components should have the same length", "M$S", "M$off")
 #: R/mgcv.r:0
 #, fuzzy
 msgid "'%s' and '%s' components should have the same length"
@@ -127,20 +127,20 @@ msgstr "x n'a pas d'attribut de colonnes"
 msgid "'%s' argument is faulty"
 msgstr "arguments supplmentaires limins"
 
-#. R/gam.fit3.r: gettextf("'%s' argument is not an object of class %s", "fam",     dQuote("family"))
-#. R/gam.fit3.r: gettextf("'%s' argument is not an object of class %s", "fam",     dQuote("family"))
-#. R/gam.fit3.r: gettextf("'%s' argument is not an object of class %s", "fam",     dQuote("family"))
+#. R/gam.fit3.r: gettextf("'%s' argument is not an object of class %s", "fam", dQuote("family"))
+#. R/gam.fit3.r: gettextf("'%s' argument is not an object of class %s", "fam", dQuote("family"))
+#. R/gam.fit3.r: gettextf("'%s' argument is not an object of class %s", "fam", dQuote("family"))
 #. R/gamm.r: gettextf("'%s' argument is not an object of class %s", "b", dQuote("lme"))
 #. R/gamm.r: gettextf("'%s' argument is not an object of class %s", "b", dQuote("lme"))
-#. R/mgcv.r: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("gam"))
+#. R/mgcv.r: gettextf("'%s' argument is not an object of class %s", "object", dQuote("gam"))
 #. R/mgcv.r: gettextf("'%s' argument is not an object of class %s", "b", dQuote("gam"))
 #. R/mgcv.r: gettextf("'%s' argument is not an object of class %s", "b", dQuote("gam"))
-#. R/mgcv.r: gettextf("'%s' argument is not an object of class %s", "object",     dQuote("gam"))
+#. R/mgcv.r: gettextf("'%s' argument is not an object of class %s", "object", dQuote("gam"))
 #. R/mgcv.r: gettextf("'%s' argument is not an object of class %s", "x", dQuote("gam"))
 #. R/mgcv.r: gettextf("'%s' argument is not an object of class %s", "x", dQuote("gam"))
 #. R/mgcv.r: gettextf("'%s' argument is not an object of class %s", "x", dQuote("gam"))
-#. R/plots.r: gettextf("'%s' argument is not an object of class %s", "fam",     dQuote("family"))
-#. R/plots.r: gettextf("'%s' argument is not an object of class %s", "fam",     dQuote("family"))
+#. R/plots.r: gettextf("'%s' argument is not an object of class %s", "fam", dQuote("family"))
+#. R/plots.r: gettextf("'%s' argument is not an object of class %s", "fam", dQuote("family"))
 #: R/gam.fit3.r:0 R/gamm.r:0 R/mgcv.r:0 R/plots.r:0
 #, fuzzy
 msgid "'%s' argument is not an object of class %s"
@@ -152,10 +152,10 @@ msgstr "l'objet ne semble pas tre de la classe lme"
 msgid "'%s' argument is of the wrong length"
 msgstr "arguments supplmentaires limins"
 
-#. R/smooth.r: gettextf("'%s' argument is of the wrong length and ignored",     "bs")
-#. R/smooth.r: gettextf("'%s' argument is of the wrong length and ignored",     "m")
-#. R/smooth.r: gettextf("'%s' argument is of the wrong length and ignored",     "bs")
-#. R/smooth.r: gettextf("'%s' argument is of the wrong length and ignored",     "m")
+#. R/smooth.r: gettextf("'%s' argument is of the wrong length and ignored", "bs")
+#. R/smooth.r: gettextf("'%s' argument is of the wrong length and ignored", "m")
+#. R/smooth.r: gettextf("'%s' argument is of the wrong length and ignored", "bs")
+#. R/smooth.r: gettextf("'%s' argument is of the wrong length and ignored", "m")
 #: R/smooth.r:0
 #, fuzzy
 msgid "'%s' argument is of the wrong length and ignored"
@@ -168,13 +168,13 @@ msgstr "m, de longueur incorrecte, est ignor."
 msgid "'%s' argument should be 1 or 2"
 msgstr "l'argument random doit tre une liste *nomme*."
 
-#. R/gamlss.r: gettextf("'%s' function requires 2 links specified as character strings",     "gaulss()")
-#. R/gamlss.r: gettextf("'%s' function requires 2 links specified as character strings",     "ziplss()")
+#. R/gamlss.r: gettextf("'%s' function requires 2 links specified as character strings", "gaulss()")
+#. R/gamlss.r: gettextf("'%s' function requires 2 links specified as character strings", "ziplss()")
 #: R/gamlss.r:0
 msgid "'%s' function requires 2 links specified as character strings"
 msgstr ""
 
-#. R/mgcv.r: gettextf("'%s', '%s' and '%s' components should have the same length",     "M$sp", "M$S", "M$off")
+#. R/mgcv.r: gettextf("'%s', '%s' and '%s' components should have the same length", "M$sp", "M$S",     "M$off")
 #: R/mgcv.r:0
 #, fuzzy
 msgid "'%s', '%s' and '%s' components should have the same length"
@@ -475,8 +475,8 @@ msgstr "L'algorithme est arrt aux valeurs limites"
 msgid "All smooth components:"
 msgstr ""
 
-#. R/gamm.r: gettextf("An object of length %d does not match the required parameter size",     aux)
-#. R/gamm.r: gettextf("An object of length %d does not match the required parameter size",     length(val))
+#. R/gamm.r: gettextf("An object of length %d does not match the required parameter size", aux)
+#. R/gamm.r: gettextf("An object of length %d does not match the required parameter size", length(val))
 #: R/gamm.r:0
 #, fuzzy
 msgid "An object of length %d does not match the required parameter size"
@@ -582,43 +582,43 @@ msgstr "Impossible d'extraire la matrice ayant des dimensions non initialises"
 msgid "Continuous 'by' variable example"
 msgstr "Impossible de trouver la variable 'by'"
 
-#. R/gam.fit4.r: gettextf("Deta2: rdiff = %s cor = %s", paste(range(dd$Deta2 -     Deta2.fd), collapse = " "), cor(dd$Deta2, Deta2.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Deta2: rdiff = %s cor = %s", paste(range(dd$Deta2 - Deta2.fd), collapse = " "),     cor(dd$Deta2, Deta2.fd), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "Deta2: rdiff = %s cor = %s"
 msgstr ""
 
-#. R/gam.fit4.r: gettextf("Deta2th2[%d]: rdiff = %s cor = %s", i, paste(range(dd$Deta2th2 -     Deta2th2.fd), collapse = " "), cor(dd$Deta2th2, Deta2th2.fd),     domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Deta2th2[%d]: rdiff = %s cor = %s", i, paste(range(dd$Deta2th2 - Deta2th2.fd),     collapse = " "), cor(dd$Deta2th2, Deta2th2.fd), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "Deta2th2[%d]: rdiff = %s cor = %s"
 msgstr ""
 
-#. R/gam.fit4.r: gettextf("Deta2th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Deta2th -     Deta2th.fd), collapse = " "), cor(dd$Deta2th, Deta2th.fd),     domain = "R-mgcv")
-#. R/gam.fit4.r: gettextf("Deta2th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Deta2th -     Deta2th.fd), collapse = " "), cor(dd$Deta2th, Deta2th.fd),     domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Deta2th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Deta2th - Deta2th.fd),     collapse = " "), cor(dd$Deta2th, Deta2th.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Deta2th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Deta2th - Deta2th.fd),     collapse = " "), cor(dd$Deta2th, Deta2th.fd), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "Deta2th[%d]: rdiff = %s cor = %s"
 msgstr ""
 
-#. R/gam.fit4.r: gettextf("Deta3: rdiff = %s cor = %s", paste(range(dd$Deta3 -     Deta3.fd), collapse = " "), cor(dd$Deta3, Deta3.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Deta3: rdiff = %s cor = %s", paste(range(dd$Deta3 - Deta3.fd), collapse = " "),     cor(dd$Deta3, Deta3.fd), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "Deta3: rdiff = %s cor = %s"
 msgstr ""
 
-#. R/gam.fit4.r: gettextf("Deta3th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Deta3th -     Deta3th.fd), collapse = " "), cor(dd$Deta3th, Deta3th.fd),     domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Deta3th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Deta3th - Deta3th.fd),     collapse = " "), cor(dd$Deta3th, Deta3th.fd), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "Deta3th[%d]: rdiff = %s cor = %s"
 msgstr ""
 
-#. R/gam.fit4.r: gettextf("Deta4: rdiff = %s cor = %s", paste(range(dd$Deta4 -     Deta4.fd), collapse = " "), cor(dd$Deta4, Deta4.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Deta4: rdiff = %s cor = %s", paste(range(dd$Deta4 - Deta4.fd), collapse = " "),     cor(dd$Deta4, Deta4.fd), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "Deta4: rdiff = %s cor = %s"
 msgstr ""
 
-#. R/gam.fit4.r: gettextf("Deta: rdiff = %s cor = %s", paste(range(dd$Deta - Deta.fd),     collapse = " "), cor(dd$Deta, Deta.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Deta: rdiff = %s cor = %s", paste(range(dd$Deta - Deta.fd), collapse = " "),     cor(dd$Deta, Deta.fd), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "Deta: rdiff = %s cor = %s"
 msgstr ""
 
-#. R/gam.fit4.r: gettextf("Detath[%d]: rdiff = %s cor = %s", i, paste(range(um -     Detath.fd), collapse = " "), cor(um, Detath.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Detath[%d]: rdiff = %s cor = %s", i, paste(range(um - Detath.fd), collapse = " "),     cor(um, Detath.fd), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "Detath[%d]: rdiff = %s cor = %s"
 msgstr ""
@@ -631,7 +631,7 @@ msgstr ""
 msgid "Deviance = %s Iterations - %d"
 msgstr ""
 
-#. R/mgcv.r: gettextf("Deviance explained = %s %%", formatC(x$dev.expl * 100,     digits = 3, width = 4), domain = "R-mgcv")
+#. R/mgcv.r: gettextf("Deviance explained = %s %%", formatC(x$dev.expl * 100, digits = 3, width = 4),     domain = "R-mgcv")
 #: R/mgcv.r:0
 msgid "Deviance explained = %s %%"
 msgstr ""
@@ -646,43 +646,43 @@ msgstr ""
 msgid "Discrete Theta search not available with performance iteration"
 msgstr ""
 
-#. R/gam.fit4.r: gettextf("Dmu2: rdiff = %s cor = %s", paste(range(dd$Dmu2 - Dmu2.fd),     collapse = " "), cor(dd$Dmu2, Dmu2.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Dmu2: rdiff = %s cor = %s", paste(range(dd$Dmu2 - Dmu2.fd), collapse = " "),     cor(dd$Dmu2, Dmu2.fd), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "Dmu2: rdiff = %s cor = %s"
 msgstr ""
 
-#. R/gam.fit4.r: gettextf("Dmu2th2[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dmu2th2 -     Dmu2th2.fd), collapse = " "), cor(dd$Dmu2th2, Dmu2th2.fd),     domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Dmu2th2[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dmu2th2 - Dmu2th2.fd),     collapse = " "), cor(dd$Dmu2th2, Dmu2th2.fd), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "Dmu2th2[%d]: rdiff = %s cor = %s"
 msgstr ""
 
-#. R/gam.fit4.r: gettextf("Dmu2th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dmu2th -     Dmu2th.fd), collapse = " "), cor(dd$Dmu2th, Dmu2th.fd), domain = "R-mgcv")
-#. R/gam.fit4.r: gettextf("Dmu2th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dmu2th -     Dmu2th.fd), collapse = " "), cor(dd$Dmu2th, Dmu2th.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Dmu2th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dmu2th - Dmu2th.fd),     collapse = " "), cor(dd$Dmu2th, Dmu2th.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Dmu2th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dmu2th - Dmu2th.fd),     collapse = " "), cor(dd$Dmu2th, Dmu2th.fd), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "Dmu2th[%d]: rdiff = %s cor = %s"
 msgstr ""
 
-#. R/gam.fit4.r: gettextf("Dmu3: rdiff = %s cor = %s", paste(range(dd$Dmu3 - Dmu3.fd),     collapse = " "), cor(dd$Dmu3, Dmu3.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Dmu3: rdiff = %s cor = %s", paste(range(dd$Dmu3 - Dmu3.fd), collapse = " "),     cor(dd$Dmu3, Dmu3.fd), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "Dmu3: rdiff = %s cor = %s"
 msgstr ""
 
-#. R/gam.fit4.r: gettextf("Dmu3th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dmu3th -     Dmu3th.fd), collapse = " "), cor(dd$Dmu3th, Dmu3th.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Dmu3th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dmu3th - Dmu3th.fd),     collapse = " "), cor(dd$Dmu3th, Dmu3th.fd), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "Dmu3th[%d]: rdiff = %s cor = %s"
 msgstr ""
 
-#. R/gam.fit4.r: gettextf("Dmu4: rdiff = %s cor = %s", paste(range(dd$Dmu4 - Dmu4.fd),     collapse = " "), cor(dd$Dmu4, Dmu4.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Dmu4: rdiff = %s cor = %s", paste(range(dd$Dmu4 - Dmu4.fd), collapse = " "),     cor(dd$Dmu4, Dmu4.fd), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "Dmu4: rdiff = %s cor = %s"
 msgstr ""
 
-#. R/gam.fit4.r: gettextf("Dmu: rdiff = %s cor = %s", paste(range(dd$Dmu - Dmu.fd),     collapse = " "), cor(dd$Dmu, Dmu.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Dmu: rdiff = %s cor = %s", paste(range(dd$Dmu - Dmu.fd), collapse = " "),     cor(dd$Dmu, Dmu.fd), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "Dmu: rdiff = %s cor = %s"
 msgstr ""
 
-#. R/gam.fit4.r: gettextf("Dmuth[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dmuth -     Dmuth.fd), collapse = " "), cor(dd$Dmuth, Dmuth.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Dmuth[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dmuth - Dmuth.fd), collapse = " "),     cor(dd$Dmuth, Dmuth.fd), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "Dmuth[%d]: rdiff = %s cor = %s"
 msgstr ""
@@ -694,14 +694,14 @@ msgid ""
 "factor variables"
 msgstr ""
 
-#. R/gam.fit4.r: gettextf("Dth2[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dth2 -     Dth2.fd), collapse = " "), cor(dd$Dth2, Dth2.fd), domain = "R-mgcv")
-#. R/gam.fit4.r: gettextf("Dth2[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dth2 -     Dth2.fd), collapse = " "), cor(dd$Dth2, Dth2.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Dth2[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dth2 - Dth2.fd), collapse = " "),     cor(dd$Dth2, Dth2.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Dth2[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dth2 - Dth2.fd), collapse = " "),     cor(dd$Dth2, Dth2.fd), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "Dth2[%d]: rdiff = %s cor = %s"
 msgstr ""
 
-#. R/gam.fit4.r: gettextf("Dth[%d]: rdiff = %s cor = %s", i, paste(range(um -     Dth.fd), collapse = " "), cor(um, Dth.fd), domain = "R-mgcv")
-#. R/gam.fit4.r: gettextf("Dth[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dth -     Dth.fd), collapse = " "), cor(dd$Dth, Dth.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Dth[%d]: rdiff = %s cor = %s", i, paste(range(um - Dth.fd), collapse = " "),     cor(um, Dth.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Dth[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dth - Dth.fd), collapse = " "),     cor(dd$Dth, Dth.fd), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "Dth[%d]: rdiff = %s cor = %s"
 msgstr ""
@@ -748,7 +748,7 @@ msgstr ""
 msgid "Gaussian quantiles"
 msgstr ""
 
-#. R/plots.r: gettextf("Gradient range [%s, %s]", min(boi$grad), max(boi$grad),     domain = "R-mgcv")
+#. R/plots.r: gettextf("Gradient range [%s, %s]", min(boi$grad), max(boi$grad), domain = "R-mgcv")
 #: R/plots.r:0
 msgid "Gradient range [%s, %s]"
 msgstr ""
@@ -758,7 +758,7 @@ msgstr ""
 msgid "Gu & Wahba 4 term additive model"
 msgstr ""
 
-#. R/gam.sim.r: gettext("Gu & Wahba 4 term additive model + correlated predictors",     domain = "R-mgcv")
+#. R/gam.sim.r: gettext("Gu & Wahba 4 term additive model + correlated predictors", domain = "R-mgcv")
 #: R/gam.sim.r:0
 msgid "Gu & Wahba 4 term additive model + correlated predictors"
 msgstr ""
@@ -768,7 +768,7 @@ msgstr ""
 msgid "Gu & Wahba 4 term additive model + random effect"
 msgstr ""
 
-#. R/plots.r: gettext("Hessian positive definite, eigenvalue range [%s, %s].",     domain = "R-mgcv")
+#. R/plots.r: gettext("Hessian positive definite, eigenvalue range [%s, %s].", domain = "R-mgcv")
 #: R/plots.r:0
 msgid "Hessian positive definite, eigenvalue range [%s, %s]."
 msgstr ""
@@ -801,7 +801,7 @@ msgid ""
 "first such term"
 msgstr ""
 
-#. R/mgcv.r: gettextf("Length of start should equal %d and correspond to initial coefs",     nvars)
+#. R/mgcv.r: gettextf("Length of start should equal %d and correspond to initial coefs", nvars)
 #: R/mgcv.r:0
 #, fuzzy
 msgid "Length of start should equal %d and correspond to initial coefs"
@@ -831,7 +831,7 @@ msgstr ""
 msgid "Maximum number of PQL iterations:"
 msgstr "le nombre maximum d'itrations doit tre > 0"
 
-#. R/plots.r: gettextf("Method: %s  Optimizer: %s", paste(b$method, collapse = ""),     paste(b$optimizer, collapse = ""), domain = "R-mgcv")
+#. R/plots.r: gettextf("Method: %s  Optimizer: %s", paste(b$method, collapse = ""), paste(b$optimizer,     collapse = ""), domain = "R-mgcv")
 #: R/plots.r:0
 msgid "Method: %s  Optimizer: %s"
 msgstr ""
@@ -860,7 +860,7 @@ msgstr "Le modle a plus de coefficients que le nombre de donnes"
 msgid "Model matrix not full column rank"
 msgstr ""
 
-#. R/plots.r: gettextf("Model rank = %s/%s", b$rank, length(b$coefficients),     domain = "R-mgcv")
+#. R/plots.r: gettextf("Model rank = %s/%s", b$rank, length(b$coefficients), domain = "R-mgcv")
 #: R/plots.r:0
 msgid "Model rank = %s/%s"
 msgstr ""
@@ -945,7 +945,7 @@ msgstr ""
 msgid "NA values not allowed for the scaled t family"
 msgstr ""
 
-#. R/efam.r: gettextf("Negative Binomial(%s)", paste(round(object$family$getTheta(TRUE),     3), sep = ", ", collapse = ""), domain = "R-mgcv")
+#. R/efam.r: gettextf("Negative Binomial(%s)", paste(round(object$family$getTheta(TRUE), 3), sep = ", ",     collapse = ""), domain = "R-mgcv")
 #: R/efam.r:0
 msgid "Negative Binomial(%s)"
 msgstr ""
@@ -1034,7 +1034,7 @@ msgstr ""
 msgid "Only 1<p<=2 supported"
 msgstr ""
 
-#. R/efam.r: gettextf("Ordered Categorical(%s)", paste(round(object$family$getTheta(TRUE),     2), collapse = ","), domain = "R-mgcv")
+#. R/efam.r: gettextf("Ordered Categorical(%s)", paste(round(object$family$getTheta(TRUE), 2),     collapse = ","), domain = "R-mgcv")
 #: R/efam.r:0
 msgid "Ordered Categorical(%s)"
 msgstr ""
@@ -1078,12 +1078,12 @@ msgstr ""
 msgid "Penalized model matrix must have no more columns than rows"
 msgstr ""
 
-#. R/gam.fit3.r: gettextf("Proportion time in C: %s ls: %s gdi: %s", (tc + tg)/at,     tc/at, tg/at, domain = "R-mgcv")
+#. R/gam.fit3.r: gettextf("Proportion time in C: %s ls: %s gdi: %s", (tc + tg)/at, tc/at, tg/at, domain = "R-mgcv")
 #: R/gam.fit3.r:0
 msgid "Proportion time in C: %s ls: %s gdi: %s"
 msgstr ""
 
-#. R/mgcv.r: gettextf("R-sq.(adj) = %s", formatC(x$r.sq, digits = 3, width = 5),     domain = "R-mgcv")
+#. R/mgcv.r: gettextf("R-sq.(adj) = %s", formatC(x$r.sq, digits = 3, width = 5), domain = "R-mgcv")
 #: R/mgcv.r:0
 msgid "R-sq.(adj) = %s"
 msgstr ""
@@ -1134,12 +1134,12 @@ msgstr ""
 msgid "S[[%d]] matrix is not +ve definite"
 msgstr "]] n'est pas +ve dfinie."
 
-#. R/mgcv.r: gettextf("  Scale est. = %s  n = %s", formatC(x$scale, digits = 5,     width = 8, flag = "-"), x$n, domain = "R-mgcv")
+#. R/mgcv.r: gettextf("  Scale est. = %s  n = %s", formatC(x$scale, digits = 5, width = 8, flag = "-"),     x$n, domain = "R-mgcv")
 #: R/mgcv.r:0
 msgid "Scale est. = %s  n = %s"
 msgstr ""
 
-#. R/efam.r: gettextf("Scaled t(%s)", paste(round(object$family$getTheta(TRUE),     3), collapse = ","), domain = "R-mgcv")
+#. R/efam.r: gettextf("Scaled t(%s)", paste(round(object$family$getTheta(TRUE), 3), collapse = ","),     domain = "R-mgcv")
 #: R/efam.r:0
 msgid "Scaled t(%s)"
 msgstr ""
@@ -1181,7 +1181,7 @@ msgid ""
 "Sorry, tensor products of smooths with multiple penalties are not supported"
 msgstr ""
 
-#. R/mgcv.r: gettextf("Standard deviations and %s confidence intervals:",     conf.lev, domain = "R-mgcv")
+#. R/mgcv.r: gettextf("Standard deviations and %s confidence intervals:", conf.lev, domain = "R-mgcv")
 #: R/mgcv.r:0
 msgid "Standard deviations and %s confidence intervals:"
 msgstr ""
@@ -1267,17 +1267,17 @@ msgstr ""
 msgid "The Hessian was positive definite."
 msgstr ""
 
-#. R/plots.r: gettextf("The RMS %s score gradient at convergence was %s.",     b$method, b$mgcv.conv$rms.grad, domain = "R-mgcv")
+#. R/plots.r: gettextf("The RMS %s score gradient at convergence was %s.", b$method, b$mgcv.conv$rms.grad,     domain = "R-mgcv")
 #: R/plots.r:0
 msgid "The RMS %s score gradient at convergence was %s."
 msgstr ""
 
-#. R/plots.r: gettextf("The estimated model rank was %s (maximum possible: %s)",     b$mgcv.conv$rank, b$mgcv.conv$full.rank, domain = "R-mgcv")
+#. R/plots.r: gettextf("The estimated model rank was %s (maximum possible: %s)", b$mgcv.conv$rank,     b$mgcv.conv$full.rank, domain = "R-mgcv")
 #: R/plots.r:0
 msgid "The estimated model rank was %s (maximum possible: %s)"
 msgstr ""
 
-#. R/mgcv.r: gettext("The following arguments to anova.glm(..) are invalid and dropped: ",     domain = "R-mgcv")
+#. R/mgcv.r: gettext("The following arguments to anova.glm(..) are invalid and dropped: ", domain = "R-mgcv")
 #: R/mgcv.r:0
 msgid "The following arguments to anova.glm(..) are invalid and dropped:"
 msgstr "Les arguments suivants de anova.glm(..) sont incorrects et ignors :"
@@ -1287,7 +1287,7 @@ msgstr "Les arguments suivants de anova.glm(..) sont incorrects et ignors :"
 msgid "The objective..."
 msgstr ""
 
-#. R/mgcv.r: gettextf("This is mgcv %s. For overview type 'help(\"mgcv-package\")'",     paste(version, collapse = ""), domain = "R-mgcv")
+#. R/mgcv.r: gettextf("This is mgcv %s. For overview type 'help(\"mgcv-package\")'", paste(version,     collapse = ""), domain = "R-mgcv")
 #: R/mgcv.r:0
 msgid "This is mgcv %s. For overview type 'help(\"mgcv-package\")'"
 msgstr ""
@@ -1302,7 +1302,7 @@ msgstr ""
 msgid "Tweedie p must be in interval (a,b)"
 msgstr ""
 
-#. R/efam.r: gettextf("Tweedie(p=%s)", round(object$family$getTheta(TRUE),     3), domain = "R-mgcv")
+#. R/efam.r: gettextf("Tweedie(p=%s)", round(object$family$getTheta(TRUE), 3), domain = "R-mgcv")
 #: R/efam.r:0
 msgid "Tweedie(p=%s)"
 msgstr ""
@@ -1313,7 +1313,7 @@ msgstr ""
 msgid "Unknown type, reset to terms"
 msgstr "Type inconnu, rinitialis  `terms'."
 
-#. R/plots.r: gettextf("View variables must contain more than one value. view = c(%s,%s).",     view[1], view[2])
+#. R/plots.r: gettextf("View variables must contain more than one value. view = c(%s,%s).", view[1],     view[2])
 #: R/plots.r:0
 #, fuzzy
 msgid "View variables must contain more than one value. view = c(%s,%s)."
@@ -1441,7 +1441,7 @@ msgid "cannot find valid starting values: please specify some"
 msgstr ""
 "Impossible de trouver des valeurs de dpart valides : veuillez en spcifier"
 
-#. R/bam.r: gettextf("chunk.size < number of coefficients. Reset to %d",     chunk.size)
+#. R/bam.r: gettextf("chunk.size < number of coefficients. Reset to %d", chunk.size)
 #: R/bam.r:0
 msgid "chunk.size < number of coefficients. Reset to %d"
 msgstr ""
@@ -1470,12 +1470,12 @@ msgstr ""
 "les composants des noeuds relatifs  un mme lissage doivent tre de mme "
 "longueur"
 
-#. R/gam.fit4.r: gettextf("cor dH/drho[%d] = %s", i, cor(as.numeric(b$dH[[i]]),     as.numeric(fd.dH[[i]])), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("cor dH/drho[%d] = %s", i, cor(as.numeric(b$dH[[i]]), as.numeric(fd.dH[[i]])),     domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "cor dH/drho[%d] = %s"
 msgstr ""
 
-#. R/gam.fit4.r: gettextf("cor db/drho[%d] = %s", i, cor(b$db.drho[, i], fd.br[,     i]), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("cor db/drho[%d] = %s", i, cor(b$db.drho[, i], fd.br[, i]), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "cor db/drho[%d] = %s"
 msgstr ""
@@ -1809,7 +1809,7 @@ msgstr ""
 msgid "linear predictor"
 msgstr ""
 
-#. R/efam.r: gettextf("link \"%s\" is not available for Tweedie family", linktemp,     collapse = "")
+#. R/efam.r: gettextf("link \"%s\" is not available for Tweedie family", linktemp, collapse = "")
 #. R/gam.fit3.r: gettextf("link \"%s\" is not available for Tweedie family", linktemp)
 #: R/efam.r:0 R/gam.fit3.r:0
 msgid "link \"%s\" is not available for Tweedie family"
@@ -1831,7 +1831,7 @@ msgstr "link non reconnu"
 msgid "log lik grad cor. = %s"
 msgstr ""
 
-#. R/gam.fit4.r: gettextf("log lik hess cor. = %s", cor(as.numeric(ll$lbb), as.numeric(fdh)),     domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("log lik hess cor. = %s", cor(as.numeric(ll$lbb), as.numeric(fdh)), domain = "R-mgcv")
 #: R/gam.fit4.r:0
 msgid "log lik hess cor. = %s"
 msgstr ""
@@ -2063,8 +2063,8 @@ msgid ""
 "selection: reset"
 msgstr ""
 
-#. R/gam.fit3.r: gettextf("only scalar '%s' and '%s' arguments are allowed", "rho",     "theta")
-#. R/gam.fit3.r: gettextf("only scalar '%s' and '%s' arguments are allowed", "p",     "phi")
+#. R/gam.fit3.r: gettextf("only scalar '%s' and '%s' arguments are allowed", "rho", "theta")
+#. R/gam.fit3.r: gettextf("only scalar '%s' and '%s' arguments are allowed", "p", "phi")
 #: R/gam.fit3.r:0
 msgid "only scalar '%s' and '%s' arguments are allowed"
 msgstr ""
@@ -2216,7 +2216,7 @@ msgstr ""
 msgid "scaled t df must be >2"
 msgstr "la valeur de epsilon doit tre > 0"
 
-#. R/plots.r: gettextf("scheme should be a single number, or a vector with %d elements",     m)
+#. R/plots.r: gettextf("scheme should be a single number, or a vector with %d elements", m)
 #: R/plots.r:0
 msgid "scheme should be a single number, or a vector with %d elements"
 msgstr ""
@@ -2338,7 +2338,7 @@ msgstr ""
 msgid "testing covariate scale invariance ..."
 msgstr ""
 
-#. R/gamm.r: gettext("testing equivalence of gam and gamm with same sp ... ",     domain = "R-mgcv")
+#. R/gamm.r: gettext("testing equivalence of gam and gamm with same sp ... ", domain = "R-mgcv")
 #: R/gamm.r:0
 msgid "testing equivalence of gam and gamm with same sp ..."
 msgstr ""
@@ -2369,7 +2369,7 @@ msgid "there should be %d knots supplied"
 msgstr ""
 
 #. R/smooth.r: gettextf("there should be %d supplied knots", nk)
-#. R/smooth.r: gettextf("there should be %d supplied knots", nk + 2 * m[1] +     2)
+#. R/smooth.r: gettextf("there should be %d supplied knots", nk + 2 * m[1] + 2)
 #: R/smooth.r:0
 msgid "there should be %d supplied knots"
 msgstr ""
@@ -2486,7 +2486,7 @@ msgstr ""
 msgid "x and y must be same length"
 msgstr ""
 
-#. R/plots.r: ngettext(boi$iter, "%s after %d iteration.", "%s after %d iterations.",     domain = "R-mgcv")
+#. R/plots.r: ngettext(boi$iter, "%s after %d iteration.", "%s after %d iterations.", domain = "R-mgcv")
 #: R/plots.r:0
 msgid "%s after %d iteration."
 msgid_plural "%s after %d iterations."
@@ -2504,7 +2504,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#. R/plots.r: ngettext(b$mgcv.conv$iter, "Smoothing parameter selection converged after %d iteration.",     "Smoothing parameter selection converged after %d iterations.",     domain = "R-mgcv")
+#. R/plots.r: ngettext(b$mgcv.conv$iter, "Smoothing parameter selection converged after %d iteration.",     "Smoothing parameter selection converged after %d iterations.", domain = "R-mgcv")
 #: R/plots.r:0
 msgid "Smoothing parameter selection converged after %d iteration."
 msgid_plural "Smoothing parameter selection converged after %d iterations."
