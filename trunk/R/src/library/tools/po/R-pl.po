@@ -518,9 +518,8 @@ msgstr "Informacja o autorach powinna być umieszczona w pliku 'inst/AUTHORS'"
 
 #. R/QC.R: gettext("Authors@R field gives more than one person with maintainer role:", domain = "R-tools")
 #: R/QC.R:0
-#, fuzzy
 msgid "Authors@R field gives more than one person with maintainer role:"
-msgstr "Pole 'Authors@R' nie zawiera danych osoby z rolą autora."
+msgstr "Pole 'Authors@R' wskazuje na więcej niż jedną osobę z rolą opiekuna:"
 
 #. R/QC.R: gettext("Authors@R field gives no person with author role.", domain = "R-tools")
 #: R/QC.R:0
@@ -529,12 +528,12 @@ msgstr "Pole 'Authors@R' nie zawiera danych osoby z rolą autora."
 
 #. R/QC.R: gettext("Authors@R field gives no person with maintainer role, valid email address and non-empty name.",     domain = "R-tools")
 #: R/QC.R:0
-#, fuzzy
 msgid ""
 "Authors@R field gives no person with maintainer role, valid email address "
 "and non-empty name."
 msgstr ""
-"Pole 'Authors@R' nie zawiera danych osoby z rolą opiekuna oraz adresem email."
+"Pole 'Authors@R' nie zawiera danych osoby z rolą opiekuna oraz adresem email "
+"ani też niepustą nazwą."
 
 #. R/QC.R: gettext("Authors@R field gives persons with no valid roles:", domain = "R-tools")
 #: R/QC.R:0
@@ -1870,6 +1869,8 @@ msgstr ""
 msgid ""
 "Malformed Description field: should contain one or more complete sentences."
 msgstr ""
+"Niepoprawnie opisane pole 'Description': powinno zawierać jedno lub więcej "
+"pełnych zdań."
 
 #. R/news.R: gettextf("Malformed NEWS.Rd file:\nChunk starting\n  %s\ncontains more than one \\itemize.\nUsing the first one.",     substring(sub("^[[:space:]]*", "", .Rd_deparse(x)), 1L, 60L))
 #: R/news.R:0
@@ -1902,7 +1903,7 @@ msgstr ""
 #. R/QC.R: gettext("Malformed Title field: should not end in a period.", domain = "R-tools")
 #: R/QC.R:0
 msgid "Malformed Title field: should not end in a period."
-msgstr ""
+msgstr "Niepoprawnie opisane pole 'Title': nie powinno kończyć się kropką."
 
 #. R/QC.R: gettext("Malformed maintainer field.", domain = "R-tools")
 #: R/QC.R:0
@@ -3164,16 +3165,18 @@ msgid ""
 "The Description field should not start with the package name,\n"
 "  'This package' or 'The package'."
 msgstr ""
+"Pole 'Description' nie powinno rozpoczynać się od nazwy pakietu,\n"
+"  opisu 'This package' lub 'The package'."
 
 #. R/QC.R: gettext("The Description field should start with a capital letter.", domain = "R-tools")
 #: R/QC.R:0
 msgid "The Description field should start with a capital letter."
-msgstr ""
+msgstr "Pole 'Description' powinno rozpoczynać się z wielkiej litery."
 
 #. R/QC.R: gettext("The Title field is just the package name: provide a real title.", domain = "R-tools")
 #: R/QC.R:0
 msgid "The Title field is just the package name: provide a real title."
-msgstr ""
+msgstr "Pole 'Title' jest po prostu nazwą pakietu: podaj prawdziwy tytuł."
 
 #. R/QC.R: gettext("The Title field should be in title case, current version then in title case:",     domain = "R-tools")
 #: R/QC.R:0
@@ -3184,7 +3187,7 @@ msgstr ""
 #. R/QC.R: gettext("The Title field starts with the package name.", domain = "R-tools")
 #: R/QC.R:0
 msgid "The Title field starts with the package name."
-msgstr ""
+msgstr "Pole 'Title' rozpoczyna się nazwą pakietu."
 
 #. R/check.R: gettext("The \\usage entries for S3 methods should use the \\method markup and not their full name.\n",     domain = "R-tools")
 #: R/check.R:0
@@ -4388,9 +4391,8 @@ msgstr "sprawdzanie plików najwyższego poziomu ..."
 
 #. R/check.R: gettext("checking use of S3 registration ...", domain = "R-tools")
 #: R/check.R:0
-#, fuzzy
 msgid "checking use of S3 registration ..."
-msgstr "sprawdzanie informacji indeksu ..."
+msgstr "sprawdzanie użycia rejestracji S3 ..."
 
 #. R/build.R: gettext("checking vignette meta-information ...", domain = "R-tools")
 #: R/build.R:0

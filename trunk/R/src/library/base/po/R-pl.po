@@ -455,9 +455,8 @@ msgstr "funkcja '%s' nie jest określona dla obiektów klasy %s"
 
 #. R/namespace.R: gettextf("'%s' is not an exported object from 'namespace:%s'", name, getNamespaceName(ns))
 #: R/namespace.R:0
-#, fuzzy
 msgid "'%s' is not an exported object from 'namespace:%s'"
-msgstr "%s nie jest eksportowanym obiektem z 'namespace:%s'"
+msgstr "'%s' nie jest eksportowanym obiektem z 'namespace:%s'"
 
 #. R/datetime.R: gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt"))
 #. R/datetime.R: gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt"))
@@ -3197,8 +3196,11 @@ msgid "Registered S3 method from a standard package overwritten by '%s':"
 msgid_plural ""
 "Registered S3 methods from standard package(s) overwritten by '%s':"
 msgstr[0] ""
+"Zarejestrowana metoda S3 ze standardowego pakietu nadpisana przez '%s':"
 msgstr[1] ""
+"Zarejestrowane metody S3 ze standardowych pakietów nadpisane przez '%s':"
 msgstr[2] ""
+"Zarejestrowane metody S3 ze standardowych pakietów nadpisane przez '%s':"
 
 #. R/namespace.R: ngettext(sum(notex), "S3 method %s was declared in 'NAMESPACE' file but was not found",     "S3 methods %s were declared in 'NAMESPACE' file but was not found", domain = "R-base")
 #: R/namespace.R:0

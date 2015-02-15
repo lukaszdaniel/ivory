@@ -876,7 +876,7 @@ msgstr "Brak zdefiniowanych pól"
 #. R/NextMethod.R: stop("No next method available")
 #: R/NextMethod.R:0
 msgid "No next method available"
-msgstr ""
+msgstr "Brak dostępnej następnej metody"
 
 #. R/methodsTable.R: gettextf("No simply inherited methods found for function %s; using non-simple method",     sQuote(fdef@generic))
 #: R/methodsTable.R:0
