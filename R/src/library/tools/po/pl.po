@@ -174,7 +174,7 @@ msgstr "brakło pamięci"
 
 #: text.c:266 text.c:268
 msgid "first arg must be a single character string"
-msgstr ""
+msgstr "pierwszy argument musi być pojedynczym łańcuchem tekstowym"
 
 #~ msgid "input"
 #~ msgstr "wejście"
