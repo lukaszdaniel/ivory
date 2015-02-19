@@ -76,11 +76,8 @@
 #endif
 
 #ifdef Win32
-int trio_vsnprintf(char *buffer, size_t bufferSize, const char *format,
-		   va_list args);
-# define vsnprintf trio_vsnprintf
+#include <trioremap.h>
 #endif
-
 
 #define BUFSIZE 8192  /* used by Rprintf etc */
 

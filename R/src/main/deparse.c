@@ -96,6 +96,9 @@
 #include <float.h> /* for DBL_DIG */
 #include <Print.h>
 #include <Fileio.h>
+#ifdef Win32
+#include <trioremap.h>
+#endif
 
 #define BUFSIZE 512
 
