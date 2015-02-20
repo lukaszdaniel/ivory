@@ -282,7 +282,7 @@
       whitespace.
 
       \item \code{cbind()} and \code{rbind()} now consider S4 inheritance
-      during S3 dispatch.
+      during S3 dispatch and also obey \code{deparse.level}.
 
       \item \code{cbind()} and \code{rbind()} will delegate recursively
       to \code{methods::cbind2} (\code{methods::rbind2}) when at least
@@ -308,13 +308,16 @@
 
       \item Add \code{lengths()} function for getting the lengths of all
       elements in a list.
-      
+
       \item New function \code{toTitleCase()} in package \pkg{tools},
       tailored to package titles.
-      
+
       \item The matrix methods of \code{cbind()} and \code{rbind()}
       allow matrices as inputs which have \eqn{2^{31}}{2^31} or more
       elements.  (For \code{cbind()}, wish of \PR{16198}.)
+      
+      \item The default method of \code{image()} has an explicit check
+      for a numeric or logical matrix (which was always required).
     }
   }
 
@@ -456,11 +459,11 @@
       \item Building the manuals now requires \command{texi2any} from
       \pkg{texinfo} 5.1 or later.  \acronym{CRAN} binary builds
       include the manuals, but by default builds from source will not, and
-      they will be accessed from \acronym{CRAN}. See the comments in
+      they will be accessed from \acronym{CRAN}.  See the comments in
       \file{src/gnuwin32/MkRules.dist} for how to specify the location
       of \command{texi2any}.
             
-      \item (Windows) Code changes have been made to allow R to be
+      \item (Windows) Code changes have been made to allow \R to be
       compiled with a new toolchain based on GCC 4.9.2.   
     }
   }
@@ -541,7 +544,7 @@
       example, a \code{data.frame} is valid for a \code{list} argument
       in the signature, and a \code{factor} is valid for \code{vector}
       arguments.
-      
+
     }
   }
 }
@@ -593,10 +596,10 @@
       configuration options of the version of PCRE in use.  In
       particular, this reports if regular expressions using
       \samp{\p{xx}} are supported.
-      
+
       \item (Windows.) \code{download.file(cacheOK = FALSE)} is now
       supported when \file{internet2.dll} is used.
-      
+
     }
   }
 
@@ -684,6 +687,10 @@
 
       \item Rare over-runs detected by AddressSanitizer in
       \code{substr()} and its replacement version have been avoided.
+      
+      \emph{Inter alia} that fix gives the documented behaviour for
+      \code{substr(x, 1, 2) <- ""} (subsequently reported as
+      \PR{16214}).
 
       \item Loading packages incorrectly defining an S4 generic followed
       by a function of the same name caused an erroneous cyclic

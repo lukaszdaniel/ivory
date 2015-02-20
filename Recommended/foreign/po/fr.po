@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreign 0.8-10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-26 08:41+0100\n"
+"POT-Creation-Date: 2015-02-20 20:09+0100\n"
 "PO-Revision-Date: 2012-10-03 15:24+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -164,7 +164,7 @@ msgid "unable to open file"
 msgstr "impossible d'ouvrir le fichier"
 
 #: Rdbfwrite.c:95 Rdbfwrite.c:133 stataread.c:298 stataread.c:319
-#: stataread.c:808 stataread.c:838
+#: stataread.c:809 stataread.c:839
 msgid "unknown data type"
 msgstr "type de donnée inconnu"
 
@@ -1124,7 +1124,7 @@ msgstr ""
 "la lecture des fichiers Stata .dta n'est pas encore possible sur cette "
 "architecture"
 
-#: stataread.c:582 stataread.c:1036
+#: stataread.c:582 stataread.c:1037
 msgid "first argument must be a file name\n"
 msgstr "le premier argument doit être un nom de fichier\n"
 
@@ -1133,44 +1133,44 @@ msgstr "le premier argument doit être un nom de fichier\n"
 msgid "a binary write error occurred"
 msgstr "une erreur d'écriture binaire s'est produite"
 
-#: stataread.c:715
+#: stataread.c:716
 msgid "this should happen: overrun"
 msgstr "ceci devrait se produire : dépassement par le haut."
 
-#: stataread.c:717
+#: stataread.c:718
 msgid "this should happen: underrun"
 msgstr "ceci devrait se produire : dépassement par le bas. "
 
-#: stataread.c:802 stataread.c:832
+#: stataread.c:803 stataread.c:833
 #, c-format
 msgid "character strings of >244 bytes in column %d will be truncated"
 msgstr ""
 
-#: stataread.c:969
+#: stataread.c:970
 msgid "empty string is not valid in Stata's documented format"
 msgstr ""
 
-#: stataread.c:975
+#: stataread.c:976
 msgid "this should not happen."
 msgstr "ceci ne devrait pas se produire."
 
-#: stataread.c:1032
+#: stataread.c:1033
 msgid "cannot yet read write .dta on this platform"
 msgstr ""
 "la lecture ou l'écriture de fichiers Stata .dta n'est pas encore possible "
 "sur cette architecture"
 
-#: stataread.c:1040
+#: stataread.c:1041
 msgid "data to be saved must be in a data frame"
 msgstr ""
 "les données à sauvegarder doivent être contenues dans un objet \"data frame\""
 
-#: stataread.c:1043
+#: stataread.c:1044
 #, c-format
 msgid "unable to open file for writing: '%s'"
 msgstr "impossible d'ouvrir le fichier '%s' en écriture"
 
-#: stataread.c:1048
+#: stataread.c:1049
 msgid "can only write version 6-10 formats"
 msgstr ""
 "il est seulement possible d'écrire des fichiers aux formats version 6-10"

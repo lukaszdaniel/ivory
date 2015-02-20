@@ -6637,7 +6637,7 @@ function(dir)
     package <- meta["Package"]
     if(grepl(paste0("^['\"]?", package), descr))
         out$descr_bad_start <- TRUE
-    if(grepl("^(The|This) package", descr))
+    if(grepl("^(The|This|A) package", descr))
         out$descr_bad_start <- TRUE
     if(!isTRUE(out$descr_bad_start) && !grepl("^['\"]?[[:upper:]]", descr))
        out$descr_bad_initial <- TRUE
@@ -6971,7 +6971,7 @@ function(x, ...)
           gettext("The Description field should start with a capital letter.", domain = "R-tools")
       },
       if(length(x$descr_bad_start)) {
-          gettext("The Description field should not start with the package name,\n  'This package' or 'The package'.", domain = "R-tools")
+          gettext("The Description field should not start with the package name,\n  'This package', 'The package' or 'A package'.", domain = "R-tools")
       }
      )
 }

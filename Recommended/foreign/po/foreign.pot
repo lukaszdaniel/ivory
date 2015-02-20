@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: foreign 0.8-62\n"
+"Project-Id-Version: foreign 0.8-63\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 19:59+0100\n"
+"POT-Creation-Date: 2015-02-20 20:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -162,7 +162,7 @@ msgid "unable to open file"
 msgstr ""
 
 #: Rdbfwrite.c:95 Rdbfwrite.c:133 stataread.c:298 stataread.c:319
-#: stataread.c:808 stataread.c:838
+#: stataread.c:809 stataread.c:839
 msgid "unknown data type"
 msgstr ""
 
@@ -991,7 +991,7 @@ msgstr ""
 msgid "can not yet read Stata .dta on this platform"
 msgstr ""
 
-#: stataread.c:582 stataread.c:1036
+#: stataread.c:582 stataread.c:1037
 msgid "first argument must be a file name\n"
 msgstr ""
 
@@ -1000,40 +1000,40 @@ msgstr ""
 msgid "a binary write error occurred"
 msgstr ""
 
-#: stataread.c:715
+#: stataread.c:716
 msgid "this should happen: overrun"
 msgstr ""
 
-#: stataread.c:717
+#: stataread.c:718
 msgid "this should happen: underrun"
 msgstr ""
 
-#: stataread.c:802 stataread.c:832
+#: stataread.c:803 stataread.c:833
 #, c-format
 msgid "character strings of >244 bytes in column %d will be truncated"
 msgstr ""
 
-#: stataread.c:969
+#: stataread.c:970
 msgid "empty string is not valid in Stata's documented format"
 msgstr ""
 
-#: stataread.c:975
+#: stataread.c:976
 msgid "this should not happen."
 msgstr ""
 
-#: stataread.c:1032
+#: stataread.c:1033
 msgid "cannot yet read write .dta on this platform"
 msgstr ""
 
-#: stataread.c:1040
+#: stataread.c:1041
 msgid "data to be saved must be in a data frame"
 msgstr ""
 
-#: stataread.c:1043
+#: stataread.c:1044
 #, c-format
 msgid "unable to open file for writing: '%s'"
 msgstr ""
 
-#: stataread.c:1048
+#: stataread.c:1049
 msgid "can only write version 6-10 formats"
 msgstr ""
