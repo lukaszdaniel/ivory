@@ -2030,6 +2030,17 @@ msgid ""
 "  \"help(selfStart)\"\n"
 "for the new form of the \"initial\" attribute."
 msgstr ""
+"Selbst-startende Model Funktionen im alten Stil\n"
+"werden nicht mehr unterstützt.\n"
+"Neue selbst-startende Funktionen sind verfügbar.\n"
+"Nutzen Sie\n"
+"  SSfpl statt fpl,\n"
+"  SSfol statt first.order.lag,\n"
+"  SSbiexp statt biexp,\n"
+"  SSlogis statt logistic.\n"
+"Um eigene selbst-startende Modelle zu implementieren,\n"
+"sehen Sie unter \"help(selfStart)\" die neue Form\n"
+"der \"initial\" Attribute nach."
 
 #. R/groupedData.R: stop("only one display level allowed")
 #: R/groupedData.R:0

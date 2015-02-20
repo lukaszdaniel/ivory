@@ -2133,9 +2133,3 @@ summary.pdBlocked <-
     eval(mCall)
   }
 }
-
-### Local variables:
-### mode: S
-### End:
-
-

@@ -65,7 +65,4 @@ StdDev: 3.650645 0.7188624
 
 Number of Observations: 84
 Number of Groups: 14 
-> q()
-> proc.time()
-   user  system elapsed 
-  0.706   0.056   0.752 
+> 
