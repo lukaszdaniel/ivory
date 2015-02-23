@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lattice 0.20-10\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2014-07-13 09:15\n"
+"POT-Creation-Date: 2015-02-23 12:09\n"
 "PO-Revision-Date: 2013-11-23 20:53+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -616,9 +616,10 @@ msgstr "brak punktów z pośród %d punktów kliknięcia"
 msgid "not enough rows for columns"
 msgstr "zbyt mało wierszy dla kolumn"
 
-#. R/panels.R: warning("only using the first two of ", p, "regression coefficients")
+#. R/panels.R: gettextf("only using the first two of %d regression coefficients", p)
 #: R/panels.R:0
-msgid "only using the first two of"
+#, fuzzy
+msgid "only using the first two of %d regression coefficients"
 msgstr "używanie jedynie pierwszych dwóch z "
 
 #. R/interaction.R: stop("panel position unspecified or invalid")
@@ -644,11 +645,6 @@ msgstr "problem z obliczeniami 'hist'"
 #: R/axis.R:0
 msgid "range too small for min.n"
 msgstr "zakres dla 'min.n' jest zbyt mały"
-
-#. R/panels.R: warning("only using the first two of ", p, "regression coefficients")
-#: R/panels.R:0
-msgid "regression coefficients"
-msgstr "współczynników regresji"
 
 #. R/interaction.R: stop("row must be specified")
 #: R/interaction.R:0
@@ -704,3 +700,6 @@ msgstr "'x' musi być czynnikiem (musi być przekształcalne w czynnik)"
 #: R/qq.R:0
 msgid "y must have exactly 2 levels"
 msgstr "'y' musi mieć dokładnie 2 poziomy"
+
+#~ msgid "regression coefficients"
+#~ msgstr "współczynników regresji"

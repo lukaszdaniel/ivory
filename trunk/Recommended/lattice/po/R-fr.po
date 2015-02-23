@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lattice 0.13-1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-07-13 09:15\n"
+"POT-Creation-Date: 2015-02-23 12:09\n"
 "PO-Revision-Date: 2007-03-23 10:18+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -631,9 +631,9 @@ msgstr "aucun point dans"
 msgid "not enough rows for columns"
 msgstr "trop peu de lignes pour le nombre de colonnes"
 
-#. R/panels.R: warning("only using the first two of ", p, "regression coefficients")
+#. R/panels.R: gettextf("only using the first two of %d regression coefficients", p)
 #: R/panels.R:0
-msgid "only using the first two of"
+msgid "only using the first two of %d regression coefficients"
 msgstr ""
 
 #. R/interaction.R: stop("panel position unspecified or invalid")
@@ -656,11 +656,6 @@ msgstr "calcul d'histogramme défectueux"
 #. R/axis.R: stop("range too small for min.n")
 #: R/axis.R:0
 msgid "range too small for min.n"
-msgstr ""
-
-#. R/panels.R: warning("only using the first two of ", p, "regression coefficients")
-#: R/panels.R:0
-msgid "regression coefficients"
 msgstr ""
 
 #. R/interaction.R: stop("row must be specified")

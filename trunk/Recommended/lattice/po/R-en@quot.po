@@ -264,11 +264,9 @@ msgstr "‘nrpoints’ should be numeric scalar with value >= 0."
 msgid "'a' is overridden by 'reg'"
 msgstr "‘a’ is overridden by ‘reg’"
 
-msgid "only using the first two of"
+#, fuzzy
+msgid "only using the first two of %d regression coefficients"
 msgstr "only using the first two of"
-
-msgid "regression coefficients"
-msgstr "regression coefficients"
 
 msgid "'a' and 'b' are overridden by 'coef'"
 msgstr "‘a’ and ‘b’ are overridden by ‘coef’"
@@ -442,6 +440,9 @@ msgstr "‘drop=TRUE’ ignored"
 
 msgid "Invalid indices"
 msgstr "Invalid indices"
+
+#~ msgid "regression coefficients"
+#~ msgstr "regression coefficients"
 
 #~ msgid ""
 #~ "Note: you shouldn't be seeing this message unless\n"

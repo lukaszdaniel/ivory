@@ -12,13 +12,13 @@ e7ddab232fd0c2c20b6eac503229ca89  man/dpill.Rd
 e9d58f063bb33cd05bb14a80fb6bfcbd  man/dpik.Rd
 b18f6ce168f418c6447707cd895d9bb0  man/bkde2D.Rd
 2fb0ede2945d4b26db4e0c165c4761cc  man/locpoly.Rd
-77a421e3a7df14f85a303fd7c3cb45db  man/bkfe.Rd
+e6d41c4b9546b7547620341fcb32e171  NAMESPACE
 d73aa41967d3cb81a5e58646fc2b42e6  po/R-pl.po
 dc04f4a6a3d6913d7195cc70db60712c  po/R-fr.po
 913b82567fa9a9e11c21736de93e73f8  po/R-de.po
-e6d41c4b9546b7547620341fcb32e171  NAMESPACE
 6c1d9da41d832a37f6091ef925943788  po/R-KernSmooth.pot
 f9e6460c2f691d7c75dc21b525a2a61d  po/R-ko.po
+77a421e3a7df14f85a303fd7c3cb45db  man/bkfe.Rd
 6e20a3d9fe37a5381234f64db0a005f5  R/all.R
 11a944c23b462f83614227ab7608927c  PORTING
 4d37c68f063852a93ff686e654a0b4fd  src/init.c

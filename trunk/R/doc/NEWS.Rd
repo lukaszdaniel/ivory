@@ -377,6 +377,9 @@
       invisibly. The initial optimization level can also be set with the
       environment variable \env{R_COMPILER_OPTIMIZE}.
 
+      \item \command{R CMD build} adds a \samp{NeedsCompilation} field
+      if one is not already present in the \file{DESCRIPTION} file.
+
       \item \command{R CMD check} gains option \option{--test-dir} to
       specify an alternative set of tests to run.
 
@@ -384,16 +387,11 @@
       testing after many types of errors, and will output a summary
       count of errors at the end if any have occurred.
 
+      \item \command{R CMD check} now checks that the \samp{Title} and
+      \samp{Description} fields are correctly terminated.
+      
       \item \command{R CMD check --as-cran} checks a \file{README.md}
       file can be processed: this needs \command{pandoc} installed.
-
-      \item \command{R CMD build} adds a \samp{NeedsCompilation} field
-      if one is not already present in the \file{DESCRIPTION} file.
-
-      \item \command{R CMD check} notes uses of \code{library()} and
-      \code{require()} in package code: see the section
-      \sQuote{Suggested packages} of \sQuote{Writing R Extensions} for
-      good practice.
 
       \item \command{R CMD check --as-cran} checks the existence and
       accessibility of URLs in the \file{DESCRIPTION}, \file{CITATION}
@@ -412,9 +410,6 @@
 
       These checks can also be selected by environment variables: see
       the \sQuote{R Internals} manual.
-
-      \item \command{R CMD check} now checks that the \samp{Title} and
-      \samp{Description} fields are correctly terminated.
 
       \item \command{R CMD check --as-cran} reports if the \code{Title}
       field does not appear to be in title case (see \sQuote{Writing R
@@ -626,6 +621,11 @@
 
       \command{R CMD build} will correct line endings in all Makefiles,
       not just those in the \file{src} directory.
+      
+      \item \command{R CMD check} notes uses of \code{library()} and
+      \code{require()} in package code: see the section
+      \sQuote{Suggested packages} of \sQuote{Writing R Extensions} for
+      good practice.
     }
   }
   \subsection{DEPRECATED AND DEFUNCT}{
@@ -700,8 +700,8 @@
       vignette engine.
 
       \item Port Tomas Kalibera's fix from R-devel that restores the
-      loadMethod fast path, effectively doubling the speed of S4
-      dispatch.
+      \code{loadMethod()} fast path, effectively doubling the speed of
+      S4 dispatch.
 
       \item \code{power.t.test()} and \code{power.prop.test()} now make
       use of the \code{extendInt} option of \code{uniroot()} and hence
@@ -723,9 +723,9 @@
       \item \code{split.Date()} retains fractional representations while
       avoiding incomplete class propagation.
 
-      \item \file{R_ext/Lapack.h} had not been updated for changes to
-      the argument lists of the (largely internal) functions
-      \code{dlaed2} and \code{dlaed3}.  (\PR{16157})
+      \item \file{R_ext/Lapack.h} had not been updated for changes made
+      by LAPACK to the argument lists of its (largely internal)
+      functions \code{dlaed2} and \code{dlaed3}.  (\PR{16157})
 
       \item \code{RShowDoc("NEWS", "txt")} had not been updated for the
       layout changes of \R 3.1.0.
