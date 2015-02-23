@@ -25,6 +25,6 @@ cf8734f496affbbe9006e60f2abe5548  po/nnet.pot
 d805c54530cb5e52e54755f1110e0c7a  R/multinom.R
 6e89a35c30d458f779f2b579c2692585  R/vcovmultinom.R
 91cbc73bd6fed6d715f20cd97e7a47ac  R/zzz.R
-f5521e9560bbf0245437ea754526aafe  src/nnet.c
 f846b6a5f4a8466aad32c811b3189bd0  man/which.is.max.Rd
+f5521e9560bbf0245437ea754526aafe  src/nnet.c
 eae59db10cf87860fa447235ed25f945  src/localization.h

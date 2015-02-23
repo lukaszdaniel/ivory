@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: lattice 0.20-29\n"
-"POT-Creation-Date: 2014-07-13 09:15\n"
+"Project-Id-Version: lattice 0.20-30\n"
+"POT-Creation-Date: 2015-02-23 12:09\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -822,9 +822,9 @@ msgstr ""
 
 
 #: R/panels.R: 0
-#. R/panels.R: warning("only using the first two of ", p, "regression coefficients")
+#. R/panels.R: gettextf("only using the first two of %d regression coefficients", p)
 
-msgid "only using the first two of"
+msgid "only using the first two of %d regression coefficients"
 msgstr ""
 
 
@@ -853,13 +853,6 @@ msgstr ""
 #. R/axis.R: stop("range too small for min.n")
 
 msgid "range too small for min.n"
-msgstr ""
-
-
-#: R/panels.R: 0
-#. R/panels.R: warning("only using the first two of ", p, "regression coefficients")
-
-msgid "regression coefficients"
 msgstr ""
 
 

@@ -1,8 +1,7 @@
 ee1f2340ddd8ca1063ca46417e507bb9  DESCRIPTION
-86b185771b0e5e29717ee6b0ad5ccf8d  Changes
 3bad31311a37fe2f39e9c2ad876ab94c  inst/CITATION
-dc34b63e948e3ba0667d43b3fde24c58  inst/po/pl/LC_MESSAGES/R-class.mo
 e042788d6870b70eb8ea0bc5f01391ff  inst/NEWS
+dc34b63e948e3ba0667d43b3fde24c58  inst/po/pl/LC_MESSAGES/R-class.mo
 41a14f2150064ddff743e39d111a870a  inst/po/de/LC_MESSAGES/R-class.mo
 a98bfc65732fea1f439faecee3a4adaf  inst/po/en@quot/LC_MESSAGES/R-class.mo
 b888e2521f30a9912d9687777b1aa478  inst/po/fr/LC_MESSAGES/R-class.mo
@@ -22,6 +21,7 @@ fdfb3a7e3ed8116278a8f4fd067a8045  man/lvq2.Rd
 11a66b273c6dc182cc05bb2bc53fdb54  man/olvq1.Rd
 69d25fc468f9fd914106f8f1fb49c101  man/condense.Rd
 4a2e92b20c3ae11d503519eda00a7ed7  man/batchSOM.Rd
+86b185771b0e5e29717ee6b0ad5ccf8d  Changes
 04d8b8fb49626fa41093f3b19ce5edbf  man/somgrid.Rd
 540f0c9085850c1fdd206c18e8127d5c  po/class.pot
 cfe00d090cffac53030a8a14788dc901  po/R-class.pot
