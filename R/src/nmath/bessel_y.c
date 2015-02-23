@@ -55,15 +55,14 @@ double bessel_y(double x, double alpha)
     if (alpha < 0) {
 	/* Using Abramowitz & Stegun  9.1.2
 	 * this may not be quite optimal (CPU and accuracy wise) */
-	return(bessel_y(x, -alpha) * cospi(alpha) -
-	       ((alpha == na) ? 0 :
-		bessel_j(x, -alpha) * sinpi(alpha)));
+	return(((alpha - na == 0.5) ? 0 : bessel_y(x, -alpha) * cospi(alpha)) -
+	       ((alpha      == na ) ? 0 : bessel_j(x, -alpha) * sinpi(alpha)));
     }
     else if (alpha > 1e7) {
 	MATHLIB_WARNING(_("besselY(x, nu): nu=%g too large for 'bessel_y()' algorithm"), alpha);
 	return ML_NAN;
     }
-    nb = 1+ (int)na;/* nb-1 <= alpha < nb */
+    nb = 1 + (int)na; /* nb-1 <= alpha < nb */
     alpha -= (double)(nb-1);
 #ifdef MATHLIB_STANDALONE
     by = (double *) calloc(nb, sizeof(double));
@@ -117,16 +116,15 @@ double bessel_y_ex(double x, double alpha, double *by)
     if (alpha < 0) {
 	/* Using Abramowitz & Stegun  9.1.2
 	 * this may not be quite optimal (CPU and accuracy wise) */
-	return(bessel_y_ex(x, -alpha, by) * cospi(alpha) -
-	       ((alpha == na) ? 0 :
-		bessel_j_ex(x, -alpha, by) * sinpi(alpha)));
+	return(((alpha - na == 0.5) ? 0 : bessel_y_ex(x, -alpha, by) * cospi(alpha)) -
+	       ((alpha      == na ) ? 0 : bessel_j_ex(x, -alpha, by) * sinpi(alpha)));
     }
     else if (alpha > 1e7) {
 	MATHLIB_WARNING(_("besselY(x, nu): nu=%g too large for 'bessel_y()' algorithm"), alpha);
 	return ML_NAN;
     }
-    nb = 1+ (int)na;/* nb-1 <= alpha < nb */
-    alpha -= (double)(nb-1);
+    nb = 1 + (int)na; /* nb-1 <= alpha < nb */
+    alpha -= (double)(nb-1); // ==> alpha' in [0, 1)
     Y_bessel(&x, &alpha, &nb, by, &ncalc);
     if(ncalc != nb) {/* error input */
 	if(ncalc == -1)
@@ -153,8 +151,7 @@ v for non-negative argument X, and non-negative order N+ALPHA.
 
  Explanation of variables in the calling sequence
 
- X     - Non-negative argument for which
-	 Y's are to be calculated.
+ X     - Non-negative argument for which Y's are to be calculated.
  ALPHA - Fractional part of order for which
 	 Y's are to be calculated.  0 <= ALPHA < 1.0.
  NB    - Number of functions to be calculated, NB > 0.
@@ -171,13 +168,12 @@ v for non-negative argument X, and non-negative order N+ALPHA.
 	 NCALC=NB, i.e., all orders have been calculated to
 	 the desired accuracy.	See error returns below.
 
+	 ****************************************************************
 
- *******************************************************************
+ Error return codes
 
- Error returns
-
-  In case of an error, NCALC != NB, and not all Y's are
-  calculated to the desired accuracy.
+    In case of an error,  NCALC != NB, and not all Y's are
+    calculated to the desired accuracy.
 
   NCALC < -1:  An argument is out of range. For example,
 	NB <= 0, IZE is not 1 or 2, or IZE=1 and ABS(X) >=
@@ -222,10 +218,10 @@ v for non-negative argument X, and non-negative order N+ALPHA.
 	       Applied Mathematics Division
 	       Argonne National Laboratory
 	       Argonne, IL  60439
- ----------------------------------------------------------------------*/
+ *******************************************************************
+ */
 
-
-/* ----------------------------------------------------------------------
+/* ---------------------------------------------------------------------
   Mathematical constants
     FIVPI = 5*PI
     PIM5 = 5*PI - 15
