@@ -11,7 +11,7 @@
 \usage{
 pltree(x, \dots)
 \method{pltree}{twins}(x, main = gettextf("Dendrogram of \%s", paste(deparse(x$call), collapse = ""), domain = "R-cluster"),
-             labels = NULL, ylab = "Height", \dots)
+             labels = NULL, ylab = gettext("Height", domain = "R-cluster"), \dots)
 }
 \arguments{
   \item{x}{in general, an \R object for which a \code{pltree} method is
