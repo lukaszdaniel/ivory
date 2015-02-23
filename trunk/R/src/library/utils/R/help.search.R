@@ -733,8 +733,8 @@ function(x, ...)
 	else if(type == "help") writeLines(c(strwrap(gettextf("Help files with %s fields matching %s using regular expression matching:", fields_used[[type]], sQuote(x$pattern), domain = "R-utils")), "\n"), outConn)
 	else if(type == "vignette") writeLines(c(strwrap(gettextf("Vignettes with %s fields matching %s using regular expression matching:", fields_used[[type]], sQuote(x$pattern), domain = "R-utils")), "\n"), outConn)
 	}
-	    dbnam <- paste0(dbtemp[, "Package"], "::", dbtemp[ , "topic"])
-	    dbtit <- paste0(dbtemp[ , "title"])
+	    dbnam <- paste0(dbtemp[, "Package"], "::", dbtemp[ , "Topic"])
+	    dbtit <- paste0(dbtemp[ , "Title"])
 	    writeLines(formatDL(dbnam, dbtit), outConn)
 	    writeLines(c("\n",
 			 strwrap(typeinstruct[type]),
