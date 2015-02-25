@@ -121,6 +121,9 @@ Loading required package: 'splines'
 [1] TRUE
 > aeq(truth$score, resid(fit, 'score'))
 [1] TRUE
+> expect <- predict(fit, type='expected', newdata=test2) #force recalc
+> aeq(test2$event -fit$resid, expect) #tests the predict function
+[1] TRUE
 > 
 > sfit <- survfit(fit, list(x=0), censor=FALSE)
 > aeq(sfit$std.err^2, truth$var) 

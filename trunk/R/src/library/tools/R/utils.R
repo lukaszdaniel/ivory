@@ -904,6 +904,8 @@ function(dir, installed = TRUE, primitive = FALSE)
             env_list <- unique(env_list)
         }
     }
+    ## some BioC packages warn here
+    suppressWarnings(
     unique(c(.get_internal_S3_generics(primitive),
              unlist(lapply(env_list,
                            function(env) {
@@ -913,7 +915,7 @@ function(dir, installed = TRUE, primitive = FALSE)
                                else Filter(function(f)
                                            .is_S3_generic(f, envir = env),
                                            nms)
-                           }))))
+                           })))))
 }
 
 ### ** .get_S3_group_generics

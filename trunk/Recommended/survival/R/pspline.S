@@ -211,13 +211,18 @@ psplineinverse <- function(x) {
     knots <- attr(x, "knots")
     nknot <- length(knots)
     if (!intercept) {
-        indx <- 1:(ncol(x)+1) + (nknot- (ncol(x) +1))/2
+        indx <- seq_len(ncol(x)+1) + (nknot- (ncol(x) +1))/2
         as.vector(cbind(1-rowSums(x), x) %*% knots[indx])
     }
     else {
-        indx <- 1:ncol(x) + (nknot - ncol(x))/2
+        indx <- seq_len(ncol(x)) + (nknot - ncol(x))/2
         as.vector(x %*% knots)
     }
 }
 
-    
+as.matrix.pspline <- function(x, ...) {
+    temp <- attributes(x)
+    attributes(x) <- temp['dim']
+    x
+}
+

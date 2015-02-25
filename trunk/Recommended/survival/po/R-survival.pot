@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: survival 2.37-7\n"
-"POT-Creation-Date: 2015-02-13 16:25\n"
+"Project-Id-Version: survival 2.38-1\n"
+"POT-Creation-Date: 2015-02-25 19:22\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -113,10 +113,26 @@ msgid "'%s' and '%s' arguments are of different lengths"
 msgstr ""
 
 
+#: R/neardate.R: 0
+#. R/neardate.R: gettextf("'%s' and '%s' arguments have different lengths", "id1", "y1")
+#. R/neardate.R: gettextf("'%s' and '%s' arguments have different lengths", "id2", "y2")
+
+msgid "'%s' and '%s' arguments have different lengths"
+msgstr ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: gettextf("'%s' and '%s' arguments must be the same length", "tstart", "id")
+#. R/tmerge.R: gettextf("'%s' and '%s' arguments must be the same length", "tstop", "id")
+
+msgid "'%s' and '%s' arguments must be the same length"
+msgstr ""
+
+
 #: R/aareg.S: 0
 #: R/anova.coxph.S: 0
 #: R/attrassign.R: 0
-#: R/basehaz.S: 0
+#: R/basehaz.R: 0
 #: R/cox.zph.S: 0
 #: R/coxph.rvar.S: 0
 #: R/is.ratetable.S: 0
@@ -141,7 +157,7 @@ msgstr ""
 #. R/aareg.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("aareg"))
 #. R/anova.coxph.S: gettextf("'%s' argument is not an object of class %s", "object", dQuote("coxph"))
 #. R/attrassign.R: gettextf("'%s' argument is not an object of class %s", "tt", dQuote("terms"))
-#. R/basehaz.S: gettextf("'%s' argument is not an object of class %s", "fit", dQuote("coxph"))
+#. R/basehaz.R: gettextf("'%s' argument is not an object of class %s", "fit", dQuote("coxph"))
 #. R/cox.zph.S: gettextf("'%s' argument is not an object of class %s", "fit", dQuote("coxph"))
 #. R/coxph.rvar.S: gettextf("'%s' argument is not an object of class %s", "fit", dQuote("coxph"))
 #. R/is.ratetable.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("ratetable"))
@@ -175,6 +191,29 @@ msgid "'%s' argument is of length 0"
 msgstr ""
 
 
+#: R/neardate.R: 0
+#: R/tmerge.R: 0
+#: R/tmerge.R: 0
+#. R/neardate.R: gettextf("'%s' argument is required", "id1")
+#. R/neardate.R: gettextf("'%s' argument is required", "id2")
+#. R/neardate.R: gettextf("'%s' argument is required", "y1")
+#. R/neardate.R: gettextf("'%s' argument is required", "y2")
+#. R/tmerge.R: gettextf("'%s' argument is required", "data1")
+#. R/tmerge.R: gettextf("'%s' argument is required", "id")
+
+msgid "'%s' argument is required"
+msgstr ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: gettextf("'%s' argument must be a character string", "id")
+#. R/tmerge.R: gettextf("'%s' argument must be a character string", "tstart")
+#. R/tmerge.R: gettextf("'%s' argument must be a character string", "tstop")
+
+msgid "'%s' argument must be a character string"
+msgstr ""
+
+
 #: R/survfitKM.S: 0
 #: R/survfitTurnbull.S: 0
 #. R/survfitKM.S: gettextf("'%s' argument must be a factor", "x")
@@ -185,11 +224,15 @@ msgstr ""
 
 
 #: R/Surv.S: 0
+#: R/survfitms.R: 0
+#: R/survfitms.R: 0
 #. R/Surv.S: gettextf("'%s' argument must be numeric", "time")
 #. R/Surv.S: gettextf("'%s' argument must be numeric", "time")
 #. R/Surv.S: gettextf("'%s' argument must be numeric", "time")
 #. R/Surv.S: gettextf("'%s' argument must be numeric", "time2")
 #. R/Surv.S: gettextf("'%s' argument must be numeric", "time2")
+#. R/survfitms.R: gettextf("'%s' argument must be numeric", "times")
+#. R/survfitms.R: gettextf("'%s' argument must be numeric", "times")
 
 msgid "'%s' argument must be numeric"
 msgstr ""
@@ -266,6 +309,27 @@ msgid "'cohort.size' and 'stratum' levels lengths do not match"
 msgstr ""
 
 
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("'data1' argument does not match its own tname attribute")
+
+msgid "'data1' argument does not match its own tname attribute"
+msgstr ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("'data1' argument must be a data frame")
+
+msgid "'data1' argument must be a data frame"
+msgstr ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("'defer' argument must be a non-negative number")
+
+msgid "'defer' argument must be a non-negative number"
+msgstr ""
+
+
 #: R/survregDtest.S: 0
 #. R/survregDtest.S: gettext("'dtrans()' component must be a 1-1 function")
 
@@ -306,6 +370,13 @@ msgstr ""
 #. R/survfitCI.R: stop("'id' argument is required for start:stop data")
 
 msgid "'id' argument is required for start:stop data"
+msgstr ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("'id' has values not in data1")
+
+msgid "'id' has values not in data1"
 msgstr ""
 
 
@@ -370,6 +441,13 @@ msgstr ""
 #. R/anova.coxphlist.S: stop("'object' argument must be a list of objects of class \"coxph\"")
 
 msgid "'object' argument must be a list of objects of class \"coxph\""
+msgstr ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("'options' argument must be a list")
+
+msgid "'options' argument must be a list"
 msgstr ""
 
 
@@ -439,6 +517,13 @@ msgstr ""
 #. R/survexp.R: stop("'survexp()' cannot have interaction terms")
 
 msgid "'survexp()' cannot have interaction terms"
+msgstr ""
+
+
+#: R/survfit.R: 0
+#. R/survfit.R: stop("'survfit()' function requires a formula as its first argument")
+
+msgid "'survfit()' function requires a formula as its first argument"
 msgstr ""
 
 
@@ -550,6 +635,13 @@ msgstr ""
 #. R/survexp.fit.S: stop("'x' matrix does not match the rate table")
 
 msgid "'x' matrix does not match the rate table"
+msgstr ""
+
+
+#: R/neardate.R: 0
+#. R/neardate.R: stop("'y1' and 'y2' arguments must be sortable")
+
+msgid "'y1' and 'y2' arguments must be sortable"
 msgstr ""
 
 
@@ -686,6 +778,13 @@ msgstr ""
 #. R/summary.aareg.S: gettextf("Chisq= %s on %d df, p=%s; test weights= %s", format(round(chi, 2)), df,     signif(1 - pchisq(chi, df), 2), x$test, domain = "R-survival")
 
 msgid "Chisq= %s on %d df, p=%s; test weights= %s"
+msgstr ""
+
+
+#: R/coxph.R: 0
+#. R/coxph.R: stop("Cluster cannot be used in an interaction")
+
+msgid "Cluster cannot be used in an interaction"
 msgstr ""
 
 
@@ -977,6 +1076,14 @@ msgstr ""
 #. R/summary.survreg.S: gettext("   No summary provided\n")
 
 msgid "No summary provided"
+msgstr ""
+
+
+#: R/neardate.R: 0
+#. R/neardate.R: stop("No valid entries in data set 2")
+#. R/neardate.R: stop("No valid entries in data set 2")
+
+msgid "No valid entries in data set 2"
 msgstr ""
 
 
@@ -1351,6 +1458,20 @@ msgid "a name given in the terms argument was not found in the model"
 msgstr ""
 
 
+#: R/coxph.R: 0
+#. R/coxph.R: warning("a variable appears on both the left and right sides of the formula")
+
+msgid "a variable appears on both the left and right sides of the formula"
+msgstr ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("all additional arguments must have a name")
+
+msgid "all additional arguments must have a name"
+msgstr ""
+
+
 #: R/anova.coxph.S: 0
 #. R/anova.coxph.S: stop("all arguments must be an objects of class \"coxph\" or \"coxme\"")
 
@@ -1358,10 +1479,31 @@ msgid "all arguments must be an objects of class \"coxph\" or \"coxme\""
 msgstr ""
 
 
+#: R/strata.S: 0
+#. R/strata.S: stop("all arguments must be the same length")
+
+msgid "all arguments must be the same length"
+msgstr ""
+
+
+#: R/strata.S: 0
+#. R/strata.S: stop("all arguments must be vectors")
+
+msgid "all arguments must be vectors"
+msgstr ""
+
+
 #: R/survfitCI.R: 0
 #. R/survfitCI.R: warning("an observation transitions to it's starting state, transition ignored")
 
 msgid "an observation transitions to it's starting state, transition ignored"
+msgstr ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: gettextf("argument %s is not the same length as id", argname[ii])
+
+msgid "argument %s is not the same length as id"
 msgstr ""
 
 
@@ -1376,6 +1518,13 @@ msgstr ""
 #. R/attrassign.R: stop("argument is not really a model matrix")
 
 msgid "argument is not really a model matrix"
+msgstr ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: gettextf("argument(s) %s not recognized type", paste(argname[is.na(check)], collapse = ", "))
+
+msgid "argument(s) %s not recognized type"
 msgstr ""
 
 
@@ -1422,6 +1571,13 @@ msgstr ""
 #. R/survfitKM.S: stop("can only handle right censored or counting data")
 
 msgid "can only handle right censored or counting data"
+msgstr ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("cannot change names in mid-stream")
+
+msgid "cannot change names in mid-stream"
 msgstr ""
 
 
@@ -1581,10 +1737,8 @@ msgstr ""
 
 
 #: R/aareg.S: 0
-#: R/coxph.R: 0
 #: R/survreg.S: 0
 #. R/aareg.S: stop("cluster can not be used in an interaction")
-#. R/coxph.R: stop("cluster can not be used in an interaction")
 #. R/survreg.S: stop("cluster can not be used in an interaction")
 
 msgid "cluster can not be used in an interaction"
@@ -1671,10 +1825,24 @@ msgid "detailed output is not available for the %s method"
 msgstr ""
 
 
+#: R/tmerge.R: 0
+#. R/tmerge.R: gettextf("different lengths in an %s call", paste(argclass[ii], collapse = ", "))
+
+msgid "different lengths in an %s call"
+msgstr ""
+
+
 #: R/is.ratetable.S: 0
 #. R/is.ratetable.S: gettextf("dimname %d is the wrong length", i)
 
 msgid "dimname %d is the wrong length"
+msgstr ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("duplicate identifiers in data1")
+
+msgid "duplicate identifiers in data1"
 msgstr ""
 
 
@@ -1717,6 +1885,13 @@ msgstr ""
 #. R/survfitCI.R: gettextf("gap in follow-up, id %s", (id[indx1])[who])
 
 msgid "gap in follow-up, id %s"
+msgstr ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("id values found in data2 which are not in data1")
+
+msgid "id values found in data2 which are not in data1"
 msgstr ""
 
 
@@ -2105,6 +2280,13 @@ msgid "missing the 'type' attribute"
 msgstr ""
 
 
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("missing time value, when that variable defines the span")
+
+msgid "missing time value, when that variable defines the span"
+msgstr ""
+
+
 #: R/anova.coxmelist.R: 0
 #. R/anova.coxmelist.R: stop("models do not have the same number of events")
 
@@ -2165,6 +2347,13 @@ msgid "negative time point requested"
 msgstr ""
 
 
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("neither a 'tstop' argument nor an initial event argument was found")
+
+msgid "neither a 'tstop' argument nor an initial event argument was found"
+msgstr ""
+
+
 #: R/frailty.controlaic.S: 0
 #: R/frailty.controldf.S: 0
 #: R/frailty.controlgam.S: 0
@@ -2221,10 +2410,24 @@ msgid "no time variable!"
 msgstr ""
 
 
+#: R/tmerge.R: 0
+#. R/tmerge.R: gettextf("non numeric increment in an %s call", paste(argclass[ii], collapse = ", "))
+
+msgid "non numeric increment in an %s call"
+msgstr ""
+
+
 #: R/match.ratetable.S: 0
 #. R/match.ratetable.S: gettextf("non-unique ratetable match for variable %s", dimid[i])
 
 msgid "non-unique ratetable match for variable %s"
+msgstr ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("nrow(data1) != nrow(data2) and data1 is missing the id")
+
+msgid "nrow(data1) != nrow(data2) and data1 is missing the id"
 msgstr ""
 
 
@@ -2283,6 +2486,13 @@ msgid "offset terms not allowed"
 msgstr ""
 
 
+#: R/coxph.R: 0
+#. R/coxph.R: stop("offsets must be finite")
+
+msgid "offsets must be finite"
+msgstr ""
+
+
 #: R/ridge.S: 0
 #. R/ridge.S: stop("only one of 'df' or 'theta' arguments can be specified")
 
@@ -2322,6 +2532,13 @@ msgid "only the last dimension can be interpolated"
 msgstr ""
 
 
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("overlapping time intervals for a subject")
+
+msgid "overlapping time intervals for a subject"
+msgstr ""
+
+
 #: R/print.survreg.penal.S: 0
 #. R/print.survreg.penal.S: stop("penalized fits must have an intercept!")
 
@@ -2356,6 +2573,13 @@ msgstr ""
 #. R/cch.R: stop("population smaller than sample in some strata")
 
 msgid "population smaller than sample in some strata"
+msgstr ""
+
+
+#: R/clogit.R: 0
+#. R/clogit.R: stop("predicted survival curves are not defined for a 'clogit' model")
+
+msgid "predicted survival curves are not defined for a 'clogit' model"
 msgstr ""
 
 
@@ -2414,6 +2638,13 @@ msgid "right censored data only"
 msgstr ""
 
 
+#: R/clogit.R: 0
+#. R/clogit.R: stop("robust variance plus the exact method is not supported")
+
+msgid "robust variance plus the exact method is not supported"
+msgstr ""
+
+
 #: R/survexp.R: 0
 #. R/survexp.R: warning("se.fit value ignored")
 
@@ -2439,6 +2670,13 @@ msgid "sparse term must be single column"
 msgstr ""
 
 
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("start and end variables must be numeric")
+
+msgid "start and end variables must be numeric"
+msgstr ""
+
+
 #: R/survfitKM.S: 0
 #: R/survfitTurnbull.S: 0
 #. R/survfitKM.S: gettextf("start.time = %s is greater than all time points.", start.time)
@@ -2455,10 +2693,11 @@ msgid "status must be 0, 1, 2 or 3; converted to NA"
 msgstr ""
 
 
-#: R/pyears.R: 0
-#. R/pyears.R: stop("stop time must be > start time")
+#: R/tmerge.R: 0
+#. R/tmerge.R: stop("stop time must be > start time for all observations")
+#. R/tmerge.R: stop("stop time must be > start time for all observations")
 
-msgid "stop time must be > start time"
+msgid "stop time must be > start time for all observations"
 msgstr ""
 
 
@@ -2611,6 +2850,13 @@ msgid "too few degrees of freedom"
 msgstr ""
 
 
+#: R/tmerge.R: 0
+#. R/tmerge.R: gettextf("too many variables in an %s call", paste(argclass[ii], collapse = ", "))
+
+msgid "too many variables in an %s call"
+msgstr ""
+
+
 #: R/is.ratetable.S: 0
 #. R/is.ratetable.S: gettextf("type[ %d ] is 1; cutpoint should be null", i)
 
@@ -2717,6 +2963,16 @@ msgstr ""
 #. R/survexp.R: warning("weights ignored")
 
 msgid "weights ignored"
+msgstr ""
+
+
+#: R/coxph.R: 0
+#: R/model.matrix.coxph.R: 0
+#. R/coxph.R: stop("weights must be finite")
+#. R/coxph.R: stop("weights must be finite")
+#. R/model.matrix.coxph.R: stop("weights must be finite")
+
+msgid "weights must be finite"
 msgstr ""
 
 

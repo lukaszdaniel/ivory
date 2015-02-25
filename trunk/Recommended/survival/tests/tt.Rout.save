@@ -23,7 +23,6 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(survival)
-Loading required package: 'splines'
 > 
 > # A contrived example for the tt function
 > #
@@ -61,6 +60,16 @@ Loading required package: 'splines'
 > 
 > dfit <- coxph(Surv(futime, status) ~ x + tt(age), tdata,
 +               tt= function(x, t, ...) x+t, iter=0, x=T)
+> 
+> #
+> # Check that cluster, weight, and offset were correctly expanded
+> #
+> tdata <- data.frame(tdata, grp=sample(1:100, 500, replace=TRUE),
++                     casewt = sample(1:5, 500, replace=TRUE),
++                     zz = rnorm(500))
+> dfit2 <- coxph(Surv(futime, status) ~ x + tt(age) + offset(zz) + cluster(grp),
++                weight=casewt, data=tdata,
++                tt= function(x, t, ...) x+t)
 > 
 > proc.time()
    user  system elapsed 

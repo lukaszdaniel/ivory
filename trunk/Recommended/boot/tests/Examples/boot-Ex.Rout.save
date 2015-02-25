@@ -507,7 +507,6 @@ Calculations and Intervals on Original Scale
 > ### ** Examples
 > 
 > library(survival)
-Loading required package: ‘splines’
 
 Attaching package: ‘survival’
 
@@ -731,7 +730,7 @@ Warning in command 'min(surv$time[inds[1 - surv$surv[inds] >= 0.5]])':
 > 
 > cleanEx()
 
-detaching ‘package:survival’, ‘package:splines’
+detaching ‘package:splines’, ‘package:survival’
 
 > nameEx("control")
 > ### * control
