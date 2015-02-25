@@ -813,7 +813,6 @@ n= 60
 > 
 > require(survival)
 Loading required package: survival
-Loading required package: ‘splines’
 > rpart(Surv(pgtime, pgstat) ~ ., stagec)
 n= 146 
 
@@ -842,7 +841,7 @@ node), split, n, deviance, yval
 > 
 > cleanEx()
 
-detaching ‘package:survival’, ‘package:splines’
+detaching ‘package:survival’
 
 > nameEx("summary.rpart")
 > ### * summary.rpart

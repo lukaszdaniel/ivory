@@ -25,7 +25,6 @@ Type 'q()' to quit R.
 > options(na.action=na.exclude) # preserve missings
 > options(contrasts=c('contr.treatment', 'contr.poly')) #ensure constrast type
 > library(survival)
-Loading required package: 'splines'
 > 
 > # Tests using the rats data
 > #
@@ -33,7 +32,7 @@ Loading required package: 'splines'
 > #    3863-3868, November 77)
 > 
 > rfit <- coxph(Surv(time,status) ~ rx + frailty(litter), rats,
-+ 	     method='breslow')
++ 	     method='breslow', subset= (sex=='f'))
 > names(rfit)
  [1] "coefficients"      "var"               "var2"             
  [4] "loglik"            "iter"              "linear.predictors"
@@ -47,7 +46,8 @@ Loading required package: 'splines'
 [28] "call"             
 > rfit
 Call:
-coxph(formula = Surv(time, status) ~ rx + frailty(litter), data = rats, method = "breslow")
+coxph(formula = Surv(time, status) ~ rx + frailty(litter), data = rats, 
+    subset = (sex == "f"), method = "breslow")
 
                 coef  se(coef) se2   Chisq DF   p    
 rx              0.906 0.323    0.319  7.88  1.0 0.005
@@ -84,11 +84,11 @@ $c.loglik
 
 > 
 > rfit1 <- coxph(Surv(time,status) ~ rx + frailty(litter, theta=1), rats,
-+ 	     method='breslow')
++ 	     method='breslow', subset=(sex=="f"))
 > rfit1
 Call:
-coxph(formula = Surv(time, status) ~ rx + frailty(litter, theta = 1), data = rats, 
-    method = "breslow")
+coxph(formula = Surv(time, status) ~ rx + frailty(litter, theta = 1), 
+    data = rats, subset = (sex == "f"), method = "breslow")
 
                           coef  se(coef) se2   Chisq DF   p     
 rx                        0.918 0.327    0.321  7.85  1.0 0.0051
@@ -99,10 +99,11 @@ Iterations: 1 outer, 6 Newton-Raphson
 Degrees of freedom for terms=  1.0 22.7
 Likelihood ratio test=50.7 on 23.7 df, p=0.001 n=150
 > 
-> rfit2 <- coxph(Surv(time,status) ~ frailty(litter), rats)
+> rfit2 <- coxph(Surv(time,status) ~ frailty(litter), rats, subset=(sex=='f'))
 > rfit2
 Call:
-coxph(formula = Surv(time, status) ~ frailty(litter), data = rats)
+coxph(formula = Surv(time, status) ~ frailty(litter), data = rats, 
+    subset = (sex == "f"))
 
                 coef se(coef) se2 Chisq DF   p   
 frailty(litter)                   18    14.6 0.24

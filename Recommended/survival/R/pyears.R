@@ -79,8 +79,6 @@ pyears <- function(formula, data,
         if (any(Y <0)) stop("negative follow up time")
         Y <- as.matrix(Y)
         if (ncol(Y) >2) stop("Y has too many columns")
-        if (ncol(Y)==2 && any(Y[,2] <= Y[,1]))
-            stop("stop time must be > start time")
         }
     else {
         stype <- attr(Y, 'type')
@@ -213,7 +211,7 @@ pyears <- function(formula, data,
                                         nint:(nint*nyear))$y - .0001)
                 }
             }
-
+        docount <- is.Surv(Y)
         temp <- .C(Cpyears1,
                         as.integer(n),
                         as.integer(ncol(Y)),
@@ -234,16 +232,16 @@ pyears <- function(formula, data,
                         as.double(X),
                         pyears=double(osize),
                         pn    =double(osize),
-                        pcount=double(if(is.Surv(Y)) osize else 1),
+                        pcount=double(if(docount) osize else 1),
                         pexpect=double(osize),
-                        offtable=double(1),
-                    DUP=FALSE)[18:22]
+                        offtable=double(1))[18:22]
         }
     else {   #no expected
+        docount <- as.integer(ncol(Y) >1)
         temp <- .C(Cpyears2,
                         as.integer(n),
                         as.integer(ncol(Y)),
-                        as.integer(is.Surv(Y)),
+                        as.integer(docount),
                         as.double(Y),
                         as.double(weights),
                         as.integer(odim),
@@ -253,7 +251,7 @@ pyears <- function(formula, data,
                         as.double(X),
                         pyears=double(osize),
                         pn    =double(osize),
-                        pcount=double(if(is.Surv(Y)) osize else 1),
+                        pcount=double(if (docount) osize else 1),
                         offtable=double(1)) [11:14]
         }
     if (data.frame) {
@@ -277,7 +275,7 @@ pyears <- function(formula, data,
         row.names(df) <- seq_len(nrow(df))
         if (has.ratetable) df$expected <- temp$pexpect[keep]
         if (expect=='pyears') df$expected <- df$expected/scale
-        if (is.Surv(Y)) df$event <- temp$pcount[keep]
+        if (docount) df$event <- temp$pcount[keep]
 
         out <- list(call=call,
                     data= df, offtable=temp$offtable/scale)  
@@ -293,7 +291,7 @@ pyears <- function(formula, data,
             if (expect=='pyears') out$expected <- out$expected/scale
             if (!is.null(rtemp$summ)) out$summary <- rtemp$summ
             }
-        if (is.Surv(Y)) out$event <- temp$pcount
+        if (docount) out$event <- temp$pcount
         }
     else {
         out <- list(call = call,
@@ -305,7 +303,7 @@ pyears <- function(formula, data,
             if (expect=='pyears') out$expected <- out$expected/scale
             if (!is.null(rtemp$summ)) out$summary <- rtemp$summ
             }
-        if (is.Surv(Y))
+        if (docount)
                 out$event <- array(temp$pcount, dim=odims, dimnames=outdname)
         }
     na.action <- attr(m, "na.action")

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: cluster 1.14.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2015-02-13 16:25\n"
-"PO-Revision-Date: 2014-06-28 13:21+0100\n"
+"PO-Revision-Date: 2015-02-25 19:27+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -64,17 +64,15 @@ msgstr "%s musi zawierać nazwy kolumn lub liczby"
 
 #. R/pam.q: gettextf("'%s' argument is not a numeric dataframe or matrix.", "x")
 #: R/pam.q:0
-#, fuzzy
 msgid "'%s' argument is not a numeric dataframe or matrix."
-msgstr "%s nie jest ramką liczbową ani też macierzą"
+msgstr "argument '%s' nie jest ramką liczbową ani też macierzą."
 
 #. R/pam.q: gettextf("'%s' argument is not and cannot be converted to class \"dissimilarity\"",     "x")
 #: R/pam.q:0
-#, fuzzy
 msgid "'%s' argument is not and cannot be converted to class \"dissimilarity\""
 msgstr ""
-"%s nie jest obiektem klasy \"dissimilarity\" ani nie może być w taki obiekt "
-"przekształcony"
+"argument '%s' nie jest obiektem klasy \"dissimilarity\" ani nie może być w "
+"taki obiekt przekształcony"
 
 #. R/ellipsoidhull.R: stop("'A' must be p x p  cov-matrix defining an ellipsoid")
 #: R/ellipsoidhull.R:0
@@ -315,6 +313,7 @@ msgstr "Wywołanie:"
 #: R/pam.q:0
 msgid "Cannot keep data when 'x' is a dissimilarity!"
 msgstr ""
+"Nie można zatrzymać danych gdy 'x' jest obiektem klasy \"dissimilarity\"!"
 
 #. R/fanny.q: gettext("Closest hard clustering:", domain = "R-cluster")
 #: R/fanny.q:0
@@ -552,7 +551,6 @@ msgstr "Potrzeba albo różnic 'dist' lub diss.matrix 'dmatrix'"
 
 #. R/pam.q: stop("No clustering performed, NA values in the computed dissimilarity matrix.")
 #: R/pam.q:0
-#, fuzzy
 msgid ""
 "No clustering performed, NA values in the computed dissimilarity matrix."
 msgstr "Nie wykonano grupowania, wyliczono wartości NA w macierzy różnic."

@@ -41,12 +41,12 @@ survfitCI <- function(X, Y, weights, id, istate,
     else if (!is.numeric(istate) || any(istate != floor(istate)))
         stop("'istate' argument should be a vector of integers or a factor")
     
-    if (length(id) ==0) id <- 1:n
+    if (length(id) ==0) id <- seq_len(n)
     # these next two lines should be impossible, since istate came from the data frame
     if (length(istate) ==1) istate <- rep(istate,n)
     if (length(istate) !=n) stop(gettextf("wrong length for '%s' argument", "istate"))
 
-    states <- sort(unique(c(istate, 1:length(attr(Y, "states"))))) #list of all
+    states <- sort(unique(c(istate, seq_len(length(attr(Y, "states")))))) #list of all
     docurve2 <- function(entry, etime, status, istate, wt, states, id, se.fit) {
         #
         # round off error can cause trouble, if two times are within machine
@@ -55,7 +55,6 @@ survfitCI <- function(X, Y, weights, id, istate,
         ftime <- factor(c(entry,etime))
         ltime <- levels(ftime)
         ftime <- matrix(as.integer(ftime), ncol=2)
-        n <- length(entry)
         timeset <- as.numeric(ltime[sort(unique(ftime[,2]))]) #unique event times
          
         nstate <- length(states)

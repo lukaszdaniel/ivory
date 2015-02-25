@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: lattice 0.20-10\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
 "POT-Creation-Date: 2015-02-23 12:09\n"
-"PO-Revision-Date: 2013-11-23 20:53+0100\n"
+"PO-Revision-Date: 2015-02-25 19:25+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -618,9 +618,8 @@ msgstr "zbyt mało wierszy dla kolumn"
 
 #. R/panels.R: gettextf("only using the first two of %d regression coefficients", p)
 #: R/panels.R:0
-#, fuzzy
 msgid "only using the first two of %d regression coefficients"
-msgstr "używanie jedynie pierwszych dwóch z "
+msgstr "używanie jedynie pierwszych dwóch z %d współczynników regresji"
 
 #. R/interaction.R: stop("panel position unspecified or invalid")
 #: R/interaction.R:0

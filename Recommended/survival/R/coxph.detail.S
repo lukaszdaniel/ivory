@@ -3,7 +3,6 @@ coxph.detail <-  function(object, riskmat=FALSE) {
     if (method!='breslow' && method!='efron')
 	stop(gettextf("detailed output is not available for the %s method", method))
     n <- length(object$residuals)
-    rr <- object$residuals
     weights <- object$weights        #always present if there are weights
     x <- object[['x']]
     y <- object$y
@@ -69,7 +68,7 @@ coxph.detail <-  function(object, riskmat=FALSE) {
 	                  rmat = rmat,
 	                  nrisk2 = double(ndeath),
 			  double(nvar*(3 + 2*nvar)))
-     keep <- 1:ff$ndeath
+     keep <- seq_len(ff$ndeath)
     vname<- dimnames(x)[[2]]
     time <- y[ff$index[keep],2]
     names(time) <- NULL

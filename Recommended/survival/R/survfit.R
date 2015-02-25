@@ -188,3 +188,5 @@ survfit.formula <- function(formula, data, weights, subset,
     temp$call <- Call
     temp
     }
+survfit.Surv <- function(formula, ...)
+    stop("'survfit()' function requires a formula as its first argument")
