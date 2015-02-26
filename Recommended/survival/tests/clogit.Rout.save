@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2015-02-23 r260) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2015-02-25 r263) -- "Internationalized Version of R"
 Copyright (C) 2013-2015 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2015-02-23 r67884) -- "Unsuffered Consequences"
+R Under development (unstable) (2015-02-25 r67890) -- "Unsuffered Consequences"
 Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -23,7 +23,6 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(survival)
-Loading required package: 'splines'
 > #
 > # Test of the clogit function, and indirectly of the exact option
 > #
@@ -64,4 +63,4 @@ In command 'coxph(Surv(dummy, y) ~ occ2 + occ2:education + occ2:race + strata(id
 > 
 > proc.time()
    user  system elapsed 
-  1.415   0.036   1.442 
+  1.412   0.031   1.437 

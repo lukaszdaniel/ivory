@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2015-02-23 r260) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2015-02-25 r263) -- "Internationalized Version of R"
 Copyright (C) 2013-2015 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2015-02-23 r67884) -- "Unsuffered Consequences"
+R Under development (unstable) (2015-02-25 r67890) -- "Unsuffered Consequences"
 Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -46,8 +46,8 @@ Type 'q()' to quit R.
 [28] "call"             
 > rfit
 Call:
-coxph(formula = Surv(time, status) ~ rx + frailty(litter), data = rats, 
-    subset = (sex == "f"), method = "breslow")
+coxph(formula = Surv(time, status) ~ rx + frailty(litter), data = rats, subset = (sex == 
+    "f"), method = "breslow")
 
                 coef  se(coef) se2   Chisq DF   p    
 rx              0.906 0.323    0.319  7.88  1.0 0.005
@@ -87,8 +87,8 @@ $c.loglik
 + 	     method='breslow', subset=(sex=="f"))
 > rfit1
 Call:
-coxph(formula = Surv(time, status) ~ rx + frailty(litter, theta = 1), 
-    data = rats, subset = (sex == "f"), method = "breslow")
+coxph(formula = Surv(time, status) ~ rx + frailty(litter, theta = 1), data = rats, 
+    subset = (sex == "f"), method = "breslow")
 
                           coef  se(coef) se2   Chisq DF   p     
 rx                        0.918 0.327    0.321  7.85  1.0 0.0051
@@ -102,8 +102,8 @@ Likelihood ratio test=50.7 on 23.7 df, p=0.001 n=150
 > rfit2 <- coxph(Surv(time,status) ~ frailty(litter), rats, subset=(sex=='f'))
 > rfit2
 Call:
-coxph(formula = Surv(time, status) ~ frailty(litter), data = rats, 
-    subset = (sex == "f"))
+coxph(formula = Surv(time, status) ~ frailty(litter), data = rats, subset = (sex == 
+    "f"))
 
                 coef se(coef) se2 Chisq DF   p   
 frailty(litter)                   18    14.6 0.24
@@ -115,4 +115,4 @@ Likelihood ratio test=30 on 14.6 df, p=0.0101 n=150
 > 
 > proc.time()
    user  system elapsed 
-  0.349   0.060   0.396 
+  0.363   0.027   0.379 

@@ -318,6 +318,9 @@
 
       \item The default method of \code{image()} has an explicit check
       for a numeric or logical matrix (which was always required).
+      
+      \item \code{URLencode()} will not by default encode further URLs
+      which appear to be already encoded.
     }
   }
 
@@ -539,7 +542,9 @@
       example, a \code{data.frame} is valid for a \code{list} argument
       in the signature, and a \code{factor} is valid for \code{vector}
       arguments.
-
+      \item \code{qbeta()}, the inversion of \code{pbeta()}, is much more
+      sophisticated, also in border cases, still not ending in too many
+      iterations.
     }
   }
 }
@@ -739,6 +744,10 @@
       \item \code{besselJ(1, 2^64)} and \code{besselY(..)} now signal a
       warning, returning \code{NaN} instead of typically
       segfaulting. (Issue 3 of \PR{15554})
+
+      \item HTML conversion of \samp{\href} markup in \file{.Rd} files
+      did not remove the backslash from \samp{\\\%} and so gave an
+      invalid URL.
     }
   }
 }
