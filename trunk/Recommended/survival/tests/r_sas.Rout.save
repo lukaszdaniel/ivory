@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2015-02-23 r260) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2015-02-25 r263) -- "Internationalized Version of R"
 Copyright (C) 2013-2015 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2015-02-23 r67884) -- "Unsuffered Consequences"
+R Under development (unstable) (2015-02-25 r67890) -- "Unsuffered Consequences"
 Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -25,7 +25,6 @@ Type 'q()' to quit R.
 > options(na.action=na.exclude) # preserve missings
 > options(contrasts=c('contr.treatment', 'contr.poly')) #ensure constrast type
 > library(survival)
-Loading required package: 'splines'
 > 
 > #
 > # Reproduce example 1 in the SAS lifereg documentation
@@ -444,4 +443,4 @@ pdf
 > 
 > proc.time()
    user  system elapsed 
-  8.234   0.063   8.317 
+  8.219   0.047   8.275 
