@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-13 16:27\n"
+"POT-Creation-Date: 2015-02-28 12:24\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -3159,14 +3159,14 @@ msgstr "Testowanie przykładów dla pakietu %s"
 msgid "Text"
 msgstr "Tekst"
 
-#. R/QC.R: gettext("The Description field should not start with the package name,\n  'This package' or 'The package'.",     domain = "R-tools")
+#. R/QC.R: gettext("The Description field should not start with the package name,\n  'This package' or similar.",     domain = "R-tools")
 #: R/QC.R:0
 msgid ""
 "The Description field should not start with the package name,\n"
-"  'This package' or 'The package'."
+"  'This package' or similar."
 msgstr ""
 "Pole 'Description' nie powinno rozpoczynać się od nazwy pakietu,\n"
-"  opisu 'This package' lub 'The package'."
+"  opisu 'This package' i tym podobne."
 
 #. R/QC.R: gettext("The Description field should start with a capital letter.", domain = "R-tools")
 #: R/QC.R:0

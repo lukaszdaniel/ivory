@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.10.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2015-02-28 12:23\n"
 "PO-Revision-Date: 2015-01-17 15:09+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -310,6 +310,12 @@ msgstr "'y' должен быть числовым вектором"
 #: R/image.R:0
 msgid "'z' must be a matrix"
 msgstr "'z' должен быть матрицей"
+
+#. R/image.R: stop("'z' must be numeric or logical")
+#: R/image.R:0
+#, fuzzy
+msgid "'z' must be numeric or logical"
+msgstr "'x' должен быть числовым"
 
 #. R/barplot.R: stop("Cannot use shading lines in bars when log scale is used")
 #: R/barplot.R:0
@@ -820,9 +826,6 @@ msgid_plural "extra arguments %s will be disregarded"
 msgstr[0] "дополнительный(е) аргумент(ы) %s будут отброшены"
 msgstr[1] "дополнительный(е) аргумент(ы) %s будут отброшены"
 msgstr[2] "дополнительный(е) аргумент(ы) %s будут отброшены"
-
-#~ msgid "'x' must be numeric"
-#~ msgstr "'x' должен быть числовым"
 
 #, fuzzy
 #~ msgid "invalid length(x)"

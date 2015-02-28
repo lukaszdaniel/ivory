@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.2.0\n"
-"POT-Creation-Date: 2015-02-13 16:27\n"
+"POT-Creation-Date: 2015-02-28 12:24\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3836,9 +3836,9 @@ msgstr ""
 
 
 #: R/QC.R: 0
-#. R/QC.R: gettext("The Description field should not start with the package name,\n  'This package' or 'The package'.",     domain = "R-tools")
+#. R/QC.R: gettext("The Description field should not start with the package name,\n  'This package' or similar.",     domain = "R-tools")
 
-msgid "The Description field should not start with the package name,\n  'This package' or 'The package'."
+msgid "The Description field should not start with the package name,\n  'This package' or similar."
 msgstr ""
 
 

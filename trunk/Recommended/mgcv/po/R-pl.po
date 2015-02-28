@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mgcv 1.8-0\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
 "POT-Creation-Date: 2015-02-13 16:25\n"
-"PO-Revision-Date: 2014-11-28 18:05+0100\n"
+"PO-Revision-Date: 2015-02-28 13:05+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -1318,9 +1318,8 @@ msgstr "wszystkie elementy listy 'random' muszą być nazwane"
 
 #. R/jagam.r: stop("all.terms argument not supported")
 #: R/jagam.r:0
-#, fuzzy
 msgid "all.terms argument not supported"
-msgstr "argument 'test' został zignorowany"
+msgstr "argument 'all.terms' nie jest wspierany"
 
 #. R/mgcv.r: stop("argument 'k' must be positive")
 #: R/mgcv.r:0
@@ -1396,9 +1395,8 @@ msgstr ""
 
 #. R/jagam.r: stop("by.resids argument not supported")
 #: R/jagam.r:0
-#, fuzzy
 msgid "by.resids argument not supported"
-msgstr "argument 'test' został zignorowany"
+msgstr "argument 'by.resids' nie jest wspierany"
 
 #. R/gam.fit3.r: gettext("calling gdi...", domain = "R-mgcv")
 #: R/gam.fit3.r:0
@@ -2139,10 +2137,8 @@ msgstr "ponowna parametryzacja nie jest stabilna dla marginesu: nie wykonano"
 
 #. R/jagam.r: stop("residuals argument not supported")
 #: R/jagam.r:0
-#, fuzzy
 msgid "residuals argument not supported"
-msgstr ""
-"argument reszt przekazywany do 'plot.gam' ma niepoprawną długość: zignorowano"
+msgstr "argument 'residuals' nie jest wspierany"
 
 #. R/plots.r: warning("residuals argument to plot.gam is wrong length: ignored")
 #: R/plots.r:0

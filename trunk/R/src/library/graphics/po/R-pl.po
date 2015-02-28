@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2015-02-28 12:23\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -289,6 +289,11 @@ msgstr "'y' musi być wektorem liczbowym"
 #: R/image.R:0
 msgid "'z' must be a matrix"
 msgstr "'z' musi być macierzą"
+
+#. R/image.R: stop("'z' must be numeric or logical")
+#: R/image.R:0
+msgid "'z' must be numeric or logical"
+msgstr "argument 'z' musi być liczbą lub wartością logiczną"
 
 #. R/barplot.R: stop("Cannot use shading lines in bars when log scale is used")
 #: R/barplot.R:0
@@ -791,9 +796,6 @@ msgid_plural "extra arguments %s will be disregarded"
 msgstr[0] "dodatkowy argument %s zostanie odrzucony"
 msgstr[1] "dodatkowe argumenty %s zostaną odrzucone"
 msgstr[2] "dodatkowe argumenty %s zostaną odrzucone"
-
-#~ msgid "'x' must be numeric"
-#~ msgstr "'x' musi być liczbą"
 
 #~ msgid "invalid length(x)"
 #~ msgstr "niepoprawne 'length(x)'"

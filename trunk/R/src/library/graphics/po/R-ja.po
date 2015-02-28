@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2015-02-28 12:23\n"
 "PO-Revision-Date: 2015-01-17 15:08+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -302,6 +302,12 @@ msgstr " 'y' は数値ベクトルでなければなりません "
 #: R/image.R:0
 msgid "'z' must be a matrix"
 msgstr " 'z' は行列でなければなりません "
+
+#. R/image.R: stop("'z' must be numeric or logical")
+#: R/image.R:0
+#, fuzzy
+msgid "'z' must be numeric or logical"
+msgstr " 'x' は数値でなければなりません "
 
 #. R/barplot.R: stop("Cannot use shading lines in bars when log scale is used")
 #: R/barplot.R:0
@@ -804,9 +810,6 @@ msgstr[0] " 引数 %s は使用されていません "
 msgid "extra argument %s will be disregarded"
 msgid_plural "extra arguments %s will be disregarded"
 msgstr[0] " 余分な引数(複数) %s は無視されます "
-
-#~ msgid "'x' must be numeric"
-#~ msgstr " 'x' は数値でなければなりません "
 
 #, fuzzy
 #~ msgid "invalid length(x)"

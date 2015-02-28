@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2015-02-28 12:23\n"
 "PO-Revision-Date: 2015-01-17 15:09+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -304,6 +304,12 @@ msgstr "'y'必需为数值向量"
 #: R/image.R:0
 msgid "'z' must be a matrix"
 msgstr "'z'必需是矩阵"
+
+#. R/image.R: stop("'z' must be numeric or logical")
+#: R/image.R:0
+#, fuzzy
+msgid "'z' must be numeric or logical"
+msgstr "'x'必需为数值"
 
 #. R/barplot.R: stop("Cannot use shading lines in bars when log scale is used")
 #: R/barplot.R:0
@@ -798,9 +804,6 @@ msgstr[0] "没有用%s这个参数"
 msgid "extra argument %s will be disregarded"
 msgid_plural "extra arguments %s will be disregarded"
 msgstr[0] "多余的参数%s略过不用"
-
-#~ msgid "'x' must be numeric"
-#~ msgstr "'x'必需为数值"
 
 #, fuzzy
 #~ msgid "invalid length(x)"
