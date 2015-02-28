@@ -459,7 +459,7 @@ Rd2HTML <-
                	   	url <- paste(as.character(block[[1L]]), collapse="")
                	   	url <- trimws(gsub("\n", "", url))
                         ## unescape any escaped % in encoded URLs
-                        url <- gsub("[\\]%", "%", url)
+                        ## url <- gsub("[\\]%", "%", url)
 		        enterPara(doParas)
                	   	of0('<a href="', urlify(url), '">')
                	   	closing <- "</a>"
