@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2015-02-28 12:23\n"
 "PO-Revision-Date: 2005-05-25 15:04+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -304,6 +304,12 @@ msgstr "'y'는 수치 벡터가 아니면 되지 않습니다"
 #: R/image.R:0
 msgid "'z' must be a matrix"
 msgstr "'z'는 행렬이 아니면 되지 않습니다"
+
+#. R/image.R: stop("'z' must be numeric or logical")
+#: R/image.R:0
+#, fuzzy
+msgid "'z' must be numeric or logical"
+msgstr "'x'는 수치가 아니면 되지 않습니다"
 
 #. R/barplot.R: stop("Cannot use shading lines in bars when log scale is used")
 #: R/barplot.R:0
@@ -804,9 +810,6 @@ msgstr[0] ""
 msgid "extra argument %s will be disregarded"
 msgid_plural "extra arguments %s will be disregarded"
 msgstr[0] "여분의 인수(복수)%s는 무시됩니다"
-
-#~ msgid "'x' must be numeric"
-#~ msgstr "'x'는 수치가 아니면 되지 않습니다"
 
 #, fuzzy
 #~ msgid "invalid length(x)"

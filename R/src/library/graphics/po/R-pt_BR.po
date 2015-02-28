@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2015-02-28 12:23\n"
 "PO-Revision-Date: 2011-03-26 08:55-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -299,6 +299,12 @@ msgstr "'y' deve ser um vetor numérico"
 #: R/image.R:0
 msgid "'z' must be a matrix"
 msgstr "'z' deve ser uma matriz"
+
+#. R/image.R: stop("'z' must be numeric or logical")
+#: R/image.R:0
+#, fuzzy
+msgid "'z' must be numeric or logical"
+msgstr "'x' deve ser numérico"
 
 #. R/barplot.R: stop("Cannot use shading lines in bars when log scale is used")
 #: R/barplot.R:0
@@ -809,9 +815,6 @@ msgid "extra argument %s will be disregarded"
 msgid_plural "extra arguments %s will be disregarded"
 msgstr[0] "os argumento(s) extras %s serão desconsiderados"
 msgstr[1] "os argumento(s) extras %s serão desconsiderados"
-
-#~ msgid "'x' must be numeric"
-#~ msgstr "'x' deve ser numérico"
 
 #, fuzzy
 #~ msgid "invalid length(x)"

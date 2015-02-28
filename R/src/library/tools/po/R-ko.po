@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:27\n"
+"POT-Creation-Date: 2015-02-28 12:24\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -3138,11 +3138,11 @@ msgstr "패키지 %s의 예제를 테스트합니다"
 msgid "Text"
 msgstr ""
 
-#. R/QC.R: gettext("The Description field should not start with the package name,\n  'This package' or 'The package'.",     domain = "R-tools")
+#. R/QC.R: gettext("The Description field should not start with the package name,\n  'This package' or similar.",     domain = "R-tools")
 #: R/QC.R:0
 msgid ""
 "The Description field should not start with the package name,\n"
-"  'This package' or 'The package'."
+"  'This package' or similar."
 msgstr ""
 
 #. R/QC.R: gettext("The Description field should start with a capital letter.", domain = "R-tools")

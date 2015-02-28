@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: survival 2.37-2\n"
 "POT-Creation-Date: 2015-02-25 19:22\n"
-"PO-Revision-Date: 2015-02-25 19:28+0100\n"
+"PO-Revision-Date: 2015-02-28 13:03+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -96,14 +96,12 @@ msgstr "argumenty '%s' oraz '%s' mają różną długość"
 #. R/neardate.R: gettextf("'%s' and '%s' arguments have different lengths", "id1", "y1")
 #. R/neardate.R: gettextf("'%s' and '%s' arguments have different lengths", "id2", "y2")
 #: R/neardate.R:0
-#, fuzzy
 msgid "'%s' and '%s' arguments have different lengths"
 msgstr "argumenty '%s' oraz '%s' mają różną długość"
 
 #. R/tmerge.R: gettextf("'%s' and '%s' arguments must be the same length", "tstart", "id")
 #. R/tmerge.R: gettextf("'%s' and '%s' arguments must be the same length", "tstop", "id")
 #: R/tmerge.R:0
-#, fuzzy
 msgid "'%s' and '%s' arguments must be the same length"
 msgstr "argumenty '%s' oraz '%s' mają różną długość"
 
@@ -161,9 +159,8 @@ msgstr "argument '%s' jest wymagany"
 #. R/tmerge.R: gettextf("'%s' argument must be a character string", "tstart")
 #. R/tmerge.R: gettextf("'%s' argument must be a character string", "tstop")
 #: R/tmerge.R:0
-#, fuzzy
 msgid "'%s' argument must be a character string"
-msgstr "argument '%s' musi być czynnikiem"
+msgstr "argument '%s' musi być łańcuchem tekstowym"
 
 #. R/survfitKM.S: gettextf("'%s' argument must be a factor", "x")
 #. R/survfitTurnbull.S: gettextf("'%s' argument must be a factor", "x")
@@ -241,15 +238,13 @@ msgstr "argument 'var' nie jest macierzą kwadratową"
 
 #. R/tmerge.R: stop("'data1' argument must be a data frame")
 #: R/tmerge.R:0
-#, fuzzy
 msgid "'data1' argument must be a data frame"
-msgstr "argument 'newdata' musi być ramką danych"
+msgstr "argument 'data1' musi być ramką danych"
 
 #. R/tmerge.R: stop("'defer' argument must be a non-negative number")
 #: R/tmerge.R:0
-#, fuzzy
 msgid "'defer' argument must be a non-negative number"
-msgstr "argument '%s' musi być liczbą"
+msgstr "argument 'defer' musi być nieujemną liczbą"
 
 #. R/survregDtest.S: gettext("'dtrans()' component must be a 1-1 function")
 #: R/survregDtest.S:0
@@ -283,7 +278,7 @@ msgstr "argument 'id' jest wymagany dla danych start:stop"
 #. R/tmerge.R: stop("'id' has values not in data1")
 #: R/tmerge.R:0
 msgid "'id' has values not in data1"
-msgstr ""
+msgstr "'id' posiada wartości nie mieszczące się w 'data1'"
 
 #. R/survfit.coxph.R: stop("'individual=TRUE' is only valid for counting process data")
 #: R/survfit.coxph.R:0
@@ -337,9 +332,8 @@ msgstr "argument 'object' musi być listą obiektów klasy \"coxph\""
 
 #. R/tmerge.R: stop("'options' argument must be a list")
 #: R/tmerge.R:0
-#, fuzzy
 msgid "'options' argument must be a list"
-msgstr "Pierwszy argument musi być listą"
+msgstr "argument 'options' musi być listą"
 
 #. R/coxpenal.fit.R: stop("'pcols' and 'assign' arguments disagree")
 #. R/survcallback.S: stop("'pcols' and 'assign' arguments disagree")
@@ -1067,9 +1061,8 @@ msgstr ""
 
 #. R/tmerge.R: stop("all additional arguments must have a name")
 #: R/tmerge.R:0
-#, fuzzy
 msgid "all additional arguments must have a name"
-msgstr "argument 'newdata' musi być ramką danych"
+msgstr "wszystkie dodatkowe argumenty muszą mieć nazwę"
 
 #. R/anova.coxph.S: stop("all arguments must be an objects of class \"coxph\" or \"coxme\"")
 #: R/anova.coxph.S:0
@@ -1078,15 +1071,13 @@ msgstr "wszystkie argumenty muszą być obiektami klasy \"coxph\" lub \"coxme\""
 
 #. R/strata.S: stop("all arguments must be the same length")
 #: R/strata.S:0
-#, fuzzy
 msgid "all arguments must be the same length"
-msgstr "Pierwszy argument musi być listą"
+msgstr "wszystkie argumenty muszą mieć tę samą długość"
 
 #. R/strata.S: stop("all arguments must be vectors")
 #: R/strata.S:0
-#, fuzzy
 msgid "all arguments must be vectors"
-msgstr "argument '%s' musi być czynnikiem"
+msgstr "wszystkie argumenty muszą być wektorami"
 
 #. R/survfitCI.R: warning("an observation transitions to it's starting state, transition ignored")
 #: R/survfitCI.R:0
@@ -1799,9 +1790,8 @@ msgstr "człony przesunięcia nie są dozwolone"
 
 #. R/coxph.R: stop("offsets must be finite")
 #: R/coxph.R:0
-#, fuzzy
 msgid "offsets must be finite"
-msgstr "człon przesunięcia został zignorowany"
+msgstr "przesunięcia muszą być skończone"
 
 #. R/ridge.S: stop("only one of 'df' or 'theta' arguments can be specified")
 #: R/ridge.S:0
@@ -1931,9 +1921,8 @@ msgstr "człon 'sparse' musi być pojedynczą kolumną"
 
 #. R/tmerge.R: stop("start and end variables must be numeric")
 #: R/tmerge.R:0
-#, fuzzy
 msgid "start and end variables must be numeric"
-msgstr "argument 'time' (czas startu) musi być liczbą"
+msgstr "zmienne 'start' oraz 'end' muszą być liczbami"
 
 #. R/survfitKM.S: gettextf("start.time = %s is greater than all time points.", start.time)
 #. R/survfitTurnbull.S: gettextf("start.time = %s is greater than all time points.", start.time)
@@ -2148,9 +2137,8 @@ msgstr "wagi zostały zignorowane"
 #. R/coxph.R: stop("weights must be finite")
 #. R/model.matrix.coxph.R: stop("weights must be finite")
 #: R/coxph.R:0 R/model.matrix.coxph.R:0
-#, fuzzy
 msgid "weights must be finite"
-msgstr "niepoprawne wagi, muszą być > 0"
+msgstr "wagi muszą być skończone"
 
 #. R/coxph.R: gettextf("wrong length for '%s' argument", "tt")
 #. R/model.matrix.coxph.R: gettextf("wrong length for '%s' argument", "tt")

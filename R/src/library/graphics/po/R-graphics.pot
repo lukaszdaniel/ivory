@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: graphics 3.2.0\n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2015-02-28 12:23\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -385,6 +385,13 @@ msgstr ""
 #. R/image.R: stop("'z' must be a matrix")
 
 msgid "'z' must be a matrix"
+msgstr ""
+
+
+#: R/image.R: 0
+#. R/image.R: stop("'z' must be numeric or logical")
+
+msgid "'z' must be numeric or logical"
 msgstr ""
 
 
