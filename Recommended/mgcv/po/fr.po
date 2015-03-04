@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.3-10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 19:59+0100\n"
+"POT-Creation-Date: 2015-03-04 18:44+0100\n"
 "PO-Revision-Date: 2005-12-08 00:40+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -17,88 +17,90 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: magic.c:440
+#: magic.c:445
 msgid "magic requires smoothing parameter starting values if L supplied"
 msgstr ""
 
-#: magic.c:558
+#: magic.c:563
 msgid "magic, the gcv/ubre optimizer, failed to converge after 400 iterations."
 msgstr "magic, l'optimisateur gcv/ubre, n'a pas convergé après 400 itérations."
 
-#: mat.c:42 mat.c:64
+#: mat.c:48 mat.c:70
 msgid ""
 "\n"
 "Failed to open file\n"
 msgstr ""
 
-#: mat.c:72
+#: mat.c:78
 msgid ""
 "\n"
 "file dim problem\n"
 msgstr ""
 
-#: mat.c:2228
+#: mat.c:2346
 #, c-format
 msgid "Non orthogonal eigenvectors %d %g\n"
 msgstr ""
 
-#: mat.c:2233
+#: mat.c:2351
 #, c-format
 msgid "Eigenvectors not normalized %d %g\n"
 msgstr ""
 
-#: matrix.c:83
+#: matrix.c:81
 msgid "Failed to initialize memory for matrix."
 msgstr "L'initialisation de la mémoire pour une matrice a échoué."
 
-#: matrix.c:145 matrix.c:207
+#: matrix.c:143 matrix.c:205
 msgid "An out of bound write to matrix has occurred!"
 msgstr "Une écrite hors des limites de la matrice s'est produite !"
 
-#: matrix.c:151
+#: matrix.c:149
 msgid "INTEGRITY PROBLEM in the extant matrix list."
 msgstr "PROBLEME D'INTEGRITE dans la liste de la matrice étendue."
 
-#: matrix.c:183
+#: matrix.c:181
 msgid "You are trying to check matrix integrity without defining RANGECHECK."
 msgstr ""
 "Vous essayez de vérifier l'intégrité de la matrice sans avoir défini "
 "RANGECHECK."
 
-#: matrix.c:245
+#: matrix.c:243
 msgid "Target matrix too small in mcopy"
 msgstr "Matrice cible trop petite dans mcopy"
 
-#: matrix.c:265 matrix.c:273 matrix.c:286 matrix.c:294
+#: matrix.c:263 matrix.c:271 matrix.c:284 matrix.c:292
 msgid "Incompatible matrices in matmult."
 msgstr "Matrices incompatibles dans matmult."
 
-#: matrix.c:381
+#: matrix.c:379
 msgid "Attempt to invert() non-square matrix"
 msgstr "Tentative d'inversion d'une matrice non carrée"
 
-#: matrix.c:403
+#: matrix.c:401
 msgid "Singular Matrix passed to invert()"
 msgstr "Matrice singulière passée à invert()"
 
-#: matrix.c:1324
-msgid "svd() not converged"
+#: matrix.c:1321
+#, fuzzy
+msgid "'svd()' not converged"
 msgstr "svd() n'a pas convergé"
 
-#: matrix.c:1400
+#: matrix.c:1397
 #, c-format
 msgid "svdroot matrix not +ve semi def. %g"
 msgstr "la matrice svdroot n'est pas +ve semi def. %g"
 
-#: matrix.c:1428
+#: matrix.c:1425
 msgid "Sort failed"
 msgstr "Le tri a échoué"
 
-#: qp.c:58
-msgid "ERROR in addconQT."
+#: qp.c:57
+#, fuzzy
+msgid "ERROR in 'addconQT()'"
 msgstr "ERREUR dans addconQT."
 
-#: qp.c:464
+#: qp.c:463
 msgid "QPCLS - Rank deficiency in model"
 msgstr "QPCLS - Déficience de rang dans le modèle"
 
@@ -147,91 +149,14 @@ msgstr ""
 msgid "lower neighbour claimed to be self!\n"
 msgstr ""
 
-#: tprs.c:46 tprs.c:81
+#: tprs.c:41
 msgid "You must have 2m>d for a thin plate spline."
 msgstr "Vous devez avoir 2m > d pour une 'thin plate spline'"
 
-#: tprs.c:417 tprs.c:425
+#: tprs.c:376 tprs.c:384
 msgid ""
 "A term has fewer unique covariate combinations than specified maximum "
 "degrees of freedom"
 msgstr ""
 "Un terme a moins de combinaisons de covariables uniques que le degré de "
 "liberté maximum spécifié"
-
-#~ msgid ""
-#~ "Overall smoothing parameter estimate on upper boundary.\n"
-#~ "Boundary GCV score change: %g. Largest change: %g"
-#~ msgstr ""
-#~ "Estimation du paramètre général de lissage dans la limite supérieure.\n"
-#~ "Changement du score GCV : %g. Plus grand changement : %g"
-
-#~ msgid "resetting -ve inf"
-#~ msgstr "réinitilisation -ve inf"
-
-#~ msgid "resetting +ve inf"
-#~ msgstr "réinitialisation +ve inf"
-
-#~ msgid ""
-#~ "Multiple GCV didn't improve autoinitialized relative smoothing parameters"
-#~ msgstr ""
-#~ "Des GCV multiples n'ont pas amélioré les paramètres relatifs de lissage "
-#~ "autoinitialisés"
-
-#~ msgid ""
-#~ "\n"
-#~ "%s not found, nothing read ! "
-#~ msgstr ""
-#~ "\n"
-#~ "%s introuvable, rien n'est lu !"
-
-#~ msgid "Not a +ve def. matrix in choleski()."
-#~ msgstr "Ceci n'est pas une matrice +ve def. dans choleski()."
-
-#~ msgid "Error in Covariance(a,b) - a,b not same length."
-#~ msgstr "Erreur dans Covariance(a, b) - a et b n'ont pas la même longueur."
-
-#~ msgid "%s not found by routine gettextmatrix().\n"
-#~ msgstr "%s introuvable pour la routine gettextmatrix().\n"
-
-#~ msgid "eigen_tri() failed to converge"
-#~ msgstr "eigen_tri() n'a pas convergé"
-
-#~ msgid "eigenvv_tri() Eigen vector %d of %d failure. Error = %g > %g"
-#~ msgstr "eigenvv_tri() vecteur propre %d de %d. Erreur = %g > %g"
-
-#~ msgid "Lanczos failed"
-#~ msgstr "Lanczos a échoué"
-
-#~ msgid ""
-#~ "Numerical difficulties obtaining tr(A) - apparently resolved. Apply some "
-#~ "caution to results."
-#~ msgstr ""
-#~ "Difficultés numériques pour obtenir tr(A) - apparemment résolue. Faites "
-#~ "tout de même attention aux résultats."
-
-#~ msgid "tr(A) utter garbage and situation un-resolvable."
-#~ msgstr "situation irrésoluble dans 'tr(A) utter garbage'"
-
-#~ msgid ""
-#~ "Numerical difficulties calculating tr(A). Not completely resolved. Use "
-#~ "results with care!"
-#~ msgstr ""
-#~ "Difficultés numériques lors du calcul de tr(A). Pas résolues "
-#~ "complètement. Utilisez les résultats avec précautions !"
-
-#~ msgid "Termwise estimate degrees of freedom are unreliable"
-#~ msgstr ""
-#~ "L'estimation des degrés de liberté en fonction des termes n'est pas fiable"
-
-#~ msgid "You must have 2m > d"
-#~ msgstr "Vous devez avoir 2m > d"
-
-# tprs.c
-#~ msgid ""
-#~ "Too many knots for t.p.r.s term: see `gam.control' to increase limit, or "
-#~ "use a different basis, or see large data set help for `gam'."
-#~ msgstr ""
-#~ "Trop de noeuds pour le terme t.p.r.s : voir `gam.control' pour augmenter "
-#~ "la limite, ou utiliser une base différente ; Ou voir l'aide sur les gros "
-#~ "jeux de données pour `gam'."

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: mgcv 1.8-4\n"
-"POT-Creation-Date: 2015-02-13 16:25\n"
+"Project-Id-Version: mgcv 1.8-5\n"
+"POT-Creation-Date: 2015-03-04 18:44\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1276,6 +1276,20 @@ msgid "Non-finite deviance"
 msgstr ""
 
 
+#: R/efam.r: 0
+#. R/efam.r: stop("Non-integer response variables are not allowed with ziP")
+
+msgid "Non-integer response variables are not allowed with ziP"
+msgstr ""
+
+
+#: R/gamlss.r: 0
+#. R/gamlss.r: stop("Non-integer response variables are not allowed with ziplss")
+
+msgid "Non-integer response variables are not allowed with ziplss"
+msgstr ""
+
+
 #: R/bam.r: 0
 #: R/gamm.r: 0
 #: R/jagam.r: 0
@@ -1678,6 +1692,20 @@ msgstr ""
 #. R/mgcv.r: warning("Unknown type, reset to terms")
 
 msgid "Unknown type, reset to terms"
+msgstr ""
+
+
+#: R/efam.r: 0
+#. R/efam.r: stop("Using ziP for binary data makes no sense")
+
+msgid "Using ziP for binary data makes no sense"
+msgstr ""
+
+
+#: R/gamlss.r: 0
+#. R/gamlss.r: stop("Using ziplss for binary data makes no sense")
+
+msgid "Using ziplss for binary data makes no sense"
 msgstr ""
 
 

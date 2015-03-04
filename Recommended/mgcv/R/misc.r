@@ -2,6 +2,11 @@
 ## Many of the following are simple wrappers for C functions, used largely 
 ## for testing purposes
 
+mgcv.omp <- function() {
+## does open MP appear to be available?
+  oo <- .C(C_mgcv_omp,a=as.integer(-1))
+  if (oo$a==1) TRUE else FALSE
+}
 
 mvn.ll <- function(y,X,beta,dbeta=NULL) {
 ## to facilitate testing of MVN routine mvn_ll.
@@ -22,8 +27,8 @@ mvn.ll <- function(y,X,beta,dbeta=NULL) {
                   lbb=as.double(rep(0,nb*nb)), dbeta = as.double(dbeta), dH = as.double(dH), 
                   deriv = as.integer(nsp>0),nsp = as.integer(nsp),nt=as.integer(1))
   if (nsp==0) dH <- NULL else {
-    dH <- list();ind <- 1:(nb*nb)
-    for (i in 1:nsp) { 
+    dH <- list();ind <- seq_len(nb*nb)
+    for (i in seq_len(nsp)) { 
       dH[[i]] <- matrix(oo$dH[ind],nb,nb)
       ind <- ind + nb*nb
     }
@@ -37,13 +42,13 @@ pinv <- function(X,svd=FALSE) {
   R <- qr.R(qrx);Q <- qr.Q(qrx) 
   rr <- Rrank(R) 
   if (svd&&rr<ncol(R)) {
-    piv <- 1:ncol(X); piv[qrx$pivot] <- 1:ncol(X)
+    piv <- seq_len(ncol(X)); piv[qrx$pivot] <- seq_len(ncol(X))
     er <- svd(R[,piv])
-    d <- er$d*0;d[1:rr] <- 1/er$d[1:rr]
+    d <- er$d*0;d[seq_len(rr)] <- 1/er$d[seq_len(rr)]
     X <- Q%*%er$u%*%(d*t(er$v))
   } else {
     Ri <- R*0 
-    Ri[1:rr,1:rr] <- backsolve(R[1:rr,1:rr],diag(rr))
+    Ri[seq_len(rr),seq_len(rr)] <- backsolve(R[seq_len(rr),seq_len(rr)],diag(rr))
     X[,qrx$pivot] <- Q%*%t(Ri)
   }
   X
@@ -52,7 +57,7 @@ pinv <- function(X,svd=FALSE) {
 pqr2 <- function(x,nt=1,nb=30) {
 ## Function for parallel pivoted qr decomposition of a matrix using LAPACK
 ## householder routines. Currently uses a block algorithm.
-## library(mgcv); n <- 10000;p<-500;x <- matrix(runif(n*p),n,p)
+## library(mgcv); n <- 4000;p<-3000;x <- matrix(runif(n*p),n,p)
 ## system.time(qrx <- qr(x,LAPACK=TRUE))
 ## system.time(qrx2 <- mgcv:::pqr2(x,2)) 
 ## system.time(qrx3 <- mgcv:::pqr(x,2)) 

@@ -325,8 +325,22 @@
       \item \code{BIC(mod)} and \code{BIC(mod, mod2)} now give non-NA
       numbers for \code{arima()} fitted models, as \code{nobs(mod)} now
       gives the number of \dQuote{used} observations for such models --
-      somewhat experimentally.% and hence not yet on ../src/library/stats/man/arima.Rd
+      somewhat experimentally.
       This fixes \PR{16198}, quite differently than proposed there.
+
+      \item The \code{print()} methods for \code{"htest"},
+      \code{"pairwise.htest"} and \code{"power.htest"} objects now have
+      a \code{digits} argument defaulting to (a function of)
+      \code{getOption("digits")}, and influencing all printed numbers
+      coherently.  Unavoidably, this changes the display of such test
+      results in some cases.
+
+      \item Code completion for namespaces now recognizes all loaded
+      namespaces, rather than only the ones that are also attached.
+
+      \item The code completion mechanism can now be replaced by a
+      user-specified completer function, for (temporary) situations
+      where the usual code completion is inappropriate.
     }
   }
 
@@ -555,7 +569,7 @@
   }
 }
 
-\section{\Rlogo CHANGES IN R 3.1.2 patched}{
+\section{\Rlogo CHANGES IN R 3.1.3}{
   \subsection{NEW FEATURES}{
     \itemize{
       \item The internal method of \code{download.file()} can now handle
@@ -606,6 +620,8 @@
       \item (Windows.) \code{download.file(cacheOK = FALSE)} is now
       supported when \file{internet2.dll} is used.
 
+      \item \code{browseURL()} has been updated to work with Firefox
+      36.0 which has dropped support for the \option{-remote} interface.
     }
   }
 

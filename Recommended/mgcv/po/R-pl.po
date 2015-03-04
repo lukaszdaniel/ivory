@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.8-0\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:25\n"
+"POT-Creation-Date: 2015-03-04 18:44\n"
 "PO-Revision-Date: 2015-02-28 13:05+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -989,6 +989,16 @@ msgstr ""
 msgid "Non-finite deviance"
 msgstr "Nieskończone odchylenie"
 
+#. R/efam.r: stop("Non-integer response variables are not allowed with ziP")
+#: R/efam.r:0
+msgid "Non-integer response variables are not allowed with ziP"
+msgstr ""
+
+#. R/gamlss.r: stop("Non-integer response variables are not allowed with ziplss")
+#: R/gamlss.r:0
+msgid "Non-integer response variables are not allowed with ziplss"
+msgstr ""
+
 #. R/bam.r: stop("Not enough (non-NA) data to do anything meaningful")
 #. R/gamm.r: stop("Not enough (non-NA) data to do anything meaningful")
 #. R/jagam.r: stop("Not enough (non-NA) data to do anything meaningful")
@@ -1294,6 +1304,16 @@ msgstr ""
 #: R/mgcv.r:0
 msgid "Unknown type, reset to terms"
 msgstr "Nieznany typ, resetowanie do 'terms'"
+
+#. R/efam.r: stop("Using ziP for binary data makes no sense")
+#: R/efam.r:0
+msgid "Using ziP for binary data makes no sense"
+msgstr ""
+
+#. R/gamlss.r: stop("Using ziplss for binary data makes no sense")
+#: R/gamlss.r:0
+msgid "Using ziplss for binary data makes no sense"
+msgstr ""
 
 #. R/plots.r: gettextf("View variables must contain more than one value. view = c(%s,%s).", view[1],     view[2])
 #: R/plots.r:0

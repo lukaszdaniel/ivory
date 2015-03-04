@@ -306,7 +306,8 @@ gam.fit3 <- function (x, y, sp, Eb,UrS=list(),
             }
         else family$linkfun(mustart)
         #etaold <- eta
-        muold <- mu <- linkinv(eta)
+        ##muold <- 
+        mu <- linkinv(eta)
         #if (!(validmu(mu) && valideta(eta))) 
         #    stop("Can't find valid starting values: please specify some")
     
@@ -487,7 +488,7 @@ gam.fit3 <- function (x, y, sp, Eb,UrS=list(),
                   old.pdev <- pdev
                   coef <- coefold <- start
                   etaold <- eta 
-                  muold <- mu
+                  ##muold <- mu
                 } else {
                   conv <- TRUE
                   coef <- start
@@ -1217,7 +1218,7 @@ newton <- function(lsp,X,y,Eb,UrS,L,lsp0,offset,U1,Mp,family,weights,
             weights = weights, start = start,
             offset = offset,Mp=Mp,family = family, 
             control = control,deriv=deriv,eps=eps,spe=spe,
-            Sl=Sl,...)
+            Sl=Sl,...) ## ignore codetools warning
    
      }
    } ## end of derivative checking
@@ -1414,7 +1415,7 @@ newton <- function(lsp,X,y,Eb,UrS,L,lsp0,offset,U1,Mp,family,weights,
         if (kk==1||score3<=score2) { ## accept step - better than last try
           score2 <- score3
           lsp2 <- lsp3
-          if (!is.null(lsp.max)) delta2 <- delta3
+          ## if (!is.null(lsp.max)) delta2 <- delta3
         }
         ## stop when improvement found, and shorter step is worse...
         if (score2<score&&score3>score2||kk==40) ok <- FALSE
@@ -1849,7 +1850,7 @@ gam2derivative <- function(lsp,args,...)
   b<-gam.fit3(x=args$X, y=args$y, sp=lsp,Eb=args$Eb,UrS=args$UrS,
      offset = args$offset,U1=args$U1,Mp=args$Mp,family = args$family,weights=args$w,deriv=1,
      control=args$control,gamma=args$gamma,scale=args$scale,scoreType=args$scoreType,
-     null.coef=args$null.coef,...)
+     null.coef=args$null.coef,n.true=args$n.true,...)
   if (reml) {
           ret <- b$REML1 
   } else if (args$scoreType=="GACV") {
@@ -1873,7 +1874,7 @@ gam2objective <- function(lsp,args,...)
   b<-gam.fit3(x=args$X, y=args$y, sp=lsp,Eb=args$Eb,UrS=args$UrS,
      offset = args$offset,U1=args$U1,Mp=args$Mp,family = args$family,weights=args$w,deriv=0,
      control=args$control,gamma=args$gamma,scale=args$scale,scoreType=args$scoreType,
-     null.coef=args$null.coef,...)
+     null.coef=args$null.coef,n.true=args$n.true,...)
   if (reml) {
           ret <- b$REML 
   } else if (args$scoreType=="GACV") {

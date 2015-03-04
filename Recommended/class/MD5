@@ -1,12 +1,12 @@
-86b185771b0e5e29717ee6b0ad5ccf8d  Changes
 ee1f2340ddd8ca1063ca46417e507bb9  DESCRIPTION
+86b185771b0e5e29717ee6b0ad5ccf8d  Changes
 3bad31311a37fe2f39e9c2ad876ab94c  inst/CITATION
-e042788d6870b70eb8ea0bc5f01391ff  inst/NEWS
 dc34b63e948e3ba0667d43b3fde24c58  inst/po/pl/LC_MESSAGES/R-class.mo
 41a14f2150064ddff743e39d111a870a  inst/po/de/LC_MESSAGES/R-class.mo
 a98bfc65732fea1f439faecee3a4adaf  inst/po/en@quot/LC_MESSAGES/R-class.mo
 b888e2521f30a9912d9687777b1aa478  inst/po/fr/LC_MESSAGES/R-class.mo
 802e4f5e2c0e759367da2ae274d5951e  inst/po/ko/LC_MESSAGES/R-class.mo
+e042788d6870b70eb8ea0bc5f01391ff  inst/NEWS
 a14861d4c76b0028b6dc635163b00297  LICENCE.note
 7ffe67ce0c67d938298e46b08818f9cb  man/knn1.Rd
 e8e077536af8608b6d5d366410bae87a  man/lvqtest.Rd
@@ -23,11 +23,10 @@ fdfb3a7e3ed8116278a8f4fd067a8045  man/lvq2.Rd
 69d25fc468f9fd914106f8f1fb49c101  man/condense.Rd
 4a2e92b20c3ae11d503519eda00a7ed7  man/batchSOM.Rd
 04d8b8fb49626fa41093f3b19ce5edbf  man/somgrid.Rd
-018ec39aa0218512d0e6493b9003f7eb  NAMESPACE
 540f0c9085850c1fdd206c18e8127d5c  po/class.pot
+018ec39aa0218512d0e6493b9003f7eb  NAMESPACE
 cfe00d090cffac53030a8a14788dc901  po/R-class.pot
 226f9301da05e1a32c20196859f64efb  po/pl.po
-bb58b22589d23aa5601fda9610bba5f9  po/R-pl.po
 a90e18606f5d74d5d7877bac601293c3  po/R-fr.po
 bd0ea343c607f617e751e941b8ca32f5  po/R-de.po
 132b8aade86ce1c1a9ee83d7806e6ec3  po/R-ko.po
@@ -36,5 +35,6 @@ ff5ef05ff4bc09abeca6fe0000416d05  R/SOM.R
 dec31ffc0e9a73c8117dd85cb18453d7  R/knn.R
 951ec3571a83bc462ea45c8664efe1d9  R/multiedit.R
 6eeaac5a4afe30bedaff5567311dc342  R/zzz.R
+bb58b22589d23aa5601fda9610bba5f9  po/R-pl.po
 fbb78de96939a522b12bc95a70c7c59e  src/class.c
 e4553dea0e4862d80ac13fa87b70465c  src/localization.h

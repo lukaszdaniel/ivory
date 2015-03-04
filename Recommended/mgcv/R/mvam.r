@@ -82,7 +82,7 @@ mvn <- function(d=2) {
     } ## residuals
 
 
-    rd <- qf <- NULL ## these functions currently undefined for Cox PH
+    ##rd <- qf <- NULL ## these functions currently undefined for 
 
     ll <- function(y,X,coef,wt,family,deriv=0,d1b=0,d2b=0,Hp=NULL,rank=0,fh=NULL,D=NULL) {
     ## function defining the Multivariate Normal model log lik.
@@ -99,7 +99,7 @@ mvn <- function(d=2) {
       lpi <- attr(X,"lpi") ## lpi[[k]] is index of model matrix columns for dim k 
       m <- length(lpi)        ## number of dimensions of MVN
       lpstart <- rep(0,m)
-      for (i in 1:(m-1)) lpstart[i] <- lpi[[i+1]][1]
+      for (i in seq_len(m-1)) lpstart[i] <- lpi[[i+1]][1]
       lpstart[m] <- lpi[[m]][length(lpi[[m]])]+1 
       nb <- length(coef)      ## total number of parameters
       if (deriv<2) {
@@ -117,13 +117,13 @@ mvn <- function(d=2) {
                deriv = as.integer(nsp>0),nsp = as.integer(nsp),nt=as.integer(1),PACKAGE="mgcv")
       if (nsp==0) d1H <- NULL else if (deriv==2) {
         d1H <- matrix(0,nb,nsp)
-        for (i in 1:nsp) { 
+        for (i in seq_len(nsp)) { 
           d1H[,i] <- diag(matrix(oo$dH[ind],nb,nb))
           ind <- ind + nb*nb
         }
       } else { ## deriv==3
-        d1H <- list();ind <- 1:(nb*nb)
-        for (i in 1:nsp) { 
+        d1H <- list();ind <- seq_len(nb*nb)
+        for (i in seq_len(nsp)) { 
           d1H[[i]] <- matrix(oo$dH[ind],nb,nb)
           ind <- ind + nb*nb
         }

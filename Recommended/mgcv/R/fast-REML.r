@@ -85,7 +85,7 @@ Sl.setup <- function(G) {
       ## overlap testing requires the block ranges 
       for (j in seq_len(m)) { ## get block range for each S[[j]]
         ir <- range(seq_len(nb)[rowSums(abs(Sl[[b]]$S[[j]]))>0])
-        ic <- range(seq_len(nb)[colSums(abs(Sl[[b]]$S[[j]]))>0])
+        #ic <- range(seq_len(nb)[colSums(abs(Sl[[b]]$S[[j]]))>0]) ## symmetric not needed
         sbStart[j] <- ir[1];sbStop[j] <- ir[2] ## individual ranges
       } 
       split.ok <- TRUE
