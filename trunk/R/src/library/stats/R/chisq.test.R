@@ -101,6 +101,8 @@ chisq.test <- function(x, y = NULL, correct = TRUE,
 	}
     }
     else {
+        if(length(dim(x)) > 2L)
+            stop(gettextf("invalid '%s' argument", "x"))
 	if (length(x) == 1L)
 	    stop("'x' must at least have 2 elements")
 	if (length(x) != length(p))

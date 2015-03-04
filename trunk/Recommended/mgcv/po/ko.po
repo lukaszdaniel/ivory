@@ -1,0 +1,161 @@
+# Korean translations for mgcv package.
+# Recommended/mgcv/po/ko.po
+# Maintainer: Simon Wood <simon.wood@r-project.org>
+#
+# This file is distributed under the same license as the R mgcv package.
+# Chel Hee Lee <chl948@mail.usask.ca>, 2013-2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mgcv 1.8-4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-04 18:44+0100\n"
+"PO-Revision-Date: 2015-02-21 16:01-0600\n"
+"Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
+"Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: magic.c:445
+msgid "magic requires smoothing parameter starting values if L supplied"
+msgstr ""
+"L에 주어진 값이 없다면 스무딩 파라미터(smoothing parameter)에 대한 초기값"
+"(starting values)가 필요합니다."
+
+#: magic.c:563
+msgid "magic, the gcv/ubre optimizer, failed to converge after 400 iterations."
+msgstr ""
+
+#: mat.c:48 mat.c:70
+msgid ""
+"\n"
+"Failed to open file\n"
+msgstr ""
+
+#: mat.c:78
+msgid ""
+"\n"
+"file dim problem\n"
+msgstr ""
+
+#: mat.c:2346
+#, c-format
+msgid "Non orthogonal eigenvectors %d %g\n"
+msgstr ""
+
+#: mat.c:2351
+#, c-format
+msgid "Eigenvectors not normalized %d %g\n"
+msgstr ""
+
+#: matrix.c:81
+msgid "Failed to initialize memory for matrix."
+msgstr "행렬생성에 필요한 메모리 초기화에 실패했습니다."
+
+#: matrix.c:143 matrix.c:205
+msgid "An out of bound write to matrix has occurred!"
+msgstr ""
+
+#: matrix.c:149
+msgid "INTEGRITY PROBLEM in the extant matrix list."
+msgstr ""
+
+#: matrix.c:181
+msgid "You are trying to check matrix integrity without defining RANGECHECK."
+msgstr ""
+
+#: matrix.c:243
+msgid "Target matrix too small in mcopy"
+msgstr ""
+
+#: matrix.c:263 matrix.c:271 matrix.c:284 matrix.c:292
+msgid "Incompatible matrices in matmult."
+msgstr ""
+
+#: matrix.c:379
+msgid "Attempt to invert() non-square matrix"
+msgstr ""
+
+#: matrix.c:401
+msgid "Singular Matrix passed to invert()"
+msgstr "특이함수(singular matrix)가 invert()에 전달되었습니다."
+
+#: matrix.c:1321
+msgid "'svd()' not converged"
+msgstr ""
+
+#: matrix.c:1397
+#, c-format
+msgid "svdroot matrix not +ve semi def. %g"
+msgstr ""
+
+#: matrix.c:1425
+msgid "Sort failed"
+msgstr "정렬에 실패했습니다."
+
+#: qp.c:57
+#, fuzzy
+msgid "ERROR in 'addconQT()'"
+msgstr "addconQT 에서 에러가 발생했습니다."
+
+#: qp.c:463
+msgid "QPCLS - Rank deficiency in model"
+msgstr ""
+
+#: sparse-smooth.c:143
+msgid "More than 2 points in a box!!\n"
+msgstr ""
+
+#: sparse-smooth.c:148
+#, c-format
+msgid "point %d in %d boxes!\n"
+msgstr ""
+
+#: sparse-smooth.c:310 sparse-smooth.c:326
+msgid "too many boxes!!"
+msgstr ""
+
+#: sparse-smooth.c:342
+#, c-format
+msgid "bi not equal to nb-1 %d %d\n"
+msgstr ""
+
+#: sparse-smooth.c:442
+msgid "child boundary problem\n"
+msgstr ""
+
+#: sparse-smooth.c:551
+msgid ""
+"\n"
+" 'star()' function is useful only in 2D\n"
+msgstr ""
+
+#: sparse-smooth.c:608
+msgid "indexing error in 'p_area()' function!\n"
+msgstr ""
+
+#: sparse-smooth.c:1054
+msgid "hello\n"
+msgstr ""
+
+#: sparse-smooth.c:1086
+#, c-format
+msgid "%d upper neighbour claimed to be self d=%d!\n"
+msgstr ""
+
+#: sparse-smooth.c:1149
+msgid "lower neighbour claimed to be self!\n"
+msgstr ""
+
+#: tprs.c:41
+msgid "You must have 2m>d for a thin plate spline."
+msgstr ""
+
+#: tprs.c:376 tprs.c:384
+msgid ""
+"A term has fewer unique covariate combinations than specified maximum "
+"degrees of freedom"
+msgstr ""

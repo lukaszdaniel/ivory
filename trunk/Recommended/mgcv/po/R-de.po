@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.10.0 / mgcv 1.5-5\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:25\n"
+"POT-Creation-Date: 2015-03-04 18:44\n"
 "PO-Revision-Date: 2009-10-08 16:16+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -104,24 +104,21 @@ msgstr ""
 
 #. R/mgcv.r: gettextf("'%s' and '%s' arguments should have the same length", "lambda", "h")
 #: R/mgcv.r:0
-#, fuzzy
 msgid "'%s' and '%s' arguments should have the same length"
-msgstr "xt-Argument ist fehlerhaft"
+msgstr ""
 
 #. R/mgcv.r: gettextf("'%s' and '%s' components should have the same length", "M$S", "M$off")
 #: R/mgcv.r:0
-#, fuzzy
 msgid "'%s' and '%s' components should have the same length"
 msgstr ""
-"Komponenten der Knoten, die sich auf eine einzige Glättung beziehen, müssen "
-"die gleiche Länge haben"
 
+# R/smooth.r
 #. R/smooth.r: gettextf("'%s' argument has no '%s' attribute", "x", "row")
 #. R/smooth.r: gettextf("'%s' argument has no '%s' attribute", "x", "col")
 #: R/smooth.r:0
 #, fuzzy
 msgid "'%s' argument has no '%s' attribute"
-msgstr "x hat kein Spaltenattribut"
+msgstr "x hat kein Zeilenattribut"
 
 #. R/smooth.r: gettextf("'%s' argument is faulty", "xt")
 #. R/smooth.r: gettextf("'%s' argument is faulty", "xt")
@@ -147,13 +144,13 @@ msgstr "xt-Argument ist fehlerhaft"
 #: R/gam.fit3.r:0 R/gamm.r:0 R/mgcv.r:0 R/plots.r:0
 #, fuzzy
 msgid "'%s' argument is not an object of class %s"
-msgstr "»object« ist nicht aus der Klasse »gam«"
+msgstr "fam ist kein family-Objekt"
 
 #. R/mgcv.r: gettextf("'%s' argument is of the wrong length", "min.sp")
 #: R/mgcv.r:0
 #, fuzzy
 msgid "'%s' argument is of the wrong length"
-msgstr "xt-Argument ist fehlerhaft"
+msgstr "angegebener sp hat falsche Länge"
 
 #. R/smooth.r: gettextf("'%s' argument is of the wrong length and ignored", "bs")
 #. R/smooth.r: gettextf("'%s' argument is of the wrong length and ignored", "m")
@@ -167,9 +164,8 @@ msgstr "m hat falsche Länge und wird ignoriert."
 #. R/gam.fit3.r: gettextf("'%s' argument should be 1 or 2", "deriv")
 #. R/gam.fit4.r: gettextf("'%s' argument should be 1 or 2", "deriv")
 #: R/gam.fit3.r:0 R/gam.fit4.r:0
-#, fuzzy
 msgid "'%s' argument should be 1 or 2"
-msgstr "L muss eine Matrix sein."
+msgstr ""
 
 #. R/gamlss.r: gettextf("'%s' function requires 2 links specified as character strings", "gaulss()")
 #. R/gamlss.r: gettextf("'%s' function requires 2 links specified as character strings", "ziplss()")
@@ -179,17 +175,13 @@ msgstr ""
 
 #. R/mgcv.r: gettextf("'%s', '%s' and '%s' components should have the same length", "M$sp", "M$S",     "M$off")
 #: R/mgcv.r:0
-#, fuzzy
 msgid "'%s', '%s' and '%s' components should have the same length"
 msgstr ""
-"Komponenten der Knoten, die sich auf eine einzige Glättung beziehen, müssen "
-"die gleiche Länge haben"
 
 #. R/bam.r: stop("'AR.start' argument must be logical")
 #: R/bam.r:0
-#, fuzzy
 msgid "'AR.start' argument must be logical"
-msgstr "Elemente von min.sp dürfen nicht negativ sein."
+msgstr ""
 
 #. R/gam.fit3.r: stop("'H' argument has wrong dimension")
 #. R/gam.fit3.r: stop("'H' argument has wrong dimension")
@@ -242,9 +234,8 @@ msgstr "X verlor Dimensionen in magic!!"
 #. R/misc.r: stop("'a' argument has wrong number of rows")
 #. R/misc.r: stop("'a' argument has wrong number of rows")
 #: R/misc.r:0
-#, fuzzy
 msgid "'a' argument has wrong number of rows"
-msgstr "H hat falsche Dimension"
+msgstr ""
 
 #. R/mgcv.r: stop("'absorb.cons' argument must be TRUE for multi-formula models")
 #: R/mgcv.r:0
@@ -307,11 +298,12 @@ msgid ""
 "'negbin()' with unknown theta and outer iteration is deprecated - use 'nb()'."
 msgstr ""
 
+# R/gamm.r
 #. R/mgcv.r: stop("'nthreads' argument must be a positive integer")
 #: R/mgcv.r:0
 #, fuzzy
 msgid "'nthreads' argument must be a positive integer"
-msgstr "Elemente von min.sp dürfen nicht negativ sein."
+msgstr "random-Argument muss eine *benannte* Liste sein."
 
 #. R/plots.r: stop("'object' argument is not an object of class \"glm\" or \"gam\"")
 #: R/plots.r:0
@@ -321,15 +313,13 @@ msgstr "»object« ist nicht aus der Klasse »gam«"
 
 #. R/gam.fit3.r: stop("'p' argument must be in (1,2)")
 #: R/gam.fit3.r:0
-#, fuzzy
 msgid "'p' argument must be in (1,2)"
-msgstr "L muss eine Matrix sein."
+msgstr ""
 
 #. R/gam.fit3.r: stop("'p' argument must be in [1,2]")
 #: R/gam.fit3.r:0
-#, fuzzy
 msgid "'p' argument must be in [1,2]"
-msgstr "L muss eine Matrix sein."
+msgstr ""
 
 #. R/mgcv.r: warning("'p.type != 0' is deprecated, and liable to be removed in future")
 #: R/mgcv.r:0
@@ -730,9 +720,8 @@ msgstr ""
 
 #. R/gam.sim.r: gettext("Factor 'by' variable example", domain = "R-mgcv")
 #: R/gam.sim.r:0
-#, fuzzy
 msgid "Factor 'by' variable example"
-msgstr "Kann nicht über Variable gefunden werden"
+msgstr ""
 
 #. R/mgcv.r: stop("First argument is no sort of formula!")
 #: R/mgcv.r:0
@@ -912,9 +901,8 @@ msgstr ""
 
 #. R/mgcv.r: stop("NA values in 'min.sp' argument")
 #: R/mgcv.r:0
-#, fuzzy
 msgid "NA values in 'min.sp' argument"
-msgstr "unerlaubtes »family«-Argument"
+msgstr ""
 
 #. R/gam.fit3.r: stop("NA values in V(mu)")
 #. R/gam.fit3.r: stop("NA values in V(mu)")
@@ -1019,6 +1007,16 @@ msgstr ""
 #. R/bam.r: stop("Non-finite deviance")
 #: R/bam.r:0
 msgid "Non-finite deviance"
+msgstr ""
+
+#. R/efam.r: stop("Non-integer response variables are not allowed with ziP")
+#: R/efam.r:0
+msgid "Non-integer response variables are not allowed with ziP"
+msgstr ""
+
+#. R/gamlss.r: stop("Non-integer response variables are not allowed with ziplss")
+#: R/gamlss.r:0
+msgid "Non-integer response variables are not allowed with ziplss"
 msgstr ""
 
 #. R/bam.r: stop("Not enough (non-NA) data to do anything meaningful")
@@ -1321,6 +1319,16 @@ msgstr ""
 msgid "Unknown type, reset to terms"
 msgstr "Unbekannte Typ, wird auf terms zurückgesetzt."
 
+#. R/efam.r: stop("Using ziP for binary data makes no sense")
+#: R/efam.r:0
+msgid "Using ziP for binary data makes no sense"
+msgstr ""
+
+#. R/gamlss.r: stop("Using ziplss for binary data makes no sense")
+#: R/gamlss.r:0
+msgid "Using ziplss for binary data makes no sense"
+msgstr ""
+
 #. R/plots.r: gettextf("View variables must contain more than one value. view = c(%s,%s).", view[1],     view[2])
 #: R/plots.r:0
 #, fuzzy
@@ -1566,6 +1574,7 @@ msgid "factor 'by' variables can not be used with matrix arguments"
 msgstr ""
 "Faktor-»by«-Variablen können nicht mit Matrixargumenten benutzt werden."
 
+# R/gam.fit3.r
 #. R/jagam.r: stop("family not implemented yet")
 #: R/jagam.r:0
 #, fuzzy
@@ -1801,13 +1810,10 @@ msgstr ""
 #. R/soap.r: stop("lengths of 'bs.dim' and 'bnd' components of 'object' argument are inconsistent")
 #. R/soap.r: stop("lengths of 'bs.dim' and 'bnd' components of 'object' argument are inconsistent")
 #: R/soap.r:0
-#, fuzzy
 msgid ""
 "lengths of 'bs.dim' and 'bnd' components of 'object' argument are "
 "inconsistent"
 msgstr ""
-"Komponenten der Knoten, die sich auf eine einzige Glättung beziehen, müssen "
-"die gleiche Länge haben"
 
 #. R/soap.r: stop("lengths of 'k' and 'bnd' arguments are inconsistent")
 #: R/soap.r:0
@@ -1860,7 +1866,6 @@ msgstr ""
 
 #. R/mgcv.r: stop("maximum number of iterations must be > 0")
 #: R/mgcv.r:0
-#, fuzzy
 msgid "maximum number of iterations must be > 0"
 msgstr "maximale Anzahl der Iterationen muss > 0 sein"
 
@@ -2178,7 +2183,7 @@ msgstr ""
 #: R/jagam.r:0
 #, fuzzy
 msgid "residuals argument not supported"
-msgstr "Residuen-Argument für plot.gam hat falsche Länge: Ignoriert"
+msgstr "Argument test ignoriert"
 
 #. R/plots.r: warning("residuals argument to plot.gam is wrong length: ignored")
 #: R/plots.r:0
@@ -2408,9 +2413,8 @@ msgstr "Typ muss »link« oder »response« sein"
 #. R/jagam.r: stop("unconditional argument not meaningful here")
 #. R/jagam.r: warning("unconditional argument not meaningful here")
 #: R/jagam.r:0
-#, fuzzy
 msgid "unconditional argument not meaningful here"
-msgstr "Anfangsparameter sehr nah zu den Ungleichungsnebenbedingungen"
+msgstr ""
 
 #. R/smooth.r: stop("unimplemented sparse constraint type requested")
 #: R/smooth.r:0
@@ -2455,7 +2459,6 @@ msgstr ""
 
 #. R/mgcv.r: stop("value of epsilon must be > 0")
 #: R/mgcv.r:0
-#, fuzzy
 msgid "value of epsilon must be > 0"
 msgstr "Wert von epsilon muss > 0 sein"
 
@@ -2483,8 +2486,9 @@ msgstr "Die view Variablen müssen gewählt werden aus"
 
 #. R/jagam.r: warning("weights ignored")
 #: R/jagam.r:0
+#, fuzzy
 msgid "weights ignored"
-msgstr ""
+msgstr "Argument test ignoriert"
 
 #. R/gamm.r: stop("weights must be like glm weights for generalized case")
 #: R/gamm.r:0
@@ -2521,8 +2525,17 @@ msgid_plural "Smoothing parameter selection converged after %d iterations."
 msgstr[0] ""
 msgstr[1] ""
 
-#~ msgid "inner loop 1; can't correct step size"
-#~ msgstr "innere Schleife 1; Schrittweite kann nicht korrigiert werden"
+#, fuzzy
+#~ msgid "non-finite coefficients at iteration %d"
+#~ msgstr "Nicht-endliche Koeffizienten bei der Iteration"
+
+#, fuzzy
+#~ msgid "algorithm did not converge"
+#~ msgstr "Algorithmus konvergierte nicht"
+
+#, fuzzy
+#~ msgid "non-finite coefficients at iteration"
+#~ msgstr "Nicht-endliche Koeffizienten bei der Iteration"
 
 #~ msgid "inner loop 2; can't correct step size"
 #~ msgstr "innere Schleife 2; Schrittweite kann nicht korrigiert werden"
@@ -2531,179 +2544,51 @@ msgstr[1] ""
 #~ msgstr "innere Schleife 3; Schrittweite kann nicht korrigiert werden"
 
 #, fuzzy
-#~ msgid "'M$S' and 'M$off' have different lengths"
-#~ msgstr "M$S und M$off haben unterschiedliche Längen"
+#~ msgid ""
+#~ "Non finite derivatives. Try decreasing fit tolerance! See `epsilon' in "
+#~ "`gam.contol'"
+#~ msgstr ""
+#~ "Glättungsparameter leitet Iterationsabweichung ab. Näherungstoleranz "
+#~ "vermindern! Siehe »epsilon« in »gam.control«"
 
-#, fuzzy
-#~ msgid "'M$sp' has different length to 'M$S' and 'M$off'"
-#~ msgstr "M$sp hat unterschiedliche Länge zu M$S und M$off"
+#~ msgid "fam not a family object"
+#~ msgstr "fam ist kein family-Objekt"
 
 # R/gam.fit3.r
 #~ msgid "family not recognised"
 #~ msgstr "family nicht erkannt"
 
-# R/smooth.r
-#, fuzzy
-#~ msgid "'x' has no row attribute"
-#~ msgstr "x hat kein Zeilenattribut"
-
-#, fuzzy
-#~ msgid "'x' is null"
-#~ msgstr "x ist Null"
-
-#, fuzzy
-#~ msgid "'bs' wrong length and ignored"
-#~ msgstr "bs hat falsche Länge und wird ignoriert."
-
-#, fuzzy
-#~ msgid "'m' has wrong length and ignored"
-#~ msgstr "m hat falsche Länge und wird ignoriert."
-
-#, fuzzy
-#~ msgid "NA's in min.sp"
-#~ msgstr "NA's in min.sp."
-
-#, fuzzy
-#~ msgid "bs wrong length and ignored"
-#~ msgstr "bs hat falsche Länge und wird ignoriert."
-
-#, fuzzy
-#~ msgid "length of min.sp is wrong"
-#~ msgstr "Länge von min.sp ist falsch."
-
-#, fuzzy
-#~ msgid "ivnalid 'family' argument"
-#~ msgstr "unerlaubtes »family«-Argument"
-
-#, fuzzy
-#~ msgid "xt argument is faulty"
-#~ msgstr "xt-Argument ist fehlerhaft"
-
-#, fuzzy
-#~ msgid "non-finite coefficients at iteration %d"
-#~ msgstr "Nicht-endliche Koeffizienten bei der Iteration"
-
-#, fuzzy
-#~ msgid "No data supplied to 'gamm.setup()'"
-#~ msgstr "Keine Daten für gam.setup bereitgestellt"
-
-#, fuzzy
-#~ msgid "No data supplied to 'gam.setup()'"
-#~ msgstr "Keine Daten für gam.setup bereitgestellt"
-
-#, fuzzy
-#~ msgid "extra arguments were discarded"
-#~ msgstr "zusätzliche Argumente verworfen"
-
-#~ msgid "can't predict outside range of knots with periodic smoother"
-#~ msgstr ""
-#~ "es kann nicht außerhalb des Bereichs von Knoten mit periodischem Glätter "
-#~ "vorausberechnet werden"
-
-#~ msgid "Step size truncated: out of bounds."
-#~ msgstr "Schrittgröße verkleinert: Außerhalb der Begrenzungen."
-
-#, fuzzy
-#~ msgid "'L' argument must be a matrix."
-#~ msgstr "L muss eine Matrix sein."
-
-#, fuzzy
-#~ msgid "'L' argument must have at least as many rows as columns."
-#~ msgstr "L muss mindestens so viele Zeilen wie Spalten haben."
-
-#, fuzzy
-#~ msgid "'L' argument has inconsistent dimensions."
-#~ msgstr "L hat inkonsistente Dimensionen."
-
-#, fuzzy
-#~ msgid "algorithm did not converge"
-#~ msgstr "Algorithmus konvergierte nicht"
-
-#, fuzzy
-#~ msgid "'fam' argument is not an object of class \"family\""
-#~ msgstr "»object« ist nicht aus der Klasse »gam«"
-
-#~ msgid "object does not appear to be of class lme"
-#~ msgstr "Objekt scheint nicht von der Klasse lme zu sein"
-
-#, fuzzy
-#~ msgid "object does not appear to be of class \"lme\""
-#~ msgstr "Objekt scheint nicht von der Klasse lme zu sein"
-
-#, fuzzy
-#~ msgid "'object' argument is not an object of class \"gam\""
-#~ msgstr "»object« ist nicht aus der Klasse »gam«"
-
-#, fuzzy
-#~ msgid "'b' argument is not an object of class \"gamm\""
-#~ msgstr "»object« ist nicht aus der Klasse »gam«"
-
-#, fuzzy
-#~ msgid "'x' argument is not an object of class \"gam\""
-#~ msgstr "»object« ist nicht aus der Klasse »gam«"
-
-#, fuzzy
-#~ msgid "'gamm()' requires package 'nlme' to be installed"
-#~ msgstr "gamm() benötigt nlme, um installiert zu werden"
-
-#, fuzzy
-#~ msgid ""
-#~ "Non finite derivatives. Try decreasing fit tolerance! See 'epsilon' in "
-#~ "'gam.contol'"
-#~ msgstr ""
-#~ "Glättungsparameter leitet Iterationsabweichung ab. Näherungstoleranz "
-#~ "vermindern! Siehe »epsilon« in »gam.control«"
-
-#, fuzzy
-#~ msgid "`object' argument is not an object of class \"gam\""
-#~ msgstr "»object« ist nicht aus der Klasse »gam«"
-
-#~ msgid "fam not a family object"
-#~ msgstr "fam ist kein family-Objekt"
-
-#, fuzzy
-#~ msgid "'fam' not a family object"
-#~ msgstr "fam ist kein family-Objekt"
-
-#~ msgid "NA's in pdTens matrix"
-#~ msgstr "NA's in pdTens-Matrix"
-
-#~ msgid "nrow(M$Ain) != length(M$p)"
-#~ msgstr "nrow(M$Ain) != length(M$p)"
-
-#~ msgid "ncol(M$C) != length(M$p)"
-#~ msgstr "ncol(M$C) != length(M$p)"
-
-#~ msgid "No observations informative at iteration"
-#~ msgstr "Keine informativen Beobachtungen bei der Iteration"
-
-#~ msgid "anova.gam called with non gam object"
-#~ msgstr "anova.gam mit einem nicht-gam-Objekt aufgerufen"
-
-#, fuzzy
-#~ msgid "not a gam object"
-#~ msgstr "fam ist kein family-Objekt"
-
-#, fuzzy
-#~ msgid "argument is not a gam object"
-#~ msgstr "fam ist kein family-Objekt"
-
-#, fuzzy
-#~ msgid "object is not a glm or gam"
-#~ msgstr "»object« ist nicht aus der Klasse »gam«"
-
 # R/mgcv.r + R/gam.fit3.r
 #~ msgid "Length of start should equal"
 #~ msgstr "Länge von start sollte gleich sein"
 
-#~ msgid "An object of length"
-#~ msgstr "Ein Objekt der Länge"
+#~ msgid "and correspond to initial coefs for"
+#~ msgstr "und entsprechend den Anfangs-coefs für"
+
+#~ msgid "Non-finite coefficients at iteration"
+#~ msgstr "Nicht-endliche Koeffizienten bei der Iteration"
 
 #~ msgid "NA's in pdTens factor"
 #~ msgstr "NA's in pdTens-Faktor"
 
+#~ msgid "NA's in pdTens matrix"
+#~ msgstr "NA's in pdTens-Matrix"
+
+#~ msgid "An object of length"
+#~ msgstr "Ein Objekt der Länge"
+
+#~ msgid "does not match the required parameter size"
+#~ msgstr "entspricht nicht der erforderlichen Parametergröße"
+
 #~ msgid "without a formula"
 #~ msgstr "ohne eine Formel"
+
+#, fuzzy
+#~ msgid "No data supplied to gamm.setup"
+#~ msgstr "Keine Daten für gam.setup bereitgestellt"
+
+#~ msgid "object does not appear to be of class lme"
+#~ msgstr "Objekt scheint nicht von der Klasse lme zu sein"
 
 #~ msgid "nrow(M$X) != length(M$y)"
 #~ msgstr "nrow(M$X) != length(M$y)"
@@ -2717,20 +2602,53 @@ msgstr[1] ""
 #~ msgid "nrow(M$Ain) != length(M$bin)"
 #~ msgstr "nrow(M$Ain) != length(M$bin)"
 
-#~ msgid "M$S["
-#~ msgstr "M$S["
+#~ msgid "nrow(M$Ain) != length(M$p)"
+#~ msgstr "nrow(M$Ain) != length(M$p)"
 
-#~ msgid "]"
-#~ msgstr "]"
+#~ msgid "ncol(M$C) != length(M$p)"
+#~ msgstr "ncol(M$C) != length(M$p)"
+
+#~ msgid "M$S and M$off have different lengths"
+#~ msgstr "M$S und M$off haben unterschiedliche Längen"
+
+#~ msgid "M$sp has different length to M$S and M$off"
+#~ msgstr "M$sp hat unterschiedliche Länge zu M$S und M$off"
+
+#~ msgid "length of min.sp is wrong."
+#~ msgstr "Länge von min.sp ist falsch."
+
+#~ msgid "NA's in min.sp."
+#~ msgstr "NA's in min.sp."
+
+#~ msgid "Step size truncated: out of bounds."
+#~ msgstr "Schrittgröße verkleinert: Außerhalb der Begrenzungen."
+
+#, fuzzy
+#~ msgid "requires an object of class gam"
+#~ msgstr "»object« ist nicht aus der Klasse »gam«"
 
 #~ msgid ","
 #~ msgstr ","
 
-#~ msgid "S[["
-#~ msgstr "S[["
+#~ msgid "anova.gam called with non gam object"
+#~ msgstr "anova.gam mit einem nicht-gam-Objekt aufgerufen"
 
-#~ msgid ")."
-#~ msgstr ")."
+#, fuzzy
+#~ msgid "not a gam object"
+#~ msgstr "fam ist kein family-Objekt"
+
+#, fuzzy
+#~ msgid "object is not a glm or gam"
+#~ msgstr "»object« ist nicht aus der Klasse »gam«"
+
+#~ msgid "x is null"
+#~ msgstr "x ist Null"
+
+#~ msgid "x has no col attribute"
+#~ msgstr "x hat kein Spaltenattribut"
+
+#~ msgid "bs wrong length and ignored."
+#~ msgstr "bs hat falsche Länge und wird ignoriert."
 
 #, fuzzy
 #~ msgid "supplied knots"
@@ -2780,8 +2698,17 @@ msgstr[1] ""
 #~ msgid "Problem with linear algebra routines."
 #~ msgstr "Problem mit linearen Algebra-Routinen."
 
+#~ msgid "gamm() requires package nlme to be installed"
+#~ msgstr "gamm() benötigt nlme, um installiert zu werden"
+
 #~ msgid "gamm() requires package MASS to be installed"
 #~ msgstr "gamm() benötigt das Paket MASS, um installiert zu werden"
+
+#~ msgid "M$S["
+#~ msgstr "M$S["
+
+#~ msgid "]"
+#~ msgstr "]"
 
 #~ msgid "Can't mix fixed and estimated penalties in mgcv() - use magic()"
 #~ msgstr ""
@@ -2791,8 +2718,10 @@ msgstr[1] ""
 #~ msgid "meaninglessly low k; reset to 2"
 #~ msgstr "bedeutungslos niedriges k; wird auf 2 zurückgesetzt"
 
-#~ msgid "supplied sp has wrong length"
-#~ msgstr "angegebener sp hat falsche Länge"
+#~ msgid "can't predict outside range of knots with periodic smoother"
+#~ msgstr ""
+#~ "es kann nicht außerhalb des Bereichs von Knoten mit periodischem Glätter "
+#~ "vorausberechnet werden"
 
 #~ msgid "supplied min.sp has wrong length"
 #~ msgstr "angegebener min.sp hat falsche Länge"
@@ -2811,6 +2740,15 @@ msgstr[1] ""
 
 #~ msgid "dispersion argument ignored"
 #~ msgstr "Argument dispersion ignoriert"
+
+#~ msgid "extra arguments discarded"
+#~ msgstr "zusätzliche Argumente verworfen"
+
+#~ msgid ")."
+#~ msgstr ")."
+
+#~ msgid "S[["
+#~ msgstr "S[["
 
 #~ msgid "Unkwown flavour of GCV"
 #~ msgstr "Unbekannte Art von GCV"

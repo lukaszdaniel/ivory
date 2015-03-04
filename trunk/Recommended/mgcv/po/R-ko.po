@@ -1,0 +1,2675 @@
+# Korean translations for mgcv package.
+# Recommended/mgcv/po/R-ko.po
+# Maintainer: Simon Wood <simon.wood@r-project.org>
+#
+# This file is distributed under the same license as the R mgcv package.
+# Chel Hee Lee <chl948@mail.usask.ca>, 2013-2015.
+#
+# Reviewing process is in progress (06-FEB-2015)
+# The original source code review is in progress (06-FEB-2015)
+# QC: PASS
+# Freezing on 06-FEB-2015 for R-3.1.3
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: R 3.1.3\n"
+"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"POT-Creation-Date: 2015-03-04 18:44\n"
+"PO-Revision-Date: 2015-02-21 16:01-0600\n"
+"Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
+"Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. R/efam.r: gettextf("\"%s\" link not available for beta regression; available links are  \"logit\", \"probit\", \"cloglog\" and \"cauchit\"",     linktemp)
+#: R/efam.r:0
+#, fuzzy
+msgid ""
+"\"%s\" link not available for beta regression; available links are  \"logit"
+"\", \"probit\", \"cloglog\" and \"cauchit\""
+msgstr ""
+"베타회귀(beta regression)에 사용할 수 있는 링크(link)가 아닙니다.  사용가능"
+"한 링크(link)에는 \"logit\", \"probit\", \"cloglog\" 그리고 \"cauchit\"가 있"
+"습니다. "
+
+#. R/coxph.r: gettextf("\"%s\" link not available for coxph family; available link is \"identity\"",     linktemp)
+#: R/coxph.r:0
+#, fuzzy
+msgid ""
+"\"%s\" link not available for coxph family; available link is \"identity\""
+msgstr ""
+"coxph 페밀리(family)에 사용할 수 있는 링크(link)가 아닙니다.  사용가능한 링크"
+"(link)는 \"identity\"입니다."
+
+#. R/gamlss.r: gettextf("\"%s\" link not available for mu parameter of gaulss", link[[1]])
+#: R/gamlss.r:0
+#, fuzzy
+msgid "\"%s\" link not available for mu parameter of gaulss"
+msgstr "gaulss 모형의 모수 mu에 사용가능한 링크(link)가 아닙니다."
+
+#. R/efam.r: gettextf("\"%s\" link not available for negative binomial family; available links are \"identity\", \"log\" and \"sqrt\"",     linktemp)
+#. R/gam.fit3.r: gettextf("\"%s\" link not available for negative binomial family; available links are \"identity\", \"log\" and \"sqrt\"",     linktemp)
+#: R/efam.r:0 R/gam.fit3.r:0
+#, fuzzy
+msgid ""
+"\"%s\" link not available for negative binomial family; available links are "
+"\"identity\", \"log\" and \"sqrt\""
+msgstr ""
+"%s는 음이항분포 페밀리(negative binomial family)에 사용할 수 있는 링크(link)"
+"가 아닙니다.  사용가능한 링크들에는 \"identity\", \"log\" 그리고 \"sqrt\"가 "
+"있습니다."
+
+#. R/efam.r: gettextf("\"%s\" link not available for ordered categorical family; available links are \"identity\"",     linktemp)
+#: R/efam.r:0
+#, fuzzy
+msgid ""
+"\"%s\" link not available for ordered categorical family; available links "
+"are \"identity\""
+msgstr ""
+"순서범주형 페밀리(ordered categorical family)에 사용할 수 있는 링크(link)가 "
+"아닙니다.  사용가능한 링크(link)는  \"identity\"입니다."
+
+#. R/gamlss.r: gettextf("\"%s\" link not available for parameter of ziplss %s", param.names[i],     link[[i]])
+#: R/gamlss.r:0
+#, fuzzy
+msgid "\"%s\" link not available for parameter of ziplss %s"
+msgstr "gaulss 모형의 모수 mu에 사용가능한 링크(link)가 아닙니다."
+
+#. R/gamlss.r: gettextf("\"%s\" link not available for precision parameter of gaulss", link[[2]])
+#: R/gamlss.r:0
+#, fuzzy
+msgid "\"%s\" link not available for precision parameter of gaulss"
+msgstr "gaulss 모형의 모수 precision에 사용가능한 링크(link)가 아닙니다."
+
+#. R/efam.r: gettextf("\"%s\" link not available for scaled t distribution; available links are \"identity\", \"log\",  and \"inverse\"",     linktemp)
+#: R/efam.r:0
+#, fuzzy
+msgid ""
+"\"%s\" link not available for scaled t distribution; available links are "
+"\"identity\", \"log\",  and \"inverse\""
+msgstr ""
+"스케일드 t 분포(scaled t distribution)에 사용할 수 있는 링크(link)가 아닙니"
+"다.  사용가능한 링크(link)에는 \"identity\", \"log\", 그리고 \"inverse\"가 있"
+"습니다."
+
+#. R/efam.r: gettextf("\"%s\" link not available for zero inflated; available link for `lambda' is only  \"loga\"",     linktemp)
+#: R/efam.r:0
+#, fuzzy
+msgid ""
+"\"%s\" link not available for zero inflated; available link for `lambda' is "
+"only  \"loga\""
+msgstr ""
+"영과잉(zero inflated)모형에 사용할 수 있는 링크(link)가 아닙니다.  "
+"`lambda'에 사용할 수 있는 링크(link)는 오로지 \"loga\"입니다."
+
+#. R/smooth.r: stop("\"fs\" smooth cannot use a multiply penalized basis (wrong basis in xt)")
+#: R/smooth.r:0
+msgid "\"fs\" smooth cannot use a multiply penalized basis (wrong basis in xt)"
+msgstr ""
+
+#. R/smooth.r: stop("\"fs\" terms can not be fixed here")
+#: R/smooth.r:0
+msgid "\"fs\" terms can not be fixed here"
+msgstr ""
+
+#. R/smooth.r: gettextf("%s has insufficient unique values to support %d knots: reduce k", object$term,     nk)
+#: R/smooth.r:0
+msgid "%s has insufficient unique values to support %d knots: reduce k"
+msgstr ""
+
+#. R/mgcv.r: gettextf("%s not in original fit", paste(levn[!levn %in% levm], collapse = ", "),     domain = "R-mgcv")
+#: R/mgcv.r:0
+msgid "%s not in original fit"
+msgstr ""
+
+#. R/mgcv.r: gettextf("%s score = %s", sQuote(x$method), x$gcv.ubre, domain = "R-mgcv")
+#: R/mgcv.r:0
+msgid "%s score = %s"
+msgstr ""
+
+#. R/mgcv.r: gettextf("'%s' and '%s' arguments should have the same length", "lambda", "h")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "'%s' and '%s' arguments should have the same length"
+msgstr "lambda와 h 모두 같은 길이를 가져야 합니다."
+
+#. R/mgcv.r: gettextf("'%s' and '%s' components should have the same length", "M$S", "M$off")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "'%s' and '%s' components should have the same length"
+msgstr "lambda와 h 모두 같은 길이를 가져야 합니다."
+
+#. R/smooth.r: gettextf("'%s' argument has no '%s' attribute", "x", "row")
+#. R/smooth.r: gettextf("'%s' argument has no '%s' attribute", "x", "col")
+#: R/smooth.r:0
+#, fuzzy
+msgid "'%s' argument has no '%s' attribute"
+msgstr "x는 행속성(row attribute)를 가지고 있지 않습니다."
+
+#. R/smooth.r: gettextf("'%s' argument is faulty", "xt")
+#. R/smooth.r: gettextf("'%s' argument is faulty", "xt")
+#: R/smooth.r:0
+#, fuzzy
+msgid "'%s' argument is faulty"
+msgstr "인자 xt가 올바르지 않습니다."
+
+#. R/gam.fit3.r: gettextf("'%s' argument is not an object of class %s", "fam", dQuote("family"))
+#. R/gam.fit3.r: gettextf("'%s' argument is not an object of class %s", "fam", dQuote("family"))
+#. R/gam.fit3.r: gettextf("'%s' argument is not an object of class %s", "fam", dQuote("family"))
+#. R/gamm.r: gettextf("'%s' argument is not an object of class %s", "b", dQuote("lme"))
+#. R/gamm.r: gettextf("'%s' argument is not an object of class %s", "b", dQuote("lme"))
+#. R/mgcv.r: gettextf("'%s' argument is not an object of class %s", "object", dQuote("gam"))
+#. R/mgcv.r: gettextf("'%s' argument is not an object of class %s", "b", dQuote("gam"))
+#. R/mgcv.r: gettextf("'%s' argument is not an object of class %s", "b", dQuote("gam"))
+#. R/mgcv.r: gettextf("'%s' argument is not an object of class %s", "object", dQuote("gam"))
+#. R/mgcv.r: gettextf("'%s' argument is not an object of class %s", "x", dQuote("gam"))
+#. R/mgcv.r: gettextf("'%s' argument is not an object of class %s", "x", dQuote("gam"))
+#. R/mgcv.r: gettextf("'%s' argument is not an object of class %s", "x", dQuote("gam"))
+#. R/plots.r: gettextf("'%s' argument is not an object of class %s", "fam", dQuote("family"))
+#. R/plots.r: gettextf("'%s' argument is not an object of class %s", "fam", dQuote("family"))
+#: R/gam.fit3.r:0 R/gamm.r:0 R/mgcv.r:0 R/plots.r:0
+#, fuzzy
+msgid "'%s' argument is not an object of class %s"
+msgstr "인자의 클래스가 gam이 아닙니다."
+
+#. R/mgcv.r: gettextf("'%s' argument is of the wrong length", "min.sp")
+#: R/mgcv.r:0
+msgid "'%s' argument is of the wrong length"
+msgstr ""
+
+#. R/smooth.r: gettextf("'%s' argument is of the wrong length and ignored", "bs")
+#. R/smooth.r: gettextf("'%s' argument is of the wrong length and ignored", "m")
+#. R/smooth.r: gettextf("'%s' argument is of the wrong length and ignored", "bs")
+#. R/smooth.r: gettextf("'%s' argument is of the wrong length and ignored", "m")
+#: R/smooth.r:0
+#, fuzzy
+msgid "'%s' argument is of the wrong length and ignored"
+msgstr "m의 길이가 올바르지 않아 사용되지 않습니다."
+
+#. R/gam.fit3.r: gettextf("'%s' argument should be 1 or 2", "deriv")
+#. R/gam.fit4.r: gettextf("'%s' argument should be 1 or 2", "deriv")
+#: R/gam.fit3.r:0 R/gam.fit4.r:0
+#, fuzzy
+msgid "'%s' argument should be 1 or 2"
+msgstr "deriv의 값은 1 또는 2이어야 합니다."
+
+#. R/gamlss.r: gettextf("'%s' function requires 2 links specified as character strings", "gaulss()")
+#. R/gamlss.r: gettextf("'%s' function requires 2 links specified as character strings", "ziplss()")
+#: R/gamlss.r:0
+#, fuzzy
+msgid "'%s' function requires 2 links specified as character strings"
+msgstr "gaulss 모형은 문자열로 표현된 2개의 링크(link)를 필요로 합니다."
+
+#. R/mgcv.r: gettextf("'%s', '%s' and '%s' components should have the same length", "M$sp", "M$S",     "M$off")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "'%s', '%s' and '%s' components should have the same length"
+msgstr "lambda와 h 모두 같은 길이를 가져야 합니다."
+
+#. R/bam.r: stop("'AR.start' argument must be logical")
+#: R/bam.r:0
+#, fuzzy
+msgid "'AR.start' argument must be logical"
+msgstr "AR.start는 반드시 논리형(logical)이어야 합니다."
+
+#. R/gam.fit3.r: stop("'H' argument has wrong dimension")
+#. R/gam.fit3.r: stop("'H' argument has wrong dimension")
+#: R/gam.fit3.r:0
+#, fuzzy
+msgid "'H' argument has wrong dimension"
+msgstr "H의 열과 행의 길이가 같아야 합니다."
+
+#. R/gam.fit3.r: stop("'L' argument has inconsistent dimensions")
+#. R/gam.fit3.r: stop("'L' argument has inconsistent dimensions")
+#. R/gam.fit3.r: stop("'L' argument has inconsistent dimensions")
+#. R/mgcv.r: stop("'L' argument has inconsistent dimensions")
+#: R/gam.fit3.r:0 R/mgcv.r:0
+msgid "'L' argument has inconsistent dimensions"
+msgstr ""
+
+#. R/gam.fit3.r: stop("'L' argument must be a matrix")
+#. R/gam.fit3.r: stop("'L' argument must be a matrix")
+#. R/gam.fit3.r: stop("'L' argument must be a matrix")
+#. R/mgcv.r: stop("'L' argument must be a matrix")
+#: R/gam.fit3.r:0 R/mgcv.r:0
+#, fuzzy
+msgid "'L' argument must be a matrix"
+msgstr "L은 반드시 행렬(matrix)이어야 합니다."
+
+#. R/gam.fit3.r: stop("'L' argument must have at least as many rows as columns")
+#. R/gam.fit3.r: stop("'L' argument must have at least as many rows as columns")
+#. R/gam.fit3.r: stop("'L' argument must have at least as many rows as columns")
+#. R/mgcv.r: stop("'L' argument must have at least as many rows as columns")
+#: R/gam.fit3.r:0 R/mgcv.r:0
+#, fuzzy
+msgid "'L' argument must have at least as many rows as columns"
+msgstr "L이 가지고 있는 행의 개수는 적어도 열의 개수만큼 있어야 합니다."
+
+#. R/mgcv.r: stop("'L' has wrong dimension in 'paraPen'")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "'L' has wrong dimension in 'paraPen'"
+msgstr "`paraPen'내에 있는 L의 차원(dimension)이 올바르지 않습니다."
+
+#. R/mgcv.r: stop("'X' lost dimensions in magic!!")
+#: R/mgcv.r:0
+msgid "'X' lost dimensions in magic!!"
+msgstr ""
+
+#. R/misc.r: stop("'a' argument has wrong number of rows")
+#. R/misc.r: stop("'a' argument has wrong number of rows")
+#. R/misc.r: stop("'a' argument has wrong number of rows")
+#. R/misc.r: stop("'a' argument has wrong number of rows")
+#: R/misc.r:0
+#, fuzzy
+msgid "'a' argument has wrong number of rows"
+msgstr "a가 가진 행의 개수가 올바르지 않습니다."
+
+#. R/mgcv.r: stop("'absorb.cons' argument must be TRUE for multi-formula models")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "'absorb.cons' argument must be TRUE for multi-formula models"
+msgstr ""
+"여러개의 모델식(multi-formula models)을 사용하는 경우에 absorb.cons은 반드시 "
+"TRUE이어야 합니다."
+
+#. R/smooth.r: stop("'by' variable must be same dimension as smooth arguments")
+#. R/smooth.r: stop("'by' variable must be same dimension as smooth arguments")
+#: R/smooth.r:0
+msgid "'by' variable must be same dimension as smooth arguments"
+msgstr ""
+
+#. R/smooth.r: stop("'by=.' is not allowed")
+#: R/smooth.r:0
+#, fuzzy
+msgid "'by=.' is not allowed"
+msgstr "by=.는 사용할 수 없습니다."
+
+#. R/smooth.r: stop("'d' can not be negative in call passed to 'null.space.dimension()'")
+#: R/smooth.r:0
+#, fuzzy
+msgid "'d' can not be negative in call passed to 'null.space.dimension()'"
+msgstr "null.space.dimension()에 지정된 인자 d는 음수를 가질 수 없습니다."
+
+#. R/bam.r: stop("'family' argument seems not to be a valid family object")
+#. R/bam.r: stop("'family' argument seems not to be a valid family object")
+#: R/bam.r:0
+msgid "'family' argument seems not to be a valid family object"
+msgstr "'family' 인자는 올바른 family 객체가 아닌 것 같이 보입니다."
+
+#. R/gamm.r: stop("'gamm()' can only handle random effects defined as named lists")
+#: R/gamm.r:0
+#, fuzzy
+msgid "'gamm()' can only handle random effects defined as named lists"
+msgstr ""
+"gamm()은 개별구성요소에 이름이 부여된 리스트(list)의 형식으로 입력된 랜덤효과"
+"(random effects)만을 다룰 수 있습니다."
+
+#. R/mgcv.r: stop("'id' linked smooths must have same number of arguments")
+#: R/mgcv.r:0
+msgid "'id' linked smooths must have same number of arguments"
+msgstr ""
+
+#. R/mgcv.r: stop("'m' argument  can't be in 're' argument")
+#: R/mgcv.r:0
+msgid "'m' argument  can't be in 're' argument"
+msgstr ""
+
+#. R/gam.fit3.r: stop("'mu' argument must be non negative")
+#: R/gam.fit3.r:0
+#, fuzzy
+msgid "'mu' argument must be non negative"
+msgstr "평균 mu는 음수일 수 없습니다."
+
+#. R/mgcv.r: warning("'negbin()' with unknown theta and outer iteration is deprecated - use 'nb()'.")
+#: R/mgcv.r:0
+msgid ""
+"'negbin()' with unknown theta and outer iteration is deprecated - use 'nb()'."
+msgstr ""
+
+#. R/mgcv.r: stop("'nthreads' argument must be a positive integer")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "'nthreads' argument must be a positive integer"
+msgstr "nthreads는 반드시 양의 정수이어야 합니다."
+
+#. R/plots.r: stop("'object' argument is not an object of class \"glm\" or \"gam\"")
+#: R/plots.r:0
+#, fuzzy
+msgid "'object' argument is not an object of class \"glm\" or \"gam\""
+msgstr "`object'는 클래스 \"gam\"가 아닙니다."
+
+#. R/gam.fit3.r: stop("'p' argument must be in (1,2)")
+#: R/gam.fit3.r:0
+#, fuzzy
+msgid "'p' argument must be in (1,2)"
+msgstr "p는 반드시 범위 (1,2) 내에 존재해야 합니다."
+
+#. R/gam.fit3.r: stop("'p' argument must be in [1,2]")
+#: R/gam.fit3.r:0
+#, fuzzy
+msgid "'p' argument must be in [1,2]"
+msgstr "p는 반드시 구간 [1,2]내에 존재해야 합니다."
+
+#. R/mgcv.r: warning("'p.type != 0' is deprecated, and liable to be removed in future")
+#: R/mgcv.r:0
+msgid "'p.type != 0' is deprecated, and liable to be removed in future"
+msgstr ""
+
+#. R/mgcv.r: stop("'paraPen' argument is not supported for multi-formula models")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "'paraPen' argument is not supported for multi-formula models"
+msgstr ""
+"여러개의 모델식(multi-formula models)을 사용하는 경우에는 paraPen을 사용할 "
+"수 없습니다."
+
+#. R/mgcv.r: stop("'rank' has wrong length in 'paraPen'")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "'rank' has wrong length in 'paraPen'"
+msgstr "`paraPen'내에 있는 `rank'의 길이가 올바르지 않습니다."
+
+#. R/smooth.r: stop("'s(.)' function is not yet supported")
+#. R/smooth.r: stop("'s(.)' function is not yet supported")
+#: R/smooth.r:0
+#, fuzzy
+msgid "'s(.)' function is not yet supported"
+msgstr "s(.)는 아직 지원되지 않습니다."
+
+#. R/mgcv.r: stop("'sp' dimension wrong in 'paraPen'")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "'sp' dimension wrong in 'paraPen'"
+msgstr "`paraPen'내에 있는 `sp'의 차원(dimension)이 올바르지 않습니다."
+
+#. R/mgcv.r: stop("'sp' is too short")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "'sp' is too short"
+msgstr "`sp'의 길이가 너무 짧습니다."
+
+#. R/mgcv.r: warning("'test' argument ignored")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "'test' argument ignored"
+msgstr ""
+"plot.gam에 전달되는 인자 residuals의 길이가 올바르지 않아 무시되었습니다. "
+
+#. R/gam.fit3.r: stop("'theta' must be specified")
+#: R/gam.fit3.r:0
+msgid "'theta' must be specified"
+msgstr "'theta'의 값은 반드시 주어져야 합니다."
+
+#. R/mgcv.r: stop("'w' argument has different length from 'y' argument!")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "'w' argument has different length from 'y' argument!"
+msgstr "w의 길이가 y의 길이와 다릅니다!"
+
+#. R/soap.r: stop("'x' and 'y' components of 'bnd' argument are not of same length")
+#: R/soap.r:0
+msgid "'x' and 'y' components of 'bnd' argument are not of same length"
+msgstr ""
+
+#. R/smooth.r: stop("'x' argument is null")
+#: R/smooth.r:0
+#, fuzzy
+msgid "'x' argument is null"
+msgstr "인자 xt가 올바르지 않습니다."
+
+#. R/smooth.r: stop("'x' out of range")
+#: R/smooth.r:0
+#, fuzzy
+msgid "'x' out of range"
+msgstr "x가 범위 밖에 놓여 있습니다."
+
+#. R/gam.fit3.r: stop("'y' argument must be an integer multiple of phi for Tweedie(p=1)")
+#: R/gam.fit3.r:0
+#, fuzzy
+msgid "'y' argument must be an integer multiple of phi for Tweedie(p=1)"
+msgstr ""
+"Tweedie(p=1)의 경우 y는 반드시 phi의 배수(integer multiple)이어야 합니다."
+
+#. R/gam.fit3.r: stop("'y' argument must be strictly positive for a Gamma density")
+#: R/gam.fit3.r:0
+#, fuzzy
+msgid "'y' argument must be strictly positive for a Gamma density"
+msgstr "감마밀도(Gamma density)의 경우 y는 반드시 양수이어야 합니다."
+
+#. R/mgcv.r: stop("'y' must be univariate unless binomial")
+#: R/mgcv.r:0
+msgid "'y' must be univariate unless binomial"
+msgstr ""
+
+#. R/plots.r: gettextf("(score %s & scale %s).", b$gcv.ubre, b$sig2, domain = "R-mgcv")
+#: R/plots.r:0
+msgid "(score %s & scale %s)."
+msgstr ""
+
+#. R/gam.fit4.r: gettext("**using positive weights", domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "**using positive weights"
+msgstr ""
+
+#. R/gam.fit3.r: stop("0s in V(mu)")
+#. R/gam.fit3.r: stop("0s in V(mu)")
+#. R/mgcv.r: stop("0s in V(mu)")
+#: R/gam.fit3.r:0 R/mgcv.r:0
+msgid "0s in V(mu)"
+msgstr "V(mu)에서 0이 발견되었습니다."
+
+#. R/gam.fit3.r: stop("1<a<b<2 (strict) required")
+#: R/gam.fit3.r:0
+msgid "1<a<b<2 (strict) required"
+msgstr "1<a<b<2 라는 조건을 반드시 만족해야 합니다."
+
+#. R/smooth.r: stop("A term has fewer unique covariate combinations than specified maximum degrees of freedom")
+#: R/smooth.r:0
+msgid ""
+"A term has fewer unique covariate combinations than specified maximum "
+"degrees of freedom"
+msgstr ""
+
+#. R/bam.r: warning("AR1 parameter rho unused with generalized model")
+#: R/bam.r:0
+msgid "AR1 parameter rho unused with generalized model"
+msgstr ""
+
+#. R/bam.r: warning("AR1 parameter rho unused with sparse fitting")
+#: R/bam.r:0
+msgid "AR1 parameter rho unused with sparse fitting"
+msgstr ""
+
+#. R/gam.sim.r: gettext("Additive model + factor", domain = "R-mgcv")
+#: R/gam.sim.r:0
+msgid "Additive model + factor"
+msgstr ""
+
+#. R/bam.r: warning("Algorithm did not converge")
+#. R/bam.r: warning("Algorithm did not converge")
+#. R/gam.fit3.r: warning("Algorithm did not converge")
+#. R/mgcv.r: warning("Algorithm did not converge")
+#: R/bam.r:0 R/gam.fit3.r:0 R/mgcv.r:0
+msgid "Algorithm did not converge"
+msgstr "알고리즘이 수렴하지 않았습니다."
+
+#. R/gam.fit3.r: warning("Algorithm stopped at boundary value")
+#. R/mgcv.r: warning("Algorithm stopped at boundary value")
+#: R/gam.fit3.r:0 R/mgcv.r:0
+msgid "Algorithm stopped at boundary value"
+msgstr "알고리즘이 경계값(boundary value)에서 멈추었습니다."
+
+#. R/mgcv.r: gettext("All smooth components:", domain = "R-mgcv")
+#: R/mgcv.r:0
+msgid "All smooth components:"
+msgstr ""
+
+#. R/gamm.r: gettextf("An object of length %d does not match the required parameter size", aux)
+#. R/gamm.r: gettextf("An object of length %d does not match the required parameter size", length(val))
+#: R/gamm.r:0
+msgid "An object of length %d does not match the required parameter size"
+msgstr "object의 길이 %d는 요구되어지는 모수의 크기와 일치하지 않습니다."
+
+#. R/mgcv.r: gettext("Approximate significance of smooth terms:", domain = "R-mgcv")
+#. R/mgcv.r: gettext("Approximate significance of smooth terms:", domain = "R-mgcv")
+#: R/mgcv.r:0
+msgid "Approximate significance of smooth terms:"
+msgstr ""
+
+#. R/smooth.r: stop("At least three knots required in call passed to 'mono.con()'")
+#: R/smooth.r:0
+#, fuzzy
+msgid "At least three knots required in call passed to 'mono.con()'"
+msgstr "mono.con을 호출하기 위해서는 최소한 세개의 노트(knots)가 필요합니다."
+
+#. R/plots.r: gettext("Basis dimension (k) checking results. Low p-value (k-index<1) may\nindicate that k is too low, especially if edf is close to k.",     domain = "R-mgcv")
+#: R/plots.r:0
+msgid ""
+"Basis dimension (k) checking results. Low p-value (k-index<1) may\n"
+"indicate that k is too low, especially if edf is close to k."
+msgstr ""
+
+#. R/smooth.r: stop("Basis only handles 1D smooths")
+#. R/smooth.r: stop("Basis only handles 1D smooths")
+#. R/smooth.r: stop("Basis only handles 1D smooths")
+#. R/smooth.r: stop("Basis only handles 1D smooths")
+#: R/smooth.r:0
+msgid "Basis only handles 1D smooths"
+msgstr ""
+
+#. R/efam.r: gettextf("Beta regression(%s)", round(theta, 3), domain = "R-mgcv")
+#: R/efam.r:0
+msgid "Beta regression(%s)"
+msgstr ""
+
+#. R/gam.sim.r: gettext("Bivariate smoothing example", domain = "R-mgcv")
+#: R/gam.sim.r:0
+msgid "Bivariate smoothing example"
+msgstr ""
+
+#. R/gamm.r: stop("Can not convert this smooth class to a random effect")
+#: R/gamm.r:0
+msgid "Can not convert this smooth class to a random effect"
+msgstr ""
+
+#. R/mgcv.r: stop("Can not have more eigenvalues than nrow(A)")
+#: R/mgcv.r:0
+msgid "Can not have more eigenvalues than nrow(A)"
+msgstr ""
+"nrow(A)의 값보다 더 많은 개수의 고유값(eigenvalues)들을 가질 수 없습니다."
+
+#. R/smooth.r: stop("Can only deal with a sphere")
+#: R/smooth.r:0
+msgid "Can only deal with a sphere"
+msgstr ""
+
+#. R/smooth.r: stop("Can't find by variable")
+#. R/smooth.r: stop("Can't find by variable")
+#. R/smooth.r: stop("Can't find by variable")
+#: R/smooth.r:0
+msgid "Can't find by variable"
+msgstr "by 변수(variable)를 찾을 수 없습니다."
+
+#. R/gam.fit3.r: stop("Can't find valid starting values: please specify some")
+#. R/mgcv.r: stop("Can't find valid starting values: please specify some")
+#: R/gam.fit3.r:0 R/mgcv.r:0
+msgid "Can't find valid starting values: please specify some"
+msgstr "사용가능한 초기값을 찾을 수 없습니다.  값을 정해주시길 바랍니다."
+
+#. R/gamm.r: stop("Cannot extract the dimensions")
+#: R/gamm.r:0
+msgid "Cannot extract the dimensions"
+msgstr "차원정보(dimensions)을 불러올 수 없습니다."
+
+#. R/gamm.r: stop("Cannot extract the inverse from an uninitialized object")
+#: R/gamm.r:0
+msgid "Cannot extract the inverse from an uninitialized object"
+msgstr ""
+
+#. R/gamm.r: stop("Cannot extract the matrix from an uninitialized object")
+#: R/gamm.r:0
+msgid "Cannot extract the matrix from an uninitialized object"
+msgstr "초기화 되지 않은 object로부터 행렬을 불러올 수는 없습니다."
+
+#. R/gamm.r: stop("Cannot extract the matrix from an uninitialized pdMat object")
+#. R/gamm.r: stop("Cannot extract the matrix from an uninitialized pdMat object")
+#: R/gamm.r:0
+msgid "Cannot extract the matrix from an uninitialized pdMat object"
+msgstr "초기화 되지 않은 pdMat 객체로부터 행렬을 불러올 수는 없습니다."
+
+#. R/gamm.r: paste("Cannot extract the matrix with uninitialized dimensions")
+#. R/gamm.r: stop("Cannot extract the matrix with uninitialized dimensions")
+#: R/gamm.r:0
+msgid "Cannot extract the matrix with uninitialized dimensions"
+msgstr ""
+
+#. R/gam.sim.r: gettext("Continuous 'by' variable example", domain = "R-mgcv")
+#: R/gam.sim.r:0
+#, fuzzy
+msgid "Continuous 'by' variable example"
+msgstr "by 변수(variable)를 찾을 수 없습니다."
+
+#. R/gam.fit4.r: gettextf("Deta2: rdiff = %s cor = %s", paste(range(dd$Deta2 - Deta2.fd), collapse = " "),     cor(dd$Deta2, Deta2.fd), domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "Deta2: rdiff = %s cor = %s"
+msgstr ""
+
+#. R/gam.fit4.r: gettextf("Deta2th2[%d]: rdiff = %s cor = %s", i, paste(range(dd$Deta2th2 - Deta2th2.fd),     collapse = " "), cor(dd$Deta2th2, Deta2th2.fd), domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "Deta2th2[%d]: rdiff = %s cor = %s"
+msgstr ""
+
+#. R/gam.fit4.r: gettextf("Deta2th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Deta2th - Deta2th.fd),     collapse = " "), cor(dd$Deta2th, Deta2th.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Deta2th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Deta2th - Deta2th.fd),     collapse = " "), cor(dd$Deta2th, Deta2th.fd), domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "Deta2th[%d]: rdiff = %s cor = %s"
+msgstr ""
+
+#. R/gam.fit4.r: gettextf("Deta3: rdiff = %s cor = %s", paste(range(dd$Deta3 - Deta3.fd), collapse = " "),     cor(dd$Deta3, Deta3.fd), domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "Deta3: rdiff = %s cor = %s"
+msgstr ""
+
+#. R/gam.fit4.r: gettextf("Deta3th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Deta3th - Deta3th.fd),     collapse = " "), cor(dd$Deta3th, Deta3th.fd), domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "Deta3th[%d]: rdiff = %s cor = %s"
+msgstr ""
+
+#. R/gam.fit4.r: gettextf("Deta4: rdiff = %s cor = %s", paste(range(dd$Deta4 - Deta4.fd), collapse = " "),     cor(dd$Deta4, Deta4.fd), domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "Deta4: rdiff = %s cor = %s"
+msgstr ""
+
+#. R/gam.fit4.r: gettextf("Deta: rdiff = %s cor = %s", paste(range(dd$Deta - Deta.fd), collapse = " "),     cor(dd$Deta, Deta.fd), domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "Deta: rdiff = %s cor = %s"
+msgstr ""
+
+#. R/gam.fit4.r: gettextf("Detath[%d]: rdiff = %s cor = %s", i, paste(range(um - Detath.fd), collapse = " "),     cor(um, Detath.fd), domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "Detath[%d]: rdiff = %s cor = %s"
+msgstr ""
+
+#. R/bam.r: gettextf("Deviance = %s Iterations - %d", dev, iter, domain = "R-mgcv")
+#. R/bam.r: gettextf("Deviance = %s Iterations - %d", dev, iter, domain = "R-mgcv")
+#. R/gam.fit3.r: gettextf("Deviance = %s Iterations - %d", dev, iter, domain = "R-mgcv")
+#. R/mgcv.r: gettextf("Deviance = %s Iterations - %d", dev, iter, domain = "R-mgcv")
+#: R/bam.r:0 R/gam.fit3.r:0 R/mgcv.r:0
+msgid "Deviance = %s Iterations - %d"
+msgstr "편차(deviance)= %s 반복(iterations) - %d"
+
+#. R/mgcv.r: gettextf("Deviance explained = %s %%", formatC(x$dev.expl * 100, digits = 3, width = 4),     domain = "R-mgcv")
+#: R/mgcv.r:0
+msgid "Deviance explained = %s %%"
+msgstr ""
+
+#. R/gam.fit3.r: gettext("Deviance...", domain = "R-mgcv")
+#: R/gam.fit3.r:0
+msgid "Deviance..."
+msgstr ""
+
+#. R/mgcv.r: warning("Discrete Theta search not available with performance iteration")
+#: R/mgcv.r:0
+msgid "Discrete Theta search not available with performance iteration"
+msgstr ""
+
+#. R/gam.fit4.r: gettextf("Dmu2: rdiff = %s cor = %s", paste(range(dd$Dmu2 - Dmu2.fd), collapse = " "),     cor(dd$Dmu2, Dmu2.fd), domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "Dmu2: rdiff = %s cor = %s"
+msgstr ""
+
+#. R/gam.fit4.r: gettextf("Dmu2th2[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dmu2th2 - Dmu2th2.fd),     collapse = " "), cor(dd$Dmu2th2, Dmu2th2.fd), domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "Dmu2th2[%d]: rdiff = %s cor = %s"
+msgstr ""
+
+#. R/gam.fit4.r: gettextf("Dmu2th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dmu2th - Dmu2th.fd),     collapse = " "), cor(dd$Dmu2th, Dmu2th.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Dmu2th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dmu2th - Dmu2th.fd),     collapse = " "), cor(dd$Dmu2th, Dmu2th.fd), domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "Dmu2th[%d]: rdiff = %s cor = %s"
+msgstr ""
+
+#. R/gam.fit4.r: gettextf("Dmu3: rdiff = %s cor = %s", paste(range(dd$Dmu3 - Dmu3.fd), collapse = " "),     cor(dd$Dmu3, Dmu3.fd), domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "Dmu3: rdiff = %s cor = %s"
+msgstr ""
+
+#. R/gam.fit4.r: gettextf("Dmu3th[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dmu3th - Dmu3th.fd),     collapse = " "), cor(dd$Dmu3th, Dmu3th.fd), domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "Dmu3th[%d]: rdiff = %s cor = %s"
+msgstr ""
+
+#. R/gam.fit4.r: gettextf("Dmu4: rdiff = %s cor = %s", paste(range(dd$Dmu4 - Dmu4.fd), collapse = " "),     cor(dd$Dmu4, Dmu4.fd), domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "Dmu4: rdiff = %s cor = %s"
+msgstr ""
+
+#. R/gam.fit4.r: gettextf("Dmu: rdiff = %s cor = %s", paste(range(dd$Dmu - Dmu.fd), collapse = " "),     cor(dd$Dmu, Dmu.fd), domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "Dmu: rdiff = %s cor = %s"
+msgstr ""
+
+#. R/gam.fit4.r: gettextf("Dmuth[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dmuth - Dmuth.fd), collapse = " "),     cor(dd$Dmuth, Dmuth.fd), domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "Dmuth[%d]: rdiff = %s cor = %s"
+msgstr ""
+
+#. R/plots.r: stop("Don't know what to do with parametric terms that are not simple numeric or factor variables")
+#: R/plots.r:0
+msgid ""
+"Don't know what to do with parametric terms that are not simple numeric or "
+"factor variables"
+msgstr ""
+
+#. R/gam.fit4.r: gettextf("Dth2[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dth2 - Dth2.fd), collapse = " "),     cor(dd$Dth2, Dth2.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Dth2[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dth2 - Dth2.fd), collapse = " "),     cor(dd$Dth2, Dth2.fd), domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "Dth2[%d]: rdiff = %s cor = %s"
+msgstr ""
+
+#. R/gam.fit4.r: gettextf("Dth[%d]: rdiff = %s cor = %s", i, paste(range(um - Dth.fd), collapse = " "),     cor(um, Dth.fd), domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Dth[%d]: rdiff = %s cor = %s", i, paste(range(dd$Dth - Dth.fd), collapse = " "),     cor(dd$Dth, Dth.fd), domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "Dth[%d]: rdiff = %s cor = %s"
+msgstr ""
+
+#. R/mgcv.r: gettext("Estimated degrees of freedom:", domain = "R-mgcv")
+#: R/mgcv.r:0
+msgid "Estimated degrees of freedom:"
+msgstr ""
+
+#. R/smooth.r: stop("F is missing from cr smooth - refit model with current mgcv")
+#: R/smooth.r:0
+msgid "F is missing from cr smooth - refit model with current mgcv"
+msgstr ""
+
+#. R/gam.sim.r: gettext("Factor 'by' variable example", domain = "R-mgcv")
+#: R/gam.sim.r:0
+msgid "Factor 'by' variable example"
+msgstr ""
+
+#. R/mgcv.r: stop("First argument is no sort of formula!")
+#: R/mgcv.r:0
+msgid "First argument is no sort of formula!"
+msgstr ""
+"첫번째 인자가 어떠한 종류의 formula 클래스에도 해당하지 않는 것으로 확인되었"
+"습니다."
+
+#. R/bam.r: gettext("Fit complete. Finishing gam object.", domain = "R-mgcv")
+#: R/bam.r:0
+msgid "Fit complete. Finishing gam object."
+msgstr ""
+
+#. R/plots.r: gettext("Fitted Values", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "Fitted Values"
+msgstr ""
+
+#. R/mgcv.r: gettext("Formula:", domain = "R-mgcv")
+#. R/mgcv.r: gettext("Formula:", domain = "R-mgcv")
+#: R/mgcv.r:0
+msgid "Formula:"
+msgstr ""
+
+#. R/plots.r: gettext("Gaussian quantiles", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "Gaussian quantiles"
+msgstr ""
+
+#. R/plots.r: gettextf("Gradient range [%s, %s]", min(boi$grad), max(boi$grad), domain = "R-mgcv")
+#: R/plots.r:0
+msgid "Gradient range [%s, %s]"
+msgstr ""
+
+#. R/gam.sim.r: gettext("Gu & Wahba 4 term additive model", domain = "R-mgcv")
+#: R/gam.sim.r:0
+msgid "Gu & Wahba 4 term additive model"
+msgstr ""
+
+#. R/gam.sim.r: gettext("Gu & Wahba 4 term additive model + correlated predictors", domain = "R-mgcv")
+#: R/gam.sim.r:0
+msgid "Gu & Wahba 4 term additive model + correlated predictors"
+msgstr ""
+
+#. R/gam.sim.r: gettext("Gu & Wahba 4 term additive model + random effect", domain = "R-mgcv")
+#: R/gam.sim.r:0
+msgid "Gu & Wahba 4 term additive model + random effect"
+msgstr ""
+
+#. R/plots.r: gettext("Hessian positive definite, eigenvalue range [%s, %s].", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "Hessian positive definite, eigenvalue range [%s, %s]."
+msgstr ""
+
+#. R/plots.r: gettext("Histogram of residuals", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "Histogram of residuals"
+msgstr ""
+
+#. R/mgcv.r: stop("IRLS regularizing parameter must be a non-negative number")
+#: R/mgcv.r:0
+msgid "IRLS regularizing parameter must be a non-negative number"
+msgstr ""
+
+#. R/gam.fit3.r: stop("Invalid fitted means in empty model")
+#: R/gam.fit3.r:0
+msgid "Invalid fitted means in empty model"
+msgstr ""
+
+#. R/gam.fit3.r: stop("Invalid linear predictor values in empty model")
+#: R/gam.fit3.r:0
+msgid "Invalid linear predictor values in empty model"
+msgstr ""
+
+#. R/mgcv.r: stop("Later terms sharing an 'id' can not have more smoothing parameters than the first such term")
+#: R/mgcv.r:0
+msgid ""
+"Later terms sharing an 'id' can not have more smoothing parameters than the "
+"first such term"
+msgstr ""
+
+#. R/mgcv.r: gettextf("Length of start should equal %d and correspond to initial coefs", nvars)
+#: R/mgcv.r:0
+#, fuzzy
+msgid "Length of start should equal %d and correspond to initial coefs"
+msgstr ""
+"start의 길이는 %d와 같아야 하며 %s에 대응하는 계수의 초기값을 가지고 있어야 "
+"합니다."
+
+#. R/gam.fit3.r: gettextf("Length of start should equal %d and correspond to initial coefs for %s",     nvars, deparse(xnames))
+#. R/gam.fit4.r: gettextf("Length of start should equal %d and correspond to initial coefs for %s",     nvars, deparse(xnames))
+#: R/gam.fit3.r:0 R/gam.fit4.r:0
+msgid "Length of start should equal %d and correspond to initial coefs for %s"
+msgstr ""
+"start의 길이는 %d와 같아야 하며 %s에 대응하는 계수의 초기값을 가지고 있어야 "
+"합니다."
+
+#. R/mgcv.r: gettextf("M$S[%d] is too large given M$off[%d]", i, i)
+#: R/mgcv.r:0
+msgid "M$S[%d] is too large given M$off[%d]"
+msgstr "M$S[%d]의 값은 주어진 M$off[%d]에 비하여 너무 큽니다."
+
+#. R/smooth.r: stop("MRF basis dimension set too high")
+#: R/smooth.r:0
+msgid "MRF basis dimension set too high"
+msgstr ""
+
+#. R/gamm.r: gettext("Maximum number of PQL iterations: ", domain = "R-mgcv")
+#: R/gamm.r:0
+#, fuzzy
+msgid "Maximum number of PQL iterations:"
+msgstr "최대 반복수(iteration)는 반드시 0 보다 커야 합니다."
+
+#. R/plots.r: gettextf("Method: %s  Optimizer: %s", paste(b$method, collapse = ""), paste(b$optimizer,     collapse = ""), domain = "R-mgcv")
+#: R/plots.r:0
+msgid "Method: %s  Optimizer: %s"
+msgstr ""
+
+#. R/bam.r: stop("Model can not be updated")
+#: R/bam.r:0
+msgid "Model can not be updated"
+msgstr "모델을 업데이트할 수 없습니다."
+
+#. R/plots.r: stop("Model does not seem to have enough terms to do anything useful")
+#: R/plots.r:0
+msgid "Model does not seem to have enough terms to do anything useful"
+msgstr ""
+
+#. R/bam.r: stop("Model has more coefficients than data")
+#. R/mgcv.r: stop("Model has more coefficients than data")
+#: R/bam.r:0 R/mgcv.r:0
+msgid "Model has more coefficients than data"
+msgstr "모형(model)이 가진 계수(coefficients)가 데이터의 개수보다 많습니다."
+
+#. R/mgcv.r: stop("Model matrix not full column rank")
+#: R/mgcv.r:0
+msgid "Model matrix not full column rank"
+msgstr ""
+
+#. R/plots.r: gettextf("Model rank = %s/%s", b$rank, length(b$coefficients), domain = "R-mgcv")
+#: R/plots.r:0
+msgid "Model rank = %s/%s"
+msgstr ""
+
+#. R/plots.r: gettext("Model required no smoothing parameter selection", domain = "R-mgcv")
+#: R/plots.r:0
+#, fuzzy
+msgid "Model required no smoothing parameter selection"
+msgstr ""
+"제공된 평활화 모수(smoothing parameter) 벡터내에서 NA가 발견되어 사용되지 않"
+"습니다."
+
+#. R/mgcv.r: stop("Model seems to contain no terms")
+#: R/mgcv.r:0
+msgid "Model seems to contain no terms"
+msgstr "모델이 아무런 항(term)도 포함하지 않는 것 같습니다."
+
+#. R/gamm.r: gettext("Multiple of an Identity", domain = "R-mgcv")
+#: R/gamm.r:0
+msgid "Multiple of an Identity"
+msgstr ""
+
+#. R/gamm.r: stop("Must give names when initializing pdIdnot from parameter without a formula")
+#: R/gamm.r:0
+msgid ""
+"Must give names when initializing pdIdnot from parameter without a formula"
+msgstr ""
+
+#. R/efam.r: stop("Must supply theta or R to ocat")
+#: R/efam.r:0
+msgid "Must supply theta or R to ocat"
+msgstr "theta 또는 R을 ocat에 제공해주어야 합니다."
+
+#. R/coxph.r: stop("NA times supplied for cox.ph prediction")
+#: R/coxph.r:0
+msgid "NA times supplied for cox.ph prediction"
+msgstr ""
+
+#. R/mgcv.r: stop("NA values in 'min.sp' argument")
+#: R/mgcv.r:0
+msgid "NA values in 'min.sp' argument"
+msgstr ""
+
+#. R/gam.fit3.r: stop("NA values in V(mu)")
+#. R/gam.fit3.r: stop("NA values in V(mu)")
+#. R/mgcv.r: stop("NA values in V(mu)")
+#: R/gam.fit3.r:0 R/mgcv.r:0
+#, fuzzy
+msgid "NA values in V(mu)"
+msgstr "V(mu)에서 NA가 발견되었습니다."
+
+#. R/gam.fit3.r: stop("NA values in d(mu)/d(eta)")
+#. R/gam.fit3.r: stop("NA values in d(mu)/d(eta)")
+#. R/mgcv.r: stop("NA values in d(mu)/d(eta)")
+#: R/gam.fit3.r:0 R/mgcv.r:0
+#, fuzzy
+msgid "NA values in d(mu)/d(eta)"
+msgstr "d(mu)/d(eta)로부터 NA가 발견되었습니다."
+
+#. R/gamm.r: warning("NA values in factor of class \"pdTens\"")
+#: R/gamm.r:0
+msgid "NA values in factor of class \"pdTens\""
+msgstr ""
+
+#. R/gamm.r: warning("NA values in matrix of class \"pdTens\"")
+#: R/gamm.r:0
+msgid "NA values in matrix of class \"pdTens\""
+msgstr ""
+
+#. R/mgcv.r: warning("NA values in supplied smoothing parameter vector - ignoring")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "NA values in supplied smoothing parameter vector - ignoring"
+msgstr ""
+"제공된 평활화 모수(smoothing parameter) 벡터내에서 NA가 발견되어 사용되지 않"
+"습니다."
+
+#. R/efam.r: stop("NA values not allowed for the scaled t family")
+#: R/efam.r:0
+msgid "NA values not allowed for the scaled t family"
+msgstr "스케일드 t 페밀리(scaled t family)에는 NA 값을 사용할 수 없습니다."
+
+#. R/efam.r: gettextf("Negative Binomial(%s)", paste(round(object$family$getTheta(TRUE), 3), sep = ", ",     collapse = ""), domain = "R-mgcv")
+#: R/efam.r:0
+msgid "Negative Binomial(%s)"
+msgstr ""
+
+#. R/gamm.r: stop("Nested smooths must be fully random")
+#: R/gamm.r:0
+msgid "Nested smooths must be fully random"
+msgstr ""
+
+#. R/gamm.r: gettextf("No data supplied to '%s' function", "gamm.setup()")
+#. R/mgcv.r: gettextf("No data supplied to '%s' function", "gam.setup()")
+#. R/mgcv.r: gettextf("No data supplied to '%s' function", "gam.setup()")
+#: R/gamm.r:0 R/mgcv.r:0
+#, fuzzy
+msgid "No data supplied to '%s' function"
+msgstr "gam.setup에 이용될 데이터가 없습니다."
+
+#. R/gam.fit3.r: gettextf("No observations informative at iteration %d", iter)
+#. R/mgcv.r: gettextf("No observations informative at iteration %d", iter)
+#: R/gam.fit3.r:0 R/mgcv.r:0
+msgid "No observations informative at iteration %d"
+msgstr ""
+
+#. R/smooth.r: stop("No suitable s (i.e. m[2]) try increasing m[1]")
+#: R/smooth.r:0
+msgid "No suitable s (i.e. m[2]) try increasing m[1]"
+msgstr ""
+
+#. R/plots.r: stop("No terms to plot - nothing for plot.gam() to do.")
+#: R/plots.r:0
+msgid "No terms to plot - nothing for plot.gam() to do."
+msgstr ""
+
+#. R/plots.r: warning("No variance estimates available")
+#: R/plots.r:0
+msgid "No variance estimates available"
+msgstr "사용할 수 있는 분산의 추정치를 찾을 수 없습니다."
+
+#. R/bam.r: gettextf("Non-finite coefficients at iteration %d", iter)
+#. R/bam.r: gettextf("Non-finite coefficients at iteration %d", iter)
+#. R/gam.fit3.r: gettextf("Non-finite coefficients at iteration %d", iter)
+#. R/gam.fit4.r: gettextf("Non-finite coefficients at iteration %d", iter)
+#. R/mgcv.r: gettextf("Non-finite coefficients at iteration %d", iter)
+#: R/bam.r:0 R/gam.fit3.r:0 R/gam.fit4.r:0 R/mgcv.r:0
+msgid "Non-finite coefficients at iteration %d"
+msgstr "%d번째 반복에서 얻은 계수의 추정치가 유한(finite)하지 않습니다."
+
+#. R/gam.fit3.r: stop("Non-finite derivatives. Try decreasing fit tolerance! See 'epsilon' in 'gam.contol'")
+#. R/gam.fit3.r: stop("Non-finite derivatives. Try decreasing fit tolerance! See 'epsilon' in 'gam.contol'")
+#. R/gam.fit3.r: stop("Non-finite derivatives. Try decreasing fit tolerance! See 'epsilon' in 'gam.contol'")
+#: R/gam.fit3.r:0
+msgid ""
+"Non-finite derivatives. Try decreasing fit tolerance! See 'epsilon' in 'gam."
+"contol'"
+msgstr ""
+
+#. R/bam.r: stop("Non-finite deviance")
+#. R/bam.r: stop("Non-finite deviance")
+#: R/bam.r:0
+msgid "Non-finite deviance"
+msgstr "편차(deviance)가 유한(finite)한 값을 가지지 않습니다."
+
+#. R/efam.r: stop("Non-integer response variables are not allowed with ziP")
+#: R/efam.r:0
+msgid "Non-integer response variables are not allowed with ziP"
+msgstr ""
+
+#. R/gamlss.r: stop("Non-integer response variables are not allowed with ziplss")
+#: R/gamlss.r:0
+msgid "Non-integer response variables are not allowed with ziplss"
+msgstr ""
+
+#. R/bam.r: stop("Not enough (non-NA) data to do anything meaningful")
+#. R/gamm.r: stop("Not enough (non-NA) data to do anything meaningful")
+#. R/jagam.r: stop("Not enough (non-NA) data to do anything meaningful")
+#. R/mgcv.r: stop("Not enough (non-NA) data to do anything meaningful")
+#: R/bam.r:0 R/gamm.r:0 R/jagam.r:0 R/mgcv.r:0
+msgid "Not enough (non-NA) data to do anything meaningful"
+msgstr ""
+"어떤 의미있는 작업을 하기에는 NA가 아닌 데이터의 개수가 충분하지 않습니다."
+
+#. R/gam.fit3.r: stop("Not enough informative observations")
+#: R/gam.fit3.r:0
+msgid "Not enough informative observations"
+msgstr ""
+
+#. R/smooth.r: stop("Number of prediction and fit constraints must match")
+#: R/smooth.r:0
+msgid "Number of prediction and fit constraints must match"
+msgstr ""
+
+#. R/gam.fit3.r: stop("Only 1<p<=2 supported")
+#: R/gam.fit3.r:0
+msgid "Only 1<p<=2 supported"
+msgstr "p는 반드시 1<p<=2라는 조건을 만족해야 합니다."
+
+#. R/efam.r: gettextf("Ordered Categorical(%s)", paste(round(object$family$getTheta(TRUE), 2),     collapse = ","), domain = "R-mgcv")
+#: R/efam.r:0
+msgid "Ordered Categorical(%s)"
+msgstr ""
+
+#. R/mgcv.r: gettext("Parametric Terms:", domain = "R-mgcv")
+#: R/mgcv.r:0
+msgid "Parametric Terms:"
+msgstr ""
+
+#. R/mgcv.r: gettext("Parametric coefficients:", domain = "R-mgcv")
+#: R/mgcv.r:0
+msgid "Parametric coefficients:"
+msgstr ""
+
+#. R/plots.r: warning("Partial residuals do not have a natural x-axis location for linear functional terms")
+#: R/plots.r:0
+msgid ""
+"Partial residuals do not have a natural x-axis location for linear "
+"functional terms"
+msgstr ""
+
+#. R/gam.fit3.r: gettext("Pearson Statistic...", domain = "R-mgcv")
+#: R/gam.fit3.r:0
+msgid "Pearson Statistic..."
+msgstr ""
+
+#. R/mgcv.r: warning("Pearson residuals are not available for this family - returning deviance residuals")
+#: R/mgcv.r:0
+#, fuzzy
+msgid ""
+"Pearson residuals are not available for this family - returning deviance "
+"residuals"
+msgstr ""
+"이 페밀리(family)에서는 피어슨 잔차(Pearson residuals)를 얻을 수 없어 이탈잔"
+"차(deviance residuals)를 구합니다."
+
+#. R/gam.fit3.r: warning("Pearson scale estimate maybe unstable. See '?gam.scale'.")
+#: R/gam.fit3.r:0
+#, fuzzy
+msgid "Pearson scale estimate maybe unstable. See '?gam.scale'."
+msgstr ""
+"피어슨 척도 (Pearson scale)에 대한 추정치가 안정적(stable)이지 않은 것 같습니"
+"다.  ?gam.scale을 확인해 보시길 바랍니다."
+
+#. R/mgcv.r: stop("Penalized model matrix must have no more columns than rows")
+#: R/mgcv.r:0
+msgid "Penalized model matrix must have no more columns than rows"
+msgstr ""
+
+#. R/gam.fit3.r: gettextf("Proportion time in C: %s ls: %s gdi: %s", (tc + tg)/at, tc/at, tg/at, domain = "R-mgcv")
+#: R/gam.fit3.r:0
+msgid "Proportion time in C: %s ls: %s gdi: %s"
+msgstr ""
+
+#. R/mgcv.r: gettextf("R-sq.(adj) = %s", formatC(x$r.sq, digits = 3, width = 5), domain = "R-mgcv")
+#: R/mgcv.r:0
+msgid "R-sq.(adj) = %s"
+msgstr ""
+
+#. R/mgcv.r: gettextf("Rank: %s/%s", x$rank, length(x$coefficients), domain = "R-mgcv")
+#. R/mgcv.r: gettextf("Rank: %s/%s", x$rank, x$np, domain = "R-mgcv")
+#. R/mgcv.r: gettextf("Rank: %s/%s", rank, ncol(H), domain = "R-mgcv")
+#: R/mgcv.r:0
+msgid "Rank: %s/%s"
+msgstr ""
+
+#. R/smooth.r: stop("Repeated variables as arguments of a smooth are not permitted")
+#. R/smooth.r: stop("Repeated variables as arguments of a smooth are not permitted")
+#. R/smooth.r: stop("Repeated variables as arguments of a smooth are not permitted")
+#: R/smooth.r:0
+msgid "Repeated variables as arguments of a smooth are not permitted"
+msgstr ""
+
+#. R/mgcv.r: warning("Reset optimizer to outer/newton")
+#: R/mgcv.r:0
+msgid "Reset optimizer to outer/newton"
+msgstr "최적화 방법을 outer/newton으로 다시 설정합니다."
+
+#. R/plots.r: gettext("Resids vs. linear pred.", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "Resids vs. linear pred."
+msgstr ""
+
+#. R/plots.r: gettext("Residuals", domain = "R-mgcv")
+#. R/plots.r: gettext("Residuals", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "Residuals"
+msgstr ""
+
+#. R/plots.r: gettext("Response", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "Response"
+msgstr ""
+
+#. R/plots.r: gettext("Response vs. Fitted Values", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "Response vs. Fitted Values"
+msgstr ""
+
+#. R/mgcv.r: gettextf("S[[%d]] matrix is not +ve definite", i)
+#: R/mgcv.r:0
+msgid "S[[%d]] matrix is not +ve definite"
+msgstr ""
+
+#. R/mgcv.r: gettextf("  Scale est. = %s  n = %s", formatC(x$scale, digits = 5, width = 8, flag = "-"),     x$n, domain = "R-mgcv")
+#: R/mgcv.r:0
+msgid "Scale est. = %s  n = %s"
+msgstr ""
+
+#. R/efam.r: gettextf("Scaled t(%s)", paste(round(object$family$getTheta(TRUE), 3), collapse = ","),     domain = "R-mgcv")
+#: R/efam.r:0
+msgid "Scaled t(%s)"
+msgstr ""
+
+#. R/bam.r: gettext("Setup complete. Calling fit", domain = "R-mgcv")
+#: R/bam.r:0
+msgid "Setup complete. Calling fit"
+msgstr ""
+
+#. R/mgcv.r: warning("Smoothness uncertainty corrected covariance not available")
+#. R/plots.r: warning("Smoothness uncertainty corrected covariance not available")
+#: R/mgcv.r:0 R/plots.r:0
+msgid "Smoothness uncertainty corrected covariance not available"
+msgstr ""
+
+#. R/mgcv.r: stop("Something wrong - matrix probably not +ve semi definite")
+#: R/mgcv.r:0
+msgid "Something wrong - matrix probably not +ve semi definite"
+msgstr ""
+
+#. R/smooth.r: stop("Something wrong with auto- penalty construction")
+#: R/smooth.r:0
+msgid "Something wrong with auto- penalty construction"
+msgstr ""
+
+#. R/plots.r: stop("Something wrong with zlim")
+#. R/plots.r: stop("Something wrong with zlim")
+#: R/plots.r:0
+msgid "Something wrong with zlim"
+msgstr "zlim이 올바르지 않습니다."
+
+#. R/smooth.r: stop("Sorry, tensor products of smooths with multiple penalties are not supported")
+#. R/smooth.r: stop("Sorry, tensor products of smooths with multiple penalties are not supported")
+#: R/smooth.r:0
+msgid ""
+"Sorry, tensor products of smooths with multiple penalties are not supported"
+msgstr ""
+
+#. R/mgcv.r: gettextf("Standard deviations and %s confidence intervals:", conf.lev, domain = "R-mgcv")
+#: R/mgcv.r:0
+msgid "Standard deviations and %s confidence intervals:"
+msgstr ""
+
+#. R/gam.fit3.r: gettextf("Step halved: new deviance = %g", dev, domain = "R-mgcv")
+#. R/gam.fit3.r: gettextf("Step halved: new deviance = %g", dev, domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Step halved: new deviance = %g", dev, domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("Step halved: new deviance = %g", dev, domain = "R-mgcv")
+#. R/mgcv.r: gettextf("Step halved: new deviance = %g", dev, domain = "R-mgcv")
+#. R/mgcv.r: gettextf("Step halved: new deviance = %g", dev, domain = "R-mgcv")
+#: R/gam.fit3.r:0 R/gam.fit4.r:0 R/mgcv.r:0
+msgid "Step halved: new deviance = %g"
+msgstr ""
+
+#. R/gam.fit3.r: gettextf("Step halved: new penalized deviance = %g", pdev, "\n")
+#. R/gam.fit4.r: gettextf("Step halved: new penalized deviance = %g", pdev, domain = "R-mgcv")
+#: R/gam.fit3.r:0 R/gam.fit4.r:0
+msgid "Step halved: new penalized deviance = %g"
+msgstr ""
+
+#. R/gam.fit3.r: warning("Step size truncated due to divergence", call. = FALSE)
+#. R/gam.fit4.r: warning("Step size truncated due to divergence", call. = FALSE)
+#. R/mgcv.r: warning("Step size truncated due to divergence", call. = FALSE)
+#: R/gam.fit3.r:0 R/gam.fit4.r:0 R/mgcv.r:0
+msgid "Step size truncated due to divergence"
+msgstr ""
+
+#. R/gam.fit3.r: warning("Step size truncated: out of bounds", call. = FALSE)
+#. R/gam.fit4.r: warning("Step size truncated: out of bounds", call. = FALSE)
+#. R/mgcv.r: warning("Step size truncated: out of bounds", call. = FALSE)
+#: R/gam.fit3.r:0 R/gam.fit4.r:0 R/mgcv.r:0
+msgid "Step size truncated: out of bounds"
+msgstr ""
+
+#. R/mgcv.r: stop("Supplied matrix not symmetric")
+#: R/mgcv.r:0
+msgid "Supplied matrix not symmetric"
+msgstr "입력된 행렬은 대칭(symmetric)이 아닙니다."
+
+#. R/mgcv.r: warning("Supplied smoothing parameter vector is too short - ignored")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "Supplied smoothing parameter vector is too short - ignored"
+msgstr ""
+"제공된 평활화 모수(smoothing parameter) 벡터의 길이가 너무 짧아 사용되지 않습"
+"니다."
+
+#. R/gamm.r: gettext("TEST FAILED: edf.diff = %s", edf.diff, domain = "R-mgcv")
+#: R/gamm.r:0
+msgid "TEST FAILED: edf.diff = %s"
+msgstr ""
+
+#. R/gamm.r: gettextf("TEST FAILED: fit.cor = %s", fit.cor, domain = "R-mgcv")
+#: R/gamm.r:0
+msgid "TEST FAILED: fit.cor = %s"
+msgstr ""
+
+#. R/gamm.r: gettext("TEST PASSED", domain = "R-mgcv")
+#: R/gamm.r:0
+msgid "TEST PASSED"
+msgstr ""
+
+#. R/gamm.r: stop("Tensor product penalty rank appears to be too low: please email Simon.Wood@R-project.org with details.")
+#: R/gamm.r:0
+msgid ""
+"Tensor product penalty rank appears to be too low: please email Simon.Wood@R-"
+"project.org with details."
+msgstr ""
+
+#. R/gamm.r: gettext("Tensor product smooth term", domain = "R-mgcv")
+#: R/gamm.r:0
+msgid "Tensor product smooth term"
+msgstr ""
+
+#. R/plots.r: gettext("The Hessian was not positive definite.", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "The Hessian was not positive definite."
+msgstr ""
+
+#. R/plots.r: gettext("The Hessian was positive definite.", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "The Hessian was positive definite."
+msgstr ""
+
+#. R/plots.r: gettextf("The RMS %s score gradient at convergence was %s.", b$method, b$mgcv.conv$rms.grad,     domain = "R-mgcv")
+#: R/plots.r:0
+msgid "The RMS %s score gradient at convergence was %s."
+msgstr ""
+
+#. R/plots.r: gettextf("The estimated model rank was %s (maximum possible: %s)", b$mgcv.conv$rank,     b$mgcv.conv$full.rank, domain = "R-mgcv")
+#: R/plots.r:0
+msgid "The estimated model rank was %s (maximum possible: %s)"
+msgstr ""
+
+#. R/mgcv.r: gettext("The following arguments to anova.glm(..) are invalid and dropped: ", domain = "R-mgcv")
+#: R/mgcv.r:0
+msgid "The following arguments to anova.glm(..) are invalid and dropped:"
+msgstr "다음의 인자들은 anova.glm(..)에 유효하지 않으므로 사용되지 않습니다: "
+
+#. R/gam.fit3.r: gettext("The objective...", domain = "R-mgcv")
+#: R/gam.fit3.r:0
+msgid "The objective..."
+msgstr ""
+
+#. R/mgcv.r: gettextf("This is mgcv %s. For overview type 'help(\"mgcv-package\")'", paste(version,     collapse = ""), domain = "R-mgcv")
+#: R/mgcv.r:0
+msgid "This is mgcv %s. For overview type 'help(\"mgcv-package\")'"
+msgstr ""
+
+#. R/mgcv.r: gettextf("Total model degrees of freedom %s", sum(x$edf), domain = "R-mgcv")
+#: R/mgcv.r:0
+msgid "Total model degrees of freedom %s"
+msgstr ""
+
+#. R/efam.r: stop("Tweedie p must be in interval (a,b)")
+#: R/efam.r:0
+msgid "Tweedie p must be in interval (a,b)"
+msgstr "트위디(tweedie) p는 반드시 구간 (a,b)내에 존재해야 합니다."
+
+#. R/efam.r: gettextf("Tweedie(p=%s)", round(object$family$getTheta(TRUE), 3), domain = "R-mgcv")
+#: R/efam.r:0
+msgid "Tweedie(p=%s)"
+msgstr ""
+
+#. R/mgcv.r: warning("Unknown type, reset to terms")
+#: R/mgcv.r:0
+msgid "Unknown type, reset to terms"
+msgstr ""
+
+#. R/efam.r: stop("Using ziP for binary data makes no sense")
+#: R/efam.r:0
+msgid "Using ziP for binary data makes no sense"
+msgstr ""
+
+#. R/gamlss.r: stop("Using ziplss for binary data makes no sense")
+#: R/gamlss.r:0
+msgid "Using ziplss for binary data makes no sense"
+msgstr ""
+
+#. R/plots.r: gettextf("View variables must contain more than one value. view = c(%s,%s).", view[1],     view[2])
+#: R/plots.r:0
+msgid "View variables must contain more than one value. view = c(%s,%s)."
+msgstr ""
+
+#. R/mgcv.r: stop("You've got no model....")
+#: R/mgcv.r:0
+msgid "You've got no model...."
+msgstr ""
+
+#. R/mgcv.r: stop("a parametric penalty has wrong dimension")
+#: R/mgcv.r:0
+msgid "a parametric penalty has wrong dimension"
+msgstr ""
+
+#. R/gamm.r: stop("all elements of random list must be named")
+#: R/gamm.r:0
+msgid "all elements of random list must be named"
+msgstr ""
+"random 인자의 개별 구성요소에 이름이 부여되어 있는 리스트이어야 합니다."
+
+#. R/jagam.r: stop("all.terms argument not supported")
+#: R/jagam.r:0
+msgid "all.terms argument not supported"
+msgstr ""
+
+#. R/mgcv.r: stop("argument 'k' must be positive")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "argument 'k' must be positive"
+msgstr "인자 k는 반드시 양수(positive)이어야 합니다."
+
+#. R/smooth.r: warning("argument 'k' of 's()' function should be integer and has been rounded")
+#: R/smooth.r:0
+#, fuzzy
+msgid "argument 'k' of 's()' function should be integer and has been rounded"
+msgstr "s()의 인자 k는 반드시 정수이어야 하므로 반올림되었습니다."
+
+#. R/smooth.r: stop("arguments of smooth not same dimension")
+#. R/smooth.r: stop("arguments of smooth not same dimension")
+#. R/smooth.r: stop("arguments of smooth not same dimension")
+#. R/smooth.r: stop("arguments of smooth not same dimension")
+#. R/smooth.r: stop("arguments of smooth not same dimension")
+#: R/smooth.r:0
+msgid "arguments of smooth not same dimension"
+msgstr ""
+
+#. R/soap.r: stop("attempt to select non existent basis function")
+#: R/soap.r:0
+msgid "attempt to select non existent basis function"
+msgstr ""
+
+#. R/smooth.r: stop("attempt to use unsuitable marginal smooth class")
+#. R/smooth.r: stop("attempt to use unsuitable marginal smooth class")
+#: R/smooth.r:0
+msgid "attempt to use unsuitable marginal smooth class"
+msgstr ""
+
+#. R/smooth.r: warning("basis dimension is larger than number of unique covariates")
+#: R/smooth.r:0
+msgid "basis dimension is larger than number of unique covariates"
+msgstr ""
+
+#. R/smooth.r: warning("basis dimension reset to minimum possible")
+#: R/smooth.r:0
+msgid "basis dimension reset to minimum possible"
+msgstr ""
+
+#. R/smooth.r: stop("basis dimension too small for b-spline order")
+#. R/smooth.r: stop("basis dimension too small for b-spline order")
+#: R/smooth.r:0
+msgid "basis dimension too small for b-spline order"
+msgstr ""
+
+#. R/smooth.r: warning("basis dimension, k, increased to minimum possible\n")
+#. R/smooth.r: warning("basis dimension, k, increased to minimum possible\n")
+#. R/smooth.r: warning("basis dimension, k, increased to minimum possible\n")
+#: R/smooth.r:0
+msgid "basis dimension, k, increased to minimum possible"
+msgstr ""
+
+#. R/soap.r: stop("bnd must be a list")
+#: R/soap.r:0
+#, fuzzy
+msgid "bnd must be a list"
+msgstr "bnd는 반드시 리스트(list)이어야 합니다."
+
+#. R/soap.r: stop("bnd must be a list of boundary loops")
+#. R/soap.r: stop("bnd must be a list of boundary loops")
+#. R/soap.r: stop("bnd must be a list of boundary loops")
+#: R/soap.r:0
+msgid "bnd must be a list of boundary loops"
+msgstr ""
+
+#. R/jagam.r: warning("burnin too large, reset")
+#: R/jagam.r:0
+msgid "burnin too large, reset"
+msgstr ""
+
+#. R/jagam.r: stop("by.resids argument not supported")
+#: R/jagam.r:0
+msgid "by.resids argument not supported"
+msgstr ""
+
+#. R/gam.fit3.r: gettext("calling gdi...", domain = "R-mgcv")
+#: R/gam.fit3.r:0
+msgid "calling gdi..."
+msgstr ""
+
+#. R/soap.r: stop("can't soap smooth without a boundary")
+#. R/soap.r: stop("can't soap smooth without a boundary")
+#. R/soap.r: stop("can't soap smooth without a boundary")
+#: R/soap.r:0
+msgid "can't soap smooth without a boundary"
+msgstr ""
+
+#. R/bam.r: stop("cannot find valid starting values: please specify some")
+#. R/bam.r: stop("cannot find valid starting values: please specify some")
+#: R/bam.r:0
+msgid "cannot find valid starting values: please specify some"
+msgstr "사용가능한 초기값을 찾을 수 없습니다.  값을 지정해 주시길 바랍니다."
+
+#. R/bam.r: gettextf("chunk.size < number of coefficients. Reset to %d", chunk.size)
+#: R/bam.r:0
+msgid "chunk.size < number of coefficients. Reset to %d"
+msgstr ""
+
+#. R/jagam.r: stop("coefficient simulation data is missing")
+#: R/jagam.r:0
+msgid "coefficient simulation data is missing"
+msgstr ""
+
+#. R/soap.r: stop("coefficient vector wrong length")
+#: R/soap.r:0
+msgid "coefficient vector wrong length"
+msgstr ""
+
+#. R/plots.r: stop("color scheme not recognised")
+#: R/plots.r:0
+msgid "color scheme not recognised"
+msgstr "알 수 없는 색상표(color scheme)입니다."
+
+#. R/smooth.r: stop("components of knots relating to a single smooth must be of same length")
+#. R/smooth.r: stop("components of knots relating to a single smooth must be of same length")
+#. R/smooth.r: stop("components of knots relating to a single smooth must be of same length")
+#: R/smooth.r:0
+msgid "components of knots relating to a single smooth must be of same length"
+msgstr ""
+
+#. R/gam.fit4.r: gettextf("cor dH/drho[%d] = %s", i, cor(as.numeric(b$dH[[i]]), as.numeric(fd.dH[[i]])),     domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "cor dH/drho[%d] = %s"
+msgstr ""
+
+#. R/gam.fit4.r: gettextf("cor db/drho[%d] = %s", i, cor(b$db.drho[, i], fd.br[, i]), domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "cor db/drho[%d] = %s"
+msgstr ""
+
+#. R/sparse.r: stop("cubic spline only deals with 1D data")
+#: R/sparse.r:0
+msgid "cubic spline only deals with 1D data"
+msgstr ""
+"삼차 스플라인(cubic spline)은 오로지 1차원 데이터(1D data)만을 다룹니다."
+
+#. R/smooth.r: stop("data contain regions that are not contained in the knot specification")
+#: R/smooth.r:0
+msgid "data contain regions that are not contained in the knot specification"
+msgstr ""
+
+#. R/soap.r: stop("data outside soap boundary")
+#. R/soap.r: stop("data outside soap boundary")
+#. R/soap.r: stop("data outside soap boundary")
+#: R/soap.r:0
+msgid "data outside soap boundary"
+msgstr ""
+
+#. R/plots.r: stop("data vectors are of different lengths")
+#: R/plots.r:0
+msgid "data vectors are of different lengths"
+msgstr "데이터 벡터(data vectors) d1과 d2의 길이가 서로 다릅니다."
+
+#. R/gam.fit3.r: gettext("differences", domain = "R-mgcv")
+#: R/gam.fit3.r:0
+msgid "differences"
+msgstr ""
+
+#. R/smooth.r: warning("dimension of 'fx' is wrong")
+#: R/smooth.r:0
+#, fuzzy
+msgid "dimension of 'fx' is wrong"
+msgstr "fx의 차원(dimension)이 올바르지 않습니다."
+
+#. R/mgcv.r: stop("dimensions of supplied 'w' argument is wrong")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "dimensions of supplied 'w' argument is wrong"
+msgstr "입력된 w의 차원(dimensions)가 올바르지 않습니다."
+
+#. R/gam.sim.r: stop("distribution was not recognised")
+#: R/gam.sim.r:0
+#, fuzzy
+msgid "distribution was not recognised"
+msgstr "dist의 정보를 찾을 수 없습니다."
+
+#. R/gam.fit3.r: gettext("done!", domain = "R-mgcv")
+#: R/gam.fit3.r:0
+msgid "done!"
+msgstr ""
+
+#. R/plots.r: gettext("effects", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "effects"
+msgstr ""
+
+#. R/plots.r: gettextf("eigenvalue range [%s, %s].", min(ev), max(ev), domain = "R-mgcv")
+#: R/plots.r:0
+msgid "eigenvalue range [%s, %s]."
+msgstr ""
+
+#. R/mgcv.r: stop("elements of 'min.sp' argument must be non negative")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "elements of 'min.sp' argument must be non negative"
+msgstr "min.sp의 구성요소는 반드시 음수이어서는 안됩니다."
+
+#. R/gam.fit4.r: stop("empty models are not available")
+#: R/gam.fit4.r:0
+#, fuzzy
+msgid "empty models are not available"
+msgstr "사용할 수 있는 모형이 아닙니다 (설명변수가 없습니다)."
+
+#. R/smooth.r: stop("factor 'by' variables can not be used with matrix arguments")
+#: R/smooth.r:0
+msgid "factor 'by' variables can not be used with matrix arguments"
+msgstr ""
+
+#. R/jagam.r: stop("family not implemented yet")
+#: R/jagam.r:0
+#, fuzzy
+msgid "family not implemented yet"
+msgstr "family에 대한 정보를 찾을 수 없습니다."
+
+#. R/bam.r: stop("family not recognized")
+#. R/gam.fit3.r: stop("family not recognized")
+#. R/gam.fit3.r: stop("family not recognized")
+#. R/gamm.r: stop("family not recognized")
+#. R/jagam.r: stop("family not recognized")
+#. R/mgcv.r: stop("family not recognized")
+#: R/bam.r:0 R/gam.fit3.r:0 R/gamm.r:0 R/jagam.r:0 R/mgcv.r:0
+msgid "family not recognized"
+msgstr "family에 대한 정보를 찾을 수 없습니다."
+
+#. R/fast-REML.r: warning("fast REML optimizer reached iteration limit")
+#: R/fast-REML.r:0
+msgid "fast REML optimizer reached iteration limit"
+msgstr ""
+
+#. R/soap.r: stop("faulty bnd")
+#. R/soap.r: stop("faulty bnd")
+#. R/soap.r: stop("faulty bnd")
+#. R/soap.r: stop("faulty bnd")
+#. R/soap.r: stop("faulty bnd")
+#. R/soap.r: stop("faulty bnd")
+#: R/soap.r:0
+msgid "faulty bnd"
+msgstr ""
+
+#. R/bam.r: warning("fitted probabilities numerically 0 or 1 occurred")
+#. R/bam.r: warning("fitted probabilities numerically 0 or 1 occurred")
+#. R/gam.fit3.r: warning("fitted probabilities numerically 0 or 1 occurred")
+#. R/mgcv.r: warning("fitted probabilities numerically 0 or 1 occurred")
+#: R/bam.r:0 R/gam.fit3.r:0 R/mgcv.r:0
+msgid "fitted probabilities numerically 0 or 1 occurred"
+msgstr "적합된 확률값이 수치적으로 0 또는 1 입니다."
+
+#. R/bam.r: warning("fitted rates numerically 0 occurred")
+#. R/bam.r: warning("fitted rates numerically 0 occurred")
+#. R/gam.fit3.r: warning("fitted rates numerically 0 occurred")
+#. R/mgcv.r: warning("fitted rates numerically 0 occurred")
+#: R/bam.r:0 R/gam.fit3.r:0 R/mgcv.r:0
+msgid "fitted rates numerically 0 occurred"
+msgstr "적합된 비율(rates)가 수치적으로 0입니다."
+
+#. R/smooth.r: stop("fs smooths can only have one factor argument")
+#: R/smooth.r:0
+msgid "fs smooths can only have one factor argument"
+msgstr ""
+
+#. R/fast-REML.r: gettext("full convergence", domain = "R-mgcv")
+#. R/gam.fit3.r: gettext("full convergence", domain = "R-mgcv")
+#. R/gam.fit3.r: gettext("full convergence", domain = "R-mgcv")
+#: R/fast-REML.r:0 R/gam.fit3.r:0
+msgid "full convergence"
+msgstr ""
+
+#. R/smooth.r: warning("fx length wrong from t2 term: ignored")
+#: R/smooth.r:0
+msgid "fx length wrong from t2 term: ignored"
+msgstr ""
+
+#. R/gamm.r: warning("gamm can not fix only some margins of tensor product.")
+#: R/gamm.r:0
+msgid "gamm can not fix only some margins of tensor product."
+msgstr ""
+
+#. R/gamm.r: stop("gamm can not handle linked smoothing parameters (probably from use of 'id' or adaptive smooths)")
+#: R/gamm.r:0
+msgid ""
+"gamm can not handle linked smoothing parameters (probably from use of 'id' "
+"or adaptive smooths)"
+msgstr ""
+
+#. R/gamm.r: stop("gamm models must have at least 1 smooth with unknown smoothing parameter or at least one other random effect")
+#: R/gamm.r:0
+msgid ""
+"gamm models must have at least 1 smooth with unknown smoothing parameter or "
+"at least one other random effect"
+msgstr ""
+
+#. R/gamm.r: warning("gamm not converged, try increasing niterPQL")
+#: R/gamm.r:0
+msgid "gamm not converged, try increasing niterPQL"
+msgstr "gamm이 수렴하지 않았습니다. niterPQL의 올려보면 어떨까요?"
+
+#. R/plots.r: stop("grid vectors are different lengths")
+#: R/plots.r:0
+msgid "grid vectors are different lengths"
+msgstr "그리드 벡터(grid vectors) g1과 g2의 길이가 서로 다릅니다."
+
+#. R/smooth.r: warning("handling 'by' variables in smooth constructors may not work with the summation convention")
+#: R/smooth.r:0
+msgid ""
+"handling 'by' variables in smooth constructors may not work with the "
+"summation convention"
+msgstr ""
+
+#. R/mgcv.r: stop("in.out incorrect: see documentation")
+#: R/mgcv.r:0
+msgid "in.out incorrect: see documentation"
+msgstr "in.out의 사용이 올바르지 않습니다:  도움말을 살펴보길 바랍니다."
+
+#. R/mgcv.r: stop("incorrect number of linear predictors for family")
+#: R/mgcv.r:0
+msgid "incorrect number of linear predictors for family"
+msgstr ""
+
+#. R/mgcv.r: stop("incorrect number of smoothing parameters supplied for a smooth term")
+#. R/mgcv.r: stop("incorrect number of smoothing parameters supplied for a smooth term")
+#: R/mgcv.r:0
+msgid "incorrect number of smoothing parameters supplied for a smooth term"
+msgstr ""
+
+#. R/gam.fit4.r: stop("indefinite penalized likelihood in 'gam.fit5()' function")
+#: R/gam.fit4.r:0
+msgid "indefinite penalized likelihood in 'gam.fit5()' function"
+msgstr ""
+
+#. R/mgcv.r: warning("initial parameters are very close to inequality constraints")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "initial parameters are very close to inequality constraints"
+msgstr "부등식으로 표현된 제약조건에 매우 가까이 놓여 있는 초기값입니다."
+
+#. R/mgcv.r: stop("initial parameters not feasible")
+#: R/mgcv.r:0
+msgid "initial parameters not feasible"
+msgstr "실행가능(feasible)한 초기모수값(initial parameters)이 아닙니다."
+
+#. R/mgcv.r: warning("initial point is very close to some inequality constraints")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "initial point is very close to some inequality constraints"
+msgstr "부등식으로 표현된 일부 제약조건에 매우 가까이 놓여 있는 초기값입니다."
+
+#. R/gamm.r: stop("inner groupings not nested in outer!!")
+#: R/gamm.r:0
+msgid "inner groupings not nested in outer!!"
+msgstr ""
+
+#. R/gam.fit3.r: gettextf("inner loop %d; can't correct step size", 1)
+#. R/gam.fit3.r: gettextf("inner loop %d; can't correct step size", 2)
+#. R/gam.fit3.r: gettextf("inner loop %d; can't correct step size", 3)
+#. R/gam.fit4.r: gettextf("inner loop %d; can't correct step size", 1)
+#. R/gam.fit4.r: gettextf("inner loop %d; can't correct step size", 2)
+#. R/gam.fit4.r: gettextf("inner loop %d; can't correct step size", 3)
+#. R/mgcv.r: gettextf("inner loop %d; can't correct step size", 1)
+#. R/mgcv.r: gettextf("inner loop %d; can't correct step size", 2)
+#: R/gam.fit3.r:0 R/gam.fit4.r:0 R/mgcv.r:0
+msgid "inner loop %d; can't correct step size"
+msgstr ""
+
+#. R/gam.fit3.r: stop("invalid 'family' argument")
+#. R/mgcv.r: stop("invalid 'family' argument")
+#: R/gam.fit3.r:0 R/mgcv.r:0
+#, fuzzy
+msgid "invalid 'family' argument"
+msgstr "`family' 인자의 값이 올바르지 않습니다."
+
+#. R/gamm.r: gettextf("iteration %d", i)
+#: R/gamm.r:0
+msgid "iteration %d"
+msgstr "%d번째 반복입니다."
+
+#. R/gam.fit3.r: gettext("iteration limit reached", domain = "R-mgcv")
+#. R/gam.fit3.r: gettext("iteration limit reached", domain = "R-mgcv")
+#: R/gam.fit3.r:0
+#, fuzzy
+msgid "iteration limit reached"
+msgstr "최대반복(iteration limit)에 도달했습니다: max abs grad = %g"
+
+#. R/gam.fit4.r: gettextf("iteration limit reached: max(|grad|) = %g", max(abs(grad)))
+#: R/gam.fit4.r:0
+#, fuzzy
+msgid "iteration limit reached: max(|grad|) = %g"
+msgstr "최대반복(iteration limit)에 도달했습니다: max abs grad = %g"
+
+#. R/mgcv.r: stop("iterative weights or data non-finite in gam.fit - regularization may help. See ?gam.control")
+#: R/mgcv.r:0
+msgid ""
+"iterative weights or data non-finite in gam.fit - regularization may help. "
+"See ?gam.control"
+msgstr ""
+
+#. R/jagam.r: stop("jagam requires a file for the JAGS model specification")
+#: R/jagam.r:0
+msgid "jagam requires a file for the JAGS model specification"
+msgstr ""
+
+#. R/soap.r: gettextf("knot %d is on or outside boundary", k)
+#: R/soap.r:0
+msgid "knot %d is on or outside boundary"
+msgstr ""
+
+#. R/smooth.r: stop("knot range does not include data")
+#. R/smooth.r: stop("knot range does not include data")
+#: R/smooth.r:0
+msgid "knot range does not include data"
+msgstr ""
+
+#. R/smooth.r: warning("knot range is so wide that there is *no* information about some basis coefficients")
+#. R/smooth.r: warning("knot range is so wide that there is *no* information about some basis coefficients")
+#: R/smooth.r:0
+msgid ""
+"knot range is so wide that there is *no* information about some basis "
+"coefficients"
+msgstr ""
+
+#. R/soap.r: stop("knots must be specified for soap")
+#. R/soap.r: stop("knots must be specified for soap")
+#. R/soap.r: stop("knots must be specified for soap")
+#: R/soap.r:0
+msgid "knots must be specified for soap"
+msgstr ""
+
+#. R/smooth.r: warning("length of sp incorrect in t2: ignored")
+#: R/smooth.r:0
+msgid "length of sp incorrect in t2: ignored"
+msgstr ""
+
+#. R/soap.r: stop("lengths of 'bs.dim' and 'bnd' components of 'object' argument are inconsistent")
+#. R/soap.r: stop("lengths of 'bs.dim' and 'bnd' components of 'object' argument are inconsistent")
+#. R/soap.r: stop("lengths of 'bs.dim' and 'bnd' components of 'object' argument are inconsistent")
+#: R/soap.r:0
+msgid ""
+"lengths of 'bs.dim' and 'bnd' components of 'object' argument are "
+"inconsistent"
+msgstr ""
+
+#. R/soap.r: stop("lengths of 'k' and 'bnd' arguments are inconsistent")
+#: R/soap.r:0
+#, fuzzy
+msgid "lengths of 'k' and 'bnd' arguments are inconsistent"
+msgstr "k와 bnd의 길이가 서로 일치하지 않습니다."
+
+#. R/plots.r: gettext("linear predictor", domain = "R-mgcv")
+#. R/plots.r: gettext("linear predictor", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "linear predictor"
+msgstr ""
+
+#. R/efam.r: gettextf("link \"%s\" is not available for Tweedie family", linktemp, collapse = "")
+#. R/gam.fit3.r: gettextf("link \"%s\" is not available for Tweedie family", linktemp)
+#: R/efam.r:0 R/gam.fit3.r:0
+#, fuzzy
+msgid "link \"%s\" is not available for Tweedie family"
+msgstr ""
+"트위디 페밀리(tweedie family)에 링크(link) \"%s\"는 사용할 수 없습니다."
+
+#. R/gam.fit3.r: stop("link is not implemented for extended families")
+#: R/gam.fit3.r:0
+#, fuzzy
+msgid "link is not implemented for extended families"
+msgstr "본 페밀리(family)에 사용가능한 링크(link)가 없습니다."
+
+#. R/gam.fit3.r: stop("link was not recognized")
+#: R/gam.fit3.r:0
+#, fuzzy
+msgid "link was not recognized"
+msgstr "알 수 없는 링크(link)입니다."
+
+#. R/gam.fit4.r: gettextf("log lik grad cor. = %s", cor(ll$lb, fdg), domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "log lik grad cor. = %s"
+msgstr ""
+
+#. R/gam.fit4.r: gettextf("log lik hess cor. = %s", cor(as.numeric(ll$lbb), as.numeric(fdh)), domain = "R-mgcv")
+#: R/gam.fit4.r:0
+msgid "log lik hess cor. = %s"
+msgstr ""
+
+#. R/smooth.r: stop("lower bound >= upper bound in call passed to 'mono.con()'")
+#: R/smooth.r:0
+#, fuzzy
+msgid "lower bound >= upper bound in call passed to 'mono.con()'"
+msgstr ""
+"mono.con()함수에 전달된 lower 인자의 값이 upper 인자의 값보다 크거나 같습니"
+"다."
+
+#. R/mgcv.r: stop("matrix 'A' is not square")
+#: R/mgcv.r:0
+msgid "matrix 'A' is not square"
+msgstr ""
+
+#. R/mgcv.r: stop("maximum number of iterations must be > 0")
+#: R/mgcv.r:0
+msgid "maximum number of iterations must be > 0"
+msgstr "최대 반복수(iteration)는 반드시 0 보다 커야 합니다."
+
+#. R/mgcv.r: stop("method was not recognised")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "method was not recognised"
+msgstr "알 수 없는 method입니다."
+
+#. R/bam.r: warning("min.sp not supported with fast REML computation, and ignored.")
+#: R/bam.r:0
+msgid "min.sp not supported with fast REML computation, and ignored."
+msgstr ""
+"fREML(fast REML 연산)을 method로 선택한 경우 min.sp는 사용되지 않습니다."
+
+#. R/smooth.r: stop("mismatch between nb/polys supplied area names and data area names")
+#: R/smooth.r:0
+msgid "mismatch between nb/polys supplied area names and data area names"
+msgstr ""
+
+#. R/mgcv.r: warning("model has repeated 1-d smooths of same variable")
+#: R/mgcv.r:0
+msgid "model has repeated 1-d smooths of same variable"
+msgstr ""
+
+#. R/bam.r: warning("model matrix too dense for any possible benefit from sparse")
+#: R/bam.r:0
+msgid "model matrix too dense for any possible benefit from sparse"
+msgstr ""
+
+#. R/smooth.r: warning("more knots than data in a ds term: knots ignored")
+#: R/smooth.r:0
+msgid "more knots than data in a ds term: knots ignored"
+msgstr ""
+
+#. R/smooth.r: warning("more knots than data in a tp term: knots ignored")
+#: R/smooth.r:0
+msgid "more knots than data in a tp term: knots ignored"
+msgstr ""
+
+#. R/smooth.r: warning("more knots than data in an sos term: knots ignored")
+#: R/smooth.r:0
+msgid "more knots than data in an sos term: knots ignored"
+msgstr ""
+
+#. R/smooth.r: stop("more knots than unique data values is not allowed")
+#: R/smooth.r:0
+msgid "more knots than unique data values is not allowed"
+msgstr ""
+
+#. R/mvam.r: stop("mvn requires 2 or more dimensional data")
+#: R/mvam.r:0
+msgid "mvn requires 2 or more dimensional data"
+msgstr "mvn은 둘 이상의 차원을 가진 데이터를 필요로 합니다."
+
+#. R/plots.r: stop("names of 'z' and 'pc' must match")
+#: R/plots.r:0
+#, fuzzy
+msgid "names of 'z' and 'pc' must match"
+msgstr ""
+"z의 구성요소에 주어진 이름들과 pc의 구성요소에 주어진 이름들은 반드시 서로 일"
+"치해야 합니다."
+
+#. R/soap.r: stop("need at least one interior knot")
+#. R/soap.r: stop("need at least one interior knot")
+#: R/soap.r:0
+msgid "need at least one interior knot"
+msgstr "최소한 하나 이상의 내부 노트(interior knot)가 필요합니다."
+
+#. R/efam.r: stop("negative values not allowed for the negative binomial family")
+#. R/gam.fit3.r: stop("negative values not allowed for the negative binomial family")
+#: R/efam.r:0 R/gam.fit3.r:0
+msgid "negative values not allowed for the negative binomial family"
+msgstr ""
+"음이항분포 페밀리(negative binomial family)에 음의 값은 사용할 수 없습니다."
+
+#. R/efam.r: stop("negative values not allowed for the zero inflated Poisson family")
+#: R/efam.r:0
+msgid "negative values not allowed for the zero inflated Poisson family"
+msgstr ""
+"영과잉 포아송 페밀리(zero inflated Poisson family)에는 음의 값을 사용할 수 없"
+"습니다."
+
+#. R/mgcv.r: stop("newdata is a model.frame: it should contain all required variables\n")
+#: R/mgcv.r:0
+msgid "newdata is a model.frame: it should contain all required variables"
+msgstr ""
+"newdata는 model.frame이므로 필요한 모든 변수들을 포함하고 있어야 합니다."
+
+#. R/gam.fit3.r: gettextf("newton max(|grad|) = %s", max(abs(grad)), domain = "R-mgcv")
+#: R/gam.fit3.r:0
+msgid "newton max(|grad|) = %s"
+msgstr ""
+
+#. R/mgcv.r: stop("nlm.fd not available with negative binomial Theta estimation")
+#: R/mgcv.r:0
+msgid "nlm.fd not available with negative binomial Theta estimation"
+msgstr "nlm.fd 방법은 음이항분포의 Theta 추정에 사용할 수 없습니다."
+
+#. R/mgcv.r: stop("nlm.fd only available for GCV/UBRE")
+#: R/mgcv.r:0
+msgid "nlm.fd only available for GCV/UBRE"
+msgstr "nlm.fd 방법은 오로지 GCV/UBRE인 경우에만 사용할 수 있습니다."
+
+#. R/plots.r: warning("no automatic plotting for smooths of more than one variable")
+#: R/plots.r:0
+msgid "no automatic plotting for smooths of more than one variable"
+msgstr ""
+
+#. R/plots.r: warning("no automatic plotting for smooths of more than two variables")
+#: R/plots.r:0
+msgid "no automatic plotting for smooths of more than two variables"
+msgstr ""
+
+#. R/fast-REML.r: gettext("no convergence in 200 iterations", domain = "R-mgcv")
+#: R/fast-REML.r:0
+msgid "no convergence in 200 iterations"
+msgstr ""
+
+#. R/smooth.r: stop("no data to predict at")
+#. R/smooth.r: stop("no data to predict at")
+#. R/smooth.r: stop("no data to predict at")
+#: R/smooth.r:0
+msgid "no data to predict at"
+msgstr ""
+
+#. R/soap.r: stop("no free coefs in sf smooth")
+#: R/soap.r:0
+msgid "no free coefs in sf smooth"
+msgstr ""
+
+#. R/smooth.r: stop("no spatial information provided!")
+#: R/smooth.r:0
+msgid "no spatial information provided!"
+msgstr ""
+
+#. R/gam.fit3.r: stop("no valid set of coefficients has been found:please supply starting values",     call. = FALSE)
+#. R/gam.fit4.r: stop("no valid set of coefficients has been found:please supply starting values",     call. = FALSE)
+#. R/mgcv.r: stop("no valid set of coefficients has been found:please supply starting values",     call. = FALSE)
+#: R/gam.fit3.r:0 R/gam.fit4.r:0 R/mgcv.r:0
+msgid ""
+"no valid set of coefficients has been found:please supply starting values"
+msgstr ""
+
+#. R/mgcv.r: warning("non-existent terms requested - ignoring")
+#: R/mgcv.r:0
+msgid "non-existent terms requested - ignoring"
+msgstr ""
+
+#. R/mgcv.r: warning("not all required variables have been supplied in  newdata!\n")
+#: R/mgcv.r:0
+msgid "not all required variables have been supplied in  newdata!"
+msgstr "필요한 모든 변수들을 newdata로부터 찾을 수 없습니다!"
+
+#. R/sparse.r: stop("not enough unique values to find k nearest")
+#: R/sparse.r:0
+msgid "not enough unique values to find k nearest"
+msgstr ""
+
+#. R/mgcv.r: stop("nothing to do for this model")
+#: R/mgcv.r:0
+msgid "nothing to do for this model"
+msgstr ""
+
+#. R/smooth.r: stop("number of supplied knots != k for a cc smooth")
+#: R/smooth.r:0
+msgid "number of supplied knots != k for a cc smooth"
+msgstr ""
+
+#. R/smooth.r: stop("number of supplied knots != k for a cr smooth")
+#: R/smooth.r:0
+msgid "number of supplied knots != k for a cr smooth"
+msgstr ""
+
+#. R/sparse.r: stop("object not fully initialized")
+#: R/sparse.r:0
+msgid "object not fully initialized"
+msgstr "완전히 초기화된 object가 아닙니다."
+
+#. R/smooth.r: warning("one or more supplied k too small - reset to default")
+#. R/smooth.r: warning("one or more supplied k too small - reset to default")
+#: R/smooth.r:0
+msgid "one or more supplied k too small - reset to default"
+msgstr ""
+
+#. R/sparse.r: stop("only deals with 2D case")
+#: R/sparse.r:0
+msgid "only deals with 2D case"
+msgstr "2차원(2D)인 경우만을 다룰 수 있습니다."
+
+#. R/smooth.r: warning("only first element of 'id' used")
+#. R/smooth.r: warning("only first element of 'id' used")
+#. R/smooth.r: warning("only first element of 'id' used")
+#: R/smooth.r:0
+#, fuzzy
+msgid "only first element of 'id' used"
+msgstr "`id'의 첫번째 요소만이 사용되었습니다."
+
+#. R/gamm.r: stop("only one level of smooth nesting is supported by gamm")
+#: R/gamm.r:0
+msgid "only one level of smooth nesting is supported by gamm"
+msgstr ""
+
+#. R/mgcv.r: warning("only outer methods 'newton' & 'bfgs' supports 'negbin' family and theta selection: reset")
+#: R/mgcv.r:0
+#, fuzzy
+msgid ""
+"only outer methods 'newton' & 'bfgs' supports 'negbin' family and theta "
+"selection: reset"
+msgstr ""
+"오로지 `newton'와 `bfgs' 방법만이 `negbin' 페밀리와 theta 선택에 사용될 수 있"
+"습니다: reset"
+
+#. R/gam.fit3.r: gettextf("only scalar '%s' and '%s' arguments are allowed", "rho", "theta")
+#. R/gam.fit3.r: gettextf("only scalar '%s' and '%s' arguments are allowed", "p", "phi")
+#: R/gam.fit3.r:0
+#, fuzzy
+msgid "only scalar '%s' and '%s' arguments are allowed"
+msgstr "`rho'와 `theta'는 오로지 스칼라(scalar) 값만을 가질 수 있습니다."
+
+#. R/smooth.r: warning("ord contains out of range orders (which will be ignored)")
+#: R/smooth.r:0
+msgid "ord contains out of range orders (which will be ignored)"
+msgstr ""
+
+#. R/smooth.r: warning("ord is wrong. reset to NULL")
+#: R/smooth.r:0
+#, fuzzy
+msgid "ord is wrong. reset to NULL"
+msgstr "ord가 올바르지 않아 NULL로 설정합니다."
+
+#. R/smooth.r: stop("order too low")
+#: R/smooth.r:0
+msgid "order too low"
+msgstr ""
+
+#. R/mgcv.r: warning("p-values for any terms that can be penalized to zero will be unreliable: refit model to fix this")
+#: R/mgcv.r:0
+msgid ""
+"p-values for any terms that can be penalized to zero will be unreliable: "
+"refit model to fix this"
+msgstr ""
+
+#. R/mgcv.r: warning("p-values may give low power in some circumstances")
+#: R/mgcv.r:0
+msgid "p-values may give low power in some circumstances"
+msgstr ""
+
+#. R/mgcv.r: warning("p-values may give very low power")
+#: R/mgcv.r:0
+msgid "p-values may give very low power"
+msgstr ""
+
+#. R/mgcv.r: warning("p-values un-reliable")
+#: R/mgcv.r:0
+msgid "p-values un-reliable"
+msgstr ""
+
+#. R/gam.fit3.r: gettextf("penalized deviance = %s", pdev, domain = "R-mgcv")
+#. R/gam.fit4.r: gettextf("penalized deviance = %s", pdev, domain = "R-mgcv")
+#: R/gam.fit3.r:0 R/gam.fit4.r:0
+msgid "penalized deviance = %s"
+msgstr ""
+
+#. R/smooth.r: stop("penalty basis too large for smoothing basis")
+#. R/smooth.r: stop("penalty basis too large for smoothing basis")
+#: R/smooth.r:0
+msgid "penalty basis too large for smoothing basis"
+msgstr ""
+
+#. R/smooth.r: stop("penalty basis too small")
+#: R/smooth.r:0
+msgid "penalty basis too small"
+msgstr ""
+
+#. R/smooth.r: stop("penalty column names don't match supplied area names!")
+#: R/smooth.r:0
+msgid "penalty column names don't match supplied area names!"
+msgstr ""
+
+#. R/smooth.r: stop("penalty matrix, boundary polygons and/or neighbours list must be supplied in xt")
+#: R/smooth.r:0
+msgid ""
+"penalty matrix, boundary polygons and/or neighbours list must be supplied in "
+"xt"
+msgstr ""
+
+#. R/smooth.r: stop("penalty order too high for basis dimension")
+#: R/smooth.r:0
+msgid "penalty order too high for basis dimension"
+msgstr ""
+
+#. R/mgcv.r: stop("predict.gam can only be used to predict from gam objects")
+#: R/mgcv.r:0
+msgid "predict.gam can only be used to predict from gam objects"
+msgstr ""
+
+#. R/gamm.r: stop("random argument must be a *named* list.")
+#: R/gamm.r:0
+msgid "random argument must be a *named* list."
+msgstr ""
+"random 인자는 개별 구성요소에 이름이 부여되어 있는 리스트(list)이어야 합니다."
+
+#. R/smooth.r: stop("random effects don't work with ids")
+#: R/smooth.r:0
+msgid "random effects don't work with ids"
+msgstr ""
+
+#. R/smooth.r: warning("reparameterization unstable for margin: not done")
+#: R/smooth.r:0
+msgid "reparameterization unstable for margin: not done"
+msgstr ""
+
+#. R/jagam.r: stop("residuals argument not supported")
+#: R/jagam.r:0
+#, fuzzy
+msgid "residuals argument not supported"
+msgstr ""
+"plot.gam에 전달되는 인자 residuals의 길이가 올바르지 않아 무시되었습니다. "
+
+#. R/plots.r: warning("residuals argument to plot.gam is wrong length: ignored")
+#: R/plots.r:0
+msgid "residuals argument to plot.gam is wrong length: ignored"
+msgstr ""
+"plot.gam에 전달되는 인자 residuals의 길이가 올바르지 않아 무시되었습니다. "
+
+#. R/plots.r: gettext("response", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "response"
+msgstr ""
+
+#. R/jagam.r: warning("rho missing from simulation data edf.type reset to 2")
+#: R/jagam.r:0
+msgid "rho missing from simulation data edf.type reset to 2"
+msgstr ""
+
+#. R/smooth.r: warning("s value increased")
+#: R/smooth.r:0
+msgid "s value increased"
+msgstr ""
+
+#. R/smooth.r: warning("s value modified to give continuous function")
+#: R/smooth.r:0
+msgid "s value modified to give continuous function"
+msgstr ""
+
+#. R/smooth.r: warning("s value reduced")
+#: R/smooth.r:0
+msgid "s value reduced"
+msgstr ""
+
+#. R/efam.r: warning("saturated likelihood may be inaccurate")
+#: R/efam.r:0
+msgid "saturated likelihood may be inaccurate"
+msgstr ""
+
+#. R/gam.fit3.r: stop("scale parameter must be positive")
+#: R/gam.fit3.r:0
+msgid "scale parameter must be positive"
+msgstr "척도모수(scale parameter)는 반드시 양수이어야 합니다."
+
+#. R/efam.r: stop("scaled t df must be >2")
+#: R/efam.r:0
+msgid "scaled t df must be >2"
+msgstr "스케일드 t 분포(scaled t)의 자유도(df)는 2보다 커야합니다."
+
+#. R/plots.r: gettextf("scheme should be a single number, or a vector with %d elements", m)
+#: R/plots.r:0
+msgid "scheme should be a single number, or a vector with %d elements"
+msgstr ""
+
+#. R/gamm.r: stop("side conditions are not allowed for nested smooths")
+#: R/gamm.r:0
+msgid "side conditions are not allowed for nested smooths"
+msgstr ""
+
+#. R/mgcv.r: stop("silly tolerance supplied")
+#: R/mgcv.r:0
+msgid "silly tolerance supplied"
+msgstr "허용오차(tolerance)의 값이 올바르게 지정되지 않았습니다."
+
+#. R/mgcv.r: warning("silly value supplied for rank.tol: reset to square root of machine precision")
+#: R/mgcv.r:0
+#, fuzzy
+msgid ""
+"silly value supplied for rank.tol: reset to square root of machine precision"
+msgstr ""
+"rank.tol에 주어진 값은 올바르지 않습니다: reset to square root of machine "
+"precision."
+
+#. R/smooth.r: warning("single penalty tensor product smooths are deprecated and likely to be removed soon")
+#: R/smooth.r:0
+msgid ""
+"single penalty tensor product smooths are deprecated and likely to be "
+"removed soon"
+msgstr ""
+
+#. R/mgcv.r: stop("singular values not returned in order")
+#: R/mgcv.r:0
+msgid "singular values not returned in order"
+msgstr ""
+
+#. R/smooth.r: warning("smooth objects should not have a qrc attribute")
+#: R/smooth.r:0
+msgid "smooth objects should not have a qrc attribute"
+msgstr ""
+
+#. R/jagam.r: warning("smoothing parameter prior choise not recognised, reset to gamma")
+#: R/jagam.r:0
+msgid "smoothing parameter prior choise not recognised, reset to gamma"
+msgstr ""
+
+#. R/soap.r: stop("soap films are bivariate only")
+#. R/soap.r: stop("soap films are bivariate only")
+#. R/soap.r: stop("soap films are bivariate only")
+#: R/soap.r:0
+msgid "soap films are bivariate only"
+msgstr ""
+
+#. R/smooth.r: warning("something wrong with argument 'd'")
+#. R/smooth.r: warning("something wrong with argument 'd'")
+#: R/smooth.r:0
+#, fuzzy
+msgid "something wrong with argument 'd'"
+msgstr "zlim이 올바르지 않습니다."
+
+#. R/jagam.r: stop("sorry link not yet handled")
+#: R/jagam.r:0
+msgid "sorry link not yet handled"
+msgstr ""
+
+#. R/plots.r: warning("sorry no option for contouring with errors: try plot.gam")
+#: R/plots.r:0
+msgid "sorry no option for contouring with errors: try plot.gam"
+msgstr ""
+
+#. R/mgcv.r: warning("sorry, general families currently ignore offsets")
+#. R/mgcv.r: warning("sorry, general families currently ignore offsets")
+#: R/mgcv.r:0
+msgid "sorry, general families currently ignore offsets"
+msgstr ""
+
+#. R/bam.r: warning("sparse=TRUE not supported with fast REML, reset to REML.")
+#: R/bam.r:0
+msgid "sparse=TRUE not supported with fast REML, reset to REML."
+msgstr ""
+"sparse=TRUE인 경우 method는 fREML(fast REML)을 사용할 수 없으므로 REML을 사용"
+"합니다."
+
+#. R/fast-REML.r: gettext("step failed", domain = "R-mgcv")
+#. R/gam.fit3.r: gettext("step failed", domain = "R-mgcv")
+#. R/gam.fit3.r: gettext("step failed", domain = "R-mgcv")
+#: R/fast-REML.r:0 R/gam.fit3.r:0
+msgid "step failed"
+msgstr ""
+
+#. R/gam.fit4.r: gettextf("step failed: max(|grad|) = %s", max(abs(grad)))
+#: R/gam.fit4.r:0
+msgid "step failed: max(|grad|) = %s"
+msgstr ""
+
+#. R/plots.r: stop("supplied dist negative")
+#: R/plots.r:0
+msgid "supplied dist negative"
+msgstr "입력된 dist에서 음수가 발견되었습니다."
+
+#. R/smooth.r: stop("supplied penalty not square!")
+#: R/smooth.r:0
+msgid "supplied penalty not square!"
+msgstr ""
+
+#. R/smooth.r: stop("supplied penalty wrong dimension!")
+#: R/smooth.r:0
+msgid "supplied penalty wrong dimension!"
+msgstr ""
+
+#. R/gamm.r: stop("te smooths not useable with gamm4: use t2 instead")
+#: R/gamm.r:0
+msgid "te smooths not useable with gamm4: use t2 instead"
+msgstr ""
+
+#. R/gamm.r: gettext("testing covariate scale invariance ... ", domain = "R-mgcv")
+#: R/gamm.r:0
+msgid "testing covariate scale invariance ..."
+msgstr ""
+
+#. R/gamm.r: gettext("testing equivalence of gam and gamm with same sp ... ", domain = "R-mgcv")
+#: R/gamm.r:0
+msgid "testing equivalence of gam and gamm with same sp ..."
+msgstr ""
+
+#. R/gamm.r: gettext("testing equivalence of te(x) and s(x) ... ", domain = "R-mgcv")
+#: R/gamm.r:0
+msgid "testing equivalence of te(x) and s(x) ..."
+msgstr ""
+
+#. R/gamm.r: gettext("testing invariance w.r.t. response ... ", domain = "R-mgcv")
+#: R/gamm.r:0
+msgid "testing invariance w.r.t. response ..."
+msgstr ""
+
+#. R/smooth.r: stop("the adaptive smooth class is limited to 1 or 2 covariates")
+#: R/smooth.r:0
+msgid "the adaptive smooth class is limited to 1 or 2 covariates"
+msgstr ""
+
+#. R/plots.r: gettext("theoretical quantiles", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "theoretical quantiles"
+msgstr ""
+
+#. R/smooth.r: gettextf("there should be %d knots supplied", nk)
+#: R/smooth.r:0
+msgid "there should be %d knots supplied"
+msgstr ""
+
+#. R/smooth.r: gettextf("there should be %d supplied knots", nk)
+#. R/smooth.r: gettextf("there should be %d supplied knots", nk + 2 * m[1] + 2)
+#: R/smooth.r:0
+msgid "there should be %d supplied knots"
+msgstr ""
+
+#. R/smooth.r: stop("too few knots")
+#. R/smooth.r: stop("too few knots")
+#: R/smooth.r:0
+msgid "too few knots"
+msgstr "노트(knots)의 개수 nk가 너무 작은 값을 가집니다."
+
+#. R/mgcv.r: gettextf(" total df = %s", round(sum(x$edf), digits = 2), domain = "R-mgcv")
+#: R/mgcv.r:0
+msgid "total df = %s"
+msgstr ""
+
+#. R/mgcv.r: warning("type 'iterms' is not available for multiple predictor cases")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "type 'iterms' is not available for multiple predictor cases"
+msgstr "gaulss 모형의 모수 mu에 사용가능한 링크(link)가 아닙니다."
+
+#. R/plots.r: stop("type must be \"link\" or \"response\"")
+#: R/plots.r:0
+msgid "type must be \"link\" or \"response\""
+msgstr "type은 반드시 \"link\" 또는 \"response\"이어야 합니다."
+
+#. R/jagam.r: stop("unconditional argument not meaningful here")
+#. R/jagam.r: warning("unconditional argument not meaningful here")
+#: R/jagam.r:0
+#, fuzzy
+msgid "unconditional argument not meaningful here"
+msgstr "실행가능(feasible)한 초기모수값(initial parameters)이 아닙니다."
+
+#. R/smooth.r: stop("unimplemented sparse constraint type requested")
+#: R/smooth.r:0
+msgid "unimplemented sparse constraint type requested"
+msgstr ""
+
+#. R/mgcv.r: stop("unknown optimizer")
+#: R/mgcv.r:0
+msgid "unknown optimizer"
+msgstr ""
+
+#. R/mgcv.r: stop("unknown outer optimization method")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "unknown outer optimization method"
+msgstr "알 수 없는 최적화 방법(optimization method)입니다."
+
+#. R/mgcv.r: stop("unknown smoothness selection criterion")
+#: R/mgcv.r:0
+msgid "unknown smoothness selection criterion"
+msgstr "알 수 없는 평활도 선택기준(smoothness selection criterion)입니다."
+
+#. R/gam.fit3.r: stop("unrecognized (vector?) link")
+#: R/gam.fit3.r:0
+msgid "unrecognized (vector?) link"
+msgstr "알 수 없는 (벡터 또는) 링크입니다."
+
+#. R/gam.fit3.r: stop("unsupported order of differentiation requested of 'gam.fit3()'")
+#: R/gam.fit3.r:0
+msgid "unsupported order of differentiation requested of 'gam.fit3()'"
+msgstr ""
+
+#. R/bam.r: stop("unsupported smoothness selection method")
+#: R/bam.r:0
+#, fuzzy
+msgid "unsupported smoothness selection method"
+msgstr "지원되지 않는 평활화 선택법(smoothness selection method)입니다."
+
+#. R/bam.r: warning("value of 'samfrac' argument is too small - ignored")
+#: R/bam.r:0
+#, fuzzy
+msgid "value of 'samfrac' argument is too small - ignored"
+msgstr "samfrac의 값이 너무 작기 때문에 이용되지 않습니다."
+
+#. R/mgcv.r: stop("value of epsilon must be > 0")
+#: R/mgcv.r:0
+msgid "value of epsilon must be > 0"
+msgstr "epsilon의 값은 반드시 0 보다 커야 합니다."
+
+#. R/efam.r: stop("values out of range")
+#: R/efam.r:0
+msgid "values out of range"
+msgstr "범위 외의 값을 가집니다."
+
+#. R/soap.r: stop("variable names don't match boundary names")
+#. R/soap.r: stop("variable names don't match boundary names")
+#: R/soap.r:0
+msgid "variable names don't match boundary names"
+msgstr ""
+
+#. R/gam.fit3.r: stop("variance function not recognized for quasi")
+#: R/gam.fit3.r:0
+msgid "variance function not recognized for quasi"
+msgstr ""
+"family에 quasi가 주어진 경우에 사용되어야 하는 분산함수(variance function)을 "
+"찾을 수 없습니다."
+
+#. R/plots.r: gettextf("view variables must be one of %s", paste(v.names, collapse = ", "))
+#: R/plots.r:0
+msgid "view variables must be one of %s"
+msgstr "view 변수들은 반드시 %s 중에 하나 이어야 합니다."
+
+#. R/jagam.r: warning("weights ignored")
+#: R/jagam.r:0
+msgid "weights ignored"
+msgstr ""
+
+#. R/gamm.r: stop("weights must be like glm weights for generalized case")
+#: R/gamm.r:0
+msgid "weights must be like glm weights for generalized case"
+msgstr ""
+
+#. R/soap.r: stop("x and y must be same length")
+#: R/soap.r:0
+msgid "x and y must be same length"
+msgstr "x의 길이와 y의 길이는 반드시 같아야 합니다."
+
+#. R/plots.r: ngettext(boi$iter, "%s after %d iteration.", "%s after %d iterations.", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "%s after %d iteration."
+msgid_plural "%s after %d iterations."
+msgstr[0] ""
+
+#. R/plots.r: ngettext(b$mgcv.conv$iter, "Smoothing parameter selection converged after %d iteration by steepest descent step failure.",     "Smoothing parameter selection converged after %d iterations by steepest descent step failure.",     domain = "R-mgcv")
+#: R/plots.r:0
+msgid ""
+"Smoothing parameter selection converged after %d iteration by steepest "
+"descent step failure."
+msgid_plural ""
+"Smoothing parameter selection converged after %d iterations by steepest "
+"descent step failure."
+msgstr[0] ""
+
+#. R/plots.r: ngettext(b$mgcv.conv$iter, "Smoothing parameter selection converged after %d iteration.",     "Smoothing parameter selection converged after %d iterations.", domain = "R-mgcv")
+#: R/plots.r:0
+msgid "Smoothing parameter selection converged after %d iteration."
+msgid_plural "Smoothing parameter selection converged after %d iterations."
+msgstr[0] ""
+
+#~ msgid "non-finite coefficients at iteration %d"
+#~ msgstr ""
+#~ "%d번째 반복에서 얻어진 계수(coefficients)가 유한(finite)한 값을 가지지 않"
+#~ "습니다."
+
+#~ msgid "algorithm did not converge"
+#~ msgstr "알고리즘이 수렴하지 않습니다."
+
+#~ msgid "non-finite coefficients at iteration"
+#~ msgstr ""
+#~ "다음의 반복단계에서 얻어진 계수(coefficients)의 값이 유한(finite)하지 않습"
+#~ "니다."
+
+#~ msgid ""
+#~ "link not available for negative binomial family; available links are "
+#~ "\"identity\", \"log\" and \"sqrt\""
+#~ msgstr ""
+#~ "음이항분포 페밀리(negative binomial family)에 사용할 수 없는 링크(link)입"
+#~ "니다.  사용가능한 링크(link)에는 \"identity\", \"log\" 그리고 \"sqrt\"가 "
+#~ "있습니다."
+
+#~ msgid "fam not a family object"
+#~ msgstr "fam은 family라는 클래스를 가진 객체가 아닙니다."
+
+#~ msgid "family not recognised"
+#~ msgstr "family에 알 수 없는 값이 입력되었습니다."
+
+#~ msgid "only scalar `p' and `phi' allowed."
+#~ msgstr "`p'와 `phi'는 오로지 스칼라(scalar) 값만을 가질 수 있습니다."
+
+#~ msgid "Length of start should equal"
+#~ msgstr "start의 길이는 "
+
+#~ msgid "and correspond to initial coefs for"
+#~ msgstr ""
+#~ "와 같아야 하며 다음에 상응하는 계수(coef)들에 대한 초기값을 가지고 있어야 "
+#~ "합니다."
+
+#~ msgid "Non-finite coefficients at iteration"
+#~ msgstr ""
+#~ "다음의 반복에서 얻어진 계수의 추정치가 유한(finite)한 값을 가지지 않습니"
+#~ "다."
+
+#~ msgid "ziplss requires 2 links specified as character strings"
+#~ msgstr "ziplss 모형은 문자열로 표현된 2개의 링크(link)를 필요로 합니다."
+
+#~ msgid "link not available for"
+#~ msgstr "링크는"
+
+#~ msgid "parameter of ziplss"
+#~ msgstr "(ziplss의 모수)에 사용할 수 없습니다."
+
+#~ msgid "NA's in pdTens factor"
+#~ msgstr "pdTens 요인(factor)내에서 NA가 발견되었습니다."
+
+#~ msgid "NA's in pdTens matrix"
+#~ msgstr "pdTens 행렬(matrix)내에서 NA가 발견되었습니다."
+
+#~ msgid "An object of length"
+#~ msgstr "object의 길이"
+
+#~ msgid "does not match the required parameter size"
+#~ msgstr "요구되어지는 모수의 크기와 일치하지 않습니다."
+
+#~ msgid "No data supplied to gamm.setup"
+#~ msgstr "gamm.setup에 제공된 데이터가 없습니다."
+
+#~ msgid "nrow(M$X) != length(M$y)"
+#~ msgstr "nrow(M$X)의 값이 length(M$y)과 일치하지 않습니다."
+
+#~ msgid "ncol(M$X) != length(M$p)"
+#~ msgstr "ncol(M$X)의 값이 length(M$p)와 일치하지 않습니다."
+
+#~ msgid "length(M$w) != length(M$y)"
+#~ msgstr "length(M$w)의 값이 length(M$y)와 일치하지 않습니다."
+
+#~ msgid "nrow(M$Ain) != length(M$bin)"
+#~ msgstr "nrow(M$Ain)의 값이 length(M$bin)와 일치하지 않습니다."
+
+#~ msgid "nrow(M$Ain) != length(M$p)"
+#~ msgstr "nrow(M$Ain)의 값이 length(M$p)와 일치하지 않습니다."
+
+#~ msgid "ncol(M$C) != length(M$p)"
+#~ msgstr "ncol(M$C)의 값이 length(M$p)와 일치하지 않습니다."
+
+#~ msgid "M$S and M$off have different lengths"
+#~ msgstr "M$S의 길이가 M$off가 가진 길이와 같지 않습니다."
+
+#~ msgid "M$sp has different length to M$S and M$off"
+#~ msgstr "M$sp의 길이는 M$S와 M$off가 가지고 있는 길이와 다릅니다."
+
+#~ msgid "length of min.sp is wrong."
+#~ msgstr "min.sp의 길이가 올바르지 않습니다."
+
+#~ msgid "NA's in min.sp."
+#~ msgstr "min.sp내에서 NA가 발견되었습니다."
+
+#~ msgid "requires an object of class gam"
+#~ msgstr "클래스 gam으로부터 얻어진 객체가 필요합니다."
+
+#~ msgid "recov works with fitted gam objects only"
+#~ msgstr "recov 함수는 오로지 적합된 gam 객체만을 사용합니다."
+
+#~ msgid "m can't be in re"
+#~ msgstr "m은 re 내에 있을 수 없습니다."
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "not a gam object"
+#~ msgstr "객체의 클래스가 gam이 아닙니다."
+
+#~ msgid "object is not a glm or gam"
+#~ msgstr "object의 클래스가 glm 또는 gam이 아닙니다."
+
+#~ msgid "x is null"
+#~ msgstr "x는 아무런 구성요소도 가지고 있지 않습니다."
+
+#~ msgid "x has no col attribute"
+#~ msgstr "x는 열속성(col attribute)를 가지고 있지 않습니다."
+
+#~ msgid "bs wrong length and ignored."
+#~ msgstr "bs의 길이가 올바르지 않아 사용되지 않습니다."
+
+#~ msgid "x and y not same length"
+#~ msgstr "x의 길이가 y의 길이와 같지 않습니다."
+
+#~ msgid "lengths of k and bnd are not compatible."
+#~ msgstr "k의 길이와 bnd의 길이가 서로 일치하지 않습니다."

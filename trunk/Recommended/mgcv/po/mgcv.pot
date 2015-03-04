@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: mgcv 1.8-4\n"
+"Project-Id-Version: mgcv 1.8-5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 19:59+0100\n"
+"POT-Creation-Date: 2015-03-04 18:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,86 +17,86 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: magic.c:440
+#: magic.c:445
 msgid "magic requires smoothing parameter starting values if L supplied"
 msgstr ""
 
-#: magic.c:558
+#: magic.c:563
 msgid "magic, the gcv/ubre optimizer, failed to converge after 400 iterations."
 msgstr ""
 
-#: mat.c:42 mat.c:64
+#: mat.c:48 mat.c:70
 msgid ""
 "\n"
 "Failed to open file\n"
 msgstr ""
 
-#: mat.c:72
+#: mat.c:78
 msgid ""
 "\n"
 "file dim problem\n"
 msgstr ""
 
-#: mat.c:2228
+#: mat.c:2346
 #, c-format
 msgid "Non orthogonal eigenvectors %d %g\n"
 msgstr ""
 
-#: mat.c:2233
+#: mat.c:2351
 #, c-format
 msgid "Eigenvectors not normalized %d %g\n"
 msgstr ""
 
-#: matrix.c:83
+#: matrix.c:81
 msgid "Failed to initialize memory for matrix."
 msgstr ""
 
-#: matrix.c:145 matrix.c:207
+#: matrix.c:143 matrix.c:205
 msgid "An out of bound write to matrix has occurred!"
 msgstr ""
 
-#: matrix.c:151
+#: matrix.c:149
 msgid "INTEGRITY PROBLEM in the extant matrix list."
 msgstr ""
 
-#: matrix.c:183
+#: matrix.c:181
 msgid "You are trying to check matrix integrity without defining RANGECHECK."
 msgstr ""
 
-#: matrix.c:245
+#: matrix.c:243
 msgid "Target matrix too small in mcopy"
 msgstr ""
 
-#: matrix.c:265 matrix.c:273 matrix.c:286 matrix.c:294
+#: matrix.c:263 matrix.c:271 matrix.c:284 matrix.c:292
 msgid "Incompatible matrices in matmult."
 msgstr ""
 
-#: matrix.c:381
+#: matrix.c:379
 msgid "Attempt to invert() non-square matrix"
 msgstr ""
 
-#: matrix.c:403
+#: matrix.c:401
 msgid "Singular Matrix passed to invert()"
 msgstr ""
 
-#: matrix.c:1324
-msgid "svd() not converged"
+#: matrix.c:1321
+msgid "'svd()' not converged"
 msgstr ""
 
-#: matrix.c:1400
+#: matrix.c:1397
 #, c-format
 msgid "svdroot matrix not +ve semi def. %g"
 msgstr ""
 
-#: matrix.c:1428
+#: matrix.c:1425
 msgid "Sort failed"
 msgstr ""
 
-#: qp.c:58
-msgid "ERROR in addconQT."
+#: qp.c:57
+msgid "ERROR in 'addconQT()'"
 msgstr ""
 
-#: qp.c:464
+#: qp.c:463
 msgid "QPCLS - Rank deficiency in model"
 msgstr ""
 
@@ -145,11 +145,11 @@ msgstr ""
 msgid "lower neighbour claimed to be self!\n"
 msgstr ""
 
-#: tprs.c:46 tprs.c:81
+#: tprs.c:41
 msgid "You must have 2m>d for a thin plate spline."
 msgstr ""
 
-#: tprs.c:417 tprs.c:425
+#: tprs.c:376 tprs.c:384
 msgid ""
 "A term has fewer unique covariate combinations than specified maximum "
 "degrees of freedom"
