@@ -6624,7 +6624,7 @@ function(dir)
     if (title == package) {
         out$title_is_name <- TRUE
     } else {
-        if(grepl(paste0("^", package), title))
+        if(grepl(paste0("^", package), title, ignore.case = TRUE))
             out$title_includes_name <- TRUE
         title2 <- toTitleCase(title)
         if(title != title2)
@@ -6635,12 +6635,20 @@ function(dir)
     descr <- trimws(as.vector(meta[["Description"]]))
     descr <- gsub("[\n\t]", " ", descr)
     package <- meta["Package"]
-    if(grepl(paste0("^['\"]?", package), descr))
+    if(grepl(paste0("^['\"]?", package, ignore.case = TRUE), descr))
         out$descr_bad_start <- TRUE
     if(grepl("^(The|This|A|In this|In the) package", descr))
         out$descr_bad_start <- TRUE
     if(!isTRUE(out$descr_bad_start) && !grepl("^['\"]?[[:upper:]]", descr))
        out$descr_bad_initial <- TRUE
+
+    ## Check Date
+    date <- trimws(as.vector(meta[["Date"]]))
+    if(!is.na(date)) {
+        dd <- strptime(date, "%Y-%m-%d", tz = "GMT")
+        if (is.na(dd)) out$bad_date <- TRUE
+        else if (as.Date(dd) < Sys.Date() - 31) out$old_date <- TRUE
+    }
 
     ## Check URLs.
     if(capabilities("libcurl")) {
@@ -6972,6 +6980,12 @@ function(x, ...)
       },
       if(length(x$descr_bad_start)) {
           gettext("The Description field should not start with the package name,\n  'This package' or similar.", domain = "R-tools")
+      },
+      if(length(x$bad_date)) {
+          gettext("The Date field is not in ISO 8601 yyyy-mm-dd format.", domain = "R-tools")
+      },
+      if(length(x$old_date)) {
+          gettext("The Date field is over a month old.", domain = "R-tools")
       }
      )
 }
