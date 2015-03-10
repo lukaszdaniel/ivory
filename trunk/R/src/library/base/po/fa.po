@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-28 12:22+0100\n"
+"POT-Creation-Date: 2015-03-10 20:41+0100\n"
 "PO-Revision-Date: 2012-10-26 22:30+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -612,9 +612,9 @@ msgstr ""
 #: src/gnuwin32/extra.c:558 src/gnuwin32/extra.c:583 src/main/agrep.c:132
 #: src/main/agrep.c:136 src/main/agrep.c:774 src/main/agrep.c:779
 #: src/main/apply.c:324 src/main/apply.c:326 src/main/apply.c:329
-#: src/main/array.c:87 src/main/array.c:1219 src/main/array.c:1345
-#: src/main/array.c:1347 src/main/array.c:1348 src/main/array.c:1688
-#: src/main/array.c:1690 src/main/array.c:1692 src/main/attrib.c:195
+#: src/main/array.c:87 src/main/array.c:1220 src/main/array.c:1346
+#: src/main/array.c:1348 src/main/array.c:1349 src/main/array.c:1689
+#: src/main/array.c:1691 src/main/array.c:1693 src/main/attrib.c:195
 #: src/main/builtin.c:89 src/main/builtin.c:98 src/main/builtin.c:117
 #: src/main/builtin.c:119 src/main/builtin.c:149 src/main/builtin.c:558
 #: src/main/builtin.c:574 src/main/builtin.c:761 src/main/builtin.c:763
@@ -656,9 +656,9 @@ msgstr ""
 #: src/main/connections.c:4965 src/main/connections.c:4994
 #: src/main/connections.c:4998 src/main/connections.c:5002
 #: src/main/connections.c:5006 src/main/context.c:607 src/main/context.c:616
-#: src/main/context.c:620 src/main/datetime.c:776 src/main/datetime.c:866
-#: src/main/datetime.c:868 src/main/datetime.c:872 src/main/datetime.c:1028
-#: src/main/datetime.c:1030 src/main/datetime.c:1235 src/main/debug.c:241
+#: src/main/context.c:620 src/main/datetime.c:778 src/main/datetime.c:868
+#: src/main/datetime.c:870 src/main/datetime.c:874 src/main/datetime.c:1030
+#: src/main/datetime.c:1032 src/main/datetime.c:1237 src/main/debug.c:241
 #: src/main/deparse.c:405 src/main/dotcode.c:479 src/main/dotcode.c:483
 #: src/main/dotcode.c:488 src/main/dounzip.c:324 src/main/dounzip.c:331
 #: src/main/dounzip.c:341 src/main/dounzip.c:346 src/main/dounzip.c:350
@@ -1146,20 +1146,20 @@ msgstr ""
 msgid "'%s' argument must be a vector"
 msgstr ""
 
-#: src/main/apply.c:106 src/main/character.c:598 src/main/connections.c:3546
-#: src/main/context.c:653 src/main/context.c:672 src/main/datetime.c:676
-#: src/main/datetime.c:778 src/main/datetime.c:1032 src/main/dotcode.c:220
-#: src/main/errors.c:942 src/main/errors.c:974 src/main/errors.c:1077
-#: src/main/errors.c:1102 src/main/errors.c:1107 src/main/errors.c:1378
-#: src/main/identical.c:73 src/main/identical.c:74 src/main/identical.c:75
-#: src/main/identical.c:76 src/main/identical.c:77 src/main/platform.c:3069
-#: src/main/seq.c:192 src/main/seq.c:347 src/main/seq.c:352 src/main/seq.c:356
-#: src/main/seq.c:397 src/main/seq.c:401 src/main/seq.c:405
-#: src/main/sort.c:1225 src/main/sort.c:1308 src/main/sort.c:1312
-#: src/main/sort.c:1319 src/main/sort.c:1394 src/main/source.c:223
-#: src/main/summary.c:886 src/main/sysutils.c:250 src/main/util.c:1051
-#: src/main/util.c:1056 src/main/util.c:1063 src/main/util.c:1066
-#: src/main/util.c:1999 src/modules/lapack/Lapack.c:940
+#: src/main/apply.c:106 src/main/array.c:479 src/main/character.c:598
+#: src/main/connections.c:3546 src/main/context.c:653 src/main/context.c:672
+#: src/main/datetime.c:678 src/main/datetime.c:780 src/main/datetime.c:1034
+#: src/main/dotcode.c:220 src/main/errors.c:942 src/main/errors.c:974
+#: src/main/errors.c:1077 src/main/errors.c:1102 src/main/errors.c:1107
+#: src/main/errors.c:1378 src/main/identical.c:73 src/main/identical.c:74
+#: src/main/identical.c:75 src/main/identical.c:76 src/main/identical.c:77
+#: src/main/platform.c:3069 src/main/seq.c:192 src/main/seq.c:347
+#: src/main/seq.c:352 src/main/seq.c:356 src/main/seq.c:397 src/main/seq.c:401
+#: src/main/seq.c:405 src/main/sort.c:1225 src/main/sort.c:1308
+#: src/main/sort.c:1312 src/main/sort.c:1319 src/main/sort.c:1394
+#: src/main/source.c:223 src/main/summary.c:886 src/main/sysutils.c:250
+#: src/main/util.c:1051 src/main/util.c:1056 src/main/util.c:1063
+#: src/main/util.c:1066 src/main/util.c:1999 src/modules/lapack/Lapack.c:940
 #: src/modules/X11/devX11.c:3132 src/modules/X11/devX11.c:3158
 #: src/modules/X11/devX11.c:3163 src/modules/X11/devX11.c:3168
 #: src/modules/X11/devX11.c:3178 src/modules/X11/devX11.c:3183
@@ -1280,7 +1280,7 @@ msgstr ""
 msgid "bad arithmetic function index"
 msgstr ""
 
-#: src/main/array.c:80 src/main/array.c:1523
+#: src/main/array.c:80 src/main/array.c:1524
 #, c-format
 msgid "'data' argument must be of a vector type, was '%s'"
 msgstr ""
@@ -1289,14 +1289,14 @@ msgstr ""
 msgid "non-numeric matrix extent"
 msgstr ""
 
-#: src/main/array.c:97 src/main/array.c:105 src/main/array.c:1631
-#: src/main/array.c:1636
+#: src/main/array.c:97 src/main/array.c:105 src/main/array.c:1632
+#: src/main/array.c:1637
 #, c-format
 msgid "invalid '%s' value (too large or NA)"
 msgstr ""
 
-#: src/main/array.c:99 src/main/array.c:107 src/main/array.c:1633
-#: src/main/array.c:1638
+#: src/main/array.c:99 src/main/array.c:107 src/main/array.c:1634
+#: src/main/array.c:1639
 #, c-format
 msgid "invalid '%s' value (< 0)"
 msgstr ""
@@ -1330,7 +1330,7 @@ msgstr ""
 msgid "data length exceeds size of matrix"
 msgstr ""
 
-#: src/main/array.c:147 src/main/array.c:1534 src/main/array.c:1645
+#: src/main/array.c:147 src/main/array.c:1535 src/main/array.c:1646
 msgid "too many elements specified"
 msgstr ""
 
@@ -1354,52 +1354,52 @@ msgstr ""
 msgid "'allocArray()': too many elements specified by 'dims' argument"
 msgstr ""
 
-#: src/main/array.c:479 src/main/attrib.c:1025 src/main/coerce.c:2428
+#: src/main/array.c:481 src/main/attrib.c:1025 src/main/coerce.c:2428
 #: src/main/engine.c:2964
 #, c-format
 msgid "'%s' argument must be a list"
 msgstr ""
 
-#: src/main/array.c:511
+#: src/main/array.c:512
 #, c-format
 msgid "a matrix-like object is required as argument passed to '%s'"
 msgstr ""
 
-#: src/main/array.c:724
+#: src/main/array.c:725
 msgid "numeric/complex matrix/vector arguments are required"
 msgstr ""
 
-#: src/main/array.c:834 src/main/array.c:838 src/main/array.c:842
+#: src/main/array.c:835 src/main/array.c:839 src/main/array.c:843
 msgid "non-conformable arguments"
 msgstr ""
 
-#: src/main/array.c:1140
+#: src/main/array.c:1141
 msgid "argument is not a matrix"
 msgstr ""
 
-#: src/main/array.c:1175
+#: src/main/array.c:1176
 msgid "invalid first argument, must be an array"
 msgstr ""
 
-#: src/main/array.c:1189
+#: src/main/array.c:1190
 #, c-format
 msgid "'perm' is of wrong length %d (!= %d)"
 msgstr ""
 
-#: src/main/array.c:1194 src/main/array.c:1197
+#: src/main/array.c:1195 src/main/array.c:1198
 msgid "'a' does not have named dimnames"
 msgstr ""
 
-#: src/main/array.c:1204
+#: src/main/array.c:1205
 #, c-format
 msgid "'perm[%d]' does not match a dimension name"
 msgstr ""
 
-#: src/main/array.c:1217
+#: src/main/array.c:1218
 msgid "value is out of range in 'perm' argument"
 msgstr ""
 
-#: src/main/array.c:1299 src/main/connections.c:5493 src/main/debug.c:112
+#: src/main/array.c:1300 src/main/connections.c:5493 src/main/debug.c:112
 #: src/main/objects.c:996 src/main/raw.c:56 src/main/raw.c:330
 #: src/main/sort.c:327 src/main/sort.c:1229 src/main/sort.c:1397
 #: src/main/unique.c:670 src/main/unique.c:1384 src/main/unique.c:1456
@@ -1408,22 +1408,22 @@ msgstr ""
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr ""
 
-#: src/main/array.c:1357
+#: src/main/array.c:1358
 #, c-format
 msgid "'%s' must be numeric"
 msgstr ""
 
-#: src/main/array.c:1530
+#: src/main/array.c:1531
 #, c-format
 msgid "'%s' argument cannot be of length 0"
 msgstr ""
 
-#: src/main/array.c:1641
+#: src/main/array.c:1642
 #, c-format
 msgid "'%s' must have positive length"
 msgstr ""
 
-#: src/main/array.c:1701
+#: src/main/array.c:1702
 #, c-format
 msgid "singular matrix in 'backsolve()'. First zero in diagonal [%d]"
 msgstr ""
@@ -1608,7 +1608,7 @@ msgid "exactly one attribute 'which' must be given"
 msgstr ""
 
 #: src/main/attrib.c:1430 src/main/attrib.c:1453 src/main/subscript.c:246
-#: src/main/subscript.c:250 src/main/subset.c:1205 src/main/subset.c:1256
+#: src/main/subscript.c:250 src/main/subset.c:1222 src/main/subset.c:1273
 #, c-format
 msgid "partial match of '%s' to '%s'"
 msgstr ""
@@ -2972,25 +2972,25 @@ msgstr ""
 msgid "unknown '%s' function"
 msgstr ""
 
-#: src/main/datetime.c:545 src/main/datetime.c:555
+#: src/main/datetime.c:547 src/main/datetime.c:557
 msgid "time zone specification is too long"
 msgstr ""
 
-#: src/main/datetime.c:549 src/main/datetime.c:557 src/main/datetime.c:571
-#: src/main/datetime.c:576
+#: src/main/datetime.c:551 src/main/datetime.c:559 src/main/datetime.c:573
+#: src/main/datetime.c:578
 msgid "problem with setting timezone"
 msgstr ""
 
-#: src/main/datetime.c:561
+#: src/main/datetime.c:563
 msgid "cannot set timezones on this system"
 msgstr ""
 
-#: src/main/datetime.c:583 src/main/datetime.c:585
+#: src/main/datetime.c:585 src/main/datetime.c:587
 msgid "problem with unsetting timezone"
 msgstr ""
 
-#: src/main/datetime.c:805 src/main/datetime.c:807 src/main/datetime.c:902
-#: src/main/datetime.c:1243 src/main/datetime.c:1245
+#: src/main/datetime.c:807 src/main/datetime.c:809 src/main/datetime.c:904
+#: src/main/datetime.c:1245 src/main/datetime.c:1247
 msgid "zero-length component in non-empty \"POSIXlt\" structure"
 msgstr ""
 
@@ -7397,7 +7397,7 @@ msgstr ""
 msgid "incompatible types (from %s to %s) in matrix subset assignment"
 msgstr ""
 
-#: src/main/subassign.c:1039 src/main/subset.c:929
+#: src/main/subassign.c:1039 src/main/subset.c:946
 msgid "incorrect number of subscripts"
 msgstr ""
 
@@ -7465,7 +7465,7 @@ msgstr ""
 #: src/main/subassign.c:1909 src/main/subscript.c:149 src/main/subscript.c:151
 #: src/main/subscript.c:280 src/main/subscript.c:282 src/main/subscript.c:887
 #: src/main/subscript.c:889 src/main/subscript.c:980 src/main/subscript.c:982
-#: src/main/subset.c:1126
+#: src/main/subset.c:1143
 #, c-format
 msgid "invalid subscript type '%s'"
 msgstr ""
@@ -7511,7 +7511,7 @@ msgstr ""
 msgid "no such index at level %d\n"
 msgstr ""
 
-#: src/main/subscript.c:319 src/main/subset.c:133 src/main/subset.c:1030
+#: src/main/subscript.c:319 src/main/subset.c:133 src/main/subset.c:1047
 msgid "invalid subscript for pairlist"
 msgstr ""
 
@@ -7555,31 +7555,31 @@ msgstr ""
 msgid "array subscripting not handled for this type"
 msgstr ""
 
-#: src/main/subset.c:828
+#: src/main/subset.c:845
 msgid "incorrect number of dimensions"
 msgstr ""
 
-#: src/main/subset.c:925
+#: src/main/subset.c:942
 msgid "no index specified"
 msgstr ""
 
-#: src/main/subset.c:935
+#: src/main/subset.c:952
 msgid "this S4 class is not subsettable"
 msgstr ""
 
-#: src/main/subset.c:941
+#: src/main/subset.c:958
 msgid "wrong arguments for subsetting an environment"
 msgstr ""
 
-#: src/main/subset.c:975
+#: src/main/subset.c:992
 msgid "getter call used outside of a complex assignment"
 msgstr ""
 
-#: src/main/subset.c:1169
+#: src/main/subset.c:1186
 msgid "$ operator not defined for this S4 class"
 msgstr ""
 
-#: src/main/subset.c:1283
+#: src/main/subset.c:1300
 msgid "$ operator is invalid for atomic vectors"
 msgstr ""
 

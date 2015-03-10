@@ -306,7 +306,7 @@
       For standard keyword entries the corresponding descriptions are
       additionally taken as concepts.
 
-      \item Add \code{lengths()} function for getting the lengths of all
+      \item New \code{lengths()} function for getting the lengths of all
       elements in a list.
 
       \item New function \code{toTitleCase()} in package \pkg{tools},
@@ -482,8 +482,9 @@
       \file{src/gnuwin32/MkRules.dist} for how to specify the location
       of \command{texi2any}.
 
-      \item (Windows) Code changes have been made to allow \R to be
-      compiled with a new toolchain based on GCC 4.9.2.
+      \item (Windows) The default toolchain for Windows is now based
+      on GCC 4.9.2.  Corresponding code changes and \file{Makefile} changes 
+      have been made; see \file{src/gnuwin32/MkRules.dist} for details.
     }
   }
 
@@ -563,7 +564,7 @@
       example, a \code{data.frame} is valid for a \code{list} argument
       in the signature, and a \code{factor} is valid for \code{vector}
       arguments.
-      
+
       \item In \code{qbeta()} the inversion of \code{pbeta()} is much
       more sophisticated.  This works better in border cases, still
       using too many iterations.

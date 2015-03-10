@@ -1,4 +1,5 @@
-ab10f5cb4ba6932380b06d60494a37e4  DESCRIPTION
+c9baa25a442ca672cd68f42ace53e62a  Changes
+f4dadd4dd750725cd369359e0c4b9912  DESCRIPTION
 81cf9cbfb920b873d7ae780c4dcc132b  inst/po/pl/LC_MESSAGES/R-codetools.mo
 2038a3d6fb9255635a44869d82c5d4b9  inst/po/en@quot/LC_MESSAGES/R-codetools.mo
 215ca204e6c7206111e585206cee095c  man/codetools.Rd
@@ -10,4 +11,3 @@ ecfdfce9918eeccddc2df4614c82658a  po/R-pl.po
 df9a80c5bc19d465d57057f9adccf40a  po/R-codetools.pot
 aa4afca91b3b5bbe3dbebde64122ee9d  R/codetools.R
 838118aa4116e6b2d66e393dae8e4073  tests/tests.R
-322e205ba893a13c12820cdfca4e6211  Changes

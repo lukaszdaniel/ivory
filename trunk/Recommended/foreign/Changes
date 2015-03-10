@@ -58,11 +58,11 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >         warning(gettextf("cannot handle unknown type %s", sQuote(type)), domain = "R-foreign")
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/R/spss.R Recommended/foreign/R/spss.R
-87c87
+88c88
 <             message(gettextf("re-encoding from %s", cp), domain = NA)
 ---
 >             message(gettextf("re-encoding from %s", cp), domain = "R-foreign")
-153,154c153
+154,155c154
 <                     warning(gettextf("missingness type %s is not handled", tp),
 <                             domain = NA)
 ---
@@ -77,19 +77,19 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <          " eight-character limit and not ending in a digit")
 ---
 >     stop("Cannot uniquely abbreviate format names to conform to eight-character limit and not ending in a digit")
-89c88
+90c89
 <             for(i in 1L:length(values)){
 ---
 >             for(i in seq_len(length(values))){
-134c133
+135c134
 <     for(v in 1L:ncol(df))
 ---
 >     for(v in seq_len(ncol(df)))
-140c139
+141c140
 <     for(v in 1L:ncol(df))
 ---
 >     for(v in seq_len(ncol(df)))
-146c145
+147c146
 <         for (f in 1L:length(fmtnames))
 ---
 >         for (f in seq_len(length(fmtnames)))
@@ -578,15 +578,15 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 			warning("invalid character string length -- truncating to 244 bytes");
 ---
 > 			warning(_("invalid character string length -- truncating to 244 bytes"));
-801c802
+802c803
 < 		    warning("character strings of >244 bytes in column %d will be truncated", i+1);
 ---
 > 		    warning(_("character strings of >244 bytes in column %d will be truncated"), i+1);
-831c832
+832c833
 < 		    warning("character strings of >244 bytes in column %d will be truncated", i+1);
 ---
 > 		    warning(_("character strings of >244 bytes in column %d will be truncated"), i+1);
-968c969
+969c970
 < 		    error("empty string is not valid in Stata's documented format");
 ---
 > 		    error(_("empty string is not valid in Stata's documented format"));

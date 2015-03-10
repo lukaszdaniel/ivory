@@ -545,51 +545,51 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <                           d, length(u)), domain = NA)
 ---
 >             stop(gettextf("number of columns of 'A' (%d) not equal to length of 'u' (%d)", d, length(u)), domain = "R-boot")
-2895,2896c2901,2902
+2896,2897c2902,2903
 <                 A1 <- A[,1L:d1]
 <                 A2 <- A[,-(1L:d1)]
 ---
 >                 A1 <- A[, seq_len(d1)]
 >                 A2 <- A[, -seq_len(d1)]
-2929,2930c2935,2936
+2930,2931c2936,2937
 <                 A1 <- A[, 1L:d1]
 <                 A2 <- A[, -(1L:d1)]
 ---
 >                 A1 <- A[, seq_len(d1)]
 >                 A2 <- A[, -seq_len(d1)]
-3232,3233c3238
+3233,3234c3239
 <     pts.in <- (1L:npts)[(abs(zeta[,1L]) > 1e-6) &
 <                        (abs(spa[, 2L] - 0.5) < 0.5 - 1e-10)]
 ---
 >     pts.in <- seq_len(npts)[(abs(zeta[,1L]) > 1e-6) & (abs(spa[, 2L] - 0.5) < 0.5 - 1e-10)]
-3247c3252
+3248c3253
 < 		for (j in 1L:d) anames[j] <- paste("zeta1.", j ,sep = "")
 ---
 > 		for (j in seq_len(d)) anames[j] <- paste("zeta1.", j ,sep = "")
-3273,3274c3278,3279
+3274,3275c3279,3280
 <     cat("\nSaddlepoint Distribution Approximations\n\n")
 <     cat("Call : \n")
 ---
 >     cat("\n", gettext("Saddlepoint Distribution Approximations", domain = "R-boot"), "\n\n", sep = "")
 >     cat(gettext("Call:", domain = "R-boot"), "\n", sep = "")
-3276c3281
+3277c3282
 <     cat("\nQuantiles of the Distribution\n")
 ---
 >     cat("\n", gettext("Quantiles of the Distribution", domain = "R-boot"), "\n", sep = "")
-3278,3279c3283
+3279,3280c3284
 <     cat(paste("\n\nSmoothing spline used ", nrow(sad.d$points),
 <               " points in the range ", rg[1L]," to ", rg[2L], ".\n", sep=""))
 ---
 >     cat("\n\n", gettextf("Smoothing spline used %d points in the range %s to %s.", nrow(sad.d$points), rg[1L], rg[2L], domain = "R-boot"), "\n", sep="")
-3281c3285
+3282c3286
 <         cat("Lugananni-Rice approximations used\n")
 ---
 >         cat(gettext("Lugananni-Rice approximations used", domain = "R-boot"), "\n", sep = "")
-3333c3337
+3334c3338
 < #            inds <- (1L:R)[len.tot < n.sim]
 ---
 > #            inds <- seq_len(R)[len.tot < n.sim]
-3425c3429
+3426c3430
 <             inds <- if (is.list(inds)) matrix(unlist(inds)[1L:n.sim], n.sim, 1L)
 ---
 >             inds <- if (is.list(inds)) matrix(unlist(inds)[seq_len(n.sim)], n.sim, 1L)
