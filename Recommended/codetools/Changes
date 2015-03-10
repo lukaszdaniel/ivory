@@ -144,27 +144,27 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <             signal(paste("wrong number of arguments to", sQuote(fn)))
 ---
 >             signal(gettextf("wrong number of arguments to %s", sQuote(fn), domain = "R-codetools"))
-1102,1104c1085
+1112,1114c1095
 <                 signal(paste("warning in ",
 <                              deparse(call, width.cutoff = 500),
 <                              ": ", msg, sep=""))
 ---
 >                 signal(paste(gettextf("warning in %s: ", sQuote(deparse(call, width.cutoff = 500)), domain = "R-codetools"), msg, sep=""))
-1107,1108c1088
+1117,1118c1098
 <     msg <- tryCatch({testMatch(); NULL},
 <                     error = function(e) conditionMessage(e))
 ---
 >     msg <- tryCatch({testMatch(); NULL}, error = function(e) conditionMessage(e))
-1110,1111c1090
+1120,1121c1100
 <         emsg <- paste("possible error in ", deparse(call, width.cutoff = 500),
 <                       ": ", msg, sep="")
 ---
 >         emsg <- paste(gettextf("possible error in %s: ", sQuote(deparse(call, width.cutoff = 500)), domain = "R-codetools"), msg, sep = "")
-1130c1109
+1140c1119
 <     for (i in 1:length(args)) {
 ---
 >     for (i in seq_len(length(args))) {
-1139c1118
+1149c1128
 <     for (i in 1:length(args)) {
 ---
 >     for (i in seq_len(length(args))) {

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-12-28 16:59\n"
+"POT-Creation-Date: 2015-03-10 20:42\n"
 "PO-Revision-Date: 2015-01-17 15:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -4218,6 +4218,7 @@ msgid "internal error"
 msgstr "interner Fehler"
 
 #. R/arima.R: gettextf("invalid '%s' argument", "SSinit")
+#. R/chisq.test.R: gettextf("invalid '%s' argument", "x")
 #. R/cor.R: gettextf("invalid '%s' argument", "use")
 #. R/cor.R: gettextf("invalid '%s' argument", "use")
 #. R/cor.R: gettextf("invalid '%s' argument", "use")
@@ -4236,8 +4237,8 @@ msgstr "interner Fehler"
 #. R/r2dtable.R: gettextf("invalid '%s' argument", "r")
 #. R/r2dtable.R: gettextf("invalid '%s' argument", "c")
 #. R/smooth.R: gettextf("invalid '%s' argument", "endrule")
-#: R/arima.R:0 R/cor.R:0 R/family.R:0 R/glm.R:0 R/loess.R:0 R/models.R:0
-#: R/nafns.R:0 R/r2dtable.R:0 R/smooth.R:0
+#: R/arima.R:0 R/chisq.test.R:0 R/cor.R:0 R/family.R:0 R/glm.R:0 R/loess.R:0
+#: R/models.R:0 R/nafns.R:0 R/r2dtable.R:0 R/smooth.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "unzulässiges 'use' Argument"

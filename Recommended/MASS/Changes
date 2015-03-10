@@ -269,130 +269,130 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <                      sQuote(method)), domain = NA)
 ---
 >         stop(gettext("cannot use leave-one-out CV with method %s", sQuote(method)), domain = "R-MASS")
-114c113
+115c114
 <         const <- format((1L:p)[f1 < tol])
 ---
 >         const <- format(seq_len(p)[f1 < tol])
-117,119c116,117
+118,120c117,118
 <                      "variables %s appear to be constant within groups"),
 <                      paste(const, collapse = " ")),
 <              domain = NA)
 ---
 >                      "variables %s appear to be constant within groups", domain = "R-MASS"),
 >                      paste(const, collapse = " ")), domain = NA)
-130,131c128,129
+131,132c129,130
 <         scaling <- scaling %*% sX$v[, 1L:rank] %*%
 <             diag(sqrt(1/sX$d[1L:rank]),,rank)
 ---
 >         scaling <- scaling %*% sX$v[, seq_len(rank)] %*%
 >             diag(sqrt(1/sX$d[seq_len(rank)]), , rank)
-133c131
+134c132
 <         if(nu <= 2) stop("'nu' must exceed 2")
 ---
 >         if(nu <= 2) stop("'nu' argument must exceed 2")
-151c149
+152c150
 <         scaling <- scaling %*% X.s$v[, 1L:rank] %*% diag(1/X.s$d[1L:rank],,rank)
 ---
 >         scaling <- scaling %*% X.s$v[, seq_len(rank)] %*% diag(1/X.s$d[seq_len(rank)], , rank)
-159c157
+160c158
 <         scaling <- scaling %*% X.s$v[, 1L:rank] %*% diag(1/X.s$d[1L:rank],,rank)
 ---
 >         scaling <- scaling %*% X.s$v[, seq_len(rank)] %*% diag(1/X.s$d[seq_len(rank)], , rank)
-167c165
+168c166
 <         for(i in 1L:ng) {
 ---
 >         for(i in seq_len(ng)) {
-171c169
+172c170
 <         ind <- cbind(1L:n, g)
 ---
 >         ind <- cbind(seq_len(n), g)
-175c173
+176c174
 <         for(i in 1L:ng) {
 ---
 >         for(i in seq_len(ng)) {
-197c195
+198c196
 <     scaling <- scaling %*% X.s$v[, 1L:rank]
 ---
 >     scaling <- scaling %*% X.s$v[, seq_len(rank)]
-199c197
+200c198
 <         dimnames(scaling) <- list(NULL, paste("LD", 1L:rank, sep = ""))
 ---
 >         dimnames(scaling) <- list(NULL, paste("LD", seq_len(rank), sep = ""))
-201c199
+202c200
 <         dimnames(scaling) <- list(colnames(x), paste("LD", 1L:rank, sep = ""))
 ---
 >         dimnames(scaling) <- list(colnames(x), paste("LD", seq_len(rank), sep = ""))
-207c205
+208c206
 <                    scaling = scaling, lev = lev, svd = X.s$d[1L:rank],
 ---
 >                    scaling = scaling, lev = lev, svd = X.s$d[seq_len(rank)],
-215c213
+216c214
 <     if(!inherits(object, "lda")) stop("object not of class \"lda\"")
 ---
 >     if(!inherits(object, "lda")) stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("lda"), domain = "R-MASS"))
-250,251c248,249
+251,252c249,250
 <         if(any(prior < 0) || round(sum(prior), 5) != 1) stop("invalid 'prior'")
 <         if(length(prior) != ng) stop("'prior' is of incorrect length")
 ---
 >         if(any(prior < 0) || round(sum(prior), 5) != 1) stop(gettextf("invalid '%s' argument", "prior"))
 >         if(length(prior) != ng) stop(gettextf("'%s' argument is of the wrong length", "prior"))
-262c260
+263c261
 <         dm <- dm[, 1L:dimen, drop = FALSE]
 ---
 >         dm <- dm[, seq_len(dimen), drop = FALSE]
-264c262
+265c263
 <                        length(prior), byrow = TRUE) - x[, 1L:dimen, drop=FALSE] %*% t(dm)
 ---
 >                        length(prior), byrow = TRUE) - x[, seq_len(dimen), drop=FALSE] %*% t(dm)
-267c265
+268c266
 <         dm <- dm[, 1L:dimen, drop=FALSE]
 ---
 >         dm <- dm[, seq_len(dimen), drop=FALSE]
-269c267
+270c268
 <             x[, 1L:dimen, drop=FALSE] %*% t(dm)
 ---
 >             x[, seq_len(dimen), drop=FALSE] %*% t(dm)
-278c276
+279c277
 <         for(i in 1L:ng) {
 ---
 >         for(i in seq_len(ng)) {
-289c287
+290c288
 <     list(class = cl, posterior = posterior, x = x[, 1L:dimen, drop = FALSE])
 ---
 >     list(class = cl, posterior = posterior, x = x[, seq_len(dimen), drop = FALSE])
-296c294
+297c295
 <         cat("Call:\n")
 ---
 >         cat(gettext("Call:", domain = "R-MASS"), "\n", sep = "")
-299c297
+300c298
 <     cat("\nPrior probabilities of groups:\n")
 ---
 >     cat("\n", gettext("Prior probabilities of groups:", domain = "R-MASS"), "\n", sep = "")
-301c299
+302c300
 <     cat("\nGroup means:\n")
 ---
 >     cat("\n", gettext("Group means:", domain = "R-MASS"), "\n", sep = "")
-303c301
+304c302
 <     cat("\nCoefficients of linear discriminants:\n")
 ---
 >     cat("\n", gettext("Coefficients of linear discriminants:", domain = "R-MASS"), "\n", sep = "")
-308c306
+309c307
 <         cat("\nProportion of trace:\n")
 ---
 >         cat("\n", gettext("Proportion of trace:", domain = "R-MASS"), "\n", sep = "")
-347c345
+348c346
 <     if(!missing(dimen) && dimen < ncol(X)) X <- X[, 1L:dimen, drop = FALSE]
 ---
 >     if(!missing(dimen) && dimen < ncol(X)) X <- X[, seq_len(dimen), drop = FALSE]
-377c375
+378c376
 <         if(any(diff(breaks) <= 0)) stop("'breaks' must be strictly increasing")
 ---
 >         if(any(diff(breaks) <= 0)) stop("'breaks' argument must be strictly increasing")
-379c377
+380c378
 <             stop("'breaks' do not cover the data")
 ---
 >             stop("'breaks' argument do not cover the data")
-454c452
+455c453
 <     if(!missing(dimen) && dimen < ncol(X)) X <- X[, 1L:dimen]
 ---
 >     if(!missing(dimen) && dimen < ncol(X)) X <- X[, seq_len(dimen)]

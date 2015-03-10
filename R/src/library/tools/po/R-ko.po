@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-02-28 12:24\n"
+"POT-Creation-Date: 2015-03-10 20:43\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -3138,6 +3138,16 @@ msgstr "패키지 %s의 예제를 테스트합니다"
 msgid "Text"
 msgstr ""
 
+#. R/QC.R: gettext("The Date field is not in ISO 8601 yyyy-mm-dd format.", domain = "R-tools")
+#: R/QC.R:0
+msgid "The Date field is not in ISO 8601 yyyy-mm-dd format."
+msgstr ""
+
+#. R/QC.R: gettext("The Date field is over a month old.", domain = "R-tools")
+#: R/QC.R:0
+msgid "The Date field is over a month old."
+msgstr ""
+
 #. R/QC.R: gettext("The Description field should not start with the package name,\n  'This package' or similar.",     domain = "R-tools")
 #: R/QC.R:0
 msgid ""
@@ -5463,6 +5473,12 @@ msgstr "'make'를 실행하는데 실패했습니다"
 msgid "running code in %s"
 msgstr "%s를 실행중입니다"
 
+#. R/testing.R: message("running more Internet and socket tests", domain = "R-tools")
+#: R/testing.R:0
+#, fuzzy
+msgid "running more Internet and socket tests"
+msgstr "중단해야 할 실행중인 서버가 없습니다"
+
 #. R/testing.R: message("running regexp regression tests", domain = "R-tools")
 #: R/testing.R:0
 msgid "running regexp regression tests"
@@ -5486,9 +5502,26 @@ msgstr "패키지 %s에 특정 테스트들을 실행중입니다"
 msgid "running strict specific tests"
 msgstr "패키지 %s에 특정 테스트들을 실행중입니다"
 
+#. R/testing.R: message("running tests demos from base and stats", domain = "R-tools")
+#: R/testing.R:0
+msgid "running tests demos from base and stats"
+msgstr ""
+
+#. R/testing.R: message("running tests of Internet functions - expect some differences", domain = "R-tools")
+#: R/testing.R:0
+msgid "running tests of Internet functions - expect some differences"
+msgstr ""
+
 #. R/testing.R: message("running tests of consistency of as/is.*", domain = "R-tools")
 #: R/testing.R:0
 msgid "running tests of consistency of as/is.*"
+msgstr ""
+
+#. R/testing.R: message("running tests of date-time printing\n expect platform-specific differences",     domain = "R-tools")
+#: R/testing.R:0
+msgid ""
+"running tests of date-time printing\n"
+" expect platform-specific differences"
 msgstr ""
 
 #. R/testing.R: message("running tests of plotting Latin-1", domain = "R-tools")

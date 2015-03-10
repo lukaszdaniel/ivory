@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.2.0\n"
-"POT-Creation-Date: 2014-12-28 16:59\n"
+"POT-Creation-Date: 2015-03-10 20:42\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5514,6 +5514,7 @@ msgstr ""
 
 
 #: R/arima.R: 0
+#: R/chisq.test.R: 0
 #: R/cor.R: 0
 #: R/cor.R: 0
 #: R/cor.R: 0
@@ -5533,6 +5534,7 @@ msgstr ""
 #: R/r2dtable.R: 0
 #: R/smooth.R: 0
 #. R/arima.R: gettextf("invalid '%s' argument", "SSinit")
+#. R/chisq.test.R: gettextf("invalid '%s' argument", "x")
 #. R/cor.R: gettextf("invalid '%s' argument", "use")
 #. R/cor.R: gettextf("invalid '%s' argument", "use")
 #. R/cor.R: gettextf("invalid '%s' argument", "use")

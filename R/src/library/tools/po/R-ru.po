@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-02-28 12:24\n"
+"POT-Creation-Date: 2015-03-10 20:43\n"
 "PO-Revision-Date: 2015-01-17 15:54+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -3191,6 +3191,16 @@ msgstr "Проверяю примеры к пакету"
 msgid "Text"
 msgstr ""
 
+#. R/QC.R: gettext("The Date field is not in ISO 8601 yyyy-mm-dd format.", domain = "R-tools")
+#: R/QC.R:0
+msgid "The Date field is not in ISO 8601 yyyy-mm-dd format."
+msgstr ""
+
+#. R/QC.R: gettext("The Date field is over a month old.", domain = "R-tools")
+#: R/QC.R:0
+msgid "The Date field is over a month old."
+msgstr ""
+
 #. R/QC.R: gettext("The Description field should not start with the package name,\n  'This package' or similar.",     domain = "R-tools")
 #: R/QC.R:0
 msgid ""
@@ -5568,6 +5578,12 @@ msgstr "не удался запуск 'zip'"
 msgid "running code in %s"
 msgstr "запускаю код в "
 
+#. R/testing.R: message("running more Internet and socket tests", domain = "R-tools")
+#: R/testing.R:0
+#, fuzzy
+msgid "running more Internet and socket tests"
+msgstr "запускаю регрессионные тесты на регулярные выражения"
+
 #. R/testing.R: message("running regexp regression tests", domain = "R-tools")
 #: R/testing.R:0
 msgid "running regexp regression tests"
@@ -5589,10 +5605,28 @@ msgstr "запускаю широкие тесты"
 msgid "running strict specific tests"
 msgstr "запускаю узкоспецифические тесты"
 
+#. R/testing.R: message("running tests demos from base and stats", domain = "R-tools")
+#: R/testing.R:0
+#, fuzzy
+msgid "running tests demos from base and stats"
+msgstr "запускаю тесты на примитивы"
+
+#. R/testing.R: message("running tests of Internet functions - expect some differences", domain = "R-tools")
+#: R/testing.R:0
+msgid "running tests of Internet functions - expect some differences"
+msgstr ""
+
 #. R/testing.R: message("running tests of consistency of as/is.*", domain = "R-tools")
 #: R/testing.R:0
 msgid "running tests of consistency of as/is.*"
 msgstr "запускаю тесты на соответствие as/is.*"
+
+#. R/testing.R: message("running tests of date-time printing\n expect platform-specific differences",     domain = "R-tools")
+#: R/testing.R:0
+msgid ""
+"running tests of date-time printing\n"
+" expect platform-specific differences"
+msgstr ""
 
 #. R/testing.R: message("running tests of plotting Latin-1", domain = "R-tools")
 #: R/testing.R:0

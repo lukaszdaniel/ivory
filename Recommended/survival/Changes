@@ -201,11 +201,11 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     if (is.R()) structure(table, heading = c(title, topnote), class = c("anova", "data.frame"))
 >     else structure(table, heading = c(title, topnote), class = "anova")	     
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/anova.coxph.S Recommended/survival/R/anova.coxph.S
-5c5
+4c4
 <         stop ("argument must be a cox model")
 ---
 >         stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("coxph")))
-16,18c16,19
+15,17c15,18
 <         warning(paste("The following arguments to anova.coxph(..)", 
 <             "are invalid and dropped:", paste(deparse(dotargs[named]), 
 <                 collapse = ", ")))
@@ -214,15 +214,15 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 	tmp_n <- paste(deparse(dotargs[named]), collapse = ", ") 
 >         warning(gettextf("the following arguments passed to 'anova.coxph()' are invalid and dropped: %s", tmp_n))
 > 	}
-26c27
+25c26
 <             stop("All arguments must be Cox models")
 ---
 >             stop("all arguments must be an objects of class \"coxph\" or \"coxme\"")
-37c38
+42c43
 <         stop("Can't do anova tables with robust variances")
 ---
 >         stop("cannot do anova tables with robust variances")
-90,93c91,92
+88,91c89,90
 <     title <- paste("Analysis of Deviance Table\n Cox model: response is ",
 < 		   deparse(object$terms[[2]]),
 < 		   "\nTerms added sequentially (first to last)\n", 
@@ -231,28 +231,28 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     title <- paste(gettext("Analysis of Deviance Table"), "\n ", gettextf("Cox model: response is %s", deparse(object$terms[[2]]), domain = "R-survival"), "\n", 
 > 		   gettext("Terms added sequentially (first to last)"), "\n", sep = "")
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/anova.coxphlist.S Recommended/survival/R/anova.coxphlist.S
-5c5
+4c4
 <     if (!is.list(object)) stop("First argument must be a list")
 ---
 >     if (!is.list(object)) stop("'object' argument is not a list")
-7c7
+6c6
 < 	     stop("Argument must be a list of coxph models")
 ---
 > 	     stop("'object' argument must be a list of objects of class \"coxph\"")
-9c9
+8c8
 <         stop("Can't do anova tables with robust variances")
 ---
 >         stop("cannot do anova tables with robust variances")
-16,17c16
+15,16c15
 <         warning(paste("Models with response", deparse(responses[!sameresp]), 
 <             "removed because response differs from", "model 1"))
 ---
 > 	warning(gettextf("models with response %s removed because response differs from model 1", deparse(responses[!sameresp])))
-34c33
+35c34
 <     dimnames(table) <- list(1:nmodels, 
 ---
 >     dimnames(table) <- list(seq_len(nmodels), 
-36,39c35,36
+37,40c36,37
 <     title <- paste("Analysis of Deviance Table\n Cox model: response is ",
 < 		   responses[1]) 
 <     topnote <- paste(" Model ", format(1:nmodels), ": ", variables, 
@@ -260,7 +260,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >     title <- paste(gettext("Analysis of Deviance Table"), "\n ", gettextf("Cox model: response is %s", responses[1]), sep = "")
 >     topnote <- paste(gettextf(" Model %s:", format(seq_len(nmodels))), variables, collapse = "\n")
-43,46c40,41
+44,47c41,42
 <     if (is.R()) structure(table, heading = c(title, topnote), 
 < 			  class = c("anova", "data.frame"))
 <     else structure(table, heading = c(title, topnote), 
@@ -273,8 +273,8 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <                 stop("need terms object")
 ---
 >                 stop(gettextf("'%s' argument is not an object of class %s", "tt", dQuote("terms")))
-diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/basehaz.S Recommended/survival/R/basehaz.S
-7c7
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/basehaz.R Recommended/survival/R/basehaz.R
+8c8
 <         stop("must be a coxph object")
 ---
 >         stop(gettextf("'%s' argument is not an object of class %s", "fit", dQuote("coxph")))
@@ -391,10 +391,14 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <     if (indx[1]==0) stop("A formula argument is required")
 ---
 >     if (indx[1]==0) stop("'formula' argument is required")
-37c37
+46c46
 <         warning("Weights are ignored in clogit")
 ---
 >         warning("weights are ignored in 'clogit()'")
+64c64
+<     stop("predicted survival curves are not defined for a clogit model")
+---
+>     stop("predicted survival curves are not defined for a 'clogit' model")
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/coxph.R Recommended/survival/R/coxph.R
 16c16
 <     if (indx[1] ==0) stop("A formula argument is required")
@@ -418,44 +422,40 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <                           "\" survival data", sep=''))
 ---
 >         stop(gettextf("Cox model doesn't support \"%s\" survival data", type))
-62c60
-<         if (any(ord>1)) stop ("Cluster can not be used in an interaction")
----
->         if (any(ord>1)) stop ("cluster can not be used in an interaction")
-103c101
+94c92
 <                  stop("The tt argument must contain function or list of functions")
 ---
 >                  stop("'tt' argument must contain a function or list of functions")
-107c105
+98c96
 <                      for (i in 1:ntrans) temp[[i]] <- tt[[1]]
 ---
 >                      for (i in seq_len(ntrans)) temp[[i]] <- tt[[1]]
-110c108
+101c99
 <                  else stop("Wrong length for tt argument")
 ---
 >                  else stop(gettextf("wrong length for '%s' argument", "tt"))
-113c111
+104c102
 <          else stop("The tt argument must contain a function or list of functions")
 ---
 >          else stop("'tt' argument must contain a function or list of functions")
-154c152
+147c145
 <          for (i in 1:ntrans) 
 ---
->          for (i in seq_len(ntrans)) 
-214c212
+>          for (i in seq_len(ntrans))
+230c228
 <         if (any(ord>1)) stop ('Penalty terms cannot be in an interaction')
 ---
 >         if (any(ord>1)) stop("penalty terms cannot be in an interaction")
-231c229
+247c245
 <         else stop(paste ("Unknown method", method))
 ---
 >         else stop(gettextf("unknown method %s", method))
-243,244c241
+259,260c257
 <            msg <-paste("X matrix deemed to be singular; variable",
 <                            paste(vars, collapse=" "))
 ---
 >            msg <-gettextf("X matrix deemed to be singular; variable %s", paste(vars, collapse=" "))
-288c285
+304c301
 <                           init[1:length(fit$coefficients)])[nabeta]
 ---
 >                           init[seq_len(length(fit$coefficients))])[nabeta]
@@ -541,12 +541,12 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 				   loglik -dfc))
 ---
 >     history <- rbind(old$history,c(old$theta, loglik, df, loglik - df, loglik - dfc))
-50,51c48
+48,49c46
 <     else  newtheta <- frailty.brent(x, aic, lower=parms$lower, 
 < 				    upper=parms$upper)
 ---
 >     else  newtheta <- frailty.brent(x, aic, lower = parms$lower, upper = parms$upper)
-55c52
+53c50
 < 	cat("    new theta=", format(newtheta), "\n\n")
 ---
 > 	cat("    ", gettextf("new theta= %s", format(newtheta), domain = "R-survival"), "\n\n", sep = "")
@@ -623,7 +623,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 		    b1 <- (1:iter)[ord==iter]
 ---
 > 		    b1 <- seq_len(iter)[ord==iter]
-83c83
+82c82
 < 		    cat("    new theta=", format(newtheta), "\n\n")
 ---
 > 		    cat("    ", gettextf("new theta= %s", format(newtheta), domain = "R-survival"), "\n\n", sep = "")
@@ -769,6 +769,41 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 		if (any(floor(temp)!=temp) || any(temp<=0) || max(temp) > length(dtemp[[i]]))
 > 		stop(gettextf("the variable %s is out of range", dimid[i]))
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/neardate.R Recommended/survival/R/neardate.R
+13,16c13,16
+<     if (missing(id1)) stop("id1 argument is required")
+<     if (missing(id2)) stop("id2 argument is required")
+<     if (missing(y1))  stop("y1 argument is required")
+<     if (missing(y2))  stop("y2 argument is required")
+---
+>     if (missing(id1)) stop(gettextf("'%s' argument is required", "id1"))
+>     if (missing(id2)) stop(gettextf("'%s' argument is required", "id2"))
+>     if (missing(y1))  stop(gettextf("'%s' argument is required","y1"))
+>     if (missing(y2))  stop(gettextf("'%s' argument is required", "y2"))
+18c18
+<             stop("id1 and y1 have different lengths")
+---
+>             stop(gettextf("'%s' and '%s' arguments have different lengths", "id1", "y1"))
+20c20
+<             stop("id2 and y2 have different lengths")
+---
+>             stop(gettextf("'%s' and '%s' arguments have different lengths", "id2", "y2"))
+28c28
+<         stop("y1 and y2 must be sortable")
+---
+>         stop("'y1' and 'y2' arguments must be sortable")
+38c38
+<     rowid <- 1:length(y2)
+---
+>     rowid <- seq_len(length(y2))
+69c69
+<         indx2 <- approx(hash2, 1:n2, hash1, method="constant", yleft=NA,
+---
+>         indx2 <- approx(hash2, seq_len(n2), hash1, method="constant", yleft=NA,
+72c72
+<         indx2 <- approx(hash2, 1:n2, hash1, method="constant", yleft=1,
+---
+>         indx2 <- approx(hash2, seq_len(n2), hash1, method="constant", yleft=1,
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/predict.coxph.R Recommended/survival/R/predict.coxph.R
 8c8
 <         stop("Primary argument much be a coxph object")
@@ -783,24 +818,24 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >            stop("a name given in the terms argument was not found in the model")
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/print.coxph.S Recommended/survival/R/print.coxph.S
-6c6
+5c5
 < 	cat("Call:\n")
 ---
 > 	cat(gettext("Call:", domain = "R-survival"), "\n", sep = "")
-11c11
+10c10
 < 	cat(" Coxph failed.", x$fail, "\n")
 ---
 > 	cat(gettext(" Coxph failed. ", domain = "R-survival"), x$fail, "\n", sep = "")
-20c20
+19c19
 <         stop("Input is not valid")
 ---
 >         stop("input is not valid")
-42,43c42
+41,42c41
 <     cat("Likelihood ratio test=", format(round(logtest, 2)), "  on ",
 < 	df, " df,", " p=", format(1 - pchisq(logtest, df)),  sep="")
 ---
 >     cat(gettextf("Likelihood ratio test = %s on %s df, p=%s", format(round(logtest, 2)), df, format(1 - pchisq(logtest, df)), domain = "R-survival"))
-46c45
+45c44
 <     if (!is.null(x$nevent)) cat(", number of events=", x$nevent, "\n")
 ---
 >     if (!is.null(x$nevent)) cat(", ", gettextf("number of events= %d", x$nevent, domain = "R-survival"), "\n", sep = "")
@@ -850,6 +885,14 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <         stop("Argment must be the result of a call to pspline")
 ---
 >         stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("pspline")))
+214c214
+<         indx <- 1:(ncol(x)+1) + (nknot- (ncol(x) +1))/2
+---
+>         indx <- seq_len(ncol(x)+1) + (nknot- (ncol(x) +1))/2
+218c218
+<         indx <- 1:ncol(x) + (nknot - ncol(x))/2
+---
+>         indx <- seq_len(ncol(x)) + (nknot - ncol(x))/2
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/pyears.R Recommended/survival/R/pyears.R
 10,11c10
 <     m <- m[c(1, match(c('formula', 'data', 'weights', 'subset', 'na.action'),
@@ -888,11 +931,11 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <         if (any(Y <0)) stop ("Negative follow up time")
 ---
 >         if (any(Y <0)) stop("negative follow up time")
-89c88
+87c86
 <             if (any(Y[,1] <0)) stop("Negative survival time")
 ---
 >             if (any(Y[,1] <0)) stop("negative survival time")
-92,94c91,94
+90,92c89,92
 <                 warning(paste(nzero, 
 <                          "observations with an event and 0 follow-up time,",
 <                        "any rate calculations are statistically questionable"))
@@ -901,52 +944,52 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >                          "%d observation with an event and 0 follow-up time, any rate calculations are statistically questionable",
 >                          "%d observations with an event and 0 follow-up time, any rate calculations are statistically questionable", domain = "R-survival"),
 > 			 nzero), domain = NA)
-97c97
+95c95
 <             stop("Only right-censored and counting process survival types are supported")
 ---
 >             stop("only right-censored and counting process survival types are supported")
-101c101
+99c99
 <     if (is.null(n) || n==0) stop("Data set has 0 observations")
 ---
 >     if (is.null(n) || n==0) stop("data set has 0 observations")
-117c117
+115c115
 <                 stop("Cannot deal with models that contain an offset")
 ---
 >                 stop("cannot deal with models that contain an offset")
-120c120
+118c118
 <                 stop("pyears cannot handle stratified Cox models")
 ---
 >                 stop("'pyears()' cannot handle stratified Cox models")
-123c123
+121c121
 <                  stop("Unable to match new data to old formula")
 ---
 >                  stop("unable to match new data to old formula")
-126c126
+124c124
 <         else stop("Invalid ratetable")
 ---
 >         else stop("invalid rate table")
-140c140
+138c138
 <         for (i in 1:odim) {
 ---
 >         for (i in seq_len(odim)) {
-187c187
+185c185
 <                  stop("Ratetable does not have expected shape")
 ---
 >                  stop("ratetable does not have expected shape")
-191,192c191
+189,190c189
 <                 offset <- bdate - as.Date(paste(byear, "01/01", sep='/'), 
 <                                           origin="1960/01/01")
 ---
 >                 offset <- bdate - as.Date(paste(byear, "01/01", sep='/'), origin="1960/01/01")
-204c203
+202c201
 <             else stop("Can't find an appropriate date class\n") 
 ---
 >             else stop("cannot find an appropriate date class") 
-213c212
+211c210
 <                 cuts[[temp]] <- round(approx(nint*(1:nyear), cuts[[temp]],
 ---
 >                 cuts[[temp]] <- round(approx(nint*(seq_len(nyear)), cuts[[temp]],
-278c277
+276c275
 <         row.names(df) <- 1:nrow(df)
 ---
 >         row.names(df) <- seq_len(nrow(df))
@@ -984,6 +1027,11 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	    stop("Only one of df or theta can be specified")
 ---
 > 	    stop("only one of 'df' or 'theta' arguments can be specified")
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/strata.S Recommended/survival/R/strata.S
+16c16
+<         argname <- words[1:nterms]
+---
+>         argname <- words[seq_len(nterms)]
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/summary.coxph.S Recommended/survival/R/summary.coxph.S
 11c11
 <          stop("Input is not valid")
@@ -1264,6 +1312,10 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <         else stop("etype argument incompatable with survival type")
 ---
 >         else stop("'etype' argument incompatable with survival type")
+195c192
+<     stop("the survfit function requires a formula as its first argument")
+---
+>     stop("'survfit()' function requires a formula as its first argument")
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/survfit.coxph.R Recommended/survival/R/survfit.coxph.R
 71c71
 <         stop("Cannot handle \"", type, "\" type survival data")
@@ -1310,31 +1362,39 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <         stop("istate should be a vector of integers or a factor")
 ---
 >         stop("'istate' argument should be a vector of integers or a factor")
+46c44
+<     if (length(id) ==0) id <- 1:n
+---
+>     if (length(id) ==0) id <- seq_len(n)
 49c47
 <     if (length(istate) !=n) stop ("wrong length for istate")
 ---
 >     if (length(istate) !=n) stop(gettextf("wrong length for '%s' argument", "istate"))
-111c109
+51c49
+<     states <- sort(unique(c(istate, 1:length(attr(Y, "states"))))) #list of all
+---
+>     states <- sort(unique(c(istate, seq_len(length(attr(Y, "states")))))) #list of all
+110c108
 <             stop("Cannot have duplicate id values with (time, status) data")
 ---
 >             stop("cannot have duplicate 'id' values with (time, status) data")
-127c125
+126c124
 <             stop("the id argument is required for start:stop data")
 ---
 >             stop("'id' argument is required for start:stop data")
-135c133
+134c132
 <             stop("subject is in two different groups, id ", (id[indx1])[who])
 ---
 >             stop(gettextf("subject is in two different groups, id %s", (id[indx1])[who]))
-139c137
+138c136
 <             stop("gap in follow-up, id ", (id[indx1])[who])
 ---
 >             stop(gettextf("gap in follow-up, id %s", (id[indx1])[who]))
-146c144
+145c143
 <             warning("subject changes to the same state, id ", (id[indx1])[who])
 ---
 >             warning(gettextf("subject changes to the same state, id %s", (id[indx1])[who]))
-150c148
+149c147
 <             stop("subject changes case weights, id ", (id[indx1])[who])
 ---
 >             stop(gettextf("subject changes case weights, id %s", (id[indx1])[who]))
@@ -1363,49 +1423,65 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 	zz <- seq_len(length(events))
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/survfitTurnbull.S Recommended/survival/R/survfitTurnbull.S
-26,27c26,27
+23,24c23,24
 <     if (!is.Surv(y)) stop("y must be a Surv object")
 <     if (!is.factor(x)) stop("x must be a factor")
 ---
 >     if (!is.Surv(y)) stop(gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv")))
 >     if (!is.factor(x)) stop(gettextf("'%s' argument must be a factor", "x"))
-44,45c44
+40,41c40
 < 		stop(paste("start.time =", start.time,
 < 			   "is greater than all time points."))
 ---
 > 		stop(gettextf("start.time = %s is greater than all time points.", start.time))
-57c56
+53c52
 < 	    stop("survfitTurnbull not appropriate for counting process data")
 ---
 > 	    stop("'survfitTurnbull()' is not appropriate for counting process data")
-211,213c210,211
+207,209c206,207
 <                 cat("\n Iteration = ", iter, "\n")
 < 		cat("survival=",
 < 		    format(round(tfit$surv[tfit$n.event>0],3)),  "\n")
 ---
 >                 cat("\n ", gettextf("Iteration = %d", iter, domain = "R-survival"), "\n", sep = "")
 > 		cat("survival=", format(round(tfit$surv[tfit$n.event>0],3)),  "\n")
+245c243
+<     for (i in 1:nstrat) {
+---
+>     for (i in seq_len(nstrat)) {
+248c246
+< 	time[[i]]   <- approx(1:length(fnumeric), fnumeric, tfit$time)$y
+---
+> 	time[[i]]   <- approx(seq_len(length(fnumeric)), fnumeric, tfit$time)$y
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/survfitms.R Recommended/survival/R/survfitms.R
 9c9
 <             stop("summary.survfit can only be used for survfit objects")
 ---
 > 	stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("survfit")))
-206c206
+20c20
+<         if (!is.numeric(times)) stop ("times must be numeric")
+---
+>         if (!is.numeric(times)) stop(gettextf("'%s' argument must be numeric", "times"))
+214c214
 <             stop("summary.survfitms can only be used for survfitms objects")
 ---
 > 	stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("survfitms")))
-420c420
+218c218
+<         if (!is.numeric(times)) stop ("times must be numeric")
+---
+>         if (!is.numeric(times)) stop(gettextf("'%s' argument must be numeric","times"))
+432c432
 <                 stop("unmatched subscript", j[is.na(indx)])
 ---
 >                 stop(gettextf("unmatched subscript %s", j[is.na(indx)]))
-438,441c438
+450,453c450
 <                 stop(paste("strata", 
 <                                paste(i[is.na(indx)], collapse=' '),
 <                            'not matched'))
 < 
 ---
 >                 stop(gettextf("strata %s not matched", paste(i[is.na(indx)], collapse=' ')))
-470c467
+482c479
 <                     stop("unmatched subscript", j[indx])
 ---
 >                     stop(gettextf("unmatched subscript %s", j[indx]))
@@ -1475,33 +1551,33 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	    stop("Invalid survival times for this distribution")
 ---
 > 	    stop("invalid survival times for this distribution")
-134,135c134
+131,132c131
 <         if (!missing(scale)) warning(paste(dlist$name, 
 <                            "has a fixed scale, user specified value ignored"))
 ---
 >         if (!missing(scale)) warning(gettextf("%s distribution has a fixed scale, user specified value ignored", sQuote(dlist$name)))
-146,147c145
+143,144c142
 <         if (!is.null(parms)) stop(paste(dlist$name, 
 <                               "distribution has no optional parameters"))
 ---
 >         if (!is.null(parms)) stop(gettextf("%s distribution has no optional parameters", sQuote(dlist$name)))
-151c149
+148c146
 <             stop("Default parameters must be a numeric vector")
 ---
 >             stop("default parameters must be a numeric vector")
-155c153
+152c150
 <             if (any(is.na(indx))) stop("Invalid parameter names")
 ---
 >             if (any(is.na(indx))) stop("invalid parameter names")
-172c170
+169c167
 <     if (any(scale < 0)) stop("Invalid scale value")
 ---
 >     if (any(scale < 0)) stop("invalid scale value")
-174c172
+171c169
 < 	    stop("The scale argument is not valid with multiple strata")
 ---
 > 	    stop("the scale argument is not valid with multiple strata")
-189c187
+186c184
 < 	if (any(ord>1)) stop ('Penalty terms cannot be in an interaction')
 ---
 > 	if (any(ord>1)) stop("penalty terms cannot be in an interaction")
@@ -1581,6 +1657,70 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	   stop("Number of labels must be 1 less than number of break points")
 ---
 > 	   stop("number of labels must be 1 less than number of break points")
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/tmerge.R Recommended/survival/R/tmerge.R
+17,19c17,19
+<     if (missing(data1)) stop("the data1 argument is required")
+<     if (missing(id)) stop("the id argument is required")
+<     if (!inherits(data1, "data.frame")) stop("data1 must be a data frame")
+---
+>     if (missing(data1)) stop(gettextf("'%s' argument is required", "data1"))
+>     if (missing(id)) stop(gettextf("'%s' argument is required", "id"))
+>     if (!inherits(data1, "data.frame")) stop("'data1' argument must be a data frame")
+23,26c23,26
+<             stop("defer option must be a non-negative number")
+<         if (!is.character(id)) stop("id option must be a character string")
+<         if (!is.character(tstart)) stop("tstart option must be a character string") 
+<          if (!is.character(tstop)) stop("tstop option must be a character string") 
+---
+>             stop("'defer' argument must be a non-negative number")
+>         if (!is.character(id)) stop(gettextf("'%s' argument must be a character string", "id"))
+>         if (!is.character(tstart)) stop(gettextf("'%s' argument must be a character string", "tstart"))
+>          if (!is.character(tstop)) stop(gettextf("'%s' argument must be a character string", "tstop"))
+32c32
+<         stop("data1 does not match its own tname attribute")
+---
+>         stop("'data1' argument does not match its own tname attribute")
+34c34
+<         if (!is.list(options)) stop("options must be a list")
+---
+>         if (!is.list(options)) stop("'options' argument must be a list")
+54c54
+<         stop("tstart and id must be the same length")
+---
+>         stop(gettextf("'%s' and '%s' arguments must be the same length", "tstart", "id"))
+56c56
+<         stop("tstop and id must be the same length")
+---
+>         stop(gettextf("'%s' and '%s' arguments must be the same length", "tstop", "id"))
+66c66
+<     if (any(argname== "")) stop("all additional argments must have a name")
+---
+>     if (any(argname== "")) stop("all additional arguments must have a name")
+70,71c70
+<         stop(paste("argument(s)", argname[is.na(check)], 
+<                        "not a recognized type"))
+---
+>         stop(gettextf("argument(s) %s not recognized type", paste(argname[is.na(check)], collapse = ", ")))
+115c114
+<                     stop("neither a tstop argument nor an initial event argument was found")
+---
+>                     stop("neither a 'tstop' argument nor an initial event argument was found")
+160c159
+<             stop("argument", argname[ii], "is not the same length as id")
+---
+>             stop(gettextf("argument %s is not the same length as id", argname[ii]))
+222c221
+<                 stop("too many variables in an", argclass[ii], "call")
+---
+>                 stop(gettextf("too many variables in an %s call", paste(argclass[ii], collapse = ", ")))
+224c223
+<                 stop("different lengths in an", argclass[ii], "call")
+---
+>                 stop(gettextf("different lengths in an %s call", paste(argclass[ii], collapse = ", ")))
+226c225
+<                 stop("non numeric increment in an", argclass[ii], "call")
+---
+>                 stop(gettextf("non numeric increment in an %s call", paste(argclass[ii], collapse = ", ")))
 Only in Recommended/survival/inst: po
 Only in Recommended/survival: po
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/cox_Rcallback.c Recommended/survival/src/cox_Rcallback.c
