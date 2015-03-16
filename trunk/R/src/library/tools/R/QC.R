@@ -5541,8 +5541,8 @@ function(package, dir, lib.loc = NULL)
     if(!is.na(enc) &&
        !(Sys.getlocale("LC_CTYPE") %in% c("C", "POSIX"))) {
         ## FIXME: what if conversion fails on e.g. UTF-8 comments
-        con <- file(file, encoding=enc)
-        on.exit(close(con))
+        con <- file(file, encoding = enc)
+        on.exit(close(con), add = TRUE)
     } else con <- file
 
     .check_packages_used_helper(db, con)
@@ -6621,7 +6621,7 @@ function(dir)
     title <- trimws(as.vector(meta["Title"]))
     title <- gsub("[\n\t]", " ", title)
     package <- meta["Package"]
-    if (title == package) {
+    if (tolower(title) == tolower(package)) {
         out$title_is_name <- TRUE
     } else {
         if(grepl(paste0("^", package), title, ignore.case = TRUE))
@@ -6635,7 +6635,7 @@ function(dir)
     descr <- trimws(as.vector(meta["Description"]))
     descr <- gsub("[\n\t]", " ", descr)
     package <- meta["Package"]
-    if(grepl(paste0("^['\"]?", package, ignore.case = TRUE), descr))
+    if(grepl(paste0("^['\"]?", package), ignore.case = TRUE, descr))
         out$descr_bad_start <- TRUE
     if(grepl("^(The|This|A|In this|In the) package", descr))
         out$descr_bad_start <- TRUE
@@ -6946,46 +6946,46 @@ function(x, ...)
             strwrap(paste(y, collapse = ", "), indent = 2L, exdent = 4L))
       },
       if(length(y <- x$citation_error)) {
-          c(gettextf("Reading CITATION file fails with\n%s\nwhen package is not installed.",
+          c(gettextf("\nReading CITATION file fails with\n%s\nwhen package is not installed.",
             paste(" ", y), domain = "R-tools"))
       },
       if(length(y <- x$bad_urls)) {
           if(inherits(y, "error"))
-              c(gettext("Checking URLs failed with message:", domain = "R-tools"),
+              c(gettext("\nChecking URLs failed with message:", domain = "R-tools"),
                 conditionMessage(y))
           else
               c(ngettext(length(y), "Found the following (possibly) invalid URL:", "Found the following (possibly) invalid URLs:", domain = "R-tools"),
                 paste(" ", gsub("\n", "\n    ", format(y))))
       },
       if(length(y <- x$no_url_checks) && y) {
-          c(gettext("Checking URLs requires 'libcurl' support in the R build", domain = "R-tools"))
+          c(gettext("\nChecking URLs requires 'libcurl' support in the R build", domain = "R-tools"))
       },
       if(length(y <- x$R_files_non_ASCII)) {
-          c(gettext("No package encoding and non-ASCII characters in the following R files:", domain = "R-tools"),
+          c(gettext("\nNo package encoding and non-ASCII characters in the following R files:", domain = "R-tools"),
             paste0("  ", names(y), "\n    ",
                    sapply(y, paste, collapse = "\n    "),
                    collapse = "\n"))
       },
       if(length(x$title_is_name)) {
-          gettext("The Title field is just the package name: provide a real title.", domain = "R-tools")
+          gettext("\nThe Title field is just the package name: provide a real title.", domain = "R-tools")
       },
       if(length(x$title_includes_name)) {
-          gettext("The Title field starts with the package name.", domain = "R-tools")
+          gettext("\nThe Title field starts with the package name.", domain = "R-tools")
       },
       if(length(y <- x$title_case)) {
-          c(gettext("The Title field should be in title case, current version then in title case:", domain = "R-tools"), sQuote(y))
+          c(gettext("\nThe Title field should be in title case, current version then in title case:", domain = "R-tools"), sQuote(y))
       },
       if(length(x$descr_bad_initial)) {
-          gettext("The Description field should start with a capital letter.", domain = "R-tools")
+          gettext("\nThe Description field should start with a capital letter.", domain = "R-tools")
       },
       if(length(x$descr_bad_start)) {
-          gettext("The Description field should not start with the package name,\n  'This package' or similar.", domain = "R-tools")
+          gettext("\nThe Description field should not start with the package name,\n  'This package' or similar.", domain = "R-tools")
       },
       if(length(x$bad_date)) {
-          gettext("The Date field is not in ISO 8601 yyyy-mm-dd format.", domain = "R-tools")
+          gettext("\nThe Date field is not in ISO 8601 yyyy-mm-dd format.", domain = "R-tools")
       },
       if(length(x$old_date)) {
-          gettext("The Date field is over a month old.", domain = "R-tools")
+          gettext("\nThe Date field is over a month old.", domain = "R-tools")
       }
      )
 }
