@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  file dounzip.c
- *  first part Copyright (C) 2002-2014  The R Core Team
+ *  first part Copyright (C) 2002-2015  The R Core Team
  *  second part Copyright (C) 1998-2010 Gilles Vollant
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -2076,6 +2076,9 @@ static int unzReadCurrentFile  (unzFile file, voidp buf, unsigned len)
                 uOutThis;
 
             iRead += (uInt)(uTotalOutAfter - uTotalOutBefore);
+	    // R addition for 3.2.0
+	    if(iRead < len && uTotalOutAfter == 4294967295U)
+		warning(_("possible truncation of >= 4GB file"));
 
             if (err == Z_STREAM_END)
                 return (iRead == 0) ? UNZ_EOF : iRead;

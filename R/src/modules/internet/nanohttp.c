@@ -698,6 +698,12 @@ RxmlNanoHTTPRecv(RxmlNanoHTTPCtxtPtr ctxt)
 #if defined(EAGAIN) && EAGAIN != EWOULDBLOCK
 		case EAGAIN:
 #endif
+#if defined(WSAEINPROGRESS) && WSAEINPROGRESS != EINPROGRESS
+		case WSAEINPROGRESS:
+#endif
+#if defined(WSAEWOULDBLOCK) && WSAEWOULDBLOCK != EWOULDBLOCK
+		case WSAEWOULDBLOCK:
+#endif
 		    break;
 
 		default:
@@ -986,6 +992,12 @@ RxmlNanoHTTPConnectAttempt(struct sockaddr *addr)
 	switch (socket_errno()) {
 	case EINPROGRESS:
 	case EWOULDBLOCK:
+#if defined(WSAEINPROGRESS) && WSAEINPROGRESS != EINPROGRESS
+	case WSAEINPROGRESS:
+#endif
+#if defined(WSAEWOULDBLOCK) && WSAEWOULDBLOCK != EWOULDBLOCK
+	case WSAEWOULDBLOCK:
+#endif	
 	    break;
 	default:
 	    perror("connect");
