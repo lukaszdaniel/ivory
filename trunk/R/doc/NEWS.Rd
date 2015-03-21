@@ -6,6 +6,16 @@
 \encoding{UTF-8}
 
 \section{\Rlogo CHANGES IN R-devel}{
+  \subsection{DEPRECATED AND DEFUNCT}{
+    \itemize{
+      \item The included versions of \code{zlib}, \code{bzip2},
+      \code{xz} and PCRE have been removed, so system versions are
+      required (see the \sQuote{R Installation and Administration} manual).
+    }
+  }
+}
+
+\section{\Rlogo CHANGES IN R 3.2.0}{
   \subsection{NEW FEATURES}{
     \itemize{
       \item \code{anyNA()} gains a \code{recursive} argument.
@@ -146,8 +156,8 @@
       \item \code{apply(m, 2, identity)} is now the same as the matrix
       \code{m} when it has \emph{named} row names.
 
-      \item A new somewhat experimental function \code{debuggingState()}
-      has been added, allowing to temporarily turn off debugging.
+      \item A new function \code{debuggingState()} has been added,
+      allowing to temporarily turn off debugging.
 
       \item \code{example()} gets a new optional argument
       \code{run.donttest} and \code{tools::Rd2ex()} a corresponding
@@ -196,8 +206,8 @@
       \code{methods:::.requirePackage()} speeding up package loading.
       (\PR{16133})
 
-      \item New (somewhat experimental) \code{get0()} function, combining
-      \code{exists()} and \code{get()} in one call.
+      \item New \code{get0()} function, combining \code{exists()} and
+      \code{get()} in one call, for efficiency.
 
       \item \code{match.call()} gains an \code{envir} argument for
       specifying the environment from which to retrieve
@@ -324,8 +334,7 @@
 
       \item \code{BIC(mod)} and \code{BIC(mod, mod2)} now give non-NA
       numbers for \code{arima()} fitted models, as \code{nobs(mod)} now
-      gives the number of \dQuote{used} observations for such models --
-      somewhat experimentally.
+      gives the number of \dQuote{used} observations for such models.
       This fixes \PR{16198}, quite differently than proposed there.
 
       \item The \code{print()} methods for \code{"htest"},
@@ -341,9 +350,20 @@
       \item The code completion mechanism can now be replaced by a
       user-specified completer function, for (temporary) situations
       where the usual code completion is inappropriate.
-      
+
       \item \code{unzip()} will now warn if it is able to detect truncation
       when unpacking a file of 4GB or more (related to \PR{16243}).
+
+      \item \code{methods()} reports S4 in addition to S3 methods;
+      output is simplified when the \code{class} argument is
+      used.  \code{.S3methods()} and \code{methods::.S4methods()} report
+      S3 and S4 methods separately.
+
+      \item Higher order functions such as the \code{apply} functions
+      and \code{Reduce} now force arguments to the functions they apply
+      in order to eliminate undesirable interactons between lazy
+      evaluation and variable capture in closures. This resolves
+      \PR{16093}.
     }
   }
 
@@ -370,7 +390,8 @@
 
        Linux users should check that the \code{-devel} or \code{-dev}
        versions of packages \pkg{zlib}, \pkg{bzip2}/\pkg{libbz2} and
-       \pkg{pcre} (or similar names) are installed.
+       \pkg{pcre} as well as \pkg{xz-devel}/\pkg{liblzma-dev} (or
+       similar names) are installed.
 
        \item \command{configure} by default looks for the
        \command{texi2any} script from \pkg{texinfo} 5.1 or later, rather
@@ -485,9 +506,11 @@
       \file{src/gnuwin32/MkRules.dist} for how to specify the location
       of \command{texi2any}.
 
-      \item (Windows) The default toolchain for Windows is now based
-      on GCC 4.9.2.  Corresponding code changes and \file{Makefile} changes 
-      have been made; see \file{src/gnuwin32/MkRules.dist} for details.
+      \item (Windows) Changes have been made to support an experimental
+      Windows toolchain based on GCC 4.9.2.   The default toolchain 
+      continues to be based on GCC 4.6.3, as the new toolchain is not
+      yet stable enough.  A change to a new toolchain is expected 
+      during the R 3.2.x lifetime.
     }
   }
 
@@ -569,8 +592,9 @@
       arguments.
 
       \item In \code{qbeta()} the inversion of \code{pbeta()} is much
-      more sophisticated.  This works better in border cases, still
-      using too many iterations.
+      more sophisticated.  This works better in corner cases some of
+      which failed completely previously (\PR{15755}), or were using
+      too many iterations.
 
       \item Auto-printing no longer duplicates objects when printing is
       dispatched to a method.
