@@ -558,47 +558,6 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <     printf("BLAS/LAPACK routine '%6s' gave error code %d", buf, -(*info));
 ---
 >     printf(_("BLAS/LAPACK routine '%6s' gave error code %d"), buf, -(*info));
-diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=ChangeLog' R-devel/src/extra/bzip2/blocksort.c R/src/extra/bzip2/blocksort.c
-21a22
-> #include <Localization.h>
-231c232
-<       VPrintf0 ( "        bucket sorting ...\n" );
----
->       VPrintf0 ( _("        bucket sorting ...\n") );
-310c311
-<          VPrintf1 ( "%6d unresolved strings\n", nNotDone );
----
->          VPrintf1 ( n_("%6d unresolved string\n", "%6d unresolved strings\n", nNotDone), nNotDone );
-322c323
-<       VPrintf0 ( "        reconstructing block ...\n" );
----
->       VPrintf0 ( _("        reconstructing block ...\n") );
-772c773
-<    if (verb >= 4) VPrintf0 ( "        main sort initialise ...\n" );
----
->    if (verb >= 4) VPrintf0 ( _("        main sort initialise ...\n") );
-805c806
-<    if (verb >= 4) VPrintf0 ( "        bucket sorting ...\n" );
----
->    if (verb >= 4) VPrintf0 ( _("        bucket sorting ...\n") );
-899,900c900
-<                      VPrintf4 ( "        qsort [0x%x, 0x%x]   "
-<                                 "done %d   this %d\n",
----
->                      VPrintf4 ( _("        qsort [0x%x, 0x%x]   done %d   this %d\n"),
-1014c1014
-<       VPrintf3 ( "        %d pointers, %d sorted, %d scanned\n",
----
->       VPrintf3 ( _("        %d pointers, %d sorted, %d scanned\n"),
-1075c1075
-<          VPrintf3 ( "      %d work, %d block, ratio %5.2f\n",
----
->          VPrintf3 ( _("      %d work, %d block, ratio %5.2f\n"),
-1082,1083c1082
-<             VPrintf0 ( "    too repetitive; using fallback"
-<                        " sorting algorithm\n" );
----
->             VPrintf0 ( _("    too repetitive; using fallback sorting algorithm\n") );
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=ChangeLog' R-devel/src/extra/graphapp/clipboard.c R/src/extra/graphapp/clipboard.c
 31c31
 < #include "win-nls.h"
@@ -876,11 +835,11 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=ChangeLog' R-devel/src/extra/tzone/localtime.c R/src/extra/tzone/localtime.c
 39a40
 > #include <Localization.h>
-413c414
+422c423
 < 	    Rf_warning("unknown timezone '%s'", sname);
 ---
 > 	    Rf_warning(_("unknown timezone '%s'"), sname);
-417c418
+426c427
 < 	    Rf_warning("unknown timezone '%s'", sname);
 ---
 > 	    Rf_warning(_("unknown timezone '%s'"), sname);
@@ -1988,15 +1947,15 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <     if(!isOpen(con)) stop("can only truncate an open connection")
 ---
 >     if(!isOpen(con)) stop("'truncate.connection()' function can only truncate an open connection")
-260c260
+262c262
 <         stop("can only write character objects")
 ---
 >         stop("'writeChar()' can only write character objects")
-275c275
+277c277
 <         stop("'timeout' must be NULL or a non-negative number")
 ---
 >         stop("'timeout' argument must be NULL or a non-negative number")
-286c286
+288c288
 <     else if(!is.raw(from)) stop("'from' must be raw or character")
 ---
 >     else if(!is.raw(from)) stop("'from' argument must be raw or character")
@@ -7041,83 +7000,87 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <             cat(file = con, out, "<not an S4 generic function>\n")
 ---
 >             cat(file = con, "\n", gettextf("Function %s:\n<not an S4 generic function>", sQuote(f), domain = "R-methods"), "\n", sep = "")
-1017c1020
+1126c1129
+<         stop("must supply 'generic.function' or 'class'")
+---
+>         stop("'%s' or '%s' argument must be supplied", "generic.function", "class")
+1154c1157
 <                 domain = NA)
 ---
 >                 domain = "R-methods")
-1039c1042
+1176c1179
 <                         domain = NA)
 ---
 >                         domain = "R-methods")
-1064c1067
+1201c1204
 <                             domain = NA)
 ---
 >                             domain = "R-methods")
-1088c1091
+1225c1228
 <                  domain = NA)
 ---
 >                  domain = "R-methods")
-1110c1113
+1247c1250
 <                         domain = NA)
 ---
 >                         domain = "R-methods")
-1117c1120
+1254c1257
 <               stop(MSG, domain = NA),
 ---
 >               stop(MSG, domain = "R-methods"),
-1168c1171
+1305c1308
 <         stop("callGeneric() must be called from within a method body")
 ---
 >         stop("'callGeneric()' function must be called from within a method body")
-1260c1263
+1397c1400
 <         stop(gettextf('expected a non-empty character string for argument name'), domain = NA)
 ---
 >         stop(gettextf("expected a non-empty character string for argument name"), domain = "R-methods")
-1262c1265
+1399c1402
 <         stop(gettextf('generic function supplied was not created for %s',
 ---
 >         stop(gettextf("generic function supplied was not created for %s",
-1264c1267
+1401c1404
 <              domain = NA)
 ---
 >              domain = "R-methods")
-1277c1280
+1414c1417
 <                        domain = NA)
 ---
 >                        domain = "R-methods")
-1309c1312
+1446c1449
 <                 domain = NA)
 ---
 >                 domain = "R-methods")
-1332c1335
+1469c1472
 <                       dQuote(class(what))), domain = NA)
 ---
 >                       dQuote(class(what))), domain = "R-methods")
-1396c1399
+1533c1536
 < 	    return(gettextf("formal arguments differ: (%s), (%s)",
 ---
 > 	    return(sprintf(gettext("formal arguments differ: (%s), (%s)", domain = "R-methods"),
-1407c1410
+1544c1547
 < 	return(gettextf("signatures differ:  (%s), (%s)",
 ---
 > 	return(sprintf(gettext("signatures differ:  (%s), (%s)", domain = "R-methods"),
-1461c1464
+1598c1601
 <              domain = NA)
 ---
 >              domain = "R-methods")
-1468c1471
+1605c1608
 <                 domain = NA)
 ---
 >                 domain = "R-methods")
-1477c1480
+1614c1617
 <           stop(gettextf("only FALSE is meaningful for 'inherited', when 'where' is supplied (got %s)", inherited), domain = NA)
 ---
 >           stop(gettextf("only FALSE is meaningful for 'inherited', when 'where' is supplied (got %s)", inherited))
-1541c1544
+1678c1681
 <                       .notSingleString(f)), domain = NA)
 ---
 >                       .notSingleString(f)), domain = "R-methods")
-1557c1560
+1694c1697
 < 		     domain = NA)
 ---
 > 		     domain = "R-methods")
@@ -7914,38 +7877,38 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <                  dQuote(class(what)[[1L]]))
 ---
 >         gettextf("single string; got an object of class %s", dQuote(class(what)[[1L]]))
-1720,1722c1696,1697
+1719,1721c1695,1696
 <                           gettextf("multiple definitions exist for class %s, but the supplied package (%s) is not one of them (%s)",
 <                                    dQuote(classi), sQuote(pkgi),
 <                                    paste(dQuote(get(classi, envir = .classTable)), collapse = ", ")))
 ---
 >                           sprintf(gettext("multiple definitions exist for class %s, but the supplied package (%s) is not one of them (%s)", domain = "R-methods"),
 >                                    dQuote(classi), sQuote(pkgi), paste(dQuote(get(classi, envir = .classTable)), collapse = ", ")))
-1727,1729c1702,1703
+1726,1728c1701,1702
 <                           gettextf("multiple definitions exist for class %s; should specify one of them (%s), e.g. by className()",
 <                                    dQuote(classi),
 <                                    paste(dQuote(get(classi, envir = .classTable)), collapse = ", ")))
 ---
 >                           sprintf(gettext("multiple definitions exist for class %s; should specify one of them (%s), e.g. by className()", domain = "R-methods"),
 >                                    dQuote(classi), paste(dQuote(get(classi, envir = .classTable)), collapse = ", ")))
-1742,1743c1716
+1741,1742c1715
 <                 msgi <- gettextf("no definition found for class %s",
 <                                  dQuote(classi))
 ---
 >                 msgi <- gettextf("no definition found for class %s", dQuote(classi), domain = "R-methods")
-1828,1830c1801
+1827,1829c1800
 <             stop(gettextf("non-function action: %s",
 <                           sQuote(fname)),
 <                  domain = NA)
 ---
 >             stop(gettextf("non-function action: %s", sQuote(fname)), domain = "R-methods")
-1832,1834c1803
+1831,1833c1802
 <             stop(gettextf("action function %s has no arguments, should have at least 1",
 <                           sQuote(fname)),
 <                  domain = NA)
 ---
 >             stop(gettextf("action function %s has no arguments, should have at least 1", sQuote(fname)), domain = "R-methods")
-1883c1852
+1882c1851
 <             warning(gettextf("some actions are missing: %s",
 ---
 >             warning(sprintf(gettext("some actions are missing: %s", domain = "R-methods"),
@@ -8295,15 +8258,15 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <              domain = NA)
 ---
 >              domain = "R-methods")
-215c215
+216c216
 <                 call. = FALSE, domain = NA)
 ---
 >                 call. = FALSE, domain = "R-methods")
-240c240
+241c241
 <                                           "class %s is missing slots from class %s (%s), and no coerce method was supplied"),
 ---
 >                                           "class %s is missing slots from class %s (%s), and no coerce method was supplied", domain = "R-methods"),
-252c252
+253c253
 <                                           "slots in class %s must extend corresponding slots in class %s: fails for %s"),
 ---
 >                                           "slots in class %s must extend corresponding slots in class %s: fails for %s", domain = "R-methods"),
@@ -17155,37 +17118,37 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <                                collapse = " ")))
 ---
 >                  gettext("dev.new() is the preferred way to open a new device, in the unlikely event one is needed.", domain = "R-tools"))
-7082,7111c6780,6819
+7084,7113c6782,6821
 <       if(length(x$Maintainer))
 <           sprintf("Maintainer: %s", sQuote(paste(x$Maintainer, collapse = " ")))
 <       else "No maintainer field in DESCRIPTION file",
 <       if(x$empty_Maintainer_name)
-<           'The maintainer field lacks a name',
+<           '\nThe maintainer field lacks a name',
 <       if(x$Maintainer_needs_quotes)
-<           'The display-name part of the maintainer field should be enclosed in ""',
+<           '\nThe display-name part of the maintainer field should be enclosed in ""',
 <       if(length(x$new_submission))
 <           "New submission",
 <       if(length(y <- x$bad_package))
-<           sprintf("Conflicting package names (submitted: %s, existing: %s)",
+<           sprintf("\nConflicting package names (submitted: %s, existing: %s)",
 <                   y[[1L]], y[[2L]]),
 <       if(length(y <- x$repositories))
-<           sprintf("Package duplicated from %s", y),
+<           sprintf("\nPackage duplicated from %s", y),
 <       if(length(y <- x$CRAN_archive))
-<           "Package was archived on CRAN",
+<           "\nPackage was archived on CRAN",
 <       if(length(y <- x$bad_version))
-<           sprintf("Insufficient package version (submitted: %s, existing: %s)",
+<           sprintf("\nInsufficient package version (submitted: %s, existing: %s)",
 <                   y[[1L]], y[[2L]]),
 <       if(length(y <- x$version_with_leading_zeroes))
-<           sprintf("Version contains leading zeroes (%s)", y),
+<           sprintf("\nVersion contains leading zeroes (%s)", y),
 <       if(length(y <- x$version_with_jump_in_minor))
-<           sprintf("Version jumps in minor (submitted: %s, existing: %s)",
+<           sprintf("'\nVersion jumps in minor (submitted: %s, existing: %s)",
 <                   y[[1L]], y[[2L]]),
 <       if(length(y <- x$recency))
-<           sprintf("Days since last update: %d", y),
+<           sprintf("\nDays since last update: %d", y),
 <       if(length(y <- x$frequency))
-<           sprintf("Number of updates in past 6 months: %d", y),
+<           sprintf("\nNumber of updates in past 6 months: %d", y),
 <       if(length(y <- x$new_maintainer))
-<           c("New maintainer:",
+<           c("\nNew maintainer:",
 ---
 >       if(length(x$Maintainer)) {
 >           gettextf("Maintainer: %s", sQuote(paste(x$Maintainer, collapse = " ")), domain = "R-tools")
@@ -17193,327 +17156,326 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 	  gettext("No maintainer field in DESCRIPTION file", domain = "R-tools")
 >       },
 >       if(x$empty_Maintainer_name) {
->           gettext("The maintainer field lacks a name", domain = "R-tools")
+>           gettext("\nThe maintainer field lacks a name", domain = "R-tools")
 >       },
 >       if(x$Maintainer_needs_quotes) {
->           gettext("The display-name part of the maintainer field should be enclosed in \"\"", domain = "R-tools")
+>           gettext("\nThe display-name part of the maintainer field should be enclosed in \"\"", domain = "R-tools")
 >       },
 >       if(length(x$new_submission)) {
 >           gettext("New submission", domain = "R-tools")
 >       },
 >       if(length(y <- x$bad_package)) {
->           gettextf("Conflicting package names (submitted: %s, existing: %s)", y[[1L]], y[[2L]], domain = "R-tools")
+>           gettextf("\nConflicting package names (submitted: %s, existing: %s)", y[[1L]], y[[2L]], domain = "R-tools")
 >       },
 >       if(length(y <- x$repositories)) {
->           gettextf("Package duplicated from %s", y, domain = "R-tools")
+>           gettextf("\nPackage duplicated from %s", y, domain = "R-tools")
 >       },
 >       if(length(y <- x$CRAN_archive)) {
->           gettext("Package was archived on CRAN", domain = "R-tools")
+>           gettext("\nPackage was archived on CRAN", domain = "R-tools")
 >       },
 >       if(length(y <- x$bad_version)) {
->           gettextf("Insufficient package version (submitted: %s, existing: %s)", y[[1L]], y[[2L]], domain = "R-tools")
+>           gettextf("\nInsufficient package version (submitted: %s, existing: %s)", y[[1L]], y[[2L]], domain = "R-tools")
 >       },
 >       if(length(y <- x$version_with_leading_zeroes)) {
->           gettextf("Version contains leading zeroes (%s)", y, domain = "R-tools")
+>           gettextf("\nVersion contains leading zeroes (%s)", y, domain = "R-tools")
 >       },
 >       if(length(y <- x$version_with_jump_in_minor)) {
->           gettextf("Version jumps in minor (submitted: %s, existing: %s)", y[[1L]], y[[2L]], domain = "R-tools")
+>           gettextf("\nVersion jumps in minor (submitted: %s, existing: %s)", y[[1L]], y[[2L]], domain = "R-tools")
 >       },
 >       if(length(y <- x$recency)) {
->           gettextf("Days since last update: %d", y, domain = "R-tools")
+>           gettextf("\nDays since last update: %d", y, domain = "R-tools")
 >       },
 >       if(length(y <- x$frequency)) {
->           gettextf("Number of updates in past 6 months: %d", y, domain = "R-tools")
+>           gettextf("\nNumber of updates in past 6 months: %d", y, domain = "R-tools")
 >       },
 >       if(length(y <- x$new_maintainer)) {
->           c(gettext("New maintainer:", domain = "R-tools"),
-7113,7119c6821,6829
+>           c(gettext("\nNew maintainer:", domain = "R-tools"),
+7115,7121c6823,6831
 <             "Old maintainer(s):",
 <             strwrap(y[[2L]], indent = 2L, exdent = 4L)),
 <       if(length(y <- x$bad_license))
-<           sprintf("Non-FOSS package license (%s)", y),
+<           sprintf("\nNon-FOSS package license (%s)", y),
 <       if(length(y <- x$new_license))
-<           c("Change to non-FOSS package license.",
+<           c("\nChange to non-FOSS package license.",
 <             "New license:",
 ---
 >             gettext("Old maintainer(s):", domain = "R-tools"),
 >             strwrap(y[[2L]], indent = 2L, exdent = 4L))
 >       },
 >       if(length(y <- x$bad_license)) {
->           gettextf("Non-FOSS package license (%s)", y, domain = "R-tools")
+>           gettextf("\nNon-FOSS package license (%s)", y, domain = "R-tools")
 >       },
 >       if(length(y <- x$new_license)) {
->           c(gettext("Change to non-FOSS package license.", domain = "R-tools"),
+>           c(gettext("\nChange to non-FOSS package license.", domain = "R-tools"),
 >             gettext("New license:", domain = "R-tools"),
-7121,7122c6831,6833
+7123,7124c6833,6835
 <             "Old license:",
 <             strwrap(y[[2L]], indent = 2L, exdent = 4L)),
 ---
 >             gettext("Old license:", domain = "R-tools"),
 >             strwrap(y[[2L]], indent = 2L, exdent = 4L))
 >       },
-7124,7125c6835
-<           c("Components with restrictions and base license permitting such:",
+7126,7127c6837
+<           c("\nLicense components with restrictions and base license permitting such:",
 <             paste(" ", y),
 ---
->           c(gettext("Components with restrictions and base license permitting such:", domain = "R-tools"), paste(" ", y),
-7128c6838
+>           c(gettext("\nLicense components with restrictions and base license permitting such:", domain = "R-tools"), paste(" ", y),
+7130c6840
 <                               c(sprintf("File '%s':", e[1L]),
 ---
 >                               c(gettextf("File '%s':", e[1L], domain = "R-tools"),
-7134,7137c6844,6845
-<           c("Possibly mis-spelled words in DESCRIPTION:",
+7136,7139c6846,6847
+<           c("\nPossibly mis-spelled words in DESCRIPTION:",
 <             sprintf("  %s (%s)",
 <                     names(s),
 <                     lapply(s, paste, collapse = ", ")))
 ---
->           c(gettext("Possibly mis-spelled words in DESCRIPTION:", domain = "R-tools"),
+>           c(gettext("\nPossibly mis-spelled words in DESCRIPTION:", domain = "R-tools"),
 >             sprintf("  %s (%s)", names(s), lapply(s, paste, collapse = ", ")))
-7140c6848
-<           "FOSS licence with BuildVignettes: false"
+7142c6850
+<           "\nFOSS licence with BuildVignettes: false"
 ---
->           gettext("FOSS licence with BuildVignettes: false", domain = "R-tools")
-7143c6851
-<           c("Unknown, possibly mis-spelled, fields in DESCRIPTION:",
+>           gettext("\nFOSS licence with BuildVignettes: false", domain = "R-tools")
+7145c6853
+<           c("\nUnknown, possibly mis-spelled, fields in DESCRIPTION:",
 ---
->           c(gettext("Possibly mis-spelled fields in DESCRIPTION:", domain = "R-tools"),
-7147c6855
-<           c("CRAN repository db overrides:", y)
+>           c(gettext("\nUnknown, possibly mis-spelled fields in DESCRIPTION:", domain = "R-tools"),
+7149c6857
+<           c("\nCRAN repository db overrides:", y)
 ---
->           c(gettextf("CRAN repository db overrides: %s", sQuote(y), domain = "R-tools"))
-7150,7151c6858
-<           sprintf("CRAN repository db conflicts: %s",
-<                   sQuote(y))
+>           c(gettextf("\nCRAN repository db overrides: %s", sQuote(y), domain = "R-tools"))
+7152c6860
+<           sprintf("\nCRAN repository db conflicts: %s", sQuote(y))
 ---
->           gettextf("CRAN repository db conflicts: %s", sQuote(y), domain = "R-tools")
-7154,7155c6861
-<           sprintf("Package license conflicts with %s override",
+>           gettextf("\nCRAN repository db conflicts: %s", sQuote(y), domain = "R-tools")
+7155,7156c6863
+<           sprintf("\nPackage license conflicts with %s override",
 <                   sQuote(paste("License_is_FOSS:", y)))
 ---
->           gettextf("Package license conflicts with %s override", sQuote(paste("License_is_FOSS:", y)), domain = "R-tools")
-7158,7159c6864
-<           sprintf("Package license conflicts with %s override",
+>           gettextf("\nPackage license conflicts with %s override", sQuote(paste("License_is_FOSS:", y)), domain = "R-tools")
+7159,7160c6866
+<           sprintf("\nPackage license conflicts with %s override",
 <                   sQuote(paste("License_restricts_use:", y)))
 ---
->           gettextf("Package license conflicts with %s override", sQuote(paste("License_restricts_use:", y)), domain = "R-tools")
-7162,7165c6867,6869
-<           c("Package has a FOSS license but eventually depends on the following",
+>           gettextf("\nPackage license conflicts with %s override", sQuote(paste("License_restricts_use:", y)), domain = "R-tools")
+7163,7166c6869,6871
+<           c("\nPackage has a FOSS license but eventually depends on the following",
 < 	    if(length(y) > 1L)
 < 	    "packages which restrict use:" else
 < 	    "package which restricts use:",
 ---
 >           c(ngettext(length(y),
-> 		"Package has a FOSS license but eventually depends on the following package which restricts use:",
->                 "Package has a FOSS license but eventually depends on the following packages which restrict use:", domain = "R-tools"),
-7169,7172c6873,6875
-<           c("Package has a FOSS license but eventually depends on the following",
+> 		"\nPackage has a FOSS license but eventually depends on the following package which restricts use:",
+>                 "\nPackage has a FOSS license but eventually depends on the following packages which restrict use:", domain = "R-tools"),
+7170,7173c6875,6877
+<           c("\nPackage has a FOSS license but eventually depends on the following",
 < 	    if(length(y) > 1L)
 <             "packages which may restrict use:" else
 < 	    "package which may restrict use:",
 ---
 >           c(ngettext(length(y),
-> 		"Package has a FOSS license but eventually depends on the following package which may restrict use:",
->                 "Package has a FOSS license but eventually depends on the following packages which may restrict use:", domain = "R-tools"),
-7176c6879
-<           c("Strong dependencies not in mainstream repositories:",
+> 		"\nPackage has a FOSS license but eventually depends on the following package which may restrict use:",
+>                 "\nPackage has a FOSS license but eventually depends on the following packages which may restrict use:", domain = "R-tools"),
+7177c6881
+<           c("\nStrong dependencies not in mainstream repositories:",
 ---
->           c(gettext("Strong dependencies not in mainstream repositories:", domain = "R-tools"),
-7181c6884
-<           c("Suggests or Enhances not in mainstream repositories:",
+>           c(gettext("\nStrong dependencies not in mainstream repositories:", domain = "R-tools"),
+7182c6886
+<           c("\nSuggests or Enhances not in mainstream repositories:",
 ---
->           c(gettext("'Suggests' or 'Enhances' packages are not in mainstream repositories:", domain = "R-tools"),
-7186c6889
-<           c("Using Additional_repositories specification failed with:",
+>           c(gettext("\n'Suggests' or 'Enhances' packages are not in mainstream repositories:", domain = "R-tools"),
+7187c6891
+<           c("\nUsing Additional_repositories specification failed with:",
 ---
->           c(gettext("Using 'Additional_repositories specification' failed with packages:", domain = "R-tools"),
-7190c6893
-<           c("Availability using Additional_repositories specification:",
+>           c(gettext("\nUsing 'Additional_repositories specification' failed with packages:", domain = "R-tools"),
+7191c6895
+<           c("\nAvailability using Additional_repositories specification:",
 ---
->           c(gettext("Availability using 'Additional_repositories' specification:", domain = "R-tools"),
-7197c6900
-<           c("Additional repositories with no packages:",
+>           c(gettext("\nAvailability using 'Additional_repositories' specification:", domain = "R-tools"),
+7198c6902
+<           c("\nAdditional repositories with no packages:",
 ---
->           c(gettext("Additional repositories with no packages:", domain = "R-tools"),
-7201,7202c6904
+>           c(gettext("\nAdditional repositories with no packages:", domain = "R-tools"),
+7202,7203c6906
 <           paste(if(length(y) > 1L)
-< 		"Uses the superseded packages:" else
+< 		"\nUses the superseded packages:" else
 ---
 >           paste(ngettext(length(y),
-7203a6906
->                        "Uses the superseded packages:", domain = "R-tools"),
-7207,7208c6910
+7204a6908
+>                        "\nUses the superseded packages:", domain = "R-tools"),
+7208,7209c6912
 <           paste(if(length(y) > 1L)
-< 		"Uses the non-portable packages:" else
+< 		"\nUses the non-portable packages:" else
 ---
 >           paste(ngettext(length(y),
-7209a6912
-> 		"Uses the non-portable packages:", domain = "R-tools"),
-7213c6916
-<           c("Authors@R field should be a call to person(), or combine such calls.")
+7210a6914
+> 		"\nUses the non-portable packages:", domain = "R-tools"),
+7214c6918
+<           "\nAuthors@R field should be a call to person(), or combine such calls."
 ---
->           c(gettext("Authors@R field should be a call to person(), or combine such calls.", domain = "R-tools"))
-7217c6920
-<               c("Vignette sources in 'inst/doc' with no 'vignettes' directory:",
+>           c(gettext("\nAuthors@R field should be a call to person(), or combine such calls.", domain = "R-tools"))
+7218c6922
+<               c("\nVignette sources in 'inst/doc' with no 'vignettes' directory:",
 ---
->               c(gettext("Vignette sources in 'inst/doc' with no 'vignettes' directory:", domain = "R-tools"),
-7220c6923
+>               c(gettext("\nVignette sources in 'inst/doc' with no 'vignettes' directory:", domain = "R-tools"),
+7221c6925
 <                 "A 'vignettes' directory is required as from R 3.1.0")
 ---
 >                 gettext("A 'vignettes' directory is required as from R 3.1.0", domain = "R-tools"))
-7222c6925
-<               c("Vignette sources in 'inst/doc' missing from the 'vignettes' directory:",
+7223c6927
+<               c("\nVignette sources in 'inst/doc' missing from the 'vignettes' directory:",
 ---
->               c(gettext("Vignette sources in 'inst/doc' missing from the 'vignettes' directory:", domain = "R-tools"),
-7227c6930
-<           "Package has a VignetteBuilder field but no prebuilt vignette index."
+>               c(gettext("\nVignette sources in 'inst/doc' missing from the 'vignettes' directory:", domain = "R-tools"),
+7228c6932
+<           "\nPackage has a VignetteBuilder field but no prebuilt vignette index."
 ---
->           gettext("Package has a VignetteBuilder field but no prebuilt vignette index.", domain = "R-tools")
-7230c6933
-<           "Package has help file(s) containing build-stage \\Sexpr{} expresssons but no build/partial.rdb."
+>           gettext("\nPackage has a VignetteBuilder field but no prebuilt vignette index.", domain = "R-tools")
+7231c6935
+<           "\nPackage has help file(s) containing build-stage \\Sexpr{} expresssons but no 'build/partial.rdb' file."
 ---
->           gettext("Package has help file(s) containing build-stage \\Sexpr{} expresssons but no build/partial.rdb.", domain = "R-tools")
-7233c6936
-<           "Package has help file(s) containing install/render-stage \\Sexpr{} expresssons but no prebuilt PDF manual."
+>           gettext("\nPackage has help file(s) containing build-stage \\Sexpr{} expresssons but no build/partial.rdb.", domain = "R-tools")
+7234c6938
+<           "\nPackage has help file(s) containing install/render-stage \\Sexpr{} expresssons but no prebuilt PDF manual."
 ---
->           gettext("Package has help file(s) containing install/render-stage \\Sexpr{} expresssons but no prebuilt PDF manual.", domain = "R-tools")
-7236c6939
-<           "Package installs .java files."
+>           gettext("\nPackage has help file(s) containing install/render-stage \\Sexpr{} expresssons but no prebuilt PDF manual.", domain = "R-tools")
+7237c6941
+<           "\nPackage installs .java files."
 ---
->           gettext("Package installs .java files.", domain = "R-tools")
-7239c6942
-<           "Package has FOSS license, installs .class/.jar but has no 'java' directory."
+>           gettext("\nPackage installs .java files.", domain = "R-tools")
+7240c6944
+<           "\nPackage has FOSS license, installs .class/.jar but has no 'java' directory."
 ---
->           gettext("Package has FOSS license, installs .class/.jar but has no 'java' directory.", domain = "R-tools")
-7242c6945
-<           c("Package CITATION file contains call(s) to:",
+>           gettext("\nPackage has FOSS license, installs .class/.jar but has no 'java' directory.", domain = "R-tools")
+7243c6947
+<           c("\nPackage CITATION file contains call(s) to:",
 ---
->           c(gettext("Package CITATION file contains call(s) to:", domain = "R-tools"),
-7246,7248c6949,6950
-<           c("Reading CITATION file fails with",
+>           c(gettext("\nPackage CITATION file contains call(s) to:", domain = "R-tools"),
+7247,7249c6951,6952
+<           c("\nReading CITATION file fails with",
 <             paste(" ", y),
 <             "when package is not installed.")
 ---
->           c(gettextf("Reading CITATION file fails with\n%s\nwhen package is not installed.",
+>           c(gettextf("\nReading CITATION file fails with\n%s\nwhen package is not installed.",
 >             paste(" ", y), domain = "R-tools"))
-7252c6954
-<               c("Checking URLs failed with message:",
+7253c6956
+<               c("\nChecking URLs failed with message:",
 ---
->               c(gettext("Checking URLs failed with message:", domain = "R-tools"),
-7255c6957
+>               c(gettext("\nChecking URLs failed with message:", domain = "R-tools"),
+7256c6959
 <               c(if (length(y) > 1L) "Found the following (possibly) invalid URLs:" else "Found the following (possibly) invalid URL:",
 ---
 >               c(ngettext(length(y), "Found the following (possibly) invalid URL:", "Found the following (possibly) invalid URLs:", domain = "R-tools"),
-7259c6961
-<           c("Checking URLs requires 'libcurl' support in the R build")
+7260c6963
+<           c("\nChecking URLs requires 'libcurl' support in the R build")
 ---
->           c(gettext("Checking URLs requires 'libcurl' support in the R build", domain = "R-tools"))
-7262c6964
-<           c("No package encoding and non-ASCII characters in the following R files:",
+>           c(gettext("\nChecking URLs requires 'libcurl' support in the R build", domain = "R-tools"))
+7263c6966
+<           c("\nNo package encoding and non-ASCII characters in the following R files:",
 ---
->           c(gettext("No package encoding and non-ASCII characters in the following R files:", domain = "R-tools"),
-7268c6970
-<           "The Title field is just the package name: provide a real title."
+>           c(gettext("\nNo package encoding and non-ASCII characters in the following R files:", domain = "R-tools"),
+7269c6972
+<           "\nThe Title field is just the package name: provide a real title."
 ---
->           gettext("The Title field is just the package name: provide a real title.", domain = "R-tools")
-7271c6973
-<           "The Title field starts with the package name."
+>           gettext("\nThe Title field is just the package name: provide a real title.", domain = "R-tools")
+7272c6975
+<           "\nThe Title field starts with the package name."
 ---
->           gettext("The Title field starts with the package name.", domain = "R-tools")
-7274c6976
-<           c("The Title field should be in title case, current version then in title case:", sQuote(y))
+>           gettext("\nThe Title field starts with the package name.", domain = "R-tools")
+7275c6978
+<           c("\nThe Title field should be in title case, current version then in title case:", sQuote(y))
 ---
->           c(gettext("The Title field should be in title case, current version then in title case:", domain = "R-tools"), sQuote(y))
-7277c6979
-<           "The Description field should start with a capital letter."
+>           c(gettext("\nThe Title field should be in title case, current version then in title case:", domain = "R-tools"), sQuote(y))
+7278c6981
+<           "\nThe Description field should start with a capital letter."
 ---
->           gettext("The Description field should start with a capital letter.", domain = "R-tools")
-7280c6982
-<           "The Description field should not start with the package name,\n  'This package' or similar."
+>           gettext("\nThe Description field should start with a capital letter.", domain = "R-tools")
+7281c6984
+<           "\nThe Description field should not start with the package name,\n  'This package' or similar."
 ---
->           gettext("The Description field should not start with the package name,\n  'This package' or similar.", domain = "R-tools")
-7283c6985
-<           "The Date field is not in ISO 8601 yyyy-mm-dd format."
+>           gettext("\nThe Description field should not start with the package name,\n  'This package' or similar.", domain = "R-tools")
+7284c6987
+<           "\nThe Date field is not in ISO 8601 yyyy-mm-dd format."
 ---
->           gettext("The Date field is not in ISO 8601 yyyy-mm-dd format.", domain = "R-tools")
-7286c6988
-<           "The Date field is over a month old."
+>           gettext("\nThe Date field is not in ISO 8601 yyyy-mm-dd format.", domain = "R-tools")
+7287c6990
+<           "\nThe Date field is over a month old."
 ---
->           gettext("The Date field is over a month old.", domain = "R-tools")
-7307c7009
+>           gettext("\nThe Date field is over a month old.", domain = "R-tools")
+7308c7011
 <             stop("argument 'package' must be of length 1")
 ---
 >             stop(gettextf("'%s' argument must be of length 1", "package"))
-7363,7364c7065
+7364,7365c7067
 <                      c(gettextf("Rd files with duplicated name '%s':",
 <                                 nm),
 ---
 >                      c(gettextf("Rd files with duplicated name %s:", sQuote(nm), domain = "R-tools"),
-7371,7373c7072
+7372,7374c7074
 <                      c(gettextf("Rd files with duplicated alias '%s':",
 <                                 nm),
 <                        .pretty_format(bad[[nm]]))
 ---
 >                      c(gettextf("Rd files with duplicated alias %s:", sQuote(nm), domain = "R-tools"), .pretty_format(bad[[nm]]))
-7389c7088
+7390c7090
 <             stop("argument 'package' must be of length 1")
 ---
 >             stop(gettextf("'%s' argument must be of length 1", "package"))
-7395c7094
+7396c7096
 <             stop("you must specify 'package' or 'dir'")
 ---
 >             stop("you must specify 'package' or 'dir' argument")
-7398,7399c7097
+7399,7400c7099
 <             stop(gettextf("directory '%s' does not exist", dir),
 <                  domain = NA)
 ---
 >             stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
-7450,7451c7148
+7451,7452c7150
 <               c(gettextf("Argument items with no description in Rd object '%s':",
 <                          nm),
 ---
 >               c(gettextf("Argument items with no description in Rd object %s:", sQuote(nm), domain = "R-tools"),
-7456,7457c7153
+7457,7458c7155
 <               c(gettextf("Auto-generated content requiring editing in Rd object '%s':",
 <                          nm),
 ---
 >               c(gettextf("Auto-generated content requiring editing in Rd object %s:", sQuote(nm), domain = "R-tools"),
-7489c7185
+7490c7187
 <                      "... [TRUNCATED]"),
 ---
 >                      gettext("... [TRUNCATED]", domain = "R-tools")),
-7506c7202
+7507c7204
 <         c(sprintf("Rd file '%s':", nm),
 ---
 >         c(gettextf("Rd file %s:", sQuote(nm), domain = "R-tools"),
-7511,7513c7207
+7512,7514c7209
 <                                 c(sprintf("  \\%s lines wider than %d characters:",
 <                                           s, limit[s]),
 <                                   .truncate(lines))
 ---
 >                                 c(sprintf(ngettext(limit[s], "  \\%s lines wider than %d character:", "  \\%s lines wider than %d characters:", domain = "R-tools"), s, limit[s]), .truncate(lines))
-7629,7630c7323
+7630,7631c7325
 <         out <- sprintf("%s%s\"%s\"", out,
 <                        substring(txt, 1L, ipos - 1L), str)
 ---
 >         out <- sprintf("%s%s\"%s\"", out, substring(txt, 1L, ipos - 1L), str)
-7641c7334
+7642c7336
 <     c(gettextf("File %s:", sQuote(f)),
 ---
 >     c(gettextf("File %s:", sQuote(f), domain = "R-tools"),
-7655,7656c7348
+7656,7657c7350
 <       c("(", "{", "function", "if", "for", "while", "repeat",
 <         "Math", "Ops", "Summary", "Complex"),
 ---
 >       c("(", "{", "function", "if", "for", "while", "repeat", "Math", "Ops", "Summary", "Complex"),
-7683c7375
+7684c7377
 < 	    warning(gettextf("Generics 'g' in 'env' %s where '%s' errors: %s\nMay need something like\n\n%s\nin NAMESPACE.",
 ---
 > 	    warning(gettextf("Generics 'g' in 'env' %s where %s errors: %s\nMay need something like\n\n%s\nin NAMESPACE.",
-7685c7377
+7686c7379
 <                              "hasMethods(g, env)",
 ---
 >                              sQuote("hasMethods(g, env)"),
-7687,7691c7379
+7688,7692c7381
 <                              paste0("  importFrom(",
 <                                     paste(dq(pkgs), dq(rErr), sep =", "),
 <                                     ")\n")
@@ -17521,64 +17483,64 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <                     domain = NA)
 ---
 >                              paste0("  importFrom(", paste(dq(pkgs), dq(rErr), sep = ", "), ")\n")), domain = "R-tools")
-7699,7700c7387,7388
+7700,7701c7389,7390
 <                                      "Generics without any methods in %s: %s"),
 <                             format(env),
 ---
 >                                      "Generics without any methods in %s: %s", domain = "R-tools"),
 >                             sQuote(format(env)),
-7813,7814c7501
+7814,7815c7503
 <     package <-
 <         sub(".*:([^_]*).*", "\\1", attr(env, "name", exact = TRUE))
 ---
 >     package <- sub(".*:([^_]*).*", "\\1", attr(env, "name", exact = TRUE))
-7877,7879c7564
+7878,7880c7566
 <         while(inherits(yy <- tryCatch(parse(text = txt),
 <                                       error = identity),
 <                        "error")
 ---
 >         while(inherits(yy <- tryCatch(parse(text = txt), error = identity), "error")
-7907,7908c7592
+7908,7909c7594
 <     txt <- .Rd_deparse(.Rd_drop_nodes_with_tags(x, "\\special"),
 <                        tag = FALSE)
 ---
 >     txt <- .Rd_deparse(.Rd_drop_nodes_with_tags(x, "\\special"), tag = FALSE)
-7925,7926c7609
+7926,7927c7611
 <     txt <- gsub("(^|[^\\])\\\\($|[^abfnrtuUvx0-9'\"\\])",
 <                 "\\1<unescaped bksl>\\2", txt)
 ---
 >     txt <- gsub("(^|[^\\])\\\\($|[^abfnrtuUvx0-9'\"\\])", "\\1<unescaped bksl>\\2", txt)
-7928,7929c7611
+7929,7930c7613
 <     txt <- gsub("(^|[^\\])\\\\($|[^abfnrtuUvx0-9'\"\\])",
 <                 "\\1<unescaped bksl>\\2", txt)
 ---
 >     txt <- gsub("(^|[^\\])\\\\($|[^abfnrtuUvx0-9'\"\\])", "\\1<unescaped bksl>\\2", txt)
-7938,7939c7620
+7939,7940c7622
 <     strwrap(paste(sQuote(x), collapse = " "),
 <             indent = 2L, exdent = 2L)
 ---
 >     strwrap(paste(sQuote(x), collapse = " "), indent = 2L, exdent = 2L)
-7945c7626
+7946c7628
 <     if (length(xx) > 1L || (nchar(msg) + nchar(xx) + 1L > 75L))
 ---
 >     if (length(xx) > 1L || (nchar(msg) + nchar(xx) + 1L > options("width")$width))
-7955,7956c7636
+7956,7957c7638
 <     writeLines(strwrap(paste(x, collapse = " "),
 <                        indent = 2L, exdent = 2L))
 ---
 >     writeLines(strwrap(paste(x, collapse = " "), indent = 2L, exdent = 2L))
-8088,8089c7768
+8089,8090c7770
 <     sprintf("^[[:space:]]*(.*<%s>|ORPHANED)[[:space:]]*$",
 <             .make_RFC_2822_email_address_regexp())
 ---
 >     sprintf("^[[:space:]]*(.*<%s>|ORPHANED)[[:space:]]*$", .make_RFC_2822_email_address_regexp())
-8144,8146c7823
+8145,8147c7825
 <                          cbind(sprintf("\\arguments, description of item '%s'",
 <                                        tab[ind, 1L]),
 <                                tab[ind, 2L]))
 ---
 >                          cbind(gettextf("\\arguments, description of item %s", sQuote(tab[ind, 1L]), domain = "R-tools"), tab[ind, 2L]))
-8159,8161c7836
+8160,8162c7838
 <                          cbind(sprintf("section 'Methods', description of item '%s'",
 <                                        tab[ind, 1L]),
 <                                tab[ind, 2L]))
@@ -23067,33 +23029,33 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <                  domain = NA)
 ---
 > 	    stop(gettextf("Running aspell failed with diagnostics:\n%s", paste(out$stderr, collapse = "\n")), domain = "R-utils")
-291c281
+292c282
 <         writeLines("Possibly mis-spelled words:")
 ---
 >         writeLines(gettext("Possibly mis-spelled words:"))
-387,388c377,378
+388,389c378,379
 <         writeLines(c(sprintf("File '%s':", nms[i]),
 <                      sprintf("  Line %s: \"%s\", \"%s\", \"%s\"",
 ---
 >         writeLines(c(gettextf("File '%s':", nms[i]),
 >                      gettextf("  Line %s: \"%s\", \"%s\", \"%s\"",
-569,571c559
+570,572c560
 <     files <- Sys.glob(file.path(tools:::.R_top_srcdir_from_Rd(),
 <                                 "src", "library", "*", "vignettes",
 <                                 "*.Rnw"))
 ---
 >     files <- Sys.glob(file.path(tools:::.R_top_srcdir_from_Rd(), "src", "library", "*", "vignettes", "*.Rnw"))
-626,628c614
+627,629c615
 <             control <- c(control,
 <                          sprintf("-p %s",
 <                                  shQuote(file.path(dir, ".aspell", d))))
 ---
 >             control <- c(control, sprintf("-p %s", shQuote(file.path(dir, ".aspell", d))))
-1044c1030
+1045c1031
 < function(ifile, encoding, keep = c("Title", "Description"),
 ---
 > function(ifile, encoding, keep = c(gettext("Title"), gettext("Description")),
-1134,1135c1120
+1139,1140c1125
 <         header <- sprintf("personal_ws-1.1 %s %d UTF-8",
 <                           language, length(x))
 ---
@@ -23818,95 +23780,95 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 	  vheaders <- gettextf("Changes in %s (%s):", vstrings, dates, domain = "R-utils")
 > 	 }
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=ChangeLog' R-devel/src/library/utils/R/objects.R R/src/library/utils/R/objects.R
-39,41c39
+38,40c38
 < 	    warning(gettextf(
 < 	"'%s' is a formal generic function; S3 methods will not likely be found",
 < 			     fname), domain = NA)
 ---
 > 	    warning(gettextf("%s is a formal generic function; S3 methods will not likely be found", sQuote(fname)), domain = "R-utils")
-108,109c106
+107,108c105
 <             stop(gettextf("no function '%s' is visible", generic.function),
 <                  domain = NA)
 ---
 >             stop(gettextf("no function '%s' is visible", generic.function), domain = "R-utils")
-113,114c110
-<                 warning(gettextf("function '%s' appears not to be generic",
-<                                  generic.function), domain = NA)
----
->                 warning(gettextf("function '%s' appears not to be generic", generic.function), domain = "R-utils")
-116,117c112
+115,116c112
 <                 warning(gettextf("generic function '%s' dispatches methods for generic '%s'",
 <                         generic.function, truegf), domain = NA)
 ---
 >                 warning(gettextf("generic function '%s' dispatches methods for generic '%s'", generic.function, truegf), domain = "R-utils")
-149,150c144
+133c129
+< 			     generic.function), domain = NA)
+---
+> 			     generic.function), domain = "R-utils")
+150,151c146
 <                               paste("registered S3method for",
 <                                     generic.function))
 ---
 >                               gettextf("registered S3method for %s", generic.function, domain = "R-utils"))
-188c182
+191c186
 <             info <- rbindSome(info, S3reg, msg = "registered S3method")
 ---
 >             info <- rbindSome(info, S3reg, msg = gettext("registered S3method", domain = "R-utils"))
-190c184
+193c188
 <     else stop("must supply 'generic.function' or 'class'")
 ---
 >     else stop("must supply 'generic.function' or 'class' argument")
-206,208c200,201
-<             cat("\n", "   ",
-<                 "Non-visible functions are asterisked", "\n", sep = "")
-<     } else cat("no methods were found\n")
+250c245
+<         cat("see '?methods' for accessing help and source code\n")
 ---
->             cat("\n   ", gettext("Non-visible functions are asterisked", domain = "R-utils"), "\n", sep = "")
->     } else cat(gettext("no methods were found", domain = "R-utils"), "\n", sep = "")
-221c214
+>         cat(gettext("see '?methods' for accessing help and source code", domain = "R-utils"), "\n", sep = "")
+252c247
+<         cat("no methods found\n")
+---
+>         cat(gettext("no methods found", domain = "R-utils"), "\n", sep = "")
+265c260
 <             else stop(gettextf("no function '%s' could be found", f), domain = NA)
 ---
 >             else stop(gettextf("no function '%s' could be found", f), domain = "R-utils")
-241,242c234
+285,286c280
 <     if(optional) NULL else stop(gettextf("S3 method '%s' not found", method),
 <                                 domain = NA)
 ---
 >     if(optional) NULL else stop(gettextf("S3 method '%s' not found", method), domain = "R-utils")
-309,310c301
+353,354c347
 <             stop("locked binding of ", sQuote(x), " cannot be changed",
 <                  domain = NA)
 ---
 >             stop(gettextf("locked binding of %s cannot be changed", sQuote(x), domain = "R-utils"), domain = "R-utils")
-316,318c307
+360,362c353
 <                 msg <-
 <                     gettextf("changing locked binding for %s in %s whilst loading %s",
 <                              sQuote(x), sQuote(ns_name), sQuote(in_load))
 ---
 >                 msg <- gettextf("changing locked binding for %s in %s whilst loading %s", sQuote(x), sQuote(ns_name), sQuote(in_load))
-320c309
+364c355
 <                     warning(msg, call. = FALSE, domain = NA, immediate. = TRUE)
 ---
 >                     warning(msg, call. = FALSE, domain = "R-utils", immediate. = TRUE)
-323,325c312,313
+367,369c358,359
 <             warning(gettextf("changing locked binding for %s in %s",
 <                              sQuote(x), sQuote(ns_name)),
 <                     call. = FALSE, domain = NA, immediate. = TRUE)
 ---
 >             warning(gettextf("changing locked binding for %s in %s", sQuote(x), sQuote(ns_name)),
 >                     call. = FALSE, domain = "R-utils", immediate. = TRUE)
-364c352
+408c398
 <         stop("'fixInNamespace' requires a name")
 ---
 >         stop(gettextf("'%s' function requires a name", "fixInNamespace"))
-404d391
+448d437
 <                 msg <- paste("registered S3 method for", gen)
-406c393,395
+450c439,441
 <                     msg <- paste(msg, "from namespace", nmev)
 ---
 >                     msg <- gettextf("registered S3 method for %s from namespace %s", gen, nmev)
 > 		else
 >                     msg <- gettextf("registered S3 method for %s", gen)
-442c431
+486c477
 <         cat("no object named", sQuote(x$name), "was found\n")
 ---
 >         cat(gettextf("no object named %s was found", sQuote(x$name), domain = "R-utils"), "\n", sep = "")
-444,447c433,436
+488,491c479,482
 <         cat("A single object matching", sQuote(x$name), "was found\n")
 <         cat("It was found in the following places\n")
 < 	cat(paste0("  ", x$where), sep="\n")
@@ -23916,14 +23878,14 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >         cat(gettextf("It was found in the following places\n%s\nwith value:", paste0("  ", x$where, collapse = "\n"), domain = "R-utils"))
 > #	cat(paste0("  ", x$where, collapse = "\n"), sep="\n")
 >         cat("\n\n")
-450,452c439,440
+494,496c485,486
 <         cat(n, "differing objects matching", sQuote(x$name),
 <             "were found\n")
 <         cat("in the following places\n")
 ---
 >         cat(sprintf(ngettext(n, "%d differing object matching %s was found\nin the following places:",
 > 		"%d differing objects matching %s were found\nin the following places:", domain = "R-utils"), n, sQuote(x$name)), "\n", sep = "")
-454c442
+498c488
 <         cat("Use [] to view one of them\n")
 ---
 >         cat(gettextf("Use [] to view one of them", domain = "R-utils"), "\n", sep = "")
@@ -25374,20 +25336,20 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=ChangeLog' R-devel/src/main/apply.c R/src/main/apply.c
 23a24
 > #include <Localization.h>
-103c104
+98c99
 <     if (!isVector(value)) error(_("'FUN.VALUE' must be a vector"));
 ---
 >     if (!isVector(value)) error(_("'%s' argument must be a vector"), "FUN.VALUE");
-168,169c169
+163,164c164
 < 	    	error(_("values must be length %d,\n but FUN(X[[%d]]) result is length %d"),
 < 	               commonLen, i+1, length(val));
 ---
 > 	    	error(_("values must be length %d, but 'FUN(X[[%d]])' result is length %d"), commonLen, i+1, length(val));
-180c180
+175c175
 < 	            error(_("values must be type '%s',\n but FUN(X[[%d]]) result is type '%s'"),
 ---
 > 	            error(_("values must be type '%s', but 'FUN(X[[%d]])' result is type '%s'"),
-257,258c257
+252,253c252
 < 			error(_("dimnames(<value>) is neither NULL nor list of length %d"),
 < 			      rnk_v);
 ---
@@ -25563,69 +25525,69 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	    error(_("'allocArray': too many elements specified by 'dims'"));
 ---
 > 	    error(_("'allocArray()': too many elements specified by 'dims' argument"));
-481c481
+480c480
 <         error(_("'%s' must be a list"), "x");
 ---
 >         error(_("'%s' argument must be a list"), "x");
-512,513c512
+511,512c511
 < 	error(_("a matrix-like object is required as argument to '%s'"),
 < 	      (PRIMVAL(op) == 2) ? "col" : "row");
 ---
 > 	error(_("a matrix-like object is required as argument passed to '%s'"), (PRIMVAL(op) == 2) ? "col" : "row");
-726c725
+725c724
 < 	errorcall(call, _("requires numeric/complex matrix/vector arguments"));
 ---
 > 	errorcall(call, _("numeric/complex matrix/vector arguments are required"));
-1219c1218
+1218c1217
 < 	else error(_("value out of range in 'perm'"));
 ---
 > 	else error(_("value is out of range in 'perm' argument"));
-1296c1295
+1295c1294
 < 	UNIMPLEMENTED_TYPE("aperm", a);
 ---
 > 	UNIMPLEMENTED_TYPE("aperm()", a);
-1301c1300
+1300c1299
 <     if (resize == NA_LOGICAL) error(_("'resize' must be TRUE or FALSE"));
 ---
 >     if (resize == NA_LOGICAL) error(_("'%s' argument must be TRUE or FALSE"), "resize");
-1359c1358
+1358c1357
 < 	error(_("'x' must be numeric"));
 ---
 > 	error(_("'%s' must be numeric"), "x");
-1494c1493
+1493c1492
 <             stop("'dim' specifies too large an array")
 ---
 >             stop(_("'dim' specifies too large array"))
-1525,1526c1524
+1524,1525c1523
 < 	    error(_("'data' must be of a vector type, was '%s'"),
 < 		type2char(TYPEOF(vals)));
 ---
 > 	    error(_("'data' argument must be of a vector type, was '%s'"), type2char(TYPEOF(vals)));
-1533c1531
+1532c1530
 <     if (nd == 0) error(_("'dims' cannot be of length 0"));
 ---
 >     if (nd == 0) error(_("'%s' argument cannot be of length 0"), "dims");
-1634c1632
+1633c1631
 < 	error(_("invalid 'nrow' value (too large or NA)"));
 ---
 > 	error(_("invalid '%s' value (too large or NA)"), "nrow");
-1636c1634
+1635c1633
 < 	error(_("invalid 'nrow' value (< 0)"));
 ---
 > 	error(_("invalid '%s' value (< 0)"), "nrow");
-1639c1637
+1638c1636
 < 	error(_("invalid 'ncol' value (too large or NA)"));
 ---
 > 	error(_("invalid '%s' value (too large or NA)"), "ncol");
-1641c1639
+1640c1638
 < 	error(_("invalid 'ncol' value (< 0)"));
 ---
 > 	error(_("invalid '%s' value (< 0)"), "ncol");
-1644c1642
+1643c1641
 < 	error(_("'x' must have positive length"));
 ---
 > 	error(_("'%s' must have positive length"), "x");
-1704,1705c1702
+1703,1704c1701
 < 	    error(_("singular matrix in 'backsolve'. First zero in diagonal [%d]"),
 < 		  i + 1);
 ---
@@ -28848,13 +28810,13 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > 	    errorcall(call, _("unknown '%s' function"), "cumxxx()");
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=ChangeLog' R-devel/src/main/datetime.c R/src/main/datetime.c
-102a103
+110a111
 > #include <Localization.h>
-546c547
+554c555
 < 	    error("time zone specification is too long");
 ---
 > 	    error(_("time zone specification is too long"));
-556c557
+564c565
 < 	    error("time zone specification is too long");
 ---
 > 	    error(_("time zone specification is too long"));
@@ -29254,6 +29216,10 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     new->conprivate = (void *) malloc(sizeof(struct unzconn));
 >     if(!new->conprivate) {
 > 	free(new->description); free(new->conclass); free(new);
+2080c2081
+< 		warning("possible truncation of >= 4GB file");
+---
+> 		warning(_("possible truncation of >= 4GB file"));
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=ChangeLog' R-devel/src/main/dstruct.c R/src/main/dstruct.c
 25a26
 > #include <Localization.h>
@@ -29664,151 +29630,151 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	error(_("argument must be an environment"));
 ---
 > 	error(_("'%s' argument must be an environment"), "env");
-3029c3098
+3036c3105
 <     errorcall(call, _("no item called \"%s\" on the search list"), what);
 ---
 >     errorcall(call, _("no item called '%s' on the search list"), what);
-3075c3144
+3082c3151
 < 	errorcall(call, _("invalid object for 'as.environment'"));
 ---
 > 	errorcall(call, _("invalid object for 'as.environment()' function"));
-3101c3170
+3108c3177
 < 	error(_("not an environment"));
 ---
 > 	error(_("'%s' argument is not an environment"), "env");
-3129c3198
+3136c3205
 < 	error(_("not an environment"));
 ---
 > 	error(_("'%s' argument is not an environment"), "env");
-3153c3222
+3160c3229
 < 	error(_("not a symbol"));
 ---
 > 	error(_("'%s' argument is not a symbol"), "sym");
-3158c3227
+3165c3234
 < 	error(_("not an environment"));
 ---
 > 	error(_("'%s' argument is not an environment"), "env");
-3166c3235
+3173c3242
 < 	    error(_("no binding for \"%s\""), EncodeChar(PRINTNAME(sym)));
 ---
 > 	    error(_("no binding for '%s'"), EncodeChar(PRINTNAME(sym)));
-3174c3243
+3181c3250
 < 	error(_("not a symbol"));
 ---
 > 	error(_("'%s' argument is not a symbol"), "sym");
-3179c3248
+3186c3255
 < 	error(_("not an environment"));
 ---
 > 	error(_("'%s' argument is not an environment"), "env");
-3187c3256
+3194c3263
 < 	    error(_("no binding for \"%s\""), EncodeChar(PRINTNAME(sym)));
 ---
 > 	    error(_("no binding for '%s'"), EncodeChar(PRINTNAME(sym)));
-3195c3264
+3202c3271
 < 	error(_("not a symbol"));
 ---
 > 	error(_("'%s' argument is not a symbol"), "sym");
-3197c3266
+3204c3273
 < 	error(_("not a function"));
 ---
 > 	error(_("'%s' argument is not a function"), "fun");
-3200,3202c3269,3270
+3207,3209c3276,3277
 <     if (TYPEOF(env) != ENVSXP &&
 < 	TYPEOF((env = simple_as_environment(env))) != ENVSXP)
 < 	error(_("not an environment"));
 ---
 >     if (TYPEOF(env) != ENVSXP && TYPEOF((env = simple_as_environment(env))) != ENVSXP)
 > 	error(_("'%s' argument is not an environment"), "env");
-3232c3300
+3239c3307
 < 	error(_("not a symbol"));
 ---
 > 	error(_("'%s' argument is not a symbol"), "sym");
-3235,3237c3303,3304
+3242,3244c3310,3311
 <     if (TYPEOF(env) != ENVSXP &&
 < 	TYPEOF((env = simple_as_environment(env))) != ENVSXP)
 < 	error(_("not an environment"));
 ---
 >     if (TYPEOF(env) != ENVSXP && TYPEOF((env = simple_as_environment(env))) != ENVSXP)
 > 	error(_("'%s' argument is not an environment"), "env");
-3245c3312
+3252c3319
 < 	    error(_("no binding for \"%s\""), EncodeChar(PRINTNAME(sym)));
 ---
 > 	    error(_("no binding for '%s'"), EncodeChar(PRINTNAME(sym)));
-3253c3320
+3260c3327
 < 	error(_("not a symbol"));
 ---
 > 	error(_("'%s' argument is not a symbol"), "sym");
-3256,3258c3323,3324
+3263,3265c3330,3331
 <     if (TYPEOF(env) != ENVSXP &&
 < 	TYPEOF((env = simple_as_environment(env))) != ENVSXP)
 < 	error(_("not an environment"));
 ---
 >     if (TYPEOF(env) != ENVSXP && TYPEOF((env = simple_as_environment(env))) != ENVSXP)
 > 	error(_("'%s' argument is not an environment"), "env");
-3266c3332
+3273c3339
 < 	    error(_("no binding for \"%s\""), EncodeChar(PRINTNAME(sym)));
 ---
 > 	    error(_("no binding for '%s'"), EncodeChar(PRINTNAME(sym)));
-3352c3418,3419
+3359c3425,3426
 <     if (TYPEOF(sym) != SYMSXP) error(_("not a symbol"));
 ---
 >     if (TYPEOF(sym) != SYMSXP)
 > 	error(_("'%s' argument is not a symbol"), "sym");
-3511c3578
+3518c3585
 < 	errorcall(call, _("namespace already registered"));
 ---
 > 	errorcall(call, _("namespace is already registered"));
-3523c3590
+3530c3597
 < 	errorcall(call, _("namespace not registered"));
 ---
 > 	errorcall(call, _("namespace is not registered"));
-3611,3612c3678
+3618,3619c3685
 < 		error(_("exported symbol '%s' has no value"),
 < 		      CHAR(PRINTNAME(expsym)));
 ---
 > 		error(_("exported symbol '%s' has no value"), CHAR(PRINTNAME(expsym)));
-3643c3709
+3650c3716
 < 	error("argument must be a hashed environment");
 ---
 > 	error(_("'%s' argument must be a hashed environment"), "env");
-3651c3717
+3658c3724
 < 	error("R character strings are limited to 2^31-1 bytes");
 ---
 > 	error(_("R character strings are limited to 2^31-1 bytes"));
-3665c3731
+3672c3738
 < 	error("R character strings are limited to 2^31-1 bytes");
 ---
 > 	error(_("R character strings are limited to 2^31-1 bytes"));
-3749c3815
+3756c3822
 <     Rprintf("Resized: size %d => %d\tpri %d => %d\n",
 ---
 >     Rprintf(_("Resized: size %d => %d\tpri %d => %d\n"),
-3796,3797c3862
+3803,3804c3869
 < 	error(_("embedded nul in string: '%s'"),
 < 	      EncodeString(c, 0, 0, Rprt_adj_none));
 ---
 > 	error(_("embedded nul in string: '%s'"), EncodeString(c, 0, 0, Rprt_adj_none));
-3840c3905
+3847c3912
 < 	    error("unknown encoding mask: %d", enc);
 ---
 > 	    error(_("unknown encoding mask: %d"), enc);
-3876,3877c3941,3942
+3883,3884c3948,3949
 <     Rprintf("Cache size: %d\n", LENGTH(R_StringHash));
 <     Rprintf("Cache pri:  %d\n", HASHPRI(R_StringHash));
 ---
 >     Rprintf(_("Cache size: %d\n"), LENGTH(R_StringHash));
 >     Rprintf(_("Cache pri:  %d\n"), HASHPRI(R_StringHash));
-3881c3946
+3888c3953
 < 	    Rprintf("Line %d: ", i);
 ---
 > 	    Rprintf(_("Line %d: "), i);
-3903,3904c3968,3969
+3910,3911c3975,3976
 < 	fprintf(f, "Cache size: %d\n", LENGTH(R_StringHash));
 < 	fprintf(f, "Cache pri:  %d\n", HASHPRI(R_StringHash));
 ---
 > 	fprintf(f, _("Cache size: %d\n"), LENGTH(R_StringHash));
 > 	fprintf(f, _("Cache pri:  %d\n"), HASHPRI(R_StringHash));
-3908c3973
+3915c3980
 < 		fprintf(f, "Line %d: ", i);
 ---
 > 		fprintf(f, _("Line %d: "), i);
@@ -30143,46 +30109,50 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	Rprintf("exiting from: ");
 ---
 > 	Rprintf(_("exiting from: "));
-1185,1186c1175
+1208c1198
+< 	    else error("something weird happened");
+---
+> 	    else error(_("something weird happened"));
+1259,1260c1249
 < 	    error(_("could not find symbol \"%s\" in environment of the generic function"),
 < 		  CHAR(PRINTNAME(symbol)));
 ---
 > 	    error(_("could not find symbol \"%s\" in environment of the generic function"), CHAR(PRINTNAME(symbol)));
-1203c1192
+1277c1266
 < 		    error(_("symbol \"%s\" not in environment of method"),
 ---
 > 		    error(_("symbol \"%s\" is not in environment of method"),
-1258c1247
+1332c1321
 < 	error(_("object '%s' not found"), EncodeChar(PRINTNAME(symbol)));
 ---
 > 	error(_("object '%s' was not found"), EncodeChar(PRINTNAME(symbol)));
-1315,1316c1304
+1389,1390c1378
 < 	warningcall(call,
 < 		    _("the condition has length > 1 and only the first element will be used"));
 ---
 > 	warningcall(call, _("the condition has length > 1 and only the first element will be used"));
-1337c1325
+1411c1399
 < 	    _("argument is of length zero");
 ---
 > 	    _("argument is of length 0");
-1345a1334
+1419a1408
 > /*
-1347a1337,1340
+1421a1411,1414
 > */
 > static R_INLINE Rboolean BodyHasBraces(SEXP body) {
 >  return (isLanguage(body) && CAR(body) == R_BraceSymbol);
 >  }
-1522c1515
+1596c1589
 < 		errorcall(call, _("invalid for() loop sequence"));
 ---
 > 		errorcall(call, _("invalid 'for()' loop sequence"));
-1677c1670
+1751c1744
 <     if (length(args) < 2) WrongArgCount("function");
 ---
 >     if (length(args) < 2) WrongArgCount("function()");
-1797a1791
+1871a1865
 > /*
-1808c1802,1811
+1882c1876,1885
 < 
 ---
 > */
@@ -30195,9 +30165,9 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >         }
 >         R_SetVarLocValue(loc, v);
 >  }
-1812a1816
+1886a1890
 > /*
-1818c1822,1826
+1892c1896,1900
 < 
 ---
 > */
@@ -30205,99 +30175,99 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >         if (NAMED(rhs) && NAMED(rhs) <= 1)
 >             SET_NAMED(rhs, 2);
 >  }
-1826c1834
+1900c1908
 < 	error(_("overlong name in '%s'"), EncodeChar(PRINTNAME(fun)));
 ---
 > 	error(_("over-long name in '%s' function"), EncodeChar(PRINTNAME(fun)));
-2043c2051
+2117c2125
 < 	errorcall(call, _("invalid (do_set) left-hand side to assignment"));
 ---
 > 	errorcall(call, _("invalid ('do_set()' function) left-hand side to assignment"));
-2055a2064
+2129a2138
 > /*
-2059a2069,2073
+2133a2143,2147
 > */
 > static R_INLINE void COPY_TAG(SEXP to, SEXP from) {
 >   SEXP tag = TAG(from);
 >   if (tag != R_NilValue) SET_TAG(to, tag);
 >  }
-2303c2317,2320
+2377c2391,2394
 < #define simple_as_environment(arg) (IS_S4_OBJECT(arg) && (TYPEOF(arg) == S4SXP) ? R_getS4DataSlot(arg, ENVSXP) : R_NilValue)
 ---
 > //#define simple_as_environment(arg) (IS_S4_OBJECT(arg) && (TYPEOF(arg) == S4SXP) ? R_getS4DataSlot(arg, ENVSXP) : R_NilValue)
 > static R_INLINE SEXP simple_as_environment(SEXP arg) {
 >  return (IS_S4_OBJECT(arg) && (TYPEOF(arg) == S4SXP) ? R_getS4DataSlot(arg, ENVSXP) : R_NilValue);
 >  }
-2327,2328c2344
+2401,2402c2418
 < 	error(_("invalid '%s' argument of type '%s'"),
 < 	      "enclos", type2char(tEncl));
 ---
 > 	error(_("invalid '%s' argument of type '%s'"), "enclos", type2char(tEncl));
-2355c2371
+2429c2445
 < 	    error(_("numeric 'envir' arg not of length one"));
 ---
 > 	    error(_("numeric 'envir' argument is not of length one"));
-2358,2359c2374
+2432,2433c2448
 < 	    error(_("invalid '%s' argument of type '%s'"),
 < 		  "envir", type2char(TYPEOF(env)));
 ---
 > 	    error(_("invalid '%s' argument of type '%s'"), "envir", type2char(TYPEOF(env)));
-2363,2364c2378
+2437,2438c2452
 < 	error(_("invalid '%s' argument of type '%s'"),
 < 	      "envir", type2char(TYPEOF(env)));
 ---
 > 	error(_("invalid '%s' argument of type '%s'"), "envir", type2char(TYPEOF(env)));
-2379c2393
+2453c2467
 < 		error(_("restarts not supported in 'eval'"));
 ---
 > 		error(_("restarts are not supported in 'eval()' function"));
-2401c2415
+2475c2489
 < 		error(_("restarts not supported in 'eval'"));
 ---
 > 		error(_("restarts are not supported in 'eval()' function"));
-2458c2472
+2532c2546
 < 	error(_("'Recall' called from outside a closure"));
 ---
 > 	error(_("'Recall()' function called from outside a closure"));
-2471c2485
+2545c2559
 < 	error(_("'Recall' called from outside a closure"));
 ---
 > 	error(_("'Recall()' function called from outside a closure"));
-2824,2825c2838
+2898,2899c2912
 < 		warning(_("Incompatible methods (\"%s\", \"%s\") for \"%s\""),
 < 			lname, rname, generic);
 ---
 > 		warning(_("Incompatible methods (\"%s\", \"%s\") for \"%s\""), lname, rname, generic);
-3325,3327c3338
+3399,3401c3412
 < 	    error(_("\"%s\" is not a %s function"),
 < 		  CHAR(PRINTNAME(symbol)),
 < 		  type == BUILTINSXP ? "BUILTIN" : "SPECIAL");
 ---
 > 	    error(_("'%s' is not a '%s' function"), CHAR(PRINTNAME(symbol)), type == BUILTINSXP ? "BUILTIN" : "SPECIAL");
-3869c3880
+3943c3954
 < #define LASTOP  default: error(_("bad opcode"))
 ---
 > #define LASTOP  default: error(_("bad operation code"))
-3999,4000c4010,4011
+4073,4074c4084,4085
 <     if(*n) error(_("argument \"%s\" is missing, with no default"), n);
 <     else error(_("argument is missing, with no default"));
 ---
 >     if(*n) error(_("'%s' argument is missing, with no default"), n);
 >     else error(_("'%s' argument is missing, with no default"), "expr");
-4002a4014
+4076a4088
 > /*
-4004a4017,4020
+4078a4091,4094
 > */
 > static R_INLINE void MAYBE_MISSING_ARGUMENT_ERROR(SEXP symbol, Rboolean keepmiss) {
 >     if (! keepmiss) MISSING_ARGUMENT_ERROR(symbol);
 >  }
-4008c4024
+4082c4098
 <     error(_("object '%s' not found"), EncodeChar(PRINTNAME(symbol)));
 ---
 >     error(_("object '%s' was not found"), EncodeChar(PRINTNAME(symbol)));
-4166a4183
+4240a4257
 > /*
-4174a4192,4199
+4248a4266,4273
 > */
 > static R_INLINE void SETCALLARG_TAG(SEXP tag) {
 >         if (tag != R_NilValue) {
@@ -30306,134 +30276,134 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >                 SET_TAG(cell, CreateTag(tag));
 > 	}
 >  }
-4176a4202
+4250a4276
 > /*
-4181a4208,4213
+4255a4282,4287
 > */
 > static R_INLINE void SETCALLARG_TAG_SYMBOL(SEXP tag) {
 >         SEXP cell = GETSTACK(-1);
 >         if (cell != R_NilValue)
 >             SET_TAG(cell, tag);
 >  }
-4837c4869
+4911c4943
 < 			  _("invalid %s type in 'x %s y'"), arg, op);	\
 ---
 > 			  _("invalid '%s' type in 'x %s y'"), arg, op);	\
-4853c4885
+4927c4959
 < 			errorcall(call, "argument %d is empty", k);
 ---
 > 			errorcall(call, _("argument %d is empty"), k);
-4867c4899
+4941c4973
 < 	    errorcall(call, "argument %d is missing", n);
 ---
 > 	    errorcall(call, _("argument %d is missing"), n);
-4897c4929,4932
+4971c5003,5006
 < #define IS_TRUE_BUILTIN(x) ((R_FunTab[PRIMOFFSET(x)].eval % 100 )/10 == 0)
 ---
 > //#define IS_TRUE_BUILTIN(x) ((R_FunTab[PRIMOFFSET(x)].eval % 100 )/10 == 0)
 > static R_INLINE Rboolean IS_TRUE_BUILTIN(SEXP x) {
 >  return ((R_FunTab[PRIMOFFSET(x)].eval % 100 )/10 == 0);
 >  }
-5054,5055c5089
+5128,5129c5163
 < 	else errorcall(VECTOR_ELT(constants, callidx),
 < 		       _("invalid for() loop sequence"));
 ---
 > 	else errorcall(VECTOR_ELT(constants, callidx), _("invalid 'for()' loop sequence"));
-5136c5170
+5210c5244
 < 	    error(_("invalid sequence argument in for loop"));
 ---
 > 	    error(_("invalid sequence argument in 'for()' loop"));
-5231c5265
+5305c5339
 < 	  Rprintf("trace: ");
 ---
 > 	  Rprintf(_("trace: "));
-5247c5281
+5321c5355
 < 	  Rprintf("trace: ");
 ---
 > 	  Rprintf(_("trace: "));
-5259c5293
+5333c5367
 < 	  Rprintf("trace: ");
 ---
 > 	  Rprintf(_("trace: "));
-5271,5272c5305
+5345,5346c5379
 < 	  error(_("there is no .Internal function '%s'"),
 < 		CHAR(PRINTNAME(symbol)));
 ---
 > 	  error(_("there is no '.Internal' function '%s'"), CHAR(PRINTNAME(symbol)));
-5382c5415
+5456c5489
 < 	  error(_("not a BUILTIN function"));
 ---
 > 	  error(_("'%s' is not a '%s' function"), CHAR(PRINTNAME(fun)), "BUILTIN");
-5410c5443
+5484c5517
 < 	  Rprintf("trace: ");
 ---
 > 	  Rprintf(_("trace: "));
-5804c5837
+5878c5911
 < 	   errorcall(call, _("EXPR must be a length 1 vector"));
 ---
 > 	   errorcall(call, _("'%s' argument must be a vector of length 1"), "EXPR");
-5807,5808c5840
+5881,5882c5914
 < 		       _("EXPR is a \"factor\", treated as integer.\n"
 < 			 " Consider using '%s' instead."),
 ---
 > 		       _("'EXPR' is an object of class \"factor\", treated as integer.\n Consider using '%s' instead."),
-5813c5845
+5887c5919
 < 	       errorcall(call, _("numeric EXPR required for 'switch' without named alternatives"));
 ---
 > 	       errorcall(call, _("numeric 'EXPR' required for 'switch()' without named alternatives"));
-5815c5847
+5889c5921
 < 	       errorcall(call, "bad character 'switch' offsets");
 ---
 > 	       errorcall(call, _("bad character 'switch()' offsets"));
-5817c5849
+5891c5923
 < 	       errorcall(call, "bad 'switch' names");
 ---
 > 	       errorcall(call, _("bad 'switch()' names"));
-5830c5862
+5904c5936
 < 	       errorcall(call, "bad numeric 'switch' offsets");
 ---
 > 	       errorcall(call, _("bad numeric 'switch()' offsets"));
-5908c5940
+5982c6014
 < 		error("unknown instruction code");
 ---
 > 		error(_("unknown instruction code"));
-6048c6080
+6122c6154
 <     errorcall(call, _("argument is not a byte code object"));
 ---
 >     errorcall(call, _("'code' argument is not a byte code object"));
-6073c6105
+6147c6179
 < 	errorcall(call, _("unable to open 'file'"));
 ---
 > 	errorcall(call, _("unable to open file '%s'"), translateChar(STRING_ELT(file, 0)));
-6088c6120
+6162c6194
 < 	errorcall(call, _("'file' must be non-empty string"));
 ---
 > 	errorcall(call, _("'%s' argument must be non-empty character string"), "file");
-6090c6122
+6164c6196
 < 	errorcall(call, _("'ascii' must be logical"));
 ---
 > 	errorcall(call, _("'%s' argument must be logical"), "ascii");
-6094c6126
+6168c6200
 < 	errorcall(call, _("unable to open 'file'"));
 ---
 > 	errorcall(call, _("unable to open file '%s'"), translateChar(STRING_ELT(CADR(args), 0)));
-6120c6152
+6194c6226
 < 	    error("R_CompiledFileName: buffer too small");
 ---
 > 	    error(_("'R_CompiledFileName()': buffer is too small"));
-6127c6159
+6201c6233
 < 	    error("R_CompiledFileName: buffer too small");
 ---
 > 	    error(_("'R_CompiledFileName()': buffer is too small"));
-6184c6216
+6258c6290
 < 	error("bad constCount value");
 ---
 > 	error(_("bad '%s' value"), "constCount");
-6248c6280
+6322c6354
 < 	error(_("profile timer in use"));
 ---
 > 	error(_("profile timer is in use"));
-6285c6317
+6359c6391
 < 	error(_("not byte code profiling"));
 ---
 > 	error(_("no byte code profiling"));
@@ -30446,136 +30416,136 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=ChangeLog' R-devel/src/main/gram.c R/src/main/gram.c
 91a92
 > #include <Localization.h>
-1366c1367
+1485c1486
 <   YYFPRINTF (stderr, "Reducing stack by rule %d (line %lu):\n",
 ---
 >   YYFPRINTF (stderr, _("Reducing stack by rule %d (line %lu):\n"),
-1646c1647
+1795c1796
 <     yymsg = "Deleting";
 ---
 >     yymsg = YY_("Deleting");
-1738c1739
+1916c1917
 <   YYDPRINTF ((stderr, "Starting parse\n"));
 ---
 >   YYDPRINTF ((stderr, YY_("Starting parse\n")));
-1817c1818
+1995c1996
 <       YYDPRINTF ((stderr, "Stack size increased to %lu\n",
 ---
 >       YYDPRINTF ((stderr, YY_("Stack size increased to %lu\n"),
-1824c1825
+2002c2003
 <   YYDPRINTF ((stderr, "Entering state %d\n", yystate));
 ---
 >   YYDPRINTF ((stderr, YY_("Entering state %d\n"), yystate));
-1849c1850
+2027c2028
 <       YYDPRINTF ((stderr, "Reading a token: "));
 ---
 >       YYDPRINTF ((stderr, YY_("Reading a token: ")));
-1856c1857
+2034c2035
 <       YYDPRINTF ((stderr, "Now at end of input.\n"));
 ---
 >       YYDPRINTF ((stderr, YY_("Now at end of input.\n")));
-1861c1862
+2039c2040
 <       YY_SYMBOL_PRINT ("Next token is", yytoken, &yylval, &yylloc);
 ---
 >       YY_SYMBOL_PRINT (YY_("Next token is"), yytoken, &yylval, &yylloc);
-1884c1885
+2062c2063
 <   YY_SYMBOL_PRINT ("Shifting", yytoken, &yylval, &yylloc);
 ---
 >   YY_SYMBOL_PRINT (YY_("Shifting"), yytoken, &yylval, &yylloc);
-2565c2566
-<           yydestruct ("Error: discarding",
+2654c2655
+< 	  yydestruct ("Error: discarding",
 ---
->           yydestruct (YY_("Error: discarding"),
-2622c2623
+> 	  yydestruct (YY_("Error: discarding"),
+2711c2712
 <       yydestruct ("Error: popping",
 ---
 >       yydestruct (YY_("Error: popping"),
-2640c2641
+2729c2730
 <   YY_SYMBOL_PRINT ("Shifting", yystos[yyn], yyvsp, yylsp);
 ---
 >   YY_SYMBOL_PRINT (YY_("Shifting"), yystos[yyn], yyvsp, yylsp);
-2676c2677
+2765c2766
 <       yydestruct ("Cleanup: discarding lookahead",
 ---
 >       yydestruct (YY_("Cleanup: discarding lookahead"),
-2685c2686
+2774c2775
 <       yydestruct ("Cleanup: popping",
 ---
 >       yydestruct (YY_("Cleanup: popping"),
-4089c4090
+4181c4182
 < static void yyerror(const char *s)
 ---
 > static void yyerror(const char *s) //output used in source.c method 'parseError(SEXP call, int linenum)'
-4099c4100
+4191c4192
 < #define YYENGLISH 8
 ---
 > #define YYENGLISH 10
-4175a4177,4182
+4267a4269,4274
 >                 case 8:
 >                         snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, _("unexpected '%s' value"), "NULL");
 >                                 break;
 >                 case 9:
 >                         snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, _("unexpected '%s' value"), "function");
 >                                 break;
-4177c4184
+4269c4276
 <                   snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, _("unexpected %s"),
 ---
 >                   snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, _("unexpected statement %s"),
-4185c4192
+4277c4284
 < 	snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE - 1, _("unexpected %s"),
 ---
 > 	snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE - 1, _("unexpected statement %s"),
-4197,4198c4204
+4289,4290c4296
 < 	    error(_("repeated formal argument '%s' on line %d"), EncodeChar(PRINTNAME(_new)),
 < 								 lloc->first_line);
 ---
 > 	    error(_("repeated formal argument '%s' on line %d"), EncodeChar(PRINTNAME(_new)), lloc->first_line);
-4593c4599
+4685c4691
 < 		    error(_("nul character not allowed (line %d)"), ParseState.xxlineno);
 ---
 > 		    error(_("nul character is not allowed (line %d)"), ParseState.xxlineno);
-4609c4615
+4701c4707
 < 			    errorcall(R_NilValue, _("'\\x' used without hex digits in character string starting \"%s\""), currtext);
 ---
 > 			    errorcall(R_NilValue, _("'%s' used without hex digits in character string starting \"%s\""), "\\x", currtext);
-4616c4622
+4708c4714
 < 		    error(_("nul character not allowed (line %d)"), ParseState.xxlineno);
 ---
 > 		    error(_("nul character is not allowed (line %d)"), ParseState.xxlineno);
-4625c4631
+4717c4723
 < 		    error(_("\\uxxxx sequences not supported inside backticks (line %d)"), ParseState.xxlineno);
 ---
 > 		    error(_("'%s' sequences not supported inside backticks (line %d)"), "\\uxxxx", ParseState.xxlineno);
-4640c4646
+4732c4738
 < 			    errorcall(R_NilValue, _("'\\u' used without hex digits in character string starting \"%s\""), currtext);
 ---
 > 			    errorcall(R_NilValue, _("'%s' used without hex digits in character string starting \"%s\""), "\\u", currtext);
-4648,4649c4654
+4740,4741c4746
 < 			error(_("invalid \\u{xxxx} sequence (line %d)"),
 < 			      ParseState.xxlineno);
 ---
 > 			error(_("invalid %s sequence (line %d)"), "\\u{xxxx}", ParseState.xxlineno);
-4653c4658
+4745c4750
 < 		    error(_("nul character not allowed (line %d)"), ParseState.xxlineno);
 ---
 > 		    error(_("nul character is not allowed (line %d)"), ParseState.xxlineno);
-4662c4667
+4754c4759
 < 		    error(_("\\Uxxxxxxxx sequences not supported inside backticks (line %d)"), ParseState.xxlineno);
 ---
 > 		    error(_("'%s' sequences not supported inside backticks (line %d)"), "\\Uxxxxxxxx", ParseState.xxlineno);
-4677c4682
+4769c4774
 < 			    errorcall(R_NilValue, _("'\\U' used without hex digits in character string starting \"%s\""), currtext);
 ---
 > 			    errorcall(R_NilValue, _("'%s' used without hex digits in character string starting \"%s\""), "\\U", currtext);
-4685c4690
+4777c4782
 < 			error(_("invalid \\U{xxxxxxxx} sequence (line %d)"), ParseState.xxlineno);
 ---
 > 			error(_("invalid %s sequence (line %d)"), "\\U{xxxxxxxx}", ParseState.xxlineno);
-4689c4694
+4781c4786
 < 		    error(_("nul character not allowed (line %d)"), ParseState.xxlineno);		
 ---
 > 		    error(_("nul character is not allowed (line %d)"), ParseState.xxlineno);		
-5566c5571
+5658c5663
 < 	    UNIMPLEMENTED_TYPE("lengthgets2", x);
 ---
 > 	    UNIMPLEMENTED_TYPE("lengthgets2()", x);
@@ -31421,44 +31391,44 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=ChangeLog' R-devel/src/main/names.c R/src/main/names.c
 27a28
 > #include <Localization.h>
-1143c1144
+1144c1145
 < 	R_Suicide("couldn't allocate memory for symbol table");
 ---
 > 	R_Suicide(_("couldn't allocate memory for symbol table"));
-1268c1269
+1269c1270
 <             error(_("class name too long in '%s'"), className);
 ---
 >             error(_("class name is too long in '%s'"), className);
-1273c1274
+1274c1275
 <         error(_("class name too long in '%s'"), className);
 ---
 >         error(_("class name is too long in '%s'"), className);
-1278c1279
+1279c1280
 <             error(_("class name too long in '%s'"), className);
 ---
 >             error(_("class name is too long in '%s'"), className);
-1283c1284
+1284c1285
 <         error(_("class name too long in '%s'"), className);
 ---
 >         error(_("class name is too long in '%s'"), className);
-1302c1303
+1303c1304
 < 	errorcall(call, _("invalid .Internal() argument"));
 ---
 > 	errorcall(call, _("invalid '%s' argument"), ".Internal()");
-1305c1306
+1306c1307
 < 	errorcall(call, _("invalid .Internal() argument"));
 ---
 > 	errorcall(call, _("invalid '%s' argument"), ".Internal()");
-1307c1308
+1308c1309
 < 	errorcall(call, _("there is no .Internal function '%s'"),
 ---
 > 	errorcall(call, _("there is no '.Internal' function '%s'"),
-1328,1329c1329
+1329,1330c1330
 < 	    errorcall(call,
 < 		      ".Internal(%s()) not called from a base namespace\n", fn);
 ---
 > 	    errorcall(call, _("'.Internal(%s())' not called from a base namespace\n"), fn);
-1336,1337c1336
+1337,1338c1337
 < 	    errorcall(call,
 < 		      ".Internal(%s()) called from namespace '%s'\n", fn, ns);
 ---
@@ -32048,23 +32018,23 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 			error("missing show() in methods namespace: this should not happen");
 ---
 > 			error(_("missing 'show()' in methods namespace: this should not happen"));
-987c989
+988c990
 < 		    error("missing methods namespace: this should not happen");
 ---
 > 		    error(_("missing methods namespace: this should not happen"));
-992c994
+993c995
 < 		    error("missing show() in methods namespace: this should not happen");
 ---
 > 		    error(_("missing 'show()' in methods namespace: this should not happen"));
-1046c1048
+1049c1051
 < 	warning(_("invalid character length in 'dblepr'"));
 ---
 > 	warning(_("invalid character length in '%s' function"), "dblepr()");
-1064c1066
+1067c1069
 < 	warning(_("invalid character length in 'intpr'"));
 ---
 > 	warning(_("invalid character length in '%s' function"), "intpr()");
-1083c1085
+1086c1088
 < 	warning(_("invalid character length in 'realpr'"));
 ---
 > 	warning(_("invalid character length in '%s' function"), "realpr()");
@@ -34632,22 +34602,22 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > #include <Localization.h>
 > 
-1414c1405,1407
+1426c1417,1419
 < 	RxmlMessage(0, "ERROR: overflowed buffer by %d bytes\n", -blen);
 ---
 > 	RxmlMessage(0, n_("Error: overflowed buffer by %d byte\n",
 > 				"Error: overflowed buffer by %d bytes\n",
 > 				-blen), -blen);
-1439,1440c1432
+1451,1452c1444
 < 	REprintf("%s\n%s\n", "Proxy authentication failed:",
 < 		"\tplease re-enter the credentials or hit Cancel");
 ---
 > 	REprintf("%s\n%s\n", _("Proxy authentication failed:\tplease re-enter the credentials or hit Cancel"));
-1478c1470
+1490c1482
 < 	RxmlMessage(1, "Code %d, content-type '%s'",
 ---
 > 	RxmlMessage(1, _("Code %d, content-type '%s'"),
-1481c1473
+1493c1485
 < 	RxmlMessage(1, "Code %d, no content-type",
 ---
 > 	RxmlMessage(1, _("Code %d, no content-type"),
@@ -35882,6 +35852,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	if(res != 1) error("fwrite error in initialize_R");
 ---
 > 	if(res != 1) error(_("fwrite error in initialize_R"));
+Only in R-devel/tests/Pkgs/exNSS4: man
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=ChangeLog' R-devel/tests/reg-tests-1b.R R/tests/reg-tests-1b.R
 240,241c240,241
 < stopifnot(sapply(R, function(ch) sub(".* : ", '', ch) ==
