@@ -118,8 +118,8 @@ before unpacking so that the files will be readable by the target group
 (e.g.,@: @code{umask 022} to be usable by all users).  Keep this
 setting of @code{umask} whilst building and installing.
 
-If you use a recent GNU version of @command{tar} and do this as a root
-account (which on Windows includes accounts with administrator
+If you use a recent @acronym{GNU} version of @command{tar} and do this
+as a root account (which on Windows includes accounts with administrator
 privileges) you may see many warnings about changing ownership.  In
 which case you can use
 
@@ -365,7 +365,8 @@ and so on, as described further below.  This has the advantage of always
 keeping your source tree clean and is particularly recommended when you
 work with a version of @R{} from Subversion.  (You may need
 @acronym{GNU} @command{make} to allow this, and you will need no spaces
-in the path to the build directory.)
+in the path to the build directory.  It is unlikely to work if the
+source directory has previously been used for a build.)
 
 @c For those obtaining @R{} @emph{via} Subversion, one additional step is
 @c necessary:
@@ -453,6 +454,7 @@ make pdf      @r{to create PDF versions}
 make info     @r{to create info files (not @samp{refman} nor @samp{fullrefman}).}
 @end example
 
+@c texi2any from Mar 2013.
 You will not be able to build any of these unless you have
 @command{texi2any} version 5.1 or later installed, and for PDF you must
 have @command{texi2dvi} and @file{texinfo.tex} installed (which are part
@@ -3049,6 +3051,8 @@ functions@footnote{including the @code{opendir}, @code{readdir},
 @code{realpath}, @code{symlink}.} will be used if available.
 
 @c PCRE 8.10 is from June 2010, 8.32 from May 2013
+@c zlib 1.2.5 is from July 2010, bzip2 1.0.6 from Sept 2010
+@c xz 5.0.3 is from mid 2011 (it was in R 2.13.1).
 Installations of @code{zlib} (version 1.2.5 or later), @code{libbz2}
 (version 1.0.6 or later: called @pkg{bzip2-libs}/@pkg{bzip2-devel} or
 @pkg{libbz2-1.0}/@pkg{libbz2-dev} by some Linux distributions),

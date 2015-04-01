@@ -655,7 +655,6 @@ gam.fit5 <- function(x,y,lsp,Sl,weights=NULL,offset=NULL,deriv=2,family,
   if (!is.null(start0)) start <- start0 
   coef <- as.numeric(start)
 
-
   if (is.null(weights)) weights <- rep.int(1, nobs)
   if (is.null(offset)) offset <- rep.int(0, nobs)
  
@@ -782,14 +781,18 @@ gam.fit5 <- function(x,y,lsp,Sl,weights=NULL,offset=NULL,deriv=2,family,
               St <- St[-drop,-drop]
               x <- x[,-drop] ## dropping columns from model matrix
               if (!is.null(lpi)) { ## need to adjust column indexes as well
-                k <- 0
+                ii <- seq_len(q)[!bdrop];ij <- rep(NA,q)
+                ij[ii] <- seq_len(length(ii)) ## col i of old model matrix is col ij[i] of new 
+                #k <- 0
                 for (i in seq_len(length(lpi))) {
-                  kk <- sum(lpi[[i]]%in%drop==FALSE) ## how many left undropped?
-                  lpi[[i]] <- seq_len(kk) + k ## new index - note strong assumptions on structure here
-                  k <- k + kk
+                  #kk <- sum(lpi[[i]]%in%drop==FALSE) ## how many left undropped?
+                  #lpi[[i]] <- seq_len(kk) + k ## new index - note strong assumptions on structure here
+                  #k <- k + kk
+                  lpi[[i]] <- ij[lpi[[i]][!(lpi[[i]]%in%drop)]] # drop and shuffle up
                 }
               } ## lpi adjustment done
               attr(x,"lpi") <- lpi
+              attr(x,"drop") <- drop ## useful if family has precomputed something from x
               ll <- family$ll(y,x,coef,weights,family,deriv=1) 
               ll0 <- ll$l - (t(coef)%*%St%*%coef)/2
             } 
@@ -1087,7 +1090,7 @@ deriv.check5 <- function(x, y, sp,
 {  if (!deriv%in%c(1,2)) stop(gettextf("'%s' argument should be 1 or 2", "deriv"))
    if (control$epsilon>1e-9) control$epsilon <- 1e-9 
    ## first obtain the fit corresponding to sp...
-   b <- gam.fit5(x=x,y=y,lsp=sp,Sl=Sl,weights=weights,offset=offset,deriv=2,
+   b <- gam.fit5(x=x,y=y,lsp=sp,Sl=Sl,weights=weights,offset=offset,deriv=deriv,
         family=family,control=control,Mp=Mp,start=start)
    ## now get the derivatives of the likelihood w.r.t. coefs...
    ll <- family$ll(y=y,X=x,coef=b$coefficients,wt=weights,family=family,

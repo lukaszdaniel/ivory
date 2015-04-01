@@ -2467,6 +2467,8 @@ SEXP attribute_hidden do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 		error(_("restarts are not supported in 'eval()' function"));
 	    }
 	}
+	UNPROTECT(1);
+	PROTECT(expr);
 	endcontext(&cntxt);
 	UNPROTECT(1);
     }
@@ -2489,6 +2491,8 @@ SEXP attribute_hidden do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 		error(_("restarts are not supported in 'eval()' function"));
 	    }
 	}
+	UNPROTECT(1);
+	PROTECT(tmp);
 	endcontext(&cntxt);
 	UNPROTECT(1);
 	expr = tmp;
@@ -3477,9 +3481,11 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 } while(0)
 
 #define Builtin2(do_fun,which,rho) do {		     \
+  SEXP stack1 = GETSTACK(-1); \
+  SEXP stack2 = GETSTACK(-2); \
   SEXP call = VECTOR_ELT(constants, GETOP()); \
-  SEXP tmp = CONS_NR(GETSTACK(-1), R_NilValue); \
-  SETSTACK(-2, CONS_NR(GETSTACK(-2), tmp));     \
+  SEXP tmp = CONS_NR(stack1, R_NilValue); \
+  SETSTACK(-2, CONS_NR(stack2, tmp));     \
   R_BCNodeStackTop--; \
   SETSTACK(-1, do_fun(call, getPrimitive(which, BUILTINSXP),	\
 		      GETSTACK(-1), rho));			\
@@ -3637,8 +3643,8 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 	}								\
 	SEXP call = VECTOR_ELT(constants, GETOP());			\
 	SEXP args = CONS_NR(GETSTACK(-1), R_NilValue);			\
-	SEXP op = getPrimitive(R_LogSym, SPECIALSXP);			\
 	SETSTACK(-1, args); /* to protect */				\
+	SEXP op = getPrimitive(R_LogSym, SPECIALSXP);			\
 	SETSTACK(-1, do_log_builtin(call, op, args, rho));		\
 	NEXT();								\
  } while (0)
@@ -3656,10 +3662,11 @@ static SEXP cmp_arith2(SEXP call, int opval, SEXP opsym, SEXP x, SEXP y,
 	    NEXT();							\
 	}								\
 	SEXP call = VECTOR_ELT(constants, GETOP());			\
-	SEXP args = CONS_NR(GETSTACK(-2), CONS_NR(GETSTACK(-1), R_NilValue)); \
-	SEXP op = getPrimitive(R_LogSym, SPECIALSXP);			\
+	SEXP tmp = GETSTACK(-2);					\
+	SEXP args = CONS_NR(tmp, CONS_NR(GETSTACK(-1), R_NilValue)); 	\
 	R_BCNodeStackTop--;						\
 	SETSTACK(-1, args); /* to protect */				\
+	SEXP op = getPrimitive(R_LogSym, SPECIALSXP);			\
 	SETSTACK(-1, do_log_builtin(call, op, args, rho));		\
 	NEXT();								\
     } while (0)
@@ -3723,8 +3730,8 @@ static R_INLINE double (*getMath1Fun(int i, SEXP call))(double) {
 	}								\
 	SEXP args = CONS_NR(GETSTACK(-1), R_NilValue);			\
 	SEXP sym = CAR(call);						\
-	SEXP op = getPrimitive(sym, BUILTINSXP);			\
 	SETSTACK(-1, args); /* to protect */				\
+	SEXP op = getPrimitive(sym, BUILTINSXP);			\
 	SETSTACK(-1, do_math1(call, op, args, rho));			\
 	NEXT();								\
     } while (0)
@@ -3746,12 +3753,12 @@ static R_INLINE double (*getMath1Fun(int i, SEXP call))(double) {
 	    NEXT();							\
 	}								\
 	SEXP args = R_NilValue;						\
-	while (nargs-- > 0) {						\
-	    args = CONS_NR(GETSTACK(-1), args);				\
+	BCNPUSH(args); /* allocate space for protecting args */		\
+	while (nargs-- >= 0) {						\
+	    args = CONS_NR(GETSTACK(-2), args);				\
+	    SETSTACK(-2, args); /* to protect */			\
 	    BCNPOP_IGNORE_VALUE();					\
 	}								\
-	args = CONS_NR(GETSTACK(-1), args);				\
-	SETSTACK(-1, args); /* to protect */				\
 	SEXP sym = CAR(call);						\
 	SEXP op = getPrimitive(sym, BUILTINSXP);			\
 	SETSTACK(-1, do_dotcall(call, op, args, rho));			\
@@ -4246,6 +4253,8 @@ static R_INLINE SEXP getvar(SEXP symbol, SEXP rho,
 	SETSTACK(-1, value);			\
     } while (0)
 
+/* push an argument to existing call frame */
+/* a call frame always uses boxed stack values, so GETSTACK will not allocate */
 #define PUSHCALLARG(v) do { \
   SEXP __cell__ = CONS_NR(v, R_NilValue); \
   if (GETSTACK(-2) == R_NilValue) SETSTACK(-2, __cell__); \
@@ -4697,8 +4706,12 @@ static R_INLINE void MATSUBSET_PTR(R_bcstack_t *sx,
 static R_INLINE SEXP addStackArgsList(int n, R_bcstack_t *start, SEXP val)
 {
     R_bcstack_t *p = start + n - 1;
-    for (int i = 0; i < n; i++, p--)
+    BCNPUSH(val); /* to protect */
+    for (int i = 0; i < n; i++, p--) {
 	val = CONS(GETSTACK_PTR(p), val);
+	SETSTACK(-1, val); /* to protect */
+    }
+    BCNPOP_IGNORE_VALUE();
     return val;
 }
 
@@ -5517,13 +5530,12 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	  Rprintf(_("trace: "));
 	  PrintValue(symbol);
 	}
-	BCNPUSH(fun);  /* for GC protection */
 	flag = PRIMPRINT(fun);
 	R_Visible = flag != 1;
 	value = PRIMFUN(fun) (call, fun, CDR(call), rho);
 	if (flag < 2) R_Visible = flag != 1;
 	vmaxset(vmax);
-	SETSTACK(-1, value); /* replaces fun on stack */
+	BCNPUSH(value);
 	NEXT();
       }
     OP(MAKECLOSURE, 1):
@@ -5814,8 +5826,8 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	  SETCALLARG_TAG_SYMBOL(R_valueSym);
 	  /* replace first argument with evaluated promise for LHS */
 	  /* promise might be captured, so track references */
-	  prom = R_mkEVPROMISE(R_TmpvalSymbol, lhs);
 	  args = CALL_FRAME_ARGS();
+	  prom = R_mkEVPROMISE(R_TmpvalSymbol, lhs);
 	  SETCAR(args, prom);
 	  /* make the call */
 	  value = applyClosure(call, fun, args, rho, R_NilValue);
@@ -5854,8 +5866,8 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	case CLOSXP:
 	  /* replace first argument with evaluated promise for LHS */
 	  /* promise might be captured, so track references */
-	  prom = R_mkEVPROMISE(R_TmpvalSymbol, lhs);
 	  args = CALL_FRAME_ARGS();
+	  prom = R_mkEVPROMISE(R_TmpvalSymbol, lhs);
 	  SETCAR(args, prom);
 	  /* make the call */
 	  value = applyClosure(call, fun, args, rho, R_NilValue);

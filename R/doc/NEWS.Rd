@@ -462,7 +462,7 @@
 	false positives, but note that technical words should be
 	single-quoted and will then be accepted).
       }
-      
+
       Most of these checks can also be selected by environment
       variables: see the \sQuote{R Internals} manual.
     }
@@ -494,25 +494,26 @@
     The following are currently in place.
     \itemize{
       \item Installation using external binary distributions
-      of \pkg{zlib}, \pkg{bzip}, \pkg{liblzma}, \pkg{pcre},
+      of \pkg{zlib}, \pkg{bzip2}, \pkg{liblzma}, \pkg{pcre},
       \pkg{libpng}, \pkg{jpeglib} and \pkg{libtiff} is now required,
       and the build instructions have been revised.
 
       \item A new \command{make} target \code{rsync-extsoft} has been
-      added to obtain copies of the external libraries from \acronym{CRAN}.
+      added to obtain copies of the external libraries from
+      \acronym{CRAN}.
 
       \item Building the manuals now requires \command{texi2any} from
-      \pkg{texinfo} 5.1 or later.  \acronym{CRAN} binary builds
-      include the manuals, but by default builds from source will not, and
-      they will be accessed from \acronym{CRAN}.  See the comments in
+      \pkg{texinfo} 5.1 or later.  \acronym{CRAN} binary builds include
+      the manuals, but by default builds from source will not, and they
+      will be accessed from \acronym{CRAN}.  See the comments in
       \file{src/gnuwin32/MkRules.dist} for how to specify the location
       of \command{texi2any}.
 
       \item (Windows) Changes have been made to support an experimental
-      Windows toolchain based on GCC 4.9.2.   The default toolchain 
+      Windows toolchain based on GCC 4.9.2.  The default toolchain
       continues to be based on GCC 4.6.3, as the new toolchain is not
-      yet stable enough.  A change to a new toolchain is expected 
-      during the R 3.2.x lifetime.
+      yet stable enough.  A change to a new toolchain is expected during
+      the R 3.2.x lifetime.
     }
   }
 
@@ -550,6 +551,11 @@
       \option{--with-valgrind-instrumentation=3} has been withdrawn, as
       it did not work with recent \command{valgrind} headers: it is now
       treated as level \code{2}.
+
+      \item The \code{MethodsList} class in package \pkg{methods} had
+      been deprecated in \R 2.11.0 and is defunct now.  Functions using
+      it are defunct if they had been deprecated in \R 2.11.0, and are
+      deprecated now, otherwise.
     }
   }
 
@@ -600,6 +606,13 @@
 
       \item Auto-printing no longer duplicates objects when printing is
       dispatched to a method.
+
+      \item \code{kmeans(x, k)} would fail when \code{nrow(x) >= 42949673}.
+      (Comment 6 of \PR{15364})
+
+      \item \sQuote{Abbreviated} locale-specific day and month names
+      could have been truncated in those rare locales where there are
+      the same as the full names.
     }
   }
 }
