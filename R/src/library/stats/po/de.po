@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-17 19:08+0100\n"
+"POT-Creation-Date: 2015-04-01 22:12+0200\n"
 "PO-Revision-Date: 2015-01-17 15:40+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <r-core@r-project.org>\n"
@@ -651,7 +651,7 @@ msgstr "ungültige Modellformel"
 msgid "invalid power in formula"
 msgstr "ungültige Potenz in Formel"
 
-#: model.c:1175 model.c:1567
+#: model.c:1175 model.c:1571
 #, fuzzy, c-format
 msgid "invalid model formula in '%s' function"
 msgstr "ungültige Modellformel in EncodeVars"
@@ -661,19 +661,19 @@ msgstr "ungültige Modellformel in EncodeVars"
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "verdoppelter Name '%s' in Data Frame bei Benutzung von '.'"
 
-#: model.c:1653
+#: model.c:1657
 msgid "argument is not a valid model"
 msgstr "Argument ist kein gültiges Modell"
 
-#: model.c:1663
+#: model.c:1667
 msgid "'specials' must be NULL or a character vector"
 msgstr "'specials' muss NULL oder eine Charaktervektor sein"
 
-#: model.c:1675
+#: model.c:1679
 msgid "'data' argument is of the wrong type"
 msgstr "Argument 'data' hat falschen Typ"
 
-#: model.c:1945
+#: model.c:1949
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' erscheint in der Formel und 'data' Argument ist ungültig"
 

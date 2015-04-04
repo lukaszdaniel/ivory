@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.3-10\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-03-04 18:44\n"
+"POT-Creation-Date: 2015-04-01 22:10\n"
 "PO-Revision-Date: 2005-12-09 09:13+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -284,6 +284,13 @@ msgstr ""
 #, fuzzy
 msgid "'mu' argument must be non negative"
 msgstr "les lments de min.sp doivent tre positifs ou nulls."
+
+#. R/misc.r: stop("'mu' dimensions are wrong")
+#. R/misc.r: stop("'mu' dimensions are wrong")
+#: R/misc.r:0
+#, fuzzy
+msgid "'mu' dimensions are wrong"
+msgstr "la dimension de fx est incorrecte"
 
 #. R/mgcv.r: warning("'negbin()' with unknown theta and outer iteration is deprecated - use 'nb()'.")
 #: R/mgcv.r:0
@@ -1536,6 +1543,11 @@ msgstr "link non reconnu"
 msgid "done!"
 msgstr ""
 
+#. R/mgcv.r: warning("dropping unidentifiable parameteric terms from model", call. = FALSE)
+#: R/mgcv.r:0
+msgid "dropping unidentifiable parameteric terms from model"
+msgstr ""
+
 #. R/plots.r: gettext("effects", domain = "R-mgcv")
 #: R/plots.r:0
 msgid "effects"
@@ -1812,6 +1824,12 @@ msgstr ""
 msgid "linear predictor"
 msgstr ""
 
+#. R/mgcv.r: stop("linear predictor labels out of range")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "linear predictor labels out of range"
+msgstr "Valeurs de prdiction linaire dans un modle vide"
+
 #. R/efam.r: gettextf("link \"%s\" is not available for Tweedie family", linktemp, collapse = "")
 #. R/gam.fit3.r: gettextf("link \"%s\" is not available for Tweedie family", linktemp)
 #: R/efam.r:0 R/gam.fit3.r:0
@@ -1907,6 +1925,11 @@ msgstr ""
 #: R/smooth.r:0
 msgid "more knots than unique data values is not allowed"
 msgstr "il n'est pas autoris d'avoir plus de noeuds que de valeurs uniques"
+
+#. R/mvam.r: stop("mvn dimension error")
+#: R/mvam.r:0
+msgid "mvn dimension error"
+msgstr ""
 
 #. R/mvam.r: stop("mvn requires 2 or more dimensional data")
 #: R/mvam.r:0
@@ -2240,6 +2263,12 @@ msgid ""
 msgstr ""
 "valeur aberrante fournie pour rank.tol : rinitialise  la racine carre de la "
 "prcision de la machine."
+
+#. R/mgcv.r: warning("single linear predictor indices are ignored")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "single linear predictor indices are ignored"
+msgstr "Valeurs de prdiction linaire dans un modle vide"
 
 #. R/smooth.r: warning("single penalty tensor product smooths are deprecated and likely to be removed soon")
 #: R/smooth.r:0

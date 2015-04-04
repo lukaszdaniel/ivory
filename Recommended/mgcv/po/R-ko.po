@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.3\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-03-04 18:44\n"
+"POT-Creation-Date: 2015-04-01 22:10\n"
 "PO-Revision-Date: 2015-02-21 16:01-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -323,6 +323,13 @@ msgstr ""
 #, fuzzy
 msgid "'mu' argument must be non negative"
 msgstr "평균 mu는 음수일 수 없습니다."
+
+#. R/misc.r: stop("'mu' dimensions are wrong")
+#. R/misc.r: stop("'mu' dimensions are wrong")
+#: R/misc.r:0
+#, fuzzy
+msgid "'mu' dimensions are wrong"
+msgstr "fx의 차원(dimension)이 올바르지 않습니다."
 
 #. R/mgcv.r: warning("'negbin()' with unknown theta and outer iteration is deprecated - use 'nb()'.")
 #: R/mgcv.r:0
@@ -1569,6 +1576,11 @@ msgstr "dist의 정보를 찾을 수 없습니다."
 msgid "done!"
 msgstr ""
 
+#. R/mgcv.r: warning("dropping unidentifiable parameteric terms from model", call. = FALSE)
+#: R/mgcv.r:0
+msgid "dropping unidentifiable parameteric terms from model"
+msgstr ""
+
 #. R/plots.r: gettext("effects", domain = "R-mgcv")
 #: R/plots.r:0
 msgid "effects"
@@ -1840,6 +1852,12 @@ msgstr "k와 bnd의 길이가 서로 일치하지 않습니다."
 msgid "linear predictor"
 msgstr ""
 
+#. R/mgcv.r: stop("linear predictor labels out of range")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "linear predictor labels out of range"
+msgstr "범위 외의 값을 가집니다."
+
 #. R/efam.r: gettextf("link \"%s\" is not available for Tweedie family", linktemp, collapse = "")
 #. R/gam.fit3.r: gettextf("link \"%s\" is not available for Tweedie family", linktemp)
 #: R/efam.r:0 R/gam.fit3.r:0
@@ -1933,6 +1951,11 @@ msgstr ""
 #. R/smooth.r: stop("more knots than unique data values is not allowed")
 #: R/smooth.r:0
 msgid "more knots than unique data values is not allowed"
+msgstr ""
+
+#. R/mvam.r: stop("mvn dimension error")
+#: R/mvam.r:0
+msgid "mvn dimension error"
 msgstr ""
 
 #. R/mvam.r: stop("mvn requires 2 or more dimensional data")
@@ -2274,6 +2297,11 @@ msgid ""
 msgstr ""
 "rank.tol에 주어진 값은 올바르지 않습니다: reset to square root of machine "
 "precision."
+
+#. R/mgcv.r: warning("single linear predictor indices are ignored")
+#: R/mgcv.r:0
+msgid "single linear predictor indices are ignored"
+msgstr ""
 
 #. R/smooth.r: warning("single penalty tensor product smooths are deprecated and likely to be removed soon")
 #: R/smooth.r:0

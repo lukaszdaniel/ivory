@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:27\n"
+"POT-Creation-Date: 2015-04-01 22:13\n"
 "PO-Revision-Date: 2012-03-09 06:16+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -1029,11 +1029,6 @@ msgid ""
 "matching."
 msgstr ""
 
-#. R/objects.R: gettext("Non-visible functions are asterisked", domain = "R-utils")
-#: R/objects.R:0
-msgid "Non-visible functions are asterisked"
-msgstr ""
-
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(other)[!other_length_ok], collapse = ", "))
@@ -2024,9 +2019,12 @@ msgstr "첫번째 다섯개의 열들의 정보가 없습니다: 중단합니다
 msgid "foundpkgs: %s"
 msgstr ""
 
-#. R/objects.R: gettextf("function '%s' appears not to be generic", generic.function)
+#. R/objects.R: gettextf("function '%s' appears not to be S3 generic; found functions that look like S3 methods",     generic.function)
 #: R/objects.R:0
-msgid "function '%s' appears not to be generic"
+#, fuzzy
+msgid ""
+"function '%s' appears not to be S3 generic; found functions that look like "
+"S3 methods"
 msgstr "'%s' 는 제네릭 함수가 아닐 것입니다 "
 
 #. R/objects.R: gettextf("generic function '%s' dispatches methods for generic '%s'", generic.function,     truegf)
@@ -2466,10 +2464,10 @@ msgstr "함수 %s 와 기호  %s 에 정의된 메소드들이 없습니다 "
 msgid "no methods for %s and no documentation for it as a function"
 msgstr "%s 에 대한 메소드들이 없으며, 함수로서 이와 연관된 문서들도 없습니다 "
 
-#. R/objects.R: gettext("no methods were found", domain = "R-utils")
+#. R/objects.R: gettext("no methods found", domain = "R-utils")
 #: R/objects.R:0
 #, fuzzy
-msgid "no methods were found"
+msgid "no methods found"
 msgstr "S3 메소드 '%s' 는 찾을 수 없습니다 "
 
 #. R/packages.R: message("no new packages are available")
@@ -2714,6 +2712,11 @@ msgstr "행들이 비어있습니다: 중단합니다"
 #: R/help.search.R:0
 msgid "saving the database ..."
 msgstr "데이터베이스를 저장중입니다 ..."
+
+#. R/objects.R: gettext("see '?methods' for accessing help and source code", domain = "R-utils")
+#: R/objects.R:0
+msgid "see '?methods' for accessing help and source code"
+msgstr ""
 
 #. R/tar.R: gettext("skipping devices")
 #: R/tar.R:0

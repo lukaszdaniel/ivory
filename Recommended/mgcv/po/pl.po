@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mgcv 1.7-19\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-04 18:44+0100\n"
-"PO-Revision-Date: 2013-09-12 17:38+0100\n"
+"PO-Revision-Date: 2015-04-02 21:47+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -85,7 +85,6 @@ msgid "Singular Matrix passed to invert()"
 msgstr "Przekazano osobliwą macierz do 'invert()'"
 
 #: matrix.c:1321
-#, fuzzy
 msgid "'svd()' not converged"
 msgstr "'svd()' nie uzbieżnił się"
 
@@ -99,9 +98,8 @@ msgid "Sort failed"
 msgstr "Sortowanie nie powiodło się"
 
 #: qp.c:57
-#, fuzzy
 msgid "ERROR in 'addconQT()'"
-msgstr "BŁĄD w addconQT."
+msgstr "BŁĄD w 'addconQT()'."
 
 #: qp.c:463
 msgid "QPCLS - Rank deficiency in model"

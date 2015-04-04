@@ -1109,7 +1109,7 @@ showMethods <-
     else if (!missing(class))
         .S4methodsForClass(generic.function, class)
     else
-        stop("'%s' or '%s' argument must be supplied", "generic.function", "class")
+        stop(gettextf("'%s' or '%s' argument must be supplied", "generic.function", "class"))
     structure(rownames(info), info=info, byclass=missing(generic.function),
               class="MethodsFunction")
 }

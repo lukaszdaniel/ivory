@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.10.0 / mgcv 1.5-5\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-03-04 18:44\n"
+"POT-Creation-Date: 2015-04-01 22:10\n"
 "PO-Revision-Date: 2009-10-08 16:16+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -291,6 +291,13 @@ msgstr ""
 #, fuzzy
 msgid "'mu' argument must be non negative"
 msgstr "Elemente von min.sp dürfen nicht negativ sein."
+
+#. R/misc.r: stop("'mu' dimensions are wrong")
+#. R/misc.r: stop("'mu' dimensions are wrong")
+#: R/misc.r:0
+#, fuzzy
+msgid "'mu' dimensions are wrong"
+msgstr "Dimension von fx ist falsch"
 
 #. R/mgcv.r: warning("'negbin()' with unknown theta and outer iteration is deprecated - use 'nb()'.")
 #: R/mgcv.r:0
@@ -1546,6 +1553,11 @@ msgstr "Verweis nicht erkannt"
 msgid "done!"
 msgstr ""
 
+#. R/mgcv.r: warning("dropping unidentifiable parameteric terms from model", call. = FALSE)
+#: R/mgcv.r:0
+msgid "dropping unidentifiable parameteric terms from model"
+msgstr ""
+
 #. R/plots.r: gettext("effects", domain = "R-mgcv")
 #: R/plots.r:0
 msgid "effects"
@@ -1826,6 +1838,13 @@ msgstr ""
 msgid "linear predictor"
 msgstr ""
 
+# http://de.wikipedia.org/wiki/Prädiktor
+#. R/mgcv.r: stop("linear predictor labels out of range")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "linear predictor labels out of range"
+msgstr "Ungültige lineare Prognosewerte in leerem Modell"
+
 #. R/efam.r: gettextf("link \"%s\" is not available for Tweedie family", linktemp, collapse = "")
 #. R/gam.fit3.r: gettextf("link \"%s\" is not available for Tweedie family", linktemp)
 #: R/efam.r:0 R/gam.fit3.r:0
@@ -1918,6 +1937,11 @@ msgstr "mehr Knoten als Daten in einem tp-Term: Knoten ignoriert."
 #: R/smooth.r:0
 msgid "more knots than unique data values is not allowed"
 msgstr "mehr Knoten als einheitliche Datenwerte sind nicht erlaubt"
+
+#. R/mvam.r: stop("mvn dimension error")
+#: R/mvam.r:0
+msgid "mvn dimension error"
+msgstr ""
 
 #. R/mvam.r: stop("mvn requires 2 or more dimensional data")
 #: R/mvam.r:0
@@ -2254,6 +2278,13 @@ msgid ""
 msgstr ""
 "dummer Wert für rank.tol angegeben: Wird auf Quadratwurzel der "
 "Maschinenpräzision zurückgesetzt."
+
+# http://de.wikipedia.org/wiki/Prädiktor
+#. R/mgcv.r: warning("single linear predictor indices are ignored")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "single linear predictor indices are ignored"
+msgstr "Ungültige lineare Prognosewerte in leerem Modell"
 
 #. R/smooth.r: warning("single penalty tensor product smooths are deprecated and likely to be removed soon")
 #: R/smooth.r:0

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.8-0\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-03-04 18:44\n"
+"POT-Creation-Date: 2015-04-01 22:10\n"
 "PO-Revision-Date: 2015-02-28 13:05+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -289,6 +289,13 @@ msgstr "argument 'm' nie może być w argumencie 're'"
 #: R/gam.fit3.r:0
 msgid "'mu' argument must be non negative"
 msgstr "argument 'mu' musi być nieujemny"
+
+#. R/misc.r: stop("'mu' dimensions are wrong")
+#. R/misc.r: stop("'mu' dimensions are wrong")
+#: R/misc.r:0
+#, fuzzy
+msgid "'mu' dimensions are wrong"
+msgstr "wymiar 'fx' jest niepoprawny"
 
 #. R/mgcv.r: warning("'negbin()' with unknown theta and outer iteration is deprecated - use 'nb()'.")
 #: R/mgcv.r:0
@@ -1523,6 +1530,11 @@ msgstr "rozkład nie został rozpoznany"
 msgid "done!"
 msgstr "wykonano!"
 
+#. R/mgcv.r: warning("dropping unidentifiable parameteric terms from model", call. = FALSE)
+#: R/mgcv.r:0
+msgid "dropping unidentifiable parameteric terms from model"
+msgstr ""
+
 #. R/plots.r: gettext("effects", domain = "R-mgcv")
 #: R/plots.r:0
 msgid "effects"
@@ -1798,6 +1810,12 @@ msgstr "długości argumentów 'k' oraz 'bnd' są niezgodne"
 msgid "linear predictor"
 msgstr "liniowy predyktor"
 
+#. R/mgcv.r: stop("linear predictor labels out of range")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "linear predictor labels out of range"
+msgstr "wartości są poza zakresem"
+
 #. R/efam.r: gettextf("link \"%s\" is not available for Tweedie family", linktemp, collapse = "")
 #. R/gam.fit3.r: gettextf("link \"%s\" is not available for Tweedie family", linktemp)
 #: R/efam.r:0 R/gam.fit3.r:0
@@ -1888,6 +1906,11 @@ msgstr "więcej węzłów niż danych w członie 'sos': węzły zostały zignoro
 msgid "more knots than unique data values is not allowed"
 msgstr ""
 "większa liczba węzłów niż unikalnych wartości danych nie jest dozwolona"
+
+#. R/mvam.r: stop("mvn dimension error")
+#: R/mvam.r:0
+msgid "mvn dimension error"
+msgstr ""
 
 #. R/mvam.r: stop("mvn requires 2 or more dimensional data")
 #: R/mvam.r:0
@@ -2229,6 +2252,12 @@ msgid ""
 msgstr ""
 "śmieszna wartość została dostarczona do 'rank.tol': ustawianie pierwiastka "
 "kwadratowego z precyzji maszyny"
+
+#. R/mgcv.r: warning("single linear predictor indices are ignored")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "single linear predictor indices are ignored"
+msgstr "Niepoprawne wartości liniowej zmiennej niezależnej w pustym modelu"
 
 #. R/smooth.r: warning("single penalty tensor product smooths are deprecated and likely to be removed soon")
 #: R/smooth.r:0

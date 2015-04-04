@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Matrix 1.0-9\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2015-02-13 16:25\n"
-"PO-Revision-Date: 2014-06-28 13:56+0100\n"
+"PO-Revision-Date: 2015-04-02 21:47+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -150,15 +150,13 @@ msgstr "'i' oraz 'x' różnią się długością"
 
 #. R/AllClass.R: gettext("'i' must be >= 1", domain = "R-Matrix")
 #: R/AllClass.R:0
-#, fuzzy
 msgid "'i' must be >= 1"
-msgstr "'ncol' musi być >= 0"
+msgstr "'i' musi być >= 0"
 
 #. R/AllClass.R: gettext("'i' must be empty when the object length is zero", domain = "R-matrix")
 #: R/AllClass.R:0
-#, fuzzy
 msgid "'i' must be empty when the object length is zero"
-msgstr "gniazdo 'x' musi być puste, gdy rodzaj to 'rleDiff'"
+msgstr "gniazdo 'x' musi być puste, gdy długość obiektu wynosi zero"
 
 #. R/AllClass.R: gettextf("'i' must be in 1:%d", n, domain = "R-Matrix")
 #: R/AllClass.R:0
@@ -172,9 +170,8 @@ msgstr "'i' musi być posortowane ściśle rosnąco"
 
 #. R/AllClass.R: gettext("'i' slot has NA values", domain = "R-Matrix")
 #: R/AllClass.R:0
-#, fuzzy
 msgid "'i' slot has NA values"
-msgstr "gniazdo 'i' nie jest w całości skończone"
+msgstr "gniazdo 'i' posiada wartości NA"
 
 #. R/AllClass.R: gettext("'i' slot is not all finite", domain = "R-Matrix")
 #: R/AllClass.R:0
@@ -1172,9 +1169,8 @@ msgstr "brak 'dimnames[[.]]': nie można używać indeksowania tekstowego"
 #. R/products.R: stop("non-conformable arguments")
 #. R/products.R: stop("non-conformable arguments")
 #: R/products.R:0
-#, fuzzy
 msgid "non-conformable arguments"
-msgstr "niezgodne wymiary macierzy w %s"
+msgstr "niezgodne argumenty"
 
 #. R/Auxiliaries.R: gettextf("non-conformable matrix dimensions in %s", deparse(sys.call(sys.parent())))
 #: R/Auxiliaries.R:0
@@ -1339,12 +1335,11 @@ msgstr "liczba wierszy nie jest zgodna dla %s"
 #. R/dMatrix.R: gettextf("object of class %s with NA values cannot be coerced to an object of class %s",     dQuote("dMatrix"), dQuote("nMatrix"))
 #. R/lMatrix.R: gettextf("object of class %s with NA values cannot be coerced to an object of class %s",     dQuote("lMatrix"), dQuote("nMatrix"))
 #: R/dMatrix.R:0 R/lMatrix.R:0
-#, fuzzy
 msgid ""
 "object of class %s with NA values cannot be coerced to an object of class %s"
 msgstr ""
-"obiekt klasy \"dMatrix\" z wartościami NA nie może zostać przekształcony w "
-"obiekt klasy \"nMatrix\""
+"obiekt klasy %s z wartościami NA nie może zostać przekształcony w obiekt "
+"klasy %s"
 
 #. R/sparseMatrix.R: stop("only 2-dimensional tables can be directly coerced to sparse matrices")
 #: R/sparseMatrix.R:0
@@ -1714,12 +1709,11 @@ msgstr "nie można mieszać ujemnych oraz dodatnich indeksów"
 
 #. R/bandSparse.R: ngettext(len.k, "'diagonals' matrix must have %d column (= length(k) )", "'diagonals' matrix must have %d columns (= length(k) )",     domain = "R-Matrix")
 #: R/bandSparse.R:0
-#, fuzzy
 msgid "'diagonals' matrix must have %d column (= length(k) )"
 msgid_plural "'diagonals' matrix must have %d columns (= length(k) )"
-msgstr[0] "'diagonals' musi mieć tę samą długość (%d) co 'k'"
-msgstr[1] "'diagonals' musi mieć tę samą długość (%d) co 'k'"
-msgstr[2] "'diagonals' musi mieć tę samą długość (%d) co 'k'"
+msgstr[0] "macierz 'diagonals' musi mieć %d kolumnę (=length(k))"
+msgstr[1] "macierz 'diagonals' musi mieć %d kolumny (=length(k))"
+msgstr[2] "macierz 'diagonals' musi mieć %d kolumn (=length(k))"
 
 #. R/Auxiliaries.R: ngettext(nx, "extra argument %s will be disregarded in\n %s", "extra arguments %s will be disregarded in\n %s",     domain = "R-Matrix")
 #: R/Auxiliaries.R:0

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:26\n"
+"POT-Creation-Date: 2015-04-02 22:16\n"
 "PO-Revision-Date: 2012-02-26 14:07+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -12,6 +12,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit \n"
 "Plural-Forms: nplurals=1; plural=0; \n"
 "X-Generator: Pootle 2.0.5 \n"
+
+#. R/RMethodUtils.R: warning("\"MethodsList\" is defunct; allMethods now are empty")
+#: R/RMethodUtils.R:0
+msgid "\"MethodsList\" is defunct; allMethods now are empty"
+msgstr ""
 
 #. R/MethodsList.R: gettext("## Signature:", domain = "R-methods")
 #: R/MethodsList.R:0
@@ -173,7 +178,16 @@ msgstr ""
 " %s（） はターゲット環境中の総称的関数ではありません -- メソッドは挿入されま"
 "せん "
 
-#. R/MethodsList.R: gettextf("%s, along with other use of the \"MethodsList\" metadata objects, is deprecated.",     dQuote(this))
+#. R/MethodsList.R: gettextf("%s, along with other use of the \"MethodsList\" metadata objects, is defunct.",     dQuote(this), domain = "R-methods")
+#: R/MethodsList.R:0
+#, fuzzy
+msgid ""
+"%s, along with other use of the \"MethodsList\" metadata objects, is defunct."
+msgstr ""
+" %s を別の \"MethodsList\" のメタデータオブジェクトとともに使うことは廃止され"
+"ました． "
+
+#. R/MethodsList.R: gettextf("%s, along with other use of the \"MethodsList\" metadata objects, is deprecated.",     dQuote(this), domain = "R-methods")
 #: R/MethodsList.R:0
 msgid ""
 "%s, along with other use of the \"MethodsList\" metadata objects, is "
@@ -188,6 +202,11 @@ msgid "'%s' is not a known generic function {and 'package' not specified}"
 msgstr ""
 " '%s' は既知の総称的関数ではありません {そして 'package' も指定されていませ"
 "ん} "
+
+#. R/Methods.R: gettextf("'%s' or '%s' argument must be supplied", "generic.function", "class")
+#: R/Methods.R:0
+msgid "'%s' or '%s' argument must be supplied"
+msgstr ""
 
 #. R/RClassUtils.R: stop("'Class' argument must be a valid class definition or class")
 #: R/RClassUtils.R:0
@@ -1141,6 +1160,20 @@ msgstr ""
 msgid ""
 "Usage:  $help(topic) where topic is the name of a method (quoted or not)"
 msgstr ""
+
+#. R/MethodsList.R: gettext("Use of the \"MethodsList\" meta data objects is defunct.", domain = "R-methods")
+#: R/MethodsList.R:0
+#, fuzzy
+msgid "Use of the \"MethodsList\" meta data objects is defunct."
+msgstr ""
+" %s 中：\"MethodsList\" メタデータオブジェクトの使用は廃止されました． "
+
+#. R/MethodsList.R: gettext("Use of the \"MethodsList\" meta data objects is deprecated.", domain = "R-methods")
+#: R/MethodsList.R:0
+#, fuzzy
+msgid "Use of the \"MethodsList\" meta data objects is deprecated."
+msgstr ""
+" %s 中：\"MethodsList\" メタデータオブジェクトの使用は廃止されました． "
 
 #. R/RClassUtils.R: gettextf("Virtual Class %s", .dQ(Class), domain = "R-methods")
 #: R/RClassUtils.R:0
@@ -2121,13 +2154,6 @@ msgstr ""
 " もし `def' 引数が与えられるなら、それはメソッドを割り当てる "
 "standardGeneric(\"%s\") を呼び出す関数である必要があります "
 
-#. R/MethodsList.R: gettextf("in %s: use of \"MethodsList\" metadata objects is deprecated.", deparse(this))
-#: R/MethodsList.R:0
-#, fuzzy
-msgid "in %s: use of \"MethodsList\" metadata objects is deprecated."
-msgstr ""
-" %s 中：\"MethodsList\" メタデータオブジェクトの使用は廃止されました． "
-
 #. R/RMethodUtils.R: gettext("in changing formal arguments in %s, some of the old names are not in fact arguments: %s",     domain = "R-methods")
 #: R/RMethodUtils.R:0
 msgid ""
@@ -2136,6 +2162,20 @@ msgid ""
 msgstr ""
 " %s 中の形式的引数を変更しようとしましたが、古い名前の幾つかは実際は引数では"
 "ありません：%s "
+
+#. R/MethodsList.R: gettextf("in command %s: use of \"MethodsList\" metadata objects is defunct.", deparse(this),     domain = "R-methods")
+#: R/MethodsList.R:0
+#, fuzzy
+msgid "in command %s: use of \"MethodsList\" metadata objects is defunct."
+msgstr ""
+" %s 中：\"MethodsList\" メタデータオブジェクトの使用は廃止されました． "
+
+#. R/MethodsList.R: gettextf("in command %s: use of \"MethodsList\" metadata objects is deprecated.",     sQuote(deparse(this)), domain = "R-methods")
+#: R/MethodsList.R:0
+#, fuzzy
+msgid "in command %s: use of \"MethodsList\" metadata objects is deprecated."
+msgstr ""
+" %s 中：\"MethodsList\" メタデータオブジェクトの使用は廃止されました． "
 
 #. R/RClassUtils.R: gettext("in constructing the prototype for class %s, slots in prototype and not in class: %s",     domain = "R-methods")
 #: R/RClassUtils.R:0
@@ -2402,12 +2442,12 @@ msgstr " 不正なメソッドサブリスト "
 msgid "invalid methods table request"
 msgstr " メソッドテーブルの要求が不正です "
 
-#. R/methodsTable.R: gettextf("invalid mlist element for signature %s at level %d (should be methods list or method, had class %s)",     sQuote(classes[[j]]), i, dQuote(class(el)))
+#. R/methodsTable.R: gettextf("invalid mlist element for signature %s at level %d (should be MethodDefinition or .Primitive, had class %s)",     sQuote(classes[[j]]), i, dQuote(class(el)))
 #: R/methodsTable.R:0
 #, fuzzy
 msgid ""
-"invalid mlist element for signature %s at level %d (should be methods list "
-"or method, had class %s)"
+"invalid mlist element for signature %s at level %d (should be "
+"MethodDefinition or .Primitive, had class %s)"
 msgstr ""
 " ( メソッドリストかメソッドでなければなりませんが、以下のクラスを持ちます \" "
 
@@ -3107,6 +3147,16 @@ msgstr ""
 msgid "restoring definition of class %s"
 msgstr " クラス”%s”の定義を回復しています "
 
+#. R/MethodsList.R: gettext("see ?MethodsList.", domain = "R-methods")
+#: R/MethodsList.R:0
+msgid "see ?MethodsList."
+msgstr ""
+
+#. R/MethodsList.R: gettext("see ?MethodsList. (This warning is shown once per session.)", domain = "R-methods")
+#: R/MethodsList.R:0
+msgid "see ?MethodsList. (This warning is shown once per session.)"
+msgstr ""
+
 #. R/Methods.R: stop("selectMethod(): mlist is not an environment or NULL :\n", "** should no longer happen!",     domain = "R-methods")
 #: R/Methods.R:0
 #, fuzzy
@@ -3173,7 +3223,7 @@ msgstr ""
 msgid "some actions are missing: %s"
 msgstr ""
 
-#. R/methodsTable.R: gettext("something weird: inconsistent number of args in methods table strings: %s (using the largest value)",     domain = "R-methods")
+#. R/methodsTable.R: gettextf("something weird: inconsistent number of args in methods table strings: %s (using the largest value)",     paste(nargs, collapse = ", "), domain = "R-methods")
 #: R/methodsTable.R:0
 #, fuzzy
 msgid ""
@@ -3657,6 +3707,7 @@ msgstr ""
 "す ；クラス\"%s\" のオブジェクトを得ました "
 
 #. R/MethodsList.R: gettextf("use %s instead.", dQuote(instead))
+#. R/MethodsList.R: gettextf("use %s instead.", dQuote(instead), domain = "R-methods")
 #: R/MethodsList.R:0
 #, fuzzy
 msgid "use %s instead."
@@ -3837,6 +3888,14 @@ msgid_plural ""
 msgstr[0] ""
 " \"%s\" (%s) に対する総称的関数の形式的引数は、既定 (%s) として使われる非総称"
 "的なそれの引数と異なります "
+
+#, fuzzy
+#~ msgid "class"
+#~ msgstr " (クラス \"%s\") "
+
+#, fuzzy
+#~ msgid "generic.function"
+#~ msgstr " 総称的関数 %s が見つかりません "
 
 #~ msgid ""
 #~ "special function %s has no known argument list; will assume '(x, ...)'"

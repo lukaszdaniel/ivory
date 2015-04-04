@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:26\n"
+"POT-Creation-Date: 2015-04-02 22:16\n"
 "PO-Revision-Date: 2014-03-27 13:32-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -19,6 +19,11 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 1.5.4\n"
+
+#. R/RMethodUtils.R: warning("\"MethodsList\" is defunct; allMethods now are empty")
+#: R/RMethodUtils.R:0
+msgid "\"MethodsList\" is defunct; allMethods now are empty"
+msgstr ""
 
 #. R/MethodsList.R: gettext("## Signature:", domain = "R-methods")
 #: R/MethodsList.R:0
@@ -161,7 +166,16 @@ msgstr ""
 "%s()는 대상 환경내에서 제네릭 함수가 아닙니다 -- 메소드가 삽입되어지지 않습니"
 "다"
 
-#. R/MethodsList.R: gettextf("%s, along with other use of the \"MethodsList\" metadata objects, is deprecated.",     dQuote(this))
+#. R/MethodsList.R: gettextf("%s, along with other use of the \"MethodsList\" metadata objects, is defunct.",     dQuote(this), domain = "R-methods")
+#: R/MethodsList.R:0
+#, fuzzy
+msgid ""
+"%s, along with other use of the \"MethodsList\" metadata objects, is defunct."
+msgstr ""
+"\"MethodsList\" 메타데이터 객체의 다른 용도에 함께 이용되는 %s는 더 이상 제공"
+"되지 않습니다."
+
+#. R/MethodsList.R: gettextf("%s, along with other use of the \"MethodsList\" metadata objects, is deprecated.",     dQuote(this), domain = "R-methods")
 #: R/MethodsList.R:0
 msgid ""
 "%s, along with other use of the \"MethodsList\" metadata objects, is "
@@ -175,6 +189,12 @@ msgstr ""
 msgid "'%s' is not a known generic function {and 'package' not specified}"
 msgstr ""
 "'%s'는 알려진 제네릭 함수가 아닙니다 {그리고 'package'가 지정되지 않았습니다}"
+
+#. R/Methods.R: gettextf("'%s' or '%s' argument must be supplied", "generic.function", "class")
+#: R/Methods.R:0
+#, fuzzy
+msgid "'%s' or '%s' argument must be supplied"
+msgstr "%s이라는 이름들은 주어지지 않았습니다"
 
 #. R/RClassUtils.R: stop("'Class' argument must be a valid class definition or class")
 #: R/RClassUtils.R:0
@@ -1093,6 +1113,20 @@ msgid ""
 "Usage:  $help(topic) where topic is the name of a method (quoted or not)"
 msgstr ""
 
+#. R/MethodsList.R: gettext("Use of the \"MethodsList\" meta data objects is defunct.", domain = "R-methods")
+#: R/MethodsList.R:0
+#, fuzzy
+msgid "Use of the \"MethodsList\" meta data objects is defunct."
+msgstr ""
+"%s내에서:  \"MethodsList\" 메타데이터 객체들의 사용은 지원되지 않습니다."
+
+#. R/MethodsList.R: gettext("Use of the \"MethodsList\" meta data objects is deprecated.", domain = "R-methods")
+#: R/MethodsList.R:0
+#, fuzzy
+msgid "Use of the \"MethodsList\" meta data objects is deprecated."
+msgstr ""
+"%s내에서:  \"MethodsList\" 메타데이터 객체들의 사용은 지원되지 않습니다."
+
 #. R/RClassUtils.R: gettextf("Virtual Class %s", .dQ(Class), domain = "R-methods")
 #: R/RClassUtils.R:0
 msgid "Virtual Class %s"
@@ -1997,12 +2031,6 @@ msgstr ""
 "만약 'def' 인자가 주어진다면, 반드시 standardGeneric(\"%s\")를 호출하는 함수"
 "이거나 기본값이어야 합니다"
 
-#. R/MethodsList.R: gettextf("in %s: use of \"MethodsList\" metadata objects is deprecated.", deparse(this))
-#: R/MethodsList.R:0
-msgid "in %s: use of \"MethodsList\" metadata objects is deprecated."
-msgstr ""
-"%s내에서:  \"MethodsList\" 메타데이터 객체들의 사용은 지원되지 않습니다."
-
 #. R/RMethodUtils.R: gettext("in changing formal arguments in %s, some of the old names are not in fact arguments: %s",     domain = "R-methods")
 #: R/RMethodUtils.R:0
 msgid ""
@@ -2011,6 +2039,20 @@ msgid ""
 msgstr ""
 "%1$s내에 있는 형식인자들을 변경하던 중, 기존의 인자명들 중 일부가 사실은 인자"
 "들이 아님을 알게 되었습니다: %2$s"
+
+#. R/MethodsList.R: gettextf("in command %s: use of \"MethodsList\" metadata objects is defunct.", deparse(this),     domain = "R-methods")
+#: R/MethodsList.R:0
+#, fuzzy
+msgid "in command %s: use of \"MethodsList\" metadata objects is defunct."
+msgstr ""
+"%s내에서:  \"MethodsList\" 메타데이터 객체들의 사용은 지원되지 않습니다."
+
+#. R/MethodsList.R: gettextf("in command %s: use of \"MethodsList\" metadata objects is deprecated.",     sQuote(deparse(this)), domain = "R-methods")
+#: R/MethodsList.R:0
+#, fuzzy
+msgid "in command %s: use of \"MethodsList\" metadata objects is deprecated."
+msgstr ""
+"%s내에서:  \"MethodsList\" 메타데이터 객체들의 사용은 지원되지 않습니다."
 
 #. R/RClassUtils.R: gettext("in constructing the prototype for class %s, slots in prototype and not in class: %s",     domain = "R-methods")
 #: R/RClassUtils.R:0
@@ -2248,12 +2290,15 @@ msgstr "메소드 부분리스트가 잘못되었습니다"
 msgid "invalid methods table request"
 msgstr ""
 
-#. R/methodsTable.R: gettextf("invalid mlist element for signature %s at level %d (should be methods list or method, had class %s)",     sQuote(classes[[j]]), i, dQuote(class(el)))
+#. R/methodsTable.R: gettextf("invalid mlist element for signature %s at level %d (should be MethodDefinition or .Primitive, had class %s)",     sQuote(classes[[j]]), i, dQuote(class(el)))
 #: R/methodsTable.R:0
+#, fuzzy
 msgid ""
-"invalid mlist element for signature %s at level %d (should be methods list "
-"or method, had class %s)"
+"invalid mlist element for signature %s at level %d (should be "
+"MethodDefinition or .Primitive, had class %s)"
 msgstr ""
+"\"signature\" 인자에 대한 리스트내에 잘못된 구성요소가 있습니다; 구성요소 %d"
+"는 클래스 정의도 아니고 클래스명도 아닙니다"
 
 #. R/MethodsListClass.R: gettextf("invalid object for formal method definition: type %s", dQuote(typeof(def)))
 #: R/MethodsListClass.R:0
@@ -2868,6 +2913,16 @@ msgstr "치환값은 반드시 클래스 %1$s를 확장해야 하지만, %2$s를
 msgid "restoring definition of class %s"
 msgstr "클래스 %s의 정의를 복원합니다"
 
+#. R/MethodsList.R: gettext("see ?MethodsList.", domain = "R-methods")
+#: R/MethodsList.R:0
+msgid "see ?MethodsList."
+msgstr ""
+
+#. R/MethodsList.R: gettext("see ?MethodsList. (This warning is shown once per session.)", domain = "R-methods")
+#: R/MethodsList.R:0
+msgid "see ?MethodsList. (This warning is shown once per session.)"
+msgstr ""
+
 #. R/Methods.R: stop("selectMethod(): mlist is not an environment or NULL :\n", "** should no longer happen!",     domain = "R-methods")
 #: R/Methods.R:0
 msgid "selectMethod(): mlist is not an environment or NULL :"
@@ -2927,7 +2982,7 @@ msgstr ""
 msgid "some actions are missing: %s"
 msgstr "다음과 같은 일부 액션들이 누락되었습니다: %s"
 
-#. R/methodsTable.R: gettext("something weird: inconsistent number of args in methods table strings: %s (using the largest value)",     domain = "R-methods")
+#. R/methodsTable.R: gettextf("something weird: inconsistent number of args in methods table strings: %s (using the largest value)",     paste(nargs, collapse = ", "), domain = "R-methods")
 #: R/methodsTable.R:0
 msgid ""
 "something weird: inconsistent number of args in methods table strings: %s "
@@ -3379,6 +3434,7 @@ msgstr ""
 "야 합니다; 그러나 클래스 %s의 객체를 가집니다"
 
 #. R/MethodsList.R: gettextf("use %s instead.", dQuote(instead))
+#. R/MethodsList.R: gettextf("use %s instead.", dQuote(instead), domain = "R-methods")
 #: R/MethodsList.R:0
 msgid "use %s instead."
 msgstr "대신 %s을 사용하세요."
@@ -3540,6 +3596,10 @@ msgid_plural ""
 "of the non-generic to be used as the default (%s)"
 msgstr[0] ""
 msgstr[1] ""
+
+#, fuzzy
+#~ msgid "generic.function"
+#~ msgstr "제네릭 함수 %s를 찾을 수 없습니다"
 
 #~ msgid ""
 #~ "special function %s has no known argument list; will assume '(x, ...)'"

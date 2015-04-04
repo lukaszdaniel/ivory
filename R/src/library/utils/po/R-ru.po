@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:27\n"
+"POT-Creation-Date: 2015-04-01 22:13\n"
 "PO-Revision-Date: 2015-01-17 15:55+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -1042,11 +1042,6 @@ msgid ""
 "matching."
 msgstr ""
 
-#. R/objects.R: gettext("Non-visible functions are asterisked", domain = "R-utils")
-#: R/objects.R:0
-msgid "Non-visible functions are asterisked"
-msgstr ""
-
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(other)[!other_length_ok], collapse = ", "))
@@ -2046,9 +2041,12 @@ msgstr "первые пять строк пусты: завязываю с эт�
 msgid "foundpkgs: %s"
 msgstr ""
 
-#. R/objects.R: gettextf("function '%s' appears not to be generic", generic.function)
+#. R/objects.R: gettextf("function '%s' appears not to be S3 generic; found functions that look like S3 methods",     generic.function)
 #: R/objects.R:0
-msgid "function '%s' appears not to be generic"
+#, fuzzy
+msgid ""
+"function '%s' appears not to be S3 generic; found functions that look like "
+"S3 methods"
 msgstr "функция '%s', похоже, не общая"
 
 #. R/objects.R: gettextf("generic function '%s' dispatches methods for generic '%s'", generic.function,     truegf)
@@ -2483,10 +2481,10 @@ msgstr "для функции %s и подписи %s не определено 
 msgid "no methods for %s and no documentation for it as a function"
 msgstr "для %s нет методов и нет документации для него как функции"
 
-#. R/objects.R: gettext("no methods were found", domain = "R-utils")
+#. R/objects.R: gettext("no methods found", domain = "R-utils")
 #: R/objects.R:0
 #, fuzzy
-msgid "no methods were found"
+msgid "no methods found"
 msgstr "метод S3 '%s' не найден"
 
 #. R/packages.R: message("no new packages are available")
@@ -2732,6 +2730,11 @@ msgstr "строки пусты: завязываю с этим"
 #: R/help.search.R:0
 msgid "saving the database ..."
 msgstr "Сохраняю базу данных..."
+
+#. R/objects.R: gettext("see '?methods' for accessing help and source code", domain = "R-utils")
+#: R/objects.R:0
+msgid "see '?methods' for accessing help and source code"
+msgstr ""
 
 #. R/tar.R: gettext("skipping devices")
 #: R/tar.R:0

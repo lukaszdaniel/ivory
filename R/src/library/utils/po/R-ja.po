@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:27\n"
+"POT-Creation-Date: 2015-04-01 22:13\n"
 "PO-Revision-Date: 2012-02-26 14:23+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -1034,11 +1034,6 @@ msgid ""
 "matching."
 msgstr ""
 
-#. R/objects.R: gettext("Non-visible functions are asterisked", domain = "R-utils")
-#: R/objects.R:0
-msgid "Non-visible functions are asterisked"
-msgstr ""
-
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(other)[!other_length_ok], collapse = ", "))
@@ -2047,9 +2042,12 @@ msgstr " 冒頭の５行が空です： お手上げです "
 msgid "foundpkgs: %s"
 msgstr ""
 
-#. R/objects.R: gettextf("function '%s' appears not to be generic", generic.function)
+#. R/objects.R: gettextf("function '%s' appears not to be S3 generic; found functions that look like S3 methods",     generic.function)
 #: R/objects.R:0
-msgid "function '%s' appears not to be generic"
+#, fuzzy
+msgid ""
+"function '%s' appears not to be S3 generic; found functions that look like "
+"S3 methods"
 msgstr " 関数 '%s' は総称的では無いようです "
 
 #. R/objects.R: gettextf("generic function '%s' dispatches methods for generic '%s'", generic.function,     truegf)
@@ -2494,10 +2492,10 @@ msgstr ""
 " '%s' に対するメソッドはありませんし、その関数としてのドキュメントもありませ"
 "ん "
 
-#. R/objects.R: gettext("no methods were found", domain = "R-utils")
+#. R/objects.R: gettext("no methods found", domain = "R-utils")
 #: R/objects.R:0
 #, fuzzy
-msgid "no methods were found"
+msgid "no methods found"
 msgstr " S3 メソッド '%s' は見付かりません  "
 
 #. R/packages.R: message("no new packages are available")
@@ -2743,6 +2741,11 @@ msgstr " 行がありません：お手上げです "
 #: R/help.search.R:0
 msgid "saving the database ..."
 msgstr " データベースを保存しています ... "
+
+#. R/objects.R: gettext("see '?methods' for accessing help and source code", domain = "R-utils")
+#: R/objects.R:0
+msgid "see '?methods' for accessing help and source code"
+msgstr ""
 
 #. R/tar.R: gettext("skipping devices")
 #: R/tar.R:0

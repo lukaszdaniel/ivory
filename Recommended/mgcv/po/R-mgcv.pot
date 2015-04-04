@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: mgcv 1.8-5\n"
-"POT-Creation-Date: 2015-03-04 18:44\n"
+"Project-Id-Version: mgcv 1.8-6\n"
+"POT-Creation-Date: 2015-04-01 22:10\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -347,6 +347,14 @@ msgstr ""
 #. R/gam.fit3.r: stop("'mu' argument must be non negative")
 
 msgid "'mu' argument must be non negative"
+msgstr ""
+
+
+#: R/misc.r: 0
+#. R/misc.r: stop("'mu' dimensions are wrong")
+#. R/misc.r: stop("'mu' dimensions are wrong")
+
+msgid "'mu' dimensions are wrong"
 msgstr ""
 
 
@@ -1985,6 +1993,13 @@ msgid "done!"
 msgstr ""
 
 
+#: R/mgcv.r: 0
+#. R/mgcv.r: warning("dropping unidentifiable parameteric terms from model", call. = FALSE)
+
+msgid "dropping unidentifiable parameteric terms from model"
+msgstr ""
+
+
 #: R/plots.r: 0
 #. R/plots.r: gettext("effects", domain = "R-mgcv")
 
@@ -2338,6 +2353,13 @@ msgid "linear predictor"
 msgstr ""
 
 
+#: R/mgcv.r: 0
+#. R/mgcv.r: stop("linear predictor labels out of range")
+
+msgid "linear predictor labels out of range"
+msgstr ""
+
+
 #: R/efam.r: 0
 #: R/gam.fit3.r: 0
 #. R/efam.r: gettextf("link \"%s\" is not available for Tweedie family", linktemp, collapse = "")
@@ -2456,6 +2478,13 @@ msgstr ""
 #. R/smooth.r: stop("more knots than unique data values is not allowed")
 
 msgid "more knots than unique data values is not allowed"
+msgstr ""
+
+
+#: R/mvam.r: 0
+#. R/mvam.r: stop("mvn dimension error")
+
+msgid "mvn dimension error"
 msgstr ""
 
 
@@ -2892,6 +2921,13 @@ msgstr ""
 #. R/mgcv.r: warning("silly value supplied for rank.tol: reset to square root of machine precision")
 
 msgid "silly value supplied for rank.tol: reset to square root of machine precision"
+msgstr ""
+
+
+#: R/mgcv.r: 0
+#. R/mgcv.r: warning("single linear predictor indices are ignored")
+
+msgid "single linear predictor indices are ignored"
 msgstr ""
 
 

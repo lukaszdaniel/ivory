@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: utils 3.2.0\n"
-"POT-Creation-Date: 2015-02-13 16:27\n"
+"Project-Id-Version: utils 3.3.0\n"
+"POT-Creation-Date: 2015-04-01 22:13\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1255,13 +1255,6 @@ msgstr ""
 #. R/help.search.R: gettextf("No vignettes found with %s fields matching %s using regular expression matching.",     fields_used$help, sQuote(x$pattern), domain = "R-utils")
 
 msgid "No vignettes found with %s fields matching %s using regular expression matching."
-msgstr ""
-
-
-#: R/objects.R: 0
-#. R/objects.R: gettext("Non-visible functions are asterisked", domain = "R-utils")
-
-msgid "Non-visible functions are asterisked"
 msgstr ""
 
 
@@ -2522,9 +2515,9 @@ msgstr ""
 
 
 #: R/objects.R: 0
-#. R/objects.R: gettextf("function '%s' appears not to be generic", generic.function)
+#. R/objects.R: gettextf("function '%s' appears not to be S3 generic; found functions that look like S3 methods",     generic.function)
 
-msgid "function '%s' appears not to be generic"
+msgid "function '%s' appears not to be S3 generic; found functions that look like S3 methods"
 msgstr ""
 
 
@@ -3098,9 +3091,9 @@ msgstr ""
 
 
 #: R/objects.R: 0
-#. R/objects.R: gettext("no methods were found", domain = "R-utils")
+#. R/objects.R: gettext("no methods found", domain = "R-utils")
 
-msgid "no methods were found"
+msgid "no methods found"
 msgstr ""
 
 
@@ -3419,6 +3412,13 @@ msgstr ""
 #. R/help.search.R: message("saving the database ...", appendLF = FALSE, domain = "R-utils")
 
 msgid "saving the database ..."
+msgstr ""
+
+
+#: R/objects.R: 0
+#. R/objects.R: gettext("see '?methods' for accessing help and source code", domain = "R-utils")
+
+msgid "see '?methods' for accessing help and source code"
 msgstr ""
 
 

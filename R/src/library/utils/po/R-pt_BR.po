@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:27\n"
+"POT-Creation-Date: 2015-04-01 22:13\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -956,11 +956,6 @@ msgid ""
 "matching."
 msgstr ""
 
-#. R/objects.R: gettext("Non-visible functions are asterisked", domain = "R-utils")
-#: R/objects.R:0
-msgid "Non-visible functions are asterisked"
-msgstr ""
-
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(other)[!other_length_ok], collapse = ", "))
@@ -1900,9 +1895,11 @@ msgstr ""
 msgid "foundpkgs: %s"
 msgstr ""
 
-#. R/objects.R: gettextf("function '%s' appears not to be generic", generic.function)
+#. R/objects.R: gettextf("function '%s' appears not to be S3 generic; found functions that look like S3 methods",     generic.function)
 #: R/objects.R:0
-msgid "function '%s' appears not to be generic"
+msgid ""
+"function '%s' appears not to be S3 generic; found functions that look like "
+"S3 methods"
 msgstr ""
 
 #. R/objects.R: gettextf("generic function '%s' dispatches methods for generic '%s'", generic.function,     truegf)
@@ -2319,10 +2316,10 @@ msgstr ""
 msgid "no methods for %s and no documentation for it as a function"
 msgstr ""
 
-#. R/objects.R: gettext("no methods were found", domain = "R-utils")
+#. R/objects.R: gettext("no methods found", domain = "R-utils")
 #: R/objects.R:0
 #, fuzzy
-msgid "no methods were found"
+msgid "no methods found"
 msgstr "documento não encontrado"
 
 #. R/packages.R: message("no new packages are available")
@@ -2556,6 +2553,11 @@ msgstr ""
 #. R/help.search.R: message("saving the database ...", appendLF = FALSE, domain = "R-utils")
 #: R/help.search.R:0
 msgid "saving the database ..."
+msgstr ""
+
+#. R/objects.R: gettext("see '?methods' for accessing help and source code", domain = "R-utils")
+#: R/objects.R:0
+msgid "see '?methods' for accessing help and source code"
 msgstr ""
 
 #. R/tar.R: gettext("skipping devices")

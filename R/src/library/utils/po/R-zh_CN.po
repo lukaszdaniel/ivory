@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:27\n"
+"POT-Creation-Date: 2015-04-01 22:13\n"
 "PO-Revision-Date: 2015-01-17 15:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1020,11 +1020,6 @@ msgid ""
 "matching."
 msgstr ""
 
-#. R/objects.R: gettext("Non-visible functions are asterisked", domain = "R-utils")
-#: R/objects.R:0
-msgid "Non-visible functions are asterisked"
-msgstr ""
-
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(other)[!other_length_ok], collapse = ", "))
@@ -2018,9 +2013,12 @@ msgstr "开头五行都是空白的：停止运行"
 msgid "foundpkgs: %s"
 msgstr ""
 
-#. R/objects.R: gettextf("function '%s' appears not to be generic", generic.function)
+#. R/objects.R: gettextf("function '%s' appears not to be S3 generic; found functions that look like S3 methods",     generic.function)
 #: R/objects.R:0
-msgid "function '%s' appears not to be generic"
+#, fuzzy
+msgid ""
+"function '%s' appears not to be S3 generic; found functions that look like "
+"S3 methods"
 msgstr "函数'%s'好象不是同属的"
 
 #. R/objects.R: gettextf("generic function '%s' dispatches methods for generic '%s'", generic.function,     truegf)
@@ -2451,10 +2449,10 @@ msgstr "函数%s和标签%s没有设定方法"
 msgid "no methods for %s and no documentation for it as a function"
 msgstr "%s没有方法，也没有将之用作函数的帮助文件"
 
-#. R/objects.R: gettext("no methods were found", domain = "R-utils")
+#. R/objects.R: gettext("no methods found", domain = "R-utils")
 #: R/objects.R:0
 #, fuzzy
-msgid "no methods were found"
+msgid "no methods found"
 msgstr "找不到S3方法'%s'"
 
 #. R/packages.R: message("no new packages are available")
@@ -2694,6 +2692,11 @@ msgstr "空白的行：停止运行"
 #: R/help.search.R:0
 msgid "saving the database ..."
 msgstr "保存到数据库…"
+
+#. R/objects.R: gettext("see '?methods' for accessing help and source code", domain = "R-utils")
+#: R/objects.R:0
+msgid "see '?methods' for accessing help and source code"
+msgstr ""
 
 #. R/tar.R: gettext("skipping devices")
 #: R/tar.R:0
