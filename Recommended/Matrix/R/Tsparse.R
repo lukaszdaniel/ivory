@@ -136,7 +136,7 @@ intI <- function(i, n, dn, give.dn = TRUE)
     DN <- has.dn && give.dn
     if(is(i, "numeric")) {
 	storage.mode(i) <- "integer"
-	if(any(is.na(i)))
+	if(anyNA(i))
 	    stop("'NA' indices are not (yet?) supported for sparse Matrices")
 	if(any(i < 0L)) {
 	    if(any(i > 0L))
@@ -159,7 +159,7 @@ intI <- function(i, n, dn, give.dn = TRUE)
 	if(!has.dn)
 	    stop("no 'dimnames[[.]]': cannot use character indexing")
 	i0 <- match(i, dn)
-	if(any(is.na(i0))) stop("invalid character indexing")
+	if(anyNA(i0)) stop("invalid character indexing")
 	if(DN) dn <- dn[i0]
 	i0 <- i0 - 1L
     }
@@ -309,7 +309,7 @@ replTmat <- function (x, i, j, ..., value)
     ## "FIXME": could pass this (and much ? more) when this function would not *be* a
     ## method but be *called* from methods
 
-    clDv <- getClassDef(clV <- class(value))
+    clDv <- getClassDef(class(value))
     spV <- extends(clDv, "sparseVector")
     ## own version of all0() that works both for sparseVector and atomic vectors:
     .all0 <- function(v) if(spV) length(v@i) == 0 else all0(v)
@@ -338,7 +338,7 @@ replTmat <- function (x, i, j, ..., value)
 	}
 	nr <- di[1]
 	x.i <- .Call(m_encodeInd2, x@i, x@j, di=di, FALSE, FALSE)
-	if(anyDuplicated(x.i)) { ## == if(is_duplicatedT(x, di = di))
+	if(anyDuplicated(x.i)) { ## == if(anyDuplicatedT(x, di = di))
 	    x <- uniqTsparse(x)
 	    x.i <- .Call(m_encodeInd2, x@i, x@j, di=di, FALSE, FALSE)
 	}
@@ -485,7 +485,7 @@ replTmat <- function (x, i, j, ..., value)
     clDx <- getClassDef(clx) # extends() , is() etc all use the class definition
     stopifnot(extends(clDx, "TsparseMatrix"))
     ## Tmatrix maybe non-unique, have an entry split into a sum of several ones:
-    if(is_duplicatedT(x, di = di))
+    if(anyDuplicatedT(x, di = di))
 	x <- uniqTsparse(x)
 
     toGeneral <- r.sym <- FALSE
@@ -547,7 +547,7 @@ replTmat <- function (x, i, j, ..., value)
     ## now have  lenV <= lenRepl
 
     if(!has.x && # <==> "n.TMatrix"
-       ((iNA <- any(is.na(value))) || value.not.logical))
+       ((iNA <- anyNA(value)) || value.not.logical))
 	warning(if(iNA)
 		gettextf("x[.,.] <- val: x is %s, val not in {TRUE, FALSE} is coerced NA |--> TRUE.", dQuote(clx))
 		else
@@ -695,7 +695,7 @@ replTmat <- function (x, i, j, ..., value)
     if(!is.integer(i)) storage.mode(i) <- "integer"
     if(any(i < 0))
 	stop("negative values are not allowed in a matrix subscript")
-    if(any(is.na(i)))
+    if(anyNA(i))
 	stop("NAs are not allowed in subscripted assignments")
     if(any(i0 <- (i == 0))) # remove them
 	i <- i[ - which(i0, arr.ind = TRUE)[,"row"], ]
@@ -726,7 +726,7 @@ replTmat <- function (x, i, j, ..., value)
     if(any(i2 > nc)) stop(gettextf("column indices must be <= ncol(.) which is %d", nc), domain = "R-Matrix")
 
     ## Tmatrix maybe non-unique, have an entry split into a sum of several ones:
-    if(is_duplicatedT(x, di = di))
+    if(anyDuplicatedT(x, di = di))
 	x <- uniqTsparse(x)
 
     toGeneral <- FALSE

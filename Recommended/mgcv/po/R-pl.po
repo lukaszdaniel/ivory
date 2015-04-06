@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mgcv 1.8-0\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
 "POT-Creation-Date: 2015-04-01 22:10\n"
-"PO-Revision-Date: 2015-02-28 13:05+0100\n"
+"PO-Revision-Date: 2015-04-04 16:08+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -58,9 +58,8 @@ msgstr ""
 
 #. R/gamlss.r: gettextf("\"%s\" link not available for parameter of ziplss %s", param.names[i],     link[[i]])
 #: R/gamlss.r:0
-#, fuzzy
 msgid "\"%s\" link not available for parameter of ziplss %s"
-msgstr "typ 'items' nie jest dostępny dla przypadków z wieloma predyktorami"
+msgstr "połączenie \"%s\" nie jest dostępne dla parametru 'ziplss()' %s"
 
 #. R/gamlss.r: gettextf("\"%s\" link not available for precision parameter of gaulss", link[[2]])
 #: R/gamlss.r:0
@@ -78,13 +77,12 @@ msgstr ""
 
 #. R/efam.r: gettextf("\"%s\" link not available for zero inflated; available link for `lambda' is only  \"loga\"",     linktemp)
 #: R/efam.r:0
-#, fuzzy
 msgid ""
 "\"%s\" link not available for zero inflated; available link for `lambda' is "
 "only  \"loga\""
 msgstr ""
-"połączenie %s nie jest dostępne dla rodziny rozkładu Pascala; dostępne "
-"połączenia to \"identity\", \"log\" oraz \"sqrt\""
+"połączenie \"%s\" nie jest dostępne dla rodziny rozkładu Pascala; dostępnym "
+"połączeniem dla 'lambda' jest tylko \"loga\""
 
 #. R/smooth.r: stop("\"fs\" smooth cannot use a multiply penalized basis (wrong basis in xt)")
 #: R/smooth.r:0
@@ -293,9 +291,8 @@ msgstr "argument 'mu' musi być nieujemny"
 #. R/misc.r: stop("'mu' dimensions are wrong")
 #. R/misc.r: stop("'mu' dimensions are wrong")
 #: R/misc.r:0
-#, fuzzy
 msgid "'mu' dimensions are wrong"
-msgstr "wymiar 'fx' jest niepoprawny"
+msgstr "wymiary 'mu' są niepoprawne"
 
 #. R/mgcv.r: warning("'negbin()' with unknown theta and outer iteration is deprecated - use 'nb()'.")
 #: R/mgcv.r:0
@@ -505,7 +502,7 @@ msgstr "Podstawa obsługuje jedynie jednowymiarowe wygładzania"
 #. R/efam.r: gettextf("Beta regression(%s)", round(theta, 3), domain = "R-mgcv")
 #: R/efam.r:0
 msgid "Beta regression(%s)"
-msgstr ""
+msgstr "Regresja beta(%s)"
 
 #. R/gam.sim.r: gettext("Bivariate smoothing example", domain = "R-mgcv")
 #: R/gam.sim.r:0
@@ -884,12 +881,12 @@ msgstr ""
 #. R/efam.r: stop("Must supply theta or R to ocat")
 #: R/efam.r:0
 msgid "Must supply theta or R to ocat"
-msgstr ""
+msgstr "wymagany jest argument 'theta' lub 'R' przy wywoływaniu 'ocat()'"
 
 #. R/coxph.r: stop("NA times supplied for cox.ph prediction")
 #: R/coxph.r:0
 msgid "NA times supplied for cox.ph prediction"
-msgstr ""
+msgstr "dostarczono czasy NA do predykcji 'cox.ph()'"
 
 #. R/mgcv.r: stop("NA values in 'min.sp' argument")
 #: R/mgcv.r:0
@@ -935,7 +932,7 @@ msgstr ""
 #. R/efam.r: gettextf("Negative Binomial(%s)", paste(round(object$family$getTheta(TRUE), 3), sep = ", ",     collapse = ""), domain = "R-mgcv")
 #: R/efam.r:0
 msgid "Negative Binomial(%s)"
-msgstr ""
+msgstr "Rozkład Pascala(%s)"
 
 #. R/gamm.r: stop("Nested smooths must be fully random")
 #: R/gamm.r:0
@@ -1033,7 +1030,7 @@ msgstr "Wspierane jest tylko 1<p<=2"
 #. R/efam.r: gettextf("Ordered Categorical(%s)", paste(round(object$family$getTheta(TRUE), 2),     collapse = ","), domain = "R-mgcv")
 #: R/efam.r:0
 msgid "Ordered Categorical(%s)"
-msgstr ""
+msgstr "Uporządkowane czynniki(%s)"
 
 #. R/mgcv.r: gettext("Parametric Terms:", domain = "R-mgcv")
 #: R/mgcv.r:0
@@ -1070,7 +1067,7 @@ msgstr ""
 #. R/gam.fit3.r: warning("Pearson scale estimate maybe unstable. See '?gam.scale'.")
 #: R/gam.fit3.r:0
 msgid "Pearson scale estimate maybe unstable. See '?gam.scale'."
-msgstr ""
+msgstr "Oszacowanie skali Pearson'a może być niestabilne. Zobacz '?gam.scale'."
 
 #. R/mgcv.r: stop("Penalized model matrix must have no more columns than rows")
 #: R/mgcv.r:0
@@ -1140,7 +1137,7 @@ msgstr "Oszacowanie skali = %s  n = %s"
 #. R/efam.r: gettextf("Scaled t(%s)", paste(round(object$family$getTheta(TRUE), 3), collapse = ","),     domain = "R-mgcv")
 #: R/efam.r:0
 msgid "Scaled t(%s)"
-msgstr ""
+msgstr "Skalowany rozkład t-Studenta(%s)"
 
 #. R/bam.r: gettext("Setup complete. Calling fit", domain = "R-mgcv")
 #: R/bam.r:0
@@ -1305,7 +1302,7 @@ msgstr ""
 #. R/efam.r: gettextf("Tweedie(p=%s)", round(object$family$getTheta(TRUE), 3), domain = "R-mgcv")
 #: R/efam.r:0
 msgid "Tweedie(p=%s)"
-msgstr ""
+msgstr "Tweedie(p=%s)"
 
 #. R/mgcv.r: warning("Unknown type, reset to terms")
 #: R/mgcv.r:0
@@ -1315,12 +1312,12 @@ msgstr "Nieznany typ, resetowanie do 'terms'"
 #. R/efam.r: stop("Using ziP for binary data makes no sense")
 #: R/efam.r:0
 msgid "Using ziP for binary data makes no sense"
-msgstr ""
+msgstr "Używanie 'ziP()' dla danych binarnych nie ma sensu"
 
 #. R/gamlss.r: stop("Using ziplss for binary data makes no sense")
 #: R/gamlss.r:0
 msgid "Using ziplss for binary data makes no sense"
-msgstr ""
+msgstr "Używanie 'ziplss()' dla danych binarnych nie ma sensu"
 
 #. R/plots.r: gettextf("View variables must contain more than one value. view = c(%s,%s).", view[1],     view[2])
 #: R/plots.r:0
@@ -1562,9 +1559,8 @@ msgstr "faktoryzacja zmiennych 'by' nie może być użyta z argumentami macierzy
 
 #. R/jagam.r: stop("family not implemented yet")
 #: R/jagam.r:0
-#, fuzzy
 msgid "family not implemented yet"
-msgstr "'family' nie został jeszcze zaimplementowany"
+msgstr "rodzina nie została jeszcze zaimplementowana"
 
 #. R/bam.r: stop("family not recognized")
 #. R/gam.fit3.r: stop("family not recognized")
@@ -1910,12 +1906,12 @@ msgstr ""
 #. R/mvam.r: stop("mvn dimension error")
 #: R/mvam.r:0
 msgid "mvn dimension error"
-msgstr ""
+msgstr "błąd wymiaru 'mvn()'"
 
 #. R/mvam.r: stop("mvn requires 2 or more dimensional data")
 #: R/mvam.r:0
 msgid "mvn requires 2 or more dimensional data"
-msgstr ""
+msgstr "'mvn()' wymaga 2 lub więcej danych wymiarowych"
 
 #. R/plots.r: stop("names of 'z' and 'pc' must match")
 #: R/plots.r:0
@@ -1936,7 +1932,6 @@ msgstr "ujemne wartości nie są dozwolone dla rozkładu z rodziny Pascala"
 
 #. R/efam.r: stop("negative values not allowed for the zero inflated Poisson family")
 #: R/efam.r:0
-#, fuzzy
 msgid "negative values not allowed for the zero inflated Poisson family"
 msgstr "ujemne wartości nie są dozwolone dla rozkładu z rodziny Pascala"
 
@@ -2226,9 +2221,8 @@ msgstr "parametr skali musi być dodatni"
 
 #. R/efam.r: stop("scaled t df must be >2")
 #: R/efam.r:0
-#, fuzzy
 msgid "scaled t df must be >2"
-msgstr "wartość 'epsilon' musi być > 0"
+msgstr "stopnie swobody skalowanego rozkładu r-Studenta muszą być > 2"
 
 #. R/plots.r: gettextf("scheme should be a single number, or a vector with %d elements", m)
 #: R/plots.r:0
@@ -2299,7 +2293,7 @@ msgstr "coś nie tak z argumentem 'd'"
 #. R/jagam.r: stop("sorry link not yet handled")
 #: R/jagam.r:0
 msgid "sorry link not yet handled"
-msgstr ""
+msgstr "połączenie nie jest jeszcze obsługiwane"
 
 #. R/plots.r: warning("sorry no option for contouring with errors: try plot.gam")
 #: R/plots.r:0
@@ -2415,9 +2409,8 @@ msgstr "'type' musi mieć wartość \"link\" lub \"response\""
 #. R/jagam.r: stop("unconditional argument not meaningful here")
 #. R/jagam.r: warning("unconditional argument not meaningful here")
 #: R/jagam.r:0
-#, fuzzy
 msgid "unconditional argument not meaningful here"
-msgstr "początkowe parametry nie mają zastosowana"
+msgstr "bezwarunkowe argumenty nie mają tu zastosowana"
 
 #. R/smooth.r: stop("unimplemented sparse constraint type requested")
 #: R/smooth.r:0
@@ -2488,7 +2481,7 @@ msgstr "zmienne podglądu muszą jednym z %s"
 #. R/jagam.r: warning("weights ignored")
 #: R/jagam.r:0
 msgid "weights ignored"
-msgstr ""
+msgstr "wagi zostały zignorowane"
 
 #. R/gamm.r: stop("weights must be like glm weights for generalized case")
 #: R/gamm.r:0
@@ -2517,16 +2510,22 @@ msgid_plural ""
 "Smoothing parameter selection converged after %d iterations by steepest "
 "descent step failure."
 msgstr[0] ""
+"Wybór parametrów wygładzania uzbieżnił się po %d iteracji poprzez "
+"niepowodzenie kroku największego spadku."
 msgstr[1] ""
+"Wybór parametrów wygładzania uzbieżnił się po %d iteracjach poprzez "
+"niepowodzenie kroku największego spadku."
 msgstr[2] ""
+"Wybór parametrów wygładzania uzbieżnił się po %d iteracjach poprzez "
+"niepowodzenie kroku największego spadku."
 
 #. R/plots.r: ngettext(b$mgcv.conv$iter, "Smoothing parameter selection converged after %d iteration.",     "Smoothing parameter selection converged after %d iterations.", domain = "R-mgcv")
 #: R/plots.r:0
 msgid "Smoothing parameter selection converged after %d iteration."
 msgid_plural "Smoothing parameter selection converged after %d iterations."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Wybór parametrów wygładzania uzbieżnił się po %d iteracji."
+msgstr[1] "Wybór parametrów wygładzania uzbieżnił się po %d iteracjach."
+msgstr[2] "Wybór parametrów wygładzania uzbieżnił się po %d iteracjach."
 
 #~ msgid "Choleski based method failed, switch to QR"
 #~ msgstr ""

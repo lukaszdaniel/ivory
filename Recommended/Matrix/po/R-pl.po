@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Matrix 1.0-9\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:25\n"
+"POT-Creation-Date: 2015-04-06 20:36\n"
 "PO-Revision-Date: 2015-04-02 21:47+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -107,10 +107,25 @@ msgstr "'V' nie jest macierzą *kwadratową*"
 msgid "'V' is not a square matrix"
 msgstr "'V' nie jest macierzą kwadratową"
 
+#. R/products.R: gettextf("'boolArith = %d' not yet implemented", boolArith)
+#. R/products.R: gettextf("'boolArith = %d' not yet implemented", boolArith)
+#. R/products.R: gettextf("'boolArith = %d' not yet implemented", boolArith)
+#: R/products.R:0
+#, fuzzy
+msgid "'boolArith = %d' not yet implemented"
+msgstr "rodzaj %s nie jest jeszcze zaimplementowany"
+
 #. R/abIndex.R: stop("'by' argument is much too small")
 #: R/abIndex.R:0
 msgid "'by' argument is much too small"
 msgstr "argument 'by' jest znacznie za mały"
+
+#. R/zzz.R: gettext("'cBind' is deprecated. Since R version 3.2.0, base's cbind() should work fine with S4 objects")
+#: R/zzz.R:0
+msgid ""
+"'cBind' is deprecated. Since R version 3.2.0, base's cbind() should work "
+"fine with S4 objects"
+msgstr ""
 
 #. R/bandSparse.R: gettextf("'diagonals' must have the same length (%d) as 'k'", len.k)
 #: R/bandSparse.R:0
@@ -264,6 +279,13 @@ msgstr "'p' musi być niemalejącym wektorem (0, ...)"
 #: R/AllClass.R:0
 msgid "'perm' slot is not a valid permutation"
 msgstr "gniazdo 'perm' nie jest poprawną permutacją"
+
+#. R/zzz.R: gettext("'rBind' is deprecated. Since R version 3.2.0, base's rbind() should work fine with S4 objects")
+#: R/zzz.R:0
+msgid ""
+"'rBind' is deprecated. Since R version 3.2.0, base's rbind() should work "
+"fine with S4 objects"
+msgstr ""
 
 #. R/AllClass.R: gettext("'rle' must be a list (lengths = *, values = *)", domain = "R-Matrix")
 #: R/AllClass.R:0
@@ -1168,6 +1190,10 @@ msgstr "brak 'dimnames[[.]]': nie można używać indeksowania tekstowego"
 
 #. R/products.R: stop("non-conformable arguments")
 #. R/products.R: stop("non-conformable arguments")
+#. R/products.R: stop("non-conformable arguments")
+#. R/products.R: stop("non-conformable arguments")
+#. R/products.R: stop("non-conformable arguments")
+#. R/products.R: stop("non-conformable arguments")
 #: R/products.R:0
 msgid "non-conformable arguments"
 msgstr "niezgodne argumenty"
@@ -1177,6 +1203,12 @@ msgstr "niezgodne argumenty"
 msgid "non-conformable matrix dimensions in %s"
 msgstr "niezgodne wymiary macierzy w %s"
 
+#. R/diagMatrix.R: stop("non-matching dimensions")
+#. R/diagMatrix.R: stop("non-matching dimensions")
+#. R/diagMatrix.R: stop("non-matching dimensions")
+#. R/diagMatrix.R: stop("non-matching dimensions")
+#. R/diagMatrix.R: stop("non-matching dimensions")
+#. R/diagMatrix.R: stop("non-matching dimensions")
 #. R/diagMatrix.R: stop("non-matching dimensions")
 #. R/diagMatrix.R: stop("non-matching dimensions")
 #. R/diagMatrix.R: stop("non-matching dimensions")
@@ -1199,11 +1231,6 @@ msgstr "niekwadratowa macierz"
 #: R/dppMatrix.R:0 R/dsyMatrix.R:0
 msgid "not a positive definite matrix"
 msgstr "to nie jest dodatnio określona macierz"
-
-#. R/indMatrix.R: stop("not a skinny matrix")
-#: R/indMatrix.R:0
-msgid "not a skinny matrix"
-msgstr "to nie jest chuda macierz"
 
 #. R/pMatrix.R: stop("not a square matrix")
 #: R/pMatrix.R:0
@@ -1332,11 +1359,24 @@ msgstr ""
 msgid "number of rows are not compatible for %s"
 msgstr "liczba wierszy nie jest zgodna dla %s"
 
-#. R/dMatrix.R: gettextf("object of class %s with NA values cannot be coerced to an object of class %s",     dQuote("dMatrix"), dQuote("nMatrix"))
-#. R/lMatrix.R: gettextf("object of class %s with NA values cannot be coerced to an object of class %s",     dQuote("lMatrix"), dQuote("nMatrix"))
-#: R/dMatrix.R:0 R/lMatrix.R:0
+#. R/dMatrix.R: gettextf("object of class %s with NA values coerced to an object of class %s:  NA |-> TRUE",     dQuote("dMatrix"), dQuote("nMatrix"))
+#. R/dMatrix.R: gettextf("object of class %s with NA values coerced to an object of class %s:  NA |-> TRUE",     dQuote("dMatrix"), dQuote("nMatrix"))
+#: R/dMatrix.R:0
+#, fuzzy
 msgid ""
-"object of class %s with NA values cannot be coerced to an object of class %s"
+"object of class %s with NA values coerced to an object of class %s:  NA |-> "
+"TRUE"
+msgstr ""
+"obiekt klasy %s z wartościami NA nie może zostać przekształcony w obiekt "
+"klasy %s"
+
+#. R/lMatrix.R: gettextf("object of class %s with NA values coerced to an object of class %s: NA |-> TRUE",     dQuote("lMatrix"), dQuote("nMatrix"))
+#. R/lMatrix.R: gettextf("object of class %s with NA values coerced to an object of class %s: NA |-> TRUE",     dQuote("lMatrix"), dQuote("nMatrix"))
+#: R/lMatrix.R:0
+#, fuzzy
+msgid ""
+"object of class %s with NA values coerced to an object of class %s: NA |-> "
+"TRUE"
 msgstr ""
 "obiekt klasy %s z wartościami NA nie może zostać przekształcony w obiekt "
 "klasy %s"
@@ -1376,7 +1416,6 @@ msgid "potentially suboptimal crossprod(\"%s\",\"%s\") as t(.) %s y"
 msgstr ""
 
 #. R/products.R: gettextf("potentially suboptimal crossprod(<", class(x), ">) as t(.) %*% . ")
-#. R/products.R: gettextf("potentially suboptimal crossprod(<", class(x), ">) as  . %*% t(.)")
 #: R/products.R:0
 msgid "potentially suboptimal crossprod(<"
 msgstr ""
@@ -1384,6 +1423,11 @@ msgstr ""
 #. R/products.R: gettextf("potentially suboptimal tcrossprod(\"%s\",\"%s\") as  x %s t(y)", class(x),     class(y), "%*%")
 #: R/products.R:0
 msgid "potentially suboptimal tcrossprod(\"%s\",\"%s\") as  x %s t(y)"
+msgstr ""
+
+#. R/products.R: gettextf("potentially suboptimal tcrossprod(<%s>) as  . %*% t(.)", class(x))
+#: R/products.R:0
+msgid "potentially suboptimal tcrossprod(<%s>) as  . %*% t(.)"
 msgstr ""
 
 #. R/products.R: gettextf("potentially suboptimal tcrossprod(<%s>[=<ANY>], \"%s\") as  x %s t(y)",     class(x), class(y), "%*%")
@@ -1458,6 +1502,12 @@ msgstr ""
 #: R/HBMM.R:0
 msgid "representation '%s' not recognized"
 msgstr "reprezentacja '%s' nie została rozpoznana"
+
+#. R/bind2.R: stop("resulting x-slot has different type than x's or y's")
+#. R/bind2.R: stop("resulting x-slot has different type than x's or y's")
+#: R/bind2.R:0
+msgid "resulting x-slot has different type than x's or y's"
+msgstr ""
 
 #. R/Tsparse.R: gettextf("row indices must be <= nrow(.) which is %d", nr)
 #: R/Tsparse.R:0
@@ -1732,6 +1782,9 @@ msgstr[1] ""
 msgstr[2] ""
 "argumenty %s zostały odrzucone w\n"
 " %s"
+
+#~ msgid "not a skinny matrix"
+#~ msgstr "to nie jest chuda macierz"
 
 #~ msgid "\"lMatrix\" object with NAs cannot be coerced to \"nMatrix\""
 #~ msgstr ""

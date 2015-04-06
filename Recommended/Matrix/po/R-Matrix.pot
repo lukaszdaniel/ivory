@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Matrix 1.1-5-1\n"
-"POT-Creation-Date: 2015-04-01 22:10\n"
+"Project-Id-Version: Matrix 1.2-0\n"
+"POT-Creation-Date: 2015-04-06 20:36\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -139,10 +139,26 @@ msgid "'V' is not a square matrix"
 msgstr ""
 
 
+#: R/products.R: 0
+#. R/products.R: gettextf("'boolArith = %d' not yet implemented", boolArith)
+#. R/products.R: gettextf("'boolArith = %d' not yet implemented", boolArith)
+#. R/products.R: gettextf("'boolArith = %d' not yet implemented", boolArith)
+
+msgid "'boolArith = %d' not yet implemented"
+msgstr ""
+
+
 #: R/abIndex.R: 0
 #. R/abIndex.R: stop("'by' argument is much too small")
 
 msgid "'by' argument is much too small"
+msgstr ""
+
+
+#: R/zzz.R: 0
+#. R/zzz.R: gettext("'cBind' is deprecated. Since R version 3.2.0, base's cbind() should work fine with S4 objects")
+
+msgid "'cBind' is deprecated. Since R version 3.2.0, base's cbind() should work fine with S4 objects"
 msgstr ""
 
 
@@ -354,6 +370,13 @@ msgstr ""
 #. R/AllClass.R: gettext("'perm' slot is not a valid permutation", domain = "R-Matrix")
 
 msgid "'perm' slot is not a valid permutation"
+msgstr ""
+
+
+#: R/zzz.R: 0
+#. R/zzz.R: gettext("'rBind' is deprecated. Since R version 3.2.0, base's rbind() should work fine with S4 objects")
+
+msgid "'rBind' is deprecated. Since R version 3.2.0, base's rbind() should work fine with S4 objects"
 msgstr ""
 
 
@@ -1501,6 +1524,10 @@ msgstr ""
 #: R/products.R: 0
 #. R/products.R: stop("non-conformable arguments")
 #. R/products.R: stop("non-conformable arguments")
+#. R/products.R: stop("non-conformable arguments")
+#. R/products.R: stop("non-conformable arguments")
+#. R/products.R: stop("non-conformable arguments")
+#. R/products.R: stop("non-conformable arguments")
 
 msgid "non-conformable arguments"
 msgstr ""
@@ -1514,6 +1541,12 @@ msgstr ""
 
 
 #: R/diagMatrix.R: 0
+#. R/diagMatrix.R: stop("non-matching dimensions")
+#. R/diagMatrix.R: stop("non-matching dimensions")
+#. R/diagMatrix.R: stop("non-matching dimensions")
+#. R/diagMatrix.R: stop("non-matching dimensions")
+#. R/diagMatrix.R: stop("non-matching dimensions")
+#. R/diagMatrix.R: stop("non-matching dimensions")
 #. R/diagMatrix.R: stop("non-matching dimensions")
 #. R/diagMatrix.R: stop("non-matching dimensions")
 #. R/diagMatrix.R: stop("non-matching dimensions")
@@ -1540,13 +1573,6 @@ msgstr ""
 #. R/dsyMatrix.R: stop("not a positive definite matrix")
 
 msgid "not a positive definite matrix"
-msgstr ""
-
-
-#: R/indMatrix.R: 0
-#. R/indMatrix.R: stop("not a skinny matrix")
-
-msgid "not a skinny matrix"
 msgstr ""
 
 
@@ -1720,11 +1746,18 @@ msgstr ""
 
 
 #: R/dMatrix.R: 0
-#: R/lMatrix.R: 0
-#. R/dMatrix.R: gettextf("object of class %s with NA values cannot be coerced to an object of class %s",     dQuote("dMatrix"), dQuote("nMatrix"))
-#. R/lMatrix.R: gettextf("object of class %s with NA values cannot be coerced to an object of class %s",     dQuote("lMatrix"), dQuote("nMatrix"))
+#. R/dMatrix.R: gettextf("object of class %s with NA values coerced to an object of class %s:  NA |-> TRUE",     dQuote("dMatrix"), dQuote("nMatrix"))
+#. R/dMatrix.R: gettextf("object of class %s with NA values coerced to an object of class %s:  NA |-> TRUE",     dQuote("dMatrix"), dQuote("nMatrix"))
 
-msgid "object of class %s with NA values cannot be coerced to an object of class %s"
+msgid "object of class %s with NA values coerced to an object of class %s:  NA |-> TRUE"
+msgstr ""
+
+
+#: R/lMatrix.R: 0
+#. R/lMatrix.R: gettextf("object of class %s with NA values coerced to an object of class %s: NA |-> TRUE",     dQuote("lMatrix"), dQuote("nMatrix"))
+#. R/lMatrix.R: gettextf("object of class %s with NA values coerced to an object of class %s: NA |-> TRUE",     dQuote("lMatrix"), dQuote("nMatrix"))
+
+msgid "object of class %s with NA values coerced to an object of class %s: NA |-> TRUE"
 msgstr ""
 
 
@@ -1772,7 +1805,6 @@ msgstr ""
 
 #: R/products.R: 0
 #. R/products.R: gettextf("potentially suboptimal crossprod(<", class(x), ">) as t(.) %*% . ")
-#. R/products.R: gettextf("potentially suboptimal crossprod(<", class(x), ">) as  . %*% t(.)")
 
 msgid "potentially suboptimal crossprod(<"
 msgstr ""
@@ -1782,6 +1814,13 @@ msgstr ""
 #. R/products.R: gettextf("potentially suboptimal tcrossprod(\"%s\",\"%s\") as  x %s t(y)", class(x),     class(y), "%*%")
 
 msgid "potentially suboptimal tcrossprod(\"%s\",\"%s\") as  x %s t(y)"
+msgstr ""
+
+
+#: R/products.R: 0
+#. R/products.R: gettextf("potentially suboptimal tcrossprod(<%s>) as  . %*% t(.)", class(x))
+
+msgid "potentially suboptimal tcrossprod(<%s>) as  . %*% t(.)"
 msgstr ""
 
 
@@ -1866,6 +1905,14 @@ msgstr ""
 #. R/HBMM.R: gettextf("representation '%s' not recognized", repr)
 
 msgid "representation '%s' not recognized"
+msgstr ""
+
+
+#: R/bind2.R: 0
+#. R/bind2.R: stop("resulting x-slot has different type than x's or y's")
+#. R/bind2.R: stop("resulting x-slot has different type than x's or y's")
+
+msgid "resulting x-slot has different type than x's or y's"
 msgstr ""
 
 

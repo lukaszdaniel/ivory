@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: survival 2.37-2\n"
 "POT-Creation-Date: 2015-02-25 19:22\n"
-"PO-Revision-Date: 2015-02-28 13:03+0100\n"
+"PO-Revision-Date: 2015-04-04 14:41+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -469,9 +469,8 @@ msgstr "macierz 'x' nie zgadza sę z tablicą częstości"
 
 #. R/neardate.R: stop("'y1' and 'y2' arguments must be sortable")
 #: R/neardate.R:0
-#, fuzzy
 msgid "'y1' and 'y2' arguments must be sortable"
-msgstr "argument 'newdata' musi być ramką danych"
+msgstr "argumenty 'y1' oraz 'y2' muszą być sortowalne"
 
 #. R/print.summary.survreg.S: gettext("(Loglikelihood assumes independent observations)", domain = "R-survival")
 #: R/print.summary.survreg.S:0
@@ -789,7 +788,7 @@ msgstr "Nie dostarczono podsumowania"
 #. R/neardate.R: stop("No valid entries in data set 2")
 #: R/neardate.R:0
 msgid "No valid entries in data set 2"
-msgstr ""
+msgstr "Brak poprawnych wpisów w zbiorze danych nr 2"
 
 #. R/print.coxph.null.S: gettext("Null model", domain = "R-survival")
 #. R/print.summary.coxph.S: gettext("Null model", domain = "R-survival")
@@ -1086,9 +1085,8 @@ msgstr ""
 
 #. R/tmerge.R: gettextf("argument %s is not the same length as id", argname[ii])
 #: R/tmerge.R:0
-#, fuzzy
 msgid "argument %s is not the same length as id"
-msgstr "Nie wszystkie argumenty mają tę samą długość (argument %d)"
+msgstr "argument %s nie jest tej samej długości co 'id'"
 
 #. R/coxph.R: gettextf("argument %s not matched", names(extraArgs)[indx == 0L])
 #: R/coxph.R:0
@@ -1324,7 +1322,7 @@ msgstr "reszty %s nie są dostępne dla ścisłej metody"
 #. R/tmerge.R: gettextf("different lengths in an %s call", paste(argclass[ii], collapse = ", "))
 #: R/tmerge.R:0
 msgid "different lengths in an %s call"
-msgstr ""
+msgstr "różne długości w wywołaniu %s"
 
 #. R/is.ratetable.S: gettextf("dimname %d is the wrong length", i)
 #: R/is.ratetable.S:0
@@ -1334,7 +1332,7 @@ msgstr "nazwa wymiaru %d ma niepoprawną długość"
 #. R/tmerge.R: stop("duplicate identifiers in data1")
 #: R/tmerge.R:0
 msgid "duplicate identifiers in data1"
-msgstr ""
+msgstr "zdublowane identyfikatory w 'data1'"
 
 #. R/survexp.R: stop("either a 'times' argument or a 'response' is needed")
 #: R/survexp.R:0
@@ -2054,7 +2052,7 @@ msgstr "zbyt mało stopni swobody"
 #. R/tmerge.R: gettextf("too many variables in an %s call", paste(argclass[ii], collapse = ", "))
 #: R/tmerge.R:0
 msgid "too many variables in an %s call"
-msgstr ""
+msgstr "zbyt wiele zmiennych w wywołaniu %s"
 
 #. R/is.ratetable.S: gettextf("type[ %d ] is 1; cutpoint should be null", i)
 #: R/is.ratetable.S:0
@@ -2214,9 +2212,10 @@ msgstr[2] ""
 #: R/print.survreg.S:0
 msgid "Coefficients: (%d not defined because of singularity)"
 msgid_plural "Coefficients: (%d not defined because of singularities)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Współczynniki: (%d nie został zdefiniowany z uwagi na osobliwość)"
+msgstr[1] "Współczynniki: (%d nie zostały zdefiniowane z uwagi na osobliwości)"
 msgstr[2] ""
+"Współczynniki: (%d nie zostało zdefiniowanych z uwagi na osobliwości)"
 
 #. R/print.ratetable.S: ngettext(length(attr(x, "dimid")), "Rate table with dimension: ", "Rate table with dimensions: ",     domain = "R-survival")
 #: R/print.ratetable.S:0
