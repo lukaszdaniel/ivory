@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Matrix 1.2-0\n"
-"POT-Creation-Date: 2015-04-06 20:36\n"
+"POT-Creation-Date: 2015-04-06 21:38\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1804,9 +1804,9 @@ msgstr ""
 
 
 #: R/products.R: 0
-#. R/products.R: gettextf("potentially suboptimal crossprod(<", class(x), ">) as t(.) %*% . ")
+#. R/products.R: gettextf("potentially suboptimal crossprod(<%s>) as t(.) %*% . ", class(x))
 
-msgid "potentially suboptimal crossprod(<"
+msgid "potentially suboptimal crossprod(<%s>) as t(.) %*% ."
 msgstr ""
 
 

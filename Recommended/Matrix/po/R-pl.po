@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Matrix 1.0-9\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-04-06 20:36\n"
-"PO-Revision-Date: 2015-04-02 21:47+0100\n"
+"POT-Creation-Date: 2015-04-06 21:38\n"
+"PO-Revision-Date: 2015-04-06 21:38+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -111,9 +111,8 @@ msgstr "'V' nie jest macierzą kwadratową"
 #. R/products.R: gettextf("'boolArith = %d' not yet implemented", boolArith)
 #. R/products.R: gettextf("'boolArith = %d' not yet implemented", boolArith)
 #: R/products.R:0
-#, fuzzy
 msgid "'boolArith = %d' not yet implemented"
-msgstr "rodzaj %s nie jest jeszcze zaimplementowany"
+msgstr "'boolArith = %d' nie jest jeszcze zaimplementowany"
 
 #. R/abIndex.R: stop("'by' argument is much too small")
 #: R/abIndex.R:0
@@ -126,6 +125,8 @@ msgid ""
 "'cBind' is deprecated. Since R version 3.2.0, base's cbind() should work "
 "fine with S4 objects"
 msgstr ""
+"funkcja 'cBind()' jest przestarzała. Od R w wersji 3.2.0, funkcja 'cbind()' "
+"pakietu 'base' powinna działać z obiektami S4"
 
 #. R/bandSparse.R: gettextf("'diagonals' must have the same length (%d) as 'k'", len.k)
 #: R/bandSparse.R:0
@@ -286,6 +287,8 @@ msgid ""
 "'rBind' is deprecated. Since R version 3.2.0, base's rbind() should work "
 "fine with S4 objects"
 msgstr ""
+"funkcja 'rBind()' jest przestarzała. Od R w wersji 3.2.0, funkcja 'rbind()' "
+"pakietu 'base' powinna działać z obiektami S4"
 
 #. R/AllClass.R: gettext("'rle' must be a list (lengths = *, values = *)", domain = "R-Matrix")
 #: R/AllClass.R:0
@@ -635,12 +638,12 @@ msgstr ""
 #. R/dgCMatrix.R: gettextf("RHS 'b' has wrong length %d", length(b))
 #: R/dgCMatrix.R:0
 msgid "RHS 'b' has wrong length %d"
-msgstr ""
+msgstr " prawa strona 'b' posiada niepoprawną długość równą %d"
 
 #. R/dgCMatrix.R: gettextf("RHS 'b' has wrong number of rows: %d", nrow(b))
 #: R/dgCMatrix.R:0
 msgid "RHS 'b' has wrong number of rows: %d"
-msgstr ""
+msgstr "prawa strona 'b' posiada niepoprawną liczbę wierszy równą %d"
 
 #. R/Matrix.R: gettextf("RHS 'value' (class %s) matches 'ANY', but must match matrix class %s",     class(value), class(x))
 #: R/Matrix.R:0
@@ -1153,7 +1156,7 @@ msgstr "potrzeba mieć dokładnie jeden niezerowy wpis na wiersz"
 #. R/Auxiliaries.R: stop("names(dimnames(<matrix>)) must be NULL or of length two")
 #: R/Auxiliaries.R:0
 msgid "names(dimnames(<matrix>)) must be NULL or of length two"
-msgstr ""
+msgstr "'names(dimnames(<matrix>))' musi mieć wartość NULL lub być długości 2"
 
 #. R/Tsparse.R: gettextf("nargs() = %d should never happen; please report.", nA)
 #: R/Tsparse.R:0
@@ -1362,24 +1365,22 @@ msgstr "liczba wierszy nie jest zgodna dla %s"
 #. R/dMatrix.R: gettextf("object of class %s with NA values coerced to an object of class %s:  NA |-> TRUE",     dQuote("dMatrix"), dQuote("nMatrix"))
 #. R/dMatrix.R: gettextf("object of class %s with NA values coerced to an object of class %s:  NA |-> TRUE",     dQuote("dMatrix"), dQuote("nMatrix"))
 #: R/dMatrix.R:0
-#, fuzzy
 msgid ""
 "object of class %s with NA values coerced to an object of class %s:  NA |-> "
 "TRUE"
 msgstr ""
-"obiekt klasy %s z wartościami NA nie może zostać przekształcony w obiekt "
-"klasy %s"
+"obiekt klasy %s z wartościami NA został przekształcony w obiekt klasy %s:  "
+"NA |-> TRUE"
 
 #. R/lMatrix.R: gettextf("object of class %s with NA values coerced to an object of class %s: NA |-> TRUE",     dQuote("lMatrix"), dQuote("nMatrix"))
 #. R/lMatrix.R: gettextf("object of class %s with NA values coerced to an object of class %s: NA |-> TRUE",     dQuote("lMatrix"), dQuote("nMatrix"))
 #: R/lMatrix.R:0
-#, fuzzy
 msgid ""
 "object of class %s with NA values coerced to an object of class %s: NA |-> "
 "TRUE"
 msgstr ""
 "obiekt klasy %s z wartościami NA nie może zostać przekształcony w obiekt "
-"klasy %s"
+"klasy %s: NA |-> TRUE"
 
 #. R/sparseMatrix.R: stop("only 2-dimensional tables can be directly coerced to sparse matrices")
 #: R/sparseMatrix.R:0
@@ -1415,9 +1416,9 @@ msgstr ""
 msgid "potentially suboptimal crossprod(\"%s\",\"%s\") as t(.) %s y"
 msgstr ""
 
-#. R/products.R: gettextf("potentially suboptimal crossprod(<", class(x), ">) as t(.) %*% . ")
+#. R/products.R: gettextf("potentially suboptimal crossprod(<%s>) as t(.) %*% . ", class(x))
 #: R/products.R:0
-msgid "potentially suboptimal crossprod(<"
+msgid "potentially suboptimal crossprod(<%s>) as t(.) %*% ."
 msgstr ""
 
 #. R/products.R: gettextf("potentially suboptimal tcrossprod(\"%s\",\"%s\") as  x %s t(y)", class(x),     class(y), "%*%")
@@ -1507,7 +1508,7 @@ msgstr "reprezentacja '%s' nie została rozpoznana"
 #. R/bind2.R: stop("resulting x-slot has different type than x's or y's")
 #: R/bind2.R:0
 msgid "resulting x-slot has different type than x's or y's"
-msgstr ""
+msgstr "wynikowe gniazdo 'x' ma inny typ niż 'x' lub 'y'"
 
 #. R/Tsparse.R: gettextf("row indices must be <= nrow(.) which is %d", nr)
 #: R/Tsparse.R:0

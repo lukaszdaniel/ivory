@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Matrix 1.0-9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-06 20:36+0200\n"
-"PO-Revision-Date: 2014-06-28 13:58+0100\n"
+"PO-Revision-Date: 2015-04-06 21:46+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -83,6 +83,8 @@ msgstr "gniazdo 'j' nie jest *ściśle* rosnące wewnątrz kolumny"
 #: Csparse.c:208
 msgid "'Csparse_to_nz_pattern(x, tri = NA)': 'tri' is taken as TRUE"
 msgstr ""
+"'Csparse_to_nz_pattern(x, tri = NA)': argument 'tri' został przyjęty jako "
+"TRUE"
 
 #: Csparse.c:225
 msgid "'x' argument is not an object of class \"n.CMatrix\""
@@ -363,7 +365,7 @@ msgstr "określono zbyt dużo elementów"
 #: Mutils.c:1078
 #, c-format
 msgid "the number of columns differ in R_rbind2_vector: %d != %d"
-msgstr ""
+msgstr "liczba kolumn różni się w funkcji 'R_rbind2_vector()': %d != %d"
 
 #: Mutils.c:1158 Mutils.c:1191
 msgid "Argument must be numeric-like atomic vector"
@@ -466,6 +468,8 @@ msgstr "niepoprawna klasa obiektu przekazanego do funkcji 'as_cholmod_dense()'"
 msgid ""
 "'chm_transpose_dense(ans, x)' not yet implemented for %s different from %s"
 msgstr ""
+"funkcja 'chm_transpose_dense(ans, x)' nie jest jeszcze zaimplementowana dla "
+"%s różnego od %s"
 
 #: chm_common.c:780
 #, c-format
@@ -827,12 +831,11 @@ msgid "'rcond()' function requires a square, non-empty matrix"
 msgstr "funkcja 'rcond()' wymaga kwadratowej, niepustej macierzy"
 
 #: dgeMatrix.c:162 dgeMatrix.c:255
-#, fuzzy, c-format
+#, c-format
 msgid "Dimensions of x and y are not compatible for %s"
 msgstr "Wymiary 'x' oraz 'y' nie są zgodne dla '%s'"
 
 #: dgeMatrix.c:234
-#, fuzzy
 msgid "Argument y must be numeric, integer or logical"
 msgstr "argument 'y' musi być liczbą, liczbą całkowitą lub wartością logiczną"
 

@@ -590,7 +590,7 @@ setMethod("crossprod", signature(x = "Matrix", y = "Matrix"),
 setMethod("crossprod", signature(x = "Matrix", y = "missing"),
 	  function(x, y=NULL, boolArith=NA, ...) {
 	      Matrix.msg(gettextf(
-	  "potentially suboptimal crossprod(<",class(x),">) as t(.) %*% . "))
+	  "potentially suboptimal crossprod(<%s>) as t(.) %*% . ", class(x)))
 	      if(isTRUE(boolArith)) t(x) %&% x else t(x) %*% x })
 setMethod("crossprod", signature(x = "Matrix", y = "ANY"),
 	  function(x, y=NULL, boolArith=NA, ...) {
