@@ -557,7 +557,7 @@ b 1.2+11i 2.4+23.141593i
 > 
 > e1 <- tryCatch(options(max.print=Inf), error=function(e)e)
 Warning message:
-In command 'options(max.print = Inf)': NA values introduced by coercion
+In command 'options(max.print = Inf)': NA values introduced by coercion to integer range
 > e2 <- tryCatch(options(max.print= 0),  error=function(e)e)
 > stopifnot(inherits(e1, "error"))
 > 

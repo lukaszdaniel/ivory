@@ -1337,7 +1337,7 @@ IS: [1] TRUE
 > res <- try(as.numeric_version( x ), silent = TRUE)
 Warning message:
 In command 'lapply(strsplit(x[ok], "[.-]"), as.integer)':
-  inaccurate integer conversion in coercion
+  NAs introduced by coercion to integer range
 > if(!inherits(res, 'try-error')) report(is.numeric_version(res))
 [1] TRUE
 > res <- try(as.ordered( x ), silent = TRUE)
@@ -1346,7 +1346,7 @@ In command 'lapply(strsplit(x[ok], "[.-]"), as.integer)':
 > res <- try(as.package_version( x ), silent = TRUE)
 Warning message:
 In command 'lapply(strsplit(x[ok], "[.-]"), as.integer)':
-  inaccurate integer conversion in coercion
+  NAs introduced by coercion to integer range
 > if(!inherits(res, 'try-error')) report(is.package_version(res))
 [1] TRUE
 > res <- try(as.pairlist( x ), silent = TRUE)
@@ -1458,7 +1458,7 @@ IS: [1] TRUE
 > res <- try(as.numeric_version( x ), silent = TRUE)
 Warning message:
 In command 'lapply(strsplit(x[ok], "[.-]"), as.integer)':
-  inaccurate integer conversion in coercion
+  NAs introduced by coercion to integer range
 > if(!inherits(res, 'try-error'))
 +    report({if(is.numeric_version(x)) { cat('IS: ');all.equal(x, res, tolerance=0)
 +    } else   !isall.equal(x, res)})
@@ -1471,7 +1471,7 @@ In command 'lapply(strsplit(x[ok], "[.-]"), as.integer)':
 > res <- try(as.package_version( x ), silent = TRUE)
 Warning message:
 In command 'lapply(strsplit(x[ok], "[.-]"), as.integer)':
-  inaccurate integer conversion in coercion
+  NAs introduced by coercion to integer range
 > if(!inherits(res, 'try-error'))
 +    report({if(is.package_version(x)) { cat('IS: ');all.equal(x, res, tolerance=0)
 +    } else   !isall.equal(x, res)})
@@ -1576,7 +1576,7 @@ IS: [1] TRUE
 > f <- try(as.numeric_version( x ), silent = TRUE)
 Warning message:
 In command 'lapply(strsplit(x[ok], "[.-]"), as.integer)':
-  inaccurate integer conversion in coercion
+  NAs introduced by coercion to integer range
 >   if(!inherits(f, 'try-error')) report(identical(f, as.numeric_version( f )))
 [1] TRUE
 > f <- try(as.octmode( x ), silent = TRUE)
@@ -1587,7 +1587,7 @@ In command 'lapply(strsplit(x[ok], "[.-]"), as.integer)':
 > f <- try(as.package_version( x ), silent = TRUE)
 Warning message:
 In command 'lapply(strsplit(x[ok], "[.-]"), as.integer)':
-  inaccurate integer conversion in coercion
+  NAs introduced by coercion to integer range
 >   if(!inherits(f, 'try-error')) report(identical(f, as.package_version( f )))
 [1] TRUE
 > f <- try(as.pairlist( x ), silent = TRUE)

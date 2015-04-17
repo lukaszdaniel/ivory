@@ -722,10 +722,7 @@ function(ifile, encoding = "unknown", ignore = character())
         }
     }
 
-    for(re in ignore[nzchar(ignore)])
-        lines <- blank_out_regexp_matches(lines, re)
-
-    lines
+    blank_out_ignores_in_lines(lines, ignore)
 }
 
 get_parse_data_for_message_strings <-
@@ -924,10 +921,7 @@ function (ifile, encoding = "unknown", ignore = character())
     ## blanks, similar to what the R text filter does.
     ## </FIXME>
 
-    for(re in ignore[nzchar(ignore)])
-        lines <- blank_out_regexp_matches(lines, re)
-
-    lines
+    blank_out_ignores_in_lines(lines, ignore)
 }
 
 ## For spell-checking all pot files in a package.
@@ -1042,9 +1036,7 @@ function(ifile, encoding, keep = c(gettext("Title"), gettext("Description")),
     ind <- !ind
     lines[ind] <- lapply(lines[ind], paste0, " ")
     lines <- unlist(lines, use.names = FALSE)
-    for(re in ignore[nzchar(ignore)])
-        lines <- blank_out_regexp_matches(lines, re)
-    lines
+    blank_out_ignores_in_lines(lines, ignore)
 }
 
 ## For spell-checking package DESCRIPTION files.
@@ -1149,9 +1141,9 @@ function(dir, encoding = "unknown")
 ## Utilities.
 
 blank_out_regexp_matches <-
-function(s, re)
+function(s, re, ...)
 {
-    m <- gregexpr(re, s)
+    m <- gregexpr(re, s, ...)
     regmatches(s, m) <- Map(blanks, lapply(regmatches(s, m), nchar))
     s
 }
@@ -1160,6 +1152,20 @@ blanks <-
 function(n) {
     vapply(Map(rep.int, rep.int(" ", length(n)), n, USE.NAMES = FALSE),
            paste, "", collapse = "")
+}
+
+blank_out_ignores_in_lines <-
+function(lines, ignore)
+{
+    args <- list()
+    if(is.list(ignore)) {
+        args <- ignore[-1L]
+        ignore <- ignore[[1L]]
+    }
+    for(re in ignore[nzchar(ignore)])
+        lines <- do.call(blank_out_regexp_matches,
+                         c(list(lines, re), args))
+    lines
 }
 
 find_files_in_directories <-

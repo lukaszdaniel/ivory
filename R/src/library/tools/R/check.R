@@ -1922,6 +1922,20 @@ setRlibs <-
                      gettextf("The following files look like leftovers/mistakes:\n%s\nPlease remove them from your package.",
                      paste(strwrap(paste(sQuote(files[bad]), collapse = ", "), indent = 2, exdent = 2), collapse = "\n"), domain = "R-tools"), "\n")
         }
+
+        ## Probable leftovers from knitr
+        dirs <- file.path(pkgdir, "vignettes", c("cache", "figure"))
+        dirs <- basename(dirs[dir.exists(dirs)])
+        if(length(dirs)) {
+            if(!any) noteLog(Log)
+            any <- TRUE
+            printLog0(Log,
+                      sprintf(ngettext(length(dirs), "The following directory looks like a leftover from 'knitr':\n%s\nPlease remove from your package.\n", "The following directories look like leftovers from 'knitr':\n%s\nPlease remove from your package.\n", domain = "R-tools"),
+                      paste(strwrap(paste(sQuote(dirs), collapse = ", "),
+                                    indent = 2, exdent = 2), collapse = "\n")),
+                      "")
+        }
+
         if (!any) resultLog(Log, gettext("OK", domain = "R-tools"))
     }
 

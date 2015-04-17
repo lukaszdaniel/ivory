@@ -471,7 +471,7 @@ numeric(0)
    100      0     NA     NA     NA      3     NA 
 Warning message:
 In command 'structure(as.integer(x), names = names(x))':
-  NA values introduced by coercion
+  NAs introduced by coercion to integer range
 > ##-   100 -1e-13    Inf   -Inf    NaN   3.14     NA
 > ##-   100      0     NA     NA     NA      3     NA
 > all(is.na(ix) != is.finite(ix) | is.infinite(ix)) # TRUE (still)
