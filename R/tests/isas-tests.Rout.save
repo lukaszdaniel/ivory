@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2015-03-01 r267) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2015-04-17 r287) -- "Internationalized Version of R"
 Copyright (C) 2013-2015 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2015-03-01 r67940) -- "Unsuffered Consequences"
+R Under development (unstable) (2015-04-17 r68202) -- "Unsuffered Consequences"
 Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -1337,7 +1337,7 @@ IS: [1] TRUE
 > res <- try(as.numeric_version( x ), silent = TRUE)
 Warning message:
 In command 'lapply(strsplit(x[ok], "[.-]"), as.integer)':
-  NAs introduced by coercion to integer range
+  NA values introduced by coercion to integer range
 > if(!inherits(res, 'try-error')) report(is.numeric_version(res))
 [1] TRUE
 > res <- try(as.ordered( x ), silent = TRUE)
@@ -1346,7 +1346,7 @@ In command 'lapply(strsplit(x[ok], "[.-]"), as.integer)':
 > res <- try(as.package_version( x ), silent = TRUE)
 Warning message:
 In command 'lapply(strsplit(x[ok], "[.-]"), as.integer)':
-  NAs introduced by coercion to integer range
+  NA values introduced by coercion to integer range
 > if(!inherits(res, 'try-error')) report(is.package_version(res))
 [1] TRUE
 > res <- try(as.pairlist( x ), silent = TRUE)
@@ -1458,7 +1458,7 @@ IS: [1] TRUE
 > res <- try(as.numeric_version( x ), silent = TRUE)
 Warning message:
 In command 'lapply(strsplit(x[ok], "[.-]"), as.integer)':
-  NAs introduced by coercion to integer range
+  NA values introduced by coercion to integer range
 > if(!inherits(res, 'try-error'))
 +    report({if(is.numeric_version(x)) { cat('IS: ');all.equal(x, res, tolerance=0)
 +    } else   !isall.equal(x, res)})
@@ -1471,7 +1471,7 @@ In command 'lapply(strsplit(x[ok], "[.-]"), as.integer)':
 > res <- try(as.package_version( x ), silent = TRUE)
 Warning message:
 In command 'lapply(strsplit(x[ok], "[.-]"), as.integer)':
-  NAs introduced by coercion to integer range
+  NA values introduced by coercion to integer range
 > if(!inherits(res, 'try-error'))
 +    report({if(is.package_version(x)) { cat('IS: ');all.equal(x, res, tolerance=0)
 +    } else   !isall.equal(x, res)})
@@ -1576,7 +1576,7 @@ IS: [1] TRUE
 > f <- try(as.numeric_version( x ), silent = TRUE)
 Warning message:
 In command 'lapply(strsplit(x[ok], "[.-]"), as.integer)':
-  NAs introduced by coercion to integer range
+  NA values introduced by coercion to integer range
 >   if(!inherits(f, 'try-error')) report(identical(f, as.numeric_version( f )))
 [1] TRUE
 > f <- try(as.octmode( x ), silent = TRUE)
@@ -1587,7 +1587,7 @@ In command 'lapply(strsplit(x[ok], "[.-]"), as.integer)':
 > f <- try(as.package_version( x ), silent = TRUE)
 Warning message:
 In command 'lapply(strsplit(x[ok], "[.-]"), as.integer)':
-  NAs introduced by coercion to integer range
+  NA values introduced by coercion to integer range
 >   if(!inherits(f, 'try-error')) report(identical(f, as.package_version( f )))
 [1] TRUE
 > f <- try(as.pairlist( x ), silent = TRUE)
@@ -2575,6 +2575,6 @@ In command 'as.dist.default(x)': 'm' argument is not a square matrix
 > f <- try(as.ts( x ), silent = TRUE)
 >   if(!inherits(f, 'try-error')) report(identical(f, as.ts( f )))
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  0.461 0.029 0.634 0 0 
+Time elapsed:  0.347 0.012 0.36 0 0 
 > 
 > 

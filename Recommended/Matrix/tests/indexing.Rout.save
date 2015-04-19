@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2015-03-01 r267) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2015-04-17 r287) -- "Internationalized Version of R"
 Copyright (C) 2013-2015 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2015-03-01 r67940) -- "Unsuffered Consequences"
+R Under development (unstable) (2015-04-17 r68202) -- "Unsuffered Consequences"
 Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -134,7 +134,7 @@ diagnosing replTmat(x,i,j,v): nargs()= 3; missing (i,j) = (0,1)
 + 	  identical(a.m, array(v, dim=dim(mn), dimnames=dimnames(mn)))
 + 	  )
 > showProc.time()
-Time elapsed:  0.289 0.004 0.296 
+Time elapsed:  0.363 0.001 0.363 
 > 
 > ## R-forge Matrix bug #2556: Subsetting a sparse matrix did remove  names(dimnames(.)) :
 > m44 <- matrix(1:16, 4, 4, dimnames=list(row=c('a','b','c','d'), col=c('x','y','z','w')))
@@ -219,7 +219,7 @@ diagnosing replTmat(x,i,j,v): nargs()= 3; missing (i,j) = (0,1)
 + 	  identical3(m[!sel],  m[!ssel], as.matrix(m)[as.matrix(!ssel)])
 + 	  )
 > showProc.time()
-Time elapsed:  0.211 0.008 0.219 
+Time elapsed:  0.223 0 0.225 
 > 
 > ## more sparse Matrices --------------------------------------
 > 
@@ -555,7 +555,7 @@ ok( d )
 == ###======================================================================
 
 > showProc.time()
-Time elapsed:  1.424 0.04 1.468 
+Time elapsed:  1.415 0.023 1.441 
 > 
 > if(doExtras) {### {was ./AAA_index.R, MM-only}
 +     ## an nsparse-example
@@ -713,7 +713,7 @@ Time elapsed:  1.424 0.04 1.468
 +     assert.EQ.mat(T[i,i], ss[i,i])
 + }
 > showProc.time()
-Time elapsed:  0.29 0.004 0.295 
+Time elapsed:  0.328 0 0.328 
 > 
 > stopifnot(all.equal(mC[,3], mm[,3]),
 + 	  identical(mC[ij], mC[ij + 0.4]),
@@ -923,7 +923,7 @@ diagnosing replTmat(x,i,j,v): nargs()= 3; missing (i,j) = (0,1)
 + 	  all(sm[,-(1:3)] == 0)
 + 	  )
 > showProc.time()
-Time elapsed:  0.281 0.004 0.285 
+Time elapsed:  0.32 0.004 0.325 
 > 
 > ##---  "nsparse*" sub-assignment :----------
 > M <- Matrix(c(1, rep(0,7), 1:4), 3,4)
@@ -980,7 +980,7 @@ Time elapsed:  0.281 0.004 0.285
 ,k.,k.,k.,k.,k.,k.,k.,k.,k.,k.
 ,k.,k.,k.,k.,k.,k.,k.,k.,k.,k.
 ,k.,k.,k.,k.,k.> showProc.time()
-Time elapsed:  0.332 0 0.333 
+Time elapsed:  0.503 0.004 0.508 
 > Nn <- Nn0
 > ## Check that  NA is interpreted as TRUE (with a warning), for "nsparseMatrix":
 > assertWarning(Nn[ii <-     3  ] <- NA); stopifnot(isValid(Nn,"nsparseMatrix"), Nn[ii])
@@ -1158,7 +1158,7 @@ as(<triangular (ge)matrix>, dtCMatrix): valid: TRUE
 > stopifnot(is(T, "dtCMatrix"), identical(T[,3], c(10,10,10,0,0)),
 + 	  Qidentical(as(Z, "matrix"), z))
 > showProc.time()
-Time elapsed:  1.112 0 1.115 
+Time elapsed:  1.046 0.004 1.052 
 > 
 > 
 > ## "Vector indices" -------------------
@@ -1362,7 +1362,7 @@ Warning in command '`[<-`(`*tmp*`, i, value = 1:7)':
 > ## mixing of negative and positive must give error
 > assertError(mT[-1:1,])
 > showProc.time()
-Time elapsed:  0.347 0.004 0.352 
+Time elapsed:  0.462 0.008 0.468 
 > 
 > ## Sub *Assignment* ---- now works (partially):
 > mt0 <- mt
@@ -1470,7 +1470,7 @@ r5   .   2  4   .  6  .  .
 r2  2
 r4  .
 > showProc.time()
-Time elapsed:  0.268 0.008 0.276 
+Time elapsed:  0.283 0.016 0.302 
 > options(Matrix.verbose = TRUE)
 > 
 > mc # no longer has non-structural zeros
@@ -1691,7 +1691,7 @@ M[i,j] <- v :  coercing symmetric M[] into non-symmetric
 > assert.EQ.mat(t2, m)# ok
 > assert.EQ.mat(s2, m)# failed in 0.9975-8
 > showProc.time()
-Time elapsed:  1.101 0.004 1.108 
+Time elapsed:  1.102 0 1.104 
 > 
 > 
 > ## m[cbind(i,j)] <- value: (2-column matrix subassignment):
@@ -1834,7 +1834,7 @@ r5  TRUE TRUE FALSE TRUE TRUE TRUE TRUE
 > 
 > cc <- capture.output(show(dLrg))# show(<diag>) used to error for large n
 > showProc.time()
-Time elapsed:  0.9 0.024 0.926 
+Time elapsed:  0.909 0.012 0.923 
 > 
 > ## Large Matrix indexing / subassignment
 > ## ------------------------------------- (from ex. by Imran Rashid)
@@ -1907,4 +1907,4 @@ NULL
 > 
 > proc.time()
    user  system elapsed 
- 10.079   0.375  10.471 
+ 10.564   0.291  10.878 
