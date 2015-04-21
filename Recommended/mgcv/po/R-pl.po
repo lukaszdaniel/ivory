@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: mgcv 1.8-0\n"
+"Project-Id-Version: mgcv 1.8-6\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-04-01 22:10\n"
-"PO-Revision-Date: 2015-04-04 16:08+0100\n"
+"POT-Creation-Date: 2015-04-20 18:54\n"
+"PO-Revision-Date: 2015-04-20 18:18+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.7.5\n"
 
 #. R/efam.r: gettextf("\"%s\" link not available for beta regression; available links are  \"logit\", \"probit\", \"cloglog\" and \"cauchit\"",     linktemp)
 #: R/efam.r:0
@@ -152,6 +152,21 @@ msgstr "argument '%s' jest błędny"
 msgid "'%s' argument is not an object of class %s"
 msgstr "argument '%s' nie jest obiektem klasy %s"
 
+#. R/jagam.r: gettextf("'%s' argument is not meaningful here", "unconfitional")
+#. R/jagam.r: gettextf("'%s' argument is not meaningful here", "unconditional")
+#: R/jagam.r:0
+#, fuzzy
+msgid "'%s' argument is not meaningful here"
+msgstr "bezwarunkowe argumenty nie mają tu zastosowana"
+
+#. R/jagam.r: gettextf("'%s' argument is not supported", "residuals")
+#. R/jagam.r: gettextf("'%s' argument is not supported", "by.resids")
+#. R/jagam.r: gettextf("'%s' argument is not supported", "all.terms")
+#: R/jagam.r:0
+#, fuzzy
+msgid "'%s' argument is not supported"
+msgstr "argument 'all.terms' nie jest wspierany"
+
 #. R/mgcv.r: gettextf("'%s' argument is of the wrong length", "min.sp")
 #: R/mgcv.r:0
 msgid "'%s' argument is of the wrong length"
@@ -164,6 +179,12 @@ msgstr "argument '%s' jest niepoprawnej długości"
 #: R/smooth.r:0
 msgid "'%s' argument is of the wrong length and ignored"
 msgstr "argument '%s' jest niepoprawnej długości przez co został zignorowany"
+
+#. R/jagam.r: gettextf("'%s' argument is too large, reset", "burnin")
+#: R/jagam.r:0
+#, fuzzy
+msgid "'%s' argument is too large, reset"
+msgstr "argument 'burnin' jest zbyt duży, resetowanie"
 
 #. R/gam.fit3.r: gettextf("'%s' argument should be 1 or 2", "deriv")
 #. R/gam.fit4.r: gettextf("'%s' argument should be 1 or 2", "deriv")
@@ -278,6 +299,12 @@ msgid "'id' linked smooths must have same number of arguments"
 msgstr ""
 "wygładzania połączone poprzez 'id' muszą mieć tę samą liczbę argumentów"
 
+#. R/jagam.r: stop("'jagam()' function requires a file for the JAGS model specification")
+#: R/jagam.r:0
+#, fuzzy
+msgid "'jagam()' function requires a file for the JAGS model specification"
+msgstr "funkcja 'jagam()' wymaga pliku do określenia modelu JAGS"
+
 #. R/mgcv.r: stop("'m' argument  can't be in 're' argument")
 #: R/mgcv.r:0
 msgid "'m' argument  can't be in 're' argument"
@@ -299,6 +326,8 @@ msgstr "wymiary 'mu' są niepoprawne"
 msgid ""
 "'negbin()' with unknown theta and outer iteration is deprecated - use 'nb()'."
 msgstr ""
+"funkcja 'negbin()' z nieznaną wartością 'theta' oraz zewnętrzną iteracją "
+"jest przestarza - użyj 'nb()'."
 
 #. R/mgcv.r: stop("'nthreads' argument must be a positive integer")
 #: R/mgcv.r:0
@@ -334,6 +363,14 @@ msgstr "argument 'paraPen' nie jest wspierany dla wielo-formułowych modeli"
 #: R/mgcv.r:0
 msgid "'rank' has wrong length in 'paraPen'"
 msgstr "'rank' posiada niepoprawną długość w 'paraPen'"
+
+#. R/jagam.r: warning("'rho' slot for 'sam' argument is missing from simulation data, 'edf.type' argument reset to 2")
+#: R/jagam.r:0
+#, fuzzy
+msgid ""
+"'rho' slot for 'sam' argument is missing from simulation data, 'edf.type' "
+"argument reset to 2"
+msgstr "brakuje 'rho' w symulacji danych, 'edf.type' zostało ustawione na 2"
 
 #. R/smooth.r: stop("'s(.)' function is not yet supported")
 #. R/smooth.r: stop("'s(.)' function is not yet supported")
@@ -997,11 +1034,13 @@ msgstr "Nieskończone odchylenie"
 #: R/efam.r:0
 msgid "Non-integer response variables are not allowed with ziP"
 msgstr ""
+"Zmienne zależne nie będące liczbami całkowitymi nie są dozwolone w 'ziP'"
 
 #. R/gamlss.r: stop("Non-integer response variables are not allowed with ziplss")
 #: R/gamlss.r:0
 msgid "Non-integer response variables are not allowed with ziplss"
 msgstr ""
+"Zmienne zależne nie będące liczbami całkowitymi nie są dozwolone w 'ziplss'"
 
 #. R/bam.r: stop("Not enough (non-NA) data to do anything meaningful")
 #. R/gamm.r: stop("Not enough (non-NA) data to do anything meaningful")
@@ -1148,7 +1187,7 @@ msgstr "Ustawienie jest kompletne. Wywoływanie dopasowania."
 #. R/plots.r: warning("Smoothness uncertainty corrected covariance not available")
 #: R/mgcv.r:0 R/plots.r:0
 msgid "Smoothness uncertainty corrected covariance not available"
-msgstr ""
+msgstr "Kowiariancja poprawiona wygładzaniem niepewności nie jest dostępna"
 
 #. R/mgcv.r: stop("Something wrong - matrix probably not +ve semi definite")
 #: R/mgcv.r:0
@@ -1297,7 +1336,7 @@ msgstr "Całkowita liczba stopni swobody modelu %s"
 #. R/efam.r: stop("Tweedie p must be in interval (a,b)")
 #: R/efam.r:0
 msgid "Tweedie p must be in interval (a,b)"
-msgstr ""
+msgstr "Tweedie 'p' musi być w przedziale (a,b)"
 
 #. R/efam.r: gettextf("Tweedie(p=%s)", round(object$family$getTheta(TRUE), 3), domain = "R-mgcv")
 #: R/efam.r:0
@@ -1340,11 +1379,6 @@ msgstr "parametryczna kara ma niepoprawny wymiar"
 msgid "all elements of random list must be named"
 msgstr "wszystkie elementy listy 'random' muszą być nazwane"
 
-#. R/jagam.r: stop("all.terms argument not supported")
-#: R/jagam.r:0
-msgid "all.terms argument not supported"
-msgstr "argument 'all.terms' nie jest wspierany"
-
 #. R/mgcv.r: stop("argument 'k' must be positive")
 #: R/mgcv.r:0
 msgid "argument 'k' must be positive"
@@ -1380,7 +1414,7 @@ msgstr "próba użycia niepasującej granicznej gładkiej klasy"
 #. R/smooth.r: warning("basis dimension is larger than number of unique covariates")
 #: R/smooth.r:0
 msgid "basis dimension is larger than number of unique covariates"
-msgstr ""
+msgstr "bazowy wymiar jest większy niż liczba unikalnych zmiennych zależnych"
 
 #. R/smooth.r: warning("basis dimension reset to minimum possible")
 #: R/smooth.r:0
@@ -1412,16 +1446,6 @@ msgstr "'bnd' musi być listą"
 msgid "bnd must be a list of boundary loops"
 msgstr "'bnd' musi być listą pętel granic"
 
-#. R/jagam.r: warning("burnin too large, reset")
-#: R/jagam.r:0
-msgid "burnin too large, reset"
-msgstr ""
-
-#. R/jagam.r: stop("by.resids argument not supported")
-#: R/jagam.r:0
-msgid "by.resids argument not supported"
-msgstr "argument 'by.resids' nie jest wspierany"
-
 #. R/gam.fit3.r: gettext("calling gdi...", domain = "R-mgcv")
 #: R/gam.fit3.r:0
 msgid "calling gdi..."
@@ -1444,12 +1468,12 @@ msgstr ""
 #. R/bam.r: gettextf("chunk.size < number of coefficients. Reset to %d", chunk.size)
 #: R/bam.r:0
 msgid "chunk.size < number of coefficients. Reset to %d"
-msgstr ""
+msgstr "'chunk.size' < liczba współczynników. Ustawienie wartości %d"
 
 #. R/jagam.r: stop("coefficient simulation data is missing")
 #: R/jagam.r:0
 msgid "coefficient simulation data is missing"
-msgstr ""
+msgstr "brakuje współczynnika symulacji danych"
 
 #. R/soap.r: stop("coefficient vector wrong length")
 #: R/soap.r:0
@@ -1530,7 +1554,7 @@ msgstr "wykonano!"
 #. R/mgcv.r: warning("dropping unidentifiable parameteric terms from model", call. = FALSE)
 #: R/mgcv.r:0
 msgid "dropping unidentifiable parameteric terms from model"
-msgstr ""
+msgstr "usuwanie nieidentyfikowalnych członów parametrycznych z modelu"
 
 #. R/plots.r: gettext("effects", domain = "R-mgcv")
 #: R/plots.r:0
@@ -1684,6 +1708,7 @@ msgstr ""
 #: R/gam.fit4.r:0
 msgid "indefinite penalized likelihood in 'gam.fit5()' function"
 msgstr ""
+"niezdefiniowana spenalizowana funkcja wiarygodności w funkcji 'gam.fit5()'"
 
 #. R/mgcv.r: warning("initial parameters are very close to inequality constraints")
 #: R/mgcv.r:0
@@ -1748,11 +1773,6 @@ msgstr ""
 "iteracyjne wagi lub nieskończone dane w 'gam.fit' - regularyzacja może "
 "pomóc. Zobacz '?gam.control'"
 
-#. R/jagam.r: stop("jagam requires a file for the JAGS model specification")
-#: R/jagam.r:0
-msgid "jagam requires a file for the JAGS model specification"
-msgstr ""
-
 #. R/soap.r: gettextf("knot %d is on or outside boundary", k)
 #: R/soap.r:0
 msgid "knot %d is on or outside boundary"
@@ -1808,9 +1828,8 @@ msgstr "liniowy predyktor"
 
 #. R/mgcv.r: stop("linear predictor labels out of range")
 #: R/mgcv.r:0
-#, fuzzy
 msgid "linear predictor labels out of range"
-msgstr "wartości są poza zakresem"
+msgstr "etykiety liniowych zmiennych są poza zakresem"
 
 #. R/efam.r: gettextf("link \"%s\" is not available for Tweedie family", linktemp, collapse = "")
 #. R/gam.fit3.r: gettextf("link \"%s\" is not available for Tweedie family", linktemp)
@@ -1945,7 +1964,7 @@ msgstr ""
 #. R/gam.fit3.r: gettextf("newton max(|grad|) = %s", max(abs(grad)), domain = "R-mgcv")
 #: R/gam.fit3.r:0
 msgid "newton max(|grad|) = %s"
-msgstr ""
+msgstr "max(|grad|) newtona = %s"
 
 #. R/mgcv.r: stop("nlm.fd not available with negative binomial Theta estimation")
 #: R/mgcv.r:0
@@ -2173,11 +2192,6 @@ msgstr "losowe efekty nie działają z 'ids'"
 msgid "reparameterization unstable for margin: not done"
 msgstr "ponowna parametryzacja nie jest stabilna dla marginesu: nie wykonano"
 
-#. R/jagam.r: stop("residuals argument not supported")
-#: R/jagam.r:0
-msgid "residuals argument not supported"
-msgstr "argument 'residuals' nie jest wspierany"
-
 #. R/plots.r: warning("residuals argument to plot.gam is wrong length: ignored")
 #: R/plots.r:0
 msgid "residuals argument to plot.gam is wrong length: ignored"
@@ -2188,11 +2202,6 @@ msgstr ""
 #: R/plots.r:0
 msgid "response"
 msgstr "zmienna zależna"
-
-#. R/jagam.r: warning("rho missing from simulation data edf.type reset to 2")
-#: R/jagam.r:0
-msgid "rho missing from simulation data edf.type reset to 2"
-msgstr ""
 
 #. R/smooth.r: warning("s value increased")
 #: R/smooth.r:0
@@ -2249,9 +2258,8 @@ msgstr ""
 
 #. R/mgcv.r: warning("single linear predictor indices are ignored")
 #: R/mgcv.r:0
-#, fuzzy
 msgid "single linear predictor indices are ignored"
-msgstr "Niepoprawne wartości liniowej zmiennej niezależnej w pustym modelu"
+msgstr "pojedyncze indeksy liniowych zmiennych zostały zignorowane"
 
 #. R/smooth.r: warning("single penalty tensor product smooths are deprecated and likely to be removed soon")
 #: R/smooth.r:0
@@ -2272,10 +2280,13 @@ msgstr "osobliwe wartości nie zostały zwrócone w w sposób uporządkowany"
 msgid "smooth objects should not have a qrc attribute"
 msgstr "gładkie obiekty nie powinny mieć atrybutu 'qrc'"
 
-#. R/jagam.r: warning("smoothing parameter prior choise not recognised, reset to gamma")
+#. R/jagam.r: warning("smoothing parameter prior choise not recognised, reset to 'gamma'")
 #: R/jagam.r:0
-msgid "smoothing parameter prior choise not recognised, reset to gamma"
+#, fuzzy
+msgid "smoothing parameter prior choise not recognised, reset to 'gamma'"
 msgstr ""
+"pierwotnie wybrany parametr wygładzający nie został rozpoznany, przywracanie "
+"wartości 'gamma'"
 
 #. R/soap.r: stop("soap films are bivariate only")
 #. R/soap.r: stop("soap films are bivariate only")
@@ -2406,12 +2417,6 @@ msgstr "typ 'items' nie jest dostępny dla przypadków z wieloma predyktorami"
 msgid "type must be \"link\" or \"response\""
 msgstr "'type' musi mieć wartość \"link\" lub \"response\""
 
-#. R/jagam.r: stop("unconditional argument not meaningful here")
-#. R/jagam.r: warning("unconditional argument not meaningful here")
-#: R/jagam.r:0
-msgid "unconditional argument not meaningful here"
-msgstr "bezwarunkowe argumenty nie mają tu zastosowana"
-
 #. R/smooth.r: stop("unimplemented sparse constraint type requested")
 #: R/smooth.r:0
 msgid "unimplemented sparse constraint type requested"
@@ -2526,6 +2531,12 @@ msgid_plural "Smoothing parameter selection converged after %d iterations."
 msgstr[0] "Wybór parametrów wygładzania uzbieżnił się po %d iteracji."
 msgstr[1] "Wybór parametrów wygładzania uzbieżnił się po %d iteracjach."
 msgstr[2] "Wybór parametrów wygładzania uzbieżnił się po %d iteracjach."
+
+#~ msgid "by.resids argument not supported"
+#~ msgstr "argument 'by.resids' nie jest wspierany"
+
+#~ msgid "residuals argument not supported"
+#~ msgstr "argument 'residuals' nie jest wspierany"
 
 #~ msgid "Choleski based method failed, switch to QR"
 #~ msgstr ""

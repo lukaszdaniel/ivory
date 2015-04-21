@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-04-01 22:12\n"
+"POT-Creation-Date: 2015-04-20 05:19\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -6535,6 +6535,18 @@ msgstr[0] ""
 msgid "Required field missing or empty:"
 msgid_plural "Required fields missing or empty:"
 msgstr[0] "필요한 항목이 누락되거나 비어있습니다:"
+
+#. R/check.R: ngettext(length(dirs), "The following directory looks like a leftover from 'knitr':\n%s\nPlease remove from your package.\n",     "The following directories look like leftovers from 'knitr':\n%s\nPlease remove from your package.\n",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"The following directory looks like a leftover from 'knitr':\n"
+"%s\n"
+"Please remove from your package.\n"
+msgid_plural ""
+"The following directories look like leftovers from 'knitr':\n"
+"%s\n"
+"Please remove from your package.\n"
+msgstr[0] ""
 
 #. R/QC.R: ngettext(length(xx), "Unavailable namespace imported from by a ':::' call: %s\nSee the note in ?`:::` about the use of this operator.",     "Unavailable namespaces imported from by ':::' calls: %s\nSee the note in ?`:::` about the use of this operator.",     domain = "R-tools")
 #: R/QC.R:0

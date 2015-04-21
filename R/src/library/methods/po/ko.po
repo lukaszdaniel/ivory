@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 19:57+0100\n"
+"POT-Creation-Date: 2015-04-20 05:19+0200\n"
 "PO-Revision-Date: 2014-03-27 09:07-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -97,7 +97,7 @@ msgstr ""
 msgid "no direct or inherited method for function '%s' for this call"
 msgstr "이 호출을 위해 함수 '%s'에 대한 직접적 또는 상속적인 메소드가 없습니다"
 
-#: methods_list_dispatch.c:521 methods_list_dispatch.c:1041
+#: methods_list_dispatch.c:521 methods_list_dispatch.c:1042
 msgid "invalid object (non-function) used as method"
 msgstr "메소드로서 사용된 유효하지 않은 객체입니다"
 
@@ -160,7 +160,7 @@ msgstr ""
 "반드시 R environment이어야 하는데, 클래스 \"%2$s\"를 얻습니다"
 
 #: methods_list_dispatch.c:611 methods_list_dispatch.c:623
-#: methods_list_dispatch.c:994
+#: methods_list_dispatch.c:995
 #, c-format
 msgid ""
 "error in evaluating the argument '%s' in selecting a method for function "
@@ -228,12 +228,12 @@ msgstr ""
 msgid "class should be either a character-string name or a class definition"
 msgstr "클래스는 문자열 이름 또는 클래스 정의 중 하나 이어야 합니다"
 
-#: methods_list_dispatch.c:954
+#: methods_list_dispatch.c:955
 #, c-format
 msgid "failed to get the generic for the primitive \"%s\""
 msgstr "프리미티브 \"%s\"를 위한 제네릭을 얻는데 실패했습니다"
 
-#: methods_list_dispatch.c:960
+#: methods_list_dispatch.c:961
 #, c-format
 msgid ""
 "expected a generic function or a primitive for dispatch, got an object of "
@@ -242,14 +242,14 @@ msgstr ""
 "제네릭 함수 또는 디스패치를 위한 프리미티브가 와야 하는데, 클래스 \"%s\"의 객"
 "체를 얻었습니다"
 
-#: methods_list_dispatch.c:972
+#: methods_list_dispatch.c:973
 #, c-format
 msgid ""
 "generic \"%s\" seems not to have been initialized for table dispatch---need "
 "to have '.SigArgs' and '.AllMtable' assigned in its environment"
 msgstr ""
 
-#: methods_list_dispatch.c:976
+#: methods_list_dispatch.c:977
 msgid "'.SigArgs' is shorter than '.SigLength' says it should be"
 msgstr ""
 

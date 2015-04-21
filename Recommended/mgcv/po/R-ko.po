@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.3\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-04-01 22:10\n"
+"POT-Creation-Date: 2015-04-20 18:54\n"
 "PO-Revision-Date: 2015-02-21 16:01-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -175,6 +175,22 @@ msgstr "인자 xt가 올바르지 않습니다."
 msgid "'%s' argument is not an object of class %s"
 msgstr "인자의 클래스가 gam이 아닙니다."
 
+#. R/jagam.r: gettextf("'%s' argument is not meaningful here", "unconfitional")
+#. R/jagam.r: gettextf("'%s' argument is not meaningful here", "unconditional")
+#: R/jagam.r:0
+#, fuzzy
+msgid "'%s' argument is not meaningful here"
+msgstr "실행가능(feasible)한 초기모수값(initial parameters)이 아닙니다."
+
+#. R/jagam.r: gettextf("'%s' argument is not supported", "residuals")
+#. R/jagam.r: gettextf("'%s' argument is not supported", "by.resids")
+#. R/jagam.r: gettextf("'%s' argument is not supported", "all.terms")
+#: R/jagam.r:0
+#, fuzzy
+msgid "'%s' argument is not supported"
+msgstr ""
+"plot.gam에 전달되는 인자 residuals의 길이가 올바르지 않아 무시되었습니다. "
+
 #. R/mgcv.r: gettextf("'%s' argument is of the wrong length", "min.sp")
 #: R/mgcv.r:0
 msgid "'%s' argument is of the wrong length"
@@ -188,6 +204,12 @@ msgstr ""
 #, fuzzy
 msgid "'%s' argument is of the wrong length and ignored"
 msgstr "m의 길이가 올바르지 않아 사용되지 않습니다."
+
+#. R/jagam.r: gettextf("'%s' argument is too large, reset", "burnin")
+#: R/jagam.r:0
+#, fuzzy
+msgid "'%s' argument is too large, reset"
+msgstr "인자 xt가 올바르지 않습니다."
 
 #. R/gam.fit3.r: gettextf("'%s' argument should be 1 or 2", "deriv")
 #. R/gam.fit4.r: gettextf("'%s' argument should be 1 or 2", "deriv")
@@ -313,6 +335,11 @@ msgstr ""
 msgid "'id' linked smooths must have same number of arguments"
 msgstr ""
 
+#. R/jagam.r: stop("'jagam()' function requires a file for the JAGS model specification")
+#: R/jagam.r:0
+msgid "'jagam()' function requires a file for the JAGS model specification"
+msgstr ""
+
 #. R/mgcv.r: stop("'m' argument  can't be in 're' argument")
 #: R/mgcv.r:0
 msgid "'m' argument  can't be in 're' argument"
@@ -379,6 +406,13 @@ msgstr ""
 #, fuzzy
 msgid "'rank' has wrong length in 'paraPen'"
 msgstr "`paraPen'내에 있는 `rank'의 길이가 올바르지 않습니다."
+
+#. R/jagam.r: warning("'rho' slot for 'sam' argument is missing from simulation data, 'edf.type' argument reset to 2")
+#: R/jagam.r:0
+msgid ""
+"'rho' slot for 'sam' argument is missing from simulation data, 'edf.type' "
+"argument reset to 2"
+msgstr ""
 
 #. R/smooth.r: stop("'s(.)' function is not yet supported")
 #. R/smooth.r: stop("'s(.)' function is not yet supported")
@@ -1387,11 +1421,6 @@ msgid "all elements of random list must be named"
 msgstr ""
 "random 인자의 개별 구성요소에 이름이 부여되어 있는 리스트이어야 합니다."
 
-#. R/jagam.r: stop("all.terms argument not supported")
-#: R/jagam.r:0
-msgid "all.terms argument not supported"
-msgstr ""
-
 #. R/mgcv.r: stop("argument 'k' must be positive")
 #: R/mgcv.r:0
 #, fuzzy
@@ -1458,16 +1487,6 @@ msgstr "bnd는 반드시 리스트(list)이어야 합니다."
 #. R/soap.r: stop("bnd must be a list of boundary loops")
 #: R/soap.r:0
 msgid "bnd must be a list of boundary loops"
-msgstr ""
-
-#. R/jagam.r: warning("burnin too large, reset")
-#: R/jagam.r:0
-msgid "burnin too large, reset"
-msgstr ""
-
-#. R/jagam.r: stop("by.resids argument not supported")
-#: R/jagam.r:0
-msgid "by.resids argument not supported"
 msgstr ""
 
 #. R/gam.fit3.r: gettext("calling gdi...", domain = "R-mgcv")
@@ -1793,11 +1812,6 @@ msgstr "최대반복(iteration limit)에 도달했습니다: max abs grad = %g"
 msgid ""
 "iterative weights or data non-finite in gam.fit - regularization may help. "
 "See ?gam.control"
-msgstr ""
-
-#. R/jagam.r: stop("jagam requires a file for the JAGS model specification")
-#: R/jagam.r:0
-msgid "jagam requires a file for the JAGS model specification"
 msgstr ""
 
 #. R/soap.r: gettextf("knot %d is on or outside boundary", k)
@@ -2221,13 +2235,6 @@ msgstr ""
 msgid "reparameterization unstable for margin: not done"
 msgstr ""
 
-#. R/jagam.r: stop("residuals argument not supported")
-#: R/jagam.r:0
-#, fuzzy
-msgid "residuals argument not supported"
-msgstr ""
-"plot.gam에 전달되는 인자 residuals의 길이가 올바르지 않아 무시되었습니다. "
-
 #. R/plots.r: warning("residuals argument to plot.gam is wrong length: ignored")
 #: R/plots.r:0
 msgid "residuals argument to plot.gam is wrong length: ignored"
@@ -2237,11 +2244,6 @@ msgstr ""
 #. R/plots.r: gettext("response", domain = "R-mgcv")
 #: R/plots.r:0
 msgid "response"
-msgstr ""
-
-#. R/jagam.r: warning("rho missing from simulation data edf.type reset to 2")
-#: R/jagam.r:0
-msgid "rho missing from simulation data edf.type reset to 2"
 msgstr ""
 
 #. R/smooth.r: warning("s value increased")
@@ -2320,9 +2322,9 @@ msgstr ""
 msgid "smooth objects should not have a qrc attribute"
 msgstr ""
 
-#. R/jagam.r: warning("smoothing parameter prior choise not recognised, reset to gamma")
+#. R/jagam.r: warning("smoothing parameter prior choise not recognised, reset to 'gamma'")
 #: R/jagam.r:0
-msgid "smoothing parameter prior choise not recognised, reset to gamma"
+msgid "smoothing parameter prior choise not recognised, reset to 'gamma'"
 msgstr ""
 
 #. R/soap.r: stop("soap films are bivariate only")
@@ -2456,13 +2458,6 @@ msgstr "gaulss 모형의 모수 mu에 사용가능한 링크(link)가 아닙니�
 #: R/plots.r:0
 msgid "type must be \"link\" or \"response\""
 msgstr "type은 반드시 \"link\" 또는 \"response\"이어야 합니다."
-
-#. R/jagam.r: stop("unconditional argument not meaningful here")
-#. R/jagam.r: warning("unconditional argument not meaningful here")
-#: R/jagam.r:0
-#, fuzzy
-msgid "unconditional argument not meaningful here"
-msgstr "실행가능(feasible)한 초기모수값(initial parameters)이 아닙니다."
 
 #. R/smooth.r: stop("unimplemented sparse constraint type requested")
 #: R/smooth.r:0

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-01 08:36+0100\n"
+"POT-Creation-Date: 2015-04-20 05:19+0200\n"
 "PO-Revision-Date: 2012-03-09 06:45+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -73,11 +73,11 @@ msgstr "그래픽 경로에 x 혹은 y 가 유한하지 않습니다 "
 msgid "Empty raster"
 msgstr ""
 
-#: grid.c:3365
+#: grid.c:3367
 msgid "invalid plotting symbol"
 msgstr "플랏 기호가 잘못되었습니다 "
 
-#: grid.c:3451
+#: grid.c:3453
 #, fuzzy
 msgid "unable to clip to rotated rectangle"
 msgstr "회전된 사각형에 고정시킬 수 없습니다 "

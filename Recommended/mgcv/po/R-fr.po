@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.3-10\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-04-01 22:10\n"
+"POT-Creation-Date: 2015-04-20 18:54\n"
 "PO-Revision-Date: 2005-12-09 09:13+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -142,6 +142,21 @@ msgstr "arguments supplmentaires limins"
 msgid "'%s' argument is not an object of class %s"
 msgstr "fam n'est pas un objet family"
 
+#. R/jagam.r: gettextf("'%s' argument is not meaningful here", "unconfitional")
+#. R/jagam.r: gettextf("'%s' argument is not meaningful here", "unconditional")
+#: R/jagam.r:0
+#, fuzzy
+msgid "'%s' argument is not meaningful here"
+msgstr "arguments supplmentaires limins"
+
+#. R/jagam.r: gettextf("'%s' argument is not supported", "residuals")
+#. R/jagam.r: gettextf("'%s' argument is not supported", "by.resids")
+#. R/jagam.r: gettextf("'%s' argument is not supported", "all.terms")
+#: R/jagam.r:0
+#, fuzzy
+msgid "'%s' argument is not supported"
+msgstr "argument test ignor"
+
 #. R/mgcv.r: gettextf("'%s' argument is of the wrong length", "min.sp")
 #: R/mgcv.r:0
 #, fuzzy
@@ -156,6 +171,12 @@ msgstr "le sp fourni n'a pas la bonne longueur"
 #, fuzzy
 msgid "'%s' argument is of the wrong length and ignored"
 msgstr "m, de longueur incorrecte, est ignor."
+
+#. R/jagam.r: gettextf("'%s' argument is too large, reset", "burnin")
+#: R/jagam.r:0
+#, fuzzy
+msgid "'%s' argument is too large, reset"
+msgstr "le sp fourni n'a pas la bonne longueur"
 
 #. R/gam.fit3.r: gettextf("'%s' argument should be 1 or 2", "deriv")
 #. R/gam.fit4.r: gettextf("'%s' argument should be 1 or 2", "deriv")
@@ -274,6 +295,11 @@ msgstr ""
 msgid "'id' linked smooths must have same number of arguments"
 msgstr ""
 
+#. R/jagam.r: stop("'jagam()' function requires a file for the JAGS model specification")
+#: R/jagam.r:0
+msgid "'jagam()' function requires a file for the JAGS model specification"
+msgstr ""
+
 #. R/mgcv.r: stop("'m' argument  can't be in 're' argument")
 #: R/mgcv.r:0
 msgid "'m' argument  can't be in 're' argument"
@@ -336,6 +362,13 @@ msgstr "Le premier argument n'est pas une formule."
 #, fuzzy
 msgid "'rank' has wrong length in 'paraPen'"
 msgstr "H a des mauvaises dimensions"
+
+#. R/jagam.r: warning("'rho' slot for 'sam' argument is missing from simulation data, 'edf.type' argument reset to 2")
+#: R/jagam.r:0
+msgid ""
+"'rho' slot for 'sam' argument is missing from simulation data, 'edf.type' "
+"argument reset to 2"
+msgstr ""
 
 #. R/smooth.r: stop("'s(.)' function is not yet supported")
 #. R/smooth.r: stop("'s(.)' function is not yet supported")
@@ -1348,12 +1381,6 @@ msgstr "H a des mauvaises dimensions"
 msgid "all elements of random list must be named"
 msgstr "tous les lments d'une liste de nombres alatoires doivent tre nomms"
 
-#. R/jagam.r: stop("all.terms argument not supported")
-#: R/jagam.r:0
-#, fuzzy
-msgid "all.terms argument not supported"
-msgstr "argument test ignor"
-
 #. R/mgcv.r: stop("argument 'k' must be positive")
 #: R/mgcv.r:0
 #, fuzzy
@@ -1422,17 +1449,6 @@ msgstr "l'argument random doit tre une liste *nomme*."
 #: R/soap.r:0
 msgid "bnd must be a list of boundary loops"
 msgstr ""
-
-#. R/jagam.r: warning("burnin too large, reset")
-#: R/jagam.r:0
-msgid "burnin too large, reset"
-msgstr ""
-
-#. R/jagam.r: stop("by.resids argument not supported")
-#: R/jagam.r:0
-#, fuzzy
-msgid "by.resids argument not supported"
-msgstr "argument test ignor"
 
 #. R/gam.fit3.r: gettext("calling gdi...", domain = "R-mgcv")
 #: R/gam.fit3.r:0
@@ -1767,11 +1783,6 @@ msgid ""
 msgstr ""
 "pondrations itratives ou donnes non finies dans gam.fit - une rgularisation "
 "peut aider. Voyez ?gam.control."
-
-#. R/jagam.r: stop("jagam requires a file for the JAGS model specification")
-#: R/jagam.r:0
-msgid "jagam requires a file for the JAGS model specification"
-msgstr ""
 
 #. R/soap.r: gettextf("knot %d is on or outside boundary", k)
 #: R/soap.r:0
@@ -2187,12 +2198,6 @@ msgstr ""
 msgid "reparameterization unstable for margin: not done"
 msgstr ""
 
-#. R/jagam.r: stop("residuals argument not supported")
-#: R/jagam.r:0
-#, fuzzy
-msgid "residuals argument not supported"
-msgstr "argument test ignor"
-
 #. R/plots.r: warning("residuals argument to plot.gam is wrong length: ignored")
 #: R/plots.r:0
 msgid "residuals argument to plot.gam is wrong length: ignored"
@@ -2202,11 +2207,6 @@ msgstr ""
 #. R/plots.r: gettext("response", domain = "R-mgcv")
 #: R/plots.r:0
 msgid "response"
-msgstr ""
-
-#. R/jagam.r: warning("rho missing from simulation data edf.type reset to 2")
-#: R/jagam.r:0
-msgid "rho missing from simulation data edf.type reset to 2"
 msgstr ""
 
 #. R/smooth.r: warning("s value increased")
@@ -2288,9 +2288,9 @@ msgstr "les valeurs singulires ne sont pas renvoyes dans l'ordre"
 msgid "smooth objects should not have a qrc attribute"
 msgstr "les objets lissage ne devraient pas avoir d'attribut qrc."
 
-#. R/jagam.r: warning("smoothing parameter prior choise not recognised, reset to gamma")
+#. R/jagam.r: warning("smoothing parameter prior choise not recognised, reset to 'gamma'")
 #: R/jagam.r:0
-msgid "smoothing parameter prior choise not recognised, reset to gamma"
+msgid "smoothing parameter prior choise not recognised, reset to 'gamma'"
 msgstr ""
 
 #. R/soap.r: stop("soap films are bivariate only")
@@ -2425,12 +2425,6 @@ msgstr ""
 msgid "type must be \"link\" or \"response\""
 msgstr "type doit tre \"link\" ou \"response\""
 
-#. R/jagam.r: stop("unconditional argument not meaningful here")
-#. R/jagam.r: warning("unconditional argument not meaningful here")
-#: R/jagam.r:0
-msgid "unconditional argument not meaningful here"
-msgstr ""
-
 #. R/smooth.r: stop("unimplemented sparse constraint type requested")
 #: R/smooth.r:0
 msgid "unimplemented sparse constraint type requested"
@@ -2539,6 +2533,14 @@ msgid "Smoothing parameter selection converged after %d iteration."
 msgid_plural "Smoothing parameter selection converged after %d iterations."
 msgstr[0] ""
 msgstr[1] ""
+
+#, fuzzy
+#~ msgid "by.resids argument not supported"
+#~ msgstr "argument test ignor"
+
+#, fuzzy
+#~ msgid "residuals argument not supported"
+#~ msgstr "argument test ignor"
 
 #, fuzzy
 #~ msgid "non-finite coefficients at iteration %d"

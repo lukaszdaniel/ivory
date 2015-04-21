@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-08 18:29+0100\n"
+"POT-Creation-Date: 2015-04-20 05:19+0200\n"
 "PO-Revision-Date: 2015-01-17 15:53+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team:  <gnustats@gmail.com>\n"
@@ -25,28 +25,28 @@ msgstr ""
 msgid "parse error in R expression"
 msgstr "R 표현식에 구문분석 에러"
 
-#: tcltk.c:165 tcltk.c:242
+#: tcltk.c:166 tcltk.c:243
 msgid "tcl error.\n"
 msgstr "tcl 에러.\n"
 
-#: tcltk.c:194 tcltk.c:739
+#: tcltk.c:195 tcltk.c:740
 msgid "invalid argument"
 msgstr "잘못된 인수"
 
-#: tcltk.c:298 tcltk.c:316 tcltk.c:389 tcltk.c:452 tcltk.c:504
+#: tcltk.c:299 tcltk.c:317 tcltk.c:390 tcltk.c:453 tcltk.c:505
 #, fuzzy
 msgid "invalid object of type tclObj -- perhaps saved from another session?"
 msgstr "잘못된 tclObj -- 혹시 다른세션에서 저장된것인가요?"
 
-#: tcltk.c:614
+#: tcltk.c:615
 msgid "argument list is too long in tcltk internal function 'callback_closure'"
 msgstr "tcltk 내부 함수 'callback_closure'에서 인수목록이 너무 깁니다"
 
-#: tcltk.c:647
+#: tcltk.c:648
 msgid "argument is not of correct type"
 msgstr "올바른 유형의 인수가 없습니다"
 
-#: tcltk.c:698
+#: tcltk.c:699
 msgid "no DISPLAY variable so Tk is not available"
 msgstr "DISPLAY 변수가 없어서 Tk를 사용할 수 없습니다"
 

@@ -46,7 +46,7 @@ survfit.formula <- function(formula, data, weights, subset,
     if (!is.null(etype)) {
         if (attr(Y, "type") == "mcounting" ||
             attr(Y, "type") == "mright")
-            stop("cannot use both the 'etype' argument and mstate survival type")
+            stop("cannot use both the 'etype' argument and 'mstate' survival type")
         if (length(istate)) 
             stop("cannot use both the 'etype' and 'istate' arguments")
         status <- Y[,ncol(Y)]

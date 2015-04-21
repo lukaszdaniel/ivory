@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Matrix 1.0-9\n"
+"Project-Id-Version: Matrix 1.2-0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-06 20:36+0200\n"
-"PO-Revision-Date: 2015-04-06 21:46+0100\n"
+"PO-Revision-Date: 2015-04-20 17:51+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.7.5\n"
 
 #: CHMfactor.c:14
 #, c-format
@@ -118,12 +118,14 @@ msgstr "'cholmod_drop()' nie powiódł się"
 #: Csparse.c:811
 #, c-format
 msgid "Impossible Rk_x/Rk_y in Csparse_%s(), please report"
-msgstr ""
+msgstr "Niemożliwe Rk_x/Rk_y w funkcji 'Csparse_%s()', proszę zgłosić"
 
 #: Csparse.c:813
 #, c-format
 msgid "chm_MOD_xtype() was not successful in Csparse_%s(), please report"
 msgstr ""
+"funkcja 'chm_MOD_xtype()' nie zakończyła się sukcesem w 'Csparse_%s()', "
+"proszę zgłosić"
 
 #: Csparse.c:917
 msgid "Index i must be NULL or integer"

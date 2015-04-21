@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.8-6\n"
-"POT-Creation-Date: 2015-04-01 22:10\n"
+"POT-Creation-Date: 2015-04-20 18:54\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -172,6 +172,23 @@ msgid "'%s' argument is not an object of class %s"
 msgstr ""
 
 
+#: R/jagam.r: 0
+#. R/jagam.r: gettextf("'%s' argument is not meaningful here", "unconfitional")
+#. R/jagam.r: gettextf("'%s' argument is not meaningful here", "unconditional")
+
+msgid "'%s' argument is not meaningful here"
+msgstr ""
+
+
+#: R/jagam.r: 0
+#. R/jagam.r: gettextf("'%s' argument is not supported", "residuals")
+#. R/jagam.r: gettextf("'%s' argument is not supported", "by.resids")
+#. R/jagam.r: gettextf("'%s' argument is not supported", "all.terms")
+
+msgid "'%s' argument is not supported"
+msgstr ""
+
+
 #: R/mgcv.r: 0
 #. R/mgcv.r: gettextf("'%s' argument is of the wrong length", "min.sp")
 
@@ -186,6 +203,13 @@ msgstr ""
 #. R/smooth.r: gettextf("'%s' argument is of the wrong length and ignored", "m")
 
 msgid "'%s' argument is of the wrong length and ignored"
+msgstr ""
+
+
+#: R/jagam.r: 0
+#. R/jagam.r: gettextf("'%s' argument is too large, reset", "burnin")
+
+msgid "'%s' argument is too large, reset"
 msgstr ""
 
 
@@ -336,6 +360,13 @@ msgid "'id' linked smooths must have same number of arguments"
 msgstr ""
 
 
+#: R/jagam.r: 0
+#. R/jagam.r: stop("'jagam()' function requires a file for the JAGS model specification")
+
+msgid "'jagam()' function requires a file for the JAGS model specification"
+msgstr ""
+
+
 #: R/mgcv.r: 0
 #. R/mgcv.r: stop("'m' argument  can't be in 're' argument")
 
@@ -411,6 +442,13 @@ msgstr ""
 #. R/mgcv.r: stop("'rank' has wrong length in 'paraPen'")
 
 msgid "'rank' has wrong length in 'paraPen'"
+msgstr ""
+
+
+#: R/jagam.r: 0
+#. R/jagam.r: warning("'rho' slot for 'sam' argument is missing from simulation data, 'edf.type' argument reset to 2")
+
+msgid "'rho' slot for 'sam' argument is missing from simulation data, 'edf.type' argument reset to 2"
 msgstr ""
 
 
@@ -1745,13 +1783,6 @@ msgid "all elements of random list must be named"
 msgstr ""
 
 
-#: R/jagam.r: 0
-#. R/jagam.r: stop("all.terms argument not supported")
-
-msgid "all.terms argument not supported"
-msgstr ""
-
-
 #: R/mgcv.r: 0
 #. R/mgcv.r: stop("argument 'k' must be positive")
 
@@ -1836,20 +1867,6 @@ msgstr ""
 #. R/soap.r: stop("bnd must be a list of boundary loops")
 
 msgid "bnd must be a list of boundary loops"
-msgstr ""
-
-
-#: R/jagam.r: 0
-#. R/jagam.r: warning("burnin too large, reset")
-
-msgid "burnin too large, reset"
-msgstr ""
-
-
-#: R/jagam.r: 0
-#. R/jagam.r: stop("by.resids argument not supported")
-
-msgid "by.resids argument not supported"
 msgstr ""
 
 
@@ -2280,13 +2297,6 @@ msgstr ""
 #. R/mgcv.r: stop("iterative weights or data non-finite in gam.fit - regularization may help. See ?gam.control")
 
 msgid "iterative weights or data non-finite in gam.fit - regularization may help. See ?gam.control"
-msgstr ""
-
-
-#: R/jagam.r: 0
-#. R/jagam.r: stop("jagam requires a file for the JAGS model specification")
-
-msgid "jagam requires a file for the JAGS model specification"
 msgstr ""
 
 
@@ -2826,13 +2836,6 @@ msgid "reparameterization unstable for margin: not done"
 msgstr ""
 
 
-#: R/jagam.r: 0
-#. R/jagam.r: stop("residuals argument not supported")
-
-msgid "residuals argument not supported"
-msgstr ""
-
-
 #: R/plots.r: 0
 #. R/plots.r: warning("residuals argument to plot.gam is wrong length: ignored")
 
@@ -2844,13 +2847,6 @@ msgstr ""
 #. R/plots.r: gettext("response", domain = "R-mgcv")
 
 msgid "response"
-msgstr ""
-
-
-#: R/jagam.r: 0
-#. R/jagam.r: warning("rho missing from simulation data edf.type reset to 2")
-
-msgid "rho missing from simulation data edf.type reset to 2"
 msgstr ""
 
 
@@ -2953,9 +2949,9 @@ msgstr ""
 
 
 #: R/jagam.r: 0
-#. R/jagam.r: warning("smoothing parameter prior choise not recognised, reset to gamma")
+#. R/jagam.r: warning("smoothing parameter prior choise not recognised, reset to 'gamma'")
 
-msgid "smoothing parameter prior choise not recognised, reset to gamma"
+msgid "smoothing parameter prior choise not recognised, reset to 'gamma'"
 msgstr ""
 
 
@@ -3134,14 +3130,6 @@ msgstr ""
 #. R/plots.r: stop("type must be \"link\" or \"response\"")
 
 msgid "type must be \"link\" or \"response\""
-msgstr ""
-
-
-#: R/jagam.r: 0
-#. R/jagam.r: stop("unconditional argument not meaningful here")
-#. R/jagam.r: warning("unconditional argument not meaningful here")
-
-msgid "unconditional argument not meaningful here"
 msgstr ""
 
 

@@ -15,9 +15,9 @@ neardate <- function(id1, id2, y1, y2, best=c("after", "prior"),
     if (missing(y1))  stop(gettextf("'%s' argument is required","y1"))
     if (missing(y2))  stop(gettextf("'%s' argument is required", "y2"))
     if (length(id1) != length(y1))
-            stop(gettextf("'%s' and '%s' arguments have different lengths", "id1", "y1"))
+            stop(gettextf("'%s' and '%s' arguments are of different lengths", "id1", "y1"))
     if (length(id2) != length(y2))
-            stop(gettextf("'%s' and '%s' arguments have different lengths", "id2", "y2"))
+            stop(gettextf("'%s' and '%s' arguments are of different lengths", "id2", "y2"))
 
     best <- match.arg(best)
         

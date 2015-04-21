@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Matrix 1.0-9\n"
+"Project-Id-Version: Matrix 1.2-0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2015-04-06 21:38\n"
-"PO-Revision-Date: 2015-04-06 21:38+0100\n"
+"PO-Revision-Date: 2015-04-20 17:49+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -13,12 +13,12 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.7.5\n"
 
 #. R/sparseMatrix.R: gettextf("%3g duplicated (i,j) pairs", m)
 #: R/sparseMatrix.R:0
 msgid "%3g duplicated (i,j) pairs"
-msgstr ""
+msgstr "%3g powtórzone pary (i,j)"
 
 #. R/Auxiliaries.R: gettextf("%d x %d Matrix of class \"%s\"", d[1], d[2], cl, domain = "R-Matrix")
 #: R/Auxiliaries.R:0
@@ -1356,6 +1356,7 @@ msgstr ""
 #: R/sparseMatrix.R:0
 msgid "number of non zeros is smaller than 'nnz' because of duplicated (i,j)s"
 msgstr ""
+"liczba nie-zer jest mniejsza niż 'nnz' z uwagi na powtórzone indeksy (i,j)"
 
 #. R/Ops.R: gettextf("number of rows are not compatible for %s", .Generic)
 #: R/Ops.R:0
@@ -1410,31 +1411,33 @@ msgstr "Spakowana faktoryzacja 'Buncha-Kaufmana':"
 #: R/products.R:0
 msgid "potentially suboptimal crossprod(\"%s\", <%s>[=<ANY>]) as t(.) %s y"
 msgstr ""
+"potencjalnie optymalny 'crossprod(\"%s\", <%s>[=<ANY>])' jako t(.) %s y"
 
 #. R/products.R: gettextf("potentially suboptimal crossprod(\"%s\",\"%s\") as t(.) %s y", class(x),     class(y), "%*%")
 #: R/products.R:0
 msgid "potentially suboptimal crossprod(\"%s\",\"%s\") as t(.) %s y"
-msgstr ""
+msgstr "potencjalnie optymalny 'crossprod(\"%s\",\"%s\")' jako t(.) %s y"
 
 #. R/products.R: gettextf("potentially suboptimal crossprod(<%s>) as t(.) %*% . ", class(x))
 #: R/products.R:0
 msgid "potentially suboptimal crossprod(<%s>) as t(.) %*% ."
-msgstr ""
+msgstr "potencjalnie optymalny 'crossprod(<%s>)' jako t(.) %*% ."
 
 #. R/products.R: gettextf("potentially suboptimal tcrossprod(\"%s\",\"%s\") as  x %s t(y)", class(x),     class(y), "%*%")
 #: R/products.R:0
 msgid "potentially suboptimal tcrossprod(\"%s\",\"%s\") as  x %s t(y)"
-msgstr ""
+msgstr "potencjalnie optymalny 'tcrossprod(\"%s\",\"%s\")'  jako x %s t(y)"
 
 #. R/products.R: gettextf("potentially suboptimal tcrossprod(<%s>) as  . %*% t(.)", class(x))
 #: R/products.R:0
 msgid "potentially suboptimal tcrossprod(<%s>) as  . %*% t(.)"
-msgstr ""
+msgstr "potencjalnie optymalny 'tcrossprod(<%s>)' jako . %*% t(.)"
 
 #. R/products.R: gettextf("potentially suboptimal tcrossprod(<%s>[=<ANY>], \"%s\") as  x %s t(y)",     class(x), class(y), "%*%")
 #: R/products.R:0
 msgid "potentially suboptimal tcrossprod(<%s>[=<ANY>], \"%s\") as  x %s t(y)"
 msgstr ""
+"potencjalnie optymalny 'tcrossprod(<%s>[=<ANY>], \"%s\")' jako  x %s t(y)"
 
 #. R/abIndex.R: stop("prod(<abIndex>) is not yet implemented")
 #: R/abIndex.R:0

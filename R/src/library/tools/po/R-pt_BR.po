@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-04-01 22:12\n"
+"POT-Creation-Date: 2015-04-20 05:19\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Colin Robert <beasley@ufpa.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -6290,6 +6290,19 @@ msgstr[1] ""
 #: R/check.R:0
 msgid "Required field missing or empty:"
 msgid_plural "Required fields missing or empty:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/check.R: ngettext(length(dirs), "The following directory looks like a leftover from 'knitr':\n%s\nPlease remove from your package.\n",     "The following directories look like leftovers from 'knitr':\n%s\nPlease remove from your package.\n",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"The following directory looks like a leftover from 'knitr':\n"
+"%s\n"
+"Please remove from your package.\n"
+msgid_plural ""
+"The following directories look like leftovers from 'knitr':\n"
+"%s\n"
+"Please remove from your package.\n"
 msgstr[0] ""
 msgstr[1] ""
 

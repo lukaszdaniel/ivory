@@ -6,7 +6,7 @@ Surv <- function(time, time2, event,
                      "mstate"),
 		       origin=0) {
 
-    if (missing(time)) stop("'time' argument is required")
+    if (missing(time)) stop(gettextf("'%s' argument is required", "time"))
     if (!is.numeric(time)) stop(gettextf("'%s' argument must be numeric", "time"))
     nn <- length(time)
 

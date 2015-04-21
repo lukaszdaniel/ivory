@@ -16,7 +16,7 @@ tmerge <- function(data1, data2, id, ..., tstart, tstop, options) {
 
     if (missing(data1)) stop(gettextf("'%s' argument is required", "data1"))
     if (missing(id)) stop(gettextf("'%s' argument is required", "id"))
-    if (!inherits(data1, "data.frame")) stop("'data1' argument must be a data frame")
+    if (!inherits(data1, "data.frame")) stop(gettextf("'%s' argument must be a data frame", "data1"))
     
     tmerge.control <- function(id="id", tstart="tstart", tstop="tstop",  defer =0) {
         if (length(defer) !=1 || !is.numeric(defer) || defer <0)
@@ -31,7 +31,7 @@ tmerge <- function(data1, data2, id, ..., tstart, tstop, options) {
     if (!is.null(tname) && any(is.null(match(unlist(tname), names(data1)))))
         stop("'data1' argument does not match its own tname attribute")
     if (!missing(options)) {
-        if (!is.list(options)) stop("'options' argument must be a list")
+        if (!is.list(options)) stop(gettextf("'%s' argument must be a list", "options"))
         if (!is.null(tname)) {
             # Changing a name partway through a set of calls?
             if (any(!is.na(match(names(options), names(tname)))))
@@ -51,9 +51,9 @@ tmerge <- function(data1, data2, id, ..., tstart, tstop, options) {
     }
 
     if (!missing(tstart) && length(tstart) != length(id))
-        stop(gettextf("'%s' and '%s' arguments must be the same length", "tstart", "id"))
+        stop(gettextf("'%s' and '%s' arguments are of different lengths", "tstart", "id"))
     if (!missing(tstop) && length(tstop) != length(id))
-        stop(gettextf("'%s' and '%s' arguments must be the same length", "tstop", "id"))
+        stop(gettextf("'%s' and '%s' arguments are of different lengths", "tstop", "id"))
     # grab the... arguments
     notdot <- c("data1", "data2", "id", "tstart", "tstop", "topt")
     dotarg <- Call[is.na(match(names(Call), notdot))]

@@ -13,7 +13,7 @@ coxph <- function(formula, data, weights, subset, na.action,
     # then evaluate it in the proper frame
     indx <- match(c("formula", "data", "weights", "subset", "na.action"),
                   names(Call), nomatch=0) 
-    if (indx[1] ==0) stop("'formula' argument is required")
+    if (indx[1] ==0) stop(gettextf("'%s' argument is required", "formula"))
     temp <- Call[c(1,indx)]  # only keep the arguments we wanted
     temp[[1]] <- as.name('model.frame')  # change the function called
     
@@ -138,7 +138,7 @@ coxph <- function(formula, data, weights, subset, na.action,
          mf <- mf[tindex,]
          Y <- Surv(rep(counts$time, counts$nrisk), counts$status)
          type <- 'right'  # new Y is right censored, even if the old was (start, stop]
-         strats <- rep(1:length(counts$nrisk), counts$nrisk)
+         strats <- rep(seq_len(length(counts$nrisk)), counts$nrisk)
          weights <- model.weights(mf)
          if (!is.null(weights) && any(!is.finite(weights)))
              stop("weights must be finite")   
@@ -253,7 +253,7 @@ coxph <- function(formula, data, weights, subset, na.action,
     }
     else {
         if (!is.null(fit$coefficients) && any(is.na(fit$coefficients))) {
-           vars <- (1:length(fit$coefficients))[is.na(fit$coefficients)]
+           vars <- seq_len(length(fit$coefficients))[is.na(fit$coefficients)]
            msg <-gettextf("X matrix deemed to be singular; variable %s", paste(vars, collapse=" "))
            if (singular.ok) warning(msg)
            else             stop(msg)

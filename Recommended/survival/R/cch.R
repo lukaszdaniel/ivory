@@ -42,9 +42,9 @@ cch <- function(formula, data=sys.parent(), subcoh, id, stratum=NULL, cohort.siz
         subcohort.sizes<-table(stratum)
     } else if(!stratified) {
         if (!(method =="LinYing") && robust)
-            warning(gettextf("'robust' argument ignored for method (%s)", method))
+            warning(gettextf("'%s' argument ignored for method (%s)", "robust", method))
         if (!is.null(stratum))
-            warning(gettextf("'stratum' argument ignored for method (%s)", method))
+            warning(gettextf("'%s' argument ignored for method (%s)", "stratum", method))
         if (length(cohort.size)!=1)
             stop("cohort size must be a scalar for unstratified analysis")
         subcohort.sizes<-length(id)

@@ -76,11 +76,11 @@ survfit.coxph <-
     else id <- NULL
 
     if (individual && missing(newdata)) {
-        stop("the id and/or individual options only make sense with new data")
+        stop("'id' and/or 'individual' arguments only make sense with new data")
     }
 
     if (individual && type!= 'counting')
-        stop("the individual option is only valid for start-stop data")
+        stop("'individual' argument is only valid for start-stop data")
 
     if (is.null(mf)) offset <- 0
     else {
@@ -158,9 +158,9 @@ survfit.coxph <-
         Terms2 <- Terms 
         if (!individual)  Terms2 <- delete.response(Terms)
         if (is.vector(newdata, "numeric")) {
-            if (individual) stop("'newdata' argument must be a data frame")
+            if (individual) stop(gettextf("'%s' argument must be a data frame", "newdata"))
             if (is.null(names(newdata))) {
-                stop("'newdata' argument must be a data frame")
+                stop(gettextf("'%s' argument must be a data frame", "newdata"))
             }
             newdata <- data.frame(as.list(newdata))
         }

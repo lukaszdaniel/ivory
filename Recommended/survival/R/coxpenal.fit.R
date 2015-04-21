@@ -153,7 +153,7 @@ coxpenal.fit <- function(x, y, strata, offset, init, control,
     # Now the non-sparse penalties
     if (sum(!sparse) >0) {
 	full.imat <- !all(unlist(lapply(pattr, function(x) x$diag)))
-	ipenal <- (1:length(pattr))[!sparse]   #index for non-sparse terms
+	ipenal <- seq_len(length(pattr))[!sparse]   #index for non-sparse terms
 	f.expr2 <- function(coef){
             coxlist2$coef<-coef ##<TSL>
 	    pentot <- 0
@@ -213,8 +213,8 @@ coxpenal.fit <- function(x, y, strata, offset, init, control,
     if (!missing(init) && !is.null(init)) {
 	if (length(init) != nvar) {
 	    if (length(init) == (nvar+nfrail)) {
-		finit <- init[-(1:nvar)]
-		init  <- init[1:nvar]
+		finit <- init[-seq_len(nvar)]
+		init  <- init[seq_len(nvar)]
 		}
 	    else stop("wrong length for inital values")
 	    }
@@ -262,7 +262,7 @@ coxpenal.fit <- function(x, y, strata, offset, init, control,
 	    calls[i] <- parse(text=paste(tempchar, ")"))
 	else {
 	    temp <- match(cargs[[i]], temp1)
-	    if (any(is.na(temp))) stop(gettextf("%s not matched", (cargs[[i]])[is.na(temp)]))
+	    if (any(is.na(temp))) stop(gettextf("%s was not matched", (cargs[[i]])[is.na(temp)]))
 	    if (sparse[i]) temp4 <- paste(temp2b[temp], collapse=',')
 	    else           temp4 <- paste(temp3b[temp], collapse=',')
 	    
@@ -383,8 +383,8 @@ coxpenal.fit <- function(x, y, strata, offset, init, control,
 	#  of self-preservation (0 divides).  But such coefs are guarranteed
 	#  zero so the variance should be too.)
 	temp <- rep(FALSE, nvar+nfrail)
-	if (nfrail>0) temp[1:nfrail] <- coxlist1$flag
-	if (ptype >1) temp[nfrail+ 1:nvar] <- coxlist2$flag
+	if (nfrail>0) temp[seq_len(nfrail)] <- coxlist1$flag
+	if (ptype >1) temp[nfrail+ seq_len(nvar)] <- coxlist2$flag
 	fdiag <- ifelse(temp, 0, coxfit$fdiag)
 
 	if (need.df) {
@@ -442,7 +442,7 @@ coxpenal.fit <- function(x, y, strata, offset, init, control,
 	    # *save = prior thetas and the resultant fits
 	    # choose as initial values the result for the closest old theta
 	    howclose <- apply((thetasave-temp)^2,2, sum)
-	    which <- min((1:iter)[howclose==min(howclose)])
+	    which <- min(seq_len(iter)[howclose==min(howclose)])
 	    if (nvar>0)   init <- coefsave[,which]
 	    if (nfrail>0) finit<- fsave[,which]
 	    thetasave <- cbind(thetasave, temp)
@@ -496,7 +496,7 @@ coxpenal.fit <- function(x, y, strata, offset, init, control,
 
     if (control$iter.max >1 && length(iterfail)>0)
 	    warning(gettextf("inner loop failed to coverge for iterations %s", paste(iterfail, collapse=' ')))
-    which.sing <- (fdiag[nfrail + 1:nvar] ==0)
+    which.sing <- (fdiag[nfrail + seq_len(nvar)] ==0)
     
     coef <- coxfit$coef
     names(coef) <- varnames

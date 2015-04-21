@@ -7,7 +7,7 @@ survreg <- function(formula, data, weights, subset, na.action,
     Call <- match.call()   # save a copy of the call
     indx <- match(c("formula", "data", "weights", "subset", "na.action"),
                   names(Call), nomatch=0) 
-    if (indx[1] ==0) stop("'formula' argument is required")
+    if (indx[1] ==0) stop(gettextf("'%s' argument is required", "formula"))
     temp <- Call[c(1,indx)]  # only keep the arguments we wanted
     temp[[1]] <- as.name('model.frame')  # change the function called
 

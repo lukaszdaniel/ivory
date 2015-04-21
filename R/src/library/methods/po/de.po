@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 19:57+0100\n"
+"POT-Creation-Date: 2015-04-20 05:19+0200\n"
 "PO-Revision-Date: 2015-01-17 15:40+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -103,7 +103,7 @@ msgid "no direct or inherited method for function '%s' for this call"
 msgstr ""
 "keine direkte oder vererbte Methode für Funktion '%s' für diesen Aufruf"
 
-#: methods_list_dispatch.c:521 methods_list_dispatch.c:1041
+#: methods_list_dispatch.c:521 methods_list_dispatch.c:1042
 msgid "invalid object (non-function) used as method"
 msgstr "unzulässiges Objekt (keine Funktion) als Methode benutzt"
 
@@ -166,7 +166,7 @@ msgstr ""
 "für den Dispatch muss eine R Umgebung sein; bekam Objekt der Klasse \"%s\""
 
 #: methods_list_dispatch.c:611 methods_list_dispatch.c:623
-#: methods_list_dispatch.c:994
+#: methods_list_dispatch.c:995
 #, c-format
 msgid ""
 "error in evaluating the argument '%s' in selecting a method for function "
@@ -242,12 +242,12 @@ msgid "class should be either a character-string name or a class definition"
 msgstr ""
 "Class sollte entweder ein Zeichenkettenname oder eine Klassendefinition sein"
 
-#: methods_list_dispatch.c:954
+#: methods_list_dispatch.c:955
 #, fuzzy, c-format
 msgid "failed to get the generic for the primitive \"%s\""
 msgstr "Bekam keine Generische für die Primitive \"%s\""
 
-#: methods_list_dispatch.c:960
+#: methods_list_dispatch.c:961
 #, fuzzy, c-format
 msgid ""
 "expected a generic function or a primitive for dispatch, got an object of "
@@ -256,7 +256,7 @@ msgstr ""
 "Erwartete eine generische Funktion oder eine Primitive für den Dispatch, "
 "bekam Objekt der Klasse \"%s\""
 
-#: methods_list_dispatch.c:972
+#: methods_list_dispatch.c:973
 #, fuzzy, c-format
 msgid ""
 "generic \"%s\" seems not to have been initialized for table dispatch---need "
@@ -265,7 +265,7 @@ msgstr ""
 "Generische \"%s\" scheint nicht für den Tabellendispatch initialisiert zu "
 "sein --- braucht zugewiesene .SigArgs und .AllMtable in ihrer Umgebung"
 
-#: methods_list_dispatch.c:976
+#: methods_list_dispatch.c:977
 msgid "'.SigArgs' is shorter than '.SigLength' says it should be"
 msgstr ""
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 19:57+0100\n"
+"POT-Creation-Date: 2015-04-20 05:19+0200\n"
 "PO-Revision-Date: 2011-11-29 09:10+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -96,7 +96,7 @@ msgstr ""
 msgid "no direct or inherited method for function '%s' for this call"
 msgstr "ingen direkte eller arvet metode for funktion '%s' for dette kald"
 
-#: methods_list_dispatch.c:521 methods_list_dispatch.c:1041
+#: methods_list_dispatch.c:521 methods_list_dispatch.c:1042
 msgid "invalid object (non-function) used as method"
 msgstr "ugyldig objekt (ikkefunktion) brugt som metode"
 
@@ -159,7 +159,7 @@ msgstr ""
 "skal være et R-miljø; fik et objekt af klasse »%s«"
 
 #: methods_list_dispatch.c:611 methods_list_dispatch.c:623
-#: methods_list_dispatch.c:994
+#: methods_list_dispatch.c:995
 #, c-format
 msgid ""
 "error in evaluating the argument '%s' in selecting a method for function "
@@ -227,12 +227,12 @@ msgstr ""
 msgid "class should be either a character-string name or a class definition"
 msgstr "Klasse skal enten være et tegn-streng navn eller en klassedefinition"
 
-#: methods_list_dispatch.c:954
+#: methods_list_dispatch.c:955
 #, fuzzy, c-format
 msgid "failed to get the generic for the primitive \"%s\""
 msgstr "Kunne ikke indhente den generiske for primitive »%s«"
 
-#: methods_list_dispatch.c:960
+#: methods_list_dispatch.c:961
 #, fuzzy, c-format
 msgid ""
 "expected a generic function or a primitive for dispatch, got an object of "
@@ -241,7 +241,7 @@ msgstr ""
 "Forventede en generisk funktion eller en primitive for afsendelse, fik et "
 "objekt af klassen »%s«"
 
-#: methods_list_dispatch.c:972
+#: methods_list_dispatch.c:973
 #, fuzzy, c-format
 msgid ""
 "generic \"%s\" seems not to have been initialized for table dispatch---need "
@@ -250,7 +250,7 @@ msgstr ""
 "Generisk »%s« ser ikke ud til at være blevet initialiseret for "
 "tabelafsendelse - skal have .SigArgs og .AllMtable tildelt i sit miljø"
 
-#: methods_list_dispatch.c:976
+#: methods_list_dispatch.c:977
 msgid "'.SigArgs' is shorter than '.SigLength' says it should be"
 msgstr ""
 

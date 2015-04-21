@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grid 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-01 22:12+0200\n"
+"POT-Creation-Date: 2015-04-20 05:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,11 +62,11 @@ msgstr ""
 msgid "Empty raster"
 msgstr ""
 
-#: grid.c:3365
+#: grid.c:3367
 msgid "invalid plotting symbol"
 msgstr ""
 
-#: grid.c:3451
+#: grid.c:3453
 msgid "unable to clip to rotated rectangle"
 msgstr ""
 

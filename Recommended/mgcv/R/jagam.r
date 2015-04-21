@@ -86,10 +86,10 @@ sp.prior = "gamma",diagonalize=FALSE) {
 ## in the Gaussian setting (Conjugate updates better than MH), otherwise 
 ## diagonalize==FALSE faster as block MH is highly advantageous
 ## WARNING: centred=FALSE is usually a very bad idea!!
-  if (is.null(file)) stop("jagam requires a file for the JAGS model specification")
+  if (is.null(file)) stop("'jagam()' function requires a file for the JAGS model specification")
   cat("model {\n",file=file) ## start the model specification
   if (!(sp.prior %in% c("gamma","log.uniform"))) {
-    warning("smoothing parameter prior choise not recognised, reset to gamma") #IVORY
+    warning("smoothing parameter prior choise not recognised, reset to 'gamma'")
   }
   ## takes GAM formula and data and produces JAGS model and corresponding 
   ## data list...
@@ -183,7 +183,7 @@ sp.prior = "gamma",diagonalize=FALSE) {
       if (!sum(overlap)) seperable <- TRUE 
     }
     if (seperable) { ## double check that they are diagonal
-      if (M>0) for (j in 1:M) {
+      if (M>0) for (j in seq_len(M)) {
         if (max(abs(G$smooth[[i]]$S[[j]] - diag(diag(G$smooth[[i]]$S[[j]]),nrow=p)))>0) seperable <- FALSE
       } 
     }
@@ -194,7 +194,7 @@ sp.prior = "gamma",diagonalize=FALSE) {
         cat("  ## Note fixed vague prior, CHECK tau...\n",file=file,append=TRUE,sep="")
         b1 <- G$smooth[[i]]$last.para
         cat("  for (i in ",b0,":",b1,") { b[i] ~ dnorm(0, 1e-6) }\n",file=file,append=TRUE,sep="")
-      } else for (j in 1:M) {
+      } else for (j in seq_len(M)) {
         D <- diag(G$smooth[[i]]$S[[j]]) > 0
         b1 <- sum(as.numeric(D)) + b0 - 1
         n.sp <- n.sp + 1
@@ -283,7 +283,7 @@ sim2jam <- function(sam,pregam,edf.type=2,burnin=0) {
   if (burnin>0) {
     nc <- dim(sam$b)[2] ## chain length
     if (burnin >= nc*.9) {
-      warning("burnin too large, reset")
+      warning(gettextf("'%s' argument is too large, reset", "burnin"))
       burnin <- min(nc-1,floor(nc * .9))
     } 
     ind <- (burnin+1):nc
@@ -310,7 +310,7 @@ sim2jam <- function(sam,pregam,edf.type=2,burnin=0) {
   ##       2. diag(VbX'WX)/scale Vb by simulation. mu used for W may also be by sim.
   if (edf.type<2&&is.null(sam$rho)) {
     edf.type <- 2
-    warning("rho missing from simulation data edf.type reset to 2")
+    warning("'rho' slot for 'sam' argument is missing from simulation data, 'edf.type' argument reset to 2")
   }
   if (edf.type > 0) { ## use X'WX not X'X
     if (is.null(sam$mu)) {
@@ -326,7 +326,7 @@ sim2jam <- function(sam,pregam,edf.type=2,burnin=0) {
   if (edf.type < 2) { ## tr((X'WX + S)^{-1}X'WX
     rho <- rowMeans(sam$rho);lambda <- exp(rho)
     XWXS <- XWX
-    for (i in 1:length(lambda)) {
+    for (i in seq_len(length(lambda))) {
       ind <- pregam$off[i]:(pregam$off[i]+ncol(pregam$S[[i]])-1)
       XWXS[ind,ind] <-  XWXS[ind,ind] + pregam$S[[i]] * lambda[i]
     } 
@@ -350,10 +350,10 @@ plot.jam <- function(x,rug=TRUE,se=TRUE,pages=0,select=NULL,scale=-1,
   ## residuals, unconditional, by.resids and all.terms not supported...
   arg.names <- names(list(...))
   if (length(arg.names)>0) {
-    if ("residuals"%in% arg.names) stop("residuals argument not supported")
-    if ("unconditional"%in% arg.names) stop("unconditional argument not meaningful here")
-    if ("by.resids"%in% arg.names) stop("by.resids argument not supported")
-    if ("all.terms"%in% arg.names) stop("all.terms argument not supported")
+    if ("residuals"%in% arg.names) stop(gettextf("'%s' argument is not supported", "residuals"))
+    if ("unconditional"%in% arg.names) stop(gettextf("'%s' argument is not meaningful here", "unconfitional"))
+    if ("by.resids"%in% arg.names) stop(gettextf("'%s' argument is not supported", "by.resids"))
+    if ("all.terms"%in% arg.names) stop(gettextf("'%s' argument is not supported", "all.terms"))
   }
   plot.gam(x,residuals=FALSE,rug=rug,se=se,pages=pages,select=select,scale=scale,
               n=n,n2=n2,pers=pers,theta=theta,phi=phi,jit=jit,xlab=xlab,
@@ -369,7 +369,7 @@ predict.jam <- function(object,newdata,type="link",se.fit=FALSE,terms=NULL,
   class(object) <- "gam" ## cheat!
   arg.names <- names(list(...))
   if (length(arg.names)>0) {
-    if ("unconditional"%in% arg.names) warning("unconditional argument not meaningful here")
+    if ("unconditional"%in% arg.names) warning(gettextf("'%s' argument is not meaningful here", "unconditional"))
   }
   predict.gam(object,newdata,type=type,se.fit=se.fit,terms=terms,
              block.size=block.size,newdata.guaranteed=newdata.guaranteed,

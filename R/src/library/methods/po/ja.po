@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 19:57+0100\n"
+"POT-Creation-Date: 2015-04-20 05:19+0200\n"
 "PO-Revision-Date: 2015-01-17 15:43+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -99,7 +99,7 @@ msgstr ""
 msgid "no direct or inherited method for function '%s' for this call"
 msgstr " この呼び出しでは '%s' に対する直接的または継承メソッドはありません  "
 
-#: methods_list_dispatch.c:521 methods_list_dispatch.c:1041
+#: methods_list_dispatch.c:521 methods_list_dispatch.c:1042
 msgid "invalid object (non-function) used as method"
 msgstr " 不正なオブジェクト(非関数)がメソッドとして使われました "
 
@@ -162,7 +162,7 @@ msgstr ""
 "境でなければなりません； クラス \"%s\" のオブジェクトでした  "
 
 #: methods_list_dispatch.c:611 methods_list_dispatch.c:623
-#: methods_list_dispatch.c:994
+#: methods_list_dispatch.c:995
 #, c-format
 msgid ""
 "error in evaluating the argument '%s' in selecting a method for function "
@@ -233,12 +233,12 @@ msgstr ""
 msgid "class should be either a character-string name or a class definition"
 msgstr " クラスは文字列の名前かクラス定義のどちらかでなければなりません "
 
-#: methods_list_dispatch.c:954
+#: methods_list_dispatch.c:955
 #, fuzzy, c-format
 msgid "failed to get the generic for the primitive \"%s\""
 msgstr " プリミティブな \"%s\" に対する総称(generic)を得るのに失敗しました "
 
-#: methods_list_dispatch.c:960
+#: methods_list_dispatch.c:961
 #, fuzzy, c-format
 msgid ""
 "expected a generic function or a primitive for dispatch, got an object of "
@@ -247,7 +247,7 @@ msgstr ""
 " メソッド割り当てに対する総称的もしくはプリミティブな関数を期待しましたが、得"
 "られたのはクラス \"%s\" のオブジェクトでした "
 
-#: methods_list_dispatch.c:972
+#: methods_list_dispatch.c:973
 #, fuzzy, c-format
 msgid ""
 "generic \"%s\" seems not to have been initialized for table dispatch---need "
@@ -256,7 +256,7 @@ msgstr ""
 " 総称的な \"%s\" は table dispatch のために初期化されていないようです---  ."
 "SigArgs と.AllMtable がその環境中に付値されている必要があります "
 
-#: methods_list_dispatch.c:976
+#: methods_list_dispatch.c:977
 msgid "'.SigArgs' is shorter than '.SigLength' says it should be"
 msgstr ""
 

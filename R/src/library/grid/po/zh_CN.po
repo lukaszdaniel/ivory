@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-01 08:36+0100\n"
+"POT-Creation-Date: 2015-04-20 05:19+0200\n"
 "PO-Revision-Date: 2015-01-17 15:13+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -71,11 +71,11 @@ msgstr "图形路径里x或y的值非限定"
 msgid "Empty raster"
 msgstr ""
 
-#: grid.c:3365
+#: grid.c:3367
 msgid "invalid plotting symbol"
 msgstr "图画符号值不对"
 
-#: grid.c:3451
+#: grid.c:3453
 #, fuzzy
 msgid "unable to clip to rotated rectangle"
 msgstr "无法修剪到旋转了的长方形上"

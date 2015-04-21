@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tcltk 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-01 22:12+0200\n"
+"POT-Creation-Date: 2015-04-20 05:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,27 +21,27 @@ msgstr ""
 msgid "parse error in R expression"
 msgstr ""
 
-#: tcltk.c:165 tcltk.c:242
+#: tcltk.c:166 tcltk.c:243
 msgid "tcl error.\n"
 msgstr ""
 
-#: tcltk.c:194 tcltk.c:739
+#: tcltk.c:195 tcltk.c:740
 msgid "invalid argument"
 msgstr ""
 
-#: tcltk.c:298 tcltk.c:316 tcltk.c:389 tcltk.c:452 tcltk.c:504
+#: tcltk.c:299 tcltk.c:317 tcltk.c:390 tcltk.c:453 tcltk.c:505
 msgid "invalid object of type tclObj -- perhaps saved from another session?"
 msgstr ""
 
-#: tcltk.c:614
+#: tcltk.c:615
 msgid "argument list is too long in tcltk internal function 'callback_closure'"
 msgstr ""
 
-#: tcltk.c:647
+#: tcltk.c:648
 msgid "argument is not of correct type"
 msgstr ""
 
-#: tcltk.c:698
+#: tcltk.c:699
 msgid "no DISPLAY variable so Tk is not available"
 msgstr ""
 

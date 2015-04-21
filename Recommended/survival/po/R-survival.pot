@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: survival 2.38-1\n"
-"POT-Creation-Date: 2015-02-25 19:22\n"
+"POT-Creation-Date: 2015-04-20 18:54\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,13 +58,6 @@ msgid "%s has levels of: %s"
 msgstr ""
 
 
-#: R/coxpenal.fit.R: 0
-#. R/coxpenal.fit.R: gettextf("%s not matched", (cargs[[i]])[is.na(temp)])
-
-msgid "%s not matched"
-msgstr ""
-
-
 #: R/summary.ratetable.S: 0
 #. R/summary.ratetable.S: gettextf("%s ranges from %s to %s; with %d categories\n", att$dimid[i], format(min(att$cutpoints[[i]])),     format(max(att$cutpoints[[i]])), att$dim[i], domain = "R-survival")
 #. R/summary.ratetable.S: gettextf("%s ranges from %s to %s; with %d categories\n", att$dimid[i], format(as.Date(min(att$cutpoints[[i]]),     origin = "1960/01/01")), format(as.Date(max(att$cutpoints[[i]]), origin = "1960/01/01")),     att$dim[i], domain = "R-survival")
@@ -81,7 +74,9 @@ msgid "%s ranges from %s to %s; with %d categories linearly interpolated in %d s
 msgstr ""
 
 
+#: R/coxpenal.fit.R: 0
 #: R/survpenal.fit.S: 0
+#. R/coxpenal.fit.R: gettextf("%s was not matched", (cargs[[i]])[is.na(temp)])
 #. R/survpenal.fit.S: gettextf("%s was not matched", sQuote(cargs[[i]][is.na(temp)]))
 
 msgid "%s was not matched"
@@ -100,6 +95,10 @@ msgstr ""
 #: R/coxph.wtest.S: 0
 #: R/coxph.wtest.S: 0
 #: R/frailty.brent.S: 0
+#: R/neardate.R: 0
+#: R/neardate.R: 0
+#: R/tmerge.R: 0
+#: R/tmerge.R: 0
 #. R/Surv.S: gettextf("'%s' and '%s' arguments are of different lengths", "time", "event")
 #. R/Surv.S: gettextf("'%s' and '%s' arguments are of different lengths", "time", "time2")
 #. R/Surv.S: gettextf("'%s' and '%s' arguments are of different lengths", "time", "event")
@@ -108,24 +107,20 @@ msgstr ""
 #. R/coxph.wtest.S: gettextf("'%s' and '%s' arguments are of different lengths", "var", "b")
 #. R/coxph.wtest.S: gettextf("'%s' and '%s' arguments are of different lengths", "var", "b")
 #. R/frailty.brent.S: gettextf("'%s' and '%s' arguments are of different lengths", "x", "y")
+#. R/neardate.R: gettextf("'%s' and '%s' arguments are of different lengths", "id1", "y1")
+#. R/neardate.R: gettextf("'%s' and '%s' arguments are of different lengths", "id2", "y2")
+#. R/tmerge.R: gettextf("'%s' and '%s' arguments are of different lengths", "tstart", "id")
+#. R/tmerge.R: gettextf("'%s' and '%s' arguments are of different lengths", "tstop", "id")
 
 msgid "'%s' and '%s' arguments are of different lengths"
 msgstr ""
 
 
-#: R/neardate.R: 0
-#. R/neardate.R: gettextf("'%s' and '%s' arguments have different lengths", "id1", "y1")
-#. R/neardate.R: gettextf("'%s' and '%s' arguments have different lengths", "id2", "y2")
+#: R/cch.R: 0
+#. R/cch.R: gettextf("'%s' argument ignored for method (%s)", "robust", method)
+#. R/cch.R: gettextf("'%s' argument ignored for method (%s)", "stratum", method)
 
-msgid "'%s' and '%s' arguments have different lengths"
-msgstr ""
-
-
-#: R/tmerge.R: 0
-#. R/tmerge.R: gettextf("'%s' and '%s' arguments must be the same length", "tstart", "id")
-#. R/tmerge.R: gettextf("'%s' and '%s' arguments must be the same length", "tstop", "id")
-
-msgid "'%s' and '%s' arguments must be the same length"
+msgid "'%s' argument ignored for method (%s)"
 msgstr ""
 
 
@@ -191,13 +186,24 @@ msgid "'%s' argument is of length 0"
 msgstr ""
 
 
+#: R/clogit.R: 0
+#: R/coxph.R: 0
 #: R/neardate.R: 0
+#: R/neardate.R: 0
+#: R/neardate.R: 0
+#: R/neardate.R: 0
+#: R/survobrien.S: 0
+#: R/survreg.S: 0
 #: R/tmerge.R: 0
 #: R/tmerge.R: 0
+#. R/clogit.R: gettextf("'%s' argument is required", "formula")
+#. R/coxph.R: gettextf("'%s' argument is required", "formula")
 #. R/neardate.R: gettextf("'%s' argument is required", "id1")
 #. R/neardate.R: gettextf("'%s' argument is required", "id2")
 #. R/neardate.R: gettextf("'%s' argument is required", "y1")
 #. R/neardate.R: gettextf("'%s' argument is required", "y2")
+#. R/survobrien.S: gettextf("'%s' argument is required", "formula")
+#. R/survreg.S: gettextf("'%s' argument is required", "formula")
 #. R/tmerge.R: gettextf("'%s' argument is required", "data1")
 #. R/tmerge.R: gettextf("'%s' argument is required", "id")
 
@@ -220,6 +226,15 @@ msgstr ""
 #. R/survfitTurnbull.S: gettextf("'%s' argument must be a factor", "x")
 
 msgid "'%s' argument must be a factor"
+msgstr ""
+
+
+#: R/anova.coxphlist.S: 0
+#: R/tmerge.R: 0
+#. R/anova.coxphlist.S: gettextf("'%s' argument must be a list", "object")
+#. R/tmerge.R: gettextf("'%s' argument must be a list", "options")
+
+msgid "'%s' argument must be a list"
 msgstr ""
 
 
@@ -353,16 +368,10 @@ msgid "'formula' argument is not a formula"
 msgstr ""
 
 
-#: R/clogit.R: 0
-#: R/coxph.R: 0
-#: R/survobrien.S: 0
-#: R/survreg.S: 0
-#. R/clogit.R: stop("'formula' argument is required")
-#. R/coxph.R: stop("'formula' argument is required")
-#. R/survobrien.S: stop("'formula' argument is required")
-#. R/survreg.S: stop("'formula' argument is required")
+#: R/survfit.coxph.R: 0
+#. R/survfit.coxph.R: stop("'id' and/or 'individual' arguments only make sense with new data")
 
-msgid "'formula' argument is required"
+msgid "'id' and/or 'individual' arguments only make sense with new data"
 msgstr ""
 
 
@@ -377,6 +386,13 @@ msgstr ""
 #. R/tmerge.R: stop("'id' has values not in data1")
 
 msgid "'id' has values not in data1"
+msgstr ""
+
+
+#: R/survfit.coxph.R: 0
+#. R/survfit.coxph.R: stop("'individual' argument is only valid for start-stop data")
+
+msgid "'individual' argument is only valid for start-stop data"
 msgstr ""
 
 
@@ -423,13 +439,6 @@ msgid "'nterm' argument is too small for df=%s"
 msgstr ""
 
 
-#: R/anova.coxphlist.S: 0
-#. R/anova.coxphlist.S: stop("'object' argument is not a list")
-
-msgid "'object' argument is not a list"
-msgstr ""
-
-
 #: R/anova.coxmelist.R: 0
 #. R/anova.coxmelist.R: stop("'object' argument must be a list of objects of class \"coxme\" or \"coxph\"")
 
@@ -441,13 +450,6 @@ msgstr ""
 #. R/anova.coxphlist.S: stop("'object' argument must be a list of objects of class \"coxph\"")
 
 msgid "'object' argument must be a list of objects of class \"coxph\""
-msgstr ""
-
-
-#: R/tmerge.R: 0
-#. R/tmerge.R: stop("'options' argument must be a list")
-
-msgid "'options' argument must be a list"
 msgstr ""
 
 
@@ -493,23 +495,9 @@ msgstr ""
 
 
 #: R/cch.R: 0
-#. R/cch.R: gettextf("'robust' argument ignored for method (%s)", method)
-
-msgid "'robust' argument ignored for method (%s)"
-msgstr ""
-
-
-#: R/cch.R: 0
 #. R/cch.R: warning("'robust' argument is not implemented for stratified analysis")
 
 msgid "'robust' argument is not implemented for stratified analysis"
-msgstr ""
-
-
-#: R/cch.R: 0
-#. R/cch.R: gettextf("'stratum' argument ignored for method (%s)", method)
-
-msgid "'stratum' argument ignored for method (%s)"
 msgstr ""
 
 
@@ -1003,7 +991,7 @@ msgstr ""
 #: R/agreg.fit.R: 0
 #: R/coxexact.fit.R: 0
 #: R/coxph.fit.S: 0
-#. R/agexact.fit.S: gettext("Loglik converged before variable %s; beta may be infinite.", domain = "R-survival")
+#. R/agexact.fit.S: gettextf("Loglik converged before variable %s; beta may be infinite.", paste((seq_len(nvar))[infs],     collapse = ", "), domain = "R-survival")
 #. R/agreg.fit.R: gettextf("Loglik converged before variable %s; beta may be infinite.", tmp_n)
 #. R/coxexact.fit.R: gettextf("Loglik converged before variable %s; beta may be infinite.", tmp_n)
 #. R/coxph.fit.S: gettext("Loglik converged before variable %s; beta may be infinite.", domain = "R-survival")
@@ -1707,16 +1695,11 @@ msgstr ""
 
 
 #: R/survfit.R: 0
+#: R/survfit.formula.S: 0
 #. R/survfit.R: stop("cannot use both the 'etype' argument and 'mstate' survival type")
+#. R/survfit.formula.S: stop("cannot use both the 'etype' argument and 'mstate' survival type")
 
 msgid "cannot use both the 'etype' argument and 'mstate' survival type"
-msgstr ""
-
-
-#: R/survfit.formula.S: 0
-#. R/survfit.formula.S: stop("cannot use both the 'etype' argument and mstate survival type")
-
-msgid "cannot use both the 'etype' argument and mstate survival type"
 msgstr ""
 
 
@@ -2770,20 +2753,6 @@ msgstr ""
 #. R/anova.coxph.S: gettextf("the following arguments passed to 'anova.coxph()' are invalid and dropped: %s",     tmp_n)
 
 msgid "the following arguments passed to 'anova.coxph()' are invalid and dropped: %s"
-msgstr ""
-
-
-#: R/survfit.coxph.R: 0
-#. R/survfit.coxph.R: stop("the id and/or individual options only make sense with new data")
-
-msgid "the id and/or individual options only make sense with new data"
-msgstr ""
-
-
-#: R/survfit.coxph.R: 0
-#. R/survfit.coxph.R: stop("the individual option is only valid for start-stop data")
-
-msgid "the individual option is only valid for start-stop data"
 msgstr ""
 
 

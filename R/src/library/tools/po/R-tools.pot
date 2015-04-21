@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.3.0\n"
-"POT-Creation-Date: 2015-04-01 22:12\n"
+"POT-Creation-Date: 2015-04-20 05:19\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -8051,6 +8051,15 @@ msgstr[1]    ""
 
 msgid        "Required field missing or empty:"
 msgid_plural "Required fields missing or empty:"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/check.R: 0
+#. R/check.R: ngettext(length(dirs), "The following directory looks like a leftover from 'knitr':\n%s\nPlease remove from your package.\n",     "The following directories look like leftovers from 'knitr':\n%s\nPlease remove from your package.\n",     domain = "R-tools")
+
+msgid        "The following directory looks like a leftover from 'knitr':\n%s\nPlease remove from your package.\n"
+msgid_plural "The following directories look like leftovers from 'knitr':\n%s\nPlease remove from your package.\n"
 msgstr[0]    ""
 msgstr[1]    ""
 
