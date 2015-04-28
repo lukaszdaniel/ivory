@@ -323,6 +323,17 @@ install.packages <-
            }
         }
     }
+    
+    ## check if we should infer the type
+    if (length(pkgs) == 1L && is.null(repos) && type == "both") {
+    	if (  (type2 %in% "win.binary" && grepl("[.]zip$", pkgs))
+	    ||(substr(type2, 1L, 10L) == "mac.binary"
+		   && grepl("[.]tgz$", pkgs))) {
+	    type <- type2
+	} else if (grepl("[.]tar[.](gz|bz2|xz)$", pkgs)) {
+	    type <- "source"
+       }
+    }
 
     if(is.null(repos) && missing(contriburl)) {
         tmpd <- destdir
@@ -447,13 +458,15 @@ install.packages <-
                                    method = method, available = av2,
                                    destdir = destdir,
                                    dependencies = NULL,
-                                   libs_only = libs_only, ...)
+                                   libs_only = libs_only,
+                                   quiet = quiet, ...)
             else
                 .install.macbinary(pkgs = bins, lib = lib,
                                    contriburl = contrib.url(repos, type2),
                                    method = method, available = av2,
                                    destdir = destdir,
-                                   dependencies = NULL, ...)
+                                   dependencies = NULL,
+                                   quiet = quiet, ...)
         }
         pkgs <- setdiff(pkgs, bins)
         if(!length(pkgs)) return(invisible())

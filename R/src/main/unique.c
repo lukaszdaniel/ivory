@@ -1240,6 +1240,7 @@ static SEXP subDots(SEXP rho)
     error(_("'...' is not a pairlist"));
 
     len = length(dots);
+    PROTECT(dots);
     PROTECT(rval=allocList(len));
     for(a = dots, b = rval, i = 1; i <= len; a = CDR(a), b = CDR(b), i++) {
 	SET_TAG(b, TAG(a));
@@ -1251,7 +1252,7 @@ static SEXP subDots(SEXP rho)
 	else
 	    SETCAR(b, t);
     }
-    UNPROTECT(1);
+    UNPROTECT(2);
     return rval;
 }
 

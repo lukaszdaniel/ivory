@@ -321,33 +321,35 @@ setRlibs <-
                 warningLog(Log, gettext("'qpdf' is needed for checks on size reduction of PDFs", domain = "R-tools"))
         }
         if (dir.exists("inst/doc") && do_install) check_doc_contents()
-        if (dir.exists("vignettes")) check_vign_contents()
-        if (dir.exists("inst/doc") && !dir.exists("vignettes")) {
-            pattern <- vignetteEngine("Sweave")$pattern
-            sources <- setdiff(list.files(file.path("inst", "doc"),
-                                          pattern = pattern),
-                               list.files("vignettes", pattern = pattern))
-            buildPkgs <- .get_package_metadata(".")["VignetteBuilder"]
-            if (!is.na(buildPkgs)) {
-                buildPkgs <- unlist(strsplit(buildPkgs, ","))
-                buildPkgs <- unique(gsub('[[:space:]]', '', buildPkgs))
-                engineList <- vignetteEngine(package = buildPkgs)
-                for(nm in names(engineList)) {
-                    pattern <- engineList[[nm]]$pattern
-                    sources <- c(sources,
-                                 setdiff(list.files(file.path("inst", "doc"),
-                                                    pattern = pattern),
-                                         list.files("vignettes", pattern = pattern)))
+        if (dir.exists("vignettes")) check_vign_contents(ignore_vignettes)
+        if (!ignore_vignettes) {
+            if (dir.exists("inst/doc") && !dir.exists("vignettes")) {
+                pattern <- vignetteEngine("Sweave")$pattern
+                sources <- setdiff(list.files(file.path("inst", "doc"),
+                                              pattern = pattern),
+                                   list.files("vignettes", pattern = pattern))
+                buildPkgs <- .get_package_metadata(".")["VignetteBuilder"]
+                if (!is.na(buildPkgs)) {
+                    buildPkgs <- unlist(strsplit(buildPkgs, ","))
+                    buildPkgs <- unique(gsub('[[:space:]]', '', buildPkgs))
+                    engineList <- vignetteEngine(package = buildPkgs)
+                    for(nm in names(engineList)) {
+                        pattern <- engineList[[nm]]$pattern
+                        sources <- c(sources,
+                                     setdiff(list.files(file.path("inst", "doc"),
+                                                        pattern = pattern),
+                                             list.files("vignettes", pattern = pattern)))
+                    }
                 }
-            }
-            sources <- unique(sources)
-            if(length(sources)) {
-                checkingLog(Log, gettext("checking for old-style vignette sources ...", domain = "R-tools"))
-                msg <- c(gettext("Vignette sources only in 'inst/doc':", domain = "R-tools"),
-                         strwrap(paste(sQuote(sources), collapse = ", "), indent = 2L, exdent = 2L),
-                         gettext("A 'vignettes' directory is required as from R 3.1.0 and these will not be indexed nor checked", domain = "R-tools"))
-                ## warning or error eventually
-                noteLog(Log, paste(msg, collapse = "\n"))
+                sources <- unique(sources)
+                if(length(sources)) {
+                    checkingLog(Log, gettext("checking for old-style vignette sources ...", domain = "R-tools"))
+                    msg <- c(gettext("Vignette sources only in 'inst/doc':", domain = "R-tools"),
+                            strwrap(paste(sQuote(sources), collapse = ", "), indent = 2L, exdent = 2L),
+                             gettext("A 'vignettes' directory is required as from R 3.1.0 and these will not be indexed nor checked", domain = "R-tools"))
+                    ## warning or error eventually
+                    noteLog(Log, paste(msg, collapse = "\n"))
+                }
             }
         }
 
@@ -373,7 +375,7 @@ setRlibs <-
 
         ## Check package vignettes.
         setwd(pkgoutdir)
-        run_vignettes(desc)
+        if (!ignore_vignettes) run_vignettes(desc)
 
     } ## end{ check_pkg }
 
@@ -711,6 +713,8 @@ setRlibs <-
 
     check_build <- function()
     {
+        ## currently only checks vignettes
+        if (ignore_vignettes) return()
         fv <- file.path("build", "vignette.rds")
         if(!file.exists(fv)) return()
         checkingLog(Log, gettext("checking 'build' directory ...", domain = "R-tools"))
@@ -1866,9 +1870,13 @@ setRlibs <-
         if (!any) resultLog(Log, "OK")
     }
 
-    check_vign_contents <- function()
+    check_vign_contents <- function(ignore_vignettes = FALSE)
     {
         checkingLog(Log, gettext("checking files in 'vignettes' ...", domain = "R-tools"))
+        if (ignore_vignettes) {
+            resultLog(Log, gettext("SKIPPED", domain = "R-tools"))
+            return()
+        }
         ## special case common problems.
         any <- FALSE
         pattern <- vignetteEngine("Sweave")$pattern
@@ -3600,7 +3608,7 @@ setRlibs <-
         ## not required in the package DESCRIPTION file.
         ## Namespace imports must really be in Depends.
         res <- .check_package_depends(pkgdir, R_check_force_suggests,
-                                      check_incoming)
+                                      check_incoming, ignore_vignettes)
         if(any(sapply(res, length) > 0L)) {
             out <- format(res)
             allowed <- c("suggests_but_not_installed",
@@ -3762,7 +3770,7 @@ setRlibs <-
             "control files are performed.  The package is installed into the log",
             "directory and production of the package PDF manual is tested.",
             "All examples and tests provided by the package are tested to see if",
-            "they run successfully.  Code in the vignettes is tested,",
+            "they run successfully.  By default code in the vignettes is tested,",
             "as is re-building the vignette PDFs.",
             "",
             "Options:",
@@ -3780,8 +3788,9 @@ setRlibs <-
             "      --no-install      skip installation and associated tests",
             "      --no-tests        do not run code in 'tests' subdirectory",
             "      --no-manual       do not produce the PDF manual",
-            "      --no-vignettes    do not run R code in vignettes",
+            "      --no-vignettes    do not run R code in vignettes nor build outputs",
             "      --no-build-vignettes    do not build vignette outputs",
+            "      --ignore-vignettes    skip all tests on vignettes",
             "      --run-dontrun     do run \\dontrun sections in the Rd files",
             "      --run-donttest    do run \\donttest sections in the Rd files",
             "      --use-gct         use 'gctorture(TRUE)' when running examples/tests",
@@ -3853,6 +3862,7 @@ setRlibs <-
     do_tests <- TRUE
     do_vignettes <- TRUE
     do_build_vignettes <- TRUE
+    ignore_vignettes <- FALSE
     do_manual <- TRUE
     use_gct <- FALSE
     use_valgrind <- FALSE
@@ -3913,9 +3923,13 @@ setRlibs <-
             do_build_vignettes  <- FALSE
         } else if (a == "--no-rebuild-vignettes") { # pre-3.0.0 version
             stop("'--no-rebuild-vignettes' is defunct: use '--no-build-vignettes' instead", call. = FALSE, domain = "R-tools")
-      } else if (a == "--no-vignettes") {
+        } else if (a == "--no-vignettes") {
             do_vignettes  <- FALSE
-        } else if (a == "--no-manual") {
+        } else if (a == "--ignore-vignettes") {
+            ignore_vignettes  <- TRUE
+            do_vignettes  <- FALSE
+            do_build_vignettes  <- FALSE
+       } else if (a == "--no-manual") {
             do_manual  <- FALSE
         } else if (a == "--no-latex") {
             stop("'--no-latex' is defunct: use '--no-manual' instead", call. = FALSE, domain = "R-tools")
@@ -4274,9 +4288,13 @@ setRlibs <-
         if (!do_examples && !spec_install) opts <- c(opts, "--no-examples")
         if (!do_tests && !spec_install) opts <- c(opts, "--no-tests")
         if (!do_manual && !spec_install) opts <- c(opts, "--no-manual")
-        if (!do_vignettes && !spec_install) opts <- c(opts, "--no-vignettes")
-        if (!do_build_vignettes && !spec_install)
-            opts <- c(opts, "--no-build-vignettes")
+        if (ignore_vignettes) opts <- c(opts, "--ignore-vignettes")
+        else {
+            if (!do_vignettes && !spec_install)
+                opts <- c(opts, "--no-vignettes")
+            if (!do_build_vignettes && !spec_install)
+                opts <- c(opts, "--no-build-vignettes")
+        }
         if (use_gct) opts <- c(opts, "--use-gct")
         if (use_valgrind) opts <- c(opts, "--use-valgrind")
         if (as_cran) opts <- c(opts, "--as-cran")
