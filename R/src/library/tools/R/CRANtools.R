@@ -34,6 +34,8 @@ function(package, results = NULL, details = NULL, mtnotes = NULL)
         if(is.null(details))
             details <- CRAN_check_details()
         details <- details[!is.na(match(details$Package, package)), ]
+        ## Remove all ok stubs.
+        details <- details[details$Check != "*", ]
         ## Remove trailing white space from outputs ... remove eventually
         ## when this is done on CRAN.
         details$Output <- sub("[[:space:]]+$", "", details$Output)
@@ -192,7 +194,7 @@ function(cran, path)
     readRDS(con)
 }
 
-CRAN_check_results <- 
+CRAN_check_results <-
 function(flavors = NULL)
 {
     db <- read_CRAN_object(CRAN_baseurl_for_web_area(),
@@ -227,7 +229,7 @@ function()
                      "web/packages/packages.rds")
 
 CRAN_aliases_db <-
-function()    
+function()
     read_CRAN_object(CRAN_baseurl_for_src_area(),
                      "src/contrib/Meta/aliases.rds")
 
@@ -242,7 +244,7 @@ function()
                      "src/contrib/Meta/current.rds")
 
 CRAN_rdxrefs_db <-
-function()    
+function()
     read_CRAN_object(CRAN_baseurl_for_src_area(),
                      "src/contrib/Meta/rdxrefs.rds")
 
@@ -259,7 +261,7 @@ function(mirrors = NULL, verbose = FALSE)
         }
         y
     }
-    
+
     read_package_db <- function(baseurl) {
         path <- sprintf("%ssrc/contrib/PACKAGES.gz", baseurl)
         db <- retry_upon_error({
@@ -319,7 +321,7 @@ function(mirrors = NULL, verbose = FALSE)
     path_ts1 <- "TIME"
     path_ts2 <- "bin/windows/contrib/r-release/TIME_r-release"
     path_ts3 <- "bin/windows/contrib/r-old-release/TIME_r-old-release"
-    
+
     master_packages <- read_package_db(master)
     master_ts1 <- read_timestamp(master, path_ts1)
     master_ts2 <- read_timestamp(master, path_ts2)
@@ -356,7 +358,7 @@ CRAN_Rd_xref_available_target_ids <-
 function()
 {
     targets <- lapply(CRAN_aliases_db(), .Rd_available_xref_targets)
-    .Rd_object_id(rep.int(names(targets), sapply(targets, length)),
+    .Rd_object_id(rep.int(names(targets), lengths(targets)),
                   unlist(targets, use.names = FALSE))
 }
 
@@ -403,7 +405,7 @@ function()
         db[!is.na(match(db[, "T_Package"], archived)), , drop = FALSE]
 
     y
-}    
+}
 
 .Rd_available_xref_targets <-
 function(aliases)

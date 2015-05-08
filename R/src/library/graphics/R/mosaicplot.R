@@ -1,7 +1,7 @@
 #  File src/library/graphics/R/mosaicplot.R
 #  Part of the R package, http://www.R-project.org
 #
-#  Copyright (C) 1995-2014 The R Core Team
+#  Copyright (C) 1995-2015 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -180,14 +180,9 @@ function(x, main = deparse(substitute(x)), sub = NULL, xlab = NULL,
     dimd <- length(dx <- dim(x))
     if(dimd == 0L || any(dx == 0L))
         stop("'x' argument must not have 0 dimensionality")
-    if(!missing(...))
-        warning(sprintf(ngettext(length(list(...)),
-                                 "extra argument %s will be disregarded",
-                                 "extra arguments %s will be disregarded", domain = "R-graphics"),
-                         paste(sQuote(names(list(...))), collapse = ", ")),
-                domain = NA)
+    chkDots(...)
     ##-- Set up 'Ind' matrix : to contain indices and data
-    Ind <- 1L:dx[1L]
+    Ind <- seq_len(dx[1L])
     if(dimd > 1L) {
         Ind <- rep.int(Ind, prod(dx[2:dimd]))
         for (i in 2:dimd) {
@@ -343,7 +338,7 @@ function(x, main = deparse(substitute(x)), sub = NULL, xlab = NULL,
         y.t <- 1000 * rev(seq.int(from = 0.95, by = - bh, length.out = 2 * len))
         y.b <- y.t - 1000 * 0.8 * bh
         ltype <- c(rep.int(2, len), rep.int(1, len))
-        for(i in 1 : (2 * len)) {
+        for(i in seq_len(2 * len)) {
             polygon(c(x.l, x.r, x.r, x.l),
                     c(y.b[i], y.b[i], y.t[i], y.t[i]),
                     col = color[i], lty = ltype[i], border = border)

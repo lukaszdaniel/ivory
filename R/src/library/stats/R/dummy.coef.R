@@ -2,7 +2,7 @@
 #  Part of the R package, http://www.R-project.org
 #
 #  Copyright (C) 1998 B. D. Ripley
-#  Copyright (C) 1998-2013 The R Core Team
+#  Copyright (C) 1998-2015 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ dummy.coef.lm <- function(object, use.na=FALSE, ...)
     Terms <- delete.response(Terms)
     vars <- all.vars(Terms) # e.g. drops I(.), ...
     nxl <- setNames(rep.int(1, length(vars)), vars)
-    tmp <- vapply(xl, length, 1L)
+    tmp <- lengths(xl)
     nxl[names(tmp)] <- tmp
     lterms <- apply(facs, 2L, function(x) prod(nxl[x > 0]))
     nl <- sum(lterms)
@@ -49,12 +49,12 @@ dummy.coef.lm <- function(object, use.na=FALSE, ...)
 	if(length(ifac) == 0L) {        # quantitative factor
 	    rnn[pos+1] <- j
 	} else if(length(ifac) == 1L) {	# main effect
-	    dummy[ pos+1L:lterms[j], ifac ] <- xl[[ifac]]
+	    dummy[ pos+seq_len(lterms[j]), ifac ] <- xl[[ifac]]
 	    rnn[ pos+1L:lterms[j] ] <- as.character(xl[[ifac]])
 	} else {			# interaction
 	    tmp <- expand.grid(xl[ifac])
-	    dummy[ pos+1L:lterms[j], ifac ] <- tmp
-	    rnn[ pos+1L:lterms[j] ] <-
+	    dummy[ pos+seq_len(lterms[j]), ifac ] <- tmp
+	    rnn[ pos+seq_len(lterms[j]) ] <-
 		apply(as.matrix(tmp), 1L, function(x) paste(x, collapse=":"))
 	}
 	pos <- pos + lterms[j]
@@ -99,7 +99,7 @@ dummy.coef.aovlist <- function(object, use.na = FALSE, ...)
 	return(as.list(coef(object)))
     }
     nxl <- setNames(rep.int(1, length(vars)), vars)
-    tmp <- unlist(lapply(xl, length))
+    tmp <- lengths(xl)
     nxl[names(tmp)] <- tmp
     lterms <- apply(facs, 2L, function(x) prod(nxl[x > 0]))
     nl <- sum(lterms)
@@ -117,12 +117,12 @@ dummy.coef.aovlist <- function(object, use.na = FALSE, ...)
 	if(length(ifac) == 0L) {        # quantitative factor
 	    rnn[pos + 1] <- j
 	} else if(length(ifac) == 1L) {	# main effect
-	    dummy[ pos+1L:lterms[j], ifac ] <- xl[[ifac]]
+	    dummy[ pos+seq_len(lterms[j]), ifac ] <- xl[[ifac]]
 	    rnn[ pos+1L:lterms[j] ] <- as.character(xl[[ifac]])
 	} else {			# interaction
 	    tmp <- expand.grid(xl[ifac])
-	    dummy[ pos+1L:lterms[j], ifac ] <- tmp
-	    rnn[ pos+1L:lterms[j] ] <-
+	    dummy[ pos+seq_len(lterms[j]), ifac ] <- tmp
+	    rnn[ pos+seq_len(lterms[j]) ] <-
 		apply(as.matrix(tmp), 1L, function(x) paste(x, collapse=":"))
 	}
 	pos <- pos + lterms[j]
@@ -162,7 +162,7 @@ print.dummy_coef <- function(x, ..., title)
 {
     terms <- names(x)
     n <- length(x)
-    nm <- max(vapply(x, length, 1L))
+    nm <- max(lengths(x))
     ans <- matrix("", 2L*n, nm)
     rn <- rep.int("", 2L*n)
     line <- 0
@@ -171,12 +171,12 @@ print.dummy_coef <- function(x, ..., title)
 	n1 <- length(this)
 	if(n1 > 1) {
 	    line <- line + 2
-	    ans[line-1, 1L:n1] <- names(this)
-	    ans[line, 1L:n1] <- format(this, ...)
+	    ans[line-1, seq_len(n1)] <- names(this)
+	    ans[line, seq_len(n1)] <- format(this, ...)
 	    rn[line-1] <- paste0(terms[j], ":   ")
 	} else {
 	    line <- line + 1
-	    ans[line, 1L:n1] <- format(this, ...)
+	    ans[line, seq_len(n1)] <- format(this, ...)
 	    rn[line] <- paste0(terms[j], ":   ")
 	}
     }

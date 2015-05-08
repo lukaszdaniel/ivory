@@ -1,7 +1,7 @@
 #  File src/library/base/R/seq.R
 #  Part of the R package, http://www.R-project.org
 #
-#  Copyright (C) 1995-2014 The R Core Team
+#  Copyright (C) 1995-2015 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -43,12 +43,7 @@ seq.default <-
 	length.out <- ceiling(length.out)
 	#length.out <- as.integer(length.out) #IVORY: maybe we should have this line in order to have: seq_len(12.3) == seq(length.out=12.3)
     }
-    if(!missing(...))
-        warning(sprintf(ngettext(length(list(...)),
-                                 "extra argument %s will be disregarded",
-                                 "extra arguments %s will be disregarded", domain = "R-base"),
-			 paste(sQuote(names(list(...))), collapse = ", ")),
-		domain = NA)
+    chkDots(...)
     if (!missing(from) && length(from) != 1L) stop(gettextf("'%s' argument must be of length 1", "from"))
     if (!missing(to) && length(to) != 1L) stop(gettextf("'%s' argument must be of length 1", "to"))
     if (!missing(from) && !is.finite(from))

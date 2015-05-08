@@ -209,7 +209,7 @@ get_exclude_patterns <- function()
             resultLog(Log, gettext("ERROR", domain = "R-tools"))
             messageLog(Log, gettext("running '.check_package_description()' failed", domain = "R-tools"))
         } else {
-            if (any(sapply(res, length))) {
+            if (any(lengths(res))) {
                 resultLog(Log, gettext("ERROR", domain = "R-tools"))
                 print(res) # FIXME print to Log?
                 do_exit(1L)
@@ -921,7 +921,7 @@ get_exclude_patterns <- function()
 
         ## Fix up man, R, demo inst/doc directories
         res <- .check_package_subdirs(pkgname, TRUE)
-        if (any(sapply(res, length))) {
+        if (any(lengths(res))) {
             messageLog(Log, gettext("excluding invalid files", domain = "R-tools"))
             print(res) # FIXME print to Log?
         }

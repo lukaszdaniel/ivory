@@ -27,13 +27,14 @@ structure(c(gettext("R or S files (*.R,*.q,*.ssc,*.S)", domain = "R-utils"),
             gettext("Text files (*.txt)", domain = "R-utils"),
             gettext("R images (*.RData,*.rda)", domain = "R-utils"),
             gettext("Zip files (*.zip)", domain = "R-utils"),
+            gettext("Package tarballs (*.tar.gz)", domain = "R-utils"),
             gettext("All files (*.*)", domain = "R-utils"),
 
             "*.R;*.q;*.ssc;*.S", "*.emf", "*.ps", "*.pdf", "*.png", "*.bmp",
-            "*.jpeg;*.jpg", "*.txt", "*.RData;*.rda", "*.zip", "*.*"),
-       .Dim = c(11L, 2L),
+            "*.jpeg;*.jpg", "*.txt", "*.RData;*.rda", "*.zip", "*.tar.gz", "*.*"),
+       .Dim = c(12L, 2L),
        .Dimnames = list(c("R", "emf", "ps","pdf", "png",
-                          "bmp", "jpeg", "txt", "RData", "zip", "All"),
+                          "bmp", "jpeg", "txt", "RData", "zip", "tarball", "All"),
                         NULL))
 
 choose.files <- function(default = '', caption = gettext("Select files", domain = "R-utils"), multi = TRUE,

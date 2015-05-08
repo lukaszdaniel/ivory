@@ -1,7 +1,7 @@
 #  File src/library/stats/R/lm.R
 #  Part of the R package, http://www.R-project.org
 #
-#  Copyright (C) 1995-2014 The R Core Team
+#  Copyright (C) 1995-2015 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -106,14 +106,7 @@ lm.fit <- function (x, y, offset = NULL, method = "qr", tol = 1e-07,
 	stop("incompatible dimensions")
     if(method != "qr")
 	warning(gettextf("method = '%s' is not supported. Using 'qr'", method), domain = "R-stats")
-    dots <- list(...)
-	if(length(dots) > 0L) {
-     warning(sprintf(ngettext(length(dots),
-		     "extra argument %s is disregarded",
-		     "extra arguments %s are disregarded", domain = "R-stats"),
-		     paste(sQuote(names(dots)), sep=", ")),
-		     domain = NA)
-}
+    chkDots(...)
     z <- .Call(C_Cdqrls, x, y, tol, FALSE)
     if(!singular.ok && z$rank < p) stop("singular fit encountered")
     coef <- z$coefficients
@@ -165,14 +158,7 @@ lm.wfit <- function (x, y, w, offset = NULL, method = "qr", tol = 1e-7,
 	stop("missing or negative weights not allowed")
     if(method != "qr")
 	warning(gettextf("method = '%s' is not supported. Using 'qr'", method), domain = "R-stats")
-    dots <- list(...)
-if(length(dots) >= 1L) {
-     warning(sprintf(ngettext(as.integer(length(dots)),
-		     "extra argument %s is disregarded",
-		     "extra arguments %s are disregarded", domain = "R-stats"),
-		     paste(sQuote(names(dots)), sep=", ")),
-		     domain = NA)
-}
+    chkDots(...)
     x.asgn <- attr(x, "assign")# save
     zero.weights <- any(w == 0)
     if (zero.weights) {
@@ -576,7 +562,7 @@ anova.lm <- function(object, ...)
         nmeffects <- c(gettext("(Intercept)", domain = NA), attr(object$terms, "term.labels"))
         tlabels <- nmeffects[1 + unique(asgn)]
         ss <- c(unlist(lapply(split(comp^2,asgn), sum)), ssr)
-        df <- c(unlist(lapply(split(asgn,  asgn), length)), dfr)
+        df <- c(lengths(split(asgn,  asgn)), dfr)
     } else {
         ss <- ssr
         df <- dfr

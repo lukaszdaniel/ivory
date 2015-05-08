@@ -14,8 +14,8 @@
 #  A copy of the GNU General Public License is available at
 #  http://www.r-project.org/Licenses/
 
-## Copyright (C) 1997-1999  Adrian Trapletti
-## Cppyright (C) 2003-2013  R Core Team
+## Copyright     1997-1999  Adrian Trapletti
+## Cppyright (C) 2003-2015  R Core Team
 ## This version distributed under GPL (version 2 or later)
 
 diffinv <- function (x, ...) { UseMethod("diffinv") }
@@ -73,17 +73,9 @@ diffinv.ts <- function (x, lag = 1, differences = 1, xi, ...)
     ts(y, frequency = frequency(x), end = end(x))
 }
 
-toeplitz <- function (x, ...)
+toeplitz <- function (x)
 {
     if(!is.vector(x)) stop(gettextf("'%s' argument is not a vector", "x"))
-    if(!missing(...)) {
-        na <- length(list(...))
-        warning(sprintf(ngettext(na,
-                                 "extra argument %s is disregarded",
-                                 "extra arguments %s are be disregarded", domain = "R-stats"),
-                        paste(sQuote(names(list(...))), collapse = ", ")),
-		domain = NA)
-    }
     n <- length(x)
     A <- matrix(raw(), n, n)
     matrix(x[abs(col(A) - row(A)) + 1L], n, n)

@@ -1580,7 +1580,7 @@ static SEXP getFont(const char *family, const char *fontdbname) {
     int i, nfonts;
     SEXP result = R_NilValue;
     int found = 0;
-    SEXP fontdb = getFontDB(fontdbname);
+    SEXP fontdb = PROTECT(getFontDB(fontdbname));
     SEXP fontnames;
     PROTECT(fontnames = getAttrib(fontdb, R_NamesSymbol));
     nfonts = LENGTH(fontdb);
@@ -1594,7 +1594,7 @@ static SEXP getFont(const char *family, const char *fontdbname) {
     if (!found)
 	warning(_("font family '%s' not found in PostScript font database"),
 		family);
-    UNPROTECT(1);
+    UNPROTECT(2);
     return result;
 }
 
@@ -1613,7 +1613,7 @@ fontMetricsFileName(const char *family, int faceIndex,
     int i, nfonts;
     const char *result = NULL;
     int found = 0;
-    SEXP fontdb = getFontDB(fontdbname);
+    SEXP fontdb = PROTECT(getFontDB(fontdbname));
     SEXP fontnames;
     PROTECT(fontnames = getAttrib(fontdb, R_NamesSymbol));
     nfonts = LENGTH(fontdb);
@@ -1629,7 +1629,7 @@ fontMetricsFileName(const char *family, int faceIndex,
     if (!found)
 	warning(_("font family '%s' not found in PostScript font database"),
 		family);
-    UNPROTECT(1);
+    UNPROTECT(2);
     return result;
 }
 
@@ -1687,7 +1687,7 @@ static const char *getFontEncoding(const char *family, const char *fontdbname)
     int i, nfonts;
     const char *result = NULL;
     int found = 0;
-    SEXP fontdb = getFontDB(fontdbname);
+    SEXP fontdb = PROTECT(getFontDB(fontdbname));
     PROTECT(fontnames = getAttrib(fontdb, R_NamesSymbol));
     nfonts = LENGTH(fontdb);
     for (i=0; i<nfonts && !found; i++) {
@@ -1701,7 +1701,7 @@ static const char *getFontEncoding(const char *family, const char *fontdbname)
     if (!found)
 	warning(_("font encoding for family '%s' not found in font database"),
 		family);
-    UNPROTECT(1);
+    UNPROTECT(2);
     return result;
 }
 
@@ -1714,7 +1714,7 @@ static const char *getFontName(const char *family, const char *fontdbname)
     int i, nfonts;
     const char *result = NULL;
     int found = 0;
-    SEXP fontdb = getFontDB(fontdbname);
+    SEXP fontdb = PROTECT(getFontDB(fontdbname));
     PROTECT(fontnames = getAttrib(fontdb, R_NamesSymbol));
     nfonts = LENGTH(fontdb);
     for (i=0; i<nfonts && !found; i++) {
@@ -1728,7 +1728,7 @@ static const char *getFontName(const char *family, const char *fontdbname)
     if (!found)
 	warning(_("font CMap for family '%s' not found in font database"),
 		family);
-    UNPROTECT(1);
+    UNPROTECT(2);
     return result;
 }
 
@@ -1741,7 +1741,7 @@ static const char *getFontCMap(const char *family, const char *fontdbname)
     int i, nfonts;
     const char *result = NULL;
     int found = 0;
-    SEXP fontdb = getFontDB(fontdbname);
+    SEXP fontdb = PROTECT(getFontDB(fontdbname));
     PROTECT(fontnames = getAttrib(fontdb, R_NamesSymbol));
     nfonts = LENGTH(fontdb);
     for (i=0; i<nfonts && !found; i++) {
@@ -1755,7 +1755,7 @@ static const char *getFontCMap(const char *family, const char *fontdbname)
     if (!found)
 	warning(_("font CMap for family '%s' not found in font database"),
 		family);
-    UNPROTECT(1);
+    UNPROTECT(2);
     return result;
 }
 
@@ -1769,7 +1769,7 @@ getCIDFontEncoding(const char *family, const char *fontdbname)
     int i, nfonts;
     const char *result = NULL;
     int found = 0;
-    SEXP fontdb = getFontDB(fontdbname);
+    SEXP fontdb = PROTECT(getFontDB(fontdbname));
     PROTECT(fontnames = getAttrib(fontdb, R_NamesSymbol));
     nfonts = LENGTH(fontdb);
     for (i=0; i<nfonts && !found; i++) {
@@ -1783,7 +1783,7 @@ getCIDFontEncoding(const char *family, const char *fontdbname)
     if (!found)
 	warning(_("font encoding for family '%s' not found in font database"),
 		family);
-    UNPROTECT(1);
+    UNPROTECT(2);
     return result;
 }
 
@@ -1796,7 +1796,7 @@ static const char *getCIDFontPDFResource(const char *family)
     int i, nfonts;
     const char *result = NULL;
     int found = 0;
-    SEXP fontdb = getFontDB(PDFFonts);
+    SEXP fontdb = PROTECT(getFontDB(PDFFonts));
     PROTECT(fontnames = getAttrib(fontdb, R_NamesSymbol));
     nfonts = LENGTH(fontdb);
     for (i=0; i<nfonts && !found; i++) {
@@ -1810,7 +1810,7 @@ static const char *getCIDFontPDFResource(const char *family)
     if (!found)
 	warning(_("font encoding for family '%s' not found in font database"),
 		family);
-    UNPROTECT(1);
+    UNPROTECT(2);
     return result;
 }
 

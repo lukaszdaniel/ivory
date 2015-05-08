@@ -793,7 +793,7 @@ function(pkgInfo, quietly = FALSE, lib.loc = NULL, useImports = FALSE)
         current <- .findVersion(pkg, lib.loc)
         if(is.null(current))
             stop(gettextf("package %s required by package %s could not be found", sQuote(pkg), sQuote(pkgname)), call. = FALSE, domain = "R-base")
-        have_vers <- vapply(depends, length, 1L) > 1L
+        have_vers <- lengths(depends) > 1L
         for(dep in depends[have_vers]) {
             target <- as.numeric_version(dep$version)
             sufficient <- do.call(dep$op, list(current, target))
