@@ -738,10 +738,6 @@ predict.lm <-
 	if (hasintercept) {
 	    #asgn$"(Intercept)" <- NULL
 	    asgn[[which(names(asgn) == gettext("(Intercept)", domain = NA))]] <- NULL
-	    if(!mmDone) {
-                mm <- model.matrix(object)
-                mmDone <- TRUE
-            }
 	    avx <- colMeans(mm)
 	    termsconst <- sum(avx[piv] * beta[piv])
 	}

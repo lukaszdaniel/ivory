@@ -29,7 +29,7 @@
       \code{grep()} and friends.
 
       \item Experimental new functionality for S3 method checking, notably
-      \code{isS3method()}.  Also, the \R \dQuote{language element} names
+      \code{isS3method()}.  Also, the \R \sQuote{language element} names
       are exported as \code{tools::langElts}.
 
       \item \code{str(x)} now displays \code{"Time-Series"} also for
@@ -39,10 +39,13 @@
       now accepts \file{*.tar.gz} files as well as \file{*.zip} files
       (but defaults to the latter).
 
-      \item new programmeR's utility \code{chkDots}.
-      
+      \item New programmeR's utility function \code{chkDots()}.
+
       \item \code{D()} now signals an error when given invalid input,
       rather than silently returning \code{NA}.  (Request of John Nash.)
+
+      \item \code{formula} objects are slightly more \dQuote{first class}:
+      e.g., \code{formula()} or \code{new("formula", y ~ x)} are now valid.
     }
   }
 
@@ -71,6 +74,9 @@
       \item \code{.colSums()} etc (with an initial dot) first argument
       name \code{x} matches \code{colSums()} such that error messages
       are correct.
+
+      \item A \code{coef.maov()} method has been added to allow
+      \code{vcov()} to work with multivariate results. (\PR{16380})
     }
   }
 }
@@ -97,6 +103,9 @@
       \item \code{lengths(x)} now also works (trivially) for atomic
       \code{x} and hence can be used more generally as an efficient
       replacement of \code{sapply(x, length)} and similar.
+
+      \item The included version of PCRE has been updated to 8.37, a
+      bug-fix release.
     }
   }
 
@@ -148,6 +157,9 @@
 
       \item The low-level functions \code{.rowSums()} etc. did not
       check the length of their argument, so could segfault. (\PR{16367})
+
+      \item Under some circumstances using the internal PCRE would cause
+      external libs such as \code{-llzma} to omitted from the main link.
     }
   }
 }
