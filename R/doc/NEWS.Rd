@@ -45,7 +45,12 @@
       rather than silently returning \code{NA}.  (Request of John Nash.)
 
       \item \code{formula} objects are slightly more \dQuote{first class}:
-      e.g., \code{formula()} or \code{new("formula", y ~ x)} are now valid.
+      e.g., \code{formula()} or \code{new("formula", y ~ x)} are now
+      valid.  Similarly, for \code{"table"}, \code{"ordered"} and
+      \code{"summary.table"}.  Packages defining S4 classes with the above
+      S3/S4 classes as slots should be reinstalled.
+      % notably if their classes are reused in other
+      % packages. e.g. re-install arules for arulesSequence, flexmix for betareg
     }
   }
 
@@ -106,6 +111,9 @@
 
       \item The included version of PCRE has been updated to 8.37, a
       bug-fix release.
+
+      \item \code{diag()} no longer duplicates a matrix when extracting
+      its diagonal.
     }
   }
 
@@ -158,8 +166,19 @@
       \item The low-level functions \code{.rowSums()} etc. did not
       check the length of their argument, so could segfault. (\PR{16367})
 
+      \item The \code{quietly} argument of \code{library()} is correctly
+      propagated from \code{.getRequiredPackages2()} now.
+
       \item Under some circumstances using the internal PCRE would cause
       external libs such as \code{-llzma} to omitted from the main link.
+
+      \item The .Primitive default methods of the logic operators, i.e.,
+      \code{!}, \code{&} and \code{|}, now give correct error messages
+      when appropriate, e.g., for \code{`&`(TRUE)} or \code{`!`()}.
+      (\PR{16385})
+
+      \item \code{cummax(x)} now correctly propagates \code{NA}s also
+      when \code{x} is of type \code{integer} and begins with an \code{NA}.
     }
   }
 }
