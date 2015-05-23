@@ -657,10 +657,11 @@ static void PrintExpression(SEXP s)
     SEXP u;
     int i, n;
 
-    u = deparse1w(s, 0, R_print.useSource | DEFAULTDEPARSE);
+    u = PROTECT(deparse1w(s, 0, R_print.useSource | DEFAULTDEPARSE));
     n = LENGTH(u);
     for (i = 0; i < n; i++)
 	Rprintf("%s\n", CHAR(STRING_ELT(u, i))); /*translated */
+    UNPROTECT(1); /* u */
 }
 
 static void PrintSpecial(SEXP s)
@@ -906,10 +907,9 @@ static void printAttributes(SEXP s, SEXP env, Rboolean useSlots)
 		    SEXP methodsNS = R_FindNamespace(mkString("methods"));
 		    if(methodsNS == R_UnboundValue)
 			error(_("missing methods namespace: this should not happen"));
-		    PROTECT(showS);
 		    PROTECT(methodsNS);
 		    showS = findVarInFrame3(methodsNS, install("show"), TRUE);
-		    UNPROTECT(2);
+		    UNPROTECT(1);
 		    if(showS == R_UnboundValue)
 			error(_("missing 'show()' in methods namespace: this should not happen"));
 		}

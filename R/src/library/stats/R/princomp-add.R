@@ -57,7 +57,7 @@ print.summary.princomp <-
         cat("\n", gettext("Loadings:", domain = "R-stats"), "\n", sep = "")
         cx <- format(round(x$loadings, digits = digits))
         cx[abs(x$loadings) < cutoff] <-
-            paste(rep(" ", nchar(cx[1,1], type="w")), collapse="")
+            strrep(" ", nchar(cx[1,1], type="w"))
         print(cx, quote = FALSE, ...)
     }
     invisible(x)
