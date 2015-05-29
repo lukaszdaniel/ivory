@@ -117,6 +117,14 @@
 
       \item \code{diag()} no longer duplicates a matrix when extracting
       its diagonal.
+
+      \item \code{news()} now displays \R and package news files within
+      the HTML help system if it is available.  If no news file is found,
+      a visible \code{NULL} is returned to the console.
+
+      \item \code{as.character.srcref()} gains an argument to allow
+      characters corresponding to a range of source references to be
+      extracted.
     }
   }
 
@@ -169,11 +177,12 @@
       \item The low-level functions \code{.rowSums()} etc. did not
       check the length of their argument, so could segfault. (\PR{16367})
 
-      \item The \code{quietly} argument of \code{library()} is correctly
-      propagated from \code{.getRequiredPackages2()} now.
+      \item The \code{quietly} argument of \code{library()} is now
+      correctly propagated from \code{.getRequiredPackages2()}.
 
-      \item Under some circumstances using the internal PCRE would cause
-      external libs such as \code{-llzma} to omitted from the main link.
+      \item Under some circumstances using the internal PCRE when
+      building \R fron source would cause external libs such as
+      \code{-llzma} to be omitted from the main link.
 
       \item The .Primitive default methods of the logic operators, i.e.,
       \code{!}, \code{&} and \code{|}, now give correct error messages
@@ -182,6 +191,18 @@
 
       \item \code{cummax(x)} now correctly propagates \code{NA}s also
       when \code{x} is of type \code{integer} and begins with an \code{NA}.
+
+      \item \code{summaryRprof()} could fail when the profile contained
+      only two records.  (\PR{16395})
+
+      \item HTML vignettes opened using \code{vignette()} did not support
+      links into the rest of the HTML help system.  (Links worked properly
+      when the vignette was opened using \code{browseVignettes()} or from
+      within the help system.)
+
+      \item \code{arima(*, xreg = .)} (for \eqn{d \ge 1}{d >= 1})
+      computes estimated variances based on a the number of effective
+      observations as in \R version 3.0.1 and earlier.  (\PR{16278})
     }
   }
 }

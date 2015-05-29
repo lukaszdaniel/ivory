@@ -2833,8 +2833,8 @@ SEXP R_lsInternal3(SEXP env, Rboolean all, Rboolean sorted)
 	    FrameNames(FRAME(env), all, ans, &k);
     }
 
-    UNPROTECT(1);
     if(sorted) sortVector(ans, FALSE);
+    UNPROTECT(1);
     return ans;
 }
 

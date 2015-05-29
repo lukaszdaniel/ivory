@@ -821,7 +821,7 @@ setRlibs <-
                        "ChangeLog", "Changelog", "CHANGELOG", "CHANGES", "Changes",
                        "INSTALL", "README", "THANKS", "TODO", "ToDo",
                        "INSTALL.windows",
-                       "README.md",   # seems popular
+                       "README.md", "NEWS.md",
                        "configure", "configure.win", "cleanup", "cleanup.win",
                        "configure.ac", "configure.in",
                        "datafiles",
@@ -3397,7 +3397,8 @@ setRlibs <-
         dirs <- sub("^\\d*\\s*", "", res)
         res2 <- data.frame(size = sizes, dir = I(dirs))
         total <- res2[nrow(res2), 1L]
-        if(!is.na(total) && total > 1024*5) { # report at 5Mb
+        if(!is.na(total) && total > 1024*5 && # report at 5Mb
+           pkgname != "Matrix") { # <- large recommended package
             noteLog(Log)
             printLog(Log, gettextf("  installed size is %4.1fMb\n", total/1024, domain = "R-tools"))
             rest <- res2[-nrow(res2), ]

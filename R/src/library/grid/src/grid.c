@@ -716,9 +716,9 @@ SEXP L_unsetviewport(SEXP n)
      * in the "Writing R Extensions" manual, but the compiler didn't
      * like CAR(t) as an lvalue.
      */
+    PROTECT(gvp); PROTECT(newvp);
     {
 	SEXP fcall, false, t;
-	PROTECT(gvp); PROTECT(newvp);
 	PROTECT(false = allocVector(LGLSXP, 1));
 	LOGICAL(false)[0] = FALSE;
 	PROTECT(fcall = lang4(install("remove"), 
@@ -731,7 +731,7 @@ SEXP L_unsetviewport(SEXP n)
 	t = CDR(t);
 	SET_TAG(t, install("inherits")); 
 	eval(fcall, R_gridEvalEnv); 
-	UNPROTECT(4);
+	UNPROTECT(2); /* false, fcall */
     }
     /* Get the current device size 
      */
@@ -767,6 +767,7 @@ SEXP L_unsetviewport(SEXP n)
      * to part of the (global) grid state
      */
     SET_VECTOR_ELT(gvp, PVP_PARENT, R_NilValue);
+    UNPROTECT(2); /* gvp, newvp */
     return R_NilValue;
 }
 
@@ -3525,8 +3526,8 @@ SEXP L_locator() {
 	REAL(answer)[0] = NA_REAL;
 	REAL(answer)[1] = NA_REAL;	
     }
-    UNPROTECT(1);
     GEMode(0, dd);
+    UNPROTECT(1);
     return answer;
 }
 
