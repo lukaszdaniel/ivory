@@ -752,23 +752,41 @@ setRlibs <-
             printLog0(Log, .format_lines_with_indent(topfiles), "\n")
             wrapLog(gettext("These files are defunct. See manual 'Writing R Extensions'.\n", domain = "R-tools"))
         }
-        ## if README.md is present, it must be able to be processed
-        ## by CRAN to README.html, which is done by pandoc.
-        if (file.exists("README.md") && check_incoming) {
-            if (nzchar(Sys.which("pandoc"))) {
-                rfile <- file.path(tempdir(), "README.html")
-                out <- .pandoc_README_md_for_CRAN("README.md", rfile)
-                if(out$status) {
-                    if(!any) warningLog(Log)
+        if(check_incoming) {
+            ## CRAN must be able to convert
+            ##   inst/README.md or README.md
+            ##   inst/NEWS.md or NEWS.md
+            ## to HTML using pandoc: check that this works fine.
+            md_files <-
+                c(Filter(file.exists,
+                         c(file.path("inst", "README.md"),
+                           "README.md"))[1L],
+                  Filter(file.exists,
+                         c(file.path("inst", "NEWS.md"),
+                           "NEWS.md"))[1L])
+            md_files <- md_files[!is.na(md_files)]
+            if(length(md_files)) {
+                if(nzchar(Sys.which("pandoc"))) {
+                    for(ifile in md_files) {
+                        ofile <- tempfile("pandoc", fileext = ".html")
+                        out <- .pandoc_md_for_CRAN(ifile, ofile)
+                        if(out$status) {
+                            if(!any) warningLog(Log)
+                            any <- TRUE
+                            printLog(Log,
+                                     sprintf("Conversion of '%s' failed:\n",
+                                             ifile),
+                                     paste(out$stderr, collapse = "\n"),
+                                     "\n")
+                        }
+                        unlink(ofile)
+                    }
+                } else {
+                    if(!any) noteLog(Log)
                     any <- TRUE
-                    printLog(Log, "Conversion of README.md failed:\n",
-                             paste(out$stderr, collapse = "\n"), "\n")
+                    printLog(Log,
+                             gettext("Files 'README.md' or 'NEWS.md' cannot be checked without 'pandoc' being installed.\n", domain = "R-tools"))
                 }
-            } else {
-                if(!any) noteLog(Log)
-                any <- TRUE
-                printLog(Log,
-                         gettext("File README.md cannot be checked without 'pandoc' being installed.\n", domain = "R-tools"))
             }
         }
         topfiles <- Sys.glob(c("LICENCE", "LICENSE"))
@@ -3387,8 +3405,8 @@ setRlibs <-
     ## It also depends on the total being last.
     check_install_sizes <- function()
     {
-        ## if we used a log, the installation need not still exist.
         pd <- file.path(libdir, pkgname)
+        ## if we used a log, the installation would not need to remain.
         if (!dir.exists(pd)) return()
         checkingLog(Log, gettext("checking installed package size ...", domain = "R-tools"))
         owd <- setwd(pd)
@@ -3403,18 +3421,16 @@ setRlibs <-
             printLog(Log, gettextf("  installed size is %4.1fMb\n", total/1024, domain = "R-tools"))
             rest <- res2[-nrow(res2), ]
             rest[, 2L] <- sub("./", "", rest[, 2L])
-            # keep only top-level directories
+            ## keep only top-level directories
             rest <- rest[!grepl("/", rest[, 2L]), ]
             rest <- rest[rest[, 1L] > 1024, ] # > 1Mb
             if(nrow(rest)) {
                 o <- sort.list(rest[, 2L])
                 printLog(Log, gettextf("  sub-directories of 1Mb or more:\n", domain = "R-tools"))
                 size <- sprintf('%4.1fMb', rest[, 1L]/1024)
-                printLog(Log, paste("    ",
-                                    format(rest[o, 2L], justify = "left"),
-                                    "  ",
-                                    format(size[o], justify = "right"),
-                                    "\n", sep=""))
+                printLog0(Log,
+			  paste0("    ", format(rest[o, 2L], justify = "left"),
+				 "  ", format(size[o], justify = "right"), "\n"))
             }
         } else resultLog(Log, gettext("OK", domain = "R-tools"))
         setwd(owd)
@@ -4440,7 +4456,7 @@ setRlibs <-
                 if (this_multiarch && length(R_check_skip_arch))
                     inst_archs <- inst_archs[!(inst_archs %in% R_check_skip_arch)]
             }
-        }   ## end of if (!is_base_pkg)
+        } else check_incoming <- FALSE  ## end of if (!is_base_pkg)
 
         elibs <- if(is_base_pkg) character()
         else if(R_check_depends_only)

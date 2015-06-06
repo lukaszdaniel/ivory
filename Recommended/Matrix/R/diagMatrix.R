@@ -357,7 +357,7 @@ setAs("matrix", "diagonalMatrix",
 	      storage.mode(x) <- "double"
 	  } ## TODO: complex
 	  new(cl, Dim = c(n,n), diag = if(uni) "U" else "N",
-	      x = if(uni) x[FALSE] else x)
+	      x = if(uni) x[FALSE] else x, Dimnames = .M.DN(from))
       })
 
 ## ``generic'' coercion to  diagonalMatrix : build on  isDiagonal() and diag()
@@ -377,7 +377,7 @@ setAs("Matrix", "diagonalMatrix",
 	      storage.mode(x) <- "double"
 	  } ## TODO: complex
 	  new(cl, Dim = c(n,n), diag = if(uni) "U" else "N",
-	      x = if(uni) x[FALSE] else x)
+	      x = if(uni) x[FALSE] else x, Dimnames = from@Dimnames)
       })
 
 
@@ -570,9 +570,9 @@ diagdiagprod <- function(x, y) {
 		x <- as(x, "dMatrix")
 	    x@x <- as.numeric(nx)
 	}
-	return(x)
+	x
     } else ## x is unit diagonal
-	return(y)
+	y
 }
 
 ##' Boolean Algebra/Arithmetic Product of Diagonal Matrices
@@ -656,7 +656,7 @@ diagmatprod <- function(x, y) {
 }
 setMethod("%*%", signature(x = "diagonalMatrix", y = "matrix"), diagmatprod)
 
-formals(diagmatprod) <- alist(x=, y=NULL, boolArith = NA, ...=) ## FIXME boolArith
+##formals(diagmatprod) <- alist(x=, y=NULL, boolArith = NA, ...=) ## FIXME boolArith
 diagmatprod2 <- function(x, y=NULL, boolArith = NA, ...) {
     ## x is diagonalMatrix
     if(x@Dim[2] != nrow(y)) stop("non-matching dimensions")
@@ -739,8 +739,9 @@ setMethod("crossprod", signature(x = "matrix", y = "diagonalMatrix"),
 	      if(dx[1] != y@Dim[1]) stop("non-matching dimensions")
               bool <- isTRUE(boolArith)
               if(bool && !is.logical(y@x)) y <- as(y, "lMatrix")
-	      Matrix(if(bool) t(rep.int(y@x, dx[2]) & x)
-                         else t(rep.int(y@x, dx[2]) * x))
+	      Matrix(if(y@diag == "U") t(x) else
+		     if(bool) t(rep.int(y@x, dx[2]) & x)
+		     else     t(rep.int(y@x, dx[2]) * x))
 	  })
 
 
@@ -1328,7 +1329,7 @@ prDiag <-
 {
     cf <- array(".", dim = x@Dim, dimnames = x@Dimnames)
     cf[row(cf) == col(cf)] <-
-        sapply(diag(x), format, digits = digits, justify = justify)
+	vapply(diag(x), format, "", digits = digits, justify = justify)
     print(cf, quote = FALSE, right = right)
     invisible(x)
 }

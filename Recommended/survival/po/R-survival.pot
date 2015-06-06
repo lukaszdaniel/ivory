@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: survival 2.38-1\n"
-"POT-Creation-Date: 2015-04-20 18:54\n"
+"POT-Creation-Date: 2015-06-06 11:42\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -186,6 +186,7 @@ msgid "'%s' argument is of length 0"
 msgstr ""
 
 
+#: R/Surv.S: 0
 #: R/clogit.R: 0
 #: R/coxph.R: 0
 #: R/neardate.R: 0
@@ -196,6 +197,7 @@ msgstr ""
 #: R/survreg.S: 0
 #: R/tmerge.R: 0
 #: R/tmerge.R: 0
+#. R/Surv.S: gettextf("'%s' argument is required", "time")
 #. R/clogit.R: gettextf("'%s' argument is required", "formula")
 #. R/coxph.R: gettextf("'%s' argument is required", "formula")
 #. R/neardate.R: gettextf("'%s' argument is required", "id1")
@@ -217,6 +219,16 @@ msgstr ""
 #. R/tmerge.R: gettextf("'%s' argument must be a character string", "tstop")
 
 msgid "'%s' argument must be a character string"
+msgstr ""
+
+
+#: R/survfit.coxph.R: 0
+#: R/tmerge.R: 0
+#. R/survfit.coxph.R: gettextf("'%s' argument must be a data frame", "newdata")
+#. R/survfit.coxph.R: gettextf("'%s' argument must be a data frame", "newdata")
+#. R/tmerge.R: gettextf("'%s' argument must be a data frame", "data1")
+
+msgid "'%s' argument must be a data frame"
 msgstr ""
 
 
@@ -332,13 +344,6 @@ msgstr ""
 
 
 #: R/tmerge.R: 0
-#. R/tmerge.R: stop("'data1' argument must be a data frame")
-
-msgid "'data1' argument must be a data frame"
-msgstr ""
-
-
-#: R/tmerge.R: 0
 #. R/tmerge.R: stop("'defer' argument must be a non-negative number")
 
 msgid "'defer' argument must be a non-negative number"
@@ -414,14 +419,6 @@ msgstr ""
 #. R/survfit.coxph.R: stop("'newdata' argument cannot be used when a model has frailty terms")
 
 msgid "'newdata' argument cannot be used when a model has frailty terms"
-msgstr ""
-
-
-#: R/survfit.coxph.R: 0
-#. R/survfit.coxph.R: stop("'newdata' argument must be a data frame")
-#. R/survfit.coxph.R: stop("'newdata' argument must be a data frame")
-
-msgid "'newdata' argument must be a data frame"
 msgstr ""
 
 
@@ -540,13 +537,6 @@ msgstr ""
 #. R/Surv.S: gettextf("'time' argument (start time) must be numeric", "time")
 
 msgid "'time' argument (start time) must be numeric"
-msgstr ""
-
-
-#: R/Surv.S: 0
-#. R/Surv.S: stop("'time' argument is required")
-
-msgid "'time' argument is required"
 msgstr ""
 
 

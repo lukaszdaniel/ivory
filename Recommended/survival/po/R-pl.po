@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: survival 2.37-2\n"
-"POT-Creation-Date: 2015-04-20 18:54\n"
+"POT-Creation-Date: 2015-06-06 11:42\n"
 "PO-Revision-Date: 2015-04-20 18:55+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -140,6 +140,7 @@ msgstr "argument '%s' nie jest obiektem klasy %s"
 msgid "'%s' argument is of length 0"
 msgstr "argument '%s' jest długości 0"
 
+#. R/Surv.S: gettextf("'%s' argument is required", "time")
 #. R/clogit.R: gettextf("'%s' argument is required", "formula")
 #. R/coxph.R: gettextf("'%s' argument is required", "formula")
 #. R/neardate.R: gettextf("'%s' argument is required", "id1")
@@ -150,8 +151,8 @@ msgstr "argument '%s' jest długości 0"
 #. R/survreg.S: gettextf("'%s' argument is required", "formula")
 #. R/tmerge.R: gettextf("'%s' argument is required", "data1")
 #. R/tmerge.R: gettextf("'%s' argument is required", "id")
-#: R/clogit.R:0 R/coxph.R:0 R/neardate.R:0 R/survobrien.S:0 R/survreg.S:0
-#: R/tmerge.R:0
+#: R/Surv.S:0 R/clogit.R:0 R/coxph.R:0 R/neardate.R:0 R/survobrien.S:0
+#: R/survreg.S:0 R/tmerge.R:0
 msgid "'%s' argument is required"
 msgstr "argument '%s' jest wymagany"
 
@@ -161,6 +162,14 @@ msgstr "argument '%s' jest wymagany"
 #: R/tmerge.R:0
 msgid "'%s' argument must be a character string"
 msgstr "argument '%s' musi być łańcuchem tekstowym"
+
+#. R/survfit.coxph.R: gettextf("'%s' argument must be a data frame", "newdata")
+#. R/survfit.coxph.R: gettextf("'%s' argument must be a data frame", "newdata")
+#. R/tmerge.R: gettextf("'%s' argument must be a data frame", "data1")
+#: R/survfit.coxph.R:0 R/tmerge.R:0
+#, fuzzy
+msgid "'%s' argument must be a data frame"
+msgstr "argument 'data1' musi być ramką danych"
 
 #. R/survfitKM.S: gettextf("'%s' argument must be a factor", "x")
 #. R/survfitTurnbull.S: gettextf("'%s' argument must be a factor", "x")
@@ -241,11 +250,6 @@ msgstr "długości poziomów 'cohort.size' oraz 'stratum' nie zgadzają się"
 msgid "'data1' argument does not match its own tname attribute"
 msgstr "argument 'var' nie jest macierzą kwadratową"
 
-#. R/tmerge.R: stop("'data1' argument must be a data frame")
-#: R/tmerge.R:0
-msgid "'data1' argument must be a data frame"
-msgstr "argument 'data1' musi być ramką danych"
-
 #. R/tmerge.R: stop("'defer' argument must be a non-negative number")
 #: R/tmerge.R:0
 msgid "'defer' argument must be a non-negative number"
@@ -302,12 +306,6 @@ msgstr ""
 #: R/survfit.coxph.R:0
 #, fuzzy
 msgid "'newdata' argument cannot be used when a model has frailty terms"
-msgstr "argument 'newdata' musi być ramką danych"
-
-#. R/survfit.coxph.R: stop("'newdata' argument must be a data frame")
-#. R/survfit.coxph.R: stop("'newdata' argument must be a data frame")
-#: R/survfit.coxph.R:0
-msgid "'newdata' argument must be a data frame"
 msgstr "argument 'newdata' musi być ramką danych"
 
 #. R/survfit.coxph.R: stop("'newdata' argument must be present when 'individual=TRUE'")
@@ -395,11 +393,6 @@ msgstr "argumenty 'time' oraz 'time2' (czas startu i stopu) mają różną dług
 #: R/Surv.S:0
 msgid "'time' argument (start time) must be numeric"
 msgstr "argument 'time' (czas startu) musi być liczbą"
-
-#. R/Surv.S: stop("'time' argument is required")
-#: R/Surv.S:0
-msgid "'time' argument is required"
-msgstr "argument 'time' jest wymagany"
 
 #. R/Surv.S: gettextf("'time2' argument (stop time) must be numeric", "time2")
 #: R/Surv.S:0
@@ -2193,6 +2186,12 @@ msgid_plural "Rate table with dimensions: "
 msgstr[0] "Tabela szybkości o wymiarze:"
 msgstr[1] "Tabela szybkości o wymiarach:"
 msgstr[2] "Tabela szybkości o wymiarach:"
+
+#~ msgid "'newdata' argument must be a data frame"
+#~ msgstr "argument 'newdata' musi być ramką danych"
+
+#~ msgid "'time' argument is required"
+#~ msgstr "argument 'time' jest wymagany"
 
 #~ msgid "%s not matched"
 #~ msgstr "%s nie zostało dopasowane"

@@ -155,7 +155,7 @@ Cmp.Mat.atomic <- function(e1, e2) { ## result will inherit from "lMatrix"
                     cl1 <- getClassDef(cl <- class(e1 <- as(e1, "dtrMatrix")))
             }
             ## FIXME? using copyClass() to copy "relevant" slots
-            r <- new(class2(cl, "l"), x = r, Dim = d, Dimnames = dimnames(e1))
+            r <- new(class2(cl, "l"), x = r, Dim = d, Dimnames = e1@Dimnames)
             if(extends(cl1, "symmetricMatrix")) {
                 r@uplo <- e1@uplo
             } else if(isTri) {
@@ -170,7 +170,7 @@ Cmp.Mat.atomic <- function(e1, e2) { ## result will inherit from "lMatrix"
                 stop("internal bug in \"Compare\" method (Cmp.Mat.atomic); please report")
 	    rx <- rep_len(r0, prod(d))
 	    rx[indTri(d[1], upper = (e1@uplo == "U"), diag=TRUE)] <- r
-	    r <- new("lgeMatrix", x = rx, Dim = d, Dimnames = dimnames(e1))
+	    r <- new("lgeMatrix", x = rx, Dim = d, Dimnames = e1@Dimnames)
 	}
 
     }
@@ -198,7 +198,7 @@ Cmp.Mat.atomic <- function(e1, e2) { ## result will inherit from "lMatrix"
                 lClass <- class2(cl, "l") # is "lsparse*"
                 r <- new(lClass)
                 r@Dim <- d
-                r@Dimnames <- dimnames(e1)
+                r@Dimnames <- e1@Dimnames
                 if(Ar) {       # 'TRUE' instead of 'x': same sparsity:
 		    for(n in intersect(c("i","j","p","uplo","diag"), slots1))
 			slot(r, n) <- slot(e1, n)
@@ -236,7 +236,7 @@ Cmp.Mat.atomic <- function(e1, e2) { ## result will inherit from "lMatrix"
                           non0ind(e1, cl1, uniqT=FALSE, xtendSymm=FALSE),
                           di = d, orig1=FALSE, checkBounds=FALSE)
             rx[1L + encI] <- r
-            r <- new(lClass, x = rx, Dim = d, Dimnames = dimnames(e1))
+            r <- new(lClass, x = rx, Dim = d, Dimnames = e1@Dimnames)
         }
     }
     r
@@ -321,9 +321,9 @@ Ops.x.x <- function(e1, e2)
 	if(kr == "d" && !is.double(r)) ## as "igeMatrix" does not yet exist!
 	    r <- as.double(r)
 	if(geM)
-	    new(paste0(kr, "geMatrix"), x = r, Dim = d, Dimnames = dimnames(e1))
+	    new(paste0(kr, "geMatrix"), x = r, Dim = d, Dimnames = e1@Dimnames)
 	else
-	    new(paste0(kr, Mclass), x = r, Dim = d, Dimnames = dimnames(e1), uplo = e1@uplo)
+	    new(paste0(kr, Mclass), x = r, Dim = d, Dimnames = e1@Dimnames, uplo = e1@uplo)
     }
     else {
 	r <- if(!dens1 && !dens2)
@@ -658,7 +658,7 @@ Logic.Mat.atomic <- function(e1, e2) { ## result will typically be "like" e1:
                     cl1 <- getClassDef(cl <- class(e1 <- as(e1, "dtrMatrix")))
             }
             ## FIXME? using copyClass() to copy "relevant" slots
-            r <- new(class2(cl, "l"), x = r, Dim = d, Dimnames = dimnames(e1))
+            r <- new(class2(cl, "l"), x = r, Dim = d, Dimnames = e1@Dimnames)
             if(extends(cl1, "symmetricMatrix")) {
                 r@uplo <- e1@uplo
             } else if(isTri) {
@@ -673,7 +673,7 @@ Logic.Mat.atomic <- function(e1, e2) { ## result will typically be "like" e1:
                 stop("internal bug in \"Logic\" method (Logic.Mat.atomic); please report")
 	    rx <- rep_len(r0, prod(d))
 	    rx[indTri(d[1], upper = (e1@uplo == "U"), diag=TRUE)] <- r
-	    r <- new("lgeMatrix", x = rx, Dim = d, Dimnames = dimnames(e1))
+	    r <- new("lgeMatrix", x = rx, Dim = d, Dimnames = e1@Dimnames)
 	}
 
     }
@@ -701,7 +701,7 @@ Logic.Mat.atomic <- function(e1, e2) { ## result will typically be "like" e1:
                 lClass <- class2(cl, "l") # is "lsparse*"
                 r <- new(lClass)
                 r@Dim <- d
-                r@Dimnames <- dimnames(e1)
+                r@Dimnames <- e1@Dimnames
                 if(Ar) {       # 'TRUE' instead of 'x': same sparsity:
 		    for(n in intersect(c("i","j","p","uplo","diag"), slots1))
 			slot(r, n) <- slot(e1, n)
@@ -740,7 +740,7 @@ Logic.Mat.atomic <- function(e1, e2) { ## result will typically be "like" e1:
                           non0ind(e1, cl1, uniqT=FALSE, xtendSymm=FALSE),
                           di = d, orig1=FALSE, checkBounds=FALSE)
             rx[1L + encI] <- r
-            r <- new(lClass, x = rx, Dim = d, Dimnames = dimnames(e1))
+            r <- new(lClass, x = rx, Dim = d, Dimnames = e1@Dimnames)
         }
     }
     r

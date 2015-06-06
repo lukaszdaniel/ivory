@@ -7009,6 +7009,12 @@ function(x, ...)
               c(ngettext(length(y), "Found the following (possibly) invalid URL:", "Found the following (possibly) invalid URLs:", domain = "R-tools"),
                 paste(" ", gsub("\n", "\n    ", format(y))))
       },
+      if(length(y) && any(nzchar(y$CRAN))) {
+          c("\n  ", gettext("The canonical URL of the CRAN page for a package is   http://cran.r-project.org/package=pkgname", domain = "R-tools"))
+      },
+      if(length(y) && any(nzchar(y$Spaces))) {
+          c("\n  ", gettext("Spaces in an http[s] URL should probably be replaced by %20", domain = "R-tools"))
+      },
       if(length(y <- x$no_url_checks) && y) {
           c(gettext("\nChecking URLs requires 'libcurl' support in the R build", domain = "R-tools"))
       },

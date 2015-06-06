@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Matrix 1.2-0\n"
-"POT-Creation-Date: 2015-04-06 21:38\n"
+"Project-Id-Version: Matrix 1.2-1\n"
+"POT-Creation-Date: 2015-06-06 11:41\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -94,13 +94,6 @@ msgstr ""
 #. R/AllClass.R: gettext("'Dim' slot is not (n,n)", domain = "R-Matrix")
 
 msgid "'Dim' slot is not (n,n)"
-msgstr ""
-
-
-#: R/AllClass.R: 0
-#. R/AllClass.R: gettext("'Dimnames' slot must be list of length 2", domain = "R-Matrix")
-
-msgid "'Dimnames' slot must be list of length 2"
 msgstr ""
 
 
@@ -627,20 +620,6 @@ msgstr ""
 #. R/Ops.R: gettextf("Compare <Csparse> -- \"%s\" %s \"%s\" :\n", cD1@className, .Generic, cD2@className,     domain = "R-Matrix")
 
 msgid "Compare <Csparse> -- \"%s\" %s \"%s\" :"
-msgstr ""
-
-
-#: R/AllClass.R: 0
-#. R/AllClass.R: gettext("Dim slot must be of length 2", domain = "R-Matrix")
-
-msgid "Dim slot must be of length 2"
-msgstr ""
-
-
-#: R/AllClass.R: 0
-#. R/AllClass.R: gettext("Dim slot must contain non-negative values", domain = "R-Matrix")
-
-msgid "Dim slot must contain non-negative values"
 msgstr ""
 
 
@@ -1331,20 +1310,6 @@ msgstr ""
 #. R/Ops.R: stop("length of 2nd arg does not match dimension of first")
 
 msgid "length of 2nd arg does not match dimension of first"
-msgstr ""
-
-
-#: R/AllClass.R: 0
-#. R/AllClass.R: gettext("length(Dimnames[[1]])' must match Dim[1]", domain = "R-Matrix")
-
-msgid "length(Dimnames[[1]])' must match Dim[1]"
-msgstr ""
-
-
-#: R/AllClass.R: 0
-#. R/AllClass.R: gettext("length(Dimnames[[2]])' must match Dim[2]", domain = "R-Matrix")
-
-msgid "length(Dimnames[[2]])' must match Dim[2]"
 msgstr ""
 
 

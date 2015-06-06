@@ -1460,9 +1460,9 @@ function(packages = NULL, FUN, ...)
     out
 }
 
-### ** .pandoc_README_md_for_CRAN
+### ** .pandoc_md_for_CRAN
 
-.pandoc_README_md_for_CRAN <-
+.pandoc_md_for_CRAN <-
 function(ifile, ofile)
 {
     .system_with_capture("pandoc",

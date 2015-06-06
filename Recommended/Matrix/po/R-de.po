@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0 / matrix 1.1-2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-04-06 21:38\n"
+"POT-Creation-Date: 2015-06-06 11:41\n"
 "PO-Revision-Date: 2014-03-28 10:23+0100\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -79,12 +79,6 @@ msgstr ""
 #: R/AllClass.R:0
 msgid "'Dim' slot is not (n,n)"
 msgstr ""
-
-#. R/AllClass.R: gettext("'Dimnames' slot must be list of length 2", domain = "R-Matrix")
-#: R/AllClass.R:0
-#, fuzzy
-msgid "'Dimnames' slot must be list of length 2"
-msgstr "dim(.)-Wert muss numerisch sein und von die Länge 2 haben"
 
 #. R/AllClass.R: gettext("'EValues' is not of correct length", domain = "R-Matrix")
 #: R/AllClass.R:0
@@ -509,18 +503,6 @@ msgstr ""
 #: R/Ops.R:0
 msgid "Compare <Csparse> -- \"%s\" %s \"%s\" :"
 msgstr ""
-
-#. R/AllClass.R: gettext("Dim slot must be of length 2", domain = "R-Matrix")
-#: R/AllClass.R:0
-#, fuzzy
-msgid "Dim slot must be of length 2"
-msgstr "dim(.)-Wert muss numerisch sein und von die Länge 2 haben"
-
-#. R/AllClass.R: gettext("Dim slot must contain non-negative values", domain = "R-Matrix")
-#: R/AllClass.R:0
-#, fuzzy
-msgid "Dim slot must contain non-negative values"
-msgstr "Länge muss eine nicht negative Zahl sein"
 
 #. R/dgTMatrix.R: gettextf("Dimensions: %d x %d", di[1], di[2])
 #: R/dgTMatrix.R:0
@@ -1058,16 +1040,6 @@ msgstr "Länge des ersten arg passt nicht zur Dimension des zweiten"
 #: R/Ops.R:0
 msgid "length of 2nd arg does not match dimension of first"
 msgstr "Länge des zweiten Arguments passt nicht zur Dimension des ersten"
-
-#. R/AllClass.R: gettext("length(Dimnames[[1]])' must match Dim[1]", domain = "R-Matrix")
-#: R/AllClass.R:0
-msgid "length(Dimnames[[1]])' must match Dim[1]"
-msgstr ""
-
-#. R/AllClass.R: gettext("length(Dimnames[[2]])' must match Dim[2]", domain = "R-Matrix")
-#: R/AllClass.R:0
-msgid "length(Dimnames[[2]])' must match Dim[2]"
-msgstr ""
 
 #. R/sparseMatrix.R: warning("length(i) is not a multiple of length(x)")
 #: R/sparseMatrix.R:0
@@ -1773,6 +1745,18 @@ msgid_plural ""
 " %s"
 msgstr[0] "Argumente %s werden nicht berücksichtigt in %s"
 msgstr[1] "Argumente %s werden nicht berücksichtigt in %s"
+
+#, fuzzy
+#~ msgid "'Dimnames' slot must be list of length 2"
+#~ msgstr "dim(.)-Wert muss numerisch sein und von die Länge 2 haben"
+
+#, fuzzy
+#~ msgid "Dim slot must be of length 2"
+#~ msgstr "dim(.)-Wert muss numerisch sein und von die Länge 2 haben"
+
+#, fuzzy
+#~ msgid "Dim slot must contain non-negative values"
+#~ msgstr "Länge muss eine nicht negative Zahl sein"
 
 #~ msgid "not a skinny matrix"
 #~ msgstr "keine lange (\"skinny\") Matrix"

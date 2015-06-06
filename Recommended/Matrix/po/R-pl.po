@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Matrix 1.2-0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-04-06 21:38\n"
+"POT-Creation-Date: 2015-06-06 11:41\n"
 "PO-Revision-Date: 2015-04-20 17:49+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -76,11 +76,6 @@ msgstr "Faktoryzacja 'Buncha-Kaufmana':"
 #: R/AllClass.R:0
 msgid "'Dim' slot is not (n,n)"
 msgstr "Gniazdo 'Dim' nie jest (n,n)"
-
-#. R/AllClass.R: gettext("'Dimnames' slot must be list of length 2", domain = "R-Matrix")
-#: R/AllClass.R:0
-msgid "'Dimnames' slot must be list of length 2"
-msgstr "gniazdo 'Dimnames' musi być listą o długości 2"
 
 #. R/AllClass.R: gettext("'EValues' is not of correct length", domain = "R-Matrix")
 #: R/AllClass.R:0
@@ -499,16 +494,6 @@ msgstr "Kolumna"
 #: R/Ops.R:0
 msgid "Compare <Csparse> -- \"%s\" %s \"%s\" :"
 msgstr "Porównaj <Csparse> -- \"%s\" %s \"%s\" :"
-
-#. R/AllClass.R: gettext("Dim slot must be of length 2", domain = "R-Matrix")
-#: R/AllClass.R:0
-msgid "Dim slot must be of length 2"
-msgstr "gniazdo wymiaru muszą być długości 2"
-
-#. R/AllClass.R: gettext("Dim slot must contain non-negative values", domain = "R-Matrix")
-#: R/AllClass.R:0
-msgid "Dim slot must contain non-negative values"
-msgstr "gniazdo wymiaru musi posiadać nieujemne wartości"
 
 #. R/dgTMatrix.R: gettextf("Dimensions: %d x %d", di[1], di[2])
 #: R/dgTMatrix.R:0
@@ -1048,16 +1033,6 @@ msgstr "długość pierwszego argumentu nie zgadza się z wymiarem drugiego"
 #: R/Ops.R:0
 msgid "length of 2nd arg does not match dimension of first"
 msgstr "długość drugiego argumentu nie zgadza się z wymiarem pierwszego"
-
-#. R/AllClass.R: gettext("length(Dimnames[[1]])' must match Dim[1]", domain = "R-Matrix")
-#: R/AllClass.R:0
-msgid "length(Dimnames[[1]])' must match Dim[1]"
-msgstr "'length(Dimnames[[1]])' musi zgadzać się z Dim[1]"
-
-#. R/AllClass.R: gettext("length(Dimnames[[2]])' must match Dim[2]", domain = "R-Matrix")
-#: R/AllClass.R:0
-msgid "length(Dimnames[[2]])' must match Dim[2]"
-msgstr "'length(Dimnames[[2]])' musi zgadzać się z Dim[2]"
 
 #. R/sparseMatrix.R: warning("length(i) is not a multiple of length(x)")
 #: R/sparseMatrix.R:0
@@ -1786,6 +1761,21 @@ msgstr[1] ""
 msgstr[2] ""
 "argumenty %s zostały odrzucone w\n"
 " %s"
+
+#~ msgid "'Dimnames' slot must be list of length 2"
+#~ msgstr "gniazdo 'Dimnames' musi być listą o długości 2"
+
+#~ msgid "Dim slot must be of length 2"
+#~ msgstr "gniazdo wymiaru muszą być długości 2"
+
+#~ msgid "Dim slot must contain non-negative values"
+#~ msgstr "gniazdo wymiaru musi posiadać nieujemne wartości"
+
+#~ msgid "length(Dimnames[[1]])' must match Dim[1]"
+#~ msgstr "'length(Dimnames[[1]])' musi zgadzać się z Dim[1]"
+
+#~ msgid "length(Dimnames[[2]])' must match Dim[2]"
+#~ msgstr "'length(Dimnames[[2]])' musi zgadzać się z Dim[2]"
 
 #~ msgid "not a skinny matrix"
 #~ msgstr "to nie jest chuda macierz"

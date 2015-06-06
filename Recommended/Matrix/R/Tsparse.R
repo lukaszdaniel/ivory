@@ -188,7 +188,7 @@ intI <- function(i, n, dn, give.dn = TRUE)
 	   i0 = i0, anyDup = anyDup, dn = intIlist$dn),
       ## actually,  iDup  is rarely needed in calling code
       if(anyDup) list(iDup = iDup, i0i = i0i, i.x = i.x,
-		      jm = unlist(jm), i.xtra = rep.int(i.x, sapply(jm, length))))
+		      jm = unlist(jm), i.xtra = rep.int(i.x, lengths(jm))))
 } ## {.ind.prep}
 
 ##' <description>
@@ -320,7 +320,7 @@ replTmat <- function (x, i, j, ..., value)
                       is.logical(value) || is.logical(as.vector(value))
                   }))
     na <- nargs()
-    if(na == 3) { ## i = vector (but *not* 2-col) indexing"  M[i] <- v
+    if(na == 3) { ## i = vector indexing  M[i] <- v,  e.g.,  M[TRUE] <- v or M[] <- v !
 	Matrix.msg(gettext("diagnosing replTmat(x,i,j,v): nargs()= 3; ", domain = "R-Matrix"),
 		   if(iMi | jMi) gettextf("missing (i,j) = (%d,%d)", iMi,jMi, domain = "R-Matrix"))
 	if(iMi) stop("internal bug: missing 'i' in replTmat(): please report")
@@ -346,8 +346,12 @@ replTmat <- function (x, i, j, ..., value)
         n <- prod(di)
 	i <- if(is.logical(i)) { # full-size logical indexing
 	    if(n) {
-		if(length(i) < n) i <- rep_len(i, n)
-		(0:(n-1))[i] # -> 0-based index vector as well {maybe LARGE!}
+                if(isTRUE(i)) # shortcut
+                    0:(n-1)
+                else {
+                    if(length(i) < n) i <- rep_len(i, n)
+                    (0:(n-1))[i] # -> 0-based index vector as well {maybe LARGE!}
+                }
 	    } else integer(0)
 	} else {
 	    ## also works with *negative* indices etc:
@@ -411,7 +415,7 @@ replTmat <- function (x, i, j, ..., value)
 
 	## 1) Change the matching non-zero entries
 	if(has.x)
-	    x@x[mi[isE]] <- value[isE]
+	    x@x[mi[isE]] <- as(value[isE], class(x@x))
         else if(any0(value[isE])) { ## "n.TMatrix" : remove (i,j) where value is FALSE
             get0 <- !value[isE] ## x[i,j] is TRUE, should become FALSE
             i.rm <- - mi[isE][get0]
@@ -421,13 +425,18 @@ replTmat <- function (x, i, j, ..., value)
 	## 2) add the new non-zero entries
 	i <- i[!isE]
 	xv <- value[!isE]
-	if(has.x) {
-            x@x <- c(x@x, xv)
-	} else { # n.TMatrix : assign (i,j) only where value is TRUE:
-	    i <- i[xv]
+	## --- Be be efficient when  'value' is sparse :
+	if(length(notE <- which(isN0(xv)))) { # isN0(): non-0's; NAs counted too
+	    xv <- xv[notE]
+	    i <- i[notE]
+	    if(has.x) {
+		x@x <- c(x@x, as(xv, class(x@x)))
+	    } else { # n.TMatrix : assign (i,j) only where value is TRUE:
+		i <- i[xv]
+	    }
+	    x@i <- c(x@i, i %%  nr)
+	    x@j <- c(x@j, i %/% nr)
 	}
-	x@i <- c(x@i, i %%  nr)
-	x@j <- c(x@j, i %/% nr)
 	if(.hasSlot(x, "factors") && length(x@factors)) # drop cashed ones
 	    x@factors <- list()
 	return(x)
@@ -523,7 +532,7 @@ replTmat <- function (x, i, j, ..., value)
 
     ## TODO (efficiency): replace  'sel' by 'which(sel)'
     get.ind.sel <- function(ii,ij)
-	(match(x@i, ii, nomatch = 0) & match(x@j, ij, nomatch = 0))
+	(match(x@i, ii, nomatch = 0L) & match(x@j, ij, nomatch = 0L))
     ## sel[k] := TRUE iff k-th non-zero entry (typically x@x[k]) is to be replaced
     sel <- get.ind.sel(i1,i2)
 
@@ -624,8 +633,8 @@ replTmat <- function (x, i, j, ..., value)
 	}
 
 	## 1b) replace non-zeros with 0 --> drop entries
-	if(any(!vN0)) {
-	    ii <- which(sel)[!vN0]
+	if(!all(vN0)) { ##-> ii will not be empty
+	    ii <- which(sel)[which(!vN0)] # <- vN0 may be sparseVector
 	    if(has.x)
 		x@x <- x@x[-ii]
 	    x@i <- x@i[-ii]

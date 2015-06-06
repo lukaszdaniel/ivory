@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2015-04-17 r287) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2015-05-30 r299) -- "Internationalized Version of R"
 Copyright (C) 2013-2015 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2015-04-17 r68202) -- "Unsuffered Consequences"
+R Under development (unstable) (2015-05-30 r68441) -- "Unsuffered Consequences"
 Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -75,4 +75,4 @@ Type 'q()' to quit R.
 > 
 > proc.time()
    user  system elapsed 
-  0.433   0.044   0.464 
+  0.553   0.036   0.598 

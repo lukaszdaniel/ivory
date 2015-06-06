@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Matrix 1.1-1\n"
-"POT-Creation-Date: 2015-04-06 21:38\n"
+"POT-Creation-Date: 2015-06-06 11:41\n"
 "PO-Revision-Date: 2014-03-30 09:07+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: none\n"
@@ -74,12 +74,6 @@ msgstr ""
 #: R/AllClass.R:0
 msgid "'Dim' slot is not (n,n)"
 msgstr ""
-
-#. R/AllClass.R: gettext("'Dimnames' slot must be list of length 2", domain = "R-Matrix")
-#: R/AllClass.R:0
-#, fuzzy
-msgid "'Dimnames' slot must be list of length 2"
-msgstr "la valeur de dim(.) doit être numérique de longueur 2"
 
 #. R/AllClass.R: gettext("'EValues' is not of correct length", domain = "R-Matrix")
 #: R/AllClass.R:0
@@ -500,18 +494,6 @@ msgstr ""
 #: R/Ops.R:0
 msgid "Compare <Csparse> -- \"%s\" %s \"%s\" :"
 msgstr ""
-
-#. R/AllClass.R: gettext("Dim slot must be of length 2", domain = "R-Matrix")
-#: R/AllClass.R:0
-#, fuzzy
-msgid "Dim slot must be of length 2"
-msgstr "la valeur de dim(.) doit être numérique de longueur 2"
-
-#. R/AllClass.R: gettext("Dim slot must contain non-negative values", domain = "R-Matrix")
-#: R/AllClass.R:0
-#, fuzzy
-msgid "Dim slot must contain non-negative values"
-msgstr "la longueur doit être un nombre non négatif"
 
 #. R/dgTMatrix.R: gettextf("Dimensions: %d x %d", di[1], di[2])
 #: R/dgTMatrix.R:0
@@ -1065,16 +1047,6 @@ msgstr "la longueur du 1er arg ne correspond pas à la dimension du second"
 #: R/Ops.R:0
 msgid "length of 2nd arg does not match dimension of first"
 msgstr "la longueur du 2ème arg ne correspond pas à la dimension du premier"
-
-#. R/AllClass.R: gettext("length(Dimnames[[1]])' must match Dim[1]", domain = "R-Matrix")
-#: R/AllClass.R:0
-msgid "length(Dimnames[[1]])' must match Dim[1]"
-msgstr ""
-
-#. R/AllClass.R: gettext("length(Dimnames[[2]])' must match Dim[2]", domain = "R-Matrix")
-#: R/AllClass.R:0
-msgid "length(Dimnames[[2]])' must match Dim[2]"
-msgstr ""
 
 #. R/sparseMatrix.R: warning("length(i) is not a multiple of length(x)")
 #: R/sparseMatrix.R:0
@@ -1805,6 +1777,18 @@ msgstr[0] ""
 msgstr[1] ""
 "les arguments %s ne sont pas utilisés dans\n"
 " %s"
+
+#, fuzzy
+#~ msgid "'Dimnames' slot must be list of length 2"
+#~ msgstr "la valeur de dim(.) doit être numérique de longueur 2"
+
+#, fuzzy
+#~ msgid "Dim slot must be of length 2"
+#~ msgstr "la valeur de dim(.) doit être numérique de longueur 2"
+
+#, fuzzy
+#~ msgid "Dim slot must contain non-negative values"
+#~ msgstr "la longueur doit être un nombre non négatif"
 
 #~ msgid "not a skinny matrix"
 #~ msgstr "pas une matrice légère"
