@@ -701,7 +701,7 @@ setRlibs <-
         }
 
 
-        out <- format(tools:::.check_package_description2(dfile))
+        out <- format(.check_package_description2(dfile))
         if (length(out)) {
             if(!any) noteLog(Log)
             any <- TRUE
@@ -2388,14 +2388,15 @@ setRlibs <-
 
             if (do_timings) {
                 tfile <- paste0(pkgname, "-Ex.timings")
-		times <- read.table(tfile, header = TRUE, row.names = 1L,
-				    colClasses = c("character", rep("numeric", 3)))
+		times <-
+                    utils::read.table(tfile, header = TRUE, row.names = 1L,
+                                      colClasses = c("character", rep("numeric", 3)))
                 o <- order(times[[1]]+times[[2]], decreasing = TRUE)
                 times <- times[o, ]
                 keep <- (times[[1]] + times[[2]] > 5) | (times[[3]] > 5)
                 if(any(keep)) {
                     printLog(Log, gettext("Examples with CPU or elapsed time > 5s\n", domain = "R-tools"))
-                    times <- capture.output(format(times[keep, ]))
+                    times <- utils::capture.output(format(times[keep, ]))
                     printLog0(Log, paste(times, collapse = "\n"), "\n")
                 }
             }
@@ -4262,8 +4263,8 @@ setRlibs <-
             }
             ## force the use of internal untar unless over-ridden
             ## so e.g. .tar.xz works everywhere
-            if (untar(pkg, exdir = dir,
-                      tar =  Sys.getenv("R_INSTALL_TAR", "internal"))) {
+            if (utils::untar(pkg, exdir = dir,
+                             tar = Sys.getenv("R_INSTALL_TAR", "internal"))) {
                 errorLog(Log, gettextf("cannot unpack %s", sQuote(pkg), domain = "R-tools"))
                 summaryLog(Log)
                 do_exit(1L)

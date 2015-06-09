@@ -1012,7 +1012,7 @@ compactPDF <-
         }
         unlink(tf)
     }
-    structure(na.omit(ans), class = c("compactPDF", "data.frame"))
+    structure(stats::na.omit(ans), class = c("compactPDF", "data.frame"))
 }
 
 find_gs_cmd <- function(gs_cmd = "")

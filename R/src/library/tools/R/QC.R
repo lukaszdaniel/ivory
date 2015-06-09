@@ -1889,7 +1889,7 @@ function(package, dir, file, lib.loc = NULL,
     	if (is.symbol(sym)) { # it might be something like pkg::sym (that's a call)
 	    if (!exists(name, code_env, inherits = FALSE)) {
 		if (allow_suppress &&
-                    name %in% suppressForeignCheck(, package))
+                    name %in% utils::suppressForeignCheck(, package))
 		    return ("SYMBOL OK") # skip false positives
                 if (have_registration) {
                     if (name %in% fr) {
@@ -2320,8 +2320,8 @@ function(package, dir, lib.loc = NULL)
                     .BaseNamespaceEnv
                 else {
                     if(.isMethodsDispatchOn()
-                       && methods:::is(genfun, "genericFunction"))
-                        genfun <- methods:::finalDefaultMethod(genfun@default)
+                       && methods::is(genfun, "genericFunction"))
+                        genfun <- methods::finalDefaultMethod(genfun@default)
                     if (typeof(genfun) == "closure") environment(genfun)
                     else .BaseNamespaceEnv
                 }
@@ -2748,7 +2748,7 @@ function(dir, force_suggests = TRUE, check_incoming = FALSE,
          ignore_vignettes = FALSE)
 {
     .check_dependency_cycles <-
-        function(db, available = available.packages(),
+        function(db, available = utils::available.packages(),
                  dependencies = c("Depends", "Imports", "LinkingTo"))
         {
             ## given a package, find its recursive dependencies.
@@ -3697,7 +3697,7 @@ function(package, lib.loc = NULL)
                                                           silent = TRUE)))
             }, type = "output")
         }
-        runif(1) # create .Random.seed
+        stats::runif(1)                 # create .Random.seed
         compat <- new.env(hash=TRUE)
         if(.Platform$OS.type != "unix") {
             assign("nsl", function(hostname) {}, envir = compat)
