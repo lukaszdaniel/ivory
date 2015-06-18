@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-03-10 20:42\n"
+"POT-Creation-Date: 2015-06-09 22:21\n"
 "PO-Revision-Date: 2012-03-06 21:48+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -5112,11 +5112,6 @@ msgstr "séries non recouvrantes"
 msgid "non-leaf subtree of length 0"
 msgstr "sous-arbre de longueur 0 qui n'est pas une feuille"
 
-#. R/density.R: warning("non-matched further arguments are disregarded")
-#: R/density.R:0
-msgid "non-matched further arguments are disregarded"
-msgstr "les arguments non nommés ultérieurs sont ignorés"
-
 #. R/family.R: stop("non-positive values not allowed for the 'gamma' family")
 #: R/family.R:0
 #, fuzzy
@@ -6909,16 +6904,6 @@ msgid_plural "but variables found have %d rows"
 msgstr[0] "'newdata' avait %d lignes mais les variables trouvées ont %d lignes"
 msgstr[1] "'newdata' avait %d lignes mais les variables trouvées ont %d lignes"
 
-#. R/diffinv.R: ngettext(na, "extra argument %s is disregarded", "extra arguments %s are be disregarded",     domain = "R-stats")
-#. R/lm.R: ngettext(length(dots), "extra argument %s is disregarded", "extra arguments %s are disregarded",     domain = "R-stats")
-#. R/lm.R: ngettext(as.integer(length(dots)), "extra argument %s is disregarded", "extra arguments %s are disregarded",     domain = "R-stats")
-#: R/diffinv.R:0 R/lm.R:0
-#, fuzzy
-msgid "extra argument %s is disregarded"
-msgid_plural "extra arguments %s are disregarded"
-msgstr[0] "arguments supplémentaires ignorés"
-msgstr[1] "arguments supplémentaires ignorés"
-
 #. R/dendrogram.R: ngettext(length(nms), "extra argument %s is not of class \"dendrogram\"", "extra arguments %s are not of class \"dendrogram\"",     domain = "R-stats")
 #: R/dendrogram.R:0
 #, fuzzy
@@ -7042,6 +7027,15 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "utilisation des %d/%d lignes d'un ajustement combiné"
 msgstr[1] "utilisation des %d/%d lignes d'un ajustement combiné"
+
+#~ msgid "non-matched further arguments are disregarded"
+#~ msgstr "les arguments non nommés ultérieurs sont ignorés"
+
+#, fuzzy
+#~ msgid "extra argument %s is disregarded"
+#~ msgid_plural "extra arguments %s are disregarded"
+#~ msgstr[0] "arguments supplémentaires ignorés"
+#~ msgstr[1] "arguments supplémentaires ignorés"
 
 #, fuzzy
 #~ msgid "'%s' argument is of wrong length"

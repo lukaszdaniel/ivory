@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-04-01 22:13\n"
+"POT-Creation-Date: 2015-06-09 22:21\n"
 "PO-Revision-Date: 2012-02-26 14:23+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -1065,6 +1065,11 @@ msgstr " パッケージをインストール出来ませんでした "
 msgid "Objects: %d, Aliases: %d, Keywords: %d, Concepts: %d"
 msgstr ""
 
+#. R/windows/install.packages.R: stop("Only '*.zip' and '*.tar.gz' files can be installed.")
+#: R/windows/install.packages.R:0
+msgid "Only '*.zip' and '*.tar.gz' files can be installed."
+msgstr ""
+
 #. R/help.start.R: gettext("Otherwise, be patient ...")
 #: R/help.start.R:0
 msgid "Otherwise, be patient ..."
@@ -1093,6 +1098,11 @@ msgstr " パッケージ "
 #, fuzzy
 msgid "Package %s: DESCRIPTION file not found"
 msgstr " パッケージ %s: DESCRIPTION が見つかりません "
+
+#. R/windows/choose.files.R: gettext("Package tarballs (*.tar.gz)", domain = "R-utils")
+#: R/windows/choose.files.R:0
+msgid "Package tarballs (*.tar.gz)"
+msgstr ""
 
 #. R/help.search.R: message("Packages {readRDS() sequentially}:", domain = "R-utils")
 #: R/help.search.R:0
@@ -1375,7 +1385,7 @@ msgstr ""
 "れていません \n"
 " もし RPM からインストールされたのなら R-devel RPM が必要でしょう "
 
-#. R/str.R: gettextf(" Time-Series %s from %s to %s:", le.str, format(tsp.a[1L]), format(tsp.a[2L]))
+#. R/str.R: gettextf(" Time-Series %s from %s to %s:", lestr, format(tsp.a[1L]), format(tsp.a[2L]),     domain = "R-tools")
 #: R/str.R:0
 msgid "Time-Series %s from %s to %s:"
 msgstr ""

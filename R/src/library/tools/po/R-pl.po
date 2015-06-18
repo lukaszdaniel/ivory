@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-20 05:19\n"
+"POT-Creation-Date: 2015-06-09 22:21\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-Bookmarks: -1,232,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #. R/install.R: gettextf("## package without R code %s", sQuote(namespace))
@@ -626,7 +626,7 @@ msgstr "Nie można wydobyć pola 'Author' z pola 'Authors@R':"
 msgid "Cannot extract Maintainer field from Authors@R field:"
 msgstr "Nie można wyodrębnić pola 'Maintainer' z pola 'Authors@R':"
 
-#. R/news.R: warning("Cannot extract version info from the following section titles:", "\n", paste(unique(nms[!ind]),     collapse = "  "), sep = "")
+#. R/news.R: warning("Cannot extract version info from the following section titles:\n", paste(unique(nms[!ind]),     collapse = "  "))
 #: R/news.R:0
 msgid "Cannot extract version info from the following section titles:"
 msgstr ""
@@ -821,8 +821,8 @@ msgstr "Plik 'DESCRIPTION' dotyczy pakietu '%s', nie '%s'"
 msgid "DIFFERED"
 msgstr "RÓŻNICE"
 
-#. R/check.R: gettext("DONE", domain = "R-tools")
-#: R/check.R:0
+#. R/logging.R: gettext("DONE", domain = "R-tools")
+#: R/logging.R:0
 msgid "DONE"
 msgstr "WYKONANO"
 
@@ -1153,6 +1153,11 @@ msgstr "ISTNIEJE ale nie posiada poprawnego formatu"
 msgid "Each sample represents %s seconds."
 msgstr "Każda próbka przedstawia %s sekundy."
 
+#. R/urltools.R: gettext("Empty URL", domain = "R-tools")
+#: R/urltools.R:0
+msgid "Empty URL"
+msgstr "Pusty adres URL"
+
 #. R/check.R: gettext("Empty file 'INDEX'.", domain = "R-tools")
 #: R/check.R:0
 msgid "Empty file 'INDEX'."
@@ -1339,13 +1344,6 @@ msgstr ""
 "Plik 'NAMESPACE' nie istnieje, ale istnieje plik o tej samej nazwie, ale "
 "różnej wielkości liter."
 
-#. R/check.R: gettext("File README.md cannot be checked without 'pandoc' being installed.\n", domain = "R-tools")
-#: R/check.R:0
-msgid "File README.md cannot be checked without 'pandoc' being installed."
-msgstr ""
-"Plik 'README.md' nie może być sprawdzony bez zainstalowanego programu "
-"'pandoc'"
-
 #. R/check.R: gettext("File names must not differ just by case to be usable on all R platforms.\nPlease rename the files and try again.\nSee section 'Package structure' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
 #: R/check.R:0
 msgid ""
@@ -1362,6 +1360,15 @@ msgstr ""
 #: R/utils.R:0
 msgid "Files 'DESCRIPTION' and 'DESCRIPTION.in' are missing."
 msgstr "Brakuje plików 'DESCRIPTION' oraz 'DESCRIPTION.in'."
+
+#. R/check.R: gettext("Files 'README.md' or 'NEWS.md' cannot be checked without 'pandoc' being installed.\n",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"Files 'README.md' or 'NEWS.md' cannot be checked without 'pandoc' being "
+"installed."
+msgstr ""
+"Plik 'README.md' oraz 'NEWS.md' nie mogą być sprawdzone bez zainstalowanego "
+"pakietu 'pandoc'."
 
 #. R/Vignettes.R: gettextf("Files named as vignettes but with no recognized vignette engine: %s\n(Is a VignetteBuilder field missing?)",     paste(sQuote(files), collapse = ", "), domain = "R-toosl")
 #: R/Vignettes.R:0
@@ -1689,6 +1696,11 @@ msgstr "Niepoprawny plik NAMESPACE, przetwarzanie daje:"
 #: R/QC.R:0
 msgid "Invalid Priority field."
 msgstr "Niepoprawne pole priorytetu."
+
+#. R/urltools.R: gettext("Invalid URI scheme", domain = "R-tools")
+#: R/urltools.R:0
+msgid "Invalid URI scheme"
+msgstr "Niepoprawna schemat URI"
 
 #. R/QC.R: gettext("Invalid VignetteBuilder field.", domain = "R-tools")
 #: R/QC.R:0
@@ -2844,6 +2856,7 @@ msgstr "Niezgodność struktury klasy S4 w obiekcie dokumentacji %s:"
 #. R/check.R: gettext("SKIPPED", domain = "R-tools")
 #. R/check.R: gettext("SKIPPED", domain = "R-tools")
 #. R/check.R: gettext("SKIPPED", domain = "R-tools")
+#. R/check.R: gettext("SKIPPED", domain = "R-tools")
 #: R/check.R:0
 msgid "SKIPPED"
 msgstr "POMINIĘTO"
@@ -3009,6 +3022,13 @@ msgstr ""
 "Pakiety źródłowe nie powinny zawierać niezadeklarowanych plików "
 "wykonywalnych.\n"
 "Zobacz sekcę 'Package structure' w podręczniku 'Writing R Extensions'."
+
+#. R/QC.R: gettext("Spaces in an http[s] URL should probably be replaced by %20", domain = "R-tools")
+#: R/QC.R:0
+msgid "Spaces in an http[s] URL should probably be replaced by %20"
+msgstr ""
+"Spacje w adresie URL http[s] prawdopodobnie powinny być zastąpione przez "
+"'%20'"
 
 #. R/QC.R: gettext("Standardizable: FALSE", domain = "R-tools")
 #: R/QC.R:0
@@ -3214,6 +3234,15 @@ msgid ""
 msgstr ""
 "Argument funkcji zastępującej, który odpowiada prawej stronie musi mieć "
 "nazwę 'value'."
+
+#. R/QC.R: gettext("The canonical URL of the CRAN page for a package is   http://cran.r-project.org/package=pkgname",     domain = "R-tools")
+#: R/QC.R:0
+msgid ""
+"The canonical URL of the CRAN page for a package is   http://cran.r-project."
+"org/package=pkgname"
+msgstr ""
+"Kanoniczny adres URL strony CRAN dla pakietu to http://cran.r-project.org/"
+"package=pkgname"
 
 #. R/bibstyle.R: stop("The default JSS style may not be modified.")
 #: R/bibstyle.R:0
@@ -6898,11 +6927,19 @@ msgstr[0] "Zależność ilustracji nie jest wymagana:"
 msgstr[1] "Zależności ilustracji nie są wymagane:"
 msgstr[2] "Zależności ilustracji nie są wymagane:"
 
-#. R/QC.R: ngettext(length(bad), "VignetteBuilder package required for checking but not available:",     "VignetteBuilder packages required for checking but not available:", domain = "R-tools")
+#. R/QC.R: ngettext(length(bad), "VignetteBuilder package not declared:", "VignetteBuilder packages not declared:",     domain = "R-tools")
 #: R/QC.R:0
-msgid "VignetteBuilder package required for checking but not available:"
+msgid "VignetteBuilder package not declared:"
+msgid_plural "VignetteBuilder packages not declared:"
+msgstr[0] "Pakiet 'VignetteBuilder' nie został określony:"
+msgstr[1] "Pakiety 'VignetteBuilder' nie zostały określone:"
+msgstr[2] "Pakiety 'VignetteBuilder' nie zostały określone:"
+
+#. R/QC.R: ngettext(length(bad), "VignetteBuilder package required for checking but not installed:",     "VignetteBuilder packages required for checking but not installed:", domain = "R-tools")
+#: R/QC.R:0
+msgid "VignetteBuilder package required for checking but not installed:"
 msgid_plural ""
-"VignetteBuilder packages required for checking but not available:"
+"VignetteBuilder packages required for checking but not installed:"
 msgstr[0] ""
 "Pakiet 'VignetteBuilder' jest wymagany do sprawdzenia, ale nie jest dostępny:"
 msgstr[1] ""

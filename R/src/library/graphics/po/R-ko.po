@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-02-28 12:23\n"
+"POT-Creation-Date: 2015-06-09 22:21\n"
 "PO-Revision-Date: 2005-05-25 15:04+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -804,12 +804,10 @@ msgid "argument %s is not made use of"
 msgid_plural "arguments %s are not made use of"
 msgstr[0] ""
 
-#. R/mosaicplot.R: ngettext(length(list(...)), "extra argument %s will be disregarded", "extra arguments %s will be disregarded",     domain = "R-graphics")
-#: R/mosaicplot.R:0
 #, fuzzy
-msgid "extra argument %s will be disregarded"
-msgid_plural "extra arguments %s will be disregarded"
-msgstr[0] "여분의 인수(복수)%s는 무시됩니다"
+#~ msgid "extra argument %s will be disregarded"
+#~ msgid_plural "extra arguments %s will be disregarded"
+#~ msgstr[0] "여분의 인수(복수)%s는 무시됩니다"
 
 #, fuzzy
 #~ msgid "invalid length(x)"

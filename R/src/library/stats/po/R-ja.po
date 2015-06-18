@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-03-10 20:42\n"
+"POT-Creation-Date: 2015-06-09 22:21\n"
 "PO-Revision-Date: 2012-02-26 14:13+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -5032,11 +5032,6 @@ msgstr " 共通部分の無い系列です "
 msgid "non-leaf subtree of length 0"
 msgstr " 長さ 0 の葉ではないサブツリーです "
 
-#. R/density.R: warning("non-matched further arguments are disregarded")
-#: R/density.R:0
-msgid "non-matched further arguments are disregarded"
-msgstr " 余計な引数は捨てられました "
-
 #. R/family.R: stop("non-positive values not allowed for the 'gamma' family")
 #: R/family.R:0
 #, fuzzy
@@ -6749,15 +6744,6 @@ msgid_plural "but variables found have %d rows"
 msgstr[0] ""
 " 'newdata' は %d 個の行を持ちますが、見付かった変数は %d の行数を持ちます： "
 
-#. R/diffinv.R: ngettext(na, "extra argument %s is disregarded", "extra arguments %s are be disregarded",     domain = "R-stats")
-#. R/lm.R: ngettext(length(dots), "extra argument %s is disregarded", "extra arguments %s are disregarded",     domain = "R-stats")
-#. R/lm.R: ngettext(as.integer(length(dots)), "extra argument %s is disregarded", "extra arguments %s are disregarded",     domain = "R-stats")
-#: R/diffinv.R:0 R/lm.R:0
-#, fuzzy
-msgid "extra argument %s is disregarded"
-msgid_plural "extra arguments %s are disregarded"
-msgstr[0] " 余計な引数は捨てられました "
-
 #. R/dendrogram.R: ngettext(length(nms), "extra argument %s is not of class \"dendrogram\"", "extra arguments %s are not of class \"dendrogram\"",     domain = "R-stats")
 #: R/dendrogram.R:0
 #, fuzzy
@@ -6862,6 +6848,14 @@ msgstr[0] " 下位のスコープはモデル中に含まれない項 %s を持�
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] " 同時当てはめから %d/%d 行を使用します。 "
+
+#~ msgid "non-matched further arguments are disregarded"
+#~ msgstr " 余計な引数は捨てられました "
+
+#, fuzzy
+#~ msgid "extra argument %s is disregarded"
+#~ msgid_plural "extra arguments %s are disregarded"
+#~ msgstr[0] " 余計な引数は捨てられました "
 
 #, fuzzy
 #~ msgid "'%s' argument is of wrong length"

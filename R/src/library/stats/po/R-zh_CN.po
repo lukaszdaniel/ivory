@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-03-10 20:42\n"
+"POT-Creation-Date: 2015-06-09 22:21\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -4999,11 +4999,6 @@ msgstr "非相叉序列"
 msgid "non-leaf subtree of length 0"
 msgstr "长度为零的非叶子树"
 
-#. R/density.R: warning("non-matched further arguments are disregarded")
-#: R/density.R:0
-msgid "non-matched further arguments are disregarded"
-msgstr "不匹配的额外参数略过不用"
-
 #. R/family.R: stop("non-positive values not allowed for the 'gamma' family")
 #: R/family.R:0
 #, fuzzy
@@ -6698,15 +6693,6 @@ msgid "but variable found had %d row"
 msgid_plural "but variables found have %d rows"
 msgstr[0] "'newdata'有%d行但变量里有%d行"
 
-#. R/diffinv.R: ngettext(na, "extra argument %s is disregarded", "extra arguments %s are be disregarded",     domain = "R-stats")
-#. R/lm.R: ngettext(length(dots), "extra argument %s is disregarded", "extra arguments %s are disregarded",     domain = "R-stats")
-#. R/lm.R: ngettext(as.integer(length(dots)), "extra argument %s is disregarded", "extra arguments %s are disregarded",     domain = "R-stats")
-#: R/diffinv.R:0 R/lm.R:0
-#, fuzzy
-msgid "extra argument %s is disregarded"
-msgid_plural "extra arguments %s are disregarded"
-msgstr[0] "额外参数不用"
-
 #. R/dendrogram.R: ngettext(length(nms), "extra argument %s is not of class \"dendrogram\"", "extra arguments %s are not of class \"dendrogram\"",     domain = "R-stats")
 #: R/dendrogram.R:0
 #, fuzzy
@@ -6811,6 +6797,14 @@ msgstr[0] "模型里下範疇没有这些词条%s"
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "在组合拟合中用%d/%d行"
+
+#~ msgid "non-matched further arguments are disregarded"
+#~ msgstr "不匹配的额外参数略过不用"
+
+#, fuzzy
+#~ msgid "extra argument %s is disregarded"
+#~ msgid_plural "extra arguments %s are disregarded"
+#~ msgstr[0] "额外参数不用"
 
 #, fuzzy
 #~ msgid "'%s' argument is of wrong length"

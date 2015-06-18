@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-04-01 22:13\n"
+"POT-Creation-Date: 2015-06-09 22:21\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -1066,6 +1066,11 @@ msgstr "kann keine Pakete installieren"
 msgid "Objects: %d, Aliases: %d, Keywords: %d, Concepts: %d"
 msgstr ""
 
+#. R/windows/install.packages.R: stop("Only '*.zip' and '*.tar.gz' files can be installed.")
+#: R/windows/install.packages.R:0
+msgid "Only '*.zip' and '*.tar.gz' files can be installed."
+msgstr ""
+
 #. R/help.start.R: gettext("Otherwise, be patient ...")
 #: R/help.start.R:0
 msgid "Otherwise, be patient ..."
@@ -1094,6 +1099,11 @@ msgstr "Paket"
 #, fuzzy
 msgid "Package %s: DESCRIPTION file not found"
 msgstr "Paket %s: DESCRIPTION nicht gefunden"
+
+#. R/windows/choose.files.R: gettext("Package tarballs (*.tar.gz)", domain = "R-utils")
+#: R/windows/choose.files.R:0
+msgid "Package tarballs (*.tar.gz)"
+msgstr ""
 
 #. R/help.search.R: message("Packages {readRDS() sequentially}:", domain = "R-utils")
 #: R/help.search.R:0
@@ -1376,7 +1386,7 @@ msgstr ""
 "Diese Version von R ist nicht vorbereitet, um Source-Pakete zu installieren\n"
 "Wenn es  aus einem RPM installiert wurde, benötigen Sie evtl. das R-devel RPM"
 
-#. R/str.R: gettextf(" Time-Series %s from %s to %s:", le.str, format(tsp.a[1L]), format(tsp.a[2L]))
+#. R/str.R: gettextf(" Time-Series %s from %s to %s:", lestr, format(tsp.a[1L]), format(tsp.a[2L]),     domain = "R-tools")
 #: R/str.R:0
 msgid "Time-Series %s from %s to %s:"
 msgstr ""

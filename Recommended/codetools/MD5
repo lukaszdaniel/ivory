@@ -8,6 +8,6 @@ c9baa25a442ca672cd68f42ace53e62a  Changes
 7915e973bb95db1197db9152d339f2c8  man/showTree.Rd
 d7d4587719d6cbb3083123501ec23dd3  NAMESPACE
 ecfdfce9918eeccddc2df4614c82658a  po/R-pl.po
+1445cbf3d51be8945b23d2714e2166f3  po/R-codetools.pot
 aa4afca91b3b5bbe3dbebde64122ee9d  R/codetools.R
 838118aa4116e6b2d66e393dae8e4073  tests/tests.R
-1445cbf3d51be8945b23d2714e2166f3  po/R-codetools.pot

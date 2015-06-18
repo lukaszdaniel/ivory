@@ -65,7 +65,7 @@ newPSOCKnode <- function(machine = "localhost", ...,
 
     if (manual) {
         cat(gettextf("Manually start 'worker' on %s with\n    %s\n", machine, cmd, domain = "R-parallel"))
-        flush.console()
+        utils::flush.console()
     } else {
         ## add the remote shell command if needed
         if (machine != "localhost") {

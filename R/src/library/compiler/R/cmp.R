@@ -2368,8 +2368,8 @@ setInlineHandler("switch", function(e, cb, cntxt) {
 
         ## collect information on named alternatives and check for
         ## multiple default cases.
-        haveNames <- !is.null(nm)
-        if (haveNames) {
+        if (! is.null(nm)) {
+            haveNames <- TRUE
             ndflt <- sum(nm == "")
             if (ndflt > 1) {
                 notifyMultipleSwitchDefaults(ndflt, cntxt)
@@ -2378,9 +2378,13 @@ setInlineHandler("switch", function(e, cb, cntxt) {
                 cmpSpecial(e, cb, cntxt)
                 return(TRUE)
             }
-            haveCharDflt <- (ndflt > 0)
+            if (ndflt > 0)
+                haveCharDflt <- TRUE
+            else
+                haveCharDflt <- FALSE
         }
         else {
+            haveNames <- FALSE
             haveCharDflt <- FALSE
         }
 
@@ -2872,7 +2876,7 @@ bcprof <- function(expr) {
     expr
     .Internal(bcprofstop())
     val <- structure(.Internal(bcprofcounts()),
-                     names = compiler:::Opcodes.names)
+                     names = Opcodes.names)
     hits <- sort(val[val > 0], decreasing = TRUE)
     pct <- round(100 * hits / sum(hits), 1)
     data.frame(hits = hits, pct = pct)

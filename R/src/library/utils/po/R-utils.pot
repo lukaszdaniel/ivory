@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.3.0\n"
-"POT-Creation-Date: 2015-04-01 22:13\n"
+"POT-Creation-Date: 2015-06-09 22:21\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1295,6 +1295,13 @@ msgid "Objects: %d, Aliases: %d, Keywords: %d, Concepts: %d"
 msgstr ""
 
 
+#: R/windows/install.packages.R: 0
+#. R/windows/install.packages.R: stop("Only '*.zip' and '*.tar.gz' files can be installed.")
+
+msgid "Only '*.zip' and '*.tar.gz' files can be installed."
+msgstr ""
+
+
 #: R/help.start.R: 0
 #. R/help.start.R: gettext("Otherwise, be patient ...")
 
@@ -1332,6 +1339,13 @@ msgstr ""
 #. R/bug.report.R: gettextf("Package %s: DESCRIPTION file not found", sQuote(package))
 
 msgid "Package %s: DESCRIPTION file not found"
+msgstr ""
+
+
+#: R/windows/choose.files.R: 0
+#. R/windows/choose.files.R: gettext("Package tarballs (*.tar.gz)", domain = "R-utils")
+
+msgid "Package tarballs (*.tar.gz)"
 msgstr ""
 
 
@@ -1672,7 +1686,7 @@ msgstr ""
 
 
 #: R/str.R: 0
-#. R/str.R: gettextf(" Time-Series %s from %s to %s:", le.str, format(tsp.a[1L]), format(tsp.a[2L]))
+#. R/str.R: gettextf(" Time-Series %s from %s to %s:", lestr, format(tsp.a[1L]), format(tsp.a[2L]),     domain = "R-tools")
 
 msgid "Time-Series %s from %s to %s:"
 msgstr ""

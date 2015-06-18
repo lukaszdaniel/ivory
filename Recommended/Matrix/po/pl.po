@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Matrix 1.2-0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-06-06 11:48+0200\n"
-"PO-Revision-Date: 2015-06-06 11:50+0100\n"
+"PO-Revision-Date: 2015-06-10 21:02+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -295,7 +295,7 @@ msgstr "'Dimnames[%d]' nie jest wektorem tekstowym"
 #: Mutils.c:356
 #, c-format
 msgid "length(Dimnames[%d]) differs from Dim[%d] which is %d"
-msgstr ""
+msgstr "'length(Dimnames[%d])' różni się od 'Dim[%d]', który wynosi %d"
 
 #: Mutils.c:383 Mutils.c:409
 msgid "'uplo' must be UPP or LOW"
@@ -782,7 +782,7 @@ msgstr "funkcja 'cs_sqr' nie powiodła się"
 
 #: dgCMatrix.c:231
 msgid "dgcMatrix_QR(*, keep_dimnames = NA): NA value taken as TRUE"
-msgstr ""
+msgstr "dgcMatrix_QR(*, keep_dimnames = NA): wartość NA przyjęta jako TRUE"
 
 #: dgCMatrix.c:234
 #, c-format
@@ -808,7 +808,7 @@ msgstr ""
 
 #: dgCMatrix.c:462
 msgid "dgcMatrix_LU(*, keep_dimnames = NA): NA taken as TRUE"
-msgstr ""
+msgstr "dgcMatrix_LU(*, keep_dimnames = NA): wartość NA przyjęta jako TRUE"
 
 #: dgCMatrix.c:474
 msgid "dgCMatrix_matrix_solve(.., sparse=TRUE) not yet implemented"
@@ -999,7 +999,7 @@ msgstr "Niepoprawna długość gniazda 'x'"
 #: dspMatrix.c:147 dsyMatrix.c:112
 #, c-format
 msgid "Matrix dimension %d x %d (= %g) is too large"
-msgstr ""
+msgstr "Wymiar macierzy %d x %d (= %g) jest zbyt duży"
 
 #: dsyMatrix.c:7 dtrMatrix.c:11
 msgid "'dim' slot has length less than two"
@@ -1085,7 +1085,7 @@ msgstr "'length(q)' musi wynosić zero lub 'ncol(R)'"
 #: sparseQR.c:46
 #, c-format
 msgid "sparseQR_Qmult(): nrow(y) = %d != %d = nrow(V)"
-msgstr ""
+msgstr "sparseQR_Qmult(): nrow(y) = %d != %d = nrow(V)"
 
 #: sparseQR.c:134 sparseQR.c:175 sparseQR.c:210
 #, c-format

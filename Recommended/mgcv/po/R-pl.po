@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mgcv 1.8-6\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
 "POT-Creation-Date: 2015-04-20 18:54\n"
-"PO-Revision-Date: 2015-04-20 18:18+0100\n"
+"PO-Revision-Date: 2015-06-10 21:03+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #. R/efam.r: gettextf("\"%s\" link not available for beta regression; available links are  \"logit\", \"probit\", \"cloglog\" and \"cauchit\"",     linktemp)
 #: R/efam.r:0
@@ -155,17 +155,15 @@ msgstr "argument '%s' nie jest obiektem klasy %s"
 #. R/jagam.r: gettextf("'%s' argument is not meaningful here", "unconfitional")
 #. R/jagam.r: gettextf("'%s' argument is not meaningful here", "unconditional")
 #: R/jagam.r:0
-#, fuzzy
 msgid "'%s' argument is not meaningful here"
-msgstr "bezwarunkowe argumenty nie mają tu zastosowana"
+msgstr "argument '%s' nie ma tu zastosowana"
 
 #. R/jagam.r: gettextf("'%s' argument is not supported", "residuals")
 #. R/jagam.r: gettextf("'%s' argument is not supported", "by.resids")
 #. R/jagam.r: gettextf("'%s' argument is not supported", "all.terms")
 #: R/jagam.r:0
-#, fuzzy
 msgid "'%s' argument is not supported"
-msgstr "argument 'all.terms' nie jest wspierany"
+msgstr "argument '%s' nie jest wspierany"
 
 #. R/mgcv.r: gettextf("'%s' argument is of the wrong length", "min.sp")
 #: R/mgcv.r:0
@@ -182,9 +180,8 @@ msgstr "argument '%s' jest niepoprawnej długości przez co został zignorowany"
 
 #. R/jagam.r: gettextf("'%s' argument is too large, reset", "burnin")
 #: R/jagam.r:0
-#, fuzzy
 msgid "'%s' argument is too large, reset"
-msgstr "argument 'burnin' jest zbyt duży, resetowanie"
+msgstr "argument '%s' jest zbyt duży, resetowanie"
 
 #. R/gam.fit3.r: gettextf("'%s' argument should be 1 or 2", "deriv")
 #. R/gam.fit4.r: gettextf("'%s' argument should be 1 or 2", "deriv")

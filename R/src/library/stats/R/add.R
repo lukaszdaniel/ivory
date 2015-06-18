@@ -58,7 +58,7 @@ add1.default <- function(object, scope, scale = 0, test=c("none", "Chisq"),
 	tt <- scope[i]
 	if(trace > 1) {
 	    cat(gettextf("trying +%s", tt, domain = "R-stats"), "\n", sep = "")
-	    utils::flush.console()
+	    flush.console()
 	}
 	nfit <- update(object, as.formula(paste("~ . +", tt)), evaluate = FALSE)
 	nfit <- eval(nfit, envir=env) # was  eval.parent(nfit)
@@ -382,7 +382,7 @@ drop1.default <- function(object, scope, scale = 0, test=c("none", "Chisq"),
 	tt <- scope[i]
 	if(trace > 1) {
 	    cat(gettextf("trying - %s", tt, domain = "R-stats"), "\n", sep = "")
-	    utils::flush.console()
+	    flush.console()
         }
         nfit <- update(object, as.formula(paste("~ . -", tt)),
                        evaluate = FALSE)
@@ -779,7 +779,7 @@ step <- function(object, scope, scale = 0,
     ## Terms <- fit$terms
     if(trace) {
 	cat(gettextf("Start:  AIC=%s", format(round(bAIC, 2)), domain = "R-stats"), "\n", cut.string(deparse(formula(fit))), "\n\n", sep = "")
-        utils::flush.console()
+        flush.console()
     }
 
     ## FIXME think about df.residual() here
@@ -842,7 +842,7 @@ step <- function(object, scope, scale = 0,
 	bAIC <- bAIC[2L]
 	if(trace) {
 	    cat("\n", gettextf("Step:  AIC=%s", format(round(bAIC, 2)), domain = "R-stats"), "\n", cut.string(deparse(formula(fit))), "\n\n", sep = "")
-            utils::flush.console()
+            flush.console()
         }
         ## add a tolerance as dropping 0-df terms might increase AIC slightly
 	if(bAIC >= AIC + 1e-7) break

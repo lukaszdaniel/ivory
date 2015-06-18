@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-04-02 22:16\n"
+"POT-Creation-Date: 2015-06-09 22:21\n"
 "PO-Revision-Date: 2012-02-26 14:07+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -1019,10 +1019,10 @@ msgstr ""
 msgid "Notes: %s."
 msgstr " 注意：%s "
 
-#. R/BasicClasses.R: gettextf("OOPS: something wrong with line %d in '.OldClassesPrototypes'", i)
+#. R/BasicClasses.R: gettextf("OOPS: something wrong with '.OldClassesPrototypes[[%d]]'", i)
 #: R/BasicClasses.R:0
 #, fuzzy
-msgid "OOPS: something wrong with line %d in '.OldClassesPrototypes'"
+msgid "OOPS: something wrong with '.OldClassesPrototypes[[%d]]'"
 msgstr " おやまあ: 行が何か変です "
 
 #. R/MethodsListClass.R: gettext("Object:", domain = "R-methods")

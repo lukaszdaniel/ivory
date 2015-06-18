@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: graphics 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-01 22:12+0200\n"
+"POT-Creation-Date: 2015-06-09 22:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -125,7 +125,7 @@ msgstr ""
 msgid "graphical parameter \"%s\" has the wrong length"
 msgstr ""
 
-#: par.c:263 par.c:673
+#: par.c:263 par.c:674
 #, c-format
 msgid "graphical parameter \"%s\" cannot be set"
 msgstr ""
@@ -144,35 +144,35 @@ msgstr ""
 msgid "value of '%s' in \"mfg\" parameter is wrong and will be ignored"
 msgstr ""
 
-#: par.c:478
+#: par.c:479
 msgid "calling 'par(new=TRUE)' with no plot"
 msgstr ""
 
-#: par.c:665 par.c:1063
+#: par.c:666 par.c:1064
 #, c-format
 msgid "graphical parameter \"%s\" is obsolete"
 msgstr ""
 
-#: par.c:669 par.c:1067
+#: par.c:670 par.c:1068
 #, c-format
 msgid "\"%s\" is not a graphical parameter"
 msgstr ""
 
-#: par.c:1120
+#: par.c:1121
 msgid "invalid argument passed to 'par()'"
 msgstr ""
 
-#: par.c:1164
+#: par.c:1165
 #, c-format
 msgid "too many rows in layout, limit %d"
 msgstr ""
 
-#: par.c:1170
+#: par.c:1171
 #, c-format
 msgid "too many columns in layout, limit %d"
 msgstr ""
 
-#: par.c:1172
+#: par.c:1173
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr ""

@@ -14,6 +14,9 @@ summary.pyears <- function(object, ...) {
     if (!is.null(object$summary)) {
         cat(gettextf("Matches to the chosen rate table:\n  %s",  object$summary), domain = "R-survival")
         }
+    cat(gettext("Observations in the data set: ", domain = "R-survival"), object$observations, "\n", sep = "")
+    if (!is.null(object$na.action))
+      cat("  (", naprint(object$na.action), ")\n", sep='')
     cat("\n")
     }
 

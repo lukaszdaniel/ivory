@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:26\n"
+"POT-Creation-Date: 2015-06-09 22:20\n"
 "PO-Revision-Date: 2015-01-17 13:33+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1017,6 +1017,12 @@ msgstr "这个平台上找不到'which'"
 #, fuzzy
 msgid "'writeChar()' can only write character objects"
 msgstr "只能写字符对象"
+
+#. R/srcfile.R: stop("'x' and 'to' arguments must refer to the same file")
+#: R/srcfile.R:0
+#, fuzzy
+msgid "'x' and 'to' arguments must refer to the same file"
+msgstr "所有参数的长度都应一致"
 
 #. R/rowsum.R: stop("'x' argument is not a data frame")
 #: R/rowsum.R:0
@@ -3337,6 +3343,17 @@ msgid_plural ""
 "S4 generic: %s"
 msgstr[0] "从%s导出功能里找不到适用于%s的相应方法"
 
+#. R/warnings.R: ngettext(nx, "In command '%s':\n extra argument %s will be disregarded", "In command '%s':\n extra arguments %s will be disregarded",     domain = "R-base")
+#: R/warnings.R:0
+#, fuzzy
+msgid ""
+"In command '%s':\n"
+" extra argument %s will be disregarded"
+msgid_plural ""
+"In command '%s':\n"
+" extra arguments %s will be disregarded"
+msgstr[0] "额外参数%s忽略不用"
+
 #. R/namespace.R: ngettext(nr, "Registered S3 method from a standard package overwritten by '%s':",     "Registered S3 methods from standard package(s) overwritten by '%s':", domain = "R-base")
 #: R/namespace.R:0
 msgid "Registered S3 method from a standard package overwritten by '%s':"
@@ -3407,14 +3424,6 @@ msgstr[0] "数据框没有列但有%d行"
 msgid "deparse option %s is not recognized"
 msgid_plural "deparse options %s are not recognized"
 msgstr[0] "没有%s反向分析这个选项"
-
-#. R/qr.R: ngettext(length(list(...)), "extra argument %s will be disregarded", "extra arguments %s will be disregarded",     domain = "R-base")
-#. R/seq.R: ngettext(length(list(...)), "extra argument %s will be disregarded", "extra arguments %s will be disregarded",     domain = "R-base")
-#: R/qr.R:0 R/seq.R:0
-#, fuzzy
-msgid "extra argument %s will be disregarded"
-msgid_plural "extra arguments %s will be disregarded"
-msgstr[0] "额外参数%s忽略不用"
 
 #. R/dataframe.R: ngettext(nr, "invalid 'row.names', length %d for a data frame with %d row", "invalid 'row.names', length %d for a data frame with %d rows",     domain = "R-base")
 #: R/dataframe.R:0
@@ -3583,10 +3592,6 @@ msgstr[0] "用T代替TRUE"
 
 #~ msgid "'normal.kind' must be a character string of length 1"
 #~ msgstr "'normal.kind'必需是字符串，而且其长度只能为一。"
-
-#, fuzzy
-#~ msgid "'x' and 'y' arguments must have the same length"
-#~ msgstr "所有参数的长度都应一致"
 
 #~ msgid "'subset' must be logical"
 #~ msgstr "'subset'必需是逻辑值"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 3.3.0\n"
-"POT-Creation-Date: 2015-04-02 22:16\n"
+"POT-Creation-Date: 2015-06-09 22:21\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1103,9 +1103,9 @@ msgstr ""
 
 
 #: R/BasicClasses.R: 0
-#. R/BasicClasses.R: gettextf("OOPS: something wrong with line %d in '.OldClassesPrototypes'", i)
+#. R/BasicClasses.R: gettextf("OOPS: something wrong with '.OldClassesPrototypes[[%d]]'", i)
 
-msgid "OOPS: something wrong with line %d in '.OldClassesPrototypes'"
+msgid "OOPS: something wrong with '.OldClassesPrototypes[[%d]]'"
 msgstr ""
 
 

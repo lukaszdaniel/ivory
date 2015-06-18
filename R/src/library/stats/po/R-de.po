@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-03-10 20:42\n"
+"POT-Creation-Date: 2015-06-09 22:21\n"
 "PO-Revision-Date: 2015-01-17 15:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -5045,11 +5045,6 @@ msgstr "schnittfreie Zeireihen"
 msgid "non-leaf subtree of length 0"
 msgstr "Teilbaum ist kein Blatt, aber Länge 0"
 
-#. R/density.R: warning("non-matched further arguments are disregarded")
-#: R/density.R:0
-msgid "non-matched further arguments are disregarded"
-msgstr "übrige Argumente ohne Entsprechung werden verworfen"
-
 #. R/family.R: stop("non-positive values not allowed for the 'gamma' family")
 #: R/family.R:0
 #, fuzzy
@@ -6817,16 +6812,6 @@ msgstr[0] ""
 msgstr[1] ""
 "'newdate' hat %d Zeilen, aber die gefundenen Variablen haben %d Zeilen"
 
-#. R/diffinv.R: ngettext(na, "extra argument %s is disregarded", "extra arguments %s are be disregarded",     domain = "R-stats")
-#. R/lm.R: ngettext(length(dots), "extra argument %s is disregarded", "extra arguments %s are disregarded",     domain = "R-stats")
-#. R/lm.R: ngettext(as.integer(length(dots)), "extra argument %s is disregarded", "extra arguments %s are disregarded",     domain = "R-stats")
-#: R/diffinv.R:0 R/lm.R:0
-#, fuzzy
-msgid "extra argument %s is disregarded"
-msgid_plural "extra arguments %s are disregarded"
-msgstr[0] "zusätzliche Argumente verworfen"
-msgstr[1] "zusätzliche Argumente verworfen"
-
 #. R/dendrogram.R: ngettext(length(nms), "extra argument %s is not of class \"dendrogram\"", "extra arguments %s are not of class \"dendrogram\"",     domain = "R-stats")
 #: R/dendrogram.R:0
 #, fuzzy
@@ -6946,6 +6931,15 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "benutze %d/%d Zeilen aus einem kombinierten Fit"
 msgstr[1] "benutze %d/%d Zeilen aus einem kombinierten Fit"
+
+#~ msgid "non-matched further arguments are disregarded"
+#~ msgstr "übrige Argumente ohne Entsprechung werden verworfen"
+
+#, fuzzy
+#~ msgid "extra argument %s is disregarded"
+#~ msgid_plural "extra arguments %s are disregarded"
+#~ msgstr[0] "zusätzliche Argumente verworfen"
+#~ msgstr[1] "zusätzliche Argumente verworfen"
 
 #, fuzzy
 #~ msgid "'%s' argument is of wrong length"

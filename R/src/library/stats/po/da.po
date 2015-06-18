@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-01 22:12+0200\n"
+"POT-Creation-Date: 2015-06-09 22:21+0200\n"
 "PO-Revision-Date: 2011-12-01 20:24+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -121,25 +121,29 @@ msgstr ""
 msgid "Function '%s' is not in the derivatives table"
 msgstr ""
 
-#: deriv.c:635
-msgid "variable must be a character string"
+#: deriv.c:634
+msgid "'expr' must be an expression or call"
 msgstr ""
 
 #: deriv.c:637
+msgid "variable must be a character string"
+msgstr ""
+
+#: deriv.c:639
 msgid "only the first element is used as variable name"
 msgstr ""
 
-#: deriv.c:650
+#: deriv.c:652
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr ""
 
-#: deriv.c:928 model.c:93
+#: deriv.c:930 model.c:93
 #, fuzzy
 msgid "invalid variable names"
 msgstr "ugyldig værdi for lag.max"
 
-#: deriv.c:937
+#: deriv.c:939
 #, fuzzy
 msgid "invalid tag"
 msgstr "ugyldig argumenttype"
@@ -171,7 +175,7 @@ msgstr ""
 msgid "Value %g out of range (0, 1)"
 msgstr "Værdi %g uden for interval (0, 1)"
 
-#: family.c:66 family.c:80 family.c:98 port.c:383 port.c:549
+#: family.c:66 family.c:80 family.c:98 port.c:383 port.c:552
 #, fuzzy, c-format
 msgid "'%s' argument must be a nonempty numeric vector"
 msgstr "Argument %s skal være en numerisk vektor som ikke er tom"
@@ -700,7 +704,7 @@ msgstr "length(m) skal være mindst to"
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr "Argument Sx skal være en numerisk vektor en kortere end m[]"
 
-#: nls.c:94 nls.c:96 port.c:550
+#: nls.c:94 nls.c:96 port.c:553
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'m' skal være en liste"
@@ -747,16 +751,16 @@ msgstr "'rho' skal være et miljø"
 msgid "'dir' is not a numeric vector of the correct length"
 msgstr "'dir' er ikke en numerisk vektor med korrekt længde"
 
-#: nls.c:307 nls.c:342
+#: nls.c:307 nls.c:341
 msgid "Missing value or an infinity produced when evaluating the model"
 msgstr "Manglende værdi eller en uendelig lavet under evaluering af modellen"
 
-#: nls.c:314
+#: nls.c:315
 #, c-format
 msgid "variable '%s' is integer, not numeric"
 msgstr "variable '%s' er et heltal, ikke numerisk"
 
-#: nls.c:316
+#: nls.c:317
 #, c-format
 msgid "variable '%s' is not numeric"
 msgstr "variabel '%s' er ikke numerisk"
@@ -1027,37 +1031,37 @@ msgstr "'lower' og 'upper' skal være numeriske vektorer"
 msgid "NA/NaN function evaluation"
 msgstr ""
 
-#: port.c:458
+#: port.c:461
 #, fuzzy
 msgid "'getElement()' function applies only to named lists"
 msgstr "'getElement' gælder kun for navngivne lister"
 
-#: port.c:484
+#: port.c:487
 #, fuzzy, c-format
 msgid "'%s' was not found"
 msgstr "%s$%s() er ikke fundet"
 
-#: port.c:498
+#: port.c:501
 #, fuzzy, c-format
 msgid "'gradient' argument must be a numeric matrix of dimension (%d,%d)"
 msgstr "'gradient' skal være en numerisk matrix med dimension (%d, %d)"
 
-#: port.c:518
+#: port.c:521
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "fcn lavede tilstand %d, længde %d - ønsket tilstand %d, længde %d"
 
-#: port.c:531
+#: port.c:534
 #, fuzzy
 msgid "invalid type for 'eval_check_store()' function"
 msgstr "ugyldig type for eval_check_store"
 
-#: port.c:570
+#: port.c:573
 #, fuzzy
 msgid "'lowerb' and 'upperb' arguments must be numeric vectors"
 msgstr "'lowerb' og 'upperb' skal være numeriske vektorer"
 
-#: port.c:593
+#: port.c:596
 #, c-format
 msgid "'nlsb_iterate()' function returned %d"
 msgstr ""

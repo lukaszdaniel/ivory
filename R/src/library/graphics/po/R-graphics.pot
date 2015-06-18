@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: graphics 3.3.0\n"
-"POT-Creation-Date: 2015-04-01 22:12\n"
+"POT-Creation-Date: 2015-06-09 22:21\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1054,14 +1054,5 @@ msgstr[1]    ""
 
 msgid        "argument %s is not made use of"
 msgid_plural "arguments %s are not made use of"
-msgstr[0]    ""
-msgstr[1]    ""
-
-
-#: R/mosaicplot.R: 0
-#. R/mosaicplot.R: ngettext(length(list(...)), "extra argument %s will be disregarded", "extra arguments %s will be disregarded",     domain = "R-graphics")
-
-msgid        "extra argument %s will be disregarded"
-msgid_plural "extra arguments %s will be disregarded"
 msgstr[0]    ""
 msgstr[1]    ""

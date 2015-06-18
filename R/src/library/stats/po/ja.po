@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-01 22:12+0200\n"
+"POT-Creation-Date: 2015-06-09 22:21+0200\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -123,24 +123,28 @@ msgstr ""
 msgid "Function '%s' is not in the derivatives table"
 msgstr " 関数 '%s' は導関数の表中にありません "
 
-#: deriv.c:635
+#: deriv.c:634
+msgid "'expr' must be an expression or call"
+msgstr ""
+
+#: deriv.c:637
 msgid "variable must be a character string"
 msgstr " 変数は文字列でなければいけません "
 
-#: deriv.c:637
+#: deriv.c:639
 msgid "only the first element is used as variable name"
 msgstr " 最初の要素だけが変数名として使われました "
 
-#: deriv.c:650
+#: deriv.c:652
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr " \"%s\" 中の式が不正です "
 
-#: deriv.c:928 model.c:93
+#: deriv.c:930 model.c:93
 msgid "invalid variable names"
 msgstr " 変数名が不正です "
 
-#: deriv.c:937
+#: deriv.c:939
 msgid "invalid tag"
 msgstr " タグが不正です "
 
@@ -173,7 +177,7 @@ msgstr " 数学関数に非数値引数が渡されました "
 msgid "Value %g out of range (0, 1)"
 msgstr " 値 %g は範囲 (0, 1) 外です "
 
-#: family.c:66 family.c:80 family.c:98 port.c:383 port.c:549
+#: family.c:66 family.c:80 family.c:98 port.c:383 port.c:552
 #, fuzzy, c-format
 msgid "'%s' argument must be a nonempty numeric vector"
 msgstr " 引数 %s は空でない数値ベクトルでなければなりません  "
@@ -697,7 +701,7 @@ msgstr " length(m) は少なくとも２でなければなりません "
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr " 引数 Sx は長さが m[] より 1 だけ短い数値ベクトルでなければなりません "
 
-#: nls.c:94 nls.c:96 port.c:550
+#: nls.c:94 nls.c:96 port.c:553
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr " 'm' はリストでなければなりません "
@@ -744,16 +748,16 @@ msgstr " 'rho' は環境(environment)でなければなりません "
 msgid "'dir' is not a numeric vector of the correct length"
 msgstr " 'dir' は正しい長さの数値ベクトルではありません "
 
-#: nls.c:307 nls.c:342
+#: nls.c:307 nls.c:341
 msgid "Missing value or an infinity produced when evaluating the model"
 msgstr " モデルを評価する際，欠損値または無限大が生成されました "
 
-#: nls.c:314
+#: nls.c:315
 #, c-format
 msgid "variable '%s' is integer, not numeric"
 msgstr " 変数 '%s' は整数です、数値ではありません "
 
-#: nls.c:316
+#: nls.c:317
 #, c-format
 msgid "variable '%s' is not numeric"
 msgstr " 変数 '%s' は数値ではありません "
@@ -1037,38 +1041,38 @@ msgstr " lower' と 'upper' は数値ベクトルでなければなりません 
 msgid "NA/NaN function evaluation"
 msgstr " 'zeroin' における関数値が不正です "
 
-#: port.c:458
+#: port.c:461
 #, fuzzy
 msgid "'getElement()' function applies only to named lists"
 msgstr " 'getElement' は名前つきリストにだけ適用されます "
 
-#: port.c:484
+#: port.c:487
 #, fuzzy, c-format
 msgid "'%s' was not found"
 msgstr " %s$%s() が見つかりません "
 
-#: port.c:498
+#: port.c:501
 #, fuzzy, c-format
 msgid "'gradient' argument must be a numeric matrix of dimension (%d,%d)"
 msgstr " 'gradient' は次元 (%d,%d) の数値行列でなければなりません "
 
-#: port.c:518
+#: port.c:521
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr ""
 " モード %d, 長さ %d の fcn が作られました - モード %d, 長さ %d が必要でした "
 
-#: port.c:531
+#: port.c:534
 #, fuzzy
 msgid "invalid type for 'eval_check_store()' function"
 msgstr " eval_check_store に対する不正なタイプです "
 
-#: port.c:570
+#: port.c:573
 #, fuzzy
 msgid "'lowerb' and 'upperb' arguments must be numeric vectors"
 msgstr " lowerb と upperb は数値ベクトルでなければなりません "
 
-#: port.c:593
+#: port.c:596
 #, c-format
 msgid "'nlsb_iterate()' function returned %d"
 msgstr ""

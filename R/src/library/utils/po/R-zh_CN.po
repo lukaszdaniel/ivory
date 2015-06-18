@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-04-01 22:13\n"
+"POT-Creation-Date: 2015-06-09 22:21\n"
 "PO-Revision-Date: 2015-01-17 15:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1050,6 +1050,11 @@ msgstr "无法安装程序包"
 msgid "Objects: %d, Aliases: %d, Keywords: %d, Concepts: %d"
 msgstr ""
 
+#. R/windows/install.packages.R: stop("Only '*.zip' and '*.tar.gz' files can be installed.")
+#: R/windows/install.packages.R:0
+msgid "Only '*.zip' and '*.tar.gz' files can be installed."
+msgstr ""
+
 #. R/help.start.R: gettext("Otherwise, be patient ...")
 #: R/help.start.R:0
 msgid "Otherwise, be patient ..."
@@ -1078,6 +1083,11 @@ msgstr "程序包"
 #, fuzzy
 msgid "Package %s: DESCRIPTION file not found"
 msgstr "'程序包%s: 找不到DESCRIPTION这个文件"
+
+#. R/windows/choose.files.R: gettext("Package tarballs (*.tar.gz)", domain = "R-utils")
+#: R/windows/choose.files.R:0
+msgid "Package tarballs (*.tar.gz)"
+msgstr ""
 
 #. R/help.search.R: message("Packages {readRDS() sequentially}:", domain = "R-utils")
 #: R/help.search.R:0
@@ -1356,7 +1366,7 @@ msgstr ""
 "本版本的R不能安装程序包的原始程序\n"
 "如果它是从RPM上安装来的话你可能需要R-devel的RPM文件"
 
-#. R/str.R: gettextf(" Time-Series %s from %s to %s:", le.str, format(tsp.a[1L]), format(tsp.a[2L]))
+#. R/str.R: gettextf(" Time-Series %s from %s to %s:", lestr, format(tsp.a[1L]), format(tsp.a[2L]),     domain = "R-tools")
 #: R/str.R:0
 msgid "Time-Series %s from %s to %s:"
 msgstr ""

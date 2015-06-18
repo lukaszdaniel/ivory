@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-04-20 05:19\n"
+"POT-Creation-Date: 2015-06-09 22:21\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -634,7 +634,7 @@ msgstr "Authors@RフィールドからAuthorフィールドを抽出できませ
 msgid "Cannot extract Maintainer field from Authors@R field:"
 msgstr "Authors@RフィールドからMaintainerフィールドを抽出できません: "
 
-#. R/news.R: warning("Cannot extract version info from the following section titles:", "\n", paste(unique(nms[!ind]),     collapse = "  "), sep = "")
+#. R/news.R: warning("Cannot extract version info from the following section titles:\n", paste(unique(nms[!ind]),     collapse = "  "))
 #: R/news.R:0
 msgid "Cannot extract version info from the following section titles:"
 msgstr " 以下のセクションタイトルからバージョン情報を取り出せません "
@@ -826,8 +826,8 @@ msgstr " パッケージ '%s' には 'DESCRIPTION.in' がありません "
 msgid "DIFFERED"
 msgstr ""
 
-#. R/check.R: gettext("DONE", domain = "R-tools")
-#: R/check.R:0
+#. R/logging.R: gettext("DONE", domain = "R-tools")
+#: R/logging.R:0
 #, fuzzy
 msgid "DONE"
 msgstr " %s (%s) "
@@ -1198,6 +1198,11 @@ msgstr ""
 msgid "Each sample represents %s seconds."
 msgstr ""
 
+#. R/urltools.R: gettext("Empty URL", domain = "R-tools")
+#: R/urltools.R:0
+msgid "Empty URL"
+msgstr ""
+
 #. R/check.R: gettext("Empty file 'INDEX'.", domain = "R-tools")
 #: R/check.R:0
 msgid "Empty file 'INDEX'."
@@ -1388,11 +1393,6 @@ msgstr ""
 msgid "File NAMESPACE does not exist but there is a case-insensitive match."
 msgstr ""
 
-#. R/check.R: gettext("File README.md cannot be checked without 'pandoc' being installed.\n", domain = "R-tools")
-#: R/check.R:0
-msgid "File README.md cannot be checked without 'pandoc' being installed."
-msgstr ""
-
 #. R/check.R: gettext("File names must not differ just by case to be usable on all R platforms.\nPlease rename the files and try again.\nSee section 'Package structure' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
@@ -1408,6 +1408,13 @@ msgstr ""
 #: R/utils.R:0
 msgid "Files 'DESCRIPTION' and 'DESCRIPTION.in' are missing."
 msgstr " ファイル'DESCRIPTION'と'DESCRIPTION.in'が見当たりません。 "
+
+#. R/check.R: gettext("Files 'README.md' or 'NEWS.md' cannot be checked without 'pandoc' being installed.\n",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"Files 'README.md' or 'NEWS.md' cannot be checked without 'pandoc' being "
+"installed."
+msgstr ""
 
 #. R/Vignettes.R: gettextf("Files named as vignettes but with no recognized vignette engine: %s\n(Is a VignetteBuilder field missing?)",     paste(sQuote(files), collapse = ", "), domain = "R-toosl")
 #: R/Vignettes.R:0
@@ -1735,6 +1742,12 @@ msgstr ""
 #: R/QC.R:0
 msgid "Invalid Priority field."
 msgstr " 不正な優先フィールドです． "
+
+#. R/urltools.R: gettext("Invalid URI scheme", domain = "R-tools")
+#: R/urltools.R:0
+#, fuzzy
+msgid "Invalid URI scheme"
+msgstr " 不正なパッケージ名です "
 
 #. R/QC.R: gettext("Invalid VignetteBuilder field.", domain = "R-tools")
 #: R/QC.R:0
@@ -2882,6 +2895,7 @@ msgstr " S4 クラス codoc はドキュメントオブジェクト '%s' とマ�
 #. R/check.R: gettext("SKIPPED", domain = "R-tools")
 #. R/check.R: gettext("SKIPPED", domain = "R-tools")
 #. R/check.R: gettext("SKIPPED", domain = "R-tools")
+#. R/check.R: gettext("SKIPPED", domain = "R-tools")
 #: R/check.R:0
 msgid "SKIPPED"
 msgstr ""
@@ -3063,6 +3077,11 @@ msgid ""
 msgstr ""
 " マニュアル'Writing R Extensions' の章'Creating R packages'中のDESCRIPTION"
 "ファイルにある情報を参照してください． "
+
+#. R/QC.R: gettext("Spaces in an http[s] URL should probably be replaced by %20", domain = "R-tools")
+#: R/QC.R:0
+msgid "Spaces in an http[s] URL should probably be replaced by %20"
+msgstr ""
 
 #. R/QC.R: gettext("Standardizable: FALSE", domain = "R-tools")
 #: R/QC.R:0
@@ -3268,6 +3287,13 @@ msgstr ""
 msgid ""
 "The argument of a replacement function which corresponds to the right hand "
 "side must be named 'value'."
+msgstr ""
+
+#. R/QC.R: gettext("The canonical URL of the CRAN page for a package is   http://cran.r-project.org/package=pkgname",     domain = "R-tools")
+#: R/QC.R:0
+msgid ""
+"The canonical URL of the CRAN page for a package is   http://cran.r-project."
+"org/package=pkgname"
 msgstr ""
 
 #. R/bibstyle.R: stop("The default JSS style may not be modified.")
@@ -6776,12 +6802,19 @@ msgid "Vignette dependency not required:"
 msgid_plural "Vignette dependencies not required:"
 msgstr[0] " ビニエットの依存性は不要です: "
 
-#. R/QC.R: ngettext(length(bad), "VignetteBuilder package required for checking but not available:",     "VignetteBuilder packages required for checking but not available:", domain = "R-tools")
+#. R/QC.R: ngettext(length(bad), "VignetteBuilder package not declared:", "VignetteBuilder packages not declared:",     domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
-msgid "VignetteBuilder package required for checking but not available:"
+msgid "VignetteBuilder package not declared:"
+msgid_plural "VignetteBuilder packages not declared:"
+msgstr[0] " ファイル '%s' が見つかりません "
+
+#. R/QC.R: ngettext(length(bad), "VignetteBuilder package required for checking but not installed:",     "VignetteBuilder packages required for checking but not installed:", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "VignetteBuilder package required for checking but not installed:"
 msgid_plural ""
-"VignetteBuilder packages required for checking but not available:"
+"VignetteBuilder packages required for checking but not installed:"
 msgstr[0] " パッケージが必要ですが，利用可能ではありません "
 
 #. R/QC.R: ngettext(len, "Warning in file %s:", "Warnings in file %s:", domain = "R-tools")

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-01 22:12+0200\n"
+"POT-Creation-Date: 2015-06-09 22:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -120,24 +120,28 @@ msgstr ""
 msgid "Function '%s' is not in the derivatives table"
 msgstr ""
 
-#: deriv.c:635
-msgid "variable must be a character string"
+#: deriv.c:634
+msgid "'expr' must be an expression or call"
 msgstr ""
 
 #: deriv.c:637
+msgid "variable must be a character string"
+msgstr ""
+
+#: deriv.c:639
 msgid "only the first element is used as variable name"
 msgstr ""
 
-#: deriv.c:650
+#: deriv.c:652
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr ""
 
-#: deriv.c:928 model.c:93
+#: deriv.c:930 model.c:93
 msgid "invalid variable names"
 msgstr ""
 
-#: deriv.c:937
+#: deriv.c:939
 msgid "invalid tag"
 msgstr ""
 
@@ -166,7 +170,7 @@ msgstr ""
 msgid "Value %g out of range (0, 1)"
 msgstr ""
 
-#: family.c:66 family.c:80 family.c:98 port.c:383 port.c:549
+#: family.c:66 family.c:80 family.c:98 port.c:383 port.c:552
 #, c-format
 msgid "'%s' argument must be a nonempty numeric vector"
 msgstr ""
@@ -683,7 +687,7 @@ msgstr ""
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr ""
 
-#: nls.c:94 nls.c:96 port.c:550
+#: nls.c:94 nls.c:96 port.c:553
 #, c-format
 msgid "'%s' argument must be a list"
 msgstr ""
@@ -730,16 +734,16 @@ msgstr ""
 msgid "'dir' is not a numeric vector of the correct length"
 msgstr ""
 
-#: nls.c:307 nls.c:342
+#: nls.c:307 nls.c:341
 msgid "Missing value or an infinity produced when evaluating the model"
 msgstr ""
 
-#: nls.c:314
+#: nls.c:315
 #, c-format
 msgid "variable '%s' is integer, not numeric"
 msgstr ""
 
-#: nls.c:316
+#: nls.c:317
 #, c-format
 msgid "variable '%s' is not numeric"
 msgstr ""
@@ -1003,34 +1007,34 @@ msgstr ""
 msgid "NA/NaN function evaluation"
 msgstr ""
 
-#: port.c:458
+#: port.c:461
 msgid "'getElement()' function applies only to named lists"
 msgstr ""
 
-#: port.c:484
+#: port.c:487
 #, c-format
 msgid "'%s' was not found"
 msgstr ""
 
-#: port.c:498
+#: port.c:501
 #, c-format
 msgid "'gradient' argument must be a numeric matrix of dimension (%d,%d)"
 msgstr ""
 
-#: port.c:518
+#: port.c:521
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr ""
 
-#: port.c:531
+#: port.c:534
 msgid "invalid type for 'eval_check_store()' function"
 msgstr ""
 
-#: port.c:570
+#: port.c:573
 msgid "'lowerb' and 'upperb' arguments must be numeric vectors"
 msgstr ""
 
-#: port.c:593
+#: port.c:596
 #, c-format
 msgid "'nlsb_iterate()' function returned %d"
 msgstr ""

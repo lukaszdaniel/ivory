@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-20 05:19+0200\n"
+"POT-Creation-Date: 2015-06-09 22:21+0200\n"
 "PO-Revision-Date: 2012-03-09 06:45+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -24,60 +24,60 @@ msgstr ""
 msgid "cannot clip to rotated viewport"
 msgstr "회전시킨 보임창에 고정시킬 수 없습니다 "
 
-#: grid.c:518 grid.c:662
+#: grid.c:519 grid.c:663
 #, c-format
 msgid "Viewport '%s' was not found"
 msgstr ""
 
-#: grid.c:697 grid.c:702 grid.c:791 grid.c:796
+#: grid.c:698 grid.c:703 grid.c:793 grid.c:798
 #, fuzzy
 msgid "cannot pop the top-level viewport ('grid' and 'graphics' output mixed?)"
 msgstr ""
 "최상단의 보임창에 띄울 수 없습니다 (그리드와 그래픽 출력을 혼용하고 있지 않습"
 "니까?) "
 
-#: grid.c:976
+#: grid.c:978
 msgid "attempt to plot on null device"
 msgstr "널 디바이스에 플랏을 시도합니다 "
 
-#: grid.c:1308
+#: grid.c:1310
 #, fuzzy
 msgid "there is no layout defined"
 msgstr "정의된 레이아웃이 없습니다 "
 
-#: grid.c:1528
+#: grid.c:1530
 #, fuzzy
 msgid "polygon edge not found (zero-width or zero-height?)"
 msgstr "다각형의 끝점을 찾을 수 없습니다 (높이 혹은 너비가 0 인가요?)"
 
-#: grid.c:1537
+#: grid.c:1539
 #, fuzzy
 msgid "polygon edge not found"
 msgstr "다각형의 끝점을 찾을 수 없습니다 "
 
-#: grid.c:1691
+#: grid.c:1693
 #, fuzzy
 msgid "require at least two points to draw arrow"
 msgstr "화살표를 그리기 위해서는 최소한 2개의 점이 필요합니다 "
 
-#: grid.c:2007
+#: grid.c:2009
 #, fuzzy
 msgid "non-finite control point in Xspline"
 msgstr "Xspline 에서 유한하지 않은 컨트롤 포인트입니다 "
 
-#: grid.c:2872
+#: grid.c:2874
 msgid "non-finite x or y in graphics path"
 msgstr "그래픽 경로에 x 혹은 y 가 유한하지 않습니다 "
 
-#: grid.c:2913
+#: grid.c:2915
 msgid "Empty raster"
 msgstr ""
 
-#: grid.c:3367
+#: grid.c:3369
 msgid "invalid plotting symbol"
 msgstr "플랏 기호가 잘못되었습니다 "
 
-#: grid.c:3453
+#: grid.c:3455
 #, fuzzy
 msgid "unable to clip to rotated rectangle"
 msgstr "회전된 사각형에 고정시킬 수 없습니다 "

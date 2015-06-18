@@ -24,8 +24,11 @@ fi;
   else
    echo "Adding package '"${pkg}"' version" ${version}
    svn delete ../${IVORY}/src/library/Recommended/${pkg}_*.tar.gz
+   svn delete ../${IVORY}/src/library/Recommended/${pkg}.tgz
    tar -czf ../${IVORY}/src/library/Recommended/${pkg}_${version}.tar.gz ${pkg}
    svn add ../${IVORY}/src/library/Recommended/${pkg}_${version}.tar.gz
+   ln -sf ../${IVORY}/src/library/Recommended/${pkg}_${version}.tar.gz ../${IVORY}/src/library/Recommended/${pkg}.tgz
+   svn add ../${IVORY}/src/library/Recommended/${pkg}.tgz
   fi;
  done
 

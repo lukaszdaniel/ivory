@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-18 16:09+0100\n"
+"POT-Creation-Date: 2015-06-09 22:21+0200\n"
 "PO-Revision-Date: 2012-03-06 22:22+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -135,7 +135,7 @@ msgstr "valeur spécifiée pour le paramètre graphique \"%s\" incorrect"
 msgid "graphical parameter \"%s\" has the wrong length"
 msgstr "le paramètre graphique \"%s\" est de la mauvaise longueur"
 
-#: par.c:263 par.c:673
+#: par.c:263 par.c:674
 #, c-format
 msgid "graphical parameter \"%s\" cannot be set"
 msgstr "le paramètre graphique \"%s\" ne peut être changé"
@@ -154,37 +154,37 @@ msgstr "le paramètre \"i\" dans \"mfg\" est hors échelle"
 msgid "value of '%s' in \"mfg\" parameter is wrong and will be ignored"
 msgstr "la valeur de nr dans \"mfg\" est mauvaise et sera ignorée"
 
-#: par.c:478
+#: par.c:479
 #, fuzzy
 msgid "calling 'par(new=TRUE)' with no plot"
 msgstr "appel de par(new=TRUE) sans graphe"
 
-#: par.c:665 par.c:1063
+#: par.c:666 par.c:1064
 #, c-format
 msgid "graphical parameter \"%s\" is obsolete"
 msgstr "paramètre graphique \"%s\" incorrect"
 
-#: par.c:669 par.c:1067
+#: par.c:670 par.c:1068
 #, c-format
 msgid "\"%s\" is not a graphical parameter"
 msgstr "\"%s\" n'est pas un paramètre graphique"
 
-#: par.c:1120
+#: par.c:1121
 #, fuzzy
 msgid "invalid argument passed to 'par()'"
 msgstr "paramètre passé à par() invalide"
 
-#: par.c:1164
+#: par.c:1165
 #, c-format
 msgid "too many rows in layout, limit %d"
 msgstr "trop de lignes dans la mise en page, limité à %d"
 
-#: par.c:1170
+#: par.c:1171
 #, c-format
 msgid "too many columns in layout, limit %d"
 msgstr "trop de colonnes dans la mise en page, limité à %d"
 
-#: par.c:1172
+#: par.c:1173
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr "trop de cellules dans la mise en page, limité à %d"

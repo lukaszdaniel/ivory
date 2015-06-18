@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.10.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-02-28 12:23\n"
+"POT-Creation-Date: 2015-06-09 22:21\n"
 "PO-Revision-Date: 2015-01-17 15:09+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -818,14 +818,12 @@ msgstr[0] "аргумент %s не для использования"
 msgstr[1] "аргументы %s не для использования"
 msgstr[2] "аргументы %s не для использования"
 
-#. R/mosaicplot.R: ngettext(length(list(...)), "extra argument %s will be disregarded", "extra arguments %s will be disregarded",     domain = "R-graphics")
-#: R/mosaicplot.R:0
 #, fuzzy
-msgid "extra argument %s will be disregarded"
-msgid_plural "extra arguments %s will be disregarded"
-msgstr[0] "дополнительный(е) аргумент(ы) %s будут отброшены"
-msgstr[1] "дополнительный(е) аргумент(ы) %s будут отброшены"
-msgstr[2] "дополнительный(е) аргумент(ы) %s будут отброшены"
+#~ msgid "extra argument %s will be disregarded"
+#~ msgid_plural "extra arguments %s will be disregarded"
+#~ msgstr[0] "дополнительный(е) аргумент(ы) %s будут отброшены"
+#~ msgstr[1] "дополнительный(е) аргумент(ы) %s будут отброшены"
+#~ msgstr[2] "дополнительный(е) аргумент(ы) %s будут отброшены"
 
 #, fuzzy
 #~ msgid "invalid length(x)"

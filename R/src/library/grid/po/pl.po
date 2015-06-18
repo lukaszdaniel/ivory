@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-20 05:19+0200\n"
+"POT-Creation-Date: 2015-06-09 22:21+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -20,55 +20,55 @@ msgstr ""
 msgid "cannot clip to rotated viewport"
 msgstr "nie można przypiąć do obróconego okienka ekranu"
 
-#: grid.c:518 grid.c:662
+#: grid.c:519 grid.c:663
 #, c-format
 msgid "Viewport '%s' was not found"
 msgstr "Okno ekranu '%s' nie zostało znalezione"
 
-#: grid.c:697 grid.c:702 grid.c:791 grid.c:796
+#: grid.c:698 grid.c:703 grid.c:793 grid.c:798
 msgid "cannot pop the top-level viewport ('grid' and 'graphics' output mixed?)"
 msgstr ""
 "nie można wyświetlić okienka ekranu na wierzchu (siatka oraz grafika "
 "pomieszały się?)"
 
-#: grid.c:976
+#: grid.c:978
 msgid "attempt to plot on null device"
 msgstr "próba rysowania na pustym urządzeniu"
 
-#: grid.c:1308
+#: grid.c:1310
 msgid "there is no layout defined"
 msgstr "nie określono układu"
 
-#: grid.c:1528
+#: grid.c:1530
 msgid "polygon edge not found (zero-width or zero-height?)"
 msgstr ""
 "nie znaleziono krawędzi wielokąta (zerowa szerokość lub zerowa wysokość?)"
 
-#: grid.c:1537
+#: grid.c:1539
 msgid "polygon edge not found"
 msgstr "nie znaleziono krawędzi wielokąta"
 
-#: grid.c:1691
+#: grid.c:1693
 msgid "require at least two points to draw arrow"
 msgstr "wymaga co najmniej dwu punktów, aby narysować strzałkę"
 
-#: grid.c:2007
+#: grid.c:2009
 msgid "non-finite control point in Xspline"
 msgstr "nieskończony punkt kontrolny w 'Xspline'"
 
-#: grid.c:2872
+#: grid.c:2874
 msgid "non-finite x or y in graphics path"
 msgstr "nieskończony 'x' lub 'y' w ścieżce grafiki"
 
-#: grid.c:2913
+#: grid.c:2915
 msgid "Empty raster"
 msgstr "Pusty raster"
 
-#: grid.c:3367
+#: grid.c:3369
 msgid "invalid plotting symbol"
 msgstr "Nieprawidłowy rysowany symbol"
 
-#: grid.c:3453
+#: grid.c:3455
 msgid "unable to clip to rotated rectangle"
 msgstr "nie można przypiąć do obróconego prostokąta"
 

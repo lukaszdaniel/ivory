@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.3.0\n"
-"POT-Creation-Date: 2015-04-01 22:12\n"
+"POT-Creation-Date: 2015-06-09 22:20\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1176,6 +1176,13 @@ msgstr ""
 #. R/connections.R: stop("'writeChar()' can only write character objects")
 
 msgid "'writeChar()' can only write character objects"
+msgstr ""
+
+
+#: R/srcfile.R: 0
+#. R/srcfile.R: stop("'x' and 'to' arguments must refer to the same file")
+
+msgid "'x' and 'to' arguments must refer to the same file"
 msgstr ""
 
 
@@ -4104,6 +4111,15 @@ msgstr[0]    ""
 msgstr[1]    ""
 
 
+#: R/warnings.R: 0
+#. R/warnings.R: ngettext(nx, "In command '%s':\n extra argument %s will be disregarded", "In command '%s':\n extra arguments %s will be disregarded",     domain = "R-base")
+
+msgid        "In command '%s':\n extra argument %s will be disregarded"
+msgid_plural "In command '%s':\n extra arguments %s will be disregarded"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
 #: R/namespace.R: 0
 #. R/namespace.R: ngettext(nr, "Registered S3 method from a standard package overwritten by '%s':",     "Registered S3 methods from standard package(s) overwritten by '%s':", domain = "R-base")
 
@@ -4181,17 +4197,6 @@ msgstr[1]    ""
 
 msgid        "deparse option %s is not recognized"
 msgid_plural "deparse options %s are not recognized"
-msgstr[0]    ""
-msgstr[1]    ""
-
-
-#: R/qr.R: 0
-#: R/seq.R: 0
-#. R/qr.R: ngettext(length(list(...)), "extra argument %s will be disregarded", "extra arguments %s will be disregarded",     domain = "R-base")
-#. R/seq.R: ngettext(length(list(...)), "extra argument %s will be disregarded", "extra arguments %s will be disregarded",     domain = "R-base")
-
-msgid        "extra argument %s will be disregarded"
-msgid_plural "extra arguments %s will be disregarded"
 msgstr[0]    ""
 msgstr[1]    ""
 

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.3.0\n"
-"POT-Creation-Date: 2015-04-01 22:12\n"
+"POT-Creation-Date: 2015-06-09 22:21\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6591,13 +6591,6 @@ msgid "non-leaf subtree of length 0"
 msgstr ""
 
 
-#: R/density.R: 0
-#. R/density.R: warning("non-matched further arguments are disregarded")
-
-msgid "non-matched further arguments are disregarded"
-msgstr ""
-
-
 #: R/family.R: 0
 #. R/family.R: stop("non-positive values not allowed for the 'gamma' family")
 
@@ -8832,19 +8825,6 @@ msgstr[1]    ""
 
 msgid        "but variable found had %d row"
 msgid_plural "but variables found have %d rows"
-msgstr[0]    ""
-msgstr[1]    ""
-
-
-#: R/diffinv.R: 0
-#: R/lm.R: 0
-#: R/lm.R: 0
-#. R/diffinv.R: ngettext(na, "extra argument %s is disregarded", "extra arguments %s are be disregarded",     domain = "R-stats")
-#. R/lm.R: ngettext(length(dots), "extra argument %s is disregarded", "extra arguments %s are disregarded",     domain = "R-stats")
-#. R/lm.R: ngettext(as.integer(length(dots)), "extra argument %s is disregarded", "extra arguments %s are disregarded",     domain = "R-stats")
-
-msgid        "extra argument %s is disregarded"
-msgid_plural "extra arguments %s are disregarded"
 msgstr[0]    ""
 msgstr[1]    ""
 

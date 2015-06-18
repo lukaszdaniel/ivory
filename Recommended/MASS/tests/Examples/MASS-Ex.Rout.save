@@ -1,13 +1,13 @@
 
-R Under development (unstable) (2014-05-06 r480) -- "Unsuffered Consequences"
-Copyright (C) 2014 The R Foundation for Statistical Computing
+Ivory Under development (unstable) (2015-06-09 r302) -- "Internationalized Version of R"
+Copyright (C) 2013-2015 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
+
+R Under development (unstable) (2015-06-09 r68498) -- "Unsuffered Consequences"
+Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
-This version of R supports extended localization
-See README-ELS file for details
-R-ELS Copyright (C) 2013-2014 Lukasz Daniel (lukasz.daniel@gmail.com)
-
-R-ELS is not part of the R project, so please do not report bugs
+Ivory is not part of the R project, so please do not report bugs
 via r-bugs or the R website - instead refer to the author.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -604,10 +604,11 @@ Call:
 coxph(formula = Surv(Time, unclass(y)) ~ week + strata(ID), data = bacteria, method = "exact")
 
 
-       coef exp(coef) se(coef)     z     p
-week -0.163      0.85   0.0547 -2.97 0.003
+        coef exp(coef) se(coef)     z     p
+week -0.1626    0.8500   0.0547 -2.97 0.003
 
-Likelihood ratio test = 9.85 on 1 df, p=0.0017  n= 220, number of events= 177
+Likelihood ratio test = 9.85 on 1 df, p=0.0017
+n= 220, number of events= 177
 > coxph(Surv(Time, unclass(y)) ~ factor(week) + strata(ID),
 +       data = bacteria, method = "exact")
 Call:
@@ -615,13 +616,14 @@ coxph(formula = Surv(Time, unclass(y)) ~ factor(week) + strata(ID), data = bacte
     method = "exact")
 
 
-                 coef exp(coef) se(coef)      z     p
-factor(week)2   0.198     1.219    0.724  0.274 0.780
-factor(week)4  -1.421     0.242    0.667 -2.131 0.033
-factor(week)6  -1.661     0.190    0.682 -2.434 0.015
-factor(week)11 -1.675     0.187    0.678 -2.471 0.013
+                 coef exp(coef) se(coef)     z     p
+factor(week)2   0.198     1.219    0.724  0.27 0.784
+factor(week)4  -1.421     0.242    0.667 -2.13 0.033
+factor(week)6  -1.661     0.190    0.682 -2.43 0.015
+factor(week)11 -1.675     0.187    0.678 -2.47 0.013
 
-Likelihood ratio test = 15.4 on 4 df, p=0.00385  n= 220, number of events= 177
+Likelihood ratio test = 15.4 on 4 df, p=0.00385
+n= 220, number of events= 177
 > coxph(Surv(Time, unclass(y)) ~ I(week > 2) + strata(ID),
 +       data = bacteria, method = "exact")
 Call:
@@ -629,10 +631,11 @@ coxph(formula = Surv(Time, unclass(y)) ~ I(week > 2) + strata(ID), data = bacter
     method = "exact")
 
 
-                 coef exp(coef) se(coef)     z       p
-I(week > 2)TRUE -1.67     0.188    0.482 -3.47 0.00053
+                  coef exp(coef) se(coef)     z       p
+I(week > 2)TRUE -1.670     0.188    0.482 -3.47 0.00053
 
-Likelihood ratio test = 15.2 on 1 df, p=9.93e-05  n= 220, number of events= 177
+Likelihood ratio test = 15.2 on 1 df, p=9.93e-05
+n= 220, number of events= 177
 > 
 > # PQL glmm analysis
 > library(nlme)
@@ -4604,7 +4607,6 @@ Initial Model:
 log(Days + 2.5) ~ Eth + Sex + Age + Lrn + Eth:Sex + Eth:Age + Eth:Lrn + Sex:Age + 
     Sex:Lrn + Age:Lrn + Eth:Sex:Age + Eth:Sex:Lrn + Eth:Age:Lrn + Sex:Age:Lrn
 
-
 Final Model:
 log(Days + 2.5) ~ Eth + Sex + Age + Lrn + Eth:Sex + Eth:Age + Eth:Lrn + Sex:Age + 
     Sex:Lrn + Age:Lrn + Eth:Sex:Lrn + Eth:Age:Lrn
@@ -5142,7 +5144,7 @@ Achieved convergence tolerance: 4.324e-06
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  8.213 0.239 8.59 0 0 
+Time elapsed:  13.771 0.144 13.99 0 0 
 > grDevices::dev.off()
 null device 
           1 

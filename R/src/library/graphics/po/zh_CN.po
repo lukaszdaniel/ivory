@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-18 16:09+0100\n"
+"POT-Creation-Date: 2015-06-09 22:21+0200\n"
 "PO-Revision-Date: 2015-01-17 15:10+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -134,7 +134,7 @@ msgstr "图形参数\"%s\"的值设得不对"
 msgid "graphical parameter \"%s\" has the wrong length"
 msgstr "图形参数\"%s\"的长度不对"
 
-#: par.c:263 par.c:673
+#: par.c:263 par.c:674
 #, c-format
 msgid "graphical parameter \"%s\" cannot be set"
 msgstr "无法设定图形参数\"%s\""
@@ -153,37 +153,37 @@ msgstr "\"mfg\"里的参数\"i\"超出了合适的范围"
 msgid "value of '%s' in \"mfg\" parameter is wrong and will be ignored"
 msgstr "\"mfg\"里的nr值不对，略过不用"
 
-#: par.c:478
+#: par.c:479
 #, fuzzy
 msgid "calling 'par(new=TRUE)' with no plot"
 msgstr "不绘图就不能调用par(new=TRUE)"
 
-#: par.c:665 par.c:1063
+#: par.c:666 par.c:1064
 #, c-format
 msgid "graphical parameter \"%s\" is obsolete"
 msgstr "图形参数\"%s\"已过期不用了"
 
-#: par.c:669 par.c:1067
+#: par.c:670 par.c:1068
 #, c-format
 msgid "\"%s\" is not a graphical parameter"
 msgstr "\"%s\"不是图形参数"
 
-#: par.c:1120
+#: par.c:1121
 #, fuzzy
 msgid "invalid argument passed to 'par()'"
 msgstr "传给par()的参数错误"
 
-#: par.c:1164
+#: par.c:1165
 #, c-format
 msgid "too many rows in layout, limit %d"
 msgstr "layout里的行数太多, 极限为%d"
 
-#: par.c:1170
+#: par.c:1171
 #, c-format
 msgid "too many columns in layout, limit %d"
 msgstr "layout里的列数太多, 极限为%d"
 
-#: par.c:1172
+#: par.c:1173
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr "layout里的元素太多, 极限为%d"

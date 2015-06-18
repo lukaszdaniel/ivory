@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-02 22:16\n"
+"POT-Creation-Date: 2015-06-09 22:21\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -961,10 +961,10 @@ msgstr ""
 msgid "Notes: %s."
 msgstr "Uwagi: %s."
 
-#. R/BasicClasses.R: gettextf("OOPS: something wrong with line %d in '.OldClassesPrototypes'", i)
+#. R/BasicClasses.R: gettextf("OOPS: something wrong with '.OldClassesPrototypes[[%d]]'", i)
 #: R/BasicClasses.R:0
-msgid "OOPS: something wrong with line %d in '.OldClassesPrototypes'"
-msgstr "OOPS: coś nie tak z linią %d w '.OldClassesPrototypes'"
+msgid "OOPS: something wrong with '.OldClassesPrototypes[[%d]]'"
+msgstr "OOPS: coś nie tak z '.OldClassesPrototypes[[%d]]'"
 
 #. R/MethodsListClass.R: gettext("Object:", domain = "R-methods")
 #: R/MethodsListClass.R:0

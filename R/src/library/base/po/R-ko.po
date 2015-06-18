@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:26\n"
+"POT-Creation-Date: 2015-06-09 22:20\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -1028,6 +1028,12 @@ msgstr "'which' 는 이 플랫폼에서 찾을 수 없습니다 "
 #, fuzzy
 msgid "'writeChar()' can only write character objects"
 msgstr "문자 객체들만 기록이 가능합니다 "
+
+#. R/srcfile.R: stop("'x' and 'to' arguments must refer to the same file")
+#: R/srcfile.R:0
+#, fuzzy
+msgid "'x' and 'to' arguments must refer to the same file"
+msgstr "모든 인수들은 동일한 길이를 가져야 합니다 "
 
 #. R/rowsum.R: stop("'x' argument is not a data frame")
 #: R/rowsum.R:0
@@ -3365,6 +3371,17 @@ msgid_plural ""
 "S4 generic: %s"
 msgstr[0] "No function found corresponding to methods exports from %s for: %s"
 
+#. R/warnings.R: ngettext(nx, "In command '%s':\n extra argument %s will be disregarded", "In command '%s':\n extra arguments %s will be disregarded",     domain = "R-base")
+#: R/warnings.R:0
+#, fuzzy
+msgid ""
+"In command '%s':\n"
+" extra argument %s will be disregarded"
+msgid_plural ""
+"In command '%s':\n"
+" extra arguments %s will be disregarded"
+msgstr[0] "추가적인 %s 는 고려되지 않습니다 "
+
 #. R/namespace.R: ngettext(nr, "Registered S3 method from a standard package overwritten by '%s':",     "Registered S3 methods from standard package(s) overwritten by '%s':", domain = "R-base")
 #: R/namespace.R:0
 msgid "Registered S3 method from a standard package overwritten by '%s':"
@@ -3435,14 +3452,6 @@ msgstr[0] "행의 개수가 0 이고 %d 의 열을 가진 데이터프레임입�
 msgid "deparse option %s is not recognized"
 msgid_plural "deparse options %s are not recognized"
 msgstr[0] "deparse options %s are not recognized"
-
-#. R/qr.R: ngettext(length(list(...)), "extra argument %s will be disregarded", "extra arguments %s will be disregarded",     domain = "R-base")
-#. R/seq.R: ngettext(length(list(...)), "extra argument %s will be disregarded", "extra arguments %s will be disregarded",     domain = "R-base")
-#: R/qr.R:0 R/seq.R:0
-#, fuzzy
-msgid "extra argument %s will be disregarded"
-msgid_plural "extra arguments %s will be disregarded"
-msgstr[0] "추가적인 %s 는 고려되지 않습니다 "
 
 #. R/dataframe.R: ngettext(nr, "invalid 'row.names', length %d for a data frame with %d row", "invalid 'row.names', length %d for a data frame with %d rows",     domain = "R-base")
 #: R/dataframe.R:0
@@ -3616,10 +3625,6 @@ msgstr[0] "TRUE 대신 T 가 사용되었습니다 "
 
 #~ msgid "'normal.kind' must be a character string of length 1"
 #~ msgstr "'normal.kind' 는 길이1의 문자열이어야 합니다 "
-
-#, fuzzy
-#~ msgid "'x' and 'y' arguments must have the same length"
-#~ msgstr "모든 인수들은 동일한 길이를 가져야 합니다 "
 
 #~ msgid "'subset' must be logical"
 #~ msgstr "'subset' 는 반드시 논리값이어야 합니다"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:26\n"
+"POT-Creation-Date: 2015-06-09 22:20\n"
 "PO-Revision-Date: 2012-02-26 14:09+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -1028,6 +1028,12 @@ msgstr " このプラットホームでは'which'が見つかりません "
 #, fuzzy
 msgid "'writeChar()' can only write character objects"
 msgstr " 文字オブジェクトしか書き込めません "
+
+#. R/srcfile.R: stop("'x' and 'to' arguments must refer to the same file")
+#: R/srcfile.R:0
+#, fuzzy
+msgid "'x' and 'to' arguments must refer to the same file"
+msgstr " 全ての引数は同じ長さでなければなりません "
 
 #. R/rowsum.R: stop("'x' argument is not a data frame")
 #: R/rowsum.R:0
@@ -3388,6 +3394,17 @@ msgid_plural ""
 "S4 generic: %s"
 msgstr[0] " %s から %s へエクスポートされるメソッドに対応する関数がありません "
 
+#. R/warnings.R: ngettext(nx, "In command '%s':\n extra argument %s will be disregarded", "In command '%s':\n extra arguments %s will be disregarded",     domain = "R-base")
+#: R/warnings.R:0
+#, fuzzy
+msgid ""
+"In command '%s':\n"
+" extra argument %s will be disregarded"
+msgid_plural ""
+"In command '%s':\n"
+" extra arguments %s will be disregarded"
+msgstr[0] "  余分な引数 %s は無視されます "
+
 #. R/namespace.R: ngettext(nr, "Registered S3 method from a standard package overwritten by '%s':",     "Registered S3 methods from standard package(s) overwritten by '%s':", domain = "R-base")
 #: R/namespace.R:0
 msgid "Registered S3 method from a standard package overwritten by '%s':"
@@ -3459,14 +3476,6 @@ msgstr[0] " 0列%d行のデータフレーム "
 msgid "deparse option %s is not recognized"
 msgid_plural "deparse options %s are not recognized"
 msgstr[0] " 逆構文解析オプション %s は認識できません "
-
-#. R/qr.R: ngettext(length(list(...)), "extra argument %s will be disregarded", "extra arguments %s will be disregarded",     domain = "R-base")
-#. R/seq.R: ngettext(length(list(...)), "extra argument %s will be disregarded", "extra arguments %s will be disregarded",     domain = "R-base")
-#: R/qr.R:0 R/seq.R:0
-#, fuzzy
-msgid "extra argument %s will be disregarded"
-msgid_plural "extra arguments %s will be disregarded"
-msgstr[0] "  余分な引数 %s は無視されます "
 
 #. R/dataframe.R: ngettext(nr, "invalid 'row.names', length %d for a data frame with %d row", "invalid 'row.names', length %d for a data frame with %d rows",     domain = "R-base")
 #: R/dataframe.R:0
@@ -3640,10 +3649,6 @@ msgstr[0] " TRUE の代わりに T が使われました "
 
 #~ msgid "'normal.kind' must be a character string of length 1"
 #~ msgstr " 'normal.kind' は長さ 1 の文字列でなければなりません "
-
-#, fuzzy
-#~ msgid "'x' and 'y' arguments must have the same length"
-#~ msgstr " 全ての引数は同じ長さでなければなりません "
 
 #~ msgid "'subset' must be logical"
 #~ msgstr " 'subset' は論理値でなければなりません "

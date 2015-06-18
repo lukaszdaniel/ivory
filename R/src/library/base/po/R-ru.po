@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:26\n"
+"POT-Creation-Date: 2015-06-09 22:20\n"
 "PO-Revision-Date: 2015-01-17 13:32+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -1030,6 +1030,12 @@ msgstr "'which' для этой платформы не найдена"
 #, fuzzy
 msgid "'writeChar()' can only write character objects"
 msgstr "могу записать только текстовые объекты"
+
+#. R/srcfile.R: stop("'x' and 'to' arguments must refer to the same file")
+#: R/srcfile.R:0
+#, fuzzy
+msgid "'x' and 'to' arguments must refer to the same file"
+msgstr "все аргументы должны иметь одинаковую длину"
 
 #. R/rowsum.R: stop("'x' argument is not a data frame")
 #: R/rowsum.R:0
@@ -3377,6 +3383,19 @@ msgstr[1] ""
 msgstr[2] ""
 "Во время экспорта из пространства имен %s найдены не S4-общие функции: %s"
 
+#. R/warnings.R: ngettext(nx, "In command '%s':\n extra argument %s will be disregarded", "In command '%s':\n extra arguments %s will be disregarded",     domain = "R-base")
+#: R/warnings.R:0
+#, fuzzy
+msgid ""
+"In command '%s':\n"
+" extra argument %s will be disregarded"
+msgid_plural ""
+"In command '%s':\n"
+" extra arguments %s will be disregarded"
+msgstr[0] "дополнительные аргументы %s не будут учтены"
+msgstr[1] "дополнительные аргументы %s не будут учтены"
+msgstr[2] "дополнительные аргументы %s не будут учтены"
+
 #. R/namespace.R: ngettext(nr, "Registered S3 method from a standard package overwritten by '%s':",     "Registered S3 methods from standard package(s) overwritten by '%s':", domain = "R-base")
 #: R/namespace.R:0
 msgid "Registered S3 method from a standard package overwritten by '%s':"
@@ -3465,16 +3484,6 @@ msgid_plural "deparse options %s are not recognized"
 msgstr[0] "опция разбора %s не распознана"
 msgstr[1] "опции разбора %s не распознаны"
 msgstr[2] "опции разбора %s не распознаны"
-
-#. R/qr.R: ngettext(length(list(...)), "extra argument %s will be disregarded", "extra arguments %s will be disregarded",     domain = "R-base")
-#. R/seq.R: ngettext(length(list(...)), "extra argument %s will be disregarded", "extra arguments %s will be disregarded",     domain = "R-base")
-#: R/qr.R:0 R/seq.R:0
-#, fuzzy
-msgid "extra argument %s will be disregarded"
-msgid_plural "extra arguments %s will be disregarded"
-msgstr[0] "дополнительные аргументы %s не будут учтены"
-msgstr[1] "дополнительные аргументы %s не будут учтены"
-msgstr[2] "дополнительные аргументы %s не будут учтены"
 
 #. R/dataframe.R: ngettext(nr, "invalid 'row.names', length %d for a data frame with %d row", "invalid 'row.names', length %d for a data frame with %d rows",     domain = "R-base")
 #: R/dataframe.R:0
@@ -3680,10 +3689,6 @@ msgstr[2] "T использовано вместо TRUE"
 
 #~ msgid "'normal.kind' must be a character string of length 1"
 #~ msgstr "'normal.kind' должен быть текстовой строкой длины 1"
-
-#, fuzzy
-#~ msgid "'x' and 'y' arguments must have the same length"
-#~ msgstr "все аргументы должны иметь одинаковую длину"
 
 #~ msgid "'subset' must be logical"
 #~ msgstr "'subset' должен быть логическим"

@@ -233,7 +233,7 @@ str.default <-
     if (is.null(object))
 	cat(" NULL\n")
     else if(S4) {
-	if(is(object,"envRefClass")) {
+	if(methods::is(object,"envRefClass")) {
 	    cld <- tryCatch(object$getClass(), error=function(e)e)
 	    if(inherits(cld, "error")) {
 	    cat(gettextf("Prototypical reference class %s [package %s]", paste(dQuote(cl), collapse = ", "), sQuote(attr(cl,"package")), domain = "R-tools"), "\n", sep = "")

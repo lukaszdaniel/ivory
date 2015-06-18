@@ -2,4 +2,7 @@
 
 source conf.sh
 
-  meld $filedev $filefroz $filemine
+for ix in ${!filedev[@]}
+do
+  meld ${filedev[$ix]} ${filefroz[$ix]} ${filemine[$ix]}
+done;

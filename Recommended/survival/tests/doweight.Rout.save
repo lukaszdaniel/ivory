@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2015-05-30 r299) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2015-06-09 r302) -- "Internationalized Version of R"
 Copyright (C) 2013-2015 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2015-05-30 r68441) -- "Unsuffered Consequences"
+R Under development (unstable) (2015-06-09 r68498) -- "Unsuffered Consequences"
 Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -79,10 +79,11 @@ coxph(formula = Surv(time, status) ~ x, data = testw1, weights = wt, method = "b
     iter = 0)
 
 
-  coef exp(coef) se(coef) z p
-x    0         1    0.586 0 1
+   coef exp(coef) se(coef) z p
+x 0.000     1.000    0.586 0 1
 
-Likelihood ratio test = 0 on 1 df, p=1  n= 9, number of events= 5
+Likelihood ratio test = 0 on 1 df, p=1
+n= 9, number of events= 5
 > summary(fit)
 Call:
 coxph(formula = Surv(time, status) ~ x, data = testw1, weights = wt, method = "breslow")
@@ -153,9 +154,10 @@ coxph(formula = Surv(time, status) ~ x, data = testw1, weights = wt, method = "e
 
 
    coef exp(coef) se(coef)    z    p
-x 0.873      2.39    0.713 1.22 0.22
+x 0.873     2.393    0.713 1.22 0.22
 
-Likelihood ratio test = 1.75 on 1 df, p=0.186  n= 9, number of events= 5
+Likelihood ratio test = 1.75 on 1 df, p=0.186
+n= 9, number of events= 5
 > resid(fit, type='mart')
           1           2           3           4           5           6 
  0.85334536 -0.02560716  0.32265266  0.32265266  0.71696234 -1.07772629 
@@ -189,10 +191,11 @@ coxph(formula = Surv(begin, time, status) ~ x, data = testw3, weights = wt, meth
     iter = 0)
 
 
-  coef exp(coef) se(coef) z p
-x    0         1    0.586 0 1
+   coef exp(coef) se(coef) z p
+x 0.000     1.000    0.586 0 1
 
-Likelihood ratio test = 0 on 1 df, p=1  n= 14, number of events= 5
+Likelihood ratio test = 0 on 1 df, p=1
+n= 14, number of events= 5
 > summary(fit)
 Call:
 coxph(formula = Surv(begin, time, status) ~ x, data = testw3, weights = wt, method = "breslow")
@@ -258,9 +261,10 @@ coxph(formula = Surv(begin, time, status) ~ x, data = testw3, weights = wt, meth
 
 
    coef exp(coef) se(coef)    z    p
-x 0.873      2.39    0.713 1.22 0.22
+x 0.873     2.393    0.713 1.22 0.22
 
-Likelihood ratio test = 1.75 on 1 df, p=0.186  n= 14, number of events= 5
+Likelihood ratio test = 1.75 on 1 df, p=0.186
+n= 14, number of events= 5
 > resid(fit, type='mart', collapse=testw3$id)
           1           2           3           4           5           6 
  0.85334536 -0.02560716  0.32265266  0.32265266  0.71696234 -1.07772629 
@@ -427,4 +431,4 @@ TRUE
 > 
 > proc.time()
    user  system elapsed 
-  0.484   0.059   0.553 
+  0.472   0.038   0.500 

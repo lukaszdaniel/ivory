@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-18 16:09+0100\n"
+"POT-Creation-Date: 2015-06-09 22:21+0200\n"
 "PO-Revision-Date: 2015-01-17 15:10+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -139,7 +139,7 @@ msgstr "указано неправильное значение графиче�
 msgid "graphical parameter \"%s\" has the wrong length"
 msgstr "графический параметр \"%s\" неправильной длины"
 
-#: par.c:263 par.c:673
+#: par.c:263 par.c:674
 #, c-format
 msgid "graphical parameter \"%s\" cannot be set"
 msgstr "графический параметр \"%s\" не может быть установлен"
@@ -158,37 +158,37 @@ msgstr "параметр \"i\" в \"mfg\" выходит за пределы"
 msgid "value of '%s' in \"mfg\" parameter is wrong and will be ignored"
 msgstr "значение 'nr' в \"mfg\" неправильное и будет пропущено"
 
-#: par.c:478
+#: par.c:479
 #, fuzzy
 msgid "calling 'par(new=TRUE)' with no plot"
 msgstr "вызов par(new=TRUE) без графика"
 
-#: par.c:665 par.c:1063
+#: par.c:666 par.c:1064
 #, c-format
 msgid "graphical parameter \"%s\" is obsolete"
 msgstr "графический параметр \"%s\" устарел"
 
-#: par.c:669 par.c:1067
+#: par.c:670 par.c:1068
 #, c-format
 msgid "\"%s\" is not a graphical parameter"
 msgstr "\"%s\" -- не графический параметр"
 
-#: par.c:1120
+#: par.c:1121
 #, fuzzy
 msgid "invalid argument passed to 'par()'"
 msgstr "par() передан неправильный аргумент"
 
-#: par.c:1164
+#: par.c:1165
 #, c-format
 msgid "too many rows in layout, limit %d"
 msgstr "слишком много строк в разметке, надо не больше %d"
 
-#: par.c:1170
+#: par.c:1171
 #, c-format
 msgid "too many columns in layout, limit %d"
 msgstr "слишком много колонок в разметке, надо не больше %d"
 
-#: par.c:1172
+#: par.c:1173
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr "слишком много ячеек в разметке, надо не больше %d"

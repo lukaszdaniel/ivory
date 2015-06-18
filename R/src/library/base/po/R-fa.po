@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:26\n"
+"POT-Creation-Date: 2015-06-09 22:20\n"
 "PO-Revision-Date: 2012-11-27 01:11+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -877,6 +877,11 @@ msgstr ""
 #. R/connections.R: stop("'writeChar()' can only write character objects")
 #: R/connections.R:0
 msgid "'writeChar()' can only write character objects"
+msgstr ""
+
+#. R/srcfile.R: stop("'x' and 'to' arguments must refer to the same file")
+#: R/srcfile.R:0
+msgid "'x' and 'to' arguments must refer to the same file"
 msgstr ""
 
 #. R/rowsum.R: stop("'x' argument is not a data frame")
@@ -3036,6 +3041,17 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
+#. R/warnings.R: ngettext(nx, "In command '%s':\n extra argument %s will be disregarded", "In command '%s':\n extra arguments %s will be disregarded",     domain = "R-base")
+#: R/warnings.R:0
+msgid ""
+"In command '%s':\n"
+" extra argument %s will be disregarded"
+msgid_plural ""
+"In command '%s':\n"
+" extra arguments %s will be disregarded"
+msgstr[0] ""
+msgstr[1] ""
+
 #. R/namespace.R: ngettext(nr, "Registered S3 method from a standard package overwritten by '%s':",     "Registered S3 methods from standard package(s) overwritten by '%s':", domain = "R-base")
 #: R/namespace.R:0
 msgid "Registered S3 method from a standard package overwritten by '%s':"
@@ -3110,14 +3126,6 @@ msgstr[1] ""
 #: R/New-Internal.R:0
 msgid "deparse option %s is not recognized"
 msgid_plural "deparse options %s are not recognized"
-msgstr[0] ""
-msgstr[1] ""
-
-#. R/qr.R: ngettext(length(list(...)), "extra argument %s will be disregarded", "extra arguments %s will be disregarded",     domain = "R-base")
-#. R/seq.R: ngettext(length(list(...)), "extra argument %s will be disregarded", "extra arguments %s will be disregarded",     domain = "R-base")
-#: R/qr.R:0 R/seq.R:0
-msgid "extra argument %s will be disregarded"
-msgid_plural "extra arguments %s will be disregarded"
 msgstr[0] ""
 msgstr[1] ""
 

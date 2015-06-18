@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-18 16:09+0100\n"
+"POT-Creation-Date: 2015-06-09 22:21+0200\n"
 "PO-Revision-Date: 2012-03-07 02:34+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -135,7 +135,7 @@ msgstr "그래픽 매개 변수 \"%s\"에 잘못된 값이 지정되었습니다
 msgid "graphical parameter \"%s\" has the wrong length"
 msgstr "그래픽 매개 변수 \"%s\"의 길이가 잘못되었습니다"
 
-#: par.c:263 par.c:673
+#: par.c:263 par.c:674
 #, c-format
 msgid "graphical parameter \"%s\" cannot be set"
 msgstr "그래픽 매개 변수 \"%s\"를 설정할 수 없습니다"
@@ -154,37 +154,37 @@ msgstr "\"mfg\"의 파라미터 \"i\"가 범위밖입니다"
 msgid "value of '%s' in \"mfg\" parameter is wrong and will be ignored"
 msgstr "\"mfg\" 안의 nr의 값은 잘못되어 무시됩니다"
 
-#: par.c:478
+#: par.c:479
 #, fuzzy
 msgid "calling 'par(new=TRUE)' with no plot"
 msgstr "calling par(new=TRUE) with no plot"
 
-#: par.c:665 par.c:1063
+#: par.c:666 par.c:1064
 #, c-format
 msgid "graphical parameter \"%s\" is obsolete"
 msgstr "그래픽 매개 변수 \"%s\"는 더 이상 지원되지 않습니다"
 
-#: par.c:669 par.c:1067
+#: par.c:670 par.c:1068
 #, c-format
 msgid "\"%s\" is not a graphical parameter"
 msgstr "\"%s\"는 그래픽 매개 변수가 아닙니다\""
 
-#: par.c:1120
+#: par.c:1121
 #, fuzzy
 msgid "invalid argument passed to 'par()'"
 msgstr "par()에 잘못된 매개 변수가 전달되었습니다"
 
-#: par.c:1164
+#: par.c:1165
 #, c-format
 msgid "too many rows in layout, limit %d"
 msgstr "layout의 행 개수가 너무 많습니다 (한계값은 %d)"
 
-#: par.c:1170
+#: par.c:1171
 #, c-format
 msgid "too many columns in layout, limit %d"
 msgstr "layout의 열 개수가 너무 많습니다 (한계값은 %d)"
 
-#: par.c:1172
+#: par.c:1173
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr "layout의 셀 개수가 너무 많습니다 (한계값은 %d)"

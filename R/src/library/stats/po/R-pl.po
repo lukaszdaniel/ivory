@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-10 20:42\n"
+"POT-Creation-Date: 2015-06-09 22:21\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -4879,11 +4879,6 @@ msgstr "nieprzecinające się szeregi"
 msgid "non-leaf subtree of length 0"
 msgstr "bezlistne poddrzewo o długości 0"
 
-#. R/density.R: warning("non-matched further arguments are disregarded")
-#: R/density.R:0
-msgid "non-matched further arguments are disregarded"
-msgstr "dalsze niedopasowane argumenty zostały odrzucone"
-
 #. R/family.R: stop("non-positive values not allowed for the 'gamma' family")
 #: R/family.R:0
 msgid "non-positive values not allowed for the 'gamma' family"
@@ -6622,16 +6617,6 @@ msgstr[0] "ale znaleziona zmienna ma %d wiersz"
 msgstr[1] "ale znalezione zmienne mają %d wiersze"
 msgstr[2] "ale znalezione zmienne mają %d wierszy"
 
-#. R/diffinv.R: ngettext(na, "extra argument %s is disregarded", "extra arguments %s are be disregarded",     domain = "R-stats")
-#. R/lm.R: ngettext(length(dots), "extra argument %s is disregarded", "extra arguments %s are disregarded",     domain = "R-stats")
-#. R/lm.R: ngettext(as.integer(length(dots)), "extra argument %s is disregarded", "extra arguments %s are disregarded",     domain = "R-stats")
-#: R/diffinv.R:0 R/lm.R:0
-msgid "extra argument %s is disregarded"
-msgid_plural "extra arguments %s are disregarded"
-msgstr[0] "dodatkowy argument %s został odrzucony"
-msgstr[1] "dodatkowe argumenty %s zostały odrzucone"
-msgstr[2] "dodatkowe argumenty %s zostały odrzucone"
-
 #. R/dendrogram.R: ngettext(length(nms), "extra argument %s is not of class \"dendrogram\"", "extra arguments %s are not of class \"dendrogram\"",     domain = "R-stats")
 #: R/dendrogram.R:0
 msgid "extra argument %s is not of class \"dendrogram\""
@@ -6754,6 +6739,15 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "używanie %d/%d wiersza z połączonego dopasowania"
 msgstr[1] "używanie %d/%d wierszy z połączonego dopasowania"
 msgstr[2] "używanie %d/%d wierszy z połączonego dopasowania"
+
+#~ msgid "non-matched further arguments are disregarded"
+#~ msgstr "dalsze niedopasowane argumenty zostały odrzucone"
+
+#~ msgid "extra argument %s is disregarded"
+#~ msgid_plural "extra arguments %s are disregarded"
+#~ msgstr[0] "dodatkowy argument %s został odrzucony"
+#~ msgstr[1] "dodatkowe argumenty %s zostały odrzucone"
+#~ msgstr[2] "dodatkowe argumenty %s zostały odrzucone"
 
 #~ msgid "'%s' argument is of wrong length"
 #~ msgstr "argument '%s' ma niepoprawną długość"

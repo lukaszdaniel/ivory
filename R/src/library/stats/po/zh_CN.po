@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-01 22:12+0200\n"
+"POT-Creation-Date: 2015-06-09 22:21+0200\n"
 "PO-Revision-Date: 2015-01-17 15:14+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -123,24 +123,28 @@ msgstr ""
 msgid "Function '%s' is not in the derivatives table"
 msgstr "微分表里没有这个函数'%s'"
 
-#: deriv.c:635
+#: deriv.c:634
+msgid "'expr' must be an expression or call"
+msgstr ""
+
+#: deriv.c:637
 msgid "variable must be a character string"
 msgstr "变数必需是字符串"
 
-#: deriv.c:637
+#: deriv.c:639
 msgid "only the first element is used as variable name"
 msgstr "只用了第一个元素作为变数名"
 
-#: deriv.c:650
+#: deriv.c:652
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr "'%s'的表达式不对"
 
-#: deriv.c:928 model.c:93
+#: deriv.c:930 model.c:93
 msgid "invalid variable names"
 msgstr "变数名字不对"
 
-#: deriv.c:937
+#: deriv.c:939
 msgid "invalid tag"
 msgstr "标签不对"
 
@@ -173,7 +177,7 @@ msgstr "数学函数中用了非数值参数"
 msgid "Value %g out of range (0, 1)"
 msgstr "%g值出界在(0, 1)外"
 
-#: family.c:66 family.c:80 family.c:98 port.c:383 port.c:549
+#: family.c:66 family.c:80 family.c:98 port.c:383 port.c:552
 #, fuzzy, c-format
 msgid "'%s' argument must be a nonempty numeric vector"
 msgstr "参数%s必需为非空数字向量"
@@ -696,7 +700,7 @@ msgstr "length(m)的值必需为二"
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr "参数Sx必需是长度比m[]小一的数值向量"
 
-#: nls.c:94 nls.c:96 port.c:550
+#: nls.c:94 nls.c:96 port.c:553
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'m'的值必需是串列"
@@ -743,16 +747,16 @@ msgstr "'rho'必需为环境"
 msgid "'dir' is not a numeric vector of the correct length"
 msgstr "'dir'这个数字向量的长度不对"
 
-#: nls.c:307 nls.c:342
+#: nls.c:307 nls.c:341
 msgid "Missing value or an infinity produced when evaluating the model"
 msgstr "在计算模型的时候产生了缺省值或无限值"
 
-#: nls.c:314
+#: nls.c:315
 #, c-format
 msgid "variable '%s' is integer, not numeric"
 msgstr "变量'%s'应该为整数，不能是数值"
 
-#: nls.c:316
+#: nls.c:317
 #, c-format
 msgid "variable '%s' is not numeric"
 msgstr "变量'%s'不是数值"
@@ -1031,37 +1035,37 @@ msgstr "'lower'和'upper'必需为数字向量"
 msgid "NA/NaN function evaluation"
 msgstr "'zeroin'函数值不对"
 
-#: port.c:458
+#: port.c:461
 #, fuzzy
 msgid "'getElement()' function applies only to named lists"
 msgstr "'getElement'只适用于带名串列"
 
-#: port.c:484
+#: port.c:487
 #, fuzzy, c-format
 msgid "'%s' was not found"
 msgstr "%s$%s()不存在"
 
-#: port.c:498
+#: port.c:501
 #, fuzzy, c-format
 msgid "'gradient' argument must be a numeric matrix of dimension (%d,%d)"
 msgstr "'gradient'必需是一个维数为(%d,%d)的数值矩阵"
 
-#: port.c:518
+#: port.c:521
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "fcn运行结果的模式为%d , 长度为%d - 但正确的模式应该是%d，长度为%d"
 
-#: port.c:531
+#: port.c:534
 #, fuzzy
 msgid "invalid type for 'eval_check_store()' function"
 msgstr "eval_check_store的种类不对"
 
-#: port.c:570
+#: port.c:573
 #, fuzzy
 msgid "'lowerb' and 'upperb' arguments must be numeric vectors"
 msgstr "'lowerb'和'upperb'必需为数字向量"
 
-#: port.c:593
+#: port.c:596
 #, c-format
 msgid "'nlsb_iterate()' function returned %d"
 msgstr ""

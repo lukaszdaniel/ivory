@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-01 22:12+0200\n"
+"POT-Creation-Date: 2015-06-09 22:21+0200\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -123,24 +123,28 @@ msgstr ""
 msgid "Function '%s' is not in the derivatives table"
 msgstr "Função '%s' não está na tabela de derivadas"
 
-#: deriv.c:635
+#: deriv.c:634
+msgid "'expr' must be an expression or call"
+msgstr ""
+
+#: deriv.c:637
 msgid "variable must be a character string"
 msgstr "variável deve ser uma string de caracteres"
 
-#: deriv.c:637
+#: deriv.c:639
 msgid "only the first element is used as variable name"
 msgstr "apenas o primeiro elemento é usado como nome da variável"
 
-#: deriv.c:650
+#: deriv.c:652
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr "expressão inválida em '%s'"
 
-#: deriv.c:928 model.c:93
+#: deriv.c:930 model.c:93
 msgid "invalid variable names"
 msgstr "nomes inválidos de variável"
 
-#: deriv.c:937
+#: deriv.c:939
 msgid "invalid tag"
 msgstr "etiqueta inválida"
 
@@ -173,7 +177,7 @@ msgstr "Argumento não-numérico para função matemática"
 msgid "Value %g out of range (0, 1)"
 msgstr "Valor %g fora do intervalo (0,1)"
 
-#: family.c:66 family.c:80 family.c:98 port.c:383 port.c:549
+#: family.c:66 family.c:80 family.c:98 port.c:383 port.c:552
 #, fuzzy, c-format
 msgid "'%s' argument must be a nonempty numeric vector"
 msgstr "Argumento %s deve ser um vetor numérico não-vazio"
@@ -699,7 +703,7 @@ msgstr "length(m) deve ser pelo menos dois"
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr "Argumento Sx deve ser um vetor numérico com comprimento menor que m[]"
 
-#: nls.c:94 nls.c:96 port.c:550
+#: nls.c:94 nls.c:96 port.c:553
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'m' deve ser uma lista"
@@ -746,16 +750,16 @@ msgstr "'rho' deve ser um ambiente"
 msgid "'dir' is not a numeric vector of the correct length"
 msgstr "'dir' não é um vetor numérico de comprimento correto"
 
-#: nls.c:307 nls.c:342
+#: nls.c:307 nls.c:341
 msgid "Missing value or an infinity produced when evaluating the model"
 msgstr "Obtido valor faltante ou infinito quando avaliando o modelo"
 
-#: nls.c:314
+#: nls.c:315
 #, c-format
 msgid "variable '%s' is integer, not numeric"
 msgstr "variável '%s' é inteira, não numérica"
 
-#: nls.c:316
+#: nls.c:317
 #, c-format
 msgid "variable '%s' is not numeric"
 msgstr "variável '%s' não é numérica"
@@ -1041,38 +1045,38 @@ msgstr "'lower' e 'upper' devem ser vetores numéricos"
 msgid "NA/NaN function evaluation"
 msgstr "valor de função inválido em 'zeroin'"
 
-#: port.c:458
+#: port.c:461
 #, fuzzy
 msgid "'getElement()' function applies only to named lists"
 msgstr "'getElement' se aplica apenas a listas nomeadas"
 
-#: port.c:484
+#: port.c:487
 #, fuzzy, c-format
 msgid "'%s' was not found"
 msgstr "%s$%s() não encontrado"
 
-#: port.c:498
+#: port.c:501
 #, fuzzy, c-format
 msgid "'gradient' argument must be a numeric matrix of dimension (%d,%d)"
 msgstr "'gradient' deve ser uma matriz numérica de dimensão (%d,%d)"
 
-#: port.c:518
+#: port.c:521
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr ""
 "fcn retornou modo %d, comprimento %d - esperado modo %d, comprimento %d"
 
-#: port.c:531
+#: port.c:534
 #, fuzzy
 msgid "invalid type for 'eval_check_store()' function"
 msgstr "tipo inválido para eval_check_store"
 
-#: port.c:570
+#: port.c:573
 #, fuzzy
 msgid "'lowerb' and 'upperb' arguments must be numeric vectors"
 msgstr "'lowerb' e 'upperb' devem ser vetores numéricos"
 
-#: port.c:593
+#: port.c:596
 #, c-format
 msgid "'nlsb_iterate()' function returned %d"
 msgstr ""

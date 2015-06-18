@@ -3,11 +3,10 @@ c4cb87eb11444c6b0dfccad6cad40741  Changes
 7112a4d219f74c9ecd9eedbc9c586290  inst/CITATION
 7febfd2a5fe3d6756a81efdcfe4393eb  inst/ppdata/fig2a.dat
 ffa9468ba353521ffef5877e52c4e115  inst/ppdata/pairfn.dat
-a17efb04f0a25736013dd810715035e5  inst/ppdata/eagles.dat
 bafdf70ccb34531ff91986c2ba9daf19  inst/ppdata/redwood.dat
+a17efb04f0a25736013dd810715035e5  inst/ppdata/eagles.dat
 8ca375c1b31c5b715762455d61d01699  inst/ppdata/fig3a.dat
 a26ffe918bb52a021adc7b03b6614d1c  inst/ppdata/stowns1.dat
-35f535419db8fa7744606e8983eeac2c  inst/ppdata/cells.dat
 7a333c19834bfea03c9dc5e2757d3368  inst/ppdata/tokyo.dat
 ead1f329d4b2bccbb77f13d2b9523a79  inst/ppdata/drumlin.dat
 dda524910e5a2d8d9d04cb3188669410  inst/ppdata/fig2b.dat
@@ -17,6 +16,7 @@ dda524910e5a2d8d9d04cb3188669410  inst/ppdata/fig2b.dat
 85ed4066e36bb17c17d276f446e0f675  inst/ppdata/fig3c.dat
 99e735dbb4d3013cf40717b4c9d1a632  inst/ppdata/fig1c.dat
 b15f2c81b673b1cc6aed94a679e9d8fb  inst/ppdata/pereg.dat
+35f535419db8fa7744606e8983eeac2c  inst/ppdata/cells.dat
 1089942eca93c4db597c838ab0e05ce2  inst/ppdata/davis.dat
 e6ece6aece5b7bd9d61d3eddfddf7313  inst/ppdata/hccells.dat
 98341f3847f222d9f8d6ac241ab416d6  inst/ppdata/pines.dat
@@ -29,13 +29,13 @@ e0030d9c8d348b412e8d2bd0ba7127e0  inst/ppdata/agter.dat
 d0be93e6b64734ec0d0721d3d1bd6334  inst/po/pl/LC_MESSAGES/R-spatial.mo
 48a4c745e4ef95fad7c95d3e158c77a9  inst/po/de/LC_MESSAGES/R-spatial.mo
 2e3e27189d8d9ffcb0791407e9774c3a  inst/po/en@quot/LC_MESSAGES/R-spatial.mo
-5193d9a4c94db175d7a3faea4c87dd94  inst/NEWS
 8252b18240bdc458ec3ae2d149b940e4  inst/po/fr/LC_MESSAGES/R-spatial.mo
 66d59f30bbbf0280d05053e0474c620a  inst/po/ko/LC_MESSAGES/R-spatial.mo
+5193d9a4c94db175d7a3faea4c87dd94  inst/NEWS
 a458ffe63b5904c1b2d137679a8611b3  LICENCE.note
 711460a998265bdb11322ddfcab76093  man/variogram.Rd
-d560347dc18da476bca35d1fc4fe54b9  man/anova.trls.Rd
 621d0b812f4dd5bee67513233c8c6e8d  man/correlogram.Rd
+d560347dc18da476bca35d1fc4fe54b9  man/anova.trls.Rd
 8dc7412bf5eb06859ba2f91490265b17  man/semat.Rd
 8b0c26b282aa42c47c772966ab7f327d  man/ppinit.Rd
 496f585d6c3a390be22c6ef151302a42  man/Strauss.Rd

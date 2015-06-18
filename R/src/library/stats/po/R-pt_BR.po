@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-03-10 20:42\n"
+"POT-Creation-Date: 2015-06-09 22:21\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -5024,11 +5024,6 @@ msgstr ""
 msgid "non-leaf subtree of length 0"
 msgstr "subárvore de comprimento 0 não é uma folha"
 
-#. R/density.R: warning("non-matched further arguments are disregarded")
-#: R/density.R:0
-msgid "non-matched further arguments are disregarded"
-msgstr "outros argumentos não-pareados são ignorados"
-
 #. R/family.R: stop("non-positive values not allowed for the 'gamma' family")
 #: R/family.R:0
 #, fuzzy
@@ -6773,16 +6768,6 @@ msgstr[1] ""
 "'newdata' teve %d linhas mas variável/variáveis encontrada/s tem/têm %d "
 "linhas"
 
-#. R/diffinv.R: ngettext(na, "extra argument %s is disregarded", "extra arguments %s are be disregarded",     domain = "R-stats")
-#. R/lm.R: ngettext(length(dots), "extra argument %s is disregarded", "extra arguments %s are disregarded",     domain = "R-stats")
-#. R/lm.R: ngettext(as.integer(length(dots)), "extra argument %s is disregarded", "extra arguments %s are disregarded",     domain = "R-stats")
-#: R/diffinv.R:0 R/lm.R:0
-#, fuzzy
-msgid "extra argument %s is disregarded"
-msgid_plural "extra arguments %s are disregarded"
-msgstr[0] "argumentos extras descartados"
-msgstr[1] "argumentos extras descartados"
-
 #. R/dendrogram.R: ngettext(length(nms), "extra argument %s is not of class \"dendrogram\"", "extra arguments %s are not of class \"dendrogram\"",     domain = "R-stats")
 #: R/dendrogram.R:0
 #, fuzzy
@@ -6901,6 +6886,15 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "usando a %d/%d linhas de um ajuste combinado"
 msgstr[1] "usando a %d/%d linhas de um ajuste combinado"
+
+#~ msgid "non-matched further arguments are disregarded"
+#~ msgstr "outros argumentos não-pareados são ignorados"
+
+#, fuzzy
+#~ msgid "extra argument %s is disregarded"
+#~ msgid_plural "extra arguments %s are disregarded"
+#~ msgstr[0] "argumentos extras descartados"
+#~ msgstr[1] "argumentos extras descartados"
 
 #, fuzzy
 #~ msgid "'%s' argument is of wrong length"

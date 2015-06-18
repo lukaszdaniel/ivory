@@ -2,7 +2,8 @@
 
 source conf.sh
 
-
+for ix in ${!filedev[@]}
+do
   cp -rf $filedev $filefroz
   cp -rf $filedev $filemine
 
@@ -11,3 +12,4 @@ source conf.sh
   if test -n "$cmd"; then
    svn add $filemine
   fi;
+done;

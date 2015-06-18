@@ -33,7 +33,7 @@ function(e1, e2)
 	    is.call(te <- topicExpr[[2L]]) && te[[1L]] == "?") {
 	    cat(gettext("Contacting Delphi...", domain = "R-utils"))
 	    flush.console()
-	    Sys.sleep(2+rpois(1,2))
+	    Sys.sleep(2 + stats::rpois(1,2))
 	    cat(gettext("the oracle is unavailable.\nWe apologize for any inconvenience.", domain = "R-utils"), "\n", sep = "")
 	    return(invisible())
 	}

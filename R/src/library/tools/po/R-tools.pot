@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.3.0\n"
-"POT-Creation-Date: 2015-04-20 05:19\n"
+"POT-Creation-Date: 2015-06-09 22:21\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -749,7 +749,7 @@ msgstr ""
 
 
 #: R/news.R: 0
-#. R/news.R: warning("Cannot extract version info from the following section titles:", "\n", paste(unique(nms[!ind]),     collapse = "  "), sep = "")
+#. R/news.R: warning("Cannot extract version info from the following section titles:\n", paste(unique(nms[!ind]),     collapse = "  "))
 
 msgid "Cannot extract version info from the following section titles:"
 msgstr ""
@@ -974,8 +974,8 @@ msgid "DIFFERED"
 msgstr ""
 
 
-#: R/check.R: 0
-#. R/check.R: gettext("DONE", domain = "R-tools")
+#: R/logging.R: 0
+#. R/logging.R: gettext("DONE", domain = "R-tools")
 
 msgid "DONE"
 msgstr ""
@@ -1411,6 +1411,13 @@ msgid "Each sample represents %s seconds."
 msgstr ""
 
 
+#: R/urltools.R: 0
+#. R/urltools.R: gettext("Empty URL", domain = "R-tools")
+
+msgid "Empty URL"
+msgstr ""
+
+
 #: R/check.R: 0
 #. R/check.R: gettext("Empty file 'INDEX'.", domain = "R-tools")
 
@@ -1649,13 +1656,6 @@ msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettext("File README.md cannot be checked without 'pandoc' being installed.\n", domain = "R-tools")
-
-msgid "File README.md cannot be checked without 'pandoc' being installed."
-msgstr ""
-
-
-#: R/check.R: 0
 #. R/check.R: gettext("File names must not differ just by case to be usable on all R platforms.\nPlease rename the files and try again.\nSee section 'Package structure' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
 
 msgid "File names must not differ just by case to be usable on all R platforms.\nPlease rename the files and try again.\nSee section 'Package structure' in the 'Writing R Extensions' manual."
@@ -1666,6 +1666,13 @@ msgstr ""
 #. R/utils.R: stop("Files 'DESCRIPTION' and 'DESCRIPTION.in' are missing.")
 
 msgid "Files 'DESCRIPTION' and 'DESCRIPTION.in' are missing."
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("Files 'README.md' or 'NEWS.md' cannot be checked without 'pandoc' being installed.\n",     domain = "R-tools")
+
+msgid "Files 'README.md' or 'NEWS.md' cannot be checked without 'pandoc' being installed."
 msgstr ""
 
 
@@ -2035,6 +2042,13 @@ msgstr ""
 #. R/QC.R: gettext("Invalid Priority field.", domain = "R-tools")
 
 msgid "Invalid Priority field."
+msgstr ""
+
+
+#: R/urltools.R: 0
+#. R/urltools.R: gettext("Invalid URI scheme", domain = "R-tools")
+
+msgid "Invalid URI scheme"
 msgstr ""
 
 
@@ -3454,6 +3468,7 @@ msgstr ""
 #. R/check.R: gettext("SKIPPED", domain = "R-tools")
 #. R/check.R: gettext("SKIPPED", domain = "R-tools")
 #. R/check.R: gettext("SKIPPED", domain = "R-tools")
+#. R/check.R: gettext("SKIPPED", domain = "R-tools")
 
 msgid "SKIPPED"
 msgstr ""
@@ -3632,6 +3647,13 @@ msgstr ""
 #. R/check.R: gettext("Source packages should not contain undeclared executable files.\nSee section 'Package structure' in the 'Writing R Extensions' manual.\n",     domain = "R-tools")
 
 msgid "Source packages should not contain undeclared executable files.\nSee section 'Package structure' in the 'Writing R Extensions' manual."
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettext("Spaces in an http[s] URL should probably be replaced by %20", domain = "R-tools")
+
+msgid "Spaces in an http[s] URL should probably be replaced by %20"
 msgstr ""
 
 
@@ -3888,6 +3910,13 @@ msgstr ""
 #. R/check.R: gettext("The argument of a replacement function which corresponds to the right hand side must be named 'value'.\n",     domain = "R-tools")
 
 msgid "The argument of a replacement function which corresponds to the right hand side must be named 'value'."
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettext("The canonical URL of the CRAN page for a package is   http://cran.r-project.org/package=pkgname",     domain = "R-tools")
+
+msgid "The canonical URL of the CRAN page for a package is   http://cran.r-project.org/package=pkgname"
 msgstr ""
 
 
@@ -8128,10 +8157,19 @@ msgstr[1]    ""
 
 
 #: R/QC.R: 0
-#. R/QC.R: ngettext(length(bad), "VignetteBuilder package required for checking but not available:",     "VignetteBuilder packages required for checking but not available:", domain = "R-tools")
+#. R/QC.R: ngettext(length(bad), "VignetteBuilder package not declared:", "VignetteBuilder packages not declared:",     domain = "R-tools")
 
-msgid        "VignetteBuilder package required for checking but not available:"
-msgid_plural "VignetteBuilder packages required for checking but not available:"
+msgid        "VignetteBuilder package not declared:"
+msgid_plural "VignetteBuilder packages not declared:"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: ngettext(length(bad), "VignetteBuilder package required for checking but not installed:",     "VignetteBuilder packages required for checking but not installed:", domain = "R-tools")
+
+msgid        "VignetteBuilder package required for checking but not installed:"
+msgid_plural "VignetteBuilder packages required for checking but not installed:"
 msgstr[0]    ""
 msgstr[1]    ""
 

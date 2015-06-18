@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2015-05-30 r299) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2015-06-09 r302) -- "Internationalized Version of R"
 Copyright (C) 2013-2015 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2015-05-30 r68441) -- "Unsuffered Consequences"
+R Under development (unstable) (2015-06-09 r68498) -- "Unsuffered Consequences"
 Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-unknown-linux-gnu (64-bit)
 
@@ -49,9 +49,9 @@ Call:
 coxph(formula = Surv(time, status) ~ rx + frailty(litter), data = rats, subset = (sex == 
     "f"), method = "breslow")
 
-                coef  se(coef) se2   Chisq DF   p    
-rx              0.906 0.323    0.319  7.88  1.0 0.005
-frailty(litter)                      16.89 13.8 0.250
+                  coef se(coef)    se2  Chisq   DF     p
+rx               0.906    0.323  0.319  7.882  1.0 0.005
+frailty(litter)                        16.888 13.8 0.253
 
 Iterations: 6 outer, 25 Newton-Raphson
      variance of random effect= 0.474  I-likelihood = -181.1 
@@ -90,9 +90,9 @@ Call:
 coxph(formula = Surv(time, status) ~ rx + frailty(litter, theta = 1), data = rats, 
     subset = (sex == "f"), method = "breslow")
 
-                          coef  se(coef) se2   Chisq DF   p     
-rx                        0.918 0.327    0.321  7.85  1.0 0.0051
-frailty(litter, theta = 1                      27.25 22.7 0.2300
+                            coef se(coef)    se2  Chisq   DF      p
+rx                         0.918    0.327  0.321  7.851  1.0 0.0051
+frailty(litter, theta = 1                        27.245 22.7 0.2324
 
 Iterations: 1 outer, 6 Newton-Raphson
      variance of random effect= 1  I-likelihood = -181.5 
@@ -105,8 +105,8 @@ Call:
 coxph(formula = Surv(time, status) ~ frailty(litter), data = rats, subset = (sex == 
     "f"))
 
-                coef se(coef) se2 Chisq DF   p   
-frailty(litter)                   18    14.6 0.24
+                coef se(coef) se2 Chisq   DF    p
+frailty(litter)                      18 14.6 0.24
 
 Iterations: 6 outer, 22 Newton-Raphson
      variance of random effect= 0.504  I-likelihood = -184.8 
@@ -115,4 +115,4 @@ Likelihood ratio test=30 on 14.6 df, p=0.0101 n=150
 > 
 > proc.time()
    user  system elapsed 
-  0.361   0.036   0.398 
+  0.339   0.033   0.357 

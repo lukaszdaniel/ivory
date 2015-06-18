@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-01 22:12+0200\n"
+"POT-Creation-Date: 2015-06-09 22:21+0200\n"
 "PO-Revision-Date: 2012-03-08 20:50+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -123,24 +123,28 @@ msgstr ""
 msgid "Function '%s' is not in the derivatives table"
 msgstr "함수 '%s'는 미분함수 테이블에 없습니다"
 
-#: deriv.c:635
+#: deriv.c:634
+msgid "'expr' must be an expression or call"
+msgstr ""
+
+#: deriv.c:637
 msgid "variable must be a character string"
 msgstr "변수는 문자열이어야 합니다"
 
-#: deriv.c:637
+#: deriv.c:639
 msgid "only the first element is used as variable name"
 msgstr " 번째 요소만 변수 이름으로 사용되었습니다 "
 
-#: deriv.c:650
+#: deriv.c:652
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr "'%s'의 식이 잘못되었습니다"
 
-#: deriv.c:928 model.c:93
+#: deriv.c:930 model.c:93
 msgid "invalid variable names"
 msgstr "변수 이름들이 잘못되었습니다"
 
-#: deriv.c:937
+#: deriv.c:939
 msgid "invalid tag"
 msgstr "태그가 부적절합니다"
 
@@ -173,7 +177,7 @@ msgstr "수학 함수에 숫자가 아닌 인수가 전달되었습니다"
 msgid "Value %g out of range (0, 1)"
 msgstr "%g 값이 (0,1) 범위 외입니다 "
 
-#: family.c:66 family.c:80 family.c:98 port.c:383 port.c:549
+#: family.c:66 family.c:80 family.c:98 port.c:383 port.c:552
 #, fuzzy, c-format
 msgid "'%s' argument must be a nonempty numeric vector"
 msgstr "%s 인자는 반드시 수치형 벡터이어야 합니다 "
@@ -697,7 +701,7 @@ msgstr "length(m) 은 반드시 2 이상이어야 합니다 "
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr "Sx 인자는 반드시 수치형 벡터이어야 하며, m[] 보다 짧아야합니다 "
 
-#: nls.c:94 nls.c:96 port.c:550
+#: nls.c:94 nls.c:96 port.c:553
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'m' 은 반드시 list 이어야 합니다 "
@@ -744,16 +748,16 @@ msgstr "'rho' 는 반드시 환경이어야 합니다 "
 msgid "'dir' is not a numeric vector of the correct length"
 msgstr "'dir' 은 올바른 길이를 가진 수치형 벡터가 아닙니다 "
 
-#: nls.c:307 nls.c:342
+#: nls.c:307 nls.c:341
 msgid "Missing value or an infinity produced when evaluating the model"
 msgstr "모델 평가시 결측치 혹은 무한값이 생성되었습니다 "
 
-#: nls.c:314
+#: nls.c:315
 #, c-format
 msgid "variable '%s' is integer, not numeric"
 msgstr "변수 '%s' 는 수치형이 아닌 정수입니다 "
 
-#: nls.c:316
+#: nls.c:317
 #, c-format
 msgid "variable '%s' is not numeric"
 msgstr "변수 '%s' 는 수치형이 아닙니다 "
@@ -1040,37 +1044,37 @@ msgstr "'lower' 와 'upper' 는 반드시 수치형 벡터이어야 합니다 "
 msgid "NA/NaN function evaluation"
 msgstr "'zeroin'의 함수값이 잘못되었습니다"
 
-#: port.c:458
+#: port.c:461
 #, fuzzy
 msgid "'getElement()' function applies only to named lists"
 msgstr "'getElement' 는 명명된 list 에만 적용됩니다 "
 
-#: port.c:484
+#: port.c:487
 #, fuzzy, c-format
 msgid "'%s' was not found"
 msgstr "%s$%s() 를 찾을 수 없습니다 "
 
-#: port.c:498
+#: port.c:501
 #, fuzzy, c-format
 msgid "'gradient' argument must be a numeric matrix of dimension (%d,%d)"
 msgstr "'gradient' 는 반드시 (%d,%d) 인 수치형 행렬이어야 합니다 "
 
-#: port.c:518
+#: port.c:521
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "fcn 은 모드 %d, 길이 %d 를 생성했고, 모드 %d, 길이 %d 를 요구합니다 "
 
-#: port.c:531
+#: port.c:534
 #, fuzzy
 msgid "invalid type for 'eval_check_store()' function"
 msgstr "eval_check_store 에 대한 유형이 잘못되었습니다 "
 
-#: port.c:570
+#: port.c:573
 #, fuzzy
 msgid "'lowerb' and 'upperb' arguments must be numeric vectors"
 msgstr "'lowerb' 와 'upperb' 는 반드시 수치형 벡터이어야 합니다 "
 
-#: port.c:593
+#: port.c:596
 #, c-format
 msgid "'nlsb_iterate()' function returned %d"
 msgstr ""

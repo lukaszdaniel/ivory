@@ -2,13 +2,13 @@ ee1f2340ddd8ca1063ca46417e507bb9  DESCRIPTION
 86b185771b0e5e29717ee6b0ad5ccf8d  Changes
 3bad31311a37fe2f39e9c2ad876ab94c  inst/CITATION
 dc34b63e948e3ba0667d43b3fde24c58  inst/po/pl/LC_MESSAGES/R-class.mo
-e042788d6870b70eb8ea0bc5f01391ff  inst/NEWS
 41a14f2150064ddff743e39d111a870a  inst/po/de/LC_MESSAGES/R-class.mo
 a98bfc65732fea1f439faecee3a4adaf  inst/po/en@quot/LC_MESSAGES/R-class.mo
+e042788d6870b70eb8ea0bc5f01391ff  inst/NEWS
 b888e2521f30a9912d9687777b1aa478  inst/po/fr/LC_MESSAGES/R-class.mo
 802e4f5e2c0e759367da2ae274d5951e  inst/po/ko/LC_MESSAGES/R-class.mo
-7ffe67ce0c67d938298e46b08818f9cb  man/knn1.Rd
 a14861d4c76b0028b6dc635163b00297  LICENCE.note
+7ffe67ce0c67d938298e46b08818f9cb  man/knn1.Rd
 e8e077536af8608b6d5d366410bae87a  man/lvqtest.Rd
 396eec671f1bddd185fa79831dd47ee3  man/lvq3.Rd
 e70f2c5c23ddf839b5e3b1457fc6fdbd  man/lvqinit.Rd
