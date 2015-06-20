@@ -1,21 +1,20 @@
-### $Id: diana.q 6869 2015-01-26 13:30:42Z maechler $
+### $Id: diana.q 6953 2015-06-18 09:30:24Z maechler $
 
 diana <- function(x, diss = inherits(x, "dist"),
 		  metric = "euclidean", stand = FALSE,
 		  ##_not_yet stop.at.k = FALSE,
                   keep.diss = n < 100, keep.data = !diss, trace.lev = 0)
 {
-    dataname <- sQuote(deparse(substitute(x)))
     if((diss <- as.logical(diss))) {
 	## check type of input vector
-	if(any(is.na(x))) stop("NA values in the dissimilarity matrix not allowed.")
+	if(anyNA(x)) stop("NA values in the dissimilarity matrix not allowed.")
 	if(data.class(x) != "dissimilarity") { # try to convert to
 	    if(!is.null(dim(x))) {
 		x <- as.dist(x) # or give an error
 	    } else {
 		## possibly convert input *vector*
 		if(!is.numeric(x) || is.na(n <- sizeDiss(x)))
-		    stop(gettextf("%s is not and cannot be converted to class \"dissimilarity\"", dataname))
+		    stop(gettextf("'%s' argument is not and cannot be converted to class \"dissimilarity\"", "x"))
 		attr(x, "Size") <- n
 	    }
 	    class(x) <- dissiCl

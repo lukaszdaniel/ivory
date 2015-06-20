@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: cluster 2.0.1\n"
-"POT-Creation-Date: 2015-02-13 16:25\n"
+"Project-Id-Version: cluster 2.0.2\n"
+"POT-Creation-Date: 2015-06-20 21:43\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,13 +32,6 @@ msgid "%s is a \"dist\" object, but should be a data matrix or frame"
 msgstr ""
 
 
-#: R/daisy.q: 0
-#. R/daisy.q: gettextf("%s is not a dataframe or a numeric matrix.", dataname)
-
-msgid "%s is not a dataframe or a numeric matrix."
-msgstr ""
-
-
 #: R/agnes.q: 0
 #: R/clara.q: 0
 #: R/diana.q: 0
@@ -53,11 +46,7 @@ msgstr ""
 
 
 #: R/agnes.q: 0
-#: R/diana.q: 0
-#: R/fanny.q: 0
 #. R/agnes.q: gettextf("%s is not and cannot be converted to class \"dissimilarity\"", dataname)
-#. R/diana.q: gettextf("%s is not and cannot be converted to class \"dissimilarity\"", dataname)
-#. R/fanny.q: gettextf("%s is not and cannot be converted to class \"dissimilarity\"", dataname)
 
 msgid "%s is not and cannot be converted to class \"dissimilarity\""
 msgstr ""
@@ -77,6 +66,13 @@ msgid "%s must contain column names or numbers"
 msgstr ""
 
 
+#: R/daisy.q: 0
+#. R/daisy.q: gettextf("'%s' argument is not a dataframe or a numeric matrix.", "x")
+
+msgid "'%s' argument is not a dataframe or a numeric matrix."
+msgstr ""
+
+
 #: R/pam.q: 0
 #. R/pam.q: gettextf("'%s' argument is not a numeric dataframe or matrix.", "x")
 
@@ -84,7 +80,11 @@ msgid "'%s' argument is not a numeric dataframe or matrix."
 msgstr ""
 
 
+#: R/diana.q: 0
+#: R/fanny.q: 0
 #: R/pam.q: 0
+#. R/diana.q: gettextf("'%s' argument is not and cannot be converted to class \"dissimilarity\"",     "x")
+#. R/fanny.q: gettextf("'%s' argument is not and cannot be converted to class \"dissimilarity\"",     "x")
 #. R/pam.q: gettextf("'%s' argument is not and cannot be converted to class \"dissimilarity\"",     "x")
 
 msgid "'%s' argument is not and cannot be converted to class \"dissimilarity\""
@@ -1111,7 +1111,7 @@ msgstr ""
 
 
 #: R/daisy.q: 0
-#. R/daisy.q: gettextf("invalid type %s for column numbers %s", type2[ina], pColl(which(is.na)))
+#. R/daisy.q: gettextf("invalid type %s for column numbers %s", type2[ina], pColl(which(ina)))
 
 msgid "invalid type %s for column numbers %s"
 msgstr ""

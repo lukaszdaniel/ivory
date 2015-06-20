@@ -155,19 +155,31 @@ function(pattern, fields = c("alias", "concept", "title"),
     if(!missing(help.db))
 	warning("argument 'help.db' is deprecated")
 
+    ## This duplicates expansion in hsearch_db(), but there is no simple
+    ## way to avoid this.
+    i <- pmatch(types, hsearch_db_types)
+    if (anyNA(i))
+	stop("incorrect type specification")
+    else
+	types <- hsearch_db_types[i]
+    
     ### Set up the hsearch db.
     db <- hsearch_db(package, lib.loc, types, verbose, rebuild,
                      use_UTF8)
-    ## Arguments types and lib.loc were expanded when building the
-    ## hsearch db, so get from there.
-    types <- attr(db, "Types")
+    ## Argument lib.loc was expanded when building the hsearch db, so
+    ## get from there.
     lib.loc <- attr(db, "LibPaths")
 
-    ### Matching.
-    if(verbose >= 2L) {
-        message(gettextf("Database of %d help objects (%d aliases, %d concepts, %d keywords)", NROW(db$Base),     NROW(db$Aliases), NROW(db$Concepts), NROW(db$Keywords), domain = "R-utils"), domain = NA)
-        flush.console()
+    ## Subset to the requested help types if necessary.
+    if(!identical(sort(types), sort(attr(db, "Types")))) {
+        db$Base <- db$Base[!is.na(match(db$Base$Type, types)), ]
+        db[-1L] <-
+            lapply(db[-1L],
+                   function(e) {
+                       e[!is.na(match(e$ID, db$Base$ID)), ]
+                   })
     }
+        
     if(!is.null(package)) {
 	## Argument 'package' was given.  Need to check that all given
 	## packages exist in the db, and only search the given ones.
@@ -178,15 +190,18 @@ function(pattern, fields = c("alias", "concept", "title"),
 	    stop(gettextf("no information in the database for package %s: need 'rebuild = TRUE'?",
 			  sQuote(package[pos_in_hsearch_db == 0][1L])),
                  domain = NA)
-	db <-
+	db[] <-
 	    lapply(db,
-		   function(x) {
-		       x[x[, "Package"] %in% package, , drop = FALSE]
+		   function(e) {
+		       e[!is.na(match(e$Package, package)), ]
 		   })
     }
 
-    ## Subset to the requested help types
-    db$Base <- db$Base[db$Base[,"Type"] %in% types, , drop=FALSE]
+    ### Matching.
+    if(verbose >= 2L) {
+        message(gettextf("Database of %d help objects (%d aliases, %d concepts, %d keywords)", NROW(db$Base), NROW(db$Aliases), NROW(db$Concepts), NROW(db$Keywords), domain = "R-utils"), domain = NA)
+        flush.console()
+    }
 
     ## <FIXME>
     ## No need continuing if there are no objects in the data base.
@@ -282,6 +297,7 @@ function(pattern, fields = c("alias", "concept", "title"),
                          "Package", "LibPath", "Type"),
                        drop = FALSE],
                 matches[c("Field", "Entry")])
+    rownames(db) <- NULL
     if(verbose>= 2L) {
         n_of_objects_matched <- length(unique(db[, "ID"]))
         message(sprintf(ngettext(n_of_objects_matched,
@@ -331,19 +347,19 @@ function(package = NULL, lib.loc = NULL,
 	## library path is different from the one used when building the
 	## hsearch db (stored as its "LibPaths" attribute).
 	if(!identical(lib.loc, attr(db, "LibPaths")) ||
-	   !all(types %in% attr(db, "Types")) ||
+	   any(is.na(match(types, attr(db, "Types")))) ||
 	   ## We also need to rebuild the hsearch db in case an existing
 	   ## dir in the library path was modified more recently than
 	   ## the db, as packages might have been installed or removed.
-	   any(attr(db, "mtime") < file.mtime(lib.loc[file.exists(lib.loc)])) ||
+           any(attr(db, "mtime") < file.mtime(lib.loc[file.exists(lib.loc)])) ||
 	   ## Or if the user changed the locale character type ...
 	   !identical(attr(db, "ctype"), Sys.getlocale("LC_CTYPE"))
-	   )
+           )
 	    rebuild <- TRUE
         ## We also need to rebuild if 'packages' was used before and has
         ## changed.
-        if (!is.null(package) &&
-            any(! package %in% db$Base[, "Package"]))
+        if(!is.null(package) &&
+           any(is.na(match(package, db$Base[, "Package"]))))
             rebuild <- TRUE
     }
     if(rebuild) {

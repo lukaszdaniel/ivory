@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: survival 2.37-2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-07 16:58+0100\n"
+"POT-Creation-Date: 2015-06-20 21:43+0200\n"
 "PO-Revision-Date: 2013-06-25 17:58+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,18 +14,27 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 1.5.4\n"
+
 #: cox_Rcallback.c:53
 msgid "coef: invalid type\n"
 msgstr "współczynnik: niepoprawny typ\n"
+
 #: cox_Rcallback.c:62
 msgid "first: invalid type\n"
 msgstr "pierwszy: niepoprawny typ\n"
+
 #: cox_Rcallback.c:72
 msgid "second: invalid type\n"
 msgstr "drugi: niepoprawny typ\n"
+
 #: cox_Rcallback.c:81
 msgid "flag: invalid type\n"
 msgstr "flaga: niepoprawny typ\n"
+
 #: cox_Rcallback.c:90
 msgid "penalty: invalid type\n"
 msgstr "kara: niepoprawny typ\n"
+
+#: coxexact.c:162
+msgid "(number at risk) * (number tied deaths) is too large"
+msgstr ""

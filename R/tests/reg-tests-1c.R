@@ -796,24 +796,29 @@ stopifnot(identical(cummin(x), c(iNA, iNA)),
 profile <- tempfile()
 writeLines(c(
 'memory profiling: sample.interval=20000',
-':145341:345360:13726384:0:"stdout"', 
+':145341:345360:13726384:0:"stdout"',
 ':208272:345360:19600000:0:"stdout"'), profile)
 summaryRprof(filename = profile, memory = "both")
 unlink(profile)
 ## failed when a matrix was downgraded to a vector
 
 
-## Garbage collection  protection problem
-if((as.numeric(Sys.time()) %% 10) < 1) { ## only run in 1 / 10 times
- cat(" gctorture() + print(factor with NA) .. ")
- x <- c("a", NA, "b")
- fx <- factor(x, exclude="")
- gctorture()
- ct <- system.time(r <- replicate(30, capture.output(print(fx))))
- stopifnot(r[,1] == r)
- gctorture(on=FALSE)
- cat("[Ok]\n")
- writeLines(r[,1])
- print(ct)
-}
-## the '<NA>' levels part would be wrong occasionally
+## option(OutDec = *)  -- now gives a warning when  not 1 character
+op <- options(OutDec = ".", digits = 7, # <- default
+              warn = 2)# <- (unexpected) warnings become errors
+stopifnot(identical("3.141593", fpi <- format(pi)))
+options(OutDec = ",")
+stopifnot(identical("3,141593", cpi <- format(pi)))
+## warnings, but it "works" (for now):
+tools::assertWarning(options(OutDec = ".1."))
+stopifnot(identical("3.1.141593", format(pi)))
+tools::assertWarning(options(OutDec = ""))
+tools::assertWarning(stopifnot(identical("3141593", format(pi))))
+options(op)# back to sanity
+## No warnings in R versions <= 3.2.1
+
+
+## format(*, decimal.mark=".")  when   OutDec != "."  (PR#16411)
+op <- options(OutDec = ",")
+stopifnot(identical(fpi, format(pi, decimal.mark=".")))
+## failed in R <= 3.2.1

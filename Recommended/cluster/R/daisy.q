@@ -2,10 +2,9 @@
 daisy <- function(x, metric = c("euclidean", "manhattan", "gower"),
 		  stand = FALSE, type = list(), weights = rep.int(1, p))
 {
-    dataname <- sQuote(deparse(substitute(x)))
     ## check type of input matrix
     if(length(dx <- dim(x)) != 2 || !(is.data.frame(x) || is.numeric(x)))
-	stop(gettextf("%s is not a dataframe or a numeric matrix.", dataname))
+	stop(gettextf("'%s' argument is not a dataframe or a numeric matrix.", "x"))
     n <- dx[1]# nrow
     p <- dx[2]# ncol
     varnms <- dimnames(x)[[2]]
@@ -123,7 +122,7 @@ daisy <- function(x, metric = c("euclidean", "manhattan", "gower"),
     ##              1   2   3   4   5   6  --> passed to Fortran below
     type3 <- match(type2, typeCodes)# integer
     if(any(ina <- is.na(type3)))
-	stop(gettextf("invalid type %s for column numbers %s", type2[ina], pColl(which(is.na))))
+	stop(gettextf("invalid type %s for column numbers %s", type2[ina], pColl(which(ina))))
     if((mdata <- any(inax <- is.na(x)))) { # TRUE if x[] has any NAs
 	jtmd <- integer(p)
 	jtmd[apply(inax, 2L, any)] <- -1L
@@ -154,7 +153,7 @@ daisy <- function(x, metric = c("euclidean", "manhattan", "gower"),
     full[!lower.tri(full, diag = TRUE)] <- disv
     disv <- t(full)[lower.tri(full)]
     ## give warning if some dissimilarities are missimg
-    if(any(is.na(disv))) attr(disv, "NA.message") <-
+    if(anyNA(disv)) attr(disv, "NA.message") <-
 	gettext("NA values in the dissimilarity matrix!")
     ## construct S object -- "dist" methods are *there* !
     class(disv) <- dissiCl # see ./0aaa.R

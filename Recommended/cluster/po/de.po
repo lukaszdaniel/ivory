@@ -1,0 +1,100 @@
+# # Translation of src/library/Recommended/cluster/po/cluster.pot to German
+# # Copyright (C) 2013 The R Foundation
+# # This file is distributed under the same license as the R package.
+# # Detlef Steuer <detlef.steuer@hsu-hh.de>, 2013-2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: cluster 2.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-20 21:43+0200\n"
+"PO-Revision-Date: 2015-02-02 12:30+0100\n"
+"Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
+"Language-Team: R Core <r-core@r-project.org>\n"
+"Language: DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
+
+#: clara.c:97
+#, c-format
+msgid "C level clara(): random k=%d > n **\n"
+msgstr "C Level clara(): random k=%d > n **\n"
+
+#: clara.c:308
+#, c-format
+msgid ""
+"clara()'s C level dysta2(nsam=%d, p=%d, nbest=%d, n=%d) gave 'toomany_NA'"
+msgstr ""
+"clara()'s C Level dysta2(nsam=%d, p=%d, nbest=%d, n=%d) ergab 'toomany_NA'"
+
+#: clara.c:342 clara.c:347
+#, c-format
+msgid "C level dysta2(): nsel[%s= %d] = %d is outside 0..n, n=%d"
+msgstr "C Level dysta2(): nsel[%s= %d] = %d ist außerhalb von 0..n, n=%d"
+
+#: fanny.c:251
+#, c-format
+msgid "  not converged: it = %d\n"
+msgstr ""
+
+#: fanny.c:260
+#, c-format
+msgid "%sConverged after %d iterations,  obj = %#20.*g\n"
+msgstr ""
+
+#: fanny.c:264
+#, c-format
+msgid "%sNOT converged after %d iterations,  obj = %#20.*g\n"
+msgstr ""
+
+#: pam.c:155
+msgid "Invalid 'medoids'"
+msgstr "unzulässige 'medoids'"
+
+#: pam.c:313
+msgid "medoids given\n"
+msgstr ""
+
+#: pam.c:329
+#, c-format
+msgid "build %d medoids:\n"
+msgstr ""
+
+#: pam.c:360
+#, c-format
+msgid "    new representative. %d\n"
+msgstr ""
+
+#: pam.c:374
+msgid "  after build: medoids are"
+msgstr ""
+
+#: pam.c:378
+msgid ""
+"\n"
+"  and min.dist dysma[1:n] are\n"
+msgstr ""
+
+#: pam.c:552
+#, c-format
+msgid "   swp new %*d <-> %*d old; decreasing diss. %7g by %g\n"
+msgstr ""
+
+#: pam.c:647
+#, c-format
+msgid "pam(): Bug in C level cstat(), k=%d: ntt=0"
+msgstr "pam(): Bug in C Level cstat(), k=%d: ntt=0"
+
+#: twins.c:154
+#, c-format
+msgid ""
+"agnes(method=%d, par.method=*) lead to invalid merge; step %d, D(.,.)=%g"
+msgstr ""
+"agnes(method=%d, par.method=*) führte zu unzulässigem Zusammenfassen;\n"
+"Schritt %d, D(.,.)=%g"
+
+#: twins.c:261
+#, c-format
+msgid "invalid method (code %d)"
+msgstr "unzulässige Methode (Kode %d)"

@@ -880,9 +880,9 @@ Loading required package: 'Matrix'
 > nchar(x, "b")
  [1]  4  2  4 15  5  3  8  3  8  5
 > try(nchar(x, "c"))
-Error in command 'nchar(x, "c")': invalid multibyte string 10
+Error in command 'nchar(x, "c")': invalid multibyte string, element 10
 > try(nchar(x, "w"))
-Error in command 'nchar(x, "w")': invalid multibyte string 10
+Error in command 'nchar(x, "w")': invalid multibyte string, element 10
 > nchar(x, "c", allowNA = TRUE)
  [1]  4  2  4 12  5  3  7  2  8 NA
 > nchar(x, "w", allowNA = TRUE)

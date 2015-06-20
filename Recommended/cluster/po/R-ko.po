@@ -1,192 +1,221 @@
+# Korean translations for cluster package.
+# Recommended/cluster/po/R-ko.po
+# Maintainer: Martin Maechler <maechler@stat.math.ethz.ch>
+# 
+# This file is distributed under the same license as the R cluster package.
+# Chel Hee Lee <chl948@mail.usask.ca>, 2013-2015.
+# 
+# Reviewing process is completed (15-JAN-2015).
+# The original source code is reviewed (26-JAN-2015).
+# QC: PASS
+# Freezing on 06-FEB-2015 for R-3.1.3
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: cluster 1.14.2\n"
-"Report-Msgid-Bugs-To: bugs.r-project.org\n"
+"Project-Id-Version: cluster 1.15.2\n"
 "POT-Creation-Date: 2015-06-20 21:43\n"
-"PO-Revision-Date: 2015-02-25 19:27+0100\n"
-"Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
-"Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
-"Language: pl_PL\n"
+"PO-Revision-Date: 2015-02-06 21:56-0600\n"
+"Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
+"Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
+"Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #. R/daisy.q: gettextf("%s has constant columns %s; these are standardized to 0", sQuote("x"),     pColl(which(sx == 0)))
 #: R/daisy.q:0
 msgid "%s has constant columns %s; these are standardized to 0"
-msgstr "%s posiada stałe kolumny %s; zostały one ustandaryzowane do zera"
+msgstr ""
+"%1$s는 상수(constant)값을 가지는 열 %2$s를 가집니다.  이들은 0으로 표준화"
+"(standardized)됩니다."
 
 #. R/daisy.q: gettextf("%s has invalid column names", ct)
 #: R/daisy.q:0
 msgid "%s has invalid column names"
-msgstr "%s posiada niepoprawne nazwy kolumn"
+msgstr "%s는 올바른 열이름을 가지고 있지 않습니다."
 
 #. R/clara.q: gettextf("%s is a \"dist\" object, but should be a data matrix or frame", dataname)
 #: R/clara.q:0
+#, fuzzy
 msgid "%s is a \"dist\" object, but should be a data matrix or frame"
-msgstr "%s jest obiektem klasy \"dist\", ale powinien być macierzą lub ramką"
+msgstr ""
+"'x'는 클래스 \"dist\"를 가지는 객체이지만, 데이터 행렬 또는 프레임이어야 합니"
+"다."
 
 #. R/agnes.q: gettextf("%s is not a numeric dataframe or matrix.", dataname)
 #. R/clara.q: gettextf("%s is not a numeric dataframe or matrix.", dataname)
 #. R/diana.q: gettextf("%s is not a numeric dataframe or matrix.", dataname)
 #. R/fanny.q: gettextf("%s is not a numeric dataframe or matrix.", dataname)
 #: R/agnes.q:0 R/clara.q:0 R/diana.q:0 R/fanny.q:0
+#, fuzzy
 msgid "%s is not a numeric dataframe or matrix."
-msgstr "%s nie jest ramką liczbową ani też macierzą"
+msgstr "x는 수치형 데이터 프레임 또는 행렬이 아닙니다."
 
 #. R/agnes.q: gettextf("%s is not and cannot be converted to class \"dissimilarity\"", dataname)
 #: R/agnes.q:0
+#, fuzzy
 msgid "%s is not and cannot be converted to class \"dissimilarity\""
 msgstr ""
-"%s nie jest obiektem klasy \"dissimilarity\" ani nie może być w taki obiekt "
-"przekształcony"
+"'x'는 \"dissimilarity\"이라는 클래스가 아니거나 클래스 \"dissimilarity\"로 전"
+"환할 수 없습니다."
 
 #. R/daisy.q: gettextf("%s must be in 1:ncol(x)", ct)
 #: R/daisy.q:0
 msgid "%s must be in 1:ncol(x)"
-msgstr "%s musi być w przedziale 1:ncol(x)"
+msgstr "%s는 반드시 1:ncol(x)내에 있어야 합니다."
 
 #. R/daisy.q: gettextf("%s must contain column names or numbers", ct)
 #: R/daisy.q:0
 msgid "%s must contain column names or numbers"
-msgstr "%s musi zawierać nazwy kolumn lub liczby"
+msgstr "%s는 반드시 열 이름 또는 번호를 포함해야 합니다."
 
 #. R/daisy.q: gettextf("'%s' argument is not a dataframe or a numeric matrix.", "x")
 #: R/daisy.q:0
 #, fuzzy
 msgid "'%s' argument is not a dataframe or a numeric matrix."
-msgstr "%s nie jest ramką danych ani też macierzą liczbową"
+msgstr "x는 데이터 프레임이 아니거나 수치형 행렬이 아닙니다."
 
 #. R/pam.q: gettextf("'%s' argument is not a numeric dataframe or matrix.", "x")
 #: R/pam.q:0
+#, fuzzy
 msgid "'%s' argument is not a numeric dataframe or matrix."
-msgstr "argument '%s' nie jest ramką liczbową ani też macierzą."
+msgstr "x는 수치형 데이터 프레임 또는 행렬이 아닙니다."
 
 #. R/diana.q: gettextf("'%s' argument is not and cannot be converted to class \"dissimilarity\"",     "x")
 #. R/fanny.q: gettextf("'%s' argument is not and cannot be converted to class \"dissimilarity\"",     "x")
 #. R/pam.q: gettextf("'%s' argument is not and cannot be converted to class \"dissimilarity\"",     "x")
 #: R/diana.q:0 R/fanny.q:0 R/pam.q:0
+#, fuzzy
 msgid "'%s' argument is not and cannot be converted to class \"dissimilarity\""
 msgstr ""
-"argument '%s' nie jest obiektem klasy \"dissimilarity\" ani nie może być w "
-"taki obiekt przekształcony"
+"'x'는 \"dissimilarity\"이라는 클래스가 아니거나 클래스 \"dissimilarity\"로 전"
+"환할 수 없습니다."
 
 #. R/ellipsoidhull.R: stop("'A' must be p x p  cov-matrix defining an ellipsoid")
 #: R/ellipsoidhull.R:0
 msgid "'A' must be p x p  cov-matrix defining an ellipsoid"
-msgstr "'A' musi być macierzą kowariancji p x p określającą elipsoidę"
+msgstr ""
+"'A'는 반드시 타원(ellipsoid)를 정의하는 크기가 p x p인 공분산행렬(cov-matrix)"
+"이어야 합니다."
 
 #. R/clusGap.R: stop("'B' has to be a positive integer")
 #: R/clusGap.R:0
 msgid "'B' has to be a positive integer"
-msgstr "'B' musi być dodatnią liczbą całkowitą"
+msgstr "'B'는 반드시 양의 정수이어야 합니다."
 
 #. R/plotpart.q: stop("'col.clus' argument should have length 4 when color is TRUE")
 #: R/plotpart.q:0
+#, fuzzy
 msgid "'col.clus' argument should have length 4 when color is TRUE"
-msgstr ""
-"argument 'col.clus' powinien mieć długość 4, gdy 'color' ma wartość TRUE"
+msgstr "color가 TRUE일 때, 'col.clus'의 길이는 반드시 4이어야 합니다."
 
 #. R/silhouette.R: stop("'dmatrix' is not a dissimilarity matrix compatible to 'x'")
 #. R/silhouette.R: stop("'dmatrix' is not a dissimilarity matrix compatible to 'x'")
 #: R/silhouette.R:0
 msgid "'dmatrix' is not a dissimilarity matrix compatible to 'x'"
-msgstr "'dmatrix' nie jest macierzą różnic kompatybilną z 'x'"
+msgstr ""
+"'dmatrix'는 'x'에 부합하는 (또는 사용할 수 있는) 비유사성 행렬(dissimilarity "
+"matrix)이 아닙니다."
 
 #. R/fanny.q: stop("'iniMem.p' must be a nonnegative n * k matrix with rowSums == 1")
 #: R/fanny.q:0
 msgid "'iniMem.p' must be a nonnegative n * k matrix with rowSums == 1"
-msgstr "'iniMem.p' musi być nieujemną maceirzą n x k z rowSums == 1"
+msgstr ""
+"'iniMem.p'는 반드시 크기가 n * k 인 비음수 행렬(nonnegative matrix)이어야 하"
+"며, 이 행렬의 rowSums == 1 이어야 합니다."
 
 #. R/fanny.q: stop("'k' (number of clusters) must be in {1,2, .., n/2 -1}")
 #: R/fanny.q:0
 msgid "'k' (number of clusters) must be in {1,2, .., n/2 -1}"
-msgstr "'k' (liczba grup) musi mieścić się w przedziale {1,2, .., n/2 -1}"
+msgstr "'k' (군집의 개수)는 반드시 {1,2, .., n/2 -1} 내에 존재해야 합니다."
 
 #. R/fanny.q: stop("'m', a membership matrix, must be nonnegative with rowSums == 1")
 #: R/fanny.q:0
 msgid "'m', a membership matrix, must be nonnegative with rowSums == 1"
-msgstr "macierz przynależności 'm' musi być nieujemna z rowSums == 1"
+msgstr ""
+"멤버쉽 행렬(membership matrix) 'm'은 반드시 음수를 가지지 않으며 rowSums == 1"
+"이어야 합니다."
 
 #. R/fanny.q: stop("'maxit' must be non-negative integer")
 #: R/fanny.q:0
 msgid "'maxit' must be non-negative integer"
-msgstr "'maxit' musi być nieujemną liczbą całkowitą"
+msgstr "'maxit'은 반드시 음이 아닌 정수이어야 합니다."
 
 #. R/pam.q: gettextf("'medoids' must be NULL or vector of %d distinct indices in {1,2, .., n}, n=%d",     k, n)
 #: R/pam.q:0
 msgid ""
 "'medoids' must be NULL or vector of %d distinct indices in {1,2, .., n}, n=%d"
 msgstr ""
-"'medoids' musi być wartością NULL lub wektorem %d różnych indeksów w "
-"{1,2, .., n}, n=%d"
+"'medoids'는 반드시 NULL 또는 {1,2, .., n}으로부터 %1$d개의 구분되는 인덱스를 "
+"가진 벡터입니다 (n=%2$d). "
 
 #. R/fanny.q: stop("'memb.exp' must be a finite number > 1")
 #: R/fanny.q:0
 msgid "'memb.exp' must be a finite number > 1"
-msgstr "'memb.exp' musi być skończoną liczbą > 1"
+msgstr "'memb.exp'는 반드시 1보다 큰 유한한(finite) 숫자이어야 합니다."
 
 #. R/internal.R: stop("'n' argument must be >= 2")
 #. R/internal.R: stop("'n' argument must be >= 2")
 #: R/internal.R:0
+#, fuzzy
 msgid "'n' argument must be >= 2"
-msgstr "argument 'n' musi być >= 2"
+msgstr "'n'는 반드시 2보다 크거나 같아야 합니다."
 
 #. R/agnes.q: stop("'par.method' must be of length 1, 3, or 4")
 #. R/agnes.q: stop("'par.method' must be of length 1, 3, or 4")
 #: R/agnes.q:0
 msgid "'par.method' must be of length 1, 3, or 4"
-msgstr "'par.method' musi być długości 1, 3, lub 4"
+msgstr "'par.method'의 길이는 반드시 1, 3, 또는 4이어야 합니다."
 
 #. R/clara.q: stop("'samples' should be at least 1")
 #: R/clara.q:0
 msgid "'samples' should be at least 1"
-msgstr "'samples' powinno wynosić przynajmniej 1"
+msgstr "'samples'는 적어도 1 이상 이어야 합니다."
 
 #. R/clara.q: gettextf("'sampsize' = %d should not be larger than the number of objects, %d", sampsize,     n)
 #: R/clara.q:0
 msgid "'sampsize' = %d should not be larger than the number of objects, %d"
-msgstr "'sampsize' = %d nie powinien być większy niż liczba obiektów, %d"
+msgstr "'sampsize' = %1$d는 객체의 개수 %2$d보다 클 수 없습니다."
 
 #. R/clara.q: gettextf("'sampsize' should be at least %d = max(2, 1+ number of clusters)", max(2,     k + 1))
 #: R/clara.q:0
 msgid "'sampsize' should be at least %d = max(2, 1+ number of clusters)"
-msgstr "'sampsize' powinien być co najmniej %d = max(2, 1+ liczba grup)"
+msgstr "'sampsize'는 최소 %d = max(2, 1 + 군집의 개수)가 되어야 합니다."
 
 #. R/daisy.q: stop("'weights' must be of length p (or 1)")
 #: R/daisy.q:0
 msgid "'weights' must be of length p (or 1)"
-msgstr "'weights' musi być o długości 'p' (lub 1)"
+msgstr "'weights'의 길이는 반드시 p (또는 1)이어야 합니다."
 
 #. R/plotpart.q: stop("'x' is not a data matrix")
 #: R/plotpart.q:0
+#, fuzzy
 msgid "'x' is not a data matrix"
-msgstr "'x' nie jest macierzą danych"
+msgstr "x는 데이터 행렬(data matrix)이 아닙니다."
 
 #. R/plotpart.q: stop("'x' is not numeric")
 #: R/plotpart.q:0
+#, fuzzy
 msgid "'x' is not numeric"
-msgstr "'x' nie jest liczbą"
+msgstr "x는 수치형(numeric)이 아닙니다."
 
 #. R/mona.q: stop("'x' must be a matrix or data frame.")
 #: R/mona.q:0
+#, fuzzy
 msgid "'x' must be a matrix or data frame."
-msgstr "'x' musi być macierzą lub ramką danych."
+msgstr "x는 반드시 행렬 또는 데이터 프레임이어야 합니다."
 
 #. R/ellipsoidhull.R: stop("'x' must be numeric  n x p matrix")
 #: R/ellipsoidhull.R:0
 msgid "'x' must be numeric  n x p matrix"
-msgstr "'x' musi być liczbową macierzą n x p"
+msgstr "'x'는 반드시 크기가 n x p인 수치형 행렬이어야 합니다."
 
 #. R/silhouette.R: stop("'x' must only have integer codes")
 #. R/silhouette.R: stop("'x' must only have integer codes")
 #: R/silhouette.R:0
 msgid "'x' must only have integer codes"
-msgstr "'x' musi posiadać tylko kody będące liczbami całkowitymi"
+msgstr "'x'는 오로지 정수형 코드(codes)만을 가질 수 있습니다."
 
 #. R/ellipsoidhull.R: gettext("** Warning: ** the algorithm did not terminate reliably!\n  (in the available number of iterations)",     domain = "R-cluster")
 #: R/ellipsoidhull.R:0
@@ -194,8 +223,6 @@ msgid ""
 "** Warning: ** the algorithm did not terminate reliably!\n"
 "  (in the available number of iterations)"
 msgstr ""
-"** Ostrzeżenie: ** algorytm nie zakończył się w sposób wiarygodny!\n"
-" (w dostępnej liczbie iteracji)"
 
 #. R/ellipsoidhull.R: gettext("** Warning: ** the algorithm did not terminate reliably!\n  most probably because of collinear data",     domain = "R-cluster")
 #: R/ellipsoidhull.R:0
@@ -203,40 +230,41 @@ msgid ""
 "** Warning: ** the algorithm did not terminate reliably!\n"
 "  most probably because of collinear data"
 msgstr ""
-"** Ostrzeżenie: ** algorytm nie zakończył się w sposób wiarygodny!\n"
-" prawdopodobnie z powodu wspóliniowych danych"
 
 #. R/clusGap.R: gettextf(" --> Number of clusters (method '%s'): %d", method, nc, domain = "R-cluster")
 #: R/clusGap.R:0
 msgid "--> Number of clusters (method '%s'): %d"
-msgstr "--> Liczba grup (metoda '%s'): %d"
+msgstr ""
 
 #. R/clusGap.R: gettextf(" --> Number of clusters (method '%s', SE.factor=%g): %d", method, SE.factor,     nc, domain = "R-cluster")
 #: R/clusGap.R:0
 msgid "--> Number of clusters (method '%s', SE.factor=%g): %d"
-msgstr "--> Liczba grup (metoda '%s', SE.factor=%g): %d"
+msgstr ""
 
 #. R/plotpart.q: warning(">>>>> funny case in clusplot.default() -- please report!\n")
 #: R/plotpart.q:0
 msgid ">>>>> funny case in clusplot.default() -- please report!"
 msgstr ""
-">>>>> zabawny przypadek w 'clusplot.default()' -- proszę zgłosić raport!"
+">>>>> clusplot.default()에서 예상치 못한 경우가 발생했습니다 -- 보고해 주시"
+"길 부탁드립니다!"
 
 #. R/plothier.q: gettextf("Agglomerative Coefficient = %s", round(x$ac, digits = 2), domain = "R-cluster")
 #: R/plothier.q:0
 msgid "Agglomerative Coefficient = %s"
-msgstr "Współczynnik aglomeracyjny = %s"
+msgstr ""
 
 #. R/agnes.q: gettext("Agglomerative coefficient: ", domain = "R-cluster")
 #. R/agnes.q: gettext("Agglomerative coefficient: ", domain = "R-cluster")
 #: R/agnes.q:0
 msgid "Agglomerative coefficient:"
-msgstr "Współczynnik aglomeracyjny:"
+msgstr ""
 
 #. R/mona.q: stop("All variables must be binary (e.g., factor with 2 levels).")
 #: R/mona.q:0
 msgid "All variables must be binary (e.g., factor with 2 levels)."
-msgstr "Wszystkie zmienne muszą być binarne (czynnik z dwoma poziomami)"
+msgstr ""
+"모든 변수들은 반드시 2개의 수준(levels)으로 이루어진 요인(factor)이어야 합니"
+"다."
 
 #. R/agnes.q: gettext("Available components:", domain = "R-cluster")
 #. R/agnes.q: gettext("Available components:", domain = "R-cluster")
@@ -251,147 +279,149 @@ msgstr "Wszystkie zmienne muszą być binarne (czynnik z dwoma poziomami)"
 #. R/pam.q: gettext("Available components:", domain = "R-cluster")
 #: R/agnes.q:0 R/clara.q:0 R/diana.q:0 R/fanny.q:0 R/mona.q:0 R/pam.q:0
 msgid "Available components:"
-msgstr "Dostępne komponenty:"
+msgstr ""
 
 #. R/clara.q: gettext("Average silhouette width of best sample: ", domain = "R-cluster")
 #: R/clara.q:0
 msgid "Average silhouette width of best sample:"
-msgstr "Przeciętna szerokość sylwetki dla najlepszej próbki:"
+msgstr ""
 
 #. R/fanny.q: gettext("Average silhouette width of total data set:", domain = "R-cluster")
 #. R/pam.q: gettext("Average silhouette width of total data set:", domain = "R-cluster")
 #: R/fanny.q:0 R/pam.q:0
 msgid "Average silhouette width of total data set:"
-msgstr "Przeciętna szerokość sylwetki pełnego zbioru danych:"
+msgstr ""
 
 #. R/clara.q: gettext("Average silhouette width per cluster:", domain = "R-cluster")
 #. R/fanny.q: gettext("Average silhouette width per cluster:", domain = "R-cluster")
 #. R/pam.q: gettext("Average silhouette width per cluster:", domain = "R-cluster")
 #: R/clara.q:0 R/fanny.q:0 R/pam.q:0
 msgid "Average silhouette width per cluster:"
-msgstr "Przeciętna szerokość sylwetki na grupę:"
+msgstr ""
 
 #. R/silhouette.R: gettext("Average silhouette width:", domain = "R-cluster")
 #: R/silhouette.R:0
 msgid "Average silhouette width:"
-msgstr "Przeciętna szerokość sylwetki:"
+msgstr ""
 
 #. R/clusGap.R: gettextf("B=%d simulated reference sets, k = 1..%d", x$B, K, domain = "R-cluster")
 #: R/clusGap.R:0
 msgid "B=%d simulated reference sets, k = 1..%d"
-msgstr "B=%d symulowane zbiory referencyjne, k = 1..%d"
+msgstr ""
 
 #. R/plothier.q: gettextf("Banner of %s", cl, domain = "R-cluster")
 #. R/plothier.q: gettextf("Banner of %s", cl, domain = "R-cluster")
 #. R/plothier.q: gettextf("Banner of %s", deparse(x$call), domain = "R-cluster")
 #: R/plothier.q:0
 msgid "Banner of %s"
-msgstr "Baner %s"
+msgstr ""
 
 #. R/clara.q: gettext("Best sample:", domain = "R-cluster")
 #. R/clara.q: gettext("Best sample:", domain = "R-cluster")
 #: R/clara.q:0
 msgid "Best sample:"
-msgstr "Najlepsza próbka:"
+msgstr ""
 
 #. R/clusGap.R: gettextf("Bootstrapping, b = 1,2,..., B (= %d)  [one \".\" per sample]:", B, domain = "R-cluster")
 #: R/clusGap.R:0
 msgid "Bootstrapping, b = 1,2,..., B (= %d)  [one \".\" per sample]:"
-msgstr "Bootstrapowanie, b = 1,2,..., B (= %d)  [jeden \".\" na próbkę]:"
+msgstr ""
 
 #. R/plotpart.q: gettextf("CLUSPLOT(%s)", deparse(substitute(x)))
 #: R/plotpart.q:0
 msgid "CLUSPLOT(%s)"
-msgstr "CLUSPLOT(%s)"
+msgstr ""
 
 #. R/agnes.q: gettext("Call: ", domain = "R-cluster")
 #. R/clara.q: gettext("Call: ", domain = "R-cluster")
 #: R/agnes.q:0 R/clara.q:0
 msgid "Call:"
-msgstr "Wywołanie:"
+msgstr ""
 
 #. R/pam.q: stop("Cannot keep data when 'x' is a dissimilarity!")
 #: R/pam.q:0
 msgid "Cannot keep data when 'x' is a dissimilarity!"
 msgstr ""
-"Nie można zatrzymać danych gdy 'x' jest obiektem klasy \"dissimilarity\"!"
 
 #. R/fanny.q: gettext("Closest hard clustering:", domain = "R-cluster")
 #: R/fanny.q:0
 msgid "Closest hard clustering:"
-msgstr "Najbliższe twarde grupowanie:"
+msgstr ""
 
 #. R/silhouette.R: gettextf("Cluster sizes and average silhouette widths:", domain = "R-cluster")
 #. R/silhouette.R: gettext("Cluster sizes and average silhouette widths:", domain = "R-cluster")
 #: R/silhouette.R:0
 msgid "Cluster sizes and average silhouette widths:"
-msgstr "Rozmiary grup oraz przeciętne szerokości sylwetek:"
+msgstr ""
 
 #. R/silhouette.R: gettextf("Cluster sizes, ids = (%s), and average silhouette widths:", paste(x$codes,     collapse = ", "), domain = "R-cluster")
 #. R/silhouette.R: gettextf("Cluster sizes, ids = (%s), and average silhouette widths:", paste(x$codes,     collapse = ", "), domain = "R-cluster")
 #: R/silhouette.R:0
 msgid "Cluster sizes, ids = (%s), and average silhouette widths:"
-msgstr "Rozmiary grup, ids = (%s), oraz przeciętne szerokości sylwetek:"
+msgstr ""
 
 #. R/clara.q: gettext("Cluster sizes:", domain = "R-cluster")
 #: R/clara.q:0
 msgid "Cluster sizes:"
-msgstr "Rozmiary grup:"
+msgstr ""
 
 #. R/clusGap.R: gettext("Clustering Gap statistic [\"clusGap\"].", domain = "R-cluster")
 #: R/clusGap.R:0
 msgid "Clustering Gap statistic [\"clusGap\"]."
-msgstr "Statystyka przerwy grupowania [\"clusGap\"]."
+msgstr ""
 
 #. R/clusGap.R: gettextf("Clustering k = 1,2,..., K.max (= %d): .. ", K.max, domain = "R-cluster")
 #: R/clusGap.R:0
 msgid "Clustering k = 1,2,..., K.max (= %d): .."
-msgstr "Grupowanie k = 1,2,..., K.max (= %d): .."
+msgstr ""
 
 #. R/clara.q: gettext("Clustering vector:", domain = "R-cluster")
 #. R/clara.q: gettext("Clustering vector:", domain = "R-cluster")
 #. R/pam.q: gettext("Clustering vector:", domain = "R-cluster")
 #: R/clara.q:0 R/pam.q:0
+#, fuzzy
 msgid "Clustering vector:"
-msgstr "Wektor grupujący:"
+msgstr "군집방법(clustering method)의 이름이 올바르지 않습니다."
 
 #. R/plotpart.q: gettext("Component 1", domain = "R-cluster")
 #: R/plotpart.q:0
 msgid "Component 1"
-msgstr "Komponent 1"
+msgstr ""
 
 #. R/plotpart.q: gettext("Component 2", domain = "R-cluster")
 #: R/plotpart.q:0
 msgid "Component 2"
-msgstr "Komponent 2"
+msgstr ""
 
 #. R/plothier.q: gettextf("Dendrogram of %s", paste(deparse(x$call), collapse = ""), domain = "R-cluster")
 #. R/plothier.q: gettextf("Dendrogram of %s", cl, domain = "R-cluster")
 #. R/plothier.q: gettextf("Dendrogram of %s", cl, domain = "R-cluster")
 #: R/plothier.q:0
 msgid "Dendrogram of %s"
-msgstr "Dendrogram %s"
+msgstr ""
 
 #. R/daisy.q: gettext("Dissimilarities:", domain = "R-cluster")
 #: R/daisy.q:0
 msgid "Dissimilarities:"
-msgstr "Odmienności:"
+msgstr ""
 
 #. R/plotpart.q: stop("Distances must be result of dist or a square matrix.")
 #: R/plotpart.q:0
 msgid "Distances must be result of dist or a square matrix."
-msgstr "Odległości muszą być wynikiem 'dist' lub macierzy kwadratowej."
+msgstr ""
+"거리(distances)는 반드시 dist 또는 정방행렬(square matrix)의 결과이어야 합니"
+"다."
 
 #. R/plothier.q: gettextf("Divisive Coefficient = %s", round(x$dc, digits = 2), domain = "R-cluster")
 #: R/plothier.q:0
 msgid "Divisive Coefficient = %s"
-msgstr "Współczynnik podziału = %s"
+msgstr ""
 
 #. R/diana.q: gettext("Divisive coefficient:", domain = "R-cluster")
 #. R/diana.q: gettext("Divisive coefficient:", domain = "R-cluster")
 #: R/diana.q:0
 msgid "Divisive coefficient:"
-msgstr "Współczynnik podziału:"
+msgstr ""
 
 #. R/clara.q: stop("Each of the random samples contains objects between which no distance can be computed.")
 #: R/clara.q:0
@@ -399,17 +429,19 @@ msgid ""
 "Each of the random samples contains objects between which no distance can be "
 "computed."
 msgstr ""
-"Każda z losowych próbek zawiera obiekty pomiędzy którymi nie można obliczyć "
-"odległości."
+"각각의 무작위 표본은 서로간의 거리를 계산할 수 없는 객체들을 포함하고 있습니"
+"다."
 
 #. R/ellipsoidhull.R: gettext("Error in Fortran routine computing the spanning ellipsoid. Probably collinear data",     domain = "R-cluster")
 #: R/ellipsoidhull.R:0
+#, fuzzy
 msgid ""
 "Error in Fortran routine computing the spanning ellipsoid. Probably "
 "collinear data"
 msgstr ""
-"Błąd w procedurze Fortran dla elipsoidy obejmującej, prawdopodobnie "
-"współliniowe dane"
+"스패닝 타원(spanning ellipsoid)를 생성하는 포트란 루틴(Fortran routine)에서 "
+"에러가 발생했습니다. \n"
+" 위수(rank) 문제인가요??"
 
 #. R/plotpart.q: warning("Error in Fortran routine for the spanning ellipsoid,\n rank problem??")
 #: R/plotpart.q:0
@@ -417,13 +449,14 @@ msgid ""
 "Error in Fortran routine for the spanning ellipsoid,\n"
 " rank problem??"
 msgstr ""
-"Błąd w procedurze Fortran dla elipsoidy obejmującej,\n"
-"problem rang?"
+"스패닝 타원(spanning ellipsoid)를 생성하는 포트란 루틴(Fortran routine)에서 "
+"에러가 발생했습니다. \n"
+" 위수(rank) 문제인가요??"
 
 #. R/fanny.q: gettextf("FANNY algorithm has not converged in 'maxit' = %d iterations", maxit)
 #: R/fanny.q:0
 msgid "FANNY algorithm has not converged in 'maxit' = %d iterations"
-msgstr "algorytm FANNY nie uzbieżnił się w 'maxit' = %d iteracjach"
+msgstr "FANNY 알고리즘은 'maxit' = %d번의 반복수행에도 수렴하지 않았습니다."
 
 #. R/clara.q: gettextf("For each of the %d samples, at least one object was found which could not be assigned to a cluster (because of missing values).",     samples)
 #: R/clara.q:0
@@ -431,105 +464,107 @@ msgid ""
 "For each of the %d samples, at least one object was found which could not be "
 "assigned to a cluster (because of missing values)."
 msgstr ""
-"Dla każdej z %d próbek, co najmniej jeden obiekt został znaleziony, który "
-"nie mógł być przypisany do grupy (z uwagi na brakujące wartości)."
+"%d개의 표본 각각에 대해서 결측값으로 인하여 어느 군집에도 배정할 수 없는 객체"
+"를 적어도 하나 이상 발견하였습니다."
 
 #. R/fanny.q: gettext("Fuzzy Clustering object of class 'fanny': ", domain = "R-cluster")
 #: R/fanny.q:0
 msgid "Fuzzy Clustering object of class 'fanny':"
-msgstr "Obiekt rozmytego grupowania klasy \"fanny\":"
+msgstr ""
 
 #. R/fanny.q: gettext("Fuzzyness coefficients:", domain = "R-cluster")
 #: R/fanny.q:0
 msgid "Fuzzyness coefficients:"
-msgstr "Współczynniki rozmycia:"
+msgstr ""
 
 #. R/plothier.q: gettext("Height", domain = "R-cluster")
 #. R/plothier.q: gettext("Height", domain = "R-cluster")
 #: R/plothier.q:0
 msgid "Height"
-msgstr "Wysokość"
+msgstr ""
 
 #. R/agnes.q: gettext("Height (summary):", domain = "R-cluster")
 #: R/agnes.q:0
 msgid "Height (summary):"
-msgstr "Wysokość (podsumowanie):"
+msgstr ""
 
 #. R/agnes.q: gettext("Height:", domain = "R-cluster")
 #. R/diana.q: gettext("Height:", domain = "R-cluster")
 #. R/diana.q: gettext("Height:", domain = "R-cluster")
 #: R/agnes.q:0 R/diana.q:0
 msgid "Height:"
-msgstr "Wysokość:"
+msgstr ""
 
 #. R/silhouette.R: gettext("Individual silhouette widths:", domain = "R-cluster")
 #: R/silhouette.R:0
+#, fuzzy
 msgid "Individual silhouette widths:"
-msgstr "Indywidualne szerokości sylwetki:"
+msgstr "'silhouette' 객체가 올바르지 않습니다."
 
 #. R/pam.q: gettext("Isolated clusters:", domain = "R-cluster")
 #: R/pam.q:0
 msgid "Isolated clusters:"
-msgstr "Izolowane grupy:"
+msgstr ""
 
 #. R/pam.q: gettext(" L*-clusters: ", domain = "R-cluster")
 #: R/pam.q:0
 msgid "L*-clusters:"
-msgstr "L*-grupy:"
+msgstr ""
 
 #. R/pam.q: gettext("L-clusters: ", domain = "R-cluster")
 #: R/pam.q:0
 msgid "L-clusters:"
-msgstr "L-grupy:"
+msgstr ""
 
 #. R/plothier.q: gettext("Make a plot selection (or 0 to exit):", domain = "R-cluster")
 #. R/plothier.q: gettext("Make a plot selection (or 0 to exit):", domain = "R-cluster")
 #. R/plotpart.q: gettext("Make a plot selection (or 0 to exit):", domain = "R-cluster")
 #: R/plothier.q:0 R/plotpart.q:0
 msgid "Make a plot selection (or 0 to exit):"
-msgstr "Wybierz wykres (lub 0 aby wyjść):"
+msgstr ""
 
 #. R/clara.q: gettext("Medoids:", domain = "R-cluster")
 #. R/clara.q: gettext("Medoids:", domain = "R-cluster")
 #. R/pam.q: gettext("Medoids:", domain = "R-cluster")
 #: R/clara.q:0 R/pam.q:0
 msgid "Medoids:"
-msgstr "Medoidy:"
+msgstr ""
 
 #. R/fanny.q: gettext("Membership coefficients (in percent, rounded):", domain = "R-cluster")
 #: R/fanny.q:0
 msgid "Membership coefficients (in percent, rounded):"
-msgstr "Współczynnik członkostwa (w procentach, zaokrąglony):"
+msgstr ""
 
 #. R/agnes.q: gettext("Merge:", domain = "R-cluster")
 #. R/diana.q: gettext("Merge:", domain = "R-cluster")
 #. R/diana.q: gettext("Merge:", domain = "R-cluster")
 #: R/agnes.q:0 R/diana.q:0
 msgid "Merge:"
-msgstr "Złączenie:"
+msgstr ""
 
 #. R/daisy.q: gettext("Metric: ", domain = "R-cluster")
 #. R/daisy.q: gettext("Metric: ", domain = "R-cluster")
 #: R/daisy.q:0
 msgid "Metric:"
-msgstr "Metryka:"
+msgstr ""
 
 #. R/plotpart.q: message("Missing values were displaced by the median of the corresponding variable(s)")
 #: R/plotpart.q:0
 msgid ""
 "Missing values were displaced by the median of the corresponding variable(s)"
-msgstr ""
-"Brakujące wartości zostały zastąpione przez medianę odpowiednich zmiennych"
+msgstr "결측값들은 대응변수(들)의 중앙값으로 대체되었습니다."
 
 #. R/plotpart.q: stop("NA values are not allowed in clustering vector")
 #: R/plotpart.q:0
+#, fuzzy
 msgid "NA values are not allowed in clustering vector"
-msgstr "wartości NA są niedozwolone w wektorze grupującym"
+msgstr "군집벡터(clustering vector)에서는 NA가 허용되지 않습니다."
 
 #. R/plotpart.q: stop("NA values are not allowed in dist-like 'x'.")
 #: R/plotpart.q:0
+#, fuzzy
 msgid "NA values are not allowed in dist-like 'x'."
-msgstr "wartości NA nie są dozwolone w 'x' typu odległości."
+msgstr "'x'는 NA를 가질 수 없습니다."
 
 #. R/agnes.q: stop("NA values in the dissimilarity matrix not allowed.")
 #. R/diana.q: stop("NA values in the dissimilarity matrix not allowed.")
@@ -537,35 +572,45 @@ msgstr "wartości NA nie są dozwolone w 'x' typu odległości."
 #. R/pam.q: stop("NA values in the dissimilarity matrix not allowed.")
 #: R/agnes.q:0 R/diana.q:0 R/fanny.q:0 R/pam.q:0
 msgid "NA values in the dissimilarity matrix not allowed."
-msgstr "wartości NA w macierzy różnic nie są dozwolone."
+msgstr "비유사성 행렬(dissimilarity matrix)는 NA 값을 가질 수 없습니다."
 
 #. R/daisy.q: gettext("NA values in the dissimilarity matrix!")
 #: R/daisy.q:0
+#, fuzzy
 msgid "NA values in the dissimilarity matrix!"
-msgstr "Wartości NA w macierzy odmienności!"
+msgstr "비유사성 행렬(dissimilarity matrix)는 NA 값을 가질 수 없습니다."
 
 #. R/silhouette.R: stop("Need either a dissimilarity 'dist' or diss.matrix 'dmatrix'")
 #. R/silhouette.R: stop("Need either a dissimilarity 'dist' or diss.matrix 'dmatrix'")
 #: R/silhouette.R:0
 msgid "Need either a dissimilarity 'dist' or diss.matrix 'dmatrix'"
-msgstr "Potrzeba albo różnic 'dist' lub diss.matrix 'dmatrix'"
+msgstr ""
+"dissimilarity 'dist' 또는 diss.matrix 'dmatrix' 둘 중에 하나가 필요합니다."
 
 #. R/pam.q: stop("No clustering performed, NA values in the computed dissimilarity matrix.")
 #: R/pam.q:0
+#, fuzzy
 msgid ""
 "No clustering performed, NA values in the computed dissimilarity matrix."
-msgstr "Nie wykonano grupowania, wyliczono wartości NA w macierzy różnic."
+msgstr ""
+"계산된 비유사성 행렬(dissimilarity matrix) 내에 NA가 존재하여 군집화 과정이 "
+"수행되지 않았습니다."
 
 #. R/agnes.q: stop("No clustering performed, NA values in the dissimilarity matrix.", "\n", sep = "")
 #. R/fanny.q: stop("No clustering performed, NA values in the dissimilarity matrix.")
 #: R/agnes.q:0 R/fanny.q:0
+#, fuzzy
 msgid "No clustering performed, NA values in the dissimilarity matrix."
-msgstr "Nie wykonano grupowania, wartości NA w macierzy różnic."
+msgstr ""
+"비유사성 행렬(dissimilarity matrix)에서 NA 값이 발견되었기 때문에 군집화 과정"
+"이 실행되지 않았습니다."
 
 #. R/diana.q: stop("No clustering performed, NA's in dissimilarity matrix.\n")
 #: R/diana.q:0
 msgid "No clustering performed, NA's in dissimilarity matrix."
-msgstr "Nie wykonano grupowania, wartości NA w macierzy różnic"
+msgstr ""
+"비유사성 행렬(dissimilarity matrix)에 NA가 있기 때문에, 군집화 과정이 실행되"
+"지 않았습니다."
 
 #. R/mona.q: stop("No clustering performed, a variable was found with all non missing values identical.")
 #: R/mona.q:0
@@ -573,70 +618,68 @@ msgid ""
 "No clustering performed, a variable was found with all non missing values "
 "identical."
 msgstr ""
-"Nie wykonano grupowania, znaleziono zmienną z identycznymi niebrakującymi "
-"wartościami."
+"결측되지 않은 모든 값들이 동일한 변수가 발견되어 군집화 과정이 수행되지 않았"
+"습니다."
 
 #. R/mona.q: stop("No clustering performed, all variables have at least one missing value.")
 #: R/mona.q:0
 msgid "No clustering performed, all variables have at least one missing value."
 msgstr ""
-"Nie wykonano grupowania, wszystkie zmienne mają co najmniej jedną brakującą "
-"wartość."
+"모든 변수들이 적어도 하나 이상의 결측값을 가지기 때문에 군집화 과정이 수행되"
+"지 않았습니다."
 
 #. R/mona.q: stop("No clustering performed, an object was found with all values missing.")
 #: R/mona.q:0
 msgid "No clustering performed, an object was found with all values missing."
-msgstr ""
-"Nie wykonano grupowania, znaleziono obiekt któremu brakowało wszystkich "
-"wartości."
+msgstr "모든 값이 결측된 객체가 발견되어 군집화 과정이 수행되지 않았습니다."
 
 #. R/mona.q: stop("No clustering performed, found variable with more than half values missing.")
 #: R/mona.q:0
 msgid ""
 "No clustering performed, found variable with more than half values missing."
 msgstr ""
-"Nie wykonano grupowania, znaleziono obiekt któremu brakowało wszystkich "
-"wartości."
+"절반 이상의 값들이 결측된 변수가 발견되어 군집화 과정이 수행되지 않았습니다."
 
 #. R/silhouette.R: stop("No valid silhouette information (#{clusters} =? 1)")
 #: R/silhouette.R:0
 msgid "No valid silhouette information (#{clusters} =? 1)"
-msgstr "Brak poprawnej informacji o sylwetce (czy liczba grup =? 1)"
+msgstr "유효한 silhouette 정보가 없습니다 (#{clusters} =? 1)"
 
 #. R/pam.q: stop("Number of clusters 'k' must be in {1,2, .., n-1}; hence n >= 2")
 #: R/pam.q:0
 msgid "Number of clusters 'k' must be in {1,2, .., n-1}; hence n >= 2"
 msgstr ""
-"Liczba grup 'k' musi zawierać się w zbiorze {1,2, .., n-1}; tak więc n >= 2"
+"군집(clusters)의 개수 'k'는 반드시 {1,2, .., n-1}내에 존재해야 하므로 n >= 2 "
+"입니다."
 
 #. R/daisy.q: gettext("Number of objects:", domain = "R-cluster")
 #. R/daisy.q: gettext("Number of objects:", domain = "R-cluster")
 #: R/daisy.q:0
 msgid "Number of objects:"
-msgstr "Liczba obiektów:"
+msgstr ""
 
 #. R/clara.q: gettext("Numerical information per cluster:", domain = "R-cluster")
 #. R/pam.q: gettext("Numerical information per cluster:", domain = "R-cluster")
 #: R/clara.q:0 R/pam.q:0
 msgid "Numerical information per cluster:"
-msgstr "Numeryczna informacja na grupę:"
+msgstr ""
 
 #. R/agnes.q: gettext("Object of class 'agnes' from call:", domain = "R-cluster")
 #: R/agnes.q:0
 msgid "Object of class 'agnes' from call:"
-msgstr "Obiekt klasy \"agnes\" z wywołania:"
+msgstr ""
 
 #. R/clara.q: gettext("Object of class 'clara' from call:", domain = "R-cluster")
 #: R/clara.q:0
 msgid "Object of class 'clara' from call:"
-msgstr "Obiekt klasy \"clara\" z wywołania:"
+msgstr ""
 
 #. R/clara.q: gettext("Objective function:", domain = "R-cluster")
 #. R/clara.q: gettext("Objective function:", domain = "R-cluster")
 #. R/pam.q: gettext("Objective function:", domain = "R-cluster")
 #: R/clara.q:0 R/pam.q:0
 msgid "Objective function:"
-msgstr "Funkcja celu:"
+msgstr ""
 
 #. R/agnes.q: gettext("Order of objects:", domain = "R-cluster")
 #. R/agnes.q: gettext("Order of objects:", domain = "R-cluster")
@@ -645,139 +688,146 @@ msgstr "Funkcja celu:"
 #. R/mona.q: gettext("Order of objects:", domain = "R-cluster")
 #: R/agnes.q:0 R/diana.q:0 R/mona.q:0
 msgid "Order of objects:"
-msgstr "Kolejność (rząd) obiektów:"
+msgstr ""
 
 #. R/mona.q: gettext("Revised data:", domain = "R-cluster")
 #: R/mona.q:0
 msgid "Revised data:"
-msgstr "Przeglądnięte dane:"
+msgstr ""
 
 #. R/plothier.q: gettext("Separation step", domain = "R-cluster")
 #: R/plothier.q:0
 msgid "Separation step"
-msgstr "Krok separacji:"
+msgstr ""
 
 #. R/mona.q: gettext("Separation step:", domain = "R-cluster")
 #: R/mona.q:0
 msgid "Separation step:"
-msgstr "Krok separacji:"
+msgstr ""
 
 #. R/silhouette.R: gettextf("Silhouette of %d units in %d clusters from %s:", sum(csiz), k, deparse(x$call),     domain = "R-cluster")
 #. R/silhouette.R: gettextf("Silhouette of %d units in %d clusters from %s:", sum(csiz), k, deparse(x$call),     domain = "R-cluster")
 #: R/silhouette.R:0
 msgid "Silhouette of %d units in %d clusters from %s:"
-msgstr "Sylwetka %d jednostek w %d klastrach z %s:"
+msgstr ""
 
 #. R/silhouette.R: gettextf("Silhouette of %d units in %d clusters:", sum(csiz), k, domain = "R-cluster")
 #. R/silhouette.R: gettextf("Silhouette of %d units in %d clusters:", sum(csiz), k, domain = "R-cluster")
 #: R/silhouette.R:0
 msgid "Silhouette of %d units in %d clusters:"
-msgstr "Sylwetka %d jednostek w %d klastrach:"
+msgstr ""
 
 #. R/silhouette.R: gettext("Silhouette plot", domain = "R-cluster")
 #: R/silhouette.R:0
 msgid "Silhouette plot"
-msgstr "Wykres sylwetki"
+msgstr ""
 
 #. R/clara.q: gettext("Silhouette plot information for best sample:", domain = "R-cluster")
 #: R/clara.q:0
 msgid "Silhouette plot information for best sample:"
-msgstr "Informacja o wykresie sylwetki dla najlepszej próbki:"
+msgstr ""
 
 #. R/fanny.q: gettext("Silhouette plot information:", domain = "R-cluster")
 #. R/pam.q: gettext("Silhouette plot information:", domain = "R-cluster")
 #: R/fanny.q:0 R/pam.q:0
 msgid "Silhouette plot information:"
-msgstr "Informacje o wykresie sylwetek:"
+msgstr ""
 
 #. R/silhouette.R: gettextf("Silhouette plot of %s", sub("^FF", "", deparse(cll)), domain = "R-cluster")
 #: R/silhouette.R:0
 msgid "Silhouette plot of %s"
-msgstr "Wykres sylwetki %s"
+msgstr ""
 
 #. R/plotpart.q: stop("The clustering vector is of incorrect length")
 #: R/plotpart.q:0
 msgid "The clustering vector is of incorrect length"
-msgstr "Wektor grupujący posiada niepoprawną długość"
+msgstr "군집벡터(clustering vector)의 길이가 올바르지 않습니다."
 
 #. R/clara.q: stop("The number of cluster should be at least 1 and at most n-1.")
 #: R/clara.q:0
 msgid "The number of cluster should be at least 1 and at most n-1."
-msgstr "Liczba grup powinna wynosić conajmniej 1 oraz co najwyżej n-1."
+msgstr ""
+"군집(cluster)의 개수는 적어도 1 이상이며 최대 n-1 이내에 있어야 합니다."
 
 #. R/plotpart.q: gettextf("These two components explain %s percent of the point variability.", round(100 *     var.dec, digits = 2))
 #: R/plotpart.q:0
 msgid "These two components explain %s percent of the point variability."
-msgstr "Te dwa komponenty wyjaśniają %s procent zmienności punktu."
+msgstr ""
 
 #. R/daisy.q: gettextf("Types = %s", paste(aT, collapse = ", "), domain = "R-cluster")
 #. R/daisy.q: gettextf("Types = %s", paste(aT, collapse = ", "), domain = "R-cluster")
 #: R/daisy.q:0
 msgid "Types = %s"
-msgstr "Typy = %s"
+msgstr ""
 
 #. R/mona.q: gettext("Variable used:", domain = "R-cluster")
 #: R/mona.q:0
 msgid "Variable used:"
-msgstr "Użyte zmienne:"
+msgstr ""
 
 #. R/daisy.q: gettext("Warning: ", domain = "R-cluster")
 #. R/daisy.q: gettext("Warning: ", domain = "R-cluster")
 #: R/daisy.q:0
 msgid "Warning:"
-msgstr "Ostrzeżenie:"
+msgstr ""
 
 #. R/ellipsoidhull.R: gettextf("algorithm possibly not converged in %d iterations", maxit)
 #: R/ellipsoidhull.R:0
 msgid "algorithm possibly not converged in %d iterations"
-msgstr "algorytm prawdopodobnie nie uzbieżnił się w %d iteracjach"
+msgstr "알고리즘의 %d번의 반복수행에도 수렴하지 않을 수 있습니다."
 
 #. R/agnes.q: stop("ambiguous clustering method")
 #: R/agnes.q:0
 msgid "ambiguous clustering method"
-msgstr "niejednoznaczna metoda grupowania"
+msgstr "불분명한 군집방법(clustering method)입니다."
 
 #. R/daisy.q: stop("at least one binary variable has more than 2 levels.")
 #: R/daisy.q:0
 msgid "at least one binary variable has more than 2 levels."
-msgstr "przynajmniej jedna zmienna binarna posiada więcej niż 2 poziomy."
+msgstr ""
+"적어도 하나 이상의 이항변수(binary variable)가 두 가지 이상의 수준(levels)을 "
+"가지고 있습니다."
 
 #. R/daisy.q: warning("at least one binary variable has not 2 different levels.")
 #: R/daisy.q:0
 msgid "at least one binary variable has not 2 different levels."
-msgstr "przynajmniej jedna zmienna binarna nie posiada 2 różnych poziomów."
+msgstr ""
+"적어도 하나 이상의 이항변수(binary variable)이 서로 다른 두 가지 수준을 가지"
+"고 있지 않습니다."
 
 #. R/daisy.q: stop("at least one binary variable has values not in {0,1,NA}")
 #: R/daisy.q:0
 msgid "at least one binary variable has values not in {0,1,NA}"
-msgstr "przynajmniej jedna zmienna binarna posiada wartości poza {0, 1, NA}"
+msgstr ""
+"적어도 하나 이상의 이항변수(binary variable)이 {0,1,NA} 외의 값을 가지고 있습"
+"니다."
 
 #. R/daisy.q: gettextf("binary variable(s) %s treated as interval scaled", pColl(which(tI)[iBin]))
 #: R/daisy.q:0
 msgid "binary variable(s) %s treated as interval scaled"
-msgstr "zmienne binarne %s traktowane jako interwał zostały przeskalowane"
+msgstr ""
+"이항변수(binary variable) %s는 구간척도(interval scale)로서 다루어집니다. "
 
 #. R/plotpart.q: gettextf("cluster %d  has only one observation ..", i, domain = "R-cluster")
 #: R/plotpart.q:0
 msgid "cluster %d  has only one observation .."
-msgstr "grupa %d ma tylko jedną obserwację .."
+msgstr ""
 
 #. R/silhouette.R: stop("clustering 'x' and dissimilarity 'dist' are incompatible")
 #. R/silhouette.R: stop("clustering 'x' and dissimilarity 'dist' are incompatible")
 #: R/silhouette.R:0
 msgid "clustering 'x' and dissimilarity 'dist' are incompatible"
-msgstr "grupowane 'x' oraz różnice 'dist' nie są kompatybilne"
+msgstr "'x'와 'dist'가 서로 부합하지 않습니다."
 
 #. R/ellipsoidhull.R: stop("computed some negative or all 0 probabilities")
 #: R/ellipsoidhull.R:0
 msgid "computed some negative or all 0 probabilities"
-msgstr ""
-"niektóre wyliczone prawdopodobieństwa są ujemne lub wszystkie są zerami"
+msgstr "확률값이 모두 0이거나 일부가 음수로 산출되었습니다."
 
 #. R/clusGap.R: gettext("done", domain = "R-cluster")
 #: R/clusGap.R:0
 msgid "done"
-msgstr "wykonano"
+msgstr ""
 
 #. R/ellipsoidhull.R: gettextf("ellipsoid in %d dimensions:\n center = (%s); squared ave.radius d^2 = %s\n and shape matrix =\n",     d, paste(format(x$loc, digits = digits), collapse = " "), format(x$d2, digits = digits),     domain = "R-cluster")
 #: R/ellipsoidhull.R:0
@@ -786,150 +836,156 @@ msgid ""
 " center = (%s); squared ave.radius d^2 = %s\n"
 " and shape matrix ="
 msgstr ""
-"elipsoida w %d wymiarach:\n"
-" centrum = (%s); kwadrat przeciętnego promienia d^2 = %s\n"
-" oraz macierz kształtu ="
 
 #. R/ellipsoidhull.R: gettextf("  ellipsoid's area = %s", format(volume(x), digits = digits), domain = "R-cluster")
 #: R/ellipsoidhull.R:0
 msgid "ellipsoid's area = %s"
-msgstr "powierzchnia elipsoidy = %s"
+msgstr ""
 
 #. R/ellipsoidhull.R: gettextf("  ellipsoid's volume = %s", format(volume(x), digits = digits), domain = "R-cluster")
 #: R/ellipsoidhull.R:0
 msgid "ellipsoid's volume = %s"
-msgstr "objętość elipsoidy = %s"
+msgstr ""
 
 #. R/ellipsoidhull.R: stop("ellipsoidPoints() not yet implemented for p >= 3 dim.")
 #: R/ellipsoidhull.R:0
 msgid "ellipsoidPoints() not yet implemented for p >= 3 dim."
-msgstr ""
-"'ellipsoidPoints()' nie została jeszcze zaimplementowana dla p >= 3 wymiary."
+msgstr "ellipsoidPoints()는 p >= 3 인경우에는 아직 구현되지 않았습니다."
 
 #. R/pam.q: stop("error from .C(cl_pam, *): invalid medID's")
 #: R/pam.q:0
 msgid "error from .C(cl_pam, *): invalid medID's"
-msgstr "błąd w '.C(cl_pam, *)': niepoprawne 'medID'"
+msgstr ".C(cl_pam, *)으로부터 에러가 발생했습니다:  medID가 올바르지 않습니다."
 
 #. R/silhouette.R: stop("full silhouette is only available for results of 'clara(*, keep.data = TRUE)'")
 #: R/silhouette.R:0
 msgid ""
 "full silhouette is only available for results of 'clara(*, keep.data = TRUE)'"
 msgstr ""
-"pełna sylwetka jest dostępna jedynie dla wyników 'clara(*, keep.data = TRUE)'"
+"full silhouette는 'clara(*, keep.data = TRUE)'의 결과만에 오로지 사용할 수 있"
+"습니다."
 
 #. R/daisy.q: gettextf("invalid %s; must be named list", sQuote("type"))
 #: R/daisy.q:0
 msgid "invalid %s; must be named list"
-msgstr "Niepoprawne %s; musi być nazwaną listą"
+msgstr ""
+"사용할 수 있는 %s가 아닙니다.  반드시 구성요소에 이름이 부여된 리스트(named "
+"list)이여야 합니다."
 
 #. R/clara.q: gettextf("invalid 'jstop' from .C(cl_clara,.): %s", res$jstop)
 #: R/clara.q:0
+#, fuzzy
 msgid "invalid 'jstop' from .C(cl_clara,.): %s"
-msgstr "niepoprawny 'jstop' z '.C(cl_clara,.)': %s"
+msgstr ""
+".C(cl_clara,.)으로부터 얻어진 'jstop'는 다음과 같은 이유로 이상합니다: "
 
 #. R/silhouette.R: stop("invalid 'silhouette' object")
 #: R/silhouette.R:0
 msgid "invalid 'silhouette' object"
-msgstr "niepoprawny obiekt 'silhouette'"
+msgstr "'silhouette' 객체가 올바르지 않습니다."
 
 #. R/coef.R: stop("invalid 'twins' object")
 #: R/coef.R:0
 msgid "invalid 'twins' object"
-msgstr "niepoprawny obiekt 'twins'"
+msgstr "올바른 'twins' 객체가 아닙니다."
 
 #. R/agnes.q: stop("invalid clustering method")
 #: R/agnes.q:0
 msgid "invalid clustering method"
-msgstr "niepoprawna metoda grupowania"
+msgstr "군집방법(clustering method)의 이름이 올바르지 않습니다."
 
 #. R/silhouette.R: stop("invalid partition object")
 #: R/silhouette.R:0
 msgid "invalid partition object"
-msgstr "niepoprawny obiekt podziału"
+msgstr "partition 객체가 유효하지 않습니다."
 
 #. R/silhouette.R: stop("invalid silhouette structure")
 #: R/silhouette.R:0
 msgid "invalid silhouette structure"
-msgstr "niepoprana struktura 'silhouette'"
+msgstr "silhouette 구조가 올바르지 않습니다."
 
 #. R/daisy.q: gettextf("invalid type %s for column numbers %s", type2[ina], pColl(which(ina)))
 #: R/daisy.q:0
 msgid "invalid type %s for column numbers %s"
-msgstr "niepoprawny typ %s dla liczb kolumn %s"
+msgstr "행번호 %2$s에 잘못된 유형(type) %1$s이 주어졌습니다."
 
 #. R/fanny.q: gettextf("k_crisp (= %d) < k !!", x$k.crisp, domain = "R-cluster")
 #: R/fanny.q:0
 msgid "k_crisp (= %d) < k !!"
-msgstr "k_crisp (= %d) < k !!"
+msgstr ""
 
 #. R/agnes.q: stop("need at least 2 objects to cluster")
 #: R/agnes.q:0
 msgid "need at least 2 objects to cluster"
-msgstr "potrzeba co najmniej 2 obiektów do grupowania"
+msgstr "군집(cluster)는 적어도 2개의 객체를 필요로 합니다."
 
 #. R/plotpart.q: stop("no diss nor data found for 'clusplot()' function")
 #: R/plotpart.q:0
+#, fuzzy
 msgid "no diss nor data found for 'clusplot()' function"
-msgstr "nie znaleziono różnic ani danych dla funkcji 'clusplot()'"
+msgstr "clusplot()에 사용될 diss와 data 모두 찾을 수 없습니다."
 
 #. R/plotpart.q: gettextf("no diss nor data found, nor the original argument of %s", deparse(x$call))
 #: R/plotpart.q:0
 msgid "no diss nor data found, nor the original argument of %s"
-msgstr "nie znaleziono różnic ani danych, ani oryginalnego argumentu %s"
+msgstr ""
+"diss와 data 모두 찾을 수 없을 뿐만 아니라 원래의 인자 %s 또한 찾을 수 없습니"
+"다."
 
 #. R/ellipsoidhull.R: stop("no points without missing values")
 #: R/ellipsoidhull.R:0
 msgid "no points without missing values"
-msgstr "brak punktów bez brakujących wartości"
+msgstr "결측값들을 제외하면 사용가능한 포인트들이 없습니다."
 
 #. R/ellipsoidhull.R: warning("omitting NAs")
 #: R/ellipsoidhull.R:0
 msgid "omitting NAs"
-msgstr "pomijanie wartości NA"
+msgstr "NA를 삭제합니다."
 
 #. R/plotpart.q: stop("one or more objects contain only missing values")
 #: R/plotpart.q:0
 msgid "one or more objects contain only missing values"
-msgstr "jeden lub więcej obiektów zawierają jedynie wartości brakujące"
+msgstr "하나 또는 그 이상의 객체들이 오로지 결측값만을 포함하고 있습니다."
 
 #. R/plotpart.q: stop("one or more variables contain only missing values")
 #: R/plotpart.q:0
 msgid "one or more variables contain only missing values"
-msgstr "jeden lub więcej zmiennych zawiera jedynie wartości brakujące"
+msgstr "하나 또는 그 이상의 변수들이 오로지 결측값만을 포함하고 있습니다."
 
 #. R/plotpart.q: gettext("span & rank2 : calling \"spannel\" ..", domain = "R-cluster")
 #: R/plotpart.q:0
 msgid "span & rank2 : calling \"spannel\" .."
-msgstr "span & rank2 : wywoływanie \"spannel\" .."
+msgstr ""
 
 #. R/fanny.q: warning("the memberships are all very close to 1/k. Maybe decrease 'memb.exp' ?")
 #: R/fanny.q:0
 msgid "the memberships are all very close to 1/k. Maybe decrease 'memb.exp' ?"
-msgstr "przynależności są bardzo bliskie 1/k. Może zmniejszyć 'memb.exp'?"
+msgstr ""
+"멤버쉽(membership) 전부가 1/k에 매우 가깝습니다.  아마도 'memb.exp'를 줄여보"
+"는 것은 어떨까요?"
 
 #. R/plotpart.q: stop("the square matrix is not symmetric.")
 #: R/plotpart.q:0
 msgid "the square matrix is not symmetric."
-msgstr "macierz kwadratowa nie jest symetryczna."
+msgstr "대칭(symmetric)적인 정방행렬이 아닙니다."
 
 #. R/clara.q: stop("when 'medoids.x' is FALSE, 'keep.data' must be too")
 #: R/clara.q:0
 msgid "when 'medoids.x' is FALSE, 'keep.data' must be too"
-msgstr "kiedy 'medoids.x' jest FALSE, 'keep.data' musi być również FALSE"
+msgstr "'medoids.x'가 FALSE인 경우에는 'keep.data' 역시 FALSE이어야 합니다."
 
 #. R/daisy.q: warning("with mixed variables, metric \"gower\" is used automatically")
 #: R/daisy.q:0
 msgid "with mixed variables, metric \"gower\" is used automatically"
-msgstr "z mieszanymi zmiennymi, metryka 'gower' jest używana automatycznie"
+msgstr ""
+"혼합형 변수(mixed variables)를 이용할 때는 metric은 자동으로 \"gower\"가 사용"
+"됩니다."
 
 #. R/daisy.q: ngettext(x$n, "%d dissimilarity, summarized:", "%d dissimilarities, summarized:",     domain = "R-cluster")
 #: R/daisy.q:0
 msgid "%d dissimilarity, summarized:"
 msgid_plural "%d dissimilarities, summarized:"
-msgstr[0] "%d odmienność, podsumowanie:"
-msgstr[1] "%d odmienności, podsumowanie:"
-msgstr[2] "%d odmienności, podsumowanie:"
+msgstr[0] ""
 
 #. R/clara.q: ngettext(nNA, "%d observation (%s) has *only* NAs --> omit them for clustering!",     "%d observations (%s ...) have *only* NAs --> omit them for clustering!", domain = "R-cluster")
 #: R/clara.q:0
@@ -937,53 +993,21 @@ msgid "%d observation (%s) has *only* NAs --> omit them for clustering!"
 msgid_plural ""
 "%d observations (%s ...) have *only* NAs --> omit them for clustering!"
 msgstr[0] ""
-"%d obserwacja (%s) posiada *tylko* wartości NA --> pomijanie jej w grupowaniu"
-msgstr[1] ""
-"%d obserwacje (%s ...) posiadają *tylko* wartości NA --> pomijanie ich w "
-"grupowaniu"
-msgstr[2] ""
-"%d obserwacji (%s ...) posiadają *tylko* wartości NA --> pomijanie ich w "
-"grupowaniu"
+"%d개의 관측값들이 (%s) *오로지* NA만을 가집니다 --> 군집화를 위하여 이들을 제"
+"거합니다!"
 
 #. R/clara.q: ngettext(nNA, "Observation %s has *only* NAs --> omit it for clustering", "Observations %s have *only* NAs --> omit them for clustering!",     domain = "R-cluster")
 #: R/clara.q:0
 msgid "Observation %s has *only* NAs --> omit it for clustering"
 msgid_plural "Observations %s have *only* NAs --> omit them for clustering!"
 msgstr[0] ""
-"Obserwacja %s posiada *tylko* wartości NA --> pomijanie jej w grupowaniu"
-msgstr[1] ""
-"Obserwacje %s posiadają *tylko* wartości NA --> pomijanie ich w grupowaniu"
-msgstr[2] ""
-"Obserwacje %s posiadają *tylko* wartości NA --> pomijanie ich w grupowaniu"
+"관측값 %s는 *오로지* NA만을 가집니다 --> 군집화를 위하여 이것들을 제거합니다!"
 
 #. R/daisy.q: ngettext(sum(ilog), "setting 'logical' variable %s to type 'asymm'", "setting 'logical' variables %s to type 'asymm'",     domain = "R-cluster")
 #: R/daisy.q:0
 msgid "setting 'logical' variable %s to type 'asymm'"
 msgid_plural "setting 'logical' variables %s to type 'asymm'"
-msgstr[0] "ustawianie zmiennej 'logical' %s na tym 'asymm'"
-msgstr[1] "ustawianie zmiennych 'logical' %s na tym 'asymm'"
-msgstr[2] "ustawianie zmiennych 'logical' %s na tym 'asymm'"
+msgstr[0] "'logical' 변수 %s를 유형(type) 'asymm'으로 설정합니다."
 
-#~ msgid "calling .C(cl_clara, ..., DUP = %s):"
-#~ msgstr "wywoływanie .C(cl_clara, ..., DUP = %s):"
-
-#~ msgid ""
-#~ "No clustering performed, a variable was found with at least 50 percent "
-#~ "missing values."
-#~ msgstr ""
-#~ "Nie wykonano grupowania, znaleziono zmienną z co najmniej 50 procent "
-#~ "brakujących wartości."
-
-#~ msgid ""
-#~ "%d observations (%s ...)\n"
-#~ "\thave *only* NAs --> na.omit() them for clustering!"
-#~ msgstr ""
-#~ "%d obserwacji (%s ...)\n"
-#~ "\tmają *tylko* wartości NA --> pomijanie ich w grupowaniu"
-
-#~ msgid "hence, area = %s"
-#~ msgstr "tak więc powierzchnia = %s"
-
-#, fuzzy
-#~ msgid "R-cluster"
-#~ msgstr "L-grupy:"
+#~ msgid "NA-values in the dissimilarity matrix not allowed."
+#~ msgstr "NA의 값은 비유사성 행렬(dissimilarity matrix)에 사용될 수 없습니다."

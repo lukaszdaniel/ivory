@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: survival 2.37-2\n"
-"POT-Creation-Date: 2015-06-06 11:42\n"
+"POT-Creation-Date: 2015-06-20 21:43\n"
 "PO-Revision-Date: 2015-04-20 18:55+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -101,7 +101,7 @@ msgid "'%s' argument ignored for method (%s)"
 msgstr "argument '%s' został zignorowany dla metody (%s)"
 
 #. R/aareg.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("aareg"))
-#. R/anova.coxph.S: gettextf("'%s' argument is not an object of class %s", "object", dQuote("coxph"))
+#. R/anova.coxph.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("coxph"))
 #. R/attrassign.R: gettextf("'%s' argument is not an object of class %s", "tt", dQuote("terms"))
 #. R/basehaz.R: gettextf("'%s' argument is not an object of class %s", "fit", dQuote("coxph"))
 #. R/cox.zph.S: gettextf("'%s' argument is not an object of class %s", "fit", dQuote("coxph"))
@@ -125,7 +125,7 @@ msgstr "argument '%s' został zignorowany dla metody (%s)"
 #. R/survfitTurnbull.S: gettextf("'%s' argument is not an object of class %s", "y", dQuote("Surv"))
 #. R/survfitms.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("survfit"))
 #. R/survfitms.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("survfitms"))
-#: R/aareg.S:0 R/anova.coxph.S:0 R/attrassign.R:0 R/basehaz.R:0 R/cox.zph.S:0
+#: R/aareg.S:0 R/anova.coxph.R:0 R/attrassign.R:0 R/basehaz.R:0 R/cox.zph.S:0
 #: R/coxph.rvar.S:0 R/is.ratetable.S:0 R/lines.aareg.S:0 R/plot.aareg.S:0
 #: R/predict.coxph.R:0 R/print.aareg.S:0 R/print.coxph.penal.S:0
 #: R/print.survdiff.S:0 R/print.survexp.S:0 R/print.survreg.penal.S:0
@@ -318,13 +318,6 @@ msgstr "argument 'newdata' musi być obecny, gdy 'individual=TRUE'"
 msgid "'nterm' argument is too small for df=%s"
 msgstr "argument 'nterm' jest zbyt mały dla stopni swobody=%s"
 
-#. R/anova.coxmelist.R: stop("'object' argument must be a list of objects of class \"coxme\" or \"coxph\"")
-#: R/anova.coxmelist.R:0
-msgid ""
-"'object' argument must be a list of objects of class \"coxme\" or \"coxph\""
-msgstr ""
-"argument 'object' musi być listą obiektów klasy \"coxme\" lub \"coxph\""
-
 #. R/anova.coxphlist.S: stop("'object' argument must be a list of objects of class \"coxph\"")
 #: R/anova.coxphlist.S:0
 msgid "'object' argument must be a list of objects of class \"coxph\""
@@ -474,6 +467,11 @@ msgstr ""
 msgid "* restricted mean with variable upper limit"
 msgstr ""
 
+#. R/anova.coxph.penal.R: paste(deparse(dotargs[named]), collapse = ", ")
+#: R/anova.coxph.penal.R:0
+msgid ","
+msgstr ""
+
 #. R/aareg.S: gettextf("Aalen model doesn't support \"%s\" survival data", type)
 #: R/aareg.S:0
 msgid "Aalen model doesn't support \"%s\" survival data"
@@ -484,13 +482,18 @@ msgstr "model Aalena nie wspiera danych przeżycia \"%s\""
 msgid "Aguments do not all have the same length (arg %d)"
 msgstr "Nie wszystkie argumenty mają tę samą długość (argument %d)"
 
-#. R/anova.coxmelist.R: gettext("Analysis of Deviance Table")
-#. R/anova.coxph.S: gettext("Analysis of Deviance Table")
+#. R/anova.coxph.penal.R: stop("All arguments must be Cox models")
+#: R/anova.coxph.penal.R:0
+#, fuzzy
+msgid "All arguments must be Cox models"
+msgstr "wszystkie argumenty muszą być wektorami"
+
+#. R/anova.coxph.R: gettext("Analysis of Deviance Table")
 #. R/anova.coxphlist.S: gettext("Analysis of Deviance Table")
 #. R/anova.survreg.S: gettext("Analysis of Deviance Table")
 #. R/anova.survreglist.S: gettext("Analysis of Deviance Table")
-#: R/anova.coxmelist.R:0 R/anova.coxph.S:0 R/anova.coxphlist.S:0
-#: R/anova.survreg.S:0 R/anova.survreglist.S:0
+#: R/anova.coxph.R:0 R/anova.coxphlist.S:0 R/anova.survreg.S:0
+#: R/anova.survreglist.S:0
 msgid "Analysis of Deviance Table"
 msgstr "Analiza Tabeli Wariancji"
 
@@ -528,6 +531,11 @@ msgstr "Beta(t) dla %s"
 #: R/summary.pyears.S:0 R/survConcordance.R:0
 msgid "Call:"
 msgstr "Wywołanie:"
+
+#. R/anova.coxph.penal.R: stop("Can't do anova tables with robust variances")
+#: R/anova.coxph.penal.R:0
+msgid "Can't do anova tables with robust variances"
+msgstr ""
 
 #. R/cch.R: gettextf("Case-cohort analysis, x$method, %s with subcohort of %s from cohort of %s",     x$method, x$subcohort.size, x$cohort.size, domain = "R-survival")
 #. R/cch.R: gettextf("Case-cohort analysis, x$method, %s with subcohort of %s from cohort of %s",     x$method, x$subcohort.size, x$cohort.size, domain = "R-survival")
@@ -590,10 +598,9 @@ msgstr "Nie można było zrekonstruować wektora 'y'"
 msgid "Cox model doesn't support \"%s\" survival data"
 msgstr ""
 
-#. R/anova.coxmelist.R: gettextf("Cox model: response is %s", responses[1])
-#. R/anova.coxph.S: gettextf("Cox model: response is %s", deparse(object$terms[[2]]), domain = "R-survival")
+#. R/anova.coxph.R: gettextf("Cox model: response is %s", deparse(object$terms[[2]]), domain = "R-survival")
 #. R/anova.coxphlist.S: gettextf("Cox model: response is %s", responses[1])
-#: R/anova.coxmelist.R:0 R/anova.coxph.S:0 R/anova.coxphlist.S:0
+#: R/anova.coxph.R:0 R/anova.coxphlist.S:0
 msgid "Cox model: response is %s"
 msgstr "Model Coxa: zmienna zależna to %s"
 
@@ -638,11 +645,6 @@ msgstr ""
 #: R/survfit.coxph.R:0
 msgid "Failed to reconstruct the original data set"
 msgstr "Nie udało się zrekonstruować oryginalnego zbioru danych"
-
-#. R/anova.coxmelist.R: stop("First argument must be a list")
-#: R/anova.coxmelist.R:0
-msgid "First argument must be a list"
-msgstr "Pierwszy argument musi być listą"
 
 #. R/match.ratetable.S: gettextf("In 'ratetable()', %s must be a continuous variable", dimid[i])
 #: R/match.ratetable.S:0
@@ -727,9 +729,8 @@ msgstr ""
 "Dopasowania do wybranej tabeli szybkości:\n"
 "  %s"
 
-#. R/anova.coxmelist.R: gettextf(" Model %s:", format(seq_len(nmodels)))
 #. R/anova.coxphlist.S: gettextf(" Model %s:", format(seq_len(nmodels)))
-#: R/anova.coxmelist.R:0 R/anova.coxphlist.S:0
+#: R/anova.coxphlist.S:0
 msgid "Model %s:"
 msgstr "Model %s:"
 
@@ -779,6 +780,11 @@ msgstr "Pusty model"
 #: R/print.summary.survreg.S:0
 msgid "Number of Newton-Raphson Iterations:"
 msgstr "Liczba iteracji Newtona-Raphsona:"
+
+#. R/summary.pyears.S: gettext("Observations in the data set: ", domain = "R-survival")
+#: R/summary.pyears.S:0
+msgid "Observations in the data set:"
+msgstr ""
 
 #. R/print.survdiff.S: gettext("Observed")
 #. R/print.survdiff.S: gettext("Observed")
@@ -900,9 +906,9 @@ msgstr ""
 msgid "Survreg failed."
 msgstr "Survreg nie powiódł się."
 
-#. R/anova.coxph.S: gettext("Terms added sequentially (first to last)")
+#. R/anova.coxph.R: gettext("Terms added sequentially (first to last)")
 #. R/anova.survreg.S: gettext("Terms added sequentially (first to last)")
-#: R/anova.coxph.S:0 R/anova.survreg.S:0
+#: R/anova.coxph.R:0 R/anova.survreg.S:0
 msgid "Terms added sequentially (first to last)"
 msgstr "Człony dodawane sekwencyjnie (od pierwszego do ostatniego)"
 
@@ -916,6 +922,14 @@ msgstr "Brakuje wywołania 'coxph' w formule!"
 #: R/anova.survreglist.S:0
 msgid "The first model has a different response from the rest"
 msgstr "Pierwszy model ma inną zmienną zależną od reszty"
+
+#. R/anova.coxph.penal.R: paste("The following arguments to anova.coxph(..)", "are invalid and dropped:", paste(deparse(dotargs[named]),     collapse = ", "))
+#: R/anova.coxph.penal.R:0
+#, fuzzy
+msgid "The following arguments to anova.coxph(..)"
+msgstr ""
+"poniższe argumenty przekazane do 'anova.coxph()' są niepoprawne i zostały "
+"odrzucone: %s"
 
 #. R/plot.survfit.R: stop("The graphical argument 'type' is not allowed")
 #: R/plot.survfit.R:0
@@ -1022,6 +1036,12 @@ msgstr "Y ma zbyt dużo kolumn"
 msgid "a 'response' is required in the formula unless method='ederer'"
 msgstr ""
 
+#. R/anova.coxph.R: stop("a coxme model was found and library coxme is not loaded")
+#. R/anova.coxph.penal.R: stop("a coxme model was found and library coxme is not loaded")
+#: R/anova.coxph.R:0 R/anova.coxph.penal.R:0
+msgid "a coxme model was found and library coxme is not loaded"
+msgstr ""
+
 #. R/survfit.R: stop("a formula argument is required")
 #: R/survfit.R:0
 msgid "a formula argument is required"
@@ -1042,8 +1062,8 @@ msgstr ""
 msgid "all additional arguments must have a name"
 msgstr "wszystkie dodatkowe argumenty muszą mieć nazwę"
 
-#. R/anova.coxph.S: stop("all arguments must be an objects of class \"coxph\" or \"coxme\"")
-#: R/anova.coxph.S:0
+#. R/anova.coxph.R: stop("all arguments must be an objects of class \"coxph\" or \"coxme\"")
+#: R/anova.coxph.R:0
 msgid "all arguments must be an objects of class \"coxph\" or \"coxme\""
 msgstr "wszystkie argumenty muszą być obiektami klasy \"coxph\" lub \"coxme\""
 
@@ -1062,6 +1082,11 @@ msgstr "wszystkie argumenty muszą być wektorami"
 msgid "an observation transitions to it's starting state, transition ignored"
 msgstr ""
 
+#. R/anova.coxph.penal.R: paste("The following arguments to anova.coxph(..)", "are invalid and dropped:", paste(deparse(dotargs[named]),     collapse = ", "))
+#: R/anova.coxph.penal.R:0
+msgid "are invalid and dropped:"
+msgstr ""
+
 #. R/tmerge.R: gettextf("argument %s is not the same length as id", argname[ii])
 #: R/tmerge.R:0
 msgid "argument %s is not the same length as id"
@@ -1076,6 +1101,12 @@ msgstr "argument %s nie został dopasowany"
 #: R/attrassign.R:0
 msgid "argument is not really a model matrix"
 msgstr "argument nie jest tak naprawdę macierzą modelu"
+
+#. R/anova.coxph.penal.R: stop("argument must be a cox model")
+#: R/anova.coxph.penal.R:0
+#, fuzzy
+msgid "argument must be a cox model"
+msgstr "Pierwszy argument musi być dopasowanym modelem Coxa"
 
 #. R/tmerge.R: gettextf("argument(s) %s not recognized type", paste(argname[is.na(check)], collapse = ", "))
 #: R/tmerge.R:0
@@ -1127,9 +1158,9 @@ msgstr ""
 msgid "cannot deal with models that contain an offset"
 msgstr ""
 
-#. R/anova.coxph.S: stop("cannot do anova tables with robust variances")
+#. R/anova.coxph.R: stop("cannot do anova tables with robust variances")
 #. R/anova.coxphlist.S: stop("cannot do anova tables with robust variances")
-#: R/anova.coxph.S:0 R/anova.coxphlist.S:0
+#: R/anova.coxph.R:0 R/anova.coxphlist.S:0
 msgid "cannot do anova tables with robust variances"
 msgstr ""
 
@@ -1164,8 +1195,7 @@ msgid "cannot handle \"%s\" type survival data"
 msgstr "nie można obsłużyć typu \"%s\" danych przeżycia"
 
 #. R/agexact.fit.S: stop("cannot handle a null model + exact calculation (yet)")
-#. R/coxexact.fit.R: stop("cannot handle a null model + exact calculation (yet)")
-#: R/agexact.fit.S:0 R/coxexact.fit.R:0
+#: R/agexact.fit.S:0
 msgid "cannot handle a null model + exact calculation (yet)"
 msgstr ""
 
@@ -1370,6 +1400,11 @@ msgstr "niepoprawna wartość zmiennej zależnej"
 #: R/coxpenal.fit.R:0 R/survcallback.S:0 R/survpenal.fit.S:0
 msgid "incorrect length in 'coxlist1' object"
 msgstr "niepoprawna długość w obiekcie klasy \"coxlist1\""
+
+#. R/coxph.R: stop("initial values lead to overflow or underflow of the exp function")
+#: R/coxph.R:0
+msgid "initial values lead to overflow or underflow of the exp function"
+msgstr ""
 
 #. R/coxpenal.fit.R: gettextf("inner loop failed to coverge for iterations %s", paste(iterfail, collapse = " "))
 #. R/survpenal.fit.S: gettextf("inner loop failed to coverge for iterations %s", paste(sQuote(iterfail),     collapse = ", "))
@@ -1618,25 +1653,14 @@ msgstr "brakuje atrybutu 'type'"
 msgid "missing time value, when that variable defines the span"
 msgstr ""
 
-#. R/anova.coxmelist.R: stop("models do not have the same number of events")
-#: R/anova.coxmelist.R:0
-msgid "models do not have the same number of events"
-msgstr "modele nie mają tej samej liczby zdarzeń"
-
-#. R/anova.coxmelist.R: stop("models do not have the same size of dataset")
-#: R/anova.coxmelist.R:0
-msgid "models do not have the same size of dataset"
-msgstr "modele nie mają tego samego rozmiaru zbioru danych"
-
 #. R/anova.coxphlist.S: stop("models were not all fitted to the same size of dataset")
 #: R/anova.coxphlist.S:0
 msgid "models were not all fitted to the same size of dataset"
 msgstr ""
 "nie wszystkie modele zostały dopasowane do tego samego rozmiaru zbioru danych"
 
-#. R/anova.coxmelist.R: gettextf("models with response %s removed because response differs from model 1",     deparse(responses[!sameresp]))
 #. R/anova.coxphlist.S: gettextf("models with response %s removed because response differs from model 1",     deparse(responses[!sameresp]))
-#: R/anova.coxmelist.R:0 R/anova.coxphlist.S:0
+#: R/anova.coxphlist.S:0
 msgid "models with response %s removed because response differs from model 1"
 msgstr ""
 "modele ze zmienną zależną %s zostały usunięte ponieważ zmienna zależna różni "
@@ -1958,8 +1982,8 @@ msgstr "obiekt klasy \"survfit\" nie ma 2 wymiarów"
 msgid "the are no score residuals for a Null model"
 msgstr "brak reszt punktacji dla pustego modelu"
 
-#. R/anova.coxph.S: gettextf("the following arguments passed to 'anova.coxph()' are invalid and dropped: %s",     tmp_n)
-#: R/anova.coxph.S:0
+#. R/anova.coxph.R: gettextf("the following arguments passed to 'anova.coxph()' are invalid and dropped: %s",     tmp_n)
+#: R/anova.coxph.R:0
 msgid ""
 "the following arguments passed to 'anova.coxph()' are invalid and dropped: %s"
 msgstr ""
@@ -2118,6 +2142,12 @@ msgstr "niepoprawna długość argumentu '%s'"
 msgid "wrong length for '%s' component"
 msgstr "niepoprawna długość komponentu '%s'"
 
+#. R/coxph.R: stop("wrong length for 'init' argument")
+#: R/coxph.R:0
+#, fuzzy
+msgid "wrong length for 'init' argument"
+msgstr "niepoprawna długość argumentu 'istate'"
+
 #. R/is.ratetable.S: gettext("wrong length for 'type' attribute")
 #: R/is.ratetable.S:0
 msgid "wrong length for 'type' attribute"
@@ -2186,6 +2216,21 @@ msgid_plural "Rate table with dimensions: "
 msgstr[0] "Tabela szybkości o wymiarze:"
 msgstr[1] "Tabela szybkości o wymiarach:"
 msgstr[2] "Tabela szybkości o wymiarach:"
+
+#~ msgid ""
+#~ "'object' argument must be a list of objects of class \"coxme\" or \"coxph"
+#~ "\""
+#~ msgstr ""
+#~ "argument 'object' musi być listą obiektów klasy \"coxme\" lub \"coxph\""
+
+#~ msgid "First argument must be a list"
+#~ msgstr "Pierwszy argument musi być listą"
+
+#~ msgid "models do not have the same number of events"
+#~ msgstr "modele nie mają tej samej liczby zdarzeń"
+
+#~ msgid "models do not have the same size of dataset"
+#~ msgstr "modele nie mają tego samego rozmiaru zbioru danych"
 
 #~ msgid "'newdata' argument must be a data frame"
 #~ msgstr "argument 'newdata' musi być ramką danych"
@@ -2317,9 +2362,6 @@ msgstr[2] "Tabela szybkości o wymiarach:"
 #~ msgid "The inf.warn setting must be >0"
 #~ msgstr "Ustawienie 'inf.warn' musi być > 0"
 
-#~ msgid "First argument must be a fitted Cox model"
-#~ msgstr "Pierwszy argument musi być dopasowanym modelem Coxa"
-
 #~ msgid "Distribution not found"
 #~ msgstr "Rozkład nie został znaleziony"
 
@@ -2375,9 +2417,6 @@ msgstr[2] "Tabela szybkości o wymiarach:"
 
 #~ msgid "Offset term ignored"
 #~ msgstr "Człon przesunięcia został zignorowany"
-
-#~ msgid "wrong length for 'istate' argument"
-#~ msgstr "niepoprawna długość argumentu 'istate'"
 
 #~ msgid "y must be a Surv object"
 #~ msgstr "y musi być obiektem klasy \"surv\""
