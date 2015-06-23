@@ -1183,6 +1183,10 @@ SEXP attribute_hidden do_attributes(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     check1arg(args, call, "x");
     namesattr = R_NilValue;
+
+    if (TYPEOF(CAR(args)) == ENVSXP)
+	R_CheckStack(); /* in case attributes might lead to a cycle */
+
     attrs = ATTRIB(CAR(args));
     nvalues = length(attrs);
     if (isList(CAR(args))) {
@@ -1233,10 +1237,11 @@ SEXP attribute_hidden do_levelsgets(SEXP call, SEXP op, SEXP args, SEXP env)
     if (DispatchOrEval(call, op, "levels<-", args, env, &ans, 0, 1))
 	/* calls, e.g., levels<-.factor() */
 	return(ans);
+    PROTECT(ans);
     if(!isNull(CADR(args)) && any_duplicated(CADR(args), FALSE))
 	warningcall(call, _("duplicated levels in factors are deprecated"));
 /* TODO errorcall(call, _("duplicated levels are not allowed in factors anymore")); */
-    PROTECT(args = ans);
+    args = ans;
     if (MAYBE_SHARED(CAR(args))) SETCAR(args, duplicate(CAR(args)));
     setAttrib(CAR(args), R_LevelsSymbol, CADR(args));
     UNPROTECT(1);
@@ -1376,6 +1381,9 @@ SEXP attribute_hidden do_attr(SEXP call, SEXP op, SEXP args, SEXP env)
 	errorcall(call, _("'which' attribute must be of mode character"));
     if (length(t) != 1)
 	errorcall(call, _("exactly one attribute 'which' must be given"));
+
+    if (TYPEOF(s) == ENVSXP)
+	R_CheckStack(); /* in case attributes might lead to a cycle */
 
     if(nargs == 3) {
 	exact = asLogical(CADDR(args));
