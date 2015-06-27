@@ -68,6 +68,9 @@
 
       \item \code{as.raster(x)} now also accepts \code{\link{raw}}
       arrays \code{x} assuming values in \code{0:255}.
+      
+      \item Subscripting of matrix/array objects of type
+      \code{"expression"} is now supported.
     }
   }
 
@@ -125,11 +128,14 @@
       \item The HTML help page links to demo code failed due to a change
       in \R 3.2.0.  (\PR{16432})
       
-      \item If \code{na.action} was used in \code{model.frame}, the 
+      \item If \code{na.action} was used in \code{model.frame()}, the 
       original data could be modified. (\PR{16436})
       
-      \item \code{getGraphicsEvent} could cause a crash if a graphics
+      \item \code{getGraphicsEvent()} could cause a crash if a graphics
       window was closed while it was in use. (\PR{16438})
+      
+      \item \code{matrix(x, nr, nc, byrow = TRUE)} failed if \code{x}
+      was an object of type \code{"expression"}.
     }
   }
 }

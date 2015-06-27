@@ -72,7 +72,7 @@ SEXP attribute_hidden do_delayed(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP name = R_NilValue /* -Wall */, expr, eenv, aenv;
     checkArity(op, args);
 
-    if (!isString(CAR(args)) || length(CAR(args)) == 0)
+    if (!isString(CAR(args)) || LENGTH(CAR(args)) == 0)
 	error(_("invalid first argument"));
     else
 	name = installTrChar(STRING_ELT(CAR(args), 0));
@@ -190,7 +190,7 @@ SEXP attribute_hidden do_args(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP s;
 
     checkArity(op,args);
-    if (TYPEOF(CAR(args)) == STRSXP && length(CAR(args))==1) {
+    if (TYPEOF(CAR(args)) == STRSXP && LENGTH(CAR(args)) == 1) {
 	PROTECT(s = installTrChar(STRING_ELT(CAR(args), 0)));
 	SETCAR(args, findFun(s, rho));
 	UNPROTECT(1);
@@ -364,7 +364,7 @@ static Rboolean R_IsImportsEnv(SEXP env)
     if (ENCLOS(env) != R_BaseNamespace)
         return FALSE;
     SEXP name = getAttrib(env, R_NameSymbol);
-    if (!isString(name) || length(name) != 1)
+    if (!isString(name) || LENGTH(name) != 1)
         return FALSE;
 
     const char *imports_prefix = "imports:";
@@ -556,7 +556,7 @@ SEXP attribute_hidden do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
     args = CDR(args);
 
     fill = CAR(args);
-    if ((!isNumeric(fill) && !isLogical(fill)) || (length(fill) != 1))
+    if ((!isNumeric(fill) && !isLogical(fill)) || (LENGTH(fill) != 1))
 	error(_("invalid '%s' argument"), "fill");
     if (isLogical(fill)) {
 	if (asLogical(fill) == 1)
@@ -1021,7 +1021,7 @@ SEXP attribute_hidden do_switch(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (nargs < 1) errorcall(call, _("'%s' argument is missing"), "EXPR");
     check1arg(args, call, "EXPR");
     PROTECT(x = eval(CAR(args), rho));
-    if (!isVector(x) || length(x) != 1)
+    if (!isVector(x) || LENGTH(x) != 1)
 	errorcall(call, _("'%s' argument must be a vector of length 1"), "EXPR");
     if (isFactor(x))
 	warningcall(call,

@@ -30,7 +30,7 @@ static SEXP cumsum(SEXP x, SEXP s)
 {
     LDOUBLE sum = 0.;
     double *rx = REAL(x), *rs = REAL(s);
-    for (R_xlen_t i = 0 ; i < xlength(x) ; i++) {
+    for (R_xlen_t i = 0 ; i < XLENGTH(x) ; i++) {
 	if (ISNAN(rx[i])) break;
 	sum += rx[i];
 	rs[i] = (double) sum;
@@ -43,7 +43,7 @@ static SEXP icumsum(SEXP x, SEXP s)
 {
     int *ix = INTEGER(x), *is = INTEGER(s);
     double sum = 0.0;
-    for (R_xlen_t i = 0 ; i < xlength(x) ; i++) {
+    for (R_xlen_t i = 0 ; i < XLENGTH(x) ; i++) {
 	if (ix[i] == NA_INTEGER) break;
 	sum += ix[i];
 	if(sum > INT_MAX || sum < 1 + INT_MIN) { /* INT_MIN is NA_INTEGER */
@@ -60,7 +60,7 @@ static SEXP ccumsum(SEXP x, SEXP s)
     Rcomplex sum;
     sum.r = 0;
     sum.i = 0;
-    for (R_xlen_t i = 0 ; i < xlength(x) ; i++) {
+    for (R_xlen_t i = 0 ; i < XLENGTH(x) ; i++) {
 	sum.r += COMPLEX(x)[i].r;
 	sum.i += COMPLEX(x)[i].i;
 	COMPLEX(s)[i].r = sum.r;
@@ -71,11 +71,10 @@ static SEXP ccumsum(SEXP x, SEXP s)
 
 static SEXP cumprod(SEXP x, SEXP s)
 {
-    int i;
     LDOUBLE prod;
     double *rx = REAL(x), *rs = REAL(s);
     prod = 1.0;
-    for (i = 0 ; i < length(x) ; i++) {
+    for (R_xlen_t i = 0 ; i < XLENGTH(x) ; i++) {
 	prod *= rx[i];
 	rs[i] = (double) prod;
     }
@@ -87,7 +86,7 @@ static SEXP ccumprod(SEXP x, SEXP s)
     Rcomplex prod, tmp;
     prod.r = 1;
     prod.i = 0;
-    for (R_xlen_t i = 0 ; i < xlength(x) ; i++) {
+    for (R_xlen_t i = 0 ; i < XLENGTH(x) ; i++) {
 	tmp.r = prod.r;
 	tmp.i = prod.i;
 	prod.r = COMPLEX(x)[i].r * tmp.r - COMPLEX(x)[i].i * tmp.i;
@@ -102,7 +101,7 @@ static SEXP cummax(SEXP x, SEXP s)
 {
     double max, *rx = REAL(x), *rs = REAL(s);
     max = R_NegInf;
-    for (R_xlen_t i = 0 ; i < xlength(x) ; i++) {
+    for (R_xlen_t i = 0 ; i < XLENGTH(x) ; i++) {
 	if(ISNAN(rx[i]) || ISNAN(max))
 	    max = max + rx[i];  /* propagate NA and NaN */
 	else
@@ -116,7 +115,7 @@ static SEXP cummin(SEXP x, SEXP s)
 {
     double min, *rx = REAL(x), *rs = REAL(s);
     min = R_PosInf; /* always positive, not NA */
-    for (R_xlen_t i = 0 ; i < xlength(x) ; i++ ) {
+    for (R_xlen_t i = 0 ; i < XLENGTH(x) ; i++ ) {
 	if (ISNAN(rx[i]) || ISNAN(min))
 	    min = min + rx[i];  /* propagate NA and NaN */
 	else
@@ -133,7 +132,7 @@ static SEXP icummax(SEXP x, SEXP s)
 	return s; // all NA
     int *is = INTEGER(s), max = ix[0];
     is[0] = max;
-    for (R_xlen_t i = 1 ; i < xlength(x) ; i++) {
+    for (R_xlen_t i = 1 ; i < XLENGTH(x) ; i++) {
 	if(ix[i] == NA_INTEGER) break;
 	is[i] = max = (max > ix[i]) ? max : ix[i];
     }
@@ -145,7 +144,7 @@ static SEXP icummin(SEXP x, SEXP s)
     int *ix = INTEGER(x), *is = INTEGER(s);
     int min = ix[0];
     is[0] = min;
-    for (R_xlen_t i = 1 ; i < xlength(x) ; i++ ) {
+    for (R_xlen_t i = 1 ; i < XLENGTH(x) ; i++ ) {
 	if(ix[i] == NA_INTEGER) break;
 	is[i] = min = (min < ix[i]) ? min : ix[i];
     }

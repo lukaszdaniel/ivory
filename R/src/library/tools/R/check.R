@@ -1240,7 +1240,7 @@ setRlibs <-
 
     check_R_code <- function()
     {
-        if (!is_base_pkg) {
+        ## if (!is_base_pkg) {
             checkingLog(Log, gettext("checking dependencies in R code ...", domain = "R-tools"))
             if (do_install) {
                 Rcmd <- sprintf("options(warn=1, showErrorCalls=FALSE)\ntools:::.check_packages_used(package = \"%s\")\n", pkgname)
@@ -1265,7 +1265,7 @@ setRlibs <-
                     ## wrapLog(msg_DESCRIPTION)
                 } else resultLog(Log, gettext("OK", domain = "R-tools"))
             }
-        }
+        ## }
 
         ## Check whether methods have all arguments of the corresponding
         ## generic.
@@ -1402,7 +1402,11 @@ setRlibs <-
             Rcmd <-
                 paste("options(warn=1)\n",
                       sprintf("tools:::.check_code_usage_in_package(package = \"%s\")\n", pkgname))
-            out3 <- R_runR2(Rcmd, "R_DEFAULT_PACKAGES=")
+            out3 <- if(config_val_to_logical(Sys.getenv("_R_CHECK_CODE_USAGE_WITH_ONLY_BASE_ATTACHED_",
+                                                        "false")))
+                R_runR2(Rcmd, "R_DEFAULT_PACKAGES=NULL")
+            else
+                R_runR2(Rcmd, "R_DEFAULT_PACKAGES=")
         }
 
         if(!is_base_pkg && R_check_use_codetools && R_check_dot_internal) {
