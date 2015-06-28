@@ -119,7 +119,7 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
             } else {
                 message(gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is %s", sQuote(pkg), pkgInfo$DESCRIPTION["License"], domain = "R-base"), domain = NA)
             }
-            choice <- menu(c(gettext("accept"), gettext("decline")), title = gettextf("License for %s", sQuote(pkg)))
+            choice <- utils::menu(c(gettext("accept"), gettext("decline")), title = gettextf("License for %s", sQuote(pkg)))
             if(choice != 1)
                 stop(gettextf("license for package %s was not accepted", sQuote(package)), domain = "R-base", call. = FALSE)
             dir.create(dirname(personal_file), showWarnings=FALSE)

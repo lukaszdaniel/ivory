@@ -163,8 +163,8 @@ all.equal.character <-
 ## In 'base' these are all visible, so need to test both args:
 
 all.equal.envRefClass <- function (target, current, ...) {
-    if(!is (target, "envRefClass")) return(gettextf("'%s' argument is not an envRefClass", "target", domain = "R-base"))
-    if(!is(current, "envRefClass")) return(gettextf("'%s' argument is not an envRefClass", "current", domain = "R-base"))
+    if(!methods::is(target, "envRefClass")) return(gettextf("'%s' argument is not an envRefClass", "target", domain = "R-base"))
+    if(!methods::is(current, "envRefClass")) return(gettextf("'%s' argument is not an envRefClass", "current", domain = "R-base"))
     if(!isTRUE(ae <- all.equal(class(target), class(current), ...)))
 	return(gettextf("Classes differ: %s", paste(ae, collapse = " ")))
     getCl <- function(x) { cl <- tryCatch(x$getClass(), error=function(e) NULL)
@@ -196,7 +196,8 @@ all.equal.envRefClass <- function (target, current, ...) {
     sns <- names(cld@slots); sns <- sns[sns != ".xData"]
     msg <- if(length(sns)) {
 	L <- lapply(sns, function(sn)
-	    all.equal(slot(target, sn), slot(current, sn), ...))
+	    all.equal(methods::slot(target, sn),
+                      methods::slot(current, sn), ...))
 	unlist(L[vapply(L, is.character, NA)])
     }
     if(is.character(n)) msg <- c(msg, n)
