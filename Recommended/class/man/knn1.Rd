@@ -1,10 +1,10 @@
 % file class/man/knn1.Rd
-% copyright (C) 1994-9 W. N. Venables and B. D. Ripley
+% copyright (C) 1994-2015 W. N. Venables and B. D. Ripley
 %
 \name{knn1}
 \alias{knn1}
 \title{
-1-nearest neighbour classification
+1-Nearest Neighbour Classification
 }
 \description{
 Nearest neighbour classification for test set from training set. For

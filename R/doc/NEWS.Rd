@@ -127,6 +127,9 @@
     \itemize{
       \item \code{cmdscale()} gets new option \code{list.} for increased
       flexibility when a list should be returned.
+
+      \item \command{configure} now supports \code{texinfo} version 6.0.
+      (Wish of \PR{16456}.)
     }
   }
   \subsection{BUG FIXES}{
@@ -142,6 +145,10 @@
       
       \item \code{matrix(x, nr, nc, byrow = TRUE)} failed if \code{x}
       was an object of type \code{"expression"}.
+      
+      \item \code{strptime()} could overflow the C stack when the
+      timezone had a non-standard format much longer than the
+      standard formats. (Part of \PR{16328}.)
     }
   }
 }

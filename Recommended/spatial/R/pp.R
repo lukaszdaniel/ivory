@@ -165,7 +165,7 @@ pplik <- function(pp, R, ng=50, trace=FALSE)
                 )
         if(trace) {
 	    print(c(cc, z$res))
-	    flush.console()
+	    utils::flush.console()
 	}
         z$res
     }

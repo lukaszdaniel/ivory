@@ -208,4 +208,9 @@ Version 2.23-14
 
 Removed unused assignments.
 Improve DESCRIPTION file.
+Update ko translations.
 
+Version 2.23-15
+===============
+
+Correct imports in NAMESPACE file.

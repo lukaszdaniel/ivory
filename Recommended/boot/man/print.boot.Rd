@@ -4,7 +4,8 @@
 Print a Summary of a Bootstrap Object
 }
 \description{
-This is a method for the function print for objects of the class \code{"boot"}.
+  This is a method for the function \code{print()} for objects of the
+  class \code{"boot"}.
 }
 \usage{
 \method{print}{boot}(x, digits = getOption("digits"), 
