@@ -7,11 +7,11 @@ a98bfc65732fea1f439faecee3a4adaf  inst/po/en@quot/LC_MESSAGES/R-class.mo
 b888e2521f30a9912d9687777b1aa478  inst/po/fr/LC_MESSAGES/R-class.mo
 41a14f2150064ddff743e39d111a870a  inst/po/de/LC_MESSAGES/R-class.mo
 802e4f5e2c0e759367da2ae274d5951e  inst/po/ko/LC_MESSAGES/R-class.mo
-5c80ca4e6c4cd95356edf642d43eb4bf  man/knn1.Rd
 a14861d4c76b0028b6dc635163b00297  LICENCE.note
+5c80ca4e6c4cd95356edf642d43eb4bf  man/knn1.Rd
+396eec671f1bddd185fa79831dd47ee3  man/lvq3.Rd
 e8e077536af8608b6d5d366410bae87a  man/lvqtest.Rd
 e70f2c5c23ddf839b5e3b1457fc6fdbd  man/lvqinit.Rd
-396eec671f1bddd185fa79831dd47ee3  man/lvq3.Rd
 4088862ce7d73759a8a754d490575c55  man/SOM.Rd
 4c659dd015ed95b15223d1a62c39a745  man/multiedit.Rd
 401fc2d0327911732fd84ccd817e41e5  man/reduce.nn.Rd
@@ -22,8 +22,8 @@ fdfb3a7e3ed8116278a8f4fd067a8045  man/lvq2.Rd
 11a66b273c6dc182cc05bb2bc53fdb54  man/olvq1.Rd
 69d25fc468f9fd914106f8f1fb49c101  man/condense.Rd
 4a2e92b20c3ae11d503519eda00a7ed7  man/batchSOM.Rd
-a92febb02a17971969afc1e4e4067279  NAMESPACE
 04d8b8fb49626fa41093f3b19ce5edbf  man/somgrid.Rd
+a92febb02a17971969afc1e4e4067279  NAMESPACE
 540f0c9085850c1fdd206c18e8127d5c  po/class.pot
 cfe00d090cffac53030a8a14788dc901  po/R-class.pot
 226f9301da05e1a32c20196859f64efb  po/pl.po

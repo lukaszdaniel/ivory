@@ -393,6 +393,7 @@ In command 'read.dta("pc5.dta")': cannot read factor labels from Stata 5 files
   .. ..- attr(*, "names")= character  "Male" "Female"
 > 
 > ## Dates and date-times in Stata12
+> Sys.setenv(TZ = "UTC") # avoid timezone differences: cannot unset so must be last
 > read.dta("xxx12.dta")
                      x                  xc               xbigc      xdate
 1  2014-01-23 20:07:16 2014-01-23 21:07:16 2014-01-23 21:07:16 2014-01-23
