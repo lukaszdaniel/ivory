@@ -68,7 +68,7 @@
 
       \item \code{as.raster(x)} now also accepts \code{\link{raw}}
       arrays \code{x} assuming values in \code{0:255}.
-      
+
       \item Subscripting of matrix/array objects of type
       \code{"expression"} is now supported.
     }
@@ -108,16 +108,6 @@
 
       \item A \code{coef.maov()} method has been added to allow
       \code{vcov()} to work with multivariate results. (\PR{16380})
-
-      \item \code{options(OutDec = s)} now signals a warning (which will
-      become an error in the future) when \code{s} is not a string with
-      exactly one character, as that has been a documented requirement.
-      %% Move to R-patched together with next one, after a while
-
-      \item \code{prettyNum()} gains a new option \code{input.d.mark}
-      which together with other changes, e.g., the default for
-      \code{decimal.mark}, fixes some \code{format()}ting variants with
-      non-default \code{getOption("OutDec")} such as in \PR{16411}.
     }
   }
 }
@@ -131,25 +121,43 @@
       \item \command{configure} now supports \code{texinfo} version 6.0,
       which (unlike the change from 4.x to 5.0) is a minor update.
       (Wish of \PR{16456}.)
+
+      \item (Windows only) \code{setInternet2(TRUE)} is now the default,
+      so \samp{https://} URLs should be readable.  The command line
+      option \command{--internet2} and the environment variable
+      \env{R_WIN_INTERNET2} are now ignored.
     }
   }
   \subsection{BUG FIXES}{
     \itemize{
       \item The HTML help page links to demo code failed due to a change
       in \R 3.2.0.  (\PR{16432})
-      
-      \item If \code{na.action} was used in \code{model.frame()}, the 
+
+      \item If \code{na.action} was used in \code{model.frame()}, the
       original data could be modified. (\PR{16436})
-      
+
       \item \code{getGraphicsEvent()} could cause a crash if a graphics
       window was closed while it was in use. (\PR{16438})
-      
+
       \item \code{matrix(x, nr, nc, byrow = TRUE)} failed if \code{x}
       was an object of type \code{"expression"}.
-      
+
       \item \code{strptime()} could overflow the C stack when the
       timezone had a non-standard format much longer than the
       standard formats. (Part of \PR{16328}.)
+
+      \item \code{options(OutDec = s)} now signals a warning (which will
+      become an error in the future) when \code{s} is not a string with
+      exactly one character, as that has been a documented requirement.
+
+      \item \code{prettyNum()} gains a new option \code{input.d.mark}
+      which together with other changes, e.g., the default for
+      \code{decimal.mark}, fixes some \code{format()}ting variants with
+      non-default \code{getOption("OutDec")} such as in \PR{16411}.
+
+      \item The \code{dendrogram} method of \code{labels()} is much more
+      efficient for large dendrograms, now using \code{rapply()}.
+      (Comment #15 of \PR{15215})
     }
   }
 }
@@ -491,8 +499,8 @@
 	schemes it supports.
 
 	\item \code{curlGetHeaders()} retrieves the headers for
-	\code{http://}, \code{https://}, \code{ftp://} and
-	\code{ftps://} URLs: analysis of these headers can provide
+	\samp{http://}, \samp{https://}, \samp{ftp://} and
+	\samp{ftps://} URLs: analysis of these headers can provide
 	insights into the `existence' of a URL (it might for example be
 	permanently redirected) and is so used in \command{R CMD
 	  check --as-cran}.
@@ -1376,7 +1384,7 @@
       an error instead of a warning.
 
       \item \code{install.packages(repos = NULL)} now accepts
-      \code{http://} or \code{ftp://} URLs of package archives as well
+      \samp{http://} or \samp{ftp://} URLs of package archives as well
       as file paths, and will download as required.  In most cases
       \code{repos = NULL} can be deduced from the extension of the URL.
 
