@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-09 22:21\n"
+"POT-Creation-Date: 2015-07-07 21:51\n"
 "PO-Revision-Date: 2015-01-17 15:49+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -501,6 +501,13 @@ msgstr "аргумент 'subset' будет пропущен"
 #, fuzzy
 msgid "'%s' must be unique, but are = %s"
 msgstr "'cutpoints' должны быть уникальны, но они ="
+
+#. R/cmdscale.R: gettextf("'%s' option is disregarded when '%s'", "eig=TRUE", "list.=FALSE")
+#. R/cmdscale.R: gettextf("'%s' option is disregarded when '%s'", "x.ret=TRUE", "list.=FALSE")
+#: R/cmdscale.R:0
+#, fuzzy
+msgid "'%s' option is disregarded when '%s'"
+msgstr "'r' < 1"
 
 #. R/friedman.test.R: gettextf("'%s', '%s' and '%s' arguments must have the same length", "y", "groups",     "blocks")
 #. R/mantelhaen.test.R: gettextf("'%s', '%s' and '%s' arguments must have the same length", "x", "y", "z")

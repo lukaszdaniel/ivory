@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-09 22:21\n"
+"POT-Creation-Date: 2015-07-07 21:37\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -851,6 +851,11 @@ msgstr ""
 "Metody mogą być zdefiniowane dla argumentów: %s\n"
 "Użyj 'showMethods(\"%s\")' dla aktualnie dostępnych."
 
+#. R/refClass.R: gettextf("Methods not found: %s", paste(dQuote(methods[missing]), collapse = ", "))
+#: R/refClass.R:0
+msgid "Methods not found: %s"
+msgstr "Metody nie zostały znalezione: %s"
+
 #. R/refClass.R: gettext("Methods used: ", domain = "R-methods")
 #: R/refClass.R:0
 msgid "Methods used:"
@@ -1023,6 +1028,15 @@ msgstr ""
 "'apply()'). Metody wywoływane bezpośrednio nie muszą być zadeklarowane, ale "
 "nic nie stoi na przeszkodzie aby to zrobić. Funkcja '$usingMethods()' nic "
 "nie robi podczas trwania."
+
+#. R/refClass.R: gettextf("Reference superclasses must come from the same package for the environment to be defined:  got %s and %s",     .nQuote(clRefMethods$.objectPackage), .nQuote(pkg))
+#: R/refClass.R:0
+msgid ""
+"Reference superclasses must come from the same package for the environment "
+"to be defined:  got %s and %s"
+msgstr ""
+"Aby środowisko było zdefiniowane, referencyjna superklasa musi pochodzić z "
+"tego samego pakietu:  otrzymano %s oraz %s"
 
 #. R/RClassUtils.R: gettextf("Required method %s not defined for signature %s", message, target)
 #: R/RClassUtils.R:0

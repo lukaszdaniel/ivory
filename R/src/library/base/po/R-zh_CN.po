@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-09 22:20\n"
+"POT-Creation-Date: 2015-07-07 21:36\n"
 "PO-Revision-Date: 2015-01-17 13:33+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -795,6 +795,11 @@ msgstr "本系统不支持'iconvlist'"
 msgid ""
 "'incomparables' argument is supported only for merging on a single column"
 msgstr "除非'file'是文件名，'compress'将被略过不用"
+
+#. R/format.R: stop("'input.d.mark' has no characters")
+#: R/format.R:0
+msgid "'input.d.mark' has no characters"
+msgstr ""
 
 #. R/all.equal.R: gettextf("'is.NA' value mismatch: %d in 'current' argument, %d in 'target' argument",     sum(is.na(current)), sum(out))
 #. R/all.equal.R: gettextf("'is.NA' value mismatch: %d in 'current' argument, %d in 'target' argument",     sum(nasc), sum(nas))
@@ -2948,12 +2953,12 @@ msgstr "没有正确安装程辑包%s "
 msgid "package %s is not installed for 'arch = %s'"
 msgstr "程辑包%s没有安装在'arch=%s'中"
 
-#. R/attach.R: gettextf("package %s is required by %s so will not be detached", sQuote(pkgname),     sQuote(sub("^package:", "", pkg)), domain = "R-base")
+#. R/attach.R: gettextf("package %s is required by %s so will not be detached", sQuote(pkgname),     sQuote(.rmpkg(pkg)), domain = "R-base")
 #: R/attach.R:0
 msgid "package %s is required by %s so will not be detached"
 msgstr "%2$s需要程辑包%1$s，因此不能将之分离"
 
-#. R/attach.R: gettextf("package %s is required by %s, which may no longer work correctly", sQuote(pkgname),     sQuote(sub("^package:", "", pkg)), domain = "R-base")
+#. R/attach.R: gettextf("package %s is required by %s, which may no longer work correctly", sQuote(pkgname),     sQuote(.rmpkg(pkg)), domain = "R-base")
 #: R/attach.R:0
 msgid "package %s is required by %s, which may no longer work correctly"
 msgstr "%2$s需要程辑包%1$s，但它与目前的版本不相容"

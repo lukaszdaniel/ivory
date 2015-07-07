@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-09 22:21\n"
+"POT-Creation-Date: 2015-07-07 21:37\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Colin Robert <beasley@ufpa.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -3250,6 +3250,11 @@ msgstr "diretório '%s' não existe"
 #. R/check.R: gettext("Unable to find GhostScript executable to run checks on size reduction\n",     domain = "R-tools")
 #: R/check.R:0
 msgid "Unable to find GhostScript executable to run checks on size reduction"
+msgstr ""
+
+#. R/QC.R: gettext("Undefined global functions or variables:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Undefined global functions or variables:"
 msgstr ""
 
 #. R/QC.R: gettextf("Undocumented %s:", tag, domain = "R-tools")

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-09 22:21\n"
+"POT-Creation-Date: 2015-07-07 21:38\n"
 "PO-Revision-Date: 2012-12-30 23:32+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -1947,6 +1947,7 @@ msgid "incorrect field specification"
 msgstr ""
 
 #. R/help.search.R: stop("incorrect type specification")
+#. R/help.search.R: stop("incorrect type specification")
 #: R/help.search.R:0
 msgid "incorrect type specification"
 msgstr ""
@@ -2275,7 +2276,7 @@ msgstr ""
 msgid "no help found for %s"
 msgstr ""
 
-#. R/help.search.R: gettextf("no hsearch.rds meta data for package %s", p)
+#. R/help.search.R: gettextf("no hsearch.rds meta data for package %s", sQuote(p))
 #: R/help.search.R:0
 msgid "no hsearch.rds meta data for package %s"
 msgstr ""

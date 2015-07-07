@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-09 22:21\n"
+"POT-Creation-Date: 2015-07-07 21:38\n"
 "PO-Revision-Date: 2012-03-06 22:16+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -2127,6 +2127,7 @@ msgid "incorrect field specification"
 msgstr "spécification de champ incorrecte"
 
 #. R/help.search.R: stop("incorrect type specification")
+#. R/help.search.R: stop("incorrect type specification")
 #: R/help.search.R:0
 msgid "incorrect type specification"
 msgstr "spécification de type incorrecte"
@@ -2474,7 +2475,7 @@ msgstr "aucune fonction '%s' n'est visible"
 msgid "no help found for %s"
 msgstr "fichier d'aide introuvable pour %s"
 
-#. R/help.search.R: gettextf("no hsearch.rds meta data for package %s", p)
+#. R/help.search.R: gettextf("no hsearch.rds meta data for package %s", sQuote(p))
 #: R/help.search.R:0
 #, fuzzy
 msgid "no hsearch.rds meta data for package %s"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-09 22:21\n"
+"POT-Creation-Date: 2015-07-07 21:38\n"
 "PO-Revision-Date: 2012-03-09 06:16+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -2088,6 +2088,7 @@ msgid "incorrect field specification"
 msgstr "올바르지 않은 필드 정보입니다 "
 
 #. R/help.search.R: stop("incorrect type specification")
+#. R/help.search.R: stop("incorrect type specification")
 #: R/help.search.R:0
 msgid "incorrect type specification"
 msgstr "올바르지 않은 유형정보입니다 "
@@ -2435,7 +2436,7 @@ msgstr "함수 '%s' 는 찾을 수 없을 것입니다 "
 msgid "no help found for %s"
 msgstr "%s 에 대한 도움말을 찾을 수 없습니다 "
 
-#. R/help.search.R: gettextf("no hsearch.rds meta data for package %s", p)
+#. R/help.search.R: gettextf("no hsearch.rds meta data for package %s", sQuote(p))
 #: R/help.search.R:0
 #, fuzzy
 msgid "no hsearch.rds meta data for package %s"

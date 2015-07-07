@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-09 22:21\n"
+"POT-Creation-Date: 2015-07-07 21:38\n"
 "PO-Revision-Date: 2012-02-26 14:23+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -2111,6 +2111,7 @@ msgid "incorrect field specification"
 msgstr " 不正確な欄指定です "
 
 #. R/help.search.R: stop("incorrect type specification")
+#. R/help.search.R: stop("incorrect type specification")
 #: R/help.search.R:0
 msgid "incorrect type specification"
 msgstr " 不正確なタイプ指定です "
@@ -2458,7 +2459,7 @@ msgstr " 可視的な関数 '%s' はありません  "
 msgid "no help found for %s"
 msgstr " %s に対するヘルプファイルが見つかりません "
 
-#. R/help.search.R: gettextf("no hsearch.rds meta data for package %s", p)
+#. R/help.search.R: gettextf("no hsearch.rds meta data for package %s", sQuote(p))
 #: R/help.search.R:0
 #, fuzzy
 msgid "no hsearch.rds meta data for package %s"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-09 22:20\n"
+"POT-Creation-Date: 2015-07-07 21:36\n"
 "PO-Revision-Date: 2011-03-26 08:54-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -794,6 +794,11 @@ msgstr "'iconvlist' não está disponível neste sistema"
 #: R/merge.R:0
 msgid ""
 "'incomparables' argument is supported only for merging on a single column"
+msgstr ""
+
+#. R/format.R: stop("'input.d.mark' has no characters")
+#: R/format.R:0
+msgid "'input.d.mark' has no characters"
 msgstr ""
 
 #. R/all.equal.R: gettextf("'is.NA' value mismatch: %d in 'current' argument, %d in 'target' argument",     sum(is.na(current)), sum(out))
@@ -2987,12 +2992,12 @@ msgstr "pacote '%s' não foi instalado corretamente"
 msgid "package %s is not installed for 'arch = %s'"
 msgstr "pacote '%s' não foi instalado para 'arch=%s'"
 
-#. R/attach.R: gettextf("package %s is required by %s so will not be detached", sQuote(pkgname),     sQuote(sub("^package:", "", pkg)), domain = "R-base")
+#. R/attach.R: gettextf("package %s is required by %s so will not be detached", sQuote(pkgname),     sQuote(.rmpkg(pkg)), domain = "R-base")
 #: R/attach.R:0
 msgid "package %s is required by %s so will not be detached"
 msgstr "pacote '%s' é requerido por %s e portanto não será descarregado"
 
-#. R/attach.R: gettextf("package %s is required by %s, which may no longer work correctly", sQuote(pkgname),     sQuote(sub("^package:", "", pkg)), domain = "R-base")
+#. R/attach.R: gettextf("package %s is required by %s, which may no longer work correctly", sQuote(pkgname),     sQuote(.rmpkg(pkg)), domain = "R-base")
 #: R/attach.R:0
 msgid "package %s is required by %s, which may no longer work correctly"
 msgstr ""

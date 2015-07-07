@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-09 22:20\n"
+"POT-Creation-Date: 2015-07-07 21:36\n"
 "PO-Revision-Date: 2011-11-30 14:20+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -781,6 +781,11 @@ msgid ""
 "'incomparables' argument is supported only for merging on a single column"
 msgstr ""
 "'rekursive' vil blive ignoreret da 'to' ikke er en enkelt eksisterende mappe"
+
+#. R/format.R: stop("'input.d.mark' has no characters")
+#: R/format.R:0
+msgid "'input.d.mark' has no characters"
+msgstr ""
 
 #. R/all.equal.R: gettextf("'is.NA' value mismatch: %d in 'current' argument, %d in 'target' argument",     sum(is.na(current)), sum(out))
 #. R/all.equal.R: gettextf("'is.NA' value mismatch: %d in 'current' argument, %d in 'target' argument",     sum(nasc), sum(nas))
@@ -2897,12 +2902,12 @@ msgstr "pakke %s er ikke blevet installeret korrekt"
 msgid "package %s is not installed for 'arch = %s'"
 msgstr "pakke %s er ikke installeret for 'arch=%s'"
 
-#. R/attach.R: gettextf("package %s is required by %s so will not be detached", sQuote(pkgname),     sQuote(sub("^package:", "", pkg)), domain = "R-base")
+#. R/attach.R: gettextf("package %s is required by %s so will not be detached", sQuote(pkgname),     sQuote(.rmpkg(pkg)), domain = "R-base")
 #: R/attach.R:0
 msgid "package %s is required by %s so will not be detached"
 msgstr "pakke %s er krævet af %s så den vil ikke blive fjernet"
 
-#. R/attach.R: gettextf("package %s is required by %s, which may no longer work correctly", sQuote(pkgname),     sQuote(sub("^package:", "", pkg)), domain = "R-base")
+#. R/attach.R: gettextf("package %s is required by %s, which may no longer work correctly", sQuote(pkgname),     sQuote(.rmpkg(pkg)), domain = "R-base")
 #: R/attach.R:0
 msgid "package %s is required by %s, which may no longer work correctly"
 msgstr "pakke %s er krævet af %s, som måske ikke længere virker korrekt"

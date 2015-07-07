@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-09 22:21\n"
+"POT-Creation-Date: 2015-07-07 21:38\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -2062,6 +2062,7 @@ msgid "incorrect field specification"
 msgstr "niepoprawne określenie pola"
 
 #. R/help.search.R: stop("incorrect type specification")
+#. R/help.search.R: stop("incorrect type specification")
 #: R/help.search.R:0
 msgid "incorrect type specification"
 msgstr "niepoprawne określenie typu"
@@ -2401,7 +2402,7 @@ msgstr "nie ma widocznej funkcji '%s'"
 msgid "no help found for %s"
 msgstr "nie znaleziono pomocy dla %s"
 
-#. R/help.search.R: gettextf("no hsearch.rds meta data for package %s", p)
+#. R/help.search.R: gettextf("no hsearch.rds meta data for package %s", sQuote(p))
 #: R/help.search.R:0
 msgid "no hsearch.rds meta data for package %s"
 msgstr "brak metadanych hsearch.rds dla pakietu %s"

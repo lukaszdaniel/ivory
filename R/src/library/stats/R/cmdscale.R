@@ -22,8 +22,8 @@ cmdscale <- function (d, k = 2, eig = FALSE, add = FALSE, x.ret = FALSE,
     if (anyNA(d))
 	stop("NA values are not allowed in 'd' argument")
     if(!list.) {
-	if (eig)  warning(  "'eig=TRUE' is disregarded when 'list.=FALSE'")
-	if(x.ret) warning("'x.ret=TRUE' is disregarded when 'list.=FALSE'")
+	if (eig)  warning(gettextf("'%s' option is disregarded when '%s'", "eig=TRUE", "list.=FALSE"))
+	if(x.ret) warning(gettextf("'%s' option is disregarded when '%s'", "x.ret=TRUE", "list.=FALSE"))
     }
     if (is.null(n <- attr(d, "Size"))) {
         if(add) d <- as.matrix(d)

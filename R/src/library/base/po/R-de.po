@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-09 22:20\n"
+"POT-Creation-Date: 2015-07-07 21:36\n"
 "PO-Revision-Date: 2015-01-17 13:31+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <r-core@r-project.org>\n"
@@ -802,6 +802,11 @@ msgstr "'iconvlist' steht auf diesem System nicht zur Verfügung"
 msgid ""
 "'incomparables' argument is supported only for merging on a single column"
 msgstr "'compress' wird ignoriert, außer 'file' ist ein Dateiname"
+
+#. R/format.R: stop("'input.d.mark' has no characters")
+#: R/format.R:0
+msgid "'input.d.mark' has no characters"
+msgstr ""
 
 #. R/all.equal.R: gettextf("'is.NA' value mismatch: %d in 'current' argument, %d in 'target' argument",     sum(is.na(current)), sum(out))
 #. R/all.equal.R: gettextf("'is.NA' value mismatch: %d in 'current' argument, %d in 'target' argument",     sum(nasc), sum(nas))
@@ -2986,12 +2991,12 @@ msgstr "Paket '%s' wurde nicht korrekt installiert"
 msgid "package %s is not installed for 'arch = %s'"
 msgstr "Paket %s wurde für 'arch=%s' nicht installiert"
 
-#. R/attach.R: gettextf("package %s is required by %s so will not be detached", sQuote(pkgname),     sQuote(sub("^package:", "", pkg)), domain = "R-base")
+#. R/attach.R: gettextf("package %s is required by %s so will not be detached", sQuote(pkgname),     sQuote(.rmpkg(pkg)), domain = "R-base")
 #: R/attach.R:0
 msgid "package %s is required by %s so will not be detached"
 msgstr "Paket %s wird von %s benötigt, wird deshalb nicht detached"
 
-#. R/attach.R: gettextf("package %s is required by %s, which may no longer work correctly", sQuote(pkgname),     sQuote(sub("^package:", "", pkg)), domain = "R-base")
+#. R/attach.R: gettextf("package %s is required by %s, which may no longer work correctly", sQuote(pkgname),     sQuote(.rmpkg(pkg)), domain = "R-base")
 #: R/attach.R:0
 msgid "package %s is required by %s, which may no longer work correctly"
 msgstr ""

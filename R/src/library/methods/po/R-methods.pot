@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 3.3.0\n"
-"POT-Creation-Date: 2015-06-09 22:21\n"
+"POT-Creation-Date: 2015-07-07 21:37\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -984,6 +984,13 @@ msgstr ""
 
 
 #: R/refClass.R: 0
+#. R/refClass.R: gettextf("Methods not found: %s", paste(dQuote(methods[missing]), collapse = ", "))
+
+msgid "Methods not found: %s"
+msgstr ""
+
+
+#: R/refClass.R: 0
 #. R/refClass.R: gettext("Methods used: ", domain = "R-methods")
 
 msgid "Methods used:"
@@ -1169,6 +1176,13 @@ msgstr ""
 #. R/refClass.R: gettext(" Reference methods used by this method are named as the arguments  either quoted or unquoted.  In the code analysis phase of installing the  the present method, the declared methods will be included.  It is essntial  to declare any methods used in a nonstandard way (e.g., via an apply function). Methods called directly do not need to be declared, but it is harmless to do so. $usingMethods() does nothing at run time.")
 
 msgid "Reference methods used by this method are named as the arguments  either quoted or unquoted.  In the code analysis phase of installing the  the present method, the declared methods will be included.  It is essntial  to declare any methods used in a nonstandard way (e.g., via an apply function). Methods called directly do not need to be declared, but it is harmless to do so. $usingMethods() does nothing at run time."
+msgstr ""
+
+
+#: R/refClass.R: 0
+#. R/refClass.R: gettextf("Reference superclasses must come from the same package for the environment to be defined:  got %s and %s",     .nQuote(clRefMethods$.objectPackage), .nQuote(pkg))
+
+msgid "Reference superclasses must come from the same package for the environment to be defined:  got %s and %s"
 msgstr ""
 
 

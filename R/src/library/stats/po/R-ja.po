@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-09 22:21\n"
+"POT-Creation-Date: 2015-07-07 21:51\n"
 "PO-Revision-Date: 2012-02-26 14:13+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -492,6 +492,13 @@ msgstr " 引数'subset'は無視されます "
 #, fuzzy
 msgid "'%s' must be unique, but are = %s"
 msgstr " 'cutpoints' は重複があってはいけませんが、以下の値です "
+
+#. R/cmdscale.R: gettextf("'%s' option is disregarded when '%s'", "eig=TRUE", "list.=FALSE")
+#. R/cmdscale.R: gettextf("'%s' option is disregarded when '%s'", "x.ret=TRUE", "list.=FALSE")
+#: R/cmdscale.R:0
+#, fuzzy
+msgid "'%s' option is disregarded when '%s'"
+msgstr " 'r' は 1 未満です "
 
 #. R/friedman.test.R: gettextf("'%s', '%s' and '%s' arguments must have the same length", "y", "groups",     "blocks")
 #. R/mantelhaen.test.R: gettextf("'%s', '%s' and '%s' arguments must have the same length", "x", "y", "z")

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-09 22:21\n"
+"POT-Creation-Date: 2015-07-07 21:37\n"
 "PO-Revision-Date: 2012-02-26 14:07+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -901,6 +901,12 @@ msgid ""
 "Use 'showMethods(\"%s\")' for currently available ones."
 msgstr ""
 
+#. R/refClass.R: gettextf("Methods not found: %s", paste(dQuote(methods[missing]), collapse = ", "))
+#: R/refClass.R:0
+#, fuzzy
+msgid "Methods not found: %s"
+msgstr " 値のクラスが異なります： %s, %s "
+
 #. R/refClass.R: gettext("Methods used: ", domain = "R-methods")
 #: R/refClass.R:0
 msgid "Methods used:"
@@ -1079,6 +1085,13 @@ msgid ""
 "declare any methods used in a nonstandard way (e.g., via an apply function). "
 "Methods called directly do not need to be declared, but it is harmless to do "
 "so. $usingMethods() does nothing at run time."
+msgstr ""
+
+#. R/refClass.R: gettextf("Reference superclasses must come from the same package for the environment to be defined:  got %s and %s",     .nQuote(clRefMethods$.objectPackage), .nQuote(pkg))
+#: R/refClass.R:0
+msgid ""
+"Reference superclasses must come from the same package for the environment "
+"to be defined:  got %s and %s"
 msgstr ""
 
 #. R/RClassUtils.R: gettextf("Required method %s not defined for signature %s", message, target)

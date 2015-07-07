@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-01 22:13+0200\n"
+"POT-Creation-Date: 2015-07-07 21:38+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -142,12 +142,12 @@ msgstr "błędny tryb %d tekstu w 'deparseRd'"
 msgid "invalid bind address specification"
 msgstr "niepoprawne określenie adresu wiążącego"
 
-#: install.c:105 install.c:126 install.c:128
+#: install.c:105 install.c:124 install.c:126
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
 
-#: install.c:156
+#: install.c:155
 msgid "write error during file append"
 msgstr "błąd zapisu podczas dołączania pliku"
 

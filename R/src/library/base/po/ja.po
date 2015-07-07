@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-09 22:20+0200\n"
+"POT-Creation-Date: 2015-07-07 21:36+0200\n"
 "PO-Revision-Date: 2012-02-26 14:21+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: R-core <R-core@R-project.org> \n"
@@ -350,7 +350,7 @@ msgstr " 実行が停止されました \n"
 msgid "Gradient:\n"
 msgstr ""
 
-#: src/extra/blas/xerbla.c:14 src/main/print.c:1117
+#: src/extra/blas/xerbla.c:14 src/main/print.c:1120
 #, c-format
 msgid "BLAS/LAPACK routine '%6s' gave error code %d"
 msgstr " BLAS/LAPACK 関数 '%6s' はエラーコード %d を返しました  "
@@ -474,7 +474,7 @@ msgid "End of file"
 msgstr " 行の終り "
 
 #: src/extra/trio/trio.c:7618 src/main/builtin.c:921 src/main/builtin.c:931
-#: src/main/options.c:654 src/modules/X11/dataentry.c:315
+#: src/main/options.c:659 src/modules/X11/dataentry.c:315
 #: src/modules/X11/dataentry.c:470 src/modules/X11/dataentry.c:473
 #: src/modules/X11/dataentry.c:503
 msgid "invalid argument"
@@ -598,11 +598,11 @@ msgstr " '%s'の表示に問題があります "
 #: src/main/builtin.c:89 src/main/builtin.c:98 src/main/builtin.c:117
 #: src/main/builtin.c:119 src/main/builtin.c:149 src/main/builtin.c:560
 #: src/main/builtin.c:576 src/main/builtin.c:763 src/main/builtin.c:765
-#: src/main/builtin.c:767 src/main/character.c:160 src/main/character.c:163
-#: src/main/character.c:168 src/main/character.c:1083
-#: src/main/character.c:1087 src/main/character.c:1090
-#: src/main/character.c:1322 src/main/character.c:1326
-#: src/main/character.c:1387 src/main/character.c:1390 src/main/coerce.c:1432
+#: src/main/builtin.c:767 src/main/character.c:239 src/main/character.c:242
+#: src/main/character.c:247 src/main/character.c:1094
+#: src/main/character.c:1098 src/main/character.c:1101
+#: src/main/character.c:1333 src/main/character.c:1337
+#: src/main/character.c:1398 src/main/character.c:1401 src/main/coerce.c:1432
 #: src/main/coerce.c:1481 src/main/coerce.c:1916 src/main/connections.c:1204
 #: src/main/connections.c:1210 src/main/connections.c:1213
 #: src/main/connections.c:1217 src/main/connections.c:1362
@@ -642,13 +642,13 @@ msgstr " '%s'の表示に問題があります "
 #: src/main/deparse.c:408 src/main/dotcode.c:479 src/main/dotcode.c:483
 #: src/main/dotcode.c:488 src/main/dounzip.c:324 src/main/dounzip.c:331
 #: src/main/dounzip.c:341 src/main/dounzip.c:346 src/main/dounzip.c:350
-#: src/main/dounzip.c:354 src/main/envir.c:1819 src/main/envir.c:1822
-#: src/main/envir.c:1943 src/main/envir.c:1948 src/main/envir.c:2012
-#: src/main/envir.c:2028 src/main/envir.c:2034 src/main/envir.c:2146
-#: src/main/envir.c:2154 src/main/envir.c:2161 src/main/envir.c:2172
-#: src/main/envir.c:2404 src/main/envir.c:2525 src/main/envir.c:2822
-#: src/main/envir.c:3076 src/main/envir.c:3090 src/main/envir.c:3097
-#: src/main/envir.c:3113 src/main/envir.c:3694 src/main/errors.c:1042
+#: src/main/dounzip.c:354 src/main/envir.c:1821 src/main/envir.c:1824
+#: src/main/envir.c:1945 src/main/envir.c:1950 src/main/envir.c:2014
+#: src/main/envir.c:2030 src/main/envir.c:2036 src/main/envir.c:2148
+#: src/main/envir.c:2156 src/main/envir.c:2163 src/main/envir.c:2174
+#: src/main/envir.c:2406 src/main/envir.c:2527 src/main/envir.c:2824
+#: src/main/envir.c:3091 src/main/envir.c:3105 src/main/envir.c:3112
+#: src/main/envir.c:3128 src/main/envir.c:3709 src/main/errors.c:1042
 #: src/main/eval.c:394 src/main/eval.c:403 src/main/eval.c:406
 #: src/main/grep.c:775 src/main/grep.c:780 src/main/grep.c:1074
 #: src/main/grep.c:1076 src/main/grep.c:1078 src/main/grep.c:1523
@@ -656,52 +656,52 @@ msgstr " '%s'の表示に問題があります "
 #: src/main/grep.c:2345 src/main/grep.c:2644 src/main/grep.c:2649
 #: src/main/internet.c:231 src/main/internet.c:245 src/main/internet.c:263
 #: src/main/internet.c:275 src/main/internet.c:287 src/main/internet.c:306
-#: src/main/memory.c:3796 src/main/names.c:1308 src/main/names.c:1311
+#: src/main/memory.c:3800 src/main/names.c:1308 src/main/names.c:1311
 #: src/main/objects.c:1573 src/main/objects.c:1575 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
 #: src/main/paste.c:411 src/main/paste.c:416 src/main/paste.c:421
-#: src/main/paste.c:424 src/main/paste.c:432 src/main/paste.c:599
-#: src/main/paste.c:604 src/main/platform.c:307 src/main/platform.c:309
-#: src/main/platform.c:311 src/main/platform.c:327 src/main/platform.c:338
-#: src/main/platform.c:391 src/main/platform.c:393 src/main/platform.c:700
-#: src/main/platform.c:702 src/main/platform.c:787 src/main/platform.c:790
-#: src/main/platform.c:969 src/main/platform.c:1128 src/main/platform.c:1134
-#: src/main/platform.c:1137 src/main/platform.c:1140 src/main/platform.c:1143
-#: src/main/platform.c:1146 src/main/platform.c:1149 src/main/platform.c:1152
-#: src/main/platform.c:1249 src/main/platform.c:1252 src/main/platform.c:1255
-#: src/main/platform.c:1293 src/main/platform.c:1351 src/main/platform.c:1354
-#: src/main/platform.c:1560 src/main/platform.c:1563 src/main/platform.c:1566
-#: src/main/platform.c:1602 src/main/platform.c:1605 src/main/platform.c:1608
-#: src/main/platform.c:1691 src/main/platform.c:1707 src/main/platform.c:1740
-#: src/main/platform.c:1742 src/main/platform.c:1813 src/main/platform.c:1896
-#: src/main/platform.c:2189 src/main/platform.c:2248 src/main/platform.c:2425
-#: src/main/platform.c:2428 src/main/platform.c:2431 src/main/platform.c:2434
-#: src/main/platform.c:2437 src/main/platform.c:2440 src/main/platform.c:2643
-#: src/main/platform.c:2646 src/main/platform.c:2649 src/main/platform.c:2652
-#: src/main/platform.c:2655 src/main/platform.c:2658 src/main/platform.c:2736
-#: src/main/platform.c:2744 src/main/platform.c:2780 src/main/platform.c:2830
-#: src/main/print.c:242 src/main/print.c:248 src/main/print.c:270
-#: src/main/print.c:276 src/main/print.c:283 src/main/random.c:468
-#: src/main/random.c:472 src/main/random.c:479 src/main/random.c:507
-#: src/main/saveload.c:1947 src/main/saveload.c:1950 src/main/saveload.c:1953
-#: src/main/saveload.c:2065 src/main/saveload.c:2244 src/main/saveload.c:2249
-#: src/main/saveload.c:2252 src/main/saveload.c:2356 src/main/scan.c:684
-#: src/main/scan.c:853 src/main/scan.c:867 src/main/scan.c:871
-#: src/main/scan.c:873 src/main/scan.c:884 src/main/scan.c:911
-#: src/main/scan.c:914 src/main/scan.c:917 src/main/scan.c:972
-#: src/main/seq.c:622 src/main/seq.c:627 src/main/seq.c:634 src/main/seq.c:664
-#: src/main/seq.c:668 src/main/seq.c:674 src/main/seq.c:682
-#: src/main/sort.c:176 src/main/sysutils.c:591 src/main/sysutils.c:595
-#: src/main/sysutils.c:599 src/main/sysutils.c:605 src/main/sysutils.c:609
-#: src/main/sysutils.c:1780 src/main/sysutils.c:1784 src/main/unique.c:969
-#: src/main/unique.c:1275 src/main/unique.c:1279 src/main/unique.c:1289
-#: src/main/unique.c:1683 src/main/util.c:639 src/main/util.c:642
-#: src/main/util.c:1378 src/main/util.c:1392 src/main/util.c:1974
-#: src/main/util.c:2197 src/main/util.c:2198 src/main/util.c:2199
-#: src/main/util.c:2216 src/main/util.c:2240 src/main/util.c:2244
-#: src/main/util.c:2246 src/main/util.c:2271 src/main/util.c:2273
-#: src/main/util.c:2275 src/main/util.c:2278 src/main/util.c:2281
-#: src/main/util.c:2285 src/main/util.c:2287
+#: src/main/paste.c:424 src/main/paste.c:432 src/main/paste.c:437
+#: src/main/paste.c:620 src/main/paste.c:625 src/main/platform.c:307
+#: src/main/platform.c:309 src/main/platform.c:311 src/main/platform.c:327
+#: src/main/platform.c:338 src/main/platform.c:391 src/main/platform.c:393
+#: src/main/platform.c:703 src/main/platform.c:705 src/main/platform.c:791
+#: src/main/platform.c:794 src/main/platform.c:973 src/main/platform.c:1132
+#: src/main/platform.c:1138 src/main/platform.c:1141 src/main/platform.c:1144
+#: src/main/platform.c:1147 src/main/platform.c:1150 src/main/platform.c:1153
+#: src/main/platform.c:1156 src/main/platform.c:1253 src/main/platform.c:1256
+#: src/main/platform.c:1259 src/main/platform.c:1297 src/main/platform.c:1355
+#: src/main/platform.c:1358 src/main/platform.c:1564 src/main/platform.c:1567
+#: src/main/platform.c:1570 src/main/platform.c:1606 src/main/platform.c:1609
+#: src/main/platform.c:1612 src/main/platform.c:1695 src/main/platform.c:1711
+#: src/main/platform.c:1744 src/main/platform.c:1746 src/main/platform.c:1817
+#: src/main/platform.c:1900 src/main/platform.c:2193 src/main/platform.c:2252
+#: src/main/platform.c:2429 src/main/platform.c:2432 src/main/platform.c:2435
+#: src/main/platform.c:2438 src/main/platform.c:2441 src/main/platform.c:2444
+#: src/main/platform.c:2647 src/main/platform.c:2650 src/main/platform.c:2653
+#: src/main/platform.c:2656 src/main/platform.c:2659 src/main/platform.c:2662
+#: src/main/platform.c:2740 src/main/platform.c:2748 src/main/platform.c:2784
+#: src/main/platform.c:2834 src/main/print.c:242 src/main/print.c:248
+#: src/main/print.c:270 src/main/print.c:276 src/main/print.c:283
+#: src/main/random.c:468 src/main/random.c:472 src/main/random.c:479
+#: src/main/random.c:507 src/main/saveload.c:1947 src/main/saveload.c:1950
+#: src/main/saveload.c:1953 src/main/saveload.c:2065 src/main/saveload.c:2244
+#: src/main/saveload.c:2249 src/main/saveload.c:2252 src/main/saveload.c:2356
+#: src/main/scan.c:684 src/main/scan.c:853 src/main/scan.c:867
+#: src/main/scan.c:871 src/main/scan.c:873 src/main/scan.c:884
+#: src/main/scan.c:911 src/main/scan.c:914 src/main/scan.c:917
+#: src/main/scan.c:972 src/main/seq.c:622 src/main/seq.c:627
+#: src/main/seq.c:634 src/main/seq.c:664 src/main/seq.c:668 src/main/seq.c:674
+#: src/main/seq.c:682 src/main/sort.c:176 src/main/sysutils.c:591
+#: src/main/sysutils.c:595 src/main/sysutils.c:599 src/main/sysutils.c:605
+#: src/main/sysutils.c:609 src/main/sysutils.c:1780 src/main/sysutils.c:1784
+#: src/main/unique.c:969 src/main/unique.c:1275 src/main/unique.c:1279
+#: src/main/unique.c:1289 src/main/unique.c:1683 src/main/util.c:639
+#: src/main/util.c:642 src/main/util.c:1378 src/main/util.c:1392
+#: src/main/util.c:1974 src/main/util.c:2197 src/main/util.c:2198
+#: src/main/util.c:2199 src/main/util.c:2216 src/main/util.c:2240
+#: src/main/util.c:2244 src/main/util.c:2246 src/main/util.c:2271
+#: src/main/util.c:2273 src/main/util.c:2275 src/main/util.c:2278
+#: src/main/util.c:2281 src/main/util.c:2285 src/main/util.c:2287
 #: src/modules/internet/internet.c:454 src/modules/internet/internet.c:460
 #: src/modules/internet/internet.c:466 src/modules/internet/internet.c:469
 #: src/modules/internet/internet.c:473 src/modules/internet/internet.c:477
@@ -712,8 +712,8 @@ msgstr " '%s'の表示に問題があります "
 #: src/modules/lapack/Lapack.c:156 src/modules/lapack/Lapack.c:262
 #: src/modules/lapack/Lapack.c:709 src/modules/lapack/Lapack.c:818
 #: src/modules/lapack/Lapack.c:880 src/modules/lapack/Lapack.c:1205
-#: src/modules/X11/devX11.c:3232 src/modules/X11/devX11.c:3235
-#: src/modules/X11/devX11.c:3238 src/modules/X11/devX11.c:3262
+#: src/modules/X11/devX11.c:3233 src/modules/X11/devX11.c:3236
+#: src/modules/X11/devX11.c:3239 src/modules/X11/devX11.c:3263
 #: src/unix/sys-std.c:1221 src/unix/sys-std.c:1244
 #, c-format
 msgid "invalid '%s' argument"
@@ -743,7 +743,7 @@ msgstr " 最初の引数は文字列ベクトルでなくてはなりません "
 
 #: src/gnuwin32/extra.c:415 src/main/edit.c:142 src/main/errors.c:1044
 #: src/main/errors.c:1046 src/main/objects.c:420 src/main/objects.c:1148
-#: src/main/options.c:339 src/main/raw.c:150 src/main/Renviron.c:311
+#: src/main/options.c:340 src/main/raw.c:150 src/main/Renviron.c:311
 #: src/main/unique.c:1576 src/modules/lapack/Lapack.c:85
 #: src/modules/lapack/Lapack.c:328 src/modules/lapack/Lapack.c:358
 #: src/modules/lapack/Lapack.c:406 src/modules/lapack/Lapack.c:442
@@ -780,7 +780,7 @@ msgstr " 不正な装置です "
 msgid "invalid input in '%s' function"
 msgstr " Rmbstowcs  への入力が不正です "
 
-#: src/gnuwin32/extra.c:811 src/main/platform.c:1326
+#: src/gnuwin32/extra.c:811 src/main/platform.c:1330
 #, fuzzy
 msgid "file choice was cancelled"
 msgstr " ファイルの選択がキャンセルされました "
@@ -870,8 +870,8 @@ msgid "<ERROR: re-encoding failure from encoding '%s'>\n"
 msgstr ""
 " <エラー : エンコーディング '%s' からの再エンコーディングに失敗しました> \n"
 
-#: src/gnuwin32/system.c:555 src/gnuwin32/system.c:1047
-#: src/gnuwin32/system.c:1059 src/main/connections.c:580
+#: src/gnuwin32/system.c:555 src/gnuwin32/system.c:1045
+#: src/gnuwin32/system.c:1057 src/main/connections.c:580
 #: src/main/connections.c:585 src/main/dounzip.c:179 src/main/saveload.c:1958
 #: src/main/serialize.c:2599 src/main/serialize.c:2604
 #: src/main/serialize.c:2689 src/main/serialize.c:2734 src/unix/sys-std.c:1161
@@ -885,74 +885,74 @@ msgstr " ファイル '%s' を開くことができません: %s "
 msgid "file.show(): file '%s' does not exist\n"
 msgstr " file.show()：ファイル '%s' は存在しません \n"
 
-#: src/gnuwin32/system.c:968
+#: src/gnuwin32/system.c:966
 #, fuzzy, c-format
 msgid "WARNING: R_MAX_MEM_SIZE value is invalid: ignored\n"
 msgstr " 警告: '%s' 値が不正なので無視されました "
 
-#: src/gnuwin32/system.c:1000
+#: src/gnuwin32/system.c:998
 msgid "WARNING: no max-mem-size given\n"
 msgstr " 警告: max-mem-size が与えられていません \n"
 
-#: src/gnuwin32/system.c:1007
+#: src/gnuwin32/system.c:1005
 #, c-format
 msgid "WARNING: --max-mem-size value is invalid: ignored\n"
 msgstr " 警告: --max-mem-size 値が不正です : 無視されました \n"
 
-#: src/gnuwin32/system.c:1010
+#: src/gnuwin32/system.c:1008
 #, c-format
 msgid "WARNING: --max-mem-size=%lu%c: too large and ignored\n"
 msgstr " 警告: --max-mem-size =%lu'%c' は大きすぎるので無視されました \n"
 
-#: src/gnuwin32/system.c:1016
+#: src/gnuwin32/system.c:1014
 #, c-format
 msgid "WARNING: --max-mem-size=%4.1fM: too small and ignored\n"
 msgstr " 警告: max-mem-size =%4.1fM は小さすぎるので無視されます \n"
 
-#: src/gnuwin32/system.c:1021
+#: src/gnuwin32/system.c:1019
 #, c-format
 msgid "WARNING: --max-mem-size=%4.0fM: too large and taken as %uM\n"
 msgstr " 警告: max-mem-size =%4.0fM は大きすぎるので %uM とされました \n"
 
-#: src/gnuwin32/system.c:1037
+#: src/gnuwin32/system.c:1035
 #, fuzzy, c-format
 msgid "option '%s' requires an argument"
 msgstr " 二項演算には二つの引数が必要です "
 
-#: src/gnuwin32/system.c:1068
+#: src/gnuwin32/system.c:1066
 #, fuzzy, c-format
 msgid "option '%s' requires a non-empty argument"
 msgstr " 二項演算には二つの引数が必要です "
 
-#: src/gnuwin32/system.c:1076 src/unix/system.c:345
+#: src/gnuwin32/system.c:1074 src/unix/system.c:345
 #, c-format
 msgid "WARNING: '-e %s' omitted as input is too long\n"
 msgstr " 警告: 入力が長すぎるため, '-e %s'  は省略されました \n"
 
-#: src/gnuwin32/system.c:1080 src/unix/system.c:358
+#: src/gnuwin32/system.c:1078 src/unix/system.c:358
 #, c-format
 msgid "WARNING: unknown option '%s'\n"
 msgstr " 警告: 未知の '%s' オプション \n"
 
-#: src/gnuwin32/system.c:1102 src/unix/system.c:362
+#: src/gnuwin32/system.c:1100 src/unix/system.c:362
 #, c-format
 msgid "ARGUMENT '%s' __ignored__\n"
 msgstr " 引数 '%s' は無視されました \n"
 
-#: src/gnuwin32/system.c:1108 src/unix/system.c:369
+#: src/gnuwin32/system.c:1106 src/unix/system.c:369
 msgid "cannot use -e with -f or --file"
 msgstr " -e は-f や --file と併用することはできません "
 
-#: src/gnuwin32/system.c:1126
+#: src/gnuwin32/system.c:1124
 msgid "creation of tmpfile failed -- set TMPDIR suitably?"
 msgstr ""
 " 一時ファイルの作成に失敗しました -- TMPDIRは正しく設定されていますか? "
 
-#: src/gnuwin32/system.c:1145 src/unix/system.c:420
+#: src/gnuwin32/system.c:1143 src/unix/system.c:420
 msgid "you must specify '--save', '--no-save' or '--vanilla'"
 msgstr " '--save' ,  '--no-save',  '--vanilla' のいずれかを指定してください "
 
-#: src/gnuwin32/system.c:1150
+#: src/gnuwin32/system.c:1148
 msgid ""
 "impossible to create 'reader thread'; you must free some system resources"
 msgstr ""
@@ -1025,7 +1025,7 @@ msgid ""
 msgstr ""
 
 #: src/gnuwin32/getline/getline.c:1041 src/gnuwin32/getline/wc_history.c:142
-#: src/main/edit.c:122 src/main/eval.c:6232 src/main/eval.c:6253
+#: src/main/edit.c:122 src/main/eval.c:6233 src/main/eval.c:6254
 #: src/main/saveload.c:2069 src/unix/hpdlfcn.c:150
 #, fuzzy, c-format
 msgid "unable to open file '%s'"
@@ -1076,18 +1076,18 @@ msgstr ""
 msgid "the 'value' of a raw object is not defined"
 msgstr ""
 
-#: src/include/Rinlinedfuns.h:711
+#: src/include/Rinlinedfuns.h:716
 msgid "cycle detected"
 msgstr ""
 
-#: src/main/agrep.c:134 src/main/agrep.c:776 src/main/character.c:1085
-#: src/main/character.c:1089 src/main/grep.c:777 src/main/grep.c:1525
+#: src/main/agrep.c:134 src/main/agrep.c:776 src/main/character.c:1096
+#: src/main/character.c:1100 src/main/grep.c:777 src/main/grep.c:1525
 #: src/main/grep.c:1529 src/main/grep.c:2342 src/main/grep.c:2646
 #, c-format
 msgid "argument '%s' has length > 1 and only the first element will be used"
 msgstr " 引数 '%s' は 1を超える長さなので, 最初の要素だけが使われます "
 
-#: src/main/agrep.c:191 src/main/agrep.c:818 src/main/attrib.c:1532
+#: src/main/agrep.c:191 src/main/agrep.c:818 src/main/attrib.c:1540
 #: src/main/coerce.c:2795 src/main/saveload.c:1939
 #, fuzzy, c-format
 msgid "'%s' argument must be a non-empty character string"
@@ -1135,14 +1135,14 @@ msgstr " 入力文字列 y[%d] はこのロケールでは不適切です "
 msgid "'%s' argument must be a vector"
 msgstr " 最初の引数はベクトルでなくてはなりません "
 
-#: src/main/apply.c:101 src/main/array.c:480 src/main/character.c:643
-#: src/main/character.c:1450 src/main/connections.c:3548
+#: src/main/apply.c:101 src/main/array.c:480 src/main/character.c:654
+#: src/main/character.c:1461 src/main/connections.c:3548
 #: src/main/context.c:653 src/main/context.c:672 src/main/datetime.c:686
 #: src/main/datetime.c:788 src/main/datetime.c:1047 src/main/dotcode.c:220
 #: src/main/errors.c:942 src/main/errors.c:974 src/main/errors.c:1077
 #: src/main/errors.c:1102 src/main/errors.c:1107 src/main/errors.c:1378
 #: src/main/identical.c:73 src/main/identical.c:74 src/main/identical.c:75
-#: src/main/identical.c:76 src/main/identical.c:77 src/main/platform.c:3070
+#: src/main/identical.c:76 src/main/identical.c:77 src/main/platform.c:3074
 #: src/main/seq.c:192 src/main/seq.c:347 src/main/seq.c:352 src/main/seq.c:356
 #: src/main/seq.c:397 src/main/seq.c:401 src/main/seq.c:405
 #: src/main/sort.c:1225 src/main/sort.c:1308 src/main/sort.c:1312
@@ -1150,10 +1150,10 @@ msgstr " 最初の引数はベクトルでなくてはなりません "
 #: src/main/summary.c:901 src/main/sysutils.c:250 src/main/util.c:1050
 #: src/main/util.c:1055 src/main/util.c:1062 src/main/util.c:1065
 #: src/main/util.c:2034 src/modules/lapack/Lapack.c:940
-#: src/modules/X11/devX11.c:3134 src/modules/X11/devX11.c:3160
-#: src/modules/X11/devX11.c:3165 src/modules/X11/devX11.c:3170
-#: src/modules/X11/devX11.c:3180 src/modules/X11/devX11.c:3185
-#: src/modules/X11/devX11.c:3189 src/modules/X11/devX11.c:3193
+#: src/modules/X11/devX11.c:3135 src/modules/X11/devX11.c:3161
+#: src/modules/X11/devX11.c:3166 src/modules/X11/devX11.c:3171
+#: src/modules/X11/devX11.c:3181 src/modules/X11/devX11.c:3186
+#: src/modules/X11/devX11.c:3190 src/modules/X11/devX11.c:3194
 #, c-format
 msgid "invalid '%s' value"
 msgstr " '%s' の値が不正です "
@@ -1576,8 +1576,8 @@ msgid "length of 'dimnames' [%d] not equal to array extent"
 msgstr " 'dimnames' の長さ [%d] が配列の大きさと違っています "
 
 #: src/main/attrib.c:1140 src/main/builtin.c:76 src/main/builtin.c:113
-#: src/main/envir.c:1807 src/main/envir.c:1935 src/main/envir.c:1995
-#: src/main/envir.c:2132 src/main/paste.c:74 src/main/paste.c:293
+#: src/main/envir.c:1809 src/main/envir.c:1937 src/main/envir.c:1997
+#: src/main/envir.c:2134 src/main/paste.c:74 src/main/paste.c:293
 #: src/main/random.c:477 src/main/random.c:506 src/main/unique.c:1682
 msgid "invalid first argument"
 msgstr " 一番目の引数が不正です "
@@ -1610,76 +1610,76 @@ msgstr " dims [product %d] はオブジェクト  [%d] の長さに整合しま�
 msgid "dimensions [product %d] do not match the length of object [%d]"
 msgstr " dims [product %d] はオブジェクト  [%d] の長さに整合しません "
 
-#: src/main/attrib.c:1237
+#: src/main/attrib.c:1242
 #, fuzzy
 msgid "duplicated levels in factors are deprecated"
 msgstr " 因子では重複する水準はもはや許されません "
 
-#: src/main/attrib.c:1267
+#: src/main/attrib.c:1272
 msgid "attributes must be a list or NULL"
 msgstr " 属性はリストもしくはNULLでなければなりません "
 
-#: src/main/attrib.c:1272
+#: src/main/attrib.c:1277
 msgid "attributes must be named"
 msgstr " 属性は名前が付けられていなければなりません "
 
-#: src/main/attrib.c:1276
+#: src/main/attrib.c:1281
 #, c-format
 msgid "all attributes must have names [%d does not]"
 msgstr " 全ての属性は名前を持っていなければなりません[%d が持っていません] "
 
-#: src/main/attrib.c:1369
+#: src/main/attrib.c:1374
 #, fuzzy
 msgid "either 2 or 3 arguments are required"
 msgstr " 文字列引数が要求されています "
 
-#: src/main/attrib.c:1376
+#: src/main/attrib.c:1381
 #, fuzzy
 msgid "'which' attribute must be of mode character"
 msgstr " 'which' は文字列モードでなくてはなりません "
 
-#: src/main/attrib.c:1378
+#: src/main/attrib.c:1383
 msgid "exactly one attribute 'which' must be given"
 msgstr " 性格に一つの属性 'which' が与えらなければなりません "
 
-#: src/main/attrib.c:1436 src/main/attrib.c:1459 src/main/subscript.c:249
-#: src/main/subscript.c:253 src/main/subset.c:1231 src/main/subset.c:1282
+#: src/main/attrib.c:1444 src/main/attrib.c:1467 src/main/subscript.c:249
+#: src/main/subscript.c:253 src/main/subset.c:1234 src/main/subset.c:1285
 #, c-format
 msgid "partial match of '%s' to '%s'"
 msgstr " '%s' の '%s'　への部分的マッチ "
 
-#: src/main/attrib.c:1497
+#: src/main/attrib.c:1505
 #, fuzzy, c-format
 msgid "invalid type '%s' for slot name"
 msgstr " スロット名の型または長さが不正です "
 
-#: src/main/attrib.c:1656 src/main/attrib.c:1727 src/main/attrib.c:1764
+#: src/main/attrib.c:1664 src/main/attrib.c:1735 src/main/attrib.c:1772
 msgid "invalid type or length for slot name"
 msgstr " スロット名の型または長さが不正です "
 
-#: src/main/attrib.c:1690
+#: src/main/attrib.c:1698
 #, c-format
 msgid "cannot get a slot (\"%s\") from an object of type \"%s\""
 msgstr ""
 " 型 \"%s\" のオブジェクトからはスロット (\"%s\") を得ることは出来ません "
 
-#: src/main/attrib.c:1701
+#: src/main/attrib.c:1709
 #, c-format
 msgid "no slot of name \"%s\" for this object of class \"%s\""
 msgstr ""
 " 名前 \"%s\" というスロットが、クラス \"%s\" のこのオブジェクトには存在しませ"
 "ん "
 
-#: src/main/attrib.c:1718
+#: src/main/attrib.c:1726
 msgid "attempt to set slot on NULL object"
 msgstr " NULL オブジェクトに対して スロットを設定しようとしました "
 
-#: src/main/attrib.c:1759
+#: src/main/attrib.c:1767
 #, fuzzy
 msgid "formal classes cannot be used without the 'methods' package"
 msgstr " メソッドパッケージなしにフォーマルクラス（formal class）は使えません "
 
-#: src/main/attrib.c:1771
+#: src/main/attrib.c:1779
 #, c-format
 msgid ""
 "trying to get slot \"%s\" from an object of a basic class (\"%s\") with no "
@@ -1688,7 +1688,7 @@ msgstr ""
 " スロット \"%s\"を、スロットを持たない基本クラス(\"%s\")のオブジェクトから得"
 "ようとしました "
 
-#: src/main/attrib.c:1775
+#: src/main/attrib.c:1783
 #, fuzzy, c-format
 msgid ""
 "trying to get slot \"%s\" from an object (class \"%s\") that is not an S4 "
@@ -1713,39 +1713,39 @@ msgstr " 型 %d は '%s' では未実装です "
 msgid "repeated formal argument '%s'"
 msgstr " 'recursive' 仮引数が繰り返されました "
 
-#: src/main/bind.c:895
+#: src/main/bind.c:898
 #, fuzzy
 msgid "argument is not a list"
 msgstr " 引数はリストではありません "
 
-#: src/main/bind.c:1039 src/main/names.c:1274 src/main/names.c:1279
+#: src/main/bind.c:1042 src/main/names.c:1274 src/main/names.c:1279
 #: src/main/names.c:1284 src/main/names.c:1289
 #, fuzzy, c-format
 msgid "class name is too long in '%s'"
 msgstr " '%s' のクラス名が長すぎます "
 
-#: src/main/bind.c:1123
+#: src/main/bind.c:1126
 #, fuzzy, c-format
 msgid "cannot create a matrix from type '%s'"
 msgstr " このようなタイプからは行列は作れません "
 
-#: src/main/bind.c:1192
+#: src/main/bind.c:1195
 #, fuzzy, c-format
 msgid "number of rows of matrices must match (see argument %d)"
 msgstr " 行列の行数は一致していなければなりません（%d 番目の引数を参照） "
 
-#: src/main/bind.c:1219
+#: src/main/bind.c:1222
 #, fuzzy, c-format
 msgid ""
 "number of rows of result is not a multiple of vector length (argument %d)"
 msgstr " 置き換えるべき項目数が，置き換える数の倍数ではありませんでした "
 
-#: src/main/bind.c:1438
+#: src/main/bind.c:1441
 #, fuzzy, c-format
 msgid "number of columns of matrices must match (see argument %d)"
 msgstr " 行列の列数は一致していなければなりません（%d 番目の引数を参照） "
 
-#: src/main/bind.c:1467
+#: src/main/bind.c:1470
 #, fuzzy, c-format
 msgid ""
 "number of columns of result is not a multiple of vector length (argument %d)"
@@ -1771,12 +1771,12 @@ msgstr " 指定されたベクトルのサイズが長すぎます "
 #: src/main/builtin.c:85 src/main/builtin.c:94 src/main/builtin.c:295
 #: src/main/builtin.c:328 src/main/builtin.c:385 src/main/builtin.c:399
 #: src/main/coerce.c:1514 src/main/connections.c:3057 src/main/engine.c:2966
-#: src/main/envir.c:1068 src/main/envir.c:1121 src/main/envir.c:1277
-#: src/main/envir.c:1816 src/main/envir.c:1940 src/main/envir.c:2006
-#: src/main/envir.c:2139 src/main/envir.c:2858 src/main/envir.c:2944
-#: src/main/envir.c:3236 src/main/envir.c:3265 src/main/envir.c:3286
-#: src/main/envir.c:3309 src/main/envir.c:3343 src/main/envir.c:3363
-#: src/main/envir.c:3684 src/main/envir.c:3689 src/main/eval.c:6146
+#: src/main/envir.c:1070 src/main/envir.c:1123 src/main/envir.c:1279
+#: src/main/envir.c:1818 src/main/envir.c:1942 src/main/envir.c:2008
+#: src/main/envir.c:2141 src/main/envir.c:2860 src/main/envir.c:2946
+#: src/main/envir.c:3251 src/main/envir.c:3280 src/main/envir.c:3301
+#: src/main/envir.c:3324 src/main/envir.c:3358 src/main/envir.c:3378
+#: src/main/envir.c:3699 src/main/envir.c:3704 src/main/eval.c:6147
 #: src/main/objects.c:192 src/main/objects.c:200 src/main/saveload.c:2063
 #: src/main/saveload.c:2354 src/main/serialize.c:2756
 msgid "use of NULL environment is defunct"
@@ -1787,7 +1787,7 @@ msgid "replacement object is not an environment"
 msgstr " 置き換えるオブジェクトが環境ではありません "
 
 #: src/main/builtin.c:333 src/main/coerce.c:2449 src/main/engine.c:2970
-#: src/main/envir.c:1850 src/main/envir.c:2865 src/main/envir.c:2946
+#: src/main/envir.c:1852 src/main/envir.c:2867 src/main/envir.c:2948
 #: src/main/unique.c:1283
 #, fuzzy, c-format
 msgid "'%s' argument must be an environment"
@@ -1815,9 +1815,9 @@ msgstr " 空の環境の親は配置できません "
 msgid "can not set the parent environment of package imports"
 msgstr " 空の環境の親は配置できません "
 
-#: src/main/builtin.c:404 src/main/envir.c:3211 src/main/envir.c:3239
-#: src/main/envir.c:3268 src/main/envir.c:3289 src/main/envir.c:3311
-#: src/main/envir.c:3345 src/main/envir.c:3365
+#: src/main/builtin.c:404 src/main/envir.c:3226 src/main/envir.c:3254
+#: src/main/envir.c:3283 src/main/envir.c:3304 src/main/envir.c:3326
+#: src/main/envir.c:3360 src/main/envir.c:3380
 #, fuzzy, c-format
 msgid "'%s' argument is not an environment"
 msgstr " 引数が環境ではありません "
@@ -1860,14 +1860,14 @@ msgid "cannot set length of non-vector"
 msgstr " ベクトルでないものの長さは設定できません "
 
 #: src/main/builtin.c:923 src/main/builtin.c:933 src/main/builtin.c:935
-#: src/main/character.c:414 src/main/coerce.c:2804
+#: src/main/character.c:425 src/main/coerce.c:2804
 msgid "invalid value"
 msgstr " 値が不正です "
 
 #: src/main/builtin.c:966 src/main/coerce.c:2515 src/main/coerce.c:2558
-#: src/main/eval.c:557 src/main/eval.c:676 src/main/eval.c:2189
-#: src/main/eval.c:2269 src/main/eval.c:2330 src/main/eval.c:2668
-#: src/main/eval.c:5492 src/main/eval.c:5609
+#: src/main/eval.c:557 src/main/eval.c:676 src/main/eval.c:2190
+#: src/main/eval.c:2270 src/main/eval.c:2331 src/main/eval.c:2669
+#: src/main/eval.c:5493 src/main/eval.c:5610
 msgid "'...' used in an incorrect context"
 msgstr " '...' が不適切な文脈で使われました "
 
@@ -1881,7 +1881,7 @@ msgstr " 重複する switch 既定値: '%s' と '%s' "
 msgid "'%s' argument is missing"
 msgstr " 引数 %d が空です "
 
-#: src/main/builtin.c:1025 src/main/eval.c:5964
+#: src/main/builtin.c:1025 src/main/eval.c:5965
 #, fuzzy, c-format
 msgid "'%s' argument must be a vector of length 1"
 msgstr " 'hostname' は長さ1の文字列ベクトルでなくてはなりません "
@@ -1897,95 +1897,94 @@ msgstr ""
 msgid "empty alternative in numeric switch"
 msgstr ""
 
-#: src/main/character.c:105 src/main/character.c:147
+#: src/main/character.c:106 src/main/character.c:226
 #, fuzzy, c-format
 msgid "%d argument passed to '%s' which requires %d to %d"
 msgid_plural "%d arguments passed to '%s' which requires %d to %d"
 msgstr[0] ""
 " '%d' 個の引数が '%s' に渡されましたが，1つまたは2つが必要とされています "
 
-#: src/main/character.c:112 src/main/character.c:115 src/main/character.c:153
-#: src/main/character.c:156
+#: src/main/character.c:113 src/main/character.c:116 src/main/character.c:232
+#: src/main/character.c:235
 #, fuzzy, c-format
 msgid "'%s' function requires a character vector"
 msgstr " '%s'は文字ベクトルを要求します "
 
-#: src/main/character.c:194 src/main/character.c:218
-#, c-format
-msgid "invalid multibyte string %d"
-msgstr " %d は不正なマルチバイト文字です "
+#: src/main/character.c:152 src/main/character.c:167 src/main/character.c:177
+#: src/main/character.c:205
+#, fuzzy, c-format
+msgid "invalid multibyte string, %s"
+msgstr " %sに不正なマルチバイト文字があります "
 
-#: src/main/character.c:203
-#, c-format
-msgid ""
-"number of characters is not computable for element %d in \"bytes\" encoding"
+#: src/main/character.c:161
+#, fuzzy, c-format
+msgid "number of characters is not computable in \"bytes\" encoding, %s"
 msgstr " \"bytes\"でエンコードされた要素 %d の文字数が計算できません "
 
-#: src/main/character.c:208 src/main/character.c:243 src/main/character.c:701
-#: src/main/character.c:798 src/main/character.c:1210
+#: src/main/character.c:190
 #, fuzzy, c-format
-msgid "invalid multibyte input string %d"
-msgstr " マルチバイト文字列が不正です "
-
-#: src/main/character.c:231
-#, c-format
-msgid "width is not computable for element %d in \"bytes\" encoding"
+msgid "width is not computable for %s in \"bytes\" encoding"
 msgstr " \"bytes\"でエンコードされた要素 %d の幅が計算できません "
 
-#: src/main/character.c:311
+#: src/main/character.c:322
 msgid "extracting substrings from a non-character object"
 msgstr " 文字列でないオブジェクトから部分文字列を抽出しようとしました "
 
-#: src/main/character.c:316 src/main/character.c:411
+#: src/main/character.c:327 src/main/character.c:422
 #, fuzzy
 msgid "invalid substring arguments"
 msgstr " 部分文字列引数が不正です "
 
-#: src/main/character.c:406
+#: src/main/character.c:417
 msgid "replacing substrings in a non-character object"
 msgstr " 文字列でないオブジェクトの部分文字列の置き換えです "
 
-#: src/main/character.c:599
+#: src/main/character.c:610
 msgid "the first argument must be a character vector"
 msgstr " 最初の引数は文字列ベクトルでなくてはなりません "
 
-#: src/main/character.c:618
+#: src/main/character.c:629
 msgid "abbreviate used with non-ASCII chars"
 msgstr " ASCII 文字でないものが省略名として使われました "
 
-#: src/main/character.c:639
+#: src/main/character.c:650
 msgid "non-character names"
 msgstr " 名前が文字列ではありません "
 
-#: src/main/character.c:744 src/main/grep.c:158
+#: src/main/character.c:712 src/main/character.c:809 src/main/character.c:1221
+#, fuzzy, c-format
+msgid "invalid multibyte input string %d"
+msgstr " マルチバイト文字列が不正です "
+
+#: src/main/character.c:755 src/main/grep.c:158
 msgid "non-character argument"
 msgstr " 文字列でない引数です "
 
-#: src/main/character.c:853
+#: src/main/character.c:864
 #, c-format
 msgid "decreasing range specification ('%lc-%lc')"
 msgstr " 範囲指定を縮小します ('%lc-%lc')  "
 
-#: src/main/character.c:938
+#: src/main/character.c:949
 #, c-format
 msgid "decreasing range specification ('%c-%c')"
 msgstr " 範囲指定を縮小します ('%c-%c')  "
 
-#: src/main/character.c:1125 src/main/character.c:1144
+#: src/main/character.c:1136 src/main/character.c:1155
 #, fuzzy, c-format
 msgid "invalid UTF-8 string '%s'"
 msgstr " 'old' は不正なUTF-8文字です "
 
-#: src/main/character.c:1131 src/main/character.c:1150 src/main/plotmath.c:981
+#: src/main/character.c:1142 src/main/character.c:1161 src/main/plotmath.c:981
 #, fuzzy, c-format
 msgid "invalid multibyte string '%s'"
 msgstr " %sに不正なマルチバイト文字があります "
 
-#: src/main/character.c:1178 src/main/character.c:1267
+#: src/main/character.c:1189 src/main/character.c:1278
 msgid "'old' is longer than 'new'"
 msgstr " 'old' が 'new' より長いです "
 
-#: src/main/character.c:1317
+#: src/main/character.c:1328
 #, fuzzy
 msgid "'strtrim()' function  requires a character vector"
 msgstr " strtrim 関数は文字ベクトルを要求します "
@@ -2043,7 +2042,7 @@ msgstr ""
 msgid "list argument expected"
 msgstr " リスト引数が期待されています "
 
-#: src/main/coerce.c:1518 src/main/eval.c:6150
+#: src/main/coerce.c:1518 src/main/eval.c:6151
 msgid "invalid environment"
 msgstr " 不正な環境です "
 
@@ -2536,12 +2535,12 @@ msgid ""
 "this is a file compressed using '%s' which this build of R does not support"
 msgstr " これは R のこのビルトがサポートしていない %s-圧縮ファイルです。 "
 
-#: src/main/connections.c:2119 src/modules/X11/devX11.c:3366
+#: src/main/connections.c:2119 src/modules/X11/devX11.c:3367
 msgid "memory allocation to copy clipboard failed"
 msgstr " クリップボードのコピーでメモリ確保に失敗しました "
 
-#: src/main/connections.c:2124 src/modules/X11/devX11.c:3345
-#: src/modules/X11/devX11.c:3350
+#: src/main/connections.c:2124 src/modules/X11/devX11.c:3346
+#: src/modules/X11/devX11.c:3351
 msgid "clipboard cannot be opened or contains no text"
 msgstr " クリップボードを開くことができないか，中身がありません "
 
@@ -3102,12 +3101,12 @@ msgstr ""
 msgid "integer overflow in '%s' function; use '%s'"
 msgstr " 'do_sys' で内部エラーが起きました "
 
-#: src/main/cum.c:181 src/main/cum.c:184
+#: src/main/cum.c:180 src/main/cum.c:183
 #, fuzzy, c-format
 msgid "'%s' function is not defined for complex numbers"
 msgstr " 複素数に対しては min/max は定義されていません "
 
-#: src/main/cum.c:187 src/main/cum.c:211 src/main/cum.c:238
+#: src/main/cum.c:186 src/main/cum.c:210 src/main/cum.c:237
 #, fuzzy, c-format
 msgid "unknown '%s' function"
 msgstr " 未知の cumxxx 関数です "
@@ -3244,8 +3243,8 @@ msgstr " 長さゼロの引数です "
 msgid "'opts' argument should be small non-negative integer"
 msgstr " 'opts' は，小さな非負の整数でなくてはなりません "
 
-#: src/main/deparse.c:422 src/main/envir.c:1965 src/main/envir.c:2050
-#: src/main/eval.c:563 src/main/eval.c:1321 src/main/eval.c:4143
+#: src/main/deparse.c:422 src/main/envir.c:1967 src/main/envir.c:2052
+#: src/main/eval.c:563 src/main/eval.c:1321 src/main/eval.c:4144
 #: src/main/saveload.c:1975 src/main/saveload.c:2302 src/main/serialize.c:2774
 #, fuzzy, c-format
 msgid "object '%s' was not found"
@@ -3380,7 +3379,7 @@ msgstr " 引数 '%s' は無視されます  "
 msgid "no arguments supplied"
 msgstr " 引数が与えられていません "
 
-#: src/main/dotcode.c:513 src/main/dotcode.c:1403 src/main/eval.c:2207
+#: src/main/dotcode.c:513 src/main/dotcode.c:1403 src/main/eval.c:2208
 #, c-format
 msgid "'%s' is missing"
 msgstr " '%s'が見つかりません "
@@ -3616,7 +3615,7 @@ msgstr " \"function\" の仮引数(複数)が不正です "
 msgid "invalid body argument for 'function'"
 msgstr " \"function\" の本体引数(body argument)が不正です "
 
-#: src/main/duplicate.c:371
+#: src/main/duplicate.c:370
 msgid "vector types do not match in 'copyVector()'"
 msgstr ""
 
@@ -3805,7 +3804,7 @@ msgstr " 行のタイプが不正です "
 msgid "cannot change value of locked binding for '%s'"
 msgstr " '%s' に対するロックされたバインディングの値は変更できません "
 
-#: src/main/envir.c:307 src/main/envir.c:1596
+#: src/main/envir.c:307 src/main/envir.c:1598
 msgid "cannot add bindings to a locked environment"
 msgstr " ロックされた環境にバインディングを追加することはできません "
 
@@ -3827,7 +3826,7 @@ msgstr " 基本名前空間の中では切り離しはできません "
 msgid "unbind in the base environment is unimplemented"
 msgstr " 基本環境中の unbind は未実装です "
 
-#: src/main/envir.c:909 src/main/envir.c:1885
+#: src/main/envir.c:909 src/main/envir.c:1887
 msgid "cannot remove bindings from a locked environment"
 msgstr " ロックされた環境からはバインディングを取り除くことはできません "
 
@@ -3836,266 +3835,266 @@ msgstr " ロックされた環境からはバインディングを取り除く�
 msgid "'findVarLocInFrame()' function cannot be used on the base environment"
 msgstr " 空の環境中から変数を除去することができません "
 
-#: src/main/envir.c:1280
+#: src/main/envir.c:1282
 #, fuzzy, c-format
 msgid "argument passed to '%s' function is not an environment"
 msgstr " '%s' に対する引数は環境ではありません "
 
-#: src/main/envir.c:1441
+#: src/main/envir.c:1443
 #, fuzzy, c-format
 msgid "the '...' list does not contain %d elements"
 msgstr " ... リストは %d 個の要素を含んでいません "
 
-#: src/main/envir.c:1443
+#: src/main/envir.c:1445
 #, fuzzy, c-format
 msgid "'..%d' used in an incorrect context, no '...' list to look in"
 msgstr " ..%d は正しくない文脈で使われています，参照すべき ... がありません "
 
-#: src/main/envir.c:1531 src/main/envir.c:2039 src/main/eval.c:567
-#: src/main/eval.c:568 src/main/eval.c:4129 src/main/eval.c:4130
+#: src/main/envir.c:1533 src/main/envir.c:2041 src/main/eval.c:567
+#: src/main/eval.c:568 src/main/eval.c:4130 src/main/eval.c:4131
 #: src/main/RNG.c:352
 #, fuzzy, c-format
 msgid "'%s' argument is missing, with no default"
 msgstr " 引数がありませんし、省略時既定値もありません "
 
-#: src/main/envir.c:1535
+#: src/main/envir.c:1537
 #, fuzzy, c-format
 msgid "could not find function '%s'"
 msgstr " 関数 \"%s\" を見つけることができませんでした "
 
-#: src/main/envir.c:1558
+#: src/main/envir.c:1560
 msgid "cannot assign values in the empty environment"
 msgstr " 空の環境中における値を割り当てることができません "
 
-#: src/main/envir.c:1564 src/main/envir.c:1693
+#: src/main/envir.c:1566 src/main/envir.c:1695
 msgid "cannot assign variables to this database"
 msgstr " このデータベースに変数を代入できません "
 
-#: src/main/envir.c:1636
+#: src/main/envir.c:1638
 msgid "additional variables should now be passed as a list, not an environment"
 msgstr ""
 
-#: src/main/envir.c:1779
+#: src/main/envir.c:1781
 #, c-format
 msgid "cannot add binding of '%s' to the base environment"
 msgstr " ロックされた環境にバインディング '%s' を追加することはできません "
 
-#: src/main/envir.c:1810
+#: src/main/envir.c:1812
 msgid "only the first element is used as variable name"
 msgstr " 最初の要素だけが変数名として使われました "
 
-#: src/main/envir.c:1842
+#: src/main/envir.c:1844
 msgid "first argument must be a named list"
 msgstr " 最初の引数は名前付きリストでなくてはなりません "
 
-#: src/main/envir.c:1847
+#: src/main/envir.c:1849
 #, fuzzy
 msgid "'names(x)' must be a character vector of the same length as 'x'"
 msgstr " names(x) はxと同じ長さの文字列ベクトルでなくてはなりません "
 
-#: src/main/envir.c:1879
+#: src/main/envir.c:1881
 msgid "cannot remove variables from base namespace"
 msgstr " base 名前空間からは変数を取り除くことはできません "
 
-#: src/main/envir.c:1881
+#: src/main/envir.c:1883
 msgid "cannot remove variables from the base environment"
 msgstr " 空の環境中から変数を除去することができません "
 
-#: src/main/envir.c:1883
+#: src/main/envir.c:1885
 msgid "cannot remove variables from the empty environment"
 msgstr " 空の環境中から変数を除去することができません "
 
-#: src/main/envir.c:1891
+#: src/main/envir.c:1893
 msgid "cannot remove variables from this database"
 msgstr " このデータベースから変数を除去することができません "
 
-#: src/main/envir.c:2052
+#: src/main/envir.c:2054
 #, c-format
 msgid "object '%s' of mode '%s' was not found"
 msgstr " 変数 ’%s'（モード '%s'）は見つかりません "
 
-#: src/main/envir.c:2135
+#: src/main/envir.c:2137
 #, c-format
 msgid "invalid name in position %d"
 msgstr " 位置 %d に不正な名前があります "
 
-#: src/main/envir.c:2141
+#: src/main/envir.c:2143
 msgid "second argument must be an environment"
 msgstr " 二番目の引数は環境でなければなりません "
 
-#: src/main/envir.c:2149 src/main/envir.c:2157
+#: src/main/envir.c:2151 src/main/envir.c:2159
 #, c-format
 msgid "wrong length for '%s' argument"
 msgstr " '%s' 引数の長さが不正です "
 
-#: src/main/envir.c:2288
+#: src/main/envir.c:2290
 msgid "invalid use of 'missing'"
 msgstr " 'missing' の不正な使用です "
 
-#: src/main/envir.c:2314
+#: src/main/envir.c:2316
 msgid "'missing' can only be used for arguments"
 msgstr " 'missing' は引数に対してだけ使えます "
 
-#: src/main/envir.c:2400
+#: src/main/envir.c:2402
 #, fuzzy, c-format
 msgid "'%s' argument must be an integer"
 msgstr " 'list' 引数はリストでなくてはなりません "
 
-#: src/main/envir.c:2414
+#: src/main/envir.c:2416
 msgid "all elements of a list must be named"
 msgstr " リスト中の全ての要素には名前が必要です "
 
-#: src/main/envir.c:2437
+#: src/main/envir.c:2439
 #, fuzzy
 msgid "'attach()' function only works for lists, data frames and environments"
 msgstr " 'attach' はリスト、データフレーム、もしくは環境にのみ有効です "
 
-#: src/main/envir.c:2520
+#: src/main/envir.c:2522
 msgid "detaching \"package:base\" is not allowed"
 msgstr " \"package:base\" は切り離すことができません "
 
-#: src/main/envir.c:2669
+#: src/main/envir.c:2671
 #, fuzzy
 msgid "bad hash table contents"
 msgstr " 不適切な変数名です "
 
-#: src/main/envir.c:2950
+#: src/main/envir.c:2952
 msgid "arguments must be symbolic"
 msgstr " 引数はシンボルでなくてはいけません "
 
-#: src/main/envir.c:3086
+#: src/main/envir.c:3101
 msgid "no enclosing environment"
 msgstr " 上位 (enclosing) 環境がありません "
 
-#: src/main/envir.c:3139
+#: src/main/envir.c:3154
 #, fuzzy, c-format
 msgid "no item called '%s' on the search list"
 msgstr " 検索リストに \"%s\" という項目はありません "
 
-#: src/main/envir.c:3164
+#: src/main/envir.c:3179
 msgid "using 'as.environment(NULL)' is defunct"
 msgstr " 'as.environment(NULL)'の利用は廃止されました "
 
-#: src/main/envir.c:3170
+#: src/main/envir.c:3185
 msgid "S4 object does not extend class \"environment\""
 msgstr " S4 オブジェクトはクラス \"environment\" に拡張されません "
 
-#: src/main/envir.c:3185
+#: src/main/envir.c:3200
 #, fuzzy
 msgid "invalid object for 'as.environment()' function"
 msgstr " 'as.environment' に対する不正なオブジェクトです "
 
-#: src/main/envir.c:3263 src/main/envir.c:3284 src/main/envir.c:3305
-#: src/main/envir.c:3341 src/main/envir.c:3361 src/main/envir.c:3460
+#: src/main/envir.c:3278 src/main/envir.c:3299 src/main/envir.c:3320
+#: src/main/envir.c:3356 src/main/envir.c:3376 src/main/envir.c:3475
 #, fuzzy, c-format
 msgid "'%s' argument is not a symbol"
 msgstr " シンボルではありません "
 
-#: src/main/envir.c:3276 src/main/envir.c:3297 src/main/envir.c:3353
-#: src/main/envir.c:3373
+#: src/main/envir.c:3291 src/main/envir.c:3312 src/main/envir.c:3368
+#: src/main/envir.c:3388
 #, fuzzy, c-format
 msgid "no binding for '%s'"
 msgstr " \"%s\" にバインドされているものがありません。 "
 
-#: src/main/envir.c:3307
+#: src/main/envir.c:3322
 #, fuzzy, c-format
 msgid "'%s' argument is not a function"
 msgstr " 引数は関数でなければなりません "
 
-#: src/main/envir.c:3314 src/main/envir.c:3330
+#: src/main/envir.c:3329 src/main/envir.c:3345
 msgid "symbol already has a regular binding"
 msgstr " シンボルは既に regular binding を持っています "
 
-#: src/main/envir.c:3316 src/main/envir.c:3332
+#: src/main/envir.c:3331 src/main/envir.c:3347
 msgid "cannot change active binding if binding is locked"
 msgstr ""
 " バインディングがロックされているならば、アクティブなバインディングを変更する"
 "ことはできません "
 
-#: src/main/envir.c:3418 src/main/envir.c:3656
+#: src/main/envir.c:3433 src/main/envir.c:3671
 msgid "unknown op"
 msgstr " 未知の演算子です "
 
-#: src/main/envir.c:3464
+#: src/main/envir.c:3479
 msgid "cannot unbind a locked binding"
 msgstr " ロックされたバインディングを切り離せません "
 
-#: src/main/envir.c:3466
+#: src/main/envir.c:3481
 msgid "cannot unbind an active binding"
 msgstr " 現在使用中のバインディングを切り離すことはできません "
 
-#: src/main/envir.c:3607
+#: src/main/envir.c:3622
 msgid "bad namespace name"
 msgstr " 不正な名前空間名です "
 
-#: src/main/envir.c:3619
+#: src/main/envir.c:3634
 #, fuzzy
 msgid "namespace is already registered"
 msgstr " ネームスペースはすでに登録されています "
 
-#: src/main/envir.c:3631
+#: src/main/envir.c:3646
 #, fuzzy
 msgid "namespace is not registered"
 msgstr " ネームスペースは登録されていません "
 
-#: src/main/envir.c:3687
+#: src/main/envir.c:3702
 msgid "bad import environment argument"
 msgstr " インポートしようとしている環境引数が不正です "
 
-#: src/main/envir.c:3692
+#: src/main/envir.c:3707
 msgid "bad export environment argument"
 msgstr " エクスポートしようとしている環境引数が不正です "
 
-#: src/main/envir.c:3696
+#: src/main/envir.c:3711
 msgid "length of import and export names must match"
 msgstr " インポートとエクスポート名の長さは一致しなければなりません "
 
-#: src/main/envir.c:3719
+#: src/main/envir.c:3734
 #, c-format
 msgid "exported symbol '%s' has no value"
 msgstr " エクスポートされたシンボル \"%s\" が値を持っていません "
 
-#: src/main/envir.c:3750
+#: src/main/envir.c:3765
 #, fuzzy, c-format
 msgid "'%s' argument must be a hashed environment"
 msgstr " 引数は環境でなければなりません "
 
-#: src/main/envir.c:3758 src/main/envir.c:3772 src/main/grep.c:108
+#: src/main/envir.c:3773 src/main/envir.c:3787 src/main/grep.c:108
 #, fuzzy
 msgid "R character strings are limited to 2^31-1 bytes"
 msgstr " 変数名は%dバイトが上限です "
 
-#: src/main/envir.c:3856
+#: src/main/envir.c:3871
 #, c-format
 msgid "Resized: size %d => %d\tpri %d => %d\n"
 msgstr ""
 
-#: src/main/envir.c:3883
+#: src/main/envir.c:3898
 #, c-format
 msgid "unknown encoding: %d"
 msgstr " 未知のエンコーディングです: '%d' "
 
-#: src/main/envir.c:3903
+#: src/main/envir.c:3918
 #, c-format
 msgid "embedded nul in string: '%s'"
 msgstr " 文字列の中にnulが埋め込まれています: '%s' "
 
-#: src/main/envir.c:3946
+#: src/main/envir.c:3961
 #, fuzzy, c-format
 msgid "unknown encoding mask: %d"
 msgstr " 未知のエンコーディングです: '%d' "
 
-#: src/main/envir.c:3982 src/main/envir.c:4009
+#: src/main/envir.c:3997 src/main/envir.c:4024
 #, c-format
 msgid "Cache size: %d\n"
 msgstr ""
 
-#: src/main/envir.c:3983 src/main/envir.c:4010
+#: src/main/envir.c:3998 src/main/envir.c:4025
 #, c-format
 msgid "Cache pri:  %d\n"
 msgstr ""
 
-#: src/main/envir.c:3987 src/main/envir.c:4014
+#: src/main/envir.c:4002 src/main/envir.c:4029
 #, c-format
 msgid "Line %d: "
 msgstr ""
@@ -4296,7 +4295,7 @@ msgstr " Rprof: プロファイル・ファイル '%s' を開くことができ�
 msgid "unable to create profiling thread"
 msgstr " pixmap を作れません "
 
-#: src/main/eval.c:375 src/main/eval.c:6427
+#: src/main/eval.c:375 src/main/eval.c:6428
 msgid "setting profile timer failed"
 msgstr " プロファイルタイマーの設定に失敗しました "
 
@@ -4347,8 +4346,8 @@ msgstr ""
 " 評価があまりに深く入れ子になっています。無限の再帰か "
 "options(expressions=)？ "
 
-#: src/main/eval.c:613 src/main/eval.c:5393 src/main/eval.c:5409
-#: src/main/eval.c:5421 src/main/eval.c:5571
+#: src/main/eval.c:613 src/main/eval.c:5394 src/main/eval.c:5410
+#: src/main/eval.c:5422 src/main/eval.c:5572
 msgid "trace: "
 msgstr ""
 
@@ -4362,7 +4361,7 @@ msgstr ""
 msgid "vis: builtin %s\n"
 msgstr ""
 
-#: src/main/eval.c:672 src/main/eval.c:1205 src/main/eval.c:5443
+#: src/main/eval.c:672 src/main/eval.c:1205 src/main/eval.c:5444
 msgid "attempt to apply non-function"
 msgstr " 関数でないものを適用しようとしました "
 
@@ -4379,7 +4378,7 @@ msgstr ""
 msgid "exiting from: "
 msgstr ""
 
-#: src/main/eval.c:1197 src/main/eval.c:2194 src/main/eval.c:5012
+#: src/main/eval.c:1197 src/main/eval.c:2195 src/main/eval.c:5013
 #, c-format
 msgid "argument %d is empty"
 msgstr " 引数 %d が空です "
@@ -4421,7 +4420,7 @@ msgstr " 引数の長さが0です "
 msgid "non-symbol loop variable"
 msgstr " ループ変数がシンボルではありません "
 
-#: src/main/eval.c:1589 src/main/eval.c:5216
+#: src/main/eval.c:1589 src/main/eval.c:5217
 #, fuzzy
 msgid "invalid 'for()' loop sequence"
 msgstr " for() ループが不正です "
@@ -4451,209 +4450,209 @@ msgstr " base 名前空間においては複素数の代入はできません "
 msgid "cannot do complex assignments in base environment"
 msgstr " 基本環境においては複素数の代入はできません "
 
-#: src/main/eval.c:2038 src/main/eval.c:2065
+#: src/main/eval.c:2039 src/main/eval.c:2066
 msgid "invalid function in complex assignment"
 msgstr " 複素数の代入で，関数が不正です "
 
-#: src/main/eval.c:2125
+#: src/main/eval.c:2126
 #, fuzzy
 msgid "invalid ('do_set()' function) left-hand side to assignment"
 msgstr " 代入の左辺が不正(do_set)です "
 
-#: src/main/eval.c:2362
+#: src/main/eval.c:2363
 msgid "invalid formal argument list for \"function\""
 msgstr " \"function\" の仮引数リストが不正です "
 
-#: src/main/eval.c:2423 src/main/eval.c:2453 src/main/eval.c:2457
+#: src/main/eval.c:2424 src/main/eval.c:2454 src/main/eval.c:2458
 #, fuzzy, c-format
 msgid "invalid '%s' argument of type '%s'"
 msgstr " '%s' 引数が不正です "
 
-#: src/main/eval.c:2450
+#: src/main/eval.c:2451
 #, fuzzy
 msgid "numeric 'envir' argument is not of length one"
 msgstr " 数値の 'envir'  引数の長さが1ではありません "
 
-#: src/main/eval.c:2472 src/main/eval.c:2496
+#: src/main/eval.c:2473 src/main/eval.c:2497
 #, fuzzy
 msgid "restarts are not supported in 'eval()' function"
 msgstr " 再実行機能は 'eval' 関数に対してはサポートされていません "
 
-#: src/main/eval.c:2555 src/main/eval.c:2568
+#: src/main/eval.c:2556 src/main/eval.c:2569
 #, fuzzy
 msgid "'Recall()' function called from outside a closure"
 msgstr " クロージャの外部から 'Recall' が呼び出されました。 "
 
-#: src/main/eval.c:2661
+#: src/main/eval.c:2662
 msgid "value in '...' is not a promise"
 msgstr " '...' の中の値は promise ではありません "
 
-#: src/main/eval.c:2922
+#: src/main/eval.c:2923
 #, c-format
 msgid "Incompatible methods (\"%s\", \"%s\") for \"%s\""
 msgstr " メソッド (\"%s\", \"%s\") は \"%s\" に対しては矛盾しています "
 
-#: src/main/eval.c:2970
+#: src/main/eval.c:2971
 msgid "dispatch error in group dispatch"
 msgstr " グループディスパッチにディスパッチエラーがあります "
 
-#: src/main/eval.c:3454 src/main/eval.c:5543 src/main/seq.c:926
+#: src/main/eval.c:3455 src/main/eval.c:5544 src/main/seq.c:926
 #, fuzzy, c-format
 msgid "'%s' is not a '%s' function"
 msgstr " \"%s\" は %s 関数ではありません "
 
-#: src/main/eval.c:3939
+#: src/main/eval.c:3940
 msgid "node stack overflow"
 msgstr " ノードスタックが溢れました "
 
-#: src/main/eval.c:3945
+#: src/main/eval.c:3946
 msgid "integer stack overflow"
 msgstr " 整数スタックが溢れました "
 
-#: src/main/eval.c:3999
+#: src/main/eval.c:4000
 #, fuzzy
 msgid "bad operation code"
 msgstr " opcode が不適当です "
 
-#: src/main/eval.c:4996 src/main/logic.c:252 src/main/logic.c:258
+#: src/main/eval.c:4997 src/main/logic.c:252 src/main/logic.c:258
 #, fuzzy, c-format
 msgid "invalid '%s' type in 'x %s y'"
 msgstr " 'x %s y' の %s の型が不正です "
 
-#: src/main/eval.c:5026
+#: src/main/eval.c:5027
 #, fuzzy, c-format
 msgid "argument %d is missing"
 msgstr " 引数 %d が空です "
 
-#: src/main/eval.c:5111
+#: src/main/eval.c:5112
 msgid "bytecode version mismatch; using eval"
 msgstr " バイトコードのバージョンが不一致です; eval を使います "
 
-#: src/main/eval.c:5116
+#: src/main/eval.c:5117
 msgid "bytecode version is too old"
 msgstr " バイトコードのバージョンが古すぎます "
 
-#: src/main/eval.c:5117
+#: src/main/eval.c:5118
 msgid "bytecode version is too new"
 msgstr " バイトコードのバージョンが新しすぎます "
 
-#: src/main/eval.c:5151
+#: src/main/eval.c:5152
 msgid "byte code version mismatch"
 msgstr " バイトコードのバージョンが不一致です "
 
-#: src/main/eval.c:5298
+#: src/main/eval.c:5299
 #, fuzzy
 msgid "invalid sequence argument in 'for()' loop"
 msgstr " for ループの範囲引数が不正です "
 
-#: src/main/eval.c:5433 src/main/names.c:1313
+#: src/main/eval.c:5434 src/main/names.c:1313
 #, fuzzy, c-format
 msgid "there is no '.Internal' function '%s'"
 msgstr " 内部関数 \"%s\" がありません "
 
-#: src/main/eval.c:5530 src/main/eval.c:5876 src/main/eval.c:5916
+#: src/main/eval.c:5531 src/main/eval.c:5877 src/main/eval.c:5917
 msgid "bad function"
 msgstr " 不正な関数です "
 
-#: src/main/eval.c:5967
+#: src/main/eval.c:5968
 #, c-format
 msgid ""
 "'EXPR' is an object of class \"factor\", treated as integer.\n"
 " Consider using '%s' instead."
 msgstr ""
 
-#: src/main/eval.c:5972
+#: src/main/eval.c:5973
 #, fuzzy
 msgid "numeric 'EXPR' required for 'switch()' without named alternatives"
 msgstr " 名前付きの代替値が無い switch() 関数には数値の EXPR が必要です "
 
-#: src/main/eval.c:5974
+#: src/main/eval.c:5975
 #, fuzzy
 msgid "bad character 'switch()' offsets"
 msgstr " 不正なな文字スィッチオフセットです "
 
-#: src/main/eval.c:5976
+#: src/main/eval.c:5977
 #, fuzzy
 msgid "bad 'switch()' names"
 msgstr " 不正なスィッチ名です "
 
-#: src/main/eval.c:5989
+#: src/main/eval.c:5990
 #, fuzzy
 msgid "bad numeric 'switch()' offsets"
 msgstr " 不正な数値スィッチオフセットです "
 
-#: src/main/eval.c:6067
+#: src/main/eval.c:6068
 #, fuzzy
 msgid "unknown instruction code"
 msgstr " 未知の入力書式です "
 
-#: src/main/eval.c:6083
+#: src/main/eval.c:6084
 msgid "cannot find index for threaded code address"
 msgstr ""
 " スレッデッド・コード・アドレス（threaded code address）のインデックスを見つ"
 "けることができません "
 
-#: src/main/eval.c:6143
+#: src/main/eval.c:6144
 msgid "invalid body"
 msgstr " 本体(body)が不正です "
 
-#: src/main/eval.c:6163
+#: src/main/eval.c:6164
 msgid "invalid symbol"
 msgstr " シンボル記号が不正です "
 
-#: src/main/eval.c:6207
+#: src/main/eval.c:6208
 #, fuzzy
 msgid "'code' argument is not a byte code object"
 msgstr " 引数がバイトコードオブジェクトではありません "
 
-#: src/main/eval.c:6228
+#: src/main/eval.c:6229
 msgid "bad file name"
 msgstr " 不正なファイル名です "
 
-#: src/main/eval.c:6247
+#: src/main/eval.c:6248
 #, fuzzy, c-format
 msgid "'%s' argument must be non-empty character string"
 msgstr " 'pattern' は空でない文字列でなければなりません "
 
-#: src/main/eval.c:6249 src/main/saveload.c:1941 src/main/saveload.c:2236
+#: src/main/eval.c:6250 src/main/saveload.c:1941 src/main/saveload.c:2236
 #: src/main/serialize.c:2190 src/modules/lapack/Lapack.c:1237
 #, fuzzy, c-format
 msgid "'%s' argument must be logical"
 msgstr " 'ascii' は論理値でなければなりません "
 
-#: src/main/eval.c:6279 src/main/eval.c:6286
+#: src/main/eval.c:6280 src/main/eval.c:6287
 #, fuzzy
 msgid "'R_CompiledFileName()': buffer is too small"
 msgstr " R_CompiledFileName: バッファが小さすぎます "
 
-#: src/main/eval.c:6320 src/main/eval.c:6339 src/main/eval.c:6369
+#: src/main/eval.c:6321 src/main/eval.c:6340 src/main/eval.c:6370
 msgid "constant buffer must be a generic vector"
 msgstr " 定数値バッファーは総称的なベクトルでなければなりません "
 
-#: src/main/eval.c:6343
+#: src/main/eval.c:6344
 #, fuzzy, c-format
 msgid "bad '%s' value"
 msgstr " '%s' の値が不正です "
 
-#: src/main/eval.c:6371
+#: src/main/eval.c:6372
 msgid "bad constant count"
 msgstr " 不正な定数値カウントです "
 
-#: src/main/eval.c:6407
+#: src/main/eval.c:6408
 #, fuzzy
 msgid "profile timer is in use"
 msgstr " プロファイルタイマーは使用中です "
 
-#: src/main/eval.c:6409
+#: src/main/eval.c:6410
 msgid "already byte code profiling"
 msgstr " 既にバイトコードは分析されています "
 
-#: src/main/eval.c:6444
+#: src/main/eval.c:6445
 #, fuzzy
 msgid "no byte code profiling"
 msgstr " バイトコードのプロファイリングではありません "
 
-#: src/main/eval.c:6459 src/main/eval.c:6462 src/main/eval.c:6465
+#: src/main/eval.c:6460 src/main/eval.c:6463 src/main/eval.c:6466
 #, fuzzy
 msgid "byte code profiling is not supported in this build"
 msgstr " このビルドではICUはサポートされていません "
@@ -4671,16 +4670,16 @@ msgstr " 内部エラー "
 msgid "this graphics device does not support event handling"
 msgstr " このグラフィックスデバイスは event handling をサポートしていません "
 
-#: src/main/gevents.c:137
+#: src/main/gevents.c:136
 msgid "invalid prompt"
 msgstr " プロンプトが不正です "
 
-#: src/main/gevents.c:149
+#: src/main/gevents.c:147
 #, fuzzy
-msgid "recursive use of 'getGraphicsEvent' not supported"
+msgid "recursive use of 'getGraphicsEvent()' function is not supported"
 msgstr " getGrapshicsEvent の再帰的使用はサポートされていません "
 
-#: src/main/gevents.c:159
+#: src/main/gevents.c:158
 msgid "no graphics event handlers set"
 msgstr " 設定されたグラフィックス event handler がありません "
 
@@ -5008,9 +5007,9 @@ msgstr " モジュール中でインターネットルーチンがアクセス�
 msgid "internet routines cannot be loaded"
 msgstr " インターネットルーチンがロードできません "
 
-#: src/main/internet.c:110 src/main/memory.c:3486 src/main/memory.c:3496
-#: src/main/memory.c:3508 src/main/memory.c:3522 src/main/memory.c:3538
-#: src/main/memory.c:3556
+#: src/main/internet.c:110 src/main/memory.c:3490 src/main/memory.c:3500
+#: src/main/memory.c:3512 src/main/memory.c:3526 src/main/memory.c:3542
+#: src/main/memory.c:3560
 msgid "bad value"
 msgstr " 不適切な値です "
 
@@ -5232,80 +5231,80 @@ msgstr ""
 msgid "Setting LC_MEASUREMENT failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.c:855
+#: src/main/main.c:856
 msgid "unable to open the base package\n"
 msgstr " baseパッケージを開くことができません \n"
 
-#: src/main/main.c:933
+#: src/main/main.c:934
 #, c-format
 msgid "unable to restore saved data in %s\n"
 msgstr " %s に保存されたデータを復帰できません \n"
 
-#: src/main/main.c:980
+#: src/main/main.c:981
 #, fuzzy
 msgid "Warning message during startup:"
 msgid_plural "Warning messages during startup:"
 msgstr[0] " 起動準備中です ー "
 
-#: src/main/main.c:1030
+#: src/main/main.c:1031
 #, c-format
 msgid "where %d"
 msgstr ""
 
-#: src/main/main.c:1153
+#: src/main/main.c:1154
 msgid "Called from: "
 msgstr ""
 
-#: src/main/main.c:1160
+#: src/main/main.c:1161
 msgid "top level \n"
 msgstr ""
 
-#: src/main/main.c:1236
+#: src/main/main.c:1237
 msgid "cannot quit from browser"
 msgstr " ブラウザを終了できません "
 
-#: src/main/main.c:1240
+#: src/main/main.c:1241
 msgid "one of \"yes\", \"no\", \"ask\" or \"default\" expected."
 msgstr ""
 " \"yes\", \"no\", \"ask\" または \"default\" のどれかが期待されています "
 
-#: src/main/main.c:1245
+#: src/main/main.c:1246
 #, fuzzy
 msgid ""
 "save=\"ask\" is in non-interactive use: command-line default will be used"
 msgstr ""
 " 非対話的な使用での save=\"ask\"：コマンドラインでの既定動作が使用されます "
 
-#: src/main/main.c:1253
+#: src/main/main.c:1254
 #, fuzzy
 msgid "unrecognized value of 'save' argument"
 msgstr " 'save' の値が認識できません "
 
-#: src/main/main.c:1256
+#: src/main/main.c:1257
 #, fuzzy
 msgid "invalid 'status' argument, 0 assumed"
 msgstr " 'status' が不正です。0が仮定されました "
 
-#: src/main/main.c:1261
+#: src/main/main.c:1262
 #, fuzzy
 msgid "invalid 'runLast' argument, FALSE assumed"
 msgstr " 'runLast' が不正です。FALSE が仮定されました "
 
-#: src/main/main.c:1292
+#: src/main/main.c:1293
 msgid "cannot allocate space for toplevel callback element"
 msgstr " トップレベルの callback 要素に作業空間を割り当てることができません "
 
-#: src/main/main.c:1370
+#: src/main/main.c:1371
 #, fuzzy
 msgid "negative index passed to 'R_removeTaskCallbackByIndex()' function"
 msgstr " R_removeTaskCallbackByIndex に負の添字が渡されました "
 
-#: src/main/main.c:1480
+#: src/main/main.c:1481
 #, fuzzy, c-format
 msgid "warning messages from top-level task callback '%s'"
 msgstr " トップレベルの task callback '%s' からの警告メッセージ \n"
 
-#: src/main/main.c:1536
+#: src/main/main.c:1537
 msgid "top-level task callback did not return a logical value"
 msgstr " トップレベルの task callback が論理値を返していません "
 
@@ -5350,353 +5349,353 @@ msgid "unused argument %s"
 msgid_plural "unused arguments %s"
 msgstr[0] " 使われていない引数 %s "
 
-#: src/main/memory.c:165
+#: src/main/memory.c:166
 #, c-format
 msgid "unprotected object (%p) encountered (was %s)"
 msgstr ""
 
-#: src/main/memory.c:746
+#: src/main/memory.c:747
 #, fuzzy
 msgid "untraced old-to-new reference\n"
 msgstr " 弱い (weak) 参照ではありません "
 
-#: src/main/memory.c:755
+#: src/main/memory.c:756
 #, c-format
 msgid "Node counts %s:\n"
 msgstr ""
 
-#: src/main/memory.c:762 src/main/memory.c:772 src/main/memory.c:782
+#: src/main/memory.c:763 src/main/memory.c:773 src/main/memory.c:783
 msgid "Inconsistent class assignment for node!\n"
 msgstr ""
 
-#: src/main/memory.c:774 src/main/memory.c:784
+#: src/main/memory.c:775 src/main/memory.c:785
 msgid "Inconsistent node generation\n"
 msgstr ""
 
-#: src/main/memory.c:787
+#: src/main/memory.c:788
 #, c-format
 msgid "Class: %d, New = %d, Old = %d, OldToNew = %d, Total = %d\n"
 msgstr ""
 
-#: src/main/memory.c:817
+#: src/main/memory.c:818
 #, c-format
 msgid ""
 "Node occupancy: %.0f%%\n"
 "Vector occupancy: %.0f%%\n"
 msgstr ""
 
-#: src/main/memory.c:822
+#: src/main/memory.c:823
 #, c-format
 msgid "Total allocation: %lu\n"
 msgstr ""
 
-#: src/main/memory.c:823
+#: src/main/memory.c:824
 #, c-format
 msgid ""
 "Ncells %lu\n"
 "Vcells %lu\n"
 msgstr ""
 
-#: src/main/memory.c:834
+#: src/main/memory.c:835
 #, c-format
 msgid "Class: %d, pages = %d, maxrel = %d, released = %d\n"
 msgstr ""
 
-#: src/main/memory.c:838
+#: src/main/memory.c:839
 #, c-format
 msgid "Allocated = %d, in use = %d\n"
 msgstr ""
 
-#: src/main/memory.c:1125 src/main/memory.c:1543
+#: src/main/memory.c:1126 src/main/memory.c:1544
 msgid "****snapping into wrong generation\n"
 msgstr ""
 
-#: src/main/memory.c:1241
+#: src/main/memory.c:1242
 msgid "can only weakly reference/finalize reference objects"
 msgstr " 参照オブジェクトは曖昧にしか参照・完結できません "
 
-#: src/main/memory.c:1275
+#: src/main/memory.c:1276
 msgid "finalizer must be a function or NULL"
 msgstr " ファイナライザーは関数であるか NULL でなければなりません "
 
-#: src/main/memory.c:1331 src/main/memory.c:1339 src/main/memory.c:1350
+#: src/main/memory.c:1332 src/main/memory.c:1340 src/main/memory.c:1351
 msgid "not a weak reference"
 msgstr " 弱い (weak) 参照ではありません "
 
-#: src/main/memory.c:1481
+#: src/main/memory.c:1482
 msgid "first argument must be environment or external pointer"
 msgstr " 最初の引数は環境か外部ポインタでなくてはなりません "
 
-#: src/main/memory.c:1483
+#: src/main/memory.c:1484
 msgid "second argument must be a function"
 msgstr " 二番目の引数は関数でなければなりません "
 
-#: src/main/memory.c:1487
+#: src/main/memory.c:1488
 msgid "third argument must be 'TRUE' or 'FALSE'"
 msgstr " 三番目の引数は 'TRUE' か 'FALSE' でなくてはなりません "
 
-#: src/main/memory.c:1824
+#: src/main/memory.c:1828
 #, c-format
 msgid "Garbage collection %d = %d"
 msgstr ""
 
-#: src/main/memory.c:1827
+#: src/main/memory.c:1831
 #, c-format
 msgid " (level %d) ... "
 msgstr ""
 
-#: src/main/memory.c:1981
+#: src/main/memory.c:1985
 msgid "vector memory exhausted (limit reached?)"
 msgstr " ベクトルのメモリを使い切りました（上限に達した？） "
 
-#: src/main/memory.c:1987
+#: src/main/memory.c:1991
 msgid "cons memory exhausted (limit reached?)"
 msgstr " cons メモリが尽きました（限界に達したかも？） "
 
-#: src/main/memory.c:1992
+#: src/main/memory.c:1996
 msgid "memory exhausted (limit reached?)"
 msgstr " メモリが尽きました（限界に達したかも？） "
 
-#: src/main/memory.c:2013
+#: src/main/memory.c:2017
 #, fuzzy
 msgid "couldn't allocate memory for pointer stack"
 msgstr " 'read.dcf' のためのメモリを割り当てられませんでした "
 
-#: src/main/memory.c:2070
+#: src/main/memory.c:2074
 #, fuzzy
 msgid "couldn't allocate node stack"
 msgstr " pushBack のための領域を割り当てられませんでした "
 
-#: src/main/memory.c:2075
+#: src/main/memory.c:2079
 #, fuzzy
 msgid "couldn't allocate integer stack"
 msgstr " pushBack のための領域を割り当てられませんでした "
 
-#: src/main/memory.c:2128
+#: src/main/memory.c:2132
 #, fuzzy, c-format
 msgid "cannot allocate memory block of size %0.f Tb"
 msgstr " サイズ %0.1f Gb のメモリブロックを割り当てることができません "
 
-#: src/main/memory.c:2133
+#: src/main/memory.c:2137
 #, c-format
 msgid "cannot allocate memory block of size %0.1f Gb"
 msgstr " サイズ %0.1f Gb のメモリブロックを割り当てることができません "
 
-#: src/main/memory.c:2460
+#: src/main/memory.c:2464
 #, fuzzy
 msgid "vector is too large"
 msgstr " 指定されたベクトルのサイズが長すぎます "
 
-#: src/main/memory.c:2463
+#: src/main/memory.c:2467
 msgid "negative length vectors are not allowed"
 msgstr " 負の長さのベクトルは許されません "
 
-#: src/main/memory.c:2475
+#: src/main/memory.c:2479
 msgid "use of allocVector(CHARSXP ...) is defunct\n"
 msgstr ""
 
-#: src/main/memory.c:2489 src/main/memory.c:2502 src/main/memory.c:2515
-#: src/main/memory.c:2530
+#: src/main/memory.c:2493 src/main/memory.c:2506 src/main/memory.c:2519
+#: src/main/memory.c:2534
 #, c-format
 msgid "cannot allocate vector of length %d"
 msgstr " 長さ %d のベクトルを割り当てることができません "
 
-#: src/main/memory.c:2540 src/main/memory.c:2547
+#: src/main/memory.c:2544 src/main/memory.c:2551
 #, fuzzy
 msgid "invalid length for pairlist"
 msgstr " 長さが0の引数は不正です "
 
-#: src/main/memory.c:2551
+#: src/main/memory.c:2555
 #, c-format
 msgid "invalid type/length (%s/%d) in vector allocation"
 msgstr " ベクトル割り当てにおいて，型か長さ (%s か %d) が不正です "
 
-#: src/main/memory.c:2650
+#: src/main/memory.c:2654
 #, c-format
 msgid "cannot allocate vector of size %0.1f Gb"
 msgstr " サイズ %0.1f Gb のベクトルを割り当てることができません "
 
-#: src/main/memory.c:2654
+#: src/main/memory.c:2658
 #, c-format
 msgid "cannot allocate vector of size %0.1f Mb"
 msgstr " サイズ %0.1f Mb のベクトルを割り当てることができません "
 
-#: src/main/memory.c:2658
+#: src/main/memory.c:2662
 #, c-format
 msgid "cannot allocate vector of size %0.f Kb"
 msgstr " サイズ %0.f Kb のベクトルを割り当てることができません "
 
-#: src/main/memory.c:2898
+#: src/main/memory.c:2902
 #, c-format
 msgid ""
 "\n"
 "%.1f Mbytes of cons cells used (%d%%)\n"
 msgstr ""
 
-#: src/main/memory.c:2903
+#: src/main/memory.c:2907
 #, c-format
 msgid "%.1f Mbytes of vectors used (%d%%)\n"
 msgstr ""
 
-#: src/main/memory.c:2926
+#: src/main/memory.c:2930
 #, c-format
 msgid "GC encountered a node (%p) with type FREESXP (was %s) at memory.c:%d"
 msgstr ""
 
-#: src/main/memory.c:2931 src/main/memory.c:2936
+#: src/main/memory.c:2935 src/main/memory.c:2940
 #, c-format
 msgid "GC encountered a node (%p) with an unknown SEXP type: %s at memory.c:%d"
 msgstr ""
 
-#: src/main/memory.c:2946
+#: src/main/memory.c:2950
 msgid "internal TRUE value has been modified"
 msgstr ""
 
-#: src/main/memory.c:2950
+#: src/main/memory.c:2954
 msgid "internal FALSE value has been modified"
 msgstr ""
 
-#: src/main/memory.c:2955
+#: src/main/memory.c:2959
 msgid "internal logical NA value has been modified"
 msgstr ""
 
-#: src/main/memory.c:3052
+#: src/main/memory.c:3056
 msgid "protect(): protection stack overflow"
 msgstr " protect()：プロテクションスタックが溢れました "
 
-#: src/main/memory.c:3059
+#: src/main/memory.c:3063
 #, fuzzy, c-format
 msgid "unprotect(): only %d protected item"
 msgid_plural "unprotect(): only %d protected items"
 msgstr[0] " unprotect(): %d 個の保護された項目  "
 
-#: src/main/memory.c:3094
+#: src/main/memory.c:3098
 msgid "unprotect_ptr: pointer not found"
 msgstr " unprotect_ptr：ポインターがありません "
 
-#: src/main/memory.c:3132
+#: src/main/memory.c:3136
 #, fuzzy, c-format
 msgid "R_Reprotect: only %d protected item, can't reprotect index %d"
 msgid_plural "R_Reprotect: only %d protected items, can't reprotect index %d"
 msgstr[0] " unprotect(): %d 個の保護された項目  "
 
-#: src/main/memory.c:3184
+#: src/main/memory.c:3188
 #, fuzzy, c-format
 msgid "'Calloc()' function could not allocate memory (%.0f of %u bytes)"
 msgstr " Calloc がメモリー (%2$u バイトの %1$.0f) を割りあてられませんでした "
 
-#: src/main/memory.c:3194
+#: src/main/memory.c:3198
 #, fuzzy, c-format
 msgid "'Realloc()' function could not re-allocate memory (%.0f bytes)"
 msgstr " Realloc がメモリーを再確保できません (%.0f バイト)  "
 
-#: src/main/memory.c:3325
+#: src/main/memory.c:3329
 #, c-format
 msgid "value of 'SET_ATTRIB' must be a pairlist or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3358
+#: src/main/memory.c:3362
 #, c-format
 msgid "LENGTH or similar applied to %s object"
 msgstr ""
 
-#: src/main/memory.c:3373
+#: src/main/memory.c:3377
 #, c-format
 msgid "'CHAR()' function can only be applied to a 'CHARSXP', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3380
+#: src/main/memory.c:3384
 #, c-format
 msgid ""
 "'STRING_ELT()' function can only be applied to a 'character vector', not a "
 "'%s'"
 msgstr ""
 
-#: src/main/memory.c:3390
+#: src/main/memory.c:3394
 #, c-format
 msgid "'VECTOR_ELT()' function can only be applied to a 'list', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3397
+#: src/main/memory.c:3401
 #, c-format
 msgid "'LOGICAL()' function can only be applied to a 'logical', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3405
+#: src/main/memory.c:3409
 #, c-format
 msgid "'INTEGER()' function can only be applied to a 'integer', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3412
+#: src/main/memory.c:3416
 #, fuzzy, c-format
 msgid "'RAW()' function can only be applied to a 'raw', not a '%s'"
 msgstr " nsl 関数はホスト '%s' を解決できませんでした "
 
-#: src/main/memory.c:3419
+#: src/main/memory.c:3423
 #, c-format
 msgid "'REAL()' function can only be applied to a 'numeric', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3426
+#: src/main/memory.c:3430
 #, fuzzy, c-format
 msgid "'COMPLEX()' function can only be applied to a 'complex', not a '%s'"
 msgstr " nsl 関数はホスト '%s' を解決できませんでした "
 
-#: src/main/memory.c:3435
+#: src/main/memory.c:3439
 msgid "not safe to return vector pointer"
 msgstr " ベクトルのポインタを返すのは安全ではありません "
 
-#: src/main/memory.c:3440
+#: src/main/memory.c:3444
 #, c-format
 msgid ""
 "'SET_STRING_ELT()' function can only be applied to a 'character vector', not "
 "a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3443
+#: src/main/memory.c:3447
 #, c-format
 msgid "value of 'SET_STRING_ELT()' function must be a 'CHARSXP' not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3446
+#: src/main/memory.c:3450
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_STRING_ELT()' function"
 msgstr ""
 
-#: src/main/memory.c:3457
+#: src/main/memory.c:3461
 #, c-format
 msgid "'SET_VECTOR_ELT()' function can only be applied to a 'list', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3461
+#: src/main/memory.c:3465
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_VECTOR_ELT()' function"
 msgstr ""
 
-#: src/main/memory.c:3638
+#: src/main/memory.c:3642
 #, c-format
 msgid "value of 'SET_CXTAIL()' function must be a 'char' or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3719
+#: src/main/memory.c:3723
 msgid "memory profiling is not available on this system"
 msgstr " メモリプロファリングはこのシステムでは使えません "
 
-#: src/main/memory.c:3783
+#: src/main/memory.c:3787
 #, fuzzy, c-format
 msgid "'Rprofmem()': cannot open output file '%s'"
 msgstr " Rprofmem: ファイル '%s' を開くことができません "
 
-#: src/main/memory.c:3819
+#: src/main/memory.c:3823
 msgid "R_AllocStringBuffer(-1) used: please report"
 msgstr ""
 
-#: src/main/memory.c:3839
+#: src/main/memory.c:3843
 #, fuzzy, c-format
 msgid "could not allocate memory (%u Mb) in 'R_AllocStringBuffer()' function"
 msgstr " 'read.dcf' のためのメモリを割り当てられませんでした "
 
-#: src/main/memory.c:3891
+#: src/main/memory.c:3895
 #, c-format
 msgid "long vectors not supported yet: %s:%d"
 msgstr ""
@@ -5951,59 +5950,64 @@ msgid "object of class \"%s\" does not correspond to a valid S3 object"
 msgstr ""
 " クラス \"%s\" のオブジェクトは適正な S3 オブジェクトに対応していません "
 
-#: src/main/options.c:121 src/main/options.c:182
+#: src/main/options.c:122 src/main/options.c:183
 msgid "corrupted options list"
 msgstr " オプションリストが間違っています "
 
-#: src/main/options.c:131
+#: src/main/options.c:132
 msgid "invalid printing width, used 80"
 msgstr " 表示の幅が不正です: 80にします "
 
-#: src/main/options.c:142
+#: src/main/options.c:143
 msgid "invalid printing digits, used 7"
 msgstr " 表示の桁数が不正です: 7にします "
 
-#: src/main/options.c:154
+#: src/main/options.c:155
 msgid "invalid 'deparse.cutoff', used 60"
 msgstr ""
 
-#: src/main/options.c:166
+#: src/main/options.c:167
 msgid "invalid value for \"device.ask.default\", using FALSE"
 msgstr " \"device.ask.default\"に対して不正な値: FALSEを使います "
 
-#: src/main/options.c:415
+#: src/main/options.c:416
 msgid "list argument has no valid names"
 msgstr " 引数リストは有効な名前ではありません "
 
-#: src/main/options.c:444
+#: src/main/options.c:445
 #, c-format
 msgid "invalid 'width' parameter, allowed %d...%d"
 msgstr " 'width'パラメータが不正です: %d...%dが認められています "
 
-#: src/main/options.c:455
+#: src/main/options.c:456
 #, c-format
 msgid "invalid 'digits' parameter, allowed %d...%d"
 msgstr " 'trans' のパラメータが不正です : %d...%dが認められています "
 
-#: src/main/options.c:462
+#: src/main/options.c:463
 #, c-format
 msgid "'expressions' parameter invalid, allowed %d...%d"
 msgstr " 'expression' パラメータが不正です: %d...%dが認められています "
 
-#: src/main/options.c:469 src/main/options.c:477 src/main/options.c:483
-#: src/main/options.c:491 src/main/options.c:498 src/main/options.c:503
-#: src/main/options.c:510 src/main/options.c:516 src/main/options.c:522
-#: src/main/options.c:527 src/main/options.c:532 src/main/options.c:541
-#: src/main/options.c:547 src/main/options.c:553 src/main/options.c:563
-#: src/main/options.c:573 src/main/options.c:579 src/main/options.c:587
-#: src/main/options.c:594 src/main/options.c:601 src/main/options.c:608
-#: src/main/options.c:615 src/main/options.c:623 src/main/options.c:632
-#: src/main/options.c:635 src/main/options.c:641
+#: src/main/options.c:470 src/main/options.c:478 src/main/options.c:484
+#: src/main/options.c:492 src/main/options.c:499 src/main/options.c:504
+#: src/main/options.c:511 src/main/options.c:517 src/main/options.c:523
+#: src/main/options.c:528 src/main/options.c:533 src/main/options.c:542
+#: src/main/options.c:548 src/main/options.c:554 src/main/options.c:564
+#: src/main/options.c:578 src/main/options.c:584 src/main/options.c:592
+#: src/main/options.c:599 src/main/options.c:606 src/main/options.c:613
+#: src/main/options.c:620 src/main/options.c:628 src/main/options.c:637
+#: src/main/options.c:640 src/main/options.c:646
 #, c-format
 msgid "invalid value for '%s'"
 msgstr " '%s' の値が不正です "
 
-#: src/main/options.c:628 src/main/options.c:657
+#: src/main/options.c:569 src/main/paste.c:448
+#, fuzzy, c-format
+msgid "'%s' argument must be a string of one character"
+msgstr " 'norm' は文字列でなければなりません "
+
+#: src/main/options.c:633 src/main/options.c:662
 msgid "\"par.ask.default\" has been replaced by \"device.ask.default\""
 msgstr " \"par.ask.default\"は\"device.ask.default\"で置き換えられました "
 
@@ -6024,244 +6028,244 @@ msgstr ""
 msgid "first argument must be atomic"
 msgstr " 最初の引数はアトムでなくてはなりません "
 
-#: src/main/paste.c:558
+#: src/main/paste.c:579
 #, fuzzy
 msgid "Impossible mode(x)"
 msgstr " 不可能なモード（x）です "
 
-#: src/main/paste.c:643
+#: src/main/paste.c:664
 msgid "atomic vector arguments only"
 msgstr " 引数はアトムであるベクトルのみです "
 
-#: src/main/platform.c:376 src/main/platform.c:420
+#: src/main/platform.c:376 src/main/platform.c:421
 msgid "write error during file append"
 msgstr " ファイル追加中に書き込みエラーが生じました "
 
-#: src/main/platform.c:395
+#: src/main/platform.c:396
 msgid "nothing to append to"
 msgstr " 付け足す（append）べきものがありません "
 
-#: src/main/platform.c:449
+#: src/main/platform.c:450
 msgid "invalid filename argument"
 msgstr " ファイル名引数が不正です "
 
-#: src/main/platform.c:461
+#: src/main/platform.c:462
 #, c-format
 msgid "cannot create file '%s', reason '%s'"
 msgstr " fife '%s' を作れません, 理由は'%s'です "
 
-#: src/main/platform.c:475 src/main/platform.c:544 src/main/platform.c:624
+#: src/main/platform.c:476 src/main/platform.c:545 src/main/platform.c:626
 msgid "invalid first filename"
 msgstr " 一番目のファイル名が不正です "
 
-#: src/main/platform.c:487
+#: src/main/platform.c:488
 #, c-format
 msgid "cannot remove file '%s', reason '%s'"
 msgstr " ファイル '%s' を削除できません, 理由は '%s' です "
 
-#: src/main/platform.c:546 src/main/platform.c:626
+#: src/main/platform.c:547 src/main/platform.c:628
 msgid "invalid second filename"
 msgstr " 二番目のファイル名が不正です "
 
-#: src/main/platform.c:548 src/main/platform.c:628
+#: src/main/platform.c:550 src/main/platform.c:631
 msgid "nothing to link"
 msgstr " リンクすべきものがありません "
 
-#: src/main/platform.c:558
+#: src/main/platform.c:560
 msgid "symbolic links are not supported on this version of Windows"
 msgstr ""
 " このWindowsのバージョンではシンボリックリンクはサポートされていません "
 
-#: src/main/platform.c:580
+#: src/main/platform.c:582
 #, c-format
 msgid "cannot symlink '%ls' to '%ls', reason '%s'"
 msgstr ""
 " シンボリックリンク '%ls' （'%ls\" に対する）を作成できません, 理由は '%s' で"
 "す "
 
-#: src/main/platform.c:599
+#: src/main/platform.c:601
 #, c-format
 msgid "cannot symlink '%s' to '%s', reason '%s'"
 msgstr " '%s'に対するシンボリックリンク'%s'を作成できません, 理由は '%s' です "
 
-#: src/main/platform.c:606
+#: src/main/platform.c:608
 #, fuzzy
 msgid "symbolic links are not supported on this platform"
 msgstr " このプラットフォームではシンボリックリンクはサポートされていません "
 
-#: src/main/platform.c:646
+#: src/main/platform.c:649
 #, c-format
 msgid "cannot link '%ls' to '%ls', reason '%s'"
 msgstr " '%ls' を '%ls' にリンクできません, 理由は '%s' です "
 
-#: src/main/platform.c:665
+#: src/main/platform.c:668
 #, c-format
 msgid "cannot link '%s' to '%s', reason '%s'"
 msgstr " '%s' を '%s' にリンクできません, 理由は '%s' です "
 
-#: src/main/platform.c:673
+#: src/main/platform.c:676
 msgid "(hard) links are not supported on this platform"
 msgstr " このプラットフォームでは（ハード）リンクはサポートされていません "
 
-#: src/main/platform.c:704
+#: src/main/platform.c:708
 #, fuzzy
 msgid "'from' and 'to' arguments are of different lengths"
 msgstr " 'from' と 'to' は異なった長さです "
 
-#: src/main/platform.c:715 src/main/platform.c:719 src/main/platform.c:725
-#: src/main/platform.c:729
+#: src/main/platform.c:719 src/main/platform.c:723 src/main/platform.c:729
+#: src/main/platform.c:733
 #, fuzzy, c-format
 msgid "expanded '%s' name is too long"
 msgstr " 展開された　'to' 名が長すぎます "
 
-#: src/main/platform.c:733
+#: src/main/platform.c:737
 #, c-format
 msgid "cannot rename file '%s' to '%s', reason '%s'"
 msgstr " ファイル名を '%s' から '%s' に変更できません, 理由は'%s'です "
 
-#: src/main/platform.c:1158
+#: src/main/platform.c:1162
 msgid "invalid 'pattern' regular expression"
 msgstr " 正規表現の 'pattern' が不正です "
 
-#: src/main/platform.c:1275
+#: src/main/platform.c:1279
 msgid "unable to determine R home location"
 msgstr " R のホームロケーションを決定できません "
 
-#: src/main/platform.c:1328 src/unix/Rscript.c:223
+#: src/main/platform.c:1332 src/unix/Rscript.c:223
 #, fuzzy
 msgid "file name is too long"
 msgstr " ファイル名が長すぎます "
 
-#: src/main/platform.c:1390
+#: src/main/platform.c:1394
 #, fuzzy, c-format
 msgid "cannot get info on '%ls', reason '%s'"
 msgstr " fifo '%s' を作れません, 理由は'%s'です "
 
-#: src/main/platform.c:1404 src/main/platform.c:2957
+#: src/main/platform.c:1408 src/main/platform.c:2961
 #, fuzzy, c-format
 msgid "cannot open reparse point '%ls', reason '%s'"
 msgstr " 目標ファイル '%s' を開くことができません, 理由は '%s' です "
 
-#: src/main/platform.c:1415
+#: src/main/platform.c:1419
 #, fuzzy, c-format
 msgid "cannot delete reparse point '%ls', reason '%s'"
 msgstr " ディレクトリ '%ls' を作れません, 理由は '%s' です "
 
-#: src/main/platform.c:1573 src/main/platform.c:1620 src/main/sysutils.c:1799
+#: src/main/platform.c:1577 src/main/platform.c:1624 src/main/sysutils.c:1799
 #: src/main/sysutils.c:1813
 msgid "internal out-of-memory condition"
 msgstr " 内部でアウトオブメモリーが発生しています "
 
-#: src/main/platform.c:1616 src/main/sysutils.c:1809
+#: src/main/platform.c:1620 src/main/sysutils.c:1809
 #, c-format
 msgid "read error on '%s'"
 msgstr " \"%s\" の読み込みエラーです "
 
-#: src/main/platform.c:1778
+#: src/main/platform.c:1782
 msgid "setting 'LC_NUMERIC' may cause R to function strangely"
 msgstr " 'LC_NUMERIC'をセットすると、Rは変に機能するかもしれません "
 
-#: src/main/platform.c:1792
+#: src/main/platform.c:1796
 msgid "LC_MESSAGES exists on Windows but is not operational"
 msgstr "LC_MESSAGES はWindowsにも存在しますが、動作しません "
 
-#: src/main/platform.c:1819
+#: src/main/platform.c:1823
 #, c-format
 msgid "OS reports request to set locale to \"%s\" cannot be honored"
 msgstr ""
 " ロケールを \"%s\" に設定せよとのOS のレポート要求は受け入れられません "
 
-#: src/main/platform.c:2138 src/main/raw.c:37 src/main/raw.c:272
+#: src/main/platform.c:2142 src/main/raw.c:37 src/main/raw.c:272
 #, fuzzy, c-format
 msgid "'%s' argument must be a character vector of length 1"
 msgstr " 'hostname' は長さ1の文字列ベクトルでなくてはなりません "
 
-#: src/main/platform.c:2144
+#: src/main/platform.c:2148
 #, fuzzy, c-format
 msgid "'nsl()' function was unable to resolve host '%s'"
 msgstr " nsl 関数はホスト '%s' を解決できませんでした "
 
-#: src/main/platform.c:2151
+#: src/main/platform.c:2155
 #, fuzzy
 msgid "unknown format returned by C function 'gethostbyname()'"
 msgstr " gethostbyname が未知の書式を返しました "
 
-#: src/main/platform.c:2160
+#: src/main/platform.c:2164
 #, fuzzy
 msgid "'nsl()' function is not supported on this platform"
 msgstr " このプラットフォームでは nsl 関数はサポートされていません "
 
-#: src/main/platform.c:2231
+#: src/main/platform.c:2235
 #, fuzzy, c-format
 msgid "directory '%s' already exists"
 msgstr " '%s' はすでに存在します "
 
-#: src/main/platform.c:2234
+#: src/main/platform.c:2238
 #, fuzzy, c-format
 msgid "cannot create directory '%s', reason '%s'"
 msgstr " ディレクトリ '%s' を作れません, 理由は'%s'です "
 
-#: src/main/platform.c:2279
+#: src/main/platform.c:2283
 #, fuzzy, c-format
 msgid "directory '%ls' already exists"
 msgstr " '%s' はすでに存在します "
 
-#: src/main/platform.c:2283
+#: src/main/platform.c:2287
 #, fuzzy, c-format
 msgid "cannot create directory '%ls', reason '%s'"
 msgstr " ディレクトリ '%ls' を作れません, 理由は '%s' です "
 
-#: src/main/platform.c:2317 src/main/platform.c:2526
+#: src/main/platform.c:2321 src/main/platform.c:2530
 msgid "too deep nesting"
 msgstr ""
 
-#: src/main/platform.c:2325 src/main/platform.c:2338 src/main/platform.c:2356
-#: src/main/platform.c:2376 src/main/platform.c:2542 src/main/platform.c:2555
-#: src/main/platform.c:2574 src/main/platform.c:2595
+#: src/main/platform.c:2329 src/main/platform.c:2342 src/main/platform.c:2360
+#: src/main/platform.c:2380 src/main/platform.c:2546 src/main/platform.c:2559
+#: src/main/platform.c:2578 src/main/platform.c:2599
 #, fuzzy
 msgid "path is too long"
 msgstr " パスが長すぎます "
 
-#: src/main/platform.c:2345
+#: src/main/platform.c:2349
 #, fuzzy, c-format
 msgid "problem with creating directory %ls: %s"
 msgstr " ディレクトリ %ls の作成に問題があります: %s "
 
-#: src/main/platform.c:2365
+#: src/main/platform.c:2369
 #, fuzzy, c-format
 msgid "problem with reading directory %ls: %s"
 msgstr " ディレクトリ %s の作成に問題があります: %s "
 
-#: src/main/platform.c:2384
+#: src/main/platform.c:2388
 #, fuzzy, c-format
 msgid "problem with copying %ls to %ls: %s"
 msgstr " %ls の %ls へのコピーに問題があります: %s "
 
-#: src/main/platform.c:2564
+#: src/main/platform.c:2568
 #, fuzzy, c-format
 msgid "problem with creating directory %s: %s"
 msgstr " ディレクトリ %s の作成に問題があります: %s "
 
-#: src/main/platform.c:2583
+#: src/main/platform.c:2587
 #, fuzzy, c-format
 msgid "problem with reading directory %s: %s"
 msgstr " ディレクトリ %s の作成に問題があります: %s "
 
-#: src/main/platform.c:2604
+#: src/main/platform.c:2608
 #, fuzzy, c-format
 msgid "problem with copying %s to %s: %s"
 msgstr " %s の %s へのコピーに問題があります: %s "
 
-#: src/main/platform.c:2741
+#: src/main/platform.c:2745
 #, fuzzy
 msgid "'mode' argument must be of length at least one"
 msgstr " 'mode' の長さは1以上でなくてはなりません "
 
-#: src/main/platform.c:2782 src/main/platform.c:2808
+#: src/main/platform.c:2786 src/main/platform.c:2812
 msgid "insufficient OS support on this platform"
 msgstr " このプラットフォームでは不十分なOSのサポートです "
 
-#: src/main/platform.c:2978
+#: src/main/platform.c:2982
 #, fuzzy, c-format
 msgid "cannot set reparse point '%ls', reason '%s'"
 msgstr " ディレクトリ '%ls' を作れません, 理由は '%s' です "
@@ -6465,11 +6469,11 @@ msgstr " 'length.out' は非負の数値でなくてはなりません "
 msgid "invalid 'tryS4' internal argument"
 msgstr " 'tryS4' 内部引数が不正です "
 
-#: src/main/print.c:302 src/main/print.c:909 src/main/print.c:993
+#: src/main/print.c:302 src/main/print.c:912 src/main/print.c:996
 msgid "missing methods namespace: this should not happen"
 msgstr ""
 
-#: src/main/print.c:307 src/main/print.c:914 src/main/print.c:998
+#: src/main/print.c:307 src/main/print.c:917 src/main/print.c:1001
 msgid "missing 'show()' in methods namespace: this should not happen"
 msgstr ""
 
@@ -6531,17 +6535,22 @@ msgstr " 弱い (weak) 参照ではありません "
 msgid "<S4 Type Object>\n"
 msgstr ""
 
-#: src/main/print.c:890
+#: src/main/print.c:860
+#, fuzzy
+msgid "print buffer overflow"
+msgstr " 入力バッファが溢れました  (%d行) "
+
+#: src/main/print.c:893
 #, c-format
 msgid "Slot \"%s\":"
 msgstr ""
 
-#: src/main/print.c:1054 src/main/print.c:1072 src/main/print.c:1091
+#: src/main/print.c:1057 src/main/print.c:1075 src/main/print.c:1094
 #, fuzzy, c-format
 msgid "invalid character length in '%s' function"
 msgstr " intpr の文字列の長さが不正です "
 
-#: src/main/print.c:1101
+#: src/main/print.c:1104
 #, fuzzy
 msgid "memory allocation error in 'realpr'"
 msgstr " realpr でメモリ確保に失敗しました "
@@ -7805,7 +7814,7 @@ msgstr " 行列への添え字の数が正しくありません "
 msgid "incompatible types (from %s to %s) in matrix subset assignment"
 msgstr " 行列への部分代入で両立しない型です (%s から　%s)  "
 
-#: src/main/subassign.c:1040 src/main/subset.c:948
+#: src/main/subassign.c:1040 src/main/subset.c:951
 msgid "incorrect number of subscripts"
 msgstr " 添え字の数が正しくありません "
 
@@ -7881,16 +7890,16 @@ msgstr " [[ による代入に両立しない型があります(%s から %s)  "
 #: src/main/subassign.c:1924 src/main/subscript.c:152 src/main/subscript.c:154
 #: src/main/subscript.c:283 src/main/subscript.c:285 src/main/subscript.c:895
 #: src/main/subscript.c:897 src/main/subscript.c:988 src/main/subscript.c:990
-#: src/main/subset.c:1150
+#: src/main/subset.c:1153
 #, c-format
 msgid "invalid subscript type '%s'"
 msgstr " 添え字の型 '%s' が不正です "
 
-#: src/main/subassign.c:1969
+#: src/main/subassign.c:1972
 msgid "no method for assigning subsets of this S4 class"
 msgstr " この S4 クラスのサブセットを付値するメソッドはありません "
 
-#: src/main/subassign.c:2027
+#: src/main/subassign.c:2030
 #, fuzzy
 msgid "coercing LHS to a list"
 msgstr " 左辺をリストに変換しました "
@@ -7928,7 +7937,7 @@ msgstr " 再帰的な添字操作がレベル %d で失敗しました \n"
 msgid "no such index at level %d\n"
 msgstr " レベル %d にはそのようなインデックスはありません \n"
 
-#: src/main/subscript.c:325 src/main/subset.c:133 src/main/subset.c:1054
+#: src/main/subscript.c:325 src/main/subset.c:133 src/main/subset.c:1057
 #, fuzzy
 msgid "invalid subscript for pairlist"
 msgstr " リストへの付値の添字が不正です "
@@ -7965,40 +7974,40 @@ msgstr " ベクトルでないものへの添え字操作 "
 msgid "dimensions would exceed maximum size of array"
 msgstr " 次元が配列の最大サイズを超えたかもしれません "
 
-#: src/main/subset.c:306 src/main/subset.c:335
+#: src/main/subset.c:307 src/main/subset.c:337
 msgid "matrix subscripting not handled for this type"
 msgstr " このデータ型に対しては添え字は使えません "
 
-#: src/main/subset.c:491
+#: src/main/subset.c:494
 msgid "array subscripting not handled for this type"
 msgstr " このデータ型に対しては添え字は使えません "
 
-#: src/main/subset.c:847
+#: src/main/subset.c:850
 msgid "incorrect number of dimensions"
 msgstr " 次元数が正しくありません "
 
-#: src/main/subset.c:944
+#: src/main/subset.c:947
 msgid "no index specified"
 msgstr " 添字が指定されていません "
 
-#: src/main/subset.c:954
+#: src/main/subset.c:957
 msgid "this S4 class is not subsettable"
 msgstr " この S4 クラスは部分代入可能ではありません "
 
-#: src/main/subset.c:961
+#: src/main/subset.c:964
 msgid "wrong arguments for subsetting an environment"
 msgstr " 環境の subsetting に対する誤った引数です "
 
-#: src/main/subset.c:995
+#: src/main/subset.c:998
 #, fuzzy
 msgid "getter call used outside of a complex assignment"
 msgstr " 複素数の代入で，関数が不正です "
 
-#: src/main/subset.c:1193
+#: src/main/subset.c:1196
 msgid "$ operator not defined for this S4 class"
 msgstr ""
 
-#: src/main/subset.c:1309
+#: src/main/subset.c:1312
 msgid "$ operator is invalid for atomic vectors"
 msgstr ""
 
@@ -9174,7 +9183,7 @@ msgstr ""
 
 #: src/modules/X11/devX11.c:796 src/modules/X11/devX11.c:1631
 #: src/modules/X11/devX11.c:1638 src/modules/X11/devX11.c:1658
-#: src/modules/X11/devX11.c:1667 src/modules/X11/devX11.c:3246
+#: src/modules/X11/devX11.c:1667 src/modules/X11/devX11.c:3247
 #, fuzzy, c-format
 msgid "cairo error '%s'"
 msgstr " regcompのエラー: '%s' "
@@ -9377,73 +9386,73 @@ msgstr " XImage を作れません "
 msgid "attempt to use the locator after 'dev.hold()'"
 msgstr " dev.hold() の実行後にロケーターを使おうとしました "
 
-#: src/modules/X11/devX11.c:2746
+#: src/modules/X11/devX11.c:2747
 #, fuzzy
 msgid "that type is not supported on this platform - using \"nbcairo\""
 msgstr " このプラットフォームでは nsl 関数はサポートされていません "
 
-#: src/modules/X11/devX11.c:2760
+#: src/modules/X11/devX11.c:2761
 #, fuzzy
 msgid "cairo-based types are not supported on this build - using \"Xlib\""
 msgstr " このビルドではICUはサポートされていません "
 
-#: src/modules/X11/devX11.c:3103
+#: src/modules/X11/devX11.c:3104
 #, fuzzy, c-format
 msgid "unable to start device '%s'"
 msgstr " デバイス '%s' を開始できません "
 
-#: src/modules/X11/devX11.c:3123
+#: src/modules/X11/devX11.c:3124
 msgid "a forked child should not open a graphics device"
 msgstr ""
 
-#: src/modules/X11/devX11.c:3130
+#: src/modules/X11/devX11.c:3131
 #, fuzzy
 msgid "invalid 'width' or 'height' arguments"
 msgstr " 'width' または 'height' が不正です "
 
-#: src/modules/X11/devX11.c:3137
+#: src/modules/X11/devX11.c:3138
 #, fuzzy
 msgid "invalid 'colortype' argument passed to X11 driver"
 msgstr " 不正な色タイプが X11 ドライバーに引き渡されました "
 
-#: src/modules/X11/devX11.c:3150
+#: src/modules/X11/devX11.c:3151
 msgid "unknown X11 color/colour model -- using monochrome"
 msgstr " 未知のX11カラーモデルです（モノクロを使用します） "
 
-#: src/modules/X11/devX11.c:3240
+#: src/modules/X11/devX11.c:3241
 msgid "no plot on device to save"
 msgstr " デバイス上に保存すべきプロットがありません "
 
-#: src/modules/X11/devX11.c:3242
+#: src/modules/X11/devX11.c:3243
 #, fuzzy
 msgid "no open 'X11cairo' device"
 msgstr " X11cairoデバイスを開けません "
 
-#: src/modules/X11/devX11.c:3251
+#: src/modules/X11/devX11.c:3252
 #, c-format
 msgid "cannot open file '%s'"
 msgstr " ファイル '%s' を開くことができません "
 
-#: src/modules/X11/devX11.c:3268
+#: src/modules/X11/devX11.c:3269
 #, fuzzy
 msgid "'savePlot()' function is not supported on this build"
 msgstr " このビルドではsavePlot()はサポートされていません "
 
-#: src/modules/X11/devX11.c:3308
+#: src/modules/X11/devX11.c:3309
 msgid "unable to contact X11 display"
 msgstr " X11ディスプレイに接続できません "
 
-#: src/modules/X11/devX11.c:3317
+#: src/modules/X11/devX11.c:3318
 #, fuzzy
 msgid "X11 clipboard selection is not supported on this system"
 msgstr " このプラットフォームでは nsl 関数はサポートされていません "
 
-#: src/modules/X11/devX11.c:3357
+#: src/modules/X11/devX11.c:3358
 #, c-format
 msgid "clipboard cannot be read (error code %d)"
 msgstr " クリップボードの内容を読み込めません(エラーコード %d) "
 
-#: src/modules/X11/devX11.c:3393
+#: src/modules/X11/devX11.c:3394
 #, fuzzy
 msgid "cannot allocate memory for 'X11Routines' structure"
 msgstr " X11Routines ストラクチャにメモリを割り当てることができません "
@@ -9844,6 +9853,9 @@ msgstr " X11 モジュールをロードできません "
 #: src/unix/X11.c:145 src/unix/X11.c:151 src/unix/X11.c:157 src/unix/X11.c:163
 msgid "X11 is not available"
 msgstr " X11 が利用できません "
+
+#~ msgid "invalid multibyte string %d"
+#~ msgstr " %d は不正なマルチバイト文字です "
 
 #~ msgid "binary operations require two arguments"
 #~ msgstr " 二項演算には二つの引数が必要です "

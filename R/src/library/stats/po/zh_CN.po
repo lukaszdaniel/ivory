@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-09 22:21+0200\n"
+"POT-Creation-Date: 2015-07-07 21:37+0200\n"
 "PO-Revision-Date: 2015-01-17 15:14+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -542,7 +542,7 @@ msgstr ""
 msgid "Singular matrix in '%s' function"
 msgstr "ldet里出现了奇异矩阵"
 
-#: mAR.c:697 massdist.c:42 model.c:363 model.c:371 optim.c:191
+#: mAR.c:697 massdist.c:42 model.c:366 model.c:374 optim.c:191
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "'%s'参数不对"
@@ -586,99 +586,99 @@ msgstr "变数的长度不一样('%s')"
 msgid "invalid result from na.action"
 msgstr "na.action的结果有错"
 
-#: model.c:382
+#: model.c:385
 msgid "invalid model frame"
 msgstr "模型框不对"
 
-#: model.c:384
+#: model.c:387
 msgid "do not know how many cases"
 msgstr "案例数目不清"
 
-#: model.c:408
+#: model.c:411
 #, c-format
 msgid "variable lengths differ (found for variable %d)"
 msgstr "变数的长度不一样(变数%d)"
 
-#: model.c:412 model.c:419
+#: model.c:415 model.c:422
 #, c-format
 msgid "variable %d has no levels"
 msgstr "变数%d没有因子层"
 
-#: model.c:531
+#: model.c:534
 msgid "the response appeared on the right-hand side and was dropped"
 msgstr "在公式右手的反应略过不用"
 
-#: model.c:551
+#: model.c:554
 #, c-format
 msgid "term %d would require %.0g columns"
 msgstr "%d项需要%.0g个列"
 
-#: model.c:555
+#: model.c:558
 #, c-format
 msgid "matrix would require %.0g columns"
 msgstr "矩阵需要%.0g个列"
 
-#: model.c:566
+#: model.c:569
 #, fuzzy, c-format
 msgid "problem with term %d in model.matrix(): no columns are assigned"
 msgstr "模型矩阵的%d项有问题: 没有指定的列"
 
-#: model.c:614 model.c:619 model.c:625 model.c:636 model.c:642 model.c:648
+#: model.c:617 model.c:622 model.c:628 model.c:639 model.c:645 model.c:651
 msgid "term names will be truncated"
 msgstr "项名字太长，被缩短了"
 
-#: model.c:628
+#: model.c:631
 msgid "complex variables are not currently allowed in model matrices"
 msgstr "模型矩阵里目前不能有复数"
 
-#: model.c:652
+#: model.c:655
 #, c-format
 msgid "variables of type '%s' are not allowed in model matrices"
 msgstr "模型矩阵里不能有种类为'%s'的参数"
 
-#: model.c:873
+#: model.c:876
 msgid "invalid formula in 'update'"
 msgstr "'update'里的公式不对"
 
-#: model.c:907
+#: model.c:910
 msgid "formula expected"
 msgstr "需要公式"
 
-#: model.c:1038
+#: model.c:1041
 msgid "invalid term in model formula"
 msgstr "模型公式里有错误的项"
 
-#: model.c:1113
+#: model.c:1116
 msgid "invalid model formula"
 msgstr "模型公式不对"
 
-#: model.c:1139 model.c:1387
+#: model.c:1142 model.c:1390
 msgid "invalid power in formula"
 msgstr "公式里的幂不对"
 
-#: model.c:1175 model.c:1571
+#: model.c:1178 model.c:1574
 #, fuzzy, c-format
 msgid "invalid model formula in '%s' function"
 msgstr "EncodeVars中的模型公式不对"
 
-#: model.c:1510
+#: model.c:1513
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "在数据框里用'.'时不能有重复的名字’%s'"
 
-#: model.c:1657
+#: model.c:1660
 msgid "argument is not a valid model"
 msgstr "参数不是正确的模型"
 
-#: model.c:1667
+#: model.c:1670
 msgid "'specials' must be NULL or a character vector"
 msgstr "'specials'的值要么是NULL要么是字符矢量"
 
-#: model.c:1679
+#: model.c:1682
 msgid "'data' argument is of the wrong type"
 msgstr "'data'参数种类有错"
 
-#: model.c:1949
+#: model.c:1952
 msgid "'.' in formula and no 'data' argument"
 msgstr "公式里有'.'，而没有'data'这一参数"
 

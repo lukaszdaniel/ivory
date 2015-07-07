@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.3.0\n"
-"POT-Creation-Date: 2015-06-09 22:21\n"
+"POT-Creation-Date: 2015-07-07 21:51\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -653,6 +653,14 @@ msgstr ""
 #. R/symnum.R: gettextf("'%s' must be unique, but are = %s", "symbols", tmp_n)
 
 msgid "'%s' must be unique, but are = %s"
+msgstr ""
+
+
+#: R/cmdscale.R: 0
+#. R/cmdscale.R: gettextf("'%s' option is disregarded when '%s'", "eig=TRUE", "list.=FALSE")
+#. R/cmdscale.R: gettextf("'%s' option is disregarded when '%s'", "x.ret=TRUE", "list.=FALSE")
+
+msgid "'%s' option is disregarded when '%s'"
 msgstr ""
 
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-09 22:21\n"
+"POT-Creation-Date: 2015-07-07 21:51\n"
 "PO-Revision-Date: 2005-04-14 18:07+0200\n"
 "Last-Translator: stefano iacus <>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -490,6 +490,13 @@ msgstr "l'argomento 'sides' deve essere 1 o 2"
 #, fuzzy
 msgid "'%s' must be unique, but are = %s"
 msgstr "'cutpoints' devono essere distinti, ma sono="
+
+#. R/cmdscale.R: gettextf("'%s' option is disregarded when '%s'", "eig=TRUE", "list.=FALSE")
+#. R/cmdscale.R: gettextf("'%s' option is disregarded when '%s'", "x.ret=TRUE", "list.=FALSE")
+#: R/cmdscale.R:0
+#, fuzzy
+msgid "'%s' option is disregarded when '%s'"
+msgstr "'r' è minori di 1"
 
 #. R/friedman.test.R: gettextf("'%s', '%s' and '%s' arguments must have the same length", "y", "groups",     "blocks")
 #. R/mantelhaen.test.R: gettextf("'%s', '%s' and '%s' arguments must have the same length", "x", "y", "z")

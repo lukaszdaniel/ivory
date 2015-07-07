@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-09 22:21\n"
+"POT-Creation-Date: 2015-07-07 21:51\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -452,6 +452,12 @@ msgstr "argument '%s' zostanie zignornowany"
 #: R/symnum.R:0
 msgid "'%s' must be unique, but are = %s"
 msgstr "'%s' muszą być unikalne, ale są = %s"
+
+#. R/cmdscale.R: gettextf("'%s' option is disregarded when '%s'", "eig=TRUE", "list.=FALSE")
+#. R/cmdscale.R: gettextf("'%s' option is disregarded when '%s'", "x.ret=TRUE", "list.=FALSE")
+#: R/cmdscale.R:0
+msgid "'%s' option is disregarded when '%s'"
+msgstr "opcja '%s' jest ignorowana, gdy '%s'"
 
 #. R/friedman.test.R: gettextf("'%s', '%s' and '%s' arguments must have the same length", "y", "groups",     "blocks")
 #. R/mantelhaen.test.R: gettextf("'%s', '%s' and '%s' arguments must have the same length", "x", "y", "z")
@@ -6739,6 +6745,9 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "używanie %d/%d wiersza z połączonego dopasowania"
 msgstr[1] "używanie %d/%d wierszy z połączonego dopasowania"
 msgstr[2] "używanie %d/%d wierszy z połączonego dopasowania"
+
+#~ msgid "'x.ret=TRUE' is disregarded when 'list.=FALSE'"
+#~ msgstr "opcja 'x.ret=TRUE' jest ignorowana, gdy 'list.=FALSE'"
 
 #~ msgid "non-matched further arguments are disregarded"
 #~ msgstr "dalsze niedopasowane argumenty zostały odrzucone"
