@@ -152,6 +152,7 @@
 
 /**
  * colSums(), colMeans(),  rowSums() and rowMeans() for all sparce *gCMatrix()es
+ * @param x a ?gCMatrix, i.e. sparse column-compressed Matrix
  * @param NArm logical indicating if NA's should be remove 'na.rm' in R
  * @param spRes logical = 'sparseResult' indicating if result should be sparse
  * @param trans logical: TRUE <==> row[Sums/Means] <==> compute col*s( t(x) )
@@ -180,8 +181,7 @@ SEXP gCMatrix_colSums(SEXP x, SEXP NArm, SEXP spRes, SEXP trans, SEXP means)
 #endif
     // result value:  sparseResult (==> "*sparseVector") or dense (atomic)vector
     SEXP ans = PROTECT(sp ? NEW_OBJECT(MAKE_CLASS(SparseResult_class))
-			  : allocVector(SXP_ans, nc));
-
+		       : allocVector(SXP_ans, nc));
     if (sp) { // sparseResult, i.e. *sparseVector (never allocating length-nc)
 	int nza, i1, i2, p, *ai;
 	Type_ans *ax;
@@ -216,6 +216,11 @@ SEXP gCMatrix_colSums(SEXP x, SEXP NArm, SEXP spRes, SEXP trans, SEXP means)
     }
 
     if (tr) cholmod_free_sparse(&cx, &c);
+    if (!sp) {
+	SEXP nms = VECTOR_ELT(GET_SLOT(x, Matrix_DimNamesSym), tr ? 0 : 1);
+	if (!isNull(nms))
+	    setAttrib(ans, R_NamesSymbol, duplicate(nms));
+    }
     UNPROTECT(1);
     return ans;
 }
