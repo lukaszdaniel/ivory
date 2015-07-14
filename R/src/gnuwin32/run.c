@@ -723,28 +723,28 @@ static int Wpipe_vfprintf(Rconnection con, const char *format, va_list ap)
 
 Rconnection newWpipe(const char *description, int ienc, const char *mode)
 {
-    Rconnection new;
+    Rconnection newconn;
     char *command;
     int len;
 
-    new = (Rconnection) malloc(sizeof(struct Rconn));
-    if(!new) error(_("allocation of pipe connection failed"));
-    new->conclass = (char *) malloc(strlen("pipe") + 1);
-    if(!new->conclass) {
-	free(new);
+    newconn = (Rconnection) malloc(sizeof(struct Rconn));
+    if(!newconn) error(_("allocation of pipe connection failed"));
+    newconn->conclass = (char *) malloc(strlen("pipe") + 1);
+    if(!newconn->conclass) {
+	free(newconn);
 	error(_("allocation of pipe connection failed"));
     }
-    strcpy(new->conclass, "pipe");
+    strcpy(newconn->conclass, "pipe");
 
     len = strlen(getenv("COMSPEC")) + strlen(description) + 5;
     command = (char *) malloc(len);
     if (command)
-	new->description = (char *) malloc(len);
+	newconn->description = (char *) malloc(len);
     else
-	new->description = NULL;
+	newconn->description = NULL;
 
-    if(!new->description) {
-	free(command); free(new->conclass); free(new);
+    if(!newconn->description) {
+	free(command); free(newconn->conclass); free(newconn);
 	error(_("allocation of pipe connection failed"));
     }
 
@@ -757,25 +757,25 @@ Rconnection newWpipe(const char *description, int ienc, const char *mode)
     strcat(command, " /c ");
     strcat(command, description);
 
-    init_con(new, command, ienc, mode);
+    init_con(newconn, command, ienc, mode);
     free(command);
 
-    new->open = &Wpipe_open;
-    new->close = &Wpipe_close;
-    new->destroy = &Wpipe_destroy;
-    new->vfprintf = &Wpipe_vfprintf;
-    new->fgetc = &Wpipe_fgetc;
-    new->seek = &null_seek;
-    new->truncate = &null_truncate;
-    new->fflush = &Wpipe_fflush;
-    new->read = &Wpipe_read;
-    new->write = &Wpipe_write;
-    new->conprivate = (void *) malloc(sizeof(struct Wpipeconn));
-    if(!new->conprivate) {
-	free(new->description); free(new->conclass); free(new);
+    newconn->open = &Wpipe_open;
+    newconn->close = &Wpipe_close;
+    newconn->destroy = &Wpipe_destroy;
+    newconn->vfprintf = &Wpipe_vfprintf;
+    newconn->fgetc = &Wpipe_fgetc;
+    newconn->seek = &null_seek;
+    newconn->truncate = &null_truncate;
+    newconn->fflush = &Wpipe_fflush;
+    newconn->read = &Wpipe_read;
+    newconn->write = &Wpipe_write;
+    newconn->conprivate = (void *) malloc(sizeof(struct Wpipeconn));
+    if(!newconn->conprivate) {
+	free(newconn->description); free(newconn->conclass); free(newconn);
 	error(_("allocation of pipe connection failed"));
     }
-    return new;
+    return newconn;
 }
 
 
