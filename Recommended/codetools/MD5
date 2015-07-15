@@ -1,6 +1,6 @@
-f4dadd4dd750725cd369359e0c4b9912  DESCRIPTION
-c9baa25a442ca672cd68f42ace53e62a  Changes
+bfa795ab90bcfc1dbe831615e06147ae  DESCRIPTION
 81cf9cbfb920b873d7ae780c4dcc132b  inst/po/pl/LC_MESSAGES/R-codetools.mo
+c9baa25a442ca672cd68f42ace53e62a  Changes
 fdfe5a5dce2afdd1bd4f39b2bc4087e8  inst/po/en@quot/LC_MESSAGES/R-codetools.mo
 215ca204e6c7206111e585206cee095c  man/codetools.Rd
 31aabac379a9264e4ce819755b95b601  man/findGlobals.Rd
@@ -8,6 +8,6 @@ fdfe5a5dce2afdd1bd4f39b2bc4087e8  inst/po/en@quot/LC_MESSAGES/R-codetools.mo
 7915e973bb95db1197db9152d339f2c8  man/showTree.Rd
 d7d4587719d6cbb3083123501ec23dd3  NAMESPACE
 ecfdfce9918eeccddc2df4614c82658a  po/R-pl.po
-aa4afca91b3b5bbe3dbebde64122ee9d  R/codetools.R
+d1b832f936dec495d3557f217af5dd11  R/codetools.R
 838118aa4116e6b2d66e393dae8e4073  tests/tests.R
 1445cbf3d51be8945b23d2714e2166f3  po/R-codetools.pot
