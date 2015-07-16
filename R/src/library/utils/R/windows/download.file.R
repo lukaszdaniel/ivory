@@ -29,47 +29,54 @@ download.file <-
 
     if(missing(mode) && length(grep("\\.(gz|bz2|xz|tgz|zip|rda|RData)$", url))) mode <- "wb"
     if(method == "auto") {
-        if(capabilities("http/ftp"))
-            method <- "internal"
-        else if(length(grep("^file:", url))) {
-            method <- "internal"
-            url <- URLdecode(url)
-        } else if(system("wget --help", invisible=TRUE) == 0L)
-            method <- "wget"
-        else if(system("curl --help", invisible=TRUE) == 0L)
-            method <- "curl"
-        else
-            stop("no download method found")
+	method <-
+	    if(capabilities("http/ftp"))
+		"internal"
+	    else if(grepl("^file:", url)) {
+		url <- URLdecode(url)
+		"internal"
+	    } else if(system("wget --help", invisible=TRUE) == 0L)
+		"wget"
+	    else if(system("curl --help", invisible=TRUE) == 0L)
+		"curl"
+	    else
+		stop("no download method found")
     }
-    if(method %in% c("internal", "wininet")) {
-        status <- .External(C_download, url, destfile, quiet, mode, cacheOK,
-                            method == "wininet")
-    }
-    else if(method == "libcurl")
-        status <- .Internal(curlDownload(url, destfile, quiet, mode, cacheOK))
-    else if(method == "wget") {
-        if(length(url) != 1L || typeof(url) != "character")
-            stop(gettextf("'%s' argument must be a length-one character vector", "url"));
-        if(length(destfile) != 1L || typeof(url) != "character")
-            stop(gettextf("'%s' argument must be a length-one character vector", "destfile"));
-        if(quiet) extra <- c(extra, "--quiet")
-        if(!cacheOK) extra <- c(extra, "--cache=off")
-        status <- system(paste("wget",
-                               paste(extra, collapse = " "),
-                               shQuote(url),
-                               "-O", shQuote(path.expand(destfile))))
-    } else if(method == "curl") {
-        if(length(url) != 1L || typeof(url) != "character")
-            stop(gettextf("'%s' argument must be a length-one character vector", "url"));
-        if(length(destfile) != 1L || typeof(url) != "character")
-            stop(gettextf("'%s' argument must be a length-one character vector", "destfile"));        if(quiet) extra <- c(extra, "-s -S")
-        if(!cacheOK) extra <- c(extra, "-H 'Pragma: no-cache'")
-        status <- system(paste("curl",
-                               paste(extra, collapse = " "),
-                               shQuote(url),
-                               " -o", shQuote(path.expand(destfile))))
-    } else if(method == "lynx")
-        stop("method 'lynx' is defunct as from R 3.1.0", domain = "R-utils")
+
+    switch(method,
+	   "internal" =, "wininet" = {
+	       status <- .External(C_download, url, destfile, quiet, mode, cacheOK,
+				   method == "wininet")
+	   },
+	   "libcurl" = {
+	       status <- .Internal(curlDownload(url, destfile, quiet, mode, cacheOK))
+	   },
+	   "wget" = {
+	       if(length(url) != 1L || typeof(url) != "character")
+		   stop(gettextf("'%s' argument must be a length-one character vector", "url"));
+	       if(length(destfile) != 1L || typeof(destfile) != "character")
+		   stop(gettextf("'%s' argument must be a length-one character vector", "destfile"));
+	       if(quiet) extra <- c(extra, "--quiet")
+	       if(!cacheOK) extra <- c(extra, "--cache=off")
+	       status <- system(paste("wget",
+				      paste(extra, collapse = " "),
+				      shQuote(url),
+				      "-O", shQuote(path.expand(destfile))))
+	   },
+	   "curl" = {
+	       if(length(url) != 1L || typeof(url) != "character")
+		   stop(gettextf("'%s' argument must be a length-one character vector", "url"));
+	       if(length(destfile) != 1L || typeof(url) != "character")
+		   stop(gettextf("'%s' argument must be a length-one character vector", "destfile"));        if(quiet) extra <- c(extra, "-s -S")
+	       if(quiet) extra <- c(extra, "-s -S")
+	       if(!cacheOK) extra <- c(extra, "-H 'Pragma: no-cache'")
+	       status <- system(paste("curl",
+				      paste(extra, collapse = " "),
+				      shQuote(url),
+				      " -o", shQuote(path.expand(destfile))))
+	   },
+	   "lynx" =
+	       stop("method 'lynx' is defunct as from R 3.1.0", domain = "R-utils"))
 
     if(status > 0L) warning("download had nonzero exit status")
 

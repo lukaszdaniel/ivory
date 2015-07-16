@@ -51,39 +51,27 @@
 	LOOP_WITH_INTERRUPT_CHECK(R_ITERATE_CORE, ncheck, n, i, loop_body); \
     } while (0)
 
-/* i1 = i % n1; i2 = i % n2;
- * this macro is quite a bit faster than having real modulo calls
- * in the loop (tested on Intel and Sparc)
- */
-/* See arithmetic.c */
-#define mod_iterate(n1,n2,i1,i2)   \
- for (i=i1=i2=0; i<n;              \
-        i1 = (++i1 == n1) ? 0 : i1,\
-        i2 = (++i2 == n2) ? 0 : i2,\
-        ++i)
-#define mod_iterate3(n1,n2,n3,i1,i2,i3) \
- for (i=i1=i2=i3=0; i<n;                \
-        i1 = (++i1==n1) ? 0 : i1,       \
-        i2 = (++i2==n2) ? 0 : i2,       \
-        i3 = (++i3==n3) ? 0 : i3,       \
-        ++i)
-#define mod_iterate4(n1,n2,n3,n4,i1,i2,i3,i4) \
- for (i=i1=i2=i3=i4=0; i<n;                   \
-        i1 = (++i1==n1) ? 0 : i1,             \
-        i2 = (++i2==n2) ? 0 : i2,             \
-        i3 = (++i3==n3) ? 0 : i3,             \
-        i4 = (++i4==n4) ? 0 : i4,             \
-        ++i)
-#define mod_iterate5(n1,n2,n3,n4,n5, i1,i2,i3,i4,i5) \
- for (i=i1=i2=i3=i4=i5=0; i<n;                       \
-        i1 = (++i1==n1) ? 0 : i1,                    \
-        i2 = (++i2==n2) ? 0 : i2,                    \
-        i3 = (++i3==n3) ? 0 : i3,                    \
-        i4 = (++i4==n4) ? 0 : i4,                    \
-        i5 = (++i5==n5) ? 0 : i5,                    \
-        ++i)
 
-#define MOD_ITERATE_CORE(n, n1, n2, i, i1, i2, loop_body) do {	\
+#define MOD_ITERATE1_CORE(n, n1, i, i1, loop_body) do {	\
+	for (; i < n;							\
+	     i1 = (++i1 == n1) ? 0 : i1,				\
+		 ++i) {							\
+	    loop_body							\
+		}							\
+    } while (0)
+
+#define MOD_ITERATE1(n, n1, i, i1, loop_body) do {	\
+	i = i1 = 0;					\
+	MOD_ITERATE1_CORE(n, n1, i, i1, loop_body);	\
+    } while (0)
+
+#define MOD_ITERATE1_CHECK(ncheck, n, n1, i, i1, loop_body) do {	\
+	i = i1 = 0;							\
+	LOOP_WITH_INTERRUPT_CHECK(MOD_ITERATE1_CORE, ncheck, n,		\
+				  n1, i, i1, loop_body);		\
+    } while (0)
+
+#define MOD_ITERATE2_CORE(n, n1, n2, i, i1, i2, loop_body) do {	\
 	for (; i < n;							\
 	     i1 = (++i1 == n1) ? 0 : i1,				\
 		 i2 = (++i2 == n2) ? 0 : i2,				\
@@ -92,16 +80,20 @@
 		}							\
     } while (0)
 
-#define MOD_ITERATE(n, n1, n2, i, i1, i2, loop_body) do {	\
+#define MOD_ITERATE2(n, n1, n2, i, i1, i2, loop_body) do {	\
 	i = i1 = i2 = 0;					\
-	MOD_ITERATE_CORE(n, n1, n2, i, i1, i2, loop_body);	\
+	MOD_ITERATE2_CORE(n, n1, n2, i, i1, i2, loop_body);	\
     } while (0)
 
-#define MOD_ITERATE_CHECK(ncheck, n, n1, n2, i, i1, i2, loop_body) do {	\
+#define MOD_ITERATE2_CHECK(ncheck, n, n1, n2, i, i1, i2, loop_body) do {	\
 	i = i1 = i2 = 0;						\
-	LOOP_WITH_INTERRUPT_CHECK(MOD_ITERATE_CORE, ncheck, n,		\
+	LOOP_WITH_INTERRUPT_CHECK(MOD_ITERATE2_CORE, ncheck, n,		\
 				  n1, n2, i, i1, i2, loop_body);	\
     } while (0)
+
+#define MOD_ITERATE MOD_ITERATE2
+#define MOD_ITERATE_CORE MOD_ITERATE2_CORE
+#define MOD_ITERATE_CHECK MOD_ITERATE2_CHECK
 
 #define MOD_ITERATE3_CORE(n, n1, n2, n3, i, i1, i2, i3, loop_body) do {	\
 	for (; i < n;							\

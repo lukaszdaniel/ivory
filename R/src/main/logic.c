@@ -25,6 +25,7 @@
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
+#include <R_ext/Itermacros.h>
 
 /* interval at which to check interrupts, a guess */
 // #define NINTERRUPT 10000000
@@ -287,7 +288,7 @@ SEXP attribute_hidden do_logic2(SEXP call, SEXP op, SEXP args, SEXP env)
 
 static SEXP binaryLogic(int code, SEXP s1, SEXP s2)
 {
-    R_xlen_t i, n, n1, n2;
+    R_xlen_t i, n, n1, n2, i1, i2;
     int x1, x2;
     SEXP ans;
 
@@ -302,30 +303,30 @@ static SEXP binaryLogic(int code, SEXP s1, SEXP s2)
 
     switch (code) {
     case 1:		/* & : AND */
-	for (i = 0; i < n; i++) {
+	MOD_ITERATE2(n, n1, n2, i, i1, i2, {
 //	    if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
-	    x1 = LOGICAL(s1)[i % n1];
-	    x2 = LOGICAL(s2)[i % n2];
+	    x1 = LOGICAL(s1)[i1];
+	    x2 = LOGICAL(s2)[i2];
 	    if (x1 == 0 || x2 == 0)
 		LOGICAL(ans)[i] = 0;
 	    else if (x1 == NA_LOGICAL || x2 == NA_LOGICAL)
 		LOGICAL(ans)[i] = NA_LOGICAL;
 	    else
 		LOGICAL(ans)[i] = 1;
-	}
+	});
 	break;
     case 2:		/* | : OR */
-	for (i = 0; i < n; i++) {
+	MOD_ITERATE2(n, n1, n2, i, i1, i2, {
 //	    if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
-	    x1 = LOGICAL(s1)[i % n1];
-	    x2 = LOGICAL(s2)[i % n2];
+	    x1 = LOGICAL(s1)[i1];
+	    x2 = LOGICAL(s2)[i2];
 	    if ((x1 != NA_LOGICAL && x1) || (x2 != NA_LOGICAL && x2))
 		LOGICAL(ans)[i] = 1;
 	    else if (x1 == 0 && x2 == 0)
 		LOGICAL(ans)[i] = 0;
 	    else
 		LOGICAL(ans)[i] = NA_LOGICAL;
-	}
+	});
 	break;
     case 3:
 	error(_("Unary operator '!' called with two arguments"));
@@ -336,7 +337,7 @@ static SEXP binaryLogic(int code, SEXP s1, SEXP s2)
 
 static SEXP binaryLogic2(int code, SEXP s1, SEXP s2)
 {
-    R_xlen_t i, n, n1, n2;
+    R_xlen_t i, n, n1, n2, i1, i2;
     Rbyte x1, x2;
     SEXP ans;
 
@@ -351,20 +352,20 @@ static SEXP binaryLogic2(int code, SEXP s1, SEXP s2)
 
     switch (code) {
     case 1:		/* & : AND */
-	for (i = 0; i < n; i++) {
+	MOD_ITERATE2(n, n1, n2, i, i1, i2, {
 //	    if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
-	    x1 = RAW(s1)[i % n1];
-	    x2 = RAW(s2)[i % n2];
+	    x1 = RAW(s1)[i1];
+	    x2 = RAW(s2)[i2];
 	    RAW(ans)[i] = x1 & x2;
-	}
+	});
 	break;
     case 2:		/* | : OR */
-	for (i = 0; i < n; i++) {
+	MOD_ITERATE2(n, n1, n2, i, i1, i2, {
 //	    if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
-	    x1 = RAW(s1)[i % n1];
-	    x2 = RAW(s2)[i % n2];
+	    x1 = RAW(s1)[i1];
+	    x2 = RAW(s2)[i2];
 	    RAW(ans)[i] = x1 | x2;
-	}
+	});
 	break;
     }
     return ans;
