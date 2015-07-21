@@ -74,7 +74,7 @@
 
       \item \code{type.convert("i")} now returns a factor instead of a
       complex value with zero real part and missing imaginary part.
-      
+
       \item Graphics devices \code{cairo_pdf()} and \code{cairo_ps()}
       now allow non-default values of the cairographics \sQuote{fallback
 	resolution} to be set.
@@ -97,9 +97,17 @@
 
   \subsection{DEPRECATED AND DEFUNCT}{
     \itemize{
-      \item The included versions of \code{zlib}, \code{bzip2},
+      \item The previously included versions of \code{zlib}, \code{bzip2},
       \code{xz} and PCRE have been removed, so system versions are
-      required (see the \sQuote{R Installation and Administration} manual).
+      required (see the \sQuote{R Installation and Administration}
+      manual).
+    }
+  }
+
+  \subsection{INSTALLATION and INCLUDED SOFTWARE}{
+    \itemize{
+      \item Support for very old versions of \command{valgrind}
+      (e.g. 3.3.0) has been removed.
     }
   }
 
@@ -113,8 +121,9 @@
       name \code{x} matches \code{colSums()} such that error messages
       are correct.
 
-      \item A \code{coef.maov()} method has been added to allow
-      \code{vcov()} to work with multivariate results. (\PR{16380})
+      \item A \code{coef()} method for class \code{"maov"} has been
+      added to allow \code{vcov()} to work with multivariate
+      results. (\PR{16380})
     }
   }
 }
@@ -142,6 +151,16 @@
       preference to HTTP mirrors.
     }
   }
+
+  \subsection{C-LEVEL FACILITIES}{
+    \itemize{
+      \item Header \file{Rconfig.h} now defines \code{HAVE_ALLOCA_H} if
+      the platform has the \file{alloca.h} header (it is needed to
+      define \code{alloca} on Solaris and AIX, at least: see
+      \sQuote{Writing R Extensions} for how to use it).
+    }
+  }
+
   \subsection{BUG FIXES}{
     \itemize{
       \item The HTML help page links to demo code failed due to a change
@@ -191,6 +210,11 @@
 
       \item \code{qt(*, df=Inf, ncp=.)} now uses the natural
       \code{qnorm()} limit instead of returning \code{NaN}. (\PR{16475})
+
+      \item Auto-printing of S3 and S4 values now searches for
+      \code{print()} in the base namespace and \code{show()} in the
+      \pkg{methods} namespace instead of searching the global
+      environment.
     }
   }
 }
