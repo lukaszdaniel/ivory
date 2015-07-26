@@ -1402,11 +1402,24 @@ setRlibs <-
             Rcmd <-
                 paste("options(warn=1)\n",
                       sprintf("tools:::.check_code_usage_in_package(package = \"%s\")\n", pkgname))
-            out3 <- if(config_val_to_logical(Sys.getenv("_R_CHECK_CODE_USAGE_WITH_ONLY_BASE_ATTACHED_",
-                                                        "false")))
-                R_runR2(Rcmd, "R_DEFAULT_PACKAGES=NULL")
-            else
-                R_runR2(Rcmd, "R_DEFAULT_PACKAGES=")
+            if(config_val_to_logical(Sys.getenv("_R_CHECK_CODE_USAGE_WITH_ONLY_BASE_ATTACHED_",
+                                                "false"))) {
+                out3 <-  R_runR2(Rcmd, "R_DEFAULT_PACKAGES=NULL")
+                if(length(pos <-
+                          grep("^Undefined global functions or variables:",
+                               out3))) {
+                    Rcmd <-
+                        sprintf("writeLines(strwrap(tools:::imports_for_undefined_globals(\"%s\"), exdent = 11))\n",
+                                paste(utils::tail(out3, -pos),
+                                      collapse = " "))
+                    miss <- R_runR2(Rcmd, "R_DEFAULT_PACKAGES=")
+                    if(length(miss))
+                        out3 <- c(out3,
+                                  c(gettextf("Consider adding %s to your NAMESPACE.",
+                                    paste0("  ", miss), domain = "R-tools")))
+                }
+            } else
+                out3 <-  R_runR2(Rcmd, "R_DEFAULT_PACKAGES=")
         }
 
         if(!is_base_pkg && R_check_use_codetools && R_check_dot_internal) {
@@ -2852,7 +2865,7 @@ setRlibs <-
                               out, value = TRUE, useBytes = TRUE)
                 if (status) {
                     noteLog(Log)
-                    out <- utils::tail(out, 25)
+                    out <- utils::tail(out, as.numeric(Sys.getenv("_R_CHECK_VIGNETTES_NLINES_", 25)))
                     printLog0(Log,
                               paste(c(gettext("Error in re-building vignettes:", domain = "R-tools"), "  ...", out, "", ""), collapse = "\n"))
                 } else if(nw <- length(warns)) {
