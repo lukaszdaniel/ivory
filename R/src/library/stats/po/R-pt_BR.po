@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-07-07 21:51\n"
+"POT-Creation-Date: 2015-07-29 22:13\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -6461,6 +6461,12 @@ msgstr "comprimento errado para 'fixed'"
 #: R/ppr.R:0
 msgid "wrong number of columns in 'x'"
 msgstr ""
+
+#. R/contr.poly.R: stop("wrong number of columns in new data: ", deparse(substitute(...)))
+#: R/contr.poly.R:0
+#, fuzzy
+msgid "wrong number of columns in new data:"
+msgstr "número errado de linhas na matriz de contraste"
 
 #. R/contrast.R: stop("wrong number of contrast matrix rows")
 #: R/contrast.R:0

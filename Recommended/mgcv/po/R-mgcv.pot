@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: mgcv 1.8-6\n"
-"POT-Creation-Date: 2015-04-20 18:54\n"
+"Project-Id-Version: mgcv 1.8-7\n"
+"POT-Creation-Date: 2015-07-29 22:15\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -293,6 +293,13 @@ msgstr ""
 
 
 #: R/mgcv.r: 0
+#. R/mgcv.r: warning("'S.scale' vector doesn't match S list - please report to maintainer")
+
+msgid "'S.scale' vector doesn't match S list - please report to maintainer"
+msgstr ""
+
+
+#: R/mgcv.r: 0
 #. R/mgcv.r: stop("'X' lost dimensions in magic!!")
 
 msgid "'X' lost dimensions in magic!!"
@@ -339,6 +346,7 @@ msgstr ""
 
 
 #: R/bam.r: 0
+#. R/bam.r: stop("'family' argument seems not to be a valid family object")
 #. R/bam.r: stop("'family' argument seems not to be a valid family object")
 #. R/bam.r: stop("'family' argument seems not to be a valid family object")
 
@@ -471,6 +479,13 @@ msgstr ""
 #. R/mgcv.r: stop("'sp' is too short")
 
 msgid "'sp' is too short"
+msgstr ""
+
+
+#: R/bam.r: 0
+#. R/bam.r: warning("'sparse=TRUE' option is deprecated")
+
+msgid "'sparse=TRUE' option is deprecated"
 msgstr ""
 
 
@@ -823,6 +838,7 @@ msgstr ""
 #: R/mgcv.r: 0
 #. R/bam.r: gettextf("Deviance = %s Iterations - %d", dev, iter, domain = "R-mgcv")
 #. R/bam.r: gettextf("Deviance = %s Iterations - %d", dev, iter, domain = "R-mgcv")
+#. R/bam.r: gettextf("Deviance = %s Iterations - %d", dev, iter, domain = "R-mgcv")
 #. R/gam.fit3.r: gettextf("Deviance = %s Iterations - %d", dev, iter, domain = "R-mgcv")
 #. R/mgcv.r: gettextf("Deviance = %s Iterations - %d", dev, iter, domain = "R-mgcv")
 
@@ -1027,6 +1043,13 @@ msgstr ""
 #. R/plots.r: gettext("Histogram of residuals", domain = "R-mgcv")
 
 msgid "Histogram of residuals"
+msgstr ""
+
+
+#: R/gam.fit3.r: 0
+#. R/gam.fit3.r: warning("Huber scale estiamte not converged")
+
+msgid "Huber scale estiamte not converged"
 msgstr ""
 
 
@@ -1317,6 +1340,7 @@ msgstr ""
 #: R/bam.r: 0
 #. R/bam.r: stop("Non-finite deviance")
 #. R/bam.r: stop("Non-finite deviance")
+#. R/bam.r: stop("Non-finite deviance")
 
 msgid "Non-finite deviance"
 msgstr ""
@@ -1409,13 +1433,6 @@ msgstr ""
 #. R/mgcv.r: warning("Pearson residuals are not available for this family - returning deviance residuals")
 
 msgid "Pearson residuals are not available for this family - returning deviance residuals"
-msgstr ""
-
-
-#: R/gam.fit3.r: 0
-#. R/gam.fit3.r: warning("Pearson scale estimate maybe unstable. See '?gam.scale'.")
-
-msgid "Pearson scale estimate maybe unstable. See '?gam.scale'."
 msgstr ""
 
 
@@ -1776,6 +1793,13 @@ msgid "a parametric penalty has wrong dimension"
 msgstr ""
 
 
+#: R/bam.r: 0
+#. R/bam.r: warning("algorithm did not converge")
+
+msgid "algorithm did not converge"
+msgstr ""
+
+
 #: R/gamm.r: 0
 #. R/gamm.r: stop("all elements of random list must be named")
 
@@ -1889,6 +1913,7 @@ msgstr ""
 #: R/bam.r: 0
 #. R/bam.r: stop("cannot find valid starting values: please specify some")
 #. R/bam.r: stop("cannot find valid starting values: please specify some")
+#. R/bam.r: stop("cannot find valid starting values: please specify some")
 
 msgid "cannot find valid starting values: please specify some"
 msgstr ""
@@ -1952,6 +1977,13 @@ msgid "cubic spline only deals with 1D data"
 msgstr ""
 
 
+#: R/bam.r: 0
+#. R/bam.r: stop("currently discrete methods do not handle by variables")
+
+msgid "currently discrete methods do not handle by variables"
+msgstr ""
+
+
 #: R/smooth.r: 0
 #. R/smooth.r: stop("data contain regions that are not contained in the knot specification")
 
@@ -1993,6 +2025,34 @@ msgstr ""
 #. R/mgcv.r: stop("dimensions of supplied 'w' argument is wrong")
 
 msgid "dimensions of supplied 'w' argument is wrong"
+msgstr ""
+
+
+#: R/bam.r: 0
+#. R/bam.r: warning("discrete method does not use parallel cluster - use nthreads instead")
+
+msgid "discrete method does not use parallel cluster - use nthreads instead"
+msgstr ""
+
+
+#: R/bam.r: 0
+#. R/bam.r: stop("discretization can not handle factor by variables")
+
+msgid "discretization can not handle factor by variables"
+msgstr ""
+
+
+#: R/bam.r: 0
+#. R/bam.r: stop("discretization can not handle smooth ids")
+
+msgid "discretization can not handle smooth ids"
+msgstr ""
+
+
+#: R/bam.r: 0
+#. R/bam.r: warning("discretization only available with fREML")
+
+msgid "discretization only available with fREML"
 msgstr ""
 
 
@@ -2052,6 +2112,13 @@ msgid "factor 'by' variables can not be used with matrix arguments"
 msgstr ""
 
 
+#: R/gamm.r: 0
+#. R/gamm.r: warning("family are not designed for use with 'gamm()' function!")
+
+msgid "family are not designed for use with 'gamm()' function!"
+msgstr ""
+
+
 #: R/jagam.r: 0
 #. R/jagam.r: stop("family not implemented yet")
 
@@ -2100,6 +2167,7 @@ msgstr ""
 #: R/mgcv.r: 0
 #. R/bam.r: warning("fitted probabilities numerically 0 or 1 occurred")
 #. R/bam.r: warning("fitted probabilities numerically 0 or 1 occurred")
+#. R/bam.r: warning("fitted probabilities numerically 0 or 1 occurred")
 #. R/gam.fit3.r: warning("fitted probabilities numerically 0 or 1 occurred")
 #. R/mgcv.r: warning("fitted probabilities numerically 0 or 1 occurred")
 
@@ -2110,6 +2178,7 @@ msgstr ""
 #: R/bam.r: 0
 #: R/gam.fit3.r: 0
 #: R/mgcv.r: 0
+#. R/bam.r: warning("fitted rates numerically 0 occurred")
 #. R/bam.r: warning("fitted rates numerically 0 occurred")
 #. R/bam.r: warning("fitted rates numerically 0 occurred")
 #. R/gam.fit3.r: warning("fitted rates numerically 0 occurred")
@@ -2259,6 +2328,13 @@ msgstr ""
 #. R/mgcv.r: gettextf("inner loop %d; can't correct step size", 2)
 
 msgid "inner loop %d; can't correct step size"
+msgstr ""
+
+
+#: R/misc.r: 0
+#. R/misc.r: stop("internal error in vcorr, please report to simon.wood@r-project.org")
+
+msgid "internal error in vcorr, please report to simon.wood@r-project.org"
 msgstr ""
 
 
@@ -2623,6 +2699,13 @@ msgstr ""
 #. R/mgcv.r: warning("non-existent terms requested - ignoring")
 
 msgid "non-existent terms requested - ignoring"
+msgstr ""
+
+
+#: R/bam.r: 0
+#. R/bam.r: gettextf("non-finite coefficients at iteration %d", iter)
+
+msgid "non-finite coefficients at iteration %d"
 msgstr ""
 
 
@@ -3158,6 +3241,13 @@ msgstr ""
 #. R/mgcv.r: stop("unknown smoothness selection criterion")
 
 msgid "unknown smoothness selection criterion"
+msgstr ""
+
+
+#: R/bam.r: 0
+#. R/bam.r: warning("unknown tensor constraint type")
+
+msgid "unknown tensor constraint type"
 msgstr ""
 
 

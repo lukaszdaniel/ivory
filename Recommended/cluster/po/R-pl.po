@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cluster 1.14.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-20 21:43\n"
+"POT-Creation-Date: 2015-07-29 22:14\n"
 "PO-Revision-Date: 2015-02-25 19:27+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -32,9 +32,7 @@ msgstr "%s jest obiektem klasy \"dist\", ale powinien być macierzą lub ramką"
 
 #. R/agnes.q: gettextf("%s is not a numeric dataframe or matrix.", dataname)
 #. R/clara.q: gettextf("%s is not a numeric dataframe or matrix.", dataname)
-#. R/diana.q: gettextf("%s is not a numeric dataframe or matrix.", dataname)
-#. R/fanny.q: gettextf("%s is not a numeric dataframe or matrix.", dataname)
-#: R/agnes.q:0 R/clara.q:0 R/diana.q:0 R/fanny.q:0
+#: R/agnes.q:0 R/clara.q:0
 msgid "%s is not a numeric dataframe or matrix."
 msgstr "%s nie jest ramką liczbową ani też macierzą"
 
@@ -61,8 +59,10 @@ msgstr "%s musi zawierać nazwy kolumn lub liczby"
 msgid "'%s' argument is not a dataframe or a numeric matrix."
 msgstr "%s nie jest ramką danych ani też macierzą liczbową"
 
+#. R/diana.q: gettextf("'%s' argument is not a numeric dataframe or matrix.", "x")
+#. R/fanny.q: gettextf("'%s' argument is not a numeric dataframe or matrix.", "x")
 #. R/pam.q: gettextf("'%s' argument is not a numeric dataframe or matrix.", "x")
-#: R/pam.q:0
+#: R/diana.q:0 R/fanny.q:0 R/pam.q:0
 msgid "'%s' argument is not a numeric dataframe or matrix."
 msgstr "argument '%s' nie jest ramką liczbową ani też macierzą."
 

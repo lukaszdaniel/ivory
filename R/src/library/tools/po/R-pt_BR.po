@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-07-07 21:37\n"
+"POT-Creation-Date: 2015-07-29 22:14\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Colin Robert <beasley@ufpa.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -699,6 +699,11 @@ msgstr ""
 #. R/QC.R: gettextf("\nConflicting package names (submitted: %s, existing: %s)", y[[1L]], y[[2L]],     domain = "R-tools")
 #: R/QC.R:0
 msgid "Conflicting package names (submitted: %s, existing: %s)"
+msgstr ""
+
+#. R/check.R: gettextf("Consider adding %s to your NAMESPACE.", paste0("  ", miss), domain = "R-tools")
+#: R/check.R:0
+msgid "Consider adding %s to your NAMESPACE."
 msgstr ""
 
 #. R/check.R: gettextf("\nConsider the use of a .Rinstignore file: see %s,\nor move the vignette sources from %s to %s.\n",     sQuote("Writing R Extensions"), sQuote("inst/doc"), sQuote("vignettes"), domain = "R-tools")

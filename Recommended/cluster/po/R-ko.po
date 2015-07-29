@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: cluster 1.15.2\n"
-"POT-Creation-Date: 2015-06-20 21:43\n"
+"POT-Creation-Date: 2015-07-29 22:14\n"
 "PO-Revision-Date: 2015-02-06 21:56-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -45,9 +45,7 @@ msgstr ""
 
 #. R/agnes.q: gettextf("%s is not a numeric dataframe or matrix.", dataname)
 #. R/clara.q: gettextf("%s is not a numeric dataframe or matrix.", dataname)
-#. R/diana.q: gettextf("%s is not a numeric dataframe or matrix.", dataname)
-#. R/fanny.q: gettextf("%s is not a numeric dataframe or matrix.", dataname)
-#: R/agnes.q:0 R/clara.q:0 R/diana.q:0 R/fanny.q:0
+#: R/agnes.q:0 R/clara.q:0
 #, fuzzy
 msgid "%s is not a numeric dataframe or matrix."
 msgstr "x는 수치형 데이터 프레임 또는 행렬이 아닙니다."
@@ -76,8 +74,10 @@ msgstr "%s는 반드시 열 이름 또는 번호를 포함해야 합니다."
 msgid "'%s' argument is not a dataframe or a numeric matrix."
 msgstr "x는 데이터 프레임이 아니거나 수치형 행렬이 아닙니다."
 
+#. R/diana.q: gettextf("'%s' argument is not a numeric dataframe or matrix.", "x")
+#. R/fanny.q: gettextf("'%s' argument is not a numeric dataframe or matrix.", "x")
 #. R/pam.q: gettextf("'%s' argument is not a numeric dataframe or matrix.", "x")
-#: R/pam.q:0
+#: R/diana.q:0 R/fanny.q:0 R/pam.q:0
 #, fuzzy
 msgid "'%s' argument is not a numeric dataframe or matrix."
 msgstr "x는 수치형 데이터 프레임 또는 행렬이 아닙니다."

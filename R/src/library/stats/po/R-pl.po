@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-07 21:51\n"
+"POT-Creation-Date: 2015-07-29 22:13\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -6294,6 +6294,12 @@ msgstr "błędna metoda"
 #. R/ppr.R: stop("wrong number of columns in 'x'")
 #: R/ppr.R:0
 msgid "wrong number of columns in 'x'"
+msgstr "niepoprawna liczba kolumn w 'x'"
+
+#. R/contr.poly.R: stop("wrong number of columns in new data: ", deparse(substitute(...)))
+#: R/contr.poly.R:0
+#, fuzzy
+msgid "wrong number of columns in new data:"
 msgstr "niepoprawna liczba kolumn w 'x'"
 
 #. R/contrast.R: stop("wrong number of contrast matrix rows")

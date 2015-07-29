@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-07 21:37\n"
+"POT-Creation-Date: 2015-07-29 22:14\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -747,6 +747,11 @@ msgstr "Warunek musi być \\Sexpr lub płaskim tekstem"
 #: R/QC.R:0
 msgid "Conflicting package names (submitted: %s, existing: %s)"
 msgstr "Nazwy pakietów w konflikcie (wprowadzone: %s, istniejące: %s)"
+
+#. R/check.R: gettextf("Consider adding %s to your NAMESPACE.", paste0("  ", miss), domain = "R-tools")
+#: R/check.R:0
+msgid "Consider adding %s to your NAMESPACE."
+msgstr ""
 
 #. R/check.R: gettextf("\nConsider the use of a .Rinstignore file: see %s,\nor move the vignette sources from %s to %s.\n",     sQuote("Writing R Extensions"), sQuote("inst/doc"), sQuote("vignettes"), domain = "R-tools")
 #: R/check.R:0

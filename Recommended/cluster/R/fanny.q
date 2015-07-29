@@ -33,7 +33,7 @@ fanny <- function(x, k, diss = inherits(x, "dist"), memb.exp = 2,
     else {
 	## check input matrix and standardize, if necessary
 	x <- data.matrix(x)
-	if(!is.numeric(x)) stop(gettextf("%s is not a numeric dataframe or matrix.", dataname))
+	if(!is.numeric(x)) stop(gettextf("'%s' argument is not a numeric dataframe or matrix.", "x"))
 	x2 <- if(stand) scale(x, scale = apply(x, 2, meanabsdev)) else x
 	metric <- match.arg(metric)
 	## put info about metric, size and NAs in arguments for the Fortran call

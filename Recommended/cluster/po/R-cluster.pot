@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: cluster 2.0.2\n"
-"POT-Creation-Date: 2015-06-20 21:43\n"
+"Project-Id-Version: cluster 2.0.3\n"
+"POT-Creation-Date: 2015-07-29 22:14\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,12 +34,8 @@ msgstr ""
 
 #: R/agnes.q: 0
 #: R/clara.q: 0
-#: R/diana.q: 0
-#: R/fanny.q: 0
 #. R/agnes.q: gettextf("%s is not a numeric dataframe or matrix.", dataname)
 #. R/clara.q: gettextf("%s is not a numeric dataframe or matrix.", dataname)
-#. R/diana.q: gettextf("%s is not a numeric dataframe or matrix.", dataname)
-#. R/fanny.q: gettextf("%s is not a numeric dataframe or matrix.", dataname)
 
 msgid "%s is not a numeric dataframe or matrix."
 msgstr ""
@@ -73,7 +69,11 @@ msgid "'%s' argument is not a dataframe or a numeric matrix."
 msgstr ""
 
 
+#: R/diana.q: 0
+#: R/fanny.q: 0
 #: R/pam.q: 0
+#. R/diana.q: gettextf("'%s' argument is not a numeric dataframe or matrix.", "x")
+#. R/fanny.q: gettextf("'%s' argument is not a numeric dataframe or matrix.", "x")
 #. R/pam.q: gettextf("'%s' argument is not a numeric dataframe or matrix.", "x")
 
 msgid "'%s' argument is not a numeric dataframe or matrix."

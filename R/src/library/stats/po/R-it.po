@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-07-07 21:51\n"
+"POT-Creation-Date: 2015-07-29 22:13\n"
 "PO-Revision-Date: 2005-04-14 18:07+0200\n"
 "Last-Translator: stefano iacus <>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -6512,6 +6512,12 @@ msgstr "'endrule' sbagliata"
 #. R/ppr.R: stop("wrong number of columns in 'x'")
 #: R/ppr.R:0
 msgid "wrong number of columns in 'x'"
+msgstr "numero di colonne sbagliate in 'x'"
+
+#. R/contr.poly.R: stop("wrong number of columns in new data: ", deparse(substitute(...)))
+#: R/contr.poly.R:0
+#, fuzzy
+msgid "wrong number of columns in new data:"
 msgstr "numero di colonne sbagliate in 'x'"
 
 #. R/contrast.R: stop("wrong number of contrast matrix rows")

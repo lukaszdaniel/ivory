@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.3\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-04-20 18:54\n"
+"POT-Creation-Date: 2015-07-29 22:15\n"
 "PO-Revision-Date: 2015-02-21 16:01-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -276,6 +276,11 @@ msgstr "L이 가지고 있는 행의 개수는 적어도 열의 개수만큼 있
 msgid "'L' has wrong dimension in 'paraPen'"
 msgstr "`paraPen'내에 있는 L의 차원(dimension)이 올바르지 않습니다."
 
+#. R/mgcv.r: warning("'S.scale' vector doesn't match S list - please report to maintainer")
+#: R/mgcv.r:0
+msgid "'S.scale' vector doesn't match S list - please report to maintainer"
+msgstr ""
+
 #. R/mgcv.r: stop("'X' lost dimensions in magic!!")
 #: R/mgcv.r:0
 msgid "'X' lost dimensions in magic!!"
@@ -316,6 +321,7 @@ msgstr "by=.는 사용할 수 없습니다."
 msgid "'d' can not be negative in call passed to 'null.space.dimension()'"
 msgstr "null.space.dimension()에 지정된 인자 d는 음수를 가질 수 없습니다."
 
+#. R/bam.r: stop("'family' argument seems not to be a valid family object")
 #. R/bam.r: stop("'family' argument seems not to be a valid family object")
 #. R/bam.r: stop("'family' argument seems not to be a valid family object")
 #: R/bam.r:0
@@ -432,6 +438,11 @@ msgstr "`paraPen'내에 있는 `sp'의 차원(dimension)이 올바르지 않습�
 #, fuzzy
 msgid "'sp' is too short"
 msgstr "`sp'의 길이가 너무 짧습니다."
+
+#. R/bam.r: warning("'sparse=TRUE' option is deprecated")
+#: R/bam.r:0
+msgid "'sparse=TRUE' option is deprecated"
+msgstr ""
 
 #. R/mgcv.r: warning("'test' argument ignored")
 #: R/mgcv.r:0
@@ -697,6 +708,7 @@ msgstr ""
 
 #. R/bam.r: gettextf("Deviance = %s Iterations - %d", dev, iter, domain = "R-mgcv")
 #. R/bam.r: gettextf("Deviance = %s Iterations - %d", dev, iter, domain = "R-mgcv")
+#. R/bam.r: gettextf("Deviance = %s Iterations - %d", dev, iter, domain = "R-mgcv")
 #. R/gam.fit3.r: gettextf("Deviance = %s Iterations - %d", dev, iter, domain = "R-mgcv")
 #. R/mgcv.r: gettextf("Deviance = %s Iterations - %d", dev, iter, domain = "R-mgcv")
 #: R/bam.r:0 R/gam.fit3.r:0 R/mgcv.r:0
@@ -849,6 +861,11 @@ msgstr ""
 #. R/plots.r: gettext("Histogram of residuals", domain = "R-mgcv")
 #: R/plots.r:0
 msgid "Histogram of residuals"
+msgstr ""
+
+#. R/gam.fit3.r: warning("Huber scale estiamte not converged")
+#: R/gam.fit3.r:0
+msgid "Huber scale estiamte not converged"
 msgstr ""
 
 #. R/mgcv.r: stop("IRLS regularizing parameter must be a non-negative number")
@@ -1073,6 +1090,7 @@ msgstr ""
 
 #. R/bam.r: stop("Non-finite deviance")
 #. R/bam.r: stop("Non-finite deviance")
+#. R/bam.r: stop("Non-finite deviance")
 #: R/bam.r:0
 msgid "Non-finite deviance"
 msgstr "편차(deviance)가 유한(finite)한 값을 가지지 않습니다."
@@ -1147,14 +1165,6 @@ msgid ""
 msgstr ""
 "이 페밀리(family)에서는 피어슨 잔차(Pearson residuals)를 얻을 수 없어 이탈잔"
 "차(deviance residuals)를 구합니다."
-
-#. R/gam.fit3.r: warning("Pearson scale estimate maybe unstable. See '?gam.scale'.")
-#: R/gam.fit3.r:0
-#, fuzzy
-msgid "Pearson scale estimate maybe unstable. See '?gam.scale'."
-msgstr ""
-"피어슨 척도 (Pearson scale)에 대한 추정치가 안정적(stable)이지 않은 것 같습니"
-"다.  ?gam.scale을 확인해 보시길 바랍니다."
 
 #. R/mgcv.r: stop("Penalized model matrix must have no more columns than rows")
 #: R/mgcv.r:0
@@ -1415,6 +1425,11 @@ msgstr ""
 msgid "a parametric penalty has wrong dimension"
 msgstr ""
 
+#. R/bam.r: warning("algorithm did not converge")
+#: R/bam.r:0
+msgid "algorithm did not converge"
+msgstr "알고리즘이 수렴하지 않습니다."
+
 #. R/gamm.r: stop("all elements of random list must be named")
 #: R/gamm.r:0
 msgid "all elements of random list must be named"
@@ -1503,6 +1518,7 @@ msgstr ""
 
 #. R/bam.r: stop("cannot find valid starting values: please specify some")
 #. R/bam.r: stop("cannot find valid starting values: please specify some")
+#. R/bam.r: stop("cannot find valid starting values: please specify some")
 #: R/bam.r:0
 msgid "cannot find valid starting values: please specify some"
 msgstr "사용가능한 초기값을 찾을 수 없습니다.  값을 지정해 주시길 바랍니다."
@@ -1550,6 +1566,11 @@ msgid "cubic spline only deals with 1D data"
 msgstr ""
 "삼차 스플라인(cubic spline)은 오로지 1차원 데이터(1D data)만을 다룹니다."
 
+#. R/bam.r: stop("currently discrete methods do not handle by variables")
+#: R/bam.r:0
+msgid "currently discrete methods do not handle by variables"
+msgstr ""
+
 #. R/smooth.r: stop("data contain regions that are not contained in the knot specification")
 #: R/smooth.r:0
 msgid "data contain regions that are not contained in the knot specification"
@@ -1583,6 +1604,26 @@ msgstr "fx의 차원(dimension)이 올바르지 않습니다."
 #, fuzzy
 msgid "dimensions of supplied 'w' argument is wrong"
 msgstr "입력된 w의 차원(dimensions)가 올바르지 않습니다."
+
+#. R/bam.r: warning("discrete method does not use parallel cluster - use nthreads instead")
+#: R/bam.r:0
+msgid "discrete method does not use parallel cluster - use nthreads instead"
+msgstr ""
+
+#. R/bam.r: stop("discretization can not handle factor by variables")
+#: R/bam.r:0
+msgid "discretization can not handle factor by variables"
+msgstr ""
+
+#. R/bam.r: stop("discretization can not handle smooth ids")
+#: R/bam.r:0
+msgid "discretization can not handle smooth ids"
+msgstr ""
+
+#. R/bam.r: warning("discretization only available with fREML")
+#: R/bam.r:0
+msgid "discretization only available with fREML"
+msgstr ""
 
 #. R/gam.sim.r: stop("distribution was not recognised")
 #: R/gam.sim.r:0
@@ -1627,6 +1668,11 @@ msgstr "사용할 수 있는 모형이 아닙니다 (설명변수가 없습니�
 msgid "factor 'by' variables can not be used with matrix arguments"
 msgstr ""
 
+#. R/gamm.r: warning("family are not designed for use with 'gamm()' function!")
+#: R/gamm.r:0
+msgid "family are not designed for use with 'gamm()' function!"
+msgstr ""
+
 #. R/jagam.r: stop("family not implemented yet")
 #: R/jagam.r:0
 #, fuzzy
@@ -1660,12 +1706,14 @@ msgstr ""
 
 #. R/bam.r: warning("fitted probabilities numerically 0 or 1 occurred")
 #. R/bam.r: warning("fitted probabilities numerically 0 or 1 occurred")
+#. R/bam.r: warning("fitted probabilities numerically 0 or 1 occurred")
 #. R/gam.fit3.r: warning("fitted probabilities numerically 0 or 1 occurred")
 #. R/mgcv.r: warning("fitted probabilities numerically 0 or 1 occurred")
 #: R/bam.r:0 R/gam.fit3.r:0 R/mgcv.r:0
 msgid "fitted probabilities numerically 0 or 1 occurred"
 msgstr "적합된 확률값이 수치적으로 0 또는 1 입니다."
 
+#. R/bam.r: warning("fitted rates numerically 0 occurred")
 #. R/bam.r: warning("fitted rates numerically 0 occurred")
 #. R/bam.r: warning("fitted rates numerically 0 occurred")
 #. R/gam.fit3.r: warning("fitted rates numerically 0 occurred")
@@ -1780,6 +1828,11 @@ msgstr ""
 #. R/mgcv.r: gettextf("inner loop %d; can't correct step size", 2)
 #: R/gam.fit3.r:0 R/gam.fit4.r:0 R/mgcv.r:0
 msgid "inner loop %d; can't correct step size"
+msgstr ""
+
+#. R/misc.r: stop("internal error in vcorr, please report to simon.wood@r-project.org")
+#: R/misc.r:0
+msgid "internal error in vcorr, please report to simon.wood@r-project.org"
 msgstr ""
 
 #. R/gam.fit3.r: stop("invalid 'family' argument")
@@ -2070,6 +2123,13 @@ msgstr ""
 #: R/mgcv.r:0
 msgid "non-existent terms requested - ignoring"
 msgstr ""
+
+#. R/bam.r: gettextf("non-finite coefficients at iteration %d", iter)
+#: R/bam.r:0
+msgid "non-finite coefficients at iteration %d"
+msgstr ""
+"%d번째 반복에서 얻어진 계수(coefficients)가 유한(finite)한 값을 가지지 않습니"
+"다."
 
 #. R/mgcv.r: warning("not all required variables have been supplied in  newdata!\n")
 #: R/mgcv.r:0
@@ -2480,6 +2540,12 @@ msgstr "알 수 없는 최적화 방법(optimization method)입니다."
 msgid "unknown smoothness selection criterion"
 msgstr "알 수 없는 평활도 선택기준(smoothness selection criterion)입니다."
 
+#. R/bam.r: warning("unknown tensor constraint type")
+#: R/bam.r:0
+#, fuzzy
+msgid "unknown tensor constraint type"
+msgstr "알 수 없는 최적화 방법(optimization method)입니다."
+
 #. R/gam.fit3.r: stop("unrecognized (vector?) link")
 #: R/gam.fit3.r:0
 msgid "unrecognized (vector?) link"
@@ -2567,13 +2633,11 @@ msgid "Smoothing parameter selection converged after %d iteration."
 msgid_plural "Smoothing parameter selection converged after %d iterations."
 msgstr[0] ""
 
-#~ msgid "non-finite coefficients at iteration %d"
+#, fuzzy
+#~ msgid "Pearson scale estimate maybe unstable. See '?gam.scale'."
 #~ msgstr ""
-#~ "%d번째 반복에서 얻어진 계수(coefficients)가 유한(finite)한 값을 가지지 않"
-#~ "습니다."
-
-#~ msgid "algorithm did not converge"
-#~ msgstr "알고리즘이 수렴하지 않습니다."
+#~ "피어슨 척도 (Pearson scale)에 대한 추정치가 안정적(stable)이지 않은 것 같"
+#~ "습니다.  ?gam.scale을 확인해 보시길 바랍니다."
 
 #~ msgid "non-finite coefficients at iteration"
 #~ msgstr ""

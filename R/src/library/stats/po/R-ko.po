@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-07-07 21:51\n"
+"POT-Creation-Date: 2015-07-29 22:13\n"
 "PO-Revision-Date: 2014-03-27 13:33-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -6404,6 +6404,12 @@ msgstr "잘못된 메소드입니다"
 #. R/ppr.R: stop("wrong number of columns in 'x'")
 #: R/ppr.R:0
 msgid "wrong number of columns in 'x'"
+msgstr "'x'에 있는 열의 개수가 잘못되었습니다"
+
+#. R/contr.poly.R: stop("wrong number of columns in new data: ", deparse(substitute(...)))
+#: R/contr.poly.R:0
+#, fuzzy
+msgid "wrong number of columns in new data:"
 msgstr "'x'에 있는 열의 개수가 잘못되었습니다"
 
 #. R/contrast.R: stop("wrong number of contrast matrix rows")

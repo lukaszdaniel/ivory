@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.3.0\n"
-"POT-Creation-Date: 2015-07-07 21:51\n"
+"POT-Creation-Date: 2015-07-29 22:13\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -8467,6 +8467,13 @@ msgstr ""
 #. R/ppr.R: stop("wrong number of columns in 'x'")
 
 msgid "wrong number of columns in 'x'"
+msgstr ""
+
+
+#: R/contr.poly.R: 0
+#. R/contr.poly.R: stop("wrong number of columns in new data: ", deparse(substitute(...)))
+
+msgid "wrong number of columns in new data:"
 msgstr ""
 
 

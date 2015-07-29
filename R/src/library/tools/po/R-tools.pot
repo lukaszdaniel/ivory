@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.3.0\n"
-"POT-Creation-Date: 2015-07-07 21:37\n"
+"POT-Creation-Date: 2015-07-29 22:14\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -881,6 +881,13 @@ msgstr ""
 #. R/QC.R: gettextf("\nConflicting package names (submitted: %s, existing: %s)", y[[1L]], y[[2L]],     domain = "R-tools")
 
 msgid "Conflicting package names (submitted: %s, existing: %s)"
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettextf("Consider adding %s to your NAMESPACE.", paste0("  ", miss), domain = "R-tools")
+
+msgid "Consider adding %s to your NAMESPACE."
 msgstr ""
 
 
