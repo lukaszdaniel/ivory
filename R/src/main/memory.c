@@ -88,6 +88,7 @@
 #include <R_ext/GraphicsEngine.h> /* GEDevDesc, GEgetDevice */
 #include <R_ext/Rdynload.h>
 #include <R_ext/Rallocators.h> /* for R_allocator_t structure */
+#include <R_ext/Minmax.h>
 #include <Rmath.h> // R_pow_di
 #include <Print.h> // R_print
 
@@ -2848,10 +2849,14 @@ static void gc_end_timing(void)
     }
 }
 
-#define R_MAX(a,b) (a) < (b) ? (b) : (a)
 
 static void R_gc_internal(R_size_t size_needed)
 {
+    if (!R_GCEnabled) {
+      AdjustHeapSize(size_needed);
+      return;
+    }
+
     R_size_t onsize = R_NSize /* can change during collection */;
     double ncells, vcells, vfrac, nfrac;
     SEXPTYPE first_bad_sexp_type = 0;
@@ -2868,8 +2873,8 @@ static void R_gc_internal(R_size_t size_needed)
 
     gc_count++;
 
-    R_N_maxused = R_MAX(R_N_maxused, R_NodesInUse);
-    R_V_maxused = R_MAX(R_V_maxused, R_VSize - VHEAP_FREE());
+    R_N_maxused = max(R_N_maxused, R_NodesInUse);
+    R_V_maxused = max(R_V_maxused, R_VSize - VHEAP_FREE());
 
     BEGIN_SUSPEND_INTERRUPTS {
 	R_in_gc = TRUE;
