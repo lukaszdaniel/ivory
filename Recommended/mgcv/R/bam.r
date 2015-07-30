@@ -461,7 +461,7 @@ bgam.fitd <- function (G, mf, gp ,scale , coef=NULL,etastart = NULL,
     } ## end fitting iteration
 
     if (!conv)
-       warning("algorithm did not converge")
+       warning("Algorithm did not converge")
    
     eps <- 10 * .Machine$double.eps
     if (family$family == "binomial") {

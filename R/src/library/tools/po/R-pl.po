@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.3\n"
 "X-Poedit-Bookmarks: -1,232,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #. R/install.R: gettextf("## package without R code %s", sQuote(namespace))
@@ -751,7 +751,7 @@ msgstr "Nazwy pakietów w konflikcie (wprowadzone: %s, istniejące: %s)"
 #. R/check.R: gettextf("Consider adding %s to your NAMESPACE.", paste0("  ", miss), domain = "R-tools")
 #: R/check.R:0
 msgid "Consider adding %s to your NAMESPACE."
-msgstr ""
+msgstr "Rozważ dodanie %s do swojego pliku NAMESPACE."
 
 #. R/check.R: gettextf("\nConsider the use of a .Rinstignore file: see %s,\nor move the vignette sources from %s to %s.\n",     sQuote("Writing R Extensions"), sQuote("inst/doc"), sQuote("vignettes"), domain = "R-tools")
 #: R/check.R:0

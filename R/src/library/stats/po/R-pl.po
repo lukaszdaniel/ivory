@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.3\n"
 "X-Poedit-Bookmarks: -1,20,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #. R/mlm.R: stop("\"mlm\" objects with weights are not supported")
@@ -4152,10 +4152,10 @@ msgstr "niepoprawny argument '%s'"
 #. R/splinefun.R: gettextf("invalid '%s' value", "length(x)")
 #. R/stl.R: gettextf("invalid '%s' value", "length(x)")
 #. R/symnum.R: gettextf("invalid '%s' value", "abbr.colnames'")
-#: R/HoltWinters.R:0 R/approx.R:0 R/bandwidths.R:0 R/cmdscale.R:0
-#: R/density.R:0 R/diffinv.R:0 R/filter.R:0 R/kmeans.R:0 R/loess.R:0
-#: R/runmed.R:0 R/smooth.R:0 R/smspline.R:0 R/spline.R:0 R/splinefun.R:0
-#: R/stl.R:0 R/symnum.R:0
+#: R/HoltWinters.R:0 R/approx.R:0 R/bandwidths.R:0 R/cmdscale.R:0 R/density.R:0
+#: R/diffinv.R:0 R/filter.R:0 R/kmeans.R:0 R/loess.R:0 R/runmed.R:0
+#: R/smooth.R:0 R/smspline.R:0 R/spline.R:0 R/splinefun.R:0 R/stl.R:0
+#: R/symnum.R:0
 msgid "invalid '%s' value"
 msgstr "niepoprawna wartość '%s'"
 
@@ -6298,9 +6298,8 @@ msgstr "niepoprawna liczba kolumn w 'x'"
 
 #. R/contr.poly.R: stop("wrong number of columns in new data: ", deparse(substitute(...)))
 #: R/contr.poly.R:0
-#, fuzzy
 msgid "wrong number of columns in new data:"
-msgstr "niepoprawna liczba kolumn w 'x'"
+msgstr "niepoprawna liczba kolumn dla nowych danych:"
 
 #. R/contrast.R: stop("wrong number of contrast matrix rows")
 #: R/contrast.R:0

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mgcv 1.8-6\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
 "POT-Creation-Date: 2015-07-29 22:15\n"
-"PO-Revision-Date: 2015-06-10 21:03+0100\n"
+"PO-Revision-Date: 2015-07-30 09:56+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.3\n"
 
 #. R/efam.r: gettextf("\"%s\" link not available for beta regression; available links are  \"logit\", \"probit\", \"cloglog\" and \"cauchit\"",     linktemp)
 #: R/efam.r:0
@@ -1386,7 +1386,6 @@ msgstr "parametryczna kara ma niepoprawny wymiar"
 
 #. R/bam.r: warning("algorithm did not converge")
 #: R/bam.r:0
-#, fuzzy
 msgid "algorithm did not converge"
 msgstr "Algorytm nie uzbieżnił się"
 

@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.3\n"
 "X-Poedit-Bookmarks: -1,736,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: src/appl/lbfgsb.c:683 src/appl/lbfgsb.c:755
@@ -610,11 +610,11 @@ msgstr "problem z wyświetleniem pliku '%ls'"
 #: src/main/builtin.c:119 src/main/builtin.c:149 src/main/builtin.c:560
 #: src/main/builtin.c:576 src/main/builtin.c:763 src/main/builtin.c:765
 #: src/main/builtin.c:767 src/main/character.c:239 src/main/character.c:242
-#: src/main/character.c:247 src/main/character.c:1094
-#: src/main/character.c:1098 src/main/character.c:1101
-#: src/main/character.c:1333 src/main/character.c:1337
-#: src/main/character.c:1398 src/main/character.c:1401 src/main/coerce.c:1432
-#: src/main/coerce.c:1481 src/main/coerce.c:1916 src/main/connections.c:1204
+#: src/main/character.c:247 src/main/character.c:1094 src/main/character.c:1098
+#: src/main/character.c:1101 src/main/character.c:1333
+#: src/main/character.c:1337 src/main/character.c:1398
+#: src/main/character.c:1401 src/main/coerce.c:1432 src/main/coerce.c:1481
+#: src/main/coerce.c:1916 src/main/connections.c:1204
 #: src/main/connections.c:1210 src/main/connections.c:1213
 #: src/main/connections.c:1217 src/main/connections.c:1362
 #: src/main/connections.c:1378 src/main/connections.c:1383
@@ -700,19 +700,19 @@ msgstr "problem z wyświetleniem pliku '%ls'"
 #: src/main/scan.c:684 src/main/scan.c:853 src/main/scan.c:867
 #: src/main/scan.c:871 src/main/scan.c:873 src/main/scan.c:884
 #: src/main/scan.c:911 src/main/scan.c:914 src/main/scan.c:917
-#: src/main/scan.c:972 src/main/seq.c:615 src/main/seq.c:620
-#: src/main/seq.c:627 src/main/seq.c:657 src/main/seq.c:661 src/main/seq.c:667
-#: src/main/seq.c:675 src/main/sort.c:176 src/main/sysutils.c:591
-#: src/main/sysutils.c:595 src/main/sysutils.c:599 src/main/sysutils.c:605
-#: src/main/sysutils.c:609 src/main/sysutils.c:1780 src/main/sysutils.c:1784
-#: src/main/unique.c:969 src/main/unique.c:1275 src/main/unique.c:1279
-#: src/main/unique.c:1289 src/main/unique.c:1683 src/main/util.c:639
-#: src/main/util.c:642 src/main/util.c:1378 src/main/util.c:1392
-#: src/main/util.c:1974 src/main/util.c:2197 src/main/util.c:2198
-#: src/main/util.c:2199 src/main/util.c:2216 src/main/util.c:2240
-#: src/main/util.c:2244 src/main/util.c:2246 src/main/util.c:2271
-#: src/main/util.c:2273 src/main/util.c:2275 src/main/util.c:2278
-#: src/main/util.c:2281 src/main/util.c:2285 src/main/util.c:2287
+#: src/main/scan.c:972 src/main/seq.c:615 src/main/seq.c:620 src/main/seq.c:627
+#: src/main/seq.c:657 src/main/seq.c:661 src/main/seq.c:667 src/main/seq.c:675
+#: src/main/sort.c:176 src/main/sysutils.c:591 src/main/sysutils.c:595
+#: src/main/sysutils.c:599 src/main/sysutils.c:605 src/main/sysutils.c:609
+#: src/main/sysutils.c:1780 src/main/sysutils.c:1784 src/main/unique.c:969
+#: src/main/unique.c:1275 src/main/unique.c:1279 src/main/unique.c:1289
+#: src/main/unique.c:1683 src/main/util.c:639 src/main/util.c:642
+#: src/main/util.c:1378 src/main/util.c:1392 src/main/util.c:1974
+#: src/main/util.c:2197 src/main/util.c:2198 src/main/util.c:2199
+#: src/main/util.c:2216 src/main/util.c:2240 src/main/util.c:2244
+#: src/main/util.c:2246 src/main/util.c:2271 src/main/util.c:2273
+#: src/main/util.c:2275 src/main/util.c:2278 src/main/util.c:2281
+#: src/main/util.c:2285 src/main/util.c:2287
 #: src/modules/internet/internet.c:454 src/modules/internet/internet.c:460
 #: src/modules/internet/internet.c:466 src/modules/internet/internet.c:469
 #: src/modules/internet/internet.c:473 src/modules/internet/internet.c:477
@@ -830,9 +830,9 @@ msgstr "obcięcie nie jest udostępnione dla tego połączenia"
 msgid "broken Windows pipe"
 msgstr "uszkodzony potok systemu Windows"
 
-#: src/gnuwin32/run.c:717 src/main/connections.c:330
-#: src/main/connections.c:347 src/main/connections.c:2905
-#: src/main/printutils.c:854 src/main/printutils.c:868
+#: src/gnuwin32/run.c:717 src/main/connections.c:330 src/main/connections.c:347
+#: src/main/connections.c:2905 src/main/printutils.c:854
+#: src/main/printutils.c:868
 msgid "printing of extremely long output is truncated"
 msgstr "drukowanie wyjątkowo długiego wyjścia zostało przycięte"
 
@@ -1162,24 +1162,24 @@ msgid "'%s' argument must be a vector"
 msgstr "argument '%s' musi być wektorem"
 
 #: src/main/apply.c:101 src/main/array.c:483 src/main/character.c:654
-#: src/main/character.c:1461 src/main/connections.c:3548
-#: src/main/context.c:653 src/main/context.c:672 src/main/datetime.c:686
-#: src/main/datetime.c:788 src/main/datetime.c:1047 src/main/dotcode.c:220
-#: src/main/errors.c:942 src/main/errors.c:974 src/main/errors.c:1077
-#: src/main/errors.c:1102 src/main/errors.c:1107 src/main/errors.c:1378
-#: src/main/identical.c:73 src/main/identical.c:74 src/main/identical.c:75
-#: src/main/identical.c:76 src/main/identical.c:77 src/main/platform.c:3074
-#: src/main/seq.c:193 src/main/seq.c:340 src/main/seq.c:345 src/main/seq.c:349
-#: src/main/seq.c:390 src/main/seq.c:394 src/main/seq.c:398
-#: src/main/sort.c:1225 src/main/sort.c:1308 src/main/sort.c:1312
-#: src/main/sort.c:1319 src/main/sort.c:1394 src/main/source.c:223
-#: src/main/summary.c:904 src/main/sysutils.c:250 src/main/util.c:1050
-#: src/main/util.c:1055 src/main/util.c:1062 src/main/util.c:1065
-#: src/main/util.c:2034 src/modules/lapack/Lapack.c:940
-#: src/modules/X11/devX11.c:3135 src/modules/X11/devX11.c:3161
-#: src/modules/X11/devX11.c:3166 src/modules/X11/devX11.c:3171
-#: src/modules/X11/devX11.c:3181 src/modules/X11/devX11.c:3186
-#: src/modules/X11/devX11.c:3190 src/modules/X11/devX11.c:3194
+#: src/main/character.c:1461 src/main/connections.c:3548 src/main/context.c:653
+#: src/main/context.c:672 src/main/datetime.c:686 src/main/datetime.c:788
+#: src/main/datetime.c:1047 src/main/dotcode.c:220 src/main/errors.c:942
+#: src/main/errors.c:974 src/main/errors.c:1077 src/main/errors.c:1102
+#: src/main/errors.c:1107 src/main/errors.c:1378 src/main/identical.c:73
+#: src/main/identical.c:74 src/main/identical.c:75 src/main/identical.c:76
+#: src/main/identical.c:77 src/main/platform.c:3074 src/main/seq.c:193
+#: src/main/seq.c:340 src/main/seq.c:345 src/main/seq.c:349 src/main/seq.c:390
+#: src/main/seq.c:394 src/main/seq.c:398 src/main/sort.c:1225
+#: src/main/sort.c:1308 src/main/sort.c:1312 src/main/sort.c:1319
+#: src/main/sort.c:1394 src/main/source.c:223 src/main/summary.c:904
+#: src/main/sysutils.c:250 src/main/util.c:1050 src/main/util.c:1055
+#: src/main/util.c:1062 src/main/util.c:1065 src/main/util.c:2034
+#: src/modules/lapack/Lapack.c:940 src/modules/X11/devX11.c:3135
+#: src/modules/X11/devX11.c:3161 src/modules/X11/devX11.c:3166
+#: src/modules/X11/devX11.c:3171 src/modules/X11/devX11.c:3181
+#: src/modules/X11/devX11.c:3186 src/modules/X11/devX11.c:3190
+#: src/modules/X11/devX11.c:3194
 #, c-format
 msgid "invalid '%s' value"
 msgstr "niepoprawna wartość '%s'"
@@ -3119,9 +3119,8 @@ msgid "Line starting with '%s ...' is malformed!"
 msgstr "Linia rozpoczynająca się od '%s ...' jest uszkodzona!"
 
 #: src/main/debug.c:47
-#, fuzzy
 msgid "argument must be a function"
-msgstr "argument nie może być funkcją"
+msgstr "argument musi być funkcją"
 
 #: src/main/debug.c:54
 msgid "argument is not being debugged"
@@ -6855,8 +6854,7 @@ msgstr "niepoprawny wielobajtowy łańcuch formatujący"
 #: src/main/saveload.c:1383 src/main/saveload.c:1427 src/main/saveload.c:1495
 #: src/main/saveload.c:1504 src/main/serialize.c:356 src/main/serialize.c:363
 #: src/main/serialize.c:376 src/main/serialize.c:380 src/main/serialize.c:407
-#: src/main/serialize.c:423 src/main/serialize.c:2430
-#: src/main/serialize.c:2438
+#: src/main/serialize.c:423 src/main/serialize.c:2430 src/main/serialize.c:2438
 msgid "read error"
 msgstr "błąd odczytu"
 
@@ -7008,9 +7006,9 @@ msgstr "pojawił się błąd zapisu danych liczby zespolonej w xdr"
 msgid "an xdr complex data read error occurred"
 msgstr "pojawił się błąd odczytu danych liczby zespolonej w xdr"
 
-#: src/main/saveload.c:1780 src/main/serialize.c:1998
-#: src/main/serialize.c:2615 src/modules/internet/internet.c:512
-#: src/modules/internet/internet.c:588 src/modules/internet/internet.c:698
+#: src/main/saveload.c:1780 src/main/serialize.c:1998 src/main/serialize.c:2615
+#: src/modules/internet/internet.c:512 src/modules/internet/internet.c:588
+#: src/modules/internet/internet.c:698
 msgid "write failed"
 msgstr "zapis nie powiódł się"
 
@@ -7083,9 +7081,8 @@ msgstr "nie można zapisać w połączeniach w formacie w wersji %d"
 msgid "cannot save XDR format to a text-mode connection"
 msgstr "nie można zapisać formatu XDR w połączeniu w trybie tekstowym"
 
-#: src/main/saveload.c:2288 src/main/serialize.c:2106
-#: src/main/serialize.c:2120 src/main/serialize.c:2304
-#: src/main/serialize.c:2326
+#: src/main/saveload.c:2288 src/main/serialize.c:2106 src/main/serialize.c:2120
+#: src/main/serialize.c:2304 src/main/serialize.c:2326
 msgid "error writing to connection"
 msgstr "błąd zapisu do połączenia"
 

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: cluster 1.14.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2015-07-29 22:14\n"
-"PO-Revision-Date: 2015-02-25 19:27+0100\n"
+"PO-Revision-Date: 2015-07-30 09:44+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.3\n"
 
 #. R/daisy.q: gettextf("%s has constant columns %s; these are standardized to 0", sQuote("x"),     pColl(which(sx == 0)))
 #: R/daisy.q:0
@@ -55,9 +55,8 @@ msgstr "%s musi zawierać nazwy kolumn lub liczby"
 
 #. R/daisy.q: gettextf("'%s' argument is not a dataframe or a numeric matrix.", "x")
 #: R/daisy.q:0
-#, fuzzy
 msgid "'%s' argument is not a dataframe or a numeric matrix."
-msgstr "%s nie jest ramką danych ani też macierzą liczbową"
+msgstr "argument '%s' nie jest ramką danych ani też macierzą liczbową"
 
 #. R/diana.q: gettextf("'%s' argument is not a numeric dataframe or matrix.", "x")
 #. R/fanny.q: gettextf("'%s' argument is not a numeric dataframe or matrix.", "x")
