@@ -1127,3 +1127,7 @@ Formal class 'signature' [package "methods"] with 3 slots
   ..@ names  : character "obj"
   ..@ package: character ""
 > 
+> cl4 <- getClasses("package:stats4")
+> stopifnot(c("mle", "profile.mle", "summary.mle") %in% cl4)
+> ## failed after an optimization patch
+> 

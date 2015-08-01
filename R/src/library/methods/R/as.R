@@ -253,7 +253,7 @@ setAs <-
                             domain = "R-methods")
                 }
                 method <- eval(function(from, to, value)NULL)
-                functionBody(method, envir = .GlobalEnv) <- replace
+                body(method, envir = .GlobalEnv) <- replace
             }
             setMethod("coerce<-", c(from, to), method, where = where)
         }
