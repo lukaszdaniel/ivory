@@ -137,7 +137,7 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
         else {
             ## A package will have created a generic
             ## only if it has created a formal method.
-            length(objects(env, pattern="^\\.__T", all.names=TRUE)) == 0L
+            length(grep(pattern="^\\.__T", names(env))) == 0L
         }
     }
 
@@ -149,9 +149,9 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
                        ".packageName", ".noGenerics", ".required",
                        ".no_S3_generics", ".Depends", ".requireCachedGenerics")
         sp <- search()
-        lib.pos <- match(pkgname, sp)
+        lib.pos <- which(sp == pkgname)
         ## ignore generics not defined for the package
-        ob <- objects(lib.pos, all.names = TRUE)
+        ob <- names(as.environment(lib.pos))
         if(!nogenerics) {
             ##  Exclude generics that are consistent with implicit generic
             ## from another package.  A better test would be to move this
@@ -167,7 +167,7 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
 	ipos <- seq_along(sp)[-c(lib.pos,
 				 match(c("Autoloads", "CheckExEnv"), sp, 0L))]
         for (i in ipos) {
-            obj.same <- match(objects(i, all.names = TRUE), ob, nomatch = 0L)
+            obj.same <- match(names(as.environment(i)), ob, nomatch = 0L)
             if (any(obj.same > 0)) {
                 same <- ob[obj.same]
                 same <- same[!(same %in% dont.mind)]
@@ -195,7 +195,8 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
                         fst <- FALSE
                         packageStartupMessage(gettextf("\nAttaching package: %s\n", sQuote(package)), domain = "R-base")
                     }
-		    msg <- .maskedMsg(same, pkg = sQuote(sp[i]), by = i < lib.pos)
+		    msg <- .maskedMsg(sort(same), pkg = sQuote(sp[i]),
+                                      by = i < lib.pos)
 		    packageStartupMessage(msg, domain = NA)
                 }
             }
@@ -225,7 +226,10 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
             ## The methods package caches all other pkgs when it is
             ## attached.
 
-            pkgpath <- find.package(package, lib.loc, quiet = TRUE,
+            ## Too extreme (unfortunately; warning too often):
+	    ## pkgpath <- find.package(package, lib.loc, quiet = TRUE, verbose = !quietly)
+	    ##   'verbose' here means to warn about packages found more than once
+	    pkgpath <- find.package(package, lib.loc, quiet = TRUE,
                                     verbose = verbose)
             if(length(pkgpath) == 0L) {
                 txt <- if(length(lib.loc))
