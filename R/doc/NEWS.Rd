@@ -141,7 +141,7 @@
   }
 }
 
-\section{\Rlogo CHANGES IN R 3.2.1 patched}{
+\section{\Rlogo CHANGES IN R 3.2.2}{
   \subsection{NEW FEATURES}{
     \itemize{
       \item \code{cmdscale()} gets new option \code{list.} for increased
@@ -162,12 +162,16 @@
 
       \item \code{chooseCRANmirror()} and \code{chooseBioCmirror()} now
       offer HTTPS mirrors in preference to HTTP mirrors.  This changes
-      the intepretation of their \code{ind} arguments: see their help
+      the interpretation of their \code{ind} arguments: see their help
       pages.
 
       \item \code{capture.output()} gets optional arguments \code{type}
       and \code{split} to pass to \code{sink()}, and hence can be used
       capture messages.
+      
+      \item \code{read.table()} now always uses the names for a named
+      \code{colClasses} argument (previously names were only used when
+      \code{colClasses} was too short). (In part, wish of \PR{16478}.)
     }
   }
 
@@ -193,8 +197,9 @@
       \item The HTML help page links to demo code failed due to a change
       in \R 3.2.0.  (\PR{16432})
 
-      \item If \code{na.action} was used in \code{model.frame()}, the
-      original data could be modified. (\PR{16436})
+      \item If the \code{na.action} argument was used in
+      \code{model.frame()}, the original data could be
+      modified. (\PR{16436})
 
       \item \code{getGraphicsEvent()} could cause a crash if a graphics
       window was closed while it was in use. (\PR{16438})
@@ -253,7 +258,8 @@
       \item \code{rhyper(nn, <large>)} now works correctly. (\PR{16489})
 
       \item \code{ttkimage()} did not (and could not) work so was removed. Ditto for
-      \code{tkimage.cget()} and \code{tkimage.configure()}. Added two Ttk widgets and
+      \code{tkimage.cget()} and \code{tkimage.configure()}.
+      Added two Ttk widgets and
       missing subcommands for Tk's \code{image} command:
       \code{ttkscale()},
       \code{ttkspinbox()},
