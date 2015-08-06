@@ -798,17 +798,19 @@ namespaceImportFrom <- function(self, ns, vars, generics, packages, from = "non-
     if (anyDuplicated(impnames)) {
         stop(gettextf("duplicate import names %s", paste(sQuote(impnames[duplicated(impnames)]), collapse = ", ")), domain = "R-base")
     }
-    if (isNamespace(self) && isBaseNamespace(self)) {
-        impenv <- self
-        msg <- gettext("replacing local value with import %s when loading namespace %s")
-        register <- FALSE
-    }
-    else if (isNamespace(self)) {
-        if (namespaceIsSealed(self))
-            stop("cannot import into a sealed namespace")
-        impenv <- parent.env(self)
-        msg <- gettext("replacing previous import by %s when loading namespace %s")
-        register <- TRUE
+    if (isNamespace(self)) {
+        if(isBaseNamespace(self)) {
+            impenv <- self
+            msg <- gettext("replacing local value with import %s when loading %s")
+            register <- FALSE
+        }
+        else {
+            if (namespaceIsSealed(self))
+                stop("cannot import into a sealed namespace")
+            impenv <- parent.env(self)
+            msg <- gettext("replacing previous import by %s when loading namespace %s")
+            register <- TRUE
+        }
     }
     else if (is.environment(self)) {
         impenv <- self
@@ -1421,12 +1423,11 @@ registerS3methods <- function(info, package, env)
 
 .mergeImportMethods <- function(impenv, expenv, metaname)
 {
-    expMethods <- get(metaname, envir = expenv)
-    if(!is.null(impMethods <- get0(metaname, envir = impenv, inherits = FALSE))) {
-	assign(metaname,
-	       methods:::.mergeMethodsTable2(impMethods,
-					     expMethods, expenv, metaname),
-	       envir = impenv)
-	impMethods
-    } ## else NULL
+    impMethods <- impenv[[metaname]]
+    if(!is.null(impMethods))
+	impenv[[metaname]] <-
+	    methods:::.mergeMethodsTable2(impMethods,
+					  newtable = expenv[[metaname]], # known to exist by caller
+					  expenv, metaname)
+    impMethods # possibly NULL
 }

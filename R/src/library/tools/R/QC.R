@@ -2791,8 +2791,13 @@ function(dir, force_suggests = TRUE, check_incoming = FALSE,
     bad_depends <- list()
     ## and we cannot have cycles
     ## this check needs a package db from repository(s), so
-    if(!any(grepl("@CRAN@", getOption("repos")))) {
-        ad <- .check_dependency_cycles(db)
+    repos <- getOption("repos")
+    if(any(grepl("@CRAN@", repos)))
+        repos <- .get_standard_repository_URLs()
+    if(!any(grepl("@CRAN@", repos))) {
+        ## Not getting here should no longer be possble ...
+        available <- utils::available.packages(repos = repos)
+        ad <- .check_dependency_cycles(db, available)
         pkgname <- db[["Package"]]
         if(pkgname %in% ad)
             bad_depends$all_depends <- setdiff(ad, pkgname)
@@ -3729,8 +3734,11 @@ function(package, lib.loc = NULL)
             assign("getIdentification", function() {}, envir = compat)
             assign("getWindowsHandle", function(which = "Console") {}, envir = compat)
             assign("getWindowTitle", function() {}, envir = compat)
-            assign("readClipboard", function(format = 1, raw = FALSE) {}, envir = compat)
-            assign("setWindowTitle", function(suffix, title = paste(getIdentification(), suffix)) {}, envir = compat)
+            assign("readClipboard", function(format = 1, raw = FALSE) {},
+                   envir = compat)
+            assign("setWindowTitle",
+                   function(suffix, title = paste(utils::getIdentification(), suffix)) {},
+                   envir = compat)
             assign("shell",
                    function(cmd, shell, flag = "/c", intern = FALSE,
                             wait = TRUE, translate = FALSE, mustWork = FALSE, ...) {}, envir = compat)
