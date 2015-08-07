@@ -31,7 +31,7 @@
 #include <Fileio.h>
 #include <errno.h>
 
-#ifdef HAVE_CURL_CURL_H
+#ifdef HAVE_LIBCURL
 # include <curl/curl.h>
 /*
   This need libcurl >= 7.28.0 (Oct 2012) for curl_multi_wait.
@@ -47,7 +47,7 @@ SEXP attribute_hidden in_do_curlVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP ans = PROTECT(allocVector(STRSXP, 1));
-#ifdef HAVE_CURL_CURL_H
+#ifdef HAVE_LIBCURL
     curl_version_info_data *d = curl_version_info(CURLVERSION_NOW);
     SET_STRING_ELT(ans, 0, mkChar(d->version));
     SEXP sSSLVersion = install("ssl_version");
@@ -72,7 +72,7 @@ SEXP attribute_hidden in_do_curlVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 
-#ifdef HAVE_CURL_CURL_H
+#ifdef HAVE_LIBCURL
 static void curlCommon(CURL *hnd, int redirect, int verify)
 {
     const char *capath = getenv("CURL_CA_BUNDLE");
@@ -140,7 +140,7 @@ SEXP attribute_hidden
 in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-#ifndef HAVE_CURL_CURL_H
+#ifndef HAVE_LIBCURL
     error(_("'curlGetHeaders()' function is not supported on this platform"));
     return R_NilValue;
 #else
@@ -185,7 +185,7 @@ in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
 }
 
-#ifdef HAVE_CURL_CURL_H
+#ifdef HAVE_LIBCURL
 static double total;
 
 static int ndashes;
@@ -305,7 +305,7 @@ SEXP attribute_hidden
 in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-#ifndef HAVE_CURL_CURL_H
+#ifndef HAVE_LIBCURL
     error(_("'download.file(method = \"libcurl\")' is not supported on this platform"));
     return R_NilValue;
 #else
@@ -507,7 +507,7 @@ in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 #include <Rconnections.h>
 
 
-#ifdef HAVE_CURL_CURL_H
+#ifdef HAVE_LIBCURL
 typedef struct Curlconn {
     char *buf, *current; // base of buffer, last read address
     size_t bufsize, filled;  // buffer size, amount which has been filled
@@ -653,7 +653,7 @@ static int Curl_fgetc_internal(Rconnection con)
 Rconnection 
 in_newCurlUrl(const char *description, const char * const mode, int type)
 {
-#ifdef HAVE_CURL_CURL_H
+#ifdef HAVE_LIBCURL
     Rconnection newcon = (Rconnection) malloc(sizeof(struct Rconn));
     if (!newcon) error(_("allocation of url connection failed"));
     newcon->conclass = (char *) malloc(strlen("url-libcurl") + 1);

@@ -2310,57 +2310,9 @@ R_PCRE
 ## tre headers and libraries.
 R_TRE
 
+
 ## libcurl
-## curl-config might not match the installed libcurl,
-## so we allow the user to set CURL_CPPFLAGS, CURL_LIBS
-## and check the version directly rather than by curl-config --checkfor
-AC_PATH_PROG(CURL_CONFIG, curl-config)
-if test -n "${CURL_CONFIG}"; then
-  echo "checking libcurl version ..." \
-    `${CURL_CONFIG} --version | sed -e 's,^[[^0-9]]*,,'`
-  if test -z "${CURL_CPPFLAGS}"; then
-    CURL_CPPFLAGS=`${CURL_CONFIG} --cflags`
-  fi
-  ## This should be correct for a static-only build, user will
-  ## need to override to specify static linking (see config.site)
-  if test -z "${CURL_LIBS}"; then
-    CURL_LIBS=`${CURL_CONFIG} --libs`
-  fi
-fi
-r_save_CPPFLAGS="${CPPLAGS}"
-CPPFLAGS="${CURL_CPPFLAGS} ${CPPFLAGS}"
-r_save_LIBS="${LIBS}"
-LIBS="${CURL_LIBS} ${LIBS}"
-AC_CACHE_CHECK([if libcurl version >= 7.28.0], [r_cv_have_curl728],
-[AC_RUN_IFELSE([AC_LANG_SOURCE([[
-#include <stdlib.h>
-#include <curl/curl.h>
-int main() 
-{
-#ifdef LIBCURL_VERSION_MAJOR
-#if LIBCURL_VERSION_MAJOR > 7
-  exit(1);
-#elif LIBCURL_VERSION_MAJOR == 7 && LIBCURL_VERSION_MINOR >= 28
-  exit(0);
-#else
-  exit(1);
-#endif
-#else
-  exit(1);
-#endif
-}
-]])], [r_cv_have_curl728=yes], [r_cv_have_curl728=no], [r_cv_have_curl728=no])])
-if test "x${r_cv_have_curl728}" != xyes; then
-  ac_cv_have_curl_curl_h=0
-  CURL_CPPFLAGS=
-  CURL_LIBS=
-else
-  AC_CHECK_HEADERS(curl/curl.h)
-fi
-CPPFLAGS="${r_save_CPPFLAGS}"
-LIBS="${r_save_LIBS}"
-AC_SUBST(CURL_CPPFLAGS)
-AC_SUBST(CURL_LIBS)
+R_LIBCURL
 
 ## POSIX times.
 R_SYS_POSIX_LEAPSECONDS
@@ -2704,21 +2656,16 @@ case "${host_os}" in
     AC_DEFINE(HAVE_ICONV, 1, [Define if you have the iconv() function.])
     AC_DEFINE(HAVE_ICONVLIST, 1, [Define if you have the `iconvlist' function.])
     AC_DEFINE(HAVE_ICONV_H, 1, [Define to 1 if you have the <iconv.h> header file.])
-    AC_DEFINE(HAVE_INTERNET, 1, [Define if you have support for ftp/http
-                                 access.])
     AC_DEFINE(HAVE_JPEG, 1,[Define if you have the JPEG headers and libraries.])
     AC_DEFINE(HAVE_PNG, 1, [Define if you have the PNG headers and libraries.])
     AC_DEFINE(HAVE_POSIX_SETJMP, 1, [Define if you have POSIX.1 compatible
                                      sigsetjmp/siglongjmp.])
-    AC_DEFINE(HAVE_SOCKETS, 1, [Define if you have support for sockets.])
     AC_DEFINE(HAVE_TCLTK, 1, [Define if you have the Tcl/Tk headers and 
                               libraries and want Tcl/Tk support to be built.] )
     AC_DEFINE(HAVE_TIFF, 1, [Define this if libtiff is available.])
     AC_DEFINE(HAVE_TIMES, 1, [Define to 1 if you have the `times' function.])
     want_R_profiling=yes
     AC_DEFINE(R_PROFILING, 1, [Define this to enable R-level profiling.])
-    AC_DEFINE(SUPPORT_LIBXML, 1, [Define if you provide support for the libxml
-                                  ftp/http functions.])
     ;;
 esac
 

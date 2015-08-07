@@ -175,6 +175,42 @@ function(x, ...)
     invisible(x)
 }
 
+## Summarize CRAN check status for maintainers matching the given
+## maintainer regexp ...
+
+summarize_CRAN_check_status_for_maintainer <-
+function(maintainer, ...)
+{
+    pdb <- CRAN_package_db()
+
+    ind <- grep(maintainer, pdb[, "Maintainer"], ...)
+
+    summarize_CRAN_check_status(pdb[ind, "Package"])
+}
+
+## Summarize complete CRAN check status according to maintainer.
+
+summarize_CRAN_check_status_according_to_maintainer <-
+function()
+{
+    pdb <- CRAN_package_db()
+    ind <- !duplicated(pdb[, "Package"])
+
+    maintainer <- pdb[, "Maintainer"]
+    maintainer <- tolower(sub(".*<(.*)>.*", "\\1", maintainer))
+
+    results <- CRAN_check_results()
+    details <- CRAN_check_details()
+    mtnotes <- CRAN_memtest_notes()
+
+    split(format(summarize_CRAN_check_status(pdb[ind, "Package"],
+                                             results,
+                                             details,
+                                             mtnotes),
+                 header = TRUE),
+          maintainer[ind])
+}
+
 CRAN_baseurl_for_src_area <-
 function()
     .get_standard_repository_URLs()[1L]
@@ -376,6 +412,54 @@ function(mirrors, db = NULL)
     list(to = to, body = body)
 }
 
+CRAN_mirror_mirmon_status <-
+function()
+{
+    ## See
+    ## <http://www.projects.science.uu.nl/csg/mirmon/mirmon.html#state_file_format>.
+
+    fields <-
+        c("url",
+          "age",
+          "status_last_probe",
+          "time_last_successful_probe",
+          "probe_history",
+          "state_history",
+          "last_probe")
+    ts_to_POSIXct <- function(ts) {
+        suppressWarnings(as.POSIXct(as.numeric(as.character(ts)),
+                                    origin = "1970-01-01"))
+    }
+    read_mirmon_state_file <- function(con) {
+        db <- utils::read.table(con, header = FALSE, col.names = fields)
+        db$url <- as.character(db$url)
+        db$age <- ts_to_POSIXct(db$age)
+        db$time_last_successful_probe <-
+            ts_to_POSIXct(db$time_last_successful_probe)
+        db$last_probe <- ts_to_POSIXct(db$last_probe)
+        db$delta <- difftime(Sys.time(), db$age, units = "days")
+        db
+    }
+    state_files <-
+        c("TIME" = "mirror.state",
+          "TIME_r-release" = "mirror_release.state",
+          "TIME_r-old-release" = "mirror_old_release.state")
+
+    ## Need to always use master for now (the mirrors do not have the
+    ## state files).
+    do.call(rbind,
+            c(Map(function(u, v) {
+                      u <- paste0("https://cran.r-project.org/mirmon/data/", u)
+                      cbind(read_mirmon_state_file(u),
+                            timestamp = v,
+                            stringsAsFactors = FALSE)
+                  },
+                  state_files,
+                  names(state_files)),
+              list(make.row.names = FALSE)))
+}
+
+
 CRAN_Rd_xref_db_with_expansions <-
 function()
 {
@@ -572,4 +656,27 @@ function(x, ...)
 {
     writeLines(paste(format(x, ...), collapse = "\n\n"))
     invisible(x)
+}
+
+CRAN_package_dependencies_with_dates <-
+function(packages)    
+{
+    a <- utils::available.packages(filters = list(),
+                                   repos = .get_standard_repository_URLs()["CRAN"])
+    p <- CRAN_package_db()
+    d <- package_dependencies(packages, a, which = "most")
+    ## Note that we currently keep the base packages dependencies, which
+    ## have no date.  We could (perhaps at least optionally) do
+    ##   base_packages <- .get_standard_package_names()["base"]
+    ## and then use
+    ##   e <- setdiff(as.character(e), base_packages)
+    ## in the code below.
+    lapply(d,
+           function(e) {
+               y <- data.frame(Package = as.character(e),
+                               stringsAsFactors = FALSE)
+               y$Date <- as.Date(p[match(y$Package, p[, "Package"]),
+                                   "Published"])
+               y[order(y$Date, decreasing = TRUE), ]
+           })
 }
