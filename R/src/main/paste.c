@@ -15,7 +15,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, a copy is available at
- *  http://www.r-project.org/Licenses/
+ *  https://www.R-project.org/Licenses/
  *
  *
  *  See ./printutils.c	 for general remarks on Printing
@@ -544,8 +544,8 @@ SEXP attribute_hidden do_format(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (STRING_ELT(xx, i) != NA_STRING) {
 		    il = Rstrlen(STRING_ELT(xx, i), 0);
 		    cnt = max(cnt, LENGTH(STRING_ELT(xx, i)) + max(0, w-il));
-		} else if (na) 
-		    cnt  = max(cnt, R_print.na_width + max(0, w-R_print.na_width));
+		} else if (na)
+		    cnt = max(cnt, R_print.na_width + max(0, w-R_print.na_width));
 	    R_CheckStack2(cnt+1);
 	    char buff[cnt+1];
 	    PROTECT(y = allocVector(STRSXP, n));

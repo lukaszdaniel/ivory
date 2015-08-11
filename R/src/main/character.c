@@ -15,7 +15,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, a copy is available at
- *  http://www.r-project.org/Licenses/
+ *  https://www.R-project.org/Licenses/
  */
 
 /* The character functions in this file are
@@ -135,7 +135,7 @@ SEXP attribute_hidden do_nzchar(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 int R_nchar(SEXP string, nchar_type type_,
-            Rboolean allowNA, Rboolean keepNA, const char* msg_name)
+	    Rboolean allowNA, Rboolean keepNA, const char* msg_name)
 {
     if (string == NA_STRING)
 	return keepNA ? NA_INTEGER : 2;
@@ -1419,7 +1419,7 @@ SEXP attribute_hidden stringSuffix(SEXP string, int fromIndex) {
     SEXP res = PROTECT(allocVector(STRSXP, newLen));
     int i;
     for(i = 0; i < newLen; i++) {
-        SET_STRING_ELT(res, i, STRING_ELT(string, fromIndex++));
+	SET_STRING_ELT(res, i, STRING_ELT(string, fromIndex++));
     }
 
     UNPROTECT(1); /* res */

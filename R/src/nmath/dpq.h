@@ -14,7 +14,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, a copy is available at
- *  http://www.r-project.org/Licenses/
+ *  https://www.R-project.org/Licenses/
  */
 	/* Utilities for `dpq' handling (density/probability/quantile) */
 
@@ -99,7 +99,7 @@
 	    return lower_tail ? _RIGHT_ : _LEFT_;	\
     }
 
-#define R_P_bounds_01(x, x_min, x_max) 	\
+#define R_P_bounds_01(x, x_min, x_max)	\
     if(x <= x_min) return R_DT_0;		\
     if(x >= x_max) return R_DT_1
 /* is typically not quite optimal for (-Inf,Inf) where
@@ -119,7 +119,7 @@
 #define R_D_negInonint(x) (x < 0. || R_nonint(x))
 
 // for discrete d<distr>(x, ...) :
-#define R_D_nonint_check(x) 				\
+#define R_D_nonint_check(x)				\
    if(R_nonint(x)) {					\
        MATHLIB_WARNING(_("non-integer x = %f"), x);	\
 	return R_D__0;					\

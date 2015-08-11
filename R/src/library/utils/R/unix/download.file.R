@@ -1,5 +1,5 @@
 #  File src/library/utils/R/unix/download.file.R
-#  Part of the R package, http://www.R-project.org
+#  Part of the R package, https://www.R-project.org
 #
 #  Copyright (C) 1995-2015 The R Core Team
 #
@@ -14,7 +14,7 @@
 #  GNU General Public License for more details.
 #
 #  A copy of the GNU General Public License is available at
-#  http://www.r-project.org/Licenses/
+#  https://www.R-project.org/Licenses/
 
 download.file <-
     function(url, destfile, method, quiet = FALSE, mode = "w",
@@ -27,13 +27,11 @@ download.file <-
         match.arg(method, c("auto", "internal", "libcurl", "wget", "curl", "lynx"))
 
     if(method == "auto") {
+        if(length(url) != 1L || typeof(url) != "character")
+            stop(gettextf("'%s' argument must be a length-one character vector", "url"));
 	method <-
 	    if(capabilities("libcurl") && grepl("^(ht|f)tps:", url))
 		"libcurl"
-## 	    else if(grepl("^file:", url)) {
-## 		url <- URLdecode(url)
-## 		"internal"
-## 	    }
             else "internal"
     }
 

@@ -15,7 +15,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, a copy is available at
- *  http://www.r-project.org/Licenses/
+ *  https://www.R-project.org/Licenses/
  */
 
 #ifndef DEFN_H_
@@ -804,10 +804,6 @@ extern0 Rboolean known_to_be_utf8 INI_as(FALSE);
 LibExtern SEXP R_TrueValue INI_as(NULL);
 LibExtern SEXP R_FalseValue INI_as(NULL);
 LibExtern SEXP R_LogicalNAValue INI_as(NULL);
-
-#ifdef Win32
-LibExtern Rboolean UseInternet2;
-#endif
 
 #ifdef __MAIN__
 # undef extern

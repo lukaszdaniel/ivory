@@ -32,7 +32,6 @@
       Remove assumption that current->dest is non-NULL
 */
 
-#include <Localization.h>
 #include "internal.h"
 
 /*

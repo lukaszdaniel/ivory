@@ -14,7 +14,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, a copy is available at
- *  http://www.r-project.org/Licenses/
+ *  https://www.R-project.org/Licenses/
  */
 
 /* Notes on so-called 'Large File Support':
@@ -597,7 +597,7 @@ static Rboolean file_open(Rconnection con)
 	unlink(name);
 #ifdef Win32
 	strncpy(thiscon->name, name, PATH_MAX);
-        thiscon->name[PATH_MAX - 1] = '\0';
+	thiscon->name[PATH_MAX - 1] = '\0';
 #endif
 	free((char *) name); /* only free if allocated by R_tmpnam */
     }
@@ -2728,7 +2728,7 @@ static void text_init(Rconnection con, SEXP text, int type)
 			    : ((type == 3) ?translateCharUTF8(STRING_ELT(text, i))
 			       : CHAR(STRING_ELT(text, i))) ) + 1;
     if (dnc >= SIZE_MAX)
- 	error(_("too many characters for text connection"));
+	error(_("too many characters for text connection"));
     else nchars = (size_t) dnc;
     thiscon->data = (char *) malloc(nchars+1);
     if(!thiscon->data) {
@@ -3970,19 +3970,19 @@ SEXP attribute_hidden do_readbin(SEXP call, SEXP op, SEXP args, SEXP env)
 	} else {
 	    R_xlen_t s;
 	    union {
-                signed char sch;
-                unsigned char uch;
-                signed short ssh;
-                unsigned short ush;
-                long l;
-                long long ll;
-                float f;
+		signed char sch;
+		unsigned char uch;
+		signed short ssh;
+		unsigned short ush;
+		long l;
+		long long ll;
+		float f;
 #if HAVE_LONG_DOUBLE
 		long double ld;
 #endif
-            } u;
-            if (size > sizeof u)
-                error(_("size %d is unknown on this machine"), size);
+	    } u;
+	    if (size > sizeof u)
+		error(_("size %d is unknown on this machine"), size);
 	    if(mode == 1) { /* integer result */
 		for(i = 0, m = 0; i < n; i++) {
 		    s = isRaw ? rawRead((char*) &u, size, 1, bytes, nbytes, &np)
@@ -4958,8 +4958,8 @@ SEXP attribute_hidden do_url(SEXP call, SEXP op, SEXP args, SEXP env)
     char *class2 = "url";
     const char *url, *open;
     int ncon, block, raw = 0, defmeth,
-	meth = 0, // 0: "internal",          1: "libcurl"
-	urlmeth;  // 0: (Unix || "default"), 1: UseInternet2 || "wininet"
+	meth = 0, // 0: "default" | "internal" | "wininet", 1: "libcurl"
+	winmeth;  // 0: "internal", 1: "wininet" (Windows only)
     cetype_t ienc = CE_NATIVE;
     Rconnection con = NULL;
 
@@ -4971,7 +4971,7 @@ SEXP attribute_hidden do_url(SEXP call, SEXP op, SEXP args, SEXP env)
     if(LENGTH(scmd) > 1)
 	warning(_("only first element of '%s' argument will be used"), "description");
 #ifdef Win32
-    urlmeth = UseInternet2;
+    winmeth = 1;
     if(PRIMVAL(op) == 1 && !IS_ASCII(STRING_ELT(scmd, 0)) ) { // file(<non-ASCII>, *)
 	ienc = CE_UTF8;
 	url = translateCharUTF8(STRING_ELT(scmd, 0));
@@ -4983,7 +4983,7 @@ SEXP attribute_hidden do_url(SEXP call, SEXP op, SEXP args, SEXP env)
 	    url = translateChar(STRING_ELT(scmd, 0));
     }
 #else
-    urlmeth = 0;
+    winmeth = 0;
     url = translateChar(STRING_ELT(scmd, 0));
 #endif
 
@@ -4995,11 +4995,13 @@ SEXP attribute_hidden do_url(SEXP call, SEXP op, SEXP args, SEXP env)
 	type = FTPsh;
     else if (strncmp(url, "https://", 8) == 0)
 	type = HTTPSsh;
-    // ftps:// is available via most libcurl.
+    // ftps:// is available via most libcurl, only
+    // The internal and wininet methods will create a connection
+    // but refuse to open it so as from R 3.2.0 we switch to libcurl
     else if (strncmp(url, "ftps://", 7) == 0)
 	type = FTPSsh;
     else
-	inet = FALSE;
+	inet = FALSE; // file:// URL or a file path
 
     // --------- open
     sopen = CADR(args);
@@ -5022,65 +5024,42 @@ SEXP attribute_hidden do_url(SEXP call, SEXP op, SEXP args, SEXP env)
     defmeth = streql(cmeth, "default");
     if (streql(cmeth, "wininet")) {
 #ifdef Win32
-	urlmeth = 1;
+	winmeth = 1;  // it already was as this is the default
 #else
 	error(_("'method = \"wininet\"' is only supported on Windows"));
 #endif
     }
 #ifdef Win32
-    else if (streql(cmeth, "internal")) urlmeth = 0;
+    else if (streql(cmeth, "internal")) winmeth = 0;
 #endif
 
-    if(PRIMVAL(op) == 1) { // file() -- has extra  'raw'  argument
+    // --------- raw, for file() only
+    if(PRIMVAL(op) == 1) {
 	raw = asLogical(CAD4R(CDR(args)));
 	if(raw == NA_LOGICAL)
 	    error(_("invalid '%s' argument"), "raw");
     }
 
     if(!meth) {
-	if (strncmp(url, "ftps://", 7) == 0)
+	if (strncmp(url, "ftps://", 7) == 0) {
 #ifdef HAVE_LIBCURL
-	{
-	    // this is slightly optimistic: we did not check the libcurl build
-	    if(!defmeth) {
-		REprintf(_("ftps:// URLs are not supported by method \"internal\": trying \"libcurl\"\n"));
-		R_FlushConsole();
-	    }
-	    meth = 1;
-	}
-//	error("ftps:// URLs are not supported by the default method:\n   consider url(method = \"libcurl\")");
-#else
-	error(_("ftps:// URLs are not supported"));
+	    if (defmeth) meth = 1; else
 #endif
+		error(_("ftps:// URLs are not supported by this method"));
+	}
 #ifdef Win32
-	if (!urlmeth && strncmp(url, "https://", 8) == 0) {
+	if (!winmeth && strncmp(url, "https://", 8) == 0) {
 # ifdef HAVE_LIBCURL
-	    // this is slightly optimistic: we did not check the libcurl build
-	    if(!defmeth) {
-		REprintf(_("https:// URLs are not supported by method \"internal\": trying \"libcurl\"\n"));
-		R_FlushConsole();
-	    }
-	    meth = 1;
-	}
-# else
-	//   error("for https:// URLs use setInternet2(TRUE)");
-	error(_("https:// URLs are not supported"));
+	    if (defmeth) meth = 1; else
 # endif
-#else
-	if (strncmp(url, "https://", 8) == 0)
-# ifdef HAVE_LIBCURL
-	{
-	    // this is slightly optimistic: we did not check the libcurl build
-	    if(!defmeth) {
-		REprintf(_("https:// URLs are not supported by method \"internal\": trying \"libcurl\"\n"));
-		R_FlushConsole();
-	    }
-	    meth = 1;
+		error(_("https:// URLs are not supported by this method"));
 	}
-//	    error("https:// URLs are not supported by the default method:\n  consider url(method = \"libcurl\")");
-# else
-	error(_("https:// URLs are not supported"));
-# endif
+#else // Unix
+	if (strncmp(url, "https://", 8) == 0) {
+	    // We check the libcurl build does support https as from R 3.3.0
+	    if (defmeth) meth = 1; else
+		error(_("https:// URLs are not supported by the \"internal\" method"));
+	}
 #endif
     }
 
@@ -5102,7 +5081,7 @@ SEXP attribute_hidden do_url(SEXP call, SEXP op, SEXP args, SEXP env)
 	    error(_("'url(method = \"libcurl\")' is not supported on this platform"));
 # endif
 	} else {
-	    con = R_newurl(url, strlen(open) ? open : "r", urlmeth);
+	    con = R_newurl(url, strlen(open) ? open : "r", winmeth);
 	    ((Rurlconn)con->conprivate)->type = type;
 	}
     } else {
@@ -6108,13 +6087,13 @@ SEXP R_new_custom_connection(const char *description, const char *mode, const ch
     if(!newcon) error(_("allocation of %s connection failed"), class_name);
     newcon->conclass = (char *) malloc(strlen(class_name) + 1);
     if(!newcon->conclass) {
-        free(newcon);
-        error(_("allocation of %s connection failed"), class_name);
+	free(newcon);
+	error(_("allocation of %s connection failed"), class_name);
     }
     strcpy(newcon->conclass, class_name);
     newcon->description = (char *) malloc(strlen(description) + 1);
     if(!newcon->description) {
-        free(newcon->conclass); free(newcon);
+	free(newcon->conclass); free(newcon);
 	error(_("allocation of %s connection failed"), class_name);
     }
     init_con(newcon, description, CE_NATIVE, mode);
@@ -6142,4 +6121,3 @@ SEXP R_new_custom_connection(const char *description, const char *mode, const ch
 
     return ans;
 }
-

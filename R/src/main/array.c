@@ -16,7 +16,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, a copy is available at
- *  http://www.r-project.org/Licenses/
+ *  https://www.R-project.org/Licenses/
  */
 
 #ifdef HAVE_CONFIG_H
@@ -341,11 +341,11 @@ SEXP DropDims(SEXP x)
 	   subset.c & others have a contrary version that leaves the
 	   S4 class in, incorrectly, in the case of vectors.  JMC
 	   3/3/09 */
-/* 	if(IS_S4_OBJECT(x)) {/\* no longer valid subclass of array or
- 	matrix *\/ */
-/* 	    setAttrib(x, R_ClassSymbol, R_NilValue); */
-/* 	    UNSET_S4_OBJECT(x); */
-/* 	} */
+/*	if(IS_S4_OBJECT(x)) {/\* no longer valid subclass of array or
+	matrix *\/ */
+/*	    setAttrib(x, R_ClassSymbol, R_NilValue); */
+/*	    UNSET_S4_OBJECT(x); */
+/*	} */
 	UNPROTECT(1); /* newnames */
     } else {
 	/* We have a lower dimensional array. */
@@ -443,16 +443,16 @@ static R_xlen_t getElementLength(SEXP x, R_xlen_t i, SEXP call, SEXP rho) {
     static SEXP length_op = NULL;
     SEXP x_elt = VECTOR_ELT(x, i);
     if (isObject(x_elt)) {
-        SEXP args, len;
-        PROTECT(args = list1(x_elt));
-        if (length_op == NULL)
-            length_op = R_Primitive("length");
-        if (DispatchOrEval(call, length_op, "length", args, rho, &len, 0, 1)) {
+	SEXP args, len;
+	PROTECT(args = list1(x_elt));
+	if (length_op == NULL)
+	    length_op = R_Primitive("length");
+	if (DispatchOrEval(call, length_op, "length", args, rho, &len, 0, 1)) {
 	    UNPROTECT(1);
 	    return (R_xlen_t)
 		(TYPEOF(len) == REALSXP ? REAL(len)[0] : asInteger(len));
 	}
-        UNPROTECT(1);
+	UNPROTECT(1);
     }
     return(xlength(x_elt));
 }
@@ -467,7 +467,7 @@ static SEXP do_lengths_long(SEXP x, SEXP call, SEXP rho)
     x_len = xlength(x);
     PROTECT(ans = allocVector(REALSXP, x_len));
     for (i = 0, ans_elt = REAL(ans); i < x_len; i++, ans_elt++)
-        *ans_elt = getElementLength(x, i, call, rho);
+	*ans_elt = getElementLength(x, i, call, rho);
     UNPROTECT(1);
     return ans;
 }
@@ -1095,44 +1095,44 @@ SEXP attribute_hidden do_transpose(SEXP call, SEXP op, SEXP args, SEXP rho)
     case LGLSXP:
     case INTSXP:
 	// filling in columnwise, "accessing row-wise":
-        for (i = 0, j = 0; i < len; i++, j += nrow) {
-            if (j > l_1) j -= l_1;
-            INTEGER(r)[i] = INTEGER(a)[j];
-        }
-        break;
+	for (i = 0, j = 0; i < len; i++, j += nrow) {
+	    if (j > l_1) j -= l_1;
+	    INTEGER(r)[i] = INTEGER(a)[j];
+	}
+	break;
     case REALSXP:
-        for (i = 0, j = 0; i < len; i++, j += nrow) {
-            if (j > l_1) j -= l_1;
-            REAL(r)[i] = REAL(a)[j];
-        }
-        break;
+	for (i = 0, j = 0; i < len; i++, j += nrow) {
+	    if (j > l_1) j -= l_1;
+	    REAL(r)[i] = REAL(a)[j];
+	}
+	break;
     case CPLXSXP:
-        for (i = 0, j = 0; i < len; i++, j += nrow) {
-            if (j > l_1) j -= l_1;
-            COMPLEX(r)[i] = COMPLEX(a)[j];
-        }
-        break;
+	for (i = 0, j = 0; i < len; i++, j += nrow) {
+	    if (j > l_1) j -= l_1;
+	    COMPLEX(r)[i] = COMPLEX(a)[j];
+	}
+	break;
     case STRSXP:
-        for (i = 0, j = 0; i < len; i++, j += nrow) {
-            if (j > l_1) j -= l_1;
-            SET_STRING_ELT(r, i, STRING_ELT(a,j));
-        }
-        break;
+	for (i = 0, j = 0; i < len; i++, j += nrow) {
+	    if (j > l_1) j -= l_1;
+	    SET_STRING_ELT(r, i, STRING_ELT(a,j));
+	}
+	break;
     case VECSXP:
-        for (i = 0, j = 0; i < len; i++, j += nrow) {
-            if (j > l_1) j -= l_1;
-            SET_VECTOR_ELT(r, i, VECTOR_ELT(a,j));
-        }
-        break;
+	for (i = 0, j = 0; i < len; i++, j += nrow) {
+	    if (j > l_1) j -= l_1;
+	    SET_VECTOR_ELT(r, i, VECTOR_ELT(a,j));
+	}
+	break;
     case RAWSXP:
-        for (i = 0, j = 0; i < len; i++, j += nrow) {
-            if (j > l_1) j -= l_1;
-            RAW(r)[i] = RAW(a)[j];
-        }
-        break;
+	for (i = 0, j = 0; i < len; i++, j += nrow) {
+	    if (j > l_1) j -= l_1;
+	    RAW(r)[i] = RAW(a)[j];
+	}
+	break;
     default:
-        UNPROTECT(2); /* r, dimnamesnames */
-        goto not_matrix;
+	UNPROTECT(2); /* r, dimnamesnames */
+	goto not_matrix;
     }
     PROTECT(dims = allocVector(INTSXP, 2));
     INTEGER(dims)[0] = ncol;
@@ -1183,7 +1183,7 @@ SEXP attribute_hidden do_transpose(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    iip[itmp]++;				\
 	    break;					\
 	}						\
-    for (lj = 0, itmp = 0; itmp < n; itmp++)	       	\
+    for (lj = 0, itmp = 0; itmp < n; itmp++)		\
 	lj += iip[itmp] * stride[itmp];
 
 /* aperm (a, perm, resize = TRUE) */
@@ -1380,7 +1380,7 @@ SEXP attribute_hidden do_colsum(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("'%s' must be numeric"), "x");
     }
     if (n * (double)p > XLENGTH(x))
-    	error(_("'%s' argument is too short"), "x"); /* PR#16367 */
+	error(_("'%s' argument is too short"), "x"); /* PR#16367 */
 
     int OP = PRIMVAL(op);
     if (OP == 0 || OP == 1) { /* columns */
@@ -1514,14 +1514,14 @@ SEXP attribute_hidden do_colsum(SEXP call, SEXP op, SEXP args, SEXP rho)
     dim <- as.integer(dim)
     vl <- prod(dim)
     if (length(data) != vl) {
-        if (vl > .Machine$integer.max)
-            stop(_("'dim' specifies too large array"))
-        data <- rep(data, length.out = vl)
+	if (vl > .Machine$integer.max)
+	    stop(_("'dim' specifies too large array"))
+	data <- rep(data, length.out = vl)
     }
     if (length(dim))
-        dim(data) <- dim
+	dim(data) <- dim
     if (is.list(dimnames) && length(dimnames))
-        dimnames(data) <- dimnames
+	dimnames(data) <- dimnames
     data
 }
 */

@@ -1,5 +1,5 @@
 % File src/library/utils/man/read.table.Rd
-% Part of the R package, http://www.R-project.org
+% Part of the R package, https://www.R-project.org
 % Copyright 1995-2015 R Core Team
 % Distributed under GPL 2 or later
 
@@ -318,7 +318,7 @@ read.delim2(file, header = TRUE, sep = "\t", quote = "\"",
   reading files which result in reports of incorrect record lengths (see
   the \sQuote{Examples} below).
 
-  \url{http://tools.ietf.org/html/rfc4180} for the IANA definition of
+  \url{https://tools.ietf.org/html/rfc4180} for the IANA definition of
   CSV files (which requires comma as separator and CRLF line endings).
 }
 

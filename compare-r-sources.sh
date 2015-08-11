@@ -39,3 +39,4 @@ if test `wc -l $RANDSTRING | cut -d" " -f1` -ne 0; then
 else
    echo "'"$X"' and '"$Y"' are identical"
 fi;
+# LC_ALL=C diff -qr --exclude=".svn" --exclude="translations" R-devel R-devel-frozen | sort | sed -n -e "s/Files \(.*\)* and .*/ \1\\\\/p"

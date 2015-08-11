@@ -15,7 +15,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, a copy is available at
- *  http://www.r-project.org/Licenses/
+ *  https://www.R-project.org/Licenses/
  */
 
 #ifdef HAVE_CONFIG_H
@@ -77,8 +77,8 @@ static SEXP lbinary(SEXP call, SEXP op, SEXP args)
     if (isRaw(x) && isRaw(y)) {
     }
     else if (!isNumber(x) || !isNumber(y))
-    	errorcall(call,
-    		  _("operations are possible only for numeric, logical or complex types"));
+	errorcall(call,
+		  _("operations are possible only for numeric, logical or complex types"));
     tsp = R_NilValue;		/* -Wall */
     klass = R_NilValue;		/* -Wall */
     xarray = isArray(x);
@@ -380,19 +380,19 @@ static int checkValues(int op, int na_rm, int *x, R_xlen_t n)
     int has_na = 0;
     for (i = 0; i < n; i++) {
 //	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
-        if (!na_rm && x[i] == NA_LOGICAL) has_na = 1;
-        else {
-            if (x[i] == TRUE && op == _OP_ANY) return TRUE;
-            if (x[i] == FALSE && op == _OP_ALL) return FALSE;
-        }
+	if (!na_rm && x[i] == NA_LOGICAL) has_na = 1;
+	else {
+	    if (x[i] == TRUE && op == _OP_ANY) return TRUE;
+	    if (x[i] == FALSE && op == _OP_ALL) return FALSE;
+	}
     }
     switch (op) {
     case _OP_ANY:
-        return has_na ? NA_LOGICAL : FALSE;
+	return has_na ? NA_LOGICAL : FALSE;
     case _OP_ALL:
-        return has_na ? NA_LOGICAL : TRUE;
+	return has_na ? NA_LOGICAL : TRUE;
     default:
-        error(_("bad operator value for 'do_logic3()' function"));
+	error(_("bad operator value for 'do_logic3()' function"));
     }
     return NA_LOGICAL; /* -Wall */
 }
@@ -439,13 +439,13 @@ SEXP attribute_hidden do_logic3(SEXP call, SEXP op, SEXP args, SEXP env)
 	    t = coerceVector(t, LGLSXP);
 	}
 	val = checkValues(PRIMVAL(op), narm, LOGICAL(t), XLENGTH(t));
-        if (val != NA_LOGICAL) {
-            if ((PRIMVAL(op) == _OP_ANY && val)
-                || (PRIMVAL(op) == _OP_ALL && !val)) {
-                has_na = 0;
-                break;
-            }
-        } else has_na = 1;
+	if (val != NA_LOGICAL) {
+	    if ((PRIMVAL(op) == _OP_ANY && val)
+		|| (PRIMVAL(op) == _OP_ALL && !val)) {
+		has_na = 0;
+		break;
+	    }
+	} else has_na = 1;
     }
     UNPROTECT(2);
     return has_na ? ScalarLogical(NA_LOGICAL) : ScalarLogical(val);

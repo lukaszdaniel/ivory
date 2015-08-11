@@ -14,7 +14,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, a copy is available at
- *  http://www.r-project.org/Licenses/
+ *  https://www.R-project.org/Licenses/
  */
 
 #ifdef HAVE_CONFIG_H
@@ -26,6 +26,7 @@
 #include <Internal.h>
 #include <R_ext/GraphicsEngine.h>
 #include <R_ext/Applic.h>	/* pretty() */
+#include <R_ext/Minmax.h>
 #include <Rmath.h>
 
 # include <rlocale.h>
@@ -3348,8 +3349,8 @@ void R_GE_rasterRotatedSize(int w, int h, double angle,
     /* 
      * Rotated image may be shorter or thinner than original
      */
-    *wnew = imax2(w, *wnew);
-    *hnew = imax2(h, *hnew);
+    *wnew = max(w, *wnew);
+    *hnew = max(h, *hnew);
 }
 
 /*

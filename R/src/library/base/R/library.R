@@ -1,5 +1,5 @@
 #  File src/library/base/R/library.R
-#  Part of the R package, http://www.R-project.org
+#  Part of the R package, https://www.R-project.org
 #
 #  Copyright (C) 1995-2015 The R Core Team
 #
@@ -14,7 +14,7 @@
 #  GNU General Public License for more details.
 #
 #  A copy of the GNU General Public License is available at
-#  http://www.r-project.org/Licenses/
+#  https://www.R-project.org/Licenses/
 
 testPlatformEquivalence <-
 function(built, run)
@@ -272,20 +272,22 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
             ## takes over.
             if (packageHasNamespace(package, which.lib.loc)) {
 		if (isNamespaceLoaded(package)) {
-                    # Already loaded.  Does the version match?
+                    ## Already loaded.  Does the version match?
                     newversion <- as.numeric_version(pkgInfo$DESCRIPTION["Version"])
                     oldversion <- as.numeric_version(getNamespaceVersion(package))
                     if (newversion != oldversion) {
-                    	# No, so try to unload the previous one
+                    	## No, so try to unload the previous one
                     	res <- try(unloadNamespace(package))
                     	if (inherits(res, "try-error"))
                     	    stop(gettextf("Package %s version %s cannot be unloaded", sQuote(package), oldversion, domain = "R-base"))
                     }
                 }
                 tt <- try({
-                    ns <- loadNamespace(package, c(which.lib.loc, lib.loc))
+                    attr(package, "LibPath") <- which.lib.loc
+                    ns <- loadNamespace(package, lib.loc)
                     env <- attachNamespace(ns, pos = pos, deps)
                 })
+                attr(package, "LibPath") <- NULL
                 if (inherits(tt, "try-error"))
                     if (logical.return)
                         return(FALSE)
@@ -415,7 +417,7 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
     if (logical.return)
 	TRUE
     else invisible(.packages())
-}
+} ## {library}
 
 format.libraryIQR <-
 function(x, ...)
@@ -646,14 +648,10 @@ function(package = NULL, lib.loc = NULL, quiet = FALSE,
                       "splines", "stats4", "tcltk"))
         return(file.path(.Library, package))
 
-    use_loaded <- FALSE
     if(is.null(package)) package <- .packages()
-    if(is.null(lib.loc)) {
-        use_loaded <- TRUE
-        lib.loc <- .libPaths()
-    }
-
     if(!length(package)) return(character())
+    if(use_loaded <- is.null(lib.loc))
+	lib.loc <- .libPaths()
 
     bad <- character()
     out <- character()
@@ -709,7 +707,7 @@ function(package = NULL, lib.loc = NULL, quiet = FALSE,
         if(length(paths) > 1L) {
             ## If a package was found more than once ...
             paths <- paths[1L]
-            if(verbose)
+	    if(verbose)
                 warning(gettextf("package %s was found more than once. Using the one found in %s", sQuote(pkg), sQuote(paths)), domain = "R-base")
         }
         out <- c(out, paths)

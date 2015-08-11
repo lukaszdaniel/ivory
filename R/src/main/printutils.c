@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
- *  Copyright (C) 1999--2014  The R Core Team
+ *  Copyright (C) 1999--2015  The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, a copy is available at
- *  http://www.r-project.org/Licenses/
+ *  https://www.R-project.org/Licenses/
  */
 
 
@@ -592,7 +592,7 @@ const char *EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 
        +2 allows for quotes, +6 for UTF_8 escapes.
      */
-    q = R_AllocStringBuffer(imax2(5*cnt+8, w), buffer);
+    q = R_AllocStringBuffer(max(5*cnt+8, w), buffer);
     b = w - i - (quote ? 2 : 0); /* total amount of padding */
     if(justify == Rprt_adj_none) b = 0;
     if(b > 0 && justify != Rprt_adj_left) {

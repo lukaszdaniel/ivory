@@ -1,5 +1,5 @@
 % File src/library/base/man/capabilities.Rd
-% Part of the R package, http://www.R-project.org
+% Part of the R package, https://www.R-project.org
 % Copyright 1995-2015 R Core Team
 % Distributed under GPL 2 or later
 
@@ -56,13 +56,13 @@ capabilities(what = NULL)
   \item{X11}{always \code{FALSE} on Windows.}
   \item{aqua}{\code{FALSE} except on OS X.}
 #endif
-  \item{http/ftp}{Does the internal method for \code{\link{url}} and
+  \item{http/ftp}{does the internal method for \code{\link{url}} and
     \code{\link{download.file}} support \samp{http://} and \samp{ftp://}
     URLs?  Always \code{TRUE} as from \R 3.3.0.}
-  \item{sockets}{Are \code{\link{make.socket}} and related functions
+  \item{sockets}{are  \code{\link{make.socket}} and related functions
     available?  Always \code{TRUE} as from \R 3.3.0.}
   \item{libxml}{is there support for integrating \code{libxml} with
-    the \R event loop?  \code{TRUE} as from \R 3.3.0.}
+    the \R event loop?  Always \code{TRUE} as from \R 3.3.0.}
   \item{fifo}{are FIFO \link{connections} supported?}
   \item{cledit}{is command-line editing available in the current \R
     session?  This is false in non-interactive sessions.

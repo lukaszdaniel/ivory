@@ -1,5 +1,5 @@
 % File src/library/base/man/options.Rd
-% Part of the R package, http://www.R-project.org
+% Part of the R package, https://www.R-project.org
 % Copyright 1995-2015 R Core Team
 % Distributed under GPL 2 or later
 
@@ -321,9 +321,6 @@ getOption(x, default = NULL)
       rendering text help (see \code{\link{Rd2txt}} in package
       \pkg{tools}).  Can be \code{TRUE}, \code{FALSE}, \code{"TeX"} or
       \code{"UTF-8"}.}
-      
-    \item{\code{useHTTPS}:}{logical.  Used by \code{\link{chooseCRANmirror}}:
-      are secure mirrors preferred?  If not set, \code{TRUE} is used.}
 
     \item{\code{verbose}:}{logical.  Should \R report extra information
       on progress?  Set to \code{TRUE} by the command-line option
@@ -497,9 +494,9 @@ getOption(x, default = NULL)
   \describe{
     \item{\code{BioC_mirror}:}{The URL of a Bioconductor mirror
       for use by \code{\link{setRepositories}},
-      e.g.\sspace{}the default \samp{"http://bioconductor.org"}
+      e.g.\sspace{}the default \samp{"https://bioconductor.org"}
       or the European mirror
-      \samp{"http://bioconductor.statistik.tu-dortmund.de"}.  Can be set
+      \samp{"https://bioconductor.statistik.tu-dortmund.de"}.  Can be set
       by \code{\link{chooseBioCmirror}}.}
 
     \item{\code{browser}:}{The HTML browser to be used by
@@ -544,11 +541,11 @@ getOption(x, default = NULL)
     \item{\code{help_type}:}{default for an argument of
     \code{\link{help}}, used also as the help type by \code{\link{?}}.}
 
-    \item{\code{HTTPUserAgent}:}{string used as the user agent in HTTP
-      requests.  If \code{NULL}, HTTP requests will be made without a
-      user agent header.  The default is \code{R (<version> <platform>
-	<arch> <os>)}}
-
+    \item{\code{HTTPUserAgent}:}{string used as the user agent in HTTP(S)
+      requests.  If \code{NULL}, requests will be made without a
+      user agent header.
+      The default is \code{R (<version> <platform> <arch> <os>)} .}
+    
     \item{\code{install.lock}:}{logical: should per-directory package
       locking be used by \code{\link{install.packages}}?  Most useful
       for binary installs on OS X and Windows, but can be used in a
@@ -557,12 +554,11 @@ getOption(x, default = NULL)
       the character string \code{"pkgloack"}.}
 
     \item{\code{internet.info}:}{The minimum level of information to be
-      printed on URL downloads etc, using the \code{"internal"} method.
+      printed on URL downloads etc, using the \code{"internal"} and
+      \code{"libcurl"} methods.
       Default is 2, for failure causes.  Set to 1 or 0 to get more
-      detailed information.
-
-      For methods based on \code{libcurl} a value less than 2 (the
-      default) selects verbose output.
+      detailed information (for the \code{"internal"} method 0 provides
+      more information than 1).
     }
 
     \item{\code{install.packages.check.source}:}{Used by
@@ -642,6 +638,9 @@ getOption(x, default = NULL)
       used.
 #endif
     }
+      
+    \item{\code{useHTTPS}:}{logical.  Used by \code{\link{chooseCRANmirror}}:
+      are secure mirrors preferred?  If not set, \code{TRUE} is assumed.}
   }
 }
 \section{Options set in package parallel}{

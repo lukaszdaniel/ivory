@@ -16,7 +16,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, a copy is available at
- *  http://www.r-project.org/Licenses/
+ *  https://www.R-project.org/Licenses/
  */
 
 #ifdef HAVE_CONFIG_H
@@ -29,6 +29,7 @@
 #include <Graphics.h>
 #include <Print.h>
 #include <Rmath.h> // for Rexp10, imax2
+#include <R_ext/Minmax.h>
 
 /* used in graphics and grid */
 SEXP CreateAtVector(double *axp, double *usr, int nint, Rboolean logflag)
@@ -48,7 +49,7 @@ SEXP CreateAtVector(double *axp, double *usr, int nint, Rboolean logflag)
     int i, n, ne;
     if (!logflag || axp[2] < 0) { /* --- linear axis --- Only use axp[] arg. */
 	n = (int)(fabs(axp[2]) + 0.25);/* >= 0 */
-	dn = imax2(1, n);
+	dn = max(1, n);
 	rng = axp[1] - axp[0];
 	small = fabs(rng)/(100.*dn);
 	at = allocVector(REALSXP, n + 1);

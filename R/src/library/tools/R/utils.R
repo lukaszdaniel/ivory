@@ -1,5 +1,5 @@
 #  File src/library/tools/R/utils.R
-#  Part of the R package, http://www.R-project.org
+#  Part of the R package, https://www.R-project.org
 #
 #  Copyright (C) 1995-2015 The R Core Team
 #
@@ -14,7 +14,7 @@
 #  GNU General Public License for more details.
 #
 #  A copy of the GNU General Public License is available at
-#  http://www.r-project.org/Licenses/
+#  https://www.R-project.org/Licenses/
 
 ### * File utilities.
 
@@ -1411,6 +1411,7 @@ nonS3methods <- function(package)
              RCurl = "merge.list",
              RNetCDF = c("close.nc", "dim.def.nc", "dim.inq.nc",
                          "dim.rename.nc", "open.nc", "print.nc"),
+             Rmpfr = c("mpfr.is.0", "mpfr.is.integer"),
              SMPracticals = "exp.gibbs",
              TANOVA = "sigma.hat",
              TeachingDemos = "sigma.test",
@@ -1641,12 +1642,13 @@ function(file)
     db
 }
 
+### default changed to https: for R 3.3.0
 .expand_BioC_repository_URLs <-
 function(x)
 {
     x <- sub("%bm",
              as.character(getOption("BioC_mirror",
-                                    "http://bioconductor.org")),
+                                    "https://bioconductor.org")),
              x, fixed = TRUE)
     sub("%v",
         as.character(.BioC_version_associated_with_R_version()),

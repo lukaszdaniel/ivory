@@ -16,7 +16,7 @@
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, a copy is available at
- *  http://www.r-project.org/Licenses/
+ *  https://www.R-project.org/Licenses/
  *
  *  SYNOPSIS
  *
@@ -171,7 +171,7 @@ double rhyper(double nn1in, double nn2in, double kkin)
     } else if (m - minjx < 10) { // II: (Scaled) algorithm HIN (inverse transformation) ----
 	const static double scale = 1e25; // scaling factor against (early) underflow
 	const static double con = 57.5646273248511421;
-                                          // 25*log(10) = log(scale) { <==> exp(con) == scale }
+					  // 25*log(10) = log(scale) { <==> exp(con) == scale }
 	if (setup1 || setup2) {
 	    double lw; // log(w);  w = exp(lw) * scale = exp(lw + log(scale)) = exp(lw + con)
 	    if (k < n2) {
