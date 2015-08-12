@@ -175,6 +175,17 @@
     }
   }
 
+  \subsection{C-LEVEL FACILITIES}{
+    \itemize{
+      \item The API call \code{logspace_sum} introduced in \R 3.2.0 is
+      now remapped as an entry point to \code{Rf_logspace_sum}, and its
+      first argument has gained a \code{const} qualifier.
+
+      Code using it will need to be reinstalled. (\PR{16470})
+      % no current CRAN packages ....
+    }
+  }
+  
   \subsection{BUG FIXES}{
     \itemize{
       \item C-level \code{asChar(x)} is fixed for when \code{x} is not a
@@ -193,9 +204,17 @@
 }
 
 \section{\Rlogo CHANGES IN R 3.2.2 patched}{
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item Some Windows time zone names have been added to the
+      conversion table used to convert these to Olson names.  (Including
+      those relating to changes for Russia in Oct 2014, as in \PR{16503}.)
+    }
+  }
+
   \subsection{BUG FIXES}{
     \itemize{
-      \item \code{regexpr(pat, x, perl = TRUE)} with Python-style
+      \item \code{regexpr(pat, x, perl = TRUE)} with Python-style named
       capture did not work correctly when \code{x} contained \code{NA}
       strings.  (\PR{16484})
 
@@ -204,7 +223,19 @@
       
       \item \code{model.tables(type = "means")} and hence
       \code{TukeyHSD()} now support \code{"aov"} fits without an
-      intercept term. 
+      intercept term.
+
+      \item \code{close()} now reports the status of a \code{pipe()}
+      connection opened with an explicit \code{open} argument.
+      (\PR{16481})
+
+      \item Coercing a list without names to a data frame is faster if
+      the elements are very long. (\PR{16467})
+
+      \item (Unix-only) Under some circumstances piping the output from
+      \command{Rscript} or \command{R -f} could result in attempting to
+      close the input file twice, possibly crashing the process.
+      (\PR{16500})
     }
   }
 }
@@ -224,7 +255,15 @@
       if that supports the \code{https} protocol (system installations
       can be expected to do).  So \samp{https://} support can be
       expected except on rather old OSes (an example being OS X
-      \sQuote{Snow Leopard}).
+      \sQuote{Snow Leopard}, where a non-system version of
+      \code{libcurl} can be used).
+
+      (Windows only) The default method for accessing URLs \emph{via}
+      \code{download.file()} and \code{url()} has been changed to be
+      \code{"wininet"} using Windows API calls.  This changes the way
+      proxies need to be set and security settings made: there have been
+      some reports of sites being inaccessible under the new default
+      method (but the previous methods remain available).
     }
   }
 

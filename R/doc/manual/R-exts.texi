@@ -4388,9 +4388,10 @@ language of the UTF-8 locale, and your users would need to be told how
 to select the @samp{encoding} argument.
 
 If you want to run @command{R CMD check} on a Unix-alike over a package
-that sets a package encoding in its @file{DESCRIPTION} file you may need
-to specify a suitable locale @emph{via} environment variable
-@env{R_ENCODING_LOCALES}.  The default is equivalent to the value
+that sets a package encoding in its @file{DESCRIPTION} file @emph{and do
+not use a UTF-8 locale} you may need to specify a suitable locale
+@emph{via} environment variable @env{R_ENCODING_LOCALES}.  The default
+is equivalent to the value
 
 @example
 "latin1=en_US:latin2=pl_PL:UTF-8=en_US.UTF-8:latin9=fr_FR.iso885915@@euro"
@@ -12085,7 +12086,7 @@ in @file{Rmath.h}, but is in @file{math.h} which @file{Rmath.h} includes.
 
 @deftypefun double logspace_add (double @var{logx}, double @var{logy})
 @deftypefunx double logspace_sub (double @var{logx}, double @var{logy})
-@deftypefunx double logspace_sum (double* @var{logx}, int @var{n})
+@deftypefunx double logspace_sum (const double* @var{logx}, int @var{n})
 Compute the log of a sum or difference from logs of terms, i.e., ``x +
 y'' as @code{log (exp(@var{logx}) + exp(@var{logy}))} and ``x - y'' as
 @code{log (exp(@var{logx}) - exp(@var{logy}))},
