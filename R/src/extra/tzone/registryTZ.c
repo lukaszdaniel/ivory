@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2007-8   The R Core Team
+ *  Copyright (C) 2007-2015   The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,6 +23,7 @@
 /*
   From http://unicode.org/cldr/data/diff/supplemental/windows_tzid.html
   Added some entries from the XP Registry (and checked on Vista).
+  Table updated from Unicode in August 2015.
  */
 const static struct {
     const wchar_t * const reg;
@@ -285,6 +286,30 @@ const static struct {
     { L"Yekaterinburg Standard Time", "Asia/Yekaterinburg" },
     { L"Yerevan Standard Time", "Asia/Yerevan" },
     { L"Yukon Standard Time", "America/Yakutat" },
+
+/* 2015 additions, seen in then-current Windows 7 */
+    { L"Argentina Standard Time", "America/Buenos_Aires" },
+    { L"Bahia Standard Time", "America/Bahia" },
+    { L"Belarus Standard Time", "Europe/Minsk" },
+    { L"Kaliningrad Standard Time", "Europe/Kaliningrad" },
+    { L"Kamchatka Standard Time", "Asia/Kamchatka" },
+    { L"Libya Standard Time", "Africa/Tripoli" },
+    { L"Morocco Standard Time", "Africa/Casablanca" },
+    { L"Syria Standard Time", "Asia/Damascus" },
+    { L"Ulaanbaatar Standard Time", "Asia/Ulaanbaatar" },
+    // See https://support.microsoft.com/en-gb/gp/cp_dst
+    { L"Russia Time Zone 1", "Europe/Kaliningrad" },
+    { L"Russia Time Zone 2", "Europe/Moscow" },
+    { L"Russia Time Zone 3", "Europe/Samara" },
+    { L"Russia Time Zone 4", "Asia/Yekaterinburg" },
+    { L"Russia Time Zone 5", "Asia/Novosibirsk" },
+    { L"Russia Time Zone 6", "Asia/Krasnoyarsk" },
+    { L"Russia Time Zone 7", "Asia/Irtutsk" },
+    { L"Russia Time Zone 8", "Asia/Yakutsk" },
+    { L"Russia Time Zone 9", "Asia/Magadan" },
+    { L"Russia Time Zone 10", "Asia/Srednekolymsk" },
+    { L"Russia Time Zone 11", "Asia/Kamchatka" },
+
     { NULL,  "" }
 };
 
