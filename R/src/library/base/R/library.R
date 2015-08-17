@@ -75,7 +75,7 @@ function(package, help, pos = 2, lib.loc = NULL, character.only = FALSE,
             ## allow mismatches if r_arch is in use, e.g.
             ## i386-gnu-linux vs x86-gnu-linux depending on
             ## build system.
-            if(!nzchar(r_arch) && length(grep("\\w", platform)) &&
+            if(!nzchar(r_arch) && grepl("\\w", platform) &&
                !testPlatformEquivalence(platform, R.version$platform))
                 stop(gettextf("package %s was built for platform %s", sQuote(pkgname), platform), call. = FALSE, domain = "R-base")
         } else {  # Windows

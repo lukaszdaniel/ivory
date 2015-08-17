@@ -242,28 +242,31 @@ function(file, pdf = FALSE, clean = FALSE, quiet = TRUE,
     Rtexmf <- file.path(R.home("share"), "texmf")
     Rtexinputs <- file.path(Rtexmf, "tex", "latex")
     ## "" forces use of default paths.
-    texinputs <- paste(c(texinputs0, Rtexinputs, ""), collapse = envSep)
+    texinputs <- paste(c(texinputs0, Rtexinputs, ""),
+                       collapse = envSep)
     ## not clear if this is needed, but works
     if(.Platform$OS.type == "windows")
         texinputs <- gsub("\\", "/", texinputs, fixed = TRUE)
     Rbibinputs <- file.path(Rtexmf, "bibtex", "bib")
-    bibinputs <- paste(c(texinputs0, Rbibinputs, ""), collapse = envSep)
+    bibinputs <- paste(c(texinputs0, Rbibinputs, ""),
+                       collapse = envSep)
     Rbstinputs <- file.path(Rtexmf, "bibtex", "bst")
-    bstinputs <- paste(c(texinputs0, Rbstinputs, ""), collapse = envSep)
+    bstinputs <- paste(c(texinputs0, Rbstinputs, ""),
+                       collapse = envSep)
 
-    otexinputs <- Sys.getenv("TEXINPUTS", unset = NA)
+    otexinputs <- Sys.getenv("TEXINPUTS", unset = NA_character_)
     if(is.na(otexinputs)) {
         on.exit(Sys.unsetenv("TEXINPUTS"))
         otexinputs <- "."
     } else on.exit(Sys.setenv(TEXINPUTS = otexinputs))
     Sys.setenv(TEXINPUTS = paste(otexinputs, texinputs, sep = envSep))
-    obibinputs <- Sys.getenv("BIBINPUTS", unset = NA)
+    obibinputs <- Sys.getenv("BIBINPUTS", unset = NA_character_)
     if(is.na(obibinputs)) {
         on.exit(Sys.unsetenv("BIBINPUTS"), add = TRUE)
         obibinputs <- "."
     } else on.exit(Sys.setenv(BIBINPUTS = obibinputs, add = TRUE))
     Sys.setenv(BIBINPUTS = paste(obibinputs, bibinputs, sep = envSep))
-    obstinputs <- Sys.getenv("BSTINPUTS", unset = NA)
+    obstinputs <- Sys.getenv("BSTINPUTS", unset = NA_character_)
     if(is.na(obstinputs)) {
         on.exit(Sys.unsetenv("BSTINPUTS"), add = TRUE)
         obstinputs <- "."
@@ -833,7 +836,7 @@ function(dir, installed = FALSE)
 .get_repositories <-
 function()
 {
-    rfile <- Sys.getenv("R_REPOSITORIES", unset = NA)
+    rfile <- Sys.getenv("R_REPOSITORIES", unset = NA_character_)
     if(is.na(rfile) || !file_test("-f", rfile)) {
         rfile <- file.path(Sys.getenv("HOME"), ".R", "repositories")
         if(!file_test("-f", rfile))

@@ -40,12 +40,12 @@ capabilities(what = NULL)
 #endif
   }
 #ifdef unix
-  \item{X11}{Are the \code{\link{X11}} graphics device and the
+  \item{X11}{are the \code{\link{X11}} graphics device and the
     X11-based data editor available?  This loads the X11 module if not
     already loaded, and checks that the default display can be
     contacted unless a \code{X11} device has already been used.}
 
-  \item{aqua}{Is the \code{\link{quartz}} function operational?
+  \item{aqua}{is the \code{\link{quartz}} function operational?
     Only on some OS X builds, including \acronym{CRAN} binary
     distributions of \R.
 

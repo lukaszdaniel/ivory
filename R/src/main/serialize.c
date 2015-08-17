@@ -855,27 +855,27 @@ OutIntegerVec(R_outpstream_t stream, SEXP s, R_xlen_t length)
     case R_pstream_xdr_format:
     {
 	static char buf[CHUNK_SIZE * sizeof(int)];
-	R_xlen_t done, this;
+	R_xlen_t done, thiss;
 	XDR xdrs;
-	for (done = 0; done < length; done += this) {
-	    this = min(CHUNK_SIZE, length - done);
-	    xdrmem_create(&xdrs, buf, (int)(this * sizeof(int)), XDR_ENCODE);
-	    for(int cnt = 0; cnt < this; cnt++)
+	for (done = 0; done < length; done += thiss) {
+	    thiss = min(CHUNK_SIZE, length - done);
+	    xdrmem_create(&xdrs, buf, (int)(thiss * sizeof(int)), XDR_ENCODE);
+	    for(int cnt = 0; cnt < thiss; cnt++)
 		if(!xdr_int(&xdrs, INTEGER(s) + done + cnt))
 		    error(_("XDR write failed"));
 	    xdr_destroy(&xdrs);
-	    stream->OutBytes(stream, buf, (int)(sizeof(int) * this));
+	    stream->OutBytes(stream, buf, (int)(sizeof(int) * thiss));
 	}
 	break;
     }
     case R_pstream_binary_format:
     {
 	/* write in chunks to avoid overflowing ints */
-	R_xlen_t done, this;
-	for (done = 0; done < length; done += this) {
-	    this = min(CHUNK_SIZE, length - done);
+	R_xlen_t done, thiss;
+	for (done = 0; done < length; done += thiss) {
+	    thiss = min(CHUNK_SIZE, length - done);
 	    stream->OutBytes(stream, INTEGER(s) + done,
-			     (int)(sizeof(int) * this));
+			     (int)(sizeof(int) * thiss));
 	}
 	break;
     }

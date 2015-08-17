@@ -2463,7 +2463,7 @@ function(x, ...)
 
     report_S3_methods_not_registered <-
         config_val_to_logical(Sys.getenv("_R_CHECK_S3_METHODS_NOT_REGISTERED_",
-                                         FALSE))
+                                         "FALSE"))
 
     c(as.character(unlist(lapply(x, .fmt))),
       if(report_S3_methods_not_registered &&
@@ -3975,7 +3975,8 @@ function(package, dir, lib.loc = NULL)
     thisfile[have_colon] <- sub("([^:]*):(.*)", "\\2", anchor[have_colon])
 
     use_aliases_from_CRAN <-
-        config_val_to_logical(Sys.getenv("_R_CHECK_XREFS_USE_ALIASES_FROM_CRAN_", FALSE))
+        config_val_to_logical(Sys.getenv("_R_CHECK_XREFS_USE_ALIASES_FROM_CRAN_",
+                                         "FALSE"))
     if(use_aliases_from_CRAN) {
         aliases_db <- NULL
     }
@@ -4148,20 +4149,24 @@ function(x, ...)
     ## not sQuote as we have mucked about with locales.
     iconv0 <- function(x, ...) paste0("'", iconv(x, ...), "'")
 
+    suppress_notes <-
+        config_val_to_logical(Sys.getenv("_R_CHECK_PACKAGE_DATASETS_SUPPRESS_NOTES_",
+                                         "FALSE"))
+
     c(character(),
-      if(n <- x$latin1) {
+      if((n <- x$latin1) && !suppress_notes) {
           sprintf(
                   ngettext(n,
                    "Note: found %d marked Latin-1 string",
                    "Note: found %d marked Latin-1 strings", domain = "R-tools"), n)
       },
-      if(n <- x$utf8) {
+      if((n <- x$utf8) && !suppress_notes) {
           sprintf(
                   ngettext(n,
                            "Note: found %d marked UTF-8 string",
                            "Note: found %d marked UTF-8 strings", domain = "R-tools"), n)
       },
-      if(n <- x$bytes) {
+      if((n <- x$bytes) && !suppress_notes) {
           sprintf(
                   ngettext(n,
                            "Note: found %d string marked as \"bytes\"",
@@ -4468,7 +4473,7 @@ function(dir)
                    Sys.setlocale("LC_CTYPE", "C")
                    )
         } else {
-            loc <- Sys.getenv("R_ENCODING_LOCALES", NA)
+            loc <- Sys.getenv("R_ENCODING_LOCALES", NA_character_)
             if(!is.na(loc)) {
                 loc <- strsplit(strsplit(loc, ":")[[1L]], "=")
                 nm <- lapply(loc, "[[", 1L)
@@ -5346,7 +5351,14 @@ function(package, dir, lib.loc = NULL)
 format.check_packages_used <-
 function(x, ...)
 {
-    incoming <- identical(Sys.getenv("_R_CHECK_PACKAGES_USED_CRAN_INCOMING_NOTES_", "FALSE"), "TRUE")
+    incoming <-
+        identical(Sys.getenv("_R_CHECK_PACKAGES_USED_CRAN_INCOMING_NOTES_",
+                             "FALSE"),
+                  "TRUE")
+    ignore_unused_imports <-
+        config_val_to_logical(Sys.getenv("_R_CHECK_PACKAGES_USED_IGNORE_UNUSED_IMPORTS_",
+                                         "FALSE"))
+
     c(character(),
       if(length(xx <- x$imports)) {
 	  paste(sprintf(ngettext(length(xx),
@@ -5375,7 +5387,7 @@ function(x, ...)
           sprintf(ngettext(length(xx), "'library' or 'require' call in package code: %s\n  Please use :: or requireNamespace() instead.\n  See section 'Suggested packages' in the 'Writing R Extensions' manual.", "'library' or 'require' calls in package code: %s\n  Please use :: or requireNamespace() instead.\n  See section 'Suggested packages' in the 'Writing R Extensions' manual.",domain = "R-tools"), .pretty_format(sort(xx)))
       },
 
-      if(length(xx <- x$unused_imports)) {
+      if(length(xx <- x$unused_imports) && !ignore_unused_imports) {
 	  sprintf(ngettext(length(xx),
  "Namespace in Imports field not imported from: %s\nAll declared Imports should be used.",
  "Namespaces in Imports field not imported from: %s\nAll declared Imports should be used.", domain = "R-tools"),
@@ -6239,7 +6251,7 @@ function(dir)
     language <- meta["Language"]
     if((is.na(language) || language == "en") &&
        config_val_to_logical(Sys.getenv("_R_CHECK_CRAN_INCOMING_USE_ASPELL_",
-                                        FALSE))) {
+                                        "FALSE"))) {
         ignore <-
             list(c("(?<=[ \t[:punct:]])'[^']*'(?=[ \t[:punct:]])",
                    "(?<=[ \t[:punct:]])[[:alnum:]_.]*\\(\\)(?=[ \t[:punct:]])"),
@@ -6721,7 +6733,7 @@ function(dir)
         if (is.na(dd)) out$bad_date <- TRUE
         else if((as.Date(dd) < Sys.Date() - 31) &&
                 !config_val_to_logical(Sys.getenv("_R_CHECK_CRAN_INCOMING_SKIP_DATES_",
-                                                  FALSE)))
+                                                  "FALSE")))
             out$old_date <- TRUE
     }
 
@@ -6798,7 +6810,7 @@ function(dir)
     v_d <- max(package_version(db[, "Version"]))
     if((v_m <= v_d) &&
        !config_val_to_logical(Sys.getenv("_R_CHECK_CRAN_INCOMING_SKIP_VERSIONS_",
-                                         FALSE)))
+                                         "FALSE")))
         out$bad_version <- list(v_m, v_d)
     if((v_m$major == v_d$major) & (v_m$minor >= v_d$minor + 10))
         out$version_with_jump_in_minor <- list(v_m, v_d)

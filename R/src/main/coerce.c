@@ -2406,12 +2406,11 @@ SEXP attribute_hidden do_call(SEXP call, SEXP op, SEXP args, SEXP rho)
     const char *str = translateChar(STRING_ELT(rfun, 0));
     if (streql(str, ".Internal")) error(_("illegal usage"));
     PROTECT(rfun = install(str));
-    PROTECT(evargs = duplicate(CDR(args)));
+    PROTECT(evargs = shallow_duplicate(CDR(args)));
     for (rest = evargs; rest != R_NilValue; rest = CDR(rest)) {
-	PROTECT(tmp = eval(CAR(rest), rho));
-	if (MAYBE_REFERENCED(tmp)) tmp = duplicate(tmp);
+	tmp = eval(CAR(rest), rho);
+	if (NAMED(tmp)) MARK_NOT_MUTABLE(tmp);
 	SETCAR(rest, tmp);
-	UNPROTECT(1);
     }
     rfun = LCONS(rfun, evargs);
     UNPROTECT(3);
@@ -2434,7 +2433,7 @@ SEXP attribute_hidden do_docall(SEXP call, SEXP op, SEXP args, SEXP rho)
        zero-length string check used to be here but install gives
        better error message.
      */
-    if( !(isString(fun) && length(fun) == 1) && !isFunction(fun) )
+    if(!(isFunction(fun) || (isString(fun) && length(fun) == 1)))
 	error(_("'%s' argument must be a character string or a function"), "what");
 
 #ifdef __maybe_in_the_future__

@@ -324,7 +324,7 @@ SEXP attribute_hidden do_fileshow(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (STRING_ELT(hd, i) != NA_STRING)
 	    h[i] = acopy_string(translateChar(STRING_ELT(hd, i)));
 	else
-            error(_("invalid '%s' argument"), "headers");
+	    error(_("invalid '%s' argument"), "headers");
     }
     if (isValidStringF(tl))
 	t = acopy_string(translateChar(STRING_ELT(tl, 0)));
@@ -332,10 +332,10 @@ SEXP attribute_hidden do_fileshow(SEXP call, SEXP op, SEXP args, SEXP rho)
 	t = "";
     if (isValidStringF(pg)) {
 	SEXP pg0 = STRING_ELT(pg, 0);
-        if (pg0 != NA_STRING)
-            pager = acopy_string(CHAR(pg0));
-        else
-            error(_("invalid '%s' argument"), "pager");
+	if (pg0 != NA_STRING)
+	    pager = acopy_string(CHAR(pg0));
+	else
+	    error(_("invalid '%s' argument"), "pager");
     } else
 	pager = "";
     R_ShowFiles(n, f, h, t, dl, pager);
@@ -775,7 +775,7 @@ SEXP attribute_hidden do_fileinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP fn, ans, ansnames, fsize, mtime, ctime, atime, isdir,
 	mode, xxclass;
 #ifdef UNIX_EXTRAS
-    SEXP uid = R_NilValue, gid = R_NilValue, 
+    SEXP uid = R_NilValue, gid = R_NilValue,
 	uname = R_NilValue, grname = R_NilValue; // silence -Wall
 #endif
 #ifdef Win32
@@ -840,9 +840,9 @@ SEXP attribute_hidden do_fileinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 	size_t len = wcslen(wfn);
 	if (len) {
 	    wchar_t *p = wfn + (len - 1);
-            if (len > 1 && (*p == L'/' || *p == L'\\') &&
-            	*(p-1) != L':') *p = 0;
-        }
+	    if (len > 1 && (*p == L'/' || *p == L'\\') &&
+		*(p-1) != L':') *p = 0;
+	}
 #else
 	const char *efn = R_ExpandFileName(translateChar(STRING_ELT(fn, i)));
 #endif
@@ -900,7 +900,7 @@ SEXP attribute_hidden do_fileinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    SET_STRING_ELT(grname, i, STRING_ELT(grname, i - 1));
 		else {
 		    struct group *stgrp = getgrgid(sb.st_gid);
-		    SET_STRING_ELT(grname, i, 
+		    SET_STRING_ELT(grname, i,
 				   stgrp ? mkChar(stgrp->gr_name): NA_STRING);
 		}
 #endif
@@ -983,9 +983,9 @@ SEXP attribute_hidden do_direxists(SEXP call, SEXP op, SEXP args, SEXP rho)
 	size_t len = wcslen(wfn);
 	if (len) {
 	    wchar_t *p = wfn + (len - 1);
-            if (len > 1 && (*p == L'/' || *p == L'\\') &&
-            	*(p-1) != L':') *p = 0;
-        }
+	    if (len > 1 && (*p == L'/' || *p == L'\\') &&
+		*(p-1) != L':') *p = 0;
+	}
 #else
 	const char *efn = R_ExpandFileName(translateChar(STRING_ELT(fn, i)));
 #endif
@@ -1117,7 +1117,7 @@ list_files(const char *dnp, const char *stem, int *count, SEXP *pans,
 		    IF_MATCH_ADD_TO_ANS
 	    }
 
-        } // end while()
+	} // end while()
 	closedir(dir);
     }
 }
@@ -1178,7 +1178,7 @@ SEXP attribute_hidden do_listfiles(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-static void list_dirs(const char *dnp, const char *nm, 
+static void list_dirs(const char *dnp, const char *nm,
 		      Rboolean full, int *count,
 		      SEXP *pans, int *countmax, PROTECT_INDEX idx,
 		      Rboolean recursive)
@@ -1220,7 +1220,7 @@ static void list_dirs(const char *dnp, const char *nm,
 		if (strcmp(de->d_name, ".") && strcmp(de->d_name, "..")) {
 		    if(recursive) {
 			char nm2[PATH_MAX];
-			snprintf(nm2, PATH_MAX, "%s%s%s", nm, R_FileSep, 
+			snprintf(nm2, PATH_MAX, "%s%s%s", nm, R_FileSep,
 				 de->d_name);
 			list_dirs(p, nm[0] ? nm2 : de->d_name, full, count,
 				  pans, countmax, idx, recursive);
@@ -1230,7 +1230,7 @@ static void list_dirs(const char *dnp, const char *nm,
 			    *countmax *= 2;
 			    REPROTECT(*pans = lengthgets(*pans, *countmax), idx);
 			}
-			SET_STRING_ELT(*pans, (*count)++, 
+			SET_STRING_ELT(*pans, (*count)++,
 				       mkChar(full ? p : de->d_name));
 		    }
 		}
@@ -1628,7 +1628,7 @@ SEXP attribute_hidden do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
 		globfree(&globbuf);
 	    } else failures++;
 #else /* HAVE_GLOB */
-	        failures += R_unlink(names, recursive, force);
+		failures += R_unlink(names, recursive, force);
 	    } else failures++;
 #endif
 	}
@@ -1901,10 +1901,10 @@ SEXP attribute_hidden do_pathexpand(SEXP call, SEXP op, SEXP args, SEXP rho)
     n = LENGTH(fn);
     PROTECT(ans = allocVector(STRSXP, n));
     for (i = 0; i < n; i++) {
-        SEXP tmp = STRING_ELT(fn, i);
-        if (tmp != NA_STRING) {
-            tmp = markKnown(R_ExpandFileName(translateChar(tmp)), tmp);
-        }
+	SEXP tmp = STRING_ELT(fn, i);
+	if (tmp != NA_STRING) {
+	    tmp = markKnown(R_ExpandFileName(translateChar(tmp)), tmp);
+	}
 	SET_STRING_ELT(ans, i, tmp);
     }
     UNPROTECT(1);
@@ -2287,14 +2287,14 @@ static void copyFileTime(const wchar_t *from, const wchar_t * to)
 {
     HANDLE hFrom, hTo;
     FILETIME modft;
-    
+
     hFrom = CreateFileW(from, GENERIC_READ, 0, NULL, OPEN_EXISTING,
 			FILE_FLAG_BACKUP_SEMANTICS, NULL);
     if (hFrom == INVALID_HANDLE_VALUE) return;
     int res  = GetFileTime(hFrom, NULL, &modft, NULL);
     CloseHandle(hFrom);
     if(!res) return;
-   
+
     hTo = CreateFileW(to, GENERIC_WRITE, 0, NULL, OPEN_EXISTING,
 		      FILE_FLAG_BACKUP_SEMANTICS, NULL);
     if (hTo == INVALID_HANDLE_VALUE) return;
@@ -2350,7 +2350,7 @@ static int do_copy(const wchar_t* from, const wchar_t* name, const wchar_t* to,
 		    return 1;
 		}
 		wsprintfW(p, L"%ls%\\%ls", name, de->d_name);
-		nfail += do_copy(from, p, to, over, recursive, 
+		nfail += do_copy(from, p, to, over, recursive,
 				 perms, dates, depth);
 	    }
 	    _wclosedir(dir);
@@ -2434,7 +2434,7 @@ SEXP attribute_hidden do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
 	wcsncpy(dir,
 		filenameToWchar(STRING_ELT(to, 0), TRUE),
 		PATH_MAX);
-        dir[PATH_MAX - 1] = L'\0';		
+	dir[PATH_MAX - 1] = L'\0';
 	if (*(dir + (wcslen(dir) - 1)) !=  L'\\')
 	    wcsncat(dir, L"\\", PATH_MAX);
 	for (i = 0; i < nfiles; i++) {
@@ -2463,7 +2463,7 @@ SEXP attribute_hidden do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
 			    wcsncpy(from, L".\\", PATH_MAX);
 			}
 		    }
-		    nfail = do_copy(from, name, dir, over, recursive, 
+		    nfail = do_copy(from, name, dir, over, recursive,
 				    perms, dates, 1);
 		} else nfail = 1;
 	    } else nfail = 1;
@@ -2568,7 +2568,7 @@ static int do_copy(const char* from, const char* name, const char* to,
 		    return 1;
 		}
 		snprintf(p, PATH_MAX+1, "%s/%s", name, de->d_name);
-		nfail += do_copy(from, p, to, over, recursive, 
+		nfail += do_copy(from, p, to, over, recursive,
 				 perms, dates, depth);
 	    }
 	    closedir(dir);
@@ -2652,7 +2652,7 @@ SEXP attribute_hidden do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
 	strncpy(dir,
 		R_ExpandFileName(translateChar(STRING_ELT(to, 0))),
 		PATH_MAX);
-        dir[PATH_MAX - 1] = '\0';
+	dir[PATH_MAX - 1] = '\0';
 	if (*(dir + (strlen(dir) - 1)) !=  '/')
 	    strncat(dir, "/", PATH_MAX);
 	for (i = 0; i < nfiles; i++) {
@@ -2660,7 +2660,7 @@ SEXP attribute_hidden do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
 		strncpy(from,
 			R_ExpandFileName(translateChar(STRING_ELT(fn, i))),
 			PATH_MAX);
-                from[PATH_MAX - 1] = '\0';
+		from[PATH_MAX - 1] = '\0';
 		size_t ll = strlen(from);
 		if (ll) {  // people do pass ""
 		    /* If there is a trailing sep, this is a mistake */
@@ -2669,14 +2669,14 @@ SEXP attribute_hidden do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    p = strrchr(from, '/') ;
 		    if (p) {
 			strncpy(name, p+1, PATH_MAX);
-                        name[PATH_MAX - 1] = '\0';
+			name[PATH_MAX - 1] = '\0';
 			*(p+1) = '\0';
 		    } else {
 			strncpy(name, from, PATH_MAX);
-                        name[PATH_MAX - 1] = '\0';
+			name[PATH_MAX - 1] = '\0';
 			strncpy(from, "./", PATH_MAX);
 		    }
-		    nfail = do_copy(from, name, dir, over, recursive, 
+		    nfail = do_copy(from, name, dir, over, recursive,
 				    perms, dates, 1);
 		} else nfail = 1;
 	    } else nfail = 1;
