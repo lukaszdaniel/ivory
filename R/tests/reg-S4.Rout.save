@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2015-08-07 r338) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2015-08-17 r342) -- "Internationalized Version of R"
 Copyright (C) 2013-2015 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2015-08-07 r68909) -- "Unsuffered Consequences"
+R Under development (unstable) (2015-08-17 r69102) -- "Unsuffered Consequences"
 Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -27,6 +27,35 @@ Type 'q()' to quit R.
 > require(methods)
 > assertError <- tools::assertError # "import"
 > ##too fragile: showMethods(where = "package:methods")
+> 
+> ## When this test comes too late, it fails too early in R <= 3.2.2
+> require(stats4)
+Loading required package: 'stats4'
+> detach("package:methods")
+> require("methods")
+Loading required package: 'methods'
+> cc <- methods::getClassDef("standardGeneric")
+> cc ## (auto) print failed here, in R <= 3.2.2
+Class "standardGeneric" [package in 'methods']
+
+Slots:
+                                                                  
+Name:           .Data        generic        package          group
+Class:       function      character      character           list
+                                                                  
+Name:      valueClass      signature        default       skeleton
+Class:      character      character optionalMethod           call
+
+Class "standardGeneric" consists of following classes: 
+Class "genericFunction", directly
+Class "function", by class "genericFunction", distance 2
+Class "OptionalFunction", by class "function", distance 3
+Class "PossibleMethod", by class "function", distance 3
+Class "optionalMethod", by class "genericFunction", distance 4
+
+Known Subclasses: "standardGenericWithTrace"
+> stopifnot(.isMethodsDispatchOn()) ## was FALSE in R <= 3.2.2
+> 
 > 
 > ## Needs cached primitive generic for '$'
 > new("envRefClass")# failed in R <= 3.2.0
@@ -1128,6 +1157,7 @@ Formal class 'signature' [package "methods"] with 3 slots
   ..@ package: character ""
 > 
 > cl4 <- getClasses("package:stats4")
-> stopifnot(c("mle", "profile.mle", "summary.mle") %in% cl4)
+> stopifnot(identical(getClasses(which(search() == "package:stats4")), cl4),
++ 	  c("mle", "profile.mle", "summary.mle") %in% cl4)
 > ## failed after an optimization patch
 > 
