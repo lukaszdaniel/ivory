@@ -3574,7 +3574,7 @@ setRlibs <-
                 else resultLog(Log, "Note_to_CRAN_maintainers")
             } else if(length(res$bad_package)) {
                 errorLog(Log)
-                printLog(Log, paste(c(out, ""), collapse = "\n"))
+                printLog(Log, c(paste(out, collapse = "\n\n"), "\n"))
 		maybe_exit(1L)
             } else if(length(res$bad_version) ||
                       identical(res$foss_with_BuildVignettes, TRUE) ||
@@ -3583,7 +3583,7 @@ setRlibs <-
                 warningLog(Log)
             else if(length(res) > 1L) noteLog(Log)
             else resultLog(Log, gettext("OK", domain = "R-tools"))
-            printLog(Log, paste(out, "\n", sep = ""))
+            printLog(Log, c(paste(out, collapse = "\n\n"), "\n"))
         } else resultLog(Log, gettext("OK", domain = "R-tools"))
     }
 

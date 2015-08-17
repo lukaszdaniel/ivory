@@ -6863,224 +6863,245 @@ function(dir)
 format.check_package_CRAN_incoming <-
 function(x, ...)
 {
+    fmt <- function(x) {
+        if(length(x)) paste(x, collapse = "\n") else character()
+    }
+    
     c(character(),
-      if(length(x$Maintainer)) {
+      if(length(x$Maintainer))
           gettextf("Maintainer: %s", sQuote(paste(x$Maintainer, collapse = " ")), domain = "R-tools")
-      } else {
-	  gettext("No maintainer field in DESCRIPTION file", domain = "R-tools")
-      },
-      if(x$empty_Maintainer_name) {
-          gettext("\nThe maintainer field lacks a name", domain = "R-tools")
-      },
-      if(x$Maintainer_needs_quotes) {
-          gettext("\nThe display-name part of the maintainer field should be enclosed in \"\"", domain = "R-tools")
-      },
-      if(length(x$new_submission)) {
-          gettext("New submission", domain = "R-tools")
-      },
-      if(length(y <- x$bad_package)) {
-          gettextf("\nConflicting package names (submitted: %s, existing: %s)", y[[1L]], y[[2L]], domain = "R-tools")
-      },
-      if(length(y <- x$repositories)) {
-          gettextf("\nPackage duplicated from %s", y, domain = "R-tools")
-      },
-      if(length(y <- x$CRAN_archive)) {
-          gettext("\nPackage was archived on CRAN", domain = "R-tools")
-      },
-      if(length(y <- x$bad_version)) {
-          gettextf("\nInsufficient package version (submitted: %s, existing: %s)", y[[1L]], y[[2L]], domain = "R-tools")
-      },
-      if(length(y <- x$version_with_leading_zeroes)) {
-          gettextf("\nVersion contains leading zeroes (%s)", y, domain = "R-tools")
-      },
-      if(length(y <- x$version_with_jump_in_minor)) {
-          gettextf("\nVersion jumps in minor (submitted: %s, existing: %s)", y[[1L]], y[[2L]], domain = "R-tools")
-      },
-      if(length(y <- x$recency)) {
-          gettextf("\nDays since last update: %d", y, domain = "R-tools")
-      },
-      if(length(y <- x$frequency)) {
-          gettextf("\nNumber of updates in past 6 months: %d", y, domain = "R-tools")
-      },
-      if(length(y <- x$new_maintainer)) {
-          c(gettext("\nNew maintainer:", domain = "R-tools"),
-            strwrap(y[[1L]], indent = 2L, exdent = 4L),
-            gettext("Old maintainer(s):", domain = "R-tools"),
-            strwrap(y[[2L]], indent = 2L, exdent = 4L))
-      },
-      if(length(y <- x$bad_license)) {
-          gettextf("\nNon-FOSS package license (%s)", y, domain = "R-tools")
-      },
-      if(length(y <- x$new_license)) {
-          c(gettext("\nChange to non-FOSS package license.", domain = "R-tools"),
-            gettext("New license:", domain = "R-tools"),
-            strwrap(y[[1L]], indent = 2L, exdent = 4L),
-            gettext("Old license:", domain = "R-tools"),
-            strwrap(y[[2L]], indent = 2L, exdent = 4L))
-      },
-      if(length(y <- x$extensions)) {
-          c(gettext("\nLicense components with restrictions and base license permitting such:", domain = "R-tools"), paste(" ", y),
-            unlist(lapply(x$pointers,
-                          function(e) {
-                              c(gettextf("File '%s':", e[1L], domain = "R-tools"),
-                                paste(" ", e[-1L]))
-                          })))
-      },
+      else
+          gettext("No maintainer field in DESCRIPTION file", domain = "R-tools"),
+      fmt(c(if(x$empty_Maintainer_name)
+                gettext("The maintainer field lacks a name", domain = "R-tools"),
+            if(x$Maintainer_needs_quotes)
+                gettext("The display-name part of the maintainer field should be enclosed in \"\"", domain = "R-tools"))
+          ),
+      if(length(x$new_submission))
+          gettext("New submission", domain = "R-tools"),
+      if(length(y <- x$bad_package))
+          gettextf("Conflicting package names (submitted: %s, existing: %s)", y[[1L]], y[[2L]], domain = "R-tools"),
+      if(length(y <- x$repositories))
+          gettextf("Package duplicated from %s", y, domain = "R-tools"),
+      if(length(y <- x$CRAN_archive))
+          gettext("Package was archived on CRAN", domain = "R-tools"),
+      fmt(c(if(length(y <- x$bad_version))
+                gettextf("Insufficient package version (submitted: %s, existing: %s)", y[[1L]], y[[2L]], domain = "R-tools"),
+            if(length(y <- x$version_with_leading_zeroes))
+                gettextf("Version contains leading zeroes (%s)", y, domain = "R-tools"),
+            if(length(y <- x$version_with_jump_in_minor))
+                gettextf("Version jumps in minor (submitted: %s, existing: %s)", y[[1L]], y[[2L]], domain = "R-tools"))),
+      fmt(c(if(length(y <- x$recency))
+                gettextf("Days since last update: %d", y, domain = "R-tools"),
+            if(length(y <- x$frequency))
+                gettextf("Number of updates in past 6 months: %d", y, domain = "R-tools"))),
+      if(length(y <- x$new_maintainer))
+          paste(c(gettext("New maintainer:", domain = "R-tools"),
+                  strwrap(y[[1L]], indent = 2L, exdent = 4L),
+                  gettext("Old maintainer(s):", domain = "R-tools"),
+                  strwrap(y[[2L]], indent = 2L, exdent = 4L)),
+                collapse = "\n"),
+      fmt(c(if(length(y <- x$bad_license))
+                gettextf("\nNon-FOSS package license (%s)", y, domain = "R-tools"),
+            if(length(y <- x$new_license))
+                paste(c(gettext("\nChange to non-FOSS package license.", domain = "R-tools"),
+                        gettext("New license:", domain = "R-tools"),
+                        strwrap(y[[1L]], indent = 2L, exdent = 4L),
+                        gettext("Old license:", domain = "R-tools"),
+                        strwrap(y[[2L]], indent = 2L, exdent = 4L)),
+                      collapse = "\n"),
+            if(length(y <- x$extensions)) {
+                paste(c(gettext("\nLicense components with restrictions and base license permitting such:", domain = "R-tools"), paste(" ", y),
+                        unlist(lapply(x$pointers,
+                                      function(e) {
+                                          c(gettextf("File '%s':", e[1L], domain = "R-tools"),
+                                            paste(" ", e[-1L]))
+                                      }))),
+                      collapse = "\n")
+            })),
       if(NROW(y <- x$spelling)) {
           s <- split(sprintf("%d:%d", y$Line, y$Column), y$Original)
-          c(gettext("\nPossibly mis-spelled words in DESCRIPTION:", domain = "R-tools"),
-            sprintf("  %s (%s)", names(s), lapply(s, paste, collapse = ", ")))
+          paste(c(gettext("\nPossibly mis-spelled words in DESCRIPTION:", domain = "R-tools"),
+                  sprintf("  %s (%s)", names(s), lapply(s, paste, collapse = ", "))),
+                collapse = "\n")
       },
       if(identical(x$foss_with_BuildVignettes, TRUE)) {
-          gettext("\nFOSS licence with BuildVignettes: false", domain = "R-tools")
+          gettext("FOSS licence with BuildVignettes: false", domain = "R-tools")
       },
       if(length(y <- x$fields)) {
-          c(gettext("\nUnknown, possibly mis-spelled fields in DESCRIPTION:", domain = "R-tools"),
-            sprintf("  %s", paste(sQuote(y), collapse = " ")))
+          paste(c(gettext("Unknown, possibly mis-spelled fields in DESCRIPTION:", domain = "R-tools"),
+                  sprintf("  %s", paste(sQuote(y), collapse = " "))),
+                collapse = "\n")
       },
-      if(length(y <- x$overrides)) {
-          c(gettextf("\nCRAN repository db overrides: %s", sQuote(y), domain = "R-tools"))
-      },
-      if(length(y <- x$conflicts)) {
-          gettextf("\nCRAN repository db conflicts: %s", sQuote(y), domain = "R-tools")
-      },
-      if(length(y <- x$conflict_in_license_is_FOSS)) {
-          gettextf("\nPackage license conflicts with %s override", sQuote(paste("License_is_FOSS:", y)), domain = "R-tools")
-      },
-      if(length(y <- x$conflict_in_license_restricts_use)) {
-          gettextf("\nPackage license conflicts with %s override", sQuote(paste("License_restricts_use:", y)), domain = "R-tools")
-      },
-      if(length(y <- x$depends_with_restricts_use_TRUE)) {
-          c(ngettext(length(y),
-		"\nPackage has a FOSS license but eventually depends on the following package which restricts use:",
-                "\nPackage has a FOSS license but eventually depends on the following packages which restrict use:", domain = "R-tools"),
-            strwrap(paste(y, collapse = ", "), indent = 2L, exdent = 4L))
-      },
-      if(length(y <- x$depends_with_restricts_use_NA)) {
-          c(ngettext(length(y),
-		"\nPackage has a FOSS license but eventually depends on the following package which may restrict use:",
-                "\nPackage has a FOSS license but eventually depends on the following packages which may restrict use:", domain = "R-tools"),
-            strwrap(paste(y, collapse = ", "), indent = 2L, exdent = 4L))
-      },
-      if(length(y <- x$strong_dependencies_not_in_mainstream_repositories)) {
-          c(gettext("\nStrong dependencies not in mainstream repositories:", domain = "R-tools"),
-            strwrap(paste(y, collapse = ", "),
-                    indent = 2L, exdent = 4L))
-      },
-      if(length(y <- x$suggests_or_enhances_not_in_mainstream_repositories)) {
-          c(gettext("\n'Suggests' or 'Enhances' packages are not in mainstream repositories:", domain = "R-tools"),
-            strwrap(paste(y, collapse = ", "),
-                    indent = 2L, exdent = 4L))
-      },
-      if(length(y <- x$additional_repositories_analysis_failed_with)) {
-          c(gettext("\nUsing 'Additional_repositories specification' failed with packages:", domain = "R-tools"),
-            paste(" ", y))
-      },
-      if(length(y <- x$additional_repositories_analysis_results)) {
-          c(gettext("\nAvailability using 'Additional_repositories' specification:", domain = "R-tools"),
-            sprintf("  %s   %s   %s",
-                    format(y[, 1L], justify = "left"),
-                    format(y[, 2L], justify = "right"),
-                    format(y[, 3L], justify = "left")))
-      },
-      if(length(y <- x$additional_repositories_with_no_packages)) {
-          c(gettext("\nAdditional repositories with no packages:", domain = "R-tools"),
-            paste(" ", y))
-      },
-      if (length(y <- x$uses)) {
+      fmt(c(if(length(y <- x$overrides)) {
+                paste(c(gettextf("CRAN repository db overrides: %s", sQuote(y), domain = "R-tools")),
+                      collapse = "\n")
+            },
+            if(length(y <- x$conflicts)) {
+                paste(gettextf("CRAN repository db conflicts: %s", sQuote(y), domain = "R-tools"),
+                      collapse = "\n")
+            },
+            if(length(y <- x$conflict_in_license_is_FOSS)) {
+                gettextf("Package license conflicts with %s override", sQuote(paste("License_is_FOSS:", y)), domain = "R-tools")
+            },
+            if(length(y <- x$conflict_in_license_restricts_use)) {
+                gettextf("Package license conflicts with %s override", sQuote(paste("License_restricts_use:", y)), domain = "R-tools")
+            })),
+      fmt(c(if(length(y <- x$depends_with_restricts_use_TRUE)) {
+                paste(c(ngettext(length(y),
+                "Package has a FOSS license but eventually depends on the following package which restricts use:",
+                "Package has a FOSS license but eventually depends on the following packages which restrict use:", domain = "R-tools"),
+            strwrap(paste(y, collapse = ", "), indent = 2L, exdent = 4L)),
+                      collapse = "\n")
+            },
+            if(length(y <- x$depends_with_restricts_use_NA)) {
+                paste(c(ngettext(length(y),
+                "Package has a FOSS license but eventually depends on the following package which may restrict use:",
+                "Package has a FOSS license but eventually depends on the following packages which may restrict use:", domain = "R-tools"),
+            strwrap(paste(y, collapse = ", "), indent = 2L, exdent = 4L)),
+                      collapse = "\n")
+            })),
+      fmt(c(if(length(y <- x$strong_dependencies_not_in_mainstream_repositories)) {
+                  paste(c(gettext("Strong dependencies not in mainstream repositories:", domain = "R-tools"),
+                          strwrap(paste(y, collapse = ", "),
+                                  indent = 2L, exdent = 4L)),
+                        collapse = "\n")
+              },
+              if(length(y <- x$suggests_or_enhances_not_in_mainstream_repositories)) {
+                  paste(c(gettext("'Suggests' or 'Enhances' packages are not in mainstream repositories:", domain = "R-tools"),
+                          strwrap(paste(y, collapse = ", "),
+                                  indent = 2L, exdent = 4L)),
+                        collapse = "\n")
+              },
+              if(length(y <- x$additional_repositories_analysis_failed_with)) {
+                  paste(c(gettext("Using 'Additional_repositories specification' failed with packages:", domain = "R-tools"),
+                          paste(" ", y)),
+                        collapse = "\n")
+              },
+              if(length(y <- x$additional_repositories_analysis_results)) {
+                  paste(c(gettext("Availability using 'Additional_repositories' specification:", domain = "R-tools"),
+                          sprintf("  %s   %s   %s",
+                                  format(y[, 1L], justify = "left"),
+                                  format(y[, 2L], justify = "right"),
+                                  format(y[, 3L], justify = "left"))),
+                        collapse = "\n")
+              },
+              if(length(y <- x$additional_repositories_with_no_packages)) {
+                  paste(c(gettext("Additional repositories with no packages:", domain = "R-tools"),
+                          paste(" ", y)),
+                        collapse = "\n")
+              })),
+      if(length(y <- x$uses)) {
           paste(ngettext(length(y),
-                       "\nUses the superseded package:",
-                       "\nUses the superseded packages:", domain = "R-tools"),
+                       "Uses the superseded package:",
+                       "Uses the superseded packages:", domain = "R-tools"),
                 paste(sQuote(y), collapse = ", "))
       },
-      if (length(y <- x$BUGS)) {
+      if(length(y <- x$BUGS)) {
           paste(ngettext(length(y),
-		"\nUses the non-portable package:",
-		"\nUses the non-portable packages:", domain = "R-tools"),
+		"Uses the non-portable package:",
+		"Uses the non-portable packages:", domain = "R-tools"),
                 paste(sQuote(y), collapse = ", "))
       },
       if(length(y <- x$authors_at_R_calls)) {
-          c(gettext("\nAuthors@R field should be a call to person(), or combine such calls.", domain = "R-tools"))
+          gettext("Authors@R field should be a call to person(), or combine such calls.", domain = "R-tools")
       },
       if(length(y <- x$vignette_sources_only_in_inst_doc)) {
           if(identical(x$have_vignettes_dir, FALSE))
-              c(gettext("\nVignette sources in 'inst/doc' with no 'vignettes' directory:", domain = "R-tools"),
-                strwrap(paste(sQuote(y), collapse = ", "),
-                        indent = 2L, exdent = 2L),
-                gettext("A 'vignettes' directory is required as from R 3.1.0", domain = "R-tools"))
+              paste(c(gettext("Vignette sources in 'inst/doc' with no 'vignettes' directory:", domain = "R-tools"),
+                      strwrap(paste(sQuote(y), collapse = ", "),
+                              indent = 2L, exdent = 2L),
+                      gettext("A 'vignettes' directory is required as from R 3.1.0", domain = "R-tools")),
+                    collapse = "\n")
           else
-              c(gettext("\nVignette sources in 'inst/doc' missing from the 'vignettes' directory:", domain = "R-tools"),
-                strwrap(paste(sQuote(y), collapse = ", "),
-                        indent = 2L, exdent = 2L))
+              paste(c(gettext("Vignette sources in 'inst/doc' missing from the 'vignettes' directory:", domain = "R-tools"),
+                      strwrap(paste(sQuote(y), collapse = ", "),
+                              indent = 2L, exdent = 2L)),
+                    collapse = "\n")
       },
       if(length(y <- x$missing_vignette_index)) {
-          gettext("\nPackage has a VignetteBuilder field but no prebuilt vignette index.", domain = "R-tools")
+          gettext("Package has a VignetteBuilder field but no prebuilt vignette index.", domain = "R-tools")
       },
-      if(length(y <- x$missing_manual_rdb)) {
-          gettext("\nPackage has help file(s) containing build-stage \\Sexpr{} expresssons but no build/partial.rdb.", domain = "R-tools")
-      },
-      if(length(y <- x$missing_manual_pdf)) {
-          gettext("\nPackage has help file(s) containing install/render-stage \\Sexpr{} expresssons but no prebuilt PDF manual.", domain = "R-tools")
-      },
-      if(length(y <- x$dotjava)) {
-          gettext("\nPackage installs .java files.", domain = "R-tools")
-      },
-      if(length(y <- x$javafiles)) {
-          gettext("\nPackage has FOSS license, installs .class/.jar but has no 'java' directory.", domain = "R-tools")
-      },
-      if(length(y <- x$citation_calls)) {
-          c(gettext("\nPackage CITATION file contains call(s) to:", domain = "R-tools"),
-            strwrap(paste(y, collapse = ", "), indent = 2L, exdent = 4L))
-      },
-      if(length(y <- x$citation_error)) {
-          c(gettextf("\nReading CITATION file fails with\n%s\nwhen package is not installed.",
-            paste(" ", y), domain = "R-tools"))
-      },
-      if(length(y <- x$bad_urls)) {
-          if(inherits(y, "error"))
-              c(gettext("\nChecking URLs failed with message:", domain = "R-tools"),
-                conditionMessage(y))
-          else
-              c(ngettext(length(y), "Found the following (possibly) invalid URL:", "Found the following (possibly) invalid URLs:", domain = "R-tools"),
-                paste(" ", gsub("\n", "\n    ", format(y))))
-      },
-      if(length(y) && any(nzchar(y$CRAN))) {
-          c("\n  ", gettext("The canonical URL of the CRAN page for a package is   https://cran.r-project.org/package=pkgname", domain = "R-tools"))
-      },
-      if(length(y) && any(nzchar(y$Spaces))) {
-          c("\n  ", gettext("Spaces in an http[s] URL should probably be replaced by %20", domain = "R-tools"))
-      },
-      if(length(y <- x$no_url_checks) && y) {
-          c(gettext("\nChecking URLs requires 'libcurl' support in the R build", domain = "R-tools"))
-      },
+      fmt(c(if(length(y <- x$missing_manual_rdb)) {
+                gettext("Package has help file(s) containing build-stage \\Sexpr{} expresssons but no build/partial.rdb.", domain = "R-tools")
+            },
+            if(length(y <- x$missing_manual_pdf)) {
+                gettext("Package has help file(s) containing install/render-stage \\Sexpr{} expresssons but no prebuilt PDF manual.", domain = "R-tools")
+            })),
+      fmt(c(if(length(y <- x$dotjava)) {
+                gettext("Package installs .java files.", domain = "R-tools")
+            },
+            if(length(y <- x$javafiles)) {
+                gettext("Package has FOSS license, installs .class/.jar but has no 'java' directory.", domain = "R-tools")
+            })),
+      fmt(c(if(length(y <- x$citation_calls)) {
+                paste(c(gettext("Package CITATION file contains call(s) to:", domain = "R-tools"),
+                        strwrap(paste(y, collapse = ", "), indent = 2L, exdent = 4L)),
+                      collapse = "\n")
+            },
+            if(length(y <- x$citation_error)) {
+                paste(c(gettextf("Reading CITATION file fails with\n%s\nwhen package is not installed.",
+                        paste(" ", y), domain = "R-tools")),
+                      collapse = "\n")
+            })),
+      fmt(c(if(length(y <- x$bad_urls)) {
+                if(inherits(y, "error"))
+                    paste(c(gettext("Checking URLs failed with message:", domain = "R-tools"),
+                            conditionMessage(y)),
+                          collapse = "\n")
+                else
+                    paste(c(ngettext(length(y), "Found the following (possibly) invalid URL:", "Found the following (possibly) invalid URLs:", domain = "R-tools"),
+                            paste(" ", gsub("\n", "\n    ", format(y)))),
+                          collapse = "\n")
+            },
+            if(length(y) && any(nzchar(y$CRAN))) {
+                paste(c("  ", gettext("The canonical URL of the CRAN page for a package is   https://cran.r-project.org/package=pkgname", domain = "R-tools")),
+                      collapse = "\n")
+            },
+            if(length(y) && any(nzchar(y$Spaces))) {
+                c("  ", gettext("Spaces in an http[s] URL should probably be replaced by %20", domain = "R-tools"))
+            },
+            if(length(y <- x$no_url_checks) && y) {
+                c(gettext("Checking URLs requires 'libcurl' support in the R build", domain = "R-tools"))
+            })),
       if(length(y <- x$R_files_non_ASCII)) {
-          c(gettext("\nNo package encoding and non-ASCII characters in the following R files:", domain = "R-tools"),
-            paste0("  ", names(y), "\n    ",
-                   sapply(y, paste, collapse = "\n    "),
-                   collapse = "\n"))
+          paste(c(gettext("No package encoding and non-ASCII characters in the following R files:", domain = "R-tools"),
+                  paste0("  ", names(y), "\n    ",
+                         sapply(y, paste, collapse = "\n    "),
+                         collapse = "\n")),
+                collapse = "\n")
       },
-      if(length(x$title_is_name)) {
-          gettext("\nThe Title field is just the package name: provide a real title.", domain = "R-tools")
-      },
-      if(length(x$title_includes_name)) {
-          gettext("\nThe Title field starts with the package name.", domain = "R-tools")
-      },
-      if(length(y <- x$title_case)) {
-          c(gettext("\nThe Title field should be in title case, current version then in title case:", domain = "R-tools"), sQuote(y))
-      },
-      if(length(x$descr_bad_initial)) {
-          gettext("\nThe Description field should start with a capital letter.", domain = "R-tools")
-      },
-      if(length(x$descr_bad_start)) {
-          gettext("\nThe Description field should not start with the package name,\n  'This package' or similar.", domain = "R-tools")
-      },
-      if(length(x$bad_date)) {
-          gettext("\nThe Date field is not in ISO 8601 yyyy-mm-dd format.", domain = "R-tools")
-      },
-      if(length(x$old_date)) {
-          gettext("\nThe Date field is over a month old.", domain = "R-tools")
-      }
-     )
+      fmt(c(if(length(x$title_is_name)) {
+                gettext("The Title field is just the package name: provide a real title.", domain = "R-tools")
+            },
+            if(length(x$title_includes_name)) {
+                gettext("The Title field starts with the package name.", domain = "R-tools")
+            },
+            if(length(y <- x$title_case)) {
+                paste(c(gettext("The Title field should be in title case, current version then in title case:", domain = "R-tools"),
+                        sQuote(y)),
+                      collapse = "\n")
+            })),
+      fmt(c(if(length(x$descr_bad_initial)) {
+                gettext("The Description field should start with a capital letter.", domain = "R-tools")
+            },
+            if(length(x$descr_bad_start)) {
+                gettext("The Description field should not start with the package name,\n  'This package' or similar.", domain = "R-tools")
+            })),
+      fmt(c(if(length(x$bad_date)) {
+                gettext("The Date field is not in ISO 8601 yyyy-mm-dd format.", domain = "R-tools")
+            },
+            if(length(x$old_date)) {
+                gettext("The Date field is over a month old.", domain = "R-tools")
+            }))
+      )
+}
+
+print.check_package_CRAN_incoming <-
+function(x, ...)
+{
+    writeLines(paste(format(x, ...), collapse = "\n\n"))
+    invisible(x)
 }
 
 ### * .check_Rd_metadata

@@ -861,8 +861,8 @@ print.check_vignette_index <-
 function(x, ...)
 {
     if(length(x)) {
-        writeLines(gettext("Vignettes with missing or empty '\\VignetteIndexEntry':"))
-        print(basename(unclass(x)), ...)
+        writeLines(c(gettext("Vignettes with missing or empty '\\VignetteIndexEntry':"),
+                     paste(" ", basename(unclass(x)))))
     }
     invisible(x)
 }
