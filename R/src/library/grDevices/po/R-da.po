@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-08-10 17:28\n"
+"POT-Creation-Date: 2015-08-18 12:52\n"
 "PO-Revision-Date: 2012-01-28 17:40+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -135,12 +135,8 @@ msgid "'r', 'g', and 'b' arguments must be in [0, maxColorValue]"
 msgstr "rgb-værdier skal være i [0, maxColorValue]"
 
 #. R/unix/png.R: stop("'res' must be specified unless 'units = \"px\"'")
-#. R/windows/cairo.R: stop("'res' must be specified unless 'units = \"px\"'")
-#. R/windows/cairo.R: stop("'res' must be specified unless 'units = \"px\"'")
-#. R/windows/cairo.R: stop("'res' must be specified unless 'units = \"px\"'")
-#. R/windows/cairo.R: stop("'res' must be specified unless 'units = \"px\"'")
 #. R/windows/png.R: stop("'res' must be specified unless 'units = \"px\"'")
-#: R/unix/png.R:0 R/windows/cairo.R:0 R/windows/png.R:0
+#: R/unix/png.R:0 R/windows/png.R:0
 msgid "'res' must be specified unless 'units = \"px\"'"
 msgstr "»res« skal angives med mindre »units = \"px\"«"
 
@@ -419,17 +415,13 @@ msgstr "øgende »x-« og »y-værdier« forventet"
 #. R/unix/quartz.R: gettextf("invalid '%s' argument", "title")
 #. R/unix/quartz.R: gettextf("invalid '%s' argument", "file")
 #. R/unix/x11.R: gettextf("invalid '%s' argument", "title")
-#. R/windows/cairo.R: gettextf("invalid '%s' argument", "filename")
-#. R/windows/cairo.R: gettextf("invalid '%s' argument", "filename")
-#. R/windows/cairo.R: gettextf("invalid '%s' argument", "filename")
-#. R/windows/cairo.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/windows.R: gettextf("invalid '%s' argument", "filename")
 #: R/cairo.R:0 R/postscript.R:0 R/unix/png.R:0 R/unix/quartz.R:0
-#: R/unix/x11.R:0 R/windows/cairo.R:0 R/windows/png.R:0 R/windows/windows.R:0
+#: R/unix/x11.R:0 R/windows/png.R:0 R/windows/windows.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "ugyldigt første argument"

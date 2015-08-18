@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-29 22:14+0200\n"
+"POT-Creation-Date: 2015-08-18 12:53+0200\n"
 "PO-Revision-Date: 2014-03-16 16:24+0100\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -22,7 +22,7 @@ msgstr ""
 #: io.c:1071 io.c:1072 io.c:1073 stubs.c:39 stubs.c:59 windows/dialogs.c:169
 #: windows/dialogs.c:194 windows/dialogs.c:197 windows/dialogs.c:241
 #: windows/dialogs.c:278 windows/dialogs.c:289 windows/dialogs.c:313
-#: windows/dialogs.c:321 windows/util.c:111 windows/widgets.c:78
+#: windows/dialogs.c:321 windows/util.c:117 windows/widgets.c:78
 #: windows/widgets.c:81 windows/widgets.c:86
 #, c-format
 msgid "invalid '%s' argument"
@@ -134,28 +134,28 @@ msgstr "X11 nicht verfügbar"
 msgid "invalid '%s' specification"
 msgstr "ungültige '%s' Spezifikation"
 
-#: utils.c:62 windows/util.c:396 windows/util.c:405 windows/widgets.c:182
+#: utils.c:62 windows/util.c:402 windows/util.c:411 windows/widgets.c:182
 #: windows/widgets.c:188 windows/widgets.c:247 windows/widgets.c:253
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string"
 msgstr "'text' muss eine Zeichenkette sein"
 
-#: utils.c:84
+#: utils.c:85
 #, fuzzy
 msgid "'hostname' argument must be a character vector of length 1"
 msgstr "'hostname' muss ein Zeihenkettenetor der Länge 1 sein"
 
-#: utils.c:90
+#: utils.c:91
 #, fuzzy, c-format
 msgid "'nsl()' was unable to resolve host '%s'"
 msgstr "nsl() konnte Hostnamen '%s' nicht auflösen"
 
-#: utils.c:97
+#: utils.c:98
 #, fuzzy
 msgid "unknown format returned by 'gethostbyname()'"
 msgstr "unbekanntes Format von 'gethostbyname' zurückgegeben"
 
-#: utils.c:106
+#: utils.c:107
 #, fuzzy
 msgid "'nsl()' is not supported on this platform"
 msgstr "nsl() ist auf dieser Plattform nicht unterstützt"
@@ -209,34 +209,34 @@ msgstr ""
 msgid "Registry key '%ls' not found"
 msgstr "Registryeintrag '%ls' nicht gefunden"
 
-#: windows/util.c:41
+#: windows/util.c:42
 msgid "unsupported version of Windows"
 msgstr "nicht unterstützte Version von Windows"
 
-#: windows/util.c:275
+#: windows/util.c:281
 #, fuzzy, c-format
 msgid "'%s' argument must be a character vector or a raw vector"
 msgstr "Argument muss Zeichenkettenvektor oder Rawvektor sein"
 
-#: windows/util.c:312
+#: windows/util.c:318
 msgid "unable to open the clipboard"
 msgstr "kann Zwischenablage nicht öffnen"
 
-#: windows/util.c:317
+#: windows/util.c:323
 msgid "unable to write to the clipboard"
 msgstr "kann nicht in die Zwischenablage schreiben"
 
-#: windows/util.c:444
+#: windows/util.c:450
 #, fuzzy, c-format
 msgid "'%s' argument must be of length 1"
 msgstr "'%s' muss Länge 1 haben"
 
-#: windows/util.c:557
+#: windows/util.c:563
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'%s' muss eine Liste sein"
 
-#: windows/util.c:561
+#: windows/util.c:567
 #, c-format
 msgid "'%s' element %d is not a window handle"
 msgstr "'%s' Element %d ist keine Fensterhandle"

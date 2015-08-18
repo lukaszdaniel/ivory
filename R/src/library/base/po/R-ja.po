@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-07-07 21:36\n"
+"POT-Creation-Date: 2015-08-18 12:52\n"
 "PO-Revision-Date: 2012-02-26 14:09+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -647,17 +647,17 @@ msgstr " 'by' は列を数値、名前ラベルもしくは論理値で特定し
 msgid "'by.x' and 'by.y' arguments specify different numbers of columns"
 msgstr " 'by.x' そして 'by.y' は異なった列数を指定しています "
 
+#. R/source.R: warning("'chdir = TRUE' makes no sense for a URL")
+#: R/source.R:0
+#, fuzzy
+msgid "'chdir = TRUE' makes no sense for a URL"
+msgstr " 'chdir = TRUE' は URL に対しては意味がありません "
+
 #. R/source.R: warning("'chdir = TRUE' option makes no sense for a connection")
 #: R/source.R:0
 #, fuzzy
 msgid "'chdir = TRUE' option makes no sense for a connection"
 msgstr " 'chdir = TRUE' はコネクションに対しては意味がありません "
-
-#. R/source.R: warning("'chdir = TRUE' option makes no sense for an URL")
-#: R/source.R:0
-#, fuzzy
-msgid "'chdir = TRUE' option makes no sense for an URL"
-msgstr " 'chdir = TRUE' は URL に対しては意味がありません "
 
 #. R/load.R: gettextf("'compress = \"%s\"' option is invalid", compress)
 #: R/load.R:0
@@ -3097,7 +3097,12 @@ msgstr " 置き換え対角成分の長さが間違っています "
 msgid "replacing element in non-existent column: %s"
 msgstr " 存在しない列中の要素の置き換えです： "
 
-#. R/namespace.R: gettext("replacing local value with import %s when loading namespace %s")
+#. R/namespace.R: gettext("replacing local value with import %s when loading %s")
+#: R/namespace.R:0
+#, fuzzy
+msgid "replacing local value with import %s when loading %s"
+msgstr " ローカル変数をインポート %s で置き換えています（%sのロード中） "
+
 #. R/namespace.R: gettext("replacing local value with import %s when loading namespace %s")
 #: R/namespace.R:0
 #, fuzzy

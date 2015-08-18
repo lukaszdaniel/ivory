@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-07 21:37+0200\n"
+"POT-Creation-Date: 2015-08-18 12:53+0200\n"
 "PO-Revision-Date: 2015-01-17 15:40+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <r-core@r-project.org>\n"
@@ -176,9 +176,9 @@ msgstr "Nicht-numerisches Argument für mathematische Funktion"
 msgid "Value %g out of range (0, 1)"
 msgstr "Wert %g liegt außerhalb des Bereichs (0, 1)"
 
-#: family.c:66 family.c:80 family.c:98 port.c:383 port.c:552
-#, fuzzy, c-format
-msgid "'%s' argument must be a nonempty numeric vector"
+#: family.c:66 family.c:80 family.c:98
+#, c-format
+msgid "Argument %s must be a nonempty numeric vector"
 msgstr "Argument %s muss ein nichtleerer numerischer Vektor sein"
 
 #: family.c:131 family.c:134
@@ -301,17 +301,17 @@ msgstr "nur 2500 Zeilen erlaubt für sm.method=\\\"spline\\\""
 msgid "insufficient observations"
 msgstr "Fehlende Werte in den letzten %d Beobachtungen"
 
-#: lm.c:51
+#: lm.c:57
 #, fuzzy
-msgid "'x' argument is not a matrix"
+msgid "'x' is not a matrix"
 msgstr "'fn' ist keine Funktion"
 
-#: lm.c:56
+#: lm.c:62
 #, c-format
 msgid "dimensions of 'x' (%d,%d) and 'y' (%d) do not match"
 msgstr ""
 
-#: lm.c:70 lm.c:74
+#: lm.c:77 lm.c:81
 #, c-format
 msgid "NA/NaN/Inf in '%s'"
 msgstr ""
@@ -1030,6 +1030,11 @@ msgstr ""
 msgid "'%s' argument must be an environment"
 msgstr "'rho' sollte eine Umgebung sein"
 
+#: port.c:383 port.c:552
+#, fuzzy, c-format
+msgid "'%s' argument must be a nonempty numeric vector"
+msgstr "Argument %s muss ein nichtleerer numerischer Vektor sein"
+
 #: port.c:385
 msgid "When Hessian defined must also have gradient defined"
 msgstr ""
@@ -1157,9 +1162,6 @@ msgstr "Fehlende Werte in den letzten %d Beobachtungen"
 #, c-format
 msgid "ifault=%d. This should not happen"
 msgstr ""
-
-#~ msgid "Argument %s must be a nonempty numeric vector"
-#~ msgstr "Argument %s muss ein nichtleerer numerischer Vektor sein"
 
 #, fuzzy
 #~ msgid "unknown 'method' argument"

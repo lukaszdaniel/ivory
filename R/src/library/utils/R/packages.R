@@ -809,7 +809,7 @@ getCRANmirrors <- function(all = FALSE, local.only = FALSE)
 .chooseMirror <- function(m, label, graphics, ind, useHTTPS)
 {
     if(is.null(ind) && !interactive())
-        stop("cannot choose a ", label, " mirror non-interactively")
+        stop(gettextf("cannot choose a %s mirror non-interactively", label))
     if (length(ind)) 
         res <- as.integer(ind)[1L] 
     else {

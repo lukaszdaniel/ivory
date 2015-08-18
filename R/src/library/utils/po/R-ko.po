@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-07-07 21:38\n"
+"POT-Creation-Date: 2015-08-18 13:11\n"
 "PO-Revision-Date: 2012-03-09 06:16+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -174,9 +174,11 @@ msgid "'%s' argument must be a character vector"
 msgstr "'url' 은 반드시 비어있지 않은 문자열이어야 합니다 "
 
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
+#. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
+#. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
 #. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
@@ -398,6 +400,11 @@ msgstr "'tar' 는 0 이 아닌 종료코드 %d 를 반환했습니다 "
 #: R/help.R:0
 msgid "'topic' should be a name, length-one character vector or reserved word"
 msgstr "'topic' 은 이름, 길이가 한개인 문자 벡터, 또는 예약어 이어야 합니다 "
+
+#. R/windows/sysutils.R: stop("'use != NA' option is defunct")
+#: R/windows/sysutils.R:0
+msgid "'use != NA' option is defunct"
+msgstr ""
 
 #. R/packageStatus.R: gettext("(each package appears only once)", domain = "R-utils")
 #: R/packageStatus.R:0
@@ -1673,14 +1680,10 @@ msgstr "can only receive calls on local machine"
 msgid "cancelled by user"
 msgstr ""
 
-#. R/packages.R: stop("cannot choose a BioC mirror non-interactively")
+#. R/packages.R: gettextf("cannot choose a %s mirror non-interactively", label)
 #: R/packages.R:0
-msgid "cannot choose a BioC mirror non-interactively"
-msgstr "BioC 미러는 인터랙티브하게 선택해야 합니다"
-
-#. R/packages.R: stop("cannot choose a CRAN mirror non-interactively")
-#: R/packages.R:0
-msgid "cannot choose a CRAN mirror non-interactively"
+#, fuzzy
+msgid "cannot choose a %s mirror non-interactively"
 msgstr "CRAN 미러는 인터랙티브하게 선택해야 합니다"
 
 #. R/roman.R: stop("cannot coerce 'x' to roman")
@@ -2290,11 +2293,12 @@ msgstr "메타데이터 %s 가 손상되었습니다 "
 msgid "metadata of package '%s' is corrupt"
 msgstr "패키지 '%s' 의 메타데이터가 손상되었습니다 "
 
-#. R/unix/download.file.R: stop("method 'lynx' is defunct as from R 3.1.0", domain = "R-utils")
-#. R/windows/download.file.R: stop("method 'lynx' is defunct as from R 3.1.0", domain = "R-utils")
+#. R/unix/download.file.R: stop("method 'lynx' is defunct", domain = "R-utils")
+#. R/windows/download.file.R: stop("method 'lynx' is defunct", domain = "R-utils")
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
-msgid "method 'lynx' is defunct as from R 3.1.0"
-msgstr ""
+#, fuzzy
+msgid "method 'lynx' is defunct"
+msgstr "'mailx' 는 Unix 에서만 사용가능한 메소드입니다 "
 
 #. R/windows/create.post.R: stop("method 'mailx' is Unix-only")
 #: R/windows/create.post.R:0
@@ -2409,12 +2413,6 @@ msgid "no documentation of type %s and topic %s (or error in processing help)"
 msgstr ""
 "유형 %s 와 주제 %s 에 대한 문서가 없습니다 (혹은 도움말 처리에 문제가 있습니"
 "다)"
-
-#. R/unix/download.file.R: stop("no download method found")
-#. R/windows/download.file.R: stop("no download method found")
-#: R/unix/download.file.R:0 R/windows/download.file.R:0
-msgid "no download method found"
-msgstr "다운로드 메소드를 찾을 수 없습니다 "
 
 #. R/summRprof.R: stop("no events were recorded")
 #: R/summRprof.R:0
@@ -3336,6 +3334,13 @@ msgstr[0] "패키지 %s 는 (%s 에 대하여) 이용가능하지 않습니다 "
 msgid "package %s is not available (for %s)"
 msgid_plural "packages %s are not available (for %s)"
 msgstr[0] "패키지 %s 는 (%s 에 대하여) 이용가능하지 않습니다 "
+
+#, fuzzy
+#~ msgid "mirror non-interactively"
+#~ msgstr "BioC 미러는 인터랙티브하게 선택해야 합니다"
+
+#~ msgid "no download method found"
+#~ msgstr "다운로드 메소드를 찾을 수 없습니다 "
 
 #~ msgid ""
 #~ "type == \"both\" cannot be used if 'available' or 'contriburl' is "

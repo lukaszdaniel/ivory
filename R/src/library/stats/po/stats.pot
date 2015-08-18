@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-07 21:37+0200\n"
+"POT-Creation-Date: 2015-08-18 12:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -170,9 +170,9 @@ msgstr ""
 msgid "Value %g out of range (0, 1)"
 msgstr ""
 
-#: family.c:66 family.c:80 family.c:98 port.c:383 port.c:552
+#: family.c:66 family.c:80 family.c:98
 #, c-format
-msgid "'%s' argument must be a nonempty numeric vector"
+msgid "Argument %s must be a nonempty numeric vector"
 msgstr ""
 
 #: family.c:131 family.c:134
@@ -291,16 +291,16 @@ msgstr ""
 msgid "insufficient observations"
 msgstr ""
 
-#: lm.c:51
-msgid "'x' argument is not a matrix"
+#: lm.c:57
+msgid "'x' is not a matrix"
 msgstr ""
 
-#: lm.c:56
+#: lm.c:62
 #, c-format
 msgid "dimensions of 'x' (%d,%d) and 'y' (%d) do not match"
 msgstr ""
 
-#: lm.c:70 lm.c:74
+#: lm.c:77 lm.c:81
 #, c-format
 msgid "NA/NaN/Inf in '%s'"
 msgstr ""
@@ -988,6 +988,11 @@ msgstr ""
 #: port.c:381
 #, c-format
 msgid "'%s' argument must be an environment"
+msgstr ""
+
+#: port.c:383 port.c:552
+#, c-format
+msgid "'%s' argument must be a nonempty numeric vector"
 msgstr ""
 
 #: port.c:385

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-07-07 21:37\n"
+"POT-Creation-Date: 2015-08-18 12:53\n"
 "PO-Revision-Date: 2015-01-17 15:43+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -752,6 +752,12 @@ msgstr "%s函数，\"%s\"标记：方法定义中的参数从(%s)改变成(%s)"
 #. R/trace.R: gettextf("For package %s", sQuote(object@packageName), domain = "R-methods")
 #: R/trace.R:0
 msgid "For package %s"
+msgstr ""
+
+#. R/RClassUtils.R: gettextf("Found more than one class %s in cache; using the first, from namespace '%s'",     dQuote(name), pkgs[1])
+#: R/RClassUtils.R:0
+msgid ""
+"Found more than one class %s in cache; using the first, from namespace '%s'"
 msgstr ""
 
 #. R/trace.R: gettextf("From source file %s", sQuote(object@sourceFile), domain = "R-methods")

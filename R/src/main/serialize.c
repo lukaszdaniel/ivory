@@ -892,26 +892,26 @@ OutRealVec(R_outpstream_t stream, SEXP s, R_xlen_t length)
     case R_pstream_xdr_format:
     {
 	static char buf[CHUNK_SIZE * sizeof(double)];
-	R_xlen_t done, this;
+	R_xlen_t done, thiss;
 	XDR xdrs;
-	for (done = 0; done < length; done += this) {
-	    this = min(CHUNK_SIZE, length - done);
-	    xdrmem_create(&xdrs, buf, (int)(this * sizeof(double)), XDR_ENCODE);
-	    for(int cnt = 0; cnt < this; cnt++)
+	for (done = 0; done < length; done += thiss) {
+	    thiss = min(CHUNK_SIZE, length - done);
+	    xdrmem_create(&xdrs, buf, (int)(thiss * sizeof(double)), XDR_ENCODE);
+	    for(int cnt = 0; cnt < thiss; cnt++)
 		if(!xdr_double(&xdrs, REAL(s) + done + cnt))
 		    error(_("XDR write failed"));
 	    xdr_destroy(&xdrs);
-	    stream->OutBytes(stream, buf, (int)(sizeof(double) * this));
+	    stream->OutBytes(stream, buf, (int)(sizeof(double) * thiss));
 	}
 	break;
     }
     case R_pstream_binary_format:
     {
-	R_xlen_t done, this;
-	for (done = 0; done < length; done += this) {
-	    this = min(CHUNK_SIZE, length - done);
+	R_xlen_t done, thiss;
+	for (done = 0; done < length; done += thiss) {
+	    thiss = min(CHUNK_SIZE, length - done);
 	    stream->OutBytes(stream, REAL(s) + done,
-			     (int)(sizeof(double) * this));
+			     (int)(sizeof(double) * thiss));
 	}
 	break;
     }
@@ -928,29 +928,29 @@ OutComplexVec(R_outpstream_t stream, SEXP s, R_xlen_t length)
     case R_pstream_xdr_format:
     {
 	static char buf[CHUNK_SIZE * sizeof(Rcomplex)];
-	R_xlen_t done, this;
+	R_xlen_t done, thiss;
 	XDR xdrs;
 	Rcomplex *c = COMPLEX(s);
-	for (done = 0; done < length; done += this) {
-	    this = min(CHUNK_SIZE, length - done);
-	    xdrmem_create(&xdrs, buf, (int)(this * sizeof(Rcomplex)), XDR_ENCODE);
-	    for(int cnt = 0; cnt < this; cnt++) {
+	for (done = 0; done < length; done += thiss) {
+	    thiss = min(CHUNK_SIZE, length - done);
+	    xdrmem_create(&xdrs, buf, (int)(thiss * sizeof(Rcomplex)), XDR_ENCODE);
+	    for(int cnt = 0; cnt < thiss; cnt++) {
 		if(!xdr_double(&xdrs, &(c[done+cnt].r)) ||
 		   !xdr_double(&xdrs, &(c[done+cnt].i)))
 		    error(_("XDR write failed"));
 	    }
-	    stream->OutBytes(stream, buf, (int)(sizeof(Rcomplex) * this));
+	    stream->OutBytes(stream, buf, (int)(sizeof(Rcomplex) * thiss));
 	    xdr_destroy(&xdrs);
 	}
 	break;
     }
     case R_pstream_binary_format:
     {
-	R_xlen_t done, this;
-	for (done = 0; done < length; done += this) {
-	    this = min(CHUNK_SIZE, length - done);
+	R_xlen_t done, thiss;
+	for (done = 0; done < length; done += thiss) {
+	    thiss = min(CHUNK_SIZE, length - done);
 	    stream->OutBytes(stream, COMPLEX(s) + done,
-			     (int)(sizeof(Rcomplex) * this));
+			     (int)(sizeof(Rcomplex) * thiss));
 	}
 	break;
     }
@@ -1119,10 +1119,10 @@ static void WriteItem (SEXP s, SEXP ref_table, R_outpstream_t stream)
 	    case R_pstream_xdr_format:
 	    case R_pstream_binary_format:
 	    {
-		R_xlen_t done, this;
-		for (done = 0; done < len; done += this) {
-		    this = min(CHUNK_SIZE, len - done);
-		    stream->OutBytes(stream, RAW(s) + done, (int) this);
+		R_xlen_t done, thiss;
+		for (done = 0; done < len; done += thiss) {
+		    thiss = min(CHUNK_SIZE, len - done);
+		    stream->OutBytes(stream, RAW(s) + done, (int) thiss);
 		}
 		break;
 	    }
@@ -1390,13 +1390,13 @@ InIntegerVec(R_inpstream_t stream, SEXP obj, R_xlen_t length)
     case R_pstream_xdr_format:
     {
 	static char buf[CHUNK_SIZE * sizeof(int)];
-	R_xlen_t done, this;
+	R_xlen_t done, thiss;
 	XDR xdrs;
-	for (done = 0; done < length; done += this) {
-	    this = min(CHUNK_SIZE, length - done);
-	    stream->InBytes(stream, buf, (int)(sizeof(int) * this));
-	    xdrmem_create(&xdrs, buf, (int)(this * sizeof(int)), XDR_DECODE);
-	    for(int cnt = 0; cnt < this; cnt++)
+	for (done = 0; done < length; done += thiss) {
+	    thiss = min(CHUNK_SIZE, length - done);
+	    stream->InBytes(stream, buf, (int)(sizeof(int) * thiss));
+	    xdrmem_create(&xdrs, buf, (int)(thiss * sizeof(int)), XDR_DECODE);
+	    for(int cnt = 0; cnt < thiss; cnt++)
 		if(!xdr_int(&xdrs, INTEGER(obj) + done + cnt))
 		    error(_("XDR read failed"));
 	    xdr_destroy(&xdrs);
@@ -1405,11 +1405,11 @@ InIntegerVec(R_inpstream_t stream, SEXP obj, R_xlen_t length)
     }
     case R_pstream_binary_format:
     {
-	R_xlen_t done, this;
-	for (done = 0; done < length; done += this) {
-	    this = min(CHUNK_SIZE, length - done);
+	R_xlen_t done, thiss;
+	for (done = 0; done < length; done += thiss) {
+	    thiss = min(CHUNK_SIZE, length - done);
 	    stream->InBytes(stream, INTEGER(obj) + done,
-			    (int)(sizeof(int) * this));
+			    (int)(sizeof(int) * thiss));
 	}
 	break;
     }
@@ -1426,13 +1426,13 @@ InRealVec(R_inpstream_t stream, SEXP obj, R_xlen_t length)
     case R_pstream_xdr_format:
     {
 	static char buf[CHUNK_SIZE * sizeof(double)];
-	R_xlen_t done, this;
+	R_xlen_t done, thiss;
 	XDR xdrs;
-	for (done = 0; done < length; done += this) {
-	    this = min(CHUNK_SIZE, length - done);
-	    stream->InBytes(stream, buf, (int)(sizeof(double) * this));
-	    xdrmem_create(&xdrs, buf, (int)(this * sizeof(double)), XDR_DECODE);
-	    for(R_xlen_t cnt = 0; cnt < this; cnt++)
+	for (done = 0; done < length; done += thiss) {
+	    thiss = min(CHUNK_SIZE, length - done);
+	    stream->InBytes(stream, buf, (int)(sizeof(double) * thiss));
+	    xdrmem_create(&xdrs, buf, (int)(thiss * sizeof(double)), XDR_DECODE);
+	    for(R_xlen_t cnt = 0; cnt < thiss; cnt++)
 		if(!xdr_double(&xdrs, REAL(obj) + done + cnt))
 		    error(_("XDR read failed"));
 	    xdr_destroy(&xdrs);
@@ -1441,11 +1441,11 @@ InRealVec(R_inpstream_t stream, SEXP obj, R_xlen_t length)
     }
     case R_pstream_binary_format:
     {
-	R_xlen_t done, this;
-	for (done = 0; done < length; done += this) {
-	    this = min(CHUNK_SIZE, length - done);
+	R_xlen_t done, thiss;
+	for (done = 0; done < length; done += thiss) {
+	    thiss = min(CHUNK_SIZE, length - done);
 	    stream->InBytes(stream, REAL(obj) + done,
-			    (int)(sizeof(double) * this));
+			    (int)(sizeof(double) * thiss));
 	}
 	break;
     }
@@ -1462,14 +1462,14 @@ InComplexVec(R_inpstream_t stream, SEXP obj, R_xlen_t length)
     case R_pstream_xdr_format:
     {
 	static char buf[CHUNK_SIZE * sizeof(Rcomplex)];
-	R_xlen_t done, this;
+	R_xlen_t done, thiss;
 	XDR xdrs;
 	Rcomplex *output = COMPLEX(obj);
-	for (done = 0; done < length; done += this) {
-	    this = min(CHUNK_SIZE, length - done);
-	    stream->InBytes(stream, buf, (int)(sizeof(Rcomplex) * this));
-	    xdrmem_create(&xdrs, buf, (int)(this * sizeof(Rcomplex)), XDR_DECODE);
-	    for(R_xlen_t cnt = 0; cnt < this; cnt++) {
+	for (done = 0; done < length; done += thiss) {
+	    thiss = min(CHUNK_SIZE, length - done);
+	    stream->InBytes(stream, buf, (int)(sizeof(Rcomplex) * thiss));
+	    xdrmem_create(&xdrs, buf, (int)(thiss * sizeof(Rcomplex)), XDR_DECODE);
+	    for(R_xlen_t cnt = 0; cnt < thiss; cnt++) {
 		if(!xdr_double(&xdrs, &(output[done+cnt].r)) ||
 		   !xdr_double(&xdrs, &(output[done+cnt].i)))
 		    error(_("XDR read failed"));
@@ -1480,11 +1480,11 @@ InComplexVec(R_inpstream_t stream, SEXP obj, R_xlen_t length)
     }
     case R_pstream_binary_format:
     {
-	R_xlen_t done, this;
-	for (done = 0; done < length; done += this) {
-	    this = min(CHUNK_SIZE, length - done);
+	R_xlen_t done, thiss;
+	for (done = 0; done < length; done += thiss) {
+	    thiss = min(CHUNK_SIZE, length - done);
 	    stream->InBytes(stream, COMPLEX(obj) + done,
-			    (int)(sizeof(Rcomplex) * this));
+			    (int)(sizeof(Rcomplex) * thiss));
 	}
 	break;
     }

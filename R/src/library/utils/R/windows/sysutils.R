@@ -116,7 +116,7 @@ readRegistry <-
 }
 
 setInternet2 <- function(use = TRUE) {
-    if(!is.na(use)) stop("use != NA is defunct")
+    if(!is.na(use)) stop("'use != NA' option is defunct")
     NA
 }
 

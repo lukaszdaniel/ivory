@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-07-07 21:36\n"
+"POT-Creation-Date: 2015-08-18 12:52\n"
 "PO-Revision-Date: 2015-01-17 13:32+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -654,17 +654,17 @@ msgstr ""
 msgid "'by.x' and 'by.y' arguments specify different numbers of columns"
 msgstr "'by.x' и 'by.y' определяют разные номера колонок"
 
+#. R/source.R: warning("'chdir = TRUE' makes no sense for a URL")
+#: R/source.R:0
+#, fuzzy
+msgid "'chdir = TRUE' makes no sense for a URL"
+msgstr "'chdir = TRUE' не имеет смысла для URL"
+
 #. R/source.R: warning("'chdir = TRUE' option makes no sense for a connection")
 #: R/source.R:0
 #, fuzzy
 msgid "'chdir = TRUE' option makes no sense for a connection"
 msgstr "'chdir = TRUE' не имеет смысла для соединения"
-
-#. R/source.R: warning("'chdir = TRUE' option makes no sense for an URL")
-#: R/source.R:0
-#, fuzzy
-msgid "'chdir = TRUE' option makes no sense for an URL"
-msgstr "'chdir = TRUE' не имеет смысла для URL"
 
 #. R/load.R: gettextf("'compress = \"%s\"' option is invalid", compress)
 #: R/load.R:0
@@ -3073,7 +3073,12 @@ msgstr "у замены диагонали -- неправильная длин�
 msgid "replacing element in non-existent column: %s"
 msgstr "замена элемента в несуществующей колонке:"
 
-#. R/namespace.R: gettext("replacing local value with import %s when loading namespace %s")
+#. R/namespace.R: gettext("replacing local value with import %s when loading %s")
+#: R/namespace.R:0
+#, fuzzy
+msgid "replacing local value with import %s when loading %s"
+msgstr "заменяю локальное значение на импортированное %s во время загрузки %s"
+
 #. R/namespace.R: gettext("replacing local value with import %s when loading namespace %s")
 #: R/namespace.R:0
 #, fuzzy

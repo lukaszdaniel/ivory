@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-07-07 21:36\n"
+"POT-Creation-Date: 2015-08-18 12:52\n"
 "PO-Revision-Date: 2012-11-27 01:11+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -558,14 +558,14 @@ msgstr ""
 msgid "'by.x' and 'by.y' arguments specify different numbers of columns"
 msgstr ""
 
+#. R/source.R: warning("'chdir = TRUE' makes no sense for a URL")
+#: R/source.R:0
+msgid "'chdir = TRUE' makes no sense for a URL"
+msgstr ""
+
 #. R/source.R: warning("'chdir = TRUE' option makes no sense for a connection")
 #: R/source.R:0
 msgid "'chdir = TRUE' option makes no sense for a connection"
-msgstr ""
-
-#. R/source.R: warning("'chdir = TRUE' option makes no sense for an URL")
-#: R/source.R:0
-msgid "'chdir = TRUE' option makes no sense for an URL"
 msgstr ""
 
 #. R/load.R: gettextf("'compress = \"%s\"' option is invalid", compress)
@@ -2765,7 +2765,11 @@ msgstr ""
 msgid "replacing element in non-existent column: %s"
 msgstr ""
 
-#. R/namespace.R: gettext("replacing local value with import %s when loading namespace %s")
+#. R/namespace.R: gettext("replacing local value with import %s when loading %s")
+#: R/namespace.R:0
+msgid "replacing local value with import %s when loading %s"
+msgstr ""
+
 #. R/namespace.R: gettext("replacing local value with import %s when loading namespace %s")
 #: R/namespace.R:0
 msgid "replacing local value with import %s when loading namespace %s"

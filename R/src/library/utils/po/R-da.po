@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-07-07 21:38\n"
+"POT-Creation-Date: 2015-08-18 13:11\n"
 "PO-Revision-Date: 2012-01-09 20:51+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -160,9 +160,11 @@ msgid "'%s' argument must be a character vector"
 msgstr "»file« skal være NULL, en tegnstreng eller en forbindelse"
 
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
+#. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
+#. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
 #. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
@@ -371,6 +373,11 @@ msgstr ""
 #. R/help.R: stop("'topic' should be a name, length-one character vector or reserved word")
 #: R/help.R:0
 msgid "'topic' should be a name, length-one character vector or reserved word"
+msgstr ""
+
+#. R/windows/sysutils.R: stop("'use != NA' option is defunct")
+#: R/windows/sysutils.R:0
+msgid "'use != NA' option is defunct"
 msgstr ""
 
 #. R/packageStatus.R: gettext("(each package appears only once)", domain = "R-utils")
@@ -1596,14 +1603,9 @@ msgstr ""
 msgid "cancelled by user"
 msgstr ""
 
-#. R/packages.R: stop("cannot choose a BioC mirror non-interactively")
+#. R/packages.R: gettextf("cannot choose a %s mirror non-interactively", label)
 #: R/packages.R:0
-msgid "cannot choose a BioC mirror non-interactively"
-msgstr ""
-
-#. R/packages.R: stop("cannot choose a CRAN mirror non-interactively")
-#: R/packages.R:0
-msgid "cannot choose a CRAN mirror non-interactively"
+msgid "cannot choose a %s mirror non-interactively"
 msgstr ""
 
 #. R/roman.R: stop("cannot coerce 'x' to roman")
@@ -2190,10 +2192,10 @@ msgstr ""
 msgid "metadata of package '%s' is corrupt"
 msgstr ""
 
-#. R/unix/download.file.R: stop("method 'lynx' is defunct as from R 3.1.0", domain = "R-utils")
-#. R/windows/download.file.R: stop("method 'lynx' is defunct as from R 3.1.0", domain = "R-utils")
+#. R/unix/download.file.R: stop("method 'lynx' is defunct", domain = "R-utils")
+#. R/windows/download.file.R: stop("method 'lynx' is defunct", domain = "R-utils")
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
-msgid "method 'lynx' is defunct as from R 3.1.0"
+msgid "method 'lynx' is defunct"
 msgstr ""
 
 #. R/windows/create.post.R: stop("method 'mailx' is Unix-only")
@@ -2303,12 +2305,6 @@ msgstr ""
 #. R/question.R: gettextf("no documentation of type %s and topic %s (or error in processing help)",     sQuote(type), sQuote(topicExpr))
 #: R/question.R:0
 msgid "no documentation of type %s and topic %s (or error in processing help)"
-msgstr ""
-
-#. R/unix/download.file.R: stop("no download method found")
-#. R/windows/download.file.R: stop("no download method found")
-#: R/unix/download.file.R:0 R/windows/download.file.R:0
-msgid "no download method found"
 msgstr ""
 
 #. R/summRprof.R: stop("no events were recorded")

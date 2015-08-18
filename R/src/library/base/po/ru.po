@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-29 22:13+0200\n"
+"POT-Creation-Date: 2015-08-18 12:52+0200\n"
 "PO-Revision-Date: 2015-01-17 13:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -528,7 +528,7 @@ msgstr "ошибка чтения"
 msgid "unknown timezone '%s'"
 msgstr "ВНИМАНИЕ: неизвестный параметр '%s'\n"
 
-#: src/extra/tzone/registryTZ.c:364
+#: src/extra/tzone/registryTZ.c:389
 #, c-format
 msgid ""
 "unable to identify current timezone '%s':\n"
@@ -607,8 +607,8 @@ msgstr "в доступе к '%s' отказано"
 msgid "problem in displaying file '%ls'"
 msgstr "проблема при отображении '%s'"
 
-#: src/gnuwin32/extra.c:114 src/gnuwin32/extra.c:156 src/gnuwin32/extra.c:332
-#: src/gnuwin32/extra.c:558 src/gnuwin32/extra.c:583 src/main/agrep.c:132
+#: src/gnuwin32/extra.c:114 src/gnuwin32/extra.c:156 src/gnuwin32/extra.c:346
+#: src/gnuwin32/extra.c:572 src/gnuwin32/extra.c:597 src/main/agrep.c:132
 #: src/main/agrep.c:136 src/main/agrep.c:774 src/main/agrep.c:779
 #: src/main/apply.c:329 src/main/apply.c:331 src/main/apply.c:334
 #: src/main/array.c:90 src/main/array.c:1243 src/main/array.c:1369
@@ -633,29 +633,29 @@ msgstr "проблема при отображении '%s'"
 #: src/main/connections.c:2665 src/main/connections.c:3048
 #: src/main/connections.c:3053 src/main/connections.c:3059
 #: src/main/connections.c:3062 src/main/connections.c:3066
-#: src/main/connections.c:3081 src/main/connections.c:3131
-#: src/main/connections.c:3136 src/main/connections.c:3140
-#: src/main/connections.c:3144 src/main/connections.c:3148
-#: src/main/connections.c:3154 src/main/connections.c:3202
-#: src/main/connections.c:3208 src/main/connections.c:3212
-#: src/main/connections.c:3263 src/main/connections.c:3266
-#: src/main/connections.c:3540 src/main/connections.c:3543
-#: src/main/connections.c:3546 src/main/connections.c:3552
-#: src/main/connections.c:3658 src/main/connections.c:3664
-#: src/main/connections.c:3667 src/main/connections.c:3819
-#: src/main/connections.c:3822 src/main/connections.c:3826
-#: src/main/connections.c:3829 src/main/connections.c:3950
-#: src/main/connections.c:4081 src/main/connections.c:4084
-#: src/main/connections.c:4421 src/main/connections.c:4446
-#: src/main/connections.c:4481 src/main/connections.c:4496
-#: src/main/connections.c:4504 src/main/connections.c:4530
-#: src/main/connections.c:4676 src/main/connections.c:4680
-#: src/main/connections.c:4808 src/main/connections.c:4810
-#: src/main/connections.c:4812 src/main/connections.c:4840
-#: src/main/connections.c:4974 src/main/connections.c:5013
-#: src/main/connections.c:5018 src/main/connections.c:5023
-#: src/main/connections.c:5042 src/main/context.c:607 src/main/context.c:616
-#: src/main/context.c:620 src/main/datetime.c:786 src/main/datetime.c:876
+#: src/main/connections.c:3081 src/main/connections.c:3130
+#: src/main/connections.c:3135 src/main/connections.c:3139
+#: src/main/connections.c:3143 src/main/connections.c:3147
+#: src/main/connections.c:3153 src/main/connections.c:3198
+#: src/main/connections.c:3204 src/main/connections.c:3208
+#: src/main/connections.c:3259 src/main/connections.c:3262
+#: src/main/connections.c:3538 src/main/connections.c:3541
+#: src/main/connections.c:3544 src/main/connections.c:3550
+#: src/main/connections.c:3656 src/main/connections.c:3662
+#: src/main/connections.c:3665 src/main/connections.c:3817
+#: src/main/connections.c:3820 src/main/connections.c:3824
+#: src/main/connections.c:3827 src/main/connections.c:3948
+#: src/main/connections.c:4079 src/main/connections.c:4082
+#: src/main/connections.c:4419 src/main/connections.c:4444
+#: src/main/connections.c:4479 src/main/connections.c:4494
+#: src/main/connections.c:4502 src/main/connections.c:4528
+#: src/main/connections.c:4674 src/main/connections.c:4678
+#: src/main/connections.c:4806 src/main/connections.c:4808
+#: src/main/connections.c:4810 src/main/connections.c:4838
+#: src/main/connections.c:4972 src/main/connections.c:5011
+#: src/main/connections.c:5016 src/main/connections.c:5021
+#: src/main/connections.c:5042 src/main/context.c:609 src/main/context.c:618
+#: src/main/context.c:622 src/main/datetime.c:786 src/main/datetime.c:876
 #: src/main/datetime.c:878 src/main/datetime.c:882 src/main/datetime.c:1043
 #: src/main/datetime.c:1045 src/main/datetime.c:1250 src/main/debug.c:241
 #: src/main/deparse.c:408 src/main/dotcode.c:479 src/main/dotcode.c:483
@@ -672,10 +672,10 @@ msgstr "проблема при отображении '%s'"
 #: src/main/grep.c:775 src/main/grep.c:780 src/main/grep.c:1074
 #: src/main/grep.c:1076 src/main/grep.c:1078 src/main/grep.c:1523
 #: src/main/grep.c:1527 src/main/grep.c:1532 src/main/grep.c:2340
-#: src/main/grep.c:2345 src/main/grep.c:2644 src/main/grep.c:2649
-#: src/main/internet.c:231 src/main/internet.c:245 src/main/internet.c:263
-#: src/main/internet.c:275 src/main/internet.c:287 src/main/internet.c:306
-#: src/main/memory.c:3794 src/main/names.c:1308 src/main/names.c:1311
+#: src/main/grep.c:2345 src/main/grep.c:2647 src/main/grep.c:2652
+#: src/main/internet.c:209 src/main/internet.c:223 src/main/internet.c:241
+#: src/main/internet.c:253 src/main/internet.c:265 src/main/internet.c:284
+#: src/main/memory.c:3804 src/main/names.c:1307 src/main/names.c:1310
 #: src/main/objects.c:1573 src/main/objects.c:1575 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
 #: src/main/paste.c:411 src/main/paste.c:416 src/main/paste.c:421
@@ -693,13 +693,13 @@ msgstr "проблема при отображении '%s'"
 #: src/main/platform.c:1570 src/main/platform.c:1606 src/main/platform.c:1609
 #: src/main/platform.c:1612 src/main/platform.c:1695 src/main/platform.c:1711
 #: src/main/platform.c:1744 src/main/platform.c:1746 src/main/platform.c:1817
-#: src/main/platform.c:1900 src/main/platform.c:2193 src/main/platform.c:2252
-#: src/main/platform.c:2429 src/main/platform.c:2432 src/main/platform.c:2435
-#: src/main/platform.c:2438 src/main/platform.c:2441 src/main/platform.c:2444
-#: src/main/platform.c:2647 src/main/platform.c:2650 src/main/platform.c:2653
-#: src/main/platform.c:2656 src/main/platform.c:2659 src/main/platform.c:2662
-#: src/main/platform.c:2740 src/main/platform.c:2748 src/main/platform.c:2784
-#: src/main/platform.c:2834 src/main/print.c:242 src/main/print.c:248
+#: src/main/platform.c:1900 src/main/platform.c:2182 src/main/platform.c:2241
+#: src/main/platform.c:2418 src/main/platform.c:2421 src/main/platform.c:2424
+#: src/main/platform.c:2427 src/main/platform.c:2430 src/main/platform.c:2433
+#: src/main/platform.c:2636 src/main/platform.c:2639 src/main/platform.c:2642
+#: src/main/platform.c:2645 src/main/platform.c:2648 src/main/platform.c:2651
+#: src/main/platform.c:2729 src/main/platform.c:2737 src/main/platform.c:2773
+#: src/main/platform.c:2823 src/main/print.c:242 src/main/print.c:248
 #: src/main/print.c:270 src/main/print.c:276 src/main/print.c:283
 #: src/main/random.c:471 src/main/random.c:475 src/main/random.c:482
 #: src/main/random.c:510 src/main/saveload.c:1947 src/main/saveload.c:1950
@@ -723,7 +723,7 @@ msgstr "проблема при отображении '%s'"
 #: src/main/util.c:2281 src/main/util.c:2285 src/main/util.c:2287
 #: src/modules/internet/internet.c:454 src/modules/internet/internet.c:460
 #: src/modules/internet/internet.c:466 src/modules/internet/internet.c:469
-#: src/modules/internet/internet.c:473 src/modules/internet/internet.c:477
+#: src/modules/internet/internet.c:473 src/modules/internet/internet.c:478
 #: src/modules/internet/libcurl.c:148 src/modules/internet/libcurl.c:153
 #: src/modules/internet/libcurl.c:156 src/modules/internet/libcurl.c:319
 #: src/modules/internet/libcurl.c:323 src/modules/internet/libcurl.c:328
@@ -733,34 +733,34 @@ msgstr "проблема при отображении '%s'"
 #: src/modules/lapack/Lapack.c:880 src/modules/lapack/Lapack.c:1205
 #: src/modules/X11/devX11.c:3233 src/modules/X11/devX11.c:3236
 #: src/modules/X11/devX11.c:3239 src/modules/X11/devX11.c:3263
-#: src/unix/sys-std.c:1221 src/unix/sys-std.c:1244
+#: src/unix/sys-std.c:1224 src/unix/sys-std.c:1247
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "неправильный аргумент '%s'"
 
-#: src/gnuwin32/extra.c:180
+#: src/gnuwin32/extra.c:181
 msgid "unsupported version of Windows"
 msgstr "неподдерживаемая версия Windows"
 
-#: src/gnuwin32/extra.c:297 src/gnuwin32/extra.c:308
+#: src/gnuwin32/extra.c:311 src/gnuwin32/extra.c:322
 msgid "incorrect argument"
 msgstr "неправильный аргумент"
 
-#: src/gnuwin32/extra.c:300
+#: src/gnuwin32/extra.c:314
 msgid "don't be silly!: your machine has a 4Gb address limit"
 msgstr "не делайте глупости: у Вашей машины лимит адресов 4Gb!"
 
-#: src/gnuwin32/extra.c:304
+#: src/gnuwin32/extra.c:318
 msgid "cannot decrease memory limit: ignored"
 msgstr "не могу уменьшить предел памяти: пропущено"
 
-#: src/gnuwin32/extra.c:411 src/gnuwin32/extra.c:512 src/main/objects.c:830
+#: src/gnuwin32/extra.c:425 src/gnuwin32/extra.c:526 src/main/objects.c:830
 #: src/main/sysutils.c:636 src/main/unique.c:1572 src/main/util.c:961
 #, fuzzy, c-format
 msgid "'%s' argument must be a character vector"
 msgstr "первый аргумент должен быть текстовым вектором"
 
-#: src/gnuwin32/extra.c:415 src/main/edit.c:142 src/main/errors.c:1044
+#: src/gnuwin32/extra.c:429 src/main/edit.c:142 src/main/errors.c:1044
 #: src/main/errors.c:1046 src/main/objects.c:420 src/main/objects.c:1148
 #: src/main/options.c:340 src/main/raw.c:150 src/main/Renviron.c:311
 #: src/main/unique.c:1576 src/modules/lapack/Lapack.c:85
@@ -771,35 +771,35 @@ msgstr "первый аргумент должен быть текстовым �
 msgid "'%s' argument must be a character string"
 msgstr "'norm' должен быть текстовой строкой"
 
-#: src/gnuwin32/extra.c:418
+#: src/gnuwin32/extra.c:432
 #, fuzzy
 msgid "'winslash' argument must be '/' or '\\\\'"
 msgstr "первый аргумент должен быть вектором"
 
-#: src/gnuwin32/extra.c:560 src/gnuwin32/extra.c:562 src/gnuwin32/extra.c:585
-#: src/gnuwin32/extra.c:587 src/gnuwin32/extra.c:622 src/main/gevents.c:62
+#: src/gnuwin32/extra.c:574 src/gnuwin32/extra.c:576 src/gnuwin32/extra.c:599
+#: src/gnuwin32/extra.c:601 src/gnuwin32/extra.c:636 src/main/gevents.c:62
 #: src/main/gevents.c:99
 msgid "invalid device"
 msgstr "неправильное устройство"
 
-#: src/gnuwin32/extra.c:563
+#: src/gnuwin32/extra.c:577
 msgid "SDI mode is required"
 msgstr ""
 
-#: src/gnuwin32/extra.c:616 src/main/gevents.c:59 src/main/gevents.c:96
+#: src/gnuwin32/extra.c:630 src/main/gevents.c:59 src/main/gevents.c:96
 msgid "invalid graphical device number"
 msgstr "неправильный номер графического устройства"
 
-#: src/gnuwin32/extra.c:626
+#: src/gnuwin32/extra.c:640
 msgid "bad device"
 msgstr "плохое устройство"
 
-#: src/gnuwin32/extra.c:780 src/gnuwin32/extra.c:788
+#: src/gnuwin32/extra.c:794 src/gnuwin32/extra.c:802
 #, fuzzy, c-format
 msgid "invalid input in '%s' function"
 msgstr "неправильный ввод в Rmbstowcs"
 
-#: src/gnuwin32/extra.c:811 src/main/platform.c:1330
+#: src/gnuwin32/extra.c:825 src/main/platform.c:1330
 #, fuzzy
 msgid "file choice was cancelled"
 msgstr "выбор файла отменен"
@@ -857,119 +857,119 @@ msgstr "выделение соединения по каналу не удал�
 msgid "'%s' argument is not a character vector"
 msgstr "'fmt' не является текстовым вектором"
 
-#: src/gnuwin32/system.c:122 src/unix/sys-unix.c:424
+#: src/gnuwin32/system.c:121 src/unix/sys-unix.c:424
 msgid "reached session elapsed time limit"
 msgstr "достигнуто сессионное ограничение времени операции"
 
-#: src/gnuwin32/system.c:124 src/unix/sys-unix.c:426
+#: src/gnuwin32/system.c:123 src/unix/sys-unix.c:426
 msgid "reached elapsed time limit"
 msgstr "достигнуто ограничение времени операции"
 
-#: src/gnuwin32/system.c:130 src/unix/sys-unix.c:432
+#: src/gnuwin32/system.c:129 src/unix/sys-unix.c:432
 msgid "reached session CPU time limit"
 msgstr "достигнуто сессионное ограничение времени ЦПУ"
 
-#: src/gnuwin32/system.c:132 src/unix/sys-unix.c:434
+#: src/gnuwin32/system.c:131 src/unix/sys-unix.c:434
 msgid "reached CPU time limit"
 msgstr "достигнуто ограничение времени ЦПУ"
 
-#: src/gnuwin32/system.c:157 src/unix/sys-std.c:74
+#: src/gnuwin32/system.c:156 src/unix/sys-std.c:74
 #, c-format
 msgid "Fatal error: %s\n"
 msgstr "Фатальная ошибка: %s\n"
 
-#: src/gnuwin32/system.c:335 src/unix/sys-std.c:868
+#: src/gnuwin32/system.c:334 src/unix/sys-std.c:868
 #, c-format
 msgid "encoding '%s' is not recognised"
 msgstr "кодировка '%s' не распознана"
 
-#: src/gnuwin32/system.c:341 src/unix/sys-std.c:874
+#: src/gnuwin32/system.c:340 src/unix/sys-std.c:874
 #, c-format
 msgid "<ERROR: re-encoding failure from encoding '%s'>\n"
 msgstr "<ОШИБКА: неудачная перекодировка из '%s'>\n"
 
-#: src/gnuwin32/system.c:555 src/gnuwin32/system.c:1045
-#: src/gnuwin32/system.c:1057 src/main/connections.c:580
+#: src/gnuwin32/system.c:562 src/gnuwin32/system.c:1052
+#: src/gnuwin32/system.c:1064 src/main/connections.c:580
 #: src/main/connections.c:585 src/main/dounzip.c:179 src/main/saveload.c:1958
 #: src/main/serialize.c:2599 src/main/serialize.c:2604
-#: src/main/serialize.c:2689 src/main/serialize.c:2734 src/unix/sys-std.c:1161
+#: src/main/serialize.c:2689 src/main/serialize.c:2734 src/unix/sys-std.c:1164
 #: src/unix/system.c:326
 #, c-format
 msgid "cannot open file '%s': %s"
 msgstr "не могу открыть файл '%s': %s"
 
-#: src/gnuwin32/system.c:569
+#: src/gnuwin32/system.c:576
 #, c-format
 msgid "file.show(): file '%s' does not exist\n"
 msgstr "file.show(): файл '%s' не существует\n"
 
-#: src/gnuwin32/system.c:966
+#: src/gnuwin32/system.c:973
 #, fuzzy, c-format
 msgid "WARNING: R_MAX_MEM_SIZE value is invalid: ignored\n"
 msgstr "ВНИМАНИЕ: '%s' значение неправильное: пропущено"
 
-#: src/gnuwin32/system.c:998
+#: src/gnuwin32/system.c:1005
 msgid "WARNING: no max-mem-size given\n"
 msgstr "ВНИМАНИЕ: не задан max-mem-size\n"
 
-#: src/gnuwin32/system.c:1005
+#: src/gnuwin32/system.c:1012
 #, c-format
 msgid "WARNING: --max-mem-size value is invalid: ignored\n"
 msgstr "ВНИМАНИЕ: значение --max-mem-size неверное: пропущено\n"
 
-#: src/gnuwin32/system.c:1008
+#: src/gnuwin32/system.c:1015
 #, c-format
 msgid "WARNING: --max-mem-size=%lu%c: too large and ignored\n"
 msgstr "ВНИМАНИЕ: --max-mem-size=%lu%c: слишком велик и пропущен\n"
 
-#: src/gnuwin32/system.c:1014
+#: src/gnuwin32/system.c:1021
 #, c-format
 msgid "WARNING: --max-mem-size=%4.1fM: too small and ignored\n"
 msgstr "ВНИМАНИЕ: --max-mem-size =%4.1fM слишком мал и пропущен\n"
 
-#: src/gnuwin32/system.c:1019
+#: src/gnuwin32/system.c:1026
 #, c-format
 msgid "WARNING: --max-mem-size=%4.0fM: too large and taken as %uM\n"
 msgstr "ВНИМАНИЕ: --max-mem-size =%4.0fM: слишком велик, установлен в %uM\n"
 
-#: src/gnuwin32/system.c:1035
+#: src/gnuwin32/system.c:1042
 #, fuzzy, c-format
 msgid "option '%s' requires an argument"
 msgstr "бинарные операторы требуют два аргумента"
 
-#: src/gnuwin32/system.c:1066
+#: src/gnuwin32/system.c:1073
 #, fuzzy, c-format
 msgid "option '%s' requires a non-empty argument"
 msgstr "бинарные операторы требуют два аргумента"
 
-#: src/gnuwin32/system.c:1074 src/unix/system.c:345
+#: src/gnuwin32/system.c:1081 src/unix/system.c:345
 #, c-format
 msgid "WARNING: '-e %s' omitted as input is too long\n"
 msgstr "WARNING: '-e %s', пропущенная при вводе, слишком длинная\n"
 
-#: src/gnuwin32/system.c:1078 src/unix/system.c:358
+#: src/gnuwin32/system.c:1085 src/unix/system.c:358
 #, c-format
 msgid "WARNING: unknown option '%s'\n"
 msgstr "ВНИМАНИЕ: неизвестный параметр '%s'\n"
 
-#: src/gnuwin32/system.c:1100 src/unix/system.c:362
+#: src/gnuwin32/system.c:1107 src/unix/system.c:362
 #, c-format
 msgid "ARGUMENT '%s' __ignored__\n"
 msgstr "АРГУМЕНТ '%s' __пропущен__\n"
 
-#: src/gnuwin32/system.c:1106 src/unix/system.c:369
+#: src/gnuwin32/system.c:1113 src/unix/system.c:369
 msgid "cannot use -e with -f or --file"
 msgstr "не могу использовать -e вместе с -f или --file"
 
-#: src/gnuwin32/system.c:1124
+#: src/gnuwin32/system.c:1131
 msgid "creation of tmpfile failed -- set TMPDIR suitably?"
 msgstr "создание временного файла не удалось -- установить подходящую TMPDIR?"
 
-#: src/gnuwin32/system.c:1143 src/unix/system.c:420
+#: src/gnuwin32/system.c:1150 src/unix/system.c:420
 msgid "you must specify '--save', '--no-save' or '--vanilla'"
 msgstr "Вы должны задать '--save', '--no-save' или '--vanilla'"
 
-#: src/gnuwin32/system.c:1148
+#: src/gnuwin32/system.c:1155
 msgid ""
 "impossible to create 'reader thread'; you must free some system resources"
 msgstr ""
@@ -1075,8 +1075,8 @@ msgid "invalid call %s"
 msgstr "неправильное значение"
 
 #: src/include/Errormsg.h:25 src/main/subscript.c:391 src/main/subscript.c:409
-#: src/main/subscript.c:433 src/main/subscript.c:472 src/main/subscript.c:653
-#: src/main/subscript.c:692 src/main/subscript.c:835
+#: src/main/subscript.c:433 src/main/subscript.c:472 src/main/subscript.c:670
+#: src/main/subscript.c:709 src/main/subscript.c:852
 #, fuzzy
 msgid "subscript is out of bounds"
 msgstr "подгруппа выходит за пределы"
@@ -1100,32 +1100,32 @@ msgstr ""
 
 #: src/main/agrep.c:134 src/main/agrep.c:776 src/main/character.c:1096
 #: src/main/character.c:1100 src/main/grep.c:777 src/main/grep.c:1525
-#: src/main/grep.c:1529 src/main/grep.c:2342 src/main/grep.c:2646
+#: src/main/grep.c:1529 src/main/grep.c:2342 src/main/grep.c:2649
 #, c-format
 msgid "argument '%s' has length > 1 and only the first element will be used"
 msgstr "длина аргумента '%s' > 1, будет использован только первый элемент"
 
 #: src/main/agrep.c:191 src/main/agrep.c:818 src/main/attrib.c:1540
-#: src/main/coerce.c:2795 src/main/saveload.c:1939
+#: src/main/coerce.c:2794 src/main/saveload.c:1939
 #, fuzzy, c-format
 msgid "'%s' argument must be a non-empty character string"
 msgstr "'pattern' должен быть непустой текстовой строкой"
 
 #: src/main/agrep.c:202 src/main/agrep.c:827 src/main/grep.c:848
-#: src/main/grep.c:2400 src/main/grep.c:2699
+#: src/main/grep.c:2400 src/main/grep.c:2702
 msgid "regular expression is invalid in this locale"
 msgstr "неправильное регулярное выражение для этой локали"
 
 #: src/main/agrep.c:208 src/main/agrep.c:624 src/main/agrep.c:833
-#: src/main/grep.c:2705
+#: src/main/grep.c:2708
 #, c-format
 msgid "regcomp error: '%s'"
 msgstr "ошибка regcomp: '%s'"
 
 #: src/main/agrep.c:240 src/main/agrep.c:872 src/main/grep.c:228
 #: src/main/grep.c:318 src/main/grep.c:429 src/main/grep.c:585
-#: src/main/grep.c:902 src/main/grep.c:1660 src/main/grep.c:2502
-#: src/main/grep.c:2571 src/main/grep.c:2736
+#: src/main/grep.c:902 src/main/grep.c:1660 src/main/grep.c:2505
+#: src/main/grep.c:2574 src/main/grep.c:2739
 #, c-format
 msgid "input string %d is invalid in this locale"
 msgstr "неправильная входная строка %d для этой локали"
@@ -1133,7 +1133,7 @@ msgstr "неправильная входная строка %d для этой 
 #: src/main/agrep.c:527 src/main/agrep.c:765 src/main/grep.c:154
 #: src/main/grep.c:768 src/main/grep.c:770 src/main/grep.c:1060
 #: src/main/grep.c:1068 src/main/grep.c:1516 src/main/grep.c:1518
-#: src/main/grep.c:2332 src/main/grep.c:2334 src/main/grep.c:2634
+#: src/main/grep.c:2332 src/main/grep.c:2334 src/main/grep.c:2637
 #, c-format
 msgid "argument '%s' will be ignored"
 msgstr "аргумент '%s' будет проигнорирован"
@@ -1154,13 +1154,13 @@ msgid "'%s' argument must be a vector"
 msgstr "первый аргумент должен быть вектором"
 
 #: src/main/apply.c:101 src/main/array.c:483 src/main/character.c:654
-#: src/main/character.c:1461 src/main/connections.c:3548
-#: src/main/context.c:653 src/main/context.c:672 src/main/datetime.c:686
+#: src/main/character.c:1461 src/main/connections.c:3546
+#: src/main/context.c:655 src/main/context.c:674 src/main/datetime.c:686
 #: src/main/datetime.c:788 src/main/datetime.c:1047 src/main/dotcode.c:220
 #: src/main/errors.c:942 src/main/errors.c:974 src/main/errors.c:1077
 #: src/main/errors.c:1102 src/main/errors.c:1107 src/main/errors.c:1378
 #: src/main/identical.c:73 src/main/identical.c:74 src/main/identical.c:75
-#: src/main/identical.c:76 src/main/identical.c:77 src/main/platform.c:3074
+#: src/main/identical.c:76 src/main/identical.c:77 src/main/platform.c:3063
 #: src/main/seq.c:193 src/main/seq.c:340 src/main/seq.c:345 src/main/seq.c:349
 #: src/main/seq.c:390 src/main/seq.c:394 src/main/seq.c:398
 #: src/main/sort.c:1225 src/main/sort.c:1308 src/main/sort.c:1312
@@ -1427,7 +1427,7 @@ msgstr "perm[%d] не соответствует имени измерения"
 msgid "value is out of range in 'perm' argument"
 msgstr "'perm': значение за пределами"
 
-#: src/main/array.c:1323 src/main/connections.c:5498 src/main/debug.c:112
+#: src/main/array.c:1323 src/main/connections.c:5482 src/main/debug.c:112
 #: src/main/objects.c:1016 src/main/raw.c:56 src/main/raw.c:331
 #: src/main/sort.c:327 src/main/sort.c:1229 src/main/sort.c:1397
 #: src/main/unique.c:670 src/main/unique.c:1385 src/main/unique.c:1457
@@ -1575,7 +1575,7 @@ msgstr "неправильный (%s) тип установки атрибута
 msgid "'dimnames()' applied to non-array"
 msgstr "'dimnames' применены для не-многомерной матрицы"
 
-#: src/main/attrib.c:1031 src/main/coerce.c:2445 src/main/engine.c:2964
+#: src/main/attrib.c:1031 src/main/coerce.c:2444 src/main/engine.c:2965
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "аргумент 'list' должен быть списком"
@@ -1734,8 +1734,8 @@ msgstr "повторный формальный аргумент 'recursive'"
 msgid "argument is not a list"
 msgstr "аргумент не является списком"
 
-#: src/main/bind.c:1045 src/main/names.c:1274 src/main/names.c:1279
-#: src/main/names.c:1284 src/main/names.c:1289
+#: src/main/bind.c:1045 src/main/names.c:1273 src/main/names.c:1278
+#: src/main/names.c:1283 src/main/names.c:1288
 #, fuzzy, c-format
 msgid "class name is too long in '%s'"
 msgstr "слишком длинное имя класса в '%s'"
@@ -1786,7 +1786,7 @@ msgstr "указанный размер вектора слишком велик
 
 #: src/main/builtin.c:85 src/main/builtin.c:94 src/main/builtin.c:295
 #: src/main/builtin.c:328 src/main/builtin.c:385 src/main/builtin.c:399
-#: src/main/coerce.c:1514 src/main/connections.c:3057 src/main/engine.c:2966
+#: src/main/coerce.c:1514 src/main/connections.c:3057 src/main/engine.c:2967
 #: src/main/envir.c:1070 src/main/envir.c:1123 src/main/envir.c:1279
 #: src/main/envir.c:1818 src/main/envir.c:1942 src/main/envir.c:2008
 #: src/main/envir.c:2141 src/main/envir.c:2860 src/main/envir.c:2946
@@ -1802,7 +1802,7 @@ msgstr "использование окружения NULL не одобряет
 msgid "replacement object is not an environment"
 msgstr "замещающий объект не является окружением"
 
-#: src/main/builtin.c:333 src/main/coerce.c:2449 src/main/engine.c:2970
+#: src/main/builtin.c:333 src/main/coerce.c:2448 src/main/engine.c:2971
 #: src/main/envir.c:1852 src/main/envir.c:2867 src/main/envir.c:2948
 #: src/main/unique.c:1283
 #, fuzzy, c-format
@@ -1838,11 +1838,11 @@ msgstr "не могу установить родителя для пустог�
 msgid "'%s' argument is not an environment"
 msgstr "аргумент не является окружением"
 
-#: src/main/builtin.c:547 src/main/connections.c:3683
-#: src/main/connections.c:4075 src/main/connections.c:4109
-#: src/main/connections.c:4487 src/main/connections.c:4557
-#: src/main/connections.c:4766 src/main/connections.c:4770
-#: src/main/connections.c:5207 src/main/deparse.c:369 src/main/deparse.c:458
+#: src/main/builtin.c:547 src/main/connections.c:3681
+#: src/main/connections.c:4073 src/main/connections.c:4107
+#: src/main/connections.c:4485 src/main/connections.c:4555
+#: src/main/connections.c:4764 src/main/connections.c:4768
+#: src/main/connections.c:5191 src/main/deparse.c:369 src/main/deparse.c:458
 #: src/main/serialize.c:2046
 msgid "cannot write to this connection"
 msgstr "не могу записать в это соединение"
@@ -1876,11 +1876,11 @@ msgid "cannot set length of non-vector"
 msgstr "установить длину для не-вектора"
 
 #: src/main/builtin.c:923 src/main/builtin.c:933 src/main/builtin.c:935
-#: src/main/character.c:425 src/main/coerce.c:2804
+#: src/main/character.c:425 src/main/coerce.c:2803
 msgid "invalid value"
 msgstr "неправильное значение"
 
-#: src/main/builtin.c:966 src/main/coerce.c:2515 src/main/coerce.c:2558
+#: src/main/builtin.c:966 src/main/coerce.c:2514 src/main/coerce.c:2557
 #: src/main/eval.c:557 src/main/eval.c:676 src/main/eval.c:2190
 #: src/main/eval.c:2270 src/main/eval.c:2331 src/main/eval.c:2669
 #: src/main/eval.c:5493 src/main/eval.c:5610
@@ -2114,31 +2114,31 @@ msgstr "метод по умолчанию для типа '%s' не сдела�
 msgid "first argument must be a character string"
 msgstr "первый аргумент должен быть текстовой строкой"
 
-#: src/main/coerce.c:2407 src/main/coerce.c:2458 src/main/coerce.c:2462
+#: src/main/coerce.c:2407 src/main/coerce.c:2457 src/main/coerce.c:2461
 msgid "illegal usage"
 msgstr ""
 
-#: src/main/coerce.c:2438
+#: src/main/coerce.c:2437
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string or a function"
 msgstr "'what' должен быть текстовой строкой или функцией"
 
-#: src/main/coerce.c:2442
+#: src/main/coerce.c:2441
 #, fuzzy, c-format
 msgid "'%s' argument must be a list or expression"
 msgstr "аргумент 'expr' должен быть выражением"
 
-#: src/main/coerce.c:2608
+#: src/main/coerce.c:2607
 msgid "invalid environment specified"
 msgstr "задано неправильное окружение"
 
-#: src/main/coerce.c:2674
+#: src/main/coerce.c:2673
 #, fuzzy
 msgid "Setting 'class(x)' to NULL. Result will no longer be an S4 object"
 msgstr ""
 "Выставляю атрибут class(x) в NULL;   результат не будет являться объектом S4"
 
-#: src/main/coerce.c:2677
+#: src/main/coerce.c:2676
 #, fuzzy, c-format
 msgid ""
 "Setting 'class(x)' to multiple strings (\"%s\", \"%s\", ...). Result will no "
@@ -2147,7 +2147,7 @@ msgstr ""
 "Выставляю class(x) в набор строк (\"%s\", \"%s\", ...);  результат не будет "
 "являться объектом S4"
 
-#: src/main/coerce.c:2680
+#: src/main/coerce.c:2679
 #, fuzzy, c-format
 msgid ""
 "Setting 'class(x)' to \"%s\" sets attribute to NULL. Result will no longer "
@@ -2156,11 +2156,11 @@ msgstr ""
 "Установка class(x) в \"%s\" выставляет атрибут в NULL; результат не будет "
 "больше объектом S4"
 
-#: src/main/coerce.c:2712
+#: src/main/coerce.c:2711
 msgid "invalid replacement object to be a class string"
 msgstr "неправильный замещающий объект, для того чтобы быть классовой строкой"
 
-#: src/main/coerce.c:2733
+#: src/main/coerce.c:2732
 #, c-format
 msgid ""
 "\"%s\" can only be set as the class if the object has this type; found \"%s\""
@@ -2168,7 +2168,7 @@ msgstr ""
 "\"%s\" может быть установлен как класс если объект имеет этот тип; найден "
 "\"%s\""
 
-#: src/main/coerce.c:2751
+#: src/main/coerce.c:2750
 #, c-format
 msgid ""
 "invalid to set the class to matrix unless the dimension attribute is of "
@@ -2177,22 +2177,22 @@ msgstr ""
 "не способен правильно установить класс для матрицы покуда атрибут "
 "'dimension' не станет длиной 2 (был %d)"
 
-#: src/main/coerce.c:2759
+#: src/main/coerce.c:2758
 msgid ""
 "cannot set class to \"array\" unless the dimension attribute has length > 0"
 msgstr ""
 "не могу установить класс для \"array\" до тех пор, пока атрибут \"dimension"
 "\" не станет > 0"
 
-#: src/main/coerce.c:2800
+#: src/main/coerce.c:2799
 msgid "use of 'real' is defunct: use 'double' instead"
 msgstr ""
 
-#: src/main/coerce.c:2802
+#: src/main/coerce.c:2801
 msgid "use of 'single' is defunct: use mode<- instead"
 msgstr ""
 
-#: src/main/coerce.c:2808
+#: src/main/coerce.c:2807
 msgid "invalid to change the storage mode of a factor"
 msgstr "не могу поменять тип хранения фактора"
 
@@ -2366,8 +2366,8 @@ msgstr "не могу открыть соединение"
 #: src/main/connections.c:1519 src/main/connections.c:1529
 #: src/main/connections.c:1648 src/main/connections.c:1708
 #: src/main/connections.c:2235 src/main/connections.c:2252
-#: src/main/connections.c:2561 src/main/connections.c:5388
-#: src/main/connections.c:5452
+#: src/main/connections.c:2561 src/main/connections.c:5372
+#: src/main/connections.c:5436
 #, fuzzy
 msgid "specified block is too large"
 msgstr "указанный размер вектора слишком велик"
@@ -2403,14 +2403,14 @@ msgid "allocation of fifo connection failed"
 msgstr "размещение fifo соединения не удалось"
 
 #: src/main/connections.c:1206 src/main/connections.c:1364
-#: src/main/connections.c:1986 src/main/connections.c:3204
-#: src/main/connections.c:4976 src/modules/internet/internet.c:456
+#: src/main/connections.c:1986 src/main/connections.c:3200
+#: src/main/connections.c:4974 src/modules/internet/internet.c:456
 #: src/modules/internet/internet.c:462
 #, fuzzy, c-format
 msgid "only first element of '%s' argument will be used"
 msgstr "использован только первый элемент аргумента 'description'"
 
-#: src/main/connections.c:1223 src/main/connections.c:5111
+#: src/main/connections.c:1223 src/main/connections.c:5095
 #, fuzzy, c-format
 msgid ""
 "'%s' only supports 'open = \"w+\"' and 'open = \"w+b\"': using the former"
@@ -2419,12 +2419,12 @@ msgstr ""
 "второе"
 
 #: src/main/connections.c:1238 src/main/connections.c:1402
-#: src/main/connections.c:2053 src/main/connections.c:3171
-#: src/main/connections.c:3225 src/main/connections.c:3273
-#: src/main/connections.c:3560 src/main/connections.c:3675
-#: src/main/connections.c:3837 src/main/connections.c:4102
-#: src/main/connections.c:4430 src/main/connections.c:4550
-#: src/main/connections.c:4762 src/main/connections.c:5188 src/main/dcf.c:95
+#: src/main/connections.c:2053 src/main/connections.c:3170
+#: src/main/connections.c:3221 src/main/connections.c:3269
+#: src/main/connections.c:3558 src/main/connections.c:3673
+#: src/main/connections.c:3835 src/main/connections.c:4100
+#: src/main/connections.c:4428 src/main/connections.c:4548
+#: src/main/connections.c:4760 src/main/connections.c:5172 src/main/dcf.c:95
 #: src/main/deparse.c:361 src/main/deparse.c:450 src/main/saveload.c:2259
 #: src/main/saveload.c:2340 src/main/scan.c:933 src/main/serialize.c:2217
 #: src/main/serialize.c:2268 src/main/source.c:268
@@ -2494,13 +2494,13 @@ msgstr "файл '%s', по-видимому, сжат не bzip2"
 msgid "allocation of bzfile connection failed"
 msgstr "выделение bzfile-соединения не удалось"
 
-#: src/main/connections.c:1792 src/main/connections.c:6044
+#: src/main/connections.c:1792 src/main/connections.c:6028
 #, c-format
 msgid "cannot initialize lzma decoder, error %d"
 msgstr "не могу включить декодер lzma, ошибка %d"
 
-#: src/main/connections.c:1801 src/main/connections.c:5770
-#: src/main/connections.c:5937
+#: src/main/connections.c:1801 src/main/connections.c:5754
+#: src/main/connections.c:5921
 #, fuzzy
 msgid "problem with setting presets"
 msgstr "проблема установки часового пояса"
@@ -2620,11 +2620,11 @@ msgid "allocation of raw connection failed"
 msgstr "размещение простого соединения не удалось"
 
 #: src/main/connections.c:2690 src/main/connections.c:3106
-#: src/main/connections.c:3253 src/main/connections.c:3302
-#: src/main/connections.c:3313 src/main/connections.c:3360
-#: src/main/connections.c:3385 src/main/connections.c:3408
-#: src/main/connections.c:3420 src/main/connections.c:3536
-#: src/main/connections.c:3660 src/main/connections.c:5491
+#: src/main/connections.c:3249 src/main/connections.c:3298
+#: src/main/connections.c:3309 src/main/connections.c:3356
+#: src/main/connections.c:3383 src/main/connections.c:3406
+#: src/main/connections.c:3418 src/main/connections.c:3534
+#: src/main/connections.c:3658 src/main/connections.c:5475
 #, fuzzy, c-format
 msgid "'%s' argument is not an object of class %s"
 msgstr "'con' не является выходным rawConnection"
@@ -2673,308 +2673,292 @@ msgstr "текстовое соединение: добавление к нес�
 msgid "unsupported mode"
 msgstr "неподдерживаемый тип"
 
-#: src/main/connections.c:3184
-msgid "sockets are not available on this system"
-msgstr "для этой системы сокеты недоступны"
-
-#: src/main/connections.c:3256
+#: src/main/connections.c:3252
 msgid "cannot open standard connections"
 msgstr "не могу открыть стандартные соединения"
 
-#: src/main/connections.c:3258
+#: src/main/connections.c:3254
 msgid "connection is already open"
 msgstr "соединение уже открыто"
 
-#: src/main/connections.c:3291
+#: src/main/connections.c:3287
 msgid "unknown 'rw' value"
 msgstr "неизвестное 'rw' значение"
 
-#: src/main/connections.c:3362
+#: src/main/connections.c:3358
 msgid "cannot close standard connections"
 msgstr "не могу закрыть стандартные соединения"
 
-#: src/main/connections.c:3365
+#: src/main/connections.c:3361
 #, fuzzy
 msgid "cannot close 'output' sink connection"
 msgstr "не могу закрыть выходное sink-соединение"
 
-#: src/main/connections.c:3367
+#: src/main/connections.c:3363
 #, fuzzy
 msgid "cannot close 'message' sink connection"
 msgstr "не могу закрыть sink-соединение для сообщений"
 
-#: src/main/connections.c:3387 src/main/connections.c:5206
-#: src/main/connections.c:5214 src/main/serialize.c:2036
+#: src/main/connections.c:3385 src/main/connections.c:5190
+#: src/main/connections.c:5198 src/main/serialize.c:2036
 #: src/main/serialize.c:2044
 msgid "connection is not open"
 msgstr "соединение не открыто"
 
-#: src/main/connections.c:3483 src/main/connections.c:3495
+#: src/main/connections.c:3481 src/main/connections.c:3493
 #, fuzzy
 msgid "line is longer than buffer size"
 msgstr "Строка длиннее чем размер буфера"
 
-#: src/main/connections.c:3567 src/main/connections.c:3569
-#: src/main/connections.c:3845 src/main/connections.c:4413
-#: src/main/connections.c:4438 src/main/connections.c:5215 src/main/dcf.c:102
+#: src/main/connections.c:3565 src/main/connections.c:3567
+#: src/main/connections.c:3843 src/main/connections.c:4411
+#: src/main/connections.c:4436 src/main/connections.c:5199 src/main/dcf.c:102
 #: src/main/scan.c:936 src/main/scan.c:940 src/main/serialize.c:2038
 #: src/main/source.c:275
 msgid "cannot read from this connection"
 msgstr "не могу читать из этого соединения"
 
-#: src/main/connections.c:3581 src/main/connections.c:3603
+#: src/main/connections.c:3579 src/main/connections.c:3601
 #, fuzzy
 msgid "cannot allocate buffer in 'readLines()'"
 msgstr "не могу разместить буфер в readLines"
 
-#: src/main/connections.c:3588 src/main/scan.c:585 src/main/scan.c:732
+#: src/main/connections.c:3586 src/main/scan.c:585 src/main/scan.c:732
 #, fuzzy
 msgid "too many items"
 msgstr "слишком много аргументов"
 
-#: src/main/connections.c:3616
+#: src/main/connections.c:3614
 #, c-format
 msgid "line %d appears to contain an embedded nul"
 msgstr ""
 
-#: src/main/connections.c:3633
+#: src/main/connections.c:3631
 #, c-format
 msgid "incomplete final line found on '%s'"
 msgstr "неполная последняя строка найдена в '%s'"
 
-#: src/main/connections.c:3638
+#: src/main/connections.c:3636
 #, fuzzy
 msgid "too few lines read in 'readLines()'"
 msgstr "слишком мало строк прочитано readLines"
 
-#: src/main/connections.c:3739 src/main/connections.c:3874
-#: src/main/connections.c:3965 src/main/connections.c:3994
-#: src/main/connections.c:4027
+#: src/main/connections.c:3737 src/main/connections.c:3872
+#: src/main/connections.c:3963 src/main/connections.c:3992
+#: src/main/connections.c:4025
 #, fuzzy
 msgid "error reading from the connection"
 msgstr "ошибка чтения из соединения"
 
-#: src/main/connections.c:3742
+#: src/main/connections.c:3740
 msgid "incomplete string at end of file has been discarded"
 msgstr "неполная строка в конце файла пропущена"
 
-#: src/main/connections.c:3748
+#: src/main/connections.c:3746
 #, fuzzy
 msgid "null terminator was not found: breaking string at 10000 bytes"
 msgstr "ограничитель 'null' не найден: разбиваю строку по 10000 байтов"
 
-#: src/main/connections.c:3813
+#: src/main/connections.c:3811
 msgid "can only read from a binary connection"
 msgstr "могу только читать из бинарного соединения"
 
-#: src/main/connections.c:3862 src/main/connections.c:4183
+#: src/main/connections.c:3860 src/main/connections.c:4181
 msgid "size changing is not supported for complex vectors"
 msgstr "изменение размера не поддерживается для комплексных векторов"
 
-#: src/main/connections.c:3901 src/main/connections.c:3919
-#: src/main/connections.c:3945 src/main/connections.c:3989
-#: src/main/connections.c:4020 src/main/connections.c:4040
-#: src/main/connections.c:4164 src/main/connections.c:4177
-#: src/main/connections.c:4236 src/main/connections.c:4268
+#: src/main/connections.c:3899 src/main/connections.c:3917
+#: src/main/connections.c:3943 src/main/connections.c:3987
+#: src/main/connections.c:4018 src/main/connections.c:4038
+#: src/main/connections.c:4162 src/main/connections.c:4175
+#: src/main/connections.c:4234 src/main/connections.c:4266
 #, c-format
 msgid "size %d is unknown on this machine"
 msgstr "размер %d неизвестен для этой машины"
 
-#: src/main/connections.c:3930
+#: src/main/connections.c:3928
 msgid "raw is always of size 1"
 msgstr "'raw' всегда единичного размера"
 
-#: src/main/connections.c:3953
+#: src/main/connections.c:3951
 msgid "'signed = FALSE' is only valid for integers of sizes 1 and 2"
 msgstr "'signed = FALSE' работает только для целых размером 1 и 2"
 
-#: src/main/connections.c:4067
+#: src/main/connections.c:4065
 #, fuzzy
 msgid "'x' argument is not an atomic vector type"
 msgstr "'x' не является элементарным вектором"
 
-#: src/main/connections.c:4073
+#: src/main/connections.c:4071
 msgid "can only write to a binary connection"
 msgstr "могу только писать в бинарное соединение"
 
-#: src/main/connections.c:4092
+#: src/main/connections.c:4090
 msgid "only 2^31-1 bytes can be written to a raw vector"
 msgstr "только 2^31-1 байтов можно записать в простой вектор"
 
-#: src/main/connections.c:4094
+#: src/main/connections.c:4092
 #, fuzzy
 msgid "only 2^31-1 bytes can be written in a single 'writeBin()' call"
 msgstr "только 2^31-1 байта можно записать в один вызов writeBin()"
 
-#: src/main/connections.c:4143 src/main/connections.c:4296
-#: src/main/connections.c:4577 src/main/connections.c:4617
+#: src/main/connections.c:4141 src/main/connections.c:4294
+#: src/main/connections.c:4575 src/main/connections.c:4615
 #, fuzzy
 msgid "problem with writing to connection"
 msgstr "проблема записи в соединение"
 
-#: src/main/connections.c:4188
+#: src/main/connections.c:4186
 msgid "size changing is not supported for raw vectors"
 msgstr "изменение размера не поддерживается для простых векторов"
 
-#: src/main/connections.c:4331 src/main/connections.c:4335
-#: src/main/connections.c:4374
+#: src/main/connections.c:4329 src/main/connections.c:4333
+#: src/main/connections.c:4372
 #, fuzzy
 msgid "invalid UTF-8 input in 'readChar()'"
 msgstr "неправильный UTF-8 ввод в readChar()"
 
-#: src/main/connections.c:4441
+#: src/main/connections.c:4439
 msgid "can only read in bytes in a non-UTF-8 MBCS locale"
 msgstr "могу читать только побайтно на не-UTF-8 MBCS локали"
 
-#: src/main/connections.c:4513
+#: src/main/connections.c:4511
 #, fuzzy
 msgid "'object' argument is too short"
 msgstr "'object' слишком короткий"
 
-#: src/main/connections.c:4539
+#: src/main/connections.c:4537
 msgid "too much data for a raw vector on this platform"
 msgstr ""
 
-#: src/main/connections.c:4566
+#: src/main/connections.c:4564
 msgid "writeChar: more bytes requested than are in the string - will zero-pad"
 msgstr "writeChar: запрошено больше байтов, чем есть в строке -- буду обнулять"
 
-#: src/main/connections.c:4591
+#: src/main/connections.c:4589
 msgid ""
 "writeChar: more characters requested than are in the string - will zero-pad"
 msgstr ""
 "writeChar: запрошено больше символов, чем есть в строке -- буду обнулять"
 
-#: src/main/connections.c:4645
+#: src/main/connections.c:4643
 #, fuzzy
 msgid "maximum number of pushback lines exceeded"
 msgstr "превышено максимальное количество цветов"
 
-#: src/main/connections.c:4651 src/main/connections.c:4655
-#: src/main/connections.c:4692 src/main/connections.c:4700
+#: src/main/connections.c:4649 src/main/connections.c:4653
+#: src/main/connections.c:4690 src/main/connections.c:4698
 #: src/main/Rdynload.c:591 src/main/Rdynload.c:624
 #, fuzzy, c-format
 msgid "could not allocate space for '%s'"
 msgstr "не могу выделить место под 'path'"
 
-#: src/main/connections.c:4683
+#: src/main/connections.c:4681
 msgid "can only push back on open readable connections"
 msgstr ""
 "могу только выталкивать назад из открытых доступных для чтения соединений"
 
-#: src/main/connections.c:4685
+#: src/main/connections.c:4683
 msgid "can only push back on text-mode connections"
 msgstr "могу только выталкивать назад из текстовых соединений"
 
-#: src/main/connections.c:4747 src/main/connections.c:4817
+#: src/main/connections.c:4745 src/main/connections.c:4815
 msgid "sink stack is full"
 msgstr "стек 'sink' полон"
 
-#: src/main/connections.c:4750
+#: src/main/connections.c:4748
 #, fuzzy
 msgid "cannot switch output to 'stdin'"
 msgstr "не могу переключить вывод на stdin"
 
-#: src/main/connections.c:4777
+#: src/main/connections.c:4775
 msgid "no sink to remove"
 msgstr "нет 'sink' для удаления"
 
-#: src/main/connections.c:4897
+#: src/main/connections.c:4895
 #, fuzzy
 msgid "there is no connection NA"
 msgstr "соединение %d не существует"
 
-#: src/main/connections.c:4899
+#: src/main/connections.c:4897
 #, c-format
 msgid "there is no connection %d"
 msgstr "соединение %d не существует"
 
-#: src/main/connections.c:5032
+#: src/main/connections.c:5031
 #, fuzzy
 msgid "'method = \"wininet\"' is only supported on Windows"
 msgstr "'dirmarke = TRUE' не поддерживается на этой платформе"
 
 #: src/main/connections.c:5050
-msgid ""
-"ftps:// URLs are not supported by the default method: trying \"libcurl\"\n"
-msgstr ""
-
-#: src/main/connections.c:5056
 #, fuzzy
-msgid "ftps:// URLs are not supported"
+msgid "ftps:// URLs are not supported by this method"
 msgstr "тип '%s' не поддерживается"
 
-#: src/main/connections.c:5060
+#: src/main/connections.c:5057
 #, fuzzy
-msgid ""
-"https:// URLs are not supported by the default method: using \"wininet\"\n"
+msgid "https:// URLs are not supported by this method"
 msgstr "тип '%s' не поддерживается"
 
-#: src/main/connections.c:5070
+#: src/main/connections.c:5063
 #, fuzzy
-msgid ""
-"https:// URLs are not supported by the default method: trying \"libcurl\"\n"
+msgid "https:// URLs are not supported by the \"internal\" method"
 msgstr "тип '%s' не поддерживается"
 
-#: src/main/connections.c:5076
-#, fuzzy
-msgid "https:// URLs are not supported"
-msgstr "тип '%s' не поддерживается"
-
-#: src/main/connections.c:5098 src/modules/internet/libcurl.c:692
+#: src/main/connections.c:5083 src/modules/internet/libcurl.c:692
 #, fuzzy
 msgid "'url(method = \"libcurl\")' is not supported on this platform"
 msgstr "'dirmarke = TRUE' не поддерживается на этой платформе"
 
-#: src/main/connections.c:5165 src/modules/internet/internet.c:155
+#: src/main/connections.c:5149 src/modules/internet/internet.c:155
 #: src/modules/internet/internet.c:276
 #, fuzzy
 msgid "URL scheme unsupported by this method"
 msgstr "ICU не поддерживается в этой сборке"
 
-#: src/main/connections.c:5256
+#: src/main/connections.c:5240
 msgid "file stream does not have gzip magic number"
 msgstr "файловый поток не имеет магического числа gzip"
 
-#: src/main/connections.c:5267
+#: src/main/connections.c:5251
 msgid "file stream does not have valid gzip header"
 msgstr "файловый поток не имеет правильного заголовка gzip"
 
-#: src/main/connections.c:5332
+#: src/main/connections.c:5316
 #, fuzzy
 msgid "writing error while flushing gzcon connection"
 msgstr "ошибка записи во время gzcon-соединения"
 
-#: src/main/connections.c:5434
+#: src/main/connections.c:5418
 #, c-format
 msgid "crc error %x %x\n"
 msgstr "ошибка crc %x %x\n"
 
-#: src/main/connections.c:5461
+#: src/main/connections.c:5445
 #, fuzzy
 msgid "write error on gzcon connection"
 msgstr "ошибка записи в gzcon-соединение"
 
-#: src/main/connections.c:5495
+#: src/main/connections.c:5479
 #, fuzzy
 msgid "'level' argument must be one of 0 ... 9"
 msgstr "'level' должен быть один из 0 ... 9"
 
-#: src/main/connections.c:5501
+#: src/main/connections.c:5485
 #, fuzzy
 msgid "this is already a gzcon connection"
 msgstr "это уже gzcon-соединение"
 
-#: src/main/connections.c:5507
+#: src/main/connections.c:5491
 msgid "can only use read- or write- binary connections"
 msgstr "могу только использовать read- или write- бинарные соединения"
 
-#: src/main/connections.c:5510
+#: src/main/connections.c:5494
 msgid "using a text-mode 'file' connection may not work correctly"
 msgstr ""
 "использование текстового соединения 'file' может не работать как положено"
 
-#: src/main/connections.c:5513
+#: src/main/connections.c:5497
 #, fuzzy
 msgid ""
 "cannot create a gzcon connection from a writable textConnection; maybe use "
@@ -2983,71 +2967,71 @@ msgstr ""
 "не могу создать соединение gzcon из textConnection, открытого для записи; "
 "возможно, поможет rawConnection"
 
-#: src/main/connections.c:5516 src/main/connections.c:5520
-#: src/main/connections.c:5527 src/main/connections.c:5541
+#: src/main/connections.c:5500 src/main/connections.c:5504
+#: src/main/connections.c:5511 src/main/connections.c:5525
 #, fuzzy
 msgid "allocation of gzcon connection failed"
 msgstr "выделить gzcon-соединение не удалось"
 
-#: src/main/connections.c:5598 src/main/connections.c:5623
-#: src/main/connections.c:5649 src/main/connections.c:5682
-#: src/main/connections.c:5792 src/main/connections.c:5832
+#: src/main/connections.c:5582 src/main/connections.c:5607
+#: src/main/connections.c:5633 src/main/connections.c:5666
+#: src/main/connections.c:5776 src/main/connections.c:5816
 #, fuzzy, c-format
 msgid "'%s' function requires a raw vector"
 msgstr "'%s' требует текстового вектора"
 
-#: src/main/connections.c:5605 src/main/connections.c:5629
-#: src/main/connections.c:5659 src/main/connections.c:5690
-#: src/main/connections.c:5699 src/main/connections.c:5802
-#: src/main/connections.c:5809 src/main/connections.c:5843
-#: src/main/connections.c:5863 src/main/connections.c:5871
-#: src/main/connections.c:5908 src/main/connections.c:5921
-#: src/main/connections.c:5943 src/main/connections.c:5953
+#: src/main/connections.c:5589 src/main/connections.c:5613
+#: src/main/connections.c:5643 src/main/connections.c:5674
+#: src/main/connections.c:5683 src/main/connections.c:5786
+#: src/main/connections.c:5793 src/main/connections.c:5827
+#: src/main/connections.c:5847 src/main/connections.c:5855
+#: src/main/connections.c:5892 src/main/connections.c:5905
+#: src/main/connections.c:5927 src/main/connections.c:5937
 #, fuzzy, c-format
 msgid "internal error %d in '%s' function"
 msgstr "внутренняя ошибка в 'do_sys'"
 
-#: src/main/connections.c:5706 src/main/connections.c:5878
+#: src/main/connections.c:5690 src/main/connections.c:5862
 #, fuzzy, c-format
 msgid "unknown type in '%s' function"
 msgstr "неизвестная функция 'cumxxx'"
 
-#: src/main/connections.c:5728
+#: src/main/connections.c:5712
 #, fuzzy, c-format
 msgid "'%s' argument is not a list of sockets"
 msgstr "не является списком сокетов"
 
-#: src/main/connections.c:5733
+#: src/main/connections.c:5717
 msgid "bad write indicators"
 msgstr "плохие индикаторы записи"
 
-#: src/main/connections.c:5744
+#: src/main/connections.c:5728
 #, fuzzy
 msgid "this is not a socket connection"
 msgstr "не сокет-соединение"
 
-#: src/main/connections.c:5853 src/main/connections.c:6007
-#: src/main/connections.c:6023
+#: src/main/connections.c:5837 src/main/connections.c:5991
+#: src/main/connections.c:6007
 #, fuzzy, c-format
 msgid "internal error %d in '%s' function (%d)"
 msgstr "внутренняя ошибка в 'do_sys'"
 
-#: src/main/connections.c:5896 src/main/connections.c:5976
+#: src/main/connections.c:5880 src/main/connections.c:5960
 #, fuzzy
 msgid "'from' argument must be raw or character"
 msgstr "'norm' должен быть текстовой строкой"
 
-#: src/main/connections.c:5988
+#: src/main/connections.c:5972
 msgid "unknown compression, assuming none"
 msgstr "неизвестный архиватор, предполагаю, что архивации не было"
 
-#: src/main/connections.c:6069
+#: src/main/connections.c:6053
 #, fuzzy, c-format
 msgid "internal error %d in '%s' function (%d) at %d"
 msgstr "внутренняя ошибка в 'do_random1'"
 
-#: src/main/connections.c:6105 src/main/connections.c:6109
-#: src/main/connections.c:6115
+#: src/main/connections.c:6089 src/main/connections.c:6093
+#: src/main/connections.c:6099
 #, fuzzy, c-format
 msgid "allocation of %s connection failed"
 msgstr "размещение простого соединения не удалось"
@@ -3059,48 +3043,48 @@ msgstr ""
 "неправильный целевой контекст -- НЕ ДОЛЖНО происходить;\n"
 "пожалуйста, bug.report() [R_run_onexits]"
 
-#: src/main/context.c:295
+#: src/main/context.c:297
 msgid "no loop for break/next, jumping to top level"
 msgstr "нет цикла для прерывания/следующего, перехожу на верхний уровень"
 
-#: src/main/context.c:303 src/main/errors.c:1294
+#: src/main/context.c:305 src/main/errors.c:1294
 msgid "no function to return from, jumping to top level"
 msgstr "нет функции для возврата, перехожу на верхний уровень"
 
-#: src/main/context.c:318
+#: src/main/context.c:320
 msgid "target context is not on the stack"
 msgstr "целевой контекст не находится в стеке"
 
-#: src/main/context.c:339 src/main/context.c:354 src/main/context.c:419
-#: src/main/context.c:440 src/main/context.c:451 src/main/context.c:463
+#: src/main/context.c:341 src/main/context.c:356 src/main/context.c:421
+#: src/main/context.c:442 src/main/context.c:453 src/main/context.c:465
 msgid "not that many frames on the stack"
 msgstr "не так много кадров в стеке"
 
-#: src/main/context.c:370
+#: src/main/context.c:372
 msgid "only positive values of 'n' are allowed"
 msgstr "только положительные значения 'n' разрешены"
 
-#: src/main/context.c:489
+#: src/main/context.c:491
 msgid "no function to restart"
 msgstr "нет функции для перезапуска"
 
-#: src/main/context.c:526
+#: src/main/context.c:528
 msgid "number of contexts must be positive"
 msgstr "количество контекстов должно быть положительно"
 
-#: src/main/context.c:539
+#: src/main/context.c:541
 msgid "no browser context to query"
 msgstr "нет браузерного контекста по запросу"
 
-#: src/main/context.c:557
+#: src/main/context.c:559
 msgid "not that many calls to browser are active"
 msgstr "не так много вызовов браузера активно"
 
-#: src/main/context.c:571
+#: src/main/context.c:573
 msgid "not that many functions on the call stack"
 msgstr "не так много функций в стеке вызова"
 
-#: src/main/context.c:656 src/main/random.c:110 src/main/random.c:202
+#: src/main/context.c:658 src/main/random.c:110 src/main/random.c:202
 #: src/main/random.c:289
 #, fuzzy, c-format
 msgid "internal error in '%s' function"
@@ -3379,7 +3363,7 @@ msgstr "'norm' должен быть текстовой строкой"
 
 #: src/main/dotcode.c:410 src/main/dounzip.c:334 src/main/util.c:806
 #: src/main/util.c:841 src/main/util.c:883 src/main/util.c:924
-#: src/unix/sys-std.c:1224 src/unix/sys-std.c:1247
+#: src/unix/sys-std.c:1227 src/unix/sys-std.c:1250
 #, fuzzy, c-format
 msgid "'%s' argument is too long"
 msgstr "аргумент 'file' слишком длинный"
@@ -3407,7 +3391,7 @@ msgstr "Неправильное количество аргументов (%d),
 msgid "'.NAME' is missing"
 msgstr "'NAME' отсутствует"
 
-#: src/main/dotcode.c:1267 src/main/dotcode.c:1284 src/main/engine.c:2992
+#: src/main/dotcode.c:1267 src/main/dotcode.c:1284 src/main/engine.c:2993
 msgid "invalid graphics state"
 msgstr "неправильное графическое состояние"
 
@@ -3675,139 +3659,139 @@ msgstr ""
 " x <- edit()\n"
 " для восстановления"
 
-#: src/main/engine.c:41
+#: src/main/engine.c:42
 msgid "Graphics API version mismatch"
 msgstr "Несоответствие версии графического API"
 
-#: src/main/engine.c:114 src/main/engine.c:119 src/main/engine.c:183
+#: src/main/engine.c:115 src/main/engine.c:120 src/main/engine.c:184
 #, fuzzy
 msgid "unable to allocate memory (in 'GEregister()' function)"
 msgstr "не могу разместить память (в GEregister)"
 
-#: src/main/engine.c:154
+#: src/main/engine.c:155
 msgid "too many graphics systems registered"
 msgstr "слишком много зарегистрированных графических систем"
 
-#: src/main/engine.c:207
+#: src/main/engine.c:208
 msgid "no graphics system to unregister"
 msgstr "нет графической системы для отмены регистрации"
 
-#: src/main/engine.c:444 src/main/engine.c:449 src/main/engine.c:457
-#: src/main/engine.c:464 src/main/engine.c:478 src/modules/X11/devX11.c:1153
+#: src/main/engine.c:445 src/main/engine.c:450 src/main/engine.c:458
+#: src/main/engine.c:465 src/main/engine.c:479 src/modules/X11/devX11.c:1153
 msgid "invalid line end"
 msgstr "неправильный конец строки"
 
-#: src/main/engine.c:509 src/main/engine.c:514 src/main/engine.c:522
-#: src/main/engine.c:529 src/main/engine.c:543 src/modules/X11/devX11.c:1171
+#: src/main/engine.c:510 src/main/engine.c:515 src/main/engine.c:523
+#: src/main/engine.c:530 src/main/engine.c:544 src/modules/X11/devX11.c:1171
 msgid "invalid line join"
 msgstr "неправильное объединение строк"
 
-#: src/main/engine.c:762 src/main/engine.c:866 src/main/engine.c:1099
-#: src/main/engine.c:1206 src/main/engine.c:1329 src/main/engine.c:1393
+#: src/main/engine.c:763 src/main/engine.c:867 src/main/engine.c:1100
+#: src/main/engine.c:1207 src/main/engine.c:1330 src/main/engine.c:1394
 #, fuzzy
 msgid "'lwd' argument must be non-negative and finite"
 msgstr "'gap' должен быть положительным целым числом"
 
-#: src/main/engine.c:799
+#: src/main/engine.c:800
 msgid "out of memory while clipping polyline"
 msgstr "не хватает памяти во время вырезания ломаной линии"
 
-#: src/main/engine.c:1387
+#: src/main/engine.c:1388
 #, fuzzy
 msgid "path rendering is not implemented for this device"
 msgstr "Воспроизведение path для этой системы не реализовано"
 
-#: src/main/engine.c:1407
+#: src/main/engine.c:1408
 msgid "Invalid graphics path"
 msgstr "Неправильный графический путь"
 
-#: src/main/engine.c:1426
+#: src/main/engine.c:1427
 #, fuzzy
 msgid "raster rendering is not implemented for this device"
 msgstr "Воспроизведение растра на этом устройстве не разработано"
 
-#: src/main/engine.c:1450
+#: src/main/engine.c:1451
 #, fuzzy
 msgid "raster capture is not available for this device"
 msgstr "Захват растра недоступен на этом устройстве"
 
-#: src/main/engine.c:1657
+#: src/main/engine.c:1658
 #, fuzzy, c-format
 msgid "font face %d is not supported for font family '%s'"
 msgstr "начертание %d не поддерживается семейством шрифтов '%s'"
 
-#: src/main/engine.c:1971
+#: src/main/engine.c:1972
 msgid "no graphics device is active"
 msgstr "нет активных графических устройств"
 
-#: src/main/engine.c:2009
+#: src/main/engine.c:2010
 msgid "use of negative 'pch' argument with symbol font is invalid"
 msgstr ""
 
-#: src/main/engine.c:2048
+#: src/main/engine.c:2049
 #, fuzzy, c-format
 msgid "'pch' value '%d' is invalid in this locale"
 msgstr "неправильное значение pch '%d' для этой локали"
 
-#: src/main/engine.c:2306
+#: src/main/engine.c:2307
 #, fuzzy, c-format
 msgid "unimplemented 'pch' value '%d'"
 msgstr "не разработанное pch-значение '%d'"
 
-#: src/main/engine.c:2329
+#: src/main/engine.c:2330
 #, fuzzy, c-format
 msgid "invalid axis extents '[GEPretty(.,.,n=%d)]'"
 msgstr "неправильная протяженность оси [GEPretty(.,.,n=%d)"
 
-#: src/main/engine.c:2333
+#: src/main/engine.c:2334
 #, fuzzy, c-format
 msgid "infinite axis extents '[GEPretty(%g,%g,%d)]'"
 msgstr "неопределенная протяженность оси [GEPretty(%g,%g,%d)]"
 
-#: src/main/engine.c:2370
+#: src/main/engine.c:2371
 #, fuzzy, c-format
 msgid " .. 'GEPretty(.)': new *lo = %g < %g = x1"
 msgstr " .. GEPretty(.): новая *lo = %g < %g = x1"
 
-#: src/main/engine.c:2372
+#: src/main/engine.c:2373
 #, fuzzy, c-format
 msgid " .. 'GEPretty(.)': new *up = %g > %g = x2"
 msgstr " .. GEPretty(.): новая *up = %g > %g = x2"
 
-#: src/main/engine.c:2772
+#: src/main/engine.c:2773
 #, fuzzy
 msgid "display list redraw incomplete"
 msgstr "Отражение списка перерисовки неполное"
 
-#: src/main/engine.c:2776
+#: src/main/engine.c:2777
 #, fuzzy
 msgid "invalid display list"
 msgstr "неправильный список аргументов"
 
-#: src/main/engine.c:2962
+#: src/main/engine.c:2963
 #, fuzzy, c-format
 msgid "'%s' argument must be an expression"
 msgstr "аргумент 'expr' должен быть выражением"
 
-#: src/main/engine.c:3050 src/main/engine.c:3058
+#: src/main/engine.c:3051 src/main/engine.c:3059
 #, fuzzy
 msgid "invalid multibyte char in 'pch=\"c\"'"
 msgstr "неправильный многобайтный знак в pch=\"c\""
 
-#: src/main/engine.c:3105
+#: src/main/engine.c:3106
 #, fuzzy
 msgid "invalid hex digit in 'color' or 'lty' argument"
 msgstr "неправильное шестнадцатеричное число в 'color' или 'lty'"
 
-#: src/main/engine.c:3128
+#: src/main/engine.c:3129
 msgid "invalid line type: must be length 2, 4, 6 or 8"
 msgstr "неправильный тип линии: должен быть длиной 2, 4, 6 или 8"
 
-#: src/main/engine.c:3132
+#: src/main/engine.c:3133
 msgid "invalid line type: zeroes are not allowed"
 msgstr "неправильный тип линии: нули не разрешены"
 
-#: src/main/engine.c:3141 src/main/engine.c:3149 src/main/engine.c:3156
+#: src/main/engine.c:3142 src/main/engine.c:3150 src/main/engine.c:3157
 msgid "invalid line type"
 msgstr "неправильный тип линии"
 
@@ -4533,7 +4517,7 @@ msgstr "переполнение стека целых чисел"
 msgid "bad operation code"
 msgstr "Неправильный 'opcode'"
 
-#: src/main/eval.c:4997 src/main/logic.c:253 src/main/logic.c:259
+#: src/main/eval.c:4997 src/main/logic.c:254 src/main/logic.c:260
 #, fuzzy, c-format
 msgid "invalid '%s' type in 'x %s y'"
 msgstr "неправильный тип %s в 'x %s y'"
@@ -4564,7 +4548,7 @@ msgstr "несоответствие версии байтового кода"
 msgid "invalid sequence argument in 'for()' loop"
 msgstr "неправильная последовательность аргументов в цикле 'for'"
 
-#: src/main/eval.c:5434 src/main/names.c:1313
+#: src/main/eval.c:5434 src/main/names.c:1312
 #, fuzzy, c-format
 msgid "there is no '.Internal' function '%s'"
 msgstr "нет внутренней функции \"%s\""
@@ -4898,7 +4882,7 @@ msgid "invalid regular expression, reason '%s'"
 msgstr "неправильное регулярное выражение, причина '%s'"
 
 #: src/main/grep.c:220 src/main/grep.c:310 src/main/grep.c:421
-#: src/main/grep.c:895 src/main/grep.c:1656 src/main/grep.c:2494
+#: src/main/grep.c:895 src/main/grep.c:1656 src/main/grep.c:2497
 #, c-format
 msgid "input string %d is invalid UTF-8"
 msgstr "входная строка %d -- это неправильный UTF-8"
@@ -5026,23 +5010,17 @@ msgstr "неправильное значение"
 msgid "internet routines cannot be accessed in module"
 msgstr "средства Интернет не доступны из модуля"
 
-#: src/main/internet.c:95 src/main/internet.c:129 src/main/internet.c:142
-#: src/main/internet.c:153 src/main/internet.c:164 src/main/internet.c:175
-#: src/main/internet.c:184 src/main/internet.c:195 src/main/internet.c:206
-#: src/main/internet.c:215 src/main/internet.c:225 src/main/internet.c:339
-#: src/main/internet.c:350 src/main/internet.c:361 src/main/internet.c:373
+#: src/main/internet.c:95 src/main/internet.c:107 src/main/internet.c:120
+#: src/main/internet.c:131 src/main/internet.c:142 src/main/internet.c:153
+#: src/main/internet.c:162 src/main/internet.c:173 src/main/internet.c:184
+#: src/main/internet.c:193 src/main/internet.c:203 src/main/internet.c:317
+#: src/main/internet.c:328 src/main/internet.c:339 src/main/internet.c:351
 msgid "internet routines cannot be loaded"
 msgstr "средства Интернет не могут быть загружены"
 
-#: src/main/internet.c:110 src/main/memory.c:3484 src/main/memory.c:3494
-#: src/main/memory.c:3506 src/main/memory.c:3520 src/main/memory.c:3536
-#: src/main/memory.c:3554
-msgid "bad value"
-msgstr "неправильное значение"
-
-#: src/main/internet.c:239 src/main/internet.c:253 src/main/internet.c:269
-#: src/main/internet.c:281 src/main/internet.c:295 src/main/internet.c:315
-#: src/main/internet.c:328
+#: src/main/internet.c:217 src/main/internet.c:231 src/main/internet.c:247
+#: src/main/internet.c:259 src/main/internet.c:273 src/main/internet.c:293
+#: src/main/internet.c:306
 msgid "socket routines cannot be loaded"
 msgstr "средства сокетов не могут быть загружены"
 
@@ -5065,21 +5043,21 @@ msgstr ""
 msgid "binary operation on non-conformable arrays"
 msgstr "бинарная операция на неподобных многомерных матрицах"
 
-#: src/main/logic.c:247
+#: src/main/logic.c:248
 #, c-format
 msgid "'%s' operator requires 2 arguments"
 msgstr "оператор '%s' требует 2 аргумента"
 
-#: src/main/logic.c:332
+#: src/main/logic.c:333
 #, fuzzy
 msgid "Unary operator '!' called with two arguments"
 msgstr "Унарный оператор `!' вызван с двумя аргументами"
 
-#: src/main/logic.c:395
+#: src/main/logic.c:396
 msgid "bad operator value for 'do_logic3()' function"
 msgstr ""
 
-#: src/main/logic.c:437
+#: src/main/logic.c:438
 #, c-format
 msgid "coercing argument of type '%s' to logical"
 msgstr "преобразование аргумента типа '%s' в логический"
@@ -5259,16 +5237,16 @@ msgstr ""
 msgid "Setting LC_MEASUREMENT failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.c:856
+#: src/main/main.c:862
 msgid "unable to open the base package\n"
 msgstr "не могу открыть пакет 'base'\n"
 
-#: src/main/main.c:934
+#: src/main/main.c:940
 #, c-format
 msgid "unable to restore saved data in %s\n"
 msgstr "не могу восстановить сохраненные в %s данные\n"
 
-#: src/main/main.c:981
+#: src/main/main.c:987
 #, fuzzy
 msgid "Warning message during startup:"
 msgid_plural "Warning messages during startup:"
@@ -5276,28 +5254,28 @@ msgstr[0] "Во время загрузки - "
 msgstr[1] "Во время загрузки - "
 msgstr[2] "Во время загрузки - "
 
-#: src/main/main.c:1031
+#: src/main/main.c:1037
 #, c-format
 msgid "where %d"
 msgstr ""
 
-#: src/main/main.c:1154
+#: src/main/main.c:1160
 msgid "Called from: "
 msgstr ""
 
-#: src/main/main.c:1161
+#: src/main/main.c:1167
 msgid "top level \n"
 msgstr ""
 
-#: src/main/main.c:1237
+#: src/main/main.c:1243
 msgid "cannot quit from browser"
 msgstr "не могу выйти из браузера"
 
-#: src/main/main.c:1241
+#: src/main/main.c:1247
 msgid "one of \"yes\", \"no\", \"ask\" or \"default\" expected."
 msgstr "ожидается одно из: \"yes\", \"no\", \"ask\" или \"default\"."
 
-#: src/main/main.c:1246
+#: src/main/main.c:1252
 #, fuzzy
 msgid ""
 "save=\"ask\" is in non-interactive use: command-line default will be used"
@@ -5305,37 +5283,37 @@ msgstr ""
 "save=\"ask\" во время неинтерактивной работы: будет использована командная "
 "строка по умолчанию"
 
-#: src/main/main.c:1254
+#: src/main/main.c:1260
 #, fuzzy
 msgid "unrecognized value of 'save' argument"
 msgstr "нераспознанное значение 'save'"
 
-#: src/main/main.c:1257
+#: src/main/main.c:1263
 #, fuzzy
 msgid "invalid 'status' argument, 0 assumed"
 msgstr "неправильный 'status', принят 0"
 
-#: src/main/main.c:1262
+#: src/main/main.c:1268
 #, fuzzy
 msgid "invalid 'runLast' argument, FALSE assumed"
 msgstr "неправильный 'runLast', принято FALSE"
 
-#: src/main/main.c:1293
+#: src/main/main.c:1299
 msgid "cannot allocate space for toplevel callback element"
 msgstr "не могу выделить место обратного вызова элемента верхнего уровня"
 
-#: src/main/main.c:1371
+#: src/main/main.c:1377
 #, fuzzy
 msgid "negative index passed to 'R_removeTaskCallbackByIndex()' function"
 msgstr "отрицательный индекс передан в R_removeTaskCallbackByIndex"
 
-#: src/main/main.c:1481
+#: src/main/main.c:1487
 #, fuzzy, c-format
 msgid "warning messages from top-level task callback '%s'"
 msgstr ""
 "предупреждающие сообщения из обратного вызова задачи верхнего уровня '%s'\n"
 
-#: src/main/main.c:1537
+#: src/main/main.c:1543
 msgid "top-level task callback did not return a logical value"
 msgstr "обратный вызов задачи верхнего уровня не вернул логического значения"
 
@@ -5382,221 +5360,221 @@ msgstr[0] "неиспользованный аргумент(ы) %s"
 msgstr[1] "неиспользованный аргумент(ы) %s"
 msgstr[2] "неиспользованный аргумент(ы) %s"
 
-#: src/main/memory.c:160
+#: src/main/memory.c:161
 #, c-format
 msgid "unprotected object (%p) encountered (was %s)"
 msgstr ""
 
-#: src/main/memory.c:741
+#: src/main/memory.c:742
 #, fuzzy
 msgid "untraced old-to-new reference\n"
 msgstr "не является слабой ссылкой"
 
-#: src/main/memory.c:750
+#: src/main/memory.c:751
 #, c-format
 msgid "Node counts %s:\n"
 msgstr ""
 
-#: src/main/memory.c:757 src/main/memory.c:767 src/main/memory.c:777
+#: src/main/memory.c:758 src/main/memory.c:768 src/main/memory.c:778
 msgid "Inconsistent class assignment for node!\n"
 msgstr ""
 
-#: src/main/memory.c:769 src/main/memory.c:779
+#: src/main/memory.c:770 src/main/memory.c:780
 msgid "Inconsistent node generation\n"
 msgstr ""
 
-#: src/main/memory.c:782
+#: src/main/memory.c:783
 #, c-format
 msgid "Class: %d, New = %d, Old = %d, OldToNew = %d, Total = %d\n"
 msgstr ""
 
-#: src/main/memory.c:812
+#: src/main/memory.c:813
 #, c-format
 msgid ""
 "Node occupancy: %.0f%%\n"
 "Vector occupancy: %.0f%%\n"
 msgstr ""
 
-#: src/main/memory.c:817
+#: src/main/memory.c:818
 #, c-format
 msgid "Total allocation: %lu\n"
 msgstr ""
 
-#: src/main/memory.c:818
+#: src/main/memory.c:819
 #, c-format
 msgid ""
 "Ncells %lu\n"
 "Vcells %lu\n"
 msgstr ""
 
-#: src/main/memory.c:829
+#: src/main/memory.c:830
 #, c-format
 msgid "Class: %d, pages = %d, maxrel = %d, released = %d\n"
 msgstr ""
 
-#: src/main/memory.c:833
+#: src/main/memory.c:834
 #, c-format
 msgid "Allocated = %d, in use = %d\n"
 msgstr ""
 
-#: src/main/memory.c:1120 src/main/memory.c:1538
+#: src/main/memory.c:1121 src/main/memory.c:1539
 msgid "****snapping into wrong generation\n"
 msgstr ""
 
-#: src/main/memory.c:1236
+#: src/main/memory.c:1237
 msgid "can only weakly reference/finalize reference objects"
 msgstr "могу сослаться на/завершить ссылочные объекты только слабо"
 
-#: src/main/memory.c:1270
+#: src/main/memory.c:1271
 msgid "finalizer must be a function or NULL"
 msgstr "завершитель должен быть функцией или NULL"
 
-#: src/main/memory.c:1326 src/main/memory.c:1334 src/main/memory.c:1345
+#: src/main/memory.c:1327 src/main/memory.c:1335 src/main/memory.c:1346
 msgid "not a weak reference"
 msgstr "не является слабой ссылкой"
 
-#: src/main/memory.c:1476
+#: src/main/memory.c:1477
 msgid "first argument must be environment or external pointer"
 msgstr "первый аргумент должен быть окружением или внешним указателем"
 
-#: src/main/memory.c:1478
+#: src/main/memory.c:1479
 msgid "second argument must be a function"
 msgstr "второй аргумент должен быть функцией"
 
-#: src/main/memory.c:1482
+#: src/main/memory.c:1483
 msgid "third argument must be 'TRUE' or 'FALSE'"
 msgstr "третий аргумент должен быть 'TRUE' или 'FALSE'"
 
-#: src/main/memory.c:1822
+#: src/main/memory.c:1823
 #, c-format
 msgid "Garbage collection %d = %d"
 msgstr ""
 
-#: src/main/memory.c:1825
+#: src/main/memory.c:1826
 #, c-format
 msgid " (level %d) ... "
 msgstr ""
 
-#: src/main/memory.c:1979
+#: src/main/memory.c:1980
 msgid "vector memory exhausted (limit reached?)"
 msgstr "векторная память вышла (достигнут предел?)"
 
-#: src/main/memory.c:1985
+#: src/main/memory.c:1986
 msgid "cons memory exhausted (limit reached?)"
 msgstr "cons-память вышла (достигнут предел?)"
 
-#: src/main/memory.c:1990
+#: src/main/memory.c:1991
 msgid "memory exhausted (limit reached?)"
 msgstr "память исчерпана (достигнут предел?)"
 
-#: src/main/memory.c:2011
+#: src/main/memory.c:2012
 #, fuzzy
 msgid "couldn't allocate memory for pointer stack"
 msgstr "не могу разместить память для 'read.dcf'"
 
-#: src/main/memory.c:2068
+#: src/main/memory.c:2069
 #, fuzzy
 msgid "couldn't allocate node stack"
 msgstr "не могу разместить место для pushBack"
 
-#: src/main/memory.c:2073
+#: src/main/memory.c:2074
 #, fuzzy
 msgid "couldn't allocate integer stack"
 msgstr "не могу разместить место для pushBack"
 
-#: src/main/memory.c:2126
+#: src/main/memory.c:2127
 #, fuzzy, c-format
 msgid "cannot allocate memory block of size %0.f Tb"
 msgstr "не могу разместить блок памяти размером %0.1f Gb"
 
-#: src/main/memory.c:2131
+#: src/main/memory.c:2132
 #, c-format
 msgid "cannot allocate memory block of size %0.1f Gb"
 msgstr "не могу разместить блок памяти размером %0.1f Gb"
 
-#: src/main/memory.c:2458
+#: src/main/memory.c:2459
 #, fuzzy
 msgid "vector is too large"
 msgstr "указанный размер вектора слишком велик"
 
-#: src/main/memory.c:2461
+#: src/main/memory.c:2462
 msgid "negative length vectors are not allowed"
 msgstr "не разрешена отрицательная длина векторов"
 
-#: src/main/memory.c:2473
+#: src/main/memory.c:2474
 msgid "use of allocVector(CHARSXP ...) is defunct\n"
 msgstr ""
 
-#: src/main/memory.c:2487 src/main/memory.c:2500 src/main/memory.c:2513
-#: src/main/memory.c:2528
+#: src/main/memory.c:2488 src/main/memory.c:2501 src/main/memory.c:2514
+#: src/main/memory.c:2529
 #, c-format
 msgid "cannot allocate vector of length %d"
 msgstr "не могу разместить вектор длины %d"
 
-#: src/main/memory.c:2538 src/main/memory.c:2545
+#: src/main/memory.c:2539 src/main/memory.c:2546
 #, fuzzy
 msgid "invalid length for pairlist"
 msgstr "неправильный аргумент нулевой длины"
 
-#: src/main/memory.c:2549
+#: src/main/memory.c:2550
 #, c-format
 msgid "invalid type/length (%s/%d) in vector allocation"
 msgstr "неправильный тип/длина (%s/%d) для размещения вектора"
 
-#: src/main/memory.c:2648
+#: src/main/memory.c:2649
 #, c-format
 msgid "cannot allocate vector of size %0.1f Gb"
 msgstr "не могу разместить вектор размером %0.1f Gb"
 
-#: src/main/memory.c:2652
+#: src/main/memory.c:2653
 #, c-format
 msgid "cannot allocate vector of size %0.1f Mb"
 msgstr "не могу разместить вектор размером %0.1f Mb"
 
-#: src/main/memory.c:2656
+#: src/main/memory.c:2657
 #, c-format
 msgid "cannot allocate vector of size %0.f Kb"
 msgstr "не могу разместить вектор размером %0.f Kb"
 
-#: src/main/memory.c:2896
+#: src/main/memory.c:2901
 #, c-format
 msgid ""
 "\n"
 "%.1f Mbytes of cons cells used (%d%%)\n"
 msgstr ""
 
-#: src/main/memory.c:2901
+#: src/main/memory.c:2906
 #, c-format
 msgid "%.1f Mbytes of vectors used (%d%%)\n"
 msgstr ""
 
-#: src/main/memory.c:2924
+#: src/main/memory.c:2929
 #, c-format
 msgid "GC encountered a node (%p) with type FREESXP (was %s) at memory.c:%d"
 msgstr ""
 
-#: src/main/memory.c:2929 src/main/memory.c:2934
+#: src/main/memory.c:2934 src/main/memory.c:2939
 #, c-format
 msgid "GC encountered a node (%p) with an unknown SEXP type: %s at memory.c:%d"
 msgstr ""
 
-#: src/main/memory.c:2944
+#: src/main/memory.c:2949
 msgid "internal TRUE value has been modified"
 msgstr ""
 
-#: src/main/memory.c:2948
+#: src/main/memory.c:2953
 msgid "internal FALSE value has been modified"
 msgstr ""
 
-#: src/main/memory.c:2953
+#: src/main/memory.c:2958
 msgid "internal logical NA value has been modified"
 msgstr ""
 
-#: src/main/memory.c:3050
+#: src/main/memory.c:3055
 msgid "protect(): protection stack overflow"
 msgstr "protect(): переполнение стека защиты"
 
-#: src/main/memory.c:3057
+#: src/main/memory.c:3062
 #, fuzzy, c-format
 msgid "unprotect(): only %d protected item"
 msgid_plural "unprotect(): only %d protected items"
@@ -5604,11 +5582,11 @@ msgstr[0] "unprotect(): только %d защищенных элементов"
 msgstr[1] "unprotect(): только %d защищенных элементов"
 msgstr[2] "unprotect(): только %d защищенных элементов"
 
-#: src/main/memory.c:3092
+#: src/main/memory.c:3097
 msgid "unprotect_ptr: pointer not found"
 msgstr "unprotect_ptr: указатель не найден"
 
-#: src/main/memory.c:3130
+#: src/main/memory.c:3135
 #, fuzzy, c-format
 msgid "R_Reprotect: only %d protected item, can't reprotect index %d"
 msgid_plural "R_Reprotect: only %d protected items, can't reprotect index %d"
@@ -5616,155 +5594,160 @@ msgstr[0] "unprotect(): только %d защищенных элементов"
 msgstr[1] "unprotect(): только %d защищенных элементов"
 msgstr[2] "unprotect(): только %d защищенных элементов"
 
-#: src/main/memory.c:3182
+#: src/main/memory.c:3187
 #, fuzzy, c-format
 msgid "'Calloc()' function could not allocate memory (%.0f of %u bytes)"
 msgstr "'Calloc' не может выделить память (%.0f из %u байт)"
 
-#: src/main/memory.c:3192
+#: src/main/memory.c:3197
 #, fuzzy, c-format
 msgid "'Realloc()' function could not re-allocate memory (%.0f bytes)"
 msgstr "'Realloc' не может переразместить память (%.0f байт)"
 
-#: src/main/memory.c:3323
+#: src/main/memory.c:3328
 #, c-format
 msgid "value of 'SET_ATTRIB' must be a pairlist or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3356
+#: src/main/memory.c:3366
 #, c-format
 msgid "LENGTH or similar applied to %s object"
 msgstr ""
 
-#: src/main/memory.c:3371
+#: src/main/memory.c:3381
 #, c-format
 msgid "'CHAR()' function can only be applied to a 'CHARSXP', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3378
+#: src/main/memory.c:3388
 #, c-format
 msgid ""
 "'STRING_ELT()' function can only be applied to a 'character vector', not a "
 "'%s'"
 msgstr ""
 
-#: src/main/memory.c:3388
+#: src/main/memory.c:3398
 #, c-format
 msgid "'VECTOR_ELT()' function can only be applied to a 'list', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3395
+#: src/main/memory.c:3405
 #, c-format
 msgid "'LOGICAL()' function can only be applied to a 'logical', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3403
+#: src/main/memory.c:3413
 #, c-format
 msgid "'INTEGER()' function can only be applied to a 'integer', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3410
+#: src/main/memory.c:3420
 #, fuzzy, c-format
 msgid "'RAW()' function can only be applied to a 'raw', not a '%s'"
 msgstr "nsl() не способна разрешить хост '%s'"
 
-#: src/main/memory.c:3417
+#: src/main/memory.c:3427
 #, c-format
 msgid "'REAL()' function can only be applied to a 'numeric', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3424
+#: src/main/memory.c:3434
 #, fuzzy, c-format
 msgid "'COMPLEX()' function can only be applied to a 'complex', not a '%s'"
 msgstr "nsl() не способна разрешить хост '%s'"
 
-#: src/main/memory.c:3433
+#: src/main/memory.c:3443
 msgid "not safe to return vector pointer"
 msgstr "небезопасно возвращать указатель вектора"
 
-#: src/main/memory.c:3438
+#: src/main/memory.c:3448
 #, c-format
 msgid ""
 "'SET_STRING_ELT()' function can only be applied to a 'character vector', not "
 "a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3441
+#: src/main/memory.c:3451
 #, c-format
 msgid "value of 'SET_STRING_ELT()' function must be a 'CHARSXP' not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3444
+#: src/main/memory.c:3454
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_STRING_ELT()' function"
 msgstr ""
 
-#: src/main/memory.c:3455
+#: src/main/memory.c:3465
 #, c-format
 msgid "'SET_VECTOR_ELT()' function can only be applied to a 'list', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3459
+#: src/main/memory.c:3469
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_VECTOR_ELT()' function"
 msgstr ""
 
-#: src/main/memory.c:3636
+#: src/main/memory.c:3494 src/main/memory.c:3504 src/main/memory.c:3516
+#: src/main/memory.c:3530 src/main/memory.c:3546 src/main/memory.c:3564
+msgid "bad value"
+msgstr "неправильное значение"
+
+#: src/main/memory.c:3646
 #, c-format
 msgid "value of 'SET_CXTAIL()' function must be a 'char' or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3717
+#: src/main/memory.c:3727
 msgid "memory profiling is not available on this system"
 msgstr "профилирование памяти в этой системе недоступно"
 
-#: src/main/memory.c:3781
+#: src/main/memory.c:3791
 #, fuzzy, c-format
 msgid "'Rprofmem()': cannot open output file '%s'"
 msgstr "Rprofmem: не могу открыть выходной файл '%s'"
 
-#: src/main/memory.c:3817
+#: src/main/memory.c:3827
 msgid "R_AllocStringBuffer(-1) used: please report"
 msgstr ""
 
-#: src/main/memory.c:3837
+#: src/main/memory.c:3847
 #, fuzzy, c-format
 msgid "could not allocate memory (%u Mb) in 'R_AllocStringBuffer()' function"
 msgstr "не могу разместить память для 'read.dcf'"
 
-#: src/main/memory.c:3889
+#: src/main/memory.c:3899
 #, c-format
 msgid "long vectors not supported yet: %s:%d"
 msgstr ""
 
-#: src/main/names.c:1022
+#: src/main/names.c:1021
 msgid "string argument required"
 msgstr "нужен текстовый аргумент"
 
-#: src/main/names.c:1025
+#: src/main/names.c:1024
 msgid "no such primitive function"
 msgstr "нет такой примитивной функции"
 
-#: src/main/names.c:1147
+#: src/main/names.c:1146
 #, fuzzy
 msgid "couldn't allocate memory for symbol table"
 msgstr "не могу разместить память для 'read.dcf'"
 
-#: src/main/names.c:1213 src/main/names.c:1243
+#: src/main/names.c:1212 src/main/names.c:1242
 msgid "attempt to use zero-length variable name"
 msgstr "попытка использовать имя переменной нулевой длины"
 
-#: src/main/names.c:1215 src/main/names.c:1245
+#: src/main/names.c:1214 src/main/names.c:1244
 #, c-format
 msgid "variable names are limited to %d bytes"
 msgstr "имена переменных ограничены %d байтами"
 
-#: src/main/names.c:1334
+#: src/main/names.c:1333
 #, fuzzy, c-format
 msgid "'.Internal(%s())' not called from a base namespace\n"
 msgstr "не могу убрать переменные из базового пространства имен"
 
-#: src/main/names.c:1341
+#: src/main/names.c:1340
 #, fuzzy, c-format
 msgid "'.Internal(%s())' called from namespace '%s'\n"
 msgstr "не могу убрать переменные из базового пространства имен"
@@ -6168,7 +6151,7 @@ msgstr "имя файла слишком длинное"
 msgid "cannot get info on '%ls', reason '%s'"
 msgstr "не могу создать fifo-канал '%s' по причине '%s'"
 
-#: src/main/platform.c:1408 src/main/platform.c:2961
+#: src/main/platform.c:1408 src/main/platform.c:2950
 #, fuzzy, c-format
 msgid "cannot open reparse point '%ls', reason '%s'"
 msgstr "не могу открыть файл назначения '%s' по причине '%s'"
@@ -6202,97 +6185,97 @@ msgid "OS reports request to set locale to \"%s\" cannot be honored"
 msgstr ""
 "ОС сообщает, что запрос установки локали в \"%s\" не может быть выполнен"
 
-#: src/main/platform.c:2142 src/main/raw.c:37 src/main/raw.c:272
+#: src/main/platform.c:2131 src/main/raw.c:37 src/main/raw.c:272
 #, fuzzy, c-format
 msgid "'%s' argument must be a character vector of length 1"
 msgstr "'hostname' должен быть единичным текстовым вектором"
 
-#: src/main/platform.c:2148
+#: src/main/platform.c:2137
 #, fuzzy, c-format
 msgid "'nsl()' function was unable to resolve host '%s'"
 msgstr "nsl() не способна разрешить хост '%s'"
 
-#: src/main/platform.c:2155
+#: src/main/platform.c:2144
 #, fuzzy
 msgid "unknown format returned by C function 'gethostbyname()'"
 msgstr "'gethostbyname' вернул неизвестный формат"
 
-#: src/main/platform.c:2164
+#: src/main/platform.c:2153
 #, fuzzy
 msgid "'nsl()' function is not supported on this platform"
 msgstr "nsl() не поддерживается на этой платформе"
 
-#: src/main/platform.c:2235
+#: src/main/platform.c:2224
 #, fuzzy, c-format
 msgid "directory '%s' already exists"
 msgstr "'%s' уже существует"
 
-#: src/main/platform.c:2238
+#: src/main/platform.c:2227
 #, fuzzy, c-format
 msgid "cannot create directory '%s', reason '%s'"
 msgstr "не могу создать директорию '%s' по причине '%s'"
 
-#: src/main/platform.c:2283
+#: src/main/platform.c:2272
 #, fuzzy, c-format
 msgid "directory '%ls' already exists"
 msgstr "'%s' уже существует"
 
-#: src/main/platform.c:2287
+#: src/main/platform.c:2276
 #, fuzzy, c-format
 msgid "cannot create directory '%ls', reason '%s'"
 msgstr "не могу создать каталог '%ls' по причине '%s'"
 
-#: src/main/platform.c:2321 src/main/platform.c:2530
+#: src/main/platform.c:2310 src/main/platform.c:2519
 msgid "too deep nesting"
 msgstr ""
 
-#: src/main/platform.c:2329 src/main/platform.c:2342 src/main/platform.c:2360
-#: src/main/platform.c:2380 src/main/platform.c:2546 src/main/platform.c:2559
-#: src/main/platform.c:2578 src/main/platform.c:2599
+#: src/main/platform.c:2318 src/main/platform.c:2331 src/main/platform.c:2349
+#: src/main/platform.c:2369 src/main/platform.c:2535 src/main/platform.c:2548
+#: src/main/platform.c:2567 src/main/platform.c:2588
 #, fuzzy
 msgid "path is too long"
 msgstr "слишком длинный путь"
 
-#: src/main/platform.c:2349
+#: src/main/platform.c:2338
 #, fuzzy, c-format
 msgid "problem with creating directory %ls: %s"
 msgstr "проблема с созданием каталога %ls: %s "
 
-#: src/main/platform.c:2369
+#: src/main/platform.c:2358
 #, fuzzy, c-format
 msgid "problem with reading directory %ls: %s"
 msgstr "проблема с чтением каталога %s: %s"
 
-#: src/main/platform.c:2388
+#: src/main/platform.c:2377
 #, fuzzy, c-format
 msgid "problem with copying %ls to %ls: %s"
 msgstr "проблема с копированием %ls в %ls: %s"
 
-#: src/main/platform.c:2568
+#: src/main/platform.c:2557
 #, fuzzy, c-format
 msgid "problem with creating directory %s: %s"
 msgstr "проблема с созданием каталога %s: %s"
 
-#: src/main/platform.c:2587
+#: src/main/platform.c:2576
 #, fuzzy, c-format
 msgid "problem with reading directory %s: %s"
 msgstr "проблема с чтением каталога %s: %s"
 
-#: src/main/platform.c:2608
+#: src/main/platform.c:2597
 #, fuzzy, c-format
 msgid "problem with copying %s to %s: %s"
 msgstr "проблема с копированием %s в %s: %s"
 
-#: src/main/platform.c:2745
+#: src/main/platform.c:2734
 #, fuzzy
 msgid "'mode' argument must be of length at least one"
 msgstr "длина 'mode' должна быть не меньше единицы"
 
-#: src/main/platform.c:2786 src/main/platform.c:2812
+#: src/main/platform.c:2775 src/main/platform.c:2801
 msgid "insufficient OS support on this platform"
 msgstr "недостаточная поддержка OS на этой платформе"
 
-#: src/main/platform.c:2982
+#: src/main/platform.c:2971
 #, fuzzy, c-format
 msgid "cannot set reparse point '%ls', reason '%s'"
 msgstr "не могу создать каталог '%ls' по причине '%s'"
@@ -6312,55 +6295,55 @@ msgstr "все значения z равны"
 msgid "all 'z' values are NA"
 msgstr "все значения z являются NA"
 
-#: src/main/plot.c:82
+#: src/main/plot.c:83
 #, c-format
 msgid "CreateAtVector \"log\"(from axis()): usr[0] = %g > %g = usr[1] !"
 msgstr ""
 
-#: src/main/plot.c:91
+#: src/main/plot.c:92
 #, c-format
 msgid "CreateAtVector \"log\"(from axis()): axp[0] = %g !"
 msgstr ""
 
-#: src/main/plot.c:93
+#: src/main/plot.c:94
 #, c-format
 msgid "CreateAtVector [log-axis()]: axp[0] = %g < 0!"
 msgstr ""
 
-#: src/main/plot.c:104
+#: src/main/plot.c:105
 #, c-format
 msgid "CreateAtVector [log-axis(), case 1]: (nint, ne) = (%d,%d)\n"
 msgstr ""
 
-#: src/main/plot.c:108
+#: src/main/plot.c:109
 #, c-format
 msgid ""
 "log - axis(), 'at' creation, _LARGE_ range: ne = %d <= 0 !!\n"
 "\t axp[0:1]=(%g,%g) ==> i = %d;\tnint = %d"
 msgstr ""
 
-#: src/main/plot.c:117
+#: src/main/plot.c:118
 #, c-format
 msgid ""
 "log - axis(), 'at' creation, _LARGE_ range: invalid {xy}axp or par; nint=%d\n"
 "\t axp[0:1]=(%g,%g), usr[0:1]=(%g,%g); i=%d, ni=%d"
 msgstr ""
 
-#: src/main/plot.c:137
+#: src/main/plot.c:138
 #, c-format
 msgid ""
 "log - axis(), 'at' creation, _MEDIUM_ range: invalid {xy}axp or par;\n"
 "\t axp[0]= %g, usr[0:1]=(%g,%g)"
 msgstr ""
 
-#: src/main/plot.c:162
+#: src/main/plot.c:163
 #, c-format
 msgid ""
 "log - axis(), 'at' creation, _SMALL_ range: invalid {xy}axp or par;\n"
 "\t axp[0]= %g, usr[0:1]=(%g,%g)"
 msgstr ""
 
-#: src/main/plot.c:177
+#: src/main/plot.c:178
 #, c-format
 msgid "log - axis(), 'at' creation: INVALID {xy}axp[3] = %g"
 msgstr ""
@@ -7111,7 +7094,7 @@ msgid "an xdr complex data read error occurred"
 msgstr "произошла ошибка чтения комплексных xdr-данных"
 
 #: src/main/saveload.c:1780 src/main/serialize.c:1998
-#: src/main/serialize.c:2615 src/modules/internet/internet.c:512
+#: src/main/serialize.c:2615 src/modules/internet/internet.c:513
 #: src/modules/internet/internet.c:588 src/modules/internet/internet.c:698
 msgid "write failed"
 msgstr "запись не удалась"
@@ -7931,9 +7914,9 @@ msgid "incompatible types (from %s to %s) in '[[' assignment"
 msgstr "несовместимые типы (от %s до %s) в [[ присвоении"
 
 #: src/main/subassign.c:1936 src/main/subscript.c:152 src/main/subscript.c:154
-#: src/main/subscript.c:283 src/main/subscript.c:285 src/main/subscript.c:895
-#: src/main/subscript.c:897 src/main/subscript.c:988 src/main/subscript.c:990
-#: src/main/subset.c:1153
+#: src/main/subscript.c:283 src/main/subscript.c:285 src/main/subscript.c:912
+#: src/main/subscript.c:914 src/main/subscript.c:1009
+#: src/main/subscript.c:1011 src/main/subset.c:1153
 #, c-format
 msgid "invalid subscript type '%s'"
 msgstr "неправильный тип подгруппы '%s'"
@@ -7997,19 +7980,19 @@ msgstr "отрицательные значения в индексе матри
 msgid "(subscript) logical subscript too long"
 msgstr "(subscript) логический индекс слишком велик"
 
-#: src/main/subscript.c:659 src/main/subscript.c:714
+#: src/main/subscript.c:676 src/main/subscript.c:731
 msgid "only 0's may be mixed with negative subscripts"
 msgstr "только нули могут смешиваться с отрицательными индексами"
 
-#: src/main/subscript.c:687
+#: src/main/subscript.c:704
 msgid "subscript too large for 32-bit R"
 msgstr ""
 
-#: src/main/subscript.c:886
+#: src/main/subscript.c:903
 msgid "no 'dimnames' attribute for array"
 msgstr "у многомерной матрицы нет атрибута 'dimnames'"
 
-#: src/main/subscript.c:926
+#: src/main/subscript.c:943
 msgid "subscripting on non-vector"
 msgstr "индексирование не-вектора"
 
@@ -8563,8 +8546,9 @@ msgid "can only open URLs for reading"
 msgstr "соединение не открыто для чтения"
 
 #: src/modules/internet/internet.c:115
-msgid "for https:// URLs use setInternet2(TRUE)"
-msgstr ""
+#, fuzzy
+msgid "for https:// URLs use method = \"wininet\""
+msgstr "тип '%s' не поддерживается"
 
 #: src/modules/internet/internet.c:350 src/modules/internet/internet.c:354
 #: src/modules/internet/internet.c:360 src/modules/internet/internet.c:382
@@ -8574,18 +8558,18 @@ msgstr ""
 msgid "allocation of url connection failed"
 msgstr "выделение url-соединения не удалось"
 
-#: src/modules/internet/internet.c:480 src/modules/internet/internet.c:576
+#: src/modules/internet/internet.c:481 src/modules/internet/internet.c:576
 #: src/modules/internet/internet.c:685 src/modules/internet/libcurl.c:370
 #: src/modules/internet/libcurl.c:383
 msgid "Download progress"
 msgstr "Процент загрузки"
 
-#: src/modules/internet/internet.c:502
+#: src/modules/internet/internet.c:503
 #, c-format
 msgid "cannot open URL '%s', reason '%s'"
 msgstr "не могу открыть URL '%s' по причине '%s'"
 
-#: src/modules/internet/internet.c:508 src/modules/internet/internet.c:535
+#: src/modules/internet/internet.c:509 src/modules/internet/internet.c:535
 #: src/modules/internet/internet.c:658 src/modules/internet/libcurl.c:411
 #, c-format
 msgid "cannot open destfile '%s', reason '%s'"
@@ -8635,16 +8619,16 @@ msgstr "загруженный размер %d != сообщенному раз�
 msgid "cannot open URL '%s'"
 msgstr "не могу открыть URL '%s'"
 
-#: src/modules/internet/internet.c:758
+#: src/modules/internet/internet.c:756
 msgid "unsupported URL scheme"
 msgstr "не поддерживаемая схема URL"
 
-#: src/modules/internet/internet.c:781 src/modules/internet/internet.c:951
+#: src/modules/internet/internet.c:777 src/modules/internet/internet.c:946
 #, c-format
 msgid "cannot open: HTTP status was '%d %s'"
 msgstr "не могу открыть: статус HTTP был '%d %s'"
 
-#: src/modules/internet/internet.c:791 src/modules/internet/internet.c:966
+#: src/modules/internet/internet.c:787 src/modules/internet/internet.c:961
 #: src/modules/internet/libcurl.c:283
 #, c-format
 msgid "Content type '%s' length %0.0f byte (%0.1f MB)"
@@ -8653,7 +8637,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/modules/internet/internet.c:795 src/modules/internet/internet.c:968
+#: src/modules/internet/internet.c:791 src/modules/internet/internet.c:963
 #: src/modules/internet/libcurl.c:286
 #, c-format
 msgid "Content type '%s' length %d byte (%d KB)"
@@ -8662,7 +8646,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/modules/internet/internet.c:799 src/modules/internet/internet.c:970
+#: src/modules/internet/internet.c:795 src/modules/internet/internet.c:965
 #: src/modules/internet/libcurl.c:289
 #, c-format
 msgid "Content type '%s' length %d byte"
@@ -8671,22 +8655,22 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/modules/internet/internet.c:802
+#: src/modules/internet/internet.c:798
 #, c-format
 msgid "Content type '%s' length unknown"
 msgstr ""
 
-#: src/modules/internet/internet.c:846
+#: src/modules/internet/internet.c:842
 #, c-format
 msgid "ftp data connection made, file length %ld bytes\n"
 msgstr ""
 
-#: src/modules/internet/internet.c:848
+#: src/modules/internet/internet.c:844
 msgid "ftp data connection made, file length unknown\n"
 msgstr ""
 
-#: src/modules/internet/internet.c:922 src/modules/internet/internet.c:936
-#: src/modules/internet/internet.c:1022 src/modules/internet/internet.c:1031
+#: src/modules/internet/internet.c:917 src/modules/internet/internet.c:931
+#: src/modules/internet/internet.c:1019 src/modules/internet/internet.c:1028
 #, c-format
 msgid "InternetOpenUrl failed: '%s'"
 msgstr "'InternetOpenUrl' не удалось: '%s'"
@@ -8742,132 +8726,132 @@ msgstr "длины экспортируемых и импортируемых и
 msgid "'curl_multi_wait()' function failed, code %d"
 msgstr ""
 
-#: src/modules/internet/nanoftp.c:286 src/modules/internet/nanoftp.c:299
-#: src/modules/internet/nanoftp.c:310 src/modules/internet/nanoftp.c:344
-#: src/modules/internet/nanoftp.c:354
+#: src/modules/internet/nanoftp.c:285 src/modules/internet/nanoftp.c:298
+#: src/modules/internet/nanoftp.c:309 src/modules/internet/nanoftp.c:343
+#: src/modules/internet/nanoftp.c:353
 msgid "RxmlNanoFTPScanURL: overlong (invalid?) URL"
 msgstr "RxmlNanoFTPScanURL: чересчур длинные (неправильные?) URL"
 
-#: src/modules/internet/nanoftp.c:387
+#: src/modules/internet/nanoftp.c:386
 msgid "removing FTP proxy info"
 msgstr "удаление информации FTP-прокси"
 
-#: src/modules/internet/nanoftp.c:389
+#: src/modules/internet/nanoftp.c:388
 #, c-format
 msgid "using FTP proxy '%s'"
 msgstr "использую FTP-прокси '%s'"
 
-#: src/modules/internet/nanoftp.c:400 src/modules/internet/nanoftp.c:429
+#: src/modules/internet/nanoftp.c:399 src/modules/internet/nanoftp.c:428
 msgid "RxmlNanoFTPScanProxy: overlong (invalid?) URL"
 msgstr "RxmlNanoFTPScanProxy: чересчур длинные (неправильные?) URL"
 
-#: src/modules/internet/nanoftp.c:449
+#: src/modules/internet/nanoftp.c:448
 #, fuzzy
 msgid "error allocating FTP context"
 msgstr "ошибка записи в соединение"
 
-#: src/modules/internet/nanoftp.c:569
+#: src/modules/internet/nanoftp.c:568
 #, c-format
 msgid "RxmlNanoFTPGetMore : buffer full %d"
 msgstr ""
 
-#: src/modules/internet/nanoftp.c:578
+#: src/modules/internet/nanoftp.c:577
 #, fuzzy
 msgid "recv failed"
 msgstr "чтение не удалось"
 
-#: src/modules/internet/nanoftp.c:583
+#: src/modules/internet/nanoftp.c:582
 #, c-format
 msgid "RxmlNanoFTPGetMore : read %d [%d - %d]"
 msgstr ""
 
-#: src/modules/internet/nanoftp.c:669
+#: src/modules/internet/nanoftp.c:668
 #, c-format
 msgid "Got %d"
 msgstr ""
 
-#: src/modules/internet/nanoftp.c:744 src/modules/internet/nanoftp.c:770
-#: src/modules/internet/nanoftp.c:924 src/modules/internet/nanoftp.c:944
-#: src/modules/internet/nanoftp.c:983 src/modules/internet/nanoftp.c:1012
-#: src/modules/internet/nanoftp.c:1033 src/modules/internet/nanoftp.c:1149
-#: src/modules/internet/nanoftp.c:1213 src/modules/internet/nanoftp.c:1260
-#: src/modules/internet/nanoftp.c:1280
+#: src/modules/internet/nanoftp.c:743 src/modules/internet/nanoftp.c:769
+#: src/modules/internet/nanoftp.c:923 src/modules/internet/nanoftp.c:943
+#: src/modules/internet/nanoftp.c:982 src/modules/internet/nanoftp.c:1011
+#: src/modules/internet/nanoftp.c:1032 src/modules/internet/nanoftp.c:1148
+#: src/modules/internet/nanoftp.c:1212 src/modules/internet/nanoftp.c:1259
+#: src/modules/internet/nanoftp.c:1279
 #, fuzzy
 msgid "send failed"
 msgstr "чтение не удалось"
 
-#: src/modules/internet/nanoftp.c:830
+#: src/modules/internet/nanoftp.c:829
 msgid "cannot resolve host"
 msgstr "не могу определить адрес хоста"
 
-#: src/modules/internet/nanoftp.c:860
+#: src/modules/internet/nanoftp.c:859
 msgid "failed to connect to server"
 msgstr "не удалось связаться с сервером"
 
-#: src/modules/internet/nanoftp.c:871
+#: src/modules/internet/nanoftp.c:870
 msgid "failed to get response from server"
 msgstr "не удалось получить ответ сервера"
 
-#: src/modules/internet/nanoftp.c:1095
+#: src/modules/internet/nanoftp.c:1094
 msgid "FTP server asking for ACCNT on anonymous"
 msgstr ""
 
-#: src/modules/internet/nanoftp.c:1134
+#: src/modules/internet/nanoftp.c:1133
 msgid "RxmlNanoFTPGetConnection: failed to create socket"
 msgstr "'RxmlNanoFTPGetConnection': не удалось создать сокет"
 
-#: src/modules/internet/nanoftp.c:1170
+#: src/modules/internet/nanoftp.c:1169
 #, fuzzy
 msgid "Invalid answer to PASV"
 msgstr "неправильный разделитель"
 
-#: src/modules/internet/nanoftp.c:1180
+#: src/modules/internet/nanoftp.c:1179
 msgid "failed to create a data connection"
 msgstr "не удалось создать соединение с данными"
 
-#: src/modules/internet/nanoftp.c:1188
+#: src/modules/internet/nanoftp.c:1187
 msgid "failed to bind a port"
 msgstr "не удалось привязать порт"
 
-#: src/modules/internet/nanoftp.c:1195
+#: src/modules/internet/nanoftp.c:1194
 #, c-format
 msgid "could not listen on port %d"
 msgstr "не могу прослушать порт %d"
 
-#: src/modules/internet/nanohttp.c:361 src/modules/internet/nanohttp.c:389
-#: src/modules/internet/nanohttp.c:398
+#: src/modules/internet/nanohttp.c:360 src/modules/internet/nanohttp.c:388
+#: src/modules/internet/nanohttp.c:397
 msgid "RxmlNanoHTTPScanURL: overlong (invalid?) URL"
 msgstr "RxmlNanoHTTPScanURL: чересчур длинные (неправильные?) URL"
 
-#: src/modules/internet/nanohttp.c:432
+#: src/modules/internet/nanohttp.c:431
 msgid "removing HTTP proxy info"
 msgstr "удаление информации HTTP-прокси"
 
-#: src/modules/internet/nanohttp.c:434
+#: src/modules/internet/nanohttp.c:433
 #, c-format
 msgid "using HTTP proxy '%s'"
 msgstr "использую HTTP-прокси '%s'"
 
-#: src/modules/internet/nanohttp.c:445 src/modules/internet/nanohttp.c:481
+#: src/modules/internet/nanohttp.c:444 src/modules/internet/nanohttp.c:480
 msgid "RxmlNanoHTTPScanProxy: overlong (invalid?) URL"
 msgstr "RxmlNanoHTTPScanProxy: чересчур длинные (неправильные?) URL"
 
-#: src/modules/internet/nanohttp.c:1115
+#: src/modules/internet/nanohttp.c:1114
 #, c-format
 msgid "unable to resolve '%s'"
 msgstr "не могу разрешить '%s'"
 
-#: src/modules/internet/nanohttp.c:1148
+#: src/modules/internet/nanohttp.c:1147
 #, c-format
 msgid "connected to '%s' on port %d."
 msgstr "соединение с '%s' через порт %d."
 
-#: src/modules/internet/nanohttp.c:1153
+#: src/modules/internet/nanohttp.c:1152
 #, c-format
 msgid "unable to connect to '%s' on port %d."
 msgstr "не могу соединиться с '%s' через порт %d."
 
-#: src/modules/internet/nanohttp.c:1417
+#: src/modules/internet/nanohttp.c:1416
 #, c-format
 msgid "Error: overflowed buffer by %d byte\n"
 msgid_plural "Error: overflowed buffer by %d bytes\n"
@@ -8875,66 +8859,66 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/modules/internet/nanohttp.c:1444
+#: src/modules/internet/nanohttp.c:1443
 msgid ""
 "Proxy authentication failed:\tplease re-enter the credentials or hit Cancel"
 msgstr ""
 
-#: src/modules/internet/nanohttp.c:1458
+#: src/modules/internet/nanohttp.c:1457
 #, c-format
 msgid "redirect to: '%s'"
 msgstr "перенаправление в: '%s'"
 
-#: src/modules/internet/nanohttp.c:1469
+#: src/modules/internet/nanohttp.c:1468
 msgid "too many redirects, aborting ..."
 msgstr "слишком много перенаправлений, отключаюсь ..."
 
-#: src/modules/internet/nanohttp.c:1482
+#: src/modules/internet/nanohttp.c:1481
 #, c-format
 msgid "Code %d, content-type '%s'"
 msgstr ""
 
-#: src/modules/internet/nanohttp.c:1485
+#: src/modules/internet/nanohttp.c:1484
 #, c-format
 msgid "Code %d, no content-type"
 msgstr ""
 
-#: src/modules/internet/Rhttpd.c:1187
+#: src/modules/internet/Rhttpd.c:1185
 #, fuzzy
 msgid "unable to create socket"
 msgstr "не могу создать 'pixmap'"
 
-#: src/modules/internet/Rhttpd.c:1205
+#: src/modules/internet/Rhttpd.c:1203
 #, fuzzy, c-format
 msgid "unable to bind socket to TCP port %d"
 msgstr "не могу соединиться с '%s' через порт %d."
 
-#: src/modules/internet/Rhttpd.c:1211
+#: src/modules/internet/Rhttpd.c:1209
 #, fuzzy, c-format
 msgid "cannot listen to TCP port %d"
 msgstr "не могу прослушать порт %d"
 
-#: src/modules/internet/Rhttpd.c:1259
+#: src/modules/internet/Rhttpd.c:1257
 msgid "invalid bind address specification"
 msgstr "неправильная спецификация адреса связи"
 
-#: src/modules/internet/sockconn.c:59
+#: src/modules/internet/sockconn.c:57
 #, fuzzy, c-format
 msgid "port %d cannot be opened"
 msgstr "zip файл '%s' не может быть открыт"
 
-#: src/modules/internet/sockconn.c:74
+#: src/modules/internet/sockconn.c:72
 #, fuzzy
 msgid "problem in listening on this socket"
 msgstr "проблема с обрезкой файла истории"
 
-#: src/modules/internet/sockconn.c:85
+#: src/modules/internet/sockconn.c:83
 #, fuzzy, c-format
 msgid "%s:%d cannot be opened"
 msgstr "zip файл '%s' не может быть открыт"
 
-#: src/modules/internet/sockconn.c:179 src/modules/internet/sockconn.c:183
-#: src/modules/internet/sockconn.c:189 src/modules/internet/sockconn.c:202
+#: src/modules/internet/sockconn.c:177 src/modules/internet/sockconn.c:181
+#: src/modules/internet/sockconn.c:187 src/modules/internet/sockconn.c:200
 msgid "allocation of socket connection failed"
 msgstr "не удалось размещение socket-соединения"
 
@@ -9657,6 +9641,11 @@ msgstr "pnchisq(x=%g, ..): не сошлось на %d итерации."
 msgid "deriv = %d > %d (= n_max)\n"
 msgstr "deriv = %d > %d (= n_max)\n"
 
+#: src/nmath/qgamma.c:153
+#, c-format
+msgid "value of shape (%g) is extremely small: results may be unreliable"
+msgstr ""
+
 #: src/nmath/rmultinom.c:78
 #, c-format
 msgid "rbinom: probability sum should be 1, but is %g"
@@ -9794,29 +9783,29 @@ msgstr ""
 msgid "Save workspace image? [y/n/c]: "
 msgstr ""
 
-#: src/unix/sys-std.c:1087 src/unix/sys-std.c:1253
+#: src/unix/sys-std.c:1087 src/unix/sys-std.c:1256
 #, c-format
 msgid "problem in saving the history file '%s'"
 msgstr "проблема при сохранении файла истории '%s'"
 
-#: src/unix/sys-std.c:1187
+#: src/unix/sys-std.c:1190
 #, fuzzy
 msgid "Enter file name: "
 msgstr "неправильное имя файла"
 
-#: src/unix/sys-std.c:1230 src/unix/sys-std.c:1232
+#: src/unix/sys-std.c:1233 src/unix/sys-std.c:1235
 msgid "no history mechanism available"
 msgstr "механизм истории недоступен"
 
-#: src/unix/sys-std.c:1259
+#: src/unix/sys-std.c:1262
 msgid "problem in truncating the history file"
 msgstr "проблема с обрезкой файла истории"
 
-#: src/unix/sys-std.c:1261 src/unix/sys-std.c:1263
+#: src/unix/sys-std.c:1264 src/unix/sys-std.c:1266
 msgid "no history available to save"
 msgstr "нет истории, чтобы сохранить"
 
-#: src/unix/sys-std.c:1275
+#: src/unix/sys-std.c:1278
 msgid "invalid timestamp"
 msgstr "неправильная временная метка"
 
@@ -9908,6 +9897,15 @@ msgstr "модуль X11 нельзя загрузить"
 #: src/unix/X11.c:145 src/unix/X11.c:151 src/unix/X11.c:157 src/unix/X11.c:163
 msgid "X11 is not available"
 msgstr "X11 недоступен"
+
+#~ msgid "sockets are not available on this system"
+#~ msgstr "для этой системы сокеты недоступны"
+
+#, fuzzy
+#~ msgid ""
+#~ "https:// URLs are not supported by the default method: trying \"libcurl"
+#~ "\"\n"
+#~ msgstr "тип '%s' не поддерживается"
 
 #~ msgid "argument must be a closure"
 #~ msgstr "аргумент должен быть замыканием"

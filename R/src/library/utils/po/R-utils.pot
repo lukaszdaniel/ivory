@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.3.0\n"
-"POT-Creation-Date: 2015-07-07 21:38\n"
+"POT-Creation-Date: 2015-08-18 13:11\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -201,10 +201,13 @@ msgstr ""
 #: R/windows/download.file.R: 0
 #: R/windows/download.file.R: 0
 #: R/windows/download.file.R: 0
+#: R/windows/download.file.R: 0
+#. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
+#. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
 #. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
@@ -478,6 +481,13 @@ msgstr ""
 #. R/help.R: stop("'topic' should be a name, length-one character vector or reserved word")
 
 msgid "'topic' should be a name, length-one character vector or reserved word"
+msgstr ""
+
+
+#: R/windows/sysutils.R: 0
+#. R/windows/sysutils.R: stop("'use != NA' option is defunct")
+
+msgid "'use != NA' option is defunct"
 msgstr ""
 
 
@@ -2053,16 +2063,9 @@ msgstr ""
 
 
 #: R/packages.R: 0
-#. R/packages.R: stop("cannot choose a BioC mirror non-interactively")
+#. R/packages.R: gettextf("cannot choose a %s mirror non-interactively", label)
 
-msgid "cannot choose a BioC mirror non-interactively"
-msgstr ""
-
-
-#: R/packages.R: 0
-#. R/packages.R: stop("cannot choose a CRAN mirror non-interactively")
-
-msgid "cannot choose a CRAN mirror non-interactively"
+msgid "cannot choose a %s mirror non-interactively"
 msgstr ""
 
 
@@ -2860,10 +2863,10 @@ msgstr ""
 
 #: R/unix/download.file.R: 0
 #: R/windows/download.file.R: 0
-#. R/unix/download.file.R: stop("method 'lynx' is defunct as from R 3.1.0", domain = "R-utils")
-#. R/windows/download.file.R: stop("method 'lynx' is defunct as from R 3.1.0", domain = "R-utils")
+#. R/unix/download.file.R: stop("method 'lynx' is defunct", domain = "R-utils")
+#. R/windows/download.file.R: stop("method 'lynx' is defunct", domain = "R-utils")
 
-msgid "method 'lynx' is defunct as from R 3.1.0"
+msgid "method 'lynx' is defunct"
 msgstr ""
 
 
@@ -3014,15 +3017,6 @@ msgstr ""
 #. R/question.R: gettextf("no documentation of type %s and topic %s (or error in processing help)",     sQuote(type), sQuote(topicExpr))
 
 msgid "no documentation of type %s and topic %s (or error in processing help)"
-msgstr ""
-
-
-#: R/unix/download.file.R: 0
-#: R/windows/download.file.R: 0
-#. R/unix/download.file.R: stop("no download method found")
-#. R/windows/download.file.R: stop("no download method found")
-
-msgid "no download method found"
 msgstr ""
 
 

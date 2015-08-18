@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-08-10 17:28\n"
+"POT-Creation-Date: 2015-08-18 12:52\n"
 "PO-Revision-Date: 2005-05-25 14:17+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -141,12 +141,8 @@ msgid "'r', 'g', and 'b' arguments must be in [0, maxColorValue]"
 msgstr "rgb값의 범위는[0,maxColorValue]이 나오지 않으면 되지 않습니다"
 
 #. R/unix/png.R: stop("'res' must be specified unless 'units = \"px\"'")
-#. R/windows/cairo.R: stop("'res' must be specified unless 'units = \"px\"'")
-#. R/windows/cairo.R: stop("'res' must be specified unless 'units = \"px\"'")
-#. R/windows/cairo.R: stop("'res' must be specified unless 'units = \"px\"'")
-#. R/windows/cairo.R: stop("'res' must be specified unless 'units = \"px\"'")
 #. R/windows/png.R: stop("'res' must be specified unless 'units = \"px\"'")
-#: R/unix/png.R:0 R/windows/cairo.R:0 R/windows/png.R:0
+#: R/unix/png.R:0 R/windows/png.R:0
 msgid "'res' must be specified unless 'units = \"px\"'"
 msgstr ""
 
@@ -429,17 +425,13 @@ msgstr "'x' 그리고 'y'의 값은 승순이 아니면 되지 않습니다"
 #. R/unix/quartz.R: gettextf("invalid '%s' argument", "title")
 #. R/unix/quartz.R: gettextf("invalid '%s' argument", "file")
 #. R/unix/x11.R: gettextf("invalid '%s' argument", "title")
-#. R/windows/cairo.R: gettextf("invalid '%s' argument", "filename")
-#. R/windows/cairo.R: gettextf("invalid '%s' argument", "filename")
-#. R/windows/cairo.R: gettextf("invalid '%s' argument", "filename")
-#. R/windows/cairo.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/windows.R: gettextf("invalid '%s' argument", "filename")
 #: R/cairo.R:0 R/postscript.R:0 R/unix/png.R:0 R/unix/quartz.R:0
-#: R/unix/x11.R:0 R/windows/cairo.R:0 R/windows/png.R:0 R/windows/windows.R:0
+#: R/unix/x11.R:0 R/windows/png.R:0 R/windows/windows.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "부적절한 'family' 인수입니다"

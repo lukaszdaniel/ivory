@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-07-07 21:36\n"
+"POT-Creation-Date: 2015-08-18 12:52\n"
 "PO-Revision-Date: 2015-01-17 13:33+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -648,17 +648,17 @@ msgstr "'by'一定得用数字，名字或逻辑值来指定列"
 msgid "'by.x' and 'by.y' arguments specify different numbers of columns"
 msgstr "'by.x'和'by.y'设定了不同数目的列"
 
+#. R/source.R: warning("'chdir = TRUE' makes no sense for a URL")
+#: R/source.R:0
+#, fuzzy
+msgid "'chdir = TRUE' makes no sense for a URL"
+msgstr "'chdir = TRUE'对URL来说没有意义"
+
 #. R/source.R: warning("'chdir = TRUE' option makes no sense for a connection")
 #: R/source.R:0
 #, fuzzy
 msgid "'chdir = TRUE' option makes no sense for a connection"
 msgstr "'chdir = TRUE'对联结来说没有任何意义"
-
-#. R/source.R: warning("'chdir = TRUE' option makes no sense for an URL")
-#: R/source.R:0
-#, fuzzy
-msgid "'chdir = TRUE' option makes no sense for an URL"
-msgstr "'chdir = TRUE'对URL来说没有意义"
 
 #. R/load.R: gettextf("'compress = \"%s\"' option is invalid", compress)
 #: R/load.R:0
@@ -3051,7 +3051,12 @@ msgstr "对角替换值的长度不对"
 msgid "replacing element in non-existent column: %s"
 msgstr "替换不存在列里的单元："
 
-#. R/namespace.R: gettext("replacing local value with import %s when loading namespace %s")
+#. R/namespace.R: gettext("replacing local value with import %s when loading %s")
+#: R/namespace.R:0
+#, fuzzy
+msgid "replacing local value with import %s when loading %s"
+msgstr "在输入%2$s时局部值将被引进值%1$s代替"
+
 #. R/namespace.R: gettext("replacing local value with import %s when loading namespace %s")
 #: R/namespace.R:0
 #, fuzzy

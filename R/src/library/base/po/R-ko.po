@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-07-07 21:36\n"
+"POT-Creation-Date: 2015-08-18 12:52\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -651,17 +651,17 @@ msgstr "'by' must specify column(s) as numbers, names or logical"
 msgid "'by.x' and 'by.y' arguments specify different numbers of columns"
 msgstr "'by.x' 와 'by.y' 가 지정하는 열의 개수가 다릅니다 "
 
+#. R/source.R: warning("'chdir = TRUE' makes no sense for a URL")
+#: R/source.R:0
+#, fuzzy
+msgid "'chdir = TRUE' makes no sense for a URL"
+msgstr "'chdir = TRUE' 은 URL 이 아닙니다 "
+
 #. R/source.R: warning("'chdir = TRUE' option makes no sense for a connection")
 #: R/source.R:0
 #, fuzzy
 msgid "'chdir = TRUE' option makes no sense for a connection"
 msgstr "'chdir = TRUE' 는 연결과 아무런 관계가 없습니다 "
-
-#. R/source.R: warning("'chdir = TRUE' option makes no sense for an URL")
-#: R/source.R:0
-#, fuzzy
-msgid "'chdir = TRUE' option makes no sense for an URL"
-msgstr "'chdir = TRUE' 은 URL 이 아닙니다 "
 
 #. R/load.R: gettextf("'compress = \"%s\"' option is invalid", compress)
 #: R/load.R:0
@@ -3077,7 +3077,12 @@ msgstr "치환 대각의 길이가 잘못되었습니다 "
 msgid "replacing element in non-existent column: %s"
 msgstr "존재하지 않는 열의 요소들을 다음의 항목으로 대체합니다 "
 
-#. R/namespace.R: gettext("replacing local value with import %s when loading namespace %s")
+#. R/namespace.R: gettext("replacing local value with import %s when loading %s")
+#: R/namespace.R:0
+#, fuzzy
+msgid "replacing local value with import %s when loading %s"
+msgstr "replacing local value with import %s when loading %s"
+
 #. R/namespace.R: gettext("replacing local value with import %s when loading namespace %s")
 #: R/namespace.R:0
 #, fuzzy

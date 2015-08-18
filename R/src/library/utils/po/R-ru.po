@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-07-07 21:38\n"
+"POT-Creation-Date: 2015-08-18 13:11\n"
 "PO-Revision-Date: 2015-01-17 15:55+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -178,9 +178,11 @@ msgid "'%s' argument must be a character vector"
 msgstr "'url' должен быть непустой текстовой строкой"
 
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
+#. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
+#. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
 #. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
@@ -406,6 +408,11 @@ msgid "'topic' should be a name, length-one character vector or reserved word"
 msgstr ""
 "'topic' должен быть именем, текстовой строкой единичной длины или "
 "зарезервированным словом"
+
+#. R/windows/sysutils.R: stop("'use != NA' option is defunct")
+#: R/windows/sysutils.R:0
+msgid "'use != NA' option is defunct"
+msgstr ""
 
 #. R/packageStatus.R: gettext("(each package appears only once)", domain = "R-utils")
 #: R/packageStatus.R:0
@@ -1694,14 +1701,10 @@ msgstr "могу принимать вызовы только на локаль�
 msgid "cancelled by user"
 msgstr ""
 
-#. R/packages.R: stop("cannot choose a BioC mirror non-interactively")
+#. R/packages.R: gettextf("cannot choose a %s mirror non-interactively", label)
 #: R/packages.R:0
-msgid "cannot choose a BioC mirror non-interactively"
-msgstr "не могу выбрать зеркало BioC неинтерактивно"
-
-#. R/packages.R: stop("cannot choose a CRAN mirror non-interactively")
-#: R/packages.R:0
-msgid "cannot choose a CRAN mirror non-interactively"
+#, fuzzy
+msgid "cannot choose a %s mirror non-interactively"
 msgstr "не могу выбрать зеркало CRAN неинтерактивно"
 
 #. R/roman.R: stop("cannot coerce 'x' to roman")
@@ -2311,11 +2314,12 @@ msgstr "метаданные пакета %s повреждены"
 msgid "metadata of package '%s' is corrupt"
 msgstr "метаданные пакета '%s' повреждены"
 
-#. R/unix/download.file.R: stop("method 'lynx' is defunct as from R 3.1.0", domain = "R-utils")
-#. R/windows/download.file.R: stop("method 'lynx' is defunct as from R 3.1.0", domain = "R-utils")
+#. R/unix/download.file.R: stop("method 'lynx' is defunct", domain = "R-utils")
+#. R/windows/download.file.R: stop("method 'lynx' is defunct", domain = "R-utils")
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
-msgid "method 'lynx' is defunct as from R 3.1.0"
-msgstr ""
+#, fuzzy
+msgid "method 'lynx' is defunct"
+msgstr "метод 'mailx' только для Unix"
 
 #. R/windows/create.post.R: stop("method 'mailx' is Unix-only")
 #: R/windows/create.post.R:0
@@ -2428,12 +2432,6 @@ msgstr "для функции %s и подписи %s нет документа�
 #: R/question.R:0
 msgid "no documentation of type %s and topic %s (or error in processing help)"
 msgstr "нет документации на тип %s и раздел %s (или ошибка в обработке помощи)"
-
-#. R/unix/download.file.R: stop("no download method found")
-#. R/windows/download.file.R: stop("no download method found")
-#: R/unix/download.file.R:0 R/windows/download.file.R:0
-msgid "no download method found"
-msgstr "не найдено метода скачивания"
 
 #. R/summRprof.R: stop("no events were recorded")
 #: R/summRprof.R:0
@@ -3454,6 +3452,13 @@ msgid_plural "packages %s are not available (for %s)"
 msgstr[0] "пакет '%s' недоступен (для %s)"
 msgstr[1] "пакеты %s недоступны (для %s)"
 msgstr[2] "пакеты %s недоступны (для %s)"
+
+#, fuzzy
+#~ msgid "mirror non-interactively"
+#~ msgstr "не могу выбрать зеркало BioC неинтерактивно"
+
+#~ msgid "no download method found"
+#~ msgstr "не найдено метода скачивания"
 
 #~ msgid ""
 #~ "type == \"both\" cannot be used if 'available' or 'contriburl' is "

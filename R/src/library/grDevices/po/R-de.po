@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-08-10 17:28\n"
+"POT-Creation-Date: 2015-08-18 12:52\n"
 "PO-Revision-Date: 2015-01-17 15:00+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-Core <R-core@r-project.org>\n"
@@ -141,12 +141,8 @@ msgid "'r', 'g', and 'b' arguments must be in [0, maxColorValue]"
 msgstr "RGB Werte müssen in [0, maxColorValue] liegen"
 
 #. R/unix/png.R: stop("'res' must be specified unless 'units = \"px\"'")
-#. R/windows/cairo.R: stop("'res' must be specified unless 'units = \"px\"'")
-#. R/windows/cairo.R: stop("'res' must be specified unless 'units = \"px\"'")
-#. R/windows/cairo.R: stop("'res' must be specified unless 'units = \"px\"'")
-#. R/windows/cairo.R: stop("'res' must be specified unless 'units = \"px\"'")
 #. R/windows/png.R: stop("'res' must be specified unless 'units = \"px\"'")
-#: R/unix/png.R:0 R/windows/cairo.R:0 R/windows/png.R:0
+#: R/unix/png.R:0 R/windows/png.R:0
 msgid "'res' must be specified unless 'units = \"px\"'"
 msgstr "'res' muss angegeben werden, außer 'units = \"px\"'"
 
@@ -427,17 +423,13 @@ msgstr "ansteigende 'x' und 'y' Werte erwarted"
 #. R/unix/quartz.R: gettextf("invalid '%s' argument", "title")
 #. R/unix/quartz.R: gettextf("invalid '%s' argument", "file")
 #. R/unix/x11.R: gettextf("invalid '%s' argument", "title")
-#. R/windows/cairo.R: gettextf("invalid '%s' argument", "filename")
-#. R/windows/cairo.R: gettextf("invalid '%s' argument", "filename")
-#. R/windows/cairo.R: gettextf("invalid '%s' argument", "filename")
-#. R/windows/cairo.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/windows.R: gettextf("invalid '%s' argument", "filename")
 #: R/cairo.R:0 R/postscript.R:0 R/unix/png.R:0 R/unix/quartz.R:0
-#: R/unix/x11.R:0 R/windows/cairo.R:0 R/windows/png.R:0 R/windows/windows.R:0
+#: R/unix/x11.R:0 R/windows/png.R:0 R/windows/windows.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "ungültiges erstes Argument"

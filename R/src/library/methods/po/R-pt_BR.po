@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-07-07 21:37\n"
+"POT-Creation-Date: 2015-08-18 12:53\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -761,6 +761,12 @@ msgstr ""
 #. R/trace.R: gettextf("For package %s", sQuote(object@packageName), domain = "R-methods")
 #: R/trace.R:0
 msgid "For package %s"
+msgstr ""
+
+#. R/RClassUtils.R: gettextf("Found more than one class %s in cache; using the first, from namespace '%s'",     dQuote(name), pkgs[1])
+#: R/RClassUtils.R:0
+msgid ""
+"Found more than one class %s in cache; using the first, from namespace '%s'"
 msgstr ""
 
 #. R/trace.R: gettextf("From source file %s", sQuote(object@sourceFile), domain = "R-methods")

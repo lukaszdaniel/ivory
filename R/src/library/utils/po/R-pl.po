@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-07 21:38\n"
+"POT-Creation-Date: 2015-08-18 13:11\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -167,9 +167,11 @@ msgid "'%s' argument must be a character vector"
 msgstr "argument '%s' musi być wektorem tekstowym"
 
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
+#. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
+#. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
 #. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
@@ -378,6 +380,11 @@ msgid "'topic' should be a name, length-one character vector or reserved word"
 msgstr ""
 "'topic' powinien być nazwą, wektorem tekstowym o długości jeden albo "
 "zarezerwowanym słowem"
+
+#. R/windows/sysutils.R: stop("'use != NA' option is defunct")
+#: R/windows/sysutils.R:0
+msgid "'use != NA' option is defunct"
+msgstr "opcja 'use != NA' została zlikwidowana"
 
 #. R/packageStatus.R: gettext("(each package appears only once)", domain = "R-utils")
 #: R/packageStatus.R:0
@@ -1653,15 +1660,10 @@ msgstr "można odbierać wywołania jedynie na lokalnej maszynie"
 msgid "cancelled by user"
 msgstr "anulowane przez użytkownika"
 
-#. R/packages.R: stop("cannot choose a BioC mirror non-interactively")
+#. R/packages.R: gettextf("cannot choose a %s mirror non-interactively", label)
 #: R/packages.R:0
-msgid "cannot choose a BioC mirror non-interactively"
-msgstr "nie można wybrać serweru lustrzanego BioC nieinteraktywnie"
-
-#. R/packages.R: stop("cannot choose a CRAN mirror non-interactively")
-#: R/packages.R:0
-msgid "cannot choose a CRAN mirror non-interactively"
-msgstr "nie można wybrać serweru lustrzanego CRAN nieinteraktywnie"
+msgid "cannot choose a %s mirror non-interactively"
+msgstr "nie można wybrać serweru lustrzanego %s nieinteraktywnie"
 
 #. R/roman.R: stop("cannot coerce 'x' to roman")
 #: R/roman.R:0
@@ -2258,11 +2260,11 @@ msgstr "metadane dla %s są uszkodzone"
 msgid "metadata of package '%s' is corrupt"
 msgstr "plik metadanych dla pakietu '%s' jest uszkodzony"
 
-#. R/unix/download.file.R: stop("method 'lynx' is defunct as from R 3.1.0", domain = "R-utils")
-#. R/windows/download.file.R: stop("method 'lynx' is defunct as from R 3.1.0", domain = "R-utils")
+#. R/unix/download.file.R: stop("method 'lynx' is defunct", domain = "R-utils")
+#. R/windows/download.file.R: stop("method 'lynx' is defunct", domain = "R-utils")
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
-msgid "method 'lynx' is defunct as from R 3.1.0"
-msgstr "metoda 'lynx' została zlikwidowana od wersji R 3.1.0"
+msgid "method 'lynx' is defunct"
+msgstr "metoda 'lynx' została zlikwidowana"
 
 #. R/windows/create.post.R: stop("method 'mailx' is Unix-only")
 #: R/windows/create.post.R:0
@@ -2375,12 +2377,6 @@ msgid "no documentation of type %s and topic %s (or error in processing help)"
 msgstr ""
 "brak dokumentacji o typie %s oraz temacie %s (lub błąd w przetwarzaniu "
 "pomocy)"
-
-#. R/unix/download.file.R: stop("no download method found")
-#. R/windows/download.file.R: stop("no download method found")
-#: R/unix/download.file.R:0 R/windows/download.file.R:0
-msgid "no download method found"
-msgstr "nie znaleziono metody pobierania"
 
 #. R/summRprof.R: stop("no events were recorded")
 #: R/summRprof.R:0
@@ -3425,6 +3421,13 @@ msgid_plural "packages %s are not available (for %s)"
 msgstr[0] "pakiet %s nie jest dostępny (dla '%s')"
 msgstr[1] "pakiety %s nie są dostępne (dla %s)"
 msgstr[2] "pakiety %s nie są dostępne (dla %s)"
+
+#, fuzzy
+#~ msgid "mirror non-interactively"
+#~ msgstr "nie można wybrać serweru lustrzanego BioC nieinteraktywnie"
+
+#~ msgid "no download method found"
+#~ msgstr "nie znaleziono metody pobierania"
 
 #~ msgid "Non-visible functions are asterisked"
 #~ msgstr "Niewidoczne funkcje są zaznaczone gwiazdką"

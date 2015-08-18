@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-07-07 21:38\n"
+"POT-Creation-Date: 2015-08-18 13:11\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -175,9 +175,11 @@ msgid "'%s' argument must be a character vector"
 msgstr "'url' muss eine nicht-leere Zeichenkette sein"
 
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
+#. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
+#. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
 #. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
@@ -405,6 +407,11 @@ msgid "'topic' should be a name, length-one character vector or reserved word"
 msgstr ""
 "'topic' sollte ein Name, ein Zeichenkettenvektor der Länge 1 oder ein "
 "reserviertes Word sein"
+
+#. R/windows/sysutils.R: stop("'use != NA' option is defunct")
+#: R/windows/sysutils.R:0
+msgid "'use != NA' option is defunct"
+msgstr ""
 
 #. R/packageStatus.R: gettext("(each package appears only once)", domain = "R-utils")
 #: R/packageStatus.R:0
@@ -1688,14 +1695,10 @@ msgstr "kann Aufrufe nur auf der lokalen Maschiene entgegennehmen"
 msgid "cancelled by user"
 msgstr ""
 
-#. R/packages.R: stop("cannot choose a BioC mirror non-interactively")
+#. R/packages.R: gettextf("cannot choose a %s mirror non-interactively", label)
 #: R/packages.R:0
-msgid "cannot choose a BioC mirror non-interactively"
-msgstr "kann keinen BioC-Spiegel nicht-interaktiv wählen"
-
-#. R/packages.R: stop("cannot choose a CRAN mirror non-interactively")
-#: R/packages.R:0
-msgid "cannot choose a CRAN mirror non-interactively"
+#, fuzzy
+msgid "cannot choose a %s mirror non-interactively"
 msgstr "kann keinen CRAN-Spiegel nicht-interaktiv nutzen"
 
 #. R/roman.R: stop("cannot coerce 'x' to roman")
@@ -2306,11 +2309,12 @@ msgstr "Metadaten für %s sind korrumpiert"
 msgid "metadata of package '%s' is corrupt"
 msgstr "Metadaten für Paket '%s' sind korrumpiert"
 
-#. R/unix/download.file.R: stop("method 'lynx' is defunct as from R 3.1.0", domain = "R-utils")
-#. R/windows/download.file.R: stop("method 'lynx' is defunct as from R 3.1.0", domain = "R-utils")
+#. R/unix/download.file.R: stop("method 'lynx' is defunct", domain = "R-utils")
+#. R/windows/download.file.R: stop("method 'lynx' is defunct", domain = "R-utils")
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
-msgid "method 'lynx' is defunct as from R 3.1.0"
-msgstr ""
+#, fuzzy
+msgid "method 'lynx' is defunct"
+msgstr "Methode 'mailx' nur unter UNIX"
 
 #. R/windows/create.post.R: stop("method 'mailx' is Unix-only")
 #: R/windows/create.post.R:0
@@ -2424,12 +2428,6 @@ msgstr "keine Doku für Funktion %s und Signatur %s"
 msgid "no documentation of type %s and topic %s (or error in processing help)"
 msgstr ""
 "keine Doku des Typs %s zum Thema %s (oder Fehler in der Hilfeverarbeitung)"
-
-#. R/unix/download.file.R: stop("no download method found")
-#. R/windows/download.file.R: stop("no download method found")
-#: R/unix/download.file.R:0 R/windows/download.file.R:0
-msgid "no download method found"
-msgstr "keine Downloadmethode gefunden"
 
 #. R/summRprof.R: stop("no events were recorded")
 #: R/summRprof.R:0
@@ -3412,6 +3410,13 @@ msgid "package %s is not available (for %s)"
 msgid_plural "packages %s are not available (for %s)"
 msgstr[0] "Paket %s ist nicht verfügbar (für %s)"
 msgstr[1] "Pakete %s sind nicht verfügbar (für %s)"
+
+#, fuzzy
+#~ msgid "mirror non-interactively"
+#~ msgstr "kann keinen BioC-Spiegel nicht-interaktiv wählen"
+
+#~ msgid "no download method found"
+#~ msgstr "keine Downloadmethode gefunden"
 
 #~ msgid ""
 #~ "type == \"both\" cannot be used if 'available' or 'contriburl' is "

@@ -148,6 +148,7 @@ src/nmath/pbinom.c
 src/nmath/pnbinom.c
 src/nmath/pnchisq.c
 src/nmath/polygamma.c
+src/nmath/qgamma.c
 src/nmath/rmultinom.c
 src/nmath/signrank.c
 src/nmath/snorm.c

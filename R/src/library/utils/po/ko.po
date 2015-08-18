@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-29 22:14+0200\n"
+"POT-Creation-Date: 2015-08-18 12:53+0200\n"
 "PO-Revision-Date: 2014-03-26 23:03-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -25,7 +25,7 @@ msgstr ""
 #: io.c:1071 io.c:1072 io.c:1073 stubs.c:39 stubs.c:59 windows/dialogs.c:169
 #: windows/dialogs.c:194 windows/dialogs.c:197 windows/dialogs.c:241
 #: windows/dialogs.c:278 windows/dialogs.c:289 windows/dialogs.c:313
-#: windows/dialogs.c:321 windows/util.c:111 windows/widgets.c:78
+#: windows/dialogs.c:321 windows/util.c:117 windows/widgets.c:78
 #: windows/widgets.c:81 windows/widgets.c:86
 #, c-format
 msgid "invalid '%s' argument"
@@ -140,28 +140,28 @@ msgstr "X11이 사용가능하지 않습니다"
 msgid "invalid '%s' specification"
 msgstr "유효하지 않은 '%s' 지정입니다"
 
-#: utils.c:62 windows/util.c:396 windows/util.c:405 windows/widgets.c:182
+#: utils.c:62 windows/util.c:402 windows/util.c:411 windows/widgets.c:182
 #: windows/widgets.c:188 windows/widgets.c:247 windows/widgets.c:253
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string"
 msgstr "'text'는 반드시 문자열이어야 합니다"
 
-#: utils.c:84
+#: utils.c:85
 #, fuzzy
 msgid "'hostname' argument must be a character vector of length 1"
 msgstr "'hostname'은 반드시 길이가 1인 문자형 벡터이어야 합니다"
 
-#: utils.c:90
+#: utils.c:91
 #, c-format
 msgid "'nsl()' was unable to resolve host '%s'"
 msgstr ""
 
-#: utils.c:97
+#: utils.c:98
 #, fuzzy
 msgid "unknown format returned by 'gethostbyname()'"
 msgstr "알수없는 형식이 'gethostbyname'에 의해서 반환되었습니다"
 
-#: utils.c:106
+#: utils.c:107
 #, fuzzy
 msgid "'nsl()' is not supported on this platform"
 msgstr "이 플랫폼에서는 nsl()는 지원되지 않습니다"
@@ -215,34 +215,34 @@ msgstr ""
 msgid "Registry key '%ls' not found"
 msgstr "레지스트리 키 '%ls'를 찾을 수 없습니다"
 
-#: windows/util.c:41
+#: windows/util.c:42
 msgid "unsupported version of Windows"
 msgstr "지원되지 않는 버전의 윈도우즈입니다"
 
-#: windows/util.c:275
+#: windows/util.c:281
 #, fuzzy, c-format
 msgid "'%s' argument must be a character vector or a raw vector"
 msgstr "인자는 반드시 문자형 벡터 또는  raw 벡터이어야 합니다"
 
-#: windows/util.c:312
+#: windows/util.c:318
 msgid "unable to open the clipboard"
 msgstr "클립보드를 열 수 없습니다"
 
-#: windows/util.c:317
+#: windows/util.c:323
 msgid "unable to write to the clipboard"
 msgstr "클립보드에 쓸 수 없습니다"
 
-#: windows/util.c:444
+#: windows/util.c:450
 #, fuzzy, c-format
 msgid "'%s' argument must be of length 1"
 msgstr "'%s'는 반드시 길이가 1이어야 합니다"
 
-#: windows/util.c:557
+#: windows/util.c:563
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'%s'은 반드시 리스트이어야 합니다"
 
-#: windows/util.c:561
+#: windows/util.c:567
 #, c-format
 msgid "'%s' element %d is not a window handle"
 msgstr "'%s'의 구성요소 %d는 윈도우 핸들이 아닙니다"

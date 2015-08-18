@@ -1414,14 +1414,9 @@ setRlibs <-
                                       collapse = " "))
                     miss <- R_runR2(Rcmd, "R_DEFAULT_PACKAGES=")
                     if(length(miss)) {
-                        msg3 <- if(length(grep("^importFrom\\(\"methods\"",
-                                               miss))) {
-                            strwrap("to your NAMESPACE (and ensure that your DESCRIPTION Imports field contains 'methods').")
-                        } else "to your NAMESPACE." #LUKI
                         out3 <- c(out3,
-                                  c("Consider adding", #LUKI
-                                    paste0("  ", miss),
-                                    msg3))
+                                  c(if(length(grep("^importFrom\\(\"methods\"", miss))) gettextf("Consider adding %s to your NAMESPACE (and ensure that your DESCRIPTION Imports field contains 'methods').", paste0("  ", miss), domain = "R-tools")
+				    else gettextf("Consider adding %s to your NAMESPACE.", paste0("  ", miss), domain = "R-tools")))
                     }
                 }
             } else
@@ -2809,37 +2804,34 @@ setRlibs <-
                     savefile <- savefiles[i]
                     if(length(grep("^  When (running|tangling|sourcing)", out,
                                    useBytes = TRUE))) {
-                        cat(" failed\n") #LUKI
-                        res <- c(res, #LUKI
-                                 paste("when running code in", sQuote(basename(file))),
-                                 "  ...",
+                        cat(" ", gettext("failed", domain = "R-tools"), "\n", sep ="")
+                        res <- c(res,
+                                 gettextf("when running code in %s ...", sQuote(basename(file)), domain = "R-tools"),
                                  utils::tail(out, as.numeric(Sys.getenv("_R_CHECK_VIGNETTES_NLINES_", "10"))))
                     } else if(status || ! " *** Run successfully completed ***" %in% out) {
                         ## (Need not be the final line if running under valgrind)
-                        cat(" failed to complete the test\n") #LUKI
-                        out <- c(out, "", "... incomplete output.  Crash?") #LUKI
-                        res <- c(res, #LUKI
-                                 paste("when running code in", sQuote(basename(file))),
-                                 "  ...",
+                        cat(" ", gettext("failed to complete the test", domain = "R-tools"), "\n", sep = "")
+                        out <- c(out, "", gettext("... incomplete output.  Crash?", domain = "R-tools"))
+                        res <- c(res,
+                                 gettextf("when running code in %s ...", sQuote(basename(file)), domain = "R-tools"),
                                  utils::tail(out, as.numeric(Sys.getenv("_R_CHECK_VIGNETTES_NLINES_", "10"))))
                     } else if (file.exists(savefile)) {
                         cmd <- paste0("invisible(tools::Rdiff('",
                                       outfile, "', '", savefile, "',TRUE,TRUE))")
                         out2 <- R_runR(cmd, R_opts2)
                         if(length(out2)) {
-                            print_time(t1b, t2b, NULL) #LUKI
-                            cat("\ndifferences from ", sQuote(basename(savefile)),
-                                "\n", sep = "")
+                            print_time(t1b, t2b, NULL)
+                            cat("\n", gettextf("differences from %s", sQuote(basename(savefile)), domain = "R-tools"), "\n", sep = "")
                             writeLines(c(out2, ""))
                         } else {
                             print_time(t1b, t2b, NULL)
-                            cat(" OK\n") #LUKI
+                            cat(" ", gettext("OK", domain = "R-tools"), "\n")
                             if (!config_val_to_logical(Sys.getenv("_R_CHECK_ALWAYS_LOG_VIGNETTE_OUTPUT_", use_valgrind)))
                                 unlink(outfile)
                         }
                     } else {
                         print_time(t1b, t2b, NULL)
-                        cat(gettext(" OK\n", domain = "R-tools"))
+                        cat(" ", gettext("OK", domain = "R-tools"), "\n", sep = "")
                         if (!config_val_to_logical(Sys.getenv("_R_CHECK_ALWAYS_LOG_VIGNETTE_OUTPUT_", use_valgrind)))
                             unlink(outfile)
                     }
@@ -2851,15 +2843,15 @@ setRlibs <-
                                 invert = TRUE, value = TRUE, useBytes = TRUE)
                 if(length(res)) {
                     if(length(grep("there is no package called", res,
-                                   useBytes = TRUE))) { #LUKI
-                        warningLog(Log, "Errors in running code in vignettes:")
+                                   useBytes = TRUE))) {
+                        warningLog(Log, gettext("Errors in running code in vignettes:", domain = "R-tool"))
                         printLog0(Log, paste(c(res, "", ""), collapse = "\n"))
-                    } else { #LUKI
-                        errorLog(Log, "Errors in running code in vignettes:")
+                    } else {
+                        errorLog(Log, gettext("Errors in running code in vignettes:", domain = "R-tools"))
                         printLog0(Log, paste(c(res, "", ""), collapse = "\n"))
                         maybe_exit(1L)
                     }
-                } else resultLog(Log, "OK") #LUKI
+                } else resultLog(Log, gettext("OK", domain = "R-tools"))
             }
                 
             if (do_build_vignettes) {

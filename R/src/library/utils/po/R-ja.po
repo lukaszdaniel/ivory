@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-07-07 21:38\n"
+"POT-Creation-Date: 2015-08-18 13:11\n"
 "PO-Revision-Date: 2012-02-26 14:23+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -167,9 +167,11 @@ msgid "'%s' argument must be a character vector"
 msgstr " 'url' は空でない文字列でなければなりません "
 
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
+#. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/unix/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
+#. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
 #. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "destfile")
 #. R/windows/download.file.R: gettextf("'%s' argument must be a length-one character vector", "url")
@@ -398,6 +400,11 @@ msgstr " 'tar' がゼロでない終了コード %d を返しました "
 #: R/help.R:0
 msgid "'topic' should be a name, length-one character vector or reserved word"
 msgstr " 'topic'は名前、長さ１の文字列、または予約語でなければなりません "
+
+#. R/windows/sysutils.R: stop("'use != NA' option is defunct")
+#: R/windows/sysutils.R:0
+msgid "'use != NA' option is defunct"
+msgstr ""
 
 #. R/packageStatus.R: gettext("(each package appears only once)", domain = "R-utils")
 #: R/packageStatus.R:0
@@ -1687,14 +1694,10 @@ msgstr " ローカルな機械上でのコールだけを受け取ることが�
 msgid "cancelled by user"
 msgstr ""
 
-#. R/packages.R: stop("cannot choose a BioC mirror non-interactively")
+#. R/packages.R: gettextf("cannot choose a %s mirror non-interactively", label)
 #: R/packages.R:0
-msgid "cannot choose a BioC mirror non-interactively"
-msgstr "BioCミラーの選択は対話的にしかできません "
-
-#. R/packages.R: stop("cannot choose a CRAN mirror non-interactively")
-#: R/packages.R:0
-msgid "cannot choose a CRAN mirror non-interactively"
+#, fuzzy
+msgid "cannot choose a %s mirror non-interactively"
 msgstr " CRANミラーの選択は対話的にしかできません "
 
 #. R/roman.R: stop("cannot coerce 'x' to roman")
@@ -2312,11 +2315,12 @@ msgstr " '%s' のメタデータは壊れています "
 msgid "metadata of package '%s' is corrupt"
 msgstr " パッケージ '%s' のメタデータは壊れています "
 
-#. R/unix/download.file.R: stop("method 'lynx' is defunct as from R 3.1.0", domain = "R-utils")
-#. R/windows/download.file.R: stop("method 'lynx' is defunct as from R 3.1.0", domain = "R-utils")
+#. R/unix/download.file.R: stop("method 'lynx' is defunct", domain = "R-utils")
+#. R/windows/download.file.R: stop("method 'lynx' is defunct", domain = "R-utils")
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
-msgid "method 'lynx' is defunct as from R 3.1.0"
-msgstr ""
+#, fuzzy
+msgid "method 'lynx' is defunct"
+msgstr " 'mailx' メソッドは Unix でのみ利用可能です "
 
 #. R/windows/create.post.R: stop("method 'mailx' is Unix-only")
 #: R/windows/create.post.R:0
@@ -2432,12 +2436,6 @@ msgid "no documentation of type %s and topic %s (or error in processing help)"
 msgstr ""
 " タイプ '%s' でトピック '%s' のドキュメントはありません(もしかするとヘルプの"
 "処理エラー) "
-
-#. R/unix/download.file.R: stop("no download method found")
-#. R/windows/download.file.R: stop("no download method found")
-#: R/unix/download.file.R:0 R/windows/download.file.R:0
-msgid "no download method found"
-msgstr " ダウンロードの方法が見付かりません "
 
 #. R/summRprof.R: stop("no events were recorded")
 #: R/summRprof.R:0
@@ -3370,6 +3368,13 @@ msgstr[0] " パッケージ %s が利用できません "
 msgid "package %s is not available (for %s)"
 msgid_plural "packages %s are not available (for %s)"
 msgstr[0] " パッケージ %s が利用できません "
+
+#, fuzzy
+#~ msgid "mirror non-interactively"
+#~ msgstr "BioCミラーの選択は対話的にしかできません "
+
+#~ msgid "no download method found"
+#~ msgstr " ダウンロードの方法が見付かりません "
 
 #~ msgid ""
 #~ "type == \"both\" cannot be used if 'available' or 'contriburl' is "

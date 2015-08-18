@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-07-29 22:14\n"
+"POT-Creation-Date: 2015-08-18 12:53\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -70,8 +70,7 @@ msgid "%s is of class %s"
 msgstr "클래스 '%s'에 대한 슬롯들"
 
 #. R/admin.R: gettextf("%s is using %s encoding", sQuote(basename(file)), sQuote(enc), domain = "R-tools")
-#. R/check.R: gettextf("%s is using %s encoding", sQuote(basename(file)), sQuote(enc), domain = "R-tools")
-#: R/admin.R:0 R/check.R:0
+#: R/admin.R:0
 msgid "%s is using %s encoding"
 msgstr ""
 
@@ -231,7 +230,7 @@ msgstr ""
 msgid "'R CMD build' failed"
 msgstr "R CMD build가 실패했습니다"
 
-#. R/QC.R: gettext("\n'Suggests' or 'Enhances' packages are not in mainstream repositories:",     domain = "R-tools")
+#. R/QC.R: gettext("'Suggests' or 'Enhances' packages are not in mainstream repositories:",     domain = "R-tools")
 #: R/QC.R:0
 msgid "'Suggests' or 'Enhances' packages are not in mainstream repositories:"
 msgstr ""
@@ -398,7 +397,7 @@ msgid ""
 "selectively is preferable."
 msgstr ""
 
-#. R/QC.R: gettext("\nAdditional repositories with no packages:", domain = "R-tools")
+#. R/QC.R: gettext("Additional repositories with no packages:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Additional repositories with no packages:"
 msgstr ""
@@ -540,7 +539,7 @@ msgstr ""
 msgid "Authors@R field gives persons with no valid roles:"
 msgstr ""
 
-#. R/QC.R: gettext("\nAuthors@R field should be a call to person(), or combine such calls.",     domain = "R-tools")
+#. R/QC.R: gettext("Authors@R field should be a call to person(), or combine such calls.", domain = "R-tools")
 #: R/QC.R:0
 msgid "Authors@R field should be a call to person(), or combine such calls."
 msgstr ""
@@ -557,7 +556,7 @@ msgstr ""
 msgid "Auto-generated content requiring editing in Rd object %s:"
 msgstr "다음은 Rd 객체 '%s'를 편집하는데 필요한 자동으로 생성된 컨텐츠입니다:"
 
-#. R/QC.R: gettext("\nAvailability using 'Additional_repositories' specification:", domain = "R-tools")
+#. R/QC.R: gettext("Availability using 'Additional_repositories' specification:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Availability using 'Additional_repositories' specification:"
 msgstr ""
@@ -584,12 +583,12 @@ msgstr "문서 객체 '%s'내에서 올바르지 않은 \\usage 라인들을 찾
 msgid "BibTeX errors:"
 msgstr ""
 
-#. R/QC.R: gettextf("\nCRAN repository db conflicts: %s", sQuote(y), domain = "R-tools")
+#. R/QC.R: gettextf("CRAN repository db conflicts: %s", sQuote(y), domain = "R-tools")
 #: R/QC.R:0
 msgid "CRAN repository db conflicts: %s"
 msgstr ""
 
-#. R/QC.R: gettextf("\nCRAN repository db overrides: %s", sQuote(y), domain = "R-tools")
+#. R/QC.R: gettextf("CRAN repository db overrides: %s", sQuote(y), domain = "R-tools")
 #: R/QC.R:0
 msgid "CRAN repository db overrides: %s"
 msgstr ""
@@ -657,13 +656,18 @@ msgstr ""
 msgid "Check results for packages in dir '%s':"
 msgstr ""
 
+#. R/checktools.R: gettextf("Check: %s, Result: %s\n", x$Check, x$Status, domain = "R-tools")
+#: R/checktools.R:0
+msgid "Check: %s, Result: %s"
+msgstr ""
+
 #. R/CRANtools.R: gettextf("Checking %s", m, domain = "R-tools")
 #: R/CRANtools.R:0
 #, fuzzy
 msgid "Checking %s"
 msgstr "%s를 실행중입니다"
 
-#. R/QC.R: gettext("\nChecking URLs failed with message:", domain = "R-tools")
+#. R/QC.R: gettext("Checking URLs failed with message:", domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
 msgid "Checking URLs failed with message:"
@@ -672,7 +676,7 @@ msgstr ""
 "었습니다:\n"
 "%3$s"
 
-#. R/QC.R: gettext("\nChecking URLs requires 'libcurl' support in the R build", domain = "R-tools")
+#. R/QC.R: gettext("Checking URLs requires 'libcurl' support in the R build", domain = "R-tools")
 #: R/QC.R:0
 msgid "Checking URLs requires 'libcurl' support in the R build"
 msgstr ""
@@ -735,9 +739,16 @@ msgstr ""
 msgid "Condition must be \\Sexpr or plain text"
 msgstr ""
 
-#. R/QC.R: gettextf("\nConflicting package names (submitted: %s, existing: %s)", y[[1L]], y[[2L]],     domain = "R-tools")
+#. R/QC.R: gettextf("Conflicting package names (submitted: %s, existing: %s)", y[[1L]], y[[2L]],     domain = "R-tools")
 #: R/QC.R:0
 msgid "Conflicting package names (submitted: %s, existing: %s)"
+msgstr ""
+
+#. R/check.R: gettextf("Consider adding %s to your NAMESPACE (and ensure that your DESCRIPTION Imports field contains 'methods').",     paste0("  ", miss), domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"Consider adding %s to your NAMESPACE (and ensure that your DESCRIPTION "
+"Imports field contains 'methods')."
 msgstr ""
 
 #. R/check.R: gettextf("Consider adding %s to your NAMESPACE.", paste0("  ", miss), domain = "R-tools")
@@ -848,7 +859,7 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#. R/QC.R: gettextf("\nDays since last update: %d", y, domain = "R-tools")
+#. R/QC.R: gettextf("Days since last update: %d", y, domain = "R-tools")
 #: R/QC.R:0
 msgid "Days since last update: %d"
 msgstr ""
@@ -1270,7 +1281,7 @@ msgstr "에러: 디렉토리 이름을 %s으로 바꿀 수 없습니다"
 msgid "Error: no packages were specified"
 msgstr "에러: 지정된 패키지들이 없습니다"
 
-#. R/check.R: gettext("Errors in running code in vignettes:", domain = "R-tools")
+#. R/check.R: gettext("Errors in running code in vignettes:", domain = "R-tool")
 #. R/check.R: gettext("Errors in running code in vignettes:", domain = "R-tools")
 #: R/check.R:0
 msgid "Errors in running code in vignettes:"
@@ -1304,7 +1315,7 @@ msgstr ""
 msgid "FAILED"
 msgstr "실패했습니다"
 
-#. R/QC.R: gettext("\nFOSS licence with BuildVignettes: false", domain = "R-tools")
+#. R/QC.R: gettext("FOSS licence with BuildVignettes: false", domain = "R-tools")
 #: R/QC.R:0
 msgid "FOSS licence with BuildVignettes: false"
 msgstr ""
@@ -1414,6 +1425,16 @@ msgstr ""
 #. R/RdConv2.R: gettext("First argument to \\href must be verbatim URL")
 #: R/RdConv2.R:0
 msgid "First argument to \\href must be verbatim URL"
+msgstr ""
+
+#. R/checktools.R: gettextf("Flags: %s\n", flags, domain = "R-tools")
+#: R/checktools.R:0
+msgid "Flags: %s"
+msgstr ""
+
+#. R/checktools.R: gettextf("Flavor: %s\n", flavor, domain = "R-tools")
+#: R/checktools.R:0
+msgid "Flavor: %s"
 msgstr ""
 
 #. R/sotools.R: gettextf("Found %s, possibly from %s", sQuote(v), paste(sprintf("%s (%s)", sQuote(u[,     "ssname"]), u[, "language"]), collapse = ", "), domain = "R-tools")
@@ -1663,7 +1684,7 @@ msgid ""
 "you need a %s script."
 msgstr ""
 
-#. R/QC.R: gettextf("\nInsufficient package version (submitted: %s, existing: %s)", y[[1L]],     y[[2L]], domain = "R-tools")
+#. R/QC.R: gettextf("Insufficient package version (submitted: %s, existing: %s)", y[[1L]], y[[2L]],     domain = "R-tools")
 #: R/QC.R:0
 msgid "Insufficient package version (submitted: %s, existing: %s)"
 msgstr ""
@@ -2045,7 +2066,7 @@ msgstr ""
 msgid "New license:"
 msgstr ""
 
-#. R/QC.R: gettext("\nNew maintainer:", domain = "R-tools")
+#. R/QC.R: gettext("New maintainer:", domain = "R-tools")
 #: R/QC.R:0
 msgid "New maintainer:"
 msgstr ""
@@ -2118,7 +2139,7 @@ msgstr ""
 msgid "No news found in given file using package default format."
 msgstr ""
 
-#. R/QC.R: gettext("\nNo package encoding and non-ASCII characters in the following R files:",     domain = "R-tools")
+#. R/QC.R: gettext("No package encoding and non-ASCII characters in the following R files:",     domain = "R-tools")
 #: R/QC.R:0
 msgid "No package encoding and non-ASCII characters in the following R files:"
 msgstr ""
@@ -2225,7 +2246,7 @@ msgid ""
 "build --resave-data"
 msgstr ""
 
-#. R/QC.R: gettextf("\nNumber of updates in past 6 months: %d", y, domain = "R-tools")
+#. R/QC.R: gettextf("Number of updates in past 6 months: %d", y, domain = "R-tools")
 #: R/QC.R:0
 msgid "Number of updates in past 6 months: %d"
 msgstr ""
@@ -2283,8 +2304,8 @@ msgstr ""
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
-#. R/check.R: gettext(" OK\n", domain = "R-tools")
-#. R/check.R: gettext(" OK\n", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
+#. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
 #. R/check.R: gettext("OK", domain = "R-tools")
@@ -2431,7 +2452,7 @@ msgstr "PDF 헤더를 찾을 수 없습니다"
 msgid "Package %s had its dependencies reduced to a minimal set."
 msgstr ""
 
-#. R/QC.R: gettext("\nPackage CITATION file contains call(s) to:", domain = "R-tools")
+#. R/QC.R: gettext("Package CITATION file contains call(s) to:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Package CITATION file contains call(s) to:"
 msgstr ""
@@ -2456,19 +2477,19 @@ msgstr "패키지 분리와 관계된 함수들은 %s를 호출하면 안됩니�
 msgid "Package directory %s does not exist."
 msgstr "패키지 디렉토리 %s가 존재하지 않습니다"
 
-#. R/QC.R: gettextf("\nPackage duplicated from %s", y, domain = "R-tools")
+#. R/QC.R: gettextf("Package duplicated from %s", y, domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
 msgid "Package duplicated from %s"
 msgstr "Depends 항목에 있는 패키지들은 다음으로부터 불러온 것이 아닙니다: %s"
 
-#. R/QC.R: gettext("\nPackage has FOSS license, installs .class/.jar but has no 'java' directory.",     domain = "R-tools")
+#. R/QC.R: gettext("Package has FOSS license, installs .class/.jar but has no 'java' directory.",     domain = "R-tools")
 #: R/QC.R:0
 msgid ""
 "Package has FOSS license, installs .class/.jar but has no 'java' directory."
 msgstr ""
 
-#. R/QC.R: gettext("\nPackage has a VignetteBuilder field but no prebuilt vignette index.",     domain = "R-tools")
+#. R/QC.R: gettext("Package has a VignetteBuilder field but no prebuilt vignette index.", domain = "R-tools")
 #: R/QC.R:0
 msgid "Package has a VignetteBuilder field but no prebuilt vignette index."
 msgstr ""
@@ -2478,14 +2499,14 @@ msgstr ""
 msgid "Package has both %s and %s."
 msgstr ""
 
-#. R/QC.R: gettext("\nPackage has help file(s) containing build-stage \\Sexpr{} expresssons but no build/partial.rdb.",     domain = "R-tools")
+#. R/QC.R: gettext("Package has help file(s) containing build-stage \\Sexpr{} expresssons but no build/partial.rdb.",     domain = "R-tools")
 #: R/QC.R:0
 msgid ""
 "Package has help file(s) containing build-stage \\Sexpr{} expresssons but no "
 "build/partial.rdb."
 msgstr ""
 
-#. R/QC.R: gettext("\nPackage has help file(s) containing install/render-stage \\Sexpr{} expresssons but no prebuilt PDF manual.",     domain = "R-tools")
+#. R/QC.R: gettext("Package has help file(s) containing install/render-stage \\Sexpr{} expresssons but no prebuilt PDF manual.",     domain = "R-tools")
 #: R/QC.R:0
 msgid ""
 "Package has help file(s) containing install/render-stage \\Sexpr{} "
@@ -2497,14 +2518,14 @@ msgstr ""
 msgid "Package has no 'Version' field"
 msgstr "패키지가 'Version' 항목을 가지고 있지 않습니다"
 
-#. R/QC.R: gettext("\nPackage installs .java files.", domain = "R-tools")
+#. R/QC.R: gettext("Package installs .java files.", domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
 msgid "Package installs .java files."
 msgstr "에러: 지정된 패키지가 없습니다"
 
-#. R/QC.R: gettextf("\nPackage license conflicts with %s override", sQuote(paste("License_is_FOSS:",     y)), domain = "R-tools")
-#. R/QC.R: gettextf("\nPackage license conflicts with %s override", sQuote(paste("License_restricts_use:",     y)), domain = "R-tools")
+#. R/QC.R: gettextf("Package license conflicts with %s override", sQuote(paste("License_is_FOSS:",     y)), domain = "R-tools")
+#. R/QC.R: gettextf("Package license conflicts with %s override", sQuote(paste("License_restricts_use:",     y)), domain = "R-tools")
 #: R/QC.R:0
 msgid "Package license conflicts with %s override"
 msgstr ""
@@ -2547,9 +2568,14 @@ msgid "Package startup functions should use %s to generate messages."
 msgstr ""
 "패키지 스타트업 함수들은 메시지를 생성하기 위해서 %s를 사용해야만 합니다."
 
-#. R/QC.R: gettext("\nPackage was archived on CRAN", domain = "R-tools")
+#. R/QC.R: gettext("Package was archived on CRAN", domain = "R-tools")
 #: R/QC.R:0
 msgid "Package was archived on CRAN"
+msgstr ""
+
+#. R/checktools.R: gettextf("Package: %s %s\n", x$Package, x$Version, domain = "R-tools")
+#: R/checktools.R:0
+msgid "Package: %s %s"
 msgstr ""
 
 #. R/check.R: gettext("Packages should not call .Internal(): it is not part of the API, for use only by R itself and subject to change without notice.",     domain = "R-tools")
@@ -2649,6 +2675,12 @@ msgstr ""
 msgid "Problems with news in 'inst/NEWS.Rd':"
 msgstr ""
 
+#. R/CRANtools.R: sprintf("Processing %s ...", m)
+#: R/CRANtools.R:0
+#, fuzzy
+msgid "Processing %s ..."
+msgstr "%s를 처리중입니다"
+
 #. R/packages.R: message("Processing packages:")
 #. R/packages.R: message("Processing packages:")
 #: R/packages.R:0
@@ -2732,7 +2764,7 @@ msgstr ""
 "었습니다:\n"
 "%3$s"
 
-#. R/QC.R: gettextf("\nReading CITATION file fails with\n%s\nwhen package is not installed.",     paste(" ", y), domain = "R-tools")
+#. R/QC.R: gettextf("Reading CITATION file fails with\n%s\nwhen package is not installed.",     paste(" ", y), domain = "R-tools")
 #: R/QC.R:0
 msgid ""
 "Reading CITATION file fails with\n"
@@ -3034,7 +3066,7 @@ msgstr ""
 msgid "Status: OK"
 msgstr ""
 
-#. R/QC.R: gettext("\nStrong dependencies not in mainstream repositories:", domain = "R-tools")
+#. R/QC.R: gettext("Strong dependencies not in mainstream repositories:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Strong dependencies not in mainstream repositories:"
 msgstr ""
@@ -3157,40 +3189,40 @@ msgstr "패키지 %s의 예제를 테스트합니다"
 msgid "Text"
 msgstr ""
 
-#. R/QC.R: gettext("\nThe Date field is not in ISO 8601 yyyy-mm-dd format.", domain = "R-tools")
+#. R/QC.R: gettext("The Date field is not in ISO 8601 yyyy-mm-dd format.", domain = "R-tools")
 #: R/QC.R:0
 msgid "The Date field is not in ISO 8601 yyyy-mm-dd format."
 msgstr ""
 
-#. R/QC.R: gettext("\nThe Date field is over a month old.", domain = "R-tools")
+#. R/QC.R: gettext("The Date field is over a month old.", domain = "R-tools")
 #: R/QC.R:0
 msgid "The Date field is over a month old."
 msgstr ""
 
-#. R/QC.R: gettext("\nThe Description field should not start with the package name,\n  'This package' or similar.",     domain = "R-tools")
+#. R/QC.R: gettext("The Description field should not start with the package name,\n  'This package' or similar.",     domain = "R-tools")
 #: R/QC.R:0
 msgid ""
 "The Description field should not start with the package name,\n"
 "  'This package' or similar."
 msgstr ""
 
-#. R/QC.R: gettext("\nThe Description field should start with a capital letter.", domain = "R-tools")
+#. R/QC.R: gettext("The Description field should start with a capital letter.", domain = "R-tools")
 #: R/QC.R:0
 msgid "The Description field should start with a capital letter."
 msgstr ""
 
-#. R/QC.R: gettext("\nThe Title field is just the package name: provide a real title.", domain = "R-tools")
+#. R/QC.R: gettext("The Title field is just the package name: provide a real title.", domain = "R-tools")
 #: R/QC.R:0
 msgid "The Title field is just the package name: provide a real title."
 msgstr ""
 
-#. R/QC.R: gettext("\nThe Title field should be in title case, current version then in title case:",     domain = "R-tools")
+#. R/QC.R: gettext("The Title field should be in title case, current version then in title case:",     domain = "R-tools")
 #: R/QC.R:0
 msgid ""
 "The Title field should be in title case, current version then in title case:"
 msgstr ""
 
-#. R/QC.R: gettext("\nThe Title field starts with the package name.", domain = "R-tools")
+#. R/QC.R: gettext("The Title field starts with the package name.", domain = "R-tools")
 #: R/QC.R:0
 msgid "The Title field starts with the package name."
 msgstr ""
@@ -3209,10 +3241,10 @@ msgid ""
 "side must be named 'value'."
 msgstr ""
 
-#. R/QC.R: gettext("The canonical URL of the CRAN page for a package is   http://cran.r-project.org/package=pkgname",     domain = "R-tools")
+#. R/QC.R: gettext("The canonical URL of the CRAN page for a package is   https://cran.r-project.org/package=pkgname",     domain = "R-tools")
 #: R/QC.R:0
 msgid ""
-"The canonical URL of the CRAN page for a package is   http://cran.r-project."
+"The canonical URL of the CRAN page for a package is   https://cran.r-project."
 "org/package=pkgname"
 msgstr ""
 
@@ -3221,7 +3253,7 @@ msgstr ""
 msgid "The default JSS style may not be modified."
 msgstr "기본 JSS 스타일은 아마도 변경되지 않을 것입니다."
 
-#. R/QC.R: gettext("\nThe display-name part of the maintainer field should be enclosed in \"\"",     domain = "R-tools")
+#. R/QC.R: gettext("The display-name part of the maintainer field should be enclosed in \"\"",     domain = "R-tools")
 #: R/QC.R:0
 msgid ""
 "The display-name part of the maintainer field should be enclosed in \"\""
@@ -3302,7 +3334,7 @@ msgid ""
 "%s"
 msgstr "다음은 중복된 이름 '%s'를 가진 Rd 파일들입니다:"
 
-#. R/QC.R: gettext("\nThe maintainer field lacks a name", domain = "R-tools")
+#. R/QC.R: gettext("The maintainer field lacks a name", domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
 msgid "The maintainer field lacks a name"
@@ -3488,7 +3520,7 @@ msgstr "ASCII가 아닌 데이터에 이용된 인코딩을 알 수 없습니다
 msgid "Unknown encoding with non-ASCII data: converting to ASCII"
 msgstr ""
 
-#. R/QC.R: gettext("\nUnknown, possibly mis-spelled fields in DESCRIPTION:", domain = "R-tools")
+#. R/QC.R: gettext("Unknown, possibly mis-spelled fields in DESCRIPTION:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Unknown, possibly mis-spelled fields in DESCRIPTION:"
 msgstr ""
@@ -3537,7 +3569,7 @@ msgstr ""
 msgid "Use 'summary(full = TRUE)' for details."
 msgstr ""
 
-#. R/QC.R: gettext("\nUsing 'Additional_repositories specification' failed with packages:",     domain = "R-tools")
+#. R/QC.R: gettext("Using 'Additional_repositories specification' failed with packages:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Using 'Additional_repositories specification' failed with packages:"
 msgstr ""
@@ -3558,12 +3590,12 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-#. R/QC.R: gettextf("\nVersion contains leading zeroes (%s)", y, domain = "R-tools")
+#. R/QC.R: gettextf("Version contains leading zeroes (%s)", y, domain = "R-tools")
 #: R/QC.R:0
 msgid "Version contains leading zeroes (%s)"
 msgstr ""
 
-#. R/QC.R: gettextf("\nVersion jumps in minor (submitted: %s, existing: %s)", y[[1L]], y[[2L]],     domain = "R-tools")
+#. R/QC.R: gettextf("Version jumps in minor (submitted: %s, existing: %s)", y[[1L]], y[[2L]],     domain = "R-tools")
 #: R/QC.R:0
 msgid "Version jumps in minor (submitted: %s, existing: %s)"
 msgstr ""
@@ -3626,13 +3658,13 @@ msgstr "비니에트 엔진 패키지가 지정되지 않았습니다"
 msgid "Vignette product %s does not have a known filename extension (%s)"
 msgstr "비니에트 프로덕트 %s는 알려진 파일확장자 (%s)를 가지고 있지 않습니다"
 
-#. R/QC.R: gettext("\nVignette sources in 'inst/doc' missing from the 'vignettes' directory:",     domain = "R-tools")
+#. R/QC.R: gettext("Vignette sources in 'inst/doc' missing from the 'vignettes' directory:",     domain = "R-tools")
 #. R/check.R: gettext("Vignette sources in 'inst/doc' missing from the 'vignettes' directory:",     domain = "R-tools")
 #: R/QC.R:0 R/check.R:0
 msgid "Vignette sources in 'inst/doc' missing from the 'vignettes' directory:"
 msgstr ""
 
-#. R/QC.R: gettext("\nVignette sources in 'inst/doc' with no 'vignettes' directory:", domain = "R-tools")
+#. R/QC.R: gettext("Vignette sources in 'inst/doc' with no 'vignettes' directory:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Vignette sources in 'inst/doc' with no 'vignettes' directory:"
 msgstr ""
@@ -4379,7 +4411,6 @@ msgstr ""
 
 #. R/check.R: gettext("checking re-building of vignette outputs ...", domain = "R-tools")
 #. R/check.R: gettext("checking re-building of vignette outputs ...", domain = "R-tools")
-#. R/check.R: gettext("checking re-building of vignette outputs ...", domain = "R-tools")
 #: R/check.R:0
 msgid "checking re-building of vignette outputs ..."
 msgstr ""
@@ -4389,7 +4420,6 @@ msgstr ""
 msgid "checking replacement functions ..."
 msgstr ""
 
-#. R/check.R: gettext("checking running R code from vignettes ...", domain = "R-tools")
 #. R/check.R: gettext("checking running R code from vignettes ...", domain = "R-tools")
 #: R/check.R:0
 msgid "checking running R code from vignettes ..."
@@ -4760,13 +4790,13 @@ msgstr "%s을 확장하고 있습니다"
 msgid "expect failure or some differences if not in a Latin or UTF-8 locale"
 msgstr ""
 
-#. R/check.R: gettext(" failed\n", domain = "R-tools")
+#. R/check.R: gettext("failed", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
 msgid "failed"
 msgstr "로딩에 실패했습니다"
 
-#. R/check.R: gettext(" failed to complete the test", domain = "R-tools")
+#. R/check.R: gettext("failed to complete the test", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
 msgid "failed to complete the test"
@@ -5965,50 +5995,6 @@ msgstr "'package', 'dir' 또는 'file'을 지정해야 합니다"
 msgid "you must specify 'package', 'dir' or 'file' argument"
 msgstr "'package', 'dir' 또는 'file'을 지정해야 합니다"
 
-#. R/QC.R: ngettext(length(y), "\nPackage has a FOSS license but eventually depends on the following package which may restrict use:",     "\nPackage has a FOSS license but eventually depends on the following packages which may restrict use:",     domain = "R-tools")
-#: R/QC.R:0
-msgid ""
-"\n"
-"Package has a FOSS license but eventually depends on the following package "
-"which may restrict use:"
-msgid_plural ""
-"\n"
-"Package has a FOSS license but eventually depends on the following packages "
-"which may restrict use:"
-msgstr[0] ""
-
-#. R/QC.R: ngettext(length(y), "\nPackage has a FOSS license but eventually depends on the following package which restricts use:",     "\nPackage has a FOSS license but eventually depends on the following packages which restrict use:",     domain = "R-tools")
-#: R/QC.R:0
-msgid ""
-"\n"
-"Package has a FOSS license but eventually depends on the following package "
-"which restricts use:"
-msgid_plural ""
-"\n"
-"Package has a FOSS license but eventually depends on the following packages "
-"which restrict use:"
-msgstr[0] ""
-
-#. R/QC.R: ngettext(length(y), "\nUses the non-portable package:", "\nUses the non-portable packages:",     domain = "R-tools")
-#: R/QC.R:0
-msgid ""
-"\n"
-"Uses the non-portable package:"
-msgid_plural ""
-"\n"
-"Uses the non-portable packages:"
-msgstr[0] ""
-
-#. R/QC.R: ngettext(length(y), "\nUses the superseded package:", "\nUses the superseded packages:",     domain = "R-tools")
-#: R/QC.R:0
-msgid ""
-"\n"
-"Uses the superseded package:"
-msgid_plural ""
-"\n"
-"Uses the superseded packages:"
-msgstr[0] ""
-
 #. R/check.R: ngettext(length(bad), "  Namespace with empty importFrom: %s", "  Namespaces with empty importFrom: %s",     domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
@@ -6474,6 +6460,26 @@ msgid "Only %d column allowed in this table"
 msgid_plural "Only %d columns allowed in this table"
 msgstr[0] ""
 
+#. R/QC.R: ngettext(length(y), "Package has a FOSS license but eventually depends on the following package which may restrict use:",     "Package has a FOSS license but eventually depends on the following packages which may restrict use:",     domain = "R-tools")
+#: R/QC.R:0
+msgid ""
+"Package has a FOSS license but eventually depends on the following package "
+"which may restrict use:"
+msgid_plural ""
+"Package has a FOSS license but eventually depends on the following packages "
+"which may restrict use:"
+msgstr[0] ""
+
+#. R/QC.R: ngettext(length(y), "Package has a FOSS license but eventually depends on the following package which restricts use:",     "Package has a FOSS license but eventually depends on the following packages which restrict use:",     domain = "R-tools")
+#: R/QC.R:0
+msgid ""
+"Package has a FOSS license but eventually depends on the following package "
+"which restricts use:"
+msgid_plural ""
+"Package has a FOSS license but eventually depends on the following packages "
+"which restrict use:"
+msgstr[0] ""
+
 #. R/QC.R: ngettext(length(bad), "Package in 'Depends/Imports' which should probably only be in 'LinkingTo': %s",     "Packages in 'Depends/Imports' which should probably only be in 'LinkingTo': %s",     domain = "R-tools")
 #: R/QC.R:0
 msgid ""
@@ -6632,6 +6638,18 @@ msgstr[0] ""
 msgid "Unknown package %s in Rd xrefs"
 msgid_plural "Unknown packages %s in Rd xrefs"
 msgstr[0] "Rd xrefs에 알 수 없는 패키지 %s입니다"
+
+#. R/QC.R: ngettext(length(y), "Uses the non-portable package:", "Uses the non-portable packages:",     domain = "R-tools")
+#: R/QC.R:0
+msgid "Uses the non-portable package:"
+msgid_plural "Uses the non-portable packages:"
+msgstr[0] ""
+
+#. R/QC.R: ngettext(length(y), "Uses the superseded package:", "Uses the superseded packages:",     domain = "R-tools")
+#: R/QC.R:0
+msgid "Uses the superseded package:"
+msgid_plural "Uses the superseded packages:"
+msgstr[0] ""
 
 #. R/QC.R: ngettext(length(xx), "Versioned 'LinkingTo' value for %s is only usable in R >= 3.0.2",     "Versioned 'LinkingTo' values for %s are only usable in R >= 3.0.2", domain = "R-tools")
 #: R/QC.R:0

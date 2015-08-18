@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 3.3.0\n"
-"POT-Creation-Date: 2015-04-01 22:12\n"
+"POT-Creation-Date: 2015-08-18 12:52\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -167,16 +167,8 @@ msgstr ""
 
 
 #: R/unix/png.R: 0
-#: R/windows/cairo.R: 0
-#: R/windows/cairo.R: 0
-#: R/windows/cairo.R: 0
-#: R/windows/cairo.R: 0
 #: R/windows/png.R: 0
 #. R/unix/png.R: stop("'res' must be specified unless 'units = \"px\"'")
-#. R/windows/cairo.R: stop("'res' must be specified unless 'units = \"px\"'")
-#. R/windows/cairo.R: stop("'res' must be specified unless 'units = \"px\"'")
-#. R/windows/cairo.R: stop("'res' must be specified unless 'units = \"px\"'")
-#. R/windows/cairo.R: stop("'res' must be specified unless 'units = \"px\"'")
 #. R/windows/png.R: stop("'res' must be specified unless 'units = \"px\"'")
 
 msgid "'res' must be specified unless 'units = \"px\"'"
@@ -539,10 +531,6 @@ msgstr ""
 #: R/unix/quartz.R: 0
 #: R/unix/quartz.R: 0
 #: R/unix/x11.R: 0
-#: R/windows/cairo.R: 0
-#: R/windows/cairo.R: 0
-#: R/windows/cairo.R: 0
-#: R/windows/cairo.R: 0
 #: R/windows/png.R: 0
 #: R/windows/png.R: 0
 #: R/windows/png.R: 0
@@ -560,10 +548,6 @@ msgstr ""
 #. R/unix/quartz.R: gettextf("invalid '%s' argument", "title")
 #. R/unix/quartz.R: gettextf("invalid '%s' argument", "file")
 #. R/unix/x11.R: gettextf("invalid '%s' argument", "title")
-#. R/windows/cairo.R: gettextf("invalid '%s' argument", "filename")
-#. R/windows/cairo.R: gettextf("invalid '%s' argument", "filename")
-#. R/windows/cairo.R: gettextf("invalid '%s' argument", "filename")
-#. R/windows/cairo.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/png.R: gettextf("invalid '%s' argument", "filename")

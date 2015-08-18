@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-07-07 21:36\n"
+"POT-Creation-Date: 2015-08-18 12:52\n"
 "PO-Revision-Date: 2015-01-17 13:32+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Italian\n"
@@ -639,14 +639,14 @@ msgstr "'by' deve specificare la colonna(e)"
 msgid "'by.x' and 'by.y' arguments specify different numbers of columns"
 msgstr "'by.x' e 'by.y' specificano numeri di colonne differenti"
 
+#. R/source.R: warning("'chdir = TRUE' makes no sense for a URL")
+#: R/source.R:0
+msgid "'chdir = TRUE' makes no sense for a URL"
+msgstr ""
+
 #. R/source.R: warning("'chdir = TRUE' option makes no sense for a connection")
 #: R/source.R:0
 msgid "'chdir = TRUE' option makes no sense for a connection"
-msgstr ""
-
-#. R/source.R: warning("'chdir = TRUE' option makes no sense for an URL")
-#: R/source.R:0
-msgid "'chdir = TRUE' option makes no sense for an URL"
 msgstr ""
 
 #. R/load.R: gettextf("'compress = \"%s\"' option is invalid", compress)
@@ -3047,7 +3047,12 @@ msgstr "la diagonale sostitutiva ha lunghezza sbagliata"
 msgid "replacing element in non-existent column: %s"
 msgstr "sostituzione di un elemento nella colonna non esistente:"
 
-#. R/namespace.R: gettext("replacing local value with import %s when loading namespace %s")
+#. R/namespace.R: gettext("replacing local value with import %s when loading %s")
+#: R/namespace.R:0
+#, fuzzy
+msgid "replacing local value with import %s when loading %s"
+msgstr "oggetto '%s' non trovato durante il caricamento del namespace '%s'"
+
 #. R/namespace.R: gettext("replacing local value with import %s when loading namespace %s")
 #: R/namespace.R:0
 msgid "replacing local value with import %s when loading namespace %s"
