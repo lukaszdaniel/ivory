@@ -569,9 +569,10 @@ read_SPSS_SAVE(const char *filename)
     }
     UNPROTECT(1);
 
+    SEXP cpsym = install("codepage");
     free_dictionary(dict);
     setAttrib(ans, R_NamesSymbol, ans_names);
-    setAttrib(ans, install("codepage"), ScalarInteger(inf.encoding));
+    setAttrib(ans, cpsym, ScalarInteger(inf.encoding));
     UNPROTECT(2);
     return ans;
 }
