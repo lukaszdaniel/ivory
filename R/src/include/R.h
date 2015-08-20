@@ -63,7 +63,7 @@ extern "C" {
 void R_FlushConsole(void);
 /* always declared, but only usable under Win32 and Aqua */
 void R_ProcessEvents(void);
-#ifdef Win32
+#ifdef _WIN32
 void R_WaitEvent(void);
 #endif
 

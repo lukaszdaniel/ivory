@@ -34,14 +34,14 @@
 #endif
 #include <errno.h>
 
-#ifdef Win32
+#ifdef _WIN32
 #include <io.h> /* for mkdir */
 #endif
 
 /* cf do_dircreate in platform.c */
 static int R_mkdir(char *path)
 {
-#ifdef Win32
+#ifdef _WIN32
     char local[PATH_MAX];
     strcpy(local, path);
     /* needed DOS paths on Win 9x */
@@ -53,7 +53,7 @@ static int R_mkdir(char *path)
 #endif
 }
 
-#ifdef Win32
+#ifdef _WIN32
 #include <windows.h>
 static void setFileTime(const char *fn, uLong dosdate)
 {
@@ -130,7 +130,7 @@ extract_one(unzFile uf, const char *const dest, const char * const filename,
 	fn0[PATH_MAX - 1] = '\0';
 	fn = fn0;
     }
-#ifdef Win32
+#ifdef _WIN32
     R_fixslash(fn);
 #endif
     if (junk && strlen(fn) >= 2) { /* need / and basename */
@@ -139,7 +139,7 @@ extract_one(unzFile uf, const char *const dest, const char * const filename,
     }
     strcat(outname, fn);
 
-#ifdef Win32
+#ifdef _WIN32
     R_fixslash(outname); /* ensure path separator is / */
 #endif
     p = outname + strlen(outname) - 1;
@@ -190,7 +190,7 @@ extract_one(unzFile uf, const char *const dest, const char * const filename,
 	SET_STRING_ELT(names, (*nnames)++, mkChar(outname));
     }
     unzCloseCurrentFile(uf);
-#ifdef Win32
+#ifdef _WIN32
     if (setTime) setFileTime(outname, file_info.dosDate);
 #else
     if (setTime) setFileTime(outname, file_info.tmu_date);
@@ -223,7 +223,7 @@ zipunzip(const char *zipname, const char *dest, int nfiles, const char **files,
 	    }
 	    if ((err = extract_one(uf, dest, NULL, names, nnames,
 				   overwrite, junk, setTime)) != UNZ_OK) break;
-#ifdef Win32
+#ifdef _WIN32
 	    R_ProcessEvents();
 #else
 	    R_CheckUserInterrupt();
@@ -234,7 +234,7 @@ zipunzip(const char *zipname, const char *dest, int nfiles, const char **files,
 	    if ((err = unzLocateFile(uf, files[i], 1)) != UNZ_OK) break;
 	    if ((err = extract_one(uf, dest, files[i], names, nnames,
 				   overwrite, junk, setTime)) != UNZ_OK) break;
-#ifdef Win32
+#ifdef _WIN32
 	    R_ProcessEvents();
 #else
 	    R_CheckUserInterrupt();
@@ -2138,7 +2138,7 @@ static int unzCloseCurrentFile (unzFile file)
 }
 
 
-#ifdef Win32
+#ifdef _WIN32
 # define f_seek fseeko64
 # define f_tell ftello64
 #elif defined(HAVE_OFF_T) && defined(HAVE_FSEEKO)

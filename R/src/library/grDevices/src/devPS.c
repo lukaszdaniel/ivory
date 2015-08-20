@@ -3694,7 +3694,7 @@ static void PS_NewPage(const pGEcontext gc,
     pd->warn_trans = FALSE;
 }
 
-#ifdef Win32
+#ifdef _WIN32
 #include "run.h" /* for runcmd */
 #endif
 static void PostScriptClose(pDevDesc dd)
@@ -3723,7 +3723,7 @@ static void PostScriptClose(pDevDesc dd)
 #ifdef Unix
 	    err = R_system(buff);
 #endif
-#ifdef Win32
+#ifdef _WIN32
 	    err = Rf_runcmd(buff, CE_NATIVE, 0, 0, NULL, NULL, NULL);
 #endif
 	    if (err)

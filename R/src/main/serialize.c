@@ -35,7 +35,7 @@
 #include <errno.h>
 #include <ctype.h>		/* for isspace */
 #include <stdarg.h>
-#ifdef Win32
+#ifdef _WIN32
 #include <trioremap.h>
 #endif
 
@@ -390,7 +390,7 @@ static int InInteger(R_inpstream_t stream)
     }
 }
 
-#ifdef Win32
+#ifdef _WIN32
 extern int trio_sscanf(const char *buffer, const char *format, ...);
 
 #endif
@@ -415,7 +415,7 @@ static double InReal(R_inpstream_t stream)
 	    return R_NegInf;
 	else
 	    if(
-#ifdef Win32
+#ifdef _WIN32
 		trio_sscanf(buf, "%lg", &d)
 #else
 		sscanf(buf, "%lg", &d)

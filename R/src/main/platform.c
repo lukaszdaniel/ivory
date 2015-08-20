@@ -179,7 +179,7 @@ static void Init_R_Platform(SEXP rho)
 #else /* unix default */
     SET_VECTOR_ELT(value, 5, mkString("source"));
 #endif
-#ifdef Win32
+#ifdef _WIN32
     SET_VECTOR_ELT(value, 6, mkString(";"));
 #else /* not Win32 */
     SET_VECTOR_ELT(value, 6, mkString(":"));
@@ -239,7 +239,7 @@ void attribute_hidden R_check_locale(void)
     }
 #endif
     mbcslocale = MB_CUR_MAX > 1;
-#ifdef Win32
+#ifdef _WIN32
     {
 	char *ctype = setlocale(LC_CTYPE, NULL), *p;
 	p = strrchr(ctype, '.');
@@ -314,7 +314,7 @@ SEXP attribute_hidden do_fileshow(SEXP call, SEXP op, SEXP args, SEXP rho)
     for (i = 0; i < n; i++) {
 	SEXP el = STRING_ELT(fn, i);
 	if (!isNull(el) && el != NA_STRING)
-#ifdef Win32
+#ifdef _WIN32
 	    f[i] = acopy_string(reEnc(CHAR(el), getCharCE(el), CE_UTF8, 1));
 #else
 	    f[i] = acopy_string(translateChar(el));
@@ -479,7 +479,7 @@ SEXP attribute_hidden do_fileremove(SEXP call, SEXP op, SEXP args, SEXP rho)
     for (i = 0; i < n; i++) {
 	if (STRING_ELT(f, i) != NA_STRING) {
 	    LOGICAL(ans)[i] =
-#ifdef Win32
+#ifdef _WIN32
 		(_wremove(filenameToWchar(STRING_ELT(f, i), TRUE)) == 0);
 #else
 		(remove(R_ExpandFileName(translateChar(STRING_ELT(f, i)))) == 0);
@@ -503,7 +503,7 @@ SEXP attribute_hidden do_fileremove(SEXP call, SEXP op, SEXP args, SEXP rho)
 # include <sys/stat.h>
 #endif
 
-#ifdef Win32
+#ifdef _WIN32
 /* Mingw-w64 defines this to be 0x0502 */
 #ifndef _WIN32_WINNT
 # define _WIN32_WINNT 0x0500 /* for CreateHardLink */
@@ -552,7 +552,7 @@ SEXP attribute_hidden do_filesymlink(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return allocVector(LGLSXP, 0);
     n = (n1 > n2) ? n1 : n2;
 
-#ifdef Win32
+#ifdef _WIN32
     // Vista, Server 2008 and later
     pCSL = (PCSL) GetProcAddress(GetModuleHandle(TEXT("kernel32.dll")),
 				 "CreateSymbolicLinkW");
@@ -567,7 +567,7 @@ SEXP attribute_hidden do_filesymlink(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    STRING_ELT(f2, i%n2) == NA_STRING)
 	    LOGICAL(ans)[i] = 0;
 	else {
-#ifdef Win32
+#ifdef _WIN32
 	    wchar_t from[PATH_MAX+1], *to;
 	    struct _stati64 sb;
 	    from[PATH_MAX] = L'\0';
@@ -639,7 +639,7 @@ SEXP attribute_hidden do_filelink(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    STRING_ELT(f2, i%n2) == NA_STRING)
 	    LOGICAL(ans)[i] = 0;
 	else {
-#ifdef Win32
+#ifdef _WIN32
 	    wchar_t from[PATH_MAX+1], *to;
 	    from[PATH_MAX] = L'\0';
 	    wcsncpy(from, filenameToWchar(STRING_ELT(f1, i%n1), TRUE), PATH_MAX);
@@ -678,7 +678,7 @@ SEXP attribute_hidden do_filelink(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
 }
 
-#ifdef Win32
+#ifdef _WIN32
 int Rwin_rename(char *from, char *to);  /* in src/gnuwin32/extra.c */
 int Rwin_wrename(const wchar_t *from, const wchar_t *to);
 #endif
@@ -687,7 +687,7 @@ SEXP attribute_hidden do_filerename(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP f1, f2, ans;
     int i, n1, n2;
-#ifdef Win32
+#ifdef _WIN32
     wchar_t from[PATH_MAX], to[PATH_MAX];
     const wchar_t *w;
 #else
@@ -713,7 +713,7 @@ SEXP attribute_hidden do_filerename(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    LOGICAL(ans)[i] = 0;
 	    continue;
 	}
-#ifdef Win32
+#ifdef _WIN32
 	w = filenameToWchar(STRING_ELT(f1, i), TRUE);
 	if (wcslen(w) >= PATH_MAX - 1)
 	    error(_("expanded '%s' name is too long"), "from");
@@ -750,7 +750,7 @@ SEXP attribute_hidden do_filerename(SEXP call, SEXP op, SEXP args, SEXP rho)
 #  define UNIX_EXTRAS 1
 # endif
 
-#ifdef Win32
+#ifdef _WIN32
 # ifndef SCS_64BIT_BINARY
 #  define SCS_64BIT_BINARY 6
 # endif
@@ -778,7 +778,7 @@ SEXP attribute_hidden do_fileinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP uid = R_NilValue, gid = R_NilValue,
 	uname = R_NilValue, grname = R_NilValue; // silence -Wall
 #endif
-#ifdef Win32
+#ifdef _WIN32
     SEXP exe = R_NilValue;
     struct _stati64 sb;
 #else
@@ -796,7 +796,7 @@ SEXP attribute_hidden do_fileinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(extras) {
 #ifdef UNIX_EXTRAS
 	ncols = 10;
-#elif defined(Win32)
+#elif defined(_WIN32)
 	ncols = 7;
 #endif
     }
@@ -825,13 +825,13 @@ SEXP attribute_hidden do_fileinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 	grname = SET_VECTOR_ELT(ans, 9, allocVector(STRSXP, n));
 	SET_STRING_ELT(ansnames, 9, mkChar("grname"));
 #endif
-#ifdef Win32
+#ifdef _WIN32
 	exe = SET_VECTOR_ELT(ans, 6, allocVector(STRSXP, n));
 	SET_STRING_ELT(ansnames, 6, mkChar("exe"));
 #endif
     }
     for (int i = 0; i < n; i++) {
-#ifdef Win32
+#ifdef _WIN32
 	wchar_t *wfn = filenameToWchar(STRING_ELT(fn, i), TRUE);
 	/* trailing \ is not valid on Windows except for the
 	   root directory on a drive, specified as "\", or "D:\",
@@ -847,7 +847,7 @@ SEXP attribute_hidden do_fileinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 	const char *efn = R_ExpandFileName(translateChar(STRING_ELT(fn, i)));
 #endif
 	if (STRING_ELT(fn, i) != NA_STRING &&
-#ifdef Win32
+#ifdef _WIN32
 	    _wstati64(wfn, &sb)
 #else
 	    /* Target not link */
@@ -904,7 +904,7 @@ SEXP attribute_hidden do_fileinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 				   stgrp ? mkChar(stgrp->gr_name): NA_STRING);
 		}
 #endif
-#ifdef Win32
+#ifdef _WIN32
 		{
 		    char *s="no";
 		    DWORD type;
@@ -944,7 +944,7 @@ SEXP attribute_hidden do_fileinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 		SET_STRING_ELT(uname, i, NA_STRING);
 		SET_STRING_ELT(grname, i, NA_STRING);
 #endif
-#ifdef Win32
+#ifdef _WIN32
 		SET_STRING_ELT(exe, i, NA_STRING);
 #endif
 	    }
@@ -961,7 +961,7 @@ SEXP attribute_hidden do_direxists(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP fn, ans;
 
-#ifdef Win32
+#ifdef _WIN32
     struct _stati64 sb;
 #else
     struct stat sb;
@@ -974,7 +974,7 @@ SEXP attribute_hidden do_direxists(SEXP call, SEXP op, SEXP args, SEXP rho)
     int n = LENGTH(fn);
     PROTECT(ans = allocVector(LGLSXP, n));
     for (int i = 0; i < n; i++) {
-#ifdef Win32
+#ifdef _WIN32
 	wchar_t *wfn = filenameToWchar(STRING_ELT(fn, i), TRUE);
 	/* trailing \ is not valid on Windows except for the
 	   root directory on a drive, specified as "\", or "D:\",
@@ -990,7 +990,7 @@ SEXP attribute_hidden do_direxists(SEXP call, SEXP op, SEXP args, SEXP rho)
 	const char *efn = R_ExpandFileName(translateChar(STRING_ELT(fn, i)));
 #endif
 	if (STRING_ELT(fn, i) != NA_STRING &&
-#ifdef Win32
+#ifdef _WIN32
 	    _wstati64(wfn, &sb)
 #else
 	    /* Target not link */
@@ -1027,7 +1027,7 @@ static SEXP filename(const char *dir, const char *file)
     SEXP ans;
     char cbuf[CBUFSIZE];
     if (dir) {
-#ifdef Win32
+#ifdef _WIN32
 	if ((strlen(dir) == 2 && dir[1] == ':') ||
 	    dir[strlen(dir) - 1] == '/' ||  dir[strlen(dir) - 1] == '\\')
 	    snprintf(cbuf, CBUFSIZE, "%s%s", dir, file);
@@ -1067,7 +1067,7 @@ list_files(const char *dnp, const char *stem, int *count, SEXP *pans,
 	    if (allfiles || !R_HiddenFile(de->d_name)) {
 		Rboolean not_dot = strcmp(de->d_name, ".") && strcmp(de->d_name, "..");
 		if (recursive) {
-#ifdef Win32
+#ifdef _WIN32
 		    if (strlen(dnp) == 2 && dnp[1] == ':') // e.g. "C:"
 			snprintf(p, PATH_MAX, "%s%s", dnp, de->d_name);
 		    else
@@ -1094,7 +1094,7 @@ list_files(const char *dnp, const char *stem, int *count, SEXP *pans,
 				IF_MATCH_ADD_TO_ANS
 			    }
 			    if (stem) {
-#ifdef Win32
+#ifdef _WIN32
 				if(strlen(stem) == 2 && stem[1] == ':')
 				    snprintf(stem2, PATH_MAX, "%s%s", stem,
 					     de->d_name);
@@ -1203,7 +1203,7 @@ static void list_dirs(const char *dnp, const char *nm,
 	    SET_STRING_ELT(*pans, (*count)++, mkChar(full ? dnp : nm));
 	}
 	while ((de = readdir(dir))) {
-#ifdef Win32
+#ifdef _WIN32
 	    if (strlen(dnp) == 2 && dnp[1] == ':')
 		snprintf(p, PATH_MAX, "%s%s", dnp, de->d_name);
 	    else
@@ -1280,7 +1280,7 @@ SEXP attribute_hidden do_Rhome(SEXP call, SEXP op, SEXP args, SEXP rho)
     return mkString(path);
 }
 
-#ifdef Win32
+#ifdef _WIN32
 static Rboolean attribute_hidden R_WFileExists(const wchar_t *path)
 {
     struct _stati64 sb;
@@ -1300,7 +1300,7 @@ SEXP attribute_hidden do_fileexists(SEXP call, SEXP op, SEXP args, SEXP rho)
     for (i = 0; i < nfile; i++) {
 	LOGICAL(ans)[i] = 0;
 	if (STRING_ELT(file, i) != NA_STRING) {
-#ifdef Win32
+#ifdef _WIN32
 	    /* Package XML sends arbitrarily long strings to file.exists! */
 	    size_t len = strlen(CHAR(STRING_ELT(file, i)));
 	    if (len > MAX_PATH)
@@ -1319,7 +1319,7 @@ SEXP attribute_hidden do_fileexists(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 #define CHOOSEBUFSIZE 1024
 
-#ifndef Win32
+#ifndef _WIN32
 SEXP attribute_hidden do_filechoose(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int _new, len;
@@ -1339,7 +1339,7 @@ SEXP attribute_hidden do_filechoose(SEXP call, SEXP op, SEXP args, SEXP rho)
 # include <unistd.h>
 #endif
 
-#ifdef Win32
+#ifdef _WIN32
 extern int winAccessW(const wchar_t *path, int mode);
 #endif
 
@@ -1364,7 +1364,7 @@ SEXP attribute_hidden do_fileaccess(SEXP call, SEXP op, SEXP args, SEXP rho)
     for (i = 0; i < n; i++)
 	if (STRING_ELT(fn, i) != NA_STRING) {
 	    INTEGER(ans)[i] =
-#ifdef Win32
+#ifdef _WIN32
 		winAccessW(filenameToWchar(STRING_ELT(fn, i), TRUE), modemask);
 #else
 		access(R_ExpandFileName(translateChar(STRING_ELT(fn, i))),
@@ -1375,7 +1375,7 @@ SEXP attribute_hidden do_fileaccess(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-#ifdef Win32
+#ifdef _WIN32
 
 static int R_rmdir(const wchar_t *dir)
 {
@@ -1547,7 +1547,7 @@ static int R_unlink(const char *name, int recursive, int force)
 
 
 /* Note that wildcards are allowed in 'names' */
-#ifdef Win32
+#ifdef _WIN32
 # include <dos_wglob.h>
 SEXP attribute_hidden do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
 {
@@ -1643,19 +1643,19 @@ static void chmod_one(const char *name)
     DIR *dir;
     struct dirent *de;
     char p[PATH_MAX];
-#ifdef Win32
+#ifdef _WIN32
     struct _stati64 sb;
 #else
     struct stat sb;
 #endif
-#ifndef Win32
+#ifndef _WIN32
     mode_t mask = S_IRUSR | S_IRGRP | S_IROTH | S_IWUSR, /* 0644 */
 	dirmask = mask | S_IXUSR | S_IXGRP | S_IXOTH; /* 0755 */
 #endif
 
     if (streql(name, ".") || streql(name, "..")) return;
     if (!R_FileExists(name)) return;
-#ifdef Win32
+#ifdef _WIN32
     _stati64(name, &sb);
     chmod(name, _S_IWRITE);
 #else
@@ -1663,7 +1663,7 @@ static void chmod_one(const char *name)
     chmod(name, (sb.st_mode | mask) & dirmask);
 #endif
     if ((sb.st_mode & S_IFDIR) > 0) { /* a directory */
-#ifndef Win32
+#ifndef _WIN32
 	chmod(name, dirmask);
 #endif
 	if ((dir = opendir(name)) != NULL) {
@@ -1791,7 +1791,7 @@ SEXP attribute_hidden do_setlocale(SEXP call, SEXP op, SEXP args, SEXP rho)
 #if defined LC_MESSAGES
     case 7:
 	cat = LC_MESSAGES;
-#ifdef Win32
+#ifdef _WIN32
 /* this seems to exist in MinGW, but it does not work in Windows */
 	warning(_("LC_MESSAGES exists on Windows but is not operational"));
 	p = NULL;
@@ -2041,7 +2041,7 @@ SEXP attribute_hidden do_capabilities(SEXP call, SEXP op, SEXP args, SEXP rho)
        if readline is available and in use. */
     SET_STRING_ELT(ansnames, i, mkChar("cledit"));
     LOGICAL(ans)[i] = FALSE;
-#if defined(Win32)
+#if defined(_WIN32)
     if (R_Interactive) LOGICAL(ans)[i] = TRUE;
 #endif
 #ifdef Unix
@@ -2077,7 +2077,7 @@ SEXP attribute_hidden do_capabilities(SEXP call, SEXP op, SEXP args, SEXP rho)
     SET_STRING_ELT(ansnames, i, mkChar("cairo"));
 #ifdef HAVE_WORKING_CAIRO
     LOGICAL(ans)[i++] = TRUE;
-#elif defined(Win32)
+#elif defined(_WIN32)
 {
     /* This is true iff winCairo.dll is available */
     struct stat sb;
@@ -2168,7 +2168,7 @@ SEXP attribute_hidden do_sysgetpid(SEXP call, SEXP op, SEXP args, SEXP rho)
   allowed in C99 but disallowed in POSIX).  Also, something under
   warning() might set errno in a future version.
 */
-#ifndef Win32
+#ifndef _WIN32
 /* mkdir is defined in <sys/stat.h> */
 SEXP attribute_hidden do_dircreate(SEXP call, SEXP op, SEXP args, SEXP env)
 {
@@ -2282,7 +2282,7 @@ end:
 /* take file/dir 'name' in dir 'from' and copy it to 'to'
    'from', 'to' should have trailing path separator if needed.
 */
-#ifdef Win32
+#ifdef _WIN32
 static void copyFileTime(const wchar_t *from, const wchar_t * to)
 {
     HANDLE hFrom, hTo;
@@ -2690,7 +2690,7 @@ SEXP attribute_hidden do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 SEXP attribute_hidden do_l10n_info(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-#ifdef Win32
+#ifdef _WIN32
     int len = 4;
 #else
     int len = 3;
@@ -2705,7 +2705,7 @@ SEXP attribute_hidden do_l10n_info(SEXP call, SEXP op, SEXP args, SEXP env)
     SET_VECTOR_ELT(ans, 0, ScalarLogical(mbcslocale));
     SET_VECTOR_ELT(ans, 1, ScalarLogical(utf8locale));
     SET_VECTOR_ELT(ans, 2, ScalarLogical(latin1locale));
-#ifdef Win32
+#ifdef _WIN32
     SET_STRING_ELT(names, 3, mkChar("codepage"));
     SET_VECTOR_ELT(ans, 3, ScalarInteger(localeCP));
 #endif
@@ -2745,14 +2745,14 @@ SEXP attribute_hidden do_syschmod(SEXP call, SEXP op, SEXP args, SEXP env)
 #ifdef HAVE_UMASK
 	if(useUmask) mode = mode & ~um;
 #endif
-#ifdef Win32
+#ifdef _WIN32
 	/* Windows' _[w]chmod seems only to support read access
 	   or read-write access.  _S_IWRITE is 0200.
 	*/
 	mode = (mode & 0200) ? (_S_IWRITE | _S_IREAD): _S_IREAD;
 #endif
 	if (STRING_ELT(paths, i) != NA_STRING) {
-#ifdef Win32
+#ifdef _WIN32
 	    res = _wchmod(filenameToWchar(STRING_ELT(paths, i), TRUE), mode);
 #else
 	    res = chmod(R_ExpandFileName(translateChar(STRING_ELT(paths, i))),
@@ -2861,7 +2861,7 @@ SEXP attribute_hidden do_Cstack_info(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-#ifdef Win32
+#ifdef _WIN32
 static int winSetFileTime(const char *fn, time_t ftime)
 {
     SYSTEMTIME st;
@@ -2898,7 +2898,7 @@ do_setFileTime(SEXP call, SEXP op, SEXP args, SEXP rho)
     const char *fn = translateChar(STRING_ELT(CAR(args), 0));
     int ftime = asInteger(CADR(args)), res;
 
-#ifdef Win32
+#ifdef _WIN32
     res  = winSetFileTime(fn, (time_t)ftime);
 #elif defined(HAVE_UTIMES)
     struct timeval times[2];
@@ -2915,7 +2915,7 @@ do_setFileTime(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ScalarLogical(res);
 }
 
-#ifdef Win32
+#ifdef _WIN32
 /* based on ideas in
    http://www.codeproject.com/KB/winsdk/junctionpoints.aspx
 */

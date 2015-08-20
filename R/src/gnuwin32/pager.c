@@ -26,7 +26,7 @@
 
 #include <Localization.h>
 
-#ifdef Win32
+#ifdef _WIN32
 #define USE_MDI 1
 #endif
 
@@ -388,7 +388,7 @@ static pager pagercreate(void)
     x = (w0 - w) / 2; x = x > 20 ? x:20;
     y = (h0 - h) / 2; y = y > 20 ? y:20;
     if(pagerMultiple) {
-#ifdef Win32
+#ifdef _WIN32
 	DWORD rand = GetTickCount();
 #else
 	int rand = 0;

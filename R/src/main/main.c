@@ -411,7 +411,7 @@ static RETSIGTYPE handleInterrupt(int dummy)
    broken pipes on send().]
  */
 
-#ifndef Win32
+#ifndef _WIN32
 // controlled by the internal http server in the internet module
 int R_ignore_SIGPIPE = 0;
 
@@ -423,7 +423,7 @@ static RETSIGTYPE handlePipe(int dummy)
 #endif
 
 
-#ifdef Win32
+#ifdef _WIN32
 static int num_caught = 0;
 
 static void win32_segv(int signum)
@@ -660,7 +660,7 @@ static void init_signal_handlers(void)
     signal(SIGINT,  handleInterrupt);
     signal(SIGUSR1, onsigusr1);
     signal(SIGUSR2, onsigusr2);
-#ifndef Win32
+#ifndef _WIN32
     signal(SIGPIPE, handlePipe);
 #else
     signal(SIGSEGV, win32_segv);
@@ -726,7 +726,7 @@ void setup_Rmainloop(void)
     /* Initialize the interpreter's internal structures. */
 
 #ifdef HAVE_LOCALE_H
-#ifdef Win32
+#ifdef _WIN32
     {
 	char *p, Rlocale[1000]; /* Windows' locales can be very long */
 	p = getenv("LC_ALL");
@@ -1587,7 +1587,7 @@ R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP name)
 
 #undef __MAIN__
 
-#ifndef Win32
+#ifndef _WIN32
 /* this is here solely to pull in xxxpr.o */
 #include <R_ext/RS.h>
 void F77_SYMBOL(intpr) (const char *, int *, int *, int *);

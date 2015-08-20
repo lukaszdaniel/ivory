@@ -23,7 +23,7 @@
 #include <Defn.h>
 #include "tcltk.h" /* declarations of our `public' interface */
 
-#ifndef Win32
+#ifndef _WIN32
 #include <R_ext/eventloop.h>
 #endif
 

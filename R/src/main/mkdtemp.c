@@ -57,7 +57,7 @@
 #endif
 
 
-#ifndef Win32
+#ifndef _WIN32
 #include <sys/stat.h>
 #ifdef STAT_MACROS_BROKEN
 # undef S_ISDIR
@@ -148,7 +148,7 @@ gen_tempname (char *tmpl)
       v /= 62;
       XXXXXX[5] = letters[v % 62];
 
-#ifdef Win32
+#ifdef _WIN32
       fd = mkdir (tmpl);
 #else
       fd = mkdir (tmpl, S_IRUSR | S_IWUSR | S_IXUSR);

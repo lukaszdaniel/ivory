@@ -457,7 +457,7 @@ static PangoFontDescription
     PangoFontDescription *fontdesc;
     gint face = gc->fontface;
     double size = gc->cex * gc->ps * fs, ssize = PANGO_SCALE * size;
-#ifdef Win32
+#ifdef _WIN32
     const char *times = "Times New Roman", *hv = "Arial";
 #else
     const char *times = "times", *hv = "Helvetica";
@@ -758,7 +758,7 @@ static void FT_getFont(pGEcontext gc, pDevDesc dd, double fs)
     double size = gc->cex * gc->ps *fs;
     cairo_font_face_t *cairo_face = NULL;
     const char *family;
-#ifdef Win32
+#ifdef _WIN32
     char *times = "Times New Roman", *hv = "Arial";
 #else
     char *times = "times", *hv = "Helvetica";
@@ -767,7 +767,7 @@ static void FT_getFont(pGEcontext gc, pDevDesc dd, double fs)
     if (face < 1 || face > 5) face = 1;
     family = gc->fontfamily;
     if (face == 5) {
-#ifdef Win32
+#ifdef _WIN32
 	if (!*family) family = "Standard Symbols L";
 #else
 	if (!*family) family = "Symbol";
@@ -800,7 +800,7 @@ static void FT_getFont(pGEcontext gc, pDevDesc dd, double fs)
     double size = gc->cex * gc->ps *fs;
     char *family;
     int slant = CAIRO_FONT_SLANT_NORMAL, wt = CAIRO_FONT_WEIGHT_NORMAL;
-#ifdef Win32
+#ifdef _WIN32
     char *times = "Times New Roman", *hv = "Arial";
 #else
     char *times = "times", *hv = "Helvetica";

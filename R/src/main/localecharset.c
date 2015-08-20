@@ -618,7 +618,7 @@ const char *locale2charset(const char *locale)
 	if(p) *p = '\0';
     }
     
-#ifdef Win32
+#ifdef _WIN32
     /*
       ## PUTTY suggests mapping Windows code pages as
       ## 1250 -> ISO 8859-2: this is WRONG
@@ -726,7 +726,7 @@ main()
     i=0;
     setlocale(LC_CTYPE,"");
     DPRINT(guess_count);
-#ifndef Win32
+#ifndef _WIN32
     SPRINT(locale2charset(NULL));
     SPRINT(locale2charset("ja"));
     SPRINT(locale2charset("ja_JP"));

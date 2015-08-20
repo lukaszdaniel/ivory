@@ -34,7 +34,7 @@
 #include "Parse.h"
 
 #include <stdio.h>
-#ifdef Win32
+#ifdef _WIN32
 # include "run.h"
 int Rgui_Edit(char *filename, int enc, char *title, int modal);
 #endif
@@ -71,7 +71,7 @@ static int  EdFileUsed = 0;
 
 void attribute_hidden InitEd()
 {
-#ifdef Win32
+#ifdef _WIN32
     DefaultFileName = R_tmpnam2("Redit", R_TempDir, ".R");
 #else
     DefaultFileName = R_tmpnam2(NULL, R_TempDir, ".R");
@@ -92,7 +92,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
     const char *cmd;
     const void *vmaxsave;
     FILE *fp;
-#ifdef Win32
+#ifdef _WIN32
     SEXP ti;
     char *title;
 #endif
@@ -127,7 +127,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
 	UNPROTECT(1); /* src */
 	fclose(fp);
     }
-#ifdef Win32
+#ifdef _WIN32
     ti = CAR(args);
 #endif
     args = CDR(args);
@@ -136,7 +136,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
     cmd = translateChar(STRING_ELT(ed, 0));
     if (strlen(cmd) == 0) errorcall(call, _("argument 'editor' is not set"));
     editcmd = R_alloc(strlen(cmd) + strlen(filename) + 6, sizeof(char));
-#ifdef Win32
+#ifdef _WIN32
     if (!strcmp(cmd,"internal")) {
 	if (!isString(ti))
 	    error(_("'%s' argument must be a character string"), "title");

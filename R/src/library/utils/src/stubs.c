@@ -25,7 +25,7 @@
 #include <Internal.h>
 #include "localization.h"
 
-#ifdef Win32
+#ifdef _WIN32
 # include "Startup.h"
 # include "getline/getline.h"     /* for gl_load/savehistory */
 # include "getline/wc_history.h"  /* for wgl_load/savehistory */
@@ -247,7 +247,7 @@ SEXP fileedit(SEXP call, SEXP op, SEXP args, SEXP rho)
 	for (i = 0; i < n; i++) {
 	    SEXP el = STRING_ELT(fn, 0);
 	    if (!isNull(el))
-#ifdef Win32
+#ifdef _WIN32
 		f[i] = acopy_string(reEnc(CHAR(el), getCharCE(el), CE_UTF8, 1));
 #else
 		f[i] = acopy_string(translateChar(el));
@@ -268,7 +268,7 @@ SEXP fileedit(SEXP call, SEXP op, SEXP args, SEXP rho)
 	title[0] = "";
     }
     SEXP ed0 = STRING_ELT(ed, 0);
-#ifdef Win32
+#ifdef _WIN32
     editor = acopy_string(reEnc(CHAR(ed0), getCharCE(ed0), CE_UTF8, 1));
 #else
     editor = acopy_string(translateChar(ed0));
@@ -278,7 +278,7 @@ SEXP fileedit(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue;
 }
 
-#ifdef Win32
+#ifdef _WIN32
 SEXP in_loadRconsole(SEXP);
 SEXP in_memsize(SEXP);
 SEXP in_shortpath(SEXP);

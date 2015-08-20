@@ -39,7 +39,7 @@
 
 extern void R_ProcessEvents(void);
 
-#ifdef Win32
+#ifdef _WIN32
 #include <io.h>
 #include <winsock2.h>
 #define _WINSOCKAPI_
@@ -1325,7 +1325,7 @@ RxmlNanoFTPRead(void *ctx, void *dest, int len)
 	    tv.tv_sec = 1;
 	    tv.tv_usec = 0;
 	}
-#elif defined(Win32)
+#elif defined(_WIN32)
 	tv.tv_sec = 0;
 	tv.tv_usec = 2e5;
 #else

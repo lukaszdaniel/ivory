@@ -140,12 +140,12 @@ SEXP (SET_CXTAIL)(SEXP x, SEXP y);
 #include "Errormsg.h"
 
 extern void R_ProcessEvents(void);
-#ifdef Win32
+#ifdef _WIN32
 extern void R_WaitEvent(void);
 #endif
 
 #ifdef R_USE_SIGNALS
-#ifdef Win32
+#ifdef _WIN32
 # include <psignal.h>
 #else
 # include <signal.h>
@@ -158,7 +158,7 @@ extern void R_WaitEvent(void);
 # define FILESEP     "/"
 #endif /* Unix */
 
-#ifdef Win32
+#ifdef _WIN32
 # define OSTYPE      "windows"
 # define FILESEP     "/"
 #endif /* Win32 */
@@ -246,7 +246,7 @@ extern int putenv(char *string);
 #  if defined(MAXPATHLEN)
 /* Try BSD name */
 #    define PATH_MAX MAXPATHLEN
-#  elif defined(Win32)
+#  elif defined(_WIN32)
 /* seems this is now defined by MinGW to be 259, whereas FILENAME_MAX
    and MAX_PATH are 260.  It is not clear that this really is in bytes,
    but might be chars for the Unicode interfaces.
@@ -724,7 +724,7 @@ extern0 int	R_NShowCalls INI_as(50);
 LibExtern Rboolean utf8locale  INI_as(FALSE);  /* is this a UTF-8 locale? */
 LibExtern Rboolean mbcslocale  INI_as(FALSE);  /* is this a MBCS locale? */
 extern0   Rboolean latin1locale INI_as(FALSE); /* is this a Latin-1 locale? */
-#ifdef Win32
+#ifdef _WIN32
 LibExtern unsigned int localeCP  INI_as(1252); /* the locale's codepage */
 extern0   Rboolean WinUTF8out  INI_as(FALSE);  /* Use UTF-8 for output */
 extern0   void WinCheckUTF8(void);
@@ -1277,7 +1277,7 @@ void R_getProcTime(double *data);
 void InitDynload(void);
 void R_CleanTempDir(void);
 
-#ifdef Win32
+#ifdef _WIN32
 void R_fixslash(char *s);
 void R_fixbackslash(char *s);
 wchar_t *filenameToWchar(const SEXP fn, const Rboolean expand);

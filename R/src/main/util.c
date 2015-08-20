@@ -39,7 +39,7 @@
 #include <unistd.h>
 #endif
 
-#ifdef Win32
+#ifdef _WIN32
 void R_UTF8fixslash(char *s);
 static void R_wfixslash(wchar_t *s);
 #endif
@@ -711,7 +711,7 @@ SEXP attribute_hidden do_merge(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 
 /* Functions for getting and setting the working directory. */
-#ifdef Win32
+#ifdef _WIN32
 # define WIN32_LEAN_AND_MEAN 1
 # include <windows.h>
 #endif
@@ -721,7 +721,7 @@ SEXP static intern_getwd(void)
     SEXP rval = R_NilValue;
     char buf[4*PATH_MAX+1];
 
-#ifdef Win32
+#ifdef _WIN32
     {
 	wchar_t wbuf[PATH_MAX+1];
 	int res = GetCurrentDirectoryW(PATH_MAX, wbuf);
@@ -748,7 +748,7 @@ SEXP attribute_hidden do_getwd(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 
-#if defined(Win32) && defined(_MSC_VER)
+#if defined(_WIN32) && defined(_MSC_VER)
 # include <direct.h> /* for chdir, via io.h */
 #endif
 
@@ -765,7 +765,7 @@ SEXP attribute_hidden do_setwd(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* get current directory to return */
     PROTECT(wd = intern_getwd());
 
-#ifdef Win32
+#ifdef _WIN32
     {
 	const wchar_t *path = filenameToWchar(STRING_ELT(s, 0), TRUE);
 	if(_wchdir(path) < 0)
@@ -785,7 +785,7 @@ SEXP attribute_hidden do_setwd(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* remove portion of path before file separator if one exists */
 
-#ifdef Win32
+#ifdef _WIN32
 SEXP attribute_hidden do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, s = R_NilValue;	/* -Wall */
@@ -860,7 +860,7 @@ SEXP attribute_hidden do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
    return "."
    */
 
-#ifdef Win32
+#ifdef _WIN32
 SEXP attribute_hidden do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, s = R_NilValue;	/* -Wall */
@@ -944,7 +944,7 @@ SEXP attribute_hidden do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
 
 
-#ifndef Win32 /* Windows version is in src/gnuwin32/extra.c */
+#ifndef _WIN32 /* Windows version is in src/gnuwin32/extra.c */
 #ifndef HAVE_DECL_REALPATH
 extern char *realpath(const char *path, char *resolved_path);
 #endif
@@ -1435,7 +1435,7 @@ char *Rf_strrchr(const char *s, int c)
     return plast;
 }
 
-#ifdef Win32
+#ifdef _WIN32
 void R_fixslash(char *s)
 {
     char *p = s;
@@ -1928,7 +1928,7 @@ static const struct {
     { NULL,  0 }
 };
 
-#ifdef Win32
+#ifdef _WIN32
 #define BUFFER_SIZE 512
 typedef int (WINAPI *PGSDLN)(LPWSTR, int);
 
@@ -2049,7 +2049,7 @@ int Scollate(SEXP a, SEXP b)
     if (!collationLocaleSet) {
 	int errsv = errno;      /* OSX may set errno in the operations below. */
 	collationLocaleSet = 1;
-#ifndef Win32
+#ifndef _WIN32
 	if (strcmp("C", getLocale()) ) {
 #else
 	const char *p = getenv("R_ICU_LOCALE");
@@ -2099,7 +2099,7 @@ SEXP attribute_hidden do_ICUget(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 void attribute_hidden resetICUcollator(void) {}
 
-# ifdef Win32
+# ifdef _WIN32
 
 static int Rstrcoll(const char *s1, const char *s2)
 {
@@ -2258,7 +2258,7 @@ SEXP attribute_hidden do_findinterval(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-#ifdef Win32
+#ifdef _WIN32
 // this includes RS.h
 # undef ERROR
 #endif
@@ -2396,7 +2396,7 @@ SEXP attribute_hidden do_formatC(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* <UTF8> char here is either ASCII or handled as a whole */
 
-#ifdef Win32
+#ifdef _WIN32
 /* avoid latest MinGW's redefinition in stdio.h */
 #include <trioremap.h>
 #endif

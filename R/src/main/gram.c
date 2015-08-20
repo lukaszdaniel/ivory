@@ -4311,7 +4311,7 @@ static int SkipSpace(void)
 {
     int c;
 
-#ifdef Win32
+#ifdef _WIN32
     if(!mbcslocale) { /* 0xa0 is NBSP in all 8-bit Windows locales */
 	while ((c = xxgetc()) == ' ' || c == '\t' || c == '\f' ||
 	       (unsigned int) c == 0xa0) ;
@@ -4565,7 +4565,7 @@ static int NumericValue(int c)
    Some (e.g. Solaris, FreeBSD) have Unicode wchar_t but do not define it.
 */
 
-#if defined(Win32) || defined(__STDC_ISO_10646__)
+#if defined(_WIN32) || defined(__STDC_ISO_10646__)
 typedef wchar_t ucs_t;
 # define mbcs_get_next2 mbcs_get_next
 #else
@@ -4617,7 +4617,7 @@ static SEXP mkStringUTF8(const ucs_t *wcs, int cnt)
     int nb;
 
 /* NB: cnt includes the terminator */
-#ifdef Win32
+#ifdef _WIN32
     nb = cnt*4; /* UCS-2/UTF-16 so max 4 bytes per wchar_t */
 #else
     nb = cnt*6;

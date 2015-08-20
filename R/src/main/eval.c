@@ -89,7 +89,7 @@ static int R_Profiling = 0;
 
    L. T.  */
 
-#ifdef Win32
+#ifdef _WIN32
 # define WIN32_LEAN_AND_MEAN 1
 # include <windows.h>		/* for CreateEvent, SetEvent */
 # include <process.h>		/* for _beginthread, _endthread */
@@ -109,7 +109,7 @@ static size_t R_Srcfile_bufcount;                  /* how big is the array above
 static SEXP R_Srcfiles_buffer = NULL;              /* a big RAWSXP to use as a buffer for filenames and pointers to them */
 static int R_Profiling_Error;		   /* record errors here */
 
-#ifdef Win32
+#ifdef _WIN32
 HANDLE MainThread;
 HANDLE ProfileEvent;
 #endif /* Win32 */
@@ -182,7 +182,7 @@ static void lineprof(char* buf, SEXP srcref)
 
 /* FIXME: This should be done wih a proper configure test, also making
    sure that the pthreads library is linked in. LT */
-#ifndef Win32
+#ifndef _WIN32
 #if (defined(__APPLE__) || defined(_REENTRANT) || defined(HAVE_OPENMP)) && \
      ! defined(HAVE_PTHREAD)
 # define HAVE_PTHREAD
@@ -203,7 +203,7 @@ static void doprof(int sig)  /* sig is ignored in Windows */
 
     buf[0] = '\0';
 
-#ifdef Win32
+#ifdef _WIN32
     SuspendThread(MainThread);
 #elif defined(HAVE_PTHREAD)
     if (! pthread_equal(pthread_self(), R_profiled_thread)) {
@@ -245,7 +245,7 @@ static void doprof(int sig)  /* sig is ignored in Windows */
 
     /* I believe it would be slightly safer to place this _after_ the
        next two bits, along with the signal() call. LT */
-#ifdef Win32
+#ifdef _WIN32
     ResumeThread(MainThread);
 #endif /* Win32 */
 
@@ -255,13 +255,13 @@ static void doprof(int sig)  /* sig is ignored in Windows */
     if(strlen(buf))
 	fprintf(R_ProfileOutfile, "%s\n", buf);
 
-#ifndef Win32
+#ifndef _WIN32
     signal(SIGPROF, doprof);
 #endif /* not Win32 */
 
 }
 
-#ifdef Win32
+#ifdef _WIN32
 /* Profiling thread main function */
 static void __cdecl ProfileThread(void *pwait)
 {
@@ -282,7 +282,7 @@ static void doprof_null(int sig)
 
 static void R_EndProfiling(void)
 {
-#ifdef Win32
+#ifdef _WIN32
     SetEvent(ProfileEvent);
     CloseHandle(MainThread);
 #else /* not Win32 */
@@ -311,7 +311,7 @@ static void R_InitProfiling(SEXP filename, int append, double dinterval,
 			    int mem_profiling, int gc_profiling,
 			    int line_profiling, int numfiles, int bufsize)
 {
-#ifndef Win32
+#ifndef _WIN32
     struct itimerval itv;
 #else
     int wait;
@@ -351,7 +351,7 @@ static void R_InitProfiling(SEXP filename, int append, double dinterval,
 	*(R_Srcfiles[0]) = '\0';
     }
 
-#ifdef Win32
+#ifdef _WIN32
     /* need to duplicate to make a real handle */
     DuplicateHandle(Proc, GetCurrentThread(), Proc, &MainThread,
 		    0, FALSE, DUPLICATE_SAME_ACCESS);
@@ -540,7 +540,7 @@ SEXP eval(SEXP e, SEXP rho)
     R_CheckStack();
 
     tmp = R_NilValue;		/* -Wall */
-#ifdef Win32
+#ifdef _WIN32
     /* This is an inlined version of Rwin_fpreset (src/gnuwin/extra.c)
        and resets the precision, rounding and exception modes of a ix86
        fpu.

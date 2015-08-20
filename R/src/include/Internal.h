@@ -30,7 +30,7 @@
 
 /* Function Names */
 
-#if Win32
+#if _WIN32
 SEXP do_mkjunction(SEXP, SEXP, SEXP, SEXP);
 SEXP do_shellexec(SEXP, SEXP, SEXP, SEXP);
 SEXP do_syswhich(SEXP, SEXP, SEXP, SEXP);

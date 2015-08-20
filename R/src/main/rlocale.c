@@ -154,7 +154,7 @@ int Ri18n_wcswidth (const wchar_t *s, size_t n)
     return rs;
 }
 
-#if defined(Win32) || defined(_AIX) || defined(__APPLE__)
+#if defined(_WIN32) || defined(_AIX) || defined(__APPLE__)
 static int wcsearch(int wint, const struct interval *table, int max)
 {
     int min = 0;
@@ -233,7 +233,7 @@ extern const char *locale2charset(const char *);
  *  iswalpha etc. does not function at all in AIX.
  *  all locale wchar_t == UNICODE
  ********************************************************************/
-#if defined(Win32) || defined(_AIX)
+#if defined(_WIN32) || defined(_AIX)
 #define ISWFUNC(ISWNAME) static int Ri18n_isw ## ISWNAME (wint_t wc) \
 {									\
     return wcsearch(wc,table_w ## ISWNAME , table_w ## ISWNAME ## _count); \

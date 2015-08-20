@@ -47,7 +47,7 @@
 
 extern void R_ProcessEvents(void);
 
-#ifdef Win32
+#ifdef _WIN32
 #include <io.h>
 #include <winsock2.h>
 #ifndef EWOULDBLOCK
@@ -65,7 +65,7 @@ extern void R_FlushConsole(void);
 #endif
 
 #include <R_ext/R-ftp-http.h>
-#ifdef Win32
+#ifdef _WIN32
 # include <R_ext/Print.h>
 #endif
 
@@ -161,7 +161,7 @@ setSelectMask(InputHandler *handlers, fd_set *readMask)
 
 /* where strncasecmp is defined seems system-specific,
    and on Windows the cross-compiler doesn't find strings.h */
-#if defined(HAVE_STRINGS_H) && !defined(Win32)
+#if defined(HAVE_STRINGS_H) && !defined(_WIN32)
 # include <strings.h>
 #endif
 #if !defined(strncasecmp) && defined(HAVE_DECL_STRNCASECMP) && !HAVE_DECL_STRNCASECMP
@@ -233,7 +233,7 @@ static int socket_errno(void)
  * Currently it just checks for proxy informations
  */
 
-#ifdef Win32
+#ifdef _WIN32
 # include "graphapp.h"
 #endif
 
@@ -271,7 +271,7 @@ RxmlNanoHTTPInit(void)
     chkuser:
 	if((env = getenv("http_proxy_user")) != NULL) {   
 	    if (proxyUser != NULL) {xmlFree(proxyUser); proxyUser = NULL;}
-#ifdef Win32
+#ifdef _WIN32
 	    if (strcmp(env, "ask") == 0) 
 		env = askUserPass("Proxy Authentication");
 #endif
@@ -640,7 +640,7 @@ RxmlNanoHTTPRecv(RxmlNanoHTTPCtxtPtr ctxt)
 		tv.tv_sec = timeout;
 		tv.tv_usec = 0;
 	    }
-#elif defined(Win32)
+#elif defined(_WIN32)
 	    tv.tv_sec = 0;
 	    tv.tv_usec = 2e5;
 #else
@@ -1018,7 +1018,7 @@ RxmlNanoHTTPConnectAttempt(struct sockaddr *addr)
 	    tv.tv_sec = timeout;
 	    tv.tv_usec = 0;
 	}
-#elif defined(Win32)
+#elif defined(_WIN32)
 	tv.tv_sec = 0;
 	tv.tv_usec = 2e5;
 #else
@@ -1311,7 +1311,7 @@ RxmlNanoHTTPMethod(const char *URL, const char *method, const char *input,
     int blen, ilen, ret;
     int head;
     int nbRedirects = 0;
-#ifdef Win32
+#ifdef _WIN32
     int nAuthenticate = 0;
 #endif
     char *redirURL = NULL;
@@ -1436,7 +1436,7 @@ RxmlNanoHTTPMethod(const char *URL, const char *method, const char *input,
         xmlFree(p);
     }
 
-#ifdef Win32
+#ifdef _WIN32
     /* Prompt for username/password again if status was proxy
        authentication failure */
     if(proxy && !nAuthenticate && ctxt->returnValue == 407) {

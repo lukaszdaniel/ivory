@@ -21,7 +21,7 @@
 # include <config.h>
 #endif
 
-#ifdef Win32
+#ifdef _WIN32
 # define R_USE_SIGNALS 1
 #endif
 #include <Defn.h>
@@ -79,7 +79,7 @@ static void curlCommon(CURL *hnd, int redirect, int verify)
     if (verify) {
 	if (capath && capath[0])
 	    curl_easy_setopt(hnd, CURLOPT_CAINFO, capath);
-#ifdef Win32
+#ifdef _WIN32
 	else
 	    curl_easy_setopt(hnd, CURLOPT_SSL_VERIFYPEER, 0L);
 #endif
@@ -196,7 +196,7 @@ static void putdashes(int *pold, int new)
     *pold = new;
 }
 
-#ifdef Win32
+#ifdef _WIN32
 // ------- Windows progress bar -----------
 #include <ga.h>
 
@@ -364,7 +364,7 @@ in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    // multiple progress bars on Windows.
 	    curl_easy_setopt(hnd[i], CURLOPT_NOPROGRESS, 0L);
 	    ndashes = 0;
-#ifdef Win32
+#ifdef _WIN32
 	    if (R_Interactive) {
 		if (!pbar.wprog) {
 		    pbar.wprog = newwindow(_("Download progress"),
@@ -435,7 +435,7 @@ in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 	curl_multi_perform(mhnd, &still_running);
     } while(still_running);
     R_Busy(0);
-#ifdef Win32
+#ifdef _WIN32
     if (R_Interactive && !quiet) {
 	endcontext(&(pbar.cntxt));
 	doneprogressbar(&pbar);

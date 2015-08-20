@@ -647,13 +647,13 @@ FUNTAB R_FunTab[] =
 {"machine",	do_machine,	0,	11,	0,	{PP_FUNCALL, PREC_FN,	0}},
 {"commandArgs", do_commandArgs, 0,	11,	0,	{PP_FUNCALL, PREC_FN,	0}},
 
-#ifdef Win32
+#ifdef _WIN32
 {"system",	do_system,	0,	211,	5,	{PP_FUNCALL, PREC_FN,	0}},
 #else
 {"system",	do_system,	0,	211,	2,	{PP_FUNCALL, PREC_FN,	0}},
 #endif
 
-#ifdef Win32
+#ifdef _WIN32
 {"shell.exec",	do_shellexec,	0,	111,	1,	{PP_FUNCALL, PREC_FN,	0}},
 {"Sys.which",	do_syswhich,	0,	11,	1,	{PP_FUNCALL, PREC_FN,	0}},
 {"mkjunction", do_mkjunction,	0,	11,	2,	{PP_FUNCALL, PREC_FN,	0}},

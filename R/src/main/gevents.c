@@ -165,7 +165,7 @@ do_getGraphicsEvent(SEXP call, SEXP op, SEXP args, SEXP env)
 	    /* make sure we still have at least one device listening for events, and throw an error if not*/
 	    if(!haveListeningDev())
 		return R_NilValue;
-#ifdef Win32
+#ifdef _WIN32
 	    R_WaitEvent();
 #endif
 	    R_ProcessEvents();

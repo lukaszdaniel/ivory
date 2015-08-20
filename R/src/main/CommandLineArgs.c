@@ -82,7 +82,7 @@ do_commandArgs(SEXP call, SEXP op, SEXP args, SEXP env)
     return vals;
 }
 
-#ifdef Win32
+#ifdef _WIN32
 extern Rboolean R_LoadRconsole;
 #endif
 
@@ -138,7 +138,7 @@ R_common_command_line(int *pac, char **argv, Rstart Rp)
 		Rp->LoadSiteFile = FALSE; /* --no-site-file */
 		Rp->LoadInitFile = FALSE; /* --no-init-file */
 		Rp->NoRenviron = TRUE;    // --no-environ
-#ifdef Win32
+#ifdef _WIN32
 		R_LoadRconsole = FALSE;
 #endif
 	    }
@@ -176,7 +176,7 @@ R_common_command_line(int *pac, char **argv, Rstart Rp)
 		    R_StdinEnc[30] = '\0';
 		}
 	    }
-#ifdef Win32
+#ifdef _WIN32
 	    else if (!strcmp(*av, "--no-Rconsole")) {
 		R_LoadRconsole = 0;
 	    }

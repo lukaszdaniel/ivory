@@ -38,7 +38,7 @@ extern "C" {
 #endif
 
 
-#ifdef Win32
+#ifdef _WIN32
 #include <windows.h>
 #define CACHE_DLL_SYM 1
 #else

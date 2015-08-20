@@ -37,14 +37,14 @@
 #include <Localization.h>
 #include "zlib.h"
 
-#ifdef Win32
+#ifdef _WIN32
 # define OS_CODE  0x06
 #else
 # define OS_CODE  0x03 
 #endif
 
 /* R ADDITION */
-#ifdef Win32
+#ifdef _WIN32
 # define Rz_off_t off64_t
 #elif defined(HAVE_OFF_T) && defined(HAVE_FSEEKO)
 # define Rz_off_t off_t

@@ -92,7 +92,7 @@ static SEXP insertString(char *str, LocalData *l)
 static R_INLINE Rboolean Rspace(unsigned int c)
 {
     if (c == ' ' || c == '\t' || c == '\n' || c == '\r') return TRUE;
-#ifdef Win32
+#ifdef _WIN32
     /* 0xa0 is NBSP in all 8-bit Windows locales */
     if(!mbcslocale && c == 0xa0) return TRUE;
 #else

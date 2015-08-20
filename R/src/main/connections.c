@@ -86,7 +86,7 @@
 #include <R_ext/Print.h> // REprintf, REvprintf
 #undef ERROR			/* for compilation on Windows */
 
-#ifdef Win32
+#ifdef _WIN32
 #include <trioremap.h>
 #endif
 
@@ -117,7 +117,7 @@ typedef long long int _lli_t;
 
 /* Win32 does have popen, but it does not work in GUI applications,
    so test that later */
-#ifdef Win32
+#ifdef _WIN32
 # include <Startup.h>
 #endif
 
@@ -512,7 +512,7 @@ void init_con(Rconnection newcon, const char *description, int enc,
 
 /* ------------------- file connections --------------------- */
 
-#ifdef Win32
+#ifdef _WIN32
 # define f_seek fseeko64
 # define f_tell ftello64
 # define OFF_T off64_t
@@ -526,7 +526,7 @@ void init_con(Rconnection newcon, const char *description, int enc,
 # define OFF_T long
 #endif
 
-#ifdef Win32
+#ifdef _WIN32
 size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
 #endif
 
@@ -535,7 +535,7 @@ typedef struct fileconn {
     OFF_T rpos, wpos;
     Rboolean last_was_write;
     Rboolean raw;
-#ifdef Win32
+#ifdef _WIN32
     Rboolean anon_file;
     char name[PATH_MAX+1];
 #endif
@@ -558,7 +558,7 @@ static Rboolean file_open(Rconnection con)
     } else name = R_ExpandFileName(con->description);
     errno = 0; /* some systems require this */
     if(strcmp(name, "stdin")) {
-#ifdef Win32
+#ifdef _WIN32
 	if(con->enc == CE_UTF8) {
 	    int n = strlen(name);
 	    wchar_t wname[2 * (n+1)], wmode[10];
@@ -595,13 +595,13 @@ static Rboolean file_open(Rconnection con)
 	 * e.g. http://www.codeproject.com/KB/files/handles.aspx
 	 */
 	unlink(name);
-#ifdef Win32
+#ifdef _WIN32
 	strncpy(thiscon->name, name, PATH_MAX);
 	thiscon->name[PATH_MAX - 1] = '\0';
 #endif
 	free((char *) name); /* only free if allocated by R_tmpnam */
     }
-#ifdef Win32
+#ifdef _WIN32
     thiscon->anon_file = temp;
 #endif
     thiscon->fp = fp;
@@ -635,7 +635,7 @@ static void file_close(Rconnection con)
     if(con->isopen && strcmp(con->description, "stdin"))
 	con->status = fclose(thiscon->fp);
     con->isopen = FALSE;
-#ifdef Win32
+#ifdef _WIN32
     if(thiscon->anon_file) unlink(thiscon->name);
 #endif
 }
@@ -693,7 +693,7 @@ static double file_seek(Rconnection con, double where, int origin, int rw)
     switch(origin) {
     case 2: whence = SEEK_CUR; break;
     case 3: whence = SEEK_END;
-//#ifdef Win32
+//#ifdef _WIN32
 	    /* work around a bug in MinGW runtime 3.8 fseeko64, PR#7896
 	       seems no longer to be needed */
 //	    if(con->canwrite) fflush(fp);
@@ -930,7 +930,7 @@ static size_t fifo_write(const void *ptr, size_t size, size_t nitems,
     return write(thiscon->fd, ptr, size * nitems)/size;
 }
 
-#elif defined(Win32)  // ----- Windows part ------
+#elif defined(_WIN32)  // ----- Windows part ------
 
 // PR#15600, based on https://github.com/0xbaadf00d/r-project_win_fifo
 # define WIN32_LEAN_AND_MEAN 1
@@ -1263,7 +1263,7 @@ static Rboolean pipe_open(Rconnection con)
     char mode[3];
     Rfileconn thiscon = con->conprivate;
 
-#ifdef Win32
+#ifdef _WIN32
     strncpy(mode, con->mode, 2);
     mode[2] = '\0';
 #else
@@ -1271,7 +1271,7 @@ static Rboolean pipe_open(Rconnection con)
     mode[1] = '\0';
 #endif
     errno = 0;
-#ifdef Win32
+#ifdef _WIN32
     if(con->enc == CE_UTF8) {
 	int n = strlen(con->description);
 	wchar_t wname[2 * (n+1)], wmode[10];
@@ -1343,7 +1343,7 @@ newpipe(const char *description, int ienc, const char *mode)
     return newcon;
 }
 
-#ifdef Win32
+#ifdef _WIN32
 extern Rconnection
 newWpipe(const char *description, int enc, const char *mode);
 #endif
@@ -1362,7 +1362,7 @@ SEXP attribute_hidden do_pipe(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("invalid '%s' argument"), "description");
     if(LENGTH(scmd) > 1)
 	warning(_("only first element of '%s' argument will be used"), "description");
-#ifdef Win32
+#ifdef _WIN32
     if( !IS_ASCII(STRING_ELT(scmd, 0)) ) {
 	ienc = CE_UTF8;
 	file = translateCharUTF8(STRING_ELT(scmd, 0));
@@ -1383,7 +1383,7 @@ SEXP attribute_hidden do_pipe(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("invalid '%s' argument"), "encoding");
 
     ncon = NextConnection();
-#ifdef Win32
+#ifdef _WIN32
     if(CharacterMode != RTerm)
 	con = newWpipe(file, ienc, strlen(open) ? open : "r");
     else
@@ -1406,7 +1406,7 @@ SEXP attribute_hidden do_pipe(SEXP call, SEXP op, SEXP args, SEXP env)
     PROTECT(ans = ScalarInteger(ncon));
     PROTECT(classs = allocVector(STRSXP, 2));
     SET_STRING_ELT(classs, 0, mkChar("pipe"));
-#ifdef Win32
+#ifdef _WIN32
     if(CharacterMode != RTerm)
 	SET_STRING_ELT(classs, 0, mkChar("pipeWin32"));
 #endif
@@ -2078,7 +2078,7 @@ SEXP attribute_hidden do_gzfile(SEXP call, SEXP op, SEXP args, SEXP env)
 
 /* ------------------- clipboard connections --------------------- */
 
-#ifdef Win32
+#ifdef _WIN32
 # define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
 extern int GA_clipboardhastext(void); /* from ga.h */
@@ -2098,7 +2098,7 @@ static Rboolean clp_open(Rconnection con)
     thiscon->pos = 0;
     if(con->canread) {
 	/* copy the clipboard contents now */
-#ifdef Win32
+#ifdef _WIN32
 	HGLOBAL hglb;
 	char *pc;
 	if(GA_clipboardhastext() &&
@@ -2148,7 +2148,7 @@ static Rboolean clp_open(Rconnection con)
 
 static void clp_writeout(Rconnection con)
 {
-#ifdef Win32
+#ifdef _WIN32
     Rclpconn thiscon = con->conprivate;
 
     HGLOBAL hglb;
@@ -2254,7 +2254,7 @@ static size_t clp_write(const void *ptr, size_t size, size_t nitems,
     for(i = 0; i < len; i++) {
 	if(thiscon->pos >= thiscon->len) break;
 	c = *p++;
-#ifdef Win32
+#ifdef _WIN32
     /* clipboard requires CRLF termination */
 	if(c == '\n') {
 	    *q++ = '\r';
@@ -2461,7 +2461,7 @@ SEXP attribute_hidden do_stderr(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* isatty is in unistd.h, or io.h on Windows */
-#ifdef Win32
+#ifdef _WIN32
 # include <io.h>
 #endif
 SEXP attribute_hidden do_isatty(SEXP call, SEXP op, SEXP args, SEXP env)
@@ -4839,7 +4839,7 @@ SEXP attribute_hidden do_sinknumber(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ScalarInteger(errcon ? R_SinkNumber : R_ErrorCon);
 }
 
-#ifdef Win32
+#ifdef _WIN32
 void WinCheckUTF8(void)
 {
     if(CharacterMode == RGui) WinUTF8out = (SinkCons[R_SinkNumber] == 1);
@@ -4972,7 +4972,7 @@ SEXP attribute_hidden do_url(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("invalid '%s' argument"), "description");
     if(LENGTH(scmd) > 1)
 	warning(_("only first element of '%s' argument will be used"), "description");
-#ifdef Win32
+#ifdef _WIN32
     winmeth = 1;
     if(PRIMVAL(op) == 1 && !IS_ASCII(STRING_ELT(scmd, 0)) ) { // file(<non-ASCII>, *)
 	ienc = CE_UTF8;
@@ -5025,13 +5025,13 @@ SEXP attribute_hidden do_url(SEXP call, SEXP op, SEXP args, SEXP env)
     meth = streql(cmeth, "libcurl"); // 1 if "libcurl", else 0
     defmeth = streql(cmeth, "default");
     if (streql(cmeth, "wininet")) {
-#ifdef Win32
+#ifdef _WIN32
 	winmeth = 1;  // it already was as this is the default
 #else
 	error(_("'method = \"wininet\"' is only supported on Windows"));
 #endif
     }
-#ifdef Win32
+#ifdef _WIN32
     else if (streql(cmeth, "internal")) winmeth = 0;
 #endif
 
@@ -5049,7 +5049,7 @@ SEXP attribute_hidden do_url(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
 		error(_("ftps:// URLs are not supported by this method"));
 	}
-#ifdef Win32
+#ifdef _WIN32
 	if (!winmeth && strncmp(url, "https://", 8) == 0) {
 # ifdef HAVE_LIBCURL
 	    if (defmeth) meth = 1; else
@@ -5068,7 +5068,7 @@ SEXP attribute_hidden do_url(SEXP call, SEXP op, SEXP args, SEXP env)
     ncon = NextConnection();
     if(strncmp(url, "file://", 7) == 0) {
 	int nh = 7;
-#ifdef Win32
+#ifdef _WIN32
 	/* on Windows we have file:///d:/path/to
 	   whereas on Unix it is file:///path/to */
 	if (strlen(url) > 9 && url[7] == '/' && url[9] == ':') nh = 8;
@@ -5096,7 +5096,7 @@ SEXP attribute_hidden do_url(SEXP call, SEXP op, SEXP args, SEXP env)
 		}
 	    }
 	    if(strcmp(url, "clipboard") == 0 ||
-#ifdef Win32
+#ifdef _WIN32
 	       strncmp(url, "clipboard-", 10) == 0
 #else
 	       strcmp(url, "X11_primary") == 0

@@ -71,7 +71,7 @@ static const struct interval_wcwidth table_wcwidth[] = {
     {0xd8,0xd8,{1,2,2,1,2,1,1}},
     {0xd9,0xdd,{1,2,1,1,1,1,1}},
     {0xde,0xdf,{1,2,2,1,2,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0xe0,0xe1,{1,2,1,2,1,1,1}},
 #else					/* Win32 */
     {0xe0,0xe1,{1,2,1,2,2,1,1}},
@@ -79,13 +79,13 @@ static const struct interval_wcwidth table_wcwidth[] = {
     {0xe2,0xe5,{1,2,1,1,1,1,1}},
     {0xe6,0xe6,{1,2,2,1,2,1,1}},
     {0xe7,0xe7,{1,2,1,1,1,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0xe8,0xea,{1,2,1,2,1,1,1}},
 #else					/* Win32 */
     {0xe8,0xea,{1,2,1,2,2,1,1}},
 #endif					/* Win32 */
     {0xeb,0xeb,{1,2,1,1,1,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0xec,0xed,{1,2,1,2,1,1,1}},
 #else					/* Win32 */
     {0xec,0xed,{1,2,1,2,2,1,1}},
@@ -93,7 +93,7 @@ static const struct interval_wcwidth table_wcwidth[] = {
     {0xee,0xef,{1,2,1,1,1,1,1}},
     {0xf0,0xf0,{1,2,2,1,2,1,1}},
     {0xf1,0xf1,{1,2,1,1,1,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0xf2,0xf3,{1,2,1,2,1,1,1}},
 #else					/* Win32 */
     {0xf2,0xf3,{1,2,1,2,2,1,1}},
@@ -101,13 +101,13 @@ static const struct interval_wcwidth table_wcwidth[] = {
     {0xf4,0xf6,{1,2,1,1,1,1,1}},
     {0xf7,0xf7,{1,2,2,2,2,2,2}},
     {0xf8,0xf8,{1,2,2,1,2,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0xf9,0xfa,{1,2,1,2,1,1,1}},
 #else					/* Win32 */
     {0xf9,0xfa,{1,2,1,2,2,1,1}},
 #endif					/* Win32 */
     {0xfb,0xfb,{1,2,1,1,1,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0xfc,0xfc,{1,2,1,2,1,1,1}},
 #else					/* Win32 */
     {0xfc,0xfc,{1,2,1,2,2,1,1}},
@@ -115,7 +115,7 @@ static const struct interval_wcwidth table_wcwidth[] = {
     {0xfd,0xfd,{1,2,1,1,1,1,1}},
     {0xfe,0xfe,{1,2,2,1,2,1,1}},
     {0xff,0x100,{1,2,1,1,1,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0x101,0x101,{1,2,1,2,1,1,1}},
 #else					/* Win32 */
     {0x101,0x101,{1,2,1,2,2,1,1}},
@@ -123,14 +123,14 @@ static const struct interval_wcwidth table_wcwidth[] = {
     {0x102,0x110,{1,2,1,1,1,1,1}},
     {0x111,0x111,{1,2,2,1,2,1,1}},
     {0x112,0x112,{1,2,1,1,1,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0x113,0x113,{1,2,1,2,1,1,1}},
 #else					/* Win32 */
     {0x113,0x113,{1,2,1,2,2,1,1}},
 #endif					/* Win32 */
     {0x114,0x115,{1,1,1,1,1,1,1}},
     {0x116,0x11a,{1,2,1,1,1,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0x11b,0x11b,{1,2,1,2,1,1,1}},
 #else					/* Win32 */
     {0x11b,0x11b,{1,2,1,2,2,1,1}},
@@ -140,7 +140,7 @@ static const struct interval_wcwidth table_wcwidth[] = {
     {0x124,0x125,{1,2,1,1,1,1,1}},
     {0x126,0x127,{1,2,2,1,2,1,1}},
     {0x128,0x12a,{1,2,1,1,1,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0x12b,0x12b,{1,2,1,2,1,1,1}},
 #else					/* Win32 */
     {0x12b,0x12b,{1,2,1,2,2,1,1}},
@@ -153,20 +153,20 @@ static const struct interval_wcwidth table_wcwidth[] = {
     {0x139,0x13e,{1,2,1,1,1,1,1}},
     {0x13f,0x142,{1,2,2,1,2,1,1}},
     {0x143,0x143,{1,2,1,1,1,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0x144,0x144,{1,2,1,2,1,1,1}},
 #else					/* Win32 */
     {0x144,0x144,{1,2,1,2,2,1,1}},
 #endif					/* Win32 */
     {0x145,0x147,{1,2,1,1,1,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0x148,0x148,{1,2,1,2,1,1,1}},
 #else					/* Win32 */
     {0x148,0x148,{1,2,1,2,2,1,1}},
 #endif					/* Win32 */
     {0x149,0x14b,{1,2,2,1,2,1,1}},
     {0x14c,0x14c,{1,2,1,1,1,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0x14d,0x14d,{1,2,1,2,1,1,1}},
 #else					/* Win32 */
     {0x14d,0x14d,{1,2,1,2,2,1,1}},
@@ -177,7 +177,7 @@ static const struct interval_wcwidth table_wcwidth[] = {
     {0x154,0x165,{1,2,1,1,1,1,1}},
     {0x166,0x167,{1,2,2,1,2,1,1}},
     {0x168,0x16a,{1,2,1,1,1,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0x16b,0x16b,{1,2,1,2,1,1,1}},
 #else					/* Win32 */
     {0x16b,0x16b,{1,2,1,2,2,1,1}},
@@ -185,49 +185,49 @@ static const struct interval_wcwidth table_wcwidth[] = {
     {0x16c,0x17e,{1,2,1,1,1,1,1}},
     {0x17f,0x1cc,{1,1,1,1,1,1,1}},
     {0x1cd,0x1cd,{1,2,1,1,1,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0x1ce,0x1ce,{1,2,1,2,1,1,1}},
 #else					/* Win32 */
     {0x1ce,0x1ce,{1,2,1,2,2,1,1}},
 #endif					/* Win32 */
     {0x1cf,0x1cf,{1,2,1,1,1,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0x1d0,0x1d0,{1,2,1,2,1,1,1}},
 #else					/* Win32 */
     {0x1d0,0x1d0,{1,2,1,2,2,1,1}},
 #endif					/* Win32 */
     {0x1d1,0x1d1,{1,2,1,1,1,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0x1d2,0x1d2,{1,2,1,2,1,1,1}},
 #else					/* Win32 */
     {0x1d2,0x1d2,{1,2,1,2,2,1,1}},
 #endif					/* Win32 */
     {0x1d3,0x1d3,{1,2,1,1,1,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0x1d4,0x1d4,{1,2,1,2,1,1,1}},
 #else					/* Win32 */
     {0x1d4,0x1d4,{1,2,1,2,2,1,1}},
 #endif					/* Win32 */
     {0x1d5,0x1d5,{1,2,1,1,1,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0x1d6,0x1d6,{1,2,1,2,1,1,1}},
 #else					/* Win32 */
     {0x1d6,0x1d6,{1,2,1,2,2,1,1}},
 #endif					/* Win32 */
     {0x1d7,0x1d7,{1,2,1,1,1,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0x1d8,0x1d8,{1,2,1,2,1,1,1}},
 #else					/* Win32 */
     {0x1d8,0x1d8,{1,2,1,2,2,1,1}},
 #endif					/* Win32 */
     {0x1d9,0x1d9,{1,2,1,1,1,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0x1da,0x1da,{1,2,1,2,1,1,1}},
 #else					/* Win32 */
     {0x1da,0x1da,{1,2,1,2,2,1,1}},
 #endif					/* Win32 */
     {0x1db,0x1db,{1,2,1,1,1,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0x1dc,0x1dc,{1,2,1,2,1,1,1}},
 #else					/* Win32 */
     {0x1dc,0x1dc,{1,2,1,2,2,1,1}},
@@ -235,7 +235,7 @@ static const struct interval_wcwidth table_wcwidth[] = {
     {0x1dd,0x1f4,{1,1,1,1,1,1,1}},
     {0x1f5,0x1f5,{1,2,1,1,1,1,1}},
     {0x1f6,0x1f8,{1,1,1,1,1,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0x1f9,0x1f9,{1,1,1,1,1,1,1}},
 #else					/* Win32 */
     {0x1f9,0x1f9,{1,1,1,1,1,1,1}},
@@ -243,13 +243,13 @@ static const struct interval_wcwidth table_wcwidth[] = {
     {0x1fa,0x220,{1,1,1,1,1,1,1}},
     {0x222,0x233,{1,1,1,1,1,1,1}},
     {0x250,0x250,{1,1,1,1,1,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0x251,0x251,{1,1,1,2,1,1,1}},
 #else					/* Win32 */
     {0x251,0x251,{1,1,1,2,2,1,1}},
 #endif					/* Win32 */
     {0x252,0x260,{1,1,1,1,1,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0x261,0x261,{1,1,1,2,1,1,1}},
 #else					/* Win32 */
     {0x261,0x261,{1,1,1,2,2,1,1}},
@@ -1158,7 +1158,7 @@ static const struct interval_wcwidth table_wcwidth[] = {
     {0xe7a7,0xe7b3,{1,1,1,1,2,1,1}},
     {0xe7b4,0xe7b4,{1,1,1,1,2,2,1}},
     {0xe7b5,0xe7c6,{1,1,1,1,2,1,1}},
-#ifdef					Win32
+#ifdef					_WIN32
     {0xe7c7,0xe7c7,{1,1,1,1,1,1,1}},
 #else					/* Win32 */
     {0xe7c7,0xe7c7,{1,1,1,1,2,1,1}},

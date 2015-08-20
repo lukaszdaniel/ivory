@@ -96,7 +96,7 @@
 #include <float.h> /* for DBL_DIG */
 #include <Print.h>
 #include <Fileio.h>
-#ifdef Win32
+#ifdef _WIN32
 #include <trioremap.h>
 #endif
 

@@ -62,7 +62,7 @@ R --slave --no-restore --vanilla --file=foo [script_args]
 # if !defined(PATH_MAX)
 #  if defined(MAXPATHLEN)
 #    define PATH_MAX MAXPATHLEN
-#  elif defined(Win32)
+#  elif defined(_WIN32)
 #    define PATH_MAX 260
 #  else
 /* quite possibly unlimited, so we make this large, and test when used */

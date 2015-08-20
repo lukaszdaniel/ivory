@@ -29,7 +29,7 @@
 #include <Rinternals.h>
 #include <R_ext/Parse.h>
 
-#ifndef Win32
+#ifndef _WIN32
 /* From tcltk_unix.c */
 void Tcl_unix_setup(void);
 #endif
@@ -45,7 +45,7 @@ SEXP dotTclcallback(SEXP args);
 
 /* Used by .C */
 
-#ifdef Win32
+#ifdef _WIN32
 void tcltk_start(void);
 void tcltk_end(void);
 #else

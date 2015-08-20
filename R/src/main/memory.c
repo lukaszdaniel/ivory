@@ -60,7 +60,7 @@
 
    For Win32, Valgrind is useful only if running under Wine.
 */
-#ifdef Win32
+#ifdef _WIN32
 # ifndef USE_VALGRIND_FOR_WINE
 # define NVALGRIND 1
 #endif
@@ -92,7 +92,7 @@
 #include <Rmath.h> // R_pow_di
 #include <Print.h> // R_print
 
-#if defined(Win32)
+#if defined(_WIN32)
 extern void *Rm_malloc(size_t n);
 extern void *Rm_calloc(size_t n_elements, size_t element_size);
 extern void Rm_free(void * p);

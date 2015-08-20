@@ -135,7 +135,7 @@ void R_CheckUserInterrupt(void)
        concurrency support. LT */
 
     R_ProcessEvents(); /* Also processes timing limits */
-#ifndef Win32
+#ifndef _WIN32
     if (R_interrupts_pending) onintr();
 #endif
 }
@@ -228,7 +228,7 @@ static void setupwarnings(void)
 }
 
 /* Rvsnprintf: like vsnprintf, but guaranteed to null-terminate. */
-#ifdef Win32
+#ifdef _WIN32
 int trio_vsnprintf(char *buffer, size_t bufferSize, const char *format,
 		   va_list args);
 

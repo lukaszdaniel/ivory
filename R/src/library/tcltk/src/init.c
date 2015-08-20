@@ -23,7 +23,7 @@
 #include <R_ext/Rdynload.h>
 
 static const R_CMethodDef CEntries[] = {
-#ifdef Win32
+#ifdef _WIN32
     {"tcltk_start", (DL_FUNC) &tcltk_start, 0},
     {"tcltk_end", (DL_FUNC) &tcltk_end, 0},
 #else

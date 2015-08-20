@@ -429,7 +429,7 @@ SEXP attribute_hidden do_envirName(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ans;
 }
 
-#ifdef Win32
+#ifdef _WIN32
 # include "rgui_UTF8.h"
 #endif
 /* Uses R_alloc but called by a .Internal.  Result may be R_alloc-ed */
@@ -453,7 +453,7 @@ static const char *trChar(SEXP x)
 	*qq = '\0';
 	return pp;
     } else {
-#ifdef Win32
+#ifdef _WIN32
 	static char buf[106];
 	char *p;
 	/* Long strings will be rare, and few per cat() call so we
@@ -515,7 +515,7 @@ static void cat_cleanup(void *data)
     if(changedcon) switch_stdout(-1, 0);
     /* previous line might have closed it */
     if(!wasopen && con->isopen) con->close(con);
-#ifdef Win32
+#ifdef _WIN32
     WinUTF8out = FALSE;
 #endif
 }
@@ -585,7 +585,7 @@ SEXP attribute_hidden do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     ci.changedcon = switch_stdout(ifile, 0);
     /* will open new connection if required, and check for writeable */
-#ifdef Win32
+#ifdef _WIN32
     /* do this after re-sinking output */
     WinCheckUTF8();
 #endif

@@ -58,7 +58,7 @@ extern void R_SaveGlobalEnv(void);
 void fpu_setup(Rboolean start);
 #endif
 
-#ifdef Win32
+#ifdef _WIN32
 extern char *getDLLVersion(void), *getRUser(void), *get_R_HOME(void);
 extern void setup_term_ui(void);
 LibExtern int UserBreak;

@@ -25,7 +25,7 @@
 
 #include <Localization.h>
 
-#ifdef Win32
+#ifdef _WIN32
 #define USE_MDI 1
 #endif
 

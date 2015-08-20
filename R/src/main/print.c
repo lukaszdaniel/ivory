@@ -703,7 +703,7 @@ void attribute_hidden PrintValueRec(SEXP s, SEXP env)
 {
     SEXP t;
 
-#ifdef Win32
+#ifdef _WIN32
     WinCheckUTF8();
 #endif
     if(!isMethodsDispatchOn() && (IS_S4_OBJECT(s) || TYPEOF(s) == S4SXP) ) {
@@ -838,7 +838,7 @@ void attribute_hidden PrintValueRec(SEXP s, SEXP env)
 	UNIMPLEMENTED_TYPE("PrintValueRec()", s);
     }
     printAttributes(s, env, FALSE);
-#ifdef Win32
+#ifdef _WIN32
     WinUTF8out = FALSE;
 #endif
 }

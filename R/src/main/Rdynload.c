@@ -117,7 +117,7 @@
 # endif /* HAVE_NO_SYMBOL_UNDERSCORE */
 #endif
 
-#ifdef Win32
+#ifdef _WIN32
 # define HAVE_DYNAMIC_LOADING
 #endif
 
@@ -507,7 +507,7 @@ DL_FUNC Rf_lookupCachedSymbol(const char *name, const char *pkg, int all)
 
 
 
-#ifdef Win32
+#ifdef _WIN32
 #define DLLerrBUFSIZE 4000
 #else  /* Not Windows */
 #define DLLerrBUFSIZE 1000
@@ -604,7 +604,7 @@ static DllInfo *R_RegisterDLL(HINSTANCE handle, const char *path)
 
     /* remove SHLIB_EXT if present */
     p = DLLname + strlen(DLLname) - strlen(SHLIB_EXT);
-#ifdef Win32  /* case-insensitive file system */
+#ifdef _WIN32  /* case-insensitive file system */
     if(p > DLLname && stricmp(p, SHLIB_EXT) == 0) *p = '\0';
 #else
     if(p > DLLname && strcmp(p, SHLIB_EXT) == 0) *p = '\0';

@@ -37,7 +37,7 @@
 
  */
 
-#ifdef Win32
+#ifdef _WIN32
 //#define HAVE_PANGOCAIRO 1
 #define HAVE_CAIRO_SVG 1
 #define HAVE_CAIRO_PDF 1
@@ -79,7 +79,7 @@ static void cbm_Size(double *left, double *right,
 #define NO_X11 1
 #include "cairoFns.c"
 
-#ifdef Win32
+#ifdef _WIN32
 # include "winbitmap.h"
 #else
 # include "bitmap.h"
@@ -386,7 +386,7 @@ BMDeviceDriver(pDevDesc dd, int kind, const char *filename,
     dd->text = dd->textUTF8 = Cairo_Text;
 #endif
     dd->hasTextUTF8 = TRUE;
-#if defined(Win32) && !defined(USE_FC)
+#if defined(_WIN32) && !defined(USE_FC)
     dd->wantSymbolUTF8 = NA_LOGICAL;
 #else
     dd->wantSymbolUTF8 = TRUE;

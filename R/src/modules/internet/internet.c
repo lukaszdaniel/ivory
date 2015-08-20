@@ -48,7 +48,7 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho);
 Rconnection 
 in_newCurlUrl(const char *description, const char * const mode, int type);
 
-#ifdef Win32
+#ifdef _WIN32
 static void *in_R_HTTPOpen2(const char *url, const char *headers, const int cacheOK);
 static int   in_R_HTTPRead2(void *ctx, char *dest, int len);
 static void  in_R_HTTPClose2(void *ctx);
@@ -110,7 +110,7 @@ static Rboolean url_open(Rconnection con)
     }
 
     switch(type) {
-#ifdef Win32
+#ifdef _WIN32
     case HTTPSsh:
 	    warning(_("for https:// URLs use method = \"wininet\""));
 	    return FALSE;
@@ -225,7 +225,7 @@ static size_t url_read(void *ptr, size_t size, size_t nitems,
     return n/size;
 }
 
-#ifdef Win32
+#ifdef _WIN32
 static Rboolean url_open2(Rconnection con)
 {
     void *ctxt;
@@ -361,7 +361,7 @@ in_R_newurl(const char *description, const char * const mode, int type)
     }
     init_con(newcon, description, CE_NATIVE, mode);
     newcon->canwrite = FALSE;
-#ifdef Win32
+#ifdef _WIN32
     if (type) {
 	newcon->open = &url_open2;
 	newcon->read = &url_read2;
@@ -415,7 +415,7 @@ typedef struct {
     void *ctxt;
 } inetconn;
 
-#ifdef Win32
+#ifdef _WIN32
 #include <ga.h>
 
 typedef struct {
@@ -444,7 +444,7 @@ static SEXP in_do_download(SEXP args)
     SEXP scmd, sfile, smode;
     const char *url, *file, *mode;
     int quiet, status = 0, cacheOK;
-#ifdef Win32
+#ifdef _WIN32
     char pbuf[30];
     int pc;
 #endif
@@ -472,7 +472,7 @@ static SEXP in_do_download(SEXP args)
     if(cacheOK == NA_LOGICAL)
 	error(_("invalid '%s' argument"), "cacheOK");
     Rboolean file_URL = (strncmp(url, "file://", 7) == 0);
-#ifdef Win32
+#ifdef _WIN32
     int meth = asLogical(CADR(args));
     if(meth == NA_LOGICAL)
 	error(_("invalid '%s' argument"), "method");
@@ -491,7 +491,7 @@ static SEXP in_do_download(SEXP args)
 	static char buf[CPBUFSIZE];
 	size_t n;
 	int nh = 7;
-#ifdef Win32
+#ifdef _WIN32
 	/* on Windows we have file:///d:/path/to
 	   whereas on Unix it is file:///path/to */
 	if (strlen(url) > 9 && url[7] == '/' && url[9] == ':') nh = 8;
@@ -515,7 +515,7 @@ static SEXP in_do_download(SEXP args)
 	fclose(out); fclose(in);
 
     } else if (strncmp(url, "http://", 7) == 0
-#ifdef Win32
+#ifdef _WIN32
 	       || ((strncmp(url, "https://", 8) == 0) && meth)
 #endif
 	) {
@@ -526,7 +526,7 @@ static SEXP in_do_download(SEXP args)
 	char buf[IBUFSIZE];
 	int ndashes = 0;
 	DLsize_t ndots = 0;
-#ifdef Win32
+#ifdef _WIN32
 	int factor = 1;
 #endif
 
@@ -538,7 +538,7 @@ static SEXP in_do_download(SEXP args)
 	R_Busy(1);
 	if(!quiet) REprintf(_("Trying URL '%s'\n"), url);
 	SEXP agentFun, sheaders;
-#ifdef Win32
+#ifdef _WIN32
 	R_FlushConsole();
 	if(meth)
 	    agentFun = PROTECT(lang2(install("makeUserAgent"), ScalarLogical(0)));
@@ -559,7 +559,7 @@ static SEXP in_do_download(SEXP args)
 	else {
 //	    if(!quiet) REprintf(_("Opened URL\n"), url);
 	    guess = total = ((inetconn *)ctxt)->length;
-#ifdef Win32
+#ifdef _WIN32
 	    if(R_Interactive) {
 		if (guess <= 0) guess = 100 * 1024;
 		if (guess > 1e9) factor = guess/1e6;
@@ -588,7 +588,7 @@ static SEXP in_do_download(SEXP args)
 		if(res != len) error(_("write failed"));
 		nbytes += len;
 		if(!quiet) {
-#ifdef Win32
+#ifdef _WIN32
 		    if(R_Interactive) {
 			if(nbytes > guess) {
 			    guess *= 2;
@@ -614,7 +614,7 @@ static SEXP in_do_download(SEXP args)
 	    }
 	    Ri_HTTPClose(ctxt);
 	    if(!quiet) {
-#ifdef Win32
+#ifdef _WIN32
 		if(!R_Interactive) REprintf("\n");
 #else
 		REprintf("\n");
@@ -627,7 +627,7 @@ static SEXP in_do_download(SEXP args)
 		    REprintf(n_("Downloaded %d byte", "Downloaded %d bytes", (int) nbytes), (int) nbytes);
 		REprintf("\n\n");
 	    }
-#ifdef Win32
+#ifdef _WIN32
 	    R_FlushConsole();
 	    if(R_Interactive && !quiet) {
 		endcontext(&(pbar.cntxt));
@@ -649,7 +649,7 @@ static SEXP in_do_download(SEXP args)
 	char buf[IBUFSIZE];
 	int ndashes = 0;
 	DLsize_t ndots = 0;
-#ifdef Win32
+#ifdef _WIN32
 	int factor = 1;
 #endif
 
@@ -661,7 +661,7 @@ static SEXP in_do_download(SEXP args)
 
 	R_Busy(1);
 	if(!quiet) REprintf(_("Trying URL '%s'\n"), url);
-#ifdef Win32
+#ifdef _WIN32
 	R_FlushConsole();
 #endif
 	ctxt = Ri_FTPOpen(url);
@@ -669,7 +669,7 @@ static SEXP in_do_download(SEXP args)
 	else {
 //	    if(!quiet) REprintf(_("Opened URL\n"), url);
 	    guess = total = ((inetconn *)ctxt)->length;
-#ifdef Win32
+#ifdef _WIN32
 	    if(R_Interactive && !quiet) {
 		if (guess <= 0) guess = 100 * 1024;
 		if (guess > 1e9) factor = guess/1e6;
@@ -698,7 +698,7 @@ static SEXP in_do_download(SEXP args)
 		if(res != len) error(_("write failed"));
 		nbytes += len;
 		if(!quiet) {
-#ifdef Win32
+#ifdef _WIN32
 		    if(R_Interactive) {
 			if(nbytes > guess) {
 			    guess *= 2;
@@ -724,7 +724,7 @@ static SEXP in_do_download(SEXP args)
 	    }
 	    Ri_FTPClose(ctxt);
 	    if(!quiet) {
-#ifdef Win32
+#ifdef _WIN32
 		if(!R_Interactive) REprintf("\n");
 #else
 		REprintf("\n");
@@ -738,7 +738,7 @@ static SEXP in_do_download(SEXP args)
 		    REprintf(n_("Downloaded %d byte", "Downloaded %d bytes", (int) nbytes), (int) nbytes);
 			REprintf("\n\n");
 	    }
-#ifdef Win32
+#ifdef _WIN32
 	    R_FlushConsole();
 	    if(R_Interactive && !quiet) {
 		endcontext(&(pbar.cntxt));
@@ -797,7 +797,7 @@ void *in_R_HTTPOpen(const char *url, const char *headers, const int cacheOK)
 				      (int)len), type ? type : "unknown", (int)len);
 		else REprintf(_("Content type '%s' length unknown"), type ? type : "unknown", len);
 		REprintf("\n");
-#ifdef Win32
+#ifdef _WIN32
 		R_FlushConsole();
 #endif
 	    }
@@ -842,7 +842,7 @@ static void *in_R_FTPOpen(const char *url)
 	    REprintf(_("ftp data connection made, file length %ld bytes\n"), len);
 	else
 	    REprintf(_("ftp data connection made, file length unknown\n"));
-#ifdef Win32
+#ifdef _WIN32
 	R_FlushConsole();
 #endif
     }
@@ -869,7 +869,7 @@ static void in_R_FTPClose(void *ctx)
 }
 
 
-#ifdef Win32
+#ifdef _WIN32
 
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>

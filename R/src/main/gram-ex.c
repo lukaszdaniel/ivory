@@ -34,7 +34,7 @@
 attribute_hidden
 int R_fgetc(FILE *fp)
 {
-#ifdef Win32
+#ifdef _WIN32
     int c;
     static int nexteof=0;
     if (nexteof) {
@@ -58,7 +58,7 @@ int R_fgetc(FILE *fp)
 	    return('\r');
 	}
     }
-#ifdef Win32
+#ifdef _WIN32
     return c;
 #else
     return feof(fp) ? R_EOF : c;

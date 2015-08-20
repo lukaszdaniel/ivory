@@ -682,7 +682,7 @@ void tcltk_init(int *TkUp)
    On Mac OS X we might be using Aqua Tcl/Tk or X11 Tcl/Tk, and that
    is in principle independent of whether we want quartz() built.
 */
-#if !defined(Win32) && !defined(HAVE_AQUA)
+#if !defined(_WIN32) && !defined(HAVE_AQUA)
     char *p= getenv("DISPLAY");
     if(p && p[0])  /* exclude DISPLAY = "" */
 #endif
@@ -698,7 +698,7 @@ void tcltk_init(int *TkUp)
 	    *TkUp = 1;
 	}
     }
-#if !defined(Win32) && !defined(HAVE_AQUA)
+#if !defined(_WIN32) && !defined(HAVE_AQUA)
     else
 	warning(_("no DISPLAY variable so Tk is not available"));
 #endif
@@ -721,7 +721,7 @@ void tcltk_init(int *TkUp)
 		      (ClientData) NULL,
 		      (Tcl_CmdDeleteProc *) NULL);
 
-#ifndef Win32
+#ifndef _WIN32
     Tcl_unix_setup();
 #endif
     Tcl_SetServiceMode(TCL_SERVICE_ALL);

@@ -348,7 +348,7 @@ SEXP attribute_hidden do_filepath(SEXP call, SEXP op, SEXP args, SEXP env)
 		buf += sepw;
 	    }
 	}
-#ifdef Win32
+#ifdef _WIN32
 	// Trailing seps are invalid for file paths except for / and d:/
 	if(streql(csep, "/") || streql(csep, "\\")) {
 	    if(buf > cbuf) {

@@ -284,7 +284,7 @@ void process_user_Renviron()
 #ifdef Unix
     s = R_ExpandFileName("~/.Renviron");
 #endif
-#ifdef Win32
+#ifdef _WIN32
     {
 	char buf[1024]; /* MAX_PATH is less than this */
 	/* R_USER is not necessarily set yet, so we have to work harder */

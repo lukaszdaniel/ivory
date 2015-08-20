@@ -103,7 +103,7 @@ FILE *R_OpenSiteFile(void)
 
 	/* Saving and Restoring the Global Environment */
 
-#ifndef Win32
+#ifndef _WIN32
 static char workspace_name[1000] = ".RData";
 
 /*
@@ -258,7 +258,7 @@ void R_SetParams(Rstart Rp)
     R_SetMaxNSize(Rp->max_nsize);
     R_SetMaxVSize(Rp->max_vsize);
     R_SetPPSize(Rp->ppsize);
-#ifdef Win32
+#ifdef _WIN32
     R_SetWin32(Rp);
 #endif
 }

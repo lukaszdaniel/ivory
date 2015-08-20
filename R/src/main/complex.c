@@ -77,7 +77,7 @@
    And use on Win32/64 suppresses warnings.
    The warning is also seen on Mac OS 10.5, but not later.
 */
-#if defined(__GNUC__) && (defined(__sun__) || defined(__hpux__) || defined(Win32))
+#if defined(__GNUC__) && (defined(__sun__) || defined(__hpux__) || defined(_WIN32))
 # undef  I
 # define I (__extension__ 1.0iF)
 #endif
@@ -148,7 +148,7 @@ static R_INLINE double complex R_cpow_n(double complex X, int k)
     }
 }
 
-#if defined(Win32)
+#if defined(_WIN32)
 # undef HAVE_CPOW
 #endif
 /* reason for this:
