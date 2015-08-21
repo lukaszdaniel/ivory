@@ -3,145 +3,187 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <  for (i in 1:n) sz[i] <- object.size(x[[i]])
 ---
 >  for (i in seq_len(n)) sz[i] <- object.size(x[[i]])
-37,38c37,38
+38,39c38,39
 <   ipiv <- piv <- attr(R,"pivot");ipiv[piv] <- 1:p
 <   rank <- attr(R,"rank");ind <- 1:rank
 ---
 >   ipiv <- piv <- attr(R,"pivot");ipiv[piv] <- seq_len(p)
 >   rank <- attr(R,"rank");ind <- seq_len(rank)
-70,71c70,71
+71,72c71,72
 <     fn <- qr.qty(qrx,yn)[1:p]
 <     rp <- qrx$pivot;rp[rp] <- 1:p # reverse pivot
 ---
 >     fn <- qr.qty(qrx,yn)[seq_len(p)]
 >     rp <- qrx$pivot;rp[rp] <- seq_len(p) # reverse pivot
-82c82
+83c83
 <   for (b in 1:arg$n.block) {
 ---
 >   for (b in seq_len(arg$n.block)) {
-112c112
+120c120
+<   for (i in 1:d) if (is.factor(dat[,i])) {  
+---
+>   for (i in seq_len(d)) if (is.factor(dat[,i])) {  
+127c127
+<     for (i in 1:d) if (!is.factor(dat[,i])) { ## round the metric variables
+---
+>     for (i in seq_len(d)) if (!is.factor(dat[,i])) { ## round the metric variables
+148c148
+<   ii <- sample(1:nrow(xu),nrow(xu),replace=FALSE) ## shuffling index
+---
+>   ii <- sample(seq_len(nrow(xu)),nrow(xu),replace=FALSE) ## shuffling index
+159c159
+<   for (i in 1:d) if (is.factor(dat[,i])) {
+---
+>   for (i in seq_len(d)) if (is.factor(dat[,i])) {
+174c174
+<   for (i in 1:length(gp$smooth.spec)) nk <- nk + 
+---
+>   for (i in seq_len(length(gp$smooth.spec))) nk <- nk + 
+180c180
+<   for (i in 1:length(gp$smooth.spec)) {
+---
+>   for (i in seq_len(length(gp$smooth.spec))) {
+183c183
+<       for (j in 1:length(gp$smooth.spec[[i]]$margin)) { ## loop through margins
+---
+>       for (j in seq_len(length(gp$smooth.spec[[i]]$margin))) { ## loop through margins
+211c211
+<   for (i in 1:length(mf0)) {
+---
+>   for (i in seq_len(length(mf0))) {
+223c223
+<   mf <- mf[1:maxr,]
+---
+>   mf <- mf[seq_len(maxr),]
+234c234
 <   for (j in 1:length(mf)) mn <- mn + if (is.factor(mf[[j]])) length(levels(mf[[j]])) else 2
 ---
 >   for (j in seq_len(length(mf))) mn <- mn + if (is.factor(mf[[j]])) length(levels(mf[[j]])) else 2
-126c126
+248c248
 <   ind <- sample(1:n,chunk.size)
 ---
 >   ind <- sample(seq_len(n),chunk.size)
-134c134
+256c256
 <   ind <- sample(1:n,n,replace=FALSE) ## randomized index for stratified sampling w.r.t. factor levels
 ---
 >   ind <- sample(seq_len(n),n,replace=FALSE) ## randomized index for stratified sampling w.r.t. factor levels
-137c137
+259c259
 <   for (j in 1:length(mf)) if (is.numeric(mf0[[j]])) {
 ---
 >   for (j in seq_len(length(mf))) if (is.numeric(mf0[[j]])) {
-139,140c139,140
+261,262c261,262
 <       j.min <- min((1:n)[as.logical(rowSums(mf[[j]]==min(mf[[j]])))])
 <       j.max <- min((1:n)[as.logical(rowSums(mf[[j]]==max(mf[[j]])))])
 ---
 >       j.min <- min((seq_len(n))[as.logical(rowSums(mf[[j]]==min(mf[[j]])))])
 >       j.max <- min((seq_len(n))[as.logical(rowSums(mf[[j]]==max(mf[[j]])))])
-167c167
-< #  for (j in 1:length(mf)) if (is.numeric(mf0[[j]])) {
+308c308
+<       ar.row <- c(1,rep(1:N,rep(2,N))[-c(1,2*N)]) ## index of rows to reweight
 ---
-> #  for (j in seq_len(length(mf))) if (is.numeric(mf0[[j]])) {
-169,170c169,170
-< #      j.min <- min((1:n)[as.logical(rowSums(mf[[j]]==min(mf[[j]])))])
-< #      j.max <- min((1:n)[as.logical(rowSums(mf[[j]]==max(mf[[j]])))])
+>       ar.row <- c(1,rep(seq_len(N),rep(2,N))[-c(1,2*N)]) ## index of rows to reweight
+310c310
+<       ar.stop <- c(1,1:(N-1)*2+1)    ## (stop[i-1]+1):stop[i] are the rows to reweight to get ith row
 ---
-> #      j.min <- min((seq_len(n))[as.logical(rowSums(mf[[j]]==min(mf[[j]])))])
-> #      j.max <- min((seq_len(n))[as.logical(rowSums(mf[[j]]==max(mf[[j]])))])
-246c246
-<       for (i in 1:n.threads) {
----
->       for (i in seq_len(n.threads)) {
-294c294
-<     for (iter in 1L:control$maxit) { ## main fitting loop
----
->     for (iter in seq_len(control$maxit)) { ## main fitting loop
-300c300
-<          for (b in 1:n.block) {
----
->          for (b in seq_len(n.block)) {
-326c326
-<          for (i in 1:length(arg)) arg[[i]]$coef <- coef
----
->          for (i in seq_len(length(arg))) arg[[i]]$coef <- coef
-330c330
-<          #for (i in 1:length(arg)) {
----
->          #for (i in seq_len(length(arg))) {
-462c462
-<           warning(gettextf("non-finite coefficients at iteration %d",
----
->           warning(gettextf("Non-finite coefficients at iteration %d",
-481c481
+>       ar.stop <- c(1,seq_len(N-1)*2+1)    ## (stop[i-1]+1):stop[i] are the rows to reweight to get ith row
+464c464
 <        warning("algorithm did not converge")
 ---
 >        warning("Algorithm did not converge")
-556c556
+588c588
+<       for (i in 1:n.threads) {
+---
+>       for (i in seq_len(n.threads)) {
+636c636
 <     for (iter in 1L:control$maxit) { ## main fitting loop
 ---
 >     for (iter in seq_len(control$maxit)) { ## main fitting loop
-585c585
+642c642
+<          for (b in 1:n.block) {
+---
+>          for (b in seq_len(n.block)) {
+668c668
+<          for (i in 1:length(arg)) arg[[i]]$coef <- coef
+---
+>          for (i in seq_len(length(arg))) arg[[i]]$coef <- coef
+672c672
+<          #for (i in 1:length(arg)) {
+---
+>          #for (i in seq_len(length(arg))) {
+804c804
+<           warning(gettextf("non-finite coefficients at iteration %d",
+---
+>           warning(gettextf("Non-finite coefficients at iteration %d",
+823c823
+<        warning("algorithm did not converge")
+---
+>        warning("Algorithm did not converge")
+898c898
+<     for (iter in 1L:control$maxit) { ## main fitting loop
+---
+>     for (iter in seq_len(control$maxit)) { ## main fitting loop
+927c927
 <          message(gettextf("Deviance = %s Iterations - %d\n", dev, iter, domain = "R-mgcv"))
 ---
 >          message(gettextf("Deviance = %s Iterations - %d", dev, iter, domain = "R-mgcv"))
-642,643c642
+984,985c984
 <           warning("non-finite coefficients at iteration ",
 <                   iter)
 ---
 >           warning(gettextf("Non-finite coefficients at iteration %d", iter))
-649c648
+991c990
 <        warning("algorithm did not converge")
 ---
 >        warning("Algorithm did not converge")
-677c676
+1019c1018
 <   for (i in 1:arg$n.block) {
 ---
 >   for (i in seq_len(arg$n.block)) {
-757c756
+1099c1098
 <     for (i in 1:n.threads) { 
 ---
 >     for (i in seq_len(n.threads)) { 
-832c831
+1175c1174
 <        for (i in 1:n.threads) { 
 ---
 >        for (i in seq_len(n.threads)) { 
-879c878
+1222c1221
 <        for (i in 1:n.block) {
 ---
 >        for (i in seq_len(n.block)) {
-926c925
+1269c1268
 <        # for (i in 1:length(arg)) {
 ---
 >        # for (i in seq_len(length(arg))) {
-1105c1104
+1448c1447
 <   for (b in 1:n.block) {    
 ---
 >   for (b in seq_len(n.block)) {    
-1139,1140c1138
-<   if (!method%in%c("fREML","GCV.Cp","REML",
+1501,1502c1500
+<     if (!method%in%c("fREML","GCV.Cp","REML",
 <                     "ML","P-REML","P-ML")) stop("un-supported smoothness selection method")
 ---
->   if (!method%in%c("fREML","GCV.Cp","REML", "ML","P-REML","P-ML")) stop("unsupported smoothness selection method")
-1171c1169
-<   if (rho!=0&&!is.null(mf$"(AR.start)")) if (!is.logical(mf$"(AR.start)")) stop("AR.start must be logical")
+>     if (!method%in%c("fREML","GCV.Cp","REML", "ML","P-REML","P-ML")) stop("unsupported smoothness selection method")
+1561c1559
+<     if (rho!=0&&!is.null(mf$"(AR.start)")) if (!is.logical(mf$"(AR.start)")) stop("AR.start must be logical")
 ---
->   if (rho!=0&&!is.null(mf$"(AR.start)")) if (!is.logical(mf$"(AR.start)")) stop("'AR.start' argument must be logical")
-1229c1227
-<   if (G$m) for (i in 1:G$m) G$min.edf<-G$min.edf+G$smooth[[i]]$null.space.dim
+>     if (rho!=0&&!is.null(mf$"(AR.start)")) if (!is.logical(mf$"(AR.start)")) stop("'AR.start' argument must be logical")
+1690c1688
+<     if (G$m) for (i in 1:G$m) G$min.edf<-G$min.edf+G$smooth[[i]]$null.space.dim
 ---
->   if (G$m) for (i in seq_len(G$m)) G$min.edf<-G$min.edf+G$smooth[[i]]$null.space.dim
-1243c1241
+>     if (G$m) for (i in seq_len(G$m)) G$min.edf<-G$min.edf+G$smooth[[i]]$null.space.dim
+1720c1718
 <   if (control$trace) cat("Setup complete. Calling fit\n")
 ---
 >   if (control$trace) cat(gettext("Setup complete. Calling fit", domain = "R-mgcv"), "\n", sep = "")
-1264c1262
+1725c1723
+<     warning("sparse=TRUE is deprecated")
+---
+>     warning("'sparse=TRUE' option is deprecated")
+1746c1744
 <       if (length(ind)<2*ncol(G$X)) warning("samfrac too small - ignored") else {
 ---
 >       if (length(ind)<2*ncol(G$X)) warning("value of 'samfrac' argument is too small - ignored") else {
-1284c1282
+1766c1764
 <   if (control$trace) cat("Fit complete. Finishing gam object.\n")
 ---
 >   if (control$trace) cat(gettext("Fit complete. Finishing gam object.", domain = "R-mgcv"), "\n", sep = "")
@@ -190,19 +232,19 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <         else stop(linktemp, " link not available for beta regression; available links are  \"logit\", \"probit\", \"cloglog\" and \"cauchit\"")
 ---
 >         else stop(gettextf("\"%s\" link not available for beta regression; available links are  \"logit\", \"probit\", \"cloglog\" and \"cauchit\"", linktemp))
-1117c1118
+1118c1119
 <       paste("Beta regression(",round(theta,3),")",sep="")
 ---
 >       gettextf("Beta regression(%s)",round(theta,3), domain = "R-mgcv")
-1203c1204
+1204c1205
 <         else stop(linktemp, " link not available for scaled t distribution; available links are \"identity\", \"log\",  and \"inverse\"")
 ---
 >         else stop(gettextf("\"%s\" link not available for scaled t distribution; available links are \"identity\", \"log\",  and \"inverse\"", linktemp))
-1357c1358
+1358c1359
 <       paste("Scaled t(",paste(round(object$family$getTheta(TRUE),3),collapse=","),")",sep="")
 ---
 >       gettextf("Scaled t(%s)",paste(round(object$family$getTheta(TRUE),3), collapse=","), domain = "R-mgcv")
-1465c1466
+1466c1467
 <   } else  stop(linktemp, " link not available for zero inflated; available link for `lambda' is only  \"loga\"")
 ---
 >   } else  stop(gettextf("\"%s\" link not available for zero inflated; available link for `lambda' is only  \"loga\"", linktemp))
@@ -265,89 +307,97 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >       ind <- seq_len(Sl[[b]]$rank)
 >       for (j in seq_len(length(Sl[[b]]$S))) { ## project penalties into range space of total penalty
-203c203
+205c205
 <         for (b in 1:length(Sl)) { 
 ---
 >         for (b in seq_len(length(Sl))) { 
-214c214
+218c218
 <          for (b in 1:length(Sl)) { 
 ---
 >          for (b in seq_len(length(Sl))) { 
-228c228
+234c234
 <       for (b in 1:length(Sl)) { 
 ---
 >       for (b in seq_len(length(Sl))) { 
-234c234
+240c240
 <   } else for (b in 1:length(Sl)) { ## model matrix re-para
 ---
 >   } else for (b in seq_len(length(Sl))) { ## model matrix re-para
-260c260
+323c323
 <   for (b in 1:length(Sl)) { ## work through blocks
 ---
 >   for (b in seq_len(length(Sl))) { ## work through blocks
-295c295
-<       for (i in 1:m) {
+360c360
+<         for (i in 1:m) {
 ---
->       for (i in seq_len(m)) {
-320c320
+>         for (i in seq_len(m)) {
+412c412
 <       for (i in 1:nr) {
 ---
 >       for (i in seq_len(nr)) {
-327c327
+419c419
 <      for (i in 1:nr) X[rp[[i]]$ind]  <- rp[[i]]$Qs %*% X[rp[[i]]$ind]
 ---
 >      for (i in seq_len(nr)) X[rp[[i]]$ind]  <- rp[[i]]$Qs %*% X[rp[[i]]$ind]
-331c331
+423c423
 <       for (i in 1:nr) X[,rp[[i]]$ind]  <- X[,rp[[i]]$ind]%*%rp[[i]]$Qs
 ---
 >       for (i in seq_len(nr)) X[,rp[[i]]$ind]  <- X[,rp[[i]]$ind]%*%rp[[i]]$Qs
-333c333
+425c425
 <       for (i in 1:nr) X[rp[[i]]$ind]  <- t(rp[[i]]$Qs) %*% X[rp[[i]]$ind]
 ---
 >       for (i in seq_len(nr)) X[rp[[i]]$ind]  <- t(rp[[i]]$Qs) %*% X[rp[[i]]$ind]
-349c349
+441c441
 <     for (b in 1:nb) { ## block loop
 ---
 >     for (b in seq_len(nb)) { ## block loop
-363,364c363,364
+455,456c455,456
 <     for (b in 1:nb) { ## block loop
 <       for (i in 1:length(Sl[[b]]$S)) { ## S loop within blocks
 ---
 >     for (b in seq_len(nb)) { ## block loop
 >       for (i in seq_len(length(Sl[[b]]$S))) { ## S loop within blocks
-409c409
+510c510
 <   for (b in 1:nb) { ## block loop
 ---
 >   for (b in seq_len(nb)) { ## block loop
-425c425
+526c526
 <       for (i in 1:length(Sl[[b]]$S)) { ## work through S terms
 ---
 >       for (i in seq_len(length(Sl[[b]]$S))) { ## work through S terms
-453c453
+568c568
 <   for (i in 1:nd) { 
 ---
 >   for (i in seq_len(nd)) { 
-479c479
+595c595
 <   for (i in 1:nd) { ## compute the first derivatives
 ---
 >   for (i in seq_len(nd)) { ## compute the first derivatives
-490c490
+605c605
 <   for (k in 1:nd) { ## second derivative loop 
 ---
 >   for (k in seq_len(nd)) { ## second derivative loop 
-609c609
+629c629
+<   for (i in 1:nd) { ## compute the first derivatives
+---
+>   for (i in seq_len(nd)) { ## compute the first derivatives
+640c640
+<   for (k in 1:nd) { ## second derivative loop 
+---
+>   for (k in seq_len(nd)) { ## second derivative loop 
+845c845
 <   for (iter in 1:200) { ## the Newton loop
 ---
 >   for (iter in seq_len(200)) { ## the Newton loop
-633c633
+869c869
 <     trial <- Sl.fit(Sl,X,y,rho1[1:nr],fixed,log.phi,phi.fixed,rss.extra,nobs,Mp,nt=nt)
 ---
 >     trial <- Sl.fit(Sl,X,y,rho1[seq_len(nr)],fixed,log.phi,phi.fixed,rss.extra,nobs,Mp,nt=nt)
-638c638
+874c874
 <       trial <- Sl.fit(Sl,X,y,rho1[1:nr],fixed,log.phi,phi.fixed,rss.extra,nobs,Mp,nt=nt)
 ---
 >       trial <- Sl.fit(Sl,X,y,rho1[seq_len(nr)],fixed,log.phi,phi.fixed,rss.extra,nobs,Mp,nt=nt)
-666,668c666,668
+902,904c902,904
 <   if (step.failed) best$conv <- "step failed" else
 <   if (iter==200) best$conv <- "no convergence in 200 iterations" else
 <   best$conv <- "full convergence"
@@ -355,44 +405,84 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >   if (step.failed) best$conv <- gettext("step failed", domain = "R-mgcv") else
 >   if (iter==200) best$conv <- gettext("no convergence in 200 iterations", domain = "R-mgcv") else
 >   best$conv <- gettext("full convergence", domain = "R-mgcv")
-714c714
+950c950
 <   for (b in 1:length(Sl)) {
 ---
 >   for (b in seq_len(length(Sl))) {
-734c734
+970c970
 <       for (i in 1:length(Sl[[b]]$S)) {
 ---
 >       for (i in seq_len(length(Sl[[b]]$S))) {
-744c744
+980c980
 <     for (i in 1:length(Sl)) {
 ---
 >     for (i in seq_len(length(Sl))) {
-767c767
+1003c1003
 <   for (b in 1:length(Sl)) rank <- rank + Sl[[b]]$rank ## the total penalty rank
 ---
 >   for (b in seq_len(length(Sl))) rank <- rank + Sl[[b]]$rank ## the total penalty rank
-787c787
-<     for (i in 1:ncol(d1b)) d1b[,i] <- Sl.initial.repara(Sl,as.numeric(d1b[,i]),inverse=TRUE) ## d beta / d rho matrix
+1023c1023
+<     for (i in 1:ncol(d1b)) d1b[,i] <- 
 ---
->     for (i in seq_len(ncol(d1b))) d1b[,i] <- Sl.initial.repara(Sl,as.numeric(d1b[,i]),inverse=TRUE) ## d beta / d rho matrix
+>     for (i in seq_len(ncol(d1b))) d1b[,i] <- 
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/mgcv/R/gamlss.r Recommended/mgcv/R/gamlss.r
-324c324
+258,259c258,259
+<     ind <- 1:n 
+<     for (i in 1:K) { 
+---
+>     ind <- seq_len(n) 
+>     for (i in seq_len(K)) { 
+273,274c273,274
+<     ind <- 1:n
+<     for (i in 1:K) { 
+---
+>     ind <- seq_len(n)
+>     for (i in seq_len(K)) { 
+280c280
+<     for (k in 1:m) for (l in k:m) { ## looping over smoothing parameters...
+---
+>     for (k in seq_len(m)) for (l in k:m) { ## looping over smoothing parameters...
+282,284c282,284
+<       for (i in 1:K) for (j in 1:K) {
+<         v <- rep(0,n);ind <- 1:n
+<         for (q in 1:K) { ## accumulate the diagonal matrix for X_i'diag(v)X_j
+---
+>       for (i in seq_len(K)) for (j in seq_len(K)) {
+>         v <- rep(0,n);ind <- seq_len(n)
+>         for (q in seq_len(K)) { ## accumulate the diagonal matrix for X_i'diag(v)X_j
+286,287c286,287
+<           ins <- 1:n
+<           for (s in 1:K) { 
+---
+>           ins <- seq_len(n)
+>           for (s in seq_len(K)) { 
+294c294
+<           rind <- 1:n + (i-1)*n
+---
+>           rind <- seq_len(n) + (i-1)*n
+297,298c297,298
+<           rind1 <- 1:n + (i-1)*n
+<           rind2 <- 1:n + (j-1)*n
+---
+>           rind1 <- seq_len(n) + (i-1)*n
+>           rind2 <- seq_len(n) + (j-1)*n
+460c460
 <   if (length(link)!=2) stop("gaulss requires 2 links specified as character strings")
 ---
 >   if (length(link)!=2) stop(gettextf("'%s' function requires 2 links specified as character strings", "gaulss()"))
-328c328
+464c464
 <   stop(link[[1]]," link not available for mu parameter of gaulss")
 ---
 >   stop(gettextf("\"%s\" link not available for mu parameter of gaulss", link[[1]]))
-350c350
+486c486
 <   } else stop(link[[2]]," link not available for precision parameter of gaulss")
 ---
 >   } else stop(gettextf("\"%s\" link not available for precision parameter of gaulss", link[[2]]))
-711c711
+847c847
 <   if (length(link)!=2) stop("ziplss requires 2 links specified as character strings")
 ---
 >   if (length(link)!=2) stop(gettextf("'%s' function requires 2 links specified as character strings", "ziplss()"))
-717c717
+853c853
 <     stop(link[[i]]," link not available for ",param.names[i]," parameter of ziplss")
 ---
 >     stop(gettextf("\"%s\" link not available for parameter of ziplss %s", param.names[i], link[[i]]))
@@ -565,77 +655,77 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <   } ## end i in 1:niter
 ---
 >   } ## end i in seq_len(niter)
-1200c1196
-<  ## if (!require("nlme")) stop("gamm() requires package nlme to be installed")
+1198c1194
+< { if (inherits(family,"extended.family")) warning("family are not designed for use with gamm!")
 ---
->  ## if (!require("nlme")) stop("'gamm()' requires package nlme to be installed")
-1209c1205
+> { if (inherits(family,"extended.family")) warning("family are not designed for use with 'gamm()' function!")
+1208c1204
 <       else stop("gamm() can only handle random effects defined as named lists")
 ---
 >       else stop("'gamm()' can only handle random effects defined as named lists")
-1224c1220
+1223c1219
 <         for (i in 1:length(weights)) {
 ---
 >         for (i in seq_len(length(weights))) {
-1313c1309
+1312c1308
 <       for (i in 1:r.m) rand[[n.sr+i]]<-random[[i]]   
 ---
 >       for (i in seq_len(r.m)) rand[[n.sr+i]]<-random[[i]]   
-1355c1351
+1354c1350
 <       if (verbosePQL) cat("\n Maximum number of PQL iterations: ",niterPQL,"\n")
 ---
 >       if (verbosePQL) cat("\n ", gettext("Maximum number of PQL iterations: ", domain = "R-mgcv"), niterPQL, "\n", sep = "")
-1394c1390
+1393c1389
 <     if (G$m>0) for (i in 1:G$m)
 ---
 >     if (G$m>0) for (i in seq_len(G$m))
-1404c1400
+1403c1399
 <           for (j in 1:length(flev)) {
 ---
 >           for (j in seq_len(length(flev))) {
-1424c1420
+1423c1419
 <     if (G$m>0) for (i in 1:G$m) # var.param in reverse term order, but forward order within terms!!
 ---
 >     if (G$m>0) for (i in seq_len(G$m)) # var.param in reverse term order, but forward order within terms!!
-1439c1435
+1438c1434
 <     if (length(spl)) for (i in 1:length(spl)) if (!is.null(spl[[i]])) object$sp <- c(object$sp,spl[[i]]) 
 ---
 >     if (length(spl)) for (i in seq_len(length(spl))) if (!is.null(spl[[i]])) object$sp <- c(object$sp,spl[[i]]) 
-1451c1447
+1450c1446
 <       if (G$m>0) for (i in 1:G$m) {# Accumulate the total model matrix
 ---
 >       if (G$m>0) for (i in seq_len(G$m)) {# Accumulate the total model matrix
-1460c1456
+1459c1455
 <           for (k in 1:length(flev)) {
 ---
 >           for (k in seq_len(length(flev))) {
-1471c1467
+1470c1466
 <       if (G$m>0) for (i in 1:G$m) {
 ---
 >       if (G$m>0) for (i in seq_len(G$m)) {
-1486c1482
+1485c1481
 <     if (G$m>0) for (i in 1:G$m) {# Accumulate the total penalty matrix 
 ---
 >     if (G$m>0) for (i in seq_len(G$m)) {# Accumulate the total penalty matrix 
-1490c1486
+1489c1485
 <         if (ns) for (l in 1:ns) { 
 ---
 >         if (ns) for (l in seq_len(ns)) { 
-1499,1500c1495,1496
+1498,1499c1494,1495
 <         for (j in 1:length(flev)) {
 <            if (ns) for (l in 1:ns) { 
 ---
 >         for (j in seq_len(length(flev))) {
 >            if (ns) for (l in seq_len(ns)) { 
-1514c1510
+1513c1509
 <     if (G$m) for (i in 1:G$m) { 
 ---
 >     if (G$m) for (i in seq_len(G$m)) { 
-1556c1552
+1555c1551
 <       for (i in 1:n.smooth)
 ---
 >       for (i in seq_len(n.smooth))
-1605,1607c1601,1603
+1604,1606c1600,1602
 <     if (fit.cor<.999) { cat("FAILED: fit.cor = ",fit.cor,"\n");return()}
 <     if (edf.diff>edf.tol) { cat("FAILED: edf.diff = ",edf.diff,"\n");return()}
 <     cat("PASSED \n")
@@ -643,19 +733,19 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     if (fit.cor<.999) { cat(gettextf("TEST FAILED: fit.cor = %s",fit.cor, domain = "R-mgcv"), "\n", sep = "");return()}
 >     if (edf.diff>edf.tol) { cat(gettext("TEST FAILED: edf.diff = %s",edf.diff, domain = "R-mgcv"), "\n", sep = "");return()}
 >     cat(gettext("TEST PASSED", domain = "R-mgcv"), "\n", sep = "")
-1613c1609
+1612c1608
 <   cat("testing covariate scale invariance ... ")  
 ---
 >   cat(gettext("testing covariate scale invariance ... ", domain = "R-mgcv"))
-1619c1615
+1618c1614
 <   cat("testing invariance w.r.t. response ... ")
 ---
 >   cat(gettext("testing invariance w.r.t. response ... ", domain = "R-mgcv"))
-1624c1620
+1623c1619
 <   cat("testing equivalence of te(x) and s(x) ... ")
 ---
 >   cat(gettext("testing equivalence of te(x) and s(x) ... ", domain = "R-mgcv"))
-1629c1625
+1628c1624
 <   cat("testing equivalence of gam and gamm with same sp ... ")
 ---
 >   cat(gettext("testing equivalence of gam and gamm with same sp ... ", domain = "R-mgcv"))
@@ -664,10 +754,52 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <   } else stop("family not implemented yet")
 ---
 >   } else stop("family not implemented yet") #IVORY
-92c92
+81c81
+<   rp <- qrx$pivot;rp[rp] <- 1:ncol(X)
+---
+>   rp <- qrx$pivot;rp[rp] <- seq_len(ncol(X))
+96c96
+<   if (is.null(file)) stop("jagam requires a file for the JAGS model specification")
+---
+>   if (is.null(file)) stop("'jagam()' function requires a file for the JAGS model specification")
+99c99
 <     warning("smoothing parameter prior choise not recognised, reset to gamma")
 ---
->     warning("smoothing parameter prior choise not recognised, reset to gamma") #IVORY
+>     warning("smoothing parameter prior choise not recognised, reset to 'gamma'")
+204c204
+<       if (M>0) for (j in 1:M) {
+---
+>       if (M>0) for (j in seq_len(M)) {
+216c216
+<       } else for (j in 1:M) {
+---
+>       } else for (j in seq_len(M)) {
+302c302
+<       warning("burnin too large, reset")
+---
+>       warning(gettextf("'%s' argument is too large, reset", "burnin"))
+329c329
+<     warning("rho missing from simulation data edf.type reset to 2")
+---
+>     warning("'rho' slot for 'sam' argument is missing from simulation data, 'edf.type' argument reset to 2")
+345c345
+<     for (i in 1:length(lambda)) {
+---
+>     for (i in seq_len(length(lambda))) {
+369,372c369,372
+<     if ("residuals"%in% arg.names) stop("residuals argument not supported")
+<     if ("unconditional"%in% arg.names) stop("unconditional argument not meaningful here")
+<     if ("by.resids"%in% arg.names) stop("by.resids argument not supported")
+<     if ("all.terms"%in% arg.names) stop("all.terms argument not supported")
+---
+>     if ("residuals"%in% arg.names) stop(gettextf("'%s' argument is not supported", "residuals"))
+>     if ("unconditional"%in% arg.names) stop(gettextf("'%s' argument is not meaningful here", "unconfitional"))
+>     if ("by.resids"%in% arg.names) stop(gettextf("'%s' argument is not supported", "by.resids"))
+>     if ("all.terms"%in% arg.names) stop(gettextf("'%s' argument is not supported", "all.terms"))
+388c388
+<     if ("unconditional"%in% arg.names) warning("unconditional argument not meaningful here")
+---
+>     if ("unconditional"%in% arg.names) warning(gettextf("'%s' argument is not meaningful here", "unconditional"))
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/mgcv/R/mgcv.r Recommended/mgcv/R/mgcv.r
 32c32
 <    if (k<0) stop("argument k must be positive.")
@@ -739,19 +871,23 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <   for (i in 1:length(smooth.spec)) {
 ---
 >   for (i in seq_len(length(smooth.spec))) {
-285c285
+301c301
 <     for (i in 1:d) {
 ---
 >     for (i in seq_len(d)) {
-378c378
+329c329
+<     for (i in 1:d) if (max(ret[[i]]$lpi)>nlp||min(ret[[i]]$lpi)<1) stop("linear predictor labels out of range")
+---
+>     for (i in seq_len(d)) if (max(ret[[i]]$lpi)>nlp||min(ret[[i]]$lpi)<1) stop("linear predictor labels out of range")
+407c407
 <   for (i in 1:m) { ## collect all term names and max smooth `dim'
 ---
 >   for (i in seq_len(m)) { ## collect all term names and max smooth `dim'
-407c407
+436c436
 <   for (i in 1:length(sm.id)) sm.id[[i]]<-array(0,0)
 ---
 >   for (i in seq_len(length(sm.id))) sm.id[[i]]<-array(0,0)
-409,411c409,411
+438,440c438,440
 <   for (d in 1:maxDim) {
 <     for (i in 1:m) {
 <       if (sm[[i]]$dim==d) for (j in 1:d) { ## work through terms
@@ -759,161 +895,187 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >   for (d in seq_len(maxDim)) {
 >     for (i in seq_len(m)) {
 >       if (sm[[i]]$dim==d) for (j in seq_len(d)) { ## work through terms
-423c423
+452c452
 <   if (maxDim==1) warning("model has repeated 1-d smooths of same variable.")
 ---
 >   if (maxDim==1) warning("model has repeated 1-d smooths of same variable")
-429c429
+458c458
 <     for (i in 1:m) { ## create parameter indices for each term
 ---
 >     for (i in seq_len(m)) { ## create parameter indices for each term
-438,439c438,439
+467,468c467,468
 <   for (d in 1:maxDim) { ## work up through dimensions 
 <     for (i in 1:m) { ## work through smooths
 ---
 >   for (d in seq_len(maxDim)) { ## work up through dimensions 
 >     for (i in seq_len(m)) { ## work through smooths
-443c443
+472c472
 <         for (j in 1:d) { ## work through variables
 ---
 >         for (j in seq_len(d)) { ## work through variables
-446c446
+475c475
 <           if (k>1) for (l in 1:(k-1)) { ## collect X columns
 ---
 >           if (k>1) for (l in seq_len(k-1)) { ## collect X columns
-480c480
+509c509
 <             if (m>1) for (j in 1:m) St <- St + 
 ---
 >             if (m>1) for (j in seq_len(m)) St <- St + 
-510c510
+539c539
 <     } ## end i in 1:m loop
 ---
 >     } ## end i in seq_len(m) loop
-512c512
+541c541
 <   if (with.pen) for (i in 1:m) { ## remove working variables that were added
 ---
 >   if (with.pen) for (i in seq_len(m)) { ## remove working variables that were added
-524c524
+553c553
 <  if (specb$dim!=spec$dim) stop("`id' linked smooths must have same number of arguments") 
 ---
 >  if (specb$dim!=spec$dim) stop("'id' linked smooths must have same number of arguments") 
-531c531
+560c560
 <     for (i in 1:length(specb$margin)) {
 ---
 >     for (i in seq_len(length(specb$margin))) {
-533c533
+562c562
 <          for (j in 1:length(specb$margin[[i]]$term)) {
 ---
 >          for (j in seq_len(length(specb$margin[[i]]$term))) {
-570c570
+599c599
 <   if (n.t>0) for (j in 1:n.t) if (tind[j]>0) {
 ---
 >   if (n.t>0) for (j in seq_len(n.t)) if (tind[j]>0) {
-581,582c581,582
+610,611c610,611
 <       if (!is.null(ranki)&&length(ranki)!=np) stop("`rank' has wrong length in `paraPen'") 
 <       if (np) for (i in 1:np) { ## unpack penalty matrices, offsets and ranks
 ---
 >       if (!is.null(ranki)&&length(ranki)!=np) stop("'rank' has wrong length in 'paraPen'") 
 >       if (np) for (i in seq_len(np)) { ## unpack penalty matrices, offsets and ranks
-595c595
+624c624
 <         if (nrow(Li)!=np) stop("L has wrong dimension in `paraPen'")
 ---
 >         if (nrow(Li)!=np) stop("'L' has wrong dimension in 'paraPen'")
-603c603
+632c632
 <           if (length(spi)!=ncol(Li)) stop("`sp' dimension wrong in `paraPen'")
 ---
 >           if (length(spi)!=ncol(Li)) stop("'sp' dimension wrong in 'paraPen'")
-617c617
+646c646
 <     if (length(sp0)<length(sp)) stop("`sp' too short")
 ---
 >     if (length(sp0)<length(sp)) stop("'sp' is too short")
-628c628
-<                      data=stop("No data supplied to gam.setup"),knots=NULL,sp=NULL,
+696c696
+<   ii <- 1:n
 ---
->                      data=stop(gettextf("No data supplied to '%s' function", "gam.setup()")),knots=NULL,sp=NULL,
-632,633c632,633
+>   ii <- seq_len(n)
+700c700
+<   for (i in 1:nf) {
+---
+>   for (i in seq_len(nf)) {
+703c703
+<       ind <- pstart[i] + 1:nsdf[i] - 1
+---
+>       ind <- pstart[i] + seq_len(nsdf[i]) - 1
+728c728
+<       for (i in 1:nlp) { 
+---
+>       for (i in seq_len(nlp)) { 
+742c742
+<                     data=stop("No data supplied to gam.setup"),knots=NULL,sp=NULL,
+---
+>                     data=stop(gettextf("No data supplied to '%s' function", "gam.setup()")),knots=NULL,sp=NULL,
+749,750c749,750
 <   if (!is.null(paraPen)) stop("paraPen not supported for multi-formula models")
 <   if (!absorb.cons) stop("absorb.cons must be TRUE for multi-formula models")
 ---
 >   if (!is.null(paraPen)) stop("'paraPen' argument is not supported for multi-formula models")
 >   if (!absorb.cons) stop("'absorb.cons' argument must be TRUE for multi-formula models")
-643c643
-<   lpi <- list(1:ncol(G$X)) ## lpi[[j]] is index of cols for jth linear predictor 
+767,768c767,768
+<   for (i in 1:formula$nlp) lpi[[i]] <- rep(0,0)
+<   lpi[[1]] <- 1:ncol(G$X) ## lpi[[j]] is index of cols for jth linear predictor 
 ---
->   lpi <- list(seq_len(ncol(G$X))) ## lpi[[j]] is index of cols for jth linear predictor 
-654c654
-<     lpi[[i]] <- pof + 1:ncol(um$X)
+>   for (i in seq_len(formula$nlp)) lpi[[i]] <- rep(0,0)
+>   lpi[[1]] <- seq_len(ncol(G$X)) ## lpi[[j]] is index of cols for jth linear predictor 
+786c786
+<       lpi[[j]] <- c(lpi[[j]],pof + 1:ncol(um$X)) ## add these cols to lpi[[j]]
 ---
->     lpi[[i]] <- pof + seq_len(ncol(um$X))
-665c665
+>       lpi[[j]] <- c(lpi[[j]],pof + seq_len(ncol(um$X))) ## add these cols to lpi[[j]]
+800c800
 <     if (um$m) for (j in 1:um$m) {
 ---
 >     if (um$m) for (j in seq_len(um$m)) {
-682c682
+817c817
 <     if (M) for (j in 1:M) {
 ---
 >     if (M) for (j in seq_len(M)) {
-697c697
+832c832
 <     if (um$nsdf>0) um$term.names[1:um$nsdf] <- paste(um$term.names[1:um$nsdf],i-1,sep=".")
 ---
 >     if (um$nsdf>0) um$term.names[seq_len(um$nsdf)] <- paste(um$term.names[1:um$nsdf],i-1,sep=".")
-710c710
+851c851
+<       for (i in 1:length(G$smooth)) {
+---
+>       for (i in seq_len(length(G$smooth))) {
+856c856
+<       for (i in 1:length(G$off)) G$off[i] <- G$off[i] - sum(rt$dind < G$off[i])
+---
+>       for (i in seq_len(length(G$off))) G$off[i] <- G$off[i] - sum(rt$dind < G$off[i])
+872c872
 <                      data=stop("No data supplied to gam.setup"),knots=NULL,sp=NULL,
 ---
 >                      data=stop(gettextf("No data supplied to '%s' function", "gam.setup()")),knots=NULL,sp=NULL,
-805c805
+963c963
 <     if (m>0) for (i in 1:m) attr(split$smooth.spec[[i]],"gamm") <- TRUE
 ---
 >     if (m>0) for (i in seq_len(m)) attr(split$smooth.spec[[i]],"gamm") <- TRUE
-810c810
+968c968
 <     for (i in 1:m) if (!is.null(split$smooth.spec[[i]]$id)) {
 ---
 >     for (i in seq_len(m)) if (!is.null(split$smooth.spec[[i]]$id)) {
-826c826
+984c984
 <         for (j in 1:length(temp.term)) id.list[[id]]$data[[j]] <- cbind(id.list[[id]]$data[[j]],
 ---
 >         for (j in seq_len(length(temp.term))) id.list[[id]]$data[[j]] <- cbind(id.list[[id]]$data[[j]],
-835c835
+993c993
 <         for (j in 1:length(term)) id.list[[id]]$data[[j]] <- get.var(term[j],data,vecMat=FALSE)
 ---
 >         for (j in seq_len(length(term))) id.list[[id]]$data[[j]] <- get.var(term[j],data,vecMat=FALSE)
-844c844
+1002c1002
 <   if (m>0) for (i in 1:m) {
 ---
 >   if (m>0) for (i in seq_len(m)) {
-859c859
+1017c1017
 <     for (j in 1:length(sml)) {
 ---
 >     for (j in seq_len(length(sml))) {
-877c877
+1035c1035
 <   if (m>0) for (i in 1:m) {
 ---
 >   if (m>0) for (i in seq_len(m)) {
-906c906
+1064c1064
 <         stop("Later terms sharing an `id' can not have more smoothing parameters than the first such term")
 ---
 >         stop("Later terms sharing an 'id' can not have more smoothing parameters than the first such term")
-919c919
+1077c1077
 <   if (m>0) for (i in 1:m) {
 ---
 >   if (m>0) for (i in seq_len(m)) {
-989,990c989,990
+1147,1148c1147,1148
 <   { if (length(sp)!=ncol(L)) { warning("Supplied smoothing parameter vector is too short - ignored.")}
 <     if (sum(is.na(sp))) { warning("NA's in supplied smoothing parameter vector - ignoring.")}
 ---
 >   { if (length(sp)!=ncol(L)) { warning("Supplied smoothing parameter vector is too short - ignored")}
 >     if (sum(is.na(sp))) { warning("NA values in supplied smoothing parameter vector - ignoring")}
-1003c1003
+1161c1161
 <   if (m>0) for (i in 1:m) {
 ---
 >   if (m>0) for (i in seq_len(m)) {
-1029,1030c1029,1030
+1187,1188c1187,1188
 <   if (length(idx)) for (i in 1:length(idx)) idx[[i]]$sp.done <- FALSE
 <   if (m>0) for (i in 1:m) { ## work through all smooths
 ---
 >   if (length(idx)) for (i in seq_len(length(idx))) idx[[i]]$sp.done <- FALSE
 >   if (m>0) for (i in seq_len(m)) { ## work through all smooths
-1050,1052c1050,1052
+1208,1210c1208,1210
 <   { if (length(min.sp)!=nrow(L)) stop("length of min.sp is wrong.")
 <     if (sum(is.na(min.sp))) stop("NA's in min.sp.")
 <     if (sum(min.sp<0)) stop("elements of min.sp must be non negative.")
@@ -921,347 +1083,357 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >   { if (length(min.sp)!=nrow(L)) stop(gettextf("'%s' argument is of the wrong length", "min.sp"))
 >     if (sum(is.na(min.sp))) stop("NA values in 'min.sp' argument")
 >     if (sum(min.sp<0)) stop("elements of 'min.sp' argument must be non negative")
-1057c1057
+1215c1215
 <   if (m>0) for (i in 1:m) {
 ---
 >   if (m>0) for (i in seq_len(m)) {
-1060c1060
+1218c1218
 <     for (j in 1:length(sm$S)) {  # work through penalty matrices
 ---
 >     for (j in seq_len(length(sm$S))) {  # work through penalty matrices
-1086c1086
+1244c1244
 <       for (i in 1:length(PP$S)) {
 ---
 >       for (i in seq_len(length(PP$S))) {
-1103c1103
+1261c1261
 <     if (length(indi)>0) for (i in 1:length(indi)) {
 ---
 >     if (length(indi)>0) for (i in seq_len(length(indi))) {
-1126c1126
+1284c1284
 <       for (i in 1:m) {
 ---
 >       for (i in seq_len(m)) {
-1152c1152
+1310c1310
 <   for (i in 1:n.smooth) { ## create coef names, if smooth has any coefs!
 ---
 >   for (i in seq_len(n.smooth)) { ## create coef names, if smooth has any coefs!
-1190c1190
+1348c1348
 <   warning("`negbin' with unknown theta and outer iteration is deprecated - use `nb'. ")
 ---
 >   warning("'negbin()' with unknown theta and outer iteration is deprecated - use 'nb()'.")
-1210c1210
+1368c1368
 <   for (i in 1:n.th) { ## search through theta values
 ---
 >   for (i in seq_len(n.th)) { ## search through theta values
-1335c1335
+1493c1493
 <   if (!optimizer[2]%in%c("newton","bfgs","nlm","optim","nlm.fd")) stop("unknown outer optimization method.")
 ---
 >   if (!optimizer[2]%in%c("newton","bfgs","nlm","optim","nlm.fd")) stop("unknown outer optimization method")
-1367c1367
+1525c1525
 <       warning("only outer methods `newton' & `bfgs' supports `negbin' family and theta selection: reset")
 ---
 >       warning("only outer methods 'newton' & 'bfgs' supports 'negbin' family and theta selection: reset")
-1506c1506
+1664c1664
 <   if (length(G$S)>0) for (i in 1:length(G$S)) G$UrS[[i]] <- t(Ssp$Y)%*%G$rS[[i]] else i <- 0
 ---
 >   if (length(G$S)>0) for (i in seq_len(length(G$S))) G$UrS[[i]] <- t(Ssp$Y)%*%G$rS[[i]] else i <- 0
-1625c1625
+1786c1786
 <       ind <- 1:nlsp + nth ## only used if nlsp>0
 ---
 >       ind <- seq_len(nlsp) + nth ## only used if nlsp>0
-1699c1699
+1863c1863
 <    ## if (v.n) for (i in 1:v.n) if (length(dl[[i]])<n) dl[[i]] <- NULL 
 ---
 >    ## if (v.n) for (i in seq_len(v.n)) if (length(dl[[i]])<n) dl[[i]] <- NULL 
-1704c1704
+1868c1868
 <      for (i in 1:v.n) if (length(dl[[i]])>=n) { 
 ---
 >      for (i in seq_len(v.n)) if (length(dl[[i]])>=n) { 
-1715c1715
+1879c1879
 <    if (v.n>0) for (i in 1:v.n) {
 ---
 >    if (v.n>0) for (i in seq_len(v.n)) {
-1799c1799
+1963c1963
 <       for (i in 1:length(formula)) {
 ---
 >       for (i in seq_len(length(formula))) {
-1848c1848
+2012c2012
 <     if (G$m) for (i in 1:G$m) G$min.edf<-G$min.edf+G$smooth[[i]]$null.space.dim
 ---
 >     if (G$m) for (i in seq_len(G$m)) G$min.edf<-G$min.edf+G$smooth[[i]]$null.space.dim
-1906c1906
+2072c2072
 <   if (is.list(x$formula)) for (i in 1:length(x$formula)) print(x$formula[[i]]) else
 ---
 >   if (is.list(x$formula)) for (i in seq_len(length(x$formula))) print(x$formula[[i]]) else
-1910c1910
+2076c2076
 <   cat("Total model degrees of freedom",sum(x$edf),"\n")
 ---
 >   cat(gettextf("Total model degrees of freedom %s",sum(x$edf), domain = "R-mgcv"), "\n", sep = "")
-1913,1914c1913,1914
+2079,2080c2079,2080
 <     cat("\nEstimated degrees of freedom:\n")
 <     for (i in 1:n.smooth)
 ---
 >     cat("\n", gettext("Estimated degrees of freedom:", domain = "R-mgcv"), "\n", sep = "")
 >     for (i in seq_len(n.smooth))
-1917c1917
+2083c2083
 <     for (i in 1:n.smooth) {   
 ---
 >     for (i in seq_len(n.smooth)) {   
-1921c1921
+2087c2087
 <     cat(" total =",round(sum(x$edf),digits=2),"\n")
 ---
 >     cat(gettextf(" total df = %s",round(sum(x$edf),digits=2), domain = "R-mgcv"), "\n", sep = "")
-1924,1925c1924,1925
+2090,2091c2090,2091
 <   cat("\n",x$method," score: ",x$gcv.ubre,"     ",sep="")
 <   if (!is.null(x$rank) && x$rank< length(x$coefficients)) cat("rank: ",x$rank,"/",length(x$coefficients),sep="") 
 ---
 >   cat("\n", gettextf("%s score = %s", sQuote(x$method), x$gcv.ubre, domain = "R-mgcv"), "     ", sep = "")
 >   if (!is.null(x$rank) && x$rank< length(x$coefficients)) cat(gettextf("Rank: %s/%s", x$rank, length(x$coefficients), domain = "R-mgcv"), sep = "") 
-1946,1947c1946,1947
+2112,2113c2112,2113
 <     if (!is.numeric(nthreads) || nthreads <1) stop("nthreads must be a positive integer") 
 <     if (!is.numeric(irls.reg) || irls.reg <0.0) stop("IRLS regularizing parameter must be a non-negative number.")
 ---
 >     if (!is.numeric(nthreads) || nthreads <1) stop("'nthreads' argument must be a positive integer") 
 >     if (!is.numeric(irls.reg) || irls.reg <0.0) stop("IRLS regularizing parameter must be a non-negative number")
-1954c1954
+2120c2120
 <       warning("silly value supplied for rank.tol: reset to square root of machine precision.")
 ---
 >       warning("silly value supplied for rank.tol: reset to square root of machine precision")
-2046c2046
+2212c2212
 <   for (i in 1:length(G$S))
 ---
 >   for (i in seq_len(length(G$S)))
-2101c2101
+2267c2267
 <       for (i in 1:n.S) S.size[i]<-mean(abs(G$S[[i]])) 
 ---
 >       for (i in seq_len(n.S)) S.size[i]<-mean(abs(G$S[[i]])) 
-2113c2113
+2279c2279
 <         stop("illegal `family' argument")
 ---
 >         stop("invalid 'family' argument")
-2128c2128
+2294c2294
 <         stop("y must be univariate unless binomial")
 ---
 >         stop("'y' must be univariate unless binomial")
-2136c2136
+2302c2302
 <     stop(gettextf("Length of start should equal %d and correspond to initial coefs.",nvars)) 
 ---
 >     stop(gettextf("Length of start should equal %d and correspond to initial coefs", nvars))
-2156c2156
+2322c2322
 <     for (iter in 1:(control$maxit)) 
 ---
 >     for (iter in seq_len(control$maxit)) 
-2161c2161
+2327c2327
 <             stop("NAs in V(mu)")
 ---
 >             stop("NA values in V(mu)")
-2166c2166
+2332c2332
 <             stop("NAs in d(mu)/d(eta)")
 ---
 >             stop("NA values in d(mu)/d(eta)")
-2190c2190
+2356c2356
 <         stop("iterative weights or data non-finite in gam.fit - regularization may help. See ?gam.control.")
 ---
 >         stop("iterative weights or data non-finite in gam.fit - regularization may help. See ?gam.control")
-2228,2229c2228
+2394,2395c2394
 <             stop("no valid set of coefficients has been found:please supply starting values",
 <             call. = FALSE)
 ---
 >             stop("no valid set of coefficients has been found:please supply starting values", call. = FALSE)
-2234c2233
+2400c2399
 <                   stop("inner loop 1; can't correct step size")
 ---
 >                   stop(gettextf("inner loop %d; can't correct step size", 1))
-2244c2243
+2410c2409
 <                 cat("Step halved: new deviance =", dev, "\n")
 ---
 >                 cat(gettextf("Step halved: new deviance = %g", dev, domain = "R-mgcv"), "\n", sep = "")
-2247c2246
+2413c2412
 <             warning("Step size truncated: out of bounds.",call.=FALSE)
 ---
 >             warning("Step size truncated: out of bounds",call. = FALSE)
-2251c2250
+2417c2416
 <                   stop("inner loop 2; can't correct step size")
 ---
 >                   stop(gettextf("inner loop %d; can't correct step size", 2))
-2261c2260
+2427c2426
 <                 cat("Step halved: new deviance =", dev, "\n")
 ---
 >                 cat(gettextf("Step halved: new deviance = %g", dev, domain = "R-mgcv"), "\n", sep = "")
-2332c2331
+2498c2497
 < { if (!inherits(object,"gam")) stop("`object' is not of class \"gam\"")
 ---
 > { if (!inherits(object,"gam")) stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("gam")))
-2382c2381
+2548c2547
 <     warning("Unknown type, reset to terms.")
 ---
 >     warning("Unknown type, reset to terms")
-2414,2415c2413
+2580,2581c2579
 <         if (sum(!(names(object$model)%in%names(newdata)))) stop(
 <         "newdata is a model.frame: it should contain all required variables\n")
 ---
 >         if (sum(!(names(object$model)%in%names(newdata)))) stop("newdata is a model.frame: it should contain all required variables\n")
-2472c2470
+2638c2636
 <     for (i in 1:length(newdata)) 
 ---
 >     for (i in seq_len(length(newdata))) 
-2477c2475
+2643c2641
 <         msg <- paste(paste(levn[!levn%in%levm],collapse=", "),"not in original fit",collapse="")
 ---
 >         msg <- gettextf("%s not in original fit", paste(levn[!levn%in%levm], collapse = ", "), domain = "R-mgcv")
-2544c2542
+2706c2704
 <       warning("type iterms not available for multiple predictor cases")
 ---
 >       warning("type 'iterms' is not available for multiple predictor cases")
-2550c2548
+2712c2710
 <     for (i in 1:length(object$nsdf)) {
 ---
 >     for (i in seq_len(length(object$nsdf))) {
-2552c2550
+2714c2712
 <       if (object$nsdf[i]>0) pind <- c(pind,pstart[i]-1+1:object$nsdf[i])
 ---
 >       if (object$nsdf[i]>0) pind <- c(pind,pstart[i]-1+seq_len(object$nsdf[i]))
-2558c2556
+2720c2718
 <     pind <- 1:object$nsdf ## index of parameteric coefficients
 ---
 >     pind <- seq_len(object$nsdf) ## index of parameteric coefficients
-2566c2564
+2728c2726
 <     for (i in 1:length(Terms)) attr(Terms[[i]],"intercept") <- 1 
 ---
 >     for (i in seq_len(length(Terms))) attr(Terms[[i]],"intercept") <- 1 
-2575c2573
+2743c2741
 <   if (n.blocks > 0) for (b in 1:n.blocks) { # work through prediction blocks
 ---
 >   if (n.blocks > 0) for (b in seq_len(n.blocks)) { # work through prediction blocks
-2581c2579
+2749c2747
 <     for (i in 1:length(Terms)) { ## loop for parametric components (1 per lp)
 ---
 >     for (i in seq_len(length(Terms))) { ## loop for parametric components (1 per lp)
-2600c2598
+2768c2766
 <       if (object$nsdf[i]>0) X[,pstart[i]-1 + 1:object$nsdf[i]] <- Xp
 ---
 >       if (object$nsdf[i]>0) X[,pstart[i]-1 + seq_len(object$nsdf[i])] <- Xp
-2603c2601
+2773c2771
 <     if (n.smooth) for (k in 1:n.smooth) { ## loop through smooths
 ---
 >     if (n.smooth) for (k in seq_len(n.smooth)) { ## loop through smooths
-2623,2624c2621,2622
+2795,2796c2793,2794
 <       for (j in 1:length(lass)) if (length(lass[[j]])) { ## work through assign list
 <         ind <- 1:length(lass[[j]]) ## index vector for coefs involved
 ---
 >       for (j in seq_len(length(lass))) if (length(lass[[j]])) { ## work through assign list
 >         ind <- seq_len(length(lass[[j]])) ## index vector for coefs involved
-2626c2624
+2798c2796
 <         if (nptj>0) for (i in 1:nptj) { ## work through parametric part
 ---
 >         if (nptj>0) for (i in seq_len(nptj)) { ## work through parametric part
-2635c2633
+2807c2805
 <         for (k in 1:n.smooth) # work through the smooth terms 
 ---
 >         for (k in seq_len(n.smooth)) # work through the smooth terms 
-2812c2810
+2852,2853c2850,2851
+<           off.ind <- (1:n.smooth)[as.logical(colSums(abs(Xoff)))]
+<           for (j in 1:nlp) { ## looping over the model formulae
+---
+>           off.ind <- seq_len(n.smooth)[as.logical(colSums(abs(Xoff)))]
+>           for (j in seq_len(nlp)) { ## looping over the model formulae
+2977c2975
 <   if (!inherits(b,"gam")) stop("requires an object of class gam")
 ---
 >   if (!inherits(b,"gam")) stop(gettextf("'%s' argument is not an object of class %s", "b", dQuote("gam")))
-2821c2819
+2986c2984
 <   for (i in 1:m) { ## loop through smooths
 ---
 >   for (i in seq_len(m)) { ## loop through smooths
-2839c2837
+3004c3002
 <     for (i in 1:m) {
 ---
 >     for (i in seq_len(m)) {
-2860,2861c2858,2859
+3025,3026c3023,3024
 <     for (i in 1:n.measures) conc[[i]] <- matrix(1,m,m) ## concurvity matrix
 <     for (i in 1:m) { ## concurvity calculation loop
 ---
 >     for (i in seq_len(n.measures)) conc[[i]] <- matrix(1,m,m) ## concurvity matrix
 >     for (i in seq_len(m)) { ## concurvity calculation loop
-2864c2862
+3029c3027
 <       for (j in 1:m) if (i!=j) { 
 ---
 >       for (j in seq_len(m)) if (i!=j) { 
-2886c2884
+3051c3049
 <     for (i in 1:n.measures) rownames(conc[[i]]) <- colnames(conc[[i]]) <- lab
 ---
 >     for (i in seq_len(n.measures)) rownames(conc[[i]]) <- colnames(conc[[i]]) <- lab
-2920c2918
+3085c3083
 <       warning("Pearson residuals not available for this family - returning deviance residuals")
 ---
 >       warning("Pearson residuals are not available for this family - returning deviance residuals")
-2949c2947
+3112c3110
 <   f <- t(ed$vectors[,1:k])%*%R%*%b
 ---
 >   f <- t(ed$vectors[,seq_len(k)])%*%R%*%b
-2972c2970
+3135c3133
 < #    for (i in 1:length(x)) r[i] <- davies(x[i],lambda,h)$Qq
 ---
 > #    for (i in seq_len(length(x))) r[i] <- davies(x[i],lambda,h)$Qq
-2976c2974
+3139c3137
 <   if (length(h) != length(lambda)) stop("lambda and h should have the same length!")
 ---
 >   if (length(h) != length(lambda)) stop(gettextf("'%s' and '%s' arguments should have the same length", "lambda", "h"))
-3035c3033
+3198c3196
 <   if (!inherits(b,"gam")) stop("recov works with fitted gam objects only") 
 ---
 >   if (!inherits(b,"gam")) stop(gettextf("'%s' argument is not an object of class %s", "b", dQuote("gam")))
-3042c3040
+3205c3203
 <       for (i in 1:length(b$smooth)) { 
 ---
 >       for (i in seq_len(length(b$smooth))) { 
-3045c3043
+3208c3206
 <         if (ns>0) for (j in 1:ns) {
 ---
 >         if (ns>0) for (j in seq_len(ns)) {
-3061c3059
+3224c3222
 <   if (m%in%re) stop("m can't be in re")
 ---
 >   if (m%in%re) stop("'m' argument  can't be in 're' argument")
-3065c3063
+3228c3226
 <   for (i in 1:length(re)) {
 ---
 >   for (i in seq_len(length(re))) {
-3083c3081
+3246c3244
 <   for (i in 1:length(b$smooth)) { 
 ---
 >   for (i in seq_len(length(b$smooth))) { 
-3087c3085
+3250c3248
 <     if (ns>0) for (j in 1:ns) {
 ---
 >     if (ns>0) for (j in seq_len(ns)) {
-3146c3144
+3309c3307
 <   for (i in 1:length(b$smooth)) if (!is.null(b$smooth[[i]]$random)&&b$smooth[[i]]$random&&i!=m) rind <- c(rind,i)
 ---
 >   for (i in seq_len(length(b$smooth))) if (!is.null(b$smooth[[i]]$random)&&b$smooth[[i]]$random&&i!=m) rind <- c(rind,i)
-3304c3302
+3402c3400
+<             t(t(vec)/sqrt(ed$val[1:k]))
+---
+>             t(t(vec)/sqrt(ed$val[seq_len(k)]))
+3479c3477
 <     warning("p-values for any terms that can be penalized to zero will be unreliable: refit model to fix this.")
 ---
 >     warning("p-values for any terms that can be penalized to zero will be unreliable: refit model to fix this")
-3310c3308
+3485c3483
 <   if (p.type!=0) warning("p.type!=0 is deprecated, and liable to be removed in future")
 ---
 >   if (p.type!=0) warning("'p.type != 0' is deprecated, and liable to be removed in future")
-3413c3411
+3588c3586
 <     for (i in 1:m) { 
 ---
 >     for (i in seq_len(m)) { 
-3446c3444
+3621c3619
 <     for (i in 1:m) { ## loop through smooths
 ---
 >     for (i in seq_len(m)) { ## loop through smooths
-3531c3529
+3706c3704
 <   cat("Formula:\n") 
 ---
 >   cat(gettext("Formula:", domain = "R-mgcv"), "\n", sep = "")
-3537c3535
+3712c3710
 <   { cat("\nParametric coefficients:\n")
 ---
 >   { cat("\n", gettext("Parametric coefficients:", domain = "R-mgcv"), "\n", sep = "")
-3542c3540
+3717c3715
 <   { cat("Approximate significance of smooth terms:\n")
 ---
 >   { cat(gettext("Approximate significance of smooth terms:", domain = "R-mgcv"), "\n", sep = "")
-3546,3548c3544,3546
+3721,3723c3719,3721
 <   if (!is.null(x$rank) && x$rank< x$np) cat("Rank: ",x$rank,"/",x$np,"\n",sep="") 
 <   if (!is.null(x$r.sq)) cat("R-sq.(adj) = ",formatC(x$r.sq,digits=3,width=5),"  ")
 <   if (length(x$dev.expl)>0) cat("Deviance explained = ",formatC(x$dev.expl*100,digits=3,width=4),"%",sep="")
@@ -1269,94 +1441,110 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >   if (!is.null(x$rank) && x$rank< x$np) cat(gettextf("Rank: %s/%s", x$rank, x$np, domain = "R-mgcv"), "\n", sep = "")
 >   if (!is.null(x$r.sq)) cat(gettextf("R-sq.(adj) = %s", formatC(x$r.sq,digits=3,width=5), domain = "R-mgcv"), "  ", sep = "")
 >   if (length(x$dev.expl)>0) cat(gettextf("Deviance explained = %s %%", formatC(x$dev.expl*100,digits=3,width=4), domain = "R-mgcv"), sep = "")
-3553c3551
+3728c3726
 <   cat("  Scale est. = ",formatC(x$scale,digits=5,width=8,flag="-"),"  n = ",x$n,"\n",sep="")
 ---
 >   cat(gettextf("  Scale est. = %s  n = %s", formatC(x$scale,digits=5,width=8,flag="-"), x$n, domain = "R-mgcv"), "\n", sep = "")
-3566,3567c3564
+3741,3742c3739
 <         warning("The following arguments to anova.glm(..) are invalid and dropped: ",
 <             paste(deparse(dotargs[named]), collapse = ", "))
 ---
 >         warning(gettext("The following arguments to anova.glm(..) are invalid and dropped: ", domain = "R-mgcv"), paste(deparse(dotargs[named]), collapse = ", "), domain = NA)
-3577,3578c3574,3575
+3752,3753c3749,3750
 <     if (!is.null(test)) warning("test argument ignored")
 <     if (!inherits(object,"gam")) stop("anova.gam called with non gam object")
 ---
 >     if (!is.null(test)) warning("'test' argument ignored")
 >     if (!inherits(object,"gam")) stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("gam")))
-3589c3586
+3764c3761
 <   cat("Formula:\n") 
 ---
 >   cat(gettext("Formula:", domain = "R-mgcv"), "\n", sep = "")
-3593c3590
+3768c3765
 <   { cat("\nParametric Terms:\n")
 ---
 >   { cat("\n", gettext("Parametric Terms:", domain = "R-mgcv"), "\n", sep = "")
-3598c3595
+3773c3770
 <   { cat("Approximate significance of smooth terms:\n")
 ---
 >   { cat(gettext("Approximate significance of smooth terms:", domain = "R-mgcv"), "\n", sep = "")
-3612c3609
+3787c3784
 <   if (!inherits(x,"gam")) stop("not a gam object")
 ---
 >   if (!inherits(x,"gam")) stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("gam")))
-3617c3614
+3792c3789
 <   for (i in 1:length(x$smooth)) { ## work through smooths
 ---
 >   for (i in seq_len(length(x$smooth))) { ## work through smooths
-3623c3620
+3798c3795
 <       for (j in 1:length(x$smooth[[i]]$S)) {
 ---
 >       for (j in seq_len(length(x$smooth[[i]]$S))) {
-3649c3646
+3824c3821
 <   if (!inherits(x,"gam")) stop("argument is not a gam object")
 ---
 >   if (!inherits(x,"gam")) stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("gam")))
-3658c3655
+3833c3830
 <   if (!inherits(x,"gam")) stop("requires an object of class gam")
 ---
 >   if (!inherits(x,"gam")) stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("gam")))
-3672c3669
+3847c3844
 <     if (m>0) for (i in 1:m) { ## loop through all smooths
 ---
 >     if (m>0) for (i in seq_len(m)) { ## loop through all smooths
-3682c3679
-<       if (ok) for (j in 1:length(x$smooth[[i]]$S.scale)) {
+3859,3860c3856,3857
+<          warning("S.scale vector doesn't match S list - please report to maintainer")
+<         for (j in 1:length(x$smooth[[i]]$S.scale)) {
 ---
->       if (ok) for (j in seq_len(length(x$smooth[[i]]$S.scale))) {
-3696c3693
+>          warning("'S.scale' vector doesn't match S list - please report to maintainer")
+>         for (j in seq_len(length(x$smooth[[i]]$S.scale))) {
+3875c3872
 <         for (j in 1:length(x$smooth[[ii]]$S.scale)) {
 ---
 >         for (j in seq_len(length(x$smooth[[ii]]$S.scale))) {
-3748c3745
+3927c3924
 <     cat(paste("Standard deviations and",conf.lev,"confidence intervals:\n\n"))
 ---
 >     cat(gettextf("Standard deviations and %s confidence intervals:", conf.lev, domain = "R-mgcv"), "\n\n", sep = "")
-3750c3747
+3929c3926
 <     cat("\nRank: ");cat(rank);cat("/");cat(ncol(H));cat("\n")
 ---
 >     cat("\n", gettextf("Rank: %s/%s", rank, ncol(H), domain = "R-mgcv"), "\n", sep = "")
-3752c3749
+3931c3928
 <       cat("\nAll smooth components:\n")
 ---
 >       cat("\n", gettext("All smooth components:", domain = "R-mgcv"), "\n", sep = "")
-3840c3837
+4006,4007c4003,4004
+<     d<-um$d[1:rank]^0.5
+<     return(t(t(um$u[,1:rank])*as.vector(d))) # note recycling rule used for efficiency
+---
+>     d<-um$d[seq_len(rank)]^0.5
+>     return(t(t(um$u[,seq_len(rank)])*as.vector(d))) # note recycling rule used for efficiency
+4019c4016
+<     L <- L[,piv,drop=FALSE]; L <- t(L[1:rank,,drop=FALSE])
+---
+>     L <- L[,piv,drop=FALSE]; L <- t(L[seq_len(rank),,drop=FALSE])
+4022c4019
 <   stop("method not recognised.")
 ---
 >   stop("method was not recognised")
-3917c3914
+4099c4096
 <     for (i in 1:length(S)) {
 ---
 >     for (i in seq_len(length(S))) {
-3974c3971
+4127c4124
+<       for (i in 1:length(S)) {
+---
+>       for (i in seq_len(length(S))) {
+4158c4155
 <     for (i in 1:n.p) { # loop over penalties
 ---
 >     for (i in seq_len(n.p)) { # loop over penalties
-3988c3985
+4172c4169
 <       if (sizeS <= 0) stop(gettextf("S[[%d]] matrix is not +ve definite.", i)) 
 ---
 >       if (sizeS <= 0) stop(gettextf("S[[%d]] matrix is not +ve definite", i))
-4049,4051c4046,4048
+4233,4235c4230,4232
 <     if (!inherits(L,"matrix")) stop("L must be a matrix.")
 <     if (nrow(L)<ncol(L)) stop("L must have at least as many rows as columns.")
 <     if (nrow(L)!=n.p||ncol(L)!=length(sp)) stop("L has inconsistent dimensions.")
@@ -1364,79 +1552,95 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     if (!inherits(L,"matrix")) stop("'L' argument must be a matrix")
 >     if (nrow(L)<ncol(L)) stop("'L' argument must have at least as many rows as columns")
 >     if (nrow(L)!=n.p||ncol(L)!=length(sp)) stop("'L' argument has inconsistent dimensions")
-4058c4055
+4242c4239
 <   { for (i in 1:n.p) 
 ---
 >   { for (i in seq_len(n.p)) 
-4078c4075
+4262c4259
 <     if (n.p>0) for (i in 1:n.p) { 
 ---
 >     if (n.p>0) for (i in seq_len(n.p)) { 
-4095c4092
+4279c4276
 <     { if (dim(w)[1]!=dim(w)[2]||dim(w)[2]!=dim(X)[1]) stop("dimensions of supplied w wrong.")
 ---
 >     { if (dim(w)[1]!=dim(w)[2]||dim(w)[2]!=dim(X)[1]) stop("dimensions of supplied 'w' argument is wrong")
-4099c4096
+4283c4280
 <     { if (length(y)!=length(w)) stop("w different length from y!")
 ---
 >     { if (length(y)!=length(w)) stop("'w' argument has different length from 'y' argument!")
-4106c4103
+4290c4287
 <     if (n!=length(X)) stop("X lost dimensions in magic!!")
 ---
 >     if (n!=length(X)) stop("'X' lost dimensions in magic!!")
-4111c4108
+4295c4292
 <   if (n.p>0) for (i in 1:n.p) { 
 ---
 >   if (n.p>0) for (i in seq_len(n.p)) { 
-4152c4149
+4336c4333
 < } ## magic
 ---
 > }
-4160c4157
+4344c4341
 <   hello <- paste("This is mgcv ",version,". For overview type 'help(\"mgcv-package\")'.",sep="")
 ---
 >   hello <- gettextf("This is mgcv %s. For overview type 'help(\"mgcv-package\")'", paste(version, collapse = ""), domain = "R-mgcv")
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/mgcv/R/misc.r Recommended/mgcv/R/misc.r
-30,31c30,31
+11c11
+<     if (ncol(mu)!=p||nrow(mu)!=n) stop("mu dimensions wrong")
+---
+>     if (ncol(mu)!=p||nrow(mu)!=n) stop("'mu' dimensions are wrong")
+14c14
+<     if (length(mu)!=p) stop("mu dimensions wrong")
+---
+>     if (length(mu)!=p) stop("'mu' dimensions are wrong")
+46,47c46,47
 <     dH <- list();ind <- 1:(nb*nb)
 <     for (i in 1:nsp) { 
 ---
 >     dH <- list();ind <- seq_len(nb*nb)
 >     for (i in seq_len(nsp)) { 
-45c45
+69c69
+<   for (i in 1:nt) pt <- pt + prod(p[ts[i]:(ts[i]+dt[i]-1)]) - as.numeric(qc[i]>0) 
+---
+>   for (i in seq_len(nt)) pt <- pt + prod(p[ts[i]:(ts[i]+dt[i]-1)]) - as.numeric(qc[i]>0) 
+83c83
+<   for (i in 1:nt) pt <- pt + prod(p[ts[i]:(ts[i]+dt[i]-1)]) - as.numeric(qc[i]>0) 
+---
+>   for (i in seq_len(nt)) pt <- pt + prod(p[ts[i]:(ts[i]+dt[i]-1)]) - as.numeric(qc[i]>0) 
+133c133
 <     piv <- 1:ncol(X); piv[qrx$pivot] <- 1:ncol(X)
 ---
 >     piv <- seq_len(ncol(X)); piv[qrx$pivot] <- seq_len(ncol(X))
-47c47
+135c135
 <     d <- er$d*0;d[1:rr] <- 1/er$d[1:rr]
 ---
 >     d <- er$d*0;d[seq_len(rr)] <- 1/er$d[seq_len(rr)]
-51c51
+139c139
 <     Ri[1:rr,1:rr] <- backsolve(R[1:rr,1:rr],diag(rr))
 ---
 >     Ri[seq_len(rr),seq_len(rr)] <- backsolve(R[seq_len(rr),seq_len(rr)],diag(rr))
-166,167c166,167
+268,269c268,269
 <     if (is.matrix(a)) { if (nrow(a) != x$r) stop("a has wrong number of rows") }
 <     else if (length(a) != x$r) stop("a has wrong number of rows")
 ---
 >     if (is.matrix(a)) { if (nrow(a) != x$r) stop("'a' argument has wrong number of rows") }
 >     else if (length(a) != x$r) stop("'a' argument has wrong number of rows")
-169,170c169,170
+271,272c271,272
 <     if (is.matrix(a)) { if (nrow(a) != x$c) stop("a has wrong number of rows") }
 <     else if (length(a) != x$c)  stop("a has wrong number of rows")
 ---
 >     if (is.matrix(a)) { if (nrow(a) != x$c) stop("'a' argument has wrong number of rows") }
 >     else if (length(a) != x$c)  stop("'a' argument has wrong number of rows")
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/mgcv/R/mvam.r Recommended/mgcv/R/mvam.r
-102c102
+195c195
 <       for (i in 1:(m-1)) lpstart[i] <- lpi[[i+1]][1]
 ---
 >       for (i in seq_len(m-1)) lpstart[i] <- lpi[[i+1]][1]
-120c120
+219c219
 <         for (i in 1:nsp) { 
 ---
 >         for (i in seq_len(nsp)) { 
-125,126c125,126
+226,227c226,227
 <         d1H <- list();ind <- 1:(nb*nb)
 <         for (i in 1:nsp) { 
 ---
@@ -1617,28 +1821,24 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <   if (m>0) for (i in 1:m) if (pd[[i]]$plot.me&&(is.null(select)||i==select)) {
 ---
 >   if (m>0) for (i in seq_len(m)) if (pd[[i]]$plot.me&&(is.null(select)||i==select)) {
-1299c1299
+1298c1298
 <     for (i in 1:length(v.names)) {
 ---
 >     for (i in seq_len(length(v.names))) {
-1316,1317c1316
+1315,1316c1315
 < 
 <     for (i in 1:2) 
 ---
 >     for (i in seq_len(2)) 
-1323c1322
+1322c1321
 <   for (i in 1:2) if (is.factor(x$var.summary[[view[i]]])) {
 ---
 >   for (i in seq_len(2)) if (is.factor(x$var.summary[[view[i]]])) {
-1334c1333
-< #  for (i in 1:length(marg))
----
-> #  for (i in seq_len(length(marg)))
-1359c1358
+1342c1341
 <   for (i in 1:length(x$var.summary)) { 
 ---
 >   for (i in seq_len(length(x$var.summary))) { 
-1375,1376c1374,1375
+1355,1356c1354,1355
 <   if (type=="link") zlab<-paste("linear predictor") ## ignore codetools
 <   else if (type=="response") zlab<-type
 ---
@@ -1810,9 +2010,9 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >     stop("Sorry, tensor products of smooths with multiple penalties are not supported")
 606c606
-<   for (i in 1:m)
+<   for (i in 1:m) {
 ---
->   for (i in seq_len(m))
+>   for (i in seq_len(m)) {
 635c635
 <   for (i in 1:m)  Sm[[i]] <- Sm[[i]]/eigen(Sm[[i]],symmetric=TRUE,only.values=TRUE)$values[1] 
 ---
@@ -2106,261 +2306,273 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <         for (i in 1:kp.tot) {
 ---
 >         for (i in seq_len(kp.tot)) {
-1979c1978
+1981c1980
 <   if (!is.null(object$id)) stop("random effects don't work with ids.")
 ---
 >   if (!is.null(object$id)) stop("random effects don't work with ids")
-2038c2037
+1993c1992
+<     for (i in 1:object$dim) {
+---
+>     for (i in seq_len(object$dim)) {
+2002c2001
+<       ind <- 1:ns;ind[maxi] <- ns ;ind[ns] <- maxi
+---
+>       ind <- seq_len(ns);ind[maxi] <- ns ;ind[ns] <- maxi
+2005c2004
+<       for (i in 1:ns) object$term <- c(object$term,object$margin[[i]]$term)
+---
+>       for (i in seq_len(ns)) object$term <- c(object$term,object$margin[[i]]$term)
+2066c2065
 <   for (i in 1:n.poly) {
 ---
 >   for (i in seq_len(n.poly)) {
-2053c2052
+2081c2080
 <   for (i in 1:length(pc)) nb[[i]] <- rep(0,0)
 ---
 >   for (i in seq_len(length(pc))) nb[[i]] <- rep(0,0)
-2055c2054
+2083c2082
 <   for (k in 1:n.poly) { ## work through poly list looking for neighbours
 ---
 >   for (k in seq_len(n.poly)) { ## work through poly list looking for neighbours
-2064c2063
+2092c2091
 <     if (length(ind)>0) for (j in 1:length(ind)) {
 ---
 >     if (length(ind)>0) for (j in seq_len(length(ind))) {
-2073c2072
+2101c2100
 <   for (i in 1:length(pc)) nb[[i]] <- unique(nb[[i]])
 ---
 >   for (i in seq_len(length(pc))) nb[[i]] <- unique(nb[[i]])
-2130c2129
+2158c2157
 <     for (i in 1:length(d.name)) {
 ---
 >     for (i in seq_len(length(d.name))) {
-2153c2152
+2181c2180
 <     for (i in 1:np) {
 ---
 >     for (i in seq_len(np)) {
-2157c2156
+2185c2184
 <       if (lind>0) for (j in 1:lind) S[a.name[i],a.name[ind[j]]] <- -1
 ---
 >       if (lind>0) for (j in seq_len(lind)) S[a.name[i],a.name[ind[j]]] <- -1
-2186c2185
+2214c2213
 <       for (i in 1:length(mi)) object$X[i,mi[i]] <- 1
 ---
 >       for (i in seq_len(length(mi))) object$X[i,mi[i]] <- 1
-2192c2191
+2220c2219
 <     object$X <- if (length(mi)) rp$X[-(1:length(mi)),ind] else  rp$X[,ind] ## model matrix
 ---
 >     object$X <- if (length(mi)) rp$X[-seq_len(length(mi)),ind] else  rp$X[,ind] ## model matrix
-2337c2336
+2365c2364
 <   for (i in 1:2) {
 ---
 >   for (i in seq_len(2)) {
-2347c2346
+2375c2374
 <     for (i in 1:2) 
 ---
 >     for (i in seq_len(2)) 
-2359c2358
+2387c2386
 <     warning("more knots than data in an sos term: knots ignored.")
 ---
 >     warning("more knots than data in an sos term: knots ignored")
-2454c2453
+2482c2481
 <     for (i in 1:n.chunk) { ## build predict matrix in chunks
 ---
 >     for (i in seq_len(n.chunk)) { ## build predict matrix in chunks
-2503c2502
+2531c2530
 <   for (i in 1:M) {
 ---
 >   for (i in seq_len(M)) {
-2505c2504
+2533c2532
 <     for (j in 1:n) y <- y * x[,j]^p[i,j]
 ---
 >     for (j in seq_len(n)) y <- y * x[,j]^p[i,j]
-2544c2543
+2572c2571
 <   for (i in 1:object$dim) {
 ---
 >   for (i in seq_len(object$dim)) {
-2554c2553
+2582c2581
 <     for (i in 1:object$dim) 
 ---
 >     for (i in seq_len(object$dim)) 
-2566c2565
+2594c2593
 <     warning("more knots than data in a ds term: knots ignored.")
 ---
 >     warning("more knots than data in a ds term: knots ignored")
-2641c2640
+2669c2668
 <   ind <- 1:ncol(T)
 ---
 >   ind <- seq_len(ncol(T))
-2695c2694
+2723c2722
 <   for (i in 1:object$dim) {
 ---
 >   for (i in seq_len(object$dim)) {
-2708,2709c2707,2708
+2736,2737c2735,2736
 <     for (i in 1:n.chunk) { ## build predict matrix in chunks
 <       ind <- 1:nk + (i-1)*nk
 ---
 >     for (i in seq_len(n.chunk)) { ## build predict matrix in chunks
 >       ind <- seq_len(nk) + (i-1)*nk
-2809c2808
+2837c2836
 <    for (i in 1:length(object$term)) { 
 ---
 >    for (i in seq_len(length(object$term))) { 
-2821c2820
+2849c2848
 <          for (i in 1:m) dat[[i]] <- X[,i]     ## return only unique rows
 ---
 >          for (i in seq_len(m)) dat[[i]] <- X[,i]     ## return only unique rows
-2853c2852
+2881c2880
 <   if (!is.null(attr(sm,"qrc"))) warning("smooth objects should not have a qrc attribute.")
 ---
 >   if (!is.null(attr(sm,"qrc"))) warning("smooth objects should not have a qrc attribute")
-2877c2876
-<        drop <- min((1:length(vcol))[vcol==min(vcol)])
+2905c2904
+<         drop <- min((1:length(vcol))[vcol==min(vcol)])
 ---
->        drop <- min(seq_len(length(vcol))[vcol==min(vcol)])
-2884c2883
+>         drop <- min(seq_len(length(vcol))[vcol==min(vcol)])
+2912c2911
 <             sm$C <- ((1:length(xsd))[xsd==0])[1] ## index of coef to set to zero
 ---
 >             sm$C <- (seq_len(length(xsd))[xsd==0])[1] ## index of coef to set to zero
-2889c2888
+2917c2916
 <             sm$C <- ((1:length(xz))[xz==min(xz)])[1] ## index of coef to set to zero
 ---
 >             sm$C <- (seq_len(length(xz))[xz==min(xz)])[1] ## index of coef to set to zero
-2924c2923
+2954c2953
 <       for (i in 1:length(sm$S)) {
 ---
 >       for (i in seq_len(length(sm$S))) {
-2944c2943
+2974c2973
 <     if (!is.null(sm$by.done)) warning("handling `by' variables in smooth constructors may not work with the summation convention ")
 ---
 >     if (!is.null(sm$by.done)) warning("handling 'by' variables in smooth constructors may not work with the summation convention")
-2965c2964
+2995c2994
 <       if (matrixArg) stop("factor `by' variables can not be used with matrix arguments.")
 ---
 >       if (matrixArg) stop("factor 'by' variables can not be used with matrix arguments")
-2972c2971
+3002c3001
 <       for (j in 1:length(lev)) {
 ---
 >       for (j in seq_len(length(lev))) {
-2985c2984
+3015c3014
 <           (!is.null(sm$ind)&&length(by)!=length(sm$ind))) stop("`by' variable must be same dimension as smooth arguments")
 ---
 >           (!is.null(sm$ind)&&length(by)!=length(sm$ind))) stop("'by' variable must be same dimension as smooth arguments")
-2991c2990
+3021c3020
 <           ind <- 1:n 
 ---
 >           ind <- seq_len(n)
-3000c2999
+3030c3029
 <             ind <- 1:n 
 ---
 >             ind <- seq_len(n)
-3013c3012
+3043c3042
 <           for (i in 1:n) { ## in this case have to work down the rows
 ---
 >           for (i in seq_len(n)) { ## in this case have to work down the rows
-3065c3064
+3095c3094
 <       for (i in 1:length(sml)) { ## loop through smooth list
 ---
 >       for (i in seq_len(length(sml))) { ## loop through smooth list
-3070c3069
+3100c3099
 <           for (l in 1:length(sml[[i]]$S)) { # some smooths have > 1 penalty 
 ---
 >           for (l in seq_len(length(sml[[i]]$S))) { # some smooths have > 1 penalty 
-3081c3080
+3111c3110
 <       { indi <- (1:ncol(sm$C))[colSums(sm$C)!=0] ## index of non-zero columns in C
 ---
 >       { indi <- seq_len(ncol(sm$C))[colSums(sm$C)!=0] ## index of non-zero columns in C
-3087c3086
+3117c3116
 <           for (i in 1:length(sml)) { ## loop through smooth list
 ---
 >           for (i in seq_len(length(sml))) { ## loop through smooth list
-3089c3088
+3119c3118
 <             for (l in 1:length(sm$S)) # some smooths have > 1 penalty 
 ---
 >             for (l in seq_len(length(sm$S))) # some smooths have > 1 penalty 
-3091c3090
+3121c3120
 <               ZSZ[indi[1:nz],]<-qr.qty(qrc,sml[[i]]$S[[l]][indi,,drop=FALSE])[(nc+1):nx,] 
 ---
 >               ZSZ[indi[seq_len(nz)],]<-qr.qty(qrc,sml[[i]]$S[[l]][indi,,drop=FALSE])[(nc+1):nx,] 
-3093c3092
+3123c3122
 <               ZSZ[,indi[1:nz]]<-t(qr.qty(qrc,t(ZSZ[,indi,drop=FALSE]))[(nc+1):nx,])
 ---
 >               ZSZ[,indi[seq_len(nz)]]<-t(qr.qty(qrc,t(ZSZ[,indi,drop=FALSE]))[(nc+1):nx,])
-3099c3098
+3129c3128
 <             sml[[i]]$X[,indi[1:nz]]<-t(qr.qty(qrc,t(sml[[i]]$X[,indi,drop=FALSE]))[(nc+1):nx,])
 ---
 >             sml[[i]]$X[,indi[seq_len(nz)]]<-t(qr.qty(qrc,t(sml[[i]]$X[,indi,drop=FALSE]))[(nc+1):nx,])
-3115c3114
+3145c3144
 <             for (i in 1:length(sml)) { ## loop through smooth list
 ---
 >             for (i in seq_len(length(sml))) { ## loop through smooth list
-3120c3119
+3150c3149
 <               for (l in 1:length(sm$S)) { # some smooths have > 1 penalty 
 ---
 >               for (l in seq_len(length(sm$S))) { # some smooths have > 1 penalty 
-3126c3125
+3156c3155
 <             for (i in 1:length(sml)) { ## loop through smooth list
 ---
 >             for (i in seq_len(length(sml))) { ## loop through smooth list
-3128c3127
+3158c3157
 <               for (l in 1:length(sm$S)) { # some smooths have > 1 penalty 
 ---
 >               for (l in seq_len(length(sm$S))) { # some smooths have > 1 penalty 
-3138c3137
+3168c3167
 <           for (i in 1:length(sml)) { ## loop through smooth list
 ---
 >           for (i in seq_len(length(sml))) { ## loop through smooth list
-3148c3147
+3178c3177
 <         for (i in 1:length(sml)) {
 ---
 >         for (i in seq_len(length(sml))) {
-3154c3153
+3184c3183
 <        for (i in 1:length(sml)) { ## loop through smooth list
 ---
 >        for (i in seq_len(length(sml))) { ## loop through smooth list
-3156c3155
+3186c3185
 <           for (l in 1:length(sm$S)) { # some smooths have > 1 penalty 
 ---
 >           for (l in seq_len(length(sm$S))) { # some smooths have > 1 penalty 
-3169c3168
+3199c3198
 <        for (i in 1:length(sml)) { ## loop through smooth list
 ---
 >        for (i in seq_len(length(sml))) { ## loop through smooth list
-3171c3170
+3201c3200
 <           for (l in 1:length(sm$S)) { # some smooths have > 1 penalty 
 ---
 >           for (l in seq_len(length(sm$S))) { # some smooths have > 1 penalty 
-3187c3186
+3217c3216
 <       for (i in 1:length(sml)) { ## loop through smooth list
 ---
 >       for (i in seq_len(length(sml))) { ## loop through smooth list
-3194c3193
+3224c3223
 <   } else for (i in 1:length(sml)) attr(sml[[i]],"qrc") <-NULL ## no absorption
 ---
 >   } else for (i in seq_len(length(sml))) attr(sml[[i]],"qrc") <-NULL ## no absorption
-3235c3234
+3265c3264
 <         if (p>rank) for (i in 1:length(sml)) {
 ---
 >         if (p>rank) for (i in seq_len(length(sml))) {
-3252c3251
+3283c3282
 <         for (i in 1:length(sml)) {
 ---
 >         for (i in seq_len(length(sml))) {
-3278c3277
+3310c3309
 <     for (i in 1:n) { ## in this case have to work down the rows
 ---
 >     for (i in seq_len(n)) { ## in this case have to work down the rows
-3302c3301
+3334c3333
 <           if (length(by)!=nrow(X)) stop("`by' variable must be same dimension as smooth arguments")
 ---
 >           if (length(by)!=nrow(X)) stop("'by' variable must be same dimension as smooth arguments")
-3314c3313
+3346c3345
 <       ind <- 1:n 
 ---
 >       ind <- seq_len(n)
-3353c3352
+3385c3384
 <             X[ind,indi[1:nz]]<-t(qr.qty(qrc,t(X[ind,indi,drop=FALSE]))[(nc+1):nx,])
 ---
 >             X[ind,indi[seq_len(nz)]]<-t(qr.qty(qrc,t(X[ind,indi,drop=FALSE]))[(nc+1):nx,])
-3357c3356
+3389c3388
 <             X[,indi[1:nz]]<-t(qr.qty(qrc,t(X[,indi,drop=FALSE]))[(nc+1):nx,,drop=FALSE])
 ---
 >             X[,indi[seq_len(nz)]]<-t(qr.qty(qrc,t(X[,indi,drop=FALSE]))[(nc+1):nx,,drop=FALSE])
@@ -2594,11 +2806,11 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <    if (j!= *r * *c)  Rprintf("\nfile dim problem\n");
 ---
 >    if (j!= *r * *c)  Rprintf(_("\nfile dim problem\n"));
-2345c2346
+2550c2551
 <     if (k) Rprintf("Non orthogonal eigenvectors %d %g\n",k,x/k);
 ---
 >     if (k) Rprintf(_("Non orthogonal eigenvectors %d %g\n"), k,x/k);
-2350c2351
+2555c2556
 <     if (k) Rprintf("Eigenvectors not normalized %d %g\n",k,x/k);
 ---
 >     if (k) Rprintf(_("Eigenvectors not normalized %d %g\n"), k,x/k);

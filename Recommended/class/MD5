@@ -1,5 +1,5 @@
-5035091d57c953882749f84c2d04fb14  DESCRIPTION
 86b185771b0e5e29717ee6b0ad5ccf8d  Changes
+5035091d57c953882749f84c2d04fb14  DESCRIPTION
 3bad31311a37fe2f39e9c2ad876ab94c  inst/CITATION
 e042788d6870b70eb8ea0bc5f01391ff  inst/NEWS
 dc34b63e948e3ba0667d43b3fde24c58  inst/po/pl/LC_MESSAGES/R-class.mo
@@ -30,8 +30,8 @@ faf0e9f10502f714e2ec4fd55e6078ef  po/R-class.pot
 bb58b22589d23aa5601fda9610bba5f9  po/R-pl.po
 a90e18606f5d74d5d7877bac601293c3  po/R-fr.po
 bd0ea343c607f617e751e941b8ca32f5  po/R-de.po
-132b8aade86ce1c1a9ee83d7806e6ec3  po/R-ko.po
 ddf83a10c93a38ef5b111508890d011b  R/lvq.R
+132b8aade86ce1c1a9ee83d7806e6ec3  po/R-ko.po
 ff5ef05ff4bc09abeca6fe0000416d05  R/SOM.R
 dec31ffc0e9a73c8117dd85cb18453d7  R/knn.R
 951ec3571a83bc462ea45c8664efe1d9  R/multiedit.R

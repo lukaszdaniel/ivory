@@ -627,7 +627,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 > envelope(boot.out = NULL, mat = NULL, level = 0.95, index = seq_len(ncol(mat)))
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/boot/man/print.boot.Rd Recommended/boot/man/print.boot.Rd
-11c11
+12c12
 <       index = 1:ncol(boot.out$t), \dots)
 ---
 >       index = seq_len(ncol(boot.out$t)), \dots)

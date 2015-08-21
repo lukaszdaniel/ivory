@@ -2494,7 +2494,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/nlme/src/nlmefit.c Recommended/nlme/src/nlmefit.c
 29a30
 > #include "localization.h"
-370c371
+375c376
 < 		warning("Singular precision matrix in level %ld, block %ld",
 ---
 > 		warning(_("Singular precision matrix in level %ld, block %ld"),

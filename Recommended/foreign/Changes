@@ -562,7 +562,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/spss.c Recommended/foreign/src/spss.c
 28a29
 > #include "localization.h"
-681,682c682
+682,683c683
 < 	    error(_("file '%s' is not in any supported SPSS format"),
 < 		  filename);
 ---
