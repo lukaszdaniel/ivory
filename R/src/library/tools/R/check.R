@@ -2229,7 +2229,6 @@ setRlibs <-
         checkingLog(Log, gettext("checking whether the package can be loaded with stated dependencies ...", domain = "R-tools"))
         out <- R_runR(Rcmd, opts, c(env, env1), arch = arch)
         if (any(grepl("^Error", out)) || length(attr(out, "status"))) {
-            warningLog(Log)
             printLog(Log, paste(c(out, ""), collapse = "\n"))
             wrapLog(gettext("\nIt looks like this package (or one of its dependent packages) has an unstated dependence on a standard package.  All dependencies must be declared in DESCRIPTION.\n", domain = "R-tools"))
             wrapLog(msg_DESCRIPTION)
@@ -2253,10 +2252,19 @@ setRlibs <-
         ## the namespace
         if (file.exists(file.path(pkgdir, "NAMESPACE"))) {
             checkingLog(Log, gettext("checking whether the namespace can be loaded with stated dependencies ...", domain = "R-tools"))
-            Rcmd <- sprintf("loadNamespace(\"%s\")", pkgname)
+            Rcmd <-
+                sprintf("options(warn=1)\ntools:::.load_namespace_rather_quietly(\"%s\")",
+                        pkgname)
             out <- R_runR(Rcmd, opts, c(env, env1), arch = arch)
+            any <- FALSE
             if (any(grepl("^Error", out)) || length(attr(out, "status"))) {
                 warningLog(Log)
+                any <- TRUE
+            } else if(any(grepl("^Warning", out))) {
+                noteLog(Log)
+                any <- TRUE
+            }
+            if(any) {
                 printLog(Log, paste(c(out, ""), collapse = "\n"))
                 wrapLog(gettext("\nA namespace must be able to be loaded with just the base namespace loaded: otherwise if the namespace gets loaded by a saved object, the session will be unable to start.\n\nProbably some imports need to be declared in the 'NAMESPACE' file.\n", domain = "R-tools"))
             } else resultLog(Log, gettext("OK", domain = "R-tools"))
