@@ -35,7 +35,7 @@
 #include <Defn.h>
 #include <Internal.h>
 #include <Graphics.h>
-#include <GraphicsBase.h> 
+#include <GraphicsBase.h>
 #include <R_ext/GraphicsEngine.h>
 
 int baseRegisterIndex = -1;
@@ -364,7 +364,7 @@ void KillAllDevices(void)
     // unregisterBase();
     if (baseRegisterIndex != -1) {
 	GEunregisterSystem(baseRegisterIndex);
-	baseRegisterIndex = -1; 
+	baseRegisterIndex = -1;
     }
 }
 
