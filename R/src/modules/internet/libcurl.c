@@ -669,7 +669,7 @@ static int fetchData(RCurlconn ctxt)
 
 static void Curl_close(Rconnection con)
 {
-    RCurlconn ctxt = (RCurlconn)(con->private);
+    RCurlconn ctxt = (RCurlconn)(con->conprivate);
 
     curl_multi_remove_handle(ctxt->mh, ctxt->hnd);
     curl_easy_cleanup(ctxt->hnd);
