@@ -508,8 +508,7 @@ inverse.gaussian <- function(link = "1/mu^2")
             stats <- link
             if(!is.null(stats$name)) linktemp <- stats$name
         } else {
-		tmp_n <- paste(sQuote(okLinks), collapse = ", ")
-	    stop(gettextf("link %s not available for inverse.gaussian family; available links are %s", sQuote(linktemp), tmp_n), domain = "R-stats")
+	    stop(gettextf("link %s not available for inverse.gaussian family; available links are %s", sQuote(linktemp), paste(sQuote(okLinks), collapse = ", "), domain = "R-stats"), domain = NA)
         }
     }
     variance <- function(mu) mu^3
@@ -524,9 +523,8 @@ inverse.gaussian <- function(link = "1/mu^2")
     })
     validmu <- function(mu) TRUE
     simfun <- function(object, nsim) {
-        if(is.null(tryCatch(loadNamespace("SuppDists"),
-                            error = function(e) NULL)))
-            stop("need CRAN package 'SuppDists' for the 'inverse.gaussian' family")
+        if(!requireNamespace("SuppDists", quietly = TRUE))
+            stop("need CRAN package 'SuppDists' for simulation from the 'inverse.gaussian' family")
         wts <- object$prior.weights
         if (any(wts != 1)) message("using weights as inverse variances")
         ftd <- fitted(object)
