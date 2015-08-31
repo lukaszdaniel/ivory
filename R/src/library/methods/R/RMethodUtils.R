@@ -1549,7 +1549,7 @@ utils::globalVariables(c(".MTable", ".AllMTable", ".dotsCall"))
 .quoteCall <- quote(.Method(...))
 .makeDotsCall <- function(formals)
 {
-    call <- methods:::.quoteCall
+    call <- .quoteCall
     if(length(formals)  > 1L) {
         idots <- match("...", formals)
         for(what in formals[-idots]) {
