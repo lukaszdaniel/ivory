@@ -232,12 +232,12 @@ platforms including @samp{@var{cpu}-*-linux-gnu} for the
 @c (see e.g.@:  @uref{https://buildd.debian.org/build.php?&pkg=r-base}),
 @c Actually, see https://packages.debian.org/unstable/math/r-base-core as
 @c the build daemon is not used for all platforms; note also that Debian
-@c has x86_64 <=> amd, ix86 <=> i386.
+@c has x86_64 <=> amd64, ix86 <=> i386.
 @samp{x86_64-@/apple-@/darwin}, @samp{i386-@/sun-@/solaris} and
 @samp{sparc-@/sun-@/solaris} as well as
 perhaps (it is tested less frequently on these platforms)
 @samp{i386-@/apple-@/darwin}, @samp{i386-@/*-@/freebsd}, @samp{x86_64-@/*-@/freebsd},
-@samp{i386-@/*-@/netbsd}, @samp{i386-@/*-@/openbsd} and
+@samp{i386-@/*-@/netbsd}, @samp{x86_64/*-@/openbsd} and
 @samp{powerpc-@/ibm-@/aix6*}
 
 @cindex Linux
@@ -5365,6 +5365,14 @@ environment can be found in the ``R on AIX'' project on R-Forge
 There have been no reports for @R{} 3.0.0 or later, except for an
 configuration failure of @R{} 3.2.0 on FreeBSD 10 (addressed in @R{}
 3.2.2).
+
+@section OpenBSD
+@cindex OpenBSD
+
+Ingo Feinerer installed @R{} version 3.2.2 on OpenBSD 5.8 arch
+@cputype{amd64} (their name for @cputype{x86_64}).  Details of the build
+(and patches applied) are at
+@uref{http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/math/R/}.
 
 @node Cygwin, New platforms, FreeBSD, Platform notes
 @section Cygwin
