@@ -1536,6 +1536,7 @@ R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean succeeded,
     }
 
     val = R_tryEval(e, NULL, &errorOccurred);
+    UNPROTECT(1); /* e */
     if(!errorOccurred) {
 	PROTECT(val);
 	if(TYPEOF(val) != LGLSXP) {

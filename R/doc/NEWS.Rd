@@ -184,6 +184,9 @@
       \item \command{configure} uses \command{pkg-config} for PNG, TIFF
       and JPEG where this is available.  This should work better with
       multiple installs and static libs.
+      
+      \item The minimum supported version of OS X is 10.6 (\sQuote{Snow
+	Leopard}): even that has been unsupported by Apple since 2012.
     }
   }
 
@@ -239,8 +242,8 @@
     \itemize{
       \item The included configuration code for \code{libintl} has been
       updated to that from \code{gettext} version 0.19.5.1 --- this
-      should only affect how an external library is detected.
-      (Wish of \PR{16464}.)
+      should only affect how an external library is detected (and the
+      only known instance is under OpenBSD).  (Wish of \PR{16464}.)
 
       \item \command{configure} has a new argument
       \option{--disable-java} to disable the checks for Java.
@@ -293,7 +296,11 @@
 
       \item \code{rchisq(*, df=0, ncp=0)} now returns \code{0} instead
       of \code{NaN}, and \code{dchisq(*, df=0, ncp=*)} also no longer
-      returns \code{NaN} in limit cases (where the limit is unique).  (\PR{16521})
+      returns \code{NaN} in limit cases (where the limit is unique).
+      (\PR{16521})
+
+      \item \code{pchisq(*, df=0, ncp > 0, log.p=TRUE)} no longer
+      underflows (for ncp > ~60).
     }
   }
 }

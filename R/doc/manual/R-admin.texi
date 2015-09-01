@@ -3239,9 +3239,9 @@ Components for Unicode, @uref{http://site.icu-project.org/}), and this
 provides much more precise control over collation on all systems.  ICU
 is available as sources and as binary distributions for (at least) most
 Linux distributions, Solaris, FreeBSD and AIX, usually as @code{libicu}
-or @code{icu4c}.  It will be used by default where available (including
-on OS X >= 10.4): should a very old or broken version of ICU be found
-this can be suppressed by @option{--without-ICU}.
+or @code{icu4c}.  It will be used by default where available: should a
+very old or broken version of ICU be found this can be suppressed by
+@option{--without-ICU}.
 
 The @code{bitmap} and @code{dev2bitmap} devices and function
 @code{embedFonts()} use ghostscript
@@ -4593,7 +4593,7 @@ the configure flag @option{--disable-largefile} was needed (since
 The instructions here are for @cputype{x86_64} builds on 10.9
 (Mavericks) or later.  In principle@footnote{It will be necessary to
 install later versions of software such as @code{libcurl}.} @R{} can be
-built for 10.4 to 10.8 but these has not been tested recently.
+built for 10.6 to 10.8 but these has not been tested recently.
 
 To build @R{} you need Apple's `Command Line Tools': these can be
 (re-)installed by @command{xcode-select --install}.  (If you have a
@@ -5361,10 +5361,22 @@ environment can be found in the ``R on AIX'' project on R-Forge
 @section FreeBSD
 @cindex FreeBSD
 
-@c PR16410
-There have been no reports for @R{} 3.0.0 or later, except for an
-configuration failure of @R{} 3.2.0 on FreeBSD 10 (addressed in @R{}
-3.2.2).
+There have been few recent reports on FreeBSD.
+
+There is a `port' at @uref{https://www.freebsd.org/ports/math.html}, for
+@R{} 3.0.2 at the time of writing.  Davor Cubranic reported some success
+on x86_64 FreeBSD 10.2 for @R{} 3.2.2.
+
+It appears that versions of FreeBSD using @command{clang} as the compiler
+(the default as from 10.0) need
+@example
+MAIN_LDFLAGS=-Wl,--export-dynamic
+@end example
+@noindent
+for @R{} releases up to 3.2.2.
+
+Use of ICU for collation and the @command{configure} option
+@option{--with-internal-tzcode} are desirable workarounds.
 
 @section OpenBSD
 @cindex OpenBSD
