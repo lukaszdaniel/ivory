@@ -2391,6 +2391,7 @@ if test -z "${TCLTK_CPPFLAGS}"; then
   if test "${have_tcltk}" = yes; then
     ## Part 2.  Check for tk.h.
     found_tk_h=no
+    found_tk_by_config=no
     if test -n "${TK_CONFIG}"; then
       . ${TK_CONFIG}
       ## TK_INCLUDE_SPEC (if set) is what we want.
@@ -2400,6 +2401,7 @@ if test -z "${TCLTK_CPPFLAGS}"; then
 	AC_CHECK_HEADER([tk.h],
 		        [TCLTK_CPPFLAGS="${TCLTK_CPPFLAGS} ${TK_INCLUDE_SPEC}"
 			 found_tk_h=yes])
+	found_tk_by_config=yes
 	CPPFLAGS="${r_save_CPPFLAGS}"
       fi
       if test "${found_tk_h}" = no; then
@@ -2441,8 +2443,12 @@ if test -z "${TCLTK_CPPFLAGS}"; then
     fi
   fi
 fi
+## TK_XINCLUDES should be empty for Aqua Tk, so earlier test was wrong
+## Our code does not include any X headers, but tk.h may ....
+## That is true even on OS X, but Aqua Tk has a private version of
+## X11 headers, and we want that one and not the XQuartz one.
 if test "${have_tcltk}" = yes; then
-  if test -n "${TK_XINCLUDES}"; then
+  if test "${found_tk_by_config}" = yes; then
     TCLTK_CPPFLAGS="${TCLTK_CPPFLAGS} ${TK_XINCLUDES}"
   else
     TCLTK_CPPFLAGS="${TCLTK_CPPFLAGS} ${X_CFLAGS}"
@@ -2454,8 +2460,7 @@ fi
 ## -------------
 ## Find the tcl and tk libraries.
 AC_DEFUN([_R_TCLTK_LIBS],
-[AC_REQUIRE([AC_PATH_XTRA])
-AC_REQUIRE([_R_TCLTK_CONFIG])
+[AC_REQUIRE([_R_TCLTK_CONFIG])
 if test -z "${TCLTK_LIBS}"; then
   ## We have to do the work.
   if test "${have_tcltk}" = yes; then

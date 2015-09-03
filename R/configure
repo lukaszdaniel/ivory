@@ -34855,6 +34855,7 @@ $as_echo "$r_cv_header_tcl_h" >&6; }
   if test "${have_tcltk}" = yes; then
     ## Part 2.  Check for tk.h.
     found_tk_h=no
+    found_tk_by_config=no
     if test -n "${TK_CONFIG}"; then
       . ${TK_CONFIG}
       ## TK_INCLUDE_SPEC (if set) is what we want.
@@ -34868,6 +34869,7 @@ if test "x$ac_cv_header_tk_h" = xyes; then :
 fi
 
 
+	found_tk_by_config=yes
 	CPPFLAGS="${r_save_CPPFLAGS}"
       fi
       if test "${found_tk_h}" = no; then
@@ -34940,14 +34942,14 @@ $as_echo "$r_cv_header_tk_h" >&6; }
     fi
   fi
 fi
+## TK_XINCLUDES should be empty for Aqua Tk, so earlier test was wrong
 if test "${have_tcltk}" = yes; then
-  if test -n "${TK_XINCLUDES}"; then
+  if test "${found_tk_by_config}" = yes; then
     TCLTK_CPPFLAGS="${TCLTK_CPPFLAGS} ${TK_XINCLUDES}"
   else
     TCLTK_CPPFLAGS="${TCLTK_CPPFLAGS} ${X_CFLAGS}"
   fi
 fi
-
 
 
 if test -z "${TCLTK_LIBS}"; then
