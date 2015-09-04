@@ -28352,13 +28352,13 @@ if test -z "${MAIN_LD}"; then
   else
      MAIN_LD="${main_ld}"
   fi
-  separator=""
+fi
+separator=""
 test -z "${separator}" && separator=" "
 if test -z "${MAIN_LDFLAGS}"; then
   MAIN_LDFLAGS="${main_ldflags}"
 else
   MAIN_LDFLAGS="${MAIN_LDFLAGS}${separator}${main_ldflags}"
-fi
 fi
 
 : ${CPICFLAGS="${cpicflags}"}
@@ -34943,6 +34943,9 @@ $as_echo "$r_cv_header_tk_h" >&6; }
   fi
 fi
 ## TK_XINCLUDES should be empty for Aqua Tk, so earlier test was wrong
+## Our code does not include any X headers, but tk.h may ....
+## That is true even on OS X, but Aqua Tk has a private version of
+## X11 headers, and we want that one and not the XQuartz one.
 if test "${have_tcltk}" = yes; then
   if test "${found_tk_by_config}" = yes; then
     TCLTK_CPPFLAGS="${TCLTK_CPPFLAGS} ${TK_XINCLUDES}"
@@ -41227,6 +41230,7 @@ FCLIBS=${FCLIBS}
 
 ## OpenMP package stuff (needs to come *after* configuration of all
 ## compilers).
+## We allow the users to override this for packages only (for now)
 if test "x${shlib_ld_was_given}" = xno -a \
         "${SHLIB_LD}" = "\$(CC)" -a \
         "x${ac_cv_prog_c_openmp}" != "xunsupported" -a \
@@ -41237,19 +41241,19 @@ if test "x${shlib_ld_was_given}" = xno -a \
         "x${shlib_fcld_was_given}" = xno -a \
         "${SHLIB_FCLD}" = "\$(FC)" -a \
         "x${ac_cv_prog_fc_openmp}" != "xunsupported"; then
-  SHLIB_OPENMP_CFLAGS="${OPENMP_CFLAGS}"
-  SHLIB_OPENMP_CXXFLAGS="${OPENMP_CXXFLAGS}"
-  SHLIB_OPENMP_FCFLAGS="${OPENMP_FCFLAGS}"
-  SHLIB_OPENMP_FFLAGS="${OPENMP_FFLAGS}"
+:  ${SHLIB_OPENMP_CFLAGS="${OPENMP_CFLAGS}"}
+:  ${SHLIB_OPENMP_CXXFLAGS="${OPENMP_CXXFLAGS}"}
+:  ${SHLIB_OPENMP_FCFLAGS="${OPENMP_FCFLAGS}"}
+:  ${SHLIB_OPENMP_FFLAGS="${OPENMP_FFLAGS}"}
   ## next macro is copied into Rconfig.h
 
 $as_echo "#define SUPPORT_OPENMP 1" >>confdefs.h
 
 else
-  SHLIB_OPENMP_CFLAGS=
-  SHLIB_OPENMP_CXXFLAGS=
-  SHLIB_OPENMP_FCFLAGS=
-  SHLIB_OPENMP_FFLAGS=
+:  ${SHLIB_OPENMP_CFLAGS=}
+:  ${SHLIB_OPENMP_CXXFLAGS=}
+:  ${SHLIB_OPENMP_FCFLAGS=}
+:  ${SHLIB_OPENMP_FFLAGS=}
 fi
 
 
