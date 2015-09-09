@@ -24593,7 +24593,9 @@ if ac_fn_c_try_link "$LINENO"; then :
   ac_cv_prog_c_openmp='none needed'
 else
   ac_cv_prog_c_openmp='unsupported'
-	  	  	  	  	  	  	                                	  	  	  	  	  	  for ac_option in -fopenmp -xopenmp -openmp -mp -omp -qsmp=omp -homp \
+	  	  	  	  	  	  	  	  	  	                                	  	  	  	  	  	  for ac_option in -fopenmp -xopenmp -qopenmp \
+                           -openmp -mp -omp -qsmp=omp -homp \
+			   -fopenmp=libomp \
                            -Popenmp --openmp; do
 	    ac_save_CFLAGS=$CFLAGS
 	    CFLAGS="$CFLAGS $ac_option"
@@ -25040,7 +25042,7 @@ _ACEOF
 # flags.
 r_save_CFLAGS=$CFLAGS
 CFLAGS="$CFLAGS $r_verb"
-(eval echo $as_me:25043: \"$ac_link\") >&5
+(eval echo $as_me:25045: \"$ac_link\") >&5
 r_c_v_output=`eval $ac_link 5>&1 2>&1 | grep -v 'Driving:'`
 echo "$r_c_v_output" >&5
 CFLAGS=$r_save_CFLAGS
@@ -25115,7 +25117,7 @@ _ACEOF
 # flags.
 r_save_CFLAGS=$CFLAGS
 CFLAGS="$CFLAGS $r_cv_prog_c_v"
-(eval echo $as_me:25118: \"$ac_link\") >&5
+(eval echo $as_me:25120: \"$ac_link\") >&5
 r_c_v_output=`eval $ac_link 5>&1 2>&1 | grep -v 'Driving:'`
 echo "$r_c_v_output" >&5
 CFLAGS=$r_save_CFLAGS
@@ -26096,7 +26098,9 @@ if ac_fn_f77_try_link "$LINENO"; then :
   ac_cv_prog_f77_openmp='none needed'
 else
   ac_cv_prog_f77_openmp='unsupported'
-	  	  	  	  	  	  	                                	  	  	  	  	  	  for ac_option in -fopenmp -xopenmp -openmp -mp -omp -qsmp=omp -homp \
+	  	  	  	  	  	  	  	  	  	                                	  	  	  	  	  	  for ac_option in -fopenmp -xopenmp -qopenmp \
+                           -openmp -mp -omp -qsmp=omp -homp \
+			   -fopenmp=libomp \
                            -Popenmp --openmp; do
 	    ac_save_FFLAGS=$FFLAGS
 	    FFLAGS="$FFLAGS $ac_option"
@@ -26225,7 +26229,9 @@ if ac_fn_cxx_try_link "$LINENO"; then :
   ac_cv_prog_cxx_openmp='none needed'
 else
   ac_cv_prog_cxx_openmp='unsupported'
-	  	  	  	  	  	  	                                	  	  	  	  	  	  for ac_option in -fopenmp -xopenmp -openmp -mp -omp -qsmp=omp -homp \
+	  	  	  	  	  	  	  	  	  	                                	  	  	  	  	  	  for ac_option in -fopenmp -xopenmp -qopenmp \
+                           -openmp -mp -omp -qsmp=omp -homp \
+			   -fopenmp=libomp \
                            -Popenmp --openmp; do
 	    ac_save_CXXFLAGS=$CXXFLAGS
 	    CXXFLAGS="$CXXFLAGS $ac_option"
@@ -28760,12 +28766,30 @@ fi
 ##
 ## (The Fortran 77 compiler is never used for linking by default.)
 
-if test "x${main_ld_was_given}" = xno -a "${MAIN_LD}" = "\$(CC)" -a \
+if test -n "${R_OPENMP_CFLAGS+set}"; then
+  if test -n "${R_OPENMP_CFLAGS}"; then
+    separator=""
+test -z "${separator}" && separator=" "
+if test -z "${MAIN_LDFLAGS}"; then
+  MAIN_LDFLAGS="${R_OPENMP_CFLAGS}"
+else
+  MAIN_LDFLAGS="${MAIN_LDFLAGS}${separator}${R_OPENMP_CFLAGS}"
+fi
+    separator=""
+test -z "${separator}" && separator=" "
+if test -z "${DYLIB_LDFLAGS}"; then
+  DYLIB_LDFLAGS="${R_OPENMP_CFLAGS}"
+else
+  DYLIB_LDFLAGS="${DYLIB_LDFLAGS}${separator}${R_OPENMP_CFLAGS}"
+fi
+
+$as_echo "#define HAVE_OPENMP 1" >>confdefs.h
+
+  fi
+elif test "x${main_ld_was_given}" = xno -a "${MAIN_LD}" = "\$(CC)" -a \
         "x${dylib_ld_was_given}" = xno -a "${DYLIB_LD}" = "\$(CC)" -a \
-        "x${ac_cv_prog_c_openmp}" != "xunsupported" -a \
-        "x${ac_cv_prog_c_openmp}" != "x"; then
+        "x${ac_cv_prog_c_openmp}" != "xunsupported"; then
   R_OPENMP_CFLAGS="${OPENMP_CFLAGS}"
-  R_OPENMP_FFLAGS="${OPENMP_FFLAGS}"
   separator=""
 test -z "${separator}" && separator=" "
 if test -z "${MAIN_LDFLAGS}"; then
@@ -28785,7 +28809,11 @@ $as_echo "#define HAVE_OPENMP 1" >>confdefs.h
 
 else
   R_OPENMP_CFLAGS=
-  R_OPENMP_FFLAGS=
+fi
+## Currently unused: see comment in Makeconf.in
+if test -z "${R_OPENMP_FFLAGS+set}" -a \
+        "x${ac_cv_prog_f77_openmp}" != "xunsupported"; then
+  R_OPENMP_FFLAGS="${OPENMP_FFLAGS}"
 fi
 
 
@@ -41172,7 +41200,9 @@ if ac_fn_fc_try_link "$LINENO"; then :
   ac_cv_prog_fc_openmp='none needed'
 else
   ac_cv_prog_fc_openmp='unsupported'
-	  	  	  	  	  	  	                                	  	  	  	  	  	  for ac_option in -fopenmp -xopenmp -openmp -mp -omp -qsmp=omp -homp \
+	  	  	  	  	  	  	  	  	  	                                	  	  	  	  	  	  for ac_option in -fopenmp -xopenmp -qopenmp \
+                           -openmp -mp -omp -qsmp=omp -homp \
+			   -fopenmp=libomp \
                            -Popenmp --openmp; do
 	    ac_save_FCFLAGS=$FCFLAGS
 	    FCFLAGS="$FCFLAGS $ac_option"
@@ -41231,6 +41261,7 @@ FCLIBS=${FCLIBS}
 ## OpenMP package stuff (needs to come *after* configuration of all
 ## compilers).
 ## We allow the users to override this for packages only (for now)
+## FIXME: what if SHLIB_OPENMP_?FLAGS is set but empty? (could use -n "${VAR+set}")
 if test "x${shlib_ld_was_given}" = xno -a \
         "${SHLIB_LD}" = "\$(CC)" -a \
         "x${ac_cv_prog_c_openmp}" != "xunsupported" -a \
@@ -41241,20 +41272,36 @@ if test "x${shlib_ld_was_given}" = xno -a \
         "x${shlib_fcld_was_given}" = xno -a \
         "${SHLIB_FCLD}" = "\$(FC)" -a \
         "x${ac_cv_prog_fc_openmp}" != "xunsupported"; then
-:  ${SHLIB_OPENMP_CFLAGS="${OPENMP_CFLAGS}"}
-:  ${SHLIB_OPENMP_CXXFLAGS="${OPENMP_CXXFLAGS}"}
-:  ${SHLIB_OPENMP_FCFLAGS="${OPENMP_FCFLAGS}"}
-:  ${SHLIB_OPENMP_FFLAGS="${OPENMP_FFLAGS}"}
   ## next macro is copied into Rconfig.h
 
 $as_echo "#define SUPPORT_OPENMP 1" >>confdefs.h
 
-else
-:  ${SHLIB_OPENMP_CFLAGS=}
-:  ${SHLIB_OPENMP_CXXFLAGS=}
-:  ${SHLIB_OPENMP_FCFLAGS=}
-:  ${SHLIB_OPENMP_FFLAGS=}
 fi
+## This assumes that OpenMP support in the C compiler includes compilation by F77
+if test -z "${SHLIB_OPENMP_CFLAGS+set}" -a \
+        "x${shlib_ld_was_given}" = xno -a \
+        "${SHLIB_LD}" = "\$(CC)" -a \
+        "x${ac_cv_prog_c_openmp}" != "xunsupported" -a \
+        "x${ac_cv_prog_c_openmp}" != "x"; then
+  SHLIB_OPENMP_CFLAGS="${OPENMP_CFLAGS}"
+  if test -z "${SHLIB_OPENMP_FFLAGS+set}" -a \
+          "x${ac_cv_prog_f77_openmp}" != "xunsupported"; then
+    SHLIB_OPENMP_FFLAGS="${OPENMP_FFLAGS}"
+  fi
+fi
+if test -z "${SHLIB_OPENMP_CXXFLAGS+set}" -a \
+        "x${shlib_cxxld_was_given}" = xno -a \
+        "${SHLIB_CXXLD}" = "\$(CXX)" -a \
+        "x${ac_cv_prog_cxx_openmp}" != "xunsupported"; then
+  SHLIB_OPENMP_CXXFLAGS="${OPENMP_CXXFLAGS}"
+fi
+if test -z "${SHLIB_OPENMP_FCFLAGS+set}" -a \
+        "x${shlib_fcld_was_given}" = xno -a \
+        "${SHLIB_FCLD}" = "\$(FC)" -a \
+        "x${ac_cv_prog_fc_openmp}" != "xunsupported"; then
+  SHLIB_OPENMP_FCFLAGS="${OPENMP_FCFLAGS}"
+fi
+
 
 
 

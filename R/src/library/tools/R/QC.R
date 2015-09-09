@@ -3852,10 +3852,13 @@ function(package, lib.loc = NULL)
     ## look for globalVariables declaration in package
     ## (This loads the namespace if not already loaded.)
     .glbs <- suppressMessages(utils::globalVariables(, package))
-    if(length(.glbs))
-        ## codetools doesn't allow adding to its default
-        args$suppressUndefined <-
-            c(codetools:::dfltSuppressUndefined, .glbs)
+    if(length(.glbs)) {
+        ## Cannot use globalVariables() for base
+        ## (and potentially tools and utils)
+        dflt <- c(if(package == "base") "last.dump",
+                  ".Generic", ".Method", ".Class")
+        args$suppressUndefined <- c(dflt, .glbs)
+    }
 
     if(check_without_loading) {
         args <- c(list(env, report = foo), args)
@@ -4041,8 +4044,7 @@ function(package, dir, lib.loc = NULL)
         ## Also allow for additionally specified repositories.
         aurls <- pkgInfo[["DESCRIPTION"]]["Additional_repositories"]
         if(!is.na(aurls)) {
-            repos <- c(repos,
-                       unique(unlist(strsplit(aurls, ",[[:space:]]*"))))
+            repos <- c(repos, .read_additional_repositories_field(aurls))
         }
         known <-
             try(suppressWarnings(utils::available.packages(utils::contrib.url(repos, "source"),
@@ -6459,7 +6461,7 @@ function(dir)
             suggests_or_enhances
     }
     if(!is.na(aurls <- meta["Additional_repositories"])) {
-        aurls <- unique(unlist(strsplit(aurls, ",[[:space:]]*")))
+        aurls <- .read_additional_repositories_field(aurls)
         ## Get available packages separately for each given URL, so that
         ## we can spot the ones which do not provide any packages.
         adb <-

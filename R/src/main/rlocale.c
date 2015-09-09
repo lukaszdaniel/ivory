@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2005-2014   The R Core Team
+ *  Copyright (C) 2005-2015   The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -18,12 +18,12 @@
  */
 
 /*  This file was contributed by Ei-ji Nakama.
- *  See also the comments in rlocale.h.
+ *  See also the comments in ../include/rlocale.h.
  *
  *  It provides replacements for the wctype functions on
  *  Windows (where they are not correct in e.g. Japanese)
  *  AIX (missing)
- *  MacOS X in CJK (where these just call the ctype functions)
+ *  OS X in CJK (where these just call the ctype functions)
  *
  *  It also provides wc[s]width, where widths of CJK fonts are often
  *  wrong in vendor-supplied versions and in Marcus Kuhn's version
@@ -54,6 +54,26 @@
 #include <locale.h>
 #include <limits.h>
 #include <R_ext/Riconv.h>
+
+static int wcsearch(int wint, const struct interval *table, int max)
+{
+    int min = 0;
+    int mid;
+    max--;
+
+    if (wint < table[0].first || wint > table[max].last)
+	return 0;
+    while (max >= min) {
+	mid = (min + max) / 2;
+	if (wint > table[mid].last)
+	    min = mid + 1;
+	else if (wint < table[mid].first)
+	    max = mid - 1;
+	else
+	    return 1;
+    }
+    return 0;
+}
 
 static int wcwidthsearch(int wint, const struct interval_wcwidth *table,
 			 int max, int locale)
@@ -102,15 +122,15 @@ static cjk_locale_name_t cjk_locale_name[] = {
     {"ZH_CN.BIG5",                              MB_zh_TW},
     {"ZH_HK",                                   MB_zh_HK},
     {"ZH_SG",                                   MB_zh_SG},
-    {"JA_JP",				MB_ja_JP},
+    {"JA_JP",					MB_ja_JP},
     {"KO_KR",				        MB_ko_KR},
     {"ZH",				        MB_zh_CN},
-    {"JA",				MB_ja_JP},
+    {"JA",					MB_ja_JP},
     {"KO",				        MB_ko_KR},
     {"",				        MB_UTF8},
 };
 
-/* used in grDevices */
+// used in character.c, ../gnuwin32/console.c , ../library/grDevices/src/devP*.c :
 int Ri18n_wcwidth(wchar_t c)
 {
     char lc_str[128];
@@ -134,12 +154,15 @@ int Ri18n_wcwidth(wchar_t c)
 	}
     }
 
-    return(wcwidthsearch(c, table_wcwidth,
-			 (sizeof(table_wcwidth)/sizeof(struct interval_wcwidth)),
-			 lc));
+    int wd = wcwidthsearch(c, table_wcwidth,
+			   (sizeof(table_wcwidth)/sizeof(struct interval_wcwidth)),
+			   lc);
+    if (wd >= 0) return wd; // currently all are 1 or 2.
+    int zw = wcsearch(c, zero_width, zero_width_count);
+    return zw ? 0 : 1; // assume unknown chars are width one.
 }
 
-/* Used in charcter.c, gnuwin32/console.c */
+/* Used in character.c, errors.c, ../gnuwin32/console.c */
 attribute_hidden
 int Ri18n_wcswidth (const wchar_t *s, size_t n)
 {
@@ -154,27 +177,6 @@ int Ri18n_wcswidth (const wchar_t *s, size_t n)
     return rs;
 }
 
-#if defined(_WIN32) || defined(_AIX) || defined(__APPLE__)
-static int wcsearch(int wint, const struct interval *table, int max)
-{
-    int min = 0;
-    int mid;
-    max--;
-
-    if (wint < table[0].first || wint > table[max].last)
-	return 0;
-    while (max >= min) {
-	mid = (min + max) / 2;
-	if (wint > table[mid].last)
-	    min = mid + 1;
-	else if (wint < table[mid].first)
-	    max = mid - 1;
-	else
-	    return 1;
-    }
-    return 0;
-}
-#endif
 
 
 /*********************************************************************

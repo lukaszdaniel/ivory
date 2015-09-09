@@ -68,8 +68,8 @@
       \item New function \code{strrep()} for repeating the elements of a
       character vector.
 
-      \item \code{rapply} preserves attributes on the list when
-      \code{how="replace"}.
+      \item \code{rapply()} preserves attributes on the list when
+      \code{how = "replace"}.
 
       \item New S3 generic function \code{sigma()} with methods for
       extracting the estimated standard deviation aka \dQuote{residual
@@ -127,6 +127,22 @@
       addiitonal arguments to methods.
 
       \item \code{[} has a method for class \code{"table"}.
+
+      \item It is now possible (again) to \code{replayPlot()} a
+      display list snapshot that was created by \code{recordPlot()}
+      in a different R session.
+
+      It is still not a good idea to use snapshots as a persistent
+      storage format for R plots, but it is now not completely silly to
+      use a snapshot as a format for transferring an R plot between two
+      R sessions.
+
+      Code for restoring snapshots was contributed by from Jeroen Ooms
+      and JJ Allaire.
+
+      Some testing code is available at
+      \url{https://github.com/pmur002/R-display-list}
+      
     }
   }
 
@@ -257,9 +273,13 @@
       defaults to \command{clang}).
 
       \item The macros \samp{SHLIB_OPENMP_CFLAGS} etc can be set in
-      e.g.\sspace{} \file{config.site}.  This is needed for
-      \command{clang} 3.7.0 which needs a compiler option for OpenMP not
-      known to the standard \command{autoconf} macro used.
+      e.g.\sspace{} \file{config.site}.
+      
+      \item \command{configure} now supports the OpenMP flags
+      \option{-fopenmp=libomp} (clang) and \option{-qopenmp} (Intel C).
+      
+      \item Various OpenMP macros can be set to override the default
+      behaviour of \command{configure}: see file \file{config.site}.
     }
   }
 
@@ -312,6 +332,11 @@
 
       \item \code{libcurl} connections signal errors rather than
       retrieving http error pages.
+      
+      \item \code{nchar(x, "w")} assumed -1 for characters it did not
+      know about (e.g.\sspace{}zero-width spaces): it now assumes 1.
+      It now  knows about zero-width characters and a few extra
+      double-width characters.
     }
   }
 }

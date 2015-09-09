@@ -1117,6 +1117,9 @@ SEXP attribute_hidden do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     int savestack, browselevel;
     SEXP ap, topExp, argList;
 
+    /* Cannot call checkArity(op, args), because "op" may be a closure  */
+    /* or a primitive other than "browser".  */
+
     /* argument matching */
     PROTECT(ap = list4(R_NilValue, R_NilValue, R_NilValue, R_NilValue));
     SET_TAG(ap,  install("text"));
@@ -1238,6 +1241,7 @@ SEXP attribute_hidden do_quit(SEXP call, SEXP op, SEXP args, SEXP rho)
     SA_TYPE ask=SA_DEFAULT;
     int status, runLast;
 
+    checkArity(op, args);
     /* if there are any browser contexts active don't quit */
     if(countContexts(CTXT_BROWSER, 1)) {
 	warning(_("cannot quit from browser"));

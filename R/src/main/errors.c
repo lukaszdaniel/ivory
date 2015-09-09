@@ -930,6 +930,7 @@ void NORET jump_to_toplevel()
 /* gettext(domain, string) */
 SEXP attribute_hidden do_gettext(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
+    checkArity(op, args);
 #ifdef ENABLE_NLS
     const char *domain = "", *cfn;
     char *buf;
@@ -1128,6 +1129,7 @@ SEXP attribute_hidden NORET do_stop(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 /* error(.) : really doesn't return anything; but all do_foo() must be SEXP */
     SEXP c_call;
+    checkArity(op, args);
 
     if(asLogical(CAR(args))) /* find context -> "Error in ..:" */
 	c_call = findCall();
@@ -1150,6 +1152,7 @@ SEXP attribute_hidden NORET do_stop(SEXP call, SEXP op, SEXP args, SEXP rho)
 SEXP attribute_hidden do_warning(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP c_call;
+    checkArity(op, args);
 
     if(asLogical(CAR(args))) /* find context -> "... in: ..:" */
 	c_call = findCall();
