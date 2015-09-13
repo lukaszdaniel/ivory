@@ -154,9 +154,12 @@
 
       \item \code{abbreviate()} has more support for multi-byte
       character sets -- it no longer removes bytes within characters and
-      it knows about (English) vowels with accents.  It is still only
+      knows about Latin vowels with accents.  It is still only
       really suitable for (most) European languages, and still warns on
       non-ASCII input.
+
+      \code{abbreviate(use.classes = FALSE)} is now implemented, and
+      that is more suitable for non-European languages.
     }
   }
 
@@ -354,12 +357,15 @@
       It now knows about most zero-width characters and a few more
       double-width characters.
 
-      \item Help for \code{which.min} is now more precise about behavior
-      with logical arguments.  (\PR{16532})
+      \item Help for \code{which.min()} is now more precise about
+      behavior with logical arguments.  (\PR{16532})
 
       \item The print width of character strings marked as
       \code{"latin1"} or \code{"bytes"} was in some cases computed
       incorrectly.
+
+      \item \code{abbreviate()} did not give names to the return value
+      if \code{minlength} was zero, unlike when it was positive.
     }
   }
 }
