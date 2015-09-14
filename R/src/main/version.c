@@ -52,8 +52,8 @@ SEXP attribute_hidden do_version(SEXP call, SEXP op, SEXP args, SEXP env)
     char buf[128];
 
     checkArity(op, args);
-    PROTECT(value = allocVector(VECSXP,14));
-    PROTECT(names = allocVector(STRSXP,14));
+    PROTECT(value = allocVector(VECSXP,15));
+    PROTECT(names = allocVector(STRSXP,15));
 
     SET_STRING_ELT(names, 0, mkChar("platform"));
     SET_VECTOR_ELT(value, 0, mkString(R_PLATFORM));
@@ -80,16 +80,20 @@ SEXP attribute_hidden do_version(SEXP call, SEXP op, SEXP args, SEXP env)
     SET_VECTOR_ELT(value, 9, mkString(R_DAY));
     SET_STRING_ELT(names, 10, mkChar("svn rev"));
 
-    snprintf(buf, 128, "%d", R_SVN_REVISION);
+    snprintf(buf, 128, "%d", R_SVN_BASEREVISION);
     SET_VECTOR_ELT(value, 10, mkString(buf));
-    SET_STRING_ELT(names, 11, mkChar("language"));
-    SET_VECTOR_ELT(value, 11, mkString("R"));
+    SET_STRING_ELT(names, 11, mkChar("svn rev ivory"));
+
+    snprintf(buf, 128, "%d", R_SVN_REVISION);
+    SET_VECTOR_ELT(value, 11, mkString(buf));
+    SET_STRING_ELT(names, 12, mkChar("language"));
+    SET_VECTOR_ELT(value, 12, mkString("R"));
 
     PrintVersionString(buf, 128);
-    SET_STRING_ELT(names, 12, mkChar("version.string"));
-    SET_VECTOR_ELT(value, 12, mkString(buf));
-    SET_STRING_ELT(names, 13, mkChar("nickname"));
-    SET_VECTOR_ELT(value, 13, mkString(R_NICK));
+    SET_STRING_ELT(names, 13, mkChar("version.string"));
+    SET_VECTOR_ELT(value, 13, mkString(buf));
+    SET_STRING_ELT(names, 14, mkChar("nickname"));
+    SET_VECTOR_ELT(value, 14, mkString(R_NICK));
 
     setAttrib(value, R_NamesSymbol, names);
     UNPROTECT(2);
