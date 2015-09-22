@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-08-18 13:11\n"
+"POT-Creation-Date: 2015-09-22 23:12\n"
 "PO-Revision-Date: 2012-03-09 06:16+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -2861,7 +2861,7 @@ msgstr ""
 msgid "type == \"both\" cannot be used with 'repos = NULL'"
 msgstr "type == \"both\" 는 'repos = NULL' 와 함께 사용할 수 없습니다 "
 
-#. R/packages.R: gettextf("unable to access index for repository %s", repos)
+#. R/packages.R: gettextf("unable to access index for repository %s", repos, domain = "R-utils")
 #: R/packages.R:0
 msgid "unable to access index for repository %s"
 msgstr "저장소 %s 에 대한 인덱스에 접근할 수 없습니다"

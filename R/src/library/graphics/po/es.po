@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-09 22:21+0200\n"
+"POT-Creation-Date: 2015-09-22 23:12+0200\n"
 "PO-Revision-Date: 2012-03-16 15:59+0100\n"
 "Last-Translator: \n"
 "Language-Team: Spanish <pabloemilio.verde@uni-duesseldorf.de>\n"
@@ -22,12 +22,17 @@ msgstr ""
 msgid "no base graphics system is registered"
 msgstr ""
 
-#: base.c:296
+#: base.c:304
+#, fuzzy
+msgid "Incompatible graphics state"
+msgstr "estado gráfico inválido"
+
+#: base.c:348
 #, fuzzy
 msgid "event 'GE_ScalePS' requires a single numeric value"
 msgstr "El evento GE_ScalePS requiere un único valor numérico"
 
-#: base.c:327 base.c:334 base.c:342
+#: base.c:379 base.c:386 base.c:394
 msgid "the base graphics system is not registered"
 msgstr ""
 

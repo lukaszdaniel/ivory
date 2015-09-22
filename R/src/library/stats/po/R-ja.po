@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-07-29 22:13\n"
+"POT-Creation-Date: 2015-09-22 23:12\n"
 "PO-Revision-Date: 2012-02-26 14:13+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -4512,7 +4512,7 @@ msgstr ""
 " リンク\"%s\"は正規ファミリに利用できるリンクではありません。利用できるリンク"
 "は %s です "
 
-#. R/family.R: gettextf("link %s not available for inverse.gaussian family; available links are %s",     sQuote(linktemp), tmp_n)
+#. R/family.R: gettextf("link %s not available for inverse.gaussian family; available links are %s",     sQuote(linktemp), paste(sQuote(okLinks), collapse = ", "), domain = "R-stats")
 #: R/family.R:0
 #, fuzzy
 msgid ""
@@ -4784,10 +4784,12 @@ msgstr " 1 つ以上のベクトルを与えなければなりません "
 msgid "n is number in *each* group"
 msgstr ""
 
-#. R/family.R: stop("need CRAN package 'SuppDists' for the 'inverse.gaussian' family")
+#. R/family.R: stop("need CRAN package 'SuppDists' for simulation from the 'inverse.gaussian' family")
 #: R/family.R:0
 #, fuzzy
-msgid "need CRAN package 'SuppDists' for the 'inverse.gaussian' family"
+msgid ""
+"need CRAN package 'SuppDists' for simulation from the 'inverse.gaussian' "
+"family"
 msgstr ""
 " 'inverse.gaussian' ファミリには CRAN パッケージ 'SuppDists' が必要です "
 
@@ -5406,6 +5408,12 @@ msgstr ""
 #. R/StructTS.R: gettext("p-values for Ljung-Box statistic")
 #: R/StructTS.R:0
 msgid "p-values for Ljung-Box statistic"
+msgstr ""
+
+#. R/confint.R: stop("package 'MASS' must be installed")
+#. R/confint.R: stop("package 'MASS' must be installed")
+#: R/confint.R:0
+msgid "package 'MASS' must be installed"
 msgstr ""
 
 #. R/nls.R: gettextf("parameters without starting value in 'data': %s", tmp_n)

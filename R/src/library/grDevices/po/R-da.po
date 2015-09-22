@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-08-18 12:52\n"
+"POT-Creation-Date: 2015-09-22 23:11\n"
 "PO-Revision-Date: 2012-01-28 17:40+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -549,12 +549,6 @@ msgstr "ugyldig indstilling for »getOption(\"device\")«"
 msgid "invalid value for 'rescale'"
 msgstr "ugyldig værdi for »rescale«"
 
-#. R/recordplot.R: stop("loading snapshot from a different session")
-#: R/recordplot.R:0
-#, fuzzy
-msgid "loading snapshot from a different session"
-msgstr "Indlæser øjebliksbillede fra anden R version"
-
 #. R/device.R: warning("need to specify one of 'width' and 'height'")
 #: R/device.R:0
 msgid "need to specify one of 'width' and 'height'"
@@ -633,6 +627,23 @@ msgstr "rgb-matrix skal have 3 rækker"
 #: R/unix/quartz.R:0 R/unix/x11.R:0 R/windows/windows.R:0
 msgid "screen devices should not be used in examples etc"
 msgstr ""
+
+#. R/recordplot.R: stop("snapshot contains invalid graphics call")
+#: R/recordplot.R:0
+msgid "snapshot contains invalid graphics call"
+msgstr ""
+
+#. R/recordplot.R: gettextf("snapshot recorded in different R version (%s)", snapshotRversion)
+#: R/recordplot.R:0
+#, fuzzy
+msgid "snapshot recorded in different R version (%s)"
+msgstr "Indlæser øjebliksbillede fra anden R version"
+
+#. R/recordplot.R: warning("snapshot recorded in different R version (pre 3.3.0)")
+#: R/recordplot.R:0
+#, fuzzy
+msgid "snapshot recorded in different R version (pre 3.3.0)"
+msgstr "Indlæser øjebliksbillede fra anden R version"
 
 #. R/postscript.R: gettextf("status %d in running command '%s'", ret, cmd)
 #: R/postscript.R:0

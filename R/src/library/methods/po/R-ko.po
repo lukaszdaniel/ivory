@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-08-18 12:53\n"
+"POT-Creation-Date: 2015-09-22 23:12\n"
 "PO-Revision-Date: 2014-03-27 13:32-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -2376,10 +2376,9 @@ msgstr ""
 msgid "making a generic for special function %s"
 msgstr "특이 함수 %s에 대한 제네릭을 생성합니다"
 
-#. R/trace.R: warning("making a traced version of a primitive; arguments will be treated as '...'")
+#. R/trace.R: warning("making a traced version of a special; arguments may be altered")
 #: R/trace.R:0
-msgid ""
-"making a traced version of a primitive; arguments will be treated as '...'"
+msgid "making a traced version of a special; arguments may be altered"
 msgstr ""
 
 #. R/refClass.R: sprintf("method %s from class %s was not processed into a class method until being installed.  Possible corruption of the methods in the class.",     me, thisClass@className)
@@ -3320,11 +3319,6 @@ msgid ""
 msgstr ""
 "메소드 서명을 제네릭 함수가 아닌 객체 (클래스 %s)에 매칭을 시도했습니다"
 
-#. R/RMethodUtils.R: warning("trying to execute load actions without 'methods' package")
-#: R/RMethodUtils.R:0
-msgid "trying to execute load actions without 'methods' package"
-msgstr "'methods' 패키지 없이 로드 액션들의 실행을 시도합니다"
-
 #. R/methodsTable.R: stop("trying to find a methods table in a non-generic function")
 #: R/methodsTable.R:0
 msgid "trying to find a methods table in a non-generic function"
@@ -3616,6 +3610,9 @@ msgid_plural ""
 "of the non-generic to be used as the default (%s)"
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid "trying to execute load actions without 'methods' package"
+#~ msgstr "'methods' 패키지 없이 로드 액션들의 실행을 시도합니다"
 
 #, fuzzy
 #~ msgid "generic.function"

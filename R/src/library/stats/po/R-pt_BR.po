@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-07-29 22:13\n"
+"POT-Creation-Date: 2015-09-22 23:12\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -4507,7 +4507,7 @@ msgstr ""
 "link \"%s\" não está disponível para a família gaussian; links disponíveis "
 "são %s"
 
-#. R/family.R: gettextf("link %s not available for inverse.gaussian family; available links are %s",     sQuote(linktemp), tmp_n)
+#. R/family.R: gettextf("link %s not available for inverse.gaussian family; available links are %s",     sQuote(linktemp), paste(sQuote(okLinks), collapse = ", "), domain = "R-stats")
 #: R/family.R:0
 #, fuzzy
 msgid ""
@@ -4776,10 +4776,12 @@ msgstr "deve fornecer um ou mais vetores"
 msgid "n is number in *each* group"
 msgstr ""
 
-#. R/family.R: stop("need CRAN package 'SuppDists' for the 'inverse.gaussian' family")
+#. R/family.R: stop("need CRAN package 'SuppDists' for simulation from the 'inverse.gaussian' family")
 #: R/family.R:0
 #, fuzzy
-msgid "need CRAN package 'SuppDists' for the 'inverse.gaussian' family"
+msgid ""
+"need CRAN package 'SuppDists' for simulation from the 'inverse.gaussian' "
+"family"
 msgstr "É preciso o pacote CRAN 'SuppDists' para a família 'inverse.gaussian'"
 
 #. R/update.R: stop("need an object with call component")
@@ -5396,6 +5398,12 @@ msgstr ""
 #. R/StructTS.R: gettext("p-values for Ljung-Box statistic")
 #: R/StructTS.R:0
 msgid "p-values for Ljung-Box statistic"
+msgstr ""
+
+#. R/confint.R: stop("package 'MASS' must be installed")
+#. R/confint.R: stop("package 'MASS' must be installed")
+#: R/confint.R:0
+msgid "package 'MASS' must be installed"
 msgstr ""
 
 #. R/nls.R: gettextf("parameters without starting value in 'data': %s", tmp_n)

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-08-18 13:11\n"
+"POT-Creation-Date: 2015-09-22 23:12\n"
 "PO-Revision-Date: 2012-12-30 23:32+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -2675,7 +2675,7 @@ msgstr ""
 msgid "type == \"both\" cannot be used with 'repos = NULL'"
 msgstr ""
 
-#. R/packages.R: gettextf("unable to access index for repository %s", repos)
+#. R/packages.R: gettextf("unable to access index for repository %s", repos, domain = "R-utils")
 #: R/packages.R:0
 msgid "unable to access index for repository %s"
 msgstr ""

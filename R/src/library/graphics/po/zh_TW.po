@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-09 22:21+0200\n"
+"POT-Creation-Date: 2015-09-22 23:12+0200\n"
 "PO-Revision-Date: 2011-10-13 17:30+0800\n"
 "Last-Translator: Wei-Lun Chao <chaoweilun@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -22,12 +22,17 @@ msgstr ""
 msgid "no base graphics system is registered"
 msgstr ""
 
-#: base.c:296
+#: base.c:304
+#, fuzzy
+msgid "Incompatible graphics state"
+msgstr "繪圖狀態不正確"
+
+#: base.c:348
 #, fuzzy
 msgid "event 'GE_ScalePS' requires a single numeric value"
 msgstr "事件 GE_ScalePS 需要單一數值"
 
-#: base.c:327 base.c:334 base.c:342
+#: base.c:379 base.c:386 base.c:394
 #, fuzzy
 msgid "the base graphics system is not registered"
 msgstr "登記了太多的繪圖系統"

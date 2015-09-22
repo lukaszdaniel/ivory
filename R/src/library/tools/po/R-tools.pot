@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.3.0\n"
-"POT-Creation-Date: 2015-08-18 12:53\n"
+"POT-Creation-Date: 2015-09-22 23:12\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4366,6 +4366,13 @@ msgstr ""
 
 
 #: R/QC.R: 0
+#. R/QC.R: gettextf("Version contains large components (%s)", y)
+
+msgid "Version contains large components (%s)"
+msgstr ""
+
+
+#: R/QC.R: 0
 #. R/QC.R: gettextf("Version contains leading zeroes (%s)", y, domain = "R-tools")
 
 msgid "Version contains leading zeroes (%s)"
@@ -4852,6 +4859,13 @@ msgstr ""
 #. R/install.R: stop("cannot create temporary directory")
 
 msgid "cannot create temporary directory"
+msgstr ""
+
+
+#: R/install.R: 0
+#. R/install.R: stop("cannot create unique directory for build")
+
+msgid "cannot create unique directory for build"
 msgstr ""
 
 

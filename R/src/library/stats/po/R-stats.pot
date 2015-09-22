@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.3.0\n"
-"POT-Creation-Date: 2015-07-29 22:13\n"
+"POT-Creation-Date: 2015-09-22 23:12\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5934,7 +5934,7 @@ msgstr ""
 
 
 #: R/family.R: 0
-#. R/family.R: gettextf("link %s not available for inverse.gaussian family; available links are %s",     sQuote(linktemp), tmp_n)
+#. R/family.R: gettextf("link %s not available for inverse.gaussian family; available links are %s",     sQuote(linktemp), paste(sQuote(okLinks), collapse = ", "), domain = "R-stats")
 
 msgid "link %s not available for inverse.gaussian family; available links are %s"
 msgstr ""
@@ -6271,9 +6271,9 @@ msgstr ""
 
 
 #: R/family.R: 0
-#. R/family.R: stop("need CRAN package 'SuppDists' for the 'inverse.gaussian' family")
+#. R/family.R: stop("need CRAN package 'SuppDists' for simulation from the 'inverse.gaussian' family")
 
-msgid "need CRAN package 'SuppDists' for the 'inverse.gaussian' family"
+msgid "need CRAN package 'SuppDists' for simulation from the 'inverse.gaussian' family"
 msgstr ""
 
 
@@ -7068,6 +7068,14 @@ msgstr ""
 #. R/StructTS.R: gettext("p-values for Ljung-Box statistic")
 
 msgid "p-values for Ljung-Box statistic"
+msgstr ""
+
+
+#: R/confint.R: 0
+#. R/confint.R: stop("package 'MASS' must be installed")
+#. R/confint.R: stop("package 'MASS' must be installed")
+
+msgid "package 'MASS' must be installed"
 msgstr ""
 
 

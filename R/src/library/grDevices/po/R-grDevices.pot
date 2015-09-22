@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 3.3.0\n"
-"POT-Creation-Date: 2015-08-18 12:52\n"
+"POT-Creation-Date: 2015-09-22 23:11\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -724,13 +724,6 @@ msgid "invalid value for 'rescale'"
 msgstr ""
 
 
-#: R/recordplot.R: 0
-#. R/recordplot.R: stop("loading snapshot from a different session")
-
-msgid "loading snapshot from a different session"
-msgstr ""
-
-
 #: R/device.R: 0
 #. R/device.R: warning("need to specify one of 'width' and 'height'")
 
@@ -835,6 +828,27 @@ msgstr ""
 #. R/windows/windows.R: warning("screen devices should not be used in examples etc", immediate. = TRUE, noBreaks. = TRUE,     domain = "R-grDevices")
 
 msgid "screen devices should not be used in examples etc"
+msgstr ""
+
+
+#: R/recordplot.R: 0
+#. R/recordplot.R: stop("snapshot contains invalid graphics call")
+
+msgid "snapshot contains invalid graphics call"
+msgstr ""
+
+
+#: R/recordplot.R: 0
+#. R/recordplot.R: gettextf("snapshot recorded in different R version (%s)", snapshotRversion)
+
+msgid "snapshot recorded in different R version (%s)"
+msgstr ""
+
+
+#: R/recordplot.R: 0
+#. R/recordplot.R: warning("snapshot recorded in different R version (pre 3.3.0)")
+
+msgid "snapshot recorded in different R version (pre 3.3.0)"
 msgstr ""
 
 

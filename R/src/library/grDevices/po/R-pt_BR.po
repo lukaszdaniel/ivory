@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-08-18 12:52\n"
+"POT-Creation-Date: 2015-09-22 23:11\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -549,12 +549,6 @@ msgstr "configuração inválida para 'getOption(\"device\")'"
 msgid "invalid value for 'rescale'"
 msgstr "valor inválido para 'rescale'"
 
-#. R/recordplot.R: stop("loading snapshot from a different session")
-#: R/recordplot.R:0
-#, fuzzy
-msgid "loading snapshot from a different session"
-msgstr "carregando snapshot de versão R diferente"
-
 #. R/device.R: warning("need to specify one of 'width' and 'height'")
 #: R/device.R:0
 msgid "need to specify one of 'width' and 'height'"
@@ -633,6 +627,23 @@ msgstr "matriz rgb deve ter 3 colunas"
 #: R/unix/quartz.R:0 R/unix/x11.R:0 R/windows/windows.R:0
 msgid "screen devices should not be used in examples etc"
 msgstr ""
+
+#. R/recordplot.R: stop("snapshot contains invalid graphics call")
+#: R/recordplot.R:0
+msgid "snapshot contains invalid graphics call"
+msgstr ""
+
+#. R/recordplot.R: gettextf("snapshot recorded in different R version (%s)", snapshotRversion)
+#: R/recordplot.R:0
+#, fuzzy
+msgid "snapshot recorded in different R version (%s)"
+msgstr "carregando snapshot de versão R diferente"
+
+#. R/recordplot.R: warning("snapshot recorded in different R version (pre 3.3.0)")
+#: R/recordplot.R:0
+#, fuzzy
+msgid "snapshot recorded in different R version (pre 3.3.0)"
+msgstr "carregando snapshot de versão R diferente"
 
 #. R/postscript.R: gettextf("status %d in running command '%s'", ret, cmd)
 #: R/postscript.R:0

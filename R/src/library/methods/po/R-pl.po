@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-18 12:53\n"
+"POT-Creation-Date: 2015-09-22 23:12\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -2385,10 +2385,10 @@ msgstr ""
 msgid "making a generic for special function %s"
 msgstr "tworzenie ogólnej funkcji dla funkcji specjalnej %s"
 
-#. R/trace.R: warning("making a traced version of a primitive; arguments will be treated as '...'")
+#. R/trace.R: warning("making a traced version of a special; arguments may be altered")
 #: R/trace.R:0
-msgid ""
-"making a traced version of a primitive; arguments will be treated as '...'"
+#, fuzzy
+msgid "making a traced version of a special; arguments may be altered"
 msgstr ""
 "tworzenie śledzonej wersji funkcji prymitywnej; argumenty będą traktowane "
 "jak  '...'"
@@ -3339,11 +3339,6 @@ msgstr ""
 "próba sprawdzenia długości sygnatury grupy ogólnej %s, ale to nie jest grupa "
 "ogólna"
 
-#. R/RMethodUtils.R: warning("trying to execute load actions without 'methods' package")
-#: R/RMethodUtils.R:0
-msgid "trying to execute load actions without 'methods' package"
-msgstr "próba wykonania akcji ładowania bez pakietu 'methods'"
-
 #. R/methodsTable.R: stop("trying to find a methods table in a non-generic function")
 #: R/methodsTable.R:0
 msgid "trying to find a methods table in a non-generic function"
@@ -3688,6 +3683,9 @@ msgstr[1] ""
 msgstr[2] ""
 "formalne argumenty ogólnej funkcji dla %s (%s) różnią się od tych dla "
 "nieogólnej, która ma być użyta jako domyślna (%s)"
+
+#~ msgid "trying to execute load actions without 'methods' package"
+#~ msgstr "próba wykonania akcji ładowania bez pakietu 'methods'"
 
 #, fuzzy
 #~ msgid "class"
