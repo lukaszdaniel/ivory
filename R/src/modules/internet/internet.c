@@ -102,7 +102,7 @@ static Rboolean url_open(Rconnection con)
 {
     void *ctxt;
     char *url = con->description;
-    UrlScheme type = ((Rurlconn)(con->conprivate))->type;
+    UrlScheme type = ((Rurlconn)(con->private))->type;
 
     if(con->mode[0] != 'r') {
 	REprintf(_("can only open URLs for reading"));
@@ -137,7 +137,7 @@ static Rboolean url_open(Rconnection con)
 	  /* error("cannot open URL '%s'", url); */
 	    return FALSE;
 	}
-	((Rurlconn)(con->conprivate))->ctxt = ctxt;
+	((Rurlconn)(con->private))->ctxt = ctxt;
     }
 	break;
     case FTPsh:
@@ -148,7 +148,7 @@ static Rboolean url_open(Rconnection con)
 	  /* error("cannot open URL '%s'", url); */
 	    return FALSE;
 	}
-	((Rurlconn)(con->conprivate))->ctxt = ctxt;
+	((Rurlconn)(con->private))->ctxt = ctxt;
 	break;
 
     default:
@@ -168,14 +168,14 @@ static Rboolean url_open(Rconnection con)
 
 static void url_close(Rconnection con)
 {
-    UrlScheme type = ((Rurlconn)(con->conprivate))->type;
+    UrlScheme type = ((Rurlconn)(con->private))->type;
     switch(type) {
     case HTTPsh:
     case HTTPSsh:
-	in_R_HTTPClose(((Rurlconn)(con->conprivate))->ctxt);
+	in_R_HTTPClose(((Rurlconn)(con->private))->ctxt);
 	break;
     case FTPsh:
-	in_R_FTPClose(((Rurlconn)(con->conprivate))->ctxt);
+	in_R_FTPClose(((Rurlconn)(con->private))->ctxt);
 	break;
     default:
 	break;
@@ -185,8 +185,8 @@ static void url_close(Rconnection con)
 
 static int url_fgetc_internal(Rconnection con)
 {
-    UrlScheme type = ((Rurlconn)(con->conprivate))->type;
-    void * ctxt = ((Rurlconn)(con->conprivate))->ctxt;
+    UrlScheme type = ((Rurlconn)(con->private))->type;
+    void * ctxt = ((Rurlconn)(con->private))->ctxt;
     unsigned char c;
     size_t n = 0; /* -Wall */
 
@@ -207,8 +207,8 @@ static int url_fgetc_internal(Rconnection con)
 static size_t url_read(void *ptr, size_t size, size_t nitems,
 		       Rconnection con)
 {
-    UrlScheme type = ((Rurlconn)(con->conprivate))->type;
-    void * ctxt = ((Rurlconn)(con->conprivate))->ctxt;
+    UrlScheme type = ((Rurlconn)(con->private))->type;
+    void * ctxt = ((Rurlconn)(con->private))->ctxt;
     size_t n = 0; /* -Wall */
 
     switch(type) {
@@ -230,7 +230,7 @@ static Rboolean url_open2(Rconnection con)
 {
     void *ctxt;
     char *url = con->description;
-    UrlScheme type = ((Rurlconn)(con->conprivate))->type;
+    UrlScheme type = ((Rurlconn)(con->private))->type;
 
     if(con->mode[0] != 'r') {
 	REprintf(_("can only open URLs for reading"));
@@ -258,7 +258,7 @@ static Rboolean url_open2(Rconnection con)
 	  /* error("cannot open URL '%s'", url); */
 	    return FALSE;
 	}
-	((Rurlconn)(con->conprivate))->ctxt = ctxt;
+	((Rurlconn)(con->private))->ctxt = ctxt;
     }
 	break;
     case FTPsh:
@@ -269,7 +269,7 @@ static Rboolean url_open2(Rconnection con)
 	  /* error("cannot open URL '%s'", url); */
 	    return FALSE;
 	}
-	((Rurlconn)(con->conprivate))->ctxt = ctxt;
+	((Rurlconn)(con->private))->ctxt = ctxt;
 	break;
 
     default:
@@ -289,12 +289,12 @@ static Rboolean url_open2(Rconnection con)
 
 static void url_close2(Rconnection con)
 {
-    UrlScheme type = ((Rurlconn)(con->conprivate))->type;
+    UrlScheme type = ((Rurlconn)(con->private))->type;
     switch(type) {
     case HTTPsh:
     case HTTPSsh:
     case FTPsh:
-	in_R_HTTPClose2(((Rurlconn)(con->conprivate))->ctxt);
+	in_R_HTTPClose2(((Rurlconn)(con->private))->ctxt);
 	break;
     default:
 	break;
@@ -304,8 +304,8 @@ static void url_close2(Rconnection con)
 
 static int url_fgetc_internal2(Rconnection con)
 {
-    UrlScheme type = ((Rurlconn)(con->conprivate))->type;
-    void * ctxt = ((Rurlconn)(con->conprivate))->ctxt;
+    UrlScheme type = ((Rurlconn)(con->private))->type;
+    void * ctxt = ((Rurlconn)(con->private))->ctxt;
     unsigned char c;
     size_t n = 0; /* -Wall */
 
@@ -324,8 +324,8 @@ static int url_fgetc_internal2(Rconnection con)
 static size_t url_read2(void *ptr, size_t size, size_t nitems,
 			Rconnection con)
 {
-    UrlScheme type = ((Rurlconn)(con->conprivate))->type;
-    void * ctxt = ((Rurlconn)(con->conprivate))->ctxt;
+    UrlScheme type = ((Rurlconn)(con->private))->type;
+    void * ctxt = ((Rurlconn)(con->private))->ctxt;
     size_t n = 0; /* -Wall */
 
     switch(type) {
@@ -376,8 +376,8 @@ in_R_newurl(const char *description, const char * const mode, int type)
 	newcon->fgetc_internal = &url_fgetc_internal;
     }
     newcon->fgetc = &dummy_fgetc;
-    newcon->conprivate = (void *) malloc(sizeof(struct urlconn));
-    if(!newcon->conprivate) {
+    newcon->private = (void *) malloc(sizeof(struct urlconn));
+    if(!newcon->private) {
 	free(newcon->description); free(newcon->conclass); free(newcon);
 	error(_("allocation of url connection failed"));
     }

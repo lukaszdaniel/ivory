@@ -72,7 +72,7 @@ struct Rconn {
     Rboolean UTF8out;
     void *id;
     void *ex_ptr;
-    void *conprivate;
+    void *private;
     int status; /* for pipes etc */
 };
 

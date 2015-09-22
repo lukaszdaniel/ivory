@@ -690,7 +690,7 @@ static int fetchData(RCurlconn ctxt)
 
 static void Curl_close(Rconnection con)
 {
-    RCurlconn ctxt = (RCurlconn)(con->conprivate);
+    RCurlconn ctxt = (RCurlconn)(con->private);
 
     curl_multi_remove_handle(ctxt->mh, ctxt->hnd);
     curl_easy_cleanup(ctxt->hnd);
@@ -703,7 +703,7 @@ static void Curl_close(Rconnection con)
 static size_t Curl_read(void *ptr, size_t size, size_t nitems,
 			Rconnection con)
 {
-    RCurlconn ctxt = (RCurlconn)(con->conprivate);
+    RCurlconn ctxt = (RCurlconn)(con->private);
     size_t nbytes = size*nitems;
     char *p = (char *) ptr;
     size_t total = consumeData(ptr, nbytes, ctxt);
@@ -722,7 +722,7 @@ static size_t Curl_read(void *ptr, size_t size, size_t nitems,
 static Rboolean Curl_open(Rconnection con)
 {
     char *url = con->description;
-    RCurlconn ctxt = (RCurlconn)(con->conprivate);
+    RCurlconn ctxt = (RCurlconn)(con->private);
 
     if (con->mode[0] != 'r') {
 	REprintf("can only open URLs for reading");
@@ -797,16 +797,16 @@ in_newCurlUrl(const char *description, const char * const mode, int type)
     newcon->fgetc_internal = &Curl_fgetc_internal;
     newcon->fgetc = &dummy_fgetc;
     newcon->read = &Curl_read;
-    newcon->conprivate = (void *) malloc(sizeof(struct Curlconn));
-    if (!newcon->conprivate) {
+    newcon->private = (void *) malloc(sizeof(struct Curlconn));
+    if (!newcon->private) {
 	free(newcon->description); free(newcon->conclass); free(newcon);
 	error(_("allocation of url connection failed"));
     }
-    RCurlconn ctxt = (RCurlconn) newcon->conprivate;
+    RCurlconn ctxt = (RCurlconn) newcon->private;
     ctxt->bufsize = 2 * CURL_MAX_WRITE_SIZE;
     ctxt->buf = malloc(ctxt->bufsize);
     if (!ctxt->buf) {
-	free(newcon->description); free(newcon->conclass); free(newcon->conprivate);
+	free(newcon->description); free(newcon->conclass); free(newcon->private);
 	free(newcon);
 	error(_("allocation of url connection failed"));
     }

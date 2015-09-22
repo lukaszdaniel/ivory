@@ -292,7 +292,7 @@ static void null_close(Rconnection con)
 
 static void null_destroy(Rconnection con)
 {
-    if(con->conprivate) free(con->conprivate);
+    if(con->private) free(con->private);
 }
 
 static int NORET null_vfprintf(Rconnection con, const char *format, va_list ap)
@@ -499,7 +499,7 @@ void init_con(Rconnection newcon, const char *description, int enc,
     newcon->write = &null_write;
     newcon->nPushBack = 0;
     newcon->save = newcon->save2 = -1000;
-    newcon->conprivate = NULL;
+    newcon->private = NULL;
     newcon->inconv = newcon->outconv = NULL;
     newcon->UTF8out = FALSE;
     /* increment id, avoid NULL */
@@ -545,7 +545,7 @@ static Rboolean file_open(Rconnection con)
 {
     const char *name;
     FILE *fp = NULL;
-    Rfileconn thiscon = con->conprivate;
+    Rfileconn thiscon = con->private;
     Rboolean temp = FALSE;
 #ifdef HAVE_FCNTL
     int fd, flags;
@@ -631,7 +631,7 @@ static Rboolean file_open(Rconnection con)
 
 static void file_close(Rconnection con)
 {
-    Rfileconn thiscon = con->conprivate;
+    Rfileconn thiscon = con->private;
     if(con->isopen && strcmp(con->description, "stdin"))
 	con->status = fclose(thiscon->fp);
     con->isopen = FALSE;
@@ -642,7 +642,7 @@ static void file_close(Rconnection con)
 
 static int file_vfprintf(Rconnection con, const char *format, va_list ap)
 {
-    Rfileconn thiscon = con->conprivate;
+    Rfileconn thiscon = con->private;
 
     if(!thiscon->last_was_write) {
 	thiscon->rpos = f_tell(thiscon->fp);
@@ -655,7 +655,7 @@ static int file_vfprintf(Rconnection con, const char *format, va_list ap)
 
 static int file_fgetc_internal(Rconnection con)
 {
-    Rfileconn thiscon = con->conprivate;
+    Rfileconn thiscon = con->private;
     FILE *fp = thiscon->fp;
     int c;
 
@@ -670,7 +670,7 @@ static int file_fgetc_internal(Rconnection con)
 
 static double file_seek(Rconnection con, double where, int origin, int rw)
 {
-    Rfileconn thiscon = con->conprivate;
+    Rfileconn thiscon = con->private;
     FILE *fp = thiscon->fp;
     OFF_T pos;
     int whence = SEEK_SET;
@@ -709,7 +709,7 @@ static double file_seek(Rconnection con, double where, int origin, int rw)
 
 static void file_truncate(Rconnection con)
 {
-    Rfileconn thiscon = con->conprivate;
+    Rfileconn thiscon = con->private;
 #ifdef HAVE_FTRUNCATE
     FILE *fp = thiscon->fp;
     int fd = fileno(fp);
@@ -738,7 +738,7 @@ static void file_truncate(Rconnection con)
 
 static int file_fflush(Rconnection con)
 {
-    FILE *fp = ((Rfileconn)(con->conprivate))->fp;
+    FILE *fp = ((Rfileconn)(con->private))->fp;
 
     return fflush(fp);
 }
@@ -746,7 +746,7 @@ static int file_fflush(Rconnection con)
 static size_t file_read(void *ptr, size_t size, size_t nitems,
 			Rconnection con)
 {
-    Rfileconn thiscon = con->conprivate;
+    Rfileconn thiscon = con->private;
     FILE *fp = thiscon->fp;
 
     if(thiscon->last_was_write) {
@@ -760,7 +760,7 @@ static size_t file_read(void *ptr, size_t size, size_t nitems,
 static size_t file_write(const void *ptr, size_t size, size_t nitems,
 			 Rconnection con)
 {
-    Rfileconn thiscon = con->conprivate;
+    Rfileconn thiscon = con->private;
     FILE *fp = thiscon->fp;
 
     if(!thiscon->last_was_write) {
@@ -800,12 +800,12 @@ static Rconnection newfile(const char *description, int enc, const char *mode,
     newcon->read = &file_read;
     newcon->write = &file_write;
     newcon->canseek = (raw == 0);
-    newcon->conprivate = (void *) malloc(sizeof(struct fileconn));
-    if(!newcon->conprivate) {
+    newcon->private = (void *) malloc(sizeof(struct fileconn));
+    if(!newcon->private) {
 	free(newcon->description); free(newcon->conclass); free(newcon);
 	error(_("allocation of file connection failed"));
     }
-    ((Rfileconn)(newcon->conprivate))->raw = raw;
+    ((Rfileconn)(newcon->private))->raw = raw;
     return newcon;
 }
 
@@ -833,7 +833,7 @@ typedef struct fifoconn {
 static Rboolean fifo_open(Rconnection con)
 {
     const char *name;
-    Rfifoconn thiscon = con->conprivate;
+    Rfifoconn thiscon = con->private;
     int fd, flags, res;
     int mlen = (int) strlen(con->mode); // short
     struct stat sb;
@@ -894,13 +894,13 @@ static Rboolean fifo_open(Rconnection con)
 
 static void fifo_close(Rconnection con)
 {
-    con->status = close(((Rfifoconn)(con->conprivate))->fd);
+    con->status = close(((Rfifoconn)(con->private))->fd);
     con->isopen = FALSE;
 }
 
 static int fifo_fgetc_internal(Rconnection con)
 {
-    Rfifoconn thiscon = con->conprivate;
+    Rfifoconn thiscon = con->private;
     unsigned char c;
     ssize_t n;
 
@@ -911,7 +911,7 @@ static int fifo_fgetc_internal(Rconnection con)
 static size_t fifo_read(void *ptr, size_t size, size_t nitems,
 			Rconnection con)
 {
-    Rfifoconn thiscon = con->conprivate;
+    Rfifoconn thiscon = con->private;
 
     /* uses 'size_t' for len */
     if ((double) size * (double) nitems > SSIZE_MAX)
@@ -922,7 +922,7 @@ static size_t fifo_read(void *ptr, size_t size, size_t nitems,
 static size_t fifo_write(const void *ptr, size_t size, size_t nitems,
 			 Rconnection con)
 {
-    Rfifoconn thiscon = con->conprivate;
+    Rfifoconn thiscon = con->private;
 
     /* uses 'size_t' for len */
     if ((double) size * (double) nitems > SSIZE_MAX)
@@ -970,7 +970,7 @@ static char* win_getlasterror_str(void)
 
 static Rboolean	fifo_open(Rconnection con)
 {
-    Rfifoconn thiscon = con->conprivate;
+    Rfifoconn thiscon = con->private;
     unsigned int uin_pipname_len = strlen(con->description);
     unsigned int uin_mode_len = strlen(con->mode);
     char *hch_pipename = NULL;
@@ -1075,7 +1075,7 @@ static Rboolean	fifo_open(Rconnection con)
 
 static void fifo_close(Rconnection con)
 {
-    Rfifoconn thiscon = con->conprivate;
+    Rfifoconn thiscon = con->private;
     con->isopen = FALSE;
     con->status = CloseHandle(thiscon->hdl_namedpipe) ? 0 : -1;
     if (thiscon->overlapped_write) CloseHandle(thiscon->overlapped_write);
@@ -1083,7 +1083,7 @@ static void fifo_close(Rconnection con)
 
 static size_t fifo_read(void* ptr, size_t size, size_t nitems, Rconnection con)
 {
-    Rfifoconn thiscon = con->conprivate;
+    Rfifoconn thiscon = con->private;
     size_t read_byte = 0;
 
     // avoid integer overflow
@@ -1103,7 +1103,7 @@ static size_t fifo_read(void* ptr, size_t size, size_t nitems, Rconnection con)
 static size_t
 fifo_write(const void *ptr, size_t size, size_t nitems, Rconnection con)
 {
-    Rfifoconn thiscon = con->conprivate;
+    Rfifoconn thiscon = con->private;
     size_t written_bytes = 0;
 
     if (size * sizeof(wchar_t) * nitems > UINT_MAX)
@@ -1136,7 +1136,7 @@ fifo_write(const void *ptr, size_t size, size_t nitems, Rconnection con)
 
 static int fifo_fgetc_internal(Rconnection con)
 {
-    Rfifoconn  thiscon = con->conprivate;
+    Rfifoconn  thiscon = con->private;
     DWORD available_bytes = 0;
     DWORD read_byte = 0;
     DWORD len = 1 * sizeof(wchar_t);
@@ -1182,8 +1182,8 @@ static Rconnection newfifo(const char *description, const char *mode)
     newcon->fflush = &null_fflush;
     newcon->read = &fifo_read;
     newcon->write = &fifo_write;
-    newcon->conprivate = (void *) malloc(sizeof(struct fifoconn));
-    if(!newcon->conprivate) {
+    newcon->private = (void *) malloc(sizeof(struct fifoconn));
+    if(!newcon->private) {
 	free(newcon->description); free(newcon->conclass); free(newcon);
 	error(_("allocation of fifo connection failed"));
     }
@@ -1261,7 +1261,7 @@ static Rboolean pipe_open(Rconnection con)
 {
     FILE *fp;
     char mode[3];
-    Rfileconn thiscon = con->conprivate;
+    Rfileconn thiscon = con->private;
 
 #ifdef _WIN32
     strncpy(mode, con->mode, 2);
@@ -1305,7 +1305,7 @@ static Rboolean pipe_open(Rconnection con)
 
 static void pipe_close(Rconnection con)
 {
-    con->status = pclose(((Rfileconn)(con->conprivate))->fp);
+    con->status = pclose(((Rfileconn)(con->private))->fp);
     con->isopen = FALSE;
 }
 
@@ -1335,8 +1335,8 @@ newpipe(const char *description, int ienc, const char *mode)
     newcon->fflush = &file_fflush;
     newcon->read = &file_read;
     newcon->write = &file_write;
-    newcon->conprivate = (void *) malloc(sizeof(struct fileconn));
-    if(!newcon->conprivate) {
+    newcon->private = (void *) malloc(sizeof(struct fileconn));
+    if(!newcon->private) {
 	free(newcon->description); free(newcon->conclass); free(newcon);
 	error(_("allocation of pipe connection failed"));
     }
@@ -1446,7 +1446,7 @@ static Rboolean gzfile_open(Rconnection con)
 {
     gzFile fp;
     char mode[6];
-    Rgzfileconn gzcon = con->conprivate;
+    Rgzfileconn gzcon = con->private;
 
     strcpy(mode, con->mode);
     /* Must open as binary */
@@ -1460,7 +1460,7 @@ static Rboolean gzfile_open(Rconnection con)
 		R_ExpandFileName(con->description), strerror(errno));
 	return FALSE;
     }
-    ((Rgzfileconn)(con->conprivate))->fp = fp;
+    ((Rgzfileconn)(con->private))->fp = fp;
     con->isopen = TRUE;
     con->canwrite = (con->mode[0] == 'w' || con->mode[0] == 'a');
     con->canread = !con->canwrite;
@@ -1472,13 +1472,13 @@ static Rboolean gzfile_open(Rconnection con)
 
 static void gzfile_close(Rconnection con)
 {
-    R_gzclose(((Rgzfileconn)(con->conprivate))->fp);
+    R_gzclose(((Rgzfileconn)(con->private))->fp);
     con->isopen = FALSE;
 }
 
 static int gzfile_fgetc_internal(Rconnection con)
 {
-    gzFile fp = ((Rgzfileconn)(con->conprivate))->fp;
+    gzFile fp = ((Rgzfileconn)(con->private))->fp;
     unsigned char c;
 
     return R_gzread(fp, &c, 1) == 1 ? c : R_EOF;
@@ -1488,7 +1488,7 @@ static int gzfile_fgetc_internal(Rconnection con)
    When reading, it either seeks forwards of rewinds and reads again */
 static double gzfile_seek(Rconnection con, double where, int origin, int rw)
 {
-    gzFile  fp = ((Rgzfileconn)(con->conprivate))->fp;
+    gzFile  fp = ((Rgzfileconn)(con->private))->fp;
     Rz_off_t pos = R_gztell(fp);
     int res, whence = SEEK_SET;
 
@@ -1513,7 +1513,7 @@ static int gzfile_fflush(Rconnection con)
 static size_t gzfile_read(void *ptr, size_t size, size_t nitems,
 			Rconnection con)
 {
-    gzFile fp = ((Rgzfileconn)(con->conprivate))->fp;
+    gzFile fp = ((Rgzfileconn)(con->private))->fp;
     /* uses 'unsigned' for len */
     if ((double) size * (double) nitems > UINT_MAX)
 	error(_("specified block is too large"));
@@ -1523,7 +1523,7 @@ static size_t gzfile_read(void *ptr, size_t size, size_t nitems,
 static size_t gzfile_write(const void *ptr, size_t size, size_t nitems,
 			   Rconnection con)
 {
-    gzFile fp = ((Rgzfileconn)(con->conprivate))->fp;
+    gzFile fp = ((Rgzfileconn)(con->private))->fp;
     /* uses 'unsigned' for len */
     if ((double) size * (double) nitems > UINT_MAX)
 	error(_("specified block is too large"));
@@ -1559,12 +1559,12 @@ static Rconnection newgzfile(const char *description, const char *mode,
     newcon->fflush = &gzfile_fflush;
     newcon->read = &gzfile_read;
     newcon->write = &gzfile_write;
-    newcon->conprivate = (void *) malloc(sizeof(struct gzfileconn));
-    if(!newcon->conprivate) {
+    newcon->private = (void *) malloc(sizeof(struct gzfileconn));
+    if(!newcon->private) {
 	free(newcon->description); free(newcon->conclass); free(newcon);
 	error(_("allocation of gzfile connection failed"));
     }
-    ((Rgzfileconn)newcon->conprivate)->compress = compress;
+    ((Rgzfileconn)newcon->private)->compress = compress;
     return newcon;
 }
 
@@ -1577,7 +1577,7 @@ typedef struct bzfileconn {
 
 static Rboolean bzfile_open(Rconnection con)
 {
-    Rbzfileconn bz = (Rbzfileconn) con->conprivate;
+    Rbzfileconn bz = (Rbzfileconn) con->private;
     FILE* fp;
     BZFILE* bfp;
     int bzerror;
@@ -1626,7 +1626,7 @@ static Rboolean bzfile_open(Rconnection con)
 static void bzfile_close(Rconnection con)
 {
     int bzerror;
-    Rbzfileconn bz = con->conprivate;
+    Rbzfileconn bz = con->private;
 
     if(con->canread)
 	BZ2_bzReadClose(&bzerror, bz->bfp);
@@ -1639,7 +1639,7 @@ static void bzfile_close(Rconnection con)
 static size_t bzfile_read(void *ptr, size_t size, size_t nitems,
 			  Rconnection con)
 {
-    Rbzfileconn bz = con->conprivate;
+    Rbzfileconn bz = con->private;
     int nread = 0,  nleft;
     int bzerror;
 
@@ -1700,7 +1700,7 @@ static int bzfile_fgetc_internal(Rconnection con)
 static size_t bzfile_write(const void *ptr, size_t size, size_t nitems,
 			   Rconnection con)
 {
-    Rbzfileconn bz = con->conprivate;
+    Rbzfileconn bz = con->private;
     int bzerror;
 
     /* uses 'int' for len */
@@ -1740,12 +1740,12 @@ static Rconnection newbzfile(const char *description, const char *mode,
     newcon->fflush = &null_fflush;
     newcon->read = &bzfile_read;
     newcon->write = &bzfile_write;
-    newcon->conprivate = (void *) malloc(sizeof(struct bzfileconn));
-    if(!newcon->conprivate) {
+    newcon->private = (void *) malloc(sizeof(struct bzfileconn));
+    if(!newcon->private) {
 	free(newcon->description); free(newcon->conclass); free(newcon);
 	error(_("allocation of bzfile connection failed"));
     }
-    ((Rbzfileconn)newcon->conprivate)->compress = compress;
+    ((Rbzfileconn)newcon->private)->compress = compress;
     return newcon;
 }
 
@@ -1764,7 +1764,7 @@ typedef struct xzfileconn {
 
 static Rboolean xzfile_open(Rconnection con)
 {
-    Rxzfileconn xz = con->conprivate;
+    Rxzfileconn xz = con->private;
     lzma_ret ret;
     char mode[] = "rb";
 
@@ -1818,7 +1818,7 @@ static Rboolean xzfile_open(Rconnection con)
 
 static void xzfile_close(Rconnection con)
 {
-    Rxzfileconn xz = con->conprivate;
+    Rxzfileconn xz = con->private;
 
     if(con->canwrite) {
 	lzma_ret ret;
@@ -1842,7 +1842,7 @@ static void xzfile_close(Rconnection con)
 static size_t xzfile_read(void *ptr, size_t size, size_t nitems,
 			  Rconnection con)
 {
-    Rxzfileconn xz = con->conprivate;
+    Rxzfileconn xz = con->private;
     lzma_stream *strm = &(xz->stream);
     lzma_ret ret;
     size_t s = size*nitems, have, given = 0;
@@ -1897,7 +1897,7 @@ static int xzfile_fgetc_internal(Rconnection con)
 static size_t xzfile_write(const void *ptr, size_t size, size_t nitems,
 			   Rconnection con)
 {
-    Rxzfileconn xz = con->conprivate;
+    Rxzfileconn xz = con->private;
     lzma_stream *strm = &(xz->stream);
     lzma_ret ret;
     size_t s = size*nitems, nout, res;
@@ -1957,14 +1957,14 @@ newxzfile(const char *description, const char *mode, int type, int compress)
     newcon->fflush = &null_fflush;
     newcon->read = &xzfile_read;
     newcon->write = &xzfile_write;
-    newcon->conprivate = (void *) malloc(sizeof(struct xzfileconn));
-    memset(newcon->conprivate, 0, sizeof(struct xzfileconn));
-    if(!newcon->conprivate) {
+    newcon->private = (void *) malloc(sizeof(struct xzfileconn));
+    memset(newcon->private, 0, sizeof(struct xzfileconn));
+    if(!newcon->private) {
 	free(newcon->description); free(newcon->conclass); free(newcon);
 	error(_("allocation of xzfile connection failed"));
     }
-    ((Rxzfileconn) newcon->conprivate)->type = type;
-    ((Rxzfileconn) newcon->conprivate)->compress = compress;
+    ((Rxzfileconn) newcon->private)->type = type;
+    ((Rxzfileconn) newcon->private)->compress = compress;
     return newcon;
 }
 
@@ -2090,7 +2090,7 @@ Rboolean R_ReadClipboard(Rclpconn clpcon, char *type);
 
 static Rboolean clp_open(Rconnection con)
 {
-    Rclpconn thiscon = con->conprivate;
+    Rclpconn thiscon = con->private;
 
     con->isopen = TRUE;
     con->canwrite = (con->mode[0] == 'w' || con->mode[0] == 'a');
@@ -2149,7 +2149,7 @@ static Rboolean clp_open(Rconnection con)
 static void clp_writeout(Rconnection con)
 {
 #ifdef _WIN32
-    Rclpconn thiscon = con->conprivate;
+    Rclpconn thiscon = con->private;
 
     HGLOBAL hglb;
     char *s, *p;
@@ -2175,7 +2175,7 @@ static void clp_writeout(Rconnection con)
 
 static void clp_close(Rconnection con)
 {
-    Rclpconn thiscon = con->conprivate;
+    Rclpconn thiscon = con->private;
 
     con->isopen = FALSE;
     if(con->canwrite)
@@ -2185,7 +2185,7 @@ static void clp_close(Rconnection con)
 
 static int clp_fgetc_internal(Rconnection con)
 {
-    Rclpconn thiscon = con->conprivate;
+    Rclpconn thiscon = con->private;
 
     if (thiscon->pos >= thiscon->len) return R_EOF;
     return thiscon->buff[thiscon->pos++];
@@ -2193,7 +2193,7 @@ static int clp_fgetc_internal(Rconnection con)
 
 static double clp_seek(Rconnection con, double where, int origin, int rw)
 {
-    Rclpconn thiscon = con->conprivate;
+    Rclpconn thiscon = con->private;
     int newpos, oldpos = thiscon->pos;
 
     if(ISNA(where)) return oldpos;
@@ -2212,7 +2212,7 @@ static double clp_seek(Rconnection con, double where, int origin, int rw)
 
 static void clp_truncate(Rconnection con)
 {
-    Rclpconn thiscon = con->conprivate;
+    Rclpconn thiscon = con->private;
 
     if(!con->isopen || !con->canwrite)
 	error(_("can only truncate connections open for writing"));
@@ -2229,7 +2229,7 @@ static int clp_fflush(Rconnection con)
 static size_t clp_read(void *ptr, size_t size, size_t nitems,
 			Rconnection con)
 {
-    Rclpconn thiscon = con->conprivate;
+    Rclpconn thiscon = con->private;
     int available = thiscon->len - thiscon->pos, request = (int)(size*nitems), used;
     if ((double) size * (double) nitems > INT_MAX)
 	error(_("specified block is too large"));
@@ -2242,7 +2242,7 @@ static size_t clp_read(void *ptr, size_t size, size_t nitems,
 static size_t clp_write(const void *ptr, size_t size, size_t nitems,
 			 Rconnection con)
 {
-    Rclpconn thiscon = con->conprivate;
+    Rclpconn thiscon = con->private;
     int i, len = (int)(size * nitems), used = 0;
     char c, *p = (char *) ptr, *q = thiscon->buff + thiscon->pos;
 
@@ -2320,18 +2320,18 @@ static Rconnection newclp(const char *url, const char *inmode)
     newcon->read = &clp_read;
     newcon->write = &clp_write;
     newcon->canseek = TRUE;
-    newcon->conprivate = (void *) malloc(sizeof(struct clpconn));
-    if(!newcon->conprivate) {
+    newcon->private = (void *) malloc(sizeof(struct clpconn));
+    if(!newcon->private) {
 	free(newcon->description); free(newcon->conclass); free(newcon);
 	error(_("allocation of clipboard connection failed"));
     }
-    ((Rclpconn)newcon->conprivate)->buff = NULL;
+    ((Rclpconn)newcon->private)->buff = NULL;
     if (strncmp(url, "clipboard-", 10) == 0) {
 	sizeKB = atoi(url+10);
 	if(sizeKB < 32) sizeKB = 32;
 	/* Rprintf("setting clipboard size to %dKB\n", sizeKB); */
     }
-    ((Rclpconn)newcon->conprivate)->sizeKB = sizeKB;
+    ((Rclpconn)newcon->private)->sizeKB = sizeKB;
     return newcon;
 }
 
@@ -2409,7 +2409,7 @@ static Rconnection newterminal(const char *description, const char *mode)
     newcon->canread = (strcmp(mode, "r") == 0);
     newcon->canwrite = (strcmp(mode, "w") == 0);
     newcon->destroy = &null_close;
-    newcon->conprivate = NULL;
+    newcon->private = NULL;
     return newcon;
 }
 
@@ -2488,7 +2488,7 @@ typedef struct rawconn {
 /* copy a raw vector into a buffer */
 static void raw_init(Rconnection con, SEXP raw)
 {
-    Rrawconn thiscon = con->conprivate;
+    Rrawconn thiscon = con->private;
 
     thiscon->data = MAYBE_REFERENCED(raw) ? duplicate(raw) : raw;
     R_PreserveObject(thiscon->data);
@@ -2507,7 +2507,7 @@ static void raw_close(Rconnection con)
 
 static void raw_destroy(Rconnection con)
 {
-    Rrawconn thiscon = con->conprivate;
+    Rrawconn thiscon = con->private;
 
     R_ReleaseObject(thiscon->data);
     free(thiscon);
@@ -2531,7 +2531,7 @@ static void raw_resize(Rrawconn thiscon, size_t needed)
 static size_t raw_write(const void *ptr, size_t size, size_t nitems,
 			Rconnection con)
 {
-    Rrawconn thiscon = con->conprivate;
+    Rrawconn thiscon = con->private;
     size_t freespace = XLENGTH(thiscon->data) - thiscon->pos, bytes = size*nitems;
 
     if ((double) size * (double) nitems + (double) thiscon->pos > R_LEN_T_MAX)
@@ -2547,14 +2547,14 @@ static size_t raw_write(const void *ptr, size_t size, size_t nitems,
 
 static void raw_truncate(Rconnection con)
 {
-    Rrawconn thiscon = con->conprivate;
+    Rrawconn thiscon = con->private;
     thiscon->nbytes = thiscon->pos;
 }
 
 static size_t raw_read(void *ptr, size_t size, size_t nitems,
 		       Rconnection con)
 {
-    Rrawconn thiscon = con->conprivate;
+    Rrawconn thiscon = con->private;
     size_t available = thiscon->nbytes - thiscon->pos, request = size*nitems, used;
 
     if ((double) size * (double) nitems + (double) thiscon->pos > R_LEN_T_MAX)
@@ -2567,14 +2567,14 @@ static size_t raw_read(void *ptr, size_t size, size_t nitems,
 
 static int raw_fgetc(Rconnection con)
 {
-    Rrawconn thiscon = con->conprivate;
+    Rrawconn thiscon = con->private;
     if(thiscon->pos >= thiscon->nbytes) return R_EOF;
     else return (int) RAW(thiscon->data)[thiscon->pos++];
 }
 
 static double raw_seek(Rconnection con, double where, int origin, int rw)
 {
-    Rrawconn thiscon = con->conprivate;
+    Rrawconn thiscon = con->private;
     double newpos;
     size_t oldpos = thiscon->pos;
 
@@ -2631,8 +2631,8 @@ static Rconnection newraw(const char *description, SEXP raw, const char *mode)
 	newcon->fgetc = &raw_fgetc;
     }
     newcon->seek = &raw_seek;
-    newcon->conprivate = (void*) malloc(sizeof(struct rawconn));
-    if(!newcon->conprivate) {
+    newcon->private = (void*) malloc(sizeof(struct rawconn));
+    if(!newcon->private) {
 	free(newcon->description); free(newcon->conclass); free(newcon);
 	error(_("allocation of raw connection failed"));
     }
@@ -2691,7 +2691,7 @@ SEXP attribute_hidden do_rawconvalue(SEXP call, SEXP op, SEXP args, SEXP env)
     con = getConnection(asInteger(CAR(args)));
     if(!con->canwrite)
 	error(_("'%s' is not an output of class %s"), "con", "\"rawConnection\"");
-    thiscon = con->conprivate;
+    thiscon = con->private;
     ans = allocVector(RAWSXP, thiscon->nbytes); /* later, use TRUELENGTH? */
     memcpy(RAW(ans), RAW(thiscon->data), thiscon->nbytes);
     return ans;
@@ -2719,7 +2719,7 @@ static void text_init(Rconnection con, SEXP text, int type)
     R_xlen_t i, nlines = xlength(text);  // not very plausible that thiscon is long
     size_t nchars = 0; /* -Wall */
     double dnc = 0.0;
-    Rtextconn thiscon = con->conprivate;
+    Rtextconn thiscon = con->private;
     const void *vmax = vmaxget();
 
     for(i = 0; i < nlines; i++)
@@ -2760,7 +2760,7 @@ static void text_close(Rconnection con)
 
 static void text_destroy(Rconnection con)
 {
-    Rtextconn thiscon = con->conprivate;
+    Rtextconn thiscon = con->private;
 
     free(thiscon->data);
     /* thiscon->cur = thiscon->nchars = 0; */
@@ -2769,7 +2769,7 @@ static void text_destroy(Rconnection con)
 
 static int text_fgetc(Rconnection con)
 {
-    Rtextconn thiscon = con->conprivate;
+    Rtextconn thiscon = con->private;
     if(thiscon->save) {
 	int c;
 	c = thiscon->save;
@@ -2810,8 +2810,8 @@ static Rconnection newtext(const char *description, SEXP text, int type)
     newcon->destroy = &text_destroy;
     newcon->fgetc = &text_fgetc;
     newcon->seek = &text_seek;
-    newcon->conprivate = (void*) malloc(sizeof(struct textconn));
-    if(!newcon->conprivate) {
+    newcon->private = (void*) malloc(sizeof(struct textconn));
+    if(!newcon->private) {
 	free(newcon->description); free(newcon->conclass); free(newcon);
 	error(_("allocation of text connection failed"));
     }
@@ -2830,7 +2830,7 @@ static SEXP mkCharLocal(const char *s)
 
 static void outtext_close(Rconnection con)
 {
-    Routtextconn thiscon = con->conprivate;
+    Routtextconn thiscon = con->private;
     int idx = ConnIndex(con);
     SEXP tmp, env = VECTOR_ELT(OutTextData, idx);
 
@@ -2849,7 +2849,7 @@ static void outtext_close(Rconnection con)
 
 static void outtext_destroy(Rconnection con)
 {
-    Routtextconn thiscon = con->conprivate;
+    Routtextconn thiscon = con->private;
     int idx = ConnIndex(con);
     /* OutTextData is preserved, and that implies that the environment
        we are writing it and hence the character vector is protected.
@@ -2864,7 +2864,7 @@ static void outtext_destroy(Rconnection con)
 
 static int text_vfprintf(Rconnection con, const char *format, va_list ap)
 {
-    Routtextconn thiscon = con->conprivate;
+    Routtextconn thiscon = con->private;
     char buf[BUFSIZE], *b = buf, *p, *q;
     const void *vmax = NULL;
     int res = 0, buffree,
@@ -2953,7 +2953,7 @@ static int text_vfprintf(Rconnection con, const char *format, va_list ap)
 
 static void outtext_init(Rconnection con, SEXP stext, const char *mode, int idx)
 {
-    Routtextconn thiscon = con->conprivate;
+    Routtextconn thiscon = con->private;
     SEXP val;
 
     if(stext == R_NilValue) {
@@ -3020,14 +3020,14 @@ static Rconnection newouttext(const char *description, SEXP stext,
     newcon->destroy = &outtext_destroy;
     newcon->vfprintf = &text_vfprintf;
     newcon->seek = &text_seek;
-    newcon->conprivate = (void*) malloc(sizeof(struct outtextconn));
-    if(!newcon->conprivate) {
+    newcon->private = (void*) malloc(sizeof(struct outtextconn));
+    if(!newcon->private) {
 	free(newcon->description); free(newcon->conclass); free(newcon);
 	error(_("allocation of text connection failed"));
     }
-    ((Routtextconn)newcon->conprivate)->lastline = tmp = malloc(LAST_LINE_LEN);
+    ((Routtextconn)newcon->private)->lastline = tmp = malloc(LAST_LINE_LEN);
     if(!tmp) {
-	free(newcon->conprivate);
+	free(newcon->private);
 	free(newcon->description); free(newcon->conclass); free(newcon);
 	error(_("allocation of text connection failed"));
     }
@@ -3107,7 +3107,7 @@ SEXP attribute_hidden do_textconvalue(SEXP call, SEXP op, SEXP args, SEXP env)
     con = getConnection(asInteger(CAR(args)));
     if(!con->canwrite)
 	error(_("'%s' is not an output of class %s"), "con", "\"rawConnection\"");
-    thiscon = con->conprivate;
+    thiscon = con->private;
     return thiscon->data;
 }
 
@@ -3315,7 +3315,7 @@ static void con_close1(Rconnection con)
 {
     if(con->isopen) con->close(con);
     if(con->isGzcon) {
-	Rgzconn priv = con->conprivate;
+	Rgzconn priv = con->private;
 	con_close1(priv->con);
 	R_ReleaseObject(priv->con->ex_ptr);
     }
@@ -5086,7 +5086,7 @@ SEXP attribute_hidden do_url(SEXP call, SEXP op, SEXP args, SEXP env)
 # endif
 	} else {
 	    con = R_newurl(url, strlen(open) ? open : "r", winmeth);
-	    ((Rurlconn)con->conprivate)->type = type;
+	    ((Rurlconn)con->private)->type = type;
 	}
     } else {
 	if(PRIMVAL(op) == 1) { /* call to file() */
@@ -5211,7 +5211,7 @@ size_t R_ReadConnection(Rconnection con, void *buf, size_t n)
 
 static Rboolean gzcon_open(Rconnection con)
 {
-    Rgzconn priv = con->conprivate;
+    Rgzconn priv = con->private;
     Rconnection icon = priv->con;
 
     if(!icon->isopen && !icon->open(icon)) return FALSE;
@@ -5302,7 +5302,7 @@ static void putLong(Rconnection con, uLong x)
 
 static void gzcon_close(Rconnection con)
 {
-    Rgzconn priv = con->conprivate;
+    Rgzconn priv = con->private;
     Rconnection icon = priv->con;
 
     if(icon->canwrite) {
@@ -5361,7 +5361,7 @@ static int gzcon_byte(Rgzconn priv)
 static size_t gzcon_read(void *ptr, size_t size, size_t nitems,
 			 Rconnection con)
 {
-    Rgzconn priv = con->conprivate;
+    Rgzconn priv = con->private;
     Rconnection icon = priv->con;
     Bytef *start = (Bytef*) ptr;
     uLong crc;
@@ -5431,7 +5431,7 @@ static size_t gzcon_read(void *ptr, size_t size, size_t nitems,
 static size_t gzcon_write(const void *ptr, size_t size, size_t nitems,
 			  Rconnection con)
 {
-    Rgzconn priv = con->conprivate;
+    Rgzconn priv = con->private;
     Rconnection icon = priv->con;
 
     if ((double) size * (double) nitems > INT_MAX)
@@ -5521,15 +5521,15 @@ SEXP attribute_hidden do_gzcon(SEXP call, SEXP op, SEXP args, SEXP rho)
     newcon->fgetc = &gzcon_fgetc;
     newcon->read = &gzcon_read;
     newcon->write = &gzcon_write;
-    newcon->conprivate = (void *) malloc(sizeof(struct gzconn));
-    if(!newcon->conprivate) {
+    newcon->private = (void *) malloc(sizeof(struct gzconn));
+    if(!newcon->private) {
 	free(newcon->description); free(newcon->conclass); free(newcon);
 	error(_("allocation of gzcon connection failed"));
     }
-    ((Rgzconn)(newcon->conprivate))->con = incon;
-    ((Rgzconn)(newcon->conprivate))->cp = level;
-    ((Rgzconn)(newcon->conprivate))->nsaved = -1;
-    ((Rgzconn)(newcon->conprivate))->allow = allow;
+    ((Rgzconn)(newcon->private))->con = incon;
+    ((Rgzconn)(newcon->private))->cp = level;
+    ((Rgzconn)(newcon->private))->nsaved = -1;
+    ((Rgzconn)(newcon->private))->allow = allow;
 
     /* as there might not be an R-level reference to the wrapped connection */
     R_PreserveObject(incon->ex_ptr);
@@ -5725,7 +5725,7 @@ SEXP attribute_hidden do_sockselect(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     for (i = 0; i < nsock; i++) {
 	Rconnection conn = getConnection(asInteger(VECTOR_ELT(insock, i)));
-	Rsockconn scp = conn->conprivate;
+	Rsockconn scp = conn->private;
 	if (strcmp(conn->conclass, "sockconn") != 0)
 	    error(_("this is not a socket connection"));
 	INTEGER(insockfd)[i] = scp->fd;

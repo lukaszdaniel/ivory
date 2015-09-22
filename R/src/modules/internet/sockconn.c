@@ -43,7 +43,7 @@ static void listencleanup(void *data)
 
 static Rboolean sock_open(Rconnection con)
 {
-    Rsockconn thiscon = (Rsockconn)con->conprivate;
+    Rsockconn thiscon = (Rsockconn)con->private;
     int sock, sock1, mlen;
     int timeout = thiscon->timeout;
     char buf[256];
@@ -99,14 +99,14 @@ static Rboolean sock_open(Rconnection con)
 
 static void sock_close(Rconnection con)
 {
-    Rsockconn thiscon = (Rsockconn)con->conprivate;
+    Rsockconn thiscon = (Rsockconn)con->private;
     R_SockClose(thiscon->fd);
     con->isopen = FALSE;
 }
 
 static size_t sock_read_helper(Rconnection con, void *ptr, size_t size)
 {
-    Rsockconn thiscon = (Rsockconn)con->conprivate;
+    Rsockconn thiscon = (Rsockconn)con->private;
     ssize_t res;
     size_t nread = 0, n;
 
@@ -163,7 +163,7 @@ static size_t sock_read(void *ptr, size_t size, size_t nitems,
 static size_t sock_write(const void *ptr, size_t size, size_t nitems,
 			 Rconnection con)
 {
-    Rsockconn thiscon = (Rsockconn)con->conprivate;
+    Rsockconn thiscon = (Rsockconn)con->private;
 
     return R_SockWrite(thiscon->fd, ptr, (int)(size * nitems), thiscon->timeout)/size;
 }
@@ -194,13 +194,13 @@ Rconnection in_R_newsock(const char *host, int port, int server,
     newcon->fgetc = &dummy_fgetc;
     newcon->read = &sock_read;
     newcon->write = &sock_write;
-    newcon->conprivate = (void *) malloc(sizeof(struct sockconn));
-    if(!newcon->conprivate) {
+    newcon->private = (void *) malloc(sizeof(struct sockconn));
+    if(!newcon->private) {
 	free(newcon->description); free(newcon->conclass); free(newcon);
 	error(_("allocation of socket connection failed"));
     }
-    ((Rsockconn)newcon->conprivate)-> port = port;
-    ((Rsockconn)newcon->conprivate)-> server = server;
-    ((Rsockconn)newcon->conprivate)-> timeout = timeout;
+    ((Rsockconn)newcon->private)-> port = port;
+    ((Rsockconn)newcon->private)-> server = server;
+    ((Rsockconn)newcon->private)-> timeout = timeout;
     return newcon;
 }

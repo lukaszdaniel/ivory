@@ -429,7 +429,7 @@ static Rboolean unz_open(Rconnection con)
 	return FALSE;
     }
     unzOpenCurrentFile(uf);
-    ((Runzconn)(con->conprivate))->uf = uf;
+    ((Runzconn)(con->private))->uf = uf;
     con->isopen = TRUE;
     con->canwrite = FALSE;
     con->canread = TRUE;
@@ -442,7 +442,7 @@ static Rboolean unz_open(Rconnection con)
 
 static void unz_close(Rconnection con)
 {
-    unzFile uf = ((Runzconn)(con->conprivate))->uf;
+    unzFile uf = ((Runzconn)(con->private))->uf;
     unzCloseCurrentFile(uf);
     unzClose(uf);
     con->isopen = FALSE;
@@ -450,7 +450,7 @@ static void unz_close(Rconnection con)
 
 static int unz_fgetc_internal(Rconnection con)
 {
-    unzFile uf = ((Runzconn)(con->conprivate))->uf;
+    unzFile uf = ((Runzconn)(con->private))->uf;
     char buf[1];
     int err, p;
 
@@ -462,7 +462,7 @@ static int unz_fgetc_internal(Rconnection con)
 static size_t unz_read(void *ptr, size_t size, size_t nitems,
 		       Rconnection con)
 {
-    unzFile uf = ((Runzconn)(con->conprivate))->uf;
+    unzFile uf = ((Runzconn)(con->private))->uf;
     return unzReadCurrentFile(uf, ptr, (unsigned int)(size*nitems))/size;
 }
 
@@ -516,8 +516,8 @@ R_newunz(const char *description, const char *const mode)
     new->fflush = &null_fflush;
     new->read = &unz_read;
     new->write = &null_write;
-    new->conprivate = (void *) malloc(sizeof(struct unzconn));
-    if(!new->conprivate) {
+    new->private = (void *) malloc(sizeof(struct unzconn));
+    if(!new->private) {
 	free(new->description); free(new->conclass); free(new);
 	error(_("allocation of 'unz' connection failed"));
     }
