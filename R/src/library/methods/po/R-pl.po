@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.4\n"
 
 #. R/RMethodUtils.R: warning("\"MethodsList\" is defunct; allMethods now are empty")
 #: R/RMethodUtils.R:0
@@ -2387,11 +2387,9 @@ msgstr "tworzenie ogólnej funkcji dla funkcji specjalnej %s"
 
 #. R/trace.R: warning("making a traced version of a special; arguments may be altered")
 #: R/trace.R:0
-#, fuzzy
 msgid "making a traced version of a special; arguments may be altered"
 msgstr ""
-"tworzenie śledzonej wersji funkcji prymitywnej; argumenty będą traktowane "
-"jak  '...'"
+"tworzenie śledzonej wersji funkcji prymitywnej; argumenty mogą ulec zmianie"
 
 #. R/refClass.R: sprintf("method %s from class %s was not processed into a class method until being installed.  Possible corruption of the methods in the class.",     me, thisClass@className)
 #: R/refClass.R:0

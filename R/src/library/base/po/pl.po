@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.3\n"
 "X-Poedit-Bookmarks: -1,736,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: src/appl/lbfgsb.c:683 src/appl/lbfgsb.c:755
@@ -701,19 +701,19 @@ msgstr "problem z wyświetleniem pliku '%ls'"
 #: src/main/scan.c:684 src/main/scan.c:853 src/main/scan.c:867
 #: src/main/scan.c:871 src/main/scan.c:873 src/main/scan.c:884
 #: src/main/scan.c:911 src/main/scan.c:914 src/main/scan.c:917
-#: src/main/scan.c:972 src/main/seq.c:615 src/main/seq.c:620
-#: src/main/seq.c:627 src/main/seq.c:657 src/main/seq.c:661 src/main/seq.c:667
-#: src/main/seq.c:675 src/main/sort.c:176 src/main/sysutils.c:591
-#: src/main/sysutils.c:595 src/main/sysutils.c:599 src/main/sysutils.c:605
-#: src/main/sysutils.c:609 src/main/sysutils.c:1780 src/main/sysutils.c:1784
-#: src/main/unique.c:1029 src/main/unique.c:1335 src/main/unique.c:1339
-#: src/main/unique.c:1349 src/main/unique.c:1745 src/main/util.c:639
-#: src/main/util.c:642 src/main/util.c:1378 src/main/util.c:1392
-#: src/main/util.c:1974 src/main/util.c:2197 src/main/util.c:2198
-#: src/main/util.c:2199 src/main/util.c:2216 src/main/util.c:2240
-#: src/main/util.c:2244 src/main/util.c:2246 src/main/util.c:2271
-#: src/main/util.c:2273 src/main/util.c:2275 src/main/util.c:2278
-#: src/main/util.c:2281 src/main/util.c:2285 src/main/util.c:2287
+#: src/main/scan.c:972 src/main/seq.c:615 src/main/seq.c:620 src/main/seq.c:627
+#: src/main/seq.c:657 src/main/seq.c:661 src/main/seq.c:667 src/main/seq.c:675
+#: src/main/sort.c:176 src/main/sysutils.c:591 src/main/sysutils.c:595
+#: src/main/sysutils.c:599 src/main/sysutils.c:605 src/main/sysutils.c:609
+#: src/main/sysutils.c:1780 src/main/sysutils.c:1784 src/main/unique.c:1029
+#: src/main/unique.c:1335 src/main/unique.c:1339 src/main/unique.c:1349
+#: src/main/unique.c:1745 src/main/util.c:639 src/main/util.c:642
+#: src/main/util.c:1378 src/main/util.c:1392 src/main/util.c:1974
+#: src/main/util.c:2197 src/main/util.c:2198 src/main/util.c:2199
+#: src/main/util.c:2216 src/main/util.c:2240 src/main/util.c:2244
+#: src/main/util.c:2246 src/main/util.c:2271 src/main/util.c:2273
+#: src/main/util.c:2275 src/main/util.c:2278 src/main/util.c:2281
+#: src/main/util.c:2285 src/main/util.c:2287
 #: src/modules/internet/internet.c:454 src/modules/internet/internet.c:460
 #: src/modules/internet/internet.c:466 src/modules/internet/internet.c:469
 #: src/modules/internet/internet.c:473 src/modules/internet/internet.c:478
@@ -831,9 +831,9 @@ msgstr "obcięcie nie jest udostępnione dla tego połączenia"
 msgid "broken Windows pipe"
 msgstr "uszkodzony potok systemu Windows"
 
-#: src/gnuwin32/run.c:717 src/main/connections.c:330
-#: src/main/connections.c:347 src/main/connections.c:2905
-#: src/main/printutils.c:874 src/main/printutils.c:888
+#: src/gnuwin32/run.c:717 src/main/connections.c:330 src/main/connections.c:347
+#: src/main/connections.c:2905 src/main/printutils.c:874
+#: src/main/printutils.c:888
 msgid "printing of extremely long output is truncated"
 msgstr "drukowanie wyjątkowo długiego wyjścia zostało przycięte"
 
@@ -1163,24 +1163,24 @@ msgid "'%s' argument must be a vector"
 msgstr "argument '%s' musi być wektorem"
 
 #: src/main/apply.c:101 src/main/array.c:484 src/main/character.c:747
-#: src/main/character.c:1554 src/main/connections.c:3546
-#: src/main/context.c:655 src/main/context.c:674 src/main/datetime.c:686
-#: src/main/datetime.c:788 src/main/datetime.c:1047 src/main/dotcode.c:220
-#: src/main/errors.c:943 src/main/errors.c:975 src/main/errors.c:1078
-#: src/main/errors.c:1103 src/main/errors.c:1108 src/main/errors.c:1381
-#: src/main/identical.c:73 src/main/identical.c:74 src/main/identical.c:75
-#: src/main/identical.c:76 src/main/identical.c:77 src/main/platform.c:3070
-#: src/main/seq.c:193 src/main/seq.c:340 src/main/seq.c:345 src/main/seq.c:349
-#: src/main/seq.c:390 src/main/seq.c:394 src/main/seq.c:398
-#: src/main/sort.c:1231 src/main/sort.c:1314 src/main/sort.c:1318
-#: src/main/sort.c:1325 src/main/sort.c:1400 src/main/source.c:223
-#: src/main/summary.c:954 src/main/sysutils.c:250 src/main/util.c:1050
-#: src/main/util.c:1055 src/main/util.c:1062 src/main/util.c:1065
-#: src/main/util.c:2034 src/modules/lapack/Lapack.c:940
-#: src/modules/X11/devX11.c:3137 src/modules/X11/devX11.c:3163
-#: src/modules/X11/devX11.c:3168 src/modules/X11/devX11.c:3173
-#: src/modules/X11/devX11.c:3183 src/modules/X11/devX11.c:3188
-#: src/modules/X11/devX11.c:3192 src/modules/X11/devX11.c:3196
+#: src/main/character.c:1554 src/main/connections.c:3546 src/main/context.c:655
+#: src/main/context.c:674 src/main/datetime.c:686 src/main/datetime.c:788
+#: src/main/datetime.c:1047 src/main/dotcode.c:220 src/main/errors.c:943
+#: src/main/errors.c:975 src/main/errors.c:1078 src/main/errors.c:1103
+#: src/main/errors.c:1108 src/main/errors.c:1381 src/main/identical.c:73
+#: src/main/identical.c:74 src/main/identical.c:75 src/main/identical.c:76
+#: src/main/identical.c:77 src/main/platform.c:3070 src/main/seq.c:193
+#: src/main/seq.c:340 src/main/seq.c:345 src/main/seq.c:349 src/main/seq.c:390
+#: src/main/seq.c:394 src/main/seq.c:398 src/main/sort.c:1231
+#: src/main/sort.c:1314 src/main/sort.c:1318 src/main/sort.c:1325
+#: src/main/sort.c:1400 src/main/source.c:223 src/main/summary.c:954
+#: src/main/sysutils.c:250 src/main/util.c:1050 src/main/util.c:1055
+#: src/main/util.c:1062 src/main/util.c:1065 src/main/util.c:2034
+#: src/modules/lapack/Lapack.c:940 src/modules/X11/devX11.c:3137
+#: src/modules/X11/devX11.c:3163 src/modules/X11/devX11.c:3168
+#: src/modules/X11/devX11.c:3173 src/modules/X11/devX11.c:3183
+#: src/modules/X11/devX11.c:3188 src/modules/X11/devX11.c:3192
+#: src/modules/X11/devX11.c:3196
 #, c-format
 msgid "invalid '%s' value"
 msgstr "niepoprawna wartość '%s'"
@@ -3703,13 +3703,15 @@ msgid ""
 "snapshot recorded with different graphics engine version (pre 11 - this is "
 "version %d)"
 msgstr ""
+"zrzut zapisany z inną wersją silnika grafiki (przed wersją 11 - to jest "
+"wersja %d)"
 
 #: src/main/engine.c:2898
 #, c-format
 msgid ""
 "snapshot recorded with different graphics engine version (%d - this is "
 "version %d)"
-msgstr ""
+msgstr "zrzut zapisany z inną wersją silnika grafiki (%d - to jest wersja %d)"
 
 #: src/main/engine.c:2977
 #, c-format
@@ -5631,7 +5633,7 @@ msgstr "'Rprofmem()': nie można otworzyć pliku wyjściowego '%s'"
 
 #: src/main/memory.c:3828
 msgid "'R_AllocStringBuffer( (size_t)-1 )' function is no longer allowed"
-msgstr ""
+msgstr "funkcja 'R_AllocStringBuffer( (size_t)-1 )' nie jest już dozwolona"
 
 #: src/main/memory.c:3845
 #, c-format
@@ -6511,9 +6513,9 @@ msgid "<environment: %p>"
 msgstr "<środowisko: %p>"
 
 #: src/main/printutils.c:397
-#, fuzzy, c-format
+#, c-format
 msgid "unsupported encoding (%d) in '%s' function"
-msgstr "niezaimplementowany typ %d w funkcji '%s'"
+msgstr "niewspierane kodowanie (%d) w funkcji '%s'"
 
 #: src/main/printutils.c:707
 msgid "it is not known that wchar_t is Unicode on this platform"
@@ -6852,8 +6854,7 @@ msgstr "niepoprawny wielobajtowy łańcuch formatujący"
 #: src/main/saveload.c:1385 src/main/saveload.c:1429 src/main/saveload.c:1497
 #: src/main/saveload.c:1506 src/main/serialize.c:356 src/main/serialize.c:363
 #: src/main/serialize.c:376 src/main/serialize.c:380 src/main/serialize.c:407
-#: src/main/serialize.c:423 src/main/serialize.c:2430
-#: src/main/serialize.c:2438
+#: src/main/serialize.c:423 src/main/serialize.c:2430 src/main/serialize.c:2438
 msgid "read error"
 msgstr "błąd odczytu"
 
@@ -7005,9 +7006,9 @@ msgstr "pojawił się błąd zapisu danych liczby zespolonej w xdr"
 msgid "an xdr complex data read error occurred"
 msgstr "pojawił się błąd odczytu danych liczby zespolonej w xdr"
 
-#: src/main/saveload.c:1782 src/main/serialize.c:1998
-#: src/main/serialize.c:2615 src/modules/internet/internet.c:513
-#: src/modules/internet/internet.c:588 src/modules/internet/internet.c:698
+#: src/main/saveload.c:1782 src/main/serialize.c:1998 src/main/serialize.c:2615
+#: src/modules/internet/internet.c:513 src/modules/internet/internet.c:588
+#: src/modules/internet/internet.c:698
 msgid "write failed"
 msgstr "zapis nie powiódł się"
 
@@ -7080,9 +7081,8 @@ msgstr "nie można zapisać w połączeniach w formacie w wersji %d"
 msgid "cannot save XDR format to a text-mode connection"
 msgstr "nie można zapisać formatu XDR w połączeniu w trybie tekstowym"
 
-#: src/main/saveload.c:2290 src/main/serialize.c:2106
-#: src/main/serialize.c:2120 src/main/serialize.c:2304
-#: src/main/serialize.c:2326
+#: src/main/saveload.c:2290 src/main/serialize.c:2106 src/main/serialize.c:2120
+#: src/main/serialize.c:2304 src/main/serialize.c:2326
 msgid "error writing to connection"
 msgstr "błąd zapisu do połączenia"
 
@@ -7826,8 +7826,8 @@ msgstr "niezgodne typy (z %s do %s) w przypisaniu '[['"
 
 #: src/main/subassign.c:1936 src/main/subscript.c:152 src/main/subscript.c:154
 #: src/main/subscript.c:283 src/main/subscript.c:285 src/main/subscript.c:912
-#: src/main/subscript.c:914 src/main/subscript.c:1009
-#: src/main/subscript.c:1011 src/main/subset.c:1153
+#: src/main/subscript.c:914 src/main/subscript.c:1009 src/main/subscript.c:1011
+#: src/main/subset.c:1153
 #, c-format
 msgid "invalid subscript type '%s'"
 msgstr "niepoprawny typ '%s' indeksu"
@@ -8498,9 +8498,9 @@ msgid "unsupported URL scheme"
 msgstr "niewspierany schemat adresu URL"
 
 #: src/modules/internet/internet.c:777 src/modules/internet/internet.c:946
-#, fuzzy, c-format
+#, c-format
 msgid "cannot open URL '%s': HTTP status was '%d %s'"
-msgstr "nie można otworzyć: uzyskany status HTTP to '%d %s'"
+msgstr "nie można otworzyć adresu URL '%s': status HTTP '%d %s'"
 
 #: src/modules/internet/internet.c:787 src/modules/internet/internet.c:962
 #: src/modules/internet/libcurl.c:381
@@ -8550,14 +8550,14 @@ msgid "InternetOpenUrl failed: '%s'"
 msgstr "'InternetOpenUrl' nie powiódł się: '%s'"
 
 #: src/modules/internet/libcurl.c:161
-#, fuzzy, c-format
+#, c-format
 msgid "URL '%s': status was '%d %s'"
-msgstr "nie można otworzyć: uzyskany status HTTP to '%d %s'"
+msgstr "Adres URL '%s': status '%d %s'"
 
 #: src/modules/internet/libcurl.c:165
 #, c-format
 msgid "URL '%s': status was '%s'"
-msgstr ""
+msgstr "Adres URL '%s': status '%s'"
 
 #: src/modules/internet/libcurl.c:242
 msgid "'curlGetHeaders()' function is not supported on this platform"
@@ -8607,9 +8607,9 @@ msgid "lengths of 'url' and 'destfile' arguments must match"
 msgstr "długości argumentów 'url' oraz 'destfile' muszą się zgadzać"
 
 #: src/modules/internet/libcurl.c:484
-#, fuzzy, c-format
+#, c-format
 msgid "URL %s: cannot open destfile '%s', reason '%s'"
-msgstr "nie można otworzyć docelowego pliku '%s', powód '%s'"
+msgstr "Adres URL %s: nie można otworzyć docelowego pliku '%s', powód '%s'"
 
 #: src/modules/internet/libcurl.c:533
 #, c-format
@@ -8622,17 +8622,14 @@ msgid "'curl_multi_wait()' function failed, code %d"
 msgstr "funkcja 'curl_multi_wait()' nie powiodła się, kod %d"
 
 #: src/modules/internet/libcurl.c:597
-#, fuzzy
 msgid "cannot download all files"
-msgstr "nie można otworzyć pliku '%s'"
+msgstr "nie można pobrać wszystkich plików"
 
 #: src/modules/internet/libcurl.c:717
-#, fuzzy
 msgid "cannot read from connection"
-msgstr "nie można czytać z tego połączenia"
+msgstr "nie można czytać z połączenia"
 
 #: src/modules/internet/libcurl.c:753
-#, fuzzy
 msgid "cannot open connection"
 msgstr "nie można otworzyć połączenia"
 

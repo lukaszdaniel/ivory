@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.4\n"
 "X-Poedit-Bookmarks: -1,232,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #. R/install.R: gettextf("## package without R code %s", sQuote(namespace))
@@ -3648,9 +3648,8 @@ msgstr "Wersja"
 
 #. R/QC.R: gettextf("Version contains large components (%s)", y)
 #: R/QC.R:0
-#, fuzzy
 msgid "Version contains large components (%s)"
-msgstr "Wersja zawiera wiodące zera (%s)"
+msgstr "Wersja zawiera duże komponenty (%s)"
 
 #. R/QC.R: gettextf("Version contains leading zeroes (%s)", y, domain = "R-tools")
 #: R/QC.R:0
@@ -4025,9 +4024,8 @@ msgstr "nie można utworzyć katalogu tymczasowego"
 
 #. R/install.R: stop("cannot create unique directory for build")
 #: R/install.R:0
-#, fuzzy
 msgid "cannot create unique directory for build"
-msgstr "nie można utworzyć katalogu %s"
+msgstr "nie można utworzyć unikalnego katalogu do stworzenia kompliacji"
 
 #. R/Rd.R: stop("cannot deal with Rd objects with missing/empty names")
 #: R/Rd.R:0

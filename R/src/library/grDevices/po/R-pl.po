@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.4\n"
 
 #. R/windows/windows.R: gettext("  #plot calls are:", domain = "R-grDevices")
 #: R/windows/windows.R:0
@@ -404,8 +404,8 @@ msgstr "oczekiwano rosnących wartości 'x' oraz 'y'"
 #. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/windows.R: gettextf("invalid '%s' argument", "filename")
-#: R/cairo.R:0 R/postscript.R:0 R/unix/png.R:0 R/unix/quartz.R:0
-#: R/unix/x11.R:0 R/windows/png.R:0 R/windows/windows.R:0
+#: R/cairo.R:0 R/postscript.R:0 R/unix/png.R:0 R/unix/quartz.R:0 R/unix/x11.R:0
+#: R/windows/png.R:0 R/windows/windows.R:0
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
 
@@ -606,19 +606,17 @@ msgstr "urządzenia ekranów nie powinny być używane w przykładach, itp."
 #. R/recordplot.R: stop("snapshot contains invalid graphics call")
 #: R/recordplot.R:0
 msgid "snapshot contains invalid graphics call"
-msgstr ""
+msgstr "zrzut zawiera niepoprawne wywołania grafiki"
 
 #. R/recordplot.R: gettextf("snapshot recorded in different R version (%s)", snapshotRversion)
 #: R/recordplot.R:0
-#, fuzzy
 msgid "snapshot recorded in different R version (%s)"
-msgstr "ładowanie zrzutu z innej sesji"
+msgstr "zrzut zapisany w innej wersji R (%s)"
 
 #. R/recordplot.R: warning("snapshot recorded in different R version (pre 3.3.0)")
 #: R/recordplot.R:0
-#, fuzzy
 msgid "snapshot recorded in different R version (pre 3.3.0)"
-msgstr "ładowanie zrzutu z innej sesji"
+msgstr "zrzut zapisany w innej wersji R (przed 3.3.0)"
 
 #. R/postscript.R: gettextf("status %d in running command '%s'", ret, cmd)
 #: R/postscript.R:0

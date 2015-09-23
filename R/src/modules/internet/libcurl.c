@@ -530,7 +530,7 @@ in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 	   curl_easy_setopt(hnd[i], CURLOPT_ACCEPT_ENCODING, "gzip, deflate");
 	*/
 
-	if (!quiet) REprintf(_("trying URL '%s'\n"), url);
+	if (!quiet) REprintf(_("Trying URL '%s'\n"), url);
     }
 
     R_Busy(1);
