@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 23:11+0200\n"
+"POT-Creation-Date: 2015-09-23 21:43+0200\n"
 "PO-Revision-Date: 2012-02-26 14:21+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: R-core <R-core@R-project.org> \n"
@@ -8556,6 +8556,7 @@ msgid "cannot open destfile '%s', reason '%s'"
 msgstr " 目標ファイル '%s' を開くことができません, 理由は '%s' です "
 
 #: src/modules/internet/internet.c:539 src/modules/internet/internet.c:663
+#: src/modules/internet/libcurl.c:533
 #, fuzzy, c-format
 msgid "Trying URL '%s'\n"
 msgstr " URL '%s' を試しています \n"
@@ -8700,11 +8701,6 @@ msgstr " インポートとエクスポート名の長さは一致しなけれ�
 #, fuzzy, c-format
 msgid "URL %s: cannot open destfile '%s', reason '%s'"
 msgstr " 目標ファイル '%s' を開くことができません, 理由は '%s' です "
-
-#: src/modules/internet/libcurl.c:533
-#, fuzzy, c-format
-msgid "trying URL '%s'\n"
-msgstr " URL '%s' を試しています \n"
 
 #: src/modules/internet/libcurl.c:543 src/modules/internet/libcurl.c:679
 #, c-format
@@ -8881,22 +8877,22 @@ msgstr ""
 msgid "Code %d, no content-type"
 msgstr ""
 
-#: src/modules/internet/Rhttpd.c:1187
+#: src/modules/internet/Rhttpd.c:1191
 #, fuzzy
 msgid "unable to create socket"
 msgstr " pixmap を作れません "
 
-#: src/modules/internet/Rhttpd.c:1205
+#: src/modules/internet/Rhttpd.c:1209
 #, fuzzy, c-format
 msgid "unable to bind socket to TCP port %d"
 msgstr " '%s' をポート %d でコネクトできません "
 
-#: src/modules/internet/Rhttpd.c:1211
+#: src/modules/internet/Rhttpd.c:1215
 #, fuzzy, c-format
 msgid "cannot listen to TCP port %d"
 msgstr " ポート %d から listen できませんでした "
 
-#: src/modules/internet/Rhttpd.c:1259
+#: src/modules/internet/Rhttpd.c:1263
 msgid "invalid bind address specification"
 msgstr " 不正なバインドアドレスです "
 
@@ -9893,6 +9889,10 @@ msgstr " X11 モジュールをロードできません "
 #: src/unix/X11.c:145 src/unix/X11.c:151 src/unix/X11.c:157 src/unix/X11.c:163
 msgid "X11 is not available"
 msgstr " X11 が利用できません "
+
+#, fuzzy
+#~ msgid "trying URL '%s'\n"
+#~ msgstr " URL '%s' を試しています \n"
 
 #~ msgid "non-numeric argument"
 #~ msgstr " 引数が数値でありません "

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 19:57+0100\n"
+"POT-Creation-Date: 2015-09-23 21:44+0200\n"
 "PO-Revision-Date: 2015-01-17 15:46+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team:  <gnustats@gmail.com>\n"
@@ -31,156 +31,156 @@ msgstr ""
 msgid "WARNING: child %d was to be removed but it doesn't exist\n"
 msgstr ""
 
-#: fork.c:153
+#: fork.c:152
 #, c-format
 msgid "child process %d got SIGUSR1; child_exit_status=%d\n"
 msgstr ""
 
-#: fork.c:168 fork.c:203
+#: fork.c:167 fork.c:202
 #, fuzzy, c-format
 msgid "child %d terminated with %d\n"
 msgstr "child %d가 존재하지 않습니다"
 
-#: fork.c:170 fork.c:205
+#: fork.c:169 fork.c:204
 #, fuzzy, c-format
 msgid "child %d terminated by signal %d\n"
 msgstr "child %d가 존재하지 않습니다"
 
-#: fork.c:251 fork.c:254
+#: fork.c:249 fork.c:252
 msgid "unable to create a pipe"
 msgstr "파이프를 생성할 수 없습니다"
 
-#: fork.c:257
+#: fork.c:255
 #, c-format
 msgid "parent[%d] created pipes: comm (%d->%d), sir (%d->%d)\n"
 msgstr ""
 
-#: fork.c:272
+#: fork.c:270
 #, c-format
 msgid "unable to fork, possible reason: %s"
 msgstr "포크할 수 없는데, 가능한 이유: %s"
 
-#: fork.c:299
+#: fork.c:297
 #, c-format
 msgid "child process %d started\n"
 msgstr ""
 
-#: fork.c:314
+#: fork.c:312
 #, c-format
 msgid "parent registers new child %d\n"
 msgstr ""
 
-#: fork.c:318
+#: fork.c:316
 msgid "memory allocation error"
 msgstr "메모리 할당 오류"
 
-#: fork.c:359
+#: fork.c:357
 msgid "descriptors must be integers"
 msgstr ""
 
-#: fork.c:371
+#: fork.c:369
 msgid "only children can send data to the master process"
 msgstr "오로지 children만이 데이터를 마스터 프로세스에 전송할 수 있습니다"
 
-#: fork.c:373
+#: fork.c:371
 msgid "there is no pipe to the master process"
 msgstr "마스터 프로세스로 연결된 파이프가 없습니다"
 
-#: fork.c:375
+#: fork.c:373
 msgid "content to send must be RAW, use serialize() if needed"
 msgstr ""
 "보내야할 컨텐츠는 반드시 RAW이어야 하며, 필요하다면 serialize()를 이용하세요"
 
-#: fork.c:379
+#: fork.c:377
 #, c-format
 msgid "child %d: send_master (%d bytes)\n"
 msgstr ""
 
-#: fork.c:384 fork.c:391 fork.c:715
+#: fork.c:382 fork.c:389 fork.c:713
 msgid "write error, closing pipe to the master"
 msgstr "쓰기 에러, 마스터에 연결된 파이프를 닫습니다"
 
-#: fork.c:404
+#: fork.c:402
 msgid "only the master process can send data to a child process"
 msgstr "오로지 마스터 프로세스만이 데이터를 자식 프로세스에 전송할 수 있습니다"
 
-#: fork.c:405
+#: fork.c:403
 msgid "what must be a raw vector"
 msgstr ""
 
-#: fork.c:411
+#: fork.c:409
 #, c-format
 msgid "child %d does not exist"
 msgstr "child %d가 존재하지 않습니다"
 
-#: fork.c:417
+#: fork.c:415
 msgid "write error"
 msgstr "쓰기 에러"
 
-#: fork.c:485 fork.c:609
+#: fork.c:483 fork.c:607
 #, c-format
 msgid "error '%s' in select"
 msgstr "선택하는 중에 에러 '%s'"
 
-#: fork.c:499
+#: fork.c:497
 #, c-format
 msgid " - read select %d children: "
 msgstr ""
 
-#: fork.c:522
+#: fork.c:520
 #, c-format
 msgid " read_child_ci(%d) - read length returned %d\n"
 msgstr ""
 
-#: fork.c:537
+#: fork.c:535
 #, c-format
 msgid " read_child_ci(%d) - read %d at %d returned %d\n"
 msgstr ""
 
-#: fork.c:570
+#: fork.c:568
 #, c-format
 msgid "read_child(%d) - pid is not in the list of children\n"
 msgstr ""
 
-#: fork.c:697
+#: fork.c:695
 #, fuzzy
 msgid "'mckill' failed"
 msgstr "mckill 실패했습니다"
 
-#: fork.c:705
+#: fork.c:703
 #, fuzzy, c-format
 msgid "child %d: 'mcexit' called\n"
 msgstr "mcexit 실패했습니다"
 
-#: fork.c:707
+#: fork.c:705
 #, fuzzy
 msgid "'mcexit' can only be used in a child process"
 msgstr "mcexit는 자식 프로세스에서만 오로지 사용될 수 있습니다"
 
-#: fork.c:719
+#: fork.c:717
 #, c-format
 msgid "child %d is waiting for permission to exit\n"
 msgstr ""
 
-#: fork.c:725
+#: fork.c:723
 #, fuzzy, c-format
 msgid "child %d: exiting\n"
 msgstr "child %d가 존재하지 않습니다"
 
-#: fork.c:728
+#: fork.c:726
 #, fuzzy
 msgid "'mcexit()' function failed"
 msgstr "mcexit 실패했습니다"
 
-#: fork.c:757 fork.c:766
+#: fork.c:755 fork.c:764
 msgid "invalid CPU affinity specification"
 msgstr ""
 
-#: fork.c:777
+#: fork.c:775
 msgid "requested CPU set is too large for this system"
 msgstr ""
 
-#: fork.c:800
+#: fork.c:798
 msgid "retrieving CPU affinity set failed"
 msgstr ""
 

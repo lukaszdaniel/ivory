@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 23:11+0200\n"
+"POT-Creation-Date: 2015-09-23 21:43+0200\n"
 "PO-Revision-Date: 2012-03-16 15:59+0100\n"
 "Last-Translator: \n"
 "Language-Team: Spanish <pabloemilio.verde@uni-duesseldorf.de>\n"
@@ -8683,6 +8683,7 @@ msgid "cannot open destfile '%s', reason '%s'"
 msgstr "no fue posible abrir el archivo '%s', motivo '%s'"
 
 #: src/modules/internet/internet.c:539 src/modules/internet/internet.c:663
+#: src/modules/internet/libcurl.c:533
 #, fuzzy, c-format
 msgid "Trying URL '%s'\n"
 msgstr "probando la URL '%s'\n"
@@ -8834,11 +8835,6 @@ msgstr "la longitud de los nombres de importación y exportación debe coincidir"
 #, fuzzy, c-format
 msgid "URL %s: cannot open destfile '%s', reason '%s'"
 msgstr "no fue posible abrir el archivo '%s', motivo '%s'"
-
-#: src/modules/internet/libcurl.c:533
-#, fuzzy, c-format
-msgid "trying URL '%s'\n"
-msgstr "probando la URL '%s'\n"
 
 #: src/modules/internet/libcurl.c:543 src/modules/internet/libcurl.c:679
 #, c-format
@@ -9016,22 +9012,22 @@ msgstr ""
 msgid "Code %d, no content-type"
 msgstr ""
 
-#: src/modules/internet/Rhttpd.c:1187
+#: src/modules/internet/Rhttpd.c:1191
 #, fuzzy
 msgid "unable to create socket"
 msgstr "imposible crear mapa de pixeles"
 
-#: src/modules/internet/Rhttpd.c:1205
+#: src/modules/internet/Rhttpd.c:1209
 #, fuzzy, c-format
 msgid "unable to bind socket to TCP port %d"
 msgstr "no fue posible conectarse a '%s' en el puerto %d."
 
-#: src/modules/internet/Rhttpd.c:1211
+#: src/modules/internet/Rhttpd.c:1215
 #, fuzzy, c-format
 msgid "cannot listen to TCP port %d"
 msgstr "no fue posible escuchar en el puerto %d"
 
-#: src/modules/internet/Rhttpd.c:1259
+#: src/modules/internet/Rhttpd.c:1263
 msgid "invalid bind address specification"
 msgstr "especificación del nombre de dirección no válido"
 
@@ -10038,6 +10034,10 @@ msgstr "módulo X11 no puede ser cargado"
 #: src/unix/X11.c:145 src/unix/X11.c:151 src/unix/X11.c:157 src/unix/X11.c:163
 msgid "X11 is not available"
 msgstr "X11 no está disponible"
+
+#, fuzzy
+#~ msgid "trying URL '%s'\n"
+#~ msgstr "probando la URL '%s'\n"
 
 #~ msgid "non-numeric argument"
 #~ msgstr "argumento no numérico"

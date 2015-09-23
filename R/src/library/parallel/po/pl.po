@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-16 19:57+0100\n"
+"POT-Creation-Date: 2015-09-23 21:44+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -26,153 +26,153 @@ msgstr "usuwanie dziecka %d\n"
 msgid "WARNING: child %d was to be removed but it doesn't exist\n"
 msgstr "OSTRZEŻENIE: dziecko %d miało być usunięte, ale nie istnieje\n"
 
-#: fork.c:153
+#: fork.c:152
 #, c-format
 msgid "child process %d got SIGUSR1; child_exit_status=%d\n"
 msgstr "proces potomny %d otrzymał SIGUSR1; child_exit_status=%d\n"
 
-#: fork.c:168 fork.c:203
+#: fork.c:167 fork.c:202
 #, c-format
 msgid "child %d terminated with %d\n"
 msgstr "dziecko %d przerwane z %d\n"
 
-#: fork.c:170 fork.c:205
+#: fork.c:169 fork.c:204
 #, c-format
 msgid "child %d terminated by signal %d\n"
 msgstr "dziecko %d przerwane przez sygnał %d\n"
 
-#: fork.c:251 fork.c:254
+#: fork.c:249 fork.c:252
 msgid "unable to create a pipe"
 msgstr "nie można utworzyć potoku"
 
-#: fork.c:257
+#: fork.c:255
 #, c-format
 msgid "parent[%d] created pipes: comm (%d->%d), sir (%d->%d)\n"
 msgstr "parent[%d] utworzył kanały: comm (%d->%d), sir (%d->%d)\n"
 
-#: fork.c:272
+#: fork.c:270
 #, c-format
 msgid "unable to fork, possible reason: %s"
 msgstr "nie można rozdzielić, prawdopodobny powód: %s"
 
-#: fork.c:299
+#: fork.c:297
 #, c-format
 msgid "child process %d started\n"
 msgstr "proces potomny %d rozpoczął się\n"
 
-#: fork.c:314
+#: fork.c:312
 #, c-format
 msgid "parent registers new child %d\n"
 msgstr "rodzic rejestruje nowe dziecko %d\n"
 
-#: fork.c:318
+#: fork.c:316
 msgid "memory allocation error"
 msgstr "błąd przydziału pamięci"
 
-#: fork.c:359
+#: fork.c:357
 msgid "descriptors must be integers"
 msgstr "deskryptory muszą być liczbami całkowitymi"
 
-#: fork.c:371
+#: fork.c:369
 msgid "only children can send data to the master process"
 msgstr "tylko potomne procesy mogą przesłać dane do procesu głównego"
 
-#: fork.c:373
+#: fork.c:371
 msgid "there is no pipe to the master process"
 msgstr "nie ma potoku do procesu głównego"
 
-#: fork.c:375
+#: fork.c:373
 msgid "content to send must be RAW, use serialize() if needed"
 msgstr ""
 "zawartość do wysłania musi być PUSTA, użyj 'serialize()' jeśli konieczne"
 
-#: fork.c:379
+#: fork.c:377
 #, c-format
 msgid "child %d: send_master (%d bytes)\n"
 msgstr "dziecko %d: send_master (%d bajtów)\n"
 
-#: fork.c:384 fork.c:391 fork.c:715
+#: fork.c:382 fork.c:389 fork.c:713
 msgid "write error, closing pipe to the master"
 msgstr "błąd zapisu, zamykanie potoku do procesu głównego"
 
-#: fork.c:404
+#: fork.c:402
 msgid "only the master process can send data to a child process"
 msgstr "tylko główny proces może przesłać dane do potomnego procesu"
 
-#: fork.c:405
+#: fork.c:403
 msgid "what must be a raw vector"
 msgstr "'what' musi być pustym wektorem"
 
-#: fork.c:411
+#: fork.c:409
 #, c-format
 msgid "child %d does not exist"
 msgstr "potomny proces %d nie istnieje"
 
-#: fork.c:417
+#: fork.c:415
 msgid "write error"
 msgstr "błąd zapisu"
 
-#: fork.c:485 fork.c:609
+#: fork.c:483 fork.c:607
 #, c-format
 msgid "error '%s' in select"
 msgstr "błąd '%s' przy wyborze"
 
-#: fork.c:499
+#: fork.c:497
 #, c-format
 msgid " - read select %d children: "
 msgstr " - przeczytaj wybrane %d dzieci: "
 
-#: fork.c:522
+#: fork.c:520
 #, c-format
 msgid " read_child_ci(%d) - read length returned %d\n"
 msgstr " read_child_ci(%d) - przeczytana długość zwróciła %d\n"
 
-#: fork.c:537
+#: fork.c:535
 #, c-format
 msgid " read_child_ci(%d) - read %d at %d returned %d\n"
 msgstr " read_child_ci(%d) - przeczytane %d w %d zwróciło %d\n"
 
-#: fork.c:570
+#: fork.c:568
 #, c-format
 msgid "read_child(%d) - pid is not in the list of children\n"
 msgstr "read_child(%d) - pid nie jest na liście dzieci\n"
 
-#: fork.c:697
+#: fork.c:695
 msgid "'mckill' failed"
 msgstr "'mckill' nie powiodło się"
 
-#: fork.c:705
+#: fork.c:703
 #, c-format
 msgid "child %d: 'mcexit' called\n"
 msgstr "dziecko %d: 'mcexit' zostało wywołane\n"
 
-#: fork.c:707
+#: fork.c:705
 msgid "'mcexit' can only be used in a child process"
 msgstr "'mcexit' może być użyty jedynie w potomnym procesie"
 
-#: fork.c:719
+#: fork.c:717
 #, c-format
 msgid "child %d is waiting for permission to exit\n"
 msgstr "dziecko %d oczekuje na pozwolenie by wyjść\n"
 
-#: fork.c:725
+#: fork.c:723
 #, c-format
 msgid "child %d: exiting\n"
 msgstr "dziecko %d: wychodzenie\n"
 
-#: fork.c:728
+#: fork.c:726
 msgid "'mcexit()' function failed"
 msgstr "funkcja 'mcexit()' nie powiodła się"
 
-#: fork.c:757 fork.c:766
+#: fork.c:755 fork.c:764
 msgid "invalid CPU affinity specification"
 msgstr "niepoprawne określenie koligacji CPU"
 
-#: fork.c:777
+#: fork.c:775
 msgid "requested CPU set is too large for this system"
 msgstr "zażądane ustawienie CPU jest zbyt duże dla tego systemu"
 
-#: fork.c:800
+#: fork.c:798
 msgid "retrieving CPU affinity set failed"
 msgstr "pozyskiwanie ustawienia koligacji CPU nie powiodło się"
 

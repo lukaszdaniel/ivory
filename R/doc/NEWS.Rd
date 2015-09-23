@@ -381,9 +381,16 @@
       \item When operating in a multibyte locale, \code{grep()}
       and related functions did not handle UTF-8 strings properly.
       (\PR{16264})
-      
+
       \item \code{read.dcf()} misread lines longer than 8191 characters.
       (Reported by Hervé Pagès with a patch.)
+
+      \item \code{within(df, ..)} no longer drops columns whose name
+      start with a \code{"."}.
+
+      \item The built-in \code{HTTP} server converted entire
+      \code{Content-Type} to lowercase including paramters which
+      can cause issues for multi-part form boundaries (\PR{16541}).
     }
   }
 }
