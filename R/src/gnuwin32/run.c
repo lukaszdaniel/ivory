@@ -613,7 +613,7 @@ static Rboolean Wpipe_open(Rconnection con)
 	warning("cannot open cmd `%s'", con->description);
 	return FALSE;
     }
-    ((RWpipeconn)(con->conprivate))->rp = rp;
+    ((RWpipeconn)(con->private))->rp = rp;
     con->isopen = TRUE;
     con->canwrite = io;
     con->canread = !con->canwrite;
@@ -625,19 +625,19 @@ static Rboolean Wpipe_open(Rconnection con)
 
 static void Wpipe_close(Rconnection con)
 {
-    con->status = rpipeClose( ((RWpipeconn)con->conprivate) ->rp);
+    con->status = rpipeClose( ((RWpipeconn)con->private) ->rp);
     con->isopen = FALSE;
 }
 
 static void Wpipe_destroy(Rconnection con)
 {
-    free(con->conprivate);
+    free(con->private);
 }
 
 
 static int Wpipe_fgetc(Rconnection con)
 {
-    rpipe *rp = ((RWpipeconn)con->conprivate) ->rp;
+    rpipe *rp = ((RWpipeconn)con->private) ->rp;
     int c;
 
     c = rpipeGetc(rp);
@@ -660,7 +660,7 @@ static int Wpipe_fflush(Rconnection con)
 {
     BOOL res;
 
-    rpipe *rp = ((RWpipeconn)con->conprivate) ->rp;
+    rpipe *rp = ((RWpipeconn)con->private) ->rp;
     res = FlushFileBuffers(rp->write);
     return res ? 0 : EOF;
 }
@@ -668,7 +668,7 @@ static int Wpipe_fflush(Rconnection con)
 static size_t Wpipe_read(void *ptr, size_t size, size_t nitems,
 			Rconnection con)
 {
-    rpipe *rp = ((RWpipeconn)con->conprivate) ->rp;
+    rpipe *rp = ((RWpipeconn)con->private) ->rp;
     DWORD ntoread, read;
 
     while (PeekNamedPipe(rp->read, NULL, 0, NULL, &ntoread, NULL)) {
@@ -689,7 +689,7 @@ static size_t Wpipe_read(void *ptr, size_t size, size_t nitems,
 static size_t Wpipe_write(const void *ptr, size_t size, size_t nitems,
 			 Rconnection con)
 {
-    rpipe *rp = ((RWpipeconn)con->conprivate) ->rp;
+    rpipe *rp = ((RWpipeconn)con->private) ->rp;
     DWORD towrite = nitems * size, write, ret;
 
     if(!rp->active) return 0;
@@ -770,8 +770,8 @@ Rconnection newWpipe(const char *description, int ienc, const char *mode)
     newconn->fflush = &Wpipe_fflush;
     newconn->read = &Wpipe_read;
     newconn->write = &Wpipe_write;
-    newconn->conprivate = (void *) malloc(sizeof(struct Wpipeconn));
-    if(!newconn->conprivate) {
+    newconn->private = (void *) malloc(sizeof(struct Wpipeconn));
+    if(!newconn->private) {
 	free(newconn->description); free(newconn->conclass); free(newconn);
 	error(_("allocation of pipe connection failed"));
     }
