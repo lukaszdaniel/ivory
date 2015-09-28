@@ -853,6 +853,9 @@ data.frame <-
     n <- length(iseq)
     if(n == 0L) n <- nrows
     p <- length(jseq)
+    if (is.null(value)) {
+        value <- list(NULL)
+    }
     m <- length(value)
     if(!is.list(value)) {
         if(p == 1L) {
@@ -930,7 +933,7 @@ data.frame <-
     ncolv <- dimv[2L]
     jvseq <- seq_len(p)
     if(ncolv < p) jvseq <- rep_len(seq_len(ncolv), p)
-    else if(ncolv > p) {
+    else if(p != 0L && ncolv > p) {
         warning(sprintf(ngettext(ncolv,
                                  "provided %d variable to replace %d variables",
                                  "provided %d variables to replace %d variables", domain = "R-base"),
