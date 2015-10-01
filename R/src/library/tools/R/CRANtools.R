@@ -384,19 +384,19 @@ function(mirrors, db = NULL)
               "Subject: CRAN mirrors maintained by you")
     len <- length(addresses)
     body <- c(if(len > 1L) {
-                  "Dear maintainers," #LUKI
+                  "Dear maintainers,"
               } else {
                   "Dear maintainer,"
               },
               "",
               strwrap(paste(if(length(mirrors) > 1L) {
-                                "This concerns the following CRAN mirrors" #LUKI
+                                "This concerns the following CRAN mirrors"
                             } else {
                                 "This concerns the following CRAN mirror"
                             },
-                            "maintained by", #LUKI
-                            if(len > 1L) "one of", #LUKI
-                            "you:")), #LUKI
+                            "maintained by",
+                            if(len > 1L) "one of",
+                            "you:")),
               "",
               paste0("  ", formatDL(mirrors, addresses, style = "list"))
               )
@@ -560,13 +560,13 @@ function(packages, db = NULL)
     lst <- split(db[ind, "Package"], db[ind, "Maintainer"])
     len <- length(addresses)
     body <- c(if(len > 1L) {
-                  "Dear maintainers," #LUKI
+                  "Dear maintainers,"
               } else {
                   "Dear maintainer,"
               },
               "",
               if(length(packages) > 1L) {
-                  "This concerns the CRAN packages" #LUKI
+                  "This concerns the CRAN packages"
               } else {
                   "This concerns the CRAN package"
               },
@@ -575,9 +575,9 @@ function(packages, db = NULL)
                             indent = 2L, exdent = 2L),
                     collapse = "\n"),
               "",
-              paste("maintained by", #LUKI
-                    if(len > 1L) "one of", #LUKI
-                    "you:"), #LUKI
+              paste("maintained by",
+                    if(len > 1L) "one of",
+                    "you:"),
               "",
               paste0("  ",
                      formatDL(vapply(lst, paste, "", collapse = " "),

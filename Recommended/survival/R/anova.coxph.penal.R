@@ -1,7 +1,7 @@
 # The first section of this is identical to anova.coxph
 anova.coxph.penal <- function (object, ...,  test = 'Chisq') {
-    if (!inherits(object, "coxph")) #LUKI
-        stop ("argument must be a cox model")
+    if (!inherits(object, "coxph"))
+        stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("coxph")))
 
     # All the ... args need to be coxph or coxme fits.  If any of them
     #  have a name attached, e.g., 'charlie=T' we assume a priori
@@ -11,25 +11,23 @@ anova.coxph.penal <- function (object, ...,  test = 'Chisq') {
     named <- if (is.null(names(dotargs))) 
 	           rep(FALSE, length(dotargs))
              else (names(dotargs) != "")
-    if (any(named))  #LUKI
-        warning(paste("The following arguments to anova.coxph(..)", 
-            "are invalid and dropped:", paste(deparse(dotargs[named]), 
-                collapse = ", ")))
+    if (any(named))
+        warning(gettext("The following arguments to anova.coxph(..) are invalid and dropped:", domain = "R-survival"), paste(deparse(dotargs[named]), collapse = ", "), domain = NA)
     dotargs <- dotargs[!named]
 
     if (length(dotargs) >0) {
         # Check that they are all cox or coxme models
         is.coxmodel <-unlist(lapply(dotargs, function(x) inherits(x, "coxph")))
         is.coxme <- unlist(lapply(dotargs, function(x) inherits(x, "coxme")))
-        if (!all(is.coxmodel | is.coxme)) #LUKI
-            stop("All arguments must be Cox models")
+        if (!all(is.coxmodel | is.coxme))
+            stop("all arguments must be an object of class %s or %s", dQuote("coxph"), dQuote("coxme"))
         
         if (any(is.coxme)) {
             # We need the anova.coxmelist function from coxme
             # If coxme is not loaded the line below returns NULL
             temp <- getS3method("anova", "coxmelist", optional=TRUE)
-            if (is.null(temp))  #LUKI
-                stop("a coxme model was found and library coxme is not loaded")
+            if (is.null(temp))
+                stop("a 'coxme' model was found and library 'coxme' is not loaded")
             else return(temp(c(list(object), dotargs), test = test))
         }
         else return(anova.coxphlist(c(list(object), dotargs), test = test))
@@ -46,8 +44,8 @@ anova.coxph.penal <- function (object, ...,  test = 'Chisq') {
     #  (which are the terms for which assign is really handy).  Use
     #  the model frame for the penalized terms, and assign for all the
     #  others.
-    if (length(object$rscore)>0) #LUKI
-        stop("Can't do anova tables with robust variances")
+    if (length(object$rscore)>0)
+        stop("cannot do anova tables with robust variances")
  
     has.strata <- !is.null(attr(terms(object), "specials")$strata)
     # The following line causes pspline terms to be re-evaluated correctly
@@ -107,10 +105,7 @@ anova.coxph.penal <- function (object, ...,  test = 'Chisq') {
         table[['Pr(>|Chi|)']] <- 1- pchisq(table$Chisq, table$Df)
         }
     row.names(table) <- c('NULL', attr(terms(object), "term.labels"))
- #LUKI
-    title <- paste("Analysis of Deviance Table\n Cox model: response is ",
-		   deparse(object$terms[[2]]),
-		   "\nTerms added sequentially (first to last)\n", 
-		   sep = "")
+
+    title <- gettextf("Analysis of Deviance Table\n Cox model: response is %s\nTerms added sequentially (first to last)\n", paste(deparse(object$terms[[2]]), sep = "", collapse = ""), domain = "R-survival")
     structure(table, heading = title, class = c("anova", "data.frame"))
 }
