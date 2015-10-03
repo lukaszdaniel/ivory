@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2 / nlme 3.1-105\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-11 12:11+0200\n"
+"POT-Creation-Date: 2015-10-01 21:12+0200\n"
 "PO-Revision-Date: 2012-10-04 19:53+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -33,34 +33,34 @@ msgstr "Unbekannte räumliche Korrelations-Klasse"
 msgid "First observation on an individual must have a dose"
 msgstr "Erste Beobachtung eines Individuums muss eine Dosis haben"
 
-#: nlmefit.c:371
+#: nlmefit.c:376
 #, fuzzy, c-format
 msgid "Singular precision matrix in level %ld, block %ld"
 msgstr "Singularität in backsolve auf Stufe %ld, Block %ld"
 
-#: nlmefit.c:402
+#: nlmefit.c:407
 #, c-format
 msgid "Singularity in backsolve at level %ld, block %ld"
 msgstr "Singularität in backsolve auf Stufe %ld, Block %ld"
 
-#: nlmefit.c:559
+#: nlmefit.c:564
 msgid "analytic gradient is not available with matrix logarithm"
 msgstr "analytischer Gradient ist nicht mit Matrixlogarithmus verfügbar"
 
-#: nlmefit.c:582
+#: nlmefit.c:587
 msgid "analytic gradient is not available with compound symmetry"
 msgstr ""
 "analytischer Gradient ist nicht mit zusammengesetzter Symmetrie verfügbar"
 
-#: nlmefit.c:862
+#: nlmefit.c:867
 msgid "Unable to form eigenvalue-eigenvector decomposition"
 msgstr "Unfähig eine Eigenwert-Eigenvektor-Zerlegung zu bilden"
 
-#: nlmefit.c:894
+#: nlmefit.c:899
 msgid "Unable to form Cholesky decomposition"
 msgstr "Unfähig eine Cholesky-Zerlegung zu bilden"
 
-#: nlmefit.c:925
+#: nlmefit.c:930
 msgid "Haven't written the compound symmetry case for this yet"
 msgstr ""
 "Fall von zusammengesetzter Symmetrie wurde für dies noch nicht geschrieben"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 23:12+0200\n"
+"POT-Creation-Date: 2015-10-01 21:11+0200\n"
 "PO-Revision-Date: 2011-03-26 08:54-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -101,7 +101,7 @@ msgid "no direct or inherited method for function '%s' for this call"
 msgstr ""
 "nenhum método direto ou obtido por herança para a função '%s' nessa chamada"
 
-#: methods_list_dispatch.c:521 methods_list_dispatch.c:1049
+#: methods_list_dispatch.c:521 methods_list_dispatch.c:1050
 msgid "invalid object (non-function) used as method"
 msgstr "objeto inválido (não-função) usado como método"
 
@@ -164,7 +164,7 @@ msgstr ""
 "o dispachamento deve ser um ambiente R; foi obtido um objeto de classe \"%s\""
 
 #: methods_list_dispatch.c:611 methods_list_dispatch.c:623
-#: methods_list_dispatch.c:999
+#: methods_list_dispatch.c:1000
 #, c-format
 msgid ""
 "error in evaluating the argument '%s' in selecting a method for function "
@@ -195,54 +195,54 @@ msgstr ""
 "erro interno em 'callNextMethod': '.nextMethod' não foi atribuído no escopo "
 "da chamada do método"
 
-#: methods_list_dispatch.c:697
+#: methods_list_dispatch.c:698
 #, c-format
 msgid "error in evaluating a 'primitive' next method: %s"
 msgstr "erro na avaliação de um próximo método 'primitive': %s"
 
-#: methods_list_dispatch.c:795
+#: methods_list_dispatch.c:796
 #, c-format
 msgid "'%s' must be a single string (got a character vector of length %d)"
 msgstr ""
 "'%s' deve ser uma única string (foi especificado um vetor de caracteres de "
 "comprimento %d)"
 
-#: methods_list_dispatch.c:799
+#: methods_list_dispatch.c:800
 #, c-format
 msgid "'%s' must be a non-empty string; got an empty string"
 msgstr "'%s' deve ser uma string não-vazia; foi obtida uma string vazia"
 
-#: methods_list_dispatch.c:803
+#: methods_list_dispatch.c:804
 #, c-format
 msgid "'%s' must be a single string (got an object of class \"%s\")"
 msgstr "'%s' deve ser uma string única (foi obtido um objeto da classe \"%s\")"
 
-#: methods_list_dispatch.c:836
+#: methods_list_dispatch.c:837
 msgid "The internal prefix (e.g., \"C\") for a meta-data object"
 msgstr ""
 
-#: methods_list_dispatch.c:838
+#: methods_list_dispatch.c:839
 msgid ""
 "The name of the object (e.g,. a class or generic function) to find in the "
 "meta-data"
 msgstr ""
 
-#: methods_list_dispatch.c:840
+#: methods_list_dispatch.c:841
 msgid "The name of the package for a meta-data object"
 msgstr ""
 
-#: methods_list_dispatch.c:879
+#: methods_list_dispatch.c:880
 #, fuzzy
 msgid "class should be either a character-string name or a class definition"
 msgstr ""
 "Class deve ser ou um nome cadeia de caracteres ou uma definição de classe"
 
-#: methods_list_dispatch.c:959
+#: methods_list_dispatch.c:960
 #, fuzzy, c-format
 msgid "failed to get the generic for the primitive \"%s\""
 msgstr "Falha ao obter a genérica primitiva '%s"
 
-#: methods_list_dispatch.c:965
+#: methods_list_dispatch.c:966
 #, fuzzy, c-format
 msgid ""
 "expected a generic function or a primitive for dispatch, got an object of "
@@ -251,7 +251,7 @@ msgstr ""
 "Esperada uma função genérica ou uma primitiva para despachamento, mas foi "
 "obtido um objeto de classe \"%s\""
 
-#: methods_list_dispatch.c:977
+#: methods_list_dispatch.c:978
 #, fuzzy, c-format
 msgid ""
 "generic \"%s\" seems not to have been initialized for table dispatch---need "
@@ -260,7 +260,7 @@ msgstr ""
 "Genérica \"%s\" aparenta não ter sido inicializada para despachamento de "
 "tabela -- precisa ter um .SigArgs e .AllMtable atributos no seu ambiente"
 
-#: methods_list_dispatch.c:981
+#: methods_list_dispatch.c:982
 msgid "'.SigArgs' is shorter than '.SigLength' says it should be"
 msgstr ""
 

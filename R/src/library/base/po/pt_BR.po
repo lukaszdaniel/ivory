@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-23 21:43+0200\n"
+"POT-Creation-Date: 2015-10-01 21:10+0200\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -663,7 +663,7 @@ msgstr "problema ao mostrar '%s'"
 #: src/main/grep.c:1527 src/main/grep.c:1532 src/main/grep.c:2340
 #: src/main/grep.c:2345 src/main/grep.c:2647 src/main/grep.c:2652
 #: src/main/internet.c:209 src/main/internet.c:223 src/main/internet.c:241
-#: src/main/internet.c:253 src/main/internet.c:265 src/main/internet.c:284
+#: src/main/internet.c:254 src/main/internet.c:266 src/main/internet.c:285
 #: src/main/memory.c:3805 src/main/names.c:1309 src/main/names.c:1312
 #: src/main/objects.c:1600 src/main/objects.c:1602 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
@@ -5031,16 +5031,21 @@ msgstr "rotinas de internet não podem ser acessadas dentro do módulo"
 #: src/main/internet.c:95 src/main/internet.c:107 src/main/internet.c:120
 #: src/main/internet.c:131 src/main/internet.c:142 src/main/internet.c:153
 #: src/main/internet.c:162 src/main/internet.c:173 src/main/internet.c:184
-#: src/main/internet.c:193 src/main/internet.c:203 src/main/internet.c:318
-#: src/main/internet.c:330 src/main/internet.c:342 src/main/internet.c:354
+#: src/main/internet.c:193 src/main/internet.c:203 src/main/internet.c:319
+#: src/main/internet.c:331 src/main/internet.c:343 src/main/internet.c:355
 msgid "internet routines cannot be loaded"
 msgstr "rotinas de internet não podem ser carregadas"
 
-#: src/main/internet.c:217 src/main/internet.c:231 src/main/internet.c:247
-#: src/main/internet.c:259 src/main/internet.c:273 src/main/internet.c:293
-#: src/main/internet.c:306
+#: src/main/internet.c:217 src/main/internet.c:231 src/main/internet.c:248
+#: src/main/internet.c:260 src/main/internet.c:274 src/main/internet.c:294
+#: src/main/internet.c:307
 msgid "socket routines cannot be loaded"
 msgstr "rotinas de soquete não podem ser carregadas"
+
+#: src/main/internet.c:243
+#, fuzzy
+msgid "attempt to close invalid socket"
+msgstr "tentativa de especificar um atributo 'comment' inválido"
 
 #: src/main/lapack.c:40
 #, fuzzy
@@ -8175,10 +8180,12 @@ msgstr ""
 msgid "unsupported conversion from '%s' to '%s' in codepage %d"
 msgstr ""
 
+# vide http://www.feferraz.net/br/P/Comentarios_Traducao_R-Project
 #: src/main/sysutils.c:651
 #, fuzzy
-msgid "'x' argument must be a list of NULL or raw vectors"
-msgstr "'x' deve ser um vetor de caracteres"
+msgid ""
+"'x' argument must be a character vector or a list of NULL or raw vectors"
+msgstr "argumento deve ser um vetor de caracteres ou um vetor raw"
 
 #: src/main/sysutils.c:729 src/main/sysutils.c:925 src/main/sysutils.c:942
 #: src/main/sysutils.c:958 src/main/sysutils.c:1035
@@ -9952,6 +9959,10 @@ msgid "X11 is not available"
 msgstr "X11 não está disponível"
 
 #, fuzzy
+#~ msgid "'x' argument must be a list of NULL or raw vectors"
+#~ msgstr "'x' deve ser um vetor de caracteres"
+
+#, fuzzy
 #~ msgid "trying URL '%s'\n"
 #~ msgstr "tentando a URL '%s'\n"
 
@@ -11162,10 +11173,6 @@ msgstr "X11 não está disponível"
 
 #~ msgid "Select one"
 #~ msgstr "Selecione um"
-
-# vide http://www.feferraz.net/br/P/Comentarios_Traducao_R-Project
-#~ msgid "argument must be a character vector or a raw vector"
-#~ msgstr "argumento deve ser um vetor de caracteres ou um vetor raw"
 
 #~ msgid "'default' must be a character string"
 #~ msgstr "'default' deve ser uma string de caracteres"

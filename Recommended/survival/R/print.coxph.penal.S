@@ -108,10 +108,10 @@ print.coxph.penal <-  function(x, terms=FALSE, maxlabel=25,
 #	"  Penalty = ", format(x$penalty), "\n")
     omit <- x$na.action
     if (length(omit)) {
-    cat(gettextf("Likelihood ratio test=%s on %s df, p=%s n=%d", format(round(logtest, 2)), format(round(df,2)), format(1 - pchisq(logtest, df)), x$n, domain = "R-survival"), " (", naprint(omit), ")", "\n",  sep = "")
+    cat(gettextf("Likelihood ratio test = %s on %s df, p=%s n=%d", format(round(logtest, 2)), format(round(df,2)), format(1 - pchisq(logtest, df)), x$n, domain = "R-survival"), " (", naprint(omit), ")", "\n",  sep = "")
     }
     else {
-    cat(gettextf("Likelihood ratio test=%s on %s df, p=%s n=%d", format(round(logtest, 2)), format(round(df,2)), format(1 - pchisq(logtest, df)), x$n, domain = "R-survival"), "\n", sep = "")
+    cat(gettextf("Likelihood ratio test = %s on %s df, p=%s n=%d", format(round(logtest, 2)), format(round(df,2)), format(1 - pchisq(logtest, df)), x$n, domain = "R-survival"), "\n", sep = "")
 	}
     invisible()
     }

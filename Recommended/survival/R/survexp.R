@@ -75,7 +75,7 @@ survexp <- function(formula, data,
     weights <- model.extract(m, 'weights')
     if (length(weights) ==0) weights <- rep(1.0, n)
     if (class(ratetable)=='ratetable' && any(weights !=1))
-        warning("weights ignored")
+        warning(gettextf("weights are ignored in '%s' function", "survexp()"))
 
     if (any(attr(Terms, 'order') >1))
             stop("'survexp()' cannot have interaction terms")

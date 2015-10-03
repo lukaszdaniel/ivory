@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-23 21:43+0200\n"
+"POT-Creation-Date: 2015-10-01 21:10+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.8.3\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-Bookmarks: -1,736,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: src/appl/lbfgsb.c:683 src/appl/lbfgsb.c:755
@@ -667,7 +667,7 @@ msgstr "problem z wyświetleniem pliku '%ls'"
 #: src/main/grep.c:1527 src/main/grep.c:1532 src/main/grep.c:2340
 #: src/main/grep.c:2345 src/main/grep.c:2647 src/main/grep.c:2652
 #: src/main/internet.c:209 src/main/internet.c:223 src/main/internet.c:241
-#: src/main/internet.c:253 src/main/internet.c:265 src/main/internet.c:284
+#: src/main/internet.c:254 src/main/internet.c:266 src/main/internet.c:285
 #: src/main/memory.c:3805 src/main/names.c:1309 src/main/names.c:1312
 #: src/main/objects.c:1600 src/main/objects.c:1602 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
@@ -4921,16 +4921,20 @@ msgstr "procedury internetowe nie są dostępne w module"
 #: src/main/internet.c:95 src/main/internet.c:107 src/main/internet.c:120
 #: src/main/internet.c:131 src/main/internet.c:142 src/main/internet.c:153
 #: src/main/internet.c:162 src/main/internet.c:173 src/main/internet.c:184
-#: src/main/internet.c:193 src/main/internet.c:203 src/main/internet.c:318
-#: src/main/internet.c:330 src/main/internet.c:342 src/main/internet.c:354
+#: src/main/internet.c:193 src/main/internet.c:203 src/main/internet.c:319
+#: src/main/internet.c:331 src/main/internet.c:343 src/main/internet.c:355
 msgid "internet routines cannot be loaded"
 msgstr "procedury internetowe nie mogą zostać załadowane"
 
-#: src/main/internet.c:217 src/main/internet.c:231 src/main/internet.c:247
-#: src/main/internet.c:259 src/main/internet.c:273 src/main/internet.c:293
-#: src/main/internet.c:306
+#: src/main/internet.c:217 src/main/internet.c:231 src/main/internet.c:248
+#: src/main/internet.c:260 src/main/internet.c:274 src/main/internet.c:294
+#: src/main/internet.c:307
 msgid "socket routines cannot be loaded"
 msgstr "procedury 'socket' nie mogą zostać załadowane"
+
+#: src/main/internet.c:243
+msgid "attempt to close invalid socket"
+msgstr "próba zamknięcia niepoprawnego gniazda"
 
 #: src/main/lapack.c:40
 msgid "LAPACK routines cannot be accessed in module"
@@ -8061,8 +8065,11 @@ msgid "unsupported conversion from '%s' to '%s' in codepage %d"
 msgstr "niewspierana konwersja z '%s' do '%s' w stronie kodowej %d"
 
 #: src/main/sysutils.c:651
-msgid "'x' argument must be a list of NULL or raw vectors"
-msgstr "argument 'x' musi być listą z wartościami NULL lub pustymi wektorami"
+msgid ""
+"'x' argument must be a character vector or a list of NULL or raw vectors"
+msgstr ""
+"argument 'x' musi być wektorem tekstowym lub listą z wartościami NULL lub "
+"pustymi wektorami"
 
 #: src/main/sysutils.c:729 src/main/sysutils.c:925 src/main/sysutils.c:942
 #: src/main/sysutils.c:958 src/main/sysutils.c:1035

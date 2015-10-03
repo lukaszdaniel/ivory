@@ -20,7 +20,7 @@ anova.coxph.penal <- function (object, ...,  test = 'Chisq') {
         is.coxmodel <-unlist(lapply(dotargs, function(x) inherits(x, "coxph")))
         is.coxme <- unlist(lapply(dotargs, function(x) inherits(x, "coxme")))
         if (!all(is.coxmodel | is.coxme))
-            stop("all arguments must be an object of class %s or %s", dQuote("coxph"), dQuote("coxme"))
+            stop(gettextf("all arguments must be an objects of class %s or %s", dQuote("coxph"), dQuote("coxme")))
         
         if (any(is.coxme)) {
             # We need the anova.coxmelist function from coxme

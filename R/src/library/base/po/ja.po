@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-23 21:43+0200\n"
+"POT-Creation-Date: 2015-10-01 21:10+0200\n"
 "PO-Revision-Date: 2012-02-26 14:21+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: R-core <R-core@R-project.org> \n"
@@ -656,7 +656,7 @@ msgstr " '%s'の表示に問題があります "
 #: src/main/grep.c:1527 src/main/grep.c:1532 src/main/grep.c:2340
 #: src/main/grep.c:2345 src/main/grep.c:2647 src/main/grep.c:2652
 #: src/main/internet.c:209 src/main/internet.c:223 src/main/internet.c:241
-#: src/main/internet.c:253 src/main/internet.c:265 src/main/internet.c:284
+#: src/main/internet.c:254 src/main/internet.c:266 src/main/internet.c:285
 #: src/main/memory.c:3805 src/main/names.c:1309 src/main/names.c:1312
 #: src/main/objects.c:1600 src/main/objects.c:1602 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
@@ -5002,16 +5002,21 @@ msgstr " モジュール中でインターネットルーチンがアクセス�
 #: src/main/internet.c:95 src/main/internet.c:107 src/main/internet.c:120
 #: src/main/internet.c:131 src/main/internet.c:142 src/main/internet.c:153
 #: src/main/internet.c:162 src/main/internet.c:173 src/main/internet.c:184
-#: src/main/internet.c:193 src/main/internet.c:203 src/main/internet.c:318
-#: src/main/internet.c:330 src/main/internet.c:342 src/main/internet.c:354
+#: src/main/internet.c:193 src/main/internet.c:203 src/main/internet.c:319
+#: src/main/internet.c:331 src/main/internet.c:343 src/main/internet.c:355
 msgid "internet routines cannot be loaded"
 msgstr " インターネットルーチンがロードできません "
 
-#: src/main/internet.c:217 src/main/internet.c:231 src/main/internet.c:247
-#: src/main/internet.c:259 src/main/internet.c:273 src/main/internet.c:293
-#: src/main/internet.c:306
+#: src/main/internet.c:217 src/main/internet.c:231 src/main/internet.c:248
+#: src/main/internet.c:260 src/main/internet.c:274 src/main/internet.c:294
+#: src/main/internet.c:307
 msgid "socket routines cannot be loaded"
 msgstr " ソケットルーチンがロードできません "
+
+#: src/main/internet.c:243
+#, fuzzy
+msgid "attempt to close invalid socket"
+msgstr " 不正な 'comment' 属性を設定しようとしました "
 
 #: src/main/lapack.c:40
 #, fuzzy
@@ -8130,8 +8135,9 @@ msgstr ""
 
 #: src/main/sysutils.c:651
 #, fuzzy
-msgid "'x' argument must be a list of NULL or raw vectors"
-msgstr " 'x' はNULLまたはraw vectorからなるリストでなくてはなりません "
+msgid ""
+"'x' argument must be a character vector or a list of NULL or raw vectors"
+msgstr " 引数は、文字ベクトルまたはローベクトルでなければなりません "
 
 #: src/main/sysutils.c:729 src/main/sysutils.c:925 src/main/sysutils.c:942
 #: src/main/sysutils.c:958 src/main/sysutils.c:1035
@@ -9891,6 +9897,10 @@ msgid "X11 is not available"
 msgstr " X11 が利用できません "
 
 #, fuzzy
+#~ msgid "'x' argument must be a list of NULL or raw vectors"
+#~ msgstr " 'x' はNULLまたはraw vectorからなるリストでなくてはなりません "
+
+#, fuzzy
 #~ msgid "trying URL '%s'\n"
 #~ msgstr " URL '%s' を試しています \n"
 
@@ -11103,9 +11113,6 @@ msgstr " X11 が利用できません "
 
 #~ msgid "Select one"
 #~ msgstr " １つを選択してください "
-
-#~ msgid "argument must be a character vector or a raw vector"
-#~ msgstr " 引数は、文字ベクトルまたはローベクトルでなければなりません "
 
 #~ msgid "'default' must be a character string"
 #~ msgstr " 'default' は文字列でなければなりません "

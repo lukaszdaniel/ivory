@@ -43,7 +43,7 @@ clogit<-function(formula, data, weights, subset, na.action,
                              "breslow")
     if (!is.null(coxcall$weights)) {
         coxcall$weights <- NULL
-        warning("weights are ignored in 'clogit()'")
+        warning(gettextf("weights are ignored in '%s' function","clogit()"))
     }
     coxcall<-eval(coxcall, sys.frame(sys.parent()))
     coxcall$userCall<-sys.call()

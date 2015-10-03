@@ -23,14 +23,14 @@ anova.coxph <- function (object, ...,  test = 'Chisq') {
         is.coxmodel <-unlist(lapply(dotargs, function(x) inherits(x, "coxph")))
         is.coxme <- unlist(lapply(dotargs, function(x) inherits(x, "coxme")))
         if (!all(is.coxmodel | is.coxme))
-            stop("all arguments must be an objects of class \"coxph\" or \"coxme\"")
+            stop(gettextf("all arguments must be an objects of class %s or %s", dQuote("coxph"), dQuote("coxme")))
         
         if (any(is.coxme)) {
             # We need the anova.coxmelist function from coxme
             # If coxme is not loaded the line below returns NULL
             temp <- getS3method("anova", "coxmelist", optional=TRUE)
             if (is.null(temp)) 
-                stop("a coxme model was found and library coxme is not loaded")
+                stop("a 'coxme' model was found and library 'coxme' is not loaded")
             else return(temp(c(list(object), dotargs), test = test))
         }
         else return(anova.coxphlist(c(list(object), dotargs), test = test))

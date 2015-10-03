@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-23 21:43+0200\n"
+"POT-Creation-Date: 2015-10-01 21:10+0200\n"
 "PO-Revision-Date: 2015-01-17 13:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -656,7 +656,7 @@ msgstr "在显示'%s'时出了问题"
 #: src/main/grep.c:1527 src/main/grep.c:1532 src/main/grep.c:2340
 #: src/main/grep.c:2345 src/main/grep.c:2647 src/main/grep.c:2652
 #: src/main/internet.c:209 src/main/internet.c:223 src/main/internet.c:241
-#: src/main/internet.c:253 src/main/internet.c:265 src/main/internet.c:284
+#: src/main/internet.c:254 src/main/internet.c:266 src/main/internet.c:285
 #: src/main/memory.c:3805 src/main/names.c:1309 src/main/names.c:1312
 #: src/main/objects.c:1600 src/main/objects.c:1602 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
@@ -4939,16 +4939,21 @@ msgstr "无法读写模块里的互联网例行程序"
 #: src/main/internet.c:95 src/main/internet.c:107 src/main/internet.c:120
 #: src/main/internet.c:131 src/main/internet.c:142 src/main/internet.c:153
 #: src/main/internet.c:162 src/main/internet.c:173 src/main/internet.c:184
-#: src/main/internet.c:193 src/main/internet.c:203 src/main/internet.c:318
-#: src/main/internet.c:330 src/main/internet.c:342 src/main/internet.c:354
+#: src/main/internet.c:193 src/main/internet.c:203 src/main/internet.c:319
+#: src/main/internet.c:331 src/main/internet.c:343 src/main/internet.c:355
 msgid "internet routines cannot be loaded"
 msgstr "无法载入互联网例行程序"
 
-#: src/main/internet.c:217 src/main/internet.c:231 src/main/internet.c:247
-#: src/main/internet.c:259 src/main/internet.c:273 src/main/internet.c:293
-#: src/main/internet.c:306
+#: src/main/internet.c:217 src/main/internet.c:231 src/main/internet.c:248
+#: src/main/internet.c:260 src/main/internet.c:274 src/main/internet.c:294
+#: src/main/internet.c:307
 msgid "socket routines cannot be loaded"
 msgstr "无法载入插坐例行程序"
+
+#: src/main/internet.c:243
+#, fuzzy
+msgid "attempt to close invalid socket"
+msgstr "无法设定'comment'属性"
 
 #: src/main/lapack.c:40
 #, fuzzy
@@ -8016,8 +8021,9 @@ msgstr "不支持代码页%3$d里从'%1$s'到'%2$s'的这种转换"
 
 #: src/main/sysutils.c:651
 #, fuzzy
-msgid "'x' argument must be a list of NULL or raw vectors"
-msgstr "'x'必需是NULL串列或原始矢量"
+msgid ""
+"'x' argument must be a character vector or a list of NULL or raw vectors"
+msgstr "参数必需是长度为一的字符矢量或原始矢量"
 
 #: src/main/sysutils.c:729 src/main/sysutils.c:925 src/main/sysutils.c:942
 #: src/main/sysutils.c:958 src/main/sysutils.c:1035
@@ -9748,6 +9754,10 @@ msgid "X11 is not available"
 msgstr "没有X11平台这一功能"
 
 #, fuzzy
+#~ msgid "'x' argument must be a list of NULL or raw vectors"
+#~ msgstr "'x'必需是NULL串列或原始矢量"
+
+#, fuzzy
 #~ msgid "trying URL '%s'\n"
 #~ msgstr "试开URL’%s'\n"
 
@@ -10936,9 +10946,6 @@ msgstr "没有X11平台这一功能"
 
 #~ msgid "Select one"
 #~ msgstr "选择一个: "
-
-#~ msgid "argument must be a character vector or a raw vector"
-#~ msgstr "参数必需是长度为一的字符矢量或原始矢量"
 
 #~ msgid "'default' must be a character string"
 #~ msgstr "'default'必需为字符串"

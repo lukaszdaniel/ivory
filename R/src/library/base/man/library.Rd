@@ -106,10 +106,11 @@ require(package, lib.loc = NULL, quietly = FALSE,
   session it is an error to use such a package whose license has not
   already been accepted.
 
-  Free or Open Source Software (FOSS, e.g.,
-  \url{https://en.wikipedia.org/wiki/FOSS}) packages are determined by
-  the same filters used by \code{\link{available.packages}} but applied
-  to just the current package, not its dependencies.
+  Free or Open Source Software (FOSS,
+  e.g.\sspace{}\url{https://en.wikipedia.org/wiki/FOSS}) packages are
+  determined by the same filters used by
+  \code{\link{available.packages}} but applied to just the current
+  package, not its dependencies.
 
   There can also be a site-wide file \file{R_HOME/etc/licensed.site} of
   packages (one per line).

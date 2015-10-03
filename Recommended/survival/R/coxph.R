@@ -152,7 +152,7 @@ coxph <- function(formula, data, weights, subset, na.action,
         robust <- TRUE  #flag to later compute a robust variance
         tempc <- untangle.specials(Terms, 'cluster', 1:10)
         ord <- attr(Terms, 'order')[tempc$terms]
-        if (any(ord>1)) stop("Cluster cannot be used in an interaction")
+        if (any(ord>1)) stop("cluster cannot be used in an interaction")
         cluster <- strata(mf[,tempc$vars], shortlabel=TRUE)  #allow multiples
         dropterms <- tempc$terms  #we won't want this in the X matrix
         # Save away xlevels after removing cluster (we don't want to save upteen
@@ -219,7 +219,7 @@ coxph <- function(formula, data, weights, subset, na.action,
     contr.save <- attr(X, "contrasts")
     if (missing(init)) init <- NULL
     else {
-        if (length(init) != ncol(X)) stop("wrong length for 'init' argument")
+        if (length(init) != ncol(X)) stop(gettextf("wrong length for '%s' argument", "init"))
         temp <- X %*% init - sum(colMeans(X) * init)
         if (any(temp < .Machine$double.min.exp | temp > .Machine$double.max.exp))
             stop("initial values lead to overflow or underflow of the exp function")

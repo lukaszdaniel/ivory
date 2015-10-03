@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.3-10\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-07-29 22:15\n"
+"POT-Creation-Date: 2015-10-01 21:12\n"
 "PO-Revision-Date: 2005-12-09 09:13+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -495,6 +495,7 @@ msgstr ""
 msgid "Additive model + factor"
 msgstr ""
 
+#. R/bam.r: warning("Algorithm did not converge")
 #. R/bam.r: warning("Algorithm did not converge")
 #. R/bam.r: warning("Algorithm did not converge")
 #. R/gam.fit3.r: warning("Algorithm did not converge")
@@ -1388,12 +1389,6 @@ msgstr "Vous n'avez aucun modle..."
 #, fuzzy
 msgid "a parametric penalty has wrong dimension"
 msgstr "H a des mauvaises dimensions"
-
-#. R/bam.r: warning("algorithm did not converge")
-#: R/bam.r:0
-#, fuzzy
-msgid "algorithm did not converge"
-msgstr "L'algorithme n'a pas converg"
 
 #. R/gamm.r: stop("all elements of random list must be named")
 #: R/gamm.r:0
@@ -2602,6 +2597,10 @@ msgid "Smoothing parameter selection converged after %d iteration."
 msgid_plural "Smoothing parameter selection converged after %d iterations."
 msgstr[0] ""
 msgstr[1] ""
+
+#, fuzzy
+#~ msgid "algorithm did not converge"
+#~ msgstr "L'algorithme n'a pas converg"
 
 #, fuzzy
 #~ msgid "by.resids argument not supported"

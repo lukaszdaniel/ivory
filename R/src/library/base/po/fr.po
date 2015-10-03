@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-23 21:43+0200\n"
+"POT-Creation-Date: 2015-10-01 21:10+0200\n"
 "PO-Revision-Date: 2014-01-23 07:50+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -663,7 +663,7 @@ msgstr "problème lors de l'affichage de '%s'"
 #: src/main/grep.c:1527 src/main/grep.c:1532 src/main/grep.c:2340
 #: src/main/grep.c:2345 src/main/grep.c:2647 src/main/grep.c:2652
 #: src/main/internet.c:209 src/main/internet.c:223 src/main/internet.c:241
-#: src/main/internet.c:253 src/main/internet.c:265 src/main/internet.c:284
+#: src/main/internet.c:254 src/main/internet.c:266 src/main/internet.c:285
 #: src/main/memory.c:3805 src/main/names.c:1309 src/main/names.c:1312
 #: src/main/objects.c:1600 src/main/objects.c:1602 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
@@ -5104,17 +5104,22 @@ msgstr "les routines internet ne sont pas accessibles dans ce module"
 #: src/main/internet.c:95 src/main/internet.c:107 src/main/internet.c:120
 #: src/main/internet.c:131 src/main/internet.c:142 src/main/internet.c:153
 #: src/main/internet.c:162 src/main/internet.c:173 src/main/internet.c:184
-#: src/main/internet.c:193 src/main/internet.c:203 src/main/internet.c:318
-#: src/main/internet.c:330 src/main/internet.c:342 src/main/internet.c:354
+#: src/main/internet.c:193 src/main/internet.c:203 src/main/internet.c:319
+#: src/main/internet.c:331 src/main/internet.c:343 src/main/internet.c:355
 msgid "internet routines cannot be loaded"
 msgstr "les routines internet ne peuvent pas être chargées"
 
-#: src/main/internet.c:217 src/main/internet.c:231 src/main/internet.c:247
-#: src/main/internet.c:259 src/main/internet.c:273 src/main/internet.c:293
-#: src/main/internet.c:306
+#: src/main/internet.c:217 src/main/internet.c:231 src/main/internet.c:248
+#: src/main/internet.c:260 src/main/internet.c:274 src/main/internet.c:294
+#: src/main/internet.c:307
 msgid "socket routines cannot be loaded"
 msgstr ""
 "les routines de connecteurs logiciels (sockets) ne peuvent pas être chargées"
+
+#: src/main/internet.c:243
+#, fuzzy
+msgid "attempt to close invalid socket"
+msgstr "tentative de changer l'attribut 'comment' à une valeur incorrecte"
 
 #: src/main/lapack.c:40
 #, fuzzy
@@ -8309,8 +8314,9 @@ msgstr "conversion de '%s' vers '%s' dans la page de code %d indisponible"
 
 #: src/main/sysutils.c:651
 #, fuzzy
-msgid "'x' argument must be a list of NULL or raw vectors"
-msgstr "'x' doit être une list de vecteurs NULL ou \"raw\""
+msgid ""
+"'x' argument must be a character vector or a list of NULL or raw vectors"
+msgstr "l'argument doit être un vecteur de caractères ou un vecteur 'raw'"
 
 #: src/main/sysutils.c:729 src/main/sysutils.c:925 src/main/sysutils.c:942
 #: src/main/sysutils.c:958 src/main/sysutils.c:1035
@@ -10095,6 +10101,10 @@ msgid "X11 is not available"
 msgstr "X11 indisponible"
 
 #, fuzzy
+#~ msgid "'x' argument must be a list of NULL or raw vectors"
+#~ msgstr "'x' doit être une list de vecteurs NULL ou \"raw\""
+
+#, fuzzy
 #~ msgid "trying URL '%s'\n"
 #~ msgstr "essai de l'URL '%s'\n"
 
@@ -11323,9 +11333,6 @@ msgstr "X11 indisponible"
 
 #~ msgid "Select one"
 #~ msgstr "Sélectionnez un item"
-
-#~ msgid "argument must be a character vector or a raw vector"
-#~ msgstr "l'argument doit être un vecteur de caractères ou un vecteur 'raw'"
 
 #~ msgid "'default' must be a character string"
 #~ msgstr "'default' doit être une chaîne de caractères"

@@ -49,7 +49,7 @@ aareg <- function(formula, data, weights, subset, na.action,
 	dfbeta <- TRUE
 	tempc <- untangle.specials(Terms, 'cluster', 1:10)
 	ord <- attr(Terms, 'order')[tempc$terms]
-	if (any(ord>1)) stop("cluster can not be used in an interaction")
+	if (any(ord>1)) stop("cluster cannot be used in an interaction")
 	cluster <- strata(m[,tempc$vars], shortlabel=TRUE)  #allow multiples
 	cluster <- as.numeric(cluster) #labels don't matter, and processing
 	                               # is a bit faster without them

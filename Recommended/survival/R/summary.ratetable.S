@@ -8,8 +8,8 @@ summary.ratetable <- function(object, ...) {
 
     att <- attributes(rtable)
     ncat <- length(dim(rtable))
-    cat(gettextf(" Rate table with %d dimensions:\n", ncat, domain = "R-survival"))
-    for (i in 1:ncat) {
+    cat(sprintf(ngettext(ncat, "Rate table with %d dimension:", "Rate table with %d dimensions:", domain = "R-survival"), ncat), "\n", sep = "")
+    for (i in seq_len(ncat)) {
         # One of 'factor' (old style table) or "type" (new style) should exist
         if (!is.null(att$factor)) {
             if (att$factor[i]==0) {

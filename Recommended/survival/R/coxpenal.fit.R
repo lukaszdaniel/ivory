@@ -495,7 +495,7 @@ coxpenal.fit <- function(x, y, strata, offset, init, control,
         }
 
     if (control$iter.max >1 && length(iterfail)>0)
-	    warning(gettextf("inner loop failed to coverge for iterations %s", paste(iterfail, collapse=' ')))
+	    warning(gettextf("inner loop failed to coverge for iterations %s", paste(sQuote(iterfail), collapse = ", ")))
     which.sing <- (fdiag[nfrail + seq_len(nvar)] ==0)
     
     coef <- coxfit$coef

@@ -2793,7 +2793,7 @@ setRlibs <-
                           paste0(vigns$names, ".Rout.save"))
 
             if(!skip_run_maybe || any(file.exists(savefiles))) {
-                checkingLog(Log, "running R code from vignettes")
+                checkingLog(Log, gettext("checking running R code from vignettes ...", domain = "R-tools"))
                 res <- character()
                 cat("\n")
                 def_enc <- desc["Encoding"]
@@ -2878,7 +2878,7 @@ setRlibs <-
             }
                 
             if (do_build_vignettes) {
-                checkingLog(Log, "re-building of vignette outputs")
+                checkingLog(Log, gettext("checking re-building of vignette outputs ...", domain = "R-tools"))
                 ## copy the whole pkg directory to check directory
                 ## so we can work in place, and allow ../../foo references.
                 dir.create(vd2 <- "vign_test")

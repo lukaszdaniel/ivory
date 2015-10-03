@@ -67,7 +67,7 @@ tmerge <- function(data1, data2, id, ..., tstart, tstop, options) {
            
     check <- match(argclass, c("tdc", "cumtdc", "event", "cumevent"))
     if (any(is.na(check)))
-        stop(gettextf("argument(s) %s not recognized type", paste(argname[is.na(check)], collapse = ", ")))
+        stop(sprintf(ngettext(length(is.na(check)), "argument '%s' has unrecognized type", "arguments '%s' have unrecognized type", domain = "R-survival"), paste(argname[is.na(check)], collapse = ", ")),domain = NA)
     # The tcount matrix is useful for debugging
     tcount <- matrix(0L, length(argname), 8)
     dimnames(tcount) <- list(argname, c("early","late", "gap", "within", 

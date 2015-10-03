@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2 / foreign 0.8-38\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-20 20:09+0100\n"
+"POT-Creation-Date: 2015-10-01 21:12+0200\n"
 "PO-Revision-Date: 2012-10-11 13:34+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -187,7 +187,7 @@ msgstr "SAS-Übertragungsdatei hat falsche Element-Header"
 msgid "problem accessing SAS XPORT file"
 msgstr "Problem beim Zugriff auf SAS-XPORT-Datei"
 
-#: SASxport.c:512 SASxport.c:609 spss.c:669 stataread.c:586
+#: SASxport.c:512 SASxport.c:609 spss.c:670 stataread.c:586
 #, c-format
 msgid "unable to open file: '%s'"
 msgstr "Datei kann nicht geöffnet werden: '%s'"
@@ -1053,12 +1053,12 @@ msgstr "%s: Unvollständiger Datensatz am Ende der Systemdatei"
 msgid "nval is 0"
 msgstr "nval ist 0"
 
-#: spss.c:672
+#: spss.c:673
 #, c-format
 msgid "problem in reading file '%s'"
 msgstr "Problem beim Lesen der Datei '%s'"
 
-#: spss.c:682
+#: spss.c:683
 #, c-format
 msgid "file '%s' is not in any supported SPSS format"
 msgstr "Datei '%s' ist nicht in einem unterstützten SPSS-Format"

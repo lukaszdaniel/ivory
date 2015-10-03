@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.10.0 / mgcv 1.5-5\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-07-29 22:15\n"
+"POT-Creation-Date: 2015-10-01 21:12\n"
 "PO-Revision-Date: 2009-10-08 16:16+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -504,6 +504,7 @@ msgstr ""
 msgid "Additive model + factor"
 msgstr ""
 
+#. R/bam.r: warning("Algorithm did not converge")
 #. R/bam.r: warning("Algorithm did not converge")
 #. R/bam.r: warning("Algorithm did not converge")
 #. R/gam.fit3.r: warning("Algorithm did not converge")
@@ -1398,12 +1399,6 @@ msgstr "Sie haben kein Modell ..."
 #, fuzzy
 msgid "a parametric penalty has wrong dimension"
 msgstr "H hat falsche Dimension"
-
-#. R/bam.r: warning("algorithm did not converge")
-#: R/bam.r:0
-#, fuzzy
-msgid "algorithm did not converge"
-msgstr "Algorithmus konvergierte nicht"
 
 #. R/gamm.r: stop("all elements of random list must be named")
 #: R/gamm.r:0
@@ -2618,6 +2613,10 @@ msgid "Smoothing parameter selection converged after %d iteration."
 msgid_plural "Smoothing parameter selection converged after %d iterations."
 msgstr[0] ""
 msgstr[1] ""
+
+#, fuzzy
+#~ msgid "algorithm did not converge"
+#~ msgstr "Algorithmus konvergierte nicht"
 
 #, fuzzy
 #~ msgid "by.resids argument not supported"

@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: foreign 0.8-65\n"
+"Project-Id-Version: foreign 0.8-66\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-29 22:14+0200\n"
+"POT-Creation-Date: 2015-10-01 21:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -187,7 +187,7 @@ msgstr ""
 msgid "problem accessing SAS XPORT file"
 msgstr ""
 
-#: SASxport.c:512 SASxport.c:609 spss.c:669 stataread.c:586
+#: SASxport.c:512 SASxport.c:609 spss.c:670 stataread.c:586
 #, c-format
 msgid "unable to open file: '%s'"
 msgstr ""
@@ -958,12 +958,12 @@ msgstr ""
 msgid "nval is 0"
 msgstr ""
 
-#: spss.c:672
+#: spss.c:673
 #, c-format
 msgid "problem in reading file '%s'"
 msgstr ""
 
-#: spss.c:682
+#: spss.c:683
 #, c-format
 msgid "file '%s' is not in any supported SPSS format"
 msgstr ""

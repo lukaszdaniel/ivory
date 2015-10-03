@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.8-7\n"
-"POT-Creation-Date: 2015-07-29 22:15\n"
+"POT-Creation-Date: 2015-10-01 21:12\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -614,6 +614,7 @@ msgstr ""
 #: R/bam.r: 0
 #: R/gam.fit3.r: 0
 #: R/mgcv.r: 0
+#. R/bam.r: warning("Algorithm did not converge")
 #. R/bam.r: warning("Algorithm did not converge")
 #. R/bam.r: warning("Algorithm did not converge")
 #. R/gam.fit3.r: warning("Algorithm did not converge")
@@ -1790,13 +1791,6 @@ msgstr ""
 #. R/mgcv.r: stop("a parametric penalty has wrong dimension")
 
 msgid "a parametric penalty has wrong dimension"
-msgstr ""
-
-
-#: R/bam.r: 0
-#. R/bam.r: warning("algorithm did not converge")
-
-msgid "algorithm did not converge"
 msgstr ""
 
 

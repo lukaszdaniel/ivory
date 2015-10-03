@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-23 21:43+0200\n"
+"POT-Creation-Date: 2015-10-01 21:10+0200\n"
 "PO-Revision-Date: 2012-03-07 02:34+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -657,7 +657,7 @@ msgstr "'%s' 를 표시하는데 문제가 생겼습니다 "
 #: src/main/grep.c:1527 src/main/grep.c:1532 src/main/grep.c:2340
 #: src/main/grep.c:2345 src/main/grep.c:2647 src/main/grep.c:2652
 #: src/main/internet.c:209 src/main/internet.c:223 src/main/internet.c:241
-#: src/main/internet.c:253 src/main/internet.c:265 src/main/internet.c:284
+#: src/main/internet.c:254 src/main/internet.c:266 src/main/internet.c:285
 #: src/main/memory.c:3805 src/main/names.c:1309 src/main/names.c:1312
 #: src/main/objects.c:1600 src/main/objects.c:1602 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
@@ -4980,16 +4980,21 @@ msgstr "내부 루틴을 모듈에서 접근할 수 없습니다"
 #: src/main/internet.c:95 src/main/internet.c:107 src/main/internet.c:120
 #: src/main/internet.c:131 src/main/internet.c:142 src/main/internet.c:153
 #: src/main/internet.c:162 src/main/internet.c:173 src/main/internet.c:184
-#: src/main/internet.c:193 src/main/internet.c:203 src/main/internet.c:318
-#: src/main/internet.c:330 src/main/internet.c:342 src/main/internet.c:354
+#: src/main/internet.c:193 src/main/internet.c:203 src/main/internet.c:319
+#: src/main/internet.c:331 src/main/internet.c:343 src/main/internet.c:355
 msgid "internet routines cannot be loaded"
 msgstr "인터넷 루틴을 로드할 수 없습니다"
 
-#: src/main/internet.c:217 src/main/internet.c:231 src/main/internet.c:247
-#: src/main/internet.c:259 src/main/internet.c:273 src/main/internet.c:293
-#: src/main/internet.c:306
+#: src/main/internet.c:217 src/main/internet.c:231 src/main/internet.c:248
+#: src/main/internet.c:260 src/main/internet.c:274 src/main/internet.c:294
+#: src/main/internet.c:307
 msgid "socket routines cannot be loaded"
 msgstr "소켓 루틴을 로드할 수 없습니다"
+
+#: src/main/internet.c:243
+#, fuzzy
+msgid "attempt to close invalid socket"
+msgstr "잘못된 'comment'속성을 설정하려고 했습니다"
 
 #: src/main/lapack.c:40
 #, fuzzy
@@ -8078,8 +8083,9 @@ msgstr "unsupported conversion from '%s' to '%s' in codepage %d"
 
 #: src/main/sysutils.c:651
 #, fuzzy
-msgid "'x' argument must be a list of NULL or raw vectors"
-msgstr "'x' must be a list of NULL or raw vectors"
+msgid ""
+"'x' argument must be a character vector or a list of NULL or raw vectors"
+msgstr "인수는 문자 벡터 혹은 로우벡터이어야 합니다 "
 
 #: src/main/sysutils.c:729 src/main/sysutils.c:925 src/main/sysutils.c:942
 #: src/main/sysutils.c:958 src/main/sysutils.c:1035
@@ -9839,6 +9845,10 @@ msgid "X11 is not available"
 msgstr "X11을 사용할 수 없습니다"
 
 #, fuzzy
+#~ msgid "'x' argument must be a list of NULL or raw vectors"
+#~ msgstr "'x' must be a list of NULL or raw vectors"
+
+#, fuzzy
 #~ msgid "trying URL '%s'\n"
 #~ msgstr "URL '%s'를 시도하고 있습니다\n"
 
@@ -11042,9 +11052,6 @@ msgstr "X11을 사용할 수 없습니다"
 
 #~ msgid "Select one"
 #~ msgstr "하나를 선택하세요 "
-
-#~ msgid "argument must be a character vector or a raw vector"
-#~ msgstr "인수는 문자 벡터 혹은 로우벡터이어야 합니다 "
 
 #~ msgid "'default' must be a character string"
 #~ msgstr "'default' 는 반드시 문자열이어야 합니다 "

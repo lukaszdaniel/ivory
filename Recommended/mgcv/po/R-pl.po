@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.8-6\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-07-29 22:15\n"
+"POT-Creation-Date: 2015-10-01 21:12\n"
 "PO-Revision-Date: 2015-07-30 09:56+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -489,6 +489,7 @@ msgstr "parametr rho AR1 jest nieużywany podczas dopasowania 'sparse'"
 msgid "Additive model + factor"
 msgstr "Model addytywny + czynnik"
 
+#. R/bam.r: warning("Algorithm did not converge")
 #. R/bam.r: warning("Algorithm did not converge")
 #. R/bam.r: warning("Algorithm did not converge")
 #. R/gam.fit3.r: warning("Algorithm did not converge")
@@ -1383,11 +1384,6 @@ msgstr "Nie posiadasz modelu..."
 #: R/mgcv.r:0
 msgid "a parametric penalty has wrong dimension"
 msgstr "parametryczna kara ma niepoprawny wymiar"
-
-#. R/bam.r: warning("algorithm did not converge")
-#: R/bam.r:0
-msgid "algorithm did not converge"
-msgstr "Algorytm nie uzbieżnił się"
 
 #. R/gamm.r: stop("all elements of random list must be named")
 #: R/gamm.r:0
@@ -2596,6 +2592,9 @@ msgid_plural "Smoothing parameter selection converged after %d iterations."
 msgstr[0] "Wybór parametrów wygładzania uzbieżnił się po %d iteracji."
 msgstr[1] "Wybór parametrów wygładzania uzbieżnił się po %d iteracjach."
 msgstr[2] "Wybór parametrów wygładzania uzbieżnił się po %d iteracjach."
+
+#~ msgid "algorithm did not converge"
+#~ msgstr "Algorytm nie uzbieżnił się"
 
 #~ msgid "Pearson scale estimate maybe unstable. See '?gam.scale'."
 #~ msgstr ""

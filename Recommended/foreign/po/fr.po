@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreign 0.8-10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-20 20:09+0100\n"
+"POT-Creation-Date: 2015-10-01 21:12+0200\n"
 "PO-Revision-Date: 2012-10-03 15:24+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -189,7 +189,7 @@ msgstr "le fichier de transfert SAS a une entête de membre incorrecte"
 msgid "problem accessing SAS XPORT file"
 msgstr "problème lors de l'accès d'un fichier SAS XPORT"
 
-#: SASxport.c:512 SASxport.c:609 spss.c:669 stataread.c:586
+#: SASxport.c:512 SASxport.c:609 spss.c:670 stataread.c:586
 #, c-format
 msgid "unable to open file: '%s'"
 msgstr "impossible d'ouvrir le fichier '%s'"
@@ -1086,12 +1086,12 @@ msgstr "%s : enregistrement partiel à la fin d'un fichier système"
 msgid "nval is 0"
 msgstr "nval est égal à 0"
 
-#: spss.c:672
+#: spss.c:673
 #, c-format
 msgid "problem in reading file '%s'"
 msgstr "problème lors de la lecture du fichier '%s'"
 
-#: spss.c:682
+#: spss.c:683
 #, c-format
 msgid "file '%s' is not in any supported SPSS format"
 msgstr ""

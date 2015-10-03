@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2015-09-18 r397) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2015-10-01 r410) -- "Internationalized Version of R"
 Copyright (C) 2013-2015 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2015-09-18 r69397) -- "Unsuffered Consequences"
+R Under development (unstable) (2015-10-01 r69444) -- "Unsuffered Consequences"
 Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -347,4 +347,4 @@ List of 6 components
 > 
 > proc.time()
    user  system elapsed 
-  0.421   0.057   0.462 
+  0.622   0.043   0.809 

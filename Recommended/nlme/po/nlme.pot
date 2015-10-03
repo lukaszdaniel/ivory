@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: nlme 3.1-121\n"
+"Project-Id-Version: nlme 3.1-122\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-29 22:15+0200\n"
+"POT-Creation-Date: 2015-10-01 21:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,32 +33,32 @@ msgstr ""
 msgid "First observation on an individual must have a dose"
 msgstr ""
 
-#: nlmefit.c:371
+#: nlmefit.c:376
 #, c-format
 msgid "Singular precision matrix in level %ld, block %ld"
 msgstr ""
 
-#: nlmefit.c:402
+#: nlmefit.c:407
 #, c-format
 msgid "Singularity in backsolve at level %ld, block %ld"
 msgstr ""
 
-#: nlmefit.c:559
+#: nlmefit.c:564
 msgid "analytic gradient is not available with matrix logarithm"
 msgstr ""
 
-#: nlmefit.c:582
+#: nlmefit.c:587
 msgid "analytic gradient is not available with compound symmetry"
 msgstr ""
 
-#: nlmefit.c:862
+#: nlmefit.c:867
 msgid "Unable to form eigenvalue-eigenvector decomposition"
 msgstr ""
 
-#: nlmefit.c:894
+#: nlmefit.c:899
 msgid "Unable to form Cholesky decomposition"
 msgstr ""
 
-#: nlmefit.c:925
+#: nlmefit.c:930
 msgid "Haven't written the compound symmetry case for this yet"
 msgstr ""

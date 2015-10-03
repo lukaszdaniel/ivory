@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: survival 2.38-3\n"
-"POT-Creation-Date: 2015-07-29 22:15\n"
+"POT-Creation-Date: 2015-10-01 22:08\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -126,6 +126,7 @@ msgstr ""
 
 #: R/aareg.S: 0
 #: R/anova.coxph.R: 0
+#: R/anova.coxph.penal.R: 0
 #: R/attrassign.R: 0
 #: R/basehaz.R: 0
 #: R/cox.zph.S: 0
@@ -151,6 +152,7 @@ msgstr ""
 #: R/survfitms.R: 0
 #. R/aareg.S: gettextf("'%s' argument is not an object of class %s", "x", dQuote("aareg"))
 #. R/anova.coxph.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("coxph"))
+#. R/anova.coxph.penal.R: gettextf("'%s' argument is not an object of class %s", "object", dQuote("coxph"))
 #. R/attrassign.R: gettextf("'%s' argument is not an object of class %s", "tt", dQuote("terms"))
 #. R/basehaz.R: gettextf("'%s' argument is not an object of class %s", "fit", dQuote("coxph"))
 #. R/cox.zph.S: gettextf("'%s' argument is not an object of class %s", "fit", dQuote("coxph"))
@@ -644,13 +646,6 @@ msgid "* restricted mean with variable upper limit"
 msgstr ""
 
 
-#: R/anova.coxph.penal.R: 0
-#. R/anova.coxph.penal.R: paste(deparse(dotargs[named]), collapse = ", ")
-
-msgid ","
-msgstr ""
-
-
 #: R/aareg.S: 0
 #. R/aareg.S: gettextf("Aalen model doesn't support \"%s\" survival data", type)
 
@@ -665,13 +660,6 @@ msgid "Aguments do not all have the same length (arg %d)"
 msgstr ""
 
 
-#: R/anova.coxph.penal.R: 0
-#. R/anova.coxph.penal.R: stop("All arguments must be Cox models")
-
-msgid "All arguments must be Cox models"
-msgstr ""
-
-
 #: R/anova.coxph.R: 0
 #: R/anova.coxphlist.S: 0
 #: R/anova.survreg.S: 0
@@ -682,6 +670,13 @@ msgstr ""
 #. R/anova.survreglist.S: gettext("Analysis of Deviance Table")
 
 msgid "Analysis of Deviance Table"
+msgstr ""
+
+
+#: R/anova.coxph.penal.R: 0
+#. R/anova.coxph.penal.R: gettextf("Analysis of Deviance Table\n Cox model: response is %s\nTerms added sequentially (first to last)\n",     paste(deparse(object$terms[[2]]), sep = "", collapse = ""), domain = "R-survival")
+
+msgid "Analysis of Deviance Table\n Cox model: response is %s\nTerms added sequentially (first to last)"
 msgstr ""
 
 
@@ -736,13 +731,6 @@ msgid "Call:"
 msgstr ""
 
 
-#: R/anova.coxph.penal.R: 0
-#. R/anova.coxph.penal.R: stop("Can't do anova tables with robust variances")
-
-msgid "Can't do anova tables with robust variances"
-msgstr ""
-
-
 #: R/cch.R: 0
 #. R/cch.R: gettextf("Case-cohort analysis, x$method, %s with subcohort of %s from cohort of %s",     x$method, x$subcohort.size, x$cohort.size, domain = "R-survival")
 #. R/cch.R: gettextf("Case-cohort analysis, x$method, %s with subcohort of %s from cohort of %s",     x$method, x$subcohort.size, x$cohort.size, domain = "R-survival")
@@ -768,13 +756,6 @@ msgstr ""
 #. R/summary.aareg.S: gettextf("Chisq= %s on %d df, p=%s; test weights= %s", format(round(chi, 2)), df,     signif(1 - pchisq(chi, df), 2), x$test, domain = "R-survival")
 
 msgid "Chisq= %s on %d df, p=%s; test weights= %s"
-msgstr ""
-
-
-#: R/coxph.R: 0
-#. R/coxph.R: stop("Cluster cannot be used in an interaction")
-
-msgid "Cluster cannot be used in an interaction"
 msgstr ""
 
 
@@ -973,10 +954,10 @@ msgstr ""
 
 
 #: R/print.coxph.penal.S: 0
-#. R/print.coxph.penal.S: gettextf("Likelihood ratio test=%s on %s df, p=%s n=%d", format(round(logtest, 2)),     format(round(df, 2)), format(1 - pchisq(logtest, df)), x$n, domain = "R-survival")
-#. R/print.coxph.penal.S: gettextf("Likelihood ratio test=%s on %s df, p=%s n=%d", format(round(logtest, 2)),     format(round(df, 2)), format(1 - pchisq(logtest, df)), x$n, domain = "R-survival")
+#. R/print.coxph.penal.S: gettextf("Likelihood ratio test = %s on %s df, p=%s n=%d", format(round(logtest,     2)), format(round(df, 2)), format(1 - pchisq(logtest, df)), x$n, domain = "R-survival")
+#. R/print.coxph.penal.S: gettextf("Likelihood ratio test = %s on %s df, p=%s n=%d", format(round(logtest,     2)), format(round(df, 2)), format(1 - pchisq(logtest, df)), x$n, domain = "R-survival")
 
-msgid "Likelihood ratio test=%s on %s df, p=%s n=%d"
+msgid "Likelihood ratio test = %s on %s df, p=%s n=%d"
 msgstr ""
 
 
@@ -1123,13 +1104,6 @@ msgstr ""
 #. R/survreg.fit.S: warning("Ran out of iterations and did not converge")
 
 msgid "Ran out of iterations and did not converge"
-msgstr ""
-
-
-#: R/summary.ratetable.S: 0
-#. R/summary.ratetable.S: gettextf(" Rate table with %d dimensions:\n", ncat, domain = "R-survival")
-
-msgid "Rate table with %d dimensions:"
 msgstr ""
 
 
@@ -1288,9 +1262,9 @@ msgstr ""
 
 
 #: R/anova.coxph.penal.R: 0
-#. R/anova.coxph.penal.R: paste("The following arguments to anova.coxph(..)", "are invalid and dropped:", paste(deparse(dotargs[named]),     collapse = ", "))
+#. R/anova.coxph.penal.R: gettext("The following arguments to anova.coxph(..) are invalid and dropped:", domain = "R-survival")
 
-msgid "The following arguments to anova.coxph(..)"
+msgid "The following arguments to anova.coxph(..) are invalid and dropped:"
 msgstr ""
 
 
@@ -1430,19 +1404,19 @@ msgid "Y has too many columns"
 msgstr ""
 
 
+#: R/anova.coxph.R: 0
+#: R/anova.coxph.penal.R: 0
+#. R/anova.coxph.R: stop("a 'coxme' model was found and library 'coxme' is not loaded")
+#. R/anova.coxph.penal.R: stop("a 'coxme' model was found and library 'coxme' is not loaded")
+
+msgid "a 'coxme' model was found and library 'coxme' is not loaded"
+msgstr ""
+
+
 #: R/survexp.R: 0
 #. R/survexp.R: stop("a 'response' is required in the formula unless method='ederer'")
 
 msgid "a 'response' is required in the formula unless method='ederer'"
-msgstr ""
-
-
-#: R/anova.coxph.R: 0
-#: R/anova.coxph.penal.R: 0
-#. R/anova.coxph.R: stop("a coxme model was found and library coxme is not loaded")
-#. R/anova.coxph.penal.R: stop("a coxme model was found and library coxme is not loaded")
-
-msgid "a coxme model was found and library coxme is not loaded"
 msgstr ""
 
 
@@ -1475,9 +1449,11 @@ msgstr ""
 
 
 #: R/anova.coxph.R: 0
-#. R/anova.coxph.R: stop("all arguments must be an objects of class \"coxph\" or \"coxme\"")
+#: R/anova.coxph.penal.R: 0
+#. R/anova.coxph.R: gettextf("all arguments must be an objects of class %s or %s", dQuote("coxph"), dQuote("coxme"))
+#. R/anova.coxph.penal.R: gettextf("all arguments must be an objects of class %s or %s", dQuote("coxph"), dQuote("coxme"))
 
-msgid "all arguments must be an objects of class \"coxph\" or \"coxme\""
+msgid "all arguments must be an objects of class %s or %s"
 msgstr ""
 
 
@@ -1502,13 +1478,6 @@ msgid "an observation transitions to it's starting state, transition ignored"
 msgstr ""
 
 
-#: R/anova.coxph.penal.R: 0
-#. R/anova.coxph.penal.R: paste("The following arguments to anova.coxph(..)", "are invalid and dropped:", paste(deparse(dotargs[named]),     collapse = ", "))
-
-msgid "are invalid and dropped:"
-msgstr ""
-
-
 #: R/tmerge.R: 0
 #. R/tmerge.R: gettextf("argument %s is not the same length as id", argname[ii])
 
@@ -1527,20 +1496,6 @@ msgstr ""
 #. R/attrassign.R: stop("argument is not really a model matrix")
 
 msgid "argument is not really a model matrix"
-msgstr ""
-
-
-#: R/anova.coxph.penal.R: 0
-#. R/anova.coxph.penal.R: stop("argument must be a cox model")
-
-msgid "argument must be a cox model"
-msgstr ""
-
-
-#: R/tmerge.R: 0
-#. R/tmerge.R: gettextf("argument(s) %s not recognized type", paste(argname[is.na(check)], collapse = ", "))
-
-msgid "argument(s) %s not recognized type"
 msgstr ""
 
 
@@ -1605,8 +1560,10 @@ msgstr ""
 
 
 #: R/anova.coxph.R: 0
+#: R/anova.coxph.penal.R: 0
 #: R/anova.coxphlist.S: 0
 #. R/anova.coxph.R: stop("cannot do anova tables with robust variances")
+#. R/anova.coxph.penal.R: stop("cannot do anova tables with robust variances")
 #. R/anova.coxphlist.S: stop("cannot do anova tables with robust variances")
 
 msgid "cannot do anova tables with robust variances"
@@ -1746,11 +1703,13 @@ msgstr ""
 
 
 #: R/aareg.S: 0
+#: R/coxph.R: 0
 #: R/survreg.S: 0
-#. R/aareg.S: stop("cluster can not be used in an interaction")
-#. R/survreg.S: stop("cluster can not be used in an interaction")
+#. R/aareg.S: stop("cluster cannot be used in an interaction")
+#. R/coxph.R: stop("cluster cannot be used in an interaction")
+#. R/survreg.S: stop("cluster cannot be used in an interaction")
 
-msgid "cluster can not be used in an interaction"
+msgid "cluster cannot be used in an interaction"
 msgstr ""
 
 
@@ -1952,7 +1911,7 @@ msgstr ""
 
 #: R/coxpenal.fit.R: 0
 #: R/survpenal.fit.S: 0
-#. R/coxpenal.fit.R: gettextf("inner loop failed to coverge for iterations %s", paste(iterfail, collapse = " "))
+#. R/coxpenal.fit.R: gettextf("inner loop failed to coverge for iterations %s", paste(sQuote(iterfail),     collapse = ", "))
 #. R/survpenal.fit.S: gettextf("inner loop failed to coverge for iterations %s", paste(sQuote(iterfail),     collapse = ", "))
 
 msgid "inner loop failed to coverge for iterations %s"
@@ -2939,16 +2898,11 @@ msgstr ""
 
 
 #: R/clogit.R: 0
-#. R/clogit.R: warning("weights are ignored in 'clogit()'")
-
-msgid "weights are ignored in 'clogit()'"
-msgstr ""
-
-
 #: R/survexp.R: 0
-#. R/survexp.R: warning("weights ignored")
+#. R/clogit.R: gettextf("weights are ignored in '%s' function", "clogit()")
+#. R/survexp.R: gettextf("weights are ignored in '%s' function", "survexp()")
 
-msgid "weights ignored"
+msgid "weights are ignored in '%s' function"
 msgstr ""
 
 
@@ -2968,6 +2922,7 @@ msgstr ""
 #: R/residuals.survreg.S: 0
 #: R/survfitCI.R: 0
 #. R/coxph.R: gettextf("wrong length for '%s' argument", "tt")
+#. R/coxph.R: gettextf("wrong length for '%s' argument", "init")
 #. R/model.matrix.coxph.R: gettextf("wrong length for '%s' argument", "tt")
 #. R/residuals.coxph.S: gettextf("wrong length for '%s' argument", "collapse")
 #. R/residuals.survreg.S: gettextf("wrong length for '%s' argument", "collapse")
@@ -2984,13 +2939,6 @@ msgstr ""
 #. R/is.ratetable.S: gettextf("wrong length for '%s' component", "factor")
 
 msgid "wrong length for '%s' component"
-msgstr ""
-
-
-#: R/coxph.R: 0
-#. R/coxph.R: stop("wrong length for 'init' argument")
-
-msgid "wrong length for 'init' argument"
 msgstr ""
 
 
@@ -3068,9 +3016,20 @@ msgstr[1]    ""
 
 
 #: R/print.ratetable.S: 0
-#. R/print.ratetable.S: ngettext(length(attr(x, "dimid")), "Rate table with dimension: ", "Rate table with dimensions: ",     domain = "R-survival")
+#: R/summary.ratetable.S: 0
+#. R/print.ratetable.S: ngettext(length(attr(x, "dimid")), "Rate table with %d dimension:", "Rate table with %d dimensions:",     domain = "R-survival")
+#. R/summary.ratetable.S: ngettext(ncat, "Rate table with %d dimension:", "Rate table with %d dimensions:",     domain = "R-survival")
 
-msgid        "Rate table with dimension: "
-msgid_plural "Rate table with dimensions: "
+msgid        "Rate table with %d dimension:"
+msgid_plural "Rate table with %d dimensions:"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/tmerge.R: 0
+#. R/tmerge.R: ngettext(length(is.na(check)), "argument '%s' has unrecognized type", "arguments '%s' have unrecognized type",     domain = "R-survival")
+
+msgid        "argument '%s' has unrecognized type"
+msgid_plural "arguments '%s' have unrecognized type"
 msgstr[0]    ""
 msgstr[1]    ""
