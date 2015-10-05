@@ -167,8 +167,8 @@
       that is more suitable for non-European languages.
 
       \item \code{match(x, table)} is faster, sometimes by an order of
-      magnitude, when \code{x} is of length one, % and
-      \code{incomparables} is unchanged thanks to Haverty's \PR{16491}.
+      magnitude, when \code{x} is of length one and \code{incomparables}
+      is unchanged, thanks to Haverty's \PR{16491}.
 
       \item More consistent, partly not back-compatible behavior of
       \code{NA} and \code{NaN} coercion to complex numbers, operations
@@ -199,7 +199,7 @@
     \itemize{
       \item The previously included versions of \code{zlib},
       \code{bzip2}, \code{xz} and PCRE have been removed, so suitable
-      external (usuallly system) versions are required (see the
+      external (usually system) versions are required (see the
       \sQuote{R Installation and Administration} manual).
 
       \item The unexported and undocumented Windows-only devices
@@ -403,7 +403,7 @@
       start with a \code{"."}.
 
       \item The built-in \code{HTTP} server converted entire
-      \code{Content-Type} to lowercase including paramters which
+      \code{Content-Type} to lowercase including parameters which
       can cause issues for multi-part form boundaries (\PR{16541}).
     }
   }
