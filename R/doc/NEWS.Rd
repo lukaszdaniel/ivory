@@ -178,6 +178,14 @@
       \code{[[} on \code{x}, so it should work automatically on any
       objects for which appropriate methods on those generics are
       defined.
+
+      \item The logic for selecting the default screen device on OS X
+      has been simplified: it is now \code{quartz()} if that is
+      available even if environment variable \env{DISPLAY} has been set
+      by the user.
+
+      The choice can easily be overridden \emph{via} environment
+      variable \env{R_INTERACTIVE_DEVICE}.
     }
   }
 
@@ -405,6 +413,9 @@
       \item The built-in \code{HTTP} server converted entire
       \code{Content-Type} to lowercase including parameters which
       can cause issues for multi-part form boundaries (\PR{16541}).
+
+      \item Modifying slots of S4 objects could fail when the
+      \pkg{methods} package was not attached (\PR{16545}).
     }
   }
 }

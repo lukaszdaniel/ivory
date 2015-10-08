@@ -102,10 +102,9 @@ getOption(x, default = NULL)
       environment variable \env{R_DEFAULT_PACKAGES}, or if that is unset
       to \code{c("datasets", "utils", "grDevices", "graphics", "stats",
         "methods")}.  (Set \env{R_DEFAULT_PACKAGES} to \code{NULL} or
-      a comma-separated list of package names.)   A call to
-      \code{options} should be in your \file{.Rprofile} file to ensure
-      that the change takes effect before the base package is
-      initialized (see \code{\link{Startup}}).}
+      a comma-separated list of package names.)  It will not work to set
+      this in a \file{.Rprofile} file, as its value is consulted before
+      that file is read.}
 
     \item{\code{deparse.cutoff}:}{integer value controlling the
       printing of language constructs which are \code{\link{deparse}}d.
@@ -429,6 +428,12 @@ getOption(x, default = NULL)
       configurable via environment variables
       \env{R_INTERACTIVE_DEVICE} and \env{R_DEFAULT_DEVICE}
       respectively.
+
+      The search logic for \sQuote{the normal screen device} is that
+      this is \code{windows} on Windows, and \code{quartz} if available
+      on OS X (running at the console, and compiled into the build).
+      Otherwise \code{X11} is used if environment variable \env{DISPLAY}
+      is set.
     }
 
     \item{\code{device.ask.default}:}{logical.  The default for

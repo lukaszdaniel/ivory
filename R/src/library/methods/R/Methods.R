@@ -16,6 +16,10 @@
 #  A copy of the GNU General Public License is available at
 #  https://www.R-project.org/Licenses/
 
+## copy here to avoid importing from stats and hence loading stats
+## namespace when methods if loaded
+setNames <- stats::setNames
+
 
 setGeneric <-
   ## Define `name' to be a generic  function, for which methods will be defined.
