@@ -440,8 +440,14 @@ function(x, ...)
 
 toBibtex.person <-
 function(object, ...)
-    paste(format(object, include = c("given", "family")),
-          collapse = " and ")
+{
+    object <- sapply(object, function(p) {
+         br <- if(is.null(p$family)) c("{", "}") else c("", "")
+         format(p, include = c("family", "given"),
+                braces = list(given = br, family = c("", ",")))
+    })
+    paste(object, collapse = " and ")
+}
 
 ######################################################################
 
@@ -1117,14 +1123,23 @@ function(package = "base", lib.loc = NULL, auto = NULL)
 
     year <- sub("-.*", "", meta$`Date/Publication`)
     if(!length(year)) {
-        year <- sub(".*((19|20)[[:digit:]]{2}).*", "\\1", meta$Date,
-                    perl = TRUE) # may not be needed, but safer
-        if(is.null(meta$Date)){
+        if(is.null(meta$Date)) {
             warning(gettextf("no date field in DESCRIPTION file of package %s", sQuote(package)), domain = "R-utils")
+        } else {
+            date <- trimws(as.vector(meta$Date))[1L]
+            date <- strptime(date, "%Y-%m-%d", tz = "GMT")
+            if(!is.na(date)) year <- format(date, "%Y")
         }
-        else if(!length(year)) {
-            warning(gettextf("could not determine year for %s from package DESCRIPTION file", sQuote(package)), domain = "R-utils")
-        }
+    }
+    ## If neither Date/Publication nor Date work, try Packaged (build
+    ## time stamp): if this fails too, use NA (PR #16550).
+    if(!length(year)) {
+        date <- as.POSIXlt(sub(";.*", "", trimws(meta$Packaged)[1L]))
+        if(!is.na(date)) year <- format(date, "%Y")
+    }
+    if(!length(year)) {
+        warning(gettextf("could not determine year for %s from package DESCRIPTION file", sQuote(package)), domain = "R-utils")
+        year <- NA_character_
     }
 
     author <- meta$`Authors@R`
@@ -1151,10 +1166,9 @@ function(package = "base", lib.loc = NULL, auto = NULL)
               note = paste("R package version", meta$Version)
               )
 
-    z$url <- if(identical(meta$Repository, "CRAN"))
-        sprintf("https://CRAN.R-project.org/package=%s", package)
-    else
-        meta$URL
+    if(identical(meta$Repository, "CRAN"))
+        z$url <- 
+            sprintf("https://CRAN.R-project.org/package=%s", package)
 
     if(identical(meta$Repository, "R-Forge")) {
         z$url <- if(!is.null(rfp <- meta$"Repository/R-Forge/Project"))
@@ -1163,6 +1177,15 @@ function(package = "base", lib.loc = NULL, auto = NULL)
             "https://R-Forge.R-project.org/"
         if(!is.null(rfr <- meta$"Repository/R-Forge/Revision"))
             z$note <- paste(z$note, rfr, sep = "/r")
+    }
+
+    if(!length(z$url) && !is.na(url <- meta$URL[1L])) {
+        ## Cannot have several URLs in BibTeX and bibentry object URL
+        ## fields (PR #16240).
+        if(grepl("[, ]", url))
+            z$note <- url
+        else
+            z$url <- url
     }
 
     header <- if(!auto_was_meta) {
