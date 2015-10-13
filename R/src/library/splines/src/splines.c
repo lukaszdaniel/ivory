@@ -195,8 +195,8 @@ spline_basis(SEXP knots, SEXP order, SEXP xvals, SEXP derivs)
     sp->ldel = (double *) R_alloc(sp->ordm1, sizeof(double));
     sp->knots = kk; sp->nknots = nk;
     sp->a = (double *) R_alloc(sp->order, sizeof(double));
-    PROTECT(val = allocMatrix(REALSXP, sp->order, nx));
-    PROTECT(offsets = allocVector(INTSXP, nx));
+    SEXP val = PROTECT(allocMatrix(REALSXP, sp->order, nx)),
+	offsets = PROTECT(allocVector(INTSXP, nx));
     double *valM = REAL(val);
     int *ioff = INTEGER(offsets);
 
