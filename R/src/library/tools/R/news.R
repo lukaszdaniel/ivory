@@ -385,20 +385,37 @@ function(file, out = stdout(), codify = FALSE)
     ## can use the DESCRIPTION metadata to obtain the package name and
     ## encoding.
 
+    format <- "default"    
+
     file <- file_path_as_absolute(file)
-    dir <- dirname(file)
-    format <- "default"
-    if(file_test("-f", dfile <- file.path(dir, "DESCRIPTION")))
-        meta <- .read_description(dfile)
-    else if(basename(dir) == "inst" &&
-            file_test("-f", dfile <- file.path(dirname(dir),
-                                               "DESCRIPTION")))
-        meta <- .read_description(dfile)
-    else {
-        ## readNEWS() is defunct now, so throw an error (PR #16556).
-        ##   format <- "R"
-        stop("'DESCRIPTION' file was not found")
+
+    if(file_test("-d", file)) {
+        dir <- file
+        dfile <- file.path(dir, "DESCRIPTION")
+        if(!file_test("-f", dfile))
+            stop(gettextf("'%s' file was not found", "DESCRIPTION"))
+        file <- file.path(dir, "inst", "NEWS")
+        if(!file_test("-f", file)) {
+            file <- file.path(dir, "NEWS")
+            if(!file_test("-f", file))
+                stop(gettextf("'%s' file not found", "NEWS"))
+        }
+    } else {
+        dir <- dirname(file)
+        dfile <- file.path(dir, "DESCRIPTION")
+        if(!file_test("-f", dfile)) {
+            if((basename(dir) != "inst") ||
+               !file_test("-f",
+                          dfile <- file.path(dirname(dir),
+                                             "DESCRIPTION")))
+                stop(gettextf("'%s' file was not found", "DESCRIPTION"))
+        }
     }
+
+    ## No longer support taking NEWS files without correponding
+    ## DESCRIPTION file as being from R itself (PR #16556).
+
+    meta <- .read_description(dfile)
 
     wto <- function(x) writeLines(x, con = out, useBytes = TRUE)
     cre <- "(\\W|^)(\"[[:alnum:]_.]*\"|[[:alnum:]_.:]+\\(\\))(\\W|$)"

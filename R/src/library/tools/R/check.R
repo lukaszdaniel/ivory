@@ -3573,6 +3573,7 @@ setRlibs <-
     {
         checkingLog(Log, gettext("checking CRAN incoming feasibility ...", domain = "R-tools"))
         res <- .check_package_CRAN_incoming(pkgdir)
+        bad <- FALSE
         if(length(res)) {
             out <- format(res)
             if((length(out) == 1L) &&
@@ -3589,8 +3590,7 @@ setRlibs <-
                 else resultLog(Log, "Note_to_CRAN_maintainers")
             } else if(length(res$bad_package)) {
                 errorLog(Log)
-                printLog(Log, c(paste(out, collapse = "\n\n"), "\n"))
-		maybe_exit(1L)
+                bad <- TRUE
             } else if(length(res$bad_version) ||
                       identical(res$foss_with_BuildVignettes, TRUE) ||
                       res$empty_Maintainer_name ||
@@ -3599,6 +3599,7 @@ setRlibs <-
             else if(length(res) > 1L) noteLog(Log)
             else resultLog(Log, gettext("OK", domain = "R-tools"))
             printLog(Log, c(paste(out, collapse = "\n\n"), "\n"))
+            if(bad) maybe_exit(1L)
         } else resultLog(Log, gettext("OK", domain = "R-tools"))
     }
 
