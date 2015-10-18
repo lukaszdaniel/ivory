@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-09-22 23:12\n"
+"POT-Creation-Date: 2015-10-18 15:37\n"
 "PO-Revision-Date: 2015-01-17 15:54+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -47,6 +47,14 @@ msgstr "%s вызывает:"
 #, fuzzy
 msgid "%s command is not available"
 msgstr "тест '%s' недоступен"
+
+#. R/news.R: gettextf("%s file was not found", sQuote("DESCRIPTION"))
+#. R/news.R: gettextf("%s file was not found", sQuote("NEWS"))
+#. R/news.R: gettextf("%s file was not found", sQuote("DESCRIPTION"))
+#: R/news.R:0
+#, fuzzy
+msgid "%s file was not found"
+msgstr "файл '%s' не найден"
 
 #. R/QC.R: gettextf("  %s has wrong argument list %s", sQuote(f), sQuote(paste(bad, collapse = ", ")),     domain = "R-tools")
 #. R/QC.R: gettextf("  %s has wrong argument list %s", sQuote(f), sQuote(paste(bad, collapse = ", ")),     domain = "R-tools")
@@ -1380,6 +1388,7 @@ msgstr "Поля с не-ASCII значениями:"
 #. R/QC.R: gettextf("File %s:", sQuote(fname), domain = "R-tools")
 #. R/QC.R: gettextf("File %s:", sQuote(f), domain = "R-tools")
 #. R/QC.R: gettextf("File %s:", sQuote(f), domain = "R-tools")
+#. R/QC.R: gettextf("File %s:", sQuote(e[1L]), domain = "R-tools")
 #. R/QC.R: gettextf("File %s:", sQuote(f), domain = "R-tools")
 #. R/Vignettes.R: gettextf("File %s:", names(y)[k], domain = "R-tools")
 #. R/sotools.R: gettextf("File %s:", sQuote(attr(x, "file")), domain = "R-tools")
@@ -1387,11 +1396,6 @@ msgstr "Поля с не-ASCII значениями:"
 #: R/QC.R:0 R/Vignettes.R:0 R/sotools.R:0
 msgid "File %s:"
 msgstr "Файл %s:"
-
-#. R/QC.R: gettextf("File '%s':", e[1L], domain = "R-tools")
-#: R/QC.R:0
-msgid "File '%s':"
-msgstr "Файл '%s':"
 
 #. R/utils.R: stop("File 'DESCRIPTION' is missing.")
 #: R/utils.R:0
@@ -4504,6 +4508,7 @@ msgstr ""
 
 #. R/check.R: gettext("checking re-building of vignette outputs ...", domain = "R-tools")
 #. R/check.R: gettext("checking re-building of vignette outputs ...", domain = "R-tools")
+#. R/check.R: gettext("checking re-building of vignette outputs ...", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
 msgid "checking re-building of vignette outputs ..."
@@ -4514,6 +4519,7 @@ msgstr "Предупреждение в файле '%s'"
 msgid "checking replacement functions ..."
 msgstr ""
 
+#. R/check.R: gettext("checking running R code from vignettes ...", domain = "R-tools")
 #. R/check.R: gettext("checking running R code from vignettes ...", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
@@ -7111,6 +7117,13 @@ msgstr[0] "не могу перекодировать '%s' строк(и) %s"
 msgstr[1] "не могу перекодировать '%s' строк(и) %s"
 msgstr[2] "не могу перекодировать '%s' строк(и) %s"
 
+#, fuzzy
+#~ msgid "'%s' file not found"
+#~ msgstr "файл '%s' не найден"
+
+#~ msgid "File '%s':"
+#~ msgstr "Файл '%s':"
+
 #~ msgid ":"
 #~ msgstr ":"
 
@@ -7233,10 +7246,6 @@ msgstr[2] "не могу перекодировать '%s' строк(и) %s"
 #, fuzzy
 #~ msgid "File"
 #~ msgstr "Файл %s:"
-
-#, fuzzy
-#~ msgid "file %s not found"
-#~ msgstr "файл '%s' не найден"
 
 #~ msgid "'file' must be a character string or connection"
 #~ msgstr "'file' должен быть текстовой строкой или соединением"

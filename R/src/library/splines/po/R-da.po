@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2015-10-18 11:49\n"
 "PO-Revision-Date: 2012-01-28 15:52+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,6 +67,11 @@ msgstr ""
 msgid "bSpline representation of spline for %s"
 msgstr ""
 
+#. R/splineClasses.R: stop("empty 'derivs' argument")
+#: R/splineClasses.R:0
+msgid "empty 'derivs' argument"
+msgstr ""
+
 #. R/splineClasses.R: stop("knot positions must be non-decreasing")
 #. R/splineClasses.R: stop("knot positions must be non-decreasing")
 #: R/splineClasses.R:0
@@ -78,9 +83,10 @@ msgstr "knobplacering skal være ikkefaldende"
 msgid "knot positions must be strictly increasing"
 msgstr "knobplaceringer skal være strengt øgende"
 
-#. R/splineClasses.R: stop("length of 'derivs' must match length of 'x'")
+#. R/splineClasses.R: stop("length of 'derivs' is larger than length of 'x'")
 #: R/splineClasses.R:0
-msgid "length of 'derivs' must match length of 'x'"
+#, fuzzy
+msgid "length of 'derivs' is larger than length of 'x'"
 msgstr "længden for »drivs« skal matche længden for »x«"
 
 #. R/splineClasses.R: stop("lengths of 'x' and 'y' must be the same")

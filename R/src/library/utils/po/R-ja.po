@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-09-22 23:12\n"
+"POT-Creation-Date: 2015-10-18 11:49\n"
 "PO-Revision-Date: 2012-02-26 14:23+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -803,6 +803,13 @@ msgid ""
 "%s yourself"
 msgstr " もし何も起きなければ、自分で '%s' を開いてください "
 
+#. R/sysdata.R: gettext("If the R code is merely a translation from another language\n(typically S), use for the translator to R.",     domain = "R-utils")
+#: R/sysdata.R:0
+msgid ""
+"If the R code is merely a translation from another language\n"
+"(typically S), use for the translator to R."
+msgstr ""
+
 #. R/help.start.R: gettextf("If the browser launched by '%s' is already running, it is *not* restarted, and you must switch to its window.",     browser)
 #: R/help.start.R:0
 msgid ""
@@ -811,6 +818,11 @@ msgid ""
 msgstr ""
 " もし'%s'で起動したブラウザが既に実行中なら、それは再起動されません。そのウィ"
 "ンドウへ切替える必要があります "
+
+#. R/sysdata.R: gettext("If the package is part of a thesis, use for the thesis advisor.", domain = "R-utils")
+#: R/sysdata.R:0
+msgid "If the package is part of a thesis, use for the thesis advisor."
+msgstr ""
 
 #. R/packageStatus.R: gettext("Installed packages:", domain = "R-utils")
 #: R/packageStatus.R:0
@@ -1497,6 +1509,51 @@ msgstr " %s は %s のどれかである必要があります "
 #, fuzzy
 msgid "Use either %s or %s but not both"
 msgstr " %s か %s のどちらかを使いますが，両方ではありません． "
+
+#. R/sysdata.R: gettext("Use for all copyright holders.", domain = "R-utils")
+#: R/sysdata.R:0
+msgid "Use for all copyright holders."
+msgstr ""
+
+#. R/sysdata.R: gettext("Use for authors who have been contracted to write (parts of) the\npackage and hence do not own intellectual property.",     domain = "R-utils")
+#: R/sysdata.R:0
+msgid ""
+"Use for authors who have been contracted to write (parts of) the\n"
+"package and hence do not own intellectual property."
+msgstr ""
+
+#. R/sysdata.R: gettext("Use for authors who have made smaller contributions (such as\ncode patches etc.) but should not show up in the package\ncitation.",     domain = "R-utils")
+#: R/sysdata.R:0
+msgid ""
+"Use for authors who have made smaller contributions (such as\n"
+"code patches etc.) but should not show up in the package\n"
+"citation."
+msgstr ""
+
+#. R/sysdata.R: gettext("Use for full authors who have made substantial contributions to\nthe package and should show up in the package citation.",     domain = "R-utils")
+#: R/sysdata.R:0
+msgid ""
+"Use for full authors who have made substantial contributions to\n"
+"the package and should show up in the package citation."
+msgstr ""
+
+#. R/sysdata.R: gettext("Use for package maintainers that collected code (potentially in\nother languages) but did not make further substantial\ncontributions to the package.",     domain = "R-utils")
+#: R/sysdata.R:0
+msgid ""
+"Use for package maintainers that collected code (potentially in\n"
+"other languages) but did not make further substantial\n"
+"contributions to the package."
+msgstr ""
+
+#. R/sysdata.R: gettext("Use for persons who contributed data sets for the package.", domain = "R-utils")
+#: R/sysdata.R:0
+msgid "Use for persons who contributed data sets for the package."
+msgstr ""
+
+#. R/sysdata.R: gettext("Use for the package maintainer.", domain = "R-utils")
+#: R/sysdata.R:0
+msgid "Use for the package maintainer."
+msgstr ""
 
 #. R/demo.R: gettextf("Use: %s to list the demos in all *available* packages.", sQuote("demo(package = .packages(all.available = TRUE))"),     domain = "R-utils")
 #: R/demo.R:0

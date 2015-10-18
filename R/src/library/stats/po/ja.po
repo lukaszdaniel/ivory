@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-18 12:53+0200\n"
+"POT-Creation-Date: 2015-10-18 11:49+0200\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -162,12 +162,12 @@ msgstr " distance(): 不正な p "
 msgid "'distance()': invalid distance"
 msgstr " distance(): 不正な距離 "
 
-#: distn.c:34
+#: distn.c:36
 #, fuzzy
 msgid "NaN values produced"
 msgstr " 計算結果が NaN になりました "
 
-#: distn.c:35
+#: distn.c:37
 #, fuzzy
 msgid "Non-numeric argument passed to mathematical function"
 msgstr " 数学関数に非数値引数が渡されました "

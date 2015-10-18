@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.8-7\n"
-"POT-Creation-Date: 2015-10-01 21:12\n"
+"POT-Creation-Date: 2015-10-18 20:40\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1048,9 +1048,9 @@ msgstr ""
 
 
 #: R/gam.fit3.r: 0
-#. R/gam.fit3.r: warning("Huber scale estiamte not converged")
+#. R/gam.fit3.r: warning("Huber scale estimate not converged")
 
-msgid "Huber scale estiamte not converged"
+msgid "Huber scale estimate not converged"
 msgstr ""
 
 
@@ -1319,6 +1319,7 @@ msgstr ""
 #: R/gam.fit3.r: 0
 #: R/gam.fit4.r: 0
 #: R/mgcv.r: 0
+#. R/bam.r: gettextf("Non-finite coefficients at iteration %d", iter)
 #. R/bam.r: gettextf("Non-finite coefficients at iteration %d", iter)
 #. R/bam.r: gettextf("Non-finite coefficients at iteration %d", iter)
 #. R/gam.fit3.r: gettextf("Non-finite coefficients at iteration %d", iter)
@@ -2693,13 +2694,6 @@ msgstr ""
 #. R/mgcv.r: warning("non-existent terms requested - ignoring")
 
 msgid "non-existent terms requested - ignoring"
-msgstr ""
-
-
-#: R/bam.r: 0
-#. R/bam.r: gettextf("non-finite coefficients at iteration %d", iter)
-
-msgid "non-finite coefficients at iteration %d"
 msgstr ""
 
 

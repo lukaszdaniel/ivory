@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-01 21:10+0200\n"
+"POT-Creation-Date: 2015-10-18 11:48+0200\n"
 "PO-Revision-Date: 2011-10-13 17:30+0800\n"
 "Last-Translator: Wei-Lun Chao <chaoweilun@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -591,9 +591,9 @@ msgstr "顯示'%s' 時發生問題"
 #: src/gnuwin32/extra.c:572 src/gnuwin32/extra.c:597 src/main/agrep.c:132
 #: src/main/agrep.c:136 src/main/agrep.c:774 src/main/agrep.c:779
 #: src/main/apply.c:329 src/main/apply.c:331 src/main/apply.c:334
-#: src/main/array.c:90 src/main/array.c:1245 src/main/array.c:1371
-#: src/main/array.c:1373 src/main/array.c:1374 src/main/array.c:1720
-#: src/main/array.c:1722 src/main/array.c:1724 src/main/attrib.c:189
+#: src/main/array.c:90 src/main/array.c:1264 src/main/array.c:1390
+#: src/main/array.c:1392 src/main/array.c:1393 src/main/array.c:1739
+#: src/main/array.c:1741 src/main/array.c:1743 src/main/attrib.c:189
 #: src/main/builtin.c:89 src/main/builtin.c:98 src/main/builtin.c:117
 #: src/main/builtin.c:119 src/main/builtin.c:150 src/main/builtin.c:561
 #: src/main/builtin.c:577 src/main/builtin.c:764 src/main/builtin.c:766
@@ -656,7 +656,7 @@ msgstr "顯示'%s' 時發生問題"
 #: src/main/grep.c:2345 src/main/grep.c:2647 src/main/grep.c:2652
 #: src/main/internet.c:209 src/main/internet.c:223 src/main/internet.c:241
 #: src/main/internet.c:254 src/main/internet.c:266 src/main/internet.c:285
-#: src/main/memory.c:3805 src/main/names.c:1309 src/main/names.c:1312
+#: src/main/memory.c:3811 src/main/names.c:1309 src/main/names.c:1312
 #: src/main/objects.c:1600 src/main/objects.c:1602 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
 #: src/main/paste.c:411 src/main/paste.c:416 src/main/paste.c:421
@@ -838,19 +838,19 @@ msgstr "管道連結配置失敗"
 msgid "'%s' argument is not a character vector"
 msgstr "'fmt' 並非字元向量"
 
-#: src/gnuwin32/system.c:121 src/unix/sys-unix.c:425
+#: src/gnuwin32/system.c:121 src/unix/sys-unix.c:441
 msgid "reached session elapsed time limit"
 msgstr "達到了作業階段經過時間的限制"
 
-#: src/gnuwin32/system.c:123 src/unix/sys-unix.c:427
+#: src/gnuwin32/system.c:123 src/unix/sys-unix.c:443
 msgid "reached elapsed time limit"
 msgstr "達到了經過時間的限制"
 
-#: src/gnuwin32/system.c:129 src/unix/sys-unix.c:433
+#: src/gnuwin32/system.c:129 src/unix/sys-unix.c:449
 msgid "reached session CPU time limit"
 msgstr "達到了作業階段 CPU 時間的限制"
 
-#: src/gnuwin32/system.c:131 src/unix/sys-unix.c:435
+#: src/gnuwin32/system.c:131 src/unix/sys-unix.c:451
 msgid "reached CPU time limit"
 msgstr "達到了 CPU 時間的限制"
 
@@ -963,7 +963,7 @@ msgstr "第一個引數應當是字串"
 msgid "character string expected as third argument"
 msgstr "第三個引數應當是字串"
 
-#: src/gnuwin32/sys-win32.c:256 src/unix/sys-unix.c:297
+#: src/gnuwin32/sys-win32.c:256 src/unix/sys-unix.c:313
 #, c-format
 msgid "running command '%s' had status %d"
 msgstr "執行中命令 '%s' 已有狀態 %d"
@@ -1084,8 +1084,8 @@ msgstr ""
 msgid "argument '%s' has length > 1 and only the first element will be used"
 msgstr "引數 '%s' 長度 > 1 且只有第一個元素將被使用"
 
-#: src/main/agrep.c:191 src/main/agrep.c:818 src/main/attrib.c:1548
-#: src/main/coerce.c:2804 src/main/saveload.c:1941
+#: src/main/agrep.c:191 src/main/agrep.c:818 src/main/coerce.c:2804
+#: src/main/saveload.c:1941
 #, fuzzy, c-format
 msgid "'%s' argument must be a non-empty character string"
 msgstr "'pattern' 必須是非空字串"
@@ -1132,7 +1132,7 @@ msgstr "輸入字串 y[%d] 在這個語區無效"
 msgid "'%s' argument must be a vector"
 msgstr "第一引數必須是向量"
 
-#: src/main/apply.c:101 src/main/array.c:484 src/main/character.c:747
+#: src/main/apply.c:101 src/main/array.c:503 src/main/character.c:747
 #: src/main/character.c:1554 src/main/connections.c:3546
 #: src/main/context.c:655 src/main/context.c:674 src/main/datetime.c:686
 #: src/main/datetime.c:788 src/main/datetime.c:1047 src/main/dotcode.c:220
@@ -1275,7 +1275,7 @@ msgstr "長度為 0 的無效引數 '基底'"
 msgid "bad arithmetic function index"
 msgstr "不當的函數"
 
-#: src/main/array.c:83 src/main/array.c:1551
+#: src/main/array.c:83 src/main/array.c:1570
 #, fuzzy, c-format
 msgid "'data' argument must be of a vector type, was '%s'"
 msgstr "'data' 必須是向量類型"
@@ -1284,14 +1284,14 @@ msgstr "'data' 必須是向量類型"
 msgid "non-numeric matrix extent"
 msgstr "非數值的矩陣範圍"
 
-#: src/main/array.c:100 src/main/array.c:108 src/main/array.c:1657
-#: src/main/array.c:1662
+#: src/main/array.c:100 src/main/array.c:108 src/main/array.c:1676
+#: src/main/array.c:1681
 #, fuzzy, c-format
 msgid "invalid '%s' value (too large or NA)"
 msgstr "無效的 'nrow' 值 (太大或無法取得)"
 
-#: src/main/array.c:102 src/main/array.c:110 src/main/array.c:1659
-#: src/main/array.c:1664
+#: src/main/array.c:102 src/main/array.c:110 src/main/array.c:1678
+#: src/main/array.c:1683
 #, fuzzy, c-format
 msgid "invalid '%s' value (< 0)"
 msgstr "無效的 'nrow' 值 (< 0)"
@@ -1326,7 +1326,7 @@ msgstr "資料長度 [%d] 並非欄位數量 [%d] 的因數或倍數"
 msgid "data length exceeds size of matrix"
 msgstr "資料長度超過矩陣的大小"
 
-#: src/main/array.c:150 src/main/array.c:1562 src/main/array.c:1671
+#: src/main/array.c:150 src/main/array.c:1581 src/main/array.c:1690
 msgid "too many elements specified"
 msgstr "指定了太多的元素"
 
@@ -1355,53 +1355,53 @@ msgstr "alloc3Darray：指定了太多的元素"
 msgid "'allocArray()': too many elements specified by 'dims' argument"
 msgstr "allocArray: 'dims' 指定了太多的元素"
 
-#: src/main/array.c:497
+#: src/main/array.c:516
 #, fuzzy, c-format
 msgid "'%s' argument must be a list or atomic vector"
 msgstr "第一引數必須是向量"
 
-#: src/main/array.c:535
+#: src/main/array.c:554
 #, fuzzy, c-format
 msgid "a matrix-like object is required as argument passed to '%s'"
 msgstr "'row/col'需要一個類矩陣物件"
 
-#: src/main/array.c:749
+#: src/main/array.c:768
 #, fuzzy
 msgid "numeric/complex matrix/vector arguments are required"
 msgstr "需要數值/複數矩陣/向量引數"
 
-#: src/main/array.c:859 src/main/array.c:863 src/main/array.c:867
+#: src/main/array.c:878 src/main/array.c:882 src/main/array.c:886
 msgid "non-conformable arguments"
 msgstr "非調和引數"
 
-#: src/main/array.c:1166
+#: src/main/array.c:1185
 msgid "argument is not a matrix"
 msgstr "引數不是矩陣"
 
-#: src/main/array.c:1201
+#: src/main/array.c:1220
 msgid "invalid first argument, must be an array"
 msgstr "第一個引數不正確, 必須是陣列"
 
-#: src/main/array.c:1215
+#: src/main/array.c:1234
 #, fuzzy, c-format
 msgid "'perm' is of wrong length %d (!= %d)"
 msgstr "'perm' 的長度不正確"
 
-#: src/main/array.c:1220 src/main/array.c:1223
+#: src/main/array.c:1239 src/main/array.c:1242
 msgid "'a' does not have named dimnames"
 msgstr "'a' 沒有具名的 dimnames"
 
-#: src/main/array.c:1230
+#: src/main/array.c:1249
 #, fuzzy, c-format
 msgid "'perm[%d]' does not match a dimension name"
 msgstr "perm[%d] 不符合維度名稱"
 
-#: src/main/array.c:1243
+#: src/main/array.c:1262
 #, fuzzy
 msgid "value is out of range in 'perm' argument"
 msgstr "'perm' 的值在範圍外"
 
-#: src/main/array.c:1325 src/main/connections.c:5484 src/main/debug.c:112
+#: src/main/array.c:1344 src/main/connections.c:5484 src/main/debug.c:112
 #: src/main/objects.c:1043 src/main/raw.c:56 src/main/raw.c:336
 #: src/main/sort.c:327 src/main/sort.c:1235 src/main/sort.c:1403
 #: src/main/unique.c:670 src/main/unique.c:1445 src/main/unique.c:1517
@@ -1410,27 +1410,27 @@ msgstr "'perm' 的值在範圍外"
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr "'resize' 必須為真或假"
 
-#: src/main/array.c:1382
+#: src/main/array.c:1401
 #, fuzzy, c-format
 msgid "'%s' must be numeric"
 msgstr "'x' 必須是數值"
 
-#: src/main/array.c:1385
+#: src/main/array.c:1404
 #, fuzzy, c-format
 msgid "'%s' argument is too short"
 msgstr "'file' 引數太長"
 
-#: src/main/array.c:1558
+#: src/main/array.c:1577
 #, fuzzy, c-format
 msgid "'%s' argument cannot be of length 0"
 msgstr "'hadj' 的長度必須是 1"
 
-#: src/main/array.c:1667
+#: src/main/array.c:1686
 #, fuzzy, c-format
 msgid "'%s' must have positive length"
 msgstr "'value' 必須是正值的長度"
 
-#: src/main/array.c:1733
+#: src/main/array.c:1752
 #, c-format
 msgid "singular matrix in 'backsolve()'. First zero in diagonal [%d]"
 msgstr ""
@@ -1507,173 +1507,178 @@ msgstr "加入 \"factor\" 類別到無效的物件"
 msgid "attempt to set invalid 'class' attribute"
 msgstr "試圖設定無效的 'class' 屬性"
 
-#: src/main/attrib.c:842
+#: src/main/attrib.c:841
 #, fuzzy
 msgid "invalid class argument passed to internal '.class_cache'"
 msgstr "call_R 的引數數目不正確"
 
-#: src/main/attrib.c:872
+#: src/main/attrib.c:871
 #, fuzzy, c-format
 msgid "class \"%s\" has no 'names' slot"
 msgstr "類別 '%s' 沒有任何 'names' 插槽"
 
-#: src/main/attrib.c:874
+#: src/main/attrib.c:873
 #, fuzzy, c-format
 msgid ""
 "class \"%s\" has no 'names' slot; assigning a 'names' attribute will create "
 "an invalid object"
 msgstr "類別 '%s' 沒有任何 'names' 插槽；指派名稱屬性將建立無效的物件"
 
-#: src/main/attrib.c:877
+#: src/main/attrib.c:876
 #, fuzzy, c-format
 msgid ""
 "invalid to use 'names()<-' to set the 'names' slot in a non-vector class "
 "(\"%s\")"
 msgstr "在非向量類別 ('%s') 中使用 names()<- 以設定 'names' 插槽是不合法的"
 
-#: src/main/attrib.c:907
+#: src/main/attrib.c:906
 msgid "incompatible 'names' argument"
 msgstr "不相容的 'names' 引數"
 
-#: src/main/attrib.c:962
+#: src/main/attrib.c:961
 #, c-format
 msgid "invalid type (%s) to set 'names' attribute"
 msgstr "以無效的類型 (%s) 設定 'names' 屬性"
 
-#: src/main/attrib.c:1034
+#: src/main/attrib.c:1033
 #, fuzzy
 msgid "'dimnames()' applied to non-array"
 msgstr "'dimnames' 被應用於非陣列"
 
-#: src/main/attrib.c:1039 src/main/coerce.c:2454 src/main/engine.c:2979
+#: src/main/attrib.c:1038 src/main/coerce.c:2454 src/main/engine.c:2979
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'list' 引數必須是串列"
 
-#: src/main/attrib.c:1042 src/main/attrib.c:1069
+#: src/main/attrib.c:1041 src/main/attrib.c:1068
 #, c-format
 msgid "length of 'dimnames' [%d] must match that of 'dims' [%d]"
 msgstr "'dimnames' 的長度 [%d] 必須同 'dims' 的長度 [%d] 相等"
 
-#: src/main/attrib.c:1075
+#: src/main/attrib.c:1074
 #, c-format
 msgid "invalid type (%s) for 'dimnames' (must be a vector)"
 msgstr "設 'dimnames' 時的類型 (%s) 不正確 (必須是向量)"
 
-#: src/main/attrib.c:1077
+#: src/main/attrib.c:1076
 #, c-format
 msgid "length of 'dimnames' [%d] not equal to array extent"
 msgstr "'dimnames' 的長度 [%d] 必須與陣列範圍相等"
 
-#: src/main/attrib.c:1148 src/main/builtin.c:76 src/main/builtin.c:113
+#: src/main/attrib.c:1147 src/main/builtin.c:76 src/main/builtin.c:113
 #: src/main/envir.c:1809 src/main/envir.c:1937 src/main/envir.c:1997
 #: src/main/envir.c:2134 src/main/paste.c:74 src/main/paste.c:293
 #: src/main/random.c:480 src/main/random.c:509 src/main/unique.c:1744
 msgid "invalid first argument"
 msgstr "第一個引數不正確"
 
-#: src/main/attrib.c:1151
+#: src/main/attrib.c:1150
 msgid "invalid second argument"
 msgstr "第二個引數不正確"
 
-#: src/main/attrib.c:1159
+#: src/main/attrib.c:1158
 msgid "length-0 dimension vector is invalid"
 msgstr "長度為零的維度向量無效"
 
-#: src/main/attrib.c:1164
+#: src/main/attrib.c:1163
 #, fuzzy
 msgid "the dimensions contain missing values"
 msgstr "維度包含缺少值"
 
-#: src/main/attrib.c:1166
+#: src/main/attrib.c:1165
 #, fuzzy
 msgid "the dimensions contain negative values"
 msgstr "維度包含負值"
 
-#: src/main/attrib.c:1171
+#: src/main/attrib.c:1170
 #, fuzzy
 msgid "dimensions do not match the length of object"
 msgstr "維度 [product %d] 不符合物件 [%d] 的長度"
 
-#: src/main/attrib.c:1173
+#: src/main/attrib.c:1172
 #, fuzzy, c-format
 msgid "dimensions [product %d] do not match the length of object [%d]"
 msgstr "維度 [product %d] 不符合物件 [%d] 的長度"
 
-#: src/main/attrib.c:1250
+#: src/main/attrib.c:1249
 #, fuzzy
 msgid "duplicated levels in factors are deprecated"
 msgstr "重複等級將不再被允許存在因子中"
 
-#: src/main/attrib.c:1280
+#: src/main/attrib.c:1279
 msgid "attributes must be a list or NULL"
 msgstr "屬性必須是串列或空值"
 
-#: src/main/attrib.c:1285
+#: src/main/attrib.c:1284
 msgid "attributes must be named"
 msgstr "屬性必須命名"
 
-#: src/main/attrib.c:1289
+#: src/main/attrib.c:1288
 #, c-format
 msgid "all attributes must have names [%d does not]"
 msgstr "所有的屬性都必須有名稱 [%d 卻沒有]"
 
-#: src/main/attrib.c:1382
+#: src/main/attrib.c:1381
 #, fuzzy
 msgid "either 2 or 3 arguments are required"
 msgstr "需要字串引數"
 
-#: src/main/attrib.c:1389
+#: src/main/attrib.c:1388
 #, fuzzy
 msgid "'which' attribute must be of mode character"
 msgstr "'which' 的模式必須是字元"
 
-#: src/main/attrib.c:1391
+#: src/main/attrib.c:1390
 msgid "exactly one attribute 'which' must be given"
 msgstr "必須給定 'which' 剛好一個屬性"
 
-#: src/main/attrib.c:1452 src/main/attrib.c:1475 src/main/subscript.c:249
-#: src/main/subscript.c:253 src/main/subset.c:1234 src/main/subset.c:1288
+#: src/main/attrib.c:1451 src/main/attrib.c:1474 src/main/subscript.c:249
+#: src/main/subscript.c:253 src/main/subset.c:1238 src/main/subset.c:1292
 #, c-format
 msgid "partial match of '%s' to '%s'"
 msgstr "'%s' 部份匹配到 '%s'"
 
-#: src/main/attrib.c:1513
+#: src/main/attrib.c:1519
 #, fuzzy, c-format
 msgid "invalid type '%s' for slot name"
 msgstr "名稱插槽的類型或長度不正確"
 
-#: src/main/attrib.c:1672 src/main/attrib.c:1743 src/main/attrib.c:1781
+#: src/main/attrib.c:1556
+#, fuzzy, c-format
+msgid "'%s' argument must be non-null character string"
+msgstr "'norm' 必須是字串"
+
+#: src/main/attrib.c:1681 src/main/attrib.c:1752 src/main/attrib.c:1790
 msgid "invalid type or length for slot name"
 msgstr "名稱插槽的類型或長度不正確"
 
-#: src/main/attrib.c:1706
+#: src/main/attrib.c:1715
 #, c-format
 msgid "cannot get a slot (\"%s\") from an object of type \"%s\""
 msgstr "類型 \"%2$s\" 的物件中沒有 \"%1$s\" 這樣一個插槽"
 
-#: src/main/attrib.c:1717
+#: src/main/attrib.c:1726
 #, c-format
 msgid "no slot of name \"%s\" for this object of class \"%s\""
 msgstr "\"%1$s\" 插槽名不存在於 \"%2$s\" 類型物件中"
 
-#: src/main/attrib.c:1734
+#: src/main/attrib.c:1743
 msgid "attempt to set slot on NULL object"
 msgstr "試圖設在空值物件上定插槽"
 
-#: src/main/attrib.c:1776
+#: src/main/attrib.c:1785
 #, fuzzy
 msgid "formal classes cannot be used without the 'methods' package"
 msgstr "一定要有方法套件才能使用正式類別"
 
-#: src/main/attrib.c:1788
+#: src/main/attrib.c:1797
 #, c-format
 msgid ""
 "trying to get slot \"%s\" from an object of a basic class (\"%s\") with no "
 "slots"
 msgstr "無法從沒有插槽的基本類別 (\"%2$s\") 的物件中取得 \"%1$s\" 插槽"
 
-#: src/main/attrib.c:1792
+#: src/main/attrib.c:1801
 #, fuzzy, c-format
 msgid ""
 "trying to get slot \"%s\" from an object (class \"%s\") that is not an S4 "
@@ -5290,353 +5295,353 @@ msgstr[0] "未使用的引數 %s"
 msgid "unprotected object (%p) encountered (was %s)"
 msgstr ""
 
-#: src/main/memory.c:742
+#: src/main/memory.c:743
 #, fuzzy
 msgid "untraced old-to-new reference\n"
 msgstr "非弱型參考"
 
-#: src/main/memory.c:751
+#: src/main/memory.c:752
 #, c-format
 msgid "Node counts %s:\n"
 msgstr ""
 
-#: src/main/memory.c:758 src/main/memory.c:768 src/main/memory.c:778
+#: src/main/memory.c:759 src/main/memory.c:769 src/main/memory.c:779
 msgid "Inconsistent class assignment for node!\n"
 msgstr ""
 
-#: src/main/memory.c:770 src/main/memory.c:780
+#: src/main/memory.c:771 src/main/memory.c:781
 msgid "Inconsistent node generation\n"
 msgstr ""
 
-#: src/main/memory.c:783
+#: src/main/memory.c:784
 #, c-format
 msgid "Class: %d, New = %d, Old = %d, OldToNew = %d, Total = %d\n"
 msgstr ""
 
-#: src/main/memory.c:813
+#: src/main/memory.c:814
 #, c-format
 msgid ""
 "Node occupancy: %.0f%%\n"
 "Vector occupancy: %.0f%%\n"
 msgstr ""
 
-#: src/main/memory.c:818
+#: src/main/memory.c:819
 #, c-format
 msgid "Total allocation: %lu\n"
 msgstr ""
 
-#: src/main/memory.c:819
+#: src/main/memory.c:820
 #, c-format
 msgid ""
 "Ncells %lu\n"
 "Vcells %lu\n"
 msgstr ""
 
-#: src/main/memory.c:830
+#: src/main/memory.c:831
 #, c-format
 msgid "Class: %d, pages = %d, maxrel = %d, released = %d\n"
 msgstr ""
 
-#: src/main/memory.c:834
+#: src/main/memory.c:835
 #, c-format
 msgid "Allocated = %d, in use = %d\n"
 msgstr ""
 
-#: src/main/memory.c:1121 src/main/memory.c:1539
+#: src/main/memory.c:1122 src/main/memory.c:1540
 msgid "****snapping into wrong generation\n"
 msgstr ""
 
-#: src/main/memory.c:1237
+#: src/main/memory.c:1238
 msgid "can only weakly reference/finalize reference objects"
 msgstr "參考物件只能被弱型參考或被終了"
 
-#: src/main/memory.c:1271
+#: src/main/memory.c:1272
 msgid "finalizer must be a function or NULL"
 msgstr "終了程式必須是函數或 NULL"
 
-#: src/main/memory.c:1327 src/main/memory.c:1335 src/main/memory.c:1346
+#: src/main/memory.c:1328 src/main/memory.c:1336 src/main/memory.c:1347
 msgid "not a weak reference"
 msgstr "非弱型參考"
 
-#: src/main/memory.c:1477
+#: src/main/memory.c:1478
 msgid "first argument must be environment or external pointer"
 msgstr "第一引數必須是環境或外部指標"
 
-#: src/main/memory.c:1479
+#: src/main/memory.c:1480
 msgid "second argument must be a function"
 msgstr "第二引數必須是函數"
 
-#: src/main/memory.c:1483
+#: src/main/memory.c:1484
 msgid "third argument must be 'TRUE' or 'FALSE'"
 msgstr "第三引數的值必須是 'TRUE' 或 'FALSE'"
 
-#: src/main/memory.c:1823
+#: src/main/memory.c:1824
 #, c-format
 msgid "Garbage collection %d = %d"
 msgstr ""
 
-#: src/main/memory.c:1826
+#: src/main/memory.c:1827
 #, c-format
 msgid " (level %d) ... "
 msgstr ""
 
-#: src/main/memory.c:1980
+#: src/main/memory.c:1981
 msgid "vector memory exhausted (limit reached?)"
 msgstr "向量記憶體已用完 (達到了極值?)"
 
-#: src/main/memory.c:1986
+#: src/main/memory.c:1987
 msgid "cons memory exhausted (limit reached?)"
 msgstr "cons 記憶體已用完 (達到了極值?)"
 
-#: src/main/memory.c:1991
+#: src/main/memory.c:1992
 msgid "memory exhausted (limit reached?)"
 msgstr "記憶體已耗盡 (達到了極值？)"
 
-#: src/main/memory.c:2012
+#: src/main/memory.c:2013
 #, fuzzy
 msgid "couldn't allocate memory for pointer stack"
 msgstr "無法為 'read.dcf' 配置記憶體"
 
-#: src/main/memory.c:2069
+#: src/main/memory.c:2070
 #, fuzzy
 msgid "couldn't allocate node stack"
 msgstr "無法為 pushBack 配置空間"
 
-#: src/main/memory.c:2074
+#: src/main/memory.c:2075
 #, fuzzy
 msgid "couldn't allocate integer stack"
 msgstr "無法為 pushBack 配置空間"
 
-#: src/main/memory.c:2127
+#: src/main/memory.c:2128
 #, fuzzy, c-format
 msgid "cannot allocate memory block of size %0.f Tb"
 msgstr "無法配置大小為 %0.1f Gb 的記憶體區塊"
 
-#: src/main/memory.c:2132
+#: src/main/memory.c:2133
 #, c-format
 msgid "cannot allocate memory block of size %0.1f Gb"
 msgstr "無法配置大小為 %0.1f Gb 的記憶體區塊"
 
-#: src/main/memory.c:2459
+#: src/main/memory.c:2460
 #, fuzzy
 msgid "vector is too large"
 msgstr "指定的向量大小太大"
 
-#: src/main/memory.c:2462
+#: src/main/memory.c:2463
 msgid "negative length vectors are not allowed"
 msgstr "不允許負長度的向量"
 
-#: src/main/memory.c:2474
+#: src/main/memory.c:2475
 msgid "use of allocVector(CHARSXP ...) is defunct\n"
 msgstr ""
 
-#: src/main/memory.c:2488 src/main/memory.c:2501 src/main/memory.c:2514
-#: src/main/memory.c:2529
+#: src/main/memory.c:2489 src/main/memory.c:2502 src/main/memory.c:2515
+#: src/main/memory.c:2530
 #, c-format
 msgid "cannot allocate vector of length %d"
 msgstr "無法分派長度為 %d 的向量"
 
-#: src/main/memory.c:2539 src/main/memory.c:2546
+#: src/main/memory.c:2540 src/main/memory.c:2547
 #, fuzzy
 msgid "invalid length for pairlist"
 msgstr "長度為 0 的引數是不正確的"
 
-#: src/main/memory.c:2550
+#: src/main/memory.c:2551
 #, c-format
 msgid "invalid type/length (%s/%d) in vector allocation"
 msgstr "向量配置的類型/長度 (%s/%d) 無效"
 
-#: src/main/memory.c:2649
+#: src/main/memory.c:2650
 #, c-format
 msgid "cannot allocate vector of size %0.1f Gb"
 msgstr "無法配置大小為 %0.1f Gb 的向量"
 
-#: src/main/memory.c:2653
+#: src/main/memory.c:2654
 #, c-format
 msgid "cannot allocate vector of size %0.1f Mb"
 msgstr "無法配置大小為 %0.1f Mb 的向量"
 
-#: src/main/memory.c:2657
+#: src/main/memory.c:2658
 #, c-format
 msgid "cannot allocate vector of size %0.f Kb"
 msgstr "無法配置大小為 %0.f Kb 的向量"
 
-#: src/main/memory.c:2901
+#: src/main/memory.c:2907
 #, c-format
 msgid ""
 "\n"
 "%.1f Mbytes of cons cells used (%d%%)\n"
 msgstr ""
 
-#: src/main/memory.c:2906
+#: src/main/memory.c:2912
 #, c-format
 msgid "%.1f Mbytes of vectors used (%d%%)\n"
 msgstr ""
 
-#: src/main/memory.c:2929
+#: src/main/memory.c:2935
 #, c-format
 msgid "GC encountered a node (%p) with type FREESXP (was %s) at memory.c:%d"
 msgstr ""
 
-#: src/main/memory.c:2934 src/main/memory.c:2939
+#: src/main/memory.c:2940 src/main/memory.c:2945
 #, c-format
 msgid "GC encountered a node (%p) with an unknown SEXP type: %s at memory.c:%d"
 msgstr ""
 
-#: src/main/memory.c:2949
+#: src/main/memory.c:2955
 msgid "internal TRUE value has been modified"
 msgstr ""
 
-#: src/main/memory.c:2953
+#: src/main/memory.c:2959
 msgid "internal FALSE value has been modified"
 msgstr ""
 
-#: src/main/memory.c:2958
+#: src/main/memory.c:2964
 msgid "internal logical NA value has been modified"
 msgstr ""
 
-#: src/main/memory.c:3056
+#: src/main/memory.c:3062
 msgid "protect(): protection stack overflow"
 msgstr "protect()：防止堆疊向上溢位"
 
-#: src/main/memory.c:3063
+#: src/main/memory.c:3069
 #, fuzzy, c-format
 msgid "unprotect(): only %d protected item"
 msgid_plural "unprotect(): only %d protected items"
 msgstr[0] "unprotect()：只有 %d 個受保護項目"
 
-#: src/main/memory.c:3098
+#: src/main/memory.c:3104
 msgid "unprotect_ptr: pointer not found"
 msgstr "unprotect_ptr: 找不到指標"
 
-#: src/main/memory.c:3136
+#: src/main/memory.c:3142
 #, fuzzy, c-format
 msgid "R_Reprotect: only %d protected item, can't reprotect index %d"
 msgid_plural "R_Reprotect: only %d protected items, can't reprotect index %d"
 msgstr[0] "unprotect()：只有 %d 個受保護項目"
 
-#: src/main/memory.c:3188
+#: src/main/memory.c:3194
 #, fuzzy, c-format
 msgid "'Calloc()' function could not allocate memory (%.0f of %u bytes)"
 msgstr "Calloc 無法配置記憶體 (%.0f 於 %u 位元組)"
 
-#: src/main/memory.c:3198
+#: src/main/memory.c:3204
 #, fuzzy, c-format
 msgid "'Realloc()' function could not re-allocate memory (%.0f bytes)"
 msgstr "Realloc 無法重新配置記憶體 (%.0f 位元組)"
 
-#: src/main/memory.c:3329
+#: src/main/memory.c:3335
 #, c-format
 msgid "value of 'SET_ATTRIB' must be a pairlist or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3367
+#: src/main/memory.c:3373
 #, c-format
 msgid "LENGTH or similar applied to %s object"
 msgstr ""
 
-#: src/main/memory.c:3382
+#: src/main/memory.c:3388
 #, c-format
 msgid "'CHAR()' function can only be applied to a 'CHARSXP', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3389
+#: src/main/memory.c:3395
 #, c-format
 msgid ""
 "'STRING_ELT()' function can only be applied to a 'character vector', not a "
 "'%s'"
 msgstr ""
 
-#: src/main/memory.c:3399
+#: src/main/memory.c:3405
 #, c-format
 msgid "'VECTOR_ELT()' function can only be applied to a 'list', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3406
+#: src/main/memory.c:3412
 #, c-format
 msgid "'LOGICAL()' function can only be applied to a 'logical', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3414
+#: src/main/memory.c:3420
 #, c-format
 msgid "'INTEGER()' function can only be applied to a 'integer', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3421
+#: src/main/memory.c:3427
 #, fuzzy, c-format
 msgid "'RAW()' function can only be applied to a 'raw', not a '%s'"
 msgstr "nsl() 無法分辨主機 '%s'"
 
-#: src/main/memory.c:3428
+#: src/main/memory.c:3434
 #, c-format
 msgid "'REAL()' function can only be applied to a 'numeric', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3435
+#: src/main/memory.c:3441
 #, fuzzy, c-format
 msgid "'COMPLEX()' function can only be applied to a 'complex', not a '%s'"
 msgstr "nsl() 無法分辨主機 '%s'"
 
-#: src/main/memory.c:3444
+#: src/main/memory.c:3450
 msgid "not safe to return vector pointer"
 msgstr "回傳向量指標不是安全的做法"
 
-#: src/main/memory.c:3449
+#: src/main/memory.c:3455
 #, c-format
 msgid ""
 "'SET_STRING_ELT()' function can only be applied to a 'character vector', not "
 "a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3452
+#: src/main/memory.c:3458
 #, c-format
 msgid "value of 'SET_STRING_ELT()' function must be a 'CHARSXP' not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3455
+#: src/main/memory.c:3461
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_STRING_ELT()' function"
 msgstr ""
 
-#: src/main/memory.c:3466
+#: src/main/memory.c:3472
 #, c-format
 msgid "'SET_VECTOR_ELT()' function can only be applied to a 'list', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3470
+#: src/main/memory.c:3476
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_VECTOR_ELT()' function"
 msgstr ""
 
-#: src/main/memory.c:3495 src/main/memory.c:3505 src/main/memory.c:3517
-#: src/main/memory.c:3531 src/main/memory.c:3547 src/main/memory.c:3565
+#: src/main/memory.c:3501 src/main/memory.c:3511 src/main/memory.c:3523
+#: src/main/memory.c:3537 src/main/memory.c:3553 src/main/memory.c:3571
 msgid "bad value"
 msgstr "不當的值"
 
-#: src/main/memory.c:3647
+#: src/main/memory.c:3653
 #, c-format
 msgid "value of 'SET_CXTAIL()' function must be a 'char' or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3728
+#: src/main/memory.c:3734
 msgid "memory profiling is not available on this system"
 msgstr "這個系統上無法取得記憶體側寫檔"
 
-#: src/main/memory.c:3792
+#: src/main/memory.c:3798
 #, fuzzy, c-format
 msgid "'Rprofmem()': cannot open output file '%s'"
 msgstr "Rprofmem：無法開啟輸出檔案 '%s'"
 
-#: src/main/memory.c:3828
+#: src/main/memory.c:3834
 msgid "'R_AllocStringBuffer( (size_t)-1 )' function is no longer allowed"
 msgstr ""
 
-#: src/main/memory.c:3845
+#: src/main/memory.c:3851
 #, fuzzy, c-format
 msgid "could not allocate memory (%u Mb) in 'R_AllocStringBuffer()' function"
 msgstr "無法為 'read.dcf' 配置記憶體"
 
-#: src/main/memory.c:3897
+#: src/main/memory.c:3903
 #, c-format
 msgid "long vectors not supported yet: %s:%d"
 msgstr ""
@@ -7690,118 +7695,118 @@ msgstr "不能在向量/串列極值外賦值(%d 加大到 %d)"
 msgid "incompatible types (from %s to %s) in subassignment type fix"
 msgstr "下賦值 fix 類型中有不相容的類型 (從 %s 到 %s)"
 
-#: src/main/subassign.c:505 src/main/subassign.c:785 src/main/subassign.c:788
-#: src/main/subassign.c:1088
+#: src/main/subassign.c:528 src/main/subassign.c:808 src/main/subassign.c:811
+#: src/main/subassign.c:1111
 #, fuzzy
 msgid "NA values are not allowed in subscripted assignments"
 msgstr "下標賦值中不允許 NA"
 
-#: src/main/subassign.c:523 src/main/subassign.c:799 src/main/subassign.c:1080
-#: src/main/subassign.c:1660
+#: src/main/subassign.c:546 src/main/subassign.c:822 src/main/subassign.c:1103
+#: src/main/subassign.c:1683
 msgid "replacement has length zero"
 msgstr "置換的長度為零"
 
-#: src/main/subassign.c:525 src/main/subassign.c:801 src/main/subassign.c:1082
+#: src/main/subassign.c:548 src/main/subassign.c:824 src/main/subassign.c:1105
 msgid "number of items to replace is not a multiple of replacement length"
 msgstr "被替換的項目不是替換值長度的倍數"
 
-#: src/main/subassign.c:721
+#: src/main/subassign.c:744
 msgid "sub assignment (*[*] <- *) not done; __bug?__"
 msgstr ""
 
-#: src/main/subassign.c:769
+#: src/main/subassign.c:792
 msgid "incorrect number of subscripts on matrix"
 msgstr "矩陣中的下標數目不正確"
 
-#: src/main/subassign.c:1034
+#: src/main/subassign.c:1057
 #, c-format
 msgid "incompatible types (from %s to %s) in matrix subset assignment"
 msgstr "矩陣子集賦值中有不相容的類型 (從 %s 到 %s)"
 
-#: src/main/subassign.c:1050 src/main/subset.c:951
+#: src/main/subassign.c:1073 src/main/subset.c:955
 msgid "incorrect number of subscripts"
 msgstr "下標數目不正確"
 
-#: src/main/subassign.c:1227
+#: src/main/subassign.c:1250
 #, c-format
 msgid "incompatible types (from %s to %s) in array subset assignment"
 msgstr "陣列子集賦值有不相容的類型 (從 %s 到 %s)"
 
-#: src/main/subassign.c:1250
+#: src/main/subassign.c:1273
 #, fuzzy, c-format
 msgid "internal error: index %d from length %d"
 msgstr "do_random1 產生了內部錯誤"
 
-#: src/main/subassign.c:1263 src/main/subassign.c:1284
+#: src/main/subassign.c:1286 src/main/subassign.c:1307
 msgid "invalid subscript in list assign"
 msgstr "串列賦值中的下標數目無效"
 
-#: src/main/subassign.c:1277
+#: src/main/subassign.c:1300
 msgid "invalid number of subscripts to list assign"
 msgstr "串列賦值中的下標數目不正確"
 
-#: src/main/subassign.c:1376
+#: src/main/subassign.c:1399
 #, fuzzy
 msgid "'SubAssignArgs()': invalid number of arguments"
 msgstr "SubAssignArgs: 引數數目不正確"
 
-#: src/main/subassign.c:1521
+#: src/main/subassign.c:1544
 msgid "result is zero-length and so cannot be a language object"
 msgstr "結果長度為零因而無法做為一個語言物件"
 
-#: src/main/subassign.c:1620
+#: src/main/subassign.c:1643
 #, fuzzy
 msgid ""
 "'[[<-' defined for objects of type \"S4\" only for subclasses of environment"
 msgstr "[[<- 只有在子類別用於定義 \"S4\" 類型的物件"
 
-#: src/main/subassign.c:1632
+#: src/main/subassign.c:1655
 #, fuzzy
 msgid "wrong arguments for environment subassignment"
 msgstr "環境下賦值的引數不正確"
 
-#: src/main/subassign.c:1662
+#: src/main/subassign.c:1685
 msgid "more elements supplied than there are to replace"
 msgstr "用來替換的元素比所要替換的值多"
 
-#: src/main/subassign.c:1664
+#: src/main/subassign.c:1687
 #, fuzzy
 msgid "'[[ ]]' with missing subscript"
 msgstr "[[ ]] 缺少下標"
 
-#: src/main/subassign.c:1682
+#: src/main/subassign.c:1705
 #, fuzzy
 msgid "'[[ ]]' subscript out of bounds"
 msgstr "[[ ]] 下標在界限外"
 
-#: src/main/subassign.c:1688 src/main/subassign.c:1869
+#: src/main/subassign.c:1711 src/main/subassign.c:1892
 #, fuzzy
 msgid "'[[ ]]' improper number of subscripts"
 msgstr "[[ ]] 下標數目不正確"
 
-#: src/main/subassign.c:1700 src/main/subassign.c:1880
+#: src/main/subassign.c:1723 src/main/subassign.c:1903
 #, fuzzy, c-format
 msgid "'[[ ]]' subscript (%d) out of bounds"
 msgstr "[[ ]] 下標 (%d) 在界限外"
 
-#: src/main/subassign.c:1834
+#: src/main/subassign.c:1857
 #, fuzzy, c-format
 msgid "incompatible types (from %s to %s) in '[[' assignment"
 msgstr "[[ 賦值中有不相容的類型 (從 %s 到 %s)"
 
-#: src/main/subassign.c:1936 src/main/subscript.c:152 src/main/subscript.c:154
+#: src/main/subassign.c:1959 src/main/subscript.c:152 src/main/subscript.c:154
 #: src/main/subscript.c:283 src/main/subscript.c:285 src/main/subscript.c:912
 #: src/main/subscript.c:914 src/main/subscript.c:1009
-#: src/main/subscript.c:1011 src/main/subset.c:1153
+#: src/main/subscript.c:1011 src/main/subset.c:1157
 #, c-format
 msgid "invalid subscript type '%s'"
 msgstr "無效的下標類型 '%s'"
 
-#: src/main/subassign.c:1984
+#: src/main/subassign.c:2007
 msgid "no method for assigning subsets of this S4 class"
 msgstr "沒有方法可用於指派這個 S4 類別的子集"
 
-#: src/main/subassign.c:2042
+#: src/main/subassign.c:2065
 #, fuzzy
 msgid "coercing LHS to a list"
 msgstr "把公式左側強迫變成串列"
@@ -7839,7 +7844,7 @@ msgstr "遞迴索引在 %d 層失敗\n"
 msgid "no such index at level %d\n"
 msgstr "在 %d 層沒有此一索引\n"
 
-#: src/main/subscript.c:325 src/main/subset.c:133 src/main/subset.c:1057
+#: src/main/subscript.c:325 src/main/subset.c:133 src/main/subset.c:1061
 #, fuzzy
 msgid "invalid subscript for pairlist"
 msgstr "串列賦值中的下標數目無效"
@@ -7884,32 +7889,32 @@ msgstr "此一類型無法處理矩陣下標"
 msgid "array subscripting not handled for this type"
 msgstr "此一類型無法處理陣列下標"
 
-#: src/main/subset.c:850
+#: src/main/subset.c:854
 msgid "incorrect number of dimensions"
 msgstr "維度數目不正確"
 
-#: src/main/subset.c:947
+#: src/main/subset.c:951
 msgid "no index specified"
 msgstr "沒有指定的索引"
 
-#: src/main/subset.c:957
+#: src/main/subset.c:961
 msgid "this S4 class is not subsettable"
 msgstr "這個 S4 類別不是子集合表格"
 
-#: src/main/subset.c:964
+#: src/main/subset.c:968
 msgid "wrong arguments for subsetting an environment"
 msgstr "取子集環境時的引數不正確"
 
-#: src/main/subset.c:998
+#: src/main/subset.c:1002
 #, fuzzy
 msgid "getter call used outside of a complex assignment"
 msgstr "複數賦值中的函數不正確"
 
-#: src/main/subset.c:1196
+#: src/main/subset.c:1200
 msgid "$ operator not defined for this S4 class"
 msgstr ""
 
-#: src/main/subset.c:1317
+#: src/main/subset.c:1321
 msgid "$ operator is invalid for atomic vectors"
 msgstr ""
 
@@ -9719,26 +9724,26 @@ msgstr "需要非空字元引數"
 msgid "'intern' must be logical and not NA"
 msgstr "'intern' 必須是邏輯值且非無定義"
 
-#: src/unix/sys-unix.c:264
+#: src/unix/sys-unix.c:270
 #, c-format
 msgid "cannot popen '%s', probable reason '%s'"
 msgstr "無法 popen '%s' ，可能的原因是 '%s'"
 
-#: src/unix/sys-unix.c:269
+#: src/unix/sys-unix.c:280
 #, c-format
 msgid "line %d may be truncated in call to system(, intern = TRUE)"
 msgstr "第 %d 列也許在呼叫 system(, intern = TRUE) 時被截斷"
 
-#: src/unix/sys-unix.c:286 src/unix/sys-unix.c:288
+#: src/unix/sys-unix.c:302 src/unix/sys-unix.c:304
 msgid "error in running command"
 msgstr "執行命令時發生錯誤"
 
-#: src/unix/sys-unix.c:292
+#: src/unix/sys-unix.c:308
 #, c-format
 msgid "running command '%s' had status %d and error message '%s'"
 msgstr "執行命令 '%s' 時出現狀態 %d 和錯誤訊息 '%s'"
 
-#: src/unix/sys-unix.c:397
+#: src/unix/sys-unix.c:413
 msgid "Sys.info() is not implemented on this system"
 msgstr "本系統沒有實作 Sys.info() 此一功能"
 
@@ -10498,10 +10503,6 @@ msgstr "無法使用 X11"
 #, fuzzy
 #~ msgid "'%s' argument must be length 1"
 #~ msgstr "'fromLast' 的長度必須是 1"
-
-#, fuzzy
-#~ msgid "'%s' argument must be non-null character string"
-#~ msgstr "'norm' 必須是字串"
 
 #, fuzzy
 #~ msgid "argument must be a character vector of length 1"

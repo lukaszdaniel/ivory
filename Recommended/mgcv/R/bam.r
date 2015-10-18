@@ -454,7 +454,7 @@ bgam.fitd <- function (G, mf, gp ,scale , coef=NULL,etastart = NULL,
 
       if (any(!is.finite(coef))) {
           conv <- FALSE
-          warning(gettextf("non-finite coefficients at iteration %d",
+          warning(gettextf("Non-finite coefficients at iteration %d",
                   iter))
           break
       }

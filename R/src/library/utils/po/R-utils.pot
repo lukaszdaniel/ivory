@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.3.0\n"
-"POT-Creation-Date: 2015-09-22 23:12\n"
+"POT-Creation-Date: 2015-10-18 11:49\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -980,10 +980,24 @@ msgid "If nothing happens, you should open\n%s yourself"
 msgstr ""
 
 
+#: R/sysdata.R: 0
+#. R/sysdata.R: gettext("If the R code is merely a translation from another language\n(typically S), use for the translator to R.",     domain = "R-utils")
+
+msgid "If the R code is merely a translation from another language\n(typically S), use for the translator to R."
+msgstr ""
+
+
 #: R/help.start.R: 0
 #. R/help.start.R: gettextf("If the browser launched by '%s' is already running, it is *not* restarted, and you must switch to its window.",     browser)
 
 msgid "If the browser launched by '%s' is already running, it is *not* restarted, and you must switch to its window."
+msgstr ""
+
+
+#: R/sysdata.R: 0
+#. R/sysdata.R: gettext("If the package is part of a thesis, use for the thesis advisor.", domain = "R-utils")
+
+msgid "If the package is part of a thesis, use for the thesis advisor."
 msgstr ""
 
 
@@ -1818,6 +1832,55 @@ msgstr ""
 #. R/citation.R: gettextf("Use either %s or %s but not both", sQuote("family"), sQuote("last"))
 
 msgid "Use either %s or %s but not both"
+msgstr ""
+
+
+#: R/sysdata.R: 0
+#. R/sysdata.R: gettext("Use for all copyright holders.", domain = "R-utils")
+
+msgid "Use for all copyright holders."
+msgstr ""
+
+
+#: R/sysdata.R: 0
+#. R/sysdata.R: gettext("Use for authors who have been contracted to write (parts of) the\npackage and hence do not own intellectual property.",     domain = "R-utils")
+
+msgid "Use for authors who have been contracted to write (parts of) the\npackage and hence do not own intellectual property."
+msgstr ""
+
+
+#: R/sysdata.R: 0
+#. R/sysdata.R: gettext("Use for authors who have made smaller contributions (such as\ncode patches etc.) but should not show up in the package\ncitation.",     domain = "R-utils")
+
+msgid "Use for authors who have made smaller contributions (such as\ncode patches etc.) but should not show up in the package\ncitation."
+msgstr ""
+
+
+#: R/sysdata.R: 0
+#. R/sysdata.R: gettext("Use for full authors who have made substantial contributions to\nthe package and should show up in the package citation.",     domain = "R-utils")
+
+msgid "Use for full authors who have made substantial contributions to\nthe package and should show up in the package citation."
+msgstr ""
+
+
+#: R/sysdata.R: 0
+#. R/sysdata.R: gettext("Use for package maintainers that collected code (potentially in\nother languages) but did not make further substantial\ncontributions to the package.",     domain = "R-utils")
+
+msgid "Use for package maintainers that collected code (potentially in\nother languages) but did not make further substantial\ncontributions to the package."
+msgstr ""
+
+
+#: R/sysdata.R: 0
+#. R/sysdata.R: gettext("Use for persons who contributed data sets for the package.", domain = "R-utils")
+
+msgid "Use for persons who contributed data sets for the package."
+msgstr ""
+
+
+#: R/sysdata.R: 0
+#. R/sysdata.R: gettext("Use for the package maintainer.", domain = "R-utils")
+
+msgid "Use for the package maintainer."
 msgstr ""
 
 

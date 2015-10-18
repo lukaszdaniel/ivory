@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-09-22 23:12\n"
+"POT-Creation-Date: 2015-10-18 15:37\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -43,6 +43,14 @@ msgstr "%s ruft auf:"
 #, fuzzy
 msgid "%s command is not available"
 msgstr "Test '%s' nicht verfügbar"
+
+#. R/news.R: gettextf("%s file was not found", sQuote("DESCRIPTION"))
+#. R/news.R: gettextf("%s file was not found", sQuote("NEWS"))
+#. R/news.R: gettextf("%s file was not found", sQuote("DESCRIPTION"))
+#: R/news.R:0
+#, fuzzy
+msgid "%s file was not found"
+msgstr "Datei '%s' nicht gefunden"
 
 #. R/QC.R: gettextf("  %s has wrong argument list %s", sQuote(f), sQuote(paste(bad, collapse = ", ")),     domain = "R-tools")
 #. R/QC.R: gettextf("  %s has wrong argument list %s", sQuote(f), sQuote(paste(bad, collapse = ", ")),     domain = "R-tools")
@@ -1375,6 +1383,7 @@ msgstr "Felder mit nicht-ASCII Werten:"
 #. R/QC.R: gettextf("File %s:", sQuote(fname), domain = "R-tools")
 #. R/QC.R: gettextf("File %s:", sQuote(f), domain = "R-tools")
 #. R/QC.R: gettextf("File %s:", sQuote(f), domain = "R-tools")
+#. R/QC.R: gettextf("File %s:", sQuote(e[1L]), domain = "R-tools")
 #. R/QC.R: gettextf("File %s:", sQuote(f), domain = "R-tools")
 #. R/Vignettes.R: gettextf("File %s:", names(y)[k], domain = "R-tools")
 #. R/sotools.R: gettextf("File %s:", sQuote(attr(x, "file")), domain = "R-tools")
@@ -1382,11 +1391,6 @@ msgstr "Felder mit nicht-ASCII Werten:"
 #: R/QC.R:0 R/Vignettes.R:0 R/sotools.R:0
 msgid "File %s:"
 msgstr "Datei %s:"
-
-#. R/QC.R: gettextf("File '%s':", e[1L], domain = "R-tools")
-#: R/QC.R:0
-msgid "File '%s':"
-msgstr "Datei '%s':"
 
 #. R/utils.R: stop("File 'DESCRIPTION' is missing.")
 #: R/utils.R:0
@@ -4510,6 +4514,7 @@ msgstr ""
 
 #. R/check.R: gettext("checking re-building of vignette outputs ...", domain = "R-tools")
 #. R/check.R: gettext("checking re-building of vignette outputs ...", domain = "R-tools")
+#. R/check.R: gettext("checking re-building of vignette outputs ...", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
 msgid "checking re-building of vignette outputs ..."
@@ -4520,6 +4525,7 @@ msgstr "Warnung in Datei '%s'"
 msgid "checking replacement functions ..."
 msgstr ""
 
+#. R/check.R: gettext("checking running R code from vignettes ...", domain = "R-tools")
 #. R/check.R: gettext("checking running R code from vignettes ...", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
@@ -7030,6 +7036,13 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "kann '%s' Zeile(n) %s nicht rekodieren"
 msgstr[1] "kann '%s' Zeile(n) %s nicht rekodieren"
 
+#, fuzzy
+#~ msgid "'%s' file not found"
+#~ msgstr "Datei '%s' nicht gefunden"
+
+#~ msgid "File '%s':"
+#~ msgstr "Datei '%s':"
+
 #~ msgid ":"
 #~ msgstr ":"
 
@@ -7153,10 +7166,6 @@ msgstr[1] "kann '%s' Zeile(n) %s nicht rekodieren"
 #, fuzzy
 #~ msgid "File"
 #~ msgstr "Datei %s:"
-
-#, fuzzy
-#~ msgid "file %s not found"
-#~ msgstr "Datei '%s' nicht gefunden"
 
 #~ msgid "'file' must be a character string or connection"
 #~ msgstr "Argument 'file' muss eine Zeichenkette oder eine Verbindung sein"

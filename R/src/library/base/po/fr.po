@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-01 21:10+0200\n"
+"POT-Creation-Date: 2015-10-18 11:48+0200\n"
 "PO-Revision-Date: 2014-01-23 07:50+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -599,9 +599,9 @@ msgstr "problème lors de l'affichage de '%s'"
 #: src/gnuwin32/extra.c:572 src/gnuwin32/extra.c:597 src/main/agrep.c:132
 #: src/main/agrep.c:136 src/main/agrep.c:774 src/main/agrep.c:779
 #: src/main/apply.c:329 src/main/apply.c:331 src/main/apply.c:334
-#: src/main/array.c:90 src/main/array.c:1245 src/main/array.c:1371
-#: src/main/array.c:1373 src/main/array.c:1374 src/main/array.c:1720
-#: src/main/array.c:1722 src/main/array.c:1724 src/main/attrib.c:189
+#: src/main/array.c:90 src/main/array.c:1264 src/main/array.c:1390
+#: src/main/array.c:1392 src/main/array.c:1393 src/main/array.c:1739
+#: src/main/array.c:1741 src/main/array.c:1743 src/main/attrib.c:189
 #: src/main/builtin.c:89 src/main/builtin.c:98 src/main/builtin.c:117
 #: src/main/builtin.c:119 src/main/builtin.c:150 src/main/builtin.c:561
 #: src/main/builtin.c:577 src/main/builtin.c:764 src/main/builtin.c:766
@@ -664,7 +664,7 @@ msgstr "problème lors de l'affichage de '%s'"
 #: src/main/grep.c:2345 src/main/grep.c:2647 src/main/grep.c:2652
 #: src/main/internet.c:209 src/main/internet.c:223 src/main/internet.c:241
 #: src/main/internet.c:254 src/main/internet.c:266 src/main/internet.c:285
-#: src/main/memory.c:3805 src/main/names.c:1309 src/main/names.c:1312
+#: src/main/memory.c:3811 src/main/names.c:1309 src/main/names.c:1312
 #: src/main/objects.c:1600 src/main/objects.c:1602 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
 #: src/main/paste.c:411 src/main/paste.c:416 src/main/paste.c:421
@@ -848,19 +848,19 @@ msgstr "l'affectation de la conduite de connexion a échoué"
 msgid "'%s' argument is not a character vector"
 msgstr "'fmt' n'est pas un vecteur de caractères"
 
-#: src/gnuwin32/system.c:121 src/unix/sys-unix.c:425
+#: src/gnuwin32/system.c:121 src/unix/sys-unix.c:441
 msgid "reached session elapsed time limit"
 msgstr "la limite de temps de la session est atteinte"
 
-#: src/gnuwin32/system.c:123 src/unix/sys-unix.c:427
+#: src/gnuwin32/system.c:123 src/unix/sys-unix.c:443
 msgid "reached elapsed time limit"
 msgstr "la limite de temps est atteinte"
 
-#: src/gnuwin32/system.c:129 src/unix/sys-unix.c:433
+#: src/gnuwin32/system.c:129 src/unix/sys-unix.c:449
 msgid "reached session CPU time limit"
 msgstr "la limite de temps processeur est atteinte"
 
-#: src/gnuwin32/system.c:131 src/unix/sys-unix.c:435
+#: src/gnuwin32/system.c:131 src/unix/sys-unix.c:451
 msgid "reached CPU time limit"
 msgstr "limite de temps processeur atteinte"
 
@@ -975,7 +975,7 @@ msgstr "chaîne de caractères attendue comme premier argument"
 msgid "character string expected as third argument"
 msgstr "chaîne de caractères attendue comme troisième argument"
 
-#: src/gnuwin32/sys-win32.c:256 src/unix/sys-unix.c:297
+#: src/gnuwin32/sys-win32.c:256 src/unix/sys-unix.c:313
 #, c-format
 msgid "running command '%s' had status %d"
 msgstr "l'exécution de la commande '%s' renvoie un statut %d"
@@ -1099,8 +1099,8 @@ msgid "argument '%s' has length > 1 and only the first element will be used"
 msgstr ""
 "l'argument %s a une longueur > 1 et seul le premier élément est utilisé"
 
-#: src/main/agrep.c:191 src/main/agrep.c:818 src/main/attrib.c:1548
-#: src/main/coerce.c:2804 src/main/saveload.c:1941
+#: src/main/agrep.c:191 src/main/agrep.c:818 src/main/coerce.c:2804
+#: src/main/saveload.c:1941
 #, fuzzy, c-format
 msgid "'%s' argument must be a non-empty character string"
 msgstr "'pattern' doit être une chaîne de caractères non vide"
@@ -1153,7 +1153,7 @@ msgstr ""
 msgid "'%s' argument must be a vector"
 msgstr "le premier argument doit être un vecteur"
 
-#: src/main/apply.c:101 src/main/array.c:484 src/main/character.c:747
+#: src/main/apply.c:101 src/main/array.c:503 src/main/character.c:747
 #: src/main/character.c:1554 src/main/connections.c:3546
 #: src/main/context.c:655 src/main/context.c:674 src/main/datetime.c:686
 #: src/main/datetime.c:788 src/main/datetime.c:1047 src/main/dotcode.c:220
@@ -1300,7 +1300,7 @@ msgstr "argument 'base' de taille nulle incorrect"
 msgid "bad arithmetic function index"
 msgstr "mauvaise fonction"
 
-#: src/main/array.c:83 src/main/array.c:1551
+#: src/main/array.c:83 src/main/array.c:1570
 #, fuzzy, c-format
 msgid "'data' argument must be of a vector type, was '%s'"
 msgstr "'data' doit être de type vecteur"
@@ -1309,14 +1309,14 @@ msgstr "'data' doit être de type vecteur"
 msgid "non-numeric matrix extent"
 msgstr "plage non numérique pour une matrice"
 
-#: src/main/array.c:100 src/main/array.c:108 src/main/array.c:1657
-#: src/main/array.c:1662
+#: src/main/array.c:100 src/main/array.c:108 src/main/array.c:1676
+#: src/main/array.c:1681
 #, fuzzy, c-format
 msgid "invalid '%s' value (too large or NA)"
 msgstr "valeur 'nrow' incorrecte (trop grande ou NA)"
 
-#: src/main/array.c:102 src/main/array.c:110 src/main/array.c:1659
-#: src/main/array.c:1664
+#: src/main/array.c:102 src/main/array.c:110 src/main/array.c:1678
+#: src/main/array.c:1683
 #, fuzzy, c-format
 msgid "invalid '%s' value (< 0)"
 msgstr "valeur 'nrow' incorrecte (< 0)"
@@ -1355,7 +1355,7 @@ msgstr ""
 msgid "data length exceeds size of matrix"
 msgstr "la longueur des données dépasse la taille de la matrice"
 
-#: src/main/array.c:150 src/main/array.c:1562 src/main/array.c:1671
+#: src/main/array.c:150 src/main/array.c:1581 src/main/array.c:1690
 msgid "too many elements specified"
 msgstr "trop d'éléments fournis"
 
@@ -1384,55 +1384,55 @@ msgstr "alloc3Darray : trop d'éléments fournis"
 msgid "'allocArray()': too many elements specified by 'dims' argument"
 msgstr "allocArray : trop d'éléments fournis par 'dims'"
 
-#: src/main/array.c:497
+#: src/main/array.c:516
 #, fuzzy, c-format
 msgid "'%s' argument must be a list or atomic vector"
 msgstr "le premier argument doit être un vecteur"
 
-#: src/main/array.c:535
+#: src/main/array.c:554
 #, fuzzy, c-format
 msgid "a matrix-like object is required as argument passed to '%s'"
 msgstr ""
 "une objet de type matrice ou assimilé est nécessaire comme argument pour "
 "'row/col'"
 
-#: src/main/array.c:749
+#: src/main/array.c:768
 #, fuzzy
 msgid "numeric/complex matrix/vector arguments are required"
 msgstr "nécessite des arguments numériques/complexes matrice/vecteur"
 
-#: src/main/array.c:859 src/main/array.c:863 src/main/array.c:867
+#: src/main/array.c:878 src/main/array.c:882 src/main/array.c:886
 msgid "non-conformable arguments"
 msgstr "arguments inadéquats"
 
-#: src/main/array.c:1166
+#: src/main/array.c:1185
 msgid "argument is not a matrix"
 msgstr "l'argument n'est pas une matrice"
 
-#: src/main/array.c:1201
+#: src/main/array.c:1220
 msgid "invalid first argument, must be an array"
 msgstr "premier argument incorrect, doit être un tableau"
 
-#: src/main/array.c:1215
+#: src/main/array.c:1234
 #, fuzzy, c-format
 msgid "'perm' is of wrong length %d (!= %d)"
 msgstr "'perm' est d'une mauvaise longueur"
 
-#: src/main/array.c:1220 src/main/array.c:1223
+#: src/main/array.c:1239 src/main/array.c:1242
 msgid "'a' does not have named dimnames"
 msgstr "'a' n'a pas de noms de dimensions"
 
-#: src/main/array.c:1230
+#: src/main/array.c:1249
 #, fuzzy, c-format
 msgid "'perm[%d]' does not match a dimension name"
 msgstr "perm[%d] ne correspond pas à une dimension de nom"
 
-#: src/main/array.c:1243
+#: src/main/array.c:1262
 #, fuzzy
 msgid "value is out of range in 'perm' argument"
 msgstr "valeur de 'perm' hors intervalle"
 
-#: src/main/array.c:1325 src/main/connections.c:5484 src/main/debug.c:112
+#: src/main/array.c:1344 src/main/connections.c:5484 src/main/debug.c:112
 #: src/main/objects.c:1043 src/main/raw.c:56 src/main/raw.c:336
 #: src/main/sort.c:327 src/main/sort.c:1235 src/main/sort.c:1403
 #: src/main/unique.c:670 src/main/unique.c:1445 src/main/unique.c:1517
@@ -1441,27 +1441,27 @@ msgstr "valeur de 'perm' hors intervalle"
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr "'resize' doit être TRUE ou FALSE"
 
-#: src/main/array.c:1382
+#: src/main/array.c:1401
 #, fuzzy, c-format
 msgid "'%s' must be numeric"
 msgstr "'x' doit être numérique"
 
-#: src/main/array.c:1385
+#: src/main/array.c:1404
 #, fuzzy, c-format
 msgid "'%s' argument is too short"
 msgstr "argument 'file' trop long"
 
-#: src/main/array.c:1558
+#: src/main/array.c:1577
 #, fuzzy, c-format
 msgid "'%s' argument cannot be of length 0"
 msgstr "'hadj' doit être de longueur unitaire"
 
-#: src/main/array.c:1667
+#: src/main/array.c:1686
 #, fuzzy, c-format
 msgid "'%s' must have positive length"
 msgstr "'value' doit avoir une longueur strictement positive"
 
-#: src/main/array.c:1733
+#: src/main/array.c:1752
 #, c-format
 msgid "singular matrix in 'backsolve()'. First zero in diagonal [%d]"
 msgstr ""
@@ -1540,17 +1540,17 @@ msgstr "ajout d'une classe \"factor\" à un objet incorrect"
 msgid "attempt to set invalid 'class' attribute"
 msgstr "tentative de changer l'attribut 'class' à une valeur incorrecte"
 
-#: src/main/attrib.c:842
+#: src/main/attrib.c:841
 #, fuzzy
 msgid "invalid class argument passed to internal '.class_cache'"
 msgstr "mauvais nombre d'arguments dans call_R"
 
-#: src/main/attrib.c:872
+#: src/main/attrib.c:871
 #, fuzzy, c-format
 msgid "class \"%s\" has no 'names' slot"
 msgstr "La classe '%s' n'a pas de slot 'names'"
 
-#: src/main/attrib.c:874
+#: src/main/attrib.c:873
 #, fuzzy, c-format
 msgid ""
 "class \"%s\" has no 'names' slot; assigning a 'names' attribute will create "
@@ -1559,7 +1559,7 @@ msgstr ""
 "La classe '%s' n'a pas de slot 'names'; l'affectation d'un attribut 'names' "
 "créera un object incorrect"
 
-#: src/main/attrib.c:877
+#: src/main/attrib.c:876
 #, fuzzy, c-format
 msgid ""
 "invalid to use 'names()<-' to set the 'names' slot in a non-vector class "
@@ -1568,146 +1568,151 @@ msgstr ""
 "L'utilisation de names()<- pour changer le slot 'names' dans une classe non "
 "vectorielle ('%s') est interdite"
 
-#: src/main/attrib.c:907
+#: src/main/attrib.c:906
 msgid "incompatible 'names' argument"
 msgstr "argument 'names' incompatible"
 
-#: src/main/attrib.c:962
+#: src/main/attrib.c:961
 #, c-format
 msgid "invalid type (%s) to set 'names' attribute"
 msgstr "type incorrect (%s) pour l'attribut 'names'"
 
-#: src/main/attrib.c:1034
+#: src/main/attrib.c:1033
 #, fuzzy
 msgid "'dimnames()' applied to non-array"
 msgstr "'dimnames' appliqué à autre chose qu'un tableau"
 
-#: src/main/attrib.c:1039 src/main/coerce.c:2454 src/main/engine.c:2979
+#: src/main/attrib.c:1038 src/main/coerce.c:2454 src/main/engine.c:2979
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "l'argument 'list' doit être une liste"
 
-#: src/main/attrib.c:1042 src/main/attrib.c:1069
+#: src/main/attrib.c:1041 src/main/attrib.c:1068
 #, c-format
 msgid "length of 'dimnames' [%d] must match that of 'dims' [%d]"
 msgstr ""
 "la longueur de 'dimnames' [%d] doit correspondre à celle de 'dims' [%d]"
 
-#: src/main/attrib.c:1075
+#: src/main/attrib.c:1074
 #, c-format
 msgid "invalid type (%s) for 'dimnames' (must be a vector)"
 msgstr "type incorrect (%s) pour 'dimnames' (doit être un vecteur)"
 
-#: src/main/attrib.c:1077
+#: src/main/attrib.c:1076
 #, c-format
 msgid "length of 'dimnames' [%d] not equal to array extent"
 msgstr "la longueur de 'dimnames' [%d] n'est pas égale à l'étendue du tableau"
 
-#: src/main/attrib.c:1148 src/main/builtin.c:76 src/main/builtin.c:113
+#: src/main/attrib.c:1147 src/main/builtin.c:76 src/main/builtin.c:113
 #: src/main/envir.c:1809 src/main/envir.c:1937 src/main/envir.c:1997
 #: src/main/envir.c:2134 src/main/paste.c:74 src/main/paste.c:293
 #: src/main/random.c:480 src/main/random.c:509 src/main/unique.c:1744
 msgid "invalid first argument"
 msgstr "premier argument incorrect"
 
-#: src/main/attrib.c:1151
+#: src/main/attrib.c:1150
 msgid "invalid second argument"
 msgstr "second argument incorrect"
 
-#: src/main/attrib.c:1159
+#: src/main/attrib.c:1158
 msgid "length-0 dimension vector is invalid"
 msgstr "vecteur dimension de longueur nulle incorrect"
 
-#: src/main/attrib.c:1164
+#: src/main/attrib.c:1163
 #, fuzzy
 msgid "the dimensions contain missing values"
 msgstr "les dimensions contiennent des valeurs manquantes"
 
-#: src/main/attrib.c:1166
+#: src/main/attrib.c:1165
 #, fuzzy
 msgid "the dimensions contain negative values"
 msgstr "les dimensions contiennent des valeurs négatives"
 
-#: src/main/attrib.c:1171
+#: src/main/attrib.c:1170
 #, fuzzy
 msgid "dimensions do not match the length of object"
 msgstr "dims [produit %d] ne correspond pas à la longueur de l'objet [%d]"
 
-#: src/main/attrib.c:1173
+#: src/main/attrib.c:1172
 #, fuzzy, c-format
 msgid "dimensions [product %d] do not match the length of object [%d]"
 msgstr "dims [produit %d] ne correspond pas à la longueur de l'objet [%d]"
 
-#: src/main/attrib.c:1250
+#: src/main/attrib.c:1249
 #, fuzzy
 msgid "duplicated levels in factors are deprecated"
 msgstr ""
 "les niveaux dupliqués ne seront plus acceptés pour les variables de type "
 "'factor'"
 
-#: src/main/attrib.c:1280
+#: src/main/attrib.c:1279
 msgid "attributes must be a list or NULL"
 msgstr "les attributs doivent être dans une liste, ou alors la valeur 'NULL'"
 
-#: src/main/attrib.c:1285
+#: src/main/attrib.c:1284
 msgid "attributes must be named"
 msgstr "les attributs doivent être nommés"
 
-#: src/main/attrib.c:1289
+#: src/main/attrib.c:1288
 #, c-format
 msgid "all attributes must have names [%d does not]"
 msgstr "tous les attributs doivent être nommés [%d ne l'est pas]"
 
-#: src/main/attrib.c:1382
+#: src/main/attrib.c:1381
 #, fuzzy
 msgid "either 2 or 3 arguments are required"
 msgstr "argument chaîne de caractères requis"
 
-#: src/main/attrib.c:1389
+#: src/main/attrib.c:1388
 #, fuzzy
 msgid "'which' attribute must be of mode character"
 msgstr "'which' doit être en mode caractère"
 
-#: src/main/attrib.c:1391
+#: src/main/attrib.c:1390
 msgid "exactly one attribute 'which' must be given"
 msgstr "un et un seul attribut 'which' doit être fourni"
 
-#: src/main/attrib.c:1452 src/main/attrib.c:1475 src/main/subscript.c:249
-#: src/main/subscript.c:253 src/main/subset.c:1234 src/main/subset.c:1288
+#: src/main/attrib.c:1451 src/main/attrib.c:1474 src/main/subscript.c:249
+#: src/main/subscript.c:253 src/main/subset.c:1238 src/main/subset.c:1292
 #, c-format
 msgid "partial match of '%s' to '%s'"
 msgstr "correspondance partielle de '%s' en '%s'"
 
-#: src/main/attrib.c:1513
+#: src/main/attrib.c:1519
 #, fuzzy, c-format
 msgid "invalid type '%s' for slot name"
 msgstr "type ou longueur incorrect pour le nom d'un slot"
 
-#: src/main/attrib.c:1672 src/main/attrib.c:1743 src/main/attrib.c:1781
+#: src/main/attrib.c:1556
+#, fuzzy, c-format
+msgid "'%s' argument must be non-null character string"
+msgstr "'norm' doit être une chaîne de caractères"
+
+#: src/main/attrib.c:1681 src/main/attrib.c:1752 src/main/attrib.c:1790
 msgid "invalid type or length for slot name"
 msgstr "type ou longueur incorrect pour le nom d'un slot"
 
-#: src/main/attrib.c:1706
+#: src/main/attrib.c:1715
 #, c-format
 msgid "cannot get a slot (\"%s\") from an object of type \"%s\""
 msgstr "impossible d'obtenir un slot (\"%s\") d'un objet de type \"%s\""
 
-#: src/main/attrib.c:1717
+#: src/main/attrib.c:1726
 #, c-format
 msgid "no slot of name \"%s\" for this object of class \"%s\""
 msgstr "aucun slot de nom \"%s\" pour cet objet de la classe \"%s\""
 
-#: src/main/attrib.c:1734
+#: src/main/attrib.c:1743
 msgid "attempt to set slot on NULL object"
 msgstr "tentative de changer le slot d'un objet en NULL"
 
-#: src/main/attrib.c:1776
+#: src/main/attrib.c:1785
 #, fuzzy
 msgid "formal classes cannot be used without the 'methods' package"
 msgstr ""
 "les classes formelles ne peuvent être utilisées sans le package 'methods'"
 
-#: src/main/attrib.c:1788
+#: src/main/attrib.c:1797
 #, c-format
 msgid ""
 "trying to get slot \"%s\" from an object of a basic class (\"%s\") with no "
@@ -1716,7 +1721,7 @@ msgstr ""
 "tentative d'obtenir le slot \"%s\" d'un objet d'une classe élémentaire (\"%s"
 "\") sans slots"
 
-#: src/main/attrib.c:1792
+#: src/main/attrib.c:1801
 #, fuzzy, c-format
 msgid ""
 "trying to get slot \"%s\" from an object (class \"%s\") that is not an S4 "
@@ -5468,355 +5473,355 @@ msgstr[1] "argument(s) inutilisé(s) %s"
 msgid "unprotected object (%p) encountered (was %s)"
 msgstr ""
 
-#: src/main/memory.c:742
+#: src/main/memory.c:743
 #, fuzzy
 msgid "untraced old-to-new reference\n"
 msgstr "ce n'est pas une référence faible"
 
-#: src/main/memory.c:751
+#: src/main/memory.c:752
 #, c-format
 msgid "Node counts %s:\n"
 msgstr ""
 
-#: src/main/memory.c:758 src/main/memory.c:768 src/main/memory.c:778
+#: src/main/memory.c:759 src/main/memory.c:769 src/main/memory.c:779
 msgid "Inconsistent class assignment for node!\n"
 msgstr ""
 
-#: src/main/memory.c:770 src/main/memory.c:780
+#: src/main/memory.c:771 src/main/memory.c:781
 msgid "Inconsistent node generation\n"
 msgstr ""
 
-#: src/main/memory.c:783
+#: src/main/memory.c:784
 #, c-format
 msgid "Class: %d, New = %d, Old = %d, OldToNew = %d, Total = %d\n"
 msgstr ""
 
-#: src/main/memory.c:813
+#: src/main/memory.c:814
 #, c-format
 msgid ""
 "Node occupancy: %.0f%%\n"
 "Vector occupancy: %.0f%%\n"
 msgstr ""
 
-#: src/main/memory.c:818
+#: src/main/memory.c:819
 #, c-format
 msgid "Total allocation: %lu\n"
 msgstr ""
 
-#: src/main/memory.c:819
+#: src/main/memory.c:820
 #, c-format
 msgid ""
 "Ncells %lu\n"
 "Vcells %lu\n"
 msgstr ""
 
-#: src/main/memory.c:830
+#: src/main/memory.c:831
 #, c-format
 msgid "Class: %d, pages = %d, maxrel = %d, released = %d\n"
 msgstr ""
 
-#: src/main/memory.c:834
+#: src/main/memory.c:835
 #, c-format
 msgid "Allocated = %d, in use = %d\n"
 msgstr ""
 
-#: src/main/memory.c:1121 src/main/memory.c:1539
+#: src/main/memory.c:1122 src/main/memory.c:1540
 msgid "****snapping into wrong generation\n"
 msgstr ""
 
-#: src/main/memory.c:1237
+#: src/main/memory.c:1238
 msgid "can only weakly reference/finalize reference objects"
 msgstr "ne peut référencer des objets qu'avec une référence faible / finalisée"
 
-#: src/main/memory.c:1271
+#: src/main/memory.c:1272
 msgid "finalizer must be a function or NULL"
 msgstr "le \"finalisateur\" doit être une fonction ou NULL"
 
-#: src/main/memory.c:1327 src/main/memory.c:1335 src/main/memory.c:1346
+#: src/main/memory.c:1328 src/main/memory.c:1336 src/main/memory.c:1347
 msgid "not a weak reference"
 msgstr "ce n'est pas une référence faible"
 
-#: src/main/memory.c:1477
+#: src/main/memory.c:1478
 msgid "first argument must be environment or external pointer"
 msgstr "le premier argument doit être un environnement ou un pointeur externe"
 
-#: src/main/memory.c:1479
+#: src/main/memory.c:1480
 msgid "second argument must be a function"
 msgstr "le second argument doit être une fonction"
 
-#: src/main/memory.c:1483
+#: src/main/memory.c:1484
 msgid "third argument must be 'TRUE' or 'FALSE'"
 msgstr "le troisième argument doit être 'TRUE' ou 'FALSE'"
 
-#: src/main/memory.c:1823
+#: src/main/memory.c:1824
 #, c-format
 msgid "Garbage collection %d = %d"
 msgstr ""
 
-#: src/main/memory.c:1826
+#: src/main/memory.c:1827
 #, c-format
 msgid " (level %d) ... "
 msgstr ""
 
-#: src/main/memory.c:1980
+#: src/main/memory.c:1981
 msgid "vector memory exhausted (limit reached?)"
 msgstr "vecteurs de mémoire épuisés (limite atteinte ?)"
 
-#: src/main/memory.c:1986
+#: src/main/memory.c:1987
 msgid "cons memory exhausted (limit reached?)"
 msgstr "mémoires 'cons' épuisées (limite atteinte ?)"
 
-#: src/main/memory.c:1991
+#: src/main/memory.c:1992
 msgid "memory exhausted (limit reached?)"
 msgstr "mémoire épuisée (limite atteinte ?)"
 
-#: src/main/memory.c:2012
+#: src/main/memory.c:2013
 #, fuzzy
 msgid "couldn't allocate memory for pointer stack"
 msgstr "impossible d'allouer de la mémoire pour 'read.dcf'"
 
-#: src/main/memory.c:2069
+#: src/main/memory.c:2070
 #, fuzzy
 msgid "couldn't allocate node stack"
 msgstr "impossible d'allouer de l'espace pour pushBack"
 
-#: src/main/memory.c:2074
+#: src/main/memory.c:2075
 #, fuzzy
 msgid "couldn't allocate integer stack"
 msgstr "impossible d'allouer de l'espace pour pushBack"
 
-#: src/main/memory.c:2127
+#: src/main/memory.c:2128
 #, fuzzy, c-format
 msgid "cannot allocate memory block of size %0.f Tb"
 msgstr "impossible d'allouer un bloc de mémoire de taille %0.1f Go"
 
-#: src/main/memory.c:2132
+#: src/main/memory.c:2133
 #, c-format
 msgid "cannot allocate memory block of size %0.1f Gb"
 msgstr "impossible d'allouer un bloc de mémoire de taille %0.1f Go"
 
-#: src/main/memory.c:2459
+#: src/main/memory.c:2460
 #, fuzzy
 msgid "vector is too large"
 msgstr "la longueur choisie pour le vecteur est trop grande"
 
-#: src/main/memory.c:2462
+#: src/main/memory.c:2463
 msgid "negative length vectors are not allowed"
 msgstr "longueur de vecteurs négative non permise"
 
-#: src/main/memory.c:2474
+#: src/main/memory.c:2475
 msgid "use of allocVector(CHARSXP ...) is defunct\n"
 msgstr ""
 
-#: src/main/memory.c:2488 src/main/memory.c:2501 src/main/memory.c:2514
-#: src/main/memory.c:2529
+#: src/main/memory.c:2489 src/main/memory.c:2502 src/main/memory.c:2515
+#: src/main/memory.c:2530
 #, c-format
 msgid "cannot allocate vector of length %d"
 msgstr "impossible d'allouer un vecteur de longueur %d"
 
-#: src/main/memory.c:2539 src/main/memory.c:2546
+#: src/main/memory.c:2540 src/main/memory.c:2547
 #, fuzzy
 msgid "invalid length for pairlist"
 msgstr "argument de longueur nulle incorrect"
 
-#: src/main/memory.c:2550
+#: src/main/memory.c:2551
 #, c-format
 msgid "invalid type/length (%s/%d) in vector allocation"
 msgstr "type / longueur incorrect (%s / %d) dans l'allocation de vecteur"
 
-#: src/main/memory.c:2649
+#: src/main/memory.c:2650
 #, c-format
 msgid "cannot allocate vector of size %0.1f Gb"
 msgstr "impossible d'allouer un vecteur de taille %0.1f Go"
 
-#: src/main/memory.c:2653
+#: src/main/memory.c:2654
 #, c-format
 msgid "cannot allocate vector of size %0.1f Mb"
 msgstr "impossible d'allouer un vecteur de taille %0.1f Mo"
 
-#: src/main/memory.c:2657
+#: src/main/memory.c:2658
 #, c-format
 msgid "cannot allocate vector of size %0.f Kb"
 msgstr "impossible d'allouer un vecteur de taille %0.f Ko"
 
-#: src/main/memory.c:2901
+#: src/main/memory.c:2907
 #, c-format
 msgid ""
 "\n"
 "%.1f Mbytes of cons cells used (%d%%)\n"
 msgstr ""
 
-#: src/main/memory.c:2906
+#: src/main/memory.c:2912
 #, c-format
 msgid "%.1f Mbytes of vectors used (%d%%)\n"
 msgstr ""
 
-#: src/main/memory.c:2929
+#: src/main/memory.c:2935
 #, c-format
 msgid "GC encountered a node (%p) with type FREESXP (was %s) at memory.c:%d"
 msgstr ""
 
-#: src/main/memory.c:2934 src/main/memory.c:2939
+#: src/main/memory.c:2940 src/main/memory.c:2945
 #, c-format
 msgid "GC encountered a node (%p) with an unknown SEXP type: %s at memory.c:%d"
 msgstr ""
 
-#: src/main/memory.c:2949
+#: src/main/memory.c:2955
 msgid "internal TRUE value has been modified"
 msgstr ""
 
-#: src/main/memory.c:2953
+#: src/main/memory.c:2959
 msgid "internal FALSE value has been modified"
 msgstr ""
 
-#: src/main/memory.c:2958
+#: src/main/memory.c:2964
 msgid "internal logical NA value has been modified"
 msgstr ""
 
-#: src/main/memory.c:3056
+#: src/main/memory.c:3062
 msgid "protect(): protection stack overflow"
 msgstr "protect() : débordement vers le haut de protection de pile"
 
-#: src/main/memory.c:3063
+#: src/main/memory.c:3069
 #, fuzzy, c-format
 msgid "unprotect(): only %d protected item"
 msgid_plural "unprotect(): only %d protected items"
 msgstr[0] "unprotect() : seulement %d éléments protégés"
 msgstr[1] "unprotect() : seulement %d éléments protégés"
 
-#: src/main/memory.c:3098
+#: src/main/memory.c:3104
 msgid "unprotect_ptr: pointer not found"
 msgstr "unprotect_ptr : pointeur non trouvé"
 
-#: src/main/memory.c:3136
+#: src/main/memory.c:3142
 #, fuzzy, c-format
 msgid "R_Reprotect: only %d protected item, can't reprotect index %d"
 msgid_plural "R_Reprotect: only %d protected items, can't reprotect index %d"
 msgstr[0] "unprotect() : seulement %d éléments protégés"
 msgstr[1] "unprotect() : seulement %d éléments protégés"
 
-#: src/main/memory.c:3188
+#: src/main/memory.c:3194
 #, fuzzy, c-format
 msgid "'Calloc()' function could not allocate memory (%.0f of %u bytes)"
 msgstr "Calloc ne peut allouer de la mémoire (%.0f de %u octets)"
 
-#: src/main/memory.c:3198
+#: src/main/memory.c:3204
 #, fuzzy, c-format
 msgid "'Realloc()' function could not re-allocate memory (%.0f bytes)"
 msgstr "Realloc ne peut réallouer de la mémoire (%.0f octets)"
 
-#: src/main/memory.c:3329
+#: src/main/memory.c:3335
 #, c-format
 msgid "value of 'SET_ATTRIB' must be a pairlist or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3367
+#: src/main/memory.c:3373
 #, c-format
 msgid "LENGTH or similar applied to %s object"
 msgstr ""
 
-#: src/main/memory.c:3382
+#: src/main/memory.c:3388
 #, c-format
 msgid "'CHAR()' function can only be applied to a 'CHARSXP', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3389
+#: src/main/memory.c:3395
 #, c-format
 msgid ""
 "'STRING_ELT()' function can only be applied to a 'character vector', not a "
 "'%s'"
 msgstr ""
 
-#: src/main/memory.c:3399
+#: src/main/memory.c:3405
 #, c-format
 msgid "'VECTOR_ELT()' function can only be applied to a 'list', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3406
+#: src/main/memory.c:3412
 #, c-format
 msgid "'LOGICAL()' function can only be applied to a 'logical', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3414
+#: src/main/memory.c:3420
 #, c-format
 msgid "'INTEGER()' function can only be applied to a 'integer', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3421
+#: src/main/memory.c:3427
 #, fuzzy, c-format
 msgid "'RAW()' function can only be applied to a 'raw', not a '%s'"
 msgstr "nsl() est incapable de résoudre le nom de la machine hote '%s'"
 
-#: src/main/memory.c:3428
+#: src/main/memory.c:3434
 #, c-format
 msgid "'REAL()' function can only be applied to a 'numeric', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3435
+#: src/main/memory.c:3441
 #, fuzzy, c-format
 msgid "'COMPLEX()' function can only be applied to a 'complex', not a '%s'"
 msgstr "nsl() est incapable de résoudre le nom de la machine hote '%s'"
 
-#: src/main/memory.c:3444
+#: src/main/memory.c:3450
 msgid "not safe to return vector pointer"
 msgstr "le renvoi d'un pointeur sur un vecteur n'est pas sûr"
 
-#: src/main/memory.c:3449
+#: src/main/memory.c:3455
 #, c-format
 msgid ""
 "'SET_STRING_ELT()' function can only be applied to a 'character vector', not "
 "a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3452
+#: src/main/memory.c:3458
 #, c-format
 msgid "value of 'SET_STRING_ELT()' function must be a 'CHARSXP' not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3455
+#: src/main/memory.c:3461
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_STRING_ELT()' function"
 msgstr ""
 
-#: src/main/memory.c:3466
+#: src/main/memory.c:3472
 #, c-format
 msgid "'SET_VECTOR_ELT()' function can only be applied to a 'list', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3470
+#: src/main/memory.c:3476
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_VECTOR_ELT()' function"
 msgstr ""
 
-#: src/main/memory.c:3495 src/main/memory.c:3505 src/main/memory.c:3517
-#: src/main/memory.c:3531 src/main/memory.c:3547 src/main/memory.c:3565
+#: src/main/memory.c:3501 src/main/memory.c:3511 src/main/memory.c:3523
+#: src/main/memory.c:3537 src/main/memory.c:3553 src/main/memory.c:3571
 msgid "bad value"
 msgstr "mauvaise valeur"
 
-#: src/main/memory.c:3647
+#: src/main/memory.c:3653
 #, c-format
 msgid "value of 'SET_CXTAIL()' function must be a 'char' or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3728
+#: src/main/memory.c:3734
 msgid "memory profiling is not available on this system"
 msgstr "le profilage de la mémoire n'est pas disponible sur ce système"
 
-#: src/main/memory.c:3792
+#: src/main/memory.c:3798
 #, fuzzy, c-format
 msgid "'Rprofmem()': cannot open output file '%s'"
 msgstr "Rprofmem: impossible d'ouvrir le fichier '%s'"
 
-#: src/main/memory.c:3828
+#: src/main/memory.c:3834
 msgid "'R_AllocStringBuffer( (size_t)-1 )' function is no longer allowed"
 msgstr ""
 
-#: src/main/memory.c:3845
+#: src/main/memory.c:3851
 #, fuzzy, c-format
 msgid "could not allocate memory (%u Mb) in 'R_AllocStringBuffer()' function"
 msgstr "impossible d'allouer de la mémoire pour 'read.dcf'"
 
-#: src/main/memory.c:3897
+#: src/main/memory.c:3903
 #, c-format
 msgid "long vectors not supported yet: %s:%d"
 msgstr ""
@@ -7968,73 +7973,73 @@ msgid "incompatible types (from %s to %s) in subassignment type fix"
 msgstr ""
 "types (de %s a %s) incompatibles dans l'ajustement d'affectation de type"
 
-#: src/main/subassign.c:505 src/main/subassign.c:785 src/main/subassign.c:788
-#: src/main/subassign.c:1088
+#: src/main/subassign.c:528 src/main/subassign.c:808 src/main/subassign.c:811
+#: src/main/subassign.c:1111
 #, fuzzy
 msgid "NA values are not allowed in subscripted assignments"
 msgstr "NAs interdits dans les affectations indicées"
 
-#: src/main/subassign.c:523 src/main/subassign.c:799 src/main/subassign.c:1080
-#: src/main/subassign.c:1660
+#: src/main/subassign.c:546 src/main/subassign.c:822 src/main/subassign.c:1103
+#: src/main/subassign.c:1683
 msgid "replacement has length zero"
 msgstr "l'argument de remplacement est de longueur nulle"
 
-#: src/main/subassign.c:525 src/main/subassign.c:801 src/main/subassign.c:1082
+#: src/main/subassign.c:548 src/main/subassign.c:824 src/main/subassign.c:1105
 msgid "number of items to replace is not a multiple of replacement length"
 msgstr ""
 "le nombre d'objets à remplacer n'est pas multiple de la taille du "
 "remplacement"
 
-#: src/main/subassign.c:721
+#: src/main/subassign.c:744
 msgid "sub assignment (*[*] <- *) not done; __bug?__"
 msgstr ""
 
-#: src/main/subassign.c:769
+#: src/main/subassign.c:792
 msgid "incorrect number of subscripts on matrix"
 msgstr "nombre d'indices incorrect sur la matrice"
 
-#: src/main/subassign.c:1034
+#: src/main/subassign.c:1057
 #, c-format
 msgid "incompatible types (from %s to %s) in matrix subset assignment"
 msgstr ""
 "types incompatibles (de %s à %s) dans l'affectation d'un sous-ensemble de "
 "matrice"
 
-#: src/main/subassign.c:1050 src/main/subset.c:951
+#: src/main/subassign.c:1073 src/main/subset.c:955
 msgid "incorrect number of subscripts"
 msgstr "nombre d'indices incorrect"
 
-#: src/main/subassign.c:1227
+#: src/main/subassign.c:1250
 #, c-format
 msgid "incompatible types (from %s to %s) in array subset assignment"
 msgstr ""
 "types (de %s à %s) incompatibles dans l'affectation d'un sous-ensemble de "
 "tableau"
 
-#: src/main/subassign.c:1250
+#: src/main/subassign.c:1273
 #, fuzzy, c-format
 msgid "internal error: index %d from length %d"
 msgstr "erreur interne dans do_random1"
 
-#: src/main/subassign.c:1263 src/main/subassign.c:1284
+#: src/main/subassign.c:1286 src/main/subassign.c:1307
 msgid "invalid subscript in list assign"
 msgstr "nombre incorrect d'indices pour l'affectation d'une liste"
 
-#: src/main/subassign.c:1277
+#: src/main/subassign.c:1300
 msgid "invalid number of subscripts to list assign"
 msgstr "nombre incorrect d'indices pour l'affectation d'une liste"
 
-#: src/main/subassign.c:1376
+#: src/main/subassign.c:1399
 #, fuzzy
 msgid "'SubAssignArgs()': invalid number of arguments"
 msgstr "SubAssignArgs : nombre d'arguments incorrect"
 
-#: src/main/subassign.c:1521
+#: src/main/subassign.c:1544
 msgid "result is zero-length and so cannot be a language object"
 msgstr ""
 "le résultat a une longueur nulle et donc, ne peut être un objet de language"
 
-#: src/main/subassign.c:1620
+#: src/main/subassign.c:1643
 #, fuzzy
 msgid ""
 "'[[<-' defined for objects of type \"S4\" only for subclasses of environment"
@@ -8042,53 +8047,53 @@ msgstr ""
 "[[<- défini pour des objets de type \"S4\" pour des sous-classes de "
 "l'environnement seulement"
 
-#: src/main/subassign.c:1632
+#: src/main/subassign.c:1655
 #, fuzzy
 msgid "wrong arguments for environment subassignment"
 msgstr "mauvais arguments pour une affectation d'environnement"
 
-#: src/main/subassign.c:1662
+#: src/main/subassign.c:1685
 msgid "more elements supplied than there are to replace"
 msgstr "plus d'éléments fournis que d'éléments à remplacer"
 
-#: src/main/subassign.c:1664
+#: src/main/subassign.c:1687
 #, fuzzy
 msgid "'[[ ]]' with missing subscript"
 msgstr "[[ ]] avec indice manquant"
 
-#: src/main/subassign.c:1682
+#: src/main/subassign.c:1705
 #, fuzzy
 msgid "'[[ ]]' subscript out of bounds"
 msgstr "[[ ]] indice en dehors des limites"
 
-#: src/main/subassign.c:1688 src/main/subassign.c:1869
+#: src/main/subassign.c:1711 src/main/subassign.c:1892
 #, fuzzy
 msgid "'[[ ]]' improper number of subscripts"
 msgstr "[[ ]] nombre d'indices incorrect"
 
-#: src/main/subassign.c:1700 src/main/subassign.c:1880
+#: src/main/subassign.c:1723 src/main/subassign.c:1903
 #, fuzzy, c-format
 msgid "'[[ ]]' subscript (%d) out of bounds"
 msgstr "[[ ]] indice (%d) en dehors des bornes"
 
-#: src/main/subassign.c:1834
+#: src/main/subassign.c:1857
 #, fuzzy, c-format
 msgid "incompatible types (from %s to %s) in '[[' assignment"
 msgstr "types (de %s a %s) incompatibles dans l'affectation [["
 
-#: src/main/subassign.c:1936 src/main/subscript.c:152 src/main/subscript.c:154
+#: src/main/subassign.c:1959 src/main/subscript.c:152 src/main/subscript.c:154
 #: src/main/subscript.c:283 src/main/subscript.c:285 src/main/subscript.c:912
 #: src/main/subscript.c:914 src/main/subscript.c:1009
-#: src/main/subscript.c:1011 src/main/subset.c:1153
+#: src/main/subscript.c:1011 src/main/subset.c:1157
 #, c-format
 msgid "invalid subscript type '%s'"
 msgstr "type '%s' d'indice incorrect"
 
-#: src/main/subassign.c:1984
+#: src/main/subassign.c:2007
 msgid "no method for assigning subsets of this S4 class"
 msgstr "pas de méthode pour changer un sous-ensemble de cette classe S4"
 
-#: src/main/subassign.c:2042
+#: src/main/subassign.c:2065
 #, fuzzy
 msgid "coercing LHS to a list"
 msgstr "Conversion automatique de LHS en liste"
@@ -8126,7 +8131,7 @@ msgstr "échec d'indexation récursive au niveau %d\n"
 msgid "no such index at level %d\n"
 msgstr "un tel index n'existe pas au niveau %d\n"
 
-#: src/main/subscript.c:325 src/main/subset.c:133 src/main/subset.c:1057
+#: src/main/subscript.c:325 src/main/subset.c:133 src/main/subset.c:1061
 #, fuzzy
 msgid "invalid subscript for pairlist"
 msgstr "nombre incorrect d'indices pour l'affectation d'une liste"
@@ -8171,32 +8176,32 @@ msgstr "indiçage matriciel non géré pour ce type"
 msgid "array subscripting not handled for this type"
 msgstr "indiçage matriciel non géré pour ce type"
 
-#: src/main/subset.c:850
+#: src/main/subset.c:854
 msgid "incorrect number of dimensions"
 msgstr "nombre de dimensions incorrect"
 
-#: src/main/subset.c:947
+#: src/main/subset.c:951
 msgid "no index specified"
 msgstr "aucun indice spécifié"
 
-#: src/main/subset.c:957
+#: src/main/subset.c:961
 msgid "this S4 class is not subsettable"
 msgstr "cette classe S4 n'est pas indiçable"
 
-#: src/main/subset.c:964
+#: src/main/subset.c:968
 msgid "wrong arguments for subsetting an environment"
 msgstr "mauvais arguments pour extraire une partie d'un environnement"
 
-#: src/main/subset.c:998
+#: src/main/subset.c:1002
 #, fuzzy
 msgid "getter call used outside of a complex assignment"
 msgstr "fonction incorrecte dans un assignation complexe"
 
-#: src/main/subset.c:1196
+#: src/main/subset.c:1200
 msgid "$ operator not defined for this S4 class"
 msgstr ""
 
-#: src/main/subset.c:1317
+#: src/main/subset.c:1321
 msgid "$ operator is invalid for atomic vectors"
 msgstr ""
 
@@ -10057,30 +10062,30 @@ msgstr "argument de taille non nulle et de type caractère attendu"
 msgid "'intern' must be logical and not NA"
 msgstr "'intern' doit être une valeur logique et non NA"
 
-#: src/unix/sys-unix.c:264
+#: src/unix/sys-unix.c:270
 #, c-format
 msgid "cannot popen '%s', probable reason '%s'"
 msgstr "popen impossible pour '%s', cause probable : '%s'"
 
-#: src/unix/sys-unix.c:269
+#: src/unix/sys-unix.c:280
 #, c-format
 msgid "line %d may be truncated in call to system(, intern = TRUE)"
 msgstr ""
 "la ligne %d est probablement tronquée lors de l'appel à system(, intern = "
 "TRUE)"
 
-#: src/unix/sys-unix.c:286 src/unix/sys-unix.c:288
+#: src/unix/sys-unix.c:302 src/unix/sys-unix.c:304
 msgid "error in running command"
 msgstr "erreur lors de l'exécution d'une commande"
 
-#: src/unix/sys-unix.c:292
+#: src/unix/sys-unix.c:308
 #, c-format
 msgid "running command '%s' had status %d and error message '%s'"
 msgstr ""
 "l'exécution de la commande '%s' renvoie un statut %d et le message d'erreur "
 "'%s'"
 
-#: src/unix/sys-unix.c:397
+#: src/unix/sys-unix.c:413
 msgid "Sys.info() is not implemented on this system"
 msgstr "Sys.info() n'est pas implémenté sur ce système"
 
@@ -10872,10 +10877,6 @@ msgstr "X11 indisponible"
 #, fuzzy
 #~ msgid "'%s' argument must be length 1"
 #~ msgstr "'fromLast' doit être de longueur 1"
-
-#, fuzzy
-#~ msgid "'%s' argument must be non-null character string"
-#~ msgstr "'norm' doit être une chaîne de caractères"
 
 #, fuzzy
 #~ msgid "argument must be a character vector of length 1"

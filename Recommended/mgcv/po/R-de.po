@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.10.0 / mgcv 1.5-5\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-10-01 21:12\n"
+"POT-Creation-Date: 2015-10-18 20:40\n"
 "PO-Revision-Date: 2009-10-08 16:16+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -832,9 +832,9 @@ msgstr ""
 msgid "Histogram of residuals"
 msgstr ""
 
-#. R/gam.fit3.r: warning("Huber scale estiamte not converged")
+#. R/gam.fit3.r: warning("Huber scale estimate not converged")
 #: R/gam.fit3.r:0
-msgid "Huber scale estiamte not converged"
+msgid "Huber scale estimate not converged"
 msgstr ""
 
 #. R/mgcv.r: stop("IRLS regularizing parameter must be a non-negative number")
@@ -1039,6 +1039,7 @@ msgstr "Keine Terme zum Darstellen - nichts für plot.gam() zu tun."
 msgid "No variance estimates available"
 msgstr "Keine Varianzschätzungen verfügbar"
 
+#. R/bam.r: gettextf("Non-finite coefficients at iteration %d", iter)
 #. R/bam.r: gettextf("Non-finite coefficients at iteration %d", iter)
 #. R/bam.r: gettextf("Non-finite coefficients at iteration %d", iter)
 #. R/gam.fit3.r: gettextf("Non-finite coefficients at iteration %d", iter)
@@ -2103,12 +2104,6 @@ msgstr ""
 msgid "non-existent terms requested - ignoring"
 msgstr "nicht existierende Terme angefordert - wird ignoriert"
 
-#. R/bam.r: gettextf("non-finite coefficients at iteration %d", iter)
-#: R/bam.r:0
-#, fuzzy
-msgid "non-finite coefficients at iteration %d"
-msgstr "Nicht-endliche Koeffizienten bei der Iteration"
-
 #. R/mgcv.r: warning("not all required variables have been supplied in  newdata!\n")
 #: R/mgcv.r:0
 msgid "not all required variables have been supplied in  newdata!"
@@ -2613,6 +2608,10 @@ msgid "Smoothing parameter selection converged after %d iteration."
 msgid_plural "Smoothing parameter selection converged after %d iterations."
 msgstr[0] ""
 msgstr[1] ""
+
+#, fuzzy
+#~ msgid "non-finite coefficients at iteration %d"
+#~ msgstr "Nicht-endliche Koeffizienten bei der Iteration"
 
 #, fuzzy
 #~ msgid "algorithm did not converge"

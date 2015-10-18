@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-18 12:53+0200\n"
+"POT-Creation-Date: 2015-10-18 11:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -157,11 +157,11 @@ msgstr ""
 msgid "'distance()': invalid distance"
 msgstr ""
 
-#: distn.c:34
+#: distn.c:36
 msgid "NaN values produced"
 msgstr ""
 
-#: distn.c:35
+#: distn.c:37
 msgid "Non-numeric argument passed to mathematical function"
 msgstr ""
 

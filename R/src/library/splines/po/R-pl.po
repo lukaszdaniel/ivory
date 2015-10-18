@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2015-10-18 11:49\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -70,6 +70,11 @@ msgstr "reprezentacja bSpline  splajnu"
 msgid "bSpline representation of spline for %s"
 msgstr "reprezentacja bSpline  splajnu dla %s"
 
+#. R/splineClasses.R: stop("empty 'derivs' argument")
+#: R/splineClasses.R:0
+msgid "empty 'derivs' argument"
+msgstr "pusty argument 'derivs'"
+
 #. R/splineClasses.R: stop("knot positions must be non-decreasing")
 #. R/splineClasses.R: stop("knot positions must be non-decreasing")
 #: R/splineClasses.R:0
@@ -81,10 +86,10 @@ msgstr "pozycje węzłów muszą być niemalejące"
 msgid "knot positions must be strictly increasing"
 msgstr "pozycje węzłów muszą być ściśle rosnące"
 
-#. R/splineClasses.R: stop("length of 'derivs' must match length of 'x'")
+#. R/splineClasses.R: stop("length of 'derivs' is larger than length of 'x'")
 #: R/splineClasses.R:0
-msgid "length of 'derivs' must match length of 'x'"
-msgstr "długość 'derivs' musi zgadzać się z długością 'x'"
+msgid "length of 'derivs' is larger than length of 'x'"
+msgstr "długość argumentu 'derivs' jest większa niż długość argumentu 'x'"
 
 #. R/splineClasses.R: stop("lengths of 'x' and 'y' must be the same")
 #: R/splineClasses.R:0

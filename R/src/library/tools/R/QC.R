@@ -6920,7 +6920,7 @@ function(x, ...)
                 paste(c(gettext("\nLicense components with restrictions and base license permitting such:", domain = "R-tools"), paste(" ", y),
                         unlist(lapply(x$pointers,
                                       function(e) {
-                                          c(gettextf("File '%s':", e[1L], domain = "R-tools"),
+                                          c(gettextf("File %s:", sQuote(e[1L]), domain = "R-tools"),
                                             paste(" ", e[-1L]))
                                       }))),
                       collapse = "\n")

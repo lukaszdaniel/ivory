@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.8-6\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-10-01 21:12\n"
-"PO-Revision-Date: 2015-07-30 09:56+0200\n"
+"POT-Creation-Date: 2015-10-18 20:40\n"
+"PO-Revision-Date: 2015-10-18 20:40+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.8.3\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #. R/efam.r: gettextf("\"%s\" link not available for beta regression; available links are  \"logit\", \"probit\", \"cloglog\" and \"cauchit\"",     linktemp)
 #: R/efam.r:0
@@ -304,7 +304,6 @@ msgstr ""
 
 #. R/jagam.r: stop("'jagam()' function requires a file for the JAGS model specification")
 #: R/jagam.r:0
-#, fuzzy
 msgid "'jagam()' function requires a file for the JAGS model specification"
 msgstr "funkcja 'jagam()' wymaga pliku do określenia modelu JAGS"
 
@@ -369,11 +368,12 @@ msgstr "'rank' posiada niepoprawną długość w 'paraPen'"
 
 #. R/jagam.r: warning("'rho' slot for 'sam' argument is missing from simulation data, 'edf.type' argument reset to 2")
 #: R/jagam.r:0
-#, fuzzy
 msgid ""
 "'rho' slot for 'sam' argument is missing from simulation data, 'edf.type' "
 "argument reset to 2"
-msgstr "brakuje 'rho' w symulacji danych, 'edf.type' zostało ustawione na 2"
+msgstr ""
+"brakuje gniazda 'rho' z argumentu 'sam' w danych symulacyjnych, argument "
+"'edf.type' został ustawiony na 2"
 
 #. R/smooth.r: stop("'s(.)' function is not yet supported")
 #. R/smooth.r: stop("'s(.)' function is not yet supported")
@@ -394,7 +394,7 @@ msgstr "'sp' jest zbyt krótkie"
 #. R/bam.r: warning("'sparse=TRUE' option is deprecated")
 #: R/bam.r:0
 msgid "'sparse=TRUE' option is deprecated"
-msgstr ""
+msgstr "opcja 'sparse=TRUE' jest przestarzała"
 
 #. R/mgcv.r: warning("'test' argument ignored")
 #: R/mgcv.r:0
@@ -815,10 +815,11 @@ msgstr "Hesjan jest dodatnio określony, zakres wartości własnych [%s, %s]."
 msgid "Histogram of residuals"
 msgstr "Histogram reszt"
 
-#. R/gam.fit3.r: warning("Huber scale estiamte not converged")
+#. R/gam.fit3.r: warning("Huber scale estimate not converged")
 #: R/gam.fit3.r:0
-msgid "Huber scale estiamte not converged"
-msgstr ""
+#, fuzzy
+msgid "Huber scale estimate not converged"
+msgstr "oszacowanie skali Hubera nie uzbieżniło się"
 
 #. R/mgcv.r: stop("IRLS regularizing parameter must be a non-negative number")
 #: R/mgcv.r:0
@@ -1019,6 +1020,7 @@ msgstr "Brak członów do rysowania - nic do wykonania przez 'plot.gam()'."
 msgid "No variance estimates available"
 msgstr "Brak dostępnego oszacowania wariancji"
 
+#. R/bam.r: gettextf("Non-finite coefficients at iteration %d", iter)
 #. R/bam.r: gettextf("Non-finite coefficients at iteration %d", iter)
 #. R/bam.r: gettextf("Non-finite coefficients at iteration %d", iter)
 #. R/gam.fit3.r: gettextf("Non-finite coefficients at iteration %d", iter)
@@ -1790,6 +1792,8 @@ msgstr "wewnętrzna pętla %d; nie można poprawić rozmiaru kroku"
 #: R/misc.r:0
 msgid "internal error in vcorr, please report to simon.wood@r-project.org"
 msgstr ""
+"wewnętrzny błąd w funkcji 'vcorr()'; proszę zgłosić błąd na adres: simon."
+"wood@r-project.org"
 
 #. R/gam.fit3.r: stop("invalid 'family' argument")
 #. R/mgcv.r: stop("invalid 'family' argument")
@@ -2075,12 +2079,6 @@ msgstr ""
 msgid "non-existent terms requested - ignoring"
 msgstr "zażądano nieistniejących członów - ignorowanie"
 
-#. R/bam.r: gettextf("non-finite coefficients at iteration %d", iter)
-#: R/bam.r:0
-#, fuzzy
-msgid "non-finite coefficients at iteration %d"
-msgstr "Nieskończone współczynniki w iteracji %d"
-
 #. R/mgcv.r: warning("not all required variables have been supplied in  newdata!\n")
 #: R/mgcv.r:0
 msgid "not all required variables have been supplied in  newdata!"
@@ -2337,7 +2335,6 @@ msgstr "gładkie obiekty nie powinny mieć atrybutu 'qrc'"
 
 #. R/jagam.r: warning("smoothing parameter prior choise not recognised, reset to 'gamma'")
 #: R/jagam.r:0
-#, fuzzy
 msgid "smoothing parameter prior choise not recognised, reset to 'gamma'"
 msgstr ""
 "pierwotnie wybrany parametr wygładzający nie został rozpoznany, przywracanie "
@@ -2494,9 +2491,8 @@ msgstr "nieznane kryterium wyboru wygładzania"
 
 #. R/bam.r: warning("unknown tensor constraint type")
 #: R/bam.r:0
-#, fuzzy
 msgid "unknown tensor constraint type"
-msgstr "zażądano niezaimplementowanego typu rzadkiego więzu"
+msgstr "nieznany typ tensorowego więzu"
 
 #. R/gam.fit3.r: stop("unrecognized (vector?) link")
 #: R/gam.fit3.r:0
@@ -2592,6 +2588,9 @@ msgid_plural "Smoothing parameter selection converged after %d iterations."
 msgstr[0] "Wybór parametrów wygładzania uzbieżnił się po %d iteracji."
 msgstr[1] "Wybór parametrów wygładzania uzbieżnił się po %d iteracjach."
 msgstr[2] "Wybór parametrów wygładzania uzbieżnił się po %d iteracjach."
+
+#~ msgid "non-finite coefficients at iteration %d"
+#~ msgstr "Nieskończone współczynniki w iteracji %d"
 
 #~ msgid "algorithm did not converge"
 #~ msgstr "Algorytm nie uzbieżnił się"

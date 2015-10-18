@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2015-10-18 11:49\n"
 "PO-Revision-Date: 2015-01-17 15:48+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -73,6 +73,11 @@ msgstr ""
 msgid "bSpline representation of spline for %s"
 msgstr ""
 
+#. R/splineClasses.R: stop("empty 'derivs' argument")
+#: R/splineClasses.R:0
+msgid "empty 'derivs' argument"
+msgstr ""
+
 #. R/splineClasses.R: stop("knot positions must be non-decreasing")
 #. R/splineClasses.R: stop("knot positions must be non-decreasing")
 #: R/splineClasses.R:0
@@ -84,9 +89,10 @@ msgstr "结的位置值必需为非递减"
 msgid "knot positions must be strictly increasing"
 msgstr "结的位置值必需严格递增"
 
-#. R/splineClasses.R: stop("length of 'derivs' must match length of 'x'")
+#. R/splineClasses.R: stop("length of 'derivs' is larger than length of 'x'")
 #: R/splineClasses.R:0
-msgid "length of 'derivs' must match length of 'x'"
+#, fuzzy
+msgid "length of 'derivs' is larger than length of 'x'"
 msgstr "'derivs'和'x'的长度必需匹配"
 
 #. R/splineClasses.R: stop("lengths of 'x' and 'y' must be the same")

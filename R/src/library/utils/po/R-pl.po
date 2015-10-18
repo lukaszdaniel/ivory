@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 23:12\n"
+"POT-Creation-Date: 2015-10-18 11:49\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -785,6 +785,15 @@ msgstr ""
 "Jeśli nic się nie stanie, powinieneś otworzyć\n"
 "%s samemu"
 
+#. R/sysdata.R: gettext("If the R code is merely a translation from another language\n(typically S), use for the translator to R.",     domain = "R-utils")
+#: R/sysdata.R:0
+msgid ""
+"If the R code is merely a translation from another language\n"
+"(typically S), use for the translator to R."
+msgstr ""
+"Jeżeli kod R jest tylko tłumaczeniem z innego języka\n"
+"(przeważnie S), użyj dla tłumacza do języka R."
+
 #. R/help.start.R: gettextf("If the browser launched by '%s' is already running, it is *not* restarted, and you must switch to its window.",     browser)
 #: R/help.start.R:0
 msgid ""
@@ -793,6 +802,11 @@ msgid ""
 msgstr ""
 "Jeśli przeglądarka uruchomiona przez '%s' już działa, *nie* zostanie "
 "zrestartowana, a ty musisz przejść na jej okno."
+
+#. R/sysdata.R: gettext("If the package is part of a thesis, use for the thesis advisor.", domain = "R-utils")
+#: R/sysdata.R:0
+msgid "If the package is part of a thesis, use for the thesis advisor."
+msgstr "Jeżeli pakiet jest częścią pracy magisterskiej, użyj dla promotora."
 
 #. R/packageStatus.R: gettext("Installed packages:", domain = "R-utils")
 #: R/packageStatus.R:0
@@ -1476,6 +1490,60 @@ msgstr "Użyj [] aby podejrzeć jeden z nich"
 #: R/citation.R:0
 msgid "Use either %s or %s but not both"
 msgstr "Użyj albo %s albo %s ale nie obu"
+
+#. R/sysdata.R: gettext("Use for all copyright holders.", domain = "R-utils")
+#: R/sysdata.R:0
+msgid "Use for all copyright holders."
+msgstr "Użyj dla wszystkich posiadaczy praw autorskich."
+
+#. R/sysdata.R: gettext("Use for authors who have been contracted to write (parts of) the\npackage and hence do not own intellectual property.",     domain = "R-utils")
+#: R/sysdata.R:0
+msgid ""
+"Use for authors who have been contracted to write (parts of) the\n"
+"package and hence do not own intellectual property."
+msgstr ""
+"Użyj dla autorów, którzy zostali wynajęci do napisania (części) pakietu,\n"
+"a tym samym nie są właścicielami własności intelektualnej."
+
+#. R/sysdata.R: gettext("Use for authors who have made smaller contributions (such as\ncode patches etc.) but should not show up in the package\ncitation.",     domain = "R-utils")
+#: R/sysdata.R:0
+msgid ""
+"Use for authors who have made smaller contributions (such as\n"
+"code patches etc.) but should not show up in the package\n"
+"citation."
+msgstr ""
+"Użyj dla autorów, którzy w mniejszym stopniu (np. poprawki kodu, itp.)\n"
+"przyczynili się do rozwoju, ale nie powinni pojawiać się w cytowaniu pakietu."
+
+#. R/sysdata.R: gettext("Use for full authors who have made substantial contributions to\nthe package and should show up in the package citation.",     domain = "R-utils")
+#: R/sysdata.R:0
+msgid ""
+"Use for full authors who have made substantial contributions to\n"
+"the package and should show up in the package citation."
+msgstr ""
+"Użyj dla autorów, którzy mieli istotny wkład w rozwój pakietu\n"
+"oraz powinni pojawić się w cytowaniu pakietu."
+
+#. R/sysdata.R: gettext("Use for package maintainers that collected code (potentially in\nother languages) but did not make further substantial\ncontributions to the package.",     domain = "R-utils")
+#: R/sysdata.R:0
+msgid ""
+"Use for package maintainers that collected code (potentially in\n"
+"other languages) but did not make further substantial\n"
+"contributions to the package."
+msgstr ""
+"Użyj dla osoby utrzymującej pakiet, która zebrała kod (potencjalnie\n"
+"napisany w różnych językach) ale nie poczyniła żadnych istotnych\n"
+"zmian w pakiecie."
+
+#. R/sysdata.R: gettext("Use for persons who contributed data sets for the package.", domain = "R-utils")
+#: R/sysdata.R:0
+msgid "Use for persons who contributed data sets for the package."
+msgstr "Użyj dla osób, które dostarczyły zbiory danych dla pakietu."
+
+#. R/sysdata.R: gettext("Use for the package maintainer.", domain = "R-utils")
+#: R/sysdata.R:0
+msgid "Use for the package maintainer."
+msgstr "Użyj dla osoby utrzymującej pakiet."
 
 #. R/demo.R: gettextf("Use: %s to list the demos in all *available* packages.", sQuote("demo(package = .packages(all.available = TRUE))"),     domain = "R-utils")
 #: R/demo.R:0
@@ -3443,9 +3511,6 @@ msgstr[2] "pakiety %s nie są dostępne (dla %s)"
 #~ "Use for a person who writes manuscript annotations on a printed item."
 #~ msgstr ""
 #~ "Użyj dla osoby, która pisze odręczne adnotacje na drukowanej pozyzji."
-
-#~ msgid "Use for all copyright holders."
-#~ msgstr "Użyj dla wszystkich posiadaczy praw autorskich."
 
 #~ msgid ""
 #~ "Use for the party who complains or sues in court in a personal action, "

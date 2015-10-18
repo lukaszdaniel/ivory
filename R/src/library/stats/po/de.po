@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-18 12:53+0200\n"
+"POT-Creation-Date: 2015-10-18 11:49+0200\n"
 "PO-Revision-Date: 2015-01-17 15:40+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <r-core@r-project.org>\n"
@@ -161,12 +161,12 @@ msgstr "distance(): unzulässiges p"
 msgid "'distance()': invalid distance"
 msgstr "distance(): unzulässige distance"
 
-#: distn.c:34
+#: distn.c:36
 #, fuzzy
 msgid "NaN values produced"
 msgstr "NaNs wurden erzeugt"
 
-#: distn.c:35
+#: distn.c:37
 #, fuzzy
 msgid "Non-numeric argument passed to mathematical function"
 msgstr "Nicht-numerisches Argument für mathematische Funktion"

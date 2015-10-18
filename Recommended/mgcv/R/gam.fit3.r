@@ -82,14 +82,14 @@ huberp <- function(wp,dof,k=1.5,tol=.Machine$double.eps^.5) {
   s0 <- mad(wp) ## initial scale estimate
   th <- 2*pnorm(k) - 1
   beta <- th + k^2 * (1 - th) - 2 * k * dnorm(k)
-  for (i in 1:50) {
+  for (i in seq_len(50)) {
     r <- pmin(pmax(wp,-k*s0),k*s0)
     ss <- sum(r^2)/dof
     s1 <- sqrt(ss/beta)
     if (abs(s1-s0)<tol*s0) break
     s0 <- s1
   }
-  if (i==50) warning("Huber scale estiamte not converged")
+  if (i==50) warning("Huber scale estimate not converged")
   s1^2
 } ## huberp
 
@@ -217,7 +217,7 @@ gam.fit3 <- function (x, y, sp, Eb,UrS=list(),
  #     }
 
       T <- diag(q)
-      T[1:ncol(rp$Qs),1:ncol(rp$Qs)] <- rp$Qs
+      T[seq_len(ncol(rp$Qs)),seq_len(ncol(rp$Qs))] <- rp$Qs
       T <- U1%*%T ## new params b'=T'b old params
     
       null.coef <- t(T)%*%null.coef
@@ -403,7 +403,7 @@ gam.fit3 <- function (x, y, sp, Eb,UrS=list(),
               if (control$trace) tc <- tc + sum((proc.time()-t1)[c(1,4)])
             }
 
-            start <- oo$y[1:ncol(x)];
+            start <- oo$y[seq_len(ncol(x))];
             penalty <- oo$penalty
             eta <- drop(x%*%start)
 
@@ -852,13 +852,13 @@ Vb.corr <- function(X,L,S,off,dw,w,rho,Vr,nth=0,scale.est=FALSE) {
     Vr <- Vr[-nrow(Vr),-ncol(Vr),drop=FALSE]
   }
   ## ??? rho0???
-  lambda <- if (is.null(L)) exp(rho) else exp(L[1:M,,drop=FALSE]%*%rho)
+  lambda <- if (is.null(L)) exp(rho) else exp(L[seq_len(M),,drop=FALSE]%*%rho)
   
   ## Re-create the Hessian, if is.null(w) then X assumed to be root
   ## unpenalized Hessian...
   H <- if (is.null(w)) crossprod(X) else H <- t(X)%*%(w*X)
-  if (M>0) for (i in 1:M) {
-      ind <- off[i] + 1:ncol(S[[i]]) - 1
+  if (M>0) for (i in seq_len(M)) {
+      ind <- off[i] + seq_len(ncol(S[[i]])) - 1
       H[ind,ind] <- H[ind,ind] + lambda[i+nth] * S[[i]]
   }
 
@@ -867,11 +867,11 @@ Vb.corr <- function(X,L,S,off,dw,w,rho,Vr,nth=0,scale.est=FALSE) {
   
   ## Create dH the derivatives of the hessian w.r.t. (all) the smoothing parameters...
   dH <- list()
-  if (length(lambda)>0) for (i in 1:length(lambda)) {
+  if (length(lambda)>0) for (i in seq_len(length(lambda))) {
     ## If w==NULL use constant H approx...
     dH[[i]] <- if (is.null(w)) H*0 else t(X)%*%(dw[,i]*X) 
     if (i>nth) { 
-      ind <- off[i-nth] + 1:ncol(S[[i-nth]]) - 1
+      ind <- off[i-nth] + seq_len(ncol(S[[i-nth]])) - 1
       dH[[i]][ind,ind] <- dH[[i]][ind,ind] + lambda[i]*S[[i-nth]]
     }
   }
@@ -879,9 +879,9 @@ Vb.corr <- function(X,L,S,off,dw,w,rho,Vr,nth=0,scale.est=FALSE) {
   ## derivatives w.r.t. optimization smoothing params.
   if (!is.null(L)) {
     dH1 <- dH;dH <- list()
-    if (length(rho)>0) for (j in 1:length(rho)) { 
+    if (length(rho)>0) for (j in seq_len(length(rho))) { 
       ok <- FALSE ## dH[[j]] not yet created
-      if (nrow(L)>0) for (i in 1:nrow(L)) if (L[i,j]!=0.0) { 
+      if (nrow(L)>0) for (i in seq_len(nrow(L))) if (L[i,j]!=0.0) { 
         dH[[j]] <- if (ok) dH[[j]] + dH1[[i]]*L[i,j] else dH1[[i]]*L[i,j]
         ok <- TRUE
       }
@@ -893,11 +893,11 @@ Vb.corr <- function(X,L,S,off,dw,w,rho,Vr,nth=0,scale.est=FALSE) {
 
   ## Get derivatives of Choleski factor w.r.t. the smoothing parameters 
   dR <- list()
-  for (i in 1:length(dH)) dR[[i]] <- dchol(dH[[i]],R) 
+  for (i in seq_len(length(dH))) dR[[i]] <- dchol(dH[[i]],R) 
   rm(dH)
   
   ## need to transform all dR to dR^{-1} = -R^{-1} dR R^{-1}...
-  for (i in 1:length(dR)) dR[[i]] <- -t(forwardsolve(t(R),t(backsolve(R,dR[[i]]))))
+  for (i in seq_len(length(dR))) dR[[i]] <- -t(forwardsolve(t(R),t(backsolve(R,dR[[i]]))))
  
   ## BUT: dR, now upper triangular, and it relates to RR' = Vb not R'R = Vb
   ## in consequence of which Rz is the thing with the right distribution
@@ -907,9 +907,9 @@ Vb.corr <- function(X,L,S,off,dw,w,rho,Vr,nth=0,scale.est=FALSE) {
     n.rep <- 10000;p <- ncol(R)
     r <- rmvn(n.rep,rep(0,M),Vr)
     b <- matrix(0,n.rep,p)
-    for (i in 1:n.rep) {
+    for (i in seq_len(n.rep)) {
       z <- rnorm(p)
-      if (M>0) for (j in 1:M) b[i,] <- b[i,] + dR[[j]]%*%z*(r[i,j]) 
+      if (M>0) for (j in seq_len(M)) b[i,] <- b[i,] + dR[[j]]%*%z*(r[i,j]) 
     }
     Vfd <- crossprod(b)/n.rep
   }
@@ -960,8 +960,8 @@ gam.fit3.post.proc <- function(X,L,S,off,object) {
     ## multiplicative range. e.g. var = 5.3 says parameter between .01 and 100 times
     ## estimate. Avoids nonsense at `infinite' smoothing parameters.   
 #    dpv <- rep(0,ncol(object$outer.info$hess))
-#    dpv[1:M] <- 1/10 ## prior precision (1/var) on log smoothing parameters
-#    Vr <- chol2inv(chol(object$outer.info$hess + diag(dpv,ncol=length(dpv))))[1:M,1:M]
+#    dpv[seq_len(M)] <- 1/10 ## prior precision (1/var) on log smoothing parameters
+#    Vr <- chol2inv(chol(object$outer.info$hess + diag(dpv,ncol=length(dpv))))[seq_len(M),seq_len(M)]
 #    Vc <- object$db.drho%*%Vr%*%t(object$db.drho)
     d <- ev$values; d[ind] <- 0;d <- 1/sqrt(d+1/10)
     Vr <- crossprod(d*t(ev$vectors))
@@ -1013,7 +1013,7 @@ score.transect <- function(ii, x, y, sp, Eb,UrS=list(),
   }
   par(mfrow=c(2,2),mar=c(4,4,1,1))
   plot(spi,score,xlab="log(sp)",ylab=scoreType,type="l")
-  plot(spi[1:(np-1)],score[2:np]-score[1:(np-1)],type="l",ylab=gettext("differences", domain = "R-mgcv"))
+  plot(spi[seq_len(np-1)],score[2:np]-score[seq_len(np-1)],type="l",ylab=gettext("differences", domain = "R-mgcv"))
   plot(spi,score,ylim=c(score[1]-.1,score[1]+.1),type="l")
   plot(spi,score,ylim=c(score[np]-.1,score[np]+.1),type="l")
 } ## score.transect
@@ -2810,7 +2810,7 @@ rTweedie <- function(mu,p=1.5,phi=1) {
 
   ## create summation index...
 
-  lab <- rep(1:length(N),N)
+  lab <- rep(seq_leb(length(N)),N)
 
   ## sum up each gamma sharing a label. 0 deviate if label does not occur
   o <- .C(C_psum,y=as.double(rep(0,n.sim)),as.double(y),as.integer(lab),as.integer(length(lab)))  

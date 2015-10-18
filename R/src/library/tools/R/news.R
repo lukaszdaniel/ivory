@@ -393,12 +393,12 @@ function(file, out = stdout(), codify = FALSE)
         dir <- file
         dfile <- file.path(dir, "DESCRIPTION")
         if(!file_test("-f", dfile))
-            stop(gettextf("'%s' file was not found", "DESCRIPTION"))
+            stop(gettextf("%s file was not found", sQuote("DESCRIPTION")))
         file <- file.path(dir, "inst", "NEWS")
         if(!file_test("-f", file)) {
             file <- file.path(dir, "NEWS")
             if(!file_test("-f", file))
-                stop(gettextf("'%s' file not found", "NEWS"))
+                stop(gettextf("%s file was not found", sQuote("NEWS")))
         }
     } else {
         dir <- dirname(file)
@@ -408,7 +408,7 @@ function(file, out = stdout(), codify = FALSE)
                !file_test("-f",
                           dfile <- file.path(dirname(dir),
                                              "DESCRIPTION")))
-                stop(gettextf("'%s' file was not found", "DESCRIPTION"))
+                stop(gettextf("%s file was not found", sQuote("DESCRIPTION")))
         }
     }
 

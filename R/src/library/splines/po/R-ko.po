@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2015-10-18 11:49\n"
 "PO-Revision-Date: 2012-03-06 18:25+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -73,6 +73,11 @@ msgstr ""
 msgid "bSpline representation of spline for %s"
 msgstr ""
 
+#. R/splineClasses.R: stop("empty 'derivs' argument")
+#: R/splineClasses.R:0
+msgid "empty 'derivs' argument"
+msgstr ""
+
 #. R/splineClasses.R: stop("knot positions must be non-decreasing")
 #. R/splineClasses.R: stop("knot positions must be non-decreasing")
 #: R/splineClasses.R:0
@@ -84,9 +89,10 @@ msgstr "knot 위치들은 감소해서는 안됩니다 "
 msgid "knot positions must be strictly increasing"
 msgstr "knot 위치들은 반드시 단조증가해야 합니다 "
 
-#. R/splineClasses.R: stop("length of 'derivs' must match length of 'x'")
+#. R/splineClasses.R: stop("length of 'derivs' is larger than length of 'x'")
 #: R/splineClasses.R:0
-msgid "length of 'derivs' must match length of 'x'"
+#, fuzzy
+msgid "length of 'derivs' is larger than length of 'x'"
 msgstr "'derivs' 의 길이는 'x' 의 길이와 일치해야 합니다 "
 
 #. R/splineClasses.R: stop("lengths of 'x' and 'y' must be the same")

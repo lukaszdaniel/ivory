@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.3\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-10-01 21:12\n"
+"POT-Creation-Date: 2015-10-18 20:40\n"
 "PO-Revision-Date: 2015-02-21 16:01-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -864,9 +864,9 @@ msgstr ""
 msgid "Histogram of residuals"
 msgstr ""
 
-#. R/gam.fit3.r: warning("Huber scale estiamte not converged")
+#. R/gam.fit3.r: warning("Huber scale estimate not converged")
 #: R/gam.fit3.r:0
-msgid "Huber scale estiamte not converged"
+msgid "Huber scale estimate not converged"
 msgstr ""
 
 #. R/mgcv.r: stop("IRLS regularizing parameter must be a non-negative number")
@@ -1071,6 +1071,7 @@ msgstr ""
 msgid "No variance estimates available"
 msgstr "사용할 수 있는 분산의 추정치를 찾을 수 없습니다."
 
+#. R/bam.r: gettextf("Non-finite coefficients at iteration %d", iter)
 #. R/bam.r: gettextf("Non-finite coefficients at iteration %d", iter)
 #. R/bam.r: gettextf("Non-finite coefficients at iteration %d", iter)
 #. R/gam.fit3.r: gettextf("Non-finite coefficients at iteration %d", iter)
@@ -2120,13 +2121,6 @@ msgstr ""
 msgid "non-existent terms requested - ignoring"
 msgstr ""
 
-#. R/bam.r: gettextf("non-finite coefficients at iteration %d", iter)
-#: R/bam.r:0
-msgid "non-finite coefficients at iteration %d"
-msgstr ""
-"%d번째 반복에서 얻어진 계수(coefficients)가 유한(finite)한 값을 가지지 않습니"
-"다."
-
 #. R/mgcv.r: warning("not all required variables have been supplied in  newdata!\n")
 #: R/mgcv.r:0
 msgid "not all required variables have been supplied in  newdata!"
@@ -2628,6 +2622,11 @@ msgstr[0] ""
 msgid "Smoothing parameter selection converged after %d iteration."
 msgid_plural "Smoothing parameter selection converged after %d iterations."
 msgstr[0] ""
+
+#~ msgid "non-finite coefficients at iteration %d"
+#~ msgstr ""
+#~ "%d번째 반복에서 얻어진 계수(coefficients)가 유한(finite)한 값을 가지지 않"
+#~ "습니다."
 
 #~ msgid "algorithm did not converge"
 #~ msgstr "알고리즘이 수렴하지 않습니다."
