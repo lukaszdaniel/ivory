@@ -26,15 +26,15 @@ function()
                       stringsAsFactors = FALSE)
 
     MARC_R_usage <-
-        c("aut" = "Use for full authors who have made substantial contributions to\nthe package and should show up in the package citation.",
-          "com" = "Use for package maintainers that collected code (potentially in\nother languages) but did not make further substantial\ncontributions to the package.",
-          "ctb" = "Use for authors who have made smaller contributions (such as\ncode patches etc.) but should not show up in the package\ncitation.", 
-          "cph" = "Use for all copyright holders.",
-          "cre" = "Use for the package maintainer.",
-          "ctr" = "Use for authors who have been contracted to write (parts of) the\npackage and hence do not own intellectual property.", 
-          "dtc" = "Use for persons who contributed data sets for the package.",
-          "ths" = "If the package is part of a thesis, use for the thesis advisor.", 
-          "trl" = "If the R code is merely a translation from another language\n(typically S), use for the translator to R.")
+        c("aut" = gettext("Use for full authors who have made substantial contributions to\nthe package and should show up in the package citation.", domain = "R-utils"),
+          "com" = gettext("Use for package maintainers that collected code (potentially in\nother languages) but did not make further substantial\ncontributions to the package.", domain = "R-utils"),
+          "ctb" = gettext("Use for authors who have made smaller contributions (such as\ncode patches etc.) but should not show up in the package\ncitation.", domain = "R-utils"), 
+          "cph" = gettext("Use for all copyright holders.", domain = "R-utils"),
+          "cre" = gettext("Use for the package maintainer.", domain = "R-utils"),
+          "ctr" = gettext("Use for authors who have been contracted to write (parts of) the\npackage and hence do not own intellectual property.", domain = "R-utils"),
+          "dtc" = gettext("Use for persons who contributed data sets for the package.", domain = "R-utils"),
+          "ths" = gettext("If the package is part of a thesis, use for the thesis advisor.", domain = "R-utils"),
+          "trl" = gettext("If the R code is merely a translation from another language\n(typically S), use for the translator to R.", domain = "R-utils"))
 
     MARC_R_usage <- data.frame(code = names(MARC_R_usage),
                                usage = c(MARC_R_usage),
