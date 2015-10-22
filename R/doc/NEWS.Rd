@@ -192,7 +192,10 @@
       longer than 8192 characters, thanks to Karl Millar's \PR{16544}.
 
       \item \code{rank()} gains a \code{ties.method = "last"} option,
-      for convenience (and symmetry), as proposed by Marius Hofert.
+      for convenience (and symmetry).
+
+      \item \code{getSource(vignette(..))} is the \R source file name of
+      a vignette.
     }
   }
 
@@ -300,6 +303,9 @@
       \item \code{xpdrows.data.frame()} was not checking for unique
       row names; in particular, this affected assignment to non-existing
       rows via numerical indexing. (\PR{16570})
+
+      \item \code{tail.matrix()} did not work for zero rows matrices,
+      and produced \code{"[1e+05,]"} row \dQuote{labels}.
     }
   }
 }
