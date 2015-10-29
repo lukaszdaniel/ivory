@@ -43,7 +43,8 @@
 #define NINTERRUPT 10000000
 
 /* We might get a call with R_NilValue from subassignment code */
-#define ECALL(call, yy) if(call == R_NilValue) error(yy); else errorcall(call, yy);
+#define ECALL(call, yy)     if(call == R_NilValue) error(yy);    else errorcall(call, yy);
+#define ECALL3(call, yy, A) if(call == R_NilValue) error(yy, A); else errorcall(call, yy, A);
 
 /* This allows for the unusual case where x is of length 2,
    and x[[-m]] selects one element for m = 1, 2.
@@ -56,11 +57,11 @@ static R_INLINE int integerOneIndex(int i, R_xlen_t len, SEXP call)
     if (i > 0) /* a regular 1-based index from R */
 	indx = i - 1;
     else if (i == 0 || len < 2) {
-	ECALL(call, _("attempt to select less than one element"));
+	ECALL3(call, _("attempt to select less than one element in %s"), "integerOneIndex");
     } else if (len == 2 && i > -3)
 	indx = 2 + i;
     else {
-	ECALL(call, _("attempt to select more than one element"));
+	ECALL3(call, _("attempt to select more than one element in %s"), "integerOneIndex");
     }
     return indx;
 }
@@ -75,10 +76,10 @@ OneIndex(SEXP x, SEXP s, R_xlen_t len, int partial, SEXP *newname,
     const void *vmax;
 
     if (pos < 0 && length(s) > 1) {
-	ECALL(call, _("attempt to select more than one element"));
+	ECALL3(call, _("attempt to select more than one element in %s"), "OneIndex");
     }
     if (pos < 0 && length(s) < 1) {
-	ECALL(call, _("attempt to select less than one element"));
+	ECALL3(call, _("attempt to select less than one element in %s"), "OneIndex");
     }
 
     if(pos < 0) pos = 0;
@@ -148,11 +149,7 @@ OneIndex(SEXP x, SEXP s, R_xlen_t len, int partial, SEXP *newname,
 	vmaxset(vmax);
 	break;
     default:
-	if (call == R_NilValue)
-	    error(_("invalid subscript type '%s'"), type2char(TYPEOF(s)));
-	else
-	    errorcall(call, _("invalid subscript type '%s'"),
-		      type2char(TYPEOF(s)));
+	ECALL3(call, _("invalid subscript type '%s'"), type2char(TYPEOF(s)));
     }
     return indx;
 }
@@ -184,9 +181,9 @@ get1index(SEXP s, SEXP names, R_xlen_t len, int pok, int pos, SEXP call)
 
     if (pos < 0 && length(s) != 1) {
 	if (length(s) > 1) {
-	    ECALL(call, _("attempt to select more than one element"));
+	    ECALL3(call, _("attempt to select more than one element in %s"), "get1index");
 	} else {
-	    ECALL(call, _("attempt to select less than one element"));
+	    ECALL3(call, _("attempt to select less than one element in %s"), "get1index");
 	}
     } else
 	if(pos >= length(s)) {
@@ -210,11 +207,11 @@ get1index(SEXP s, SEXP names, R_xlen_t len, int pok, int pos, SEXP call)
 	    /* see comment above integerOneIndex */
 	    if (dblind > 0) indx = (R_xlen_t)(dblind - 1);
 	    else if (dblind == 0 || len < 2) {
-		ECALL(call, _("attempt to select less than one element"));
+		ECALL3(call, _("attempt to select less than one element in %s"), "get1index <real>");
 	    } else if (len == 2 && dblind > -3)
 		indx = (R_xlen_t)(2 + dblind);
 	    else {
-		ECALL(call, _("attempt to select more than one element"));
+		ECALL3(call, _("attempt to select more than one element in %s"), "get1index <real>");
 	    }
 	}
 	break;
@@ -279,11 +276,7 @@ get1index(SEXP s, SEXP names, R_xlen_t len, int pok, int pos, SEXP call)
 		break;
 	    }
     default:
-	if (call == R_NilValue)
-	    error(_("invalid subscript type '%s'"), type2char(TYPEOF(s)));
-	else
-	    errorcall(call, _("invalid subscript type '%s'"),
-		      type2char(TYPEOF(s)));
+	ECALL3(call, _("invalid subscript type '%s'"), type2char(TYPEOF(s)));
     }
     return indx;
 }
@@ -310,7 +303,7 @@ vectorIndex(SEXP x, SEXP thesub, int start, int stop, int pok, SEXP call,
 	    if (i)
 		errorcall(call, _("recursive indexing failed at level %d\n"), i+1);
 	    else
-		errorcall(call, _("attempt to select more than one element"));
+		errorcall(call, _("attempt to select more than one element in %s"), "vectorIndex");
 	}
 	PROTECT(x);
 	SEXP names = PROTECT(getAttrib(x, R_NamesSymbol));
@@ -908,11 +901,7 @@ int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, SEXP call)
 	if (s == R_MissingArg)
 	    return nullSubscript(nd);
     default:
-	if (call == R_NilValue)
-	    error(_("invalid subscript type '%s'"), type2char(TYPEOF(s)));
-	else
-	    errorcall(call, _("invalid subscript type '%s'"),
-		      type2char(TYPEOF(s)));
+	ECALL3(call, _("invalid subscript type '%s'"), type2char(TYPEOF(s)));
     }
     return R_NilValue;
 }
@@ -1005,11 +994,7 @@ makeSubscript(SEXP x, SEXP s, R_xlen_t *stretch, SEXP call)
 	    break;
 	}
     default:
-	if (call == R_NilValue)
-	    error(_("invalid subscript type '%s'"), type2char(TYPEOF(s)));
-	else
-	    errorcall(call, _("invalid subscript type '%s'"),
-		      type2char(TYPEOF(s)));
+	ECALL3(call, _("invalid subscript type '%s'"), type2char(TYPEOF(s)));
     }
     return ans;
 }

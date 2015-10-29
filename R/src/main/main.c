@@ -1106,6 +1106,16 @@ static int ParseBrowser(SEXP CExpr, SEXP rho)
     return rval;
 }
 
+/* There's another copy of this in eval.c */
+static void PrintCall(SEXP call, SEXP rho)
+{
+    int old_bl = R_BrowseLines,
+        blines = asInteger(GetOption1(install("deparse.max.lines")));
+    if(blines != NA_INTEGER && blines > 0)
+	R_BrowseLines = blines;
+    PrintValueRec(call, rho);
+    R_BrowseLines = old_bl;
+}
 
 /* browser(text = "", condition = NULL, expr = TRUE, skipCalls = 0L)
  * ------- but also called from ./eval.c */
@@ -1161,10 +1171,8 @@ SEXP attribute_hidden do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 		&& cptr->callflag )
 	    cptr = cptr->nextcontext;
 	Rprintf(_("Called from: "));
-	int tmp = asInteger(GetOption(install("deparse.max.lines"), R_BaseEnv));
-	if(tmp != NA_INTEGER && tmp > 0) R_BrowseLines = tmp;
 	if( cptr != R_ToplevelContext ) {
-	    PrintValueRec(cptr->call, rho);
+	    PrintCall(cptr->call, rho);
 	    SET_RDEBUG(cptr->cloenv, 1);
 	} else
 	    Rprintf(_("top level \n"));
