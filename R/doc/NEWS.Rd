@@ -199,6 +199,13 @@
 
       \item \code{regmatches(invert = NA)} can now be used to extract
       both non-matched and matched substrings.
+
+      \item \code{data.frame()} gains argument \code{fix.empty.names};
+      \code{as.data.frame.list()} gets new \code{cut.names},
+      \code{col.names} and \code{fix.empty.names}.
+
+      \item \code{plot(x ~ x, *)} now warns that it is the same as
+      \code{plot(x ~ 1, *)}.
     }
   }
 
@@ -311,6 +318,9 @@
 
       \item \code{tail.matrix()} did not work for zero rows matrices,
       and produced \code{"[1e+05,]"} row \dQuote{labels}.
+
+      \item Data frames with column name \code{"stringsAsFactors"} now
+      format and print correctly.  (\PR{16580})
     }
   }
 }
@@ -468,7 +478,7 @@
       \item If the expression in the traceback was too long,
       \code{traceback()} did not report the source line number.  (Patch
       by Kirill Müller.)
-      
+
       \item The browser did not truncate the display of the function when
       exiting with \code{options("deparse.max.lines")} set.
       (\PR{16581})
@@ -476,6 +486,9 @@
       \item When \code{bs(*, Boundary.knots=)} had boundary knots inside
       the data range, extrapolation was somewhat off.  (Patch by Trevor
       Hastie.)
+
+      \item \code{var()} hence \code{sd()} now signal an error for
+      \code{factor()} arguments. (\PR{16564})
     }
   }
 }
