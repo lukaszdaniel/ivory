@@ -16,25 +16,28 @@
 #  A copy of the GNU General Public License is available at
 #  https://www.R-project.org/Licenses/
 
-recordPlot <- function()
+# 'load' and 'attach' should be character vectors of package names
+recordPlot <- function(load=NULL, attach=NULL)
 {
     if(dev.cur() == 1L)
         stop("no current device to record from")
     res <- .External2(C_getSnapshot)
     attr(res, "pid") <- Sys.getpid()
     attr(res, "Rversion") <- getRversion()
+    attr(res, "load") <- as.character(load)
+    attr(res, "attach") <- as.character(attach)
     class(res) <- "recordedplot"
     res
 }
 
-replayPlot <- function(x)
+replayPlot <- function(x, reloadPkgs=FALSE)
 {
     if(!inherits(x, "recordedplot"))
         stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("recordedplot")), domain = "R-grDevices")
     pid <- attr(x, "pid") ## added after R 3.0.2
     if (is.null(pid) || pid != Sys.getpid()) {
         # This is a "recordedplot" loaded from another session
-        x <- restoreRecordedPlot(x)
+        x <- restoreRecordedPlot(x, reloadPkgs)
     }
     invisible(.External2(C_playSnapshot, x))
 }
@@ -50,7 +53,7 @@ print.recordedplot <- function(x, ...)
 # - warn if have R version mismatch
 # - restore NativeSymbolInfo on each element of the snapshot display list
 # - bail out gracefully if something is not right
-restoreRecordedPlot <- function(x) {
+restoreRecordedPlot <- function(x, reloadPkgs) {
     snapshotRversion <- attr(x, "Rversion")
     if (is.null(snapshotRversion)) {
         warning("snapshot recorded in different R version (pre 3.3.0)")
@@ -60,12 +63,23 @@ restoreRecordedPlot <- function(x) {
     }
     # Ensure that all graphics systems in the snapshot are available
     # (snapshots only started recording pkgName in R 3.3.0)
+    # Similar for any 'pkgs' saved with the snapshot
     n <- length(x)
     if (n > 1 &&
         !is.null(snapshotRversion) &&
         snapshotRversion >= R_system_version("3.3.0")) {
         for (i in 2:n) {
             library(attr(x[[i]], "pkgName"), character.only=TRUE)
+        }
+        if (reloadPkgs) {
+            load <- attr(x, "load")
+            for (i in load) {
+                loadNamespace(i)
+            }
+            attach <- attr(x, "attach")
+            for (i in attach) {
+                library(i, character.only=TRUE)
+            }
         }
     }
     # The display list is the first component of the snapshot
