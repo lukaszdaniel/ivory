@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-10-18 11:49\n"
+"POT-Creation-Date: 2015-11-04 20:50\n"
 "PO-Revision-Date: 2015-01-17 15:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -280,6 +280,12 @@ msgstr "'destdir'不是目录"
 #: R/str.R:0
 msgid "'digits' and 'digits.d' are both specified and the latter is not used"
 msgstr "'digits'和'digits.d'两个都设定了，但后者没有用"
+
+#. R/packages.R: gettextf("'download.file()' error code '%d'", m)
+#: R/packages.R:0
+#, fuzzy
+msgid "'download.file()' error code '%d'"
+msgstr "read.dcf()在'%s'文件上出了错"
 
 #. R/debugger.R: gettextf("'dump' is empty", domain = "R-utils")
 #: R/debugger.R:0
@@ -2027,6 +2033,11 @@ msgstr "无法建立%s"
 msgid "failed to create directory %s"
 msgstr "无法建立目录%s"
 
+#. R/packages.R: gettextf("failed to download mirrors file (%s); using local file '%s'", conditionMessage(err),     local.file)
+#: R/packages.R:0
+msgid "failed to download mirrors file (%s); using local file '%s'"
+msgstr ""
+
 #. R/unix/mac.install.R: gettextf("file %s is not an OS X binary package", sQuote(pkg))
 #. R/unix/mac.install.R: gettextf("file %s is not an OS X binary package", sQuote(pkg))
 #. R/unix/mac.install.R: gettextf("file %s is not an OS X binary package", sQuote(pkg))
@@ -2986,7 +2997,7 @@ msgstr ""
 msgid "vignette %s has no PDF/HTML"
 msgstr "小文品%s没有PDF文件"
 
-#. R/vignette.R: gettextf("vignette %s has no R code", sQuote(name$Topic))
+#. R/vignette.R: gettextf("vignette %s has no R code", sQuote(x$Topic))
 #: R/vignette.R:0
 #, fuzzy
 msgid "vignette %s has no R code"
@@ -3611,9 +3622,6 @@ msgstr[0] "没有%s这个程序包(给%s用)"
 
 #~ msgid "updating HTML package descriptions"
 #~ msgstr "更新HTML程序包的描述内容"
-
-#~ msgid "read.dcf() error on file '%s'"
-#~ msgstr "read.dcf()在'%s'文件上出了错"
 
 #~ msgid "Could not find aspell or ispell executable."
 #~ msgstr "找不到aspell或ispell执行文件"

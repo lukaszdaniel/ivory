@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-08-18 12:52\n"
+"POT-Creation-Date: 2015-11-04 20:49\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -2530,6 +2530,7 @@ msgstr "wymagane jest 0, 1, lub 2 indeksy"
 msgid "need larger value of 'ncol' as pivoting occurred"
 msgstr "wymagana jest większa wartość argumentu 'ncol' ponieważ nastąpił obrót"
 
+#. R/grep.R: gettextf("need non-overlapping matches for %s", sQuote("invert = NA"), domain = "R-base")
 #. R/grep.R: gettextf("need non-overlapping matches for %s", sQuote("invert = TRUE"), domain = "R-base")
 #: R/grep.R:0
 msgid "need non-overlapping matches for %s"

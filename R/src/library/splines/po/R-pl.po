@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-18 11:49\n"
+"POT-Creation-Date: 2015-11-04 21:08\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -21,22 +21,22 @@ msgstr ""
 msgid "%s needs package 'Matrix' correctly installed"
 msgstr "'%s' potrzebuje poprawnie zainstalowanego pakietu 'Matrix'"
 
-#. R/splines.R: stop("'degree' must be integer >= 1")
+#. R/splines.R: gettextf("'%s' argument must be integer >= 1", "degree")
 #: R/splines.R:0
-msgid "'degree' must be integer >= 1"
-msgstr "'degree' musi być liczbą całkowitą >= 1"
+msgid "'%s' argument must be integer >= 1"
+msgstr "argument '%s' musi być liczbą całkowitą >= 1"
+
+#. R/splines.R: gettextf("'%s' argument was too small; have used %d", "df", ord - (1L - intercept))
+#. R/splines.R: gettextf("'%s' argument was too small; have used %d", "df", 1L + intercept)
+#: R/splines.R:0
+msgid "'%s' argument was too small; have used %d"
+msgstr "argument '%s' był zbyt mały; użyto %d"
 
 #. R/splineClasses.R: gettextf("'deriv' must be between 0 and %d", ord - 1)
 #. R/splineClasses.R: gettextf("'deriv' must be between 0 and %d", ord - 1)
 #: R/splineClasses.R:0
 msgid "'deriv' must be between 0 and %d"
 msgstr "'deriv' musi być pomiędzy 0 a %d"
-
-#. R/splines.R: gettextf("'df' was too small; have used %d", ord - (1L - intercept))
-#. R/splines.R: gettextf("'df' was too small; have used %d", 1L + intercept)
-#: R/splines.R:0
-msgid "'df' was too small; have used %d"
-msgstr "'df' było zbyt małe; użyto %d"
 
 #. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
 #. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
@@ -153,3 +153,6 @@ msgstr "wartości 'x' muszą być różne"
 #: R/splineClasses.R:0
 msgid "values of 'x' must be strictly increasing"
 msgstr "wartości 'x' muszą być ściśle rosnące"
+
+#~ msgid "'%s' was too small; have used %d"
+#~ msgstr "argument '%s' był zbyt mały; użyto %d"

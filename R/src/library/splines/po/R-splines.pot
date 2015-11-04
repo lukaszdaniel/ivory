@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: splines 3.3.0\n"
-"POT-Creation-Date: 2015-10-18 11:49\n"
+"POT-Creation-Date: 2015-11-04 21:08\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,9 +19,17 @@ msgstr ""
 
 
 #: R/splines.R: 0
-#. R/splines.R: stop("'degree' must be integer >= 1")
+#. R/splines.R: gettextf("'%s' argument must be integer >= 1", "degree")
 
-msgid "'degree' must be integer >= 1"
+msgid "'%s' argument must be integer >= 1"
+msgstr ""
+
+
+#: R/splines.R: 0
+#. R/splines.R: gettextf("'%s' argument was too small; have used %d", "df", ord - (1L - intercept))
+#. R/splines.R: gettextf("'%s' argument was too small; have used %d", "df", 1L + intercept)
+
+msgid "'%s' argument was too small; have used %d"
 msgstr ""
 
 
@@ -30,14 +38,6 @@ msgstr ""
 #. R/splineClasses.R: gettextf("'deriv' must be between 0 and %d", ord - 1)
 
 msgid "'deriv' must be between 0 and %d"
-msgstr ""
-
-
-#: R/splines.R: 0
-#. R/splines.R: gettextf("'df' was too small; have used %d", ord - (1L - intercept))
-#. R/splines.R: gettextf("'df' was too small; have used %d", 1L + intercept)
-
-msgid "'df' was too small; have used %d"
 msgstr ""
 
 

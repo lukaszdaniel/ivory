@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-09 22:21\n"
+"POT-Creation-Date: 2015-11-04 20:50\n"
 "PO-Revision-Date: 2011-10-15 15:12+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -762,6 +762,11 @@ msgstr "la fonction 'panel' a créé un nouveau graphe"
 #, fuzzy
 msgid "the AREAS in the plot are wrong -- rather use 'freq = FALSE'"
 msgstr "les SURFACES du graphe sont fausses -- utilisez plutôt freq=FALSE"
+
+#. R/plot.R: gettextf("the formula '%s' is treated as '%s'", format(formula), format(local({    f <- formula    f[[3L]] <- quote(1)    f})))
+#: R/plot.R:0
+msgid "the formula '%s' is treated as '%s'"
+msgstr ""
 
 #. R/plot.design.R: stop("there must be at least one numeric variable!")
 #: R/plot.design.R:0

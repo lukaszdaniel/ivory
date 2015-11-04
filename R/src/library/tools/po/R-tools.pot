@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.3.0\n"
-"POT-Creation-Date: 2015-10-18 15:37\n"
+"POT-Creation-Date: 2015-11-04 21:08\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -809,6 +809,13 @@ msgstr ""
 #. R/CRANtools.R: gettextf("Checking %s", m, domain = "R-tools")
 
 msgid "Checking %s"
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettext("Checking DOIs failed with message:", domain = "R-tools")
+
+msgid "Checking DOIs failed with message:"
 msgstr ""
 
 
@@ -2067,6 +2074,13 @@ msgid "Invalid DESCRIPTION file"
 msgstr ""
 
 
+#: R/doitools.R: 0
+#. R/doitools.R: gettext("Invalid DOI")
+
+msgid "Invalid DOI"
+msgstr ""
+
+
 #: R/QC.R: 0
 #. R/QC.R: gettext("Invalid NAMESPACE file, parsing gives:", domain = "R-tools")
 
@@ -2085,6 +2099,13 @@ msgstr ""
 #. R/urltools.R: gettext("Invalid URI scheme", domain = "R-tools")
 
 msgid "Invalid URI scheme"
+msgstr ""
+
+
+#: R/urltools.R: 0
+#. R/urltools.R: gettext("Invalid URI scheme (use \\doi for DOIs)", domain = "R-tools")
+
+msgid "Invalid URI scheme (use \\doi for DOIs)"
 msgstr ""
 
 
@@ -6673,6 +6694,13 @@ msgid "processing %s"
 msgstr ""
 
 
+#: R/doitools.R: 0
+#. R/doitools.R: gettextf("processing DOI %s", d)
+
+msgid "processing DOI %s"
+msgstr ""
+
+
 #: R/utils.R: 0
 #. R/utils.R: gettextf("processing directory %s", sQuote(basename(dir)))
 
@@ -6687,7 +6715,9 @@ msgid "processing file %s"
 msgstr ""
 
 
+#: R/doitools.R: 0
 #: R/install.R: 0
+#. R/doitools.R: gettextf("processing package %s", sQuote(p))
 #. R/install.R: gettextf("processing package %s", sQuote(pkg))
 
 msgid "processing package %s"
@@ -6727,6 +6757,14 @@ msgstr ""
 #. R/build.R: gettext("re-saving tabular files", domain = "R-tools")
 
 msgid "re-saving tabular files"
+msgstr ""
+
+
+#: R/packages.R: 0
+#. R/packages.R: gettextf("reading 'DESCRIPTION' file for package %s failed with message:\n  %s",     sQuote(basename(dirname(p))), conditionMessage(temp))
+#. R/packages.R: gettextf("reading 'DESCRIPTION' file for package %s failed with message:\n  %s",     sQuote(basename(paths[i])), conditionMessage(temp))
+
+msgid "reading 'DESCRIPTION' file for package %s failed with message:\n  %s"
 msgstr ""
 
 
@@ -7770,6 +7808,15 @@ msgstr[1]    ""
 
 msgid        "Found the deprecated function:"
 msgid_plural "Found the deprecated functions:"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: ngettext(length(y), "Found the following (possibly) invalid DOI:", "Found the following (possibly) invalid DOIs:",     domain = "R-tools")
+
+msgid        "Found the following (possibly) invalid DOI:"
+msgid_plural "Found the following (possibly) invalid DOIs:"
 msgstr[0]    ""
 msgstr[1]    ""
 

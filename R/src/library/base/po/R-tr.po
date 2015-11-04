@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-08-18 12:52\n"
+"POT-Creation-Date: 2015-11-04 20:49\n"
 "PO-Revision-Date: 2011-04-01 04:29+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -2494,6 +2494,7 @@ msgstr ""
 msgid "need larger value of 'ncol' as pivoting occurred"
 msgstr ""
 
+#. R/grep.R: gettextf("need non-overlapping matches for %s", sQuote("invert = NA"), domain = "R-base")
 #. R/grep.R: gettextf("need non-overlapping matches for %s", sQuote("invert = TRUE"), domain = "R-base")
 #: R/grep.R:0
 msgid "need non-overlapping matches for %s"

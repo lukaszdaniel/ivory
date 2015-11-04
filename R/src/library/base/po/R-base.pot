@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.3.0\n"
-"POT-Creation-Date: 2015-08-18 12:52\n"
+"POT-Creation-Date: 2015-11-04 20:49\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3264,6 +3264,7 @@ msgstr ""
 
 
 #: R/grep.R: 0
+#. R/grep.R: gettextf("need non-overlapping matches for %s", sQuote("invert = NA"), domain = "R-base")
 #. R/grep.R: gettextf("need non-overlapping matches for %s", sQuote("invert = TRUE"), domain = "R-base")
 
 msgid "need non-overlapping matches for %s"

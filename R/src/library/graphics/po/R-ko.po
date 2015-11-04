@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-09 22:21\n"
+"POT-Creation-Date: 2015-11-04 20:50\n"
 "PO-Revision-Date: 2005-05-25 15:04+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -753,6 +753,11 @@ msgstr "'panel' 함수는 신규의 plot로 작성했습니다"
 #, fuzzy
 msgid "the AREAS in the plot are wrong -- rather use 'freq = FALSE'"
 msgstr "plot의 영역이 오류입니다 -- 차라리 freq=FALSE를 사용해주십시오"
+
+#. R/plot.R: gettextf("the formula '%s' is treated as '%s'", format(formula), format(local({    f <- formula    f[[3L]] <- quote(1)    f})))
+#: R/plot.R:0
+msgid "the formula '%s' is treated as '%s'"
+msgstr ""
 
 #. R/plot.design.R: stop("there must be at least one numeric variable!")
 #: R/plot.design.R:0

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-10-18 11:49\n"
+"POT-Creation-Date: 2015-11-04 20:50\n"
 "PO-Revision-Date: 2012-01-09 20:51+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -262,6 +262,11 @@ msgstr ""
 #. R/str.R: warning("'digits' and 'digits.d' are both specified and the latter is not used")
 #: R/str.R:0
 msgid "'digits' and 'digits.d' are both specified and the latter is not used"
+msgstr ""
+
+#. R/packages.R: gettextf("'download.file()' error code '%d'", m)
+#: R/packages.R:0
+msgid "'download.file()' error code '%d'"
 msgstr ""
 
 #. R/debugger.R: gettextf("'dump' is empty", domain = "R-utils")
@@ -1948,6 +1953,11 @@ msgstr ""
 msgid "failed to create directory %s"
 msgstr ""
 
+#. R/packages.R: gettextf("failed to download mirrors file (%s); using local file '%s'", conditionMessage(err),     local.file)
+#: R/packages.R:0
+msgid "failed to download mirrors file (%s); using local file '%s'"
+msgstr ""
+
 #. R/unix/mac.install.R: gettextf("file %s is not an OS X binary package", sQuote(pkg))
 #. R/unix/mac.install.R: gettextf("file %s is not an OS X binary package", sQuote(pkg))
 #. R/unix/mac.install.R: gettextf("file %s is not an OS X binary package", sQuote(pkg))
@@ -2877,7 +2887,7 @@ msgstr ""
 msgid "vignette %s has no PDF/HTML"
 msgstr ""
 
-#. R/vignette.R: gettextf("vignette %s has no R code", sQuote(name$Topic))
+#. R/vignette.R: gettextf("vignette %s has no R code", sQuote(x$Topic))
 #: R/vignette.R:0
 msgid "vignette %s has no R code"
 msgstr ""

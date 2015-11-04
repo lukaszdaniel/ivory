@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-09 22:21\n"
+"POT-Creation-Date: 2015-11-04 20:50\n"
 "PO-Revision-Date: 2015-01-17 15:08+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Italian\n"
@@ -753,6 +753,11 @@ msgstr "La funzione 'panel' ha generato un nuovo grafico"
 #, fuzzy
 msgid "the AREAS in the plot are wrong -- rather use 'freq = FALSE'"
 msgstr "le AREE nel grafico sono sbagliate -- usare piuttosto freq=FALSE"
+
+#. R/plot.R: gettextf("the formula '%s' is treated as '%s'", format(formula), format(local({    f <- formula    f[[3L]] <- quote(1)    f})))
+#: R/plot.R:0
+msgid "the formula '%s' is treated as '%s'"
+msgstr ""
 
 #. R/plot.design.R: stop("there must be at least one numeric variable!")
 #: R/plot.design.R:0

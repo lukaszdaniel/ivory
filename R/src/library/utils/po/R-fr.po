@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-10-18 11:49\n"
+"POT-Creation-Date: 2015-11-04 20:50\n"
 "PO-Revision-Date: 2012-03-06 22:16+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -284,6 +284,12 @@ msgstr "'destdir' n'est pas un répertoire"
 msgid "'digits' and 'digits.d' are both specified and the latter is not used"
 msgstr ""
 "'digits' et 'digits.d' sont tous deux spécifiés et le second est ignoré"
+
+#. R/packages.R: gettextf("'download.file()' error code '%d'", m)
+#: R/packages.R:0
+#, fuzzy
+msgid "'download.file()' error code '%d'"
+msgstr "erreur de read.dcf() dans le fichier %s"
 
 #. R/debugger.R: gettextf("'dump' is empty", domain = "R-utils")
 #: R/debugger.R:0
@@ -2072,6 +2078,11 @@ msgstr "la création de %s a échoué"
 msgid "failed to create directory %s"
 msgstr "impossible de créer le répertoire %s"
 
+#. R/packages.R: gettextf("failed to download mirrors file (%s); using local file '%s'", conditionMessage(err),     local.file)
+#: R/packages.R:0
+msgid "failed to download mirrors file (%s); using local file '%s'"
+msgstr ""
+
 #. R/unix/mac.install.R: gettextf("file %s is not an OS X binary package", sQuote(pkg))
 #. R/unix/mac.install.R: gettextf("file %s is not an OS X binary package", sQuote(pkg))
 #. R/unix/mac.install.R: gettextf("file %s is not an OS X binary package", sQuote(pkg))
@@ -3054,7 +3065,7 @@ msgstr ""
 msgid "vignette %s has no PDF/HTML"
 msgstr "la vignette %s n'a pas de PDF"
 
-#. R/vignette.R: gettextf("vignette %s has no R code", sQuote(name$Topic))
+#. R/vignette.R: gettextf("vignette %s has no R code", sQuote(x$Topic))
 #: R/vignette.R:0
 #, fuzzy
 msgid "vignette %s has no R code"
@@ -3746,9 +3757,6 @@ msgstr[1] "les packages '%s' ne sont pas disponibles (pour %s)"
 
 #~ msgid "updating HTML package descriptions"
 #~ msgstr "mise à jour des descriptions HTML des packages"
-
-#~ msgid "read.dcf() error on file '%s'"
-#~ msgstr "erreur de read.dcf() dans le fichier %s"
 
 #~ msgid "Could not find aspell or ispell executable."
 #~ msgstr "Executable aspell ou ispell introuvable."

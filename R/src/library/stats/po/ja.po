@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-18 11:49+0200\n"
+"POT-Creation-Date: 2015-11-04 20:50+0100\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -82,31 +82,43 @@ msgstr " ケースの数を決定する入力がありません "
 msgid "not all arguments have the same length"
 msgstr " 引数の中に異なった長さのものがあります "
 
-#: cov.c:560
+#: cov.c:564
 msgid "missing observations in cov/cor"
 msgstr " cov/cor 関数に欠損した観測値があります "
 
 #: cov.c:638
-msgid "'x' is NULL"
-msgstr " 'x' が空です "
+#, fuzzy, c-format
+msgid "'%s' argument is NULL"
+msgstr " 範囲(span)が小さすぎます "
 
-#: cov.c:657 cov.c:663
+#: cov.c:640 cov.c:660
+#, fuzzy, c-format
+msgid "'%s' argument is a factor"
+msgstr " 'fn' が関数ではありません "
+
+#: cov.c:642
+msgid ""
+"Calling 'var(x)' on a factor 'x' is deprecated and will become an error.\n"
+"  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
+msgstr ""
+
+#: cov.c:668 cov.c:674
 msgid "incompatible dimensions"
 msgstr " 互換性のない次元です "
 
-#: cov.c:682 cov.c:723 cov.c:756
+#: cov.c:693 cov.c:734 cov.c:767
 msgid "no complete element pairs"
 msgstr " 完全な要素のペアがありません "
 
-#: cov.c:695
+#: cov.c:706
 msgid "invalid 'use' (computational method)"
 msgstr " 'use' (計算法)が不正です "
 
-#: cov.c:698
+#: cov.c:709
 msgid "'x' is empty"
 msgstr " 'x' が空です "
 
-#: cov.c:792
+#: cov.c:803
 msgid "the standard deviation is zero"
 msgstr " 標準偏差が0です "
 
@@ -1153,6 +1165,9 @@ msgstr " 直前の %d 個の観測値中に欠損値があります "
 #, c-format
 msgid "ifault=%d. This should not happen"
 msgstr ""
+
+#~ msgid "'x' is NULL"
+#~ msgstr " 'x' が空です "
 
 #, fuzzy
 #~ msgid "unknown 'method' argument"

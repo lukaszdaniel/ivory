@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-18 11:49+0200\n"
+"POT-Creation-Date: 2015-11-04 20:50+0100\n"
 "PO-Revision-Date: 2005-04-14 18:06+0200\n"
 "Last-Translator: stefano iacus <stefano.iacus@r-project.org>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -80,32 +80,43 @@ msgstr ""
 msgid "not all arguments have the same length"
 msgstr "non tutti gli argomenti hanno la stessa lunghezza"
 
-#: cov.c:560
+#: cov.c:564
 msgid "missing observations in cov/cor"
 msgstr "osservazioni mancanti in cov/cor"
 
 #: cov.c:638
-#, fuzzy
-msgid "'x' is NULL"
-msgstr "'x' è vuoto"
+#, fuzzy, c-format
+msgid "'%s' argument is NULL"
+msgstr "ampiezza troppo piccola"
 
-#: cov.c:657 cov.c:663
+#: cov.c:640 cov.c:660
+#, fuzzy, c-format
+msgid "'%s' argument is a factor"
+msgstr "'fn' non è una funzione"
+
+#: cov.c:642
+msgid ""
+"Calling 'var(x)' on a factor 'x' is deprecated and will become an error.\n"
+"  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
+msgstr ""
+
+#: cov.c:668 cov.c:674
 msgid "incompatible dimensions"
 msgstr "dimensioni incompatibili"
 
-#: cov.c:682 cov.c:723 cov.c:756
+#: cov.c:693 cov.c:734 cov.c:767
 msgid "no complete element pairs"
 msgstr ""
 
-#: cov.c:695
+#: cov.c:706
 msgid "invalid 'use' (computational method)"
 msgstr "'use' non valido (metodo computazionale)"
 
-#: cov.c:698
+#: cov.c:709
 msgid "'x' is empty"
 msgstr "'x' è vuoto"
 
-#: cov.c:792
+#: cov.c:803
 msgid "the standard deviation is zero"
 msgstr "la deviazione standard è zero"
 
@@ -1158,6 +1169,10 @@ msgstr "valori mancanti nelle ultime %d osservazioni"
 #, c-format
 msgid "ifault=%d. This should not happen"
 msgstr ""
+
+#, fuzzy
+#~ msgid "'x' is NULL"
+#~ msgstr "'x' è vuoto"
 
 #, fuzzy
 #~ msgid "unknown 'method' argument"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2015-11-04 20:50\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -591,11 +591,6 @@ msgstr "niepoprawne określenie 'row'"
 msgid "invalid display list element"
 msgstr "niepoprawne element listy wyświetleń"
 
-#. R/grob.R: stop("invalid element in the display list")
-#: R/grob.R:0
-msgid "invalid element in the display list"
-msgstr "niepoprawny element w liście wyświetleń"
-
 #. R/grob.R: stop("invalid element to add to an object of class \"gList\"")
 #: R/grob.R:0
 msgid "invalid element to add to an object of class \"gList\""
@@ -850,6 +845,9 @@ msgid_plural "invalid viewport names"
 msgstr[0] "niepoprawna nazwa okna ekranu"
 msgstr[1] "niepoprawne nazwy okien ekranu"
 msgstr[2] "niepoprawne nazwy okien ekranu"
+
+#~ msgid "invalid element in the display list"
+#~ msgstr "niepoprawny element w liście wyświetleń"
 
 #~ msgid "'%s' argument must be an object of class %s"
 #~ msgstr "argument '%s' musi być obiektem klasy %s"

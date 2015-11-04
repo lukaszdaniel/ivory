@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2015-11-04 20:50\n"
 "PO-Revision-Date: 2005-05-25 16:34+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -657,12 +657,6 @@ msgstr "부적절한 'row'의 지정입니다"
 msgid "invalid display list element"
 msgstr "부적절한 display 리스트의 요소입니다"
 
-#. R/grob.R: stop("invalid element in the display list")
-#: R/grob.R:0
-#, fuzzy
-msgid "invalid element in the display list"
-msgstr "display 리스트에서 부적절한 요소가 있습니다"
-
 #. R/grob.R: stop("invalid element to add to an object of class \"gList\"")
 #: R/grob.R:0
 #, fuzzy
@@ -942,6 +936,10 @@ msgstr[0] "부적절한 'grob'의 이름입니다"
 msgid "invalid viewport name"
 msgid_plural "invalid viewport names"
 msgstr[0] "부적절한 viewport명입니다"
+
+#, fuzzy
+#~ msgid "invalid element in the display list"
+#~ msgstr "display 리스트에서 부적절한 요소가 있습니다"
 
 #, fuzzy
 #~ msgid "'%s' argument must be an object of class %s"

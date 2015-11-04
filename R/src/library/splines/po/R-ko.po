@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-10-18 11:49\n"
+"POT-Creation-Date: 2015-11-04 21:08\n"
 "PO-Revision-Date: 2012-03-06 18:25+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -24,23 +24,24 @@ msgstr ""
 msgid "%s needs package 'Matrix' correctly installed"
 msgstr ""
 
-#. R/splines.R: stop("'degree' must be integer >= 1")
+#. R/splines.R: gettextf("'%s' argument must be integer >= 1", "degree")
 #: R/splines.R:0
-msgid "'degree' must be integer >= 1"
+#, fuzzy
+msgid "'%s' argument must be integer >= 1"
 msgstr "'depgree' 는 반드시 1 이상의 정수이어야 합니다 "
+
+#. R/splines.R: gettextf("'%s' argument was too small; have used %d", "df", ord - (1L - intercept))
+#. R/splines.R: gettextf("'%s' argument was too small; have used %d", "df", 1L + intercept)
+#: R/splines.R:0
+#, fuzzy
+msgid "'%s' argument was too small; have used %d"
+msgstr "'df' 가 너무 작아 다음의 값이 사용되었습니다 "
 
 #. R/splineClasses.R: gettextf("'deriv' must be between 0 and %d", ord - 1)
 #. R/splineClasses.R: gettextf("'deriv' must be between 0 and %d", ord - 1)
 #: R/splineClasses.R:0
 msgid "'deriv' must be between 0 and %d"
 msgstr "'deriv' 는 반드시 0 과 %d 사이에 있어야 합니다 "
-
-#. R/splines.R: gettextf("'df' was too small; have used %d", ord - (1L - intercept))
-#. R/splines.R: gettextf("'df' was too small; have used %d", 1L + intercept)
-#: R/splines.R:0
-#, fuzzy
-msgid "'df' was too small; have used %d"
-msgstr "'df' 가 너무 작아 다음의 값이 사용되었습니다 "
 
 #. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
 #. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
@@ -161,3 +162,7 @@ msgstr "'x' 의 값들이 모두 달라야 합니다 "
 #: R/splineClasses.R:0
 msgid "values of 'x' must be strictly increasing"
 msgstr "'x' 의 값들은 반드시 단조증가해야 합니다 "
+
+#, fuzzy
+#~ msgid "'%s' was too small; have used %d"
+#~ msgstr "'df' 가 너무 작아 다음의 값이 사용되었습니다 "

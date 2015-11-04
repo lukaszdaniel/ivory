@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-10-18 15:37\n"
+"POT-Creation-Date: 2015-11-04 21:08\n"
 "PO-Revision-Date: 2005-04-17 16:57+0200\n"
 "Last-Translator: stefano iacus <>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -653,6 +653,11 @@ msgstr ""
 #, fuzzy
 msgid "Checking %s"
 msgstr "analizzo '%s'"
+
+#. R/QC.R: gettext("Checking DOIs failed with message:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Checking DOIs failed with message:"
+msgstr ""
 
 #. R/QC.R: gettext("Checking URLs failed with message:", domain = "R-tools")
 #: R/QC.R:0
@@ -1674,6 +1679,12 @@ msgstr ""
 msgid "Invalid DESCRIPTION file"
 msgstr "file DESCRIPTION non valido"
 
+#. R/doitools.R: gettext("Invalid DOI")
+#: R/doitools.R:0
+#, fuzzy
+msgid "Invalid DOI"
+msgstr "non può essere usato per il pacchetto 'base'"
+
 #. R/QC.R: gettext("Invalid NAMESPACE file, parsing gives:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Invalid NAMESPACE file, parsing gives:"
@@ -1688,6 +1699,12 @@ msgstr ""
 #: R/urltools.R:0
 #, fuzzy
 msgid "Invalid URI scheme"
+msgstr "non può essere usato per il pacchetto 'base'"
+
+#. R/urltools.R: gettext("Invalid URI scheme (use \\doi for DOIs)", domain = "R-tools")
+#: R/urltools.R:0
+#, fuzzy
+msgid "Invalid URI scheme (use \\doi for DOIs)"
 msgstr "non può essere usato per il pacchetto 'base'"
 
 #. R/QC.R: gettext("Invalid VignetteBuilder field.", domain = "R-tools")
@@ -5335,6 +5352,12 @@ msgstr ""
 msgid "processing %s"
 msgstr "analizzo '%s'"
 
+#. R/doitools.R: gettextf("processing DOI %s", d)
+#: R/doitools.R:0
+#, fuzzy
+msgid "processing DOI %s"
+msgstr "analizzo '%s'"
+
 #. R/utils.R: gettextf("processing directory %s", sQuote(basename(dir)))
 #: R/utils.R:0
 #, fuzzy
@@ -5347,8 +5370,9 @@ msgstr "analizzo '%s'"
 msgid "processing file %s"
 msgstr "analizzo '%s'"
 
+#. R/doitools.R: gettextf("processing package %s", sQuote(p))
 #. R/install.R: gettextf("processing package %s", sQuote(pkg))
-#: R/install.R:0
+#: R/doitools.R:0 R/install.R:0
 #, fuzzy
 msgid "processing package %s"
 msgstr "Elaboro i pacchetti:"
@@ -5380,6 +5404,15 @@ msgstr "analizzo '%s'"
 #: R/build.R:0
 msgid "re-saving tabular files"
 msgstr ""
+
+#. R/packages.R: gettextf("reading 'DESCRIPTION' file for package %s failed with message:\n  %s",     sQuote(basename(dirname(p))), conditionMessage(temp))
+#. R/packages.R: gettextf("reading 'DESCRIPTION' file for package %s failed with message:\n  %s",     sQuote(basename(paths[i])), conditionMessage(temp))
+#: R/packages.R:0
+#, fuzzy
+msgid ""
+"reading 'DESCRIPTION' file for package %s failed with message:\n"
+"  %s"
+msgstr "non può essere usato per il pacchetto 'base'"
 
 #. R/build.R: gettextf("removing %s as '--force' was given", sQuote(oldindex), domain = "R-tools")
 #: R/build.R:0
@@ -6253,6 +6286,14 @@ msgid "Found the deprecated function:"
 msgid_plural "Found the deprecated functions:"
 msgstr[0] ""
 msgstr[1] ""
+
+#. R/QC.R: ngettext(length(y), "Found the following (possibly) invalid DOI:", "Found the following (possibly) invalid DOIs:",     domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Found the following (possibly) invalid DOI:"
+msgid_plural "Found the following (possibly) invalid DOIs:"
+msgstr[0] "I file Rd devono avere \\title non vuoto."
+msgstr[1] "I file Rd devono avere \\title non vuoto."
 
 #. R/QC.R: ngettext(length(y), "Found the following (possibly) invalid URL:", "Found the following (possibly) invalid URLs:",     domain = "R-tools")
 #: R/QC.R:0

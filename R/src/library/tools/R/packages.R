@@ -197,7 +197,7 @@ function(dir, fields = NULL, verbose = getOption("verbose"))
             ## on the unpacked sources ...
             db[[i]] <- temp
         } else {
-            warning(gettextf("reading 'DESCRIPTION' for package %s failed with message:\n  %s",
+            warning(gettextf("reading 'DESCRIPTION' file for package %s failed with message:\n  %s",
                              sQuote(basename(paths[i])),
                              conditionMessage(temp)),
                     domain = "R-tools")

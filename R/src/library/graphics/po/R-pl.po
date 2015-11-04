@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-09 22:21\n"
+"POT-Creation-Date: 2015-11-04 20:50\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -729,6 +729,11 @@ msgstr "funkcja 'panel' utworzyła nowy wykres"
 #: R/hist.R:0
 msgid "the AREAS in the plot are wrong -- rather use 'freq = FALSE'"
 msgstr "OBSZARY na wykresie są błędne -- użyj raczej 'freq=FALSE'"
+
+#. R/plot.R: gettextf("the formula '%s' is treated as '%s'", format(formula), format(local({    f <- formula    f[[3L]] <- quote(1)    f})))
+#: R/plot.R:0
+msgid "the formula '%s' is treated as '%s'"
+msgstr "formuła '%s' jest traktowana jako '%s'"
 
 #. R/plot.design.R: stop("there must be at least one numeric variable!")
 #: R/plot.design.R:0

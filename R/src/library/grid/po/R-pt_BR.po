@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2015-11-04 20:50\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -652,12 +652,6 @@ msgstr "Especificação inválida para 'row'"
 msgid "invalid display list element"
 msgstr "elemento da lista de exibição inválido"
 
-#. R/grob.R: stop("invalid element in the display list")
-#: R/grob.R:0
-#, fuzzy
-msgid "invalid element in the display list"
-msgstr "Elemento Inválido na lista de exibição"
-
 #. R/grob.R: stop("invalid element to add to an object of class \"gList\"")
 #: R/grob.R:0
 #, fuzzy
@@ -940,6 +934,10 @@ msgid "invalid viewport name"
 msgid_plural "invalid viewport names"
 msgstr[0] "Nome(s) de vista inválido(s)"
 msgstr[1] "Nome(s) de vista inválido(s)"
+
+#, fuzzy
+#~ msgid "invalid element in the display list"
+#~ msgstr "Elemento Inválido na lista de exibição"
 
 #, fuzzy
 #~ msgid "'%s' argument must be an object of class %s"

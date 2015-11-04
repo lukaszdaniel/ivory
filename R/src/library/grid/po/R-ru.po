@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-07-19 18:10\n"
+"POT-Creation-Date: 2015-11-04 20:50\n"
 "PO-Revision-Date: 2015-01-17 15:11+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -646,12 +646,6 @@ msgstr "Неправильное указание 'row'"
 msgid "invalid display list element"
 msgstr "Неправильный элемент списка изображений"
 
-#. R/grob.R: stop("invalid element in the display list")
-#: R/grob.R:0
-#, fuzzy
-msgid "invalid element in the display list"
-msgstr "Неправильный элемент в списке изображений"
-
 #. R/grob.R: stop("invalid element to add to an object of class \"gList\"")
 #: R/grob.R:0
 #, fuzzy
@@ -936,6 +930,10 @@ msgid_plural "invalid viewport names"
 msgstr[0] "Неправильное име(на) оконницы"
 msgstr[1] "Неправильное име(на) оконницы"
 msgstr[2] "Неправильное име(на) оконницы"
+
+#, fuzzy
+#~ msgid "invalid element in the display list"
+#~ msgstr "Неправильный элемент в списке изображений"
 
 #, fuzzy
 #~ msgid "'%s' argument must be an object of class %s"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-10-18 15:37\n"
+"POT-Creation-Date: 2015-11-04 21:08\n"
 "PO-Revision-Date: 2015-01-17 15:54+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -690,6 +690,14 @@ msgstr ""
 #, fuzzy
 msgid "Checking %s"
 msgstr "делаю DLL..."
+
+#. R/QC.R: gettext("Checking DOIs failed with message:", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Checking DOIs failed with message:"
+msgstr ""
+"выполнение Sweave в очерке '%s' не удалось с диагностикой:\n"
+"%s"
 
 #. R/QC.R: gettext("Checking URLs failed with message:", domain = "R-tools")
 #: R/QC.R:0
@@ -1747,6 +1755,12 @@ msgstr ""
 msgid "Invalid DESCRIPTION file"
 msgstr "Неправильный файл 'DESCRIPTION'"
 
+#. R/doitools.R: gettext("Invalid DOI")
+#: R/doitools.R:0
+#, fuzzy
+msgid "Invalid DOI"
+msgstr "Неправильное имя пакета."
+
 #. R/QC.R: gettext("Invalid NAMESPACE file, parsing gives:", domain = "R-tools")
 #: R/QC.R:0
 msgid "Invalid NAMESPACE file, parsing gives:"
@@ -1761,6 +1775,12 @@ msgstr "Неправильное поле привилегий."
 #: R/urltools.R:0
 #, fuzzy
 msgid "Invalid URI scheme"
+msgstr "Неправильное имя пакета."
+
+#. R/urltools.R: gettext("Invalid URI scheme (use \\doi for DOIs)", domain = "R-tools")
+#: R/urltools.R:0
+#, fuzzy
+msgid "Invalid URI scheme (use \\doi for DOIs)"
 msgstr "Неправильное имя пакета."
 
 #. R/QC.R: gettext("Invalid VignetteBuilder field.", domain = "R-tools")
@@ -5484,6 +5504,12 @@ msgstr ""
 msgid "processing %s"
 msgstr "обрабатываю %s"
 
+#. R/doitools.R: gettextf("processing DOI %s", d)
+#: R/doitools.R:0
+#, fuzzy
+msgid "processing DOI %s"
+msgstr "обрабатываю %s"
+
 #. R/utils.R: gettextf("processing directory %s", sQuote(basename(dir)))
 #: R/utils.R:0
 #, fuzzy
@@ -5496,8 +5522,9 @@ msgstr "обрабатываю %s"
 msgid "processing file %s"
 msgstr "обрабатываю %s"
 
+#. R/doitools.R: gettextf("processing package %s", sQuote(p))
 #. R/install.R: gettextf("processing package %s", sQuote(pkg))
-#: R/install.R:0
+#: R/doitools.R:0 R/install.R:0
 #, fuzzy
 msgid "processing package %s"
 msgstr "Обрабатываю пакеты:"
@@ -5532,6 +5559,17 @@ msgstr "делаю DLL..."
 #: R/build.R:0
 msgid "re-saving tabular files"
 msgstr ""
+
+#. R/packages.R: gettextf("reading 'DESCRIPTION' file for package %s failed with message:\n  %s",     sQuote(basename(dirname(p))), conditionMessage(temp))
+#. R/packages.R: gettextf("reading 'DESCRIPTION' file for package %s failed with message:\n  %s",     sQuote(basename(paths[i])), conditionMessage(temp))
+#: R/packages.R:0
+#, fuzzy
+msgid ""
+"reading 'DESCRIPTION' file for package %s failed with message:\n"
+"  %s"
+msgstr ""
+"выполнение Sweave в очерке '%s' не удалось с диагностикой:\n"
+"%s"
 
 #. R/build.R: gettextf("removing %s as '--force' was given", sQuote(oldindex), domain = "R-tools")
 #: R/build.R:0
@@ -6472,6 +6510,15 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
+#. R/QC.R: ngettext(length(y), "Found the following (possibly) invalid DOI:", "Found the following (possibly) invalid DOIs:",     domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "Found the following (possibly) invalid DOI:"
+msgid_plural "Found the following (possibly) invalid DOIs:"
+msgstr[0] "Найдены возможные глобальные T или F в следующем Rd-файле примеров:"
+msgstr[1] "Найдены возможные глобальные T или F в следующем Rd-файле примеров:"
+msgstr[2] "Найдены возможные глобальные T или F в следующем Rd-файле примеров:"
+
 #. R/QC.R: ngettext(length(y), "Found the following (possibly) invalid URL:", "Found the following (possibly) invalid URLs:",     domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
@@ -7116,6 +7163,14 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "не могу перекодировать '%s' строк(и) %s"
 msgstr[1] "не могу перекодировать '%s' строк(и) %s"
 msgstr[2] "не могу перекодировать '%s' строк(и) %s"
+
+#, fuzzy
+#~ msgid ""
+#~ "reading 'DESCRIPTION' for package %s failed with message:\n"
+#~ "  %s"
+#~ msgstr ""
+#~ "выполнение Sweave в очерке '%s' не удалось с диагностикой:\n"
+#~ "%s"
 
 #, fuzzy
 #~ msgid "'%s' file not found"

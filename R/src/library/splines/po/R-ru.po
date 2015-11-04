@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.9.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-10-18 11:49\n"
+"POT-Creation-Date: 2015-11-04 21:08\n"
 "PO-Revision-Date: 2015-01-17 15:47+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -28,23 +28,24 @@ msgstr ""
 msgid "%s needs package 'Matrix' correctly installed"
 msgstr ""
 
-#. R/splines.R: stop("'degree' must be integer >= 1")
+#. R/splines.R: gettextf("'%s' argument must be integer >= 1", "degree")
 #: R/splines.R:0
-msgid "'degree' must be integer >= 1"
+#, fuzzy
+msgid "'%s' argument must be integer >= 1"
 msgstr "'degree' должна быть целым >= 1"
+
+#. R/splines.R: gettextf("'%s' argument was too small; have used %d", "df", ord - (1L - intercept))
+#. R/splines.R: gettextf("'%s' argument was too small; have used %d", "df", 1L + intercept)
+#: R/splines.R:0
+#, fuzzy
+msgid "'%s' argument was too small; have used %d"
+msgstr "'df' был слишком мал; использован"
 
 #. R/splineClasses.R: gettextf("'deriv' must be between 0 and %d", ord - 1)
 #. R/splineClasses.R: gettextf("'deriv' must be between 0 and %d", ord - 1)
 #: R/splineClasses.R:0
 msgid "'deriv' must be between 0 and %d"
 msgstr "'deriv' должно быть между 0 и %d"
-
-#. R/splines.R: gettextf("'df' was too small; have used %d", ord - (1L - intercept))
-#. R/splines.R: gettextf("'df' was too small; have used %d", 1L + intercept)
-#: R/splines.R:0
-#, fuzzy
-msgid "'df' was too small; have used %d"
-msgstr "'df' был слишком мал; использован"
 
 #. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
 #. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
@@ -165,3 +166,7 @@ msgstr "значения 'x' должны бить разными"
 #: R/splineClasses.R:0
 msgid "values of 'x' must be strictly increasing"
 msgstr "значения 'x' должны постоянно возрастать"
+
+#, fuzzy
+#~ msgid "'%s' was too small; have used %d"
+#~ msgstr "'df' был слишком мал; использован"

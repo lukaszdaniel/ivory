@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-10-18 11:49\n"
+"POT-Creation-Date: 2015-11-04 20:50\n"
 "PO-Revision-Date: 2012-03-09 06:16+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -283,6 +283,11 @@ msgstr "'destdir' 는 디렉토리가 아닙니다"
 msgid "'digits' and 'digits.d' are both specified and the latter is not used"
 msgstr ""
 "'digits' 와 'digits.d' 는 모두 지정되지 않았고, 후자는 사용되지 않습니다"
+
+#. R/packages.R: gettextf("'download.file()' error code '%d'", m)
+#: R/packages.R:0
+msgid "'download.file()' error code '%d'"
+msgstr ""
 
 #. R/debugger.R: gettextf("'dump' is empty", domain = "R-utils")
 #: R/debugger.R:0
@@ -2033,6 +2038,11 @@ msgstr "%s 를 생성하는데 실패했습니다 "
 msgid "failed to create directory %s"
 msgstr "디렉토리 %s 를 생성하는데 실패했습니다 "
 
+#. R/packages.R: gettextf("failed to download mirrors file (%s); using local file '%s'", conditionMessage(err),     local.file)
+#: R/packages.R:0
+msgid "failed to download mirrors file (%s); using local file '%s'"
+msgstr ""
+
 #. R/unix/mac.install.R: gettextf("file %s is not an OS X binary package", sQuote(pkg))
 #. R/unix/mac.install.R: gettextf("file %s is not an OS X binary package", sQuote(pkg))
 #. R/unix/mac.install.R: gettextf("file %s is not an OS X binary package", sQuote(pkg))
@@ -3007,7 +3017,7 @@ msgstr ""
 msgid "vignette %s has no PDF/HTML"
 msgstr "비니에트  %s 는 PDF 를 가지고 있지 않습니다 "
 
-#. R/vignette.R: gettextf("vignette %s has no R code", sQuote(name$Topic))
+#. R/vignette.R: gettextf("vignette %s has no R code", sQuote(x$Topic))
 #: R/vignette.R:0
 #, fuzzy
 msgid "vignette %s has no R code"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-18 11:49+0200\n"
+"POT-Creation-Date: 2015-11-04 20:50+0100\n"
 "PO-Revision-Date: 2012-03-08 20:50+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -82,31 +82,43 @@ msgstr "사례 수를 결정하는 입력이 없습니다"
 msgid "not all arguments have the same length"
 msgstr "인수중에 다른 길이를 가진 것이 있습니다"
 
-#: cov.c:560
+#: cov.c:564
 msgid "missing observations in cov/cor"
 msgstr "cov / cor 에서 결손 관측값이 있습니다"
 
 #: cov.c:638
-msgid "'x' is NULL"
-msgstr "'x'이 비어 있습니다"
+#, fuzzy, c-format
+msgid "'%s' argument is NULL"
+msgstr "범위가 너무 작습니다 "
 
-#: cov.c:657 cov.c:663
+#: cov.c:640 cov.c:660
+#, fuzzy, c-format
+msgid "'%s' argument is a factor"
+msgstr "'fn'은 함수가 아닙니다"
+
+#: cov.c:642
+msgid ""
+"Calling 'var(x)' on a factor 'x' is deprecated and will become an error.\n"
+"  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
+msgstr ""
+
+#: cov.c:668 cov.c:674
 msgid "incompatible dimensions"
 msgstr "호환되지 않는 차원입니다"
 
-#: cov.c:682 cov.c:723 cov.c:756
+#: cov.c:693 cov.c:734 cov.c:767
 msgid "no complete element pairs"
 msgstr "전체 요소 페어가 없습니다"
 
-#: cov.c:695
+#: cov.c:706
 msgid "invalid 'use' (computational method)"
 msgstr "'use'(계산법)이 잘못되었습니다"
 
-#: cov.c:698
+#: cov.c:709
 msgid "'x' is empty"
 msgstr "'x'가 비어 있습니다"
 
-#: cov.c:792
+#: cov.c:803
 msgid "the standard deviation is zero"
 msgstr "표준 편차가 0 입니다"
 
@@ -1155,6 +1167,9 @@ msgstr "마지막 %d 개의 관측치가 결측치입니다 "
 #, c-format
 msgid "ifault=%d. This should not happen"
 msgstr ""
+
+#~ msgid "'x' is NULL"
+#~ msgstr "'x'이 비어 있습니다"
 
 #, fuzzy
 #~ msgid "unknown 'method' argument"

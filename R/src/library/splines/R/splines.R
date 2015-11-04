@@ -104,7 +104,7 @@ ns <- function(x, df = NULL, knots = NULL, intercept = FALSE,
         nIknots <- df - 1L - intercept
         if(nIknots < 0L) {
             nIknots <- 0L
-            warning(gettextf("'%s' was too small; have used %d", "df",
+            warning(gettextf("'%s' argument was too small; have used %d", "df",
                              1L + intercept), domain = "R-splines")
         }
         knots <- if(nIknots > 0L) {
