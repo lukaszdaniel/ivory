@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-04 20:50\n"
+"POT-Creation-Date: 2015-11-04 22:32\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -98,11 +98,6 @@ msgstr "'figs' musi być wektorem lub macierzą z 4-ma kolumnami"
 #: R/screen.R:0
 msgid "'figs' must specify at least one screen"
 msgstr "'figs' musi określać przynajmniej jeden ekran"
-
-#. R/boxplot.R: stop("'formula' missing or incorrect")
-#: R/boxplot.R:0
-msgid "'formula' missing or incorrect"
-msgstr "brakująca lub niepoprawna 'formula'"
 
 #. R/cdplot.R: stop("'formula' should specify exactly two variables")
 #. R/spineplot.R: stop("'formula' should specify exactly two variables")
@@ -414,9 +409,10 @@ msgstr "wymiary 'z' nie są równe 'length(x)(-1) * length(y)(-1)'"
 msgid "exactly one symbol type must be specified"
 msgstr "dokładnie jeden typ symbolu musi być określony"
 
+#. R/boxplot.R: stop("formula missing or incorrect")
 #. R/stripchart.R: stop("formula missing or incorrect")
 #. R/sunflowerplot.R: stop("formula missing or incorrect")
-#: R/stripchart.R:0 R/sunflowerplot.R:0
+#: R/boxplot.R:0 R/stripchart.R:0 R/sunflowerplot.R:0
 msgid "formula missing or incorrect"
 msgstr "brakuje formuły lub jest ona niepoprawna"
 
@@ -793,6 +789,9 @@ msgid_plural "arguments %s are not made use of"
 msgstr[0] "argument %s nie robi użytku z"
 msgstr[1] "argumenty %s nie robią użytku z"
 msgstr[2] "argumenty %s nie robią użytku z"
+
+#~ msgid "'formula' missing or incorrect"
+#~ msgstr "brakująca lub niepoprawna 'formula'"
 
 #~ msgid "extra argument %s will be disregarded"
 #~ msgid_plural "extra arguments %s will be disregarded"

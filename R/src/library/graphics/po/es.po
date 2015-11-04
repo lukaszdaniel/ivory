@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 23:12+0200\n"
+"POT-Creation-Date: 2015-11-04 22:32+0100\n"
 "PO-Revision-Date: 2012-03-16 15:59+0100\n"
 "Last-Translator: \n"
 "Language-Team: Spanish <pabloemilio.verde@uni-duesseldorf.de>\n"
@@ -80,7 +80,7 @@ msgstr "límites de ejes no finitos [GScale(%g,%g,%d, .); log=%d]"
 msgid "axis style \"%c\" unimplemented"
 msgstr "estilo de ejes \"%c\" ignorado"
 
-#: graphics.c:2209
+#: graphics.c:2209 graphics.c:2597
 #, fuzzy
 msgid "no graphics device is active"
 msgstr "Ningún dispositivo gráfico está activo"
@@ -97,10 +97,6 @@ msgstr "estado gráfico inválido"
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.c:2597
-msgid "No graphics device is active"
-msgstr "Ningún dispositivo gráfico está activo"
-
 #: graphics.c:3056
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "vector de argumento cero tiene un ángulo indeterminado y se saltea"
@@ -110,9 +106,10 @@ msgstr "vector de argumento cero tiene un ángulo indeterminado y se saltea"
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "parámetro inválido par(\"bty\") = '%c'; no box() desechado"
 
-#: graphics.c:3154
-msgid "invalid argument to GBox"
-msgstr "argumento inválido para GBox"
+#: graphics.c:3154 par.c:1121
+#, fuzzy, c-format
+msgid "invalid argument passed to '%s' function"
+msgstr "el parámetro pasado a par() es inválido"
 
 #: graphics.c:3399
 #, fuzzy
@@ -170,11 +167,6 @@ msgstr "lista de parámetros gráficos no válidos"
 #, fuzzy, c-format
 msgid "\"%s\" is not a graphical parameter"
 msgstr "parámetro gráfico inválido"
-
-#: par.c:1121
-#, fuzzy
-msgid "invalid argument passed to 'par()'"
-msgstr "el parámetro pasado a par() es inválido"
 
 #: par.c:1165
 #, c-format
@@ -308,7 +300,7 @@ msgstr "estructura de gráfico inválida"
 
 #: plot.c:1316
 #, fuzzy, c-format
-msgid "'x' and 'y' argument lengths differ in '%s()'"
+msgid "'x' and 'y' argument lengths differ in '%s' function"
 msgstr "longitudes de 'x' e 'y' difieren en %s()"
 
 #: plot.c:1327
@@ -451,7 +443,7 @@ msgstr "datos de estrella no válidos"
 msgid "invalid thermometers data (need 3 or 4 columns)"
 msgstr "datos de termómetros no válidos (son necesarias 3 o 4 columnas)"
 
-#: plot.c:3804
+#: plot.c:3804 plot.c:3810
 #, fuzzy, c-format
 msgid "invalid 'thermometers[, %s]'"
 msgstr "termómetros[,%s] no válidos"
@@ -460,11 +452,6 @@ msgstr "termómetros[,%s] no válidos"
 #, fuzzy, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
 msgstr "termómetros[,%s] no están en [0,1] - puede parecer gracioso"
-
-#: plot.c:3810
-#, fuzzy
-msgid "invalid 'thermometers[, 1:2]'"
-msgstr "termómetros[,1:2] no válidos"
 
 #: plot.c:3849
 #, fuzzy
@@ -523,17 +510,10 @@ msgstr "Orientación de ejes no calculada"
 msgid "too few parameters"
 msgstr "muy pocos parámetros"
 
-#: plot3d.c:1113
-msgid "invalid 'x' limits"
+#: plot3d.c:1113 plot3d.c:1115 plot3d.c:1117
+#, fuzzy, c-format
+msgid "invalid '%s' limits"
 msgstr "límites de 'x' no válidos"
-
-#: plot3d.c:1115
-msgid "invalid 'y' limits"
-msgstr "límites de 'y' no válidos"
-
-#: plot3d.c:1117
-msgid "invalid 'z' limits"
-msgstr "límites de 'z' no válidos"
 
 #: plot3d.c:1138 plot3d.c:1140 plot3d.c:1142
 #, fuzzy, c-format
@@ -615,6 +595,26 @@ msgstr ""
 #: stem.c:192
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#, fuzzy
+#~ msgid "invalid argument passed to '%s'function"
+#~ msgstr "el parámetro pasado a par() es inválido"
+
+#~ msgid "No graphics device is active"
+#~ msgstr "Ningún dispositivo gráfico está activo"
+
+#~ msgid "invalid argument to GBox"
+#~ msgstr "argumento inválido para GBox"
+
+#, fuzzy
+#~ msgid "invalid 'thermometers[, 1:2]'"
+#~ msgstr "termómetros[,1:2] no válidos"
+
+#~ msgid "invalid 'y' limits"
+#~ msgstr "límites de 'y' no válidos"
+
+#~ msgid "invalid 'z' limits"
+#~ msgstr "límites de 'z' no válidos"
 
 #~ msgid "parameter \"j\" in \"mfg\" is out of range"
 #~ msgstr "el parámetro \"j\" en \"mfg\" está fuera del rango"

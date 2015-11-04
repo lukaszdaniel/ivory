@@ -1313,11 +1313,11 @@ SEXP C_plotXY(SEXP args)
     else							\
 	error(_("invalid plotting structure"));	\
     if (LENGTH(sx) != LENGTH(sy))				\
-	error(_("'x' and 'y' argument lengths differ in '%s()'"), subname);\
+	error(_("'x' and 'y' argument lengths differ in '%s' function"), subname);\
     n = LENGTH(sx);						\
     args = CDR(args)
 
-    PLOT_XY_DEALING("plot.xy");
+    PLOT_XY_DEALING("plot.xy()");
 
     if (isNull(CAR(args))) type = 'p';
     else {
@@ -2071,7 +2071,7 @@ SEXP C_text(SEXP args)
     args = CDR(args);
     if (length(args) < 3) error(_("too few arguments"));
 
-    PLOT_XY_DEALING("text");
+    PLOT_XY_DEALING("text()");
 
     /* labels */
     txt = CAR(args);
@@ -3807,7 +3807,7 @@ SEXP C_symbols(SEXP args)
 	    warning(_("'thermometers[, %s]' not in [0,1] -- may look funny"),
 		    (nc == 4)? "3:4" : "3");
 	if (!SymbolRange(REAL(p), 2 * nr, &pmax, &pmin))
-	    error(_("invalid 'thermometers[, 1:2]'"));
+	    error(_("invalid 'thermometers[, %s]'"), "1:2");
 	for (i = 0; i < nr; i++) {
 	    xx = REAL(x)[i];
 	    yy = REAL(y)[i];

@@ -1118,7 +1118,7 @@ SEXP C_par(SEXP call, SEXP op, SEXP args, SEXP rho)
 	setAttrib(value, R_NamesSymbol, newnames);
     }
     else {
-	error(_("invalid argument passed to 'par()'"));
+	error(_("invalid argument passed to '%s' function"), "par()");
 	return R_NilValue/* -Wall */;
     }
     /* should really only do this if specifying new pars ?  yes! [MM] */

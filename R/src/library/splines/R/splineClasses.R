@@ -41,7 +41,7 @@ splineDesign <-
              sparse = FALSE)
 {
     if((nk <- length(knots <- as.numeric(knots))) <= 0)
-        stop("must have at least 'ord' knots")
+        stop(sprintf(ngettext(ord, "at least '%s' (=%d) knots is needed", "at least '%s' (=%d) knots are needed", domain = "R-splines"), "ord", ord), domain = NA)
     if(is.unsorted(knots)) knots <- sort.int(knots)
     x <- as.numeric(x)
     nx <- length(x)
@@ -55,7 +55,7 @@ splineDesign <-
 
     ## The x test w/ sorted knots assumes ord <= nk+1-ord, or nk >= 2*ord-1L:
     if(!outer.ok && nk < 2*ord-1)
-        stop(gettextf("need at least %s (=%d) knots", "2*ord -1", 2*ord -1, domain = "R-splines"), domain = NA)
+        stop(sprintf(ngettext(2*ord-1, "at least '%s' (=%d) knots is needed", "at least '%s' (=%d) knots are needed", domain = "R-splines"), "2*ord - 1", 2*ord-1), domain = NA)
 
     o1 <- ord - 1L
 ### FIXME: the 'outer.ok && need.outer' handling would more efficiently happen
@@ -81,9 +81,9 @@ splineDesign <-
     ncoef <- nk - ord
 
     ii <- if(need.outer && x.out) { # only assign non-zero for x[]'s "inside" knots
-        rep.int((1L:nx)[in.x], rep.int(ord, nnx))
-    } else rep.int(1L:nx, rep.int(ord, nx))
-    jj <- c(outer(1L:ord, attr(temp, "Offsets"), "+"))
+        rep.int(seq_len(nx)[in.x], rep.int(ord, nnx))
+    } else rep.int(seq_len(nx), rep.int(ord, nx))
+    jj <- c(outer(seq_len(ord), attr(temp, "Offsets"), "+"))
     ## stopifnot(length(ii) == length(jj))
 
     if(sparse) {
@@ -132,8 +132,8 @@ interpSpline.default <-
     if(anyDuplicated(x))
 	stop("values of 'x' must be distinct")
     ## 'deg' extra knots (shifted) out on each side :
-    knots <- c(x[1L:deg] + x[1L] - x[ord], x,
-	       x[ndat + (1L:deg) - deg] + x[ndat] - x[ndat - deg])
+    knots <- c(x[seq_len(deg)] + x[1L] - x[ord], x,
+	       x[ndat + seq_len(deg) - deg] + x[ndat] - x[ndat - deg])
     derivs <- c(2, integer(ndat), 2) # 2nd derivs coerced to 0 in solve() below
     x	   <- c(x[1L], x, x[ndat])
 ## Solving the system of equations for the spline coefficients can be
@@ -221,20 +221,20 @@ periodicSpline.default <-
 	stop("values of 'x' must be distinct")
     if(any((x[-1L] - x[ - lenx]) <= 0))
 	stop("values of 'x' must be strictly increasing")
-    if(ord < 2) stop("'ord' must be >= 2")
+    if(ord < 2) stop(gettextf("'%s' argument must be integer >= %d", "ord", 2))
     o1 <- ord - 1 # = degree
     if(!missing(knots)) {
 	period <- knots[length(knots) - o1] - knots[1L]
     }
     else {
-	knots <- c(x[(lenx - (ord - 2)):lenx] - period, x, x[1L:ord] + period)
+	knots <- c(x[(lenx - (ord - 2)):lenx] - period, x, x[seq_len(ord)] + period)
     }
     if((x[lenx] - x[1L]) >= period)
 	stop("the range of 'x' values exceeds one period")
     y <- y[ind]
     coeff.mat <- splineDesign(knots, x, ord)
     i1 <- seq_len(o1)
-    sys.mat <- coeff.mat[, (1L:lenx)]
+    sys.mat <- coeff.mat[, seq_len(lenx)]
     sys.mat[, i1] <- sys.mat[, i1] + coeff.mat[, lenx + i1]
     coeff <- qr.coef(qr(sys.mat), y)
     coeff <- c(coeff, coeff[i1])
@@ -279,7 +279,7 @@ polySpline.bSpline <- function(object, ...)
     if(ord > 1) {
 	for(i in 2:ord) {
 	    coeff[, i] <- asVector(predict(object, knots, deriv = i - 1))/
-		prod(1L:(i - 1))
+		prod(seq_len(i - 1))
 	}
     }
     structure(list(knots = knots, coefficients = coeff),
@@ -359,7 +359,7 @@ predict.polySpline <- function(object, x, nseg = 50, deriv = 0, ...)
 	stop(gettextf("'deriv' must be between 0 and %d", ord - 1), domain = "R-splines")
     while(deriv > 0) {
 	ord <- ord - 1
-	coeff <- t(t(coeff[, -1]) * (1L:ord))
+	coeff <- t(t(coeff[, -1]) * seq_len(ord))
 	deriv <- deriv - 1
     }
     y <- coeff[i, ord]
@@ -410,7 +410,7 @@ predict.nbSpline <- function(object, x, nseg = 50, deriv = 0, ...)
     while(deriv) {
 	ord <- ord - 1
 	## could be simplified when coeff has <= 2 non-zero cols:
-	coeff <- t(t(coeff[, -1]) * (1L:ord))# 1L:ord = the 'k' in k* x^{k-1}
+	coeff <- t(t(coeff[, -1]) * seq_len(ord))# seq_len(ord) = the 'k' in k* x^{k-1}
 	deriv <- deriv - 1
     }
     nc <- ncol(coeff)
@@ -457,7 +457,7 @@ predict.npolySpline <- function(object, x, nseg = 50, deriv = 0, ...)
     while(deriv) {
 	ord <- ord - 1
 	## could be simplified when coeff has <= 2 non-zero cols:
-	coeff <- t(t(coeff[, -1]) * (1L:ord))# 1L:ord = the 'k' in k* x^{k-1}
+	coeff <- t(t(coeff[, -1]) * seq_len(ord))# seq_len(ord) = the 'k' in k* x^{k-1}
 	deriv <- deriv - 1
     }
     nc <- ncol(coeff)
@@ -512,7 +512,7 @@ print.polySpline <- function(x, ...)
 	dimnames(coeff) <-
 	    list(format(splineKnots(x)),
 		 c("constant", "linear", "quadratic", "cubic",
-		   paste0(4:29, "th"))[1L:(dim(coeff)[2L])])
+		   paste0(4:29, "th"))[seq_len(dim(coeff)[2L])])
     if (!is.null(form <- attr(x, "formula")))
     cat(gettextf("polynomial representation of spline for %s", deparse(as.vector(form)), domain = "R-splines"))
     else
@@ -572,7 +572,7 @@ backSpline.npolySpline <- function(object)
 	       c(nkm1, 2L, 2L))
     b <- array(c(kdiff - adiff * bcoeff[ - nk, 2L],
 		 bcoeff[-1L, 2L] - bcoeff[ - nk, 2L]), c(nkm1, 2))
-    for(i in 1L:(nkm1))
+    for(i in seq_len(nkm1))
 	bcoeff[i, 3L:4L] <- solve(a[i,, ], b[i,  ])
     bcoeff[nk, 2L:4L] <- NA
     if(nk > 2L) {

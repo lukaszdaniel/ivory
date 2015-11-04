@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 23:12+0200\n"
+"POT-Creation-Date: 2015-11-04 22:32+0100\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -80,7 +80,7 @@ msgstr "limites de eixo não finitos [GScale(%g,%g,%d, .); log=%d]"
 msgid "axis style \"%c\" unimplemented"
 msgstr "estilo de eixo \"%c\" não implementado"
 
-#: graphics.c:2209
+#: graphics.c:2209 graphics.c:2597
 #, fuzzy
 msgid "no graphics device is active"
 msgstr "Nenhum dispositivo gráfico está ativo"
@@ -97,10 +97,6 @@ msgstr "estado gráfico inválido"
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.c:2597
-msgid "No graphics device is active"
-msgstr "Nenhum dispositivo gráfico está ativo"
-
 #: graphics.c:3056
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "flexa de comprimento zero tem ângulo indeterminado e foi pulada"
@@ -110,9 +106,10 @@ msgstr "flexa de comprimento zero tem ângulo indeterminado e foi pulada"
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "parâmetro inválido par(\"bty\") = '%c'; nenhum box() desenhado"
 
-#: graphics.c:3154
-msgid "invalid argument to GBox"
-msgstr "argumento inválido para GBox"
+#: graphics.c:3154 par.c:1121
+#, fuzzy, c-format
+msgid "invalid argument passed to '%s' function"
+msgstr "argumento inválido passado para par()"
 
 #: graphics.c:3399
 #, fuzzy
@@ -170,11 +167,6 @@ msgstr "parâmetro gráfico \"%s\" é obsoleto"
 #, c-format
 msgid "\"%s\" is not a graphical parameter"
 msgstr "\"%s\" não é um parâmetro gráfico"
-
-#: par.c:1121
-#, fuzzy
-msgid "invalid argument passed to 'par()'"
-msgstr "argumento inválido passado para par()"
 
 #: par.c:1165
 #, c-format
@@ -308,7 +300,7 @@ msgstr "estrutura de gráfico inválida"
 
 #: plot.c:1316
 #, fuzzy, c-format
-msgid "'x' and 'y' argument lengths differ in '%s()'"
+msgid "'x' and 'y' argument lengths differ in '%s' function"
 msgstr "comprimentos de 'x' e 'y' diferem em %s()"
 
 #: plot.c:1327
@@ -451,7 +443,7 @@ msgstr "dados de estrela inválidos"
 msgid "invalid thermometers data (need 3 or 4 columns)"
 msgstr "dados de termômetro inválidos (3 ou 4 colunas necessárias)"
 
-#: plot.c:3804
+#: plot.c:3804 plot.c:3810
 #, fuzzy, c-format
 msgid "invalid 'thermometers[, %s]'"
 msgstr "thermometers[,%s] inválidos"
@@ -460,11 +452,6 @@ msgstr "thermometers[,%s] inválidos"
 #, fuzzy, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
 msgstr "thermometers[,%s] não estão em [0,1] - pode não dar um bom resultado"
-
-#: plot.c:3810
-#, fuzzy
-msgid "invalid 'thermometers[, 1:2]'"
-msgstr "thermometers[,1:2] inválidos"
 
 #: plot.c:3849
 #, fuzzy
@@ -523,17 +510,10 @@ msgstr "Orientação dos eixos não calculada"
 msgid "too few parameters"
 msgstr "muito poucos parâmetros"
 
-#: plot3d.c:1113
-msgid "invalid 'x' limits"
+#: plot3d.c:1113 plot3d.c:1115 plot3d.c:1117
+#, fuzzy, c-format
+msgid "invalid '%s' limits"
 msgstr "limites de 'x' inválidos"
-
-#: plot3d.c:1115
-msgid "invalid 'y' limits"
-msgstr "limites de 'y' inválidos"
-
-#: plot3d.c:1117
-msgid "invalid 'z' limits"
-msgstr "limites de 'z' inválidos"
 
 #: plot3d.c:1138 plot3d.c:1140 plot3d.c:1142
 #, fuzzy, c-format
@@ -614,6 +594,26 @@ msgstr ""
 #: stem.c:192
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#, fuzzy
+#~ msgid "invalid argument passed to '%s'function"
+#~ msgstr "argumento inválido passado para par()"
+
+#~ msgid "No graphics device is active"
+#~ msgstr "Nenhum dispositivo gráfico está ativo"
+
+#~ msgid "invalid argument to GBox"
+#~ msgstr "argumento inválido para GBox"
+
+#, fuzzy
+#~ msgid "invalid 'thermometers[, 1:2]'"
+#~ msgstr "thermometers[,1:2] inválidos"
+
+#~ msgid "invalid 'y' limits"
+#~ msgstr "limites de 'y' inválidos"
+
+#~ msgid "invalid 'z' limits"
+#~ msgstr "limites de 'z' inválidos"
 
 #~ msgid "parameter \"j\" in \"mfg\" is out of range"
 #~ msgstr "parâmetro  \"j\" em \"mfg\" fora dos limites"

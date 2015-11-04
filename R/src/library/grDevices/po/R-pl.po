@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #. R/windows/windows.R: gettext("  #plot calls are:", domain = "R-grDevices")
 #: R/windows/windows.R:0
@@ -404,8 +404,8 @@ msgstr "oczekiwano rosnących wartości 'x' oraz 'y'"
 #. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/windows.R: gettextf("invalid '%s' argument", "filename")
-#: R/cairo.R:0 R/postscript.R:0 R/unix/png.R:0 R/unix/quartz.R:0 R/unix/x11.R:0
-#: R/windows/png.R:0 R/windows/windows.R:0
+#: R/cairo.R:0 R/postscript.R:0 R/unix/png.R:0 R/unix/quartz.R:0
+#: R/unix/x11.R:0 R/windows/png.R:0 R/windows/windows.R:0
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
 
@@ -531,7 +531,7 @@ msgstr "niepoprawna wartość dla 'rescale'"
 #. R/device.R: warning("need to specify one of 'width' and 'height'")
 #: R/device.R:0
 msgid "need to specify one of 'width' and 'height'"
-msgstr "potrzeba określić jeden z 'width' oraz 'height'"
+msgstr "jeden z 'width' oraz 'height' powinien być określony"
 
 #. R/calc.R: stop("no 'z' matrix specified")
 #: R/calc.R:0

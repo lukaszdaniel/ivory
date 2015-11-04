@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 23:12+0200\n"
+"POT-Creation-Date: 2015-11-04 22:32+0100\n"
 "PO-Revision-Date: 2006-01-16 09:11+0100\n"
 "Last-Translator: Daniele Medri <daniele.medri2@unibo.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -87,7 +87,7 @@ msgstr "limiti asse non finiti [GScale(%g,%g,%d, .); log=%d]"
 msgid "axis style \"%c\" unimplemented"
 msgstr "stile asse \"%c\" non implementato"
 
-#: graphics.c:2209
+#: graphics.c:2209 graphics.c:2597
 #, fuzzy
 msgid "no graphics device is active"
 msgstr "Nessun dispositivo grafico attivo"
@@ -104,10 +104,6 @@ msgstr "stato grafico non valido"
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.c:2597
-msgid "No graphics device is active"
-msgstr "Nessun dispositivo grafico attivo"
-
 #: graphics.c:3056
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr ""
@@ -119,9 +115,10 @@ msgstr ""
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "par(\"bty\") = '%c' non valido; no disegno il box()"
 
-#: graphics.c:3154
-msgid "invalid argument to GBox"
-msgstr "argomento non valido in GBox"
+#: graphics.c:3154 par.c:1121
+#, fuzzy, c-format
+msgid "invalid argument passed to '%s' function"
+msgstr "parametro non valido passato a par()"
 
 #: graphics.c:3399
 #, fuzzy
@@ -179,11 +176,6 @@ msgstr "lista parametro grafico non valida"
 #, c-format
 msgid "\"%s\" is not a graphical parameter"
 msgstr "parametro grafico \"%s\" non valido"
-
-#: par.c:1121
-#, fuzzy
-msgid "invalid argument passed to 'par()'"
-msgstr "parametro non valido passato a par()"
 
 #: par.c:1165
 #, c-format
@@ -316,7 +308,7 @@ msgstr "struttura disegno non valida"
 
 #: plot.c:1316
 #, fuzzy, c-format
-msgid "'x' and 'y' argument lengths differ in '%s()'"
+msgid "'x' and 'y' argument lengths differ in '%s' function"
 msgstr "lunghezza di 'x' e 'y' differenti in %s()"
 
 #: plot.c:1327
@@ -457,7 +449,7 @@ msgstr "dati 'stars' non validi"
 msgid "invalid thermometers data (need 3 or 4 columns)"
 msgstr "dati termometri non validi (richieste 3 o 4 colonne)"
 
-#: plot.c:3804
+#: plot.c:3804 plot.c:3810
 #, fuzzy, c-format
 msgid "invalid 'thermometers[, %s]'"
 msgstr "termometri non validi [,%s]"
@@ -466,11 +458,6 @@ msgstr "termometri non validi [,%s]"
 #, fuzzy, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
 msgstr "termometri[.%s] non in [0,1] - sembreranno buffi"
-
-#: plot.c:3810
-#, fuzzy
-msgid "invalid 'thermometers[, 1:2]'"
-msgstr "termometri[,1:2] non validi"
 
 #: plot.c:3849
 #, fuzzy
@@ -529,17 +516,10 @@ msgstr "Orientamento degli assi non calcolato"
 msgid "too few parameters"
 msgstr "gli argomenti sono troppo pochi"
 
-#: plot3d.c:1113
-msgid "invalid 'x' limits"
+#: plot3d.c:1113 plot3d.c:1115 plot3d.c:1117
+#, fuzzy, c-format
+msgid "invalid '%s' limits"
 msgstr "limiti 'x' non validi"
-
-#: plot3d.c:1115
-msgid "invalid 'y' limits"
-msgstr "limiti 'y' non validi"
-
-#: plot3d.c:1117
-msgid "invalid 'z' limits"
-msgstr "limiti 'z' non validi"
 
 #: plot3d.c:1138 plot3d.c:1140 plot3d.c:1142
 #, fuzzy, c-format
@@ -620,6 +600,26 @@ msgstr ""
 #: stem.c:192
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#, fuzzy
+#~ msgid "invalid argument passed to '%s'function"
+#~ msgstr "parametro non valido passato a par()"
+
+#~ msgid "No graphics device is active"
+#~ msgstr "Nessun dispositivo grafico attivo"
+
+#~ msgid "invalid argument to GBox"
+#~ msgstr "argomento non valido in GBox"
+
+#, fuzzy
+#~ msgid "invalid 'thermometers[, 1:2]'"
+#~ msgstr "termometri[,1:2] non validi"
+
+#~ msgid "invalid 'y' limits"
+#~ msgstr "limiti 'y' non validi"
+
+#~ msgid "invalid 'z' limits"
+#~ msgstr "limiti 'z' non validi"
 
 #~ msgid "parameter \"j\" in \"mfg\" is out of range"
 #~ msgstr "parametro \"j\" in \"mfg\" fuori range"

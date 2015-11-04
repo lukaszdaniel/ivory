@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 23:11+0200\n"
+"POT-Creation-Date: 2015-11-04 22:28+0100\n"
 "PO-Revision-Date: 2005-05-31 10:31+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -89,7 +89,9 @@ msgstr "무효의 문자열 인수입니다"
 msgid "invalid gray level, must be in [0,1]."
 msgstr ""
 
-#: colors.c:549
+#: colors.c:549 devPS.c:8248 devPS.c:8410 devPS.c:8413 devWindows.c:3640
+#: devWindows.c:3644 devWindows.c:3652 devWindows.c:3663 devWindows.c:3669
+#: devWindows.c:3676 devWindows.c:3683 devWindows.c:3687
 #, fuzzy, c-format
 msgid "invalid '%s' value"
 msgstr "무효의 문자열 인수입니다"
@@ -163,7 +165,7 @@ msgstr "충돌한 AFM entity를 알수가 없습니다 "
 #: devPS.c:739 devPS.c:742 devPS.c:4426 devPS.c:7917 devPicTeX.c:485
 #: devPicTeX.c:487
 #, fuzzy, c-format
-msgid "invalid string in '%s'"
+msgid "invalid string in '%s' function"
 msgstr "무효의 문자열 인수입니다"
 
 #: devPS.c:773
@@ -171,10 +173,10 @@ msgstr "무효의 문자열 인수입니다"
 msgid "font width unknown for character 0x%x"
 msgstr "문자 0x%x에는 알수 없는 font폭 입니다"
 
-#: devPS.c:831
-#, c-format
-msgid "unknown encoding '%s' in 'PostScriptMetricInfo'"
-msgstr ""
+#: devPS.c:831 devPS.c:4306
+#, fuzzy, c-format
+msgid "unknown encoding '%s' in '%s' function"
+msgstr "encoding 패스는 너무 깁니다"
 
 #: devPS.c:847 devPS.c:858
 #, fuzzy, c-format
@@ -189,13 +191,13 @@ msgstr "문자 0x%x에는 알수 없는 font 척도입니다"
 #: devPS.c:880
 #, c-format
 msgid ""
-"invalid character (%04x) sent to 'PostScriptCIDMetricInfo' in a single-byte "
-"locale"
+"invalid character (%04x) sent to 'PostScriptCIDMetricInfo()' function in a "
+"single-byte locale"
 msgstr ""
 
 #: devPS.c:888
 msgid ""
-"invalid character sent to 'PostScriptCIDMetricInfo' in a single-byte locale"
+"invalid character sent to 'PostScriptCIDMetricInfo()' in a single-byte locale"
 msgstr ""
 
 #: devPS.c:993
@@ -314,7 +316,7 @@ msgstr "%s() 호출에 대해서 너무 긴 파일명입니다"
 msgid "memory allocation problem in %s()"
 msgstr ""
 
-#: devPS.c:3125 devPS.c:5906
+#: devPS.c:3125
 #, fuzzy, c-format
 msgid "encoding path is too long in %s()"
 msgstr "encoding 패스는 너무 깁니다"
@@ -393,14 +395,11 @@ msgstr "PostScript 디바이스에 포함하지 않는 family %s 입니다"
 msgid "family '%s' not included in postscript() device"
 msgstr "PostScript 디바이스에 포함하지 않는 family %s 입니다"
 
-#: devPS.c:4306
-#, c-format
-msgid "unknown encoding '%s' in 'mbcsToSbcs'"
-msgstr ""
-
 #: devPS.c:4316
 #, c-format
-msgid "conversion failure on '%s' in 'mbcsToSbcs': dot substituted for <%02x>"
+msgid ""
+"conversion failure on '%s' in 'mbcsToSbcs()' function: dot substituted for <"
+"%02x>"
 msgstr ""
 
 #: devPS.c:4394
@@ -415,7 +414,7 @@ msgstr ""
 
 #: devPS.c:4590
 #, fuzzy
-msgid "ran out of colors in xfig()"
+msgid "ran out of colors in 'xfig()' function"
 msgstr "xfig() 에서 colors를 전부 소모 해주십시오"
 
 #: devPS.c:4619
@@ -486,9 +485,15 @@ msgstr "적재한 encodings를 corrupt 시켜주십시오; font는 증가하지 
 msgid "failed to record device encoding; font not added"
 msgstr "디바이스 encode를 기록하는것이 실패했습니다;font가 추가하지 않았습니다"
 
-#: devPS.c:5892
-msgid "increasing the PDF version to 1.2"
+#: devPS.c:5892 devPS.c:6294 devPS.c:6931
+#, c-format
+msgid "increasing the PDF version to %s"
 msgstr ""
+
+#: devPS.c:5906
+#, fuzzy, c-format
+msgid "encoding path is too long in '%s' function"
+msgstr "encoding 패스는 너무 깁니다"
 
 #: devPS.c:5922
 #, fuzzy
@@ -529,10 +534,6 @@ msgstr "무효의 foreground /background색(pdf) 입니다"
 msgid "invalid 'alpha' value in PDF"
 msgstr "PDF에서 무효의 alpha 값입니다"
 
-#: devPS.c:6294
-msgid "increasing the PDF version to 1.4"
-msgstr ""
-
 #: devPS.c:6345 devPS.c:6392
 msgid "unknown 'colormodel', using 'srgb'"
 msgstr ""
@@ -546,10 +547,6 @@ msgstr "encode 파일을 적재하는데 실패되었습니다"
 #, fuzzy
 msgid "corrupt encodings in PDF device"
 msgstr "PDF 디바이스에서의 Corrupt가 있는 encode 입니다"
-
-#: devPS.c:6931
-msgid "increasing the PDF version to 1.3"
-msgstr ""
 
 #: devPS.c:7056
 #, fuzzy, c-format
@@ -579,24 +576,18 @@ msgstr "PDF font를 검색 또는 적재하는데 실패되었습니다"
 msgid "failed to find or load PDF CID font"
 msgstr "PDF font를 검색 또는 적재하는데 실패되었습니다"
 
-#: devPS.c:8220 devPS.c:8224 devPS.c:8384 devPS.c:8388
-#, c-format
-msgid "invalid 'family' parameter in %s"
-msgstr "%s 에서 무효의 'family' 파라미터 입니다"
-
-#: devPS.c:8242 devPS.c:8400
-#, c-format
-msgid "invalid 'fonts' parameter in %s"
+#: devPS.c:8220 devPS.c:8224 devPS.c:8242 devPS.c:8384 devPS.c:8388
+#: devPS.c:8400
+#, fuzzy, c-format
+msgid "invalid '%s' parameter in '%s'"
 msgstr "%s에서 무효의 'fonts' 파라미터 입니다"
 
-#: devPS.c:8248 devPS.c:8410 devPS.c:8413 devWindows.c:3640 devWindows.c:3644
-#: devWindows.c:3652 devWindows.c:3663 devWindows.c:3669 devWindows.c:3676
-#: devWindows.c:3683 devWindows.c:3687
+#: devPS.c:8261 devPS.c:8328
 #, fuzzy, c-format
-msgid "invalid value of '%s'"
-msgstr "devWindows에서 'bg'의 무효인 값입니다"
+msgid "unable to start '%s' function"
+msgstr "디바이스 pdf를 시작할수가 없습니다"
 
-#: devPS.c:8261 devPS.c:8328 devPS.c:8427 devPicTeX.c:741 devWindows.c:3728
+#: devPS.c:8427 devPicTeX.c:741 devWindows.c:3728
 #, fuzzy, c-format
 msgid "unable to start %s() device"
 msgstr "디바이스 pdf를 시작할수가 없습니다"
@@ -764,7 +755,7 @@ msgstr "옵션 'windowsTimeouts'는 정수가 아니면 되지 않습니다"
 
 #: devWindows.c:3412
 #, fuzzy
-msgid "invalid device number in 'savePlot'"
+msgid "invalid device number in 'savePlot()' function"
 msgstr "savePlot의 무효인 디바이스번호입니다"
 
 #: devWindows.c:3414
@@ -774,13 +765,13 @@ msgstr "savePlot의 무효인 디비이스입니다"
 
 #: devWindows.c:3417
 #, fuzzy
-msgid "invalid filename argument in 'savePlot'"
+msgid "invalid filename argument in 'savePlot()' function"
 msgstr "savaPlot에서 무효인 파일명 인수입니다"
 
 #: devWindows.c:3422
 #, fuzzy
-msgid "invalid type argument in 'savePlot'"
-msgstr "savePlot에서 무효인 유형 인수입니다"
+msgid "invalid type argument in 'savePlot()' function"
+msgstr "savaPlot에서 무효인 파일명 인수입니다"
 
 #: devWindows.c:3449
 msgid "unknown type in savePlot"
@@ -826,6 +817,29 @@ msgstr ""
 #, fuzzy, c-format
 msgid "invalid '%s' argument"
 msgstr "무효의 문자열 인수입니다"
+
+#, fuzzy
+#~ msgid "invalid string in '%s'function"
+#~ msgstr "무효의 문자열 인수입니다"
+
+#, fuzzy
+#~ msgid "invalid string in '%s'"
+#~ msgstr "무효의 문자열 인수입니다"
+
+#, fuzzy
+#~ msgid "invalid type argument in 'savePlot'"
+#~ msgstr "savePlot에서 무효인 유형 인수입니다"
+
+#, fuzzy
+#~ msgid "unable to start %s' function"
+#~ msgstr "디바이스 pdf를 시작할수가 없습니다"
+
+#~ msgid "invalid 'family' parameter in %s"
+#~ msgstr "%s 에서 무효의 'family' 파라미터 입니다"
+
+#, fuzzy
+#~ msgid "invalid value of '%s'"
+#~ msgstr "devWindows에서 'bg'의 무효인 값입니다"
 
 #~ msgid "Impossible to load Rbitmap.dll"
 #~ msgstr "Rbitmap.dll를 적재하는데 가능하지 않습니다"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 23:12+0200\n"
+"POT-Creation-Date: 2015-11-04 22:32+0100\n"
 "PO-Revision-Date: 2015-01-17 15:10+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -82,7 +82,7 @@ msgstr "座标范围不能无穷大[GScale(%g,%g,%d, .); log=%d]"
 msgid "axis style \"%c\" unimplemented"
 msgstr "座标形式\"%c\"目前没有实现"
 
-#: graphics.c:2209
+#: graphics.c:2209 graphics.c:2597
 #, fuzzy
 msgid "no graphics device is active"
 msgstr "没有已积活的图形设备"
@@ -99,10 +99,6 @@ msgstr "图形狀態不对"
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.c:2597
-msgid "No graphics device is active"
-msgstr "没有已积活的图形设备"
-
 #: graphics.c:3056
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "零长度箭头的角度不定，因此略过不用"
@@ -112,9 +108,10 @@ msgstr "零长度箭头的角度不定，因此略过不用"
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "par(\"bty\")=‘%c'不对; 因此没有画box()"
 
-#: graphics.c:3154
-msgid "invalid argument to GBox"
-msgstr "GBox参数不对"
+#: graphics.c:3154 par.c:1121
+#, fuzzy, c-format
+msgid "invalid argument passed to '%s' function"
+msgstr "传给par()的参数错误"
 
 #: graphics.c:3399
 #, fuzzy
@@ -172,11 +169,6 @@ msgstr "图形参数\"%s\"已过期不用了"
 #, c-format
 msgid "\"%s\" is not a graphical parameter"
 msgstr "\"%s\"不是图形参数"
-
-#: par.c:1121
-#, fuzzy
-msgid "invalid argument passed to 'par()'"
-msgstr "传给par()的参数错误"
 
 #: par.c:1165
 #, c-format
@@ -310,7 +302,7 @@ msgstr "绘图结构不对"
 
 #: plot.c:1316
 #, fuzzy, c-format
-msgid "'x' and 'y' argument lengths differ in '%s()'"
+msgid "'x' and 'y' argument lengths differ in '%s' function"
 msgstr "%s()里的'x'和'y'的长度不一样"
 
 #: plot.c:1327
@@ -452,7 +444,7 @@ msgstr "星形数据不对"
 msgid "invalid thermometers data (need 3 or 4 columns)"
 msgstr "温度计数据不对(需要三或四个列)"
 
-#: plot.c:3804
+#: plot.c:3804 plot.c:3810
 #, fuzzy, c-format
 msgid "invalid 'thermometers[, %s]'"
 msgstr "温度计[,%s]不对"
@@ -461,11 +453,6 @@ msgstr "温度计[,%s]不对"
 #, fuzzy, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
 msgstr "温度计[,%s]在[0,1]范围外--看起来会有点不对"
-
-#: plot.c:3810
-#, fuzzy
-msgid "invalid 'thermometers[, 1:2]'"
-msgstr "温度计[,1:2]"
 
 #: plot.c:3849
 #, fuzzy
@@ -524,17 +511,10 @@ msgstr "无法计算座标方位"
 msgid "too few parameters"
 msgstr "参数太少"
 
-#: plot3d.c:1113
-msgid "invalid 'x' limits"
+#: plot3d.c:1113 plot3d.c:1115 plot3d.c:1117
+#, fuzzy, c-format
+msgid "invalid '%s' limits"
 msgstr "'x'极限不对"
-
-#: plot3d.c:1115
-msgid "invalid 'y' limits"
-msgstr "'y'极限不对"
-
-#: plot3d.c:1117
-msgid "invalid 'z' limits"
-msgstr "'z'极限不对"
 
 #: plot3d.c:1138 plot3d.c:1140 plot3d.c:1142
 #, fuzzy, c-format
@@ -613,6 +593,26 @@ msgstr ""
 #: stem.c:192
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#, fuzzy
+#~ msgid "invalid argument passed to '%s'function"
+#~ msgstr "传给par()的参数错误"
+
+#~ msgid "No graphics device is active"
+#~ msgstr "没有已积活的图形设备"
+
+#~ msgid "invalid argument to GBox"
+#~ msgstr "GBox参数不对"
+
+#, fuzzy
+#~ msgid "invalid 'thermometers[, 1:2]'"
+#~ msgstr "温度计[,1:2]"
+
+#~ msgid "invalid 'y' limits"
+#~ msgstr "'y'极限不对"
+
+#~ msgid "invalid 'z' limits"
+#~ msgstr "'z'极限不对"
 
 #~ msgid "parameter \"j\" in \"mfg\" is out of range"
 #~ msgstr "\"mfg\"里的参数\"j\"超出了合适的范围"

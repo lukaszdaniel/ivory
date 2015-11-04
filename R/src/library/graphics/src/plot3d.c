@@ -1110,11 +1110,11 @@ SEXP C_persp(SEXP args)
     /* Checks on x/y/z Limits */
 
     if (!LimitCheck(REAL(xlim), &xc, &xs))
-	error(_("invalid 'x' limits"));
+	error(_("invalid '%s' limits"), "x");
     if (!LimitCheck(REAL(ylim), &yc, &ys))
-	error(_("invalid 'y' limits"));
+	error(_("invalid '%s' limits"), "y");
     if (!LimitCheck(REAL(zlim), &zc, &zs))
-	error(_("invalid 'z' limits"));
+	error(_("invalid '%s' limits"), "z");
 
     theta = asReal(CAR(args));	args = CDR(args);
     phi	  = asReal(CAR(args));	args = CDR(args);

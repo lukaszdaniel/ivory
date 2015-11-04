@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 23:12+0200\n"
+"POT-Creation-Date: 2015-11-04 22:32+0100\n"
 "PO-Revision-Date: 2011-04-02 18:24+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -83,7 +83,7 @@ msgstr "sonlu olmayan eksen sınırları [GScale(%g,%g,%d, .); log=%d]"
 msgid "axis style \"%c\" unimplemented"
 msgstr "eksen biçimi \"%c\" tanımlanmamış"
 
-#: graphics.c:2209
+#: graphics.c:2209 graphics.c:2597
 #, fuzzy
 msgid "no graphics device is active"
 msgstr "Hiç bir grafik aygıtı aktif değil"
@@ -100,10 +100,6 @@ msgstr "geçersiz grafik durumu"
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.c:2597
-msgid "No graphics device is active"
-msgstr "Hiç bir grafik aygıtı aktif değil"
-
 #: graphics.c:3056
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "belirsiz açıda sıfır uzunlukta ok, atlandı"
@@ -113,9 +109,10 @@ msgstr "belirsiz açıda sıfır uzunlukta ok, atlandı"
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "geçersiz par(\"bty\") = '%c'; box() çizilmedi"
 
-#: graphics.c:3154
-msgid "invalid argument to GBox"
-msgstr "GBox a geçersiz argüman"
+#: graphics.c:3154 par.c:1121
+#, fuzzy, c-format
+msgid "invalid argument passed to '%s' function"
+msgstr "par()'a geçersiz bir argüman geçirildi"
 
 #: graphics.c:3399
 #, fuzzy
@@ -173,11 +170,6 @@ msgstr "grafiksel parametre \"%s\" çok eski"
 #, c-format
 msgid "\"%s\" is not a graphical parameter"
 msgstr "\"%s\" bir grafiksel parametre değil"
-
-#: par.c:1121
-#, fuzzy
-msgid "invalid argument passed to 'par()'"
-msgstr "par()'a geçersiz bir argüman geçirildi"
 
 #: par.c:1165
 #, c-format
@@ -311,7 +303,7 @@ msgstr "geçersiz grafik yapısı"
 
 #: plot.c:1316
 #, fuzzy, c-format
-msgid "'x' and 'y' argument lengths differ in '%s()'"
+msgid "'x' and 'y' argument lengths differ in '%s' function"
 msgstr "%s() içinde 'x' ve 'y' uzunlukları farklı "
 
 #: plot.c:1327
@@ -454,7 +446,7 @@ msgstr "geçersiz yıldız verisi"
 msgid "invalid thermometers data (need 3 or 4 columns)"
 msgstr "geçersiz termometre verisi (3 veya 4 sütun gerekli)"
 
-#: plot.c:3804
+#: plot.c:3804 plot.c:3810
 #, fuzzy, c-format
 msgid "invalid 'thermometers[, %s]'"
 msgstr "geçersiz thermometers[,%s]"
@@ -463,11 +455,6 @@ msgstr "geçersiz thermometers[,%s]"
 #, fuzzy, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
 msgstr "thermometers[,%s] [0,1] içide değil -- komik görünebilir"
-
-#: plot.c:3810
-#, fuzzy
-msgid "invalid 'thermometers[, 1:2]'"
-msgstr "geçersiz thermometers[,1:2]"
 
 #: plot.c:3849
 #, fuzzy
@@ -526,17 +513,10 @@ msgstr "Eksen yönelimi hesaplanmadı"
 msgid "too few parameters"
 msgstr "çok az parametre"
 
-#: plot3d.c:1113
-msgid "invalid 'x' limits"
+#: plot3d.c:1113 plot3d.c:1115 plot3d.c:1117
+#, fuzzy, c-format
+msgid "invalid '%s' limits"
 msgstr "geçersiz 'x' sınırları"
-
-#: plot3d.c:1115
-msgid "invalid 'y' limits"
-msgstr "geçersiz 'y' sınırları"
-
-#: plot3d.c:1117
-msgid "invalid 'z' limits"
-msgstr "geçersiz 'z' sınırları"
 
 #: plot3d.c:1138 plot3d.c:1140 plot3d.c:1142
 #, fuzzy, c-format
@@ -615,6 +595,26 @@ msgstr ""
 #: stem.c:192
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#, fuzzy
+#~ msgid "invalid argument passed to '%s'function"
+#~ msgstr "par()'a geçersiz bir argüman geçirildi"
+
+#~ msgid "No graphics device is active"
+#~ msgstr "Hiç bir grafik aygıtı aktif değil"
+
+#~ msgid "invalid argument to GBox"
+#~ msgstr "GBox a geçersiz argüman"
+
+#, fuzzy
+#~ msgid "invalid 'thermometers[, 1:2]'"
+#~ msgstr "geçersiz thermometers[,1:2]"
+
+#~ msgid "invalid 'y' limits"
+#~ msgstr "geçersiz 'y' sınırları"
+
+#~ msgid "invalid 'z' limits"
+#~ msgstr "geçersiz 'z' sınırları"
 
 #~ msgid "parameter \"j\" in \"mfg\" is out of range"
 #~ msgstr "\"mfg\" içindeki \"j\" parametresi sınırlar dışında"

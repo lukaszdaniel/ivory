@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-04 20:50\n"
+"POT-Creation-Date: 2015-11-04 22:32\n"
 "PO-Revision-Date: 2012-01-08 00:28+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -94,11 +94,6 @@ msgstr ""
 #. R/screen.R: stop("'figs' must specify at least one screen")
 #: R/screen.R:0
 msgid "'figs' must specify at least one screen"
-msgstr ""
-
-#. R/boxplot.R: stop("'formula' missing or incorrect")
-#: R/boxplot.R:0
-msgid "'formula' missing or incorrect"
 msgstr ""
 
 #. R/cdplot.R: stop("'formula' should specify exactly two variables")
@@ -407,9 +402,10 @@ msgstr ""
 msgid "exactly one symbol type must be specified"
 msgstr ""
 
+#. R/boxplot.R: stop("formula missing or incorrect")
 #. R/stripchart.R: stop("formula missing or incorrect")
 #. R/sunflowerplot.R: stop("formula missing or incorrect")
-#: R/stripchart.R:0 R/sunflowerplot.R:0
+#: R/boxplot.R:0 R/stripchart.R:0 R/sunflowerplot.R:0
 msgid "formula missing or incorrect"
 msgstr ""
 

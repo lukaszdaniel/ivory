@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-04 21:08\n"
+"POT-Creation-Date: 2015-11-04 21:37\n"
 "PO-Revision-Date: 2015-01-17 15:47+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -23,10 +23,11 @@ msgstr ""
 msgid "%s needs package 'Matrix' correctly installed"
 msgstr ""
 
-#. R/splines.R: gettextf("'%s' argument must be integer >= 1", "degree")
-#: R/splines.R:0
+#. R/splineClasses.R: gettextf("'%s' argument must be integer >= %d", "ord", 2)
+#. R/splines.R: gettextf("'%s' argument must be integer >= %d", "degree", 1)
+#: R/splineClasses.R:0 R/splines.R:0
 #, fuzzy
-msgid "'%s' argument must be integer >= 1"
+msgid "'%s' argument must be integer >= %d"
 msgstr "'degree' deve ser inteiro >= 1"
 
 #. R/splines.R: gettextf("'%s' argument was too small; have used %d", "df", ord - (1L - intercept))
@@ -47,11 +48,6 @@ msgstr "'deriv' deve estar entre 0 e %d"
 #: R/splineClasses.R:0
 msgid "'formula' must be of the form \"y ~ x\""
 msgstr "'formula' deve ser da forma \"y ~ x\""
-
-#. R/splineClasses.R: stop("'ord' must be >= 2")
-#: R/splineClasses.R:0
-msgid "'ord' must be >= 2"
-msgstr "'ord' deve ser >= 2"
 
 #. R/splineClasses.R: stop("'ord' must be positive integer, at most the number of knots")
 #: R/splineClasses.R:0
@@ -106,17 +102,6 @@ msgstr "comprimentos de 'x' e 'y' devem ser iguais"
 msgid "lengths of 'x' and 'y' must match"
 msgstr "comprimentos de 'x' e 'y' devem ser iguais"
 
-#. R/splineClasses.R: stop("must have at least 'ord' knots")
-#: R/splineClasses.R:0
-msgid "must have at least 'ord' knots"
-msgstr "pelo menos os nós 'ord' devem estar presentes"
-
-#. R/splineClasses.R: gettextf("need at least %s (=%d) knots", "2*ord -1", 2 * ord - 1, domain = "R-splines")
-#: R/splineClasses.R:0
-#, fuzzy
-msgid "need at least %s (=%d) knots"
-msgstr "são necessários pelo menos 2*ord -1 (=%d) nós"
-
 #. R/splineClasses.R: gettext("polynomial representation of spline", domain = "R-splines")
 #: R/splineClasses.R:0
 msgid "polynomial representation of spline"
@@ -162,6 +147,21 @@ msgstr "valores de 'x' devem ser distintos"
 #: R/splineClasses.R:0
 msgid "values of 'x' must be strictly increasing"
 msgstr "valores de 'x' devem ser estritamente crescentes"
+
+#. R/splineClasses.R: ngettext(ord, "at least '%s' (=%d) knots is needed", "at least '%s' (=%d) knots are needed",     domain = "R-splines")
+#. R/splineClasses.R: ngettext(2 * ord - 1, "at least '%s' (=%d) knots is needed", "at least '%s' (=%d) knots are needed",     domain = "R-splines")
+#: R/splineClasses.R:0
+#, fuzzy
+msgid "at least '%s' (=%d) knots is needed"
+msgid_plural "at least '%s' (=%d) knots are needed"
+msgstr[0] "são necessários pelo menos 2*ord -1 (=%d) nós"
+msgstr[1] "são necessários pelo menos 2*ord -1 (=%d) nós"
+
+#~ msgid "'ord' must be >= 2"
+#~ msgstr "'ord' deve ser >= 2"
+
+#~ msgid "must have at least 'ord' knots"
+#~ msgstr "pelo menos os nós 'ord' devem estar presentes"
 
 #, fuzzy
 #~ msgid "'%s' was too small; have used %d"

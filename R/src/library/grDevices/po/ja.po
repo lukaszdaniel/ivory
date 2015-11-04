@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 23:11+0200\n"
+"POT-Creation-Date: 2015-11-04 22:28+0100\n"
 "PO-Revision-Date: 2012-02-26 14:10+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -90,7 +90,9 @@ msgstr " 不正な 'file' 引数 "
 msgid "invalid gray level, must be in [0,1]."
 msgstr ""
 
-#: colors.c:549
+#: colors.c:549 devPS.c:8248 devPS.c:8410 devPS.c:8413 devWindows.c:3640
+#: devWindows.c:3644 devWindows.c:3652 devWindows.c:3663 devWindows.c:3669
+#: devWindows.c:3676 devWindows.c:3683 devWindows.c:3687
 #, fuzzy, c-format
 msgid "invalid '%s' value"
 msgstr " 不正な 'file' 引数 "
@@ -163,8 +165,8 @@ msgstr " 未知の AFM 項目に出会いました "
 
 #: devPS.c:739 devPS.c:742 devPS.c:4426 devPS.c:7917 devPicTeX.c:485
 #: devPicTeX.c:487
-#, c-format
-msgid "invalid string in '%s'"
+#, fuzzy, c-format
+msgid "invalid string in '%s' function"
 msgstr " '%s' 中に不正な文字列 "
 
 #: devPS.c:773
@@ -172,10 +174,10 @@ msgstr " '%s' 中に不正な文字列 "
 msgid "font width unknown for character 0x%x"
 msgstr " 文字 0x%x に対する文字幅がわかりません "
 
-#: devPS.c:831
-#, c-format
-msgid "unknown encoding '%s' in 'PostScriptMetricInfo'"
-msgstr " 'PostScriptMetricInfo' 中に未知のエンコーディング '%s' "
+#: devPS.c:831 devPS.c:4306
+#, fuzzy, c-format
+msgid "unknown encoding '%s' in '%s' function"
+msgstr " 'mbcsToSbcs' 中に未知のエンコーディング '%s' があります "
 
 #: devPS.c:847 devPS.c:858
 #, c-format
@@ -188,17 +190,18 @@ msgid "font metrics unknown for character 0x%x"
 msgstr " 文字　0x%x に対するフォントメトリックスが未知です "
 
 #: devPS.c:880
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"invalid character (%04x) sent to 'PostScriptCIDMetricInfo' in a single-byte "
-"locale"
+"invalid character (%04x) sent to 'PostScriptCIDMetricInfo()' function in a "
+"single-byte locale"
 msgstr ""
 " 一バイトロケールに於いて 'PostScriptCIDMetricInfo' に不正な文字(%04x)が送ら"
 "れました "
 
 #: devPS.c:888
+#, fuzzy
 msgid ""
-"invalid character sent to 'PostScriptCIDMetricInfo' in a single-byte locale"
+"invalid character sent to 'PostScriptCIDMetricInfo()' in a single-byte locale"
 msgstr ""
 " 一バイトロケールに於いて 'PostScriptCIDMetricInfo' に不正な文字が送られまし"
 "た "
@@ -319,7 +322,7 @@ msgstr " %s() 中に長すぎるファイル名  "
 msgid "memory allocation problem in %s()"
 msgstr " %s() 中にメモリ割り当てのトラブルがあります "
 
-#: devPS.c:3125 devPS.c:5906
+#: devPS.c:3125
 #, c-format
 msgid "encoding path is too long in %s()"
 msgstr " %s() 中のエンコーディングのパスが長すぎます "
@@ -399,14 +402,11 @@ msgstr " ポストスクリプトデバイス中に CID ファミリ '%s' は含
 msgid "family '%s' not included in postscript() device"
 msgstr " ポストスクリプトデバイス中にフォントファミリ '%s' は含まれていません "
 
-#: devPS.c:4306
-#, c-format
-msgid "unknown encoding '%s' in 'mbcsToSbcs'"
-msgstr " 'mbcsToSbcs' 中に未知のエンコーディング '%s' があります "
-
 #: devPS.c:4316
-#, c-format
-msgid "conversion failure on '%s' in 'mbcsToSbcs': dot substituted for <%02x>"
+#, fuzzy, c-format
+msgid ""
+"conversion failure on '%s' in 'mbcsToSbcs()' function: dot substituted for <"
+"%02x>"
 msgstr " 'mbcsToSbcs' 中の '%s' で変換に失敗: <%02x>をドットで置き換えました "
 
 #: devPS.c:4394
@@ -421,7 +421,7 @@ msgstr " テキストをエンコーディング '%s' に変換することに�
 
 #: devPS.c:4590
 #, fuzzy
-msgid "ran out of colors in xfig()"
+msgid "ran out of colors in 'xfig()' function"
 msgstr " xfig() 中で色数が多すぎました "
 
 #: devPS.c:4619
@@ -493,9 +493,15 @@ msgid "failed to record device encoding; font not added"
 msgstr ""
 " デバイスエンコーディングの記録に失敗しました；　フォントは追加されません "
 
-#: devPS.c:5892
-msgid "increasing the PDF version to 1.2"
+#: devPS.c:5892 devPS.c:6294 devPS.c:6931
+#, fuzzy, c-format
+msgid "increasing the PDF version to %s"
 msgstr " PDF のバージョンを 1.2 に更新しています "
+
+#: devPS.c:5906
+#, fuzzy, c-format
+msgid "encoding path is too long in '%s' function"
+msgstr " %s() 中のエンコーディングのパスが長すぎます "
 
 #: devPS.c:5922
 msgid "failed to load default encoding"
@@ -533,10 +539,6 @@ msgstr " 不正な前景/背景色 (pdf) "
 msgid "invalid 'alpha' value in PDF"
 msgstr " PDF 中に不正なアルファ値 "
 
-#: devPS.c:6294
-msgid "increasing the PDF version to 1.4"
-msgstr " PDF のバージョンを 1.4 に更新 "
-
 #: devPS.c:6345 devPS.c:6392
 msgid "unknown 'colormodel', using 'srgb'"
 msgstr " 未知の 'colormodel'です。'srgb' を使います "
@@ -550,10 +552,6 @@ msgstr " sRGB 色空間ファイルのロードに失敗しました "
 #, fuzzy
 msgid "corrupt encodings in PDF device"
 msgstr " PDF デバイス中に破損したエンコーディング "
-
-#: devPS.c:6931
-msgid "increasing the PDF version to 1.3"
-msgstr " PDF のバージョンを 1.3 に更新 "
 
 #: devPS.c:7056
 #, c-format
@@ -583,24 +581,18 @@ msgstr " PDF フォントが見付からないかロードできませんでし�
 msgid "failed to find or load PDF CID font"
 msgstr " PDF CID フォントが見付からないかロードできませんでした "
 
-#: devPS.c:8220 devPS.c:8224 devPS.c:8384 devPS.c:8388
-#, c-format
-msgid "invalid 'family' parameter in %s"
-msgstr " %s 中に不正な 'family' パラメータ "
-
-#: devPS.c:8242 devPS.c:8400
-#, c-format
-msgid "invalid 'fonts' parameter in %s"
+#: devPS.c:8220 devPS.c:8224 devPS.c:8242 devPS.c:8384 devPS.c:8388
+#: devPS.c:8400
+#, fuzzy, c-format
+msgid "invalid '%s' parameter in '%s'"
 msgstr " %s 中に不正な 'fonts' パラメータ "
 
-#: devPS.c:8248 devPS.c:8410 devPS.c:8413 devWindows.c:3640 devWindows.c:3644
-#: devWindows.c:3652 devWindows.c:3663 devWindows.c:3669 devWindows.c:3676
-#: devWindows.c:3683 devWindows.c:3687
-#, c-format
-msgid "invalid value of '%s'"
-msgstr " '%s' の値が不正です "
+#: devPS.c:8261 devPS.c:8328
+#, fuzzy, c-format
+msgid "unable to start '%s' function"
+msgstr " デバイス %s() を開始できませんでした "
 
-#: devPS.c:8261 devPS.c:8328 devPS.c:8427 devPicTeX.c:741 devWindows.c:3728
+#: devPS.c:8427 devPicTeX.c:741 devWindows.c:3728
 #, c-format
 msgid "unable to start %s() device"
 msgstr " デバイス %s() を開始できませんでした "
@@ -763,7 +755,8 @@ msgid "option 'windowsTimeouts' should be integer"
 msgstr " オプション 'windowsTimeouts' は整数でなければなりません "
 
 #: devWindows.c:3412
-msgid "invalid device number in 'savePlot'"
+#, fuzzy
+msgid "invalid device number in 'savePlot()' function"
 msgstr " savePlot　中に不正なデバイス番号 "
 
 #: devWindows.c:3414
@@ -772,12 +765,13 @@ msgstr " savePlot 中に不正なデバイス "
 
 #: devWindows.c:3417
 #, fuzzy
-msgid "invalid filename argument in 'savePlot'"
+msgid "invalid filename argument in 'savePlot()' function"
 msgstr " savePlot 中に不正なファイル名引数 "
 
 #: devWindows.c:3422
-msgid "invalid type argument in 'savePlot'"
-msgstr " savePlot　に不正な型の引数 "
+#, fuzzy
+msgid "invalid type argument in 'savePlot()' function"
+msgstr " savePlot 中に不正なファイル名引数 "
 
 #: devWindows.c:3449
 msgid "unknown type in savePlot"
@@ -824,6 +818,35 @@ msgstr ""
 #, fuzzy, c-format
 msgid "invalid '%s' argument"
 msgstr " 不正な 'file' 引数 "
+
+#, fuzzy
+#~ msgid "invalid string in '%s'function"
+#~ msgstr " '%s' 中に不正な文字列 "
+
+#~ msgid "invalid string in '%s'"
+#~ msgstr " '%s' 中に不正な文字列 "
+
+#~ msgid "invalid type argument in 'savePlot'"
+#~ msgstr " savePlot　に不正な型の引数 "
+
+#~ msgid "unknown encoding '%s' in 'PostScriptMetricInfo'"
+#~ msgstr " 'PostScriptMetricInfo' 中に未知のエンコーディング '%s' "
+
+#, fuzzy
+#~ msgid "unable to start %s' function"
+#~ msgstr " デバイス %s() を開始できませんでした "
+
+#~ msgid "increasing the PDF version to 1.4"
+#~ msgstr " PDF のバージョンを 1.4 に更新 "
+
+#~ msgid "increasing the PDF version to 1.3"
+#~ msgstr " PDF のバージョンを 1.3 に更新 "
+
+#~ msgid "invalid 'family' parameter in %s"
+#~ msgstr " %s 中に不正な 'family' パラメータ "
+
+#~ msgid "invalid value of '%s'"
+#~ msgstr " '%s' の値が不正です "
 
 #~ msgid "Impossible to load Rbitmap.dll"
 #~ msgstr " Rbitmap.dll をロードできません "

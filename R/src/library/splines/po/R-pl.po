@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-04 21:08\n"
+"POT-Creation-Date: 2015-11-04 21:37\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -21,10 +21,11 @@ msgstr ""
 msgid "%s needs package 'Matrix' correctly installed"
 msgstr "'%s' potrzebuje poprawnie zainstalowanego pakietu 'Matrix'"
 
-#. R/splines.R: gettextf("'%s' argument must be integer >= 1", "degree")
-#: R/splines.R:0
-msgid "'%s' argument must be integer >= 1"
-msgstr "argument '%s' musi być liczbą całkowitą >= 1"
+#. R/splineClasses.R: gettextf("'%s' argument must be integer >= %d", "ord", 2)
+#. R/splines.R: gettextf("'%s' argument must be integer >= %d", "degree", 1)
+#: R/splineClasses.R:0 R/splines.R:0
+msgid "'%s' argument must be integer >= %d"
+msgstr "argument '%s' musi być liczbą całkowitą >= %d"
 
 #. R/splines.R: gettextf("'%s' argument was too small; have used %d", "df", ord - (1L - intercept))
 #. R/splines.R: gettextf("'%s' argument was too small; have used %d", "df", 1L + intercept)
@@ -43,11 +44,6 @@ msgstr "'deriv' musi być pomiędzy 0 a %d"
 #: R/splineClasses.R:0
 msgid "'formula' must be of the form \"y ~ x\""
 msgstr "'formula' musi posiadać formę \"y ~ x\""
-
-#. R/splineClasses.R: stop("'ord' must be >= 2")
-#: R/splineClasses.R:0
-msgid "'ord' must be >= 2"
-msgstr "'ord' musi być >= 2"
 
 #. R/splineClasses.R: stop("'ord' must be positive integer, at most the number of knots")
 #: R/splineClasses.R:0
@@ -68,7 +64,7 @@ msgstr "reprezentacja bSpline  splajnu"
 #. R/splineClasses.R: gettextf("bSpline representation of spline for %s", deparse(as.vector(form)), domain = "R-splines")
 #: R/splineClasses.R:0
 msgid "bSpline representation of spline for %s"
-msgstr "reprezentacja bSpline  splajnu dla %s"
+msgstr "reprezentacja bSpline splajnu dla %s"
 
 #. R/splineClasses.R: stop("empty 'derivs' argument")
 #: R/splineClasses.R:0
@@ -100,16 +96,6 @@ msgstr "długości 'x' oraz 'y' muszą być takie same"
 #: R/splineClasses.R:0
 msgid "lengths of 'x' and 'y' must match"
 msgstr "długości 'x' oraz 'y' muszą być zgodne"
-
-#. R/splineClasses.R: stop("must have at least 'ord' knots")
-#: R/splineClasses.R:0
-msgid "must have at least 'ord' knots"
-msgstr "potrzeba mieć przynajmniej węzły 'ord'"
-
-#. R/splineClasses.R: gettextf("need at least %s (=%d) knots", "2*ord -1", 2 * ord - 1, domain = "R-splines")
-#: R/splineClasses.R:0
-msgid "need at least %s (=%d) knots"
-msgstr "potrzeba przynamniej %s (=%d) wezłów"
 
 #. R/splineClasses.R: gettext("polynomial representation of spline", domain = "R-splines")
 #: R/splineClasses.R:0
@@ -153,6 +139,21 @@ msgstr "wartości 'x' muszą być różne"
 #: R/splineClasses.R:0
 msgid "values of 'x' must be strictly increasing"
 msgstr "wartości 'x' muszą być ściśle rosnące"
+
+#. R/splineClasses.R: ngettext(ord, "at least '%s' (=%d) knots is needed", "at least '%s' (=%d) knots are needed",     domain = "R-splines")
+#. R/splineClasses.R: ngettext(2 * ord - 1, "at least '%s' (=%d) knots is needed", "at least '%s' (=%d) knots are needed",     domain = "R-splines")
+#: R/splineClasses.R:0
+msgid "at least '%s' (=%d) knots is needed"
+msgid_plural "at least '%s' (=%d) knots are needed"
+msgstr[0] "przynajmniej %s (=%d) węzeł jest potrzebny"
+msgstr[1] "przynajmniej %s (=%d) węzły są potrzebne"
+msgstr[2] "przynajmniej %s (=%d) węzłów jest potrzebnych"
+
+#~ msgid "'ord' must be >= 2"
+#~ msgstr "'ord' musi być >= 2"
+
+#~ msgid "must have at least 'ord' knots"
+#~ msgstr "przynajmniej 'ord' węzłów jest wymagane"
 
 #~ msgid "'%s' was too small; have used %d"
 #~ msgstr "argument '%s' był zbyt mały; użyto %d"

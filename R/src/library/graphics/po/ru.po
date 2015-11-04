@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 23:12+0200\n"
+"POT-Creation-Date: 2015-11-04 22:32+0100\n"
 "PO-Revision-Date: 2015-01-17 15:10+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -87,7 +87,7 @@ msgstr "неопределенные границы осей [GScale(%g,%g,%d, .
 msgid "axis style \"%c\" unimplemented"
 msgstr "стиль оси \"%c\" не разработан"
 
-#: graphics.c:2209
+#: graphics.c:2209 graphics.c:2597
 #, fuzzy
 msgid "no graphics device is active"
 msgstr "Нет активного графического устройства"
@@ -104,10 +104,6 @@ msgstr "неправильное графическое состояние"
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.c:2597
-msgid "No graphics device is active"
-msgstr "Нет активного графического устройства"
-
 #: graphics.c:3056
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "стрелка нулевой длины имеет неопределенный угол и поэтому пропущена"
@@ -117,9 +113,10 @@ msgstr "стрелка нулевой длины имеет неопределе
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "неправильный par(\"bty\") = '%c'; не нарисован box()"
 
-#: graphics.c:3154
-msgid "invalid argument to GBox"
-msgstr "неправильный аргумент для GBox"
+#: graphics.c:3154 par.c:1121
+#, fuzzy, c-format
+msgid "invalid argument passed to '%s' function"
+msgstr "par() передан неправильный аргумент"
 
 #: graphics.c:3399
 #, fuzzy
@@ -177,11 +174,6 @@ msgstr "графический параметр \"%s\" устарел"
 #, c-format
 msgid "\"%s\" is not a graphical parameter"
 msgstr "\"%s\" -- не графический параметр"
-
-#: par.c:1121
-#, fuzzy
-msgid "invalid argument passed to 'par()'"
-msgstr "par() передан неправильный аргумент"
 
 #: par.c:1165
 #, c-format
@@ -315,7 +307,7 @@ msgstr "неправильная структура графика"
 
 #: plot.c:1316
 #, fuzzy, c-format
-msgid "'x' and 'y' argument lengths differ in '%s()'"
+msgid "'x' and 'y' argument lengths differ in '%s' function"
 msgstr "длины 'x' и 'y' в %s() различаются"
 
 #: plot.c:1327
@@ -457,7 +449,7 @@ msgstr "неправильные данные о звездочках"
 msgid "invalid thermometers data (need 3 or 4 columns)"
 msgstr "неправильные данные о градусниках (нужно 3 или 4 колонки)"
 
-#: plot.c:3804
+#: plot.c:3804 plot.c:3810
 #, fuzzy, c-format
 msgid "invalid 'thermometers[, %s]'"
 msgstr "неправильные 'thermometers[,%s]'"
@@ -466,11 +458,6 @@ msgstr "неправильные 'thermometers[,%s]'"
 #, fuzzy, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
 msgstr "'thermometers[,%s]' вне [0,1] -- может странно выглядеть"
-
-#: plot.c:3810
-#, fuzzy
-msgid "invalid 'thermometers[, 1:2]'"
-msgstr "неправильные 'thermometers[,1:2]'"
 
 #: plot.c:3849
 #, fuzzy
@@ -529,17 +516,10 @@ msgstr "Положение осей не вычислено"
 msgid "too few parameters"
 msgstr "слишком мало параметров"
 
-#: plot3d.c:1113
-msgid "invalid 'x' limits"
+#: plot3d.c:1113 plot3d.c:1115 plot3d.c:1117
+#, fuzzy, c-format
+msgid "invalid '%s' limits"
 msgstr "неправильные границы 'x'"
-
-#: plot3d.c:1115
-msgid "invalid 'y' limits"
-msgstr "неправильные границы 'y'"
-
-#: plot3d.c:1117
-msgid "invalid 'z' limits"
-msgstr "неправильные границы 'z'"
 
 #: plot3d.c:1138 plot3d.c:1140 plot3d.c:1142
 #, fuzzy, c-format
@@ -622,6 +602,26 @@ msgstr ""
 #: stem.c:192
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#, fuzzy
+#~ msgid "invalid argument passed to '%s'function"
+#~ msgstr "par() передан неправильный аргумент"
+
+#~ msgid "No graphics device is active"
+#~ msgstr "Нет активного графического устройства"
+
+#~ msgid "invalid argument to GBox"
+#~ msgstr "неправильный аргумент для GBox"
+
+#, fuzzy
+#~ msgid "invalid 'thermometers[, 1:2]'"
+#~ msgstr "неправильные 'thermometers[,1:2]'"
+
+#~ msgid "invalid 'y' limits"
+#~ msgstr "неправильные границы 'y'"
+
+#~ msgid "invalid 'z' limits"
+#~ msgstr "неправильные границы 'z'"
 
 #~ msgid "parameter \"j\" in \"mfg\" is out of range"
 #~ msgstr "параметр \"j\" в \"mfg\" выходит за пределы"

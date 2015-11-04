@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 23:12+0200\n"
+"POT-Creation-Date: 2015-11-04 22:32+0100\n"
 "PO-Revision-Date: 2011-02-18 09:09+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -81,7 +81,7 @@ msgstr "uendelege aksegrenser [GScale(%g,%g,%d, .); log=%d]"
 msgid "axis style \"%c\" unimplemented"
 msgstr "aksestilen «%c» er ikkje implementert"
 
-#: graphics.c:2209
+#: graphics.c:2209 graphics.c:2597
 #, fuzzy
 msgid "no graphics device is active"
 msgstr "Inga verksam grafikkeining"
@@ -98,10 +98,6 @@ msgstr "ugyldig grafikktilstand"
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.c:2597
-msgid "No graphics device is active"
-msgstr "Inga verksam grafikkeining"
-
 #: graphics.c:3056
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "pil av lengd null har ikkje-unik vinkel, og vert derfor ikkje teikna"
@@ -111,9 +107,10 @@ msgstr "pil av lengd null har ikkje-unik vinkel, og vert derfor ikkje teikna"
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "ugyldig par(\"bty\") = '%c' (ingen box() teikna)"
 
-#: graphics.c:3154
-msgid "invalid argument to GBox"
-msgstr "ugyldig argument til GBox"
+#: graphics.c:3154 par.c:1121
+#, fuzzy, c-format
+msgid "invalid argument passed to '%s' function"
+msgstr "ugyldig argument sendt til par()"
 
 #: graphics.c:3399
 #, fuzzy
@@ -171,11 +168,6 @@ msgstr "den grafiske parameteren «%s» er utdatert"
 #, c-format
 msgid "\"%s\" is not a graphical parameter"
 msgstr "«%s» er ikkje ein grafisk parameter"
-
-#: par.c:1121
-#, fuzzy
-msgid "invalid argument passed to 'par()'"
-msgstr "ugyldig argument sendt til par()"
 
 #: par.c:1165
 #, c-format
@@ -309,7 +301,7 @@ msgstr "ugyldig plottestruktur"
 
 #: plot.c:1316
 #, fuzzy, c-format
-msgid "'x' and 'y' argument lengths differ in '%s()'"
+msgid "'x' and 'y' argument lengths differ in '%s' function"
 msgstr "«x» og «y»-lengdene er forskjellig i %s()"
 
 #: plot.c:1327
@@ -451,7 +443,7 @@ msgstr "ugyldige stjernedata"
 msgid "invalid thermometers data (need 3 or 4 columns)"
 msgstr "ugyldige termometerdata (treng 3 eller 4 kolonnar)"
 
-#: plot.c:3804
+#: plot.c:3804 plot.c:3810
 #, fuzzy, c-format
 msgid "invalid 'thermometers[, %s]'"
 msgstr "ugyldige termometer[,%s]"
@@ -460,11 +452,6 @@ msgstr "ugyldige termometer[,%s]"
 #, fuzzy, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
 msgstr "termometer[,%s] ikkje i området [0,1] – kan sjå rart ut"
-
-#: plot.c:3810
-#, fuzzy
-msgid "invalid 'thermometers[, 1:2]'"
-msgstr "ugyldige termometer[,1:2]"
 
 #: plot.c:3849
 #, fuzzy
@@ -523,17 +510,10 @@ msgstr "Akseretnings ikkje rekna ut"
 msgid "too few parameters"
 msgstr "for få parametrar"
 
-#: plot3d.c:1113
-msgid "invalid 'x' limits"
+#: plot3d.c:1113 plot3d.c:1115 plot3d.c:1117
+#, fuzzy, c-format
+msgid "invalid '%s' limits"
 msgstr "ugyldige «x»-grenser"
-
-#: plot3d.c:1115
-msgid "invalid 'y' limits"
-msgstr "ugyldige «y»-grenser"
-
-#: plot3d.c:1117
-msgid "invalid 'z' limits"
-msgstr "ugyldige «z»-grenser"
 
 #: plot3d.c:1138 plot3d.c:1140 plot3d.c:1142
 #, fuzzy, c-format
@@ -614,6 +594,26 @@ msgstr ""
 #: stem.c:192
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#, fuzzy
+#~ msgid "invalid argument passed to '%s'function"
+#~ msgstr "ugyldig argument sendt til par()"
+
+#~ msgid "No graphics device is active"
+#~ msgstr "Inga verksam grafikkeining"
+
+#~ msgid "invalid argument to GBox"
+#~ msgstr "ugyldig argument til GBox"
+
+#, fuzzy
+#~ msgid "invalid 'thermometers[, 1:2]'"
+#~ msgstr "ugyldige termometer[,1:2]"
+
+#~ msgid "invalid 'y' limits"
+#~ msgstr "ugyldige «y»-grenser"
+
+#~ msgid "invalid 'z' limits"
+#~ msgstr "ugyldige «z»-grenser"
 
 #~ msgid "parameter \"j\" in \"mfg\" is out of range"
 #~ msgstr "parameteren «j» i «mfg» ligg utanfor gyldig verdiområde"

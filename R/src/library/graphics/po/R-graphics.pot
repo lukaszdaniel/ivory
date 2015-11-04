@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: graphics 3.3.0\n"
-"POT-Creation-Date: 2015-11-04 20:50\n"
+"POT-Creation-Date: 2015-11-04 22:32\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -122,13 +122,6 @@ msgstr ""
 #. R/screen.R: stop("'figs' must specify at least one screen")
 
 msgid "'figs' must specify at least one screen"
-msgstr ""
-
-
-#: R/boxplot.R: 0
-#. R/boxplot.R: stop("'formula' missing or incorrect")
-
-msgid "'formula' missing or incorrect"
 msgstr ""
 
 
@@ -550,8 +543,10 @@ msgid "exactly one symbol type must be specified"
 msgstr ""
 
 
+#: R/boxplot.R: 0
 #: R/stripchart.R: 0
 #: R/sunflowerplot.R: 0
+#. R/boxplot.R: stop("formula missing or incorrect")
 #. R/stripchart.R: stop("formula missing or incorrect")
 #. R/sunflowerplot.R: stop("formula missing or incorrect")
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 23:11+0200\n"
+"POT-Creation-Date: 2015-11-04 22:28+0100\n"
 "PO-Revision-Date: 2015-01-17 15:06+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Italian\n"
@@ -90,7 +90,9 @@ msgstr "argomento stringa non valido"
 msgid "invalid gray level, must be in [0,1]."
 msgstr ""
 
-#: colors.c:549
+#: colors.c:549 devPS.c:8248 devPS.c:8410 devPS.c:8413 devWindows.c:3640
+#: devWindows.c:3644 devWindows.c:3652 devWindows.c:3663 devWindows.c:3669
+#: devWindows.c:3676 devWindows.c:3683 devWindows.c:3687
 #, fuzzy, c-format
 msgid "invalid '%s' value"
 msgstr "argomento stringa non valido"
@@ -162,7 +164,7 @@ msgstr "entità AFM sconosciuta"
 #: devPS.c:739 devPS.c:742 devPS.c:4426 devPS.c:7917 devPicTeX.c:485
 #: devPicTeX.c:487
 #, fuzzy, c-format
-msgid "invalid string in '%s'"
+msgid "invalid string in '%s' function"
 msgstr "argomento stringa non valido"
 
 #: devPS.c:773
@@ -170,10 +172,10 @@ msgstr "argomento stringa non valido"
 msgid "font width unknown for character 0x%x"
 msgstr "larghezza font sconosciuta per il carattere 0x%x"
 
-#: devPS.c:831
-#, c-format
-msgid "unknown encoding '%s' in 'PostScriptMetricInfo'"
-msgstr ""
+#: devPS.c:831 devPS.c:4306
+#, fuzzy, c-format
+msgid "unknown encoding '%s' in '%s' function"
+msgstr "percorso encoding troppo lungo"
 
 #: devPS.c:847 devPS.c:858
 #, c-format
@@ -188,13 +190,13 @@ msgstr "metrica carattere sconosciuta per carattere 0x%x"
 #: devPS.c:880
 #, c-format
 msgid ""
-"invalid character (%04x) sent to 'PostScriptCIDMetricInfo' in a single-byte "
-"locale"
+"invalid character (%04x) sent to 'PostScriptCIDMetricInfo()' function in a "
+"single-byte locale"
 msgstr ""
 
 #: devPS.c:888
 msgid ""
-"invalid character sent to 'PostScriptCIDMetricInfo' in a single-byte locale"
+"invalid character sent to 'PostScriptCIDMetricInfo()' in a single-byte locale"
 msgstr ""
 
 #: devPS.c:993
@@ -305,7 +307,7 @@ msgstr "nome file troppo lungo in %s()"
 msgid "memory allocation problem in %s()"
 msgstr ""
 
-#: devPS.c:3125 devPS.c:5906
+#: devPS.c:3125
 #, fuzzy, c-format
 msgid "encoding path is too long in %s()"
 msgstr "percorso encoding troppo lungo"
@@ -383,14 +385,11 @@ msgstr "famiglia CID '%s' non inclusa nel dispositivo PostScript"
 msgid "family '%s' not included in postscript() device"
 msgstr "famiglia '%s' non inclusa nel dispositivo PostScript"
 
-#: devPS.c:4306
-#, c-format
-msgid "unknown encoding '%s' in 'mbcsToSbcs'"
-msgstr ""
-
 #: devPS.c:4316
 #, c-format
-msgid "conversion failure on '%s' in 'mbcsToSbcs': dot substituted for <%02x>"
+msgid ""
+"conversion failure on '%s' in 'mbcsToSbcs()' function: dot substituted for <"
+"%02x>"
 msgstr ""
 
 #: devPS.c:4394
@@ -405,7 +404,7 @@ msgstr ""
 
 #: devPS.c:4590
 #, fuzzy
-msgid "ran out of colors in xfig()"
+msgid "ran out of colors in 'xfig()' function"
 msgstr "usati tutti i colori in xfig()"
 
 #: devPS.c:4619
@@ -475,9 +474,15 @@ msgid "failed to record device encoding; font not added"
 msgstr ""
 "Registrazione encoding dispositivo non riuscita; il font non verrà aggiunto"
 
-#: devPS.c:5892
-msgid "increasing the PDF version to 1.2"
+#: devPS.c:5892 devPS.c:6294 devPS.c:6931
+#, c-format
+msgid "increasing the PDF version to %s"
 msgstr ""
+
+#: devPS.c:5906
+#, fuzzy, c-format
+msgid "encoding path is too long in '%s' function"
+msgstr "percorso encoding troppo lungo"
 
 #: devPS.c:5922
 msgid "failed to load default encoding"
@@ -517,10 +522,6 @@ msgstr "colore foreground/background non valido (pdf)"
 msgid "invalid 'alpha' value in PDF"
 msgstr "valore alpha non valido in PDF"
 
-#: devPS.c:6294
-msgid "increasing the PDF version to 1.4"
-msgstr ""
-
 #: devPS.c:6345 devPS.c:6392
 msgid "unknown 'colormodel', using 'srgb'"
 msgstr ""
@@ -534,10 +535,6 @@ msgstr "caricamento file encoding fallito"
 #, fuzzy
 msgid "corrupt encodings in PDF device"
 msgstr "Encoding danneggiato nel dispositivo PDF"
-
-#: devPS.c:6931
-msgid "increasing the PDF version to 1.3"
-msgstr ""
 
 #: devPS.c:7056
 #, fuzzy, c-format
@@ -567,24 +564,18 @@ msgstr "Impossibile caricare o trovare il font PDF"
 msgid "failed to find or load PDF CID font"
 msgstr "Impossibile caricare o trovare il font PDF CID"
 
-#: devPS.c:8220 devPS.c:8224 devPS.c:8384 devPS.c:8388
-#, c-format
-msgid "invalid 'family' parameter in %s"
-msgstr "parametro 'family' non valido in %s"
-
-#: devPS.c:8242 devPS.c:8400
-#, c-format
-msgid "invalid 'fonts' parameter in %s"
+#: devPS.c:8220 devPS.c:8224 devPS.c:8242 devPS.c:8384 devPS.c:8388
+#: devPS.c:8400
+#, fuzzy, c-format
+msgid "invalid '%s' parameter in '%s'"
 msgstr "parametro 'fonts' non valido in %s"
 
-#: devPS.c:8248 devPS.c:8410 devPS.c:8413 devWindows.c:3640 devWindows.c:3644
-#: devWindows.c:3652 devWindows.c:3663 devWindows.c:3669 devWindows.c:3676
-#: devWindows.c:3683 devWindows.c:3687
+#: devPS.c:8261 devPS.c:8328
 #, fuzzy, c-format
-msgid "invalid value of '%s'"
-msgstr "valore di 'bg' non valido in devWindows"
+msgid "unable to start '%s' function"
+msgstr "impossibile aprire dispositivo pdf"
 
-#: devPS.c:8261 devPS.c:8328 devPS.c:8427 devPicTeX.c:741 devWindows.c:3728
+#: devPS.c:8427 devPicTeX.c:741 devWindows.c:3728
 #, fuzzy, c-format
 msgid "unable to start %s() device"
 msgstr "impossibile aprire dispositivo pdf"
@@ -752,7 +743,7 @@ msgstr "l'opzione 'windowsTimeouts' dovrebbe essere un intero"
 
 #: devWindows.c:3412
 #, fuzzy
-msgid "invalid device number in 'savePlot'"
+msgid "invalid device number in 'savePlot()' function"
 msgstr "numero dispositivo non valido in savePlot"
 
 #: devWindows.c:3414
@@ -762,13 +753,13 @@ msgstr "dispositivo non valido in savePlot"
 
 #: devWindows.c:3417
 #, fuzzy
-msgid "invalid filename argument in 'savePlot'"
+msgid "invalid filename argument in 'savePlot()' function"
 msgstr "nome file non valido in savePlot"
 
 #: devWindows.c:3422
 #, fuzzy
-msgid "invalid type argument in 'savePlot'"
-msgstr "argomento type non valido in savePlot"
+msgid "invalid type argument in 'savePlot()' function"
+msgstr "nome file non valido in savePlot"
 
 #: devWindows.c:3449
 msgid "unknown type in savePlot"
@@ -814,6 +805,29 @@ msgstr ""
 #, fuzzy, c-format
 msgid "invalid '%s' argument"
 msgstr "argomento stringa non valido"
+
+#, fuzzy
+#~ msgid "invalid string in '%s'function"
+#~ msgstr "argomento stringa non valido"
+
+#, fuzzy
+#~ msgid "invalid string in '%s'"
+#~ msgstr "argomento stringa non valido"
+
+#, fuzzy
+#~ msgid "invalid type argument in 'savePlot'"
+#~ msgstr "argomento type non valido in savePlot"
+
+#, fuzzy
+#~ msgid "unable to start %s' function"
+#~ msgstr "impossibile aprire dispositivo pdf"
+
+#~ msgid "invalid 'family' parameter in %s"
+#~ msgstr "parametro 'family' non valido in %s"
+
+#, fuzzy
+#~ msgid "invalid value of '%s'"
+#~ msgstr "valore di 'bg' non valido in devWindows"
 
 #~ msgid "Impossible to load Rbitmap.dll"
 #~ msgstr "Impossibile caricare Rbitmap.dll"

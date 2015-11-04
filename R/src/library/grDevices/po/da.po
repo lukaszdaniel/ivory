@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 23:11+0200\n"
+"POT-Creation-Date: 2015-11-04 22:28+0100\n"
 "PO-Revision-Date: 2011-11-29 09:07+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,7 +88,9 @@ msgstr "ugyldigt 'fil'-argument"
 msgid "invalid gray level, must be in [0,1]."
 msgstr ""
 
-#: colors.c:549
+#: colors.c:549 devPS.c:8248 devPS.c:8410 devPS.c:8413 devWindows.c:3640
+#: devWindows.c:3644 devWindows.c:3652 devWindows.c:3663 devWindows.c:3669
+#: devWindows.c:3676 devWindows.c:3683 devWindows.c:3687
 #, fuzzy, c-format
 msgid "invalid '%s' value"
 msgstr "ugyldigt 'fil'-argument"
@@ -162,8 +164,8 @@ msgstr "mødte ukendt AFM-entitet"
 
 #: devPS.c:739 devPS.c:742 devPS.c:4426 devPS.c:7917 devPicTeX.c:485
 #: devPicTeX.c:487
-#, c-format
-msgid "invalid string in '%s'"
+#, fuzzy, c-format
+msgid "invalid string in '%s' function"
 msgstr "ugyldig streng i '%s'"
 
 #: devPS.c:773
@@ -171,10 +173,10 @@ msgstr "ugyldig streng i '%s'"
 msgid "font width unknown for character 0x%x"
 msgstr "skriftbredde ukendt for tegn 0x%x"
 
-#: devPS.c:831
-#, c-format
-msgid "unknown encoding '%s' in 'PostScriptMetricInfo'"
-msgstr "ukendt kodning '%s' i 'PostScriptMetricInfo'"
+#: devPS.c:831 devPS.c:4306
+#, fuzzy, c-format
+msgid "unknown encoding '%s' in '%s' function"
+msgstr "ukendt kodning '%s' i 'mbcsToSbcs'"
 
 #: devPS.c:847 devPS.c:858
 #, c-format
@@ -187,17 +189,18 @@ msgid "font metrics unknown for character 0x%x"
 msgstr "måleenhed for skrifttype er ukendt for tegn 0x%x"
 
 #: devPS.c:880
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"invalid character (%04x) sent to 'PostScriptCIDMetricInfo' in a single-byte "
-"locale"
+"invalid character (%04x) sent to 'PostScriptCIDMetricInfo()' function in a "
+"single-byte locale"
 msgstr ""
 "ugyldigt tegn (%04x) sendt til PostScriptCIDMetricInfo i en enkelt-byte "
 "lokalitet"
 
 #: devPS.c:888
+#, fuzzy
 msgid ""
-"invalid character sent to 'PostScriptCIDMetricInfo' in a single-byte locale"
+"invalid character sent to 'PostScriptCIDMetricInfo()' in a single-byte locale"
 msgstr ""
 "ugyldigt tegn sendt til PostScriptCIDMetricInfo i en enkelt-byte lokalitet"
 
@@ -312,7 +315,7 @@ msgstr "filnavn er for langt i %s()"
 msgid "memory allocation problem in %s()"
 msgstr "allokeringsproblem for hukommelsen i %s()"
 
-#: devPS.c:3125 devPS.c:5906
+#: devPS.c:3125
 #, c-format
 msgid "encoding path is too long in %s()"
 msgstr "kodningssti er for lang i %s()"
@@ -393,14 +396,11 @@ msgstr "CID-familie '%s' er ikke inkluderet i PostScript-enhed"
 msgid "family '%s' not included in postscript() device"
 msgstr "familie '%s' er ikke inkluderet i PostScript-enhed"
 
-#: devPS.c:4306
-#, c-format
-msgid "unknown encoding '%s' in 'mbcsToSbcs'"
-msgstr "ukendt kodning '%s' i 'mbcsToSbcs'"
-
 #: devPS.c:4316
-#, c-format
-msgid "conversion failure on '%s' in 'mbcsToSbcs': dot substituted for <%02x>"
+#, fuzzy, c-format
+msgid ""
+"conversion failure on '%s' in 'mbcsToSbcs()' function: dot substituted for <"
+"%02x>"
 msgstr "konverteringsfejl på '%s' i 'mbcsToSbcs': punktum erstattet for <%02x>"
 
 #: devPS.c:4394
@@ -415,7 +415,7 @@ msgstr "fejlede i tekstomdannelse til kodning '%s'"
 
 #: devPS.c:4590
 #, fuzzy
-msgid "ran out of colors in xfig()"
+msgid "ran out of colors in 'xfig()' function"
 msgstr "løb ud af farver i xfig()"
 
 #: devPS.c:4619
@@ -487,9 +487,15 @@ msgstr "Ødelagte indlæste kodninger;  skrift ikke tilføjet"
 msgid "failed to record device encoding; font not added"
 msgstr "Kunne ikke optage enhedskodning: skrifttype ikke tilføjet"
 
-#: devPS.c:5892
-msgid "increasing the PDF version to 1.2"
+#: devPS.c:5892 devPS.c:6294 devPS.c:6931
+#, fuzzy, c-format
+msgid "increasing the PDF version to %s"
 msgstr "øger PDF-versionen til 1.2"
+
+#: devPS.c:5906
+#, fuzzy, c-format
+msgid "encoding path is too long in '%s' function"
+msgstr "kodningssti er for lang i %s()"
 
 #: devPS.c:5922
 msgid "failed to load default encoding"
@@ -531,10 +537,6 @@ msgstr "ugyldig forgrund- eller baggrundsfarve (pdf)"
 msgid "invalid 'alpha' value in PDF"
 msgstr "Ugyldig alfaværdi i PDF"
 
-#: devPS.c:6294
-msgid "increasing the PDF version to 1.4"
-msgstr "øger PDF-versionen til 1.4"
-
 #: devPS.c:6345 devPS.c:6392
 msgid "unknown 'colormodel', using 'srgb'"
 msgstr "ukendt 'colormodel', bruger 'srgb'"
@@ -548,10 +550,6 @@ msgstr "Kunne ikke indlæse sRGB-farverumsfil"
 #, fuzzy
 msgid "corrupt encodings in PDF device"
 msgstr "Ødelagte kodninger i PDF-enhed"
-
-#: devPS.c:6931
-msgid "increasing the PDF version to 1.3"
-msgstr "øger PDF-versionen til 1.3"
 
 #: devPS.c:7056
 #, fuzzy, c-format
@@ -581,25 +579,20 @@ msgstr "Kunne ikke finde eller indlæse PDF-skrift"
 msgid "failed to find or load PDF CID font"
 msgstr "Kunne ikke finde eller indlæse PDF CID-skrift"
 
-#: devPS.c:8220 devPS.c:8224 devPS.c:8384 devPS.c:8388
-#, c-format
-msgid "invalid 'family' parameter in %s"
-msgstr "ugyldigt 'family'-parameter i %s"
-
-#: devPS.c:8242 devPS.c:8400
-#, c-format
-msgid "invalid 'fonts' parameter in %s"
+#: devPS.c:8220 devPS.c:8224 devPS.c:8242 devPS.c:8384 devPS.c:8388
+#: devPS.c:8400
+#, fuzzy, c-format
+msgid "invalid '%s' parameter in '%s'"
 msgstr "ugyldigt 'fonts'-parameter i %s"
 
-#: devPS.c:8248 devPS.c:8410 devPS.c:8413 devWindows.c:3640 devWindows.c:3644
-#: devWindows.c:3652 devWindows.c:3663 devWindows.c:3669 devWindows.c:3676
-#: devWindows.c:3683 devWindows.c:3687
-#, c-format
-msgid "invalid value of '%s'"
-msgstr "ugyldig værdi for '%s'"
+# 85%
+#: devPS.c:8261 devPS.c:8328
+#, fuzzy, c-format
+msgid "unable to start '%s' function"
+msgstr "kan ikke starte %s()-enhed"
 
 # 85%
-#: devPS.c:8261 devPS.c:8328 devPS.c:8427 devPicTeX.c:741 devWindows.c:3728
+#: devPS.c:8427 devPicTeX.c:741 devWindows.c:3728
 #, c-format
 msgid "unable to start %s() device"
 msgstr "kan ikke starte %s()-enhed"
@@ -766,7 +759,8 @@ msgid "option 'windowsTimeouts' should be integer"
 msgstr "tilvalg 'windows Timeouts' skal være et heltal"
 
 #: devWindows.c:3412
-msgid "invalid device number in 'savePlot'"
+#, fuzzy
+msgid "invalid device number in 'savePlot()' function"
 msgstr "ugyldigt enhedstal i 'savePlot'"
 
 #: devWindows.c:3414
@@ -775,12 +769,13 @@ msgstr "ugyldig enhed i 'savePlot'"
 
 #: devWindows.c:3417
 #, fuzzy
-msgid "invalid filename argument in 'savePlot'"
+msgid "invalid filename argument in 'savePlot()' function"
 msgstr "ugyldigt filnavnsargument i savePlot"
 
 #: devWindows.c:3422
-msgid "invalid type argument in 'savePlot'"
-msgstr "ugyldigt typeargument i 'savePlot'"
+#, fuzzy
+msgid "invalid type argument in 'savePlot()' function"
+msgstr "ugyldigt filnavnsargument i savePlot"
 
 #: devWindows.c:3449
 msgid "unknown type in savePlot"
@@ -826,6 +821,36 @@ msgstr ""
 #, fuzzy, c-format
 msgid "invalid '%s' argument"
 msgstr "ugyldigt 'fil'-argument"
+
+#, fuzzy
+#~ msgid "invalid string in '%s'function"
+#~ msgstr "ugyldig streng i '%s'"
+
+#~ msgid "invalid string in '%s'"
+#~ msgstr "ugyldig streng i '%s'"
+
+#~ msgid "invalid type argument in 'savePlot'"
+#~ msgstr "ugyldigt typeargument i 'savePlot'"
+
+#~ msgid "unknown encoding '%s' in 'PostScriptMetricInfo'"
+#~ msgstr "ukendt kodning '%s' i 'PostScriptMetricInfo'"
+
+# 85%
+#, fuzzy
+#~ msgid "unable to start %s' function"
+#~ msgstr "kan ikke starte %s()-enhed"
+
+#~ msgid "increasing the PDF version to 1.4"
+#~ msgstr "øger PDF-versionen til 1.4"
+
+#~ msgid "increasing the PDF version to 1.3"
+#~ msgstr "øger PDF-versionen til 1.3"
+
+#~ msgid "invalid 'family' parameter in %s"
+#~ msgstr "ugyldigt 'family'-parameter i %s"
+
+#~ msgid "invalid value of '%s'"
+#~ msgstr "ugyldig værdi for '%s'"
 
 #~ msgid "Impossible to load Rbitmap.dll"
 #~ msgstr "Umuligt at indlæse Rbitmap.dll"

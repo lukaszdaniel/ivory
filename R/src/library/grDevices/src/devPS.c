@@ -736,10 +736,10 @@ static double
 		    sum += wx;
 		}
 	    else
-		warning(_("invalid string in '%s'"), "PostScriptStringWidth");
+		warning(_("invalid string in '%s' function"), "PostScriptStringWidth()");
 	    return 0.001 * sum;
 	} else {
-	    warning(_("invalid string in '%s'"), "PostScriptStringWidth");
+	    warning(_("invalid string in '%s' function"), "PostScriptStringWidth()");
 	    return 0.0;
 	}
     } else
@@ -828,8 +828,8 @@ PostScriptMetricInfo(int c, double *ascent, double *descent, double *width,
 	unsigned short w[2];
 
 	if ((void*)-1 == (cd = Riconv_open(encoding, UCS2ENC)))
-	    error(_("unknown encoding '%s' in 'PostScriptMetricInfo'"),
-		  encoding);
+	    error(_("unknown encoding '%s' in '%s' function"),
+		  encoding, "PostScriptMetricInfo()");
 
 	/* Here we use terminated strings, but could use one char */
 	w[0] = (unsigned short) c; w[1] = 0;
@@ -877,7 +877,7 @@ PostScriptCIDMetricInfo(int c, double *ascent, double *descent, double *width)
        cope sensibly. */
     if(!mbcslocale && c > 0) {
 	if (c > 255)
-	    error(_("invalid character (%04x) sent to 'PostScriptCIDMetricInfo' in a single-byte locale"),
+	    error(_("invalid character (%04x) sent to 'PostScriptCIDMetricInfo()' function in a single-byte locale"),
 		  c);
 	else {
 	    /* convert to UCS-2 to use wcwidth. */
@@ -885,7 +885,7 @@ PostScriptCIDMetricInfo(int c, double *ascent, double *descent, double *width)
 	    ucs2_t out;
 	    str[0] = (char) c;
 	    if(mbcsToUcs2(str, &out, 1, CE_NATIVE) == (size_t)-1)
-		error(_("invalid character sent to 'PostScriptCIDMetricInfo' in a single-byte locale"));
+		error(_("invalid character sent to 'PostScriptCIDMetricInfo()' in a single-byte locale"));
 	    c = out;
 	}
     }
@@ -4303,7 +4303,7 @@ static void mbcsToSbcs(const char *in, char *out, const char *encoding,
 
     if ((void*)-1 ==
 	(cd = Riconv_open(encoding, (enc == CE_UTF8) ? "UTF-8" : "")))
-	error(_("unknown encoding '%s' in 'mbcsToSbcs'"), encoding);
+	error(_("unknown encoding '%s' in '%s' function"), encoding, "mbcsToSbcs()");
 
     i_buf = (char *) in;
     i_len = strlen(in)+1; /* include terminator */
@@ -4313,7 +4313,7 @@ next_char:
     status = Riconv(cd, &i_buf, &i_len, &o_buf, &o_len);
     /* libiconv 1.13 gives EINVAL on \xe0 in UTF-8 (as used in fBasics) */
     if(status == (size_t) -1 && (errno == EILSEQ || errno == EINVAL)) {
-	warning(_("conversion failure on '%s' in 'mbcsToSbcs': dot substituted for <%02x>"),
+	warning(_("conversion failure on '%s' in 'mbcsToSbcs()' function: dot substituted for <%02x>"),
 		in, (unsigned char) *i_buf),
 	*o_buf++ = '.'; i_buf++; o_len--; i_len--;
 	if(i_len > 0) goto next_char;
@@ -4321,7 +4321,7 @@ next_char:
 
     Riconv_close(cd);
     if (status == (size_t)-1)  /* internal error? */
-	error("conversion failure from %s to %s on '%s' in 'mbcsToSbcs'",
+	error("conversion failure from %s to %s on '%s' in 'mbcsToSbcs()' function",
 	      (enc == CE_UTF8) ? "UTF-8" : "native", encoding, in);
 }
 
@@ -4423,7 +4423,7 @@ static void PS_Text0(double x, double y, const char *str, int enc,
 	    }
 	    return;
 	} else {
-	    warning(_("invalid string in '%s'"), "PS_Text");
+	    warning(_("invalid string in '%s' function"), "PS_Text()");
 	    return;
 	}
     }
@@ -4587,7 +4587,7 @@ static int XF_SetColor(int color, XFigDesc *pd)
     for (i = 0; i < pd->nXFigColors; i++)
 	if(color == pd->XFigColors[i]) return i;
     if(pd->nXFigColors == 534)
-	error(_("ran out of colors in xfig()"));
+	error(_("ran out of colors in 'xfig()' function"));
     /* new colour */
     fprintf(pd->psfp, "0 %d #%02x%02x%02x\n", pd->nXFigColors,
 	    R_RED(color), R_GREEN(color), R_BLUE(color));
@@ -5889,7 +5889,7 @@ PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
     pd->useCompression = useCompression;
     if(useCompression && pd->versionMajor == 1 && pd->versionMinor < 2) {
 	pd->versionMinor = 2;
-	warning(_("increasing the PDF version to 1.2"));
+	warning(_("increasing the PDF version to %s"), "1.2");
     }
 
     pd->width = width;
@@ -5903,7 +5903,7 @@ PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
     if(strlen(encoding) > PATH_MAX - 1) {
 	PDFcleanup(3, pd);
 	free(dd);
-	error(_("encoding path is too long in %s()"), "pdf");
+	error(_("encoding path is too long in '%s' function"), "pdf()");
     }
     /*
      * Load the default encoding AS THE FIRST ENCODING FOR THIS DEVICE.
@@ -6291,7 +6291,7 @@ static int fillAlphaIndex(int alpha, PDFDesc *pd) {
 static void alphaVersion(PDFDesc *pd) {
     if(pd->versionMajor == 1 && pd->versionMinor < 4) {
 	pd->versionMinor  = 4;
-	warning(_("increasing the PDF version to 1.4"));
+	warning(_("increasing the PDF version to %s"), "1.4");
     }
     pd->usedAlpha = TRUE;
 }
@@ -6928,7 +6928,7 @@ static void PDF_endfile(PDFDesc *pd)
 	cidfontlist fontlist = pd->cidfonts;
 	if(pd->versionMajor == 1 && pd->versionMinor < 3) {
 	    pd->versionMinor  = 3;
-	    warning(_("increasing the PDF version to 1.3"));
+	    warning(_("increasing the PDF version to %s"), "1.3");
 	}
 	while (fontlist) {
 	    for (i = 0; i < 4; i++) {
@@ -7914,7 +7914,7 @@ static void PDF_Text0(double x, double y, const char *str, int enc,
 	    }
 	    return;
 	} else {
-	    warning(_("invalid string in '%s'"), "PDF_Text");
+	    warning(_("invalid string in '%s' function"), "PDF_Text()");
 	    return;
 	}
     }
@@ -8217,11 +8217,11 @@ SEXP PostScript(SEXP args)
     if(length(fam) == 1)
 	family = CHAR(asChar(fam));
     else if(length(fam) == 5) {
-	if(!isString(fam)) error(_("invalid 'family' parameter in %s"), call);
+	if(!isString(fam)) error(_("invalid '%s' parameter in '%s'"), "family", call);
 	family = "User";
 	for(i = 0; i < 5; i++) afms[i] = CHAR(STRING_ELT(fam, i));
     } else
-	error(_("invalid 'family' parameter in %s"), call);
+	error(_("invalid '%s' parameter in '%s'"), "family", call);
 
     encoding = CHAR(asChar(CAR(args)));    args = CDR(args);
     bg = CHAR(asChar(CAR(args)));    args = CDR(args);
@@ -8239,13 +8239,13 @@ SEXP PostScript(SEXP args)
     title = translateChar(asChar(CAR(args)));  args = CDR(args);
     fonts = CAR(args);		      args = CDR(args);
     if (!isNull(fonts) && !isString(fonts))
-	error(_("invalid 'fonts' parameter in %s"), call);
+	error(_("invalid '%s' parameter in '%s'"), "fonts", call);
     colormodel = CHAR(asChar(CAR(args)));  args = CDR(args);
     useKern = asLogical(CAR(args));   args = CDR(args);
     if (useKern == NA_LOGICAL) useKern = 1;
     fillOddEven = asLogical(CAR(args));
     if (fillOddEven == NA_LOGICAL)
-	error(_("invalid value of '%s'"), "fillOddEven");
+	error(_("invalid '%s' value"), "fillOddEven");
 
     R_GE_checkVersionOrDie(R_GE_version);
     R_CheckDeviceAvailable();
@@ -8258,7 +8258,7 @@ SEXP PostScript(SEXP args)
 			   pagecentre, printit, cmd, title, fonts,
 			   colormodel, useKern, fillOddEven)) {
 	    /* we no longer get here: error is thrown in PSDeviceDriver */
-	    error(_("unable to start %s() device"), "postscript");
+	    error(_("unable to start '%s' function"), "postscript()");
 	}
 	gdd = GEcreateDevDesc(dev);
 	GEaddDevice2f(gdd, "postscript", file);
@@ -8325,7 +8325,7 @@ SEXP XFig(SEXP args)
 			     (double) horizontal, ps, onefile, pagecentre, defaultfont, textspecial,
 			     encoding)) {
 	    /* we no longer get here: error is thrown in XFigDeviceDriver */
-	    error(_("unable to start %s() device"), "xfig");
+	    error(_("unable to start '%s' function"), "xfig()");
 	}
 	gdd = GEcreateDevDesc(dev);
 	GEaddDevice2f(gdd, "xfig", file);
@@ -8381,11 +8381,11 @@ SEXP PDF(SEXP args)
     if(length(fam) == 1)
 	family = CHAR(asChar(fam));
     else if(length(fam) == 5) {
-	if(!isString(fam)) error(_("invalid 'family' parameter in %s"), call);
+	if(!isString(fam)) error(_("invalid '%s' parameter in '%s'"), "family", call);
 	family = "User";
 	for(i = 0; i < 5; i++) afms[i] = CHAR(STRING_ELT(fam, i));
     } else
-	error(_("invalid 'family' parameter in %s"), call);
+	error(_("invalid '%s' parameter in '%s'"), "family", call);
     encoding = CHAR(asChar(CAR(args)));  args = CDR(args);
     bg = CHAR(asChar(CAR(args)));    args = CDR(args);
     fg = CHAR(asChar(CAR(args)));    args = CDR(args);
@@ -8397,7 +8397,7 @@ SEXP PDF(SEXP args)
     title = translateChar(asChar(CAR(args))); args = CDR(args);
     fonts = CAR(args); args = CDR(args);
     if (!isNull(fonts) && !isString(fonts))
-	error(_("invalid 'fonts' parameter in %s"), call);
+	error(_("invalid '%s' parameter in '%s'"), "fonts", call);
     major = asInteger(CAR(args)); args = CDR(args);
     minor = asInteger(CAR(args)); args = CDR(args);
     colormodel = CHAR(asChar(CAR(args))); args = CDR(args);
@@ -8407,10 +8407,10 @@ SEXP PDF(SEXP args)
     if (useKern == NA_LOGICAL) useKern = 1;
     fillOddEven = asLogical(CAR(args)); args = CDR(args);
     if (fillOddEven == NA_LOGICAL)
-	error(_("invalid value of '%s'"), "fillOddEven");
+	error(_("invalid '%s' value"), "fillOddEven");
     useCompression = asLogical(CAR(args)); args = CDR(args);
     if (useCompression == NA_LOGICAL)
-	error(_("invalid value of '%s'"), "useCompression");
+	error(_("invalid '%s' value"), "useCompression");
 
     R_GE_checkVersionOrDie(R_GE_version);
     R_CheckDeviceAvailable();

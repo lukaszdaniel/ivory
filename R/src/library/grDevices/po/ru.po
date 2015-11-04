@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 23:11+0200\n"
+"POT-Creation-Date: 2015-11-04 22:28+0100\n"
 "PO-Revision-Date: 2015-01-17 15:07+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -93,7 +93,9 @@ msgstr "неправильный аргумент 'file'"
 msgid "invalid gray level, must be in [0,1]."
 msgstr ""
 
-#: colors.c:549
+#: colors.c:549 devPS.c:8248 devPS.c:8410 devPS.c:8413 devWindows.c:3640
+#: devWindows.c:3644 devWindows.c:3652 devWindows.c:3663 devWindows.c:3669
+#: devWindows.c:3676 devWindows.c:3683 devWindows.c:3687
 #, fuzzy, c-format
 msgid "invalid '%s' value"
 msgstr "неправильный аргумент 'file'"
@@ -166,8 +168,8 @@ msgstr "встречен неизвестный раздел AFM"
 
 #: devPS.c:739 devPS.c:742 devPS.c:4426 devPS.c:7917 devPicTeX.c:485
 #: devPicTeX.c:487
-#, c-format
-msgid "invalid string in '%s'"
+#, fuzzy, c-format
+msgid "invalid string in '%s' function"
 msgstr "неправильная строка в '%s'"
 
 #: devPS.c:773
@@ -175,10 +177,10 @@ msgstr "неправильная строка в '%s'"
 msgid "font width unknown for character 0x%x"
 msgstr "неизвестна ширина символа 0x%x"
 
-#: devPS.c:831
-#, c-format
-msgid "unknown encoding '%s' in 'PostScriptMetricInfo'"
-msgstr "неизвестная кодировка '%s' в 'PostScriptMetricInfo'"
+#: devPS.c:831 devPS.c:4306
+#, fuzzy, c-format
+msgid "unknown encoding '%s' in '%s' function"
+msgstr "неизвестная кодировка '%s' в 'mbcsToSbcs'"
 
 #: devPS.c:847 devPS.c:858
 #, c-format
@@ -191,17 +193,18 @@ msgid "font metrics unknown for character 0x%x"
 msgstr "неизвестны шрифтовые метрики для символа 0x%x"
 
 #: devPS.c:880
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"invalid character (%04x) sent to 'PostScriptCIDMetricInfo' in a single-byte "
-"locale"
+"invalid character (%04x) sent to 'PostScriptCIDMetricInfo()' function in a "
+"single-byte locale"
 msgstr ""
 "неправильный символ (%04x) послан в 'PostScriptCIDMetricInfo' на однобайтной "
 "локали"
 
 #: devPS.c:888
+#, fuzzy
 msgid ""
-"invalid character sent to 'PostScriptCIDMetricInfo' in a single-byte locale"
+"invalid character sent to 'PostScriptCIDMetricInfo()' in a single-byte locale"
 msgstr ""
 "неправильный символ послан в 'PostScriptCIDMetricInfo' на однобайтной локали"
 
@@ -313,7 +316,7 @@ msgstr "слишком длинное имя файла в вызове %s()"
 msgid "memory allocation problem in %s()"
 msgstr "проблема с выделением памяти в %s()"
 
-#: devPS.c:3125 devPS.c:5906
+#: devPS.c:3125
 #, c-format
 msgid "encoding path is too long in %s()"
 msgstr "путь к кодировке слишком длинный в %s()"
@@ -393,14 +396,11 @@ msgstr "CID-семейство '%s' не включено в PostScript-устр
 msgid "family '%s' not included in postscript() device"
 msgstr "семейство '%s' не включено в PostScript-устройство"
 
-#: devPS.c:4306
-#, c-format
-msgid "unknown encoding '%s' in 'mbcsToSbcs'"
-msgstr "неизвестная кодировка '%s' в 'mbcsToSbcs'"
-
 #: devPS.c:4316
-#, c-format
-msgid "conversion failure on '%s' in 'mbcsToSbcs': dot substituted for <%02x>"
+#, fuzzy, c-format
+msgid ""
+"conversion failure on '%s' in 'mbcsToSbcs()' function: dot substituted for <"
+"%02x>"
 msgstr "ошибка конвертации '%s' в 'mbcsToSbcs': точка заменена на <%02x>"
 
 #: devPS.c:4394
@@ -415,7 +415,7 @@ msgstr "не удалась конверсия текста в кодировк�
 
 #: devPS.c:4590
 #, fuzzy
-msgid "ran out of colors in xfig()"
+msgid "ran out of colors in 'xfig()' function"
 msgstr "не хватило цветов в xfig()"
 
 #: devPS.c:4619
@@ -484,9 +484,15 @@ msgstr "Повреждены загруженные кодировки; шриф
 msgid "failed to record device encoding; font not added"
 msgstr "Не могу записать кодировку устройства; шрифт не добавлен"
 
-#: devPS.c:5892
-msgid "increasing the PDF version to 1.2"
+#: devPS.c:5892 devPS.c:6294 devPS.c:6931
+#, fuzzy, c-format
+msgid "increasing the PDF version to %s"
 msgstr "увеличиваю версию PDF до 1.2"
+
+#: devPS.c:5906
+#, fuzzy, c-format
+msgid "encoding path is too long in '%s' function"
+msgstr "путь к кодировке слишком длинный в %s()"
 
 #: devPS.c:5922
 msgid "failed to load default encoding"
@@ -524,10 +530,6 @@ msgstr "неправильный цвет переднего/заднего пл
 msgid "invalid 'alpha' value in PDF"
 msgstr "Неправильное alpha-значение в PDF"
 
-#: devPS.c:6294
-msgid "increasing the PDF version to 1.4"
-msgstr "увеличиваю версию PDF до 1.4"
-
 #: devPS.c:6345 devPS.c:6392
 msgid "unknown 'colormodel', using 'srgb'"
 msgstr "неизвестная 'colormodel', использую 'srgb'"
@@ -541,10 +543,6 @@ msgstr "Не удалось загрузить файл цветового пр�
 #, fuzzy
 msgid "corrupt encodings in PDF device"
 msgstr "Поврежденные кодировки в устройстве PDF"
-
-#: devPS.c:6931
-msgid "increasing the PDF version to 1.3"
-msgstr "увеличиваю версию PDF до 1.3"
 
 #: devPS.c:7056
 #, c-format
@@ -574,24 +572,18 @@ msgstr "Не удалось найти или загрузить шрифт PDF"
 msgid "failed to find or load PDF CID font"
 msgstr "Не удалось найти или загрузить CID-шрифт PDF"
 
-#: devPS.c:8220 devPS.c:8224 devPS.c:8384 devPS.c:8388
-#, c-format
-msgid "invalid 'family' parameter in %s"
-msgstr "неправильный параметр 'family' в %s"
-
-#: devPS.c:8242 devPS.c:8400
-#, c-format
-msgid "invalid 'fonts' parameter in %s"
+#: devPS.c:8220 devPS.c:8224 devPS.c:8242 devPS.c:8384 devPS.c:8388
+#: devPS.c:8400
+#, fuzzy, c-format
+msgid "invalid '%s' parameter in '%s'"
 msgstr "неправильный параметр 'fonts' в %s"
 
-#: devPS.c:8248 devPS.c:8410 devPS.c:8413 devWindows.c:3640 devWindows.c:3644
-#: devWindows.c:3652 devWindows.c:3663 devWindows.c:3669 devWindows.c:3676
-#: devWindows.c:3683 devWindows.c:3687
-#, c-format
-msgid "invalid value of '%s'"
-msgstr "неправильное значение '%s'"
+#: devPS.c:8261 devPS.c:8328
+#, fuzzy, c-format
+msgid "unable to start '%s' function"
+msgstr "не могу запустить устройство %s()"
 
-#: devPS.c:8261 devPS.c:8328 devPS.c:8427 devPicTeX.c:741 devWindows.c:3728
+#: devPS.c:8427 devPicTeX.c:741 devWindows.c:3728
 #, c-format
 msgid "unable to start %s() device"
 msgstr "не могу запустить устройство %s()"
@@ -756,7 +748,8 @@ msgid "option 'windowsTimeouts' should be integer"
 msgstr "опция 'windowsTimeouts' должна быть целым числом"
 
 #: devWindows.c:3412
-msgid "invalid device number in 'savePlot'"
+#, fuzzy
+msgid "invalid device number in 'savePlot()' function"
 msgstr "неправильный номер устройства в 'savePlot'"
 
 #: devWindows.c:3414
@@ -765,12 +758,13 @@ msgstr "неправильное устройство в 'savePlot'"
 
 #: devWindows.c:3417
 #, fuzzy
-msgid "invalid filename argument in 'savePlot'"
+msgid "invalid filename argument in 'savePlot()' function"
 msgstr "неправильный аргумент имени файла в savePlot"
 
 #: devWindows.c:3422
-msgid "invalid type argument in 'savePlot'"
-msgstr "неправильный тип аргумента в 'savePlot'"
+#, fuzzy
+msgid "invalid type argument in 'savePlot()' function"
+msgstr "неправильный аргумент имени файла в savePlot"
 
 #: devWindows.c:3449
 msgid "unknown type in savePlot"
@@ -816,6 +810,35 @@ msgstr ""
 #, fuzzy, c-format
 msgid "invalid '%s' argument"
 msgstr "неправильный аргумент 'file'"
+
+#, fuzzy
+#~ msgid "invalid string in '%s'function"
+#~ msgstr "неправильная строка в '%s'"
+
+#~ msgid "invalid string in '%s'"
+#~ msgstr "неправильная строка в '%s'"
+
+#~ msgid "invalid type argument in 'savePlot'"
+#~ msgstr "неправильный тип аргумента в 'savePlot'"
+
+#~ msgid "unknown encoding '%s' in 'PostScriptMetricInfo'"
+#~ msgstr "неизвестная кодировка '%s' в 'PostScriptMetricInfo'"
+
+#, fuzzy
+#~ msgid "unable to start %s' function"
+#~ msgstr "не могу запустить устройство %s()"
+
+#~ msgid "increasing the PDF version to 1.4"
+#~ msgstr "увеличиваю версию PDF до 1.4"
+
+#~ msgid "increasing the PDF version to 1.3"
+#~ msgstr "увеличиваю версию PDF до 1.3"
+
+#~ msgid "invalid 'family' parameter in %s"
+#~ msgstr "неправильный параметр 'family' в %s"
+
+#~ msgid "invalid value of '%s'"
+#~ msgstr "неправильное значение '%s'"
 
 #~ msgid "Impossible to load Rbitmap.dll"
 #~ msgstr "Невозможно загрузить Rbitmap.dll"

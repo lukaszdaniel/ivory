@@ -20,7 +20,7 @@ bs <- function(x, df = NULL, knots = NULL, degree = 3, intercept = FALSE,
                Boundary.knots = range(x))
 {
     ord <- 1L + (degree <- as.integer(degree))
-    if(ord <= 1) stop(gettextf("'%s' argument must be integer >= 1", "degree"))
+    if(ord <= 1) stop(gettextf("'%s' argument must be integer >= %d", "degree", 1))
     nx <- names(x)
     x <- as.vector(x)
     nax <- is.na(x)
@@ -49,20 +49,20 @@ bs <- function(x, df = NULL, knots = NULL, degree = 3, intercept = FALSE,
     if(any(outside)) {
         warning("some 'x' values beyond boundary knots may cause ill-conditioned bases")
         derivs <- 0:degree
-        scalef <- gamma(1L:ord)# factorials
+        scalef <- gamma(seq_len(ord))# factorials
         basis <- array(0, c(length(x), length(Aknots) - degree - 1L))
 	e <- 1/4 # in theory anything in (0,1); was (implicitly) 0 in R <= 3.2.2
         if(any(ol)) {
 	    ## left pivot inside, i.e., a bit to the right of the boundary knot
 	    k.pivot <- (1-e)*Boundary.knots[1L] + e*Aknots[ord+1]
-            xl <- cbind(1, outer(x[ol] - k.pivot, 1L:degree, "^"))
+            xl <- cbind(1, outer(x[ol] - k.pivot, seq_len(degree), "^"))
             tt <- splineDesign(Aknots, rep(k.pivot, ord), ord, derivs)
             basis[ol, ] <- xl %*% (tt/scalef)
         }
         if(any(or)) {
 	    ## right pivot inside, i.e., a bit to the left of the boundary knot:
 	    k.pivot <- (1-e)*Boundary.knots[2L] + e*Aknots[length(Aknots)-ord]
-            xr <- cbind(1, outer(x[or] - k.pivot, 1L:degree, "^"))
+            xr <- cbind(1, outer(x[or] - k.pivot, seq_len(degree), "^"))
             tt <- splineDesign(Aknots, rep(k.pivot, ord), ord, derivs)
             basis[or, ] <- xr %*% (tt/scalef)
         }
@@ -78,7 +78,7 @@ bs <- function(x, df = NULL, knots = NULL, degree = 3, intercept = FALSE,
         nmat[!nax,  ] <- basis
         basis <- nmat
     }
-    dimnames(basis) <- list(nx, 1L:n.col)
+    dimnames(basis) <- list(nx, seq_len(n.col))
     a <- list(degree = degree, knots = if(is.null(knots)) numeric(0L) else knots,
               Boundary.knots = Boundary.knots, intercept = intercept)
     attributes(basis) <- c(attributes(basis), a)
@@ -145,7 +145,7 @@ ns <- function(x, df = NULL, knots = NULL, intercept = FALSE,
         nmat[!nax, ] <- basis
         basis <- nmat
     }
-    dimnames(basis) <- list(nx, 1L:n.col)
+    dimnames(basis) <- list(nx, seq_len(n.col))
     a <- list(degree = 3L, knots = if(is.null(knots)) numeric() else knots,
               Boundary.knots = Boundary.knots, intercept = intercept)
     attributes(basis) <- c(attributes(basis), a)

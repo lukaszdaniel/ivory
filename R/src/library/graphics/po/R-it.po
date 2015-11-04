@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-04 20:50\n"
+"POT-Creation-Date: 2015-11-04 22:32\n"
 "PO-Revision-Date: 2015-01-17 15:08+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Italian\n"
@@ -107,11 +107,6 @@ msgstr "'figs' deve essere un vettore o una matrice con 4 colonne"
 #: R/screen.R:0
 msgid "'figs' must specify at least one screen"
 msgstr "'figs' deve specificare almeno uno schermo"
-
-#. R/boxplot.R: stop("'formula' missing or incorrect")
-#: R/boxplot.R:0
-msgid "'formula' missing or incorrect"
-msgstr "'formula' mancante o sbagliata"
 
 #. R/cdplot.R: stop("'formula' should specify exactly two variables")
 #. R/spineplot.R: stop("'formula' should specify exactly two variables")
@@ -426,9 +421,10 @@ msgstr "le dimensioni di z non sono length(z)(+1) volte length(y)(+1)"
 msgid "exactly one symbol type must be specified"
 msgstr "esattamente un tipo di symbol deve essere specificato"
 
+#. R/boxplot.R: stop("formula missing or incorrect")
 #. R/stripchart.R: stop("formula missing or incorrect")
 #. R/sunflowerplot.R: stop("formula missing or incorrect")
-#: R/stripchart.R:0 R/sunflowerplot.R:0
+#: R/boxplot.R:0 R/stripchart.R:0 R/sunflowerplot.R:0
 #, fuzzy
 msgid "formula missing or incorrect"
 msgstr "'formula' mancante o sbagliata"
@@ -810,6 +806,9 @@ msgid "argument %s is not made use of"
 msgid_plural "arguments %s are not made use of"
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid "'formula' missing or incorrect"
+#~ msgstr "'formula' mancante o sbagliata"
 
 #, fuzzy
 #~ msgid "extra argument %s will be disregarded"

@@ -2594,7 +2594,7 @@ void GMetricInfo(int c, double *ascent, double *descent, double *width,
 void GMode(int mode, pGEDevDesc dd)
 {
     if (NoDevices())
-	error(_("No graphics device is active"));
+	error(_("no graphics device is active"));
     if(mode != gpptr(dd)->devmode) GEMode(mode, dd); /* dd->dev->mode(mode, dd->dev); */
     gpptr(dd)->newplot = dpptr(dd)->newplot = FALSE;
     gpptr(dd)->devmode = dpptr(dd)->devmode = mode;
@@ -3151,7 +3151,7 @@ void GBox(int which, pGEDevDesc dd)
 		 R_TRANWHITE, gpptr(dd)->col, dd);
 	break;
     default:
-	error(_("invalid argument to GBox"));
+	error(_("invalid argument passed to '%s' function"), "GBox()");
     }
 }
 

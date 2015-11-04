@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 23:12+0200\n"
+"POT-Creation-Date: 2015-11-04 22:32+0100\n"
 "PO-Revision-Date: 2012-02-26 14:21+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: R-core <R-core@R-project.org> \n"
@@ -80,7 +80,7 @@ msgstr " 軸の限界が有限ではありません [GScale(%g,%g,%d, .); log=%d
 msgid "axis style \"%c\" unimplemented"
 msgstr " 軸のスタイル \"%c\" はまだ実装されていません "
 
-#: graphics.c:2209
+#: graphics.c:2209 graphics.c:2597
 #, fuzzy
 msgid "no graphics device is active"
 msgstr " 現在有効なグラフィックデバイスがありません "
@@ -97,10 +97,6 @@ msgstr " グラフィックスの状態が不正です "
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.c:2597
-msgid "No graphics device is active"
-msgstr " 現在有効なグラフィックデバイスがありません "
-
 #: graphics.c:3056
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr " 長さゼロの arrow は角度が不定ですので，スキップされました "
@@ -110,9 +106,10 @@ msgstr " 長さゼロの arrow は角度が不定ですので，スキップさ�
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr " par(\"bty\") = '%c' が不正です：box() は描画されません "
 
-#: graphics.c:3154
-msgid "invalid argument to GBox"
-msgstr " GBox の引数が不正です "
+#: graphics.c:3154 par.c:1121
+#, fuzzy, c-format
+msgid "invalid argument passed to '%s' function"
+msgstr " par（） に不正なパラメータが渡されました "
 
 #: graphics.c:3399
 #, fuzzy
@@ -170,11 +167,6 @@ msgstr " グラフィックスパラメータ\"%s\"はもはやサポートさ�
 #, c-format
 msgid "\"%s\" is not a graphical parameter"
 msgstr " \"%s\"はグラフィックスパラメータではありません "
-
-#: par.c:1121
-#, fuzzy
-msgid "invalid argument passed to 'par()'"
-msgstr " par（） に不正なパラメータが渡されました "
 
 #: par.c:1165
 #, c-format
@@ -308,7 +300,7 @@ msgstr " 不正なプロット構造です "
 
 #: plot.c:1316
 #, fuzzy, c-format
-msgid "'x' and 'y' argument lengths differ in '%s()'"
+msgid "'x' and 'y' argument lengths differ in '%s' function"
 msgstr " %s() において 'x' と 'y' の長さが異なります "
 
 #: plot.c:1327
@@ -450,7 +442,7 @@ msgstr " 星形データが不正です "
 msgid "invalid thermometers data (need 3 or 4 columns)"
 msgstr " thermometers データが不正です（3または4列必要です） "
 
-#: plot.c:3804
+#: plot.c:3804 plot.c:3810
 #, fuzzy, c-format
 msgid "invalid 'thermometers[, %s]'"
 msgstr " thermometers [,%s] が不正です "
@@ -459,11 +451,6 @@ msgstr " thermometers [,%s] が不正です "
 #, fuzzy, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
 msgstr "  thermometers[,%s] が [0,1] 範囲外 ‐ 奇妙に見えるかも知れません "
-
-#: plot.c:3810
-#, fuzzy
-msgid "invalid 'thermometers[, 1:2]'"
-msgstr " thermometers [,1:2] が不正です "
 
 #: plot.c:3849
 #, fuzzy
@@ -522,17 +509,10 @@ msgstr " 軸方向は計算されませんでした "
 msgid "too few parameters"
 msgstr " パラメータが少なすぎます "
 
-#: plot3d.c:1113
-msgid "invalid 'x' limits"
+#: plot3d.c:1113 plot3d.c:1115 plot3d.c:1117
+#, fuzzy, c-format
+msgid "invalid '%s' limits"
 msgstr " 'x' の限界値が不正です "
-
-#: plot3d.c:1115
-msgid "invalid 'y' limits"
-msgstr " 'y' の限界値が不正です "
-
-#: plot3d.c:1117
-msgid "invalid 'z' limits"
-msgstr " 'zlim' の限界値が不正です "
 
 #: plot3d.c:1138 plot3d.c:1140 plot3d.c:1142
 #, fuzzy, c-format
@@ -611,6 +591,26 @@ msgstr ""
 #: stem.c:192
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#, fuzzy
+#~ msgid "invalid argument passed to '%s'function"
+#~ msgstr " par（） に不正なパラメータが渡されました "
+
+#~ msgid "No graphics device is active"
+#~ msgstr " 現在有効なグラフィックデバイスがありません "
+
+#~ msgid "invalid argument to GBox"
+#~ msgstr " GBox の引数が不正です "
+
+#, fuzzy
+#~ msgid "invalid 'thermometers[, 1:2]'"
+#~ msgstr " thermometers [,1:2] が不正です "
+
+#~ msgid "invalid 'y' limits"
+#~ msgstr " 'y' の限界値が不正です "
+
+#~ msgid "invalid 'z' limits"
+#~ msgstr " 'zlim' の限界値が不正です "
 
 #~ msgid "parameter \"j\" in \"mfg\" is out of range"
 #~ msgstr " \"mfg\" の パラメータ \"j\" が範囲外です "

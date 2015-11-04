@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-04 20:50\n"
+"POT-Creation-Date: 2015-11-04 22:32\n"
 "PO-Revision-Date: 2015-01-17 15:09+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -108,11 +108,6 @@ msgstr "'figs'要么是向量，要么是有四条列的矩阵"
 #: R/screen.R:0
 msgid "'figs' must specify at least one screen"
 msgstr "'figs'至少要设定一个屏幕"
-
-#. R/boxplot.R: stop("'formula' missing or incorrect")
-#: R/boxplot.R:0
-msgid "'formula' missing or incorrect"
-msgstr "要么是缺少'formula'，要么是它的设定不对"
 
 #. R/cdplot.R: stop("'formula' should specify exactly two variables")
 #. R/spineplot.R: stop("'formula' should specify exactly two variables")
@@ -425,9 +420,10 @@ msgstr "z的大小应该等于length(x)(-1)乘length(y)(-1)"
 msgid "exactly one symbol type must be specified"
 msgstr "只能设定一个符号种类"
 
+#. R/boxplot.R: stop("formula missing or incorrect")
 #. R/stripchart.R: stop("formula missing or incorrect")
 #. R/sunflowerplot.R: stop("formula missing or incorrect")
-#: R/stripchart.R:0 R/sunflowerplot.R:0
+#: R/boxplot.R:0 R/stripchart.R:0 R/sunflowerplot.R:0
 msgid "formula missing or incorrect"
 msgstr "要么是缺少公式，要么是公式设定不对"
 
@@ -802,6 +798,9 @@ msgstr[0] "boxplot%2$d里没有画离群值(%1$s)"
 msgid "argument %s is not made use of"
 msgid_plural "arguments %s are not made use of"
 msgstr[0] "没有用%s这个参数"
+
+#~ msgid "'formula' missing or incorrect"
+#~ msgstr "要么是缺少'formula'，要么是它的设定不对"
 
 #, fuzzy
 #~ msgid "extra argument %s will be disregarded"

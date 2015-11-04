@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-04 20:50\n"
+"POT-Creation-Date: 2015-11-04 22:32\n"
 "PO-Revision-Date: 2015-01-17 15:08+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -104,11 +104,6 @@ msgstr " 'figs' はベクトルか 4 列の行列でなければなりません 
 #: R/screen.R:0
 msgid "'figs' must specify at least one screen"
 msgstr " 'figs' は少なくとも一つのスクリーンを指定しなければなりません "
-
-#. R/boxplot.R: stop("'formula' missing or incorrect")
-#: R/boxplot.R:0
-msgid "'formula' missing or incorrect"
-msgstr " 'formula' が無いか不正確です "
 
 #. R/cdplot.R: stop("'formula' should specify exactly two variables")
 #. R/spineplot.R: stop("'formula' should specify exactly two variables")
@@ -423,9 +418,10 @@ msgstr " z の次元が length(x)(-1) × length(y)(-1) ではありません "
 msgid "exactly one symbol type must be specified"
 msgstr " 丁度一つのシンボルタイプを指定しなければなりません "
 
+#. R/boxplot.R: stop("formula missing or incorrect")
 #. R/stripchart.R: stop("formula missing or incorrect")
 #. R/sunflowerplot.R: stop("formula missing or incorrect")
-#: R/stripchart.R:0 R/sunflowerplot.R:0
+#: R/boxplot.R:0 R/stripchart.R:0 R/sunflowerplot.R:0
 msgid "formula missing or incorrect"
 msgstr " formulaが無いか不正確です "
 
@@ -808,6 +804,9 @@ msgstr[0] " 外れ値 (%s) は描かれません 箱型図 %d 中では "
 msgid "argument %s is not made use of"
 msgid_plural "arguments %s are not made use of"
 msgstr[0] " 引数 %s は使用されていません "
+
+#~ msgid "'formula' missing or incorrect"
+#~ msgstr " 'formula' が無いか不正確です "
 
 #, fuzzy
 #~ msgid "extra argument %s will be disregarded"
