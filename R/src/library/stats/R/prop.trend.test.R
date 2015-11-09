@@ -26,9 +26,9 @@ prop.trend.test <- function (x, n, score = seq_along(x))
     n <- as.vector(n)
 
     p <- sum(x)/sum(n)
-    a <- anova(lm(freq ~ score, data = list(freq = x/n, score = as.vector(score),
-                                            w = n/p/(1 - p)),
-                  weights = w))
+    w <- n/p/(1 - p) # <- workaround 'codetools' inability to see the 'weights' in 'data':
+    a <- anova(lm(freq ~ score, data = list(freq = x/n, score = as.vector(score)),
+		  weights = w))
     chisq <- a["score", "Sum Sq"]
     names(chisq) <- gettext("X-squared", domain = "R-stats")
     DF <- 1
