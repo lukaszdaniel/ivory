@@ -2816,7 +2816,7 @@ rTweedie <- function(mu,p=1.5,phi=1) {
 
   ## create summation index...
 
-  lab <- rep(seq_leb(length(N)),N)
+  lab <- rep(seq_len(length(N)),N)
 
   ## sum up each gamma sharing a label. 0 deviate if label does not occur
   o <- .C(C_psum,y=as.double(rep(0,n.sim)),as.double(y),as.integer(lab),as.integer(length(lab)))  
