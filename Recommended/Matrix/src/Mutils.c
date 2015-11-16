@@ -653,7 +653,7 @@ SEXP dup_mMatrix_as_geMatrix(SEXP A)
 	MATRIX_VALID_ndense, /* 5  */
 	""};
     SEXP ans, ad = R_NilValue, an = R_NilValue;	/* -Wall */
-    int sz, ctype = Matrix_check_class_etc(A, valid),
+    int sz, ctype = R_check_class_etc(A, valid),
 	nprot = 1;
     enum dense_enum M_type = ddense /* -Wall */;
 
@@ -819,7 +819,7 @@ SEXP dup_mMatrix_as_dgeMatrix2(SEXP A, Rboolean tr_if_vec)
     SEXP ans = PROTECT(NEW_OBJECT(MAKE_CLASS("dgeMatrix"))),
 	ad = R_NilValue , an = R_NilValue;	/* -Wall */
     static const char *valid[] = {"_NOT_A_CLASS_", MATRIX_VALID_ddense, ""};
-    int ctype = Matrix_check_class_etc(A, valid),
+    int ctype = R_check_class_etc(A, valid),
 	nprot = 1, sz;
     double *ansx;
 
