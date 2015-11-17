@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Matrix 1.2-3\n"
-"POT-Creation-Date: 2015-07-16 21:44\n"
+"POT-Creation-Date: 2015-11-17 17:53\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -412,6 +412,20 @@ msgstr ""
 #. R/sparseVector.R: stop("'times >= 0' is required")
 
 msgid "'times >= 0' is required"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: stop("'uniDiag=TRUE', but not all diagonal entries are 1")
+
+msgid "'uniDiag=TRUE', but not all diagonal entries are 1"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: warning("'uniDiag=TRUE', not all entries in diagonal coded as 1")
+
+msgid "'uniDiag=TRUE', not all entries in diagonal coded as 1"
 msgstr ""
 
 
@@ -1111,6 +1125,13 @@ msgstr ""
 #. R/Summary.R: gettextf("in Summary(<ANY>, .): %s(<%s>, <%s>,...)\n", .Generic, class(x), class(a[[1]]))
 
 msgid "in Summary(<ANY>, .): %s(<%s>, <%s>,...)"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: gettext("in show(); maybe adjust 'options(max.print= *, width = *)'")
+
+msgid "in show(); maybe adjust 'options(max.print= *, width = *)'"
 msgstr ""
 
 
@@ -1947,6 +1968,27 @@ msgstr ""
 #. R/abIndex.R: stop("sum(<abIndex>) is not yet implemented")
 
 msgid "sum(<abIndex>) is not yet implemented"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: gettext("suppressing columns")
+
+msgid "suppressing columns"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: if (suppCols) "suppressing columns and rows" else "suppressing rows"
+
+msgid "suppressing columns and rows"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: if (suppCols) "suppressing columns and rows" else "suppressing rows"
+
+msgid "suppressing rows"
 msgstr ""
 
 

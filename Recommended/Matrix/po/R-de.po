@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0 / matrix 1.1-2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-06 11:41\n"
+"POT-Creation-Date: 2015-11-17 17:53\n"
 "PO-Revision-Date: 2014-03-28 10:23+0100\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -324,6 +324,16 @@ msgstr ""
 #: R/sparseVector.R:0
 msgid "'times >= 0' is required"
 msgstr "'times >= 0' wird benötigt"
+
+#. R/sparseMatrix.R: stop("'uniDiag=TRUE', but not all diagonal entries are 1")
+#: R/sparseMatrix.R:0
+msgid "'uniDiag=TRUE', but not all diagonal entries are 1"
+msgstr ""
+
+#. R/sparseMatrix.R: warning("'uniDiag=TRUE', not all entries in diagonal coded as 1")
+#: R/sparseMatrix.R:0
+msgid "'uniDiag=TRUE', not all entries in diagonal coded as 1"
+msgstr ""
 
 #. R/CHMfactor.R: stop("'update' must be logical or '+' or '-'; 'C' a matrix, and 'L' a \"CHMfactor\"")
 #: R/CHMfactor.R:0
@@ -891,6 +901,11 @@ msgstr "in Summary(<ANY>, .): %s(<%s>, <%s>, ...)"
 #: R/Summary.R:0
 msgid "in Summary(<ANY>, .): %s(<%s>, <%s>,...)"
 msgstr "in Summary(<ANY>, .): %s(<%s>, <%s>, ...)"
+
+#. R/sparseMatrix.R: gettext("in show(); maybe adjust 'options(max.print= *, width = *)'")
+#: R/sparseMatrix.R:0
+msgid "in show(); maybe adjust 'options(max.print= *, width = *)'"
+msgstr ""
 
 #. R/diagMatrix.R: stop("incompatible matrix dimensions")
 #: R/diagMatrix.R:0
@@ -1541,6 +1556,23 @@ msgstr ""
 #: R/abIndex.R:0
 msgid "sum(<abIndex>) is not yet implemented"
 msgstr "sum(<abIndex>) ist noch nicht implementiert"
+
+#. R/sparseMatrix.R: gettext("suppressing columns")
+#: R/sparseMatrix.R:0
+#, fuzzy
+msgid "suppressing columns"
+msgstr "[[ unterdrücke %d Spaltennamen %s ]]"
+
+#. R/sparseMatrix.R: if (suppCols) "suppressing columns and rows" else "suppressing rows"
+#: R/sparseMatrix.R:0
+#, fuzzy
+msgid "suppressing columns and rows"
+msgstr "[[ unterdrücke %d Spaltennamen %s ]]"
+
+#. R/sparseMatrix.R: if (suppCols) "suppressing columns and rows" else "suppressing rows"
+#: R/sparseMatrix.R:0
+msgid "suppressing rows"
+msgstr ""
 
 #. R/sparseMatrix.R: stop("symmetric matrix must be square")
 #: R/sparseMatrix.R:0

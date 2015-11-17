@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-04 20:49\n"
+"POT-Creation-Date: 2015-11-17 20:33\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1432,14 +1432,14 @@ msgstr "Brak biblioteki DLL aktualnie załadowanej o nazwie lub ścieżce %s"
 msgid "No factors specified"
 msgstr "Nie określono czynników"
 
-#. R/namespace.R: gettextf("No generic function was found corresponding to requested imported methods for function %s from package %s (malformed exports?)",     sQuote(g), sQuote(pkg))
+#. R/namespace.R: gettextf("No generic function %s found corresponding to requested imported methods from package %s when loading %s (malformed exports?)",     sQuote(g), sQuote(pkg), sQuote(from))
 #: R/namespace.R:0
 msgid ""
-"No generic function was found corresponding to requested imported methods "
-"for function %s from package %s (malformed exports?)"
+"No generic function %s found corresponding to requested imported methods "
+"from package %s when loading %s (malformed exports?)"
 msgstr ""
-"Nie znaleziono ogólnej funkcji odpowiadającej zażądanym zaimportowanym "
-"metodom dla funkcji %s z pakietu %s (uszkodzone eksporty?)"
+"Nie znaleziono ogólnej funkcji %s odpowiadającej zażądanym zaimportowanym "
+"metodom z pakietu %s podczas ładowania %s (uszkodzone eksporty?)"
 
 #. R/namespace.R: gettextf("No methods were found in package %s for requests: %s", sQuote(pkg), paste(vars[is.na(match(vars,     allFuns))], collapse = ", "))
 #: R/namespace.R:0
@@ -3459,7 +3459,6 @@ msgstr[0] "zamiana ma %d wiersz, dane mają %d"
 msgstr[1] "zamiana ma %d wiersze, dane mają %d"
 msgstr[2] "zamiana ma %d wierszy, dane mają %d"
 
-#. R/dataframe.R: ngettext(length(row.names), "supplied %d row name for %d rows", "supplied %d row names for %d rows",     domain = "R-base")
 #. R/dataframe.R: ngettext(length(row.names), "supplied %d row name for %d rows", "supplied %d row names for %d rows",     domain = "R-base")
 #: R/dataframe.R:0
 msgid "supplied %d row name for %d rows"

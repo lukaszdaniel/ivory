@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-04 20:49\n"
+"POT-Creation-Date: 2015-11-17 20:33\n"
 "PO-Revision-Date: 2015-01-17 13:32+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -1547,12 +1547,12 @@ msgstr "Сейчас не было загружено DLL с именем или
 msgid "No factors specified"
 msgstr "не определена DLL"
 
-#. R/namespace.R: gettextf("No generic function was found corresponding to requested imported methods for function %s from package %s (malformed exports?)",     sQuote(g), sQuote(pkg))
+#. R/namespace.R: gettextf("No generic function %s found corresponding to requested imported methods from package %s when loading %s (malformed exports?)",     sQuote(g), sQuote(pkg), sQuote(from))
 #: R/namespace.R:0
 #, fuzzy
 msgid ""
-"No generic function was found corresponding to requested imported methods "
-"for function %s from package %s (malformed exports?)"
+"No generic function %s found corresponding to requested imported methods "
+"from package %s when loading %s (malformed exports?)"
 msgstr ""
 "Не найдено общей функции, соответствующей запрошенным методам импорта для "
 "\"%s\" из пакета \"%s\" (испорчен вывод?)"
@@ -3627,7 +3627,6 @@ msgstr[0] "у замены %d строк, у данных -- %d"
 msgstr[1] "у замены %d строк, у данных -- %d"
 msgstr[2] "у замены %d строк, у данных -- %d"
 
-#. R/dataframe.R: ngettext(length(row.names), "supplied %d row name for %d rows", "supplied %d row names for %d rows",     domain = "R-base")
 #. R/dataframe.R: ngettext(length(row.names), "supplied %d row name for %d rows", "supplied %d row names for %d rows",     domain = "R-base")
 #: R/dataframe.R:0
 #, fuzzy

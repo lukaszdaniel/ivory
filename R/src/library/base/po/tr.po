@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-04 20:49+0100\n"
+"POT-Creation-Date: 2015-11-17 17:27+0100\n"
 "PO-Revision-Date: 2011-04-02 18:24+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -593,9 +593,9 @@ msgstr "'%s' gösterilirken sorun oluştu"
 #: src/gnuwin32/extra.c:572 src/gnuwin32/extra.c:597 src/main/agrep.c:132
 #: src/main/agrep.c:136 src/main/agrep.c:774 src/main/agrep.c:779
 #: src/main/apply.c:329 src/main/apply.c:331 src/main/apply.c:334
-#: src/main/array.c:90 src/main/array.c:1264 src/main/array.c:1390
-#: src/main/array.c:1392 src/main/array.c:1393 src/main/array.c:1739
-#: src/main/array.c:1741 src/main/array.c:1743 src/main/attrib.c:189
+#: src/main/array.c:90 src/main/array.c:1264 src/main/array.c:1403
+#: src/main/array.c:1405 src/main/array.c:1406 src/main/array.c:1752
+#: src/main/array.c:1754 src/main/array.c:1756 src/main/attrib.c:189
 #: src/main/builtin.c:89 src/main/builtin.c:98 src/main/builtin.c:117
 #: src/main/builtin.c:119 src/main/builtin.c:150 src/main/builtin.c:561
 #: src/main/builtin.c:577 src/main/builtin.c:764 src/main/builtin.c:766
@@ -659,7 +659,7 @@ msgstr "'%s' gösterilirken sorun oluştu"
 #: src/main/internet.c:209 src/main/internet.c:223 src/main/internet.c:241
 #: src/main/internet.c:254 src/main/internet.c:266 src/main/internet.c:285
 #: src/main/memory.c:3811 src/main/names.c:1305 src/main/names.c:1308
-#: src/main/objects.c:1600 src/main/objects.c:1602 src/main/paste.c:96
+#: src/main/objects.c:1611 src/main/objects.c:1613 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
 #: src/main/paste.c:411 src/main/paste.c:416 src/main/paste.c:421
 #: src/main/paste.c:424 src/main/paste.c:432 src/main/paste.c:437
@@ -1148,8 +1148,8 @@ msgstr "ilk karakter bir vektör olmalı"
 #: src/main/identical.c:76 src/main/identical.c:77 src/main/platform.c:2965
 #: src/main/seq.c:193 src/main/seq.c:340 src/main/seq.c:345 src/main/seq.c:349
 #: src/main/seq.c:390 src/main/seq.c:394 src/main/seq.c:398
-#: src/main/sort.c:1245 src/main/sort.c:1328 src/main/sort.c:1332
-#: src/main/sort.c:1339 src/main/sort.c:1414 src/main/source.c:223
+#: src/main/sort.c:1244 src/main/sort.c:1327 src/main/sort.c:1331
+#: src/main/sort.c:1338 src/main/sort.c:1413 src/main/source.c:223
 #: src/main/summary.c:954 src/main/sysutils.c:250 src/main/util.c:1050
 #: src/main/util.c:1055 src/main/util.c:1062 src/main/util.c:1065
 #: src/main/util.c:2034 src/modules/lapack/Lapack.c:940
@@ -1281,7 +1281,7 @@ msgstr "0 birim uzunluğunda geçersiz argüman 'base'"
 msgid "bad arithmetic function index"
 msgstr "hatalı fonksiyon"
 
-#: src/main/array.c:83 src/main/array.c:1570
+#: src/main/array.c:83 src/main/array.c:1583
 #, fuzzy, c-format
 msgid "'data' argument must be of a vector type, was '%s'"
 msgstr "'data' bir vektörü tipinde olmalıdır"
@@ -1290,14 +1290,14 @@ msgstr "'data' bir vektörü tipinde olmalıdır"
 msgid "non-numeric matrix extent"
 msgstr "sayısal olmayan matris boyutu"
 
-#: src/main/array.c:100 src/main/array.c:108 src/main/array.c:1676
-#: src/main/array.c:1681
+#: src/main/array.c:100 src/main/array.c:108 src/main/array.c:1689
+#: src/main/array.c:1694
 #, fuzzy, c-format
 msgid "invalid '%s' value (too large or NA)"
 msgstr "geçersiz 'nrow' değeri (çok büyük veya NA)"
 
-#: src/main/array.c:102 src/main/array.c:110 src/main/array.c:1678
-#: src/main/array.c:1683
+#: src/main/array.c:102 src/main/array.c:110 src/main/array.c:1691
+#: src/main/array.c:1696
 #, fuzzy, c-format
 msgid "invalid '%s' value (< 0)"
 msgstr "geçersiz 'nrow' değeri (< 0)"
@@ -1332,7 +1332,7 @@ msgstr "veri uzunluğu [%d] sütun sayılarının böleni veya tam böleni deği
 msgid "data length exceeds size of matrix"
 msgstr "veri uzunluğu matris boyutunu aşıyor"
 
-#: src/main/array.c:150 src/main/array.c:1581 src/main/array.c:1690
+#: src/main/array.c:150 src/main/array.c:1594 src/main/array.c:1703
 msgid "too many elements specified"
 msgstr "çok fazla eleman seçildi"
 
@@ -1409,34 +1409,34 @@ msgstr "'perm' de değer sınırlar dışında"
 
 #: src/main/array.c:1344 src/main/connections.c:5484 src/main/debug.c:112
 #: src/main/objects.c:1043 src/main/raw.c:56 src/main/raw.c:336
-#: src/main/sort.c:327 src/main/sort.c:1249 src/main/sort.c:1417
+#: src/main/sort.c:326 src/main/sort.c:1248 src/main/sort.c:1416
 #: src/main/unique.c:670 src/main/unique.c:1445 src/main/unique.c:1517
 #: src/main/util.c:644 src/main/util.c:646
 #, fuzzy, c-format
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr "'resize' DOĞRU yada YANLIŞ olmalı"
 
-#: src/main/array.c:1401
+#: src/main/array.c:1414
 #, fuzzy, c-format
 msgid "'%s' must be numeric"
 msgstr "'x' sayısal olmalı"
 
-#: src/main/array.c:1404
+#: src/main/array.c:1417
 #, fuzzy, c-format
 msgid "'%s' argument is too short"
 msgstr "'file' argüman çok uzun"
 
-#: src/main/array.c:1577
+#: src/main/array.c:1590
 #, fuzzy, c-format
 msgid "'%s' argument cannot be of length 0"
 msgstr "'hadj' bir birim uzunluğunda olmalıdır"
 
-#: src/main/array.c:1686
+#: src/main/array.c:1699
 #, fuzzy, c-format
 msgid "'%s' must have positive length"
 msgstr "'value' pozitif bir değer olmalı"
 
-#: src/main/array.c:1752
+#: src/main/array.c:1765
 #, c-format
 msgid "singular matrix in 'backsolve()'. First zero in diagonal [%d]"
 msgstr ""
@@ -1753,16 +1753,16 @@ msgstr "değiştirilecek öğelerin sayısı değiştirme uzunluğunun bir katı
 msgid "vector size cannot be NA"
 msgstr "vektör boyutu NA olamaz"
 
-#: src/main/builtin.c:50 src/main/builtin.c:58 src/main/sort.c:1324
+#: src/main/builtin.c:50 src/main/builtin.c:58 src/main/sort.c:1323
 msgid "vector size cannot be NA/NaN"
 msgstr "vektör boyutu NA/NaN olamaz"
 
-#: src/main/builtin.c:51 src/main/builtin.c:59 src/main/sort.c:1325
+#: src/main/builtin.c:51 src/main/builtin.c:59 src/main/sort.c:1324
 msgid "vector size cannot be infinite"
 msgstr "vektör boyutu sonsuz olamaz"
 
 #: src/main/builtin.c:52 src/main/builtin.c:60 src/main/builtin.c:941
-#: src/main/sort.c:1326
+#: src/main/sort.c:1325
 msgid "vector size specified is too large"
 msgstr "seçilen vektör boyutu çok büyük"
 
@@ -5863,7 +5863,12 @@ msgstr ""
 "standardGeneric(\"%s\")'e çağrı görünürde genel fonksiyonun gövdesinden "
 "değil "
 
-#: src/main/objects.c:1242
+#: src/main/objects.c:1195
+#, fuzzy, c-format
+msgid "'internal' slot does not name an internal function: %s"
+msgstr "iç fonksiyonlarda \"%s\" yok"
+
+#: src/main/objects.c:1250
 #, c-format
 msgid ""
 "invalid primitive methods code (\"%s\"): should be \"clear\", \"reset\", "
@@ -5872,11 +5877,11 @@ msgstr ""
 "geçersiz basit metod kodu (\"%s\"): \"clear\", \"reset\", \"set\", veya "
 "\"suppress\" olabilir"
 
-#: src/main/objects.c:1250
+#: src/main/objects.c:1258
 msgid "invalid object: must be a primitive function"
 msgstr "geçersiz nesne: bir basit fonksiyon olmalı"
 
-#: src/main/objects.c:1297
+#: src/main/objects.c:1305
 #, c-format
 msgid ""
 "the formal definition of a primitive generic must be a function object (got "
@@ -5885,20 +5890,20 @@ msgstr ""
 "bir basit genelin biçimsel tanımı bir fonksiyon nesnesi olmalı ('%s' tipi "
 "var)"
 
-#: src/main/objects.c:1326
+#: src/main/objects.c:1334
 #, fuzzy, c-format
 msgid "object returned as generic function '%s' does not appear to be one"
 msgstr "genel fonksiyon \"%s\" olarak dönen nesne doğru gözükmüyor"
 
-#: src/main/objects.c:1431
+#: src/main/objects.c:1439
 msgid "invalid primitive operation given for dispatch"
 msgstr "dağıtım için verilen basit operasyon geçersiz"
 
-#: src/main/objects.c:1457 src/main/objects.c:1475
+#: src/main/objects.c:1468 src/main/objects.c:1486
 msgid "dispatch error"
 msgstr "dağıtım hatası"
 
-#: src/main/objects.c:1470
+#: src/main/objects.c:1481
 #, fuzzy, c-format
 msgid ""
 "primitive function '%s' has been set for methods but no generic function "
@@ -5907,35 +5912,35 @@ msgstr ""
 "basit fonksiyon \"%s\" yöntemler için belirlendi ancak genel fonksiyon "
 "verilmedi"
 
-#: src/main/objects.c:1494
+#: src/main/objects.c:1505
 msgid "C level MAKE_CLASS macro called with NULL string pointer"
 msgstr "C seviye MAKE_CLASS makro NULL dize işaretçisiyle çağırıldı"
 
-#: src/main/objects.c:1510
+#: src/main/objects.c:1521
 #, fuzzy
 msgid "'methods' package not yet loaded"
 msgstr "Hershey yazıtipleri yüklenemedi"
 
-#: src/main/objects.c:1520
+#: src/main/objects.c:1531
 #, fuzzy
 msgid "'R_getClassDef(.)' called with NULL string pointer"
 msgstr "R_getClassDef(.) bir NULL dize işaretçisiyle çağırıldı"
 
-#: src/main/objects.c:1565
+#: src/main/objects.c:1576
 msgid "C level NEW macro called with null class definition pointer"
 msgstr "C seviye NEW makro null sınıf tanım işaretçisiyle çağırıldı"
 
-#: src/main/objects.c:1569
+#: src/main/objects.c:1580
 #, c-format
 msgid "trying to generate an object from a virtual class (\"%s\")"
 msgstr "bir sanal sınıf olan (\"%s\")'den bir nesne oluşturulmaya çalışılıyor"
 
-#: src/main/objects.c:1614
+#: src/main/objects.c:1625
 #, fuzzy
 msgid "'R_get_primname()' called on a non-primitive"
 msgstr "basit olmayanda 'R_get_primname' çağırıldı"
 
-#: src/main/objects.c:1650
+#: src/main/objects.c:1661
 #, fuzzy, c-format
 msgid "object of class \"%s\" does not correspond to a valid S3 object"
 msgstr "\"%s\" sınıfının nesnesi geçerli bir S3 nesnesiyle uyuşmuyor"
@@ -7505,51 +7510,51 @@ msgstr ""
 msgid "only atomic vectors can be tested to be sorted"
 msgstr "sadece atomik vektörler sıralanmak için sınanabilir"
 
-#: src/main/sort.c:330 src/main/sort.c:601
+#: src/main/sort.c:329 src/main/sort.c:600
 msgid "only atomic vectors can be sorted"
 msgstr "sadece atomik vektörler sıralanabilir"
 
-#: src/main/sort.c:332 src/main/sort.c:603 src/main/sort.c:1318
+#: src/main/sort.c:331 src/main/sort.c:602 src/main/sort.c:1317
 msgid "raw vectors cannot be sorted"
 msgstr "ham vektörler sıralanamaz"
 
-#: src/main/sort.c:377 src/main/sort.c:394 src/main/sort.c:411
-#: src/main/sort.c:434
+#: src/main/sort.c:376 src/main/sort.c:393 src/main/sort.c:410
+#: src/main/sort.c:433
 msgid "'n >= 2' is required"
 msgstr ""
 
-#: src/main/sort.c:614
+#: src/main/sort.c:613
 msgid "NA or infinite index"
 msgstr ""
 
-#: src/main/sort.c:617
+#: src/main/sort.c:616
 #, fuzzy, c-format
 msgid "index %ld outside bounds"
 msgstr "indis %d sınırlar dışında"
 
-#: src/main/sort.c:622 src/main/sort.c:635
+#: src/main/sort.c:621 src/main/sort.c:634
 msgid "NA index"
 msgstr "NA indis"
 
-#: src/main/sort.c:624 src/main/sort.c:637
+#: src/main/sort.c:623 src/main/sort.c:636
 #, c-format
 msgid "index %d outside bounds"
 msgstr "indis %d sınırlar dışında"
 
-#: src/main/sort.c:1258
+#: src/main/sort.c:1257
 #, c-format
 msgid "argument %d is not a vector"
 msgstr "%d argümanı bir vektör değil"
 
-#: src/main/sort.c:1260
+#: src/main/sort.c:1259
 msgid "argument lengths differ"
 msgstr "argüman uzunlukları farklı"
 
-#: src/main/sort.c:1345
+#: src/main/sort.c:1344
 msgid "invalid ties.method for rank() [should never happen]"
 msgstr "rank() için geçersiz ties.method [gerçekleşmemesi gerekirdi]"
 
-#: src/main/sort.c:1450
+#: src/main/sort.c:1449
 msgid "too large a range of values in 'x'"
 msgstr "'x'de çok geniş değer aralığı"
 
@@ -10350,10 +10355,6 @@ msgstr "X11 mevcut değil"
 #, fuzzy
 #~ msgid "'con' argument is not an object of class \"textConnection\""
 #~ msgstr "'con' bir çıktı textConnection'ı değil"
-
-#, fuzzy
-#~ msgid "there is no .Internal function '%s'"
-#~ msgstr "iç fonksiyonlarda \"%s\" yok"
 
 #, fuzzy
 #~ msgid "'jobu' and 'jobv' arguments must be character strings"

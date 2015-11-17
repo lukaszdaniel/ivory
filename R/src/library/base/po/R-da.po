@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-04 20:49\n"
+"POT-Creation-Date: 2015-11-17 20:33\n"
 "PO-Revision-Date: 2011-11-30 14:20+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1503,11 +1503,11 @@ msgstr "Ingen DLL er aktuelt indlæst med navn eller sti"
 msgid "No factors specified"
 msgstr "ingen DLL angivet"
 
-#. R/namespace.R: gettextf("No generic function was found corresponding to requested imported methods for function %s from package %s (malformed exports?)",     sQuote(g), sQuote(pkg))
+#. R/namespace.R: gettextf("No generic function %s found corresponding to requested imported methods from package %s when loading %s (malformed exports?)",     sQuote(g), sQuote(pkg), sQuote(from))
 #: R/namespace.R:0
 msgid ""
-"No generic function was found corresponding to requested imported methods "
-"for function %s from package %s (malformed exports?)"
+"No generic function %s found corresponding to requested imported methods "
+"from package %s when loading %s (malformed exports?)"
 msgstr ""
 
 #. R/namespace.R: gettextf("No methods were found in package %s for requests: %s", sQuote(pkg), paste(vars[is.na(match(vars,     allFuns))], collapse = ", "))
@@ -3509,7 +3509,6 @@ msgid_plural "replacement has %d rows, data has %d"
 msgstr[0] "erstatning har %d rækker, data har %d"
 msgstr[1] "erstatning har %d rækker, data har %d"
 
-#. R/dataframe.R: ngettext(length(row.names), "supplied %d row name for %d rows", "supplied %d row names for %d rows",     domain = "R-base")
 #. R/dataframe.R: ngettext(length(row.names), "supplied %d row name for %d rows", "supplied %d row names for %d rows",     domain = "R-base")
 #: R/dataframe.R:0
 #, fuzzy

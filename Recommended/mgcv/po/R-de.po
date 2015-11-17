@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.10.0 / mgcv 1.5-5\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-10-18 20:40\n"
+"POT-Creation-Date: 2015-11-17 17:53\n"
 "PO-Revision-Date: 2009-10-08 16:16+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -111,14 +111,6 @@ msgstr ""
 #: R/mgcv.r:0
 msgid "'%s' and '%s' components should have the same length"
 msgstr ""
-
-# R/smooth.r
-#. R/smooth.r: gettextf("'%s' argument has no '%s' attribute", "x", "row")
-#. R/smooth.r: gettextf("'%s' argument has no '%s' attribute", "x", "col")
-#: R/smooth.r:0
-#, fuzzy
-msgid "'%s' argument has no '%s' attribute"
-msgstr "x hat kein Zeilenattribut"
 
 #. R/smooth.r: gettextf("'%s' argument is faulty", "xt")
 #. R/smooth.r: gettextf("'%s' argument is faulty", "xt")
@@ -483,6 +475,7 @@ msgid "1<a<b<2 (strict) required"
 msgstr ""
 
 #. R/smooth.r: stop("A term has fewer unique covariate combinations than specified maximum degrees of freedom")
+#. R/smooth.r: stop("A term has fewer unique covariate combinations than specified maximum degrees of freedom")
 #: R/smooth.r:0
 msgid ""
 "A term has fewer unique covariate combinations than specified maximum "
@@ -791,6 +784,11 @@ msgstr ""
 msgid "Fitted Values"
 msgstr ""
 
+#. R/gam.fit3.r: warning("Fitting terminated with step failure - check results carefully")
+#: R/gam.fit3.r:0
+msgid "Fitting terminated with step failure - check results carefully"
+msgstr ""
+
 #. R/mgcv.r: gettext("Formula:", domain = "R-mgcv")
 #. R/mgcv.r: gettext("Formula:", domain = "R-mgcv")
 #: R/mgcv.r:0
@@ -853,6 +851,11 @@ msgstr "Ungültig angepasste Mittel in leerem Modell"
 #: R/gam.fit3.r:0
 msgid "Invalid linear predictor values in empty model"
 msgstr "Ungültige lineare Prognosewerte in leerem Modell"
+
+#. R/gam.fit3.r: warning("Iteration limit reached without full convergence - check carefully")
+#: R/gam.fit3.r:0
+msgid "Iteration limit reached without full convergence - check carefully"
+msgstr ""
 
 #. R/mgcv.r: stop("Later terms sharing an 'id' can not have more smoothing parameters than the first such term")
 #: R/mgcv.r:0
@@ -1265,16 +1268,14 @@ msgid "Step halved: new penalized deviance = %g"
 msgstr ""
 
 #. R/gam.fit3.r: warning("Step size truncated due to divergence", call. = FALSE)
-#. R/gam.fit4.r: warning("Step size truncated due to divergence", call. = FALSE)
 #. R/mgcv.r: warning("Step size truncated due to divergence", call. = FALSE)
-#: R/gam.fit3.r:0 R/gam.fit4.r:0 R/mgcv.r:0
+#: R/gam.fit3.r:0 R/mgcv.r:0
 msgid "Step size truncated due to divergence"
 msgstr "Schrittweite wurde wegen Divergenz reduziert"
 
 #. R/gam.fit3.r: warning("Step size truncated: out of bounds", call. = FALSE)
-#. R/gam.fit4.r: warning("Step size truncated: out of bounds", call. = FALSE)
 #. R/mgcv.r: warning("Step size truncated: out of bounds", call. = FALSE)
-#: R/gam.fit3.r:0 R/gam.fit4.r:0 R/mgcv.r:0
+#: R/gam.fit3.r:0 R/mgcv.r:0
 msgid "Step size truncated: out of bounds"
 msgstr "Schrittweite verkleinert: Außerhalb der Begrenzung"
 
@@ -1423,6 +1424,8 @@ msgstr "Argument k von s() sollte ganzzahlig sein und wurde gerundet"
 #. R/smooth.r: stop("arguments of smooth not same dimension")
 #. R/smooth.r: stop("arguments of smooth not same dimension")
 #. R/smooth.r: stop("arguments of smooth not same dimension")
+#. R/smooth.r: stop("arguments of smooth not same dimension")
+#. R/smooth.r: stop("arguments of smooth not same dimension")
 #: R/smooth.r:0
 msgid "arguments of smooth not same dimension"
 msgstr "Argumente der Glättung haben nicht die gleiche Dimension"
@@ -1438,11 +1441,17 @@ msgstr ""
 msgid "attempt to use unsuitable marginal smooth class"
 msgstr ""
 
+#. R/bam.r: stop("bam can not discretize with this nesting structure")
+#: R/bam.r:0
+msgid "bam can not discretize with this nesting structure"
+msgstr ""
+
 #. R/smooth.r: warning("basis dimension is larger than number of unique covariates")
 #: R/smooth.r:0
 msgid "basis dimension is larger than number of unique covariates"
 msgstr ""
 
+#. R/smooth.r: warning("basis dimension reset to minimum possible")
 #. R/smooth.r: warning("basis dimension reset to minimum possible")
 #: R/smooth.r:0
 #, fuzzy
@@ -1497,6 +1506,7 @@ msgstr ""
 "Es wurden keine gültigen Startwerte gefunden: Bitte geben Sie einige an"
 
 #. R/bam.r: gettextf("chunk.size < number of coefficients. Reset to %d", chunk.size)
+#. R/bam.r: gettextf("chunk.size < number of coefficients. Reset to %d", chunk.size)
 #: R/bam.r:0
 msgid "chunk.size < number of coefficients. Reset to %d"
 msgstr ""
@@ -1519,6 +1529,7 @@ msgstr "Farbschema nicht erkannt"
 #. R/smooth.r: stop("components of knots relating to a single smooth must be of same length")
 #. R/smooth.r: stop("components of knots relating to a single smooth must be of same length")
 #. R/smooth.r: stop("components of knots relating to a single smooth must be of same length")
+#. R/smooth.r: stop("components of knots relating to a single smooth must be of same length")
 #: R/smooth.r:0
 msgid "components of knots relating to a single smooth must be of same length"
 msgstr ""
@@ -1538,11 +1549,6 @@ msgstr ""
 #. R/sparse.r: stop("cubic spline only deals with 1D data")
 #: R/sparse.r:0
 msgid "cubic spline only deals with 1D data"
-msgstr ""
-
-#. R/bam.r: stop("currently discrete methods do not handle by variables")
-#: R/bam.r:0
-msgid "currently discrete methods do not handle by variables"
 msgstr ""
 
 #. R/smooth.r: stop("data contain regions that are not contained in the knot specification")
@@ -1582,11 +1588,6 @@ msgstr "Dimensionen des angegebenen w sind falsch."
 #. R/bam.r: warning("discrete method does not use parallel cluster - use nthreads instead")
 #: R/bam.r:0
 msgid "discrete method does not use parallel cluster - use nthreads instead"
-msgstr ""
-
-#. R/bam.r: stop("discretization can not handle factor by variables")
-#: R/bam.r:0
-msgid "discretization can not handle factor by variables"
 msgstr ""
 
 #. R/bam.r: stop("discretization can not handle smooth ids")
@@ -1701,6 +1702,12 @@ msgid "fitted rates numerically 0 occurred"
 msgstr ""
 "Es trat der Fall auf, dass die angenäherten Quoten numerisch 0 oder 1 waren"
 
+#. R/smooth.r: stop("fs smooth not suitable for discretisation with more than one metric predictor")
+#: R/smooth.r:0
+msgid ""
+"fs smooth not suitable for discretisation with more than one metric predictor"
+msgstr ""
+
 #. R/smooth.r: stop("fs smooths can only have one factor argument")
 #: R/smooth.r:0
 msgid "fs smooths can only have one factor argument"
@@ -1759,6 +1766,11 @@ msgstr ""
 #. R/mgcv.r: stop("in.out incorrect: see documentation")
 #: R/mgcv.r:0
 msgid "in.out incorrect: see documentation"
+msgstr ""
+
+#. R/smooth.r: stop("incorrect arguments to GP smoother")
+#: R/smooth.r:0
+msgid "incorrect arguments to GP smoother"
 msgstr ""
 
 #. R/mgcv.r: stop("incorrect number of linear predictors for family")
@@ -1991,6 +2003,12 @@ msgstr "mehr Knoten als Daten in einem tp-Term: Knoten ignoriert."
 msgid "more knots than data in a tp term: knots ignored"
 msgstr "mehr Knoten als Daten in einem tp-Term: Knoten ignoriert."
 
+#. R/smooth.r: warning("more knots than data in an ms term: knots ignored.")
+#: R/smooth.r:0
+#, fuzzy
+msgid "more knots than data in an ms term: knots ignored."
+msgstr "mehr Knoten als Daten in einem tp-Term: Knoten ignoriert."
+
 #. R/smooth.r: warning("more knots than data in an sos term: knots ignored")
 #: R/smooth.r:0
 #, fuzzy
@@ -2098,6 +2116,12 @@ msgid ""
 msgstr ""
 "es wurde keine gültige Menge von Koeffizienten gefunden: Bitte stellen Sie "
 "Startwerte bereit"
+
+#. R/mgcv.r: warning("non-existent exclude terms requested - ignoring")
+#: R/mgcv.r:0
+#, fuzzy
+msgid "non-existent exclude terms requested - ignoring"
+msgstr "nicht existierende Terme angefordert - wird ignoriert"
 
 #. R/mgcv.r: warning("non-existent terms requested - ignoring")
 #: R/mgcv.r:0
@@ -2479,6 +2503,12 @@ msgstr ""
 msgid "too few knots"
 msgstr "zu wenige Knoten"
 
+#. R/bam.r: warning("too many cluster nodes to use all efficiently")
+#. R/bam.r: warning("too many cluster nodes to use all efficiently")
+#: R/bam.r:0
+msgid "too many cluster nodes to use all efficiently"
+msgstr ""
+
 #. R/mgcv.r: gettextf(" total df = %s", round(sum(x$edf), digits = 2), domain = "R-mgcv")
 #: R/mgcv.r:0
 msgid "total df = %s"
@@ -2608,6 +2638,11 @@ msgid "Smoothing parameter selection converged after %d iteration."
 msgid_plural "Smoothing parameter selection converged after %d iterations."
 msgstr[0] ""
 msgstr[1] ""
+
+# R/smooth.r
+#, fuzzy
+#~ msgid "'%s' argument has no '%s' attribute"
+#~ msgstr "x hat kein Zeilenattribut"
 
 #, fuzzy
 #~ msgid "non-finite coefficients at iteration %d"

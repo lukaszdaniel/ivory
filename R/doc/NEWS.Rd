@@ -511,6 +511,11 @@
 
       \item \code{loess(*, weights = *)} stored wrong weights and hence
       gave slightly wrong predictions for \code{newdata}.  (\PR{16587})
+
+      \item \code{aperm(a, *)} now preserves \code{names(dim(a))}.
+
+      \item \code{poly(x, ..)} now works when either \code{raw=TRUE} or
+      \code{coef} is specified.  (\PR{16597})
     }
   }
 }

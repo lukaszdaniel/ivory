@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-09-22 23:12\n"
+"POT-Creation-Date: 2015-11-17 17:28\n"
 "PO-Revision-Date: 2012-03-06 21:42+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -43,20 +43,21 @@ msgstr ""
 "%f n'est pas une fonction générique valide : la liste des méthodes est un "
 "objet de classe %s"
 
+#. R/Methods.R: gettextf("%s dispatches internally;  methods can be defined, but the generic function is implicit, and cannot be changed.",     sQuote(name))
+#: R/Methods.R:0
+#, fuzzy
+msgid ""
+"%s dispatches internally;  methods can be defined, but the generic function "
+"is implicit, and cannot be changed."
+msgstr ""
+"%s est une fonction primitive ; Les méthodes peuvent être définies, mais la "
+"fonction générique est implicite et ne peut être modifiée."
+
 #. R/Methods.R: gettextf("%s has no methods defined", sQuote(f))
 #: R/Methods.R:0
 #, fuzzy
 msgid "%s has no methods defined"
 msgstr "\"%s\" n'a aucune méthode définie"
-
-#. R/Methods.R: gettextf("%s is a primitive function;  methods can be defined, but the generic function is implicit, and cannot be changed.",     sQuote(name))
-#: R/Methods.R:0
-msgid ""
-"%s is a primitive function;  methods can be defined, but the generic "
-"function is implicit, and cannot be changed."
-msgstr ""
-"%s est une fonction primitive ; Les méthodes peuvent être définies, mais la "
-"fonction générique est implicite et ne peut être modifiée."
 
 #. R/Methods.R: gettextf("%s is a primitive function; its generic form cannot be redefined", sQuote(name))
 #: R/Methods.R:0
@@ -2637,11 +2638,6 @@ msgstr ""
 "les méthodes peuvent ajouter des arguments à la fonction générique %s "
 "seulement si '...' est un argument de cette fonction générique"
 
-#. R/RMethodUtils.R: gettextf("methods cannot be defined for the primitive function %s", sQuote(f))
-#: R/RMethodUtils.R:0
-msgid "methods cannot be defined for the primitive function %s"
-msgstr "des méthodes ne peuvent être définies pour la fonction primitive %s"
-
 #. R/as.R: gettextf("methods currently exist for coercing from %s to %s; they will be replaced.",     dQuote(from), dQuote(to))
 #: R/as.R:0
 #, fuzzy
@@ -4045,6 +4041,9 @@ msgstr[0] ""
 msgstr[1] ""
 "les arguments formels de la fonction générique pour \"%s\" (%s) diffèrent de "
 "ceux de la fonction non générique à utiliser par défaut (%s)"
+
+#~ msgid "methods cannot be defined for the primitive function %s"
+#~ msgstr "des méthodes ne peuvent être définies pour la fonction primitive %s"
 
 #, fuzzy
 #~ msgid "class"

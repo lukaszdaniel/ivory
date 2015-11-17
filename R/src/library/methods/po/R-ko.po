@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-09-22 23:12\n"
+"POT-Creation-Date: 2015-11-17 17:28\n"
 "PO-Revision-Date: 2014-03-27 13:32-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -44,19 +44,20 @@ msgstr ""
 "%f는 유효한 제네릭 함수가 아닙니다: 메소드 리스트가 클래스 %s의 객체이기 때문"
 "입니다"
 
+#. R/Methods.R: gettextf("%s dispatches internally;  methods can be defined, but the generic function is implicit, and cannot be changed.",     sQuote(name))
+#: R/Methods.R:0
+#, fuzzy
+msgid ""
+"%s dispatches internally;  methods can be defined, but the generic function "
+"is implicit, and cannot be changed."
+msgstr ""
+"%s는 프리미티브 함수입니다; 따라서 메소드들이 정의되어 질 수 있지만, 제네릭 "
+"함수는 절대적이고, 변경되어 질 수 없습니다."
+
 #. R/Methods.R: gettextf("%s has no methods defined", sQuote(f))
 #: R/Methods.R:0
 msgid "%s has no methods defined"
 msgstr "%s는 정의된 메소드들을 가지고 있지 않습니다"
-
-#. R/Methods.R: gettextf("%s is a primitive function;  methods can be defined, but the generic function is implicit, and cannot be changed.",     sQuote(name))
-#: R/Methods.R:0
-msgid ""
-"%s is a primitive function;  methods can be defined, but the generic "
-"function is implicit, and cannot be changed."
-msgstr ""
-"%s는 프리미티브 함수입니다; 따라서 메소드들이 정의되어 질 수 있지만, 제네릭 "
-"함수는 절대적이고, 변경되어 질 수 없습니다."
 
 #. R/Methods.R: gettextf("%s is a primitive function; its generic form cannot be redefined", sQuote(name))
 #: R/Methods.R:0
@@ -2397,11 +2398,6 @@ msgstr ""
 "오로지 '...' 이 제네릭에 대한 인자인 경우에만 메소드들은 제네릭 %s에 추가될 "
 "수 있습니다"
 
-#. R/RMethodUtils.R: gettextf("methods cannot be defined for the primitive function %s", sQuote(f))
-#: R/RMethodUtils.R:0
-msgid "methods cannot be defined for the primitive function %s"
-msgstr "프리미티브 함수 %s에 대해서 메소드들이 정의될 수 없습니다"
-
 #. R/as.R: gettextf("methods currently exist for coercing from %s to %s; they will be replaced.",     dQuote(from), dQuote(to))
 #: R/as.R:0
 msgid ""
@@ -3610,6 +3606,9 @@ msgid_plural ""
 "of the non-generic to be used as the default (%s)"
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid "methods cannot be defined for the primitive function %s"
+#~ msgstr "프리미티브 함수 %s에 대해서 메소드들이 정의될 수 없습니다"
 
 #~ msgid "trying to execute load actions without 'methods' package"
 #~ msgstr "'methods' 패키지 없이 로드 액션들의 실행을 시도합니다"

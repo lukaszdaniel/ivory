@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: R 2.16.0\n"
+"Project-Id-Version: R 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-22 23:12\n"
+"POT-Creation-Date: 2015-11-17 17:28\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.5.4\n"
 "X-Poedit-Bookmarks: -1,20,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #. R/mlm.R: stop("\"mlm\" objects with weights are not supported")
@@ -237,6 +237,11 @@ msgstr "argument '%s' nie jest wektorem"
 #: R/diffinv.R:0 R/embed.R:0
 msgid "'%s' argument is not a vector or matrix"
 msgstr "argument '%s' nie jest wektorem ani macierzą"
+
+#. R/ts-tests.R: gettextf("'%s' argument is not a vector or univariate time series", "x")
+#: R/ts-tests.R:0
+msgid "'%s' argument is not a vector or univariate time series"
+msgstr "'%s' nie jest wektorem ani jednowymiarowym szeregiem czasowym"
 
 #. R/lag.R: gettextf("'%s' argument is not an integer", "k")
 #: R/lag.R:0
@@ -1553,7 +1558,6 @@ msgstr "Test Box'a-Pierce'a"
 #. R/lm.R: gettext("Call:", domain = "R-stats")
 #. R/lm.R: gettext("Call:", domain = "R-stats")
 #. R/loess.R: gettext("Call:", domain = "R-stats")
-#. R/loess.R: gettext("Call:", domain = "R-stats")
 #. R/ppr.R: gettext("Call:", domain = "R-stats")
 #. R/princomp.R: gettext("Call:", domain = "R-stats")
 #. R/smspline.R: gettext("Call:", domain = "R-stats")
@@ -1714,11 +1718,6 @@ msgstr "Kontrasty ortogonalne do %s"
 msgid "Contrasts spanned by %s"
 msgstr "Kontrasty rozciągnięte przez %s"
 
-#. R/loess.R: gettext("Control settings:", domain = "R-stats")
-#: R/loess.R:0
-msgid "Control settings:"
-msgstr "Ustawienia kontrolne:"
-
 #. R/nls.R: gettextf("Convergence failure: %s", msg.nls)
 #: R/nls.R:0
 msgid "Convergence failure: %s"
@@ -1830,7 +1829,6 @@ msgstr ""
 msgid "Equivalent Degrees of Freedom (Df): %s"
 msgstr "Równoważna liczba stopni swobody (Df): %s"
 
-#. R/loess.R: gettext("Equivalent Number of Parameters:", domain = "R-stats")
 #. R/loess.R: gettext("Equivalent Number of Parameters:", domain = "R-stats")
 #: R/loess.R:0
 msgid "Equivalent Number of Parameters:"
@@ -2415,7 +2413,6 @@ msgid "Number of Fisher Scoring iterations:"
 msgstr "Liczba iteracji punktacji Fishera:"
 
 #. R/loess.R: gettext("Number of Observations:", domain = "R-stats")
-#. R/loess.R: gettext("Number of Observations:", domain = "R-stats")
 #: R/loess.R:0
 msgid "Number of Observations:"
 msgstr "Liczba obserwacji:"
@@ -2643,7 +2640,6 @@ msgstr "Powód zatrzymania:"
 msgid "Refitting model to allow projection"
 msgstr "Ponowne dopasowywanie modelu aby umożliwić rzutowanie"
 
-#. R/loess.R: gettext("Residual Scale Estimate:", domain = "R-stats")
 #. R/loess.R: gettext("Residual Scale Estimate:", domain = "R-stats")
 #: R/loess.R:0
 msgid "Residual Scale Estimate:"
@@ -2956,11 +2952,6 @@ msgstr ""
 #: R/stl.R:0
 msgid "Time.series components:"
 msgstr "Komponenty szeregu czasowego:"
-
-#. R/loess.R: gettext("Trace of smoother matrix:", domain = "R-stats")
-#: R/loess.R:0
-msgid "Trace of smoother matrix:"
-msgstr "Ślad gładkiej macierzy:"
 
 #. R/ts-tests.R: gettext("Truncation lag parameter")
 #: R/ts-tests.R:0
@@ -4143,7 +4134,7 @@ msgstr "niepoprawny argument '%s'"
 #. R/kmeans.R: gettextf("invalid '%s' value", "ncol(x)")
 #. R/kmeans.R: gettextf("invalid '%s' value", "k")
 #. R/loess.R: gettextf("invalid '%s' value", "NCOL(X)")
-#. R/loess.R: gettextf("invalid '%s' value", "NCOL(X)")
+#. R/loess.R: gettextf("invalid '%s' value", "NROW(X)")
 #. R/runmed.R: gettextf("invalid '%s' value", "length(x)")
 #. R/runmed.R: gettextf("invalid '%s' value", "k")
 #. R/smooth.R: gettextf("invalid '%s' value", "length(x)")
@@ -4152,10 +4143,10 @@ msgstr "niepoprawny argument '%s'"
 #. R/splinefun.R: gettextf("invalid '%s' value", "length(x)")
 #. R/stl.R: gettextf("invalid '%s' value", "length(x)")
 #. R/symnum.R: gettextf("invalid '%s' value", "abbr.colnames'")
-#: R/HoltWinters.R:0 R/approx.R:0 R/bandwidths.R:0 R/cmdscale.R:0 R/density.R:0
-#: R/diffinv.R:0 R/filter.R:0 R/kmeans.R:0 R/loess.R:0 R/runmed.R:0
-#: R/smooth.R:0 R/smspline.R:0 R/spline.R:0 R/splinefun.R:0 R/stl.R:0
-#: R/symnum.R:0
+#: R/HoltWinters.R:0 R/approx.R:0 R/bandwidths.R:0 R/cmdscale.R:0
+#: R/density.R:0 R/diffinv.R:0 R/filter.R:0 R/kmeans.R:0 R/loess.R:0
+#: R/runmed.R:0 R/smooth.R:0 R/smspline.R:0 R/spline.R:0 R/splinefun.R:0
+#: R/stl.R:0 R/symnum.R:0
 msgid "invalid '%s' value"
 msgstr "niepoprawna wartość '%s'"
 
@@ -4273,6 +4264,11 @@ msgstr "niepoprawne wartości parametrów"
 #: R/models.R:0
 msgid "invalid response type"
 msgstr "niepoprawny typ zmiennej zależnej"
+
+#. R/loess.R: gettextf("iterTrace = %s not obeyed as iterations = %d", iterTrace, iterations)
+#: R/loess.R:0
+msgid "iterTrace = %s not obeyed as iterations = %d"
+msgstr "'iterTrace = %s' nie jest przestrzegane ponieważ 'iterations = %d'"
 
 #. R/nlminb.R: gettext("iteration limit reached without convergence (10)")
 #: R/nlminb.R:0
@@ -6317,7 +6313,6 @@ msgid "wrong number of contrast matrix rows"
 msgstr "niepoprawna liczba wierszy macierzy kontrastu"
 
 #. R/ts-tests.R: stop("x is not a vector or univariate time series")
-#. R/ts-tests.R: stop("x is not a vector or univariate time series")
 #: R/ts-tests.R:0
 msgid "x is not a vector or univariate time series"
 msgstr "'x' nie jest wektorem ani jednowymiarowym szeregiem czasowym"
@@ -6557,7 +6552,6 @@ msgstr[2] "grupowanie metodą K-średnich z %d klastrami o rozmiarach %s"
 #. R/aov.R: ngettext(length(rs), "Residual Standard Error:", "Residual Standard Errors:", domain = "R-stats")
 #. R/aov.R: ngettext(length(rs), "Residual Standard Error:", "Residual Standard Errors:", domain = "R-stats")
 #. R/loess.R: ngettext(1L, "Residual Standard Error:", "Residual Standard Errors:", domain = "R-stats")
-#. R/loess.R: ngettext(1L, "Residual Standard Error:", "Residual Standard Errors:", domain = "R-stats")
 #: R/aov.R:0 R/loess.R:0
 msgid "Residual Standard Error:"
 msgid_plural "Residual Standard Errors:"
@@ -6760,6 +6754,12 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "używanie %d/%d wiersza z połączonego dopasowania"
 msgstr[1] "używanie %d/%d wierszy z połączonego dopasowania"
 msgstr[2] "używanie %d/%d wierszy z połączonego dopasowania"
+
+#~ msgid "Control settings:"
+#~ msgstr "Ustawienia kontrolne:"
+
+#~ msgid "Trace of smoother matrix:"
+#~ msgstr "Ślad gładkiej macierzy:"
 
 #~ msgid "'x.ret=TRUE' is disregarded when 'list.=FALSE'"
 #~ msgstr "opcja 'x.ret=TRUE' jest ignorowana, gdy 'list.=FALSE'"

@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Matrix 1.1-3\n"
-"POT-Creation-Date: 2015-06-06 11:41\n"
+"POT-Creation-Date: 2015-11-17 17:53\n"
 "PO-Revision-Date: 2015-03-29 18:45-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -332,6 +332,16 @@ msgstr ""
 #: R/sparseVector.R:0
 msgid "'times >= 0' is required"
 msgstr "'times >= 0'이 요구되어집니다."
+
+#. R/sparseMatrix.R: stop("'uniDiag=TRUE', but not all diagonal entries are 1")
+#: R/sparseMatrix.R:0
+msgid "'uniDiag=TRUE', but not all diagonal entries are 1"
+msgstr ""
+
+#. R/sparseMatrix.R: warning("'uniDiag=TRUE', not all entries in diagonal coded as 1")
+#: R/sparseMatrix.R:0
+msgid "'uniDiag=TRUE', not all entries in diagonal coded as 1"
+msgstr ""
 
 #. R/CHMfactor.R: stop("'update' must be logical or '+' or '-'; 'C' a matrix, and 'L' a \"CHMfactor\"")
 #: R/CHMfactor.R:0
@@ -915,6 +925,11 @@ msgstr ""
 #. R/Summary.R: gettextf("in Summary(<ANY>, .): %s(<%s>, <%s>,...)\n", .Generic, class(x), class(a[[1]]))
 #: R/Summary.R:0
 msgid "in Summary(<ANY>, .): %s(<%s>, <%s>,...)"
+msgstr ""
+
+#. R/sparseMatrix.R: gettext("in show(); maybe adjust 'options(max.print= *, width = *)'")
+#: R/sparseMatrix.R:0
+msgid "in show(); maybe adjust 'options(max.print= *, width = *)'"
 msgstr ""
 
 #. R/diagMatrix.R: stop("incompatible matrix dimensions")
@@ -1579,6 +1594,23 @@ msgstr ""
 #: R/abIndex.R:0
 msgid "sum(<abIndex>) is not yet implemented"
 msgstr "sum(<abIndex>)는 아직 구현되지 않았습니다."
+
+#. R/sparseMatrix.R: gettext("suppressing columns")
+#: R/sparseMatrix.R:0
+#, fuzzy
+msgid "suppressing columns"
+msgstr "[[ %d개의 열이름 %s를 제거합니다 ]]"
+
+#. R/sparseMatrix.R: if (suppCols) "suppressing columns and rows" else "suppressing rows"
+#: R/sparseMatrix.R:0
+#, fuzzy
+msgid "suppressing columns and rows"
+msgstr "[[ %d개의 열이름 %s를 제거합니다 ]]"
+
+#. R/sparseMatrix.R: if (suppCols) "suppressing columns and rows" else "suppressing rows"
+#: R/sparseMatrix.R:0
+msgid "suppressing rows"
+msgstr ""
 
 #. R/sparseMatrix.R: stop("symmetric matrix must be square")
 #: R/sparseMatrix.R:0

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-04 20:49\n"
+"POT-Creation-Date: 2015-11-17 20:33\n"
 "PO-Revision-Date: 2012-09-28 22:18+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -1536,12 +1536,12 @@ msgstr "Ingen DLL lasta med namn eller filadresse"
 msgid "No factors specified"
 msgstr "ingen DLL definert"
 
-#. R/namespace.R: gettextf("No generic function was found corresponding to requested imported methods for function %s from package %s (malformed exports?)",     sQuote(g), sQuote(pkg))
+#. R/namespace.R: gettextf("No generic function %s found corresponding to requested imported methods from package %s when loading %s (malformed exports?)",     sQuote(g), sQuote(pkg), sQuote(from))
 #: R/namespace.R:0
 #, fuzzy
 msgid ""
-"No generic function was found corresponding to requested imported methods "
-"for function %s from package %s (malformed exports?)"
+"No generic function %s found corresponding to requested imported methods "
+"from package %s when loading %s (malformed exports?)"
 msgstr ""
 "Fann ingen generisk funksjon som svarar til førespurde importerte metodar "
 "for «%s» frå pakken «%s» (feilformaterte eksportar?)"
@@ -3587,7 +3587,6 @@ msgid_plural "replacement has %d rows, data has %d"
 msgstr[0] "erstattingsobjektet har %d rader, mens dataa har %d"
 msgstr[1] "erstattingsobjektet har %d rader, mens dataa har %d"
 
-#. R/dataframe.R: ngettext(length(row.names), "supplied %d row name for %d rows", "supplied %d row names for %d rows",     domain = "R-base")
 #. R/dataframe.R: ngettext(length(row.names), "supplied %d row name for %d rows", "supplied %d row names for %d rows",     domain = "R-base")
 #: R/dataframe.R:0
 #, fuzzy

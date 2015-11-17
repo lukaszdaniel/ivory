@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 3.3.0\n"
-"POT-Creation-Date: 2015-09-22 23:12\n"
+"POT-Creation-Date: 2015-11-17 17:28\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,16 +40,16 @@ msgstr ""
 
 
 #: R/Methods.R: 0
-#. R/Methods.R: gettextf("%s has no methods defined", sQuote(f))
+#. R/Methods.R: gettextf("%s dispatches internally;  methods can be defined, but the generic function is implicit, and cannot be changed.",     sQuote(name))
 
-msgid "%s has no methods defined"
+msgid "%s dispatches internally;  methods can be defined, but the generic function is implicit, and cannot be changed."
 msgstr ""
 
 
 #: R/Methods.R: 0
-#. R/Methods.R: gettextf("%s is a primitive function;  methods can be defined, but the generic function is implicit, and cannot be changed.",     sQuote(name))
+#. R/Methods.R: gettextf("%s has no methods defined", sQuote(f))
 
-msgid "%s is a primitive function;  methods can be defined, but the generic function is implicit, and cannot be changed."
+msgid "%s has no methods defined"
 msgstr ""
 
 
@@ -2609,13 +2609,6 @@ msgstr ""
 #. R/RMethodUtils.R: gettextf("methods can add arguments to the generic %s only if '...' is an argument to the generic",     sQuote(generic@generic))
 
 msgid "methods can add arguments to the generic %s only if '...' is an argument to the generic"
-msgstr ""
-
-
-#: R/RMethodUtils.R: 0
-#. R/RMethodUtils.R: gettextf("methods cannot be defined for the primitive function %s", sQuote(f))
-
-msgid "methods cannot be defined for the primitive function %s"
 msgstr ""
 
 

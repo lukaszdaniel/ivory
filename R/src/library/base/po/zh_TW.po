@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-04 20:49+0100\n"
+"POT-Creation-Date: 2015-11-17 17:27+0100\n"
 "PO-Revision-Date: 2011-10-13 17:30+0800\n"
 "Last-Translator: Wei-Lun Chao <chaoweilun@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -591,9 +591,9 @@ msgstr "顯示'%s' 時發生問題"
 #: src/gnuwin32/extra.c:572 src/gnuwin32/extra.c:597 src/main/agrep.c:132
 #: src/main/agrep.c:136 src/main/agrep.c:774 src/main/agrep.c:779
 #: src/main/apply.c:329 src/main/apply.c:331 src/main/apply.c:334
-#: src/main/array.c:90 src/main/array.c:1264 src/main/array.c:1390
-#: src/main/array.c:1392 src/main/array.c:1393 src/main/array.c:1739
-#: src/main/array.c:1741 src/main/array.c:1743 src/main/attrib.c:189
+#: src/main/array.c:90 src/main/array.c:1264 src/main/array.c:1403
+#: src/main/array.c:1405 src/main/array.c:1406 src/main/array.c:1752
+#: src/main/array.c:1754 src/main/array.c:1756 src/main/attrib.c:189
 #: src/main/builtin.c:89 src/main/builtin.c:98 src/main/builtin.c:117
 #: src/main/builtin.c:119 src/main/builtin.c:150 src/main/builtin.c:561
 #: src/main/builtin.c:577 src/main/builtin.c:764 src/main/builtin.c:766
@@ -657,7 +657,7 @@ msgstr "顯示'%s' 時發生問題"
 #: src/main/internet.c:209 src/main/internet.c:223 src/main/internet.c:241
 #: src/main/internet.c:254 src/main/internet.c:266 src/main/internet.c:285
 #: src/main/memory.c:3811 src/main/names.c:1305 src/main/names.c:1308
-#: src/main/objects.c:1600 src/main/objects.c:1602 src/main/paste.c:96
+#: src/main/objects.c:1611 src/main/objects.c:1613 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
 #: src/main/paste.c:411 src/main/paste.c:416 src/main/paste.c:421
 #: src/main/paste.c:424 src/main/paste.c:432 src/main/paste.c:437
@@ -1142,8 +1142,8 @@ msgstr "第一引數必須是向量"
 #: src/main/identical.c:76 src/main/identical.c:77 src/main/platform.c:2965
 #: src/main/seq.c:193 src/main/seq.c:340 src/main/seq.c:345 src/main/seq.c:349
 #: src/main/seq.c:390 src/main/seq.c:394 src/main/seq.c:398
-#: src/main/sort.c:1245 src/main/sort.c:1328 src/main/sort.c:1332
-#: src/main/sort.c:1339 src/main/sort.c:1414 src/main/source.c:223
+#: src/main/sort.c:1244 src/main/sort.c:1327 src/main/sort.c:1331
+#: src/main/sort.c:1338 src/main/sort.c:1413 src/main/source.c:223
 #: src/main/summary.c:954 src/main/sysutils.c:250 src/main/util.c:1050
 #: src/main/util.c:1055 src/main/util.c:1062 src/main/util.c:1065
 #: src/main/util.c:2034 src/modules/lapack/Lapack.c:940
@@ -1275,7 +1275,7 @@ msgstr "長度為 0 的無效引數 '基底'"
 msgid "bad arithmetic function index"
 msgstr "不當的函數"
 
-#: src/main/array.c:83 src/main/array.c:1570
+#: src/main/array.c:83 src/main/array.c:1583
 #, fuzzy, c-format
 msgid "'data' argument must be of a vector type, was '%s'"
 msgstr "'data' 必須是向量類型"
@@ -1284,14 +1284,14 @@ msgstr "'data' 必須是向量類型"
 msgid "non-numeric matrix extent"
 msgstr "非數值的矩陣範圍"
 
-#: src/main/array.c:100 src/main/array.c:108 src/main/array.c:1676
-#: src/main/array.c:1681
+#: src/main/array.c:100 src/main/array.c:108 src/main/array.c:1689
+#: src/main/array.c:1694
 #, fuzzy, c-format
 msgid "invalid '%s' value (too large or NA)"
 msgstr "無效的 'nrow' 值 (太大或無法取得)"
 
-#: src/main/array.c:102 src/main/array.c:110 src/main/array.c:1678
-#: src/main/array.c:1683
+#: src/main/array.c:102 src/main/array.c:110 src/main/array.c:1691
+#: src/main/array.c:1696
 #, fuzzy, c-format
 msgid "invalid '%s' value (< 0)"
 msgstr "無效的 'nrow' 值 (< 0)"
@@ -1326,7 +1326,7 @@ msgstr "資料長度 [%d] 並非欄位數量 [%d] 的因數或倍數"
 msgid "data length exceeds size of matrix"
 msgstr "資料長度超過矩陣的大小"
 
-#: src/main/array.c:150 src/main/array.c:1581 src/main/array.c:1690
+#: src/main/array.c:150 src/main/array.c:1594 src/main/array.c:1703
 msgid "too many elements specified"
 msgstr "指定了太多的元素"
 
@@ -1403,34 +1403,34 @@ msgstr "'perm' 的值在範圍外"
 
 #: src/main/array.c:1344 src/main/connections.c:5484 src/main/debug.c:112
 #: src/main/objects.c:1043 src/main/raw.c:56 src/main/raw.c:336
-#: src/main/sort.c:327 src/main/sort.c:1249 src/main/sort.c:1417
+#: src/main/sort.c:326 src/main/sort.c:1248 src/main/sort.c:1416
 #: src/main/unique.c:670 src/main/unique.c:1445 src/main/unique.c:1517
 #: src/main/util.c:644 src/main/util.c:646
 #, fuzzy, c-format
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr "'resize' 必須為真或假"
 
-#: src/main/array.c:1401
+#: src/main/array.c:1414
 #, fuzzy, c-format
 msgid "'%s' must be numeric"
 msgstr "'x' 必須是數值"
 
-#: src/main/array.c:1404
+#: src/main/array.c:1417
 #, fuzzy, c-format
 msgid "'%s' argument is too short"
 msgstr "'file' 引數太長"
 
-#: src/main/array.c:1577
+#: src/main/array.c:1590
 #, fuzzy, c-format
 msgid "'%s' argument cannot be of length 0"
 msgstr "'hadj' 的長度必須是 1"
 
-#: src/main/array.c:1686
+#: src/main/array.c:1699
 #, fuzzy, c-format
 msgid "'%s' must have positive length"
 msgstr "'value' 必須是正值的長度"
 
-#: src/main/array.c:1752
+#: src/main/array.c:1765
 #, c-format
 msgid "singular matrix in 'backsolve()'. First zero in diagonal [%d]"
 msgstr ""
@@ -1743,16 +1743,16 @@ msgstr "被替換的項目不是替換值長度的倍數"
 msgid "vector size cannot be NA"
 msgstr "向量大小不能是 NA"
 
-#: src/main/builtin.c:50 src/main/builtin.c:58 src/main/sort.c:1324
+#: src/main/builtin.c:50 src/main/builtin.c:58 src/main/sort.c:1323
 msgid "vector size cannot be NA/NaN"
 msgstr "向量大小不能是 NA/NaN"
 
-#: src/main/builtin.c:51 src/main/builtin.c:59 src/main/sort.c:1325
+#: src/main/builtin.c:51 src/main/builtin.c:59 src/main/sort.c:1324
 msgid "vector size cannot be infinite"
 msgstr "向量大小不能是無限大"
 
 #: src/main/builtin.c:52 src/main/builtin.c:60 src/main/builtin.c:941
-#: src/main/sort.c:1326
+#: src/main/sort.c:1325
 msgid "vector size specified is too large"
 msgstr "指定的向量大小太大"
 
@@ -5805,7 +5805,12 @@ msgid ""
 "function"
 msgstr "不能從非同屬函數中呼叫 standardGeneric(\"%s\") "
 
-#: src/main/objects.c:1242
+#: src/main/objects.c:1195
+#, fuzzy, c-format
+msgid "'internal' slot does not name an internal function: %s"
+msgstr "沒有 \"%s\" 這個內部函數"
+
+#: src/main/objects.c:1250
 #, c-format
 msgid ""
 "invalid primitive methods code (\"%s\"): should be \"clear\", \"reset\", "
@@ -5814,66 +5819,66 @@ msgstr ""
 "原始方法程式碼 (\"%s\") 不正確：應該是 \"clear\"、\"reset\"、\"set\" 或 "
 "\"suppress\""
 
-#: src/main/objects.c:1250
+#: src/main/objects.c:1258
 msgid "invalid object: must be a primitive function"
 msgstr "物件不正確: 必須是原始函數"
 
-#: src/main/objects.c:1297
+#: src/main/objects.c:1305
 #, c-format
 msgid ""
 "the formal definition of a primitive generic must be a function object (got "
 "type '%s')"
 msgstr "原始一般函數的正式定義必須是函數物件 (不能是 '%s' 類別)"
 
-#: src/main/objects.c:1326
+#: src/main/objects.c:1334
 #, fuzzy, c-format
 msgid "object returned as generic function '%s' does not appear to be one"
 msgstr "以通用函數 \"%s\" 型式回傳的物件看來不是一個"
 
-#: src/main/objects.c:1431
+#: src/main/objects.c:1439
 msgid "invalid primitive operation given for dispatch"
 msgstr "不能分派原始運算"
 
-#: src/main/objects.c:1457 src/main/objects.c:1475
+#: src/main/objects.c:1468 src/main/objects.c:1486
 msgid "dispatch error"
 msgstr "分派錯誤"
 
-#: src/main/objects.c:1470
+#: src/main/objects.c:1481
 #, fuzzy, c-format
 msgid ""
 "primitive function '%s' has been set for methods but no generic function "
 "supplied"
 msgstr "原始函數 \"%s\" 設定了方法，但沒有一般函數 "
 
-#: src/main/objects.c:1494
+#: src/main/objects.c:1505
 msgid "C level MAKE_CLASS macro called with NULL string pointer"
 msgstr "C 級的 MAKE_TYPE 巨集不能用 NULL 字串指標來呼叫"
 
-#: src/main/objects.c:1510
+#: src/main/objects.c:1521
 #, fuzzy
 msgid "'methods' package not yet loaded"
 msgstr "無法載入 Hershey 字型"
 
-#: src/main/objects.c:1520
+#: src/main/objects.c:1531
 #, fuzzy
 msgid "'R_getClassDef(.)' called with NULL string pointer"
 msgstr "R_getClassDef(.)  以空字串指標來呼叫"
 
-#: src/main/objects.c:1565
+#: src/main/objects.c:1576
 msgid "C level NEW macro called with null class definition pointer"
 msgstr "C 級的 NEW 巨集不能用 null 類別定義指標來呼叫"
 
-#: src/main/objects.c:1569
+#: src/main/objects.c:1580
 #, c-format
 msgid "trying to generate an object from a virtual class (\"%s\")"
 msgstr "試著從虛擬類別 (\"%s\") 產生物件"
 
-#: src/main/objects.c:1614
+#: src/main/objects.c:1625
 #, fuzzy
 msgid "'R_get_primname()' called on a non-primitive"
 msgstr "'R_get_primname' 以非原型來呼叫"
 
-#: src/main/objects.c:1650
+#: src/main/objects.c:1661
 #, fuzzy, c-format
 msgid "object of class \"%s\" does not correspond to a valid S3 object"
 msgstr "\"%s\" 類別的物件並不相應於有效的 S3 物件"
@@ -7433,51 +7438,51 @@ msgstr ""
 msgid "only atomic vectors can be tested to be sorted"
 msgstr "只有基元向量才能被試著排序"
 
-#: src/main/sort.c:330 src/main/sort.c:601
+#: src/main/sort.c:329 src/main/sort.c:600
 msgid "only atomic vectors can be sorted"
 msgstr "只有基元向量才能被排序"
 
-#: src/main/sort.c:332 src/main/sort.c:603 src/main/sort.c:1318
+#: src/main/sort.c:331 src/main/sort.c:602 src/main/sort.c:1317
 msgid "raw vectors cannot be sorted"
 msgstr "無法排序純量向量"
 
-#: src/main/sort.c:377 src/main/sort.c:394 src/main/sort.c:411
-#: src/main/sort.c:434
+#: src/main/sort.c:376 src/main/sort.c:393 src/main/sort.c:410
+#: src/main/sort.c:433
 msgid "'n >= 2' is required"
 msgstr ""
 
-#: src/main/sort.c:614
+#: src/main/sort.c:613
 msgid "NA or infinite index"
 msgstr ""
 
-#: src/main/sort.c:617
+#: src/main/sort.c:616
 #, fuzzy, c-format
 msgid "index %ld outside bounds"
 msgstr "索引 %d 在界限外"
 
-#: src/main/sort.c:622 src/main/sort.c:635
+#: src/main/sort.c:621 src/main/sort.c:634
 msgid "NA index"
 msgstr "NA 索引"
 
-#: src/main/sort.c:624 src/main/sort.c:637
+#: src/main/sort.c:623 src/main/sort.c:636
 #, c-format
 msgid "index %d outside bounds"
 msgstr "索引 %d 在界限外"
 
-#: src/main/sort.c:1258
+#: src/main/sort.c:1257
 #, c-format
 msgid "argument %d is not a vector"
 msgstr "引數 %d 不是向量"
 
-#: src/main/sort.c:1260
+#: src/main/sort.c:1259
 msgid "argument lengths differ"
 msgstr "引數長度不同"
 
-#: src/main/sort.c:1345
+#: src/main/sort.c:1344
 msgid "invalid ties.method for rank() [should never happen]"
 msgstr "rank() 的 ties.method 不正確 [這是不應該發生的]"
 
-#: src/main/sort.c:1450
+#: src/main/sort.c:1449
 msgid "too large a range of values in 'x'"
 msgstr "'x' 中的值的範圍太大"
 
@@ -10264,10 +10269,6 @@ msgstr "無法使用 X11"
 #, fuzzy
 #~ msgid "'con' argument is not an object of class \"textConnection\""
 #~ msgstr "'con' 不是個輸出 textConnection"
-
-#, fuzzy
-#~ msgid "there is no .Internal function '%s'"
-#~ msgstr "沒有 \"%s\" 這個內部函數"
 
 #, fuzzy
 #~ msgid "'jobu' and 'jobv' arguments must be character strings"

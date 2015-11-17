@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-04 20:49\n"
+"POT-Creation-Date: 2015-11-17 20:33\n"
 "PO-Revision-Date: 2012-02-26 14:09+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -1545,12 +1545,12 @@ msgstr " 名前かパスを持つ Dll は現在何もロードされていませ
 msgid "No factors specified"
 msgstr "DLLが何も指定されませんでした "
 
-#. R/namespace.R: gettextf("No generic function was found corresponding to requested imported methods for function %s from package %s (malformed exports?)",     sQuote(g), sQuote(pkg))
+#. R/namespace.R: gettextf("No generic function %s found corresponding to requested imported methods from package %s when loading %s (malformed exports?)",     sQuote(g), sQuote(pkg), sQuote(from))
 #: R/namespace.R:0
 #, fuzzy
 msgid ""
-"No generic function was found corresponding to requested imported methods "
-"for function %s from package %s (malformed exports?)"
+"No generic function %s found corresponding to requested imported methods "
+"from package %s when loading %s (malformed exports?)"
 msgstr ""
 " \"%s\" に対して要求されたインポートされたメソッド（パッケージ \"%s\" から"
 "の）に対応する総称的関数がありません (不正確なエクスポート？) "
@@ -3593,7 +3593,6 @@ msgid "replacement has %d row, data has %d"
 msgid_plural "replacement has %d rows, data has %d"
 msgstr[0] " 置き換えは %d 列ですが、データは %d 列です "
 
-#. R/dataframe.R: ngettext(length(row.names), "supplied %d row name for %d rows", "supplied %d row names for %d rows",     domain = "R-base")
 #. R/dataframe.R: ngettext(length(row.names), "supplied %d row name for %d rows", "supplied %d row names for %d rows",     domain = "R-base")
 #: R/dataframe.R:0
 #, fuzzy

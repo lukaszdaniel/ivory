@@ -111,7 +111,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 52c52
 < 	if (any(ord>1)) stop ("Cluster can not be used in an interaction")
 ---
-> 	if (any(ord>1)) stop("cluster can not be used in an interaction")
+> 	if (any(ord>1)) stop("cluster cannot be used in an interaction")
 58c58
 <     else cluster <- 1:nrow(m)
 ---
@@ -178,7 +178,11 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 25c26
 <             stop("All arguments must be Cox models")
 ---
->             stop("all arguments must be an objects of class \"coxph\" or \"coxme\"")
+>             stop(gettextf("all arguments must be an objects of class %s or %s", dQuote("coxph"), dQuote("coxme")))
+32c33
+<                 stop("a coxme model was found and library coxme is not loaded")
+---
+>                 stop("a 'coxme' model was found and library 'coxme' is not loaded")
 46c47
 <         stop("Can't do anova tables with robust variances")
 ---
@@ -355,7 +359,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 46c46
 <         warning("Weights are ignored in clogit")
 ---
->         warning("weights are ignored in 'clogit()'")
+>         warning(gettextf("weights are ignored in '%s' function","clogit()"))
 64c64
 <     stop("predicted survival curves are not defined for a clogit model")
 ---
@@ -407,10 +411,14 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <          for (i in 1:ntrans) 
 ---
 >          for (i in seq_len(ntrans))
+157c155
+<         if (any(ord>1)) stop ("Cluster can not be used in an interaction")
+---
+>         if (any(ord>1)) stop("cluster cannot be used in an interaction")
 224c222
 <         if (length(init) != ncol(X)) stop("wrong length for init argument")
 ---
->         if (length(init) != ncol(X)) stop("wrong length for 'init' argument")
+>         if (length(init) != ncol(X)) stop(gettextf("wrong length for '%s' argument", "init"))
 236c234
 <         if (any(ord>1)) stop ('Penalty terms cannot be in an interaction')
 ---
@@ -855,7 +863,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 4c4
 <   cat ("Rate table with dimension(s):", attr(x, 'dimid'), "\n")
 ---
->   cat(ngettext(length(attr(x, 'dimid')), "Rate table with dimension: ", "Rate table with dimensions: ", domain = "R-survival"), paste(attr(x, 'dimid'), collapse = ", "), "\n", sep = "")
+>   cat(sprintf(ngettext(length(attr(x, 'dimid')), "Rate table with %d dimension:", "Rate table with %d dimensions:", domain = "R-survival"), length(attr(x, 'dimid'))), " ", paste(attr(x, 'dimid'), collapse = ", "), "\n", sep = "")
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/pspline.S Recommended/survival/R/pspline.S
 9c9
 < 	if (theta <=0 || theta >=1) stop("Invalid value for theta")
@@ -1038,10 +1046,12 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <     if (!inherits(rtable, 'ratetable')) stop("Argument is not a rate table")
 ---
 >     if (!inherits(rtable, 'ratetable')) stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("ratetable")))
-11c11
+11,12c11,12
 <     cat (" Rate table with", ncat, "dimensions:\n")
+<     for (i in 1:ncat) {
 ---
->     cat(gettextf(" Rate table with %d dimensions:\n", ncat, domain = "R-survival"))
+>     cat(sprintf(ngettext(ncat, "Rate table with %d dimension:", "Rate table with %d dimensions:", domain = "R-survival"), ncat), "\n", sep = "")
+>     for (i in seq_len(ncat)) {
 16,19c16
 <                 cat("\t", att$dimid[i], " ranges from ", 
 <                     format(min(att$cutpoints[[i]])), " to ", 
@@ -1184,6 +1194,10 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <     if (n==0) stop("Data set has 0 rows")
 ---
 >     if (n==0) stop("data set has 0 rows")
+78c78
+<         warning("weights ignored")
+---
+>         warning(gettextf("weights are ignored in '%s' function", "survexp()"))
 81c81
 <             stop("Survexp cannot have interaction terms")
 ---
@@ -1530,7 +1544,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 32c32
 <         if (any(ord>1)) stop ("Cluster can not be used in an interaction")
 ---
->         if (any(ord>1)) stop("cluster can not be used in an interaction")
+>         if (any(ord>1)) stop("cluster cannot be used in an interaction")
 82c82
 <     if (type== 'counting') stop ("Invalid survival type")
 ---
@@ -1700,7 +1714,7 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <         stop(paste("argument(s)", argname[is.na(check)], 
 <                        "not a recognized type"))
 ---
->         stop(gettextf("argument(s) %s not recognized type", paste(argname[is.na(check)], collapse = ", ")))
+>         stop(sprintf(ngettext(length(is.na(check)), "argument '%s' has unrecognized type", "arguments '%s' have unrecognized type", domain = "R-survival"), paste(argname[is.na(check)], collapse = ", ")),domain = NA)
 115c114
 <                     stop("neither a tstop argument nor an initial event argument was found")
 ---

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-09-22 23:12\n"
+"POT-Creation-Date: 2015-11-17 17:28\n"
 "PO-Revision-Date: 2012-02-26 14:13+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -250,6 +250,12 @@ msgstr " 'split' 引数はリストでなければなりません "
 #, fuzzy
 msgid "'%s' argument is not a vector or matrix"
 msgstr " 'split' 引数はリストでなければなりません "
+
+#. R/ts-tests.R: gettextf("'%s' argument is not a vector or univariate time series", "x")
+#: R/ts-tests.R:0
+#, fuzzy
+msgid "'%s' argument is not a vector or univariate time series"
+msgstr " x はベクトルもしくは一変量時系列ではありません "
 
 #. R/lag.R: gettextf("'%s' argument is not an integer", "k")
 #: R/lag.R:0
@@ -1648,7 +1654,6 @@ msgstr ""
 #. R/lm.R: gettext("Call:", domain = "R-stats")
 #. R/lm.R: gettext("Call:", domain = "R-stats")
 #. R/loess.R: gettext("Call:", domain = "R-stats")
-#. R/loess.R: gettext("Call:", domain = "R-stats")
 #. R/ppr.R: gettext("Call:", domain = "R-stats")
 #. R/princomp.R: gettext("Call:", domain = "R-stats")
 #. R/smspline.R: gettext("Call:", domain = "R-stats")
@@ -1813,11 +1818,6 @@ msgstr ""
 msgid "Contrasts spanned by %s"
 msgstr ""
 
-#. R/loess.R: gettext("Control settings:", domain = "R-stats")
-#: R/loess.R:0
-msgid "Control settings:"
-msgstr ""
-
 #. R/nls.R: gettextf("Convergence failure: %s", msg.nls)
 #: R/nls.R:0
 #, fuzzy
@@ -1934,7 +1934,6 @@ msgstr ""
 msgid "Equivalent Degrees of Freedom (Df): %s"
 msgstr " 残差に自由度がありません "
 
-#. R/loess.R: gettext("Equivalent Number of Parameters:", domain = "R-stats")
 #. R/loess.R: gettext("Equivalent Number of Parameters:", domain = "R-stats")
 #: R/loess.R:0
 msgid "Equivalent Number of Parameters:"
@@ -2513,7 +2512,6 @@ msgid "Number of Fisher Scoring iterations:"
 msgstr " 観測値の数が不十分です "
 
 #. R/loess.R: gettext("Number of Observations:", domain = "R-stats")
-#. R/loess.R: gettext("Number of Observations:", domain = "R-stats")
 #: R/loess.R:0
 #, fuzzy
 msgid "Number of Observations:"
@@ -2742,7 +2740,6 @@ msgstr ""
 msgid "Refitting model to allow projection"
 msgstr " 射影を許容するためにモデルの再当てはめを行います "
 
-#. R/loess.R: gettext("Residual Scale Estimate:", domain = "R-stats")
 #. R/loess.R: gettext("Residual Scale Estimate:", domain = "R-stats")
 #: R/loess.R:0
 msgid "Residual Scale Estimate:"
@@ -3063,11 +3060,6 @@ msgstr ""
 #. R/stl.R: gettext("Time.series components:", domain = "R-stats")
 #: R/stl.R:0
 msgid "Time.series components:"
-msgstr ""
-
-#. R/loess.R: gettext("Trace of smoother matrix:", domain = "R-stats")
-#: R/loess.R:0
-msgid "Trace of smoother matrix:"
 msgstr ""
 
 #. R/ts-tests.R: gettext("Truncation lag parameter")
@@ -4251,7 +4243,7 @@ msgstr " 無効な 'use' 引数です "
 #. R/kmeans.R: gettextf("invalid '%s' value", "ncol(x)")
 #. R/kmeans.R: gettextf("invalid '%s' value", "k")
 #. R/loess.R: gettextf("invalid '%s' value", "NCOL(X)")
-#. R/loess.R: gettextf("invalid '%s' value", "NCOL(X)")
+#. R/loess.R: gettextf("invalid '%s' value", "NROW(X)")
 #. R/runmed.R: gettextf("invalid '%s' value", "length(x)")
 #. R/runmed.R: gettextf("invalid '%s' value", "k")
 #. R/smooth.R: gettextf("invalid '%s' value", "length(x)")
@@ -4390,6 +4382,11 @@ msgstr " 無効なパラメータ値です "
 #: R/models.R:0
 msgid "invalid response type"
 msgstr " 無効な応答タイプです "
+
+#. R/loess.R: gettextf("iterTrace = %s not obeyed as iterations = %d", iterTrace, iterations)
+#: R/loess.R:0
+msgid "iterTrace = %s not obeyed as iterations = %d"
+msgstr ""
 
 #. R/nlminb.R: gettext("iteration limit reached without convergence (10)")
 #: R/nlminb.R:0
@@ -6493,7 +6490,6 @@ msgid "wrong number of contrast matrix rows"
 msgstr " 対比行列の行数が間違っています "
 
 #. R/ts-tests.R: stop("x is not a vector or univariate time series")
-#. R/ts-tests.R: stop("x is not a vector or univariate time series")
 #: R/ts-tests.R:0
 msgid "x is not a vector or univariate time series"
 msgstr " x はベクトルもしくは一変量時系列ではありません "
@@ -6696,7 +6692,6 @@ msgstr[0] ""
 
 #. R/aov.R: ngettext(length(rs), "Residual Standard Error:", "Residual Standard Errors:", domain = "R-stats")
 #. R/aov.R: ngettext(length(rs), "Residual Standard Error:", "Residual Standard Errors:", domain = "R-stats")
-#. R/loess.R: ngettext(1L, "Residual Standard Error:", "Residual Standard Errors:", domain = "R-stats")
 #. R/loess.R: ngettext(1L, "Residual Standard Error:", "Residual Standard Errors:", domain = "R-stats")
 #: R/aov.R:0 R/loess.R:0
 msgid "Residual Standard Error:"

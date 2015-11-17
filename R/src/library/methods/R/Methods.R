@@ -45,7 +45,9 @@ setGeneric <-
 
         name <- switch(name, "as.double" = "as.numeric", name)
         fdef <- getGeneric(name) # will fail if this can't have methods
-        if(nargs() <= 1) {
+        compatibleSignature <- nargs() == 2L && !missing(signature) &&
+            identical(signature, fdef@signature)
+        if(nargs() <= 1 || compatibleSignature) {
             ## generics for primitives are global, so can & must always be cached
             .cacheGeneric(name, fdef)
             return(name)
@@ -53,7 +55,7 @@ setGeneric <-
         ## you can only conflict with a primitive if you supply
         ## useAsDefault to signal you really mean a different function
         if(!is.function(useAsDefault) && !identical(useAsDefault, FALSE)) {
-            msg <- gettextf("%s is a primitive function;  methods can be defined, but the generic function is implicit, and cannot be changed.", sQuote(name))
+            msg <- gettextf("%s dispatches internally;  methods can be defined, but the generic function is implicit, and cannot be changed.", sQuote(name))
             stop(msg, domain = "R-methods")
         }
     }

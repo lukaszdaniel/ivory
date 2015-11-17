@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-09-22 23:12\n"
+"POT-Creation-Date: 2015-11-17 17:28\n"
 "PO-Revision-Date: 2015-01-17 15:43+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -42,19 +42,20 @@ msgid ""
 "%f is not a valid generic function: methods list was an object of class %s"
 msgstr "%f不是正确的泛型函数: 方法串列是类别为%s的对象"
 
+#. R/Methods.R: gettextf("%s dispatches internally;  methods can be defined, but the generic function is implicit, and cannot be changed.",     sQuote(name))
+#: R/Methods.R:0
+#, fuzzy
+msgid ""
+"%s dispatches internally;  methods can be defined, but the generic function "
+"is implicit, and cannot be changed."
+msgstr ""
+"%s是基元函数; 能够为其设定方法，但泛型函数是隱含定义的，无法对之进行改动。"
+
 #. R/Methods.R: gettextf("%s has no methods defined", sQuote(f))
 #: R/Methods.R:0
 #, fuzzy
 msgid "%s has no methods defined"
 msgstr "'%s'没有设定任何方法"
-
-#. R/Methods.R: gettextf("%s is a primitive function;  methods can be defined, but the generic function is implicit, and cannot be changed.",     sQuote(name))
-#: R/Methods.R:0
-msgid ""
-"%s is a primitive function;  methods can be defined, but the generic "
-"function is implicit, and cannot be changed."
-msgstr ""
-"%s是基元函数; 能够为其设定方法，但泛型函数是隱含定义的，无法对之进行改动。"
 
 #. R/Methods.R: gettextf("%s is a primitive function; its generic form cannot be redefined", sQuote(name))
 #: R/Methods.R:0
@@ -2388,11 +2389,6 @@ msgid ""
 "the generic"
 msgstr "只有当'...'是泛型方法参数时方法才能给泛型%s加参数"
 
-#. R/RMethodUtils.R: gettextf("methods cannot be defined for the primitive function %s", sQuote(f))
-#: R/RMethodUtils.R:0
-msgid "methods cannot be defined for the primitive function %s"
-msgstr "无法为基元函数%s定义方法"
-
 #. R/as.R: gettextf("methods currently exist for coercing from %s to %s; they will be replaced.",     dQuote(from), dQuote(to))
 #: R/as.R:0
 #, fuzzy
@@ -3604,6 +3600,9 @@ msgid_plural ""
 msgstr[0] ""
 "用于'%s'泛型函数(%s)的正式参数与将作为默認值(%s)来用的非泛型的正式参数不相符"
 "合"
+
+#~ msgid "methods cannot be defined for the primitive function %s"
+#~ msgstr "无法为基元函数%s定义方法"
 
 #, fuzzy
 #~ msgid "class"

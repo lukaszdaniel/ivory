@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-09-22 23:12\n"
+"POT-Creation-Date: 2015-11-17 17:28\n"
 "PO-Revision-Date: 2012-03-06 21:48+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -258,6 +258,12 @@ msgstr "l'argument 'split' doit être une liste"
 #, fuzzy
 msgid "'%s' argument is not a vector or matrix"
 msgstr "l'argument 'split' doit être une liste"
+
+#. R/ts-tests.R: gettextf("'%s' argument is not a vector or univariate time series", "x")
+#: R/ts-tests.R:0
+#, fuzzy
+msgid "'%s' argument is not a vector or univariate time series"
+msgstr "x n'est pas un vecteur ni une série temporelle univariée"
 
 #. R/lag.R: gettextf("'%s' argument is not an integer", "k")
 #: R/lag.R:0
@@ -1669,7 +1675,6 @@ msgstr ""
 #. R/lm.R: gettext("Call:", domain = "R-stats")
 #. R/lm.R: gettext("Call:", domain = "R-stats")
 #. R/loess.R: gettext("Call:", domain = "R-stats")
-#. R/loess.R: gettext("Call:", domain = "R-stats")
 #. R/ppr.R: gettext("Call:", domain = "R-stats")
 #. R/princomp.R: gettext("Call:", domain = "R-stats")
 #. R/smspline.R: gettext("Call:", domain = "R-stats")
@@ -1833,11 +1838,6 @@ msgstr ""
 msgid "Contrasts spanned by %s"
 msgstr ""
 
-#. R/loess.R: gettext("Control settings:", domain = "R-stats")
-#: R/loess.R:0
-msgid "Control settings:"
-msgstr ""
-
 #. R/nls.R: gettextf("Convergence failure: %s", msg.nls)
 #: R/nls.R:0
 msgid "Convergence failure: %s"
@@ -1956,7 +1956,6 @@ msgstr ""
 msgid "Equivalent Degrees of Freedom (Df): %s"
 msgstr "les résidus n'ont aucun degré de liberté"
 
-#. R/loess.R: gettext("Equivalent Number of Parameters:", domain = "R-stats")
 #. R/loess.R: gettext("Equivalent Number of Parameters:", domain = "R-stats")
 #: R/loess.R:0
 msgid "Equivalent Number of Parameters:"
@@ -2537,7 +2536,6 @@ msgid "Number of Fisher Scoring iterations:"
 msgstr "observations insuffisantes"
 
 #. R/loess.R: gettext("Number of Observations:", domain = "R-stats")
-#. R/loess.R: gettext("Number of Observations:", domain = "R-stats")
 #: R/loess.R:0
 #, fuzzy
 msgid "Number of Observations:"
@@ -2767,7 +2765,6 @@ msgstr ""
 msgid "Refitting model to allow projection"
 msgstr "Réajustement du modèle pour permettre la projection"
 
-#. R/loess.R: gettext("Residual Scale Estimate:", domain = "R-stats")
 #. R/loess.R: gettext("Residual Scale Estimate:", domain = "R-stats")
 #: R/loess.R:0
 msgid "Residual Scale Estimate:"
@@ -3086,11 +3083,6 @@ msgstr ""
 #. R/stl.R: gettext("Time.series components:", domain = "R-stats")
 #: R/stl.R:0
 msgid "Time.series components:"
-msgstr ""
-
-#. R/loess.R: gettext("Trace of smoother matrix:", domain = "R-stats")
-#: R/loess.R:0
-msgid "Trace of smoother matrix:"
 msgstr ""
 
 #. R/ts-tests.R: gettext("Truncation lag parameter")
@@ -4314,7 +4306,7 @@ msgstr "argument 'use' incorrect"
 #. R/kmeans.R: gettextf("invalid '%s' value", "ncol(x)")
 #. R/kmeans.R: gettextf("invalid '%s' value", "k")
 #. R/loess.R: gettextf("invalid '%s' value", "NCOL(X)")
-#. R/loess.R: gettextf("invalid '%s' value", "NCOL(X)")
+#. R/loess.R: gettextf("invalid '%s' value", "NROW(X)")
 #. R/runmed.R: gettextf("invalid '%s' value", "length(x)")
 #. R/runmed.R: gettextf("invalid '%s' value", "k")
 #. R/smooth.R: gettextf("invalid '%s' value", "length(x)")
@@ -4453,6 +4445,11 @@ msgstr "valeurs des paramètres incorrectes"
 #: R/models.R:0
 msgid "invalid response type"
 msgstr "type de réponse incorrecte"
+
+#. R/loess.R: gettextf("iterTrace = %s not obeyed as iterations = %d", iterTrace, iterations)
+#: R/loess.R:0
+msgid "iterTrace = %s not obeyed as iterations = %d"
+msgstr ""
 
 #. R/nlminb.R: gettext("iteration limit reached without convergence (10)")
 #: R/nlminb.R:0
@@ -6621,7 +6618,6 @@ msgid "wrong number of contrast matrix rows"
 msgstr "nombre de lignes de la matrice de contrastes incorrect"
 
 #. R/ts-tests.R: stop("x is not a vector or univariate time series")
-#. R/ts-tests.R: stop("x is not a vector or univariate time series")
 #: R/ts-tests.R:0
 msgid "x is not a vector or univariate time series"
 msgstr "x n'est pas un vecteur ni une série temporelle univariée"
@@ -6847,7 +6843,6 @@ msgstr[1] ""
 
 #. R/aov.R: ngettext(length(rs), "Residual Standard Error:", "Residual Standard Errors:", domain = "R-stats")
 #. R/aov.R: ngettext(length(rs), "Residual Standard Error:", "Residual Standard Errors:", domain = "R-stats")
-#. R/loess.R: ngettext(1L, "Residual Standard Error:", "Residual Standard Errors:", domain = "R-stats")
 #. R/loess.R: ngettext(1L, "Residual Standard Error:", "Residual Standard Errors:", domain = "R-stats")
 #: R/aov.R:0 R/loess.R:0
 msgid "Residual Standard Error:"

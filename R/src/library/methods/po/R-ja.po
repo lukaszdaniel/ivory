@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-09-22 23:12\n"
+"POT-Creation-Date: 2015-11-17 17:28\n"
 "PO-Revision-Date: 2012-02-26 14:07+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -38,20 +38,21 @@ msgstr ""
 " %fは適切な総称的関数ではありません：メソッドリストはクラス %s のオブジェクト"
 "でした "
 
+#. R/Methods.R: gettextf("%s dispatches internally;  methods can be defined, but the generic function is implicit, and cannot be changed.",     sQuote(name))
+#: R/Methods.R:0
+#, fuzzy
+msgid ""
+"%s dispatches internally;  methods can be defined, but the generic function "
+"is implicit, and cannot be changed."
+msgstr ""
+" %s はプリミティブな関数です；メソッドを定義できますが、総称的関数は隠匿され"
+"ており、変更できません "
+
 #. R/Methods.R: gettextf("%s has no methods defined", sQuote(f))
 #: R/Methods.R:0
 #, fuzzy
 msgid "%s has no methods defined"
 msgstr " \"%s\" は定義されたメソッドを持ちません "
-
-#. R/Methods.R: gettextf("%s is a primitive function;  methods can be defined, but the generic function is implicit, and cannot be changed.",     sQuote(name))
-#: R/Methods.R:0
-msgid ""
-"%s is a primitive function;  methods can be defined, but the generic "
-"function is implicit, and cannot be changed."
-msgstr ""
-" %s はプリミティブな関数です；メソッドを定義できますが、総称的関数は隠匿され"
-"ており、変更できません "
 
 #. R/Methods.R: gettextf("%s is a primitive function; its generic form cannot be redefined", sQuote(name))
 #: R/Methods.R:0
@@ -2565,11 +2566,6 @@ msgstr ""
 " メソッドは総称　%s に、 '...' がそれへの引数である時に限り、引数を追加できま"
 "す "
 
-#. R/RMethodUtils.R: gettextf("methods cannot be defined for the primitive function %s", sQuote(f))
-#: R/RMethodUtils.R:0
-msgid "methods cannot be defined for the primitive function %s"
-msgstr " プリミティブ関数 \"%s\" に対してはメソッドを定義できません "
-
 #. R/as.R: gettextf("methods currently exist for coercing from %s to %s; they will be replaced.",     dQuote(from), dQuote(to))
 #: R/as.R:0
 #, fuzzy
@@ -3902,6 +3898,9 @@ msgid_plural ""
 msgstr[0] ""
 " \"%s\" (%s) に対する総称的関数の形式的引数は、既定 (%s) として使われる非総称"
 "的なそれの引数と異なります "
+
+#~ msgid "methods cannot be defined for the primitive function %s"
+#~ msgstr " プリミティブ関数 \"%s\" に対してはメソッドを定義できません "
 
 #, fuzzy
 #~ msgid "class"

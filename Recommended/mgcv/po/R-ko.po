@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.3\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-10-18 20:40\n"
+"POT-Creation-Date: 2015-11-17 17:53\n"
 "PO-Revision-Date: 2015-02-21 16:01-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -141,13 +141,6 @@ msgstr "lambda와 h 모두 같은 길이를 가져야 합니다."
 #, fuzzy
 msgid "'%s' and '%s' components should have the same length"
 msgstr "lambda와 h 모두 같은 길이를 가져야 합니다."
-
-#. R/smooth.r: gettextf("'%s' argument has no '%s' attribute", "x", "row")
-#. R/smooth.r: gettextf("'%s' argument has no '%s' attribute", "x", "col")
-#: R/smooth.r:0
-#, fuzzy
-msgid "'%s' argument has no '%s' attribute"
-msgstr "x는 행속성(row attribute)를 가지고 있지 않습니다."
 
 #. R/smooth.r: gettextf("'%s' argument is faulty", "xt")
 #. R/smooth.r: gettextf("'%s' argument is faulty", "xt")
@@ -520,6 +513,7 @@ msgid "1<a<b<2 (strict) required"
 msgstr "1<a<b<2 라는 조건을 반드시 만족해야 합니다."
 
 #. R/smooth.r: stop("A term has fewer unique covariate combinations than specified maximum degrees of freedom")
+#. R/smooth.r: stop("A term has fewer unique covariate combinations than specified maximum degrees of freedom")
 #: R/smooth.r:0
 msgid ""
 "A term has fewer unique covariate combinations than specified maximum "
@@ -823,6 +817,11 @@ msgstr ""
 msgid "Fitted Values"
 msgstr ""
 
+#. R/gam.fit3.r: warning("Fitting terminated with step failure - check results carefully")
+#: R/gam.fit3.r:0
+msgid "Fitting terminated with step failure - check results carefully"
+msgstr ""
+
 #. R/mgcv.r: gettext("Formula:", domain = "R-mgcv")
 #. R/mgcv.r: gettext("Formula:", domain = "R-mgcv")
 #: R/mgcv.r:0
@@ -882,6 +881,11 @@ msgstr ""
 #. R/gam.fit3.r: stop("Invalid linear predictor values in empty model")
 #: R/gam.fit3.r:0
 msgid "Invalid linear predictor values in empty model"
+msgstr ""
+
+#. R/gam.fit3.r: warning("Iteration limit reached without full convergence - check carefully")
+#: R/gam.fit3.r:0
+msgid "Iteration limit reached without full convergence - check carefully"
 msgstr ""
 
 #. R/mgcv.r: stop("Later terms sharing an 'id' can not have more smoothing parameters than the first such term")
@@ -1294,16 +1298,14 @@ msgid "Step halved: new penalized deviance = %g"
 msgstr ""
 
 #. R/gam.fit3.r: warning("Step size truncated due to divergence", call. = FALSE)
-#. R/gam.fit4.r: warning("Step size truncated due to divergence", call. = FALSE)
 #. R/mgcv.r: warning("Step size truncated due to divergence", call. = FALSE)
-#: R/gam.fit3.r:0 R/gam.fit4.r:0 R/mgcv.r:0
+#: R/gam.fit3.r:0 R/mgcv.r:0
 msgid "Step size truncated due to divergence"
 msgstr ""
 
 #. R/gam.fit3.r: warning("Step size truncated: out of bounds", call. = FALSE)
-#. R/gam.fit4.r: warning("Step size truncated: out of bounds", call. = FALSE)
 #. R/mgcv.r: warning("Step size truncated: out of bounds", call. = FALSE)
-#: R/gam.fit3.r:0 R/gam.fit4.r:0 R/mgcv.r:0
+#: R/gam.fit3.r:0 R/mgcv.r:0
 msgid "Step size truncated: out of bounds"
 msgstr ""
 
@@ -1450,6 +1452,8 @@ msgstr "s()의 인자 k는 반드시 정수이어야 하므로 반올림되었�
 #. R/smooth.r: stop("arguments of smooth not same dimension")
 #. R/smooth.r: stop("arguments of smooth not same dimension")
 #. R/smooth.r: stop("arguments of smooth not same dimension")
+#. R/smooth.r: stop("arguments of smooth not same dimension")
+#. R/smooth.r: stop("arguments of smooth not same dimension")
 #: R/smooth.r:0
 msgid "arguments of smooth not same dimension"
 msgstr ""
@@ -1465,11 +1469,17 @@ msgstr ""
 msgid "attempt to use unsuitable marginal smooth class"
 msgstr ""
 
+#. R/bam.r: stop("bam can not discretize with this nesting structure")
+#: R/bam.r:0
+msgid "bam can not discretize with this nesting structure"
+msgstr ""
+
 #. R/smooth.r: warning("basis dimension is larger than number of unique covariates")
 #: R/smooth.r:0
 msgid "basis dimension is larger than number of unique covariates"
 msgstr ""
 
+#. R/smooth.r: warning("basis dimension reset to minimum possible")
 #. R/smooth.r: warning("basis dimension reset to minimum possible")
 #: R/smooth.r:0
 msgid "basis dimension reset to minimum possible"
@@ -1521,6 +1531,7 @@ msgid "cannot find valid starting values: please specify some"
 msgstr "사용가능한 초기값을 찾을 수 없습니다.  값을 지정해 주시길 바랍니다."
 
 #. R/bam.r: gettextf("chunk.size < number of coefficients. Reset to %d", chunk.size)
+#. R/bam.r: gettextf("chunk.size < number of coefficients. Reset to %d", chunk.size)
 #: R/bam.r:0
 msgid "chunk.size < number of coefficients. Reset to %d"
 msgstr ""
@@ -1543,6 +1554,7 @@ msgstr "알 수 없는 색상표(color scheme)입니다."
 #. R/smooth.r: stop("components of knots relating to a single smooth must be of same length")
 #. R/smooth.r: stop("components of knots relating to a single smooth must be of same length")
 #. R/smooth.r: stop("components of knots relating to a single smooth must be of same length")
+#. R/smooth.r: stop("components of knots relating to a single smooth must be of same length")
 #: R/smooth.r:0
 msgid "components of knots relating to a single smooth must be of same length"
 msgstr ""
@@ -1562,11 +1574,6 @@ msgstr ""
 msgid "cubic spline only deals with 1D data"
 msgstr ""
 "삼차 스플라인(cubic spline)은 오로지 1차원 데이터(1D data)만을 다룹니다."
-
-#. R/bam.r: stop("currently discrete methods do not handle by variables")
-#: R/bam.r:0
-msgid "currently discrete methods do not handle by variables"
-msgstr ""
 
 #. R/smooth.r: stop("data contain regions that are not contained in the knot specification")
 #: R/smooth.r:0
@@ -1605,11 +1612,6 @@ msgstr "입력된 w의 차원(dimensions)가 올바르지 않습니다."
 #. R/bam.r: warning("discrete method does not use parallel cluster - use nthreads instead")
 #: R/bam.r:0
 msgid "discrete method does not use parallel cluster - use nthreads instead"
-msgstr ""
-
-#. R/bam.r: stop("discretization can not handle factor by variables")
-#: R/bam.r:0
-msgid "discretization can not handle factor by variables"
 msgstr ""
 
 #. R/bam.r: stop("discretization can not handle smooth ids")
@@ -1719,6 +1721,12 @@ msgstr "적합된 확률값이 수치적으로 0 또는 1 입니다."
 msgid "fitted rates numerically 0 occurred"
 msgstr "적합된 비율(rates)가 수치적으로 0입니다."
 
+#. R/smooth.r: stop("fs smooth not suitable for discretisation with more than one metric predictor")
+#: R/smooth.r:0
+msgid ""
+"fs smooth not suitable for discretisation with more than one metric predictor"
+msgstr ""
+
 #. R/smooth.r: stop("fs smooths can only have one factor argument")
 #: R/smooth.r:0
 msgid "fs smooths can only have one factor argument"
@@ -1776,6 +1784,11 @@ msgstr ""
 #: R/mgcv.r:0
 msgid "in.out incorrect: see documentation"
 msgstr "in.out의 사용이 올바르지 않습니다:  도움말을 살펴보길 바랍니다."
+
+#. R/smooth.r: stop("incorrect arguments to GP smoother")
+#: R/smooth.r:0
+msgid "incorrect arguments to GP smoother"
+msgstr ""
 
 #. R/mgcv.r: stop("incorrect number of linear predictors for family")
 #: R/mgcv.r:0
@@ -2007,6 +2020,11 @@ msgstr ""
 msgid "more knots than data in a tp term: knots ignored"
 msgstr ""
 
+#. R/smooth.r: warning("more knots than data in an ms term: knots ignored.")
+#: R/smooth.r:0
+msgid "more knots than data in an ms term: knots ignored."
+msgstr ""
+
 #. R/smooth.r: warning("more knots than data in an sos term: knots ignored")
 #: R/smooth.r:0
 msgid "more knots than data in an sos term: knots ignored"
@@ -2114,6 +2132,11 @@ msgstr ""
 #: R/gam.fit3.r:0 R/gam.fit4.r:0 R/mgcv.r:0
 msgid ""
 "no valid set of coefficients has been found:please supply starting values"
+msgstr ""
+
+#. R/mgcv.r: warning("non-existent exclude terms requested - ignoring")
+#: R/mgcv.r:0
+msgid "non-existent exclude terms requested - ignoring"
 msgstr ""
 
 #. R/mgcv.r: warning("non-existent terms requested - ignoring")
@@ -2493,6 +2516,12 @@ msgstr ""
 msgid "too few knots"
 msgstr "노트(knots)의 개수 nk가 너무 작은 값을 가집니다."
 
+#. R/bam.r: warning("too many cluster nodes to use all efficiently")
+#. R/bam.r: warning("too many cluster nodes to use all efficiently")
+#: R/bam.r:0
+msgid "too many cluster nodes to use all efficiently"
+msgstr ""
+
 #. R/mgcv.r: gettextf(" total df = %s", round(sum(x$edf), digits = 2), domain = "R-mgcv")
 #: R/mgcv.r:0
 msgid "total df = %s"
@@ -2622,6 +2651,10 @@ msgstr[0] ""
 msgid "Smoothing parameter selection converged after %d iteration."
 msgid_plural "Smoothing parameter selection converged after %d iterations."
 msgstr[0] ""
+
+#, fuzzy
+#~ msgid "'%s' argument has no '%s' attribute"
+#~ msgstr "x는 행속성(row attribute)를 가지고 있지 않습니다."
 
 #~ msgid "non-finite coefficients at iteration %d"
 #~ msgstr ""

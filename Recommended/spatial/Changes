@@ -152,4 +152,4 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 40c37
 < 	error("not initialized -- use ppregion");
 ---
-> 	error(_("not initialized -- use ppregion"));
+> 	error(_("rectangular domain was not initialized -- use 'ppregion()' function"));

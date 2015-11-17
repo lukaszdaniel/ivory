@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: mgcv 1.8-7\n"
-"POT-Creation-Date: 2015-10-18 20:40\n"
+"Project-Id-Version: mgcv 1.8-9\n"
+"POT-Creation-Date: 2015-11-17 17:53\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -122,14 +122,6 @@ msgstr ""
 #. R/mgcv.r: gettextf("'%s' and '%s' components should have the same length", "M$S", "M$off")
 
 msgid "'%s' and '%s' components should have the same length"
-msgstr ""
-
-
-#: R/smooth.r: 0
-#. R/smooth.r: gettextf("'%s' argument has no '%s' attribute", "x", "row")
-#. R/smooth.r: gettextf("'%s' argument has no '%s' attribute", "x", "col")
-
-msgid "'%s' argument has no '%s' attribute"
 msgstr ""
 
 
@@ -585,6 +577,7 @@ msgstr ""
 
 #: R/smooth.r: 0
 #. R/smooth.r: stop("A term has fewer unique covariate combinations than specified maximum degrees of freedom")
+#. R/smooth.r: stop("A term has fewer unique covariate combinations than specified maximum degrees of freedom")
 
 msgid "A term has fewer unique covariate combinations than specified maximum degrees of freedom"
 msgstr ""
@@ -990,6 +983,13 @@ msgid "Fitted Values"
 msgstr ""
 
 
+#: R/gam.fit3.r: 0
+#. R/gam.fit3.r: warning("Fitting terminated with step failure - check results carefully")
+
+msgid "Fitting terminated with step failure - check results carefully"
+msgstr ""
+
+
 #: R/mgcv.r: 0
 #. R/mgcv.r: gettext("Formula:", domain = "R-mgcv")
 #. R/mgcv.r: gettext("Formula:", domain = "R-mgcv")
@@ -1072,6 +1072,13 @@ msgstr ""
 #. R/gam.fit3.r: stop("Invalid linear predictor values in empty model")
 
 msgid "Invalid linear predictor values in empty model"
+msgstr ""
+
+
+#: R/gam.fit3.r: 0
+#. R/gam.fit3.r: warning("Iteration limit reached without full convergence - check carefully")
+
+msgid "Iteration limit reached without full convergence - check carefully"
 msgstr ""
 
 
@@ -1613,10 +1620,8 @@ msgstr ""
 
 
 #: R/gam.fit3.r: 0
-#: R/gam.fit4.r: 0
 #: R/mgcv.r: 0
 #. R/gam.fit3.r: warning("Step size truncated due to divergence", call. = FALSE)
-#. R/gam.fit4.r: warning("Step size truncated due to divergence", call. = FALSE)
 #. R/mgcv.r: warning("Step size truncated due to divergence", call. = FALSE)
 
 msgid "Step size truncated due to divergence"
@@ -1624,10 +1629,8 @@ msgstr ""
 
 
 #: R/gam.fit3.r: 0
-#: R/gam.fit4.r: 0
 #: R/mgcv.r: 0
 #. R/gam.fit3.r: warning("Step size truncated: out of bounds", call. = FALSE)
-#. R/gam.fit4.r: warning("Step size truncated: out of bounds", call. = FALSE)
 #. R/mgcv.r: warning("Step size truncated: out of bounds", call. = FALSE)
 
 msgid "Step size truncated: out of bounds"
@@ -1822,6 +1825,8 @@ msgstr ""
 #. R/smooth.r: stop("arguments of smooth not same dimension")
 #. R/smooth.r: stop("arguments of smooth not same dimension")
 #. R/smooth.r: stop("arguments of smooth not same dimension")
+#. R/smooth.r: stop("arguments of smooth not same dimension")
+#. R/smooth.r: stop("arguments of smooth not same dimension")
 
 msgid "arguments of smooth not same dimension"
 msgstr ""
@@ -1842,6 +1847,13 @@ msgid "attempt to use unsuitable marginal smooth class"
 msgstr ""
 
 
+#: R/bam.r: 0
+#. R/bam.r: stop("bam can not discretize with this nesting structure")
+
+msgid "bam can not discretize with this nesting structure"
+msgstr ""
+
+
 #: R/smooth.r: 0
 #. R/smooth.r: warning("basis dimension is larger than number of unique covariates")
 
@@ -1850,6 +1862,7 @@ msgstr ""
 
 
 #: R/smooth.r: 0
+#. R/smooth.r: warning("basis dimension reset to minimum possible")
 #. R/smooth.r: warning("basis dimension reset to minimum possible")
 
 msgid "basis dimension reset to minimum possible"
@@ -1916,6 +1929,7 @@ msgstr ""
 
 #: R/bam.r: 0
 #. R/bam.r: gettextf("chunk.size < number of coefficients. Reset to %d", chunk.size)
+#. R/bam.r: gettextf("chunk.size < number of coefficients. Reset to %d", chunk.size)
 
 msgid "chunk.size < number of coefficients. Reset to %d"
 msgstr ""
@@ -1946,6 +1960,7 @@ msgstr ""
 #. R/smooth.r: stop("components of knots relating to a single smooth must be of same length")
 #. R/smooth.r: stop("components of knots relating to a single smooth must be of same length")
 #. R/smooth.r: stop("components of knots relating to a single smooth must be of same length")
+#. R/smooth.r: stop("components of knots relating to a single smooth must be of same length")
 
 msgid "components of knots relating to a single smooth must be of same length"
 msgstr ""
@@ -1969,13 +1984,6 @@ msgstr ""
 #. R/sparse.r: stop("cubic spline only deals with 1D data")
 
 msgid "cubic spline only deals with 1D data"
-msgstr ""
-
-
-#: R/bam.r: 0
-#. R/bam.r: stop("currently discrete methods do not handle by variables")
-
-msgid "currently discrete methods do not handle by variables"
 msgstr ""
 
 
@@ -2027,13 +2035,6 @@ msgstr ""
 #. R/bam.r: warning("discrete method does not use parallel cluster - use nthreads instead")
 
 msgid "discrete method does not use parallel cluster - use nthreads instead"
-msgstr ""
-
-
-#: R/bam.r: 0
-#. R/bam.r: stop("discretization can not handle factor by variables")
-
-msgid "discretization can not handle factor by variables"
 msgstr ""
 
 
@@ -2184,6 +2185,13 @@ msgstr ""
 
 
 #: R/smooth.r: 0
+#. R/smooth.r: stop("fs smooth not suitable for discretisation with more than one metric predictor")
+
+msgid "fs smooth not suitable for discretisation with more than one metric predictor"
+msgstr ""
+
+
+#: R/smooth.r: 0
 #. R/smooth.r: stop("fs smooths can only have one factor argument")
 
 msgid "fs smooths can only have one factor argument"
@@ -2254,6 +2262,13 @@ msgstr ""
 #. R/mgcv.r: stop("in.out incorrect: see documentation")
 
 msgid "in.out incorrect: see documentation"
+msgstr ""
+
+
+#: R/smooth.r: 0
+#. R/smooth.r: stop("incorrect arguments to GP smoother")
+
+msgid "incorrect arguments to GP smoother"
 msgstr ""
 
 
@@ -2549,6 +2564,13 @@ msgstr ""
 
 
 #: R/smooth.r: 0
+#. R/smooth.r: warning("more knots than data in an ms term: knots ignored.")
+
+msgid "more knots than data in an ms term: knots ignored."
+msgstr ""
+
+
+#: R/smooth.r: 0
 #. R/smooth.r: warning("more knots than data in an sos term: knots ignored")
 
 msgid "more knots than data in an sos term: knots ignored"
@@ -2687,6 +2709,13 @@ msgstr ""
 #. R/mgcv.r: stop("no valid set of coefficients has been found:please supply starting values",     call. = FALSE)
 
 msgid "no valid set of coefficients has been found:please supply starting values"
+msgstr ""
+
+
+#: R/mgcv.r: 0
+#. R/mgcv.r: warning("non-existent exclude terms requested - ignoring")
+
+msgid "non-existent exclude terms requested - ignoring"
 msgstr ""
 
 
@@ -3180,6 +3209,14 @@ msgstr ""
 #. R/smooth.r: stop("too few knots")
 
 msgid "too few knots"
+msgstr ""
+
+
+#: R/bam.r: 0
+#. R/bam.r: warning("too many cluster nodes to use all efficiently")
+#. R/bam.r: warning("too many cluster nodes to use all efficiently")
+
+msgid "too many cluster nodes to use all efficiently"
 msgstr ""
 
 

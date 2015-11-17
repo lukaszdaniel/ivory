@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-09-22 23:12\n"
+"POT-Creation-Date: 2015-11-17 17:28\n"
 "PO-Revision-Date: 2012-03-15 11:56-0500\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -46,20 +46,21 @@ msgstr ""
 "%f не является правильной общей функцией: список методов был объектом класса "
 "%s"
 
+#. R/Methods.R: gettextf("%s dispatches internally;  methods can be defined, but the generic function is implicit, and cannot be changed.",     sQuote(name))
+#: R/Methods.R:0
+#, fuzzy
+msgid ""
+"%s dispatches internally;  methods can be defined, but the generic function "
+"is implicit, and cannot be changed."
+msgstr ""
+"\"%s\" является элементарной функцией; методы могут быть определены, но "
+"общая функция подразумевается и не может быть изменена."
+
 #. R/Methods.R: gettextf("%s has no methods defined", sQuote(f))
 #: R/Methods.R:0
 #, fuzzy
 msgid "%s has no methods defined"
 msgstr "\"%s\" не содержит определенных методов"
-
-#. R/Methods.R: gettextf("%s is a primitive function;  methods can be defined, but the generic function is implicit, and cannot be changed.",     sQuote(name))
-#: R/Methods.R:0
-msgid ""
-"%s is a primitive function;  methods can be defined, but the generic "
-"function is implicit, and cannot be changed."
-msgstr ""
-"\"%s\" является элементарной функцией; методы могут быть определены, но "
-"общая функция подразумевается и не может быть изменена."
 
 #. R/Methods.R: gettextf("%s is a primitive function; its generic form cannot be redefined", sQuote(name))
 #: R/Methods.R:0
@@ -2554,11 +2555,6 @@ msgstr ""
 "методы могут добавлять аргументы в общую %s только если '...' является "
 "аргументом для общей"
 
-#. R/RMethodUtils.R: gettextf("methods cannot be defined for the primitive function %s", sQuote(f))
-#: R/RMethodUtils.R:0
-msgid "methods cannot be defined for the primitive function %s"
-msgstr "методы не могут быть определены для элементарной функции %s"
-
 #. R/as.R: gettextf("methods currently exist for coercing from %s to %s; they will be replaced.",     dQuote(from), dQuote(to))
 #: R/as.R:0
 #, fuzzy
@@ -3924,6 +3920,9 @@ msgstr[1] ""
 msgstr[2] ""
 "формальные аргументы общей функции для \"%s\" (%s) отличаются от не-общих, "
 "используемых по умолчанию (%s)"
+
+#~ msgid "methods cannot be defined for the primitive function %s"
+#~ msgstr "методы не могут быть определены для элементарной функции %s"
 
 #, fuzzy
 #~ msgid "class"

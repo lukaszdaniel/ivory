@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.3.0\n"
-"POT-Creation-Date: 2015-09-22 23:12\n"
+"POT-Creation-Date: 2015-11-17 17:28\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -329,6 +329,13 @@ msgstr ""
 #. R/embed.R: gettextf("'%s' argument is not a vector or matrix", "x")
 
 msgid "'%s' argument is not a vector or matrix"
+msgstr ""
+
+
+#: R/ts-tests.R: 0
+#. R/ts-tests.R: gettextf("'%s' argument is not a vector or univariate time series", "x")
+
+msgid "'%s' argument is not a vector or univariate time series"
 msgstr ""
 
 
@@ -2131,7 +2138,6 @@ msgstr ""
 #: R/lm.R: 0
 #: R/lm.R: 0
 #: R/loess.R: 0
-#: R/loess.R: 0
 #: R/ppr.R: 0
 #: R/princomp.R: 0
 #: R/smspline.R: 0
@@ -2153,7 +2159,6 @@ msgstr ""
 #. R/hclust.R: gettext("Call:", domain = "R-stats")
 #. R/lm.R: gettext("Call:", domain = "R-stats")
 #. R/lm.R: gettext("Call:", domain = "R-stats")
-#. R/loess.R: gettext("Call:", domain = "R-stats")
 #. R/loess.R: gettext("Call:", domain = "R-stats")
 #. R/ppr.R: gettext("Call:", domain = "R-stats")
 #. R/princomp.R: gettext("Call:", domain = "R-stats")
@@ -2362,13 +2367,6 @@ msgid "Contrasts spanned by %s"
 msgstr ""
 
 
-#: R/loess.R: 0
-#. R/loess.R: gettext("Control settings:", domain = "R-stats")
-
-msgid "Control settings:"
-msgstr ""
-
-
 #: R/nls.R: 0
 #. R/nls.R: gettextf("Convergence failure: %s", msg.nls)
 
@@ -2524,7 +2522,6 @@ msgstr ""
 
 
 #: R/loess.R: 0
-#. R/loess.R: gettext("Equivalent Number of Parameters:", domain = "R-stats")
 #. R/loess.R: gettext("Equivalent Number of Parameters:", domain = "R-stats")
 
 msgid "Equivalent Number of Parameters:"
@@ -3287,7 +3284,6 @@ msgstr ""
 
 #: R/loess.R: 0
 #. R/loess.R: gettext("Number of Observations:", domain = "R-stats")
-#. R/loess.R: gettext("Number of Observations:", domain = "R-stats")
 
 msgid "Number of Observations:"
 msgstr ""
@@ -3593,7 +3589,6 @@ msgstr ""
 
 
 #: R/loess.R: 0
-#. R/loess.R: gettext("Residual Scale Estimate:", domain = "R-stats")
 #. R/loess.R: gettext("Residual Scale Estimate:", domain = "R-stats")
 
 msgid "Residual Scale Estimate:"
@@ -4008,13 +4003,6 @@ msgstr ""
 #. R/stl.R: gettext("Time.series components:", domain = "R-stats")
 
 msgid "Time.series components:"
-msgstr ""
-
-
-#: R/loess.R: 0
-#. R/loess.R: gettext("Trace of smoother matrix:", domain = "R-stats")
-
-msgid "Trace of smoother matrix:"
 msgstr ""
 
 
@@ -5617,7 +5605,7 @@ msgstr ""
 #. R/kmeans.R: gettextf("invalid '%s' value", "ncol(x)")
 #. R/kmeans.R: gettextf("invalid '%s' value", "k")
 #. R/loess.R: gettextf("invalid '%s' value", "NCOL(X)")
-#. R/loess.R: gettextf("invalid '%s' value", "NCOL(X)")
+#. R/loess.R: gettextf("invalid '%s' value", "NROW(X)")
 #. R/runmed.R: gettextf("invalid '%s' value", "length(x)")
 #. R/runmed.R: gettextf("invalid '%s' value", "k")
 #. R/smooth.R: gettextf("invalid '%s' value", "length(x)")
@@ -5792,6 +5780,13 @@ msgstr ""
 #. R/models.R: stop("invalid response type")
 
 msgid "invalid response type"
+msgstr ""
+
+
+#: R/loess.R: 0
+#. R/loess.R: gettextf("iterTrace = %s not obeyed as iterations = %d", iterTrace, iterations)
+
+msgid "iterTrace = %s not obeyed as iterations = %d"
 msgstr ""
 
 
@@ -8494,7 +8489,6 @@ msgstr ""
 
 #: R/ts-tests.R: 0
 #. R/ts-tests.R: stop("x is not a vector or univariate time series")
-#. R/ts-tests.R: stop("x is not a vector or univariate time series")
 
 msgid "x is not a vector or univariate time series"
 msgstr ""
@@ -8758,10 +8752,8 @@ msgstr[1]    ""
 
 #: R/aov.R: 0
 #: R/loess.R: 0
-#: R/loess.R: 0
 #. R/aov.R: ngettext(length(rs), "Residual Standard Error:", "Residual Standard Errors:", domain = "R-stats")
 #. R/aov.R: ngettext(length(rs), "Residual Standard Error:", "Residual Standard Errors:", domain = "R-stats")
-#. R/loess.R: ngettext(1L, "Residual Standard Error:", "Residual Standard Errors:", domain = "R-stats")
 #. R/loess.R: ngettext(1L, "Residual Standard Error:", "Residual Standard Errors:", domain = "R-stats")
 
 msgid        "Residual Standard Error:"

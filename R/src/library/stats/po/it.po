@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-04 20:50+0100\n"
+"POT-Creation-Date: 2015-11-17 17:28+0100\n"
 "PO-Revision-Date: 2005-04-14 18:06+0200\n"
 "Last-Translator: stefano iacus <stefano.iacus@r-project.org>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -327,186 +327,186 @@ msgstr ""
 msgid "NA/NaN/Inf in '%s'"
 msgstr ""
 
-#: loessc.c:227 loessc.c:348
+#: loessc.c:232 loessc.c:353
 #, fuzzy, c-format
 msgid "'%s' argument is too small"
 msgstr "ampiezza troppo piccola"
 
-#: loessc.c:233
+#: loessc.c:238
 msgid "workspace required is too large"
 msgstr ""
 
-#: loessc.c:342
+#: loessc.c:347
 #, c-format
 msgid "wrong version number in lowesd. Probably typo in caller."
 msgstr ""
 
-#: loessc.c:343
+#: loessc.c:348
 #, c-format
 msgid "d>dMAX in ehg131.  Need to recompile with increased dimensions."
 msgstr ""
 
-#: loessc.c:344 loessc.c:345
+#: loessc.c:349 loessc.c:350
 #, fuzzy, c-format
 msgid "'%s' argument is too small. (Discovered by 'lowesd()' function)"
 msgstr "'fn' non è una funzione"
 
-#: loessc.c:346
+#: loessc.c:351
 #, c-format
 msgid ""
 "'span' argument is too small. Fewer data values than degrees of freedom."
 msgstr ""
 
-#: loessc.c:347
+#: loessc.c:352
 #, c-format
 msgid "k>d2MAX in ehg136.  Need to recompile with increased dimensions."
 msgstr ""
 
-#: loessc.c:349 loessc.c:350 optim.c:364 optimize.c:254 optimize.c:261
+#: loessc.c:354 loessc.c:355 optim.c:364 optimize.c:254 optimize.c:261
 #: optimize.c:270 optimize.c:344 optimize.c:349 optimize.c:365 pacf.c:465
 #, c-format
 msgid "invalid '%s' value"
 msgstr "valore '%s' non valido"
 
-#: loessc.c:351
+#: loessc.c:356
 #, c-format
 msgid "lowstt only applies when 'kernel=1'."
 msgstr ""
 
-#: loessc.c:352
+#: loessc.c:357
 #, c-format
 msgid "not enough extra workspace for robustness calculation"
 msgstr ""
 
-#: loessc.c:353
+#: loessc.c:358
 #, c-format
 msgid "zero-width neighborhood. make span bigger"
 msgstr ""
 
-#: loessc.c:354
+#: loessc.c:359
 #, c-format
 msgid "all data on boundary of neighborhood. make span bigger"
 msgstr ""
 
-#: loessc.c:355
+#: loessc.c:360
 #, c-format
 msgid "extrapolation not allowed with blending"
 msgstr ""
 
-#: loessc.c:356
+#: loessc.c:361
 #, c-format
 msgid ""
 "ihat=1 (diag L) in 'l2fit()' function only makes sense if z=x (eval=data)."
 msgstr ""
 
-#: loessc.c:357
+#: loessc.c:362
 #, fuzzy, c-format
 msgid "'lowesd()' function must be called first."
 msgstr "m deve essere di tipo list"
 
-#: loessc.c:358
+#: loessc.c:363
 #, c-format
 msgid ""
 "'lowesf()' function must not come between lowesb and lowese, lowesr, or "
 "lowesl."
 msgstr ""
 
-#: loessc.c:359
+#: loessc.c:364
 #, c-format
 msgid "'lowesb()' function must come before lowese, lowesr, or lowesl."
 msgstr ""
 
-#: loessc.c:360
+#: loessc.c:365
 #, c-format
 msgid "'lowesb()' function need not be called twice."
 msgstr ""
 
-#: loessc.c:361
+#: loessc.c:366
 #, c-format
 msgid "need setLf=.true. for lowesl."
 msgstr ""
 
-#: loessc.c:362
+#: loessc.c:367
 #, fuzzy, c-format
 msgid "nv>nvmax in 'cpvert()' function"
 msgstr "Matrice singolare in ldet"
 
-#: loessc.c:363
+#: loessc.c:368
 #, fuzzy, c-format
 msgid "nt>20 in 'eval()' function"
 msgstr "Matrice singolare in ldet"
 
-#: loessc.c:364
+#: loessc.c:369
 #, fuzzy, c-format
 msgid "svddc failed in 'l2fit()' function"
 msgstr "Matrice singolare in ldet"
 
-#: loessc.c:365
+#: loessc.c:370
 #, fuzzy, c-format
 msgid "didnt find edge in 'vleaf()' function"
 msgstr "Matrice singolare in ldet"
 
-#: loessc.c:366
+#: loessc.c:371
 #, c-format
 msgid "zero-width cell found in 'vleaf()' function"
 msgstr ""
 
-#: loessc.c:367
+#: loessc.c:372
 #, c-format
 msgid "trouble descending to leaf in 'vleaf()' function"
 msgstr ""
 
-#: loessc.c:368
+#: loessc.c:373
 #, c-format
 msgid "insufficient workspace for 'lowesf()' function"
 msgstr ""
 
-#: loessc.c:369
+#: loessc.c:374
 #, c-format
 msgid "insufficient stack space"
 msgstr ""
 
-#: loessc.c:370
+#: loessc.c:375
 #, c-format
 msgid "lv too small for computing explicit L"
 msgstr ""
 
-#: loessc.c:371
+#: loessc.c:376
 #, c-format
 msgid "computed trace L was negative; something is wrong!"
 msgstr ""
 
-#: loessc.c:372
+#: loessc.c:377
 #, c-format
 msgid "computed delta was negative; something is wrong!"
 msgstr ""
 
-#: loessc.c:373
+#: loessc.c:378
 #, c-format
 msgid "workspace in loread appears to be corrupted"
 msgstr ""
 
-#: loessc.c:374
+#: loessc.c:379
 #, c-format
 msgid "trouble in l2fit/l2tr"
 msgstr ""
 
-#: loessc.c:375
+#: loessc.c:380
 #, c-format
 msgid "only constant, linear, or quadratic local models allowed"
 msgstr ""
 
-#: loessc.c:376
+#: loessc.c:381
 #, c-format
 msgid "degree must be at least 1 for vertex influence matrix"
 msgstr ""
 
-#: loessc.c:377
+#: loessc.c:382
 #, c-format
 msgid "not yet implemented"
 msgstr ""
 
-#: loessc.c:379
+#: loessc.c:384
 #, fuzzy, c-format
 msgid "Assert failed; error code %d\n"
 msgstr "codice di errore starma %d"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.7-19\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-29 22:15+0200\n"
+"POT-Creation-Date: 2015-11-17 17:53+0100\n"
 "PO-Revision-Date: 2015-04-02 21:47+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -42,12 +42,12 @@ msgstr ""
 "\n"
 "problem z wymiarem pliku\n"
 
-#: mat.c:2551
+#: mat.c:2561
 #, c-format
 msgid "Non orthogonal eigenvectors %d %g\n"
 msgstr "Nieortogonalne wektory własne %d %g\n"
 
-#: mat.c:2556
+#: mat.c:2566
 #, c-format
 msgid "Eigenvectors not normalized %d %g\n"
 msgstr "Wektory własne nie są znormalizowane %d %g\n"
