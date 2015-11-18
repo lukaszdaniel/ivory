@@ -2788,7 +2788,7 @@ setRlibs <-
                 R_check_vignettes_skip_run_maybe && do_build_vignettes
 
             vigns <- pkgVignettes(dir = pkgdir)
-            savefiles <- 
+            savefiles <-
                 file.path(dirname(vigns$docs),
                           paste0(vigns$names, ".Rout.save"))
 
@@ -2876,7 +2876,7 @@ setRlibs <-
                     }
                 } else resultLog(Log, gettext("OK", domain = "R-tools"))
             }
-                
+
             if (do_build_vignettes) {
                 checkingLog(Log, gettext("checking re-building of vignette outputs ...", domain = "R-tools"))
                 ## copy the whole pkg directory to check directory
@@ -3441,6 +3441,14 @@ setRlibs <-
                                   fixed = TRUE, invert = TRUE, value = TRUE)
 
                 lines <- unique(lines)
+
+                ## Can get reports like
+                ## Warning: No generic function ‘as.vector’ found corresponding to requested imported methods from package ‘Matrix’ when loading ‘MatrixModels’ (malformed exports?)
+                ## Exclude these unless they are about the current package.
+                load_re <- gettext("Warning: No generic function.*corresponding to requested imported methods", domain = "R-tools")
+                ex <- grepl(load_re, lines, useBytes = TRUE) &
+                    !grepl(pkgname, lines, fixed = TRUE, useBytes = TRUE)
+                lines <- lines[!ex]
 
                 note_re <-
                     gettext("warning: control may reach end of non-void function", domain = "R-tools")
@@ -4194,7 +4202,7 @@ setRlibs <-
     R_check_vignettes_skip_run_maybe <-
         config_val_to_logical(Sys.getenv("_R_CHECK_VIGNETTES_SKIP_RUN_MAYBE_",
                                          "FALSE"))
-    
+
     if (!nzchar(check_subdirs)) check_subdirs <- R_check_subdirs_strict
 
     if (as_cran) {
@@ -4585,7 +4593,7 @@ setRlibs <-
 
         if(Log$errors > 0L)
             do_exit(1L)
-        
+
         closeLog(Log)
         message("")
 
