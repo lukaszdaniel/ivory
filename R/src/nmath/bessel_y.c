@@ -82,10 +82,10 @@ double bessel_y(double x, double alpha)
 	    return ML_POSINF;
 	}
 	else if(ncalc < -1)
-	    MATHLIB_WARNING4(_("bessel_y(%g): ncalc (=%ld) != nb (=%ld); alpha=%g. Arg. out of range?\n"),
+	    MATHLIB_WARNING4(_("bessel_y(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?"),
 			     x, ncalc, nb, alpha);
 	else /* ncalc >= 0 */
-	    MATHLIB_WARNING2(_("bessel_y(%g,nu=%g): precision lost in result\n"),
+	    MATHLIB_WARNING2(_("bessel_y(%g,nu=%g): precision lost in result"),
 			     x, alpha+(double)nb-1);
     }
     x = by[nb-1];
@@ -130,10 +130,10 @@ double bessel_y_ex(double x, double alpha, double *by)
 	if(ncalc == -1)
 	    return ML_POSINF;
 	else if(ncalc < -1)
-	    MATHLIB_WARNING4(_("bessel_y(%g): ncalc (=%ld) != nb (=%ld); alpha=%g. Arg. out of range?\n"),
+	    MATHLIB_WARNING4(_("bessel_y(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?"),
 			     x, ncalc, nb, alpha);
 	else /* ncalc >= 0 */
-	    MATHLIB_WARNING2(_("bessel_y(%g,nu=%g): precision lost in result\n"),
+	    MATHLIB_WARNING2(_("bessel_y(%g,nu=%g): precision lost in result"),
 			     x, alpha+(double)nb-1);
     }
     x = by[nb-1];
