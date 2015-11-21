@@ -129,7 +129,7 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
 	Rprintf("\"%s\"", CHAR(v));
     }
     if (TYPEOF(v) == SYMSXP) {
-	if((SYMVALUE(v) == R_UnboundValue))
+	if(SYMVALUE(v) == R_UnboundValue)
 	  Rprintf("\"%s\"", EncodeChar(PRINTNAME(v)));
 	else
 	  Rprintf(_("\"%s\" (has value)"), EncodeChar(PRINTNAME(v)));
