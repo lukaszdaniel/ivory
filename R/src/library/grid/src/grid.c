@@ -1100,6 +1100,7 @@ SEXP L_convert(SEXP x, SEXP whatfrom,
     double rotationAngle;
     LViewportContext vpc;
     R_GE_gcontext gc;
+    memset(gc.fontfamily, 0, 201); // initialize for VFontFamilyCode
     LTransform transform;
     SEXP currentvp, currentgp;
     int TOunit, FROMaxis, TOaxis;

@@ -479,7 +479,7 @@ static R_INLINE SEXP getFunc(SEXP list, char *enm, char *lnm)
 {
     SEXP ans;
     if (!isFunction(ans = getElement(list, enm))) {
-	char *bf;
+	char *bf = NULL;
 	strcat(bf, lnm);
 	strcat(bf, "$");
 	strcat(bf, enm);
