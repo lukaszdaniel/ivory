@@ -69,6 +69,12 @@ static Rboolean sm_3(double *x, double *y, int n, int end_rule)
     int i,j;
     Rboolean chg = FALSE;
 
+    if (n <= 2) {
+        for(i=0; i < n; i++)
+	   y[i] = x[i];
+        return FALSE;
+    }
+
     for(i = 1; i < n-1; i++) {
 	j = imed3(x[i-1], x[i], x[i+1]);
 	y[i] = x[i + j];
@@ -118,7 +124,7 @@ static int sm_3R(double *x, double *y, double *z, int n, int end_rule)
 	}
     }
 
-    sm_DO_ENDRULE(y);/* =>  chg = TRUE  iff  ends changed */
+    if (n > 2) sm_DO_ENDRULE(y);/* =>  chg = TRUE  iff  ends changed */
 
     return(iter ? iter : chg);
     /* = 0   <==>  only one "3" w/o any change
@@ -148,6 +154,8 @@ static Rboolean sm_split3(double *x, double *y, int n, Rboolean do_ends)
 
     for(i=0; i < n; i++)
 	y[i] = x[i];
+
+    if (n <= 4) return FALSE;
 
     /* Colin Goodall doesn't do splits near ends
        in spl() in Statlib's "smoother" code !! */
@@ -236,7 +244,7 @@ static int sm_3RSR(double *x, double *y, double *z, double *w, int n,
     return(iter);
 }
 
-
+
 /*-------- These are  called from R : -----------*/
 
 #include <Rinternals.h>
