@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.3.0\n"
-"POT-Creation-Date: 2015-11-04 21:08\n"
+"POT-Creation-Date: 2015-12-12 21:35\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4573,6 +4573,13 @@ msgstr ""
 #. R/check.R: gettext("\nWarning: --install=check... specified without --library\n", domain = "R-tools")
 
 msgid "Warning: --install=check... specified without --library"
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("Warning: No generic function.*corresponding to requested imported methods",     domain = "R-tools")
+
+msgid "Warning: No generic function.*corresponding to requested imported methods"
 msgstr ""
 
 

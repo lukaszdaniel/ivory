@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-04 21:08\n"
+"POT-Creation-Date: 2015-12-12 21:35\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -3865,6 +3865,12 @@ msgstr ""
 #. R/check.R: gettext("\nWarning: --install=check... specified without --library\n", domain = "R-tools")
 #: R/check.R:0
 msgid "Warning: --install=check... specified without --library"
+msgstr ""
+
+#. R/check.R: gettext("Warning: No generic function.*corresponding to requested imported methods",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"Warning: No generic function.*corresponding to requested imported methods"
 msgstr ""
 
 #. R/testing.R: gettextf("Warning: creation of %s failed", sQuote(Rfile), domain = "R-tools")

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-17 20:33\n"
+"POT-Creation-Date: 2015-12-12 21:34\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -994,16 +994,11 @@ msgstr "can only truncate an open connection"
 msgid "'tzone' attributes are inconsistent"
 msgstr "'tzone' 속성이 일관되지 않습니다 "
 
-#. R/findInt.R: stop("'vec' argument contains NA values")
+#. R/findInt.R: stop("'vec' argument must be sorted non-decreasingly and not contain NA values")
 #: R/findInt.R:0
 #, fuzzy
-msgid "'vec' argument contains NA values"
-msgstr "'vec' 에 NA 가 있습니다"
-
-#. R/findInt.R: stop("'vec' argument must be sorted non-decreasingly")
-#: R/findInt.R:0
-#, fuzzy
-msgid "'vec' argument must be sorted non-decreasingly"
+msgid ""
+"'vec' argument must be sorted non-decreasingly and not contain NA values"
 msgstr "'vec' 는 비감소순으로 정렬되어야합니다 "
 
 #. R/library.R: message("'verbose' and 'quietly' arguments are both true; being verbose then ..")
@@ -3592,6 +3587,10 @@ msgstr[0] "%s 라는 이름의 패키지는 없습니다"
 msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "TRUE 대신 T 가 사용되었습니다 "
+
+#, fuzzy
+#~ msgid "'vec' argument contains NA values"
+#~ msgstr "'vec' 에 NA 가 있습니다"
 
 #, fuzzy
 #~ msgid "%s value was not found"

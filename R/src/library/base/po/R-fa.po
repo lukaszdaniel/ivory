@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-17 20:33\n"
+"POT-Creation-Date: 2015-12-12 21:34\n"
 "PO-Revision-Date: 2012-11-27 01:11+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -852,14 +852,10 @@ msgstr ""
 msgid "'tzone' attributes are inconsistent"
 msgstr ""
 
-#. R/findInt.R: stop("'vec' argument contains NA values")
+#. R/findInt.R: stop("'vec' argument must be sorted non-decreasingly and not contain NA values")
 #: R/findInt.R:0
-msgid "'vec' argument contains NA values"
-msgstr ""
-
-#. R/findInt.R: stop("'vec' argument must be sorted non-decreasingly")
-#: R/findInt.R:0
-msgid "'vec' argument must be sorted non-decreasingly"
+msgid ""
+"'vec' argument must be sorted non-decreasingly and not contain NA values"
 msgstr ""
 
 #. R/library.R: message("'verbose' and 'quietly' arguments are both true; being verbose then ..")

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-17 17:27+0100\n"
+"POT-Creation-Date: 2015-12-12 21:34+0100\n"
 "PO-Revision-Date: 2012-10-26 22:30+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -673,31 +673,31 @@ msgstr ""
 #: src/main/scan.c:873 src/main/scan.c:884 src/main/scan.c:911
 #: src/main/scan.c:914 src/main/scan.c:917 src/main/scan.c:972
 #: src/main/seq.c:615 src/main/seq.c:620 src/main/seq.c:627 src/main/seq.c:657
-#: src/main/seq.c:661 src/main/seq.c:667 src/main/seq.c:675
-#: src/main/sort.c:176 src/main/sysutils.c:591 src/main/sysutils.c:595
-#: src/main/sysutils.c:599 src/main/sysutils.c:605 src/main/sysutils.c:609
-#: src/main/sysutils.c:1780 src/main/sysutils.c:1784 src/main/unique.c:1029
-#: src/main/unique.c:1335 src/main/unique.c:1339 src/main/unique.c:1349
-#: src/main/unique.c:1745 src/main/util.c:639 src/main/util.c:642
-#: src/main/util.c:1378 src/main/util.c:1392 src/main/util.c:1974
-#: src/main/util.c:2197 src/main/util.c:2198 src/main/util.c:2199
-#: src/main/util.c:2216 src/main/util.c:2240 src/main/util.c:2244
-#: src/main/util.c:2246 src/main/util.c:2271 src/main/util.c:2273
-#: src/main/util.c:2275 src/main/util.c:2278 src/main/util.c:2281
-#: src/main/util.c:2285 src/main/util.c:2287
-#: src/modules/internet/internet.c:454 src/modules/internet/internet.c:460
-#: src/modules/internet/internet.c:466 src/modules/internet/internet.c:469
-#: src/modules/internet/internet.c:473 src/modules/internet/internet.c:478
-#: src/modules/internet/libcurl.c:246 src/modules/internet/libcurl.c:251
-#: src/modules/internet/libcurl.c:254 src/modules/internet/libcurl.c:417
-#: src/modules/internet/libcurl.c:421 src/modules/internet/libcurl.c:426
-#: src/modules/internet/libcurl.c:429 src/modules/internet/libcurl.c:433
-#: src/modules/lapack/Lapack.c:156 src/modules/lapack/Lapack.c:262
-#: src/modules/lapack/Lapack.c:709 src/modules/lapack/Lapack.c:818
-#: src/modules/lapack/Lapack.c:880 src/modules/lapack/Lapack.c:1205
-#: src/modules/X11/devX11.c:3235 src/modules/X11/devX11.c:3238
-#: src/modules/X11/devX11.c:3241 src/modules/X11/devX11.c:3265
-#: src/unix/sys-std.c:1224 src/unix/sys-std.c:1247
+#: src/main/seq.c:661 src/main/seq.c:667 src/main/seq.c:675 src/main/sort.c:176
+#: src/main/sysutils.c:591 src/main/sysutils.c:595 src/main/sysutils.c:599
+#: src/main/sysutils.c:605 src/main/sysutils.c:609 src/main/sysutils.c:1780
+#: src/main/sysutils.c:1784 src/main/unique.c:1029 src/main/unique.c:1335
+#: src/main/unique.c:1339 src/main/unique.c:1349 src/main/unique.c:1745
+#: src/main/util.c:639 src/main/util.c:642 src/main/util.c:1378
+#: src/main/util.c:1392 src/main/util.c:1974 src/main/util.c:2197
+#: src/main/util.c:2198 src/main/util.c:2199 src/main/util.c:2216
+#: src/main/util.c:2240 src/main/util.c:2244 src/main/util.c:2246
+#: src/main/util.c:2271 src/main/util.c:2273 src/main/util.c:2275
+#: src/main/util.c:2278 src/main/util.c:2281 src/main/util.c:2285
+#: src/main/util.c:2287 src/modules/internet/internet.c:454
+#: src/modules/internet/internet.c:460 src/modules/internet/internet.c:466
+#: src/modules/internet/internet.c:469 src/modules/internet/internet.c:473
+#: src/modules/internet/internet.c:478 src/modules/internet/libcurl.c:246
+#: src/modules/internet/libcurl.c:251 src/modules/internet/libcurl.c:254
+#: src/modules/internet/libcurl.c:417 src/modules/internet/libcurl.c:421
+#: src/modules/internet/libcurl.c:426 src/modules/internet/libcurl.c:429
+#: src/modules/internet/libcurl.c:433 src/modules/lapack/Lapack.c:156
+#: src/modules/lapack/Lapack.c:262 src/modules/lapack/Lapack.c:709
+#: src/modules/lapack/Lapack.c:818 src/modules/lapack/Lapack.c:880
+#: src/modules/lapack/Lapack.c:1205 src/modules/X11/devX11.c:3235
+#: src/modules/X11/devX11.c:3238 src/modules/X11/devX11.c:3241
+#: src/modules/X11/devX11.c:3265 src/unix/sys-std.c:1224
+#: src/unix/sys-std.c:1247
 #, c-format
 msgid "invalid '%s' argument"
 msgstr ""
@@ -801,9 +801,9 @@ msgstr ""
 msgid "broken Windows pipe"
 msgstr ""
 
-#: src/gnuwin32/run.c:717 src/main/connections.c:330
-#: src/main/connections.c:347 src/main/connections.c:2905
-#: src/main/printutils.c:874 src/main/printutils.c:888
+#: src/gnuwin32/run.c:717 src/main/connections.c:330 src/main/connections.c:347
+#: src/main/connections.c:2905 src/main/printutils.c:874
+#: src/main/printutils.c:888
 msgid "printing of extremely long output is truncated"
 msgstr ""
 
@@ -1001,7 +1001,7 @@ msgid ""
 msgstr ""
 
 #: src/gnuwin32/getline/getline.c:1041 src/gnuwin32/getline/wc_history.c:142
-#: src/main/edit.c:122 src/main/eval.c:6237 src/main/eval.c:6258
+#: src/main/edit.c:122 src/main/eval.c:6239 src/main/eval.c:6260
 #: src/main/saveload.c:2071 src/unix/hpdlfcn.c:150
 #, c-format
 msgid "unable to open file '%s'"
@@ -1111,24 +1111,24 @@ msgid "'%s' argument must be a vector"
 msgstr ""
 
 #: src/main/apply.c:101 src/main/array.c:503 src/main/character.c:747
-#: src/main/character.c:1554 src/main/connections.c:3546
-#: src/main/context.c:629 src/main/context.c:648 src/main/datetime.c:686
-#: src/main/datetime.c:788 src/main/datetime.c:1047 src/main/dotcode.c:220
-#: src/main/errors.c:943 src/main/errors.c:975 src/main/errors.c:1078
-#: src/main/errors.c:1103 src/main/errors.c:1108 src/main/errors.c:1381
-#: src/main/identical.c:73 src/main/identical.c:74 src/main/identical.c:75
-#: src/main/identical.c:76 src/main/identical.c:77 src/main/platform.c:2965
-#: src/main/seq.c:193 src/main/seq.c:340 src/main/seq.c:345 src/main/seq.c:349
-#: src/main/seq.c:390 src/main/seq.c:394 src/main/seq.c:398
-#: src/main/sort.c:1244 src/main/sort.c:1327 src/main/sort.c:1331
-#: src/main/sort.c:1338 src/main/sort.c:1413 src/main/source.c:223
-#: src/main/summary.c:954 src/main/sysutils.c:250 src/main/util.c:1050
-#: src/main/util.c:1055 src/main/util.c:1062 src/main/util.c:1065
-#: src/main/util.c:2034 src/modules/lapack/Lapack.c:940
-#: src/modules/X11/devX11.c:3137 src/modules/X11/devX11.c:3163
-#: src/modules/X11/devX11.c:3168 src/modules/X11/devX11.c:3173
-#: src/modules/X11/devX11.c:3183 src/modules/X11/devX11.c:3188
-#: src/modules/X11/devX11.c:3192 src/modules/X11/devX11.c:3196
+#: src/main/character.c:1554 src/main/connections.c:3546 src/main/context.c:629
+#: src/main/context.c:648 src/main/datetime.c:686 src/main/datetime.c:788
+#: src/main/datetime.c:1047 src/main/dotcode.c:220 src/main/errors.c:943
+#: src/main/errors.c:975 src/main/errors.c:1078 src/main/errors.c:1103
+#: src/main/errors.c:1108 src/main/errors.c:1381 src/main/identical.c:73
+#: src/main/identical.c:74 src/main/identical.c:75 src/main/identical.c:76
+#: src/main/identical.c:77 src/main/platform.c:2965 src/main/seq.c:193
+#: src/main/seq.c:340 src/main/seq.c:345 src/main/seq.c:349 src/main/seq.c:390
+#: src/main/seq.c:394 src/main/seq.c:398 src/main/sort.c:1244
+#: src/main/sort.c:1327 src/main/sort.c:1331 src/main/sort.c:1338
+#: src/main/sort.c:1413 src/main/source.c:223 src/main/summary.c:954
+#: src/main/sysutils.c:250 src/main/util.c:1050 src/main/util.c:1055
+#: src/main/util.c:1062 src/main/util.c:1065 src/main/util.c:2034
+#: src/modules/lapack/Lapack.c:940 src/modules/X11/devX11.c:3137
+#: src/modules/X11/devX11.c:3163 src/modules/X11/devX11.c:3168
+#: src/modules/X11/devX11.c:3173 src/modules/X11/devX11.c:3183
+#: src/modules/X11/devX11.c:3188 src/modules/X11/devX11.c:3192
+#: src/modules/X11/devX11.c:3196
 #, c-format
 msgid "invalid '%s' value"
 msgstr ""
@@ -1504,7 +1504,7 @@ msgstr ""
 msgid "'dimnames()' applied to non-array"
 msgstr ""
 
-#: src/main/attrib.c:1038 src/main/coerce.c:2454 src/main/engine.c:2979
+#: src/main/attrib.c:1038 src/main/coerce.c:2454 src/main/engine.c:2985
 #, c-format
 msgid "'%s' argument must be a list"
 msgstr ""
@@ -1709,13 +1709,13 @@ msgstr ""
 
 #: src/main/builtin.c:85 src/main/builtin.c:94 src/main/builtin.c:296
 #: src/main/builtin.c:329 src/main/builtin.c:386 src/main/builtin.c:400
-#: src/main/coerce.c:1521 src/main/connections.c:3057 src/main/engine.c:2981
+#: src/main/coerce.c:1521 src/main/connections.c:3057 src/main/engine.c:2987
 #: src/main/envir.c:1070 src/main/envir.c:1123 src/main/envir.c:1279
 #: src/main/envir.c:1818 src/main/envir.c:1942 src/main/envir.c:2008
 #: src/main/envir.c:2141 src/main/envir.c:2860 src/main/envir.c:2946
 #: src/main/envir.c:3251 src/main/envir.c:3280 src/main/envir.c:3301
 #: src/main/envir.c:3324 src/main/envir.c:3358 src/main/envir.c:3378
-#: src/main/envir.c:3699 src/main/envir.c:3704 src/main/eval.c:6150
+#: src/main/envir.c:3699 src/main/envir.c:3704 src/main/eval.c:6152
 #: src/main/objects.c:192 src/main/objects.c:200 src/main/saveload.c:2065
 #: src/main/saveload.c:2356 src/main/serialize.c:2756
 msgid "use of NULL environment is defunct"
@@ -1725,7 +1725,7 @@ msgstr ""
 msgid "replacement object is not an environment"
 msgstr ""
 
-#: src/main/builtin.c:334 src/main/coerce.c:2458 src/main/engine.c:2985
+#: src/main/builtin.c:334 src/main/coerce.c:2458 src/main/engine.c:2991
 #: src/main/envir.c:1852 src/main/envir.c:2867 src/main/envir.c:2948
 #: src/main/unique.c:1343
 #, c-format
@@ -1802,9 +1802,9 @@ msgid "invalid value"
 msgstr ""
 
 #: src/main/builtin.c:967 src/main/coerce.c:2524 src/main/coerce.c:2567
-#: src/main/eval.c:557 src/main/eval.c:676 src/main/eval.c:2191
-#: src/main/eval.c:2271 src/main/eval.c:2332 src/main/eval.c:2670
-#: src/main/eval.c:5496 src/main/eval.c:5613
+#: src/main/eval.c:557 src/main/eval.c:676 src/main/eval.c:2193
+#: src/main/eval.c:2273 src/main/eval.c:2334 src/main/eval.c:2672
+#: src/main/eval.c:5498 src/main/eval.c:5615
 msgid "'...' used in an incorrect context"
 msgstr ""
 
@@ -1818,7 +1818,7 @@ msgstr ""
 msgid "'%s' argument is missing"
 msgstr ""
 
-#: src/main/builtin.c:1026 src/main/eval.c:5968
+#: src/main/builtin.c:1026 src/main/eval.c:5970
 #, c-format
 msgid "'%s' argument must be a vector of length 1"
 msgstr ""
@@ -1975,7 +1975,7 @@ msgstr ""
 msgid "list argument expected"
 msgstr ""
 
-#: src/main/coerce.c:1525 src/main/eval.c:6154
+#: src/main/coerce.c:1525 src/main/eval.c:6156
 msgid "invalid environment"
 msgstr ""
 
@@ -3070,7 +3070,7 @@ msgid "'opts' argument should be small non-negative integer"
 msgstr ""
 
 #: src/main/deparse.c:422 src/main/envir.c:1967 src/main/envir.c:2052
-#: src/main/eval.c:563 src/main/eval.c:1322 src/main/eval.c:4145
+#: src/main/eval.c:563 src/main/eval.c:1322 src/main/eval.c:4147
 #: src/main/saveload.c:1977 src/main/saveload.c:2304 src/main/serialize.c:2774
 #, c-format
 msgid "object '%s' was not found"
@@ -3092,15 +3092,15 @@ msgstr ""
 msgid "no active or default device"
 msgstr ""
 
-#: src/main/devices.c:388 src/main/devices.c:450
+#: src/main/devices.c:389 src/main/devices.c:451
 msgid "too many open devices"
 msgstr ""
 
-#: src/main/devices.c:491
+#: src/main/devices.c:492
 msgid "not enough memory to allocate device (in 'GEcreateDevDesc()' function)"
 msgstr ""
 
-#: src/main/devices.c:532
+#: src/main/devices.c:533
 msgid "Hit <Return> to see next plot: "
 msgstr ""
 
@@ -3197,7 +3197,7 @@ msgstr ""
 msgid "no arguments supplied"
 msgstr ""
 
-#: src/main/dotcode.c:513 src/main/dotcode.c:1403 src/main/eval.c:2209
+#: src/main/dotcode.c:513 src/main/dotcode.c:1403 src/main/eval.c:2211
 #, c-format
 msgid "'%s' is missing"
 msgstr ""
@@ -3211,7 +3211,7 @@ msgstr ""
 msgid "'.NAME' is missing"
 msgstr ""
 
-#: src/main/dotcode.c:1267 src/main/dotcode.c:1284 src/main/engine.c:3007
+#: src/main/dotcode.c:1267 src/main/dotcode.c:1284 src/main/engine.c:3013
 msgid "invalid graphics state"
 msgstr ""
 
@@ -3515,93 +3515,93 @@ msgstr ""
 msgid "raster capture is not available for this device"
 msgstr ""
 
-#: src/main/engine.c:1658
+#: src/main/engine.c:1664
 #, c-format
 msgid "font face %d is not supported for font family '%s'"
 msgstr ""
 
-#: src/main/engine.c:1972
+#: src/main/engine.c:1978
 msgid "no graphics device is active"
 msgstr ""
 
-#: src/main/engine.c:2010
+#: src/main/engine.c:2016
 msgid "use of negative 'pch' argument with symbol font is invalid"
 msgstr ""
 
-#: src/main/engine.c:2049
+#: src/main/engine.c:2055
 #, c-format
 msgid "'pch' value '%d' is invalid in this locale"
 msgstr ""
 
-#: src/main/engine.c:2307
+#: src/main/engine.c:2313
 #, c-format
 msgid "unimplemented 'pch' value '%d'"
 msgstr ""
 
-#: src/main/engine.c:2330
+#: src/main/engine.c:2336
 #, c-format
 msgid "invalid axis extents '[GEPretty(.,.,n=%d)]'"
 msgstr ""
 
-#: src/main/engine.c:2334
+#: src/main/engine.c:2340
 #, c-format
 msgid "infinite axis extents '[GEPretty(%g,%g,%d)]'"
 msgstr ""
 
-#: src/main/engine.c:2371
+#: src/main/engine.c:2377
 #, c-format
 msgid " .. 'GEPretty(.)': new *lo = %g < %g = x1"
 msgstr ""
 
-#: src/main/engine.c:2373
+#: src/main/engine.c:2379
 #, c-format
 msgid " .. 'GEPretty(.)': new *up = %g > %g = x2"
 msgstr ""
 
-#: src/main/engine.c:2778
+#: src/main/engine.c:2784
 msgid "display list redraw incomplete"
 msgstr ""
 
-#: src/main/engine.c:2782
+#: src/main/engine.c:2788
 msgid "invalid display list"
 msgstr ""
 
-#: src/main/engine.c:2894
+#: src/main/engine.c:2900
 #, c-format
 msgid ""
 "snapshot recorded with different graphics engine version (pre 11 - this is "
 "version %d)"
 msgstr ""
 
-#: src/main/engine.c:2898
+#: src/main/engine.c:2904
 #, c-format
 msgid ""
 "snapshot recorded with different graphics engine version (%d - this is "
 "version %d)"
 msgstr ""
 
-#: src/main/engine.c:2977
+#: src/main/engine.c:2983
 #, c-format
 msgid "'%s' argument must be an expression"
 msgstr ""
 
-#: src/main/engine.c:3065 src/main/engine.c:3073
+#: src/main/engine.c:3071 src/main/engine.c:3079
 msgid "invalid multibyte char in 'pch=\"c\"'"
 msgstr ""
 
-#: src/main/engine.c:3120
+#: src/main/engine.c:3126
 msgid "invalid hex digit in 'color' or 'lty' argument"
 msgstr ""
 
-#: src/main/engine.c:3143
+#: src/main/engine.c:3149
 msgid "invalid line type: must be length 2, 4, 6 or 8"
 msgstr ""
 
-#: src/main/engine.c:3147
+#: src/main/engine.c:3153
 msgid "invalid line type: zeroes are not allowed"
 msgstr ""
 
-#: src/main/engine.c:3156 src/main/engine.c:3164 src/main/engine.c:3171
+#: src/main/engine.c:3162 src/main/engine.c:3170 src/main/engine.c:3177
 msgid "invalid line type"
 msgstr ""
 
@@ -3655,7 +3655,7 @@ msgid "'..%d' used in an incorrect context, no '...' list to look in"
 msgstr ""
 
 #: src/main/envir.c:1533 src/main/envir.c:2041 src/main/eval.c:567
-#: src/main/eval.c:568 src/main/eval.c:4131 src/main/eval.c:4132
+#: src/main/eval.c:568 src/main/eval.c:4133 src/main/eval.c:4134
 #: src/main/RNG.c:352
 #, c-format
 msgid "'%s' argument is missing, with no default"
@@ -4080,7 +4080,7 @@ msgstr ""
 msgid "unable to create profiling thread"
 msgstr ""
 
-#: src/main/eval.c:375 src/main/eval.c:6434
+#: src/main/eval.c:375 src/main/eval.c:6436
 msgid "setting profile timer failed"
 msgstr ""
 
@@ -4124,8 +4124,8 @@ msgid ""
 "evaluation is nested too deeply: infinite recursion / options(expressions=)?"
 msgstr ""
 
-#: src/main/eval.c:613 src/main/eval.c:5395 src/main/eval.c:5411
-#: src/main/eval.c:5423 src/main/eval.c:5575
+#: src/main/eval.c:613 src/main/eval.c:5397 src/main/eval.c:5413
+#: src/main/eval.c:5425 src/main/eval.c:5577
 msgid "trace: "
 msgstr ""
 
@@ -4139,7 +4139,7 @@ msgstr ""
 msgid "vis: builtin %s\n"
 msgstr ""
 
-#: src/main/eval.c:672 src/main/eval.c:1206 src/main/eval.c:5445
+#: src/main/eval.c:672 src/main/eval.c:1206 src/main/eval.c:5447
 msgid "attempt to apply non-function"
 msgstr ""
 
@@ -4156,7 +4156,7 @@ msgstr ""
 msgid "exiting from: "
 msgstr ""
 
-#: src/main/eval.c:1198 src/main/eval.c:2196 src/main/eval.c:5014
+#: src/main/eval.c:1198 src/main/eval.c:2198 src/main/eval.c:5016
 #, c-format
 msgid "argument %d is empty"
 msgstr ""
@@ -4191,225 +4191,225 @@ msgstr ""
 msgid "argument is of length 0"
 msgstr ""
 
-#: src/main/eval.c:1498
+#: src/main/eval.c:1499
 msgid "non-symbol loop variable"
 msgstr ""
 
-#: src/main/eval.c:1590 src/main/eval.c:5218
+#: src/main/eval.c:1591 src/main/eval.c:5220
 msgid "invalid 'for()' loop sequence"
 msgstr ""
 
-#: src/main/eval.c:1730
+#: src/main/eval.c:1732
 msgid "multi-argument returns are not permitted"
 msgstr ""
 
-#: src/main/eval.c:1777
+#: src/main/eval.c:1779
 msgid "invalid (NULL) left side of assignment"
 msgstr ""
 
-#: src/main/eval.c:1811
+#: src/main/eval.c:1813
 msgid "target of assignment expands to non-language object"
 msgstr ""
 
-#: src/main/eval.c:1909
+#: src/main/eval.c:1911
 #, c-format
 msgid "over-long name in '%s' function"
 msgstr ""
 
-#: src/main/eval.c:1999
+#: src/main/eval.c:2001
 msgid "cannot do complex assignments in base namespace"
 msgstr ""
 
-#: src/main/eval.c:2001
+#: src/main/eval.c:2003
 msgid "cannot do complex assignments in base environment"
 msgstr ""
 
-#: src/main/eval.c:2040 src/main/eval.c:2067
+#: src/main/eval.c:2042 src/main/eval.c:2069
 msgid "invalid function in complex assignment"
 msgstr ""
 
-#: src/main/eval.c:2127
+#: src/main/eval.c:2129
 msgid "invalid ('do_set()' function) left-hand side to assignment"
 msgstr ""
 
-#: src/main/eval.c:2364
+#: src/main/eval.c:2366
 msgid "invalid formal argument list for \"function\""
 msgstr ""
 
-#: src/main/eval.c:2425 src/main/eval.c:2455 src/main/eval.c:2459
+#: src/main/eval.c:2427 src/main/eval.c:2457 src/main/eval.c:2461
 #, c-format
 msgid "invalid '%s' argument of type '%s'"
 msgstr ""
 
-#: src/main/eval.c:2452
+#: src/main/eval.c:2454
 msgid "numeric 'envir' argument is not of length one"
 msgstr ""
 
-#: src/main/eval.c:2474 src/main/eval.c:2498
+#: src/main/eval.c:2476 src/main/eval.c:2500
 msgid "restarts are not supported in 'eval()' function"
 msgstr ""
 
-#: src/main/eval.c:2557 src/main/eval.c:2570
+#: src/main/eval.c:2559 src/main/eval.c:2572
 msgid "'Recall()' function called from outside a closure"
 msgstr ""
 
-#: src/main/eval.c:2663
+#: src/main/eval.c:2665
 msgid "value in '...' is not a promise"
 msgstr ""
 
-#: src/main/eval.c:2924
+#: src/main/eval.c:2926
 #, c-format
 msgid "Incompatible methods (\"%s\", \"%s\") for \"%s\""
 msgstr ""
 
-#: src/main/eval.c:2972
+#: src/main/eval.c:2974
 msgid "dispatch error in group dispatch"
 msgstr ""
 
-#: src/main/eval.c:3456 src/main/eval.c:5547 src/main/seq.c:919
+#: src/main/eval.c:3458 src/main/eval.c:5549 src/main/seq.c:919
 #, c-format
 msgid "'%s' is not a '%s' function"
 msgstr ""
 
-#: src/main/eval.c:3941
+#: src/main/eval.c:3943
 msgid "node stack overflow"
 msgstr ""
 
-#: src/main/eval.c:3947
+#: src/main/eval.c:3949
 msgid "integer stack overflow"
 msgstr ""
 
-#: src/main/eval.c:4001
+#: src/main/eval.c:4003
 msgid "bad operation code"
 msgstr ""
 
-#: src/main/eval.c:4998 src/main/logic.c:254 src/main/logic.c:260
+#: src/main/eval.c:5000 src/main/logic.c:254 src/main/logic.c:260
 #, c-format
 msgid "invalid '%s' type in 'x %s y'"
 msgstr ""
 
-#: src/main/eval.c:5028
+#: src/main/eval.c:5030
 #, c-format
 msgid "argument %d is missing"
 msgstr ""
 
-#: src/main/eval.c:5113
+#: src/main/eval.c:5115
 msgid "bytecode version mismatch; using eval"
 msgstr ""
 
-#: src/main/eval.c:5118
+#: src/main/eval.c:5120
 msgid "bytecode version is too old"
 msgstr ""
 
-#: src/main/eval.c:5119
+#: src/main/eval.c:5121
 msgid "bytecode version is too new"
 msgstr ""
 
-#: src/main/eval.c:5153
+#: src/main/eval.c:5155
 msgid "byte code version mismatch"
 msgstr ""
 
-#: src/main/eval.c:5300
+#: src/main/eval.c:5302
 msgid "invalid sequence argument in 'for()' loop"
 msgstr ""
 
-#: src/main/eval.c:5435 src/main/names.c:1310
+#: src/main/eval.c:5437 src/main/names.c:1310
 #, c-format
 msgid "there is no '.Internal' function '%s'"
 msgstr ""
 
-#: src/main/eval.c:5534 src/main/eval.c:5880 src/main/eval.c:5920
+#: src/main/eval.c:5536 src/main/eval.c:5882 src/main/eval.c:5922
 msgid "bad function"
 msgstr ""
 
-#: src/main/eval.c:5971
+#: src/main/eval.c:5973
 #, c-format
 msgid ""
 "'EXPR' is an object of class \"factor\", treated as integer.\n"
 " Consider using '%s' instead."
 msgstr ""
 
-#: src/main/eval.c:5976
+#: src/main/eval.c:5978
 msgid "numeric 'EXPR' required for 'switch()' without named alternatives"
 msgstr ""
 
-#: src/main/eval.c:5978
+#: src/main/eval.c:5980
 msgid "bad character 'switch()' offsets"
 msgstr ""
 
-#: src/main/eval.c:5980
+#: src/main/eval.c:5982
 msgid "bad 'switch()' names"
 msgstr ""
 
-#: src/main/eval.c:5993
+#: src/main/eval.c:5995
 msgid "bad numeric 'switch()' offsets"
 msgstr ""
 
-#: src/main/eval.c:6071
+#: src/main/eval.c:6073
 msgid "unknown instruction code"
 msgstr ""
 
-#: src/main/eval.c:6087
+#: src/main/eval.c:6089
 msgid "cannot find index for threaded code address"
 msgstr ""
 
-#: src/main/eval.c:6147
+#: src/main/eval.c:6149
 msgid "invalid body"
 msgstr ""
 
-#: src/main/eval.c:6167
+#: src/main/eval.c:6169
 msgid "invalid symbol"
 msgstr ""
 
-#: src/main/eval.c:6211
+#: src/main/eval.c:6213
 msgid "'code' argument is not a byte code object"
 msgstr ""
 
-#: src/main/eval.c:6233
+#: src/main/eval.c:6235
 msgid "bad file name"
 msgstr ""
 
-#: src/main/eval.c:6252
+#: src/main/eval.c:6254
 #, c-format
 msgid "'%s' argument must be non-empty character string"
 msgstr ""
 
-#: src/main/eval.c:6254 src/main/saveload.c:1943 src/main/saveload.c:2238
+#: src/main/eval.c:6256 src/main/saveload.c:1943 src/main/saveload.c:2238
 #: src/main/serialize.c:2190 src/modules/lapack/Lapack.c:1237
 #, c-format
 msgid "'%s' argument must be logical"
 msgstr ""
 
-#: src/main/eval.c:6284 src/main/eval.c:6291
+#: src/main/eval.c:6286 src/main/eval.c:6293
 msgid "'R_CompiledFileName()': buffer is too small"
 msgstr ""
 
-#: src/main/eval.c:6325 src/main/eval.c:6344 src/main/eval.c:6374
+#: src/main/eval.c:6327 src/main/eval.c:6346 src/main/eval.c:6376
 msgid "constant buffer must be a generic vector"
 msgstr ""
 
-#: src/main/eval.c:6348
+#: src/main/eval.c:6350
 #, c-format
 msgid "bad '%s' value"
 msgstr ""
 
-#: src/main/eval.c:6376
+#: src/main/eval.c:6378
 msgid "bad constant count"
 msgstr ""
 
-#: src/main/eval.c:6414
+#: src/main/eval.c:6416
 msgid "profile timer is in use"
 msgstr ""
 
-#: src/main/eval.c:6416
+#: src/main/eval.c:6418
 msgid "already byte code profiling"
 msgstr ""
 
-#: src/main/eval.c:6452
+#: src/main/eval.c:6454
 msgid "no byte code profiling"
 msgstr ""
 
-#: src/main/eval.c:6468 src/main/eval.c:6472 src/main/eval.c:6476
+#: src/main/eval.c:6470 src/main/eval.c:6474 src/main/eval.c:6478
 msgid "byte code profiling is not supported in this build"
 msgstr ""
 
@@ -6559,8 +6559,7 @@ msgstr ""
 #: src/main/saveload.c:1385 src/main/saveload.c:1429 src/main/saveload.c:1497
 #: src/main/saveload.c:1506 src/main/serialize.c:356 src/main/serialize.c:363
 #: src/main/serialize.c:376 src/main/serialize.c:380 src/main/serialize.c:407
-#: src/main/serialize.c:423 src/main/serialize.c:2430
-#: src/main/serialize.c:2438
+#: src/main/serialize.c:423 src/main/serialize.c:2430 src/main/serialize.c:2438
 msgid "read error"
 msgstr ""
 
@@ -6707,9 +6706,9 @@ msgstr ""
 msgid "an xdr complex data read error occurred"
 msgstr ""
 
-#: src/main/saveload.c:1782 src/main/serialize.c:1998
-#: src/main/serialize.c:2615 src/modules/internet/internet.c:513
-#: src/modules/internet/internet.c:588 src/modules/internet/internet.c:698
+#: src/main/saveload.c:1782 src/main/serialize.c:1998 src/main/serialize.c:2615
+#: src/modules/internet/internet.c:513 src/modules/internet/internet.c:588
+#: src/modules/internet/internet.c:698
 msgid "write failed"
 msgstr ""
 
@@ -6777,9 +6776,8 @@ msgstr ""
 msgid "cannot save XDR format to a text-mode connection"
 msgstr ""
 
-#: src/main/saveload.c:2290 src/main/serialize.c:2106
-#: src/main/serialize.c:2120 src/main/serialize.c:2304
-#: src/main/serialize.c:2326
+#: src/main/saveload.c:2290 src/main/serialize.c:2106 src/main/serialize.c:2120
+#: src/main/serialize.c:2304 src/main/serialize.c:2326
 msgid "error writing to connection"
 msgstr ""
 
@@ -7392,114 +7390,118 @@ msgstr ""
 msgid "assignment outside vector/list limits (extending from %d to %d)"
 msgstr ""
 
-#: src/main/subassign.c:369
+#: src/main/subassign.c:197
+msgid "implicit list embedding of S4 objects is deprecated"
+msgstr ""
+
+#: src/main/subassign.c:392
 #, c-format
 msgid "incompatible types (from %s to %s) in subassignment type fix"
 msgstr ""
 
-#: src/main/subassign.c:528 src/main/subassign.c:808 src/main/subassign.c:811
-#: src/main/subassign.c:1111
+#: src/main/subassign.c:551 src/main/subassign.c:831 src/main/subassign.c:834
+#: src/main/subassign.c:1134
 msgid "NA values are not allowed in subscripted assignments"
 msgstr ""
 
-#: src/main/subassign.c:546 src/main/subassign.c:822 src/main/subassign.c:1103
-#: src/main/subassign.c:1683
+#: src/main/subassign.c:569 src/main/subassign.c:845 src/main/subassign.c:1126
+#: src/main/subassign.c:1706
 msgid "replacement has length zero"
 msgstr ""
 
-#: src/main/subassign.c:548 src/main/subassign.c:824 src/main/subassign.c:1105
+#: src/main/subassign.c:571 src/main/subassign.c:847 src/main/subassign.c:1128
 msgid "number of items to replace is not a multiple of replacement length"
 msgstr ""
 
-#: src/main/subassign.c:744
+#: src/main/subassign.c:767
 msgid "sub assignment (*[*] <- *) not done; __bug?__"
 msgstr ""
 
-#: src/main/subassign.c:792
+#: src/main/subassign.c:815
 msgid "incorrect number of subscripts on matrix"
 msgstr ""
 
-#: src/main/subassign.c:1057
+#: src/main/subassign.c:1080
 #, c-format
 msgid "incompatible types (from %s to %s) in matrix subset assignment"
 msgstr ""
 
-#: src/main/subassign.c:1073 src/main/subset.c:955
+#: src/main/subassign.c:1096 src/main/subset.c:955
 msgid "incorrect number of subscripts"
-msgstr ""
-
-#: src/main/subassign.c:1250
-#, c-format
-msgid "incompatible types (from %s to %s) in array subset assignment"
 msgstr ""
 
 #: src/main/subassign.c:1273
 #, c-format
+msgid "incompatible types (from %s to %s) in array subset assignment"
+msgstr ""
+
+#: src/main/subassign.c:1296
+#, c-format
 msgid "internal error: index %d from length %d"
 msgstr ""
 
-#: src/main/subassign.c:1286 src/main/subassign.c:1307
+#: src/main/subassign.c:1309 src/main/subassign.c:1330
 msgid "invalid subscript in list assign"
 msgstr ""
 
-#: src/main/subassign.c:1300
+#: src/main/subassign.c:1323
 msgid "invalid number of subscripts to list assign"
 msgstr ""
 
-#: src/main/subassign.c:1399
+#: src/main/subassign.c:1422
 msgid "'SubAssignArgs()': invalid number of arguments"
 msgstr ""
 
-#: src/main/subassign.c:1544
+#: src/main/subassign.c:1567
 msgid "result is zero-length and so cannot be a language object"
 msgstr ""
 
-#: src/main/subassign.c:1643
+#: src/main/subassign.c:1666
 msgid ""
 "'[[<-' defined for objects of type \"S4\" only for subclasses of environment"
 msgstr ""
 
-#: src/main/subassign.c:1655
+#: src/main/subassign.c:1678
 msgid "wrong arguments for environment subassignment"
 msgstr ""
 
-#: src/main/subassign.c:1685
+#: src/main/subassign.c:1708
 msgid "more elements supplied than there are to replace"
 msgstr ""
 
-#: src/main/subassign.c:1687
+#: src/main/subassign.c:1710
 msgid "'[[ ]]' with missing subscript"
 msgstr ""
 
-#: src/main/subassign.c:1705
+#: src/main/subassign.c:1728
 msgid "'[[ ]]' subscript out of bounds"
 msgstr ""
 
-#: src/main/subassign.c:1711 src/main/subassign.c:1892
+#: src/main/subassign.c:1734 src/main/subassign.c:1915
 msgid "'[[ ]]' improper number of subscripts"
 msgstr ""
 
-#: src/main/subassign.c:1723 src/main/subassign.c:1903
+#: src/main/subassign.c:1746 src/main/subassign.c:1926
 #, c-format
 msgid "'[[ ]]' subscript (%d) out of bounds"
 msgstr ""
 
-#: src/main/subassign.c:1857
+#: src/main/subassign.c:1880
 #, c-format
 msgid "incompatible types (from %s to %s) in '[[' assignment"
 msgstr ""
 
-#: src/main/subassign.c:1959 src/main/subscript.c:152 src/main/subscript.c:279
+#: src/main/subassign.c:1982 src/main/subscript.c:152 src/main/subscript.c:279
 #: src/main/subscript.c:904 src/main/subscript.c:997 src/main/subset.c:1157
 #, c-format
 msgid "invalid subscript type '%s'"
 msgstr ""
 
-#: src/main/subassign.c:2007
+#: src/main/subassign.c:2030
 msgid "no method for assigning subsets of this S4 class"
 msgstr ""
 
-#: src/main/subassign.c:2065
+#: src/main/subassign.c:2088
 msgid "coercing LHS to a list"
 msgstr ""
 
@@ -9015,7 +9017,7 @@ msgstr ""
 
 #: src/nmath/bessel_i.c:76 src/nmath/bessel_i.c:119
 #, c-format
-msgid "bessel_i(%g): ncalc (=%ld) != nb (=%ld); alpha=%g. Arg. out of range?"
+msgid "bessel_i(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?"
 msgstr ""
 
 #: src/nmath/bessel_i.c:78 src/nmath/bessel_i.c:121
@@ -9034,7 +9036,7 @@ msgstr ""
 
 #: src/nmath/bessel_j.c:78 src/nmath/bessel_j.c:122
 #, c-format
-msgid "bessel_j(%g): ncalc (=%ld) != nb (=%ld); alpha=%g. Arg. out of range?"
+msgid "bessel_j(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?"
 msgstr ""
 
 #: src/nmath/bessel_j.c:80 src/nmath/bessel_j.c:124
@@ -9048,7 +9050,7 @@ msgstr ""
 
 #: src/nmath/bessel_k.c:69 src/nmath/bessel_k.c:104
 #, c-format
-msgid "bessel_k(%g): ncalc (=%ld) != nb (=%ld); alpha=%g. Arg. out of range?"
+msgid "bessel_k(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?"
 msgstr ""
 
 #: src/nmath/bessel_k.c:71 src/nmath/bessel_k.c:106
@@ -9067,12 +9069,12 @@ msgstr ""
 
 #: src/nmath/bessel_y.c:85 src/nmath/bessel_y.c:133
 #, c-format
-msgid "bessel_y(%g): ncalc (=%ld) != nb (=%ld); alpha=%g. Arg. out of range?\n"
+msgid "bessel_y(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?"
 msgstr ""
 
 #: src/nmath/bessel_y.c:88 src/nmath/bessel_y.c:136
 #, c-format
-msgid "bessel_y(%g,nu=%g): precision lost in result\n"
+msgid "bessel_y(%g,nu=%g): precision lost in result"
 msgstr ""
 
 #: src/nmath/choose.c:79 src/nmath/choose.c:122
@@ -9085,27 +9087,27 @@ msgstr ""
 msgid "non-integer x = %f"
 msgstr ""
 
-#: src/nmath/nmath.h:137
+#: src/nmath/nmath.h:145
 #, c-format
 msgid "argument out of domain in '%s' function"
 msgstr ""
 
-#: src/nmath/nmath.h:140
+#: src/nmath/nmath.h:148
 #, c-format
 msgid "value out of range in '%s' function"
 msgstr ""
 
-#: src/nmath/nmath.h:143
+#: src/nmath/nmath.h:151
 #, c-format
 msgid "convergence failed in '%s' function"
 msgstr ""
 
-#: src/nmath/nmath.h:146
+#: src/nmath/nmath.h:154
 #, c-format
 msgid "full precision may not have been achieved in '%s' function"
 msgstr ""
 
-#: src/nmath/nmath.h:149
+#: src/nmath/nmath.h:157
 #, c-format
 msgid "underflow occurred in '%s' function"
 msgstr ""

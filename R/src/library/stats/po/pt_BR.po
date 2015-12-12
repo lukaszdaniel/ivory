@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-17 17:28+0100\n"
+"POT-Creation-Date: 2015-12-12 21:35+0100\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -715,7 +715,7 @@ msgstr "length(m) deve ser pelo menos dois"
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr "Argumento Sx deve ser um vetor numérico com comprimento menor que m[]"
 
-#: nls.c:94 nls.c:96 port.c:553
+#: nls.c:94 nls.c:96 port.c:555
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'m' deve ser uma lista"
@@ -1038,7 +1038,7 @@ msgstr ""
 msgid "'%s' argument must be an environment"
 msgstr "'rho' deve ser um ambiente"
 
-#: port.c:383 port.c:552
+#: port.c:383 port.c:554
 #, fuzzy, c-format
 msgid "'%s' argument must be a nonempty numeric vector"
 msgstr "Argumento %s deve ser um vetor numérico não-vazio"
@@ -1057,7 +1057,7 @@ msgstr "ambiente 'rho' deve conter um vetor numérico '.par' de comprimento %d"
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr "'lower' e 'upper' devem ser vetores numéricos"
 
-#: port.c:416
+#: port.c:417
 #, fuzzy
 msgid "NA/NaN function evaluation"
 msgstr "valor de função inválido em 'zeroin'"
@@ -1088,12 +1088,12 @@ msgstr ""
 msgid "invalid type for 'eval_check_store()' function"
 msgstr "tipo inválido para eval_check_store"
 
-#: port.c:573
+#: port.c:575
 #, fuzzy
 msgid "'lowerb' and 'upperb' arguments must be numeric vectors"
 msgstr "'lowerb' e 'upperb' devem ser vetores numéricos"
 
-#: port.c:596
+#: port.c:598
 #, c-format
 msgid "'nlsb_iterate()' function returned %d"
 msgstr ""
@@ -1151,7 +1151,7 @@ msgstr ""
 msgid "spar-finding: non-finite value %g; using BIG value\n"
 msgstr ""
 
-#: smooth.c:96
+#: smooth.c:102
 #, c-format
 msgid "invalid end-rule for running median of 3: %d"
 msgstr "regra final inválida para mediana móvel de 3: %d"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-17 17:28+0100\n"
+"POT-Creation-Date: 2015-12-12 21:35+0100\n"
 "PO-Revision-Date: 2012-03-08 20:50+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -713,7 +713,7 @@ msgstr "length(m) 은 반드시 2 이상이어야 합니다 "
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr "Sx 인자는 반드시 수치형 벡터이어야 하며, m[] 보다 짧아야합니다 "
 
-#: nls.c:94 nls.c:96 port.c:553
+#: nls.c:94 nls.c:96 port.c:555
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'m' 은 반드시 list 이어야 합니다 "
@@ -1037,7 +1037,7 @@ msgstr ""
 msgid "'%s' argument must be an environment"
 msgstr "'rho' 는 반드시 환경이어야 합니다 "
 
-#: port.c:383 port.c:552
+#: port.c:383 port.c:554
 #, fuzzy, c-format
 msgid "'%s' argument must be a nonempty numeric vector"
 msgstr "%s 인자는 반드시 수치형 벡터이어야 합니다 "
@@ -1056,7 +1056,7 @@ msgstr ""
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr "'lower' 와 'upper' 는 반드시 수치형 벡터이어야 합니다 "
 
-#: port.c:416
+#: port.c:417
 #, fuzzy
 msgid "NA/NaN function evaluation"
 msgstr "'zeroin'의 함수값이 잘못되었습니다"
@@ -1086,12 +1086,12 @@ msgstr "fcn 은 모드 %d, 길이 %d 를 생성했고, 모드 %d, 길이 %d 를 
 msgid "invalid type for 'eval_check_store()' function"
 msgstr "eval_check_store 에 대한 유형이 잘못되었습니다 "
 
-#: port.c:573
+#: port.c:575
 #, fuzzy
 msgid "'lowerb' and 'upperb' arguments must be numeric vectors"
 msgstr "'lowerb' 와 'upperb' 는 반드시 수치형 벡터이어야 합니다 "
 
-#: port.c:596
+#: port.c:598
 #, c-format
 msgid "'nlsb_iterate()' function returned %d"
 msgstr ""
@@ -1149,7 +1149,7 @@ msgstr ""
 msgid "spar-finding: non-finite value %g; using BIG value\n"
 msgstr ""
 
-#: smooth.c:96
+#: smooth.c:102
 #, c-format
 msgid "invalid end-rule for running median of 3: %d"
 msgstr "invalid end-rule for running median of 3: %d"

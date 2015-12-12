@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-17 20:33\n"
+"POT-Creation-Date: 2015-12-12 21:34\n"
 "PO-Revision-Date: 2012-02-26 14:09+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -995,16 +995,11 @@ msgstr " 開かれたコネクションしか切り詰められません "
 msgid "'tzone' attributes are inconsistent"
 msgstr " 'tzone' 属性は整合性がありません "
 
-#. R/findInt.R: stop("'vec' argument contains NA values")
+#. R/findInt.R: stop("'vec' argument must be sorted non-decreasingly and not contain NA values")
 #: R/findInt.R:0
 #, fuzzy
-msgid "'vec' argument contains NA values"
-msgstr " 'vec' は NA 値を含んでいます "
-
-#. R/findInt.R: stop("'vec' argument must be sorted non-decreasingly")
-#: R/findInt.R:0
-#, fuzzy
-msgid "'vec' argument must be sorted non-decreasingly"
+msgid ""
+"'vec' argument must be sorted non-decreasingly and not contain NA values"
 msgstr " 'vec' は非減少順にソートされていなければいけません "
 
 #. R/library.R: message("'verbose' and 'quietly' arguments are both true; being verbose then ..")
@@ -3616,6 +3611,10 @@ msgstr[0] " '%s' という名前のパッケージはありません "
 msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] " TRUE の代わりに T が使われました "
+
+#, fuzzy
+#~ msgid "'vec' argument contains NA values"
+#~ msgstr " 'vec' は NA 値を含んでいます "
 
 #, fuzzy
 #~ msgid "%s value was not found"

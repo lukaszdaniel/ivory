@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-17 20:33\n"
+"POT-Creation-Date: 2015-12-12 21:34\n"
 "PO-Revision-Date: 2011-11-30 14:20+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -964,16 +964,11 @@ msgstr "kan kun afkorte en åben forbindelse"
 msgid "'tzone' attributes are inconsistent"
 msgstr "'tzone'-attributter er inkonsistente"
 
-#. R/findInt.R: stop("'vec' argument contains NA values")
+#. R/findInt.R: stop("'vec' argument must be sorted non-decreasingly and not contain NA values")
 #: R/findInt.R:0
 #, fuzzy
-msgid "'vec' argument contains NA values"
-msgstr "'vec' indeholder NA'er"
-
-#. R/findInt.R: stop("'vec' argument must be sorted non-decreasingly")
-#: R/findInt.R:0
-#, fuzzy
-msgid "'vec' argument must be sorted non-decreasingly"
+msgid ""
+"'vec' argument must be sorted non-decreasingly and not contain NA values"
 msgstr "'vec' skal sorteres ikkefaldende"
 
 #. R/library.R: message("'verbose' and 'quietly' arguments are both true; being verbose then ..")
@@ -3534,6 +3529,10 @@ msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] ""
 msgstr[1] ""
+
+#, fuzzy
+#~ msgid "'vec' argument contains NA values"
+#~ msgstr "'vec' indeholder NA'er"
 
 #, fuzzy
 #~ msgid "%s value was not found"

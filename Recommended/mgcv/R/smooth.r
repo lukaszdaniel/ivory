@@ -172,8 +172,10 @@ uniquecombs <- function(x) {
     x <- as.data.frame(x)
     names(x) <- names(xo)
     for (i in seq_len(ncol(xo))) if (is.factor(xo[,i])) { ## may need to reset factors to factors
-      x[,i] <- if (is.ordered(xo[,i])) as.ordered(x[,i]) else as.factor(x[,i])
-      levels(x[,i]) <- levels(xo[,i])
+      xoi <- levels(xo[,i])
+      x[,i] <- if (is.ordered(xo[,i])) ordered(x[,i],levels=1:length(xoi),labels=xoi) else 
+               factor(x[,i],levels=seq_len(length(xoi)),labels=xoi)
+      contrasts(x[,i]) <- contrasts(xo[,i])
     }
   }
   attr(x,"index") <- res$ind+1 ## C to R index gotcha 
@@ -3545,7 +3547,7 @@ PredictMat <- function(object,data,n=nrow(data))
     X <- matrix(0,n,ncol(pm$X))  
     for (i in seq_len(n)) { ## in this case have to work down the rows
       ind <- ind + 1
-      X[i,] <- colSums(by[ind]*pm$X[pm$ind[ind],]) 
+      X[i,] <- colSums(by[ind]*pm$X[pm$ind[ind],,drop=FALSE]) 
       if (!is.null(offs)) {
         offX[i] <- sum(offs[pm$ind[ind]]*by[ind])
       }      
@@ -3554,7 +3556,7 @@ PredictMat <- function(object,data,n=nrow(data))
   } else { ## regular case 
     offset <- attr(pm$X,"offset")
     if (!is.null(pm$ind)) { ## X needs to be unpacked
-      X <- pm$X[pm$ind,]
+      X <- pm$X[pm$ind,,drop=FALSE]
       if (!is.null(offset)) offset <- offset[pm$ind]
     } else X <- pm$X
    
@@ -3587,7 +3589,7 @@ PredictMat <- function(object,data,n=nrow(data))
       } else { get.off <- FALSE;offs <- NULL}
       for (i in 2:q) {
         ind <- ind + n
-        Xs <- Xs + X[ind,]
+        Xs <- Xs + X[ind,,drop=FALSE]
         if (get.off) offs <- offs + offset[ind]
       }
       offset <- offs
@@ -3644,7 +3646,7 @@ PredictMat <- function(object,data,n=nrow(data))
 
   ## drop columns eliminated by side-conditions...
   del.index <- attr(object,"del.index") 
-  if (!is.null(del.index)) X <- X[,-del.index]
+  if (!is.null(del.index)) X <- X[,-del.index,drop=FALSE]
   attr(X,"offset") <- offset
   X
 } ## end of PredictMat

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: R 2.16.0\n"
+"Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-17 20:33\n"
+"POT-Creation-Date: 2015-12-12 21:34\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -902,15 +902,13 @@ msgstr ""
 msgid "'tzone' attributes are inconsistent"
 msgstr "atrybuty 'tzone' są niespójne"
 
-#. R/findInt.R: stop("'vec' argument contains NA values")
+#. R/findInt.R: stop("'vec' argument must be sorted non-decreasingly and not contain NA values")
 #: R/findInt.R:0
-msgid "'vec' argument contains NA values"
-msgstr "argument 'vec' zawiera wartości NA"
-
-#. R/findInt.R: stop("'vec' argument must be sorted non-decreasingly")
-#: R/findInt.R:0
-msgid "'vec' argument must be sorted non-decreasingly"
-msgstr "argument 'vec' musi być posortowany w sposób niemalejący"
+msgid ""
+"'vec' argument must be sorted non-decreasingly and not contain NA values"
+msgstr ""
+"argument 'vec' musi być posortowany w sposób niemalejący oraz nie może "
+"zawierać wartości NA"
 
 #. R/library.R: message("'verbose' and 'quietly' arguments are both true; being verbose then ..")
 #: R/library.R:0
@@ -3485,6 +3483,9 @@ msgid_plural "variables %s are not all TRUE"
 msgstr[0] "zmienna %s nie ma wartości TRUE"
 msgstr[1] "nie wszystkie zmienne %s mają wartość TRUE"
 msgstr[2] "nie wszystkie zmienne %s mają wartość TRUE"
+
+#~ msgid "'vec' argument contains NA values"
+#~ msgstr "argument 'vec' zawiera wartości NA"
 
 #~ msgid "%s value was not found"
 #~ msgstr "wartość %s nie została znaleziona"

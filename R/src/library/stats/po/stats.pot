@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the stats package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-17 17:28+0100\n"
+"POT-Creation-Date: 2015-12-12 21:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -699,7 +699,7 @@ msgstr ""
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr ""
 
-#: nls.c:94 nls.c:96 port.c:553
+#: nls.c:94 nls.c:96 port.c:555
 #, c-format
 msgid "'%s' argument must be a list"
 msgstr ""
@@ -1002,7 +1002,7 @@ msgstr ""
 msgid "'%s' argument must be an environment"
 msgstr ""
 
-#: port.c:383 port.c:552
+#: port.c:383 port.c:554
 #, c-format
 msgid "'%s' argument must be a nonempty numeric vector"
 msgstr ""
@@ -1020,7 +1020,7 @@ msgstr ""
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr ""
 
-#: port.c:416
+#: port.c:417
 msgid "NA/NaN function evaluation"
 msgstr ""
 
@@ -1047,11 +1047,11 @@ msgstr ""
 msgid "invalid type for 'eval_check_store()' function"
 msgstr ""
 
-#: port.c:573
+#: port.c:575
 msgid "'lowerb' and 'upperb' arguments must be numeric vectors"
 msgstr ""
 
-#: port.c:596
+#: port.c:598
 #, c-format
 msgid "'nlsb_iterate()' function returned %d"
 msgstr ""
@@ -1107,7 +1107,7 @@ msgstr ""
 msgid "spar-finding: non-finite value %g; using BIG value\n"
 msgstr ""
 
-#: smooth.c:96
+#: smooth.c:102
 #, c-format
 msgid "invalid end-rule for running median of 3: %d"
 msgstr ""

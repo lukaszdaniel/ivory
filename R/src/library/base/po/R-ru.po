@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-17 20:33\n"
+"POT-Creation-Date: 2015-12-12 21:34\n"
 "PO-Revision-Date: 2015-01-17 13:32+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -997,16 +997,11 @@ msgstr "могу обрезать только открытое соединен
 msgid "'tzone' attributes are inconsistent"
 msgstr "противоречивые атрибуты 'tzone'"
 
-#. R/findInt.R: stop("'vec' argument contains NA values")
+#. R/findInt.R: stop("'vec' argument must be sorted non-decreasingly and not contain NA values")
 #: R/findInt.R:0
 #, fuzzy
-msgid "'vec' argument contains NA values"
-msgstr "'vec' содержит NA"
-
-#. R/findInt.R: stop("'vec' argument must be sorted non-decreasingly")
-#: R/findInt.R:0
-#, fuzzy
-msgid "'vec' argument must be sorted non-decreasingly"
+msgid ""
+"'vec' argument must be sorted non-decreasingly and not contain NA values"
 msgstr "'vec' должен быть сортирован не по уменьшению"
 
 #. R/library.R: message("'verbose' and 'quietly' arguments are both true; being verbose then ..")
@@ -3656,6 +3651,10 @@ msgid_plural "variables %s are not all TRUE"
 msgstr[0] "T использовано вместо TRUE"
 msgstr[1] "T использовано вместо TRUE"
 msgstr[2] "T использовано вместо TRUE"
+
+#, fuzzy
+#~ msgid "'vec' argument contains NA values"
+#~ msgstr "'vec' содержит NA"
 
 #, fuzzy
 #~ msgid "%s value was not found"

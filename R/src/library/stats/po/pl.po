@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-17 17:28+0100\n"
+"POT-Creation-Date: 2015-12-12 21:35+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -732,7 +732,7 @@ msgstr "'length(m)' musi wynosić co najmniej dwa"
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr "Argument 'Sx' musi być wektorem liczbowym o jeden którszym niż 'm[]'"
 
-#: nls.c:94 nls.c:96 port.c:553
+#: nls.c:94 nls.c:96 port.c:555
 #, c-format
 msgid "'%s' argument must be a list"
 msgstr "argument '%s' musi być listą"
@@ -1053,7 +1053,7 @@ msgstr "wyliczenie wartości NA/NaN hesjanu"
 msgid "'%s' argument must be an environment"
 msgstr "argument '%s' musi być środowiskiem"
 
-#: port.c:383 port.c:552
+#: port.c:383 port.c:554
 #, c-format
 msgid "'%s' argument must be a nonempty numeric vector"
 msgstr "argument '%s' musi być niepustym wektorem liczbowym"
@@ -1071,7 +1071,7 @@ msgstr "środowisko 'rho' musi zawierać wektor liczbowy '.par' o długości %d"
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr "'lower' oraz 'upper' muszą być wektorami liczbowymi"
 
-#: port.c:416
+#: port.c:417
 msgid "NA/NaN function evaluation"
 msgstr "wynik NA/NaN funkcji"
 
@@ -1099,11 +1099,11 @@ msgstr ""
 msgid "invalid type for 'eval_check_store()' function"
 msgstr "niepoprawny typ dla funkcji 'eval_check_store()'"
 
-#: port.c:573
+#: port.c:575
 msgid "'lowerb' and 'upperb' arguments must be numeric vectors"
 msgstr "argumenty 'lowerb' oraz 'upperb' muszą być wektorami liczbowymi"
 
-#: port.c:596
+#: port.c:598
 #, c-format
 msgid "'nlsb_iterate()' function returned %d"
 msgstr "funkcja 'nlsb_iterate()' zwróciła %d"
@@ -1159,7 +1159,7 @@ msgstr "rcont2 [%d,%d]: wyrażenie spadło do 0; niepowodzenie algorytmu"
 msgid "spar-finding: non-finite value %g; using BIG value\n"
 msgstr "spar-finding: nieskończona wartość %g; używanie wartości BIG\n"
 
-#: smooth.c:96
+#: smooth.c:102
 #, c-format
 msgid "invalid end-rule for running median of 3: %d"
 msgstr "niepoprawna końcowa reguła dla ruchomiej mediany 3: %d"

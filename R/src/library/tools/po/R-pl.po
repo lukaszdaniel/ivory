@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-04 21:08\n"
+"POT-Creation-Date: 2015-12-12 21:35\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -3818,6 +3818,14 @@ msgstr ""
 #: R/check.R:0
 msgid "Warning: --install=check... specified without --library"
 msgstr "Ostrzeżenie: '--install=check...' określone bez '--library'"
+
+#. R/check.R: gettext("Warning: No generic function.*corresponding to requested imported methods",     domain = "R-tools")
+#: R/check.R:0
+msgid ""
+"Warning: No generic function.*corresponding to requested imported methods"
+msgstr ""
+"Ostrzeżenie: Brak ogólnej funkcji.* odpowiadającej oczekiwanym importowanym "
+"metodom"
 
 #. R/testing.R: gettextf("Warning: creation of %s failed", sQuote(Rfile), domain = "R-tools")
 #: R/testing.R:0

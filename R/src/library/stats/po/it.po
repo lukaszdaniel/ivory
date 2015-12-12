@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-17 17:28+0100\n"
+"POT-Creation-Date: 2015-12-12 21:35+0100\n"
 "PO-Revision-Date: 2005-04-14 18:06+0200\n"
 "Last-Translator: stefano iacus <stefano.iacus@r-project.org>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -714,7 +714,7 @@ msgstr "m deve essere di tipo list"
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr ""
 
-#: nls.c:94 nls.c:96 port.c:553
+#: nls.c:94 nls.c:96 port.c:555
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'m' deve essere di tipo list"
@@ -1042,7 +1042,7 @@ msgstr ""
 msgid "'%s' argument must be an environment"
 msgstr "'rho' deve essere un environment"
 
-#: port.c:383 port.c:552
+#: port.c:383 port.c:554
 #, fuzzy, c-format
 msgid "'%s' argument must be a nonempty numeric vector"
 msgstr "'x' deve essere di tipo numeric"
@@ -1060,7 +1060,7 @@ msgstr ""
 msgid "'lower' and 'upper' must be numeric vectors"
 msgstr ""
 
-#: port.c:416
+#: port.c:417
 #, fuzzy
 msgid "NA/NaN function evaluation"
 msgstr "valore funzione non valido in 'zeroin'"
@@ -1088,12 +1088,12 @@ msgstr ""
 msgid "invalid type for 'eval_check_store()' function"
 msgstr ""
 
-#: port.c:573
+#: port.c:575
 #, fuzzy
 msgid "'lowerb' and 'upperb' arguments must be numeric vectors"
 msgstr "'x' deve essere di tipo numeric"
 
-#: port.c:596
+#: port.c:598
 #, c-format
 msgid "'nlsb_iterate()' function returned %d"
 msgstr ""
@@ -1151,7 +1151,7 @@ msgstr ""
 msgid "spar-finding: non-finite value %g; using BIG value\n"
 msgstr ""
 
-#: smooth.c:96
+#: smooth.c:102
 #, c-format
 msgid "invalid end-rule for running median of 3: %d"
 msgstr ""
