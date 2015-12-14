@@ -72,7 +72,11 @@ summary.default <-
 
 format.summaryDefault <- function(x, ...)
 {
-    xx <- if(is.numeric(x) || is.complex(x)) zapsmall(x) else x
+    xx <- x
+    if(is.numeric(x) || is.complex(x)) {
+      finite <- is.finite(x)
+      xx[finite] <- zapsmall(x[finite])
+    }
     class(xx) <- class(x)[-1]
     m <- match(gettext("NA's"), names(x), 0)
     if(inherits(x, "Date") || inherits(x, "POSIXct")) {
@@ -92,7 +96,11 @@ format.summaryDefault <- function(x, ...)
 
 print.summaryDefault <- function(x, ...)
 {
-    xx <- if(is.numeric(x) || is.complex(x)) zapsmall(x) else x
+    xx <- x
+    if(is.numeric(x) || is.complex(x)) {
+      finite <- is.finite(x)
+      xx[finite] <- zapsmall(x[finite])
+    }
     class(xx) <- class(x)[-1] # for format
     m <- match(gettext("NA's"), names(xx), 0)
     if(inherits(x, "Date") || inherits(x, "POSIXct")) {
