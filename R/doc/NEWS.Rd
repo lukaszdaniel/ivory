@@ -368,6 +368,15 @@
   \subsection{BUG FIXES}{
     \itemize{
       \item \code{kmeans(x, centers = <1-row>)} now works. (\PR{16623})
+      
+      \item \code{Vectorize()} now checks for clashes in argument names.
+      (\PR{16577})
+      
+      \item \code{file.copy(overwrite = FALSE)} would signal a successful
+      copy when none had taken place.  (\PR{16576})
+      
+      \item \code{ngettext()} now uses the same default domain as
+      \code{gettext()}.  (\PR{14605})
     }
   }
 }
