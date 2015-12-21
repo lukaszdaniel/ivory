@@ -96,12 +96,12 @@ addmargins <-
 	    fnames[[i]][blank] <- seq_along(blank)[blank]
 	    if (topname == "") {
 		fnames[[i]][blank] <-
-		    paste("Margin ", margin[i], ".", fnames[[i]][blank], sep = "")
+		    paste0("Margin ", margin[i], ".", fnames[[i]][blank])
 	    } else {
 		fnames[[i]] <- paste0(topname, ".", fnames[[i]])
 	    }
-	} else
-	    if (fnames[[i]] == "") fnames[[i]] <- paste("Margin", margin[i])
+	} else if (fnames[[i]] == "")
+            fnames[[i]] <- paste("Margin", margin[i])
     }
 
     ## So finally we have the relevant form of FUN and fnames to pass
@@ -126,8 +126,10 @@ addmargins <-
 	## Define the dimensions of the new table with the margins
 	newdim <- d
 	newdim[margin] <- newdim[margin] + n.mar
-	newdimnames <- dimnames(A)
-	newdimnames[[margin]] <- c(newdimnames[[margin]], fnames)
+	if(is.null(dnA <- dimnames(A))) dnA <- vector("list", n.dim)
+	dnA[[margin]] <-
+	    c(if(is.null(dnA[[margin]])) rep("", d[[margin]]) else dnA[[margin]],
+	      fnames)
 
 	## Number of elements in the expanded array
 	n.new <- prod(newdim)
@@ -136,7 +138,8 @@ addmargins <-
 	## where the original table values goes, as a logical vector
 	skip <- prod(d[seq_len(margin)])
 	runl <- skip / d[margin]
-	apos <- rep(c(rep(TRUE, skip), rep(FALSE, n.mar*runl)), n.new/(skip+n.mar*runl))
+	apos <- rep(c(rep_len(TRUE, skip), rep_len(FALSE, n.mar*runl)),
+		    n.new/(skip+n.mar*runl))
 
 	## Define a vector to hold all the values of the new table
 	values <- double(length(apos))
@@ -150,27 +153,26 @@ addmargins <-
 		apply(A, seq_len(n.dim)[-margin], FUN[[i]])
 	    } else FUN[[i]](A)
 	    ## Vector the same length as the number of margins
-	    select <- rep(FALSE, n.mar)
+	    select <- rep_len(FALSE, n.mar)
 	    ## The position of the current margin
 	    select[i] <- TRUE
 	    ## Expand that to a vector the same length as the entire new matrix
-	    mpos <- rep(c(rep(FALSE, skip), rep(select, each=runl)), prod(dim(A))/skip)
+	    mpos <- rep(c(rep_len(FALSE, skip), rep(select, each=runl)),
+			prod(dim(A))/skip)
 	    ## Fill the marginal table in there
 	    values[mpos] <- as.vector(mtab)
 	}
 
-	## Then define the new table with contents and margins
-	##
-	new.A <- array(values, dim=newdim, dimnames=newdimnames)
-	if(inherits(A, "table")) # result shall be table, too
-	    class(new.A) <- c("table", class(new.A))
-	new.A
+	## the new table with contents and margins
+	array(values, dim=newdim, dimnames=dnA)
     }
 
     ## Once defined, we can use the expand.one function repeatedly
     new.A <- A
     for(i in seq_len(n.sid))
 	new.A <- expand.one(A = new.A, margin = margin[i], FUN = FUN[[i]], fnames = fnames[[i]])
+    if(inherits(A, "table")) # result shall be table, too
+        class(new.A) <- c("table", class(new.A))
 
     ## Done! Now print it.
     ##
