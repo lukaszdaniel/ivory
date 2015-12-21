@@ -1,7 +1,7 @@
 #  File src/library/stats/R/addmargins.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2012 The R Core Team
+#  Copyright (C) 2004-2015 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -19,17 +19,17 @@
 addmargins <-
     function(A, margin = seq_along(dim(A)), FUN = sum, quiet = FALSE)
 {
-### The workhorse for this margin-expansion is the function
-### expand.one, which is defined and called at the bottom.
-###
-### All this initial stuff is just to check consistency of
-### specifications, and form maximally sensible margin names
-###
-### BxC, August 2003
-###	 Sept	2003: Single margins caused crash. Fixed.
-### Duncan Murdoch, Feb 2004: Machinery to derive functionnames
-###			      from unnamed lists
-###-------------------------------------------------------------
+    ## The workhorse for this margin-expansion is the function
+    ## expand.one, which is defined and called at the bottom.
+    ##
+    ## All this initial stuff is just to check consistency of
+    ## specifications, and form maximally sensible margin names
+    ##
+    ## BxC, August 2003
+    ##	 Sept	2003: Single margins caused crash. Fixed.
+    ## Duncan Murdoch, Feb 2004: Machinery to derive functionnames
+    ##			      from unnamed lists
+    ##-------------------------------------------------------------
 
     if(is.null(dim(A))) stop(gettextf("'%s' argument must be an array or table", "A"))
     ## How many dimensions of A, and how many sides do we touch?

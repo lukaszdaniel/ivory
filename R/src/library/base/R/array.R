@@ -53,14 +53,14 @@ function(x, MARGIN)
 
     if(any(d == 0L)) return(array(integer(), d))
 
-    y <- rep.int(rep.int(1L:d[MARGIN],
+    y <- rep.int(rep.int(seq_len(d[MARGIN]),
 			 prod(d[seq_len(MARGIN - 1L)]) * rep.int(1L, d[MARGIN])),
 		 prod(d[seq.int(from = MARGIN + 1L, length.out = n - MARGIN)]))
     dim(y) <- d
     y
 }
 
-provideDimnames <- function(x, sep = "", base = list(LETTERS))
+provideDimnames <- function(x, sep = "", base = list(LETTERS), unique = TRUE)
 {
     ## provide dimnames where missing - not copying x unnecessarily
     dx <- dim(x)
@@ -71,7 +71,8 @@ provideDimnames <- function(x, sep = "", base = list(LETTERS))
     for(i in which(vapply(dnx, is.null, NA))) {
 	ii <- 1L+(i-1L) %% k # recycling
         ss <- seq_len(dx[i]) - 1L # dim could be zero
-	dnx[[i]] <- make.unique(base[[ii]][1L+ (ss %% M[ii])], sep = sep)
+	bi <- base[[ii]][1L+ (ss %% M[ii])]
+	dnx[[i]] <- if(unique) make.unique(bi, sep = sep) else bi
 	new <- TRUE
     }
     if(new) dimnames(x) <- dnx
