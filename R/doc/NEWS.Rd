@@ -354,9 +354,9 @@
       Enterprise Linux 6. It now waits for \code{MapNotify} events
       instead of \code{Expose} events, thanks to Siteshwar
       Vashisht. (\PR{16497})
-
-      \item \code{as(1L, "numeric")} and  \code{as(1L, "double")} now
-      give the same as \code{as.double(1L)}.
+      
+      \item \code{cor()} is now guaranteed to return a value with 
+      absolute value less than or equal to 1. (\PR{16638})
     }
   }
 }
@@ -393,6 +393,9 @@
 
       \item \code{addmargins()} now adds dimnames for the extended
       margins in all cases, as always documented.
+      
+      \item \code{heatmap()} evaluated its \code{add.expr} argument
+      in the wrong environment.  (\PR{16583})
     }
   }
 }

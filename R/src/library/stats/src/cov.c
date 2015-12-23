@@ -30,7 +30,7 @@
 
 #include <Defn.h>
 #include <Rmath.h>
-
+#include <R_ext/Minmax.h>
 #include "localization.h"
 #include "statsR.h"
 
@@ -56,6 +56,8 @@ SEXP cov(SEXP x, SEXP y, SEXP na_method, SEXP kendall)
 		    }
 
 #define ANS(I,J)  ans[I + J * ncx]
+//#define CLAMP(X)  (X >= 1. ? 1. : (X <= -1. ? -1. : X))
+#define CLAMP(X)  max(-1., min(X,1.))
 
 /* Note that "if (kendall)" and	 "if (cor)" are used inside a double for() loop;
    which makes the code better readable -- and is hopefully dealt with
@@ -120,8 +122,8 @@ SEXP cov(SEXP x, SEXP y, SEXP na_method, SEXP kendall)
 			    ysd /= n1;					\
 			    sum /= n1;					\
 			}						\
-			sum /= (SQRTL(xsd) * SQRTL(ysd));	       	\
-			if(sum > 1.) sum = 1.;				\
+			sum /= (SQRTL(xsd) * SQRTL(ysd));		\
+			sum = CLAMP(sum);				\
 		    }							\
 		}							\
 		else if(!kendall)					\
@@ -291,8 +293,7 @@ cov_complete1(int n, int ncx, double *x, double *xm,
 		}
 		else {
 		    sum = ANS(i,j) / (xm[i] * xm[j]);
-		    if(sum > 1.) sum = 1.;
-		    ANS(j,i) = ANS(i,j) = (double)sum;
+		    ANS(j,i) = ANS(i,j) = (double)CLAMP(sum);
 		}
 	    }
 	    ANS(i,i) = 1.0;
@@ -361,8 +362,7 @@ cov_na_1(int n, int ncx, double *x, double *xm,
 		}
 		else {
 		    sum = ANS(i,j) / (xm[i] * xm[j]);
-		    if(sum > 1.) sum = 1.;
-		    ANS(j,i) = ANS(i,j) = (double)sum;
+		    ANS(j,i) = ANS(i,j) = (double)CLAMP(sum);
 		}
 	    }
 	    ANS(i,i) = 1.0;
@@ -445,7 +445,7 @@ cov_complete2(int n, int ncx, int ncy, double *x, double *y,
 		}
 		else {
 		    ANS(i,j) /= (xm[i] * ym[j]);
-		    if(ANS(i,j) > 1.) ANS(i,j) = 1.;
+		    ANS(i,j) = CLAMP(ANS(i,j));
 		}
     }/* cor */
 
@@ -536,7 +536,7 @@ cov_na_2(int n, int ncx, int ncy, double *x, double *y,
 			}
 			else {
 			    ANS(i,j) /= (xm[i] * ym[j]);
-			    if(ANS(i,j) > 1.) ANS(i,j) = 1.;
+			    ANS(i,j) = CLAMP(ANS(i,j));
 			}
 		    }
 	    }
