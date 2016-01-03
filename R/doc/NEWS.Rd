@@ -220,13 +220,17 @@
       \item S4 values are automatically coerced to vector (via
       \code{as.vector}) when subassigned into atomic vectors.
 
-      \item \code{findInterval()} gets a  \code{left.open} option.
-      
+      \item \code{findInterval()} gets a \code{left.open} option.
+
       \item The version of LAPACK included in the sources has been
       updated to 3.6.0.  (It does not include most of the deprecated
       routines removed in that version.  For the time being, the
       deprecated routines \code{dgegv} and \code{dggsvd} \emph{are}
       included as they are used by current packages.)
+
+      \item \code{tapply()} has been made considerably more efficient
+      without changing functionality, thanks to proposals from Peter
+      Haverty and Suharto Anggono.  (\PR{16488})
     }
   }
 
@@ -320,9 +324,6 @@
       Code using it will need to be reinstalled. (\PR{16470})
       % no current CRAN packages ....
 
-      \item Use of \samp{SUPPORT_OPENMP} from header \file{Rconfig.h} is
-      deprecated in favour of the standard OpenMP define \samp{_OPENMP}.
-
       \item \code{R_GE_version} has been increased to \code{11}.
 
       \item New API call \code{R_orderVector1()}, a faster
@@ -387,6 +388,16 @@
       in \command{cmd.exe} in Windows.  (Response to \PR{16636}.)
     }
   }
+
+  \subsection{DEPRECATED AND DEFUNCT}{
+    \itemize{
+      \item Use of \samp{SUPPORT_OPENMP} from header \file{Rconfig.h} is
+      deprecated in favour of the standard OpenMP define \samp{_OPENMP}.
+
+      (This has been the recommendation in the manual for a while now.)
+    }
+  }
+
   \subsection{BUG FIXES}{
     \itemize{
       \item \code{kmeans(x, centers = <1-row>)} now works. (\PR{16623})
@@ -409,6 +420,10 @@
 
       \item \code{heatmap()} evaluated its \code{add.expr} argument
       in the wrong environment.  (\PR{16583})
+
+      \item \code{require()} etc now give the correct entry of
+      \code{lib.loc} in the warning about an old version of a package
+      masking a newer required one.
     }
   }
 }

@@ -1,7 +1,7 @@
 #  File src/library/base/R/library.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2015 The R Core Team
+#  Copyright (C) 1995-2016 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -777,14 +777,7 @@ function(pkgInfo, quietly = FALSE, lib.loc = NULL, useImports = FALSE)
                              package = pkg, lib.loc = lib.loc)
         if (nzchar(pfile))
             as.numeric_version(readRDS(pfile)$DESCRIPTION["Version"])
-        else
-            NULL
-    }
-    .findAllVersions <- function(pkg, lib.loc = NULL) {
-        if (is.null(lib.loc))
-            lib.loc <- .libPaths()
-        do.call(c, Filter(Negate(is.null),
-                          lapply(lib.loc, .findVersion, pkg=pkg)))
+        ## else NULL
     }
     pkgs <- unique(names(pkgInfo$Depends))
     pkgname <- pkgInfo$DESCRIPTION["Package"]
@@ -802,14 +795,15 @@ function(pkgInfo, quietly = FALSE, lib.loc = NULL, useImports = FALSE)
             if (!sufficient) {
                 if (is.null(lib.loc))
                     lib.loc <- .libPaths()
-                versions <- .findAllVersions(pkg, lib.loc)
+		allV <- lapply(lib.loc, .findVersion, pkg=pkg)
+		versions <- do.call(c, allV[iV <- which(!vapply(allV, is.null, NA))])
                 sufficient <- vapply(versions, dep$op, logical(1L), target)
                 if (any(sufficient)) {
                     warning(gettextf("version %s of %s masked by %s in %s",
                                      versions[which(sufficient)[1L]],
                                      sQuote(pkg),
                                      current,
-                                     lib.loc[which(sufficient)[1L]-1L]),
+				     lib.loc[iV[!sufficient][1L]]),
                             call. = FALSE, domain = NA)
                 }
                 if (attached)
