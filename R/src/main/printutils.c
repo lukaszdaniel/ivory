@@ -642,13 +642,15 @@ const char *EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 		if(res == 0) {k = 0; wc = L'\0';}
 		if(0x20 <= k && k < 0x7f && iswprint(wc)) {
 		    switch(wc) {
-		    case L'\\': *q++ = '\\'; *q++ = '\\'; p++;
-			break;
+		    case L'\\': *q++ = '\\'; *q++ = '\\'; p++; break;
 		    case L'\'':
 		    case L'"':
 		    case L'`':
-			if(quote == *p)  *q++ = '\\'; *q++ = *p++;
-			break;
+			{
+			    if(quote == *p)  *q++ = '\\'; 
+			    *q++ = *p++;
+			    break;
+			}
 		    default:
 			for(j = 0; j < res; j++) *q++ = *p++;
 			break;
@@ -718,7 +720,11 @@ const char *EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 		    case '\'':
 		    case '"':
 		    case '`':
-			if(quote == *p)  *q++ = '\\'; *q++ = *p; break;
+		    {
+			if(quote == *p)  *q++ = '\\';
+			*q++ = *p; 
+			break;
+		    }
 		    default: *q++ = *p; break;
 		    }
 		} else switch(*p) {

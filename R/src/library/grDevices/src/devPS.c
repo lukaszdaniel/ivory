@@ -8374,8 +8374,9 @@ SEXP PDF(SEXP args)
     args = CDR(args); /* skip entry point name */
     if (isNull(CAR(args)))
         file = NULL;
-    else 
-        file = translateChar(asChar(CAR(args)));  args = CDR(args);
+    else
+        file = translateChar(asChar(CAR(args)));  
+    args = CDR(args);
     paper = CHAR(asChar(CAR(args))); args = CDR(args);
     fam = CAR(args); args = CDR(args);
     if(length(fam) == 1)
