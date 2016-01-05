@@ -231,6 +231,16 @@
       \item \code{tapply()} has been made considerably more efficient
       without changing functionality, thanks to proposals from Peter
       Haverty and Suharto Anggono.  (\PR{16640})
+
+      \item \code{match.arg(arg)} (the one-argument case) is faster; so
+      is \code{sort.int()}.  (\PR{16640})
+
+      \item The \code{format} method for \code{object_size} objects now
+      also accepts \dQuote{binary} units (and e.g. Tb).  (\PR{16649})
+
+      \item Profiling now records calls of the form \code{foo::bar} and
+      some similar cases directly rather than as calls to
+      \code{<Anonymous>}.  Contributed by Winston Chang.
     }
   }
 
@@ -315,6 +325,14 @@
     }
   }
 
+  \subsection{PACKAGE INSTALLATION}{
+    \itemize{
+      \item The \command{make} macro \code{AWK} which used to be made
+      available to files such as \file{src/Makefile} is no longer set.
+      [Announced and will be implemented once packages are updated.]
+    }
+  }
+
   \subsection{C-LEVEL FACILITIES}{
     \itemize{
       \item The API call \code{logspace_sum} introduced in \R 3.2.0 is
@@ -395,6 +413,10 @@
       deprecated in favour of the standard OpenMP define \samp{_OPENMP}.
 
       (This has been the recommendation in the manual for a while now.)
+
+      \item The \command{make} macro @code{AWK} which is long unused by
+      \R itself but recorded in file \file{etc/Makeconf} is deprecated
+      and will be removed in \R 3.3.0.
     }
   }
 
@@ -424,7 +446,7 @@
       \item \code{require()} etc now give the correct entry of
       \code{lib.loc} in the warning about an old version of a package
       masking a newer required one.
-      
+
       \item The internal deparser did not add parentheses when
       necessary before \code{[]} or \code{[[]]}.  (Reported by
       Lukas Stadler).
