@@ -1515,8 +1515,7 @@ getGroupMembers <- function(group, recursive = FALSE, character = TRUE)
 
 
 .hasS4MetaData <- function(env)
-  (length(objects(env, all.names = TRUE,
-                          pattern = "^[.]__[CTA]_")))
+    any(grepl("^[.]__[CTA]_", names(env)))
 
 ## turn ordinary generic into one that dispatches on "..."
 ## currently only called in one place from setGeneric()

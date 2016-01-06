@@ -1395,6 +1395,7 @@ implicitGeneric <- function(...) NULL
                                     sQuote(name)),
                            domain = "R-methods")
                   generic <- value
+                  fdefault <- generic@default
               }
               package <- "base"
           }
