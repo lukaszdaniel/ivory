@@ -27,7 +27,7 @@ format.object_size <- function(x, units = "b", ...)
 				"PiB", "EiB", "ZiB", "YiB"))
     if (units == "auto")
 	units <-
-	    if      (x >= 1024^6) "Tb"
+	    if      (x >= 1024^4) "Tb"
             else if (x >= 1024^3) "Gb"
 	    else if (x >= 1024^2) "Mb"
 	    else if (x >= 1024  ) "Kb" else "b"
@@ -36,8 +36,8 @@ format.object_size <- function(x, units = "b", ...)
 	   "Kb" =, "KB" = paste(round(x/1024  , 1L), "Kb"),
 	   "Mb" =, "MB" = paste(round(x/1024^2, 1L), "Mb"),
 	   "Gb" =, "GB" = paste(round(x/1024^3, 1L), "Gb"),
-	   "Tb" =, "TB" = paste(round(x/1024^3, 1L), "Tb"),
-	   "Pb" =, "PB" = paste(round(x/1024^3, 1L), "Pb"),
+	   "Tb" =, "TB" = paste(round(x/1024^4, 1L), "Tb"),
+	   "Pb" =, "PB" = paste(round(x/1024^5, 1L), "Pb"),
 	   "KiB" = paste(round(x/1024  , 1L), "KiB"),
 	   "MiB" = paste(round(x/1024^2, 1L), "MiB"),
 	   "GiB" = paste(round(x/1024^3, 1L), "GiB"),
