@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-12-12 21:35\n"
+"POT-Creation-Date: 2016-01-09 15:49\n"
 "PO-Revision-Date: 2013-06-02 11:39+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -59,7 +59,7 @@ msgstr "le fichier '%s' est introuvable"
 msgid "%s has wrong argument list %s"
 msgstr "%s a une liste d'arguments erronée %s"
 
-#. R/QC.R: gettextf("%s in object %s", iconv0(x$unknown[, 1L], "", "ASCII", sub = "byte"), sQuote(x$unknown[,     2L]), domain = "R-tools")
+#. R/QC.R: gettextf("%s in object %s", iconv0((x$unknown)[, 1L], "", "ASCII", sub = "byte"),     sQuote((x$unknown)[, 2L]), domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
 msgid "%s in object %s"
@@ -4940,7 +4940,7 @@ msgstr "fichiers dupliqués dans le champ '%s' :"
 msgid "empty 'data' directory"
 msgstr "répertoire 'data' vide"
 
-#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, db$Entry[pos], paste(sQuote(bad[pos]),     collapse = ", "), domain = "R-tools")
+#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, (db$Entry)[pos], paste(sQuote(bad[pos]),     collapse = ", "), domain = "R-tools")
 #: R/QC.R:0
 msgid "entry %d (%s): missing required field(s) %s"
 msgstr ""

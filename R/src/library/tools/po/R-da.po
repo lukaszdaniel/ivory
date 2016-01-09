@@ -2,16 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-12-12 21:35\n"
-"PO-Revision-Date: 2012-01-07 22:11+0200\n"
-"Last-Translator: Joe <joedalton2@yahoo.dk>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: da\n"
+"POT-Creation-Date: 2016-01-09 15:49\n"
+"PO-Revision-Date: 2016-01-09 20:39+0100\n"
+"Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
+"Language-Team: \n"
+"Language: da_DK\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"X-Generator: Poedit 1.8.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/install.R: gettextf("## package without R code %s", sQuote(namespace))
 #: R/install.R:0
@@ -50,7 +51,7 @@ msgstr "Vignette afhængigheder ikke krævet:"
 msgid "%s has wrong argument list %s"
 msgstr ""
 
-#. R/QC.R: gettextf("%s in object %s", iconv0(x$unknown[, 1L], "", "ASCII", sub = "byte"), sQuote(x$unknown[,     2L]), domain = "R-tools")
+#. R/QC.R: gettextf("%s in object %s", iconv0((x$unknown)[, 1L], "", "ASCII", sub = "byte"),     sQuote((x$unknown)[, 2L]), domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
 msgid "%s in object %s"
@@ -4615,7 +4616,7 @@ msgstr "fortolkningsfejl i fil »%s«:"
 msgid "empty 'data' directory"
 msgstr ""
 
-#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, db$Entry[pos], paste(sQuote(bad[pos]),     collapse = ", "), domain = "R-tools")
+#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, (db$Entry)[pos], paste(sQuote(bad[pos]),     collapse = ", "), domain = "R-tools")
 #: R/QC.R:0
 msgid "entry %d (%s): missing required field(s) %s"
 msgstr ""

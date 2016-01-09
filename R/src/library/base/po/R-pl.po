@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-12-12 21:34\n"
+"POT-Creation-Date: 2016-01-09 22:31\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.4\n"
 
 #. R/New-Internal.R: stop("\"hexNumeric\" and \"digits17\" are mutually exclusive")
 #: R/New-Internal.R:0
@@ -795,6 +795,11 @@ msgstr ""
 #: R/connections.R:0
 msgid "'origin' argument must be one of 'start', 'current' or 'end'"
 msgstr "argument 'origin' musi być jednym ze 'start', 'current' lub 'end'"
+
+#. R/sort.R: stop("'partial' sorting is not supported by 'radix()' method")
+#: R/sort.R:0
+msgid "'partial' sorting is not supported by 'radix()' method"
+msgstr "sortowanie 'partial' nie jest wspierane przez funkcję 'radix()'"
 
 #. R/qr.R: stop("'qr' and 'y' arguments must have the same number of rows")
 #. R/qr.R: stop("'qr' and 'y' arguments must have the same number of rows")
@@ -2777,7 +2782,7 @@ msgid ""
 msgstr ""
 "Pakiet %s posiada licencję, którą musisz zaakceptować w interaktywnej sesji"
 
-#. R/library.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is %s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"], domain = "R-base")
+#. R/library.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is %s",     sQuote(pkg), (pkgInfo$DESCRIPTION)["License"], domain = "R-base")
 #: R/library.R:0
 msgid ""
 "package %s has a license that you need to accept:\n"
@@ -2895,13 +2900,7 @@ msgstr "zamiana elementów diagonalnych ma niepoprawną długość"
 msgid "replacing element in non-existent column: %s"
 msgstr "zastępowanie elementu w nieistniejącej kolumnie: %s"
 
-#. R/namespace.R: gettext("replacing local value with import %s when loading %s")
-#: R/namespace.R:0
-msgid "replacing local value with import %s when loading %s"
-msgstr ""
-"zastępowanie lokalnej wartości z importu %s podczas ładowania przestrzeni "
-"nazw %s"
-
+#. R/namespace.R: gettext("replacing local value with import %s when loading namespace %s")
 #. R/namespace.R: gettext("replacing local value with import %s when loading namespace %s")
 #: R/namespace.R:0
 msgid "replacing local value with import %s when loading namespace %s"
@@ -2909,11 +2908,18 @@ msgstr ""
 "zastępowanie lokalnej wartości z importu %s podczas ładowania przestrzeni "
 "nazw %s"
 
+#. R/namespace.R: gettextf("replacing previous import %s by %s when loading %s", sQuote(paste(prev,     n, sep = "::")), sQuote(paste(nsname, n, sep = "::")), sQuote(from))
+#: R/namespace.R:0
+msgid "replacing previous import %s by %s when loading %s"
+msgstr ""
+"zastępowanie poprzedniego importu %s przez %s podczas ładowania przestrzeni "
+"nazw %s"
+
 #. R/namespace.R: gettext("replacing previous import by %s when loading namespace %s")
 #: R/namespace.R:0
 msgid "replacing previous import by %s when loading namespace %s"
 msgstr ""
-"zastępowanie poprzedniego importu przez %s podczas ładowanie przestrzeni "
+"zastępowanie poprzedniego importu przez %s podczas ładowania przestrzeni "
 "nazw %s"
 
 #. R/namespace.R: gettextf("requested methods were not found in environment/package %s: %s", sQuote(pkg),     paste(vars[is.na(match(vars, allFuns))], collapse = ", "))
@@ -3006,6 +3012,11 @@ msgstr "ta sesja nie jest interaktywna"
 #: R/seq.R:0
 msgid "too many arguments"
 msgstr "zbyć dużo argumentów"
+
+#. R/tapply.R: stop("total number of levels >= 2^31")
+#: R/tapply.R:0
+msgid "total number of levels >= 2^31"
+msgstr "całkowita liczba poziomów >= 2^31"
 
 #. R/methodsSupport.R: stop("tracing functions requires the 'methods' package, but unable to load the 'methods' namespace")
 #: R/methodsSupport.R:0
@@ -3121,7 +3132,7 @@ msgstr "wartości:"
 msgid "values in 'breaks' argument are not unique"
 msgstr "wartosci w argumencie 'breaks' nie są unikalne"
 
-#. R/library.R: gettextf("version %s of %s masked by %s in %s", versions[which(sufficient)[1L]],     sQuote(pkg), current, lib.loc[which(sufficient)[1L] - 1L])
+#. R/library.R: gettextf("version %s of %s masked by %s in %s", versions[which(sufficient)[1L]],     sQuote(pkg), current, lib.loc[iV[!sufficient][1L]])
 #: R/library.R:0
 msgid "version %s of %s masked by %s in %s"
 msgstr "wersja %s pakietu %s zasłonięta przez %s w %s"
@@ -3169,6 +3180,14 @@ msgid_plural "%d string mismatches"
 msgstr[0] "%d łańcuch nie zgadza się"
 msgstr[1] "%d łańcuchy nie zgadzają się"
 msgstr[2] "%d łańcuchów nie zgadza się"
+
+#. R/mapply.R: ngettext(length(collisions), "%s function may not have argument named %s", "%s function may not have arguments named %s",     domain = "R-base")
+#: R/mapply.R:0
+msgid "%s function may not have argument named %s"
+msgid_plural "%s function may not have arguments named %s"
+msgstr[0] "funkcja %s nie może mieć argumentu o nazwie %s"
+msgstr[1] "funkcja %s nie może mieć argumentów o nazwach %s"
+msgstr[2] "funkcja %s nie może mieć argumentów o nazwach %s"
 
 #. R/merge.R: ngettext(sum(bad), "'by' argument must specify a uniquely valid column", "'by' argument must specify uniquely valid columns",     domain = "R-base")
 #. R/merge.R: ngettext(sum(bad), "'by' argument must specify a uniquely valid column", "'by' argument must specify uniquely valid columns",     domain = "R-base")
@@ -3483,6 +3502,11 @@ msgid_plural "variables %s are not all TRUE"
 msgstr[0] "zmienna %s nie ma wartości TRUE"
 msgstr[1] "nie wszystkie zmienne %s mają wartość TRUE"
 msgstr[2] "nie wszystkie zmienne %s mają wartość TRUE"
+
+#~ msgid "replacing local value with import %s when loading %s"
+#~ msgstr ""
+#~ "zastępowanie lokalnej wartości z importu %s podczas ładowania przestrzeni "
+#~ "nazw %s"
 
 #~ msgid "'vec' argument contains NA values"
 #~ msgstr "argument 'vec' zawiera wartości NA"

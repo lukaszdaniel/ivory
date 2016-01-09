@@ -2,16 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-04 20:50\n"
-"PO-Revision-Date: 2012-01-29 12:58+0200\n"
-"Last-Translator: Joe <joedalton2@yahoo.dk>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: da\n"
+"POT-Creation-Date: 2016-01-09 15:48\n"
+"PO-Revision-Date: 2016-01-09 19:14+0100\n"
+"Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
+"Language-Team: \n"
+"Language: da_DK\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"X-Generator: Poedit 1.8.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must all be same length",     "x", "y", "id")
 #. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must all be same length",     "x", "y", "id")
@@ -403,11 +404,6 @@ msgstr "Ugyldig »frame«"
 #. R/grob.R: gettextf("New 'grob' name (%s) does not match 'gPath' (%s)", newGrob$name, gPath)
 #: R/grob.R:0
 msgid "New 'grob' name (%s) does not match 'gPath' (%s)"
-msgstr ""
-
-#. R/ls.R: stop("Nothing on the display list")
-#: R/ls.R:0
-msgid "Nothing on the display list"
 msgstr ""
 
 #. R/unit.R: stop("Zero arguments where at least one expected")

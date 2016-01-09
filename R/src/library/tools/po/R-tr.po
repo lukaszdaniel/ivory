@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-12-12 21:35\n"
+"POT-Creation-Date: 2016-01-09 15:49\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -53,7 +53,7 @@ msgstr ""
 msgid "%s has wrong argument list %s"
 msgstr ""
 
-#. R/QC.R: gettextf("%s in object %s", iconv0(x$unknown[, 1L], "", "ASCII", sub = "byte"), sQuote(x$unknown[,     2L]), domain = "R-tools")
+#. R/QC.R: gettextf("%s in object %s", iconv0((x$unknown)[, 1L], "", "ASCII", sub = "byte"),     sQuote((x$unknown)[, 2L]), domain = "R-tools")
 #: R/QC.R:0
 msgid "%s in object %s"
 msgstr ""
@@ -4467,7 +4467,7 @@ msgstr ""
 msgid "empty 'data' directory"
 msgstr ""
 
-#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, db$Entry[pos], paste(sQuote(bad[pos]),     collapse = ", "), domain = "R-tools")
+#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, (db$Entry)[pos], paste(sQuote(bad[pos]),     collapse = ", "), domain = "R-tools")
 #: R/QC.R:0
 msgid "entry %d (%s): missing required field(s) %s"
 msgstr ""

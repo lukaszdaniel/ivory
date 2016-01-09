@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-04 20:50\n"
+"POT-Creation-Date: 2016-01-09 15:48\n"
 "PO-Revision-Date: 2012-02-26 14:01+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -427,12 +427,6 @@ msgstr " 不正な viewport 名です "
 #: R/grob.R:0
 msgid "New 'grob' name (%s) does not match 'gPath' (%s)"
 msgstr " 新しい 'grob' 名(%s)は 'gPath'(%s) に合致しません "
-
-#. R/ls.R: stop("Nothing on the display list")
-#: R/ls.R:0
-#, fuzzy
-msgid "Nothing on the display list"
-msgstr " ディスプレイリストの中に不正な要素があります "
 
 #. R/unit.R: stop("Zero arguments where at least one expected")
 #: R/unit.R:0
@@ -938,6 +932,10 @@ msgstr[0] " 不正な 'grob' の名前です "
 msgid "invalid viewport name"
 msgid_plural "invalid viewport names"
 msgstr[0] " 不正な viewport 名です "
+
+#, fuzzy
+#~ msgid "Nothing on the display list"
+#~ msgstr " ディスプレイリストの中に不正な要素があります "
 
 #, fuzzy
 #~ msgid "invalid element in the display list"

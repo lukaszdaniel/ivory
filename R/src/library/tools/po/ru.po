@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-07 21:38+0200\n"
+"POT-Creation-Date: 2016-01-09 15:50+0100\n"
 "PO-Revision-Date: 2015-01-17 15:55+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -163,15 +163,15 @@ msgstr "psnice()  на этой платформе не поддерживает
 msgid "invalid argument type"
 msgstr "неправильный тип аргумента"
 
-#: text.c:157
+#: text.c:158
 #, c-format
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr ""
 
-#: text.c:224 text.c:246
+#: text.c:225 text.c:247
 msgid "out of memory"
 msgstr "не хватает памяти"
 
-#: text.c:266 text.c:268
+#: text.c:267 text.c:269
 msgid "first arg must be a single character string"
 msgstr ""

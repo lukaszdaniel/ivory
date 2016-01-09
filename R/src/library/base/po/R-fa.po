@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-12-12 21:34\n"
+"POT-Creation-Date: 2016-01-09 22:31\n"
 "PO-Revision-Date: 2012-11-27 01:11+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -755,6 +755,11 @@ msgstr ""
 #. R/connections.R: stop("'origin' argument must be one of 'start', 'current' or 'end'")
 #: R/connections.R:0
 msgid "'origin' argument must be one of 'start', 'current' or 'end'"
+msgstr ""
+
+#. R/sort.R: stop("'partial' sorting is not supported by 'radix()' method")
+#: R/sort.R:0
+msgid "'partial' sorting is not supported by 'radix()' method"
 msgstr ""
 
 #. R/qr.R: stop("'qr' and 'y' arguments must have the same number of rows")
@@ -2652,7 +2657,7 @@ msgid ""
 "package %s has a license that you need to accept in an interactive session"
 msgstr ""
 
-#. R/library.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is %s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"], domain = "R-base")
+#. R/library.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is %s",     sQuote(pkg), (pkgInfo$DESCRIPTION)["License"], domain = "R-base")
 #: R/library.R:0
 msgid ""
 "package %s has a license that you need to accept:\n"
@@ -2762,14 +2767,15 @@ msgstr ""
 msgid "replacing element in non-existent column: %s"
 msgstr ""
 
-#. R/namespace.R: gettext("replacing local value with import %s when loading %s")
-#: R/namespace.R:0
-msgid "replacing local value with import %s when loading %s"
-msgstr ""
-
+#. R/namespace.R: gettext("replacing local value with import %s when loading namespace %s")
 #. R/namespace.R: gettext("replacing local value with import %s when loading namespace %s")
 #: R/namespace.R:0
 msgid "replacing local value with import %s when loading namespace %s"
+msgstr ""
+
+#. R/namespace.R: gettextf("replacing previous import %s by %s when loading %s", sQuote(paste(prev,     n, sep = "::")), sQuote(paste(nsname, n, sep = "::")), sQuote(from))
+#: R/namespace.R:0
+msgid "replacing previous import %s by %s when loading %s"
 msgstr ""
 
 #. R/namespace.R: gettext("replacing previous import by %s when loading namespace %s")
@@ -2863,6 +2869,11 @@ msgstr ""
 #. R/seq.R: stop("too many arguments")
 #: R/seq.R:0
 msgid "too many arguments"
+msgstr ""
+
+#. R/tapply.R: stop("total number of levels >= 2^31")
+#: R/tapply.R:0
+msgid "total number of levels >= 2^31"
 msgstr ""
 
 #. R/methodsSupport.R: stop("tracing functions requires the 'methods' package, but unable to load the 'methods' namespace")
@@ -2976,7 +2987,7 @@ msgstr ""
 msgid "values in 'breaks' argument are not unique"
 msgstr ""
 
-#. R/library.R: gettextf("version %s of %s masked by %s in %s", versions[which(sufficient)[1L]],     sQuote(pkg), current, lib.loc[which(sufficient)[1L] - 1L])
+#. R/library.R: gettextf("version %s of %s masked by %s in %s", versions[which(sufficient)[1L]],     sQuote(pkg), current, lib.loc[iV[!sufficient][1L]])
 #: R/library.R:0
 msgid "version %s of %s masked by %s in %s"
 msgstr ""
@@ -3018,6 +3029,13 @@ msgstr[1] ""
 #: R/all.equal.R:0
 msgid "%d string mismatch"
 msgid_plural "%d string mismatches"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/mapply.R: ngettext(length(collisions), "%s function may not have argument named %s", "%s function may not have arguments named %s",     domain = "R-base")
+#: R/mapply.R:0
+msgid "%s function may not have argument named %s"
+msgid_plural "%s function may not have arguments named %s"
 msgstr[0] ""
 msgstr[1] ""
 

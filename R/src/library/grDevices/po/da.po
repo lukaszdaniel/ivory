@@ -6,16 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-04 22:28+0100\n"
-"PO-Revision-Date: 2011-11-29 09:07+0200\n"
-"Last-Translator: Joe <joedalton2@yahoo.dk>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: da\n"
+"POT-Creation-Date: 2016-01-09 15:47+0100\n"
+"PO-Revision-Date: 2016-01-09 18:50+0100\n"
+"Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
+"Language-Team: \n"
+"Language: da_DK\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"X-Generator: Poedit 1.8.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: axis_scales.c:38 axis_scales.c:39 axis_scales.c:56
 #, c-format
@@ -88,7 +89,7 @@ msgstr "ugyldigt 'fil'-argument"
 msgid "invalid gray level, must be in [0,1]."
 msgstr ""
 
-#: colors.c:549 devPS.c:8248 devPS.c:8410 devPS.c:8413 devWindows.c:3640
+#: colors.c:549 devPS.c:8248 devPS.c:8411 devPS.c:8414 devWindows.c:3640
 #: devWindows.c:3644 devWindows.c:3652 devWindows.c:3663 devWindows.c:3669
 #: devWindows.c:3676 devWindows.c:3683 devWindows.c:3687
 #, fuzzy, c-format
@@ -579,8 +580,8 @@ msgstr "Kunne ikke finde eller indlæse PDF-skrift"
 msgid "failed to find or load PDF CID font"
 msgstr "Kunne ikke finde eller indlæse PDF CID-skrift"
 
-#: devPS.c:8220 devPS.c:8224 devPS.c:8242 devPS.c:8384 devPS.c:8388
-#: devPS.c:8400
+#: devPS.c:8220 devPS.c:8224 devPS.c:8242 devPS.c:8385 devPS.c:8389
+#: devPS.c:8401
 #, fuzzy, c-format
 msgid "invalid '%s' parameter in '%s'"
 msgstr "ugyldigt 'fonts'-parameter i %s"
@@ -592,7 +593,7 @@ msgid "unable to start '%s' function"
 msgstr "kan ikke starte %s()-enhed"
 
 # 85%
-#: devPS.c:8427 devPicTeX.c:741 devWindows.c:3728
+#: devPS.c:8428 devPicTeX.c:741 devWindows.c:3728
 #, c-format
 msgid "unable to start %s() device"
 msgstr "kan ikke starte %s()-enhed"

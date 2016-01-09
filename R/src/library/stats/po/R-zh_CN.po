@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-17 17:28\n"
+"POT-Creation-Date: 2016-01-09 15:48\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1994,7 +1994,7 @@ msgstr ""
 msgid "F-statistic (df=%s, %s)=%s"
 msgstr ""
 
-#. R/lm.R: gettextf("F-statistic: %s on %d and %d DF", formatC(x$fstatistic[1L], digits = digits),     x$fstatistic[2L], x$fstatistic[3L], domain = "R-stats")
+#. R/lm.R: gettextf("F-statistic: %s on %d and %d DF", formatC((x$fstatistic)[1L], digits = digits),     (x$fstatistic)[2L], (x$fstatistic)[3L], domain = "R-stats")
 #: R/lm.R:0
 msgid "F-statistic: %s on %d and %d DF"
 msgstr ""
@@ -3020,7 +3020,7 @@ msgid ""
 "The 'ward()' method has been renamed to 'ward.D()'; note new 'ward.D2()'"
 msgstr ""
 
-#. R/factanal.R: gettextf("The degrees of freedom for the model is %d and the fit was %s", x$dof,     round(x$criteria["objective"], 4), domain = "R-stats")
+#. R/factanal.R: gettextf("The degrees of freedom for the model is %d and the fit was %s", x$dof,     round((x$criteria)["objective"], 4), domain = "R-stats")
 #: R/factanal.R:0
 #, fuzzy
 msgid "The degrees of freedom for the model is %d and the fit was %s"
@@ -5791,7 +5791,7 @@ msgstr "spline: 第一个和最后一个y的值不相等-因此都用y[1L] 来�
 msgid "spline: first and last y values differ - using y[1] for both"
 msgstr "spline: 第一个和最后一个y的值不相等-两个用y[1]"
 
-#. R/factanal.R: gettextf("start %d value: %s uniqs: %s", i, format(nfit$criteria[1L]), format(as.vector(round(nfit$uniquenesses,     4))), domain = "R-stats")
+#. R/factanal.R: gettextf("start %d value: %s uniqs: %s", i, format((nfit$criteria)[1L]), format(as.vector(round(nfit$uniquenesses,     4))), domain = "R-stats")
 #: R/factanal.R:0
 msgid "start %d value: %s uniqs: %s"
 msgstr ""

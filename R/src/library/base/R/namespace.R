@@ -786,7 +786,7 @@ namespaceImportFrom <- function(self, ns, vars, generics, packages, from = "non-
     if (isNamespace(self)) {
         if(isBaseNamespace(self)) {
             impenv <- self
-            msg <- gettext("replacing local value with import %s when loading %s")
+            msg <- gettext("replacing local value with import %s when loading namespace %s")
             register <- FALSE
         }
         else {

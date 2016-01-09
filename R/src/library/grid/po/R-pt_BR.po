@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-04 20:50\n"
+"POT-Creation-Date: 2016-01-09 15:48\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -433,12 +433,6 @@ msgstr "Nome(s) de vista inválido(s)"
 #: R/grob.R:0
 msgid "New 'grob' name (%s) does not match 'gPath' (%s)"
 msgstr "Novo nome de 'grob' (%s) não corresponde a 'gPath' (%s)"
-
-#. R/ls.R: stop("Nothing on the display list")
-#: R/ls.R:0
-#, fuzzy
-msgid "Nothing on the display list"
-msgstr "Elemento Inválido na lista de exibição"
 
 #. R/unit.R: stop("Zero arguments where at least one expected")
 #: R/unit.R:0
@@ -934,6 +928,10 @@ msgid "invalid viewport name"
 msgid_plural "invalid viewport names"
 msgstr[0] "Nome(s) de vista inválido(s)"
 msgstr[1] "Nome(s) de vista inválido(s)"
+
+#, fuzzy
+#~ msgid "Nothing on the display list"
+#~ msgstr "Elemento Inválido na lista de exibição"
 
 #, fuzzy
 #~ msgid "invalid element in the display list"

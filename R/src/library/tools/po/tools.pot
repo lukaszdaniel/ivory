@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the tools package.
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-12 21:35+0100\n"
+"POT-Creation-Date: 2016-01-09 15:50+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -157,15 +157,15 @@ msgstr ""
 msgid "invalid argument type"
 msgstr ""
 
-#: text.c:157
+#: text.c:158
 #, c-format
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr ""
 
-#: text.c:224 text.c:246
+#: text.c:225 text.c:247
 msgid "out of memory"
 msgstr ""
 
-#: text.c:266 text.c:268
+#: text.c:267 text.c:269
 msgid "first arg must be a single character string"
 msgstr ""

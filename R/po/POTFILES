@@ -101,6 +101,7 @@ src/main/print.c
 src/main/printutils.c
 src/main/printvector.c
 src/main/qsort.c
+src/main/radixsort.c
 src/main/random.c
 src/main/raw.c
 src/main/Rdynload.c

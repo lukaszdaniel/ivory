@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.3.0\n"
-"POT-Creation-Date: 2015-12-12 21:35\n"
+"POT-Creation-Date: 2016-01-09 15:49\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,7 +59,7 @@ msgstr ""
 
 
 #: R/QC.R: 0
-#. R/QC.R: gettextf("%s in object %s", iconv0(x$unknown[, 1L], "", "ASCII", sub = "byte"), sQuote(x$unknown[,     2L]), domain = "R-tools")
+#. R/QC.R: gettextf("%s in object %s", iconv0((x$unknown)[, 1L], "", "ASCII", sub = "byte"),     sQuote((x$unknown)[, 2L]), domain = "R-tools")
 
 msgid "%s in object %s"
 msgstr ""
@@ -5917,7 +5917,7 @@ msgstr ""
 
 
 #: R/QC.R: 0
-#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, db$Entry[pos], paste(sQuote(bad[pos]),     collapse = ", "), domain = "R-tools")
+#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, (db$Entry)[pos], paste(sQuote(bad[pos]),     collapse = ", "), domain = "R-tools")
 
 msgid "entry %d (%s): missing required field(s) %s"
 msgstr ""

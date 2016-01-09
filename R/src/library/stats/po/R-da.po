@@ -2,16 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-17 17:28\n"
-"PO-Revision-Date: 2012-01-28 01:18+0200\n"
-"Last-Translator: Joe <joedalton2@yahoo.dk>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: da\n"
+"POT-Creation-Date: 2016-01-09 15:48\n"
+"PO-Revision-Date: 2016-01-09 20:36+0100\n"
+"Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
+"Language-Team: \n"
+"Language: da_DK\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"X-Generator: Poedit 1.8.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/mlm.R: stop("\"mlm\" objects with weights are not supported")
 #: R/mlm.R:0
@@ -563,7 +564,7 @@ msgstr ""
 msgid "'ar' part of model is not stationary"
 msgstr ""
 
-# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable. 
+# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable.
 #. R/arima.R: stop("'arima()' method is implemented only for univariate time series")
 #: R/arima.R:0
 #, fuzzy
@@ -612,7 +613,7 @@ msgstr ""
 msgid "'covmat' is of unknown type"
 msgstr ""
 
-# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable. 
+# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable.
 #. R/cpgram.R: stop("'cpgram()' is implemented only for univariate time series")
 #: R/cpgram.R:0
 #, fuzzy
@@ -1006,7 +1007,7 @@ msgstr "argumenter skal have samme længde"
 msgid "'scores' must all be different numbers"
 msgstr ""
 
-# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable. 
+# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable.
 #. R/ar.R: warning("'se.fit()' not yet implemented for multivariate models")
 #: R/ar.R:0
 #, fuzzy
@@ -1936,7 +1937,7 @@ msgstr ""
 msgid "F-statistic (df=%s, %s)=%s"
 msgstr ""
 
-#. R/lm.R: gettextf("F-statistic: %s on %d and %d DF", formatC(x$fstatistic[1L], digits = digits),     x$fstatistic[2L], x$fstatistic[3L], domain = "R-stats")
+#. R/lm.R: gettextf("F-statistic: %s on %d and %d DF", formatC((x$fstatistic)[1L], digits = digits),     (x$fstatistic)[2L], (x$fstatistic)[3L], domain = "R-stats")
 #: R/lm.R:0
 msgid "F-statistic: %s on %d and %d DF"
 msgstr ""
@@ -2922,7 +2923,7 @@ msgid ""
 "The 'ward()' method has been renamed to 'ward.D()'; note new 'ward.D2()'"
 msgstr ""
 
-#. R/factanal.R: gettextf("The degrees of freedom for the model is %d and the fit was %s", x$dof,     round(x$criteria["objective"], 4), domain = "R-stats")
+#. R/factanal.R: gettextf("The degrees of freedom for the model is %d and the fit was %s", x$dof,     round((x$criteria)["objective"], 4), domain = "R-stats")
 #: R/factanal.R:0
 msgid "The degrees of freedom for the model is %d and the fit was %s"
 msgstr ""
@@ -5111,7 +5112,7 @@ msgstr ""
 msgid "only 1-4 predictors are allowed"
 msgstr ""
 
-# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable. 
+# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable.
 #. R/StructTS.R: stop("only implemented for univariate time series")
 #. R/arma0.R: stop("only implemented for univariate time series")
 #: R/StructTS.R:0 R/arma0.R:0
@@ -5591,7 +5592,7 @@ msgstr ""
 msgid "spline: first and last y values differ - using y[1] for both"
 msgstr ""
 
-#. R/factanal.R: gettextf("start %d value: %s uniqs: %s", i, format(nfit$criteria[1L]), format(as.vector(round(nfit$uniquenesses,     4))), domain = "R-stats")
+#. R/factanal.R: gettextf("start %d value: %s uniqs: %s", i, format((nfit$criteria)[1L]), format(as.vector(round(nfit$uniquenesses,     4))), domain = "R-stats")
 #: R/factanal.R:0
 msgid "start %d value: %s uniqs: %s"
 msgstr ""

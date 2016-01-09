@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-12 21:35+0100\n"
+"POT-Creation-Date: 2016-01-09 15:48+0100\n"
 "PO-Revision-Date: 2015-01-17 15:14+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -95,7 +95,7 @@ msgstr ""
 msgid "no direct or inherited method for function '%s' for this call"
 msgstr "调用时找不到用于'%s'函数的直接或继承的方法"
 
-#: methods_list_dispatch.c:525 methods_list_dispatch.c:1068
+#: methods_list_dispatch.c:525 methods_list_dispatch.c:1070
 msgid "invalid object (non-function) used as method"
 msgstr "当方法用的对象(非函数)出了错"
 
@@ -153,7 +153,7 @@ msgstr ""
 "\"%s\"的对象"
 
 #: methods_list_dispatch.c:615 methods_list_dispatch.c:627
-#: methods_list_dispatch.c:1014
+#: methods_list_dispatch.c:1016
 #, c-format
 msgid ""
 "error in evaluating the argument '%s' in selecting a method for function "
@@ -221,14 +221,14 @@ msgstr "类别必需是字符串名字或类别定义"
 msgid "failed to get the generic for the primitive \"%s\""
 msgstr "没有能够为原始\"%s\"找到同属函数"
 
-#: methods_list_dispatch.c:980
+#: methods_list_dispatch.c:981
 #, fuzzy, c-format
 msgid ""
 "expected a generic function or a primitive for dispatch, got an object of "
 "class \"%s\""
 msgstr "需要的是同属函数或原始函数，现在得到的却是类别为\"%s\"的对象"
 
-#: methods_list_dispatch.c:992
+#: methods_list_dispatch.c:993
 #, fuzzy, c-format
 msgid ""
 "generic \"%s\" seems not to have been initialized for table dispatch---need "
@@ -237,7 +237,7 @@ msgstr ""
 "同属函数\"%s\"没有为表台调度进行初始化--.SigArgs 和.AllMtable 这两个量都需要"
 "在它的环境里有定义"
 
-#: methods_list_dispatch.c:996
+#: methods_list_dispatch.c:997
 msgid "'.SigArgs' is shorter than '.SigLength' says it should be"
 msgstr ""
 

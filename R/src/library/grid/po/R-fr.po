@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-04 20:50\n"
+"POT-Creation-Date: 2016-01-09 15:48\n"
 "PO-Revision-Date: 2012-03-06 21:36+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -433,12 +433,6 @@ msgstr "Nom(s) de vue(s) incorrect(s)"
 #: R/grob.R:0
 msgid "New 'grob' name (%s) does not match 'gPath' (%s)"
 msgstr "Le nouveau nom de 'grob' (%s) n'est pas compatible avec 'gPath' (%s)"
-
-#. R/ls.R: stop("Nothing on the display list")
-#: R/ls.R:0
-#, fuzzy
-msgid "Nothing on the display list"
-msgstr "Modification incorrecte dans la liste d'affichage (display list)"
 
 #. R/unit.R: stop("Zero arguments where at least one expected")
 #: R/unit.R:0
@@ -948,6 +942,10 @@ msgid "invalid viewport name"
 msgid_plural "invalid viewport names"
 msgstr[0] "Nom(s) de vue(s) incorrect(s)"
 msgstr[1] "Nom(s) de vue(s) incorrect(s)"
+
+#, fuzzy
+#~ msgid "Nothing on the display list"
+#~ msgstr "Modification incorrecte dans la liste d'affichage (display list)"
 
 #, fuzzy
 #~ msgid "invalid element in the display list"

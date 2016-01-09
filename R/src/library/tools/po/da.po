@@ -6,16 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-07 21:38+0200\n"
-"PO-Revision-Date: 2011-11-28 22:24+0200\n"
-"Last-Translator: Joe <joedalton2@yahoo.dk>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: da\n"
+"POT-Creation-Date: 2016-01-09 15:50+0100\n"
+"PO-Revision-Date: 2016-01-09 20:39+0100\n"
+"Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
+"Language-Team: \n"
+"Language: da_DK\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"X-Generator: Poedit 1.8.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: Rmd5.c:38
 msgid "argument 'files' must be character"
@@ -157,15 +158,15 @@ msgstr "psnice() er ikke understøttet på denne platform"
 msgid "invalid argument type"
 msgstr "ugyldig argumenttype"
 
-#: text.c:157
+#: text.c:158
 #, c-format
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr ""
 
-#: text.c:224 text.c:246
+#: text.c:225 text.c:247
 msgid "out of memory"
 msgstr "ikke nok hukommelse"
 
-#: text.c:266 text.c:268
+#: text.c:267 text.c:269
 msgid "first arg must be a single character string"
 msgstr ""

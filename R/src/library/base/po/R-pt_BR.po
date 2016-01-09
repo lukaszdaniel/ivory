@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-12-12 21:34\n"
+"POT-Creation-Date: 2016-01-09 22:31\n"
 "PO-Revision-Date: 2011-03-26 08:54-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -876,6 +876,11 @@ msgstr "options('stringsAsFactors') não definido como TRUE ou FALSE"
 #, fuzzy
 msgid "'origin' argument must be one of 'start', 'current' or 'end'"
 msgstr "'origin' deve ser um dentre 'start', 'current' ou 'end'"
+
+#. R/sort.R: stop("'partial' sorting is not supported by 'radix()' method")
+#: R/sort.R:0
+msgid "'partial' sorting is not supported by 'radix()' method"
+msgstr ""
 
 #. R/qr.R: stop("'qr' and 'y' arguments must have the same number of rows")
 #. R/qr.R: stop("'qr' and 'y' arguments must have the same number of rows")
@@ -2959,7 +2964,7 @@ msgid ""
 msgstr ""
 "pacote '%s' tem uma licença que você precisa aceitar em uma sessão interativa"
 
-#. R/library.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is %s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"], domain = "R-base")
+#. R/library.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is %s",     sQuote(pkg), (pkgInfo$DESCRIPTION)["License"], domain = "R-base")
 #: R/library.R:0
 #, fuzzy
 msgid ""
@@ -3089,17 +3094,18 @@ msgstr "a diagonal substituta tem o comprimento errado"
 msgid "replacing element in non-existent column: %s"
 msgstr "substituindo elemento em coluna não existente:"
 
-#. R/namespace.R: gettext("replacing local value with import %s when loading %s")
-#: R/namespace.R:0
-#, fuzzy
-msgid "replacing local value with import %s when loading %s"
-msgstr "substituindo valor local com import %s quando carregando %s"
-
+#. R/namespace.R: gettext("replacing local value with import %s when loading namespace %s")
 #. R/namespace.R: gettext("replacing local value with import %s when loading namespace %s")
 #: R/namespace.R:0
 #, fuzzy
 msgid "replacing local value with import %s when loading namespace %s"
 msgstr "substituindo valor local com import %s quando carregando %s"
+
+#. R/namespace.R: gettextf("replacing previous import %s by %s when loading %s", sQuote(paste(prev,     n, sep = "::")), sQuote(paste(nsname, n, sep = "::")), sQuote(from))
+#: R/namespace.R:0
+#, fuzzy
+msgid "replacing previous import %s by %s when loading %s"
+msgstr "substituindo importação %s quando carregando %s"
 
 #. R/namespace.R: gettext("replacing previous import by %s when loading namespace %s")
 #: R/namespace.R:0
@@ -3206,6 +3212,12 @@ msgstr ""
 #: R/seq.R:0
 msgid "too many arguments"
 msgstr "muitos argumentos"
+
+#. R/tapply.R: stop("total number of levels >= 2^31")
+#: R/tapply.R:0
+#, fuzzy
+msgid "total number of levels >= 2^31"
+msgstr "número de níveis difere"
 
 #. R/methodsSupport.R: stop("tracing functions requires the 'methods' package, but unable to load the 'methods' namespace")
 #: R/methodsSupport.R:0
@@ -3330,7 +3342,7 @@ msgstr "valor para '"
 msgid "values in 'breaks' argument are not unique"
 msgstr "'breaks' não são únicos"
 
-#. R/library.R: gettextf("version %s of %s masked by %s in %s", versions[which(sufficient)[1L]],     sQuote(pkg), current, lib.loc[which(sufficient)[1L] - 1L])
+#. R/library.R: gettextf("version %s of %s masked by %s in %s", versions[which(sufficient)[1L]],     sQuote(pkg), current, lib.loc[iV[!sufficient][1L]])
 #: R/library.R:0
 msgid "version %s of %s masked by %s in %s"
 msgstr ""
@@ -3373,6 +3385,13 @@ msgstr[1] "%d linhas no valor para substituir %d linhas"
 #: R/all.equal.R:0
 msgid "%d string mismatch"
 msgid_plural "%d string mismatches"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/mapply.R: ngettext(length(collisions), "%s function may not have argument named %s", "%s function may not have arguments named %s",     domain = "R-base")
+#: R/mapply.R:0
+msgid "%s function may not have argument named %s"
+msgid_plural "%s function may not have arguments named %s"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -3641,6 +3660,10 @@ msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "T usado ao invés de TRUE"
 msgstr[1] "T usado ao invés de TRUE"
+
+#, fuzzy
+#~ msgid "replacing local value with import %s when loading %s"
+#~ msgstr "substituindo valor local com import %s quando carregando %s"
 
 #, fuzzy
 #~ msgid "'vec' argument contains NA values"

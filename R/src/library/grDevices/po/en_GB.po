@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-04 22:28+0100\n"
+"POT-Creation-Date: 2016-01-09 15:47+0100\n"
 "PO-Revision-Date: 2015-01-17 15:06+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: English\n"
@@ -88,7 +88,7 @@ msgstr ""
 msgid "invalid gray level, must be in [0,1]."
 msgstr "invalid grey level, must be in [0,1]"
 
-#: colors.c:549 devPS.c:8248 devPS.c:8410 devPS.c:8413 devWindows.c:3640
+#: colors.c:549 devPS.c:8248 devPS.c:8411 devPS.c:8414 devWindows.c:3640
 #: devWindows.c:3644 devWindows.c:3652 devWindows.c:3663 devWindows.c:3669
 #: devWindows.c:3676 devWindows.c:3683 devWindows.c:3687
 #, fuzzy, c-format
@@ -535,8 +535,8 @@ msgstr ""
 msgid "failed to find or load PDF CID font"
 msgstr ""
 
-#: devPS.c:8220 devPS.c:8224 devPS.c:8242 devPS.c:8384 devPS.c:8388
-#: devPS.c:8400
+#: devPS.c:8220 devPS.c:8224 devPS.c:8242 devPS.c:8385 devPS.c:8389
+#: devPS.c:8401
 #, fuzzy, c-format
 msgid "invalid '%s' parameter in '%s'"
 msgstr "invalid hsv colour"
@@ -546,7 +546,7 @@ msgstr "invalid hsv colour"
 msgid "unable to start '%s' function"
 msgstr ""
 
-#: devPS.c:8427 devPicTeX.c:741 devWindows.c:3728
+#: devPS.c:8428 devPicTeX.c:741 devWindows.c:3728
 #, c-format
 msgid "unable to start %s() device"
 msgstr ""
