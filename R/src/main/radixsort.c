@@ -60,17 +60,17 @@ static R_len_t *savedtl=NULL, nalloc=0, nsaved=0;
 
 static void savetl_init() {
     if (nsaved || nalloc || saveds || savedtl)
-        error(_("Internal error: savetl_init checks failed (%d %d %p %p)."),
+        error(_("Internal error: 'savetl_init()' checks failed (%d %d %p %p)."),
               nsaved, nalloc, saveds, savedtl);
     nsaved = 0;
     nalloc = 100;
     saveds = (SEXP *)malloc(nalloc * sizeof(SEXP));
     if (saveds == NULL)
-        error(_("Couldn't allocate saveds in savetl_init"));
+        error(_("Couldn't allocate '%s' variable in '%s' function"), "saveds", "savetl_init()");
     savedtl = (R_len_t *)malloc(nalloc * sizeof(R_len_t));
     if (savedtl == NULL) {
         free(saveds);
-        error(_("Couldn't allocate saveds in savetl_init"));
+        error(_("Couldn't allocate '%s' variable in '%s' function"), "saveds", "savetl_init()");
     }
 }
 
@@ -97,13 +97,13 @@ static void savetl(SEXP s)
         tmp = (char *)realloc(saveds, nalloc * sizeof(SEXP));
         if (tmp == NULL) {
             savetl_end();
-            error(_("Couldn't realloc saveds in savetl"));
+            error(_("Couldn't reallocate '%s' variable in '%s' function"), "saveds", "savetl()");
         }
         saveds = (SEXP *)tmp;
         tmp = (char *)realloc(savedtl, nalloc * sizeof(R_len_t));
         if (tmp == NULL) {
             savetl_end();
-            error(_("Couldn't realloc savedtl in savetl"));
+            error(_("Couldn't reallocate '%s' variable in '%s' function"), "savedtl", "savetl()");
         }
         savedtl = (R_len_t *)tmp;
     }
@@ -113,7 +113,7 @@ static void savetl(SEXP s)
 }
 
 // http://gcc.gnu.org/onlinedocs/cpp/Swallowing-the-Semicolon.html#Swallowing-the-Semicolon
-#define Error(...) do {savetl_end(); error(__VA_ARGS__);} while(0) 
+#define Error(...) do { savetl_end(); error(__VA_ARGS__); } while(0) 
 #undef warning
 // since it can be turned to error via warn=2
 #define warning(...) Do not use warning in this file
@@ -127,7 +127,7 @@ static void growstack(int newlen) {
     if (newlen>gsmaxalloc) newlen=gsmaxalloc;
     gs[flip] = realloc(gs[flip], newlen*sizeof(int));
     if (gs[flip] == NULL)
-        Error(_("Failed to realloc working memory stack to %d*4bytes (flip=%d)"),
+        Error(_("Failed to reallocate working memory stack to %d*4bytes (flip=%d)"),
               newlen, flip);
     gsalloc[flip] = newlen;
 }
@@ -384,13 +384,14 @@ static void alloc_otmp(int n) {
         return;
     otmp = (int *)realloc(otmp, n * sizeof(int));
     if (otmp == NULL)
-        Error(_("Failed to allocate working memory for otmp. Requested %d * %d bytes"),
+        Error(n_("Failed to allocate working memory for '%s' variable. Requested %d * %d byte", "Failed to allocate working memory for '%s' variable. Requested %d * %d bytes", n*sizeof(int)), "otmp",
               n, sizeof(int));
     otmp_alloc = n;
 }
 
 // TO DO: save xtmp if possible, see allocs in forder
-static void *xtmp=NULL; int xtmp_alloc=0;
+static void *xtmp=NULL; 
+static int xtmp_alloc=0;
 // TO DO: currently always the largest type (double) but 
 //        could be int if that's all that's needed
 static void alloc_xtmp(int n) { 
@@ -398,7 +399,7 @@ static void alloc_xtmp(int n) {
         return;
     xtmp = (double *)realloc(xtmp, n * sizeof(double));
     if (xtmp == NULL)
-        Error(_("Failed to allocate working memory for xtmp. Requested %d * %d bytes"),
+        Error(n_("Failed to allocate working memory for '%s' variable. Requested %d * %d byte", "Failed to allocate working memory for '%s' variable. Requested %d * %d bytes", n*sizeof(double)), "xtmp",
               n, sizeof(double));
     xtmp_alloc = n;
 }
@@ -483,7 +484,7 @@ static void iradix(int *x, int *o, int n)
         // repetitively
         radix_xsub = (int *)realloc(radix_xsub, maxgrpn*sizeof(double));
         if (!radix_xsub)
-            Error(_("Failed to realloc working memory %d*8bytes (xsub in iradix), radix=%d"),
+            Error(_("Failed to reallocate working memory %d*8bytes (xsub in 'iradix()' function), radix=%d"),
                   maxgrpn, radix);
         radix_xsuballoc = maxgrpn;
     }
@@ -597,31 +598,34 @@ static int dround = 2;
 static unsigned long long dmask1;
 static unsigned long long dmask2;
 
-void setNumericRounding(int dround) {
+static void setNumericRounding(int dround) {
     dmask1 = dround ? 1 << (8*dround-1) : 0;
     dmask2 = 0xffffffffffffffff << dround*8;
 }
 
-SEXP do_setNumericRounding(SEXP droundArg)
+SEXP attribute_hidden do_setNumericRounding(SEXP droundArg)
 // init.c has initial call with default of 2
 {
     if (!isInteger(droundArg) || LENGTH(droundArg)!=1)
-        error(_("Must an integer or numeric vector length 1"));
+        error(_("'%s' argument must be an integer or numeric vector length 1"), "droundArg");
     if (INTEGER(droundArg)[0] < 0 || INTEGER(droundArg)[0] > 2)
-        error(_("Must be 2 (default) or 1 or 0"));
+        error(_("'%s' argument must be 2 (default) or 1 or 0"), "droundArg");
     dround = INTEGER(droundArg)[0];
     setNumericRounding(dround);
     return R_NilValue;
 }
 
-SEXP do_getNumericRounding()
+SEXP attribute_hidden do_getNumericRounding()
 {
     return ScalarInteger(dround);
 }
 
-static union {double d;
-    unsigned long long ull;} u;
+static union {
+    double d;
+    unsigned long long ull;} 
+u;
 
+static
 unsigned long long dtwiddle(void *p, int i, int order)
 {
     u.d = order*((double *)p)[i]; // take care of 'order' right at the beginning
@@ -655,16 +659,16 @@ unsigned long long dtwiddle(void *p, int i, int order)
     return( (u.ull ^ mask) & dmask2 );
 }
 
-Rboolean dnan(void *p, int i) {
+static Rboolean dnan(void *p, int i) {
     u.d = ((double *)p)[i];
     return (ISNAN(u.d));
 }
 
-unsigned long long (*twiddle)(void *, int, int);
-Rboolean (*is_nan)(void *, int);
+static unsigned long long (*twiddle)(void *, int, int);
+static Rboolean (*is_nan)(void *, int);
 // the size of the column type (4 or 8). Just 8 currently until iradix is
 // merged in.
-size_t colSize=8;
+static size_t colSize=8;
 
 static void dradix_r(unsigned char *xsub, int *osub, int n, int radix);
 
@@ -684,10 +688,10 @@ static void dradix(unsigned char *x, int *o, int n)
     for (i=0;i<n;i++) {
         thisx = twiddle(x,i,order);
         for (radix=0; radix<colSize; radix++)
+            // if dround==2 then radix 0 and 1 will be all 0 here and skipped.
+            /* on little endian, 0 is the least significant bits (the right) 
+               and 7 is the most including sign (the left); i.e. reversed. */
             radixcounts[radix][((unsigned char *)&thisx)[RADIX_BYTE]]++;
-        // if dround==2 then radix 0 and 1 will be all 0 here and skipped.
-        /* on little endian, 0 is the least significant bits (the right) 
-           / and 7 is the most including sign (the left); i.e. reversed. */
     }
     for (radix=0; radix<colSize; radix++) {
         // thisx is the last x after loop above
@@ -697,7 +701,7 @@ static void dradix(unsigned char *x, int *o, int n)
         if (skip[radix])
             radixcounts[radix][i] = 0; 
     }
-    radix = colSize-1;  // MSD
+    radix = (int) colSize-1;  // MSD
     while (radix>=0 && skip[radix]) radix--;
     if (radix==-1) {
         // All radix are skipped; i.e. one number repeated n times.
@@ -744,7 +748,7 @@ static void dradix(unsigned char *x, int *o, int n)
         // repetitively
         radix_xsub = (double *)realloc(radix_xsub, maxgrpn*sizeof(double));
         if (!radix_xsub)
-            Error(_("Failed to realloc working memory %d*8bytes (xsub in dradix), radix=%d"),
+            Error(_("Failed to realloc working memory %d*8bytes (xsub in 'dradix()' function), radix=%d"),
                   maxgrpn, radix);
         radix_xsuballoc = maxgrpn;
     }
@@ -911,7 +915,8 @@ static SEXP *cradix_xtmp = NULL;
 static int cradix_xtmp_alloc = 0;
 
 // same as StrCmp but also takes into account 'na.last' argument.
-int StrCmp2(SEXP x, SEXP y) {
+static int StrCmp2(SEXP x, SEXP y) 
+{
     // same cached pointer (including NA_STRING==NA_STRING)
     if (x == y) return 0;
     // if x=NA, nalast=1 ? then x > y else x < y (Note: nalast == 0 is
@@ -921,7 +926,7 @@ int StrCmp2(SEXP x, SEXP y) {
     return order*strcmp(CHAR(x), CHAR(y));  // same as explanation in StrCmp
 }
 
-int StrCmp(SEXP x, SEXP y)            // also used by bmerge and chmatch
+static int StrCmp(SEXP x, SEXP y)            // also used by bmerge and chmatch
 {
     // same cached pointer (including NA_STRING==NA_STRING)
     if (x == y) return 0;
@@ -1055,7 +1060,7 @@ static void cgroup(SEXP *x, int *o, int n)
     SEXP s;
     int i, k, cumsum;
     // savetl_init() is called once at the start of forder
-    if (ustr_n != 0) Error(_("Internal error. ustr isn't empty when starting cgroup: ustr_n=%d, ustr_alloc=%d"), ustr_n, ustr_alloc);
+    if (ustr_n != 0) Error(_("Internal error. 'ustr' variable isn't empty when starting 'cgroup()' function: ustr_n=%d, ustr_alloc=%d"), ustr_n, ustr_alloc);
     for(i=0; i<n; i++) {
         s = x[i];
         if (TRUELENGTH(s)<0) { // this case first as it's the most frequent
@@ -1080,7 +1085,7 @@ static void cgroup(SEXP *x, int *o, int n)
                 ustr_alloc = n;
             ustr = realloc(ustr, ustr_alloc * sizeof(SEXP));
             if (ustr == NULL)
-                Error(_("Unable to realloc %d * %d bytes in cgroup"), ustr_alloc,
+                Error(_("Unable to reallocate %d * %d bytes in 'cgroup()' function"), ustr_alloc,
                       sizeof(SEXP));
         }
         SET_TRUELENGTH(s, -1); 
@@ -1114,7 +1119,7 @@ static void alloc_csort_otmp(int n) {
         return;
     csort_otmp = (int *)realloc(csort_otmp, n * sizeof(int));
     if (csort_otmp == NULL)
-        Error(_("Failed to allocate working memory for csort_otmp. Requested %d * %d bytes"),
+        Error(_("Failed to allocate working memory for 'csort_otmp' variable. Requested %d * %d bytes"),
               n, sizeof(int));
     csort_otmp_alloc = n;
 }
@@ -1158,7 +1163,7 @@ static void csort(SEXP *x, int *o, int n)
     } else {
         setRange(csort_otmp, n);
         if (range == NA_INTEGER)
-            Error(_("Internal error. csort's otmp contains all-NA"));
+            Error(_("Internal error. 'otmp' variable in 'csort()' function contains all NA values"));
         int *target = (o[0] != -1) ? newo : o; 
         if (range <= N_RANGE)
             // TO DO: calibrate(). radix was faster (9.2s
@@ -1205,7 +1210,7 @@ static void csort_pre(SEXP *x, int n)
                 ustr_alloc = old_un + n;
             ustr = realloc(ustr, ustr_alloc * sizeof(SEXP));
             if (ustr==NULL)
-                Error(_("Failed to realloc ustr. Requested %d * %d bytes"),
+                Error(_("Failed to reallocate 'ustr' variable. Requested %d * %d bytes"),
                       ustr_alloc, sizeof(SEXP));
         }
         SET_TRUELENGTH(s, -1);  // this -1 will become its ordering later below
@@ -1230,14 +1235,14 @@ static void csort_pre(SEXP *x, int n)
         cradix_counts = (int *)realloc(cradix_counts,
                                        cradix_counts_alloc * 256 * sizeof(int));
         if (!cradix_counts)
-            Error(_("Failed to alloc cradix_counts"));
+            Error(_("Failed to allocate '%s' variable"), "cradix_counts");
         memset(cradix_counts, 0, cradix_counts_alloc * 256 * sizeof(int));
     }
     if (cradix_xtmp_alloc < ustr_n) {
         cradix_xtmp = (SEXP *)realloc( cradix_xtmp,  ustr_n * sizeof(SEXP) );
         // TO DO: Reuse the one we have in forder. Does it need to be n length?
         if (!cradix_xtmp)
-            Error(_("Failed to alloc cradix_tmp"));
+            Error(_("Failed to allocate '%s' variable"), "cradix_tmp");
         cradix_xtmp_alloc = ustr_n;
     }
     // sorts ustr in-place by reference save ordering in the
@@ -1458,7 +1463,7 @@ static void isort(int *x, int *o, int n)
                     o[i] = 0; 
             push(1); push(1);
             return;
-        } else Error(_("Internal error: isort received n=%d. isorted should have dealt with this (e.g. as a reverse sorted vector) already"),n);
+        } else Error(_("Internal error: 'isort()' function received n=%d. 'isorted()' function should have dealt with this (e.g. as a reverse sorted vector) already"),n);
     }
     if (n<N_SMALL && o[0] != -1 && nalast != 0) {
         // see comment above in iradix_r on N_SMALL=200.
@@ -1481,7 +1486,7 @@ static void isort(int *x, int *o, int n)
            i.e. negligible. */
         setRange(x, n);
         if (range==NA_INTEGER)
-            Error(_("Internal error: isort passed all-NA. isorted should have caught this before this point"));
+            Error(_("Internal error: 'isort()' passed all-NA. isorted should have caught this before this point"));
         int *target = (o[0] != -1) ? newo : o;
         // was range<10000 for subgroups, but 1e5 for the first
         // column, tried to generalise here.  1e4 rather than 1e5 here
@@ -1525,18 +1530,18 @@ static void dsort(double *x, int *o, int n)
 SEXP attribute_hidden do_radixsort2(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ap, ans = R_NilValue /* -Wall */, x, decreasing;
-    int narg = 0, i, j, k, grp, ngrp, tmp, *osub, thisgrpn, col;
-    R_xlen_t n = -1;
+    int n = -1, narg = 0, i, j, k, grp, ngrp, tmp, *osub, thisgrpn, col;
+    R_xlen_t nl = n;
     Rboolean isSorted = TRUE;
     void *xd;
     int *o = NULL;
 
     /* ML: FIXME: Here are just two of the dangerous assumptions here */
     if (sizeof(int) != 4) {
-        error(_("order2() assumes sizeof(int) == 4"));
+        error(_("'%s' function assumes %s"), "order2()", "sizeof(int) == 4");
     }
     if (sizeof(double) != 8) {
-        error(_("order2() assumes sizeof(double) == 8"));
+        error(_("'%s' function assumes %s"), "order2()", "sizeof(double) == 8");
     }
 
     /* (ML) Controls the precision of numeric vector sorting; may want
@@ -1564,11 +1569,11 @@ SEXP attribute_hidden do_radixsort2(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return R_NilValue;
 
     if (isVector(CAR(args)))
-	n = XLENGTH(CAR(args));
+	nl = XLENGTH(CAR(args));
     for (ap = args; ap != R_NilValue; ap = CDR(ap), narg++) {
 	if (!isVector(CAR(ap)))
 	    error(_("argument %d is not a vector"), narg + 1);
-	if (XLENGTH(CAR(ap)) != n)
+	if (XLENGTH(CAR(ap)) != nl)
 	    error(_("argument lengths differ"));
     }
 
@@ -1583,6 +1588,12 @@ SEXP attribute_hidden do_radixsort2(SEXP call, SEXP op, SEXP args, SEXP rho)
     x = CAR(args);
     args = CDR(args);
 
+    // (ML) FIXME: need to support long vectors
+    if (nl > INT_MAX) {
+        error(_("long vectors are not supported"));
+    }
+    n = (int) nl;
+    
     // upper limit for stack size (all size 1 groups). We'll detect
     // and avoid that limit, but if just one non-1 group (say 2), that
     // can't be avoided.
@@ -1595,7 +1606,6 @@ SEXP attribute_hidden do_radixsort2(SEXP call, SEXP op, SEXP args, SEXP rho)
     // memory needed to reorder existing order had to repace this from
     // '0' to '-1' because 'nalast = 0' replace 'o[.]' with 0 values.
 
-    // (ML) FIXME: need to support long vectors
     ans = PROTECT(allocVector(INTSXP, n)); 
     o = INTEGER(ans);
     o[0] = -1;
@@ -1674,12 +1684,12 @@ SEXP attribute_hidden do_radixsort2(SEXP call, SEXP op, SEXP args, SEXP rho)
         // double is the largest type, 8
         xsub = (void *)malloc(maxgrpn * sizeof(double));
         if (xsub==NULL)
-            Error(_("Couldn't allocate xsub in forder, requested %d * %d bytes."),
+            Error(_("Couldn't allocate '%s' variable in forder, requested %d * %d bytes."), "xsub",
                   maxgrpn, sizeof(double));
         // global variable, used by isort, dsort, sort and cgroup
         newo = (int *)malloc(maxgrpn * sizeof(int));
         if (newo==NULL)
-            Error(_("Couldn't allocate newo in forder, requested %d * %d bytes."),
+            Error(_("Couldn't allocate '%s' variable in forder, requested %d * %d bytes."), "newo",
                   maxgrpn, sizeof(int));
     }
     

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.15.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-09 18:32+0100\n"
+"POT-Creation-Date: 2016-01-10 15:58+0100\n"
 "PO-Revision-Date: 2015-01-17 13:34+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -652,7 +652,7 @@ msgstr "Problem bei der Anzeige von '%s'"
 #: src/main/context.c:596 src/main/datetime.c:786 src/main/datetime.c:876
 #: src/main/datetime.c:878 src/main/datetime.c:882 src/main/datetime.c:1043
 #: src/main/datetime.c:1045 src/main/datetime.c:1250 src/main/debug.c:245
-#: src/main/deparse.c:408 src/main/dotcode.c:479 src/main/dotcode.c:483
+#: src/main/deparse.c:409 src/main/dotcode.c:479 src/main/dotcode.c:483
 #: src/main/dotcode.c:488 src/main/dounzip.c:324 src/main/dounzip.c:331
 #: src/main/dounzip.c:341 src/main/dounzip.c:346 src/main/dounzip.c:350
 #: src/main/dounzip.c:354 src/main/envir.c:1821 src/main/envir.c:1824
@@ -1847,7 +1847,7 @@ msgstr "Argument ist keine Umgebung"
 #: src/main/connections.c:4073 src/main/connections.c:4107
 #: src/main/connections.c:4485 src/main/connections.c:4555
 #: src/main/connections.c:4766 src/main/connections.c:4770
-#: src/main/connections.c:5193 src/main/deparse.c:369 src/main/deparse.c:458
+#: src/main/connections.c:5193 src/main/deparse.c:370 src/main/deparse.c:459
 #: src/main/serialize.c:2046
 msgid "cannot write to this connection"
 msgstr "kann auf diese Verbindung nicht schreiben"
@@ -2436,7 +2436,7 @@ msgstr ""
 #: src/main/connections.c:3835 src/main/connections.c:4100
 #: src/main/connections.c:4428 src/main/connections.c:4548
 #: src/main/connections.c:4762 src/main/connections.c:5174 src/main/dcf.c:94
-#: src/main/deparse.c:361 src/main/deparse.c:450 src/main/saveload.c:2261
+#: src/main/deparse.c:362 src/main/deparse.c:451 src/main/saveload.c:2261
 #: src/main/saveload.c:2342 src/main/scan.c:933 src/main/serialize.c:2217
 #: src/main/serialize.c:2268 src/main/source.c:268
 msgid "cannot open the connection"
@@ -3201,66 +3201,66 @@ msgstr ""
 msgid "R was not compiled with support for memory profiling"
 msgstr "R wurde ohne Unterstützung von Memoryprofiling kompiliert"
 
-#: src/main/deparse.c:156 src/main/sprintf.c:217 src/main/sprintf.c:249
+#: src/main/deparse.c:157 src/main/sprintf.c:217 src/main/sprintf.c:249
 msgid "too few arguments"
 msgstr "zu wenig Argumente"
 
-#: src/main/deparse.c:163
+#: src/main/deparse.c:164
 #, fuzzy, c-format
 msgid "invalid 'cutoff' value (%d) for 'deparse()', using default %d"
 msgstr "ungültiger 'cutoff' in deparse, nutze Standard"
 
-#: src/main/deparse.c:254
+#: src/main/deparse.c:255
 #, fuzzy
 msgid "deparse of an S4 object will not be sourceable by 'source()'"
 msgstr "Deparsed S4 Objekt kann nicht ge-sourced() werden"
 
-#: src/main/deparse.c:256
+#: src/main/deparse.c:257
 msgid "deparse may be incomplete"
 msgstr "deparse ist evtl. unvollständig"
 
-#: src/main/deparse.c:258
+#: src/main/deparse.c:259
 #, fuzzy
 msgid ""
 "deparse may be not be sourceable by 'source()' in R version less than 2.7.0"
 msgstr "deparse evtl. nicht source()bar in R < 2.7.0"
 
-#: src/main/deparse.c:350
+#: src/main/deparse.c:351
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string or connection"
 msgstr "'what' muss eine Zeichenkette oder eine Funktion sein"
 
-#: src/main/deparse.c:378 src/main/deparse.c:473 src/main/deparse.c:479
+#: src/main/deparse.c:379 src/main/deparse.c:474 src/main/deparse.c:480
 msgid "wrote too few characters"
 msgstr "zu wenig Zeichen geschrieben"
 
-#: src/main/deparse.c:400 src/main/source.c:204
+#: src/main/deparse.c:401 src/main/source.c:204
 #, fuzzy, c-format
 msgid "'%s' must be a character string or connection"
 msgstr "'what' muss eine Zeichenkette oder eine Funktion sein"
 
-#: src/main/deparse.c:402
+#: src/main/deparse.c:403
 msgid "character arguments expected"
 msgstr "Charakter Argumente erwartet"
 
-#: src/main/deparse.c:405
+#: src/main/deparse.c:406
 #, fuzzy
 msgid "zero-length argument"
 msgstr "Argument der Länge 0"
 
-#: src/main/deparse.c:412
+#: src/main/deparse.c:413
 #, fuzzy
 msgid "'opts' argument should be small non-negative integer"
 msgstr "'opts' sollte eine kleine nicht-negative ganze Zahl sein"
 
-#: src/main/deparse.c:422 src/main/envir.c:1967 src/main/envir.c:2052
+#: src/main/deparse.c:423 src/main/envir.c:1967 src/main/envir.c:2052
 #: src/main/eval.c:621 src/main/eval.c:1380 src/main/eval.c:4205
 #: src/main/saveload.c:1977 src/main/saveload.c:2304 src/main/serialize.c:2774
 #, fuzzy, c-format
 msgid "object '%s' was not found"
 msgstr "Objekt '%s' nicht gefunden"
 
-#: src/main/deparse.c:1578
+#: src/main/deparse.c:1587
 msgid "badly formed function expression"
 msgstr "unbrauchbar gebildeter Funktionenausdruck"
 
@@ -6618,27 +6618,22 @@ msgstr "Argument ist kein numerischer Vektor"
 
 #: src/main/radixsort.c:63
 #, c-format
-msgid "Internal error: savetl_init checks failed (%d %d %p %p)."
+msgid "Internal error: 'savetl_init()' checks failed (%d %d %p %p)."
 msgstr ""
 
 #: src/main/radixsort.c:69 src/main/radixsort.c:73
-#, fuzzy
-msgid "Couldn't allocate saveds in savetl_init"
-msgstr "konnte keinen Speicher für pushBack zuteilen"
+#, fuzzy, c-format
+msgid "Couldn't allocate '%s' variable in '%s' function"
+msgstr "Allokationsfehler in R_tmpnam2"
 
-#: src/main/radixsort.c:100
-#, fuzzy
-msgid "Couldn't realloc saveds in savetl"
-msgstr "konnte keinen Speicher für pushBack zuteilen"
-
-#: src/main/radixsort.c:106
-#, fuzzy
-msgid "Couldn't realloc savedtl in savetl"
-msgstr "konnte keinen Speicher für pushBack zuteilen"
+#: src/main/radixsort.c:100 src/main/radixsort.c:106
+#, fuzzy, c-format
+msgid "Couldn't reallocate '%s' variable in '%s' function"
+msgstr "Allokationsfehler in R_tmpnam2"
 
 #: src/main/radixsort.c:130
 #, c-format
-msgid "Failed to realloc working memory stack to %d*4bytes (flip=%d)"
+msgid "Failed to reallocate working memory stack to %d*4bytes (flip=%d)"
 msgstr ""
 
 #: src/main/radixsort.c:255
@@ -6646,172 +6641,173 @@ msgstr ""
 msgid "Internal error: range = %d; isorted can't handle range > %d"
 msgstr "interner Fehler in do_random1"
 
-#: src/main/radixsort.c:387
+#: src/main/radixsort.c:387 src/main/radixsort.c:402
 #, c-format
-msgid "Failed to allocate working memory for otmp. Requested %d * %d bytes"
-msgstr ""
+msgid ""
+"Failed to allocate working memory for '%s' variable. Requested %d * %d byte"
+msgid_plural ""
+"Failed to allocate working memory for '%s' variable. Requested %d * %d bytes"
+msgstr[0] ""
+msgstr[1] ""
 
-#: src/main/radixsort.c:401
-#, c-format
-msgid "Failed to allocate working memory for xtmp. Requested %d * %d bytes"
-msgstr ""
+#: src/main/radixsort.c:487
+#, fuzzy, c-format
+msgid ""
+"Failed to reallocate working memory %d*8bytes (xsub in 'iradix()' function), "
+"radix=%d"
+msgstr "kann nicht genug Speicher zuteilen (in GEregister)"
 
-#: src/main/radixsort.c:486
-#, c-format
-msgid "Failed to realloc working memory %d*8bytes (xsub in iradix), radix=%d"
-msgstr ""
-
-#: src/main/radixsort.c:499
+#: src/main/radixsort.c:500
 #, c-format
 msgid ""
 "Internal error. thiscounts[0]=%d but should have been decremented to 0. "
 "dradix=%d"
 msgstr ""
 
-#: src/main/radixsort.c:574 src/main/radixsort.c:884
+#: src/main/radixsort.c:575 src/main/radixsort.c:888
 #, c-format
 msgid ""
 "Logical error. thiscounts[0]=%d but should have been decremented to 0. radix="
 "%d"
 msgstr ""
 
-#: src/main/radixsort.c:609
-msgid "Must an integer or numeric vector length 1"
-msgstr ""
+#: src/main/radixsort.c:610
+#, fuzzy, c-format
+msgid "'%s' argument must be an integer or numeric vector length 1"
+msgstr "'list' Argument muss eine Liste sein"
 
-#: src/main/radixsort.c:611
-msgid "Must be 2 (default) or 1 or 0"
-msgstr ""
+#: src/main/radixsort.c:612
+#, fuzzy, c-format
+msgid "'%s' argument must be 2 (default) or 1 or 0"
+msgstr "erstes Argument muss ein Vektor sein"
 
-#: src/main/radixsort.c:747
+#: src/main/radixsort.c:751
 #, c-format
-msgid "Failed to realloc working memory %d*8bytes (xsub in dradix), radix=%d"
+msgid ""
+"Failed to realloc working memory %d*8bytes (xsub in 'dradix()' function), "
+"radix=%d"
 msgstr ""
 
-#: src/main/radixsort.c:759
+#: src/main/radixsort.c:763
 #, c-format
 msgid ""
 "Logical error. thiscounts[0]=%d but should have been decremented to 0. "
 "dradix=%d"
 msgstr ""
 
-#: src/main/radixsort.c:771 src/main/radixsort.c:858
+#: src/main/radixsort.c:775 src/main/radixsort.c:862
 msgid "Not yet used, still using iradix instead"
 msgstr ""
 
-#: src/main/radixsort.c:1023
+#: src/main/radixsort.c:1028
 #, c-format
 msgid ""
 "Logical error. counts[0]=%d in cradix but should have been decremented to 0. "
 "radix=%d"
 msgstr ""
 
-#: src/main/radixsort.c:1058
+#: src/main/radixsort.c:1063
 #, c-format
 msgid ""
-"Internal error. ustr isn't empty when starting cgroup: ustr_n=%d, ustr_alloc="
-"%d"
+"Internal error. 'ustr' variable isn't empty when starting 'cgroup()' "
+"function: ustr_n=%d, ustr_alloc=%d"
 msgstr ""
 
-#: src/main/radixsort.c:1083
-#, c-format
-msgid "Unable to realloc %d * %d bytes in cgroup"
-msgstr ""
+#: src/main/radixsort.c:1088
+#, fuzzy, c-format
+msgid "Unable to reallocate %d * %d bytes in 'cgroup()' function"
+msgstr "kann nicht genug Speicher zuteilen (in GEregister)"
 
-#: src/main/radixsort.c:1117
-#, c-format
-msgid ""
-"Failed to allocate working memory for csort_otmp. Requested %d * %d bytes"
-msgstr ""
-
-#: src/main/radixsort.c:1161
-msgid "Internal error. csort's otmp contains all-NA"
-msgstr ""
-
-#: src/main/radixsort.c:1208
-#, c-format
-msgid "Failed to realloc ustr. Requested %d * %d bytes"
-msgstr ""
-
-#: src/main/radixsort.c:1233
-msgid "Failed to alloc cradix_counts"
-msgstr ""
-
-#: src/main/radixsort.c:1240
-msgid "Failed to alloc cradix_tmp"
-msgstr ""
-
-#: src/main/radixsort.c:1461
+#: src/main/radixsort.c:1122
 #, c-format
 msgid ""
-"Internal error: isort received n=%d. isorted should have dealt with this (e."
-"g. as a reverse sorted vector) already"
+"Failed to allocate working memory for 'csort_otmp' variable. Requested %d * "
+"%d bytes"
 msgstr ""
 
-#: src/main/radixsort.c:1484
+#: src/main/radixsort.c:1166
 msgid ""
-"Internal error: isort passed all-NA. isorted should have caught this before "
-"this point"
+"Internal error. 'otmp' variable in 'csort()' function contains all NA values"
 msgstr ""
 
-#: src/main/radixsort.c:1511
+#: src/main/radixsort.c:1213
+#, c-format
+msgid "Failed to reallocate 'ustr' variable. Requested %d * %d bytes"
+msgstr ""
+
+#: src/main/radixsort.c:1238 src/main/radixsort.c:1245
+#, fuzzy, c-format
+msgid "Failed to allocate '%s' variable"
+msgstr "Allokationsfehler in R_tmpnam2"
+
+#: src/main/radixsort.c:1466
+#, c-format
+msgid ""
+"Internal error: 'isort()' function received n=%d. 'isorted()' function "
+"should have dealt with this (e.g. as a reverse sorted vector) already"
+msgstr ""
+
+#: src/main/radixsort.c:1489
+msgid ""
+"Internal error: 'isort()' passed all-NA. isorted should have caught this "
+"before this point"
+msgstr ""
+
+#: src/main/radixsort.c:1516
 #, c-format
 msgid ""
 "Internal error: dsort received n=%d. dsorted should have dealt with this (e."
 "g. as a reverse sorted vector) already"
 msgstr ""
 
-#: src/main/radixsort.c:1536
-msgid "order2() assumes sizeof(int) == 4"
-msgstr ""
+#: src/main/radixsort.c:1541 src/main/radixsort.c:1544
+#, fuzzy, c-format
+msgid "'%s' function assumes %s"
+msgstr "Warnung in %s : %s\n"
 
-#: src/main/radixsort.c:1539
-msgid "order2() assumes sizeof(double) == 8"
-msgstr ""
-
-#: src/main/radixsort.c:1570 src/main/sort.c:1258
+#: src/main/radixsort.c:1575 src/main/sort.c:1258
 #, c-format
 msgid "argument %d is not a vector"
 msgstr "Argument %d ist kein Vektor"
 
-#: src/main/radixsort.c:1572 src/main/sort.c:1260
+#: src/main/radixsort.c:1577 src/main/sort.c:1260
 msgid "argument lengths differ"
 msgstr "Länge der Argumente unterschiedlich"
 
-#: src/main/radixsort.c:1576
+#: src/main/radixsort.c:1581
 msgid "length(decreasing) must match the number of order arguments"
 msgstr ""
 
-#: src/main/radixsort.c:1579
+#: src/main/radixsort.c:1584
 #, fuzzy
 msgid "'decreasing' elements must be TRUE or FALSE"
 msgstr "'decreasing' muss TRUE oder FALSE sein"
 
-#: src/main/radixsort.c:1621
+#: src/main/radixsort.c:1593
+#, fuzzy
+msgid "long vectors are not supported"
+msgstr "Typ '%s' wird nicht unterstützt"
+
+#: src/main/radixsort.c:1631
 #, c-format
 msgid "First column being ordered is type '%s', not yet supported"
 msgstr ""
 
-#: src/main/radixsort.c:1665 src/main/radixsort.c:1747
+#: src/main/radixsort.c:1675 src/main/radixsort.c:1757
 msgid "Internal error: previous default should have caught unsupported type"
 msgstr ""
 
-#: src/main/radixsort.c:1677
-#, c-format
-msgid "Couldn't allocate xsub in forder, requested %d * %d bytes."
-msgstr ""
+#: src/main/radixsort.c:1687 src/main/radixsort.c:1692
+#, fuzzy, c-format
+msgid "Couldn't allocate '%s' variable in forder, requested %d * %d bytes."
+msgstr "Allokationsfehler in R_tmpnam2"
 
-#: src/main/radixsort.c:1682
-#, c-format
-msgid "Couldn't allocate newo in forder, requested %d * %d bytes."
-msgstr ""
-
-#: src/main/radixsort.c:1718
+#: src/main/radixsort.c:1728
 #, fuzzy, c-format
 msgid "Arg %d is type '%s', not yet supported"
 msgstr "Typ '%s' wird nicht unterstützt"
 
-#: src/main/radixsort.c:1814
+#: src/main/radixsort.c:1824
 #, c-format
 msgid "Internal error: at the end of forder sortStr==FALSE but ustr_n!=0 [%d]"
 msgstr ""
@@ -10138,6 +10134,18 @@ msgstr "X11 Modul kann nicht geladen werden"
 msgid "X11 is not available"
 msgstr "X11 nicht verfügbar"
 
+#, fuzzy
+#~ msgid "Couldn't allocate saveds in savetl_init"
+#~ msgstr "konnte keinen Speicher für pushBack zuteilen"
+
+#, fuzzy
+#~ msgid "Couldn't realloc saveds in savetl"
+#~ msgstr "konnte keinen Speicher für pushBack zuteilen"
+
+#, fuzzy
+#~ msgid "Couldn't realloc savedtl in savetl"
+#~ msgstr "konnte keinen Speicher für pushBack zuteilen"
+
 #~ msgid "no function to restart"
 #~ msgstr "keine Funktion für Neustart"
 
@@ -10694,10 +10702,6 @@ msgstr "X11 nicht verfügbar"
 #~ msgstr ""
 #~ "Warnung in %s :\n"
 #~ "  %s\n"
-
-#, fuzzy
-#~ msgid "%d: In function '%s': %s\n"
-#~ msgstr "Warnung in %s : %s\n"
 
 #, fuzzy
 #~ msgid "initial value %f \n"
