@@ -46,7 +46,7 @@ pasteExpr <- function(e, prefix = "\n    ") {
 }
 
 dots.or.missing <- function(args) {
-    for (i in 1:length(args)) {
+    for (i in seq_len(length(args))) {
         a <-args[[i]]
         if (missing(a)) return(TRUE) #**** better test?
         if (typeof(a) == "symbol" && a == "...") return(TRUE)
@@ -55,7 +55,7 @@ dots.or.missing <- function(args) {
 }
 
 any.dots <- function(args) {
-    for (i in 1:length(args)) {
+    for (i in seq_len(length(args))) {
         a <-args[[i]]
         if (! missing(a) && typeof(a) == "symbol" && a == "...")
             return(TRUE)
@@ -791,7 +791,7 @@ make.codeBuf <- function(expr) {
                 stop(gettextf("no offset recorded for label \"%s\"", lbl), domain = "R-compiler")
             labels[[lbl]]
         }
-        for (i in 1 : codeCount) {
+        for (i in seq_len(codeCount)) {
             v <- codeBuf[[i]]
             if (is.character(v))
                 codeBuf[[i]] <<- offset(v)
@@ -2732,7 +2732,7 @@ cmpfile <- function(infile, outfile, ascii = FALSE, env = .GlobalEnv,
         cenv <- makeCenv(env)
         cntxt <- make.toplevelContext(cenv, options)
         cntxt$env <- addCenvVars(cenv, findLocalsList(forms, cntxt))
-        for (i in 1:nforms) {
+        for (i in seq_len(nforms)) {
             e <- forms[[i]]
             if (verbose) {
                 if (typeof(e) == "language" && e[[1]] == "<-" &&
@@ -2840,7 +2840,7 @@ bcDecode <- function(code) {
         ncode[[i]] <- as.name(name)
         i<-i+1
         if (argc > 0)
-            for (j in 1:argc) {
+            for (j in seq_len(argc)) {
                 ncode[[i]]<-code[i]
                 i<-i+1
             }
