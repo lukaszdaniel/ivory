@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-09 15:49\n"
+"POT-Creation-Date: 2016-01-10 18:05\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -53,7 +53,7 @@ msgstr "plik %s nie został znaleziony"
 msgid "%s has wrong argument list %s"
 msgstr "%s ma błędną listę argumentów %s"
 
-#. R/QC.R: gettextf("%s in object %s", iconv0((x$unknown)[, 1L], "", "ASCII", sub = "byte"),     sQuote((x$unknown)[, 2L]), domain = "R-tools")
+#. R/QC.R: gettextf("%s in object %s", iconv0(x$unknown[, 1L], "", "ASCII", sub = "byte"), sQuote(x$unknown[,     2L]), domain = "R-tools")
 #: R/QC.R:0
 msgid "%s in object %s"
 msgstr "%s w obiekcie %s"
@@ -492,12 +492,12 @@ msgstr "Nazwy argumentów w kodzie, ale nie w dokumentacji:"
 msgid "Argument names in docs but not in code:"
 msgstr "Nazwy argumentów w dokumentacji, ale nie w kodzie:"
 
-#. R/assertCondition.R: gettextf("Asserted error: %s", error[[1]]$message)
+#. R/assertCondition.R: gettextf("Asserted error: %s", (error[[1]])$message)
 #: R/assertCondition.R:0
 msgid "Asserted error: %s"
 msgstr "Założony błąd: %s"
 
-#. R/assertCondition.R: gettextf("Asserted warning: %s", warning[[1]]$message)
+#. R/assertCondition.R: gettextf("Asserted warning: %s", (warning[[1]])$message)
 #: R/assertCondition.R:0
 msgid "Asserted warning: %s"
 msgstr "Założone ostrzeżenie: %s"
@@ -4800,7 +4800,7 @@ msgstr "powtórzone pliki w polu %s:"
 msgid "empty 'data' directory"
 msgstr "pusty katalog 'data'"
 
-#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, (db$Entry)[pos], paste(sQuote(bad[pos]),     collapse = ", "), domain = "R-tools")
+#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, db$Entry[pos], paste(sQuote(bad[pos]),     collapse = ", "), domain = "R-tools")
 #: R/QC.R:0
 msgid "entry %d (%s): missing required field(s) %s"
 msgstr "wpis %d (%s): brakuje wymaganych pól %s"

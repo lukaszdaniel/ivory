@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-12-12 21:35\n"
+"POT-Creation-Date: 2016-01-10 18:05\n"
 "PO-Revision-Date: 2012-03-06 22:16+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -71,7 +71,7 @@ msgstr "%s a un fichier d'aide associé, mais pas d'exemples"
 msgid "%s has to be one of %s"
 msgstr "%s doit être l'un de %s"
 
-#. R/findLineNum.R: gettextf(" %s in %s", x[[i]]$name, format(x[[i]]$env))
+#. R/findLineNum.R: gettextf(" %s in %s", (x[[i]])$name, format((x[[i]])$env))
 #: R/findLineNum.R:0
 #, fuzzy
 msgid "%s in %s"
@@ -112,19 +112,19 @@ msgstr "'option' doit être une chaîne de caractères ou NULL"
 msgid "%s should be one of %s"
 msgstr "%s doit être l'un de %s"
 
-#. R/findLineNum.R: gettextf(" %s signature %s in %s", x[[i]]$name, paste(x[[i]]$signature, collapse = ","),     format(x[[i]]$env))
+#. R/findLineNum.R: gettextf(" %s signature %s in %s", (x[[i]])$name, paste((x[[i]])$signature, collapse = ","),     format((x[[i]])$env))
 #: R/findLineNum.R:0
 #, fuzzy
 msgid "%s signature %s in %s"
 msgstr "impossible de trouver le packages %s"
 
-#. R/findLineNum.R: gettextf(" %s step %s in %s", x[[i]]$name, paste(x[[i]]$at, collapse = ","), format(x[[i]]$env))
+#. R/findLineNum.R: gettextf(" %s step %s in %s", (x[[i]])$name, paste((x[[i]])$at, collapse = ","),     format((x[[i]])$env))
 #: R/findLineNum.R:0
 #, fuzzy
 msgid "%s step %s in %s"
 msgstr "impossible de trouver le packages %s"
 
-#. R/findLineNum.R: gettextf(" %s step %s signature %s in %s", x[[i]]$name, paste(x[[i]]$at, collapse = ","),     paste(x[[i]]$signature, collapse = ","), format(x[[i]]$env))
+#. R/findLineNum.R: gettextf(" %s step %s signature %s in %s", (x[[i]])$name, paste((x[[i]])$at, collapse = ","),     paste((x[[i]])$signature, collapse = ","), format((x[[i]])$env))
 #: R/findLineNum.R:0
 #, fuzzy
 msgid "%s step %s signature %s in %s"
@@ -2243,8 +2243,8 @@ msgstr ""
 #. R/packages2.R: gettextf("invalid '%s' argument", "keep_outputs")
 #. R/sock.R: gettextf("invalid '%s' argument", "socket")
 #. R/tar.R: gettextf("invalid '%s' argument", "tarfile")
-#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0
-#: R/tar.R:0
+#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0
+#: R/sock.R:0 R/tar.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "argument %s incorrect"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-10 15:58+0100\n"
+"POT-Creation-Date: 2016-01-10 18:10+0100\n"
 "PO-Revision-Date: 2011-04-02 18:24+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -6581,7 +6581,7 @@ msgstr ""
 msgid "Internal error: range = %d; isorted can't handle range > %d"
 msgstr "do_random1içinde iç hata"
 
-#: src/main/radixsort.c:387 src/main/radixsort.c:402
+#: src/main/radixsort.c:387 src/main/radixsort.c:402 src/main/radixsort.c:1122
 #, c-format
 msgid ""
 "Failed to allocate working memory for '%s' variable. Requested %d * %d byte"
@@ -6657,22 +6657,16 @@ msgstr ""
 msgid "Unable to reallocate %d * %d bytes in 'cgroup()' function"
 msgstr "bellekte yer ayrıllamadı (GEregister içinde)"
 
-#: src/main/radixsort.c:1122
-#, c-format
-msgid ""
-"Failed to allocate working memory for 'csort_otmp' variable. Requested %d * "
-"%d bytes"
-msgstr ""
-
 #: src/main/radixsort.c:1166
 msgid ""
 "Internal error. 'otmp' variable in 'csort()' function contains all NA values"
 msgstr ""
 
 #: src/main/radixsort.c:1213
-#, c-format
-msgid "Failed to reallocate 'ustr' variable. Requested %d * %d bytes"
-msgstr ""
+#, fuzzy, c-format
+msgid "Failed to reallocate '%s' variable. Requested %d * %d byte"
+msgid_plural "Failed to reallocate '%s' variable. Requested %d * %d bytes"
+msgstr[0] "R_tmpnam için bellek ayırma hatası"
 
 #: src/main/radixsort.c:1238 src/main/radixsort.c:1245
 #, fuzzy, c-format

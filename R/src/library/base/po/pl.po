@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-10 15:58+0100\n"
+"POT-Creation-Date: 2016-01-10 18:10+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 1.8.4\n"
-"X-Poedit-Bookmarks: -1,736,-1,-1,-1,-1,-1,-1,-1,-1\n"
+"X-Poedit-Bookmarks: -1,1307,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: src/appl/lbfgsb.c:683 src/appl/lbfgsb.c:755
 msgid "Singular triangular system detected."
@@ -6542,15 +6542,21 @@ msgstr ""
 msgid "Internal error: range = %d; isorted can't handle range > %d"
 msgstr "błąd wewnętrzny: indeks %d z długości %d"
 
-#: src/main/radixsort.c:387 src/main/radixsort.c:402
+#: src/main/radixsort.c:387 src/main/radixsort.c:402 src/main/radixsort.c:1122
 #, c-format
 msgid ""
 "Failed to allocate working memory for '%s' variable. Requested %d * %d byte"
 msgid_plural ""
 "Failed to allocate working memory for '%s' variable. Requested %d * %d bytes"
 msgstr[0] ""
+"Nie udało się zaalokować pamięci roboczej dla zmiennej '%s'. Zażądano %d * "
+"%d bajtu."
 msgstr[1] ""
+"Nie udało się zaalokować pamięci roboczej dla zmiennej '%s'. Zażądano %d * "
+"%d bajtów."
 msgstr[2] ""
+"Nie udało się zaalokować pamięci roboczej dla zmiennej '%s'. Zażądano %d * "
+"%d bajtów."
 
 #: src/main/radixsort.c:487
 #, fuzzy, c-format
@@ -6565,6 +6571,8 @@ msgid ""
 "Internal error. thiscounts[0]=%d but should have been decremented to 0. "
 "dradix=%d"
 msgstr ""
+"Błąd wewnętrzny. 'thiscounts[0]=%d' ale powinien być sprowadzony do 0. "
+"dradix=%d"
 
 #: src/main/radixsort.c:575 src/main/radixsort.c:888
 #, c-format
@@ -6572,16 +6580,19 @@ msgid ""
 "Logical error. thiscounts[0]=%d but should have been decremented to 0. radix="
 "%d"
 msgstr ""
+"Błąd logiczny. 'thiscounts[0]=%d' ale powinien być sprowadzony do 0. radix=%d"
 
 #: src/main/radixsort.c:610
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' argument must be an integer or numeric vector length 1"
-msgstr "argument '%s' musi być wektorem liczb całkowitych"
+msgstr ""
+"argument '%s' musi być wektorem liczb całkowitych lub wektorem liczbowym o "
+"długości 1"
 
 #: src/main/radixsort.c:612
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' argument must be 2 (default) or 1 or 0"
-msgstr "argument '%s' musi mieć wartości 0, 1 lub 2"
+msgstr "argument '%s' musi mieć wartości 2 (domyślnie) lub 1 lub 0"
 
 #: src/main/radixsort.c:751
 #, c-format
@@ -6596,6 +6607,8 @@ msgid ""
 "Logical error. thiscounts[0]=%d but should have been decremented to 0. "
 "dradix=%d"
 msgstr ""
+"Błąd logiczny. 'thiscounts[0]=%d' ale powinien być sprowadzony do 0. dradix="
+"%d"
 
 #: src/main/radixsort.c:775 src/main/radixsort.c:862
 msgid "Not yet used, still using iradix instead"
@@ -6607,6 +6620,8 @@ msgid ""
 "Logical error. counts[0]=%d in cradix but should have been decremented to 0. "
 "radix=%d"
 msgstr ""
+"Błąd logiczny. 'counts[0]=%d' w 'cradix()' ale powinien być sprowadzony do "
+"0. radix=%d"
 
 #: src/main/radixsort.c:1063
 #, c-format
@@ -6620,13 +6635,6 @@ msgstr ""
 msgid "Unable to reallocate %d * %d bytes in 'cgroup()' function"
 msgstr "nie można przydzielić pamięci (w funkcji 'GEregister()')"
 
-#: src/main/radixsort.c:1122
-#, c-format
-msgid ""
-"Failed to allocate working memory for 'csort_otmp' variable. Requested %d * "
-"%d bytes"
-msgstr ""
-
 #: src/main/radixsort.c:1166
 msgid ""
 "Internal error. 'otmp' variable in 'csort()' function contains all NA values"
@@ -6634,8 +6642,17 @@ msgstr ""
 
 #: src/main/radixsort.c:1213
 #, c-format
-msgid "Failed to reallocate 'ustr' variable. Requested %d * %d bytes"
-msgstr ""
+msgid "Failed to reallocate '%s' variable. Requested %d * %d byte"
+msgid_plural "Failed to reallocate '%s' variable. Requested %d * %d bytes"
+msgstr[0] ""
+"Nie udało się ponownie przydzielić pamięci zmiennej '%s'. Zażądano %d * %d "
+"bajtu."
+msgstr[1] ""
+"Nie udało się ponownie przydzielić pamięci zmiennej '%s'. Zażądano %d * %d "
+"bajtów."
+msgstr[2] ""
+"Nie udało się ponownie przydzielić pamięci zmiennej '%s'. Zażądano %d * %d "
+"bajtów."
 
 #: src/main/radixsort.c:1238 src/main/radixsort.c:1245
 #, c-format
@@ -9967,6 +9984,13 @@ msgstr "moduł X11 nie może zostać załadowany"
 #: src/unix/X11.c:145 src/unix/X11.c:151 src/unix/X11.c:157 src/unix/X11.c:163
 msgid "X11 is not available"
 msgstr "X11 nie jest dostępne"
+
+#~ msgid ""
+#~ "Failed to allocate working memory for 'csort_otmp' variable. Requested %d "
+#~ "* %d bytes"
+#~ msgstr ""
+#~ "Nie udało się zaalokować pamięci roboczej dla zmiennej 'csort_otmp'. "
+#~ "Zażądano %d * %d bajtów."
 
 #~ msgid "Couldn't allocate '%s' in forder, requested %d * %d bytes."
 #~ msgstr ""

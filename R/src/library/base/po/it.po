@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-10 15:58+0100\n"
+"POT-Creation-Date: 2016-01-10 18:10+0100\n"
 "PO-Revision-Date: 2006-01-16 09:11+0100\n"
 "Last-Translator: Daniele Medri <daniele.medri2@unibo.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -6664,7 +6664,7 @@ msgstr ""
 msgid "Internal error: range = %d; isorted can't handle range > %d"
 msgstr "errore interno in do_random1"
 
-#: src/main/radixsort.c:387 src/main/radixsort.c:402
+#: src/main/radixsort.c:387 src/main/radixsort.c:402 src/main/radixsort.c:1122
 #, c-format
 msgid ""
 "Failed to allocate working memory for '%s' variable. Requested %d * %d byte"
@@ -6741,22 +6741,17 @@ msgstr ""
 msgid "Unable to reallocate %d * %d bytes in 'cgroup()' function"
 msgstr "non è possibile allocare memoria (in GEregister)"
 
-#: src/main/radixsort.c:1122
-#, c-format
-msgid ""
-"Failed to allocate working memory for 'csort_otmp' variable. Requested %d * "
-"%d bytes"
-msgstr ""
-
 #: src/main/radixsort.c:1166
 msgid ""
 "Internal error. 'otmp' variable in 'csort()' function contains all NA values"
 msgstr ""
 
 #: src/main/radixsort.c:1213
-#, c-format
-msgid "Failed to reallocate 'ustr' variable. Requested %d * %d bytes"
-msgstr ""
+#, fuzzy, c-format
+msgid "Failed to reallocate '%s' variable. Requested %d * %d byte"
+msgid_plural "Failed to reallocate '%s' variable. Requested %d * %d bytes"
+msgstr[0] "allocazione di memoria non riuscita in GVText"
+msgstr[1] "allocazione di memoria non riuscita in GVText"
 
 #: src/main/radixsort.c:1238 src/main/radixsort.c:1245
 #, fuzzy, c-format

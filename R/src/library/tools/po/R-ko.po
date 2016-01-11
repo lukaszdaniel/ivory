@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-09 15:49\n"
+"POT-Creation-Date: 2016-01-10 18:05\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -61,7 +61,7 @@ msgstr "파일 '%s'를 찾을 수 없습니다"
 msgid "%s has wrong argument list %s"
 msgstr "%s는 잘못된 인자목록 %s를 가지고 있습니다"
 
-#. R/QC.R: gettextf("%s in object %s", iconv0((x$unknown)[, 1L], "", "ASCII", sub = "byte"),     sQuote((x$unknown)[, 2L]), domain = "R-tools")
+#. R/QC.R: gettextf("%s in object %s", iconv0(x$unknown[, 1L], "", "ASCII", sub = "byte"), sQuote(x$unknown[,     2L]), domain = "R-tools")
 #: R/QC.R:0
 msgid "%s in object %s"
 msgstr ""
@@ -487,12 +487,12 @@ msgstr "코드에는 있는 인자들의 이름이 문서에는 없습니다:"
 msgid "Argument names in docs but not in code:"
 msgstr "문서안에 있는 인자들의 이름이 코드에는 없습니다:"
 
-#. R/assertCondition.R: gettextf("Asserted error: %s", error[[1]]$message)
+#. R/assertCondition.R: gettextf("Asserted error: %s", (error[[1]])$message)
 #: R/assertCondition.R:0
 msgid "Asserted error: %s"
 msgstr ""
 
-#. R/assertCondition.R: gettextf("Asserted warning: %s", warning[[1]]$message)
+#. R/assertCondition.R: gettextf("Asserted warning: %s", (warning[[1]])$message)
 #: R/assertCondition.R:0
 msgid "Asserted warning: %s"
 msgstr ""
@@ -4793,7 +4793,7 @@ msgstr "다음은 '%s' 항목에서 중복된 파일들입니다:"
 msgid "empty 'data' directory"
 msgstr "비어있는 'data' 디렉토리입니다"
 
-#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, (db$Entry)[pos], paste(sQuote(bad[pos]),     collapse = ", "), domain = "R-tools")
+#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, db$Entry[pos], paste(sQuote(bad[pos]),     collapse = ", "), domain = "R-tools")
 #: R/QC.R:0
 msgid "entry %d (%s): missing required field(s) %s"
 msgstr ""

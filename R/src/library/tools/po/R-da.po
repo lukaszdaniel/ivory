@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-09 15:49\n"
+"POT-Creation-Date: 2016-01-10 18:05\n"
 "PO-Revision-Date: 2016-01-09 20:39+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -51,7 +51,7 @@ msgstr "Vignette afhængigheder ikke krævet:"
 msgid "%s has wrong argument list %s"
 msgstr ""
 
-#. R/QC.R: gettextf("%s in object %s", iconv0((x$unknown)[, 1L], "", "ASCII", sub = "byte"),     sQuote((x$unknown)[, 2L]), domain = "R-tools")
+#. R/QC.R: gettextf("%s in object %s", iconv0(x$unknown[, 1L], "", "ASCII", sub = "byte"), sQuote(x$unknown[,     2L]), domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
 msgid "%s in object %s"
@@ -465,13 +465,13 @@ msgstr "Argumentnavne i kode men ikke i dokumenter:"
 msgid "Argument names in docs but not in code:"
 msgstr "Argumentnavne i dokumenter men ikke i kode:"
 
-#. R/assertCondition.R: gettextf("Asserted error: %s", error[[1]]$message)
+#. R/assertCondition.R: gettextf("Asserted error: %s", (error[[1]])$message)
 #: R/assertCondition.R:0
 #, fuzzy
 msgid "Asserted error: %s"
 msgstr "Dokumenter: %s"
 
-#. R/assertCondition.R: gettextf("Asserted warning: %s", warning[[1]]$message)
+#. R/assertCondition.R: gettextf("Asserted warning: %s", (warning[[1]])$message)
 #: R/assertCondition.R:0
 #, fuzzy
 msgid "Asserted warning: %s"
@@ -4616,7 +4616,7 @@ msgstr "fortolkningsfejl i fil »%s«:"
 msgid "empty 'data' directory"
 msgstr ""
 
-#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, (db$Entry)[pos], paste(sQuote(bad[pos]),     collapse = ", "), domain = "R-tools")
+#. R/QC.R: gettextf("entry %d (%s): missing required field(s) %s", pos, db$Entry[pos], paste(sQuote(bad[pos]),     collapse = ", "), domain = "R-tools")
 #: R/QC.R:0
 msgid "entry %d (%s): missing required field(s) %s"
 msgstr ""

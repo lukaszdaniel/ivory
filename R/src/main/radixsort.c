@@ -1119,7 +1119,7 @@ static void alloc_csort_otmp(int n) {
         return;
     csort_otmp = (int *)realloc(csort_otmp, n * sizeof(int));
     if (csort_otmp == NULL)
-        Error(_("Failed to allocate working memory for 'csort_otmp' variable. Requested %d * %d bytes"),
+        Error(n_("Failed to allocate working memory for '%s' variable. Requested %d * %d byte", "Failed to allocate working memory for '%s' variable. Requested %d * %d bytes", n*sizeof(int)), "csort_otmp",
               n, sizeof(int));
     csort_otmp_alloc = n;
 }
@@ -1210,7 +1210,7 @@ static void csort_pre(SEXP *x, int n)
                 ustr_alloc = old_un + n;
             ustr = realloc(ustr, ustr_alloc * sizeof(SEXP));
             if (ustr==NULL)
-                Error(_("Failed to reallocate 'ustr' variable. Requested %d * %d bytes"),
+                Error(n_("Failed to reallocate '%s' variable. Requested %d * %d byte", "Failed to reallocate '%s' variable. Requested %d * %d bytes", ustr_alloc*sizeof(SEXP)), "ustr",
                       ustr_alloc, sizeof(SEXP));
         }
         SET_TRUELENGTH(s, -1);  // this -1 will become its ordering later below
