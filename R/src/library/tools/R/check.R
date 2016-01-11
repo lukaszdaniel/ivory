@@ -1,7 +1,7 @@
 #  File src/library/tools/R/check.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2015 The R Core Team
+#  Copyright (C) 1995-2016 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -634,7 +634,8 @@ setRlibs <-
             if (length(out)) {
                 if (check_license == "maybe") {
                     if (!any) warningLog(Log)
-                } else if (any(grepl("^(Standardizable: FALSE|Invalid license file pointers:)", out))) {
+                } else if(any(startsWith(out, "Standardizable: FALSE"),
+                              startsWith(out, "Invalid license file pointers:"))) {
                     if (!any) warningLog(Log)
                 } else {
                     if (!any) noteLog(Log)
@@ -1230,7 +1231,7 @@ setRlibs <-
         checkingLog(Log, gettext("checking R files for syntax errors ...", domain = "R-tools"))
         Rcmd  <- "options(warn=1);tools:::.check_package_code_syntax(\"R\")"
         out <- R_runR(Rcmd, R_opts2, "R_DEFAULT_PACKAGES=NULL")
-        if (any(grepl("^Error", out))) {
+        if (any(startsWith(out, "Error"))) {
             errorLog(Log)
             printLog0(Log, paste(c(out, ""), collapse = "\n"))
 	    maybe_exit(1L)
@@ -2173,7 +2174,7 @@ setRlibs <-
                       sprintf("tools:::check_compiled_code(\"%s\")",
                               file.path(libdir, pkgname)))
         out <- R_runR(Rcmd, R_opts2, "R_DEFAULT_PACKAGES=NULL")
-        if(length(out) == 1L && grepl("^Note:", out)) {
+        if(length(out) == 1L && startsWith(out,"Note:")) {
             ## This will be a note about symbols.rds not being available
             if(!is_base_pkg) {
                 noteLog(Log)
@@ -2221,7 +2222,7 @@ setRlibs <-
             summaryLog(Log)
             do_exit()
         }
-        if (any(grepl("^Error", out))) {
+        if (any(startsWith(out, "Error"))) {
             errorLog(Log)
             printLog(Log, paste(c(out, ""), collapse = "\n"))
             wrapLog(gettext("\nIt looks like this package has a loading problem: see the messages for details.\n", domain = "R-tools"))
@@ -2230,7 +2231,7 @@ setRlibs <-
 
         checkingLog(Log, gettext("checking whether the package can be loaded with stated dependencies ...", domain = "R-tools"))
         out <- R_runR(Rcmd, opts, c(env, env1), arch = arch)
-        if (any(grepl("^Error", out)) || length(attr(out, "status"))) {
+        if (any(startsWith(out, "Error")) || length(attr(out, "status"))) {
             printLog(Log, paste(c(out, ""), collapse = "\n"))
             wrapLog(gettext("\nIt looks like this package (or one of its dependent packages) has an unstated dependence on a standard package.  All dependencies must be declared in DESCRIPTION.\n", domain = "R-tools"))
             wrapLog(msg_DESCRIPTION)
@@ -2259,7 +2260,7 @@ setRlibs <-
                         pkgname)
             out <- R_runR(Rcmd, opts, c(env, env1), arch = arch)
             any <- FALSE
-            if (any(grepl("^Error", out)) || length(attr(out, "status"))) {
+            if (any(startsWith(out, "Error")) || length(attr(out, "status"))) {
                 warningLog(Log)
                 any <- TRUE
             } else {
@@ -2274,7 +2275,7 @@ setRlibs <-
                 if(config_val_to_logical(check_imports_flag))
                     out <- grep("Warning: replacing previous import", out,
                                 fixed = TRUE, invert = TRUE, value = TRUE)
-                if(any(grepl("^Warning", out))) {
+                if(any(startsWith(out, "Warning"))) {
                     noteLog(Log)
                     any <- TRUE
                 }
@@ -2311,7 +2312,7 @@ setRlibs <-
                             self2 = FALSE, quote = TRUE)
             if(nzchar(arch)) env <- c(env, "R_DEFAULT_PACKAGES=NULL")
             out <- R_runR(Rcmd, opts, env, arch = arch)
-            if (any(grepl("^Error", out))) {
+            if (any(startsWith(out, "Error"))) {
                 warningLog(Log)
                 printLog(Log, paste(c(out, ""), collapse = "\n"))
                 wrapLog(gettext("\nIt looks like this package has a loading problem when not on .libPaths: see the messages for details.\n", domain = "R-tools"))
@@ -3131,7 +3132,7 @@ setRlibs <-
         alldirs <- sub("^./","", alldirs)
         alldirs <- alldirs[alldirs != "."]
         bases <- basename(alldirs)
-        dots <- c(dots, setdiff(alldirs[grepl("^[.]", bases)], ".aspell"))
+        dots <- c(dots, setdiff(alldirs[startsWith(bases, ".")], ".aspell"))
         if (length(dots)) {
             noteLog(Log, gettext("Found the following hidden files and directories:", domain = "R-tools"))
             printLog(Log, .format_lines_with_indent(dots), "\n")
@@ -3139,9 +3140,11 @@ setRlibs <-
             if(cran) {
                 known <- basename(dots) %in% .hidden_file_exclusions
                 known <- known | grepl("^.Rbuildindex[.]", dots) |
-                  grepl("inst/doc/[.](Rinstignore|build[.]timestamp)$", dots) |
-                  grepl("vignettes/[.]Rinstignore$", dots) |
-                  grepl("^src.*/[.]deps$", dots)
+                    ## or?      startsWith(dots,".Rbuildindex.") |
+                    endsWith(dots, "inst/doc/.Rinstignore") |
+                    endsWith(dots, "inst/doc/.build.timestamp") |
+                    endsWith(dots, "vignettes/.Rinstignore") |
+                    grepl("^src.*/[.]deps$", dots)
 		if (all(known))
                     printLog(Log, gettext("\nCRAN-pack knows about all of these files and directories\n", domain = "R-tools"))
                 else if (any(!known)) {
@@ -3171,7 +3174,7 @@ setRlibs <-
             messageLog(Log, gettext("skipping installation test", domain = "R-tools"))
         else {
             use_install_log <-
-                (grepl("^check", install) || R_check_use_install_log
+                (startsWith(install, "check") || R_check_use_install_log
                  || !isatty(stdout()))
             INSTALL_opts <- install_args
             ## don't use HTML, checkRd goes over the same ground.
@@ -3200,7 +3203,7 @@ setRlibs <-
                 ## or already available in the log file.
                 checkingLog(Log, gettextf("checking whether package %s can be installed ...", sQuote(desc["Package"]), domain = "R-tools"))
                 outfile <- file.path(pkgoutdir, "00install.out")
-                if (grepl("^check", install)) {
+                if (startsWith(install, "check")) {
                     if (!nzchar(arg_libdir))
                         printLog(Log, gettext("\nWarning: --install=check... specified without --library\n", domain = "R-tools"))
                     thislog <- substr(install, 7L, 1000L)
@@ -3586,8 +3589,7 @@ setRlibs <-
         bad <- FALSE
         if(length(res)) {
             out <- format(res)
-            if((length(out) == 1L) &&
-               grepl("^Maintainer: ", out)) {
+            if(length(out) == 1L && startsWith(out, "Maintainer: ")) {
                 ## Special-case when there is only the maintainer
                 ## address to note (if at all).
                 maintainer <- res$Maintainer
@@ -3741,7 +3743,7 @@ setRlibs <-
             printLog(Log, gettext("Only *source* packages can be checked.\n", domain = "R-tools"))
             summaryLog(Log)
             do_exit(1L)
-        } else if (!grepl("^check", install)) {
+        } else if (!startsWith(install, "check")) {
             ini <- character()
             ## Check for package 'src' subdirectories with object
             ## files (but not if installation was already performed).

@@ -1,7 +1,7 @@
 #  File src/library/tools/R/QC.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2015 The R Core Team
+#  Copyright (C) 1995-2016 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -944,7 +944,7 @@ function(package, lib.loc = NULL)
     stats <- c(n.S4classes = length(S4_classes), n.db = length(db))
 
     aliases <- lapply(db, .Rd_get_metadata, "alias")
-    named_class <- lapply(aliases, grepl, pattern="-class$")
+    named_class <- lapply(aliases, endsWith, suffix="-class")
     nClass <- sApply(named_class, sum)
     oneAlias <- lengths(aliases, use.names=FALSE) == 1L
     idx <- oneAlias | nClass == 1L
@@ -3956,7 +3956,7 @@ function(package, dir, lib.loc = NULL)
 
     ## fixup \link[=dest] form
     anchor <- db[, 2L]
-    have_equals <- grepl("^=", anchor)
+    have_equals <- startsWith(anchor, "=")
     if(any(have_equals))
         db[have_equals, 1:2] <- cbind(sub("^=", "", anchor[have_equals]), "")
 

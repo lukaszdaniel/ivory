@@ -104,7 +104,7 @@ static void sock_close(Rconnection con)
     con->isopen = FALSE;
 }
 
-static size_t sock_read_helper(Rconnection con, void *ptr, size_t size)
+static ssize_t sock_read_helper(Rconnection con, void *ptr, size_t size)
 {
     Rsockconn thiscon = (Rsockconn)con->private;
     ssize_t res;
@@ -148,7 +148,7 @@ static size_t sock_read_helper(Rconnection con, void *ptr, size_t size)
 static int sock_fgetc_internal(Rconnection con)
 {
     unsigned char c;
-    size_t n;
+    ssize_t n;
 
     n = sock_read_helper(con, (char *)&c, 1);
     return (n == 1) ? c : R_EOF;
@@ -157,15 +157,17 @@ static int sock_fgetc_internal(Rconnection con)
 static size_t sock_read(void *ptr, size_t size, size_t nitems,
 			Rconnection con)
 {
-    return sock_read_helper(con, ptr, size * nitems)/size;
+    ssize_t n = sock_read_helper(con, ptr, size * nitems)/size;
+    return n > 0 ? n : 0;
 }
 
 static size_t sock_write(const void *ptr, size_t size, size_t nitems,
 			 Rconnection con)
 {
     Rsockconn thiscon = (Rsockconn)con->private;
-
-    return R_SockWrite(thiscon->fd, ptr, (int)(size * nitems), thiscon->timeout)/size;
+    ssize_t n = R_SockWrite(thiscon->fd, ptr, (int)(size * nitems),
+			    thiscon->timeout)/size;
+    return n > 0 ? n : 0;
 }
 
 Rconnection in_R_newsock(const char *host, int port, int server,
