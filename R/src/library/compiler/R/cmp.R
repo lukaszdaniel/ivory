@@ -2358,6 +2358,9 @@ setInlineHandler("switch", function(e, cb, cntxt) {
         expr <- e[[2]]
         cases <-e[-c(1, 2)]
 
+        if (is.null(cases))
+            notifyNoSwitchcases(cntxt)
+
         miss <- missingArgs(cases)
         nm <- names(cases)
 
@@ -2633,8 +2636,12 @@ notifyBadAssignFun <- function(fun, cntxt) {
 
 notifyMultipleSwitchDefaults <- function(ndflt, cntxt)
     if (! suppressAll(cntxt))
-        cntxt$warn(gettext("more than one default provided in switch() call"),
+        cntxt$warn(gettext("more than one default provided in 'switch()' call"),
                    cntxt)
+
+notifyNoSwitchcases <- function(cntxt)
+    if (! suppressAll(cntxt))
+        cntxt$warn(gettext("'switch()' with no alternatives"), cntxt)
 
 
 ##
