@@ -73,13 +73,9 @@ abbreviate chartr make.names strtrim tolower toupper give error.
 #include <Defn.h>
 #include <Internal.h>
 #include <errno.h>
-
 #include <R_ext/RS.h>  /* for Calloc/Free */
-#include <Rinternals.h> // R_nchar()
-
 #include <R_ext/Itermacros.h>
 #include <R_ext/Minmax.h>
-
 #include <rlocale.h>
 
 /* We use a shared buffer here to avoid reallocing small buffers, and
@@ -137,6 +133,7 @@ SEXP attribute_hidden do_nzchar(SEXP call, SEXP op, SEXP args, SEXP env)
     return ans;
 }
 
+/* R strings are limited to 2^31 - 1 bytes on all platforms */
 int R_nchar(SEXP string, nchar_type type_,
 	    Rboolean allowNA, Rboolean keepNA, const char* msg_name)
 {
@@ -353,7 +350,8 @@ do_substr(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 // return TRUE iff CHARSXP x starts with CHARSXP pre
-int str_startsWith(SEXP x, SEXP pre) {
+static int str_startsWith(SEXP x, SEXP pre)
+{
     cetype_t ienc = getCharCE(x);
     const char *cx = CHAR(x);
     int p_len = R_nchar(pre, Chars, FALSE, FALSE, "startWith(, prefix)");
@@ -367,7 +365,8 @@ int str_startsWith(SEXP x, SEXP pre) {
 }
 
 // return TRUE iff CHARSXP x ends with CHARSXP suffix
-int str_endsWith(SEXP x, SEXP suffix) {
+static int str_endsWith(SEXP x, SEXP suffix)
+{
     cetype_t ienc = getCharCE(x);
     const char *cx = CHAR(x);
     int p_len = R_nchar(suffix, Chars, FALSE, FALSE, "endsWith(, suffix)");
@@ -376,7 +375,7 @@ int str_endsWith(SEXP x, SEXP suffix) {
     if(p_len == 0)
 	buf[0] = '\0';
     else {
-	size_t x_len = R_nchar(x, Chars, FALSE, FALSE, "endsWith(x, )");
+	int x_len = R_nchar(x, Chars, FALSE, FALSE, "endsWith(x, )");
 	substr(buf, cx, ienc, x_len-p_len+1, x_len);
     }
     return Seql(mkCharCE(buf, ienc), suffix);
