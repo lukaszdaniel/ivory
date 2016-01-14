@@ -6075,10 +6075,10 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 		   warningcall(call, _("'switch()' with no alternatives"));
 	       }
 	       else
-		   errorcall(call, _("numeric 'EXPR' required for 'switch' without named alternatives"));
+		   errorcall(call, _("numeric 'EXPR' required for 'switch()' without named alternatives"));
 	   } else {
 	       if (TYPEOF(coffsets) != INTSXP)
-		   errorcall(call, _("bad character 'switch' offsets"));
+		   errorcall(call, _("bad character 'switch()' offsets"));
 	       if (TYPEOF(names) != STRSXP || LENGTH(names) != LENGTH(coffsets))
 		   errorcall(call, _("bad 'switch()' names"));
 	       n = LENGTH(names);

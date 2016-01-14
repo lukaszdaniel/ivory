@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.4\n"
 
 #. R/cmp.R: gettextf("%s is not a registered math1 function", sQuote(name))
 #: R/cmp.R:0
@@ -50,7 +50,7 @@ msgstr ""
 #. R/cmp.R: gettext("'switch()' with no alternatives")
 #: R/cmp.R:0
 msgid "'switch()' with no alternatives"
-msgstr ""
+msgstr "'switch()' nie posiada alternatyw"
 
 #. R/cmp.R: gettext("Note: ", domain = "R-compiler")
 #: R/cmp.R:0
@@ -174,6 +174,7 @@ msgstr "nazwy plików wejścia i wyjścia są takie same"
 #: R/cmp.R:0
 msgid "invalid compiler options: 'optimize(==%d)<2' and 'jitEnabled(==%d)>2'"
 msgstr ""
+"niepoprawne opcje kompilatora: 'optimize(==%d)<2' oraz 'jitEnabled(==%d)>2'"
 
 #. R/cmp.R: gettext("invalid function in complex assignment")
 #. R/cmp.R: gettext("invalid function in complex assignment")
@@ -188,7 +189,6 @@ msgstr "brakujące argumenty nie są dozwolone"
 
 #. R/cmp.R: gettext("more than one default provided in 'switch()' call")
 #: R/cmp.R:0
-#, fuzzy
 msgid "more than one default provided in 'switch()' call"
 msgstr "więcej niż jedna wartość domyślna dostarczona w wywołaniu 'switch()'"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-14 21:11+0100\n"
+"POT-Creation-Date: 2016-01-14 21:45+0100\n"
 "PO-Revision-Date: 2012-03-07 02:34+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -4563,12 +4563,12 @@ msgstr "수치 스위치 오프셋이 잘못되었습니다"
 
 #: src/main/eval.c:6078
 #, fuzzy
-msgid "numeric 'EXPR' required for 'switch' without named alternatives"
+msgid "numeric 'EXPR' required for 'switch()' without named alternatives"
 msgstr "명명된 대체값이 없는 switch() 함수는 숫자 표현식이 필요합니다"
 
 #: src/main/eval.c:6081
 #, fuzzy
-msgid "bad character 'switch' offsets"
+msgid "bad character 'switch()' offsets"
 msgstr "문자 스위치 오프셋이 잘못 되었습니다"
 
 #: src/main/eval.c:6083

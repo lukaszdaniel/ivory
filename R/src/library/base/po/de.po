@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.15.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-14 21:11+0100\n"
+"POT-Creation-Date: 2016-01-14 21:45+0100\n"
 "PO-Revision-Date: 2015-01-17 13:34+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -4602,13 +4602,13 @@ msgstr "unzulässige switch Offsets für numerischen Wert"
 
 #: src/main/eval.c:6078
 #, fuzzy
-msgid "numeric 'EXPR' required for 'switch' without named alternatives"
+msgid "numeric 'EXPR' required for 'switch()' without named alternatives"
 msgstr ""
 "für switch() ohne benannte Alternativen ist ein numerischer Ausdruck nötig"
 
 #: src/main/eval.c:6081
 #, fuzzy
-msgid "bad character 'switch' offsets"
+msgid "bad character 'switch()' offsets"
 msgstr "unzulässige switch Offsets für Charakter"
 
 #: src/main/eval.c:6083

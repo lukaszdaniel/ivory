@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-14 21:11+0100\n"
+"POT-Creation-Date: 2016-01-14 21:45+0100\n"
 "PO-Revision-Date: 2015-01-17 13:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -4602,13 +4602,13 @@ msgstr "неверное смещение числовых переключат�
 
 #: src/main/eval.c:6078
 #, fuzzy
-msgid "numeric 'EXPR' required for 'switch' without named alternatives"
+msgid "numeric 'EXPR' required for 'switch()' without named alternatives"
 msgstr ""
 "числовое выражение (EXPR) требуется для switch() без именованных альтернатив"
 
 #: src/main/eval.c:6081
 #, fuzzy
-msgid "bad character 'switch' offsets"
+msgid "bad character 'switch()' offsets"
 msgstr "неверное смещение строковых переключателей"
 
 #: src/main/eval.c:6083

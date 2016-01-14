@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-14 21:11+0100\n"
+"POT-Creation-Date: 2016-01-14 21:45+0100\n"
 "PO-Revision-Date: 2012-10-26 22:30+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -4347,11 +4347,11 @@ msgid "bad numeric 'switch()' offsets"
 msgstr ""
 
 #: src/main/eval.c:6078
-msgid "numeric 'EXPR' required for 'switch' without named alternatives"
+msgid "numeric 'EXPR' required for 'switch()' without named alternatives"
 msgstr ""
 
 #: src/main/eval.c:6081
-msgid "bad character 'switch' offsets"
+msgid "bad character 'switch()' offsets"
 msgstr ""
 
 #: src/main/eval.c:6083

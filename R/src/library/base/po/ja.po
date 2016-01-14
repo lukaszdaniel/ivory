@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-14 21:11+0100\n"
+"POT-Creation-Date: 2016-01-14 21:45+0100\n"
 "PO-Revision-Date: 2012-02-26 14:21+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: R-core <R-core@R-project.org> \n"
@@ -4583,12 +4583,12 @@ msgstr " 不正な数値スィッチオフセットです "
 
 #: src/main/eval.c:6078
 #, fuzzy
-msgid "numeric 'EXPR' required for 'switch' without named alternatives"
+msgid "numeric 'EXPR' required for 'switch()' without named alternatives"
 msgstr " 名前付きの代替値が無い switch() 関数には数値の EXPR が必要です "
 
 #: src/main/eval.c:6081
 #, fuzzy
-msgid "bad character 'switch' offsets"
+msgid "bad character 'switch()' offsets"
 msgstr " 不正なな文字スィッチオフセットです "
 
 #: src/main/eval.c:6083

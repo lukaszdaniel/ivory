@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-14 21:11+0100\n"
+"POT-Creation-Date: 2016-01-14 21:45+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1910,10 +1910,8 @@ msgid "empty alternative in numeric switch"
 msgstr "pusta alternatywa w liczbowej operacji switch"
 
 #: src/main/builtin.c:1085 src/main/eval.c:6075 src/main/eval.c:6103
-#, fuzzy
 msgid "'switch()' with no alternatives"
-msgstr ""
-"wyrażenie regularne 'EXPR' wymagane przez 'switch()' bez nazwanych alternatyw"
+msgstr "'switch()' nie posiada alternatyw"
 
 #: src/main/character.c:105 src/main/character.c:226
 #, c-format
@@ -1957,9 +1955,8 @@ msgid "invalid substring arguments"
 msgstr "niepoprawne argumenty podłańcucha"
 
 #: src/main/character.c:392
-#, fuzzy
 msgid "non-character object(s)"
-msgstr "nazwy nietekstowe"
+msgstr "nietekstowe obiekty"
 
 #: src/main/character.c:485
 msgid "replacing substrings in a non-character object"
@@ -4501,14 +4498,12 @@ msgid "bad numeric 'switch()' offsets"
 msgstr "błędne przesunięcia liczbowe w funkcji 'switch()'"
 
 #: src/main/eval.c:6078
-#, fuzzy
-msgid "numeric 'EXPR' required for 'switch' without named alternatives"
+msgid "numeric 'EXPR' required for 'switch()' without named alternatives"
 msgstr ""
 "wyrażenie regularne 'EXPR' wymagane przez 'switch()' bez nazwanych alternatyw"
 
 #: src/main/eval.c:6081
-#, fuzzy
-msgid "bad character 'switch' offsets"
+msgid "bad character 'switch()' offsets"
 msgstr "błędne przesunięcia znakowe 'switch()'"
 
 #: src/main/eval.c:6083
@@ -6541,12 +6536,12 @@ msgid "Internal error: 'savetl_init()' checks failed (%d %d %p %p)."
 msgstr ""
 
 #: src/main/radixsort.c:69 src/main/radixsort.c:73
-#, fuzzy, c-format
+#, c-format
 msgid "Could not allocate '%s' variable in '%s' function"
 msgstr "nie można przydzielić pamięci zmiennej '%s' w funkcji '%s'"
 
 #: src/main/radixsort.c:101 src/main/radixsort.c:107
-#, fuzzy, c-format
+#, c-format
 msgid "Could not reallocate '%s' variable in '%s' function"
 msgstr "nie można ponownie przydzielić pamięci zmiennej '%s' w funkcji '%s'"
 
