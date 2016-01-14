@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-11 13:46\n"
+"POT-Creation-Date: 2016-01-14 21:11\n"
 "PO-Revision-Date: 2011-03-26 08:55-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -44,6 +44,11 @@ msgstr "'env' deve ser um ambiente em primeiro nível"
 msgid "'ns' argument must be a namespace or a namespace imports environment"
 msgstr ""
 "'ns' deve ser um espaço de nomes ou um ambiente importado de espaço de nomes"
+
+#. R/cmp.R: gettext("'switch()' with no alternatives")
+#: R/cmp.R:0
+msgid "'switch()' with no alternatives"
+msgstr ""
 
 #. R/cmp.R: gettext("Note: ", domain = "R-compiler")
 #: R/cmp.R:0
@@ -167,6 +172,11 @@ msgstr ""
 msgid "input and output file names are the same"
 msgstr "nomes de entrada e saida são os mesmos"
 
+#. R/cmp.R: gettextf("invalid compiler options: 'optimize(==%d)<2' and 'jitEnabled(==%d)>2'",     optimize, jitEnabled)
+#: R/cmp.R:0
+msgid "invalid compiler options: 'optimize(==%d)<2' and 'jitEnabled(==%d)>2'"
+msgstr ""
+
 #. R/cmp.R: gettext("invalid function in complex assignment")
 #. R/cmp.R: gettext("invalid function in complex assignment")
 #: R/cmp.R:0
@@ -178,10 +188,10 @@ msgstr "função inválida em atribuição complexa"
 msgid "missing arguments are not allowed"
 msgstr "argumentos faltantes não são permitidos"
 
-#. R/cmp.R: gettext("more than one default provided in switch() call")
+#. R/cmp.R: gettext("more than one default provided in 'switch()' call")
 #: R/cmp.R:0
 #, fuzzy
-msgid "more than one default provided in switch() call"
+msgid "more than one default provided in 'switch()' call"
 msgstr "mais de um valor default fornecido na chamada de switch"
 
 #. R/cmp.R: gettextf("no offset recorded for label \"%s\"", lbl)

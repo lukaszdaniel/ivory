@@ -257,7 +257,7 @@ checkPoFile <- function(f, strictPlural = FALSE)
 		ref <- paste(ref, "etc.")
 	    else
 		ref <- sub("^#:[[:blank:]]*", "", lines[i])
-	} else if (startsWith(lines[i], "msgid ")) {
+	} else if (grepl("^msgid ", lines[i], useBytes = TRUE)) {#} else if (startsWith(lines[i], "msgid ")) {
 	    s1 <- sub('^msgid[[:blank:]]+["](.*)["][[:blank:]]*$', "\\1", lines[i])
 	    while (startsWith(lines[i+1L], '"')) {
 		i <- i + 1L
@@ -283,7 +283,7 @@ checkPoFile <- function(f, strictPlural = FALSE)
 
 		s2 <- sub( paste0("^", statement, "[[:blank:]]+[\"](.*)[\"][[:blank:]]*$"),
 		                 "\\1", lines[j])
-		while (startsWith(lines[j+1L], '"')) { # useBytes=TRUE (speedup ?)
+		while (grepl('^["]', lines[j+1L], useBytes = TRUE)) {#while (startsWith(lines[j+1L], '"')) { # useBytes=TRUE (speedup ?)
 		    j <- j+1L
 		    s2 <- paste0(s2, sub('^["](.*)["][[:blank:]]*$', "\\1", lines[j]))
 		}

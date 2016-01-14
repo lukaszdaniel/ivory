@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-11 13:46\n"
+"POT-Creation-Date: 2016-01-14 21:11\n"
 "PO-Revision-Date: 2015-01-17 14:59+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team:  <gnustats@gmail.com>\n"
@@ -52,6 +52,11 @@ msgstr "'env'은 반드시 최상위 환경이어야 합니다"
 msgid "'ns' argument must be a namespace or a namespace imports environment"
 msgstr ""
 "'ns'는 반드시 네임스페이스 또는 환경을  불러오는 네임스페이스이어야 합니다"
+
+#. R/cmp.R: gettext("'switch()' with no alternatives")
+#: R/cmp.R:0
+msgid "'switch()' with no alternatives"
+msgstr ""
 
 #. R/cmp.R: gettext("Note: ", domain = "R-compiler")
 #: R/cmp.R:0
@@ -175,6 +180,11 @@ msgstr ""
 msgid "input and output file names are the same"
 msgstr "입력과 출력 파일 이름들은 서로 같아야 합니다"
 
+#. R/cmp.R: gettextf("invalid compiler options: 'optimize(==%d)<2' and 'jitEnabled(==%d)>2'",     optimize, jitEnabled)
+#: R/cmp.R:0
+msgid "invalid compiler options: 'optimize(==%d)<2' and 'jitEnabled(==%d)>2'"
+msgstr ""
+
 #. R/cmp.R: gettext("invalid function in complex assignment")
 #. R/cmp.R: gettext("invalid function in complex assignment")
 #: R/cmp.R:0
@@ -186,10 +196,10 @@ msgstr "invalid function in complex assignment"
 msgid "missing arguments are not allowed"
 msgstr "인수들의 누락은 허용되지 않습니다"
 
-#. R/cmp.R: gettext("more than one default provided in switch() call")
+#. R/cmp.R: gettext("more than one default provided in 'switch()' call")
 #: R/cmp.R:0
 #, fuzzy
-msgid "more than one default provided in switch() call"
+msgid "more than one default provided in 'switch()' call"
 msgstr "스위치 호출에서 1개 이상의 기본값이 제공됩니다"
 
 #. R/cmp.R: gettextf("no offset recorded for label \"%s\"", lbl)

@@ -8,13 +8,16 @@ msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2016-01-10 18:04\n"
-"PO-Revision-Date: 2012-11-27 01:11+0330\n"
-"Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
+"PO-Revision-Date: 2016-01-14 20:01+0100\n"
+"Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Persian\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.8.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/New-Internal.R: stop("\"hexNumeric\" and \"digits17\" are mutually exclusive")
 #: R/New-Internal.R:0
@@ -3009,35 +3012,30 @@ msgstr ""
 msgid " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]"
 msgid_plural " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/all.equal.R: ngettext(sum(ne), "%d element mismatch", "%d element mismatches")
 #: R/all.equal.R:0
 msgid "%d element mismatch"
 msgid_plural "%d element mismatches"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/dataframe.R: ngettext(nrowv, "%d row in value to replace %d rows", "%d rows in value to replace %d rows",     domain = "R-base")
 #: R/dataframe.R:0
 msgid "%d row in value to replace %d rows"
 msgid_plural "%d rows in value to replace %d rows"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/all.equal.R: ngettext(sum(ne), "%d string mismatch", "%d string mismatches")
 #: R/all.equal.R:0
 msgid "%d string mismatch"
 msgid_plural "%d string mismatches"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/mapply.R: ngettext(length(collisions), "%s function may not have argument named %s", "%s function may not have arguments named %s",     domain = "R-base")
 #: R/mapply.R:0
 msgid "%s function may not have argument named %s"
 msgid_plural "%s function may not have arguments named %s"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/merge.R: ngettext(sum(bad), "'by' argument must specify a uniquely valid column", "'by' argument must specify uniquely valid columns",     domain = "R-base")
 #. R/merge.R: ngettext(sum(bad), "'by' argument must specify a uniquely valid column", "'by' argument must specify uniquely valid columns",     domain = "R-base")
@@ -3045,14 +3043,12 @@ msgstr[1] ""
 msgid "'by' argument must specify a uniquely valid column"
 msgid_plural "'by' argument must specify uniquely valid columns"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/source.R: ngettext(Ne, "--> parsed %d expression; now evaluating them:", "--> parsed %d expressions; now evaluating them:",     domain = "R-base")
 #: R/source.R:0
 msgid "--> parsed %d expression; now evaluating them:"
 msgid_plural "--> parsed %d expressions; now evaluating them:"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/namespace.R: ngettext(length(bad), "Function found when exporting methods from the namespace %s which is not S4 generic: %s",     "Functions found when exporting methods from the namespace %s which are not S4 generic: %s",     domain = "R-base")
 #: R/namespace.R:0
@@ -3063,7 +3059,6 @@ msgid_plural ""
 "Functions found when exporting methods from the namespace %s which are not "
 "S4 generic: %s"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/warnings.R: ngettext(nx, "In command '%s':\n extra argument %s will be disregarded", "In command '%s':\n extra arguments %s will be disregarded",     domain = "R-base")
 #: R/warnings.R:0
@@ -3074,7 +3069,6 @@ msgid_plural ""
 "In command '%s':\n"
 " extra arguments %s will be disregarded"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/namespace.R: ngettext(nr, "Registered S3 method from a standard package overwritten by '%s':",     "Registered S3 methods from standard package(s) overwritten by '%s':", domain = "R-base")
 #: R/namespace.R:0
@@ -3082,7 +3076,6 @@ msgid "Registered S3 method from a standard package overwritten by '%s':"
 msgid_plural ""
 "Registered S3 methods from standard package(s) overwritten by '%s':"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/namespace.R: ngettext(sum(notex), "S3 method %s was declared in 'NAMESPACE' file but was not found",     "S3 methods %s were declared in 'NAMESPACE' file but was not found", domain = "R-base")
 #: R/namespace.R:0
@@ -3090,7 +3083,6 @@ msgid "S3 method %s was declared in 'NAMESPACE' file but was not found"
 msgid_plural ""
 "S3 methods %s were declared in 'NAMESPACE' file but was not found"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/attach.R: ngettext(length(same), "The following object is masked _by_ %s:\n\n%s\n", "The following objects are masked _by_ %s:\n\n%s\n",     domain = "R-base")
 #: R/attach.R:0
@@ -3103,7 +3095,6 @@ msgid_plural ""
 "\n"
 "%s\n"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/attach.R: ngettext(length(same), "The following object is masked from %s:\n\n%s\n", "The following objects are masked from %s:\n\n%s\n",     domain = "R-base")
 #: R/attach.R:0
@@ -3116,119 +3107,102 @@ msgid_plural ""
 "\n"
 "%s\n"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/warnings.R: ngettext(n, "Warning message:", "Warning messages:", domain = "R-base")
 #: R/warnings.R:0
 msgid "Warning message:"
 msgid_plural "Warning messages:"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/namespace.R: ngettext(length(miss), "class %s is not exported by 'namespace:%s'", "classes %s are not exported by 'namespace:%s'",     domain = "R-base")
 #: R/namespace.R:0
 msgid "class %s is not exported by 'namespace:%s'"
 msgid_plural "classes %s are not exported by 'namespace:%s'"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/merge.R: ngettext(sum(d), "column name %s is duplicated in the result", "column names %s are duplicated in the result",     domain = "R-base")
 #: R/merge.R:0
 msgid "column name %s is duplicated in the result"
 msgid_plural "column names %s are duplicated in the result"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/dataframe.R: ngettext(n, "data frame with 0 columns and %d row", "data frame with 0 columns and %d rows",     domain = "R-base")
 #: R/dataframe.R:0
 msgid "data frame with 0 columns and %d row"
 msgid_plural "data frame with 0 columns and %d rows"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/New-Internal.R: ngettext(as.integer(sum(is.na(opts))), "deparse option %s is not recognized", "deparse options %s are not recognized",     domain = "R-base")
 #: R/New-Internal.R:0
 msgid "deparse option %s is not recognized"
 msgid_plural "deparse options %s are not recognized"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/dataframe.R: ngettext(nr, "invalid 'row.names', length %d for a data frame with %d row", "invalid 'row.names', length %d for a data frame with %d rows",     domain = "R-base")
 #: R/dataframe.R:0
 msgid "invalid 'row.names', length %d for a data frame with %d row"
 msgid_plural "invalid 'row.names', length %d for a data frame with %d rows"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/library.R: ngettext(length(nopkgs), "library %s contains no packages", "libraries %s contain no packages",     domain = "R-base")
 #: R/library.R:0
 msgid "library %s contains no packages"
 msgid_plural "libraries %s contain no packages"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/dataframe.R: ngettext(length(nonuniq), "non-unique value when setting 'row.names': %s", "non-unique values when setting 'row.names': %s",     domain = "R-base")
 #: R/dataframe.R:0
 msgid "non-unique value when setting 'row.names': %s"
 msgid_plural "non-unique values when setting 'row.names': %s"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/namespace.R: ngettext(length(miss), "object %s is not exported by 'namespace:%s'", "objects %s are not exported by 'namespace:%s'",     domain = "R-base")
 #: R/namespace.R:0
 msgid "object %s is not exported by 'namespace:%s'"
 msgid_plural "objects %s are not exported by 'namespace:%s'"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/load.R: ngettext(n, "object %s was not found", "objects %s were not found", domain = "R-base")
 #: R/load.R:0
 msgid "object %s was not found"
 msgid_plural "objects %s were not found"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/library.R: ngettext(as.integer(sum(m)), "package %s is not loaded", "packages %s are not loaded",     domain = "R-base")
 #: R/library.R:0
 msgid "package %s is not loaded"
 msgid_plural "packages %s are not loaded"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/namespace.R: ngettext(sum(ex), "previous export %s is being replaced", "previous exports %s are being replaced",     domain = "R-base")
 #: R/namespace.R:0
 msgid "previous export %s is being replaced"
 msgid_plural "previous exports %s are being replaced"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/dataframe.R: ngettext(ncolv, "provided %d variable to replace %d variables", "provided %d variables to replace %d variables",     domain = "R-base")
 #: R/dataframe.R:0
 msgid "provided %d variable to replace %d variables"
 msgid_plural "provided %d variables to replace %d variables"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/dataframe.R: ngettext(nrowv, "replacement data has %d row to replace %d rows", "replacement data has %d rows to replace %d rows",     domain = "R-base")
 #: R/dataframe.R:0
 msgid "replacement data has %d row to replace %d rows"
 msgid_plural "replacement data has %d rows to replace %d rows"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/dataframe.R: ngettext(N, "replacement element %d has %d row to replace %d rows", "replacement element %d has %d rows to replace %d rows",     domain = "R-base")
 #: R/dataframe.R:0
 msgid "replacement element %d has %d row to replace %d rows"
 msgid_plural "replacement element %d has %d rows to replace %d rows"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/dataframe.R: ngettext(N, "replacement element %d has %d row, need %d", "replacement element %d has %d rows, need %d",     domain = "R-base")
 #: R/dataframe.R:0
 msgid "replacement element %d has %d row, need %d"
 msgid_plural "replacement element %d has %d rows, need %d"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/dataframe.R: ngettext(N, "replacement element %d is a matrix/data frame of %d row, need %d", "replacement element %d is a matrix/data frame of %d rows, need %d",     domain = "R-base")
 #: R/dataframe.R:0
@@ -3236,14 +3210,12 @@ msgid "replacement element %d is a matrix/data frame of %d row, need %d"
 msgid_plural ""
 "replacement element %d is a matrix/data frame of %d rows, need %d"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/dataframe.R: ngettext(m, "replacement has %d item, need %d", "replacement has %d items, need %d",     domain = "R-base")
 #: R/dataframe.R:0
 msgid "replacement has %d item, need %d"
 msgid_plural "replacement has %d items, need %d"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d",     domain = "R-base")
 #. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d",     domain = "R-base")
@@ -3255,14 +3227,12 @@ msgstr[1] ""
 msgid "replacement has %d row, data has %d"
 msgid_plural "replacement has %d rows, data has %d"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/dataframe.R: ngettext(length(row.names), "supplied %d row name for %d rows", "supplied %d row names for %d rows",     domain = "R-base")
 #: R/dataframe.R:0
 msgid "supplied %d row name for %d rows"
 msgid_plural "supplied %d row names for %d rows"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/library.R: ngettext(1L, "there is no package called %s", "there are no packages called %s",     domain = "R-base")
 #. R/library.R: ngettext(length(bad), "there is no package called %s", "there are no packages called %s",     domain = "R-base")
@@ -3272,11 +3242,9 @@ msgstr[1] ""
 msgid "there is no package called %s"
 msgid_plural "there are no packages called %s"
 msgstr[0] ""
-msgstr[1] ""
 
 #. R/stop.R: ngettext(length(r), "variable %s is not TRUE", "variables %s are not all TRUE", domain = "R-base")
 #: R/stop.R:0
 msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] ""
-msgstr[1] ""

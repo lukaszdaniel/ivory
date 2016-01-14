@@ -772,6 +772,22 @@ static void loadCompilerNamespace(void)
     UNPROTECT(3);
 }
 
+static void checkCompilerOptions(int jitEnabled)
+{
+    int old_visible = R_Visible;
+    SEXP packsym, funsym, call, fcall, arg;
+
+    packsym = install("compiler");
+    funsym = install("checkCompilerOptions");
+
+    PROTECT(arg = ScalarInteger(jitEnabled));
+    PROTECT(fcall = lang3(R_TripleColonSymbol, packsym, funsym));
+    PROTECT(call = lang2(fcall, arg));
+    eval(call, R_GlobalEnv);
+    UNPROTECT(3);
+    R_Visible = old_visible;
+}
+
 static int R_disable_bytecode = 0;
 
 void attribute_hidden R_init_jit_enabled(void)
@@ -787,6 +803,7 @@ void attribute_hidden R_init_jit_enabled(void)
 	    int val = atoi(enable);
 	    if (val > 0)
 		loadCompilerNamespace();
+	    checkCompilerOptions(val);
 	    R_jit_enabled = val;
 	}
     }
@@ -816,6 +833,7 @@ void attribute_hidden R_init_jit_enabled(void)
 
 SEXP attribute_hidden R_cmpfun(SEXP fun)
 {
+    int old_visible = R_Visible;
     SEXP packsym, funsym, call, fcall, val;
 
     packsym = install("compiler");
@@ -825,11 +843,13 @@ SEXP attribute_hidden R_cmpfun(SEXP fun)
     PROTECT(call = lang2(fcall, fun));
     val = eval(call, R_GlobalEnv);
     UNPROTECT(2);
+    R_Visible = old_visible;
     return val;
 }
 
 static SEXP R_compileExpr(SEXP expr, SEXP rho)
 {
+    int old_visible = R_Visible;
     SEXP packsym, funsym, quotesym;
     SEXP qexpr, call, fcall, val;
 
@@ -842,18 +862,21 @@ static SEXP R_compileExpr(SEXP expr, SEXP rho)
     PROTECT(call = lang3(fcall, qexpr, rho));
     val = eval(call, R_GlobalEnv);
     UNPROTECT(3);
+    R_Visible = old_visible;
     return val;
 }
 
 static SEXP R_compileAndExecute(SEXP call, SEXP rho)
 {
     int old_enabled = R_jit_enabled;
+    int old_visible = R_Visible;
     SEXP code, val;
 
     R_jit_enabled = 0;
     PROTECT(call);
     PROTECT(rho);
     PROTECT(code = R_compileExpr(call, rho));
+    R_Visible = old_visible;
     R_jit_enabled = old_enabled;
 
     val = bcEval(code, rho, TRUE);
@@ -866,9 +889,13 @@ SEXP attribute_hidden do_enablejit(SEXP call, SEXP op, SEXP args, SEXP rho)
     int old = R_jit_enabled, new;
     checkArity(op, args);
     new = asInteger(CAR(args));
-    if (new > 0)
-	loadCompilerNamespace();
-    R_jit_enabled = new;
+    if (new >= 0) {
+	if (new > 0)
+	    loadCompilerNamespace();
+	checkCompilerOptions(new);
+	R_jit_enabled = new;
+    }
+    /* negative 'new' just returns 'old' */
     return ScalarInteger(old);
 }
 
@@ -5481,6 +5508,12 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	/* get the function */
 	SEXP symbol = VECTOR_ELT(constants, GETOP());
 	value = getPrimitive(symbol, BUILTINSXP);
+//#define REPORT_OVERRIDEN_BUILTINS
+#ifdef REPORT_OVERRIDEN_BUILTINS
+	if (value != findFun(symbol, rho)) {
+	    Rprintf(_("Possibly overriden builtin: %s\n"), PRIMNAME(value));
+	}
+#endif
 	if (RTRACE(value)) {
 	  Rprintf(_("trace: "));
 	  PrintValue(symbol);

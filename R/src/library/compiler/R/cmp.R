@@ -1125,9 +1125,11 @@ haveInlineHandler <- function(name, package = "base") {
 ## Inlining is controlled by the optimize compiler option, with possible
 ## values 0, 1, 2, 3.
 
+noInlineSymbols <- c("standardGeneric")
+
 getInlineInfo <- function(name, cntxt) {
     optimize <- cntxt$optimize
-    if (optimize > 0) {
+    if (optimize > 0 && ! (name %in% noInlineSymbols)) {
         info <- findCenvVar(name, cntxt$env)
         if (is.null(info))
             NULL
@@ -2548,7 +2550,7 @@ setSetterInlineHandler("@<-", function(afun, place, acall, cb, cntxt) {
         TRUE
     }
     else FALSE
-}, "methods")
+})
 
 setInlineHandler("with", function(e, cb, cntxt) {
     cntxt$suppressUndefined <- TRUE
@@ -2669,7 +2671,7 @@ cmpfun <- function(f, options = NULL) {
             val <- asS4(val)
         val
     }
-    else if (typeof(f) == "builtin" || type == "special")
+    else if (type == "builtin" || type == "special")
         f
     else stop("cannot compile a non-function")
 }
@@ -2788,6 +2790,7 @@ setCompilerOptions <- function(...) {
         if (! exists(n, compilerOptions))
             stop(gettextf("'%s' is not a valid compiler option", n), domain = "R-compiler")
     old <- list()
+    newOptions <- compilerOptions
     for (n in nm) {
         op <- options[[n]]
         switch(n,
@@ -2796,14 +2799,14 @@ setCompilerOptions <- function(...) {
                    if (length(op) == 1 && 0 <= op && op <= 3) {
                        old <- c(old, list(optimize =
                                           compilerOptions$optimize))
-                       compilerOptions$optimize <- op
+                       newOptions$optimize <- op
                    }
                },
                suppressAll = {
                    if (identical(op, TRUE) || identical(op, FALSE)) {
                        old <- c(old, list(suppressAll =
                                           compilerOptions$suppressAll))
-                       compilerOptions$suppressAll <- op
+                       newOptions$suppressAll <- op
                    }
                },
                suppressUndefined = {
@@ -2811,10 +2814,12 @@ setCompilerOptions <- function(...) {
                        is.character(op)) {
                        old <- c(old, list(suppressUndefined =
                                           compilerOptions$suppressUndefined))
-                       compilerOptions$suppressUndefined <- op
+                       newOptions$suppressUndefined <- op
                    }
                })
     }
+    jitEnabled <- enableJIT(-1)
+    checkCompilerOptions(jitEnabled, newOptions)
     invisible(old)
 }
 
@@ -2829,6 +2834,18 @@ setCompilerOptions <- function(...) {
             if (0 <= lev && lev <= 3)
                 setCompilerOptions(optimize = lev)
         }, error = function(e) e, warning = function(w) w)
+}
+
+checkCompilerOptions <- function(jitEnabled, options = NULL) {
+    optimize <- getCompilerOption("optimize", options)
+    if (jitEnabled <= 2 || optimize >= 2)
+        TRUE
+    else {
+        stop(gettextf(
+            "invalid compiler options: 'optimize(==%d)<2' and 'jitEnabled(==%d)>2'",
+            optimize, jitEnabled))
+        FALSE
+    }
 }
 
 

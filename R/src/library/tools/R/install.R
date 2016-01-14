@@ -1051,7 +1051,12 @@
             BC <- if (!is.na(byte_compile)) byte_compile
             else
                 parse_description_field(desc, "ByteCompile", default = FALSE)
-            rcp <- as.numeric(Sys.getenv("R_COMPILE_PKGS"))
+            rcps <- Sys.getenv("R_COMPILE_PKGS")
+            rcp <- switch(rcps,
+                "TRUE"=, "true"=, "True"=, "yes"=, "Yes"= 1,
+                "FALSE"=,"false"=,"False"=, "no"=, "No" = 0,
+                as.numeric(rcps)
+            )
             BC <- BC || (!is.na(rcp) && rcp > 0)
             if (BC) {
                 starsmsg(stars, gettext("byte-compile and prepare package for lazy loading"))

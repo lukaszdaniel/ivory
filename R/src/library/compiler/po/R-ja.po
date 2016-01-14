@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-10-11 13:46\n"
+"POT-Creation-Date: 2016-01-14 21:11\n"
 "PO-Revision-Date: 2015-01-17 14:58+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -46,6 +46,11 @@ msgid "'ns' argument must be a namespace or a namespace imports environment"
 msgstr ""
 " 'ns' はネームスペースか, あるいは環境をインポートしたネームスペースでなけれ"
 "ばなりません "
+
+#. R/cmp.R: gettext("'switch()' with no alternatives")
+#: R/cmp.R:0
+msgid "'switch()' with no alternatives"
+msgstr ""
 
 #. R/cmp.R: gettext("Note: ", domain = "R-compiler")
 #: R/cmp.R:0
@@ -169,6 +174,11 @@ msgstr ""
 msgid "input and output file names are the same"
 msgstr " 入力ファイルと出力ファイルの名前が同じです "
 
+#. R/cmp.R: gettextf("invalid compiler options: 'optimize(==%d)<2' and 'jitEnabled(==%d)>2'",     optimize, jitEnabled)
+#: R/cmp.R:0
+msgid "invalid compiler options: 'optimize(==%d)<2' and 'jitEnabled(==%d)>2'"
+msgstr ""
+
 #. R/cmp.R: gettext("invalid function in complex assignment")
 #. R/cmp.R: gettext("invalid function in complex assignment")
 #: R/cmp.R:0
@@ -180,10 +190,10 @@ msgstr " complexの付値に不正な関数があります "
 msgid "missing arguments are not allowed"
 msgstr " 引数の欠損は許されません "
 
-#. R/cmp.R: gettext("more than one default provided in switch() call")
+#. R/cmp.R: gettext("more than one default provided in 'switch()' call")
 #: R/cmp.R:0
 #, fuzzy
-msgid "more than one default provided in switch() call"
+msgid "more than one default provided in 'switch()' call"
 msgstr " スイッチ呼び出しの中で, デフォルト選択肢が２つ以上あります "
 
 #. R/cmp.R: gettextf("no offset recorded for label \"%s\"", lbl)

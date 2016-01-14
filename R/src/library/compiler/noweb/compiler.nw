@@ -1787,9 +1787,11 @@ tryInline <- function(e, cb, cntxt) {
 The function [[getInlineInfo]] implements the optimization rules
 described at the beginning of this section.
 <<[[getInlineInfo]] function>>=
+noInlineSymbols <- c("standardGeneric")
+
 getInlineInfo <- function(name, cntxt) {
     optimize <- cntxt$optimize
-    if (optimize > 0) {
+    if (optimize > 0 && ! (name %in% noInlineSymbols)) {
         info <- findCenvVar(name, cntxt$env)
         if (is.null(info))
             NULL
@@ -4302,7 +4304,7 @@ setSetterInlineHandler("@<-", function(afun, place, acall, cb, cntxt) {
         TRUE
     }
     else FALSE
-}, "methods")
+})
 @ 
 
 
@@ -4638,7 +4640,7 @@ cmpfun <- function(f, options = NULL) {
             val <- asS4(val)
         val
     }
-    else if (typeof(f) == "builtin" || type == "special")
+    else if (type == "builtin" || type == "special")
         f
     else stop("cannot compile a non-function")
 }
@@ -4678,7 +4680,7 @@ cmpfile <- function(infile, outfile, ascii = FALSE, env = .GlobalEnv,
         cenv <- makeCenv(env)
         cntxt <- make.toplevelContext(cenv, options)
         cntxt$env <- addCenvVars(cenv, findLocalsList(forms, cntxt))
-        for (i in 1:nforms) {
+        for (i in seq_len(nforms)) {
             e <- forms[[i]]
             if (verbose) {
                 if (typeof(e) == "language" && e[[1]] == "<-" &&
@@ -4807,6 +4809,7 @@ setCompilerOptions <- function(...) {
             stop(gettextf("'%s' is not a valid compiler option", n),
                  domain = NA)
     old <- list()
+    newOptions <- compilerOptions
     for (n in nm) {
         op <- options[[n]]
         switch(n,
@@ -4815,14 +4818,14 @@ setCompilerOptions <- function(...) {
                    if (length(op) == 1 && 0 <= op && op <= 3) {
                        old <- c(old, list(optimize =
                                           compilerOptions$optimize))
-                       compilerOptions$optimize <- op
+                       newOptions$optimize <- op
                    }
                },
                suppressAll = {
                    if (identical(op, TRUE) || identical(op, FALSE)) {
                        old <- c(old, list(suppressAll =
                                           compilerOptions$suppressAll))
-                       compilerOptions$suppressAll <- op
+                       newOptions$suppressAll <- op
                    }
                },
                suppressUndefined = {
@@ -4830,10 +4833,12 @@ setCompilerOptions <- function(...) {
                        is.character(op)) {
                        old <- c(old, list(suppressUndefined =
                                           compilerOptions$suppressUndefined))
-                       compilerOptions$suppressUndefined <- op
+                       newOptions$suppressUndefined <- op
                    }
                })
     }
+    jitEnabled <- enableJIT(-1)
+    checkCompilerOptions(jitEnabled, newOptions)
     invisible(old)
 }
 @ %def
@@ -4858,6 +4863,27 @@ optimization level to be specified using environment variables.
         }, error = function(e) e, warning = function(w) w)
 }
 @ %def .onLoad
+
+When [[enableJIT]] is set to 3, loops should be compiled before executing. 
+However, if the [[optimize]] option is set to 0 or 1, a compiled loop will
+call to the same primitive function as is used by the AST interpretter (e.g. 
+[[do_for]]), and the compilation would run into infinite recursion. 
+[[checkCompilerOptions]] will detect invalid combinations of [[enableJIT]]
+and [[optimize]] and report a warning.
+%% **** could also change the interface and atomically set enableJIT and optimize
+<<[[checkCompilerOptions]] function>>=
+checkCompilerOptions <- function(jitEnabled, options = NULL) {
+    optimize <- getCompilerOption("optimize", options)
+    if (jitEnabled <= 2 || optimize >= 2)
+        TRUE
+    else {
+        stop(gettextf(
+            "invalid compiler options: 'optimize(==%d)<2' and 'jitEnabled(==%d)>2'",
+            optimize, jitEnabled))
+        FALSE
+    }
+}
+@ %def checkCompilerOptions
 
 
 \subsection{Disassembler}
@@ -4902,7 +4928,7 @@ bcDecode <- function(code) {
         ncode[[i]] <- as.name(name)
         i<-i+1
         if (argc > 0)
-            for (j in 1:argc) {
+            for (j in seq_len(argc)) {
                 ncode[[i]]<-code[i]
                 i<-i+1
             }
@@ -5202,7 +5228,7 @@ The function [[dots.or.missing]] checks the argument list for any
 missing or [[...]] arguments:
 <<[[dots.or.missing]] function>>=
 dots.or.missing <- function(args) {
-    for (i in 1:length(args)) {
+    for (i in seq_len(length(args))) {
         a <-args[[i]]
         if (missing(a)) return(TRUE) #**** better test?
         if (typeof(a) == "symbol" && a == "...") return(TRUE)
@@ -5214,7 +5240,7 @@ dots.or.missing <- function(args) {
 The function [[any.dots]] is defined as
 <<[[any.dots]] function>>=
 any.dots <- function(args) {
-    for (i in 1:length(args)) {
+    for (i in seq_len(length(args))) {
         a <-args[[i]]
         if (! missing(a) && typeof(a) == "symbol" && a == "...")
             return(TRUE)
@@ -6232,6 +6258,8 @@ Opcodes.names <- names(Opcodes.argc)
 <<[[setCompilerOptions]] function>>
 
 <<[[.onLoad]] function>>
+
+<<[[checkCompilerOptions]] function>>
 
 
 ##

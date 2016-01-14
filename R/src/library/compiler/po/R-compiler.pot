@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: compiler 3.3.0\n"
-"POT-Creation-Date: 2015-04-01 22:12\n"
+"POT-Creation-Date: 2016-01-14 21:11\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,6 +50,13 @@ msgstr ""
 #. R/cmp.R: stop("'ns' argument must be a namespace or a namespace imports environment")
 
 msgid "'ns' argument must be a namespace or a namespace imports environment"
+msgstr ""
+
+
+#: R/cmp.R: 0
+#. R/cmp.R: gettext("'switch()' with no alternatives")
+
+msgid "'switch()' with no alternatives"
 msgstr ""
 
 
@@ -214,6 +221,13 @@ msgstr ""
 
 
 #: R/cmp.R: 0
+#. R/cmp.R: gettextf("invalid compiler options: 'optimize(==%d)<2' and 'jitEnabled(==%d)>2'",     optimize, jitEnabled)
+
+msgid "invalid compiler options: 'optimize(==%d)<2' and 'jitEnabled(==%d)>2'"
+msgstr ""
+
+
+#: R/cmp.R: 0
 #. R/cmp.R: gettext("invalid function in complex assignment")
 #. R/cmp.R: gettext("invalid function in complex assignment")
 
@@ -229,9 +243,9 @@ msgstr ""
 
 
 #: R/cmp.R: 0
-#. R/cmp.R: gettext("more than one default provided in switch() call")
+#. R/cmp.R: gettext("more than one default provided in 'switch()' call")
 
-msgid "more than one default provided in switch() call"
+msgid "more than one default provided in 'switch()' call"
 msgstr ""
 
 
