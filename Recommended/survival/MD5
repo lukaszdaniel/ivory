@@ -214,7 +214,7 @@ ee77bcf769260142402c34a334c1a0a2 *po/R-pl.po
 97e294af3935dca814ebd26bae16f168 *src/pyears3b.c
 2d7f18518c13727a50f4b9e59a6bc9e6 *src/survreg6.c
 ff7a20d8d165802ea3766d9fa75e14a1 *src/doloop.c
-4fbd9ee9033cb469f23534595aaa1695 *src/survdiff2.c
+45f7e21762414d4e2b146482b422e43a *src/survdiff2.c
 9d58cebadc5a235bb5860076bb15ce10 *src/chinv2.c
 5e9895762edebdd45109fa025b19d1c9 *src/agfit4.c
 bf4dd7cff7207e17eeaeb9d37b3e4088 *src/cholesky3.c
@@ -234,13 +234,13 @@ a03b1a3c6764b98696b3c32718f31bd7 *src/survfit4.c
 1143f87e1941fd27622fc229b13d840c *src/survregc1.c
 064da177122e444a026f36830a8b52ad *src/init.c
 4426b24b5d9e0c6ca32f91d37ec28104 *src/cox_Rcallback.c
-643c952406884d38b7409138cbdd7c0a *src/survfitci.c
+1ac0f0f462e1249f0b6dc04bafdd4973 *src/survfitci.c
 a7fa8f474f0c9d896c4ac2eceda91a05 *src/agfit5.c
 7e8e47e291ebc7308604421e099383b6 *src/chsolve3.c
-49ffabd94126ed4b7a2c46dffa646087 *src/survConcordance.c
+2a66523da40439d5f660951709be410c *src/survConcordance.c
 2510be13268a84154521b1b600a02b7e *src/agmart.c
 3f85ef9d57e28eb78ac14afb2cf8e855 *src/pyears2.c
-4a4b12e263e74728a89ca703cd4a51d2 *src/coxexact.c
+02d6c9f8da990c8724dc624b1cf0e3eb *src/coxexact.c
 6a85c40ec6742f6986c0e53932a5d1da *src/coxmart.c
 9348631d5f86125d99f657cc27ee4c3e *src/tmerge.c
 eb162e94b31d0ec6ed0e68b767ac13d5 *src/coxscore.c
@@ -253,7 +253,7 @@ d9ee5e75ea894b8f6526ecd7e0917e63 *src/coxsafe.c
 1ff88ef5614cf0138ea5315f69d5ff4d *src/coxph_wtest.c
 4df7e06ba19e37b66b6c0ed6119f3219 *src/chsolve2.c
 a7616401e3f02d65ed94de3ed279cb30 *src/agmart3.c
-20e4b99ef6b980c657d0f34be576cbad *src/survpenal.c
+9009b9e8518fbfc4d7c16f68b595d68c *src/survpenal.c
 dca45548f139de8e5dbf3fd1f7d8bcaf *src/coxscho.c
 594eb5924365cb5371b8d853cfde98fb *src/agmart2.c
 c84812b76eb487d1681437f9e00aae17 *src/dmatrix.c
