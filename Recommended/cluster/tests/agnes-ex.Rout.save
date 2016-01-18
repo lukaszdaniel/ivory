@@ -1,10 +1,10 @@
 
-Ivory Under development (unstable) (2015-12-02 r480) -- "Internationalized Version of R"
-Copyright (C) 2013-2015 Lukasz Daniel (lukasz.daniel@gmail.com)
+Ivory Under development (unstable) (2016-01-15 r542) -- "Internationalized Version of R"
+Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2015-12-02 r69718) -- "Unsuffered Consequences"
-Copyright (C) 2015 The R Foundation for Statistical Computing
+R Under development (unstable) (2016-01-15 r69945) -- "Unsuffered Consequences"
+Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 Ivory is not part of the R project, so please do not report bugs
@@ -496,7 +496,7 @@ List of 9 components
  - attr(*, "class")= character [1:2] "agnes" "twins"
 > 
 > showProc.time()
-Time elapsed:  0.136 0.015 0.153 
+Time elapsed:  0.06 0.016 0.076 
 > 
 > summary(ar2 <- agnes(ruspini, metric="manhattan", method = "weighted"))
 Object of class 'agnes' from call:
@@ -621,7 +621,7 @@ Available components:
 > stopifnot(all.equal(ar2[1:4], ar3[1:4], tol=1e-12))
 > 
 > showProc.time()
-Time elapsed:  0.01 0.008 0.017 
+Time elapsed:  0 0.012 0.012 
 > 
 > ## Small example, testing "flexible" vs "single"
 > i8 <- -c(1:2, 9:10)
@@ -766,7 +766,7 @@ C agnes(n=75, method = 5, ..): 74 merging steps
 C agnes(n=75, method = 6, ..): 74 merging steps
 > 
 > showProc.time()
-Time elapsed:  0.068 0 0.069 
+Time elapsed:  0.024 0.008 0.033 
 > 
 > ## an invalid "flexible" case - now must give error early:
 > x <- rbind(c( -6, -9), c(  0, 13),
@@ -791,4 +791,4 @@ Number of objects: 5
 > 
 > proc.time()
    user  system elapsed 
-  0.564   0.078   0.628 
+  0.228   0.048   0.273 

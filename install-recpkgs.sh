@@ -16,7 +16,8 @@ fi;
   cd $pkg
   version=`sed -n -e '/Version:/p' DESCRIPTION | cut -d" " -f2`
   rm MD5
-  md5deep -r -l * > MD5
+  #md5deep -r -l * > MD5
+  find -type f -print0 | xargs -0 md5sum | sed -e 's/ .\//*/' > MD5
   cd ..
   if test -f ../${IVORY}/src/library/Recommended/${pkg}_${version}.tar.gz; then
    echo "Updating package '"${pkg}"' version" ${version}

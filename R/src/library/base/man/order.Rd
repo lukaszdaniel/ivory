@@ -16,10 +16,10 @@
   etc.
 }
 \usage{
-order(\dots, na.last = TRUE, decreasing = FALSE)
+order(\dots, na.last = TRUE, decreasing = FALSE, method = c("shell", "radix"))
 
 sort.list(x, partial = NULL, na.last = TRUE, decreasing = FALSE,
-          method = c("shell", "quick", "radix"))
+          method = c("shell", "quick", "radix", "radix2"))
 }
 \arguments{
   \item{\dots}{a sequence of numeric, complex, character or logical

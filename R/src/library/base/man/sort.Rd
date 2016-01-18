@@ -20,7 +20,7 @@ sort(x, decreasing = FALSE, \dots)
 \method{sort}{default}(x, decreasing = FALSE, na.last = NA, \dots)
 
 sort.int(x, partial = NULL, na.last = NA, decreasing = FALSE,
-         method = c("shell", "quick"), index.return = FALSE)
+         method = c("shell", "quick", "radix"), index.return = FALSE)
 }
 \arguments{
   \item{x}{for \code{sort} an \R object with a class or a numeric,

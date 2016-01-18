@@ -127,9 +127,9 @@ if [[ "$1" == "Matrix" ]] || [[ "$1" == "all" ]]; then
 fi;
 
 if [[ "$1" == "nlme" ]] || [[ "$1" == "all" ]]; then
+`$cmd nlme.Rcheck/tests/coef.Rout	../../$RECIVORY/nlme/tests/coef.Rout.save`
 `$cmd nlme.Rcheck/tests/lme.Rout		../../$RECIVORY/nlme/tests/lme.Rout.save`
 `$cmd nlme.Rcheck/tests/missing.Rout	../../$RECIVORY/nlme/tests/missing.Rout.save`
-`$cmd nlme.Rcheck/tests/nlme.Rout	../../$RECIVORY/nlme/tests/nlme.Rout.save`
 fi;
 
 

@@ -6644,9 +6644,9 @@ msgid ""
 msgstr ""
 
 #: src/main/radixsort.c:1102
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to reallocate %d * %d bytes in 'cgroup()' function"
-msgstr "nie można przydzielić pamięci (w funkcji 'GEregister()')"
+msgstr "nie można ponownie przydzielić %d * %d bajtów w funkcji 'cgroup()'"
 
 #: src/main/radixsort.c:1180
 msgid ""
@@ -6722,6 +6722,8 @@ msgstr "długie wektory nie są wspierane"
 #, c-format
 msgid "First column being ordered is type '%s', not yet supported"
 msgstr ""
+"Pierwsza kolumna podlegająca sortowaniu jest typu '%s', co nie jest "
+"aktualnie wspierane"
 
 #: src/main/radixsort.c:1699 src/main/radixsort.c:1793
 msgid "Internal error: previous default should have caught unsupported type"
