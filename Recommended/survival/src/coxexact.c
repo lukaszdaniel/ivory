@@ -61,14 +61,14 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
     double *time, *status;   /* input data */
     double *offset;
     int    *strata;
-    int    sstart;   /* starting obs of current strata */
+    int    sstart = 0;   /* starting obs of current strata */
     double *score;
     double *oldbeta;
     double  zbeta;
     double  newlk=0;
     double  temp;
     int     halving;    /*are we doing step halving at the moment? */
-    int     nrisk;   /* number of subjects in the current risk set */
+    int     nrisk = 0;   /* number of subjects in the current risk set */
     int dsize,       /* memory needed for one coxc0, coxc1, or coxd2 array */
         dmemtot,     /* amount needed for all arrays */
         ndeath;      /* number of deaths at the current time point */

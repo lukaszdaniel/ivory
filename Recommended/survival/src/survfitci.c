@@ -100,14 +100,14 @@ SEXP survfitci(SEXP ftime2,  SEXP sort12,  SEXP sort22, SEXP ntime2,
     chaz = (double**) dmatrix2(nstate, nstate);
 
     /* R_alloc does not zero allocated memory */
-    for (i=0; i<nstate; i++) {
+    for (int i=0; i<nstate; i++) {
         ws[i] =0;
         ns[i] =0;
-        for (j=0; j<nstate; j++) {
+        for (int j=0; j<nstate; j++) {
                 hmat[i][j] =0;
                 chaz[i][j] =0;
         }
-        if (sefit) {for (j=0; j<nperson; j++) umat[j][i]=0;}
+        for (int j=0; j<nperson; j++) umat[j][i]=0;
      }
     for (i=0; i<nperson; i++) atrisk[i] =0;
     itime =0; /*current time index, for output arrays */
