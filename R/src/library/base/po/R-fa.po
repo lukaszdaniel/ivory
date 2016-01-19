@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-10 18:04\n"
+"POT-Creation-Date: 2016-01-19 19:19\n"
 "PO-Revision-Date: 2016-01-14 20:01+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Persian\n"
@@ -791,6 +791,13 @@ msgstr ""
 msgid ""
 "'recursive' argument will be ignored as 'to' argument is not a single "
 "existing directory"
+msgstr ""
+
+#. R/dataframe.R: gettextf("'row.names' argument is not a character vector of length %d -- omitting it. Will be an error!",     nrows)
+#: R/dataframe.R:0
+msgid ""
+"'row.names' argument is not a character vector of length %d -- omitting it. "
+"Will be an error!"
 msgstr ""
 
 #. R/dataframe.R: stop("'row.names' argument should specify one of the variables")

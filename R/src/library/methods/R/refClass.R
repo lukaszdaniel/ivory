@@ -295,7 +295,7 @@ utils::globalVariables(".envRefMethods")# (codetools analysis)
                  value
              }
              else if(is(classDef, "classRepresentation")) # use standard S4 as()
-                 methods::as(.self, Class)
+                  methods::as(.self, Class)
              else if(is.character(Class) && length(Class) == 1)
                  stop(gettextf("%s is not a defined class in this environment",
                                dQuote(Class)),
@@ -666,7 +666,7 @@ accessors = function(...) {
     methods(accessors)
     invisible(accessors)
 }
-)
+)## end{ .GeneratorMethods }
 
 .localRefMethods <-
     list(
@@ -889,19 +889,14 @@ insertClassMethods <- function(methods, Class, value, fieldNames, returnAll) {
     theseMethods <- names(value)
     prevMethods <- names(methods) # catch refs to inherited methods as well
     allMethods <- unique(c(theseMethods, prevMethods))
-    if(returnAll)
-        returnMethods <- methods
-    else
-        returnMethods <- value
+    returnMethods <- if(returnAll) methods else value
     check <- TRUE
     for(method in theseMethods) {
         prevMethod <- methods[[method]] # NULL or superClass method
         if(is.null(prevMethod)) {
             ## kludge because default version of $initialize() breaks bootstrapping of methods package
-            if(identical(method, "initialize"))
-                superClassMethod <- "initFields"
-            else
-                superClassMethod <- ""
+            superClassMethod <- if(identical(method, "initialize"))
+                "initFields" else ""
         }
         else if(identical(prevMethod@refClassName, Class))
             superClassMethod <- prevMethod@superClassMethod
@@ -1078,10 +1073,9 @@ showRefClassDef <- function(object, title = gettext("Reference Class", domain = 
 
 .mergeAssigns <- function(previous, new) {
     for(what in names(new)) {
-        if(is.null(previous[[what]]))
-            previous[[what]] <- new[[what]]
-        else
-            previous[[what]] <- paste(previous[[what]], new[[what]], sep="; ")
+	previous[[what]] <-
+	    if(is.null(previous[[what]])) new[[what]]
+	    else paste(previous[[what]],  new[[what]], sep="; ")
     }
     previous
 }

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-10 18:04\n"
+"POT-Creation-Date: 2016-01-19 19:19\n"
 "PO-Revision-Date: 2016-01-09 18:48+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -895,6 +895,14 @@ msgid ""
 "existing directory"
 msgstr ""
 "'rekursive' vil blive ignoreret da 'to' ikke er en enkelt eksisterende mappe"
+
+#. R/dataframe.R: gettextf("'row.names' argument is not a character vector of length %d -- omitting it. Will be an error!",     nrows)
+#: R/dataframe.R:0
+#, fuzzy
+msgid ""
+"'row.names' argument is not a character vector of length %d -- omitting it. "
+"Will be an error!"
+msgstr "'kind' skal være en tegnstreng af længde 1 (RNG vil blive brugt)."
 
 #. R/dataframe.R: stop("'row.names' argument should specify one of the variables")
 #: R/dataframe.R:0

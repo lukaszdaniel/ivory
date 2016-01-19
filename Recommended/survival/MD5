@@ -234,13 +234,13 @@ a03b1a3c6764b98696b3c32718f31bd7 *src/survfit4.c
 1143f87e1941fd27622fc229b13d840c *src/survregc1.c
 064da177122e444a026f36830a8b52ad *src/init.c
 4426b24b5d9e0c6ca32f91d37ec28104 *src/cox_Rcallback.c
-643c952406884d38b7409138cbdd7c0a *src/survfitci.c
+9aeebd27b9cef2b7f1af34cebf79e4f0 *src/survfitci.c
 a7fa8f474f0c9d896c4ac2eceda91a05 *src/agfit5.c
 7e8e47e291ebc7308604421e099383b6 *src/chsolve3.c
 49ffabd94126ed4b7a2c46dffa646087 *src/survConcordance.c
 2510be13268a84154521b1b600a02b7e *src/agmart.c
 3f85ef9d57e28eb78ac14afb2cf8e855 *src/pyears2.c
-4a4b12e263e74728a89ca703cd4a51d2 *src/coxexact.c
+71b0235113a61f8a8cd7b8effb774fbe *src/coxexact.c
 6a85c40ec6742f6986c0e53932a5d1da *src/coxmart.c
 9348631d5f86125d99f657cc27ee4c3e *src/tmerge.c
 eb162e94b31d0ec6ed0e68b767ac13d5 *src/coxscore.c
