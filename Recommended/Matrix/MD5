@@ -10,7 +10,6 @@ c39a26dfe7ccaafd044e88468155b153 *vignettes/Introduction.Rnw
 d3528bc0cd82f248821809f253bffe35 *data/CAex.R
 7586556183d8d0a3c7979702254f93c1 *data/KNex.R
 10b959df8869ec28b992f2ff6dad2991 *data/USCounties.R
-d41d8cd98f00b204e9800998ecf8427e *MD5
 384ad19fd9e35dfa867ff36dc6d502f4 *inst/test-tools.R
 ec9e134ad0a923fd8493ec7e108bfc9b *inst/test-tools-1.R
 826de3bfb21871d3c61af4c96dbb2580 *inst/include/Matrix.h

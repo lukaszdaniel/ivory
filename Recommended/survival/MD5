@@ -28,7 +28,6 @@ ba8f4bf4656d05f12e3e66649318f52d *data/bladder.rda
 ccec4c290e88d1d537995b013f6f7644 *data/lung.rda
 1349117ec7f1b23d891a20571b878f11 *data/transplant.rda
 6473af5d92183e8533ad71464faea559 *data/nwtco.rda
-d41d8cd98f00b204e9800998ecf8427e *MD5
 125a8993c88b795784a86dd5390b2a19 *cleanup.win
 a3884af002890ecf46180468c47d6c7f *noweb/msurv.nw
 eba900d489efe016a6028f57973f8e2b *noweb/ratetable.Rnw
