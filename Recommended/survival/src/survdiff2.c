@@ -19,17 +19,17 @@ void survdiff2(Sint   *nn,     Sint   *nngroup,    Sint   *nstrat,
     ntot = *nn;
     ngroup = *nngroup;
     istart=0; koff=0;
-    for (int i=0; i< ngroup*ngroup; i++)  var[i]=0;
-    for (int i=0; i< *nstrat*ngroup; i++) {
+    for (i=0; i< ngroup*ngroup; i++)  var[i]=0;
+    for (i=0; i< *nstrat*ngroup; i++) {
 	obs[i]=0;
 	exp[i]=0;
 	}
 
     while (istart < ntot) {  /* loop over the strata */
-	for (int i=0; i<ngroup; i++) risk[i]=0;
+	for (i=0; i<ngroup; i++) risk[i]=0;
 
 	/* last obs of this strata */
-	for (int i=istart; i<ntot; i++)
+	for (i=istart; i<ntot; i++)
 	    if (strata[i]==1) break;
 	n = i+1;
 
@@ -40,11 +40,11 @@ void survdiff2(Sint   *nn,     Sint   *nngroup,    Sint   *nstrat,
 	*/
 	if (*rho !=0){
 	    km =1;
-	    for (int i=istart; i<n; ) {
+	    for (i=istart; i<n; ) {
 		kaplan[i] = km;
 		nrisk = n-i;
 		deaths =status[i];
-		for (int j=i+1; j<n && time[j]==time[i]; j++) {
+		for (j=i+1; j<n && time[j]==time[i]; j++) {
 		    kaplan[j] = km;
 		    deaths += status[j];
 		    }
@@ -56,12 +56,12 @@ void survdiff2(Sint   *nn,     Sint   *nngroup,    Sint   *nstrat,
 	/*
 	** Now for the actual test
 	*/
-	for (int i=n-1; i>=istart; i--) {
+	for (i=n-1; i>=istart; i--) {
 	    if (*rho ==0) wt=1;
 	    else          wt= pow(kaplan[i], *rho);
 
 	    deaths = 0;
-	    for (int j=i; j>=istart && time[j]==time[i]; j--) {
+	    for (j=i; j>=istart && time[j]==time[i]; j--) {
 		k = group[j]-1;
 		deaths += status[j];
 		risk[k] += 1;
@@ -71,16 +71,16 @@ void survdiff2(Sint   *nn,     Sint   *nngroup,    Sint   *nstrat,
 	    nrisk = n-i;
 
 	    if (deaths>0) {  /* a death time */
-		for (int k=0; k<ngroup; k++)
+		for (k=0; k<ngroup; k++)
 		    exp[k+koff] += wt* deaths * risk[k] / nrisk;
 
 		if (nrisk==1) continue;  /*only 1 subject, so no variance */
 		kk =0;
 		wt = wt*wt;
-		for (int j=0; j<ngroup; j++) {
+		for (j=0; j<ngroup; j++) {
 		    tmp = wt* deaths* risk[j]* (nrisk-deaths)/(nrisk *(nrisk-1));
 		    var[kk+j] += tmp;
-		    for (int k=0; k<ngroup; k++) {
+		    for (k=0; k<ngroup; k++) {
 			var[kk] -= tmp * risk[k] / nrisk;
 			kk++ ;
 			}

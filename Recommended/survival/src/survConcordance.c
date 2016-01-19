@@ -37,8 +37,8 @@ void survConcordance(Sint *np,    double *time,  Sint *status,
     n2= *n2p;
     count1 = &(temp[0]);
     count2 = &(temp[n2]);
-    for (int i=0; i<5; i++) result[i] =0;  /* redundant I think */
-    for (int i=0; i<n2; i++) count1[i]=0;
+    for (i=0; i<5; i++) result[i] =0;  /* redundant I think */
+    for (i=0; i<n2; i++) count1[i]=0;
 
     /* 
     ** The heart of the algorithm is to think of the ordered list of
@@ -70,7 +70,7 @@ void survConcordance(Sint *np,    double *time,  Sint *status,
     */
 
     tdeath =0;     /* current count of tied deaths */
-    for (int i=0; i<n; i++) {
+    for (i=0; i<n; i++) {
 	if (status[i] > 0) {
 	    /*
 	    ** Walk the tree a first time, to count this observation's
@@ -112,7 +112,7 @@ void survConcordance(Sint *np,    double *time,  Sint *status,
             if (i<(n-1) && status[i+1]>0 &&(time[i] == time[i+1])) {
                 tdeath += 1;  /* Yes it is */
 		if (tdeath==1) {
-		    for (int j=0; j<n2; j++) count2[j] = count1[j];
+		    for (j=0; j<n2; j++) count2[j] = count1[j];
 		    }
 		}
             else {

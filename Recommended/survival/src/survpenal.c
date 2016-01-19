@@ -28,7 +28,7 @@ void survpenal(int whichcase, int nfrail,    int  nvar,    double **hmat,
 	/*
 	** Get the penalty for the sparse term
 	*/
-	for (int i=0; i<nfrail; i++) cptr1[i] = beta[i];  /* set "coef1" in rho */
+	for (i=0; i<nfrail; i++) cptr1[i] = beta[i];  /* set "coef1" in rho */
 	PROTECT(plist = eval(pexpr1, rho));
 	/*
 	** plist is a list, with elements of a new coef, 
@@ -39,7 +39,7 @@ void survpenal(int whichcase, int nfrail,    int  nvar,    double **hmat,
 	*penalty += asReal(VECTOR_ELT(plist,3));
 	if (whichcase==0) {
 	    dptr = REAL(VECTOR_ELT(plist,0));
-	    for (int i=0; i<nfrail; i++) beta[i] = dptr[i];
+	    for (i=0; i<nfrail; i++) beta[i] = dptr[i];
 
 	    flag =   LOGICAL(VECTOR_ELT(plist, 4));
 
@@ -57,19 +57,19 @@ void survpenal(int whichcase, int nfrail,    int  nvar,    double **hmat,
 		**  arithmetic errors: u=0 and H = identity.  (Only the
 		**  relevant columns of each, of course).
 		*/
-		for (int i=0; i<nfrail; i++) {
+		for (i=0; i<nfrail; i++) {
 		    hdiag[i] =1;
 		    jdiag[i] =1;
 		    u[i] =0;
-		    for (int j=0; j<nvar; j++) hmat[j][i] =0; 
+		    for (j=0; j<nvar; j++) hmat[j][i] =0; 
 		    }
 	        }
 	    else {
 		dptr = REAL(VECTOR_ELT(plist, 1));
-		for (int i=0; i<nfrail; i++) u[i] += dptr[i];
+		for (i=0; i<nfrail; i++) u[i] += dptr[i];
 	    
 		dptr = REAL(VECTOR_ELT(plist,2));
-		for (int i=0; i<nfrail; i++) {
+		for (i=0; i<nfrail; i++) {
 		    hdiag[i] += dptr[i];
 		    jdiag[i] += dptr[i];
 		    }
@@ -84,21 +84,21 @@ void survpenal(int whichcase, int nfrail,    int  nvar,    double **hmat,
 	** Note that penalties never apply to the variance terms,
 	**   which means that indices go to nvar, not nvar2
 	*/
-	for (int i=0; i<nvar; i++) cptr2[i] = beta[i+nfrail]; /* set fcn var */
+	for (i=0; i<nvar; i++) cptr2[i] = beta[i+nfrail]; /* set fcn var */
 	PROTECT(plist = eval(pexpr2, rho));     /* "call" the function */
 	*penalty += asReal(VECTOR_ELT(plist,3));  /* loglik penalty */
 
 	if (whichcase==0) {
 	    dptr = REAL(VECTOR_ELT(plist,0));   /* updated coefficients */
-	    for (int i=0; i<nvar; i++) beta[i+nfrail] = dptr[i];
+	    for (i=0; i<nvar; i++) beta[i+nfrail] = dptr[i];
 
 	    dptr = REAL(VECTOR_ELT(plist, 1));       /* first deriv penalty */
-	    for (int i=0; i<nvar; i++) u[i+nfrail] += dptr[i];
+	    for (i=0; i<nvar; i++) u[i+nfrail] += dptr[i];
 	    
 	    dptr = REAL(VECTOR_ELT(plist,2));
 	    if (pdiag==0) {
 		/* diagonal penalty */
-		for (int i=0; i<nvar; i++) {
+		for (i=0; i<nvar; i++) {
 		    JJ[i][i+nfrail] += dptr[i];
 		    hmat[i][i+nfrail] += dptr[i];
 		    }
@@ -106,8 +106,8 @@ void survpenal(int whichcase, int nfrail,    int  nvar,    double **hmat,
 	    else {
 		/* full penalty matrix */
 		k=0;
-		for (int i=0; i<nvar; i++) {
-		    for (int j=nfrail; j<nvar+nfrail; j++) {
+		for (i=0; i<nvar; i++) {
+		    for (j=nfrail; j<nvar+nfrail; j++) {
 			JJ[i][j] += dptr[k];
 			hmat[i][j] += dptr[k];
 			k++;
@@ -116,11 +116,11 @@ void survpenal(int whichcase, int nfrail,    int  nvar,    double **hmat,
 	        }
 
 	    flag = LOGICAL(VECTOR_ELT(plist, 4));
-	    for (int i=0; i<nvar; i++) {
+	    for (i=0; i<nvar; i++) {
 		if (flag[i] ==1) {  /* See comments above on flag[0]*/
 		    u[i+nfrail] =0;
 		    hmat[i][i+nfrail] =1;
-		    for (int j=0; j<i; j++) hmat[i][j+nfrail] =0;
+		    for (j=0; j<i; j++) hmat[i][j+nfrail] =0;
 		    }
 	        }
 	    }
@@ -128,3 +128,4 @@ void survpenal(int whichcase, int nfrail,    int  nvar,    double **hmat,
 	}
 	
     }
+		

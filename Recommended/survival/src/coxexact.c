@@ -127,7 +127,7 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
 
     maxdeath =0;
     j=0;   /* start of the strata */
-    for (int i=0; i<nused;) {
+    for (i=0; i<nused;) {
       if (strata[i]==1) { /* first obs of a new strata */
           if (i>0) {
               /* If maxdeath <2 leave the strata alone at it's current value of 1 */
@@ -164,22 +164,22 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
     dmem0 = (double *) R_alloc(dmemtot, sizeof(double)); /*pointer to memory */
     dmem1 = (double **) R_alloc(nvar, sizeof(double*));
     dmem1[0] = dmem0 + dsize; /*points to the first derivative memory */
-    for (int i=1; i<nvar; i++) dmem1[i] = dmem1[i-1] + dsize;
+    for (i=1; i<nvar; i++) dmem1[i] = dmem1[i-1] + dsize;
     d1 = (double *) R_alloc(nvar, sizeof(double)); /*first deriv results */
     /*
     ** do the initial iteration step
     */
     newlk =0;
-    for (int i=0; i<nvar; i++) {
+    for (i=0; i<nvar; i++) {
         u[i] =0;
-        for (int j=0; j<nvar; j++)
+        for (j=0; j<nvar; j++)
             imat[i][j] =0 ;
         }
-    for (int i=0; i<nused; ) {
+    for (i=0; i<nused; ) {
         if (strata[i] >0) { /* first obs of a new strata */
             maxdeath= strata[i];
             dtemp = dmem0;
-            for (int j=0; j<dmemtot; j++) *dtemp++ =0.0;
+            for (j=0; j<dmemtot; j++) *dtemp++ =0.0;
             sstart =i;
             nrisk =0;
         }
@@ -188,11 +188,11 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
         ndeath =0;
         while (time[i] == dtime) {
             zbeta= offset[i];
-            for (int j=0; j<nvar; j++) zbeta += covar[j][i] * beta[j];
+            for (j=0; j<nvar; j++) zbeta += covar[j][i] * beta[j];
             score[i] = exp(zbeta);
             if (status[i]==1) {
                 newlk += zbeta;
-                for (int j=0; j<nvar; j++) u[j] += covar[j][i];
+                for (j=0; j<nvar; j++) u[j] += covar[j][i];
                 ndeath++;
             }
             nrisk++;
@@ -206,12 +206,12 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
             R_CheckUserInterrupt();
             newlk -= log(d0);
             dmem2 = dmem0 + (nvar+1)*dsize;  /*start for the second deriv memory */
-            for (int j=0; j<nvar; j++) { /* for each covariate */
+            for (j=0; j<nvar; j++) { /* for each covariate */
                 d1[j] = coxd1(ndeath, nrisk, score+sstart, dmem0, dmem1[j], 
                               covar[j]+sstart, maxdeath) / d0;
                 if (ndeath > 3) R_CheckUserInterrupt();
                 u[j] -= d1[j];
-                for (int k=0; k<= j; k++) {  /* second derivative*/
+                for (k=0; k<= j; k++) {  /* second derivative*/
                     temp = coxd2(ndeath, nrisk, score+sstart, dmem0, dmem1[j],
                                  dmem1[k], dmem2, covar[j] + sstart, 
                                  covar[k] + sstart, maxdeath);
@@ -228,22 +228,22 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
     /* 
     **   update the betas and compute the score test 
     */
-    for (int i=0; i<nvar; i++) /*use 'd1' as a temp to save u0, for the score test*/
+    for (i=0; i<nvar; i++) /*use 'd1' as a temp to save u0, for the score test*/
         d1[i] = u[i];
 
     loglik[3] = cholesky2(imat, nvar, toler);
     chsolve2(imat,nvar, u);        /* u replaced by  u *inverse(imat) */
 
     loglik[2] =0;                  /* score test stored here */
-    for (int i=0; i<nvar; i++)
+    for (i=0; i<nvar; i++)
         loglik[2] +=  u[i]*d1[i];
 
     if (maxiter==0) {
         iter =0;  /*number of iterations */
         loglik[4] = iter;
         chinv2(imat, nvar);
-        for (int i=1; i<nvar; i++)
-            for (int j=0; j<i; j++)  imat[i][j] = imat[j][i];
+        for (i=1; i<nvar; i++)
+            for (j=0; j<i; j++)  imat[i][j] = imat[j][i];
 
         /* assemble the return objects as a list */
         PROTECT(rlist= allocVector(VECSXP, 4));
@@ -268,23 +268,23 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
     **  Never, never complain about convergence on the first step.  That way,
     **  if someone has to they can force one iter at a time.
     */
-    for (int i=0; i<nvar; i++) {
+    for (i=0; i<nvar; i++) {
         oldbeta[i] = beta[i];
         beta[i] = beta[i] + u[i];
         }
     halving =0 ;             /* =1 when in the midst of "step halving" */
-    for (int iter=1; iter<=maxiter; iter++) {
+    for (iter=1; iter<=maxiter; iter++) {
         newlk =0;
-        for (int i=0; i<nvar; i++) {
+        for (i=0; i<nvar; i++) {
             u[i] =0;
             for (j=0; j<nvar; j++)
                     imat[i][j] =0;
             }
-        for (int i=0; i<nused; ) {
+        for (i=0; i<nused; ) {
             if (strata[i] >0) { /* first obs of a new strata */
                 maxdeath= strata[i];
                 dtemp = dmem0;
-                for (int j=0; j<dmemtot; j++) *dtemp++ =0.0;
+                for (j=0; j<dmemtot; j++) *dtemp++ =0.0;
                 sstart =i;
                 nrisk =0;
             }
@@ -293,11 +293,11 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
             ndeath =0;
             while (time[i] == dtime) {
                 zbeta= offset[i];
-                for (int j=0; j<nvar; j++) zbeta += covar[j][i] * beta[j];
+                for (j=0; j<nvar; j++) zbeta += covar[j][i] * beta[j];
                 score[i] = exp(zbeta);
                 if (status[i]==1) {
                     newlk += zbeta;
-                    for (int j=0; j<nvar; j++) u[j] += covar[j][i];
+                    for (j=0; j<nvar; j++) u[j] += covar[j][i];
                     ndeath++;
                 }
                 nrisk++;
@@ -311,12 +311,12 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
                 R_CheckUserInterrupt();
                 newlk -= log(d0);
                 dmem2 = dmem0 + (nvar+1)*dsize;  /*start for the second deriv memory */
-                for (int j=0; j<nvar; j++) { /* for each covariate */
+                for (j=0; j<nvar; j++) { /* for each covariate */
                     d1[j] = coxd1(ndeath, nrisk, score+sstart, dmem0, dmem1[j], 
                                   covar[j]+sstart, maxdeath) / d0;
                     if (ndeath > 3) R_CheckUserInterrupt();
                     u[j] -= d1[j];
-                    for (int k=0; k<= j; k++) {  /* second derivative*/
+                    for (k=0; k<= j; k++) {  /* second derivative*/
                         temp = coxd2(ndeath, nrisk, score+sstart, dmem0, dmem1[j],
                                      dmem1[k], dmem2, covar[j] + sstart, 
                                      covar[k] + sstart, maxdeath);
@@ -337,8 +337,8 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
             loglik[1] = newlk;
            loglik[4] = iter;
            chinv2(imat, nvar);
-           for (int i=1; i<nvar; i++)
-               for (int j=0; j<i; j++)  imat[i][j] = imat[j][i];
+           for (i=1; i<nvar; i++)
+               for (j=0; j<i; j++)  imat[i][j] = imat[j][i];
 
            /* assemble the return objects as a list */
            PROTECT(rlist= allocVector(VECSXP, 4));
@@ -363,7 +363,7 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
 
         if (newlk < loglik[1])   {    /*it is not converging ! */
                 halving =1;
-                for (int i=0; i<nvar; i++)
+                for (i=0; i<nvar; i++)
                     beta[i] = (oldbeta[i] + beta[i]) /2; /*half of old increment */
                 }
         else {
@@ -371,7 +371,7 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
                 loglik[1] = newlk;
                 chsolve2(imat,nvar,u);
 
-                for (int i=0; i<nvar; i++) {
+                for (i=0; i<nvar; i++) {
                     oldbeta[i] = beta[i];
                     beta[i] = beta[i] +  u[i];
                     }
@@ -386,8 +386,8 @@ SEXP coxexact(SEXP maxiter2,  SEXP y2,
     loglik[3] = 1000;  /* signal no convergence */
     loglik[4] = iter;
     chinv2(imat, nvar);
-    for (int i=1; i<nvar; i++)
-        for (int j=0; j<i; j++)  imat[i][j] = imat[j][i];
+    for (i=1; i<nvar; i++)
+        for (j=0; j<i; j++)  imat[i][j] = imat[j][i];
 
     /* assemble the return objects as a list */
     PROTECT(rlist= allocVector(VECSXP, 4));
