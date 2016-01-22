@@ -9,9 +9,9 @@ pNode branch(pNode tree, int obs);
 
 void bsplit(pNode me, int n1, int n2);
 
-void choose_surg(int n1, int n2, int *y, double *x, int *order,
-		 int ncat, double *agreement, double *split, int *csplit,
-		 double ltot, double rtot, double *adj);
+void choose_surg(int n1, int n2, int *y, double *x, int *order, int ncat,
+		double *agreement, double *split, int *csplit, double ltot, double rtot,
+		double *adj);
 
 void fix_cp(pNode me, double parent_cp);
 
@@ -37,16 +37,16 @@ int partition(int nodenum, pNode splitnode, double *sumrisk, int n1, int n2);
 int print_tree(pNode me, int maxdepth);
 
 SEXP rpart(SEXP ncat2, SEXP method2, SEXP opt2, SEXP parms2, SEXP ymat2,
-	   SEXP xmat2, SEXP xvals2, SEXP xgrp2, SEXP wt2, SEXP ny2, SEXP cost2);
+		SEXP xmat2, SEXP xvals2, SEXP xgrp2, SEXP wt2, SEXP ny2, SEXP cost2);
 
 void rpart_callback0(int *nr);
 void rpart_callback1(int n, double *y[], double *wt, double *z);
-void rpart_callback2(int n, int ncat, double *y[], double *wt,
-		     double *x, double *good);
+void rpart_callback2(int n, int ncat, double *y[], double *wt, double *x,
+		double *good);
 void rpcountup(pNode me, int *nnode, int *nsplit, int *ncat);
 
 void rpmatrix(pNode me, int *numcat, double **dsplit, int **isplit,
-	      int **csplit, double **dnode, int **inode, int id);
+		int **csplit, double **dnode, int **inode, int id);
 
 void rundown(pNode tree, int obs, double *cp, double *xpred, double *xtemp);
 
@@ -55,8 +55,8 @@ void rundown2(pNode tree, int obs, double *cp, double *xpred, int nresp);
 void surrogate(pNode me, int n1, int n2);
 
 SEXP xpred(SEXP ncat2, SEXP method2, SEXP opt2, SEXP parms2, SEXP xvals2,
-	   SEXP xgrp2, SEXP ymat2, SEXP xmat2, SEXP wt2, SEXP ny2,
-	   SEXP cost2, SEXP all2, SEXP cp2, SEXP toprisk2, SEXP nresp2);
+		SEXP xgrp2, SEXP ymat2, SEXP xmat2, SEXP wt2, SEXP ny2, SEXP cost2,
+		SEXP all2, SEXP cp2, SEXP toprisk2, SEXP nresp2);
 
 void xval(int n_xval, CpTable cptable_head, int *x_grp, int maxcat,
-	  char **error, double *parms, int *savesort);
+		char **error, double *parms, int *savesort);

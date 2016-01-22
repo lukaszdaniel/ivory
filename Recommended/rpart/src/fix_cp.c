@@ -7,14 +7,12 @@
 #include "node.h"
 #include "rpartproto.h"
 
-void
-fix_cp(pNode me, double parent_cp)
-{
-    if (me->complexity > parent_cp)
-	me->complexity = parent_cp;
+void fix_cp(pNode me, double parent_cp) {
+	if (me->complexity > parent_cp)
+		me->complexity = parent_cp;
 
-    if (me->leftson) {
-	fix_cp(me->leftson, me->complexity);
-	fix_cp(me->rightson, me->complexity);
-    }
+	if (me->leftson) {
+		fix_cp(me->leftson, me->complexity);
+		fix_cp(me->rightson, me->complexity);
+	}
 }

@@ -24,7 +24,6 @@
 #ifndef SWAP_BYTES_H
 #define SWAP_BYTES_H
 
-
 #define swap_bytes_16(from, to)						\
 do {									\
     unsigned short __from16 = (from);					\

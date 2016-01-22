@@ -22,7 +22,7 @@ cff1dc6b069d8e9e72f79ff7b5b3d4f4 *po/R-class.pot
 132b8aade86ce1c1a9ee83d7806e6ec3 *po/R-ko.po
 bb58b22589d23aa5601fda9610bba5f9 *po/R-pl.po
 e4553dea0e4862d80ac13fa87b70465c *src/localization.h
-fbb78de96939a522b12bc95a70c7c59e *src/class.c
+decb43de052e0f9dc1259d853f737435 *src/class.c
 e8e077536af8608b6d5d366410bae87a *man/lvqtest.Rd
 69d25fc468f9fd914106f8f1fb49c101 *man/condense.Rd
 fdfb3a7e3ed8116278a8f4fd067a8045 *man/lvq2.Rd

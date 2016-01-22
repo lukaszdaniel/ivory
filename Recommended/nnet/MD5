@@ -20,7 +20,7 @@ c26b7160df13618c49268bcca597e562 *po/nnet.pot
 f8a01c4a4507e028bfa2c276209b7e74 *po/R-nnet.pot
 596cf34e8782d9cf25f4ed819373a094 *po/R-ko.po
 6cbd7a799ec96e6117925121fd3ba8f6 *po/R-pl.po
-f5521e9560bbf0245437ea754526aafe *src/nnet.c
+b2d10ef95181078dd6de5465ea97b805 *src/nnet.c
 eae59db10cf87860fa447235ed25f945 *src/localization.h
 a3b762d16d720130f354292ec6e5d3ad *man/predict.nnet.Rd
 658e8411d785b785db614690f26710b0 *man/class.ind.Rd

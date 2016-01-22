@@ -63,8 +63,8 @@ f5e96e30c746b6c4e1dc57d13218b9e7 *demo/panel.R
 9ec1d932fca442660b60818b0be9c0f3 *demo/labels.R
 69dfca4fdce9bfeba0732fa69605c5b0 *src/localization.h
 e92972db59c6aa30de492fc63d8a332f *src/init.c
-f52b692774cf58f83a86a2269b8f699d *src/threeDplot.h
-c1b95f438426c270e27d10fb7ad1824f *src/threeDplot.c
+80e8b0a897f8133d230cc79351d8eed4 *src/threeDplot.h
+23844565a12786a4d4f49e79ff673ffd *src/threeDplot.c
 a16cdf0220dff68378f1c5196f0f8f19 *man/panel.levelplot.Rd
 5a8fe5da32d284aa737ab5bb68672b46 *man/barchart.table.Rd
 32153927dac1bf180c06f86ecfe3f87e *man/panel.functions.Rd

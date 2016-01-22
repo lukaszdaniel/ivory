@@ -165,8 +165,8 @@ fa23127be8b07d13ec7b55c56963256a *po/pl.po
 821fc3e8e6376d620bc522146e6e4a64 *po/R-ko.po
 156797766d5176471ed9c747be9fc2d5 *po/R-pl.po
 8fbf3a0f6c57bb6815ec2d4fbe3faed9 *src/localization.h
-71793e0a75407f348c83f843f572bf0e *src/lqs.c
-79d19181a8a398c386a6c69a6afa79ef *src/MASS.c
+d4eabfde9b78dd6a0d6409f2877681b1 *src/lqs.c
+770a5f58e8087e36cbe3bd6eedca5a16 *src/MASS.c
 c0883959355d48f6685f2cd1d9e42ce2 *man/polr.Rd
 989cb309d961aca2b8d9d54df183223d *man/dropterm.Rd
 622b42b7de01cd0d290f57a0b9086402 *man/shoes.Rd

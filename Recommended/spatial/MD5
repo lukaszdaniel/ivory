@@ -45,10 +45,10 @@ e7acfa017083acfc431a7836ffe8bb2f *po/pl.po
 41ec1535a8517bf30cc786960a6d1a2b *po/R-pl.po
 59b89a674fce735692e6571c9d7c52ab *po/R-spatial.pot
 6986b81a3ed0294c61f082b383966239 *src/localization.h
-29113468fe54201d0366c6d81de45a3c *src/krc.c
+68063e3f850c65b7add411eff8295837 *src/krc.c
 71f5e23c87ed3f2e46bb0ee1ba3f7760 *src/init.c
-5efaf84fe700ce816b3ea1ec21cae4b5 *src/pps.c
-df5b3ef820841dc1b4fa04fd07291e84 *src/spatial.h
+593f80a6b78573c110eaa888269494c3 *src/pps.c
+bbde5bca39eb096c4865b68d096601d0 *src/spatial.h
 621d0b812f4dd5bee67513233c8c6e8d *man/correlogram.Rd
 59bbd5b3b8aee9dce9b0b88987473f96 *man/trls.influence.Rd
 496f585d6c3a390be22c6ef151302a42 *man/Strauss.Rd

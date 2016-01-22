@@ -30,46 +30,44 @@
 #include "node.h"
 #include "rpartproto.h"
 
-void
-make_cp_list(pNode me, double parent, CpTable cptable_head)
-{
-    double me_cp;
-    CpTable cplist, cptemp = NULL;
+void make_cp_list(pNode me, double parent, CpTable cptable_head) {
+	double me_cp;
+	CpTable cplist, cptemp = NULL;
 
-    if (me->complexity > parent)
-	me->complexity = parent;
-    me_cp = me->complexity;
-    if (me_cp < rp.alpha)
-	me_cp = rp.alpha;       /* table should go no lower */
-    if (me->leftson) {
-	make_cp_list(me->leftson, me_cp, cptable_head);
-	make_cp_list(me->rightson, me_cp, cptable_head);
-    }
-    if (me_cp < parent) {       /* if not, then it can't be unique */
-	for (cplist = cptable_head; cplist; cplist = cplist->forward) {
-	   /* am I tied? */
-	    if (me_cp == cplist->cp) /* exact ties */
-		return;         
-
-	    if (me_cp > cplist->cp)
-		break;
-	    cptemp = cplist;
+	if (me->complexity > parent)
+		me->complexity = parent;
+	me_cp = me->complexity;
+	if (me_cp < rp.alpha)
+		me_cp = rp.alpha; /* table should go no lower */
+	if (me->leftson) {
+		make_cp_list(me->leftson, me_cp, cptable_head);
+		make_cp_list(me->rightson, me_cp, cptable_head);
 	}
+	if (me_cp < parent) { /* if not, then it can't be unique */
+		for (cplist = cptable_head; cplist; cplist = cplist->forward) {
+			/* am I tied? */
+			if (me_cp == cplist->cp) /* exact ties */
+				return;
 
-       /* insert new stuff after cptemp */
-       /* was CALLOC and not cleaned up */
-	cplist = (CpTable) ALLOC(1, sizeof(cpTable));
-	cplist->cp = me_cp;
-	cplist->risk = cplist->xrisk = cplist->xstd = 0;
-	cplist->nsplit = 0;
-	cplist->back = cptemp;
-	cplist->forward = cptemp->forward;
-	if (cptemp->forward)
-	    (cptemp->forward)->back = cplist;
-	else
-	    cptable_tail = cplist;
-	cptemp->forward = cplist;
-	rp.num_unique_cp++;
-	return;
-    }
+			if (me_cp > cplist->cp)
+				break;
+			cptemp = cplist;
+		}
+
+		/* insert new stuff after cptemp */
+		/* was CALLOC and not cleaned up */
+		cplist = (CpTable) ALLOC(1, sizeof(cpTable));
+		cplist->cp = me_cp;
+		cplist->risk = cplist->xrisk = cplist->xstd = 0;
+		cplist->nsplit = 0;
+		cplist->back = cptemp;
+		cplist->forward = cptemp->forward;
+		if (cptemp->forward)
+			(cptemp->forward)->back = cplist;
+		else
+			cptable_tail = cplist;
+		cptemp->forward = cplist;
+		rp.num_unique_cp++;
+		return;
+	}
 }
