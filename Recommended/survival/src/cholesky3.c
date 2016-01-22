@@ -30,7 +30,7 @@
 
 int cholesky3(double **matrix, int n, int m, double *diag, double toler) {
 	double temp;
-	int i, j, k;
+	int j;
 	double eps, pivot;
 	int rank;
 	int n2;

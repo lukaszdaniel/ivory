@@ -22,7 +22,6 @@
 
 int cholesky2(double **matrix, int n, double toler) {
 	double temp;
-	int i, j, k;
 	double eps, pivot;
 	int rank;
 	int nonneg;

@@ -18,7 +18,6 @@
 #include "survproto.h"
 
 void chinv3(double **matrix, int n, int m, double *fdiag) {
-	int i, j, k;
 	int n2, ii;
 
 	n2 = n - m; /* number of full covariates */
@@ -58,7 +57,6 @@ void chinv3(double **matrix, int n, int m, double *fdiag) {
 void chprod3(matrix, n, m, fdiag)
 	int n, m;double fdiag[];double **matrix; {
 	double temp;
-	int i, j, k;
 	int n2, ii;
 
 	n2 = n - m; /* number of full covariates */

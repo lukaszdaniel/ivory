@@ -15,7 +15,6 @@
 #include "survproto.h"
 
 void chsolve2(double **matrix, int n, double *y) {
-	register int i, j;
 	register double temp;
 
 	/*

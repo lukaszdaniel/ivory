@@ -20,7 +20,7 @@
 #include "survproto.h"
 
 void chsolve3(double **matrix, int n, int m, double *diag, double *y) {
-	int i, j, n2;
+	int n2;
 	double temp;
 
 	n2 = n - m;

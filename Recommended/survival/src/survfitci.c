@@ -44,7 +44,6 @@ SEXP survfitci(SEXP ftime2, SEXP sort12, SEXP sort22, SEXP ntime2, SEXP status2,
 	int *cstate; /* current state for each subject */
 	double *wt; /* weight for each observation */
 	int *id; /* for each obs, which subject is it */
-	int sefit;
 
 	/* returned objects */
 	SEXP rlist; /* the returned list and variable names of same */
@@ -69,7 +68,7 @@ SEXP survfitci(SEXP ftime2, SEXP sort12, SEXP sort22, SEXP ntime2, SEXP status2,
 	PROTECT(p2 = duplicate(p2)); /*copy of initial prevalence */
 	p = REAL(p2);
 	nstate = LENGTH(p2); /* number of states */
-	sefit = asInteger(sefit2);
+	const int sefit = asInteger(sefit2);
 
 	/* allocate space for the output objects */
 	PROTECT(pmat2 = allocMatrix(REALSXP, nstate, ntime));
@@ -173,30 +172,30 @@ SEXP survfitci(SEXP ftime2, SEXP sort12, SEXP sort22, SEXP ntime2, SEXP status2,
 			}
 			if (sefit > 0) {
 				/* Update U, part 1  U = U %*% H -- matrix multiplication */
-				for (j = 0; j < nperson; j++) { /* row of U */
-					for (k = 0; k < nstate; k++) { /* column of U */
+				for (int j = 0; j < nperson; j++) { /* row of U */
+					for (int k = 0; k < nstate; k++) { /* column of U */
 						temp2[k] = 0;
-						for (kk = 0; kk < nstate; kk++)
+						for (int kk = 0; kk < nstate; kk++)
 							temp2[k] += umat[j][kk] * hmat[kk][k];
 					}
-					for (k = 0; k < nstate; k++)
+					for (int k = 0; k < nstate; k++)
 						umat[j][k] = temp2[k];
 				}
 
 				/* Update U, part 2, subtract from everyone at risk
 				 For this I need H2 */
-				for (j = 0; j < nstate; j++)
+				for (int j = 0; j < nstate; j++)
 					hmat[j][j] -= 1;
-				for (j = 0; j < nperson; j++) {
+				for (int j = 0; j < nperson; j++) {
 					if (atrisk[j] == 1) {
 						kk = cstate[j];
-						for (k = 0; k < nstate; k++)
+						for (int k = 0; k < nstate; k++)
 							umat[j][k] -= (p[kk] / ws[kk]) * hmat[kk][k];
 					}
 				}
 
 				/* Update U, part 3.  An addition for each event */
-				for (j = i; j < n; j++) {
+				for (int j = i; j < n; j++) {
 					k = sort2[j];
 					if (etime[k] == ctime) {
 						if (status[k] > 0) {
@@ -211,29 +210,29 @@ SEXP survfitci(SEXP ftime2, SEXP sort12, SEXP sort22, SEXP ntime2, SEXP status2,
 				}
 			}
 			/* Finally, update chaz and p.  */
-			for (j = 0; j < nstate; j++) {
+			for (int j = 0; j < nstate; j++) {
 				if (sefit == 0)
 					hmat[j][j] -= 1; /* conversion to H2*/
-				for (k = 0; k < nstate; k++)
+				for (int k = 0; k < nstate; k++)
 					chaz[j][k] += hmat[j][k];
 
 				hmat[j][j] += 1; /* change from H2 to H */
 				temp2[j] = 0;
-				for (k = 0; k < nstate; k++)
+				for (int k = 0; k < nstate; k++)
 					temp2[j] += p[k] * hmat[k][j];
 			}
-			for (j = 0; j < nstate; j++)
+			for (int j = 0; j < nstate; j++)
 				p[j] = temp2[j];
 		}
 		/* store into the matrices that will be passed back */
-		for (j = 0; j < nstate; j++) {
+		for (int j = 0; j < nstate; j++) {
 			*pmat++ = p[j];
 			*nrisk++ = ns[j];
-			for (k = 0; k < nstate; k++)
+			for (int k = 0; k < nstate; k++)
 				*cumhaz++ = chaz[k][j];
 			temp = 0;
 			if (sefit > 0) {
-				for (k = 0; k < nperson; k++)
+				for (int k = 0; k < nperson; k++)
 					temp += wtp[k] * umat[k][j] * umat[k][j];
 				*vmat++ = temp;
 			}
