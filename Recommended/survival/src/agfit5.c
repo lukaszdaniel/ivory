@@ -141,7 +141,7 @@ void agfit5a(Sint *nusedx, Sint *nvarx, double *yy, double *covar2,
 	sort1 = event + nused;
 	sort2 = sort1 + nused;
 
-	for (i = 0; i < nused; i++) {
+	for (int i = 0; i < nused; i++) {
 		weights[i] = weights2[i];
 		offset[i] = offset2[i];
 		event[i] = yy[nused + nused + i];
@@ -173,7 +173,7 @@ void agfit5a(Sint *nusedx, Sint *nvarx, double *yy, double *covar2,
 
 	if (nf > 0) {
 		frail = Calloc(nused, int);
-		for (i = 0; i < nused; i++)
+		for (int i = 0; i < nused; i++)
 			frail[i] = frail2[i];
 	}
 
@@ -181,13 +181,13 @@ void agfit5a(Sint *nusedx, Sint *nvarx, double *yy, double *covar2,
 	 ** Subtract the mean from each covar, as this makes the regression
 	 **  much more stable
 	 */
-	for (i = 0; i < nvar; i++) {
+	for (int i = 0; i < nvar; i++) {
 		temp = 0;
-		for (person = 0; person < nused; person++)
+		for (int person = 0; person < nused; person++)
 			temp += covar[i][person];
 		temp /= nused;
 		means[i] = temp;
-		for (person = 0; person < nused; person++)
+		for (int person = 0; person < nused; person++)
 			covar[i][person] -= temp;
 	}
 
@@ -199,7 +199,7 @@ void agfit5a(Sint *nusedx, Sint *nvarx, double *yy, double *covar2,
 
 	for (person = 0; person < nused; person++) {
 		zbeta = 0; /* form the term beta*z   (vector mult) */
-		for (i = 0; i < nvar; i++)
+		for (int i = 0; i < nvar; i++)
 			zbeta += beta[i] * covar[i][person];
 		score[person] = coxsafe(zbeta + offset[person]); /* save this away */
 	}
@@ -223,7 +223,7 @@ void agfit5a(Sint *nusedx, Sint *nvarx, double *yy, double *covar2,
 	istrat = 0;
 	indx2 = 0;
 	denom = 0;
-	for (person = 0; person < nused;) {
+	for (int person = 0; person < nused;) {
 		p = sort1[person];
 		if (event[p] == 0) {
 			risk = exp(score[p]) * weights[p];
@@ -338,29 +338,29 @@ void agfit5b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
 		jmat = 0;
 	}
 
-	for (i = 0; i < nf; i++)
+	for (int i = 0; i < nf; i++)
 		oldbeta[i] = fbeta[i];
-	for (i = 0; i < nvar; i++)
+	for (int i = 0; i < nvar; i++)
 		oldbeta[i + nf] = beta[i];
 
 	halving = 0; /* =1 when in the midst of "step halving" */
-	for (iter = 0; iter <= *maxiter; iter++) {
+	for (int iter = 0; iter <= *maxiter; iter++) {
 		newlk = 0;
-		for (i = 0; i < nf; i++)
+		for (int i = 0; i < nf; i++)
 			fdiag[i] = 0;
-		for (i = 0; i < nvar2; i++) {
+		for (int i = 0; i < nvar2; i++) {
 			u[i] = 0;
-			for (j = 0; j < nvar; j++)
+			for (int j = 0; j < nvar; j++)
 				jmat[j][i] = 0;
 		}
 
-		for (person = 0; person < nused; person++) {
+		for (int person = 0; person < nused; person++) {
 			if (nf > 0) {
 				fgrp = frail[person] - 1;
 				zbeta = offset[person] + fbeta[fgrp];
 			} else
 				zbeta = offset[person];
-			for (i = 0; i < nvar; i++)
+			for (int i = 0; i < nvar; i++)
 				zbeta += beta[i] * covar[i][person];
 			zbeta = coxsafe(zbeta);
 			score[person] = zbeta;
@@ -391,9 +391,9 @@ void agfit5b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
 				 **   true final solution had max values of 4.47.
 				 */
 				halving=1;
-				for (i=0; i<nvar; i++)
+				for (int i=0; i<nvar; i++)
 				beta[i] = (oldbeta[i+nf] + beta[i]) /2;
-				for (i=0; i<nf; i++)
+				for (int i=0; i<nf; i++)
 				fbeta[i] = (oldbeta[i] + fbeta[i])/2;
 				person = -1; /* force the loop to start over */
 			}
@@ -403,14 +403,14 @@ void agfit5b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
 		istrat = 0;
 		indx2 = 0;
 		denom = 0;
-		for (i = 0; i < nvar2; i++) {
+		for (int i = 0; i < nvar2; i++) {
 			a[i] = 0;
-			for (j = 0; j < nvar; j++) {
+			for (int j = 0; j < nvar; j++) {
 				cmat[j][i] = 0;
 			}
 		}
 
-		for (person = 0; person < nused;) {
+		for (int person = 0; person < nused;) {
 			p = sort1[person];
 			if (nf > 0)
 				fgrp = frail[p] - 1;
@@ -421,11 +421,11 @@ void agfit5b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
 				denom += risk;
 				if (fgrp >= 0)
 					a[fgrp] += risk;
-				for (i = 0; i < nvar; i++) {
+				for (int i = 0; i < nvar; i++) {
 					a[i + nf] += risk * covar[i][p];
 					if (fgrp >= 0)
 						cmat[i][fgrp] += risk * covar[i][p];
-					for (j = 0; j <= i; j++)
+					for (int j = 0; j <= i; j++)
 						cmat[i][j + nf] += risk * covar[i][p] * covar[j][p];
 				}
 				person++;
@@ -446,11 +446,11 @@ void agfit5b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
 						fgrp = -1;
 					if (fgrp >= 0)
 						a[fgrp] -= risk;
-					for (i = 0; i < nvar; i++) {
+					for (int i = 0; i < nvar; i++) {
 						a[i + nf] -= risk * covar[i][p];
 						if (fgrp >= 0)
 							cmat[i][fgrp] -= risk * covar[i][p];
-						for (j = 0; j <= i; j++)
+						for (int j = 0; j <= i; j++)
 							cmat[i][j + nf] -= risk * covar[i][p] * covar[j][p];
 					}
 				}
@@ -459,9 +459,9 @@ void agfit5b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
 				 */
 				efron_wt = 0;
 				meanwt = 0;
-				for (i = 0; i < nvar2; i++) {
+				for (int i = 0; i < nvar2; i++) {
 					a2[i] = 0;
-					for (j = 0; j < nvar; j++) {
+					for (int j = 0; j < nvar; j++) {
 						cmat2[j][i] = 0;
 					}
 				}
@@ -478,11 +478,11 @@ void agfit5b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
 							a[fgrp] += risk;
 					} else
 						fgrp = -1;
-					for (i = 0; i < nvar; i++) {
+					for (int i = 0; i < nvar; i++) {
 						a[i + nf] += risk * covar[i][p];
 						if (fgrp >= 0)
 							cmat[i][fgrp] += risk * covar[i][p];
-						for (j = 0; j <= i; j++)
+						for (int j = 0; j <= i; j++)
 							cmat[i][j + nf] += risk * covar[i][p] * covar[j][p];
 					}
 					if (event[p] == 1) {
@@ -493,12 +493,12 @@ void agfit5b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
 							u[fgrp] += weights[p];
 							a2[fgrp] += risk;
 						}
-						for (i = 0; i < nvar; i++) {
+						for (int i = 0; i < nvar; i++) {
 							a2[i + nf] += risk * covar[i][p];
 							u[i + nf] += weights[p] * covar[i][p];
 							if (fgrp >= 0)
 								cmat2[i][fgrp] += risk * covar[i][p];
-							for (j = 0; j <= i; j++)
+							for (int j = 0; j <= i; j++)
 								cmat2[i][j + nf] += risk * covar[i][p]
 										* covar[j][p];
 						}
@@ -516,7 +516,7 @@ void agfit5b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
 						temp = itemp * method / deaths;
 						d2 = denom - temp * efron_wt;
 						newlk += weights[p] * score[p] - meanwt * log(d2);
-						for (i = 0; i < nvar2; i++) { /* by row of full matrix */
+						for (int i = 0; i < nvar2; i++) { /* by row of full matrix */
 							temp2 = (a[i] - temp * a2[i]) / d2;
 							tmean[i] = temp2;
 							u[i] -= meanwt * temp2;
@@ -524,7 +524,7 @@ void agfit5b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
 								fdiag[i] += temp2 * (1 - temp2);
 							else {
 								ii = i - nf; /*actual row in c/j storage space*/
-								for (j = 0; j <= i; j++)
+								for (int j = 0; j <= i; j++)
 									jmat[ii][j] += meanwt
 											* ((cmat[ii][j]
 													- temp * cmat2[ii][j]) / d2
@@ -539,9 +539,9 @@ void agfit5b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
 				istrat++;
 				denom = 0;
 				indx2 = person;
-				for (i = 0; i < nvar2; i++) {
+				for (int i = 0; i < nvar2; i++) {
 					a[i] = 0;
-					for (j = 0; j < nvar; j++) {
+					for (int j = 0; j < nvar; j++) {
 						cmat[j][i] = 0;
 					}
 				}
@@ -555,14 +555,14 @@ void agfit5b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
 			/* there are sparse terms */
 			cox_callback(1, fbeta, upen, ipen, &logpen, zflag, nf, fexpr1, rho);
 			if (zflag[0] == 1) { /* force terms to zero */
-				for (i = 0; i < nf; i++) {
+				for (int i = 0; i < nf; i++) {
 					u[i] = 0;
 					fdiag[i] = 1;
-					for (j = 0; j < nvar; j++)
+					for (int j = 0; j < nvar; j++)
 						jmat[j][i] = 0;
 				}
 			} else {
-				for (i = 0; i < nf; i++) {
+				for (int i = 0; i < nf; i++) {
 					u[i] += upen[i];
 					fdiag[i] += ipen[i];
 				}
@@ -576,22 +576,22 @@ void agfit5b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
 					rho);
 			newlk += logpen;
 			if (pdiag == 0) {
-				for (i = 0; i < nvar; i++) {
+				for (int i = 0; i < nvar; i++) {
 					u[i + nf] += upen[i];
 					jmat[i][i + nf] += ipen[i];
 				}
 			} else {
 				k = 0;
-				for (i = 0; i < nvar; i++) {
+				for (int i = 0; i < nvar; i++) {
 					u[i + nf] += upen[i];
-					for (j = nf; j < nvar2; j++)
+					for (int j = nf; j < nvar2; j++)
 						jmat[i][j] += ipen[k++];
 				}
 			}
-			for (i = 0; i < nvar; i++) {
+			for (int i = 0; i < nvar; i++) {
 				if (zflag[i] == 1) {
 					u[i + nf] = 0;
-					for (j = 0; j < i; j++)
+					for (int j = 0; j < i; j++)
 						jmat[i][j + nf] = 0;
 					jmat[i + nf][i] = 1;
 				}
@@ -609,11 +609,11 @@ void agfit5b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
 					imat[i][j] = jmat[i][j];
 			}
 			chinv3(jmat, nvar2, nf, fdiag);
-			for (i = nf; i < nvar2; i++) { /*nicer output for S user */
+			for (int i = nf; i < nvar2; i++) { /*nicer output for S user */
 				fdiag[i] = jmat[i - nf][i];
 				jmat[i - nf][i] = 1;
 				imat[i - nf][i] = 1;
-				for (j = i + 1; j < nvar2; j++) {
+				for (int j = i + 1; j < nvar2; j++) {
 					jmat[i - nf][j] = 0;
 					imat[i - nf][j] = 0;
 				}
@@ -628,9 +628,9 @@ void agfit5b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
 
 		if (iter > 0 && newlk < *loglik) { /*it is not converging ! */
 			halving = 1;
-			for (i = 0; i < nvar; i++)
+			for (int i = 0; i < nvar; i++)
 				beta[i] = (oldbeta[i + nf] + beta[i]) / 2;
-			for (i = 0; i < nf; i++)
+			for (int i = 0; i < nf; i++)
 				fbeta[i] = (oldbeta[i] + fbeta[i]) / 2;
 		} else {
 			halving = 0;
@@ -638,11 +638,11 @@ void agfit5b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
 			chsolve3(jmat, nvar2, nf, fdiag, u);
 
 			j = 0;
-			for (i = 0; i < nvar; i++) {
+			for (int i = 0; i < nvar; i++) {
 				oldbeta[i + nf] = beta[i];
 				beta[i] += u[i + nf];
 			}
-			for (i = 0; i < nf; i++) {
+			for (int i = 0; i < nf; i++) {
 				oldbeta[i] = fbeta[i];
 				fbeta[i] += u[i];
 			}
@@ -650,16 +650,16 @@ void agfit5b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
 	} /* return for another iteration */
 
 	*loglik = newlk;
-	for (i = 0; i < nvar; i++)
-		for (j = 0; j < nvar2; j++) {
+	for (int i = 0; i < nvar; i++)
+		for (int j = 0; j < nvar2; j++) {
 			imat[i][j] = jmat[i][j];
 		}
 	chinv3(jmat, nvar2, nf, fdiag);
-	for (i = nf; i < nvar2; i++) { /*nicer output for S user */
+	for (int i = nf; i < nvar2; i++) { /*nicer output for S user */
 		fdiag[i] = jmat[i - nf][i];
 		jmat[i - nf][i] = 1;
 		imat[i - nf][i] = 1;
-		for (j = i + 1; j < nvar2; j++) {
+		for (int j = i + 1; j < nvar2; j++) {
 			jmat[i - nf][j] = 0;
 			imat[i - nf][j] = 0;
 		}

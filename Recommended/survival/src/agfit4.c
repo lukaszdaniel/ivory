@@ -126,28 +126,28 @@ SEXP agfit4(SEXP surv2, SEXP covar2, SEXP strata2, SEXP weights2, SEXP offset2,
 	 **  computation much more stable
 	 */
 	temp2 = 0;
-	for (i = 0; i < nused; i++)
+	for (int i = 0; i < nused; i++)
 		temp2 += weights[i]; /* sum of weights */
 
-	for (i = 0; i < nvar; i++) {
+	for (int i = 0; i < nvar; i++) {
 		maxbeta[i] = 0; /* temporary, save the max abs covariate value */
 		temp = 0;
-		for (person = 0; person < nused; person++)
+		for (int person = 0; person < nused; person++)
 			temp += weights[i] * covar[i][person];
 		temp /= temp2;
 		means[i] = temp;
-		for (person = 0; person < nused; person++)
+		for (int person = 0; person < nused; person++)
 			covar[i][person] -= temp;
 		if (doscale == 1) { /* also scale the regression */
 			temp = 0;
-			for (person = 0; person < nused; person++)
+			for (int person = 0; person < nused; person++)
 				temp += weights[person] * fabs(covar[i][person]);
 			if (temp > 0)
 				temp = temp2 / temp;
 			else
 				temp = 1.0; /* rare case of a constant covariate */
 			scale[i] = temp;
-			for (person = 0; person < nused; person++) {
+			for (int person = 0; person < nused; person++) {
 				covar[i][person] *= temp;
 				if (fabs(covar[i][person]) > maxbeta[i])
 					maxbeta[i] = fabs(covar[i][person]);
@@ -155,7 +155,7 @@ SEXP agfit4(SEXP surv2, SEXP covar2, SEXP strata2, SEXP weights2, SEXP offset2,
 		} else {
 			/* scaling is only turned off during debugging
 			 still, cover the case */
-			for (person = 0; person < nused; person++) {
+			for (int person = 0; person < nused; person++) {
 				if (fabs(covar[i][person]) > maxbeta[i])
 					maxbeta[i] = fabs(covar[i][person]);
 			}
@@ -163,10 +163,10 @@ SEXP agfit4(SEXP surv2, SEXP covar2, SEXP strata2, SEXP weights2, SEXP offset2,
 	}
 
 	if (doscale == 1) {
-		for (i = 0; i < nvar; i++)
+		for (int i = 0; i < nvar; i++)
 			beta[i] /= scale[i]; /* rescale initial betas */
 	} else {
-		for (i = 0; i < nvar; i++)
+		for (int i = 0; i < nvar; i++)
 			scale[i] = 1.0;
 	}
 
@@ -182,26 +182,26 @@ SEXP agfit4(SEXP surv2, SEXP covar2, SEXP strata2, SEXP weights2, SEXP offset2,
 	 **  indicate "no risk", meaning that x*beta values of 50-100 can occur
 	 **  in "ok" data sets.  Compromise.
 	 */
-	for (i = 0; i < nvar; i++)
+	for (int i = 0; i < nvar; i++)
 		maxbeta[i] = 200 / maxbeta[i];
 
 	ndeath = 0;
-	for (i = 0; i < nused; i++)
+	for (int i = 0; i < nused; i++)
 		ndeath += event[i];
 
 	/* First iteration, which has different ending criteria */
-	for (i = 0; i < nvar; i++) {
+	for (int i = 0; i < nvar; i++) {
 		u[i] = 0;
 		a[i] = 0;
-		for (j = 0; j < nvar; j++) {
+		for (int j = 0; j < nvar; j++) {
 			imat[i][j] = 0;
 			cmat[i][j] = 0;
 		}
 	}
 
-	for (person = 0; person < nused; person++) {
+	for (int person = 0; person < nused; person++) {
 		zbeta = 0; /* form the term beta*z   (vector mult) */
-		for (i = 0; i < nvar; i++)
+		for (int i = 0; i < nvar; i++)
 			zbeta += beta[i] * covar[i][person];
 		eta[person] = zbeta + offset[person];
 	}
@@ -227,16 +227,16 @@ SEXP agfit4(SEXP surv2, SEXP covar2, SEXP strata2, SEXP weights2, SEXP offset2,
 	meaneta = 0;
 	nrisk = 0;
 	newlk = 0;
-	for (person = 0; person < nused;) {
+	for (int person = 0; person < nused;) {
 		p = sort1[person];
 		if (event[p] == 0) {
 			nrisk++;
 			meaneta += eta[p];
 			risk = exp(eta[p]) * weights[p];
 			denom += risk;
-			for (i = 0; i < nvar; i++) {
+			for (int i = 0; i < nvar; i++) {
 				a[i] += risk * covar[i][p];
-				for (j = 0; j <= i; j++)
+				for (int j = 0; j <= i; j++)
 					cmat[i][j] += risk * covar[i][p] * covar[j][p];
 			}
 			person++;
@@ -254,9 +254,9 @@ SEXP agfit4(SEXP surv2, SEXP covar2, SEXP strata2, SEXP weights2, SEXP offset2,
 				meaneta -= eta[p];
 				risk = exp(eta[p]) * weights[p];
 				denom -= risk;
-				for (i = 0; i < nvar; i++) {
+				for (int i = 0; i < nvar; i++) {
 					a[i] -= risk * covar[i][p];
-					for (j = 0; j <= i; j++)
+					for (int j = 0; j <= i; j++)
 						cmat[i][j] -= risk * covar[i][p] * covar[j][p];
 				}
 			}
@@ -268,9 +268,9 @@ SEXP agfit4(SEXP surv2, SEXP covar2, SEXP strata2, SEXP weights2, SEXP offset2,
 			 */
 			efron_wt = 0;
 			meanwt = 0;
-			for (i = 0; i < nvar; i++) {
+			for (int i = 0; i < nvar; i++) {
 				a2[i] = 0;
-				for (j = 0; j < nvar; j++) {
+				for (int j = 0; j < nvar; j++) {
 					cmat2[i][j] = 0;
 				}
 			}
@@ -284,18 +284,18 @@ SEXP agfit4(SEXP surv2, SEXP covar2, SEXP strata2, SEXP weights2, SEXP offset2,
 				nrisk++;
 				meaneta += eta[p];
 
-				for (i = 0; i < nvar; i++) {
+				for (int i = 0; i < nvar; i++) {
 					a[i] += risk * covar[i][p];
-					for (j = 0; j <= i; j++)
+					for (int j = 0; j <= i; j++)
 						cmat[i][j] += risk * covar[i][p] * covar[j][p];
 				}
 				if (event[p] == 1) {
 					deaths += event[p];
 					efron_wt += risk * event[p];
 					meanwt += weights[p];
-					for (i = 0; i < nvar; i++) {
+					for (int i = 0; i < nvar; i++) {
 						a2[i] += risk * covar[i][p];
-						for (j = 0; j <= i; j++)
+						for (int j = 0; j <= i; j++)
 							cmat2[i][j] += risk * covar[i][p] * covar[j][p];
 					}
 				}
@@ -311,14 +311,14 @@ SEXP agfit4(SEXP surv2, SEXP covar2, SEXP strata2, SEXP weights2, SEXP offset2,
 			 */
 			if (fabs(meaneta) > (nrisk * 110)) {
 				meaneta = meaneta / nrisk;
-				for (i = 0; i < nused; i++)
+				for (int i = 0; i < nused; i++)
 					eta[i] -= meaneta;
 				temp = exp(-meaneta);
 				denom *= temp;
-				for (i = 0; i < nvar; i++) {
+				for (int i = 0; i < nvar; i++) {
 					a[i] *= temp;
 					a2[i] *= temp;
-					for (j = 0; j < nvar; j++) {
+					for (int j = 0; j < nvar; j++) {
 						cmat[i][j] *= temp;
 						cmat2[i][j] *= temp;
 					}
@@ -339,10 +339,10 @@ SEXP agfit4(SEXP surv2, SEXP covar2, SEXP strata2, SEXP weights2, SEXP offset2,
 					d2 = denom - temp * efron_wt;
 					newlk += weights[p] * eta[p] - meanwt * log(d2);
 
-					for (i = 0; i < nvar; i++) {
+					for (int i = 0; i < nvar; i++) {
 						temp2 = (a[i] - temp * a2[i]) / d2;
 						u[i] += weights[p] * covar[i][p] - meanwt * temp2;
-						for (j = 0; j <= i; j++)
+						for (int j = 0; j <= i; j++)
 							imat[j][i] +=
 									meanwt
 											* ((cmat[i][j] - temp * cmat2[i][j])
@@ -363,9 +363,9 @@ SEXP agfit4(SEXP surv2, SEXP covar2, SEXP strata2, SEXP weights2, SEXP offset2,
 			meaneta = 0;
 			nrisk = 0;
 			indx2 = person;
-			for (i = 0; i < nvar; i++) {
+			for (int i = 0; i < nvar; i++) {
 				a[i] = 0;
-				for (j = 0; j < nvar; j++) {
+				for (int j = 0; j < nvar; j++) {
 					cmat[i][j] = 0;
 				}
 			}
@@ -375,23 +375,23 @@ SEXP agfit4(SEXP surv2, SEXP covar2, SEXP strata2, SEXP weights2, SEXP offset2,
 	loglik[1] = newlk;
 
 	/* Calculate the score test */
-	for (i = 0; i < nvar; i++) /*use 'a' as a temp to save u0, for the score test*/
+	for (int i = 0; i < nvar; i++) /*use 'a' as a temp to save u0, for the score test*/
 		a[i] = u[i];
 	*flag = cholesky2(imat, nvar, tol_chol);
 	chsolve2(imat, nvar, a); /* a replaced by  a *inverse(i) */
 	*sctest = 0;
-	for (i = 0; i < nvar; i++)
+	for (int i = 0; i < nvar; i++)
 		*sctest += u[i] * a[i];
 
 	if (maxiter == 0) {
 		*iter = 0;
 		loglik[1] = newlk;
 		chinv2(imat, nvar);
-		for (i = 0; i < nvar; i++) {
+		for (int i = 0; i < nvar; i++) {
 			beta[i] *= scale[i]; /* return to original scale */
 			u[i] /= scale[i];
 			imat[i][i] *= scale[i] * scale[i];
-			for (j = 0; j < i; j++) {
+			for (int j = 0; j < i; j++) {
 				imat[j][i] *= scale[i] * scale[j];
 				imat[i][j] = imat[j][i];
 			}
@@ -403,7 +403,7 @@ SEXP agfit4(SEXP surv2, SEXP covar2, SEXP strata2, SEXP weights2, SEXP offset2,
 		 **  Never complain about convergence on this first step or impose step
 		 **  halving.  That way someone can force one iter at a time.
 		 */
-		for (i = 0; i < nvar; i++) {
+		for (int i = 0; i < nvar; i++) {
 			oldbeta[i] = beta[i];
 			beta[i] = beta[i] + a[i];
 		}
@@ -630,11 +630,11 @@ SEXP agfit4(SEXP surv2, SEXP covar2, SEXP strata2, SEXP weights2, SEXP offset2,
 	} /*return for another iteration */
 	loglik[1] = newlk;
 	chinv2(imat, nvar);
-	for (i = 0; i < nvar; i++) {
+	for (int i = 0; i < nvar; i++) {
 		beta[i] *= scale[i]; /* return to original scale */
 		u[i] /= scale[i];
 		imat[i][i] *= scale[i] * scale[i];
-		for (j = 0; j < i; j++) {
+		for (int j = 0; j < i; j++) {
 			imat[j][i] *= scale[i] * scale[j];
 			imat[i][j] = imat[j][i];
 		}

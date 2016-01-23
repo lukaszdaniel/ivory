@@ -215,7 +215,7 @@ cdf1272e770ad786638cbfa2c0c11782 *src/survreg6.c
 fe6b0f0e90c5bb3481a6135f5ee4afa0 *src/doloop.c
 f59d6d22b603c9de108efffce0067461 *src/survdiff2.c
 1edb56c8eab737cb82df67261d1b380e *src/chinv2.c
-18bfeb8db84f7a5b59d0ad15423e84d8 *src/agfit4.c
+c919de9d9c4352596aba36f633984924 *src/agfit4.c
 20892631ca9c9b90f72093c3852f43a2 *src/cholesky3.c
 3e9d32fe30acc89fbe77b1e9c1f09ecf *src/coxmart2.c
 57dd6f74db5be25d570c4f049c5f9d15 *src/pystep.c
@@ -234,7 +234,7 @@ e241599733d358a3fd6d9fc0d516f12e *src/survregc1.c
 064da177122e444a026f36830a8b52ad *src/init.c
 67774d7cda44f94d1c3c173167c32d24 *src/cox_Rcallback.c
 6b09fef6366843bf7c56663dcb8e2576 *src/survfitci.c
-be3c9911bbb3df89fbfd975e0d403037 *src/agfit5.c
+f036094b8dcb03f1af2c50c00025c001 *src/agfit5.c
 233c747ccaae84c061eb1cedaf5796d6 *src/chsolve3.c
 f448796f788d4172cac8f90c6d541fbe *src/survConcordance.c
 c1b66e792df47b81522e95e9f1c896ae *src/agmart.c
