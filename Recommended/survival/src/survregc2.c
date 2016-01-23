@@ -92,7 +92,7 @@ double survregc2(int n, int nvar, int nstrat, int whichcase, double *beta,
 	 */
 	PROTECT(rmat = eval(expr, rho));
 	funs[0] = REAL(rmat);
-	for (i = 0; i < 4; i++)
+	for (int i = 0; i < 4; i++)
 		funs[i + 1] = funs[i] + icount;
 
 	/*
@@ -100,7 +100,7 @@ double survregc2(int n, int nvar, int nstrat, int whichcase, double *beta,
 	 **   then the derivatives of the loglik (u, imat, JJ)
 	 */
 	icount = n;
-	for (person = 0; person < n; person++) {
+	for (int person = 0; person < n; person++) {
 		if (nstrat > 1) {
 			strata = strat[person] - 1; /*S likes to start counting at 1 */
 			sigma = exp(beta[strata + nvar]);
@@ -220,10 +220,10 @@ double survregc2(int n, int nvar, int nstrat, int whichcase, double *beta,
 			fdiag[fgrp] -= ddg * w;
 			jdiag[fgrp] += dg * dg * w;
 		}
-		for (i = 0; i < nvar; i++) {
+		for (int i = 0; i < nvar; i++) {
 			temp = dg * covar[i][person] * w;
 			u[i + nf] += temp;
-			for (j = 0; j <= i; j++) {
+			for (int j = 0; j <= i; j++) {
 				imat[i][j + nf] -= covar[i][person] * covar[j][person] * ddg
 						* w;
 				JJ[i][j + nf] += temp * covar[j][person] * dg;
@@ -237,7 +237,7 @@ double survregc2(int n, int nvar, int nstrat, int whichcase, double *beta,
 		if (nstrat != 0) { /* need derivative wrt log sigma */
 			k = strata + nvar;
 			u[k + nf] += w * dsig;
-			for (i = 0; i < nvar; i++) {
+			for (int i = 0; i < nvar; i++) {
 				imat[k][i + nf] -= dsg * covar[i][person] * w;
 				JJ[k][i + nf] += dsig * covar[i][person] * dg * w;
 			}

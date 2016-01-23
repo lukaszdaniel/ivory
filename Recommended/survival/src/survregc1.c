@@ -41,6 +41,7 @@
  */
 #include "survS.h"
 #include <math.h>
+#include <Rmath.h>
 #define SMALL -200 /* what to use for log(f(x)) when f(x) gives a zero,
 		       i.e., the calling made a really bad guess for beta */
 
@@ -49,8 +50,8 @@ static void logistic_d(double z, double ans[4], int j);
 static void gauss_d(double z, double ans[4], int j);
 static void (*sreg_gg)();
 
-#define  SPI    2.506628274631001     /* sqrt(2*pi) */
-#define  ROOT_2 1.414213562373095
+//#define  SPI    2.506628274631001     /* sqrt(2*pi) */
+//#define  ROOT_2 1.414213562373095
 
 double survregc1(int n, int nvar, int nstrat, int whichcase, double *beta,
 		int dist, Sint *strat, double *offset, double *time1, double *time2,
@@ -89,13 +90,13 @@ double survregc1(int n, int nvar, int nstrat, int whichcase, double *beta,
 
 	loglik = 0;
 	if (whichcase == 0) {
-		for (i = 0; i < nf; i++) {
+		for (int i = 0; i < nf; i++) {
 			fdiag[i] = 0;
 			jdiag[i] = 0;
 		}
-		for (i = 0; i < nvar3; i++) {
+		for (int i = 0; i < nvar3; i++) {
 			u[i] = 0;
-			for (j = 0; j < nvar2; j++) {
+			for (int j = 0; j < nvar2; j++) {
 				imat[j][i] = 0;
 				JJ[j][i] = 0;
 			}
@@ -109,7 +110,7 @@ double survregc1(int n, int nvar, int nstrat, int whichcase, double *beta,
 	strata = 0;
 	sigma = exp(beta[nvar + nf]);
 	sig2 = 1 / (sigma * sigma);
-	for (person = 0; person < n; person++) {
+	for (int person = 0; person < n; person++) {
 		if (nstrat > 1) {
 			/*
 			 ** multiple scales: pick the right sigma for this obs
@@ -120,7 +121,7 @@ double survregc1(int n, int nvar, int nstrat, int whichcase, double *beta,
 			sig2 = 1 / (sigma * sigma);
 		}
 		eta = 0;
-		for (i = 0; i < nvar; i++)
+		for (int i = 0; i < nvar; i++)
 			eta += beta[i + nf] * covar[i][person];
 		eta += offset[person];
 		if (nf > 0) {
@@ -241,10 +242,10 @@ double survregc1(int n, int nvar, int nstrat, int whichcase, double *beta,
 			fdiag[fgrp] -= ddg * w;
 			jdiag[fgrp] += dg * dg * w;
 		}
-		for (i = 0; i < nvar; i++) {
+		for (int i = 0; i < nvar; i++) {
 			temp = dg * covar[i][person] * w;
 			u[i + nf] += temp;
-			for (j = 0; j <= i; j++) {
+			for (int j = 0; j <= i; j++) {
 				imat[i][j + nf] -= covar[i][person] * covar[j][person] * ddg
 						* w;
 				JJ[i][j + nf] += temp * covar[j][person] * dg;
@@ -258,7 +259,7 @@ double survregc1(int n, int nvar, int nstrat, int whichcase, double *beta,
 		if (nstrat != 0) { /* need derivative wrt log sigma */
 			k = strata + nvar;
 			u[k + nf] += w * dsig;
-			for (i = 0; i < nvar; i++) {
+			for (int i = 0; i < nvar; i++) {
 				imat[k][i + nf] -= dsg * covar[i][person] * w;
 				JJ[k][i + nf] += dsig * covar[i][person] * dg * w;
 			}
@@ -319,7 +320,7 @@ static void logistic_d(double z, double ans[4], int j) {
 static void gauss_d(double z, double ans[4], int j) {
 	double f;
 
-	f = exp(-z * z / 2) / SPI;
+	f = exp(-z * z / 2) * M_1_SQRT_2PI;
 	switch (j) {
 	case 1:
 		ans[1] = f;
@@ -328,11 +329,11 @@ static void gauss_d(double z, double ans[4], int j) {
 		break;
 	case 2:
 		if (z > 0) {
-			ans[0] = (1 + erf(z / ROOT_2)) / 2;
-			ans[1] = erfc(z / ROOT_2) / 2;
+			ans[0] = (1 + erf(z / M_SQRT2)) / 2;
+			ans[1] = erfc(z / M_SQRT2) / 2;
 		} else {
-			ans[1] = (1 + erf(-z / ROOT_2)) / 2;
-			ans[0] = erfc(-z / ROOT_2) / 2;
+			ans[1] = (1 + erf(-z / M_SQRT2)) / 2;
+			ans[0] = erfc(-z / M_SQRT2) / 2;
 		}
 		ans[2] = f;
 		ans[3] = -z * f;

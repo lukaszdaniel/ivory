@@ -13,7 +13,6 @@
 #include "survS.h"
 SEXP tmerge(SEXP id2, SEXP time2x, SEXP newx2, SEXP nid2, SEXP ntime2, SEXP x2,
 		SEXP indx2) {
-	int i, k;
 	int n1, n2;
 
 	int *id, *nid;
@@ -45,8 +44,8 @@ SEXP tmerge(SEXP id2, SEXP time2x, SEXP newx2, SEXP nid2, SEXP ntime2, SEXP x2,
 	 **  The indx variable says where to start for each new addition,
 	 **   one continues as long as time2 > newtime and id=nid.
 	 */
-	for (k = 0; k < n2; k++) {
-		for (i = indx[k] - 1; i < n1; i++) {
+	for (int k = 0; k < n2; k++) {
+		for (int i = indx[k] - 1; i < n1; i++) {
 			if (id[i] != nid[k] || time2[i] <= ntime[k])
 				break;
 			newx[i] = x[k];

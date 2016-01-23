@@ -177,7 +177,7 @@ SEXP survreg7(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 	 ** fixed scale parameters were tacked onto the end of beta at input
 	 **  copy them to to the end of newbeta as well ((*dolik) expects them)
 	 */
-	for (i = nvar; i < LENGTH(beta2); i++)
+	for (int i = nvar; i < LENGTH(beta2); i++)
 		newbeta[i] = beta[i];
 
 	if (ny == 2) {
@@ -240,7 +240,7 @@ SEXP survreg7(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 	survpenal(0, nfrail, nvar, hmat, JJ, hdiag, jdiag, u, beta, penalty, ptype,
 			pdiag, pexpr1, cptr1, pexpr2, cptr2, rho);
 	*loglik += *penalty;
-	for (i = 0; i < nvar3; i++)
+	for (int i = 0; i < nvar3; i++)
 		usave[i] = u[i];
 
 	/*
@@ -263,7 +263,7 @@ SEXP survreg7(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 			chsolve3(hmat, nvar3, nfrail, hdiag, u);
 		}
 
-		for (i = 0; i < nvar3; i++) {
+		for (int i = 0; i < nvar3; i++) {
 			newbeta[i] = beta[i] + u[i];
 		}
 
@@ -280,7 +280,7 @@ SEXP survreg7(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 		if (fabs(1 - (*loglik / newlk)) <= eps) { /* all done */
 			*loglik = newlk;
 			*penalty = newpen;
-			for (i = 0; i < nvar3; i++) {
+			for (int i = 0; i < nvar3; i++) {
 				beta[i] = newbeta[i];
 				usave[i] = u[i];
 			}
@@ -308,9 +308,9 @@ SEXP survreg7(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 			 **   the use of whichcase=1 until we're done, so u is left alone.
 			 ** We sometimes see saddle points where alpha <0, btw.
 			 */
-			for (i = 0; i < nvar3; i++)
+			for (int i = 0; i < nvar3; i++)
 				u[i] = newbeta[i] - beta[i];
-			for (i = 0; i < nstrat; i++)
+			for (int i = 0; i < nstrat; i++)
 				if (u[i + nvar + nfrail] < -0.7)
 					u[i + nvar + nfrail] = -1.1;
 
@@ -328,7 +328,7 @@ SEXP survreg7(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 				x3 = x1;
 				x1 = x3 - (x4 - x3) / .618;
 				y3 = y1;
-				for (i = 0; i < nvar3; i++)
+				for (int i = 0; i < nvar3; i++)
 					newbeta[i] = beta[i] + u[i] * x1;
 
 				y1 = (*dolik)(n, nvar, nstrat, 1, newbeta, asInteger(dist),
@@ -341,7 +341,7 @@ SEXP survreg7(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 			}
 
 			x2 = .618 * x3 + .382 * x1;
-			for (i = 0; i < nvar3; i++)
+			for (int i = 0; i < nvar3; i++)
 				newbeta[i] = beta[i] + u[i] * x2;
 			y2 = (*dolik)(n, nvar, nstrat, 1, newbeta, asInteger(dist), strat,
 					offset, time1, time2, status, wt, covar, hmat, JJ, u, dexpr,
@@ -350,13 +350,13 @@ SEXP survreg7(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 					&newpen, ptype, pdiag, pexpr1, cptr1, pexpr2, cptr2, rho);
 			y2 += newpen;
 
-			for (golden = 0; golden < 8; golden++) {
+			for (int golden = 0; golden < 8; golden++) {
 				if (y3 > y2) { /* toss away the interval from x1 to x2 */
 					x1 = x2;
 					x2 = x3;
 					x3 = .618 * x4 + .382 * x1;
 					y2 = y3;
-					for (i = 0; i < nvar3; i++)
+					for (int i = 0; i < nvar3; i++)
 						newbeta[i] = beta[i] + u[i] * x3;
 					goright = 1;
 				} else { /* toss away the interval from x3 to x4 */
@@ -364,7 +364,7 @@ SEXP survreg7(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 					x3 = x2;
 					x2 = .618 * x1 + .382 * x4;
 					y3 = y2;
-					for (i = 0; i < nvar3; i++)
+					for (int i = 0; i < nvar3; i++)
 						newbeta[i] = beta[i] + u[i] * x2;
 					goright = 0;
 				}
@@ -385,10 +385,10 @@ SEXP survreg7(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 			if (y2 > *loglik || y3 > *loglik) {
 				/* Success - keep the better guess & compute derivatives */
 				if (y2 > y3) {
-					for (i = 0; i < nvar3; i++)
+					for (int i = 0; i < nvar3; i++)
 						newbeta[i] = beta[i] + u[i] * x2;
 				} else {
-					for (i = 0; i < nvar3; i++)
+					for (int i = 0; i < nvar3; i++)
 						newbeta[i] = beta[i] + u[i] * x3;
 				}
 				newlk = (*dolik)(n, nvar, nstrat, 0, newbeta, asInteger(dist),
@@ -408,7 +408,7 @@ SEXP survreg7(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 		 ** We have a "newbeta" that is an improvement
 		 **  Keep it.
 		 */
-		for (i = 0; i < nvar3; i++) {
+		for (int i = 0; i < nvar3; i++) {
 			beta[i] = newbeta[i];
 			usave[i] = u[i];
 		}
@@ -424,17 +424,17 @@ SEXP survreg7(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 	 ** Put together the return list
 	 */
 	alldone: *flag = cholesky3(hmat, nvar3, nfrail, hdiag, tol_chol);
-	for (i = 0; i < nvar2; i++) {
-		for (j = 0; j < nvar3; j++)
+	for (int i = 0; i < nvar2; i++) {
+		for (int j = 0; j < nvar3; j++)
 			hinv[i][j] = hmat[i][j];
 	}
 	chinv3(hinv, nvar3, nfrail, hdiag);
 
-	for (i = nfrail; i < nvar3; i++) { /*nicer output for S user */
+	for (int i = nfrail; i < nvar3; i++) { /*nicer output for S user */
 		hdiag[i] = hinv[i - nfrail][i];
 		hmat[i - nfrail][i] = 1;
 		hinv[i - nfrail][i] = 1;
-		for (j = i + 1; j < nvar3; j++) {
+		for (int j = i + 1; j < nvar3; j++) {
 			hmat[i - nfrail][j] = 0;
 			hinv[i - nfrail][j] = 0;
 		}
