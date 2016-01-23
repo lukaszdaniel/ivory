@@ -9,11 +9,10 @@
 
 double **dmatrix(double *array, int ncol, int nrow) {
 
-	int i;
 	double **pointer;
 
 	pointer = (double **) ALLOC(nrow, sizeof(double *));
-	for (i = 0; i < nrow; i++) {
+	for (int i = 0; i < nrow; i++) {
 		pointer[i] = array;
 		array += ncol;
 	}

@@ -43,7 +43,7 @@ double pystep(int nc, int *index, int *index2, double *wt, double *data,
 	*wt = 1;
 	shortfall = 0;
 	maxtime = step;
-	for (i = 0; i < nc; i++) {
+	for (int i = 0; i < nc; i++) {
 		if (fac[i] == 1)
 			*index += (data[i] - 1) * kk;
 		else {

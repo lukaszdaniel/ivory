@@ -77,7 +77,7 @@ SEXP agmart3(SEXP surv2, SEXP score2, SEXP weight2, SEXP strata2, SEXP sortx,
 	indx2 = 0;
 	denom = 0;
 	cumhaz = 0;
-	for (person = 0; person < n;) {
+	for (int person = 0; person < n;) {
 		p = sort1[person];
 		if (event[p] == 0) { /* censored */
 			denom += score[p] * weight[p];
@@ -127,7 +127,7 @@ SEXP agmart3(SEXP surv2, SEXP score2, SEXP weight2, SEXP strata2, SEXP sortx,
 				hazard = 0;
 				e_hazard = 0; /* hazard experienced by a tied death */
 				wtsum /= deaths;
-				for (k = 0; k < deaths; k++) {
+				for (int k = 0; k < deaths; k++) {
 					temp = k / deaths;
 					hazard += wtsum / (denom - temp * e_denom);
 					e_hazard += wtsum * (1 - temp) / (denom - temp * e_denom);

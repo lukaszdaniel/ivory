@@ -38,9 +38,9 @@ void agmart(Sint *n, Sint *method, double *start, double *stop, Sint *event,
 	nused = *n;
 	strata[nused - 1] = 1; /* Failsafe */
 
-	for (i = 0; i < nused; i++)
+	for (int i = 0; i < nused; i++)
 		resid[i] = event[i];
-	for (person = 0; person < nused;) {
+	for (int person = 0; person < nused;) {
 		if (event[person] == 0)
 			person++;
 		else {
@@ -49,7 +49,7 @@ void agmart(Sint *n, Sint *method, double *start, double *stop, Sint *event,
 			wtsum = 0;
 			time = stop[person];
 			deaths = 0;
-			for (k = person; k < nused; k++) {
+			for (int k = person; k < nused; k++) {
 				if (start[k] < time) {
 					denom += score[k] * wt[k];
 					if (stop[k] == time && event[k] == 1) {
@@ -68,12 +68,12 @@ void agmart(Sint *n, Sint *method, double *start, double *stop, Sint *event,
 			hazard = 0;
 			e_hazard = 0;
 			wtsum /= deaths;
-			for (k = 0; k < deaths; k++) {
+			for (int k = 0; k < deaths; k++) {
 				temp = *method * (k / deaths);
 				hazard += wtsum / (denom - temp * e_denom);
 				e_hazard += wtsum * (1 - temp) / (denom - temp * e_denom);
 			}
-			for (k = person; k < nused; k++) {
+			for (int k = person; k < nused; k++) {
 				if (start[k] < time) {
 					if (stop[k] == time && event[k] == 1)
 						resid[k] -= score[k] * e_hazard;

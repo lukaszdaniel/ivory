@@ -50,7 +50,7 @@ void agmart2(Sint *n, Sint *method, double *start, double *stop, Sint *event,
 	istrat = 0;
 	ndeath = 0;
 	strata_start = 0;
-	for (person = 0; person < nused;) {
+	for (int person = 0; person < nused;) {
 		p = sort1[person];
 		if (event[p] == 0) {
 			denom += score[p] * wt[p];

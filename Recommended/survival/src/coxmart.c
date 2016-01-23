@@ -51,7 +51,7 @@ void coxmart(Sint *sn, Sint *method, double *time, Sint *status, Sint * strata,
 	e_denom = 0;
 	hazard = 0;
 	lastone = 0;
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		if (expect[i] != 0)
 			denom = expect[i];
 		expect[i] = status[i];
@@ -68,12 +68,12 @@ void coxmart(Sint *sn, Sint *method, double *time, Sint *status, Sint * strata,
 			} else {
 				temp = hazard;
 				wtsum /= deaths;
-				for (j = 0; j < deaths; j++) {
+				for (int j = 0; j < deaths; j++) {
 					downwt = j / deaths;
 					hazard += wtsum / (denom - e_denom * downwt);
 					temp += wtsum * (1 - downwt) / (denom - e_denom * downwt);
 				}
-				for (j = lastone; j <= i; j++) {
+				for (int j = lastone; j <= i; j++) {
 					if (status[j] == 0)
 						expect[j] = -score[j] * hazard;
 					else
@@ -89,6 +89,6 @@ void coxmart(Sint *sn, Sint *method, double *time, Sint *status, Sint * strata,
 			hazard = 0;
 	}
 
-	for (j = lastone; j < n; j++)
+	for (int j = lastone; j < n; j++)
 		expect[j] -= score[j] * hazard;
 }

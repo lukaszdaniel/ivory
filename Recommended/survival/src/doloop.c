@@ -44,14 +44,13 @@ void init_doloop(int min, int max) {
 }
 
 int doloop(int nloops, int *index) {
-	register int i;
 
 	if (firsttime == 1) {
-		for (i = 0; i < nloops; i++)
+		for (int i = 0; i < nloops; i++)
 			index[i] = minval + i;
 		firsttime = 0;
-		if (maxval >= (minval + i))
-			return (minval + i - 1);
+		if (maxval >= (minval + nloops))
+			return (minval + nloops - 1);
 		else
 			return (minval - 1);
 	}
