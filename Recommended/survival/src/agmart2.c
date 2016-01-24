@@ -122,11 +122,11 @@ void agmart2(Sint *n, Sint *method, double *start, double *stop, Sint *event,
 			 **  each subject's interval).
 			 */
 			k = 0;
-			for (i = strata_start; i < person; i++) {
+			for (int i = strata_start; i < person; i++) {
 				p = sort1[i];
 				for (; k < ndeath && dtimes[k] >= stop[p]; k++)
 					;
-				for (j = k; j < ndeath; j++)
+				for (int j = k; j < ndeath; j++)
 					if (start[p] < dtimes[j])
 						resid[p] -= score[p] * haz[j];
 			}

@@ -197,7 +197,7 @@ void agfit5a(Sint *nusedx, Sint *nvarx, double *yy, double *covar2,
 	 */
 	*loglik = 0;
 
-	for (person = 0; person < nused; person++) {
+	for (int person = 0; person < nused; person++) {
 		zbeta = 0; /* form the term beta*z   (vector mult) */
 		for (int i = 0; i < nvar; i++)
 			zbeta += beta[i] * covar[i][person];

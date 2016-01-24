@@ -234,7 +234,7 @@ e241599733d358a3fd6d9fc0d516f12e *src/survregc1.c
 064da177122e444a026f36830a8b52ad *src/init.c
 67774d7cda44f94d1c3c173167c32d24 *src/cox_Rcallback.c
 6b09fef6366843bf7c56663dcb8e2576 *src/survfitci.c
-f036094b8dcb03f1af2c50c00025c001 *src/agfit5.c
+1aad64d06bcf22bdc7f264d2a1baac2d *src/agfit5.c
 233c747ccaae84c061eb1cedaf5796d6 *src/chsolve3.c
 f448796f788d4172cac8f90c6d541fbe *src/survConcordance.c
 c1b66e792df47b81522e95e9f1c896ae *src/agmart.c
@@ -246,7 +246,7 @@ c4e03bce0ee6cb250aaecc39c2e62fa3 *src/coxscore.c
 d5a3fece68dc1bc2404d214f5f24c24f *src/agsurv3.c
 a221676c68fcd5cc35e1fe2dc72c2c82 *src/coxdetail.c
 c208f91365fb981f95b00ead096f3cc7 *src/agsurv4.c
-78907d8379ce11095c7391978ed11251 *src/agexact.c
+c114dff6045bd9759c7dd49050441543 *src/agexact.c
 68abd98d3f2be030bf29955a90925ff8 *src/pyears1.c
 2c666ee6ed7a2527de7a0a2106a1a30e *src/coxsafe.c
 578e967e7b6b0edd7d48199a43ca1061 *src/coxph_wtest.c
@@ -254,7 +254,7 @@ c208f91365fb981f95b00ead096f3cc7 *src/agsurv4.c
 163cad0cbd809db55eb017d64a14b8cf *src/agmart3.c
 6b25b9e40443e926ebf104a06a41a33d *src/survpenal.c
 dcd3f1c34ffa37da6e819284312c71b9 *src/coxscho.c
-84b6ac507c6a82a7a32b0fa137d0b644 *src/agmart2.c
+aa1af6906e691bc353370d7940bdad06 *src/agmart2.c
 aca0dfabd1b6375a3e62d2a2ac00564f *src/dmatrix.c
 485dbca279b773951df7d113e915d004 *src/agsurv5.c
 6cc40f78e6b2ee5afd13260d7e55623d *src/concordance1.c

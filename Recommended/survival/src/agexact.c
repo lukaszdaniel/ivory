@@ -118,14 +118,14 @@ void agexact(Sint *maxiter, Sint *nusedx, Sint *nvarx, double *start,
 		score[person] = exp(zbeta + offset[person]);
 	}
 
-	for (person = 0; person < n;) {
+	for (int person = 0; person < n;) {
 		if (event[person] == 0)
 			person++;
 		else {
 			denom = 0;
-			for (i = 0; i < nvar; i++) {
+			for (int i = 0; i < nvar; i++) {
 				a[i] = 0;
-				for (j = 0; j < nvar; j++)
+				for (int j = 0; j < nvar; j++)
 					cmat[i][j] = 0;
 			}
 
@@ -135,7 +135,7 @@ void agexact(Sint *maxiter, Sint *nusedx, Sint *nvarx, double *start,
 			nrisk = 0;
 			deaths = 0;
 			time = stop[person];
-			for (k = person; k < n; k++) {
+			for (int k = person; k < n; k++) {
 				if (stop[k] == time)
 					deaths += event[k];
 				if (start[k] < time) {
@@ -151,13 +151,13 @@ void agexact(Sint *maxiter, Sint *nusedx, Sint *nvarx, double *start,
 			 **   It's fast if #deaths=1
 			 */
 			if (deaths == 1) {
-				for (l = 0; l < nrisk; l++) {
+				for (int l = 0; l < nrisk; l++) {
 					k = atrisk[l];
 					weight = score[k];
 					denom += weight;
-					for (i = 0; i < nvar; i++) {
+					for (int i = 0; i < nvar; i++) {
 						a[i] = a[i] + weight * covar[i][k];
-						for (j = 0; j <= i; j++)
+						for (int j = 0; j <= i; j++)
 							cmat[i][j] += weight * covar[i][k] * covar[j][k];
 					}
 				}
@@ -173,16 +173,16 @@ void agexact(Sint *maxiter, Sint *nusedx, Sint *nvarx, double *start,
 					for (i = 0; i < nvar; i++)
 						newvar[i] = 0;
 					weight = 1;
-					for (l = 0; l < deaths; l++) {
+					for (int l = 0; l < deaths; l++) {
 						k = atrisk[index[l]];
 						weight *= score[k];
-						for (i = 0; i < nvar; i++)
+						for (int i = 0; i < nvar; i++)
 							newvar[i] += covar[i][k];
 					}
 					denom += weight;
-					for (i = 0; i < nvar; i++) {
+					for (int i = 0; i < nvar; i++) {
 						a[i] = a[i] + weight * newvar[i];
-						for (j = 0; j <= i; j++)
+						for (int j = 0; j <= i; j++)
 							cmat[i][j] += weight * newvar[i] * newvar[j];
 					}
 				}
@@ -191,15 +191,15 @@ void agexact(Sint *maxiter, Sint *nusedx, Sint *nvarx, double *start,
 			 ** Add results into u and imat
 			 */
 			loglik[1] -= log(denom);
-			for (i = 0; i < nvar; i++) {
+			for (int i = 0; i < nvar; i++) {
 				u[i] -= a[i] / denom;
-				for (j = 0; j <= i; j++)
+				for (int j = 0; j <= i; j++)
 					imat[j][i] += (cmat[i][j] - a[i] * a[j] / denom) / denom;
 			}
-			for (k = person; k < n && stop[k] == time; k++) {
+			for (int k = person; k < n && stop[k] == time; k++) {
 				if (event[k] == 1) {
 					loglik[1] += log(score[k]);
-					for (i = 0; i < nvar; i++)
+					for (int i = 0; i < nvar; i++)
 						u[i] += covar[i][k];
 				}
 				person++;
@@ -245,30 +245,30 @@ void agexact(Sint *maxiter, Sint *nusedx, Sint *nvarx, double *start,
 	 ** here is the main loop
 	 */
 	halving = 0; /* =1 when in the midst of "step halving" */
-	for (iter = 1; iter <= *maxiter; iter++) {
+	for (int iter = 1; iter <= *maxiter; iter++) {
 		newlk = 0;
-		for (i = 0; i < nvar; i++) {
+		for (int i = 0; i < nvar; i++) {
 			u[i] = 0;
-			for (j = 0; j < nvar; j++)
+			for (int j = 0; j < nvar; j++)
 				imat[i][j] = 0;
 		}
 
-		for (person = 0; person < n; person++) {
+		for (int person = 0; person < n; person++) {
 			zbeta = 0; /* form the term beta*z   (vector mult) */
-			for (i = 0; i < nvar; i++)
+			for (int i = 0; i < nvar; i++)
 				zbeta += newbeta[i] * covar[i][person];
 			score[person] = exp(zbeta + offset[person]);
 		}
 
-		for (person = 0; person < n;) {
+		for (int person = 0; person < n;) {
 			R_CheckUserInterrupt();
 			if (event[person] == 0)
 				person++;
 			else {
 				denom = 0;
-				for (i = 0; i < nvar; i++) {
+				for (int i = 0; i < nvar; i++) {
 					a[i] = 0;
-					for (j = 0; j < nvar; j++)
+					for (int j = 0; j < nvar; j++)
 						cmat[i][j] = 0;
 				}
 
@@ -278,7 +278,7 @@ void agexact(Sint *maxiter, Sint *nusedx, Sint *nvarx, double *start,
 				nrisk = 0;
 				deaths = 0;
 				time = stop[person];
-				for (k = person; k < n; k++) {
+				for (int k = person; k < n; k++) {
 					if (stop[k] == time)
 						deaths += event[k];
 					if (start[k] < time) {
@@ -294,13 +294,13 @@ void agexact(Sint *maxiter, Sint *nusedx, Sint *nvarx, double *start,
 				 **   It's fast if #deaths=1
 				 */
 				if (deaths == 1) {
-					for (l = 0; l < nrisk; l++) {
+					for (int l = 0; l < nrisk; l++) {
 						k = atrisk[l];
 						weight = score[k];
 						denom += weight;
-						for (i = 0; i < nvar; i++) {
+						for (int i = 0; i < nvar; i++) {
 							a[i] = a[i] + weight * covar[i][k];
-							for (j = 0; j <= i; j++)
+							for (int j = 0; j <= i; j++)
 								cmat[i][j] += weight * covar[i][k]
 										* covar[j][k];
 						}
@@ -314,19 +314,19 @@ void agexact(Sint *maxiter, Sint *nusedx, Sint *nvarx, double *start,
 					 */
 					init_doloop(0, nrisk);
 					while (doloop(deaths, index) >= 0) {
-						for (i = 0; i < nvar; i++)
+						for (int i = 0; i < nvar; i++)
 							newvar[i] = 0;
 						weight = 1;
-						for (l = 0; l < deaths; l++) {
+						for (int l = 0; l < deaths; l++) {
 							k = atrisk[index[l]];
 							weight *= score[k];
-							for (i = 0; i < nvar; i++)
+							for (int i = 0; i < nvar; i++)
 								newvar[i] += covar[i][k];
 						}
 						denom += weight;
-						for (i = 0; i < nvar; i++) {
+						for (int i = 0; i < nvar; i++) {
 							a[i] = a[i] + weight * newvar[i];
-							for (j = 0; j <= i; j++)
+							for (int j = 0; j <= i; j++)
 								cmat[i][j] += weight * newvar[i] * newvar[j];
 						}
 					}
@@ -335,16 +335,16 @@ void agexact(Sint *maxiter, Sint *nusedx, Sint *nvarx, double *start,
 				 ** Add results into u and imat
 				 */
 				newlk -= log(denom);
-				for (i = 0; i < nvar; i++) {
+				for (int i = 0; i < nvar; i++) {
 					u[i] -= a[i] / denom;
-					for (j = 0; j <= i; j++)
+					for (int j = 0; j <= i; j++)
 						imat[j][i] += (cmat[i][j] - a[i] * a[j] / denom)
 								/ denom;
 				}
-				for (k = person; k < n && stop[k] == time; k++) {
+				for (int k = person; k < n && stop[k] == time; k++) {
 					if (event[k] == 1) {
 						newlk += log(score[k]);
-						for (i = 0; i < nvar; i++)
+						for (int i = 0; i < nvar; i++)
 							u[i] += covar[i][k];
 					}
 					person++;
@@ -362,10 +362,10 @@ void agexact(Sint *maxiter, Sint *nusedx, Sint *nvarx, double *start,
 		if (fabs(1 - (loglik[1] / newlk)) <= *eps && halving == 0) { /* all done */
 			loglik[1] = newlk;
 			chinv2(imat, nvar); /* invert the information matrix */
-			for (i = 1; i < nvar; i++)
-				for (j = 0; j < i; j++)
+			for (int i = 1; i < nvar; i++)
+				for (int j = 0; j < i; j++)
 					imat[i][j] = imat[j][i];
-			for (i = 0; i < nvar; i++)
+			for (int i = 0; i < nvar; i++)
 				beta[i] = newbeta[i];
 			*maxiter = iter;
 			return;
