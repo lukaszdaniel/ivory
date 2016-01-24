@@ -94,11 +94,11 @@ void agsurv3(Sint *sn, Sint *snvar, Sint *sncurve, Sint *snpt, Sint *sse,
 	 */
 	need = 2 * n + se * nvar * (2 + n * (n + 1) / 2) + nvar;
 	nscore = (double *) ALLOC(need, sizeof(double));
-	for (i = 0; i < need; i++)
+	for (int i = 0; i < need; i++)
 		nscore[i] = 0.0; /* R doesn't zero the memory */
 	mean = nscore + n;
 	isurv = mean + nvar;
-	for (i = 0; i < n; i++)
+	for (int i = 0; i < n; i++)
 		isurv[i] = 1;
 	if (se == 1) {
 		a = isurv + n;
@@ -106,7 +106,7 @@ void agsurv3(Sint *sn, Sint *snvar, Sint *sncurve, Sint *snpt, Sint *sse,
 		tvar = (double **) ALLOC(n, sizeof(double *));
 		/* be tricky here, as only the bottom half is used */
 		tvar[0] = a2 + nvar;
-		for (i = 1; i < n; i++)
+		for (int i = 1; i < n; i++)
 			tvar[i] = tvar[i - 1] + i;
 	}
 
@@ -121,16 +121,16 @@ void agsurv3(Sint *sn, Sint *snvar, Sint *sncurve, Sint *snpt, Sint *sse,
 	vsurv = dmatrix(varh, npt, ncurve);
 	used = dmatrix(sused, npt, ncurve);
 
-	for (i = 0; i < ncurve; i++)
-		for (j = 0; j < npt; j++)
+	for (int i = 0; i < ncurve; i++)
+		for (int j = 0; j < npt; j++)
 			surv[i][j] = 1;
 
 	/*
 	 ** compute the risk scores
 	 */
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		nscore[i] = 0;
-		for (j = 0; j < nvar; j++) {
+		for (int j = 0; j < nvar; j++) {
 			nscore[i] += coef[j] * (newx[j][i] - xmean[j]);
 		}
 		nscore[i] = exp(nscore[i]);
@@ -142,7 +142,7 @@ void agsurv3(Sint *sn, Sint *snvar, Sint *sncurve, Sint *snpt, Sint *sse,
 	 */
 	itime = 0;
 	nvar2 = nvar * se; /*simpler than a lot of " if (se==1)" statements */
-	for (person = 0; person < cn;) {
+	for (int person = 0; person < cn;) {
 		if (event[person] == 0)
 			person++;
 		else {
@@ -151,19 +151,19 @@ void agsurv3(Sint *sn, Sint *snvar, Sint *sncurve, Sint *snpt, Sint *sse,
 			 */
 			denom = 0;
 			e_denom = 0;
-			for (i = 0; i < nvar2; i++) {
+			for (int i = 0; i < nvar2; i++) {
 				a[i] = 0;
 				a2[i] = 0;
 			}
 			ttime = stop[person];
 			nrisk = 0;
 			deaths = 0;
-			for (k = person; k < cn; k++) {
+			for (int k = person; k < cn; k++) {
 				if (start[k] < ttime) {
 					nrisk++;
 					weight = score[k];
 					denom += weight;
-					for (i = 0; i < nvar2; i++) {
+					for (int i = 0; i < nvar2; i++) {
 						a[i] += weight * (oldx[i][k] - xmean[i]);
 					}
 				}
@@ -171,7 +171,7 @@ void agsurv3(Sint *sn, Sint *snvar, Sint *sncurve, Sint *snpt, Sint *sse,
 					kk = k;
 					deaths++;
 					e_denom += weight;
-					for (i = 0; i < nvar2; i++) {
+					for (int i = 0; i < nvar2; i++) {
 						a2[i] += weight * (oldx[i][k] - xmean[i]);
 					}
 				}
@@ -181,11 +181,10 @@ void agsurv3(Sint *sn, Sint *snvar, Sint *sncurve, Sint *snpt, Sint *sse,
 			 ** Now compute the increment in the hazard and variance at "time"
 			 */
 			if (method < 3)
-				for (i = 0; i < nvar2; i++)
+				for (int i = 0; i < nvar2; i++)
 					mean[i] = a[i] / denom;
 			if (method == 1) {
-				for (psave = person; psave < cn && stop[psave] == ttime;
-						psave++)
+				for (psave = person; psave < cn && stop[psave] == ttime; psave++) {
 					/*
 					 ** kalbfleisch estimator requires iteration;
 					 */
@@ -196,9 +195,9 @@ void agsurv3(Sint *sn, Sint *snvar, Sint *sncurve, Sint *snpt, Sint *sse,
 					} else { /*find the zero of an equation */
 						km = .5;
 						inc = .25;
-						for (l = 0; l < 35; l++) { /* bisect it to death */
+						for (int l = 0; l < 35; l++) { /* bisect it to death */
 							sumt = 0;
-							for (k = person; k < psave; k++) {
+							for (int k = person; k < psave; k++) {
 								if (event[k] == 1)
 									sumt += score[k] / (1 - pow(km, score[k]));
 							}
@@ -209,6 +208,7 @@ void agsurv3(Sint *sn, Sint *snvar, Sint *sncurve, Sint *snpt, Sint *sse,
 							inc = inc / 2;
 						}
 					}
+				}
 				if (km == 0)
 					addup(itime, 0.0, 0.0);
 				else {
@@ -227,13 +227,13 @@ void agsurv3(Sint *sn, Sint *snvar, Sint *sncurve, Sint *snpt, Sint *sse,
 				temp = 0;
 				haz = 0;
 				varhaz = 0;
-				for (k = person; k < cn && stop[k] == ttime; k++) {
+				for (int k = person; k < cn && stop[k] == ttime; k++) {
 					if (event[k] == 1) {
 						downwt = temp++ / deaths;
 						d2 = (denom - downwt * e_denom);
 						haz = 1 / d2;
 						varhaz = 1 / (d2 * d2);
-						for (i = 0; i < nvar2; i++)
+						for (int i = 0; i < nvar2; i++)
 							mean[i] = (a[i] - downwt * a2[i]) / d2;
 						addup(itime, haz, varhaz);
 					}
@@ -255,7 +255,7 @@ static void addup(itime, haz, var)
 		/*
 		 ** KM method, and everyone in the referent group died
 		 */
-		for (i = 0; i < ncurve; i++) {
+		for (int i = 0; i < ncurve; i++) {
 			surv[i][itime] = 0;
 			if (nvar > 0)
 				vsurv[i][itime] = 0;
@@ -289,12 +289,12 @@ static void addup(itime, haz, var)
 			 ** The variance is computed as though it were the Ederer est, always
 			 */
 			if (se == 1) { /* Do the variance term (nasty) */
-				for (j = pstart; j <= i; j++) {
+				for (int j = pstart; j <= i; j++) {
 					temp = 0;
-					for (k = 0; k < nvar; k++) {
+					for (int k = 0; k < nvar; k++) {
 						temp += (newx[k][i] - mean[k]) * (newx[k][j] - mean[k])
 								* imat[k][k];
-						for (l = 0; l < k; l++)
+						for (int l = 0; l < k; l++)
 							temp += ((newx[k][i] - mean[k])
 									* (newx[l][j] - mean[l])
 									+ (newx[k][j] - mean[k])

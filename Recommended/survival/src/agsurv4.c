@@ -10,7 +10,7 @@ void agsurv4(Sint *ndeath, double *risk, double *wt, Sint *sn, double *denom,
 
 	n = *sn;
 	j = 0;
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		if (ndeath[i] == 0)
 			km[i] = 1;
 		else if (ndeath[i] == 1) { /* not a tied death */
@@ -18,9 +18,9 @@ void agsurv4(Sint *ndeath, double *risk, double *wt, Sint *sn, double *denom,
 		} else { /* biscection solution */
 			guess = .5;
 			inc = .25;
-			for (l = 0; l < 35; l++) { /* bisect it to death */
+			for (int l = 0; l < 35; l++) { /* bisect it to death */
 				sumt = 0;
-				for (k = j; k < (j + ndeath[i]); k++) {
+				for (int k = j; k < (j + ndeath[i]); k++) {
 					sumt += wt[k] * risk[k] / (1 - pow(guess, risk[k]));
 				}
 				if (sumt < denom[i])

@@ -56,7 +56,7 @@ void agscore(Sint *nx, Sint *nvarx, double *y, double *covar2, Sint *strata,
 	mh2 = mh1 + nvar;
 	mh3 = mh2 + nvar;
 
-	for (person = 0; person < n;) {
+	for (int person = 0; person < n;) {
 		if (event[person] == 0)
 			person++;
 		else {
@@ -67,23 +67,23 @@ void agscore(Sint *nx, Sint *nvarx, double *y, double *covar2, Sint *strata,
 			e_denom = 0;
 			meanwt = 0;
 			deaths = 0;
-			for (i = 0; i < nvar; i++) {
+			for (int i = 0; i < nvar; i++) {
 				a[i] = 0;
 				a2[i] = 0;
 			}
 			time = stop[person];
-			for (k = person; k < n; k++) {
+			for (int k = person; k < n; k++) {
 				if (start[k] < time) {
 					risk = score[k] * weights[k];
 					denom += risk;
-					for (i = 0; i < nvar; i++) {
+					for (int i = 0; i < nvar; i++) {
 						a[i] = a[i] + risk * covar[i][k];
 					}
 					if (stop[k] == time && event[k] == 1) {
 						deaths++;
 						e_denom += risk;
 						meanwt += weights[k];
-						for (i = 0; i < nvar; i++)
+						for (int i = 0; i < nvar; i++)
 							a2[i] = a2[i] + risk * covar[i][k];
 					}
 				}
@@ -95,18 +95,18 @@ void agscore(Sint *nx, Sint *nvarx, double *y, double *covar2, Sint *strata,
 			if (deaths < 2 || *method == 0) {
 				/* easier case */
 				hazard = meanwt / denom;
-				for (i = 0; i < nvar; i++)
+				for (int i = 0; i < nvar; i++)
 					mean[i] = a[i] / denom;
-				for (k = person; k < n; k++) {
+				for (int k = person; k < n; k++) {
 					if (start[k] < time) {
 						risk = score[k];
-						for (i = 0; i < nvar; i++)
+						for (int i = 0; i < nvar; i++)
 							resid[i][k] -= (covar[i][k] - mean[i]) * risk
 									* hazard;
 						if (stop[k] == time) {
 							person++;
 							if (event[k] == 1)
-								for (i = 0; i < nvar; i++)
+								for (int i = 0; i < nvar; i++)
 									resid[i][k] += (covar[i][k] - mean[i]);
 						}
 					}
@@ -127,36 +127,36 @@ void agscore(Sint *nx, Sint *nvarx, double *y, double *covar2, Sint *strata,
 				 */
 				temp1 = 0;
 				temp2 = 0;
-				for (i = 0; i < nvar; i++) {
+				for (int i = 0; i < nvar; i++) {
 					mh1[i] = 0;
 					mh2[i] = 0;
 					mh3[i] = 0;
 				}
 				meanwt /= deaths;
-				for (dd = 0; dd < deaths; dd++) {
+				for (int dd = 0; dd < deaths; dd++) {
 					downwt = dd / deaths;
 					d2 = denom - downwt * e_denom;
 					hazard = meanwt / d2;
 					temp1 += hazard;
 					temp2 += (1 - downwt) * hazard;
-					for (i = 0; i < nvar; i++) {
+					for (int i = 0; i < nvar; i++) {
 						mean[i] = (a[i] - downwt * a2[i]) / d2;
 						mh1[i] += mean[i] * hazard;
 						mh2[i] += mean[i] * (1 - downwt) * hazard;
 						mh3[i] += mean[i] / deaths;
 					}
 				}
-				for (k = person; k < n; k++) {
+				for (int k = person; k < n; k++) {
 					if (start[k] < time) {
 						risk = score[k];
 						if (stop[k] == time && event[k] == 1) {
-							for (i = 0; i < nvar; i++) {
+							for (int i = 0; i < nvar; i++) {
 								resid[i][k] += covar[i][k] - mh3[i];
 								resid[i][k] -= risk * covar[i][k] * temp2;
 								resid[i][k] += risk * mh2[i];
 							}
 						} else {
-							for (i = 0; i < nvar; i++)
+							for (int i = 0; i < nvar; i++)
 								resid[i][k] -= risk
 										* (covar[i][k] * temp1 - mh1[i]);
 						}
