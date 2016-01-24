@@ -224,7 +224,12 @@
 
       \item The version of LAPACK included in the sources has been
       updated to 3.6.0, including those \sQuote{deprecated} routines
-      which were previously included.
+      which were previously included.  \emph{Ca} 40 double-complex
+      routines have been added at the request of a package maintainer.
+
+      As before, the details of what is included are in
+      \file{src/modules/lapack/README} and this now gives information on
+      earlier additions.
 
       \item \code{tapply()} has been made considerably more efficient
       without changing functionality, thanks to proposals from Peter
@@ -407,6 +412,10 @@
       \item The \code{data.frame} method of \code{rbind()} construction
       \code{row.names} works better in borderline integer cases, but
       may change the names assigned.  (\PR{16666})
+
+      \item \code{url} connections with \code{method = "libcurl"} are
+      destroyed properly. (\PR{16681})
+
     }
   }
 }
