@@ -17,15 +17,15 @@ void survdiff2(Sint *nn, Sint *nngroup, Sint *nstrat, double *rho, double *time,
 	ngroup = *nngroup;
 	istart = 0;
 	koff = 0;
-	for (i = 0; i < ngroup * ngroup; i++)
+	for (int i = 0; i < ngroup * ngroup; i++)
 		var[i] = 0;
-	for (i = 0; i < *nstrat * ngroup; i++) {
+	for (int i = 0; i < *nstrat * ngroup; i++) {
 		obs[i] = 0;
 		exp[i] = 0;
 	}
 
 	while (istart < ntot) { /* loop over the strata */
-		for (i = 0; i < ngroup; i++)
+		for (int i = 0; i < ngroup; i++)
 			risk[i] = 0;
 
 		/* last obs of this strata */
@@ -40,7 +40,7 @@ void survdiff2(Sint *nn, Sint *nngroup, Sint *nstrat, double *rho, double *time,
 		 */
 		if (*rho != 0) {
 			km = 1;
-			for (i = istart; i < n;) {
+			for (int i = istart; i < n;) {
 				kaplan[i] = km;
 				nrisk = n - i;
 				deaths = status[i];
@@ -56,7 +56,7 @@ void survdiff2(Sint *nn, Sint *nngroup, Sint *nstrat, double *rho, double *time,
 		/*
 		 ** Now for the actual test
 		 */
-		for (i = n - 1; i >= istart; i--) {
+		for (int i = n - 1; i >= istart; i--) {
 			if (*rho == 0)
 				wt = 1;
 			else
@@ -73,18 +73,18 @@ void survdiff2(Sint *nn, Sint *nngroup, Sint *nstrat, double *rho, double *time,
 			nrisk = n - i;
 
 			if (deaths > 0) { /* a death time */
-				for (k = 0; k < ngroup; k++)
+				for (int k = 0; k < ngroup; k++)
 					exp[k + koff] += wt * deaths * risk[k] / nrisk;
 
 				if (nrisk == 1)
 					continue; /*only 1 subject, so no variance */
 				kk = 0;
 				wt = wt * wt;
-				for (j = 0; j < ngroup; j++) {
+				for (int j = 0; j < ngroup; j++) {
 					tmp = wt * deaths * risk[j] * (nrisk - deaths)
 							/ (nrisk * (nrisk - 1));
 					var[kk + j] += tmp;
-					for (k = 0; k < ngroup; k++) {
+					for (int k = 0; k < ngroup; k++) {
 						var[kk] -= tmp * risk[k] / nrisk;
 						kk++;
 					}

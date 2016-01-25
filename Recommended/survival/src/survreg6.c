@@ -124,7 +124,7 @@ SEXP survreg6(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 	 ** fixed scale parameters were tacked onto the end of beta at input
 	 **  copy them to to the end of newbeta as well (survregc1/c2 expects em)
 	 */
-	for (i = nvar; i < LENGTH(beta2); i++)
+	for (int i = nvar; i < LENGTH(beta2); i++)
 		newbeta[i] = beta[i];
 
 	if (ny == 2) {
@@ -147,7 +147,7 @@ SEXP survreg6(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 		 **  needs to be of length n + number of status==3 obs
 		 */
 		j = 0;
-		for (i = 0; i < n; i++)
+		for (int i = 0; i < n; i++)
 			if (status[i] == 3)
 				j++;
 		PROTECT(z = allocVector(REALSXP, n + j));
@@ -162,7 +162,7 @@ SEXP survreg6(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 	*loglik = (*dolik)(n, nvar, nstrat, 0, beta, asInteger(dist), strat, offset,
 			time1, time2, status, wt, covar, imat, JJ, u, dexpr, rho, zptr, 0,
 			NULL, NULL, NULL);
-	for (i = 0; i < nvar2; i++)
+	for (int i = 0; i < nvar2; i++)
 		usave[i] = u[i];
 	/*
 	 ** Why cholesky3 (with 0 sparse terms) instead of cholesky2, which assumes
@@ -183,13 +183,13 @@ SEXP survreg6(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 	 **  Never, never complain about convergence on the first step.  That way,
 	 **  if someone HAS to they can force one iter at a time.
 	 */
-	for (i = 0; i < nvar2; i++) {
+	for (int i = 0; i < nvar2; i++) {
 		newbeta[i] = beta[i] + u[i];
 	}
 	if (maxiter == 0) {
 		chinv2(imat, nvar2);
-		for (i = 1; i < nvar2; i++)
-			for (j = 0; j < i; j++)
+		for (int i = 1; i < nvar2; i++)
+			for (int j = 0; j < i; j++)
 				imat[i][j] = imat[j][i];
 		*iter2 = 0;
 		goto alldone;
@@ -202,10 +202,10 @@ SEXP survreg6(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 	newlk = (*dolik)(n, nvar, nstrat, 0, newbeta, asInteger(dist), strat,
 			offset, time1, time2, status, wt, covar, imat, JJ, u, dexpr, rho,
 			zptr, 0, NULL, NULL, NULL);
-	for (i = 0; i < nvar2; i++)
+	for (int i = 0; i < nvar2; i++)
 		usave[i] = u[i];
 
-	for (iter = 1; iter <= maxiter; iter++) {
+	for (int iter = 1; iter <= maxiter; iter++) {
 		/*
 		 **   Am I done?  Check for convergence, then update betas
 		 */
@@ -214,11 +214,11 @@ SEXP survreg6(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 			*flag = cholesky3(imat, nvar2, 0, NULL, tol_chol);
 
 			chinv2(imat, nvar2); /* invert the information matrix */
-			for (i = 1; i < nvar2; i++) {
-				for (j = 0; j < i; j++)
+			for (int i = 1; i < nvar2; i++) {
+				for (int j = 0; j < i; j++)
 					imat[i][j] = imat[j][i];
 			}
-			for (i = 0; i < nvar2; i++)
+			for (int i = 0; i < nvar2; i++)
 				beta[i] = newbeta[i];
 			if (halving == 1)
 				*flag = 1000; /*didn't converge after all */
@@ -227,9 +227,9 @@ SEXP survreg6(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 		}
 
 		if (newlk < *loglik) { /*it is not converging ! */
-			for (j = 0; j < 5 && newlk < *loglik; j++) {
+			for (int j = 0; j < 5 && newlk < *loglik; j++) {
 				halving++;
-				for (i = 0; i < nvar2; i++)
+				for (int i = 0; i < nvar2; i++)
 					newbeta[i] = (newbeta[i] + beta[i]) / 2;
 				/*
 				 ** Special code for sigmas.  Often, they are the part
@@ -242,7 +242,7 @@ SEXP survreg6(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 				 **  log(sigma) goes from 0.5 to -3, or has become singular.
 				 */
 				if (halving == 1) { /* only the first time */
-					for (i = 0; i < nstrat; i++) {
+					for (int i = 0; i < nstrat; i++) {
 						if ((beta[nvar + i] - newbeta[nvar + i]) > 1.1)
 							newbeta[nvar + i] = beta[nvar + i] - 1.1;
 					}
@@ -262,7 +262,7 @@ SEXP survreg6(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 				chsolve2(JJ, nvar2, u);
 			} else
 				chsolve2(imat, nvar2, u);
-			for (i = 0; i < nvar2; i++) {
+			for (int i = 0; i < nvar2; i++) {
 				beta[i] = newbeta[i];
 				newbeta[i] = newbeta[i] + u[i];
 			}
@@ -271,19 +271,19 @@ SEXP survreg6(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 		newlk = (*dolik)(n, nvar, nstrat, 0, newbeta, asInteger(dist), strat,
 				offset, time1, time2, status, wt, covar, imat, JJ, u, dexpr,
 				rho, zptr, 0, NULL, NULL, NULL);
-		for (i = 0; i < nvar2; i++)
+		for (int i = 0; i < nvar2; i++)
 			usave[i] = u[i];
 	} /* return for another iteration */
 	*iter2 = maxiter;
 	*loglik = newlk;
 	cholesky3(imat, nvar2, 0, NULL, tol_chol);
 	chinv2(imat, nvar2);
-	for (i = 1; i < nvar2; i++) {
-		for (j = 0; j < i; j++)
+	for (int i = 1; i < nvar2; i++) {
+		for (int j = 0; j < i; j++)
 			imat[i][j] = imat[j][i];
 	}
 
-	for (i = 0; i < nvar2; i++)
+	for (int i = 0; i < nvar2; i++)
 		beta[i] = newbeta[i];
 	*flag = 1000;
 

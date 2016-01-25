@@ -22,7 +22,7 @@ void survfit4(Sint *n, Sint *dd, double *x1, double *x2) {
 	int i, j;
 	double d;
 
-	for (i = 0; i < *n; i++) {
+	for (int i = 0; i < *n; i++) {
 		d = dd[i];
 		if (d == 0) {
 			x1[i] = 1;
@@ -34,7 +34,7 @@ void survfit4(Sint *n, Sint *dd, double *x1, double *x2) {
 		} else {
 			temp1 = 1 / x1[i];
 			temp2 = temp1 * temp1;
-			for (j = 1; j < d; j++) {
+			for (int j = 1; j < d; j++) {
 				temp = 1 / (x1[i] - x2[i] * j / d);
 				temp1 += temp;
 				temp2 += temp * temp;
