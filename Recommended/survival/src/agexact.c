@@ -383,7 +383,6 @@ void agexact(Sint *maxiter, Sint *nusedx, Sint *nvarx, double *start,
 			loglik[1] = newlk;
 			chsolve2(imat, nvar, u);
 
-			j = 0;
 			for (int i = 0; i < nvar; i++) {
 				beta[i] = newbeta[i];
 				newbeta[i] = newbeta[i] + u[i];
