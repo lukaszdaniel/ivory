@@ -27,7 +27,7 @@ SEXP agmart3(SEXP surv2, SEXP score2, SEXP weight2, SEXP strata2, SEXP sortx,
 	double hazard, e_hazard, cumhaz;
 	double temp, time;
 	double wtsum;
-	int n, person;
+	int n;
 
 	/* pointers to the input data */
 	double *start, *stop, *event;

@@ -27,13 +27,13 @@
 
 void agmart(Sint *n, Sint *method, double *start, double *stop, Sint *event,
 		double *score, double *wt, Sint *strata, double *resid) {
-	int i, k;
+
 	double deaths, denom, e_denom;
 	double hazard, e_hazard;
 	double temp, time;
 	double wtsum;
 	int nused;
-	int person;
+
 
 	nused = *n;
 	strata[nused - 1] = 1; /* Failsafe */

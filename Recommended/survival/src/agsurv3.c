@@ -58,13 +58,13 @@ void agsurv3(Sint *sn, Sint *snvar, Sint *sncurve, Sint *snpt, Sint *sse,
 		double *var, double *xmean, Sint *scn, double *cy, double *cx,
 		double *ssurv, double *varh, double *sused, Sint *smethod) {
 
-	int i, j, k, l;
+
 	double *start, *stop, *event;
 	int cn;
 	int npt, nvar2, method;
 	int kk = 0, psave;
 	int itime;
-	int person;
+
 	int deaths, nrisk;
 	int need;
 	double *a = 0, *a2 = 0;
@@ -247,7 +247,7 @@ void agsurv3(Sint *sn, Sint *snvar, Sint *sncurve, Sint *snpt, Sint *sse,
 
 static void addup(itime, haz, var)
 	int itime;double haz, var; {
-	int i, j, k, l;
+	int i;
 	int pstart, ic;
 	double temp, totsurv, totvar, wt, nn;
 

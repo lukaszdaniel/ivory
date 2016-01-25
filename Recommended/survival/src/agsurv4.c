@@ -4,7 +4,7 @@
 
 void agsurv4(Sint *ndeath, double *risk, double *wt, Sint *sn, double *denom,
 		double *km) {
-	int i, j, k, l;
+	int j;
 	int n; /* number of unique death times */
 	double sumt, guess, inc;
 

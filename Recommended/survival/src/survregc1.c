@@ -59,7 +59,7 @@ double survregc1(int n, int nvar, int nstrat, int whichcase, double *beta,
 		double *u, SEXP expr, SEXP rho, double *dummy, int nf, Sint *frail,
 		double *fdiag, double *jdiag) {
 
-	int person, i, j, k;
+	int j, k;
 	int nvar2; /* nvar + nstrat */
 	int nvar3; /* nvar2 + nf */
 	int strata;

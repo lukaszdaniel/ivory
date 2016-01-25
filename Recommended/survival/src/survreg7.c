@@ -66,14 +66,14 @@ SEXP survreg7(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 		SEXP epsx, SEXP tolx, SEXP dist, SEXP dexpr, SEXP rho, SEXP ptype2,
 		SEXP pdiag2, SEXP nfrail2, SEXP fgrp2, SEXP pexpr1, SEXP pexpr2) {
 	/* local variables */
-	int i, j;
+
 	int nvar, nvar2, nvar3, nstrat;
 	int iter;
 	double newlk = 0;
 	double (*dolik)(); /* will point to (*dolik) or survregc2 */
 	double x1, x2, x3, x4;
 	double y1, y2, y3;
-	int golden, goright;
+	int goright;
 	double newpen;
 
 	/* pointers for the data regions of the input arguments */

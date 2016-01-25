@@ -3,7 +3,7 @@
 void agsurv5(Sint *n2, Sint *nvar2, Sint *dd, double *x1, double *x2,
 		double *xsum, double *xsum2, double *sum1, double *sum2, double *xbar) {
 	double temp;
-	int i, j, k, kk;
+	int kk;
 	double d;
 	int n, nvar;
 

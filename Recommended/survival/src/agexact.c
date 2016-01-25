@@ -57,8 +57,8 @@ void agexact(Sint *maxiter, Sint *nusedx, Sint *nvarx, double *start,
 		double *means, double *beta, double *u, double *imat2, double loglik[2],
 		Sint *flag, double *work, Sint *work2, double *eps, double *tol_chol,
 		double *sctest) {
-	int i, j, k, l, person;
-	int iter;
+	int i, k;
+
 	int n, nvar;
 
 	double **covar, **cmat, **imat; /*ragged array versions*/

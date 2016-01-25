@@ -96,7 +96,7 @@ void agfit5a(Sint *nusedx, Sint *nvarx, double *yy, double *covar2,
 		Sint *ptype2, Sint *pdiag2, Sint *nfrail, Sint *frail2, void *fexpr1,
 		void *fexpr2, void *rho) {
 
-	int i, j, k, person;
+	int i, j, k;
 	int nused, nvar;
 	int nf, nvar2;
 	int deaths, itemp;
@@ -307,9 +307,9 @@ void agfit5b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
 		double *beta, double *u, double *imat2, double *jmat2, double *loglik,
 		Sint *flag, double *eps, double *tolerch, Sint *methodx, Sint *nfrail,
 		double *fbeta, double *fdiag, void *fexpr1, void *fexpr2, void *rho) {
-	int i, j, k, person;
+	int i, j, k;
 	int ii;
-	int iter;
+
 	int nused, nvar;
 	int nf, nvar2;
 	int fgrp;

@@ -107,7 +107,7 @@ SEXP survfitci(SEXP ftime2, SEXP sort12, SEXP sort22, SEXP ntime2, SEXP status2,
 			hmat[i][j] = 0;
 			chaz[i][j] = 0;
 		}
-		for (int j = 0; j < nperson; j++)
+		if (sefit > 0) for (int j = 0; j < nperson; j++)
 			umat[j][i] = 0;
 	}
 	for (i = 0; i < nperson; i++)

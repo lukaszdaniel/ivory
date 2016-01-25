@@ -25,16 +25,16 @@
 
 void agscore(Sint *nx, Sint *nvarx, double *y, double *covar2, Sint *strata,
 		double *score, double *weights, Sint *method, double *resid2, double *a) {
-	int i, k;
+
 	int n, nvar;
-	int person;
+
 	double denom, time;
 	double *a2, *mean;
 	double e_denom;
 	double risk;
 	double hazard, meanwt;
 	double deaths, downwt;
-	int dd;
+
 	double *start, *stop, *event;
 	double **covar, **resid;
 	double temp1, temp2, d2;
