@@ -18,7 +18,8 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#include "grid.h" 
+#include "grid.h"
+#include <math.h>
 #include "localization.h"
 
 /* Code for matrices, matrix multiplication, etc for performing

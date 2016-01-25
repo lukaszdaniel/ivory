@@ -24,6 +24,10 @@
 /* do this first to get the right options for math.h */
 #include <R_ext/Arith.h>
 
+#include <stdlib.h> // for abs
+#include <string.h>
+#include <math.h>
+
 #include <R.h>
 #include <R_ext/Minmax.h>
 #include "ts.h"

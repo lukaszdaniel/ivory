@@ -29,8 +29,8 @@
 #endif
 
 #include <R_ext/Arith.h>
-
 #include <Rinternals.h>
+#include <math.h>
 #include "localization.h"
 
 /* NB: this only works in the lower half of y, but pads with zeros. */

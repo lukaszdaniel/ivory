@@ -24,11 +24,13 @@
  *  https://www.R-project.org/Licenses/
  */
 
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <float.h>
 #include <R.h>
 #include <Rinternals.h>
 #include <R_ext/Minmax.h>
-#include <stdlib.h>
-#include <float.h>
 #include "nls.h"
 #include "localization.h"
 

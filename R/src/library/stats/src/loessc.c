@@ -24,6 +24,8 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <math.h>
+#include <limits.h>
 #include <R.h>
 #include "localization.h"
 

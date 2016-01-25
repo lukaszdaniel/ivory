@@ -19,6 +19,7 @@
  */
 
 #include "grid.h"
+#include <string.h>
 #include "localization.h"
 
 int gridRegisterIndex;

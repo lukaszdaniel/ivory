@@ -23,6 +23,7 @@
 
 /* do this first to get the right options for math.h */
 #include <R_ext/Arith.h>
+#include <math.h>
 #include <R_ext/Minmax.h>
 
 #include <R.h>
