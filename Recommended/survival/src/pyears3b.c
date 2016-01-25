@@ -76,7 +76,7 @@ SEXP pyears3b(SEXP death2, SEXP efac2, SEXP edims2, SEXP ecut2, SEXP expect2,
 	/* scratch space */
 	data2 = (double *) ALLOC(edim + 1, sizeof(double));
 	wvec = (double *) ALLOC(ntime * ngrp, sizeof(double));
-	for (j = 0; j < ntime * ngrp; j++)
+	for (int j = 0; j < ntime * ngrp; j++)
 		wvec[j] = 0;
 
 	/*
@@ -84,7 +84,7 @@ SEXP pyears3b(SEXP death2, SEXP efac2, SEXP edims2, SEXP ecut2, SEXP expect2,
 	 */
 	ecut = (double **) ALLOC(edim, sizeof(double *));
 	etemp = REAL(ecut2);
-	for (i = 0; i < edim; i++) {
+	for (int i = 0; i < edim; i++) {
 		ecut[i] = etemp;
 		if (efac[i] == 0)
 			etemp += edims[i];
@@ -99,19 +99,19 @@ SEXP pyears3b(SEXP death2, SEXP efac2, SEXP edims2, SEXP ecut2, SEXP expect2,
 	esurv = REAL(esurv2);
 	PROTECT(nsurv2 = allocVector(INTSXP, ntime * ngrp));
 	nsurv = INTEGER(nsurv2);
-	for (i = 0; i < (ntime * ngrp); i++) {
+	for (int i = 0; i < (ntime * ngrp); i++) {
 		esurv[i] = 0.;
 		nsurv[i] = 0;
 	}
 
 	/* compute */
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		R_CheckUserInterrupt(); /* check for control-C */
 		/*
 		 ** initialize
 		 */
 		cumhaz = 0;
-		for (j = 0; j < edim; j++)
+		for (int j = 0; j < edim; j++)
 			data2[j] = x[j][i];
 		timeleft = y[i];
 		group = grpx[i] - 1;
@@ -120,7 +120,7 @@ SEXP pyears3b(SEXP death2, SEXP efac2, SEXP edims2, SEXP ecut2, SEXP expect2,
 		/*
 		 ** add up hazard
 		 */
-		for (j = 0; j < ntime && timeleft > 0; j++) {
+		for (int j = 0; j < ntime && timeleft > 0; j++) {
 			thiscell = times[j] - time;
 			if (thiscell > timeleft)
 				thiscell = timeleft;
@@ -142,7 +142,7 @@ SEXP pyears3b(SEXP death2, SEXP efac2, SEXP edims2, SEXP ecut2, SEXP expect2,
 							* (wt * expect[indx] + (1 - wt) * expect[indx2]);
 				else
 					hazard += et2 * expect[indx];
-				for (k = 0; k < edim; k++)
+				for (int k = 0; k < edim; k++)
 					if (efac[k] != 1)
 						data2[k] += et2;
 				etime -= et2;
@@ -173,7 +173,7 @@ SEXP pyears3b(SEXP death2, SEXP efac2, SEXP edims2, SEXP ecut2, SEXP expect2,
 		}
 	}
 
-	for (i = 0; i < ntime * ngrp; i++) {
+	for (int i = 0; i < ntime * ngrp; i++) {
 		/*
 		 printf("i=%3d, esurv=%6e, wvec=%6e, death=%d\n", i, esurv[i], wvec[i], death);
 		 */

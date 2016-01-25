@@ -69,7 +69,7 @@ void pyears2(Sint *sn, Sint *sny, Sint *sdoevent, double *sy, double *wt,
 	 ** will be a ragged array
 	 */
 	ocut = (double **) ALLOC(odim, sizeof(double *));
-	for (i = 0; i < odim; i++) {
+	for (int i = 0; i < odim; i++) {
 		ocut[i] = socut;
 		if (ofac[i] == 0)
 			socut += odims[i] + 1;
@@ -104,7 +104,7 @@ void pyears2(Sint *sn, Sint *sny, Sint *sdoevent, double *sy, double *wt,
 	eps *= 1e-8;
 
 	*offtable = 0;
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		R_CheckUserInterrupt(); /* in case of long calculations */
 		/*
 		 ** initialize
@@ -113,7 +113,7 @@ void pyears2(Sint *sn, Sint *sny, Sint *sdoevent, double *sy, double *wt,
 		 **    for a continuous one it is the value, which will be matched to
 		 **       the ocuts list, by pystep, to figure out a cell number
 		 */
-		for (j = 0; j < odim; j++) {
+		for (int j = 0; j < odim; j++) {
 			if (ofac[j] == 1 || dostart == 0)
 				data[j] = odata[j][i];
 			else
@@ -145,7 +145,7 @@ void pyears2(Sint *sn, Sint *sny, Sint *sdoevent, double *sy, double *wt,
 			} else
 				*offtable += thiscell * wt[i];
 
-			for (j = 0; j < odim; j++)
+			for (int j = 0; j < odim; j++)
 				if (ofac[j] == 0)
 					data[j] += thiscell;
 			timeleft -= thiscell;

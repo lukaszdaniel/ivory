@@ -59,13 +59,13 @@ void coxscore(Sint *nx, Sint *nvarx, double *y, double *covar2, Sint *strata,
 	e_denom = 0;
 	deaths = 0;
 	meanwt = 0;
-	for (i = 0; i < nvar; i++)
+	for (int i = 0; i < nvar; i++)
 		a2[i] = 0;
 	strata[n - 1] = 1; /*failsafe */
-	for (i = n - 1; i >= 0; i--) {
+	for (int i = n - 1; i >= 0; i--) {
 		if (strata[i] == 1) {
 			denom = 0;
-			for (j = 0; j < nvar; j++)
+			for (int j = 0; j < nvar; j++)
 				a[j] = 0;
 		}
 
@@ -75,10 +75,10 @@ void coxscore(Sint *nx, Sint *nvarx, double *y, double *covar2, Sint *strata,
 			deaths++;
 			e_denom += risk;
 			meanwt += weights[i];
-			for (j = 0; j < nvar; j++)
+			for (int j = 0; j < nvar; j++)
 				a2[j] += risk * covar[j][i];
 		}
-		for (j = 0; j < nvar; j++) {
+		for (int j = 0; j < nvar; j++) {
 			a[j] += risk * covar[j][i];
 			resid[j][i] = 0;
 		}
@@ -88,9 +88,9 @@ void coxscore(Sint *nx, Sint *nvarx, double *y, double *covar2, Sint *strata,
 			/* last obs of a set of tied death times */
 			if (deaths < 2 || *method == 0) {
 				hazard = meanwt / denom;
-				for (j = 0; j < nvar; j++) {
+				for (int j = 0; j < nvar; j++) {
 					temp = (a[j] / denom); /* xbar */
-					for (k = i; k < n; k++) {
+					for (int k = i; k < n; k++) {
 						temp2 = covar[j][k] - temp;
 						if (time[k] == time[i] && status[k] == 1)
 							resid[j][k] += temp2;
@@ -101,13 +101,13 @@ void coxscore(Sint *nx, Sint *nvarx, double *y, double *covar2, Sint *strata,
 				}
 			} else { /* the harder case */
 				meanwt /= deaths;
-				for (dd = 0; dd < deaths; dd++) {
+				for (int dd = 0; dd < deaths; dd++) {
 					downwt = dd / deaths;
 					temp = denom - downwt * e_denom;
 					hazard = meanwt / temp;
-					for (j = 0; j < nvar; j++) {
+					for (int j = 0; j < nvar; j++) {
 						mean = (a[j] - downwt * a2[j]) / temp;
-						for (k = i; k < n; k++) {
+						for (int k = i; k < n; k++) {
 							temp2 = covar[j][k] - mean;
 							if (time[k] == time[i] && status[k] == 1) {
 								resid[j][k] += temp2 / deaths;
@@ -124,7 +124,7 @@ void coxscore(Sint *nx, Sint *nvarx, double *y, double *covar2, Sint *strata,
 			e_denom = 0;
 			deaths = 0;
 			meanwt = 0;
-			for (j = 0; j < nvar; j++)
+			for (int j = 0; j < nvar; j++)
 				a2[j] = 0;
 		}
 	}

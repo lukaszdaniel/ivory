@@ -90,7 +90,7 @@ void pyears1(Sint *sn, Sint *sny, Sint *sdoevent, double *sy, double *weight,
 	 ** ecut and ocut will be ragged arrays
 	 */
 	ecut = (double **) ALLOC(edim, sizeof(double *));
-	for (i = 0; i < edim; i++) {
+	for (int i = 0; i < edim; i++) {
 		ecut[i] = secut;
 		if (efac[i] == 0)
 			secut += edims[i];
@@ -99,7 +99,7 @@ void pyears1(Sint *sn, Sint *sny, Sint *sdoevent, double *sy, double *weight,
 	}
 
 	ocut = (double **) ALLOC(odim, sizeof(double *));
-	for (i = 0; i < odim; i++) {
+	for (int i = 0; i < odim; i++) {
 		ocut[i] = socut;
 		if (ofac[i] == 0)
 			socut += odims[i] + 1;
@@ -134,17 +134,17 @@ void pyears1(Sint *sn, Sint *sny, Sint *sdoevent, double *sy, double *weight,
 	eps *= 1e-8;
 
 	*offtable = 0;
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		/*
 		 ** initialize
 		 */
-		for (j = 0; j < odim; j++) {
+		for (int j = 0; j < odim; j++) {
 			if (ofac[j] == 1 || dostart == 0)
 				data[j] = odata[j][i];
 			else
 				data[j] = odata[j][i] + start[i];
 		}
-		for (j = 0; j < edim; j++) {
+		for (int j = 0; j < edim; j++) {
 			if (efac[j] == 1 || dostart == 0)
 				data2[j] = edata[j][i];
 			else
@@ -196,7 +196,7 @@ void pyears1(Sint *sn, Sint *sny, Sint *sdoevent, double *sy, double *weight,
 								/ lambda;
 					hazard += lambda * et2;
 
-					for (j = 0; j < edim; j++)
+					for (int j = 0; j < edim; j++)
 						if (efac[j] != 1)
 							data2[j] += et2;
 					etime -= et2;
@@ -208,12 +208,12 @@ void pyears1(Sint *sn, Sint *sny, Sint *sdoevent, double *sy, double *weight,
 				cumhaz += hazard;
 			} else {
 				*offtable += thiscell * weight[i];
-				for (j = 0; j < edim; j++)
+				for (int j = 0; j < edim; j++)
 					if (efac[j] != 1)
 						data2[j] += thiscell;
 			}
 
-			for (j = 0; j < odim; j++)
+			for (int j = 0; j < odim; j++)
 				if (ofac[j] == 0)
 					data[j] += thiscell;
 			timeleft -= thiscell;
