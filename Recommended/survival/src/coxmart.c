@@ -35,7 +35,7 @@ void coxmart(Sint *sn, Sint *method, double *time, Sint *status, Sint * strata,
 	strata[n - 1] = 1; /* Failsafe */
 
 	/* Pass 1-- store the risk denominator in 'expect' */
-	for (i = n - 1; i >= 0; i--) {
+	for (int i = n - 1; i >= 0; i--) {
 		if (strata[i] == 1)
 			denom = 0;
 		denom += score[i] * wt[i];
@@ -62,7 +62,7 @@ void coxmart(Sint *sn, Sint *method, double *time, Sint *status, Sint * strata,
 			/*last subject of a set of tied times */
 			if (deaths < 2 || *method == 0) {
 				hazard += wtsum / denom;
-				for (j = lastone; j <= i; j++) {
+				for (int j = lastone; j <= i; j++) {
 					expect[j] -= score[j] * hazard;
 				}
 			} else {

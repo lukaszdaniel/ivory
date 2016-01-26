@@ -28,13 +28,10 @@
  ** We only cut these off enough to avoid underflow.
  */
 
+#include <R_ext/Minmax.h>
 #define LARGE 22
 #define SMALL -200
 
 double coxsafe(double x) {
-	if (x < SMALL)
-		return (SMALL);
-	if (x > LARGE)
-		return (LARGE);
-	return (x);
+	return min(max(SMALL, x), LARGE);
 }

@@ -31,7 +31,7 @@ void coxmart2(Sint *sn, double *time, Sint *status, Sint * strata,
 	 **  Temporarily save the resulting hazard in the residual vector
 	 */
 	denom = 0;
-	for (i = 0; i < n;) {
+	for (int i = 0; i < n;) {
 		if (strata[i] == 1) { /*first obs of a new strata */
 			denom = 0;
 		}
@@ -59,7 +59,7 @@ void coxmart2(Sint *sn, double *time, Sint *status, Sint * strata,
 	 ** pass 2: accumulate the hazard from smallest time to largest
 	 */
 	expected = 0;
-	for (i = n - 1; i >= 0; i--) {
+	for (int i = n - 1; i >= 0; i--) {
 		expected += resid[i];
 		resid[i] = status[i] - score[i] * expected;
 		if (strata[i] == 1)

@@ -36,9 +36,9 @@ void survConcordance(Sint *np, double *time, Sint *status, double *x, Sint *n2p,
 	n2 = *n2p;
 	count1 = &(temp[0]);
 	count2 = &(temp[n2]);
-	for (i = 0; i < 5; i++)
+	for (int i = 0; i < 5; i++)
 		result[i] = 0; /* redundant I think */
-	for (i = 0; i < n2; i++)
+	for (int i = 0; i < n2; i++)
 		count1[i] = 0;
 
 	/*
@@ -71,7 +71,7 @@ void survConcordance(Sint *np, double *time, Sint *status, double *x, Sint *n2p,
 	 */
 
 	tdeath = 0; /* current count of tied deaths */
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		if (status[i] > 0) {
 			/*
 			 ** Walk the tree a first time, to count this observation's

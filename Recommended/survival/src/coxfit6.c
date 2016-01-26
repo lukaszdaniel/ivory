@@ -158,22 +158,22 @@ SEXP coxfit6(SEXP maxiter2, SEXP time2, SEXP status2, SEXP covar2, SEXP offset2,
 	 */
 	tdeath = 0;
 	temp2 = 0;
-	for (i = 0; i < nused; i++) {
+	for (int i = 0; i < nused; i++) {
 		temp2 += weights[i];
 		tdeath += weights[i] * status[i];
 	}
 	for (i = 0; i < nvar; i++) {
 		maxbeta[i] = 0; /* temporary, keep the max abs for the covariate */
 		temp = 0;
-		for (person = 0; person < nused; person++)
+		for (int person = 0; person < nused; person++)
 			temp += weights[person] * covar[i][person];
 		temp /= temp2;
 		means[i] = temp;
-		for (person = 0; person < nused; person++)
+		for (int person = 0; person < nused; person++)
 			covar[i][person] -= temp;
 		if (doscale == 1) { /* and also scale it */
 			temp = 0;
-			for (person = 0; person < nused; person++) {
+			for (int person = 0; person < nused; person++) {
 				temp += weights[person] * fabs(covar[i][person]);
 			}
 			if (temp > 0)
@@ -181,7 +181,7 @@ SEXP coxfit6(SEXP maxiter2, SEXP time2, SEXP status2, SEXP covar2, SEXP offset2,
 			else
 				temp = 1.0; /* rare case of a constant covariate */
 			scale[i] = temp;
-			for (person = 0; person < nused; person++) {
+			for (int person = 0; person < nused; person++) {
 				covar[i][person] *= temp;
 				if (fabs(covar[i][person]) > maxbeta[i])
 					maxbeta[i] = fabs(covar[i][person]);
@@ -189,17 +189,17 @@ SEXP coxfit6(SEXP maxiter2, SEXP time2, SEXP status2, SEXP covar2, SEXP offset2,
 		} else {
 			/* scaling is only turned off during debugging
 			 still, cover the case */
-			for (person = 0; person < nused; person++) {
+			for (int person = 0; person < nused; person++) {
 				if (fabs(covar[i][person]) > maxbeta[i])
 					maxbeta[i] = fabs(covar[i][person]);
 			}
 		}
 	}
 	if (doscale == 1) {
-		for (i = 0; i < nvar; i++)
+		for (int i = 0; i < nvar; i++)
 			beta[i] /= scale[i]; /*rescale initial betas */
 	} else {
-		for (i = 0; i < nvar; i++)
+		for (int i = 0; i < nvar; i++)
 			scale[i] = 1.0;
 	}
 
@@ -215,7 +215,7 @@ SEXP coxfit6(SEXP maxiter2, SEXP time2, SEXP status2, SEXP covar2, SEXP offset2,
 	 **  indicate "no risk", meaning that x*beta values of 50-100 can occur
 	 **  in "ok" data sets.  Compromise.
 	 */
-	for (i = 0; i < nvar; i++)
+	for (int i = 0; i < nvar; i++)
 		maxbeta[i] = 200 / maxbeta[i];
 
 	/*
@@ -223,22 +223,22 @@ SEXP coxfit6(SEXP maxiter2, SEXP time2, SEXP status2, SEXP covar2, SEXP offset2,
 	 */
 	strata[nused - 1] = 1;
 	loglik[1] = 0;
-	for (i = 0; i < nvar; i++) {
+	for (int i = 0; i < nvar; i++) {
 		u[i] = 0;
 		a2[i] = 0;
-		for (j = 0; j < nvar; j++) {
+		for (int j = 0; j < nvar; j++) {
 			imat[i][j] = 0;
 			cmat2[i][j] = 0;
 		}
 	}
 
-	for (person = nused - 1; person >= 0;) {
+	for (int person = nused - 1; person >= 0;) {
 		if (strata[person] == 1) {
 			nrisk = 0;
 			denom = 0;
-			for (i = 0; i < nvar; i++) {
+			for (int i = 0; i < nvar; i++) {
 				a[i] = 0;
-				for (j = 0; j < nvar; j++)
+				for (int j = 0; j < nvar; j++)
 					cmat[i][j] = 0;
 			}
 		}
@@ -251,15 +251,15 @@ SEXP coxfit6(SEXP maxiter2, SEXP time2, SEXP status2, SEXP covar2, SEXP offset2,
 			/* walk through the this set of tied times */
 			nrisk++;
 			zbeta = offset[person]; /* form the term beta*z (vector mult) */
-			for (i = 0; i < nvar; i++)
+			for (int i = 0; i < nvar; i++)
 				zbeta += beta[i] * covar[i][person];
 			risk = exp(zbeta) * weights[person];
 			denom += risk;
 
 			/* a is the vector of weighted sums of x, cmat sums of squares */
-			for (i = 0; i < nvar; i++) {
+			for (int i = 0; i < nvar; i++) {
 				a[i] += risk * covar[i][person];
-				for (j = 0; j <= i; j++)
+				for (int j = 0; j <= i; j++)
 					cmat[i][j] += risk * covar[i][person] * covar[j][person];
 			}
 
@@ -269,12 +269,12 @@ SEXP coxfit6(SEXP maxiter2, SEXP time2, SEXP status2, SEXP covar2, SEXP offset2,
 				efronwt += risk;
 				loglik[1] += weights[person] * zbeta;
 
-				for (i = 0; i < nvar; i++)
+				for (int i = 0; i < nvar; i++)
 					u[i] += weights[person] * covar[i][person];
 				if (method == 1) { /* Efron */
-					for (i = 0; i < nvar; i++) {
+					for (int i = 0; i < nvar; i++) {
 						a2[i] += risk * covar[i][person];
-						for (j = 0; j <= i; j++)
+						for (int j = 0; j <= i; j++)
 							cmat2[i][j] += risk * covar[i][person]
 									* covar[j][person];
 					}
@@ -290,10 +290,10 @@ SEXP coxfit6(SEXP maxiter2, SEXP time2, SEXP status2, SEXP covar2, SEXP offset2,
 			if (method == 0) { /* Breslow */
 				loglik[1] -= deadwt * log(denom);
 
-				for (i = 0; i < nvar; i++) {
+				for (int i = 0; i < nvar; i++) {
 					temp2 = a[i] / denom; /* mean */
 					u[i] -= deadwt * temp2;
-					for (j = 0; j <= i; j++)
+					for (int j = 0; j <= i; j++)
 						imat[j][i] += deadwt * (cmat[i][j] - temp2 * a[j])
 								/ denom;
 				}
@@ -308,24 +308,24 @@ SEXP coxfit6(SEXP maxiter2, SEXP time2, SEXP status2, SEXP covar2, SEXP offset2,
 				 **     cmat - (k/ndead)*cmat2 as the "cmat" term
 				 **  and reprise the equations just above.
 				 */
-				for (k = 0; k < ndead; k++) {
+				for (int k = 0; k < ndead; k++) {
 					temp = (double) k / ndead;
 					wtave = deadwt / ndead;
 					d2 = denom - temp * efronwt;
 					loglik[1] -= wtave * log(d2);
-					for (i = 0; i < nvar; i++) {
+					for (int i = 0; i < nvar; i++) {
 						temp2 = (a[i] - temp * a2[i]) / d2;
 						u[i] -= wtave * temp2;
-						for (j = 0; j <= i; j++)
+						for (int j = 0; j <= i; j++)
 							imat[j][i] += (wtave / d2)
 									* ((cmat[i][j] - temp * cmat2[i][j])
 											- temp2 * (a[j] - temp * a2[j]));
 					}
 				}
 
-				for (i = 0; i < nvar; i++) {
+				for (int i = 0; i < nvar; i++) {
 					a2[i] = 0;
-					for (j = 0; j < nvar; j++)
+					for (int j = 0; j < nvar; j++)
 						cmat2[i][j] = 0;
 				}
 			}
@@ -336,14 +336,14 @@ SEXP coxfit6(SEXP maxiter2, SEXP time2, SEXP status2, SEXP covar2, SEXP offset2,
 	/* am I done?
 	 **   update the betas and test for convergence
 	 */
-	for (i = 0; i < nvar; i++) /*use 'a' as a temp to save u0, for the score test*/
+	for (int i = 0; i < nvar; i++) /*use 'a' as a temp to save u0, for the score test*/
 		a[i] = u[i];
 
 	*flag = cholesky2(imat, nvar, toler);
 	chsolve2(imat, nvar, a); /* a replaced by  a *inverse(i) */
 
 	temp = 0;
-	for (i = 0; i < nvar; i++)
+	for (int i = 0; i < nvar; i++)
 		temp += u[i] * a[i];
 	*sctest = temp; /* score test */
 
@@ -351,16 +351,16 @@ SEXP coxfit6(SEXP maxiter2, SEXP time2, SEXP status2, SEXP covar2, SEXP offset2,
 	 **  Never, never complain about convergence on the first step.  That way,
 	 **  if someone HAS to they can force one iter at a time.
 	 */
-	for (i = 0; i < nvar; i++) {
+	for (int i = 0; i < nvar; i++) {
 		newbeta[i] = beta[i] + a[i];
 	}
 	if (maxiter == 0) {
 		chinv2(imat, nvar);
-		for (i = 0; i < nvar; i++) {
+		for (int i = 0; i < nvar; i++) {
 			beta[i] *= scale[i]; /*return to original scale */
 			u[i] /= scale[i];
 			imat[i][i] *= scale[i] * scale[i];
-			for (j = 0; j < i; j++) {
+			for (int j = 0; j < i; j++) {
 				imat[j][i] *= scale[i] * scale[j];
 				imat[i][j] = imat[j][i];
 			}
@@ -375,9 +375,9 @@ SEXP coxfit6(SEXP maxiter2, SEXP time2, SEXP status2, SEXP covar2, SEXP offset2,
 	for (*iter = 1; *iter <= maxiter; (*iter)++) {
 		R_CheckUserInterrupt();
 		newlk = 0;
-		for (i = 0; i < nvar; i++) {
+		for (int i = 0; i < nvar; i++) {
 			u[i] = 0;
-			for (j = 0; j < nvar; j++)
+			for (int j = 0; j < nvar; j++)
 				imat[i][j] = 0;
 		}
 
@@ -385,13 +385,13 @@ SEXP coxfit6(SEXP maxiter2, SEXP time2, SEXP status2, SEXP covar2, SEXP offset2,
 		 ** The data is sorted from smallest time to largest
 		 ** Start at the largest time, accumulating the risk set 1 by 1
 		 */
-		for (person = nused - 1; person >= 0;) {
+		for (int person = nused - 1; person >= 0;) {
 			if (strata[person] == 1) { /* rezero temps for each strata */
 				denom = 0;
 				nrisk = 0;
-				for (i = 0; i < nvar; i++) {
+				for (int i = 0; i < nvar; i++) {
 					a[i] = 0;
-					for (j = 0; j < nvar; j++)
+					for (int j = 0; j < nvar; j++)
 						cmat[i][j] = 0;
 				}
 			}
@@ -403,14 +403,14 @@ SEXP coxfit6(SEXP maxiter2, SEXP time2, SEXP status2, SEXP covar2, SEXP offset2,
 			while (person >= 0 && time[person] == dtime) {
 				nrisk++;
 				zbeta = offset[person];
-				for (i = 0; i < nvar; i++)
+				for (int i = 0; i < nvar; i++)
 					zbeta += newbeta[i] * covar[i][person];
 				risk = exp(zbeta) * weights[person];
 				denom += risk;
 
-				for (i = 0; i < nvar; i++) {
+				for (int i = 0; i < nvar; i++) {
 					a[i] += risk * covar[i][person];
-					for (j = 0; j <= i; j++)
+					for (int j = 0; j <= i; j++)
 						cmat[i][j] += risk * covar[i][person]
 								* covar[j][person];
 				}
@@ -419,13 +419,13 @@ SEXP coxfit6(SEXP maxiter2, SEXP time2, SEXP status2, SEXP covar2, SEXP offset2,
 					ndead++;
 					deadwt += weights[person];
 					newlk += weights[person] * zbeta;
-					for (i = 0; i < nvar; i++)
+					for (int i = 0; i < nvar; i++)
 						u[i] += weights[person] * covar[i][person];
 					if (method == 1) { /* Efron */
 						efronwt += risk;
-						for (i = 0; i < nvar; i++) {
+						for (int i = 0; i < nvar; i++) {
 							a2[i] += risk * covar[i][person];
-							for (j = 0; j <= i; j++)
+							for (int j = 0; j <= i; j++)
 								cmat2[i][j] += risk * covar[i][person]
 										* covar[j][person];
 						}
@@ -440,23 +440,23 @@ SEXP coxfit6(SEXP maxiter2, SEXP time2, SEXP status2, SEXP covar2, SEXP offset2,
 			if (ndead > 0) { /* add up terms*/
 				if (method == 0) { /* Breslow */
 					newlk -= deadwt * log(denom);
-					for (i = 0; i < nvar; i++) {
+					for (int i = 0; i < nvar; i++) {
 						temp2 = a[i] / denom; /* mean */
 						u[i] -= deadwt * temp2;
-						for (j = 0; j <= i; j++)
+						for (int j = 0; j <= i; j++)
 							imat[j][i] += (deadwt / denom)
 									* (cmat[i][j] - temp2 * a[j]);
 					}
 				} else { /* Efron */
-					for (k = 0; k < ndead; k++) {
+					for (int k = 0; k < ndead; k++) {
 						temp = (double) k / ndead;
 						wtave = deadwt / ndead;
 						d2 = denom - temp * efronwt;
 						newlk -= wtave * log(d2);
-						for (i = 0; i < nvar; i++) {
+						for (int i = 0; i < nvar; i++) {
 							temp2 = (a[i] - temp * a2[i]) / d2;
 							u[i] -= wtave * temp2;
-							for (j = 0; j <= i; j++)
+							for (int j = 0; j <= i; j++)
 								imat[j][i] +=
 										(wtave / d2)
 												* ((cmat[i][j]
@@ -468,9 +468,9 @@ SEXP coxfit6(SEXP maxiter2, SEXP time2, SEXP status2, SEXP covar2, SEXP offset2,
 						}
 					}
 
-					for (i = 0; i < nvar; i++) { /*in anticipation */
+					for (int i = 0; i < nvar; i++) { /*in anticipation */
 						a2[i] = 0;
-						for (j = 0; j < nvar; j++)
+						for (int j = 0; j < nvar; j++)
 							cmat2[i][j] = 0;
 					}
 				}
@@ -485,11 +485,11 @@ SEXP coxfit6(SEXP maxiter2, SEXP time2, SEXP status2, SEXP covar2, SEXP offset2,
 		if (fabs(1 - (loglik[1] / newlk)) <= eps && halving == 0) { /* all done */
 			loglik[1] = newlk;
 			chinv2(imat, nvar); /* invert the information matrix */
-			for (i = 0; i < nvar; i++) {
+			for (int i = 0; i < nvar; i++) {
 				beta[i] = newbeta[i] * scale[i];
 				u[i] /= scale[i];
 				imat[i][i] *= scale[i] * scale[i];
-				for (j = 0; j < i; j++) {
+				for (int j = 0; j < i; j++) {
 					imat[j][i] *= scale[i] * scale[j];
 					imat[i][j] = imat[j][i];
 				}
@@ -502,14 +502,14 @@ SEXP coxfit6(SEXP maxiter2, SEXP time2, SEXP status2, SEXP covar2, SEXP offset2,
 
 		if (newlk < loglik[1]) { /*it is not converging ! */
 			halving = 1;
-			for (i = 0; i < nvar; i++)
+			for (int i = 0; i < nvar; i++)
 				newbeta[i] = (newbeta[i] + beta[i]) / 2; /*half of old increment */
 		} else {
 			halving = 0;
 			loglik[1] = newlk;
 			chsolve2(imat, nvar, u);
-			j = 0;
-			for (i = 0; i < nvar; i++) {
+			//j = 0;
+			for (int i = 0; i < nvar; i++) {
 				beta[i] = newbeta[i];
 				newbeta[i] = newbeta[i] + u[i];
 				if (newbeta[i] > maxbeta[i])
@@ -525,11 +525,11 @@ SEXP coxfit6(SEXP maxiter2, SEXP time2, SEXP status2, SEXP covar2, SEXP offset2,
 	 */
 	loglik[1] = newlk;
 	chinv2(imat, nvar);
-	for (i = 0; i < nvar; i++) {
+	for (int i = 0; i < nvar; i++) {
 		beta[i] = newbeta[i] * scale[i];
 		u[i] /= scale[i];
 		imat[i][i] *= scale[i] * scale[i];
-		for (j = 0; j < i; j++) {
+		for (int j = 0; j < i; j++) {
 			imat[j][i] *= scale[i] * scale[j];
 			imat[i][j] = imat[j][i];
 		}

@@ -18,17 +18,17 @@ void coxph_wtest(Sint *nvar2, Sint *ntest, double *var, double *b,
 
 	cholesky2(var2, nvar, *tolerch);
 	df = 0;
-	for (i = 0; i < nvar; i++)
+	for (int i = 0; i < nvar; i++)
 		if (var2[i][i] > 0)
 			df++; /* count up the df */
 
-	for (i = 0; i < *ntest; i++) {
-		for (j = 0; j < nvar; j++)
+	for (int i = 0; i < *ntest; i++) {
+		for (int j = 0; j < nvar; j++)
 			solve[j] = b[j];
 		chsolve2(var2, nvar, solve); /*solve now has b* var-inverse */
 
 		sum = 0;
-		for (j = 0; j < nvar; j++)
+		for (int j = 0; j < nvar; j++)
 			sum += b[j] * solve[j];
 		b2[i] = sum; /* save the result */
 		b += nvar; /*move to next column of b */

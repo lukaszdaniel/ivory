@@ -66,7 +66,7 @@ void coxscho(Sint *nusedx, Sint *nvarx, double *y, double *covar2,
 	/*
 	 ** Now walk through the data
 	 */
-	for (person = 0; person < nused;) {
+	for (int person = 0; person < nused;) {
 		if (event[person] == 0)
 			person++;
 		else {
@@ -75,23 +75,23 @@ void coxscho(Sint *nusedx, Sint *nvarx, double *y, double *covar2,
 			 */
 			denom = 0;
 			efron_wt = 0;
-			for (i = 0; i < nvar; i++) {
+			for (int i = 0; i < nvar; i++) {
 				a[i] = 0;
 				a2[i] = 0;
 			}
 			time = stop[person];
 			deaths = 0;
-			for (k = person; k < nused; k++) {
+			for (int k = person; k < nused; k++) {
 				if (start[k] < time) {
 					weight = score[k];
 					denom += weight;
-					for (i = 0; i < nvar; i++) {
+					for (int i = 0; i < nvar; i++) {
 						a[i] += weight * covar[i][k];
 					}
 					if (stop[k] == time && event[k] == 1) {
 						deaths += 1;
 						efron_wt += weight * event[k];
-						for (i = 0; i < nvar; i++)
+						for (int i = 0; i < nvar; i++)
 							a2[i] += weight * covar[i][k];
 					}
 				}
@@ -102,20 +102,20 @@ void coxscho(Sint *nusedx, Sint *nvarx, double *y, double *covar2,
 			/*
 			 ** Compute the mean at this time point
 			 */
-			for (i = 0; i < nvar; i++)
+			for (int i = 0; i < nvar; i++)
 				mean[i] = 0;
-			for (k = 0; k < deaths; k++) {
+			for (int k = 0; k < deaths; k++) {
 				temp = method * k / deaths;
-				for (i = 0; i < nvar; i++)
+				for (int i = 0; i < nvar; i++)
 					mean[i] += (a[i] - temp * a2[i])
 							/ (deaths * (denom - temp * efron_wt));
 			}
 			/*
 			 ** Compute the residual(s) for this time point
 			 */
-			for (k = person; k < nused && stop[k] == time; k++) {
+			for (int k = person; k < nused && stop[k] == time; k++) {
 				if (event[k] == 1) {
-					for (i = 0; i < nvar; i++) {
+					for (int i = 0; i < nvar; i++) {
 						covar[i][k] -= mean[i];
 					}
 				}

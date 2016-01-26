@@ -38,13 +38,13 @@ double survregc2(int n, int nvar, int nstrat, int whichcase, double *beta,
 	nvar2 = nvar + nstrat;
 	loglik = 0;
 	if (whichcase == 0) {
-		for (i = 0; i < nf; i++) {
+		for (int i = 0; i < nf; i++) {
 			fdiag[i] = 0;
 			jdiag[i] = 0;
 		}
-		for (i = 0; i < nvar2 + nf; i++) {
+		for (int i = 0; i < nvar2 + nf; i++) {
 			u[i] = 0;
-			for (j = 0; j < nvar2; j++) {
+			for (int j = 0; j < nvar2; j++) {
 				imat[j][i] = 0;
 				JJ[j][i] = 0;
 			}
@@ -67,7 +67,7 @@ double survregc2(int n, int nvar, int nstrat, int whichcase, double *beta,
 			sigma = exp(beta[strata + nvar + nf]);
 		}
 		eta = 0;
-		for (i = 0; i < nvar; i++)
+		for (int i = 0; i < nvar; i++)
 			eta += beta[i] * covar[i][person];
 		eta += offset[person];
 		if (nf > 0) {
