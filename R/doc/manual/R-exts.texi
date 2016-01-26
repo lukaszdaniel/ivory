@@ -2419,7 +2419,7 @@ As from version 6 (to be released in 2016), @command{g++} will default
 to C++14: earlier versions aim to support C++03 with many extensions
 (including support for TR1).  @command{clang} with its
 native@footnote{Some distributions, notably Debian, have supplied a
-buiild of @command{clang} with @command{g++}'s headers and library.
+build of @command{clang} with @command{g++}'s headers and library.
 Conversely, Apple's command named @command{g++} is based on
 @command{clang} using @code{libcxx}.}  @code{libcxx} headers and library
 includes many C++11 features, and does not support TR1.
@@ -9292,7 +9292,8 @@ conflicts---if this happens, try defining @samp{NO_C_HEADERS} before
 including the @R{} headers, and include C++ versions (such as
 @samp{cmath} and @samp{cstdlib}) of the appropriate headers yourself
 before the @R{} headers. (Headers @file{R.h} and @file{Rmath.h} support
-@samp{NO_C_HEADERS}: @file{S.h} does not.)
+@samp{NO_C_HEADERS}: @file{S.h} does not.  Nor does @file{Rinternals.h}
+but that switches to the equivalent C++ headers when included from C++.)
 
 By default header @file{Rmath.h} includes @file{math.h}.  Header
 @file{R.h} includes
