@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-17 17:28\n"
+"POT-Creation-Date: 2016-01-27 18:05\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -2948,12 +2948,6 @@ msgstr "Função original é proibida como função genérica"
 #. R/trace.R: gettextf("package %s is not attached and no namespace found for it", sQuote(package))
 #: R/trace.R:0
 msgid "package %s is not attached and no namespace found for it"
-msgstr ""
-
-#. R/RMethodUtils.R: gettextf("package %s seems to have out-of-date methods; need to reinstall from source",     sQuote(getPackageName(where[[1L]])))
-#: R/RMethodUtils.R:0
-msgid ""
-"package %s seems to have out-of-date methods; need to reinstall from source"
 msgstr ""
 
 #. R/methodsTable.R: gettext("package slot missing from signature for generic %s\n and classes %s\ncannot use with duplicate class names (the package may need to be re-installed)",     domain = "R-methods")

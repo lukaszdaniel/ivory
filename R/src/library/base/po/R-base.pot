@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.3.0\n"
-"POT-Creation-Date: 2016-01-19 19:19\n"
+"POT-Creation-Date: 2016-01-27 18:05\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -978,13 +978,6 @@ msgstr ""
 #. R/sort.R: stop("'method = \"quick\"' option is only for numeric 'x'")
 
 msgid "'method = \"quick\"' option is only for numeric 'x'"
-msgstr ""
-
-
-#: R/sort.R: 0
-#. R/sort.R: stop("'method = \"radix\"' option is only for integer 'x'")
-
-msgid "'method = \"radix\"' option is only for integer 'x'"
 msgstr ""
 
 

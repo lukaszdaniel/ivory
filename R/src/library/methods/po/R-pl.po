@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-17 17:28\n"
+"POT-Creation-Date: 2016-01-27 18:05\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -2877,14 +2877,6 @@ msgstr ""
 "pakiet %s nie jest dołączony przez co nie znaleziono dla niego przestrzeni "
 "nazw"
 
-#. R/RMethodUtils.R: gettextf("package %s seems to have out-of-date methods; need to reinstall from source",     sQuote(getPackageName(where[[1L]])))
-#: R/RMethodUtils.R:0
-msgid ""
-"package %s seems to have out-of-date methods; need to reinstall from source"
-msgstr ""
-"pakiet %s wydaje się mieć nieaktualne metody; potrzeba przeinstalować ze "
-"źródła"
-
 #. R/methodsTable.R: gettext("package slot missing from signature for generic %s\n and classes %s\ncannot use with duplicate class names (the package may need to be re-installed)",     domain = "R-methods")
 #: R/methodsTable.R:0
 msgid ""
@@ -3676,6 +3668,13 @@ msgstr[1] ""
 msgstr[2] ""
 "formalne argumenty ogólnej funkcji dla %s (%s) różnią się od tych dla "
 "nieogólnej, która ma być użyta jako domyślna (%s)"
+
+#~ msgid ""
+#~ "package %s seems to have out-of-date methods; need to reinstall from "
+#~ "source"
+#~ msgstr ""
+#~ "pakiet %s wydaje się mieć nieaktualne metody; potrzeba przeinstalować ze "
+#~ "źródła"
 
 #~ msgid "methods cannot be defined for the primitive function %s"
 #~ msgstr "metody nie mogą być zdefiniowane dla prymitywnej funkcji %s"

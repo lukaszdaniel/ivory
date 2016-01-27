@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-10 18:04\n"
+"POT-Creation-Date: 2016-01-27 18:05\n"
 "PO-Revision-Date: 2015-01-17 13:32+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Italian\n"
@@ -820,12 +820,6 @@ msgstr "'from' deve avere lunghezza 1"
 msgid "'method = \"quick\"' option is only for numeric 'x'"
 msgstr "method=\"quick\" è solo per 'x' di tipo numeric"
 
-#. R/sort.R: stop("'method = \"radix\"' option is only for integer 'x'")
-#: R/sort.R:0
-#, fuzzy
-msgid "'method = \"radix\"' option is only for integer 'x'"
-msgstr "method=\"radix\" è solo per 'x' interi"
-
 #. R/format.R: stop("'mode' argument must be \"double\" (\"real\"), \"integer\" or \"character\"")
 #: R/format.R:0
 #, fuzzy
@@ -890,6 +884,16 @@ msgid ""
 "'recursive' argument will be ignored as 'to' argument is not a single "
 "existing directory"
 msgstr ""
+
+#. R/dataframe.R: gettextf("'row.names' argument is not a character vector of length %d -- omitting it. Will be an error!",     nrows)
+#: R/dataframe.R:0
+#, fuzzy
+msgid ""
+"'row.names' argument is not a character vector of length %d -- omitting it. "
+"Will be an error!"
+msgstr ""
+"'kind' deve essere una stringa di caratteri di lunghezza 1 (si deve usare "
+"RNG)"
 
 #. R/dataframe.R: stop("'row.names' argument should specify one of the variables")
 #: R/dataframe.R:0
@@ -3611,6 +3615,10 @@ msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "non è"
 msgstr[1] "non è"
+
+#, fuzzy
+#~ msgid "'method = \"radix\"' option is only for integer 'x'"
+#~ msgstr "method=\"radix\" è solo per 'x' interi"
 
 #, fuzzy
 #~ msgid "replacing local value with import %s when loading %s"

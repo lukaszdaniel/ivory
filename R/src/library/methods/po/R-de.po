@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-17 17:28\n"
+"POT-Creation-Date: 2016-01-27 18:05\n"
 "PO-Revision-Date: 2015-01-17 15:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -3114,15 +3114,6 @@ msgid "package %s is not attached and no namespace found for it"
 msgstr ""
 "Paket \"%s\" ist nicht attached und kein Namensraum für das Paket gefunden"
 
-#. R/RMethodUtils.R: gettextf("package %s seems to have out-of-date methods; need to reinstall from source",     sQuote(getPackageName(where[[1L]])))
-#: R/RMethodUtils.R:0
-#, fuzzy
-msgid ""
-"package %s seems to have out-of-date methods; need to reinstall from source"
-msgstr ""
-"Paket \"%s\" scheint veraltete Methoden zu beinhalten; Neuinstallation aus "
-"den Quellen erforderlich"
-
 #. R/methodsTable.R: gettext("package slot missing from signature for generic %s\n and classes %s\ncannot use with duplicate class names (the package may need to be re-installed)",     domain = "R-methods")
 #: R/methodsTable.R:0
 msgid ""
@@ -3965,6 +3956,14 @@ msgstr[1] ""
 "die formalen Argumente der generischen Funktion für \"%s\" (%s) "
 "unterscheiden sich von denen der nicht-generischen Funktion, die als "
 "Standard genutzt wird (%s)"
+
+#, fuzzy
+#~ msgid ""
+#~ "package %s seems to have out-of-date methods; need to reinstall from "
+#~ "source"
+#~ msgstr ""
+#~ "Paket \"%s\" scheint veraltete Methoden zu beinhalten; Neuinstallation "
+#~ "aus den Quellen erforderlich"
 
 #~ msgid "methods cannot be defined for the primitive function %s"
 #~ msgstr ""

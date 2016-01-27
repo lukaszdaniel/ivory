@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-18 12:53+0200\n"
+"POT-Creation-Date: 2016-01-27 18:06+0100\n"
 "PO-Revision-Date: 2014-03-26 23:03-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -140,28 +140,28 @@ msgstr "X11이 사용가능하지 않습니다"
 msgid "invalid '%s' specification"
 msgstr "유효하지 않은 '%s' 지정입니다"
 
-#: utils.c:62 windows/util.c:402 windows/util.c:411 windows/widgets.c:182
+#: utils.c:63 windows/util.c:402 windows/util.c:411 windows/widgets.c:182
 #: windows/widgets.c:188 windows/widgets.c:247 windows/widgets.c:253
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string"
 msgstr "'text'는 반드시 문자열이어야 합니다"
 
-#: utils.c:85
+#: utils.c:86
 #, fuzzy
 msgid "'hostname' argument must be a character vector of length 1"
 msgstr "'hostname'은 반드시 길이가 1인 문자형 벡터이어야 합니다"
 
-#: utils.c:91
+#: utils.c:92
 #, c-format
 msgid "'nsl()' was unable to resolve host '%s'"
 msgstr ""
 
-#: utils.c:98
+#: utils.c:99
 #, fuzzy
 msgid "unknown format returned by 'gethostbyname()'"
 msgstr "알수없는 형식이 'gethostbyname'에 의해서 반환되었습니다"
 
-#: utils.c:107
+#: utils.c:108
 #, fuzzy
 msgid "'nsl()' is not supported on this platform"
 msgstr "이 플랫폼에서는 nsl()는 지원되지 않습니다"

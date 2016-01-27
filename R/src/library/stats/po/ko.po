@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-12 21:35+0100\n"
+"POT-Creation-Date: 2016-01-27 18:05+0100\n"
 "PO-Revision-Date: 2012-03-08 20:50+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -19,23 +19,23 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 2.1.6\n"
 
-#: Srunmed.c:55
+#: Srunmed.c:54
 msgid "bandwidth/span of running medians is larger than n"
 msgstr "중앙값의 bandwidth/span 가 n 보다 큽니다"
 
-#: Srunmed.c:198
+#: Srunmed.c:197
 msgid "numeric 'x' required"
 msgstr ""
 
-#: Srunmed.c:205
+#: Srunmed.c:204
 msgid "long vectors are not supported for algorithm = \"Turlach\""
 msgstr ""
 
-#: Trunmed.c:372
+#: Trunmed.c:373
 msgid "After inittree():\n"
 msgstr ""
 
-#: ansari.c:117
+#: ansari.c:119
 #, fuzzy
 msgid "probabilities outside [0,1] in 'qansari()' function"
 msgstr "qunsari() 내에 확률이 [0,1] 범위외입니다"
@@ -56,7 +56,7 @@ msgstr "approx(): NA 값들을 보간하려고 했습니다 "
 msgid "invalid argument type"
 msgstr "인수의 유형이 잘못되었습니다 "
 
-#: arima.c:440 arima.c:526 pacf.c:323 pacf.c:362
+#: arima.c:440 arima.c:526 pacf.c:321 pacf.c:360
 msgid "can only transform 100 pars in arima0"
 msgstr "arima0 는 최대 100 개까지의 파라미터들만 변환이 가능합니다 "
 
@@ -160,16 +160,16 @@ msgstr "변수 이름들이 잘못되었습니다"
 msgid "invalid tag"
 msgstr "태그가 부적절합니다"
 
-#: distance.c:154
+#: distance.c:153
 msgid "treating non-finite values as NA"
 msgstr "유한하지 않은 값들은 NA 처리됩니다 "
 
-#: distance.c:227
+#: distance.c:226
 #, fuzzy
 msgid "'distance()': invalid 'p' argument"
 msgstr "distance(): p 값이 잘못되었습니다 "
 
-#: distance.c:230
+#: distance.c:229
 #, fuzzy
 msgid "'distance()': invalid distance"
 msgstr "distance(): 거리가 잘못되었습니다 "
@@ -184,41 +184,41 @@ msgstr "계산결과가 NaN가 생성되었습니다"
 msgid "Non-numeric argument passed to mathematical function"
 msgstr "수학 함수에 숫자가 아닌 인수가 전달되었습니다"
 
-#: family.c:45
+#: family.c:46
 #, c-format
 msgid "Value %g out of range (0, 1)"
 msgstr "%g 값이 (0,1) 범위 외입니다 "
 
-#: family.c:66 family.c:80 family.c:98
+#: family.c:67 family.c:81 family.c:99
 #, c-format
 msgid "Argument %s must be a nonempty numeric vector"
 msgstr "%s 인자는 반드시 수치형 벡터이어야 합니다 "
 
-#: family.c:131 family.c:134
+#: family.c:132 family.c:135
 #, c-format
 msgid "argument %s must be a numeric vector of length 1 or length %d"
 msgstr "%s 는 길이가 1 이거나 %d 인 수치형 벡터이어야 합니다 "
 
-#: fexact.c:205 fexact.c:392
+#: fexact.c:206 fexact.c:393
 msgid "NROW must be less than or equal to LDTABL."
 msgstr ""
 
-#: fexact.c:211 fexact.c:414
+#: fexact.c:212 fexact.c:415
 msgid "All elements of TABLE may not be negative."
 msgstr ""
 
-#: fexact.c:216 fexact.c:421
+#: fexact.c:217 fexact.c:422
 msgid ""
 "All elements of TABLE are zero.\n"
 "PRT and PRE are set to missing values."
 msgstr ""
 
-#: fexact.c:394
+#: fexact.c:395
 #, fuzzy
 msgid "NCOL must be at least 2"
 msgstr "n 은 반드시 최소 2 이상이어야 합니다 "
 
-#: fexact.c:464 fexact.c:473
+#: fexact.c:465 fexact.c:474
 msgid ""
 "The hash table key cannot be computed because the largest key\n"
 "is larger than the largest representable int.\n"
@@ -226,44 +226,44 @@ msgid ""
 "Reduce the workspace size or use another algorithm."
 msgstr ""
 
-#: fexact.c:656 fexact.c:1398
+#: fexact.c:657 fexact.c:1399
 msgid ""
 "LDKEY is too small for this problem.\n"
 "Try increasing the size of the workspace."
 msgstr ""
 
-#: fexact.c:1031
+#: fexact.c:1032
 msgid "Bug in FEXACT: gave negative key"
 msgstr ""
 
-#: fexact.c:1052
+#: fexact.c:1053
 msgid ""
 "Stack length exceeded in f3xact.\n"
 "This problem should not occur."
 msgstr ""
 
-#: fexact.c:1414 fexact.c:1451
+#: fexact.c:1415 fexact.c:1452
 msgid ""
 "LDSTP is too small for this problem.\n"
 "Try increasing the size of the workspace."
 msgstr ""
 
-#: fexact.c:1808
+#: fexact.c:1809
 #, c-format
 msgid ""
 "FEXACT error %d.\n"
 "%s"
 msgstr ""
 
-#: fexact.c:1843
+#: fexact.c:1844
 msgid "Out of workspace."
 msgstr ""
 
-#: fexact.c:1922
+#: fexact.c:1923
 msgid "This should never occur."
 msgstr ""
 
-#: filter.c:39 filter.c:42 filter.c:90 lowess.c:283 lowess.c:285
+#: filter.c:37 filter.c:40 filter.c:88 lowess.c:283 lowess.c:285
 #, fuzzy
 msgid "invalid input"
 msgstr "태그가 부적절합니다"
@@ -292,20 +292,20 @@ msgstr "인자가 아닙니다"
 msgid "invalid factors"
 msgstr "인자가 잘못되었습니다"
 
-#: integrate.c:53
+#: integrate.c:54
 msgid "evaluation of function gave a result of wrong length"
 msgstr ""
 
-#: integrate.c:57
+#: integrate.c:58
 msgid "evaluation of function gave a result of wrong type"
 msgstr ""
 
-#: integrate.c:61
+#: integrate.c:62
 #, fuzzy
 msgid "non-finite function value"
 msgstr "'zeroin'의 함수값이 잘못되었습니다"
 
-#: ksmooth.c:62
+#: ksmooth.c:63
 msgid "only 2500 rows are allowed for sm.method=\"spline\""
 msgstr "sm.method=\"spline\" 에서는 최대 2500 개의 행만을 가질 수 있습니다 "
 
@@ -329,186 +329,186 @@ msgstr ""
 msgid "NA/NaN/Inf in '%s'"
 msgstr ""
 
-#: loessc.c:232 loessc.c:353
+#: loessc.c:234 loessc.c:355
 #, fuzzy, c-format
 msgid "'%s' argument is too small"
 msgstr "범위가 너무 작습니다 "
 
-#: loessc.c:238
+#: loessc.c:240
 msgid "workspace required is too large"
 msgstr ""
 
-#: loessc.c:347
+#: loessc.c:349
 #, c-format
 msgid "wrong version number in lowesd. Probably typo in caller."
 msgstr ""
 
-#: loessc.c:348
+#: loessc.c:350
 #, c-format
 msgid "d>dMAX in ehg131.  Need to recompile with increased dimensions."
 msgstr ""
 
-#: loessc.c:349 loessc.c:350
+#: loessc.c:351 loessc.c:352
 #, fuzzy, c-format
 msgid "'%s' argument is too small. (Discovered by 'lowesd()' function)"
 msgstr "'fn'은 함수가 아닙니다"
 
-#: loessc.c:351
+#: loessc.c:353
 #, c-format
 msgid ""
 "'span' argument is too small. Fewer data values than degrees of freedom."
 msgstr ""
 
-#: loessc.c:352
+#: loessc.c:354
 #, c-format
 msgid "k>d2MAX in ehg136.  Need to recompile with increased dimensions."
 msgstr ""
 
-#: loessc.c:354 loessc.c:355 optim.c:364 optimize.c:254 optimize.c:261
-#: optimize.c:270 optimize.c:344 optimize.c:349 optimize.c:365 pacf.c:465
+#: loessc.c:356 loessc.c:357 optim.c:364 optimize.c:254 optimize.c:261
+#: optimize.c:270 optimize.c:344 optimize.c:349 optimize.c:365 pacf.c:463
 #, c-format
 msgid "invalid '%s' value"
 msgstr "'%s' 의 값이 잘못되었습니다 "
 
-#: loessc.c:356
+#: loessc.c:358
 #, c-format
 msgid "lowstt only applies when 'kernel=1'."
 msgstr ""
 
-#: loessc.c:357
+#: loessc.c:359
 #, c-format
 msgid "not enough extra workspace for robustness calculation"
 msgstr ""
 
-#: loessc.c:358
+#: loessc.c:360
 #, c-format
 msgid "zero-width neighborhood. make span bigger"
 msgstr ""
 
-#: loessc.c:359
+#: loessc.c:361
 #, c-format
 msgid "all data on boundary of neighborhood. make span bigger"
 msgstr ""
 
-#: loessc.c:360
+#: loessc.c:362
 #, c-format
 msgid "extrapolation not allowed with blending"
 msgstr ""
 
-#: loessc.c:361
+#: loessc.c:363
 #, c-format
 msgid ""
 "ihat=1 (diag L) in 'l2fit()' function only makes sense if z=x (eval=data)."
 msgstr ""
 
-#: loessc.c:362
+#: loessc.c:364
 #, fuzzy, c-format
 msgid "'lowesd()' function must be called first."
 msgstr "m 은 반드시 list 이어야 합니다 "
 
-#: loessc.c:363
+#: loessc.c:365
 #, c-format
 msgid ""
 "'lowesf()' function must not come between lowesb and lowese, lowesr, or "
 "lowesl."
 msgstr ""
 
-#: loessc.c:364
+#: loessc.c:366
 #, c-format
 msgid "'lowesb()' function must come before lowese, lowesr, or lowesl."
 msgstr ""
 
-#: loessc.c:365
+#: loessc.c:367
 #, c-format
 msgid "'lowesb()' function need not be called twice."
 msgstr ""
 
-#: loessc.c:366
+#: loessc.c:368
 #, c-format
 msgid "need setLf=.true. for lowesl."
 msgstr ""
 
-#: loessc.c:367
+#: loessc.c:369
 #, fuzzy, c-format
 msgid "nv>nvmax in 'cpvert()' function"
 msgstr "Singular matrix in ldet"
 
-#: loessc.c:368
+#: loessc.c:370
 #, fuzzy, c-format
 msgid "nt>20 in 'eval()' function"
 msgstr "Singular matrix in ldet"
 
-#: loessc.c:369
+#: loessc.c:371
 #, fuzzy, c-format
 msgid "svddc failed in 'l2fit()' function"
 msgstr "Singular matrix in ldet"
 
-#: loessc.c:370
+#: loessc.c:372
 #, fuzzy, c-format
 msgid "didnt find edge in 'vleaf()' function"
 msgstr "Singular matrix in ldet"
 
-#: loessc.c:371
+#: loessc.c:373
 #, c-format
 msgid "zero-width cell found in 'vleaf()' function"
 msgstr ""
 
-#: loessc.c:372
+#: loessc.c:374
 #, c-format
 msgid "trouble descending to leaf in 'vleaf()' function"
 msgstr ""
 
-#: loessc.c:373
+#: loessc.c:375
 #, c-format
 msgid "insufficient workspace for 'lowesf()' function"
 msgstr ""
 
-#: loessc.c:374
+#: loessc.c:376
 #, c-format
 msgid "insufficient stack space"
 msgstr ""
 
-#: loessc.c:375
+#: loessc.c:377
 #, c-format
 msgid "lv too small for computing explicit L"
 msgstr ""
 
-#: loessc.c:376
+#: loessc.c:378
 #, c-format
 msgid "computed trace L was negative; something is wrong!"
 msgstr ""
 
-#: loessc.c:377
+#: loessc.c:379
 #, c-format
 msgid "computed delta was negative; something is wrong!"
 msgstr ""
 
-#: loessc.c:378
+#: loessc.c:380
 #, c-format
 msgid "workspace in loread appears to be corrupted"
 msgstr ""
 
-#: loessc.c:379
+#: loessc.c:381
 #, c-format
 msgid "trouble in l2fit/l2tr"
 msgstr ""
 
-#: loessc.c:380
+#: loessc.c:382
 #, c-format
 msgid "only constant, linear, or quadratic local models allowed"
 msgstr ""
 
-#: loessc.c:381
+#: loessc.c:383
 #, c-format
 msgid "degree must be at least 1 for vertex influence matrix"
 msgstr ""
 
-#: loessc.c:382
+#: loessc.c:384
 #, c-format
 msgid "not yet implemented"
 msgstr ""
 
-#: loessc.c:384
+#: loessc.c:386
 #, fuzzy, c-format
 msgid "Assert failed; error code %d\n"
 msgstr "starma 에러 코드는 %d 입니다"
@@ -540,26 +540,26 @@ msgstr "'maxiter'는 양수여야 합니다"
 msgid "'%s' argument must be finite and >= 0"
 msgstr "'maxiter'는 양수여야 합니다"
 
-#: mAR.c:80
+#: mAR.c:83
 msgid "assert failed in src/library/ts/src/carray.c"
 msgstr ""
 
-#: mAR.c:321 mAR.c:351
+#: mAR.c:324 mAR.c:354
 #, c-format
 msgid "Unknown operator in array_op"
 msgstr ""
 
-#: mAR.c:467 mAR.c:510
+#: mAR.c:470 mAR.c:513
 #, fuzzy, c-format
 msgid "Singular matrix in '%s' function"
 msgstr "Singular matrix in ldet"
 
-#: mAR.c:697 massdist.c:42 model.c:366 model.c:374 optim.c:191
+#: mAR.c:700 massdist.c:41 model.c:366 model.c:374 optim.c:191
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "'%s' 인수가 잘못되었습니다 "
 
-#: mAR.c:833
+#: mAR.c:836
 msgid "Burg's algorithm failed to find partial correlation"
 msgstr "Burg 의 알고리즘를 이용하여 부분상관관계를 찾는데 실패했습니다 "
 
@@ -695,81 +695,81 @@ msgstr "'data'인수가 잘못된 유형입니다"
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.'가 수식에서 있습니다만, 'data'인수가 아닙니다"
 
-#: monoSpl.c:35
+#: monoSpl.c:37
 #, fuzzy, c-format
 msgid "'%s' argument must be at least two"
 msgstr "'m' 은 반드시 list 이어야 합니다 "
 
-#: monoSpl.c:68
+#: monoSpl.c:70
 #, fuzzy, c-format
 msgid "'%s' argument must be numeric"
 msgstr "인자 m 은 반드시 수치형이어야 합니다 "
 
-#: monoSpl.c:71
+#: monoSpl.c:73
 msgid "length(m) must be at least two"
 msgstr "length(m) 은 반드시 2 이상이어야 합니다 "
 
-#: monoSpl.c:73
+#: monoSpl.c:75
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr "Sx 인자는 반드시 수치형 벡터이어야 하며, m[] 보다 짧아야합니다 "
 
-#: nls.c:94 nls.c:96 port.c:555
+#: nls.c:96 nls.c:98 port.c:555
 #, fuzzy, c-format
 msgid "'%s' argument must be a list"
 msgstr "'m' 은 반드시 list 이어야 합니다 "
 
-#: nls.c:102 nls.c:107 nls.c:112 nls.c:117 nls.c:122 nls.c:163 nls.c:168
-#: nls.c:173 nls.c:178 nls.c:183 nls.c:188
+#: nls.c:104 nls.c:109 nls.c:114 nls.c:119 nls.c:124 nls.c:165 nls.c:170
+#: nls.c:175 nls.c:180 nls.c:185 nls.c:190
 #, fuzzy, c-format
 msgid "'%s' is absent"
 msgstr "'%s' 가 없습니다 "
 
-#: nls.c:228
+#: nls.c:230
 msgid "singular gradient"
 msgstr "singular gradient"
 
-#: nls.c:249
+#: nls.c:251
 #, c-format
 msgid "step factor %g reduced below 'minFactor' of %g"
 msgstr "step factor %g reduced below 'minFactor' of %g"
 
-#: nls.c:258
+#: nls.c:260
 #, c-format
 msgid "number of iterations exceeded maximum of %d"
 msgstr "최대 반복수 %d 를 초과했습니다 "
 
-#: nls.c:263
+#: nls.c:265
 msgid "converged"
 msgstr "수렴합니다 "
 
-#: nls.c:284
+#: nls.c:286
 #, fuzzy, c-format
 msgid "'%s' argument should be of type character"
 msgstr "'theta' 는 반드시 문자형 이어야 합니다 "
 
-#: nls.c:286 port.c:377
+#: nls.c:288 port.c:377
 msgid "use of NULL environment is defunct"
 msgstr "use of NULL environment is defunct"
 
-#: nls.c:290
+#: nls.c:292
 #, fuzzy, c-format
 msgid "'%s' argument should be an environment"
 msgstr "'rho' 는 반드시 환경이어야 합니다 "
 
-#: nls.c:293
+#: nls.c:295
 msgid "'dir' is not a numeric vector of the correct length"
 msgstr "'dir' 은 올바른 길이를 가진 수치형 벡터가 아닙니다 "
 
-#: nls.c:307 nls.c:341
+#: nls.c:309 nls.c:343
 msgid "Missing value or an infinity produced when evaluating the model"
 msgstr "모델 평가시 결측치 혹은 무한값이 생성되었습니다 "
 
-#: nls.c:315
+#: nls.c:317
 #, c-format
 msgid "variable '%s' is integer, not numeric"
 msgstr "변수 '%s' 는 수치형이 아닌 정수입니다 "
 
-#: nls.c:317
+#: nls.c:319
 #, c-format
 msgid "variable '%s' is not numeric"
 msgstr "변수 '%s' 는 수치형이 아닙니다 "
@@ -990,16 +990,16 @@ msgstr ""
 msgid "gradient supplied is of the wrong length or mode, so ignored"
 msgstr "제공된 기울기는 부적절한 길이 또는 모드이었기때문에 무시되었습니다"
 
-#: pacf.c:86
+#: pacf.c:84
 msgid "bad Starma struct"
 msgstr "Starma struct 가 잘못되었습니다 "
 
-#: pacf.c:232
+#: pacf.c:230
 #, c-format
 msgid "starma error code %d"
 msgstr "starma 에러 코드는 %d 입니다"
 
-#: pacf.c:292
+#: pacf.c:290
 #, c-format
 msgid "forkal error code %d"
 msgstr "forkal 에러코드는 %d 입니다"
@@ -1096,15 +1096,15 @@ msgstr "'lowerb' 와 'upperb' 는 반드시 수치형 벡터이어야 합니다 
 msgid "'nlsb_iterate()' function returned %d"
 msgstr ""
 
-#: rWishart.c:50
+#: rWishart.c:52
 msgid "inconsistent degrees of freedom and dimension"
 msgstr "자유도와 차원이 일치하지 않습니다 "
 
-#: rWishart.c:83
+#: rWishart.c:85
 msgid "'scal' must be a square, real matrix"
 msgstr "'scal' 은 반드시 실수형 정방행렬이어야 합니다 "
 
-#: rWishart.c:95
+#: rWishart.c:97
 msgid "'scal' matrix is not positive-definite"
 msgstr "'scal' 행렬이 positive-definite 가 아닙니다 "
 
@@ -1158,12 +1158,12 @@ msgstr "invalid end-rule for running median of 3: %d"
 msgid "inputs of different lengths"
 msgstr ""
 
-#: starma.c:360
+#: starma.c:358
 #, c-format
 msgid "missing value in last %d observations"
 msgstr "마지막 %d 개의 관측치가 결측치입니다 "
 
-#: swilk.c:206
+#: swilk.c:208
 #, c-format
 msgid "ifault=%d. This should not happen"
 msgstr ""

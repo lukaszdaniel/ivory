@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-10 18:04\n"
+"POT-Creation-Date: 2016-01-27 18:05\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -763,11 +763,6 @@ msgstr "argument 'local' musi być TRUE, FALSE lub musi być środowiskiem"
 msgid "'method = \"quick\"' option is only for numeric 'x'"
 msgstr "opcja 'method=\"quick\"' jest tylko dla liczbowych 'x'"
 
-#. R/sort.R: stop("'method = \"radix\"' option is only for integer 'x'")
-#: R/sort.R:0
-msgid "'method = \"radix\"' option is only for integer 'x'"
-msgstr "opcja 'method=\"radix\"' jest tylko dla liczb całkowitych 'x'"
-
 #. R/format.R: stop("'mode' argument must be \"double\" (\"real\"), \"integer\" or \"character\"")
 #: R/format.R:0
 msgid ""
@@ -831,6 +826,15 @@ msgid ""
 msgstr ""
 "argument 'recursive' zostanie zignorowany ponieważ argument 'to' nie jest "
 "pojedynczym istniejącym katalogiem"
+
+#. R/dataframe.R: gettextf("'row.names' argument is not a character vector of length %d -- omitting it. Will be an error!",     nrows)
+#: R/dataframe.R:0
+msgid ""
+"'row.names' argument is not a character vector of length %d -- omitting it. "
+"Will be an error!"
+msgstr ""
+"argument 'row.names' nie jest łańcuchem tekstowym o długości %d - pomijanie. "
+"Będzie błąd!"
 
 #. R/dataframe.R: stop("'row.names' argument should specify one of the variables")
 #: R/dataframe.R:0
@@ -3502,6 +3506,9 @@ msgid_plural "variables %s are not all TRUE"
 msgstr[0] "zmienna %s nie ma wartości TRUE"
 msgstr[1] "nie wszystkie zmienne %s mają wartość TRUE"
 msgstr[2] "nie wszystkie zmienne %s mają wartość TRUE"
+
+#~ msgid "'method = \"radix\"' option is only for integer 'x'"
+#~ msgstr "opcja 'method=\"radix\"' jest tylko dla liczb całkowitych 'x'"
 
 #~ msgid "replacing local value with import %s when loading %s"
 #~ msgstr ""

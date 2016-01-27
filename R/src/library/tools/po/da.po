@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-09 15:50+0100\n"
+"POT-Creation-Date: 2016-01-27 18:06+0100\n"
 "PO-Revision-Date: 2016-01-09 20:39+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -18,11 +18,11 @@ msgstr ""
 "X-Generator: Poedit 1.8.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: Rmd5.c:38
+#: Rmd5.c:37
 msgid "argument 'files' must be character"
 msgstr "argumentet 'files' skal være tegn"
 
-#: Rmd5.c:52
+#: Rmd5.c:51
 #, c-format
 msgid "md5 failed on file '%s'"
 msgstr "md5 fejlede på fil '%s'"
@@ -146,27 +146,27 @@ msgstr "ugyldig argumenttype"
 msgid "write error during file append"
 msgstr ""
 
-#: signals.c:44
+#: signals.c:43
 msgid "pskill() is not supported on this platform"
 msgstr "pskill() er ikke understøttet på denne platform"
 
-#: signals.c:141
+#: signals.c:140
 msgid "psnice() is not supported on this platform"
 msgstr "psnice() er ikke understøttet på denne platform"
 
-#: text.c:67
+#: text.c:68
 msgid "invalid argument type"
 msgstr "ugyldig argumenttype"
 
-#: text.c:158
+#: text.c:159
 #, c-format
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr ""
 
-#: text.c:225 text.c:247
+#: text.c:226 text.c:248
 msgid "out of memory"
 msgstr "ikke nok hukommelse"
 
-#: text.c:267 text.c:269
+#: text.c:268 text.c:270
 msgid "first arg must be a single character string"
 msgstr ""

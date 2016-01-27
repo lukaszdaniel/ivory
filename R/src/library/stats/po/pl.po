@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-12 21:35+0100\n"
+"POT-Creation-Date: 2016-01-27 18:05+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -16,23 +16,23 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: Srunmed.c:55
+#: Srunmed.c:54
 msgid "bandwidth/span of running medians is larger than n"
 msgstr "pasmo/rozpiętość ruchomych median jest większe niż 'n'"
 
-#: Srunmed.c:198
+#: Srunmed.c:197
 msgid "numeric 'x' required"
 msgstr "wymagana jest liczba 'x'"
 
-#: Srunmed.c:205
+#: Srunmed.c:204
 msgid "long vectors are not supported for algorithm = \"Turlach\""
 msgstr "długie wektory nie są wspierane dla 'algorithm = \"Turlach\"'"
 
-#: Trunmed.c:372
+#: Trunmed.c:373
 msgid "After inittree():\n"
 msgstr "Po funkcji 'inittree()':\n"
 
-#: ansari.c:117
+#: ansari.c:119
 msgid "probabilities outside [0,1] in 'qansari()' function"
 msgstr "prawdopodobieństwa poza przedziałem [0,1] w funkcji 'qansari()'"
 
@@ -52,7 +52,7 @@ msgstr "approx(): próbowano interpolować wartości NA"
 msgid "invalid argument type"
 msgstr "niepoprawny typ argumentu"
 
-#: arima.c:440 arima.c:526 pacf.c:323 pacf.c:362
+#: arima.c:440 arima.c:526 pacf.c:321 pacf.c:360
 msgid "can only transform 100 pars in arima0"
 msgstr "można przekształcić tylko do 100 par w 'arima0'"
 
@@ -160,15 +160,15 @@ msgstr "niepoprawne nazwy zmiennych"
 msgid "invalid tag"
 msgstr "niepoprawny znacznik"
 
-#: distance.c:154
+#: distance.c:153
 msgid "treating non-finite values as NA"
 msgstr "traktowanie nieskończonych wartości jako NA"
 
-#: distance.c:227
+#: distance.c:226
 msgid "'distance()': invalid 'p' argument"
 msgstr "'distance()': niepoprawny argument 'p'"
 
-#: distance.c:230
+#: distance.c:229
 msgid "'distance()': invalid distance"
 msgstr "'distance()': niepoprawna odległość"
 
@@ -180,30 +180,30 @@ msgstr "wyprodukowano wartości NaN"
 msgid "Non-numeric argument passed to mathematical function"
 msgstr "Argument nieliczbowy przekazany do funkcji matematycznej"
 
-#: family.c:45
+#: family.c:46
 #, c-format
 msgid "Value %g out of range (0, 1)"
 msgstr "Wartość %g jest poza zakresem (0, 1)"
 
-#: family.c:66 family.c:80 family.c:98
+#: family.c:67 family.c:81 family.c:99
 #, c-format
 msgid "Argument %s must be a nonempty numeric vector"
 msgstr "argument '%s' musi być niepustym wektorem liczbowym"
 
-#: family.c:131 family.c:134
+#: family.c:132 family.c:135
 #, c-format
 msgid "argument %s must be a numeric vector of length 1 or length %d"
 msgstr "argument '%s' musi być wektorem liczbowym o długości 1 lub długości %d"
 
-#: fexact.c:205 fexact.c:392
+#: fexact.c:206 fexact.c:393
 msgid "NROW must be less than or equal to LDTABL."
 msgstr "'NROW' musi być mniejsze bądź równe 'LDTABL'."
 
-#: fexact.c:211 fexact.c:414
+#: fexact.c:212 fexact.c:415
 msgid "All elements of TABLE may not be negative."
 msgstr "Wszystkie elementy 'TABLE' nie mogą być ujemne."
 
-#: fexact.c:216 fexact.c:421
+#: fexact.c:217 fexact.c:422
 msgid ""
 "All elements of TABLE are zero.\n"
 "PRT and PRE are set to missing values."
@@ -211,11 +211,11 @@ msgstr ""
 "Wszystkie elementy 'TABLE' wynoszą zero.\n"
 "'PRT' oraz 'PRE' są ustawione na brakujące wartości."
 
-#: fexact.c:394
+#: fexact.c:395
 msgid "NCOL must be at least 2"
 msgstr "'NCOL' musi wynosić co najmniej 2"
 
-#: fexact.c:464 fexact.c:473
+#: fexact.c:465 fexact.c:474
 msgid ""
 "The hash table key cannot be computed because the largest key\n"
 "is larger than the largest representable int.\n"
@@ -227,7 +227,7 @@ msgstr ""
 "Alrogytm nie może kontynuować.\n"
 "Zmniejsz obszar roboczy lub użyj innego algorytmu."
 
-#: fexact.c:656 fexact.c:1398
+#: fexact.c:657 fexact.c:1399
 msgid ""
 "LDKEY is too small for this problem.\n"
 "Try increasing the size of the workspace."
@@ -235,11 +235,11 @@ msgstr ""
 "'LDKEY' jest zbyt małe dla tego problemu.\n"
 "Spróbuj zwięszyć rozmiar obszaru roboczego."
 
-#: fexact.c:1031
+#: fexact.c:1032
 msgid "Bug in FEXACT: gave negative key"
 msgstr "Błąd w 'FEXACT()': otrzymano ujemny klucz"
 
-#: fexact.c:1052
+#: fexact.c:1053
 msgid ""
 "Stack length exceeded in f3xact.\n"
 "This problem should not occur."
@@ -247,7 +247,7 @@ msgstr ""
 "Długość stosu została przekroczona w 'f3xact'.\n"
 "Ten problem nie powinien się pojawić."
 
-#: fexact.c:1414 fexact.c:1451
+#: fexact.c:1415 fexact.c:1452
 msgid ""
 "LDSTP is too small for this problem.\n"
 "Try increasing the size of the workspace."
@@ -255,7 +255,7 @@ msgstr ""
 "'LDSTP' jest zbyt małe dla tego problemu.\n"
 "Spróbuj zwięszyć rozmiar obszaru roboczego."
 
-#: fexact.c:1808
+#: fexact.c:1809
 #, c-format
 msgid ""
 "FEXACT error %d.\n"
@@ -264,15 +264,15 @@ msgstr ""
 "błąd FEXACT %d.\n"
 "%s"
 
-#: fexact.c:1843
+#: fexact.c:1844
 msgid "Out of workspace."
 msgstr "Zabrakło obszaru roboczego."
 
-#: fexact.c:1922
+#: fexact.c:1923
 msgid "This should never occur."
 msgstr "Nie nigdy nie powinno się pojawić."
 
-#: filter.c:39 filter.c:42 filter.c:90 lowess.c:283 lowess.c:285
+#: filter.c:37 filter.c:40 filter.c:88 lowess.c:283 lowess.c:285
 msgid "invalid input"
 msgstr "niepoprawne wejście"
 
@@ -300,19 +300,19 @@ msgstr "brak czynników"
 msgid "invalid factors"
 msgstr "niepoprawne czynniki"
 
-#: integrate.c:53
+#: integrate.c:54
 msgid "evaluation of function gave a result of wrong length"
 msgstr "obliczenie funkcji zwróciło wynik o niepoprawnej długości"
 
-#: integrate.c:57
+#: integrate.c:58
 msgid "evaluation of function gave a result of wrong type"
 msgstr "obliczenie funkcji zwróciło wynik o niepoprawnym typie"
 
-#: integrate.c:61
+#: integrate.c:62
 msgid "non-finite function value"
 msgstr "nieskończona wartość funkcji"
 
-#: ksmooth.c:62
+#: ksmooth.c:63
 msgid "only 2500 rows are allowed for sm.method=\"spline\""
 msgstr "tylko 2500 wierszy jest dozwolonych dla 'sm.method=\"spline\"'"
 
@@ -334,80 +334,80 @@ msgstr "wymiary 'x' (%d,%d) oraz 'y' (%d) nie zgadzają się"
 msgid "NA/NaN/Inf in '%s'"
 msgstr "wartość NA/NaN/Inf w '%s'"
 
-#: loessc.c:232 loessc.c:353
+#: loessc.c:234 loessc.c:355
 #, c-format
 msgid "'%s' argument is too small"
 msgstr "argument '%s' jest zbyt mały"
 
-#: loessc.c:238
+#: loessc.c:240
 msgid "workspace required is too large"
 msgstr "wymagany obszar roboczy jest zbyt duży"
 
-#: loessc.c:347
+#: loessc.c:349
 #, c-format
 msgid "wrong version number in lowesd. Probably typo in caller."
 msgstr ""
 "niepoprawny numer wersji w 'lowesd()'. Prawdopodobnie literówka w wywołaniu."
 
-#: loessc.c:348
+#: loessc.c:350
 #, c-format
 msgid "d>dMAX in ehg131.  Need to recompile with increased dimensions."
 msgstr ""
 " 'd>dMAX' w funkcji 'ehg131()'. Konieczna rekompilacja ze zwiększonymi "
 "wymiarami."
 
-#: loessc.c:349 loessc.c:350
+#: loessc.c:351 loessc.c:352
 #, c-format
 msgid "'%s' argument is too small. (Discovered by 'lowesd()' function)"
 msgstr "argument '%s' jest zbyt mały. (Znaleziono przez funkcję 'lowesd()')"
 
-#: loessc.c:351
+#: loessc.c:353
 #, c-format
 msgid ""
 "'span' argument is too small. Fewer data values than degrees of freedom."
 msgstr ""
 "argument 'span' jest zbyt mały. Mniej wartości danych niż stopni swobody."
 
-#: loessc.c:352
+#: loessc.c:354
 #, c-format
 msgid "k>d2MAX in ehg136.  Need to recompile with increased dimensions."
 msgstr ""
 "'k>d2MAX' w 'ehg136'. Konieczna rekompilacja ze zwiększonymi wymiarami."
 
-#: loessc.c:354 loessc.c:355 optim.c:364 optimize.c:254 optimize.c:261
-#: optimize.c:270 optimize.c:344 optimize.c:349 optimize.c:365 pacf.c:465
+#: loessc.c:356 loessc.c:357 optim.c:364 optimize.c:254 optimize.c:261
+#: optimize.c:270 optimize.c:344 optimize.c:349 optimize.c:365 pacf.c:463
 #, c-format
 msgid "invalid '%s' value"
 msgstr "niepoprawna wartość '%s'"
 
-#: loessc.c:356
+#: loessc.c:358
 #, c-format
 msgid "lowstt only applies when 'kernel=1'."
 msgstr "'lowstt' ma zastosowanie tylko gdy 'kernel=1'."
 
-#: loessc.c:357
+#: loessc.c:359
 #, c-format
 msgid "not enough extra workspace for robustness calculation"
 msgstr ""
 "niewystarczający rozmiar dodatkowej przestrzeni roboczej w kalkulacjach "
 "odpornościowych"
 
-#: loessc.c:358
+#: loessc.c:360
 #, c-format
 msgid "zero-width neighborhood. make span bigger"
 msgstr "sąsiedztwo o zerowej szerokości. Zwiększanie zakresu."
 
-#: loessc.c:359
+#: loessc.c:361
 #, c-format
 msgid "all data on boundary of neighborhood. make span bigger"
 msgstr "wszystkie dane są na granicy sąsiedztwa. Zwiększanie zakresu"
 
-#: loessc.c:360
+#: loessc.c:362
 #, c-format
 msgid "extrapolation not allowed with blending"
 msgstr "ekstrapolacja nie jest dozwolona razem z wygładzaniem"
 
-#: loessc.c:361
+#: loessc.c:363
 #, c-format
 msgid ""
 "ihat=1 (diag L) in 'l2fit()' function only makes sense if z=x (eval=data)."
@@ -415,12 +415,12 @@ msgstr ""
 "'ihat=1' (diagonala 'L') w funkcji 'l2fit()' ma sens tylko jeśli 'z=x "
 "(eval=data)'"
 
-#: loessc.c:362
+#: loessc.c:364
 #, c-format
 msgid "'lowesd()' function must be called first."
 msgstr "funkcja 'lowesd()' musi być wywołana jako pierwsza"
 
-#: loessc.c:363
+#: loessc.c:365
 #, c-format
 msgid ""
 "'lowesf()' function must not come between lowesb and lowese, lowesr, or "
@@ -429,104 +429,104 @@ msgstr ""
 "funkcja 'lowesf()' nie może pojawić się pomiędzy funkcjami 'lowesb()' oraz "
 "'lowese()', 'lowesr()', lub 'lowesl()'"
 
-#: loessc.c:364
+#: loessc.c:366
 #, c-format
 msgid "'lowesb()' function must come before lowese, lowesr, or lowesl."
 msgstr ""
 "funkcja 'lowesb()' musi być przed funkcjami 'lowese()', 'lowesr()' lub "
 "'lowesl()'"
 
-#: loessc.c:365
+#: loessc.c:367
 #, c-format
 msgid "'lowesb()' function need not be called twice."
 msgstr "funkcja 'lowesb()' nie musi być wywoływana dwukrotnie"
 
-#: loessc.c:366
+#: loessc.c:368
 #, c-format
 msgid "need setLf=.true. for lowesl."
 msgstr "potrzeba 'setLf=.true.' w 'lowesl()'."
 
-#: loessc.c:367
+#: loessc.c:369
 #, c-format
 msgid "nv>nvmax in 'cpvert()' function"
 msgstr "'nv>nvmax' w funkcji 'cpvert()'."
 
-#: loessc.c:368
+#: loessc.c:370
 #, c-format
 msgid "nt>20 in 'eval()' function"
 msgstr "nt>20 w funkcji 'eval()'"
 
-#: loessc.c:369
+#: loessc.c:371
 #, c-format
 msgid "svddc failed in 'l2fit()' function"
 msgstr "'svddc()' niepowiodło się w funkcji 'l2fit()'."
 
-#: loessc.c:370
+#: loessc.c:372
 #, c-format
 msgid "didnt find edge in 'vleaf()' function"
 msgstr "nie znaleziono krawędzi w funkcji 'vleaf()'"
 
-#: loessc.c:371
+#: loessc.c:373
 #, c-format
 msgid "zero-width cell found in 'vleaf()' function"
 msgstr "komórka o zerowej szerokości w funkcji 'vleaf()'"
 
-#: loessc.c:372
+#: loessc.c:374
 #, c-format
 msgid "trouble descending to leaf in 'vleaf()' function"
 msgstr "problem z zejściem do liścia w funkcji 'vleaf()'"
 
-#: loessc.c:373
+#: loessc.c:375
 #, c-format
 msgid "insufficient workspace for 'lowesf()' function"
 msgstr "niewystarczający obszar roboczy dla funkcji 'lowesf()'"
 
-#: loessc.c:374
+#: loessc.c:376
 #, c-format
 msgid "insufficient stack space"
 msgstr "niewystarczająca przestrzeń stosu"
 
-#: loessc.c:375
+#: loessc.c:377
 #, c-format
 msgid "lv too small for computing explicit L"
 msgstr "'lv' jest zbyt małe aby obliczyć jawne 'L'"
 
-#: loessc.c:376
+#: loessc.c:378
 #, c-format
 msgid "computed trace L was negative; something is wrong!"
 msgstr "obliczony ślad 'L' jest ujemny; coś jest nie tak!"
 
-#: loessc.c:377
+#: loessc.c:379
 #, c-format
 msgid "computed delta was negative; something is wrong!"
 msgstr "obliczona delta jest ujemna; coś jest nie tak!"
 
-#: loessc.c:378
+#: loessc.c:380
 #, c-format
 msgid "workspace in loread appears to be corrupted"
 msgstr "przestrzeń robocza w 'loread' wydaje się być uszkodzona"
 
-#: loessc.c:379
+#: loessc.c:381
 #, c-format
 msgid "trouble in l2fit/l2tr"
 msgstr "problemy w 'l2fit()/l2tr()'"
 
-#: loessc.c:380
+#: loessc.c:382
 #, c-format
 msgid "only constant, linear, or quadratic local models allowed"
 msgstr "dozwolony jest tylko stały , liniowy lub kwadratowy lokalny model"
 
-#: loessc.c:381
+#: loessc.c:383
 #, c-format
 msgid "degree must be at least 1 for vertex influence matrix"
 msgstr "stopień musi wynosić co najmniej 1 dla macierzy wierzchołka wpływu"
 
-#: loessc.c:382
+#: loessc.c:384
 #, c-format
 msgid "not yet implemented"
 msgstr "jeszcze niezaimplementowane"
 
-#: loessc.c:384
+#: loessc.c:386
 #, c-format
 msgid "Assert failed; error code %d\n"
 msgstr "Przydział nie powiódł się: kod błędu %d\n"
@@ -557,26 +557,26 @@ msgstr "argument '%s' musi być skończony oraz > 0"
 msgid "'%s' argument must be finite and >= 0"
 msgstr "argument '%s' musi być skończony oraz >= 0"
 
-#: mAR.c:80
+#: mAR.c:83
 msgid "assert failed in src/library/ts/src/carray.c"
 msgstr "założenie nie powiodło się w 'src/library/ts/src/carray.c'"
 
-#: mAR.c:321 mAR.c:351
+#: mAR.c:324 mAR.c:354
 #, c-format
 msgid "Unknown operator in array_op"
 msgstr "Nieznany operator w 'array_op'"
 
-#: mAR.c:467 mAR.c:510
+#: mAR.c:470 mAR.c:513
 #, c-format
 msgid "Singular matrix in '%s' function"
 msgstr "Osobliwa macierz w funkcji '%s'"
 
-#: mAR.c:697 massdist.c:42 model.c:366 model.c:374 optim.c:191
+#: mAR.c:700 massdist.c:41 model.c:366 model.c:374 optim.c:191
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
 
-#: mAR.c:833
+#: mAR.c:836
 msgid "Burg's algorithm failed to find partial correlation"
 msgstr ""
 "Algorytm Burga nie powiódł się przy próbie znalezienia częściowej korelacji"
@@ -714,83 +714,83 @@ msgstr "argument 'data' posiada niepoprawny typ"
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' w formule oraz brak argumentu 'data'"
 
-#: monoSpl.c:35
+#: monoSpl.c:37
 #, c-format
 msgid "'%s' argument must be at least two"
 msgstr "argument '%s' musi wynosić co najmniej 2"
 
-#: monoSpl.c:68
+#: monoSpl.c:70
 #, c-format
 msgid "'%s' argument must be numeric"
 msgstr "argument '%s' musi być liczbą"
 
-#: monoSpl.c:71
+#: monoSpl.c:73
 msgid "length(m) must be at least two"
 msgstr "'length(m)' musi wynosić co najmniej dwa"
 
-#: monoSpl.c:73
+#: monoSpl.c:75
 msgid "Argument Sx must be numeric vector one shorter than m[]"
 msgstr "Argument 'Sx' musi być wektorem liczbowym o jeden którszym niż 'm[]'"
 
-#: nls.c:94 nls.c:96 port.c:555
+#: nls.c:96 nls.c:98 port.c:555
 #, c-format
 msgid "'%s' argument must be a list"
 msgstr "argument '%s' musi być listą"
 
-#: nls.c:102 nls.c:107 nls.c:112 nls.c:117 nls.c:122 nls.c:163 nls.c:168
-#: nls.c:173 nls.c:178 nls.c:183 nls.c:188
+#: nls.c:104 nls.c:109 nls.c:114 nls.c:119 nls.c:124 nls.c:165 nls.c:170
+#: nls.c:175 nls.c:180 nls.c:185 nls.c:190
 #, c-format
 msgid "'%s' is absent"
 msgstr "'%s' jest niedostępne"
 
-#: nls.c:228
+#: nls.c:230
 msgid "singular gradient"
 msgstr "osobliwy gradient"
 
-#: nls.c:249
+#: nls.c:251
 #, c-format
 msgid "step factor %g reduced below 'minFactor' of %g"
 msgstr "czynnik kroku %g zmiejszony poniżej  'minFactor' %g"
 
-#: nls.c:258
+#: nls.c:260
 #, c-format
 msgid "number of iterations exceeded maximum of %d"
 msgstr "liczba iteracji przekroczyła maksymalną liczbę %d"
 
-#: nls.c:263
+#: nls.c:265
 msgid "converged"
 msgstr "zbiegł się"
 
-#: nls.c:284
+#: nls.c:286
 #, c-format
 msgid "'%s' argument should be of type character"
 msgstr "argument '%s' powinien być typu tekstowego"
 
-#: nls.c:286 port.c:377
+#: nls.c:288 port.c:377
 msgid "use of NULL environment is defunct"
 msgstr "użycie wartości NULL dla środowiska zostało zlikwidowane"
 
-#: nls.c:290
+#: nls.c:292
 #, c-format
 msgid "'%s' argument should be an environment"
 msgstr "argument '%s' powinien być środowiskiem"
 
-#: nls.c:293
+#: nls.c:295
 msgid "'dir' is not a numeric vector of the correct length"
 msgstr "'dir' nie jest wektorem liczbowym o poprawnej długości"
 
-#: nls.c:307 nls.c:341
+#: nls.c:309 nls.c:343
 msgid "Missing value or an infinity produced when evaluating the model"
 msgstr ""
 "Brakuje wartości lub wyprodukowano wartości nieskończone podczas wyliczania "
 "modelu"
 
-#: nls.c:315
+#: nls.c:317
 #, c-format
 msgid "variable '%s' is integer, not numeric"
 msgstr "zmienna '%s' jest liczbą całkowitą, a nie rzeczywistą"
 
-#: nls.c:317
+#: nls.c:319
 #, c-format
 msgid "variable '%s' is not numeric"
 msgstr "zmienna '%s' nie jest liczbą rzeczywistą"
@@ -1007,16 +1007,16 @@ msgstr ""
 "dostarczony gradient posiada niepoprawną długość lub tryb, tak więc został "
 "zignorowany"
 
-#: pacf.c:86
+#: pacf.c:84
 msgid "bad Starma struct"
 msgstr "zła struktura 'Starma'"
 
-#: pacf.c:232
+#: pacf.c:230
 #, c-format
 msgid "starma error code %d"
 msgstr "starma: kod błędu %d"
 
-#: pacf.c:292
+#: pacf.c:290
 #, c-format
 msgid "forkal error code %d"
 msgstr "forkal: kod błędu %d"
@@ -1108,15 +1108,15 @@ msgstr "argumenty 'lowerb' oraz 'upperb' muszą być wektorami liczbowymi"
 msgid "'nlsb_iterate()' function returned %d"
 msgstr "funkcja 'nlsb_iterate()' zwróciła %d"
 
-#: rWishart.c:50
+#: rWishart.c:52
 msgid "inconsistent degrees of freedom and dimension"
 msgstr "niespójna liczba stopni swodoby oraz wymiaru"
 
-#: rWishart.c:83
+#: rWishart.c:85
 msgid "'scal' must be a square, real matrix"
 msgstr "'scal' musi być kwadratową, rzeczywistą macierzą"
 
-#: rWishart.c:95
+#: rWishart.c:97
 msgid "'scal' matrix is not positive-definite"
 msgstr "macierz 'scal' nie jest dodatnio określona"
 
@@ -1168,12 +1168,12 @@ msgstr "niepoprawna końcowa reguła dla ruchomiej mediany 3: %d"
 msgid "inputs of different lengths"
 msgstr "wejścia o różnych długościach"
 
-#: starma.c:360
+#: starma.c:358
 #, c-format
 msgid "missing value in last %d observations"
 msgstr "brakuje wartości w ostatnich %d obserwacjach"
 
-#: swilk.c:206
+#: swilk.c:208
 #, c-format
 msgid "ifault=%d. This should not happen"
 msgstr "ifault=%d. To nie powinno się wydarzyć"

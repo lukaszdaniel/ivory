@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-10 18:04\n"
+"POT-Creation-Date: 2016-01-27 18:05\n"
 "PO-Revision-Date: 2011-04-01 04:29+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -777,11 +777,6 @@ msgstr ""
 msgid "'method = \"quick\"' option is only for numeric 'x'"
 msgstr ""
 
-#. R/sort.R: stop("'method = \"radix\"' option is only for integer 'x'")
-#: R/sort.R:0
-msgid "'method = \"radix\"' option is only for integer 'x'"
-msgstr ""
-
 #. R/format.R: stop("'mode' argument must be \"double\" (\"real\"), \"integer\" or \"character\"")
 #: R/format.R:0
 #, fuzzy
@@ -842,6 +837,14 @@ msgid ""
 "'recursive' argument will be ignored as 'to' argument is not a single "
 "existing directory"
 msgstr ""
+
+#. R/dataframe.R: gettextf("'row.names' argument is not a character vector of length %d -- omitting it. Will be an error!",     nrows)
+#: R/dataframe.R:0
+#, fuzzy
+msgid ""
+"'row.names' argument is not a character vector of length %d -- omitting it. "
+"Will be an error!"
+msgstr "isim alanı"
 
 #. R/dataframe.R: stop("'row.names' argument should specify one of the variables")
 #: R/dataframe.R:0

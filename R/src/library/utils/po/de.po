@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-18 12:53+0200\n"
+"POT-Creation-Date: 2016-01-27 18:06+0100\n"
 "PO-Revision-Date: 2014-03-16 16:24+0100\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -134,28 +134,28 @@ msgstr "X11 nicht verfügbar"
 msgid "invalid '%s' specification"
 msgstr "ungültige '%s' Spezifikation"
 
-#: utils.c:62 windows/util.c:402 windows/util.c:411 windows/widgets.c:182
+#: utils.c:63 windows/util.c:402 windows/util.c:411 windows/widgets.c:182
 #: windows/widgets.c:188 windows/widgets.c:247 windows/widgets.c:253
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string"
 msgstr "'text' muss eine Zeichenkette sein"
 
-#: utils.c:85
+#: utils.c:86
 #, fuzzy
 msgid "'hostname' argument must be a character vector of length 1"
 msgstr "'hostname' muss ein Zeihenkettenetor der Länge 1 sein"
 
-#: utils.c:91
+#: utils.c:92
 #, fuzzy, c-format
 msgid "'nsl()' was unable to resolve host '%s'"
 msgstr "nsl() konnte Hostnamen '%s' nicht auflösen"
 
-#: utils.c:98
+#: utils.c:99
 #, fuzzy
 msgid "unknown format returned by 'gethostbyname()'"
 msgstr "unbekanntes Format von 'gethostbyname' zurückgegeben"
 
-#: utils.c:107
+#: utils.c:108
 #, fuzzy
 msgid "'nsl()' is not supported on this platform"
 msgstr "nsl() ist auf dieser Plattform nicht unterstützt"

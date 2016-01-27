@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-17 17:28\n"
+"POT-Creation-Date: 2016-01-27 18:05\n"
 "PO-Revision-Date: 2014-03-27 13:32-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -2866,13 +2866,6 @@ msgstr "원래의 함수는 제네릭함수이기 때문에 사용될 수 없습
 msgid "package %s is not attached and no namespace found for it"
 msgstr "패키지 %s가 부착되지 않아 이것에 대한 네임스페이스를 찾을 수 없습니다"
 
-#. R/RMethodUtils.R: gettextf("package %s seems to have out-of-date methods; need to reinstall from source",     sQuote(getPackageName(where[[1L]])))
-#: R/RMethodUtils.R:0
-msgid ""
-"package %s seems to have out-of-date methods; need to reinstall from source"
-msgstr ""
-"패키지 %s는  seems to have out-of-date methods; need to reinstall from source"
-
 #. R/methodsTable.R: gettext("package slot missing from signature for generic %s\n and classes %s\ncannot use with duplicate class names (the package may need to be re-installed)",     domain = "R-methods")
 #: R/methodsTable.R:0
 msgid ""
@@ -3606,6 +3599,13 @@ msgid_plural ""
 "of the non-generic to be used as the default (%s)"
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid ""
+#~ "package %s seems to have out-of-date methods; need to reinstall from "
+#~ "source"
+#~ msgstr ""
+#~ "패키지 %s는  seems to have out-of-date methods; need to reinstall from "
+#~ "source"
 
 #~ msgid "methods cannot be defined for the primitive function %s"
 #~ msgstr "프리미티브 함수 %s에 대해서 메소드들이 정의될 수 없습니다"

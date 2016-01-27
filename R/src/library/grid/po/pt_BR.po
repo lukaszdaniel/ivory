@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-09 22:21+0200\n"
+"POT-Creation-Date: 2016-01-27 18:05+0100\n"
 "PO-Revision-Date: 2015-01-17 15:12+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -91,11 +91,11 @@ msgstr "layout.pos.row inválido"
 msgid "invalid 'layout.pos.col'"
 msgstr "layout.pos.col inválido"
 
-#: matrix.c:50
+#: matrix.c:51
 msgid "singular transformation matrix"
 msgstr "matriz de transformação singular"
 
-#: state.c:170
+#: state.c:171
 #, fuzzy
 msgid "unable to store 'grid' state.  Too many devices open?"
 msgstr ""

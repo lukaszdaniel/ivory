@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-09 15:50+0100\n"
+"POT-Creation-Date: 2016-01-27 18:06+0100\n"
 "PO-Revision-Date: 2012-03-06 17:56+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -19,11 +19,11 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Pootle 2.1.6\n"
 
-#: Rmd5.c:38
+#: Rmd5.c:37
 msgid "argument 'files' must be character"
 msgstr "'files' 인자는 반드시 문자이어야 합니다 "
 
-#: Rmd5.c:52
+#: Rmd5.c:51
 #, c-format
 msgid "md5 failed on file '%s'"
 msgstr "파일 '%s' 에서 md5 가 작동하지 않습니다 "
@@ -147,27 +147,27 @@ msgstr "올바르지 않은 인자의 유형 "
 msgid "write error during file append"
 msgstr ""
 
-#: signals.c:44
+#: signals.c:43
 msgid "pskill() is not supported on this platform"
 msgstr "이 플랫폼에서는 pskill() 이 지원되지 않습니다 "
 
-#: signals.c:141
+#: signals.c:140
 msgid "psnice() is not supported on this platform"
 msgstr "이 플랫폼에서는 psnice() 가 지원되지 않습니다 "
 
-#: text.c:67
+#: text.c:68
 msgid "invalid argument type"
 msgstr "올바르지 않은 인자의 유형 "
 
-#: text.c:158
+#: text.c:159
 #, c-format
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr ""
 
-#: text.c:225 text.c:247
+#: text.c:226 text.c:248
 msgid "out of memory"
 msgstr "메모리가 부족합니다 "
 
-#: text.c:267 text.c:269
+#: text.c:268 text.c:270
 msgid "first arg must be a single character string"
 msgstr ""

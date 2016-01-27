@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-09 15:50+0100\n"
+"POT-Creation-Date: 2016-01-27 18:06+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: Rmd5.c:38
+#: Rmd5.c:37
 msgid "argument 'files' must be character"
 msgstr "argument 'files' musi być tekstem"
 
-#: Rmd5.c:52
+#: Rmd5.c:51
 #, c-format
 msgid "md5 failed on file '%s'"
 msgstr "md5 nie powiodło się na pliku '%s'"
@@ -151,28 +151,28 @@ msgstr "niepoprawny argument '%s'"
 msgid "write error during file append"
 msgstr "błąd zapisu podczas dołączania pliku"
 
-#: signals.c:44
+#: signals.c:43
 msgid "pskill() is not supported on this platform"
 msgstr "'pskill()' nie jest wspierany na tej platformie"
 
-#: signals.c:141
+#: signals.c:140
 msgid "psnice() is not supported on this platform"
 msgstr "'psnice()' nie jest wspierany na tej platformie"
 
-#: text.c:67
+#: text.c:68
 msgid "invalid argument type"
 msgstr "niepoprawny typ argumentu"
 
-#: text.c:158
+#: text.c:159
 #, c-format
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr "argument '%s' musi mieć wartość TRUE lub FALSE"
 
-#: text.c:225 text.c:247
+#: text.c:226 text.c:248
 msgid "out of memory"
 msgstr "brakło pamięci"
 
-#: text.c:267 text.c:269
+#: text.c:268 text.c:270
 msgid "first arg must be a single character string"
 msgstr "pierwszy argument musi być pojedynczym łańcuchem tekstowym"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-09 15:50+0100\n"
+"POT-Creation-Date: 2016-01-27 18:06+0100\n"
 "PO-Revision-Date: 2015-01-17 15:39+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -19,11 +19,11 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: Rmd5.c:38
+#: Rmd5.c:37
 msgid "argument 'files' must be character"
 msgstr "Argument 'files' muss Zeichenkette sein"
 
-#: Rmd5.c:52
+#: Rmd5.c:51
 #, c-format
 msgid "md5 failed on file '%s'"
 msgstr "md5 für Datei '%s' fehlgeschlagen"
@@ -147,27 +147,27 @@ msgstr "unzulässiger Argumenttyp"
 msgid "write error during file append"
 msgstr ""
 
-#: signals.c:44
+#: signals.c:43
 msgid "pskill() is not supported on this platform"
 msgstr "pskill() auf dieser Plattform nicht unterstützt"
 
-#: signals.c:141
+#: signals.c:140
 msgid "psnice() is not supported on this platform"
 msgstr "psnice() auf dieser Plattform nicht unterstützt"
 
-#: text.c:67
+#: text.c:68
 msgid "invalid argument type"
 msgstr "unzulässiger Argumenttyp"
 
-#: text.c:158
+#: text.c:159
 #, c-format
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr ""
 
-#: text.c:225 text.c:247
+#: text.c:226 text.c:248
 msgid "out of memory"
 msgstr "zu wenig Hauptspeicher"
 
-#: text.c:267 text.c:269
+#: text.c:268 text.c:270
 msgid "first arg must be a single character string"
 msgstr ""

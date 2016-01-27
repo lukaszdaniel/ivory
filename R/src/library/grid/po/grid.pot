@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grid 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-09 15:48+0100\n"
+"POT-Creation-Date: 2016-01-27 18:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,11 +78,11 @@ msgstr ""
 msgid "invalid 'layout.pos.col'"
 msgstr ""
 
-#: matrix.c:50
+#: matrix.c:51
 msgid "singular transformation matrix"
 msgstr ""
 
-#: state.c:170
+#: state.c:171
 msgid "unable to store 'grid' state.  Too many devices open?"
 msgstr ""
 

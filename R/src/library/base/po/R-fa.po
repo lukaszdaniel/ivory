@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-19 19:19\n"
+"POT-Creation-Date: 2016-01-27 18:05\n"
 "PO-Revision-Date: 2016-01-14 20:01+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Persian\n"
@@ -727,11 +727,6 @@ msgstr ""
 #. R/sort.R: stop("'method = \"quick\"' option is only for numeric 'x'")
 #: R/sort.R:0
 msgid "'method = \"quick\"' option is only for numeric 'x'"
-msgstr ""
-
-#. R/sort.R: stop("'method = \"radix\"' option is only for integer 'x'")
-#: R/sort.R:0
-msgid "'method = \"radix\"' option is only for integer 'x'"
 msgstr ""
 
 #. R/format.R: stop("'mode' argument must be \"double\" (\"real\"), \"integer\" or \"character\"")

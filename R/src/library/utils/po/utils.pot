@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: utils 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-09 15:50+0100\n"
+"POT-Creation-Date: 2016-01-27 18:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -132,26 +132,26 @@ msgstr ""
 msgid "invalid '%s' specification"
 msgstr ""
 
-#: utils.c:62 windows/util.c:402 windows/util.c:411 windows/widgets.c:182
+#: utils.c:63 windows/util.c:402 windows/util.c:411 windows/widgets.c:182
 #: windows/widgets.c:188 windows/widgets.c:247 windows/widgets.c:253
 #, c-format
 msgid "'%s' argument must be a character string"
 msgstr ""
 
-#: utils.c:85
+#: utils.c:86
 msgid "'hostname' argument must be a character vector of length 1"
 msgstr ""
 
-#: utils.c:91
+#: utils.c:92
 #, c-format
 msgid "'nsl()' was unable to resolve host '%s'"
 msgstr ""
 
-#: utils.c:98
+#: utils.c:99
 msgid "unknown format returned by 'gethostbyname()'"
 msgstr ""
 
-#: utils.c:107
+#: utils.c:108
 msgid "'nsl()' is not supported on this platform"
 msgstr ""
 

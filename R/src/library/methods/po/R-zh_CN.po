@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-17 17:28\n"
+"POT-Creation-Date: 2016-01-27 18:05\n"
 "PO-Revision-Date: 2015-01-17 15:43+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -2867,13 +2867,6 @@ msgstr "原始函数是禁止作为泛型函数来用的"
 msgid "package %s is not attached and no namespace found for it"
 msgstr "\"%s\"程序包没有被附加，也找不到它的名字空间"
 
-#. R/RMethodUtils.R: gettextf("package %s seems to have out-of-date methods; need to reinstall from source",     sQuote(getPackageName(where[[1L]])))
-#: R/RMethodUtils.R:0
-#, fuzzy
-msgid ""
-"package %s seems to have out-of-date methods; need to reinstall from source"
-msgstr "程序包\"%s\"的方法好象过时了；请重新安装"
-
 #. R/methodsTable.R: gettext("package slot missing from signature for generic %s\n and classes %s\ncannot use with duplicate class names (the package may need to be re-installed)",     domain = "R-methods")
 #: R/methodsTable.R:0
 msgid ""
@@ -3600,6 +3593,12 @@ msgid_plural ""
 msgstr[0] ""
 "用于'%s'泛型函数(%s)的正式参数与将作为默認值(%s)来用的非泛型的正式参数不相符"
 "合"
+
+#, fuzzy
+#~ msgid ""
+#~ "package %s seems to have out-of-date methods; need to reinstall from "
+#~ "source"
+#~ msgstr "程序包\"%s\"的方法好象过时了；请重新安装"
 
 #~ msgid "methods cannot be defined for the primitive function %s"
 #~ msgstr "无法为基元函数%s定义方法"

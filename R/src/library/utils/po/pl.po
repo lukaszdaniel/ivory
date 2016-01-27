@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-18 12:53+0200\n"
+"POT-Creation-Date: 2016-01-27 18:06+0100\n"
 "PO-Revision-Date: 2014-05-10 14:41+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -134,26 +134,26 @@ msgstr "X11 nie jest dostępne"
 msgid "invalid '%s' specification"
 msgstr "niepoprawne określenie '%s'"
 
-#: utils.c:62 windows/util.c:402 windows/util.c:411 windows/widgets.c:182
+#: utils.c:63 windows/util.c:402 windows/util.c:411 windows/widgets.c:182
 #: windows/widgets.c:188 windows/widgets.c:247 windows/widgets.c:253
 #, c-format
 msgid "'%s' argument must be a character string"
 msgstr "argument '%s' musi być łańcuchem tekstowym"
 
-#: utils.c:85
+#: utils.c:86
 msgid "'hostname' argument must be a character vector of length 1"
 msgstr "argument 'hostname' musi być wektorem tekstowym o długości 1"
 
-#: utils.c:91
+#: utils.c:92
 #, c-format
 msgid "'nsl()' was unable to resolve host '%s'"
 msgstr "'nsl()' nie był w stanie nawiązać połączenia z hostem '%s'"
 
-#: utils.c:98
+#: utils.c:99
 msgid "unknown format returned by 'gethostbyname()'"
 msgstr "nieznany format zwrócony przez 'gethostbyname()'"
 
-#: utils.c:107
+#: utils.c:108
 msgid "'nsl()' is not supported on this platform"
 msgstr "'nsl()' nie jest obsługiwany na tej platformie"
 

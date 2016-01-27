@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-10 18:04\n"
+"POT-Creation-Date: 2016-01-27 18:05\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -849,12 +849,6 @@ msgstr "'local' 은 만드시 TRUE, FLASE, 혹은 환경 값을 가집니다 "
 msgid "'method = \"quick\"' option is only for numeric 'x'"
 msgstr "method=\"quick\" 는 'x' 가 수치일 경우에만 사용합니다 "
 
-#. R/sort.R: stop("'method = \"radix\"' option is only for integer 'x'")
-#: R/sort.R:0
-#, fuzzy
-msgid "'method = \"radix\"' option is only for integer 'x'"
-msgstr "method=\"radix\" 는 'x' 가 정수일때만 사용합니다 "
-
 #. R/format.R: stop("'mode' argument must be \"double\" (\"real\"), \"integer\" or \"character\"")
 #: R/format.R:0
 #, fuzzy
@@ -922,6 +916,14 @@ msgid ""
 "'recursive' argument will be ignored as 'to' argument is not a single "
 "existing directory"
 msgstr "'recursive' will be ignored as 'to' is not a single existing directory"
+
+#. R/dataframe.R: gettextf("'row.names' argument is not a character vector of length %d -- omitting it. Will be an error!",     nrows)
+#: R/dataframe.R:0
+#, fuzzy
+msgid ""
+"'row.names' argument is not a character vector of length %d -- omitting it. "
+"Will be an error!"
+msgstr "'kind'는 길이 1의 문자열 이어야 합니다 (사용하게 될 RNG)"
 
 #. R/dataframe.R: stop("'row.names' argument should specify one of the variables")
 #: R/dataframe.R:0
@@ -3605,6 +3607,10 @@ msgstr[0] "%s 라는 이름의 패키지는 없습니다"
 msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "TRUE 대신 T 가 사용되었습니다 "
+
+#, fuzzy
+#~ msgid "'method = \"radix\"' option is only for integer 'x'"
+#~ msgstr "method=\"radix\" 는 'x' 가 정수일때만 사용합니다 "
 
 #, fuzzy
 #~ msgid "replacing local value with import %s when loading %s"

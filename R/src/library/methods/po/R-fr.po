@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-17 17:28\n"
+"POT-Creation-Date: 2016-01-27 18:05\n"
 "PO-Revision-Date: 2012-03-06 21:42+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -3180,15 +3180,6 @@ msgstr "La fonction originale ne peut être utilisée comme fonction générique"
 msgid "package %s is not attached and no namespace found for it"
 msgstr "Le package \"%s\" n'est pas attaché et ne possède aucun espace de noms"
 
-#. R/RMethodUtils.R: gettextf("package %s seems to have out-of-date methods; need to reinstall from source",     sQuote(getPackageName(where[[1L]])))
-#: R/RMethodUtils.R:0
-#, fuzzy
-msgid ""
-"package %s seems to have out-of-date methods; need to reinstall from source"
-msgstr ""
-"La package \"%s\" semble avoir des méthodes périmées ; il faut le "
-"réinstaller depuis ses sources"
-
 #. R/methodsTable.R: gettext("package slot missing from signature for generic %s\n and classes %s\ncannot use with duplicate class names (the package may need to be re-installed)",     domain = "R-methods")
 #: R/methodsTable.R:0
 msgid ""
@@ -4041,6 +4032,14 @@ msgstr[0] ""
 msgstr[1] ""
 "les arguments formels de la fonction générique pour \"%s\" (%s) diffèrent de "
 "ceux de la fonction non générique à utiliser par défaut (%s)"
+
+#, fuzzy
+#~ msgid ""
+#~ "package %s seems to have out-of-date methods; need to reinstall from "
+#~ "source"
+#~ msgstr ""
+#~ "La package \"%s\" semble avoir des méthodes périmées ; il faut le "
+#~ "réinstaller depuis ses sources"
 
 #~ msgid "methods cannot be defined for the primitive function %s"
 #~ msgstr "des méthodes ne peuvent être définies pour la fonction primitive %s"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-10 18:04\n"
+"POT-Creation-Date: 2016-01-27 18:05\n"
 "PO-Revision-Date: 2012-09-28 22:18+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -842,12 +842,6 @@ msgstr "«local» må vera TRUE, FALSE eller ein omgjevnad"
 msgid "'method = \"quick\"' option is only for numeric 'x'"
 msgstr "«method=\"quick\"» er berre for numerisk «x»"
 
-#. R/sort.R: stop("'method = \"radix\"' option is only for integer 'x'")
-#: R/sort.R:0
-#, fuzzy
-msgid "'method = \"radix\"' option is only for integer 'x'"
-msgstr "«method=\"radix\"» er berre for numerisk «x»"
-
 #. R/format.R: stop("'mode' argument must be \"double\" (\"real\"), \"integer\" or \"character\"")
 #: R/format.R:0
 #, fuzzy
@@ -916,6 +910,16 @@ msgid ""
 msgstr ""
 "«recursive» vert ikkje brukt, sidan «to» ikkje er ei enkeltmappe som finst "
 "frå før"
+
+#. R/dataframe.R: gettextf("'row.names' argument is not a character vector of length %d -- omitting it. Will be an error!",     nrows)
+#: R/dataframe.R:0
+#, fuzzy
+msgid ""
+"'row.names' argument is not a character vector of length %d -- omitting it. "
+"Will be an error!"
+msgstr ""
+"«kind» må vera ein teiknstreng av lengd 1 (slumptalsgenerator som skal "
+"brukast)."
 
 #. R/dataframe.R: stop("'row.names' argument should specify one of the variables")
 #: R/dataframe.R:0
@@ -3627,6 +3631,10 @@ msgid "variable %s is not TRUE"
 msgid_plural "variables %s are not all TRUE"
 msgstr[0] "T brukt i staden for TRUE"
 msgstr[1] "T brukt i staden for TRUE"
+
+#, fuzzy
+#~ msgid "'method = \"radix\"' option is only for integer 'x'"
+#~ msgstr "«method=\"radix\"» er berre for numerisk «x»"
 
 #, fuzzy
 #~ msgid "replacing local value with import %s when loading %s"
