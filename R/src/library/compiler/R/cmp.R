@@ -2790,7 +2790,7 @@ setCompilerOptions <- function(...) {
         if (! exists(n, compilerOptions))
             stop(gettextf("'%s' is not a valid compiler option", n), domain = "R-compiler")
     old <- list()
-    newOptions <- compilerOptions
+    newOptions <- as.list(compilerOptions) # copy options
     for (n in nm) {
         op <- options[[n]]
         switch(n,
@@ -2819,7 +2819,9 @@ setCompilerOptions <- function(...) {
                })
     }
     jitEnabled <- enableJIT(-1)
-    checkCompilerOptions(jitEnabled, newOptions)
+    if (checkCompilerOptions(jitEnabled, newOptions))
+        for(n in names(newOptions)) # commit the new options
+            assign(n, newOptions[[n]], compilerOptions)
     invisible(old)
 }
 
