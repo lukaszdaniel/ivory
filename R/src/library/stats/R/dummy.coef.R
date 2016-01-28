@@ -111,8 +111,10 @@ dummy.coef.lm <- function(object, use.na=FALSE, ...)
 		    setNames(drop(mm[ij, keep, drop = FALSE] %*% cf), rnn[ij])
 	}
     }
-    if(int > 0)
-	res <- c(list(gettext("(Intercept)", domain = "R-stats") = if(isM) coef[int, ] else coef[int]), res)
+    if(int > 0) {
+	res <- c(list("(Intercept)" = if(isM) coef[int, ] else coef[int]), res)
+	names(res) <- c(gettext("(Intercept)", domain = "R-stats"), names(res[-1L]))
+    }
     structure(res, class = "dummy_coef",  matrix = isM)
 }
 
