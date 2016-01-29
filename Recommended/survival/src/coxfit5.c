@@ -520,7 +520,6 @@ void coxfit5_b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
 			*loglik = newlk;
 			chsolve3(jmat, nvar2, nf, fdiag, u);
 
-			j = 0;
 			for (int i = 0; i < nvar; i++) {
 				oldbeta[i + nf] = beta[i];
 				beta[i] += u[i + nf];

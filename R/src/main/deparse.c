@@ -735,7 +735,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 {
     PPinfo fop;
     Rboolean lookahead = FALSE, lbreak = FALSE, parens, fnarg = d->fnarg, 
-             outerparens;
+             outerparens, doquote;
     SEXP op, t;
     int localOpts = d->opts, i, n;
     
@@ -750,7 +750,8 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 	print2buff("NULL", d);
 	break;
     case SYMSXP:
-	if (localOpts & QUOTEEXPRESSIONS) {
+	doquote = (localOpts & QUOTEEXPRESSIONS) && strlen(CHAR(PRINTNAME(s)));
+	if (doquote) {
 	    attr1(s, d);
 	    print2buff("quote(", d);
 	}
@@ -760,7 +761,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 	    print2buff(quotify(PRINTNAME(s), '`'), d);
 	else
 	    print2buff(CHAR(PRINTNAME(s)), d);
-	if (localOpts & QUOTEEXPRESSIONS) {
+	if (doquote) {
 	    print2buff(")", d);
 	    attr2(s, d);
 	}

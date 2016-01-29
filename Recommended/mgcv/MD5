@@ -41,7 +41,7 @@ ec93ec84df60a68f320a110db107ea26 *po/de.po
 f48324ac5ec1a8e5509f411d53bbdc6a *po/R-ko.po
 7fcc55cb7b1266d49bd9f0ec8acbb055 *po/R-pl.po
 da0f05ffe11c99741cfe37bc23f5d72b *po/mgcv.pot
-827d5e3248666cd7080d15ad08a15985 *src/mat.c
+64092b677d07698a29f75ee8071c23a6 *src/mat.c
 4bbc617399554d28b2a0786331cdc24c *src/misc.c
 e4db7d04fdd31912638a95d337602016 *src/coxph.c
 a52b0b3cb7d59c459ff7bb98fd4935ae *src/mgcv.c
@@ -61,7 +61,7 @@ cbaccf4e7c33fb7b424066252d27750a *src/matrix.h
 b5e227b16a00c2aca999a52106a96b7a *src/matrix.c
 03972284b3400cf82cacd5d2dc4b8cb3 *src/Makevars
 d175b184a94572542b59cb65809088af *src/gdi.c
-91c7e18bb76056ed3d89541aae8ff561 *src/discrete.c
+b7e6d36936f6c4ef62e54251a6a39160 *src/discrete.c
 80f8763baa4987579e2aa56073a9e94e *man/anova.gam.Rd
 5bf12ddc0dab9daae72271b96a15c539 *man/Predict.matrix.Rd
 c523210ae95cb9aaa0aaa1c37da1a4c5 *man/residuals.gam.Rd

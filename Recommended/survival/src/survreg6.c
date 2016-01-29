@@ -174,7 +174,7 @@ SEXP survreg6(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 	 */
 	*flag = cholesky3(imat, nvar2, 0, NULL, tol_chol);
 	if (*flag < 0) {
-		i = cholesky3(JJ, nvar2, 0, NULL, tol_chol);
+		cholesky3(JJ, nvar2, 0, NULL, tol_chol);
 		chsolve2(JJ, nvar2, u);
 	} else
 		chsolve2(imat, nvar2, u); /* a replaced by  a *inverse(i) */
@@ -258,7 +258,7 @@ SEXP survreg6(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 			*loglik = newlk;
 			*flag = cholesky3(imat, nvar2, 0, NULL, tol_chol);
 			if (*flag < 0) {
-				i = cholesky3(JJ, nvar2, 0, NULL, tol_chol);
+				cholesky3(JJ, nvar2, 0, NULL, tol_chol);
 				chsolve2(JJ, nvar2, u);
 			} else
 				chsolve2(imat, nvar2, u);
