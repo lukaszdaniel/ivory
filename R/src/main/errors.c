@@ -110,7 +110,7 @@ void R_CheckStack2(size_t extra)
     int dummy;
     intptr_t usage = R_CStackDir * (R_CStackStart - (uintptr_t)&dummy);
 
-    /* do it this way, as some compilers do usage + extra 
+    /* do it this way, as some compilers do usage + extra
        in unsigned arithmetic */
     usage += extra;
     if(R_CStackLimit != -1 && usage > ((intptr_t) R_CStackLimit))
@@ -341,7 +341,7 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 
     if(w >= 2) { /* make it an error */
 	Rvsnprintf(buf, min(BUFSIZE, R_WarnLength), format, ap);
-        RprintTrunc(buf);
+	RprintTrunc(buf);
 	inWarning = 0; /* PR#1570 */
 	errorcall(call, _("(converted from warning) %s"), buf);
     }
@@ -351,12 +351,12 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 	    dcall = CHAR(STRING_ELT(deparse1s(call), 0));
 	} else dcall = "";
 	Rvsnprintf(buf, min(BUFSIZE, R_WarnLength+1), format, ap);
-        RprintTrunc(buf);
+	RprintTrunc(buf);
 
 	if(dcall[0] == '\0') REprintf(_("Warning:"));
 	else {
 	    REprintf(_("Warning in command '%s':"), dcall);
-	    if(!(noBreakWarning || 
+	    if(!(noBreakWarning ||
 		 ( mbcslocale && 18 + wd(dcall) + wd(buf) <= LONGWARN) ||
 		 (!mbcslocale && 18 + strlen(dcall) + strlen(buf) <= LONGWARN)))
 		REprintf("\n ");
@@ -372,9 +372,9 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 	if(R_CollectWarnings < R_nwarnings) {
 	    SET_VECTOR_ELT(R_Warnings, R_CollectWarnings, call);
 	    Rvsnprintf(buf, min(BUFSIZE, R_WarnLength+1), format, ap);
-            RprintTrunc(buf);
+	    RprintTrunc(buf);
 	    if(R_ShowWarnCalls && call != R_NilValue) {
-		char *tr =  R_ConciseTraceback(call, 0); 
+		char *tr =  R_ConciseTraceback(call, 0);
 		size_t nc = strlen(tr);
 		if (nc && nc + (int)strlen(buf) + 8 < BUFSIZE) {
 		    strcat(buf, "\n");
@@ -466,7 +466,7 @@ void PrintWarnings(const char *hdr)
 	else {
 	    const char *dcall, *msg = CHAR(STRING_ELT(names, 0));
 	    dcall = CHAR(STRING_ELT(deparse1s(VECTOR_ELT(R_Warnings, 0)), 0));
-            REprintf(_("In command '%s':"), dcall);
+	    REprintf(_("In command '%s':"), dcall);
 	    if (mbcslocale) {
 		int msgline1;
 		char *p = strchr(msg, '\n');
