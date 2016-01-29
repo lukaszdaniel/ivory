@@ -37,7 +37,6 @@
  */
 SEXP pyears3b(SEXP death2, SEXP efac2, SEXP edims2, SEXP ecut2, SEXP expect2,
 		SEXP grpx2, SEXP x2, SEXP y2, SEXP times2, SEXP ngrp2) {
-	int i, j, k;
 	int n, death, edim, ngrp, ntime;
 	double **x;
 	double *data2;

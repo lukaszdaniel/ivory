@@ -6,7 +6,6 @@
 
 void coxph_wtest(Sint *nvar2, Sint *ntest, double *var, double *b,
 		double *solve, double *tolerch) {
-	int i, j;
 	int nvar, df;
 	double sum;
 	double **var2;

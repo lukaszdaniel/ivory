@@ -98,7 +98,6 @@ void coxfit5_a(Sint *nusedx, Sint *nvarx, double *yy, double *covar2,
 		void *fexpr2, void *rho) {
 
 	int i, j, k, p, istrat;
-	int ii;
 	int nused, nvar;
 	int nf, nvar2;
 
@@ -299,9 +298,8 @@ void coxfit5_b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
 		Sint *flag, double *eps, double *tolerch, Sint *methodx, Sint *nfrail,
 		double *fbeta, double *fdiag, void *fexpr1, void *fexpr2, void *rho) {
 
-	int i, j, k, p;
-	int ii, istrat, ip;
-	int iter;
+	int k, p;
+	int ii, istrat;
 	int nused, nvar;
 	int nf, nvar2;
 	int fgrp = 0;
@@ -555,7 +553,6 @@ void coxfit5_b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
 
 static double **cmatrix(double *data, int ncol, int nrow) {
 
-	int i, j;
 	double **pointer;
 	double *temp;
 
@@ -584,7 +581,7 @@ static void cmatrix_free(double **data) {
 void coxfit5_c(Sint *nusedx, Sint *nvar, Sint *strata, Sint *methodx,
 		double *expect) {
 	double hazard, denom, temp, temp2, efron_wt, ndead, hazard2;
-	int p, nused, method, ip, istrat, i, j;
+	int p, nused, method, istrat, i;
 
 	nused = *nusedx;
 	method = *methodx;

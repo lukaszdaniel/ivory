@@ -19,7 +19,6 @@
 
 void survfit4(Sint *n, Sint *dd, double *x1, double *x2) {
 	double temp, temp1, temp2;
-	int i, j;
 	double d;
 
 	for (int i = 0; i < *n; i++) {

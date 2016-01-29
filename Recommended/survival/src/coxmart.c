@@ -23,7 +23,6 @@
 
 void coxmart(Sint *sn, Sint *method, double *time, Sint *status, Sint * strata,
 		double *score, double *wt, double *expect) {
-	register int i, j;
 	int lastone;
 	int n;
 	double deaths, denom = 0, e_denom = 0;

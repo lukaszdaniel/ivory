@@ -19,7 +19,7 @@
 #include "survproto.h"
 void coxmart2(Sint *sn, double *time, Sint *status, Sint * strata,
 		double *score, double *wt, double *resid) {
-	int i, j;
+	int j;
 	int n;
 	double deaths, denom;
 	double expected, hazard;

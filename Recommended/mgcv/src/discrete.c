@@ -98,7 +98,7 @@ void tensorXty(double *Xy,double *work,double *work1, double *y,double *X,
    Note: constraint not dealt with here. Thread safe.
    k[,kstart[i] + *koff] is the index for the ith term (starting at i=0)
 */
-  int pb=1,i,j,pd,q;
+  int pb=1,i,j,pd;
   double *p1,*yn,*p0,*M; 
   yn = y + *n;
   M = X;

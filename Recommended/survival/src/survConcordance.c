@@ -25,7 +25,7 @@
 #include <stdio.h>
 void survConcordance(Sint *np, double *time, Sint *status, double *x, Sint *n2p,
 		double *x2, Sint *temp, Sint *result) {
-	int i, j, k = 0;
+	int j, k = 0;
 	int start, end;
 	int n, n2;
 	Sint *count1, *count2, *count;

@@ -36,7 +36,7 @@ void pyears2(Sint *sn, Sint *sny, Sint *sdoevent, double *sy, double *wt,
 		Sint *sodim, Sint *ofac, Sint *odims, double *socut, double *sodata,
 		double *pyears, double *pn, double *pcount, double *offtable) {
 
-	int i, j;
+	int i;
 	int n, ny, doevent, odim;
 	double *start, *stop, *event, **ocut, **odata;
 	double *data;

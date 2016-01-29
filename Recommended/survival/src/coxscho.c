@@ -35,7 +35,6 @@
 
 void coxscho(Sint *nusedx, Sint *nvarx, double *y, double *covar2,
 		double *score, Sint *strata, Sint *method2, double *work) {
-	int i, k, person;
 	int nused, nvar;
 	double **covar;
 	double *a;

@@ -35,7 +35,6 @@ void agmart2(Sint *n, Sint *method, double *start, double *stop, Sint *event,
 	double temp, time;
 	double wtsum, *dtimes;
 	int nused, ndeath;
-	int person;
 	int strata_start;
 
 	nused = *n;

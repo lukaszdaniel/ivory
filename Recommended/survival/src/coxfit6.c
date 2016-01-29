@@ -55,7 +55,7 @@
 SEXP coxfit6(SEXP maxiter2, SEXP time2, SEXP status2, SEXP covar2, SEXP offset2,
 		SEXP weights2, SEXP strata2, SEXP method2, SEXP eps2, SEXP toler2,
 		SEXP ibeta, SEXP doscale2) {
-	int i, j, k, person;
+	int i;
 
 	double **covar, **cmat, **imat; /*ragged arrays */
 	double wtave;

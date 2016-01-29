@@ -17,7 +17,7 @@ void survpenal(int whichcase, int nfrail, int nvar, double **hmat, double **JJ,
 		int ptype, int pdiag, SEXP pexpr1, double *cptr1, SEXP pexpr2,
 		double *cptr2, SEXP rho) {
 
-	int i, j, k;
+	int k;
 	Sint *flag;
 	SEXP plist;
 	double *dptr;

@@ -45,10 +45,10 @@
 SEXP survreg6(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
 		SEXP wtx, SEXP offset2, SEXP beta2, SEXP nstratx, SEXP stratax,
 		SEXP epsx, SEXP tolx, SEXP dist, SEXP dexpr, SEXP rho) {
-	int i, j;
+	int j;
 	int n, maxiter, ny;
 	double *newbeta;
-	int halving, iter;
+	int halving;
 	double newlk;
 	double *loglik, eps, tol_chol;
 	double *beta;

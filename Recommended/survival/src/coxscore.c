@@ -29,11 +29,9 @@
 void coxscore(Sint *nx, Sint *nvarx, double *y, double *covar2, Sint *strata,
 		double *score, double *weights, Sint *method, double *resid2,
 		double *scratch) {
-	int i, j, k;
 	double temp;
 	int n, nvar;
 	double deaths;
-	int dd;
 	double *time, *status;
 	double *a, *a2;
 	double denom = 0, e_denom;

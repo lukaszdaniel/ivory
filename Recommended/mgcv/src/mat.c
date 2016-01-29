@@ -1322,7 +1322,7 @@ void getXtX(double *XtX,double *X,int *r,int *c)
 void getXXt(double *XXt,double *X,int *r,int *c)
 /* form XX' (nearly) as efficiently as possible - uses BLAS*/
 { double alpha=1.0,beta=0.0;
-  int i,j;
+
   ptrdiff_t ii,jj;
   char uplo = 'L',trans='N';
   F77_CALL(dsyrk)(&uplo,&trans,r, c, &alpha,X,r,&beta,XXt,r);
