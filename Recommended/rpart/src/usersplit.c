@@ -34,7 +34,7 @@ void usersplit_eval(int n, double *y[], double *value, double *risk, double *wt)
 
 	rpart_callback1(n, y, wt, uscratch);
 	*risk = uscratch[0];
-	for (i = 0; i < n_return; i++)
+	for (int i = 0; i < n_return; i++)
 		value[i] = uscratch[i + 1];
 }
 
@@ -84,7 +84,7 @@ void usersplit(int n, double *y[], double *x, int nclass, int edge,
 		dscratch = uscratch + n - 1;
 		best = 0;
 
-		for (i = edge - 1; i < n - edge; i++) {
+		for (int i = edge - 1; i < n - edge; i++) {
 			if ((x[i] < x[i + 1]) && (uscratch[i] > best)) {
 				best = uscratch[i];
 				where = i;
@@ -104,7 +104,7 @@ void usersplit(int n, double *y[], double *x, int nclass, int edge,
 		 * in order, and the assurance that the best split is one of
 		 * those that use categories in that order.
 		 */
-		for (i = 0; i < nclass; i++)
+		for (int i = 0; i < nclass; i++)
 			csplit[i] = 0;
 		best = 0;
 		m = (int) uscratch[0];
@@ -112,7 +112,7 @@ void usersplit(int n, double *y[], double *x, int nclass, int edge,
 
 		where = -1;
 		left_n = 0;
-		for (i = 1; i < m; i++) {
+		for (int i = 1; i < m; i++) {
 			k = (int) dscratch[i - 1]; /* the next group of interest */
 			for (j = 0; j < n; j++)
 				if (x[j] == k)
@@ -131,7 +131,7 @@ void usersplit(int n, double *y[], double *x, int nclass, int edge,
 		 *   group, best will still = 0.
 		 */
 		if (best > 0) {
-			for (i = 0; i < m; i++) {
+			for (int i = 0; i < m; i++) {
 				k = (int) dscratch[i]; /* the next group of interest */
 				if (i < where)
 					csplit[k - 1] = LEFT;

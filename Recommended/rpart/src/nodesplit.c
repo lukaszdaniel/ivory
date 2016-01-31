@@ -48,7 +48,7 @@ void nodesplit(pNode me, int nodenum, int n1, int n2, int *nnleft, int *nnright)
 
 	if (rp.numcat[pvar] > 0) { /* categorical primary variable */
 		index = tsplit->csplit;
-		for (i = n1; i < n2; i++) {
+		for (int i = n1; i < n2; i++) {
 			j = sorts[pvar][i];
 			if (j < 0)
 				someleft++; /* missing value */
@@ -67,7 +67,7 @@ void nodesplit(pNode me, int nodenum, int n1, int n2, int *nnleft, int *nnright)
 	} else {
 		psplit = tsplit->spoint; /* value of split point */
 		extra = tsplit->csplit[0];
-		for (i = n1; i < n2; i++) {
+		for (int i = n1; i < n2; i++) {
 			j = sorts[pvar][i];
 			if (j < 0)
 				someleft++;
@@ -94,7 +94,7 @@ void nodesplit(pNode me, int nodenum, int n1, int n2, int *nnleft, int *nnright)
 	 *   with multiple runs through the surrogate list.
 	 */
 	if (someleft > 0 && rp.usesurrogate > 0) {
-		for (i = n1; i < n2; i++) {
+		for (int i = n1; i < n2; i++) {
 			j = rp.sorts[pvar][i];
 			if (j >= 0)
 				continue; /* already split */
@@ -165,7 +165,7 @@ void nodesplit(pNode me, int nodenum, int n1, int n2, int *nnleft, int *nnright)
 				nright += someleft;
 			}
 
-			for (i = n1; i < n2; i++) {
+			for (int i = n1; i < n2; i++) {
 				j = sorts[pvar][i];
 				/*
 				 * only those who weren't split by the primary (j < 0) and
@@ -212,12 +212,12 @@ void nodesplit(pNode me, int nodenum, int n1, int n2, int *nnleft, int *nnright)
 	 *   portion of "sorts" would remain unchanged.  It's not worth
 	 *   the bother of checking, however.
 	 */
-	for (k = 0; k < rp.nvar; k++) {
+	for (int k = 0; k < rp.nvar; k++) {
 		sindex = rp.sorts[k]; /* point to variable k */
 		i1 = n1;
 		i2 = i1 + nleft;
 		i3 = i2 + nright;
-		for (i = n1; i < n2; i++) {
+		for (int i = n1; i < n2; i++) {
 			j = sindex[i];
 			if (j < 0)
 				j = -(j + 1);
@@ -230,7 +230,7 @@ void nodesplit(pNode me, int nodenum, int n1, int n2, int *nnleft, int *nnright)
 					rp.tempvec[i3++] = sindex[i]; /* went nowhere */
 			}
 		}
-		for (i = n1 + nleft; i < n2; i++)
+		for (int i = n1 + nleft; i < n2; i++)
 			sindex[i] = rp.tempvec[i];
 	}
 

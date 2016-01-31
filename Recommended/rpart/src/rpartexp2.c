@@ -27,7 +27,7 @@ static void Rpartexp2(int n, double *y, double eps, int *keep) {
 	 */
 	lasty = y[0];
 	keep[0] = 1;
-	for (i = 1; i < n; i++) {
+	for (int i = 1; i < n; i++) {
 		if ((y[i] - lasty) <= delta)
 			keep[i] = 0;
 		else {

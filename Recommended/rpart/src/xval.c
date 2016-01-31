@@ -56,7 +56,7 @@ void xval(int n_xval, CpTable cptable_head, int *x_grp, int maxcat,
 	xpred = xtemp + rp.num_unique_cp;
 	cp = xpred + rp.num_unique_cp;
 	savew = (int *) CALLOC(rp.n, sizeof(int));
-	for (i = 0; i < rp.n; i++)
+	for (int i = 0; i < rp.n; i++)
 		savew[i] = rp.which[i]; /* restore at the end */
 
 	/*
@@ -67,7 +67,7 @@ void xval(int n_xval, CpTable cptable_head, int *x_grp, int maxcat,
 			cplist = cplist->forward, i++)
 		cp[i] = sqrt(cplist->cp * (cplist->forward)->cp);
 	total_wt = 0;
-	for (i = 0; i < rp.n; i++)
+	for (int i = 0; i < rp.n; i++)
 		total_wt += rp.wt[i];
 	old_wt = total_wt;
 
@@ -75,14 +75,14 @@ void xval(int n_xval, CpTable cptable_head, int *x_grp, int maxcat,
 	 * do the validations
 	 */
 	k = 0; /* -Wall */
-	for (xgroup = 0; xgroup < n_xval; xgroup++) {
+	for (int xgroup = 0; xgroup < n_xval; xgroup++) {
 		/*
 		 * restore rp.sorts, with the data for this run at the top
 		 * this requires one pass per variable
 		 */
-		for (j = 0; j < rp.nvar; j++) {
+		for (int j = 0; j < rp.nvar; j++) {
 			k = 0;
-			for (i = 0; i < rp.n; i++) {
+			for (int i = 0; i < rp.n; i++) {
 				ii = savesort[j * rp.n + i];
 				if (ii < 0)
 					ii = -(1 + ii); /* missings move too */
@@ -104,7 +104,7 @@ void xval(int n_xval, CpTable cptable_head, int *x_grp, int maxcat,
 		last = k;
 		k = 0;
 		temp = 0;
-		for (i = 0; i < rp.n; i++) {
+		for (int i = 0; i < rp.n; i++) {
 			rp.which[i] = 1; /* everyone starts in group 1 */
 			if (x_grp[i] == xgroup + 1) {
 				rp.sorts[0][last] = i;
@@ -119,7 +119,7 @@ void xval(int n_xval, CpTable cptable_head, int *x_grp, int maxcat,
 
 		/* at this point k = #obs in the xval group */
 		/* rescale the cp */
-		for (j = 0; j < rp.num_unique_cp; j++)
+		for (int j = 0; j < rp.num_unique_cp; j++)
 			cp[j] *= temp / old_wt;
 		rp.alpha *= temp / old_wt;
 		old_wt = temp;
@@ -138,7 +138,7 @@ void xval(int n_xval, CpTable cptable_head, int *x_grp, int maxcat,
 		/*
 		 * run the extra data down the new tree
 		 */
-		for (i = k; i < rp.n; i++) {
+		for (int i = k; i < rp.n; i++) {
 			j = rp.sorts[0][i];
 			rundown(xtree, j, cp, xpred, xtemp);
 #if DEBUG > 1
@@ -149,7 +149,7 @@ void xval(int n_xval, CpTable cptable_head, int *x_grp, int maxcat,
 #endif
 			/* add it in to the risk */
 			cplist = cptable_head;
-			for (jj = 0; jj < rp.num_unique_cp; jj++) {
+			for (int jj = 0; jj < rp.num_unique_cp; jj++) {
 				cplist->xrisk += xtemp[jj] * rp.wt[j];
 				cplist->xstd += xtemp[jj] * xtemp[jj] * rp.wt[j];
 #if DEBUG > 1
@@ -168,7 +168,7 @@ void xval(int n_xval, CpTable cptable_head, int *x_grp, int maxcat,
 				cplist->xstd - cplist->xrisk * cplist->xrisk / total_wt);
 	}
 	rp.alpha = alphasave;
-	for (i = 0; i < rp.n; i++)
+	for (int i = 0; i < rp.n; i++)
 		rp.which[i] = savew[i];
 	Free(savew);
 	Free(xtemp);

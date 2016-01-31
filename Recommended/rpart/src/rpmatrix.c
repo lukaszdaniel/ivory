@@ -44,7 +44,7 @@ void rpmatrix(pNode me, int *numcat, double **dsplit, int **isplit,
 	dnode[0][ncnt] = me->risk;
 	dnode[1][ncnt] = me->complexity * cp_scale;
 	dnode[2][ncnt] = me->sum_wt;
-	for (i = 0; i < rp.num_resp; i++)
+	for (int i = 0; i < rp.num_resp; i++)
 		dnode[3 + i][ncnt] = me->response_est[i];
 	inode[0][ncnt] = id;
 	inode[4][ncnt] = me->num_obs;
@@ -69,7 +69,7 @@ void rpmatrix(pNode me, int *numcat, double **dsplit, int **isplit,
 			} else { /* categorical */
 				dsplit[1][scnt] = ccnt + 1;
 				isplit[2][scnt] = numcat[j];
-				for (k = 0; k < numcat[j]; k++)
+				for (int k = 0; k < numcat[j]; k++)
 					csplit[k][ccnt] = spl->csplit[k];
 				ccnt++;
 			}
@@ -91,7 +91,7 @@ void rpmatrix(pNode me, int *numcat, double **dsplit, int **isplit,
 			} else {
 				dsplit[1][scnt] = ccnt + 1;
 				isplit[2][scnt] = numcat[j];
-				for (k = 0; k < numcat[j]; k++)
+				for (int k = 0; k < numcat[j]; k++)
 					csplit[k][ccnt] = spl->csplit[k];
 				ccnt++;
 			}

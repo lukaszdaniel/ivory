@@ -30,7 +30,7 @@ int partition(int nodenum, pNode splitnode, double *sumrisk, int n1, int n2) {
 	if (nodenum > 1) {
 		twt = 0;
 		k = 0;
-		for (i = n1; i < n2; i++) {
+		for (int i = n1; i < n2; i++) {
 			j = rp.sorts[0][i]; /* any variable would do, use first */
 			if (j < 0)
 				j = -(1 + j); /* if missing, value = -(1+ true index) */
@@ -159,7 +159,7 @@ int partition(int nodenum, pNode splitnode, double *sumrisk, int n1, int n2) {
 		 */
 		free_tree(me, 0);
 		*sumrisk = me->risk;
-		for (i = n1; i < n2; i++) {
+		for (int i = n1; i < n2; i++) {
 			j = rp.sorts[0][i];
 			if (j < 0)
 				j = -(1 + j);

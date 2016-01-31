@@ -70,11 +70,11 @@ void rpart_callback1(int n, double *y[], double *wt, double *z) {
 	double *dptr;
 
 	/* Copy n and wt into the parent frame */
-	for (i = 0, k = 0; i < ysave; i++)
-		for (j = 0; j < n; j++)
+	for (int i = 0, k = 0; i < ysave; i++)
+		for (int j = 0; j < n; j++)
 			ydata[k++] = y[j][i];
 
-	for (i = 0; i < n; i++)
+	for (int i = 0; i < n; i++)
 		wdata[i] = wt[i];
 	ndata[0] = n;
 
@@ -91,7 +91,7 @@ void rpart_callback1(int n, double *y[], double *wt, double *z) {
 	if (LENGTH(value) != (1 + rsave))
 		error(_("returned value is the wrong length"));
 	dptr = REAL(value);
-	for (i = 0; i <= rsave; i++)
+	for (int i = 0; i <= rsave; i++)
 		z[i] = dptr[i];
 }
 
@@ -105,11 +105,11 @@ void rpart_callback2(int n, int ncat, double *y[], double *wt, double *x,
 	SEXP goodness;
 	double *dptr;
 
-	for (i = 0, k = 0; i < ysave; i++)
-		for (j = 0; j < n; j++)
+	for (int i = 0, k = 0; i < ysave; i++)
+		for (int j = 0; j < n; j++)
 			ydata[k++] = y[j][i];
 
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		wdata[i] = wt[i];
 		xdata[i] = x[i];
 	}
@@ -134,7 +134,7 @@ void rpart_callback2(int n, int ncat, double *y[], double *wt, double *x,
 							"the expression expr1 returned a list of %d elements, %d required"),
 					j, 2 * (n - 1));
 
-		for (i = 0; i < j; i++)
+		for (int i = 0; i < j; i++)
 			good[i] = dptr[i];
 	} else {
 		/*
@@ -143,7 +143,7 @@ void rpart_callback2(int n, int ncat, double *y[], double *wt, double *x,
 		 * The first element of "good" contains the number of groups found
 		 */
 		good[0] = (j + 1) / 2;
-		for (i = 0; i < j; i++)
+		for (int i = 0; i < j; i++)
 			good[i + 1] = dptr[i];
 	}
 }

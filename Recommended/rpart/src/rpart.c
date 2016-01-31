@@ -119,14 +119,14 @@ SEXP rpart(SEXP ncat2, SEXP method2, SEXP opt2, SEXP parms2, SEXP xvals2,
 	 */
 	dptr = REAL(xmat2);
 	rp.xdata = (double **) ALLOC(rp.nvar, sizeof(double *));
-	for (i = 0; i < rp.nvar; i++) {
+	for (int i = 0; i < rp.nvar; i++) {
 		rp.xdata[i] = dptr;
 		dptr += n;
 	}
 	rp.ydata = (double **) ALLOC(n, sizeof(double *));
 
 	dptr = REAL(ymat2);
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		rp.ydata[i] = dptr;
 		dptr += rp.num_y;
 	}
@@ -146,9 +146,9 @@ SEXP rpart(SEXP ncat2, SEXP method2, SEXP opt2, SEXP parms2, SEXP xvals2,
 	rp.sorts = (int **) ALLOC(rp.nvar, sizeof(int *));
 	rp.sorts[0] = (int *) ALLOC(n * rp.nvar, sizeof(int));
 	maxcat = 0;
-	for (i = 0; i < rp.nvar; i++) {
+	for (int i = 0; i < rp.nvar; i++) {
 		rp.sorts[i] = rp.sorts[0] + i * n;
-		for (k = 0; k < n; k++) {
+		for (int k = 0; k < n; k++) {
 			if (!R_FINITE(rp.xdata[i][k])) {
 				rp.tempvec[k] = -(k + 1); /* this variable is missing */
 				rp.xtemp[k] = 0; /* avoid weird numerics in S's NA */
@@ -161,7 +161,7 @@ SEXP rpart(SEXP ncat2, SEXP method2, SEXP opt2, SEXP parms2, SEXP xvals2,
 			mysort(0, n - 1, rp.xtemp, rp.tempvec);
 		else if (ncat[i] > maxcat)
 			maxcat = ncat[i];
-		for (k = 0; k < n; k++)
+		for (int k = 0; k < n; k++)
 			rp.sorts[i][k] = rp.tempvec[k];
 	}
 
@@ -192,7 +192,7 @@ SEXP rpart(SEXP ncat2, SEXP method2, SEXP opt2, SEXP parms2, SEXP xvals2,
 	which3 = PROTECT(allocVector(INTSXP, n));
 	rp.which = INTEGER(which3);
 	temp = 0;
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		rp.which[i] = 1;
 		temp += wt[i];
 	}
@@ -259,30 +259,30 @@ SEXP rpart(SEXP ncat2, SEXP method2, SEXP opt2, SEXP parms2, SEXP xvals2,
 	dnode3 = PROTECT(allocMatrix(REALSXP, nodecount, (3 + rp.num_resp)));
 	ddnode = (double **) ALLOC(3 + rp.num_resp, sizeof(double *));
 	dptr = REAL(dnode3);
-	for (i = 0; i < 3 + rp.num_resp; i++) {
+	for (int i = 0; i < 3 + rp.num_resp; i++) {
 		ddnode[i] = dptr;
 		dptr += nodecount;
 	}
 
 	dsplit3 = PROTECT(allocMatrix(REALSXP, splitcount, 3));
 	dptr = REAL(dsplit3);
-	for (i = 0; i < 3; i++) {
+	for (int i = 0; i < 3; i++) {
 		ddsplit[i] = dptr;
 		dptr += splitcount;
-		for (j = 0; j < splitcount; j++)
+		for (int j = 0; j < splitcount; j++)
 			ddsplit[i][j] = 0.0;
 	}
 
 	inode3 = PROTECT(allocMatrix(INTSXP, nodecount, 6));
 	iptr = INTEGER(inode3);
-	for (i = 0; i < 6; i++) {
+	for (int i = 0; i < 6; i++) {
 		iinode[i] = iptr;
 		iptr += nodecount;
 	}
 
 	isplit3 = PROTECT(allocMatrix(INTSXP, splitcount, 3));
 	iptr = INTEGER(isplit3);
-	for (i = 0; i < 3; i++) {
+	for (int i = 0; i < 3; i++) {
 		iisplit[i] = iptr;
 		iptr += splitcount;
 	}
@@ -291,10 +291,10 @@ SEXP rpart(SEXP ncat2, SEXP method2, SEXP opt2, SEXP parms2, SEXP xvals2,
 		csplit3 = PROTECT(allocMatrix(INTSXP, catcount, maxcat));
 		ccsplit = (int **) ALLOC(maxcat, sizeof(int *));
 		iptr = INTEGER(csplit3);
-		for (i = 0; i < maxcat; i++) {
+		for (int i = 0; i < maxcat; i++) {
 			ccsplit[i] = iptr;
 			iptr += catcount;
-			for (j = 0; j < catcount; j++)
+			for (int j = 0; j < catcount; j++)
 				ccsplit[i][j] = 0; /* zero it out */
 		}
 	} else
@@ -308,7 +308,7 @@ SEXP rpart(SEXP ncat2, SEXP method2, SEXP opt2, SEXP parms2, SEXP xvals2,
 	 *  Nodes are sometimes trimmed during the
 	 *  tree building, and 'which' is not updated in that case
 	 */
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		k = rp.which[i];
 		do {
 			for (j = 0; j < nodecount; j++)

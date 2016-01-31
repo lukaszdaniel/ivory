@@ -43,24 +43,24 @@ static void pred_rpart0(const int *dimx, int nnode, int nsplit, const int *dimc,
 	const double **xdata;
 
 	n = dimx[0];
-	for (i = 0; i < 4; i++) {
+	for (int i = 0; i < 4; i++) {
 		nodes[i] = &(nodes2[nnode * i]);
 		split[i] = &(split2[nsplit * i]);
 	}
 
 	if (dimc[1] > 0) {
 		csplit = (const int **) ALLOC((int ) dimc[1], sizeof(int *));
-		for (i = 0; i < dimc[1]; i++)
+		for (int i = 0; i < dimc[1]; i++)
 			csplit[i] = &(csplit2[i * dimc[0]]);
 	}
 	xmiss = (const int **) ALLOC((int ) dimx[1], sizeof(int *));
 	xdata = (const double **) ALLOC((int ) dimx[1], sizeof(double *));
-	for (i = 0; i < dimx[1]; i++) {
+	for (int i = 0; i < dimx[1]; i++) {
 		xmiss[i] = &(xmiss2[i * dimx[0]]);
 		xdata[i] = &(xdata2[i * dimx[0]]);
 	}
 
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		node = 1; /* current node of the tree */
 		next: for (npos = 0; nnum[npos] != node; npos++)
 			; /* position of the node */
@@ -86,7 +86,7 @@ static void pred_rpart0(const int *dimx, int nnode, int nsplit, const int *dimc,
 				}
 			}
 			if (*usesur > 0) {
-				for (j = 0; j < nodes[2][npos]; j++) {
+				for (int j = 0; j < nodes[2][npos]; j++) {
 					nspl = nodes[1][npos] + nodes[3][npos] + j;
 					var = vnum[nspl] - 1;
 					if (xmiss[var][i] == 0) { /* surrogate not missing */

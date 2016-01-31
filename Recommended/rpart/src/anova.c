@@ -31,14 +31,14 @@ void anovass(int n, double *y[], double *value, double *risk, double *wt) {
 	double temp = 0., twt = 0.; /* sum of the weights */
 	double mean, ss;
 
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		temp += *y[i] * wt[i];
 		twt += wt[i];
 	}
 	mean = temp / twt;
 
 	ss = 0;
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		temp = *y[i] - mean;
 		ss += temp * temp * wt[i];
 	}
@@ -77,7 +77,7 @@ void anova(int n, double *y[], double *x, int nclass, int edge, double *improve,
 	right_wt = 0;
 	right_n = n;
 	right_sum = 0;
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		right_sum += *y[i] * wt[i];
 		right_wt += wt[i];
 	}
@@ -89,7 +89,7 @@ void anova(int n, double *y[], double *x, int nclass, int edge, double *improve,
 		left_n = 0;
 		right_sum = 0; /* after subracting grand mean, it's zero */
 		best = 0;
-		for (i = 0; right_n > edge; i++) {
+		for (int i = 0; right_n > edge; i++) {
 			left_wt += wt[i];
 			right_wt -= wt[i];
 			left_n++;
@@ -121,20 +121,20 @@ void anova(int n, double *y[], double *x, int nclass, int edge, double *improve,
 	 * Categorical predictor
 	 */
 	else {
-		for (i = 0; i < nclass; i++) {
+		for (int i = 0; i < nclass; i++) {
 			sums[i] = 0;
 			countn[i] = 0;
 			wts[i] = 0;
 		}
 
 		/* rank the classes by their mean y value */
-		for (i = 0; i < n; i++) {
+		for (int i = 0; i < n; i++) {
 			j = (int) x[i] - 1;
 			countn[j]++;
 			wts[j] += wt[i];
 			sums[j] += (*y[i] - grandmean) * wt[i];
 		}
-		for (i = 0; i < nclass; i++) {
+		for (int i = 0; i < nclass; i++) {
 			if (countn[i] > 0) {
 				tsplit[i] = RIGHT;
 				mean[i] = sums[i] / wts[i];
@@ -166,10 +166,10 @@ void anova(int n, double *y[], double *x, int nclass, int edge, double *improve,
 				if (temp > best) {
 					best = temp;
 					if ((left_sum / left_wt) > (right_sum / right_wt))
-						for (i = 0; i < nclass; i++)
+						for (int i = 0; i < nclass; i++)
 							csplit[i] = -tsplit[i];
 					else
-						for (i = 0; i < nclass; i++)
+						for (int i = 0; i < nclass; i++)
 							csplit[i] = tsplit[i];
 				}
 			}

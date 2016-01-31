@@ -27,7 +27,7 @@ void rpartexp(int *n2, double *y, double *wt, double *newy, double *wtemp) {
 	event = y + n;
 
 	temp = 0;
-	for (i = n - 1; i >= 0; i--) {
+	for (int i = n - 1; i >= 0; i--) {
 		temp += wt[i];
 		wtemp[i] = temp; /* sum of weights */
 	}
@@ -47,7 +47,7 @@ void rpartexp(int *n2, double *y, double *wt, double *newy, double *wtemp) {
 		 * Found it (or the end of the data)
 		 */
 		if (i > n) { /* no more deaths */
-			for (i = last; i < n; i++)
+			for (int i = last; i < n; i++)
 				newy[i] = rtime;
 			last = n;
 		} else { /* rescale this interval */
@@ -62,7 +62,7 @@ void rpartexp(int *n2, double *y, double *wt, double *newy, double *wtemp) {
 			tsum = (wtemp[i] + dsum) * (time - ltime) + psum;
 			scale = dsum / tsum; /* scaling factor */
 
-			for (j = last; j < i; j++)
+			for (int j = last; j < i; j++)
 				newy[j] = rtime + (stop[j] - ltime) * scale;
 			rtime += (time - ltime) * scale;
 			last = i;

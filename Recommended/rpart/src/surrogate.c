@@ -45,7 +45,7 @@ void surrogate(pNode me, int n1, int n2) {
 	if (rp.numcat[var] == 0) { /* continuous variable */
 		split = (me->primary)->spoint;
 		extra = (me->primary)->csplit[0];
-		for (i = n1; i < n2; i++) {
+		for (int i = n1; i < n2; i++) {
 			j = sorts[var][i];
 			if (j < 0)
 				tempy[-(j + 1)] = 0;
@@ -54,7 +54,7 @@ void surrogate(pNode me, int n1, int n2) {
 		}
 	} else { /* categorical variable */
 		index = (me->primary)->csplit;
-		for (i = n1; i < n2; i++) {
+		for (int i = n1; i < n2; i++) {
 			j = sorts[var][i];
 			if (j < 0)
 				tempy[-(j + 1)] = 0;
@@ -66,7 +66,7 @@ void surrogate(pNode me, int n1, int n2) {
 	/* count the total number sent left and right */
 	lcount = 0;
 	rcount = 0;
-	for (i = n1; i < n2; i++) {
+	for (int i = n1; i < n2; i++) {
 		j = sorts[var][i];
 		if (j < 0)
 			j = -(1 + j);
@@ -95,7 +95,7 @@ void surrogate(pNode me, int n1, int n2) {
 	 * Now walk through the variables
 	 */
 	me->surrogate = (pSplit) NULL;
-	for (i = 0; i < rp.nvar; i++) {
+	for (int i = 0; i < rp.nvar; i++) {
 		if (var == i)
 			continue;
 		ncat = rp.numcat[i];
@@ -117,7 +117,7 @@ void surrogate(pNode me, int n1, int n2) {
 				ss->spoint = split;
 				ss->csplit[0] = rp.csplit[0];
 			} else
-				for (k = 0; k < rp.numcat[i]; k++)
+				for (int k = 0; k < rp.numcat[i]; k++)
 					ss->csplit[k] = rp.csplit[k];
 		}
 	}

@@ -19,7 +19,7 @@ void mysort(int start, int stop, double *x, int *cvec) {
 		 * first-- if the list is short, do an ordinary insertion sort
 		 */
 		if ((stop - start) < 11) {
-			for (i = start + 1; i <= stop; i++) {
+			for (int i = start + 1; i <= stop; i++) {
 				temp = x[i];
 				tempd = cvec[i];
 				j = i - 1;

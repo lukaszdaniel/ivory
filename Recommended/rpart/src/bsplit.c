@@ -33,12 +33,12 @@ void bsplit(pNode me, int n1, int n2) {
 	 * test out the variables 1 at at time
 	 */
 	me->primary = (pSplit) NULL;
-	for (i = 0; i < rp.nvar; i++) {
+	for (int i = 0; i < rp.nvar; i++) {
 		index = rp.sorts[i];
 		nc = rp.numcat[i];
 		/* extract x and y data */
 		k = 0;
-		for (j = n1; j < n2; j++) {
+		for (int j = n1; j < n2; j++) {
 			kk = index[j];
 			if (kk >= 0 && rp.wt[kk] > 0) { /* x data not missing and wt > 0 */
 				xtemp[k] = rp.xdata[i][kk];
@@ -73,7 +73,7 @@ void bsplit(pNode me, int n1, int n2) {
 					tsplit->spoint = split;
 					tsplit->csplit[0] = rp.csplit[0];
 				} else
-					for (k = 0; k < nc; k++)
+					for (int k = 0; k < nc; k++)
 						tsplit->csplit[k] = rp.csplit[k];
 			}
 		}

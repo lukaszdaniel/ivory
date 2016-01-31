@@ -28,7 +28,7 @@ int poissoninit(int n, double *y[], int maxcat, char **error, double *param,
 	}
 	/* check data */
 	if (who == 1) {
-		for (i = 0; i < n; i++) {
+		for (int i = 0; i < n; i++) {
 			if (y[i][0] <= 0) {
 				*error = _("Invalid time point");
 				return 1;
@@ -42,7 +42,7 @@ int poissoninit(int n, double *y[], int maxcat, char **error, double *param,
 	/* compute the overall hazard rate */
 	event = 0;
 	time = 0;
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		event += y[i][1] * wt[i];
 		time += y[i][0] * wt[i];
 	}
@@ -107,13 +107,13 @@ void poissondev(int n, double **y, double *value, double *risk, double *wt) {
 	/*
 	 * first get the overall estimate of lambda
 	 */
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		death += y[i][1] * wt[i];
 		time += y[i][0] * wt[i];
 	}
 	lambda = (death + exp_alpha) / (time + exp_beta);
 
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		temp = y[i][1];
 		dev -= (lambda * y[i][0] - temp) * wt[i];
 		if (temp > 0)
@@ -156,7 +156,7 @@ void poisson(int n, double **y, double *x, int nclass, int edge,
 	right_d = 0;
 	right_time = 0;
 	right_n = n;
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		right_d += y[i][1] * wt[i];
 		right_time += y[i][0] * wt[i];
 	}
@@ -181,7 +181,7 @@ void poisson(int n, double **y, double *x, int nclass, int edge,
 	left_d = 0;
 	where = -1;
 	best = dev;
-	for (i = 0; i < n - edge; i++) {
+	for (int i = 0; i < n - edge; i++) {
 		left_d += y[i][1] * wt[i];
 		right_d -= y[i][1] * wt[i];
 		left_time += y[i][0] * wt[i];
@@ -211,13 +211,13 @@ void poisson(int n, double **y, double *x, int nclass, int edge,
 	return;
 
 	categorical: ;
-	for (i = 0; i < nclass; i++) {
+	for (int i = 0; i < nclass; i++) {
 		wtime[i] = 0;
 		death[i] = 0;
 		countn[i] = 0;
 	}
 
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		j = (int) (x[i] - 1);
 		countn[j]++; /* number per group */
 		death[j] += y[i][1] * wt[i];
@@ -230,12 +230,12 @@ void poisson(int n, double **y, double *x, int nclass, int edge,
 	 */
 	ncat = 0; /* may be less than nclass if not all
 	 * categories are present */
-	for (i = 0; i < nclass; i++) {
+	for (int i = 0; i < nclass; i++) {
 		order[i] = 0;
 		if (countn[i] > 0) {
 			ncat++;
 			rate[i] = death[i] / wtime[i];
-			for (j = i - 1; j >= 0; j--) {
+			for (int j = i - 1; j >= 0; j--) {
 				if (countn[j] > 0) {
 					if (rate[i] > rate[j])
 						order[j]++;
@@ -248,7 +248,7 @@ void poisson(int n, double **y, double *x, int nclass, int edge,
 	/*
 	 * order2 will point to the largest, second largest, etc
 	 */
-	for (i = 0; i < nclass; i++)
+	for (int i = 0; i < nclass; i++)
 		if (countn[i] > 0)
 			order2[order[i]] = i;
 
@@ -261,7 +261,7 @@ void poisson(int n, double **y, double *x, int nclass, int edge,
 	left_time = 0;
 	best = dev;
 	where = 0;
-	for (i = 0; i < ncat - 1; i++) {
+	for (int i = 0; i < ncat - 1; i++) {
 		j = order2[i];
 		left_n += countn[j];
 		right_n -= countn[j];
@@ -288,10 +288,10 @@ void poisson(int n, double **y, double *x, int nclass, int edge,
 	*improve = -2 * (dev - best);
 
 	/* if improve = 0, csplit will never be looked at by the calling routine */
-	for (i = 0; i < nclass; i++)
+	for (int i = 0; i < nclass; i++)
 		csplit[i] = 0;
-	for (i = 0; i <= where; i++)
+	for (int i = 0; i <= where; i++)
 		csplit[order2[i]] = direction;
-	for (; i < ncat; i++)
+	for (int i = where + 1; i < ncat; i++)
 		csplit[order2[i]] = -direction;
 }

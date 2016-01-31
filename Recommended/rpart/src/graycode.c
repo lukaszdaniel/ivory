@@ -19,10 +19,9 @@ void graycode_init0(int maxcat) {
 }
 
 void graycode_init1(int numcat, int *count) {
-	int i;
 
 	maxc = numcat;
-	for (i = 0; i < maxc; i++)
+	for (int i = 0; i < maxc; i++)
 		gray[i] = count[i] ? 1 : 0;
 	gsave = -2;
 }
@@ -41,9 +40,9 @@ void graycode_init2(int numcat, int *count, double *val) {
 		k = 1;
 	else
 		k = 0;
-	for (i = 1; i < maxc; i++) {
+	for (int i = 1; i < maxc; i++) {
 		if (count[i] == 0) {
-			for (j = i - 1; j >= k; j--) {
+			for (int j = i - 1; j >= k; j--) {
 				gray[j + 1] = gray[j];
 				val[j + 1] = val[j];
 			}
@@ -85,7 +84,7 @@ int graycode(void) {
 		 *  The outer loop only goes up to maxc-1: we know for rpart that
 		 *    changing the allegiance of the last subject is never necessary
 		 */
-		for (i = 0; i < maxc - 1; i++) {
+		for (int i = 0; i < maxc - 1; i++) {
 			if (gray[i] == 1) {
 				gray[i] = 2;
 				return i;

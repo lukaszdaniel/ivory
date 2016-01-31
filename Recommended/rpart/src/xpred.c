@@ -118,14 +118,14 @@ SEXP xpred(SEXP ncat2, SEXP method2, SEXP opt2, SEXP parms2, SEXP xvals2,
 	 */
 	dptr = REAL(xmat2);
 	rp.xdata = (double **) ALLOC(rp.nvar, sizeof(double *));
-	for (i = 0; i < rp.nvar; i++) {
+	for (int i = 0; i < rp.nvar; i++) {
 		rp.xdata[i] = dptr;
 		dptr += n;
 	}
 	rp.ydata = (double **) ALLOC(n, sizeof(double *));
 
 	dptr = REAL(ymat2);
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		rp.ydata[i] = dptr;
 		dptr += rp.num_y;
 	}
@@ -145,9 +145,9 @@ SEXP xpred(SEXP ncat2, SEXP method2, SEXP opt2, SEXP parms2, SEXP xvals2,
 	rp.sorts = (int **) ALLOC(rp.nvar, sizeof(int *));
 	rp.sorts[0] = (int *) ALLOC(n * rp.nvar, sizeof(int));
 	maxcat = 0;
-	for (i = 0; i < rp.nvar; i++) {
+	for (int i = 0; i < rp.nvar; i++) {
 		rp.sorts[i] = rp.sorts[0] + i * n;
-		for (k = 0; k < n; k++) {
+		for (int k = 0; k < n; k++) {
 			if (!R_FINITE(rp.xdata[i][k])) {
 				rp.tempvec[k] = -(k + 1); /* this variable is missing */
 				rp.xtemp[k] = 0; /* avoid weird numerics in S's NA */
@@ -160,7 +160,7 @@ SEXP xpred(SEXP ncat2, SEXP method2, SEXP opt2, SEXP parms2, SEXP xvals2,
 			mysort(0, n - 1, rp.xtemp, rp.tempvec);
 		else if (ncat[i] > maxcat)
 			maxcat = ncat[i];
-		for (k = 0; k < n; k++)
+		for (int k = 0; k < n; k++)
 			rp.sorts[i][k] = rp.tempvec[k];
 	}
 
@@ -194,7 +194,7 @@ SEXP xpred(SEXP ncat2, SEXP method2, SEXP opt2, SEXP parms2, SEXP xvals2,
 	 * From this point on we look much more like xval.c
 	 */
 	rp.alpha = rp.complexity * toprisk;
-	for (i = 0; i < ncp; i++)
+	for (int i = 0; i < ncp; i++)
 		cp[i] *= toprisk; /* scale to internal units */
 
 	/*
@@ -211,19 +211,19 @@ SEXP xpred(SEXP ncat2, SEXP method2, SEXP opt2, SEXP parms2, SEXP xvals2,
 	 * do the validations
 	 */
 	total_wt = 0;
-	for (i = 0; i < rp.n; i++)
+	for (int i = 0; i < rp.n; i++)
 		total_wt += rp.wt[i];
 	old_wt = total_wt;
 
 	k = 0; /* -Wall */
-	for (xgroup = 0; xgroup < xvals; xgroup++) {
+	for (int xgroup = 0; xgroup < xvals; xgroup++) {
 		/*
 		 * restore rp.sorts, with the data for this run at the top
 		 * this requires one pass per variable
 		 */
-		for (j = 0; j < rp.nvar; j++) {
+		for (int j = 0; j < rp.nvar; j++) {
 			k = 0;
-			for (i = 0; i < rp.n; i++) {
+			for (int i = 0; i < rp.n; i++) {
 				ii = savesort[j * n + i]; /* walk through the variables
 				 * in order */
 				if (ii < 0)
@@ -246,7 +246,7 @@ SEXP xpred(SEXP ncat2, SEXP method2, SEXP opt2, SEXP parms2, SEXP xvals2,
 		last = k;
 		k = 0;
 		temp = 0;
-		for (i = 0; i < n; i++) {
+		for (int i = 0; i < n; i++) {
 			rp.which[i] = 1; /* everyone starts in the top node */
 			if (xgrp[i] == xgroup + 1) {
 				rp.sorts[0][last] = i;
@@ -261,7 +261,7 @@ SEXP xpred(SEXP ncat2, SEXP method2, SEXP opt2, SEXP parms2, SEXP xvals2,
 
 		/* at this point k = #obs in the prediction group */
 		/* rescale the cp */
-		for (j = 0; j < rp.num_unique_cp; j++)
+		for (int j = 0; j < rp.num_unique_cp; j++)
 			cp[j] *= temp / old_wt;
 		rp.alpha *= temp / old_wt;
 		old_wt = temp;
@@ -280,7 +280,7 @@ SEXP xpred(SEXP ncat2, SEXP method2, SEXP opt2, SEXP parms2, SEXP xvals2,
 		/*
 		 * run the extra data down the new tree
 		 */
-		for (i = k; i < rp.n; i++) {
+		for (int i = k; i < rp.n; i++) {
 			j = rp.sorts[0][i];
 			rundown2(xtree, j, cp, (predict + j * ncp * nresp), nresp);
 		}
