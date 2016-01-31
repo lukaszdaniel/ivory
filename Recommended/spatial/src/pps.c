@@ -31,9 +31,7 @@ static Sfloat xl0, yl0, xu0, yu0;
 
 static void testinit(void) {
 	if ((xu0 == xl0) || (yu0 == yl0))
-		error(
-				_(
-						"rectangular domain was not initialized -- use 'ppregion()' function"));
+		error(_("rectangular domain was not initialized -- use 'ppregion()' function"));
 }
 
 void VR_ppset(Sfloat *area) {
@@ -72,7 +70,7 @@ static Sfloat edge(Sfloat x, Sfloat y, Sfloat a) {
 	r[2] = xu0 - x;
 	r[3] = y - yl0;
 	b = 0.0;
-	for (i = 1; i <= 4; i++)
+	for (int i = 1; i <= 4; i++)
 		if (r[i] < a) {
 			if (r[i] == 0.0)
 				b += M_PI;
@@ -106,12 +104,12 @@ void VR_sp_pp2(Sfloat *x, Sfloat *y, Sint *npt, Sint *k, Sfloat *h,
 	k1 = (int) floor(s1 * fs1 + 1e-3);
 	*k = k1;
 	rr = fs1 * fs1;
-	for (i = 0; i < kk; i++)
+	for (int i = 0; i < kk; i++)
 		h[i] = 0.0;
-	for (i = 1; i < n; i++) {
+	for (int i = 1; i < n; i++) {
 		xi = x[i];
 		yi = y[i];
-		for (j = 0; j < i; j++) {
+		for (int j = 0; j < i; j++) {
 			x1 = x[j] - xi;
 			y1 = y[j] - yi;
 			a = x1 * x1 + y1 * y1;
@@ -136,14 +134,13 @@ void VR_sp_pp2(Sfloat *x, Sfloat *y, Sint *npt, Sint *k, Sfloat *h,
 }
 
 void VR_pdata(Sint *npt, Sfloat *x, Sfloat *y) {
-	int i;
 	Sfloat ax, ay;
 
 	testinit();
 	ax = xu0 - xl0;
 	ay = yu0 - yl0;
 	RANDIN;
-	for (i = 0; i < *npt; i++) {
+	for (int i = 0; i < *npt; i++) {
 		x[i] = xl0 + ax * UNIF;
 		y[i] = yl0 + ay * UNIF;
 	}
@@ -168,7 +165,7 @@ void VR_simpat(Sint *npt, Sfloat *x, Sfloat *y, Sfloat *c, Sfloat *r,
 	mm = 4 * n;
 	if (*init > 0)
 		mm = 10 * mm;
-	for (i = 1; i <= mm; i++) {
+	for (int i = 1; i <= mm; i++) {
 		id = (int) floor(n * UNIF);
 		x[id] = x[0];
 		y[id] = y[0];
@@ -178,7 +175,7 @@ void VR_simpat(Sint *npt, Sfloat *x, Sfloat *y, Sfloat *c, Sfloat *r,
 			y[0] = yl0 + ay * UNIF;
 			u = UNIF;
 			d = 1.0;
-			for (j = 1; j < n; j++) {
+			for (int j = 1; j < n; j++) {
 				x1 = x[j] - x[0];
 				y1 = y[j] - y[0];
 				if (x1 * x1 + y1 * y1 < rr) {
@@ -203,14 +200,14 @@ void VR_simmat(Sint *npt, Sfloat *x, Sfloat *y, Sfloat *r) {
 	ax = xu0 - xl0;
 	ay = yu0 - yl0;
 	rr = (*r) * (*r);
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 		do {
 			attempts++;
 			icnt = 0;
 			x[i] = xl0 + ax * UNIF;
 			y[i] = yl0 + ay * UNIF;
 			if (i > 0)
-				for (j = 0; j < i; j++) {
+				for (int j = 0; j < i; j++) {
 					x1 = x[i] - x[j];
 					y1 = y[i] - y[j];
 					if (x1 * x1 + y1 * y1 < rr) {
@@ -237,12 +234,12 @@ void VR_plike(Sfloat *x, Sfloat *y, Sint *npt, Sfloat *c, Sfloat *r, Sint *ng,
 		*res = -*target;
 		return;
 	}
-	for (i1 = 0; i1 < g; i1++) {
+	for (int i1 = 0; i1 < g; i1++) {
 		xi = xl0 + ar + (xu0 - xl0 - 2 * ar) * i1 / (g - 1);
-		for (i2 = 0; i2 < g; i2++) {
+		for (int i2 = 0; i2 < g; i2++) {
 			yi = yl0 + ar + (yu0 - yl0 - 2 * ar) * i2 / (g - 1);
 			ic = 0;
-			for (j = 0; j < n; j++) {
+			for (int j = 0; j < n; j++) {
 				x1 = x[j] - xi;
 				y1 = y[j] - yi;
 				if (x1 * x1 + y1 * y1 < rr)

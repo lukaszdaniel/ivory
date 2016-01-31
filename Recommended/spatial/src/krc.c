@@ -50,23 +50,20 @@ void VR_alset(Sfloat *alph, Sint *nalph) {
 }
 
 static double powi(double x, int i) {
-	int j;
-	double tmp;
+	double tmp = 1.0;
 
-	tmp = 1.0;
-	for (j = 1; j <= i; ++j)
+	for (int j = 0; j < i; ++j)
 		tmp *= x;
 	return tmp;
 }
 
 static void cov(int n, double *d, int pred) {
-	int i;
 	double p, dd;
 	int id;
 	double mm;
 
 	mm = alph1[0];
-	for (i = 0; i < n; ++i) {
+	for (int i = 0; i < n; ++i) {
 		dd = sqrt(d[i]);
 		id = (int) (dd / mm);
 		p = dd / mm - id;
@@ -181,12 +178,12 @@ void VR_fmat(double *f, double *x, double *y, Sint *n, Sint *np) {
 
 	xs = Calloc(*n, double);
 	ys = Calloc(*n, double);
-	for (i = 0; i < *n; ++i)
+	for (int i = 0; i < *n; ++i)
 		dscale(x[i], y[i], &xs[i], &ys[i]);
 	k1 = 0;
-	for (i = 0; i <= *np; ++i)
-		for (j = 0; j <= *np - i; ++j)
-			for (k = 0; k < *n; ++k)
+	for (int i = 0; i <= *np; ++i)
+		for (int j = 0; j <= *np - i; ++j)
+			for (int k = 0; k < *n; ++k)
 				f[k1++] = powi(xs[k], j) * powi(ys[k], i);
 	Free(xs);
 	Free(ys);
@@ -202,8 +199,8 @@ static void cholcov(double *x, double *y, double *l, int n, Sint *ifail) {
 
 	w = Calloc(n * (n + 1) / 2, double);
 	i1 = 0;
-	for (i = 0; i < n; ++i)
-		for (j = 0; j <= i; ++j) {
+	for (int i = 0; i < n; ++i)
+		for (int j = 0; j <= i; ++j) {
 			t1 = x[i] - x[j];
 			t2 = y[i] - y[j];
 			w[i1++] = t1 * t1 + t2 * t2;
@@ -229,18 +226,18 @@ static void householder(double *f, double *nu, double *b, double *r, int n,
 	 Computations' p.40) */
 
 	*ifail = 0;
-	for (k = 0; k < m; ++k) {
+	for (int k = 0; k < m; ++k) {
 		k1 = k * n;
 		k3 = k1 + k;
 		c2 = fabs(f[k3]);
-		for (i = k + 1; i < n; ++i)
+		for (int i = k + 1; i < n; ++i)
 			c2 = max(c2, fabs(f[i + k1]));
 		if (c2 < 1e-6) {
 			*ifail = k + 1;
 			return;
 		}
 		c1 = 0.0;
-		for (i = k; i < n; ++i) {
+		for (int i = k; i < n; ++i) {
 			k2 = k1 + i;
 			nu[k2] = f[k2] / c2;
 			c1 += nu[k2] * nu[k2];
@@ -253,14 +250,14 @@ static void householder(double *f, double *nu, double *b, double *r, int n,
 			nu[k3] -= c1;
 		i1 = (k + 1) * (k + 2) / 2;
 		i2 = k + 1;
-		for (i = k; i < m; ++i) {
+		for (int i = k; i < m; ++i) {
 			i3 = i * n;
 			c1 = 0.0;
-			for (j = k; j < n; ++j)
+			for (int j = k; j < n; ++j)
 				c1 += nu[k1 + j] * f[i3 + j];
 			c1 /= b[k];
 			r[i1 - 1] = f[i3 + k] - c1 * nu[k3];
-			for (j = k; j < n; ++j)
+			for (int j = k; j < n; ++j)
 				f[i3 + j] -= c1 * nu[k1 + j];
 			i1 += i2;
 			++i2;
@@ -270,7 +267,6 @@ static void householder(double *f, double *nu, double *b, double *r, int n,
 
 static void house_rhs(double *nu, double *b, double *r, int n, int m, double *z,
 		double *beta) {
-	int i, k;
 	double *w;
 	int k1;
 	double sum;
@@ -281,15 +277,15 @@ static void house_rhs(double *nu, double *b, double *r, int n, int m, double *z,
 	 give least squares estimates beta. */
 
 	w = Calloc(n, double);
-	for (i = 0; i < n; ++i)
+	for (int i = 0; i < n; ++i)
 		w[i] = z[i];
-	for (k = 0; k < m; ++k) {
+	for (int k = 0; k < m; ++k) {
 		sum = 0.0;
 		k1 = k * n;
-		for (i = k; i < n; ++i)
+		for (int i = k; i < n; ++i)
 			sum += nu[i + k1] * w[i];
 		sum /= b[k];
-		for (i = k; i < n; ++i)
+		for (int i = k; i < n; ++i)
 			w[i] -= sum * nu[i + k1];
 	}
 	bsolv(beta, w, m, r);
@@ -299,7 +295,7 @@ static void house_rhs(double *nu, double *b, double *r, int n, int m, double *z,
 static void chols(int n, double *a, double *l, Sint *ifail) {
 	double eps = 1e-9;
 
-	int icol, irow, i, j, k, m;
+	int j, k, m;
 	double w = 0.0; /* -Wall */
 	int i1;
 
@@ -316,13 +312,13 @@ static void chols(int n, double *a, double *l, Sint *ifail) {
 	*ifail = 1;
 	j = 1;
 	k = 0;
-	for (icol = 1; icol <= n; ++icol) {
+	for (int icol = 1; icol <= n; ++icol) {
 		i1 = 0;
-		for (irow = 1; irow <= icol; ++irow) {
+		for (int irow = 1; irow <= icol; ++irow) {
 			++k;
 			w = a[k];
 			m = j;
-			for (i = 1; i <= irow; ++i) {
+			for (int i = 1; i <= irow; ++i) {
 				++i1;
 				if (i == irow)
 					continue;
@@ -349,7 +345,7 @@ static void chols(int n, double *a, double *l, Sint *ifail) {
 		}
 		j += icol;
 	}
-	for (i = 1; i <= n; ++i) {
+	for (int i = 1; i <= n; ++i) {
 		j = i * (i + 1) / 2;
 		if (l[j] == 0.0)
 			return;
@@ -359,24 +355,24 @@ static void chols(int n, double *a, double *l, Sint *ifail) {
 }
 
 static void fsolv(double *x, double *y, int n, double *l) {
-	int i, j, i1;
+	int i1;
 	double sum;
 
 	/*  Solves Lx = y for x by forward substitution - L lower triangular
 	 and stored as a vector. */
 
 	i1 = 0;
-	for (i = 0; i < n; ++i) {
+	for (int i = 0; i < n; ++i) {
 		x[i] = y[i];
 		sum = 0.0;
-		for (j = 0; j < i; ++j)
+		for (int j = 0; j < i; ++j)
 			sum += x[j] * l[i1++];
 		x[i] = (x[i] - sum) / l[i1++];
 	}
 }
 
 static void bsolv(double *x, double *y, int n, double *u) {
-	int i, j, i1, ic;
+	int i1, ic;
 	double sum;
 
 	/*  Solves Ux = y for x by backward substitution -
@@ -384,11 +380,11 @@ static void bsolv(double *x, double *y, int n, double *u) {
 	 */
 
 	i1 = n * (n + 1) / 2 - 1;
-	for (i = n - 1; i >= 0; --i) {
+	for (int i = n - 1; i >= 0; --i) {
 		x[i] = y[i];
 		sum = 0.0;
 		ic = i1;
-		for (j = i + 1; j < n; ++j) {
+		for (int j = i + 1; j < n; ++j) {
 			ic += j;
 			sum += x[j] * u[ic];
 		}
@@ -430,7 +426,7 @@ static void dscale(double xo, double yo, double *xs, double *ys) {
 /*   VARIANCE/COVARIANCE,PREDICTION AND STANDARD ERROR ROUTINES */
 
 static double val(double xp, double yp, double *beta, Sint *np) {
-	int i, j, i1;
+	int i1;
 	double xs, ys, sum;
 
 	/*   Evaluates the fitted surface at the point (XP,YP) for coeffs BETA */
@@ -438,27 +434,26 @@ static double val(double xp, double yp, double *beta, Sint *np) {
 	dscale(xp, yp, &xs, &ys);
 	sum = 0.0;
 	i1 = 0;
-	for (i = 0; i <= *np; ++i)
-		for (j = 0; j <= *np - i; ++j)
+	for (int i = 0; i <= *np; ++i)
+		for (int j = 0; j <= *np - i; ++j)
 			sum += beta[i1++] * powi(xs, j) * powi(ys, i);
 	return sum;
 }
 
 void VR_valn(double *z, double *x, double *y, Sint *n, double *beta, Sint *np) {
-	int i, j, i1;
-	int it;
+	int i1;
 	double xp, yp, xs, ys, sum;
 
 	/*   Evaluates the fitted surface at the point (XP,YP) for coeffs BETA */
 
-	for (it = 0; it < *n; ++it) {
+	for (int it = 0; it < *n; ++it) {
 		xp = x[it];
 		yp = y[it];
 		dscale(xp, yp, &xs, &ys);
 		sum = 0.0;
 		i1 = 0;
-		for (i = 0; i <= *np; ++i)
-			for (j = 0; j <= *np - i; ++j)
+		for (int i = 0; i <= *np; ++i)
+			for (int j = 0; j <= *np - i; ++j)
 				sum += beta[i1++] * powi(xs, j) * powi(ys, i);
 		z[it] = sum;
 	}
@@ -467,26 +462,24 @@ void VR_valn(double *z, double *x, double *y, Sint *n, double *beta, Sint *np) {
 void VR_krpred(double *z, double *xs, double *ys, double *x, double *y,
 		Sint *npt, Sint *n, double *yy) {
 	double *d;
-	int i;
 	double t1, t2;
-	int it;
 	double xp, yp;
 	double sum;
 
 	/*   Gives value of interpolator at the point (XP,YP) */
 
 	d = Calloc(*n, double);
-	for (it = 0; it < *npt; ++it) {
+	for (int it = 0; it < *npt; ++it) {
 		xp = xs[it];
 		yp = ys[it];
 		sum = 0.0;
-		for (i = 0; i < *n; ++i) {
+		for (int i = 0; i < *n; ++i) {
 			t1 = x[i] - xp;
 			t2 = y[i] - yp;
 			d[i] = t1 * t1 + t2 * t2;
 		}
 		cov(*n, d, 1);
-		for (i = 0; i < *n; ++i) {
+		for (int i = 0; i < *n; ++i) {
 			sum += yy[i] * d[i];
 		}
 		z[it] = sum;
@@ -497,7 +490,7 @@ void VR_krpred(double *z, double *xs, double *ys, double *x, double *y,
 void VR_prvar(double *z, double *xp, double *yp, Sint *npt, double *x,
 		double *y, double *l, double *r, Sint *n, Sint *np, Sint *npar,
 		double *l1f) {
-	int i, j, k, i1, k1, it;
+	int i1, k1;
 
 	double *w1, *w2;
 	double xs, ys, xd, yd;
@@ -507,8 +500,8 @@ void VR_prvar(double *z, double *xp, double *yp, Sint *npt, double *x,
 
 	w1 = Calloc(*n, double);
 	w2 = Calloc(*n, double);
-	for (it = 0; it < *npt; ++it) {
-		for (i = 0; i < *n; ++i) {
+	for (int it = 0; it < *npt; ++it) {
+		for (int i = 0; i < *n; ++i) {
 			xd = x[i] - xp[it];
 			yd = y[i] - yp[it];
 			w1[i] = xd * xd + yd * yd;
@@ -516,22 +509,22 @@ void VR_prvar(double *z, double *xp, double *yp, Sint *npt, double *x,
 		cov(*n, w1, 1);
 		fsolv(w2, w1, *n, l);
 		sum1 = 0.0;
-		for (i = 0; i < *n; ++i)
+		for (int i = 0; i < *n; ++i)
 			sum1 += w2[i] * w2[i];
 		sum1 = alph1[1] - sum1;
 		dscale(xp[it], yp[it], &xs, &ys);
 		k1 = 0;
 		i1 = 0;
-		for (i = 0; i <= *np; ++i)
-			for (j = 0; j <= *np - i; ++j) {
+		for (int i = 0; i <= *np; ++i)
+			for (int j = 0; j <= *np - i; ++j) {
 				++i1;
 				w1[i1 - 1] = powi(xs, j) * powi(ys, i);
-				for (k = 0; k < *n; ++k)
+				for (int k = 0; k < *n; ++k)
 					w1[i1 - 1] -= l1f[k1++] * w2[k];
 			}
 		fsolv(w2, w1, *npar, r);
 		sum = 0.0;
-		for (i = 0; i < *npar; ++i)
+		for (int i = 0; i < *npar; ++i)
 			sum += w2[i] * w2[i];
 		z[it] = sum1 + sum;
 	}
@@ -545,7 +538,7 @@ void VR_prvar(double *z, double *xp, double *yp, Sint *npt, double *x,
 void VR_correlogram(Sfloat *xp, Sfloat *yp, Sint *nint, double *x, double *y,
 		double *z, Sint *n, Sint *cnt) {
 	double xd, yd, d, sc, zb, xm, var, sum;
-	int i, j, i1, ibin;
+	int i1, ibin;
 	double *cp;
 
 	int *ncp;
@@ -557,17 +550,17 @@ void VR_correlogram(Sfloat *xp, Sfloat *yp, Sint *nint, double *x, double *y,
 	cp = Calloc(*nint + 1, double);
 	ncp = Calloc(*nint + 1, int);
 	zb = 0.0;
-	for (i = 0; i < *n; ++i) {
+	for (int i = 0; i < *n; ++i) {
 		zb += z[i];
 	}
 	zb /= *n;
-	for (i = 0; i < *nint; ++i) {
+	for (int i = 0; i < *nint; ++i) {
 		ncp[i] = 0;
 		cp[i] = 0.0;
 	}
 	xm = 0.0;
-	for (i = 0; i < *n; ++i) {
-		for (j = 0; j < i; ++j) {
+	for (int i = 0; i < *n; ++i) {
+		for (int j = 0; j < i; ++j) {
 			xd = x[i] - x[j];
 			yd = y[i] - y[j];
 			d = xd * xd + yd * yd;
@@ -575,8 +568,8 @@ void VR_correlogram(Sfloat *xp, Sfloat *yp, Sint *nint, double *x, double *y,
 		}
 	}
 	sc = (*nint - 1) / sqrt(xm);
-	for (i = 0; i < *n; ++i) {
-		for (j = 0; j <= i; ++j) {
+	for (int i = 0; i < *n; ++i) {
+		for (int j = 0; j <= i; ++j) {
 			xd = x[i] - x[j];
 			yd = y[i] - y[j];
 			d = sqrt(xd * xd + yd * yd);
@@ -586,14 +579,14 @@ void VR_correlogram(Sfloat *xp, Sfloat *yp, Sint *nint, double *x, double *y,
 		}
 	}
 	sum = 0.0;
-	for (i = 0; i < *n; ++i) {
+	for (int i = 0; i < *n; ++i) {
 		xd = z[i] - zb;
 		sum += xd * xd;
 	}
 	var = sum / *n;
 	/*  Only return values for fairly reliable intervals */
 	i1 = 0;
-	for (i = 0; i < *nint; ++i) {
+	for (int i = 0; i < *nint; ++i) {
 		if (ncp[i] > 5) {
 			xp[i1] = i / sc;
 			yp[i1] = cp[i] / (var * ncp[i]);
@@ -610,7 +603,7 @@ void VR_variogram(Sfloat *xp, Sfloat *yp, Sint *nint, double *x, double *y,
 		double *z, Sint *n, Sint *cnt) {
 	double xd, yd, d, sc, xm;
 
-	int ibin, i, j, i1;
+	int ibin, i1;
 	double *sv;
 	int *nsv;
 
@@ -621,13 +614,13 @@ void VR_variogram(Sfloat *xp, Sfloat *yp, Sint *nint, double *x, double *y,
 
 	sv = Calloc(*nint + 1, double);
 	nsv = Calloc(*nint + 1, int);
-	for (i = 0; i < *nint; ++i) {
+	for (int i = 0; i < *nint; ++i) {
 		nsv[i] = 0;
 		sv[i] = 0.0;
 	}
 	xm = 0.0;
-	for (i = 0; i < *n; ++i) {
-		for (j = 0; j < i; ++j) {
+	for (int i = 0; i < *n; ++i) {
+		for (int j = 0; j < i; ++j) {
 			xd = x[i] - x[j];
 			yd = y[i] - y[j];
 			d = xd * xd + yd * yd;
@@ -635,8 +628,8 @@ void VR_variogram(Sfloat *xp, Sfloat *yp, Sint *nint, double *x, double *y,
 		}
 	}
 	sc = (*nint - 1) / sqrt(xm);
-	for (i = 0; i < *n; ++i) {
-		for (j = 0; j < i; ++j) {
+	for (int i = 0; i < *n; ++i) {
+		for (int j = 0; j < i; ++j) {
 			xd = x[i] - x[j];
 			yd = y[i] - y[j];
 			d = sqrt(xd * xd + yd * yd);
@@ -647,7 +640,7 @@ void VR_variogram(Sfloat *xp, Sfloat *yp, Sint *nint, double *x, double *y,
 		}
 	}
 	i1 = 0;
-	for (i = 0; i < *nint; ++i) {
+	for (int i = 0; i < *nint; ++i) {
 		if (nsv[i] > 5) {
 			xp[i1] = i / sc;
 			yp[i1] = sv[i] / (2 * nsv[i]);
