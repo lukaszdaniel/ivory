@@ -333,7 +333,7 @@ afd4f607cba7fda8ec4d22bffd88fc50 *tests/glm.nb.R
 7b1360150b8598b576e82534b12345a2 *tests/BankWages.rda
 f4e6b3ffb6521ea7625515e2f0ae7f98 *tests/profile.R
 a0854fee9b36691ca1d0880da31d6f79 *tests/fitdistr.R
-d4fcf0889a72e05be593ce000052e8c9 *tests/regression.Rout.save
-d105749a90ed4026c928a3067e2b8968 *tests/fitdistr.Rout.save
+8fabc01725331a666ffbd0001640041b *tests/regression.Rout.save
+6293c11184643dd18939afb0d97d3154 *tests/fitdistr.Rout.save
 a23ddf89e02a02ed030e4ed5538d3430 *tests/regression.R
 fd9fbc52e72cc2fb95470ff7f531b216 *tests/Examples/MASS-Ex.Rout.save

@@ -464,10 +464,10 @@ ed231754703a243d3731f29b7057cba4 *tests/group-methods.R
 128ccccdfe84c2dbed42bdce86258491 *tests/other-pkgs.R
 f9cf0de1815f036d1e0280ff74ea2843 *tests/matprod.R
 8d94ef0528ccbd6756361acd354279a5 *tests/validObj.R
-c4c0cde25eef6b276b2ed81d185c752b *tests/bind.Rout.save
+0826bd27bdecef16fb4838f6820ec311 *tests/bind.Rout.save
 25542600eadca4e8af5261e98e3b3c5d *tests/dtpMatrix.R
 21024c2ae5eb4f5b1e073a7568171d89 *tests/dg_Matrix.R
-e794d329a0ae384227ec39c6ffa06483 *tests/indexing.Rout.save
+060b7cb0c39207505c88a6357b514ab4 *tests/indexing.Rout.save
 c7bffb71295456bcd21189d03719622c *tests/Simple.R
 98b8b9b24b00c0ee3e0aa2bd25718310 *tests/factorizing.R
 b2cc9ba163939e31d28c3277d24d4ea5 *tests/bind.R
