@@ -27,7 +27,6 @@ int anovainit(int n, double *y[], int maxcat, char **error, double *parm,
  * The anova evaluation function.  Return the mean and the ss.
  */
 void anovass(int n, double *y[], double *value, double *risk, double *wt) {
-	int i;
 	double temp = 0., twt = 0.; /* sum of the weights */
 	double mean, ss;
 
@@ -55,7 +54,7 @@ void anovass(int n, double *y[], double *value, double *risk, double *wt) {
  */
 void anova(int n, double *y[], double *x, int nclass, int edge, double *improve,
 		double *split, int *csplit, double myrisk, double *wt) {
-	int i, j;
+	int j;
 	double temp;
 	double left_sum, right_sum;
 	double left_wt, right_wt;

@@ -27,7 +27,7 @@ void graycode_init1(int numcat, int *count) {
 }
 
 void graycode_init2(int numcat, int *count, double *val) {
-	int i, j, k;
+	int j, k;
 	double temp;
 	maxc = numcat;
 
@@ -67,7 +67,6 @@ void graycode_init2(int numcat, int *count, double *val) {
  * A value of maxc means that we're done.
  */
 int graycode(void) {
-	int i;
 
 	if (gsave > -2) { /* ordered data */
 		gsave++;

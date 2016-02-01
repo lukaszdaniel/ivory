@@ -30,7 +30,7 @@ static void pred_rpart0(const int *dimx, int nnode, int nsplit, const int *dimc,
 		const int *nnum, const int *nodes2, const int *vnum,
 		const double *split2, const int *csplit2, const int *usesur,
 		const double *xdata2, const int *xmiss2, int *where) {
-	int i, j;
+	int j;
 	int n;
 	int ncat;
 	int node, nspl, var, dir;

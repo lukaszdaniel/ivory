@@ -32,7 +32,7 @@ void rpmatrix(pNode me, int *numcat, double **dsplit, int **isplit,
 	 *         5: # obs for which this is the final resting place
 	 */
 
-	int i, j, k;
+	int i, j;
 	pSplit spl;
 
 	if (id == 1) { /* this is the top node */

@@ -13,7 +13,7 @@
 #include "rpartproto.h"
 
 void bsplit(pNode me, int n1, int n2) {
-	int i, j, k;
+	int k;
 	int kk;
 	int nc;
 	double improve;

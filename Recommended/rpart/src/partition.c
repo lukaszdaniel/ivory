@@ -16,7 +16,7 @@
 int partition(int nodenum, pNode splitnode, double *sumrisk, int n1, int n2) {
 	pNode me;
 	double tempcp;
-	int i, j, k;
+	int j, k;
 	double tempcp2;
 	double left_risk, right_risk;
 	int left_split, right_split;

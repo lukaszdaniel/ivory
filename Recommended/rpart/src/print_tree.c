@@ -47,7 +47,7 @@ static void print_tree2(pNode me, int id, int mydepth, int target) {
 
 /* the actual work routine */
 static void printme(pNode me, int id) {
-	int i, j, k;
+	int i, j;
 	pSplit ss;
 
 	Rprintf("\n\n");

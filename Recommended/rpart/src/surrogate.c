@@ -17,7 +17,7 @@
 #include "rpartproto.h"
 
 void surrogate(pNode me, int n1, int n2) {
-	int i, j, k;
+	int j;
 	int var; /* the primary split variable */
 	double split;
 	double improve;

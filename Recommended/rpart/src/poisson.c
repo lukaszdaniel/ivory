@@ -14,7 +14,6 @@ static int which_pred;
  */
 int poissoninit(int n, double *y[], int maxcat, char **error, double *param,
 		int *size, int who, double *wt) {
-	int i;
 	double event, time;
 
 	/* allocate memory for scratch */
@@ -101,7 +100,6 @@ double poissonpred(double *y, double *lambda) {
  *   where p_i = predicted # events = \lambda t_i
  */
 void poissondev(int n, double **y, double *value, double *risk, double *wt) {
-	int i;
 	double death = 0, time = 0, lambda, dev = 0, temp;
 
 	/*
@@ -139,7 +137,7 @@ void poissondev(int n, double **y, double *value, double *risk, double *wt) {
  */
 void poisson(int n, double **y, double *x, int nclass, int edge,
 		double *improve, double *split, int *csplit, double my_risk, double *wt) {
-	int i, j;
+	int j;
 	int left_n, right_n;
 	double left_time, right_time;
 	double left_d, right_d;

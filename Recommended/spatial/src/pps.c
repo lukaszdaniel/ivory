@@ -54,7 +54,6 @@ void VR_ppget(Sfloat *xx) {
 
 static Sfloat edge(Sfloat x, Sfloat y, Sfloat a) {
 	Sfloat b, c, c1, c2, r[6], w;
-	int i;
 
 	w = x - xl0;
 	if (w > y - yl0)
@@ -89,7 +88,7 @@ static Sfloat edge(Sfloat x, Sfloat y, Sfloat a) {
 
 void VR_sp_pp2(Sfloat *x, Sfloat *y, Sint *npt, Sint *k, Sfloat *h,
 		Sfloat *dmin, Sfloat *lm, Sfloat *fs) {
-	int n = *npt, kk = *k, k1, i, j, ib;
+	int n = *npt, kk = *k, k1, i, ib;
 	Sfloat ax, ay, xi, yi, sarea, g, dm, alm;
 	double a, x1, y1, rr, fss = *fs, fs1, s1;
 
@@ -149,7 +148,7 @@ void VR_pdata(Sint *npt, Sfloat *x, Sfloat *y) {
 
 void VR_simpat(Sint *npt, Sfloat *x, Sfloat *y, Sfloat *c, Sfloat *r,
 		Sint *init) {
-	int i, attempts = 0, id, j, mm, n = *npt;
+	int attempts = 0, id, mm, n = *npt;
 	Sfloat cc, rr, ax, ay, d, x1, y1, u;
 
 	testinit();
@@ -192,7 +191,7 @@ void VR_simpat(Sint *npt, Sfloat *x, Sfloat *y, Sfloat *c, Sfloat *r,
 }
 
 void VR_simmat(Sint *npt, Sfloat *x, Sfloat *y, Sfloat *r) {
-	int i, icnt, attempts = 0, j, n = *npt;
+	int icnt, attempts = 0, n = *npt;
 	Sfloat x1, y1, rr, ax, ay;
 
 	testinit();
@@ -225,7 +224,7 @@ void VR_simmat(Sint *npt, Sfloat *x, Sfloat *y, Sfloat *r) {
 void VR_plike(Sfloat *x, Sfloat *y, Sint *npt, Sfloat *c, Sfloat *r, Sint *ng,
 		Sfloat *target, Sfloat *res) {
 	Sfloat ar, rr, suma = 0, sumb = 0, xi, yi, x1, y1, c1, cc = *c;
-	int ic, i1, i2, j, n = *npt, g = *ng;
+	int ic, n = *npt, g = *ng;
 
 	testinit();
 	ar = (*r);

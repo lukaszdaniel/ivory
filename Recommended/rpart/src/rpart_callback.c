@@ -65,7 +65,6 @@ void rpart_callback0(int *nr) {
  * This is called by the evaluation function
  */
 void rpart_callback1(int n, double *y[], double *wt, double *z) {
-	int i, j, k;
 	SEXP value;
 	double *dptr;
 
@@ -101,7 +100,7 @@ void rpart_callback1(int n, double *y[], double *wt, double *z) {
  */
 void rpart_callback2(int n, int ncat, double *y[], double *wt, double *x,
 		double *good) {
-	int i, j, k;
+	int j;
 	SEXP goodness;
 	double *dptr;
 

@@ -27,7 +27,7 @@ static double gini_impure2(double p) {
 
 int giniinit(int n, double **y, int maxcat, char **error, double *parm,
 		int *size, int who, double *wt) {
-	int i, j, k;
+	int j, k;
 	double temp;
 
 	/* allocate memory  and setup losses */
@@ -102,7 +102,7 @@ int giniinit(int n, double **y, int maxcat, char **error, double *parm,
  *   This is R(T) (this node's contribution) in the paper.
  */
 void ginidev(int n, double **y, double *value, double *risk, double *wt) {
-	int i, j, max = 0;
+	int j, max = 0;
 	double temp, dev = 0;
 	double prob;
 

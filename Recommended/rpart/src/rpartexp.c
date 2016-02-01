@@ -15,7 +15,7 @@
 void rpartexp(int *n2, double *y, double *wt, double *newy, double *wtemp) {
 	int n;
 	double *stop, *event;
-	int i, j;
+	int i;
 	double tsum, dsum; /* weighted sums of times and deaths */
 	double time, ltime, rtime;
 	double temp;

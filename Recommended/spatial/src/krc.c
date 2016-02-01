@@ -170,7 +170,7 @@ void VR_ls(double *x, double *y, double *z, Sint *n, Sint *np, Sint *npar,
 
 /* -------------------------------------------------------------------- */
 void VR_fmat(double *f, double *x, double *y, Sint *n, Sint *np) {
-	int i, j, k, k1;
+	int k1;
 	double *xs, *ys;
 
 	/*  FMAT evaluates the 'regression' matrix F (scaled to [-1,+1]x[-1,+1] to
@@ -190,7 +190,6 @@ void VR_fmat(double *f, double *x, double *y, Sint *n, Sint *np) {
 }
 
 static void cholcov(double *x, double *y, double *l, int n, Sint *ifail) {
-	int i, j;
 	static double *w;
 	int i1;
 	double t1, t2;
@@ -215,7 +214,6 @@ static void cholcov(double *x, double *y, double *l, int n, Sint *ifail) {
 
 static void householder(double *f, double *nu, double *b, double *r, int n,
 		int m, Sint *ifail) {
-	int i, j, k;
 	double c1, c2;
 	int i1, i2, k1, k2, k3, i3;
 

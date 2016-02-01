@@ -30,7 +30,6 @@ int usersplit_init(int n, double *y[], int maxcat, char **error, double *parm,
  * The user evaluation function
  */
 void usersplit_eval(int n, double *y[], double *value, double *risk, double *wt) {
-	int i;
 
 	rpart_callback1(n, y, wt, uscratch);
 	*risk = uscratch[0];

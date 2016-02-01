@@ -38,7 +38,6 @@ SEXP xpred(SEXP ncat2, SEXP method2, SEXP opt2, SEXP parms2, SEXP xvals2,
 	int i, j, k, n;
 	int last, ii;
 	int maxcat, ncp;
-	int xgroup;
 	double temp, total_wt, old_wt;
 	int *savesort;
 	double *dptr; /* temp */

@@ -35,9 +35,8 @@ static int debug = 0; /*if it is odd, print out every tree */
 
 void xval(int n_xval, CpTable cptable_head, int *x_grp, int maxcat,
 		char **errmsg, double *parms, int *savesort) {
-	int i, j, k, ii, jj;
+	int i, j, k, ii;
 	int last;
-	int xgroup;
 	double *xtemp, *xpred;
 	int *savew;
 	double *cp;
