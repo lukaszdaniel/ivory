@@ -45,9 +45,9 @@ e7acfa017083acfc431a7836ffe8bb2f *po/pl.po
 41ec1535a8517bf30cc786960a6d1a2b *po/R-pl.po
 59b89a674fce735692e6571c9d7c52ab *po/R-spatial.pot
 6986b81a3ed0294c61f082b383966239 *src/localization.h
-e3cc5c1636c204da229f3e9349b11aa8 *src/krc.c
+0eac9fe472055a95251470aaa84e8343 *src/krc.c
 71f5e23c87ed3f2e46bb0ee1ba3f7760 *src/init.c
-939b64728ebf3f0e62c984119b27064d *src/pps.c
+c44155535e15dd4b0fc4875f53b42236 *src/pps.c
 bbde5bca39eb096c4865b68d096601d0 *src/spatial.h
 621d0b812f4dd5bee67513233c8c6e8d *man/correlogram.Rd
 59bbd5b3b8aee9dce9b0b88987473f96 *man/trls.influence.Rd
