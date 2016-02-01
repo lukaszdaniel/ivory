@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R /3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-14 21:11\n"
+"POT-Creation-Date: 2016-02-01 21:16\n"
 "PO-Revision-Date: 2016-01-09 18:49+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -195,6 +195,16 @@ msgstr "manglende argumenter er ikke tilladt"
 msgid "more than one default provided in 'switch()' call"
 msgstr "mere end en standard tilbudt i kontaktkald"
 
+#. R/cmp.R: stop("namespace found within global environments")
+#: R/cmp.R:0
+msgid "namespace found within global environments"
+msgstr ""
+
+#. R/cmp.R: stop("namespace found within local environments")
+#: R/cmp.R:0
+msgid "namespace found within local environments"
+msgstr ""
+
 #. R/cmp.R: gettextf("no offset recorded for label \"%s\"", lbl)
 #: R/cmp.R:0
 msgid "no offset recorded for label \"%s\""
@@ -214,6 +224,12 @@ msgstr "ingen synlig binding for global variabel '%s'"
 #: R/cmp.R:0
 msgid "no visible global function definition for '%s'"
 msgstr "ingen synlig global funktionsdefinition for '%s'"
+
+#. R/cmp.R: stop("non-namespace found within namespace environments")
+#: R/cmp.R:0
+#, fuzzy
+msgid "non-namespace found within namespace environments"
+msgstr "'ns' skal være et navnerum eller et importmiljø for navnerum"
 
 #. R/cmp.R: gettextf("possible error in '%s': %s", deparse(call, 20)[1], msg)
 #: R/cmp.R:0

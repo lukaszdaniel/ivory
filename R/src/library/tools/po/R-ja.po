@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-10 18:05\n"
+"POT-Creation-Date: 2016-02-01 21:16\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -6815,6 +6815,12 @@ msgstr[0] ""
 msgid "Required field missing or empty:"
 msgid_plural "Required fields missing or empty:"
 msgstr[0] " 必要なフィールドは見当たりません． "
+
+#. R/QC.R: ngettext(y, "Size of tarball: %d byte", "Size of tarball: %d bytes", domain = "R-tools")
+#: R/QC.R:0
+msgid "Size of tarball: %d byte"
+msgid_plural "Size of tarball: %d bytes"
+msgstr[0] ""
 
 #. R/check.R: ngettext(length(dirs), "The following directory looks like a leftover from 'knitr':\n%s\nPlease remove from your package.\n",     "The following directories look like leftovers from 'knitr':\n%s\nPlease remove from your package.\n",     domain = "R-tools")
 #: R/check.R:0

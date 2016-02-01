@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: compiler 3.3.0\n"
-"POT-Creation-Date: 2016-01-14 21:11\n"
+"POT-Creation-Date: 2016-02-01 21:16\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -250,6 +250,20 @@ msgstr ""
 
 
 #: R/cmp.R: 0
+#. R/cmp.R: stop("namespace found within global environments")
+
+msgid "namespace found within global environments"
+msgstr ""
+
+
+#: R/cmp.R: 0
+#. R/cmp.R: stop("namespace found within local environments")
+
+msgid "namespace found within local environments"
+msgstr ""
+
+
+#: R/cmp.R: 0
 #. R/cmp.R: gettextf("no offset recorded for label \"%s\"", lbl)
 
 msgid "no offset recorded for label \"%s\""
@@ -274,6 +288,13 @@ msgstr ""
 #. R/cmp.R: gettextf("no visible global function definition for '%s'", as.character(fun))
 
 msgid "no visible global function definition for '%s'"
+msgstr ""
+
+
+#: R/cmp.R: 0
+#. R/cmp.R: stop("non-namespace found within namespace environments")
+
+msgid "non-namespace found within namespace environments"
 msgstr ""
 
 

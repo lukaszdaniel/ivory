@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.3.0\n"
-"POT-Creation-Date: 2016-01-10 18:05\n"
+"POT-Creation-Date: 2016-02-01 21:16\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -8187,6 +8187,15 @@ msgstr[1]    ""
 
 msgid        "Required field missing or empty:"
 msgid_plural "Required fields missing or empty:"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: ngettext(y, "Size of tarball: %d byte", "Size of tarball: %d bytes", domain = "R-tools")
+
+msgid        "Size of tarball: %d byte"
+msgid_plural "Size of tarball: %d bytes"
 msgstr[0]    ""
 msgstr[1]    ""
 

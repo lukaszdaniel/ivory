@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-14 21:11\n"
+"POT-Creation-Date: 2016-02-01 21:16\n"
 "PO-Revision-Date: 2011-04-02 18:32+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -204,6 +204,16 @@ msgstr "les arguments manquants ne sont pas autorisés"
 msgid "more than one default provided in 'switch()' call"
 msgstr "plus d'une valeur par défaut fournie dans une construction 'switch'"
 
+#. R/cmp.R: stop("namespace found within global environments")
+#: R/cmp.R:0
+msgid "namespace found within global environments"
+msgstr ""
+
+#. R/cmp.R: stop("namespace found within local environments")
+#: R/cmp.R:0
+msgid "namespace found within local environments"
+msgstr ""
+
 #. R/cmp.R: gettextf("no offset recorded for label \"%s\"", lbl)
 #: R/cmp.R:0
 msgid "no offset recorded for label \"%s\""
@@ -223,6 +233,14 @@ msgstr "pas de lien pour la variable globale '%s'"
 #: R/cmp.R:0
 msgid "no visible global function definition for '%s'"
 msgstr "pas de définition globale de fonction visible pour '%s'"
+
+#. R/cmp.R: stop("non-namespace found within namespace environments")
+#: R/cmp.R:0
+#, fuzzy
+msgid "non-namespace found within namespace environments"
+msgstr ""
+"'ns' doit être être un espace de noms (namespace) ou un environnement "
+"d'importation d'espace de noms"
 
 #. R/cmp.R: gettextf("possible error in '%s': %s", deparse(call, 20)[1], msg)
 #: R/cmp.R:0

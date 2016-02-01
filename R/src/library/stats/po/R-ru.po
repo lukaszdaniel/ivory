@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-10 18:05\n"
+"POT-Creation-Date: 2016-02-01 21:16\n"
 "PO-Revision-Date: 2015-01-17 15:49+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -1448,6 +1448,8 @@ msgstr "'y' должен быть длиннее чем 'x'"
 msgid "(Dispersion parameter for %s family taken to be %s)"
 msgstr ""
 
+#. R/dummy.coef.R: gettext("(Intercept)", domain = "R-stats")
+#. R/dummy.coef.R: gettext("(Intercept)", domain = "R-stats")
 #. R/dummy.coef.R: gettext("(Intercept)", domain = "R-stats")
 #. R/dummy.coef.R: gettext("(Intercept)", domain = "R-stats")
 #. R/dummy.coef.R: gettext("(Intercept)", domain = "R-stats")
@@ -4754,6 +4756,12 @@ msgstr "больше центров кластеров, чем отдельны�
 #. R/reshape.R: gettextf("multiple rows match for %s=%s: first taken", timevar, times[i])
 #: R/reshape.R:0
 msgid "multiple rows match for %s=%s: first taken"
+msgstr ""
+
+#. R/dummy.coef.R: stop("multivariate case with missing coefficients is not yet implemented")
+#. R/dummy.coef.R: stop("multivariate case with missing coefficients is not yet implemented")
+#: R/dummy.coef.R:0
+msgid "multivariate case with missing coefficients is not yet implemented"
 msgstr ""
 
 #. R/symnum.R: stop("must have 2 'symbols' for logical 'x' argument")

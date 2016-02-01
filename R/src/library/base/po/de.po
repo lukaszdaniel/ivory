@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.15.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-27 18:05+0100\n"
+"POT-Creation-Date: 2016-02-01 22:04+0100\n"
 "PO-Revision-Date: 2015-01-17 13:34+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -358,11 +358,6 @@ msgstr "Ausführung angehalten\n"
 msgid "Gradient:\n"
 msgstr ""
 
-#: src/extra/blas/xerbla.c:14 src/main/print.c:1109
-#, c-format
-msgid "BLAS/LAPACK routine '%6s' gave error code %d"
-msgstr "BLAS/LAPACK-Routine '%6s' gab Fehlercode %d"
-
 #: src/extra/graphapp/dialogs.c:738
 msgid "Password"
 msgstr ""
@@ -516,7 +511,7 @@ msgstr "ungültiges Argument"
 msgid "Custom error"
 msgstr "Lesefehler"
 
-#: src/extra/tzone/localtime.c:436 src/extra/tzone/localtime.c:440
+#: src/extra/tzone/localtime.c:439 src/extra/tzone/localtime.c:443
 #, fuzzy, c-format
 msgid "unknown timezone '%s'"
 msgstr "Warnung: unbekannte Option '%s'\n"
@@ -546,7 +541,7 @@ msgstr ""
 msgid "DLL attempted to change FPU control word from %x to %x"
 msgstr "DLL versuchte das FPU-Kontrollwort von %x nach %x zu ändern"
 
-#: src/gnuwin32/dynload.c:204 src/unix/dynload.c:241
+#: src/gnuwin32/dynload.c:204 src/unix/dynload.c:233
 msgid "cannot get working directory"
 msgstr "kann das Arbeitsverzeichnis nicht ermitteln"
 
@@ -649,9 +644,9 @@ msgstr "Problem bei der Anzeige von '%s'"
 #: src/main/connections.c:4974 src/main/connections.c:5013
 #: src/main/connections.c:5018 src/main/connections.c:5023
 #: src/main/connections.c:5044 src/main/context.c:583 src/main/context.c:592
-#: src/main/context.c:596 src/main/datetime.c:786 src/main/datetime.c:876
-#: src/main/datetime.c:878 src/main/datetime.c:882 src/main/datetime.c:1043
-#: src/main/datetime.c:1045 src/main/datetime.c:1250 src/main/debug.c:245
+#: src/main/context.c:596 src/main/datetime.c:782 src/main/datetime.c:872
+#: src/main/datetime.c:874 src/main/datetime.c:878 src/main/datetime.c:1044
+#: src/main/datetime.c:1046 src/main/datetime.c:1251 src/main/debug.c:245
 #: src/main/deparse.c:409 src/main/dotcode.c:479 src/main/dotcode.c:483
 #: src/main/dotcode.c:488 src/main/dounzip.c:324 src/main/dounzip.c:331
 #: src/main/dounzip.c:341 src/main/dounzip.c:346 src/main/dounzip.c:350
@@ -693,8 +688,8 @@ msgstr "Problem bei der Anzeige von '%s'"
 #: src/main/platform.c:2545 src/main/platform.c:2548 src/main/platform.c:2551
 #: src/main/platform.c:2554 src/main/platform.c:2557 src/main/platform.c:2635
 #: src/main/platform.c:2643 src/main/platform.c:2679 src/main/platform.c:2729
-#: src/main/print.c:236 src/main/print.c:242 src/main/print.c:264
-#: src/main/print.c:270 src/main/print.c:277 src/main/random.c:471
+#: src/main/print.c:235 src/main/print.c:241 src/main/print.c:263
+#: src/main/print.c:269 src/main/print.c:276 src/main/random.c:471
 #: src/main/random.c:475 src/main/random.c:482 src/main/random.c:510
 #: src/main/saveload.c:1949 src/main/saveload.c:1952 src/main/saveload.c:1955
 #: src/main/saveload.c:2067 src/main/saveload.c:2246 src/main/saveload.c:2251
@@ -1068,14 +1063,14 @@ msgstr "kann Datei nicht öffnen"
 msgid "invalid call %s"
 msgstr "ungültiger Wert"
 
-#: src/include/Errormsg.h:25 src/main/subscript.c:384 src/main/subscript.c:402
+#: src/include/Errormsg.h:27 src/main/subscript.c:384 src/main/subscript.c:402
 #: src/main/subscript.c:426 src/main/subscript.c:465 src/main/subscript.c:663
 #: src/main/subscript.c:702 src/main/subscript.c:845
 #, fuzzy
 msgid "subscript is out of bounds"
 msgstr "Indizierung außerhalb der Grenzen"
 
-#: src/include/Errormsg.h:26
+#: src/include/Errormsg.h:28
 #, c-format
 msgid "object of type '%s' is not subsettable"
 msgstr "Objekt des Typs '%s' ist nicht indizierbar"
@@ -1088,7 +1083,7 @@ msgstr ""
 msgid "the 'value' of a raw object is not defined"
 msgstr ""
 
-#: src/include/Rinlinedfuns.h:716
+#: src/include/Rinlinedfuns.h:718
 msgid "cycle detected"
 msgstr ""
 
@@ -1150,8 +1145,8 @@ msgstr "erstes Argument muss ein Vektor sein"
 
 #: src/main/apply.c:101 src/main/array.c:513 src/main/character.c:815
 #: src/main/character.c:1622 src/main/connections.c:3546
-#: src/main/context.c:629 src/main/context.c:648 src/main/datetime.c:686
-#: src/main/datetime.c:788 src/main/datetime.c:1047 src/main/dotcode.c:220
+#: src/main/context.c:629 src/main/context.c:648 src/main/datetime.c:682
+#: src/main/datetime.c:784 src/main/datetime.c:1048 src/main/dotcode.c:220
 #: src/main/errors.c:943 src/main/errors.c:975 src/main/errors.c:1081
 #: src/main/errors.c:1106 src/main/errors.c:1111 src/main/errors.c:1384
 #: src/main/identical.c:73 src/main/identical.c:74 src/main/identical.c:75
@@ -1171,7 +1166,7 @@ msgstr "erstes Argument muss ein Vektor sein"
 msgid "invalid '%s' value"
 msgstr "ungültiger '%s' Wert"
 
-#: src/main/apply.c:104 src/main/complex.c:759
+#: src/main/apply.c:104 src/main/complex.c:754
 msgid "invalid length"
 msgstr "ungültige Länge"
 
@@ -1265,7 +1260,7 @@ msgid_plural "unimplemented real function of %d numeric arguments"
 msgstr[0] "nicht implementierte reelle Funktion von %d numerischen Argumenten"
 msgstr[1] "nicht implementierte reelle Funktion von %d numerischen Argumenten"
 
-#: src/main/arithmetic.c:1203 src/main/complex.c:644 src/main/complex.c:714
+#: src/main/arithmetic.c:1203 src/main/complex.c:639 src/main/complex.c:709
 msgid "unimplemented complex function"
 msgstr "nicht implementierte komplexe Funktion"
 
@@ -1853,7 +1848,7 @@ msgid "cannot write to this connection"
 msgstr "kann auf diese Verbindung nicht schreiben"
 
 #: src/main/builtin.c:553 src/main/builtin.c:583 src/main/platform.c:305
-#: src/main/platform.c:323 src/main/print.c:142 src/main/print.c:248
+#: src/main/platform.c:323 src/main/print.c:141 src/main/print.c:247
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "ungültige '%s' Spezifikation"
@@ -2256,29 +2251,29 @@ msgstr "Warnung: '--max-ppsize' ist zu klein: wird ignoriert"
 msgid "WARNING: '--max-ppsize' value is too large: ignored"
 msgstr "Warnung: '--max-ppsize' ist zu groß: wird ignoriert"
 
-#: src/main/complex.c:129
+#: src/main/complex.c:124
 msgid "invalid complex unary operator"
 msgstr "ungültiger, komplexer, unärer Operator"
 
-#: src/main/complex.c:257
+#: src/main/complex.c:252
 msgid "unimplemented complex operation"
 msgstr "nicht implementierte komplexe Operation"
 
-#: src/main/complex.c:359
+#: src/main/complex.c:354
 #, fuzzy
 msgid "non-numeric argument passed to function"
 msgstr "nicht-numerisches Argument für Funktion"
 
-#: src/main/complex.c:647 src/main/complex.c:740
+#: src/main/complex.c:642 src/main/complex.c:735
 #, fuzzy, c-format
 msgid "NaN values produced in '%s' function"
 msgstr "konnte Funktion \"%s\" nicht finden"
 
-#: src/main/complex.c:828
+#: src/main/complex.c:823
 msgid "invalid polynomial coefficient"
 msgstr "ungültiger Polynomialkoeffizient"
 
-#: src/main/complex.c:833
+#: src/main/complex.c:828
 msgid "root finding code failed"
 msgstr "Nullstellensuche fehlgeschlagen"
 
@@ -3132,26 +3127,26 @@ msgstr "min/max für komplexe Zahlen nicht definiert"
 msgid "unknown '%s' function"
 msgstr "unbekannte cumxxx Funktion"
 
-#: src/main/datetime.c:555 src/main/datetime.c:565
+#: src/main/datetime.c:551 src/main/datetime.c:561
 #, fuzzy
 msgid "time zone specification is too long"
 msgstr "Eingabe-Zeichenkette ist zu lang"
 
-#: src/main/datetime.c:559 src/main/datetime.c:567 src/main/datetime.c:581
-#: src/main/datetime.c:586
+#: src/main/datetime.c:555 src/main/datetime.c:563 src/main/datetime.c:577
+#: src/main/datetime.c:582
 msgid "problem with setting timezone"
 msgstr "Problem beim Setzen der Zeitzone"
 
-#: src/main/datetime.c:571
+#: src/main/datetime.c:567
 msgid "cannot set timezones on this system"
 msgstr "kann Zeitzonen auf diesem System nicht setzen"
 
-#: src/main/datetime.c:593 src/main/datetime.c:595
+#: src/main/datetime.c:589 src/main/datetime.c:591
 msgid "problem with unsetting timezone"
 msgstr "Problem beim Zurücksetzen der Zeitzone"
 
-#: src/main/datetime.c:815 src/main/datetime.c:817 src/main/datetime.c:912
-#: src/main/datetime.c:1258 src/main/datetime.c:1260
+#: src/main/datetime.c:811 src/main/datetime.c:813 src/main/datetime.c:908
+#: src/main/datetime.c:1259 src/main/datetime.c:1261
 #, fuzzy
 msgid "zero-length component in non-empty \"POSIXlt\" structure"
 msgstr "Komponente der Länge 0 in nicht-leerer POSIXlt Struktur"
@@ -3265,13 +3260,13 @@ msgid "'opts' argument should be small non-negative integer"
 msgstr "'opts' sollte eine kleine nicht-negative ganze Zahl sein"
 
 #: src/main/deparse.c:423 src/main/envir.c:1967 src/main/envir.c:2052
-#: src/main/eval.c:621 src/main/eval.c:1409 src/main/eval.c:4262
+#: src/main/eval.c:621 src/main/eval.c:1412 src/main/eval.c:4262
 #: src/main/saveload.c:1977 src/main/saveload.c:2304 src/main/serialize.c:2774
 #, fuzzy, c-format
 msgid "object '%s' was not found"
 msgstr "Objekt '%s' nicht gefunden"
 
-#: src/main/deparse.c:1587
+#: src/main/deparse.c:1588
 msgid "badly formed function expression"
 msgstr "unbrauchbar gebildeter Funktionenausdruck"
 
@@ -4356,12 +4351,12 @@ msgstr ""
 msgid "restarting interrupted promise evaluation"
 msgstr "Neustart einer unterbrochenen promise evaluation"
 
-#: src/main/eval.c:578 src/main/eval.c:967
+#: src/main/eval.c:578 src/main/eval.c:970
 #, fuzzy, c-format
 msgid "'rho' argument cannot be C NULL: detected in C-level '%s' function"
 msgstr "erstes Argument muss entweder Umgebung oder externer Zeiger sein"
 
-#: src/main/eval.c:580 src/main/eval.c:969
+#: src/main/eval.c:580 src/main/eval.c:972
 #, fuzzy, c-format
 msgid ""
 "'rho' argument must be an environment not %s: detected in C-level '%s' "
@@ -4391,7 +4386,7 @@ msgstr ""
 msgid "vis: builtin %s\n"
 msgstr ""
 
-#: src/main/eval.c:730 src/main/eval.c:1293 src/main/eval.c:5568
+#: src/main/eval.c:730 src/main/eval.c:1296 src/main/eval.c:5568
 msgid "attempt to apply non-function"
 msgstr "Versuch eine Nicht-Funktion anzuwenden"
 
@@ -4400,56 +4395,56 @@ msgstr "Versuch eine Nicht-Funktion anzuwenden"
 msgid "%s at %s#%d: "
 msgstr "%s bei %s#%d:"
 
-#: src/main/eval.c:1069 src/main/eval.c:1177
+#: src/main/eval.c:1072 src/main/eval.c:1180
 msgid "debugging in: "
 msgstr ""
 
-#: src/main/eval.c:1128 src/main/eval.c:1231
+#: src/main/eval.c:1131 src/main/eval.c:1234
 msgid "exiting from: "
 msgstr ""
 
-#: src/main/eval.c:1285 src/main/eval.c:2285 src/main/eval.c:5131
+#: src/main/eval.c:1288 src/main/eval.c:2285 src/main/eval.c:5131
 #, c-format
 msgid "argument %d is empty"
 msgstr "Argument %d ist leer"
 
-#: src/main/eval.c:1286
+#: src/main/eval.c:1289
 #, fuzzy
 msgid "something weird happened"
 msgstr "nichts anzuhängen an"
 
-#: src/main/eval.c:1337
+#: src/main/eval.c:1340
 #, c-format
 msgid "could not find symbol \"%s\" in environment of the generic function"
 msgstr "konnte Symbol \"%s\" nicht in Umgebung der generischen Funktion finden"
 
-#: src/main/eval.c:1354
+#: src/main/eval.c:1357
 #, fuzzy, c-format
 msgid "symbol \"%s\" is not in environment of method"
 msgstr "symbol \"%s\" nicht in Umgebung der Methode"
 
-#: src/main/eval.c:1466
+#: src/main/eval.c:1469
 msgid "the condition has length > 1 and only the first element will be used"
 msgstr "Bedingung hat Länge > 1 und nur das erste Element wird benutzt"
 
-#: src/main/eval.c:1485
+#: src/main/eval.c:1488
 msgid "missing value where TRUE/FALSE needed"
 msgstr "Fehlender Wert, wo TRUE/FALSE nötig ist"
 
-#: src/main/eval.c:1486
+#: src/main/eval.c:1489
 msgid "argument is not interpretable as logical"
 msgstr "Argument kann nicht als logischer Wert interpretiert werden"
 
-#: src/main/eval.c:1487 src/main/seq.c:161
+#: src/main/eval.c:1490 src/main/seq.c:161
 #, fuzzy
 msgid "argument is of length 0"
 msgstr "Argument der Länge 0"
 
-#: src/main/eval.c:1586
+#: src/main/eval.c:1589
 msgid "non-symbol loop variable"
 msgstr "nicht-symbolische Schleifenvariable"
 
-#: src/main/eval.c:1678 src/main/eval.c:5335
+#: src/main/eval.c:1680 src/main/eval.c:5335
 #, fuzzy
 msgid "invalid 'for()' loop sequence"
 msgstr "unbrauchbare Sequenz für for() Schleife"
@@ -6493,45 +6488,45 @@ msgstr[0] ""
 msgstr[1] ""
 " [ erreichte getOption(\"max.print\") -- letzte Zeile ausgelassen ]\n"
 
-#: src/main/print.c:151
+#: src/main/print.c:150
 msgid "invalid row labels"
 msgstr "ungültige Bezeichnungen für die Zeilen"
 
-#: src/main/print.c:153
+#: src/main/print.c:152
 msgid "invalid column labels"
 msgstr "ungültige Bezeichnungen für die Spalten"
 
-#: src/main/print.c:177
+#: src/main/print.c:176
 msgid "non-function argument to .Internal(print.function(.))"
 msgstr "Argument für .Internal(print.function(.)) ist keine Funktion"
 
-#: src/main/print.c:199 src/main/print.c:820
+#: src/main/print.c:198 src/main/print.c:819
 #, c-format
 msgid "<bytecode: %p>\n"
 msgstr ""
 
-#: src/main/print.c:258
+#: src/main/print.c:257
 #, fuzzy, c-format
 msgid "'%s' argument must be non-negative integer"
 msgstr "'length.out' muss eine nicht-negative Zahl sein"
 
-#: src/main/print.c:283
+#: src/main/print.c:282
 msgid "invalid 'tryS4' internal argument"
 msgstr "ungültiges internes Argument für 'tryS4'"
 
-#: src/main/print.c:296 src/main/print.c:906 src/main/print.c:987
+#: src/main/print.c:295 src/main/print.c:905 src/main/print.c:986
 msgid "missing methods namespace: this should not happen"
 msgstr ""
 
-#: src/main/print.c:301 src/main/print.c:911 src/main/print.c:992
+#: src/main/print.c:300 src/main/print.c:910 src/main/print.c:991
 msgid "missing 'show()' in methods namespace: this should not happen"
 msgstr ""
 
-#: src/main/print.c:393
+#: src/main/print.c:392
 msgid "[truncated]"
 msgstr ""
 
-#: src/main/print.c:488 src/main/printvector.c:209 src/main/printvector.c:353
+#: src/main/print.c:487 src/main/printvector.c:209 src/main/printvector.c:353
 #, fuzzy, c-format
 msgid " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]"
 msgid_plural " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]"
@@ -6540,72 +6535,77 @@ msgstr[0] ""
 msgstr[1] ""
 " [ erreichte getOption(\"max.print\") -- letzte Zeile ausgelassen ]\n"
 
-#: src/main/print.c:509
+#: src/main/print.c:508
 #, c-format
 msgid "An object of class \"%s\"\n"
 msgstr ""
 
-#: src/main/print.c:516
+#: src/main/print.c:515
 msgid "named list()\n"
 msgstr ""
 
-#: src/main/print.c:708
+#: src/main/print.c:707
 msgid "<S4 object without a class>\n"
 msgstr ""
 
-#: src/main/print.c:710
+#: src/main/print.c:709
 #, fuzzy, c-format
 msgid "<Object of type '%s' with S4 bit but without a class>\n"
 msgstr "Objekt des Typs '%s' ist nicht indizierbar"
 
-#: src/main/print.c:715
+#: src/main/print.c:714
 #, c-format
 msgid "<S4 object of class \"%s\">\n"
 msgstr ""
 
-#: src/main/print.c:718
+#: src/main/print.c:717
 #, c-format
 msgid "<S4 object of class \"%s\" from package '%s'>\n"
 msgstr ""
 
-#: src/main/print.c:756
+#: src/main/print.c:755
 #, fuzzy, c-format
 msgid "<promise: %p>\n"
 msgstr "unbrauchbare Umgebung"
 
-#: src/main/print.c:817
+#: src/main/print.c:816
 #, c-format
 msgid "<pointer: %p>\n"
 msgstr ""
 
-#: src/main/print.c:823
+#: src/main/print.c:822
 #, fuzzy
 msgid "<weak reference>\n"
 msgstr "keine schwache Referenz"
 
-#: src/main/print.c:829
+#: src/main/print.c:828
 msgid "<S4 Type Object>\n"
 msgstr ""
 
-#: src/main/print.c:854
+#: src/main/print.c:853
 #, fuzzy
 msgid "print buffer overflow"
 msgstr "Überlauf des Eingabebuffers in Zeile %d"
 
-#: src/main/print.c:887
+#: src/main/print.c:886
 #, c-format
 msgid "Slot \"%s\":"
 msgstr ""
 
-#: src/main/print.c:1046 src/main/print.c:1064 src/main/print.c:1083
+#: src/main/print.c:1045 src/main/print.c:1063 src/main/print.c:1082
 #, fuzzy, c-format
 msgid "invalid character length in '%s' function"
 msgstr "ungültige Charakterlänge in intpr"
 
-#: src/main/print.c:1093
+#: src/main/print.c:1092
 #, fuzzy
 msgid "memory allocation error in 'realpr'"
 msgstr "Speicherallokationsfehler in realpr"
+
+#: src/main/print.c:1108
+#, c-format
+msgid "BLAS/LAPACK routine '%6s' gave error code %d"
+msgstr "BLAS/LAPACK-Routine '%6s' gab Fehlercode %d"
 
 #: src/main/printutils.c:152 src/main/printutils.c:154
 #: src/main/printutils.c:156 src/main/printutils.c:158
@@ -6662,7 +6662,7 @@ msgstr ""
 msgid "Internal error: range = %d; isorted cannot handle range > %d"
 msgstr "interner Fehler in do_random1"
 
-#: src/main/radixsort.c:398 src/main/radixsort.c:414 src/main/radixsort.c:1185
+#: src/main/radixsort.c:398 src/main/radixsort.c:414 src/main/radixsort.c:1149
 #, c-format
 msgid ""
 "Failed to allocate working memory for '%s' variable. Requested %d * %d byte"
@@ -6724,113 +6724,108 @@ msgstr ""
 msgid "Character encoding must be UTF-8, Latin-1 or bytes"
 msgstr ""
 
-#: src/main/radixsort.c:1004
-#, fuzzy
-msgid "Unable to normalize character encodings"
-msgstr "'fmt' ist kein Charakter-Vektor"
-
-#: src/main/radixsort.c:1090
+#: src/main/radixsort.c:1054
 #, c-format
 msgid ""
 "Logical error. counts[0]=%d in cradix but should have been decremented to 0. "
 "radix=%d"
 msgstr ""
 
-#: src/main/radixsort.c:1124
+#: src/main/radixsort.c:1088
 #, c-format
 msgid ""
 "Internal error. 'ustr' variable isn't empty when starting 'cgroup()' "
 "function: ustr_n=%d, ustr_alloc=%d"
 msgstr ""
 
-#: src/main/radixsort.c:1149
+#: src/main/radixsort.c:1113
 #, fuzzy, c-format
 msgid "Unable to reallocate %d * %d bytes in 'cgroup()' function"
 msgstr "kann nicht genug Speicher zuteilen (in GEregister)"
 
-#: src/main/radixsort.c:1228
+#: src/main/radixsort.c:1192
 msgid ""
 "Internal error. 'otmp' variable in 'csort()' function contains all NA values"
 msgstr ""
 
-#: src/main/radixsort.c:1276
+#: src/main/radixsort.c:1240
 #, fuzzy, c-format
 msgid "Failed to reallocate '%s' variable. Requested %d * %d byte"
 msgid_plural "Failed to reallocate '%s' variable. Requested %d * %d bytes"
 msgstr[0] "Allokationsfehler in R_tmpnam2"
 msgstr[1] "Allokationsfehler in R_tmpnam2"
 
-#: src/main/radixsort.c:1301 src/main/radixsort.c:1309
+#: src/main/radixsort.c:1265 src/main/radixsort.c:1273
 #, fuzzy, c-format
 msgid "Failed to allocate '%s' variable"
 msgstr "Allokationsfehler in R_tmpnam2"
 
-#: src/main/radixsort.c:1530
+#: src/main/radixsort.c:1495
 #, c-format
 msgid ""
 "Internal error: 'isort()' function received n=%d. 'isorted()' function "
 "should have dealt with this (e.g. as a reverse sorted vector) already"
 msgstr ""
 
-#: src/main/radixsort.c:1553
+#: src/main/radixsort.c:1518
 msgid ""
 "Internal error: 'isort()' passed all-NA. isorted should have caught this "
 "before this point"
 msgstr ""
 
-#: src/main/radixsort.c:1580
+#: src/main/radixsort.c:1546
 #, c-format
 msgid ""
 "Internal error: 'dsort()' received n=%d. dsorted should have dealt with this "
 "(e.g. as a reverse sorted vector) already"
 msgstr ""
 
-#: src/main/radixsort.c:1604
+#: src/main/radixsort.c:1570
 msgid "radix sort assumes sizeof(int) == 4"
 msgstr ""
 
-#: src/main/radixsort.c:1607
+#: src/main/radixsort.c:1573
 msgid "radix sort assumes sizeof(double) == 8"
 msgstr ""
 
-#: src/main/radixsort.c:1637 src/main/sort.c:1258
+#: src/main/radixsort.c:1603 src/main/sort.c:1258
 #, c-format
 msgid "argument %d is not a vector"
 msgstr "Argument %d ist kein Vektor"
 
-#: src/main/radixsort.c:1640 src/main/sort.c:1260
+#: src/main/radixsort.c:1606 src/main/sort.c:1260
 msgid "argument lengths differ"
 msgstr "Länge der Argumente unterschiedlich"
 
-#: src/main/radixsort.c:1644
+#: src/main/radixsort.c:1610
 msgid "length(decreasing) must match the number of order arguments"
 msgstr ""
 
-#: src/main/radixsort.c:1647
+#: src/main/radixsort.c:1613
 #, fuzzy
 msgid "'decreasing' elements must be TRUE or FALSE"
 msgstr "'decreasing' muss TRUE oder FALSE sein"
 
-#: src/main/radixsort.c:1656
+#: src/main/radixsort.c:1622
 #, fuzzy
 msgid "long vectors are not supported"
 msgstr "Typ '%s' wird nicht unterstützt"
 
-#: src/main/radixsort.c:1743 src/main/radixsort.c:1836
+#: src/main/radixsort.c:1707 src/main/radixsort.c:1800
 msgid "Internal error: previous default should have caught unsupported type"
 msgstr ""
 
-#: src/main/radixsort.c:1756 src/main/radixsort.c:1761
+#: src/main/radixsort.c:1720 src/main/radixsort.c:1725
 #, fuzzy, c-format
 msgid "Couldn't allocate '%s' variable in forder, requested %d * %d bytes."
 msgstr "Allokationsfehler in R_tmpnam2"
 
-#: src/main/radixsort.c:1800
+#: src/main/radixsort.c:1764
 #, fuzzy, c-format
 msgid "Arg %d is type '%s', not yet supported"
 msgstr "Typ '%s' wird nicht unterstützt"
 
-#: src/main/radixsort.c:1907
+#: src/main/radixsort.c:1871
 #, c-format
 msgid "Internal error: at the end of forder sortStr==FALSE but ustr_n!=0 [%d]"
 msgstr ""
@@ -10152,6 +10147,10 @@ msgstr "X11 Modul kann nicht geladen werden"
 #: src/unix/X11.c:145 src/unix/X11.c:151 src/unix/X11.c:157 src/unix/X11.c:163
 msgid "X11 is not available"
 msgstr "X11 nicht verfügbar"
+
+#, fuzzy
+#~ msgid "Unable to normalize character encodings"
+#~ msgstr "'fmt' ist kein Charakter-Vektor"
 
 #, fuzzy
 #~ msgid "'%s' function assumes %s"

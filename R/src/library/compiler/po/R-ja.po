@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-14 21:11\n"
+"POT-Creation-Date: 2016-02-01 21:16\n"
 "PO-Revision-Date: 2015-01-17 14:58+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -196,6 +196,16 @@ msgstr " 引数の欠損は許されません "
 msgid "more than one default provided in 'switch()' call"
 msgstr " スイッチ呼び出しの中で, デフォルト選択肢が２つ以上あります "
 
+#. R/cmp.R: stop("namespace found within global environments")
+#: R/cmp.R:0
+msgid "namespace found within global environments"
+msgstr ""
+
+#. R/cmp.R: stop("namespace found within local environments")
+#: R/cmp.R:0
+msgid "namespace found within local environments"
+msgstr ""
+
 #. R/cmp.R: gettextf("no offset recorded for label \"%s\"", lbl)
 #: R/cmp.R:0
 msgid "no offset recorded for label \"%s\""
@@ -215,6 +225,14 @@ msgstr " グローバル変数 '%s' の明示されたバインディングが�
 #: R/cmp.R:0
 msgid "no visible global function definition for '%s'"
 msgstr " グローバル関数 '%s' の明示された定義が見つかりません "
+
+#. R/cmp.R: stop("non-namespace found within namespace environments")
+#: R/cmp.R:0
+#, fuzzy
+msgid "non-namespace found within namespace environments"
+msgstr ""
+" 'ns' はネームスペースか, あるいは環境をインポートしたネームスペースでなけれ"
+"ばなりません "
 
 #. R/cmp.R: gettextf("possible error in '%s': %s", deparse(call, 20)[1], msg)
 #: R/cmp.R:0

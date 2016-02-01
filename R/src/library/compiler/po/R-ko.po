@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-14 21:11\n"
+"POT-Creation-Date: 2016-02-01 21:16\n"
 "PO-Revision-Date: 2015-01-17 14:59+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team:  <gnustats@gmail.com>\n"
@@ -202,6 +202,16 @@ msgstr "인수들의 누락은 허용되지 않습니다"
 msgid "more than one default provided in 'switch()' call"
 msgstr "스위치 호출에서 1개 이상의 기본값이 제공됩니다"
 
+#. R/cmp.R: stop("namespace found within global environments")
+#: R/cmp.R:0
+msgid "namespace found within global environments"
+msgstr ""
+
+#. R/cmp.R: stop("namespace found within local environments")
+#: R/cmp.R:0
+msgid "namespace found within local environments"
+msgstr ""
+
 #. R/cmp.R: gettextf("no offset recorded for label \"%s\"", lbl)
 #: R/cmp.R:0
 msgid "no offset recorded for label \"%s\""
@@ -221,6 +231,13 @@ msgstr "전역 변수 '%s'에 대한 바인딩을 찾을 수 없습니다"
 #: R/cmp.R:0
 msgid "no visible global function definition for '%s'"
 msgstr "'%s'에 대하여 전역적 함수정의를 찾을 수 없습니다"
+
+#. R/cmp.R: stop("non-namespace found within namespace environments")
+#: R/cmp.R:0
+#, fuzzy
+msgid "non-namespace found within namespace environments"
+msgstr ""
+"'ns'는 반드시 네임스페이스 또는 환경을  불러오는 네임스페이스이어야 합니다"
 
 #. R/cmp.R: gettextf("possible error in '%s': %s", deparse(call, 20)[1], msg)
 #: R/cmp.R:0

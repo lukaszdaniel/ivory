@@ -6,7 +6,6 @@ src/appl/maxcol.c
 src/appl/optim.c
 src/appl/pretty.c
 src/appl/uncmin.c
-src/extra/blas/xerbla.c
 src/extra/graphapp/clipboard.c
 src/extra/graphapp/context.c
 src/extra/graphapp/dialogs.c

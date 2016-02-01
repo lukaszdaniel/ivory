@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.3.0\n"
-"POT-Creation-Date: 2016-01-10 18:05\n"
+"POT-Creation-Date: 2016-02-01 21:16\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1853,6 +1853,8 @@ msgstr ""
 #: R/proj.R: 0
 #: R/proj.R: 0
 #: R/proj.R: 0
+#. R/dummy.coef.R: gettext("(Intercept)", domain = "R-stats")
+#. R/dummy.coef.R: gettext("(Intercept)", domain = "R-stats")
 #. R/dummy.coef.R: gettext("(Intercept)", domain = "R-stats")
 #. R/dummy.coef.R: gettext("(Intercept)", domain = "R-stats")
 #. R/dummy.coef.R: gettext("(Intercept)", domain = "R-stats")
@@ -6205,6 +6207,14 @@ msgstr ""
 #. R/reshape.R: gettextf("multiple rows match for %s=%s: first taken", timevar, times[i])
 
 msgid "multiple rows match for %s=%s: first taken"
+msgstr ""
+
+
+#: R/dummy.coef.R: 0
+#. R/dummy.coef.R: stop("multivariate case with missing coefficients is not yet implemented")
+#. R/dummy.coef.R: stop("multivariate case with missing coefficients is not yet implemented")
+
+msgid "multivariate case with missing coefficients is not yet implemented"
 msgstr ""
 
 
