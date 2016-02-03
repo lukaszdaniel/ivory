@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-27 18:05\n"
+"POT-Creation-Date: 2016-02-03 18:32\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -2214,6 +2214,11 @@ msgstr "niepoprawne '(to - from)/by' w funkcji 'seq(.)'"
 #: R/dates.R:0
 msgid "invalid 'by' string"
 msgstr "błędny łańcuch 'by'"
+
+#. R/serialize.R: gettextf("invalid 'compress' argument: %s", compress, domain = "R-base")
+#: R/serialize.R:0
+msgid "invalid 'compress' argument: %s"
+msgstr "niepoprawny argument 'compress': %s"
 
 #. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
 #. R/dataframe.R: stop("invalid 'dimnames' given for data frame")

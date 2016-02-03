@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-01 22:04+0100\n"
+"POT-Creation-Date: 2016-02-03 18:32+0100\n"
 "PO-Revision-Date: 2012-02-26 14:21+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: R-core <R-core@R-project.org> \n"
@@ -594,11 +594,11 @@ msgstr " '%s'の表示に問題があります "
 #: src/main/builtin.c:119 src/main/builtin.c:150 src/main/builtin.c:561
 #: src/main/builtin.c:577 src/main/builtin.c:764 src/main/builtin.c:766
 #: src/main/builtin.c:768 src/main/character.c:239 src/main/character.c:242
-#: src/main/character.c:247 src/main/character.c:756 src/main/character.c:759
-#: src/main/character.c:1255 src/main/character.c:1259
-#: src/main/character.c:1262 src/main/character.c:1494
-#: src/main/character.c:1498 src/main/character.c:1559
-#: src/main/character.c:1562 src/main/coerce.c:1449 src/main/coerce.c:1498
+#: src/main/character.c:247 src/main/character.c:788 src/main/character.c:791
+#: src/main/character.c:1287 src/main/character.c:1291
+#: src/main/character.c:1294 src/main/character.c:1526
+#: src/main/character.c:1530 src/main/character.c:1591
+#: src/main/character.c:1594 src/main/coerce.c:1449 src/main/coerce.c:1498
 #: src/main/coerce.c:1933 src/main/connections.c:1204
 #: src/main/connections.c:1210 src/main/connections.c:1213
 #: src/main/connections.c:1217 src/main/connections.c:1362
@@ -1021,7 +1021,7 @@ msgid ""
 msgstr ""
 
 #: src/gnuwin32/getline/getline.c:1041 src/gnuwin32/getline/wc_history.c:142
-#: src/main/edit.c:122 src/main/eval.c:6371 src/main/eval.c:6392
+#: src/main/edit.c:122 src/main/eval.c:6369 src/main/eval.c:6390
 #: src/main/saveload.c:2071 src/unix/hpdlfcn.c:150
 #, fuzzy, c-format
 msgid "unable to open file '%s'"
@@ -1064,11 +1064,11 @@ msgstr " 添え字が許される範囲外です "
 msgid "object of type '%s' is not subsettable"
 msgstr " '%s' 型のオブジェクトは部分代入可能ではありません "
 
-#: src/include/Rdefines.h:117
+#: src/include/Rdefines.h:124
 msgid "the 'value' of a list object is not defined"
 msgstr ""
 
-#: src/include/Rdefines.h:118
+#: src/include/Rdefines.h:125
 msgid "the 'value' of a raw object is not defined"
 msgstr ""
 
@@ -1076,8 +1076,8 @@ msgstr ""
 msgid "cycle detected"
 msgstr ""
 
-#: src/main/agrep.c:134 src/main/agrep.c:776 src/main/character.c:1257
-#: src/main/character.c:1261 src/main/grep.c:777 src/main/grep.c:1525
+#: src/main/agrep.c:134 src/main/agrep.c:776 src/main/character.c:1289
+#: src/main/character.c:1293 src/main/grep.c:777 src/main/grep.c:1525
 #: src/main/grep.c:1529 src/main/grep.c:2342 src/main/grep.c:2649
 #, c-format
 msgid "argument '%s' has length > 1 and only the first element will be used"
@@ -1131,8 +1131,8 @@ msgstr " 入力文字列 y[%d] はこのロケールでは不適切です "
 msgid "'%s' argument must be a vector"
 msgstr " 最初の引数はベクトルでなくてはなりません "
 
-#: src/main/apply.c:101 src/main/array.c:513 src/main/character.c:815
-#: src/main/character.c:1622 src/main/connections.c:3546
+#: src/main/apply.c:101 src/main/array.c:513 src/main/character.c:847
+#: src/main/character.c:1654 src/main/connections.c:3546
 #: src/main/context.c:629 src/main/context.c:648 src/main/datetime.c:682
 #: src/main/datetime.c:784 src/main/datetime.c:1048 src/main/dotcode.c:220
 #: src/main/errors.c:943 src/main/errors.c:975 src/main/errors.c:1081
@@ -1777,7 +1777,7 @@ msgstr " 指定されたベクトルのサイズが長すぎます "
 #: src/main/envir.c:2141 src/main/envir.c:2860 src/main/envir.c:2946
 #: src/main/envir.c:3251 src/main/envir.c:3280 src/main/envir.c:3301
 #: src/main/envir.c:3324 src/main/envir.c:3358 src/main/envir.c:3378
-#: src/main/envir.c:3699 src/main/envir.c:3704 src/main/eval.c:6284
+#: src/main/envir.c:3699 src/main/envir.c:3704 src/main/eval.c:6282
 #: src/main/objects.c:192 src/main/objects.c:200 src/main/saveload.c:2065
 #: src/main/saveload.c:2356 src/main/serialize.c:2756
 msgid "use of NULL environment is defunct"
@@ -1861,14 +1861,14 @@ msgid "cannot set length of non-vector"
 msgstr " ベクトルでないものの長さは設定できません "
 
 #: src/main/builtin.c:924 src/main/builtin.c:934 src/main/builtin.c:936
-#: src/main/character.c:493 src/main/coerce.c:2823
+#: src/main/character.c:525 src/main/coerce.c:2823
 msgid "invalid value"
 msgstr " 値が不正です "
 
 #: src/main/builtin.c:967 src/main/coerce.c:2534 src/main/coerce.c:2577
 #: src/main/eval.c:615 src/main/eval.c:734 src/main/eval.c:2280
 #: src/main/eval.c:2360 src/main/eval.c:2421 src/main/eval.c:2759
-#: src/main/eval.c:5619 src/main/eval.c:5736
+#: src/main/eval.c:5617 src/main/eval.c:5734
 msgid "'...' used in an incorrect context"
 msgstr " '...' が不適切な文脈で使われました "
 
@@ -1882,7 +1882,7 @@ msgstr " 重複する switch 既定値: '%s' と '%s' "
 msgid "'%s' argument is missing"
 msgstr " 引数 %d が空です "
 
-#: src/main/builtin.c:1026 src/main/eval.c:6091
+#: src/main/builtin.c:1026 src/main/eval.c:6089
 #, fuzzy, c-format
 msgid "'%s' argument must be a vector of length 1"
 msgstr " 'hostname' は長さ1の文字列ベクトルでなくてはなりません "
@@ -1898,7 +1898,7 @@ msgstr ""
 msgid "empty alternative in numeric switch"
 msgstr ""
 
-#: src/main/builtin.c:1085 src/main/eval.c:6103 src/main/eval.c:6131
+#: src/main/builtin.c:1085 src/main/eval.c:6101 src/main/eval.c:6129
 #, fuzzy
 msgid "'switch()' with no alternatives"
 msgstr " 名前付きの代替値が無い switch() 関数には数値の EXPR が必要です "
@@ -1936,66 +1936,67 @@ msgstr " \"bytes\"でエンコードされた要素 %d の幅が計算できま�
 msgid "extracting substrings from a non-character object"
 msgstr " 文字列でないオブジェクトから部分文字列を抽出しようとしました "
 
-#: src/main/character.c:321 src/main/character.c:490
+#: src/main/character.c:321 src/main/character.c:522
 #, fuzzy
 msgid "invalid substring arguments"
 msgstr " 部分文字列引数が不正です "
 
-#: src/main/character.c:392
+#: src/main/character.c:361
 #, fuzzy
 msgid "non-character object(s)"
 msgstr " 名前が文字列ではありません "
 
-#: src/main/character.c:485
+#: src/main/character.c:517
 msgid "replacing substrings in a non-character object"
 msgstr " 文字列でないオブジェクトの部分文字列の置き換えです "
 
-#: src/main/character.c:753
+#: src/main/character.c:785
 msgid "the first argument must be a character vector"
 msgstr " 最初の引数は文字列ベクトルでなくてはなりません "
 
-#: src/main/character.c:790
+#: src/main/character.c:822
 msgid "abbreviate used with non-ASCII chars"
 msgstr " ASCII 文字でないものが省略名として使われました "
 
-#: src/main/character.c:811
+#: src/main/character.c:843
 msgid "non-character names"
 msgstr " 名前が文字列ではありません "
 
-#: src/main/character.c:873 src/main/character.c:970 src/main/character.c:1382
+#: src/main/character.c:905 src/main/character.c:1002
+#: src/main/character.c:1414
 #, fuzzy, c-format
 msgid "invalid multibyte input string %d"
 msgstr " マルチバイト文字列が不正です "
 
-#: src/main/character.c:916 src/main/grep.c:158
+#: src/main/character.c:948 src/main/grep.c:158
 msgid "non-character argument"
 msgstr " 文字列でない引数です "
 
-#: src/main/character.c:1025
+#: src/main/character.c:1057
 #, c-format
 msgid "decreasing range specification ('%lc-%lc')"
 msgstr " 範囲指定を縮小します ('%lc-%lc')  "
 
-#: src/main/character.c:1110
+#: src/main/character.c:1142
 #, c-format
 msgid "decreasing range specification ('%c-%c')"
 msgstr " 範囲指定を縮小します ('%c-%c')  "
 
-#: src/main/character.c:1297 src/main/character.c:1316
+#: src/main/character.c:1329 src/main/character.c:1348
 #, fuzzy, c-format
 msgid "invalid UTF-8 string '%s'"
 msgstr " 'old' は不正なUTF-8文字です "
 
-#: src/main/character.c:1303 src/main/character.c:1322 src/main/plotmath.c:981
+#: src/main/character.c:1335 src/main/character.c:1354 src/main/plotmath.c:981
 #, fuzzy, c-format
 msgid "invalid multibyte string '%s'"
 msgstr " %sに不正なマルチバイト文字があります "
 
-#: src/main/character.c:1350 src/main/character.c:1439
+#: src/main/character.c:1382 src/main/character.c:1471
 msgid "'old' is longer than 'new'"
 msgstr " 'old' が 'new' より長いです "
 
-#: src/main/character.c:1489
+#: src/main/character.c:1521
 #, fuzzy
 msgid "'strtrim()' function  requires a character vector"
 msgstr " strtrim 関数は文字ベクトルを要求します "
@@ -2053,7 +2054,7 @@ msgstr ""
 msgid "list argument expected"
 msgstr " リスト引数が期待されています "
 
-#: src/main/coerce.c:1535 src/main/eval.c:6288
+#: src/main/coerce.c:1535 src/main/eval.c:6286
 msgid "invalid environment"
 msgstr " 不正な環境です "
 
@@ -4300,7 +4301,7 @@ msgstr " Rprof: プロファイル・ファイル '%s' を開くことができ�
 msgid "unable to create profiling thread"
 msgstr " pixmap を作れません "
 
-#: src/main/eval.c:433 src/main/eval.c:6568
+#: src/main/eval.c:433 src/main/eval.c:6566
 msgid "setting profile timer failed"
 msgstr " プロファイルタイマーの設定に失敗しました "
 
@@ -4351,8 +4352,8 @@ msgstr ""
 " 評価があまりに深く入れ子になっています。無限の再帰か "
 "options(expressions=)？ "
 
-#: src/main/eval.c:671 src/main/eval.c:5512 src/main/eval.c:5528
-#: src/main/eval.c:5546 src/main/eval.c:5698
+#: src/main/eval.c:671 src/main/eval.c:5510 src/main/eval.c:5526
+#: src/main/eval.c:5544 src/main/eval.c:5696
 msgid "trace: "
 msgstr ""
 
@@ -4366,7 +4367,7 @@ msgstr ""
 msgid "vis: builtin %s\n"
 msgstr ""
 
-#: src/main/eval.c:730 src/main/eval.c:1296 src/main/eval.c:5568
+#: src/main/eval.c:730 src/main/eval.c:1296 src/main/eval.c:5566
 msgid "attempt to apply non-function"
 msgstr " 関数でないものを適用しようとしました "
 
@@ -4501,7 +4502,7 @@ msgstr " メソッド (\"%s\", \"%s\") は \"%s\" に対しては矛盾してい
 msgid "dispatch error in group dispatch"
 msgstr " グループディスパッチにディスパッチエラーがあります "
 
-#: src/main/eval.c:3545 src/main/eval.c:5670 src/main/seq.c:919
+#: src/main/eval.c:3545 src/main/eval.c:5668 src/main/seq.c:919
 #, fuzzy, c-format
 msgid "'%s' is not a '%s' function"
 msgstr " \"%s\" は %s 関数ではありません "
@@ -4550,119 +4551,119 @@ msgstr " バイトコードのバージョンが不一致です "
 msgid "invalid sequence argument in 'for()' loop"
 msgstr " for ループの範囲引数が不正です "
 
-#: src/main/eval.c:5542
+#: src/main/eval.c:5540
 #, c-format
 msgid "Possibly overriden builtin: %s\n"
 msgstr ""
 
-#: src/main/eval.c:5558 src/main/names.c:1313
+#: src/main/eval.c:5556 src/main/names.c:1313
 #, fuzzy, c-format
 msgid "there is no '.Internal' function '%s'"
 msgstr " 内部関数 \"%s\" がありません "
 
-#: src/main/eval.c:5657 src/main/eval.c:6003 src/main/eval.c:6043
+#: src/main/eval.c:5655 src/main/eval.c:6001 src/main/eval.c:6041
 msgid "bad function"
 msgstr " 不正な関数です "
 
-#: src/main/eval.c:6094
+#: src/main/eval.c:6092
 #, c-format
 msgid ""
 "'EXPR' is an object of class \"factor\", treated as integer.\n"
 " Consider using '%s' instead."
 msgstr ""
 
-#: src/main/eval.c:6100 src/main/eval.c:6125
+#: src/main/eval.c:6098 src/main/eval.c:6123
 #, fuzzy
 msgid "bad numeric 'switch()' offsets"
 msgstr " 不正な数値スィッチオフセットです "
 
-#: src/main/eval.c:6106
+#: src/main/eval.c:6104
 #, fuzzy
 msgid "numeric 'EXPR' required for 'switch()' without named alternatives"
 msgstr " 名前付きの代替値が無い switch() 関数には数値の EXPR が必要です "
 
-#: src/main/eval.c:6109
+#: src/main/eval.c:6107
 #, fuzzy
 msgid "bad character 'switch()' offsets"
 msgstr " 不正なな文字スィッチオフセットです "
 
-#: src/main/eval.c:6111
+#: src/main/eval.c:6109
 #, fuzzy
 msgid "bad 'switch()' names"
 msgstr " 不正なスィッチ名です "
 
-#: src/main/eval.c:6205
+#: src/main/eval.c:6203
 #, fuzzy
 msgid "unknown instruction code"
 msgstr " 未知の入力書式です "
 
-#: src/main/eval.c:6221
+#: src/main/eval.c:6219
 msgid "cannot find index for threaded code address"
 msgstr ""
 " スレッデッド・コード・アドレス（threaded code address）のインデックスを見つ"
 "けることができません "
 
-#: src/main/eval.c:6281
+#: src/main/eval.c:6279
 msgid "invalid body"
 msgstr " 本体(body)が不正です "
 
-#: src/main/eval.c:6301
+#: src/main/eval.c:6299
 msgid "invalid symbol"
 msgstr " シンボル記号が不正です "
 
-#: src/main/eval.c:6345
+#: src/main/eval.c:6343
 #, fuzzy
 msgid "'code' argument is not a byte code object"
 msgstr " 引数がバイトコードオブジェクトではありません "
 
-#: src/main/eval.c:6367
+#: src/main/eval.c:6365
 msgid "bad file name"
 msgstr " 不正なファイル名です "
 
-#: src/main/eval.c:6386
+#: src/main/eval.c:6384
 #, fuzzy, c-format
 msgid "'%s' argument must be non-empty character string"
 msgstr " 'pattern' は空でない文字列でなければなりません "
 
-#: src/main/eval.c:6388 src/main/saveload.c:1943 src/main/saveload.c:2238
+#: src/main/eval.c:6386 src/main/saveload.c:1943 src/main/saveload.c:2238
 #: src/main/serialize.c:2190 src/modules/lapack/Lapack.c:1237
 #, fuzzy, c-format
 msgid "'%s' argument must be logical"
 msgstr " 'ascii' は論理値でなければなりません "
 
-#: src/main/eval.c:6418 src/main/eval.c:6425
+#: src/main/eval.c:6416 src/main/eval.c:6423
 #, fuzzy
 msgid "'R_CompiledFileName()': buffer is too small"
 msgstr " R_CompiledFileName: バッファが小さすぎます "
 
-#: src/main/eval.c:6459 src/main/eval.c:6478 src/main/eval.c:6508
+#: src/main/eval.c:6457 src/main/eval.c:6476 src/main/eval.c:6506
 msgid "constant buffer must be a generic vector"
 msgstr " 定数値バッファーは総称的なベクトルでなければなりません "
 
-#: src/main/eval.c:6482
+#: src/main/eval.c:6480
 #, fuzzy, c-format
 msgid "bad '%s' value"
 msgstr " '%s' の値が不正です "
 
-#: src/main/eval.c:6510
+#: src/main/eval.c:6508
 msgid "bad constant count"
 msgstr " 不正な定数値カウントです "
 
-#: src/main/eval.c:6548
+#: src/main/eval.c:6546
 #, fuzzy
 msgid "profile timer is in use"
 msgstr " プロファイルタイマーは使用中です "
 
-#: src/main/eval.c:6550
+#: src/main/eval.c:6548
 msgid "already byte code profiling"
 msgstr " 既にバイトコードは分析されています "
 
-#: src/main/eval.c:6586
+#: src/main/eval.c:6584
 #, fuzzy
 msgid "no byte code profiling"
 msgstr " バイトコードのプロファイリングではありません "
 
-#: src/main/eval.c:6602 src/main/eval.c:6606 src/main/eval.c:6610
+#: src/main/eval.c:6600 src/main/eval.c:6604 src/main/eval.c:6608
 #, fuzzy
 msgid "byte code profiling is not supported in this build"
 msgstr " このビルドではICUはサポートされていません "

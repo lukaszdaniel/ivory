@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-01 22:04+0100\n"
+"POT-Creation-Date: 2016-02-03 18:32+0100\n"
 "PO-Revision-Date: 2015-01-17 13:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -594,11 +594,11 @@ msgstr "在显示'%s'时出了问题"
 #: src/main/builtin.c:119 src/main/builtin.c:150 src/main/builtin.c:561
 #: src/main/builtin.c:577 src/main/builtin.c:764 src/main/builtin.c:766
 #: src/main/builtin.c:768 src/main/character.c:239 src/main/character.c:242
-#: src/main/character.c:247 src/main/character.c:756 src/main/character.c:759
-#: src/main/character.c:1255 src/main/character.c:1259
-#: src/main/character.c:1262 src/main/character.c:1494
-#: src/main/character.c:1498 src/main/character.c:1559
-#: src/main/character.c:1562 src/main/coerce.c:1449 src/main/coerce.c:1498
+#: src/main/character.c:247 src/main/character.c:788 src/main/character.c:791
+#: src/main/character.c:1287 src/main/character.c:1291
+#: src/main/character.c:1294 src/main/character.c:1526
+#: src/main/character.c:1530 src/main/character.c:1591
+#: src/main/character.c:1594 src/main/coerce.c:1449 src/main/coerce.c:1498
 #: src/main/coerce.c:1933 src/main/connections.c:1204
 #: src/main/connections.c:1210 src/main/connections.c:1213
 #: src/main/connections.c:1217 src/main/connections.c:1362
@@ -1018,7 +1018,7 @@ msgid ""
 msgstr ""
 
 #: src/gnuwin32/getline/getline.c:1041 src/gnuwin32/getline/wc_history.c:142
-#: src/main/edit.c:122 src/main/eval.c:6371 src/main/eval.c:6392
+#: src/main/edit.c:122 src/main/eval.c:6369 src/main/eval.c:6390
 #: src/main/saveload.c:2071 src/unix/hpdlfcn.c:150
 #, fuzzy, c-format
 msgid "unable to open file '%s'"
@@ -1061,11 +1061,11 @@ msgstr "下标出界"
 msgid "object of type '%s' is not subsettable"
 msgstr "类别为'%s'的对象不可以取子集"
 
-#: src/include/Rdefines.h:117
+#: src/include/Rdefines.h:124
 msgid "the 'value' of a list object is not defined"
 msgstr ""
 
-#: src/include/Rdefines.h:118
+#: src/include/Rdefines.h:125
 msgid "the 'value' of a raw object is not defined"
 msgstr ""
 
@@ -1073,8 +1073,8 @@ msgstr ""
 msgid "cycle detected"
 msgstr ""
 
-#: src/main/agrep.c:134 src/main/agrep.c:776 src/main/character.c:1257
-#: src/main/character.c:1261 src/main/grep.c:777 src/main/grep.c:1525
+#: src/main/agrep.c:134 src/main/agrep.c:776 src/main/character.c:1289
+#: src/main/character.c:1293 src/main/grep.c:777 src/main/grep.c:1525
 #: src/main/grep.c:1529 src/main/grep.c:2342 src/main/grep.c:2649
 #, c-format
 msgid "argument '%s' has length > 1 and only the first element will be used"
@@ -1128,8 +1128,8 @@ msgstr "输入的字符串y[%d]不适用于此语言环境"
 msgid "'%s' argument must be a vector"
 msgstr "第一参数必需是矢量"
 
-#: src/main/apply.c:101 src/main/array.c:513 src/main/character.c:815
-#: src/main/character.c:1622 src/main/connections.c:3546
+#: src/main/apply.c:101 src/main/array.c:513 src/main/character.c:847
+#: src/main/character.c:1654 src/main/connections.c:3546
 #: src/main/context.c:629 src/main/context.c:648 src/main/datetime.c:682
 #: src/main/datetime.c:784 src/main/datetime.c:1048 src/main/dotcode.c:220
 #: src/main/errors.c:943 src/main/errors.c:975 src/main/errors.c:1081
@@ -1760,7 +1760,7 @@ msgstr "矢量size设得太大了"
 #: src/main/envir.c:2141 src/main/envir.c:2860 src/main/envir.c:2946
 #: src/main/envir.c:3251 src/main/envir.c:3280 src/main/envir.c:3301
 #: src/main/envir.c:3324 src/main/envir.c:3358 src/main/envir.c:3378
-#: src/main/envir.c:3699 src/main/envir.c:3704 src/main/eval.c:6284
+#: src/main/envir.c:3699 src/main/envir.c:3704 src/main/eval.c:6282
 #: src/main/objects.c:192 src/main/objects.c:200 src/main/saveload.c:2065
 #: src/main/saveload.c:2356 src/main/serialize.c:2756
 msgid "use of NULL environment is defunct"
@@ -1844,14 +1844,14 @@ msgid "cannot set length of non-vector"
 msgstr "不能设非矢量的长度"
 
 #: src/main/builtin.c:924 src/main/builtin.c:934 src/main/builtin.c:936
-#: src/main/character.c:493 src/main/coerce.c:2823
+#: src/main/character.c:525 src/main/coerce.c:2823
 msgid "invalid value"
 msgstr "值不对"
 
 #: src/main/builtin.c:967 src/main/coerce.c:2534 src/main/coerce.c:2577
 #: src/main/eval.c:615 src/main/eval.c:734 src/main/eval.c:2280
 #: src/main/eval.c:2360 src/main/eval.c:2421 src/main/eval.c:2759
-#: src/main/eval.c:5619 src/main/eval.c:5736
+#: src/main/eval.c:5617 src/main/eval.c:5734
 msgid "'...' used in an incorrect context"
 msgstr "'...'用在的上下文不对"
 
@@ -1865,7 +1865,7 @@ msgstr "重复开关默认值：'%s'和'%s'"
 msgid "'%s' argument is missing"
 msgstr "%d元素是空的"
 
-#: src/main/builtin.c:1026 src/main/eval.c:6091
+#: src/main/builtin.c:1026 src/main/eval.c:6089
 #, fuzzy, c-format
 msgid "'%s' argument must be a vector of length 1"
 msgstr "'hostname'必需是长度为一的字符矢量"
@@ -1881,7 +1881,7 @@ msgstr ""
 msgid "empty alternative in numeric switch"
 msgstr ""
 
-#: src/main/builtin.c:1085 src/main/eval.c:6103 src/main/eval.c:6131
+#: src/main/builtin.c:1085 src/main/eval.c:6101 src/main/eval.c:6129
 #, fuzzy
 msgid "'switch()' with no alternatives"
 msgstr "没有名字替代的开关需要数值EXPR"
@@ -1918,66 +1918,67 @@ msgstr "\"bytes\"编码里无法为％%d元素计算长度"
 msgid "extracting substrings from a non-character object"
 msgstr "无法从非字符对象里抽取子字串"
 
-#: src/main/character.c:321 src/main/character.c:490
+#: src/main/character.c:321 src/main/character.c:522
 #, fuzzy
 msgid "invalid substring arguments"
 msgstr "子字符串参数不对"
 
-#: src/main/character.c:392
+#: src/main/character.c:361
 #, fuzzy
 msgid "non-character object(s)"
 msgstr "不能有非字符名字"
 
-#: src/main/character.c:485
+#: src/main/character.c:517
 msgid "replacing substrings in a non-character object"
 msgstr "无法在非字符的对象里替换子字串"
 
-#: src/main/character.c:753
+#: src/main/character.c:785
 msgid "the first argument must be a character vector"
 msgstr "第一参数必需是字符矢量"
 
-#: src/main/character.c:790
+#: src/main/character.c:822
 msgid "abbreviate used with non-ASCII chars"
 msgstr "abbreviate不适用于非ASCII字元"
 
-#: src/main/character.c:811
+#: src/main/character.c:843
 msgid "non-character names"
 msgstr "不能有非字符名字"
 
-#: src/main/character.c:873 src/main/character.c:970 src/main/character.c:1382
+#: src/main/character.c:905 src/main/character.c:1002
+#: src/main/character.c:1414
 #, fuzzy, c-format
 msgid "invalid multibyte input string %d"
 msgstr "多字节输入字符串不对"
 
-#: src/main/character.c:916 src/main/grep.c:158
+#: src/main/character.c:948 src/main/grep.c:158
 msgid "non-character argument"
 msgstr "非字符参数"
 
-#: src/main/character.c:1025
+#: src/main/character.c:1057
 #, c-format
 msgid "decreasing range specification ('%lc-%lc')"
 msgstr "不能设定递减的范围('%lc-%lc')"
 
-#: src/main/character.c:1110
+#: src/main/character.c:1142
 #, c-format
 msgid "decreasing range specification ('%c-%c')"
 msgstr "不能设定递减的范围('%c-%c')"
 
-#: src/main/character.c:1297 src/main/character.c:1316
+#: src/main/character.c:1329 src/main/character.c:1348
 #, fuzzy, c-format
 msgid "invalid UTF-8 string '%s'"
 msgstr "UTF-8字符串'old'有错"
 
-#: src/main/character.c:1303 src/main/character.c:1322 src/main/plotmath.c:981
+#: src/main/character.c:1335 src/main/character.c:1354 src/main/plotmath.c:981
 #, fuzzy, c-format
 msgid "invalid multibyte string '%s'"
 msgstr "'%s'多字节字符串有错"
 
-#: src/main/character.c:1350 src/main/character.c:1439
+#: src/main/character.c:1382 src/main/character.c:1471
 msgid "'old' is longer than 'new'"
 msgstr "'old'比'new'要长"
 
-#: src/main/character.c:1489
+#: src/main/character.c:1521
 #, fuzzy
 msgid "'strtrim()' function  requires a character vector"
 msgstr "strtrim()需要字符矢量"
@@ -2035,7 +2036,7 @@ msgstr ""
 msgid "list argument expected"
 msgstr "需要串列参数"
 
-#: src/main/coerce.c:1535 src/main/eval.c:6288
+#: src/main/coerce.c:1535 src/main/eval.c:6286
 msgid "invalid environment"
 msgstr "环境不对"
 
@@ -4247,7 +4248,7 @@ msgstr "Rprof: 无法打开程序概要分析文件'%s'"
 msgid "unable to create profiling thread"
 msgstr "无法建立像映"
 
-#: src/main/eval.c:433 src/main/eval.c:6568
+#: src/main/eval.c:433 src/main/eval.c:6566
 msgid "setting profile timer failed"
 msgstr "程序概要分析计时器设制失败"
 
@@ -4294,8 +4295,8 @@ msgid ""
 "evaluation is nested too deeply: infinite recursion / options(expressions=)?"
 msgstr "评估嵌套太深：无穷递归/ options(expressions=)?"
 
-#: src/main/eval.c:671 src/main/eval.c:5512 src/main/eval.c:5528
-#: src/main/eval.c:5546 src/main/eval.c:5698
+#: src/main/eval.c:671 src/main/eval.c:5510 src/main/eval.c:5526
+#: src/main/eval.c:5544 src/main/eval.c:5696
 msgid "trace: "
 msgstr ""
 
@@ -4309,7 +4310,7 @@ msgstr ""
 msgid "vis: builtin %s\n"
 msgstr ""
 
-#: src/main/eval.c:730 src/main/eval.c:1296 src/main/eval.c:5568
+#: src/main/eval.c:730 src/main/eval.c:1296 src/main/eval.c:5566
 msgid "attempt to apply non-function"
 msgstr "不适用于非函数"
 
@@ -4443,7 +4444,7 @@ msgstr "不可兼容的方法(\"%s\", \"%s\")和\"%s\""
 msgid "dispatch error in group dispatch"
 msgstr "组分派错误"
 
-#: src/main/eval.c:3545 src/main/eval.c:5670 src/main/seq.c:919
+#: src/main/eval.c:3545 src/main/eval.c:5668 src/main/seq.c:919
 #, fuzzy, c-format
 msgid "'%s' is not a '%s' function"
 msgstr "\"%s\"不是%s函数"
@@ -4492,117 +4493,117 @@ msgstr "位元組碼版本不配"
 msgid "invalid sequence argument in 'for()' loop"
 msgstr "循环里的顺序参数不对"
 
-#: src/main/eval.c:5542
+#: src/main/eval.c:5540
 #, c-format
 msgid "Possibly overriden builtin: %s\n"
 msgstr ""
 
-#: src/main/eval.c:5558 src/main/names.c:1313
+#: src/main/eval.c:5556 src/main/names.c:1313
 #, fuzzy, c-format
 msgid "there is no '.Internal' function '%s'"
 msgstr "没有\"%s\"这个内部函数"
 
-#: src/main/eval.c:5657 src/main/eval.c:6003 src/main/eval.c:6043
+#: src/main/eval.c:5655 src/main/eval.c:6001 src/main/eval.c:6041
 msgid "bad function"
 msgstr "函数不对"
 
-#: src/main/eval.c:6094
+#: src/main/eval.c:6092
 #, c-format
 msgid ""
 "'EXPR' is an object of class \"factor\", treated as integer.\n"
 " Consider using '%s' instead."
 msgstr ""
 
-#: src/main/eval.c:6100 src/main/eval.c:6125
+#: src/main/eval.c:6098 src/main/eval.c:6123
 #, fuzzy
 msgid "bad numeric 'switch()' offsets"
 msgstr "数字开关偏移设定不对"
 
-#: src/main/eval.c:6106
+#: src/main/eval.c:6104
 #, fuzzy
 msgid "numeric 'EXPR' required for 'switch()' without named alternatives"
 msgstr "没有名字替代的开关需要数值EXPR"
 
-#: src/main/eval.c:6109
+#: src/main/eval.c:6107
 #, fuzzy
 msgid "bad character 'switch()' offsets"
 msgstr "字符开关偏移不对"
 
-#: src/main/eval.c:6111
+#: src/main/eval.c:6109
 #, fuzzy
 msgid "bad 'switch()' names"
 msgstr "开关名字不对"
 
-#: src/main/eval.c:6205
+#: src/main/eval.c:6203
 #, fuzzy
 msgid "unknown instruction code"
 msgstr "没有这种输入格式"
 
-#: src/main/eval.c:6221
+#: src/main/eval.c:6219
 msgid "cannot find index for threaded code address"
 msgstr "找不到线程代码地址的索引"
 
-#: src/main/eval.c:6281
+#: src/main/eval.c:6279
 msgid "invalid body"
 msgstr "函数体不对"
 
-#: src/main/eval.c:6301
+#: src/main/eval.c:6299
 msgid "invalid symbol"
 msgstr "符号不对"
 
-#: src/main/eval.c:6345
+#: src/main/eval.c:6343
 #, fuzzy
 msgid "'code' argument is not a byte code object"
 msgstr "参数不是位元组码对象"
 
-#: src/main/eval.c:6367
+#: src/main/eval.c:6365
 msgid "bad file name"
 msgstr "文件名字不对"
 
-#: src/main/eval.c:6386
+#: src/main/eval.c:6384
 #, fuzzy, c-format
 msgid "'%s' argument must be non-empty character string"
 msgstr "'pattern'必需为非空字符串"
 
-#: src/main/eval.c:6388 src/main/saveload.c:1943 src/main/saveload.c:2238
+#: src/main/eval.c:6386 src/main/saveload.c:1943 src/main/saveload.c:2238
 #: src/main/serialize.c:2190 src/modules/lapack/Lapack.c:1237
 #, fuzzy, c-format
 msgid "'%s' argument must be logical"
 msgstr "'ascii’必需是逻辑值"
 
-#: src/main/eval.c:6418 src/main/eval.c:6425
+#: src/main/eval.c:6416 src/main/eval.c:6423
 #, fuzzy
 msgid "'R_CompiledFileName()': buffer is too small"
 msgstr "R_CompiledFileName: 缓冲区太小"
 
-#: src/main/eval.c:6459 src/main/eval.c:6478 src/main/eval.c:6508
+#: src/main/eval.c:6457 src/main/eval.c:6476 src/main/eval.c:6506
 msgid "constant buffer must be a generic vector"
 msgstr "常量缓冲区必须是矢量类属"
 
-#: src/main/eval.c:6482
+#: src/main/eval.c:6480
 #, fuzzy, c-format
 msgid "bad '%s' value"
 msgstr "'%s'值不对"
 
-#: src/main/eval.c:6510
+#: src/main/eval.c:6508
 msgid "bad constant count"
 msgstr "常量数目不对"
 
-#: src/main/eval.c:6548
+#: src/main/eval.c:6546
 #, fuzzy
 msgid "profile timer is in use"
 msgstr "程序概要分析计时器在运行中"
 
-#: src/main/eval.c:6550
+#: src/main/eval.c:6548
 msgid "already byte code profiling"
 msgstr "已经在进行位元组码程序概要分析"
 
-#: src/main/eval.c:6586
+#: src/main/eval.c:6584
 #, fuzzy
 msgid "no byte code profiling"
 msgstr "非位元组码程序概要分析"
 
-#: src/main/eval.c:6602 src/main/eval.c:6606 src/main/eval.c:6610
+#: src/main/eval.c:6600 src/main/eval.c:6604 src/main/eval.c:6608
 #, fuzzy
 msgid "byte code profiling is not supported in this build"
 msgstr "本平台不支持ICU"

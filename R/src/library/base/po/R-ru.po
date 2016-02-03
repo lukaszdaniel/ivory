@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-27 18:05\n"
+"POT-Creation-Date: 2016-02-03 18:32\n"
 "PO-Revision-Date: 2015-01-17 13:32+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -2352,6 +2352,12 @@ msgstr "неправильный (to - from)/by в seq(.)"
 msgid "invalid 'by' string"
 msgstr "неправильная строка 'by'"
 
+#. R/serialize.R: gettextf("invalid 'compress' argument: %s", compress, domain = "R-base")
+#: R/serialize.R:0
+#, fuzzy
+msgid "invalid 'compress' argument: %s"
+msgstr "неправильный аргумент 'name'"
+
 #. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
 #. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
 #: R/dataframe.R:0
@@ -4041,9 +4047,6 @@ msgstr[2] "T использовано вместо TRUE"
 #, fuzzy
 #~ msgid "'%s' must be of length 1"
 #~ msgstr "'to' должен быть длиной 1"
-
-#~ msgid "invalid 'name' argument"
-#~ msgstr "неправильный аргумент 'name'"
 
 #, fuzzy
 #~ msgid "binary + is not defined for \"Date\" objects"

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: R 2.16.0\n"
+"Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2016-02-01 21:16\n"
 "PO-Revision-Date: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 1.8.4\n"
 
 #. R/cmp.R: gettextf("%s is not a registered math1 function", sQuote(name))
@@ -195,12 +195,12 @@ msgstr "więcej niż jedna wartość domyślna dostarczona w wywołaniu 'switch(
 #. R/cmp.R: stop("namespace found within global environments")
 #: R/cmp.R:0
 msgid "namespace found within global environments"
-msgstr ""
+msgstr "przestrzeń nazw znaleziona wewnątrz globalnych środowisk"
 
 #. R/cmp.R: stop("namespace found within local environments")
 #: R/cmp.R:0
 msgid "namespace found within local environments"
-msgstr ""
+msgstr "przestrzeń nazw znaleziona wewnątrz lokalnych środowisk"
 
 #. R/cmp.R: gettextf("no offset recorded for label \"%s\"", lbl)
 #: R/cmp.R:0
@@ -224,10 +224,9 @@ msgstr "brak widocznej globalnej definicji funkcji dla '%s'"
 
 #. R/cmp.R: stop("non-namespace found within namespace environments")
 #: R/cmp.R:0
-#, fuzzy
 msgid "non-namespace found within namespace environments"
 msgstr ""
-"'ns' musi być przestrzenią nazw lub przestrzenią nazw importującą środowisko"
+"obiekt inny niż przestrzeń nazw znaleziona w środowiskach przestrzeni nazw"
 
 #. R/cmp.R: gettextf("possible error in '%s': %s", deparse(call, 20)[1], msg)
 #: R/cmp.R:0

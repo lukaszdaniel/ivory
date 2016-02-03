@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: R 3.3.0\n"
+"Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-02-01 21:16\n"
 "PO-Revision-Date: \n"
@@ -13,8 +13,8 @@ msgstr ""
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.8.4\n"
 "X-Poedit-Bookmarks: -1,20,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #. R/mlm.R: stop("\"mlm\" objects with weights are not supported")
@@ -4602,6 +4602,8 @@ msgstr "wielokrotne dopasowania wierszy dla %s=%s: wzięto pierwszy"
 #: R/dummy.coef.R:0
 msgid "multivariate case with missing coefficients is not yet implemented"
 msgstr ""
+"wielowymiarowy przypadek z brakującymi współczynnikami nie jest jeszcze "
+"zaimplementowany"
 
 #. R/symnum.R: stop("must have 2 'symbols' for logical 'x' argument")
 #: R/symnum.R:0

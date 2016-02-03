@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-27 18:05\n"
+"POT-Creation-Date: 2016-02-03 18:32\n"
 "PO-Revision-Date: 2012-02-26 14:09+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -2358,6 +2358,12 @@ msgstr " seq(.) 中の (to - from)/by が不正です "
 msgid "invalid 'by' string"
 msgstr " 無効な文字列 'by' です "
 
+#. R/serialize.R: gettextf("invalid 'compress' argument: %s", compress, domain = "R-base")
+#: R/serialize.R:0
+#, fuzzy
+msgid "invalid 'compress' argument: %s"
+msgstr " 無効な 'name' 引数です "
+
 #. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
 #. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
 #: R/dataframe.R:0
@@ -3999,9 +4005,6 @@ msgstr[0] " TRUE の代わりに T が使われました "
 #, fuzzy
 #~ msgid "'%s' must be of length 1"
 #~ msgstr " 'to' は長さ 1 でなければなりません "
-
-#~ msgid "invalid 'name' argument"
-#~ msgstr " 無効な 'name' 引数です "
 
 #, fuzzy
 #~ msgid "binary + is not defined for \"Date\" objects"

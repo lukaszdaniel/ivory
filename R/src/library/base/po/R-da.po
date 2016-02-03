@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-27 18:05\n"
+"POT-Creation-Date: 2016-02-03 18:32\n"
 "PO-Revision-Date: 2016-01-09 18:48+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -2291,6 +2291,12 @@ msgstr "entalsmatrix i 'chol2inv'"
 msgid "invalid 'by' string"
 msgstr "ugyldig 'by'-streng"
 
+#. R/serialize.R: gettextf("invalid 'compress' argument: %s", compress, domain = "R-base")
+#: R/serialize.R:0
+#, fuzzy
+msgid "invalid 'compress' argument: %s"
+msgstr "ugyldigt 'name'-argument"
+
 #. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
 #. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
 #: R/dataframe.R:0
@@ -3813,9 +3819,6 @@ msgstr[1] ""
 #, fuzzy
 #~ msgid "'%s' must be of length 1"
 #~ msgstr "'to' skal være af længde 1"
-
-#~ msgid "invalid 'name' argument"
-#~ msgstr "ugyldigt 'name'-argument"
 
 #, fuzzy
 #~ msgid "binary + is not defined for \"Date\" objects"

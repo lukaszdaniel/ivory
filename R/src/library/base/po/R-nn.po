@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-27 18:05\n"
+"POT-Creation-Date: 2016-02-03 18:32\n"
 "PO-Revision-Date: 2012-09-28 22:18+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -2345,6 +2345,12 @@ msgstr "ugyldig (to - from)/by i seq(.)"
 msgid "invalid 'by' string"
 msgstr "ugyldig «by»-verdi"
 
+#. R/serialize.R: gettextf("invalid 'compress' argument: %s", compress, domain = "R-base")
+#: R/serialize.R:0
+#, fuzzy
+msgid "invalid 'compress' argument: %s"
+msgstr "ugyldig «name»-argument"
+
 #. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
 #. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
 #: R/dataframe.R:0
@@ -3996,9 +4002,6 @@ msgstr[1] "T brukt i staden for TRUE"
 #, fuzzy
 #~ msgid "'%s' must be of length 1"
 #~ msgstr "«to» må ha lengd 1"
-
-#~ msgid "invalid 'name' argument"
-#~ msgstr "ugyldig «name»-argument"
 
 #, fuzzy
 #~ msgid "binary + is not defined for \"Date\" objects"

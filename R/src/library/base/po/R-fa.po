@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-27 18:05\n"
+"POT-Creation-Date: 2016-02-03 18:32\n"
 "PO-Revision-Date: 2016-01-14 20:01+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Persian\n"
@@ -2108,6 +2108,11 @@ msgstr ""
 #. R/dates.R: stop("invalid 'by' string")
 #: R/dates.R:0
 msgid "invalid 'by' string"
+msgstr ""
+
+#. R/serialize.R: gettextf("invalid 'compress' argument: %s", compress, domain = "R-base")
+#: R/serialize.R:0
+msgid "invalid 'compress' argument: %s"
 msgstr ""
 
 #. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
