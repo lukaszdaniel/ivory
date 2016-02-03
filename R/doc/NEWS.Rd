@@ -396,6 +396,9 @@
 
       \item Including header \file{S.h} from C++ code will fail on some
       platforms, and so gives a compilation warning on all.
+      
+      \item The deprecated header \file{Rdefines.h} is now compatible
+      with defining \code{R_NO_REMAP}.
     }
   }
 
@@ -538,6 +541,9 @@
       could segfault or recycle wrongly.  (\PR{16685})
 
       \item \code{plot.ts(<matrix>, las = 1)} now does use \code{las}.
+
+      \item \code{saveRDS(*, compress = "gzip")} now works as
+      documented.  (\PR{16653})
     }
   }
 }
