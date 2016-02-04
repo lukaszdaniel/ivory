@@ -358,6 +358,17 @@
       been 8.32 (released in Nov 2012).  Versions 8.10 to 8.31 are now
       deprecated (with warnings from \command{configure}), but for now
       still accepted.
+      
+      \item (Windows) An experimental build of R based on \command{gcc}
+      4.9.3 is now available on CRAN on the \file{bin/windows/base/rdevel.html}
+      snapshot page.  This build will require recompilation of at least those 
+      packages that include C++ code, and possibly others.  The CRAN 
+      binary packages still use the older toolchain, so package installs
+      default to \code{type = "source"}.  
+      
+      During the transition, the environment variable \env{R_COMPILED_BY} will 
+      be defined to indicate which toolchain was used to compile R (and hence, 
+      which should be used to compile code in packages).
     }
   }
 
@@ -376,6 +387,9 @@
       first argument has gained a \code{const} qualifier.
 
       Code using it will need to be reinstalled. (\PR{16470})
+
+      Similarly, entry point \code{log1pexp} also defined in
+      \file{Rmath.h} is remapped there to \code{Rf_log1pexp}
 
       \item \code{R_GE_version} has been increased to \code{11}.
 
