@@ -285,22 +285,22 @@ ldetSblock <- function(rS,rho,deriv=2,root=FALSE,nt=1) {
   r <- attr(R,"rank")
   if (r<p) R[(r+1):p,(r+1):p] <- 0 ## fix chol bug
   if (root) {
-    rp <- piv;rp[rp] <- 1:p ## reverse pivot
+    rp <- piv;rp[rp] <- seq_len(p) ## reverse pivot
     E <- t(t(R[,rp])*d)
   } 
   if (r<p) { ## rank deficiency
-    R <- R[1:r,1:r]
-    piv <- piv[1:r]
+    R <- R[seq_len(r),seq_len(r)]
+    piv <- piv[seq_len(r)]
   }
   RrS <- list();dS1 <- rep(0,m);dS2 <- matrix(0,m,m)
   ## use dlog|S|/drhoi = lam_i tr(S^{-1}S_i) = tr(R^{-T}rS[[i]]rS[[i]]R^{-1} etc...
-  for (i in 1:m) {
+  for (i in seq_len(m)) {
     RrS[[i]] <- pforwardsolve(R,rS[[i]][piv,]/d[piv],nt=nt) ## note R transposed internally - unlike forwardsolve!!
     dS1[i] <- sum(RrS[[i]]^2)*lam[i] ## dlog|S|/drhoi
     if (deriv==2) { 
       RrS[[i]] <- pcrossprod(RrS[[i]],trans=TRUE,nt=nt)
       #tcrossprod(RrS[[i]]) ## parallel
-      for (j in 1:i) {
+      for (j in seq_len(i)) {
         dS2[i,j] <- dS2[j,i] <- -sum(RrS[[i]]*RrS[[j]])*lam[i]*lam[j]
       }
       dS2[i,i] <- dS2[i,i] + dS1[i]
@@ -392,13 +392,13 @@ Sl.addS <- function(Sl,A,rho) {
 ## list from Sl.setup, so initial reparameterizations have taken place,
 ## and should have already been applied to A using Sl.initial.repara
   k <- 1
-  for (b in 1:length(Sl)) {
+  for (b in seq_len(length(Sl))) {
     ind <- (Sl[[b]]$start:Sl[[b]]$stop)[Sl[[b]]$ind] 
     if (length(Sl[[b]]$S)==1) { ## singleton
       diag(A)[ind] <-  diag(A)[ind] + exp(rho[k]) ## penalty is identity times sp
       k <- k + 1
     } else {
-      for (j in 1:length(Sl[[b]]$S)) {
+      for (j in seq_len(length(Sl[[b]]$S))) {
         A[ind,ind] <- A[ind,ind] + exp(rho[k]) * Sl[[b]]$S[[j]]
         k <- k + 1
       }
@@ -680,8 +680,8 @@ Sl.fitChol <- function(Sl,XX,f,rho,yy=0,L=NULL,rho0=0,log.phi=0,phi.fixed=TRUE,n
   r <- Rrank(R);p <- ncol(XXp)
   piv <- attr(R,"pivot") #;rp[rp] <- 1:p
   if (r<p) { ## drop rank deficient terms...
-    R <- R[1:r,1:r]
-    piv <- piv[1:r]
+    R <- R[seq_len(r),seq_len(r)]
+    piv <- piv[seq_len(r)]
   }
   beta <- rep(0,p)
   beta[piv] <- backsolve(R,(forwardsolve(t(R),f[piv]/d[piv])))/d[piv]
@@ -758,12 +758,12 @@ Sl.fit <- function(Sl,X,y,rho,fixed,log.phi=0,phi.fixed=TRUE,rss.extra=0,nobs=NU
   X <- Sl.repara(ldS$rp,X)
   ## get pivoted QR decomp of augmented model matrix (in parallel if nt>1)
   qrx <- if (nt>1) pqr2(rbind(X,ldS$E),nt=nt) else qr(rbind(X,ldS$E),LAPACK=TRUE)
-  rp <- qrx$pivot;rp[rp] <- 1:np ## reverse pivot vector
+  rp <- qrx$pivot;rp[rp] <- seq_len(np) ## reverse pivot vector
   ## find pivoted \hat beta...
   R <- qr.R(qrx)
   Qty0 <- qr.qty(qrx,c(y,rep(0,nrow(ldS$E))))
-  beta <- backsolve(R,Qty0)[1:np]
-  rss.bSb <- sum(Qty0[-(1:np)]^2) + rss.extra
+  beta <- backsolve(R,Qty0)[seq_len(np)]
+  rss.bSb <- sum(Qty0[-seq_len(np)]^2) + rss.extra
   ## get component derivatives based on IFT...
   dift <- Sl.ift(ldS$Sl,R,X,y,beta,qrx$pivot,rp)
   ## and the derivatives of log|X'X+S|...
@@ -788,7 +788,7 @@ Sl.fit <- function(Sl,X,y,rho,fixed,log.phi=0,phi.fixed=TRUE,rss.extra=0,nobs=NU
     reml1[n+1] <- (-rss.bSb/phi + nobs - Mp)/2
     #d <- c(-(dift$bSb1[!fixed]),rss.bSb)/(2*phi)
     d <- c(-(dift$rss1[!fixed] + dift$bSb1[!fixed]),rss.bSb)/(2*phi)
-    reml2 <- rbind(cbind(reml2,d[1:n]),d)
+    reml2 <- rbind(cbind(reml2,d[seq_len(n)]),d)
   } 
   ## following are de-bugging lines for testing derivatives of components...
   #list(reml=ldetXXS,reml1=dXXS$d1,reml2=dXXS$d2)
@@ -815,11 +815,11 @@ fast.REML.fit <- function(Sl,X,y,rho,L=NULL,rho.0=NULL,log.phi=0,phi.fixed=TRUE,
   if (nrow(X) > np) { ## might as well do an initial QR step
     qrx <- if (nt>1) pqr2(X,nt=nt) else qr(X,LAPACK=TRUE)
     rp <- qrx$pivot
-    rp[rp] <- 1:np
+    rp[rp] <- seq_len(np)
     X <- qr.R(qrx)[,rp]
     y <- qr.qty(qrx,y)
-    rss.extra <- rss.extra + sum(y[-(1:np)]^2)
-    y <- y[1:np]
+    rss.extra <- rss.extra + sum(y[-seq_len(np)]^2)
+    y <- y[seq_len(np)]
   }
 
   if (is.null(L)) {
@@ -934,8 +934,8 @@ ident.test <- function(X,E,nt=1) {
   Xnorm <- norm(X,type="F")
   qrx <- if (nt>1) pqr2(rbind(X/Xnorm,E),nt=nt) else qr(rbind(X/Xnorm,E),LAPACK=TRUE) ## pivoted QR
   rank <- Rrank(qr.R(qrx),tol=.Machine$double.eps^.75)
-  drop <- qrx$pivot[-(1:rank)] ## index of un-identifiable coefs
-  undrop <- 1:ncol(X) 
+  drop <- qrx$pivot[-seq_len(rank)] ## index of un-identifiable coefs
+  undrop <- seq_len(ncol(X))
   if (length(drop)>0) undrop <- undrop[-drop]
   list(drop=drop,undrop=undrop)
 } ## ident.test

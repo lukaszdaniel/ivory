@@ -608,7 +608,7 @@ bgam.fitd <- function (G, mf, gp ,scale , coef=NULL,etastart = NULL,
       repeat { ## Take a Newton step to update log sp and phi
         lsp <- lsp0 + Nstep
         if (scale<=0) log.phi <- lsp[n.sp+1] 
-        prop <- Sl.fitChol(Sl,qrx$XX,qrx$Xy,rho=lsp[1:n.sp],yy=qrx$y.norm2,L=G$L,rho0=G$lsp0,log.phi=log.phi,
+        prop <- Sl.fitChol(Sl,qrx$XX,qrx$Xy,rho=lsp[seq_len(n.sp)],yy=qrx$y.norm2,L=G$L,rho0=G$lsp0,log.phi=log.phi,
                  phi.fixed=scale>0,nobs=nobs,Mp=Mp,nt=npt,tol=dev*.Machine$double.eps^.7)
         if (max(Nstep)==0) { 
           Nstep <- prop$step;lsp0 <- lsp;
@@ -651,7 +651,7 @@ bgam.fitd <- function (G, mf, gp ,scale , coef=NULL,etastart = NULL,
     reml <- reml - (nobs-df)*log(ld)
   }
 
-  for (i in 1:ncol(prop$db)) prop$db[,i] <- ## d beta / d rho matrix
+  for (i in seq_len(ncol(prop$db))) prop$db[,i] <- ## d beta / d rho matrix
         Sl.initial.repara(Sl,as.numeric(prop$db[,i]),inverse=TRUE,both.sides=TRUE,cov=TRUE,nt=npt) 
 
   object <- list(db.drho=prop$db,
@@ -772,7 +772,7 @@ bgam.fit <- function (G, mf, chunk.size, gp ,scale ,gamma,method, coef=NULL,etas
         stub <- nt[i]%%chunk.size ## size of end block
         if (n.block>0) {
           start <- (0:(n.block-1))*chunk.size+1
-          stop <- (1:n.block)*chunk.size
+          stop <- seq_len(n.block)*chunk.size
           if (stub>0) {
             start[n.block+1] <- stop[n.block]+1
             stop[n.block+1] <- nt[i]
@@ -796,7 +796,7 @@ bgam.fit <- function (G, mf, chunk.size, gp ,scale ,gamma,method, coef=NULL,etas
       stub <- nobs%%chunk.size ## size of end block
       if (n.block>0) {
         start <- (0:(n.block-1))*chunk.size+1
-        stop <- (1:n.block)*chunk.size
+        stop <- seq_len(n.block)*chunk.size
         if (stub>0) {
           start[n.block+1] <- stop[n.block]+1
           stop[n.block+1] <- nobs
@@ -873,8 +873,8 @@ bgam.fit <- function (G, mf, chunk.size, gp ,scale ,gamma,method, coef=NULL,etas
           }         
           ## use parallel QR here if npt>1...
           qrx <- if (npt>1) pqr2(R,npt) else qr(R,tol=0,LAPACK=TRUE) 
-          f <- qr.qty(qrx,f)[1:ncol(R)]
-          rp <- qrx$pivot;rp[rp] <- 1:ncol(R) # reverse pivot
+          f <- qr.qty(qrx,f)[seq_len(ncol(R))]
+          rp <- qrx$pivot;rp[rp] <- seq_len(ncol(R)) # reverse pivot
           qrx <- list(R=qr.R(qrx)[,rp],f=f,y.norm2=y.norm2)
         }
       } 
@@ -1201,9 +1201,9 @@ ar.qr.up <- function(arg) {
        N <- arg$end[i]-arg$start[i]+1
        ## note first row implied by this transform
        ## is always dropped, unless really at beginning of data.
-       row <- c(1,rep(1:N,rep(2,N))[-c(1,2*N)])
+       row <- c(1,rep(seq_len(N),rep(2,N))[-c(1,2*N)])
        weight <- c(1,rep(c(sd,ld),N-1))
-       stop <- c(1,1:(N-1)*2+1)
+       stop <- c(1,seq_len(N-1)*2+1)
        if (!is.null(arg$mf$"(AR.start)")) { ## need to correct the start of new AR sections...
            ii <- which(arg$mf$"(AR.start)"[ind]==TRUE)
            if (length(ii)>0) {
@@ -1410,9 +1410,9 @@ bam.fit <- function(G,mf,chunk.size,gp,scale,gamma,method,rho=0,
          if (rho!=0) {
            N <- end[i]-start[i]+1
 
-           row <- c(1,rep(1:N,rep(2,N))[-c(1,2*N)])
+           row <- c(1,rep(seq_len(N),rep(2,N))[-c(1,2*N)])
            weight <- c(1,rep(c(sd,ld),N-1))
-           stop <- c(1,1:(N-1)*2+1) 
+           stop <- c(1,seq_len(N-1)*2+1) 
            if (!is.null(mf$"(AR.start)")) { ## need to correct the start of new AR sections...
              ii <- which(mf$"(AR.start)"[ind]==TRUE)
              if (length(ii)>0) {
@@ -1473,8 +1473,8 @@ bam.fit <- function(G,mf,chunk.size,gp,scale,gamma,method,rho=0,
        } else { ## proper QR         
          ## use parallel QR if npt>1...
          qrx <- if (npt>1) pqr2(R,npt) else qr(R,tol=0,LAPACK=TRUE) 
-         f <- qr.qty(qrx,f)[1:ncol(R)]
-         rp <- qrx$pivot;rp[rp] <- 1:ncol(R) # reverse pivot
+         f <- qr.qty(qrx,f)[seq_len(ncol(R))]
+         rp <- qrx$pivot;rp[rp] <- seq_len(ncol(R)) # reverse pivot
          qrx <- list(R=qr.R(qrx)[,rp],f=f,y.norm2=y.norm2)
        }
        yX.last <- res[[n.threads]]$yX.last
@@ -1484,9 +1484,9 @@ bam.fit <- function(G,mf,chunk.size,gp,scale,gamma,method,rho=0,
    
    } else { ## n <= chunk.size
      if (rho==0) qrx <- qr.update(sqrt(G$w)*G$X,sqrt(G$w)*(G$y-G$offset),use.chol=use.chol,nt=npt) else {
-       row <- c(1,rep(1:n,rep(2,n))[-c(1,2*n)])
+       row <- c(1,rep(seq_len(n),rep(2,n))[-c(1,2*n)])
        weight <- c(1,rep(c(sd,ld),n-1))
-       stop <- c(1,1:(n-1)*2+1)
+       stop <- c(1,seq_len(n-1)*2+1)
        if (!is.null(mf$"(AR.start)")) { ## need to correct the start of new AR sections...
          ii <- which(mf$"(AR.start)"==TRUE)
          if (length(ii)>0) {
@@ -1638,8 +1638,8 @@ predict.bamd <- function(object,newdata,type="link",se.fit=FALSE,terms=NULL,excl
     ## save copies of smooth info...
     smooth <- object$smooth; coef <- object$coefficients; Vp <- object$Vp
     ## remove key smooth info from object 
-    object$coefficients <-  object$coefficients[1:object$nsdf]
-    object$Vp <- object$V[1:object$nsdf,1:object$nsdf]
+    object$coefficients <-  object$coefficients[seq_len(object$nsdf)]
+    object$Vp <- object$V[seq_len(object$nsdf),seq_len(object$nsdf)]
     object$smooth <- NULL
     ## get prediction for parametric component. Always "lpmatrix", unless terms required.
     ptype <- if (type %in% c("terms","iterms")) type else "lpmatrix"
@@ -1679,7 +1679,7 @@ predict.bamd <- function(object,newdata,type="link",se.fit=FALSE,terms=NULL,excl
   for (i in seq_len(length(object$smooth))) { ## work through the smooth list
     ## first deal with any by variable (as first marginal of tensor)...
     if (object$smooth[[i]]$by!="NA") {
-      by.var <- dk$mf[[object$smooth[[i]]$by]][1:dk$nr[k]]
+      by.var <- dk$mf[[object$smooth[[i]]$by]][seq_len(dk$nr[k])]
       if (is.factor(by.var)) { 
          ## create dummy by variable...
          by.var <- as.numeric(by.var==object$smooth[[i]]$by.level)  
@@ -1729,7 +1729,7 @@ predict.bamd <- function(object,newdata,type="link",se.fit=FALSE,terms=NULL,excl
       k <- 1; ## starting Xd
       kk <- 1 ## starting col of fit for smooth terms
     }
-    for (i in 1:length(object$smooth)) {
+    for (i in seq_len(length(object$smooth))) {
       ii <- ts[k]:(ts[k]+dt[k]-1) ## index components for this term
       ind <- object$smooth[[i]]$first.para:object$smooth[[i]]$last.para ## index coefs for this term
       if (!is.null(object$dinfo$drop)) { 
@@ -1778,7 +1778,7 @@ sparse.model.matrix <- function(G,mf,chunk.size) {
   stub <- nobs%%chunk.size ## size of end block
   if (n.block>0) {
     start <- (0:(n.block-1))*chunk.size+1
-      stop <- (1:n.block)*chunk.size
+      stop <- seq_len(n.block)*chunk.size
       if (stub>0) {
         start[n.block+1] <- stop[n.block]+1
         stop[n.block+1] <- nobs
@@ -1806,15 +1806,15 @@ tero <- function(sm) {
 ## te smooth spec re-order so that largest marginal is last.
   maxd <- 0
   ns <- length(sm$margin)
-  for (i in 1:ns) if (sm$margin[[i]]$bs.dim>=maxd) {
+  for (i in seq_len(ns)) if (sm$margin[[i]]$bs.dim>=maxd) {
     maxi <- i;maxd <- sm$margin[[i]]$bs.dim
   }
   if (maxi<ns) { ## re-ordering required
-    ind <- 1:ns;ind[maxi] <- ns;ind[ns] <- maxi
+    ind <- seq_len(ns);ind[maxi] <- ns;ind[ns] <- maxi
     sm$margin <- sm$margin[ind]
     sm$fix <- sm$fix[ind]
     sm$term <- rep("",0)
-    for (i in 1:ns) sm$term <- c(sm$term,sm$margin[[i]]$term)
+    for (i in seq_len(ns)) sm$term <- c(sm$term,sm$margin[[i]]$term)
     sm$label <- paste0(substr(sm$label,1,3),paste0(sm$term,collapse=","),")",collapse="")
   }
   sm
@@ -1895,7 +1895,7 @@ bam <- function(formula,family=gaussian(),data=list(),weights=NULL,subset=NULL,n
       ## re-order the tensor terms for maximum efficiency, and 
       ## signal that "re"/"fs" terms should be constructed with marginals
       ## also for efficiency
-      if (length(gp$smooth.spec)>0) for (i in 1:length(gp$smooth.spec)) { 
+      if (length(gp$smooth.spec)>0) for (i in seq_len(length(gp$smooth.spec))) { 
         if (inherits(gp$smooth.spec[[i]],"tensor.smooth.spec")) 
         gp$smooth.spec[[i]] <- tero(gp$smooth.spec[[i]])
         if (inherits(gp$smooth.spec[[i]],c("re.smooth.spec","fs.smooth.spec"))&&gp$smooth.spec[[i]]$dim>1) {
@@ -2001,12 +2001,12 @@ bam <- function(formula,family=gaussian(),data=list(),weights=NULL,subset=NULL,n
         kb <- k <- 1; qc <- dt <- ts <- rep(0,length(G$smooth))
       }
       drop <- rep(0,0) ## index of te related columns to drop
-      for (i in 1:length(G$smooth)) {
+      for (i in seq_len(length(G$smooth))) {
         ts[kb] <- k
         ## first deal with any by variable (as first marginal of tensor)...
         if (G$smooth[[i]]$by!="NA") {
           dt[kb] <- 1
-          by.var <- dk$mf[[G$smooth[[i]]$by]][1:dk$nr[k]]
+          by.var <- dk$mf[[G$smooth[[i]]$by]][seq_len(dk$nr[k])]
           if (is.factor(by.var)) { 
             ## create dummy by variable...
             by.var <- as.numeric(by.var==G$smooth[[i]]$by.level)  
@@ -2030,7 +2030,7 @@ bam <- function(formula,family=gaussian(),data=list(),weights=NULL,subset=NULL,n
             #G$kd[,rind] <- G$kd[,k+G$smooth[[i]]$rind-1]
           }       
           for (j in seq_len(nmar)) {
-            G$Xd[[k]] <- G$smooth[[i]]$margin[[j]]$X[1:dk$nr[k],,drop=FALSE]
+            G$Xd[[k]] <- G$smooth[[i]]$margin[[j]]$X[seq_len(dk$nr[k]),,drop=FALSE]
             k <- k + 1 
           }
           ## deal with any side constraints on tensor terms  
@@ -2152,7 +2152,7 @@ bam <- function(formula,family=gaussian(),data=list(),weights=NULL,subset=NULL,n
     if (rho!=0) warning("AR1 parameter rho unused with generalized model")
     coef <- NULL
     if (samfrac<1 && samfrac>0) { ## sub-sample first to get close to right answer...
-      ind <- sample(1:nrow(mf),ceiling(nrow(mf)*samfrac))
+      ind <- sample(seq_len(nrow(mf)),ceiling(nrow(mf)*samfrac))
       if (length(ind)<2*ncol(G$X)) warning("value of 'samfrac' argument is too small - ignored") else {
         Gw <- G$w;Goffset <- G$offset
         G$w <- G$w[ind];G$offset <- G$offset[ind]
@@ -2205,7 +2205,7 @@ bam <- function(formula,family=gaussian(),data=list(),weights=NULL,subset=NULL,n
   object$model <- mf;rm(mf);if (gc.level>0) gc()
   object$na.action <- attr(object$model,"na.action") # how to deal with NA's
   object$nsdf <- G$nsdf
-  if (G$nsdf>0) names(object$coefficients)[1:G$nsdf] <- colnamesX[1:G$nsdf]
+  if (G$nsdf>0) names(object$coefficients)[seq_len(G$nsdf)] <- colnamesX[seq_len(G$nsdf)]
   object$offset <- G$offset
   object$prior.weights <- G$w
   object$pterms <- G$pterms
@@ -2325,9 +2325,9 @@ bam.update <- function(b,data,chunk.size=10000) {
     m <- nrow(wX)
     b$yX.last <- c(wy[m],wX[m,])
 
-    row <- c(1,rep(1:m,rep(2,m))[-c(1,2*m)])
+    row <- c(1,rep(seq_len(m),rep(2,m))[-c(1,2*m)])
     weight <- c(1,rep(c(sd,ld),m-1))
-    stop <- c(1,1:(m-1)*2+1)
+    stop <- c(1,seq_len(m-1)*2+1)
     if (!is.null(mf$"(AR.start)")) { ## need to correct the start of new AR sections...
          ii <- which(mf$"(AR.start)"==TRUE)
          if (length(ii)>0) {

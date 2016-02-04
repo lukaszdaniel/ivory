@@ -259,7 +259,7 @@ ocat <- function(theta=NULL,link="identity",R=NULL) {
       Da1 <-  2 * a1/f #! - B/A 
       ## now transform to derivatives w.r.t. theta...
       oo$Dmu2th <- oo$Dmuth <- oo$Dth <- matrix(0,n,R-2)
-      for (k in 1:(R-2)) { 
+      for (k in seq_len(R-2)) { 
         etk <- exp(theta[k])
         ind <- y == k+1
         oo$Dth[ind,k] <- Da1[ind]*etk
@@ -308,7 +308,7 @@ ocat <- function(theta=NULL,link="identity",R=NULL) {
       oo$Dmu3th <- matrix(0,n,R-2)
       oo$Dmu2th2 <- oo$Dmuth2 <- oo$Dth2 <- matrix(0,n,n2d)
       i <- 0
-      for (j in 1:(R-2)) for (k in j:(R-2)) { 
+      for (j in seq_len(R-2)) for (k in j:(R-2)) { 
         i <- i + 1 ## the second deriv col
         ind <- y >= j ## rest are zero
         ar1.k <- ar.k <- rep(exp(theta[k]),n)
@@ -406,7 +406,7 @@ ocat <- function(theta=NULL,link="identity",R=NULL) {
     n <- length(y)
     Dth <- matrix(0,n,R-2)
     Dth2 <- matrix(0,n,n2d)
-    for (j in 1:(R-2)) for (k in j:(R-2)) { 
+    for (j in seq_len(R-2)) for (k in j:(R-2)) { 
       i <- i + 1 ## the second deriv col
       ind <- y >= j ## rest are zero
       ar1.k <- ar.k <- rep(exp(theta[k]),n)
@@ -425,7 +425,7 @@ ocat <- function(theta=NULL,link="identity",R=NULL) {
     lsth2=colSums(Dth2)
     if (R>2) {
       ls2 <- matrix(0,R-2,R-2);ii <- 0
-      for (i in 1:(R-2)) for (j in i:(R-2)) { 
+      for (i in seq_len(R-2)) for (j in i:(R-2)) { 
         ii <- ii + 1 
         ls2[i,j] <- ls2[j,i] <- lsth2[ii]
       } 
@@ -441,7 +441,7 @@ ocat <- function(theta=NULL,link="identity",R=NULL) {
     ocat.ini <- function(R,y) {
     ## initialize theta from raw counts in each category
       if (R<3) return
-      y <- c(1:R,y) ## make sure there is *something* in each class
+      y <- c(seq_len(R),y) ## make sure there is *something* in each class
       p <- cumsum(tabulate(y[is.finite(y)])/length(y[is.finite(y)]))
       eta <- if (p[1]==0) 5 else -1 - log(p[1]/(1-p[1])) ## mean of latent
       theta <- rep(-1,R-1) 
@@ -487,7 +487,7 @@ ocat <- function(theta=NULL,link="identity",R=NULL) {
          alpha[ind] <- alpha[2] + cumsum(exp(theta))
        } 
        fv <- mu*NA
-       for (i in 1:(R+1)) {
+       for (i in seq_len(R+1)) {
          ind <- mu>alpha[i] & mu<=alpha[i+1]
          fv[ind] <- i
        } 
@@ -519,7 +519,7 @@ ocat <- function(theta=NULL,link="identity",R=NULL) {
       R <- length(theta) 
       dp <- prob <- matrix(0,length(lp),R+2)
       prob[,R+2] <- 1
-      for (i in 1:R) {
+      for (i in seq_len(R)) {
         x <- theta[i] - lp
         ind <- x > 0
         prob[ind,i+1] <- 1/(1+exp(-x[ind]))
@@ -548,7 +548,7 @@ ocat <- function(theta=NULL,link="identity",R=NULL) {
       alpha <- rep(0,R) ## the thresholds
       alpha[1] <- -Inf;alpha[R] <- Inf
       fv <- eta*NA
-      for (i in 1:(R+1)) {
+      for (i in seq_len(R+1)) {
         ind <- eta>alpha[i] & eta<=alpha[i+1]
         fv[ind] <- i
       } 
@@ -571,7 +571,7 @@ ocat <- function(theta=NULL,link="identity",R=NULL) {
     y <- u <- runif(length(mu))
     u <- mu + log(u/(1-u)) 
     ## and allocate categories according to u and cut points...
-    for (i in 1:R) {
+    for (i in seq_len(R)) {
       y[u > alpha[i]&u <= alpha[i+1]] <- i
     }
     y
@@ -1066,7 +1066,7 @@ betar <- function (theta = NULL, link = "logit",eps=.Machine$double.eps*100) {
       eta[y<=eps*1.2] <- eps *1.2
       eta[y>=1-eps*1.2] <- 1-eps*1.2
       eta <- log((eta-a)/(b-eta)) 
-      mu <- LS <- ii <- 1:length(y)
+      mu <- LS <- ii <- seq_len(length(y))
       for (i in 1:200) {
         ls <- gbh(y,eta,theta,TRUE,a=eps/10)
         conv <- abs(ls$g)<mean(abs(ls$l)+.1)*1e-8
