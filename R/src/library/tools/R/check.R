@@ -1406,7 +1406,7 @@ setRlibs <-
                 paste("options(warn=1)\n",
                       sprintf("tools:::.check_code_usage_in_package(package = \"%s\")\n", pkgname))
             if(config_val_to_logical(Sys.getenv("_R_CHECK_CODE_USAGE_WITH_ONLY_BASE_ATTACHED_",
-                                                "false"))) {
+                                                "true"))) {
                 out3 <-  R_runR2(Rcmd, "R_DEFAULT_PACKAGES=NULL")
                 if(length(pos <-
                           grep("^Undefined global functions or variables:",
@@ -1418,8 +1418,8 @@ setRlibs <-
                     miss <- R_runR2(Rcmd, "R_DEFAULT_PACKAGES=")
                     if(length(miss)) {
                         out3 <- c(out3,
-                                  c(if(length(grep("^importFrom\\(\"methods\"", miss))) gettextf("Consider adding %s to your NAMESPACE (and ensure that your DESCRIPTION Imports field contains 'methods').", paste0("  ", miss), domain = "R-tools")
-				    else gettextf("Consider adding %s to your NAMESPACE.", paste0("  ", miss), domain = "R-tools")))
+                                  c(if(length(grep("^importFrom\\(\"methods\"", miss))) gettextf("Consider adding %s to your NAMESPACE file (and ensure that your DESCRIPTION Imports field contains 'methods').", paste0("  ", miss), domain = "R-tools")
+				    else gettextf("Consider adding %s to your NAMESPACE file.", paste0("  ", miss), domain = "R-tools")))
                     }
                 }
             } else
@@ -2904,7 +2904,8 @@ setRlibs <-
                 ## testing what R CMD build uses.
                 Rcmd <- sprintf("options(warn=1)\nlibrary(tools)\nbuildVignettes(dir = '%s')", file.path(pkgoutdir, "vign_test", pkgname0))
                 t1 <- proc.time()
-                outfile <- tempfile()
+#                outfile <- tempfile()
+                outfile <- file.path(pkgoutdir, "build_vignettes.log")
                 status <- R_runR(Rcmd, R_opts2, jitstr, stdout = outfile, stderr = outfile)
                 t2 <- proc.time()
                 out <- readLines(outfile, warn = FALSE)
@@ -2931,6 +2932,8 @@ setRlibs <-
                     ## clean up
                     if (config_val_to_logical(Sys.getenv("_R_CHECK_CLEAN_VIGN_TEST_", "true")))
                         unlink(vd2, recursive = TRUE)
+                    if (!config_val_to_logical(Sys.getenv("_R_CHECK_ALWAYS_LOG_VIGNETTE_OUTPUT_", "false")))
+                            unlink(outfile)
                     print_time(t1, t2, Log)
                     resultLog(Log, gettext("OK", domain = "R-tools"))
                 }

@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-01-31 r575) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-02-04 r587) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-01-31 r70053) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-02-04 r70105) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -453,7 +453,7 @@ List of 8 components
 > .p1 <- proc.time()
 > dCH <- diana(swiss.x)
 > cat('Time elapsed: ', proc.time() - .p1,'\n')
-Time elapsed:  0 0 0 0 0 
+Time elapsed:  0 0 0.001 0 0 
 > str(as.dendrogram(as.hclust(dCH)))# keep back-compatible
 --[dendrogram with 2 branches and 47 members, at height 127]
   |--[dendrogram with 2 branches and 31 members, at height 99.2]
@@ -551,4 +551,4 @@ Time elapsed:  0 0 0 0 0
 > 
 > proc.time()
    user  system elapsed 
-  0.232   0.044   0.269 
+  0.192   0.040   0.226 
