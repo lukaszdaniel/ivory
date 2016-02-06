@@ -57,13 +57,13 @@ unconstrain <- function(object,beta) {
         cnst <- sum(beta*qrc[-1])
         if (qrc[1]==1) beta <- c(0,beta) else 
         if (qrc[1]==length(beta)+1) beta <- c(beta,0) else
-        beta <- c(beta[1:(qrc[1]-1)],0,beta[qrc[1]:length(beta)])
+        beta <- c(beta[seq_len(qrc[1]-1)],0,beta[qrc[1]:length(beta)])
         attr(beta,"constant") <- cnst
       } else if (qrc>0) { ## simple set to zero constraint
         ##X <- X[,-qrc] 
         if (qrc==1) beta <- c(0,beta) else 
         if (qrc==length(beta)+1) beta <- c(beta,0) else
-        beta <- c(beta[1:(qrc-1)],0,beta[qrc:length(beta)])
+        beta <- c(beta[seq_len(qrc-1)],0,beta[qrc:length(beta)])
       } else if (qrc<0) { ## params sum to zero
         # X <- t(diff(t(X)))
         beta <- t(diff(diag(length(beta)+1)))%*%beta
@@ -139,7 +139,7 @@ process.boundary <- function(bnd)
         if (!is.null(bnd[[i]]$f)) bnd[[i]]$f[n] <- bnd[[i]]$f[1]
       }
     }
-    len <- c(0,sqrt((x[1:(n-1)]-x[2:n])^2+(y[1:(n-1)]-y[2:n])^2)) ## seg lengths
+    len <- c(0,sqrt((x[seq_len(n-1)]-x[2:n])^2+(y[seq_len(n-1)]-y[2:n])^2)) ## seg lengths
     bnd[[i]]$d<-cumsum(len) ## distance along boundary
   }
   bnd
@@ -221,7 +221,7 @@ setup.soap <- function(bnd,knots,nmax=100,k=10,bndSpec=NULL) {
   xx <- rep(0,5*n.inside)
   o1 <- .C(C_pde_coeffs,as.integer(ret$G),xx=as.double(xx),ii=as.integer(xx),jj=as.integer(xx),
             n=as.integer(0),as.integer(nx),as.integer(ny),as.double(dx),as.double(dy))
-  ind <- 1:o1$n
+  ind <- seq_len(o1$n)
   X <- sparseMatrix(i=o1$ii[ind]+1,j=o1$jj[ind]+1,x=o1$xx[ind])
   er <- expand(lu(X))
   ret$Q <- er$Q;ret$U <- er$U;ret$L <- er$L;ret$P <- er$P
@@ -252,7 +252,7 @@ setup.soap <- function(bnd,knots,nmax=100,k=10,bndSpec=NULL) {
       } else { ## use "cp" P-spline
         bsm <- smooth.construct(s(d,bs="cp",k=k[i],m=bndSpec$m),data=data.frame(d=d),knots=NULL) 
       }
-      bc[[i]] <- list(bsm=bsm,X=bsm$X[1:ret$nb[i],],S=bsm$S[[1]],free.bound=TRUE)
+      bc[[i]] <- list(bsm=bsm,X=bsm$X[seq_len(ret$nb[i]),],S=bsm$S[[1]],free.bound=TRUE)
     } else { ## boundary is fixed
       ## pmax/pmin needed to avoid rounding error induced NA's
       d <- pmax(pmin(ret$d[start:stop],max(bnd[[i]]$d)),min(bnd[[i]]$d)) 
@@ -315,7 +315,7 @@ soap.basis <- function(sd,x=NA,y=NA,film=TRUE,wiggly=TRUE,penalty=TRUE,plot=FALS
       ind <- !is.na(G)
       gind <- G[ind] <- abs(G[ind])+1
       ## need to create the indices such that G[gind] <- g is correct...
-      gind[G[ind]] <- (1:length(G))[ind]
+      gind[G[ind]] <- seq_len(length(G))[ind]
       G[ind] <- cnst ## now clear interior of G
   } ## finished preliminary if (plot)
 
@@ -475,7 +475,7 @@ smooth.construct.so.smooth.spec<-function(object,data,knots)
   irng <- 1/as.numeric(apply(b$X,2,max)-apply(b$X,2,min))
   b$X <- t(t(b$X)*irng)  
   ## now apply rescaling
-  for (i in  1:length(b$S)) {
+  for (i in  seq_len(length(b$S))) {
     a <- irng[b$off[i]:(b$off[i]+ncol(b$S[[i]])-1)]
     b$S[[i]] <- diag(a)%*%b$S[[i]]%*%diag(a)
   }
@@ -586,7 +586,7 @@ smooth.construct.sf.smooth.spec<-function(object,data,knots)
   irng <- 1/as.numeric(apply(b$X,2,max)-apply(b$X,2,min))
   b$X <- t(t(b$X)*irng)  
   ## now apply rescaling
-  if (length(b$S)>0) for (i in  1:length(b$S)) {
+  if (length(b$S)>0) for (i in  seq_len(length(b$S))) {
     a <- irng[b$off[i]:(b$off[i]+ncol(b$S[[i]])-1)]
     b$S[[i]] <- diag(a)%*%b$S[[i]]%*%diag(a)
   }
@@ -672,7 +672,7 @@ smooth.construct.sw.smooth.spec<-function(object,data,knots)
   irng <- 1/as.numeric(apply(b$X,2,max)-apply(b$X,2,min))
   b$X <- t(t(b$X)*irng)  
   ## now apply rescaling
-  for (i in  1:length(b$S)) {
+  for (i in  seq_len(length(b$S))) {
     a <- irng[b$off[i]:(b$off[i]+ncol(b$S[[i]])-1)]
     b$S[[i]] <- diag(a)%*%b$S[[i]]%*%diag(a)
   }

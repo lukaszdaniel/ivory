@@ -23,11 +23,11 @@ write.jagslp <- function(resp,family,file,use.weights,offset=FALSE) {
   } else {
     if (offset) cat("  eta <- X %*% b + offset ## linear predictor\n",file=file,append=TRUE)
     else cat("  eta <- X %*% b ## linear predictor\n",file=file,append=TRUE)
-    cat("  for (i in 1:n) { mu[i] <- ",iltab[family$link],"} ## expected response\n",file=file,append=TRUE)
+    cat("  for (i in seq_len(n)) { mu[i] <- ",iltab[family$link],"} ## expected response\n",file=file,append=TRUE)
   }
   ## code the response given mu and any scale parameter prior...
   #scale <- TRUE ## is scale parameter free?
-  cat("  for (i in 1:n) { ",file=file,append=TRUE)
+  cat("  for (i in seq_len(n)) { ",file=file,append=TRUE)
   if (family$family=="gaussian") {
     if (use.weights) cat(resp,"[i] ~ dnorm(mu[i],tau*w[i]) } ## response \n",sep="",file=file,append=TRUE)
     else cat(resp,"[i] ~ dnorm(mu[i],tau) } ## response \n",sep="",file=file,append=TRUE)
@@ -65,7 +65,7 @@ jini <- function(G,lambda) {
   X <- rbind(w*G$X,matrix(0,p,p)) 
   ## now append square roots of penalties
   uoff <- unique(G$off)
-  for (i in 1:length(uoff)) {
+  for (i in seq_len(length(uoff))) {
     jj <- which(G$off%in%uoff[i])
     S <- G$S[[jj[1]]]*lambda[[jj[1]]]
     m <- length(jj)
@@ -174,9 +174,9 @@ sp.prior = "gamma",diagonalize=FALSE) {
 
   ## set the fixed effect priors...
   if (G$nsdf>0) {
-    ptau <- min(prior.tau[1:G$nsdf]) 
+    ptau <- min(prior.tau[seq_len(G$nsdf)]) 
     cat("  ## Parametric effect priors CHECK tau=1/",signif(1/sqrt(ptau),2),"^2 is appropriate!\n",file=file,append=TRUE,sep="")
-    cat("  for (i in 1:",G$nsdf,") { b[i] ~ dnorm(0,",ptau,") }\n",file=file,append=TRUE,sep="")
+    cat("  for (i in seq_len(",G$nsdf,")) { b[i] ~ dnorm(0,",ptau,") }\n",file=file,append=TRUE,sep="")
   }
 
   ## Work through smooths.
@@ -190,7 +190,7 @@ sp.prior = "gamma",diagonalize=FALSE) {
   ## Smoothing parameters should be in a single vector in the code indexed by 
   ## number.  
   n.sp <- 0 ## count the smoothing parameters....
-  for (i in 1:length(G$smooth)) {
+  for (i in seq_len(length(G$smooth))) {
     ## Are penalties seperable...
     seperable <- FALSE
     M <- length(G$smooth[[i]]$S)
@@ -224,10 +224,10 @@ sp.prior = "gamma",diagonalize=FALSE) {
       b0 <- G$smooth[[i]]$first.para; b1 <- G$smooth[[i]]$last.para
       Kname <- paste("K",i,sep="") ## total penalty matrix in JAGS
       Sname <- paste("S",i,sep="") ## components of total penalty in R & JAGS
-      cat("  ",Kname," <- ",Sname,"[1:",p,",1:",p,"] * lambda[",n.sp+1,"] ",
+      cat("  ",Kname," <- ",Sname,"[seq_len(",p,"), seq_len(",p,")] * lambda[",n.sp+1,"] ",
           file=file,append=TRUE,sep="")
       if (M>1) { ## code to form total precision matrix...  
-        for (j in 2:M) cat(" + ",Sname,"[1:",p,",",(j-1)*p+1,":",j*p,"] * lambda[",n.sp+j,"]",
+        for (j in 2:M) cat(" + ",Sname,"[seq_len(",p,"), ",(j-1)*p+1,":",j*p,"] * lambda[",n.sp+j,"]",
             file=file,append=TRUE,sep="")
       }
       cat("\n  b[",b0,":",b1,"] ~ dmnorm(zero[",b0,":",b1,"],",Kname,") \n"
@@ -245,13 +245,13 @@ sp.prior = "gamma",diagonalize=FALSE) {
   cat("  ## smoothing parameter priors CHECK...\n",file=file,append=TRUE,sep="")
   if (is.null(G$L)) {
     if (sp.prior=="log.uniform") {
-      cat("  for (i in 1:",n.sp,") {\n",file=file,append=TRUE,sep="")
+      cat("  for (i in seq_len(",n.sp,")) {\n",file=file,append=TRUE,sep="")
       cat("    rho[i] ~ dunif(-12,12)\n",file=file,append=TRUE,sep="") 
       cat("    lambda[i] <- exp(rho[i])\n",file=file,append=TRUE,sep="")
       cat("  }\n",file=file,append=TRUE,sep="")
       jags.ini$rho <- log(lambda)
     } else { ## gamma priors
-      cat("  for (i in 1:",n.sp,") {\n",file=file,append=TRUE,sep="")
+      cat("  for (i in seq_len(",n.sp,")) {\n",file=file,append=TRUE,sep="")
       cat("    lambda[i] ~ dgamma(.05,.005)\n",file=file,append=TRUE,sep="") 
       cat("    rho[i] <- log(lambda[i])\n",file=file,append=TRUE,sep="")
       cat("  }\n",file=file,append=TRUE,sep="")
@@ -266,19 +266,19 @@ sp.prior = "gamma",diagonalize=FALSE) {
     }
     nr <- ncol(G$L)
     if (sp.prior=="log.uniform") {
-      cat("  for (i in 1:",nr,") { rho0[i] ~ dunif(-12,12) }\n",file=file,append=TRUE,sep="")
+      cat("  for (i in seq_len(",nr,")) { rho0[i] ~ dunif(-12,12) }\n",file=file,append=TRUE,sep="")
       if (rho.lo) cat("  rho <- rho.lo + L %*% rho0\n",file=file,append=TRUE,sep="")
       else cat("  rho <- L %*% rho0\n",file=file,append=TRUE,sep="")
-      cat("  for (i in 1:",n.sp,") { lambda[i] <- exp(rho[i]) }\n",file=file,append=TRUE,sep="")
+      cat("  for (i in seq_len(",n.sp,")) { lambda[i] <- exp(rho[i]) }\n",file=file,append=TRUE,sep="")
       jags.ini$rho0 <- log(lambda)
     } else { ## gamma prior
-      cat("  for (i in 1:",nr,") {\n",file=file,append=TRUE,sep="")
+      cat("  for (i in seq_len(",nr,")) {\n",file=file,append=TRUE,sep="")
       cat("    lambda0[i] ~ dgamma(.05,.005)\n",file=file,append=TRUE,sep="") 
       cat("    rho0[i] <- log(lambda0[i])\n",file=file,append=TRUE,sep="")
       cat("  }\n",file=file,append=TRUE,sep="")
       if (rho.lo) cat("  rho <- rho.lo + L %*% rho0\n",file=file,append=TRUE,sep="")
       else cat("  rho <- L %*% rho0\n",file=file,append=TRUE,sep="")
-      cat("  for (i in 1:",n.sp,") { lambda[i] <- exp(rho[i]) }\n",file=file,append=TRUE,sep="")
+      cat("  for (i in seq_len(",n.sp,")) { lambda[i] <- exp(rho[i]) }\n",file=file,append=TRUE,sep="")
       jags.ini$lambda0 <- lambda
     }
   } 

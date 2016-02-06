@@ -173,7 +173,7 @@ uniquecombs <- function(x) {
     names(x) <- names(xo)
     for (i in seq_len(ncol(xo))) if (is.factor(xo[,i])) { ## may need to reset factors to factors
       xoi <- levels(xo[,i])
-      x[,i] <- if (is.ordered(xo[,i])) ordered(x[,i],levels=1:length(xoi),labels=xoi) else 
+      x[,i] <- if (is.ordered(xo[,i])) ordered(x[,i],levels=seq_len(length(xoi)),labels=xoi) else 
                factor(x[,i],levels=seq_len(length(xoi)),labels=xoi)
       contrasts(x[,i]) <- contrasts(xo[,i])
     }
@@ -1859,13 +1859,13 @@ D2 <- function(ni=5,nj=5) {
   cr.ci <- cmt[ci]                              ## index to coef array column
  
   ci <- Ind[seq_len(ni-2),seq_len(nj-2)] 
-  Dcr <- mfil(Dcr,1:n.ci,ci,sqrt(0.125)) ## -- coefficient
+  Dcr <- mfil(Dcr,seq_len(n.ci),ci,sqrt(0.125)) ## -- coefficient
   ci <- Ind[3:ni,3:nj] 
-  Dcr <- mfil(Dcr,1:n.ci,ci,sqrt(0.125)) ## ++ coefficient
-  ci <- Ind[1:(ni-2),3:nj] 
-  Dcr <- mfil(Dcr,1:n.ci,ci,-sqrt(0.125)) ## -+ coefficient
-  ci <- Ind[3:ni,1:(nj-2)] 
-  Dcr <- mfil(Dcr,1:n.ci,ci,-sqrt(0.125)) ## +- coefficient
+  Dcr <- mfil(Dcr,seq_len(n.ci),ci,sqrt(0.125)) ## ++ coefficient
+  ci <- Ind[seq_len(ni-2),3:nj] 
+  Dcr <- mfil(Dcr,seq_len(n.ci),ci,-sqrt(0.125)) ## -+ coefficient
+  ci <- Ind[3:ni,seq_len(nj-2)] 
+  Dcr <- mfil(Dcr,seq_len(n.ci),ci,-sqrt(0.125)) ## +- coefficient
 
   list(Dcc=Dcc,Drr=Drr,Dcr=Dcr,rr.ri=rr.ri,rr.ci=rr.ci,cc.ri=cc.ri,
                 cc.ci=cc.ci,cr.ri=cr.ri,cr.ci=cr.ci,rmt=rmt,cmt=cmt)
@@ -1904,7 +1904,7 @@ smooth.construct.ad.smooth.spec <- function(object,data,knots)
       pspl$fixed <- TRUE
       pspl$S <- NULL
     } else if (k>=2) { ## penalty basis needed ...
-      x <- 1:(nk-2)/nk;m=2
+      x <- seq_len(nk-2)/nk;m=2
       ## All elements of V must be >=0 for all S[[l]] to be +ve semi-definite 
       if (k==2) V <- cbind(rep(1,nk-2),x) else if (k==3) {
          m <- 1
@@ -2124,7 +2124,7 @@ pol2nb <- function(pc) {
     ol2 <- (lo2[k] <= hi2 & lo2[k] >= lo2)|(hi2[k] <= hi2 & hi2[k] >= lo2)|
            (lo2 <= hi2[k] & lo2 >= lo2[k])|(hi2 <= hi2[k] & hi2 >= lo2[k])
     ol <- ol1&ol2;ol[k] <- FALSE
-    ind <- (1:n.poly)[ol] ## index of potential neighbours of poly k
+    ind <- seq_len(n.poly)[ol] ## index of potential neighbours of poly k
     ## co-ordinates of polygon k...
     cok <- pc[[k]]
     if (length(ind)>0) for (j in seq_len(length(ind))) {
@@ -2194,12 +2194,12 @@ smooth.construct.mrf.smooth.spec <- function(object, data, knots) {
   d.name <- unique(a.name[duplicated(a.name)]) ## find duplicated names
   if (length(d.name)) {  ## deal with duplicates
     for (i in seq_len(length(d.name))) {
-      ind <- (1:length(a.name))[a.name==d.name[i]] ## index of duplicates 
+      ind <- seq_len(length(a.name))[a.name==d.name[i]] ## index of duplicates 
       for (j in 2:length(ind)) object$xt$polys[[ind[1]]] <- ## combine matrices for duplicate names
         rbind(object$xt$polys[[ind[1]]],c(NA,NA),object$xt$polys[[ind[j]]])
       }
       ## now delete the un-wanted duplicates...
-      ind <- (1:length(a.name))[duplicated(a.name)]
+      ind <- seq_len(length(a.name))[duplicated(a.name)]
       if (length(ind)>0) for (i in length(ind):1) object$xt$polys[[ind[i]]] <- NULL 
     }
   } ## polygon list in correct format
@@ -2439,7 +2439,7 @@ smooth.construct.sos.smooth.spec<-function(object,data,knots)
         RNGkind("default","default")
         set.seed(xtra$seed) ## ensure repeatability
         nk <- xtra$max.knots ## going to create nk knots
-        ind <- sample(1:nu,nk,replace=FALSE)  ## by sampling these rows from xu
+        ind <- sample(seq_len(nu),nk,replace=FALSE)  ## by sampling these rows from xu
         knt <- as.numeric(xu[ind,])  ## ... like this
         RNGkind(kind[1],kind[2])
         assign(".Random.seed",seed,envir=.GlobalEnv) ## RNG behaves as if it had not been used
@@ -2458,9 +2458,9 @@ smooth.construct.sos.smooth.spec<-function(object,data,knots)
   if (object$p.order< -1) object$p.order <- -1
   if (object$p.order>4) object$p.order <- 4
 
-  R <- makeR(la=knt[1:nk],lo=knt[-(1:nk)],lak=knt[1:nk],lok=knt[-(1:nk)],m=object$p.order)
+  R <- makeR(la=knt[seq_len(nk)],lo=knt[-seq_len(nk)],lak=knt[seq_len(nk)],lok=knt[-seq_len(nk)],m=object$p.order)
   T <- attr(R,"Tc") ## constraint matrix
-  ind <- 1:ncol(T)
+  ind <- seq_len(ncol(T))
   k <- object$bs.dim   
 
   if (k<nk) {
@@ -2513,12 +2513,12 @@ Predict.matrix.sos.smooth <- function(object,data)
 # prediction method function for the spline on the sphere smooth class
 { nk <- length(object$knt)/2 ## number of 'knots'
   la <- data[[object$term[1]]];lo <- data[[object$term[2]]] ## eval points
-  lak <- object$knt[1:nk];lok <- object$knt[-(1:nk)] ## knots
+  lak <- object$knt[seq_len(nk)];lok <- object$knt[-seq_len(nk)] ## knots
   n <- length(la); 
   if (n > nk) { ## split into chunks to save memory
     n.chunk <- n %/% nk
     for (i in seq_len(n.chunk)) { ## build predict matrix in chunks
-      ind <- 1:nk + (i-1)*nk
+      ind <- seq_len(nk) + (i-1)*nk
       Xc <- makeR(la=la[ind],lo=lo[ind],
                  lak=lak,lok=lok,m=object$p.order)
       Xc <- cbind(Xc%*%object$UZ,attr(Xc,"T"))
@@ -2576,7 +2576,7 @@ DuchonT <- function(x,m=2,n=1) {
 
 DuchonE <- function(x,xk,m=2,s=0,n=1) {
 ## Get the r.k. matrix for a Duchon '77 construction...
-  ind <- expand.grid(x=1:nrow(x),xk=1:nrow(xk))
+  ind <- expand.grid(x=seq_len(nrow(x)),xk=seq_len(nrow(xk)))
   ## get d[i,j] the Euclidian distance from x[i] to xk[j]... 
   d <- matrix(sqrt(rowSums((x[ind$x,,drop=FALSE]-xk[ind$xk,,drop=FALSE])^2)),nrow(x),nrow(xk))  
   k <- 2*m + 2*s - n
@@ -2650,7 +2650,7 @@ smooth.construct.ds.smooth.spec <- function(object,data,knots)
         RNGkind("default","default")
         set.seed(xtra$seed) ## ensure repeatability
         nk <- xtra$max.knots ## going to create nk knots
-        ind <- sample(1:nu,nk,replace=FALSE)  ## by sampling these rows from xu
+        ind <- sample(seq_len(nu),nk,replace=FALSE)  ## by sampling these rows from xu
         knt <- as.numeric(xu[ind,])  ## ... like this
         RNGkind(kind[1],kind[2])
         assign(".Random.seed",seed,envir=.GlobalEnv) ## RNG behaves as if it had not been used
@@ -2804,7 +2804,7 @@ gpT <- function(x) {
 gpE <- function(x,xk,defn = NA) {
 ## Get the E matrix for a Kammann and Wand Matern spline.
 ## rho is the range parameter... set to K&W default if not supplied
-  ind <- expand.grid(x=1:nrow(x),xk=1:nrow(xk))
+  ind <- expand.grid(x=seq_len(nrow(x)),xk=seq_len(nrow(xk)))
   ## get d[i,j] the Euclidian distance from x[i] to xk[j]... 
   E <- matrix(sqrt(rowSums((x[ind$x,,drop=FALSE]-xk[ind$xk,,drop=FALSE])^2)),nrow(x),nrow(xk))
   rho <- -1; k <- 1
@@ -2841,7 +2841,7 @@ smooth.construct.gp.smooth.spec <- function(object,data,knots)
   ## now collect predictors
   x <- array(0,0)
 
-  for (i in 1:object$dim) {
+  for (i in seq_len(object$dim)) {
     xx <- data[[object$term[i]]]
     if (i==1) n <- length(xx) else 
     if (n!=length(xx)) stop("arguments of smooth not same dimension")
@@ -2851,7 +2851,7 @@ smooth.construct.gp.smooth.spec <- function(object,data,knots)
   if (is.null(knots)) { knt <- 0; nk <- 0}
   else { 
     knt <- array(0,0)
-    for (i in 1:object$dim) { 
+    for (i in seq_len(object$dim)) { 
       dum <- knots[[object$term[i]]]
       if (is.null(dum)) { knt <- 0; nk <- 0; break} # no valid knots for this term
       knt <- c(knt,dum)
@@ -2883,7 +2883,7 @@ smooth.construct.gp.smooth.spec <- function(object,data,knots)
         RNGkind("default","default")
         set.seed(xtra$seed) ## ensure repeatability
         nk <- xtra$max.knots ## going to create nk knots
-        ind <- sample(1:nu,nk,replace=FALSE)  ## by sampling these rows from xu
+        ind <- sample(seq_len(nu),nk,replace=FALSE)  ## by sampling these rows from xu
         knt <- as.numeric(xu[ind,])  ## ... like this
         RNGkind(kind[1],kind[2])
         assign(".Random.seed",seed,envir=.GlobalEnv) ## RNG behaves as if it had not been used
@@ -2922,7 +2922,7 @@ smooth.construct.gp.smooth.spec <- function(object,data,knots)
     D <- diag(c(er$values,rep(0,object$null.space.dim))) ## penalty matrix
   } else { ## no point using eigen-decomp
     D <- matrix(0,object$bs.dim,object$bs.dim)
-    D[1:k,1:k] <- E  ## penalty
+    D[seq_len(k),seq_len(k)] <- E  ## penalty
     er <- list(vectors=diag(k)) ## U is identity here
   }
   rm(E)
@@ -2948,7 +2948,7 @@ Predict.matrix.gp.smooth <- function(object,data)
 { nk <- nrow(object$knt) ## number of 'knots'
 
   ## get evaluation points....
-  for (i in 1:object$dim) {
+  for (i in seq_len(object$dim)) {
     xx <- data[[object$term[i]]]
     if (i==1) { n <- length(xx) 
       x <- matrix(xx,n,object$dim)
@@ -2961,8 +2961,8 @@ Predict.matrix.gp.smooth <- function(object,data)
  
   if (n > nk) { ## split into chunks to save memory
     n.chunk <- n %/% nk
-    for (i in 1:n.chunk) { ## build predict matrix in chunks
-      ind <- 1:nk + (i-1)*nk
+    for (i in seq_len(n.chunk)) { ## build predict matrix in chunks
+      ind <- seq_len(nk) + (i-1)*nk
       Xc <- gpE(x=x[ind,,drop=FALSE],xk=object$knt,object$gp.defn)
       Xc <- cbind(Xc%*%object$UZ,gpT(x=x[ind,,drop=FALSE]))
       if (i == 1) X <- Xc else { X <- rbind(X,Xc);rm(Xc)}
@@ -3511,7 +3511,7 @@ smoothCon <- function(object,data,knots=NULL,absorb.cons=FALSE,scale.penalty=TRU
 
     if (need.full) {
       St <- sml[[1]]$S[[1]]
-      if (length(sml[[1]]$S)>1) for (i in 1:length(sml[[1]]$S)) St <- St + sml[[1]]$S[[i]]
+      if (length(sml[[1]]$S)>1) for (i in seq_len(length(sml[[1]]$S))) St <- St + sml[[1]]$S[[i]]
       es <- eigen(St,symmetric=TRUE)
       ind <- es$values<max(es$values)*.Machine$double.eps^.66
       if (sum(ind)) { ## then there is an unpenalized space remaining

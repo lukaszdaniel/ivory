@@ -34,9 +34,9 @@ tri.pen <- function(X,T) {
   jj <- c(seq_len(n),oo$ni[seq_len(ni)]+1) ## col index
   
   ni <- length(ii)
-  Kx <- sparseMatrix(i=ii,j=jj,x=oo$D[1:ni],dims=c(n,n))
-  Kz <- sparseMatrix(i=ii,j=jj,x=oo$D[1:ni+ni],dims=c(n,n))
-  Kxz <- sparseMatrix(i=ii,j=jj,x=oo$D[1:ni+2*ni],dims=c(n,n))
+  Kx <- sparseMatrix(i=ii,j=jj,x=oo$D[seq_len(ni)],dims=c(n,n))
+  Kz <- sparseMatrix(i=ii,j=jj,x=oo$D[seq_len(ni)+ni],dims=c(n,n))
+  Kxz <- sparseMatrix(i=ii,j=jj,x=oo$D[seq_len(ni)+2*ni],dims=c(n,n))
   list(Kx=Kx,Kz=Kz,Kxz=Kxz)
 }
 

@@ -170,7 +170,7 @@ coef.pdTens <-
   if (unconstrained) NextMethod()
   else {
     val <- notExp2(as.vector(object))
-    names(val) <- paste("sp.",1:length(val), sep ="")
+    names(val) <- paste("sp.", seq_len(length(val)), sep ="")
     val
   }
 }
@@ -216,7 +216,7 @@ corMatrix.pdIdnot <-
   attr(val, "stdDev") <- rep(sqrt(notExp2(as.vector(object))), Ncol)
   if (length(nm <- nlme::Names(object)) == 0) {
     len <- length(as.vector(object)) 
-    nm <- paste("V", 1:len, sep = "")
+    nm <- paste("V", seq_len(len), sep = "")
     dimnames(val) <- list(nm, nm)
   }
   names(attr(val, "stdDev")) <- nm
@@ -349,7 +349,7 @@ smooth2random.fs.interaction <- function(object,vnames,type=1) {
   ##if (type == 2) require(Matrix)
   colx <- ncol(object$X) 
   diagU <- rep(1,colx)
-  ind <- 1:colx 
+  ind <- seq_len(colx )
   flev <- levels(object$fac)
   n.lev <- length(flev)
   if (type==2) {
@@ -400,7 +400,7 @@ smooth2random.fs.interaction <- function(object,vnames,type=1) {
   }
   if (type==2) {
     ## expand the rind (rinc not needed)
-    ind <- 1:length(rind)
+    ind <- seq_len(length(rind))
     ni <- length(ind)
     rind <- rep(rind,n.lev)
     if (n.lev>1) for (k in 2:n.lev) { 
@@ -438,7 +438,7 @@ smooth2random.t2.smooth <- function(object,vnames,type=1) {
   fixed <- rep(TRUE,ncol(object$X))
   random <- list()
   diagU <- rep(1,ncol(object$X))
-  ind <- 1:ncol(object$X)
+  ind <- seq_len(ncol(object$X))
   pen.ind <- ind*0
   n.para <- 0
   for (i in seq_len(length(object$S))) { ## work through penalties
@@ -471,7 +471,7 @@ smooth2random.t2.smooth <- function(object,vnames,type=1) {
     Xf <- object$X[,fixed,drop=FALSE]
   } else Xf <- matrix(0,nrow(object$X),0)
   list(rand=random,trans.D=diagU,Xf=Xf,fixed=FALSE,
-       rind=1:n.para,rinc=rep(n.para,n.para),pen.ind=pen.ind)
+       rind=seq_len(n.para),rinc=rep(n.para,n.para),pen.ind=pen.ind)
 } ## smooth2random.t2.smooth
 
 smooth2random.mgcv.smooth <- function(object,vnames,type=1) {
@@ -502,7 +502,7 @@ smooth2random.mgcv.smooth <- function(object,vnames,type=1) {
   p.rank <- object$rank
   if (p.rank>ncol(object$X)) p.rank <- ncol(object$X)
   U <- ev$vectors
-  D <- c(ev$values[1:p.rank],rep(1,null.rank))
+  D <- c(ev$values[seq_len(p.rank)],rep(1,null.rank))
   D <- 1/sqrt(D)
   UD <- t(t(U)*D)      ## U%*%[b,beta] returns coefs in original parameterization 
   X <- object$X%*%UD 
@@ -518,13 +518,13 @@ smooth2random.mgcv.smooth <- function(object,vnames,type=1) {
     names(random) <- group.name
     attr(random[[1]],"group") <- factor(rep(1,nrow(X)))
     attr(random[[1]],"Xr.name") <- term.name
-    attr(random[[1]],"Xr") <- X[,1:p.rank,drop=FALSE]
+    attr(random[[1]],"Xr") <- X[, seq_len(p.rank), drop = FALSE]
   } else { ## lmer form as used in gamm4
-    random <- list(X[,1:p.rank,drop=FALSE]) 
+    random <- list(X[, seq_len(p.rank), drop = FALSE]) 
     names(random)[1] <- term.name
     attr(random[[1]],"s.label") <- object$label
   }
-  rind <- 1:p.rank
+  rind <- seq_len(p.rank)
   pen.ind <- rep(0,ncol(object$X))
   pen.ind[rind] <- 1
   rinc <- rep(p.rank,p.rank)
@@ -579,7 +579,7 @@ smooth2random.tensor.smooth <- function(object,vnames,type=1) {
   p.rank <- ncol(object$X) - null.rank
   if (p.rank>ncol(object$X)) p.rank <- ncol(object$X)
   U <- ev$vectors
-  D <- c(ev$values[1:p.rank],rep(1,null.rank))
+  D <- c(ev$values[seq_len(p.rank)],rep(1,null.rank))
   if (sum(D<=0)) stop("Tensor product penalty rank appears to be too low: please email Simon.Wood@R-project.org with details.")
   ## D <- 1/sqrt(D)
   U <- U ## maps coefs back to untransformed versions
@@ -588,7 +588,7 @@ smooth2random.tensor.smooth <- function(object,vnames,type=1) {
                       Xf <- matrix(0,nrow(X),0) # no fixed terms left
  
   for (l in seq_len(length(object$S))) {   # transform penalty explicitly
-    object$S[[l]] <- (t(U)%*%object$S[[l]]%*%U)[1:p.rank,1:p.rank]
+    object$S[[l]] <- (t(U)%*%object$S[[l]]%*%U)[seq_len(p.rank), seq_len(p.rank)]
     object$S[[l]] <- (object$S[[l]]+t(object$S[[l]]))/2
   }
   
@@ -601,8 +601,8 @@ smooth2random.tensor.smooth <- function(object,vnames,type=1) {
   names(random) <- group.name ## grouping factor name
   attr(random[[1]],"group") <- factor(rep(1,nrow(X))) ## grouping factor
   attr(random[[1]],"Xr.name") <- term.name           ## random effect matrix name 
-  attr(random[[1]],"Xr") <- X[,1:p.rank,drop=FALSE] ## random effect model matrix
-  rind <- 1:p.rank
+  attr(random[[1]],"Xr") <- X[, seq_len(p.rank), drop = FALSE] ## random effect model matrix
+  rind <- seq_len(p.rank)
   rinc <- rep(p.rank,p.rank)
   list(rand=random, ## the random effects for this term
          Xf=Xf, ## the fixed effect model matrix for this term
@@ -647,7 +647,7 @@ gamm.setup <- function(formula,pterms,
   G$Xf <- G$X # full GAM model matrix, treating smooths as fixed effects
   random <- list()
   
-  if (G$nsdf>0) ind <- 1:G$nsdf else ind <- rep(0,0)  
+  if (G$nsdf>0) ind <- seq_len(G$nsdf) else ind <- rep(0,0)  
   X <- G$X[,ind,drop=FALSE] # accumulate fixed effects into here
 
   xlab <- rep("",0)
@@ -656,7 +656,7 @@ gamm.setup <- function(formula,pterms,
   ## multi-level factors are processed last, and hence end up at the end of the 
   ## random list (right is nested in left in this list!)
   if (G$m>0) {
-    pord <- 1:G$m
+    pord <- seq_len(G$m)
     done <- rep(FALSE,length(pord))
     k <- 0
     f.name <- NULL
@@ -836,7 +836,7 @@ extract.lme.cov2<-function(b,data,start.level=1)
     #Cgrps <- nlme::getGroups(b$modelStruct$corStruct) # ditto
     Cind <- sort(as.numeric(Cgrps),index.return=TRUE)$ix
     # Cind[i] is where row i of sorted Cgrps is in original data frame order 
-    rCind <- 1:n; rCind[Cind] <- 1:n
+    rCind <- seq_len(n); rCind[Cind] <- seq_len(n)
     # rCind[i] is location of ith original datum in the coarse ordering
     ## CFgrps <- grps[Cind] # fine group levels in coarse group order (unused!!)
     Clevel <- levels(Cgrps) # levels of coarse grouping factor
@@ -845,7 +845,7 @@ extract.lme.cov2<-function(b,data,start.level=1)
     for (i in seq_len(n.cg)) size.cg[i] <- sum(Cgrps==Clevel[i]) # size of each coarse group
     ## Cgrps[Cind] is sorted by coarsest grouping factor level
     ## so e.g. y[Cind] would be data in c.g.f. order
-  } else {n.cg <- 1;Cind<-1:n}
+  } else {n.cg <- 1;Cind<-seq_len(n)}
   if (is.null(b$modelStruct$varStruct)) w<-rep(b$sigma,n) ### 
   else 
   { w <- 1/nlme::varWeights(b$modelStruct$varStruct) 
@@ -870,7 +870,7 @@ extract.lme.cov2<-function(b,data,start.level=1)
       ind <- list() # ind[[i]] is order index for V[[i]] 
       for (i in seq_len(n.cg)) { 
         V[[i]] <- matrix(0,size.cg[i],size.cg[i]) 
-        ind[[i]] <- 1:size.cg[i]
+        ind[[i]] <- seq_len(size.cg[i])
       }
       # Voff[i] is where, in coarse order data, first element of V[[i]]
       # relates to ... 
@@ -878,12 +878,12 @@ extract.lme.cov2<-function(b,data,start.level=1)
       gr.name <- names(c.m) # the names of the innermost groups
       n.g<-length(c.m)   # number of innermost groups
       j0<-rep(1,n.cg) # place holders in V[[i]]'s
-      ii <- 1:n
+      ii <- seq_len(n)
       for (i in seq_len(n.g)) # work through innermost groups
       { # first identify coarse grouping
         Clev <- unique(Cgrps[grps==gr.name[i]])  # level for coarse grouping factor
         if (length(Clev)>1) stop("inner groupings not nested in outer!!")
-        k <- (1:n.cg)[Clevel==Clev] # index of coarse group - i.e. update V[[k]] 
+        k <- seq_len(n.cg)[Clevel==Clev] # index of coarse group - i.e. update V[[k]] 
         # now need to get c.m into right place within V[[k]]
         j1<-j0[k]+nrow(c.m[[i]])-1
         V[[k]][j0[k]:j1,j0[k]:j1]<-c.m[[i]]
@@ -1017,7 +1017,7 @@ extract.lme.cov<-function(b,data,start.level=1)
       gr.name <- names(c.m) # the names of the groups
       n.g<-length(c.m)   # number of innermost groups
       j0<-1
-      ind<-ii<-1:n
+      ind<-ii<-seq_len(n)
       for (i in seq_len(n.g)) 
       { j1<-j0+nrow(c.m[[i]])-1
         V[j0:j1,j0:j1]<-c.m[[i]]
@@ -1385,7 +1385,7 @@ gamm <- function(formula,random=NULL,correlation=NULL,family=gaussian(),data=lis
 
     fs.present <- FALSE
 
-    if (G$nsdf) p <- bf[1:G$nsdf] else p <- array(0,0)
+    if (G$nsdf) p <- bf[seq_len(G$nsdf)] else p <- array(0,0)
     if (G$m>0) for (i in seq_len(G$m))
     { fx <- G$smooth[[i]]$fixed 
       first <- G$smooth[[i]]$first.f.para;last <- G$smooth[[i]]$last.f.para
@@ -1442,7 +1442,7 @@ gamm <- function(formula,random=NULL,correlation=NULL,family=gaussian(),data=lis
     ## obtain XVX and S....
     first.para <- last.para <- rep(0,G$m) ## collect first and last para info relevant to expanded Xf
     if (fs.present) { ## First create expanded Xf...
-      Xf <- G$Xf[,1:G$nsdf,drop=FALSE] 
+      Xf <- G$Xf[, seq_len(G$nsdf), drop = FALSE] 
       if (G$m>0) for (i in seq_len(G$m)) {# Accumulate the total model matrix
         ind <- object$smooth[[i]]$first.para:object$smooth[[i]]$last.para
         if (is.null(object$smooth[[i]]$fac)) { ## normal smooth
@@ -1545,7 +1545,7 @@ gamm <- function(formula,random=NULL,correlation=NULL,family=gaussian(),data=lis
  
     object$residuals <- residuals(ret$lme) #as.numeric(G$y) - object$fitted.values
 
-    if (G$nsdf>0) term.names<-colnames(G$X)[1:G$nsdf] else term.names<-array("",0)
+    if (G$nsdf>0) term.names<-colnames(G$X)[seq_len(G$nsdf)] else term.names<-array("",0)
     n.smooth <- length(G$smooth) 
     if (n.smooth) {
       for (i in seq_len(n.smooth))

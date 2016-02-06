@@ -298,7 +298,7 @@ pqr.qy <- function(x,a,tr=FALSE) {
   }
   oo <- .C(C_mgcv_pqrqy,a=as.double(a),as.double(x$x),as.double(x$tau),as.integer(x$r),
                          as.integer(x$c),as.integer(a.c),as.integer(tr),as.integer(x$nt))
-  if (tr) return(matrix(oo$a[1:(a.c*x$c)],x$c,a.c)) else
+  if (tr) return(matrix(oo$a[seq_len(a.c*x$c)],x$c,a.c)) else
   return(matrix(oo$a,x$r,a.c))
 }
 

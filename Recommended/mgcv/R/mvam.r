@@ -15,8 +15,8 @@ lpi.expand <- function(X,trailing=TRUE) {
     X <- cbind(X[,ip],X[,ii])
   } else X <- X[,ip]
   k <- 0
-  for (i in 1:length(lpi)) {
-    lpi[[i]] <- 1:length(lpi[[i]]) + k
+  for (i in seq_len(length(lpi))) {
+    lpi[[i]] <- seq_len(length(lpi[[i]])) + k
     k <- k + length(lpi[[i]])
   } 
   attr(X,"lpi") <- lpi
@@ -38,7 +38,7 @@ lpi.contract <- function(x,lpi,type="rc",trailing=TRUE) {
       if (ncol(x)>lip) nt <- ncol(x) - lip
     } else if (length(x)>lip) nt <- length(x) - lip
     if (nt>0) { ## there is a trailing block - index it in lpi
-      lpi[[length(lpi)+1]] <- 1:nt + max(ip)
+      lpi[[length(lpi)+1]] <- seq_len(nt) + max(ip)
       ip <- unlist(lpi)  
     }
   }
@@ -47,8 +47,8 @@ lpi.contract <- function(x,lpi,type="rc",trailing=TRUE) {
     if (type=="c"||type=="rc") { ## column contraction
       k <- 0
       z <- matrix(0,nrow(x),p)
-      for (i in 1:length(lpi)) { 
-        ii <- 1:length(lpi[[i]]) + k
+      for (i in seq_len(length(lpi))) { 
+        ii <- seq_len(length(lpi[[i]])) + k
         k <- k + length(ii) 
         z[,lpi[[i]]] <- z[,lpi[[i]]] + x[,ii]
       } 
@@ -57,16 +57,16 @@ lpi.contract <- function(x,lpi,type="rc",trailing=TRUE) {
     if (type=="r"||type=="rc") { ## row contraction
       z <- matrix(0,p,ncol(x))
       k <- 0
-      for (i in 1:length(lpi)) { 
-        ii <- 1:length(lpi[[i]]) + k
+      for (i in seq_len(length(lpi))) { 
+        ii <- seq_len(length(lpi[[i]])) + k
         k <- k + length(ii) 
         z[lpi[[i]],] <- z[lpi[[i]],] + x[ii,]
       }
     } 
   } else { ## vector
     z <- rep(0,p);k <- 0
-    for (i in 1:length(lpi)) {
-      ii <- 1:length(lpi[[i]]) + k
+    for (i in seq_len(length(lpi))) {
+      ii <- seq_len(length(lpi[[i]])) + k
       k <- k + length(ii) 
       z[lpi[[i]]] <- z[lpi[[i]]] + x[ii]
     }
@@ -76,9 +76,9 @@ lpi.contract <- function(x,lpi,type="rc",trailing=TRUE) {
 
 mvn <- function(d=2) { 
 ## Extended family object for multivariate normal additive model.
-  if (d<2) stop("mvn requires 2 or more dimensional data")
+  if (d<2) stop(gettextf("'%s' function requires 2 or more dimensional data", "mvn()"))
   stats <- list()
-  for (i in 1:d) {
+  for (i in seq_len(d)) {
     stats[[i]] <- make.link("identity") 
   }
   
@@ -99,7 +99,7 @@ mvn <- function(d=2) {
       XX <- crossprod(G$X)
       G$X <- cbind(G$X,matrix(0,nrow(G$X),ntheta)) ## add dummy columns to G$X
       #G$cmX <- c(G$cmX,rep(0,ntheta)) ## and corresponding column means
-      G$term.names <- c(G$term.names,paste("R",1:ntheta,sep="."))
+      G$term.names <- c(G$term.names,paste("R",seq_len(ntheta),sep="."))
       attr(G$X,"lpi") <- lpi
       attr(G$X,"XX") <- XX
       ## pad out sqrt of balanced penalty matrix to account for extra params
@@ -107,7 +107,7 @@ mvn <- function(d=2) {
       G$family$data <- list(ydim = ydim,nbeta=nbeta)
       G$family$ibeta = rep(0,ncol(G$X))
       ## now get initial parameters and store in family...
-      for (k in 1:ydim) {
+      for (k in seq_len(ydim)) {
         sin <- G$off %in% lpi[[k]]
         #Sk <- G$S[sin]
         um <- magic(G$y[,k],G$X[,lpi[[k]]],rep(-1,sum(sin)),G$S[sin],
@@ -124,9 +124,9 @@ mvn <- function(d=2) {
     ## precision matrix, etc...
       ydim <- G$family$data$ydim
       R <- matrix(0,ydim,ydim)
-      ind <- G$family$data$nbeta + 1:(ydim*(ydim+1)/2);
+      ind <- G$family$data$nbeta + seq_len(ydim*(ydim+1)/2);
       theta <- object$coefficients[ind]
-      k <- 1;for (i in 1:ydim) for (j in i:ydim) {
+      k <- 1;for (i in seq_len(ydim)) for (j in i:ydim) {
         if (i==j) R[i,j] <- exp(theta[k]) else R[i,j] <- theta[k]
         k <- k + 1
       }

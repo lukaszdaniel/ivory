@@ -32,7 +32,7 @@ trind.generator <- function(K=2) {
   i4 <- array(0,dim=c(K,K,K,K))
   m.start <- 1
   m <- m.start
-  for (i in 1:K) for (j in i:K) for (k in j:K) for (l in k:K) {
+  for (i in seq_len(K)) for (j in i:K) for (k in j:K) for (l in k:K) {
     i4[i,j,k,l] <- i4[i,j,l,k] <- i4[i,k,l,j] <- i4[i,k,j,l] <- i4[i,l,j,k] <- 
     i4[i,l,k,j] <- 
     i4[j,i,k,l] <- i4[j,i,l,k] <- i4[j,k,l,i] <- i4[j,k,i,l] <- i4[j,l,i,k] <- 
@@ -46,7 +46,7 @@ trind.generator <- function(K=2) {
 
   i3 <- array(0,dim=c(K,K,K))
   m <- m.start
-  for (j in 1:K) for (k in j:K) for (l in k:K) {
+  for (j in seq_len(K)) for (k in j:K) for (l in k:K) {
     i3[j,k,l] <- i3[j,l,k] <- i3[k,l,j] <- i3[k,j,l] <- i3[l,j,k] <- 
     i3[l,k,j] <- m
     m <- m + 1
@@ -54,7 +54,7 @@ trind.generator <- function(K=2) {
 
   i2 <- array(0,dim=c(K,K))
   m <- m.start
-  for (k in 1:K) for (l in k:K) {
+  for (k in seq_len(K)) for (l in k:K) {
     i2[k,l] <- i2[l,k] <- m
     m <- m + 1
   }
@@ -75,7 +75,7 @@ gamlss.etamu <- function(l1,l2,l3=NULL,l4=NULL,ig1,g2,g3=NULL,g4=NULL,i2,i3=NULL
 ## the index values except that they are in 1..K 
   K <- ncol(l1) ## number of parameters of distribution
   d1 <- l1
-  for (i in 1:K) { ## first derivative loop
+  for (i in seq_len(K)) { ## first derivative loop
     d1[,i] <- l1[,i]*ig1[,i]
   }
 
@@ -83,7 +83,7 @@ gamlss.etamu <- function(l1,l2,l3=NULL,l4=NULL,ig1,g2,g3=NULL,g4=NULL,i2,i3=NULL
 
   k <- 0
   d2 <- l2
-  for (i in 1:K) for (j in i:K) {
+  for (i in seq_len(K)) for (j in i:K) {
     ## obtain the order of differentiation associated 
     ## with the i,j derivatives...
     ord <- rep(1,2);k <- k+1
@@ -100,7 +100,7 @@ gamlss.etamu <- function(l1,l2,l3=NULL,l4=NULL,ig1,g2,g3=NULL,g4=NULL,i2,i3=NULL
 
   k <- 0
   d3 <- l3
-  if (deriv>0) for (i in 1:K) for (j in i:K) for (l in j:K) {
+  if (deriv>0) for (i in seq_len(K)) for (j in i:K) for (l in j:K) {
     ## obtain the order of differentiation associated 
     ## with the i,j,l derivatives...
     ord <- rep(1,3);k <- k+1
@@ -127,7 +127,7 @@ gamlss.etamu <- function(l1,l2,l3=NULL,l4=NULL,ig1,g2,g3=NULL,g4=NULL,i2,i3=NULL
   
   k <- 0
   d4 <- l4
-  if (deriv>2) for (i in 1:K) for (j in i:K) for (l in j:K) for (m in l:K) {
+  if (deriv>2) for (i in seq_len(K)) for (j in i:K) for (l in j:K) for (m in l:K) {
     ## obtain the order of differentiation associated 
     ## with the i,j,l & m derivatives...
     ord <- rep(1,4);k <- k+1
@@ -195,13 +195,13 @@ gamlss.gH0 <- function(X,jj,l1,l2,i2,l3=0,i3=0,l4=0,i4=0,d1b=0,d2b=0,deriv=0,fh=
 
   ## the gradient...
   lb <- rep(0,p)
-  for (i in 1:K) { ## first derivative loop
+  for (i in seq_len(K)) { ## first derivative loop
     lb[jj[[i]]] <- colSums(l1[,i]*X[,jj[[i]],drop=FALSE])
   }
   
   ## the Hessian...
   lbb <- matrix(0,p,p)
-  for (i in 1:K) for (j in i:K) {
+  for (i in seq_len(K)) for (j in i:K) {
     lbb[jj[[i]],jj[[j]]] <- t(X[,jj[[i]],drop=FALSE])%*%(l2[,i2[i,j]]*X[,jj[[j]],drop=FALSE])
     lbb[jj[[j]],jj[[i]]] <- t(lbb[jj[[i]],jj[[j]]])
   } 
@@ -213,8 +213,8 @@ gamlss.gH0 <- function(X,jj,l1,l2,i2,l3=0,i3=0,l4=0,i4=0,d1b=0,d2b=0,deriv=0,fh=
     ## stack the derivatives of the various linear predictors on top
     ## of each other...
     d1eta <- matrix(0,n*K,m)
-    ind <- 1:n
-    for (i in 1:K) { 
+    ind <- seq_len(n)
+    for (i in seq_len(K)) { 
       d1eta[ind,] <- X[,jj[[i]],drop=FALSE]%*%d1b[jj[[i]],]
       ind <- ind + n
     }
@@ -222,10 +222,10 @@ gamlss.gH0 <- function(X,jj,l1,l2,i2,l3=0,i3=0,l4=0,i4=0,d1b=0,d2b=0,deriv=0,fh=
 
   if (deriv==1) { 
     d1H <- matrix(0,p,m) ## only store diagonals of d1H
-    for (l in 1:m) {
-      for (i in 1:K) {
-        v <- rep(0,n);ind <- 1:n
-        for (q in 1:K) { 
+    for (l in seq_len(m)) {
+      for (i in seq_len(K)) {
+        v <- rep(0,n);ind <- seq_len(n)
+        for (q in seq_len(K)) { 
           v <- v + l3[,i3[i,i,q]] * d1eta[ind,l]
           ind <- ind + n
         }
@@ -236,11 +236,11 @@ gamlss.gH0 <- function(X,jj,l1,l2,i2,l3=0,i3=0,l4=0,i4=0,d1b=0,d2b=0,deriv=0,fh=
 
   if (deriv>1) {
     d1H <- list()
-    for (l in 1:m) {
+    for (l in seq_len(m)) {
       d1H[[l]] <- matrix(0,p,p)
-      for (i in 1:K) for (j in i:K) {
-        v <- rep(0,n);ind <- 1:n
-        for (q in 1:K) { 
+      for (i in seq_len(K)) for (j in i:K) {
+        v <- rep(0,n);ind <- seq_len(n)
+        for (q in seq_len(K)) { 
           v <- v + l3[,i3[i,j,q]] * d1eta[ind,l]
           ind <- ind + n
         }
@@ -265,7 +265,7 @@ gamlss.gH0 <- function(X,jj,l1,l2,i2,l3=0,i3=0,l4=0,i4=0,d1b=0,d2b=0,deriv=0,fh=
        d <- fh$values;d[d>0] <- 1/d[d>0];d[d<=0] <- 0
        Xe <- t(D*((fh$vectors%*%(d*t(fh$vectors)))%*%(D*t(Xe))))
     } else { ## the supplied factor is a choleski factor
-       ipiv <- piv <- attr(fh,"pivot");ipiv[piv] <- 1:p
+       ipiv <- piv <- attr(fh,"pivot");ipiv[piv] <- seq_len(p)
        Xe <- t(D*(backsolve(fh,forwardsolve(t(fh),(D*t(Xe))[piv,]))[ipiv,]))
     }
     ## now compute the required trace terms
@@ -329,13 +329,13 @@ gamlss.gH <- function(X,jj,l1,l2,i2,l3=0,i3=0,l4=0,i4=0,d1b=0,d2b=0,deriv=0,fh=N
 
   ## the gradient...
   lb <- rep(0,p)
-  for (i in 1:K) { ## first derivative loop
+  for (i in seq_len(K)) { ## first derivative loop
     lb[jj[[i]]] <- lb[jj[[i]]] + colSums(l1[,i]*X[,jj[[i]],drop=FALSE]) ## !
   }
   
   ## the Hessian...
   lbb <- matrix(0,p,p)
-  for (i in 1:K) for (j in i:K) {
+  for (i in seq_len(K)) for (j in i:K) {
     A <- t(X[,jj[[i]],drop=FALSE])%*%(l2[,i2[i,j]]*X[,jj[[j]],drop=FALSE])
     lbb[jj[[i]],jj[[j]]] <- lbb[jj[[i]],jj[[j]]] + A 
     if (j>i) lbb[jj[[j]],jj[[i]]] <- lbb[jj[[j]],jj[[i]]] + t(A) 
@@ -348,8 +348,8 @@ gamlss.gH <- function(X,jj,l1,l2,i2,l3=0,i3=0,l4=0,i4=0,d1b=0,d2b=0,deriv=0,fh=N
     ## stack the derivatives of the various linear predictors on top
     ## of each other...
     d1eta <- matrix(0,n*K,m)
-    ind <- 1:n
-    for (i in 1:K) { 
+    ind <- seq_len(n)
+    for (i in seq_len(K)) { 
       d1eta[ind,] <- X[,jj[[i]],drop=FALSE]%*%d1b[jj[[i]],]
       ind <- ind + n
     }
@@ -357,10 +357,10 @@ gamlss.gH <- function(X,jj,l1,l2,i2,l3=0,i3=0,l4=0,i4=0,d1b=0,d2b=0,deriv=0,fh=N
 
   if (deriv==1) { 
     d1H <- matrix(0,p,m) ## only store diagonals of d1H
-    for (l in 1:m) {
-      for (i in 1:K) {
-        v <- rep(0,n);ind <- 1:n
-        for (q in 1:K) { 
+    for (l in seq_len(m)) {
+      for (i in seq_len(K)) {
+        v <- rep(0,n);ind <- seq_len(n)
+        for (q in seq_len(K)) { 
           v <- v + l3[,i3[i,i,q]] * d1eta[ind,l]
           ind <- ind + n
         }
@@ -371,11 +371,11 @@ gamlss.gH <- function(X,jj,l1,l2,i2,l3=0,i3=0,l4=0,i4=0,d1b=0,d2b=0,deriv=0,fh=N
 
   if (deriv>1) {
     d1H <- list()
-    for (l in 1:m) {
+    for (l in seq_len(m)) {
       d1H[[l]] <- matrix(0,p,p)
-      for (i in 1:K) for (j in i:K) {
-        v <- rep(0,n);ind <- 1:n
-        for (q in 1:K) { 
+      for (i in seq_len(K)) for (j in i:K) {
+        v <- rep(0,n);ind <- seq_len(n)
+        for (q in seq_len(K)) { 
           v <- v + l3[,i3[i,j,q]] * d1eta[ind,l]
           ind <- ind + n
         }
@@ -391,8 +391,8 @@ gamlss.gH <- function(X,jj,l1,l2,i2,l3=0,i3=0,l4=0,i4=0,d1b=0,d2b=0,deriv=0,fh=N
     ## need tr(Hp^{-1} d^2H/drho_k drho_j)
     ## First form the expanded model matrix...
     VX <- Xe <- matrix(0,K*n,ncol(X))
-    ind <- 1:n 
-    for (i in 1:K) { 
+    ind <- seq_len(n) 
+    for (i in seq_len(K)) { 
       Xe[ind,jj[[i]]] <- X[,jj[[i]]]
       ind <- ind + n
     }
@@ -401,37 +401,37 @@ gamlss.gH <- function(X,jj,l1,l2,i2,l3=0,i3=0,l4=0,i4=0,d1b=0,d2b=0,deriv=0,fh=N
        d <- fh$values;d[d>0] <- 1/d[d>0];d[d<=0] <- 0
        Xe <- t(D*((fh$vectors%*%(d*t(fh$vectors)))%*%(D*t(Xe))))
     } else { ## the supplied factor is a choleski factor
-       ipiv <- piv <- attr(fh,"pivot");ipiv[piv] <- 1:p
+       ipiv <- piv <- attr(fh,"pivot");ipiv[piv] <- seq_len(p)
        Xe <- t(D*(backsolve(fh,forwardsolve(t(fh),(D*t(Xe))[piv,]))[ipiv,]))
     }
     ## now compute the required trace terms
     d2eta <- matrix(0,n*K,ncol(d2b))
-    ind <- 1:n
-    for (i in 1:K) { 
+    ind <- seq_len(n)
+    for (i in seq_len(K)) { 
       d2eta[ind,] <- X[,jj[[i]],drop=FALSE]%*%d2b[jj[[i]],]
       ind <- ind + n
     }
     trHid2H <- rep(0,ncol(d2b))
     kk <- 0 ## counter for second derivatives
-    for (k in 1:m) for (l in k:m) { ## looping over smoothing parameters...
+    for (k in seq_len(m)) for (l in k:m) { ## looping over smoothing parameters...
       kk <- kk + 1
-      for (i in 1:K) for (j in 1:K) {
-        v <- rep(0,n);ind <- 1:n
-        for (q in 1:K) { ## accumulate the diagonal matrix for X_i'diag(v)X_j
+      for (i in seq_len(K)) for (j in seq_len(K)) {
+        v <- rep(0,n);ind <- seq_len(n)
+        for (q in seq_len(K)) { ## accumulate the diagonal matrix for X_i'diag(v)X_j
           v <- v + d2eta[ind,kk]*l3[,i3[i,j,q]]
-          ins <- 1:n
-          for (s in 1:K) { 
+          ins <- seq_len(n)
+          for (s in seq_len(K)) { 
             v <- v + d1eta[ind,k]*d1eta[ins,l]*l4[,i4[i,j,q,s]]
             ins <- ins + n
           }
           ind <- ind + n
         }
         if (i==j) {
-          rind <- 1:n + (i-1)*n
+          rind <- seq_len(n) + (i-1)*n
           VX[rind,jj[[i]]] <- v * X[,jj[[i]]]
         } else {
-          rind1 <- 1:n + (i-1)*n
-          rind2 <- 1:n + (j-1)*n
+          rind1 <- seq_len(n) + (i-1)*n
+          rind2 <- seq_len(n) + (j-1)*n
           VX[rind2,jj[[i]]] <- v * X[,jj[[i]]]
           VX[rind1,jj[[j]]] <- v * X[,jj[[j]]]
         }
@@ -659,7 +659,7 @@ multinom <- function(K=1) {
       ## +ve sign if class correct, -ve otherwise
       sgn <- rep(-1,n); sgn[pc==object$y] <- 1
       ## now get the deviance...
-      sgn*sqrt(-2*log(pmax(.Machine$double.eps,p[1:n + object$y*n]))) 
+      sgn*sqrt(-2*log(pmax(.Machine$double.eps,p[seq_len(n) + object$y*n]))) 
   } ## residuals
 
   predict <- function(family,se=FALSE,eta=NULL,y=NULL,X=NULL,
@@ -674,7 +674,7 @@ multinom <- function(K=1) {
     if (is.null(eta)) { 
       lpi <- attr(X,"lpi") 
       if (is.null(lpi)) {
-        lpi <- list(1:ncol(X))
+        lpi <- list(seq_len(ncol(X)))
       } 
       K <- length(lpi) ## number of linear predictors
       eta <- matrix(0,nrow(X),K)
@@ -682,7 +682,7 @@ multinom <- function(K=1) {
         ve <- matrix(0,nrow(X),K) ## variance of eta
         ce <- matrix(0,nrow(X),K*(K-1)/2) ## covariance of eta_i eta_j
       } 
-      for (i in 1:K) { 
+      for (i in seq_len(K)) { 
         Xi <- X[,lpi[[i]],drop=FALSE]
         eta[,i] <- Xi%*%beta[lpi[[i]]] ## ith linear predictor
         if (se) { ## variance and covariances for kth l.p.
@@ -702,7 +702,7 @@ multinom <- function(K=1) {
     gamma <- gamma/beta ## category probabilities
     vp <- gamma*0
     if (se) { ## need to loop to find se of probabilities...
-      for (j in 1:(K+1)) {
+      for (j in seq_len(K+1)) {
         ## get dp_j/deta_k...
         if (j==1) dp <- -gamma[,-1,drop=FALSE]/beta else { 
           dp <- -gamma[,j]*gamma[,-1,drop=FALSE]
@@ -711,7 +711,7 @@ multinom <- function(K=1) {
         ## now compute variance... 
         vp[,j] <- rowSums(dp^2*ve)
         ii <- 0
-        for (i in 1:K) if (i<K) for (k in (i+1):K) {
+        for (i in seq_len(K)) if (i<K) for (k in (i+1):K) {
           ii <- ii + 1
           vp[,j] <- vp[,j] + 2 * dp[,i]*dp[,k]*ce[,ii] 
         }
@@ -753,7 +753,7 @@ multinom <- function(K=1) {
       jj <- attr(X,"lpi") ## extract linear predictor index
       K <- length(jj) ## number of linear predictors 
       eta <- matrix(1,n,K+1) ## linear predictor matrix (dummy 1's in first column)
-      for (i in 1:K) eta[,i+1] <- X[,jj[[i]],drop=FALSE]%*%coef[jj[[i]]]
+      for (i in seq_len(K)) eta[,i+1] <- X[,jj[[i]],drop=FALSE]%*%coef[jj[[i]]]
     } else { l2 <- 0;K <- ncol(eta);eta <- cbind(1,eta); return.l <- TRUE}
  
     if (K!=family$nlp) stop("number of linear predictors doesn't match")
@@ -763,25 +763,25 @@ multinom <- function(K=1) {
     ee <- exp(eta[,-1,drop=FALSE])
     beta <- 1 + rowSums(ee); alpha <- log(beta)
     
-    l0 <- eta[1:n+y*n] - alpha ## log likelihood
+    l0 <- eta[seq_len(n)+y*n] - alpha ## log likelihood
     l <- sum(l0)    
 
     l1 <- matrix(0,n,K) ## first deriv matrix
  
     if (deriv>0) {
-      for (i in 1:K) l1[,i] <- ee[,i]/beta ## alpha1
+      for (i in seq_len(K)) l1[,i] <- ee[,i]/beta ## alpha1
     
       ## the second derivatives...
     
       l2 <- matrix(0,n,K*(K+1)/2)
       ii <- 0; b2 <- beta^2
-      for (i in 1:K) for (j in i:K) {
+      for (i in seq_len(K)) for (j in i:K) {
         ii <- ii + 1 ## column index
         l2[,ii] <- if (i==j) -l1[,i] + ee[,i]^2/b2 else (ee[,i]*ee[,j])/b2
       }
 
       ## finish first derivatives...
-      for (i in 1:K) l1[,i] <- as.numeric(y==i) - l1[,i] 
+      for (i in seq_len(K)) l1[,i] <- as.numeric(y==i) - l1[,i] 
 
     } ## if (deriv>0)
  
@@ -791,7 +791,7 @@ multinom <- function(K=1) {
     if (deriv>1) { ## the third derivatives...
       l3 <- matrix(0,n,(K*(K+3)+2)*K/6)
       ii <- 0; b3 <- b2 * beta
-      for (i in 1:K) for (j in i:K) for (k in j:K) {
+      for (i in seq_len(K)) for (j in i:K) for (k in j:K) {
         ii <- ii + 1 ## column index
         if (i==j&&j==k) { ## all same
            l3[,ii] <- l2[,tri$i2[i,i]] + 2*ee[,i]^2/b2 - 2*ee[,i]^3/b3
@@ -807,7 +807,7 @@ multinom <- function(K=1) {
     if (deriv>3) { ## the fourth derivatives...
       l4 <- matrix(0,n,(6+K*11+K^2*6+K^3)*K/24)
       ii <- 0; b4 <- b3 * beta
-      for (i in 1:K) for (j in i:K) for (k in j:K) for (l in k:K) {
+      for (i in seq_len(K)) for (j in i:K) for (k in j:K) for (l in k:K) {
         ii <- ii + 1 ## column index
         uni <- unique(c(i,j,k,l));
         nun <- length(uni) ## number of unique indices
@@ -855,7 +855,7 @@ multinom <- function(K=1) {
       if (is.null(start)) {
         jj <- attr(x,"lpi")
         start <- rep(0,ncol(x))
-        for (k in 1:length(jj)) { ## loop over the linear predictors      
+        for (k in seq_len(length(jj))) { ## loop over the linear predictors      
           yt1 <- 6*as.numeric(y==k)-3
           x1 <- x[,jj[[k]],drop=FALSE]
           e1 <- E[,jj[[k]],drop=FALSE] ## square root of total penalty
@@ -898,21 +898,21 @@ pen.reg <- function(x,e,y) {
   r <- ncol(R)
   rr <- Rrank(R) ## rank of R/X
   R[,qrx$pivot] <- R ## unpivot
-  Qy <- qr.qty(qrx,y)[1:ncol(R)]  
+  Qy <- qr.qty(qrx,y)[seq_len(ncol(R))]  
   ## now we want estimates with penalty weight low enough 
   ## EDF is k * rr where k is somewhere in e.g. (.7,.9)
   k <- .01 * norm(R)/norm(e)
   qrr <- qr(rbind(R,e*k));
-  edf <- sum(qr.Q(qrr)[1:r,]^2) 
+  edf <- sum(qr.Q(qrr)[seq_len(r),]^2) 
   while (edf > .9*rr) { ## increase penalization
     k <- k*10
     qrr <- qr(rbind(R,e*k));
-    edf <- sum(qr.Q(qrr)[1:r,]^2)
+    edf <- sum(qr.Q(qrr)[seq_len(r),]^2)
   } 
   while (edf<.7*rr) { ## reduce penalization
     k <- k/20
     qrr <- qr(rbind(R,e*k));
-    edf <- sum(qr.Q(qrr)[1:r,]^2)
+    edf <- sum(qr.Q(qrr)[seq_len(r),]^2)
   } 
   b <- qr.coef(qrr,c(Qy,rep(0,nrow(e))));b[!is.finite(b)] <- 0
   b
@@ -1347,7 +1347,7 @@ ziplss <-  function(link=list("identity","identity")) {
           startji[!is.finite(startji)] <- 0       
         } else startji <- pen.reg(x1,e1,yt1)
         start[jj[[2]]] <- startji
-        p <- drop(x1[1:nobs,,drop=FALSE] %*% startji) ## probability of presence
+        p <- drop(x1[seq_len(nobs),,drop=FALSE] %*% startji) ## probability of presence
         ind <- y==0 & p < 0.5 ## downweight these for estimating lambda
         w <- rep(1,nobs); w[ind] <- .1
 

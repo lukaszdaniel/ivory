@@ -1026,7 +1026,7 @@ gam.fit5 <- function(x,y,lsp,Sl,weights=NULL,offset=NULL,deriv=2,family,
     fitted.values <- family$linkinv(linear.predictors) 
   } else {
     fitted.values <- linear.predictors <- matrix(0,nrow(x),length(lpi))
-    for (j in 1:length(lpi)) {
+    for (j in seq_len(length(lpi))) {
       linear.predictors[,j] <- as.numeric(x[,lpi[[j]],drop=FALSE] %*% coef[lpi[[j]]])
       fitted.values[,j] <- family$linfo[[j]]$linkinv( linear.predictors[,j]) 
     }

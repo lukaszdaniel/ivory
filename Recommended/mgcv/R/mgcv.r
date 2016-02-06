@@ -172,19 +172,19 @@ interpret.gam0 <- function(gf,textra=NULL)
   ## rather than elements of the formula...
   vtab <- attr(tf,"factors") # cross tabulation of vars to terms
   if (length(sp)>0) for (i in seq_len(length(sp))) {
-    ind <- (1:nt)[as.logical(vtab[sp[i],])]
+    ind <- seq_len(nt)[as.logical(vtab[sp[i],])]
     sp[i] <- ind # the term that smooth relates to
   }
   if (length(tp)>0) for (i in seq_len(length(tp))) {
-    ind <- (1:nt)[as.logical(vtab[tp[i],])]
+    ind <- seq_len(nt)[as.logical(vtab[tp[i],])]
     tp[i] <- ind # the term that smooth relates to
   } 
   if (length(tip)>0) for (i in seq_len(length(tip))) {
-    ind <- (1:nt)[as.logical(vtab[tip[i],])]
+    ind <- seq_len(nt)[as.logical(vtab[tip[i],])]
     tip[i] <- ind # the term that smooth relates to
   } 
    if (length(t2p)>0) for (i in seq_len(length(t2p))) {
-    ind <- (1:nt)[as.logical(vtab[t2p[i],])]
+    ind <- seq_len(nt)[as.logical(vtab[t2p[i],])]
     t2p[i] <- ind # the term that smooth relates to
   } ## re-referencing is complete
 
@@ -247,7 +247,7 @@ interpret.gam0 <- function(gf,textra=NULL)
   if (length(smooth.spec)>0) 
   for (i in seq_len(length(smooth.spec))) {
     nt <- length(smooth.spec[[i]]$term)
-    ff1 <- paste(smooth.spec[[i]]$term[1:nt],collapse="+")
+    ff1 <- paste(smooth.spec[[i]]$term[seq_len(nt)],collapse="+")
     fake.formula <- paste(fake.formula,"+",ff1)
     if (smooth.spec[[i]]$by!="NA") {
       fake.formula <- paste(fake.formula,"+",smooth.spec[[i]]$by)
@@ -345,10 +345,10 @@ fixDependence <- function(X1,X2,tol=.Machine$double.eps^.5,rank.def=0,strict=FAL
     ## Project columns of X2 into space of X1 and look at difference
     ## to orignal X2 to check for deficiency...  
     QtX2 <- qr.qty(qr1,X2)
-    QtX2[-(1:r),] <- 0
+    QtX2[-seq_len(r),] <- 0
     mdiff <- colMeans(abs(X2 - qr.qy(qr1,QtX2)))
-    if (rank.def>0) ind <- (1:ncol(X2))[rank(mdiff) <= rank.def] else
-    ind <- (1:ncol(X2))[mdiff < R11*tol]
+    if (rank.def>0) ind <- seq_len(ncol(X2))[rank(mdiff) <= rank.def] else
+    ind <- seq_len(ncol(X2))[mdiff < R11*tol]
     if (length(ind)<1) ind <- NULL
   } else { ## make X2 full rank given X1
     QtX2 <- qr.qty(qr1,X2)[(r+1):n,] # Q'X2
@@ -437,7 +437,7 @@ gam.side <- function(sm,Xp,tol=.Machine$double.eps^.5,with.pen=FALSE)
   sm.dim <- sm.id
   for (d in seq_len(maxDim)) {
     for (i in seq_len(m)) {
-      if (sm[[i]]$dim==d&&sm[[i]]$side.constrain) for (j in 1:d) { ## work through terms
+      if (sm[[i]]$dim==d&&sm[[i]]$side.constrain) for (j in seq_len(d)) { ## work through terms
         term<-sm[[i]]$vn[j]
         a <- sm.id[[term]]
         la <- length(a)+1
@@ -471,7 +471,7 @@ gam.side <- function(sm,Xp,tol=.Machine$double.eps^.5,with.pen=FALSE)
         X1 <- matrix(1,nobs,as.integer(intercept))
         for (j in seq_len(d)) { ## work through variables
           b <- sm.id[[sm[[i]]$vn[j]]] # list of smooths dependent on this variable
-          k <- (1:length(b))[b==i] ## locate current smooth in list 
+          k <- seq_len(length(b))[b==i] ## locate current smooth in list 
           if (k>1) for (l in seq_len(k-1)) { ## collect X columns
             if (with.pen) { ## need to use augmented model matrix in testing 
               if (is.null(sm[[b[l]]]$Xa)) sm[[b[l]]]$Xa <- augment.smX(sm[[b[l]]],nobs,np)
@@ -600,7 +600,7 @@ parametricPenalty <- function(pterms,assign,paraPen,sp0) {
     term.label <- attr(pterms[tind[j]],"term.label")
     P <- paraPen[[term.label]] ## get any penalty information for this term
     if (!is.null(P)) { ## then there is information
-      ind <- (1:length(assign))[assign==tind[j]] ## index of coefs involved here
+      ind <- seq_len(length(assign))[assign==tind[j]] ## index of coefs involved here
       Li <- P$L;P$L <- NULL
       spi <- P$sp;P$sp <- NULL
       ranki <- P$rank;P$rank <- NULL
@@ -644,7 +644,7 @@ parametricPenalty <- function(pterms,assign,paraPen,sp0) {
   if (k==0) return(NULL)
   if (!is.null(sp0)) {
     if (length(sp0)<length(sp)) stop("'sp' is too short")
-    sp0 <- sp0[1:length(sp)]
+    sp0 <- sp0[seq_len(length(sp))]
     sp[sp<0] <- sp0[sp<0]
   }
   ## S is list of penalty matrices, off[i] is index of first coefficient penalized by each S[[i]]
@@ -829,7 +829,7 @@ gam.setup.list <- function(formula,pterms,
       G$P <- rbind(cbind(G$P,matrix(0,pof,k)),cbind(matrix(0,k,pof),um$P))
     }
     G$cmX <- c(G$cmX,um$cmX)
-    if (um$nsdf>0) um$term.names[seq_len(um$nsdf)] <- paste(um$term.names[1:um$nsdf],i-1,sep=".")
+    if (um$nsdf>0) um$term.names[seq_len(um$nsdf)] <- paste(um$term.names[seq_len(um$nsdf)],i-1,sep=".")
     G$term.names <- c(G$term.names,um$term.names)
     G$lsp0 <- c(G$lsp0,um$lsp0)
     G$sp <- c(G$sp,um$sp)
@@ -946,7 +946,7 @@ gam.setup <- function(formula,pterms,
   ## now deal with any user supplied penalties on the parametric part of the model...
   PP <- parametricPenalty(pterms,G$assign,paraPen,sp)
   if (!is.null(PP)) { ## strip out supplied sps already used
-    ind <- 1:length(PP$sp)
+    ind <- seq_len(length(PP$sp))
     if (!is.null(sp)) sp <- sp[-ind]
     if (!is.null(min.sp)) { 
       PP$min.sp <- min.sp[ind]
@@ -1051,7 +1051,7 @@ gam.setup <- function(formula,pterms,
     if (length.S > 0) { ## there are smoothing parameters to name
        if (length.S == 1) spn <- sm[[i]]$label else {
           Sname <- names(sm[[i]]$S)
-          if (is.null(Sname)) spn <- paste(sm[[i]]$label,1:length.S,sep="") else
+          if (is.null(Sname)) spn <- paste(sm[[i]]$label, seq_len(length.S),sep="") else
           spn <- paste(sm[[i]]$label,Sname,sep="")
        }
     }
@@ -1122,9 +1122,9 @@ gam.setup <- function(formula,pterms,
     R <- qr.R(qrx)
     p <- ncol(R)
     rank <- Rrank(R) ## rank of Xp/R    
-    QtX <- qr.qty(qrx,X)[1:rank,]
+    QtX <- qr.qty(qrx,X)[seq_len(rank),]
     if (rank<p) { ## rank deficient  
-      R <- R[1:rank,]
+      R <- R[seq_len(rank),]
       qrr <- qr(t(R),tol=0)
       R <- qr.R(qrr)
       G$P <- forwardsolve(t(R),QtX)
@@ -1136,7 +1136,7 @@ gam.setup <- function(formula,pterms,
     }
     G$P[qrx$pivot,] <- G$P
   }
-  if (G$nsdf>0) G$cmX[-(1:G$nsdf)] <- 0 ## zero the smooth parts here 
+  if (G$nsdf>0) G$cmX[-seq_len(G$nsdf)] <- 0 ## zero the smooth parts here 
   else G$cmX <- G$cmX * 0
   G$X <- X;rm(X)
   n.p <- ncol(G$X) 
@@ -1267,7 +1267,7 @@ gam.setup <- function(formula,pterms,
   if (sum(fix.ind)) {
     lsp0 <- G$sp[fix.ind]
     ind <- lsp0==0 ## find the zero s.p.s
-    ef0 <- indi <- (1:length(ind))[ind]
+    ef0 <- indi <- seq_len(length(ind))[ind]
     if (length(indi)>0) for (i in seq_len(length(indi))) {
       ## find "effective zero" to replace each zero s.p. with
       ii <- G$off[i]:(G$off[i]+ncol(G$S[[i]])-1) 
@@ -1314,7 +1314,7 @@ gam.setup <- function(formula,pterms,
 
   ## Create names for model coefficients... 
 
-  if (G$nsdf > 0) term.names <- colnames(G$X)[1:G$nsdf] else term.names<-array("",0)
+  if (G$nsdf > 0) term.names <- colnames(G$X)[seq_len(G$nsdf)] else term.names<-array("",0)
   n.smooth <- length(G$smooth)
   if (n.smooth)
   for (i in seq_len(n.smooth)) { ## create coef names, if smooth has any coefs!
@@ -1642,7 +1642,7 @@ estimate.gam <- function (G,method,optimizer,control,in.out,scale,gamma,...) {
     if (!(method%in%c("REML","ML"))) method <- "REML"
     if (optimizer[1]=="perf") optimizer <- c("outer","newton") 
     if (inherits(G$family,"general.family")) {
-       if (!is.null(G$offset)) if (is.list(G$offset)) { for (i in 1:length(G$offset)) 
+       if (!is.null(G$offset)) if (is.list(G$offset)) { for (i in seq_len(length(G$offset)))
          if (!is.null(G$offset[[i]])) warning("sorry, general families currently ignore offsets")
        } else if (sum(G$offset!=0)>0) warning("sorry, general families currently ignore offsets")
 
@@ -1817,7 +1817,7 @@ estimate.gam <- function (G,method,optimizer,control,in.out,scale,gamma,...) {
     if (criterion%in%c("REML","ML")&&scale<=0)  object$sp <- 
                                                 object$sp[-length(object$sp)] ## drop scale estimate from sp array
     
-    if (inherits(G$family,"extended.family")&&nth>0) object$sp <- object$sp[-(1:nth)] ## drop theta params
+    if (inherits(G$family,"extended.family")&&nth>0) object$sp <- object$sp[-seq_len(nth)] ## drop theta params
  
     object$mgcv.conv <- mgcv.conv 
 
@@ -3043,18 +3043,18 @@ concurvity <- function(b,full=TRUE) {
       Xi <- X[,-(start[i]:stop[i]),drop=FALSE]
       Xj <- X[,start[i]:stop[i],drop=FALSE]
       r <- ncol(Xi) 
-      R <- qr.R(qr(cbind(Xi,Xj),LAPACK=FALSE,tol=0))[,-(1:r),drop=FALSE] ## No pivoting!!  
+      R <- qr.R(qr(cbind(Xi,Xj),LAPACK=FALSE,tol=0))[,-seq_len(r),drop=FALSE] ## No pivoting!!  
        
       ##u worst case...
       Rt <- qr.R(qr(R)) 
-      conc[1,i] <- svd(forwardsolve(t(Rt),t(R[1:r,,drop=FALSE])))$d[1]^2
+      conc[1,i] <- svd(forwardsolve(t(Rt),t(R[seq_len(r),,drop=FALSE])))$d[1]^2
        
       ## observed...
       beta <- b$coef[start[i]:stop[i]]
-      conc[2,i] <- sum((R[1:r,,drop=FALSE]%*%beta)^2)/sum((Rt%*%beta)^2)
+      conc[2,i] <- sum((R[seq_len(r),,drop=FALSE]%*%beta)^2)/sum((Rt%*%beta)^2)
 
       ## less pessimistic...
-      conc[3,i] <- sum(R[1:r,]^2)/sum(R^2)
+      conc[3,i] <- sum(R[seq_len(r),]^2)/sum(R^2)
     }
     colnames(conc) <- lab
     rownames(conc) <- measure.names
@@ -3066,18 +3066,18 @@ concurvity <- function(b,full=TRUE) {
       r <- ncol(Xi)
       for (j in seq_len(m)) if (i!=j) { 
         Xj <- X[,start[j]:stop[j],drop=FALSE]
-        R <- qr.R(qr(cbind(Xi,Xj),LAPACK=FALSE,tol=0))[,-(1:r),drop=FALSE] ## No pivoting!!  
+        R <- qr.R(qr(cbind(Xi,Xj),LAPACK=FALSE,tol=0))[,-seq_len(r),drop=FALSE] ## No pivoting!!  
         
         ## worst case...
         Rt <- qr.R(qr(R)) 
-        conc[[1]][i,j] <- svd(forwardsolve(t(Rt),t(R[1:r,,drop=FALSE])))$d[1]^2
+        conc[[1]][i,j] <- svd(forwardsolve(t(Rt),t(R[seq_len(r),,drop=FALSE])))$d[1]^2
        
         ## observed...
         beta <- b$coef[start[j]:stop[j]]
-        conc[[2]][i,j] <- sum((R[1:r,,drop=FALSE]%*%beta)^2)/sum((Rt%*%beta)^2)
+        conc[[2]][i,j] <- sum((R[seq_len(r),,drop=FALSE]%*%beta)^2)/sum((Rt%*%beta)^2)
 
         ## less pessimistic...
-        conc[[3]][i,j] <- sum(R[1:r,]^2)/sum(R^2)
+        conc[[3]][i,j] <- sum(R[seq_len(r),]^2)/sum(R^2)
         
         ## Alternative less pessimistic
        # log.det.R <- sum(log(abs(diag(R[(r+1):nrow(R),,drop=FALSE]))))
@@ -3150,7 +3150,7 @@ smoothTest <- function(b,X,V,eps=.Machine$double.eps^.5) {
   f <- t(ed$vectors[,seq_len(k)])%*%R%*%b
   t <- sum(f^2)
   k <- ncol(X)
-  lambda <- as.numeric(ed$values[1:k])
+  lambda <- as.numeric(ed$values[seq_len(k)])
   pval <- liu2(t,lambda) ## should really use Davies
   list(stat=t,pval=pval)  
 } 
@@ -3214,7 +3214,7 @@ simf <- function(x,a,df,nq=50) {
 ## Pr[T>x] = Pr(sum(a_i \chi^2_1) > x *chi^2_df/df). Quadrature 
 ## used here. So, e.g.
 ## 1-pf(4/3,3,40);simf(4,rep(1,3),40);1-pchisq(4,3)
-  p <- (1:nq-.5)/nq
+  p <- (seq_len(nq)-.5)/nq
   q <- qchisq(p,df)
   x <- x*q/df
   pr <- sum(liu2(x,a)) ## Pearson/Liu approx to chi^2 mixture
@@ -3269,8 +3269,8 @@ recov <- function(b,re=rep(0,0),m=0) {
   p2 <- sum(rind) ## number random
   p1 <- p - p2 ## number fixed
   map <- rep(0,p) ## remaps param indices to indices in split version
-  map[rind] <- 1:p2 ## random
-  map[!rind] <- 1:p1 ## fixed
+  map[rind] <- seq_len(p2) ## random
+  map[!rind] <- seq_len(p1) ## fixed
   
   ## split R...
   R1 <- b$R[,!rind]  ## fixed effect columns
@@ -3419,11 +3419,11 @@ testStat <- function(p,X,V,rank=NULL,type=0,res.df= -1) {
   ## Get the eigenvectors...
   # vec <- qr.qy(qrx,rbind(ed$vectors,matrix(0,nrow(X)-ncol(X),ncol(X))))
   vec <- ed$vectors
-  if (k1<ncol(vec)) vec <- vec[,1:k1,drop=FALSE]
+  if (k1<ncol(vec)) vec <- vec[,seq_len(k1),drop=FALSE]
 
   ## deal with the fractional part of the pinv...
   if (nu>0&&k>0) {
-     if (k>1) vec[,1:(k-1)] <- t(t(vec[,1:(k-1)])/sqrt(ed$val[1:(k-1)]))
+     if (k>1) vec[,seq_len(k-1)] <- t(t(vec[,seq_len(k-1)])/sqrt(ed$val[seq_len(k-1)]))
      b12 <- .5*nu*(1-nu)
      if (b12<0) b12 <- 0
      b12 <- sqrt(b12)
@@ -3545,9 +3545,9 @@ summary.gam <- function (object, dispersion = NULL, freq = FALSE, p.type=0, ...)
     if (length(object$nsdf)>1) { ## several linear predictors 
       pstart <- attr(object$nsdf,"pstart")
       ind <- rep(0,0)
-      for (i in 1:length(object$nsdf)) if (object$nsdf[i]>0) ind <- 
+      for (i in seq_len(length(object$nsdf))) if (object$nsdf[i]>0) ind <- 
           c(ind,pstart[i]:(pstart[i]+object$nsdf[i]-1))
-    } else { pstart <- 1;ind <- 1:object$nsdf} ## only one lp
+    } else { pstart <- 1;ind <- seq_len(object$nsdf)} ## only one lp
     p.coeff <- object$coefficients[ind]
     p.se <- se[ind]
     p.t<-p.coeff/p.se
@@ -3570,7 +3570,7 @@ summary.gam <- function (object, dispersion = NULL, freq = FALSE, p.type=0, ...)
   if (npt>0)  pTerms.df <- pTerms.chi.sq <- pTerms.pv <- array(0,npt)
   term.labels <- rep("",0)
   k <- 0 ## total term counter
-  for (j in 1:length(pterms)) {
+  for (j in seq_len(length(pterms))) {
     ##term.labels <- attr(object$pterms,"term.labels")
     tlj <- attr(pterms[[j]],"term.labels") 
     nt <- length(tlj)
@@ -3578,13 +3578,13 @@ summary.gam <- function (object, dispersion = NULL, freq = FALSE, p.type=0, ...)
     term.labels <- c(term.labels,tlj)
     if (nt>0) { # individual parametric terms
       np <- length(object$assign[[j]])
-      ind <- pstart[j] - 1 + 1:np 
+      ind <- pstart[j] - 1 + seq_len(np)
       Vb <- covmat[ind,ind,drop=FALSE]
       bp <- array(object$coefficients[ind],np)
       #pTerms.pv <- if (j==1) array(0,nt) else c(pTerms.pv,array(0,nt))
       #attr(pTerms.pv,"names") <- term.labels
       #pTerms.df <- pTerms.chi.sq <- pTerms.pv
-      for (i in 1:nt) { 
+      for (i in seq_len(nt)) { 
         k <- k + 1
         ind <- object$assign[[j]]==i
         b <- bp[ind];V <- Vb[ind,ind]
@@ -3645,7 +3645,7 @@ summary.gam <- function (object, dispersion = NULL, freq = FALSE, p.type=0, ...)
           kind <- RNGkind(NULL)
           RNGkind("default","default")
           set.seed(11) ## ensure repeatability
-          ind <- sample(1:nrow(object$model),sub.samp,replace=FALSE)  ## sample these rows from X
+          ind <- sample(seq_len(nrow(object$model)),sub.samp,replace=FALSE)  ## sample these rows from X
           X <- predict(object,object$model[ind,],type="lpmatrix")
           RNGkind(kind[1],kind[2])
           assign(".Random.seed",seed,envir=.GlobalEnv) ## RNG behaves as if it had not been used
@@ -3745,7 +3745,7 @@ print.summary.gam <- function(x, digits = max(3, getOption("digits") - 3),
 { print(x$family)
   cat(gettext("Formula:", domain = "R-mgcv"), "\n", sep = "")
 
-  if (is.list(x$formula)) for (i in 1:length(x$formula)) print(x$formula[[i]]) else
+  if (is.list(x$formula)) for (i in seq_len(length(x$formula))) print(x$formula[[i]]) else
      print(x$formula)
 
   if (length(x$p.coeff)>0)
@@ -3801,7 +3801,7 @@ print.anova.gam <- function(x, digits = max(3, getOption("digits") - 3), ...)
   # gam model calls to anova. Improved by Henric Nilsson.
   print(x$family)
   cat(gettext("Formula:", domain = "R-mgcv"), "\n", sep = "")
-  if (is.list(x$formula)) for (i in 1:length(x$formula)) print(x$formula[[i]]) else
+  if (is.list(x$formula)) for (i in seq_len(length(x$formula))) print(x$formula[[i]]) else
   print(x$formula)
   if (length(x$pTerms.pv)>0)
   { cat("\n", gettext("Parametric Terms:", domain = "R-mgcv"), "\n", sep = "")
@@ -3832,7 +3832,7 @@ pen.edf <- function(x) {
     if (length(x$smooth[[i]]$S)>0) {
       pind <- x$smooth[[i]]$first.para:x$smooth[[i]]$last.para ## range of coefs relating to this term
       Snames <- names(x$smooth[[i]]$S)
-      if (is.null(Snames)) Snames <- as.character(1:length(x$smooth[[i]]$S))
+      if (is.null(Snames)) Snames <- as.character(seq_len(length(x$smooth[[i]]$S)))
       if (length(Snames)==1) Snames <- ""
       for (j in seq_len(length(x$smooth[[i]]$S))) {
         ind <- rowSums(x$smooth[[i]]$S[[j]]!=0)!=0 ## index of penalized coefs (within pind)
@@ -3931,7 +3931,7 @@ gam.vcomp <- function(x,rescale=TRUE,conf.lev=.95) {
   if (x$method%in%c("ML","P-ML","REML","P-REML","fREML")&&!is.null(x$outer.info$hess)) {
     if (is.null(x$family$n.theta)||x$family$n.theta<=0) H <- x$outer.info$hess ## the hessian w.r.t. log sps and log scale
     else {
-      ind <- 1:x$family$n.theta
+      ind <- seq_len(x$family$n.theta)
       H <- x$outer.info$hess[-ind,-ind,drop=FALSE]
     }
 
@@ -4360,8 +4360,8 @@ magic <- function(y,X,sp,S,off,L=NULL,lsp0=NULL,rank=NULL,H=NULL,C=NULL,w=NULL,g
           as.double(control$rank.tol),rms.grad=as.double(control$tol),b=as.double(b),rV=double(q*q),
           as.double(extra.rss),as.integer(n.score),as.integer(nthreads))
   res<-list(b=um$b,scale=um$scale,score=um$score,sp=um$sp,sp.full=as.numeric(exp(L%*%log(um$sp))))
-  res$R <- matrix(um$X[1:q^2],q,q)
-  res$rV<-matrix(um$rV[1:(um$info[1]*q)],q,um$info[1])
+  res$R <- matrix(um$X[seq_len(q)^2],q,q)
+  res$rV<-matrix(um$rV[seq_len(um$info[1]*q)],q,um$info[1])
   gcv.info<-list(full.rank=full.rank,rank=um$info[1],fully.converged=as.logical(um$info[2]),
       hess.pos.def=as.logical(um$info[3]),iter=um$info[4],score.calls=um$info[5],rms.grad=um$rms.grad)
   res$gcv.info<-gcv.info

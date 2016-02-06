@@ -185,7 +185,7 @@ k.check <- function(b,subsample=5000,n.rep=400) {
   snames <- rep("",m)
   n <- nrow(b$model)
   if (n>subsample) { ## subsample to avoid excessive cost
-    ind <- sample(1:n,subsample)
+    ind <- sample(seq_len(n), subsample)
     modf <- b$model[ind,] 
     rsd <- rsd[ind]
   } else modf <- b$model
@@ -201,7 +201,7 @@ k.check <- function(b,subsample=5000,n.rep=400) {
     kc[k] <- length(ind)
     edf[k] <- sum(b$edf[ind]) 
     nc <- b$smooth[[k]]$dim
-    if (ok && ncol(dat)>nc) dat <- dat[,1:nc,drop=FALSE] ## drop any by variables
+    if (ok && ncol(dat)>nc) dat <- dat[, seq_len(nc), drop = FALSE] ## drop any by variables
     for (j in seq_len(nc)) if (is.factor(dat[[j]])) ok <- FALSE 
     if (!ok) {
       p.val[k] <- v.obs[k] <- NA ## can't do this test with summation convention/factors
@@ -210,7 +210,7 @@ k.check <- function(b,subsample=5000,n.rep=400) {
         e <- diff(rsd[order(dat[,1])])
         v.obs[k] <- mean(e^2)/2
         for (i in seq_len(n.rep)) {
-          e <- diff(rsd[sample(1:nr,nr)]) ## shuffle 
+          e <- diff(rsd[sample(seq_len(nr), nr)]) ## shuffle 
           ve[i] <-  mean(e^2)/2
         }
         p.val[k] <- mean(ve<v.obs[k])
@@ -238,7 +238,7 @@ k.check <- function(b,subsample=5000,n.rep=400) {
         for (j in 2:nn) e <- c(e,rsd-rsd[ni[,j]])
         v.obs[k] <- mean(e^2)/2
         for (i in seq_len(n.rep)) {
-          rsdr <- rsd[sample(1:nr,nr)] ## shuffle
+          rsdr <- rsd[sample(seq_len(nr), nr)] ## shuffle
           e <- rsdr - rsdr[ni[,1]]
           for (j in 2:nn) e <- c(e,rsdr-rsdr[ni[,j]])
           ve[i] <-  mean(e^2)/2
@@ -545,7 +545,7 @@ poly2 <- function(x,col) {
 ## other loops are holes (further nesting gives and island 
 ## in hole, etc). Holes are left unfilled.
 ## The first polygon should not be a hole.
-  ind <- (1:nrow(x))[is.na(rowSums(x))] ## where are the splits?
+  ind <- seq_len(nrow(x))[is.na(rowSums(x))] ## where are the splits?
   if (length(ind)==0|| ind[1]==nrow(x)) polygon(x,col=col,border="black") else {
     base <- x[1,]
     xf <- x
@@ -682,7 +682,7 @@ plot.fs.interaction <- function(x,P=NULL,data=NULL,label="",se1.mult=1,se2.mult=
     return(list(X=X,scale=TRUE,se=FALSE,raw=raw,xlab=xlabel,ylab=ylabel,
              main="",x=xx,n=n,nf=nf))
   } else { ## produce the plot
-    ind <- 1:P$n
+    ind <- seq_len(P$n)
     plot(P$x[ind],P$fit[ind],ylim=range(P$fit),xlab=P$xlab,ylab=P$ylab,type="l")
     if (P$nf>1) for (i in 2:P$nf) {
       ind <- ind + P$n
@@ -1273,11 +1273,11 @@ vis.gam <- function(x,view=NULL,cond=list(),n.grid=30,too.far=0,col=NA,color="he
 { fac.seq<-function(fac,n.grid)
   # generates a sequence of factor variables of length n.grid
   { fn<-length(levels(fac));gn<-n.grid;
-    if (fn>gn) mf<-factor(levels(fac))[1:gn]
+    if (fn>gn) mf<-factor(levels(fac))[seq_len(gn)]
     else
     { ln<-floor(gn/fn) # length of runs               
       mf<-rep(levels(fac)[fn],gn)
-      mf[1:(ln*fn)]<-rep(levels(fac),rep(ln,fn))
+      mf[seq_len(ln*fn)]<-rep(levels(fac),rep(ln,fn))
       mf<-factor(mf,levels=levels(fac))
     }
     mf
