@@ -340,7 +340,7 @@
       S4 object into its own list such that the end result is roughly
       equivalent to using \code{[[<-}. That behavior is deprecated. In
       the future, the S4 value will be coerced to a list with
-      \code{as.list}.
+      \code{as.list()}.
     }
   }
 
@@ -424,7 +424,7 @@
       included within an \code{extern "C"} block, and almost all the
       packages affected by this change are doing so.
 
-      \item Including header \file{S.h} from C++ code will fail on some
+      \item Including header \file{S.h} from C++ code would fail on some
       platforms, and so gives a compilation error on all.
       
       \item The deprecated header \file{Rdefines.h} is now compatible
@@ -482,6 +482,10 @@
       for multivariate linear models (\code{"mlm"}, \code{\link{manova}})
       thanks to a proposal by Daniel Wollschlaeger.
       % port to r-patched
+      
+      \item (X11 only)  \code{getGraphicsEvent()} miscoded buttons and 
+      missed mouse motion events.  (\PR{16700})
+      % port to r-patched if it doesn't add too many events to graphics windows
     }
   }
 }
