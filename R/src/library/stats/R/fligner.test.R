@@ -38,7 +38,7 @@ function(x, g, ...)
     else {
         if (length(x) != length(g))
             stop(gettextf("'%s' and '%s' arguments must have the same length", "x", "g"))
-        DNAME <- gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(g)), collapse = ""))
+        DNAME <- gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(g)), collapse = ""), domain = "R-stats")
         OK <- complete.cases(x, g)
         x <- x[OK]
         g <- g[OK]

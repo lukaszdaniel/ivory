@@ -32,7 +32,7 @@ function(x, y, ratio = 1,
           (conf.level > 0) && (conf.level < 1)))
         stop(gettextf("'%s' argument must be a single number between 0 and 1", "conf.level"))
 
-    DNAME <- gettextf("%s and %s", deparse(substitute(x)), deparse(substitute(y)), domain = "R-stats")
+    DNAME <- gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)), collapse = ""), domain = "R-stats")
 
     if (inherits(x, "lm") && inherits(y, "lm")) {
         DF.x <- x$df.residual

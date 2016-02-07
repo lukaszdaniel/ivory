@@ -32,7 +32,7 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
         conf.level < 0 || conf.level > 1))
         stop(gettextf("'%s' argument must be a single number between 0 and 1", "conf.level"))
     if( !is.null(y) ) {
-	DNAME <- gettextf("%s and %s", deparse(substitute(x)), deparse(substitute(y)))
+        DNAME <- gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)), collapse = ""), domain = "R-stats")
 	if(paired)
 	    xok <- yok <- complete.cases(x,y)
 	else {

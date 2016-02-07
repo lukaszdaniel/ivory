@@ -19,7 +19,7 @@
 prop.trend.test <- function (x, n, score = seq_along(x))
 {
     METHOD <- gettext("Chi-squared Test for Trend in Proportions", domain = "R-stats")
-    DNAME <- gettextf("%s out of %s,\n using scores: %s", deparse(substitute(x)), deparse(substitute(n)), paste(score, collapse = " "), domain = "R-stats")
+    DNAME <- gettextf("%s out of %s,\n using scores: %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(n)), collapse = ""), paste(score, collapse = " "), domain = "R-stats")
 
     ## Tabular input has caused grief, get rid of dim() attributes:
     x <- as.vector(x)

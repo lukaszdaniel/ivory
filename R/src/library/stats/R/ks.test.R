@@ -29,7 +29,7 @@ ks.test <-
     PVAL <- NULL
 
     if(is.numeric(y)) { ## two-sample case
-        DNAME <- gettextf("%s and %s", paste(DNAME, collapse = ""), paste(deparse(substitute(y)), collapse = ""))
+        DNAME <- gettextf("%s and %s", paste(DNAME, collapse = ""), paste(deparse(substitute(y)), collapse = ""), domain = "R-stats")
         y <- y[!is.na(y)]
         n.x <- as.double(n)             # to avoid integer overflow
         n.y <- length(y)

@@ -37,7 +37,7 @@ function(x, n, p = NULL, alternative = c("two.sided", "less", "greater"),
 	x <- x[, 1L]
     }
     else {
-	DNAME <- gettextf("%s out of %s", DNAME, deparse(substitute(n)), domain = "R-stats")
+        DNAME <- gettextf("%s out of %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(n)), collapse = ""), domain = "R-stats")
 	if ((l <- length(x)) != length(n))
 	    stop(gettextf("'%s' and '%s' arguments must have the same length", "x", "n"))
     }
@@ -57,7 +57,7 @@ function(x, n, p = NULL, alternative = c("two.sided", "less", "greater"),
     if (is.null(p) && (k == 1))
 	p <- .5
     if (!is.null(p)) {
-	DNAME <- paste0(DNAME, ", ", sprintf(ngettext(k, "null probability %s", "null probabilities %s", domain = "R-stats"), deparse(substitute(p))))
+	DNAME <- paste0(DNAME, ", ", sprintf(ngettext(k, "null probability %s", "null probabilities %s", domain = "R-stats"), paste(deparse(substitute(p)), collapse = "")))
 	if (length(p) != l)
 	    stop(gettextf("'%s', '%s' and '%s' arguments must have the same length", "x", "n", "p"))
 	p <- p[OK]

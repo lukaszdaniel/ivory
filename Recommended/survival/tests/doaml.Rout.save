@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-02-04 r587) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-02-07 r593) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-02-04 r70105) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-02-07 r70118) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -192,4 +192,4 @@ n= 23, number of events= 18
 > 
 > proc.time()
    user  system elapsed 
-  0.268   0.016   0.275 
+  0.216   0.048   0.256 

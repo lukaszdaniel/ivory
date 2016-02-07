@@ -22,7 +22,7 @@ poisson.test <- function(x, T = 1, r = 1, alternative =
                          conf.level = 0.95)
 {
 
-    DNAME <- gettextf("%s time base: %s", deparse(substitute(x)), deparse(substitute(T)), domain = "R-stats")
+    DNAME <- gettextf("%s time base: %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(T)), collapse = ""), domain = "R-stats")
     if ((l <- length(x)) != length(T))
         if (length(T) == 1L)
             T <- rep(T, l)

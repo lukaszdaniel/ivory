@@ -45,7 +45,7 @@ chisq.test <- function(x, y = NULL, correct = TRUE,
 	names(dimnames(x)) <- c(xname, yname)
         ## unclear what to do here: might abbreviating be preferable?
 	#DNAME <- paste(paste(DNAME, collapse = "\n"), "and", paste(DNAME2, collapse = "\n"))
-	DNAME <- gettextf("%s and %s", paste(DNAME, collapse = "\n"), paste(DNAME2, collapse = "\n"))
+	DNAME <- gettextf("%s and %s", paste(DNAME, collapse = "\n"), paste(DNAME2, collapse = "\n"), domain = "R-stats")
     }
 
     if (any(x < 0) || anyNA(x))

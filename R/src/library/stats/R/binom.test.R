@@ -37,7 +37,7 @@ function(x, n, p = 0.5, alternative = c("two.sided", "less", "greater"),
         if((length(n) > 1L) || is.na(n) || (n < 1) || abs(n-nr) > 1e-7
            || (x > nr))
             stop("'n' argument must be a positive integer >= 'x' argument")
-        DNAME <- gettextf("%s and %s", deparse(substitute(x)), deparse(substitute(n)), domain = "R-stats")
+        DNAME <- gettextf("%s and %s", paste(DNAME, collapse = ""), paste(deparse(substitute(n)), collapse = ""), domain = "R-stats")
         n <- nr
     }
     else

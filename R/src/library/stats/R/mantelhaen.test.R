@@ -35,7 +35,7 @@ function(x, y = NULL, z = NULL,
         if(is.null(z)) stop(gettextf("if '%s' argument is not an array, '%s' argument must be given", "x", "z"))
         if(any(diff(c(length(x), length(y), length(z))) != 0L ))
             stop(gettextf("'%s', '%s' and '%s' arguments must have the same length", "x", "y", "z"))
-        DNAME <- gettextf("%s and %s and %s", deparse(substitute(x)), deparse(substitute(y)), deparse(substitute(z)), domain = "R-stats")
+        DNAME <- gettextf("%s and %s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)), collapse = ""), paste(deparse(substitute(z)), collapse = ""), domain = "R-stats")
         OK <- complete.cases(x, y, z)
         x <- factor(x[OK])
         y <- factor(y[OK])

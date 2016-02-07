@@ -46,7 +46,7 @@ function(x, y = NULL, workspace = 200000, hybrid = FALSE,
             stop(gettextf("if '%s' argument is not a matrix, '%s' argument must be given", "x", "y"))
         if(length(x) != length(y))
             stop(gettextf("'%s' and '%s' arguments must have the same length", "x", "y"))
-        DNAME <- gettextf("%s and %s", deparse(substitute(x)), deparse(substitute(y)), domain = "R-stats")
+        DNAME <- gettextf("%s and %s", paste(DNAME, collapse = ""), paste(deparse(substitute(y)), collapse = ""), domain = "R-stats")
         OK <- complete.cases(x, y)
         ## use as.factor rather than factor here to be consistent with
         ## pre-tabulated data
