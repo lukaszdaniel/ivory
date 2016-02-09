@@ -299,9 +299,9 @@ correlogram <- function(krig, nint, plotit=TRUE, ...)
           as.integer(length(krig$x)),
           cnt = integer(nint)
           )
-  xp <- z$xp[1L:z$nint]
-  yp <- z$yp[1L:z$nint]
-  z <- list(x = xp, y = yp, cnt = z$cnt[1L:z$nint])
+  xp <- z$xp[seq_len(z$nint)]
+  yp <- z$yp[seq_len(z$nint)]
+  z <- list(x = xp, y = yp, cnt = z$cnt[seq_len(z$nint)])
   if(plotit)
     if(exists(".Device")) {
       plot(xp, yp, type = "p", ylim = c(-1, 1), ...)
@@ -327,10 +327,10 @@ variogram <- function(krig, nint, plotit=TRUE, ...)
           as.integer(length(krig$x)),
           cnt = integer(nint)
           )
-  xp <- z$xp[1L:z$nint]
-  yp <- z$yp[1L:z$nint]
+  xp <- z$xp[seq_len(z$nint)]
+  yp <- z$yp[seq_len(z$nint)]
   if(xp[1L] > 0) {xp <- c(0, xp); yp <- c(0, yp)}
-  z <- list(x = xp, y = yp, cnt = z$cnt[1L:z$nint])
+  z <- list(x = xp, y = yp, cnt = z$cnt[seq_len(z$nint)])
   if(plotit)
     if(exists(".Device")) {
       plot(xp, yp, type = "p", ...)
@@ -469,10 +469,9 @@ anovalist.trls <- function (object, ...)
     }
     table <- data.frame(df.r, ss.r, df, ss, f, p)
     dimnames(table) <-
-        list(1L:nmodels, c("Res.Df", "Res.Sum Sq", "Df", "Sum Sq", "F value", "Pr(>F)"))
+        list(seq_len(nmodels), c("Res.Df", "Res.Sum Sq", "Df", "Sum Sq", "F value", "Pr(>F)"))
     title <- paste(gettext("Analysis of Variance Table"), "\n", sep = "")
-    topnote <- paste(gettextf("Model %s: %s", format(1L:nmodels), models), collapse = "\n")
-				#paste(gettextf("Model %d: %s", format(1L:nmodels), models), "\n", sep = "")
+    topnote <- paste(gettextf("Model %s: %s", format(seq_len(nmodels)), models), collapse = "\n")
     sss <- getOption("show.signif.stars")
     if (sss) options(show.signif.stars = FALSE)
     print(structure(table, heading = c(title, topnote), class = c("anova", "data.frame")))

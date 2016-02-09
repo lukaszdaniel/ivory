@@ -203,10 +203,10 @@ survreg <- function(formula, data, weights, subset, na.action,
     else {
 	if (scale==0) {
 	    nvar <- length(fit$coefficients) - nstrata
-	    fit$scale <- exp(fit$coefficients[-(1:nvar)])
+	    fit$scale <- exp(fit$coefficients[-seq_len(nvar)])
 	    if (nstrata==1) names(fit$scale) <- NULL
 	    else names(fit$scale) <- levels(strata.keep)
-	    fit$coefficients  <- fit$coefficients[1:nvar]
+	    fit$coefficients  <- fit$coefficients[seq_len(nvar)]
 	    fit$idf  <- 1 + nstrata
 	    }
 	else {

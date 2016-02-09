@@ -81,7 +81,7 @@ predict.coxph.penal <- function(object,  newdata,
 			}
 		    }
 		else {
-		    first <- if (xvar==1) 0 else 1:(xvar-1)
+		    first <- if (xvar==1) 0 else seq_len(xvar-1)
 		    secnd <- if (xvar==nvar) 0 else  (xvar+1):nvar
 		    pred  <- cbind(pred[,first], spterm, pred[,secnd])
 		    if (se.fit)

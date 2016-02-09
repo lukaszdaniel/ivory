@@ -2,8 +2,8 @@
 plot.aareg <- function(x, se=TRUE, maxtime, type='s', ...) {
     if (!inherits(x, 'aareg')) stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("aareg")))
 
-    if (missing(maxtime)) keep <- 1:length(x$time)
-    else		  keep <- 1:sum(x$time <= maxtime)
+    if (missing(maxtime)) keep <- seq_len(length(x$time))
+    else		  keep <- seq_len(sum(x$time <= maxtime))
 
     yylab <- names(x$test.statistic)
 
@@ -19,7 +19,7 @@ plot.aareg <- function(x, se=TRUE, maxtime, type='s', ...) {
                 #              ... , apply(dfbeta[,,ndeath].....
 		# By being sneaky, it can be done quickly
 		dd <- dim(x$dfbeta)
-		keep2 <- 1:length(unique(x$time[keep]))
+		keep2 <- seq_len(length(unique(x$time[keep])))
 		temp <- matrix(x$dfbeta[,,keep2], nrow=dd[1])
 		se.increment <- matrix(apply(temp^2, 2, sum), nrow=dd[2])
 		se.yy <- sqrt(apply(t(se.increment), 2, cumsum))
@@ -37,7 +37,7 @@ plot.aareg <- function(x, se=TRUE, maxtime, type='s', ...) {
 	if (se) {
 	    if (!is.null(x$dfbeta)) {
 		dd <- dim(x$dfbeta)
-		keep2 <- 1:length(unique(x$time[keep]))
+		keep2 <- seq_len(length(unique(x$time[keep])))
 		temp <- matrix(x$dfbeta[,,keep2], nrow=dd[1])
 		se.yy <- sqrt(cumsum(c(0, apply(temp^2, 2, sum))))
 		}

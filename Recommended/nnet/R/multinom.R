@@ -25,7 +25,7 @@ multinom <-
         n <- length(cl)
         x <- matrix(0, n, length(levels(cl)))
         ## get codes of a factor
-        x[(1L:n) + n * (as.integer(cl) - 1L)] <- 1
+        x[seq_len(n) + n * (as.integer(cl) - 1L)] <- 1
         dimnames(x) <- list(names(cl), levels(cl))
         x
     }
@@ -44,8 +44,8 @@ multinom <-
                 as.integer(q),
                 Z = Z,
                 na = integer(1L))
-        Za <- t(z$Z[, 1L:z$na, drop = FALSE])
-        list(X = Za[, 1L:p, drop = FALSE], Y = Za[, p + 1L:q])
+        Za <- t(z$Z[, seq_len(z$na), drop = FALSE])
+        list(X = Za[, seq_len(p), drop = FALSE], Y = Za[, p + seq_len(q)])
     }
 
     call <- match.call()
@@ -94,15 +94,15 @@ multinom <-
     }
     if(summ == 2) {
         Z <- summ2(cbind(X, Y), w)
-        X <- Z$X[, 1L:ncol(X)]
-        Y <- Z$X[, ncol(X) + 1L:ncol(Y), drop = FALSE]
+        X <- Z$X[, seq_len(ncol(X))]
+        Y <- Z$X[, ncol(X) + seq_len(ncol(Y)), drop = FALSE]
         w <- Z$Y
         print(dim(X))
     }
     if(summ == 3) {
         Z <- summ2(X, Y*w)
         X <- Z$X
-        Y <- Z$Y[, 1L:ncol(Y), drop = FALSE]
+        Y <- Z$Y[, seq_len(ncol(Y)), drop = FALSE]
         w <- rep(1, nrow(X))
         print(dim(X))
     }
@@ -155,10 +155,10 @@ multinom <-
     if(is.matrix(Y)) {
         edf <- (ncol(Y)-1)*Xr
         if(length(dn <- colnames(Y)) > 0) fit$lab <- dn
-        else fit$lab <- 1L:ncol(Y)
+        else fit$lab <- seq_len(ncol(Y))
     }
     fit$coefnames <- colnames(X)
-    fit$vcoefnames <- fit$coefnames[1L:r] # remove offset cols
+    fit$vcoefnames <- fit$coefnames[seq_len(r)] # remove offset cols
     fit$na.action <- attr(m, "na.action")
     fit$contrasts <- cons
     fit$xlevels <- .getXlevels(Terms, m)
@@ -220,10 +220,10 @@ coef.multinom <- function(object, ...)
 {
     r <- length(object$vcoefnames)
     if(length(object$lev) == 2L) {
-        coef <- object$wts[1L+(1L:r)]
+        coef <- object$wts[1L+seq_len(r)]
         names(coef) <- object$vcoefnames
     } else {
-        coef <- matrix(object$wts, nrow = object$n[3L], byrow=TRUE)[, 1L+(1L:r), drop=FALSE]
+        coef <- matrix(object$wts, nrow = object$n[3L], byrow=TRUE)[, 1L+seq_len(r), drop=FALSE]
         if(length(object$lev)) dimnames(coef) <- list(object$lev, object$vcoefnames)
         if(length(object$lab)) dimnames(coef) <- list(object$lab, object$vcoefnames)
         coef <- coef[-1L, , drop=FALSE]
@@ -319,12 +319,12 @@ function(object, correlation = FALSE, digits = options()$digits,
     r <- length(object$vcoefnames)
     se <- sqrt(diag(vc))
     if(length(object$lev) == 2L) {
-        coef <- object$wts[1L + (1L:r)]
+        coef <- object$wts[1L + seq_len(r)]
         stderr <- se
         names(coef) <- names(stderr) <- object$vcoefnames
     } else {
         coef <- matrix(object$wts, nrow = object$n[3L],
-                       byrow = TRUE)[-1L, 1L + (1L:r), drop = FALSE]
+                       byrow = TRUE)[-1L, 1L + seq_len(r), drop = FALSE]
         stderr <- matrix(se, nrow = object$n[3L] - 1L, byrow = TRUE)
         if(length(l <- object$lab) || length(l <- object$lev))
             dimnames(coef) <- dimnames(stderr) <-
@@ -398,7 +398,7 @@ anova.multinom <- function(object, ..., test = c("Chisq", "none"))
     mds <- sapply(mlist, function(x) paste(formula(x)[3L]))
     dfs <- dflis[s]
     lls <- sapply(mlist, function(x) deviance(x))
-    tss <- c("", paste(1L:(nt - 1), 2L:nt, sep = " vs "))
+    tss <- c("", paste(seq_len(nt - 1), 2L:nt, sep = " vs "))
     df <- c(NA, -diff(dfs))
     x2 <- c(NA, -diff(lls))
     pr <- c(NA, 1 - pchisq(x2[-1L], df[-1L]))

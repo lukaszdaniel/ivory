@@ -23,7 +23,7 @@ nnet.formula <- function(formula, data, weights, ...,
     {
         n <- length(cl)
         x <- matrix(0, n, length(levels(cl)))
-        x[(1L:n) + n * (as.vector(unclass(cl)) - 1L)] <- 1
+        x[seq_len(n) + n * (as.vector(unclass(cl)) - 1L)] <- 1
         dimnames(x) <- list(names(cl), levels(cl))
         x
     }
@@ -202,7 +202,7 @@ predict.nnet <- function(object, newdata, type=c("raw","class"), ...)
                 dim(newdata) <- c(1L, length(newdata)) # a row vector
             x <- as.matrix(newdata)     # to cope with dataframes
             if(any(is.na(x))) stop("missing values in 'x'")
-            keep <- 1L:nrow(x)
+            keep <- seq_len(nrow(x))
             rn <- rownames(x)
         }
         ntr <- nrow(x)
@@ -248,7 +248,7 @@ add.net <- function(net, from, to)
         cadd <- from
         if(nconn[i+1] == ns) cadd <- c(0,from)
         con <- NULL
-        if(ns > 1L) con <- conn[1L:ns]
+        if(ns > 1L) con <- conn[seq_len(ns)]
         con <- c(con, cadd)
         if(length(conn) > ns) con <- c(con, conn[(ns+1L):length(conn)])
         for(j in (i+1L):net$nunits) nconn[j+1L] <- nconn[j+1L]+length(cadd)
@@ -263,7 +263,7 @@ norm.net <- function(net)
 {
     n <- net$n; n0 <- n[1L]; n1 <- n0+n[2L]; n2 <- n1+n[3L];
     if(n[2L] <= 0) return(net)
-    net <- add.net(net, 1L:n0,(n0+1L):n1)
+    net <- add.net(net, seq_len(n0), (n0+1L):n1)
     add.net(net, (n0+1L):n1, (n1+1L):n2)
 }
 
@@ -309,7 +309,7 @@ class.ind <- function(cl)
     n <- length(cl)
     cl <- as.factor(cl)
     x <- matrix(0, n, length(levels(cl)) )
-    x[(1L:n) + n*(unclass(cl)-1L)] <- 1
+    x[seq_len(n) + n*(unclass(cl)-1L)] <- 1
     dimnames(x) <- list(names(cl), levels(cl))
     x
 }
@@ -340,7 +340,7 @@ coef.nnet <- function(object, ...)
                                   paste("o", seq_len(object$n[3L]), sep=""))
     else wm <- c(wm, "o")
     names(wts) <- apply(cbind(wm[1+object$conn],
-                              wm[1L+rep(1L:object$nunits - 1L,
+                              wm[1L+rep(seq_len(object$nunits) - 1L,
                                         diff(object$nconn))]),
                         1L, function(x)  paste(x, collapse = "->"))
     wts
@@ -365,7 +365,7 @@ print.summary.nnet <- function(x, ...)
     if(x$decay[1L] > 0) cat(gettextf(" decay=%s", x$decay[1L], domain = "R-nnet"), sep="")
     cat("\n")
     wts <- format(round(coef.nnet(x),2))
-    lapply(split(wts, rep(1L:x$nunits, tconn)),
+    lapply(split(wts, rep(seq_len(x$nunits), tconn)),
            function(x) print(x, quote=FALSE))
     invisible(x)
 }

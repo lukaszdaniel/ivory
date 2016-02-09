@@ -43,7 +43,7 @@ Kfn <- function(pp, fs, k = 100)
 	  dmin = double(1L),
 	  lm = double(1L),
 	  as.double(fs))
-  list(y = z$h[1L:z$k1], x = (seq(1L:z$k1) * fs)/k, k = k,
+  list(y = z$h[seq_len(z$k1)], x = (seq(seq_len(z$k1)) * fs)/k, k = k,
        dmin = z$dmin, lm = max(z$dmin, z$lm),
        call=match.call())
 }

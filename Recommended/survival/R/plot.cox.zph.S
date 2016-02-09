@@ -8,20 +8,20 @@ plot.cox.zph <- function(x, resid=TRUE, se=TRUE, df=4, nsmo=40, var, ...) {
     pred.x <- seq(from=min(xx), to=max(xx), length=nsmo)
     temp <- c(pred.x, xx)
     lmat <- ns(temp, df=df, intercept=TRUE)
-    pmat <- lmat[1:nsmo,]       # for prediction
-    xmat <- lmat[-(1:nsmo),]
+    pmat <- lmat[seq_len(nsmo), ]       # for prediction
+    xmat <- lmat[-seq_len(nsmo), ]
     qmat <- qr(xmat)
     if (qmat$rank < df) 
 	 stop("Spline fit is singular, try a smaller degrees of freedom")
 
     if (se) {
-	bk <- backsolve(qmat$qr[1:df, 1:df], diag(df))
+	bk <- backsolve(qmat$qr[seq_len(df), seq_len(df)], diag(df))
 	xtx <- bk %*% t(bk)
 	seval <- d*((pmat%*% xtx) *pmat) %*% rep(1, df)
 	}
 
     ylab <- gettextf("Beta(t) for %s", dimnames(yy)[[2]])
-    if (missing(var)) var <- 1:nvar
+    if (missing(var)) var <- seq_len(nvar)
     else {
 	if (is.character(var)) var <- match(var, dimnames(yy)[[2]])
 	if  (any(is.na(var)) || max(var)>nvar || min(var) <1)

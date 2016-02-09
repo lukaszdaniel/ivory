@@ -838,7 +838,7 @@ cv.glm <- function(data, glmfit, cost=function(y,yhat) mean((y-yhat)^2),
         stop("'K' outside allowable range")
     K.o <- K
     K <- round(K)
-    kvals <- unique(round(n/(1L:floor(n/2))))
+    kvals <- unique(round(n/(seq_len(floor(n/2)))))
     temp <- abs(kvals-K)
     if (!any(temp == 0))
         K <- kvals[temp == min(temp)][1L]

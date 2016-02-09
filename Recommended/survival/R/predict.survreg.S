@@ -30,7 +30,7 @@ predict.survreg <-
     coef <- object$coefficients
     intercept <- attr(Terms, "intercept")
     nvar <- length(object$coefficients)
-    vv <- object$var[1:nvar, 1:nvar]
+    vv <- object$var[seq_len(nvar), seq_len(nvar)]
     fixedscale <- (nvar == ncol(object$var))
 
     if (missing(newdata) && (type=='terms' || se.fit)) need.x <- TRUE
@@ -133,10 +133,10 @@ predict.survreg <-
 		se <- rep(sqrt(drop(var)), length(qq))
 		}
 	    else if (se.fit) {
-		x.strata <- outer(strata, 1:nstrata, 
+		x.strata <- outer(strata, seq_len(nstrata),
 				  function(x,y) 1*(x==y))
 		se <- matrix(0, ncol=length(qq), nrow=nrow(x))
-		for (i in 1:(length(qq))) {
+		for (i in seq_len(length(qq))) {
 		    temp <- cbind(x, (qq[i]*scale)* x.strata)
 		    var <- ((temp %*% object$var) *temp) %*% rep(1, ncol(temp))
 		    se[,i] <- sqrt(drop(var))
@@ -155,11 +155,11 @@ predict.survreg <-
 		else se <- sqrt(drop(var))
 		}
 	    else if (se.fit) {
-		x.strata <- outer(strata, 1:nstrata, 
+		x.strata <- outer(strata, seq_len(nstrata),
 				  function(x,y) 1*(x==y))
 		se <- pred
 		nc <- rep(1., ncol(object$var))
-		for (i in 1:length(qq)) {
+		for (i in seq_len(length(qq))) {
 		    temp <- cbind(x, (qq[i]*scale)*x.strata)
 		    var <- ((temp %*% object$var)* temp) %*% nc
 		    se[,i] <- sqrt(drop(var))
@@ -193,7 +193,7 @@ predict.survreg <-
 		ii<-asgn[[i]]
 		pred[,i]<-x[,ii,drop=FALSE]%*%(coef[ii])
 		if (se.fit){
-		    for(j in (1:NROW(x))){
+		    for(j in seq_len(NROW(x))){
 			xi<-x[j,ii,drop=FALSE]*(coef[ii])
 			vci<-R[ii,ii]
 			se[j,i]<-sqrt(sum(xi%*% vci %*%t( xi)))
