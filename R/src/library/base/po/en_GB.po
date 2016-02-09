@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-03 18:32+0100\n"
+"POT-Creation-Date: 2016-02-09 07:31+0100\n"
 "PO-Revision-Date: 2015-01-17 13:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: English\n"
@@ -501,7 +501,7 @@ msgstr ""
 msgid "[... truncated]"
 msgstr ""
 
-#: src/gnuwin32/console.c:2084 src/gnuwin32/editor.c:259
+#: src/gnuwin32/console.c:2086 src/gnuwin32/editor.c:259
 #, c-format
 msgid "Page %d"
 msgstr ""
@@ -637,7 +637,7 @@ msgstr ""
 #: src/main/grep.c:2345 src/main/grep.c:2647 src/main/grep.c:2652
 #: src/main/internet.c:209 src/main/internet.c:223 src/main/internet.c:241
 #: src/main/internet.c:254 src/main/internet.c:266 src/main/internet.c:285
-#: src/main/memory.c:3811 src/main/names.c:1308 src/main/names.c:1311
+#: src/main/memory.c:3818 src/main/names.c:1308 src/main/names.c:1311
 #: src/main/objects.c:1611 src/main/objects.c:1613 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
 #: src/main/paste.c:411 src/main/paste.c:416 src/main/paste.c:421
@@ -693,8 +693,8 @@ msgstr ""
 #: src/modules/lapack/Lapack.c:156 src/modules/lapack/Lapack.c:262
 #: src/modules/lapack/Lapack.c:709 src/modules/lapack/Lapack.c:818
 #: src/modules/lapack/Lapack.c:880 src/modules/lapack/Lapack.c:1205
-#: src/modules/X11/devX11.c:3235 src/modules/X11/devX11.c:3238
-#: src/modules/X11/devX11.c:3241 src/modules/X11/devX11.c:3265
+#: src/modules/X11/devX11.c:3238 src/modules/X11/devX11.c:3241
+#: src/modules/X11/devX11.c:3244 src/modules/X11/devX11.c:3268
 #: src/unix/sys-std.c:1224 src/unix/sys-std.c:1247
 #, c-format
 msgid "invalid '%s' argument"
@@ -848,8 +848,8 @@ msgstr ""
 msgid "<ERROR: re-encoding failure from encoding '%s'>\n"
 msgstr ""
 
-#: src/gnuwin32/system.c:562 src/gnuwin32/system.c:1052
-#: src/gnuwin32/system.c:1064 src/main/connections.c:580
+#: src/gnuwin32/system.c:562 src/gnuwin32/system.c:1058
+#: src/gnuwin32/system.c:1070 src/main/connections.c:580
 #: src/main/connections.c:585 src/main/dounzip.c:179 src/main/saveload.c:1960
 #: src/main/serialize.c:2599 src/main/serialize.c:2604
 #: src/main/serialize.c:2689 src/main/serialize.c:2734 src/unix/sys-std.c:1164
@@ -863,73 +863,73 @@ msgstr ""
 msgid "file.show(): file '%s' does not exist\n"
 msgstr ""
 
-#: src/gnuwin32/system.c:973
+#: src/gnuwin32/system.c:979
 #, c-format
 msgid "WARNING: R_MAX_MEM_SIZE value is invalid: ignored\n"
 msgstr ""
 
-#: src/gnuwin32/system.c:1005
+#: src/gnuwin32/system.c:1011
 msgid "WARNING: no max-mem-size given\n"
 msgstr ""
 
-#: src/gnuwin32/system.c:1012
+#: src/gnuwin32/system.c:1018
 #, c-format
 msgid "WARNING: --max-mem-size value is invalid: ignored\n"
 msgstr ""
 
-#: src/gnuwin32/system.c:1015
+#: src/gnuwin32/system.c:1021
 #, c-format
 msgid "WARNING: --max-mem-size=%lu%c: too large and ignored\n"
 msgstr ""
 
-#: src/gnuwin32/system.c:1021
+#: src/gnuwin32/system.c:1027
 #, c-format
 msgid "WARNING: --max-mem-size=%4.1fM: too small and ignored\n"
 msgstr ""
 
-#: src/gnuwin32/system.c:1026
+#: src/gnuwin32/system.c:1032
 #, c-format
 msgid "WARNING: --max-mem-size=%4.0fM: too large and taken as %uM\n"
 msgstr ""
 
-#: src/gnuwin32/system.c:1042
+#: src/gnuwin32/system.c:1048
 #, c-format
 msgid "option '%s' requires an argument"
 msgstr ""
 
-#: src/gnuwin32/system.c:1073
+#: src/gnuwin32/system.c:1079
 #, c-format
 msgid "option '%s' requires a non-empty argument"
 msgstr ""
 
-#: src/gnuwin32/system.c:1081 src/unix/system.c:345
+#: src/gnuwin32/system.c:1087 src/unix/system.c:345
 #, c-format
 msgid "WARNING: '-e %s' omitted as input is too long\n"
 msgstr ""
 
-#: src/gnuwin32/system.c:1085 src/unix/system.c:358
+#: src/gnuwin32/system.c:1091 src/unix/system.c:358
 #, c-format
 msgid "WARNING: unknown option '%s'\n"
 msgstr ""
 
-#: src/gnuwin32/system.c:1107 src/unix/system.c:362
+#: src/gnuwin32/system.c:1113 src/unix/system.c:362
 #, c-format
 msgid "ARGUMENT '%s' __ignored__\n"
 msgstr ""
 
-#: src/gnuwin32/system.c:1113 src/unix/system.c:369
+#: src/gnuwin32/system.c:1119 src/unix/system.c:369
 msgid "cannot use -e with -f or --file"
 msgstr ""
 
-#: src/gnuwin32/system.c:1131
+#: src/gnuwin32/system.c:1137
 msgid "creation of tmpfile failed -- set TMPDIR suitably?"
 msgstr ""
 
-#: src/gnuwin32/system.c:1150 src/unix/system.c:420
+#: src/gnuwin32/system.c:1156 src/unix/system.c:420
 msgid "you must specify '--save', '--no-save' or '--vanilla'"
 msgstr ""
 
-#: src/gnuwin32/system.c:1155
+#: src/gnuwin32/system.c:1161
 msgid ""
 "impossible to create 'reader thread'; you must free some system resources"
 msgstr ""
@@ -1042,11 +1042,11 @@ msgstr ""
 msgid "object of type '%s' is not subsettable"
 msgstr ""
 
-#: src/include/Rdefines.h:124
+#: src/include/Rdefines.h:133
 msgid "the 'value' of a list object is not defined"
 msgstr ""
 
-#: src/include/Rdefines.h:125
+#: src/include/Rdefines.h:134
 msgid "the 'value' of a raw object is not defined"
 msgstr ""
 
@@ -1123,11 +1123,11 @@ msgstr ""
 #: src/main/sort.c:1339 src/main/source.c:223 src/main/summary.c:954
 #: src/main/sysutils.c:250 src/main/util.c:1054 src/main/util.c:1059
 #: src/main/util.c:1066 src/main/util.c:1069 src/main/util.c:2038
-#: src/modules/lapack/Lapack.c:940 src/modules/X11/devX11.c:3137
-#: src/modules/X11/devX11.c:3163 src/modules/X11/devX11.c:3168
-#: src/modules/X11/devX11.c:3173 src/modules/X11/devX11.c:3183
-#: src/modules/X11/devX11.c:3188 src/modules/X11/devX11.c:3192
-#: src/modules/X11/devX11.c:3196
+#: src/modules/lapack/Lapack.c:940 src/modules/X11/devX11.c:3140
+#: src/modules/X11/devX11.c:3166 src/modules/X11/devX11.c:3171
+#: src/modules/X11/devX11.c:3176 src/modules/X11/devX11.c:3186
+#: src/modules/X11/devX11.c:3191 src/modules/X11/devX11.c:3195
+#: src/modules/X11/devX11.c:3199
 #, c-format
 msgid "invalid '%s' value"
 msgstr ""
@@ -2453,12 +2453,12 @@ msgid ""
 "this is a file compressed using '%s' which this build of R does not support"
 msgstr ""
 
-#: src/main/connections.c:2119 src/modules/X11/devX11.c:3369
+#: src/main/connections.c:2119 src/modules/X11/devX11.c:3372
 msgid "memory allocation to copy clipboard failed"
 msgstr ""
 
-#: src/main/connections.c:2124 src/modules/X11/devX11.c:3348
-#: src/modules/X11/devX11.c:3353
+#: src/main/connections.c:2124 src/modules/X11/devX11.c:3351
+#: src/modules/X11/devX11.c:3356
 msgid "clipboard cannot be opened or contains no text"
 msgstr ""
 
@@ -5281,184 +5281,184 @@ msgstr ""
 msgid "cannot allocate vector of size %0.f Kb"
 msgstr ""
 
-#: src/main/memory.c:2907
+#: src/main/memory.c:2914
 #, c-format
 msgid ""
 "\n"
 "%.1f Mbytes of cons cells used (%d%%)\n"
 msgstr ""
 
-#: src/main/memory.c:2912
+#: src/main/memory.c:2919
 #, c-format
 msgid "%.1f Mbytes of vectors used (%d%%)\n"
 msgstr ""
 
-#: src/main/memory.c:2935
+#: src/main/memory.c:2942
 #, c-format
 msgid "GC encountered a node (%p) with type FREESXP (was %s) at memory.c:%d"
 msgstr ""
 
-#: src/main/memory.c:2940 src/main/memory.c:2945
+#: src/main/memory.c:2947 src/main/memory.c:2952
 #, c-format
 msgid "GC encountered a node (%p) with an unknown SEXP type: %s at memory.c:%d"
 msgstr ""
 
-#: src/main/memory.c:2955
+#: src/main/memory.c:2962
 msgid "internal TRUE value has been modified"
 msgstr ""
 
-#: src/main/memory.c:2959
+#: src/main/memory.c:2966
 msgid "internal FALSE value has been modified"
 msgstr ""
 
-#: src/main/memory.c:2964
+#: src/main/memory.c:2971
 msgid "internal logical NA value has been modified"
 msgstr ""
 
-#: src/main/memory.c:3062
+#: src/main/memory.c:3069
 msgid "protect(): protection stack overflow"
 msgstr ""
 
-#: src/main/memory.c:3069
+#: src/main/memory.c:3076
 #, c-format
 msgid "unprotect(): only %d protected item"
 msgid_plural "unprotect(): only %d protected items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/main/memory.c:3104
+#: src/main/memory.c:3111
 msgid "unprotect_ptr: pointer not found"
 msgstr ""
 
-#: src/main/memory.c:3142
+#: src/main/memory.c:3149
 #, c-format
 msgid "R_Reprotect: only %d protected item, can't reprotect index %d"
 msgid_plural "R_Reprotect: only %d protected items, can't reprotect index %d"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/main/memory.c:3194
+#: src/main/memory.c:3201
 #, c-format
 msgid "'Calloc()' function could not allocate memory (%.0f of %u bytes)"
 msgstr ""
 
-#: src/main/memory.c:3204
+#: src/main/memory.c:3211
 #, c-format
 msgid "'Realloc()' function could not re-allocate memory (%.0f bytes)"
 msgstr ""
 
-#: src/main/memory.c:3335
+#: src/main/memory.c:3342
 #, c-format
 msgid "value of 'SET_ATTRIB' must be a pairlist or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3373
+#: src/main/memory.c:3380
 #, c-format
 msgid "LENGTH or similar applied to %s object"
 msgstr ""
 
-#: src/main/memory.c:3388
+#: src/main/memory.c:3395
 #, c-format
 msgid "'CHAR()' function can only be applied to a 'CHARSXP', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3395
+#: src/main/memory.c:3402
 #, c-format
 msgid ""
 "'STRING_ELT()' function can only be applied to a 'character vector', not a "
 "'%s'"
 msgstr ""
 
-#: src/main/memory.c:3405
+#: src/main/memory.c:3412
 #, c-format
 msgid "'VECTOR_ELT()' function can only be applied to a 'list', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3412
+#: src/main/memory.c:3419
 #, c-format
 msgid "'LOGICAL()' function can only be applied to a 'logical', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3420
+#: src/main/memory.c:3427
 #, c-format
 msgid "'INTEGER()' function can only be applied to a 'integer', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3427
+#: src/main/memory.c:3434
 #, c-format
 msgid "'RAW()' function can only be applied to a 'raw', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3434
+#: src/main/memory.c:3441
 #, c-format
 msgid "'REAL()' function can only be applied to a 'numeric', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3441
+#: src/main/memory.c:3448
 #, c-format
 msgid "'COMPLEX()' function can only be applied to a 'complex', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3450
+#: src/main/memory.c:3457
 msgid "not safe to return vector pointer"
 msgstr ""
 
-#: src/main/memory.c:3455
+#: src/main/memory.c:3462
 #, c-format
 msgid ""
 "'SET_STRING_ELT()' function can only be applied to a 'character vector', not "
 "a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3458
+#: src/main/memory.c:3465
 #, c-format
 msgid "value of 'SET_STRING_ELT()' function must be a 'CHARSXP' not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3461
+#: src/main/memory.c:3468
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_STRING_ELT()' function"
 msgstr ""
 
-#: src/main/memory.c:3472
+#: src/main/memory.c:3479
 #, c-format
 msgid "'SET_VECTOR_ELT()' function can only be applied to a 'list', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3476
+#: src/main/memory.c:3483
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_VECTOR_ELT()' function"
 msgstr ""
 
-#: src/main/memory.c:3501 src/main/memory.c:3511 src/main/memory.c:3523
-#: src/main/memory.c:3537 src/main/memory.c:3553 src/main/memory.c:3571
+#: src/main/memory.c:3508 src/main/memory.c:3518 src/main/memory.c:3530
+#: src/main/memory.c:3544 src/main/memory.c:3560 src/main/memory.c:3578
 msgid "bad value"
 msgstr ""
 
-#: src/main/memory.c:3653
+#: src/main/memory.c:3660
 #, c-format
 msgid "value of 'SET_CXTAIL()' function must be a 'char' or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3734
+#: src/main/memory.c:3741
 msgid "memory profiling is not available on this system"
 msgstr ""
 
-#: src/main/memory.c:3798
+#: src/main/memory.c:3805
 #, c-format
 msgid "'Rprofmem()': cannot open output file '%s'"
 msgstr ""
 
-#: src/main/memory.c:3834
+#: src/main/memory.c:3841
 msgid "'R_AllocStringBuffer( (size_t)-1 )' function is no longer allowed"
 msgstr ""
 
-#: src/main/memory.c:3851
+#: src/main/memory.c:3858
 #, c-format
 msgid "could not allocate memory (%u Mb) in 'R_AllocStringBuffer()' function"
 msgstr ""
 
-#: src/main/memory.c:3903
+#: src/main/memory.c:3910
 #, c-format
 msgid "long vectors not supported yet: %s:%d"
 msgstr ""
@@ -8962,7 +8962,7 @@ msgstr ""
 
 #: src/modules/X11/devX11.c:796 src/modules/X11/devX11.c:1633
 #: src/modules/X11/devX11.c:1640 src/modules/X11/devX11.c:1660
-#: src/modules/X11/devX11.c:1669 src/modules/X11/devX11.c:3249
+#: src/modules/X11/devX11.c:1669 src/modules/X11/devX11.c:3252
 #, c-format
 msgid "cairo error '%s'"
 msgstr ""
@@ -9152,68 +9152,68 @@ msgstr ""
 msgid "attempt to use the locator after 'dev.hold()'"
 msgstr ""
 
-#: src/modules/X11/devX11.c:2749
+#: src/modules/X11/devX11.c:2752
 msgid "that type is not supported on this platform - using \"nbcairo\""
 msgstr ""
 
-#: src/modules/X11/devX11.c:2763
+#: src/modules/X11/devX11.c:2766
 msgid "cairo-based types are not supported on this build - using \"Xlib\""
 msgstr ""
 
-#: src/modules/X11/devX11.c:3106
+#: src/modules/X11/devX11.c:3109
 #, c-format
 msgid "unable to start device '%s'"
 msgstr ""
 
-#: src/modules/X11/devX11.c:3126
+#: src/modules/X11/devX11.c:3129
 msgid "a forked child should not open a graphics device"
 msgstr ""
 
-#: src/modules/X11/devX11.c:3133
+#: src/modules/X11/devX11.c:3136
 #, fuzzy
 msgid "invalid 'width' or 'height' arguments"
 msgstr "invalid colour name '%s'"
 
-#: src/modules/X11/devX11.c:3140
+#: src/modules/X11/devX11.c:3143
 #, fuzzy
 msgid "invalid 'colortype' argument passed to X11 driver"
 msgstr "invalid colour name '%s'"
 
-#: src/modules/X11/devX11.c:3153
+#: src/modules/X11/devX11.c:3156
 msgid "unknown X11 color/colour model -- using monochrome"
 msgstr "unknown X11 colour model -- using monochrome"
 
-#: src/modules/X11/devX11.c:3243
+#: src/modules/X11/devX11.c:3246
 msgid "no plot on device to save"
 msgstr ""
 
-#: src/modules/X11/devX11.c:3245
+#: src/modules/X11/devX11.c:3248
 msgid "no open 'X11cairo' device"
 msgstr ""
 
-#: src/modules/X11/devX11.c:3254
+#: src/modules/X11/devX11.c:3257
 #, c-format
 msgid "cannot open file '%s'"
 msgstr ""
 
-#: src/modules/X11/devX11.c:3271
+#: src/modules/X11/devX11.c:3274
 msgid "'savePlot()' function is not supported on this build"
 msgstr ""
 
-#: src/modules/X11/devX11.c:3311
+#: src/modules/X11/devX11.c:3314
 msgid "unable to contact X11 display"
 msgstr ""
 
-#: src/modules/X11/devX11.c:3320
+#: src/modules/X11/devX11.c:3323
 msgid "X11 clipboard selection is not supported on this system"
 msgstr ""
 
-#: src/modules/X11/devX11.c:3360
+#: src/modules/X11/devX11.c:3363
 #, c-format
 msgid "clipboard cannot be read (error code %d)"
 msgstr ""
 
-#: src/modules/X11/devX11.c:3396
+#: src/modules/X11/devX11.c:3399
 msgid "cannot allocate memory for 'X11Routines' structure"
 msgstr ""
 
@@ -9307,27 +9307,27 @@ msgstr ""
 msgid "non-integer x = %f"
 msgstr ""
 
-#: src/nmath/nmath.h:145
+#: src/nmath/nmath.h:150
 #, fuzzy, c-format
 msgid "argument out of domain in '%s' function"
 msgstr "invalid colour name '%s'"
 
-#: src/nmath/nmath.h:148
+#: src/nmath/nmath.h:153
 #, fuzzy, c-format
 msgid "value out of range in '%s' function"
 msgstr "invalid colour name '%s'"
 
-#: src/nmath/nmath.h:151
+#: src/nmath/nmath.h:156
 #, fuzzy, c-format
 msgid "convergence failed in '%s' function"
 msgstr "invalid colour specification '%s'"
 
-#: src/nmath/nmath.h:154
+#: src/nmath/nmath.h:159
 #, c-format
 msgid "full precision may not have been achieved in '%s' function"
 msgstr ""
 
-#: src/nmath/nmath.h:157
+#: src/nmath/nmath.h:162
 #, fuzzy, c-format
 msgid "underflow occurred in '%s' function"
 msgstr "invalid colour specification '%s'"

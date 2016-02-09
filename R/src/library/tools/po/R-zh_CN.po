@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-01 21:16\n"
+"POT-Creation-Date: 2016-02-09 07:32\n"
 "PO-Revision-Date: 2015-01-17 15:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -760,16 +760,16 @@ msgstr ""
 msgid "Conflicting package names (submitted: %s, existing: %s)"
 msgstr ""
 
-#. R/check.R: gettextf("Consider adding %s to your NAMESPACE (and ensure that your DESCRIPTION Imports field contains 'methods').",     paste0("  ", miss), domain = "R-tools")
+#. R/check.R: gettextf("Consider adding %s to your NAMESPACE file (and ensure that your DESCRIPTION Imports field contains 'methods').",     paste0("  ", miss), domain = "R-tools")
 #: R/check.R:0
 msgid ""
-"Consider adding %s to your NAMESPACE (and ensure that your DESCRIPTION "
+"Consider adding %s to your NAMESPACE file (and ensure that your DESCRIPTION "
 "Imports field contains 'methods')."
 msgstr ""
 
-#. R/check.R: gettextf("Consider adding %s to your NAMESPACE.", paste0("  ", miss), domain = "R-tools")
+#. R/check.R: gettextf("Consider adding %s to your NAMESPACE file.", paste0("  ", miss), domain = "R-tools")
 #: R/check.R:0
-msgid "Consider adding %s to your NAMESPACE."
+msgid "Consider adding %s to your NAMESPACE file."
 msgstr ""
 
 #. R/check.R: gettextf("\nConsider the use of a .Rinstignore file: see %s,\nor move the vignette sources from %s to %s.\n",     sQuote("Writing R Extensions"), sQuote("inst/doc"), sQuote("vignettes"), domain = "R-tools")

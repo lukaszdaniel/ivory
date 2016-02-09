@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.3.0\n"
-"POT-Creation-Date: 2016-02-01 21:16\n"
+"POT-Creation-Date: 2016-02-09 07:32\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -906,16 +906,16 @@ msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettextf("Consider adding %s to your NAMESPACE (and ensure that your DESCRIPTION Imports field contains 'methods').",     paste0("  ", miss), domain = "R-tools")
+#. R/check.R: gettextf("Consider adding %s to your NAMESPACE file (and ensure that your DESCRIPTION Imports field contains 'methods').",     paste0("  ", miss), domain = "R-tools")
 
-msgid "Consider adding %s to your NAMESPACE (and ensure that your DESCRIPTION Imports field contains 'methods')."
+msgid "Consider adding %s to your NAMESPACE file (and ensure that your DESCRIPTION Imports field contains 'methods')."
 msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettextf("Consider adding %s to your NAMESPACE.", paste0("  ", miss), domain = "R-tools")
+#. R/check.R: gettextf("Consider adding %s to your NAMESPACE file.", paste0("  ", miss), domain = "R-tools")
 
-msgid "Consider adding %s to your NAMESPACE."
+msgid "Consider adding %s to your NAMESPACE file."
 msgstr ""
 
 

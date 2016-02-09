@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-03 18:32+0100\n"
+"POT-Creation-Date: 2016-02-09 07:31+0100\n"
 "PO-Revision-Date: 2011-02-18 09:09+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -521,7 +521,7 @@ msgstr ""
 msgid "[... truncated]"
 msgstr ""
 
-#: src/gnuwin32/console.c:2084 src/gnuwin32/editor.c:259
+#: src/gnuwin32/console.c:2086 src/gnuwin32/editor.c:259
 #, c-format
 msgid "Page %d"
 msgstr ""
@@ -658,7 +658,7 @@ msgstr "feil ved vising av «%s»"
 #: src/main/grep.c:2345 src/main/grep.c:2647 src/main/grep.c:2652
 #: src/main/internet.c:209 src/main/internet.c:223 src/main/internet.c:241
 #: src/main/internet.c:254 src/main/internet.c:266 src/main/internet.c:285
-#: src/main/memory.c:3811 src/main/names.c:1308 src/main/names.c:1311
+#: src/main/memory.c:3818 src/main/names.c:1308 src/main/names.c:1311
 #: src/main/objects.c:1611 src/main/objects.c:1613 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
 #: src/main/paste.c:411 src/main/paste.c:416 src/main/paste.c:421
@@ -714,8 +714,8 @@ msgstr "feil ved vising av «%s»"
 #: src/modules/lapack/Lapack.c:156 src/modules/lapack/Lapack.c:262
 #: src/modules/lapack/Lapack.c:709 src/modules/lapack/Lapack.c:818
 #: src/modules/lapack/Lapack.c:880 src/modules/lapack/Lapack.c:1205
-#: src/modules/X11/devX11.c:3235 src/modules/X11/devX11.c:3238
-#: src/modules/X11/devX11.c:3241 src/modules/X11/devX11.c:3265
+#: src/modules/X11/devX11.c:3238 src/modules/X11/devX11.c:3241
+#: src/modules/X11/devX11.c:3244 src/modules/X11/devX11.c:3268
 #: src/unix/sys-std.c:1224 src/unix/sys-std.c:1247
 #, c-format
 msgid "invalid '%s' argument"
@@ -871,8 +871,8 @@ msgstr "kjenner ikkje teiknkodinga «%s»"
 msgid "<ERROR: re-encoding failure from encoding '%s'>\n"
 msgstr "<FEIL: Feil ved omkoding frå teiknkodinga «%s»>\n"
 
-#: src/gnuwin32/system.c:562 src/gnuwin32/system.c:1052
-#: src/gnuwin32/system.c:1064 src/main/connections.c:580
+#: src/gnuwin32/system.c:562 src/gnuwin32/system.c:1058
+#: src/gnuwin32/system.c:1070 src/main/connections.c:580
 #: src/main/connections.c:585 src/main/dounzip.c:179 src/main/saveload.c:1960
 #: src/main/serialize.c:2599 src/main/serialize.c:2604
 #: src/main/serialize.c:2689 src/main/serialize.c:2734 src/unix/sys-std.c:1164
@@ -886,77 +886,77 @@ msgstr "klarte ikkje opna fila «%s»: %s"
 msgid "file.show(): file '%s' does not exist\n"
 msgstr "file.show(): fila «%s» finst ikkje\n"
 
-#: src/gnuwin32/system.c:973
+#: src/gnuwin32/system.c:979
 #, fuzzy, c-format
 msgid "WARNING: R_MAX_MEM_SIZE value is invalid: ignored\n"
 msgstr "ÅTVARING: «%s»-verdien er ugyldig, og vert ikkje brukt\n"
 
-#: src/gnuwin32/system.c:1005
+#: src/gnuwin32/system.c:1011
 msgid "WARNING: no max-mem-size given\n"
 msgstr "ÅTVARING: ingen «max-mem-size» vald\n"
 
-#: src/gnuwin32/system.c:1012
+#: src/gnuwin32/system.c:1018
 #, c-format
 msgid "WARNING: --max-mem-size value is invalid: ignored\n"
 msgstr "ÅTVARING: «--max-mem-size»-verdien er ugyldig, og vert ikkje brukt\n"
 
-#: src/gnuwin32/system.c:1015
+#: src/gnuwin32/system.c:1021
 #, c-format
 msgid "WARNING: --max-mem-size=%lu%c: too large and ignored\n"
 msgstr ""
 "ÅTVARING: «--max-mem-size=%lu%c»-verdien er for høg, og vert ikkje brukt\n"
 
-#: src/gnuwin32/system.c:1021
+#: src/gnuwin32/system.c:1027
 #, c-format
 msgid "WARNING: --max-mem-size=%4.1fM: too small and ignored\n"
 msgstr ""
 "ÅTVARING: «--max-mem-size=%4.1fM»-verdien er for låg, og vert ikkje brukt\n"
 
-#: src/gnuwin32/system.c:1026
+#: src/gnuwin32/system.c:1032
 #, c-format
 msgid "WARNING: --max-mem-size=%4.0fM: too large and taken as %uM\n"
 msgstr ""
 "ÅTVARING: «--max-mem-size=%4.0fM»-verdien er for låg, og %uM vert brukt i "
 "staden for\n"
 
-#: src/gnuwin32/system.c:1042
+#: src/gnuwin32/system.c:1048
 #, fuzzy, c-format
 msgid "option '%s' requires an argument"
 msgstr "binæroperasjonar krev to argument"
 
-#: src/gnuwin32/system.c:1073
+#: src/gnuwin32/system.c:1079
 #, fuzzy, c-format
 msgid "option '%s' requires a non-empty argument"
 msgstr "binæroperasjonar krev to argument"
 
-#: src/gnuwin32/system.c:1081 src/unix/system.c:345
+#: src/gnuwin32/system.c:1087 src/unix/system.c:345
 #, c-format
 msgid "WARNING: '-e %s' omitted as input is too long\n"
 msgstr "ÅTVARING: «-e %s»-argumentet utelate, sidan inndata er for stor\n"
 
-#: src/gnuwin32/system.c:1085 src/unix/system.c:358
+#: src/gnuwin32/system.c:1091 src/unix/system.c:358
 #, c-format
 msgid "WARNING: unknown option '%s'\n"
 msgstr "ÅTVARING: ukjent val («%s»)\n"
 
-#: src/gnuwin32/system.c:1107 src/unix/system.c:362
+#: src/gnuwin32/system.c:1113 src/unix/system.c:362
 #, c-format
 msgid "ARGUMENT '%s' __ignored__\n"
 msgstr "ARGUMENTET «%s» __ikkje brukt__\n"
 
-#: src/gnuwin32/system.c:1113 src/unix/system.c:369
+#: src/gnuwin32/system.c:1119 src/unix/system.c:369
 msgid "cannot use -e with -f or --file"
 msgstr "kan ikkje bruka «-e» med «-f» eller «--file»"
 
-#: src/gnuwin32/system.c:1131
+#: src/gnuwin32/system.c:1137
 msgid "creation of tmpfile failed -- set TMPDIR suitably?"
 msgstr "klarte ikkje lagra «tmpfile». Prøv å definera «TMPDIR»."
 
-#: src/gnuwin32/system.c:1150 src/unix/system.c:420
+#: src/gnuwin32/system.c:1156 src/unix/system.c:420
 msgid "you must specify '--save', '--no-save' or '--vanilla'"
 msgstr "du må velja «--save», «--no-save» eller «--vanilla»"
 
-#: src/gnuwin32/system.c:1155
+#: src/gnuwin32/system.c:1161
 msgid ""
 "impossible to create 'reader thread'; you must free some system resources"
 msgstr ""
@@ -1072,11 +1072,11 @@ msgstr "indeksen ligg utanfor grensene"
 msgid "object of type '%s' is not subsettable"
 msgstr "kan ikkje trekkja ut delmengd av objekt som er av typen «%s»"
 
-#: src/include/Rdefines.h:124
+#: src/include/Rdefines.h:133
 msgid "the 'value' of a list object is not defined"
 msgstr ""
 
-#: src/include/Rdefines.h:125
+#: src/include/Rdefines.h:134
 msgid "the 'value' of a raw object is not defined"
 msgstr ""
 
@@ -1154,11 +1154,11 @@ msgstr "det første argumentet må vera ein vektor"
 #: src/main/sort.c:1339 src/main/source.c:223 src/main/summary.c:954
 #: src/main/sysutils.c:250 src/main/util.c:1054 src/main/util.c:1059
 #: src/main/util.c:1066 src/main/util.c:1069 src/main/util.c:2038
-#: src/modules/lapack/Lapack.c:940 src/modules/X11/devX11.c:3137
-#: src/modules/X11/devX11.c:3163 src/modules/X11/devX11.c:3168
-#: src/modules/X11/devX11.c:3173 src/modules/X11/devX11.c:3183
-#: src/modules/X11/devX11.c:3188 src/modules/X11/devX11.c:3192
-#: src/modules/X11/devX11.c:3196
+#: src/modules/lapack/Lapack.c:940 src/modules/X11/devX11.c:3140
+#: src/modules/X11/devX11.c:3166 src/modules/X11/devX11.c:3171
+#: src/modules/X11/devX11.c:3176 src/modules/X11/devX11.c:3186
+#: src/modules/X11/devX11.c:3191 src/modules/X11/devX11.c:3195
+#: src/modules/X11/devX11.c:3199
 #, c-format
 msgid "invalid '%s' value"
 msgstr "ugyldig «%s»-verdi"
@@ -2558,12 +2558,12 @@ msgid ""
 msgstr ""
 "dette er ei %s-komprimert fil, som denne byggversjonen av R ikkje støttar"
 
-#: src/main/connections.c:2119 src/modules/X11/devX11.c:3369
+#: src/main/connections.c:2119 src/modules/X11/devX11.c:3372
 msgid "memory allocation to copy clipboard failed"
 msgstr "feil ved minnereservering til kopiering til utklippstavla"
 
-#: src/main/connections.c:2124 src/modules/X11/devX11.c:3348
-#: src/modules/X11/devX11.c:3353
+#: src/main/connections.c:2124 src/modules/X11/devX11.c:3351
+#: src/modules/X11/devX11.c:3356
 msgid "clipboard cannot be opened or contains no text"
 msgstr "utklippstavla kan ikkje opnast, eller inneheld ikkje noko tekst"
 
@@ -5551,184 +5551,184 @@ msgstr "kan ikkje reservera vektor av storleik %0.1f Mb"
 msgid "cannot allocate vector of size %0.f Kb"
 msgstr "kan ikkje reservera vektor av storleik %0.f Kb"
 
-#: src/main/memory.c:2907
+#: src/main/memory.c:2914
 #, c-format
 msgid ""
 "\n"
 "%.1f Mbytes of cons cells used (%d%%)\n"
 msgstr ""
 
-#: src/main/memory.c:2912
+#: src/main/memory.c:2919
 #, c-format
 msgid "%.1f Mbytes of vectors used (%d%%)\n"
 msgstr ""
 
-#: src/main/memory.c:2935
+#: src/main/memory.c:2942
 #, c-format
 msgid "GC encountered a node (%p) with type FREESXP (was %s) at memory.c:%d"
 msgstr ""
 
-#: src/main/memory.c:2940 src/main/memory.c:2945
+#: src/main/memory.c:2947 src/main/memory.c:2952
 #, c-format
 msgid "GC encountered a node (%p) with an unknown SEXP type: %s at memory.c:%d"
 msgstr ""
 
-#: src/main/memory.c:2955
+#: src/main/memory.c:2962
 msgid "internal TRUE value has been modified"
 msgstr ""
 
-#: src/main/memory.c:2959
+#: src/main/memory.c:2966
 msgid "internal FALSE value has been modified"
 msgstr ""
 
-#: src/main/memory.c:2964
+#: src/main/memory.c:2971
 msgid "internal logical NA value has been modified"
 msgstr ""
 
-#: src/main/memory.c:3062
+#: src/main/memory.c:3069
 msgid "protect(): protection stack overflow"
 msgstr "protect(): vern av stakkoverflyt"
 
-#: src/main/memory.c:3069
+#: src/main/memory.c:3076
 #, fuzzy, c-format
 msgid "unprotect(): only %d protected item"
 msgid_plural "unprotect(): only %d protected items"
 msgstr[0] "unprotect(): berre %d verna objekt"
 msgstr[1] "unprotect(): berre %d verna objekt"
 
-#: src/main/memory.c:3104
+#: src/main/memory.c:3111
 msgid "unprotect_ptr: pointer not found"
 msgstr "unprotect_ptr: fann ikkje peikar"
 
-#: src/main/memory.c:3142
+#: src/main/memory.c:3149
 #, fuzzy, c-format
 msgid "R_Reprotect: only %d protected item, can't reprotect index %d"
 msgid_plural "R_Reprotect: only %d protected items, can't reprotect index %d"
 msgstr[0] "unprotect(): berre %d verna objekt"
 msgstr[1] "unprotect(): berre %d verna objekt"
 
-#: src/main/memory.c:3194
+#: src/main/memory.c:3201
 #, fuzzy, c-format
 msgid "'Calloc()' function could not allocate memory (%.0f of %u bytes)"
 msgstr "Calloc klarte ikkje reservera (%u av %u) minne"
 
-#: src/main/memory.c:3204
+#: src/main/memory.c:3211
 #, fuzzy, c-format
 msgid "'Realloc()' function could not re-allocate memory (%.0f bytes)"
 msgstr "Realloc klarte ikkje endra storleik (%u) på reservert minne"
 
-#: src/main/memory.c:3335
+#: src/main/memory.c:3342
 #, c-format
 msgid "value of 'SET_ATTRIB' must be a pairlist or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3373
+#: src/main/memory.c:3380
 #, c-format
 msgid "LENGTH or similar applied to %s object"
 msgstr ""
 
-#: src/main/memory.c:3388
+#: src/main/memory.c:3395
 #, c-format
 msgid "'CHAR()' function can only be applied to a 'CHARSXP', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3395
+#: src/main/memory.c:3402
 #, c-format
 msgid ""
 "'STRING_ELT()' function can only be applied to a 'character vector', not a "
 "'%s'"
 msgstr ""
 
-#: src/main/memory.c:3405
+#: src/main/memory.c:3412
 #, c-format
 msgid "'VECTOR_ELT()' function can only be applied to a 'list', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3412
+#: src/main/memory.c:3419
 #, c-format
 msgid "'LOGICAL()' function can only be applied to a 'logical', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3420
+#: src/main/memory.c:3427
 #, c-format
 msgid "'INTEGER()' function can only be applied to a 'integer', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3427
+#: src/main/memory.c:3434
 #, fuzzy, c-format
 msgid "'RAW()' function can only be applied to a 'raw', not a '%s'"
 msgstr "nsl() klarte ikkje utføra namneoppslag for verten «%s»"
 
-#: src/main/memory.c:3434
+#: src/main/memory.c:3441
 #, c-format
 msgid "'REAL()' function can only be applied to a 'numeric', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3441
+#: src/main/memory.c:3448
 #, fuzzy, c-format
 msgid "'COMPLEX()' function can only be applied to a 'complex', not a '%s'"
 msgstr "nsl() klarte ikkje utføra namneoppslag for verten «%s»"
 
-#: src/main/memory.c:3450
+#: src/main/memory.c:3457
 msgid "not safe to return vector pointer"
 msgstr "ikkje trygt å returnera vektorpeikar"
 
-#: src/main/memory.c:3455
+#: src/main/memory.c:3462
 #, c-format
 msgid ""
 "'SET_STRING_ELT()' function can only be applied to a 'character vector', not "
 "a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3458
+#: src/main/memory.c:3465
 #, c-format
 msgid "value of 'SET_STRING_ELT()' function must be a 'CHARSXP' not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3461
+#: src/main/memory.c:3468
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_STRING_ELT()' function"
 msgstr ""
 
-#: src/main/memory.c:3472
+#: src/main/memory.c:3479
 #, c-format
 msgid "'SET_VECTOR_ELT()' function can only be applied to a 'list', not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3476
+#: src/main/memory.c:3483
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_VECTOR_ELT()' function"
 msgstr ""
 
-#: src/main/memory.c:3501 src/main/memory.c:3511 src/main/memory.c:3523
-#: src/main/memory.c:3537 src/main/memory.c:3553 src/main/memory.c:3571
+#: src/main/memory.c:3508 src/main/memory.c:3518 src/main/memory.c:3530
+#: src/main/memory.c:3544 src/main/memory.c:3560 src/main/memory.c:3578
 msgid "bad value"
 msgstr "ugyldig verdi"
 
-#: src/main/memory.c:3653
+#: src/main/memory.c:3660
 #, c-format
 msgid "value of 'SET_CXTAIL()' function must be a 'char' or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3734
+#: src/main/memory.c:3741
 msgid "memory profiling is not available on this system"
 msgstr "minneprofilering er ikkje tilgjengeleg på dette systemet"
 
-#: src/main/memory.c:3798
+#: src/main/memory.c:3805
 #, fuzzy, c-format
 msgid "'Rprofmem()': cannot open output file '%s'"
 msgstr "Rprofmem: klarte ikkje opna utfila «%s»"
 
-#: src/main/memory.c:3834
+#: src/main/memory.c:3841
 msgid "'R_AllocStringBuffer( (size_t)-1 )' function is no longer allowed"
 msgstr ""
 
-#: src/main/memory.c:3851
+#: src/main/memory.c:3858
 #, fuzzy, c-format
 msgid "could not allocate memory (%u Mb) in 'R_AllocStringBuffer()' function"
 msgstr "klarte ikkje reservera minne til «read.dcf»"
 
-#: src/main/memory.c:3903
+#: src/main/memory.c:3910
 #, c-format
 msgid "long vectors not supported yet: %s:%d"
 msgstr ""
@@ -9421,7 +9421,7 @@ msgstr ""
 
 #: src/modules/X11/devX11.c:796 src/modules/X11/devX11.c:1633
 #: src/modules/X11/devX11.c:1640 src/modules/X11/devX11.c:1660
-#: src/modules/X11/devX11.c:1669 src/modules/X11/devX11.c:3249
+#: src/modules/X11/devX11.c:1669 src/modules/X11/devX11.c:3252
 #, fuzzy, c-format
 msgid "cairo error '%s'"
 msgstr "regcomp-feil: «%s»"
@@ -9621,73 +9621,73 @@ msgstr "klarte ikkje laga XImage"
 msgid "attempt to use the locator after 'dev.hold()'"
 msgstr ""
 
-#: src/modules/X11/devX11.c:2749
+#: src/modules/X11/devX11.c:2752
 #, fuzzy
 msgid "that type is not supported on this platform - using \"nbcairo\""
 msgstr "nsl() er ikkje støtta på denne plattforma"
 
-#: src/modules/X11/devX11.c:2763
+#: src/modules/X11/devX11.c:2766
 #, fuzzy
 msgid "cairo-based types are not supported on this build - using \"Xlib\""
 msgstr "ICU er ikkje støtte på dette bygget"
 
-#: src/modules/X11/devX11.c:3106
+#: src/modules/X11/devX11.c:3109
 #, fuzzy, c-format
 msgid "unable to start device '%s'"
 msgstr "klarte ikkje starta eininga %s"
 
-#: src/modules/X11/devX11.c:3126
+#: src/modules/X11/devX11.c:3129
 msgid "a forked child should not open a graphics device"
 msgstr ""
 
-#: src/modules/X11/devX11.c:3133
+#: src/modules/X11/devX11.c:3136
 #, fuzzy
 msgid "invalid 'width' or 'height' arguments"
 msgstr "ugyldig «breidd» eller «høgd»"
 
-#: src/modules/X11/devX11.c:3140
+#: src/modules/X11/devX11.c:3143
 #, fuzzy
 msgid "invalid 'colortype' argument passed to X11 driver"
 msgstr "ugyldig colortype sendt til X11-drivaren"
 
-#: src/modules/X11/devX11.c:3153
+#: src/modules/X11/devX11.c:3156
 msgid "unknown X11 color/colour model -- using monochrome"
 msgstr "ukjend X11 color/colour-modell – brukar monochrome"
 
-#: src/modules/X11/devX11.c:3243
+#: src/modules/X11/devX11.c:3246
 msgid "no plot on device to save"
 msgstr "inga plott på eininga å lagra"
 
-#: src/modules/X11/devX11.c:3245
+#: src/modules/X11/devX11.c:3248
 #, fuzzy
 msgid "no open 'X11cairo' device"
 msgstr "ikkje ei open X11cairo-eining"
 
-#: src/modules/X11/devX11.c:3254
+#: src/modules/X11/devX11.c:3257
 #, c-format
 msgid "cannot open file '%s'"
 msgstr "klarte ikkje opna fila «%s»"
 
-#: src/modules/X11/devX11.c:3271
+#: src/modules/X11/devX11.c:3274
 #, fuzzy
 msgid "'savePlot()' function is not supported on this build"
 msgstr "savePlot() er ikkje støtta på denne bygginga"
 
-#: src/modules/X11/devX11.c:3311
+#: src/modules/X11/devX11.c:3314
 msgid "unable to contact X11 display"
 msgstr "fekk ikkje kontakt med X11-display"
 
-#: src/modules/X11/devX11.c:3320
+#: src/modules/X11/devX11.c:3323
 #, fuzzy
 msgid "X11 clipboard selection is not supported on this system"
 msgstr "nsl() er ikkje støtta på denne plattforma"
 
-#: src/modules/X11/devX11.c:3360
+#: src/modules/X11/devX11.c:3363
 #, c-format
 msgid "clipboard cannot be read (error code %d)"
 msgstr "utklippstavla kan ikkje opnast (feilkode: %d)"
 
-#: src/modules/X11/devX11.c:3396
+#: src/modules/X11/devX11.c:3399
 #, fuzzy
 msgid "cannot allocate memory for 'X11Routines' structure"
 msgstr "klarte ikkje reservera minne for X11Routines-struktur"
@@ -9792,27 +9792,27 @@ msgstr ""
 msgid "non-integer x = %f"
 msgstr "feil tal på dimensjonar"
 
-#: src/nmath/nmath.h:145
+#: src/nmath/nmath.h:150
 #, fuzzy, c-format
 msgid "argument out of domain in '%s' function"
 msgstr "argumentet er utanfor gyldig definisjonområde i «%s»\n"
 
-#: src/nmath/nmath.h:148
+#: src/nmath/nmath.h:153
 #, fuzzy, c-format
 msgid "value out of range in '%s' function"
 msgstr "verdien til «%s» er utanfor gyldig verdiområde\n"
 
-#: src/nmath/nmath.h:151
+#: src/nmath/nmath.h:156
 #, fuzzy, c-format
 msgid "convergence failed in '%s' function"
 msgstr "konvergerte ikkje i «%s»\n"
 
-#: src/nmath/nmath.h:154
+#: src/nmath/nmath.h:159
 #, fuzzy, c-format
 msgid "full precision may not have been achieved in '%s' function"
 msgstr "full presisjon vart kanskje ikkje oppnådd i «%s»\n"
 
-#: src/nmath/nmath.h:157
+#: src/nmath/nmath.h:162
 #, fuzzy, c-format
 msgid "underflow occurred in '%s' function"
 msgstr "det oppstod underflyt i «%s»\n"

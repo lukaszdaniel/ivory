@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-01 21:16\n"
+"POT-Creation-Date: 2016-02-09 07:32\n"
 "PO-Revision-Date: 2014-03-27 13:33-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -37,23 +37,23 @@ msgstr ""
 msgid "%s Tukey smoother resulting from %s"
 msgstr ""
 
-#. R/ansari.test.R: gettextf("%s and %s", deparse(substitute(x)), deparse(substitute(y)))
-#. R/bartlett.test.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(g)),     collapse = ""))
-#. R/binom.test.R: gettextf("%s and %s", deparse(substitute(x)), deparse(substitute(n)), domain = "R-stats")
-#. R/chisq.test.R: gettextf("%s and %s", paste(DNAME, collapse = "\n"), paste(DNAME2, collapse = "\n"))
+#. R/ansari.test.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)),     collapse = ""), domain = "R-stats")
+#. R/bartlett.test.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(g)),     collapse = ""), domain = "R-stats")
+#. R/binom.test.R: gettextf("%s and %s", paste(DNAME, collapse = ""), paste(deparse(substitute(n)),     collapse = ""), domain = "R-stats")
+#. R/chisq.test.R: gettextf("%s and %s", paste(DNAME, collapse = "\n"), paste(DNAME2, collapse = "\n"),     domain = "R-stats")
 #. R/cor.test.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)),     collapse = ""), domain = "R-stats")
 #. R/cor.test.R: gettextf("%s and %s", names(mf[1]), names(mf[2]))
-#. R/fisher.test.R: gettextf("%s and %s", deparse(substitute(x)), deparse(substitute(y)), domain = "R-stats")
-#. R/fligner.test.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(g)),     collapse = ""))
-#. R/kruskal.test.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(g)),     collapse = ""))
-#. R/ks.test.R: gettextf("%s and %s", paste(DNAME, collapse = ""), paste(deparse(substitute(y)),     collapse = ""))
+#. R/fisher.test.R: gettextf("%s and %s", paste(DNAME, collapse = ""), paste(deparse(substitute(y)),     collapse = ""), domain = "R-stats")
+#. R/fligner.test.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(g)),     collapse = ""), domain = "R-stats")
+#. R/kruskal.test.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(g)),     collapse = ""), domain = "R-stats")
+#. R/ks.test.R: gettextf("%s and %s", paste(DNAME, collapse = ""), paste(deparse(substitute(y)),     collapse = ""), domain = "R-stats")
 #. R/mcnemar.test.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)),     collapse = ""), domain = "R-stats")
 #. R/mood.test.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)),     collapse = ""), domain = "R-stats")
 #. R/oneway.test.R: gettextf("%s and %s", dp[[2L]], dp[[3L]], domain = "R-stats")
 #. R/pairwise.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(g)),     collapse = ""))
 #. R/pairwise.R: gettextf("%s and %s", deparse(substitute(x)), deparse(substitute(g)), domain = "R-stats")
-#. R/t.test.R: gettextf("%s and %s", deparse(substitute(x)), deparse(substitute(y)))
-#. R/var.test.R: gettextf("%s and %s", deparse(substitute(x)), deparse(substitute(y)), domain = "R-stats")
+#. R/t.test.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)),     collapse = ""), domain = "R-stats")
+#. R/var.test.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)),     collapse = ""), domain = "R-stats")
 #. R/wilcox.test.R: gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)),     collapse = ""), domain = "R-stats")
 #: R/ansari.test.R:0 R/bartlett.test.R:0 R/binom.test.R:0 R/chisq.test.R:0
 #: R/cor.test.R:0 R/fisher.test.R:0 R/fligner.test.R:0 R/kruskal.test.R:0
@@ -62,10 +62,10 @@ msgstr ""
 msgid "%s and %s"
 msgstr ""
 
-#. R/friedman.test.R: gettextf("%s and %s and %s", DNAME, deparse(substitute(groups)), deparse(substitute(blocks)))
+#. R/friedman.test.R: gettextf("%s and %s and %s", paste(deparse(substitute(y)), collapse = ""), paste(deparse(substitute(groups)),     collapse = ""), paste(deparse(substitute(blocks)), collapse = ""), domain = "R-stats")
 #. R/friedman.test.R: gettextf("%s and %s and %s", names(mf[1]), names(mf[2]), names(mf[3]))
-#. R/mantelhaen.test.R: gettextf("%s and %s and %s", deparse(substitute(x)), deparse(substitute(y)), deparse(substitute(z)),     domain = "R-stats")
-#. R/quade.test.R: gettextf("%s and %s and %s", DNAME, deparse(substitute(groups)), deparse(substitute(blocks)))
+#. R/mantelhaen.test.R: gettextf("%s and %s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)),     collapse = ""), paste(deparse(substitute(z)), collapse = ""), domain = "R-stats")
+#. R/quade.test.R: gettextf("%s and %s and %s", paste(deparse(substitute(y)), collapse = ""), paste(deparse(substitute(groups)),     collapse = ""), paste(deparse(substitute(blocks)), collapse = ""), domain = "R-stats")
 #. R/quade.test.R: gettextf("%s and %s and %s", names(mf[1]), names(mf[2]), names(mf[3]), domain = "R-stats")
 #: R/friedman.test.R:0 R/mantelhaen.test.R:0 R/quade.test.R:0
 msgid "%s and %s and %s"
@@ -113,12 +113,12 @@ msgid "%s of %s"
 msgstr ""
 
 #. R/pairwise.R: gettextf("%s out of %s", deparse(substitute(x)), deparse(substitute(n)), domain = "R-stats")
-#. R/prop.test.R: gettextf("%s out of %s", DNAME, deparse(substitute(n)), domain = "R-stats")
+#. R/prop.test.R: gettextf("%s out of %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(n)),     collapse = ""), domain = "R-stats")
 #: R/pairwise.R:0 R/prop.test.R:0
 msgid "%s out of %s"
 msgstr ""
 
-#. R/prop.trend.test.R: gettextf("%s out of %s,\n using scores: %s", deparse(substitute(x)), deparse(substitute(n)),     paste(score, collapse = " "), domain = "R-stats")
+#. R/prop.trend.test.R: gettextf("%s out of %s,\n using scores: %s", paste(deparse(substitute(x)), collapse = ""),     paste(deparse(substitute(n)), collapse = ""), paste(score, collapse = " "), domain = "R-stats")
 #: R/prop.trend.test.R:0
 msgid ""
 "%s out of %s,\n"
@@ -131,7 +131,7 @@ msgstr ""
 msgid "%s percent confidence interval:"
 msgstr "tie가 있어 정확한 신뢰구간을 계산할 수 없습니다"
 
-#. R/poisson.test.R: gettextf("%s time base: %s", deparse(substitute(x)), deparse(substitute(T)), domain = "R-stats")
+#. R/poisson.test.R: gettextf("%s time base: %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(T)),     collapse = ""), domain = "R-stats")
 #: R/poisson.test.R:0
 msgid "%s time base: %s"
 msgstr ""
@@ -4874,6 +4874,11 @@ msgstr "적합된 모델에 요인들이 없습니다"
 msgid "no finite observations"
 msgstr ""
 
+#. R/complete.cases.R: stop("no input has determined the number of cases")
+#: R/complete.cases.R:0
+msgid "no input has determined the number of cases"
+msgstr ""
+
 #. R/loess.R: stop("no models to compare")
 #: R/loess.R:0
 msgid "no models to compare"
@@ -5033,6 +5038,12 @@ msgstr ""
 #: R/stepfun.R:0
 msgid "not a valid step function"
 msgstr "유효한 step function이 아닙니다"
+
+#. R/complete.cases.R: stop("not all arguments have the same length", call. = FALSE)
+#: R/complete.cases.R:0
+#, fuzzy
+msgid "not all arguments have the same length"
+msgstr "인자들은 반드시 같은 길이를 가지고 있어야 합니다"
 
 #. R/ts.R: stop("not all series have the same frequency")
 #: R/ts.R:0

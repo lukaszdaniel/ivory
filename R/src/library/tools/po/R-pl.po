@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-01 21:16\n"
+"POT-Creation-Date: 2016-02-09 07:32\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -764,19 +764,19 @@ msgstr "Warunek musi być \\Sexpr lub płaskim tekstem"
 msgid "Conflicting package names (submitted: %s, existing: %s)"
 msgstr "Nazwy pakietów w konflikcie (wprowadzone: %s, istniejące: %s)"
 
-#. R/check.R: gettextf("Consider adding %s to your NAMESPACE (and ensure that your DESCRIPTION Imports field contains 'methods').",     paste0("  ", miss), domain = "R-tools")
+#. R/check.R: gettextf("Consider adding %s to your NAMESPACE file (and ensure that your DESCRIPTION Imports field contains 'methods').",     paste0("  ", miss), domain = "R-tools")
 #: R/check.R:0
 msgid ""
-"Consider adding %s to your NAMESPACE (and ensure that your DESCRIPTION "
+"Consider adding %s to your NAMESPACE file (and ensure that your DESCRIPTION "
 "Imports field contains 'methods')."
 msgstr ""
-"Rozważ dodanie %s do swojego pliku NAMESPACE (oraz upewnij się, że w pliku "
-"DESCRIPTION pole 'Imports' zawiera nazwę 'methods')."
+"Rozważ dodanie %s do swojego pliku 'NAMESPACE' (oraz upewnij się, że w pliku "
+"'DESCRIPTION' pole 'Imports' zawiera nazwę 'methods')."
 
-#. R/check.R: gettextf("Consider adding %s to your NAMESPACE.", paste0("  ", miss), domain = "R-tools")
+#. R/check.R: gettextf("Consider adding %s to your NAMESPACE file.", paste0("  ", miss), domain = "R-tools")
 #: R/check.R:0
-msgid "Consider adding %s to your NAMESPACE."
-msgstr "Rozważ dodanie %s do swojego pliku NAMESPACE."
+msgid "Consider adding %s to your NAMESPACE file."
+msgstr "Rozważ dodanie %s do swojego pliku 'NAMESPACE'."
 
 #. R/check.R: gettextf("\nConsider the use of a .Rinstignore file: see %s,\nor move the vignette sources from %s to %s.\n",     sQuote("Writing R Extensions"), sQuote("inst/doc"), sQuote("vignettes"), domain = "R-tools")
 #: R/check.R:0
