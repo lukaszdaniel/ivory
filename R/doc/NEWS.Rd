@@ -521,16 +521,7 @@
       optional argument \code{stringsAsFactors} (instead of only
       depending on \code{getOption("stringsAsFactors")}).
 
-      \item The \code{as.hclust} method for \code{"dendrogram"}s failed often
-      when there were ties in the heights.
-
-      \item \code{reorder()} and \code{midcache.dendrogram()} now are
-      non-recursive and hence applicable to somewhat deeply nested
-      dendrograms, thanks to a proposal by Suharto Anggono in \PR{16424}.
-
-      \item \code{cor.test()} now calculates very small p values
-      more accurately (affecting the result only in extreme not
-      statistically relevant cases).  (\PR{16704})
+      \code{smooth(x, *)} now also works for long vectors.
     }
   }
 
@@ -605,6 +596,29 @@
       \item (Windows only) The \command{Rgui} front end did not
       always initialize the console properly, and could cause
       \R to crash.  (\PR{16998})
+
+      \item The \code{as.hclust} method for \code{"dendrogram"}s failed often
+      when there were ties in the heights.
+
+      \item \code{reorder()} and \code{midcache.dendrogram()} now are
+      non-recursive and hence applicable to somewhat deeply nested
+      dendrograms, thanks to a proposal by Suharto Anggono in \PR{16424}.
+
+      \item \code{cor.test()} now calculates very small p values
+      more accurately (affecting the result only in extreme not
+      statistically relevant cases).  (\PR{16704})
+
+      \item \code{smooth(*, do.ends=TRUE)} did not always work correctly
+      in \R versions between 3.0.0 and 3.2.3.
+
+      \item \code{pretty(D)} for date-time objects \code{D} now also
+      works well if \code{range(D)} is (much) smaller than a second.  In
+      the case of only one unique value in \code{D}, the pretty range
+      now is more symmetric around that value than previously.
+      
+      \item The figures in help pages such as \code{?points} were 
+      accidentally damaged, and did not appear in \R 3.2.3.  
+      (\PR{16708})
     }
   }
 }
