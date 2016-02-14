@@ -229,6 +229,10 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > 
 > 
 > 	
+825c841
+<     kvals <- unique(round(n/(1L:floor(n/2))))
+---
+>     kvals <- unique(round(n/(seq_len(floor(n/2)))))
 829c845
 <     if (K!=K.o) warning(gettextf("'K' has been set to %f", K), domain = NA)
 ---

@@ -94,207 +94,1485 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >         for (f in seq_len(length(fmtnames)))
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/R_systat.c Recommended/foreign/src/R_systat.c
-100a101
+100a99
 > #include "localization.h"
-131,132c132
-< 	sprintf(msg, _("not a rectangular data file (%s mtype is %d)"),
-< 		CHAR(STRING_ELT(file, 0)), getmtype(use));
+102,103c101
+< static void swapb(void *result, int size)
+< {
 ---
-> 	sprintf(msg, _("not a rectangular data file (%s mtype is %d)"), CHAR(STRING_ELT(file, 0)), getmtype(use));
-334c334
+> static void swapb(void *result, int size) {
+117,118c115
+< SEXP readSystat(SEXP file)
+< {
+---
+> SEXP readSystat(SEXP file) {
+138c134,135
+<     PROTECT(res = allocVector(VECSXP, getnv(use))); pc++;
+---
+> 	PROTECT(res = allocVector(VECSXP, getnv(use)));
+> 	pc++;
+146c143,144
+<     PROTECT(resnames = allocVector(STRSXP, getnv(use))); pc++;
+---
+> 	PROTECT(resnames = allocVector(STRSXP, getnv(use)));
+> 	pc++;
+152c150,151
+< 	PROTECT(comment = allocVector(STRSXP, 1)); pc++;
+---
+> 		PROTECT(comment = allocVector(STRSXP, 1));
+> 		pc++;
+164c163,164
+< 		else REAL(VECTOR_ELT(res, i))[j] = x[j];
+---
+> 				else
+> 					REAL(VECTOR_ELT(res, i))[j] = x[j];
+175,176c175
+< 		getsvar(use->h.fd, str,
+< 			use->str_offset[use->ithstr[i]]);
+---
+> 				getsvar(use->h.fd, str, use->str_offset[use->ithstr[i]]);
+192,193c191
+< static void init_use(struct SysFilev3 *use)
+< {
+---
+> static void init_use(struct SysFilev3 *use) {
+227,228c224
+< static void getuse(const char *fname, struct SysFilev3 *u)
+< {
+---
+> static void getuse(const char *fname, struct SysFilev3 *u) {
+243c238,239
+<     j = 0; k = 0;
+---
+> 	j = 0;
+> 	k = 0;
+258c254,255
+<     if(getoctal(&k, u->h.fd) != 1) error(_("getuse: File access error"));
+---
+> 	if (getoctal(&k, u->h.fd) != 1)
+> 		error(_("getuse: File access error"));
+286,288c283,287
+< 		(u->h.nd % (FORTBUF / (u->h.ntype == 1 ? sizeof(float) : sizeof(double))))
+< 		* (u->h.ntype == 1 ? sizeof(float) :
+< 		   sizeof(double));
+---
+> 					(u->h.nd
+> 							% (FORTBUF
+> 									/ (u->h.ntype == 1 ?
+> 											sizeof(float) : sizeof(double))))
+> 							* (u->h.ntype == 1 ? sizeof(float) : sizeof(double));
+334c333
 < 	    sprintf(tmp, "Getuse: failure reading byte %d", end);
 ---
-> 	    sprintf(tmp, _("Getuse: failure reading byte %d"), end);
+> 			sprintf(tmp, _("Getuse: failure reading byte %d"), end);
+340c339,340
+<     if (i >= 512) error(_("getuse: terminal null block"));
+---
+> 	if (i >= 512)
+> 		error(_("getuse: terminal null block"));
 346c346
 < 	sprintf(tmp, "Getuse: last byte = %o octal", k);
 ---
-> 	sprintf(tmp, _("Getuse: last byte = %o octal"), k);
-503,504c503
+> 		sprintf(tmp, _("Getuse: last byte = %o octal"), k);
+362,364c362,363
+< 	    u->local_offset[i] = (int) u->ithdb[i] *
+< 		(u->h.ntype == 1 ? sizeof(float) :
+< 		 sizeof(double))	/* the easy
+---
+> 			u->local_offset[i] = (int) u->ithdb[i]
+> 					* (u->h.ntype == 1 ? sizeof(float) : sizeof(double)) /* the easy
+368,369c367,371
+< 		+ (u->ithdb[i] / (FORTBUF / (u->h.ntype == 1 ?
+< 					     sizeof(float) : sizeof(double)))) * 2;
+---
+> 					+ (u->ithdb[i]
+> 							/ (FORTBUF
+> 									/ (u->h.ntype == 1 ?
+> 											sizeof(float) : sizeof(double))))
+> 							* 2;
+373,374c375
+< 	}
+< 	else {			/* or a string */
+---
+> 		} else { /* or a string */
+376,377c377,378
+< 	    u->local_offset[i] = (int) (u->h.nd*(u->h.ntype == 1 ?
+< 						  sizeof(float) : sizeof(double)))
+---
+> 			u->local_offset[i] = (int) (u->h.nd
+> 					* (u->h.ntype == 1 ? sizeof(float) : sizeof(double)))
+379,380c380,384
+< 		+ (u->h.nd / (FORTBUF / (u->h.ntype == 1 ?
+< 					 sizeof(float) : sizeof(double)))) * 2
+---
+> 					+ (u->h.nd
+> 							/ (FORTBUF
+> 									/ (u->h.ntype == 1 ?
+> 											sizeof(float) : sizeof(double))))
+> 							* 2
+387,388c391,392
+< 	    if(u->ithstr[i] >= 0
+< 	       && u->str_offset[u->ithstr[i]] != 0) k++;
+---
+> 			if (u->ithstr[i] >= 0 && u->str_offset[u->ithstr[i]] != 0)
+> 				k++;
+405,406c408
+< static void getlab(struct SysFilev3 *u)
+< {
+---
+> static void getlab(struct SysFilev3 *u) {
+422c424,425
+< 	error(tmp1); }	/* read and throw away zeroth byte=0113 */
+---
+> 		error(tmp1);
+> 	} /* read and throw away zeroth byte=0113 */
+426c429,430
+< 	error(tmp1); }
+---
+> 		error(tmp1);
+> 	}
+438c442,443
+< 	error(tmp1);}
+---
+> 		error(tmp1);
+> 	}
+449c454,455
+< 		error(tmp1); }
+---
+> 				error(tmp1);
+> 			}
+455,456c461,464
+< 		    error(tmp1); }
+< 		if (j == 0) isDollar = (o == '$');
+---
+> 					error(tmp1);
+> 				}
+> 				if (j == 0)
+> 					isDollar = (o == '$');
+460c468,469
+< 		error(tmp1); }
+---
+> 				error(tmp1);
+> 			}
+478c487,488
+< 	    error(tmp1); }
+---
+> 			error(tmp1);
+> 		}
+489c499,500
+< 	    error(tmp1); }
+---
+> 			error(tmp1);
+> 		}
+503,505c514,517
 < 	    sprintf(tmp1, _("getlab: byte lab[%d]0 = %o, nv=%d"),
 < 		    j, o, u->h.nv);
+< 	    error(tmp1); }
 ---
-> 	    sprintf(tmp1, _("getlab: byte lab[%d]0 = %o, nv=%d"), j, o, u->h.nv);
+> 			sprintf(tmp1, _("getlab: byte lab[%d]0 = %o, nv=%d"), j, o,
+> 					u->h.nv);
+> 			error(tmp1);
+> 		}
+513c525,526
+< 	if(label[8] == '$') u->h.nk++;
+---
+> 		if (label[8] == '$')
+> 			u->h.nk++;
+518c531,532
+< 	} else u->h.nd++;	/* if the ninth char in label is '$',
+---
+> 		} else
+> 			u->h.nd++; /* if the ninth char in label is '$',
+523c537,538
+< 	    if(label[i] != ' ') tmp[o++] = label[i];
+---
+> 			if (label[i] != ' ')
+> 				tmp[o++] = label[i];
+537c552,553
+< 	    error(tmp1); }
+---
+> 			error(tmp1);
+> 		}
+550,552c565,567
+< static void closeuse(struct SysFilev3 *use)
+< {
+<     if(use->h.flag != 0) fclose(use->h.fd);
+---
+> static void closeuse(struct SysFilev3 *use) {
+> 	if (use->h.flag != 0)
+> 		fclose(use->h.fd);
+576,578c590,592
+< static int getnv(struct SysFilev3 *use)
+< {
+<     if (isuse(use) == 0) return(-1);
+---
+> static int getnv(struct SysFilev3 *use) {
+> 	if (isuse(use) == 0)
+> 		return (-1);
+586,588c600,602
+< static int getnd(struct SysFilev3 *use)
+< {
+<     if (isuse(use) == 0) return(-1);
+---
+> static int getnd(struct SysFilev3 *use) {
+> 	if (isuse(use) == 0)
+> 		return (-1);
+596,598c610,612
+< static int getnk(struct SysFilev3 *use)
+< {
+<     if (isuse(use) == 0) return(-1);
+---
+> static int getnk(struct SysFilev3 *use) {
+> 	if (isuse(use) == 0)
+> 		return (-1);
+603,605c617,619
+< static char *getvarnam(int i, struct SysFilev3 *use)
+< {
+<     if (isuse(use) == 0 || i >= use->h.nv) return(NULL);
+---
+> static char *getvarnam(int i, struct SysFilev3 *use) {
+> 	if (isuse(use) == 0 || i >= use->h.nv)
+> 		return (NULL);
+611,614c624,628
+< static int isdb(int i, struct SysFilev3 *use)
+< {
+<     if (use->ithdb[i] >= 0) return(0);
+<     else return(-1);
+---
+> static int isdb(int i, struct SysFilev3 *use) {
+> 	if (use->ithdb[i] >= 0)
+> 		return (0);
+> 	else
+> 		return (-1);
+619,620c632
+< static int getmtype(struct SysFilev3 *use)
+< {
+---
+> static int getmtype(struct SysFilev3 *use) {
+625,626c637
+< static int isuse(struct SysFilev3 *use)
+< {
+---
+> static int isuse(struct SysFilev3 *use) {
+634,636c645,647
+< static int getnobs(struct SysFilev3 *use)
+< {
+<     if(isuse(use) == 0) return(-1);
+---
+> static int getnobs(struct SysFilev3 *use) {
+> 	if (isuse(use) == 0)
+> 		return (-1);
+647,648c657
+< static int getdb(FILE *fd, short type, double *x)
+< {
+---
+> static int getdb(FILE *fd, short type, double *x) {
+653c662,663
+< 	if(fread(&fx, sizeof(float), 1, fd) != 1) return(1);
+---
+> 		if (fread(&fx, sizeof(float), 1, fd) != 1)
+> 			return (1);
+657c667,668
+< 	if(fread(&dx, sizeof(double), 1, fd) != 1) return(1);
+---
+> 		if (fread(&dx, sizeof(double), 1, fd) != 1)
+> 			return (1);
+686,689c697,700
+<     }
+<     else {
+< 	if((fread(tmp_str, 1, (LABELSIZ - packet_bound), fd)) !=
+< 	   (LABELSIZ - packet_bound)) error(_("file access error"));
+---
+> 	} else {
+> 		if ((fread(tmp_str, 1, (LABELSIZ - packet_bound), fd))
+> 				!= (LABELSIZ - packet_bound))
+> 			error(_("file access error"));
+695c706,707
+< 	if((fseek(fd, 2L, SEEK_CUR)) != 0) error(_("file access error"));			/* hop over the packet boundary */
+---
+> 		if ((fseek(fd, 2L, SEEK_CUR)) != 0)
+> 			error(_("file access error")); /* hop over the packet boundary */
+697,698c709,710
+< 	if((fread(tmp_str, 1, packet_bound, fd)) !=
+< 	   packet_bound) error(_("file access error"));
+---
+> 		if ((fread(tmp_str, 1, packet_bound, fd)) != packet_bound)
+> 			error(_("file access error"));
+709,710c719
+< static void getdbvar(int varno, double *db, struct SysFilev3 *use)
+< {
+---
+> static void getdbvar(int varno, double *db, struct SysFilev3 *use) {
+714c723,724
+<     if (use->ithdb[varno] < 0) error(_("string variable"));
+---
+> 	if (use->ithdb[varno] < 0)
+> 		error(_("string variable"));
+716,717c726,728
+<     if((j = fseek(use->h.fd, use->pos+use->local_offset[varno]+1L, SEEK_SET))
+<        != 0) error(_("file access error"));
+---
+> 	if ((j = fseek(use->h.fd, use->pos + use->local_offset[varno] + 1L,
+> 			SEEK_SET)) != 0)
+> 		error(_("file access error"));
+725c736,737
+< 	if((j = getdb(use->h.fd, use->h.ntype, &x)) != 0) break;
+---
+> 		if ((j = getdb(use->h.fd, use->h.ntype, &x)) != 0)
+> 			break;
+737c749,750
+<     if (j != 0) error(_("file access error"));
+---
+> 	if (j != 0)
+> 		error(_("file access error"));
+744,745c757
+< static int getoctal(int *o, FILE *fp)
+< {
+---
+> static int getoctal(int *o, FILE *fp) {
+760,761c772
+< static size_t getshort(short *sh, FILE *fp)
+< {
+---
+> static size_t getshort(short *sh, FILE *fp) {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/Rdbfread.c Recommended/foreign/src/Rdbfread.c
 29a30
 > #include "localization.h"
+31,32c32
+< SEXP Rdbfread(SEXP dbfnm)
+< {
+---
+> SEXP Rdbfread(SEXP dbfnm) {
+55c54,55
+<     if( hDBF == NULL ) error(_("unable to open DBF file"));
+---
+> 	if (hDBF == NULL)
+> 		error(_("unable to open DBF file"));
+60,61c60
+<     if( DBFGetFieldCount(hDBF) == 0 )
+<     {
+---
+> 	if (DBFGetFieldCount(hDBF) == 0) {
+70c69,70
+<     PROTECT(DataTypes = allocVector(STRSXP, nflds)); pc++;
+---
+> 	PROTECT(DataTypes = allocVector(STRSXP, nflds));
+> 	pc++;
+93c93,94
+< 	buf[0] = hDBF->pachFieldType[i]; buf[1] = '\0';
+---
+> 		buf[0] = hDBF->pachFieldType[i];
+> 		buf[1] = '\0';
+97,100c98,102
+<     PROTECT(df = allocVector(VECSXP, nRvar)); pc++;
+<     PROTECT(varlabels = allocVector(STRSXP, nRvar)); pc++;
+<     for(i = 0, nRvar = 0; i < nflds; i++)
+<     {
+---
+> 	PROTECT(df = allocVector(VECSXP, nRvar));
+> 	pc++;
+> 	PROTECT(varlabels = allocVector(STRSXP, nRvar));
+> 	pc++;
+> 	for (i = 0, nRvar = 0; i < nflds; i++) {
+122,123c124
+<     for(iRecord = 0; iRecord < nrecs; iRecord++)
+<     {
+---
+> 	for (iRecord = 0; iRecord < nrecs; iRecord++) {
+142c143,144
+< 			int ii, *it; double *r;
+---
+> 						int ii, *it;
+> 						double *r;
+205c207,208
+<     PROTECT(tmp = mkString("data.frame")); pc++;
+---
+> 	PROTECT(tmp = mkString("data.frame"));
+> 	pc++;
+209c212,213
+<     PROTECT(row_names = allocVector(STRSXP, nrecs)); pc++;
+---
+> 	PROTECT(row_names = allocVector(STRSXP, nrecs));
+> 	pc++;
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/Rdbfwrite.c Recommended/foreign/src/Rdbfwrite.c
 30c30
 < 
 ---
 > #include "localization.h"
+34,35c34
+< static char* nameMangleOut(char *dbfFldname, int len)
+< {
+---
+> static char* nameMangleOut(char *dbfFldname, int len) {
+38c37,38
+<       if (dbfFldname[i] == '.') dbfFldname[i] = '_';
+---
+> 		if (dbfFldname[i] == '.')
+> 			dbfFldname[i] = '_';
+42,44c42
+< 
+< SEXP DoWritedbf(SEXP file, SEXP df, SEXP pr, SEXP sc, SEXP DataTypes)
+< {
+---
+> SEXP DoWritedbf(SEXP file, SEXP df, SEXP pr, SEXP sc, SEXP DataTypes) {
+51c49,50
+<     if (hDBF == NULL) error(_("unable to open file"));
+---
+> 	if (hDBF == NULL)
+> 		error(_("unable to open file"));
+58,61c57,58
+< 
+< static DBFHandle
+< Rdbfwrite(DBFHandle hDBF, SEXP df, SEXP pr, SEXP sc, SEXP DataTypes)
+< {
+---
+> static DBFHandle Rdbfwrite(DBFHandle hDBF, SEXP df, SEXP pr, SEXP sc,
+> 		SEXP DataTypes) {
+82,83c79,80
+< 		DBFAddField(hDBF, nameMangleOut(szTitle,11), FTInteger,
+< 			    nWidth, 0);
+---
+> 				DBFAddField(hDBF, nameMangleOut(szTitle, 11), FTInteger, nWidth,
+> 						0);
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/SASxport.c Recommended/foreign/src/SASxport.c
 29a30
 > #include "localization.h"
-610,611c611
-< 	error(_("problem reading SAS XPORT file '%s'"),
-< 	      CHAR(STRING_ELT(xportFile, 0)));
+61,62c61
+< static double get_IBM_double(char* c, size_t len)
+< {
 ---
-> 	error(_("problem reading SAS XPORT file '%s'"), CHAR(STRING_ELT(xportFile, 0)));
+> static double get_IBM_double(char* c, size_t len) {
+96c95,96
+<     if (c[1] == '\0' && c[0] != '\0') return R_NaReal;
+---
+> 	if (c[1] == '\0' && c[0] != '\0')
+> 		return R_NaReal;
+99c99,100
+<     for (i = 1; i < 4; i++) buf[i] = c[i];
+---
+> 	for (i = 1; i < 4; i++)
+> 		buf[i] = c[i];
+102c103,104
+<     for (i = 0; i < 4; i++) buf[i] = c[i + 4];
+---
+> 	for (i = 0; i < 4; i++)
+> 		buf[i] = c[i + 4];
+105,107c107,110
+<     value = ((double) upper + ((double) lower)/Two32) *
+< 	pow(16., (double) exponent);
+<     if (negative) value = -value;
+---
+> 	value = ((double) upper + ((double) lower) / Two32)
+> 			* pow(16., (double) exponent);
+> 	if (negative)
+> 		value = -value;
+111,113c114,115
+< static int
+< get_nam_header(FILE *fp, struct SAS_XPORT_namestr *namestr, int length)
+< {
+---
+> static int get_nam_header(FILE *fp, struct SAS_XPORT_namestr *namestr,
+> 		int length) {
+140,142c142
+< static int
+< get_lib_header(FILE *fp, struct SAS_XPORT_header *head)
+< {
+---
+> static int get_lib_header(FILE *fp, struct SAS_XPORT_header *head) {
+178,180c178
+< static int
+< get_mem_header(FILE *fp, struct SAS_XPORT_member *member)
+< {
+---
+> static int get_mem_header(FILE *fp, struct SAS_XPORT_member *member) {
+210,212c208
+< static int
+< init_xport_info(FILE *fp)
+< {
+---
+> static int init_xport_info(FILE *fp) {
+229,230c225,226
+<     if(n != 80 || strncmp(MEM_HEADER, record, 75) != 0 ||
+<        strncmp("  ", record+78, 2) != 0)
+---
+> 	if (n != 80 || strncmp(MEM_HEADER, record, 75) != 0
+> 			|| strncmp("  ", record + 78, 2) != 0)
+238,240c234
+< static int
+< init_mem_info(FILE *fp, char *name)
+< {
+---
+> static int init_mem_info(FILE *fp, char *name) {
+254,255c248,249
+<     if(n != 80 || strncmp(NAM_HEADER, record, 54) != 0 ||
+<        (strrchr(record+58, ' ') - record) != 79) {
+---
+> 	if (n != 80 || strncmp(NAM_HEADER, record, 54) != 0
+> 			|| (strrchr(record + 58, ' ') - record) != 79) {
+269c263,264
+<     } else name[0] = '\0';
+---
+> 	} else
+> 		name[0] = '\0';
+276,280c271,273
+< static int
+< next_xport_info(FILE *fp, int namestr_length, int nvars, int *headpad,
+< 		int *tailpad, int *length, int *ntype, int *nlng,
+< 		int *nvar0, SEXP nname, SEXP nlabel, SEXP nform, int *npos)
+< {
+---
+> static int next_xport_info(FILE *fp, int namestr_length, int nvars,
+> 		int *headpad, int *tailpad, int *length, int *ntype, int *nlng,
+> 		int *nvar0, SEXP nname, SEXP nlabel, SEXP nform, int *npos) {
+382,383c375,376
+< 	    if(n == 80 && strncmp(MEM_HEADER, record, 75) == 0 &&
+< 	       strncmp("  ", record+78, 2) == 0) {
+---
+> 			if (n == 80 && strncmp(MEM_HEADER, record, 75) == 0
+> 					&& strncmp("  ", record + 78, 2) == 0) {
+389,390c382
+< 	}
+< 	else /* beware that the previous member can end on card
+---
+> 		} else /* beware that the previous member can end on card
+392,394c384,385
+< 	    if (restOfCard == 80 && n == 80 &&
+< 		strncmp(MEM_HEADER, tmp, 75) == 0 &&
+< 		strncmp("  ", tmp+78, 2) == 0) {
+---
+> 		if (restOfCard == 80 && n == 80 && strncmp(MEM_HEADER, tmp, 75) == 0
+> 				&& strncmp("  ", tmp + 78, 2) == 0) {
+414c405,406
+< 	restOfCard = (restOfCard >= totwidth)?
+---
+> 		restOfCard =
+> 				(restOfCard >= totwidth) ?
+429,430c421
+< static SEXP
+< getListElement(SEXP list, char *str) {
+---
+> static SEXP getListElement(SEXP list, char *str) {
+450,462c441,442
+< const char *cVarInfoNames[] = {
+<     "headpad",
+<     "type",
+<     "width",
+<     "index",
+<     "position",
+<     "name",
+<     "label",
+<     "format",
+<     "sexptype",
+<     "tailpad",
+<     "length"
+< };
+---
+> const char *cVarInfoNames[] = { "headpad", "type", "width", "index", "position",
+> 		"name", "label", "format", "sexptype", "tailpad", "length" };
+491,493c471
+< SEXP
+< xport_info(SEXP xportFile)
+< {
+---
+> SEXP xport_info(SEXP xportFile) {
+520,521c498
+<     while(!feof(fp))
+<       {
+---
+> 	while (!feof(fp)) {
+539,540c516
+< 	namestrLength =
+< 	    next_xport_info(fp, namestrLength, memLength,
+---
+> 		namestrLength = next_xport_info(fp, namestrLength, memLength,
+546,549c522,523
+< 			    INTEGER(XPORT_VAR_INDEX(varInfo)),
+< 			    XPORT_VAR_NAME(varInfo),
+< 			    XPORT_VAR_LABEL(varInfo),
+< 			    XPORT_VAR_FORM(varInfo),
+---
+> 				INTEGER(XPORT_VAR_INDEX(varInfo)), XPORT_VAR_NAME(varInfo),
+> 				XPORT_VAR_LABEL(varInfo), XPORT_VAR_FORM(varInfo),
+555,556c529
+< 			   (ntype[i] == REALSXP) ? char_numeric :
+< 			   char_character);
+---
+> 					(ntype[i] == REALSXP) ? char_numeric : char_character);
+585,587c558
+< SEXP
+< xport_read(SEXP xportFile, SEXP xportInfo)
+< {
+---
+> SEXP xport_read(SEXP xportFile, SEXP xportInfo) {
+645,646c616,617
+< 		    REAL(VECTOR_ELT(data, k))[j] =
+< 			get_IBM_double(tmpchar, dataWidth[k]);
+---
+> 					REAL(VECTOR_ELT(data, k))[j] = get_IBM_double(tmpchar,
+> 							dataWidth[k]);
+655,656c626
+< 				   (c < tmpchar) ? R_BlankString :
+< 				   mkChar(tmpchar));
+---
+> 							(c < tmpchar) ? R_BlankString : mkChar(tmpchar));
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/avl.c Recommended/foreign/src/avl.c
 28a29
 > #include "localization.h"
-56c57
+42,43c43
+< static void Free_fn(void *x, void *y)
+< {
+---
+> static void Free_fn(void *x, void *y) {
+52,53c52
+< R_avl_create (MAYBE_POOL avl_comparison_func cmp, void *param)
+< {
+---
+> R_avl_create(MAYBE_POOL avl_comparison_func cmp, void *param) {
+56c55,56
 <   if (!(cmp != NULL)) error("assert failed : cmp != NULL");
 ---
->   if (!(cmp != NULL)) error(_("assert failed : cmp != NULL"));
-87c88
+> 	if (!(cmp != NULL))
+> 		error(_("assert failed : cmp != NULL"));
+84,87c84,86
+< void
+< R_avl_destroy (avl_tree *tree, avl_node_func free_func)
+< {
 <   if (!(tree != NULL)) error("assert failed : tree != NULL");
 ---
->   if (!(tree != NULL)) error(_("assert failed : tree != NULL"));
-155c156
+> void R_avl_destroy(avl_tree *tree, avl_node_func free_func) {
+> 	if (!(tree != NULL))
+> 		error(_("assert failed : tree != NULL"));
+102,103c101
+<       for (;;)
+< 	{
+---
+> 		for (;;) {
+105,106c103
+< 	  while (p != NULL)
+< 	    {
+---
+> 			while (p != NULL) {
+114,115c111
+< 	  for (;;)
+< 	    {
+---
+> 			for (;;) {
+120,121c116
+< 	      if (ab[ap] == 0)
+< 		{
+---
+> 				if (ab[ap] == 0) {
+145,147c140
+< void
+< R_avl_free (avl_tree *tree)
+< {
+---
+> void R_avl_free(avl_tree *tree) {
+152,155c145,147
+< int
+< R_avl_count (const avl_tree *tree)
+< {
 <   if (!(tree != NULL)) error("assert failed : tree != NULL");
 ---
->   if (!(tree != NULL)) error(_("assert failed : tree != NULL"));
-206c207
+> int R_avl_count(const avl_tree *tree) {
+> 	if (!(tree != NULL))
+> 		error(_("assert failed : tree != NULL"));
+172,173c164
+< new_node (void)
+< {
+---
+> new_node(void) {
+206c197
 <   if (!(tree != NULL)) error("assert failed : tree != NULL");
 ---
->   if (!(tree != NULL)) error(_("assert failed : tree != NULL"));
-244c245
+> 	if (!(tree != NULL)) error(_("assert failed : tree != NULL"));
+244c235
 < 	      if (!(qp == qa)) error("assert failed : qp == qa");
 ---
-> 	      if (!(qp == qa)) error(_("assert failed : qp == qa"));
-281c282
+> 				if (!(qp == qa)) error(_("assert failed : qp == qa"));
+281c271
 <   if (!(tree && walk_func)) error("assert failed : tree && walk_func");
 ---
->   if (!(tree && walk_func)) error(_("assert failed : tree && walk_func"));
-318c319
+> 	if (!(tree && walk_func)) error(_("assert failed : tree && walk_func"));
+318c308
 <   if (!(tree && trav)) error("assert failed : tree && trav");
 ---
->   if (!(tree && trav)) error(_("assert failed : tree && trav"));
-374c375
+> 	if (!(tree && trav)) error(_("assert failed : tree && trav"));
+363,364c353
+< avl_probe (avl_tree *tree, void *item)
+< {
+---
+> avl_probe(avl_tree *tree, void *item) {
+374c363,364
 <   if (!(tree != NULL)) error("assert failed : tree != NULL");
 ---
->   if (!(tree != NULL)) error(_("assert failed : tree != NULL"));
-381c382
+> 	if (!(tree != NULL))
+> 		error(_("assert failed : tree != NULL"));
+378,379c368
+<   if (s == NULL)
+<     {
+---
+> 	if (s == NULL) {
+381c370,371
 <       if (!(tree->count == 1)) error("assert failed : tree->count == 1");
 ---
->       if (!(tree->count == 1)) error(_("assert failed : tree->count == 1"));
-455c456
-<       if (!(s->bal == -1)) error("assert failed : s->bal == -1");
+> 		if (!(tree->count == 1))
+> 			error(_("assert failed : tree->count == 1"));
+389,390c379
+<   for (;;)
+<     {
 ---
->       if (!(s->bal == -1)) error(_("assert failed : s->bal == -1"));
-467c468
+> 	for (;;) {
+395,396c384
+<       if (diff < 0)
+< 	{
+---
+> 		if (diff < 0) {
+399,400c387
+< 	  if (q == NULL)
+< 	    {
+---
+> 			if (q == NULL) {
+406,407c393
+<       else if (diff > 0)
+< 	{
+---
+> 		else if (diff > 0) {
+410,411c396
+< 	  if (q == NULL)
+< 	    {
+---
+> 			if (q == NULL) {
+415,416c400
+< 	}
+<       else
+---
+> 		} else
+434,435c418
+<   while (p != q)
+<     {
+---
+> 	while (p != q) {
+441,442c424
+<   if (s->cache == 0)
+<     {
+---
+> 	if (s->cache == 0) {
+444,445c426
+<       if (s->bal == 0)
+< 	{
+---
+> 		if (s->bal == 0) {
+448,450c429
+< 	}
+<       else if (s->bal == +1)
+< 	{
+---
+> 		} else if (s->bal == +1) {
+455,457c434,436
+<       if (!(s->bal == -1)) error("assert failed : s->bal == -1");
+<       if (r->bal == -1)
+< 	{
+---
+> 		if (!(s->bal == -1))
+> 			error(_("assert failed : s->bal == -1"));
+> 		if (r->bal == -1) {
+463,465c442
+< 	}
+<       else
+< 	{
+---
+> 		} else {
+467c444,445
 < 	  if (!(r->bal == +1)) error("assert failed : r->bal == +1");
 ---
-> 	  if (!(r->bal == +1)) error(_("assert failed : r->bal == +1"));
-479c480
+> 			if (!(r->bal == +1))
+> 				error(_("assert failed : r->bal == +1"));
+477,479c455,457
+< 	  else
+< 	    {
 < 	      if (!(p->bal == +1)) error("assert failed : p->bal == +1");
 ---
-> 	      if (!(p->bal == +1)) error(_("assert failed : p->bal == +1"));
-499c500
-<       if (!(s->bal == +1)) error("assert failed : s->bal == +1");
+> 			else {
+> 				if (!(p->bal == +1))
+> 					error(_("assert failed : p->bal == +1"));
+484,486c462
+<     }
+<   else
+<     {
 ---
->       if (!(s->bal == +1)) error(_("assert failed : s->bal == +1"));
-511c512
+> 	} else {
+488,489c464
+<       if (s->bal == 0)
+< 	{
+---
+> 		if (s->bal == 0) {
+492,494c467
+< 	}
+<       else if (s->bal == -1)
+< 	{
+---
+> 		} else if (s->bal == -1) {
+499,501c472,474
+<       if (!(s->bal == +1)) error("assert failed : s->bal == +1");
+<       if (r->bal == +1)
+< 	{
+---
+> 		if (!(s->bal == +1))
+> 			error(_("assert failed : s->bal == +1"));
+> 		if (r->bal == +1) {
+507,509c480
+< 	}
+<       else
+< 	{
+---
+> 		} else {
+511c482,483
 < 	  if (!(r->bal == -1)) error("assert failed : r->bal == -1");
 ---
-> 	  if (!(r->bal == -1)) error(_("assert failed : r->bal == -1"));
-523c524
+> 			if (!(r->bal == -1))
+> 				error(_("assert failed : r->bal == -1"));
+521,523c493,495
+< 	  else
+< 	    {
 < 	      if (!(p->bal == -1)) error("assert failed : p->bal == -1");
 ---
-> 	      if (!(p->bal == -1)) error(_("assert failed : p->bal == -1"));
-545c546
+> 			else {
+> 				if (!(p->bal == -1))
+> 					error(_("assert failed : p->bal == -1"));
+541,542c513
+< R_avl_find (const avl_tree *tree, const void *item)
+< {
+---
+> R_avl_find(const avl_tree *tree, const void *item) {
+545,547c516,518
+<   if (!(tree != NULL)) error("assert failed : tree != NULL");
+<   for (p = tree->root.link[0]; p; )
+<     {
+---
+> 	if (!(tree != NULL))
+> 		error(_("assert failed : tree != NULL"));
+> 	for (p = tree->root.link[0]; p;) {
+583c554
 <   if (!(tree != NULL)) error("assert failed : tree != NULL");
 ---
->   if (!(tree != NULL)) error(_("assert failed : tree != NULL"));
-583c584
-<   if (!(tree != NULL)) error("assert failed : tree != NULL");
----
->   if (!(tree != NULL)) error(_("assert failed : tree != NULL"));
-672c673
+> 	if (!(tree != NULL)) error(_("assert failed : tree != NULL"));
+672c643
 <   if (!(k > 0)) error("assert failed : k > 0");
 ---
->   if (!(k > 0)) error(_("assert failed : k > 0"));
-692c693
+> 	if (!(k > 0)) error(_("assert failed : k > 0"));
+692c663
 < 	  if (!(s->bal == +1)) error("assert failed : s->bal == +1");
 ---
-> 	  if (!(s->bal == +1)) error(_("assert failed : s->bal == +1"));
-695c696
+> 			if (!(s->bal == +1)) error(_("assert failed : s->bal == +1"));
+695c666
 < 	  if (!(r != NULL)) error("assert failed : r != NULL");
 ---
-> 	  if (!(r != NULL)) error(_("assert failed : r != NULL"));
-716c717
+> 			if (!(r != NULL)) error(_("assert failed : r != NULL"));
+716c687
 < 	      if (!(r->bal == -1)) error("assert failed : r->bal == -1");
 ---
-> 	      if (!(r->bal == -1)) error(_("assert failed : r->bal == -1"));
-728c729
+> 				if (!(r->bal == -1)) error(_("assert failed : r->bal == -1"));
+728c699
 < 		  if (!(p->bal == -1)) error("assert failed : p->bal == -1");
 ---
-> 		  if (!(p->bal == -1)) error(_("assert failed : p->bal == -1"));
-737c738
+> 					if (!(p->bal == -1)) error(_("assert failed : p->bal == -1"));
+737c708
 < 	  if (!(a[k] == 1)) error("assert failed : a[k] == 1");
 ---
-> 	  if (!(a[k] == 1)) error(_("assert failed : a[k] == 1"));
-751c752
+> 			if (!(a[k] == 1)) error(_("assert failed : a[k] == 1"));
+751c722
 < 	  if (!(s->bal == -1)) error("assert failed : s->bal == -1");
 ---
-> 	  if (!(s->bal == -1)) error(_("assert failed : s->bal == -1"));
-785c786
+> 			if (!(s->bal == -1)) error(_("assert failed : s->bal == -1"));
+785c756
 < 		  if (!(p->bal == 1)) error("assert failed : p->bal == 1");
 ---
-> 		  if (!(p->bal == 1)) error(_("assert failed : p->bal == 1"));
-805c806
+> 					if (!(p->bal == 1)) error(_("assert failed : p->bal == 1"));
+801,802c772
+< R_avl_insert (avl_tree *tree, void *item)
+< {
+---
+> R_avl_insert(avl_tree *tree, void *item) {
+805c775,776
 <   if (!(tree != NULL)) error("assert failed : tree != NULL");
 ---
->   if (!(tree != NULL)) error(_("assert failed : tree != NULL"));
-820c821
+> 	if (!(tree != NULL))
+> 		error(_("assert failed : tree != NULL"));
+816,817c787
+< R_avl_replace (avl_tree *tree, void *item)
+< {
+---
+> R_avl_replace(avl_tree *tree, void *item) {
+820c790,791
 <   if (!(tree != NULL)) error("assert failed : tree != NULL");
 ---
->   if (!(tree != NULL)) error(_("assert failed : tree != NULL"));
+> 	if (!(tree != NULL))
+> 		error(_("assert failed : tree != NULL"));
+825,826c796
+<   else
+<     {
+---
+> 	else {
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/avl.h Recommended/foreign/src/avl.h
+35,36c35
+< typedef struct avl_node
+<   {
+---
+> typedef struct avl_node {
+42,43c41
+<   }
+< avl_node;
+---
+> } avl_node;
+46,47c44
+< typedef struct avl_traverser
+<   {
+---
+> typedef struct avl_traverser {
+52,53c49
+<   }
+< avl_traverser;
+---
+> } avl_traverser;
+66,67c62
+< typedef struct avl_tree
+<   {
+---
+> typedef struct avl_tree {
+75,76c70
+<   }
+< avl_tree;
+---
+> } avl_tree;
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/dbfopen.c Recommended/foreign/src/dbfopen.c
 196a197
 > #include "localization.h"
 276c277
 < 	error("binary write error");
 ---
-> 	error(_("binary write error"));
-278c279
+> 		error(_("binary write error"));
+278c279,280
 < 	!= psDBF->nFields) error("binary write error");
 ---
-> 	!= psDBF->nFields) error(_("binary write error"));
+> 			!= psDBF->nFields)
+> 		error(_("binary write error"));
+283,284c285
+<     if( psDBF->nHeaderLength > 32*psDBF->nFields + 32 )
+<     {
+---
+> 	if (psDBF->nHeaderLength > 32 * psDBF->nFields + 32) {
 289c290
 < 	    error("binary write error");
 ---
-> 	    error(_("binary write error"));
-313c314
+> 			error(_("binary write error"));
+304,305c305
+<     if( psDBF->bCurrentRecordModified && psDBF->nCurrentRecord > -1 )
+<     {
+---
+> 	if (psDBF->bCurrentRecordModified && psDBF->nCurrentRecord > -1) {
+312,313c312,314
+< 	if (fwrite( psDBF->pszCurrentRecord, psDBF->nRecordLength, 1, 
 < 		    psDBF->fp ) != 1) error("binary write error");
 ---
-> 		    psDBF->fp ) != 1) error(_("binary write error"));
+> 		if (fwrite(psDBF->pszCurrentRecord, psDBF->nRecordLength, 1, psDBF->fp)
+> 				!= 1)
+> 			error(_("binary write error"));
 334c335
 < 	error("binary read error");
 ---
-> 	error(_("binary read error"));
-343c344
+> 		error(_("binary read error"));
+339c340,341
+<     abyFileHeader[7] = (unsigned char) ((psDBF->nRecords/(256*256*256)) % 256);
+---
+> 	abyFileHeader[7] = (unsigned char) ((psDBF->nRecords / (256 * 256 * 256))
+> 			% 256);
+343c345
 < 	error("binary write error");
 ---
-> 	error(_("binary write error"));
-725c726
+> 		error(_("binary write error"));
+380,381c382
+<     if( psDBF->fp == NULL )
+<     {
+---
+> 	if (psDBF->fp == NULL) {
+394,395c395
+<     if( fread( pabyBuf, 32, 1, psDBF->fp ) != 1 )
+<     {
+---
+> 	if (fread(pabyBuf, 32, 1, psDBF->fp) != 1) {
+402,403c402,403
+<     psDBF->nRecords =
+<      pabyBuf[4] + pabyBuf[5]*256 + pabyBuf[6]*256*256 + pabyBuf[7]*256*256*256;
+---
+> 	psDBF->nRecords = pabyBuf[4] + pabyBuf[5] * 256 + pabyBuf[6] * 256 * 256
+> 			+ pabyBuf[7] * 256 * 256 * 256;
+420,421c420
+<     if( fread( pabyBuf, nHeadLen-32, 1, psDBF->fp ) != 1 )
+<     {
+---
+> 	if (fread(pabyBuf, nHeadLen - 32, 1, psDBF->fp) != 1) {
+433,434c432
+<     for( iField = 0; iField < nFields; iField++ )
+<     {
+---
+> 	for (iField = 0; iField < nFields; iField++) {
+439,440c437
+< 	if( pabyFInfo[11] == 'N' || pabyFInfo[11] == 'F' )
+< 	{
+---
+> 		if (pabyFInfo[11] == 'N' || pabyFInfo[11] == 'F') {
+443,445c440
+< 	}
+< 	else
+< 	{
+---
+> 		} else {
+454,455c449,450
+< 	    psDBF->panFieldOffset[iField] =
+< 	      psDBF->panFieldOffset[iField-1] + psDBF->panFieldSize[iField-1];
+---
+> 			psDBF->panFieldOffset[iField] = psDBF->panFieldOffset[iField - 1]
+> 					+ psDBF->panFieldSize[iField - 1];
+466,467c461
+< DBFClose(DBFHandle psDBF)
+< {
+---
+> DBFClose(DBFHandle psDBF) {
+488,489c482
+<     if( psDBF->panFieldOffset != NULL )
+<     {
+---
+> 	if (psDBF->panFieldOffset != NULL) {
+501,502c494
+<     if( pszStringField != NULL )
+<     {
+---
+> 	if (pszStringField != NULL) {
+532,533c524,525
+< 	       && pszBasename[i] != '\\';
+< 	 i-- ) {}
+---
+> 					&& pszBasename[i] != '\\'; i--) {
+> 	}
+592,593c584,585
+< DBFAddField(DBFHandle psDBF, const char * pszFieldName,
+< 	    DBFFieldType eType, int nWidth, int nDecimals )
+---
+> DBFAddField(DBFHandle psDBF, const char * pszFieldName, DBFFieldType eType,
+> 		int nWidth, int nDecimals)
+620,621c612,613
+<     psDBF->panFieldOffset = (int *)
+<       SfRealloc( psDBF->panFieldOffset, sizeof(int) * psDBF->nFields );
+---
+> 	psDBF->panFieldOffset = (int *) SfRealloc(psDBF->panFieldOffset,
+> 			sizeof(int) * psDBF->nFields);
+623,624c615,616
+<     psDBF->panFieldSize = (int *)
+<       SfRealloc( psDBF->panFieldSize, sizeof(int) * psDBF->nFields );
+---
+> 	psDBF->panFieldSize = (int *) SfRealloc(psDBF->panFieldSize,
+> 			sizeof(int) * psDBF->nFields);
+626,627c618,619
+<     psDBF->panFieldDecimals = (int *)
+<       SfRealloc( psDBF->panFieldDecimals, sizeof(int) * psDBF->nFields );
+---
+> 	psDBF->panFieldDecimals = (int *) SfRealloc(psDBF->panFieldDecimals,
+> 			sizeof(int) * psDBF->nFields);
+629,630c621,622
+<     psDBF->pachFieldType = (char *)
+<       SfRealloc( psDBF->pachFieldType, sizeof(char) * psDBF->nFields );
+---
+> 	psDBF->pachFieldType = (char *) SfRealloc(psDBF->pachFieldType,
+> 			sizeof(char) * psDBF->nFields);
+655c647,648
+<     psDBF->pszHeader = (char *) SfRealloc(psDBF->pszHeader,psDBF->nFields*32);
+---
+> 	psDBF->pszHeader = (char *) SfRealloc(psDBF->pszHeader,
+> 			psDBF->nFields * 32);
+669,670c662
+<     if( eType == FTString )
+<     {
+---
+> 	if (eType == FTString) {
+673,675c665
+<     }
+<     else
+<     {
+---
+> 	} else {
+717,718c707
+<     if( psDBF->nCurrentRecord != hEntity )
+<     {
+---
+> 	if (psDBF->nCurrentRecord != hEntity) {
+723,725c712,713
+< 	if( fseek( psDBF->fp, nRecordOffset, 0 ) != 0 )
+< 	{
 < 	    REprintf("fseek(%d) failed on DBF file", nRecordOffset);
 ---
-> 	    REprintf(_("fseek(%d) failed on DBF file"), nRecordOffset);
-732c733
+> 		if (fseek(psDBF->fp, nRecordOffset, 0) != 0) {
+> 			REprintf(_("fseek(%d) failed on DBF file"), nRecordOffset);
+729,732c717,719
+< 	if( fread( psDBF->pszCurrentRecord, psDBF->nRecordLength,
+< 		   1, psDBF->fp ) != 1 )
+< 	{
 < 	    REprintf("fread(%d) failed on DBF file", psDBF->nRecordLength );
 ---
-> 	    REprintf(_("fread(%d) failed on DBF file"), psDBF->nRecordLength );
-1030c1031
+> 		if (fread(psDBF->pszCurrentRecord, psDBF->nRecordLength, 1, psDBF->fp)
+> 				!= 1) {
+> 			REprintf(_("fread(%d) failed on DBF file"), psDBF->nRecordLength);
+744,745c731
+<     if( psDBF->panFieldSize[iField]+1 > nStringFieldLen )
+<     {
+---
+> 	if (psDBF->panFieldSize[iField] + 1 > nStringFieldLen) {
+763,764c749
+<     if( chReqType == 'N' )
+<     {
+---
+> 	if (chReqType == 'N') {
+774,775c759
+<     else
+<     {
+---
+> 	else {
+877c861,862
+<     if(pszValue == NULL) return TRUE;
+---
+> 	if (pszValue == NULL)
+> 		return TRUE;
+879,880c864
+<     switch(psDBF->pachFieldType[iField])
+<     {
+---
+> 	switch (psDBF->pachFieldType[iField]) {
+888c872,873
+< 	if(pszValue[0] == '*') return TRUE;
+---
+> 		if (pszValue[0] == '*')
+> 			return TRUE;
+890c875,876
+<              if(pszValue[i] != ' ') return FALSE;
+---
+> 			if (pszValue[i] != ' ')
+> 				return FALSE;
+940,941c926,927
+< DBFGetFieldInfo( DBFHandle psDBF, int iField, char * pszFieldName,
+< 		 int * pnWidth, int * pnDecimals )
+---
+> DBFGetFieldInfo(DBFHandle psDBF, int iField, char * pszFieldName, int * pnWidth,
+> 		int * pnDecimals)
+953,954c939
+<     if( pszFieldName != NULL )
+<     {
+---
+> 	if (pszFieldName != NULL) {
+974,976c959
+<     }
+<     else
+<     {
+---
+> 	} else {
+1007,1008c990
+<     if( hEntity == psDBF->nRecords )
+<     {
+---
+> 	if (hEntity == psDBF->nRecords) {
+1022,1023c1004
+<     if( psDBF->nCurrentRecord != hEntity )
+<     {
+---
+> 	if (psDBF->nCurrentRecord != hEntity) {
+1029,1030c1010,1012
+< 	if (fread( psDBF->pszCurrentRecord, psDBF->nRecordLength, 1, 
 < 		   psDBF->fp ) != 1) error("binary read error");
 ---
-> 		   psDBF->fp ) != 1) error(_("binary read error"));
-1200c1201
+> 		if (fread(psDBF->pszCurrentRecord, psDBF->nRecordLength, 1, psDBF->fp)
+> 				!= 1)
+> 			error(_("binary read error"));
+1045,1048c1027,1028
+<     if( pValue == NULL )
+<     {
+< 	switch(psDBF->pachFieldType[iField])
+< 	{
+---
+> 	if (pValue == NULL) {
+> 		switch (psDBF->pachFieldType[iField]) {
+1080,1081c1060
+<     switch( psDBF->pachFieldType[iField] )
+<     {
+---
+> 	switch (psDBF->pachFieldType[iField]) {
+1085,1086c1064
+< 	if( psDBF->panFieldDecimals[iField] == 0 )
+< 	{
+---
+> 		if (psDBF->panFieldDecimals[iField] == 0) {
+1094,1095c1072
+< 	    if( (int)strlen(szSField) > psDBF->panFieldSize[iField] )
+< 	    {
+---
+> 			if ((int) strlen(szSField) > psDBF->panFieldSize[iField]) {
+1102,1104c1079
+< 	}
+< 	else
+< 	{
+---
+> 		} else {
+1110,1111c1085,1086
+< 	    sprintf( szFormat, "%%%d.%df",
+< 		     nWidth, psDBF->panFieldDecimals[iField] );
+---
+> 			sprintf(szFormat, "%%%d.%df", nWidth,
+> 					psDBF->panFieldDecimals[iField]);
+1113,1114c1088
+< 	    if( (int) strlen(szSField) > psDBF->panFieldSize[iField] )
+< 	    {
+---
+> 			if ((int) strlen(szSField) > psDBF->panFieldSize[iField]) {
+1124,1125c1098,1099
+< 	if (psDBF->panFieldSize[iField] >= 1  &&
+< 	    (*(char*)pValue == 'F' || *(char*)pValue == 'T'))
+---
+> 		if (psDBF->panFieldSize[iField] >= 1
+> 				&& (*(char*) pValue == 'F' || *(char*) pValue == 'T'))
+1130,1131c1104
+< 	if( (int) strlen((char *) pValue) > psDBF->panFieldSize[iField] )
+< 	{
+---
+> 		if ((int) strlen((char *) pValue) > psDBF->panFieldSize[iField]) {
+1134,1136c1107
+< 	}
+< 	else
+< 	{
+---
+> 		} else {
+1177,1178c1148
+<     if( hEntity == psDBF->nRecords )
+<     {
+---
+> 	if (hEntity == psDBF->nRecords) {
+1192,1193c1162
+<     if( psDBF->nCurrentRecord != hEntity )
+<     {
+---
+> 	if (psDBF->nCurrentRecord != hEntity) {
+1199,1200c1168,1170
+< 	if (fread( psDBF->pszCurrentRecord, psDBF->nRecordLength, 
 < 		   1, psDBF->fp ) != 1) error("binary read error");
 ---
-> 		   1, psDBF->fp ) != 1) error(_("binary read error"));
-1347c1348
+> 		if (fread(psDBF->pszCurrentRecord, psDBF->nRecordLength, 1, psDBF->fp)
+> 				!= 1)
+> 			error(_("binary read error"));
+1212,1213c1182
+<     else
+<     {
+---
+> 	else {
+1219,1220c1188,1189
+<     strncpy((char *) (pabyRec+psDBF->panFieldOffset[iField]),
+< 	    (char *) pValue, j );
+---
+> 	strncpy((char *) (pabyRec + psDBF->panFieldOffset[iField]), (char *) pValue,
+> 			j);
+1235,1236c1204
+< DBFWriteDoubleAttribute( DBFHandle psDBF, int iRecord, int iField,
+< 			 double dValue )
+---
+> DBFWriteDoubleAttribute(DBFHandle psDBF, int iRecord, int iField, double dValue)
+1249,1250c1217
+< DBFWriteIntegerAttribute( DBFHandle psDBF, int iRecord, int iField,
+< 			  int nValue )
+---
+> DBFWriteIntegerAttribute(DBFHandle psDBF, int iRecord, int iField, int nValue)
+1324,1325c1291
+<     if( hEntity == psDBF->nRecords )
+<     {
+---
+> 	if (hEntity == psDBF->nRecords) {
+1339,1340c1305
+<     if( psDBF->nCurrentRecord != hEntity )
+<     {
+---
+> 	if (psDBF->nCurrentRecord != hEntity) {
+1346,1347c1311,1313
+< 	if (fread( psDBF->pszCurrentRecord, psDBF->nRecordLength, 
 < 		   1, psDBF->fp ) != 1) error("binary read error");
 ---
-> 		   1, psDBF->fp ) != 1) error(_("binary read error"));
-1392c1393
+> 		if (fread(psDBF->pszCurrentRecord, psDBF->nRecordLength, 1, psDBF->fp)
+> 				!= 1)
+> 			error(_("binary read error"));
+1384,1385c1350
+<     if( psDBF->nCurrentRecord != hEntity )
+<     {
+---
+> 	if (psDBF->nCurrentRecord != hEntity) {
+1391,1392c1356,1358
+< 	if (fread( psDBF->pszCurrentRecord, psDBF->nRecordLength, 
 < 		   1, psDBF->fp ) != 1) error("binary read error");
 ---
-> 		   1, psDBF->fp ) != 1) error(_("binary read error"));
+> 		if (fread(psDBF->pszCurrentRecord, psDBF->nRecordLength, 1, psDBF->fp)
+> 				!= 1)
+> 			error(_("binary read error"));
+1416,1417c1382
+< DBFCloneEmpty(DBFHandle psDBF, const char * pszFilename )
+< {
+---
+> DBFCloneEmpty(DBFHandle psDBF, const char * pszFilename) {
+1421c1386,1387
+<    if ( newDBF == NULL ) return ( NULL );
+---
+> 	if (newDBF == NULL)
+> 		return ( NULL);
+1431c1397,1398
+<    memcpy ( newDBF->panFieldOffset, psDBF->panFieldOffset, sizeof(int) * psDBF->nFields );
+---
+> 	memcpy(newDBF->panFieldOffset, psDBF->panFieldOffset,
+> 			sizeof(int) * psDBF->nFields);
+1433c1400,1401
+<    memcpy ( newDBF->panFieldSize, psDBF->panFieldSize, sizeof(int) * psDBF->nFields );
+---
+> 	memcpy(newDBF->panFieldSize, psDBF->panFieldSize,
+> 			sizeof(int) * psDBF->nFields);
+1435c1403,1404
+<    memcpy ( newDBF->panFieldDecimals, psDBF->panFieldDecimals, sizeof(int) * psDBF->nFields );
+---
+> 	memcpy(newDBF->panFieldDecimals, psDBF->panFieldDecimals,
+> 			sizeof(int) * psDBF->nFields);
+1437c1406,1407
+<    memcpy ( newDBF->pachFieldType, psDBF->pachFieldType, sizeof(int) * psDBF->nFields );
+---
+> 	memcpy(newDBF->pachFieldType, psDBF->pachFieldType,
+> 			sizeof(int) * psDBF->nFields);
+1476,1477c1446
+< static void str_to_upper (char *string)
+< {
+---
+> static void str_to_upper(char *string) {
+1507,1508c1476
+<     for( i = 0; i < DBFGetFieldCount(psDBF); i++ )
+<     {
+---
+> 	for (i = 0; i < DBFGetFieldCount(psDBF); i++) {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/file-handle.c Recommended/foreign/src/file-handle.c
 27a28
 > #include "localization.h"
+53,55c53
+< static void
+< init_file_handle (struct file_handle *h)
+< {
+---
+> static void init_file_handle(struct file_handle *h) {
+68,69c65
+< fh_get_handle_by_filename (const char *filename)
+< {
+---
+> fh_get_handle_by_filename(const char *filename) {
+88,89c84
+<   if (!fp)
+<     {
+---
+> 	if (!fp) {
+95,97c90
+<     }
+<   else
+<     {
+---
+> 	} else {
+107,108c100
+< fh_get_handle_by_name (const char name[9])
+< {
+---
+> fh_get_handle_by_name(const char name[9]) {
+114c106,109
+<     error (_("file handle `%s' has not been previously declared on FILE HANDLE"), name);
+---
+> 		error(
+> 				_(
+> 						"file handle `%s' has not been previously declared on FILE HANDLE"),
+> 				name);
+125,126c120
+< fh_handle_name (struct file_handle *h)
+< {
+---
+> fh_handle_name(struct file_handle *h) {
+129,130c123
+<   if (buf)
+<     {
+---
+> 	if (buf) {
+137,138c130
+<   if (h->name[0] == '*')
+<     {
+---
+> 	if (h->name[0] == '*') {
+153,155c145
+< void
+< fh_close_handle (struct file_handle *h)
+< {
+---
+> void fh_close_handle(struct file_handle *h) {
+167c157,158
+<   if(h->ext) Free(h->ext);
+---
+> 	if (h->ext)
+> 		Free(h->ext);
+172,174c163
+< static int
+< cmp_file_handle (const void *a, const void *b, void *foo)
+< {
+---
+> static int cmp_file_handle(const void *a, const void *b, void *foo) {
+184,186c173
+< void
+< fh_init_files (void)
+< {
+---
+> void fh_init_files(void) {
+194,195c181,182
+<   inline_file->where.filename
+<       = inline_file->fn = inline_file->norm_fn = inline_filename;
+---
+> 	inline_file->where.filename = inline_file->fn = inline_file->norm_fn =
+> 			inline_filename;
+202,203c189
+< fh_handle_filename (struct file_handle * h)
+< {
+---
+> fh_handle_filename(struct file_handle * h) {
+208,210c194
+< size_t
+< fh_record_width (struct file_handle *h)
+< {
+---
+> size_t fh_record_width(struct file_handle *h) {
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/file-handle.h Recommended/foreign/src/file-handle.h
+34,35c34
+< enum
+<   {
+---
+> enum {
+42,43c41
+< enum
+<   {
+---
+> enum {
+54,55c52
+< struct fh_ext_class
+<   {
+---
+> struct fh_ext_class {
+64,65c61
+< struct file_locator
+<   {
+---
+> struct file_locator {
+72,73c68
+< struct file_handle
+<   {
+---
+> struct file_handle {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/foreign.h Recommended/foreign/src/foreign.h
 29a30
 > #include <R_ext/Minmax.h>
@@ -321,193 +1599,1404 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/format.c Recommended/foreign/src/format.c
 24a25
 > #include "localization.h"
-221c222
+29,30c30
+< struct fmt_desc formats[FMT_NUMBER_OF_FORMATS + 1] =
+< {
+---
+> struct fmt_desc formats[FMT_NUMBER_OF_FORMATS + 1] = {
+32,33c32
+<   {"",         -1, -1,  -1, -1,   -1, 0000, -1, -1},
+< };
+---
+> 		{ "", -1, -1, -1, -1, -1, 0000, -1, -1 }, };
+35,44c34,39
+< const int translate_fmt[40] =
+<   {
+<     -1, FMT_A, FMT_AHEX, FMT_COMMA, FMT_DOLLAR, FMT_F, FMT_IB,
+<     FMT_PIBHEX, FMT_P, FMT_PIB, FMT_PK, FMT_RB, FMT_RBHEX, -1,
+<     -1, FMT_Z, FMT_N, FMT_E, -1, -1, FMT_DATE, FMT_TIME,
+<     FMT_DATETIME, FMT_ADATE, FMT_JDATE, FMT_DTIME, FMT_WKDAY,
+<     FMT_MONTH, FMT_MOYR, FMT_QYR, FMT_WKYR, FMT_PCT, FMT_DOT,
+<     FMT_CCA, FMT_CCB, FMT_CCC, FMT_CCD, FMT_CCE, FMT_EDATE,
+<     FMT_SDATE,
+<   };
+---
+> const int translate_fmt[40] = { -1, FMT_A, FMT_AHEX, FMT_COMMA, FMT_DOLLAR,
+> 		FMT_F, FMT_IB, FMT_PIBHEX, FMT_P, FMT_PIB, FMT_PK, FMT_RB, FMT_RBHEX,
+> 		-1, -1, FMT_Z, FMT_N, FMT_E, -1, -1, FMT_DATE, FMT_TIME, FMT_DATETIME,
+> 		FMT_ADATE, FMT_JDATE, FMT_DTIME, FMT_WKDAY, FMT_MONTH, FMT_MOYR,
+> 		FMT_QYR, FMT_WKYR, FMT_PCT, FMT_DOT, FMT_CCA, FMT_CCB, FMT_CCC, FMT_CCD,
+> 		FMT_CCE, FMT_EDATE, FMT_SDATE, };
+85,86c80
+< fmt_to_string (const struct fmt_spec *f)
+< {
+---
+> fmt_to_string(const struct fmt_spec *f) {
+96,98c90
+< int
+< check_input_specifier (const struct fmt_spec *spec)
+< {
+---
+> int check_input_specifier(const struct fmt_spec *spec) {
+106,107c98
+<   if (f->cat & FCAT_OUTPUT_ONLY)
+<     {
+---
+> 	if (f->cat & FCAT_OUTPUT_ONLY) {
+111,113c102,105
+<   if (spec->w < f->Imin_w || spec->w > f->Imax_w)
+<     {
+<       error(_("input format %s specifies a bad width %d.  Format %s requires a width between %d and %d"),
+---
+> 	if (spec->w < f->Imin_w || spec->w > f->Imax_w) {
+> 		error(
+> 				_(
+> 						"input format %s specifies a bad width %d. Format %s requires a width between %d and %d"),
+117,119c109,112
+<   if ((f->cat & FCAT_EVEN_WIDTH) && spec->w % 2)
+<     {
+<       error (_("input format %s specifies an odd width %d, but format %s requires an even width between %d and %d"),
+---
+> 	if ((f->cat & FCAT_EVEN_WIDTH) && spec->w % 2) {
+> 		error(
+> 				_(
+> 						"input format %s specifies an odd width %d, but format %s requires an even width between %d and %d"),
+123,125c116,119
+<   if (f->n_args > 1 && (spec->d < 0 || spec->d > 16))
+<     {
+<       error (_("Input format %s specifies a bad number of implied decimal places %d.  Input format %s allows up to 16 implied decimal places"),
+---
+> 	if (f->n_args > 1 && (spec->d < 0 || spec->d > 16)) {
+> 		error(
+> 				_(
+> 						"Input format %s specifies a bad number of implied decimal places %d. Input format %s allows up to 16 implied decimal places"),
+132,134c126
+< int
+< check_output_specifier (const struct fmt_spec *spec)
+< {
+---
+> int check_output_specifier(const struct fmt_spec *spec) {
+142,144c134,137
+<   if (spec->w < f->Omin_w || spec->w > f->Omax_w)
+<     {
+<       error (_("output format %s specifies a bad width %d.  Format %s requires a width between %d and %d"),
+---
+> 	if (spec->w < f->Omin_w || spec->w > f->Omax_w) {
+> 		error(
+> 				_(
+> 						"output format %s specifies a bad width %d. Format %s requires a width between %d and %d"),
+151,153c144,147
+<       && spec->w < f->Omin_w + 1 + spec->d)
+<     {
+<       error (_("output format %s requires minimum width %d to allow %d decimal places.  Try %s%d.%d instead of %s"),
+---
+> 			&& spec->w < f->Omin_w + 1 + spec->d) {
+> 		error(
+> 				_(
+> 						"output format %s requires minimum width %d to allow %d decimal places. Try %s%d.%d instead of %s"),
+158,160c152,155
+<   if ((f->cat & FCAT_EVEN_WIDTH) && spec->w % 2)
+<     {
+<       error (_("output format %s specifies an odd width %d, but output format %s requires an even width between %d and %d"),
+---
+> 	if ((f->cat & FCAT_EVEN_WIDTH) && spec->w % 2) {
+> 		error(
+> 				_(
+> 						"output format %s specifies an odd width %d, but output format %s requires an even width between %d and %d"),
+164,166c159,162
+<   if (f->n_args > 1 && (spec->d < 0 || spec->d > 16))
+<     {
+<       error (_("Output format %s specifies a bad number of implied decimal places %d.  Output format %s allows a number of implied decimal places between 1 and 16"),
+---
+> 	if (f->n_args > 1 && (spec->d < 0 || spec->d > 16)) {
+> 		error(
+> 				_(
+> 						"Output format %s specifies a bad number of implied decimal places %d. Output format %s allows a number of implied decimal places between 1 and 16"),
+175,177c171
+< int
+< check_string_specifier (const struct fmt_spec *f, int min_len)
+< {
+---
+> int check_string_specifier(const struct fmt_spec *f, int min_len) {
+179,181c173,176
+<       || (f->type == FMT_AHEX && min_len * 2 > f->w))
+<     {
+<       error (_("cannot display a string variable of width %d with format specifier %s"),
+---
+> 			|| (f->type == FMT_AHEX && min_len * 2 > f->w)) {
+> 		error(
+> 				_(
+> 						"cannot display a string variable of width %d with format specifier %s"),
+188,190c183
+< void
+< convert_fmt_ItoO (const struct fmt_spec *input, struct fmt_spec *output)
+< {
+---
+> void convert_fmt_ItoO(const struct fmt_spec *input, struct fmt_spec *output) {
+197,198c190
+<   switch (input->type)
+<     {
+---
+> 	switch (input->type) {
+217,218c209
+<     case FMT_PIBHEX:
+<       {
+---
+> 	case FMT_PIBHEX: {
+221c212
 < 	    error("convert_fmt_ItoO : assert failed");
 ---
-> 	    error(_("convert_fmt_ItoO: assert failed"));
-243c244
+> 			error(_("convert_fmt_ItoO: assert failed"));
+243c234
 <       error("convert_fmt_ItoO : invalid input->type : %d", input->type);
 ---
->       error(_("convert_fmt_ItoO: invalid input->type: %d"), input->type);
-277c278
+> 		error(_("convert_fmt_ItoO: invalid input->type: %d"), input->type);
+277c268
 <       error("convert_fmt_ItoO : invalid input->type : %d", input->type);
 ---
->       error(_("convert_fmt_ItoO: invalid input->type: %d"), input->type);
+> 		error(_("convert_fmt_ItoO: invalid input->type: %d"), input->type);
 Only in Recommended/foreign/src: localization.h
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/minitab.c Recommended/foreign/src/minitab.c
 28a29
 > #include "localization.h"
-121,122c122
-< 	error(_("file '%s' is not in Minitab Portable Worksheet format"),
-< 	      CHAR(fname));
+50,51c51
+< char *strtrim(char *str)
+< {
 ---
-> 	error(_("file '%s' is not in Minitab Portable Worksheet format"), CHAR(fname));
+> char *strtrim(char *str) {
+58,59c58
+< static
+< SEXP MTB2SEXP(MTB mtb[], int len) /* Create a list from a vector of
+---
+> static SEXP MTB2SEXP(MTB mtb[], int len) /* Create a list from a vector of
+62,63c61,62
+<     SEXP ans = PROTECT(allocVector(VECSXP,len)),
+< 	names = PROTECT(allocVector(STRSXP, len));
+---
+> 	SEXP ans = PROTECT(allocVector(VECSXP, len)), names = PROTECT(
+> 			allocVector(STRSXP, len));
+103,105c101
+< SEXP
+< read_mtp(SEXP fname)
+< {
+---
+> SEXP read_mtp(SEXP fname) {
+117,120c113,116
+< 	error(_("unable to open file '%s': '%s'"), 
+< 	      CHAR(fname), strerror(errno));
+<     if ((fgets(buf, MTP_BUF_SIZE, f) == NULL) ||
+< 	strncmp(buf, "Minitab Portable Worksheet ", 27) != 0)
+---
+> 		error(_("unable to open file '%s': '%s'"), CHAR(fname),
+> 				strerror(errno));
+> 	if ((fgets(buf, MTP_BUF_SIZE, f) == NULL)
+> 			|| strncmp(buf, "Minitab Portable Worksheet ", 27) != 0)
+124c120,121
+<     if(pres != buf) error(_("file read error"));
+---
+> 	if (pres != buf)
+> 		error(_("file read error"));
+135,136c132,133
+< 		   &(thisRec->cnum), &(thisRec->len),
+< 		   &(thisRec->dtype), blank, thisRec->name) != 6)
+---
+> 				&(thisRec->cnum), &(thisRec->len), &(thisRec->dtype), blank,
+> 				thisRec->name) != 6)
+145c142,143
+< 		if(res == EOF) error(_("file read error"));
+---
+> 				if (res == EOF)
+> 					error(_("file read error"));
+153c151,152
+< 		    if(res == EOF) error(_("file read error"));
+---
+> 					if (res == EOF)
+> 						error(_("file read error"));
+160c159,160
+<   	if(pres != buf) error(_("file read error"));
+---
+> 		if (pres != buf)
+> 			error(_("file read error"));
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/pfm-read.c Recommended/foreign/src/pfm-read.c
 34a35
 > #include "localization.h"
-100c101
+74,75c74
+< struct pfm_fhuser_ext
+<   {
+---
+> struct pfm_fhuser_ext {
+100c98
 <   "reading as a portable file",
 ---
->   N_("reading as a portable file"),
-226,227c227
-<       error(_("cannot read file %s as portable file: already opened for %s"),
-< 	   fh_handle_name (h), h->class->name);
+> 	N_("reading as a portable file"),
+108,110c106
+< static void
+< pfm_close (struct file_handle * h)
+< {
 ---
->       error(_("cannot read file %s as portable file: already opened for %s"), fh_handle_name (h), h->class->name);
-242,243c242
+> static void pfm_close(struct file_handle * h) {
+131,133c127
+< static int
+< fill_buf (struct file_handle *h)
+< {
+---
+> static int fill_buf(struct file_handle *h) {
+152,153c146
+<   if (ext->trans)
+<     {
+---
+> 	if (ext->trans) {
+164,165c157
+<  lossage:
+<   return 0;
+---
+> 	lossage: return 0;
+169,171c161
+< static int
+< read_char (struct file_handle *h)
+< {
+---
+> static int read_char(struct file_handle *h) {
+185,187c175
+< static inline int
+< skip_char (struct file_handle *h, int c)
+< {
+---
+> static inline int skip_char(struct file_handle *h, int c) {
+190,191c178
+<   if (ext->cc == c)
+<     {
+---
+> 	if (ext->cc == c) {
+195,196c182
+<  lossage:
+<   return 0;
+---
+> 	lossage: return 0;
+213,214c199
+< pfm_read_dictionary (struct file_handle *h, struct pfm_read_info *inf)
+< {
+---
+> pfm_read_dictionary(struct file_handle *h, struct pfm_read_info *inf) {
+219,220c204
+<   if (h->class == &pfm_r_class)
+<     {
+---
+> 	if (h->class == &pfm_r_class) {
+223,225c207
+<     }
+<   else if (h->class != NULL)
+<     {
+---
+> 	} else if (h->class != NULL) {
+239,240c221
+<   if (ext->file == NULL)
+<     {
+---
+> 	if (ext->file == NULL) {
+242c223,225
 <       error(_("an error occurred while opening \"%s\" for reading as a portable file: %s"),
-< 	    h->fn, strerror (errno));
 ---
->       error(_("an error occurred while opening \"%s\" for reading as a portable file: %s"), h->fn, strerror (errno));
-646,650c645,658
+> 		error(
+> 				_(
+> 						"an error occurred while opening \"%s\" for reading as a portable file: %s"),
+300,302c283
+< static double
+< read_float (struct file_handle *h)
+< {
+---
+> static double read_float(struct file_handle *h) {
+314,316c295,297
+<   if (pfm_match (137 /* * */))
+<     {
+<       advance ();	/* Probably a dot (.) but doesn't appear to matter. */
+---
+> 	if (pfm_match(137 /* * */)) {
+> 		advance ();
+> 		/* Probably a dot (.) but doesn't appear to matter. */
+318,319c299
+<     }
+<   else if (pfm_match (141 /* - */))
+---
+> 	} else if (pfm_match(141 /* - */))
+322,325c302,303
+<   for (;;)
+<     {
+<       if (ext->cc >= 64 /* 0 */ && ext->cc <= 93 /* T */)
+< 	{
+---
+> 	for (;;) {
+> 		if (ext->cc >= 64 /* 0 */&& ext->cc <= 93 /* T */) {
+345,346c323
+< 	}
+<       else if (!got_dot && ext->cc == 127 /* . */)
+---
+> 		} else if (!got_dot && ext->cc == 127 /* . */)
+359,360c336
+<   if (ext->cc == 130 /* + */ || ext->cc == 141 /* - */)
+<     {
+---
+> 	if (ext->cc == 130 /* + */|| ext->cc == 141 /* - */) {
+365,366c341
+<       for (;;)
+< 	{
+---
+> 		for (;;) {
+391,392c366
+<   else if (exponent > 0)
+<     {
+---
+> 	else if (exponent > 0) {
+403,404c377
+<  overflow:
+<   if (neg)
+---
+> 	overflow: if (neg)
+409,410c382
+<  lossage:
+<   return NA_REAL;
+---
+> 	lossage: return NA_REAL;
+414,416c386
+< int
+< read_int (struct file_handle *h)
+< {
+---
+> int read_int(struct file_handle *h) {
+425,426c395
+<  lossage:
+<   return NA_INTEGER;
+---
+> 	lossage: return NA_INTEGER;
+433,434c402
+< read_string (struct file_handle *h)
+< {
+---
+> read_string(struct file_handle *h) {
+457,458c425
+<     for (i = 0; i < n; i++)
+<       {
+---
+> 		for (i = 0; i < n; i++) {
+467,468c434
+<  lossage:
+<   return NULL;
+---
+> 	lossage: return NULL;
+472,474c438
+< static int
+< read_header (struct file_handle *h)
+< {
+---
+> static int read_header(struct file_handle *h) {
+490,491c454
+<     for (i = 0; i < 256; i++)
+<       {
+---
+> 		for (i = 0; i < 256; i++) {
+508c471,472
+< 	ext->trans[i] = trans_temp[i] == -1 ? 0 : (unsigned char) trans_temp[i];
+---
+> 			ext->trans[i] =
+> 					trans_temp[i] == -1 ? 0 : (unsigned char) trans_temp[i];
+527,528c491
+<  lossage:
+<   return 0;
+---
+> 	lossage: return 0;
+533,535c496
+< int
+< read_version_data (struct file_handle *h, struct pfm_read_info *inf)
+< {
+---
+> int read_version_data(struct file_handle *h, struct pfm_read_info *inf) {
+555,556c516
+<     for (i = 0; i < 8; i++)
+<       {
+---
+> 		for (i = 0; i < 8; i++) {
+562,563c522
+<     if (inf)
+<       {
+---
+> 		if (inf) {
+582,583c541
+<     for (i = 0; i < 6; i++)
+<       {
+---
+> 		for (i = 0; i < 6; i++) {
+589,590c547
+<     if (inf)
+<       {
+---
+> 		if (inf) {
+597,598c554
+<   if (pfm_match (65 /* 1 */))
+<     {
+---
+> 	if (pfm_match(65 /* 1 */)) {
+606,607c562
+<     }
+<   else if (inf)
+---
+> 	} else if (inf)
+611,612c566
+<   if (pfm_match (67 /* 3 */))
+<     {
+---
+> 	if (pfm_match(67 /* 3 */)) {
+620,621c574
+<     }
+<   else if (inf)
+---
+> 	} else if (inf)
+625,626c578
+<  lossage:
+<   return 0;
+---
+> 	lossage: return 0;
+629,632c581,582
+< static int
+< convert_format (struct file_handle *h, int fmt[3], struct fmt_spec *v,
+< 		struct variable *vv)
+< {
+---
+> static int convert_format(struct file_handle *h, int fmt[3], struct fmt_spec *v,
+> 		struct variable *vv) {
+645,650c595,611
+<   if ((vv->type == ALPHA) ^ ((formats[v->type].cat & FCAT_STRING) != 0))
 <     lose ((_("%s variable %s has %s format specifier %s"),
 < 	   vv->type == ALPHA ? "String" : "Numeric",
 < 	   vv->name,
 < 	   formats[v->type].cat & FCAT_STRING ? "string" : "numeric",
 < 	   formats[v->type].name));
 ---
->   {
->     if(vv->type == ALPHA) {
-> 	if(formats[v->type].cat & FCAT_STRING)
-> 	 lose ((_("String variable %s has string format specifier %s"),  vv->name, formats[v->type].name));
-> 	else 
-> 	 lose ((_("String variable %s has numeric format specifier %s"), vv->name, formats[v->type].name));
+> 	if ((vv->type == ALPHA) ^ ((formats[v->type].cat & FCAT_STRING) != 0)) {
+> 		if (vv->type == ALPHA) {
+> 			if (formats[v->type].cat & FCAT_STRING)
+> 				lose(
+> 						(_("String variable %s has string format specifier %s"), vv->name, formats[v->type].name));
+> 			else
+> 				lose(
+> 						(_("String variable %s has numeric format specifier %s"), vv->name, formats[v->type].name));
+> 		} else {
+> 			if (formats[v->type].cat & FCAT_STRING)
+> 				lose(
+> 						(_("Numeric variable %s has string format specifier %s"), vv->name, formats[v->type].name));
+> 			else
+> 				lose(
+> 						(_("Numeric variable %s has numeric format specifier %s"), vv->name, formats[v->type].name));
+> 		}
 > 	}
->     else {
-> 	if(formats[v->type].cat & FCAT_STRING)
-> 	 lose ((_("Numeric variable %s has string format specifier %s"),  vv->name, formats[v->type].name));
-> 	else 
-> 	 lose ((_("Numeric variable %s has numeric format specifier %s"), vv->name, formats[v->type].name));
-> 	}
->   }
-749,750c757
+653,654c614
+<  lossage:
+<   return 0;
+---
+> 	lossage: return 0;
+664,665c624
+<     "                                                                "
+<   };
+---
+> 						"                                                                " };
+668,670c627
+< static void
+< asciify (char *s)
+< {
+---
+> static void asciify(char *s) {
+678,680c635
+< static int
+< read_variables (struct file_handle *h)
+< {
+---
+> static int read_variables(struct file_handle *h) {
+706,707c661
+<   if (pfm_match (70 /* 6 */))
+<     {
+---
+> 	if (pfm_match(70 /* 6 */)) {
+716,717c670
+<   for (i = 0; i < ext->nvars; i++)
+<     {
+---
+> 	for (i = 0; i < ext->nvars; i++) {
+737,738c690
+<       for (j = 0; j < 6; j++)
+< 	{
+---
+> 		for (j = 0; j < 6; j++) {
+749,750c701,702
 < 	lose ((_("position %d: Variable name has %u characters"),
 < 	       i, strlen ((char *) name)));
 ---
-> 	lose ((_("position %d: Variable name has %u characters"), i, strlen ((char *) name)));
-753,754c760
+> 			lose(
+> 					(_("position %d: Variable name has %u characters"), i, strlen ((char *) name)));
+753,757c705,710
 < 	lose ((_("position %d: Variable name begins with invalid character"),
 < 	       i));
----
-> 	lose ((_("position %d: Variable name begins with invalid character"), i));
-757,758c763
+<       if (name[0] >= 100 /* a */ && name[0] <= 125 /* z */)
+< 	{
 < 	  warning(_("position %d: Variable name begins with lowercase letter %c"),
-< 		  i, name[0] - 100 + 'a');
 ---
-> 	  warning(_("position %d: Variable name begins with lowercase letter %c"), i, name[0] - 100 + 'a');
-769,770c774
+> 			lose(
+> 					(_("position %d: Variable name begins with invalid character"), i));
+> 		if (name[0] >= 100 /* a */&& name[0] <= 125 /* z */) {
+> 			warning(
+> 					_(
+> 							"position %d: Variable name begins with lowercase letter %c"),
+763,764c716
+<       for (j = 1; j < (int) strlen ((char *) name); j++)
+< 	{
+---
+> 		for (j = 1; j < (int) strlen((char *) name); j++) {
+767,769c719,722
+< 	  if (c >= 100 /* a */ && c <= 125 /* z */)
+< 	    {
 < 	      warning(_("position %d: Variable name character %d is lowercase letter %c"),
-< 		      i, j + 1, c - 100 + 'a');
 ---
-> 	      warning(_("position %d: Variable name character %d is lowercase letter %c"), i, j + 1, c - 100 + 'a');
-778,779c782
+> 			if (c >= 100 /* a */&& c <= 125 /* z */) {
+> 				warning(
+> 						_(
+> 								"position %d: Variable name character %d is lowercase letter %c"),
+772,774c725,726
+< 	    }
+< 	  else if ((c >= 64 /* 0 */ && c <= 99 /* Z */)
+< 		   || c == 127 /* . */ || c == 152 /* @ */
+---
+> 			} else if ((c >= 64 /* 0 */&& c <= 99 /* Z */) || c == 127 /* . */
+> 					|| c == 152 /* @ */
+778,779c730,731
 < 	    lose ((_("position %d: character `\\%03o' is not valid in a variable name"),
 < 		   i, c));
 ---
-> 	    lose ((_("position %d: character `\\%03o' is not valid in a variable name"), i, c));
-857,858c860
+> 				lose(
+> 						(_("position %d: character `\\%03o' is not valid in a variable name"), i, c));
+786,787c738,739
+<       v = create_variable (ext->dict, (char *) name,
+< 			   width ? ALPHA : NUMERIC, width);
+---
+> 		v = create_variable(ext->dict, (char *) name, width ? ALPHA : NUMERIC,
+> 				width);
+797,798c749
+<       if (pfm_match (75 /* B */))
+< 	{
+---
+> 		if (pfm_match(75 /* B */)) {
+803,805c754
+< 	}
+<       else if (pfm_match (74 /* A */))
+< 	{
+---
+> 		} else if (pfm_match(74 /* A */)) {
+809,811c758
+< 	}
+<       else if (pfm_match (73 /* 9 */))
+< 	{
+---
+> 		} else if (pfm_match(73 /* 9 */)) {
+818,825c765,768
+<       while (pfm_match (72 /* 8 */))
+< 	{
+< 	  static const int map_next[MISSING_COUNT] =
+< 	    {
+< 	      MISSING_1, MISSING_2, MISSING_3, -1,
+< 	      MISSING_RANGE_1, MISSING_LOW_1, MISSING_HIGH_1,
+< 	      -1, -1, -1,
+< 	    };
+---
+> 		while (pfm_match(72 /* 8 */)) {
+> 			static const int map_next[MISSING_COUNT] = { MISSING_1, MISSING_2,
+> 					MISSING_3, -1, MISSING_RANGE_1, MISSING_LOW_1,
+> 					MISSING_HIGH_1, -1, -1, -1, };
+827,830c770,771
+< 	  static const int map_ofs[MISSING_COUNT] =
+< 	    {
+< 	      -1, 0, 1, 2, -1, -1, -1, 2, 1, 1,
+< 	    };
+---
+> 			static const int map_ofs[MISSING_COUNT] = { -1, 0, 1, 2, -1, -1, -1,
+> 					2, 1, 1, };
+842,843c783
+<       if (pfm_match (76 /* C */))
+< 	{
+---
+> 		if (pfm_match(76 /* C */)) {
+857,858c797,798
 <     lose ((_("Weighting variable %s not present in dictionary"),
 < 	   ext->dict->weight_var));
 ---
->     lose ((_("Weighting variable %s not present in dictionary"), ext->dict->weight_var));
-928,929c930
+> 		lose(
+> 				(_("Weighting variable %s not present in dictionary"), ext->dict->weight_var));
+862,863c802
+<  lossage:
+<   return 0;
+---
+> 	lossage: return 0;
+867,871c806,808
+< static int
+< parse_value (struct file_handle *h, union value *v, struct variable *vv)
+< {
+<   if (vv->type == ALPHA)
+<     {
+---
+> static int parse_value(struct file_handle *h, union value *v,
+> 		struct variable *vv) {
+> 	if (vv->type == ALPHA) {
+885,887c822
+<     }
+<   else
+<     {
+---
+> 	} else {
+897,899c832
+< static int
+< read_value_label (struct file_handle *h)
+< {
+---
+> static int read_value_label(struct file_handle *h) {
+916,917c849
+<   for (i = 0; i < nv; i++)
+<     {
+---
+> 	for (i = 0; i < nv; i++) {
+928,929c860,861
 < 	lose ((_("Cannot assign value labels to %s and %s, which have different variable types or widths"),
 < 	       v[0]->name, v[i]->name));
 ---
-> 	lose ((_("Cannot assign value labels to %s and %s, which have different variable types or widths"), v[0]->name, v[i]->name));
-974,975c975
+> 			lose(
+> 					(_("Cannot assign value labels to %s and %s, which have different variable types or widths"), v[0]->name, v[i]->name));
+936,937c868
+<   for (i = 0; i < n_labels; i++)
+<     {
+---
+> 	for (i = 0; i < n_labels; i++) {
+959,960c890
+<       for (j = 0; j < nv; j++)
+< 	{
+---
+> 		for (j = 0; j < nv; j++) {
+974,975c904,905
 < 	    lose ((_("Duplicate label for value %g for variable %s"),
 < 		   vl->v.f, var->name));
 ---
-> 	    lose ((_("Duplicate label for value %g for variable %s"), vl->v.f, var->name));
-977,978c977
+> 				lose(
+> 						(_("Duplicate label for value %g for variable %s"), vl->v.f, var->name));
+977,978c907,908
 < 	    lose ((_("Duplicate label for value `%.*s' for variable %s"),
 < 		   var->width, vl->v.s, var->name));
 ---
-> 	    lose ((_("Duplicate label for value '%.*s' for variable %s"), var->width, vl->v.s, var->name));
-1076c1075
-<   "reading as a portable file",
+> 				lose(
+> 						(_("Duplicate label for value '%.*s' for variable %s"), var->width, vl->v.s, var->name));
+986,987c916
+<  lossage:
+<   Free (v);
 ---
->   N_("reading as a portable file"),
+> 	lossage: Free(v);
+994,996c923
+< static void
+< st_bare_pad_copy (char *dest, const char *src, size_t n)
+< {
+---
+> static void st_bare_pad_copy(char *dest, const char *src, size_t n) {
+1000,1001c927
+<   else
+<     {
+---
+> 	else {
+1011,1013c937,938
+< int
+< pfm_read_case (struct file_handle *h, union value *perm, struct dictionary *dict)
+< {
+---
+> int pfm_read_case(struct file_handle *h, union value *perm,
+> 		struct dictionary *dict) {
+1028,1029c953
+<     if (ext->vars[i] == 0)
+<       {
+---
+> 		if (ext->vars[i] == 0) {
+1034,1036c958
+<       }
+<     else
+<       {
+---
+> 		} else {
+1048,1049c970
+<   for (i = 0; i < dict->nvar; i++)
+<     {
+---
+> 	for (i = 0; i < dict->nvar; i++) {
+1067,1068c988
+<  lossage:
+<   Free (temp);
+---
+> 	lossage: Free(temp);
+1073,1078c993,994
+< static struct fh_ext_class pfm_r_class =
+< {
+<   5,
+<   "reading as a portable file",
+<   pfm_close,
+< };
+---
+> static struct fh_ext_class pfm_r_class = { 5, N_("reading as a portable file"),
+> 		pfm_close, };
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/pfm.h Recommended/foreign/src/pfm.h
+30,33c30,31
+< enum
+<   {
+<     PFM_COMM,
+<     PFM_TAPE
+---
+> enum {
+> 	PFM_COMM, PFM_TAPE
+38,39c36
+< struct pfm_read_info
+<   {
+---
+> struct pfm_read_info {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/sfm-read.c Recommended/foreign/src/sfm-read.c
 32a33
 > #include "localization.h"
-135c136
+68,70c69
+< static double
+< second_lowest_double_val()
+< {
+---
+> static double second_lowest_double_val() {
+98,99c97
+< struct sfm_fhuser_ext
+<   {
+---
+> struct sfm_fhuser_ext {
+135c133
 <   "reading as a system file",
 ---
->   N_("reading as a system file"),
-161c162
+> 	N_("reading as a system file"),
+155,157c153
+< static void
+< sfm_close (struct file_handle * h)
+< {
+---
+> static void sfm_close(struct file_handle * h) {
+161c157,158
 <   if (!(ext->opened == 0)) error("assert failed : ext->opened == 0");
 ---
->   if (!(ext->opened == 0)) error(_("assert failed : ext->opened == 0"));
-220c221
+> 	if (!(ext->opened == 0))
+> 		error(_("assert failed : ext->opened == 0"));
+168,170c165
+< void
+< sfm_maybe_close (struct file_handle *h)
+< {
+---
+> void sfm_maybe_close(struct file_handle *h) {
+187,189c182,187
+< static int read_value_labels (struct file_handle * h, struct variable ** var_by_index);
+< static int read_variables (struct file_handle * h, struct variable *** var_by_index);
+< static int read_machine_int32_info (struct file_handle * h, int size, int count, int *encoding);
+---
+> static int read_value_labels(struct file_handle * h,
+> 		struct variable ** var_by_index);
+> static int read_variables(struct file_handle * h,
+> 		struct variable *** var_by_index);
+> static int read_machine_int32_info(struct file_handle * h, int size, int count,
+> 		int *encoding);
+191,192c189,190
+< static int read_long_var_names (struct file_handle * h, struct dictionary *
+< 		, unsigned long size, unsigned int count);
+---
+> static int read_long_var_names(struct file_handle * h, struct dictionary *,
+> 		unsigned long size, unsigned int count);
+217,222c215,218
+< void
+< free_value_label (struct value_label * v)
+< {
 <   if (!(v->ref_count >= 1)) error("assert failed : v->ref_count >= 1");
+<   if (--v->ref_count == 0)
+<     {
 ---
->   if (!(v->ref_count >= 1)) error(_("assert failed : v->ref_count >= 1"));
-295,296c296
-<       error(_("cannot read file %s as system file: already opened for %s"),
-< 	    fh_handle_name (h), h->class->name);
+> void free_value_label(struct value_label * v) {
+> 	if (!(v->ref_count >= 1))
+> 		error(_("assert failed : v->ref_count >= 1"));
+> 	if (--v->ref_count == 0) {
+230,232c226
+< void
+< free_val_lab (void *p, void *param)
+< {
 ---
->       error(_("cannot read file %s as system file: already opened for %s"), fh_handle_name (h), h->class->name);
-310,311c310
+> void free_val_lab(void *p, void *param) {
+237,239c231
+< void
+< free_dictionary (struct dictionary * d)
+< {
+---
+> void free_dictionary(struct dictionary * d) {
+249,250c241
+<   for (i = 0; i < d->nvar; i++)
+<     {
+---
+> 	for (i = 0; i < d->nvar; i++) {
+253,254c244
+<       if (v->val_lab)
+< 	{
+---
+> 		if (v->val_lab) {
+258,259c248
+<       if (v->label)
+< 	{
+---
+> 		if (v->label) {
+277,278c266
+< sfm_read_dictionary (struct file_handle * h, struct sfm_read_info * inf)
+< {
+---
+> sfm_read_dictionary(struct file_handle * h, struct sfm_read_info * inf) {
+287,288c275
+<   if (h->class == &sfm_r_class)
+<     {
+---
+> 	if (h->class == &sfm_r_class) {
+292,294c279
+<     }
+<   else if (h->class != NULL)
+<     {
+---
+> 	} else if (h->class != NULL) {
+307,308c292
+<   if (ext->file == NULL)
+<     {
+---
+> 	if (ext->file == NULL) {
+310c294,296
 <       error(_("An error occurred while opening '%s' for reading as a system file: %s"),
-< 	    h->fn, strerror (errno));
 ---
->       error(_("An error occurred while opening '%s' for reading as a system file: %s"), h->fn, strerror (errno));
-343,344c342
+> 		error(
+> 				_(
+> 						"An error occurred while opening '%s' for reading as a system file: %s"),
+336,337c322
+<   if (ext->weight_index != -1)
+<     {
+---
+> 	if (ext->weight_index != -1) {
+341c326,327
+< 	lose ((_("%s: Weighting variable may not be a continuation of a long string variable"), h->fn));
+---
+> 			lose(
+> 					(_("%s: Weighting variable may not be a continuation of a long string variable"), h->fn));
+343,344c329,330
 < 	lose ((_("%s: Weighting variable may not be a string variable"),
 < 	       h->fn));
 ---
-> 	lose ((_("%s: Weighting variable may not be a string variable"), h->fn));
-368,369c366
+> 			lose(
+> 					(_("%s: Weighting variable may not be a string variable"), h->fn));
+347,348c333
+<     }
+<   else
+---
+> 	} else
+352,353c337
+<   for (;;)
+<     {
+---
+> 	for (;;) {
+360,361c344
+<       switch (rec_type)
+< 	{
+---
+> 		switch (rec_type) {
+368,369c351,352
 < 	  lose ((_("%s: Orphaned variable index record (type 4).  Type 4 records must always immediately follow type 3 records"),
 < 		 h->fn));
 ---
-> 	  lose ((_("%s: Orphaned variable index record (type 4). Type 4 records must always immediately follow type 3 records"), h->fn));
-472c469
+> 			lose(
+> 					(_("%s: Orphaned variable index record (type 4). Type 4 records must always immediately follow type 3 records"), h->fn));
+376,379c359,360
+< 	case 7:
+< 	  {
+< 	    struct
+< 	      {
+---
+> 		case 7: {
+> 			struct {
+383,384c364
+< 	      }
+< 	    data;
+---
+> 			} data;
+389,390c369
+< 	    if (ext->reverse_endian)
+< 	      {
+---
+> 			if (ext->reverse_endian) {
+403,404c382
+< 	    switch (data.subtype)
+< 	      {
+---
+> 			switch (data.subtype) {
+441c419,422
+< 		warning(_("%s: Unrecognized record type 7, subtype %d encountered in system file"), h->fn, data.subtype);
+---
+> 				warning(
+> 						_(
+> 								"%s: Unrecognized record type 7, subtype %d encountered in system file"),
+> 						h->fn, data.subtype);
+445,446c426
+< 	    if (skip)
+< 	      {
+---
+> 			if (skip) {
+455,456c435
+< 	case 999:
+< 	  {
+---
+> 		case 999: {
+472c451
 <   warning ("Read system-file dictionary successfully");
 ---
->   warning(_("Read system-file dictionary successfully"));
-504,505c501
+> 	warning(_("Read system-file dictionary successfully"));
+493,495c472,473
+< static int
+< read_machine_int32_info (struct file_handle * h, int size, int count, int *encoding)
+< {
+---
+> static int read_machine_int32_info(struct file_handle * h, int size, int count,
+> 		int *encoding) {
+504,505c482,483
 <     lose ((_("%s: Bad size (%d) or count (%d) field on record type 7, subtype 3.	Expected size %d, count 8"),
 < 	h->fn, size, count, sizeof (R_int32)));
 ---
->     lose ((_("%s: Bad size (%d) or count (%d) field on record type 7, subtype 3. Expected size %d, count 8"), h->fn, size, count, sizeof (R_int32)));
-520c516
+> 		lose(
+> 				(_("%s: Bad size (%d) or count (%d) field on record type 7, subtype 3. Expected size %d, count 8"), h->fn, size, count, sizeof (R_int32)));
+513,514c491
+<   switch (FPREP)
+<     {
+---
+> 	switch (FPREP) {
+517c494,495
+< 	lose ((_("%s: Floating-point representation in system file is not IEEE-754.  read.spss cannot convert between floating-point formats"), h->fn));
+---
+> 			lose(
+> 					(_("%s: Floating-point representation in system file is not IEEE-754. read.spss cannot convert between floating-point formats"), h->fn));
+520c498,499
 <       if (!(0)) error("assert failed : 0");
 ---
->       if (!(0)) error(_("assert failed : 0"));
-533c529
+> 		if (!(0))
+> 			error(_("assert failed : 0"));
+526,527c505
+<   if (ext->reverse_endian)
+<     {
+---
+> 	if (ext->reverse_endian) {
+532,533c510,511
+<       else
 < 	if (!(0)) error("assert failed : 0");
 ---
-> 	if (!(0)) error(_("assert failed : 0"));
-571,572c567
+> 		else if (!(0))
+> 			error(_("assert failed : 0"));
+536,539c514,515
+<     lose ((_("%s: File-indicated endianness (%s) does not match endianness intuited from file header (%s)"),
+< 	   h->fn, file_endian == BIG ? "big-endian" : "little-endian",
+< 	   data[6] == 1 ? "big-endian" : (data[6] == 2 ? "little-endian"
+< 					  : "unknown")));
+---
+> 		lose(
+> 				(_("%s: File-indicated endianness (%s) does not match endianness intuited from file header (%s)"), h->fn, file_endian == BIG ? "big-endian" : "little-endian", data[6] == 1 ? "big-endian" : (data[6] == 2 ? "little-endian" : "unknown")));
+548,549c524,525
+<     lose ((_("%s: File-indicated character representation code (%s) is not ASCII"), h->fn,
+<        data[7] == 1 ? "EBCDIC" : (data[7] == 4 ? "DEC Kanji" : "Unknown")));
+---
+> 		lose(
+> 				(_("%s: File-indicated character representation code (%s) is not ASCII"), h->fn, data[7] == 1 ? "EBCDIC" : (data[7] == 4 ? "DEC Kanji" : "Unknown")));
+553c529,532
+<       warning(_("%s: File-indicated character representation code (%d) is unknown"), h->fn, data[7]);
+---
+> 		warning(
+> 				_(
+> 						"%s: File-indicated character representation code (%d) is unknown"),
+> 				h->fn, data[7]);
+556,557c535
+< lossage:
+<   return 0;
+---
+> 	lossage: return 0;
+561,563c539
+< static int
+< read_machine_flt64_info (struct file_handle * h, int size, int count)
+< {
+---
+> static int read_machine_flt64_info(struct file_handle * h, int size, int count) {
+571,572c547,548
 <     lose ((_("%s: Bad size (%d) or count (%d) field on record type 7, subtype 4.	Expected size %d, count 8"),
 < 	   h->fn, size, count, sizeof (R_flt64)));
 ---
->     lose ((_("%s: Bad size (%d) or count (%d) field on record type 7, subtype 4. Expected size %d, count 8"), h->fn, size, count, sizeof (R_flt64)));
-611,613c606
+> 		lose(
+> 				(_("%s: Bad size (%d) or count (%d) field on record type 7, subtype 4. Expected size %d, count 8"), h->fn, size, count, sizeof (R_flt64)));
+580,581c556
+<       || data[2] != second_lowest_double_val())
+<     {
+---
+> 			|| data[2] != second_lowest_double_val()) {
+585,588c560,565
+<       warning(_("%s: File-indicated value is different from internal value for at least one of the three system values.  SYSMIS: indicated %g, expected %g; HIGHEST: %g, %g; LOWEST: %g, %g"),
+< 	  h->fn, (double) data[0], (double) SYSMIS,
+< 	  (double) data[1], (double) DBL_MAX,
+< 	  (double) data[2], (double) second_lowest_double_val());
+---
+> 		warning(
+> 				_(
+> 						"%s: File-indicated value is different from internal value for at least one of the three system values. SYSMIS: indicated %g, expected %g; HIGHEST: %g, %g; LOWEST: %g, %g"),
+> 				h->fn, (double) data[0], (double) SYSMIS, (double) data[1],
+> 				(double) DBL_MAX, (double) data[2],
+> 				(double) second_lowest_double_val());
+593,594c570
+< lossage:
+<   return 0;
+---
+> 	lossage: return 0;
+600,603c576,577
+< static int
+< read_long_var_names (struct file_handle * h, struct dictionary * dict
+< 		, unsigned long size, unsigned int count)
+< {
+---
+> static int read_long_var_names(struct file_handle * h, struct dictionary * dict,
+> 		unsigned long size, unsigned int count) {
+611,613c585,588
 <     warning("%s: strange record info seen, size=%u, count=%u"
 <       ", ignoring long variable names"
 <       , h->fn, size, count);
 ---
->     warning(_("%s: strange record info seen, size=%u, count=%u, ignoring long variable names"), h->fn, size, count);
-626c619
+> 		warning(
+> 				_(
+> 						"%s: strange record info seen, size=%u, count=%u, ignoring long variable names"),
+> 				h->fn, size, count);
+626c601
 <       warning("%s: no long variable name for variable '%s'", h->fn, p);
 ---
->       warning(_("%s: no long variable name for variable '%s'"), h->fn, p);
-638,640c631
+> 			warning(_("%s: no long variable name for variable '%s'"), h->fn, p);
+638,640c613,616
 <         warning("%s: long variable name mapping '%s' to '%s'"
 <         "for variable which does not exist"
 <         , h->fn, p, val);
 ---
->         warning(_("%s: long variable name mapping '%s' to '%s' for variable which does not exist"), h->fn, p, val);
-693,694c684
+> 				warning(
+> 						_(
+> 								"%s: long variable name mapping '%s' to '%s' for variable which does not exist"),
+> 						h->fn, p, val);
+650,652c626
+< static int
+< read_header (struct file_handle * h, struct sfm_read_info * inf)
+< {
+---
+> static int read_header(struct file_handle * h, struct sfm_read_info * inf) {
+693,694c667,668
 <     lose ((_("%s: Bad magic.  Proper system files begin with the four characters `$FL2'. This file will not be read"),
 < 	   h->fn));
 ---
->     lose ((_("%s: Bad magic. Proper system files begin with the four characters `$FL2'. This file will not be read"), h->fn));
-1108,1113c1098,1115
+> 		lose(
+> 				(_("%s: Bad magic. Proper system files begin with the four characters `$FL2'. This file will not be read"), h->fn));
+702,703c676
+<     if (!isgraph ((unsigned char) prod_name[i]))
+<       {
+---
+> 		if (!isgraph((unsigned char ) prod_name[i])) {
+711,715c684,685
+<     static const char *prefix[N_PREFIXES] =
+<       {
+< 	"@(#) SPSS DATA FILE",
+< 	"SPSS SYSTEM FILE.",
+<       };
+---
+> 		static const char *prefix[N_PREFIXES] = { "@(#) SPSS DATA FILE",
+> 				"SPSS SYSTEM FILE.", };
+720,721c690
+<       if (!strncmp (prefix[i], hdr.prod_name, strlen (prefix[i])))
+< 	{
+---
+> 			if (!strncmp(prefix[i], hdr.prod_name, strlen(prefix[i]))) {
+731,732c700
+<   else
+<     {
+---
+> 	else {
+735,736c703,704
+< 	lose ((_("%s: File layout code has unexpected value %d.  Value should be 2 or 3, in big-endian or little-endian format"),
+< 	       h->fn, hdr.layout_code));
+---
+> 			lose(
+> 					(_("%s: File layout code has unexpected value %d. Value should be 2 or 3, in big-endian or little-endian format"), h->fn, hdr.layout_code));
+748,751c716,719
+<   if (hdr.case_size <= 0 || ext->case_size > (INT_MAX
+< 					      / (int) sizeof (union value) / 2))
+<     lose ((_("%s: Number of elements per case (%d) is not between 1 and %d"),
+< 	   h->fn, hdr.case_size, INT_MAX / sizeof (union value) / 2));
+---
+> 	if (hdr.case_size <= 0
+> 			|| ext->case_size > (INT_MAX / (int) sizeof(union value) / 2))
+> 		lose(
+> 				(_("%s: Number of elements per case (%d) is not between 1 and %d"), h->fn, hdr.case_size, INT_MAX / sizeof (union value) / 2));
+757,758c725,726
+<     lose ((_("%s: Index of weighting variable (%d) is not between 0 and number of elements per case (%d)"),
+< 	   h->fn, hdr.weight_index, ext->case_size));
+---
+> 		lose(
+> 				(_("%s: Index of weighting variable (%d) is not between 0 and number of elements per case (%d)"), h->fn, hdr.weight_index, ext->case_size));
+762,763c730,731
+<     lose ((_("%s: Number of cases in file (%d) is not between -1 and %d"),
+< 	   h->fn, ext->ncases, INT_MAX / 2));
+---
+> 		lose(
+> 				(_("%s: Number of cases in file (%d) is not between -1 and %d"), h->fn, ext->ncases, INT_MAX / 2));
+778,779c746
+< 	  && hdr.file_label[i] != 0)
+< 	{
+---
+> 					&& hdr.file_label[i] != 0) {
+787,788c754
+<   if (inf)
+<     {
+---
+> 	if (inf) {
+814,815c780
+< lossage:
+<   return 0;
+---
+> 	lossage: return 0;
+818,820c783
+< int
+< cmp_variable (const void *a, const void *b, void *foo)
+< {
+---
+> int cmp_variable(const void *a, const void *b, void *foo) {
+833,835c796,797
+< static int
+< read_variables (struct file_handle * h, struct variable *** var_by_index)
+< {
+---
+> static int read_variables(struct file_handle * h,
+> 		struct variable *** var_by_index) {
+851,852c813
+<   for (i = 0; i < ext->case_size; i++)
+<     {
+---
+> 	for (i = 0; i < ext->case_size; i++) {
+858,859c819
+<       if (ext->reverse_endian)
+< 	{
+---
+> 		if (ext->reverse_endian) {
+869,870c829,830
+< 	lose ((_("%s: position %d: Bad record type (%d); the expected value was 2"),
+< 	       h->fn, i, sv.rec_type));
+---
+> 			lose(
+> 					(_("%s: position %d: Bad record type (%d); the expected value was 2"), h->fn, i, sv.rec_type));
+875,876c835
+<       if (long_string_count)
+< 	{
+---
+> 		if (long_string_count) {
+878,879c837,838
+< 	    lose ((_("%s: position %d: String variable does not have proper number of continuation records"),
+< 		   h->fn, i));
+---
+> 				lose(
+> 						(_("%s: position %d: String variable does not have proper number of continuation records"), h->fn, i));
+884,887c843,845
+< 	}
+<       else if (sv.type == -1)
+< 	lose ((_("%s: position %d: Superfluous long string continuation record"),
+< 	       h->fn, i));
+---
+> 		} else if (sv.type == -1)
+> 			lose(
+> 					(_("%s: position %d: Superfluous long string continuation record"), h->fn, i));
+891,892c849,850
+< 	lose ((_("%s: position %d: Bad variable type code %d"),
+< 	       h->fn, i, sv.type));
+---
+> 			lose(
+> 					(_("%s: position %d: Bad variable type code %d"), h->fn, i, sv.type));
+894,895c852,853
+< 	lose ((_("%s: position %d: Variable label indicator field is not 0 or 1"),
+< 	       h->fn, i));
+---
+> 			lose(
+> 					(_("%s: position %d: Variable label indicator field is not 0 or 1"), h->fn, i));
+898c856,857
+< 	lose ((_("%s: position %d: Missing value indicator field is not -3, -2, 0, 1, 2, or 3"), h->fn, i));
+---
+> 			lose(
+> 					(_("%s: position %d: Missing value indicator field is not -3, -2, 0, 1, 2, or 3"), h->fn, i));
+911,913c870,873
+<       if (!isalpha ((unsigned char) sv.name[0])
+< 	  && sv.name[0] != '@' && sv.name[0] != '#')
+< 	lose ((_("%s: position %d: Variable name begins with invalid character"), h->fn, i));
+---
+> 		if (!isalpha((unsigned char ) sv.name[0]) && sv.name[0] != '@'
+> 				&& sv.name[0] != '#')
+> 			lose(
+> 					(_("%s: position %d: Variable name begins with invalid character"), h->fn, i));
+915c875,877
+< 	warning(_("%s: position %d: Variable name begins with lowercase letter %c"),
+---
+> 			warning(
+> 					_(
+> 							"%s: position %d: Variable name begins with lowercase letter %c"),
+918c880,882
+< 	warning(_("%s: position %d: Variable name begins with octothorpe ('#').  Scratch variables should not appear in system files"),
+---
+> 			warning(
+> 					_(
+> 							"%s: position %d: Variable name begins with octothorpe ('#'). Scratch variables should not appear in system files"),
+923,924c887
+<       for (j = 1; j < 8; j++)
+< 	{
+---
+> 		for (j = 1; j < 8; j++) {
+929,931c892,895
+< 	  else if (islower (c))
+< 	    {
+< 	      warning(_("%s: position %d: Variable name character %d is lowercase letter %c"),
+---
+> 			else if (islower(c)) {
+> 				warning(
+> 						_(
+> 								"%s: position %d: Variable name character %d is lowercase letter %c"),
+934,936c898,899
+< 	    }
+< 	  else if (isalnum (c) || c == '.' || c == '@'
+< 		   || c == '#' || c == '$' || c == '_' || c > 127)
+---
+> 			} else if (isalnum(c) || c == '.' || c == '@' || c == '#'
+> 					|| c == '$' || c == '_' || c > 127)
+939,940c902,903
+< 	    lose ((_("%s: position %d: character `\\%03o' (%c) is not valid in a variable name"),
+< 		   h->fn, j, c, c)); /* changed from 'i', PR#14465 */
+---
+> 				lose(
+> 						(_("%s: position %d: character `\\%03o' (%c) is not valid in a variable name"), h->fn, j, c, c)); /* changed from 'i', PR#14465 */
+946,947c909
+<       if (sv.type == 0)
+< 	{
+---
+> 		if (sv.type == 0) {
+953,955c915
+< 	}
+<       else
+< 	{
+---
+> 		} else {
+967,968c927
+<       if (sv.has_var_label == 1)
+< 	{
+---
+> 		if (sv.has_var_label == 1) {
+981,982c940,941
+< 	    lose ((_("%s: Variable %s indicates variable label of invalid length %d"),
+< 		   h->fn, vv->name, len));
+---
+> 				lose(
+> 						(_("%s: Variable %s indicates variable label of invalid length %d"), h->fn, vv->name, len));
+985c944,945
+< 	  vv->label = bufread (h, NULL, ROUND_UP (len, sizeof (R_int32)), len + 1);
+---
+> 			vv->label = bufread(h, NULL, ROUND_UP(len, sizeof(R_int32)),
+> 					len + 1);
+992,993c952
+<       if (sv.n_missing_values != 0)
+< 	{
+---
+> 		if (sv.n_missing_values != 0) {
+997c956,957
+< 	    lose ((_("%s: Long string variable %s may not have missing values"), h->fn, vv->name));
+---
+> 				lose(
+> 						(_("%s: Long string variable %s may not have missing values"), h->fn, vv->name));
+1005,1006c965
+< 	  if (sv.n_missing_values > 0)
+< 	    {
+---
+> 			if (sv.n_missing_values > 0) {
+1014,1016c973
+< 	    }
+< 	  else
+< 	    {
+---
+> 			} else {
+1020,1021c977,978
+< 		lose ((_("%s: String variable %s may not have missing values specified as a range"),
+< 		       h->fn, vv->name));
+---
+> 					lose(
+> 							(_("%s: String variable %s may not have missing values specified as a range"), h->fn, vv->name));
+1023,1024c980
+< 	      if (mv[0] == ext->lowest)
+< 		{
+---
+> 				if (mv[0] == ext->lowest) {
+1027,1029c983
+< 		}
+< 	      else if (mv[1] == ext->highest)
+< 		{
+---
+> 				} else if (mv[1] == ext->highest) {
+1032,1034c986
+< 		}
+< 	      else
+< 		{
+---
+> 				} else {
+1040,1041c992
+< 	      if (sv.n_missing_values == -3)
+< 		{
+---
+> 				if (sv.n_missing_values == -3) {
+1046,1047c997
+< 	}
+<       else
+---
+> 		} else
+1057,1058c1007,1008
+<     lose ((_("%s: Long string continuation records omitted at end of dictionary"),
+< 	   h->fn));
+---
+> 		lose(
+> 				(_("%s: Long string continuation records omitted at end of dictionary"), h->fn));
+1060,1061c1010,1011
+<     lose ((_("%s: System file header indicates %d variable positions but %d were read from file"),
+< 	   h->fn, ext->case_size, next_value));
+---
+> 		lose(
+> 				(_("%s: System file header indicates %d variable positions but %d were read from file"), h->fn, ext->case_size, next_value));
+1069,1070c1019,1020
+<       lose ((_("%s: Duplicate variable name `%s' within system file"),
+< 	     h->fn, dict->var[i]->name));
+---
+> 			lose(
+> 					(_("%s: Duplicate variable name `%s' within system file"), h->fn, dict->var[i]->name));
+1074,1076c1024
+< lossage:
+<   for (i = 0; i < dict->nvar; i++)
+<     {
+---
+> 	lossage: for (i = 0; i < dict->nvar; i++) {
+1091,1093c1039,1040
+< static int
+< parse_format_spec (struct file_handle *h, R_int32 s, struct fmt_spec *v, struct variable *vv)
+< {
+---
+> static int parse_format_spec(struct file_handle *h, R_int32 s,
+> 		struct fmt_spec *v, struct variable *vv) {
+1096,1097c1043,1044
+<     lose ((_("%s: Bad format specifier byte (%d)"),
+< 	   h->fn, (s >> 16) & 0xff));
+---
+> 		lose(
+> 				(_("%s: Bad format specifier byte (%d)"), h->fn, (s >> 16) & 0xff));
+1106,1113c1053,1071
+<     lose ((_("%s: Bad format specifier byte (%d)"),
+< 	   h->fn, (s >> 16) & 0xff));
 <   if ((vv->type == ALPHA) ^ ((formats[v->type].cat & FCAT_STRING) != 0))
 <     lose ((_("%s: %s variable %s has %s format specifier %s"),
 < 	   h->fn, vv->type == ALPHA ? "String" : "Numeric",
@@ -515,78 +3004,1137 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	   formats[v->type].cat & FCAT_STRING ? "string" : "numeric",
 < 	   formats[v->type].name));
 ---
->   if ((vv->type == ALPHA) ^ ((formats[v->type].cat & FCAT_STRING) != 0)) {
->     if(vv->type == ALPHA) {
->         if(formats[v->type].cat & FCAT_STRING)
->          lose ((_("%s: String variable %s has string format specifier %s"),
->            h->fn, vv->name, formats[v->type].name));
->         else
->          lose ((_("%s: String variable %s has numeric format specifier %s"),
->            h->fn, vv->name, formats[v->type].name));
->         }
->     else {
->         if(formats[v->type].cat & FCAT_STRING)
->          lose ((_("%s: Numeric variable %s has string format specifier %s"),
->            h->fn, vv->name, formats[v->type].name));
->         else
->          lose ((_("%s: Numeric variable %s has numeric format specifier %s"),
->            h->fn, vv->name, formats[v->type].name));
->         }
->   }
-1231,1234c1233,1240
+> 		lose(
+> 				(_("%s: Bad format specifier byte (%d)"), h->fn, (s >> 16) & 0xff));
+> 	if ((vv->type == ALPHA) ^ ((formats[v->type].cat & FCAT_STRING) != 0)) {
+> 		if (vv->type == ALPHA) {
+> 			if (formats[v->type].cat & FCAT_STRING)
+> 				lose(
+> 						(_("%s: String variable %s has string format specifier %s"), h->fn, vv->name, formats[v->type].name));
+> 			else
+> 				lose(
+> 						(_("%s: String variable %s has numeric format specifier %s"), h->fn, vv->name, formats[v->type].name));
+> 		} else {
+> 			if (formats[v->type].cat & FCAT_STRING)
+> 				lose(
+> 						(_("%s: Numeric variable %s has string format specifier %s"), h->fn, vv->name, formats[v->type].name));
+> 			else
+> 				lose(
+> 						(_("%s: Numeric variable %s has numeric format specifier %s"), h->fn, vv->name, formats[v->type].name));
+> 		}
+> 	}
+1116,1117c1074
+< lossage:
+<   return 0;
+---
+> 	lossage: return 0;
+1122,1124c1079
+< int
+< read_value_labels (struct file_handle * h, struct variable ** var_by_index)
+< {
+---
+> int read_value_labels(struct file_handle * h, struct variable ** var_by_index) {
+1152,1153c1107
+<   for (i = 0; i < n_labels; i++)
+<     {
+---
+> 	for (i = 0; i < n_labels; i++) {
+1188c1142,1143
+<       lose ((_("%s: Variable index record (type 4) does not immediately follow value label record (type 3) as it ought"), h->fn));
+---
+> 			lose(
+> 					(_("%s: Variable index record (type 4) does not immediately follow value label record (type 3) as it ought"), h->fn));
+1197,1198c1152,1153
+<     lose ((_("%s: Number of variables associated with a value label (%d) is not between 1 and the number of variables (%d)"),
+< 	   h->fn, n_vars, ext->dict->nvar));
+---
+> 		lose(
+> 				(_("%s: Number of variables associated with a value label (%d) is not between 1 and the number of variables (%d)"), h->fn, n_vars, ext->dict->nvar));
+1204,1205c1159
+<   for (i = 0; i < n_vars; i++)
+<     {
+---
+> 	for (i = 0; i < n_vars; i++) {
+1214,1215c1168,1169
+< 	lose ((_("%s: Variable index associated with value label (%d) is not between 1 and the number of values (%d)"),
+< 	       h->fn, var_index, ext->case_size));
+---
+> 			lose(
+> 					(_("%s: Variable index associated with value label (%d) is not between 1 and the number of values (%d)"), h->fn, var_index, ext->case_size));
+1220,1221c1174,1175
+< 	lose ((_("%s: Variable index associated with value label (%d) refers to a continuation of a string variable, not to an actual variable"),
+< 	       h->fn, var_index));
+---
+> 			lose(
+> 					(_("%s: Variable index associated with value label (%d) refers to a continuation of a string variable, not to an actual variable"), h->fn, var_index));
+1223c1177,1178
+< 	lose ((_("%s: Value labels are not allowed on long string variables (%s)"), h->fn, v->name));
+---
+> 			lose(
+> 					(_("%s: Value labels are not allowed on long string variables (%s)"), h->fn, v->name));
+1231,1234c1186,1193
 <     if (var[i]->type != var[0]->type)
 <       lose ((_("%s: Variables associated with value label are not all of identical type.  Variable %s has %s type, but variable %s has %s type"), h->fn,
 < 	     var[0]->name, var[0]->type == ALPHA ? "string" : "numeric",
 < 	     var[i]->name, var[i]->type == ALPHA ? "string" : "numeric"));
 ---
->     if (var[i]->type != var[0]->type) {
->      if(var[0]->type == ALPHA)
->       lose ((_("%s: Variables associated with value label are not all of identical type. Variable %s has string type, but variable %s has numeric type"), h->fn,
-> 	     var[0]->name, var[i]->name));
->      else
->       lose ((_("%s: Variables associated with value label are not all of identical type. Variable %s has numeric type, but variable %s has string type"), h->fn,
-> 	     var[0]->name, var[i]->name));
->     }
-1426c1432
+> 		if (var[i]->type != var[0]->type) {
+> 			if (var[0]->type == ALPHA)
+> 				lose(
+> 						(_("%s: Variables associated with value label are not all of identical type. Variable %s has string type, but variable %s has numeric type"), h->fn, var[0]->name, var[i]->name));
+> 			else
+> 				lose(
+> 						(_("%s: Variables associated with value label are not all of identical type. Variable %s has numeric type, but variable %s has string type"), h->fn, var[0]->name, var[i]->name));
+> 		}
+1238,1241c1197,1198
+<   for (i = 0; i < n_labels; i++)
+<     {
+<       if (var[0]->type == ALPHA)
+< 	{
+---
+> 	for (i = 0; i < n_labels; i++) {
+> 		if (var[0]->type == ALPHA) {
+1256,1257c1213
+<   for (i = 0; i < n_vars; i++)
+<     {
+---
+> 	for (i = 0; i < n_vars; i++) {
+1264c1220,1222
+< 	v->val_lab = R_avl_create (val_lab_cmp, (void *) (void *) (void *) (void *) (void *) (void *) (void *) (void *) (void *) &width);
+---
+> 			v->val_lab =
+> 					R_avl_create(val_lab_cmp,
+> 							(void *) (void *) (void *) (void *) (void *) (void *) (void *) (void *) (void *) &width);
+1267,1269c1225,1227
+<       for (j = 0; j < n_labels; j++)
+< 	{
+< 	  struct value_label *old = R_avl_replace (v->val_lab, cooked_label[j]);
+---
+> 		for (j = 0; j < n_labels; j++) {
+> 			struct value_label *old = R_avl_replace(v->val_lab,
+> 					cooked_label[j]);
+1274c1232,1234
+< 	    warning(_("%s: File contains duplicate label for value %g for variable %s"),
+---
+> 				warning(
+> 						_(
+> 								"%s: File contains duplicate label for value %g for variable %s"),
+1277,1279c1237,1240
+< 	    warning(_("%s: File contains duplicate label for value `%.*s' for variable %s"),
+< 		      h->fn, v->width,
+< 		 cooked_label[j]->v.s, v->name);
+---
+> 				warning(
+> 						_(
+> 								"%s: File contains duplicate label for value `%.*s' for variable %s"),
+> 						h->fn, v->width, cooked_label[j]->v.s, v->name);
+1290,1291c1251
+< lossage:
+<   if (cooked_label)
+---
+> 	lossage: if (cooked_label)
+1293,1294c1253
+<       if (cooked_label[i])
+< 	{
+---
+> 			if (cooked_label[i]) {
+1308,1309c1267
+< bufread (struct file_handle * h, void *buf, size_t nbytes, size_t minalloc)
+< {
+---
+> bufread(struct file_handle * h, void *buf, size_t nbytes, size_t minalloc) {
+1314,1315c1272
+<   if ((nbytes != 0) && (1 != fread (buf, nbytes, 1, ext->file)))
+<     {
+---
+> 	if ((nbytes != 0) && (1 != fread(buf, nbytes, 1, ext->file))) {
+1328,1330c1285
+< static int
+< read_documents (struct file_handle * h)
+< {
+---
+> static int read_documents(struct file_handle * h) {
+1336,1337c1291,1292
+<     lose ((_("%s: System file contains multiple type 6 (document) records"),
+< 	   h->fn));
+---
+> 		lose(
+> 				(_("%s: System file contains multiple type 6 (document) records"), h->fn));
+1343c1298,1299
+<   if (ext->reverse_endian) bswap_int32 (&n_lines);
+---
+> 	if (ext->reverse_endian)
+> 		bswap_int32(&n_lines);
+1346,1347c1302,1303
+<     lose ((_("%s: Number of document lines (%d) must be greater than 0"),
+< 	   h->fn, dict->n_documents));
+---
+> 		lose(
+> 				(_("%s: Number of document lines (%d) must be greater than 0"), h->fn, dict->n_documents));
+1354,1355c1310
+< lossage:
+<   return 0;
+---
+> 	lossage: return 0;
+1426c1381
 <           if (!(0)) warning("assert failed : 0");
 ---
->           if (!(0)) warning(_("assert failed : 0"));
-1580c1586
+> 			if (!(0)) warning(_("assert failed : 0"));
+1446,1448c1401
+< static size_t
+< buffer_input (struct file_handle * h)
+< {
+---
+> static size_t buffer_input(struct file_handle * h) {
+1455,1456c1408
+<   if (ferror (ext->file))
+<     {
+---
+> 	if (ferror(ext->file)) {
+1473,1475c1425
+< static int
+< read_compressed_data (struct file_handle * h, R_flt64 * temp)
+< {
+---
+> static int read_compressed_data(struct file_handle * h, R_flt64 * temp) {
+1484,1485c1434
+<   for (;;)
+<     {
+---
+> 	for (;;) {
+1487,1488c1436
+< 	switch (*p)
+< 	  {
+---
+> 			switch (*p) {
+1495c1443,1444
+< 	      lose ((_("%s: Compressed data is corrupted.  Data ends partway through a case"), h->fn));
+---
+> 					lose(
+> 							(_("%s: Compressed data is corrupted.  Data ends partway through a case"), h->fn));
+1501,1502c1450
+< 	      if (!buffer_input (h))
+< 		{
+---
+> 					if (!buffer_input(h)) {
+1541,1542c1489
+< 	if (!buffer_input (h))
+< 	  {
+---
+> 			if (!buffer_input(h)) {
+1568,1570c1515,1516
+< int
+< sfm_read_case (struct file_handle * h, union value * perm, struct dictionary * dict)
+< {
+---
+> int sfm_read_case(struct file_handle * h, union value * perm,
+> 		struct dictionary * dict) {
+1580c1526,1527
 <   if (!(dict->nval > 0)) error("assert failed : dict->nval > 0");
 ---
->   if (!(dict->nval > 0)) error(_("assert failed : dict->nval > 0"));
-1636c1642
-<   "reading as a system file",
+> 	if (!(dict->nval > 0))
+> 		error(_("assert failed : dict->nval > 0"));
+1588,1589c1535
+<   if (ext->compressed == 0)
+<     {
 ---
->   N_("reading as a system file"),
+> 	if (ext->compressed == 0) {
+1592,1593c1538
+<       if (amt != nbytes)
+< 	{
+---
+> 		if (amt != nbytes) {
+1600,1601c1545
+<     }
+<   else if (!read_compressed_data (h, temp))
+---
+> 	} else if (!read_compressed_data(h, temp))
+1606,1607c1550
+<   for (i = 0; i < dict->nvar; i++)
+<     {
+---
+> 	for (i = 0; i < dict->nvar; i++) {
+1613,1614c1556
+<       if (v->type == NUMERIC)
+< 	{
+---
+> 		if (v->type == NUMERIC) {
+1619,1620c1561
+< 	}
+<       else
+---
+> 		} else
+1627,1628c1568
+< lossage:
+<   Free (temp);
+---
+> 	lossage: Free(temp);
+1633,1638c1573,1574
+< static struct fh_ext_class sfm_r_class =
+< {
+<   3,
+<   "reading as a system file",
+<   sfm_close,
+< };
+---
+> static struct fh_ext_class sfm_r_class = { 3, N_("reading as a system file"),
+> 		sfm_close, };
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/sfm.h Recommended/foreign/src/sfm.h
+35,36c35
+< struct sfm_read_info
+< {
+---
+> struct sfm_read_info {
+56,57c55
+< struct sfm_write_info
+< {
+---
+> struct sfm_write_info {
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/sfmP.h Recommended/foreign/src/sfmP.h
+22,23c22
+< struct sysfile_header
+<   {
+---
+> struct sysfile_header {
+39,40c38
+< struct sysfile_variable
+<   {
+---
+> struct sysfile_variable {
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/shapefil.h Recommended/foreign/src/shapefil.h
+197,198c197
+< typedef struct
+< {
+---
+> typedef struct {
+257,258c255
+< typedef struct
+< {
+---
+> typedef struct {
+305,307c302,303
+<       SHPCreateObject( int nSHPType, int nShapeId,
+< 		       int nParts, int * panPartStart, int * panPartType,
+< 		       int nVertices, double * padfX, double * padfY,
+---
+> SHPCreateObject(int nSHPType, int nShapeId, int nParts, int * panPartStart,
+> 		int * panPartType, int nVertices, double * padfX, double * padfY,
+310,311c306,307
+<       SHPCreateSimpleObject( int nSHPType, int nVertices,
+< 			     double * padfX, double * padfY, double * padfZ );
+---
+> SHPCreateSimpleObject(int nSHPType, int nVertices, double * padfX,
+> 		double * padfY, double * padfZ);
+331,332c327
+< typedef struct shape_tree_node
+< {
+---
+> typedef struct shape_tree_node {
+348,349c343
+< typedef struct
+< {
+---
+> typedef struct {
+380,383c374,375
+<       SHPTreeFindLikelyShapes( SHPTree * hTree,
+< 			       double * padfBoundsMin,
+< 			       double * padfBoundsMax,
+< 			       int * );
+---
+> SHPTreeFindLikelyShapes(SHPTree * hTree, double * padfBoundsMin,
+> 		double * padfBoundsMax, int *);
+390,391c382
+< typedef struct
+< {
+---
+> typedef struct {
+417,422c408
+<   FTString,
+<   FTInteger,
+<   FTDouble,
+<   FTLogical,
+<   FTDate,
+<   FTInvalid
+---
+> 	FTString, FTInteger, FTDouble, FTLogical, FTDate, FTInvalid
+437,438c423,424
+<       DBFAddField( DBFHandle hDBF, const char * pszFieldName,
+< 		   DBFFieldType eType, int nWidth, int nDecimals );
+---
+> DBFAddField(DBFHandle hDBF, const char * pszFieldName, DBFFieldType eType,
+> 		int nWidth, int nDecimals);
+441,442c427,428
+<       DBFGetFieldInfo( DBFHandle psDBF, int iField,
+< 		       char * pszFieldName, int * pnWidth, int * pnDecimals );
+---
+> DBFGetFieldInfo(DBFHandle psDBF, int iField, char * pszFieldName, int * pnWidth,
+> 		int * pnDecimals);
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/spss.c Recommended/foreign/src/spss.c
 28a29
 > #include "localization.h"
-682,683c683
+39,40c40
+< xstrdup(const char *s)
+< {
+---
+> xstrdup(const char *s) {
+49,51c49,51
+< new_dictionary (int copy)
+< {
+<   struct dictionary *d = Calloc (1, struct dictionary);
+---
+> new_dictionary(int copy) {
+> 	struct dictionary
+> 	*d = Calloc (1, struct dictionary);
+80,81c80
+< find_dict_variable (const struct dictionary *d, const char *name)
+< {
+---
+> find_dict_variable(const struct dictionary *d, const char *name) {
+87,90c86,87
+< static inline void
+< common_init_stuff (struct dictionary *dict, struct variable *v,
+< 		   const char *name, int type, int width)
+< {
+---
+> static inline void common_init_stuff(struct dictionary *dict,
+> 		struct variable *v, const char *name, int type, int width) {
+101,102c98
+<   if (v->type == NUMERIC)
+<     {
+---
+> 	if (v->type == NUMERIC) {
+106,108c102
+<     }
+<   else
+<     {
+---
+> 	} else {
+118,121c112,113
+< void
+< init_variable (struct dictionary *dict, struct variable *v, const char *name,
+< 	       int type, int width)
+< {
+---
+> void init_variable(struct dictionary *dict, struct variable *v,
+> 		const char *name, int type, int width) {
+137,139c129
+< create_variable (struct dictionary *dict, const char *name,
+< 		 int type, int width)
+< {
+---
+> create_variable(struct dictionary *dict, const char *name, int type, int width) {
+159,161c149
+< int
+< val_lab_cmp (const void *a, const void *b, void *param)
+< {
+---
+> int val_lab_cmp(const void *a, const void *b, void *param) {
+165,168c153,154
+< 		    (char *)((struct value_label *) b)->v.s,
+< 		    width);
+<   else
+<     {
+---
+> 				(char *) ((struct value_label *) b)->v.s, width);
+> 	else {
+199,200c184
+<       while (p != NULL)
+< 	{
+---
+> 		while (p != NULL) {
+219,221c203
+< 
+< static SEXP getSPSSvaluelabels(struct dictionary *dict)
+< {
+---
+> static SEXP getSPSSvaluelabels(struct dictionary *dict) {
+229c211,212
+<     if (nvars == 0) return R_NilValue;
+---
+> 	if (nvars == 0)
+> 		return R_NilValue;
+234c217,218
+< 	if (!labelset) continue;
+---
+> 		if (!labelset)
+> 			continue;
+264,265c248
+< static SEXP getSPSSmissing(struct dictionary *dict, int *have_miss)
+< {
+---
+> static SEXP getSPSSmissing(struct dictionary *dict, int *have_miss) {
+270c253,254
+<     if (nvars == 0) return R_NilValue;
+---
+> 	if (nvars == 0)
+> 		return R_NilValue;
+320c304,305
+< 	if (strcmp(type, "none")) (*have_miss)++;
+---
+> 		if (strcmp(type, "none"))
+> 			(*have_miss)++;
+333c318,319
+< 		for(j = 0; j < n; j++) rx[j] = v->missing[j].f;
+---
+> 				for (j = 0; j < n; j++)
+> 					rx[j] = v->missing[j].f;
+353,355c339
+< static SEXP
+< read_SPSS_PORT(const char *filename)
+< {
+---
+> static SEXP read_SPSS_PORT(const char *filename) {
+369c353,354
+<     SEXP miss_labels; int have_miss = 0;
+---
+> 	SEXP miss_labels;
+> 	int have_miss = 0;
+395,396c380
+< 	    case_vals[v->fv].c =
+< 		(unsigned char *) R_alloc(v->width + 1, 1);
+---
+> 			case_vals[v->fv].c = (unsigned char *) R_alloc(v->width + 1, 1);
+471,473c455
+< static SEXP
+< read_SPSS_SAVE(const char *filename)
+< {
+---
+> static SEXP read_SPSS_SAVE(const char *filename) {
+485c467,468
+<     SEXP miss_labels; int have_miss = 0;
+---
+> 	SEXP miss_labels;
+> 	int have_miss = 0;
+517,518c500
+< 	    case_vals[v->fv].c =
+< 		(unsigned char *) R_alloc(v->width + 1, 1);
+---
+> 			case_vals[v->fv].c = (unsigned char *) R_alloc(v->width + 1, 1);
+581,583c563
+< static size_t
+< fread_pfm(void *ptr, size_t size, size_t nobj, FILE *stream)
+< {
+---
+> static size_t fread_pfm(void *ptr, size_t size, size_t nobj, FILE *stream) {
+609,611c589
+< static int
+< is_PORT(FILE *fp)
+< {
+---
+> static int is_PORT(FILE *fp) {
+660,662c638
+< SEXP
+< do_read_SPSS(SEXP file)
+< {
+---
+> SEXP do_read_SPSS(SEXP file) {
+682,683c658
 < 	    error(_("file '%s' is not in any supported SPSS format"),
 < 		  filename);
 ---
-> 	    error(_("file '%s' is not in any supported SPSS format"), filename);
+> 			error(_("file '%s' is not in any supported SPSS format"), filename);
+692,694c667
+< void
+< spss_init(void)
+< {
+---
+> void spss_init(void) {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/stataread.c Recommended/foreign/src/stataread.c
-45a46
+45a45
 > #include "localization.h"
-459c460
+90,91c89
+< static int InIntegerBinary(FILE * fp, int naok, int swapends)
+< {
+---
+> static int InIntegerBinary(FILE * fp, int naok, int swapends) {
+100,101c98
+< static int InByteBinary(FILE * fp, int naok)
+< {
+---
+> static int InByteBinary(FILE * fp, int naok) {
+108,109c105
+< static int RawByteBinary(FILE * fp, int naok)
+< {
+---
+> static int RawByteBinary(FILE * fp, int naok) {
+116,117c112
+< static int InShortIntBinary(FILE * fp, int naok,int swapends)
+< {
+---
+> static int InShortIntBinary(FILE * fp, int naok, int swapends) {
+128c123,124
+<   if (result > STATA_SHORTINT_NA) result -= 65536;
+---
+> 	if (result > STATA_SHORTINT_NA)
+> 		result -= 65536;
+132,134c128
+< 
+< static double InDoubleBinary(FILE * fp, int naok, int swapends)
+< {
+---
+> static double InDoubleBinary(FILE * fp, int naok, int swapends) {
+143,144c137
+< static double InFloatBinary(FILE * fp, int naok, int swapends)
+< {
+---
+> static double InFloatBinary(FILE * fp, int naok, int swapends) {
+153,154c146
+< static void InStringBinary(FILE * fp, int nchar, char* buffer)
+< {
+---
+> static void InStringBinary(FILE * fp, int nchar, char* buffer) {
+179,184c171,173
+< 
+< 
+< SEXP R_LoadStataData(FILE *fp)
+< {
+<     int i, j = 0, nvar, nobs, charlen, version, swapends, 
+< 	varnamelength, nlabels, totlen, res;
+---
+> SEXP R_LoadStataData(FILE *fp) {
+> 	int i, j = 0, nvar, nobs, charlen, version, swapends, varnamelength,
+> 			nlabels, totlen, res;
+337c324,325
+<     for (i = 0; i < 2*(nvar+1); i++) RawByteBinary(fp, 1);
+---
+> 	for (i = 0; i < 2 * (nvar + 1); i++)
+> 		RawByteBinary(fp, 1);
+421c408,409
+< 	    for (i = 0; i < charlen; i++) InByteBinary(fp, 1);
+---
+> 			for (i = 0; i < charlen; i++)
+> 				InByteBinary(fp, 1);
+432,433c420,422
+< 	error(_("something strange in the file\n (Type 0 characteristic of nonzero length)"));
+< 
+---
+> 		error(
+> 				_(
+> 						"something strange in the file\n (Type 0 characteristic of nonzero length)"));
+445c434,435
+< 		    REAL(VECTOR_ELT(df,j))[i] = InDoubleBinary(fp, 0, swapends);
+---
+> 					REAL(VECTOR_ELT(df, j))[i] = InDoubleBinary(fp, 0,
+> 							swapends);
+448c438,439
+< 		    INTEGER(VECTOR_ELT(df,j))[i] = InIntegerBinary(fp, 0, swapends);
+---
+> 					INTEGER(VECTOR_ELT(df, j))[i] = InIntegerBinary(fp, 0,
+> 							swapends);
+451c442,443
+< 		    INTEGER(VECTOR_ELT(df,j))[i] = InShortIntBinary(fp, 0, swapends);
+---
+> 					INTEGER(VECTOR_ELT(df, j))[i] = InShortIntBinary(fp, 0,
+> 							swapends);
+459c451,453
 < 			warning("invalid character string length -- truncating to 244 bytes");
 ---
-> 			warning(_("invalid character string length -- truncating to 244 bytes"));
-491c492
+> 						warning(
+> 								_(
+> 										"invalid character string length -- truncating to 244 bytes"));
+477c471,472
+< 		    REAL(VECTOR_ELT(df,j))[i] = InDoubleBinary(fp, 0, swapends);
+---
+> 					REAL(VECTOR_ELT(df, j))[i] = InDoubleBinary(fp, 0,
+> 							swapends);
+480c475,476
+< 		    INTEGER(VECTOR_ELT(df,j))[i] = InIntegerBinary(fp, 0, swapends);
+---
+> 					INTEGER(VECTOR_ELT(df, j))[i] = InIntegerBinary(fp, 0,
+> 							swapends);
+483c479,480
+< 		    INTEGER(VECTOR_ELT(df,j))[i] = InShortIntBinary(fp, 0, swapends);
+---
+> 					INTEGER(VECTOR_ELT(df, j))[i] = InShortIntBinary(fp, 0,
+> 							swapends);
+491c488,490
 < 			warning("invalid character string length -- truncating to 244 bytes");
 ---
-> 			warning(_("invalid character string length -- truncating to 244 bytes"));
-802c803
+> 						warning(
+> 								_(
+> 										"invalid character string length -- truncating to 244 bytes"));
+512,513c510,513
+< 	    if (feof(fp)) break;
+< 	    if (res != 1) warning(_("a binary read error occurred"));
+---
+> 			if (feof(fp))
+> 				break;
+> 			if (res != 1)
+> 				warning(_("a binary read error occurred"));
+521c521,523
+< 	    RawByteBinary(fp, 1); RawByteBinary(fp, 1); RawByteBinary(fp, 1); /*padding*/
+---
+> 			RawByteBinary(fp, 1);
+> 			RawByteBinary(fp, 1);
+> 			RawByteBinary(fp, 1); /*padding*/
+561,562c563,566
+< 	if(j > 0) setAttrib(df, install("label.table"), labeltable);
+< 	UNPROTECT(1); /*labeltable*/;
+---
+> 		if (j > 0)
+> 			setAttrib(df, install("label.table"), labeltable);
+> 		UNPROTECT(1); /*labeltable*/
+> 		;
+571,572c575
+< SEXP do_readStata(SEXP call)
+< {
+---
+> SEXP do_readStata(SEXP call) {
+595,596c596
+< static void OutIntegerBinary(int i, FILE * fp, int naok)
+< {
+---
+> static void OutIntegerBinary(int i, FILE * fp, int naok) {
+603,604c603
+< static void OutByteBinary(unsigned char i, FILE * fp)
+< {
+---
+> static void OutByteBinary(unsigned char i, FILE * fp) {
+608,609c607
+< static void OutDataByteBinary(int i, FILE * fp)
+< {
+---
+> static void OutDataByteBinary(int i, FILE * fp) {
+615,616c613
+< static void OutShortIntBinary(int i,FILE * fp)
+< {
+---
+> static void OutShortIntBinary(int i, FILE * fp) {
+632,634c629
+< 
+< static void  OutDoubleBinary(double d, FILE * fp, int naok)
+< {
+---
+> static void OutDoubleBinary(double d, FILE * fp, int naok) {
+640,643c635,637
+< 
+< static void OutStringBinary(const char *buffer, FILE * fp, int nchar)
+< {
+<     if (nchar == 0) return;
+---
+> static void OutStringBinary(const char *buffer, FILE * fp, int nchar) {
+> 	if (nchar == 0)
+> 		return;
+648,649c642
+< static char* nameMangleOut(char *stataname, int len)
+< {
+---
+> static char* nameMangleOut(char *stataname, int len) {
+651c644,645
+<       if (stataname[i] == '.') stataname[i] = '_';
+---
+> 		if (stataname[i] == '.')
+> 			stataname[i] = '_';
+659,662c653,655
+< static Rboolean 
+< writeStataValueLabel(const char *labelName, const SEXP theselabels,
+< 		     const SEXP theselevels, const int namelength, FILE *fp)
+< {
+---
+> static Rboolean writeStataValueLabel(const char *labelName,
+> 		const SEXP theselabels, const SEXP theselevels, const int namelength,
+> 		FILE *fp) {
+669,671c662,664
+<     if (!isNull(theselevels) && 
+< 	((TYPEOF(theselevels)!=INTSXP && TYPEOF(theselevels)!=REALSXP)  || 
+< 	 LENGTH(theselabels) != LENGTH(theselevels)))
+---
+> 	if (!isNull(theselevels)
+> 			&& ((TYPEOF(theselevels) != INTSXP && TYPEOF(theselevels) != REALSXP)
+> 					|| LENGTH(theselabels) != LENGTH(theselevels)))
+682,683c675,676
+<     OutStringBinary(nameMangleOut(labelName2, (int)strlen(labelName)),
+< 		    fp, namelength);
+---
+> 	OutStringBinary(nameMangleOut(labelName2, (int) strlen(labelName)), fp,
+> 			namelength);
+685c678,680
+<     OutByteBinary(0, fp); OutByteBinary(0, fp); OutByteBinary(0, fp); /*padding*/
+---
+> 	OutByteBinary(0, fp);
+> 	OutByteBinary(0, fp);
+> 	OutByteBinary(0, fp); /*padding*/
+698,699c693
+<     }
+<     else{
+---
+> 	} else {
+703,704c697
+< 	}
+< 	else{
+---
+> 		} else {
+715c708,709
+< 	if (txtlen < 0) error(_("this should happen: overrun"));
+---
+> 		if (txtlen < 0)
+> 			error(_("this should happen: overrun"));
+717c711,712
+<     if (txtlen > 0) error(_("this should happen: underrun"));
+---
+> 	if (txtlen > 0)
+> 		error(_("this should happen: underrun"));
+723,724c718
+< void R_SaveStataData(FILE *fp, SEXP df, int version, SEXP leveltable)
+< {
+---
+> void R_SaveStataData(FILE *fp, SEXP df, int version, SEXP leveltable) {
+726,727c720,721
+<     char datalabel[81] = "Written by R.              ",
+< 	timestamp[18], aname[33];
+---
+> 	char datalabel[81] = "Written by R.              ", timestamp[18],
+> 			aname[33];
+730,731c724,725
+<     SEXP names, types, theselabels, orig_names, vlabels, dlabel, 
+< 	exp_fields, exp_field, curr_val_labels, label_table, names_lt,
+---
+> 	SEXP names, types, theselabels, orig_names, vlabels, dlabel, exp_fields,
+> 			exp_field, curr_val_labels, label_table, names_lt,
+737,738c731,734
+<     if (version >= 7) namelength=32;
+<     if (version >= 10) fmtlist_len = 49;
+---
+> 	if (version >= 7)
+> 		namelength = 32;
+> 	if (version >= 10)
+> 		fmtlist_len = 49;
+769c764,765
+<     for(i = 0; i < 18; i++) timestamp[i] = 0;
+---
+> 	for (i = 0; i < 18; i++)
+> 		timestamp[i] = 0;
+799c793,794
+< 		    if (k > charlen) charlen = k;
+---
+> 					if (k > charlen)
+> 						charlen = k;
+802c797,800
 < 		    warning("character strings of >244 bytes in column %d will be truncated", i+1);
 ---
-> 		    warning(_("character strings of >244 bytes in column %d will be truncated"), i+1);
-832c833
+> 					warning(
+> 							_(
+> 									"character strings of >244 bytes in column %d will be truncated"),
+> 							i + 1);
+804c802,803
+< 		OutByteBinary((unsigned char)(charlen+STATA_STRINGOFFSET), fp);
+---
+> 				OutByteBinary((unsigned char) (charlen + STATA_STRINGOFFSET),
+> 						fp);
+829c828,829
+< 		    if (k > charlen) charlen = k;
+---
+> 					if (k > charlen)
+> 						charlen = k;
+832c832,835
 < 		    warning("character strings of >244 bytes in column %d will be truncated", i+1);
 ---
-> 		    warning(_("character strings of >244 bytes in column %d will be truncated"), i+1);
-969c970
+> 					warning(
+> 							_(
+> 									"character strings of >244 bytes in column %d will be truncated"),
+> 							i + 1);
+834c837,838
+< 		OutByteBinary((unsigned char)(charlen+STATA_SE_STRINGOFFSET), fp);
+---
+> 				OutByteBinary((unsigned char) (charlen + STATA_SE_STRINGOFFSET),
+> 						fp);
+855c857,858
+<     for (i = 0; i < 2*(nvar+1); i++) OutByteBinary(0, fp);
+---
+> 	for (i = 0; i < 2 * (nvar + 1); i++)
+> 		OutByteBinary(0, fp);
+877c880,881
+< 	    for(j = 0; j < namelength+1; j++) OutByteBinary(0, fp);
+---
+> 			for (j = 0; j < namelength + 1; j++)
+> 				OutByteBinary(0, fp);
+882c886,887
+< 	    	strncpy(aname, CHAR(STRING_ELT(curr_val_labels, i)), namelength);
+---
+> 				strncpy(aname, CHAR(STRING_ELT(curr_val_labels, i)),
+> 						namelength);
+902,903c906
+<     }
+<     else{
+---
+> 	} else {
+920c922,923
+<     if(!isNull(exp_fields) && TYPEOF(exp_fields) == VECSXP && abs(version) >= 7){
+---
+> 	if (!isNull(exp_fields) && TYPEOF(exp_fields) == VECSXP
+> 			&& abs(version) >= 7) {
+924c927,928
+< 	    if(!isNull(exp_field) && isString(exp_field) && LENGTH(exp_field) == 3) {
+---
+> 			if (!isNull(exp_field) && isString(exp_field)
+> 					&& LENGTH(exp_field) == 3) {
+926c930,933
+< 		OutIntegerBinary(2*(namelength+1) + (length(STRING_ELT(exp_field,2))+1), fp, 1);
+---
+> 				OutIntegerBinary(
+> 						2 * (namelength + 1)
+> 								+ (length(STRING_ELT(exp_field, 2)) + 1), fp,
+> 						1);
+935c942,943
+< 		OutStringBinary(CHAR(STRING_ELT(exp_field, 2)), fp, length(STRING_ELT(exp_field, 2)));
+---
+> 				OutStringBinary(CHAR(STRING_ELT(exp_field, 2)), fp,
+> 						length(STRING_ELT(exp_field, 2)));
+969,970c976,980
 < 		    error("empty string is not valid in Stata's documented format");
+< 		if(k > 244) k = 244;
 ---
-> 		    error(_("empty string is not valid in Stata's documented format"));
+> 					error(
+> 							_(
+> 									"empty string is not valid in Stata's documented format"));
+> 				if (k > 244)
+> 					k = 244;
+972c982,983
+< 		for(l = INTEGER(types)[j]-k; l > 0; l--) OutByteBinary(0, fp);
+---
+> 				for (l = INTEGER(types)[j] - k; l > 0; l--)
+> 					OutByteBinary(0, fp);
+988,989c999,1002
+< 	    if(!isNull(curr_val_labels) && isString(curr_val_labels) && LENGTH(curr_val_labels) > i)
+< 	    	strncpy(aname, CHAR(STRING_ELT(curr_val_labels, i)), namelength);
+---
+> 			if (!isNull(curr_val_labels) && isString(curr_val_labels)
+> 					&& LENGTH(curr_val_labels) > i)
+> 				strncpy(aname, CHAR(STRING_ELT(curr_val_labels, i)),
+> 						namelength);
+993c1006,1007
+< 	    writeStataValueLabel(aname, theselabels, R_NilValue, namelength, fp);
+---
+> 			writeStataValueLabel(aname, theselabels, R_NilValue, namelength,
+> 					fp);
+1005c1019,1021
+< 					if(strncmp(thisnamechar, CHAR(STRING_ELT(curr_val_labels, j)), namelength) == 0)
+---
+> 						if (strncmp(thisnamechar,
+> 								CHAR(STRING_ELT(curr_val_labels, j)),
+> 								namelength) == 0)
+1008c1024,1025
+< 				if(j<LENGTH(curr_val_labels)) continue;
+---
+> 					if (j < LENGTH(curr_val_labels))
+> 						continue;
+1013,1014c1030,1034
+< 				PROTECT(theselabels = getAttrib(theselabelslevels, R_NamesSymbol));
+< 				writeStataValueLabel(thisnamechar, theselabels, theselabelslevels, namelength, fp);
+---
+> 					PROTECT(
+> 							theselabels = getAttrib(theselabelslevels,
+> 									R_NamesSymbol));
+> 					writeStataValueLabel(thisnamechar, theselabels,
+> 							theselabelslevels, namelength, fp);
+1025,1026c1045
+< SEXP do_writeStata(SEXP call)
+< {
+---
+> SEXP do_writeStata(SEXP call) {
+1043c1061,1062
+<     if (!fp) error(_("unable to open file for writing: '%s'"), strerror(errno));
+---
+> 	if (!fp)
+> 		error(_("unable to open file for writing: '%s'"), strerror(errno));
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/foreign/src/var.h Recommended/foreign/src/var.h
+52,53c52
+< union value
+<   {
+---
+> union value {
+78,79c77
+< struct value_label
+<   {
+---
+> struct value_label {
+88,89c86
+< struct freq
+<   {
+---
+> struct freq {
+95,98c92,93
+< enum
+<   {
+<     FRQM_GENERAL,
+<     FRQM_INTEGER
+---
+> enum {
+> 	FRQM_GENERAL, FRQM_INTEGER
+102,103c97
+< struct freq_tab
+<   {
+---
+> struct freq_tab {
+128,129c122
+< struct freq_tab_set
+<   {
+---
+> struct freq_tab_set {
+143,144c136
+< struct crosstab_proc
+<   {
+---
+> struct crosstab_proc {
+152,156c144,159
+< enum
+<   {
+<     frq_mean = 0, frq_semean, frq_median, frq_mode, frq_stddev, frq_variance,
+<     frq_kurt, frq_sekurt, frq_skew, frq_seskew, frq_range, frq_min, frq_max,
+<     frq_sum, frq_n_stats
+---
+> enum {
+> 	frq_mean = 0,
+> 	frq_semean,
+> 	frq_median,
+> 	frq_mode,
+> 	frq_stddev,
+> 	frq_variance,
+> 	frq_kurt,
+> 	frq_sekurt,
+> 	frq_skew,
+> 	frq_seskew,
+> 	frq_range,
+> 	frq_min,
+> 	frq_max,
+> 	frq_sum,
+> 	frq_n_stats
+159,160c162
+< struct frequencies_proc
+<   {
+---
+> struct frequencies_proc {
+173,174c175
+< struct list_proc
+<   {
+---
+> struct list_proc {
+182,183c183
+< enum
+<   {
+---
+> enum {
+187,189c187,199
+<     dsc_mean = 0, dsc_semean, dsc_stddev, dsc_variance, dsc_kurt,
+<     dsc_sekurt, dsc_skew, dsc_seskew, dsc_range, dsc_min,
+<     dsc_max, dsc_sum, dsc_n_stats
+---
+> 	dsc_mean = 0,
+> 	dsc_semean,
+> 	dsc_stddev,
+> 	dsc_variance,
+> 	dsc_kurt,
+> 	dsc_sekurt,
+> 	dsc_skew,
+> 	dsc_seskew,
+> 	dsc_range,
+> 	dsc_min,
+> 	dsc_max,
+> 	dsc_sum,
+> 	dsc_n_stats
+192,193c202
+< struct descriptives_proc
+<   {
+---
+> struct descriptives_proc {
+211,212c220
+< struct get_proc
+<   {
+---
+> struct get_proc {
+217,218c225
+< enum
+<   {
+---
+> enum {
+224,225c231
+< struct sort_cases_proc
+<   {
+---
+> struct sort_cases_proc {
+230,231c236
+< struct modify_vars_proc
+<   {
+---
+> struct modify_vars_proc {
+238,239c243
+< struct means_proc
+<   {
+---
+> struct means_proc {
+245,246c249
+< enum
+<   {
+---
+> enum {
+257,258c260
+< struct matrix_data_proc
+<   {
+---
+> struct matrix_data_proc {
+264,265c266
+< struct match_files_proc
+<   {
+---
+> struct match_files_proc {
+273,274c274
+< enum
+<   {
+---
+> enum {
+285,286c285
+< enum
+<   {
+---
+> enum {
+303,304c302
+< struct variable
+<   {
+---
+> struct variable {
+331,332c329
+<     union
+<       {
+---
+> 	union {
+342,343c339
+<       }
+<     p;
+---
+> 	} p;
+350,351c346
+< struct ccase
+<   {
+---
+> struct ccase {
+358,359c353
+< struct dictionary
+<   {
+---
+> struct dictionary {
+422,423c416
+< enum
+<   {
+---
+> enum {
+469,470c462
+< void replace_variable (struct variable *, const char *name,
+< 		       int type, int width);
+---
+> void replace_variable(struct variable *, const char *name, int type, int width);
+491,492c483
+< struct trns_header
+<   {
+---
+> struct trns_header {
+520,521c511
+< enum
+<   {
+---
+> enum {
+535,536c525,526
+< int parse_variables (struct dictionary *dict, struct variable ***v,
+< 		     int *nv, int pv_opts);
+---
+> int parse_variables(struct dictionary *dict, struct variable ***v, int *nv,
+> 		int pv_opts);

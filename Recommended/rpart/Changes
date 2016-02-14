@@ -245,114 +245,991 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < \method{meanvar}{rpart}(tree, xlab = "ave(y)", ylab = "ave(deviance)", \dots)
 ---
 > \method{meanvar}{rpart}(tree, xlab = gettext("ave(y)"), ylab = gettext("ave(deviance)"), \dots)
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/anova.c Recommended/rpart/src/anova.c
+12,15c12,13
+< int
+< anovainit(int n, double *y[], int maxcat, char **error,
+< 	  double *parm, int *size, int who, double *wt)
+< {
+---
+> int anovainit(int n, double *y[], int maxcat, char **error, double *parm,
+> 		int *size, int who, double *wt) {
+31,34c29
+< void
+< anovass(int n, double *y[], double *value, double *risk, double *wt)
+< {
+<     int i;
+---
+> void anovass(int n, double *y[], double *value, double *risk, double *wt) {
+38c33
+<     for (i = 0; i < n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+45c40
+<     for (i = 0; i < n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+60,65c55,57
+< void
+< anova(int n, double *y[], double *x, int nclass,
+<       int edge, double *improve, double *split, int *csplit,
+<       double myrisk, double *wt)
+< {
+<     int i, j;
+---
+> void anova(int n, double *y[], double *x, int nclass, int edge, double *improve,
+> 		double *split, int *csplit, double myrisk, double *wt) {
+> 	int j;
+87c79
+<     for (i = 0; i < n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+99c91
+< 	for (i = 0; right_n > edge; i++) {
+---
+> 		for (int i = 0; right_n > edge; i++) {
+108,109c100,101
+< 		temp = left_sum * left_sum / left_wt +
+< 		    right_sum * right_sum / right_wt;
+---
+> 				temp = left_sum * left_sum / left_wt
+> 						+ right_sum * right_sum / right_wt;
+131c123
+< 	for (i = 0; i < nclass; i++) {
+---
+> 		for (int i = 0; i < nclass; i++) {
+138c130
+< 	for (i = 0; i < n; i++) {
+---
+> 		for (int i = 0; i < n; i++) {
+144c136
+< 	for (i = 0; i < nclass; i++) {
+---
+> 		for (int i = 0; i < nclass; i++) {
+171,172c163,164
+< 		temp = left_sum * left_sum / left_wt +
+< 		    right_sum * right_sum / right_wt;
+---
+> 				temp = left_sum * left_sum / left_wt
+> 						+ right_sum * right_sum / right_wt;
+176c168,169
+< 			for (i = 0; i < nclass; i++) csplit[i] = -tsplit[i];
+---
+> 						for (int i = 0; i < nclass; i++)
+> 							csplit[i] = -tsplit[i];
+178c171,172
+< 			for (i = 0; i < nclass; i++) csplit[i] = tsplit[i];
+---
+> 						for (int i = 0; i < nclass; i++)
+> 							csplit[i] = tsplit[i];
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/anovapred.c Recommended/rpart/src/anovapred.c
+4,6c4
+< double
+< anovapred(double *y, double *yhat)
+< {
+---
+> double anovapred(double *y, double *yhat) {
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/branch.c Recommended/rpart/src/branch.c
+19,21c19
+< pNode
+< branch(pNode tree, int obs)
+< {
+---
+> pNode branch(pNode tree, int obs) {
+28c26,27
+<     if (!tree->leftson) return NULL;
+---
+> 	if (!tree->leftson)
+> 		return NULL;
+82,83c80
+< down:
+<     return (dir == LEFT) ? me->leftson : me->rightson;
+---
+> 	down: return (dir == LEFT) ? me->leftson : me->rightson;
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/bsplit.c Recommended/rpart/src/bsplit.c
+15,18c15,16
+< void
+< bsplit(pNode me, int n1, int n2)
+< {
+<     int i, j, k;
+---
+> void bsplit(pNode me, int n1, int n2) {
+> 	int k;
+38c36
+<     for (i = 0; i < rp.nvar; i++) {
+---
+> 	for (int i = 0; i < rp.nvar; i++) {
+43c41
+< 	for (j = n1; j < n2; j++) {
+---
+> 		for (int j = n1; j < n2; j++) {
+56,57c54,55
+< 	(*rp_choose) (k, ytemp, xtemp, nc, rp.min_node, &improve,
+< 		      &split, rp.csplit, me->risk, wtemp);
+---
+> 		(*rp_choose)(k, ytemp, xtemp, nc, rp.min_node, &improve, &split,
+> 				rp.csplit, me->risk, wtemp);
+78c76
+< 		    for (k = 0; k < nc; k++)
+---
+> 					for (int k = 0; k < nc; k++)
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/choose_surg.c Recommended/rpart/src/choose_surg.c
+14,18c14,16
+< void
+< choose_surg(int n1, int n2, int *y, double *x, int *order,
+< 	    int ncat, double *agreement, double *split, int *csplit,
+< 	    double tleft, double tright, double *adj)
+< {
+---
+> void choose_surg(int n1, int n2, int *y, double *x, int *order, int ncat,
+> 		double *agreement, double *split, int *csplit, double tleft,
+> 		double tright, double *adj) {
+60c58,59
+< 		default:;
+---
+> 				default:
+> 					;
+119c118,119
+< 		default:;      /* ignore missing y's */
+---
+> 				default:
+> 					; /* ignore missing y's */
+155c155,156
+< 		default:;
+---
+> 				default:
+> 					;
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/fix_cp.c Recommended/rpart/src/fix_cp.c
+10,12c10
+< void
+< fix_cp(pNode me, double parent_cp)
+< {
+---
+> void fix_cp(pNode me, double parent_cp) {
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/free_tree.c Recommended/rpart/src/free_tree.c
+8,10c8
+< static void
+< free_split(pSplit spl)
+< {
+---
+> static void free_split(pSplit spl) {
+18,20c16
+< void
+< free_tree(pNode node, int freenode)
+< {
+---
+> void free_tree(pNode node, int freenode) {
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/func_table.h Recommended/rpart/src/func_table.h
+13,14c13,14
+< extern int anovainit(int n, double *y[], int maxcat, char **error,
+< 		     double *parm, int *size, int who, double *wt);
+---
+> extern int anovainit(int n, double *y[], int maxcat, char **error, double *parm,
+> 		int *size, int who, double *wt);
+17,18c17,18
+< extern int giniinit(int n, double *y[], int maxcat, char **error,
+< 		    double *parm, int *size, int who, double *wt);
+---
+> extern int giniinit(int n, double *y[], int maxcat, char **error, double *parm,
+> 		int *size, int who, double *wt);
+31,42c31,38
+< extern void anova(int n, double *y[], double *x, int nclass,
+< 		  int edge, double *improve, double *split, int *csplit,
+< 		  double myrisk, double *wt);
+< extern void poisson(int n, double *y[], double *x, int nclass,
+< 		    int edge, double *improve, double *split, int *csplit,
+< 		    double myrisk, double *wt);
+< extern void gini(int n, double *y[], double *x, int nclass,
+< 		 int edge, double *improve, double *split, int *csplit,
+< 		 double myrisk, double *wt);
+< extern void usersplit(int n, double *y[], double *x, int nclass,
+< 		      int edge, double *improve, double *split, int *csplit,
+< 		      double myrisk, double *wt);
+---
+> extern void anova(int n, double *y[], double *x, int nclass, int edge,
+> 		double *improve, double *split, int *csplit, double myrisk, double *wt);
+> extern void poisson(int n, double *y[], double *x, int nclass, int edge,
+> 		double *improve, double *split, int *csplit, double myrisk, double *wt);
+> extern void gini(int n, double *y[], double *x, int nclass, int edge,
+> 		double *improve, double *split, int *csplit, double myrisk, double *wt);
+> extern void usersplit(int n, double *y[], double *x, int nclass, int edge,
+> 		double *improve, double *split, int *csplit, double myrisk, double *wt);
+54,59c50,53
+< } func_table[] = {
+<     {anovainit, anova, anovass, anovapred},
+<     {poissoninit, poisson, poissondev, poissonpred},
+<     {giniinit, gini, ginidev, ginipred},
+<     {usersplit_init, usersplit, usersplit_eval, usersplit_pred}
+< };
+---
+> } func_table[] = { { anovainit, anova, anovass, anovapred }, { poissoninit,
+> 		poisson, poissondev, poissonpred },
+> 		{ giniinit, gini, ginidev, ginipred }, { usersplit_init, usersplit,
+> 				usersplit_eval, usersplit_pred } };
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/gini.c Recommended/rpart/src/gini.c
+17,19c17
+< static double
+< gini_impure1(double p)
+< {
+---
+> static double gini_impure1(double p) {
+23,26c21,25
+< static double
+< gini_impure2(double p)
+< {
+<     if (p == 0) return 0.0; else return -p * log(p);
+---
+> static double gini_impure2(double p) {
+> 	if (p == 0)
+> 		return 0.0;
+> 	else
+> 		return -p * log(p);
+29,33c28,30
+< int
+< giniinit(int n, double **y, int maxcat, char **error,
+< 	 double *parm, int *size, int who, double *wt)
+< {
+<     int i, j, k;
+---
+> int giniinit(int n, double **y, int maxcat, char **error, double *parm,
+> 		int *size, int who, double *wt) {
+> 	int j, k;
+39c36
+< 	for (i = 0; i < n; i++)
+---
+> 		for (int i = 0; i < n; i++)
+61c58
+< 	    for (i = 1; i < numclass; i++)
+---
+> 			for (int i = 1; i < numclass; i++)
+64,65c61,62
+< 	i = 3 * numclass + numclass * numclass;
+< 	prior = (double *) ALLOC(i, sizeof(double));
+---
+> 		//i = 3 * numclass + numclass * numclass;
+> 		prior = (double *) ALLOC(3 * numclass + numclass * numclass, sizeof(double));
+70c67
+< 	for (i = 0; i < numclass; i++)
+---
+> 		for (int i = 0; i < numclass; i++)
+73c70
+< 	for (i = 0; i < n; i++) {
+---
+> 		for (int i = 0; i < n; i++) {
+78c75
+< 	for (i = 0; i < numclass; i++)
+---
+> 		for (int i = 0; i < numclass; i++)
+82c79
+< 	for (i = 0; i < numclass; i++) {
+---
+> 		for (int i = 0; i < numclass; i++) {
+85c82
+< 	    for (j = 0; j < numclass; j++) {
+---
+> 			for (int j = 0; j < numclass; j++) {
+92c89
+< 	for (i = 0; i < numclass; i++) {
+---
+> 		for (int i = 0; i < numclass; i++) {
+107,110c104,105
+< void
+< ginidev(int n, double **y, double *value, double *risk, double *wt)
+< {
+<     int i, j, max = 0;
+---
+> void ginidev(int n, double **y, double *value, double *risk, double *wt) {
+> 	int j, max = 0;
+118c113
+<     for (i = 0; i < numclass; i++)
+---
+> 	for (int i = 0; i < numclass; i++)
+121c116
+<     for (i = 0; i < n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+132c127
+<     for (i = 0; i < numclass; i++) {    /* assume class i were the prediction */
+---
+> 	for (int i = 0; i < numclass; i++) { /* assume class i were the prediction */
+134c129
+< 	for (j = 0; j < numclass; j++)
+---
+> 		for (int j = 0; j < numclass; j++)
+143c138
+<     for (i = 0; i < numclass; i++)
+---
+> 	for (int i = 0; i < numclass; i++)
+153,155c147
+< double
+< ginipred(double *y, double *pred)
+< {
+---
+> double ginipred(double *y, double *pred) {
+170,174c161,162
+< void
+< gini(int n, double *y[], double *x, int numcat,
+<      int edge, double *improve, double *split, int *csplit, double my_risk,
+<      double *wt)
+< {
+---
+> void gini(int n, double *y[], double *x, int numcat, int edge, double *improve,
+> 		double *split, int *csplit, double my_risk, double *wt) {
+182c170
+<     for (i = 0; i < numclass; i++) {
+---
+> 	for (int i = 0; i < numclass; i++) {
+190c178
+<     for (i = 0; i < n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+197c185
+<     for (i = 0; i < numclass; i++) {
+---
+> 	for (int i = 0; i < numclass; i++) {
+209c197
+<     for (i = 0; rtot > edge; i++) {
+---
+> 	for (int i = 0; rtot > edge; i++) {
+222c210
+< 	    for (j = 0; j < numclass; j++) {
+---
+> 			for (int j = 0; j < numclass; j++) {
+250c238
+<     for (j = 0; j < numcat; j++) {
+---
+> 	for (int j = 0; j < numcat; j++) {
+253c241
+< 	for (i = 0; i < numclass; i++)
+---
+> 		for (int i = 0; i < numclass; i++)
+256c244
+<     for (i = 0; i < n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+264c252
+<     for (i = 0; i < numcat; i++) {
+---
+> 	for (int i = 0; i < numcat; i++) {
+286c274
+< 	    for (j = 0; j < numclass; j++) {
+---
+> 			for (int j = 0; j < numclass; j++) {
+296c284
+< 	    for (j = 0; j < numclass; j++) {
+---
+> 			for (int j = 0; j < numclass; j++) {
+306c294
+< 	    for (j = 0; j < numclass; j++) {
+---
+> 			for (int j = 0; j < numclass; j++) {
+317c305,306
+< 		    for (j = 0; j < numcat; j++) csplit[j] = tsplit[j];
+---
+> 					for (int j = 0; j < numcat; j++)
+> 						csplit[j] = tsplit[j];
+319c308,309
+< 		    for (j = 0; j < numcat; j++) csplit[j] = -tsplit[j];
+---
+> 					for (int j = 0; j < numcat; j++)
+> 						csplit[j] = -tsplit[j];
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/graycode.c Recommended/rpart/src/graycode.c
+17,19c17
+< void
+< graycode_init0(int maxcat)
+< {
+---
+> void graycode_init0(int maxcat) {
+23,26c21
+< void
+< graycode_init1(int numcat, int *count)
+< {
+<     int i;
+---
+> void graycode_init1(int numcat, int *count) {
+29c24
+<     for (i = 0; i < maxc; i++)
+---
+> 	for (int i = 0; i < maxc; i++)
+34,38c29,30
+< 
+< void
+< graycode_init2(int numcat, int *count, double *val)
+< {
+<     int i, j, k;
+---
+> void graycode_init2(int numcat, int *count, double *val) {
+> 	int j, k;
+51c43
+<     for (i = 1; i < maxc; i++) {
+---
+> 	for (int i = 1; i < maxc; i++) {
+53c45
+< 	    for (j = i - 1; j >= k; j--) {
+---
+> 			for (int j = i - 1; j >= k; j--) {
+77,80c69
+< int
+< graycode(void)
+< {
+<     int i;
+---
+> int graycode(void) {
+97c86
+< 	for (i = 0; i < maxc - 1; i++) {
+---
+> 		for (int i = 0; i < maxc - 1; i++) {
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/insert_split.c Recommended/rpart/src/insert_split.c
+12,14c12
+< pSplit
+< insert_split(pSplit *listhead, int ncat, double improve, int max)
+< {
+---
+> pSplit insert_split(pSplit *listhead, int ncat, double improve, int max) {
+19c17,18
+<     if (ncat == 0) ncat = 1; 
+---
+> 	if (ncat == 0)
+> 		ncat = 1;
 Only in Recommended/rpart/src: localization.h
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/make_cp_list.c Recommended/rpart/src/make_cp_list.c
+33,35c33
+< void
+< make_cp_list(pNode me, double parent, CpTable cptable_head)
+< {
+---
+> void make_cp_list(pNode me, double parent, CpTable cptable_head) {
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/make_cp_table.c Recommended/rpart/src/make_cp_table.c
+18,20c18
+< CpTable
+< make_cp_table(pNode me, double parent, int nsplit)
+< {
+---
+> CpTable make_cp_table(pNode me, double parent, int nsplit) {
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/mysort.c Recommended/rpart/src/mysort.c
+12,14c12
+< void
+< mysort(int start, int stop, double *x, int *cvec)
+< {
+---
+> void mysort(int start, int stop, double *x, int *cvec) {
+24c22
+< 	    for (i = start + 1; i <= stop; i++) {
+---
+> 			for (int i = start + 1; i <= stop; i++) {
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/nodesplit.c Recommended/rpart/src/nodesplit.c
+17,19c17
+< void
+< nodesplit(pNode me, int nodenum, int n1, int n2, int *nnleft, int *nnright)
+< {
+---
+> void nodesplit(pNode me, int nodenum, int n1, int n2, int *nnleft, int *nnright) {
+53c51
+< 	for (i = n1; i < n2; i++) {
+---
+> 		for (int i = n1; i < n2; i++) {
+72c70
+< 	for (i = n1; i < n2; i++) {
+---
+> 		for (int i = n1; i < n2; i++) {
+99c97
+< 	for (i = n1; i < n2; i++) {
+---
+> 		for (int i = n1; i < n2; i++) {
+170c168
+< 	    for (i = n1; i < n2; i++) {
+---
+> 			for (int i = n1; i < n2; i++) {
+217c215
+<     for (k = 0; k < rp.nvar; k++) {
+---
+> 	for (int k = 0; k < rp.nvar; k++) {
+222c220
+< 	for (i = n1; i < n2; i++) {
+---
+> 		for (int i = n1; i < n2; i++) {
+235c233
+< 	for (i = n1 + nleft; i < n2; i++)
+---
+> 		for (int i = n1 + nleft; i < n2; i++)
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/partition.c Recommended/rpart/src/partition.c
+16,18c16
+< int
+< partition(int nodenum, pNode splitnode, double *sumrisk, int n1, int n2)
+< {
+---
+> int partition(int nodenum, pNode splitnode, double *sumrisk, int n1, int n2) {
+21c19
+<     int i, j, k;
+---
+> 	int j, k;
+35c33
+< 	for (i = n1; i < n2; i++) {
+---
+> 		for (int i = n1; i < n2; i++) {
+56,57c54,55
+<     if (me->num_obs < rp.min_split || tempcp <= rp.alpha ||
+< 	nodenum > rp.maxnode) {
+---
+> 	if (me->num_obs < rp.min_split || tempcp <= rp.alpha
+> 			|| nodenum > rp.maxnode) {
+100,101c98,99
+<     left_split =
+< 	partition(2 * nodenum, me->leftson, &left_risk, n1, n1 + nleft);
+---
+> 	left_split = partition(2 * nodenum, me->leftson, &left_risk, n1,
+> 			n1 + nleft);
+124,125c122,123
+<     tempcp = (me->risk - (left_risk + right_risk)) /
+< 	(left_split + right_split + 1);
+---
+> 	tempcp = (me->risk - (left_risk + right_risk))
+> 			/ (left_split + right_split + 1);
+134,135c132,133
+< 	    tempcp = (me->risk - (left_risk + right_risk)) /
+< 		(left_split + right_split + 1);
+---
+> 			tempcp = (me->risk - (left_risk + right_risk))
+> 					/ (left_split + right_split + 1);
+147,148c145,146
+< 	tempcp = (me->risk - (left_risk + right_risk)) /
+< 	    (left_split + right_split + 1);
+---
+> 		tempcp = (me->risk - (left_risk + right_risk))
+> 				/ (left_split + right_split + 1);
+155,156c153,154
+<     me->complexity = (me->risk - (left_risk + right_risk)) /
+< 	(left_split + right_split + 1);
+---
+> 	me->complexity = (me->risk - (left_risk + right_risk))
+> 			/ (left_split + right_split + 1);
+164c162
+< 	for (i = n1; i < n2; i++) {
+---
+> 		for (int i = n1; i < n2; i++) {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/poisson.c Recommended/rpart/src/poisson.c
 5a6
 > #include "localization.h"
+14,18c15,16
+< int
+< poissoninit(int n, double *y[], int maxcat, char **error,
+< 	    double *param, int *size, int who, double *wt)
+< {
+<     int i;
+---
+> int poissoninit(int n, double *y[], int maxcat, char **error, double *param,
+> 		int *size, int who, double *wt) {
+32c30
+< 	for (i = 0; i < n; i++) {
+---
+> 		for (int i = 0; i < n; i++) {
+46c44
+<     for (i = 0; i < n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+78,80c76
+< double
+< poissonpred(double *y, double *lambda)
+< {
+---
+> double poissonpred(double *y, double *lambda) {
+106,109c102
+< void
+< poissondev(int n, double **y, double *value, double *risk, double *wt)
+< {
+<     int i;
+---
+> void poissondev(int n, double **y, double *value, double *risk, double *wt) {
+115c108
+<     for (i = 0; i < n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+121c114
+<     for (i = 0; i < n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+145,150c138,140
+< void
+< poisson(int n, double **y, double *x, int nclass,
+< 	int edge, double *improve, double *split,
+< 	int *csplit, double my_risk, double *wt)
+< {
+<     int i, j;
+---
+> void poisson(int n, double **y, double *x, int nclass, int edge,
+> 		double *improve, double *split, int *csplit, double my_risk, double *wt) {
+> 	int j;
+167c157
+<     for (i = 0; i < n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+192c182
+<     for (i = 0; i < n - edge; i++) {
+---
+> 	for (int i = 0; i < n - edge; i++) {
+222c212
+<     for (i = 0; i < nclass; i++) {
+---
+> 	for (int i = 0; i < nclass; i++) {
+228c218
+<     for (i = 0; i < n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+241c231
+<     for (i = 0; i < nclass; i++) {
+---
+> 	for (int i = 0; i < nclass; i++) {
+246c236
+< 	    for (j = i - 1; j >= 0; j--) {
+---
+> 			for (int j = i - 1; j >= 0; j--) {
+259c249
+<     for (i = 0; i < nclass; i++)
+---
+> 	for (int i = 0; i < nclass; i++)
+272c262
+<     for (i = 0; i < ncat - 1; i++) {
+---
+> 	for (int i = 0; i < ncat - 1; i++) {
+299c289
+<     for (i = 0; i < nclass; i++)
+---
+> 	for (int i = 0; i < nclass; i++)
+301c291
+<     for (i = 0; i <= where; i++)
+---
+> 	for (int i = 0; i <= where; i++)
+303c293
+<     for (; i < ncat; i++)
+---
+> 	for (int i = where + 1; i < ncat; i++)
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/pred_rpart.c Recommended/rpart/src/pred_rpart.c
+29,30c29
+< static void
+< pred_rpart0(const int *dimx, int nnode, int nsplit, const int *dimc,
+---
+> static void pred_rpart0(const int *dimx, int nnode, int nsplit, const int *dimc,
+33,35c32,33
+< 	    const double *xdata2, const int *xmiss2, int *where)
+< {
+<     int i, j;
+---
+> 		const double *xdata2, const int *xmiss2, int *where) {
+> 	int j;
+48c46
+<     for (i = 0; i < 4; i++) {
+---
+> 	for (int i = 0; i < 4; i++) {
+55c53
+< 	for (i = 0; i < dimc[1]; i++)
+---
+> 		for (int i = 0; i < dimc[1]; i++)
+60c58
+<     for (i = 0; i < dimx[1]; i++) {
+---
+> 	for (int i = 0; i < dimx[1]; i++) {
+65c63
+<     for (i = 0; i < n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+67,68c65,66
+< next:
+< 	for (npos = 0; nnum[npos] != node; npos++);  /* position of the node */
+---
+> 		next: for (npos = 0; nnum[npos] != node; npos++)
+> 			; /* position of the node */
+91c89
+< 		for (j = 0; j < nodes[2][npos]; j++) {
+---
+> 				for (int j = 0; j < nodes[2][npos]; j++) {
+98c96,98
+< 			    dir = csplit[(int)xdata[var][i] - 1][(int)temp - 1];
+---
+> 							dir =
+> 									csplit[(int) xdata[var][i] - 1][(int) temp
+> 											- 1];
+114c114,115
+< 		for (j = 0; nnum[j] != (2 * node); j++);
+---
+> 				for (j = 0; nnum[j] != (2 * node); j++)
+> 					;
+116c117,118
+< 		for (j = 0; nnum[j] != (1 + 2 * node); j++);
+---
+> 				for (j = 0; nnum[j] != (1 + 2 * node); j++)
+> 					;
+133,137c135,137
+< SEXP
+< pred_rpart(SEXP dimx, SEXP nnode, SEXP nsplit, SEXP dimc,
+< 	   SEXP nnum, SEXP nodes2, SEXP vnum, SEXP split2,
+< 	   SEXP csplit2, SEXP usesur, SEXP xdata2, SEXP xmiss2)
+< {
+---
+> SEXP pred_rpart(SEXP dimx, SEXP nnode, SEXP nsplit, SEXP dimc, SEXP nnum,
+> 		SEXP nodes2, SEXP vnum, SEXP split2, SEXP csplit2, SEXP usesur,
+> 		SEXP xdata2, SEXP xmiss2) {
+141,144c141,143
+< 		INTEGER(dimc), INTEGER(nnum), INTEGER(nodes2),
+< 		INTEGER(vnum), REAL(split2), INTEGER(csplit2),
+< 		INTEGER(usesur), REAL(xdata2), INTEGER(xmiss2),
+< 		INTEGER(where));
+---
+> 			INTEGER(dimc), INTEGER(nnum), INTEGER(nodes2), INTEGER(vnum),
+> 			REAL(split2), INTEGER(csplit2), INTEGER(usesur), REAL(xdata2),
+> 			INTEGER(xmiss2), INTEGER(where));
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/print_tree.c Recommended/rpart/src/print_tree.c
 17a18
 > #include "localization.h"
-59,62c60,63
+22,25c23
+< void
+< print_tree(pNode me, int maxdepth)
+< {
+<     int i;
+---
+> void print_tree(pNode me, int maxdepth) {
+28c26
+<     for (i = 2; i <= maxdepth; i++) {
+---
+> 	for (int i = 2; i <= maxdepth; i++) {
+39,41c37
+< static void
+< print_tree2(pNode me, int id, int mydepth, int target)
+< {
+---
+> static void print_tree2(pNode me, int id, int mydepth, int target) {
+53,56c49,50
+< static void
+< printme(pNode me, int id)
+< {
+<     int i, j, k;
+---
+> static void printme(pNode me, int id) {
+> 	int i, j;
+59,62c53,60
 <     Rprintf("\n\nNode number %d: %d observations", id, me->num_obs);
 <     Rprintf("\t   Complexity param= %f\n", me->complexity);
 <     Rprintf("  response estimate=%f,  risk/n= %f\n", *(me->response_est),
 < 	    me->risk / me->num_obs);
 ---
->     Rprintf("\n\n");
->     Rprintf(n_("Node number %d: %d observation", "Node number %d: %d observations", me->num_obs), id, me->num_obs);
->     Rprintf("\t   ");
->     Rprintf(_("Complexity param= %f\n  response estimate=%f,  risk/n= %f\n"), me->complexity, *(me->response_est), me->risk / me->num_obs);
-65c66
+> 	Rprintf("\n\n");
+> 	Rprintf(
+> 			n_("Node number %d: %d observation",
+> 					"Node number %d: %d observations", me->num_obs), id,
+> 			me->num_obs);
+> 	Rprintf("\t   ");
+> 	Rprintf(_("Complexity param= %f\n  response estimate=%f,  risk/n= %f\n"),
+> 			me->complexity, *(me->response_est), me->risk / me->num_obs);
+65c63,67
 < 	Rprintf("  left son=%d (%d obs)", 2 * id, (me->leftson)->num_obs);
 ---
-> 	Rprintf(n_("  left son=%d (%d observation)", "  left son=%d (%d observations)", (me->leftson)->num_obs), 2 * id, (me->leftson)->num_obs);
-67c68
+> 		Rprintf(
+> 				n_("  left son=%d (%d observation)",
+> 						"  left son=%d (%d observations)",
+> 						(me->leftson)->num_obs), 2 * id,
+> 				(me->leftson)->num_obs);
+67c69,73
 < 	Rprintf(" right son=%d (%d obs)", 2 * id + 1, (me->rightson)->num_obs);
 ---
-> 	Rprintf(n_(" right son=%d (%d observation)", " right son=%d (%d observations)", (me->rightson)->num_obs), 2 * id + 1, (me->rightson)->num_obs);
-72,73c73,76
+> 		Rprintf(
+> 				n_(" right son=%d (%d observation)",
+> 						" right son=%d (%d observations)",
+> 						(me->rightson)->num_obs), 2 * id + 1,
+> 				(me->rightson)->num_obs);
+72,73c78,83
 < 	else
 < 	    Rprintf(", %d obs do not split\n", i);
 ---
-> 	else {
-> 	    Rprintf(", ");
-> 	    Rprintf(n_("%d observation does not split\n", "%d observations do not split\n", i), i);
->         }
-77c80
+> 		else {
+> 			Rprintf(", ");
+> 			Rprintf(
+> 					n_("%d observation does not split\n",
+> 							"%d observations do not split\n", i), i);
+> 		}
+77c87
 <     Rprintf("  Primary splits:\n");
 ---
->     Rprintf(_("  Primary splits:\n"));
-80a84
-> 	    Rprintf("\t");
-83c87
+> 	Rprintf(_("  Primary splits:\n"));
+80a91
+> 			Rprintf("\t");
+82,84c93,98
+< 		Rprintf
 < 		    ("\tvar%d < %5g to the left, improve=%5.3f,  (%d missing)\n",
+< 		     j, ss->spoint, ss->improve, me->num_obs - ss->count);
 ---
-> 		    (n_("var%d < %5g to the left, improve=%5.3f,  (%d missing)\n", "var%d < %5g to the left, improve=%5.3f,  (%d missing)\n", me->num_obs - ss->count),
-87c91
+> 				Rprintf(
+> 						n_(
+> 								"var%d < %5g to the left, improve=%5.3f,  (%d missing)\n",
+> 								"var%d < %5g to the left, improve=%5.3f,  (%d missing)\n",
+> 								me->num_obs - ss->count), j, ss->spoint,
+> 						ss->improve, me->num_obs - ss->count);
+86,88c100,105
+< 		Rprintf
 < 		    ("\tvar%d > %5g to the left, improve=%5.3f, (%d missing)\n",
+< 		     j, ss->spoint, ss->improve, me->num_obs - ss->count);
 ---
-> 		    (n_("var%d > %5g to the left, improve=%5.3f, (%d missing)\n", "var%d > %5g to the left, improve=%5.3f, (%d missing)\n", me->num_obs - ss->count),
-90c94,95
+> 				Rprintf(
+> 						n_(
+> 								"var%d > %5g to the left, improve=%5.3f, (%d missing)\n",
+> 								"var%d > %5g to the left, improve=%5.3f, (%d missing)\n",
+> 								me->num_obs - ss->count), j, ss->spoint,
+> 						ss->improve, me->num_obs - ss->count);
+90,91c107,109
 < 	    Rprintf("\tvar%d splits as ", j);
+< 	    for (k = 0; k < rp.numcat[j]; k++) {
 ---
-> 	    Rprintf("\t");
-> 	    Rprintf(_("var%d splits as: "), j);
-103,104c108,110
+> 			Rprintf("\t");
+> 			Rprintf(_("var%d splits as: "), j);
+> 			for (int k = 0; k < rp.numcat[j]; k++) {
+103,108c121,135
 < 	    if (rp.numcat[j] < 7)
 < 		Rprintf(",\timprove=%5.3f, (%d missing)\n",
----
-> 	    if (rp.numcat[j] < 7) {
-> 		Rprintf(",\t");
-> 		Rprintf(n_("improve=%5.3f, (%d missing)\n", "improve=%5.3f, (%d missing)\n", (me->num_obs - ss->count)),
-106,107c112,115
+< 			ss->improve, (me->num_obs - ss->count));
 < 	    else
 < 		Rprintf(", improve=%5.3f, (%d missing)\n",
+< 			ss->improve, (me->num_obs - ss->count));
 ---
-> 	    }
-> 	    else {
-> 		Rprintf(", ");
-> 		Rprintf(n_("improve=%5.3f, (%d missing)\n", "improve=%5.3f, (%d missing)\n", (me->num_obs - ss->count)),
-110a119
->     }
-116c125
+> 			if (rp.numcat[j] < 7) {
+> 				Rprintf(",\t");
+> 				Rprintf(
+> 						n_("improve=%5.3f, (%d missing)\n",
+> 								"improve=%5.3f, (%d missing)\n",
+> 								(me->num_obs - ss->count)), ss->improve,
+> 						(me->num_obs - ss->count));
+> 			} else {
+> 				Rprintf(", ");
+> 				Rprintf(
+> 						n_("improve=%5.3f, (%d missing)\n",
+> 								"improve=%5.3f, (%d missing)\n",
+> 								(me->num_obs - ss->count)), ss->improve,
+> 						(me->num_obs - ss->count));
+> 			}
+116c143
 < 	Rprintf("  Surrogate splits:\n");
 ---
-> 	Rprintf(_("  Surrogate splits:\n"));
-119a129
-> 	    Rprintf("\t");
-122c132
+> 		Rprintf(_("  Surrogate splits:\n"));
+119a147
+> 			Rprintf("\t");
+121,123c149,153
+< 		Rprintf
 < 		    ("\tvar%d < %5g to the left, agree=%5.3f, (%d split)\n",
+< 		     j, ss->spoint, ss->improve, ss->count);
 ---
-> 		    (n_("var%d < %5g to the left, agree=%5.3f, (%d split)\n", "var%d < %5g to the left, agree=%5.3f, (%d split)\n", ss->count),
-126c136
+> 				Rprintf(
+> 						n_("var%d < %5g to the left, agree=%5.3f, (%d split)\n",
+> 								"var%d < %5g to the left, agree=%5.3f, (%d split)\n",
+> 								ss->count), j, ss->spoint, ss->improve,
+> 						ss->count);
+125,127c155,159
+< 		Rprintf
 < 		    ("\tvar%d > %5g to the left, agree=%5.3f, (%d split)\n",
+< 		     j, ss->spoint, ss->improve, ss->count);
 ---
-> 		    (n_("var%d > %5g to the left, agree=%5.3f, (%d split)\n", "var%d > %5g to the left, agree=%5.3f, (%d split)\n", ss->count),
-129c139,140
+> 				Rprintf(
+> 						n_("var%d > %5g to the left, agree=%5.3f, (%d split)\n",
+> 								"var%d > %5g to the left, agree=%5.3f, (%d split)\n",
+> 								ss->count), j, ss->spoint, ss->improve,
+> 						ss->count);
+129,130c161,163
 < 	    Rprintf("\tvar%d splits as ", j);
+< 	    for (k = 0; k < rp.numcat[j]; k++) {
 ---
-> 	    Rprintf("\t");
-> 	    Rprintf(_("var%d splits as: "), j);
-142,143c153,155
+> 			Rprintf("\t");
+> 			Rprintf(_("var%d splits as: "), j);
+> 			for (int k = 0; k < rp.numcat[j]; k++) {
+142,143c175,179
 < 	    if (rp.numcat[j] < 7)
 < 		Rprintf(",\tagree=%5.3f, (%d split)\n",
 ---
-> 	    if (rp.numcat[j] < 7) {
-> 		Rprintf(",\t");
-> 		Rprintf(n_("agree=%5.3f, (%d split)\n", "agree=%5.3f, (%d split)\n", ss->count),
-145,146c157,160
+> 			if (rp.numcat[j] < 7) {
+> 				Rprintf(",\t");
+> 				Rprintf(
+> 						n_("agree=%5.3f, (%d split)\n",
+> 								"agree=%5.3f, (%d split)\n", ss->count),
+145,146c181,185
 < 	    else
 < 		Rprintf(", agree=%5.3f, (%d split)\n",
 ---
-> 	    }
-> 	    else {
-> 		Rprintf(", ");
-> 		Rprintf(n_("agree=%5.3f, (%d split)\n", "agree=%5.3f, (%d split)\n", ss->count),
-147a162
-> 	    }
+> 			} else {
+> 				Rprintf(", ");
+> 				Rprintf(
+> 						n_("agree=%5.3f, (%d split)\n",
+> 								"agree=%5.3f, (%d split)\n", ss->count),
+149a189
+> 	}
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/rpart.c Recommended/rpart/src/rpart.c
 38a39
 > #include "localization.h"
+40,44c41,42
+< SEXP
+< rpart(SEXP ncat2, SEXP method2, SEXP opt2,
+<       SEXP parms2, SEXP xvals2, SEXP xgrp2,
+<       SEXP ymat2, SEXP xmat2, SEXP wt2, SEXP ny2, SEXP cost2)
+< {
+---
+> SEXP rpart(SEXP ncat2, SEXP method2, SEXP opt2, SEXP parms2, SEXP xvals2,
+> 		SEXP xgrp2, SEXP ymat2, SEXP xmat2, SEXP wt2, SEXP ny2, SEXP cost2) {
+124c122
+<     for (i = 0; i < rp.nvar; i++) {
+---
+> 	for (int i = 0; i < rp.nvar; i++) {
+131c129
+<     for (i = 0; i < n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+151c149
+<     for (i = 0; i < rp.nvar; i++) {
+---
+> 	for (int i = 0; i < rp.nvar; i++) {
+153c151
+< 	for (k = 0; k < n; k++) {
+---
+> 		for (int k = 0; k < n; k++) {
+166c164
+< 	for (k = 0; k < n; k++)
+---
+> 		for (int k = 0; k < n; k++)
+197c195
+<     for (i = 0; i < n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+241,242c239,240
+<     cptable3 = PROTECT(allocMatrix(REALSXP, xvals > 1 ? 5 : 3,
+< 				   rp.num_unique_cp));
+---
+> 	cptable3 = PROTECT(
+> 			allocMatrix(REALSXP, xvals > 1 ? 5 : 3, rp.num_unique_cp));
+264c262
+<     for (i = 0; i < 3 + rp.num_resp; i++) {
+---
+> 	for (int i = 0; i < 3 + rp.num_resp; i++) {
+271c269
+<     for (i = 0; i < 3; i++) {
+---
+> 	for (int i = 0; i < 3; i++) {
+274c272
+< 	for (j = 0; j < splitcount; j++)
+---
+> 		for (int j = 0; j < splitcount; j++)
+280c278
+<     for (i = 0; i < 6; i++) {
+---
+> 	for (int i = 0; i < 6; i++) {
+287c285
+<     for (i = 0; i < 3; i++) {
+---
+> 	for (int i = 0; i < 3; i++) {
+296c294
+< 	for (i = 0; i < maxcat; i++) {
+---
+> 		for (int i = 0; i < maxcat; i++) {
+299c297
+< 	    for (j = 0; j < catcount; j++)
+---
+> 			for (int j = 0; j < catcount; j++)
+313c311
+<     for (i = 0; i < n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/rpart.h Recommended/rpart/src/rpart.h
 9,15d8
 < #ifdef ENABLE_NLS
@@ -374,30 +1251,424 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 
 ---
 > #include "localization.h"
-148c141
+33,35c26
+< SEXP
+< init_rpcallback(SEXP rhox, SEXP ny, SEXP nr, SEXP expr1x, SEXP expr2x)
+< {
+---
+> SEXP init_rpcallback(SEXP rhox, SEXP ny, SEXP nr, SEXP expr1x, SEXP expr2x) {
+69,71c60
+< void
+< rpart_callback0(int *nr)
+< {
+---
+> void rpart_callback0(int *nr) {
+78,81c67
+< void
+< rpart_callback1(int n, double *y[], double *wt, double *z)
+< {
+<     int i, j, k;
+---
+> void rpart_callback1(int n, double *y[], double *wt, double *z) {
+86,87c72,73
+<     for (i = 0, k = 0; i < ysave; i++)
+< 	for (j = 0; j < n; j++)
+---
+> 	for (int i = 0, k = 0; i < ysave; i++)
+> 		for (int j = 0; j < n; j++)
+90,91c76
+< 
+<     for (i = 0; i < n; i++)
+---
+> 	for (int i = 0; i < n; i++)
+108c93
+<     for (i = 0; i <= rsave; i++)
+---
+> 	for (int i = 0; i <= rsave; i++)
+116,120c101,103
+< void
+< rpart_callback2(int n, int ncat, double *y[], double *wt,
+< 		double *x, double *good)
+< {
+<     int i, j, k;
+---
+> void rpart_callback2(int n, int ncat, double *y[], double *wt, double *x,
+> 		double *good) {
+> 	int j;
+124,125c107,108
+<     for (i = 0, k = 0; i < ysave; i++)
+< 	for (j = 0; j < n; j++)
+---
+> 	for (int i = 0, k = 0; i < ysave; i++)
+> 		for (int j = 0; j < n; j++)
+128c111
+<     for (i = 0; i < n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+148c131,133
 < 	    error("the expression expr1 returned a list of %d elements, %d required",
 ---
-> 	    error(_("the expression expr1 returned a list of %d elements, %d required"),
+> 			error(
+> 					_(
+> 							"the expression expr1 returned a list of %d elements, %d required"),
+151c136
+< 	for (i = 0; i < j; i++)
+---
+> 		for (int i = 0; i < j; i++)
+160c145
+< 	for (i = 0; i < j; i++)
+---
+> 		for (int i = 0; i < j; i++)
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/rpartexp.c Recommended/rpart/src/rpartexp.c
+15,17c15
+< void
+< rpartexp(int *n2, double *y, double *wt, double *newy, double *wtemp)
+< {
+---
+> void rpartexp(int *n2, double *y, double *wt, double *newy, double *wtemp) {
+20c18
+<     int i, j;
+---
+> 	int i;
+32c30
+<     for (i = n - 1; i >= 0; i--) {
+---
+> 	for (int i = n - 1; i >= 0; i--) {
+52c50
+< 	    for (i = last; i < n; i++)
+---
+> 			for (int i = last; i < n; i++)
+67c65
+< 	    for (j = last; j < i; j++)
+---
+> 			for (int j = last; j < i; j++)
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/rpartexp2.c Recommended/rpart/src/rpartexp2.c
+13,15c13
+< static void
+< Rpartexp2(int n, double *y, double eps, int *keep)
+< {
+---
+> static void Rpartexp2(int n, double *y, double eps, int *keep) {
+33c30
+<     for (i = 1; i < n; i++) {
+---
+> 	for (int i = 1; i < n; i++) {
+43,45c40
+< SEXP
+< rpartexp2(SEXP dtimes, SEXP eps)
+< {
+---
+> SEXP rpartexp2(SEXP dtimes, SEXP eps) {
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/rpartproto.h Recommended/rpart/src/rpartproto.h
+12,14c12,14
+< void choose_surg(int n1, int n2, int *y, double *x, int *order,
+< 		 int ncat, double *agreement, double *split, int *csplit,
+< 		 double ltot, double rtot, double *adj);
+---
+> void choose_surg(int n1, int n2, int *y, double *x, int *order, int ncat,
+> 		double *agreement, double *split, int *csplit, double ltot, double rtot,
+> 		double *adj);
+44,45c44,45
+< void rpart_callback2(int n, int ncat, double *y[], double *wt,
+< 		     double *x, double *good);
+---
+> void rpart_callback2(int n, int ncat, double *y[], double *wt, double *x,
+> 		double *good);
+58,59c58,59
+< 	   SEXP xgrp2, SEXP ymat2, SEXP xmat2, SEXP wt2, SEXP ny2,
+< 	   SEXP cost2, SEXP all2, SEXP cp2, SEXP toprisk2, SEXP nresp2);
+---
+> 		SEXP xgrp2, SEXP ymat2, SEXP xmat2, SEXP wt2, SEXP ny2, SEXP cost2,
+> 		SEXP all2, SEXP cp2, SEXP toprisk2, SEXP nresp2);
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/rpcountup.c Recommended/rpart/src/rpcountup.c
+11,13c11
+< void
+< rpcountup(pNode me, int *nnode, int *nsplit, int *ncat)
+< {
+---
+> void rpcountup(pNode me, int *nnode, int *nsplit, int *ncat) {
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/rpmatrix.c Recommended/rpart/src/rpmatrix.c
+12,15c12,13
+< void
+< rpmatrix(pNode me, int *numcat, double **dsplit,
+< 	 int **isplit, int **csplit, double **dnode, int **inode, int id)
+< {
+---
+> void rpmatrix(pNode me, int *numcat, double **dsplit, int **isplit,
+> 		int **csplit, double **dnode, int **inode, int id) {
+37c35
+<     int i, j, k;
+---
+> 	int i, j;
+49c47
+<     for (i = 0; i < rp.num_resp; i++)
+---
+> 	for (int i = 0; i < rp.num_resp; i++)
+74c72
+< 		for (k = 0; k < numcat[j]; k++)
+---
+> 				for (int k = 0; k < numcat[j]; k++)
+96c94
+< 		for (k = 0; k < numcat[j]; k++)
+---
+> 				for (int k = 0; k < numcat[j]; k++)
+105,106c103,104
+< 	inode[5][ncnt] = me->num_obs -
+< 	    ((me->leftson)->num_obs + (me->rightson)->num_obs);
+---
+> 		inode[5][ncnt] = me->num_obs
+> 				- ((me->leftson)->num_obs + (me->rightson)->num_obs);
+110,113c108,111
+< 	rpmatrix(me->leftson, numcat,
+< 		 dsplit, isplit, csplit, dnode, inode, 2 * id);
+< 	rpmatrix(me->rightson, numcat,
+< 		 dsplit, isplit, csplit, dnode, inode, 2 * id + 1);
+---
+> 		rpmatrix(me->leftson, numcat, dsplit, isplit, csplit, dnode, inode,
+> 				2 * id);
+> 		rpmatrix(me->rightson, numcat, dsplit, isplit, csplit, dnode, inode,
+> 				2 * id + 1);
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/rundown.c Recommended/rpart/src/rundown.c
 8a9
 > #include "localization.h"
-48c49
+10,12c11
+< void
+< rundown(pNode tree, int obs, double *cp, double *xpred, double *xtemp)
+< {
+---
+> void rundown(pNode tree, int obs, double *cp, double *xpred, double *xtemp) {
+48c47
 <     warning("Warning message--see rundown.c");
 ---
->     warning(_("Warning message--see rundown.c"));
+> 	warning(_("Warning message--see rundown.c"));
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/rundown2.c Recommended/rpart/src/rundown2.c
 8a9
 > #include "localization.h"
-48c49
+10,12c11
+< void
+< rundown2(pNode tree, int obs, double *cp, double *xpred, int nresp)
+< {
+---
+> void rundown2(pNode tree, int obs, double *cp, double *xpred, int nresp) {
+48c47
 <     warning("Warning message--see rundown2.c");
 ---
->     warning(_("Warning message--see rundown2.c"));
+> 	warning(_("Warning message--see rundown2.c"));
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/surrogate.c Recommended/rpart/src/surrogate.c
+19,22c19,20
+< void
+< surrogate(pNode me, int n1, int n2)
+< {
+<     int i, j, k;
+---
+> void surrogate(pNode me, int n1, int n2) {
+> 	int j;
+50c48
+< 	for (i = n1; i < n2; i++) {
+---
+> 		for (int i = n1; i < n2; i++) {
+59c57
+< 	for (i = n1; i < n2; i++) {
+---
+> 		for (int i = n1; i < n2; i++) {
+71c69
+<     for (i = n1; i < n2; i++) {
+---
+> 	for (int i = n1; i < n2; i++) {
+100c98
+<     for (i = 0; i < rp.nvar; i++) {
+---
+> 	for (int i = 0; i < rp.nvar; i++) {
+105,106c103,104
+< 	choose_surg(n1, n2, tempy, xdata[i], sorts[i], ncat,
+< 		    &improve, &split, rp.csplit, lcount, rcount, &adj_agree);
+---
+> 		choose_surg(n1, n2, tempy, xdata[i], sorts[i], ncat, &improve, &split,
+> 				rp.csplit, lcount, rcount, &adj_agree);
+122c120
+< 		for (k = 0; k < rp.numcat[i]; k++)
+---
+> 				for (int k = 0; k < rp.numcat[i]; k++)
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/usersplit.c Recommended/rpart/src/usersplit.c
+11,14c11,12
+< int
+< usersplit_init(int n, double *y[], int maxcat, char **error,
+< 	       double *parm, int *size, int who, double *wt)
+< {
+---
+> int usersplit_init(int n, double *y[], int maxcat, char **error, double *parm,
+> 		int *size, int who, double *wt) {
+34,37c32
+< void
+< usersplit_eval(int n, double *y[], double *value, double *risk, double *wt)
+< {
+<     int i;
+---
+> void usersplit_eval(int n, double *y[], double *value, double *risk, double *wt) {
+41c36
+<     for (i = 0; i < n_return; i++)
+---
+> 	for (int i = 0; i < n_return; i++)
+48,52c43,44
+< void
+< usersplit(int n, double *y[], double *x, int nclass, int edge,
+< 	  double *improve, double *split, int *csplit, double myrisk,
+< 	  double *wt)
+< {
+---
+> void usersplit(int n, double *y[], double *x, int nclass, int edge,
+> 		double *improve, double *split, int *csplit, double myrisk, double *wt) {
+94c86
+< 	for (i = edge - 1; i < n - edge; i++) {
+---
+> 		for (int i = edge - 1; i < n - edge; i++) {
+114c106
+< 	for (i = 0; i < nclass; i++)
+---
+> 		for (int i = 0; i < nclass; i++)
+122c114
+< 	for (i = 1; i < m; i++) {
+---
+> 		for (int i = 1; i < m; i++) {
+141c133
+< 	    for (i = 0; i < m; i++) {
+---
+> 			for (int i = 0; i < m; i++) {
+159,161c151
+< double
+< usersplit_pred(double *y, double *yhat)
+< {
+---
+> double usersplit_pred(double *y, double *yhat) {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/xpred.c Recommended/rpart/src/xpred.c
 31a32
 > #include "localization.h"
+33,38c34,36
+< SEXP
+< xpred(SEXP ncat2, SEXP method2, SEXP opt2,
+<       SEXP parms2, SEXP xvals2, SEXP xgrp2,
+<       SEXP ymat2, SEXP xmat2, SEXP wt2,
+<       SEXP ny2, SEXP cost2, SEXP all2, SEXP cp2, SEXP toprisk2, SEXP nresp2)
+< {
+---
+> SEXP xpred(SEXP ncat2, SEXP method2, SEXP opt2, SEXP parms2, SEXP xvals2,
+> 		SEXP xgrp2, SEXP ymat2, SEXP xmat2, SEXP wt2, SEXP ny2, SEXP cost2,
+> 		SEXP all2, SEXP cp2, SEXP toprisk2, SEXP nresp2) {
+43d40
+<     int xgroup;
+123c120
+<     for (i = 0; i < rp.nvar; i++) {
+---
+> 	for (int i = 0; i < rp.nvar; i++) {
+130c127
+<     for (i = 0; i < n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+150c147
+<     for (i = 0; i < rp.nvar; i++) {
+---
+> 	for (int i = 0; i < rp.nvar; i++) {
+152c149
+< 	for (k = 0; k < n; k++) {
+---
+> 		for (int k = 0; k < n; k++) {
+165c162
+< 	for (k = 0; k < n; k++)
+---
+> 		for (int k = 0; k < n; k++)
+199c196
+<     for (i = 0; i < ncp; i++)
+---
+> 	for (int i = 0; i < ncp; i++)
+216c213
+<     for (i = 0; i < rp.n; i++)
+---
+> 	for (int i = 0; i < rp.n; i++)
+221c218
+<     for (xgroup = 0; xgroup < xvals; xgroup++) {
+---
+> 	for (int xgroup = 0; xgroup < xvals; xgroup++) {
+226c223
+< 	for (j = 0; j < rp.nvar; j++) {
+---
+> 		for (int j = 0; j < rp.nvar; j++) {
+228c225
+< 	    for (i = 0; i < rp.n; i++) {
+---
+> 			for (int i = 0; i < rp.n; i++) {
+251c248
+< 	for (i = 0; i < n; i++) {
+---
+> 		for (int i = 0; i < n; i++) {
+266c263
+< 	for (j = 0; j < rp.num_unique_cp; j++)
+---
+> 		for (int j = 0; j < rp.num_unique_cp; j++)
+285c282
+< 	for (i = k; i < rp.n; i++) {
+---
+> 		for (int i = k; i < rp.n; i++) {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/rpart/src/xval.c Recommended/rpart/src/xval.c
-160,161c160
+36,40c36,38
+< void
+< xval(int n_xval, CpTable cptable_head, int *x_grp,
+<      int maxcat, char **errmsg, double *parms, int *savesort)
+< {
+<     int i, j, k, ii, jj;
+---
+> void xval(int n_xval, CpTable cptable_head, int *x_grp, int maxcat,
+> 		char **errmsg, double *parms, int *savesort) {
+> 	int i, j, k, ii;
+42d39
+<     int xgroup;
+61c58
+<     for (i = 0; i < rp.n; i++)
+---
+> 	for (int i = 0; i < rp.n; i++)
+72c69
+<     for (i = 0; i < rp.n; i++)
+---
+> 	for (int i = 0; i < rp.n; i++)
+80c77
+<     for (xgroup = 0; xgroup < n_xval; xgroup++) {
+---
+> 	for (int xgroup = 0; xgroup < n_xval; xgroup++) {
+85c82
+< 	for (j = 0; j < rp.nvar; j++) {
+---
+> 		for (int j = 0; j < rp.nvar; j++) {
+87c84
+< 	    for (i = 0; i < rp.n; i++) {
+---
+> 			for (int i = 0; i < rp.n; i++) {
+109c106
+< 	for (i = 0; i < rp.n; i++) {
+---
+> 		for (int i = 0; i < rp.n; i++) {
+124c121
+< 	for (j = 0; j < rp.num_unique_cp; j++)
+---
+> 		for (int j = 0; j < rp.num_unique_cp; j++)
+144c140
+< 	for (i = k; i < rp.n; i++) {
+---
+> 		for (int i = k; i < rp.n; i++) {
+155c151
+< 	    for (jj = 0; jj < rp.num_unique_cp; jj++) {
+---
+> 			for (int jj = 0; jj < rp.num_unique_cp; jj++) {
+160,161c156
 < 		    Rprintf("  cp=%f, pred=%f, xtemp=%f\n",
 < 			    cp[jj] / old_wt, xpred[jj], xtemp[jj]);
 ---
-> 		    Rprintf("  cp=%f, pred=%f, xtemp=%f\n", cp[jj] / old_wt, xpred[jj], xtemp[jj]);
+> 				Rprintf("  cp=%f, pred=%f, xtemp=%f\n", cp[jj] / old_wt, xpred[jj], xtemp[jj]);
+171,172c166,167
+< 	cplist->xstd = sqrt(cplist->xstd -
+< 			    cplist->xrisk * cplist->xrisk / total_wt);
+---
+> 		cplist->xstd = sqrt(
+> 				cplist->xstd - cplist->xrisk * cplist->xrisk / total_wt);
+175c170
+<     for (i = 0; i < rp.n; i++)
+---
+> 	for (int i = 0; i < rp.n; i++)

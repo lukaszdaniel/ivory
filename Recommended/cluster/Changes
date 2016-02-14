@@ -712,6 +712,372 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/cluster/src/clara.c Recommended/cluster/src/clara.c
 19a20
 > #include "localization.h"
+40,41c41
+< 	      int *nsel,
+< 	      int *nbest,/* x[nbest[j],] : the j-th obs in the final sample */
+---
+> 		int *nsel, int *nbest,/* x[nbest[j],] : the j-th obs in the final sample */
+43,48c43,45
+< 	      double *radus, double *ttd, double *ratt,
+< 	      double *ttbes, double *rdbes, double *rabes,
+< 	      int *mtt, double *obj,
+< 	      double *avsyl, double *ttsyl, double *sylinf,
+< 	      int *jstop, int *trace_lev,
+< 	      double *tmp, /* = double [ 3 * nsam ] */
+---
+> 		double *radus, double *ttd, double *ratt, double *ttbes, double *rdbes,
+> 		double *rabes, int *mtt, double *obj, double *avsyl, double *ttsyl,
+> 		double *sylinf, int *jstop, int *trace_lev, double *tmp, /* = double [ 3 * nsam ] */
+50,51c47
+<     )
+< {
+---
+> 		) {
+65,66c61
+<     Rboolean nafs, kall, full_sample, lrg_sam, dyst_toomany_NA,
+< 	has_NA = *mdata;
+---
+> 	Rboolean nafs, kall, full_sample, lrg_sam, dyst_toomany_NA, has_NA = *mdata;
+84,86c79,82
+<     if(*trace_lev) Rprintf("C clara(): (nsam,nran,n) = (%d,%d,%d);%s\n",
+< 			   *nsam, *nran, *n,
+< 			   full_sample ? " 'full_sample',":
+---
+> 	if (*trace_lev)
+> 		Rprintf("C clara(): (nsam,nran,n) = (%d,%d,%d);%s\n", *nsam, *nran, *n,
+> 				full_sample ?
+> 						" 'full_sample'," :
+90c86,87
+<     else /* << initialize `random seed' of the very simple randm() below */
+---
+> 	else
+> 		/* << initialize `random seed' of the very simple randm() below */
+113c110,111
+< 	if(*trace_lev) Rprintf("C clara(): sample %d ", jran);
+---
+> 		if (*trace_lev)
+> 			Rprintf("C clara(): sample %d ", jran);
+119c117,118
+< 		if(*trace_lev >= 2) Rprintf(" if (kall && nunfs...): \n");
+---
+> 				if (*trace_lev >= 2)
+> 					Rprintf(" if (kall && nunfs...): \n");
+133c132,133
+< 		    nsel[jsm] = nsel[jk]; nsel[jk] = nsm;
+---
+> 					nsel[jsm] = nsel[jk];
+> 					nsel[jk] = nsm;
+136,138c136,138
+< 	    }
+< 	    else { /* no valid sample  _OR_  lrg_sam */
+< 		if(*trace_lev >= 2) Rprintf(" finding 1st... new k{ran}:\n");
+---
+> 			} else { /* no valid sample  _OR_  lrg_sam */
+> 				if (*trace_lev >= 2)
+> 					Rprintf(" finding 1st... new k{ran}:\n");
+162c162,163
+< 		    for (jk = 0; jk < *kk; jk++) Rprintf("%d ",nrx[jk]);
+---
+> 					for (jk = 0; jk < *kk; jk++)
+> 						Rprintf("%d ", nrx[jk]);
+164c165,166
+< 		    for (jk = 0; jk < ntt; jk++) Rprintf("%d ",nsel[jk]);
+---
+> 					for (jk = 0; jk < ntt; jk++)
+> 						Rprintf("%d ", nsel[jk]);
+196,197c198
+< 	    L290:
+< 		++ntt;
+---
+> 				L290: ++ntt;
+200,201c201,202
+< 	L295:
+< 	    if(*trace_lev) Rprintf(" {295} [ntt=%d, nunfs=%d] ", ntt, nunfs);
+---
+> 			L295: if (*trace_lev)
+> 				Rprintf(" {295} [ntt=%d, nunfs=%d] ", ntt, nunfs);
+215,217c216,217
+< 		for (jk = 0; jk < *nsam; jk++) Rprintf("%d ",nsel[jk]);
+< 	    }
+< 	    if(*trace_lev) Rprintf(" -> dysta2()\n");
+---
+> 				for (jk = 0; jk < *nsam; jk++)
+> 					Rprintf("%d ", nsel[jk]);
+219c219,221
+< 	else { /* full_sample : *n = *nsam -- one sample is enough ! */
+---
+> 			if (*trace_lev)
+> 				Rprintf(" -> dysta2()\n");
+> 		} else { /* full_sample : *n = *nsam -- one sample is enough ! */
+224,225c226,227
+< 	dysta2(*nsam, *jpp, nsel, x, *n, dys, *diss_kind,
+< 	       jtmd, valmd, has_NA, &dyst_toomany_NA);
+---
+> 		dysta2(*nsam, *jpp, nsel, x, *n, dys, *diss_kind, jtmd, valmd, has_NA,
+> 				&dyst_toomany_NA);
+258,259c260
+< 	}
+< 	else if(!kall || zba > zb) { /* 1st proper sample  or  new best */
+---
+> 		} else if (!kall || zba > zb) { /* 1st proper sample  or  new best */
+261c262,263
+< 	    if(*trace_lev >= 2) Rprintf(" 1st proper or new best:");
+---
+> 			if (*trace_lev >= 2)
+> 				Rprintf(" 1st proper or new best:");
+273c275,276
+< 	if(*trace_lev >= 2) Rprintf(" obj= %g\n", zb/rnn);
+---
+> 		if (*trace_lev >= 2)
+> 			Rprintf(" obj= %g\n", zb / rnn);
+275c278,279
+< 	if(full_sample) break; /* out of resampling */
+---
+> 		if (full_sample)
+> 			break; /* out of resampling */
+281c285,288
+<     if (nunfs >= *nran) { *jstop = 1; return; }
+---
+> 	if (nunfs >= *nran) {
+> 		*jstop = 1;
+> 		return;
+> 	}
+283c290,293
+<     if (!kall) { *jstop = 2; return; }
+---
+> 	if (!kall) {
+> 		*jstop = 2;
+> 		return;
+> 	}
+291c301,302
+< 		if(js+1 < *nsam) Rprintf(",");
+---
+> 				if (js + 1 < *nsam)
+> 					Rprintf(",");
+303,304c313,314
+<     dysta2(*nsam, *jpp, nbest, x, *n, dys, *diss_kind, jtmd, valmd,
+< 	   has_NA, &dyst_toomany_NA);
+---
+> 	dysta2(*nsam, *jpp, nbest, x, *n, dys, *diss_kind, jtmd, valmd, has_NA,
+> 			&dyst_toomany_NA);
+306c316,317
+< 	error(_(
+---
+> 		error(
+> 				_(
+329,333c340,342
+< 
+< void dysta2(int nsam, int jpp, int *nsel,
+< 	    double *x, int n, double *dys, int diss_kind,
+< 	    int *jtmd, double *valmd, Rboolean has_NA, Rboolean *toomany_NA)
+< {
+---
+> void dysta2(int nsam, int jpp, int *nsel, double *x, int n, double *dys,
+> 		int diss_kind, int *jtmd, double *valmd, Rboolean has_NA,
+> 		Rboolean *toomany_NA) {
+341c350,352
+< 	    error(_("C level dysta2(): nsel[%s= %d] = %d is outside 0..n, n=%d"),
+---
+> 			error(
+> 					_(
+> 							"C level dysta2(): nsel[%s= %d] = %d is outside 0..n, n=%d"),
+346c357,359
+< 		error(_("C level dysta2(): nsel[%s= %d] = %d is outside 0..n, n=%d"),
+---
+> 				error(
+> 						_(
+> 								"C level dysta2(): nsel[%s= %d] = %d is outside 0..n, n=%d"),
+378,379c391
+< double randm(int *nrun)
+< {
+---
+> double randm(int *nrun) {
+392,393c404
+< 	    double s, const double dys[],
+< 	    Rboolean pam_like, int trace_lev,
+---
+> double s, const double dys[], Rboolean pam_like, int trace_lev,
+395,397c406
+< 	    double *sky, int *nrepr,
+< 	    double *dysma, double *dysmb, double *beter)
+< {
+---
+> 		double *sky, int *nrepr, double *dysma, double *dysmb, double *beter) {
+405c414,415
+<     --dysma;	--dysmb;
+---
+> 	--dysma;
+> 	--dysmb;
+466c476,477
+< 	    if(nrepr[i] == 1) Rprintf(" %2d", i);
+---
+> 			if (nrepr[i] == 1)
+> 				Rprintf(" %2d", i);
+471c482,483
+< 		if(i % 10 == 0) Rprintf("\n");
+---
+> 				if (i % 10 == 0)
+> 					Rprintf("\n");
+473,474c485,488
+< 	    if(n % 10 != 0) Rprintf("\n");
+< 	} else Rprintf("\n");
+---
+> 			if (n % 10 != 0)
+> 				Rprintf("\n");
+> 		} else
+> 			Rprintf("\n");
+507,508c521,524
+<     for (h = 1; h <= n; ++h) if (!nrepr[h]) {
+<         for (i = 1; i <= n; ++i) if (nrepr[i]) {
+---
+> 	for (h = 1; h <= n; ++h)
+> 		if (!nrepr[h]) {
+> 			for (i = 1; i <= n; ++i)
+> 				if (nrepr[i]) {
+512,513c528
+< 		int ij = ind_2(i, j),
+< 		    hj = ind_2(h, j);
+---
+> 						int ij = ind_2(i, j), hj = ind_2(h, j);
+518c533,534
+< 		    else // old clara code which differs from pam()'s
+---
+> 							else
+> 								// old clara code which differs from pam()'s
+522,523c538
+< 		}
+< 		else if (dys[hj] < dysma[j])
+---
+> 						} else if (dys[hj] < dysma[j])
+539,540c554,555
+< 	    Rprintf( "   swp new %d <-> %d old; decreasing diss. by %g\n",
+< 		     hbest, nbest, dzsky);
+---
+> 			Rprintf("   swp new %d <-> %d old; decreasing diss. by %g\n", hbest,
+> 					nbest, dzsky);
+553,557c568,570
+< void selec(int kk, int n, int jpp, int diss_kind,
+< 	   double *zb, int nsam, Rboolean has_NA, int *jtmd, double *valmd,
+< 	   int trace_lev,
+< 	   int *nrepr, int *nsel, double *dys, double *x, int *nr,
+< 	   Rboolean *nafs, /* := TRUE if a distance cannot be calculated */
+---
+> void selec(int kk, int n, int jpp, int diss_kind, double *zb, int nsam,
+> 		Rboolean has_NA, int *jtmd, double *valmd, int trace_lev, int *nrepr,
+> 		int *nsel, double *dys, double *x, int *nr, Rboolean *nafs, /* := TRUE if a distance cannot be calculated */
+561,562c574
+< 	   double *ttnew, double *rdnew)
+< {
+---
+> 		double *ttnew, double *rdnew) {
+571c583,584
+<     --nsel;    --nrepr;
+---
+> 	--nsel;
+> 	--nrepr;
+574,576c587,597
+<     --radus; --ttd;    --np;	--nr;	 --ns;
+< 
+<     --rdnew; --ttnew; --npnew; --nrnew; --nsnew;
+---
+> 	--radus;
+> 	--ttd;
+> 	--np;
+> 	--nr;
+> 	--ns;
+> 
+> 	--rdnew;
+> 	--ttnew;
+> 	--npnew;
+> 	--nrnew;
+> 	--nsnew;
+623,624c644
+< 	}
+< 	else { /* _has_ missing data */
+---
+> 		} else { /* _has_ missing data */
+660c680,681
+< 		*nafs = TRUE; return;
+---
+> 				*nafs = TRUE;
+> 				return;
+677c698,699
+< 			goto L90;/* next jj */
+---
+> 						goto L90;
+> 					/* next jj */
+683,684c705
+<     L90:
+< 	;
+---
+> 		L90: ;
+741,743c761,762
+< void resul(int kk, int n, int jpp, int diss_kind, Rboolean has_NA,
+< 	   int *jtmd, double *valmd, double *x, int *nrx, int *mtt)
+< {
+---
+> void resul(int kk, int n, int jpp, int diss_kind, Rboolean has_NA, int *jtmd,
+> 		double *valmd, double *x, int *nrx, int *mtt) {
+754c773,774
+< 		goto L220; /* continue next jj (i.e., outer loop) */
+---
+> 				goto L220;
+> 			/* continue next jj (i.e., outer loop) */
+775,776c795
+< 	}
+< 	else { /* _has_ missing data */
+---
+> 		} else { /* _has_ missing data */
+807,808c826
+<     L220:
+< 	;
+---
+> 		L220: ;
+828,829c844,845
+< void black(int kk, int jpp, int nsam, int *nbest,
+< 	   double *dys, double s, double *x,
+---
+> void black(int kk, int jpp, int nsam, int *nbest, double *dys, double s,
+> 		double *x,
+833,835c849,850
+< 	   int *ncluv, int *nsend, int *nelem, int *negbr,
+< 	   double *syl, double *srank)
+< {
+---
+> 		int *ncluv, int *nsend, int *nelem, int *negbr, double *syl,
+> 		double *srank) {
+850,852c865,871
+<     --srank;    --syl;
+<     --negbr; --nelem; --nsend;
+<     --ncluv;	--nbest;
+---
+> 	--srank;
+> 	--syl;
+> 	--negbr;
+> 	--nelem;
+> 	--nsend;
+> 	--ncluv;
+> 	--nbest;
+906c925,926
+< 		syl[j] = 0.;	    continue /* j */;
+---
+> 				syl[j] = 0.;
+> 				continue /* j */;
+929c949,950
+< 		else /* (dysb == dysa) */
+---
+> 				else
+> 					/* (dysb == dysa) */
+936,937c957
+< 	    }
+< 	    else {
+---
+> 			} else {
+970,971c990
+< 	}
+< 	else {
+---
+> 		} else {
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/cluster/src/cluster.h Recommended/cluster/src/cluster.h
 7,12d6
 < #ifdef ENABLE_NLS

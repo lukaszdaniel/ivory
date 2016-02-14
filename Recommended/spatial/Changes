@@ -34,10 +34,28 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     if(!inherits(obj, "trgls"))
 >         stop(gettextf("'%s' argument is not an object of class %s", "obj", dQuote("trgls")))
 >     if(n > 999) stop("'n' argument is too large")
+299,301c302,304
+<   xp <- z$xp[1L:z$nint]
+<   yp <- z$yp[1L:z$nint]
+<   z <- list(x = xp, y = yp, cnt = z$cnt[1L:z$nint])
+---
+>   xp <- z$xp[seq_len(z$nint)]
+>   yp <- z$yp[seq_len(z$nint)]
+>   z <- list(x = xp, y = yp, cnt = z$cnt[seq_len(z$nint)])
 309c312
 <       warning("Device not active")
 ---
 >       warning("Device is not active")
+327,328c330,331
+<   xp <- z$xp[1L:z$nint]
+<   yp <- z$yp[1L:z$nint]
+---
+>   xp <- z$xp[seq_len(z$nint)]
+>   yp <- z$yp[seq_len(z$nint)]
+330c333
+<   z <- list(x = xp, y = yp, cnt = z$cnt[1L:z$nint])
+---
+>   z <- list(x = xp, y = yp, cnt = z$cnt[seq_len(z$nint)])
 337c340
 <       warning("Device not active")
 ---
@@ -78,32 +96,31 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <             stop("'object' is not a fitted trend surface")
 ---
 >             stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls")))
-469,473c472,475
+469,473c472,474
 <         list(1L:nmodels, c("Res.Df", "Res.Sum Sq",
 <                           "Df", "Sum Sq", "F value", "Pr(>F)"))
 <     title <- "Analysis of Variance Table\n"
 <     topnote <- paste("Model ", format(1L:nmodels), ": ", models,
 <                      sep = "", collapse = "\n")
 ---
->         list(1L:nmodels, c("Res.Df", "Res.Sum Sq", "Df", "Sum Sq", "F value", "Pr(>F)"))
+>         list(seq_len(nmodels), c("Res.Df", "Res.Sum Sq", "Df", "Sum Sq", "F value", "Pr(>F)"))
 >     title <- paste(gettext("Analysis of Variance Table"), "\n", sep = "")
->     topnote <- paste(gettextf("Model %s: %s", format(1L:nmodels), models), collapse = "\n")
-> 				#paste(gettextf("Model %d: %s", format(1L:nmodels), models), "\n", sep = "")
-476,477c478
+>     topnote <- paste(gettextf("Model %s: %s", format(seq_len(nmodels)), models), collapse = "\n")
+476,477c477
 <     print(structure(table, heading = c(title, topnote),
 <                     class = c("anova", "data.frame")))
 ---
 >     print(structure(table, heading = c(title, topnote), class = c("anova", "data.frame")))
-479,480c480
+479,480c479
 <     invisible(structure(table, heading = c(title, topnote),
 <                         class = c("anova", "data.frame")))
 ---
 >     invisible(structure(table, heading = c(title, topnote), class = c("anova", "data.frame")))
-490c490
+490c489
 <         stop("'object' is not a fitted trend surface")
 ---
 >         stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls")))
-499,501c499,501
+499,501c498,500
 <     cat("Multiple R-Squared:", format(rsquared, digits = digits))
 <     cat(",\tAdjusted R-squared:", format(adj.rsquared, digits = digits),
 <         "\n")
@@ -111,32 +128,431 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     cat(gettext("Multiple R-Squared:", domain = "R-spatial"), " ", format(rsquared, digits = digits), sep = "")
 >     cat(",\t", gettext("Adjusted R-squared:", domain = "R-spatial"), " ", format(adj.rsquared, digits = digits),
 >         "\n", sep = "")
-503,504c503,504
+503,504c502,503
 <     cat("AIC: (df = ", AIC[1L], ") ", AIC[2L], "\n", sep = "")
 <     cat("Fitted:\n")
 ---
 >     cat(gettextf("AIC: (df = %s) %s", AIC[1L], round(AIC[2L], 4), domain = "R-spatial"), "\n", sep = "")
 >     cat(gettext("Fitted:", domain = "R-spatial"), "\n", sep = "")
-512c512
+512c511
 <     cat("Residuals:\n")
 ---
 >     cat(gettext("Residuals:", domain = "R-spatial"), "\n", sep = "")
-527c527
+527c526
 <         stop("'object' is not a fitted trend surface")
 ---
 >         stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("trls")))
-544c544
+544c543
 <         stop("'x' not a fitted trend surface")
 ---
 >         stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("trls")))
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/spatial/R/pp.R Recommended/spatial/R/pp.R
+46c46
+<   list(y = z$h[1L:z$k1], x = (seq(1L:z$k1) * fs)/k, k = k,
+---
+>   list(y = z$h[seq_len(z$k1)], x = (seq(seq_len(z$k1)) * fs)/k, k = k,
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/spatial/src/krc.c Recommended/spatial/src/krc.c
 19a20
 > #include <R_ext/Minmax.h>
-22,25d22
-< 
+23,26d23
 < #ifndef max
 < #  define max(a,b) ((a) > (b) ? (a) : (b))
 < #endif
+< 
+31,32c28,29
+< static void householder(double *, double *, double *, double *,
+< 			int, int, Sint *);
+---
+> static void householder(double *, double *, double *, double *, int, int,
+> 		Sint *);
+37,38c34,35
+< static void house_rhs(double *, double *, double *, int, int,
+< 		      double *, double *);
+---
+> static void house_rhs(double *, double *, double *, int, int, double *,
+> 		double *);
+44,46c41
+< void
+< VR_alset(Sfloat *alph, Sint *nalph)
+< {
+---
+> void VR_alset(Sfloat *alph, Sint *nalph) {
+57,61c52,53
+< static double 
+< powi(double x, int i)
+< {
+<     int   j;
+<     double tmp;
+---
+> static double powi(double x, int i) {
+> 	double tmp = 1.0;
+63,64c55
+<     tmp = 1.0;
+<     for (j = 1; j <= i; ++j)
+---
+> 	for (int j = 0; j < i; ++j)
+69,72c60
+< static void
+< cov(int n, double *d, int pred)
+< {
+<     int   i;
+---
+> static void cov(int n, double *d, int pred) {
+78c66
+<     for (i = 0; i < n; ++i) {
+---
+> 	for (int i = 0; i < n; ++i) {
+88,92c76,78
+< void
+< VR_gls(double *x, double *y, double *z, Sint *n, Sint *np,
+<        Sint *npar, double *f, double *l, double *r, double *bz,
+<        double *wz, double *yy, double *w, Sint *ifail, double *l1f)
+< {
+---
+> void VR_gls(double *x, double *y, double *z, Sint *n, Sint *np, Sint *npar,
+> 		double *f, double *l, double *r, double *bz, double *wz, double *yy,
+> 		double *w, Sint *ifail, double *l1f) {
+153,157c138,139
+< void
+< VR_ls(double *x, double *y, double *z, Sint *n, Sint *np,
+<       Sint *npar, double *f, double *r, double *bz, double *wz,
+<       Sint *ifail)
+< {
+---
+> void VR_ls(double *x, double *y, double *z, Sint *n, Sint *np, Sint *npar,
+> 		double *f, double *r, double *bz, double *wz, Sint *ifail) {
+190,193c172,173
+< void
+< VR_fmat(double *f, double *x, double *y, Sint *n, Sint *np)
+< {
+<     int   i, j, k, k1;
+---
+> void VR_fmat(double *f, double *x, double *y, Sint *n, Sint *np) {
+> 	int k1;
+201c181
+<     for (i = 0; i < *n; ++i)
+---
+> 	for (int i = 0; i < *n; ++i)
+204,206c184,186
+<     for (i = 0; i <= *np; ++i)
+< 	for (j = 0; j <= *np - i; ++j)
+< 	    for (k = 0; k < *n; ++k)
+---
+> 	for (int i = 0; i <= *np; ++i)
+> 		for (int j = 0; j <= *np - i; ++j)
+> 			for (int k = 0; k < *n; ++k)
+212,215c192
+< static void
+< cholcov(double *x, double *y, double *l, int n, Sint *ifail)
+< {
+<     int   i, j;
+---
+> static void cholcov(double *x, double *y, double *l, int n, Sint *ifail) {
+224,225c201,202
+<     for (i = 0; i < n; ++i)
+< 	for (j = 0; j <= i; ++j) {
+---
+> 	for (int i = 0; i < n; ++i)
+> 		for (int j = 0; j <= i; ++j) {
+238,242c215,216
+< static void
+< householder(double *f, double *nu, double *b, double *r, int n,
+< 	    int m, Sint *ifail)
+< {
+<     int   i, j, k;
+---
+> static void householder(double *f, double *nu, double *b, double *r, int n,
+> 		int m, Sint *ifail) {
+253c227
+<     for (k = 0; k < m; ++k) {
+---
+> 	for (int k = 0; k < m; ++k) {
+257c231
+< 	for (i = k + 1; i < n; ++i)
+---
+> 		for (int i = k + 1; i < n; ++i)
+264c238
+< 	for (i = k; i < n; ++i) {
+---
+> 		for (int i = k; i < n; ++i) {
+277c251
+< 	for (i = k; i < m; ++i) {
+---
+> 		for (int i = k; i < m; ++i) {
+280c254
+< 	    for (j = k; j < n; ++j)
+---
+> 			for (int j = k; j < n; ++j)
+284c258
+< 	    for (j = k; j < n; ++j)
+---
+> 			for (int j = k; j < n; ++j)
+292,296c266,267
+< static void
+< house_rhs(double *nu, double *b, double *r, int n, int m,
+< 	  double *z, double *beta)
+< {
+<     int   i, k;
+---
+> static void house_rhs(double *nu, double *b, double *r, int n, int m, double *z,
+> 		double *beta) {
+307c278
+<     for (i = 0; i < n; ++i)
+---
+> 	for (int i = 0; i < n; ++i)
+309c280
+<     for (k = 0; k < m; ++k) {
+---
+> 	for (int k = 0; k < m; ++k) {
+312c283
+< 	for (i = k; i < n; ++i)
+---
+> 		for (int i = k; i < n; ++i)
+315c286
+< 	for (i = k; i < n; ++i)
+---
+> 		for (int i = k; i < n; ++i)
+322,324c293
+< static void
+< chols(int n, double *a, double *l, Sint *ifail)
+< {
+---
+> static void chols(int n, double *a, double *l, Sint *ifail) {
+327c296
+<     int   icol, irow, i, j, k, m;
+---
+> 	int j, k, m;
+344c313
+<     for (icol = 1; icol <= n; ++icol) {
+---
+> 	for (int icol = 1; icol <= n; ++icol) {
+346c315
+< 	for (irow = 1; irow <= icol; ++irow) {
+---
+> 		for (int irow = 1; irow <= icol; ++irow) {
+350c319
+< 	    for (i = 1; i <= irow; ++i) {
+---
+> 			for (int i = 1; i <= irow; ++i) {
+377c346
+<     for (i = 1; i <= n; ++i) {
+---
+> 	for (int i = 1; i <= n; ++i) {
+386,389c355,356
+< static void
+< fsolv(double *x, double *y, int n, double *l)
+< {
+<     int   i, j, i1;
+---
+> static void fsolv(double *x, double *y, int n, double *l) {
+> 	int i1;
+396c363
+<     for (i = 0; i < n; ++i) {
+---
+> 	for (int i = 0; i < n; ++i) {
+399c366
+< 	for (j = 0; j < i; ++j)
+---
+> 		for (int j = 0; j < i; ++j)
+405,408c372,373
+< static void
+< bsolv(double *x, double *y, int n, double *u)
+< {
+<     int   i, j, i1, ic;
+---
+> static void bsolv(double *x, double *y, int n, double *u) {
+> 	int i1, ic;
+416c381
+<     for (i = n - 1; i >= 0; --i) {
+---
+> 	for (int i = n - 1; i >= 0; --i) {
+420c385
+< 	for (j = i + 1; j < n; ++j) {
+---
+> 		for (int j = i + 1; j < n; ++j) {
+429,431c394
+< static void
+< solv(double *x, double *y, int n, double *l, double *u)
+< {
+---
+> static void solv(double *x, double *y, int n, double *l, double *u) {
+442,444c405
+< void
+< VR_frset(Sfloat *xl, Sfloat *xu, Sfloat *yl, Sfloat *yu)
+< {
+---
+> void VR_frset(Sfloat *xl, Sfloat *xu, Sfloat *yl, Sfloat *yu) {
+451,453c412
+< static void
+< dscale(double xo, double yo, double *xs, double *ys)
+< {
+---
+> static void dscale(double xo, double yo, double *xs, double *ys) {
+467,470c426,427
+< static double
+< val(double xp, double yp, double *beta, Sint *np)
+< {
+<     int   i, j, i1;
+---
+> static double val(double xp, double yp, double *beta, Sint *np) {
+> 	int i1;
+478,479c435,436
+<     for (i = 0; i <= *np; ++i)
+< 	for (j = 0; j <= *np - i; ++j)
+---
+> 	for (int i = 0; i <= *np; ++i)
+> 		for (int j = 0; j <= *np - i; ++j)
+484,488c441,442
+< void
+< VR_valn(double *z, double *x, double *y, Sint *n, double *beta, Sint *np)
+< {
+<     int   i, j, i1;
+<     int   it;
+---
+> void VR_valn(double *z, double *x, double *y, Sint *n, double *beta, Sint *np) {
+> 	int i1;
+493c447
+<     for (it = 0; it < *n; ++it) {
+---
+> 	for (int it = 0; it < *n; ++it) {
+499,500c453,454
+< 	for (i = 0; i <= *np; ++i)
+< 	    for (j = 0; j <= *np - i; ++j)
+---
+> 		for (int i = 0; i <= *np; ++i)
+> 			for (int j = 0; j <= *np - i; ++j)
+506,509c460,461
+< void
+< VR_krpred(double *z, double *xs, double *ys, double *x, double *y,
+< 	  Sint *npt, Sint *n, double *yy)
+< {
+---
+> void VR_krpred(double *z, double *xs, double *ys, double *x, double *y,
+> 		Sint *npt, Sint *n, double *yy) {
+511d462
+<     int   i;
+513d463
+<     int   it;
+520c470
+<     for (it = 0; it < *npt; ++it) {
+---
+> 	for (int it = 0; it < *npt; ++it) {
+524c474
+< 	for (i = 0; i < *n; ++i) {
+---
+> 		for (int i = 0; i < *n; ++i) {
+530c480
+< 	for (i = 0; i < *n; ++i) {
+---
+> 		for (int i = 0; i < *n; ++i) {
+538,543c488,491
+< void
+< VR_prvar(double *z, double *xp, double *yp, Sint *npt,
+< 	 double *x, double *y, double *l, double *r, Sint *n,
+< 	 Sint *np, Sint *npar, double *l1f)
+< {
+<     int   i, j, k, i1, k1, it;
+---
+> void VR_prvar(double *z, double *xp, double *yp, Sint *npt, double *x,
+> 		double *y, double *l, double *r, Sint *n, Sint *np, Sint *npar,
+> 		double *l1f) {
+> 	int i1, k1;
+553,554c501,502
+<     for (it = 0; it < *npt; ++it) {
+< 	for (i = 0; i < *n; ++i) {
+---
+> 	for (int it = 0; it < *npt; ++it) {
+> 		for (int i = 0; i < *n; ++i) {
+562c510
+< 	for (i = 0; i < *n; ++i)
+---
+> 		for (int i = 0; i < *n; ++i)
+568,569c516,517
+< 	for (i = 0; i <= *np; ++i)
+< 	    for (j = 0; j <= *np - i; ++j) {
+---
+> 		for (int i = 0; i <= *np; ++i)
+> 			for (int j = 0; j <= *np - i; ++j) {
+572c520
+< 		for (k = 0; k < *n; ++k)
+---
+> 				for (int k = 0; k < *n; ++k)
+577c525
+< 	for (i = 0; i < *npar; ++i)
+---
+> 		for (int i = 0; i < *npar; ++i)
+589,592c536,537
+< void
+< VR_correlogram(Sfloat *xp, Sfloat *yp, Sint *nint, double *x,
+< 	       double *y, double *z, Sint *n, Sint *cnt)
+< {
+---
+> void VR_correlogram(Sfloat *xp, Sfloat *yp, Sint *nint, double *x, double *y,
+> 		double *z, Sint *n, Sint *cnt) {
+594c539
+<     int   i, j, i1, ibin;
+---
+> 	int i1, ibin;
+606c551
+<     for (i = 0; i < *n; ++i) {
+---
+> 	for (int i = 0; i < *n; ++i) {
+610c555
+<     for (i = 0; i < *nint; ++i) {
+---
+> 	for (int i = 0; i < *nint; ++i) {
+615,616c560,561
+<     for (i = 0; i < *n; ++i) {
+< 	for (j = 0; j < i; ++j) {
+---
+> 	for (int i = 0; i < *n; ++i) {
+> 		for (int j = 0; j < i; ++j) {
+624,625c569,570
+<     for (i = 0; i < *n; ++i) {
+< 	for (j = 0; j <= i; ++j) {
+---
+> 	for (int i = 0; i < *n; ++i) {
+> 		for (int j = 0; j <= i; ++j) {
+635c580
+<     for (i = 0; i < *n; ++i) {
+---
+> 	for (int i = 0; i < *n; ++i) {
+642c587
+<     for (i = 0; i < *nint; ++i) {
+---
+> 	for (int i = 0; i < *nint; ++i) {
+655,658c600,601
+< void
+< VR_variogram(Sfloat *xp, Sfloat *yp, Sint *nint, double *x,
+< 	     double *y, double *z, Sint *n, Sint *cnt)
+< {
+---
+> void VR_variogram(Sfloat *xp, Sfloat *yp, Sint *nint, double *x, double *y,
+> 		double *z, Sint *n, Sint *cnt) {
+661c604
+<     int   ibin, i, j, i1;
+---
+> 	int ibin, i1;
+672c615
+<     for (i = 0; i < *nint; ++i) {
+---
+> 	for (int i = 0; i < *nint; ++i) {
+677,678c620,621
+<     for (i = 0; i < *n; ++i) {
+< 	for (j = 0; j < i; ++j) {
+---
+> 	for (int i = 0; i < *n; ++i) {
+> 		for (int j = 0; j < i; ++j) {
+686,687c629,630
+<     for (i = 0; i < *n; ++i) {
+< 	for (j = 0; j < i; ++j) {
+---
+> 	for (int i = 0; i < *n; ++i) {
+> 		for (int j = 0; j < i; ++j) {
+698c641
+<     for (i = 0; i < *nint; ++i) {
+---
+> 	for (int i = 0; i < *nint; ++i) {
 Only in Recommended/spatial/src: localization.h
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/spatial/src/pps.c Recommended/spatial/src/pps.c
 20a21
@@ -149,7 +565,233 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < #endif
 ---
 > #include "localization.h"
-40c37
+35,38c32
+< 
+< static void
+< testinit(void)
+< {
+---
+> static void testinit(void) {
+40c34
 < 	error("not initialized -- use ppregion");
 ---
-> 	error(_("rectangular domain was not initialized -- use 'ppregion()' function"));
+> 		error(_("rectangular domain was not initialized -- use 'ppregion()' function"));
+43,46c37
+< 
+< void
+< VR_ppset(Sfloat *area)
+< {
+---
+> void VR_ppset(Sfloat *area) {
+54,56c45
+< void
+< VR_ppget(Sfloat *xx)
+< {
+---
+> void VR_ppget(Sfloat *xx) {
+66,68c55
+< static Sfloat
+< edge(Sfloat x, Sfloat y, Sfloat a)
+< {
+---
+> static Sfloat edge(Sfloat x, Sfloat y, Sfloat a) {
+70d56
+<     int   i;
+73,76c59,66
+<     if (w > y - yl0) w = y - yl0;
+<     if (w > xu0 - x) w = xu0 - x;
+<     if (w > yu0 - y) w = yu0 - y;
+<     if (a <= w) return (0.5);
+---
+> 	if (w > y - yl0)
+> 		w = y - yl0;
+> 	if (w > xu0 - x)
+> 		w = xu0 - x;
+> 	if (w > yu0 - y)
+> 		w = yu0 - y;
+> 	if (a <= w)
+> 		return (0.5);
+82c72
+<     for (i = 1; i <= 4; i++)
+---
+> 	for (int i = 1; i <= 4; i++)
+99,103c89,91
+< void
+< VR_sp_pp2(Sfloat *x, Sfloat *y, Sint *npt, Sint *k,
+< 	  Sfloat *h, Sfloat *dmin, Sfloat *lm, Sfloat *fs)
+< {
+<     int   n = *npt, kk = *k, k1, i, j, ib;
+---
+> void VR_sp_pp2(Sfloat *x, Sfloat *y, Sint *npt, Sint *k, Sfloat *h,
+> 		Sfloat *dmin, Sfloat *lm, Sfloat *fs) {
+> 	int n = *npt, kk = *k, k1, i, ib;
+118c106
+<     for (i = 0; i < kk; i++)
+---
+> 	for (int i = 0; i < kk; i++)
+120c108
+<     for (i = 1; i < n; i++) {
+---
+> 	for (int i = 1; i < n; i++) {
+123c111
+< 	for (j = 0; j < i; j++) {
+---
+> 		for (int j = 0; j < i; j++) {
+147,150c135
+< void
+< VR_pdata(Sint *npt, Sfloat *x, Sfloat *y)
+< {
+<     int   i;
+---
+> void VR_pdata(Sint *npt, Sfloat *x, Sfloat *y) {
+157c142
+<     for (i = 0; i < *npt; i++) {
+---
+> 	for (int i = 0; i < *npt; i++) {
+164,169c149,151
+< 
+< void
+< VR_simpat(Sint *npt, Sfloat *x, Sfloat *y, Sfloat *c,
+< 	  Sfloat *r, Sint *init)
+< {
+<     int   i, attempts = 0, id, j, mm, n = *npt;
+---
+> void VR_simpat(Sint *npt, Sfloat *x, Sfloat *y, Sfloat *c, Sfloat *r,
+> 		Sint *init) {
+> 	int attempts = 0, id, mm, n = *npt;
+183,184c165,167
+<     if (*init > 0) mm = 10 * mm;
+<     for (i = 1; i <= mm; i++) {
+---
+> 	if (*init > 0)
+> 		mm = 10 * mm;
+> 	for (int i = 1; i <= mm; i++) {
+194c177
+< 	    for (j = 1; j < n; j++) {
+---
+> 			for (int j = 1; j < n; j++) {
+199,200c182,183
+< 		    if (d < u) continue;
+< 		}
+---
+> 					if (d < u)
+> 						continue;
+202d184
+< 	    if(attempts % 1000 == 0) R_CheckUserInterrupt();
+204c186,188
+< 	while (d < u);
+---
+> 			if (attempts % 1000 == 0)
+> 				R_CheckUserInterrupt();
+> 		} while (d < u);
+209,212c193,194
+< void
+< VR_simmat(Sint *npt, Sfloat *x, Sfloat *y, Sfloat *r)
+< {
+<     int   i, icnt, attempts = 0, j, n = *npt;
+---
+> void VR_simmat(Sint *npt, Sfloat *x, Sfloat *y, Sfloat *r) {
+> 	int icnt, attempts = 0, n = *npt;
+220c202
+<     for (i = 0; i < n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+227c209
+< 		for (j = 0; j < i; j++) {
+---
+> 				for (int j = 0; j < i; j++) {
+235,237c217,219
+< 	    if(attempts % 1000 == 0) R_CheckUserInterrupt();
+< 	}
+< 	while (icnt > 0);
+---
+> 			if (attempts % 1000 == 0)
+> 				R_CheckUserInterrupt();
+> 		} while (icnt > 0);
+242,245c224,225
+< void
+< VR_plike(Sfloat *x, Sfloat *y, Sint *npt, Sfloat *c,
+< 	 Sfloat *r, Sint *ng, Sfloat *target, Sfloat *res)
+< {
+---
+> void VR_plike(Sfloat *x, Sfloat *y, Sint *npt, Sfloat *c, Sfloat *r, Sint *ng,
+> 		Sfloat *target, Sfloat *res) {
+247c227
+<     int   ic, i1, i2, j, n = *npt, g = *ng;
+---
+> 	int ic, n = *npt, g = *ng;
+256c236
+<     for (i1 = 0; i1 < g; i1++) {
+---
+> 	for (int i1 = 0; i1 < g; i1++) {
+258c238
+< 	for (i2 = 0; i2 < g; i2++) {
+---
+> 		for (int i2 = 0; i2 < g; i2++) {
+261c241
+< 	    for (j = 0; j < n; j++) {
+---
+> 			for (int j = 0; j < n; j++) {
+264c244,245
+< 		if (x1 * x1 + y1 * y1 < rr) ic += 1;
+---
+> 				if (x1 * x1 + y1 * y1 < rr)
+> 					ic += 1;
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/spatial/src/spatial.h Recommended/spatial/src/spatial.h
+5,7c5,7
+< VR_gls(double *x, double *y, double *z, Sint *n, Sint *np,
+<        Sint *npar, double *f, double *l, double *r, double *bz,
+<        double *wz, double *yy, double *w, Sint *ifail, double *l1f);
+---
+> VR_gls(double *x, double *y, double *z, Sint *n, Sint *np, Sint *npar,
+> 		double *f, double *l, double *r, double *bz, double *wz, double *yy,
+> 		double *w, Sint *ifail, double *l1f);
+10,12c10,11
+< VR_ls(double *x, double *y, double *z, Sint *n, Sint *np,
+<       Sint *npar, double *f, double *r, double *bz, double *wz,
+<       Sint *ifail);
+---
+> VR_ls(double *x, double *y, double *z, Sint *n, Sint *np, Sint *npar, double *f,
+> 		double *r, double *bz, double *wz, Sint *ifail);
+24,25c23,24
+< VR_krpred(double *z, double *xs, double *ys, double *x, double *y,
+< 	  Sint *npt, Sint *n, double *yy);
+---
+> VR_krpred(double *z, double *xs, double *ys, double *x, double *y, Sint *npt,
+> 		Sint *n, double *yy);
+28,30c27,28
+< VR_prvar(double *z, double *xp, double *yp, Sint *npt,
+< 	 double *x, double *y, double *l, double *r, Sint *n,
+< 	 Sint *np, Sint *npar, double *l1f);
+---
+> VR_prvar(double *z, double *xp, double *yp, Sint *npt, double *x, double *y,
+> 		double *l, double *r, Sint *n, Sint *np, Sint *npar, double *l1f);
+33,34c31,32
+< VR_correlogram(Sfloat *xp, Sfloat *yp, Sint *nint, double *x,
+< 	       double *y, double *z, Sint *n, Sint *cnt);
+---
+> VR_correlogram(Sfloat *xp, Sfloat *yp, Sint *nint, double *x, double *y,
+> 		double *z, Sint *n, Sint *cnt);
+37,38c35,36
+< VR_variogram(Sfloat *xp, Sfloat *yp, Sint *nint, double *x,
+< 	     double *y, double *z, Sint *n, Sint *cnt);
+---
+> VR_variogram(Sfloat *xp, Sfloat *yp, Sint *nint, double *x, double *y,
+> 		double *z, Sint *n, Sint *cnt);
+47,48c45,46
+< VR_sp_pp2(Sfloat *x, Sfloat *y, Sint *npt, Sint *k,
+< 	  Sfloat *h, Sfloat *dmin, Sfloat *lm, Sfloat *fs);
+---
+> VR_sp_pp2(Sfloat *x, Sfloat *y, Sint *npt, Sint *k, Sfloat *h, Sfloat *dmin,
+> 		Sfloat *lm, Sfloat *fs);
+54,55c52
+< VR_simpat(Sint *npt, Sfloat *x, Sfloat *y, Sfloat *c,
+< 	  Sfloat *r, Sint *init);
+---
+> VR_simpat(Sint *npt, Sfloat *x, Sfloat *y, Sfloat *c, Sfloat *r, Sint *init);
+61,62c58,59
+< VR_plike(Sfloat *x, Sfloat *y, Sint *npt, Sfloat *c,
+< 	 Sfloat *r, Sint *ng, Sfloat *target, Sfloat *res);
+---
+> VR_plike(Sfloat *x, Sfloat *y, Sint *npt, Sfloat *c, Sfloat *r, Sint *ng,
+> 		Sfloat *target, Sfloat *res);

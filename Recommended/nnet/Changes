@@ -1,8 +1,36 @@
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/nnet/R/multinom.R Recommended/nnet/R/multinom.R
+28c28
+<         x[(1L:n) + n * (as.integer(cl) - 1L)] <- 1
+---
+>         x[seq_len(n) + n * (as.integer(cl) - 1L)] <- 1
+47,48c47,48
+<         Za <- t(z$Z[, 1L:z$na, drop = FALSE])
+<         list(X = Za[, 1L:p, drop = FALSE], Y = Za[, p + 1L:q])
+---
+>         Za <- t(z$Z[, seq_len(z$na), drop = FALSE])
+>         list(X = Za[, seq_len(p), drop = FALSE], Y = Za[, p + seq_len(q)])
 73c73
 <                                      "groups %s are empty"),
 ---
 >                                      "groups %s are empty", domain = "R-nnet"),
+97,98c97,98
+<         X <- Z$X[, 1L:ncol(X)]
+<         Y <- Z$X[, ncol(X) + 1L:ncol(Y), drop = FALSE]
+---
+>         X <- Z$X[, seq_len(ncol(X))]
+>         Y <- Z$X[, ncol(X) + seq_len(ncol(Y)), drop = FALSE]
+105c105
+<         Y <- Z$Y[, 1L:ncol(Y), drop = FALSE]
+---
+>         Y <- Z$Y[, seq_len(ncol(Y)), drop = FALSE]
+158c158
+<         else fit$lab <- 1L:ncol(Y)
+---
+>         else fit$lab <- seq_len(ncol(Y))
+161c161
+<     fit$vcoefnames <- fit$coefnames[1L:r] # remove offset cols
+---
+>     fit$vcoefnames <- fit$coefnames[seq_len(r)] # remove offset cols
 175c175
 <     if(!inherits(object, "multinom")) stop("not a \"multinom\" fit")
 ---
@@ -21,6 +49,14 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >     cat("\n", gettext("Residual Deviance: ", domain = "R-nnet"), format(x$deviance), "\n", sep = "")
 >     cat(gettext("AIC: ", domain = "R-nnet"), format(x$AIC), "\n", sep = "")
+223c223
+<         coef <- object$wts[1L+(1L:r)]
+---
+>         coef <- object$wts[1L+seq_len(r)]
+226c226
+<         coef <- matrix(object$wts, nrow = object$n[3L], byrow=TRUE)[, 1L+(1L:r), drop=FALSE]
+---
+>         coef <- matrix(object$wts, nrow = object$n[3L], byrow=TRUE)[, 1L+seq_len(r), drop=FALSE]
 236c236
 <     if(!inherits(object, "multinom")) stop("not a \"multinom\" fit")
 ---
@@ -43,6 +79,14 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 ---
 >         cat(gettextf("trying + %s", tt, domain = "R-nnet"), "\n", sep = "")
 >         nobject <- update(object, as.formula(paste("~ . +", tt)), trace = trace, evaluate = FALSE)
+324c322
+<         coef <- object$wts[1L + (1L:r)]
+---
+>         coef <- object$wts[1L + seq_len(r)]
+329c327
+<                        byrow = TRUE)[-1L, 1L + (1L:r), drop = FALSE]
+---
+>                        byrow = TRUE)[-1L, 1L + seq_len(r), drop = FALSE]
 348c346
 <         cat("Call:\n")
 ---
@@ -77,6 +121,10 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <         stop('not all objects are of class "multinom"')
 ---
 >         stop("not all objects are of class \"multinom\"")
+403c401
+<     tss <- c("", paste(1L:(nt - 1), 2L:nt, sep = " vs "))
+---
+>     tss <- c("", paste(seq_len(nt - 1), 2L:nt, sep = " vs "))
 410,411c408
 <     names(out) <- c("Model", "Resid. df", "Resid. Dev", "Test",
 <                     "   Df", "LR stat.", "Pr(Chi)")
@@ -89,6 +137,10 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >         c(gettext("Likelihood ratio tests of Multinomial Models\n", domain = "R-nnet"),
 >           gettextf("Response: %s", paste(rsp, collapse = ""), domain = "R-nnet"))
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/nnet/R/nnet.R Recommended/nnet/R/nnet.R
+26c26
+<         x[(1L:n) + n * (as.vector(unclass(cl)) - 1L)] <- 1
+---
+>         x[seq_len(n) + n * (as.vector(unclass(cl)) - 1L)] <- 1
 51c51
 <                                      "groups %s are empty"),
 ---
@@ -101,6 +153,22 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 <     if(!inherits(object, "nnet")) stop("object not of class \"nnet\"")
 ---
 >     if(!inherits(object, "nnet")) stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("nnet")))
+205c205
+<             keep <- 1L:nrow(x)
+---
+>             keep <- seq_len(nrow(x))
+251c251
+<         if(ns > 1L) con <- conn[1L:ns]
+---
+>         if(ns > 1L) con <- conn[seq_len(ns)]
+266c266
+<     net <- add.net(net, 1L:n0,(n0+1L):n1)
+---
+>     net <- add.net(net, seq_len(n0), (n0+1L):n1)
+312c312
+<     x[(1L:n) + n*(unclass(cl)-1L)] <- 1
+---
+>     x[seq_len(n) + n*(unclass(cl)-1L)] <- 1
 319,324c319,322
 <     if(!inherits(x, "nnet")) stop("not a legitimate neural net fit")
 <     cat("a ",x$n[1L],"-",x$n[2L],"-",x$n[3L]," network", sep="")
@@ -125,6 +193,10 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     if(x$entropy) cat(gettext(" entropy fitting ", domain = "R-nnet"))
 >     if(x$softmax) cat(gettext(" softmax modelling ", domain = "R-nnet"))
 >     if(x$decay[1L] > 0) cat(gettextf(" decay=%s", x$decay[1L], domain = "R-nnet"), sep = "")
+345c343
+<                               wm[1L+rep(1L:object$nunits - 1L,
+---
+>                               wm[1L+rep(seq_len(object$nunits) - 1L,
 360,362c358,359
 <     cat("a ",x$n[1L],"-",x$n[2L],"-",x$n[3L]," network", sep="")
 <     cat(" with", length(x$wts),"weights\n")
@@ -144,30 +216,319 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >     if(x$entropy) cat(gettext(" entropy fitting ", domain = "R-nnet"))
 >     if(x$softmax) cat(gettext(" softmax modelling ", domain = "R-nnet"))
 >     if(x$decay[1L] > 0) cat(gettextf(" decay=%s", x$decay[1L], domain = "R-nnet"), sep="")
-diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/nnet/R/vcovmultinom.R Recommended/nnet/R/vcovmultinom.R
-45c45
-<     for (i in 1L:n){
+371c368
+<     lapply(split(wts, rep(1L:x$nunits, tconn)),
 ---
->     for (i in seq_len(n)){
-48c48
-<         for (j in 1L:(k+1)){
----
->         for (j in seq_len(k+1)){
+>     lapply(split(wts, rep(seq_len(x$nunits), tconn)),
 Only in Recommended/nnet/src: localization.h
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/nnet/src/nnet.c Recommended/nnet/src/nnet.c
-26a27
+27a28
 > #include <R_ext/Minmax.h>
-27a29
+28a30
 > #include "localization.h"
-124c126
+72,76c74,75
+< void
+< VR_set_net(Sint *n, Sint *nconn, Sint *conn,
+< 	   double *decay, Sint *nsunits, Sint *entropy,
+< 	   Sint *softmax, Sint *censored)
+< {
+---
+> void VR_set_net(Sint *n, Sint *nconn, Sint *conn, double *decay, Sint *nsunits,
+> 		Sint *entropy, Sint *softmax, Sint *censored) {
+101,103c100
+< void 
+< VR_unset_net()
+< {
+---
+> void VR_unset_net() {
+116,118c113
+< void
+< VR_nntest(Sint *ntest, Sdata *test, Sdata *result, double *inwts)
+< {
+---
+> void VR_nntest(Sint *ntest, Sdata *test, Sdata *result, double *inwts) {
+125c120
 < 	error("No model set");
 ---
-> 	error(_("No model set"));
-593,595d594
+> 		error(_("No model set"));
+140,143c135
+< 
+< static void
+< Build_Net(int ninputs, int nhidden, int noutputs)
+< {
+---
+> static void Build_Net(int ninputs, int nhidden, int noutputs) {
+157,159c149
+< static double
+< sigmoid(double sum)
+< {
+---
+> static double sigmoid(double sum) {
+169,171c159
+< static double
+< E(double y, double t)
+< {
+---
+> static double E(double y, double t) {
+186,189c174
+< 
+< static void
+< fpass(Sdata *input, Sdata *goal, Sdata wx, int nr)
+< {
+---
+> static void fpass(Sdata *input, Sdata *goal, Sdata wx, int nr) {
+240,242c225
+< static double
+< sigmoid_prime(double value)
+< {
+---
+> static double sigmoid_prime(double value) {
+246,248c229
+< static double
+< sigmoid_prime_prime(double value)
+< {
+---
+> static double sigmoid_prime_prime(double value) {
+252,254c233
+< static void
+< bpass(Sdata *goal, Sdata wx)
+< {
+---
+> static void bpass(Sdata *goal, Sdata wx) {
+300,302c279
+< void
+< VR_dfunc(double *p, double *df, double *fp)
+< {
+---
+> void VR_dfunc(double *p, double *df, double *fp) {
+326,328c303
+< static double
+< fminfn(int nn, double *p, void *dummy)
+< {
+---
+> static double fminfn(int nn, double *p, void *dummy) {
+348,350c323
+< static void
+< fmingr(int nn, double *p, double *df, void *dummy)
+< {
+---
+> static void fmingr(int nn, double *p, double *df, void *dummy) {
+370,371c343
+< vect(int n)
+< {
+---
+> vect(int n) {
+378,380c350
+< static void 
+< free_vect(double *v)
+< {
+---
+> static void free_vect(double *v) {
+385,386c355
+< matrix(int nrh, int nch)
+< {
+---
+> matrix(int nrh, int nch) {
+398,400c367
+< static void 
+< free_matrix(double **m, int nrh, int nch)
+< {
+---
+> static void free_matrix(double **m, int nrh, int nch) {
+409,410c376
+< Lmatrix(int n)
+< {
+---
+> Lmatrix(int n) {
+422,424c388
+< static void 
+< free_Lmatrix(double **m, int n)
+< {
+---
+> static void free_Lmatrix(double **m, int n) {
+435,440c398,400
+< void
+< VR_dovm(Sint *ntr, Sdata *train, Sdata *weights,
+< 	Sint *Nw, double *wts, double *Fmin,
+< 	Sint *maxit, Sint *trace, Sint *mask,
+< 	double *abstol, double *reltol, int *ifail)
+< {
+---
+> void VR_dovm(Sint *ntr, Sdata *train, Sdata *weights, Sint *Nw, double *wts,
+> double *Fmin, Sint *maxit, Sint *trace, Sint *mask, double *abstol,
+> double *reltol, int *ifail) {
+446,447c406
+<     vmmin((int) *Nw, wts, Fmin, fminfn, fmingr, 
+< 	  (int) *maxit, (int) *trace, mask,
+---
+> vmmin((int) *Nw, wts, Fmin, fminfn, fmingr, (int) *maxit, (int) *trace, mask,
+453,455c412
+< static void
+< pHessian(Sdata *input, Sdata *goal, Sdata wx, int nr)
+< {
+---
+> static void pHessian(Sdata *input, Sdata *goal, Sdata wx, int nr) {
+479c436,437
+< 	if(Censored) tot = 1;
+---
+> if (Censored)
+> 	tot = 1;
+491,492c449,453
+< 				    tmp = -Probs[to1] * Probs[to2] *
+< 					(1 - goal[to1 - FirstOutput] * goal[to2 - FirstOutput] / P / P);
+---
+> 							tmp = -Probs[to1] * Probs[to2]
+> 									* (1
+> 											- goal[to1 - FirstOutput]
+> 													* goal[to2 - FirstOutput]
+> 													/ P / P);
+494,495c455,458
+< 					tmp += Probs[to1] * (1 - goal[to1 - FirstOutput] / P);
+< 				    H[j1][j2] += wx * (tmp * Outputs[from1] * Outputs[from2]);
+---
+> 								tmp += Probs[to1]
+> 										* (1 - goal[to1 - FirstOutput] / P);
+> 							H[j1][j2] += wx
+> 									* (tmp * Outputs[from1] * Outputs[from2]);
+498,499c461,464
+< 				    if (to1 == to2) tmp += Probs[to1];
+< 				    H[j1][j2] += wx * tot * (tmp * Outputs[from1] * Outputs[from2]);
+---
+> 							if (to1 == to2)
+> 								tmp += Probs[to1];
+> 							H[j1][j2] += wx * tot
+> 									* (tmp * Outputs[from1] * Outputs[from2]);
+512,513c477,478
+< 				    s = sigmoid_prime(Outputs[to1]) * sigmoid_prime(Outputs[to2])
+< 					* sum2;
+---
+> 							s = sigmoid_prime(Outputs[to1])
+> 									* sigmoid_prime(Outputs[to2]) * sum2;
+516,517c481,482
+< 				    s = sigmoid_prime(Outputs[to1]) * sigmoid_prime(Outputs[to2])
+< 					* tot * sum2;
+---
+> 							s = sigmoid_prime(Outputs[to1])
+> 									* sigmoid_prime(Outputs[to2]) * tot * sum2;
+526,530c491,499
+< 					tmp += goal[to2 - FirstOutput] / P *
+< 					    (h1[to1] - w[to1][to2]);
+< 				    H[j1][j2] += wx * (Outputs[from1] * sigmoid_prime(Outputs[to1])
+< 						       * (Outputs[from2] * Probs[to2] * tmp * tot
+< 				     + ((to1 == from2) ? Errors[to2] : 0)));
+---
+> 								tmp += goal[to2 - FirstOutput] / P
+> 										* (h1[to1] - w[to1][to2]);
+> 							H[j1][j2] += wx
+> 									* (Outputs[from1]
+> 											* sigmoid_prime(Outputs[to1])
+> 											* (Outputs[from2] * Probs[to2] * tmp
+> 													* tot
+> 													+ ((to1 == from2) ?
+> 															Errors[to2] : 0)));
+534,538c503,511
+< 					tmp += goal[to1 - FirstOutput] / P *
+< 					    (h1[to2] - w[to2][to1]);
+< 				    H[j1][j2] += wx * (Outputs[from2] * sigmoid_prime(Outputs[to2])
+< 						       * (Outputs[from1] * Probs[to1] * tmp * tot
+< 				     + ((to2 == from1) ? Errors[to1] : 0)));
+---
+> 								tmp += goal[to1 - FirstOutput] / P
+> 										* (h1[to2] - w[to2][to1]);
+> 							H[j1][j2] += wx
+> 									* (Outputs[from2]
+> 											* sigmoid_prime(Outputs[to2])
+> 											* (Outputs[from1] * Probs[to1] * tmp
+> 													* tot
+> 													+ ((to2 == from1) ?
+> 															Errors[to1] : 0)));
+566c539,542
+< 				    H[j1][j2] += wx * (h[to1] * Outputs[from1] * Outputs[from2]);
+---
+> 							H[j1][j2] +=
+> 									wx
+> 											* (h[to1] * Outputs[from1]
+> 													* Outputs[from2]);
+573,574c549,550
+< 				s = sigmoid_prime(Outputs[to1]) * sigmoid_prime(Outputs[to2])
+< 				    * sum2;
+---
+> 						s = sigmoid_prime(Outputs[to1])
+> 								* sigmoid_prime(Outputs[to2]) * sum2;
+580,582c556,562
+< 				    H[j1][j2] += wx * (Outputs[from1] * sigmoid_prime(Outputs[to1])
+< 				    * (Outputs[from2] * w[to1][to2] * h[to2]
+< 				     + ((to1 == from2) ? Errors[to2] : 0)));
+---
+> 							H[j1][j2] += wx
+> 									* (Outputs[from1]
+> 											* sigmoid_prime(Outputs[to1])
+> 											* (Outputs[from2] * w[to1][to2]
+> 													* h[to2]
+> 													+ ((to1 == from2) ?
+> 															Errors[to2] : 0)));
+584,586c564,570
+< 				    H[j1][j2] += wx * (Outputs[from2] * sigmoid_prime(Outputs[to2])
+< 				    * (Outputs[from1] * w[to2][to1] * h[to1]
+< 				     + ((to2 == from1) ? Errors[to1] : 0)));
+---
+> 							H[j1][j2] += wx
+> 									* (Outputs[from2]
+> 											* sigmoid_prime(Outputs[to2])
+> 											* (Outputs[from1] * w[to2][to1]
+> 													* h[to1]
+> 													+ ((to2 == from1) ?
+> 															Errors[to1] : 0)));
+594,600c578,579
 < #define max9(a,b) a>b?a:b
 < #define min9(a,b) a<b?a:b
 < 
-631c630
+< void
+< VR_nnHessian(Sint *ntr, Sdata *train, Sdata *weights,
+< 	     double *inwts, Sdata *Hess)
+< {
+---
+> void VR_nnHessian(Sint *ntr, Sdata *train, Sdata *weights, double *inwts,
+> Sdata *Hess) {
+632c611
 < 	    *Hess++ = H[max9(i, j)][min9(i, j)];
 ---
-> 	    *Hess++ = H[max(i, j)][min(i, j)];
+> 	*Hess++ = H[max(i, j)][min(i, j)];
+641,643c620
+< static int 
+< Zcompar(const Sdata *a, const Sdata *b)
+< {
+---
+> static int Zcompar(const Sdata *a, const Sdata *b) {
+654,656c631
+< void
+< VR_summ2(Sint *n0, Sint *p0, Sint *q0, Sdata *Z, Sint *na)
+< {
+---
+> void VR_summ2(Sint *n0, Sint *p0, Sint *q0, Sdata *Z, Sint *na) {
+663,664c638
+<     qsort(Z, n, m * sizeof(Sdata), 
+< 	  (int (*)(const void *, const void *)) Zcompar);
+---
+> qsort(Z, n, m * sizeof(Sdata), (int (*)(const void *, const void *)) Zcompar);
+687,695c661,665
+<     {"VR_dfunc", (DL_FUNC) &VR_dfunc, 3},
+<     {"VR_dovm", (DL_FUNC) &VR_dovm, 12},
+<     {"VR_nnHessian", (DL_FUNC) &VR_nnHessian, 5},
+<     {"VR_nntest", (DL_FUNC) &VR_nntest, 4},
+<     {"VR_set_net", (DL_FUNC) &VR_set_net, 8},
+<     {"VR_summ2", (DL_FUNC) &VR_summ2, 5},
+<     {"VR_unset_net", (DL_FUNC) &VR_unset_net, 0},
+<     {NULL, NULL, 0}
+< };
+---
+> { "VR_dfunc", (DL_FUNC) & VR_dfunc, 3 }, { "VR_dovm", (DL_FUNC) & VR_dovm, 12 },
+> { "VR_nnHessian", (DL_FUNC) & VR_nnHessian, 5 }, { "VR_nntest", (DL_FUNC)
+> & VR_nntest, 4 }, { "VR_set_net", (DL_FUNC) & VR_set_net, 8 }, { "VR_summ2",
+> (DL_FUNC) & VR_summ2, 5 }, { "VR_unset_net", (DL_FUNC) & VR_unset_net, 0 }, {
+> NULL, NULL, 0 } };
+698,699c668
+< void R_init_nnet(DllInfo *dll)
+< {
+---
+> void R_init_nnet(DllInfo *dll) {

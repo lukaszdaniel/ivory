@@ -1595,6 +1595,14 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 < 	if (any(ord>1)) stop ('Penalty terms cannot be in an interaction')
 ---
 > 	if (any(ord>1)) stop("penalty terms cannot be in an interaction")
+208c206
+< 	    fit$scale <- exp(fit$coefficients[-(1:nvar)])
+---
+> 	    fit$scale <- exp(fit$coefficients[-seq_len(nvar)])
+211c209
+< 	    fit$coefficients  <- fit$coefficients[1:nvar]
+---
+> 	    fit$coefficients  <- fit$coefficients[seq_len(nvar)]
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/R/survregDtest.S Recommended/survival/R/survregDtest.S
 13c13
 <     if (is.null(dlist$name)) errlist <- c(errlist, "Missing a name")
@@ -1737,36 +1745,5476 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 >                 stop(gettextf("non numeric increment in an %s call", paste(argclass[ii], collapse = ", ")))
 Only in Recommended/survival/inst: po
 Only in Recommended/survival: po
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/agexact.c Recommended/survival/src/agexact.c
+56,62c56,61
+< 	     double *stop,   Sint *event,    double *covar2,double *offset, 
+< 	     Sint   *strata, double *means,  double *beta,  double *u, 
+< 	     double *imat2,  double loglik[2], Sint *flag,  double *work, 
+< 	     Sint   *work2,  double *eps,    double *tol_chol, double *sctest)
+< {
+<     int i,j,k, l, person;
+<     int     iter;
+---
+> 		double *stop, Sint *event, double *covar2, double *offset, Sint *strata,
+> 		double *means, double *beta, double *u, double *imat2, double loglik[2],
+> 		Sint *flag, double *work, Sint *work2, double *eps, double *tol_chol,
+> 		double *sctest) {
+> 	int i, k;
+> 
+95c94
+<     for (i=0; i<nvar; i++) {
+---
+> 	for (int i = 0; i < nvar; i++) {
+97c96,97
+< 	for (person=0; person<n; person++) temp += covar[i][person];
+---
+> 		for (int person = 0; person < n; person++)
+> 			temp += covar[i][person];
+100c100,101
+< 	for (person=0; person<n; person++) covar[i][person] -= temp;
+---
+> 		for (int person = 0; person < n; person++)
+> 			covar[i][person] -= temp;
+107c108
+<     for (i=0; i<nvar; i++) {
+---
+> 	for (int i = 0; i < nvar; i++) {
+109c110
+< 	for (j=0; j<nvar; j++)
+---
+> 		for (int j = 0; j < nvar; j++)
+113c114
+<     for (person=0; person<n; person++) {
+---
+> 	for (int person = 0; person < n; person++) {
+115c116
+< 	for (i=0; i<nvar; i++)
+---
+> 		for (int i = 0; i < nvar; i++)
+120,121c121,123
+<     for (person=0; person<n;) {
+< 	if (event[person]==0) person++;
+---
+> 	for (int person = 0; person < n;) {
+> 		if (event[person] == 0)
+> 			person++;
+124c126
+< 	    for (i=0; i<nvar; i++) {
+---
+> 			for (int i = 0; i < nvar; i++) {
+126c128,129
+< 		for (j=0; j<nvar; j++)  cmat[i][j]=0;
+---
+> 				for (int j = 0; j < nvar; j++)
+> 					cmat[i][j] = 0;
+135,136c138,140
+< 	    for (k=person; k<n; k++) {
+< 		if (stop[k]==time) deaths += event[k];
+---
+> 			for (int k = person; k < n; k++) {
+> 				if (stop[k] == time)
+> 					deaths += event[k];
+141c145,146
+< 		if (strata[k]==1) break;
+---
+> 				if (strata[k] == 1)
+> 					break;
+149c154
+< 		for (l=0; l<nrisk; l++) {
+---
+> 				for (int l = 0; l < nrisk; l++) {
+153c158
+< 		    for (i=0; i<nvar; i++) {
+---
+> 					for (int i = 0; i < nvar; i++) {
+155c160
+< 			for (j=0; j<=i; j++)
+---
+> 						for (int j = 0; j <= i; j++)
+159,160c164
+< 		}
+< 	    else {
+---
+> 			} else {
+169c173,174
+< 		    for (i=0; i<nvar; i++) newvar[i]=0;
+---
+> 					for (i = 0; i < nvar; i++)
+> 						newvar[i] = 0;
+171c176
+< 		    for (l=0; l<deaths; l++) {
+---
+> 					for (int l = 0; l < deaths; l++) {
+174c179,180
+< 			for (i=0; i<nvar; i++)  newvar[i]+= covar[i][k];
+---
+> 						for (int i = 0; i < nvar; i++)
+> 							newvar[i] += covar[i][k];
+177c183
+< 		    for (i=0; i<nvar; i++) {
+---
+> 					for (int i = 0; i < nvar; i++) {
+179c185
+< 			for (j=0; j<=i; j++)
+---
+> 						for (int j = 0; j <= i; j++)
+188c194
+< 	    for (i=0; i<nvar; i++) {
+---
+> 			for (int i = 0; i < nvar; i++) {
+190c196
+< 		for (j=0; j<=i; j++)
+---
+> 				for (int j = 0; j <= i; j++)
+193c199
+< 	    for (k=person; k<n && stop[k]==time; k++) {
+---
+> 			for (int k = person; k < n && stop[k] == time; k++) {
+196c202,203
+< 		    for (i=0; i<nvar; i++) u[i] += covar[i][k];
+---
+> 					for (int i = 0; i < nvar; i++)
+> 						u[i] += covar[i][k];
+199c206,207
+< 		if (strata[k]==1) break;
+---
+> 				if (strata[k] == 1)
+> 					break;
+210c218
+<     for (i=0; i<nvar; i++) /*use 'a' as a temp to save u0, for the score test*/
+---
+> 	for (int i = 0; i < nvar; i++) /*use 'a' as a temp to save u0, for the score test*/
+217c225
+<     for (i=0; i<nvar; i++)
+---
+> 	for (int i = 0; i < nvar; i++)
+224c232
+<     for (i=0; i<nvar; i++) {
+---
+> 	for (int i = 0; i < nvar; i++) {
+229,230c237,239
+< 	for (i=1; i<nvar; i++)
+< 	    for (j=0; j<i; j++)  imat[i][j] = imat[j][i];
+---
+> 		for (int i = 1; i < nvar; i++)
+> 			for (int j = 0; j < i; j++)
+> 				imat[i][j] = imat[j][i];
+239c248
+<     for (iter=1; iter<=*maxiter; iter++) {
+---
+> 	for (int iter = 1; iter <= *maxiter; iter++) {
+241c250
+< 	for (i=0; i<nvar; i++) {
+---
+> 		for (int i = 0; i < nvar; i++) {
+243c252
+< 	    for (j=0; j<nvar; j++)
+---
+> 			for (int j = 0; j < nvar; j++)
+247c256
+< 	for (person=0; person<n; person++) {
+---
+> 		for (int person = 0; person < n; person++) {
+249c258
+< 	    for (i=0; i<nvar; i++)
+---
+> 			for (int i = 0; i < nvar; i++)
+254c263
+< 	for (person=0; person<n; ) {
+---
+> 		for (int person = 0; person < n;) {
+256c265,266
+< 	    if (event[person]==0) person++;
+---
+> 			if (event[person] == 0)
+> 				person++;
+259c269
+< 		for (i=0; i<nvar; i++) {
+---
+> 				for (int i = 0; i < nvar; i++) {
+261c271,272
+< 		    for (j=0; j<nvar; j++)  cmat[i][j]=0;
+---
+> 					for (int j = 0; j < nvar; j++)
+> 						cmat[i][j] = 0;
+270,271c281,283
+< 		for (k=person; k<n; k++) {
+< 		    if (stop[k]==time) deaths += event[k];
+---
+> 				for (int k = person; k < n; k++) {
+> 					if (stop[k] == time)
+> 						deaths += event[k];
+276c288,289
+< 		    if (strata[k]==1) break;
+---
+> 					if (strata[k] == 1)
+> 						break;
+284c297
+< 		    for (l=0; l<nrisk; l++) {
+---
+> 					for (int l = 0; l < nrisk; l++) {
+288c301
+< 			for (i=0; i<nvar; i++) {
+---
+> 						for (int i = 0; i < nvar; i++) {
+290,292c303,305
+< 			    for (j=0; j<=i; j++)
+< 				cmat[i][j] += weight*covar[i][k]*covar[j][k];
+< 			    }
+---
+> 							for (int j = 0; j <= i; j++)
+> 								cmat[i][j] += weight * covar[i][k]
+> 										* covar[j][k];
+295c308
+< 		else {
+---
+> 				} else {
+304c317,318
+< 			for (i=0; i<nvar; i++) newvar[i]=0;
+---
+> 						for (int i = 0; i < nvar; i++)
+> 							newvar[i] = 0;
+306c320
+< 			for (l=0; l<deaths; l++) {
+---
+> 						for (int l = 0; l < deaths; l++) {
+309c323,324
+< 			    for (i=0; i<nvar; i++)  newvar[i]+= covar[i][k];
+---
+> 							for (int i = 0; i < nvar; i++)
+> 								newvar[i] += covar[i][k];
+312c327
+< 			for (i=0; i<nvar; i++) {
+---
+> 						for (int i = 0; i < nvar; i++) {
+314c329
+< 			    for (j=0; j<=i; j++)
+---
+> 							for (int j = 0; j <= i; j++)
+323c338
+< 		for (i=0; i<nvar; i++) {
+---
+> 				for (int i = 0; i < nvar; i++) {
+325,326c340,342
+< 		    for (j=0; j<=i; j++)
+< 			imat[j][i] += (cmat[i][j] - a[i]*a[j]/denom)/denom;
+---
+> 					for (int j = 0; j <= i; j++)
+> 						imat[j][i] += (cmat[i][j] - a[i] * a[j] / denom)
+> 								/ denom;
+328c344
+< 		for (k=person; k<n && stop[k]==time; k++) {
+---
+> 				for (int k = person; k < n && stop[k] == time; k++) {
+331c347,348
+< 			for (i=0; i<nvar; i++) u[i] += covar[i][k];
+---
+> 						for (int i = 0; i < nvar; i++)
+> 							u[i] += covar[i][k];
+334c351,352
+< 		    if (strata[k]==1) break;
+---
+> 					if (strata[k] == 1)
+> 						break;
+347,349c365,368
+< 	    for (i=1; i<nvar; i++)
+< 		for (j=0; j<i; j++)  imat[i][j] = imat[j][i];
+< 	    for (i=0; i<nvar; i++)
+---
+> 			for (int i = 1; i < nvar; i++)
+> 				for (int j = 0; j < i; j++)
+> 					imat[i][j] = imat[j][i];
+> 			for (int i = 0; i < nvar; i++)
+355c374,375
+< 	if (iter==*maxiter) break;  /*skip the step halving and etc */
+---
+> 		if (iter == *maxiter)
+> 			break; /*skip the step halving and etc */
+359c379
+< 		for (i=0; i<nvar; i++)
+---
+> 			for (int i = 0; i < nvar; i++)
+361,362c381
+< 		}
+< 	    else {
+---
+> 		} else {
+367,368c386
+< 		j=0;
+< 		for (i=0; i<nvar; i++) {
+---
+> 			for (int i = 0; i < nvar; i++) {
+377,379c395,398
+<     for (i=1; i<nvar; i++)
+< 	for (j=0; j<i; j++)  imat[i][j] = imat[j][i];
+<     for (i=0; i<nvar; i++)
+---
+> 	for (int i = 1; i < nvar; i++)
+> 		for (int j = 0; j < i; j++)
+> 			imat[i][j] = imat[j][i];
+> 	for (int i = 0; i < nvar; i++)
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/agfit4.c Recommended/survival/src/agfit4.c
+6,10c6,8
+< SEXP agfit4(SEXP surv2,      SEXP covar2,    SEXP strata2,
+<             SEXP weights2,  SEXP offset2,    SEXP ibeta2,
+<             SEXP sort12,     SEXP sort22,    SEXP method2,
+<             SEXP maxiter2,   SEXP  eps2,     SEXP tolerance2,
+<             SEXP doscale2) { 
+---
+> SEXP agfit4(SEXP surv2, SEXP covar2, SEXP strata2, SEXP weights2, SEXP offset2,
+> 		SEXP ibeta2, SEXP sort12, SEXP sort22, SEXP method2, SEXP maxiter2,
+> 		SEXP eps2, SEXP tolerance2, SEXP doscale2) {
+76c74,75
+<     eta = (double *) R_alloc(nused + 5*nvar + 2*nvar*nvar, sizeof(double));
+---
+> 	eta = (double *) R_alloc(nused + 5 * nvar + 2 * nvar * nvar,
+> 			sizeof(double));
+130c129,130
+<     for (i=0; i<nused; i++) temp2 += weights[i];  /* sum of weights */
+---
+> 	for (int i = 0; i < nused; i++)
+> 		temp2 += weights[i]; /* sum of weights */
+132c132
+<     for (i=0; i<nvar; i++) {
+---
+> 	for (int i = 0; i < nvar; i++) {
+135c135
+<         for (person=0; person<nused; person++)
+---
+> 		for (int person = 0; person < nused; person++)
+139c139
+<         for (person=0; person<nused; person++)
+---
+> 		for (int person = 0; person < nused; person++)
+143c143
+<             for (person=0; person<nused; person++)
+---
+> 			for (int person = 0; person < nused; person++)
+145,146c145,148
+<             if (temp >0) temp = temp2/temp;
+<             else temp = 1.0;  /* rare case of a constant covariate */
+---
+> 			if (temp > 0)
+> 				temp = temp2 / temp;
+> 			else
+> 				temp = 1.0; /* rare case of a constant covariate */
+148c150
+<             for (person=0; person<nused; person++) {
+---
+> 			for (int person = 0; person < nused; person++) {
+156c158
+<             for (person=0; person<nused; person++) {
+---
+> 			for (int person = 0; person < nused; person++) {
+164c166,170
+<         for (i=0; i<nvar; i++) beta[i] /= scale[i]; /* rescale initial betas */
+---
+> 		for (int i = 0; i < nvar; i++)
+> 			beta[i] /= scale[i]; /* rescale initial betas */
+> 	} else {
+> 		for (int i = 0; i < nvar; i++)
+> 			scale[i] = 1.0;
+166d171
+<     else {for (i=0; i<nvar; i++) scale[i] = 1.0;}
+180c185,186
+<     for (i=0; i<nvar; i++) maxbeta[i] = 200/maxbeta[i];
+---
+> 	for (int i = 0; i < nvar; i++)
+> 		maxbeta[i] = 200 / maxbeta[i];
+183c189,190
+<     for (i=0; i<nused; i++) ndeath += event[i];
+---
+> 	for (int i = 0; i < nused; i++)
+> 		ndeath += event[i];
+186c193
+<     for (i=0; i<nvar; i++) {
+---
+> 	for (int i = 0; i < nvar; i++) {
+189c196
+<         for (j=0; j<nvar; j++) {
+---
+> 		for (int j = 0; j < nvar; j++) {
+195c202
+<     for (person=0; person<nused; person++) {
+---
+> 	for (int person = 0; person < nused; person++) {
+197c204
+<         for (i=0; i<nvar; i++)
+---
+> 		for (int i = 0; i < nvar; i++)
+223c230
+<     for (person=0; person<nused;) {
+---
+> 	for (int person = 0; person < nused;) {
+230c237
+<             for (i=0; i<nvar; i++) {
+---
+> 			for (int i = 0; i < nvar; i++) {
+232c239
+<                 for (j=0; j<=i; j++)
+---
+> 				for (int j = 0; j <= i; j++)
+237,238c244
+<         }
+<         else {
+---
+> 		} else {
+245c251,252
+<                 if (start[p] < time) break;
+---
+> 				if (start[p] < time)
+> 					break;
+250c257
+<                 for (i=0; i<nvar; i++) {
+---
+> 				for (int i = 0; i < nvar; i++) {
+252c259
+<                     for (j=0; j<=i; j++)
+---
+> 					for (int j = 0; j <= i; j++)
+264c271
+<             for (i=0; i<nvar; i++) {
+---
+> 			for (int i = 0; i < nvar; i++) {
+266c273
+<                 for (j=0; j<nvar; j++) {
+---
+> 				for (int j = 0; j < nvar; j++) {
+273c280,281
+<                 if (stop[p] < time) break;
+---
+> 				if (stop[p] < time)
+> 					break;
+279c287
+<                 for (i=0; i<nvar; i++) {
+---
+> 				for (int i = 0; i < nvar; i++) {
+281c289
+<                     for (j=0; j<=i; j++)
+---
+> 					for (int j = 0; j <= i; j++)
+288c296
+<                     for (i=0; i<nvar; i++) {
+---
+> 					for (int i = 0; i < nvar; i++) {
+290c298
+<                         for (j=0; j<=i; j++)
+---
+> 						for (int j = 0; j <= i; j++)
+306c314,315
+<                 for (i=0; i<nused; i++) eta[i] -= meaneta;
+---
+> 				for (int i = 0; i < nused; i++)
+> 					eta[i] -= meaneta;
+309c318
+<                 for (i=0; i<nvar; i++) {
+---
+> 				for (int i = 0; i < nvar; i++) {
+312c321
+<                     for (j=0; j<nvar; j++) {
+---
+> 					for (int j = 0; j < nvar; j++) {
+333c342
+<                     for (i=0; i<nvar; i++) {
+---
+> 					for (int i = 0; i < nvar; i++) {
+336,339c345,354
+<                         for (j=0; j<=i; j++)
+<                             imat[j][i] += meanwt* (
+<                                         (cmat[i][j] - temp*cmat2[i][j])/d2-
+<                                            temp2*(a[j]-temp*a2[j])/d2);
+---
+> 						for (int j = 0; j <= i; j++)
+> 							imat[j][i] +=
+> 									meanwt
+> 											* ((cmat[i][j] - temp * cmat2[i][j])
+> 													/ d2
+> 													- temp2
+> 															* (a[j]
+> 																	- temp
+> 																			* a2[j])
+> 															/ d2);
+351c366
+<             for (i=0; i<nvar; i++) {
+---
+> 			for (int i = 0; i < nvar; i++) {
+353c368
+<                 for (j=0; j<nvar; j++) {
+---
+> 				for (int j = 0; j < nvar; j++) {
+363c378
+<     for (i=0; i<nvar; i++) /*use 'a' as a temp to save u0, for the score test*/
+---
+> 	for (int i = 0; i < nvar; i++) /*use 'a' as a temp to save u0, for the score test*/
+368c383
+<     for (i=0; i<nvar; i++)
+---
+> 	for (int i = 0; i < nvar; i++)
+375c390
+<         for (i=0; i<nvar; i++) {
+---
+> 		for (int i = 0; i < nvar; i++) {
+379c394
+<             for (j=0; j<i; j++) {
+---
+> 			for (int j = 0; j < i; j++) {
+386,387c401
+<     }
+<     else {  
+---
+> 	} else {
+392c406
+<         for (i=0; i<nvar; i++) {
+---
+> 		for (int i = 0; i < nvar; i++) {
+451,452c465
+<             }
+<             else {
+---
+> 			} else {
+459c472,473
+<                     if (start[p] < time) break;
+---
+> 					if (start[p] < time)
+> 						break;
+487c501,502
+<                     if (stop[p] < time) break;
+---
+> 					if (stop[p] < time)
+> 						break;
+520c535,536
+<                     for (i=0; i<nused; i++) eta[i] -= meaneta;
+---
+> 					for (i = 0; i < nused; i++)
+> 						eta[i] -= meaneta;
+551,553c567,571
+<                                 imat[j][i] += meanwt* (
+<                                             (cmat[i][j] - temp*cmat2[i][j])/d2-
+<                                                temp2*(a[j]-temp*a2[j])/d2);
+---
+> 								imat[j][i] += meanwt
+> 										* ((cmat[i][j] - temp * cmat2[i][j])
+> 												/ d2
+> 												- temp2 * (a[j] - temp * a2[j])
+> 														/ d2);
+596,597c614
+<             }
+<             else {
+---
+> 			} else {
+605,606c622,625
+<                     if (beta[i]> maxbeta[i]) beta[i] = maxbeta[i];
+<                     else if (beta[i] < -maxbeta[i]) beta[i] = -maxbeta[i];
+---
+> 					if (beta[i] > maxbeta[i])
+> 						beta[i] = maxbeta[i];
+> 					else if (beta[i] < -maxbeta[i])
+> 						beta[i] = -maxbeta[i];
+614c633
+<     for (i=0; i<nvar; i++) {
+---
+> 	for (int i = 0; i < nvar; i++) {
+618c637
+<         for (j=0; j<i; j++) {
+---
+> 		for (int j = 0; j < i; j++) {
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/agfit5.c Recommended/survival/src/agfit5.c
+93,101c93,97
+< void agfit5a(Sint *nusedx, Sint *nvarx, double *yy, 
+< 	       double *covar2, double *offset2,
+< 	       double *weights2, 
+< 	       Sint   *strata,  Sint   *sort,
+< 	       double *means, double *beta, double *u, 
+< 	       double *loglik, 
+< 	       Sint *methodx, Sint *ptype2, Sint *pdiag2,
+< 	       Sint *nfrail,  Sint *frail2,
+<                void *fexpr1, void *fexpr2, void *rho) {
+---
+> void agfit5a(Sint *nusedx, Sint *nvarx, double *yy, double *covar2,
+> 		double *offset2, double *weights2, Sint *strata, Sint *sort,
+> 		double *means, double *beta, double *u, double *loglik, Sint *methodx,
+> 		Sint *ptype2, Sint *pdiag2, Sint *nfrail, Sint *frail2, void *fexpr1,
+> 		void *fexpr2, void *rho) {
+103c99
+<     int i,j,k, person;
+---
+> 	int i, j, k;
+148c144
+<     for (i=0; i<nused; i++) {
+---
+> 	for (int i = 0; i < nused; i++) {
+162,163c158,165
+<     if (nf > nvar) i=nf; else i=nvar;
+<     if (nf > nvar*nvar) j=nf; else j=nvar*nvar;
+---
+> 	if (nf > nvar)
+> 		i = nf;
+> 	else
+> 		i = nvar;
+> 	if (nf > nvar * nvar)
+> 		j = nf;
+> 	else
+> 		j = nvar * nvar;
+167,168c169,172
+<     if (ptype>1)  zflag = Calloc(nvar, Sint);
+<     else          zflag = Calloc(2, Sint);
+---
+> 	if (ptype > 1)
+> 		zflag = Calloc(nvar, Sint);
+> 	else
+> 		zflag = Calloc(2, Sint);
+172c176,177
+< 	for (i=0; i<nused; i++) frail[i] = frail2[i];
+---
+> 		for (int i = 0; i < nused; i++)
+> 			frail[i] = frail2[i];
+179c184
+<     for (i=0; i<nvar; i++) {
+---
+> 	for (int i = 0; i < nvar; i++) {
+181c186,187
+< 	for (person=0; person<nused; person++) temp += covar[i][person];
+---
+> 		for (int person = 0; person < nused; person++)
+> 			temp += covar[i][person];
+184c190,191
+< 	for (person=0; person<nused; person++) covar[i][person] -=temp;
+---
+> 		for (int person = 0; person < nused; person++)
+> 			covar[i][person] -= temp;
+193c200
+<     for (person=0; person<nused; person++) {
+---
+> 	for (int person = 0; person < nused; person++) {
+195c202
+<         for (i=0; i<nvar; i++)
+---
+> 		for (int i = 0; i < nvar; i++)
+219c226
+<     for (person=0; person<nused;) {
+---
+> 	for (int person = 0; person < nused;) {
+225,226c232
+< 	    }
+< 	else {
+---
+> 		} else {
+233c239,240
+< 		if (start[p] < time) break;
+---
+> 				if (start[p] < time)
+> 					break;
+247c254,255
+< 		if (stop[p] < time) break;
+---
+> 				if (stop[p] < time)
+> 					break;
+298,305c306,310
+< void agfit5b(Sint *maxiter, Sint *nusedx, Sint *nvarx, 
+< 	       Sint *strata, double *beta, double *u,
+< 	       double *imat2,  double *jmat2, double *loglik, 
+< 	       Sint *flag,  double *eps, double *tolerch, Sint *methodx, 
+< 	       Sint *nfrail, double *fbeta, double *fdiag,
+<                void *fexpr1, void *fexpr2, void *rho)
+< {
+<     int i,j,k, person;
+---
+> void agfit5b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
+> 		double *beta, double *u, double *imat2, double *jmat2, double *loglik,
+> 		Sint *flag, double *eps, double *tolerch, Sint *methodx, Sint *nfrail,
+> 		double *fbeta, double *fdiag, void *fexpr1, void *fexpr2, void *rho) {
+> 	int i, j, k;
+307c312
+<     int     iter;
+---
+> 
+331,332c336
+<         }
+<     else {
+---
+> 	} else {
+337,338c341,344
+<     for (i=0; i<nf; i++) oldbeta[i] = fbeta[i];
+<     for (i=0; i<nvar; i++) oldbeta[i+nf] = beta[i];
+---
+> 	for (int i = 0; i < nf; i++)
+> 		oldbeta[i] = fbeta[i];
+> 	for (int i = 0; i < nvar; i++)
+> 		oldbeta[i + nf] = beta[i];
+341c347
+<     for (iter=0; iter<=*maxiter; iter++) {
+---
+> 	for (int iter = 0; iter <= *maxiter; iter++) {
+343,344c349,351
+< 	for (i=0; i<nf; i++) fdiag[i] =0;
+< 	for (i=0; i<nvar2; i++) {
+---
+> 		for (int i = 0; i < nf; i++)
+> 			fdiag[i] = 0;
+> 		for (int i = 0; i < nvar2; i++) {
+346c353,354
+< 	    for (j=0; j<nvar; j++) jmat[j][i] =0 ;
+---
+> 			for (int j = 0; j < nvar; j++)
+> 				jmat[j][i] = 0;
+349c357
+<         for (person=0; person<nused; person++) {
+---
+> 		for (int person = 0; person < nused; person++) {
+353,355c361,363
+< 	        }
+< 	    else zbeta = offset[person];
+< 	    for (i=0; i<nvar; i++)
+---
+> 			} else
+> 				zbeta = offset[person];
+> 			for (int i = 0; i < nvar; i++)
+386c394
+< 		for (i=0; i<nvar; i++)
+---
+> 				for (int i=0; i<nvar; i++)
+388c396
+< 		for (i=0; i<nf; i++)
+---
+> 				for (int i=0; i<nf; i++)
+398c406
+< 	for (i=0; i<nvar2; i++) {
+---
+> 		for (int i = 0; i < nvar2; i++) {
+400c408
+< 	    for (j=0; j<nvar; j++) {
+---
+> 			for (int j = 0; j < nvar; j++) {
+405c413
+< 	for (person=0; person<nused; ) {
+---
+> 		for (int person = 0; person < nused;) {
+407,408c415,418
+< 	    if (nf>0)  fgrp = frail[p] -1;
+< 	    else       fgrp = -1;
+---
+> 			if (nf > 0)
+> 				fgrp = frail[p] - 1;
+> 			else
+> 				fgrp = -1;
+412,413c422,424
+< 		if (fgrp >=0) a[fgrp] += risk;
+< 		for (i=0; i<nvar; i++) {
+---
+> 				if (fgrp >= 0)
+> 					a[fgrp] += risk;
+> 				for (int i = 0; i < nvar; i++) {
+415,416c426,428
+< 		    if (fgrp >=0) cmat[i][fgrp] += risk * covar[i][p];
+< 		    for (j=0; j<=i; j++)
+---
+> 					if (fgrp >= 0)
+> 						cmat[i][fgrp] += risk * covar[i][p];
+> 					for (int j = 0; j <= i; j++)
+420,421c432
+< 		}
+< 	    else {
+---
+> 			} else {
+428c439,440
+< 		    if (start[p] < time) break;
+---
+> 					if (start[p] < time)
+> 						break;
+431,434c443,449
+< 		    if (nf >0) fgrp = frail[p] - 1;
+< 		    else       fgrp = -1;
+< 		    if (fgrp >=0) a[fgrp] -= risk;
+< 		    for (i=0; i<nvar; i++) {
+---
+> 					if (nf > 0)
+> 						fgrp = frail[p] - 1;
+> 					else
+> 						fgrp = -1;
+> 					if (fgrp >= 0)
+> 						a[fgrp] -= risk;
+> 					for (int i = 0; i < nvar; i++) {
+436,437c451,453
+< 			if (fgrp >=0) cmat[i][fgrp] -= risk* covar[i][p];
+< 			for (j=0; j<=i; j++)
+---
+> 						if (fgrp >= 0)
+> 							cmat[i][fgrp] -= risk * covar[i][p];
+> 						for (int j = 0; j <= i; j++)
+446c462
+< 		for (i=0; i<nvar2; i++) {
+---
+> 				for (int i = 0; i < nvar2; i++) {
+448c464
+< 		    for (j=0; j<nvar; j++) {
+---
+> 					for (int j = 0; j < nvar; j++) {
+455c471,472
+< 		    if (stop[p] < time) break;
+---
+> 					if (stop[p] < time)
+> 						break;
+460,463c477,481
+< 			if (fgrp>=0) a[fgrp] += risk;
+< 			}
+< 		    else fgrp = -1;
+< 		    for (i=0; i<nvar; i++) {
+---
+> 						if (fgrp >= 0)
+> 							a[fgrp] += risk;
+> 					} else
+> 						fgrp = -1;
+> 					for (int i = 0; i < nvar; i++) {
+465,466c483,485
+< 			if (fgrp>=0) cmat[i][fgrp] += risk*covar[i][p];
+< 			for (j=0; j<=i; j++)
+---
+> 						if (fgrp >= 0)
+> 							cmat[i][fgrp] += risk * covar[i][p];
+> 						for (int j = 0; j <= i; j++)
+477c496
+< 			for (i=0; i<nvar; i++) {
+---
+> 						for (int i = 0; i < nvar; i++) {
+480,482c499,503
+< 			    if (fgrp >=0) cmat2[i][fgrp] += risk*covar[i][p];
+< 			    for (j=0; j<=i; j++)
+< 				cmat2[i][j+nf] += risk*covar[i][p]*covar[j][p];
+---
+> 							if (fgrp >= 0)
+> 								cmat2[i][fgrp] += risk * covar[i][p];
+> 							for (int j = 0; j <= i; j++)
+> 								cmat2[i][j + nf] += risk * covar[i][p]
+> 										* covar[j][p];
+498c519
+< 			for (i=0; i<nvar2; i++) {  /* by row of full matrix */
+---
+> 						for (int i = 0; i < nvar2; i++) { /* by row of full matrix */
+502c523,524
+< 			    if (i<nf) fdiag[i] += temp2 * (1-temp2);
+---
+> 							if (i < nf)
+> 								fdiag[i] += temp2 * (1 - temp2);
+505,508c527,531
+< 				for (j=0; j<=i; j++) 
+< 				    jmat[ii][j] +=  meanwt*(
+< 					(cmat[ii][j] - temp*cmat2[ii][j]) /d2 -
+< 					temp2*tmean[j]);
+---
+> 								for (int j = 0; j <= i; j++)
+> 									jmat[ii][j] += meanwt
+> 											* ((cmat[ii][j]
+> 													- temp * cmat2[ii][j]) / d2
+> 													- temp2 * tmean[j]);
+519c542
+< 		for (i=0; i<nvar2; i++) {
+---
+> 				for (int i = 0; i < nvar2; i++) {
+521c544
+< 		    for (j=0; j<nvar; j++) {
+---
+> 					for (int j = 0; j < nvar; j++) {
+535c558
+< 		for (i=0; i<nf; i++) {
+---
+> 				for (int i = 0; i < nf; i++) {
+538c561,562
+< 		    for (j=0; j<nvar; j++) jmat[j][i]=0;
+---
+> 					for (int j = 0; j < nvar; j++)
+> 						jmat[j][i] = 0;
+540,542c564,565
+< 		}
+< 	    else {
+< 		for (i=0; i<nf; i++) {
+---
+> 			} else {
+> 				for (int i = 0; i < nf; i++) {
+552c575,576
+< 	    cox_callback(2, beta, upen, ipen, &logpen, zflag, nvar, fexpr2, rho);
+---
+> 			cox_callback(2, beta, upen, ipen, &logpen, zflag, nvar, fexpr2,
+> 					rho);
+555c579
+< 		for (i=0; i<nvar; i++) {
+---
+> 				for (int i = 0; i < nvar; i++) {
+559,560c583
+< 		}
+< 	    else {
+---
+> 			} else {
+562c585
+< 		for (i=0; i<nvar; i++) {
+---
+> 				for (int i = 0; i < nvar; i++) {
+564c587,588
+< 		    for (j=nf; j<nvar2; j++) jmat[i][j] += ipen[k++];
+---
+> 					for (int j = nf; j < nvar2; j++)
+> 						jmat[i][j] += ipen[k++];
+567c591
+< 	    for (i=0; i<nvar; i++) {
+---
+> 			for (int i = 0; i < nvar; i++) {
+570c594,595
+< 		    for (j=0; j<i; j++) jmat[i][j+nf]=0;
+---
+> 					for (int j = 0; j < i; j++)
+> 						jmat[i][j + nf] = 0;
+583c608,609
+< 		for (j=0; j<nvar2; j++)  imat[i][j] = jmat[i][j];
+---
+> 				for (j = 0; j < nvar2; j++)
+> 					imat[i][j] = jmat[i][j];
+586c612
+< 	    for (i=nf; i<nvar2; i++) {       /*nicer output for S user */
+---
+> 			for (int i = nf; i < nvar2; i++) { /*nicer output for S user */
+590c616
+< 		for (j=i+1; j<nvar2; j++) {
+---
+> 				for (int j = i + 1; j < nvar2; j++) {
+600c626,627
+< 	if (iter==*maxiter) break;  /*skip the step halving and etc */
+---
+> 		if (iter == *maxiter)
+> 			break; /*skip the step halving and etc */
+604c631
+< 	    for (i=0; i<nvar; i++)
+---
+> 			for (int i = 0; i < nvar; i++)
+606c633
+< 	    for (i=0; i<nf; i++)
+---
+> 			for (int i = 0; i < nf; i++)
+608,609c635
+< 	    }
+< 	else {
+---
+> 		} else {
+615c641
+< 	    for (i=0; i<nvar; i++) {
+---
+> 			for (int i = 0; i < nvar; i++) {
+619c645
+< 	    for (i=0; i<nf; i++) {
+---
+> 			for (int i = 0; i < nf; i++) {
+627,628c653,654
+<     for (i=0; i<nvar; i++) 
+< 	for (j=0; j<nvar2; j++) {
+---
+> 	for (int i = 0; i < nvar; i++)
+> 		for (int j = 0; j < nvar2; j++) {
+632c658
+<     for (i=nf; i<nvar2; i++) {       /*nicer output for S user */
+---
+> 	for (int i = nf; i < nvar2; i++) { /*nicer output for S user */
+636c662
+<   	for (j=i+1; j<nvar2; j++) {
+---
+> 		for (int j = i + 1; j < nvar2; j++) {
+645,646c671
+< static double **cmatrix(double *data, int ncol, int nrow)
+<     {
+---
+> static double **cmatrix(double *data, int ncol, int nrow) {
+658,659c683
+<         }
+<     else {
+---
+> 	} else {
+662c686,687
+< 	    for (j=0; j<ncol; j++) *temp++ = *data++;
+---
+> 			for (j = 0; j < ncol; j++)
+> 				*temp++ = *data++;
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/agmart.c Recommended/survival/src/agmart.c
+28,32c28,30
+< void agmart(Sint   *n,     Sint   *method,  double *start,   double *stop, 
+< 	    Sint   *event, double *score,   double *wt,      Sint   *strata, 
+< 	    double *resid)
+<     {
+<     int i,k;
+---
+> void agmart(Sint *n, Sint *method, double *start, double *stop, Sint *event,
+> 		double *score, double *wt, Sint *strata, double *resid) {
+> 
+38c36
+<     int person;
+---
+> 
+43,45c41,45
+<     for (i=0; i<nused; i++)  resid[i]=event[i];
+<     for (person=0; person<nused;) {
+< 	if (event[person]==0) person++;
+---
+> 	for (int i = 0; i < nused; i++)
+> 		resid[i] = event[i];
+> 	for (int person = 0; person < nused;) {
+> 		if (event[person] == 0)
+> 			person++;
+52c52
+< 	    for (k=person; k<nused; k++) {
+---
+> 			for (int k = person; k < nused; k++) {
+61c61,62
+< 		if (strata[k]==1) break;
+---
+> 				if (strata[k] == 1)
+> 					break;
+70c71
+< 	    for (k=0; k<deaths; k++) {
+---
+> 			for (int k = 0; k < deaths; k++) {
+75c76
+< 	    for (k=person; k<nused; k++) {
+---
+> 			for (int k = person; k < nused; k++) {
+79c80,81
+< 		    else    resid[k] -= score[k]*hazard;
+---
+> 					else
+> 						resid[k] -= score[k] * hazard;
+81,82c83,86
+< 		if (stop[k]==time) person++;
+< 		if (strata[k]==1) break;
+---
+> 				if (stop[k] == time)
+> 					person++;
+> 				if (strata[k] == 1)
+> 					break;
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/agmart2.c Recommended/survival/src/agmart2.c
+28,32c28,30
+< void agmart2(Sint   *n,     Sint   *method,  double *start,   double *stop, 
+< 	    Sint   *event,  Sint   *nstrat,  Sint *strata,    Sint *sort1,
+< 	    Sint   *sort2,  double *score,   double *wt,      
+< 	    double *resid,  double *haz)
+<     {
+---
+> void agmart2(Sint *n, Sint *method, double *start, double *stop, Sint *event,
+> 		Sint *nstrat, Sint *strata, Sint *sort1, Sint *sort2, double *score,
+> 		double *wt, double *resid, double *haz) {
+40d37
+<     int person;
+55c52
+<     for (person=0; person<nused;) {
+---
+> 	for (int person = 0; person < nused;) {
+60,61c57
+< 	    }
+< 	else {
+---
+> 		} else {
+68c64,65
+< 		if (stop[p] < time) break;
+---
+> 				if (stop[p] < time)
+> 					break;
+83c80,81
+< 		if (start[p] < time) break;
+---
+> 				if (start[p] < time)
+> 					break;
+109c107,108
+< 		if (stop[p] > time) break;
+---
+> 				if (stop[p] > time)
+> 					break;
+125c124
+< 	    for (i=strata_start; i<person; i++) {
+---
+> 			for (int i = strata_start; i < person; i++) {
+127,129c126,130
+< 		for (; k< ndeath && dtimes[k] >= stop[p]; k++);  
+< 		for (j=k; j<ndeath; j++)
+< 		    if (start[p] < dtimes[j]) resid[p] -= score[p]*haz[j];
+---
+> 				for (; k < ndeath && dtimes[k] >= stop[p]; k++)
+> 					;
+> 				for (int j = k; j < ndeath; j++)
+> 					if (start[p] < dtimes[j])
+> 						resid[p] -= score[p] * haz[j];
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/agmart3.c Recommended/survival/src/agmart3.c
+21,22c21,22
+< SEXP agmart3(SEXP surv2, SEXP score2, SEXP weight2, SEXP strata2,
+< 	     SEXP sortx, SEXP method2) {
+---
+> SEXP agmart3(SEXP surv2, SEXP score2, SEXP weight2, SEXP strata2, SEXP sortx,
+> 		SEXP method2) {
+30c30
+<     int n, person;
+---
+> 	int n;
+80c80
+<     for (person=0; person <n; ) {
+---
+> 	for (int person = 0; person < n;) {
+94c94,95
+< 		if (start[p] < time) break;
+---
+> 				if (start[p] < time)
+> 					break;
+107c108,109
+< 		if (stop[p]  < time) break;  /* only tied times */ 
+---
+> 				if (stop[p] < time)
+> 					break; /* only tied times */
+124,125c126
+< 	    }
+< 	    else { /* Efron */
+---
+> 			} else { /* Efron */
+129c130
+< 		for (k=0; k <deaths; k++) {
+---
+> 				for (int k = 0; k < deaths; k++) {
+144,145c145,148
+< 		if (event[p] ==1) resid[p] = 1 + temp*score[p];
+< 		else resid[p] = cumhaz * score[p];
+---
+> 				if (event[p] == 1)
+> 					resid[p] = 1 + temp * score[p];
+> 				else
+> 					resid[p] = cumhaz * score[p];
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/agscore.c Recommended/survival/src/agscore.c
+26,30c26,28
+< void agscore(Sint   *nx,       Sint   *nvarx,      double *y,
+< 	     double *covar2,   Sint   *strata,     double *score,
+< 	     double *weights,  Sint   *method,     double *resid2, double *a)
+<     {
+<     int i,k;
+---
+> void agscore(Sint *nx, Sint *nvarx, double *y, double *covar2, Sint *strata,
+> 		double *score, double *weights, Sint *method, double *resid2, double *a) {
+> 
+32c30
+<     int person;
+---
+> 
+39c37
+<     int dd;
+---
+> 
+41,42c39
+<     double **covar,
+< 	   **resid;
+---
+> 	double **covar, **resid;
+62,63c59,61
+<     for (person=0; person<n; ) {
+< 	if (event[person]==0) person++;
+---
+> 	for (int person = 0; person < n;) {
+> 		if (event[person] == 0)
+> 			person++;
+72c70
+< 	    for (i=0; i<nvar; i++) {
+---
+> 			for (int i = 0; i < nvar; i++) {
+77c75
+< 	    for (k=person; k<n; k++) {
+---
+> 			for (int k = person; k < n; k++) {
+81c79
+< 		    for (i=0; i<nvar; i++) {
+---
+> 					for (int i = 0; i < nvar; i++) {
+88c86
+< 			for (i=0; i<nvar; i++)
+---
+> 						for (int i = 0; i < nvar; i++)
+92c90,91
+< 		if (strata[k]==1) break;
+---
+> 				if (strata[k] == 1)
+> 					break;
+99,100c98,100
+< 		for (i=0; i<nvar; i++) mean[i] = a[i]/denom;
+< 		for (k=person; k<n; k++) {
+---
+> 				for (int i = 0; i < nvar; i++)
+> 					mean[i] = a[i] / denom;
+> 				for (int k = person; k < n; k++) {
+103,104c103,105
+< 			for (i=0; i<nvar; i++)
+< 			    resid[i][k] -= (covar[i][k] -mean[i])*risk*hazard;
+---
+> 						for (int i = 0; i < nvar; i++)
+> 							resid[i][k] -= (covar[i][k] - mean[i]) * risk
+> 									* hazard;
+108c109
+< 				for (i=0; i<nvar; i++)
+---
+> 								for (int i = 0; i < nvar; i++)
+112c113,114
+< 		    if (strata[k]==1) break;
+---
+> 					if (strata[k] == 1)
+> 						break;
+128c130
+< 		for (i=0; i<nvar; i++) {
+---
+> 				for (int i = 0; i < nvar; i++) {
+134c136
+< 		for (dd=0; dd<deaths; dd++){
+---
+> 				for (int dd = 0; dd < deaths; dd++) {
+140c142
+< 		    for (i=0; i<nvar; i++) {
+---
+> 					for (int i = 0; i < nvar; i++) {
+147c149
+< 		for (k=person; k<n; k++) {
+---
+> 				for (int k = person; k < n; k++) {
+151c153
+< 			    for (i=0; i<nvar; i++) {
+---
+> 							for (int i = 0; i < nvar; i++) {
+156,159c158,161
+< 			    }
+< 			else {
+< 			    for (i=0; i<nvar; i++)
+< 				resid[i][k] -= risk*(covar[i][k]*temp1 - mh1[i]);
+---
+> 						} else {
+> 							for (int i = 0; i < nvar; i++)
+> 								resid[i][k] -= risk
+> 										* (covar[i][k] * temp1 - mh1[i]);
+162c164,165
+< 		    if (strata[k]==1) break;
+---
+> 					if (strata[k] == 1)
+> 						break;
+165c168,169
+< 		    if (strata[person]==1) break;
+---
+> 					if (strata[person] == 1)
+> 						break;
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/agsurv3.c Recommended/survival/src/agsurv3.c
+49,56c49
+< static double   *y,
+< 		*nscore,
+< 		**newx,
+< 		**surv,
+< 		**vsurv,
+< 		*isurv,
+< 		**used,
+< 		**tvar;
+---
+> static double *y, *nscore, **newx, **surv, **vsurv, *isurv, **used, **tvar;
+59,65c52,53
+< 		**imat,
+< 		*mean;
+< static int      death,
+< 		ncurve,
+< 		se,
+< 		nvar,
+< 		n;
+---
+> **imat, *mean;
+> static int death, ncurve, se, nvar, n;
+68,74c56,60
+< void agsurv3(Sint   *sn,    Sint   *snvar,    Sint   *sncurve, 
+< 	     Sint   *snpt,  Sint   *sse,      double *score, 
+< 	     double *sy,    Sint   *grpx,     double *r,        double *coef, 
+< 	     double *var,   double *xmean,    Sint   *scn, 
+< 	     double *cy,    double *cx,       double *ssurv,
+< 	     double *varh,  double *sused,    Sint   *smethod)
+< {
+---
+> void agsurv3(Sint *sn, Sint *snvar, Sint *sncurve, Sint *snpt, Sint *sse,
+> 		double *score, double *sy, Sint *grpx, double *r, double *coef,
+> 		double *var, double *xmean, Sint *scn, double *cy, double *cx,
+> 		double *ssurv, double *varh, double *sused, Sint *smethod) {
+> 
+76d61
+<     int i,j,k,l;
+79,81c64
+<     int npt,
+< 	nvar2,
+< 	method;
+---
+> 	int npt, nvar2, method;
+84c67
+<     int person;
+---
+> 
+88,98c71,74
+<     double weight=0,
+< 	   e_denom,
+< 	   denom;
+<     double inc,
+< 	   sumt,
+< 	   km =0;
+<     double temp,
+< 	   downwt,
+< 	   d2;
+<     double haz,
+< 	   varhaz;
+---
+> 	double weight = 0, e_denom, denom;
+> 	double inc, sumt, km = 0;
+> 	double temp, downwt, d2;
+> 	double haz, varhaz;
+101,103c77,80
+< 
+<     n = *sn;  nvar = *snvar;
+<     cn = *scn; npt = *snpt;
+---
+> 	n = *sn;
+> 	nvar = *snvar;
+> 	cn = *scn;
+> 	npt = *snpt;
+120c97,98
+<     for (i=0; i<need; i++) nscore[i] =0.0;  /* R doesn't zero the memory */
+---
+> 	for (int i = 0; i < need; i++)
+> 		nscore[i] = 0.0; /* R doesn't zero the memory */
+123c101,102
+<     for (i=0; i<n; i++) isurv[i]=1;
+---
+> 	for (int i = 0; i < n; i++)
+> 		isurv[i] = 1;
+130c109
+< 	for (i=1; i<n; i++)
+---
+> 		for (int i = 1; i < n; i++)
+137c116,117
+<     if (se==1) oldx = dmatrix(cx, cn, nvar);
+---
+> 	if (se == 1)
+> 		oldx = dmatrix(cx, cn, nvar);
+144,145c124,126
+<     for (i=0; i<ncurve; i++)
+< 	for (j=0; j<npt; j++)  surv[i][j] =1;
+---
+> 	for (int i = 0; i < ncurve; i++)
+> 		for (int j = 0; j < npt; j++)
+> 			surv[i][j] = 1;
+150c131
+<     for (i=0; i<n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+152c133
+< 	for (j=0; j<nvar; j++) {
+---
+> 		for (int j = 0; j < nvar; j++) {
+164,165c145,147
+<     for (person=0; person<cn;) {
+< 	if (event[person]==0) person++;
+---
+> 	for (int person = 0; person < cn;) {
+> 		if (event[person] == 0)
+> 			person++;
+172c154
+< 	    for(i=0; i<nvar2; i++){
+---
+> 			for (int i = 0; i < nvar2; i++) {
+179c161
+< 	    for (k=person; k<cn; k++) {
+---
+> 			for (int k = person; k < cn; k++) {
+184c166
+< 		    for (i=0; i<nvar2; i++) {
+---
+> 					for (int i = 0; i < nvar2; i++) {
+192c174
+< 		    for (i=0; i<nvar2; i++) {
+---
+> 					for (int i = 0; i < nvar2; i++) {
+201c183,185
+< 	    if (method <3) for (i=0; i<nvar2; i++) mean[i] = a[i]/denom;
+---
+> 			if (method < 3)
+> 				for (int i = 0; i < nvar2; i++)
+> 					mean[i] = a[i] / denom;
+203c187
+< 		for (psave=person; psave<cn && stop[psave]==ttime; psave++) 
+---
+> 				for (psave = person; psave < cn && stop[psave] == ttime; psave++) {
+207c191,192
+< 		if (deaths == nrisk) km=0;
+---
+> 					if (deaths == nrisk)
+> 						km = 0;
+210,211c195
+< 		    }
+< 		else {           /*find the zero of an equation */
+---
+> 					} else { /*find the zero of an equation */
+214c198
+< 		    for (l=0; l<35; l++) { /* bisect it to death */
+---
+> 						for (int l = 0; l < 35; l++) { /* bisect it to death */
+216c200
+< 			for (k=person; k<psave; k++) {
+---
+> 							for (int k = person; k < psave; k++) {
+220,221c204,207
+< 			if (sumt < denom)  km += inc;
+< 			     else          km -= inc;
+---
+> 							if (sumt < denom)
+> 								km += inc;
+> 							else
+> 								km -= inc;
+224a211
+> 				}
+237,241c224,230
+< 		for (; person<cn && stop[person]==ttime; person++);
+< 		}
+< 	    else {
+< 		temp =0;  haz=0; varhaz=0;
+< 		for (k=person; k<cn && stop[k]==ttime; k++) {
+---
+> 				for (; person < cn && stop[person] == ttime; person++)
+> 					;
+> 			} else {
+> 				temp = 0;
+> 				haz = 0;
+> 				varhaz = 0;
+> 				for (int k = person; k < cn && stop[k] == ttime; k++) {
+247c236
+< 			for (i=0; i<nvar2; i++)
+---
+> 						for (int i = 0; i < nvar2; i++)
+261,271c249,252
+< int itime;
+< double haz, var;
+<     {
+<     int i, j, k, l;
+<     int     pstart,
+< 	    ic;
+<     double  temp,
+< 	    totsurv,
+< 	    totvar,
+< 	    wt,
+< 	    nn;
+---
+> 	int itime;double haz, var; {
+> 	int i;
+> 	int pstart, ic;
+> 	double temp, totsurv, totvar, wt, nn;
+277c258
+< 	for (i=0; i<ncurve; i++) {
+---
+> 		for (int i = 0; i < ncurve; i++) {
+279c260,261
+< 	    if (nvar>0) vsurv[i][itime]=0;
+---
+> 			if (nvar > 0)
+> 				vsurv[i][itime] = 0;
+300,301c282
+< 		    }
+< 		else {
+---
+> 				} else {
+311c292
+< 		for (j=pstart; j<=i; j++) {
+---
+> 				for (int j = pstart; j <= i; j++) {
+313,319c294,302
+< 		    for (k=0; k<nvar; k++) {
+< 			temp += (newx[k][i]-mean[k])*(newx[k][j]-mean[k])*
+< 					  imat[k][k];
+< 			for (l=0; l<k; l++)
+< 			    temp += ((newx[k][i]-mean[k])*(newx[l][j]-mean[l]) +
+< 				     (newx[k][j]-mean[k])*(newx[l][i]-mean[l]))*
+< 				     imat[k][l];
+---
+> 					for (int k = 0; k < nvar; k++) {
+> 						temp += (newx[k][i] - mean[k]) * (newx[k][j] - mean[k])
+> 								* imat[k][k];
+> 						for (int l = 0; l < k; l++)
+> 							temp += ((newx[k][i] - mean[k])
+> 									* (newx[l][j] - mean[l])
+> 									+ (newx[k][j] - mean[k])
+> 											* (newx[l][i] - mean[l]))
+> 									* imat[k][l];
+322,325c305,310
+< 		    temp = nscore[i]*nscore[j]* tvar[i][j] *
+< 				 isurv[i] * isurv[j];
+< 		    if (i==j) totvar += temp;
+< 		    else      totvar += temp + temp;
+---
+> 					temp = nscore[i] * nscore[j] * tvar[i][j] * isurv[i]
+> 							* isurv[j];
+> 					if (i == j)
+> 						totvar += temp;
+> 					else
+> 						totvar += temp + temp;
+335,337c320,325
+< 	if (death==0) surv[ic][itime] *= totsurv/wt;
+< 	else          surv[ic][itime] *= exp(totsurv/wt);
+< 	if (se==1) vsurv[ic][itime] = totvar/(nn*nn);
+---
+> 		if (death == 0)
+> 			surv[ic][itime] *= totsurv / wt;
+> 		else
+> 			surv[ic][itime] *= exp(totsurv / wt);
+> 		if (se == 1)
+> 			vsurv[ic][itime] = totvar / (nn * nn);
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/agsurv4.c Recommended/survival/src/agsurv4.c
+5,8c5,7
+< void agsurv4(Sint   *ndeath,   double *risk,    double *wt,
+<              Sint   *sn,        double *denom,   double *km) 
+< {
+<     int i,j,k, l;
+---
+> void agsurv4(Sint *ndeath, double *risk, double *wt, Sint *sn, double *denom,
+> 		double *km) {
+> 	int j;
+14,15c13,15
+<     for (i=0; i<n; i++) {
+<         if (ndeath[i] ==0) km[i] =1;
+---
+> 	for (int i = 0; i < n; i++) {
+> 		if (ndeath[i] == 0)
+> 			km[i] = 1;
+18,19c18
+<             }
+<         else { /* biscection solution */
+---
+> 		} else { /* biscection solution */
+22c21
+<             for (l=0; l<35; l++) { /* bisect it to death */
+---
+> 			for (int l = 0; l < 35; l++) { /* bisect it to death */
+24c23
+<                 for (k=j; k<(j+ndeath[i]); k++) {
+---
+> 				for (int k = j; k < (j + ndeath[i]); k++) {
+27,28c26,29
+<             if (sumt < denom[i])  guess += inc;
+<             else          guess -= inc;
+---
+> 				if (sumt < denom[i])
+> 					guess += inc;
+> 				else
+> 					guess -= inc;
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/agsurv5.c Recommended/survival/src/agsurv5.c
+3,5c3,4
+< void agsurv5(Sint *n2,     Sint *nvar2,  Sint *dd, double *x1,  
+<              double *x2,   double *xsum, double *xsum2, 
+<              double *sum1, double *sum2, double *xbar) {
+---
+> void agsurv5(Sint *n2, Sint *nvar2, Sint *dd, double *x1, double *x2,
+> 		double *xsum, double *xsum2, double *sum1, double *sum2, double *xbar) {
+7c6
+<     int i,j, k, kk;
+---
+> 	int kk;
+14c13
+<     for (i=0; i< n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+20c19
+<             for (k=0; k< nvar; k++) 
+---
+> 			for (int k = 0; k < nvar; k++)
+22,23c21
+<             }
+<         else {
+---
+> 		} else {
+25c23
+<             for (j=0; j<d; j++) {
+---
+> 			for (int j = 0; j < d; j++) {
+29c27
+<                 for (k=0; k< nvar; k++){
+---
+> 				for (int k = 0; k < nvar; k++) {
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/chinv2.c Recommended/survival/src/chinv2.c
+16,17c16
+< void chinv2(double **matrix , int n)
+<      {
+---
+> void chinv2(double **matrix, int n) {
+19d17
+<      register int i,j,k;
+25c23
+<      for (i=0; i<n; i++){
+---
+> 	for (int i = 0; i < n; i++) {
+28c26
+< 	      for (j= (i+1); j<n; j++) {
+---
+> 			for (int j = (i + 1); j < n; j++) {
+30c28
+< 		   for (k=0; k<i; k++)     /*sweep operator */
+---
+> 				for (int k = 0; k < i; k++) /*sweep operator */
+41c39
+<      for (i=0; i<n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+43,47c41,46
+< 		for (j=0; j<i; j++) matrix[j][i]=0;
+< 		for (j=i; j<n; j++) matrix[i][j]=0;
+< 		}
+< 	  else {
+< 	      for (j=(i+1); j<n; j++) {
+---
+> 			for (int j = 0; j < i; j++)
+> 				matrix[j][i] = 0;
+> 			for (int j = i; j < n; j++)
+> 				matrix[i][j] = 0;
+> 		} else {
+> 			for (int j = (i + 1); j < n; j++) {
+49,50c48,50
+< 		   if (j!=i) matrix[i][j] = temp;
+< 		   for (k=i; k<j; k++)
+---
+> 				if (j != i)
+> 					matrix[i][j] = temp;
+> 				for (int k = i; k < j; k++)
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/chinv3.c Recommended/survival/src/chinv3.c
+20,22c20
+< void chinv3(double **matrix , int n, int m, double *fdiag)
+<      {
+<      int i,j,k;
+---
+> void chinv3(double **matrix, int n, int m, double *fdiag) {
+32c30
+<      for (i=0; i<m; i++) {
+---
+> 	for (int i = 0; i < m; i++) {
+35c33
+< 	     for (j=0; j<n2; j++) 
+---
+> 			for (int j = 0; j < n2; j++)
+41c39
+<      for (i=0; i<n2; i++){
+---
+> 	for (int i = 0; i < n2; i++) {
+45c43
+< 	      for (j= (i+1); j<n2; j++) {
+---
+> 			for (int j = (i + 1); j < n2; j++) {
+47c45
+< 		   for (k=0; k<ii; k++)     /*sweep operator */
+---
+> 				for (int k = 0; k < ii; k++) /*sweep operator */
+60,63c58
+< int  n, m;
+< double fdiag[];
+< double **matrix;
+<      {
+---
+> 	int n, m;double fdiag[];double **matrix; {
+65d59
+<      int i,j,k;
+79c73
+<      for (i=0; i<n2; i++) {
+---
+> 	for (int i = 0; i < n2; i++) {
+82,86c76,81
+< 		for (j=0; j<i; j++) matrix[j][ii]=0;
+< 		for (j=ii; j<n; j++) matrix[i][j]=0;
+< 		}
+< 	  else {
+< 	      for (j=(i+1); j<n2; j++) {
+---
+> 			for (int j = 0; j < i; j++)
+> 				matrix[j][ii] = 0;
+> 			for (int j = ii; j < n; j++)
+> 				matrix[i][j] = 0;
+> 		} else {
+> 			for (int j = (i + 1); j < n2; j++) {
+88,89c83,85
+< 		   if (j!=i) matrix[i][j+m] = temp;
+< 		   for (k=i; k<j; k++)
+---
+> 				if (j != i)
+> 					matrix[i][j + m] = temp;
+> 				for (int k = i; k < j; k++)
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/cholesky2.c Recommended/survival/src/cholesky2.c
+23,24c23
+< int cholesky2(double **matrix, int n, double toler)
+<     {
+---
+> int cholesky2(double **matrix, int n, double toler) {
+26d24
+<     int  i,j,k;
+33,35c31,35
+<     for (i=0; i<n; i++) {
+< 	if (matrix[i][i] > eps)  eps = matrix[i][i];
+< 	for (j=(i+1); j<n; j++)  matrix[j][i] = matrix[i][j];
+---
+> 	for (int i = 0; i < n; i++) {
+> 		if (matrix[i][i] > eps)
+> 			eps = matrix[i][i];
+> 		for (int j = (i + 1); j < n; j++)
+> 			matrix[j][i] = matrix[i][j];
+40c40
+<     for (i=0; i<n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+44,46c44,46
+< 	    if (pivot < -8*eps) nonneg= -1;
+< 	    }
+< 	else  {
+---
+> 			if (pivot < -8 * eps)
+> 				nonneg = -1;
+> 		} else {
+48c48
+< 	    for (j=(i+1); j<n; j++) {
+---
+> 			for (int j = (i + 1); j < n; j++) {
+52c52,53
+< 		for (k=(j+1); k<n; k++) matrix[k][j] -= temp*matrix[k][i];
+---
+> 				for (int k = (j + 1); k < n; k++)
+> 					matrix[k][j] -= temp * matrix[k][i];
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/cholesky3.c Recommended/survival/src/cholesky3.c
+31,32c31
+< int cholesky3(double **matrix, int n, int m, double *diag, double toler)
+<     {
+---
+> int cholesky3(double **matrix, int n, int m, double *diag, double toler) {
+34c33
+<     int  i,j,k;
+---
+> 	int j;
+44,45c43,48
+<     for (i=0; i<m; i++) if (diag[i] <eps) eps = diag[i];
+<     for (i=0; i<n2; i++) if (matrix[i][i+m] > eps)  eps = matrix[i][i+m];
+---
+> 	for (int i = 0; i < m; i++)
+> 		if (diag[i] < eps)
+> 			eps = diag[i];
+> 	for (int i = 0; i < n2; i++)
+> 		if (matrix[i][i + m] > eps)
+> 			eps = matrix[i][i + m];
+50c53
+<     for (i=0; i<m; i++) {
+---
+> 	for (int i = 0; i < m; i++) {
+53,56c56,60
+<             for (j=0; j<n2; j++) matrix[j][i] =0;
+<             if (pivot < -8*eps) nonneg= -1;
+<             }
+< 	else {
+---
+> 			for (int j = 0; j < n2; j++)
+> 				matrix[j][i] = 0;
+> 			if (pivot < -8 * eps)
+> 				nonneg = -1;
+> 		} else {
+58c62
+< 	    for (j=0; j<n2; j++) {
+---
+> 			for (int j = 0; j < n2; j++) {
+62c66,67
+< 		for (k=(j+1); k<n2; k++) matrix[k][j+m] -= temp*matrix[k][i];
+---
+> 				for (int k = (j + 1); k < n2; k++)
+> 					matrix[k][j + m] -= temp * matrix[k][i];
+68c73
+<     for (i=0; i<n2; i++) {
+---
+> 	for (int i = 0; i < n2; i++) {
+71,74c76,80
+< 	    for (j=i; j<n2; j++) matrix[j][i+m] =0;  /* zero the column */
+<             if (pivot < -8*eps) nonneg= -1;
+< 	    }
+< 	else  {
+---
+> 			for (j = i; j < n2; j++)
+> 				matrix[j][i + m] = 0; /* zero the column */
+> 			if (pivot < -8 * eps)
+> 				nonneg = -1;
+> 		} else {
+76c82
+< 	    for (j=(i+1); j<n2; j++) {
+---
+> 			for (int j = (i + 1); j < n2; j++) {
+80c86,87
+< 		for (k=(j+1); k<n2; k++) matrix[k][j+m] -= temp*matrix[k][i+m];
+---
+> 				for (int k = (j + 1); k < n2; k++)
+> 					matrix[k][j + m] -= temp * matrix[k][i + m];
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/chsolve2.c Recommended/survival/src/chsolve2.c
+17,19c17
+< void chsolve2(double **matrix, int n, double *y)
+<      {
+<      register int i,j;
+---
+> void chsolve2(double **matrix, int n, double *y) {
+25c23
+<      for (i=0; i<n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+27c25
+< 	  for (j=0; j<i; j++)
+---
+> 		for (int j = 0; j < i; j++)
+34,35c32,34
+<      for (i=(n-1); i>=0; i--) {
+< 	  if (matrix[i][i]==0)  y[i] =0;
+---
+> 	for (int i = (n - 1); i >= 0; i--) {
+> 		if (matrix[i][i] == 0)
+> 			y[i] = 0;
+38c37
+< 	      for (j= i+1; j<n; j++)
+---
+> 			for (int j = i + 1; j < n; j++)
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/chsolve3.c Recommended/survival/src/chsolve3.c
+22,24c22,23
+< void chsolve3(double **matrix, int n, int m, double *diag, double *y)
+<      {
+<      int i,j, n2;
+---
+> void chsolve3(double **matrix, int n, int m, double *diag, double *y) {
+> 	int n2;
+31c30
+<      for (i=0; i<n2; i++) {
+---
+> 	for (int i = 0; i < n2; i++) {
+33,34c32,35
+< 	  for (j=0; j<m; j++) temp -= y[j]   * matrix[i][j];
+< 	  for (j=0; j<i; j++) temp -= y[j+m] * matrix[i][j+m] ;
+---
+> 		for (int j = 0; j < m; j++)
+> 			temp -= y[j] * matrix[i][j];
+> 		for (int j = 0; j < i; j++)
+> 			temp -= y[j + m] * matrix[i][j + m];
+41,42c42,44
+<      for (i=(n2-1); i>=0; i--) {
+< 	  if (matrix[i][i+m]==0)  y[i+m] =0;
+---
+> 	for (int i = (n2 - 1); i >= 0; i--) {
+> 		if (matrix[i][i + m] == 0)
+> 			y[i + m] = 0;
+45c47
+< 	      for (j= i+1; j<n2; j++)
+---
+> 			for (int j = i + 1; j < n2; j++)
+51,52c53,55
+<      for (i=(m-1); i>=0; i--) {
+< 	 if (diag[i] == 0)  y[i] =0;
+---
+> 	for (int i = (m - 1); i >= 0; i--) {
+> 		if (diag[i] == 0)
+> 			y[i] = 0;
+55c58
+< 	     for (j=0; j<n2; j++)
+---
+> 			for (int j = 0; j < n2; j++)
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/concordance1.c Recommended/survival/src/concordance1.c
+29,30c29,32
+<     for (i=0; i< 2*ntree; i++) twt[i] =0.0;
+<     for (i=0; i<5; i++) count[i]=0.0;
+---
+> 	for (i = 0; i < 2 * ntree; i++)
+> 		twt[i] = 0.0;
+> 	for (i = 0; i < 5; i++)
+> 		count[i] = 0.0;
+39c41,42
+<                 for (k=i; k>j; k--) count[3] += wt[j]*wt[k]; /* tied on time */
+---
+> 				for (k = i; k > j; k--)
+> 					count[3] += wt[j] * wt[k]; /* tied on time */
+52c55,56
+<                     else count[0] += wt[j] * (twt[parent] - twt[index]);
+---
+> 					else
+> 						count[0] += wt[j] * (twt[parent] - twt[index]);
+56,57c60,61
+<             }                    
+<         else j = i-1;
+---
+> 		} else
+> 			j = i - 1;
+68c72,73
+<             if (child < ntree) wsum1 += twt[child];
+---
+> 			if (child < ntree)
+> 				wsum1 += twt[child];
+82,83c87,90
+<             vss += wsum1*(newmean+ oldmean - 2*lmean) * (newmean - oldmean);
+<             vss += wsum3*(newmean+ oldmean+ wt[i]- 2*umean) *(oldmean-newmean);
+---
+> 			vss += wsum1 * (newmean + oldmean - 2 * lmean)
+> 					* (newmean - oldmean);
+> 			vss += wsum3 * (newmean + oldmean + wt[i] - 2 * umean)
+> 					* (oldmean - newmean);
+92,93c99,100
+< SEXP concordance2(SEXP y,     SEXP wt2,  SEXP indx2, SEXP ntree2,
+<                   SEXP sortstop, SEXP sortstart) {
+---
+> SEXP concordance2(SEXP y, SEXP wt2, SEXP indx2, SEXP ntree2, SEXP sortstop,
+> 		SEXP sortstart) {
+123,124c130,133
+<     for (i=0; i< 2*ntree; i++) twt[i] =0.0;
+<     for (i=0; i<5; i++) count[i]=0.0;
+---
+> 	for (i = 0; i < 2 * ntree; i++)
+> 		twt[i] = 0.0;
+> 	for (i = 0; i < 5; i++)
+> 		count[i] = 0.0;
+142c151,152
+<                 if (child < ntree) wsum1 += twt[child];
+---
+> 				if (child < ntree)
+> 					wsum1 += twt[child];
+155c165,166
+<                 vss += wsum1*(newmean+ oldmean - 2*lmean) * (newmean-oldmean);
+---
+> 				vss += wsum1 * (newmean + oldmean - 2 * lmean)
+> 						* (newmean - oldmean);
+157c168,169
+<                 vss += wsum3*(newmean+ oldmean -2*umean) * (newmean-oldmean);
+---
+> 				vss += wsum3 * (newmean + oldmean - 2 * umean)
+> 						* (newmean - oldmean);
+162c174,176
+<             for (j=i; j <n && status[sort2[j]]==1 && time2[sort2[j]]==dtime; j++) {
+---
+> 			for (j = i;
+> 					j < n && status[sort2[j]] == 1 && time2[sort2[j]] == dtime;
+> 					j++) {
+166c180,181
+<                 for (k=i; k<j; k++) count[3] += wt[jptr]*wt[sort2[k]]; 
+---
+> 				for (k = i; k < j; k++)
+> 					count[3] += wt[jptr] * wt[sort2[k]];
+169c184,185
+<                 if (child < ntree) count[0] += wt[jptr] * twt[child];
+---
+> 				if (child < ntree)
+> 					count[0] += wt[jptr] * twt[child];
+171c187,188
+<                 if (child < ntree) count[1] += wt[jptr] * twt[child];
+---
+> 				if (child < ntree)
+> 					count[1] += wt[jptr] * twt[child];
+177c194,195
+<                     else count[0] += wt[jptr] * (twt[parent] - twt[index]);
+---
+> 					else
+> 						count[0] += wt[jptr] * (twt[parent] - twt[index]);
+181,182c199,200
+<             }
+<         else j = i+1;
+---
+> 		} else
+> 			j = i + 1;
+194c212,213
+<             if (child < ntree) wsum1 += twt[child];
+---
+> 			if (child < ntree)
+> 				wsum1 += twt[child];
+207,208c226,229
+<             vss += wsum1*(newmean+ oldmean - 2*lmean) * (newmean-oldmean);
+<             vss += wsum3*(newmean+ oldmean +wt[iptr] - 2*umean) * (oldmean-newmean);
+---
+> 			vss += wsum1 * (newmean + oldmean - 2 * lmean)
+> 					* (newmean - oldmean);
+> 			vss += wsum3 * (newmean + oldmean + wt[iptr] - 2 * umean)
+> 					* (oldmean - newmean);
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/cox_Rcallback.c Recommended/survival/src/cox_Rcallback.c
 8c8
 < 
 ---
 > #include "localization.h"
-53c53
+22,27c22,23
+< int which;
+< double *coef, *first, *second;
+< double *penalty;
+< int *flag,p; 
+< SEXP fexpr,rho;
+< {
+---
+> 	int which;double *coef, *first, *second;double *penalty;int *flag, p;SEXP
+> 			fexpr, rho; {
+53c49
 <                 error("coef:invalid type\n");
 ---
->                 error(_("coef: invalid type\n"));
-62c62
+> 		error(_("coef: invalid type\n"));
+62c58
 <                 error("first: invalid type\n");
 ---
->                 error(_("first: invalid type\n"));
-72c72
+> 		error(_("first: invalid type\n"));
+72c68
 <                 error("second: invalid type\n");
 ---
->                 error(_("second: invalid type\n"));
-81c81
+> 		error(_("second: invalid type\n"));
+81c77
 <                 error("flag:invalid type\n");
 ---
->                 error(_("flag: invalid type\n"));
-90c90
+> 		error(_("flag: invalid type\n"));
+90c86
 <                 error("penalty: invalid type\n");
 ---
->                 error(_("penalty: invalid type\n"));
+> 		error(_("penalty: invalid type\n"));
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/coxcount1.c Recommended/survival/src/coxcount1.c
+23c23,24
+<     ntime=0; nrow=0;
+---
+> 	ntime = 0;
+> 	nrow = 0;
+25c26,27
+<         if (strata[i] ==1) nrisk =0;
+---
+> 		if (strata[i] == 1)
+> 			nrisk = 0;
+31,32c33,36
+<             for (j=i+1; j<n && time[j]==dtime && status[j]==1 && strata[j]==0;
+<                  j++) nrisk++;
+---
+> 			for (j = i + 1;
+> 					j < n && time[j] == dtime && status[j] == 1
+> 							&& strata[j] == 0; j++)
+> 				nrisk++;
+52c56,57
+<         if (strata[i] ==1) stratastart =i;
+---
+> 		if (strata[i] == 1)
+> 			stratastart = i;
+55c60,61
+<             for (j=stratastart; j<i; j++) *rrstatus++=0; /*non-deaths */
+---
+> 			for (j = stratastart; j < i; j++)
+> 				*rrstatus++ = 0; /*non-deaths */
+58,59c64,67
+<             for(j= i+1; j<n && status[j]==1 && time[j]==dtime  && strata[j]==0;
+<                 j++) *rrstatus++ =1;
+---
+> 			for (j = i + 1;
+> 					j < n && status[j] == 1 && time[j] == dtime
+> 							&& strata[j] == 0; j++)
+> 				*rrstatus++ = 1;
+65c73,74
+<             for (j=stratastart; j<=i; j++) *rrindex++ = j+1;
+---
+> 			for (j = stratastart; j <= i; j++)
+> 				*rrindex++ = j + 1;
+110c119,120
+<     ntime=0; nrow=0;
+---
+> 	ntime = 0;
+> 	nrow = 0;
+114c124,125
+<         if (strata[i]==1) nrisk=0;
+---
+> 		if (strata[i] == 1)
+> 			nrisk = 0;
+123c134,135
+<                 if (status[jptr]==1 && time2[jptr]==dtime && strata[jptr]==0)
+---
+> 				if (status[jptr] == 1 && time2[jptr] == dtime
+> 						&& strata[jptr] == 0)
+125c137,138
+<                 else break;
+---
+> 				else
+> 					break;
+146,147c159,162
+<     ntime=0; nrisk=0;
+<     j=0;  /* pointer to time1 */;
+---
+> 	ntime = 0;
+> 	nrisk = 0;
+> 	j = 0; /* pointer to time1 */
+> 	;
+153c168,169
+<             for (j=0; j<n; j++) atrisk[j] =0;
+---
+> 			for (j = 0; j < n; j++)
+> 				atrisk[j] = 0;
+162,163c178,182
+<             for (j=1; j<nrisk; j++) *rrstatus++ =0;
+<             for (j=0; j<n; j++) if (atrisk[j]) *rrindex++ = j+1;
+---
+> 			for (j = 1; j < nrisk; j++)
+> 				*rrstatus++ = 0;
+> 			for (j = 0; j < n; j++)
+> 				if (atrisk[j])
+> 					*rrindex++ = j + 1;
+170c189,190
+<                 if (time2[jptr]==dtime && status[jptr]==1 && strata[jptr]==0){
+---
+> 				if (time2[jptr] == dtime && status[jptr] == 1
+> 						&& strata[jptr] == 0) {
+175,176c195,196
+<                     }
+<                 else break;
+---
+> 				} else
+> 					break;
+182,183c202
+<         }
+<         else {
+---
+> 		} else {
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/coxdetail.c Recommended/survival/src/coxdetail.c
+54,59c54,57
+< void coxdetail(Sint   *nusedx,   Sint   *nvarx,    Sint   *ndeadx, 
+< 	       double *y,        double *covar2,   Sint   *strata,  
+< 	       double *score,    double *weights,  double *means2, 
+< 	       double *u2,       double *var,      Sint   *rmat,
+< 	       double *nrisk2,   double *work)
+< {
+---
+> void coxdetail(Sint *nusedx, Sint *nvarx, Sint *ndeadx, double *y,
+> 		double *covar2, Sint *strata, double *score, double *weights,
+> 		double *means2, double *u2, double *var, Sint *rmat, double *nrisk2,
+> 		double *work) {
+81,83c79
+<     double  *start,
+< 	    *stop,
+< 	    *event;
+---
+> 	double *start, *stop, *event;
+113c109,110
+< 	for (person=0; person<nused; person++) temp += covar[i][person];
+---
+> 		for (person = 0; person < nused; person++)
+> 			temp += covar[i][person];
+116c113,114
+< 	for (person=0; person<nused; person++) covar[i][person] -=temp;
+---
+> 		for (person = 0; person < nused; person++)
+> 			covar[i][person] -= temp;
+126c124,125
+<     for (i=0; i<ndead*nvar*nvar; i++) var[i]=0;
+---
+> 	for (i = 0; i < ndead * nvar * nvar; i++)
+> 		var[i] = 0;
+133c132,133
+< 	if (event[person]==0) person++;
+---
+> 		if (event[person] == 0)
+> 			person++;
+150c150,151
+< 	    deaths=0; wdeath=0;
+---
+> 			deaths = 0;
+> 			wdeath = 0;
+155c156,157
+< 		    if (rflag) rmat[ideath*nused +k] =1;
+---
+> 					if (rflag)
+> 						rmat[ideath * nused + k] = 1;
+175c177,178
+< 		if (strata[k]==1) break;
+---
+> 				if (strata[k] == 1)
+> 					break;
+195c198,199
+< 			u[i][ideath] += weights[k]*covar[i][k] - meanwt*temp2;
+---
+> 						u[i][ideath] += weights[k] * covar[i][k]
+> 								- meanwt * temp2;
+197,198c201,202
+< 			    temp3 =((cmat[i][j] - temp*cmat2[i][j]) -
+< 					       temp2*(a[j]-temp*a2[j]))/d2;
+---
+> 							temp3 = ((cmat[i][j] - temp * cmat2[i][j])
+> 									- temp2 * (a[j] - temp * a2[j])) / d2;
+202c206,207
+< 				var[j + i*nvar + ideath*nvar*nvar] +=temp3;
+---
+> 								var[j + i * nvar + ideath * nvar * nvar] +=
+> 										temp3;
+207c212,213
+< 		if (strata[k]==1) break;
+---
+> 				if (strata[k] == 1)
+> 					break;
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/coxexact.c Recommended/survival/src/coxexact.c
 2a3
 > #include "localization.h"
-161c162
+7,8c8
+< double coxd0(int d, int n, double *score, double *dmat,
+<              int dmax) {
+---
+> double coxd0(int d, int n, double *score, double *dmat, int dmax) {
+11c11,12
+<     if (d==0) return(1.0);
+---
+> 	if (d == 0)
+> 		return (1.0);
+16c17,18
+<             if (d<n) *dn += coxd0(d, n-1, score, dmat, dmax);
+---
+> 		if (d < n)
+> 			*dn += coxd0(d, n - 1, score, dmat, dmax);
+26,29c28,34
+<         d1[indx] = score[n-1]* covar[n-1]* coxd0(d-1, n-1, score, dmat, dmax);
+<         if (d<n) d1[indx] += coxd1(d, n-1, score, dmat, d1, covar, dmax);
+<         if (d>1) d1[indx] += score[n-1]*
+<                         coxd1(d-1, n-1, score, dmat, d1, covar, dmax);
+---
+> 		d1[indx] = score[n - 1] * covar[n - 1]
+> 				* coxd0(d - 1, n - 1, score, dmat, dmax);
+> 		if (d < n)
+> 			d1[indx] += coxd1(d, n - 1, score, dmat, d1, covar, dmax);
+> 		if (d > 1)
+> 			d1[indx] += score[n - 1]
+> 					* coxd1(d - 1, n - 1, score, dmat, d1, covar, dmax);
+35,36c40
+<              double *d1k, double *d2, double *covarj, double *covark,
+<              int dmax) {
+---
+> 		double *d1k, double *d2, double *covarj, double *covark, int dmax) {
+41,43c45,48
+<         d2[indx] = coxd0(d-1, n-1, score, dmat, dmax)*score[n-1] *
+<             covarj[n-1]* covark[n-1];
+<         if (d<n) d2[indx] += coxd2(d, n-1, score, dmat, d1j, d1k, d2, covarj, 
+---
+> 		d2[indx] = coxd0(d - 1, n - 1, score, dmat, dmax) * score[n - 1]
+> 				* covarj[n - 1] * covark[n - 1];
+> 		if (d < n)
+> 			d2[indx] += coxd2(d, n - 1, score, dmat, d1j, d1k, d2, covarj,
+45,48c50,59
+<         if (d>1) d2[indx] += score[n-1] * (
+<             coxd2(d-1, n-1, score, dmat, d1j, d1k, d2, covarj, covark, dmax) +
+<             covarj[n-1] * coxd1(d-1, n-1, score, dmat, d1k, covark, dmax) +
+<             covark[n-1] * coxd1(d-1, n-1, score, dmat, d1j, covarj, dmax));
+---
+> 		if (d > 1)
+> 			d2[indx] += score[n - 1]
+> 					* (coxd2(d - 1, n - 1, score, dmat, d1j, d1k, d2, covarj,
+> 							covark, dmax)
+> 							+ covarj[n - 1]
+> 									* coxd1(d - 1, n - 1, score, dmat, d1k,
+> 											covark, dmax)
+> 							+ covark[n - 1]
+> 									* coxd1(d - 1, n - 1, score, dmat, d1j,
+> 											covarj, dmax));
+53,54c64
+< SEXP coxexact(SEXP maxiter2,  SEXP y2, 
+<               SEXP covar2,    SEXP offset2, SEXP strata2,
+---
+> SEXP coxexact(SEXP maxiter2, SEXP y2, SEXP covar2, SEXP offset2, SEXP strata2,
+63c73
+<     int    sstart;   /* starting obs of current strata */
+---
+> 	int sstart = 0; /* starting obs of current strata */
+70c80
+<     int     nrisk;   /* number of subjects in the current risk set */
+---
+> 	int nrisk = 0; /* number of subjects in the current risk set */
+133c143,144
+<               if (maxdeath >1) strata[j] = maxdeath;
+---
+> 				if (maxdeath > 1)
+> 					strata[j] = maxdeath;
+135c146,147
+<               if (maxdeath*nrisk > temp) temp = maxdeath*nrisk;
+---
+> 				if (maxdeath * nrisk > temp)
+> 					temp = maxdeath * nrisk;
+147c159,160
+<           if (i>=nused || strata[i] >0) break;  /*tied deaths don't cross strata */
+---
+> 			if (i >= nused || strata[i] > 0)
+> 				break; /*tied deaths don't cross strata */
+149c162,163
+<       if (ndeath > maxdeath) maxdeath=ndeath;
+---
+> 		if (ndeath > maxdeath)
+> 			maxdeath = ndeath;
+151,152c165,168
+<     if (maxdeath*nrisk > temp) temp = maxdeath*nrisk;
+<     if (maxdeath >1) strata[j] = maxdeath;
+---
+> 	if (maxdeath * nrisk > temp)
+> 		temp = maxdeath * nrisk;
+> 	if (maxdeath > 1)
+> 		strata[j] = maxdeath;
+161c177
 <         error("(number at risk) * (number tied deaths) is too large");
 ---
->         error(_("(number at risk) * (number tied deaths) is too large"));
+> 		error(_("(number at risk) * (number tied deaths) is too large"));
+166c182,183
+<     for (i=1; i<nvar; i++) dmem1[i] = dmem1[i-1] + dsize;
+---
+> 	for (i = 1; i < nvar; i++)
+> 		dmem1[i] = dmem1[i - 1] + dsize;
+181c198,199
+<             for (j=0; j<dmemtot; j++) *dtemp++ =0.0;
+---
+> 			for (j = 0; j < dmemtot; j++)
+> 				*dtemp++ = 0.0;
+190c208,209
+<             for (j=0; j<nvar; j++) zbeta += covar[j][i] * beta[j];
+---
+> 			for (j = 0; j < nvar; j++)
+> 				zbeta += covar[j][i] * beta[j];
+194c213,214
+<                 for (j=0; j<nvar; j++) u[j] += covar[j][i];
+---
+> 				for (j = 0; j < nvar; j++)
+> 					u[j] += covar[j][i];
+199c219,220
+<             if (i>=nused || strata[i] >0) break; 
+---
+> 			if (i >= nused || strata[i] > 0)
+> 				break;
+211c232,233
+<                 if (ndeath > 3) R_CheckUserInterrupt();
+---
+> 				if (ndeath > 3)
+> 					R_CheckUserInterrupt();
+217c239,240
+<                     if (ndeath > 5) R_CheckUserInterrupt();
+---
+> 					if (ndeath > 5)
+> 						R_CheckUserInterrupt();
+245c268,269
+<             for (j=0; j<i; j++)  imat[i][j] = imat[j][i];
+---
+> 			for (j = 0; j < i; j++)
+> 				imat[i][j] = imat[j][i];
+286c310,311
+<                 for (j=0; j<dmemtot; j++) *dtemp++ =0.0;
+---
+> 				for (j = 0; j < dmemtot; j++)
+> 					*dtemp++ = 0.0;
+295c320,321
+<                 for (j=0; j<nvar; j++) zbeta += covar[j][i] * beta[j];
+---
+> 				for (j = 0; j < nvar; j++)
+> 					zbeta += covar[j][i] * beta[j];
+299c325,326
+<                     for (j=0; j<nvar; j++) u[j] += covar[j][i];
+---
+> 					for (j = 0; j < nvar; j++)
+> 						u[j] += covar[j][i];
+304c331,332
+<                 if (i>=nused || strata[i] >0) break; 
+---
+> 				if (i >= nused || strata[i] > 0)
+> 					break;
+314,316c342,345
+<                     d1[j] = coxd1(ndeath, nrisk, score+sstart, dmem0, dmem1[j], 
+<                                   covar[j]+sstart, maxdeath) / d0;
+<                     if (ndeath > 3) R_CheckUserInterrupt();
+---
+> 					d1[j] = coxd1(ndeath, nrisk, score + sstart, dmem0,
+> 							dmem1[j], covar[j] + sstart, maxdeath) / d0;
+> 					if (ndeath > 3)
+> 						R_CheckUserInterrupt();
+319,320c348,349
+<                         temp = coxd2(ndeath, nrisk, score+sstart, dmem0, dmem1[j],
+<                                      dmem1[k], dmem2, covar[j] + sstart, 
+---
+> 						temp = coxd2(ndeath, nrisk, score + sstart, dmem0,
+> 								dmem1[j], dmem1[k], dmem2, covar[j] + sstart,
+322c351,352
+<                         if (ndeath > 5) R_CheckUserInterrupt();
+---
+> 						if (ndeath > 5)
+> 							R_CheckUserInterrupt();
+340c370,371
+<                for (j=0; j<i; j++)  imat[i][j] = imat[j][i];
+---
+> 				for (j = 0; j < i; j++)
+> 					imat[i][j] = imat[j][i];
+361c392,393
+<         if (iter==maxiter) break;  /*skip the step halving and etc */
+---
+> 		if (iter == maxiter)
+> 			break; /*skip the step halving and etc */
+367,368c399
+<                 }
+<         else {
+---
+> 		} else {
+389c419,420
+<         for (j=0; j<i; j++)  imat[i][j] = imat[j][i];
+---
+> 		for (j = 0; j < i; j++)
+> 			imat[i][j] = imat[j][i];
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/coxfit5.c Recommended/survival/src/coxfit5.c
+94,100c94,98
+< void coxfit5_a(Sint *nusedx,     Sint *nvarx,     double *yy, 
+< 	       double *covar2,   double *offset2, double *weights2,
+< 	       Sint *strata,     Sint *sorted,    double *means, 
+<                double *beta,     double *u,       double *loglik, 
+< 	       Sint *methodx,    Sint *ptype2,    Sint *pdiag2,
+< 	       Sint *nfrail,     Sint *frail2,
+<                void *fexpr1,     void *fexpr2,    void *rho) {
+---
+> void coxfit5_a(Sint *nusedx, Sint *nvarx, double *yy, double *covar2,
+> 		double *offset2, double *weights2, Sint *strata, Sint *sorted,
+> 		double *means, double *beta, double *u, double *loglik, Sint *methodx,
+> 		Sint *ptype2, Sint *pdiag2, Sint *nfrail, Sint *frail2, void *fexpr1,
+> 		void *fexpr2, void *rho) {
+103d100
+<     int ii; 
+144c141
+<     for (i=0; i<nused; i++) {
+---
+> 	for (int i = 0; i < nused; i++) {
+156,157c153,160
+<     if (nf > nvar) i=nf; else i=nvar;
+<     if (nf > nvar*nvar) j=nf; else j=nvar*nvar;
+---
+> 	if (nf > nvar)
+> 		i = nf;
+> 	else
+> 		i = nvar;
+> 	if (nf > nvar * nvar)
+> 		j = nf;
+> 	else
+> 		j = nvar * nvar;
+161,162c164,167
+<     if (ptype>1)  zflag = Calloc(nvar, Sint);
+<     else          zflag = Calloc(2, Sint);
+---
+> 	if (ptype > 1)
+> 		zflag = Calloc(nvar, Sint);
+> 	else
+> 		zflag = Calloc(2, Sint);
+166c171,172
+< 	for (i=0; i<nused; i++) frail[i] = frail2[i];
+---
+> 		for (int i = 0; i < nused; i++)
+> 			frail[i] = frail2[i];
+178c184
+<     for (i=0; i<nused; i++)
+---
+> 	for (int i = 0; i < nused; i++)
+180c186
+<     for (i=0; i<nused; ) {
+---
+> 	for (int i = 0; i < nused;) {
+187c193,194
+< 		if ((ttime[k] != ttime[p]) || (j==strata[istrat])) break;
+---
+> 				if ((ttime[k] != ttime[p]) || (j == strata[istrat]))
+> 					break;
+195,197c202,205
+< 	    }
+< 	else i++;
+< 	if (i==strata[istrat]) istrat++;
+---
+> 		} else
+> 			i++;
+> 		if (i == strata[istrat])
+> 			istrat++;
+204c212
+<     for (i=0; i<nvar; i++) {
+---
+> 	for (int i = 0; i < nvar; i++) {
+206c214,215
+< 	for (p=0; p<nused; p++) temp += covar[i][p];
+---
+> 		for (int p = 0; p < nused; p++)
+> 			temp += covar[i][p];
+209c218,219
+< 	for (p=0; p<nused; p++) covar[i][p] -=temp;
+---
+> 		for (int p = 0; p < nused; p++)
+> 			covar[i][p] -= temp;
+217c227
+<     for (i=0; i<nvar; i++) {
+---
+> 	for (int i = 0; i < nvar; i++) {
+225c235
+<     for (ii=0; ii<nused; ii++) {
+---
+> 	for (int ii = 0; ii < nused; ii++) {
+228c238,239
+< 	    for (i=0; i<nvar; i++) a[i] = 0;
+---
+> 			for (int i = 0; i < nvar; i++)
+> 				a[i] = 0;
+234c245
+< 	for (i=0; i<nvar; i++)
+---
+> 		for (int i = 0; i < nvar; i++)
+240c251,252
+< 	for (i=0; i<nvar; i++) a[i] += risk*covar[i][p];
+---
+> 		for (int i = 0; i < nvar; i++)
+> 			a[i] += risk * covar[i][p];
+244c256
+< 	    for (i=0; i<nvar; i++) {
+---
+> 			for (int i = 0; i < nvar; i++) {
+254c266
+< 	    for (k=0; k<ndead; k++) {
+---
+> 			for (int k = 0; k < ndead; k++) {
+258c270
+< 		for (i=0; i<nvar; i++) {
+---
+> 				for (int i = 0; i < nvar; i++) {
+264c276,277
+< 	    for (i=0; i<nvar; i++) a2[i]=0;
+---
+> 			for (int i = 0; i < nvar; i++)
+> 				a2[i] = 0;
+284,294c296,302
+< void coxfit5_b(Sint *maxiter, Sint *nusedx, Sint *nvarx, 
+< 	       Sint *strata, double *beta, double *u,
+< 	       double *imat2,  double *jmat2, double *loglik, 
+< 	       Sint *flag,  double *eps, double *tolerch, Sint *methodx, 
+< 	       Sint *nfrail, double *fbeta, double *fdiag,
+<                void *fexpr1, void *fexpr2, void *rho)
+< {
+< 
+<     int i,j,k, p;
+<     int ii, istrat, ip;
+<     int     iter;
+---
+> void coxfit5_b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
+> 		double *beta, double *u, double *imat2, double *jmat2, double *loglik,
+> 		Sint *flag, double *eps, double *tolerch, Sint *methodx, Sint *nfrail,
+> 		double *fbeta, double *fdiag, void *fexpr1, void *fexpr2, void *rho) {
+> 
+> 	int k, p;
+> 	int ii, istrat;
+316,317c324
+<         }
+<     else {
+---
+> 	} else {
+322,323c329,332
+<     for (i=0; i<nf; i++) oldbeta[i] = fbeta[i];
+<     for (i=0; i<nvar; i++) oldbeta[i+nf] = beta[i];
+---
+> 	for (int i = 0; i < nf; i++)
+> 		oldbeta[i] = fbeta[i];
+> 	for (int i = 0; i < nvar; i++)
+> 		oldbeta[i + nf] = beta[i];
+326c335
+<     for (iter=0; iter<=*maxiter; iter++) {
+---
+> 	for (int iter = 0; iter <= *maxiter; iter++) {
+328,329c337,339
+< 	for (i=0; i<nf; i++) fdiag[i] =0;
+< 	for (i=0; i<nvar2; i++) {
+---
+> 		for (int i = 0; i < nf; i++)
+> 			fdiag[i] = 0;
+> 		for (int i = 0; i < nvar2; i++) {
+331c341
+< 	    for (j=0; j<nvar; j++)
+---
+> 			for (int j = 0; j < nvar; j++)
+336c346
+< 	for (ip=0; ip<nused; ip++) {
+---
+> 		for (int ip = 0; ip < nused; ip++) {
+341c351
+< 		for (i=0; i<nvar2; i++) {
+---
+> 				for (int i = 0; i < nvar2; i++) {
+344c354
+< 		    for (j=0; j<nvar; j++) {
+---
+> 					for (int j = 0; j < nvar; j++) {
+350c360,361
+< 	    if (ip==strata[istrat]) istrat++;
+---
+> 			if (ip == strata[istrat])
+> 				istrat++;
+355,356c366,367
+< 	        }
+< 	    else zbeta = offset[p];
+---
+> 			} else
+> 				zbeta = offset[p];
+358c369
+< 	    for (i=0; i<nvar; i++)
+---
+> 			for (int i = 0; i < nvar; i++)
+365,366c376,378
+< 	    if (nf>0) a[fgrp] += risk;
+< 	    for (i=0; i<nvar; i++) {
+---
+> 			if (nf > 0)
+> 				a[fgrp] += risk;
+> 			for (int i = 0; i < nvar; i++) {
+368,369c380,382
+< 		if (nf>0) cmat[i][fgrp] += risk*covar[i][p];
+< 		for (j=0; j<=i; j++)
+---
+> 				if (nf > 0)
+> 					cmat[i][fgrp] += risk * covar[i][p];
+> 				for (int j = 0; j <= i; j++)
+380c393
+< 		for (i=0; i<nvar; i++) {
+---
+> 				for (int i = 0; i < nvar; i++) {
+383,384c396,398
+< 		    if (nf>0) cmat2[i][fgrp] += risk*covar[i][p];	
+< 		    for (j=0; j<=i; j++)
+---
+> 					if (nf > 0)
+> 						cmat2[i][fgrp] += risk * covar[i][p];
+> 					for (int j = 0; j <= i; j++)
+391c405
+< 		for (k=0; k<ndead; k++) {
+---
+> 				for (int k = 0; k < ndead; k++) {
+396c410
+< 		    for (i=0; i<nvar2; i++) {  /* by row of full matrix */
+---
+> 					for (int i = 0; i < nvar2; i++) { /* by row of full matrix */
+400c414,415
+< 			if (i<nf) fdiag[i] += temp2 * (1-temp2);
+---
+> 						if (i < nf)
+> 							fdiag[i] += temp2 * (1 - temp2);
+403,406c418,421
+< 			    for (j=0; j<=i; j++) 
+< 				jmat[ii][j] +=  wtave[p]*(
+<                                    (cmat[ii][j] - temp*cmat2[ii][j]) /d2 -
+<                                           temp2*tmean[j]);
+---
+> 							for (int j = 0; j <= i; j++)
+> 								jmat[ii][j] += wtave[p]
+> 										* ((cmat[ii][j] - temp * cmat2[ii][j])
+> 												/ d2 - temp2 * tmean[j]);
+411c426
+< 		for (i=0; i<nvar2; i++) {
+---
+> 				for (int i = 0; i < nvar2; i++) {
+413c428,429
+< 		    for (j=0; j<nvar; j++)  cmat2[j][i]=0;
+---
+> 					for (int j = 0; j < nvar; j++)
+> 						cmat2[j][i] = 0;
+425c441
+< 		for (i=0; i<nf; i++) {
+---
+> 				for (int i = 0; i < nf; i++) {
+428,429c444,445
+< 		    for (j=0; j<nvar; j++) jmat[j][i]=0;
+< 		    }
+---
+> 					for (int j = 0; j < nvar; j++)
+> 						jmat[j][i] = 0;
+431,432c447,448
+< 	    else {
+< 		for (i=0; i<nf; i++) {
+---
+> 			} else {
+> 				for (int i = 0; i < nf; i++) {
+442c458,459
+< 	    cox_callback(2, beta, upen, ipen, &logpen, zflag, nvar, fexpr2,rho);
+---
+> 			cox_callback(2, beta, upen, ipen, &logpen, zflag, nvar, fexpr2,
+> 					rho);
+445c462
+< 		for (i=0; i<nvar; i++) {
+---
+> 				for (int i = 0; i < nvar; i++) {
+449,450c466
+< 	        }
+< 	    else {
+---
+> 			} else {
+452c468
+< 		for (i=0; i<nvar; i++) {
+---
+> 				for (int i = 0; i < nvar; i++) {
+454c470,471
+< 		    for (j=nf; j<nvar2; j++) jmat[i][j] += ipen[k++];
+---
+> 					for (int j = nf; j < nvar2; j++)
+> 						jmat[i][j] += ipen[k++];
+457c474
+< 	    for (i=0; i<nvar; i++) {
+---
+> 			for (int i = 0; i < nvar; i++) {
+460c477,478
+< 		    for (j=0; j<i; j++) jmat[i][j+nf]=0;
+---
+> 					for (int j = 0; j < i; j++)
+> 						jmat[i][j + nf] = 0;
+472,473c490,492
+< 	    for (i=0; i<nvar; i++) {
+< 	        for (j=0; j<nvar2; j++)  imat[i][j] = jmat[i][j];
+---
+> 			for (int i = 0; i < nvar; i++) {
+> 				for (int j = 0; j < nvar2; j++)
+> 					imat[i][j] = jmat[i][j];
+476c495
+< 	    for (i=nf; i<nvar2; i++) {       /*nicer output for S user */
+---
+> 			for (int i = nf; i < nvar2; i++) { /*nicer output for S user */
+480c499
+< 		for (j=i+1; j<nvar2; j++) {
+---
+> 				for (int j = i + 1; j < nvar2; j++) {
+490c509,510
+< 	if (iter==*maxiter) break;  /*skip the step halving and etc */
+---
+> 		if (iter == *maxiter)
+> 			break; /*skip the step halving and etc */
+494c514
+< 		for (i=0; i<nvar; i++)
+---
+> 			for (int i = 0; i < nvar; i++)
+496c516
+< 		for (i=0; i<nf; i++)
+---
+> 			for (int i = 0; i < nf; i++)
+498,499c518
+< 		}
+< 	    else {
+---
+> 		} else {
+504,505c523
+< 		j=0;
+< 		for (i=0; i<nvar; i++) {
+---
+> 			for (int i = 0; i < nvar; i++) {
+509c527
+< 		for (i=0; i<nf; i++) {
+---
+> 			for (int i = 0; i < nf; i++) {
+517,518c535,536
+<     for (i=0; i<nvar; i++) 
+< 	for (j=0; j<nvar2; j++) {
+---
+> 	for (int i = 0; i < nvar; i++)
+> 		for (int j = 0; j < nvar2; j++) {
+522c540
+<     for (i=nf; i<nvar2; i++) {       /*nicer output for S user */
+---
+> 	for (int i = nf; i < nvar2; i++) { /*nicer output for S user */
+526c544
+<   	for (j=i+1; j<nvar2; j++) {
+---
+> 		for (int j = i + 1; j < nvar2; j++) {
+534a553
+> static double **cmatrix(double *data, int ncol, int nrow) {
+536,539d554
+< static double **cmatrix(double *data, int ncol, int nrow)
+<     {
+< 
+<     int i,j;
+546c561
+< 	for (i=0; i<nrow; i++) {
+---
+> 		for (int i = 0; i < nrow; i++) {
+550,552c565,566
+<         }
+<     else {
+< 	for (i=0; i<nrow; i++) {
+---
+> 	} else {
+> 		for (int i = 0; i < nrow; i++) {
+554c568,569
+< 	    for (j=0; j<ncol; j++) *temp++ = *data++;
+---
+> 			for (int j = 0; j < ncol; j++)
+> 				*temp++ = *data++;
+560,561c575
+< static void cmatrix_free(double **data) 
+< {
+---
+> static void cmatrix_free(double **data) {
+569,579c582,583
+<     double hazard, 
+<            denom,
+<            temp, temp2,
+<            efron_wt,
+<            ndead, 
+<            hazard2;
+<     int    p,
+<            nused,
+<            method,
+< 	   ip, istrat,
+<            i, j;
+---
+> 	double hazard, denom, temp, temp2, efron_wt, ndead, hazard2;
+> 	int p, nused, method, istrat, i;
+589c593
+<     for (ip=0; ip<nused; ip++) {
+---
+> 	for (int ip = 0; ip < nused; ip++) {
+607c611
+< 	    for (j=0; j<ndead; j++) {  
+---
+> 			for (int j = 0; j < ndead; j++) {
+617,618c621
+< 		}
+< 	    else {
+---
+> 			} else {
+622c625
+<                 for (j=0; j<ndead; j++) {
+---
+> 				for (int j = 0; j < ndead; j++) {
+637c640
+<     for (ip=nused-1; ip>=0; ) {
+---
+> 	for (int ip = nused - 1; ip >= 0;) {
+644c647
+< 	    for (j=0; j<ndead; j++) {
+---
+> 			for (int j = 0; j < ndead; j++) {
+650,651c653
+< 	    }
+< 	else {
+---
+> 		} else {
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/coxfit6.c Recommended/survival/src/coxfit6.c
+55,59c55,58
+< SEXP coxfit6(SEXP maxiter2,  SEXP time2,   SEXP status2, 
+< 	     SEXP covar2,    SEXP offset2, SEXP weights2,
+< 	     SEXP strata2,   SEXP method2, SEXP eps2, 
+< 	     SEXP toler2,    SEXP ibeta,    SEXP doscale2) {
+<     int i,j,k, person;
+---
+> SEXP coxfit6(SEXP maxiter2, SEXP time2, SEXP status2, SEXP covar2, SEXP offset2,
+> 		SEXP weights2, SEXP strata2, SEXP method2, SEXP eps2, SEXP toler2,
+> 		SEXP ibeta, SEXP doscale2) {
+> 	int i;
+160,161c159,161
+<     tdeath=0; temp2=0;
+<     for (i=0; i<nused; i++) {
+---
+> 	tdeath = 0;
+> 	temp2 = 0;
+> 	for (int i = 0; i < nused; i++) {
+168c168
+< 	for (person=0; person<nused; person++) 
+---
+> 		for (int person = 0; person < nused; person++)
+172c172,173
+< 	for (person=0; person<nused; person++) covar[i][person] -=temp;
+---
+> 		for (int person = 0; person < nused; person++)
+> 			covar[i][person] -= temp;
+175c176
+< 	    for (person=0; person<nused; person++) {
+---
+> 			for (int person = 0; person < nused; person++) {
+178,179c179,182
+< 	    if (temp > 0) temp = temp2/temp;   /* scaling */
+< 	    else temp=1.0; /* rare case of a constant covariate */
+---
+> 			if (temp > 0)
+> 				temp = temp2 / temp; /* scaling */
+> 			else
+> 				temp = 1.0; /* rare case of a constant covariate */
+181c184
+< 	    for (person=0; person<nused; person++) {
+---
+> 			for (int person = 0; person < nused; person++) {
+186,187c189
+< 	    }
+< 	else { 
+---
+> 		} else {
+190c192
+< 	    for (person=0; person<nused; person++) {
+---
+> 			for (int person = 0; person < nused; person++) {
+197,200c199,203
+< 	for (i=0; i<nvar; i++) beta[i] /= scale[i]; /*rescale initial betas */
+< 	}
+<     else {
+< 	for (i=0; i<nvar; i++) scale[i] = 1.0;
+---
+> 		for (int i = 0; i < nvar; i++)
+> 			beta[i] /= scale[i]; /*rescale initial betas */
+> 	} else {
+> 		for (int i = 0; i < nvar; i++)
+> 			scale[i] = 1.0;
+215c218,219
+<     for (i=0; i<nvar; i++) maxbeta[i] = 200/maxbeta[i];
+---
+> 	for (int i = 0; i < nvar; i++)
+> 		maxbeta[i] = 200 / maxbeta[i];
+222c226
+<     for (i=0; i<nvar; i++) {
+---
+> 	for (int i = 0; i < nvar; i++) {
+225c229
+< 	for (j=0; j<nvar; j++) {
+---
+> 		for (int j = 0; j < nvar; j++) {
+231c235
+<     for (person=nused-1; person>=0; ) {
+---
+> 	for (int person = nused - 1; person >= 0;) {
+235c239
+< 	    for (i=0; i<nvar; i++) {
+---
+> 			for (int i = 0; i < nvar; i++) {
+237c241,242
+< 		for (j=0; j<nvar; j++) cmat[i][j] = 0;
+---
+> 				for (int j = 0; j < nvar; j++)
+> 					cmat[i][j] = 0;
+249c254
+< 	    for (i=0; i<nvar; i++)
+---
+> 			for (int i = 0; i < nvar; i++)
+255c260
+< 	    for (i=0; i<nvar; i++) {
+---
+> 			for (int i = 0; i < nvar; i++) {
+257c262
+< 		for (j=0; j<=i; j++)
+---
+> 				for (int j = 0; j <= i; j++)
+267c272
+< 		for (i=0; i<nvar; i++) 
+---
+> 				for (int i = 0; i < nvar; i++)
+270c275
+< 		    for (i=0; i<nvar; i++) {
+---
+> 					for (int i = 0; i < nvar; i++) {
+272,273c277,279
+< 			for (j=0; j<=i; j++)
+< 			    cmat2[i][j] += risk*covar[i][person]*covar[j][person];
+---
+> 						for (int j = 0; j <= i; j++)
+> 							cmat2[i][j] += risk * covar[i][person]
+> 									* covar[j][person];
+279c285,286
+< 	    if (strata[person]==1) break;  /*ties don't cross strata */
+---
+> 			if (strata[person] == 1)
+> 				break; /*ties don't cross strata */
+287c293
+< 		for (i=0; i<nvar; i++) {
+---
+> 				for (int i = 0; i < nvar; i++) {
+290,291c296,298
+< 		    for (j=0; j<=i; j++)
+< 			imat[j][i] += deadwt*(cmat[i][j] - temp2*a[j])/denom;
+---
+> 					for (int j = 0; j <= i; j++)
+> 						imat[j][i] += deadwt * (cmat[i][j] - temp2 * a[j])
+> 								/ denom;
+293,294c300
+< 		}
+< 	    else { /* Efron */
+---
+> 			} else { /* Efron */
+305c311
+< 		for (k=0; k<ndead; k++) {
+---
+> 				for (int k = 0; k < ndead; k++) {
+310c316
+< 		    for (i=0; i<nvar; i++) {
+---
+> 					for (int i = 0; i < nvar; i++) {
+313,316c319,322
+< 			for (j=0; j<=i; j++)
+< 			    imat[j][i] +=  (wtave/d2) *
+< 				((cmat[i][j] - temp*cmat2[i][j]) -
+< 					  temp2*(a[j]-temp*a2[j]));
+---
+> 						for (int j = 0; j <= i; j++)
+> 							imat[j][i] += (wtave / d2)
+> 									* ((cmat[i][j] - temp * cmat2[i][j])
+> 											- temp2 * (a[j] - temp * a2[j]));
+320c326
+< 		for (i=0; i<nvar; i++) {
+---
+> 				for (int i = 0; i < nvar; i++) {
+322c328,329
+< 		    for (j=0; j<nvar; j++) cmat2[i][j]=0;
+---
+> 					for (int j = 0; j < nvar; j++)
+> 						cmat2[i][j] = 0;
+332c339
+<     for (i=0; i<nvar; i++) /*use 'a' as a temp to save u0, for the score test*/
+---
+> 	for (int i = 0; i < nvar; i++) /*use 'a' as a temp to save u0, for the score test*/
+339c346
+<     for (i=0; i<nvar; i++)
+---
+> 	for (int i = 0; i < nvar; i++)
+347c354
+<     for (i=0; i<nvar; i++) {
+---
+> 	for (int i = 0; i < nvar; i++) {
+352c359
+< 	for (i=0; i<nvar; i++) {
+---
+> 		for (int i = 0; i < nvar; i++) {
+356c363
+< 	    for (j=0; j<i; j++) {
+---
+> 			for (int j = 0; j < i; j++) {
+371c378
+< 	for (i=0; i<nvar; i++) {
+---
+> 		for (int i = 0; i < nvar; i++) {
+373c380
+< 	    for (j=0; j<nvar; j++)
+---
+> 			for (int j = 0; j < nvar; j++)
+381c388
+< 	for (person=nused-1; person>=0; ) {
+---
+> 		for (int person = nused - 1; person >= 0;) {
+385c392
+< 		for (i=0; i<nvar; i++) {
+---
+> 				for (int i = 0; i < nvar; i++) {
+387c394,395
+< 		    for (j=0; j<nvar; j++) cmat[i][j] = 0;
+---
+> 					for (int j = 0; j < nvar; j++)
+> 						cmat[i][j] = 0;
+398c406
+< 		for (i=0; i<nvar; i++)
+---
+> 				for (int i = 0; i < nvar; i++)
+403c411
+< 		for (i=0; i<nvar; i++) {
+---
+> 				for (int i = 0; i < nvar; i++) {
+405,406c413,415
+< 		    for (j=0; j<=i; j++)
+< 		    cmat[i][j] += risk*covar[i][person]*covar[j][person];
+---
+> 					for (int j = 0; j <= i; j++)
+> 						cmat[i][j] += risk * covar[i][person]
+> 								* covar[j][person];
+413c422
+< 		    for (i=0; i<nvar; i++) 
+---
+> 					for (int i = 0; i < nvar; i++)
+417c426
+< 			for (i=0; i<nvar; i++) {
+---
+> 						for (int i = 0; i < nvar; i++) {
+419,420c428,430
+< 			    for (j=0; j<=i; j++)
+< 				cmat2[i][j] += risk*covar[i][person]*covar[j][person];
+---
+> 							for (int j = 0; j <= i; j++)
+> 								cmat2[i][j] += risk * covar[i][person]
+> 										* covar[j][person];
+426c436,437
+< 		if (strata[person]==1) break; /*tied times don't cross strata*/
+---
+> 				if (strata[person] == 1)
+> 					break; /*tied times don't cross strata*/
+432c443
+< 		    for (i=0; i<nvar; i++) {
+---
+> 					for (int i = 0; i < nvar; i++) {
+435,438c446,448
+< 			for (j=0; j<=i; j++)
+< 			    imat[j][i] +=  (deadwt/denom)*
+< 				(cmat[i][j] - temp2*a[j]);
+< 		        }
+---
+> 						for (int j = 0; j <= i; j++)
+> 							imat[j][i] += (deadwt / denom)
+> 									* (cmat[i][j] - temp2 * a[j]);
+440,441c450,451
+< 		else  { /* Efron */
+< 		    for (k=0; k<ndead; k++) {
+---
+> 				} else { /* Efron */
+> 					for (int k = 0; k < ndead; k++) {
+446c456
+< 			for (i=0; i<nvar; i++) {
+---
+> 						for (int i = 0; i < nvar; i++) {
+449,452c459,467
+< 			    for (j=0; j<=i; j++)
+< 				imat[j][i] +=  (wtave/d2)*
+< 				    ((cmat[i][j] - temp*cmat2[i][j]) -
+< 				    temp2*(a[j]-temp*a2[j]));
+---
+> 							for (int j = 0; j <= i; j++)
+> 								imat[j][i] +=
+> 										(wtave / d2)
+> 												* ((cmat[i][j]
+> 														- temp * cmat2[i][j])
+> 														- temp2
+> 																* (a[j]
+> 																		- temp
+> 																				* a2[j]));
+456c471
+< 		    for (i=0; i<nvar; i++) { /*in anticipation */
+---
+> 					for (int i = 0; i < nvar; i++) { /*in anticipation */
+458c473,474
+< 			for (j=0; j<nvar; j++) cmat2[i][j] =0;
+---
+> 						for (int j = 0; j < nvar; j++)
+> 							cmat2[i][j] = 0;
+472c488
+< 	    for (i=0; i<nvar; i++) {
+---
+> 			for (int i = 0; i < nvar; i++) {
+476c492
+< 		for (j=0; j<i; j++) {
+---
+> 				for (int j = 0; j < i; j++) {
+484c500,501
+< 	if (*iter== maxiter) break;  /*skip the step halving calc*/
+---
+> 		if (*iter == maxiter)
+> 			break; /*skip the step halving calc*/
+488c505
+< 		for (i=0; i<nvar; i++)
+---
+> 			for (int i = 0; i < nvar; i++)
+490,491c507
+< 		}
+< 	else {
+---
+> 		} else {
+495,496c511,512
+< 	    j=0;
+< 	    for (i=0; i<nvar; i++) {
+---
+> 			//j = 0;
+> 			for (int i = 0; i < nvar; i++) {
+499,500c515,518
+< 		if (newbeta[i] > maxbeta[i]) newbeta[i] = maxbeta[i];
+< 		else if (newbeta[i] < -maxbeta[i]) newbeta[i] = -maxbeta[i];
+---
+> 				if (newbeta[i] > maxbeta[i])
+> 					newbeta[i] = maxbeta[i];
+> 				else if (newbeta[i] < -maxbeta[i])
+> 					newbeta[i] = -maxbeta[i];
+510c528
+<     for (i=0; i<nvar; i++) {
+---
+> 	for (int i = 0; i < nvar; i++) {
+514c532
+< 	for (j=0; j<i; j++) {
+---
+> 		for (int j = 0; j < i; j++) {
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/coxmart.c Recommended/survival/src/coxmart.c
+24,28c24,25
+< void coxmart(Sint   *sn,     Sint   *method,    double *time, 
+< 	     Sint   *status, Sint   * strata,   double *score, 
+< 	     double *wt,     double *expect)
+<     {
+<     register int i,j;
+---
+> void coxmart(Sint *sn, Sint *method, double *time, Sint *status, Sint * strata,
+> 		double *score, double *wt, double *expect) {
+40,41c37,39
+<     for (i= n -1; i>=0; i--) {
+< 	if (strata[i]==1) denom =0;
+---
+> 	for (int i = n - 1; i >= 0; i--) {
+> 		if (strata[i] == 1)
+> 			denom = 0;
+45c43,44
+< 	else    expect[i] =0;
+---
+> 		else
+> 			expect[i] = 0;
+54,55c53,55
+<     for (i= 0; i<n; i++) {
+< 	if (expect[i]!=0) denom = expect[i];
+---
+> 	for (int i = 0; i < n; i++) {
+> 		if (expect[i] != 0)
+> 			denom = expect[i];
+64c64
+< 		for (j=lastone; j<=i; j++) {
+---
+> 				for (int j = lastone; j <= i; j++) {
+67,68c67
+< 		}
+< 	    else {
+---
+> 			} else {
+71c70
+< 		for (j=0; j<deaths; j++) {
+---
+> 				for (int j = 0; j < deaths; j++) {
+76,78c75,79
+< 		for (j=lastone; j<=i; j++) {
+< 		    if (status[j]==0) expect[j] = -score[j]*hazard;
+< 		    else  expect[j] -=  score[j]* temp;
+---
+> 				for (int j = lastone; j <= i; j++) {
+> 					if (status[j] == 0)
+> 						expect[j] = -score[j] * hazard;
+> 					else
+> 						expect[j] -= score[j] * temp;
+86c87,88
+< 	if (strata[i]==1) hazard =0;
+---
+> 		if (strata[i] == 1)
+> 			hazard = 0;
+89c91,92
+<     for (j=lastone; j<n; j++)  expect[j] -= score[j] * hazard;
+---
+> 	for (int j = lastone; j < n; j++)
+> 		expect[j] -= score[j] * hazard;
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/coxmart2.c Recommended/survival/src/coxmart2.c
+20,24c20,22
+< void coxmart2(Sint   *sn,     double *time, 
+< 	     Sint   *status, Sint   * strata,   double *score, 
+< 	     double *wt,     double *resid)
+<     {
+<     int i,j;
+---
+> void coxmart2(Sint *sn, double *time, Sint *status, Sint * strata,
+> 		double *score, double *wt, double *resid) {
+> 	int j;
+36c34
+<     for (i=0; i<n; ) {
+---
+> 	for (int i = 0; i < n;) {
+64c62
+<     for (i= n-1; i>=0; i--) {
+---
+> 	for (int i = n - 1; i >= 0; i--) {
+67c65,66
+< 	if (strata[i] ==1) expected=0;  /* last obs of a strata */
+---
+> 		if (strata[i] == 1)
+> 			expected = 0; /* last obs of a strata */
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/coxph_wtest.c Recommended/survival/src/coxph_wtest.c
+9d8
+<     int i,j;
+21,24c20,26
+<     for (i=0; i<nvar; i++) if (var2[i][i] >0) df++;  /* count up the df */
+< 
+<     for (i=0; i< *ntest; i++) {
+< 	for (j=0; j<nvar; j++) solve[j] = b[j];
+---
+> 	for (int i = 0; i < nvar; i++)
+> 		if (var2[i][i] > 0)
+> 			df++; /* count up the df */
+> 
+> 	for (int i = 0; i < *ntest; i++) {
+> 		for (int j = 0; j < nvar; j++)
+> 			solve[j] = b[j];
+28c30,31
+< 	for (j=0; j<nvar; j++) sum += b[j]*solve[j];
+---
+> 		for (int j = 0; j < nvar; j++)
+> 			sum += b[j] * solve[j];
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/coxsafe.c Recommended/survival/src/coxsafe.c
+30a31
+> #include <R_ext/Minmax.h>
+35,37c36
+<     if (x< SMALL) return(SMALL);
+<     if (x> LARGE) return(LARGE);
+<     return (x);
+---
+> 	return min(max(SMALL, x), LARGE);
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/coxscho.c Recommended/survival/src/coxscho.c
+36,40c36,37
+< void coxscho(Sint   *nusedx,    Sint   *nvarx,    double *y, 
+< 	     double *covar2,    double *score,    Sint   *strata,  
+< 	     Sint   *method2,   double *work)
+< {
+<     int i,k,person;
+---
+> void coxscho(Sint *nusedx, Sint *nvarx, double *y, double *covar2,
+> 		double *score, Sint *strata, Sint *method2, double *work) {
+52,54c49
+<     double  *start,
+< 	    *stop,
+< 	    *event;
+---
+> 	double *start, *stop, *event;
+73,74c68,70
+<     for (person=0; person<nused;) {
+< 	if (event[person]==0) person++;
+---
+> 	for (int person = 0; person < nused;) {
+> 		if (event[person] == 0)
+> 			person++;
+81c77
+< 	    for (i=0; i<nvar; i++) {
+---
+> 			for (int i = 0; i < nvar; i++) {
+87c83
+< 	    for (k=person; k<nused; k++) {
+---
+> 			for (int k = person; k < nused; k++) {
+91c87
+< 		    for (i=0; i<nvar; i++) {
+---
+> 					for (int i = 0; i < nvar; i++) {
+97c93,94
+< 			for (i=0; i<nvar; i++) a2[i]+= weight*covar[i][k];
+---
+> 						for (int i = 0; i < nvar; i++)
+> 							a2[i] += weight * covar[i][k];
+100c97,98
+< 		if (strata[k]==1) break;
+---
+> 				if (strata[k] == 1)
+> 					break;
+106,107c104,106
+< 	    for (i=0; i<nvar; i++) mean[i] =0;
+< 	    for (k=0; k<deaths; k++) {
+---
+> 			for (int i = 0; i < nvar; i++)
+> 				mean[i] = 0;
+> 			for (int k = 0; k < deaths; k++) {
+109,110c108,110
+< 		for (i=0; i<nvar; i++)
+< 		    mean[i] += (a[i] - temp*a2[i])/(deaths*(denom -temp*efron_wt));
+---
+> 				for (int i = 0; i < nvar; i++)
+> 					mean[i] += (a[i] - temp * a2[i])
+> 							/ (deaths * (denom - temp * efron_wt));
+115c115
+< 	    for (k=person; k<nused && stop[k]==time; k++) {
+---
+> 			for (int k = person; k < nused && stop[k] == time; k++) {
+117c117
+< 		    for (i=0; i<nvar; i++) {
+---
+> 					for (int i = 0; i < nvar; i++) {
+122c122,123
+< 		if (strata[k]==1) break;
+---
+> 				if (strata[k] == 1)
+> 					break;
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/coxscore.c Recommended/survival/src/coxscore.c
+29,34c29,31
+< void coxscore(Sint   *nx,      Sint   *nvarx,    double *y, 
+< 	      double *covar2,  Sint   *strata,   double *score, 
+< 	      double *weights, Sint   *method,   double *resid2,
+< 	      double *scratch)
+<     {
+<     int i,j, k;
+---
+> void coxscore(Sint *nx, Sint *nvarx, double *y, double *covar2, Sint *strata,
+> 		double *score, double *weights, Sint *method, double *resid2,
+> 		double *scratch) {
+38d34
+<     int dd;
+64c60,61
+<     for (i=0; i<nvar; i++) a2[i] =0;
+---
+> 	for (int i = 0; i < nvar; i++)
+> 		a2[i] = 0;
+66c63
+<     for (i=n-1; i >=0; i--) {
+---
+> 	for (int i = n - 1; i >= 0; i--) {
+69c66,67
+< 	    for (j=0; j<nvar; j++) a[j] =0;
+---
+> 			for (int j = 0; j < nvar; j++)
+> 				a[j] = 0;
+78c76,77
+< 	    for (j=0; j<nvar; j++) a2[j] += risk*covar[j][i];
+---
+> 			for (int j = 0; j < nvar; j++)
+> 				a2[j] += risk * covar[j][i];
+80c79
+< 	for (j=0; j<nvar; j++) {
+---
+> 		for (int j = 0; j < nvar; j++) {
+85c84,85
+< 	if (deaths>0 && (i==0 || strata[i-1]==1 || time[i]!=time[i-1])){
+---
+> 		if (deaths > 0
+> 				&& (i == 0 || strata[i - 1] == 1 || time[i] != time[i - 1])) {
+89c89
+< 		for (j=0; j<nvar; j++)  {
+---
+> 				for (int j = 0; j < nvar; j++) {
+91c91
+< 		    for (k=i; k<n; k++) {
+---
+> 					for (int k = i; k < n; k++) {
+96c96,97
+< 			if (strata[k]==1) break;
+---
+> 						if (strata[k] == 1)
+> 							break;
+99,100c100
+< 		}
+< 	    else {  /* the harder case */
+---
+> 			} else { /* the harder case */
+102c102
+< 		for (dd=0; dd<deaths; dd++) {
+---
+> 				for (int dd = 0; dd < deaths; dd++) {
+106c106
+< 		    for (j=0; j<nvar; j++) {
+---
+> 					for (int j = 0; j < nvar; j++) {
+108c108
+< 			for (k=i; k<n; k++) {
+---
+> 						for (int k = i; k < n; k++) {
+112,116c112,117
+< 				resid[j][k] -= temp2 * score[k] * hazard *
+< 						    (1 - downwt);
+< 				}
+< 			    else resid[j][k]-= temp2*score[k] * hazard;
+< 			    if (strata[k]==1) break;
+---
+> 								resid[j][k] -= temp2 * score[k] * hazard
+> 										* (1 - downwt);
+> 							} else
+> 								resid[j][k] -= temp2 * score[k] * hazard;
+> 							if (strata[k] == 1)
+> 								break;
+124c125,126
+< 	    for (j=0; j<nvar; j++)  a2[j] =0;
+---
+> 			for (int j = 0; j < nvar; j++)
+> 				a2[j] = 0;
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/dmatrix.c Recommended/survival/src/dmatrix.c
+10,11c10
+< double **dmatrix(double *array, int ncol, int nrow)
+<     {
+---
+> double **dmatrix(double *array, int ncol, int nrow) {
+13d11
+<     int i;
+17c15
+<     for (i=0; i<nrow; i++) {
+---
+> 	for (int i = 0; i < nrow; i++) {
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/doloop.c Recommended/survival/src/doloop.c
+47d46
+<     register int i;
+50c49,50
+< 	for (i=0; i<nloops; i++)  index[i] =minval+i;
+---
+> 		for (int i = 0; i < nloops; i++)
+> 			index[i] = minval + i;
+52,53c52,55
+< 	if (maxval >= (minval+i)) return (minval+i-1);
+< 	    else                  return (minval-1);
+---
+> 		if (maxval >= (minval + nloops))
+> 			return (minval + nloops - 1);
+> 		else
+> 			return (minval - 1);
+59,60c61,64
+<     if (index[nloops] <= (maxval-depth)) return(index[nloops]);
+<     else if (nloops ==0)                 return(minval - depth);
+---
+> 	if (index[nloops] <= (maxval - depth))
+> 		return (index[nloops]);
+> 	else if (nloops == 0)
+> 		return (minval - depth);
 Only in Recommended/survival/src: localization.h
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/pyears1.c Recommended/survival/src/pyears1.c
+49,80c49,60
+< void pyears1(Sint   *sn,      Sint   *sny,      Sint   *sdoevent, 
+< 	     double *sy,      double *weight,       
+<              Sint   *sedim,   Sint   *efac, 
+< 	     Sint   *edims,   double *secut,    double *expect, 
+< 	     double *sedata,  Sint   *sodim,    Sint   *ofac, 
+< 	     Sint   *odims,   double *socut,    Sint   *smethod, 
+< 	     double *sodata,  double *pyears,   double *pn, 
+< 	     double *pcount,  double *pexpect,  double *offtable)
+<     {
+< 
+<     int i,j;
+<     int     n,
+< 	    ny,
+< 	    doevent,
+<             method,
+< 	    edim,
+< 	    odim;
+<     double  *start,
+< 	    *stop,
+< 	    *event,
+< 	    **ecut,
+< 	    **ocut,
+< 	    **edata,
+< 	    **odata;
+<     double  *data,
+< 	    *data2;
+<     double  timeleft,
+< 	    thiscell,
+< 	    etime,
+< 	    et2;
+<     int     index,
+< 	    indx, indx2;
+---
+> void pyears1(Sint *sn, Sint *sny, Sint *sdoevent, double *sy, double *weight,
+> 		Sint *sedim, Sint *efac, Sint *edims, double *secut, double *expect,
+> 		double *sedata, Sint *sodim, Sint *ofac, Sint *odims, double *socut,
+> 		Sint *smethod, double *sodata, double *pyears, double *pn,
+> 		double *pcount, double *pexpect, double *offtable) {
+> 
+> 	int i;
+> 	int n, ny, doevent, method, edim, odim;
+> 	double *start, *stop, *event, **ecut, **ocut, **edata, **odata;
+> 	double *data, *data2;
+> 	double timeleft, thiscell, etime, et2;
+> 	int index, indx, indx2;
+99,100c79
+< 	}
+<     else   {
+---
+> 	} else {
+114c93
+<     for (i=0; i<edim; i++) {
+---
+> 	for (int i = 0; i < edim; i++) {
+116,117c95,98
+< 	if (efac[i]==0)     secut += edims[i];
+< 	else if(efac[i] >1) secut += 1 + (efac[i]-1)*edims[i];
+---
+> 		if (efac[i] == 0)
+> 			secut += edims[i];
+> 		else if (efac[i] > 1)
+> 			secut += 1 + (efac[i] - 1) * edims[i];
+121c102
+<     for (i=0; i<odim; i++) {
+---
+> 	for (int i = 0; i < odim; i++) {
+123c104,105
+< 	if (ofac[i]==0) socut += odims[i] +1;
+---
+> 		if (ofac[i] == 0)
+> 			socut += odims[i] + 1;
+135,136c117,120
+< 	if (dostart==1) timeleft = stop[i] - start[i];
+< 	else timeleft= stop[i];
+---
+> 		if (dostart == 1)
+> 			timeleft = stop[i] - start[i];
+> 		else
+> 			timeleft = stop[i];
+143,145c127,132
+< 	if (dostart==1) timeleft = stop[i] - start[i];
+< 	else timeleft= stop[i];
+< 	if (timeleft >0 && timeleft < eps) eps = timeleft;
+---
+> 		if (dostart == 1)
+> 			timeleft = stop[i] - start[i];
+> 		else
+> 			timeleft = stop[i];
+> 		if (timeleft > 0 && timeleft < eps)
+> 			eps = timeleft;
+150c137
+<     for (i=0; i<n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+154,163c141,156
+< 	for (j=0; j<odim; j++) {
+< 	    if (ofac[j] ==1 || dostart==0) data[j] = odata[j][i];
+< 	    else                           data[j] = odata[j][i] + start[i];
+< 	    }
+< 	for (j=0; j<edim; j++) {
+< 	    if (efac[j] ==1 || dostart==0) data2[j] = edata[j][i];
+< 	    else                           data2[j] = edata[j][i] + start[i];
+< 	    }
+< 	if (dostart==1) timeleft = stop[i] - start[i];
+< 	else timeleft= stop[i];
+---
+> 		for (int j = 0; j < odim; j++) {
+> 			if (ofac[j] == 1 || dostart == 0)
+> 				data[j] = odata[j][i];
+> 			else
+> 				data[j] = odata[j][i] + start[i];
+> 		}
+> 		for (int j = 0; j < edim; j++) {
+> 			if (efac[j] == 1 || dostart == 0)
+> 				data2[j] = edata[j][i];
+> 			else
+> 				data2[j] = edata[j][i] + start[i];
+> 		}
+> 		if (dostart == 1)
+> 			timeleft = stop[i] - start[i];
+> 		else
+> 			timeleft = stop[i];
+194,198c187,193
+< 		    et2 = pystep(edim, &indx, &indx2, &lwt, data2, efac,
+< 				 edims, ecut, etime, 1);
+< 		    if (lwt <1) lambda = (lwt*expect[indx] +
+< 						     (1-lwt)*expect[indx2]);
+< 		    else       lambda =  expect[indx];
+---
+> 					et2 = pystep(edim, &indx, &indx2, &lwt, data2, efac, edims,
+> 							ecut, etime, 1);
+> 					if (lwt < 1)
+> 						lambda =
+> 								(lwt * expect[indx] + (1 - lwt) * expect[indx2]);
+> 					else
+> 						lambda = expect[indx];
+200c195,196
+< 			temp += exp(-hazard)*(1-exp(-lambda*et2))/ lambda;
+---
+> 						temp += exp(-hazard) * (1 - exp(-lambda * et2))
+> 								/ lambda;
+203,204c199,201
+< 		    for (j=0; j<edim; j++)
+< 			if (efac[j] !=1) data2[j] += et2;
+---
+> 					for (int j = 0; j < edim; j++)
+> 						if (efac[j] != 1)
+> 							data2[j] += et2;
+207,208c204,207
+< 		if (method==1) pexpect[index] += hazard * weight[i];
+< 		else           pexpect[index] += exp(-cumhaz)*temp * weight[i];
+---
+> 				if (method == 1)
+> 					pexpect[index] += hazard * weight[i];
+> 				else
+> 					pexpect[index] += exp(-cumhaz) * temp * weight[i];
+210,211c209
+< 		}
+< 	    else  {
+---
+> 			} else {
+213,214c211,213
+< 		for (j=0; j<edim; j++)
+< 		    if (efac[j] !=1) data2[j] += thiscell;
+---
+> 				for (int j = 0; j < edim; j++)
+> 					if (efac[j] != 1)
+> 						data2[j] += thiscell;
+217,218c216,218
+< 	    for (j=0; j<odim; j++)
+< 		if (ofac[j] ==0) data[j] += thiscell;
+---
+> 			for (int j = 0; j < odim; j++)
+> 				if (ofac[j] == 0)
+> 					data[j] += thiscell;
+221c221,222
+< 	if (index >=0 && doevent) pcount[index] += event[i] * weight[i];
+---
+> 		if (index >= 0 && doevent)
+> 			pcount[index] += event[i] * weight[i];
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/pyears2.c Recommended/survival/src/pyears2.c
+35,51c35,41
+< void pyears2(Sint   *sn,      Sint   *sny,   Sint   *sdoevent, 
+< 	     double *sy,      double *wt,    Sint   *sodim,    Sint   *ofac, 
+< 	     Sint   *odims,   double *socut, double *sodata,
+< 	     double *pyears,  double *pn,    double *pcount, 
+< 	     double *offtable)
+<     {
+< 
+<     int i,j;
+<     int     n,
+< 	    ny,
+< 	    doevent,
+< 	    odim;
+<     double  *start,
+< 	    *stop,
+< 	    *event,
+< 	    **ocut,
+< 	    **odata;
+---
+> void pyears2(Sint *sn, Sint *sny, Sint *sdoevent, double *sy, double *wt,
+> 		Sint *sodim, Sint *ofac, Sint *odims, double *socut, double *sodata,
+> 		double *pyears, double *pn, double *pcount, double *offtable) {
+> 
+> 	int i;
+> 	int n, ny, doevent, odim;
+> 	double *start, *stop, *event, **ocut, **odata;
+53,54c43
+<     double  timeleft,
+< 	    thiscell;
+---
+> 	double timeleft, thiscell;
+71,72c60
+< 	}
+<     else   {
+---
+> 	} else {
+84c72
+<     for (i=0; i<odim; i++) {
+---
+> 	for (int i = 0; i < odim; i++) {
+86c74,75
+< 	if (ofac[i]==0) socut += odims[i] +1;
+---
+> 		if (ofac[i] == 0)
+> 			socut += odims[i] + 1;
+98,99c87,90
+< 	if (dostart==1) timeleft = stop[i] - start[i];
+< 	else timeleft= stop[i];
+---
+> 		if (dostart == 1)
+> 			timeleft = stop[i] - start[i];
+> 		else
+> 			timeleft = stop[i];
+106,108c97,102
+< 	if (dostart==1) timeleft = stop[i] - start[i];
+< 	else timeleft= stop[i];
+< 	if ((timeleft >0) && (timeleft < eps)) eps = timeleft;
+---
+> 		if (dostart == 1)
+> 			timeleft = stop[i] - start[i];
+> 		else
+> 			timeleft = stop[i];
+> 		if ((timeleft > 0) && (timeleft < eps))
+> 			eps = timeleft;
+113c107
+<     for (i=0; i<n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+122,127c116,125
+< 	for (j=0; j<odim; j++) {
+< 	    if (ofac[j] ==1 || dostart==0) data[j] = odata[j][i];
+< 	    else                           data[j] = odata[j][i] + start[i];
+< 	    }
+< 	if (dostart==1) timeleft = stop[i] - start[i];
+< 	else            timeleft = stop[i];
+---
+> 		for (int j = 0; j < odim; j++) {
+> 			if (ofac[j] == 1 || dostart == 0)
+> 				data[j] = odata[j][i];
+> 			else
+> 				data[j] = odata[j][i] + start[i];
+> 		}
+> 		if (dostart == 1)
+> 			timeleft = stop[i] - start[i];
+> 		else
+> 			timeleft = stop[i];
+147,148c145,146
+< 		}
+< 	    else *offtable += thiscell * wt[i];
+---
+> 			} else
+> 				*offtable += thiscell * wt[i];
+150,151c148,150
+< 	    for (j=0; j<odim; j++)
+< 		if (ofac[j] ==0) data[j] += thiscell;
+---
+> 			for (int j = 0; j < odim; j++)
+> 				if (ofac[j] == 0)
+> 					data[j] += thiscell;
+154c153,154
+< 	if (index >=0 && doevent) pcount[index] += event[i] * wt[i];
+---
+> 		if (index >= 0 && doevent)
+> 			pcount[index] += event[i] * wt[i];
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/pyears3b.c Recommended/survival/src/pyears3b.c
+38,47c38,40
+< SEXP pyears3b(SEXP   death2,    SEXP   efac2,   SEXP edims2,
+< 	      SEXP   ecut2,     SEXP   expect2, SEXP grpx2,
+< 	      SEXP   x2, 	SEXP   y2,      SEXP times2,
+< 	      SEXP   ngrp2) {
+<     int i,j,k;
+<     int     n,
+< 	    death,
+< 	    edim,
+< 	    ngrp,
+< 	    ntime;
+---
+> SEXP pyears3b(SEXP death2, SEXP efac2, SEXP edims2, SEXP ecut2, SEXP expect2,
+> 		SEXP grpx2, SEXP x2, SEXP y2, SEXP times2, SEXP ngrp2) {
+> 	int n, death, edim, ngrp, ntime;
+53,60c46,47
+<     double  timeleft,
+< 	    thiscell,
+< 	    etime,
+< 	    time,
+< 	    et2;
+<     int     index,
+< 	    indx,
+< 	    indx2;
+---
+> 	double timeleft, thiscell, etime, time, et2;
+> 	int index, indx, indx2;
+92c78,79
+<     for (j=0; j<ntime*ngrp; j++) wvec[j] =0;
+---
+> 	for (int j = 0; j < ntime * ngrp; j++)
+> 		wvec[j] = 0;
+99c86
+<     for (i=0; i<edim; i++) {
+---
+> 	for (int i = 0; i < edim; i++) {
+101,102c88,91
+< 	if (efac[i]==0)     etemp += edims[i];
+< 	else if(efac[i] >1) etemp += 1 + (efac[i]-1)*edims[i];
+---
+> 		if (efac[i] == 0)
+> 			etemp += edims[i];
+> 		else if (efac[i] > 1)
+> 			etemp += 1 + (efac[i] - 1) * edims[i];
+112c101
+<     for (i=0; i<(ntime*ngrp); i++) {
+---
+> 	for (int i = 0; i < (ntime * ngrp); i++) {
+118c107
+<     for (i=0; i<n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+124c113,114
+< 	for (j=0; j<edim; j++) data2[j] = x[j][i];
+---
+> 		for (int j = 0; j < edim; j++)
+> 			data2[j] = x[j][i];
+132c122
+< 	for (j=0; j<ntime && timeleft >0; j++) {
+---
+> 		for (int j = 0; j < ntime && timeleft > 0; j++) {
+134c124,125
+< 	    if (thiscell > timeleft) thiscell = timeleft;
+---
+> 			if (thiscell > timeleft)
+> 				thiscell = timeleft;
+146,151c137,146
+< 		et2 = pystep(edim, &indx, &indx2, &wt, data2, efac,
+< 			     edims, ecut, etime, 1);
+< 		if (wt <1) hazard+= et2*(wt*expect[indx] +(1-wt)*expect[indx2]);
+< 		else       hazard+= et2* expect[indx];
+< 		for (k=0; k<edim; k++)
+< 		    if (efac[k] !=1) data2[k] += et2;
+---
+> 				et2 = pystep(edim, &indx, &indx2, &wt, data2, efac, edims, ecut,
+> 						etime, 1);
+> 				if (wt < 1)
+> 					hazard += et2
+> 							* (wt * expect[indx] + (1 - wt) * expect[indx2]);
+> 				else
+> 					hazard += et2 * expect[indx];
+> 				for (int k = 0; k < edim; k++)
+> 					if (efac[k] != 1)
+> 						data2[k] += et2;
+161,164c156,160
+< 		if (death==0) esurv[index]=1;
+< 		else          esurv[index]=0;
+< 		}
+< 	    else if (death==0) {
+---
+> 				if (death == 0)
+> 					esurv[index] = 1;
+> 				else
+> 					esurv[index] = 0;
+> 			} else if (death == 0) {
+167,168c163
+< 		}
+< 	    else {
+---
+> 			} else {
+180c175
+<     for (i=0; i<ntime*ngrp; i++) {
+---
+> 	for (int i = 0; i < ntime * ngrp; i++) {
+185,188c180,185
+< 	    if (death==0) esurv[i] /= wvec[i];
+< 	    else          esurv[i] = exp(-esurv[i]/wvec[i]);
+< 	    }
+< 	else if (death!=0) esurv[i] = exp(-esurv[i]);
+---
+> 			if (death == 0)
+> 				esurv[i] /= wvec[i];
+> 			else
+> 				esurv[i] = exp(-esurv[i] / wvec[i]);
+> 		} else if (death != 0)
+> 			esurv[i] = exp(-esurv[i]);
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/pystep.c Recommended/survival/src/pystep.c
+32,36c32,34
+< double pystep(int nc,        int  *index,  int  *index2,   double *wt, 
+< 	      double *data,  Sint *fac,    Sint *dims,     double **cuts, 
+< 	      double step,   int  edge)
+<     {
+<     int i,j;
+---
+> double pystep(int nc, int *index, int *index2, double *wt, double *data,
+> 		Sint *fac, Sint *dims, double **cuts, double step, int edge) {
+> 	int j;
+44c41,42
+<     *index =0;  *index2=0;
+---
+> 	*index = 0;
+> 	*index2 = 0;
+48,49c46,48
+<     for (i=0; i<nc; i++) {
+< 	if (fac[i]==1) *index += (data[i]-1) * kk;
+---
+> 	for (int i = 0; i < nc; i++) {
+> 		if (fac[i] == 1)
+> 			*index += (data[i] - 1) * kk;
+51,53c50,56
+< 	    if (fac[i]>1) dtemp = 1 + (fac[i]-1)*dims[i];
+< 	    else          dtemp = dims[i];
+< 	    for (j=0; j<dtemp; j++) if (data[i] < cuts[i][j]) break;
+---
+> 			if (fac[i] > 1)
+> 				dtemp = 1 + (fac[i] - 1) * dims[i];
+> 			else
+> 				dtemp = dims[i];
+> 			for (j = 0; j < dtemp; j++)
+> 				if (data[i] < cuts[i][j])
+> 					break;
+58,63c61,68
+< 		    if (temp > step) shortfall = step;
+< 		    else             shortfall = temp;
+< 		    }
+< 		if (temp < maxtime)  maxtime = temp;
+< 		}
+< 	    else if (j==dtemp){  /*bigger than last cutpoint */
+---
+> 					if (temp > step)
+> 						shortfall = step;
+> 					else
+> 						shortfall = temp;
+> 				}
+> 				if (temp < maxtime)
+> 					maxtime = temp;
+> 			} else if (j == dtemp) { /*bigger than last cutpoint */
+66,72c71,80
+< 		    if (temp <=0) shortfall = step;
+< 		    else if (temp < maxtime) maxtime = temp;
+< 		    }
+< 		if (fac[i] >1) j = dims[i] -1;   /*back to normal indices */
+< 		else  j--;
+< 		}
+< 	    else {
+---
+> 					if (temp <= 0)
+> 						shortfall = step;
+> 					else if (temp < maxtime)
+> 						maxtime = temp;
+> 				}
+> 				if (fac[i] > 1)
+> 					j = dims[i] - 1; /*back to normal indices */
+> 				else
+> 					j--;
+> 			} else {
+74c82,83
+< 		if (temp < maxtime)  maxtime = temp;
+---
+> 				if (temp < maxtime)
+> 					maxtime = temp;
+88c97,98
+<     if (shortfall ==0) return(maxtime);
+---
+> 	if (shortfall == 0)
+> 		return (maxtime);
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/survConcordance.c Recommended/survival/src/survConcordance.c
+26,29c26,28
+< void survConcordance(Sint *np,    double *time,  Sint *status, 
+< 		     double *x,   Sint *n2p,     double *x2,
+< 		     Sint   *temp,Sint *result) {
+<     int i, j, k=0;
+---
+> void survConcordance(Sint *np, double *time, Sint *status, double *x, Sint *n2p,
+> 		double *x2, Sint *temp, Sint *result) {
+> 	int j, k = 0;
+40,41c39,42
+<     for (i=0; i<5; i++) result[i] =0;  /* redundant I think */
+<     for (i=0; i<n2; i++) count1[i]=0;
+---
+> 	for (int i = 0; i < 5; i++)
+> 		result[i] = 0; /* redundant I think */
+> 	for (int i = 0; i < n2; i++)
+> 		count1[i] = 0;
+73c74
+<     for (i=0; i<n; i++) {
+---
+> 	for (int i = 0; i < n; i++) {
+80,82c81,86
+< 	    start = 0; end= n2-1;  /*start to end of sublist being looked at */
+< 	    if (tdeath==0) count=count1;   /* use the appropriate count */
+< 	    else           count=count2;
+---
+> 			start = 0;
+> 			end = n2 - 1; /*start to end of sublist being looked at */
+> 			if (tdeath == 0)
+> 				count = count1; /* use the appropriate count */
+> 			else
+> 				count = count2;
+85c89,90
+< 		if (x[i] == x2[k]) break;
+---
+> 				if (x[i] == x2[k])
+> 					break;
+90,91c95,96
+< 		    }
+< 		else  start = k+1;  /*right branch */
+---
+> 				} else
+> 					start = k + 1; /*right branch */
+115,116c120,121
+< 		    for (j=0; j<n2; j++) count2[j] = count1[j];
+< 		    }
+---
+> 					for (j = 0; j < n2; j++)
+> 						count2[j] = count1[j];
+118c123
+<             else {
+---
+> 			} else {
+122,123c127
+<             }
+<         else { 
+---
+> 		} else {
+135c139,140
+< 	start = 0; end= n2-1;  /*start to end of sublist being looked at */
+---
+> 		start = 0;
+> 		end = n2 - 1; /*start to end of sublist being looked at */
+139,141c144,149
+< 	    if (x[i] == x2[k]) break;
+< 	    if (x[i] < x2[k]) 	end = k-1;  /* left branch */
+< 	    else  start = k+1;  /*right branch */
+---
+> 			if (x[i] == x2[k])
+> 				break;
+> 			if (x[i] < x2[k])
+> 				end = k - 1; /* left branch */
+> 			else
+> 				start = k + 1; /*right branch */
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/survdiff2.c Recommended/survival/src/survdiff2.c
+6,11c6,8
+< void survdiff2(Sint   *nn,     Sint   *nngroup,    Sint   *nstrat, 
+< 	       double *rho,    double *time,       Sint   *status, 
+< 	       Sint   *group,  Sint   *strata,	   double *obs, 
+< 	       double *exp,    double *var,        double *risk, 
+< 	       double *kaplan)
+<     {
+---
+> void survdiff2(Sint *nn, Sint *nngroup, Sint *nstrat, double *rho, double *time,
+> 		Sint *status, Sint *group, Sint *strata, double *obs, double *exp,
+> 		double *var, double *risk, double *kaplan) {
+21,23c18,22
+<     istart=0; koff=0;
+<     for (i=0; i< ngroup*ngroup; i++)  var[i]=0;
+<     for (i=0; i< *nstrat*ngroup; i++) {
+---
+> 	istart = 0;
+> 	koff = 0;
+> 	for (int i = 0; i < ngroup * ngroup; i++)
+> 		var[i] = 0;
+> 	for (int i = 0; i < *nstrat * ngroup; i++) {
+29c28,29
+< 	for (i=0; i<ngroup; i++) risk[i]=0;
+---
+> 		for (int i = 0; i < ngroup; i++)
+> 			risk[i] = 0;
+33c33,34
+< 	    if (strata[i]==1) break;
+---
+> 			if (strata[i] == 1)
+> 				break;
+43c43
+< 	    for (i=istart; i<n; ) {
+---
+> 			for (int i = istart; i < n;) {
+59,61c59,63
+< 	for (i=n-1; i>=istart; i--) {
+< 	    if (*rho ==0) wt=1;
+< 	    else          wt= pow(kaplan[i], *rho);
+---
+> 		for (int i = n - 1; i >= istart; i--) {
+> 			if (*rho == 0)
+> 				wt = 1;
+> 			else
+> 				wt = pow(kaplan[i], *rho);
+74c76
+< 		for (k=0; k<ngroup; k++)
+---
+> 				for (int k = 0; k < ngroup; k++)
+77c79,80
+< 		if (nrisk==1) continue;  /*only 1 subject, so no variance */
+---
+> 				if (nrisk == 1)
+> 					continue; /*only 1 subject, so no variance */
+80,81c83,85
+< 		for (j=0; j<ngroup; j++) {
+< 		    tmp = wt* deaths* risk[j]* (nrisk-deaths)/(nrisk *(nrisk-1));
+---
+> 				for (int j = 0; j < ngroup; j++) {
+> 					tmp = wt * deaths * risk[j] * (nrisk - deaths)
+> 							/ (nrisk * (nrisk - 1));
+83c87
+< 		    for (k=0; k<ngroup; k++) {
+---
+> 					for (int k = 0; k < ngroup; k++) {
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/survfit4.c Recommended/survival/src/survfit4.c
+22d21
+<     int i,j;
+25c24
+<     for (i=0; i< *n; i++) {
+---
+> 	for (int i = 0; i < *n; i++) {
+30,31c29
+< 	    }
+< 	else if (d==1){
+---
+> 		} else if (d == 1) {
+35,36c33
+< 	    }
+< 	else {
+---
+> 		} else {
+39c36
+< 	    for (j=1; j<d; j++) {
+---
+> 			for (int j = 1; j < d; j++) {
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/survfitci.c Recommended/survival/src/survfitci.c
+18,20c18,19
+< SEXP survfitci(SEXP ftime2,  SEXP sort12,  SEXP sort22, SEXP ntime2,
+<                     SEXP status2, SEXP cstate2, SEXP wt2,  SEXP id2,
+<                     SEXP p2,  SEXP sefit2) {   
+---
+> SEXP survfitci(SEXP ftime2, SEXP sort12, SEXP sort22, SEXP ntime2, SEXP status2,
+> 		SEXP cstate2, SEXP wt2, SEXP id2, SEXP p2, SEXP sefit2) {
+48d46
+<     int sefit;
+52,53c50,51
+<     const char *rnames[]= {"nrisk","nevent","ncensor", "prev", 
+<                            "cumhaz", "var", ""};
+---
+> 	const char *rnames[] = { "nrisk", "nevent", "ncensor", "prev", "cumhaz",
+> 			"var", "" };
+73c71
+<     sefit = asInteger(sefit2);
+---
+> 	const int sefit = asInteger(sefit2);
+80c78,79
+<     else PROTECT(vmat2 = allocMatrix(REALSXP, 1, 1)); /* dummy object */
+---
+> 	else
+> 		PROTECT(vmat2 = allocMatrix(REALSXP, 1, 1)); /* dummy object */
+99c98,99
+<     if (sefit >0) umat = (double**) dmatrix2(nperson, nstate);
+---
+> 	if (sefit > 0)
+> 		umat = (double**) dmatrix2(nperson, nstate);
+103c103
+<     for (i=0; i<nstate; i++) {
+---
+> 	for (int i = 0; i < nstate; i++) {
+106c106
+<         for (j=0; j<nstate; j++) {
+---
+> 		for (int j = 0; j < nstate; j++) {
+110c110,111
+<         if (sefit) {for (j=0; j<nperson; j++) umat[j][i]=0;}
+---
+> 		if (sefit > 0) for (int j = 0; j < nperson; j++)
+> 			umat[j][i] = 0;
+112c113,114
+<     for (i=0; i<nperson; i++) atrisk[i] =0;
+---
+> 	for (i = 0; i < nperson; i++)
+> 		atrisk[i] = 0;
+128,129c130,131
+<             }
+<             else break;
+---
+> 			} else
+> 				break;
+151,154c153,156
+<                 }
+<                 else ncensor[itime]++;
+<             }
+<             else break;
+---
+> 				} else
+> 					ncensor[itime]++;
+> 			} else
+> 				break;
+167,168c169,170
+<                 }
+<                 else hmat[j][j] =1.0; 
+---
+> 				} else
+> 					hmat[j][j] = 1.0;
+173,174c175,176
+<                 for (j=0; j<nperson; j++) { /* row of U */
+<                     for (k=0; k<nstate; k++) { /* column of U */
+---
+> 				for (int j = 0; j < nperson; j++) { /* row of U */
+> 					for (int k = 0; k < nstate; k++) { /* column of U */
+176c178
+<                         for (kk=0; kk<nstate; kk++) 
+---
+> 						for (int kk = 0; kk < nstate; kk++)
+179c181,182
+<                     for (k=0; k<nstate; k++) umat[j][k] = temp2[k];
+---
+> 					for (int k = 0; k < nstate; k++)
+> 						umat[j][k] = temp2[k];
+184,185c187,189
+<                 for (j=0; j<nstate; j++) hmat[j][j] -= 1;
+<                 for (j=0; j<nperson; j++) {
+---
+> 				for (int j = 0; j < nstate; j++)
+> 					hmat[j][j] -= 1;
+> 				for (int j = 0; j < nperson; j++) {
+188c192
+<                         for (k=0; k<nstate; k++) 
+---
+> 						for (int k = 0; k < nstate; k++)
+194c198
+<                 for (j=i; j<n; j++) {
+---
+> 				for (int j = i; j < n; j++) {
+204,205c208,209
+<                     }
+<                     else break;
+---
+> 					} else
+> 						break;
+209,211c213,217
+<             for (j=0; j<nstate; j++) {
+<                 if (sefit ==0) hmat[j][j] -= 1;  /* conversion to H2*/
+<                 for (k=0; k<nstate; k++) chaz[j][k] += hmat[j][k];
+---
+> 			for (int j = 0; j < nstate; j++) {
+> 				if (sefit == 0)
+> 					hmat[j][j] -= 1; /* conversion to H2*/
+> 				for (int k = 0; k < nstate; k++)
+> 					chaz[j][k] += hmat[j][k];
+215c221
+<                 for (k=0; k<nstate; k++)
+---
+> 				for (int k = 0; k < nstate; k++)
+218c224,225
+<             for (j=0; j<nstate; j++) p[j] = temp2[j];
+---
+> 			for (int j = 0; j < nstate; j++)
+> 				p[j] = temp2[j];
+221c228
+<         for (j=0; j<nstate; j++) {
+---
+> 		for (int j = 0; j < nstate; j++) {
+224c231,232
+<             for (k=0; k<nstate; k++) *cumhaz++ = chaz[k][j];
+---
+> 			for (int k = 0; k < nstate; k++)
+> 				*cumhaz++ = chaz[k][j];
+227c235
+<                 for (k=0; k<nperson; k++) 
+---
+> 				for (int k = 0; k < nperson; k++)
+240c248,249
+<                 if (status[j] >0) cstate[id[j]] = status[j]-1; /*new state */
+---
+> 				if (status[j] > 0)
+> 					cstate[id[j]] = status[j] - 1; /*new state */
+242,243c251,252
+<             }
+<             else break;
+---
+> 			} else
+> 				break;
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/survpenal.c Recommended/survival/src/survpenal.c
+15,19c15,18
+< void survpenal(int whichcase, int nfrail,    int  nvar,    double **hmat, 
+< 	       double **JJ,   double *hdiag, double *jdiag,
+< 	       double *u,     double *beta,  double *penalty,
+< 	       int ptype,     int pdiag,     SEXP pexpr1,   double *cptr1, 
+< 	       SEXP pexpr2,   double *cptr2, SEXP rho) {
+---
+> void survpenal(int whichcase, int nfrail, int nvar, double **hmat, double **JJ,
+> 		double *hdiag, double *jdiag, double *u, double *beta, double *penalty,
+> 		int ptype, int pdiag, SEXP pexpr1, double *cptr1, SEXP pexpr2,
+> 		double *cptr2, SEXP rho) {
+21c20
+<     int i,j, k;
+---
+> 	int k;
+31c30,31
+< 	for (i=0; i<nfrail; i++) cptr1[i] = beta[i];  /* set "coef1" in rho */
+---
+> 		for (int i = 0; i < nfrail; i++)
+> 			cptr1[i] = beta[i]; /* set "coef1" in rho */
+42c42,43
+< 	    for (i=0; i<nfrail; i++) beta[i] = dptr[i];
+---
+> 			for (int i = 0; i < nfrail; i++)
+> 				beta[i] = dptr[i];
+60c61
+< 		for (i=0; i<nfrail; i++) {
+---
+> 				for (int i = 0; i < nfrail; i++) {
+64c65,66
+< 		    for (j=0; j<nvar; j++) hmat[j][i] =0; 
+---
+> 					for (int j = 0; j < nvar; j++)
+> 						hmat[j][i] = 0;
+66,67c68
+< 	        }
+< 	    else {
+---
+> 			} else {
+69c70,71
+< 		for (i=0; i<nfrail; i++) u[i] += dptr[i];
+---
+> 				for (int i = 0; i < nfrail; i++)
+> 					u[i] += dptr[i];
+72c74
+< 		for (i=0; i<nfrail; i++) {
+---
+> 				for (int i = 0; i < nfrail; i++) {
+87c89,90
+< 	for (i=0; i<nvar; i++) cptr2[i] = beta[i+nfrail]; /* set fcn var */
+---
+> 		for (int i = 0; i < nvar; i++)
+> 			cptr2[i] = beta[i + nfrail]; /* set fcn var */
+93c96,97
+< 	    for (i=0; i<nvar; i++) beta[i+nfrail] = dptr[i];
+---
+> 			for (int i = 0; i < nvar; i++)
+> 				beta[i + nfrail] = dptr[i];
+96c100,101
+< 	    for (i=0; i<nvar; i++) u[i+nfrail] += dptr[i];
+---
+> 			for (int i = 0; i < nvar; i++)
+> 				u[i + nfrail] += dptr[i];
+101c106
+< 		for (i=0; i<nvar; i++) {
+---
+> 				for (int i = 0; i < nvar; i++) {
+105,106c110
+< 	        }
+< 	    else {
+---
+> 			} else {
+109,110c113,114
+< 		for (i=0; i<nvar; i++) {
+< 		    for (j=nfrail; j<nvar+nfrail; j++) {
+---
+> 				for (int i = 0; i < nvar; i++) {
+> 					for (int j = nfrail; j < nvar + nfrail; j++) {
+119c123
+< 	    for (i=0; i<nvar; i++) {
+---
+> 			for (int i = 0; i < nvar; i++) {
+123c127,128
+< 		    for (j=0; j<i; j++) hmat[i][j+nfrail] =0;
+---
+> 					for (int j = 0; j < i; j++)
+> 						hmat[i][j + nfrail] = 0;
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/survproto.h Recommended/survival/src/survproto.h
+5,26c5,18
+< SEXP agfit4(SEXP surv2,      SEXP covar2,    SEXP strata2,
+<             SEXP weights2,   SEXP offset2,   SEXP ibeta2,
+<             SEXP sort12,     SEXP sort22,    SEXP method2,
+<             SEXP maxiter2,   SEXP  eps2,     SEXP tolerance2,
+< 	    SEXP doscale2);
+< 
+< 
+< void agfit5a(Sint *nusedx,     Sint *nvarx,     double *yy, 
+< 	      double *covar2,   double *offset2, double *weights2, 
+< 	      int   *strata,    Sint   *sort,    double *means,   
+<               double *beta,     double *u,       double *loglik, 
+< 	      Sint *methodx,    Sint *ptype2,    Sint *pdiag2,
+< 	      Sint *nfrail,     Sint *frail2,
+<               void *fexpr1,     void *fexpr2,    void *rho) ;
+< 
+< void agfit5b( Sint *maxiter,   Sint *nusedx,    Sint *nvarx, 
+< 	       Sint *strata,    double *beta,    double *u,
+< 	       double *imat2,   double *jmat2,   double *loglik, 
+< 	       Sint *flag,      double *eps,     double *tolerch, 
+< 	       Sint *methodx,   Sint *nfrail,     double *fbeta, 
+< 	       double *fdiag,
+<                void *fexpr1,    void *fexpr2,     void *rho);
+---
+> SEXP agfit4(SEXP surv2, SEXP covar2, SEXP strata2, SEXP weights2, SEXP offset2,
+> 		SEXP ibeta2, SEXP sort12, SEXP sort22, SEXP method2, SEXP maxiter2,
+> 		SEXP eps2, SEXP tolerance2, SEXP doscale2);
+> 
+> void agfit5a(Sint *nusedx, Sint *nvarx, double *yy, double *covar2,
+> 		double *offset2, double *weights2, int *strata, Sint *sort,
+> 		double *means, double *beta, double *u, double *loglik, Sint *methodx,
+> 		Sint *ptype2, Sint *pdiag2, Sint *nfrail, Sint *frail2, void *fexpr1,
+> 		void *fexpr2, void *rho);
+> 
+> void agfit5b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
+> 		double *beta, double *u, double *imat2, double *jmat2, double *loglik,
+> 		Sint *flag, double *eps, double *tolerch, Sint *methodx, Sint *nfrail,
+> 		double *fbeta, double *fdiag, void *fexpr1, void *fexpr2, void *rho);
+30,31c22,23
+< SEXP agmart3(SEXP surv2, SEXP score2, SEXP weight2, SEXP strata2,
+< 	     SEXP sort2, SEXP method2);
+---
+> SEXP agmart3(SEXP surv2, SEXP score2, SEXP weight2, SEXP strata2, SEXP sort2,
+> 		SEXP method2);
+34,63c26,50
+< 	     double *stop,   Sint *event,    double *covar2,double *offset, 
+< 	     Sint   *strata, double *means,  double *beta,  double *u, 
+< 	     double *imat2,  double loglik[2], Sint *flag,  double *work, 
+< 	     Sint   *work2,  double *eps,    double *tol_chol, double *sctest);
+< 
+< void agmart(Sint   *n,     Sint   *method,  double *start,   double *stop, 
+< 	    Sint   *event, double *score,   double *wt,      Sint   *strata, 
+< 	    double *resid);
+< 
+< void agmart2(Sint   *n,     Sint   *method,  double *start,   double *stop, 
+< 	     Sint   *event,  Sint   *nstrat,  Sint *strata,    Sint *sort1,
+< 	     Sint   *sort2,  double *score,   double *wt,      
+< 	     double *resid,  double *haz);
+< void agscore(Sint   *nx,       Sint   *nvarx,      double *y,
+< 	     double *covar2,   Sint   *strata,     double *score,
+< 	     double *weights,  Sint   *method,     double *resid2, double *a);
+< 
+< void agsurv3(Sint   *sn,    Sint   *snvar,    Sint   *sncurve, 
+< 	     Sint   *snpt,  Sint   *sse,      double *score, 
+< 	     double *sy,    Sint   *grpx,     double *r,        double *coef, 
+< 	     double *var,   double *xmean,    Sint   *scn, 
+< 	     double *cy,    double *cx,       double *ssurv,
+< 	     double *varh,  double *sused,    Sint   *smethod);
+< 
+< void agsurv4(Sint   *ndeath,   double *risk,    double *wt,
+<              Sint   *sn,        double *denom,   double *km);
+< 
+< void agsurv5(Sint *n2,     Sint *nvar2,  Sint *dd, double *x1,  
+<              double *x2,   double *xsum, double *xsum2, 
+<              double *sum1, double *sum2, double *xbar) ;
+---
+> 		double *stop, Sint *event, double *covar2, double *offset, Sint *strata,
+> 		double *means, double *beta, double *u, double *imat2, double loglik[2],
+> 		Sint *flag, double *work, Sint *work2, double *eps, double *tol_chol,
+> 		double *sctest);
+> 
+> void agmart(Sint *n, Sint *method, double *start, double *stop, Sint *event,
+> 		double *score, double *wt, Sint *strata, double *resid);
+> 
+> void agmart2(Sint *n, Sint *method, double *start, double *stop, Sint *event,
+> 		Sint *nstrat, Sint *strata, Sint *sort1, Sint *sort2, double *score,
+> 		double *wt, double *resid, double *haz);
+> void agscore(Sint *nx, Sint *nvarx, double *y, double *covar2, Sint *strata,
+> 		double *score, double *weights, Sint *method, double *resid2,
+> 		double *a);
+> 
+> void agsurv3(Sint *sn, Sint *snvar, Sint *sncurve, Sint *snpt, Sint *sse,
+> 		double *score, double *sy, Sint *grpx, double *r, double *coef,
+> 		double *var, double *xmean, Sint *scn, double *cy, double *cx,
+> 		double *ssurv, double *varh, double *sused, Sint *smethod);
+> 
+> void agsurv4(Sint *ndeath, double *risk, double *wt, Sint *sn, double *denom,
+> 		double *km);
+> 
+> void agsurv5(Sint *n2, Sint *nvar2, Sint *dd, double *x1, double *x2,
+> 		double *xsum, double *xsum2, double *sum1, double *sum2, double *xbar);
+74,75c61,62
+< SEXP concordance2(SEXP y,     SEXP wt2,  SEXP indx2, SEXP ntree2,
+<                   SEXP sortstop, SEXP sortstart) ;
+---
+> SEXP concordance2(SEXP y, SEXP wt2, SEXP indx2, SEXP ntree2, SEXP sortstop,
+> 		SEXP sortstart);
+80,84c67,70
+< void coxdetail(Sint   *nusedx,   Sint   *nvarx,    Sint   *ndeadx, 
+< 	       double *y,        double *covar2,   Sint   *strata,  
+< 	       double *score,    double *weights,  double *means2, 
+< 	       double *u2,       double *var,      Sint   *rmat,
+< 	       double *nrisk2,   double *work);
+---
+> void coxdetail(Sint *nusedx, Sint *nvarx, Sint *ndeadx, double *y,
+> 		double *covar2, Sint *strata, double *score, double *weights,
+> 		double *means2, double *u2, double *var, Sint *rmat, double *nrisk2,
+> 		double *work);
+86,87c72
+< SEXP coxexact(SEXP maxiter2,  SEXP y2, 
+<               SEXP covar2,    SEXP offset2, SEXP strata2,
+---
+> SEXP coxexact(SEXP maxiter2, SEXP y2, SEXP covar2, SEXP offset2, SEXP strata2,
+90,120c75,97
+< void coxfit5_a(Sint *nusedx,     Sint *nvarx,     double *yy, 
+<  	       double *covar2,   double *offset2, double *weights2, 
+< 	       int   *strata,    Sint   *sort,    double *means,   
+<                double *beta,     double *u,       double *loglik, 
+< 	       Sint *methodx,    Sint *ptype2,    Sint *pdiag2,
+< 	       Sint *nfrail,     Sint *frail2,
+<                void *fexpr1,     void *fexpr2,    void *rho) ;
+< 
+< void coxfit5_b( Sint *maxiter,   Sint *nusedx,    Sint *nvarx, 
+< 	        Sint *strata,    double *beta,    double *u,
+< 	        double *imat2,   double *jmat2,   double *loglik, 
+< 	        Sint *flag,      double *eps,     double *tolerch, 
+< 	        Sint *methodx,   Sint *nfrail,     double *fbeta, 
+< 	        double *fdiag,
+<                 void *fexpr1,    void *fexpr2,     void *rho);
+< 
+< void coxfit5_c(Sint *nusedx,   Sint *nvar,    Sint *strata,
+< 	       Sint *methodx,  double *expect) ;
+< 
+< SEXP coxfit6(SEXP maxiter2,  SEXP time2,   SEXP status2, 
+< 	     SEXP covar2,    SEXP offset2, SEXP weights2,
+< 	     SEXP strata2,   SEXP method2, SEXP eps2, 
+< 	     SEXP toler2,    SEXP ibeta,    SEXP doscale2) ;
+< 
+< void coxmart(Sint   *sn,     Sint   *method,    double *time, 
+< 	     Sint   *status, Sint   * strata,   double *score, 
+< 	     double *wt,     double *expect);
+< 
+< void coxmart2(Sint   *sn,     double *time, 
+< 	     Sint   *status, Sint   * strata,   double *score, 
+< 	     double *wt,     double *resid);
+---
+> void coxfit5_a(Sint *nusedx, Sint *nvarx, double *yy, double *covar2,
+> 		double *offset2, double *weights2, int *strata, Sint *sort,
+> 		double *means, double *beta, double *u, double *loglik, Sint *methodx,
+> 		Sint *ptype2, Sint *pdiag2, Sint *nfrail, Sint *frail2, void *fexpr1,
+> 		void *fexpr2, void *rho);
+> 
+> void coxfit5_b(Sint *maxiter, Sint *nusedx, Sint *nvarx, Sint *strata,
+> 		double *beta, double *u, double *imat2, double *jmat2, double *loglik,
+> 		Sint *flag, double *eps, double *tolerch, Sint *methodx, Sint *nfrail,
+> 		double *fbeta, double *fdiag, void *fexpr1, void *fexpr2, void *rho);
+> 
+> void coxfit5_c(Sint *nusedx, Sint *nvar, Sint *strata, Sint *methodx,
+> 		double *expect);
+> 
+> SEXP coxfit6(SEXP maxiter2, SEXP time2, SEXP status2, SEXP covar2, SEXP offset2,
+> 		SEXP weights2, SEXP strata2, SEXP method2, SEXP eps2, SEXP toler2,
+> 		SEXP ibeta, SEXP doscale2);
+> 
+> void coxmart(Sint *sn, Sint *method, double *time, Sint *status, Sint * strata,
+> 		double *score, double *wt, double *expect);
+> 
+> void coxmart2(Sint *sn, double *time, Sint *status, Sint * strata,
+> 		double *score, double *wt, double *resid);
+125,131c102,106
+< void coxscho(Sint   *nusedx,    Sint   *nvarx,    double *y, 
+< 	     double *covar2,    double *score,    Sint   *strata,  
+< 	     Sint   *method2,   double *work);
+< 
+< void coxscore(Sint   *nx,      Sint   *nvarx,    double *y, 
+< 	      double *covar2,  Sint   *strata,   double *score, 
+< 	      double *weights, Sint   *method,   double *resid2,
+---
+> void coxscho(Sint *nusedx, Sint *nvarx, double *y, double *covar2,
+> 		double *score, Sint *strata, Sint *method2, double *work);
+> 
+> void coxscore(Sint *nx, Sint *nvarx, double *y, double *covar2, Sint *strata,
+> 		double *score, double *weights, Sint *method, double *resid2,
+140,146c115,118
+< void pyears1(Sint   *sn,      Sint   *sny,      Sint   *sdoevent, 
+< 	     double *sy,      double *wt,       
+< 	     Sint   *sedim,   Sint   *efac, 
+< 	     Sint   *edims,   double *secut,    double *expect, 
+< 	     double *sedata,  Sint   *sodim,    Sint   *ofac, 
+< 	     Sint   *odims,   double *socut,    Sint   *smethod, 
+< 	     double *sodata,  double *pyears,   double *pn, 
+---
+> void pyears1(Sint *sn, Sint *sny, Sint *sdoevent, double *sy, double *wt,
+> 		Sint *sedim, Sint *efac, Sint *edims, double *secut, double *expect,
+> 		double *sedata, Sint *sodim, Sint *ofac, Sint *odims, double *socut,
+> 		Sint *smethod, double *sodata, double *pyears, double *pn,
+149,169c121,133
+< void pyears2(Sint   *sn,      Sint   *sny,   Sint   *sdoevent, 
+< 	     double *sy,      double *wt,    
+< 	     Sint   *sodim,   Sint   *ofac, 
+< 	     Sint   *odims,   double *socut, double *sodata,
+< 	     double *pyears,  double *pn,    double *pcount, 
+< 	     double *offtable);
+< 
+< SEXP pyears3b(SEXP   death2,    SEXP   efac2,   SEXP edims2,
+< 	      SEXP   ecut2,     SEXP   expect2, SEXP grpx2,
+< 	      SEXP   x2, 	SEXP   y2,      SEXP times2,
+< 	      SEXP   ngrp2);
+< 
+< double pystep(int nc,        int  *index,  int  *index2,   double *wt, 
+< 	      double *data,  Sint *fac,    Sint *dims,     double **cuts, 
+< 	      double step,   int  edge);
+< 
+< void survdiff2(Sint   *nn,     Sint   *nngroup,    Sint   *nstrat, 
+< 	       double *rho,    double *time,       Sint   *status, 
+< 	       Sint   *group,  Sint   *strata,	   double *obs, 
+< 	       double *exp,    double *var,        double *risk, 
+< 	       double *kaplan);
+---
+> void pyears2(Sint *sn, Sint *sny, Sint *sdoevent, double *sy, double *wt,
+> 		Sint *sodim, Sint *ofac, Sint *odims, double *socut, double *sodata,
+> 		double *pyears, double *pn, double *pcount, double *offtable);
+> 
+> SEXP pyears3b(SEXP death2, SEXP efac2, SEXP edims2, SEXP ecut2, SEXP expect2,
+> 		SEXP grpx2, SEXP x2, SEXP y2, SEXP times2, SEXP ngrp2);
+> 
+> double pystep(int nc, int *index, int *index2, double *wt, double *data,
+> 		Sint *fac, Sint *dims, double **cuts, double step, int edge);
+> 
+> void survdiff2(Sint *nn, Sint *nngroup, Sint *nstrat, double *rho, double *time,
+> 		Sint *status, Sint *group, Sint *strata, double *obs, double *exp,
+> 		double *var, double *risk, double *kaplan);
+173,209c137,164
+<  SEXP survfitci(SEXP ftime2,  SEXP sort12,  SEXP sort22, SEXP ntime2,
+<                     SEXP status2, SEXP cstate2, SEXP wt2,  SEXP id2,
+<                     SEXP p2,  SEXP sefit2) ;
+<   
+< SEXP survreg6(SEXP maxiter2,   SEXP nvarx,  SEXP y,
+< 	      SEXP ny2,        SEXP covar2, SEXP wtx,
+< 	      SEXP offset2,    SEXP beta2,  SEXP nstratx,
+< 	      SEXP stratax,    SEXP epsx,   SEXP tolx,       
+< 	      SEXP dist,       SEXP expr,   SEXP rho);
+< 
+< SEXP survreg7(SEXP maxiter2,   SEXP nvarx,  SEXP y,
+< 	      SEXP ny2,        SEXP covar2, SEXP wtx,
+< 	      SEXP offset2,    SEXP beta2,  SEXP nstratx,
+< 	      SEXP stratax,    SEXP epsx,   SEXP tolx,
+< 	      SEXP dist,       SEXP dexpr,  SEXP rho,
+< 	      SEXP ptype2,     SEXP pdiag2, SEXP nfrail2,
+< 	      SEXP fgrp2,      SEXP pexpr1, SEXP pexpr2) ;
+< 
+< double survregc1(int n,          int nvar,     int nstrat,      int whichcase,
+< 		 double *beta,   int dist,     Sint *strat,     double *offset,
+< 		 double *time1,  double *time2, double *status, double *wt,
+< 		 double **covar, double **imat, double **JJ,    double *u, 
+< 		 SEXP expr,      SEXP rho,      double *dummy,  int nf,
+< 		 Sint *frail,    double *fdiag, double *jdiag );
+< 
+< double survregc2(int n,          int nvar,     int nstrat,      int whichcase,
+< 		 double *beta,   int dist,     Sint *strat,     double *offset,
+< 		 double *time1,  double *time2, double *status, double *wt,
+< 		 double **covar, double **imat, double **JJ,    double *u, 
+< 		 SEXP expr,      SEXP rho,      double *dummy,  int nf,
+< 		 Sint *frail,    double *fdiag, double *jdiag );
+< 
+< void survpenal(int whichcase, int nfrail,    int  nvar2,    double **hmat, 
+< 	       double **JJ,   double *hdiag, double *jdiag,
+< 	       double *u,     double *beta,  double *loglik,
+< 	       int ptype,     int pdiag,     SEXP pexpr1,   double *cptr1, 
+< 	       SEXP pexpr2,   double *cptr2, SEXP rho);
+---
+> SEXP survfitci(SEXP ftime2, SEXP sort12, SEXP sort22, SEXP ntime2, SEXP status2,
+> 		SEXP cstate2, SEXP wt2, SEXP id2, SEXP p2, SEXP sefit2);
+> 
+> SEXP survreg6(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
+> 		SEXP wtx, SEXP offset2, SEXP beta2, SEXP nstratx, SEXP stratax,
+> 		SEXP epsx, SEXP tolx, SEXP dist, SEXP expr, SEXP rho);
+> 
+> SEXP survreg7(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
+> 		SEXP wtx, SEXP offset2, SEXP beta2, SEXP nstratx, SEXP stratax,
+> 		SEXP epsx, SEXP tolx, SEXP dist, SEXP dexpr, SEXP rho, SEXP ptype2,
+> 		SEXP pdiag2, SEXP nfrail2, SEXP fgrp2, SEXP pexpr1, SEXP pexpr2);
+> 
+> double survregc1(int n, int nvar, int nstrat, int whichcase, double *beta,
+> 		int dist, Sint *strat, double *offset, double *time1, double *time2,
+> 		double *status, double *wt, double **covar, double **imat, double **JJ,
+> 		double *u, SEXP expr, SEXP rho, double *dummy, int nf, Sint *frail,
+> 		double *fdiag, double *jdiag);
+> 
+> double survregc2(int n, int nvar, int nstrat, int whichcase, double *beta,
+> 		int dist, Sint *strat, double *offset, double *time1, double *time2,
+> 		double *status, double *wt, double **covar, double **imat, double **JJ,
+> 		double *u, SEXP expr, SEXP rho, double *dummy, int nf, Sint *frail,
+> 		double *fdiag, double *jdiag);
+> 
+> void survpenal(int whichcase, int nfrail, int nvar2, double **hmat, double **JJ,
+> 		double *hdiag, double *jdiag, double *u, double *beta, double *loglik,
+> 		int ptype, int pdiag, SEXP pexpr1, double *cptr1, SEXP pexpr2,
+> 		double *cptr2, SEXP rho);
+211,212c166,167
+< SEXP tmerge (SEXP id2,  SEXP time1x, SEXP time2x, SEXP newx2,
+< 	     SEXP nid2, SEXP ntime2, SEXP x2,  SEXP indx2); 
+---
+> SEXP tmerge(SEXP id2, SEXP time1x, SEXP time2x, SEXP newx2, SEXP nid2,
+> 		SEXP ntime2, SEXP x2, SEXP indx2);
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/survreg6.c Recommended/survival/src/survreg6.c
+45,52c45,49
+< SEXP survreg6(SEXP maxiter2,   SEXP nvarx,  SEXP y,
+< 	      SEXP ny2,        SEXP covar2, SEXP wtx,
+< 	      SEXP offset2,    SEXP beta2,  SEXP nstratx,
+< 	      SEXP stratax,    SEXP epsx,   SEXP  tolx,
+< 	      SEXP dist,       SEXP dexpr,  SEXP rho) {
+<     int i,j;	
+<     int n, maxiter,
+< 	ny;
+---
+> SEXP survreg6(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
+> 		SEXP wtx, SEXP offset2, SEXP beta2, SEXP nstratx, SEXP stratax,
+> 		SEXP epsx, SEXP tolx, SEXP dist, SEXP dexpr, SEXP rho) {
+> 	int j;
+> 	int n, maxiter, ny;
+54c51
+<     int halving, iter;
+---
+> 	int halving;
+130,131c127,128
+<     for (i=nvar; i<LENGTH(beta2); i++) newbeta[i] = beta[i];
+<        
+---
+> 	for (int i = nvar; i < LENGTH(beta2); i++)
+> 		newbeta[i] = beta[i];
+137,138c134
+< 	}
+<     else {
+---
+> 	} else {
+147,148c143
+< 	}
+<     else {
+---
+> 	} else {
+155c150,152
+< 	for (i=0; i<n; i++) if (status[i]==3) j++;
+---
+> 		for (int i = 0; i < n; i++)
+> 			if (status[i] == 3)
+> 				j++;
+165,171c162,166
+<     *loglik = (*dolik)(n,      nvar,             nstrat,  0,
+< 		       beta,   asInteger(dist),  strat,   offset,
+< 		       time1,  time2,            status,  wt,
+< 		       covar,  imat,             JJ,      u,
+< 		       dexpr,  rho,              zptr,
+< 		       0,      NULL,             NULL,    NULL);
+<     for (i=0; i<nvar2; i++) usave[i] = u[i];
+---
+> 	*loglik = (*dolik)(n, nvar, nstrat, 0, beta, asInteger(dist), strat, offset,
+> 			time1, time2, status, wt, covar, imat, JJ, u, dexpr, rho, zptr, 0,
+> 			NULL, NULL, NULL);
+> 	for (int i = 0; i < nvar2; i++)
+> 		usave[i] = u[i];
+182c177
+< 	i = cholesky3(JJ, nvar2, 0, NULL, tol_chol);
+---
+> 		cholesky3(JJ, nvar2, 0, NULL, tol_chol);
+184,185c179,180
+< 	}
+<     else chsolve2(imat,nvar2,u);        /* a replaced by  a *inverse(i) */
+---
+> 	} else
+> 		chsolve2(imat, nvar2, u); /* a replaced by  a *inverse(i) */
+191c186
+<     for (i=0; i<nvar2; i++) {
+---
+> 	for (int i = 0; i < nvar2; i++) {
+196,197c191,193
+< 	for (i=1; i<nvar2; i++)
+< 	    for (j=0; j<i; j++)  imat[i][j] = imat[j][i];
+---
+> 		for (int i = 1; i < nvar2; i++)
+> 			for (int j = 0; j < i; j++)
+> 				imat[i][j] = imat[j][i];
+207,213c202,206
+<     newlk = (*dolik)(n,      nvar,             nstrat,  0,
+< 		     newbeta,asInteger(dist),  strat,   offset,
+< 		     time1,  time2,            status,  wt,
+< 		     covar,  imat,             JJ,      u,
+< 		     dexpr,  rho,              zptr,
+< 		     0,      NULL,             NULL,    NULL); 
+<     for (i=0; i<nvar2; i++) usave[i] = u[i];
+---
+> 	newlk = (*dolik)(n, nvar, nstrat, 0, newbeta, asInteger(dist), strat,
+> 			offset, time1, time2, status, wt, covar, imat, JJ, u, dexpr, rho,
+> 			zptr, 0, NULL, NULL, NULL);
+> 	for (int i = 0; i < nvar2; i++)
+> 		usave[i] = u[i];
+215c208
+<     for (iter=1; iter<= maxiter; iter++) {
+---
+> 	for (int iter = 1; iter <= maxiter; iter++) {
+224,225c217,219
+< 	    for (i=1; i<nvar2; i++){
+< 		for (j=0; j<i; j++)  imat[i][j] = imat[j][i];
+---
+> 			for (int i = 1; i < nvar2; i++) {
+> 				for (int j = 0; j < i; j++)
+> 					imat[i][j] = imat[j][i];
+227c221
+< 	    for (i=0; i<nvar2; i++)
+---
+> 			for (int i = 0; i < nvar2; i++)
+229c223,224
+< 	    if (halving==1) *flag= 1000; /*didn't converge after all */
+---
+> 			if (halving == 1)
+> 				*flag = 1000; /*didn't converge after all */
+235c230
+< 	    for (j=0; j<5 && newlk < *loglik; j++) {
+---
+> 			for (int j = 0; j < 5 && newlk < *loglik; j++) {
+237c232
+< 		for (i=0; i<nvar2; i++)
+---
+> 				for (int i = 0; i < nvar2; i++)
+250c245
+< 		    for (i=0; i<nstrat; i++) {
+---
+> 					for (int i = 0; i < nstrat; i++) {
+255,260c250,252
+< 		newlk = (*dolik)(n,      nvar,             nstrat,  1,
+< 				 newbeta,asInteger(dist),  strat,   offset,
+< 				 time1,  time2,            status,  wt,
+< 				 covar,  imat,             JJ,      u,
+< 				 dexpr,  rho,              zptr,
+< 				 0,      NULL,             NULL,    NULL); 
+---
+> 				newlk = (*dolik)(n, nvar, nstrat, 1, newbeta, asInteger(dist),
+> 						strat, offset, time1, time2, status, wt, covar, imat,
+> 						JJ, u, dexpr, rho, zptr, 0, NULL, NULL, NULL);
+269c261
+< 		i = cholesky3(JJ, nvar2, 0, NULL, tol_chol);
+---
+> 				cholesky3(JJ, nvar2, 0, NULL, tol_chol);
+271,273c263,265
+< 		}
+< 	    else chsolve2(imat,nvar2,u);
+< 	    for (i=0; i<nvar2; i++) {
+---
+> 			} else
+> 				chsolve2(imat, nvar2, u);
+> 			for (int i = 0; i < nvar2; i++) {
+279,285c271,275
+< 	newlk = (*dolik)(n,      nvar,             nstrat,  0,
+< 			 newbeta,asInteger(dist),  strat,   offset,
+< 			 time1,  time2,            status,  wt,
+< 			 covar,  imat,             JJ,      u,
+< 			 dexpr,  rho,              zptr,
+< 			 0,      NULL,             NULL,    NULL); 
+< 	for (i=0; i<nvar2; i++) usave[i] = u[i];
+---
+> 		newlk = (*dolik)(n, nvar, nstrat, 0, newbeta, asInteger(dist), strat,
+> 				offset, time1, time2, status, wt, covar, imat, JJ, u, dexpr,
+> 				rho, zptr, 0, NULL, NULL, NULL);
+> 		for (int i = 0; i < nvar2; i++)
+> 			usave[i] = u[i];
+291,292c281,283
+<     for (i=1; i<nvar2; i++) {
+<         for (j=0; j<i; j++)  imat[i][j] = imat[j][i];
+---
+> 	for (int i = 1; i < nvar2; i++) {
+> 		for (int j = 0; j < i; j++)
+> 			imat[i][j] = imat[j][i];
+295c286
+<     for (i=0; i<nvar2; i++)
+---
+> 	for (int i = 0; i < nvar2; i++)
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/survreg7.c Recommended/survival/src/survreg7.c
+64,70c64,67
+< SEXP survreg7(SEXP maxiter2,   SEXP nvarx,  SEXP y,
+< 	      SEXP ny2,        SEXP covar2, SEXP wtx,
+< 	      SEXP offset2,    SEXP beta2,  SEXP nstratx,
+< 	      SEXP stratax,    SEXP epsx,   SEXP tolx,
+< 	      SEXP dist,       SEXP dexpr,  SEXP rho,
+< 	      SEXP ptype2,     SEXP pdiag2, SEXP nfrail2,
+< 	      SEXP fgrp2,      SEXP pexpr1, SEXP pexpr2) {
+---
+> SEXP survreg7(SEXP maxiter2, SEXP nvarx, SEXP y, SEXP ny2, SEXP covar2,
+> 		SEXP wtx, SEXP offset2, SEXP beta2, SEXP nstratx, SEXP stratax,
+> 		SEXP epsx, SEXP tolx, SEXP dist, SEXP dexpr, SEXP rho, SEXP ptype2,
+> 		SEXP pdiag2, SEXP nfrail2, SEXP fgrp2, SEXP pexpr1, SEXP pexpr2) {
+72c69
+<     int i,j;	
+---
+> 
+79c76
+<     int golden, goright;
+---
+> 	int goright;
+96,98c93
+<     double *jdiag, 
+< 	   *newbeta,
+< 	   *u;
+---
+> 	double *jdiag, *newbeta, *u;
+108,109c103
+<     SEXP  out_iter, out_loglik, out_hmat, 
+< 	  out_hinv, out_flag,   out_beta;
+---
+> 	SEXP out_iter, out_loglik, out_hmat, out_hinv, out_flag, out_beta;
+186c180,181
+<     for (i=nvar; i<LENGTH(beta2); i++) newbeta[i] = beta[i];
+---
+> 	for (int i = nvar; i < LENGTH(beta2); i++)
+> 		newbeta[i] = beta[i];
+192,193c187
+< 	}
+<     else {
+---
+> 	} else {
+202,203c196
+< 	}
+<     else {
+---
+> 	} else {
+244,248c237,238
+<     *loglik = (*dolik)(n,      nvar,             nstrat,  0,
+< 		       beta,   asInteger(dist),  strat,   offset,
+< 		       time1,  time2,            status,  wt,
+< 		       covar,  hmat,             JJ,      u,
+< 		       dexpr,  rho,              zptr,
+---
+> 	*loglik = (*dolik)(n, nvar, nstrat, 0, beta, asInteger(dist), strat, offset,
+> 			time1, time2, status, wt, covar, hmat, JJ, u, dexpr, rho, zptr,
+250,251c240,241
+<     survpenal(0, nfrail, nvar,  hmat,  JJ,     hdiag, jdiag,  u,     beta,  
+< 	         penalty, ptype, pdiag, pexpr1, cptr1, pexpr2, cptr2, rho);
+---
+> 	survpenal(0, nfrail, nvar, hmat, JJ, hdiag, jdiag, u, beta, penalty, ptype,
+> 			pdiag, pexpr1, cptr1, pexpr2, cptr2, rho);
+253c243,244
+<     for (i=0; i<nvar3; i++) usave[i] = u[i];
+---
+> 	for (int i = 0; i < nvar3; i++)
+> 		usave[i] = u[i];
+271,272c262
+< 	    }
+< 	else {  /* Newton-Raphson step */
+---
+> 		} else { /* Newton-Raphson step */
+276c266
+< 	for (i=0; i<nvar3; i++) {
+---
+> 		for (int i = 0; i < nvar3; i++) {
+280,287c270,274
+< 	newlk = (*dolik)(n,       nvar,             nstrat,  0,
+< 			  newbeta, asInteger(dist),  strat,   offset,
+< 			  time1,   time2,            status,  wt,
+< 			  covar,   hmat,             JJ,      u,
+< 			  dexpr,   rho,              zptr,
+< 			  nfrail,  fgrp,             hdiag,   jdiag);
+< 	survpenal(0, nfrail, nvar,  hmat,  JJ,     hdiag, jdiag,  u, newbeta,  
+< 		  &newpen, ptype, pdiag, pexpr1, cptr1, pexpr2, cptr2, rho);
+---
+> 		newlk = (*dolik)(n, nvar, nstrat, 0, newbeta, asInteger(dist), strat,
+> 				offset, time1, time2, status, wt, covar, hmat, JJ, u, dexpr,
+> 				rho, zptr, nfrail, fgrp, hdiag, jdiag);
+> 		survpenal(0, nfrail, nvar, hmat, JJ, hdiag, jdiag, u, newbeta, &newpen,
+> 				ptype, pdiag, pexpr1, cptr1, pexpr2, cptr2, rho);
+296c283
+< 	    for (i=0; i<nvar3; i++) {
+---
+> 			for (int i = 0; i < nvar3; i++) {
+324,326c311,315
+< 	    for (i=0; i<nvar3; i++) u[i] = newbeta[i] - beta[i];
+< 	    for (i=0; i<nstrat; i++) 
+< 		if (u[i+nvar+nfrail] < -0.7) u[i+nvar+nfrail] = -1.1;
+---
+> 			for (int i = 0; i < nvar3; i++)
+> 				u[i] = newbeta[i] - beta[i];
+> 			for (int i = 0; i < nstrat; i++)
+> 				if (u[i + nvar + nfrail] < -0.7)
+> 					u[i + nvar + nfrail] = -1.1;
+342c331
+< 		for (i=0; i<nvar3; i++)
+---
+> 				for (int i = 0; i < nvar3; i++)
+345,353c334,339
+< 		y1 = (*dolik)(n,      nvar,             nstrat,  1,
+< 			      newbeta,asInteger(dist),  strat,   offset,
+< 			      time1,  time2,            status,  wt,
+< 			      covar,  hmat,             JJ,      u,
+< 			      dexpr,  rho,              zptr,
+< 			      nfrail, fgrp,             hdiag,   jdiag);
+< 		survpenal(1, nfrail,  nvar,   hmat,  JJ, hdiag, jdiag,  
+< 			  u, newbeta, &newpen, ptype, pdiag,
+< 			  pexpr1, cptr1, pexpr2, cptr2, rho);
+---
+> 				y1 = (*dolik)(n, nvar, nstrat, 1, newbeta, asInteger(dist),
+> 						strat, offset, time1, time2, status, wt, covar, hmat,
+> 						JJ, u, dexpr, rho, zptr, nfrail, fgrp, hdiag, jdiag);
+> 				survpenal(1, nfrail, nvar, hmat, JJ, hdiag, jdiag, u, newbeta,
+> 						&newpen, ptype, pdiag, pexpr1, cptr1, pexpr2, cptr2,
+> 						rho);
+358c344
+< 	    for (i=0; i<nvar3; i++)
+---
+> 			for (int i = 0; i < nvar3; i++)
+360,368c346,350
+< 	    y2 = (*dolik)(n,      nvar,             nstrat,  1,
+< 			  newbeta,asInteger(dist),  strat,   offset,
+< 			  time1,  time2,            status,  wt,
+< 			  covar,  hmat,             JJ,      u,
+< 			  dexpr,  rho,              zptr,
+< 			  nfrail, fgrp,             hdiag,   jdiag);
+< 	    survpenal(1, nfrail,  nvar,   hmat,  JJ, hdiag, jdiag,  
+< 		      u, newbeta, &newpen, ptype, pdiag,
+< 		      pexpr1, cptr1, pexpr2, cptr2, rho);
+---
+> 			y2 = (*dolik)(n, nvar, nstrat, 1, newbeta, asInteger(dist), strat,
+> 					offset, time1, time2, status, wt, covar, hmat, JJ, u, dexpr,
+> 					rho, zptr, nfrail, fgrp, hdiag, jdiag);
+> 			survpenal(1, nfrail, nvar, hmat, JJ, hdiag, jdiag, u, newbeta,
+> 					&newpen, ptype, pdiag, pexpr1, cptr1, pexpr2, cptr2, rho);
+371c353
+< 	    for (golden=0; golden< 8; golden++) {
+---
+> 			for (int golden = 0; golden < 8; golden++) {
+377c359
+< 		    for (i=0; i<nvar3; i++)
+---
+> 					for (int i = 0; i < nvar3; i++)
+380,381c362
+< 		    }
+< 		else { /* toss away the interval from x3 to x4 */
+---
+> 				} else { /* toss away the interval from x3 to x4 */
+386c367
+< 		    for (i=0; i<nvar3; i++)
+---
+> 					for (int i = 0; i < nvar3; i++)
+391,402c372,382
+< 		newlk = (*dolik)(n,      nvar,             nstrat,  1,
+< 				 newbeta,asInteger(dist),  strat,   offset,
+< 				 time1,  time2,            status,  wt,
+< 				 covar,  hmat,             JJ,      u,
+< 				 dexpr,  rho,              zptr,
+< 				 nfrail, fgrp,             hdiag,   jdiag);
+< 		survpenal(1, nfrail,  nvar,   hmat,  JJ, hdiag, jdiag,  
+< 			  u, newbeta, &newpen, ptype, pdiag,
+< 			  pexpr1, cptr1, pexpr2, cptr2, rho);
+< 		     
+< 		if (goright) y3= newlk + newpen;
+< 		else         y2= newlk + newpen;
+---
+> 				newlk = (*dolik)(n, nvar, nstrat, 1, newbeta, asInteger(dist),
+> 						strat, offset, time1, time2, status, wt, covar, hmat,
+> 						JJ, u, dexpr, rho, zptr, nfrail, fgrp, hdiag, jdiag);
+> 				survpenal(1, nfrail, nvar, hmat, JJ, hdiag, jdiag, u, newbeta,
+> 						&newpen, ptype, pdiag, pexpr1, cptr1, pexpr2, cptr2,
+> 						rho);
+> 
+> 				if (goright)
+> 					y3 = newlk + newpen;
+> 				else
+> 					y2 = newlk + newpen;
+408,411c388,392
+< 		     for (i=0; i<nvar3; i++) newbeta[i] = beta[i] + u[i]*x2;
+< 		     }
+< 		 else {
+< 		     for (i=0; i<nvar3; i++) newbeta[i] = beta[i] + u[i]*x3;
+---
+> 					for (int i = 0; i < nvar3; i++)
+> 						newbeta[i] = beta[i] + u[i] * x2;
+> 				} else {
+> 					for (int i = 0; i < nvar3; i++)
+> 						newbeta[i] = beta[i] + u[i] * x3;
+413,421c394,399
+< 		 newlk = (*dolik)(n,      nvar,             nstrat,  0,
+< 				  newbeta,asInteger(dist),  strat,   offset,
+< 				  time1,  time2,            status,  wt,
+< 				  covar,  hmat,             JJ,      u,
+< 				  dexpr,  rho,              zptr,
+< 				  nfrail, fgrp,             hdiag,   jdiag);
+< 		 survpenal(0, nfrail,  nvar,   hmat,  JJ, hdiag, jdiag,  
+< 			   u, newbeta, &newpen, ptype, pdiag,
+< 			   pexpr1, cptr1, pexpr2, cptr2, rho);
+---
+> 				newlk = (*dolik)(n, nvar, nstrat, 0, newbeta, asInteger(dist),
+> 						strat, offset, time1, time2, status, wt, covar, hmat,
+> 						JJ, u, dexpr, rho, zptr, nfrail, fgrp, hdiag, jdiag);
+> 				survpenal(0, nfrail, nvar, hmat, JJ, hdiag, jdiag, u, newbeta,
+> 						&newpen, ptype, pdiag, pexpr1, cptr1, pexpr2, cptr2,
+> 						rho);
+424,425c402
+< 		 }
+< 	     else { /* abject failure */
+---
+> 			} else { /* abject failure */
+435c411
+< 	for (i=0; i<nvar3; i++) {
+---
+> 		for (int i = 0; i < nvar3; i++) {
+443c419,420
+<     if (maxiter > 1) *flag= 1000;  /* no "non convergence" for 0 or 1 iter */
+---
+> 	if (maxiter > 1)
+> 		*flag = 1000; /* no "non convergence" for 0 or 1 iter */
+449,452c426,429
+< alldone:
+<     *flag = cholesky3(hmat, nvar3, nfrail, hdiag, tol_chol);
+<     for (i=0; i<nvar2; i++) {
+< 	for (j=0; j<nvar3; j++)  hinv[i][j] = hmat[i][j];
+---
+> 	alldone: *flag = cholesky3(hmat, nvar3, nfrail, hdiag, tol_chol);
+> 	for (int i = 0; i < nvar2; i++) {
+> 		for (int j = 0; j < nvar3; j++)
+> 			hinv[i][j] = hmat[i][j];
+456c433
+<     for (i=nfrail; i<nvar3; i++) {       /*nicer output for S user */
+---
+> 	for (int i = nfrail; i < nvar3; i++) { /*nicer output for S user */
+460c437
+< 	for (j=i+1; j<nvar3; j++) {
+---
+> 		for (int j = i + 1; j < nvar3; j++) {
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/survregc1.c Recommended/survival/src/survregc1.c
+43a44
+> #include <Rmath.h>
+52,53c53,54
+< #define  SPI    2.506628274631001     /* sqrt(2*pi) */
+< #define  ROOT_2 1.414213562373095
+---
+> //#define  SPI    2.506628274631001     /* sqrt(2*pi) */
+> //#define  ROOT_2 1.414213562373095
+55,60c56,60
+< double survregc1(int n,          int nvar,      int nstrat,     int whichcase,
+< 		 double *beta,   int dist,      Sint *strat,    double *offset,
+< 		 double *time1,  double *time2, double *status, double *wt,
+< 		 double **covar, double **imat, double **JJ,    double *u, 
+< 		 SEXP expr,      SEXP rho,      double *dummy,  int nf,
+< 		 Sint *frail,    double *fdiag, double *jdiag ) {
+---
+> double survregc1(int n, int nvar, int nstrat, int whichcase, double *beta,
+> 		int dist, Sint *strat, double *offset, double *time1, double *time2,
+> 		double *status, double *wt, double **covar, double **imat, double **JJ,
+> 		double *u, SEXP expr, SEXP rho, double *dummy, int nf, Sint *frail,
+> 		double *fdiag, double *jdiag) {
+62c62
+<     int person, i,j,k;
+---
+> 	int j, k;
+66,70c66,67
+<     double  eta,
+< 	    sigma;
+<     double  z, zu,
+< 	    loglik,
+< 	    temp, temp2;
+---
+> 	double eta, sigma;
+> 	double z, zu, loglik, temp, temp2;
+80,82c77,85
+< 	case 1: sreg_gg = exvalue_d;  break;
+< 	case 2: sreg_gg = logistic_d; break;
+< 	case 3: sreg_gg = gauss_d;    break;
+---
+> 	case 1:
+> 		sreg_gg = exvalue_d;
+> 		break;
+> 	case 2:
+> 		sreg_gg = logistic_d;
+> 		break;
+> 	case 3:
+> 		sreg_gg = gauss_d;
+> 		break;
+90c93
+< 	for (i=0; i<nf; i++) {
+---
+> 		for (int i = 0; i < nf; i++) {
+94c97
+< 	for (i=0; i<nvar3; i++) {
+---
+> 		for (int i = 0; i < nvar3; i++) {
+96c99
+< 	    for (j=0; j<nvar2; j++) {
+---
+> 			for (int j = 0; j < nvar2; j++) {
+110c113
+<     for (person=0; person<n; person++) {
+---
+> 	for (int person = 0; person < n; person++) {
+121c124,125
+< 	for (i=0; i<nvar; i++) eta += beta[i+nf] * covar[i][person];
+---
+> 		for (int i = 0; i < nvar; i++)
+> 			eta += beta[i + nf] * covar[i][person];
+142,144c146,149
+< 		    dsig =0; ddsig=0; dsg=0;
+< 		    }
+< 		else {
+---
+> 				dsig = 0;
+> 				ddsig = 0;
+> 				dsg = 0;
+> 			} else {
+162,164c167,170
+< 		    dsig =0; ddsig=0; dsg=0;
+< 		    }
+< 		else {
+---
+> 				dsig = 0;
+> 				ddsig = 0;
+> 				dsg = 0;
+> 			} else {
+181c187,189
+< 		    dsig =0; ddsig=0; dsg=0;
+---
+> 				dsig = 0;
+> 				ddsig = 0;
+> 				dsg = 0;
+183,184c191
+< 		    }
+< 		else {
+---
+> 			} else {
+199,200c206,209
+< 		if (z>0)  temp = funs[1] - ufun[1]; /*stop roundoff in tails*/
+< 		else      temp = ufun[0] - funs[0];
+---
+> 			if (z > 0)
+> 				temp = funs[1] - ufun[1]; /*stop roundoff in tails*/
+> 			else
+> 				temp = ufun[0] - funs[0];
+206,208c215,218
+< 		    dsig =0; ddsig=0; dsg=0;
+< 		    }
+< 		else {
+---
+> 				dsig = 0;
+> 				ddsig = 0;
+> 				dsg = 0;
+> 			} else {
+213,216c223,226
+< 		    ddsig= ((zu*zu*ufun[3] - z*z*funs[3])/temp) -
+< 			                dsig*(1+dsig);
+< 		    dsg = ((zu*ufun[3] - z*funs[3])/ (temp*sigma)) -
+< 				      dg * (dsig +1);
+---
+> 				ddsig = ((zu * zu * ufun[3] - z * z * funs[3]) / temp)
+> 						- dsig * (1 + dsig);
+> 				dsg = ((zu * ufun[3] - z * funs[3]) / (temp * sigma))
+> 						- dg * (dsig + 1);
+227c237,238
+< 	if (whichcase==1) continue;     /*only needed the loglik */
+---
+> 		if (whichcase == 1)
+> 			continue; /*only needed the loglik */
+234c245
+< 	for (i=0; i<nvar; i++) {
+---
+> 		for (int i = 0; i < nvar; i++) {
+237,238c248,250
+< 	    for (j=0; j<=i; j++) {
+< 		imat[i][j+nf] -= covar[i][person] *covar[j][person] *ddg *w;
+---
+> 			for (int j = 0; j <= i; j++) {
+> 				imat[i][j + nf] -= covar[i][person] * covar[j][person] * ddg
+> 						* w;
+250c262
+< 	    for (i=0; i<nvar; i++) {
+---
+> 			for (int i = 0; i < nvar; i++) {
+276,277c287
+< static void logistic_d(double z, double ans[4], int j)
+<     {
+---
+> static void logistic_d(double z, double ans[4], int j) {
+289,290c299
+< 	}
+<     else {
+---
+> 	} else {
+297c306,307
+< 	case 1:  ans[1] = w/(temp*temp);
+---
+> 	case 1:
+> 		ans[1] = w / (temp * temp);
+301c311,312
+< 	case 2:  ans[1-ii] = w/temp;
+---
+> 	case 2:
+> 		ans[1 - ii] = w / temp;
+309,310c320
+< static void gauss_d(double z, double ans[4], int j)
+<     {
+---
+> static void gauss_d(double z, double ans[4], int j) {
+313c323
+<     f = exp(-z*z/2) /SPI;
+---
+> 	f = exp(-z * z / 2) * M_1_SQRT_2PI;
+315c325,326
+< 	case 1: ans[1] =f;
+---
+> 	case 1:
+> 		ans[1] = f;
+319,325c330,336
+< 	case 2: if (z>0) {
+< 		    ans[0] = (1 + erf(z/ROOT_2))/2;
+< 		    ans[1] =  erfc(z/ROOT_2) /2;
+< 		    }
+< 		else {
+< 		    ans[1] = (1 + erf(-z/ROOT_2))/2;
+< 		    ans[0] =  erfc(-z/ROOT_2) /2;
+---
+> 	case 2:
+> 		if (z > 0) {
+> 			ans[0] = (1 + erf(z / M_SQRT2)) / 2;
+> 			ans[1] = erfc(z / M_SQRT2) / 2;
+> 		} else {
+> 			ans[1] = (1 + erf(-z / M_SQRT2)) / 2;
+> 			ans[0] = erfc(-z / M_SQRT2) / 2;
+341,342c352
+< static void exvalue_d(double z, double ans[4], int j)
+<     {
+---
+> static void exvalue_d(double z, double ans[4], int j) {
+345,347c355,360
+<     if (z < SMALL) w= exp(SMALL);
+<     else if (-z < SMALL) w = exp(-SMALL);  /* stop infinite answers */
+<     else   w = exp(z);
+---
+> 	if (z < SMALL)
+> 		w = exp(SMALL);
+> 	else if (-z < SMALL)
+> 		w = exp(-SMALL); /* stop infinite answers */
+> 	else
+> 		w = exp(z);
+351c364,365
+< 	case 1:  ans[1] = w*temp;
+---
+> 	case 1:
+> 		ans[1] = w * temp;
+355c369,370
+< 	case 2:  ans[0] = 1-temp;
+---
+> 	case 2:
+> 		ans[0] = 1 - temp;
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/survregc2.c Recommended/survival/src/survregc2.c
+15,20c15,19
+< double survregc2(int n,          int nvar,     int nstrat,      int whichcase,
+< 		 double *beta,   int dist,     Sint *strat,     double *offset,
+< 		 double *time1,  double *time2, double *status, double *wt,
+< 		 double **covar, double **imat, double **JJ,    double *u, 
+< 		 SEXP expr,      SEXP rho,      double *z,      int nf,
+< 		 Sint *frail,    double *fdiag, double *jdiag ) {
+---
+> double survregc2(int n, int nvar, int nstrat, int whichcase, double *beta,
+> 		int dist, Sint *strat, double *offset, double *time1, double *time2,
+> 		double *status, double *wt, double **covar, double **imat, double **JJ,
+> 		double *u, SEXP expr, SEXP rho, double *z, int nf, Sint *frail,
+> 		double *fdiag, double *jdiag) {
+22c21
+<     int person, i,j,k;
+---
+> 	int person, j, k;
+25,26c24
+<     double  eta,
+< 	    sigma;
+---
+> 	double eta, sigma;
+29,30c27
+<     double  loglik,
+< 	    temp;
+---
+> 	double loglik, temp;
+44c41
+< 	for (i=0; i<nf; i++) {
+---
+> 		for (int i = 0; i < nf; i++) {
+48c45
+< 	for (i=0; i<nvar2+nf; i++) {
+---
+> 		for (int i = 0; i < nvar2 + nf; i++) {
+50c47
+< 	    for (j=0; j<nvar2; j++) {
+---
+> 			for (int j = 0; j < nvar2; j++) {
+73c70,71
+< 	for (i=0; i<nvar; i++) eta += beta[i] * covar[i][person];
+---
+> 		for (int i = 0; i < nvar; i++)
+> 			eta += beta[i] * covar[i][person];
+97c95,96
+<     for (i=0; i<4; i++) funs[i+1] = funs[i] + icount;
+---
+> 	for (int i = 0; i < 4; i++)
+> 		funs[i + 1] = funs[i] + icount;
+104c103
+<     for (person=0; person<n; person++) {
+---
+> 	for (int person = 0; person < n; person++) {
+124,126c123,126
+< 		    dsig =0; ddsig=0; dsg=0;
+< 		    }
+< 		else {
+---
+> 				dsig = 0;
+> 				ddsig = 0;
+> 				dsg = 0;
+> 			} else {
+142,144c142,145
+< 		    dsig =0; ddsig=0; dsg=0;
+< 		    }
+< 		else {
+---
+> 				dsig = 0;
+> 				ddsig = 0;
+> 				dsg = 0;
+> 			} else {
+147,148c148,149
+< 		    temp2 = -funs[3][person]*funs[2][person]*sig2/
+< 			               funs[1][person];
+---
+> 				temp2 = -funs[3][person] * funs[2][person] * sig2
+> 						/ funs[1][person];
+161c162,164
+< 		    dsig =0; ddsig=0; dsg=0;
+---
+> 				dsig = 0;
+> 				ddsig = 0;
+> 				dsg = 0;
+163,164c166
+< 		    }
+< 		else {
+---
+> 			} else {
+167,168c169,170
+< 		    temp2 = funs[3][person]*funs[2][person]*sig2/
+< 			                      funs[0][person];
+---
+> 				temp2 = funs[3][person] * funs[2][person] * sig2
+> 						/ funs[0][person];
+179,180c181,184
+< 		if (zz>0)  temp = funs[1][person] - funs[1][icount]; 
+< 		else       temp = funs[0][icount] - funs[0][person];
+---
+> 			if (zz > 0)
+> 				temp = funs[1][person] - funs[1][icount];
+> 			else
+> 				temp = funs[0][icount] - funs[0][person];
+186,188c190,193
+< 		    dsig =0; ddsig=0; dsg=0;
+< 		    }
+< 		else {
+---
+> 				dsig = 0;
+> 				ddsig = 0;
+> 				dsg = 0;
+> 			} else {
+193c198,199
+< 		    ddg = (funs[3][icount] -funs[3][person])*sig2/temp - dg*dg;
+---
+> 				ddg = (funs[3][icount] - funs[3][person]) * sig2 / temp
+> 						- dg * dg;
+197,198c203,204
+< 		    dsg = (zu*funs[3][icount] - zz*funs[3][person])/
+< 			       (temp*sigma)  - dg *(1+dsig);
+---
+> 				dsg = (zu * funs[3][icount] - zz * funs[3][person])
+> 						/ (temp * sigma) - dg * (1 + dsig);
+208c214,215
+< 	if (whichcase==1) continue;     /*only needed the loglik */
+---
+> 		if (whichcase == 1)
+> 			continue; /*only needed the loglik */
+216c223
+< 	for (i=0; i<nvar; i++) {
+---
+> 		for (int i = 0; i < nvar; i++) {
+219,220c226,228
+< 	    for (j=0; j<=i; j++) {
+< 		imat[i][j+nf] -= covar[i][person] *covar[j][person] *ddg *w;
+---
+> 			for (int j = 0; j <= i; j++) {
+> 				imat[i][j + nf] -= covar[i][person] * covar[j][person] * ddg
+> 						* w;
+232c240
+< 	    for (i=0; i<nvar; i++) {
+---
+> 			for (int i = 0; i < nvar; i++) {
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/survival/src/tmerge.c Recommended/survival/src/tmerge.c
+14,16c14,15
+< SEXP tmerge(SEXP id2,  SEXP time2x, SEXP newx2,
+<             SEXP nid2, SEXP ntime2, SEXP x2,  SEXP indx2) {
+<     int i, k;
+---
+> SEXP tmerge(SEXP id2, SEXP time2x, SEXP newx2, SEXP nid2, SEXP ntime2, SEXP x2,
+> 		SEXP indx2) {
+20,21c19
+<     double *time2, 
+< 	   *ntime, *x;
+---
+> 	double *time2, *ntime, *x;
+49,51c47,50
+<     for (k=0; k<n2; k++) {
+< 	for (i=indx[k]-1; i<n1; i++) {
+< 	    if (id[i] != nid[k] || time2[i] <= ntime[k]) break;
+---
+> 	for (int k = 0; k < n2; k++) {
+> 		for (int i = indx[k] - 1; i < n1; i++) {
+> 			if (id[i] != nid[k] || time2[i] <= ntime[k])
+> 				break;

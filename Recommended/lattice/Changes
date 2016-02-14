@@ -234,11 +234,120 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > rfs(model, layout=c(2, 1), xlab = gettext("f-value", domain = "R-lattice"), ylab=NULL,
 Only in Recommended/lattice/src: localization.h
 diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/lattice/src/threeDplot.c Recommended/lattice/src/threeDplot.c
-2c2
+1a2
+> #include "localization.h"
+3,10c4,5
+< 
+< 
+< 
+< static void 
+< calculate_angles(double *x, double *y, double *z,
+< 		 double *ls, double *misc, 
+< 		 double distance)
+< {
+---
+> static void calculate_angles(double *x, double *y, double *z, double *ls,
+> 		double *misc, double distance) {
+105,106c99,100
+< 	misc[0] /= sqrt((xl * xl + yl * yl + zl * zl) * (xn * xn + yn * yn + zn * zn));
 < 
 ---
-> #include "localization.h"
-154c154
+> 		misc[0] /= sqrt(
+> 				(xl * xl + yl * yl + zl * zl) * (xn * xn + yn * yn + zn * zn));
+121c115,116
+<     if (len != 0) len /= (xn * xn + yn * yn + zn * zn);
+---
+> 	if (len != 0)
+> 		len /= (xn * xn + yn * yn + zn * zn);
+143c138,139
+< 	misc[1] /= sqrt((xr * xr + yr * yr + zr * zr) * (xe * xe + ye * ye + ze * ze));
+---
+> 		misc[1] /= sqrt(
+> 				(xr * xr + yr * yr + zr * zr) * (xe * xe + ye * ye + ze * ze));
+154c150,152
 < 	error("bug in wireframe calculations: cosines supposed to be non-negative but not");
 ---
-> 	error(_("bug in wireframe calculations: cosines supposed to be non-negative but not"));
+> 		error(
+> 				_(
+> 						"bug in wireframe calculations: cosines supposed to be non-negative but not"));
+165,171c158,159
+< 				SEXP distanceArg,
+< 				SEXP nxArg, SEXP nyArg, SEXP ngArg,
+< 				SEXP lsArg,
+< 				SEXP env, 
+< 				SEXP shadeArg,
+< 				SEXP isParSurfArg)
+< {
+---
+> 		SEXP distanceArg, SEXP nxArg, SEXP nyArg, SEXP ngArg, SEXP lsArg,
+> 		SEXP env, SEXP shadeArg, SEXP isParSurfArg) {
+325,326c310
+<      }
+<      else {
+---
+> 	} else {
+406,407c385,388
+< 	 if (isparsurf)	misc[2] += sqrt(tx * tx + ty * ty + tz * tz);
+< 	 else misc[2] += tz;
+---
+> 		if (isparsurf)
+> 			misc[2] += sqrt(tx * tx + ty * ty + tz * tz);
+> 		else
+> 			misc[2] += tz;
+432,433c413,416
+< 	 if (isparsurf)	misc[2] += sqrt(tx * tx + ty * ty + tz * tz);
+< 	 else misc[2] += tz;
+---
+> 		if (isparsurf)
+> 			misc[2] += sqrt(tx * tx + ty * ty + tz * tz);
+> 		else
+> 			misc[2] += tz;
+459,460c441,444
+< 	 if (isparsurf)	misc[2] += sqrt(tx * tx + ty * ty + tz * tz);
+< 	 else misc[2] += tz;
+---
+> 		if (isparsurf)
+> 			misc[2] += sqrt(tx * tx + ty * ty + tz * tz);
+> 		else
+> 			misc[2] += tz;
+488,489c469,472
+< 	 if (isparsurf)	misc[2] += sqrt(tx * tx + ty * ty + tz * tz);
+< 	 else misc[2] += tz;
+---
+> 		if (isparsurf)
+> 			misc[2] += sqrt(tx * tx + ty * ty + tz * tz);
+> 		else
+> 			misc[2] += tz;
+540c521,522
+< 	     if (anyNaOrNan == 0) eval(call, env);
+---
+> 			if (anyNaOrNan == 0)
+> 				eval(call, env);
+567c549,550
+< 	     if (anyNaOrNan == 0) eval(call, env);
+---
+> 			if (anyNaOrNan == 0)
+> 				eval(call, env);
+569,570c552
+< 	 }
+< 	 else {
+---
+> 		} else {
+579c561,562
+< 	     if (anyNaOrNan == 0) eval(call, env);
+---
+> 			if (anyNaOrNan == 0)
+> 				eval(call, env);
+diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--exclude=Makefile*' '--exclude=all.R' '--exclude=Changes' R-recommended/lattice/src/threeDplot.h Recommended/lattice/src/threeDplot.h
+10,17c8,9
+< 				SEXP distanceArg,
+< 				SEXP nxArg, SEXP nyArg, SEXP ngArg,
+< 				SEXP lsArg,
+< 				SEXP env, 
+< 				SEXP shadeArg,
+< 				SEXP isParSurfArg);
+< 
+< 
+---
+> 		SEXP distanceArg, SEXP nxArg, SEXP nyArg, SEXP ngArg, SEXP lsArg,
+> 		SEXP env, SEXP shadeArg, SEXP isParSurfArg);

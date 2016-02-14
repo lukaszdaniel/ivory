@@ -94,14 +94,175 @@ diff -rEZbwB '--exclude=*.[lo,d,pdf,mo,po,tgz,gz,save]*' '--exclude=MD5' '--excl
 > #include <R_ext/Minmax.h>
 21a23
 > #include "localization.h"
-135c137
+29,32c31,32
+< void
+< VR_knn1(Sint *pntr, Sint *pnte, Sint *p, double *train, Sint *class,
+< 	double *test, Sint *res, Sint *votes, Sint *nc, double *dists)
+< {
+---
+> void VR_knn1(Sint *pntr, Sint *pnte, Sint *p, double *train, Sint *class,
+> 		double *test, Sint *res, Sint *votes, Sint *nc, double *dists) {
+92,94c91
+< 
+< void
+< VR_knn(Sint *kin, Sint *lin, Sint *pntr, Sint *pnte, Sint *p,
+---
+> void VR_knn(Sint *kin, Sint *lin, Sint *pntr, Sint *pnte, Sint *p,
+96,99c93,95
+<        Sint *votes, Sint *nc, Sint *cv, Sint *use_all)
+< {
+<     int   i, index, j, k, k1, kinit = *kin, kn, l = *lin, mm, npat, ntie,
+<           ntr = *pntr, nte = *pnte, extras;
+---
+> 		Sint *votes, Sint *nc, Sint *cv, Sint *use_all) {
+> 	int i, index, j, k, k1, kinit = *kin, kn, l = *lin, mm, npat, ntie, ntr =
+> 			*pntr, nte = *pnte, extras;
+135c131
 < 				error("too many ties in knn");
 ---
-> 				error(_("too many ties in knn"));
-206d207
+> 								error(_("too many ties in knn"));
+205,212c201,202
+< 
 < #define min9(a,b) ((a < b)?a:b)
-238c239
+< 
+< void
+< VR_olvq(double *alpha, Sint *pn, Sint *p, double *x, Sint *cl,
+< 	Sint *pncodes, double *xc, Sint *clc, Sint *niter,
+< 	Sint *iters)
+< {
+---
+> void VR_olvq(double *alpha, Sint *pn, Sint *p, double *x, Sint *cl,
+> 		Sint *pncodes, double *xc, Sint *clc, Sint *niter, Sint *iters) {
+236,238c226,228
+< 	    xc[index + k * ncodes] += s * al[index] *
+< 		(x[npat + k * n] - xc[index + k * ncodes]);
 < 	al[index] = min9(*alpha, al[index] / (1 + s * al[index]));
 ---
-> 	al[index] = min(*alpha, al[index] / (1 + s * al[index]));
+> 			xc[index + k * ncodes] += s * al[index]
+> 					* (x[npat + k * n] - xc[index + k * ncodes]);
+> 		al[index] = min(*alpha, al[index] / (1 + s * al[index]));
+243,247c233,234
+< void
+< VR_lvq1(double *alpha, Sint *pn, Sint *p, double *x, Sint *cl,
+< 	Sint *pncodes, double *xc, Sint *clc, Sint *niter,
+< 	Sint *iters)
+< {
+---
+> void VR_lvq1(double *alpha, Sint *pn, Sint *p, double *x, Sint *cl,
+> 		Sint *pncodes, double *xc, Sint *clc, Sint *niter, Sint *iters) {
+269,270c256,257
+< 	    xc[index + k * ncodes] += s * alpha_t *
+< 		(x[npat + k * n] - xc[index + k * ncodes]);
+---
+> 			xc[index + k * ncodes] += s * alpha_t
+> 					* (x[npat + k * n] - xc[index + k * ncodes]);
+274,280c261,264
+< void
+< VR_lvq2(double *alpha, double *win, Sint *pn, Sint *p, double *x,
+< 	Sint *cl, Sint *pncodes, double *xc, Sint *clc,
+< 	Sint *niter, Sint *iters)
+< {
+<     int index = 0, iter, j, k, n = *pn, ncodes = *pncodes, nindex = 0,
+< 	npat, ntmp;
+---
+> void VR_lvq2(double *alpha, double *win, Sint *pn, Sint *p, double *x, Sint *cl,
+> 		Sint *pncodes, double *xc, Sint *clc, Sint *niter, Sint *iters) {
+> 	int index = 0, iter, j, k, n = *pn, ncodes = *pncodes, nindex = 0, npat,
+> 			ntmp;
+315,318c299,302
+< 		    xc[index + k * ncodes] += alpha_t *
+< 			(x[npat + k * n] - xc[index + k * ncodes]);
+< 		    xc[nindex + k * ncodes] -= alpha_t *
+< 			(x[npat + k * n] - xc[nindex + k * ncodes]);
+---
+> 					xc[index + k * ncodes] += alpha_t
+> 							* (x[npat + k * n] - xc[index + k * ncodes]);
+> 					xc[nindex + k * ncodes] -= alpha_t
+> 							* (x[npat + k * n] - xc[nindex + k * ncodes]);
+325,331c309,313
+< void
+< VR_lvq3(double *alpha, double *win, double *epsilon, Sint *pn, Sint *p,
+< 	double *x, Sint *cl, Sint *pncodes, double *xc, Sint *clc,
+< 	Sint *niter, Sint *iters)
+< {
+<     int index = 0, iter, j, k, n = *pn, ncodes = *pncodes, nindex = 0,
+< 	npat, ntmp;
+---
+> void VR_lvq3(double *alpha, double *win, double *epsilon, Sint *pn, Sint *p,
+> 		double *x, Sint *cl, Sint *pncodes, double *xc, Sint *clc, Sint *niter,
+> 		Sint *iters) {
+> 	int index = 0, iter, j, k, n = *pn, ncodes = *pncodes, nindex = 0, npat,
+> 			ntmp;
+365,368c347,350
+< 		    xc[index + k * ncodes] += alpha_t *
+< 			(x[npat + k * n] - xc[index + k * ncodes]);
+< 		    xc[nindex + k * ncodes] -= alpha_t *
+< 			(x[npat + k * n] - xc[nindex + k * ncodes]);
+---
+> 					xc[index + k * ncodes] += alpha_t
+> 							* (x[npat + k * n] - xc[index + k * ncodes]);
+> 					xc[nindex + k * ncodes] -= alpha_t
+> 							* (x[npat + k * n] - xc[nindex + k * ncodes]);
+373,376c355,358
+< 		xc[index + k * ncodes] += *epsilon * alpha_t *
+< 		    (x[npat + k * n] - xc[index + k * ncodes]);
+< 		xc[nindex + k * ncodes] += *epsilon * alpha_t *
+< 		    (x[npat + k * n] - xc[nindex + k * ncodes]);
+---
+> 				xc[index + k * ncodes] += *epsilon * alpha_t
+> 						* (x[npat + k * n] - xc[index + k * ncodes]);
+> 				xc[nindex + k * ncodes] += *epsilon * alpha_t
+> 						* (x[npat + k * n] - xc[nindex + k * ncodes]);
+382,386c364,365
+< void
+< VR_onlineSOM(double *data, double *codes, double *nhbrdist,
+< 	     double *alpha, double *radii,
+< 	     Sint *pn, Sint *pp, Sint *pncodes, Sint *rlen)
+< {
+---
+> void VR_onlineSOM(double *data, double *codes, double *nhbrdist, double *alpha,
+> 		double *radii, Sint *pn, Sint *pp, Sint *pncodes, Sint *rlen) {
+397c376,377
+< 	nind = 0; dm = DOUBLE_XMAX;
+---
+> 		nind = 0;
+> 		dm = DOUBLE_XMAX;
+409c389,390
+< 		    if(++nind * UNIF < 1.0) nearest = cd;
+---
+> 					if (++nind * UNIF < 1.0)
+> 						nearest = cd;
+415c396,397
+< 		if(nhbrdist[cd + ncodes*nearest] > radii[k]) continue;
+---
+> 				if (nhbrdist[cd + ncodes * nearest] > radii[k])
+> 					continue;
+417,418c399,400
+< 		    codes[cd + j*ncodes] += alpha[k] *
+< 			(data[i + j*n] - codes[cd + j*ncodes]);
+---
+> 					codes[cd + j * ncodes] += alpha[k]
+> 							* (data[i + j * n] - codes[cd + j * ncodes]);
+427,436c409,413
+< static const R_CMethodDef CEntries[] = {
+<     {"VR_knn", (DL_FUNC) &VR_knn, 14},
+<     {"VR_knn1", (DL_FUNC) &VR_knn1, 10},
+<     {"VR_lvq1", (DL_FUNC) &VR_lvq1, 10},
+<     {"VR_lvq2", (DL_FUNC) &VR_lvq2, 11},
+<     {"VR_lvq3", (DL_FUNC) &VR_lvq3, 12},
+<     {"VR_olvq", (DL_FUNC) &VR_olvq, 10},
+<     {"VR_onlineSOM", (DL_FUNC) &VR_onlineSOM, 9},
+<     {NULL, NULL, 0}
+< };
+---
+> static const R_CMethodDef CEntries[] = { { "VR_knn", (DL_FUNC) & VR_knn, 14 }, {
+> 		"VR_knn1", (DL_FUNC) & VR_knn1, 10 }, { "VR_lvq1", (DL_FUNC) & VR_lvq1,
+> 		10 }, { "VR_lvq2", (DL_FUNC) & VR_lvq2, 11 }, { "VR_lvq3", (DL_FUNC)
+> 		& VR_lvq3, 12 }, { "VR_olvq", (DL_FUNC) & VR_olvq, 10 }, {
+> 		"VR_onlineSOM", (DL_FUNC) & VR_onlineSOM, 9 }, { NULL, NULL, 0 } };
+439,440c416
+< void R_init_class(DllInfo *dll)
+< {
+---
+> void R_init_class(DllInfo *dll) {
 Only in Recommended/class/src: localization.h
