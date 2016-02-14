@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-02-07 r593) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-02-14 r612) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-02-07 r70118) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-02-14 r70169) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -195,7 +195,7 @@ Error in command 'assertWarning(ff())':
 > bibstyle("unsorted", sortKeys = function(refs) seq_along(refs),
 +     fmtPrefix = function(paper) paste0("[", paper$.index, "]"),
 +        .init = TRUE)
-<environment: 0x44cd290>
+<environment: 0xe0d740>
 > print(refs, .bibstyle = "unsorted")
 [1] R Core Team (2013). _R: A Language and Environment for Statistical
 Computing_. R Foundation for Statistical Computing, Vienna, Austria.
@@ -611,15 +611,15 @@ attr(,"match.length")
 > ### ** Examples
 > 
 > pkgDepends("tools", local = FALSE)
-Warning: 'pkgDepends' is deprecated.
-Use 'package_dependencies()' instead.
+Warning: Function 'pkgDepends' is deprecated.
+Use function 'package_dependencies()' instead.
 See help("Deprecated")
-Warning: 'package.dependencies' is deprecated.
-Use 'package_dependencies' instead.
+Warning: Function 'package.dependencies' is deprecated.
+Use function 'package_dependencies' instead.
 See help("Deprecated")
-Warning: 'getDepList' is deprecated.
-Use 'dependsOnPkgs() or package_dependencies()' instead.
-See help("Deprecated")
+Warning: Function 'getDepList()' is deprecated.
+Use function 'dependsOnPkgs()' or 'package_dependencies()' instead.
+
 $Depends
 character(0)
 
@@ -674,15 +674,15 @@ attr(,"class")
 > dir.create(tmp)
 > 
 > pDL <- pkgDepends("tools", local = FALSE)
-Warning: 'pkgDepends' is deprecated.
-Use 'package_dependencies()' instead.
+Warning: Function 'pkgDepends' is deprecated.
+Use function 'package_dependencies()' instead.
 See help("Deprecated")
-Warning: 'package.dependencies' is deprecated.
-Use 'package_dependencies' instead.
+Warning: Function 'package.dependencies' is deprecated.
+Use function 'package_dependencies' instead.
 See help("Deprecated")
-Warning: 'getDepList' is deprecated.
-Use 'dependsOnPkgs() or package_dependencies()' instead.
-See help("Deprecated")
+Warning: Function 'getDepList()' is deprecated.
+Use function 'dependsOnPkgs()' or 'package_dependencies()' instead.
+
 > installFoundDepends(pDL$Found, destdir = tmp)
 Warning: 'installFoundDepends()' is deprecated: It is misleading nowadays
  since it has never taken 'Imports' into consideration
@@ -1008,7 +1008,7 @@ List of 6 components
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.608 0.032 0.639 0 0 
+Time elapsed:  0.256 0.048 0.305 0 0 
 > grDevices::dev.off()
 null device 
           1 

@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-02-07 r593) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-02-14 r612) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-02-07 r70118) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-02-14 r70169) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -54,4 +54,4 @@ In command 'coxph(Surv(time, status) ~ age + sex:strata(ph.ecog), tdata)':
 > 
 > proc.time()
    user  system elapsed 
-  0.208   0.016   0.215 
+  0.156   0.024   0.174 

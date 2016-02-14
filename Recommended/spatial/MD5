@@ -31,10 +31,10 @@ b1438ee845934762e30612fe0d406c86 *inst/po/en@quot/LC_MESSAGES/R-spatial.mo
 66d59f30bbbf0280d05053e0474c620a *inst/po/ko/LC_MESSAGES/R-spatial.mo
 d0be93e6b64734ec0d0721d3d1bd6334 *inst/po/pl/LC_MESSAGES/R-spatial.mo
 7e12726c0a5f9abf7de8b68735d73750 *inst/PP.files
-b73d901aec0000ef0b54400c80081df2 *R/pp.R
+30a993f860dfe832b6df3c6ffe645232 *R/pp.R
 98a2ee9826ed77ec2c49d4b4d4cbd123 *R/zzz.R
-c2da393656e5ed900fb5aed94105319b *R/kr.R
-061872734a77c6f9eaeec8b5156b368a *Changes
+41d587b6618e1b4b3dd4d00fb8a8a3fe *R/kr.R
+ca28d3976d6350f9bb67a9ab1370d3de *Changes
 9669a5ba859da001694e764789a4ce73 *NAMESPACE
 9fab525de9b9302dc3ab737d6a0e0015 *DESCRIPTION
 a3b0f85bd4ee4cb92fc878dff60dd435 *po/spatial.pot

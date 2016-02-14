@@ -8,9 +8,9 @@ b8c0310be0136ae7d9b479bd001dba0c *inst/po/ko/LC_MESSAGES/R-nnet.mo
 085d3b3557ff27e2bdcfd40b727c1723 *inst/po/pl/LC_MESSAGES/R-nnet.mo
 91cbc73bd6fed6d715f20cd97e7a47ac *R/zzz.R
 0611f18002ef19f31e57919fd7a80b35 *R/vcovmultinom.R
-d805c54530cb5e52e54755f1110e0c7a *R/multinom.R
-23e482c6ed66891ff10c94ab74a09bad *R/nnet.R
-dde2ed1c21f0e4397d60f292732d3f26 *Changes
+bae3c754a31fe4669807864a2f3f9356 *R/multinom.R
+8ae55d4e10c3b9f5993690ce950abd24 *R/nnet.R
+a552078bc6d46f59fd9a9b540517e000 *Changes
 3108fb45014de53cb6a33bdac2bc71b3 *NAMESPACE
 3679ec8ae98688cc5515c3e6d0c6a4f1 *DESCRIPTION
 63e26fa47eb9adcc38f30f3471a86240 *po/R-de.po

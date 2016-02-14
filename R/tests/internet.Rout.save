@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-02-07 r593) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-02-14 r612) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-02-07 r70118) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-02-14 r70169) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -30,7 +30,7 @@ Type 'q()' to quit R.
 > 
 > # test do_download.
 > nrow(available.packages(contrib.url("http://cran.r-project.org")))
-[1] 7860
+[1] 7901
 > 
 > # test url connections on http
 > zz <- url("http://cran.r-project.org/")

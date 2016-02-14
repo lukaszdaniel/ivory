@@ -154,7 +154,7 @@ a317b028c0068a3fe27c2d27219f13b6 *R/sammon.R
 65465a53489bf07c42f2d41f641376ab *R/stdres.R
 1a7dc09590c1fe2f4f47d3bb0fd22e9d *R/truehist.R
 35aff05a505ecf7e81e0473767794ca9 *INDEX
-a2feb629c0dc1cd5491d86df6c2afc37 *Changes
+efdd29c1f69621c9876c8389ade52011 *Changes
 026d810db3c67bd78387f8f0be8465f4 *NAMESPACE
 4a57ea9fed741e4f897fecfa0d716ae1 *DESCRIPTION
 b678832e02372694edb83acf679710c9 *po/R-de.po
@@ -333,7 +333,7 @@ afd4f607cba7fda8ec4d22bffd88fc50 *tests/glm.nb.R
 7b1360150b8598b576e82534b12345a2 *tests/BankWages.rda
 f4e6b3ffb6521ea7625515e2f0ae7f98 *tests/profile.R
 a0854fee9b36691ca1d0880da31d6f79 *tests/fitdistr.R
-8fabc01725331a666ffbd0001640041b *tests/regression.Rout.save
-6293c11184643dd18939afb0d97d3154 *tests/fitdistr.Rout.save
+3458c9cfa850a6e25836063403b7c9a0 *tests/regression.Rout.save
+e3561b42fadf95bf65dd52245aa04c78 *tests/fitdistr.Rout.save
 a23ddf89e02a02ed030e4ed5538d3430 *tests/regression.R
 fd9fbc52e72cc2fb95470ff7f531b216 *tests/Examples/MASS-Ex.Rout.save
