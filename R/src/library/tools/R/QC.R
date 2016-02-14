@@ -6799,6 +6799,11 @@ function(dir)
             out$R_files_non_ASCII <- lines
     }
 
+    size <- Sys.getenv("_R_CHECK_SIZE_OF_TARBALL_",
+                       unset = NA_character_)
+    if(!is.na(size) && (as.integer(size) > 5000000))
+        out$size_of_tarball <- size
+
     ## Is this an update for a package already on CRAN?
     db <- db[(packages == package) &
              (db[, "Repository"] == CRAN) &
@@ -6820,11 +6825,6 @@ function(dir)
             out$bad_license <- meta["License"]
         return(out)
     }
-
-    size <- Sys.getenv("_R_CHECK_SIZE_OF_TARBALL_",
-                       unset = NA_character_)
-    if(!is.na(size) && (as.integer(size) > 5000000))
-        out$size_of_tarball <- size
 
     ## Checks from this point down should be for a package already on CRAN
 
