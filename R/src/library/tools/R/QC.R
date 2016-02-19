@@ -6895,7 +6895,10 @@ function(x, ...)
 
     c(character(),
       if(length(x$Maintainer))
-          gettextf("Maintainer: %s", sQuote(paste(x$Maintainer, collapse = " ")), domain = "R-tools")
+          gettextf("Maintainer: %s",
+                  sQuote(trimws(gsub("\n", " ",
+                                     paste(x$Maintainer,
+                                           collapse = " ")))), domain = "R-tools")
       else
           gettext("No maintainer field in DESCRIPTION file", domain = "R-tools"),
       fmt(c(if(x$empty_Maintainer_name)
