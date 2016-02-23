@@ -300,6 +300,9 @@
       Foundation by RStudio).  It is defined in \file{.svg} format, so
       will resize without unnecessary degradation when displayed on
       HTML pages.
+
+      \item New function \code{.traceback()} returns the stack trace
+      which \code{traceback()} prints.
     }
   }
 
@@ -322,12 +325,6 @@
       \item \command{R CMD Rdconv} and \command{R CMD Rd2pdf} each have
       a new option \option{--RdMacros=pkglist} which allows Rd macros
       to be specified before processing.
-
-      \item \command{R CMD check} will leave a log file
-      \file{build_vignettes.log} from the re-building of vignettes in
-      the \file{.Rcheck} directory if there is a problem, and always if
-      environment variable \env{_R_CHECK_ALWAYS_LOG_VIGNETTE_OUTPUT_} is
-      set to a true value.
     }
   }
 
@@ -528,10 +525,26 @@
       optional argument \code{stringsAsFactors} (instead of only
       depending on \code{getOption("stringsAsFactors")}).
 
-      \code{smooth(x, *)} now also works for long vectors.
+      \item \code{smooth(x, *)} now also works for long vectors.
+      
+      \item \code{tools::texi2dvi()} has a workaround for problems with
+      the \command{texi2dvi} script supplied by \pkg{texinfo 6.1}.
+
+      It extracts more error messages from the LaTeX logs when in
+      emulation mode.
     }
   }
 
+  \subsection{UTILITIES}{
+    \itemize{
+      \item \command{R CMD check} will leave a log file
+      \file{build_vignettes.log} from the re-building of vignettes in
+      the \file{.Rcheck} directory if there is a problem, and always if
+      environment variable \env{_R_CHECK_ALWAYS_LOG_VIGNETTE_OUTPUT_} is
+      set to a true value.
+    }
+  }
+  
   \subsection{DEPRECATED AND DEFUNCT}{
     \itemize{
       \item Use of \samp{SUPPORT_OPENMP} from header \file{Rconfig.h} is
@@ -684,9 +697,6 @@
 
       \item \code{View()} now displays nested data frames in a more
       friendly way.  (Request with patch in \PR{15915}.)
-
-      \item New \code{.traceback()} returns the stack trace which
-      \code{traceback()} prints.
     }
   }
 

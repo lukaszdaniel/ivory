@@ -2904,7 +2904,6 @@ setRlibs <-
                 ## testing what R CMD build uses.
                 Rcmd <- sprintf("options(warn=1)\nlibrary(tools)\nbuildVignettes(dir = '%s')", file.path(pkgoutdir, "vign_test", pkgname0))
                 t1 <- proc.time()
-#                outfile <- tempfile()
                 outfile <- file.path(pkgoutdir, "build_vignettes.log")
                 status <- R_runR(Rcmd, R_opts2, jitstr, stdout = outfile, stderr = outfile)
                 t2 <- proc.time()
