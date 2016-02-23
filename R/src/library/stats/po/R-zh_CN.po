@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-09 07:32\n"
+"POT-Creation-Date: 2016-02-23 20:39\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -3758,9 +3758,10 @@ msgstr ""
 msgid "dendrogram leaf '%s', at height %s"
 msgstr ""
 
-#. R/dendrogram.R: stop("dendrogram node with non-positive #{branches}")
+#. R/dendrogram.R: stop("dendrogram node with non-positive number of branches")
 #: R/dendrogram.R:0
-msgid "dendrogram node with non-positive #{branches}"
+#, fuzzy
+msgid "dendrogram node with non-positive number of branches"
 msgstr "系統樹圖節點有非正#{分支}"
 
 #. R/dendrogram.R: stop("dendrogram non-leaf node with non-positive #{branches}")
@@ -4235,7 +4236,6 @@ msgstr "'use'参数不对"
 #. R/loess.R: gettextf("invalid '%s' value", "NROW(X)")
 #. R/runmed.R: gettextf("invalid '%s' value", "length(x)")
 #. R/runmed.R: gettextf("invalid '%s' value", "k")
-#. R/smooth.R: gettextf("invalid '%s' value", "length(x)")
 #. R/smspline.R: gettextf("invalid '%s' value", "control.spar")
 #. R/spline.R: gettextf("invalid '%s' value", "length(x)")
 #. R/splinefun.R: gettextf("invalid '%s' value", "length(x)")
@@ -4243,8 +4243,8 @@ msgstr "'use'参数不对"
 #. R/symnum.R: gettextf("invalid '%s' value", "abbr.colnames'")
 #: R/HoltWinters.R:0 R/approx.R:0 R/bandwidths.R:0 R/cmdscale.R:0
 #: R/density.R:0 R/diffinv.R:0 R/filter.R:0 R/kmeans.R:0 R/loess.R:0
-#: R/runmed.R:0 R/smooth.R:0 R/smspline.R:0 R/spline.R:0 R/splinefun.R:0
-#: R/stl.R:0 R/symnum.R:0
+#: R/runmed.R:0 R/smspline.R:0 R/spline.R:0 R/splinefun.R:0 R/stl.R:0
+#: R/symnum.R:0
 #, fuzzy
 msgid "invalid '%s' value"
 msgstr "'use'参数不对"
@@ -4886,11 +4886,6 @@ msgstr "拟合模型里没有因子"
 msgid "no finite observations"
 msgstr "没有有限观察量"
 
-#. R/complete.cases.R: stop("no input has determined the number of cases")
-#: R/complete.cases.R:0
-msgid "no input has determined the number of cases"
-msgstr ""
-
 #. R/loess.R: stop("no models to compare")
 #: R/loess.R:0
 msgid "no models to compare"
@@ -5055,12 +5050,6 @@ msgstr "非时间序列的长度不对"
 #: R/stepfun.R:0
 msgid "not a valid step function"
 msgstr "步驟函数不对"
-
-#. R/complete.cases.R: stop("not all arguments have the same length", call. = FALSE)
-#: R/complete.cases.R:0
-#, fuzzy
-msgid "not all arguments have the same length"
-msgstr "参数的长度必需一样"
 
 #. R/ts.R: stop("not all series have the same frequency")
 #: R/ts.R:0
@@ -6832,6 +6821,10 @@ msgstr[0] "模型里下範疇没有这些词条%s"
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "在组合拟合中用%d/%d行"
+
+#, fuzzy
+#~ msgid "not all arguments have the same length"
+#~ msgstr "参数的长度必需一样"
 
 #~ msgid "non-matched further arguments are disregarded"
 #~ msgstr "不匹配的额外参数略过不用"

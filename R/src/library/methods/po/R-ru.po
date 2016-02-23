@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-27 18:05\n"
+"POT-Creation-Date: 2016-02-23 20:39\n"
 "PO-Revision-Date: 2012-03-15 11:56-0500\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -1008,17 +1008,6 @@ msgstr ""
 "определение не будет рассматриваться как соответствующее определению из "
 "пакета %s"
 
-#. R/RClassUtils.R: gettextf("Note: the specification for S3 class %s in package %s seems equivalent to one from package %s: not turning on duplicate class definitions for this class.",     dQuote(def@className), sQuote(def@package), sQuote(prev@package))
-#: R/RClassUtils.R:0
-#, fuzzy
-msgid ""
-"Note: the specification for S3 class %s in package %s seems equivalent to "
-"one from package %s: not turning on duplicate class definitions for this "
-"class."
-msgstr ""
-"Спецификация класса S3 %s в пакете %s похожа на спецификацию из пакета %s и "
-"не превращается в дублированное определение для этого класса"
-
 #. R/RClassUtils.R: gettextf("Note: the specification for class %s in package %s seems equivalent to one from package %s and is not turning on duplicate class definitions for this class",     dQuote(def@className), sQuote(def@package), sQuote(prev@package))
 #: R/RClassUtils.R:0
 #, fuzzy
@@ -1230,6 +1219,16 @@ msgstr ""
 "определение метода 'replace' в 'setAs' должно быть функцией двух аргументов, "
 "получено %d"
 
+#. R/refClass.R: gettextf("a call to 'superClass()' is in the method %s but there is no superclass definition of this method for class %s",     sQuote(me), dQuote(thisClass@className))
+#: R/refClass.R:0
+#, fuzzy
+msgid ""
+"a call to 'superClass()' is in the method %s but there is no superclass "
+"definition of this method for class %s"
+msgstr ""
+"вызов superClass() есть в методе \"%s\", но там нет определения "
+"суперклассаэтого метода для класса %s"
+
 #. R/NextMethod.R: gettextf("a call to callNextMethod() appears in a call to %s, but the call does not seem to come from either a generic function or another 'callNextMethod'",     sQuote(f))
 #: R/NextMethod.R:0
 #, fuzzy
@@ -1239,16 +1238,6 @@ msgid ""
 msgstr ""
 "при обращении к \"%s\", похоже был вызван callNextMethod(), но данный вызов "
 "не был, похоже, произведен другой общей функцией или другим 'callNextMethod'"
-
-#. R/refClass.R: gettextf("a call to superClass() is in the method %s but there is no superclass definition of this method for class %s",     sQuote(me), dQuote(thisClass@className))
-#: R/refClass.R:0
-#, fuzzy
-msgid ""
-"a call to superClass() is in the method %s but there is no superclass "
-"definition of this method for class %s"
-msgstr ""
-"вызов superClass() есть в методе \"%s\", но там нет определения "
-"суперклассаэтого метода для класса %s"
 
 #. R/Methods.R: stop("a function for argument 'f' must be a generic function")
 #. R/trace.R: stop("a function for argument 'f' must be a generic function")
@@ -2535,16 +2524,6 @@ msgstr "создаю общую для специальной функции %s"
 msgid "making a traced version of a special; arguments may be altered"
 msgstr ""
 "создаю отслеживаемую версию примитива; аргументы будут обработаны как  '...'"
-
-#. R/refClass.R: sprintf("method %s from class %s was not processed into a class method until being installed.  Possible corruption of the methods in the class.",     me, thisClass@className)
-#: R/refClass.R:0
-#, fuzzy
-msgid ""
-"method %s from class %s was not processed into a class method until being "
-"installed.  Possible corruption of the methods in the class."
-msgstr ""
-"Метод %s из класса %s не был преобразован в метод класса, покуда не был "
-"установлен. Возможно повреждение методов в классе."
 
 #. R/RMethodUtils.R: gettextf("methods can add arguments to the generic %s only if '...' is an argument to the generic",     sQuote(generic@generic))
 #: R/RMethodUtils.R:0
@@ -3911,6 +3890,23 @@ msgstr[1] ""
 msgstr[2] ""
 "формальные аргументы общей функции для \"%s\" (%s) отличаются от не-общих, "
 "используемых по умолчанию (%s)"
+
+#, fuzzy
+#~ msgid ""
+#~ "Note: the specification for S3 class %s in package %s seems equivalent to "
+#~ "one from package %s: not turning on duplicate class definitions for this "
+#~ "class."
+#~ msgstr ""
+#~ "Спецификация класса S3 %s в пакете %s похожа на спецификацию из пакета %s "
+#~ "и не превращается в дублированное определение для этого класса"
+
+#, fuzzy
+#~ msgid ""
+#~ "method %s from class %s was not processed into a class method until being "
+#~ "installed.  Possible corruption of the methods in the class."
+#~ msgstr ""
+#~ "Метод %s из класса %s не был преобразован в метод класса, покуда не был "
+#~ "установлен. Возможно повреждение методов в классе."
 
 #, fuzzy
 #~ msgid ""

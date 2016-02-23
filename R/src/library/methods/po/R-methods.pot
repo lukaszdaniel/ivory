@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 3.3.0\n"
-"POT-Creation-Date: 2016-01-27 18:05\n"
+"POT-Creation-Date: 2016-02-23 20:39\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1096,13 +1096,6 @@ msgstr ""
 
 
 #: R/RClassUtils.R: 0
-#. R/RClassUtils.R: gettextf("Note: the specification for S3 class %s in package %s seems equivalent to one from package %s: not turning on duplicate class definitions for this class.",     dQuote(def@className), sQuote(def@package), sQuote(prev@package))
-
-msgid "Note: the specification for S3 class %s in package %s seems equivalent to one from package %s: not turning on duplicate class definitions for this class."
-msgstr ""
-
-
-#: R/RClassUtils.R: 0
 #. R/RClassUtils.R: gettextf("Note: the specification for class %s in package %s seems equivalent to one from package %s and is not turning on duplicate class definitions for this class",     dQuote(def@className), sQuote(def@package), sQuote(prev@package))
 
 msgid "Note: the specification for class %s in package %s seems equivalent to one from package %s and is not turning on duplicate class definitions for this class"
@@ -1337,17 +1330,17 @@ msgid "a 'replace' method definition in 'setAs' function must be a function of t
 msgstr ""
 
 
+#: R/refClass.R: 0
+#. R/refClass.R: gettextf("a call to 'superClass()' is in the method %s but there is no superclass definition of this method for class %s",     sQuote(me), dQuote(thisClass@className))
+
+msgid "a call to 'superClass()' is in the method %s but there is no superclass definition of this method for class %s"
+msgstr ""
+
+
 #: R/NextMethod.R: 0
 #. R/NextMethod.R: gettextf("a call to callNextMethod() appears in a call to %s, but the call does not seem to come from either a generic function or another 'callNextMethod'",     sQuote(f))
 
 msgid "a call to callNextMethod() appears in a call to %s, but the call does not seem to come from either a generic function or another 'callNextMethod'"
-msgstr ""
-
-
-#: R/refClass.R: 0
-#. R/refClass.R: gettextf("a call to superClass() is in the method %s but there is no superclass definition of this method for class %s",     sQuote(me), dQuote(thisClass@className))
-
-msgid "a call to superClass() is in the method %s but there is no superclass definition of this method for class %s"
 msgstr ""
 
 
@@ -2595,13 +2588,6 @@ msgstr ""
 #. R/trace.R: warning("making a traced version of a special; arguments may be altered")
 
 msgid "making a traced version of a special; arguments may be altered"
-msgstr ""
-
-
-#: R/refClass.R: 0
-#. R/refClass.R: sprintf("method %s from class %s was not processed into a class method until being installed.  Possible corruption of the methods in the class.",     me, thisClass@className)
-
-msgid "method %s from class %s was not processed into a class method until being installed.  Possible corruption of the methods in the class."
 msgstr ""
 
 

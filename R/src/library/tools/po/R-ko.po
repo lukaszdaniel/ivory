@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-09 07:32\n"
+"POT-Creation-Date: 2016-02-23 20:39\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -1602,6 +1602,13 @@ msgstr ""
 msgid "Found the following warnings:"
 msgstr "다음의 함수로부터 .Internal 호출을 찾았습니다:"
 
+#. R/pkgDepends.R: gettextf("Function %s is deprecated.\nUse function %s or %s instead.\n", sQuote("getDepList()"),     sQuote("dependsOnPkgs()"), sQuote("package_dependencies()"))
+#: R/pkgDepends.R:0
+msgid ""
+"Function %s is deprecated.\n"
+"Use function %s or %s instead."
+msgstr ""
+
 #. R/QC.R: gettextf("Functions or methods with usage in documentation object %s but not in code:",     sQuote(fname), domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
@@ -1816,6 +1823,7 @@ msgstr ""
 
 #. R/utils.R: gettext("LaTeX errors:")
 #. R/utils.R: gettext("LaTeX errors:")
+#. R/utils.R: gettext("LaTeX errors:", domain = "R-tools")
 #: R/utils.R:0
 msgid "LaTeX errors:"
 msgstr ""
@@ -1897,7 +1905,7 @@ msgstr ""
 msgid "Maintainer:"
 msgstr ""
 
-#. R/QC.R: gettextf("Maintainer: %s", sQuote(paste(x$Maintainer, collapse = " ")), domain = "R-tools")
+#. R/QC.R: gettextf("Maintainer: %s", sQuote(trimws(gsub("\n", " ", paste(x$Maintainer, collapse = " ")))),     domain = "R-tools")
 #: R/QC.R:0
 msgid "Maintainer: %s"
 msgstr ""
@@ -5771,6 +5779,11 @@ msgstr "패키지 %2$s 내의 링크 %1$s 를 제자리에 위치시킬 수 없�
 msgid "testing package %s failed"
 msgstr "'%s'를 테스팅하는 것은 실패했습니다"
 
+#. R/pkgDepends.R: warning("the 'lib.loc' argument has always been unused and is deprecated now")
+#: R/pkgDepends.R:0
+msgid "the 'lib.loc' argument has always been unused and is deprecated now"
+msgstr ""
+
 #. R/makeLazyLoad.R: gettextf("there is no package called %s", sQuote(package))
 #. R/makeLazyLoad.R: gettextf("there is no package called %s", sQuote(package))
 #. R/makeLazyLoad.R: gettextf("there is no package called %s", sQuote(package))
@@ -5896,7 +5909,7 @@ msgstr "임시디렉토리 %s를 생성하지 못했습니다"
 
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file))
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(makeindex), sQuote(idxfile))
-#. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file))
+#. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file), domain = "R-tools")
 #: R/utils.R:0
 #, fuzzy
 msgid "unable to run %s command on file %s"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-09 07:31+0100\n"
+"POT-Creation-Date: 2016-02-23 20:39+0100\n"
 "PO-Revision-Date: 2012-03-16 15:59+0100\n"
 "Last-Translator: \n"
 "Language-Team: Spanish <pabloemilio.verde@uni-duesseldorf.de>\n"
@@ -1142,7 +1142,7 @@ msgid "'%s' argument must be a vector"
 msgstr "primer argumento debe ser un vector"
 
 #: src/main/apply.c:101 src/main/array.c:513 src/main/character.c:847
-#: src/main/character.c:1654 src/main/connections.c:3546
+#: src/main/character.c:1653 src/main/connections.c:3546
 #: src/main/context.c:629 src/main/context.c:648 src/main/datetime.c:682
 #: src/main/datetime.c:784 src/main/datetime.c:1048 src/main/dotcode.c:220
 #: src/main/errors.c:943 src/main/errors.c:975 src/main/errors.c:1081
@@ -6674,32 +6674,32 @@ msgstr "esta plataforma no soporta nsl()"
 msgid "argument is not a numeric vector"
 msgstr "el argumento no es un vector numérico"
 
-#: src/main/radixsort.c:67
+#: src/main/radixsort.c:69
 #, c-format
 msgid "Internal error: 'savetl_init()' checks failed (%d %d %p %p)."
 msgstr ""
 
-#: src/main/radixsort.c:73 src/main/radixsort.c:77
+#: src/main/radixsort.c:75 src/main/radixsort.c:79
 #, fuzzy, c-format
 msgid "Could not allocate '%s' variable in '%s' function"
 msgstr "fallo de asignación en GVText"
 
-#: src/main/radixsort.c:105 src/main/radixsort.c:111
+#: src/main/radixsort.c:107 src/main/radixsort.c:113
 #, fuzzy, c-format
 msgid "Could not reallocate '%s' variable in '%s' function"
 msgstr "fallo de asignación en GVText"
 
-#: src/main/radixsort.c:136
+#: src/main/radixsort.c:138
 #, c-format
 msgid "Failed to reallocate working memory stack to %d*4bytes (flip=%d)"
 msgstr ""
 
-#: src/main/radixsort.c:266
+#: src/main/radixsort.c:268
 #, fuzzy, c-format
 msgid "Internal error: range = %d; isorted cannot handle range > %d"
 msgstr "error interno en do_random1"
 
-#: src/main/radixsort.c:398 src/main/radixsort.c:414 src/main/radixsort.c:1149
+#: src/main/radixsort.c:400 src/main/radixsort.c:416 src/main/radixsort.c:1151
 #, c-format
 msgid ""
 "Failed to allocate working memory for '%s' variable. Requested %d * %d byte"
@@ -6708,21 +6708,21 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/main/radixsort.c:500
+#: src/main/radixsort.c:502
 #, fuzzy, c-format
 msgid ""
 "Failed to reallocate working memory %d*8bytes (xsub in 'iradix()' function), "
 "radix=%d"
 msgstr "no se puede asignar memoria (en GEregister)"
 
-#: src/main/radixsort.c:513
+#: src/main/radixsort.c:515
 #, c-format
 msgid ""
 "Internal error. thiscounts[0]=%d but should have been decremented to 0. "
 "dradix=%d"
 msgstr ""
 
-#: src/main/radixsort.c:588 src/main/radixsort.c:903
+#: src/main/radixsort.c:590 src/main/radixsort.c:905
 #, c-format
 msgid ""
 "Logical error. thiscounts[0]=%d but should have been decremented to 0. radix="
@@ -6730,140 +6730,140 @@ msgid ""
 msgstr ""
 
 # Marca para mi 3pm
-#: src/main/radixsort.c:623
+#: src/main/radixsort.c:625
 #, fuzzy, c-format
 msgid "'%s' argument must be an integer or numeric vector length 1"
 msgstr "el argumento 'list' debe ser una lista"
 
-#: src/main/radixsort.c:625
+#: src/main/radixsort.c:627
 #, fuzzy, c-format
 msgid "'%s' argument must be 2 (default) or 1 or 0"
 msgstr "primer argumento debe ser un vector"
 
-#: src/main/radixsort.c:765
+#: src/main/radixsort.c:767
 #, c-format
 msgid ""
 "Failed to realloc working memory %d*8bytes (xsub in 'dradix()' function), "
 "radix=%d"
 msgstr ""
 
-#: src/main/radixsort.c:777
+#: src/main/radixsort.c:779
 #, c-format
 msgid ""
 "Logical error. thiscounts[0]=%d but should have been decremented to 0. "
 "dradix=%d"
 msgstr ""
 
-#: src/main/radixsort.c:789 src/main/radixsort.c:877
+#: src/main/radixsort.c:791 src/main/radixsort.c:879
 msgid "Not yet used, still using iradix instead"
 msgstr ""
 
-#: src/main/radixsort.c:966
+#: src/main/radixsort.c:968
 msgid "Character encoding must be UTF-8, Latin-1 or bytes"
 msgstr ""
 
-#: src/main/radixsort.c:1054
+#: src/main/radixsort.c:1056
 #, c-format
 msgid ""
 "Logical error. counts[0]=%d in cradix but should have been decremented to 0. "
 "radix=%d"
 msgstr ""
 
-#: src/main/radixsort.c:1088
+#: src/main/radixsort.c:1090
 #, c-format
 msgid ""
 "Internal error. 'ustr' variable isn't empty when starting 'cgroup()' "
 "function: ustr_n=%d, ustr_alloc=%d"
 msgstr ""
 
-#: src/main/radixsort.c:1113
+#: src/main/radixsort.c:1115
 #, fuzzy, c-format
 msgid "Unable to reallocate %d * %d bytes in 'cgroup()' function"
 msgstr "no se puede asignar memoria (en GEregister)"
 
-#: src/main/radixsort.c:1192
+#: src/main/radixsort.c:1194
 msgid ""
 "Internal error. 'otmp' variable in 'csort()' function contains all NA values"
 msgstr ""
 
-#: src/main/radixsort.c:1240
+#: src/main/radixsort.c:1242
 #, fuzzy, c-format
 msgid "Failed to reallocate '%s' variable. Requested %d * %d byte"
 msgid_plural "Failed to reallocate '%s' variable. Requested %d * %d bytes"
 msgstr[0] "fallo de asignación en GVText"
 msgstr[1] "fallo de asignación en GVText"
 
-#: src/main/radixsort.c:1265 src/main/radixsort.c:1273
+#: src/main/radixsort.c:1267 src/main/radixsort.c:1275
 #, fuzzy, c-format
 msgid "Failed to allocate '%s' variable"
 msgstr "fallo de asignación en GVText"
 
-#: src/main/radixsort.c:1495
+#: src/main/radixsort.c:1497
 #, c-format
 msgid ""
 "Internal error: 'isort()' function received n=%d. 'isorted()' function "
 "should have dealt with this (e.g. as a reverse sorted vector) already"
 msgstr ""
 
-#: src/main/radixsort.c:1518
+#: src/main/radixsort.c:1520
 msgid ""
 "Internal error: 'isort()' passed all-NA. isorted should have caught this "
 "before this point"
 msgstr ""
 
-#: src/main/radixsort.c:1546
+#: src/main/radixsort.c:1548
 #, c-format
 msgid ""
 "Internal error: 'dsort()' received n=%d. dsorted should have dealt with this "
 "(e.g. as a reverse sorted vector) already"
 msgstr ""
 
-#: src/main/radixsort.c:1570
+#: src/main/radixsort.c:1572
 msgid "radix sort assumes sizeof(int) == 4"
 msgstr ""
 
-#: src/main/radixsort.c:1573
+#: src/main/radixsort.c:1575
 msgid "radix sort assumes sizeof(double) == 8"
 msgstr ""
 
-#: src/main/radixsort.c:1603 src/main/sort.c:1258
+#: src/main/radixsort.c:1605 src/main/sort.c:1258
 #, c-format
 msgid "argument %d is not a vector"
 msgstr "argumento %d no es un vector"
 
-#: src/main/radixsort.c:1606 src/main/sort.c:1260
+#: src/main/radixsort.c:1608 src/main/sort.c:1260
 msgid "argument lengths differ"
 msgstr "argumentos con longitudes diferentes"
 
-#: src/main/radixsort.c:1610
+#: src/main/radixsort.c:1612
 msgid "length(decreasing) must match the number of order arguments"
 msgstr ""
 
-#: src/main/radixsort.c:1613
+#: src/main/radixsort.c:1615
 #, fuzzy
 msgid "'decreasing' elements must be TRUE or FALSE"
 msgstr "'decreciente' debe ser TRUE o FALSE"
 
-#: src/main/radixsort.c:1622
+#: src/main/radixsort.c:1624
 #, fuzzy
 msgid "long vectors are not supported"
 msgstr "el modo '%s' no es soportado en call_R"
 
-#: src/main/radixsort.c:1707 src/main/radixsort.c:1800
+#: src/main/radixsort.c:1709 src/main/radixsort.c:1802
 msgid "Internal error: previous default should have caught unsupported type"
 msgstr ""
 
-#: src/main/radixsort.c:1720 src/main/radixsort.c:1725
+#: src/main/radixsort.c:1722 src/main/radixsort.c:1727
 #, fuzzy, c-format
 msgid "Couldn't allocate '%s' variable in forder, requested %d * %d bytes."
 msgstr "fallo de asignación en GVText"
 
-#: src/main/radixsort.c:1764
+#: src/main/radixsort.c:1766
 #, fuzzy, c-format
 msgid "Arg %d is type '%s', not yet supported"
 msgstr "el modo '%s' no es soportado en call_R"
 
-#: src/main/radixsort.c:1871
+#: src/main/radixsort.c:1873
 #, c-format
 msgid "Internal error: at the end of forder sortStr==FALSE but ustr_n!=0 [%d]"
 msgstr ""

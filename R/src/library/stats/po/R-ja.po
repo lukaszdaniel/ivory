@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-09 07:32\n"
+"POT-Creation-Date: 2016-02-23 20:39\n"
 "PO-Revision-Date: 2012-02-26 14:13+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -3769,9 +3769,10 @@ msgstr ""
 msgid "dendrogram leaf '%s', at height %s"
 msgstr ""
 
-#. R/dendrogram.R: stop("dendrogram node with non-positive #{branches}")
+#. R/dendrogram.R: stop("dendrogram node with non-positive number of branches")
 #: R/dendrogram.R:0
-msgid "dendrogram node with non-positive #{branches}"
+#, fuzzy
+msgid "dendrogram node with non-positive number of branches"
 msgstr " 枝数が正でないデンドログラムノードです "
 
 #. R/dendrogram.R: stop("dendrogram non-leaf node with non-positive #{branches}")
@@ -4248,7 +4249,6 @@ msgstr " 無効な 'use' 引数です "
 #. R/loess.R: gettextf("invalid '%s' value", "NROW(X)")
 #. R/runmed.R: gettextf("invalid '%s' value", "length(x)")
 #. R/runmed.R: gettextf("invalid '%s' value", "k")
-#. R/smooth.R: gettextf("invalid '%s' value", "length(x)")
 #. R/smspline.R: gettextf("invalid '%s' value", "control.spar")
 #. R/spline.R: gettextf("invalid '%s' value", "length(x)")
 #. R/splinefun.R: gettextf("invalid '%s' value", "length(x)")
@@ -4256,8 +4256,8 @@ msgstr " 無効な 'use' 引数です "
 #. R/symnum.R: gettextf("invalid '%s' value", "abbr.colnames'")
 #: R/HoltWinters.R:0 R/approx.R:0 R/bandwidths.R:0 R/cmdscale.R:0
 #: R/density.R:0 R/diffinv.R:0 R/filter.R:0 R/kmeans.R:0 R/loess.R:0
-#: R/runmed.R:0 R/smooth.R:0 R/smspline.R:0 R/spline.R:0 R/splinefun.R:0
-#: R/stl.R:0 R/symnum.R:0
+#: R/runmed.R:0 R/smspline.R:0 R/spline.R:0 R/splinefun.R:0 R/stl.R:0
+#: R/symnum.R:0
 #, fuzzy
 msgid "invalid '%s' value"
 msgstr " 無効な 'use' 引数です "
@@ -4919,11 +4919,6 @@ msgstr " 当てはめモデル中には因子がありません "
 msgid "no finite observations"
 msgstr " 有限な観測値がありません "
 
-#. R/complete.cases.R: stop("no input has determined the number of cases")
-#: R/complete.cases.R:0
-msgid "no input has determined the number of cases"
-msgstr ""
-
 #. R/loess.R: stop("no models to compare")
 #: R/loess.R:0
 msgid "no models to compare"
@@ -5088,12 +5083,6 @@ msgstr " 正しい長さでない非時系列です "
 #: R/stepfun.R:0
 msgid "not a valid step function"
 msgstr " 適正な階段関数ではありません "
-
-#. R/complete.cases.R: stop("not all arguments have the same length", call. = FALSE)
-#: R/complete.cases.R:0
-#, fuzzy
-msgid "not all arguments have the same length"
-msgstr " 引数は同じ長さでなければなりません "
 
 #. R/ts.R: stop("not all series have the same frequency")
 #: R/ts.R:0
@@ -6883,6 +6872,10 @@ msgstr[0] " 下位のスコープはモデル中に含まれない項 %s を持�
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] " 同時当てはめから %d/%d 行を使用します。 "
+
+#, fuzzy
+#~ msgid "not all arguments have the same length"
+#~ msgstr " 引数は同じ長さでなければなりません "
 
 #~ msgid "non-matched further arguments are disregarded"
 #~ msgstr " 余計な引数は捨てられました "

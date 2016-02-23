@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-27 18:05\n"
+"POT-Creation-Date: 2016-02-23 20:39\n"
 "PO-Revision-Date: 2012-02-26 14:07+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -1005,17 +1005,6 @@ msgstr ""
 " クラス %s (パッケージ %s 中の)のある上位クラスが重複する定義を持ちます．この"
 "定義はパッケージ %s からのそれと同値としては扱われません "
 
-#. R/RClassUtils.R: gettextf("Note: the specification for S3 class %s in package %s seems equivalent to one from package %s: not turning on duplicate class definitions for this class.",     dQuote(def@className), sQuote(def@package), sQuote(prev@package))
-#: R/RClassUtils.R:0
-#, fuzzy
-msgid ""
-"Note: the specification for S3 class %s in package %s seems equivalent to "
-"one from package %s: not turning on duplicate class definitions for this "
-"class."
-msgstr ""
-"S3 っクラス %s (パッケージ %s 中の)はパッケージ %s からのものと同値に見えます"
-"ので、このクラスに対する重複クラス定義とはされません "
-
 #. R/RClassUtils.R: gettextf("Note: the specification for class %s in package %s seems equivalent to one from package %s and is not turning on duplicate class definitions for this class",     dQuote(def@className), sQuote(def@package), sQuote(prev@package))
 #: R/RClassUtils.R:0
 #, fuzzy
@@ -1227,6 +1216,16 @@ msgstr ""
 " 'setAs' 中の 'replace' メソッド定義は二つの引数を持つ関数でなければなりませ"
 "ん； (%d) でした "
 
+#. R/refClass.R: gettextf("a call to 'superClass()' is in the method %s but there is no superclass definition of this method for class %s",     sQuote(me), dQuote(thisClass@className))
+#: R/refClass.R:0
+#, fuzzy
+msgid ""
+"a call to 'superClass()' is in the method %s but there is no superclass "
+"definition of this method for class %s"
+msgstr ""
+" superClass() の呼び出しはメソッド \"%s\" 中にありますが，クラス %s に対する"
+"このメソッドの上位クラス定義がありません "
+
 #. R/NextMethod.R: gettextf("a call to callNextMethod() appears in a call to %s, but the call does not seem to come from either a generic function or another 'callNextMethod'",     sQuote(f))
 #: R/NextMethod.R:0
 #, fuzzy
@@ -1236,16 +1235,6 @@ msgid ""
 msgstr ""
 " callNextMethod() の呼び出しが  \"%s\" への呼び出しに現れました．しかしこの呼"
 "び出しは総称的関数や別の 'callNextMethod' から来たものには見えません "
-
-#. R/refClass.R: gettextf("a call to superClass() is in the method %s but there is no superclass definition of this method for class %s",     sQuote(me), dQuote(thisClass@className))
-#: R/refClass.R:0
-#, fuzzy
-msgid ""
-"a call to superClass() is in the method %s but there is no superclass "
-"definition of this method for class %s"
-msgstr ""
-" superClass() の呼び出しはメソッド \"%s\" 中にありますが，クラス %s に対する"
-"このメソッドの上位クラス定義がありません "
 
 #. R/Methods.R: stop("a function for argument 'f' must be a generic function")
 #. R/trace.R: stop("a function for argument 'f' must be a generic function")
@@ -2546,16 +2535,6 @@ msgid "making a traced version of a special; arguments may be altered"
 msgstr ""
 " プリミティブの traced バージョンを作っています；引数は '...' として扱われま"
 "す "
-
-#. R/refClass.R: sprintf("method %s from class %s was not processed into a class method until being installed.  Possible corruption of the methods in the class.",     me, thisClass@className)
-#: R/refClass.R:0
-#, fuzzy
-msgid ""
-"method %s from class %s was not processed into a class method until being "
-"installed.  Possible corruption of the methods in the class."
-msgstr ""
-" メソッド %s (クラス %s からの)はインストールされるまでクラスメソッドとして処"
-"理されません． このクラス中のメソッドに混乱がある可能性があります． "
 
 #. R/RMethodUtils.R: gettextf("methods can add arguments to the generic %s only if '...' is an argument to the generic",     sQuote(generic@generic))
 #: R/RMethodUtils.R:0
@@ -3889,6 +3868,23 @@ msgid_plural ""
 msgstr[0] ""
 " \"%s\" (%s) に対する総称的関数の形式的引数は、既定 (%s) として使われる非総称"
 "的なそれの引数と異なります "
+
+#, fuzzy
+#~ msgid ""
+#~ "Note: the specification for S3 class %s in package %s seems equivalent to "
+#~ "one from package %s: not turning on duplicate class definitions for this "
+#~ "class."
+#~ msgstr ""
+#~ "S3 っクラス %s (パッケージ %s 中の)はパッケージ %s からのものと同値に見え"
+#~ "ますので、このクラスに対する重複クラス定義とはされません "
+
+#, fuzzy
+#~ msgid ""
+#~ "method %s from class %s was not processed into a class method until being "
+#~ "installed.  Possible corruption of the methods in the class."
+#~ msgstr ""
+#~ " メソッド %s (クラス %s からの)はインストールされるまでクラスメソッドとし"
+#~ "て処理されません． このクラス中のメソッドに混乱がある可能性があります． "
 
 #, fuzzy
 #~ msgid ""

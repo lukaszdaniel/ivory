@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-27 18:05\n"
+"POT-Creation-Date: 2016-02-23 20:39\n"
 "PO-Revision-Date: 2014-03-27 13:32-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -965,17 +965,6 @@ msgstr ""
 "있습니다.  이 정의는 패키지 %3$s내에 정의된 것과 동일하게 처리되어지지 않습니"
 "다"
 
-#. R/RClassUtils.R: gettextf("Note: the specification for S3 class %s in package %s seems equivalent to one from package %s: not turning on duplicate class definitions for this class.",     dQuote(def@className), sQuote(def@package), sQuote(prev@package))
-#: R/RClassUtils.R:0
-msgid ""
-"Note: the specification for S3 class %s in package %s seems equivalent to "
-"one from package %s: not turning on duplicate class definitions for this "
-"class."
-msgstr ""
-"노트: 패키지 %2$s내에 있는 S3 클래스 %1$s에 대한 세부사항들이 패키지 %3$s내"
-"에 있는 것과 같아 보입니다: 이 클래스에 대한 클래스 정의들이 중복되어 있는 "
-"것 같습니다."
-
 #. R/RClassUtils.R: gettextf("Note: the specification for class %s in package %s seems equivalent to one from package %s and is not turning on duplicate class definitions for this class",     dQuote(def@className), sQuote(def@package), sQuote(prev@package))
 #: R/RClassUtils.R:0
 #, fuzzy
@@ -1178,6 +1167,16 @@ msgstr ""
 "'setAs'내에 있는 'replace' 메소드 정의는 반드시 두 개의 인자들을 가지는 함수"
 "이어야 하는데 %d개를 가집니다"
 
+#. R/refClass.R: gettextf("a call to 'superClass()' is in the method %s but there is no superclass definition of this method for class %s",     sQuote(me), dQuote(thisClass@className))
+#: R/refClass.R:0
+#, fuzzy
+msgid ""
+"a call to 'superClass()' is in the method %s but there is no superclass "
+"definition of this method for class %s"
+msgstr ""
+"superClass()로의 호출은 메소드 %1$s내에 있으나 클래스 %2$s에 대하여 이 메소드"
+"의 슈퍼클래스 정의는 없습니다"
+
 #. R/NextMethod.R: gettextf("a call to callNextMethod() appears in a call to %s, but the call does not seem to come from either a generic function or another 'callNextMethod'",     sQuote(f))
 #: R/NextMethod.R:0
 msgid ""
@@ -1187,15 +1186,6 @@ msgstr ""
 "%s에 호출하는 동안 callNextMethod()에 호출이 이루어진 것으로 보입니다, 그러"
 "나 이 호출은 제네릭 함수 또는 또다른 'callNextMethod'으로부터 온 것으로 보여"
 "지지 않습니다"
-
-#. R/refClass.R: gettextf("a call to superClass() is in the method %s but there is no superclass definition of this method for class %s",     sQuote(me), dQuote(thisClass@className))
-#: R/refClass.R:0
-msgid ""
-"a call to superClass() is in the method %s but there is no superclass "
-"definition of this method for class %s"
-msgstr ""
-"superClass()로의 호출은 메소드 %1$s내에 있으나 클래스 %2$s에 대하여 이 메소드"
-"의 슈퍼클래스 정의는 없습니다"
 
 #. R/Methods.R: stop("a function for argument 'f' must be a generic function")
 #. R/trace.R: stop("a function for argument 'f' must be a generic function")
@@ -2380,13 +2370,6 @@ msgstr "특이 함수 %s에 대한 제네릭을 생성합니다"
 #. R/trace.R: warning("making a traced version of a special; arguments may be altered")
 #: R/trace.R:0
 msgid "making a traced version of a special; arguments may be altered"
-msgstr ""
-
-#. R/refClass.R: sprintf("method %s from class %s was not processed into a class method until being installed.  Possible corruption of the methods in the class.",     me, thisClass@className)
-#: R/refClass.R:0
-msgid ""
-"method %s from class %s was not processed into a class method until being "
-"installed.  Possible corruption of the methods in the class."
 msgstr ""
 
 #. R/RMethodUtils.R: gettextf("methods can add arguments to the generic %s only if '...' is an argument to the generic",     sQuote(generic@generic))
@@ -3599,6 +3582,15 @@ msgid_plural ""
 "of the non-generic to be used as the default (%s)"
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid ""
+#~ "Note: the specification for S3 class %s in package %s seems equivalent to "
+#~ "one from package %s: not turning on duplicate class definitions for this "
+#~ "class."
+#~ msgstr ""
+#~ "노트: 패키지 %2$s내에 있는 S3 클래스 %1$s에 대한 세부사항들이 패키지 %3$s"
+#~ "내에 있는 것과 같아 보입니다: 이 클래스에 대한 클래스 정의들이 중복되어 있"
+#~ "는 것 같습니다."
 
 #~ msgid ""
 #~ "package %s seems to have out-of-date methods; need to reinstall from "

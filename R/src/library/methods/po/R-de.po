@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-27 18:05\n"
+"POT-Creation-Date: 2016-02-23 20:39\n"
 "PO-Revision-Date: 2015-01-17 15:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -1014,18 +1014,6 @@ msgstr ""
 "Definitionen. Diese Definition wird nicht als äquivalent zu der aus\n"
 "Paket %s behandelt."
 
-#. R/RClassUtils.R: gettextf("Note: the specification for S3 class %s in package %s seems equivalent to one from package %s: not turning on duplicate class definitions for this class.",     dQuote(def@className), sQuote(def@package), sQuote(prev@package))
-#: R/RClassUtils.R:0
-#, fuzzy
-msgid ""
-"Note: the specification for S3 class %s in package %s seems equivalent to "
-"one from package %s: not turning on duplicate class definitions for this "
-"class."
-msgstr ""
-"Eine Spezifikation für die S3 Klasse %s in Paket %s scheint äquivlant\n"
-"zu einer aus Paket %s und schaltet für diese Klasse nicht die\n"
-"dublizierten Klassendefinitionen an"
-
 #. R/RClassUtils.R: gettextf("Note: the specification for class %s in package %s seems equivalent to one from package %s and is not turning on duplicate class definitions for this class",     dQuote(def@className), sQuote(def@package), sQuote(prev@package))
 #: R/RClassUtils.R:0
 #, fuzzy
@@ -1236,6 +1224,16 @@ msgstr ""
 "eine 'replace' Methodendefinition in 'setAs' muss eine Funktion von zwei "
 "Argumenten sein; bekam %d"
 
+#. R/refClass.R: gettextf("a call to 'superClass()' is in the method %s but there is no superclass definition of this method for class %s",     sQuote(me), dQuote(thisClass@className))
+#: R/refClass.R:0
+#, fuzzy
+msgid ""
+"a call to 'superClass()' is in the method %s but there is no superclass "
+"definition of this method for class %s"
+msgstr ""
+"In der Methode \"%s\" ist ein Aufruf von superClass(), aber es gibt keine "
+"Oberklassendefiniton dieser Methode für die Klasse %s"
+
 #. R/NextMethod.R: gettextf("a call to callNextMethod() appears in a call to %s, but the call does not seem to come from either a generic function or another 'callNextMethod'",     sQuote(f))
 #: R/NextMethod.R:0
 #, fuzzy
@@ -1246,16 +1244,6 @@ msgstr ""
 "ein Aufruf von callNextMethod() tritt in einem Aufruf von \"%s\" auf, aber "
 "der Aufruf stammt weder von einer generischen Funktion, noch von einem "
 "anderen Aufruf von 'callNextMethod'"
-
-#. R/refClass.R: gettextf("a call to superClass() is in the method %s but there is no superclass definition of this method for class %s",     sQuote(me), dQuote(thisClass@className))
-#: R/refClass.R:0
-#, fuzzy
-msgid ""
-"a call to superClass() is in the method %s but there is no superclass "
-"definition of this method for class %s"
-msgstr ""
-"In der Methode \"%s\" ist ein Aufruf von superClass(), aber es gibt keine "
-"Oberklassendefiniton dieser Methode für die Klasse %s"
 
 #. R/Methods.R: stop("a function for argument 'f' must be a generic function")
 #. R/trace.R: stop("a function for argument 'f' must be a generic function")
@@ -2577,17 +2565,6 @@ msgid "making a traced version of a special; arguments may be altered"
 msgstr ""
 "erzeuge verfolgte Version einer Primitiven; Argumente werden wie '...' "
 "behandelt"
-
-#. R/refClass.R: sprintf("method %s from class %s was not processed into a class method until being installed.  Possible corruption of the methods in the class.",     me, thisClass@className)
-#: R/refClass.R:0
-#, fuzzy
-msgid ""
-"method %s from class %s was not processed into a class method until being "
-"installed.  Possible corruption of the methods in the class."
-msgstr ""
-"Methode %s aus Klasse %s wurde bis zur Installation nicht als Klassenmethode "
-"behandelt,\n"
-"Mögliche Beschädigung der Methoden der Klasse"
 
 #. R/RMethodUtils.R: gettextf("methods can add arguments to the generic %s only if '...' is an argument to the generic",     sQuote(generic@generic))
 #: R/RMethodUtils.R:0
@@ -3956,6 +3933,25 @@ msgstr[1] ""
 "die formalen Argumente der generischen Funktion für \"%s\" (%s) "
 "unterscheiden sich von denen der nicht-generischen Funktion, die als "
 "Standard genutzt wird (%s)"
+
+#, fuzzy
+#~ msgid ""
+#~ "Note: the specification for S3 class %s in package %s seems equivalent to "
+#~ "one from package %s: not turning on duplicate class definitions for this "
+#~ "class."
+#~ msgstr ""
+#~ "Eine Spezifikation für die S3 Klasse %s in Paket %s scheint äquivlant\n"
+#~ "zu einer aus Paket %s und schaltet für diese Klasse nicht die\n"
+#~ "dublizierten Klassendefinitionen an"
+
+#, fuzzy
+#~ msgid ""
+#~ "method %s from class %s was not processed into a class method until being "
+#~ "installed.  Possible corruption of the methods in the class."
+#~ msgstr ""
+#~ "Methode %s aus Klasse %s wurde bis zur Installation nicht als "
+#~ "Klassenmethode behandelt,\n"
+#~ "Mögliche Beschädigung der Methoden der Klasse"
 
 #, fuzzy
 #~ msgid ""

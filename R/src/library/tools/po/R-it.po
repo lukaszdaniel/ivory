@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-09 07:32\n"
+"POT-Creation-Date: 2016-02-23 20:39\n"
 "PO-Revision-Date: 2005-04-17 16:57+0200\n"
 "Last-Translator: stefano iacus <>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -1561,6 +1561,13 @@ msgstr ""
 msgid "Found the following warnings:"
 msgstr "I file Rd devono avere \\title non vuoto."
 
+#. R/pkgDepends.R: gettextf("Function %s is deprecated.\nUse function %s or %s instead.\n", sQuote("getDepList()"),     sQuote("dependsOnPkgs()"), sQuote("package_dependencies()"))
+#: R/pkgDepends.R:0
+msgid ""
+"Function %s is deprecated.\n"
+"Use function %s or %s instead."
+msgstr ""
+
 #. R/QC.R: gettextf("Functions or methods with usage in documentation object %s but not in code:",     sQuote(fname), domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
@@ -1772,6 +1779,7 @@ msgstr ""
 
 #. R/utils.R: gettext("LaTeX errors:")
 #. R/utils.R: gettext("LaTeX errors:")
+#. R/utils.R: gettext("LaTeX errors:", domain = "R-tools")
 #: R/utils.R:0
 msgid "LaTeX errors:"
 msgstr ""
@@ -1848,7 +1856,7 @@ msgstr ""
 msgid "Maintainer:"
 msgstr ""
 
-#. R/QC.R: gettextf("Maintainer: %s", sQuote(paste(x$Maintainer, collapse = " ")), domain = "R-tools")
+#. R/QC.R: gettextf("Maintainer: %s", sQuote(trimws(gsub("\n", " ", paste(x$Maintainer, collapse = " ")))),     domain = "R-tools")
 #: R/QC.R:0
 msgid "Maintainer: %s"
 msgstr ""
@@ -5717,6 +5725,11 @@ msgstr "il name space non deve essere caricato."
 msgid "testing package %s failed"
 msgstr "esecuzione di make fallita"
 
+#. R/pkgDepends.R: warning("the 'lib.loc' argument has always been unused and is deprecated now")
+#: R/pkgDepends.R:0
+msgid "the 'lib.loc' argument has always been unused and is deprecated now"
+msgstr ""
+
 #. R/makeLazyLoad.R: gettextf("there is no package called %s", sQuote(package))
 #. R/makeLazyLoad.R: gettextf("there is no package called %s", sQuote(package))
 #. R/makeLazyLoad.R: gettextf("there is no package called %s", sQuote(package))
@@ -5842,7 +5855,7 @@ msgstr "impossibile creare directory temporanea"
 
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file))
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(makeindex), sQuote(idxfile))
-#. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file))
+#. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file), domain = "R-tools")
 #: R/utils.R:0
 #, fuzzy
 msgid "unable to run %s command on file %s"
