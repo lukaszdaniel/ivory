@@ -448,7 +448,7 @@ SEXP attribute_hidden do_length(SEXP call, SEXP op, SEXP args, SEXP rho)
     return ScalarInteger(length(x));
 }
 
-static R_xlen_t dispatch_length(SEXP x, SEXP call, SEXP rho) {
+R_xlen_t attribute_hidden dispatch_length(SEXP x, SEXP call, SEXP rho) {
     static SEXP length_op = NULL;
     if (isObject(x)) {
         SEXP len, args;
@@ -463,21 +463,6 @@ static R_xlen_t dispatch_length(SEXP x, SEXP call, SEXP rho) {
         UNPROTECT(1);
     }
     return(xlength(x));
-}
-
-static SEXP dispatch_subset2(SEXP x, R_xlen_t i, SEXP call, SEXP rho) {
-    static SEXP bracket_op = NULL;
-    SEXP args, x_elt;
-    if (isObject(x)) {
-        if (bracket_op == NULL)
-            bracket_op = R_Primitive("[[");
-        PROTECT(args = list2(x, ScalarReal(i + 1)));
-        x_elt = do_subset2(call, bracket_op, args, rho);
-        UNPROTECT(1);
-    } else {
-        x_elt = VECTOR_ELT(x, i);
-    }
-    return(x_elt);
 }
 
 // auxiliary for do_lengths_*(), i.e., R's lengths()
@@ -511,6 +496,10 @@ SEXP attribute_hidden do_lengths(SEXP call, SEXP op, SEXP args, SEXP rho)
     int useNames = asLogical(CADR(args));
     if (useNames == NA_LOGICAL)
 	error(_("invalid '%s' value"), "USE.NAMES");
+
+    if (DispatchOrEval(call, op, "lengths", args, rho, &ans, 0, 1))
+      return(ans);
+
     Rboolean isList = isVectorList(x) || isS4(x);
     if(!isList) switch(TYPEOF(x)) {
 	case NILSXP:
