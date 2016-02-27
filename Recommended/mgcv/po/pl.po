@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.7-19\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-17 17:53+0100\n"
+"POT-Creation-Date: 2016-02-27 19:10+0100\n"
 "PO-Revision-Date: 2015-04-02 21:47+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -15,13 +15,13 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: magic.c:445
+#: magic.c:591
 msgid "magic requires smoothing parameter starting values if L supplied"
 msgstr ""
 "'magic' wymaga wartości startowych dla parametru wygładzającego jeśli L "
 "zostało dostarczone"
 
-#: magic.c:563
+#: magic.c:753
 msgid "magic, the gcv/ubre optimizer, failed to converge after 400 iterations."
 msgstr ""
 "'magic', omptymalizator gcv/ubre, nie zdodał uzbieżnić się po 400 iteracjach."
@@ -42,92 +42,92 @@ msgstr ""
 "\n"
 "problem z wymiarem pliku\n"
 
-#: mat.c:2561
+#: mat.c:2804
 #, c-format
 msgid "Non orthogonal eigenvectors %d %g\n"
 msgstr "Nieortogonalne wektory własne %d %g\n"
 
-#: mat.c:2566
+#: mat.c:2809
 #, c-format
 msgid "Eigenvectors not normalized %d %g\n"
 msgstr "Wektory własne nie są znormalizowane %d %g\n"
 
-#: matrix.c:81
+#: matrix.c:86
 msgid "Failed to initialize memory for matrix."
 msgstr "Nie udało się zainicjalizować pamięci dla macierzy."
 
-#: matrix.c:143 matrix.c:205
+#: matrix.c:182 matrix.c:265
 msgid "An out of bound write to matrix has occurred!"
 msgstr "Nastąpił zapis poza zakresem macierzy!"
 
-#: matrix.c:149
+#: matrix.c:192
 msgid "INTEGRITY PROBLEM in the extant matrix list."
 msgstr "PROBLEM SPÓJNOŚCI w istniejącej liście macierzy."
 
-#: matrix.c:181
+#: matrix.c:236
 msgid "You are trying to check matrix integrity without defining RANGECHECK."
 msgstr "Próbujesz sprawdzić integralność macierzy bez określania 'RANGECHECK'"
 
-#: matrix.c:243
+#: matrix.c:309
 msgid "Target matrix too small in mcopy"
 msgstr "Docelowa macierz jest zbyt mała, aby wykonać 'mcopy'"
 
-#: matrix.c:263 matrix.c:271 matrix.c:284 matrix.c:292
+#: matrix.c:335 matrix.c:347 matrix.c:363 matrix.c:375
 msgid "Incompatible matrices in matmult."
 msgstr "Niespójne macierze w 'matmult'."
 
-#: matrix.c:379
+#: matrix.c:485
 msgid "Attempt to invert() non-square matrix"
 msgstr "Próba odwrócenia metodą 'invert()' niekwadratowej macierzy"
 
-#: matrix.c:401
+#: matrix.c:524
 msgid "Singular Matrix passed to invert()"
 msgstr "Przekazano osobliwą macierz do 'invert()'"
 
-#: matrix.c:1321
+#: matrix.c:1870
 msgid "'svd()' not converged"
 msgstr "'svd()' nie uzbieżnił się"
 
-#: matrix.c:1397
+#: matrix.c:1951
 #, c-format
 msgid "svdroot matrix not +ve semi def. %g"
 msgstr "macierz 'svdroot' nie jest dodatnio określona %g"
 
-#: matrix.c:1425
+#: matrix.c:1982
 msgid "Sort failed"
 msgstr "Sortowanie nie powiodło się"
 
-#: qp.c:57
+#: qp.c:63
 msgid "ERROR in 'addconQT()'"
 msgstr "BŁĄD w 'addconQT()'."
 
-#: qp.c:463
+#: qp.c:566
 msgid "QPCLS - Rank deficiency in model"
 msgstr "QPCLS - Niedobór rang w modelu"
 
-#: sparse-smooth.c:143
+#: sparse-smooth.c:162
 msgid "More than 2 points in a box!!\n"
 msgstr "Więcej niż 2 punkty w pudełku!!\n"
 
-#: sparse-smooth.c:148
+#: sparse-smooth.c:171
 #, c-format
 msgid "point %d in %d boxes!\n"
 msgstr "punkt %d w %d pudełkach!\n"
 
-#: sparse-smooth.c:310 sparse-smooth.c:326
+#: sparse-smooth.c:366 sparse-smooth.c:388
 msgid "too many boxes!!"
 msgstr "zbyt dużo pudełek!!"
 
-#: sparse-smooth.c:342
+#: sparse-smooth.c:410
 #, c-format
 msgid "bi not equal to nb-1 %d %d\n"
 msgstr "'bi' nie jest równe 'nb-1' %d %d\n"
 
-#: sparse-smooth.c:442
+#: sparse-smooth.c:523
 msgid "child boundary problem\n"
 msgstr "problem brzegu dziecka\n"
 
-#: sparse-smooth.c:551
+#: sparse-smooth.c:651
 msgid ""
 "\n"
 " 'star()' function is useful only in 2D\n"
@@ -135,20 +135,20 @@ msgstr ""
 "\n"
 "funkcja 'star()' jest przydatna jedynie w 2D\n"
 
-#: sparse-smooth.c:608
+#: sparse-smooth.c:720
 msgid "indexing error in 'p_area()' function!\n"
 msgstr "indeksowanie błędu w funkcji 'p_area()'!\n"
 
-#: sparse-smooth.c:1054
+#: sparse-smooth.c:1222
 msgid "hello\n"
 msgstr "witaj\n"
 
-#: sparse-smooth.c:1086
+#: sparse-smooth.c:1260
 #, c-format
 msgid "%d upper neighbour claimed to be self d=%d!\n"
 msgstr "%d górny sąsiad twierdzi, że jest samym sobą d=%d!\n"
 
-#: sparse-smooth.c:1149
+#: sparse-smooth.c:1333
 msgid "lower neighbour claimed to be self!\n"
 msgstr "niższy sąsiad twierdzi że jest samym sobą!\n"
 
@@ -156,7 +156,7 @@ msgstr "niższy sąsiad twierdzi że jest samym sobą!\n"
 msgid "You must have 2m>d for a thin plate spline."
 msgstr "Musisz mieć 2m>d dla cienkiej płyty splajnu."
 
-#: tprs.c:376 tprs.c:384
+#: tprs.c:461 tprs.c:477
 msgid ""
 "A term has fewer unique covariate combinations than specified maximum "
 "degrees of freedom"

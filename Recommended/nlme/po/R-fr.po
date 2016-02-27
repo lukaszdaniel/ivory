@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nlme 3.1-65\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:25\n"
+"POT-Creation-Date: 2016-02-27 19:10\n"
 "PO-Revision-Date: 2012-10-03 16:45+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -523,10 +523,14 @@ msgstr ""
 msgid "Convergence at iteration:"
 msgstr ""
 
+#. R/nlme.R: gettextf("Convergence crit. (must all become <= tolerance = %g):", controlvals$tolerance,     domain = "R-nlme")
+#: R/nlme.R:0
+msgid "Convergence crit. (must all become <= tolerance = %g):"
+msgstr ""
+
 #. R/gls.R: gettext("Convergence:", domain = "R-nlme")
 #. R/gnls.R: gettext("Convergence:", domain = "R-nlme")
-#. R/nlme.R: gettext("Convergence:", domain = "R-nlme")
-#: R/gls.R:0 R/gnls.R:0 R/nlme.R:0
+#: R/gls.R:0 R/gnls.R:0
 msgid "Convergence:"
 msgstr ""
 
@@ -709,9 +713,9 @@ msgstr ""
 "'L' ne peut que prendre en compte des effets fixes ayant même degré de "
 "liberté au dénominateur"
 
-#. R/nlme.R: gettextf("LME step: Loglik: %s, nlm iterations: %d", format(nlmeFit$logLik), convIter,     domain = "R-nlme")
+#. R/nlme.R: gettextf("LME step: Loglik: %s, %s iterations: %d", format(nlmeFit$logLik), controlvals$opt,     convIter, domain = "R-nlme")
 #: R/nlme.R:0
-msgid "LME step: Loglik: %s, nlm iterations: %d"
+msgid "LME step: Loglik: %s, %s iterations: %d"
 msgstr ""
 
 #. R/pdMat.R: stop("LNone of the arguments specify more than one block")
@@ -899,7 +903,6 @@ msgid "Rational quadratic spatial correlation"
 msgstr ""
 
 #. R/gls.R: gettext("Residual standard error:", domain = "R-nlme")
-#. R/gls.R: gettext("Residual standard error:", domain = "R-nlme")
 #. R/gls.R: gettext("Residual standard error: ", domain = "R-nlme")
 #. R/gls.R: gettext("Residual standard error: ", domain = "R-nlme")
 #. R/lmList.R: gettext("Residual standard error: ", domain = "R-nlme")
@@ -1024,8 +1027,17 @@ msgid "Variance function:"
 msgstr ""
 
 #. R/lme.R: gettext("Within-group standard error:", domain = "R-nlme")
+#. R/lme.R: gettext("Within-group standard error:", domain = "R-nmle")
 #: R/lme.R:0
 msgid "Within-group standard error:"
+msgstr ""
+
+#. R/gls.R: stop("Within-group std. dev. must be a positive numeric value")
+#. R/gnls.R: stop("Within-group std. dev. must be a positive numeric value")
+#. R/lme.R: stop("Within-group std. dev. must be a positive numeric value")
+#. R/nlme.R: stop("Within-group std. dev. must be a positive numeric value")
+#: R/gls.R:0 R/gnls.R:0 R/lme.R:0 R/nlme.R:0
+msgid "Within-group std. dev. must be a positive numeric value"
 msgstr ""
 
 #. R/varFunc.R: stop("all arguments passed to 'varComb()' function must be of class \"varFunc\"")
@@ -1125,13 +1137,6 @@ msgstr ""
 #, fuzzy
 msgid "an object with 'call' component is required"
 msgstr "nécessite un objet avec une composante 'call'"
-
-#. R/gnls.R: stop("approximate covariance matrix for parameter estimates not of full rank")
-#: R/gnls.R:0
-msgid "approximate covariance matrix for parameter estimates not of full rank"
-msgstr ""
-"matrice de covariance approximative pour les estimateurs de paramètres qui "
-"ne sont pas de rang complet"
 
 #. R/pdMat.R: stop("arguments imply different number of blocks")
 #: R/pdMat.R:0
@@ -1369,9 +1374,18 @@ msgid "cannot fix variances in all groups"
 msgstr "impossible de fixer les variances de tous les groupes"
 
 #. R/gls.R: gettextf("cannot get confidence intervals on var-cov components: %s", aV)
-#. R/lme.R: gettextf("cannot get confidence intervals on var-cov components: %s", aV)
-#: R/gls.R:0 R/lme.R:0
+#: R/gls.R:0
 msgid "cannot get confidence intervals on var-cov components: %s"
+msgstr ""
+"impossible de calculer un intervalle de confiance sur les composantes var-"
+"cov : %s"
+
+#. R/lme.R: gettextf("cannot get confidence intervals on var-cov components: %s\n Consider '%s'",     aV, "which = \"fixed\"")
+#: R/lme.R:0
+#, fuzzy
+msgid ""
+"cannot get confidence intervals on var-cov components: %s\n"
+" Consider '%s'"
 msgstr ""
 "impossible de calculer un intervalle de confiance sur les composantes var-"
 "cov : %s"
@@ -1599,6 +1613,13 @@ msgid "fixed-effects model must be a formula of the form \"resp ~ pred\""
 msgstr ""
 "un modèle à effet fixe doit être une formule de la forme \"resp ~ pred\""
 
+#. R/lme.R: warning("for 'sigma' fixed, 'apVar' is set FALSE, as the cov approxmation is not yet available.")
+#: R/lme.R:0
+msgid ""
+"for 'sigma' fixed, 'apVar' is set FALSE, as the cov approxmation is not yet "
+"available."
+msgstr ""
+
 #. R/gnls.R: gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "params")
 #. R/gnls.R: gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "params")
 #. R/nlme.R: gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "fixed")
@@ -1810,6 +1831,12 @@ msgstr "la log-vraissemblance n'est pas disponible avec des ajustements NULL"
 msgid ""
 "maximum number of iterations (lmeControl(maxIter)) reached without "
 "convergence"
+msgstr "le nombre maximum d'itérations est atteint, mais pas la convergence"
+
+#. R/nlme.R: gettextf("maximum number of iterations (maxIter = %d) reached without convergence",     controlvals$maxIter, domain = "R-nlme")
+#: R/nlme.R:0
+#, fuzzy
+msgid "maximum number of iterations (maxIter = %d) reached without convergence"
 msgstr "le nombre maximum d'itérations est atteint, mais pas la convergence"
 
 #. R/gls.R: stop("maximum number of iterations reached without convergence")
@@ -2043,11 +2070,11 @@ msgstr "les objets doivent avoir une composante ou un attribut \"call\""
 msgid "objects must have coefficients with same row names"
 msgstr "les objets doivent avoir des coefficients qui ont mêmes noms de lignes"
 
-#. R/lme.R: gettextf("objects must inherit from at least one of the following classes: %s", paste(dQuote(valid.classes),     collapse = ", "))
+#. R/lme.R: gettextf("objects must inherit from classes %s, or %s", paste(head(valid.cl, -1),     collapse = ", "), tail(valid.cl, 1))
 #: R/lme.R:0
 #, fuzzy
-msgid "objects must inherit from at least one of the following classes: %s"
-msgstr "Les objets doivent hériter des classes \"gls\", \"gnls\","
+msgid "objects must inherit from classes %s, or %s"
+msgstr "l'objet doit hériter de la classe \"lme\""
 
 #. R/nlsList.R: stop("old-style self-starting model functions\nare no longer supported.\nNew selfStart functions are available.\nUse\n  SSfpl instead of fpl,\n  SSfol instead of first.order.log,\n  SSbiexp instead of biexp,\n  SSlogis instead of logistic.\nIf writing your own selfStart model, see\n  \"help(selfStart)\"\nfor the new form of the \"initial\" attribute.",     domain = "R-nlme")
 #: R/nlsList.R:0
@@ -2213,8 +2240,7 @@ msgstr ""
 "le facteur de division par deux du pas est réduit en dessous du minimum dans "
 "un pas NLS"
 
-#. R/nlme.R: warning("step halving factor reduced below minimum in PNLS step")
-#. R/nlme.R: stop("step halving factor reduced below minimum in PNLS step")
+#. R/nlme.R: gettext("step halving factor reduced below minimum in PNLS step", domain = "R-nlme")
 #: R/nlme.R:0
 msgid "step halving factor reduced below minimum in PNLS step"
 msgstr ""
@@ -2365,6 +2391,16 @@ msgid "term %s was not matched"
 msgid_plural "terms %s were not matched"
 msgstr[0] "le terme %s est incohérent"
 msgstr[1] "les termes %s sont incohérents"
+
+#~ msgid ""
+#~ "approximate covariance matrix for parameter estimates not of full rank"
+#~ msgstr ""
+#~ "matrice de covariance approximative pour les estimateurs de paramètres "
+#~ "qui ne sont pas de rang complet"
+
+#, fuzzy
+#~ msgid "objects must inherit from at least one of the following classes: %s"
+#~ msgstr "Les objets doivent hériter des classes \"gls\", \"gnls\","
 
 #, fuzzy
 #~ msgid "Unitialized correlation structure of class %s"
@@ -2830,9 +2866,6 @@ msgstr[1] "les termes %s sont incohérents"
 #, fuzzy
 #~ msgid "'object' argument is not an object of class \"formula\""
 #~ msgstr "'form' doit être une formule"
-
-#~ msgid "object must inherit from class \"lme\""
-#~ msgstr "l'objet doit hériter de la classe \"lme\""
 
 #~ msgid "'Terms' must be between 1 and %d"
 #~ msgstr "'Terms' doivent être compris entre 1 et %d"

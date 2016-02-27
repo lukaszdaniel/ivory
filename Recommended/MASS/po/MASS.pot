@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MASS 7.3-45\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-17 17:53+0100\n"
+"POT-Creation-Date: 2016-02-27 19:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,17 +21,17 @@ msgstr ""
 msgid "initial configuration has duplicates"
 msgstr ""
 
-#: MASS.c:63
+#: MASS.c:64
 #, c-format
 msgid "Initial stress        : %7.5f\n"
 msgstr ""
 
-#: MASS.c:118
+#: MASS.c:121
 #, c-format
 msgid "stress after %3d iters: %7.5f\n"
 msgstr ""
 
-#: MASS.c:138
+#: MASS.c:142
 #, c-format
 msgid "stress after %3d iters: %7.5f, magic = %5.3f\n"
 msgstr ""

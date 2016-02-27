@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: mgcv 1.8-9\n"
-"POT-Creation-Date: 2015-11-17 17:53\n"
+"Project-Id-Version: mgcv 1.8-11\n"
+"POT-Creation-Date: 2016-02-27 19:10\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -222,6 +222,13 @@ msgid "'%s' function requires 2 links specified as character strings"
 msgstr ""
 
 
+#: R/mvam.r: 0
+#. R/mvam.r: gettextf("'%s' function requires 2 or more dimensional data", "mvn()")
+
+msgid "'%s' function requires 2 or more dimensional data"
+msgstr ""
+
+
 #: R/mgcv.r: 0
 #. R/mgcv.r: gettextf("'%s', '%s' and '%s' components should have the same length", "M$sp", "M$S",     "M$off")
 
@@ -334,6 +341,13 @@ msgstr ""
 #. R/smooth.r: stop("'d' can not be negative in call passed to 'null.space.dimension()'")
 
 msgid "'d' can not be negative in call passed to 'null.space.dimension()'"
+msgstr ""
+
+
+#: R/bam.r: 0
+#. R/bam.r: warning("'exclude' argument ignored by discrete prediction at present")
+
+msgid "'exclude' argument ignored by discrete prediction at present"
 msgstr ""
 
 
@@ -2591,13 +2605,6 @@ msgid "mvn dimension error"
 msgstr ""
 
 
-#: R/mvam.r: 0
-#. R/mvam.r: stop("mvn requires 2 or more dimensional data")
-
-msgid "mvn requires 2 or more dimensional data"
-msgstr ""
-
-
 #: R/plots.r: 0
 #. R/plots.r: stop("names of 'z' and 'pc' must match")
 
@@ -2744,6 +2751,20 @@ msgstr ""
 #. R/mgcv.r: stop("nothing to do for this model")
 
 msgid "nothing to do for this model"
+msgstr ""
+
+
+#: R/gamlss.r: 0
+#. R/gamlss.r: stop("number of categories must be at least 2")
+
+msgid "number of categories must be at least 2"
+msgstr ""
+
+
+#: R/gamlss.r: 0
+#. R/gamlss.r: stop("number of linear predictors doesn't match")
+
+msgid "number of linear predictors doesn't match"
 msgstr ""
 
 
@@ -2947,6 +2968,13 @@ msgstr ""
 #. R/plots.r: gettext("response", domain = "R-mgcv")
 
 msgid "response"
+msgstr ""
+
+
+#: R/gamlss.r: 0
+#. R/gamlss.r: stop("response not in 0 to number of predictors + 1")
+
+msgid "response not in 0 to number of predictors + 1"
 msgstr ""
 
 
@@ -3231,6 +3259,13 @@ msgstr ""
 #. R/mgcv.r: warning("type 'iterms' is not available for multiple predictor cases")
 
 msgid "type 'iterms' is not available for multiple predictor cases"
+msgstr ""
+
+
+#: R/bam.r: 0
+#. R/bam.r: warning("type 'iterms' reset to type 'terms'")
+
+msgid "type 'iterms' reset to type 'terms'"
 msgstr ""
 
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: rpart 3.1-53\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-07 16:58+0100\n"
+"POT-Creation-Date: 2016-02-27 19:10+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -15,23 +15,28 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 1.5.4\n"
-#: poisson.c:35
+
+#: poisson.c:32
 msgid "Invalid time point"
 msgstr "Niepoprawny punkt czasowy"
-#: poisson.c:39
+
+#: poisson.c:36
 msgid "Invalid event count"
 msgstr "błędne zliczenia zdarzenia"
-#: poisson.c:69
+
+#: poisson.c:66
 msgid "Invalid error rule"
 msgstr "Niepoprawna reguła błędu"
-#: print_tree.c:61
+
+#: print_tree.c:55
 #, c-format
 msgid "Node number %d: %d observation"
 msgid_plural "Node number %d: %d observations"
 msgstr[0] "Węzeł numer %d: %d obserwacja"
 msgstr[1] "Węzeł numer %d: %d obserwacje"
 msgstr[2] "Węzeł numer %d: %d obserwacji"
-#: print_tree.c:63
+
+#: print_tree.c:59
 #, c-format
 msgid ""
 "Complexity param= %f\n"
@@ -39,115 +44,140 @@ msgid ""
 msgstr ""
 "Parametr złożoności= %f\n"
 "  oszacowanie zmiennej niezależnej=%f,  ryzyko/n= %f\n"
-#: print_tree.c:66
+
+#: print_tree.c:64
 #, c-format
 msgid "  left son=%d (%d observation)"
 msgid_plural "  left son=%d (%d observations)"
 msgstr[0] "  lewy syn=%d (%d obserwacja)"
 msgstr[1] "  lewy syn=%d (%d obserwacje)"
 msgstr[2] "  lewy syn=%d (%d obserwacji)"
-#: print_tree.c:68
+
+#: print_tree.c:70
 #, c-format
 msgid " right son=%d (%d observation)"
 msgid_plural " right son=%d (%d observations)"
 msgstr[0] "prawy syn=%d (%d obserwacja)"
 msgstr[1] "prawy syn=%d (%d obserwacje)"
 msgstr[2] "prawy syn=%d (%d obserwacji)"
-#: print_tree.c:75
+
+#: print_tree.c:81
 #, c-format
 msgid "%d observation does not split\n"
 msgid_plural "%d observations do not split\n"
 msgstr[0] "%d obserwacja nie rozdziela się\n"
 msgstr[1] "%d obserwacje nie rozdzielają się\n"
 msgstr[2] "%d obserwacji nie rozdziela się\n"
-#: print_tree.c:80
+
+#: print_tree.c:87
 msgid "  Primary splits:\n"
 msgstr "  Pierwotne podziały:\n"
-#: print_tree.c:87
+
+#: print_tree.c:95
 #, c-format
 msgid "var%d < %5g to the left, improve=%5.3f,  (%d missing)\n"
 msgid_plural "var%d < %5g to the left, improve=%5.3f,  (%d missing)\n"
 msgstr[0] "zmienna 'var%d' < %5g na lewo, ulepszenie=%5.3f, (%d brakujący)\n"
 msgstr[1] "zmienna 'var%d' < %5g na lewo, ulepszenie=%5.3f, (%d brakujące)\n"
 msgstr[2] "zmienna 'var%d' < %5g na lewo, ulepszenie=%5.3f, (%d brakujących)\n"
-#: print_tree.c:91
+
+#: print_tree.c:102
 #, c-format
 msgid "var%d > %5g to the left, improve=%5.3f, (%d missing)\n"
 msgid_plural "var%d > %5g to the left, improve=%5.3f, (%d missing)\n"
 msgstr[0] "zmienna 'var%d' > %5g na lewo, ulepszenie=%5.3f, (%d brakujący)\n"
 msgstr[1] "zmienna 'var%d' > %5g na lewo, ulepszenie=%5.3f, (%d brakujące)\n"
 msgstr[2] "zmienna 'var%d' > %5g na lewo, ulepszenie=%5.3f, (%d brakujących)\n"
-#: print_tree.c:95 print_tree.c:140
+
+#: print_tree.c:108 print_tree.c:162
 #, c-format
 msgid "var%d splits as: "
 msgstr "zmienna 'var%d' rozdziela się jako: "
-#: print_tree.c:110 print_tree.c:115
+
+#: print_tree.c:124 print_tree.c:131
 #, c-format
 msgid "improve=%5.3f, (%d missing)\n"
 msgid_plural "improve=%5.3f, (%d missing)\n"
 msgstr[0] "ulepszenie=%5.3f, (%d brakujący)\n"
 msgstr[1] "ulepszenie=%5.3f, (%d brakujące)\n"
 msgstr[2] "ulepszenie=%5.3f, (%d brakujących)\n"
-#: print_tree.c:125
+
+#: print_tree.c:143
 msgid "  Surrogate splits:\n"
 msgstr "  Zastępcze podziały:\n"
-#: print_tree.c:132
+
+#: print_tree.c:150
 #, c-format
 msgid "var%d < %5g to the left, agree=%5.3f, (%d split)\n"
 msgid_plural "var%d < %5g to the left, agree=%5.3f, (%d split)\n"
 msgstr[0] "zmienna 'var%d' < %5g na lewo, zgoda=%5.3f, (%d podział)\n"
 msgstr[1] "zmienna 'var%d' < %5g na lewo, zgoda=%5.3f, (%d podziały)\n"
 msgstr[2] "zmienna 'var%d' < %5g na lewo, zgoda=%5.3f, (%d podziałów)\n"
-#: print_tree.c:136
+
+#: print_tree.c:156
 #, c-format
 msgid "var%d > %5g to the left, agree=%5.3f, (%d split)\n"
 msgid_plural "var%d > %5g to the left, agree=%5.3f, (%d split)\n"
 msgstr[0] "zmienna 'var%d' > %5g na lewo, zgoda=%5.3f, (%d podział)\n"
 msgstr[1] "zmienna 'var%d' > %5g na lewo, zgoda=%5.3f, (%d podziały)\n"
 msgstr[2] "zmienna 'var%d' > %5g na lewo, zgoda=%5.3f, (%d podziałów)\n"
-#: print_tree.c:155 print_tree.c:160
+
+#: print_tree.c:178 print_tree.c:184
 #, c-format
 msgid "agree=%5.3f, (%d split)\n"
 msgid_plural "agree=%5.3f, (%d split)\n"
 msgstr[0] "zgoda=%5.3f, (%d podział)\n"
 msgstr[1] "zgoda=%5.3f, (%d podziały)\n"
 msgstr[2] "zgoda=%5.3f, (%d podziałów)\n"
-#: rpart.c:92 xpred.c:90
+
+#: rpart.c:89 xpred.c:86
 msgid "Invalid value for 'method'"
 msgstr "niepoprawna wartość dla 'method'"
-#: rpart.c:194
+
+#: rpart.c:191
 msgid "unknown error"
 msgstr "nieznany błąd"
-#: rpart_callback.c:39
+
+#: rpart_callback.c:37
 msgid "'yback' not found"
 msgstr "nie znaleziono 'yback'"
-#: rpart_callback.c:43
+
+#: rpart_callback.c:41
 msgid "'wback' not found"
 msgstr "nie znaleziono 'wback'"
-#: rpart_callback.c:47
+
+#: rpart_callback.c:45
 msgid "'xback' not found"
 msgstr "nie znaleziono 'xback'"
-#: rpart_callback.c:51
+
+#: rpart_callback.c:49
 msgid "'nback' not found"
 msgstr "nie znaleziono 'nback'"
-#: rpart_callback.c:97
+
+#: rpart_callback.c:89
 msgid "return value not a vector"
 msgstr "zwrócona wartość nie jest wektorem"
-#: rpart_callback.c:99
+
+#: rpart_callback.c:91
 msgid "returned value is the wrong length"
 msgstr "zwrócona wartość ma błędną długość"
-#: rpart_callback.c:131
+
+#: rpart_callback.c:121
 msgid "the expression expr1 did not return a vector!"
 msgstr "wyrażenie 'expr1' nie zwróciło wektora!"
-#: rpart_callback.c:141
+
+#: rpart_callback.c:133
 #, c-format
 msgid "the expression expr1 returned a list of %d elements, %d required"
 msgstr "wyrażenie 'expr1' zwróciło listę %d elementów, %d jest wymaganych"
-#: rundown.c:49
+
+#: rundown.c:47
 msgid "Warning message--see rundown.c"
 msgstr "Komunikat ostrzegawczy--zobacz 'rundown.c'"
-#: rundown2.c:49
+
+#: rundown2.c:47
 msgid "Warning message--see rundown2.c"
 msgstr "Komunikat ostrzegawczy--zobacz 'rundown2.c'"
+
 #~ msgid "Out of memory"
 #~ msgstr "Brak pamięci"

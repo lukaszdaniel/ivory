@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.3-10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-17 17:53+0100\n"
+"POT-Creation-Date: 2016-02-27 19:10+0100\n"
 "PO-Revision-Date: 2005-12-08 00:40+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: magic.c:445
+#: magic.c:591
 msgid "magic requires smoothing parameter starting values if L supplied"
 msgstr ""
 
-#: magic.c:563
+#: magic.c:753
 msgid "magic, the gcv/ubre optimizer, failed to converge after 400 iterations."
 msgstr "magic, l'optimisateur gcv/ubre, n'a pas convergé après 400 itérations."
 
@@ -37,115 +37,115 @@ msgid ""
 "file dim problem\n"
 msgstr ""
 
-#: mat.c:2561
+#: mat.c:2804
 #, c-format
 msgid "Non orthogonal eigenvectors %d %g\n"
 msgstr ""
 
-#: mat.c:2566
+#: mat.c:2809
 #, c-format
 msgid "Eigenvectors not normalized %d %g\n"
 msgstr ""
 
-#: matrix.c:81
+#: matrix.c:86
 msgid "Failed to initialize memory for matrix."
 msgstr "L'initialisation de la mémoire pour une matrice a échoué."
 
-#: matrix.c:143 matrix.c:205
+#: matrix.c:182 matrix.c:265
 msgid "An out of bound write to matrix has occurred!"
 msgstr "Une écrite hors des limites de la matrice s'est produite !"
 
-#: matrix.c:149
+#: matrix.c:192
 msgid "INTEGRITY PROBLEM in the extant matrix list."
 msgstr "PROBLEME D'INTEGRITE dans la liste de la matrice étendue."
 
-#: matrix.c:181
+#: matrix.c:236
 msgid "You are trying to check matrix integrity without defining RANGECHECK."
 msgstr ""
 "Vous essayez de vérifier l'intégrité de la matrice sans avoir défini "
 "RANGECHECK."
 
-#: matrix.c:243
+#: matrix.c:309
 msgid "Target matrix too small in mcopy"
 msgstr "Matrice cible trop petite dans mcopy"
 
-#: matrix.c:263 matrix.c:271 matrix.c:284 matrix.c:292
+#: matrix.c:335 matrix.c:347 matrix.c:363 matrix.c:375
 msgid "Incompatible matrices in matmult."
 msgstr "Matrices incompatibles dans matmult."
 
-#: matrix.c:379
+#: matrix.c:485
 msgid "Attempt to invert() non-square matrix"
 msgstr "Tentative d'inversion d'une matrice non carrée"
 
-#: matrix.c:401
+#: matrix.c:524
 msgid "Singular Matrix passed to invert()"
 msgstr "Matrice singulière passée à invert()"
 
-#: matrix.c:1321
+#: matrix.c:1870
 #, fuzzy
 msgid "'svd()' not converged"
 msgstr "svd() n'a pas convergé"
 
-#: matrix.c:1397
+#: matrix.c:1951
 #, c-format
 msgid "svdroot matrix not +ve semi def. %g"
 msgstr "la matrice svdroot n'est pas +ve semi def. %g"
 
-#: matrix.c:1425
+#: matrix.c:1982
 msgid "Sort failed"
 msgstr "Le tri a échoué"
 
-#: qp.c:57
+#: qp.c:63
 #, fuzzy
 msgid "ERROR in 'addconQT()'"
 msgstr "ERREUR dans addconQT."
 
-#: qp.c:463
+#: qp.c:566
 msgid "QPCLS - Rank deficiency in model"
 msgstr "QPCLS - Déficience de rang dans le modèle"
 
-#: sparse-smooth.c:143
+#: sparse-smooth.c:162
 msgid "More than 2 points in a box!!\n"
 msgstr ""
 
-#: sparse-smooth.c:148
+#: sparse-smooth.c:171
 #, c-format
 msgid "point %d in %d boxes!\n"
 msgstr ""
 
-#: sparse-smooth.c:310 sparse-smooth.c:326
+#: sparse-smooth.c:366 sparse-smooth.c:388
 msgid "too many boxes!!"
 msgstr ""
 
-#: sparse-smooth.c:342
+#: sparse-smooth.c:410
 #, c-format
 msgid "bi not equal to nb-1 %d %d\n"
 msgstr ""
 
-#: sparse-smooth.c:442
+#: sparse-smooth.c:523
 msgid "child boundary problem\n"
 msgstr ""
 
-#: sparse-smooth.c:551
+#: sparse-smooth.c:651
 msgid ""
 "\n"
 " 'star()' function is useful only in 2D\n"
 msgstr ""
 
-#: sparse-smooth.c:608
+#: sparse-smooth.c:720
 msgid "indexing error in 'p_area()' function!\n"
 msgstr ""
 
-#: sparse-smooth.c:1054
+#: sparse-smooth.c:1222
 msgid "hello\n"
 msgstr ""
 
-#: sparse-smooth.c:1086
+#: sparse-smooth.c:1260
 #, c-format
 msgid "%d upper neighbour claimed to be self d=%d!\n"
 msgstr ""
 
-#: sparse-smooth.c:1149
+#: sparse-smooth.c:1333
 msgid "lower neighbour claimed to be self!\n"
 msgstr ""
 
@@ -153,7 +153,7 @@ msgstr ""
 msgid "You must have 2m>d for a thin plate spline."
 msgstr "Vous devez avoir 2m > d pour une 'thin plate spline'"
 
-#: tprs.c:376 tprs.c:384
+#: tprs.c:461 tprs.c:477
 msgid ""
 "A term has fewer unique covariate combinations than specified maximum "
 "degrees of freedom"

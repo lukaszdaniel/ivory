@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: survival 2.38-3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-29 22:15+0200\n"
+"POT-Creation-Date: 2016-02-27 19:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,26 +17,26 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: cox_Rcallback.c:53
+#: cox_Rcallback.c:49
 msgid "coef: invalid type\n"
 msgstr ""
 
-#: cox_Rcallback.c:62
+#: cox_Rcallback.c:58
 msgid "first: invalid type\n"
 msgstr ""
 
-#: cox_Rcallback.c:72
+#: cox_Rcallback.c:68
 msgid "second: invalid type\n"
 msgstr ""
 
-#: cox_Rcallback.c:81
+#: cox_Rcallback.c:77
 msgid "flag: invalid type\n"
 msgstr ""
 
-#: cox_Rcallback.c:90
+#: cox_Rcallback.c:86
 msgid "penalty: invalid type\n"
 msgstr ""
 
-#: coxexact.c:162
+#: coxexact.c:177
 msgid "(number at risk) * (number tied deaths) is too large"
 msgstr ""

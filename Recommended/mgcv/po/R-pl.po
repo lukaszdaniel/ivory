@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.8-6\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-11-17 17:53\n"
+"POT-Creation-Date: 2016-02-27 19:10\n"
 "PO-Revision-Date: 2015-10-18 20:40+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -189,6 +189,12 @@ msgstr "argument '%s' powinien wynosić 1 lub 2"
 msgid "'%s' function requires 2 links specified as character strings"
 msgstr "funkcja '%s' wymaga dwóch połączeń określonych jako łańcuchy tekstowe"
 
+#. R/mvam.r: gettextf("'%s' function requires 2 or more dimensional data", "mvn()")
+#: R/mvam.r:0
+#, fuzzy
+msgid "'%s' function requires 2 or more dimensional data"
+msgstr "'mvn()' wymaga 2 lub więcej danych wymiarowych"
+
 #. R/mgcv.r: gettextf("'%s', '%s' and '%s' components should have the same length", "M$sp", "M$S",     "M$off")
 #: R/mgcv.r:0
 msgid "'%s', '%s' and '%s' components should have the same length"
@@ -274,6 +280,11 @@ msgstr "'by=.' nie jest dozwolone"
 msgid "'d' can not be negative in call passed to 'null.space.dimension()'"
 msgstr ""
 "'d' nie może być ujemne w wywołaniu przekazywanym do 'null.space.dimension()'"
+
+#. R/bam.r: warning("'exclude' argument ignored by discrete prediction at present")
+#: R/bam.r:0
+msgid "'exclude' argument ignored by discrete prediction at present"
+msgstr ""
 
 #. R/bam.r: stop("'family' argument seems not to be a valid family object")
 #. R/bam.r: stop("'family' argument seems not to be a valid family object")
@@ -2000,11 +2011,6 @@ msgstr ""
 msgid "mvn dimension error"
 msgstr "błąd wymiaru 'mvn()'"
 
-#. R/mvam.r: stop("mvn requires 2 or more dimensional data")
-#: R/mvam.r:0
-msgid "mvn requires 2 or more dimensional data"
-msgstr "'mvn()' wymaga 2 lub więcej danych wymiarowych"
-
 #. R/plots.r: stop("names of 'z' and 'pc' must match")
 #: R/plots.r:0
 msgid "names of 'z' and 'pc' must match"
@@ -2119,6 +2125,18 @@ msgstr "zbyt mało unikalnych wartości aby znaleźć k najbliższych"
 #: R/mgcv.r:0
 msgid "nothing to do for this model"
 msgstr "nic do zrobienia dla tego modelu"
+
+#. R/gamlss.r: stop("number of categories must be at least 2")
+#: R/gamlss.r:0
+#, fuzzy
+msgid "number of categories must be at least 2"
+msgstr "maksymalna liczba iteracji musi być > 0"
+
+#. R/gamlss.r: stop("number of linear predictors doesn't match")
+#: R/gamlss.r:0
+#, fuzzy
+msgid "number of linear predictors doesn't match"
+msgstr "niepoprawna liczba liniowych predyktorów dla rodziny"
 
 #. R/smooth.r: stop("number of supplied knots != k for a cc smooth")
 #: R/smooth.r:0
@@ -2281,6 +2299,11 @@ msgstr ""
 #: R/plots.r:0
 msgid "response"
 msgstr "zmienna zależna"
+
+#. R/gamlss.r: stop("response not in 0 to number of predictors + 1")
+#: R/gamlss.r:0
+msgid "response not in 0 to number of predictors + 1"
+msgstr ""
 
 #. R/smooth.r: warning("s value increased")
 #: R/smooth.r:0
@@ -2495,6 +2518,12 @@ msgstr "całkowita liczba stopni swobody = %s"
 #: R/mgcv.r:0
 msgid "type 'iterms' is not available for multiple predictor cases"
 msgstr "typ 'items' nie jest dostępny dla przypadków z wieloma predyktorami"
+
+#. R/bam.r: warning("type 'iterms' reset to type 'terms'")
+#: R/bam.r:0
+#, fuzzy
+msgid "type 'iterms' reset to type 'terms'"
+msgstr "Nieznany typ, resetowanie do 'terms'"
 
 #. R/plots.r: stop("type must be \"link\" or \"response\"")
 #: R/plots.r:0

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: spatial 7.2-20\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:25\n"
+"POT-Creation-Date: 2016-02-27 19:10\n"
 "PO-Revision-Date: 2005-12-07 23:53+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -90,7 +90,7 @@ msgstr "Le périphérique n'est pas actif"
 msgid "Fitted:"
 msgstr ""
 
-#. R/kr.R: gettextf("Model %s: %s", format(1L:nmodels), models)
+#. R/kr.R: gettextf("Model %s: %s", format(seq_len(nmodels)), models)
 #: R/kr.R:0
 msgid "Model %s: %s"
 msgstr ""

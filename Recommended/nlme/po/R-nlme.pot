@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: nlme 3.1-122\n"
-"POT-Creation-Date: 2015-10-01 21:12\n"
+"Project-Id-Version: nlme 3.1-125\n"
+"POT-Creation-Date: 2016-02-27 19:10\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -640,12 +640,17 @@ msgid "Convergence at iteration:"
 msgstr ""
 
 
+#: R/nlme.R: 0
+#. R/nlme.R: gettextf("Convergence crit. (must all become <= tolerance = %g):", controlvals$tolerance,     domain = "R-nlme")
+
+msgid "Convergence crit. (must all become <= tolerance = %g):"
+msgstr ""
+
+
 #: R/gls.R: 0
 #: R/gnls.R: 0
-#: R/nlme.R: 0
 #. R/gls.R: gettext("Convergence:", domain = "R-nlme")
 #. R/gnls.R: gettext("Convergence:", domain = "R-nlme")
-#. R/nlme.R: gettext("Convergence:", domain = "R-nlme")
 
 msgid "Convergence:"
 msgstr ""
@@ -895,9 +900,9 @@ msgstr ""
 
 
 #: R/nlme.R: 0
-#. R/nlme.R: gettextf("LME step: Loglik: %s, nlm iterations: %d", format(nlmeFit$logLik), convIter,     domain = "R-nlme")
+#. R/nlme.R: gettextf("LME step: Loglik: %s, %s iterations: %d", format(nlmeFit$logLik), controlvals$opt,     convIter, domain = "R-nlme")
 
-msgid "LME step: Loglik: %s, nlm iterations: %d"
+msgid "LME step: Loglik: %s, %s iterations: %d"
 msgstr ""
 
 
@@ -1164,7 +1169,6 @@ msgstr ""
 #: R/gls.R: 0
 #: R/lmList.R: 0
 #. R/gls.R: gettext("Residual standard error:", domain = "R-nlme")
-#. R/gls.R: gettext("Residual standard error:", domain = "R-nlme")
 #. R/gls.R: gettext("Residual standard error: ", domain = "R-nlme")
 #. R/gls.R: gettext("Residual standard error: ", domain = "R-nlme")
 #. R/lmList.R: gettext("Residual standard error: ", domain = "R-nlme")
@@ -1341,8 +1345,22 @@ msgstr ""
 
 #: R/lme.R: 0
 #. R/lme.R: gettext("Within-group standard error:", domain = "R-nlme")
+#. R/lme.R: gettext("Within-group standard error:", domain = "R-nmle")
 
 msgid "Within-group standard error:"
+msgstr ""
+
+
+#: R/gls.R: 0
+#: R/gnls.R: 0
+#: R/lme.R: 0
+#: R/nlme.R: 0
+#. R/gls.R: stop("Within-group std. dev. must be a positive numeric value")
+#. R/gnls.R: stop("Within-group std. dev. must be a positive numeric value")
+#. R/lme.R: stop("Within-group std. dev. must be a positive numeric value")
+#. R/nlme.R: stop("Within-group std. dev. must be a positive numeric value")
+
+msgid "Within-group std. dev. must be a positive numeric value"
 msgstr ""
 
 
@@ -1451,13 +1469,6 @@ msgstr ""
 #. R/nlme.R: stop("an object with 'call' component is required")
 
 msgid "an object with 'call' component is required"
-msgstr ""
-
-
-#: R/gnls.R: 0
-#. R/gnls.R: stop("approximate covariance matrix for parameter estimates not of full rank")
-
-msgid "approximate covariance matrix for parameter estimates not of full rank"
 msgstr ""
 
 
@@ -1742,11 +1753,16 @@ msgstr ""
 
 
 #: R/gls.R: 0
-#: R/lme.R: 0
 #. R/gls.R: gettextf("cannot get confidence intervals on var-cov components: %s", aV)
-#. R/lme.R: gettextf("cannot get confidence intervals on var-cov components: %s", aV)
 
 msgid "cannot get confidence intervals on var-cov components: %s"
+msgstr ""
+
+
+#: R/lme.R: 0
+#. R/lme.R: gettextf("cannot get confidence intervals on var-cov components: %s\n Consider '%s'",     aV, "which = \"fixed\"")
+
+msgid "cannot get confidence intervals on var-cov components: %s\n Consider '%s'"
 msgstr ""
 
 
@@ -2001,6 +2017,13 @@ msgid "fixed-effects model must be a formula of the form \"resp ~ pred\""
 msgstr ""
 
 
+#: R/lme.R: 0
+#. R/lme.R: warning("for 'sigma' fixed, 'apVar' is set FALSE, as the cov approxmation is not yet available.")
+
+msgid "for 'sigma' fixed, 'apVar' is set FALSE, as the cov approxmation is not yet available."
+msgstr ""
+
+
 #: R/gnls.R: 0
 #: R/nlme.R: 0
 #: R/nlme.R: 0
@@ -2238,6 +2261,13 @@ msgstr ""
 #. R/lme.R: gettext("maximum number of iterations (lmeControl(maxIter)) reached without convergence")
 
 msgid "maximum number of iterations (lmeControl(maxIter)) reached without convergence"
+msgstr ""
+
+
+#: R/nlme.R: 0
+#. R/nlme.R: gettextf("maximum number of iterations (maxIter = %d) reached without convergence",     controlvals$maxIter, domain = "R-nlme")
+
+msgid "maximum number of iterations (maxIter = %d) reached without convergence"
 msgstr ""
 
 
@@ -2520,9 +2550,9 @@ msgstr ""
 
 
 #: R/lme.R: 0
-#. R/lme.R: gettextf("objects must inherit from at least one of the following classes: %s", paste(dQuote(valid.classes),     collapse = ", "))
+#. R/lme.R: gettextf("objects must inherit from classes %s, or %s", paste(head(valid.cl, -1),     collapse = ", "), tail(valid.cl, 1))
 
-msgid "objects must inherit from at least one of the following classes: %s"
+msgid "objects must inherit from classes %s, or %s"
 msgstr ""
 
 
@@ -2706,8 +2736,7 @@ msgstr ""
 
 
 #: R/nlme.R: 0
-#. R/nlme.R: warning("step halving factor reduced below minimum in PNLS step")
-#. R/nlme.R: stop("step halving factor reduced below minimum in PNLS step")
+#. R/nlme.R: gettext("step halving factor reduced below minimum in PNLS step", domain = "R-nlme")
 
 msgid "step halving factor reduced below minimum in PNLS step"
 msgstr ""

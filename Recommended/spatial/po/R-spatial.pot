@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: spatial 7.3-11\n"
-"POT-Creation-Date: 2015-10-01 21:12\n"
+"POT-Creation-Date: 2016-02-27 19:10\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -101,7 +101,7 @@ msgstr ""
 
 
 #: R/kr.R: 0
-#. R/kr.R: gettextf("Model %s: %s", format(1L:nmodels), models)
+#. R/kr.R: gettextf("Model %s: %s", format(seq_len(nmodels)), models)
 
 msgid "Model %s: %s"
 msgstr ""

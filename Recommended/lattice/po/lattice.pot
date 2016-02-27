@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lattice 0.20-33\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-29 22:14+0200\n"
+"POT-Creation-Date: 2016-02-27 19:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: threeDplot.c:154
+#: threeDplot.c:152
 msgid ""
 "bug in wireframe calculations: cosines supposed to be non-negative but not"
 msgstr ""

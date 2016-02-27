@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2 / spatial 7.3-5\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:25\n"
+"POT-Creation-Date: 2016-02-27 19:10\n"
 "PO-Revision-Date: 2012-10-12 23:18+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -90,7 +90,7 @@ msgstr "Gerät nicht aktiv"
 msgid "Fitted:"
 msgstr ""
 
-#. R/kr.R: gettextf("Model %s: %s", format(1L:nmodels), models)
+#. R/kr.R: gettextf("Model %s: %s", format(seq_len(nmodels)), models)
 #: R/kr.R:0
 msgid "Model %s: %s"
 msgstr ""

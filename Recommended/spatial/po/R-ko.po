@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: spatial 7.3-7\n"
-"POT-Creation-Date: 2015-02-13 16:25\n"
+"POT-Creation-Date: 2016-02-27 19:10\n"
 "PO-Revision-Date: 2015-02-06 21:56-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -95,7 +95,7 @@ msgstr "장치가 활성화되어 있지 않습니다."
 msgid "Fitted:"
 msgstr ""
 
-#. R/kr.R: gettextf("Model %s: %s", format(1L:nmodels), models)
+#. R/kr.R: gettextf("Model %s: %s", format(seq_len(nmodels)), models)
 #: R/kr.R:0
 msgid "Model %s: %s"
 msgstr ""

@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: nlme 3.1-117\n"
+"Project-Id-Version: nlme 3.1-125\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2015-02-13 16:25\n"
-"PO-Revision-Date: 2014-07-05 16:08+0100\n"
+"POT-Creation-Date: 2016-02-27 19:10\n"
+"PO-Revision-Date: 2016-02-27 19:13+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -12,8 +12,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.8.4\n"
 "X-Poedit-Bookmarks: -1,-1,-1,72,-1,-1,-1,-1,-1,-1\n"
 
 #. R/gls.R: gettextf("%s and %s must have the same group levels", sQuote(c1), sQuote(c2))
@@ -489,10 +489,14 @@ msgstr "Ciągła AR(1)"
 msgid "Convergence at iteration:"
 msgstr "Zbieżność w iteracji:"
 
+#. R/nlme.R: gettextf("Convergence crit. (must all become <= tolerance = %g):", controlvals$tolerance,     domain = "R-nlme")
+#: R/nlme.R:0
+msgid "Convergence crit. (must all become <= tolerance = %g):"
+msgstr ""
+
 #. R/gls.R: gettext("Convergence:", domain = "R-nlme")
 #. R/gnls.R: gettext("Convergence:", domain = "R-nlme")
-#. R/nlme.R: gettext("Convergence:", domain = "R-nlme")
-#: R/gls.R:0 R/gnls.R:0 R/nlme.R:0
+#: R/gls.R:0 R/gnls.R:0
 msgid "Convergence:"
 msgstr "Zbieżność:"
 
@@ -670,10 +674,10 @@ msgstr ""
 "'L' może zawierać jedynie stałe efekty z tą samą liczbą stopni swobody "
 "mianownika"
 
-#. R/nlme.R: gettextf("LME step: Loglik: %s, nlm iterations: %d", format(nlmeFit$logLik), convIter,     domain = "R-nlme")
+#. R/nlme.R: gettextf("LME step: Loglik: %s, %s iterations: %d", format(nlmeFit$logLik), controlvals$opt,     convIter, domain = "R-nlme")
 #: R/nlme.R:0
-msgid "LME step: Loglik: %s, nlm iterations: %d"
-msgstr "krok LME: Logarytm funkcji wiarygodności: %s, iteracje nlm: %d"
+msgid "LME step: Loglik: %s, %s iterations: %d"
+msgstr "krok LME: Logarytm funkcji wiarygodności: %s, iteracje: %d"
 
 #. R/pdMat.R: stop("LNone of the arguments specify more than one block")
 #: R/pdMat.R:0
@@ -858,7 +862,6 @@ msgid "Rational quadratic spatial correlation"
 msgstr "Wymierna kwadratowa korelacja przestrzenna"
 
 #. R/gls.R: gettext("Residual standard error:", domain = "R-nlme")
-#. R/gls.R: gettext("Residual standard error:", domain = "R-nlme")
 #. R/gls.R: gettext("Residual standard error: ", domain = "R-nlme")
 #. R/gls.R: gettext("Residual standard error: ", domain = "R-nlme")
 #. R/lmList.R: gettext("Residual standard error: ", domain = "R-nlme")
@@ -982,9 +985,18 @@ msgid "Variance function:"
 msgstr "Funkcja wariancji:"
 
 #. R/lme.R: gettext("Within-group standard error:", domain = "R-nlme")
+#. R/lme.R: gettext("Within-group standard error:", domain = "R-nmle")
 #: R/lme.R:0
 msgid "Within-group standard error:"
 msgstr "Standardowy błąd w obrębie grup:"
+
+#. R/gls.R: stop("Within-group std. dev. must be a positive numeric value")
+#. R/gnls.R: stop("Within-group std. dev. must be a positive numeric value")
+#. R/lme.R: stop("Within-group std. dev. must be a positive numeric value")
+#. R/nlme.R: stop("Within-group std. dev. must be a positive numeric value")
+#: R/gls.R:0 R/gnls.R:0 R/lme.R:0 R/nlme.R:0
+msgid "Within-group std. dev. must be a positive numeric value"
+msgstr ""
 
 #. R/varFunc.R: stop("all arguments passed to 'varComb()' function must be of class \"varFunc\"")
 #: R/varFunc.R:0
@@ -1070,13 +1082,6 @@ msgstr "obiekt o długości %d nie zgadza się z wymaganym rozmiarem parametru"
 #: R/gls.R:0 R/gnls.R:0 R/lme.R:0 R/nlme.R:0
 msgid "an object with 'call' component is required"
 msgstr "wymagany jest obiekt z komponentem 'call'"
-
-#. R/gnls.R: stop("approximate covariance matrix for parameter estimates not of full rank")
-#: R/gnls.R:0
-msgid "approximate covariance matrix for parameter estimates not of full rank"
-msgstr ""
-"przybliżona macierz kowariancji dla szacunkowych parametrów nie jest pełnej "
-"rangi"
 
 #. R/pdMat.R: stop("arguments imply different number of blocks")
 #: R/pdMat.R:0
@@ -1299,10 +1304,18 @@ msgid "cannot fix variances in all groups"
 msgstr "nie można ustalić wariancji we wszystkich grupach"
 
 #. R/gls.R: gettextf("cannot get confidence intervals on var-cov components: %s", aV)
-#. R/lme.R: gettextf("cannot get confidence intervals on var-cov components: %s", aV)
-#: R/gls.R:0 R/lme.R:0
+#: R/gls.R:0
 msgid "cannot get confidence intervals on var-cov components: %s"
 msgstr "nie można uzyskać przedziałów ufności na komponentach var-cov: %s"
+
+#. R/lme.R: gettextf("cannot get confidence intervals on var-cov components: %s\n Consider '%s'",     aV, "which = \"fixed\"")
+#: R/lme.R:0
+msgid ""
+"cannot get confidence intervals on var-cov components: %s\n"
+" Consider '%s'"
+msgstr ""
+"nie można uzyskać przedziałów ufności na komponentach var-cov: %s\n"
+" Rozważ '%s'"
 
 #. R/pdMat.R: stop("cannot get the inverse of an uninitialized object")
 #. R/pdMat.R: stop("cannot get the inverse of an uninitialized object")
@@ -1513,6 +1526,13 @@ msgstr ""
 "model stałych efektów musi być formułą o formie \"zmienna zależna ~ zmienna "
 "niezależna\""
 
+#. R/lme.R: warning("for 'sigma' fixed, 'apVar' is set FALSE, as the cov approxmation is not yet available.")
+#: R/lme.R:0
+msgid ""
+"for 'sigma' fixed, 'apVar' is set FALSE, as the cov approxmation is not yet "
+"available."
+msgstr ""
+
 #. R/gnls.R: gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "params")
 #. R/gnls.R: gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "params")
 #. R/nlme.R: gettextf("formulae in '%s' must be of the form \"parameter ~ expr\"", "fixed")
@@ -1706,6 +1726,13 @@ msgid ""
 msgstr ""
 "maksymalna liczba iteracji ('lmeControl(maxIter)') została osiągnięta bez "
 "uzyskania zbieżności"
+
+#. R/nlme.R: gettextf("maximum number of iterations (maxIter = %d) reached without convergence",     controlvals$maxIter, domain = "R-nlme")
+#: R/nlme.R:0
+msgid "maximum number of iterations (maxIter = %d) reached without convergence"
+msgstr ""
+"maksymalna liczba iteracji (maxiter = %d) została osiągnięta bez uzyskania "
+"zbieżności"
 
 #. R/gls.R: stop("maximum number of iterations reached without convergence")
 #. R/gnls.R: warning("maximum number of iterations reached without convergence")
@@ -1928,11 +1955,10 @@ msgstr "obiekty muszą mieć komponent \"call\" lub atrybut"
 msgid "objects must have coefficients with same row names"
 msgstr "obiekty muszą mieć współczynniki z tymi samymi nazwami wierszy"
 
-#. R/lme.R: gettextf("objects must inherit from at least one of the following classes: %s", paste(dQuote(valid.classes),     collapse = ", "))
+#. R/lme.R: gettextf("objects must inherit from classes %s, or %s", paste(head(valid.cl, -1),     collapse = ", "), tail(valid.cl, 1))
 #: R/lme.R:0
-msgid "objects must inherit from at least one of the following classes: %s"
-msgstr ""
-"obiekty muszą dziedziczyć z co najmniej jednej z następujących klas: %s"
+msgid "objects must inherit from classes %s, or %s"
+msgstr "obiekt musi dziedziczyć z klasy %s lub %s"
 
 #. R/nlsList.R: stop("old-style self-starting model functions\nare no longer supported.\nNew selfStart functions are available.\nUse\n  SSfpl instead of fpl,\n  SSfol instead of first.order.log,\n  SSbiexp instead of biexp,\n  SSlogis instead of logistic.\nIf writing your own selfStart model, see\n  \"help(selfStart)\"\nfor the new form of the \"initial\" attribute.",     domain = "R-nlme")
 #: R/nlsList.R:0
@@ -2101,8 +2127,7 @@ msgstr ""
 msgid "step halving factor reduced below minimum in NLS step"
 msgstr "czynnik skracający krok został zredukowany poniżej minimum w kroku NLS"
 
-#. R/nlme.R: warning("step halving factor reduced below minimum in PNLS step")
-#. R/nlme.R: stop("step halving factor reduced below minimum in PNLS step")
+#. R/nlme.R: gettext("step halving factor reduced below minimum in PNLS step", domain = "R-nlme")
 #: R/nlme.R:0
 msgid "step halving factor reduced below minimum in PNLS step"
 msgstr ""
@@ -2252,6 +2277,16 @@ msgid_plural "terms %s were not matched"
 msgstr[0] "człon %s nie został dopasowany"
 msgstr[1] "człony %s nie zostały dopasowane"
 msgstr[2] "człony %s nie zostały dopasowane"
+
+#~ msgid ""
+#~ "approximate covariance matrix for parameter estimates not of full rank"
+#~ msgstr ""
+#~ "przybliżona macierz kowariancji dla szacunkowych parametrów nie jest "
+#~ "pełnej rangi"
+
+#~ msgid "objects must inherit from at least one of the following classes: %s"
+#~ msgstr ""
+#~ "obiekty muszą dziedziczyć z co najmniej jednej z następujących klas: %s"
 
 #~ msgid "Unitialized correlation structure of class %s"
 #~ msgstr "Niezainicjalizowana struktura korelacji klasy %s"
@@ -2687,9 +2722,6 @@ msgstr[2] "człony %s nie zostały dopasowane"
 #, fuzzy
 #~ msgid "'object' argument is not an object of class \"formula\""
 #~ msgstr "argument 'form' nie jest obiektem klasy \"fomula\""
-
-#~ msgid "object must inherit from class \"lme\""
-#~ msgstr "obiekt musi dziedziczyć z klasy \"lme\""
 
 #~ msgid "'Terms' must be between 1 and %d"
 #~ msgstr "argument 'Terms' musi być pomiędzy 1 a %d"

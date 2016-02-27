@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cluster 2.0.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-29 22:14+0200\n"
+"POT-Creation-Date: 2016-02-27 19:10+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,18 +17,18 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: clara.c:97
+#: clara.c:93
 #, c-format
 msgid "C level clara(): random k=%d > n **\n"
 msgstr ""
 
-#: clara.c:308
+#: clara.c:318
 #, c-format
 msgid ""
 "clara()'s C level dysta2(nsam=%d, p=%d, nbest=%d, n=%d) gave 'toomany_NA'"
 msgstr ""
 
-#: clara.c:342 clara.c:347
+#: clara.c:352 clara.c:359
 #, c-format
 msgid "C level dysta2(): nsel[%s= %d] = %d is outside 0..n, n=%d"
 msgstr ""

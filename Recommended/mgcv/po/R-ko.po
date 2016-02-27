@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.3\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-17 17:53\n"
+"POT-Creation-Date: 2016-02-27 19:10\n"
 "PO-Revision-Date: 2015-02-21 16:01-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -218,6 +218,12 @@ msgstr "deriv의 값은 1 또는 2이어야 합니다."
 msgid "'%s' function requires 2 links specified as character strings"
 msgstr "gaulss 모형은 문자열로 표현된 2개의 링크(link)를 필요로 합니다."
 
+#. R/mvam.r: gettextf("'%s' function requires 2 or more dimensional data", "mvn()")
+#: R/mvam.r:0
+#, fuzzy
+msgid "'%s' function requires 2 or more dimensional data"
+msgstr "mvn은 둘 이상의 차원을 가진 데이터를 필요로 합니다."
+
 #. R/mgcv.r: gettextf("'%s', '%s' and '%s' components should have the same length", "M$sp", "M$S",     "M$off")
 #: R/mgcv.r:0
 #, fuzzy
@@ -313,6 +319,11 @@ msgstr "by=.는 사용할 수 없습니다."
 #, fuzzy
 msgid "'d' can not be negative in call passed to 'null.space.dimension()'"
 msgstr "null.space.dimension()에 지정된 인자 d는 음수를 가질 수 없습니다."
+
+#. R/bam.r: warning("'exclude' argument ignored by discrete prediction at present")
+#: R/bam.r:0
+msgid "'exclude' argument ignored by discrete prediction at present"
+msgstr ""
 
 #. R/bam.r: stop("'family' argument seems not to be a valid family object")
 #. R/bam.r: stop("'family' argument seems not to be a valid family object")
@@ -2040,11 +2051,6 @@ msgstr ""
 msgid "mvn dimension error"
 msgstr ""
 
-#. R/mvam.r: stop("mvn requires 2 or more dimensional data")
-#: R/mvam.r:0
-msgid "mvn requires 2 or more dimensional data"
-msgstr "mvn은 둘 이상의 차원을 가진 데이터를 필요로 합니다."
-
 #. R/plots.r: stop("names of 'z' and 'pc' must match")
 #: R/plots.r:0
 #, fuzzy
@@ -2157,6 +2163,17 @@ msgstr ""
 #. R/mgcv.r: stop("nothing to do for this model")
 #: R/mgcv.r:0
 msgid "nothing to do for this model"
+msgstr ""
+
+#. R/gamlss.r: stop("number of categories must be at least 2")
+#: R/gamlss.r:0
+#, fuzzy
+msgid "number of categories must be at least 2"
+msgstr "최대 반복수(iteration)는 반드시 0 보다 커야 합니다."
+
+#. R/gamlss.r: stop("number of linear predictors doesn't match")
+#: R/gamlss.r:0
+msgid "number of linear predictors doesn't match"
 msgstr ""
 
 #. R/smooth.r: stop("number of supplied knots != k for a cc smooth")
@@ -2317,6 +2334,11 @@ msgstr ""
 #. R/plots.r: gettext("response", domain = "R-mgcv")
 #: R/plots.r:0
 msgid "response"
+msgstr ""
+
+#. R/gamlss.r: stop("response not in 0 to number of predictors + 1")
+#: R/gamlss.r:0
+msgid "response not in 0 to number of predictors + 1"
 msgstr ""
 
 #. R/smooth.r: warning("s value increased")
@@ -2532,6 +2554,11 @@ msgstr ""
 #, fuzzy
 msgid "type 'iterms' is not available for multiple predictor cases"
 msgstr "gaulss 모형의 모수 mu에 사용가능한 링크(link)가 아닙니다."
+
+#. R/bam.r: warning("type 'iterms' reset to type 'terms'")
+#: R/bam.r:0
+msgid "type 'iterms' reset to type 'terms'"
+msgstr ""
 
 #. R/plots.r: stop("type must be \"link\" or \"response\"")
 #: R/plots.r:0
