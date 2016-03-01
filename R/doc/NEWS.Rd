@@ -424,17 +424,17 @@
     \itemize{
       \item The API call \code{logspace_sum} introduced in \R 3.2.0 is
       now remapped as an entry point to \code{Rf_logspace_sum}, and its
-      first argument has gained a \code{const} qualifier.
+      first argument has gained a \code{const} qualifier.  (\PR{16470})
 
-      Code using it will need to be reinstalled. (\PR{16470})
+      Code using it will need to be reinstalled.
 
       Similarly, entry point \code{log1pexp} also defined in
       \file{Rmath.h} is remapped there to \code{Rf_log1pexp}
 
       \item \code{R_GE_version} has been increased to \code{11}.
 
-      \item New API call \code{R_orderVector1()}, a faster
-      one-argument version of \code{R_orderVector()}.
+      \item New API call \code{R_orderVector1}, a faster
+      one-argument version of \code{R_orderVector}.
 
       \item When \R{} headers such as \file{R.h} and \file{Rmath.h} are
       called from C++ code in packages they include the C++ versions of
@@ -484,11 +484,6 @@
       \item Data frames with column name \code{"stringsAsFactors"} now
       format and print correctly.  (\PR{16580})
 
-      \item The \code{X11()} device sometimes froze on Red Hat
-      Enterprise Linux 6. It now waits for \code{MapNotify} events
-      instead of \code{Expose} events, thanks to Siteshwar
-      Vashisht. (\PR{16497})
-
       \item \code{cor()} is now guaranteed to return a value with
       absolute value less than or equal to 1. (\PR{16638})
 
@@ -510,7 +505,7 @@
   }
 }
 
-\section{\Rlogo CHANGES IN R 3.2.3 patched}{
+\section{\Rlogo CHANGES IN R 3.2.4}{
   \subsection{NEW FEATURES}{
     \itemize{
       \item \code{install.packages()} and related functions now give a
@@ -626,8 +621,8 @@
       for multivariate linear models (\code{"mlm"}, \code{\link{manova}})
       thanks to a proposal by Daniel Wollschlaeger.
 
-      \item The \code{as.hclust} method for \code{"dendrogram"}s failed often
-      when there were ties in the heights.
+      \item The \code{as.hclust()} method for \code{"dendrogram"}s
+      failed often when there were ties in the heights.
 
       \item \code{reorder()} and \code{midcache.dendrogram()} now are
       non-recursive and hence applicable to somewhat deeply nested
@@ -656,9 +651,21 @@
       \item \code{available.packages()} sometimes deleted the wrong
       file when cleaning up temporary files.  (\PR{16712})
 
+      \item The \code{X11()} device sometimes froze on Red Hat
+      Enterprise Linux 6. It now waits for \code{MapNotify} events
+      instead of \code{Expose} events, thanks to Siteshwar
+      Vashisht. (\PR{16497})
+
       \item \code{[dpqr]nbinom(*, size=Inf, mu=.)} now works as limit
       case, for \sQuote{dpq} as the Poisson.  (\PR{16727})\cr
       \code{pnbinom()} no longer loops infinitely in border cases.
+
+      \item \code{approxfun(*, method="constant")} and hence \code{ecdf()}
+      which calls the former now correctly \dQuote{predict} \code{NaN}
+      values as \code{NaN}.
+
+      \item \code{summary.data.frame()} now displays \code{NA}s in
+      \code{Date} columns in all cases.  (\PR{16709})
     }
   }
 }
