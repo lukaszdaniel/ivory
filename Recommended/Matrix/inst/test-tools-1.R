@@ -40,7 +40,7 @@ assertError <- function(expr, verbose=getOption("verbose")) {
     t.res <- tryCatch(expr, error = function(e) e)
     if(!inherits(t.res, "error"))
 	stop(gettextf("%s\n\t did not give an error", d.expr, domain = "R-Matrix"), call. = FALSE)
-    cat(gettext("Asserted Error:", domain = "R-Matrix"), conditionMessage(t.res),"\n")
+    if(verbose) cat(gettext("Asserted Error:", domain = "R-Matrix"), conditionMessage(t.res),"\n")
     invisible(t.res)
 }
 
@@ -218,9 +218,9 @@ relErrV <- function(target, current) {
 pkgRversion <- function(pkgname)
     sub("^R ([0-9.]+).*", "\\1", packageDescription(pkgname)[["Built"]])
 
-showSys.time <- function(expr) {
+showSys.time <- function(expr, ...) {
     ## prepend 'Time' for R CMD Rdiff
-    st <- system.time(expr)
+    st <- system.time(expr, ...)
     writeLines(paste("Time", capture.output(print(st))))
     invisible(st)
 }
@@ -232,6 +232,26 @@ showProc.time <- local({ ## function + 'pct' variable
 	cat('Time elapsed: ', (pct - ot)[1:3], final)
     }
 })
+
+##' A version of sfsmisc::Sys.memGB() which should never give an error
+##'  ( ~/R/Pkgs/sfsmisc/R/unix/Sys.ps.R  )
+##' TODO: A version that also works on Windows, using memory.size(max=TRUE)
+##' Windows help on memory.limit(): size in Mb (1048576 bytes), rounded down.
+
+Sys.memGB <- function(kind = "MemTotal") {## "MemFree" is typically more relevant
+    if(!file.exists(pf <- "/proc/meminfo"))
+	return(if(.Platform$OS.type == "windows")
+		   memory.limit() / 1000
+	       else NA)
+    mm <- tryCatch(drop(read.dcf(pf, fields=kind)),
+                   error = function(e) NULL)
+    if(is.null(mm) || any(is.na(mm)) || !all(grepl(" kB$", mm)))
+        return(NA)
+    ## return memory in giga bytes
+    as.numeric(sub(" kB$", "", mm)) / (1000 * 1024)
+}
+
+
 
 ##' @title turn an S4 object (with slots) into a list with corresponding components
 ##' @param obj an R object with a formal class (aka "S4")
@@ -250,7 +270,7 @@ assert.EQ <- function(target, current, tol = if(showOnly) 0 else 1e-15,
     T <- isTRUE(ae <- all.equal(target, current, tolerance = tol, ...))
     if(showOnly) return(ae) else if(giveRE && T) { ## don't show if stop() later:
 	ae0 <- if(tol == 0) ae else all.equal(target, current, tolerance = 0, ...)
-	if(!isTRUE(ae0)) cat(ae0,"\n")
+	if(!isTRUE(ae0)) writeLines(ae0)
     }
     if(!T) stop("all.equal() |-> ", paste(ae, collapse=sprintf("%-19s","\n")))
     else if(giveRE) invisible(ae0)
@@ -266,10 +286,11 @@ assert.EQ. <- function(target, current,
 
 ### ------- Part II  -- related to matrices, but *not* "Matrix" -----------
 
-add.simpleDimnames <- function(m) {
+add.simpleDimnames <- function(m, named=FALSE) {
     stopifnot(length(d <- dim(m)) == 2)
-    dimnames(m) <- list(if(d[1]) paste0("r", seq_len(d[1])),
-                        if(d[2]) paste0("c", seq_len(d[2])))
+    dimnames(m) <- setNames(list(if(d[1]) paste0("r", seq_len(d[1])),
+				 if(d[2]) paste0("c", seq_len(d[2]))),
+			    if(named) c("Row", "Col"))
     m
 }
 
