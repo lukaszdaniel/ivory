@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-23 20:39+0100\n"
+"POT-Creation-Date: 2016-03-03 21:06+0100\n"
 "PO-Revision-Date: 2012-02-26 14:21+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: R-core <R-core@R-project.org> \n"
@@ -587,9 +587,9 @@ msgstr " '%s'の表示に問題があります "
 #: src/gnuwin32/extra.c:572 src/gnuwin32/extra.c:597 src/main/agrep.c:132
 #: src/main/agrep.c:136 src/main/agrep.c:774 src/main/agrep.c:779
 #: src/main/apply.c:329 src/main/apply.c:331 src/main/apply.c:334
-#: src/main/array.c:90 src/main/array.c:1274 src/main/array.c:1413
-#: src/main/array.c:1415 src/main/array.c:1416 src/main/array.c:1759
-#: src/main/array.c:1761 src/main/array.c:1763 src/main/attrib.c:189
+#: src/main/array.c:90 src/main/array.c:1263 src/main/array.c:1402
+#: src/main/array.c:1404 src/main/array.c:1405 src/main/array.c:1748
+#: src/main/array.c:1750 src/main/array.c:1752 src/main/attrib.c:189
 #: src/main/builtin.c:89 src/main/builtin.c:98 src/main/builtin.c:117
 #: src/main/builtin.c:119 src/main/builtin.c:150 src/main/builtin.c:561
 #: src/main/builtin.c:577 src/main/builtin.c:764 src/main/builtin.c:766
@@ -1131,7 +1131,7 @@ msgstr " 入力文字列 y[%d] はこのロケールでは不適切です "
 msgid "'%s' argument must be a vector"
 msgstr " 最初の引数はベクトルでなくてはなりません "
 
-#: src/main/apply.c:101 src/main/array.c:513 src/main/character.c:847
+#: src/main/apply.c:101 src/main/array.c:498 src/main/character.c:847
 #: src/main/character.c:1653 src/main/connections.c:3546
 #: src/main/context.c:629 src/main/context.c:648 src/main/datetime.c:682
 #: src/main/datetime.c:784 src/main/datetime.c:1048 src/main/dotcode.c:220
@@ -1274,7 +1274,7 @@ msgstr " 長さ 0 の 'base ' 引数です "
 msgid "bad arithmetic function index"
 msgstr " 不正な関数です "
 
-#: src/main/array.c:83 src/main/array.c:1593
+#: src/main/array.c:83 src/main/array.c:1582
 #, fuzzy, c-format
 msgid "'data' argument must be of a vector type, was '%s'"
 msgstr " 'data' はベクトル型でなくてはなりません "
@@ -1283,14 +1283,14 @@ msgstr " 'data' はベクトル型でなくてはなりません "
 msgid "non-numeric matrix extent"
 msgstr " 行列の大きさが数値ではありません "
 
-#: src/main/array.c:100 src/main/array.c:108 src/main/array.c:1696
-#: src/main/array.c:1701
+#: src/main/array.c:100 src/main/array.c:108 src/main/array.c:1685
+#: src/main/array.c:1690
 #, fuzzy, c-format
 msgid "invalid '%s' value (too large or NA)"
 msgstr " 'nrow' の値が不正です（大きすぎるか NA です） "
 
-#: src/main/array.c:102 src/main/array.c:110 src/main/array.c:1698
-#: src/main/array.c:1703
+#: src/main/array.c:102 src/main/array.c:110 src/main/array.c:1687
+#: src/main/array.c:1692
 #, fuzzy, c-format
 msgid "invalid '%s' value (< 0)"
 msgstr " 'nrow' の値が不正です（負の値です） "
@@ -1327,7 +1327,7 @@ msgstr ""
 msgid "data length exceeds size of matrix"
 msgstr " データの長さが行列の大きさを超えています "
 
-#: src/main/array.c:150 src/main/array.c:1604 src/main/array.c:1710
+#: src/main/array.c:150 src/main/array.c:1593 src/main/array.c:1699
 msgid "too many elements specified"
 msgstr " 指定された要素数が多すぎます "
 
@@ -1356,53 +1356,53 @@ msgstr " alloc３Darray : 指定された要素数が多すぎます "
 msgid "'allocArray()': too many elements specified by 'dims' argument"
 msgstr " allocArray：'dims' によって指定された要素数が多すぎます "
 
-#: src/main/array.c:526
+#: src/main/array.c:515
 #, fuzzy, c-format
 msgid "'%s' argument must be a list or atomic vector"
 msgstr " 最初の引数はベクトルでなくてはなりません "
 
-#: src/main/array.c:564
+#: src/main/array.c:553
 #, fuzzy, c-format
 msgid "a matrix-like object is required as argument passed to '%s'"
 msgstr " 'row/col' への引数としては行列風のオブジェクトが必要とされます "
 
-#: src/main/array.c:778
+#: src/main/array.c:767
 #, fuzzy
 msgid "numeric/complex matrix/vector arguments are required"
 msgstr " 数値/複素数/行列またはベクトルが要求されます "
 
-#: src/main/array.c:888 src/main/array.c:892 src/main/array.c:896
+#: src/main/array.c:877 src/main/array.c:881 src/main/array.c:885
 msgid "non-conformable arguments"
 msgstr " 適切な引数ではありません "
 
-#: src/main/array.c:1195
+#: src/main/array.c:1184
 msgid "argument is not a matrix"
 msgstr " 引数が行列ではありません "
 
-#: src/main/array.c:1230
+#: src/main/array.c:1219
 msgid "invalid first argument, must be an array"
 msgstr " 一番目の引数が不正です。配列でなくてはなりません "
 
-#: src/main/array.c:1244
+#: src/main/array.c:1233
 #, fuzzy, c-format
 msgid "'perm' is of wrong length %d (!= %d)"
 msgstr " 'perm' の長さが誤っています "
 
-#: src/main/array.c:1249 src/main/array.c:1252
+#: src/main/array.c:1238 src/main/array.c:1241
 msgid "'a' does not have named dimnames"
 msgstr " 'a' は名前付きの次元名を持ちません "
 
-#: src/main/array.c:1259
+#: src/main/array.c:1248
 #, fuzzy, c-format
 msgid "'perm[%d]' does not match a dimension name"
 msgstr " perm[%d] は次元名にマッチしません "
 
-#: src/main/array.c:1272
+#: src/main/array.c:1261
 #, fuzzy
 msgid "value is out of range in 'perm' argument"
 msgstr " 'perm' 中の値が範囲を超えています "
 
-#: src/main/array.c:1354 src/main/connections.c:5484 src/main/debug.c:112
+#: src/main/array.c:1343 src/main/connections.c:5484 src/main/debug.c:112
 #: src/main/objects.c:1043 src/main/raw.c:56 src/main/raw.c:336
 #: src/main/sort.c:326 src/main/sort.c:1249 src/main/unique.c:670
 #: src/main/unique.c:1445 src/main/unique.c:1517 src/main/util.c:644
@@ -1411,27 +1411,27 @@ msgstr " 'perm' 中の値が範囲を超えています "
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr " 'resize' は TRUE か FALSE でなければなりません "
 
-#: src/main/array.c:1424
+#: src/main/array.c:1413
 #, fuzzy, c-format
 msgid "'%s' must be numeric"
 msgstr " 'x' は数値でなければなりません "
 
-#: src/main/array.c:1427
+#: src/main/array.c:1416
 #, fuzzy, c-format
 msgid "'%s' argument is too short"
 msgstr " 'file' 引数が長過ぎます "
 
-#: src/main/array.c:1600
+#: src/main/array.c:1589
 #, fuzzy, c-format
 msgid "'%s' argument cannot be of length 0"
 msgstr " 'hadj' は長さ1でなくてはなりません "
 
-#: src/main/array.c:1706
+#: src/main/array.c:1695
 #, fuzzy, c-format
 msgid "'%s' must have positive length"
 msgstr " 'value' は正の長さを持たないといけません "
 
-#: src/main/array.c:1772
+#: src/main/array.c:1761
 #, c-format
 msgid "singular matrix in 'backsolve()'. First zero in diagonal [%d]"
 msgstr ""
@@ -1639,7 +1639,7 @@ msgid "exactly one attribute 'which' must be given"
 msgstr " 性格に一つの属性 'which' が与えらなければなりません "
 
 #: src/main/attrib.c:1451 src/main/attrib.c:1474 src/main/subscript.c:246
-#: src/main/subscript.c:250 src/main/subset.c:1243 src/main/subset.c:1297
+#: src/main/subscript.c:250 src/main/subset.c:1258 src/main/subset.c:1312
 #, c-format
 msgid "partial match of '%s' to '%s'"
 msgstr " '%s' の '%s'　への部分的マッチ "
@@ -3242,7 +3242,7 @@ msgstr " 'opts' は，小さな非負の整数でなくてはなりません "
 msgid "object '%s' was not found"
 msgstr " オブジェクト '%s' がありません "
 
-#: src/main/deparse.c:1588
+#: src/main/deparse.c:1593
 msgid "badly formed function expression"
 msgstr " 関数の構文が不適切です "
 
@@ -8090,7 +8090,7 @@ msgid "incompatible types (from %s to %s) in '[[' assignment"
 msgstr " [[ による代入に両立しない型があります(%s から %s)  "
 
 #: src/main/subassign.c:1987 src/main/subscript.c:152 src/main/subscript.c:279
-#: src/main/subscript.c:904 src/main/subscript.c:997 src/main/subset.c:1162
+#: src/main/subscript.c:904 src/main/subscript.c:997 src/main/subset.c:1177
 #, c-format
 msgid "invalid subscript type '%s'"
 msgstr " 添え字の型 '%s' が不正です "
@@ -8205,11 +8205,11 @@ msgstr " 環境の subsetting に対する誤った引数です "
 msgid "getter call used outside of a complex assignment"
 msgstr " 複素数の代入で，関数が不正です "
 
-#: src/main/subset.c:1205
+#: src/main/subset.c:1220
 msgid "$ operator not defined for this S4 class"
 msgstr ""
 
-#: src/main/subset.c:1326
+#: src/main/subset.c:1341
 msgid "$ operator is invalid for atomic vectors"
 msgstr ""
 
@@ -9817,7 +9817,7 @@ msgstr ""
 msgid "non-integer n = %f"
 msgstr " 次元数が正しくありません "
 
-#: src/nmath/pnbinom.c:79
+#: src/nmath/pnbinom.c:82
 #, c-format
 msgid "pnbinom_mu() -> bratio() gave error code %d"
 msgstr ""

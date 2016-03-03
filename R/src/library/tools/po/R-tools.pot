@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.3.0\n"
-"POT-Creation-Date: 2016-02-23 20:39\n"
+"POT-Creation-Date: 2016-03-03 21:07\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -572,14 +572,14 @@ msgstr ""
 
 
 #: R/assertCondition.R: 0
-#. R/assertCondition.R: gettextf("Asserted error: %s", (error[[1]])$message)
+#. R/assertCondition.R: gettextf("Asserted error: %s", error[[1]]$message)
 
 msgid "Asserted error: %s"
 msgstr ""
 
 
 #: R/assertCondition.R: 0
-#. R/assertCondition.R: gettextf("Asserted warning: %s", (warning[[1]])$message)
+#. R/assertCondition.R: gettextf("Asserted warning: %s", warning[[1]]$message)
 
 msgid "Asserted warning: %s"
 msgstr ""

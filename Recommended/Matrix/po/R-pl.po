@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Matrix 1.2-0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-11-17 17:53\n"
+"POT-Creation-Date: 2016-03-03 20:43\n"
 "PO-Revision-Date: 2015-04-20 17:49+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -465,6 +465,13 @@ msgstr ""
 "Abstrakcyjny indeks wektora (klasa \"abIndex\") długości %.0f, rodzaj \"%s"
 "\"\n"
 " oraz gniazdo \"rleD\":"
+
+#. R/sparseMatrix.R: stop("Both 'symmetric' and 'triangular', i.e. asking for diagonal matrix.  Use 'Diagonal()' instead")
+#: R/sparseMatrix.R:0
+msgid ""
+"Both 'symmetric' and 'triangular', i.e. asking for diagonal matrix.  Use "
+"'Diagonal()' instead"
+msgstr ""
 
 #. R/Csparse.R: stop("Cholesky(<nsparse...>) -> *symbolic* factorization -- not yet implemented")
 #: R/Csparse.R:0
@@ -1641,6 +1648,17 @@ msgstr "zbyt wiele argumentów"
 #: R/Csparse.R:0 R/Tsparse.R:0 R/sparseVector.R:0
 msgid "too many replacement values"
 msgstr "zbyt dużo wartości zamieniających"
+
+#. R/sparseMatrix.R: stop("triangular matrix must be square")
+#: R/sparseMatrix.R:0
+#, fuzzy
+msgid "triangular matrix must be square"
+msgstr "macierz symetryczna musi być kwadratowa"
+
+#. R/sparseMatrix.R: stop("triangular matrix must have all i >= j or i <= j")
+#: R/sparseMatrix.R:0
+msgid "triangular matrix must have all i >= j or i <= j"
+msgstr ""
 
 #. R/Matrix.R: warning("trimmed mean of 'sparseVector' -- suboptimally using as.numeric(.)")
 #: R/Matrix.R:0

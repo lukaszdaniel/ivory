@@ -69,7 +69,7 @@ bandchol <- function(B) {
   }
   oo <- .C(C_band_chol,B=as.double(B),n=as.integer(n),k=as.integer(nrow(B)),info=as.integer(0))
   if (oo$info<0) stop("something wrong with inputs to LAPACK routine")
-  if (oo$info>0) stop("not positive definite")
+  if (oo$info>0) stop("matrix is not positive definite")
   B <- matrix(oo$B,nrow(B),n)
   if (k>0) { ## was square on entry, so also on exit...
     A <- A * 0
@@ -88,7 +88,7 @@ trichol <- function(ld,sd) {
   if (n!=length(sd)+1) stop("sd should have exactly one less entry than ld")
   oo <- .C(C_tri_chol,ld=as.double(ld),sd=as.double(sd),n=as.integer(n),info=as.integer(0))
   if (oo$info<0) stop("something wrong with inputs to LAPACK routine")
-  if (oo$info>0) stop("not positive definite")
+  if (oo$info>0) stop("matrix is not positive definite")
   ld <- sqrt(oo$ld)
   sd <- oo$sd*ld[seq_len(n-1)]
   list(ld=ld,sd=sd)

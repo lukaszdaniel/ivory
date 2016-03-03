@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Matrix 1.2-3\n"
-"POT-Creation-Date: 2015-11-17 17:53\n"
+"Project-Id-Version: Matrix 1.2-4\n"
+"POT-Creation-Date: 2016-03-03 20:43\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -592,6 +592,13 @@ msgstr ""
 #. R/abIndex.R: gettextf("Abstract Index vector (class 'abIndex') of length %.0f, kind \"%s\"\n and slot \"rleD\":",     length(object), knd, domain = "R-Matrix")
 
 msgid "Abstract Index vector (class 'abIndex') of length %.0f, kind \"%s\"\n and slot \"rleD\":"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: stop("Both 'symmetric' and 'triangular', i.e. asking for diagonal matrix.  Use 'Diagonal()' instead")
+
+msgid "Both 'symmetric' and 'triangular', i.e. asking for diagonal matrix.  Use 'Diagonal()' instead"
 msgstr ""
 
 
@@ -2075,6 +2082,20 @@ msgstr ""
 #. R/sparseVector.R: stop("too many replacement values")
 
 msgid "too many replacement values"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: stop("triangular matrix must be square")
+
+msgid "triangular matrix must be square"
+msgstr ""
+
+
+#: R/sparseMatrix.R: 0
+#. R/sparseMatrix.R: stop("triangular matrix must have all i >= j or i <= j")
+
+msgid "triangular matrix must have all i >= j or i <= j"
 msgstr ""
 
 

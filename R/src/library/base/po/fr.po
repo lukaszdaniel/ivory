@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-23 20:39+0100\n"
+"POT-Creation-Date: 2016-03-03 21:06+0100\n"
 "PO-Revision-Date: 2014-01-23 07:50+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -594,9 +594,9 @@ msgstr "problème lors de l'affichage de '%s'"
 #: src/gnuwin32/extra.c:572 src/gnuwin32/extra.c:597 src/main/agrep.c:132
 #: src/main/agrep.c:136 src/main/agrep.c:774 src/main/agrep.c:779
 #: src/main/apply.c:329 src/main/apply.c:331 src/main/apply.c:334
-#: src/main/array.c:90 src/main/array.c:1274 src/main/array.c:1413
-#: src/main/array.c:1415 src/main/array.c:1416 src/main/array.c:1759
-#: src/main/array.c:1761 src/main/array.c:1763 src/main/attrib.c:189
+#: src/main/array.c:90 src/main/array.c:1263 src/main/array.c:1402
+#: src/main/array.c:1404 src/main/array.c:1405 src/main/array.c:1748
+#: src/main/array.c:1750 src/main/array.c:1752 src/main/attrib.c:189
 #: src/main/builtin.c:89 src/main/builtin.c:98 src/main/builtin.c:117
 #: src/main/builtin.c:119 src/main/builtin.c:150 src/main/builtin.c:561
 #: src/main/builtin.c:577 src/main/builtin.c:764 src/main/builtin.c:766
@@ -1148,7 +1148,7 @@ msgstr ""
 msgid "'%s' argument must be a vector"
 msgstr "le premier argument doit être un vecteur"
 
-#: src/main/apply.c:101 src/main/array.c:513 src/main/character.c:847
+#: src/main/apply.c:101 src/main/array.c:498 src/main/character.c:847
 #: src/main/character.c:1653 src/main/connections.c:3546
 #: src/main/context.c:629 src/main/context.c:648 src/main/datetime.c:682
 #: src/main/datetime.c:784 src/main/datetime.c:1048 src/main/dotcode.c:220
@@ -1295,7 +1295,7 @@ msgstr "argument 'base' de taille nulle incorrect"
 msgid "bad arithmetic function index"
 msgstr "mauvaise fonction"
 
-#: src/main/array.c:83 src/main/array.c:1593
+#: src/main/array.c:83 src/main/array.c:1582
 #, fuzzy, c-format
 msgid "'data' argument must be of a vector type, was '%s'"
 msgstr "'data' doit être de type vecteur"
@@ -1304,14 +1304,14 @@ msgstr "'data' doit être de type vecteur"
 msgid "non-numeric matrix extent"
 msgstr "plage non numérique pour une matrice"
 
-#: src/main/array.c:100 src/main/array.c:108 src/main/array.c:1696
-#: src/main/array.c:1701
+#: src/main/array.c:100 src/main/array.c:108 src/main/array.c:1685
+#: src/main/array.c:1690
 #, fuzzy, c-format
 msgid "invalid '%s' value (too large or NA)"
 msgstr "valeur 'nrow' incorrecte (trop grande ou NA)"
 
-#: src/main/array.c:102 src/main/array.c:110 src/main/array.c:1698
-#: src/main/array.c:1703
+#: src/main/array.c:102 src/main/array.c:110 src/main/array.c:1687
+#: src/main/array.c:1692
 #, fuzzy, c-format
 msgid "invalid '%s' value (< 0)"
 msgstr "valeur 'nrow' incorrecte (< 0)"
@@ -1350,7 +1350,7 @@ msgstr ""
 msgid "data length exceeds size of matrix"
 msgstr "la longueur des données dépasse la taille de la matrice"
 
-#: src/main/array.c:150 src/main/array.c:1604 src/main/array.c:1710
+#: src/main/array.c:150 src/main/array.c:1593 src/main/array.c:1699
 msgid "too many elements specified"
 msgstr "trop d'éléments fournis"
 
@@ -1379,55 +1379,55 @@ msgstr "alloc3Darray : trop d'éléments fournis"
 msgid "'allocArray()': too many elements specified by 'dims' argument"
 msgstr "allocArray : trop d'éléments fournis par 'dims'"
 
-#: src/main/array.c:526
+#: src/main/array.c:515
 #, fuzzy, c-format
 msgid "'%s' argument must be a list or atomic vector"
 msgstr "le premier argument doit être un vecteur"
 
-#: src/main/array.c:564
+#: src/main/array.c:553
 #, fuzzy, c-format
 msgid "a matrix-like object is required as argument passed to '%s'"
 msgstr ""
 "une objet de type matrice ou assimilé est nécessaire comme argument pour "
 "'row/col'"
 
-#: src/main/array.c:778
+#: src/main/array.c:767
 #, fuzzy
 msgid "numeric/complex matrix/vector arguments are required"
 msgstr "nécessite des arguments numériques/complexes matrice/vecteur"
 
-#: src/main/array.c:888 src/main/array.c:892 src/main/array.c:896
+#: src/main/array.c:877 src/main/array.c:881 src/main/array.c:885
 msgid "non-conformable arguments"
 msgstr "arguments inadéquats"
 
-#: src/main/array.c:1195
+#: src/main/array.c:1184
 msgid "argument is not a matrix"
 msgstr "l'argument n'est pas une matrice"
 
-#: src/main/array.c:1230
+#: src/main/array.c:1219
 msgid "invalid first argument, must be an array"
 msgstr "premier argument incorrect, doit être un tableau"
 
-#: src/main/array.c:1244
+#: src/main/array.c:1233
 #, fuzzy, c-format
 msgid "'perm' is of wrong length %d (!= %d)"
 msgstr "'perm' est d'une mauvaise longueur"
 
-#: src/main/array.c:1249 src/main/array.c:1252
+#: src/main/array.c:1238 src/main/array.c:1241
 msgid "'a' does not have named dimnames"
 msgstr "'a' n'a pas de noms de dimensions"
 
-#: src/main/array.c:1259
+#: src/main/array.c:1248
 #, fuzzy, c-format
 msgid "'perm[%d]' does not match a dimension name"
 msgstr "perm[%d] ne correspond pas à une dimension de nom"
 
-#: src/main/array.c:1272
+#: src/main/array.c:1261
 #, fuzzy
 msgid "value is out of range in 'perm' argument"
 msgstr "valeur de 'perm' hors intervalle"
 
-#: src/main/array.c:1354 src/main/connections.c:5484 src/main/debug.c:112
+#: src/main/array.c:1343 src/main/connections.c:5484 src/main/debug.c:112
 #: src/main/objects.c:1043 src/main/raw.c:56 src/main/raw.c:336
 #: src/main/sort.c:326 src/main/sort.c:1249 src/main/unique.c:670
 #: src/main/unique.c:1445 src/main/unique.c:1517 src/main/util.c:644
@@ -1436,27 +1436,27 @@ msgstr "valeur de 'perm' hors intervalle"
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr "'resize' doit être TRUE ou FALSE"
 
-#: src/main/array.c:1424
+#: src/main/array.c:1413
 #, fuzzy, c-format
 msgid "'%s' must be numeric"
 msgstr "'x' doit être numérique"
 
-#: src/main/array.c:1427
+#: src/main/array.c:1416
 #, fuzzy, c-format
 msgid "'%s' argument is too short"
 msgstr "argument 'file' trop long"
 
-#: src/main/array.c:1600
+#: src/main/array.c:1589
 #, fuzzy, c-format
 msgid "'%s' argument cannot be of length 0"
 msgstr "'hadj' doit être de longueur unitaire"
 
-#: src/main/array.c:1706
+#: src/main/array.c:1695
 #, fuzzy, c-format
 msgid "'%s' must have positive length"
 msgstr "'value' doit avoir une longueur strictement positive"
 
-#: src/main/array.c:1772
+#: src/main/array.c:1761
 #, c-format
 msgid "singular matrix in 'backsolve()'. First zero in diagonal [%d]"
 msgstr ""
@@ -1668,7 +1668,7 @@ msgid "exactly one attribute 'which' must be given"
 msgstr "un et un seul attribut 'which' doit être fourni"
 
 #: src/main/attrib.c:1451 src/main/attrib.c:1474 src/main/subscript.c:246
-#: src/main/subscript.c:250 src/main/subset.c:1243 src/main/subset.c:1297
+#: src/main/subscript.c:250 src/main/subset.c:1258 src/main/subset.c:1312
 #, c-format
 msgid "partial match of '%s' to '%s'"
 msgstr "correspondance partielle de '%s' en '%s'"
@@ -3310,7 +3310,7 @@ msgstr "'opts' doit être un petit entier positif ou nul"
 msgid "object '%s' was not found"
 msgstr "(fr) objet '%s' introuvable"
 
-#: src/main/deparse.c:1588
+#: src/main/deparse.c:1593
 msgid "badly formed function expression"
 msgstr "expression de fonction mal structurée"
 
@@ -8272,7 +8272,7 @@ msgid "incompatible types (from %s to %s) in '[[' assignment"
 msgstr "types (de %s a %s) incompatibles dans l'affectation [["
 
 #: src/main/subassign.c:1987 src/main/subscript.c:152 src/main/subscript.c:279
-#: src/main/subscript.c:904 src/main/subscript.c:997 src/main/subset.c:1162
+#: src/main/subscript.c:904 src/main/subscript.c:997 src/main/subset.c:1177
 #, c-format
 msgid "invalid subscript type '%s'"
 msgstr "type '%s' d'indice incorrect"
@@ -8387,11 +8387,11 @@ msgstr "mauvais arguments pour extraire une partie d'un environnement"
 msgid "getter call used outside of a complex assignment"
 msgstr "fonction incorrecte dans un assignation complexe"
 
-#: src/main/subset.c:1205
+#: src/main/subset.c:1220
 msgid "$ operator not defined for this S4 class"
 msgstr ""
 
-#: src/main/subset.c:1326
+#: src/main/subset.c:1341
 msgid "$ operator is invalid for atomic vectors"
 msgstr ""
 
@@ -10021,7 +10021,7 @@ msgstr ""
 msgid "non-integer n = %f"
 msgstr "nombre de dimensions incorrect"
 
-#: src/nmath/pnbinom.c:79
+#: src/nmath/pnbinom.c:82
 #, c-format
 msgid "pnbinom_mu() -> bratio() gave error code %d"
 msgstr ""

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: nlme 3.1-125\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
 "POT-Creation-Date: 2016-02-27 19:10\n"
-"PO-Revision-Date: 2016-02-27 19:13+0100\n"
+"PO-Revision-Date: 2016-03-03 20:45+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -677,7 +677,7 @@ msgstr ""
 #. R/nlme.R: gettextf("LME step: Loglik: %s, %s iterations: %d", format(nlmeFit$logLik), controlvals$opt,     convIter, domain = "R-nlme")
 #: R/nlme.R:0
 msgid "LME step: Loglik: %s, %s iterations: %d"
-msgstr "krok LME: Logarytm funkcji wiarygodności: %s, iteracje: %d"
+msgstr "krok LME: Logarytm funkcji wiarygodności: %s, %s iteracje: %d"
 
 #. R/pdMat.R: stop("LNone of the arguments specify more than one block")
 #: R/pdMat.R:0

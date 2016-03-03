@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.3\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-27 19:10\n"
+"POT-Creation-Date: 2016-03-03 21:03\n"
 "PO-Revision-Date: 2015-02-21 16:01-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -368,12 +368,6 @@ msgstr "평균 mu는 음수일 수 없습니다."
 msgid "'mu' dimensions are wrong"
 msgstr "fx의 차원(dimension)이 올바르지 않습니다."
 
-#. R/mgcv.r: warning("'negbin()' with unknown theta and outer iteration is deprecated - use 'nb()'.")
-#: R/mgcv.r:0
-msgid ""
-"'negbin()' with unknown theta and outer iteration is deprecated - use 'nb()'."
-msgstr ""
-
 #. R/mgcv.r: stop("'nthreads' argument must be a positive integer")
 #: R/mgcv.r:0
 #, fuzzy
@@ -591,6 +585,7 @@ msgid ""
 "indicate that k is too low, especially if edf is close to k."
 msgstr ""
 
+#. R/smooth.r: stop("Basis only handles 1D smooths")
 #. R/smooth.r: stop("Basis only handles 1D smooths")
 #. R/smooth.r: stop("Basis only handles 1D smooths")
 #. R/smooth.r: stop("Basis only handles 1D smooths")
@@ -1188,6 +1183,18 @@ msgstr ""
 msgid "Penalized model matrix must have no more columns than rows"
 msgstr ""
 
+#. R/mgcv.r: stop("Please provide a single value for theta or use nb to estimate it")
+#: R/mgcv.r:0
+msgid "Please provide a single value for theta or use nb to estimate it"
+msgstr ""
+
+#. R/smooth.r: stop("Please put term with most levels last in 're' to avoid spoiling supplied penalties")
+#: R/smooth.r:0
+msgid ""
+"Please put term with most levels last in 're' to avoid spoiling supplied "
+"penalties"
+msgstr ""
+
 #. R/gam.fit3.r: gettextf("Proportion time in C: %s ls: %s gdi: %s", (tc + tg)/at, tc/at, tg/at, domain = "R-mgcv")
 #: R/gam.fit3.r:0
 msgid "Proportion time in C: %s ls: %s gdi: %s"
@@ -1486,6 +1493,7 @@ msgid "bam can not discretize with this nesting structure"
 msgstr ""
 
 #. R/smooth.r: warning("basis dimension is larger than number of unique covariates")
+#. R/smooth.r: warning("basis dimension is larger than number of unique covariates")
 #: R/smooth.r:0
 msgid "basis dimension is larger than number of unique covariates"
 msgstr ""
@@ -1498,6 +1506,7 @@ msgstr ""
 
 #. R/smooth.r: stop("basis dimension too small for b-spline order")
 #. R/smooth.r: stop("basis dimension too small for b-spline order")
+#. R/smooth.r: stop("basis dimension too small for b-spline order")
 #: R/smooth.r:0
 msgid "basis dimension too small for b-spline order"
 msgstr ""
@@ -1507,6 +1516,11 @@ msgstr ""
 #. R/smooth.r: warning("basis dimension, k, increased to minimum possible\n")
 #: R/smooth.r:0
 msgid "basis dimension, k, increased to minimum possible"
+msgstr ""
+
+#. R/smooth.r: stop("basis not usable with reduced te")
+#: R/smooth.r:0
+msgid "basis not usable with reduced te"
 msgstr ""
 
 #. R/soap.r: stop("bnd must be a list")
@@ -1640,6 +1654,11 @@ msgstr ""
 #, fuzzy
 msgid "distribution was not recognised"
 msgstr "dist의 정보를 찾을 수 없습니다."
+
+#. R/misc.r: stop("don't be silly")
+#: R/misc.r:0
+msgid "don't be silly"
+msgstr ""
 
 #. R/gam.fit3.r: gettext("done!", domain = "R-mgcv")
 #: R/gam.fit3.r:0
@@ -1895,11 +1914,11 @@ msgstr ""
 
 #. R/smooth.r: stop("knot range does not include data")
 #. R/smooth.r: stop("knot range does not include data")
+#. R/smooth.r: stop("knot range does not include data")
 #: R/smooth.r:0
 msgid "knot range does not include data"
 msgstr ""
 
-#. R/smooth.r: warning("knot range is so wide that there is *no* information about some basis coefficients")
 #. R/smooth.r: warning("knot range is so wide that there is *no* information about some basis coefficients")
 #: R/smooth.r:0
 msgid ""
@@ -1987,6 +2006,12 @@ msgstr ""
 #. R/mgcv.r: stop("matrix 'A' is not square")
 #: R/mgcv.r:0
 msgid "matrix 'A' is not square"
+msgstr ""
+
+#. R/misc.r: stop("matrix is not positive definite")
+#. R/misc.r: stop("matrix is not positive definite")
+#: R/misc.r:0
+msgid "matrix is not positive definite"
 msgstr ""
 
 #. R/mgcv.r: stop("maximum number of iterations must be > 0")
@@ -2089,11 +2114,6 @@ msgstr ""
 #: R/gam.fit3.r:0
 msgid "newton max(|grad|) = %s"
 msgstr ""
-
-#. R/mgcv.r: stop("nlm.fd not available with negative binomial Theta estimation")
-#: R/mgcv.r:0
-msgid "nlm.fd not available with negative binomial Theta estimation"
-msgstr "nlm.fd 방법은 음이항분포의 Theta 추정에 사용할 수 없습니다."
 
 #. R/mgcv.r: stop("nlm.fd only available for GCV/UBRE")
 #: R/mgcv.r:0
@@ -2215,16 +2235,6 @@ msgstr "`id'의 첫번째 요소만이 사용되었습니다."
 msgid "only one level of smooth nesting is supported by gamm"
 msgstr ""
 
-#. R/mgcv.r: warning("only outer methods 'newton' & 'bfgs' supports 'negbin' family and theta selection: reset")
-#: R/mgcv.r:0
-#, fuzzy
-msgid ""
-"only outer methods 'newton' & 'bfgs' supports 'negbin' family and theta "
-"selection: reset"
-msgstr ""
-"오로지 `newton'와 `bfgs' 방법만이 `negbin' 페밀리와 theta 선택에 사용될 수 있"
-"습니다: reset"
-
 #. R/gam.fit3.r: gettextf("only scalar '%s' and '%s' arguments are allowed", "rho", "theta")
 #. R/gam.fit3.r: gettextf("only scalar '%s' and '%s' arguments are allowed", "p", "phi")
 #: R/gam.fit3.r:0
@@ -2325,6 +2335,11 @@ msgstr ""
 msgid "reparameterization unstable for margin: not done"
 msgstr ""
 
+#. R/smooth.r: stop("requested non-existent derivative in B-spline penalty")
+#: R/smooth.r:0
+msgid "requested non-existent derivative in B-spline penalty"
+msgstr ""
+
 #. R/plots.r: warning("residuals argument to plot.gam is wrong length: ignored")
 #: R/plots.r:0
 msgid "residuals argument to plot.gam is wrong length: ignored"
@@ -2374,6 +2389,11 @@ msgstr "스케일드 t 분포(scaled t)의 자유도(df)는 2보다 커야합니
 #. R/plots.r: gettextf("scheme should be a single number, or a vector with %d elements", m)
 #: R/plots.r:0
 msgid "scheme should be a single number, or a vector with %d elements"
+msgstr ""
+
+#. R/misc.r: stop("sd should have exactly one less entry than ld")
+#: R/misc.r:0
+msgid "sd should have exactly one less entry than ld"
 msgstr ""
 
 #. R/gamm.r: stop("side conditions are not allowed for nested smooths")
@@ -2429,11 +2449,23 @@ msgstr ""
 msgid "soap films are bivariate only"
 msgstr ""
 
+#. R/smooth.r: stop("something wrong in monotone setup - no unpenalized terms!")
+#: R/smooth.r:0
+msgid "something wrong in monotone setup - no unpenalized terms!"
+msgstr ""
+
 #. R/smooth.r: warning("something wrong with argument 'd'")
 #. R/smooth.r: warning("something wrong with argument 'd'")
 #: R/smooth.r:0
 #, fuzzy
 msgid "something wrong with argument 'd'"
+msgstr "zlim이 올바르지 않습니다."
+
+#. R/misc.r: stop("something wrong with inputs to LAPACK routine")
+#. R/misc.r: stop("something wrong with inputs to LAPACK routine")
+#: R/misc.r:0
+#, fuzzy
+msgid "something wrong with inputs to LAPACK routine"
 msgstr "zlim이 올바르지 않습니다."
 
 #. R/jagam.r: stop("sorry link not yet handled")
@@ -2471,6 +2503,12 @@ msgstr ""
 msgid "step failed: max(|grad|) = %s"
 msgstr ""
 
+#. R/smooth.r: stop("supplied S matrices are wrong dimension")
+#: R/smooth.r:0
+#, fuzzy
+msgid "supplied S matrices are wrong dimension"
+msgstr "H의 열과 행의 길이가 같아야 합니다."
+
 #. R/plots.r: stop("supplied dist negative")
 #: R/plots.r:0
 msgid "supplied dist negative"
@@ -2484,6 +2522,13 @@ msgstr ""
 #. R/smooth.r: stop("supplied penalty wrong dimension!")
 #: R/smooth.r:0
 msgid "supplied penalty wrong dimension!"
+msgstr ""
+
+#. R/smooth.r: warning("sweep and drop constraints unlikely to work well with self handling of by vars")
+#: R/smooth.r:0
+msgid ""
+"sweep and drop constraints unlikely to work well with self handling of by "
+"vars"
 msgstr ""
 
 #. R/gamm.r: stop("te smooths not useable with gamm4: use t2 instead")
@@ -2521,15 +2566,18 @@ msgstr ""
 msgid "theoretical quantiles"
 msgstr ""
 
-#. R/smooth.r: gettextf("there should be %d knots supplied", nk)
+#. R/smooth.r: warning("there is *no* information about some basis coefficients")
+#. R/smooth.r: warning("there is *no* information about some basis coefficients")
 #: R/smooth.r:0
-msgid "there should be %d knots supplied"
+msgid "there is *no* information about some basis coefficients"
 msgstr ""
 
-#. R/smooth.r: gettextf("there should be %d supplied knots", nk)
-#. R/smooth.r: gettextf("there should be %d supplied knots", nk + 2 * m[1] + 2)
+#. R/smooth.r: gettextf("there should be %d knots supplied", nk)
+#. R/smooth.r: gettextf("there should be %d knots supplied", nk)
+#. R/smooth.r: gettextf("there should be %d knots supplied", nk + 2 * m[1] + 2)
+#. R/smooth.r: gettextf("there should be %d knots supplied", nk + 2 * m[1])
 #: R/smooth.r:0
-msgid "there should be %d supplied knots"
+msgid "there should be %d knots supplied"
 msgstr ""
 
 #. R/smooth.r: stop("too few knots")
@@ -2678,6 +2726,21 @@ msgstr[0] ""
 msgid "Smoothing parameter selection converged after %d iteration."
 msgid_plural "Smoothing parameter selection converged after %d iterations."
 msgstr[0] ""
+
+#, fuzzy
+#~ msgid "supplied knots"
+#~ msgstr "입력된 dist에서 음수가 발견되었습니다."
+
+#~ msgid "nlm.fd not available with negative binomial Theta estimation"
+#~ msgstr "nlm.fd 방법은 음이항분포의 Theta 추정에 사용할 수 없습니다."
+
+#, fuzzy
+#~ msgid ""
+#~ "only outer methods 'newton' & 'bfgs' supports 'negbin' family and theta "
+#~ "selection: reset"
+#~ msgstr ""
+#~ "오로지 `newton'와 `bfgs' 방법만이 `negbin' 페밀리와 theta 선택에 사용될 "
+#~ "수 있습니다: reset"
 
 #, fuzzy
 #~ msgid "'%s' argument has no '%s' attribute"

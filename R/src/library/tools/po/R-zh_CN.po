@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-23 20:39\n"
+"POT-Creation-Date: 2016-03-03 21:07\n"
 "PO-Revision-Date: 2015-01-17 15:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -484,13 +484,13 @@ msgstr "参数名字在编码里有记录但不在文件里:"
 msgid "Argument names in docs but not in code:"
 msgstr "参数名字在文件里有记录但不在编码里:"
 
-#. R/assertCondition.R: gettextf("Asserted error: %s", (error[[1]])$message)
+#. R/assertCondition.R: gettextf("Asserted error: %s", error[[1]]$message)
 #: R/assertCondition.R:0
 #, fuzzy
 msgid "Asserted error: %s"
 msgstr "文件: %s"
 
-#. R/assertCondition.R: gettextf("Asserted warning: %s", (warning[[1]])$message)
+#. R/assertCondition.R: gettextf("Asserted warning: %s", warning[[1]]$message)
 #: R/assertCondition.R:0
 #, fuzzy
 msgid "Asserted warning: %s"

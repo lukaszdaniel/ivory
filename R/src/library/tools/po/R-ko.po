@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-23 20:39\n"
+"POT-Creation-Date: 2016-03-03 21:07\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -487,12 +487,12 @@ msgstr "코드에는 있는 인자들의 이름이 문서에는 없습니다:"
 msgid "Argument names in docs but not in code:"
 msgstr "문서안에 있는 인자들의 이름이 코드에는 없습니다:"
 
-#. R/assertCondition.R: gettextf("Asserted error: %s", (error[[1]])$message)
+#. R/assertCondition.R: gettextf("Asserted error: %s", error[[1]]$message)
 #: R/assertCondition.R:0
 msgid "Asserted error: %s"
 msgstr ""
 
-#. R/assertCondition.R: gettextf("Asserted warning: %s", (warning[[1]])$message)
+#. R/assertCondition.R: gettextf("Asserted warning: %s", warning[[1]]$message)
 #: R/assertCondition.R:0
 msgid "Asserted warning: %s"
 msgstr ""

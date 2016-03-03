@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-27 18:05+0100\n"
+"POT-Creation-Date: 2016-03-03 21:07+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -684,33 +684,33 @@ msgstr "niepoprawny człon w formule modelu"
 msgid "invalid model formula"
 msgstr "niepoprawna formuła modelu"
 
-#: model.c:1142 model.c:1390
+#: model.c:1142 model.c:1401
 msgid "invalid power in formula"
 msgstr "niepoprawna potęga w formule"
 
-#: model.c:1178 model.c:1574
+#: model.c:1178 model.c:1585
 #, c-format
 msgid "invalid model formula in '%s' function"
 msgstr "niepoprawna formuła modelu w funkcji '%s'"
 
-#: model.c:1513
+#: model.c:1524
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "powtórzona nazwa '%s' w ramce danych używając '.'"
 
-#: model.c:1660
+#: model.c:1671
 msgid "argument is not a valid model"
 msgstr "argument nie jest poprawnym modelem"
 
-#: model.c:1670
+#: model.c:1681
 msgid "'specials' must be NULL or a character vector"
 msgstr "'specials' musi być wektorem tekstowym lub wartością 'NULL'"
 
-#: model.c:1682
+#: model.c:1693
 msgid "'data' argument is of the wrong type"
 msgstr "argument 'data' posiada niepoprawny typ"
 
-#: model.c:1952
+#: model.c:1963
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' w formule oraz brak argumentu 'data'"
 

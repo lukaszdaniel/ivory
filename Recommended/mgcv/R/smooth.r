@@ -1545,7 +1545,7 @@ smooth.construct.cp.smooth.spec <- function(object,data,knots)
      k <- seq(x0,x1,length=nk)  
   } else {
     if (length(k)!=nk) 
-    stop(gettextf("there should be %d supplied knots", nk))
+    stop(gettextf("there should be %d knots supplied", nk))
   }
 
   if (length(k)!=nk) stop(gettextf("there should be %d knots supplied", nk))
@@ -1615,7 +1615,7 @@ smooth.construct.ps.smooth.spec <- function(object,data,knots)
     k <- seq(xl-dx*(m[1]+1),xu+dx*(m[1]+1),length=nk+2*m[1]+2)   
   } else {
     if (length(k)!=nk+2*m[1]+2) 
-    stop(gettextf("there should be %d supplied knots",nk+2*m[1]+2))
+    stop(gettextf("there should be %d knots supplied",nk+2*m[1]+2))
   }
   if (is.null(object$deriv)) object$deriv <- 0 
   object$X <- splines::spline.des(k,x,m[1]+2,x*0+object$deriv)$design # get model matrix
@@ -1627,7 +1627,7 @@ smooth.construct.ps.smooth.spec <- function(object,data,knots)
   if (is.null(object$mono)) object$mono <- 0 
   if (object$mono!=0) { ## scop-spline requested
     p <- ncol(object$X)
-    B <- matrix(as.numeric(rep(1:p,p)>=rep(1:p,each=p)),p,p) ## coef summation matrix
+    B <- matrix(as.numeric(rep(seq_len(p),p)>=rep(seq_len(p),each=p)),p,p) ## coef summation matrix
     if (object$mono < 0) B[,2:p] <- -B[,2:p] ## monotone decrease case
     object$X <- object$X %*% B
     object$g.index <- c(FALSE,rep(TRUE,p-1)) ## indicator of which coefficients must be positive (exponentiated)
@@ -1719,7 +1719,7 @@ smooth.construct.bs.smooth.spec <- function(object,data,knots) {
     k <- seq(xl-dx*(m[1]),xu+dx*(m[1]),length=nk+2*m[1])   
   } else {
     if (length(k)!=nk+2*m[1]) 
-    stop(paste("there should be ",nk+2*m[1]," supplied knots"))
+    stop(gettextf("there should be %d knots supplied", nk+2*m[1]))
   }
   if (is.null(object$deriv)) object$deriv <- 0 
   object$X <- splines::spline.des(k,x,m[1]+1,x*0+object$deriv)$design # get model matrix
@@ -1733,13 +1733,13 @@ smooth.construct.bs.smooth.spec <- function(object,data,knots) {
   ## cubic case...        
   object$knots <- k; 
   class(object) <- "Bspline.smooth"  # Give object a class
-  k0 <- k[m[1]+1:nk] ## the interior knots
+  k0 <- k[m[1]+seq_len(nk)] ## the interior knots
   object$deriv <- m[2]
   pord <- m[1]-m[2] ## order of derivative polynomial 0 is step function
   if (pord<0) stop("requested non-existent derivative in B-spline penalty") 
   h <- diff(k0) ## the difference sequence...
   ## now create the sequence at which to obtain derivatives
-  if (pord==0) k1 <- (k0[2:nk]+k0[1:(nk-1)])/2 else {
+  if (pord==0) k1 <- (k0[2:nk]+k0[seq_len(nk-1)])/2 else {
     h1 <- rep(h/pord,each=pord)
     k1 <- cumsum(c(k0[1],h1)) 
   } 
@@ -1750,30 +1750,30 @@ smooth.construct.bs.smooth.spec <- function(object,data,knots) {
     object$D <- sqrt(h)*D
   } else { ## integrand is a piecewise polynomial...
     P <- solve(matrix(rep(seq(-1,1,length=pord+1),pord+1)^rep(0:pord,each=pord+1),pord+1,pord+1))
-    i1 <- rep(1:(pord+1),pord+1)+rep(1:(pord+1),each=pord+1) ## i + j
+    i1 <- rep(seq_len(pord+1),pord+1)+rep(seq_len(pord+1),each=pord+1) ## i + j
     H <- matrix((1+(-1)^(i1-2))/(i1-1),pord+1,pord+1)
     W1 <- t(P)%*%H%*%P
     h <- h/2 ## because we map integration interval to to [-1,1] for maximum stability
     ## Create the non-zero diagonals of the W matrix... 
     ld0 <- rep(sdiag(W1),length(h))*rep(h,each=pord+1)
-    i1 <- c(rep(1:pord,length(h)) + rep(0:(length(h)-1) * (pord+1),each=pord),length(ld0))
+    i1 <- c(rep(seq_len(pord),length(h)) + rep(0:(length(h)-1) * (pord+1),each=pord),length(ld0))
     ld <- ld0[i1] ## extract elements for leading diagonal
-    i0 <- 1:(length(h)-1)*pord+1
-    i2 <- 1:(length(h)-1)*(pord+1)
+    i0 <- seq_len(length(h)-1)*pord+1
+    i2 <- seq_len(length(h)-1)*(pord+1)
     ld[i0] <- ld[i0] + ld0[i2] ## add on extra parts for overlap
     B <- matrix(0,pord+1,length(ld))
     B[1,] <- ld
-    for (k in 1:pord) { ## create the other diagonals...
+    for (k in seq_len(pord)) { ## create the other diagonals...
       diwk <- sdiag(W1,k) ## kth diagonal of W1
-      ind <- 1:(length(ld)-k)
+      ind <- seq_len(length(ld)-k)
       B[k+1,ind] <- (rep(h,each=pord)*rep(c(diwk,rep(0,k-1)),length(h)))[ind]  
     }
     ## ... now B contains the non-zero diagonals of W
     B <- bandchol(B) ## the banded cholesky factor.
     ## Pre-Multiply D by the Cholesky factor...
     D1 <- B[1,]*D
-    for (k in 1:pord) {
-      ind <- 1:(nrow(D)-k)
+    for (k in seq_len(pord)) {
+      ind <- seq_len(nrow(D)-k)
       D1[ind,] <- D1[ind,] + B[k+1,ind] * D[ind+k,]
     }
     object$D <- D1
@@ -2216,8 +2216,8 @@ smooth.construct.re.smooth.spec <- function(object,data,knots)
     object$rank <- object$bs.dim  # penalty rank 
   } else {
     object$S <- if (is.list(object$xt$S)) object$xt$S else list(object$xt$S)
-    for (i in 1:length(object$S)) { 
-      if (ncol(object$S[[i]])!=object$bs.dim||nrow(object$S[[i]])!=object$bs.dim) stop("supplied S matrices are wrong diminsion")
+    for (i in seq_len(length(object$S))) { 
+      if (ncol(object$S[[i]])!=object$bs.dim||nrow(object$S[[i]])!=object$bs.dim) stop("supplied S matrices are wrong dimension")
     }
     object$rank <- object$xt$rank
   }
@@ -3440,7 +3440,7 @@ smoothCon <- function(object,data,knots=NULL,absorb.cons=FALSE,scale.penalty=TRU
      class(qrc) <- "sweepDrop"
      sm$X <- sm$X[,-drop] - matrix(qrc[-1],nrow(sm$X),ncol(sm$X)-1,byrow=TRUE)
      if (length(sm$S)>0)
-     for (l in 1:length(sm$S)) { # some smooths have > 1 penalty 
+     for (l in seq_len(length(sm$S))) { # some smooths have > 1 penalty 
         sm$S[[l]]<-sm$S[[l]][-drop,-drop]
      }
      attr(sm,"qrc") <- qrc

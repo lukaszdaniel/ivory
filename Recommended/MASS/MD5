@@ -160,8 +160,8 @@ efdd29c1f69621c9876c8389ade52011 *Changes
 b678832e02372694edb83acf679710c9 *po/R-de.po
 f5dd576c663a4b04c2bb4833eea1ab63 *po/R-fr.po
 a6f395810b1c3c5e70030c359ba1ad5b *po/R-MASS.pot
-fa23127be8b07d13ec7b55c56963256a *po/pl.po
-425af4aa32c9c86f681c28139429215c *po/MASS.pot
+1a3cea834198e57a83f2895b07b1144c *po/pl.po
+a57d3dfeb3f8cbc78242bd64dae115a0 *po/MASS.pot
 821fc3e8e6376d620bc522146e6e4a64 *po/R-ko.po
 156797766d5176471ed9c747be9fc2d5 *po/R-pl.po
 8fbf3a0f6c57bb6815ec2d4fbe3faed9 *src/localization.h
@@ -333,7 +333,7 @@ afd4f607cba7fda8ec4d22bffd88fc50 *tests/glm.nb.R
 7b1360150b8598b576e82534b12345a2 *tests/BankWages.rda
 f4e6b3ffb6521ea7625515e2f0ae7f98 *tests/profile.R
 a0854fee9b36691ca1d0880da31d6f79 *tests/fitdistr.R
-3458c9cfa850a6e25836063403b7c9a0 *tests/regression.Rout.save
-e3561b42fadf95bf65dd52245aa04c78 *tests/fitdistr.Rout.save
+95d607421bd27acb314bfd4d40042891 *tests/regression.Rout.save
+5d907d24b9b8be28888e58b62e421fad *tests/fitdistr.Rout.save
 a23ddf89e02a02ed030e4ed5538d3430 *tests/regression.R
 fd9fbc52e72cc2fb95470ff7f531b216 *tests/Examples/MASS-Ex.Rout.save

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: mgcv 1.8-11\n"
-"POT-Creation-Date: 2016-02-27 19:10\n"
+"Project-Id-Version: mgcv 1.8-12\n"
+"POT-Creation-Date: 2016-03-03 21:03\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -404,13 +404,6 @@ msgstr ""
 
 
 #: R/mgcv.r: 0
-#. R/mgcv.r: warning("'negbin()' with unknown theta and outer iteration is deprecated - use 'nb()'.")
-
-msgid "'negbin()' with unknown theta and outer iteration is deprecated - use 'nb()'."
-msgstr ""
-
-
-#: R/mgcv.r: 0
 #. R/mgcv.r: stop("'nthreads' argument must be a positive integer")
 
 msgid "'nthreads' argument must be a positive integer"
@@ -678,6 +671,7 @@ msgstr ""
 
 
 #: R/smooth.r: 0
+#. R/smooth.r: stop("Basis only handles 1D smooths")
 #. R/smooth.r: stop("Basis only handles 1D smooths")
 #. R/smooth.r: stop("Basis only handles 1D smooths")
 #. R/smooth.r: stop("Basis only handles 1D smooths")
@@ -1466,6 +1460,20 @@ msgid "Penalized model matrix must have no more columns than rows"
 msgstr ""
 
 
+#: R/mgcv.r: 0
+#. R/mgcv.r: stop("Please provide a single value for theta or use nb to estimate it")
+
+msgid "Please provide a single value for theta or use nb to estimate it"
+msgstr ""
+
+
+#: R/smooth.r: 0
+#. R/smooth.r: stop("Please put term with most levels last in 're' to avoid spoiling supplied penalties")
+
+msgid "Please put term with most levels last in 're' to avoid spoiling supplied penalties"
+msgstr ""
+
+
 #: R/gam.fit3.r: 0
 #. R/gam.fit3.r: gettextf("Proportion time in C: %s ls: %s gdi: %s", (tc + tg)/at, tc/at, tg/at, domain = "R-mgcv")
 
@@ -1870,6 +1878,7 @@ msgstr ""
 
 #: R/smooth.r: 0
 #. R/smooth.r: warning("basis dimension is larger than number of unique covariates")
+#. R/smooth.r: warning("basis dimension is larger than number of unique covariates")
 
 msgid "basis dimension is larger than number of unique covariates"
 msgstr ""
@@ -1886,6 +1895,7 @@ msgstr ""
 #: R/smooth.r: 0
 #. R/smooth.r: stop("basis dimension too small for b-spline order")
 #. R/smooth.r: stop("basis dimension too small for b-spline order")
+#. R/smooth.r: stop("basis dimension too small for b-spline order")
 
 msgid "basis dimension too small for b-spline order"
 msgstr ""
@@ -1897,6 +1907,13 @@ msgstr ""
 #. R/smooth.r: warning("basis dimension, k, increased to minimum possible\n")
 
 msgid "basis dimension, k, increased to minimum possible"
+msgstr ""
+
+
+#: R/smooth.r: 0
+#. R/smooth.r: stop("basis not usable with reduced te")
+
+msgid "basis not usable with reduced te"
 msgstr ""
 
 
@@ -2070,6 +2087,13 @@ msgstr ""
 #. R/gam.sim.r: stop("distribution was not recognised")
 
 msgid "distribution was not recognised"
+msgstr ""
+
+
+#: R/misc.r: 0
+#. R/misc.r: stop("don't be silly")
+
+msgid "don't be silly"
 msgstr ""
 
 
@@ -2410,13 +2434,13 @@ msgstr ""
 #: R/smooth.r: 0
 #. R/smooth.r: stop("knot range does not include data")
 #. R/smooth.r: stop("knot range does not include data")
+#. R/smooth.r: stop("knot range does not include data")
 
 msgid "knot range does not include data"
 msgstr ""
 
 
 #: R/smooth.r: 0
-#. R/smooth.r: warning("knot range is so wide that there is *no* information about some basis coefficients")
 #. R/smooth.r: warning("knot range is so wide that there is *no* information about some basis coefficients")
 
 msgid "knot range is so wide that there is *no* information about some basis coefficients"
@@ -2518,6 +2542,14 @@ msgstr ""
 #. R/mgcv.r: stop("matrix 'A' is not square")
 
 msgid "matrix 'A' is not square"
+msgstr ""
+
+
+#: R/misc.r: 0
+#. R/misc.r: stop("matrix is not positive definite")
+#. R/misc.r: stop("matrix is not positive definite")
+
+msgid "matrix is not positive definite"
 msgstr ""
 
 
@@ -2647,13 +2679,6 @@ msgstr ""
 #. R/gam.fit3.r: gettextf("newton max(|grad|) = %s", max(abs(grad)), domain = "R-mgcv")
 
 msgid "newton max(|grad|) = %s"
-msgstr ""
-
-
-#: R/mgcv.r: 0
-#. R/mgcv.r: stop("nlm.fd not available with negative binomial Theta estimation")
-
-msgid "nlm.fd not available with negative binomial Theta estimation"
 msgstr ""
 
 
@@ -2820,13 +2845,6 @@ msgid "only one level of smooth nesting is supported by gamm"
 msgstr ""
 
 
-#: R/mgcv.r: 0
-#. R/mgcv.r: warning("only outer methods 'newton' & 'bfgs' supports 'negbin' family and theta selection: reset")
-
-msgid "only outer methods 'newton' & 'bfgs' supports 'negbin' family and theta selection: reset"
-msgstr ""
-
-
 #: R/gam.fit3.r: 0
 #. R/gam.fit3.r: gettextf("only scalar '%s' and '%s' arguments are allowed", "rho", "theta")
 #. R/gam.fit3.r: gettextf("only scalar '%s' and '%s' arguments are allowed", "p", "phi")
@@ -2957,6 +2975,13 @@ msgid "reparameterization unstable for margin: not done"
 msgstr ""
 
 
+#: R/smooth.r: 0
+#. R/smooth.r: stop("requested non-existent derivative in B-spline penalty")
+
+msgid "requested non-existent derivative in B-spline penalty"
+msgstr ""
+
+
 #: R/plots.r: 0
 #. R/plots.r: warning("residuals argument to plot.gam is wrong length: ignored")
 
@@ -3027,6 +3052,13 @@ msgid "scheme should be a single number, or a vector with %d elements"
 msgstr ""
 
 
+#: R/misc.r: 0
+#. R/misc.r: stop("sd should have exactly one less entry than ld")
+
+msgid "sd should have exactly one less entry than ld"
+msgstr ""
+
+
 #: R/gamm.r: 0
 #. R/gamm.r: stop("side conditions are not allowed for nested smooths")
 
@@ -3093,10 +3125,25 @@ msgstr ""
 
 
 #: R/smooth.r: 0
+#. R/smooth.r: stop("something wrong in monotone setup - no unpenalized terms!")
+
+msgid "something wrong in monotone setup - no unpenalized terms!"
+msgstr ""
+
+
+#: R/smooth.r: 0
 #. R/smooth.r: warning("something wrong with argument 'd'")
 #. R/smooth.r: warning("something wrong with argument 'd'")
 
 msgid "something wrong with argument 'd'"
+msgstr ""
+
+
+#: R/misc.r: 0
+#. R/misc.r: stop("something wrong with inputs to LAPACK routine")
+#. R/misc.r: stop("something wrong with inputs to LAPACK routine")
+
+msgid "something wrong with inputs to LAPACK routine"
 msgstr ""
 
 
@@ -3147,6 +3194,13 @@ msgid "step failed: max(|grad|) = %s"
 msgstr ""
 
 
+#: R/smooth.r: 0
+#. R/smooth.r: stop("supplied S matrices are wrong dimension")
+
+msgid "supplied S matrices are wrong dimension"
+msgstr ""
+
+
 #: R/plots.r: 0
 #. R/plots.r: stop("supplied dist negative")
 
@@ -3165,6 +3219,13 @@ msgstr ""
 #. R/smooth.r: stop("supplied penalty wrong dimension!")
 
 msgid "supplied penalty wrong dimension!"
+msgstr ""
+
+
+#: R/smooth.r: 0
+#. R/smooth.r: warning("sweep and drop constraints unlikely to work well with self handling of by vars")
+
+msgid "sweep and drop constraints unlikely to work well with self handling of by vars"
 msgstr ""
 
 
@@ -3218,17 +3279,20 @@ msgstr ""
 
 
 #: R/smooth.r: 0
-#. R/smooth.r: gettextf("there should be %d knots supplied", nk)
+#. R/smooth.r: warning("there is *no* information about some basis coefficients")
+#. R/smooth.r: warning("there is *no* information about some basis coefficients")
 
-msgid "there should be %d knots supplied"
+msgid "there is *no* information about some basis coefficients"
 msgstr ""
 
 
 #: R/smooth.r: 0
-#. R/smooth.r: gettextf("there should be %d supplied knots", nk)
-#. R/smooth.r: gettextf("there should be %d supplied knots", nk + 2 * m[1] + 2)
+#. R/smooth.r: gettextf("there should be %d knots supplied", nk)
+#. R/smooth.r: gettextf("there should be %d knots supplied", nk)
+#. R/smooth.r: gettextf("there should be %d knots supplied", nk + 2 * m[1] + 2)
+#. R/smooth.r: gettextf("there should be %d knots supplied", nk + 2 * m[1])
 
-msgid "there should be %d supplied knots"
+msgid "there should be %d knots supplied"
 msgstr ""
 
 

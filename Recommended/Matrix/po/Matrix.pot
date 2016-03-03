@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Matrix 1.2-3\n"
+"Project-Id-Version: Matrix 1.2-4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-17 17:53+0100\n"
+"POT-Creation-Date: 2016-03-03 20:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,129 +78,129 @@ msgstr ""
 msgid "slot j is not *strictly* increasing inside a column"
 msgstr ""
 
-#: Csparse.c:208
+#: Csparse.c:214
 msgid "'Csparse_to_nz_pattern(x, tri = NA)': 'tri' is taken as TRUE"
 msgstr ""
 
-#: Csparse.c:231
+#: Csparse.c:237
 msgid "'x' argument is not an object of class \"n.CMatrix\""
 msgstr ""
 
-#: Csparse.c:261
+#: Csparse.c:267
 #, c-format
 msgid "nz2Csparse(): invalid/non-implemented r_kind = %d"
 msgstr ""
 
-#: Csparse.c:343
+#: Csparse.c:349
 msgid "Nonsymmetric matrix in Csparse_symmetric_to_general"
 msgstr ""
 
-#: Csparse.c:354
+#: Csparse.c:360
 msgid "Csparse_general_to_symmetric(): matrix is not square!"
 msgstr ""
 
-#: Csparse.c:763
+#: Csparse.c:769
 msgid "Csparse_crossprod(): error return from cholmod_aat()"
 msgstr ""
 
-#: Csparse.c:792
+#: Csparse.c:798
 msgid "cholmod_drop() failed"
 msgstr ""
 
-#: Csparse.c:818
+#: Csparse.c:824
 #, c-format
 msgid "Impossible Rk_x/Rk_y in Csparse_%s(), please report"
 msgstr ""
 
-#: Csparse.c:820
+#: Csparse.c:826
 #, c-format
 msgid "chm_MOD_xtype() was not successful in Csparse_%s(), please report"
 msgstr ""
 
-#: Csparse.c:924
+#: Csparse.c:930
 msgid "Index i must be NULL or integer"
 msgstr ""
 
-#: Csparse.c:926
+#: Csparse.c:932
 msgid "Index j must be NULL or integer"
 msgstr ""
 
-#: Csparse.c:973
+#: Csparse.c:979
 #, c-format
 msgid "failure to open file \"%s\" for writing"
 msgstr ""
 
-#: Csparse.c:977
+#: Csparse.c:983
 msgid "cholmod_write_sparse returned error code"
 msgstr ""
 
-#: Csparse.c:1076
+#: Csparse.c:1082
 #, c-format
 msgid "%s = '%s' (back-permuted) is experimental"
 msgstr ""
 
-#: Csparse.c:1086
+#: Csparse.c:1092
 msgid "diag_tC(): invalid 'resultKind'"
 msgstr ""
 
-#: Csparse.c:1158
+#: Csparse.c:1164
 #, c-format
 msgid "negative vector lengths not allowed: np = %d, nnz = %d"
 msgstr ""
 
-#: Csparse.c:1163
+#: Csparse.c:1169
 msgid "exactly 1 of 'i', 'j' or 'p' must be NULL"
 msgstr ""
 
-#: Csparse.c:1165
+#: Csparse.c:1171
 #, c-format
 msgid "np = %d, must be zero when p is NULL"
 msgstr ""
 
-#: Csparse.c:1168
+#: Csparse.c:1174
 #, c-format
 msgid "p[0] = %d, should be zero"
 msgstr ""
 
-#: Csparse.c:1171
+#: Csparse.c:1177
 msgid "p must be non-decreasing"
 msgstr ""
 
-#: Csparse.c:1187
+#: Csparse.c:1193
 #, c-format
 msgid "Inconsistent dimensions: np = 0 and nnz = %d"
 msgstr ""
 
-#: Csparse.c:1195
+#: Csparse.c:1201
 #, c-format
 msgid "invalid row index at position %d"
 msgstr ""
 
-#: Csparse.c:1202
+#: Csparse.c:1208
 #, c-format
 msgid "invalid column index at position %d"
 msgstr ""
 
-#: Csparse.c:1212
+#: Csparse.c:1218
 #, c-format
 msgid "strlen of cls argument = %d, should be 8"
 msgstr ""
 
-#: Csparse.c:1214
+#: Csparse.c:1220
 #, c-format
 msgid "cls = \"%s\" does not end in \"CMatrix\""
 msgstr ""
 
-#: Csparse.c:1224
+#: Csparse.c:1230
 #, c-format
 msgid "cls = \"%s\" must begin with 'd', 'l' or 'n'"
 msgstr ""
 
-#: Csparse.c:1227
+#: Csparse.c:1233
 msgid "Only 'g'eneral sparse matrix types allowed"
 msgstr ""
 
-#: Csparse.c:1255
+#: Csparse.c:1261
 msgid "code not yet written for cls = \"lgCMatrix\""
 msgstr ""
 
@@ -258,133 +258,133 @@ msgstr ""
 msgid "'Dim' slot must have length 2"
 msgstr ""
 
-#: Mutils.c:322
-msgid "'Dim' slot is not numeric"
+#: Mutils.c:325
+msgid "'Dim' slot is not integer"
 msgstr ""
 
-#: Mutils.c:327
+#: Mutils.c:330
 msgid "Negative value in 'Dim' slot"
 msgid_plural "Negative values in 'Dim' slot"
 msgstr[0] ""
 msgstr[1] ""
 
-#: Mutils.c:344
+#: Mutils.c:347
 msgid "'Dimnames' slot is not a list"
 msgstr ""
 
-#: Mutils.c:346
+#: Mutils.c:349
 msgid "'Dimnames' slot is a list, but not of length 2"
 msgstr ""
 
-#: Mutils.c:351
+#: Mutils.c:354
 #, c-format
 msgid "'Dimnames[%d]' is not a character vector"
 msgstr ""
 
-#: Mutils.c:356
+#: Mutils.c:359
 #, c-format
 msgid "length(Dimnames[%d]) differs from Dim[%d] which is %d"
 msgstr ""
 
-#: Mutils.c:383 Mutils.c:409
+#: Mutils.c:386 Mutils.c:412
 msgid "'uplo' must be UPP or LOW"
 msgstr ""
 
-#: Mutils.c:464 dgeMatrix.c:421 dtrMatrix.c:283
+#: Mutils.c:467 dgeMatrix.c:421 dtrMatrix.c:283
 msgid "replacement diagonal has wrong length"
 msgstr ""
 
-#: Mutils.c:678
+#: Mutils.c:681
 #, c-format
 msgid "invalid class \"%s\" passed to 'dup_mMatrix_as_geMatrix' function"
 msgstr ""
 
-#: Mutils.c:808
+#: Mutils.c:811
 #, c-format
 msgid "unexpected ctype = %d in 'dup_mMatrix_as_geMatrix' function"
 msgstr ""
 
-#: Mutils.c:836
+#: Mutils.c:839
 #, c-format
 msgid "invalid class \"%s\" passed to 'dup_mMatrix_as_dgeMatrix()' function"
 msgstr ""
 
-#: Mutils.c:886
+#: Mutils.c:889
 msgid "Argument 'ij' must be 2-column integer matrix"
 msgstr ""
 
-#: Mutils.c:905
+#: Mutils.c:908
 msgid "subscript 'i' out of bounds in M[ij]"
 msgstr ""
 
-#: Mutils.c:907
+#: Mutils.c:910
 msgid "subscript 'j' out of bounds in M[ij]"
 msgstr ""
 
-#: Mutils.c:951
+#: Mutils.c:954
 msgid "'i' and 'j' arguments must be integer vectors of the same length"
 msgstr ""
 
-#: Mutils.c:996
+#: Mutils.c:999
 msgid "'data' must be of a vector type"
 msgstr ""
 
-#: Mutils.c:1003
+#: Mutils.c:1006
 #, c-format
 msgid "invalid '%s' argument"
 msgstr ""
 
-#: Mutils.c:1010 Mutils.c:1018
+#: Mutils.c:1013 Mutils.c:1021
 msgid "non-numeric matrix extent"
 msgstr ""
 
-#: Mutils.c:1013
+#: Mutils.c:1016
 msgid "invalid 'nrow' value (too large or NA)"
 msgstr ""
 
-#: Mutils.c:1015
+#: Mutils.c:1018
 msgid "invalid 'nrow' value (< 0)"
 msgstr ""
 
-#: Mutils.c:1021
+#: Mutils.c:1024
 msgid "invalid 'ncol' value (too large or NA)"
 msgstr ""
 
-#: Mutils.c:1023
+#: Mutils.c:1026
 msgid "invalid 'ncol' value (< 0)"
 msgstr ""
 
-#: Mutils.c:1026 Mutils.c:1029 Mutils.c:1032
+#: Mutils.c:1029 Mutils.c:1032 Mutils.c:1035
 msgid "data is too long"
 msgstr ""
 
-#: Mutils.c:1041
+#: Mutils.c:1044
 #, c-format
 msgid ""
 "data length [%d] is not a sub-multiple or multiple of the number of rows [%d]"
 msgstr ""
 
-#: Mutils.c:1044
+#: Mutils.c:1047
 #, c-format
 msgid ""
 "data length [%d] is not a sub-multiple or multiple of the number of columns "
 "[%d]"
 msgstr ""
 
-#: Mutils.c:1047
+#: Mutils.c:1050
 msgid "data length exceeds size of matrix"
 msgstr ""
 
-#: Mutils.c:1053
+#: Mutils.c:1056
 msgid "too many elements specified"
 msgstr ""
 
-#: Mutils.c:1125
+#: Mutils.c:1128
 #, c-format
 msgid "the number of columns differ in R_rbind2_vector: %d != %d"
 msgstr ""
 
-#: Mutils.c:1179 Mutils.c:1210 Mutils.c:1221 Mutils.c:1248
+#: Mutils.c:1182 Mutils.c:1213 Mutils.c:1224 Mutils.c:1251
 msgid "Argument must be numeric-like atomic vector"
 msgstr ""
 
@@ -803,7 +803,12 @@ msgstr ""
 msgid "'cholmod_sdmult' function error (resid)"
 msgstr ""
 
-#: dgTMatrix.c:62
+#: dgTMatrix.c:33 dgTMatrix.c:62
+#, c-format
+msgid "too large matrix: %.0f"
+msgstr ""
+
+#: dgTMatrix.c:97
 #, c-format
 msgid "Cannot coerce to too large '*geMatrix' with %.0f entries"
 msgstr ""
@@ -1003,11 +1008,11 @@ msgstr ""
 msgid "cannot add diag() as long as 'diag = \"U\"'"
 msgstr ""
 
-#: factorizations.c:17
+#: factorizations.c:18
 msgid "'x' slot is not \"double\""
 msgstr ""
 
-#: factorizations.c:19
+#: factorizations.c:20
 msgid "'x' slot is not of correct length"
 msgstr ""
 

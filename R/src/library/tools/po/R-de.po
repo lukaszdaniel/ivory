@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-23 20:39\n"
+"POT-Creation-Date: 2016-03-03 21:07\n"
 "PO-Revision-Date: 2015-01-17 15:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -491,13 +491,13 @@ msgstr "Argumentnamen im Code (ohne Doku):"
 msgid "Argument names in docs but not in code:"
 msgstr "Argumentnamen in Doku (ohne Code):"
 
-#. R/assertCondition.R: gettextf("Asserted error: %s", (error[[1]])$message)
+#. R/assertCondition.R: gettextf("Asserted error: %s", error[[1]]$message)
 #: R/assertCondition.R:0
 #, fuzzy
 msgid "Asserted error: %s"
 msgstr "Doku: %s"
 
-#. R/assertCondition.R: gettextf("Asserted warning: %s", (warning[[1]])$message)
+#. R/assertCondition.R: gettextf("Asserted warning: %s", warning[[1]]$message)
 #: R/assertCondition.R:0
 #, fuzzy
 msgid "Asserted warning: %s"

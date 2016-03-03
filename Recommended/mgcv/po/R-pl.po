@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mgcv 1.8-6\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2016-02-27 19:10\n"
-"PO-Revision-Date: 2015-10-18 20:40+0100\n"
+"POT-Creation-Date: 2016-03-03 21:03\n"
+"PO-Revision-Date: 2016-03-03 21:02+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.4\n"
 
 #. R/efam.r: gettextf("\"%s\" link not available for beta regression; available links are  \"logit\", \"probit\", \"cloglog\" and \"cauchit\"",     linktemp)
 #: R/efam.r:0
@@ -191,9 +191,8 @@ msgstr "funkcja '%s' wymaga dwóch połączeń określonych jako łańcuchy teks
 
 #. R/mvam.r: gettextf("'%s' function requires 2 or more dimensional data", "mvn()")
 #: R/mvam.r:0
-#, fuzzy
 msgid "'%s' function requires 2 or more dimensional data"
-msgstr "'mvn()' wymaga 2 lub więcej danych wymiarowych"
+msgstr "funkcja '%s' wymaga 2 lub więcej danych wymiarowych"
 
 #. R/mgcv.r: gettextf("'%s', '%s' and '%s' components should have the same length", "M$sp", "M$S",     "M$off")
 #: R/mgcv.r:0
@@ -327,14 +326,6 @@ msgstr "argument 'mu' musi być nieujemny"
 #: R/misc.r:0
 msgid "'mu' dimensions are wrong"
 msgstr "wymiary 'mu' są niepoprawne"
-
-#. R/mgcv.r: warning("'negbin()' with unknown theta and outer iteration is deprecated - use 'nb()'.")
-#: R/mgcv.r:0
-msgid ""
-"'negbin()' with unknown theta and outer iteration is deprecated - use 'nb()'."
-msgstr ""
-"funkcja 'negbin()' z nieznaną wartością 'theta' oraz zewnętrzną iteracją "
-"jest przestarza - użyj 'nb()'."
 
 #. R/mgcv.r: stop("'nthreads' argument must be a positive integer")
 #: R/mgcv.r:0
@@ -543,6 +534,7 @@ msgstr ""
 "może\n"
 "wskazywać, że k jest zbyt małe, szczególnie jeśli edf jest bliskie k."
 
+#. R/smooth.r: stop("Basis only handles 1D smooths")
 #. R/smooth.r: stop("Basis only handles 1D smooths")
 #. R/smooth.r: stop("Basis only handles 1D smooths")
 #. R/smooth.r: stop("Basis only handles 1D smooths")
@@ -1142,6 +1134,18 @@ msgstr ""
 msgid "Penalized model matrix must have no more columns than rows"
 msgstr "Macierz modelu kary nie może mieć więcej kolumn niż wierszy"
 
+#. R/mgcv.r: stop("Please provide a single value for theta or use nb to estimate it")
+#: R/mgcv.r:0
+msgid "Please provide a single value for theta or use nb to estimate it"
+msgstr ""
+
+#. R/smooth.r: stop("Please put term with most levels last in 're' to avoid spoiling supplied penalties")
+#: R/smooth.r:0
+msgid ""
+"Please put term with most levels last in 're' to avoid spoiling supplied "
+"penalties"
+msgstr ""
+
 #. R/gam.fit3.r: gettextf("Proportion time in C: %s ls: %s gdi: %s", (tc + tg)/at, tc/at, tg/at, domain = "R-mgcv")
 #: R/gam.fit3.r:0
 msgid "Proportion time in C: %s ls: %s gdi: %s"
@@ -1446,6 +1450,7 @@ msgid "bam can not discretize with this nesting structure"
 msgstr ""
 
 #. R/smooth.r: warning("basis dimension is larger than number of unique covariates")
+#. R/smooth.r: warning("basis dimension is larger than number of unique covariates")
 #: R/smooth.r:0
 msgid "basis dimension is larger than number of unique covariates"
 msgstr "bazowy wymiar jest większy niż liczba unikalnych zmiennych zależnych"
@@ -1458,6 +1463,7 @@ msgstr "wymiar podstawy został przywrócony do minimalnego możliwego"
 
 #. R/smooth.r: stop("basis dimension too small for b-spline order")
 #. R/smooth.r: stop("basis dimension too small for b-spline order")
+#. R/smooth.r: stop("basis dimension too small for b-spline order")
 #: R/smooth.r:0
 msgid "basis dimension too small for b-spline order"
 msgstr "wymiar podstawy jest zbyt mały dla rzędu b-splajnu"
@@ -1468,6 +1474,11 @@ msgstr "wymiar podstawy jest zbyt mały dla rzędu b-splajnu"
 #: R/smooth.r:0
 msgid "basis dimension, k, increased to minimum possible"
 msgstr "wymiar podstawy, k, zwiększył się do minimalnego możliwego"
+
+#. R/smooth.r: stop("basis not usable with reduced te")
+#: R/smooth.r:0
+msgid "basis not usable with reduced te"
+msgstr ""
 
 #. R/soap.r: stop("bnd must be a list")
 #: R/soap.r:0
@@ -1598,6 +1609,11 @@ msgstr ""
 #: R/gam.sim.r:0
 msgid "distribution was not recognised"
 msgstr "rozkład nie został rozpoznany"
+
+#. R/misc.r: stop("don't be silly")
+#: R/misc.r:0
+msgid "don't be silly"
+msgstr "nie bądź niemądry"
 
 #. R/gam.fit3.r: gettext("done!", domain = "R-mgcv")
 #: R/gam.fit3.r:0
@@ -1858,11 +1874,11 @@ msgstr "węzeł %d jest na granicy lub poza granicą"
 
 #. R/smooth.r: stop("knot range does not include data")
 #. R/smooth.r: stop("knot range does not include data")
+#. R/smooth.r: stop("knot range does not include data")
 #: R/smooth.r:0
 msgid "knot range does not include data"
 msgstr "zakres węzła nie zawiera danych"
 
-#. R/smooth.r: warning("knot range is so wide that there is *no* information about some basis coefficients")
 #. R/smooth.r: warning("knot range is so wide that there is *no* information about some basis coefficients")
 #: R/smooth.r:0
 msgid ""
@@ -1945,6 +1961,12 @@ msgstr "dolny zakres >= górny zakres w wywołaniu przekazywanym do 'mono.con()'
 msgid "matrix 'A' is not square"
 msgstr "macierz 'A' nie jest kwadratowa"
 
+#. R/misc.r: stop("matrix is not positive definite")
+#. R/misc.r: stop("matrix is not positive definite")
+#: R/misc.r:0
+msgid "matrix is not positive definite"
+msgstr "macierz nie jest dodatnio określona"
+
 #. R/mgcv.r: stop("maximum number of iterations must be > 0")
 #: R/mgcv.r:0
 msgid "maximum number of iterations must be > 0"
@@ -1991,9 +2013,8 @@ msgstr "więcej węzłów niż danych w członie 'tp': węzły zostały zignorow
 
 #. R/smooth.r: warning("more knots than data in an ms term: knots ignored.")
 #: R/smooth.r:0
-#, fuzzy
 msgid "more knots than data in an ms term: knots ignored."
-msgstr "więcej węzłów niż danych w członie 'sos': węzły zostały zignorowane"
+msgstr "więcej węzłów niż danych w członie 'ms': węzły zostały zignorowane."
 
 #. R/smooth.r: warning("more knots than data in an sos term: knots ignored")
 #: R/smooth.r:0
@@ -2044,12 +2065,6 @@ msgstr ""
 #: R/gam.fit3.r:0
 msgid "newton max(|grad|) = %s"
 msgstr "max(|grad|) newtona = %s"
-
-#. R/mgcv.r: stop("nlm.fd not available with negative binomial Theta estimation")
-#: R/mgcv.r:0
-msgid "nlm.fd not available with negative binomial Theta estimation"
-msgstr ""
-"'nlm.fd' nie jest dostępne z ujemnym oszacowaniem Theta rozkładu Pascala"
 
 #. R/mgcv.r: stop("nlm.fd only available for GCV/UBRE")
 #: R/mgcv.r:0
@@ -2128,9 +2143,8 @@ msgstr "nic do zrobienia dla tego modelu"
 
 #. R/gamlss.r: stop("number of categories must be at least 2")
 #: R/gamlss.r:0
-#, fuzzy
 msgid "number of categories must be at least 2"
-msgstr "maksymalna liczba iteracji musi być > 0"
+msgstr "liczba kategorii musi wynosić przynajmniej 2"
 
 #. R/gamlss.r: stop("number of linear predictors doesn't match")
 #: R/gamlss.r:0
@@ -2177,15 +2191,6 @@ msgstr "został użyty jedynie pierwszy element 'id'"
 #: R/gamm.r:0
 msgid "only one level of smooth nesting is supported by gamm"
 msgstr "tylko jeden poziom zagnieżdżania gładkości jest wspierane przez 'gamm'"
-
-#. R/mgcv.r: warning("only outer methods 'newton' & 'bfgs' supports 'negbin' family and theta selection: reset")
-#: R/mgcv.r:0
-msgid ""
-"only outer methods 'newton' & 'bfgs' supports 'negbin' family and theta "
-"selection: reset"
-msgstr ""
-"tylko zewnętrzne metody 'newton' oraz 'bfgs' wspierają rodzinę 'negbin' oraz "
-"wybór theta: reset"
 
 #. R/gam.fit3.r: gettextf("only scalar '%s' and '%s' arguments are allowed", "rho", "theta")
 #. R/gam.fit3.r: gettextf("only scalar '%s' and '%s' arguments are allowed", "p", "phi")
@@ -2289,6 +2294,11 @@ msgstr "losowe efekty nie działają z 'ids'"
 msgid "reparameterization unstable for margin: not done"
 msgstr "ponowna parametryzacja nie jest stabilna dla marginesu: nie wykonano"
 
+#. R/smooth.r: stop("requested non-existent derivative in B-spline penalty")
+#: R/smooth.r:0
+msgid "requested non-existent derivative in B-spline penalty"
+msgstr ""
+
 #. R/plots.r: warning("residuals argument to plot.gam is wrong length: ignored")
 #: R/plots.r:0
 msgid "residuals argument to plot.gam is wrong length: ignored"
@@ -2339,6 +2349,11 @@ msgstr "stopnie swobody skalowanego rozkładu r-Studenta muszą być > 2"
 #: R/plots.r:0
 msgid "scheme should be a single number, or a vector with %d elements"
 msgstr "'scheme' powinno być pojedynczą liczbą lub wektorem z %d elementami"
+
+#. R/misc.r: stop("sd should have exactly one less entry than ld")
+#: R/misc.r:0
+msgid "sd should have exactly one less entry than ld"
+msgstr ""
 
 #. R/gamm.r: stop("side conditions are not allowed for nested smooths")
 #: R/gamm.r:0
@@ -2396,11 +2411,23 @@ msgstr ""
 msgid "soap films are bivariate only"
 msgstr "filmy 'soap' są tylko dwuwymiarowe"
 
+#. R/smooth.r: stop("something wrong in monotone setup - no unpenalized terms!")
+#: R/smooth.r:0
+msgid "something wrong in monotone setup - no unpenalized terms!"
+msgstr ""
+
 #. R/smooth.r: warning("something wrong with argument 'd'")
 #. R/smooth.r: warning("something wrong with argument 'd'")
 #: R/smooth.r:0
 msgid "something wrong with argument 'd'"
 msgstr "coś nie tak z argumentem 'd'"
+
+#. R/misc.r: stop("something wrong with inputs to LAPACK routine")
+#. R/misc.r: stop("something wrong with inputs to LAPACK routine")
+#: R/misc.r:0
+#, fuzzy
+msgid "something wrong with inputs to LAPACK routine"
+msgstr "Coś nie tak z konstrukcją automatycznej kary"
 
 #. R/jagam.r: stop("sorry link not yet handled")
 #: R/jagam.r:0
@@ -2436,6 +2463,12 @@ msgstr "krok nie powiódł się"
 msgid "step failed: max(|grad|) = %s"
 msgstr "krok nie powiódł się: max(|grad|) = %s"
 
+#. R/smooth.r: stop("supplied S matrices are wrong dimension")
+#: R/smooth.r:0
+#, fuzzy
+msgid "supplied S matrices are wrong dimension"
+msgstr "dostarczone macierze S mają niepoprawny wymiar"
+
 #. R/plots.r: stop("supplied dist negative")
 #: R/plots.r:0
 msgid "supplied dist negative"
@@ -2450,6 +2483,13 @@ msgstr "dostarczona kara nie jest kwadratowa!"
 #: R/smooth.r:0
 msgid "supplied penalty wrong dimension!"
 msgstr "dostarczona kara ma niepoprawny wymiar!"
+
+#. R/smooth.r: warning("sweep and drop constraints unlikely to work well with self handling of by vars")
+#: R/smooth.r:0
+msgid ""
+"sweep and drop constraints unlikely to work well with self handling of by "
+"vars"
+msgstr ""
 
 #. R/gamm.r: stop("te smooths not useable with gamm4: use t2 instead")
 #: R/gamm.r:0
@@ -2486,15 +2526,18 @@ msgstr "adaptacyjna klasa wygładzania jest ograniczona do 1 lub 2 zmiennych"
 msgid "theoretical quantiles"
 msgstr "teoretyczne kwantyle"
 
+#. R/smooth.r: warning("there is *no* information about some basis coefficients")
+#. R/smooth.r: warning("there is *no* information about some basis coefficients")
+#: R/smooth.r:0
+msgid "there is *no* information about some basis coefficients"
+msgstr "*brak* informacji o niektórych podstawowych współczynnikach"
+
 #. R/smooth.r: gettextf("there should be %d knots supplied", nk)
+#. R/smooth.r: gettextf("there should be %d knots supplied", nk)
+#. R/smooth.r: gettextf("there should be %d knots supplied", nk + 2 * m[1] + 2)
+#. R/smooth.r: gettextf("there should be %d knots supplied", nk + 2 * m[1])
 #: R/smooth.r:0
 msgid "there should be %d knots supplied"
-msgstr "powinno być dostarczonych %d węzłów"
-
-#. R/smooth.r: gettextf("there should be %d supplied knots", nk)
-#. R/smooth.r: gettextf("there should be %d supplied knots", nk + 2 * m[1] + 2)
-#: R/smooth.r:0
-msgid "there should be %d supplied knots"
 msgstr "powinno być dostarczonych %d węzłów"
 
 #. R/smooth.r: stop("too few knots")
@@ -2649,6 +2692,35 @@ msgid_plural "Smoothing parameter selection converged after %d iterations."
 msgstr[0] "Wybór parametrów wygładzania uzbieżnił się po %d iteracji."
 msgstr[1] "Wybór parametrów wygładzania uzbieżnił się po %d iteracjach."
 msgstr[2] "Wybór parametrów wygładzania uzbieżnił się po %d iteracjach."
+
+#, fuzzy
+#~ msgid "supplied knots"
+#~ msgstr "dostarczona kara nie jest kwadratowa!"
+
+#, fuzzy
+#~ msgid "there should be"
+#~ msgstr "powinno być dostarczonych %d węzłów"
+
+#~ msgid "there should be %d supplied knots"
+#~ msgstr "powinno być dostarczonych %d węzłów"
+
+#~ msgid ""
+#~ "'negbin()' with unknown theta and outer iteration is deprecated - use "
+#~ "'nb()'."
+#~ msgstr ""
+#~ "funkcja 'negbin()' z nieznaną wartością 'theta' oraz zewnętrzną iteracją "
+#~ "jest przestarza - użyj 'nb()'."
+
+#~ msgid "nlm.fd not available with negative binomial Theta estimation"
+#~ msgstr ""
+#~ "'nlm.fd' nie jest dostępne z ujemnym oszacowaniem Theta rozkładu Pascala"
+
+#~ msgid ""
+#~ "only outer methods 'newton' & 'bfgs' supports 'negbin' family and theta "
+#~ "selection: reset"
+#~ msgstr ""
+#~ "tylko zewnętrzne metody 'newton' oraz 'bfgs' wspierają rodzinę 'negbin' "
+#~ "oraz wybór theta: reset"
 
 #~ msgid "'%s' argument has no '%s' attribute"
 #~ msgstr "argument '%s' nie posiada atrybutu '%s'"

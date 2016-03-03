@@ -51,7 +51,7 @@ fada536cb8b24ede4624ba3a24112981 *data/aircondit7.rda
 8394a6b2bd9c58152a238f1a4a1616b9 *data/catsM.rda
 5dc2147b194c15507379de49828222c1 *inst/CITATION
 f0ece7302d2c5c67cf46b1f577c6b4f1 *inst/po/ru/LC_MESSAGES/R-boot.mo
-6206053a772383cc82484ac8a7a1a9bf *inst/po/en@quot/LC_MESSAGES/R-boot.mo
+c013e0e82c3deedd44cd4a5362929e6c *inst/po/en@quot/LC_MESSAGES/R-boot.mo
 700b17b5e90aa4e50dec415a0f89b0d4 *inst/po/de/LC_MESSAGES/R-boot.mo
 340eeb6a93ac3bac62246e5413020f9c *inst/po/fr/LC_MESSAGES/R-boot.mo
 f977351e4742b8b36477a7288a4467b9 *inst/po/ko/LC_MESSAGES/R-boot.mo
@@ -66,7 +66,7 @@ e6929f73b03924d15f3af4a4c8549a45 *INDEX
 ff099806c027496ed3bea85d6c78c094 *po/R-de.po
 f54f247c3d01528762d614ed3b1b6156 *po/R-fr.po
 af1d51062bf26c42aca25a77093164fa *po/R-ru.po
-92892a0807aa78b0e9f2817c06cfd1ab *po/R-boot.pot
+d034c57d3fac1d1cb5e822b4b85c52da *po/R-boot.pot
 80d1628c5b5da69a425410a1bc4911c8 *po/R-ko.po
 38732e7b37039a9f6c550c23b21dbf53 *po/R-pl.po
 ca33b3f597920217fd81cbc40a769385 *man/islay.Rd

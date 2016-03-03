@@ -1,7 +1,7 @@
 5eebfdd24e8b4bbc1a0e6fbda79d194d *LICENCE.note
 b5835a1a06dc5a83b0465dbd6c3f39e4 *inst/NEWS
 aea650cb108dfd007ba5b35ad6ff7226 *inst/CITATION
-e08b4f6cc70d36c74dda0a11c024b51d *inst/po/en@quot/LC_MESSAGES/R-nnet.mo
+95229ace50295724ad8beca574b4774f *inst/po/en@quot/LC_MESSAGES/R-nnet.mo
 b9f8e5c595305995f9075b143072b150 *inst/po/de/LC_MESSAGES/R-nnet.mo
 ca3e2a786a3a1f13aa512bedd38ab01b *inst/po/fr/LC_MESSAGES/R-nnet.mo
 b8c0310be0136ae7d9b479bd001dba0c *inst/po/ko/LC_MESSAGES/R-nnet.mo
@@ -14,10 +14,10 @@ a552078bc6d46f59fd9a9b540517e000 *Changes
 3108fb45014de53cb6a33bdac2bc71b3 *NAMESPACE
 3679ec8ae98688cc5515c3e6d0c6a4f1 *DESCRIPTION
 63e26fa47eb9adcc38f30f3471a86240 *po/R-de.po
-c26b7160df13618c49268bcca597e562 *po/nnet.pot
+cedfcc54685c9c96184d91220dc2e3d1 *po/nnet.pot
 5f44b5c41e5c28ddf96b11f6d11d2788 *po/R-fr.po
-2cea606245875c49d0c8142216039ad5 *po/pl.po
-f8a01c4a4507e028bfa2c276209b7e74 *po/R-nnet.pot
+3a285393035fca379c264c724ae587c4 *po/pl.po
+c32816b78cec51f96f94473eb0da9f1e *po/R-nnet.pot
 596cf34e8782d9cf25f4ed819373a094 *po/R-ko.po
 6cbd7a799ec96e6117925121fd3ba8f6 *po/R-pl.po
 b364b691adba30c4836fdd284ade50c4 *src/nnet.c
