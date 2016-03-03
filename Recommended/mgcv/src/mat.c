@@ -525,32 +525,33 @@ int mgcv_pchol(double *A,int *piv,int *n,int *nt) {
   return(r); 
 } /* mgcv_pchol */
 
-SEXP mgcv_Rpchol(SEXP Amat, SEXP PIV, SEXP NT, SEXP NB) {
-	/* routine to Choleski decompose n by n  matrix Amat with pivoting
-	 using routine mgcv_bchol to do the work. Uses NT parallel
-	 threads. NB is block size.
 
-	 Designed for use with .call rather than .C
-	 Returns detected rank, and overwrites Amat with its pivoted
-	 Choleski factor. PIV contains pivot vector.
+SEXP mgcv_Rpchol(SEXP Amat,SEXP PIV,SEXP NT,SEXP NB) {
+/* routine to Choleski decompose n by n  matrix Amat with pivoting 
+   using routine mgcv_bchol to do the work. Uses NT parallel
+   threads. NB is block size.
 
-	 */
-	int n, nt, *piv, r, *rrp, nb;
-	double *A;
-	SEXP rr;
-	nb = asInteger(NB);
-	nt = asInteger(NT);
-	n = nrows(Amat);
-	A = REAL(Amat);
-	piv = INTEGER(PIV);
-	// r = mgcv_pchol(A,piv,&n,&nt);
-	r = mgcv_bchol(A, piv, &n, &nt, &nb);
-	/* should return rank (r+1) */
-	rr = PROTECT(allocVector(INTSXP, 1));
-	rrp = INTEGER(rr);
-	*rrp = r;
-	UNPROTECT(1);
-	return (rr);
+   Designed for use with .call rather than .C
+   Returns detected rank, and overwrites Amat with its pivoted
+   Choleski factor. PIV contains pivot vector.
+
+*/
+  int n,nt,*piv,r,*rrp,nb;
+  double *A;
+  SEXP rr;
+  nb = asInteger(NB);
+  nt = asInteger(NT);
+  n = nrows(Amat);
+  A = REAL(Amat);
+  piv = INTEGER(PIV);
+  // r = mgcv_pchol(A,piv,&n,&nt); 
+  r = mgcv_bchol(A,piv,&n,&nt,&nb);
+  /* should return rank (r+1) */
+  rr = PROTECT(allocVector(INTSXP, 1));
+  rrp = INTEGER(rr);
+  *rrp = r;
+  UNPROTECT(1);
+  return(rr);
 } /* mgcv_Rpchol */
 
 
@@ -569,314 +570,221 @@ int bpqr(double *A,int n,int p,double *tau,int *piv,int nb,int nt) {
 #ifdef OMP_REPORT
   Rprintf("bpqr...");
 #endif
-	tol = pow(DOUBLE_EPS, .8);
-	mb = (int *) CALLOC((size_t) nt, sizeof(int));
-	kb = (int *) CALLOC((size_t) nt, sizeof(int));
-	for (p0 = piv, i = 0; i < p; i++, p0++)
-		*p0 = i; /* initialize pivot index */
-	work = (double *) CALLOC((size_t) nb, sizeof(double));
-	/* create column norm vectors */
-	cn = (double *) CALLOC((size_t) p, sizeof(double)); /* version for downdating */
-	icn = (double *) CALLOC((size_t) p, sizeof(double)); /* inital for judging cancellation error */
-	for (a0 = A, i = 0; i < p; i++) { /* cn[i]=icn[i] = || A[:,i] ||^2 */
-		for (x = 0.0, a1 = a0 + n; a0 < a1; a0++)
-			x += *a0 * *a0;
-		cn[i] = icn[i] = x;
-	}
-	if (p < nb)
-		nb = p;
-	nb0 = nb; /* target block size nb */
-	jb = 0; /* start column of current block */
-	pb = p; /* columns left to process */
-	F = (double *) CALLOC((size_t) p * nb0, sizeof(double));
-	while (jb < p) {
-		nb = p - jb;
-		if (nb > nb0)
-			nb = nb0;/* attempted block size */
-		for (a0 = F, a1 = F + nb * pb; a0 < a1; a0++)
-			*a0 = 0.0; /* F[1:pb,1:nb] = 0 - i.e. clear F */
-		for (j = 0; j < nb; j++) { /* loop through cols of this block */
-			k = jb + j; /* index of current column of A to process */
-			a0 = cn + k;
-			x = *a0;
-			q = k;
-			a0++;
-			for (i = k + 1; i < p; i++, a0++)
-				if (*a0 > x) {
-					x = *a0;
-					q = i;
-				} /* find pivot col q */
-			if (q != k) { /* then pivot */
-				i = piv[q];
-				piv[q] = piv[k];
-				piv[k] = i;
-				x = cn[q];
-				cn[q] = cn[k];
-				cn[k] = x;
-				x = icn[q];
-				icn[q] = icn[k];
-				icn[k] = x;
-				Aq = A + q * (ptrdiff_t) n;
-				Ak = A + k * (ptrdiff_t) n;
-				a1 = Aq + n;
-				for (; Aq < a1; Aq++, Ak++) {
-					x = *Aq;
-					*Aq = *Ak;
-					*Ak = x;
-				} /* A[:,k] <-> A[:,q] */
-				Aq = F + q - jb;
-				Ak = F + j;
-				a1 = F + nb * (ptrdiff_t) pb;
-				for (; Aq < a1; Aq += pb, Ak += pb) {
-					x = *Aq;
-					*Aq = *Ak;
-					*Ak = x;
-				} /* F[q-jb,:] <-> F[j,:] */
-			}
-			/* update the pivot column: A[k:n-1,k] -= A[k:n-1,jb:k-1]F[j,0:j-1]' using
-			 BLAS call to DGEMV(TRANS,M,N,ALPHA,A,LDA,X,INCX,BETA,Y,INCY)
-			 y := alpha*A*x + beta*y (or A' if TRANS='T')*/
-			m = n - k;
-			Ak = A + (ptrdiff_t) n * k + k;
-			if (j) {
-				q = m; /* total number of rows to split between threads */
-				rt = q / nt;
-				if (rt * nt < q)
-					rt++; /* rows per thread */
-				nth = nt;
-				while (nth > 1 && (nth - 1) * rt > q)
-					nth--; /* reduce number of threads if some empty */
-				kb[0] = k; /* starting row */
-				for (i = 0; i < nth - 1; i++) {
-					mb[i] = rt;
-					kb[i + 1] = kb[i] + rt;
-				}
-				mb[nth - 1] = q - (nth - 1) * rt;
-#ifdef SUPPORT_OPENMP
-#pragma omp parallel private(i) num_threads(nth)
-#endif
-				{ /* start of parallel section */
-#ifdef SUPPORT_OPENMP
-#pragma omp for
-#endif
-					for (i = 0; i < nth; i++) {
-						/* Only 10th argument changed on exit... */
-						F77_CALL(dgemv)(&nottrans, mb + i, &j, &dmone,
-								A + jb * (ptrdiff_t) n + kb[i], &n, F + j, &pb,
-								&done, A + (ptrdiff_t) n * k + kb[i], &one);
-						//F77_CALL(dgemv)(&nottrans, &m, &j,&dmone,A+jb*n+k,&n,F+j,&pb,&done,Ak, &one);
-					}
-				}
-			}
-			/* now compute the Householder transform for A[,k], by calling
-			 dlarfg (N, ALPHA, X, INCX, TAU), N is housholder dim */
-			xx = *Ak; /* A[k,k] on entry and transformed on exit */
-			Ak++; /* on exit all but first element of v will be in Ak, v(1) = 1 */
-			F77_CALL(dlarfg)(&m, &xx, Ak, &one, tau + k);
-			Ak--;
-			*Ak = 1.0; /* for now, have Ak point to whole of v */
-			/* F[j+1:pb-1,j] = tau[k] * A[k:n-1,k+1:p-1]'v */
+  tol = pow(DOUBLE_EPS,.8);
+  mb = (int *)CALLOC((size_t) nt,sizeof(int));
+  kb = (int *)CALLOC((size_t) nt,sizeof(int));  
+  for (p0=piv,i=0;i<p;i++,p0++) *p0 = i; /* initialize pivot index */
+  work = (double *)CALLOC((size_t) nb,sizeof(double));
+  /* create column norm vectors */
+  cn =(double *)CALLOC((size_t) p,sizeof(double)); /* version for downdating */
+  icn =(double *)CALLOC((size_t) p,sizeof(double)); /* inital for judging cancellation error */
+  for (a0=A,i=0;i<p;i++) { /* cn[i]=icn[i] = || A[:,i] ||^2 */
+    for (x=0.0,a1 = a0 + n;a0<a1;a0++) x += *a0 * *a0;
+    cn[i] = icn[i] = x;   
+  }
+  if (p<nb) nb = p;
+  nb0 = nb; /* target block size nb */  
+  jb=0; /* start column of current block */
+  pb = p; /* columns left to process */
+  F = (double *)CALLOC((size_t) p * nb0,sizeof(double));
+  while (jb < p) {
+    nb = p-jb;if (nb>nb0) nb = nb0;/* attempted block size */
+    for (a0=F,a1=F+nb*pb;a0<a1;a0++) *a0 = 0.0; /* F[1:pb,1:nb] = 0 - i.e. clear F */
+    for (j=0;j<nb;j++) { /* loop through cols of this block */
+      k = jb + j; /* index of current column of A to process */
+      a0 = cn + k;x = *a0;q=k;a0++;
+      for (i=k+1;i<p;i++,a0++) if (*a0>x) { x = *a0;q=i; } /* find pivot col q */
+      if (q!=k) { /* then pivot */
+        i = piv[q];piv[q]=piv[k];piv[k] = i;
+        x = cn[q];cn[q]=cn[k];cn[k] = x;
+        x = icn[q];icn[q]=icn[k];icn[k] = x;
+        Aq = A + q * (ptrdiff_t) n;Ak = A + k * (ptrdiff_t) n;a1 = Aq + n;
+        for (;Aq<a1;Aq++,Ak++) { x = *Aq; *Aq = *Ak; *Ak = x;} /* A[:,k] <-> A[:,q] */
+        Aq = F + q - jb;Ak = F + j;a1 = F + nb * (ptrdiff_t) pb;
+        for (;Aq<a1;Aq+=pb,Ak+=pb) { x = *Aq; *Aq = *Ak; *Ak = x;} /* F[q-jb,:] <-> F[j,:] */        
+      }
+      /* update the pivot column: A[k:n-1,k] -= A[k:n-1,jb:k-1]F[j,0:j-1]' using
+         BLAS call to DGEMV(TRANS,M,N,ALPHA,A,LDA,X,INCX,BETA,Y,INCY)
+                    y := alpha*A*x + beta*y (or A' if TRANS='T')*/
+      m = n-k;Ak = A + (ptrdiff_t)n * k + k;
+      if (j) {
+        q = m ; /* total number of rows to split between threads */
+        rt = q/nt;if (rt*nt < q) rt++; /* rows per thread */
+        nth = nt; while (nth>1&&(nth-1)*rt>q) nth--; /* reduce number of threads if some empty */
+        kb[0] = k; /* starting row */
+        for (i=0;i<nth-1;i++) { mb[i] = rt;kb[i+1]=kb[i]+rt;}
+        mb[nth-1]=q-(nth-1)*rt;
+        #ifdef SUPPORT_OPENMP
+        #pragma omp parallel private(i) num_threads(nth)
+        #endif 
+        { /* start of parallel section */
+          #ifdef SUPPORT_OPENMP
+          #pragma omp for
+          #endif
+          for (i=0;i<nth;i++) {
+	    /* Only 10th argument changed on exit... */ 
+            F77_CALL(dgemv)(&nottrans, mb+i, &j,&dmone,A+jb*(ptrdiff_t)n+kb[i],&n,F+j,&pb,&done,
+	                    A + (ptrdiff_t)n*k + kb[i], &one);
+            //F77_CALL(dgemv)(&nottrans, &m, &j,&dmone,A+jb*n+k,&n,F+j,&pb,&done,Ak, &one);
+          }
+        }
+      }
+      /* now compute the Householder transform for A[,k], by calling 
+         dlarfg (N, ALPHA, X, INCX, TAU), N is housholder dim */
+      xx = *Ak; /* A[k,k] on entry and transformed on exit */
+      Ak++; /* on exit all but first element of v will be in Ak, v(1) = 1 */
+      F77_CALL(dlarfg)(&m,&xx,Ak,&one,tau+k);
+      Ak--;*Ak = 1.0; /* for now, have Ak point to whole of v */
+      /* F[j+1:pb-1,j] = tau[k] * A[k:n-1,k+1:p-1]'v */ 
+      
+      if (k<p-1) { /* up to O(np) step - most expensive after block */
+        // i=p-k-1;
+        q = p - k - 1 ; /* total number of rows to split between threads */
+        rt = q/nt;if (rt*nt < q) rt++; /* rows per thread */
+        nth = nt; while (nth>1&&(nth-1)*rt>q) nth--; /* reduce number of threads if some empty */
+        kb[0] = j+1;
+        for (i=0;i<nth-1;i++) { mb[i] = rt;kb[i+1]=kb[i]+rt;}
+        mb[nth-1]=q-(nth-1)*rt;
+	//  #ifdef SUPPORT_OPENMP
+        //#pragma omp parallel private(i) num_threads(nth)
+        //#endif 
+        { /* start of parallel section */
+          #ifdef SUPPORT_OPENMP
+          #pragma omp parallel for private(i) num_threads(nth)
+          #endif
+          for (i=0;i<nth;i++) {
+            //#pragma flush(trans,m,mb,tau,k,A,kb,jb,n,Ak,one,dzero,F,pb)
+	  F77_CALL(dgemv)(&trans, &m, mb+i,tau+k,A+(kb[i]+jb) * (ptrdiff_t) n+k,&n,
+                          Ak,&one,&dzero,F+kb[i]+(ptrdiff_t)j*pb, &one);
+          }
+          //F77_CALL(dgemv)(&trans, &m, &i,tau+k,A+(k+1)*n+k,&n,Ak,&one,&dzero,F+j+1+j*pb, &one);
+        } /* end of parallel section */
+      } 
+      /* F[0:pb-1,j] -= tau[k] F[0:pb-1,0:j-1] A[k:n-1,jb:k-1]'v */
+      if (j>0) {
+        q = j ; /* total number of rows to split between threads */
+        rt = q/nt;if (rt*nt < q) rt++; /* rows per thread */
+        nth = nt; while (nth>1&&(nth-1)*rt>q) nth--; /* reduce number of threads if some empty */
+        kb[0] = jb; /* starting row */
+        for (i=0;i<nth-1;i++) { mb[i] = rt;kb[i+1]=kb[i]+rt;}
+        mb[nth-1]=q-(nth-1)*rt;
+        #ifdef SUPPORT_OPENMP
+        #pragma omp parallel private(i) num_threads(nth)
+        #endif 
+        { /* start of parallel section */
+          #ifdef SUPPORT_OPENMP
+          #pragma omp for
+          #endif
+          for (i=0;i<nth;i++) {
+  	    F77_CALL(dgemv)(&trans, &m, mb+i,&dmone,A+kb[i]* (ptrdiff_t)n+k,&n,Ak,&one,&dzero,work+kb[i]-jb, &one);
+          // F77_CALL(dgemv)(&trans, &m, &j,&dmone,A+jb*n+k,&n,Ak,&one,&dzero,work, &one);
+          }
+        }
+        q = pb ; /* total number of rows to split between threads */
+        rt = q/nt;if (rt*nt < q) rt++; /* rows per thread */
+        nth = nt; while (nth>1&&(nth-1)*rt>q) nth--; /* reduce number of threads if some empty */
+        kb[0] = 0; /* starting row */
+        for (i=0;i<nth-1;i++) { mb[i] = rt;kb[i+1]=kb[i]+rt;}
+        mb[nth-1]=q-(nth-1)*rt;
+        for (i=0;i<nth;i++) { 
+	  F77_CALL(dgemv)(&nottrans, mb+i, &j,tau+k,F+kb[i],&pb,work,&one,&done,F+(ptrdiff_t)j*pb+kb[i], &one);
+	  // F77_CALL(dgemv)(&nottrans, &pb, &j,tau+k,F,&pb,work,&one,&done,F+j*pb, &one);
+        }
+      }
+      /* update pivot row A[k,k+1:p-1] -= A[k,jb:k]F(j+1:pb-1,1:j)' */
+      if (k<p-1) {
+        q = pb-j-1 ; /* total number of cols to split between threads */
+        rt = q/nt;if (rt*nt < q) rt++; /* colss per thread */
+        nth = nt; while (nth>1&&(nth-1)*rt>q) nth--; /* reduce number of threads if some empty */
+        kb[0] = j+1; /* starting col in F, and jb to this to get start in A */
+        for (i=0;i<nth-1;i++) { mb[i] = rt;kb[i+1]=kb[i]+rt;}
+        mb[nth-1]=q-(nth-1)*rt;
+        q=j+1; 
+        #ifdef SUPPORT_OPENMP
+        #pragma omp parallel private(i) num_threads(nth)
+        #endif 
+        { /* start of parallel section */
+          #ifdef SUPPORT_OPENMP
+          #pragma omp for
+          #endif
+          for (i=0;i<nth;i++) {
+	    F77_CALL(dgemv)(&nottrans, mb+i, &q,&dmone,F+kb[i],&pb,A+(ptrdiff_t)jb*n+k,
+	                    &n,&done,A+(kb[i]+jb)*(ptrdiff_t)n+k, &n); 
+          }
+        }
+        //m=pb-j-1;i=j+1;
+        //F77_CALL(dgemv)(&nottrans, &m, &i,&dmone,F+j+1,&pb,A + jb * n + k,&n,&done,Ak+n, &n);
+      }
+      *Ak = xx; /* restore A[k,k] */
+      /* Now down date the column norms */
+      ok_norm = 1;
+      if (k < p-1) {
+        Ak += n;
+        a0 = cn + k + 1;a1=cn + p;Aq = icn + k + 1;
+        for (;a0<a1;a0++,Aq++,Ak+=n) { 
+          *a0 -= *Ak * *Ak;
+          if (*a0<*Aq*tol) ok_norm = 0; /* cancellation error problem in downdate */ 
+        }  
+      } /* down dates complete */
+      if (!ok_norm) { 
+        j++;
+        nb = j;
+        break; /* a column norm has suffered serious cancellation error. Need to break out and recompute */
+      }
+    } /* for j */
+    j--; /* make compatible with current k */
 
-			if (k < p - 1) { /* up to O(np) step - most expensive after block */
-				// i=p-k-1;
-				q = p - k - 1; /* total number of rows to split between threads */
-				rt = q / nt;
-				if (rt * nt < q)
-					rt++; /* rows per thread */
-				nth = nt;
-				while (nth > 1 && (nth - 1) * rt > q)
-					nth--; /* reduce number of threads if some empty */
-				kb[0] = j + 1;
-				for (i = 0; i < nth - 1; i++) {
-					mb[i] = rt;
-					kb[i + 1] = kb[i] + rt;
-				}
-				mb[nth - 1] = q - (nth - 1) * rt;
-				//  #ifdef SUPPORT_OPENMP
-				//#pragma omp parallel private(i) num_threads(nth)
-				//#endif
-				{ /* start of parallel section */
-#ifdef SUPPORT_OPENMP
-#pragma omp parallel for private(i) num_threads(nth)
-#endif
-					for (i = 0; i < nth; i++) {
-						//#pragma flush(trans,m,mb,tau,k,A,kb,jb,n,Ak,one,dzero,F,pb)
-						F77_CALL(dgemv)(&trans, &m, mb + i, tau + k,
-								A + (kb[i] + jb) * (ptrdiff_t) n + k, &n, Ak,
-								&one, &dzero, F + kb[i] + (ptrdiff_t) j * pb,
-								&one);
-					}
-					//F77_CALL(dgemv)(&trans, &m, &i,tau+k,A+(k+1)*n+k,&n,Ak,&one,&dzero,F+j+1+j*pb, &one);
-				} /* end of parallel section */
-			}
-			/* F[0:pb-1,j] -= tau[k] F[0:pb-1,0:j-1] A[k:n-1,jb:k-1]'v */
-			if (j > 0) {
-				q = j; /* total number of rows to split between threads */
-				rt = q / nt;
-				if (rt * nt < q)
-					rt++; /* rows per thread */
-				nth = nt;
-				while (nth > 1 && (nth - 1) * rt > q)
-					nth--; /* reduce number of threads if some empty */
-				kb[0] = jb; /* starting row */
-				for (i = 0; i < nth - 1; i++) {
-					mb[i] = rt;
-					kb[i + 1] = kb[i] + rt;
-				}
-				mb[nth - 1] = q - (nth - 1) * rt;
-#ifdef SUPPORT_OPENMP
-#pragma omp parallel private(i) num_threads(nth)
-#endif
-				{ /* start of parallel section */
-#ifdef SUPPORT_OPENMP
-#pragma omp for
-#endif
-					for (i = 0; i < nth; i++) {
-						F77_CALL(dgemv)(&trans, &m, mb + i, &dmone,
-								A + kb[i] * (ptrdiff_t) n + k, &n, Ak, &one,
-								&dzero, work + kb[i] - jb, &one);
-						// F77_CALL(dgemv)(&trans, &m, &j,&dmone,A+jb*n+k,&n,Ak,&one,&dzero,work, &one);
-					}
-				}
-				q = pb; /* total number of rows to split between threads */
-				rt = q / nt;
-				if (rt * nt < q)
-					rt++; /* rows per thread */
-				nth = nt;
-				while (nth > 1 && (nth - 1) * rt > q)
-					nth--; /* reduce number of threads if some empty */
-				kb[0] = 0; /* starting row */
-				for (i = 0; i < nth - 1; i++) {
-					mb[i] = rt;
-					kb[i + 1] = kb[i] + rt;
-				}
-				mb[nth - 1] = q - (nth - 1) * rt;
-				for (i = 0; i < nth; i++) {
-					F77_CALL(dgemv)(&nottrans, mb + i, &j, tau + k, F + kb[i],
-							&pb, work, &one, &done,
-							F + (ptrdiff_t) j * pb + kb[i], &one);
-					// F77_CALL(dgemv)(&nottrans, &pb, &j,tau+k,F,&pb,work,&one,&done,F+j*pb, &one);
-				}
-			}
-			/* update pivot row A[k,k+1:p-1] -= A[k,jb:k]F(j+1:pb-1,1:j)' */
-			if (k < p - 1) {
-				q = pb - j - 1; /* total number of cols to split between threads */
-				rt = q / nt;
-				if (rt * nt < q)
-					rt++; /* colss per thread */
-				nth = nt;
-				while (nth > 1 && (nth - 1) * rt > q)
-					nth--; /* reduce number of threads if some empty */
-				kb[0] = j + 1; /* starting col in F, and jb to this to get start in A */
-				for (i = 0; i < nth - 1; i++) {
-					mb[i] = rt;
-					kb[i + 1] = kb[i] + rt;
-				}
-				mb[nth - 1] = q - (nth - 1) * rt;
-				q = j + 1;
-#ifdef SUPPORT_OPENMP
-#pragma omp parallel private(i) num_threads(nth)
-#endif
-				{ /* start of parallel section */
-#ifdef SUPPORT_OPENMP
-#pragma omp for
-#endif
-					for (i = 0; i < nth; i++) {
-						F77_CALL(dgemv)(&nottrans, mb + i, &q, &dmone,
-								F + kb[i], &pb, A + (ptrdiff_t) jb * n + k, &n,
-								&done, A + (kb[i] + jb) * (ptrdiff_t) n + k,
-								&n);
-					}
-				}
-				//m=pb-j-1;i=j+1;
-				//F77_CALL(dgemv)(&nottrans, &m, &i,&dmone,F+j+1,&pb,A + jb * n + k,&n,&done,Ak+n, &n);
-			}
-			*Ak = xx; /* restore A[k,k] */
-			/* Now down date the column norms */
-			ok_norm = 1;
-			if (k < p - 1) {
-				Ak += n;
-				a0 = cn + k + 1;
-				a1 = cn + p;
-				Aq = icn + k + 1;
-				for (; a0 < a1; a0++, Aq++, Ak += n) {
-					*a0 -= *Ak * *Ak;
-					if (*a0 < *Aq * tol)
-						ok_norm = 0; /* cancellation error problem in downdate */
-				}
-			} /* down dates complete */
-			if (!ok_norm) {
-				j++;
-				nb = j;
-				break; /* a column norm has suffered serious cancellation error. Need to break out and recompute */
-			}
-		} /* for j */
-		j--; /* make compatible with current k */
+    /* now the block update - about half the work is here*/    
+    if (k<p-1) {
+      /* A[k+1:n,k+1:p] -= A[k+1:n,jb:k]F[j+1:pb,0:nb-1]'
+         dgemm (TRANSA, TRANSB, M, N, K, ALPHA, A, LDA, B, LDB, BETA, C, LDC)*/ 
+      m = n - k - 1 ;
+      rt = m/nt;if (rt*nt < m) rt++; /* rows per thread */
+      nth = nt; while (nth>1&&(nth-1)*rt>m) nth--; /* reduce number of threads if some empty */
+      kb[0] = k+1;
+      for (i=0;i<nth-1;i++) { mb[i] = rt;kb[i+1]=kb[i]+rt;}
+      mb[nth-1]=m-(nth-1)*rt;
+      rt = p - k - 1;  
+      //Rprintf("nth = %d  nt = %d\n",nth,nt);   
+      #ifdef SUPPORT_OPENMP
+      #pragma omp parallel private(i,Ak,Aq) num_threads(nth)
+      #endif 
+      { /* start of parallel section */
+        #ifdef SUPPORT_OPENMP
+        #pragma omp for
+        #endif
+        for (i=0;i<nth;i++) {
+          Ak = A + (k+1)*(ptrdiff_t) n + kb[i];Aq = A + jb * (ptrdiff_t) n + kb[i];
+          /* Argument 12 changed on exit... */
+          F77_CALL(dgemm)(&nottrans,&trans,mb+i,&rt,&nb,&dmone,Aq,&n,F+j+1,&pb,&done,Ak,&n);
+          // Ak = A + (k+1)*n + k + 1;Aq = A + jb * n + k + 1;
+          // F77_CALL(dgemm)(&nottrans,&trans,&m,&rt,&nb,&dmone,Aq,&n,F+j+1,&pb,&done,Ak,&n);
+        }
+      } /* end of parallel section */
+    }
 
-		/* now the block update - about half the work is here*/
-		if (k < p - 1) {
-			/* A[k+1:n,k+1:p] -= A[k+1:n,jb:k]F[j+1:pb,0:nb-1]'
-			 dgemm (TRANSA, TRANSB, M, N, K, ALPHA, A, LDA, B, LDB, BETA, C, LDC)*/
-			m = n - k - 1;
-			rt = m / nt;
-			if (rt * nt < m)
-				rt++; /* rows per thread */
-			nth = nt;
-			while (nth > 1 && (nth - 1) * rt > m)
-				nth--; /* reduce number of threads if some empty */
-			kb[0] = k + 1;
-			for (i = 0; i < nth - 1; i++) {
-				mb[i] = rt;
-				kb[i + 1] = kb[i] + rt;
-			}
-			mb[nth - 1] = m - (nth - 1) * rt;
-			rt = p - k - 1;
-			//Rprintf("nth = %d  nt = %d\n",nth,nt);
-#ifdef SUPPORT_OPENMP
-#pragma omp parallel private(i,Ak,Aq) num_threads(nth)
-#endif
-			{ /* start of parallel section */
-#ifdef SUPPORT_OPENMP
-#pragma omp for
-#endif
-				for (i = 0; i < nth; i++) {
-					Ak = A + (k + 1) * (ptrdiff_t) n + kb[i];
-					Aq = A + jb * (ptrdiff_t) n + kb[i];
-					/* Argument 12 changed on exit... */
-					F77_CALL(dgemm)(&nottrans, &trans, mb + i, &rt, &nb, &dmone,
-							Aq, &n, F + j + 1, &pb, &done, Ak, &n);
-					// Ak = A + (k+1)*n + k + 1;Aq = A + jb * n + k + 1;
-					// F77_CALL(dgemm)(&nottrans,&trans,&m,&rt,&nb,&dmone,Aq,&n,F+j+1,&pb,&done,Ak,&n);
-				}
-			} /* end of parallel section */
-		}
-
-		if (!ok_norm) { /* recompute any column norms that had cancelled badly */
-			for (i = k + 1; i < p; i++) {
-				if (cn[i] < icn[i] * tol) { /* do the recompute */
-					x = 0.0;
-					Ak = A + i * (ptrdiff_t) n;
-					Aq = Ak + n; // Aq += n; <-- this was old code: Aq not initialised!
-					Ak += k + 1;
-					for (; Ak < Aq; Ak++)
-						x += *Ak * *Ak;
-					cn[i] = icn[i] = x;
-				}
-			}
-		}
-		pb -= nb;
-		jb += nb;
-	} /* end while (jb<p) */
-	FREE(F);
-	FREE(mb);
-	FREE(kb);
-	FREE(cn);
-	FREE(icn);
-	FREE(work);
+    if (!ok_norm) { /* recompute any column norms that had cancelled badly */ 
+      for (i = k+1;i<p; i++) { 
+        if (cn[i]<icn[i]*tol) { /* do the recompute */
+          x=0.0; Ak = A + i * (ptrdiff_t)n; 
+          Aq = Ak + n; // Aq += n; <-- this was old code: Aq not initialised!
+          Ak += k+1;
+          for (;Ak<Aq;Ak++) x += *Ak * *Ak;
+          cn[i] = icn[i] = x;
+        } 
+      } 
+    }
+    pb -= nb;
+    jb += nb;
+  } /* end while (jb<p) */
+  FREE(F); FREE(mb); FREE(kb);
+  FREE(cn);
+  FREE(icn);
+  FREE(work);
 #ifdef OMP_REPORT
-	Rprintf("done\n");
+  Rprintf("done\n");
 #endif
-	return (p); /* NOTE: not really rank!! */
+  return(p); /* NOTE: not really rank!! */
 } /* bpqr */
 
 int mgcv_piqr(double *x,int n, int p, double *beta, int *piv, int nt) {
@@ -911,100 +819,82 @@ int mgcv_piqr(double *x,int n, int p, double *beta, int *piv, int nt) {
   }
   r = -1;
   nh = n; /* householder length */
+  
+  while (tau > 0) {
+    r++;
+    i=piv[r]; piv[r] = piv[k];piv[k] = i;
+    /* swap r with k O(n) */
+    xx = c[r];c[r] = c[k];c[k] = xx;
+    for (p0 = x + n * r, p1 = x + (ptrdiff_t)n * k,p2 = p0 + n;p0<p2;p0++,p1++) {
+          xx = *p0; *p0 = *p1; *p1 = xx;
+    }
+    /* now generate the householder reflector for column r O(n)*/
+    p0 = x + r * n + r; /* first element of column */
+    p1 = p0 + 1; /* remaining elements of column */
+    xx = *p0; /* contains first element of column to be worked on */
+    F77_CALL(dlarfg)(&nh,&xx,p1,&one,beta+r);
+    /* now xx contains first element of rotated column - i.e. leading 
+       diagonal element of R[r,r]. Elements of column r of x below the 
+       diagonal now contain elements of the housholder vector apart from 
+       the first, which is 1. So if v' = [1,x[(r+1):n,r]'] then 
+       H = I - beta[r]*v*v' */
 
-	while (tau > 0) {
-		r++;
-		i = piv[r];
-		piv[r] = piv[k];
-		piv[k] = i;
-		/* swap r with k O(n) */
-		xx = c[r];
-		c[r] = c[k];
-		c[k] = xx;
-		for (p0 = x + n * r, p1 = x + (ptrdiff_t) n * k, p2 = p0 + n; p0 < p2;
-				p0++, p1++) {
-			xx = *p0;
-			*p0 = *p1;
-			*p1 = xx;
-		}
-		/* now generate the householder reflector for column r O(n)*/
-		p0 = x + r * n + r; /* first element of column */
-		p1 = p0 + 1; /* remaining elements of column */
-		xx = *p0; /* contains first element of column to be worked on */
-		F77_CALL(dlarfg)(&nh, &xx, p1, &one, beta + r);
-		/* now xx contains first element of rotated column - i.e. leading
-		 diagonal element of R[r,r]. Elements of column r of x below the
-		 diagonal now contain elements of the housholder vector apart from
-		 the first, which is 1. So if v' = [1,x[(r+1):n,r]'] then
-		 H = I - beta[r]*v*v' */
+    /* next apply the rotation to the remaining columns of x O(np) */
+       
+    *p0 = 1.0; /* put 1 into leading diagonal element of x so that v = x[r:n,r] */
+    j=p-r-1;
+    
+    /* now distribute the j columns between nt threads */
+    if (j) {
+          cpt = j / nt; /* cols per thread */
+          if (cpt * nt < j) cpt++; 
+          nth = j/cpt; /* actual number of threads */
+          if (nth * cpt < j) nth++;
+          cpf = j - cpt * (nth-1); /* columns on final block */
+    } else nth=cpf=cpt=0;
 
-		/* next apply the rotation to the remaining columns of x O(np) */
-
-		*p0 = 1.0; /* put 1 into leading diagonal element of x so that v = x[r:n,r] */
-		j = p - r - 1;
-
-		/* now distribute the j columns between nt threads */
-		if (j) {
-			cpt = j / nt; /* cols per thread */
-			if (cpt * nt < j)
-				cpt++;
-			nth = j / cpt; /* actual number of threads */
-			if (nth * cpt < j)
-				nth++;
-			cpf = j - cpt * (nth - 1); /* columns on final block */
-		} else
-			nth = cpf = cpt = 0;
-
-		br = beta[r];
-		//#ifdef SUPPORT_OPENMP
-		//#pragma omp parallel private(i,j,p1,v,z,z1,zz,ii) num_threads(nt)
-		//#endif
-		{
-			j = cpt;
-			if (j) {
-#ifdef SUPPORT_OPENMP
-#pragma omp parallel for private(i,j,p1,v,z,z1,zz,ii) num_threads(nt)
-#endif
-				for (i = 0; i < nth; i++) {
-					if (i == nth - 1)
-						j = cpf;
-					else
-						j = cpt;
-					p1 = p0 + n + n * cpt * i;
-					z1 = p1 + nh;
-					for (ii = 0; ii < j; ii++, p1 += n, z1 += n) {
-						/* apply reflection I - beta v v' */
-						for (zz = 0.0, v = p0, z = p1; z < z1; z++, v++)
-							zz += *z * *v * br;
-						for (z = p1, v = p0; z < z1; z++, v++)
-							*z -= zz * *v;
-					}
-					/*F77_CALL(dlarfx)(&side, &nh, &j, p0, beta+r, p0 + n + n * cpt * i , &n , work + p * i);*/
-				}
-			} /* if (j) */
-		} /* end parallel */
-		nh--;
-		*p0 = xx; /* now restore leading diagonal element of R to x[r,r] */
-		/* update c, get new k... */
-		k = r + 1;
-		for (tau = 0.0, p0 += n, i = r + 1; i < p; i++, p0 += n) {
-			c[i] -= *p0 * *p0;
-			if (c[i] > tau) {
-				tau = c[i];
-				k = i;
-			}
-		}
-		if (r == n - 1)
-			tau = 0.0;
-
-	} /* end while (tau > 0) */
-
-	FREE(c);
-	FREE(work);
-#ifdef OMP_REPORT
-	Rprintf("done\n");
-#endif
-	return (r + 1);
+    br = beta[r];
+    //#ifdef SUPPORT_OPENMP
+    //#pragma omp parallel private(i,j,p1,v,z,z1,zz,ii) num_threads(nt)
+    //#endif
+    { j = cpt;
+      if (j) {        
+        #ifdef SUPPORT_OPENMP
+        #pragma omp parallel for private(i,j,p1,v,z,z1,zz,ii) num_threads(nt)
+        #endif
+        for (i=0;i<nth;i++) {
+	    if (i == nth-1) j = cpf; else j = cpt;
+            p1 = p0 + n + n * cpt *i; 
+            z1=p1+nh;
+            for (ii =0;ii<j;ii++,p1+=n,z1+=n) {
+            /* apply reflection I - beta v v' */ 
+            for (zz=0.0,v=p0,z=p1;z<z1;z++,v++) zz += *z * *v * br;
+            for (z=p1,v=p0;z<z1;z++,v++) *z -= zz * *v;
+	   }
+	   /*F77_CALL(dlarfx)(&side, &nh, &j, p0, beta+r, p0 + n + n * cpt * i , &n , work + p * i);*/
+        }
+      } /* if (j) */
+    } /* end parallel */ 
+    nh--;
+    *p0 = xx; /* now restore leading diagonal element of R to x[r,r] */
+    /* update c, get new k... */
+    k = r + 1;
+    for (tau=0.0,p0+=n,i=r+1;i<p;i++,p0+=n) { 
+          c[i] -= *p0 * *p0;
+          if (c[i]>tau) { 
+            tau = c[i];
+            k=i;
+          }
+     }
+     if (r==n-1) tau = 0.0;
+    
+    } /* end while (tau > 0) */
+  
+  FREE(c); FREE(work); 
+  #ifdef OMP_REPORT
+  Rprintf("done\n");
+  #endif
+  return(r+1);
 } /* mgcv_piqr */
 
 SEXP mgcv_Rpiqr(SEXP X, SEXP BETA,SEXP PIV,SEXP NT, SEXP NB) {
@@ -1034,239 +924,184 @@ SEXP mgcv_Rpiqr(SEXP X, SEXP BETA,SEXP PIV,SEXP NT, SEXP NB) {
 
 } /* mgcv_piqr */
 
-void mgcv_pmmult(double *A, double *B, double *C, int *bt, int *ct, int *r,
-		int *c, int *n, int *nt) {
-	/*
-	 Forms r by c product, A, of B and C, transposing each according to bt and ct.
-	 n is the common dimension of the two matrices, which are stored in R
-	 default column order form.
+void mgcv_pmmult(double *A,double *B,double *C,int *bt,int *ct,int *r,int *c,int *n,int *nt) {
+  /* 
+     Forms r by c product, A, of B and C, transposing each according to bt and ct.
+     n is the common dimension of the two matrices, which are stored in R 
+     default column order form.
+   
+     This version uses openMP parallelization. nt is number of threads to use. 
+     The strategy is rather simple, and this routine is really only useful when 
+     B and C have numbers of rows and columns somewhat higher than the number of 
+     threads. Assumes number of threads already set on entry and nt reset to 1
+     if no openMP support.
 
-	 This version uses openMP parallelization. nt is number of threads to use.
-	 The strategy is rather simple, and this routine is really only useful when
-	 B and C have numbers of rows and columns somewhat higher than the number of
-	 threads. Assumes number of threads already set on entry and nt reset to 1
-	 if no openMP support.
+     BLAS version A is c (result), B is a, C is b, bt is transa ct is transb 
+     r is m, c is n, n is k.
+     Does nothing if r,c or n <= zero. 
+  */
+  char transa='N',transb='N';
+  int lda,ldb,ldc,cpt,cpf,c1,i,nth;
+  double alpha=1.0,beta=0.0;
+  if (*r<=0||*c<=0||*n<=0) return;
+  #ifdef OMP_REPORT
+  Rprintf("mgcv_pmmult...");
+  #endif
+  if (B==C) { /* this is serial, unfortunately. note case must be caught as B can be re-ordered!  */
+    if (*bt&&(!*ct)&&(*r==*c)) { getXtX(A,B,n,r);return;} 
+    else if (*ct&&(!*bt)&&(*r==*c)) { getXXt(A,B,c,n);return;}
+  }
+  #ifndef SUPPORT_OPENMP
+  *nt = 1;
+  #endif
+  if (*nt == 1) {
+    mgcv_mmult(A,B,C,bt,ct,r,c,n); /* use single thread version */
+    return;
+  }
+  if (*bt) { /* so B is n by r */
+    transa = 'T';  
+    lda = *n;
+  } else  lda = *r; /* B is r by n */
 
-	 BLAS version A is c (result), B is a, C is b, bt is transa ct is transb
-	 r is m, c is n, n is k.
-	 Does nothing if r,c or n <= zero.
-	 */
-	char transa = 'N', transb = 'N';
-	int lda, ldb, ldc, cpt, cpf, c1, i, nth;
-	double alpha = 1.0, beta = 0.0;
-	if (*r <= 0 || *c <= 0 || *n <= 0)
-		return;
-#ifdef OMP_REPORT
-	Rprintf("mgcv_pmmult...");
-#endif
-	if (B == C) { /* this is serial, unfortunately. note case must be caught as B can be re-ordered!  */
-		if (*bt && (!*ct) && (*r == *c)) {
-			getXtX(A, B, n, r);
-			return;
-		} else if (*ct && (!*bt) && (*r == *c)) {
-			getXXt(A, B, c, n);
-			return;
-		}
-	}
-#ifndef SUPPORT_OPENMP
-	*nt = 1;
-#endif
-	if (*nt == 1) {
-		mgcv_mmult(A, B, C, bt, ct, r, c, n); /* use single thread version */
-		return;
-	}
-	if (*bt) { /* so B is n by r */
-		transa = 'T';
-		lda = *n;
-	} else
-		lda = *r; /* B is r by n */
+  if (*ct) { /* C is c by n */ 
+    transb = 'T';
+    ldb = *c;
+  } else ldb = *n; /* C is n by c */
 
-	if (*ct) { /* C is c by n */
-		transb = 'T';
-		ldb = *c;
-	} else
-		ldb = *n; /* C is n by c */
+  ldc = *r;
 
-	ldc = *r;
-
-	if (*ct) { /* have to split on B, which involves re-ordering */
-		if (*bt) { /* B'C': can split on columns of n by r matrix B, but (r by c) A then needs re-ordering */
-			cpt = *r / *nt; /* cols per thread */
-			if (cpt * *nt < *r)
-				cpt++;
-			nth = *r / cpt;
-			if (nth * cpt < *r)
-				nth++;
-			cpf = *r - cpt * (nth - 1); /* columns on final block */
-#ifdef SUPPORT_OPENMP
-#pragma omp parallel private(i,c1) num_threads(nth)
-#endif
-			{ /* open parallel section */
-				//c1 = cpt;
-#ifdef SUPPORT_OPENMP
-#pragma omp for
-#endif
-				for (i = 0; i < nth; i++) {
-					if (i == nth - 1)
-						c1 = cpf;
-					else
-						c1 = cpt;
-					/* note integer after each matrix is its leading dimension */
-					if (c1 > 0)
-						F77_CALL(dgemm)(&transa, &transb, &c1, c, n, &alpha,
-								B + i * (ptrdiff_t) cpt * *n, n, C, c, &beta,
-								A + i * (ptrdiff_t) cpt * *c, &c1);
-				}
-			} /* parallel section ends */
-			/* now re-order the r by c matrix A, which currently contains the sequential
-			 blocks corresponding to each cpt rows of A */
-			row_block_reorder(A, r, c, &cpt, bt); /* bt used here for 'reverse' as it contains a 1 */
-		} else { /* BC':worst case - have to re-order r by n mat B and then reverse re-ordering of B and A at end */
-			cpt = *r / *nt; /* cols per thread */
-			if (cpt * *nt < *r)
-				cpt++;
-			nth = *r / cpt;
-			if (nth * cpt < *r)
-				nth++;
-			cpf = *r - cpt * (nth - 1); /* columns on final block */
-			/* re-order cpt-row blocks of B into sequential cpt by n matrices (in B) */
-			row_block_reorder(B, r, n, &cpt, bt); /* bt contains a zero - forward mode here */
-#ifdef SUPPORT_OPENMP
-#pragma omp parallel private(i,c1) num_threads(nth)
-#endif
-			{ /* open parallel section */
-				//c1 = cpt;
-#ifdef SUPPORT_OPENMP
-#pragma omp for
-#endif
-				for (i = 0; i < nth; i++) {
-					if (i == nth - 1)
-						c1 = cpf;
-					else
-						c1 = cpt;
-					if (c1 > 0)
-						F77_CALL(dgemm)(&transa, &transb, &c1, c, n, &alpha,
-								B + i * (ptrdiff_t) cpt * *n, &c1, C, c, &beta,
-								A + i * (ptrdiff_t) cpt * *c, &c1);
-				}
-			} /* parallel ends */
-			/* now reverse the re-ordering */
-			row_block_reorder(B, r, n, &cpt, ct);
-			row_block_reorder(A, r, c, &cpt, ct);
-		}
-	} else { /* can split on columns of n by c matrix C, which avoids re-ordering */
-		cpt = *c / *nt; /* cols per thread */
-		if (cpt * *nt < *c)
-			cpt++;
-		nth = *c / cpt;
-		if (nth * cpt < *c)
-			nth++;
-		cpf = *c - cpt * (nth - 1); /* columns on final block */
-#ifdef SUPPORT_OPENMP
-#pragma omp parallel private(i,c1) num_threads(*nt)
-#endif
-		{ /* open parallel section */
-			//c1 = cpt;
-#ifdef SUPPORT_OPENMP
-#pragma omp for
-#endif
-			for (i = 0; i < nth; i++) {
-				if (i == nth - 1)
-					c1 = cpf;
-				else
-					c1 = cpt; /* how many columns in this block */
-				if (c1 > 0)
-					F77_CALL(dgemm)(&transa, &transb, r, &c1, n, &alpha, B,
-							&lda, C + i * (ptrdiff_t) *n * cpt, &ldb, &beta,
-							A + i * (ptrdiff_t) *r * cpt, &ldc);
-			}
-		} /* end parallel */
-	}
-#ifdef OMP_REPORT
-	Rprintf("done\n");
-#endif
+  if (*ct) { /* have to split on B, which involves re-ordering */
+    if (*bt) { /* B'C': can split on columns of n by r matrix B, but (r by c) A then needs re-ordering */
+      cpt = *r / *nt; /* cols per thread */
+      if (cpt * *nt < *r) cpt++; 
+      nth = *r/cpt;
+      if (nth * cpt < *r) nth++;
+      cpf = *r - cpt * (nth-1); /* columns on final block */
+      #ifdef SUPPORT_OPENMP
+      #pragma omp parallel private(i,c1) num_threads(nth)
+      #endif
+      { /* open parallel section */
+        //c1 = cpt;
+        #ifdef SUPPORT_OPENMP
+        #pragma omp for
+        #endif
+        for (i=0;i<nth;i++) {
+          if (i == nth-1) c1 = cpf; else c1 = cpt;
+          /* note integer after each matrix is its leading dimension */
+          if (c1>0) F77_CALL(dgemm)(&transa,&transb,&c1,c,n, &alpha,
+				    B + i * (ptrdiff_t) cpt * *n, n ,C, c,&beta, A + i * (ptrdiff_t) cpt * *c, &c1);
+        }
+      } /* parallel section ends */
+      /* now re-order the r by c matrix A, which currently contains the sequential
+         blocks corresponding to each cpt rows of A */
+      row_block_reorder(A,r,c,&cpt,bt); /* bt used here for 'reverse' as it contains a 1 */
+    } else { /* BC':worst case - have to re-order r by n mat B and then reverse re-ordering of B and A at end */
+      cpt = *r / *nt; /* cols per thread */
+      if (cpt * *nt < *r) cpt++; 
+      nth = *r/cpt;
+      if (nth * cpt < *r) nth++;
+      cpf = *r - cpt * (nth-1); /* columns on final block */
+      /* re-order cpt-row blocks of B into sequential cpt by n matrices (in B) */ 
+      row_block_reorder(B,r,n,&cpt,bt); /* bt contains a zero - forward mode here */
+      #ifdef SUPPORT_OPENMP
+      #pragma omp parallel private(i,c1) num_threads(nth)
+      #endif
+      { /* open parallel section */
+        //c1 = cpt;
+        #ifdef SUPPORT_OPENMP
+        #pragma omp for
+        #endif
+        for (i=0;i<nth;i++) {
+          if (i == nth-1) c1 = cpf;else c1=cpt;
+          if (c1>0) F77_CALL(dgemm)(&transa,&transb,&c1,c,n, &alpha,
+		B + i * (ptrdiff_t) cpt * *n, &c1,C,c,&beta, A + i * (ptrdiff_t) cpt * *c, &c1);
+        }
+      } /* parallel ends */
+      /* now reverse the re-ordering */
+      row_block_reorder(B,r,n,&cpt,ct);
+      row_block_reorder(A,r,c,&cpt,ct);
+    }
+  } else { /* can split on columns of n by c matrix C, which avoids re-ordering */
+    cpt = *c / *nt; /* cols per thread */
+    if (cpt * *nt < *c) cpt++;
+    nth = *c/cpt;
+    if (nth * cpt < *c) nth++;
+    cpf = *c - cpt * (nth-1); /* columns on final block */
+    #ifdef SUPPORT_OPENMP
+    #pragma omp parallel private(i,c1) num_threads(*nt)
+    #endif
+    { /* open parallel section */
+      //c1 = cpt;
+      #ifdef SUPPORT_OPENMP
+      #pragma omp for
+      #endif
+      for (i=0;i< nth;i++) {
+        if (i == nth-1) c1 = cpf;else c1=cpt; /* how many columns in this block */
+        if (c1>0) F77_CALL(dgemm)(&transa,&transb,r,&c1,n, &alpha,
+		B, &lda,C + i * (ptrdiff_t) *n * cpt, &ldb,&beta, A + i * (ptrdiff_t) *r * cpt, &ldc);
+      }
+    } /* end parallel */
+  }
+  #ifdef OMP_REPORT
+  Rprintf("done\n");
+  #endif
 } /* end mgcv_pmmult */
 
-void pcrossprod(double *B, double *A, int *R, int *C, int *nt, int *nb) {
-	/* B=A'A if t==0. A is R by C. nb^2 is the target number of elements in a block.
-	 nt is the number of threads to use. B is C by C.
-	 30/4 memorial edition
-	 */
-	int M, N, nf, nrf, kmax, kk, i, r, c, k, bn, an, cn;
-	ptrdiff_t as, bs, cs;
-	char uplo = 'U', trans = 'T', ntrans = 'N';
-	double alpha = 1.0, beta = 1.0;
-	M = ceil(((double) *C) / *nb);
-	N = ceil(((double) *R) / *nb);
-	if (M == 1) { /* perform single threaded crossprod */
-		beta = 0.0;
-		F77_CALL(dsyrk)(&uplo, &trans, C, R, &alpha, A, R, &beta, B, C);
-	} else {
-		nf = *C - (M - 1) * *nb; /* cols in last col block of A */
-		nrf = *R - (N - 1) * *nb; /* rows in last row block of A */
-		kmax = (M + 1) * M / 2; /* number of blocks in upper triangle */
-#ifdef SUPPORT_OPENMP
-#pragma omp parallel for private(kk,i,r,c,bn,bs,k,as,an,beta,cs,cn) num_threads(*nt)
-#endif
-		for (kk = 0; kk < kmax; kk++) { /* work through blocks on upper triangle */
-			i = kk;
-			r = 0;
-			while (i >= M - r) {
-				i -= M - r;
-				r++;
-			};
-			c = r + i; /* convert kk to row/col */
-			if (r == M - 1)
-				bn = nf;
-			else
-				bn = *nb; /* (row) B block size */
-			bs = r * (ptrdiff_t) *nb; /* (row) B block start */
-			if (c == r) { /* diagonal block */
-				for (k = 0; k < N; k++) { /* work through row blocks of A */
-					as = k * (ptrdiff_t) *nb; /* A row block start */
-					if (k == N - 1)
-						an = nrf;
-					else
-						an = *nb; /* A row block size */
-					/* uplo 'U' or 'L' for upper/lower tri. trans = 'T' for A'A.*/
-					if (k)
-						beta = 1.0;
-					else
-						beta = 0.0; /* multiplier for B block */
-					F77_CALL(dsyrk)(&uplo, &trans, &bn, /* cols of A block */
-					&an, /* rows of A block */
-					&alpha, A + as + (ptrdiff_t) *R * bs, /* start of A block */
-					R, /* R is physical number of rows in A */
-					&beta, B + bs + (ptrdiff_t) *C * bs, C);
-				}
-			} else {
-				cs = c * (ptrdiff_t) *nb; /* b col start */
-				if (c == M - 1)
-					cn = nf;
-				else
-					cn = *nb; /* b col block size */
-				for (k = 0; k < N; k++) { /* work through row blocks of A */
-					as = k * (ptrdiff_t) *nb; /* A row block start */
-					if (k == N - 1)
-						an = nrf;
-					else
-						an = *nb; /* A row block size */
-					/* uplo 'U' or 'L' for upper/lower tri. trans = 'T' for A'A.*/
-					if (k)
-						beta = 1.0;
-					else
-						beta = 0.0; /* multiplier for B block */
-					F77_CALL(dgemm)(&trans, &ntrans, &bn, &cn, &an, &alpha,
-							A + *R * bs + as, R, A + *R * cs + as, R, &beta,
-							B + bs + *C * cs, C);
-				}
-			}
-		}
-	}
-	/* fill in lower block */
-	for (r = 0; r < *C; r++)
-		for (c = 0; c < r; c++)
-			B[r + *C * c] = B[c + *C * r];
+void pcrossprod(double *B, double *A,int *R, int *C,int *nt,int *nb) {
+/* B=A'A if t==0. A is R by C. nb^2 is the target number of elements in a block. 
+   nt is the number of threads to use. B is C by C.
+   30/4 memorial edition 
+*/
+  int M,N,nf,nrf,kmax,kk,i,r,c,k,bn,an,cn; 
+  ptrdiff_t as,bs,cs;
+  char uplo = 'U',trans='T',ntrans='N'; 
+  double alpha=1.0,beta=1.0;
+  M = ceil(((double) *C)/ *nb);
+  N = ceil(((double) *R)/ *nb);
+  if (M==1) { /* perform single threaded crossprod */
+    beta = 0.0;
+    F77_CALL(dsyrk)(&uplo,&trans,C,R,&alpha,A,R,&beta,B,C);
+  } else {
+    nf = *C - (M-1) * *nb;  /* cols in last col block of A */
+    nrf = *R - (N-1) * *nb;  /* rows in last row block of A */
+    kmax = (M+1)*M/2; /* number of blocks in upper triangle */ 
+    #ifdef SUPPORT_OPENMP
+    #pragma omp parallel for private(kk,i,r,c,bn,bs,k,as,an,beta,cs,cn) num_threads(*nt)
+    #endif
+    for (kk=0;kk<kmax;kk++) { /* work through blocks on upper triangle */
+      i=kk;r=0;while (i >= M-r) { i -= M - r; r++;}; c = r + i; /* convert kk to row/col */
+      if (r==M-1) bn = nf; else bn = *nb; /* (row) B block size */
+      bs = r * (ptrdiff_t) *nb; /* (row) B block start */
+      if (c==r) { /* diagonal block */
+        for (k=0;k<N;k++) { /* work through row blocks of A */
+          as = k * (ptrdiff_t) *nb; /* A row block start */ 
+          if (k==N-1) an = nrf; else an = *nb; /* A row block size */ 
+          /* uplo 'U' or 'L' for upper/lower tri. trans = 'T' for A'A.*/
+          if (k) beta=1.0; else beta = 0.0; /* multiplier for B block */
+          F77_CALL(dsyrk)(&uplo,&trans,&bn, /* cols of A block */
+			&an, /* rows of A block */ 
+                        &alpha,A + as + (ptrdiff_t) *R * bs, /* start of A block */
+                        R, /* R is physical number of rows in A */
+                        &beta,B + bs + (ptrdiff_t) *C * bs,C);
+        }
+      } else {
+	cs = c * (ptrdiff_t) *nb; /* b col start */
+        if (c==M-1) cn = nf; else cn = *nb; /* b col block size */
+        for (k=0;k<N;k++) { /* work through row blocks of A */
+          as = k * (ptrdiff_t) *nb; /* A row block start */ 
+          if (k==N-1) an = nrf; else an = *nb; /* A row block size */ 
+          /* uplo 'U' or 'L' for upper/lower tri. trans = 'T' for A'A.*/
+          if (k) beta=1.0; else beta = 0.0; /* multiplier for B block */
+          F77_CALL(dgemm)(&trans,&ntrans,
+                          &bn,&cn,&an, 
+                          &alpha,A + *R * bs + as, 
+                          R,A + *R * cs + as,R,&beta, B + bs + *C * cs, C);
+        }
+      }
+    }
+  }
+  /* fill in lower block */
+  for (r=0; r < *C;r++) for (c=0;c < r;c++) B[r + *C * c] = B[c + *C * r];
 } /* pcrossprod */
 
 
@@ -1603,37 +1438,52 @@ matrix(um[[2]],q,q);er$v
   FREE(work);
 }
 
-void mgcv_td_qy(double *S, double *tau, int *m, int *n, double *B, int *left,
-		int *transpose)
-/* Multiplies m by n matrix B by orthogonal matrix returned from mgcv_tri_diag and stored in
- S, tau. B is overwritten with result.
 
- Note that this is a bit inefficient if really only a few rotations matter!
+void mgcv_td_qy(double *S,double *tau,int *m,int *n, double *B,int *left,int *transpose)
+/* Multiplies m by n matrix B by orthogonal matrix returned from mgcv_tri_diag and stored in 
+   S, tau. B is overwritten with result. 
+    
+   Note that this is a bit inefficient if really only a few rotations matter!
 
- Calls LAPACK routine dormtr
- */
-{
-	char trans = 'N', side = 'R', uplo = 'U';
-	int nq, lwork = -1, info;
-	double *work, work1;
-	if (*left) {
-		side = 'L';
-		nq = *m;
-	} else
-		nq = *n;
-	if (*transpose)
-		trans = 'T';
-	/* workspace query ... */
-	F77_CALL(dormtr)(&side, &uplo, &trans, m, n, S, &nq, tau, B, m, &work1,
-			&lwork, &info);
-	lwork = (int) floor(work1);
-	if (work1 - lwork > 0.5)
-		lwork++;
-	work = (double *) CALLOC((size_t) lwork, sizeof(double));
-	/* actual call ... */
-	F77_CALL(dormtr)(&side, &uplo, &trans, m, n, S, &nq, tau, B, m, work,
-			&lwork, &info);
-	FREE(work);
+   Calls LAPACK routine dormtr 
+*/
+{ char trans='N',side='R',uplo='U';
+  int nq,lwork=-1,info;
+  double *work,work1;
+  if (*left) { side = 'L';nq = *m;} else nq = *n;
+  if (*transpose) trans = 'T';
+  /* workspace query ... */
+  F77_CALL(dormtr)(&side,&uplo,&trans,m,n,S,&nq,tau,B,m,&work1,&lwork,&info);
+  lwork=(int)floor(work1);if (work1-lwork>0.5) lwork++;
+  work=(double *)CALLOC((size_t)lwork,sizeof(double));
+  /* actual call ... */
+  F77_CALL(dormtr)(&side,&uplo,&trans,m,n,S,&nq,tau,B,m,work,&lwork,&info);
+  FREE(work);
+}
+
+void tri_chol(double *ld,double *sd,int *n,int *info) {
+/* compute LDL' decomposition of n by n symm tridiagonal matrix
+   with leading diagonal ld and sub/sup diagonals sd. 
+   Returns D in ld and sub-diagonal of L in sd (leading diagonal 
+   of L is all ones). info is 0 for success, -k if kth argument illegal
+   and k<n if not +ve definite, k==n if positive semi-definite and could 
+   just complete.
+*/  
+  F77_CALL(dpttrf)(n,ld,sd,info); 
+}
+
+void band_chol(double *B,int *n,int *k,int *info) {
+/* k by n matrix B contains k non-zero diagonal of a +ve definite 2k-1 banded matrix
+   The leading diagonal is stored in the first row and is of length n.
+   Subsequent diagonal are zero padded at the end, to also be of length n. 
+   Note the unusual `by row' storage.
+   On exit the diagonals of the factor are returned in the same way.
+*/  
+  char uplo='L';
+  int kd;
+  kd = *k - 1;  
+  F77_CALL(dpbtrf)(&uplo,n,&kd,B,k,info);
+  // DPBTRF( UPLO, N, KD, AB, LDAB, INFO )
 }
 
 void mgcv_tri_diag(double *S,int *n,double *tau)
@@ -1707,238 +1557,211 @@ void mgcv_backsolve(double *R,int *r,int *c,double *B,double *C, int *bc,int *ri
   F77_CALL(dtrsm)(&side,&uplo,&transa, &diag,&m, &n, &alpha,R, r,C,&m);
 } /* mgcv_backsolve */
 
-void mgcv_pbsi(double *R, int *r, int *nt) {
-	/* parallel back substitution inversion of upper triangular matrix using nt threads
-	 i.e. Solve of R Ri = I for Ri. Idea is to work through columns of I
-	 exploiting fact that full solve is never needed. Results are stored
-	 in lower triangle of R and an r-dimensional array, and copied into R
-	 before exit (working back trough columns over-writing columns of R
-	 as we go is not an option without waiting for threads to return in
-	 right order - which can lead to blocking by slowest).
 
-	 This version avoids BLAS calls which have function call overheads.
-	 In single thread mode it is 2-3 times faster than a BLAS call to dtrsm.
-	 It uses a load balancing approach, splitting columns up to threads in advance,
-	 so that thread initialisation overheads are minimised. This is important,
-	 e.g. the alternative of sending each column to a separate thread removes
-	 almost all advantage of parallel computing, because of the thread initiation
-	 overheads.
+void mgcv_pbsi(double *R,int *r,int *nt) {
+/* parallel back substitution inversion of upper triangular matrix using nt threads
+   i.e. Solve of R Ri = I for Ri. Idea is to work through columns of I
+   exploiting fact that full solve is never needed. Results are stored
+   in lower triangle of R and an r-dimensional array, and copied into R 
+   before exit (working back trough columns over-writing columns of R
+   as we go is not an option without waiting for threads to return in 
+   right order - which can lead to blocking by slowest). 
 
-	 Only disadvantage of this approach is that all cores are assumed equal.
+   This version avoids BLAS calls which have function call overheads. 
+   In single thread mode it is 2-3 times faster than a BLAS call to dtrsm.
+   It uses a load balancing approach, splitting columns up to threads in advance,
+   so that thread initialisation overheads are minimised. This is important, 
+   e.g. the alternative of sending each column to a separate thread removes 
+   almost all advantage of parallel computing, because of the thread initiation 
+   overheads. 
 
-	 */
-	int i, j, k, r1, *a, b;
-	double x, *d, *dk, *z, *zz, *z1, *rr, *Rjj, *r2;
-#ifdef OMP_REPORT
-	Rprintf("mgcv_pbsi...");
-#endif
-	d = (double *) CALLOC((size_t) *r, sizeof(double));
-	if (*nt < 1)
-		*nt = 1;
-	if (*nt > *r)
-		*nt = *r; /* no point having more threads than columns */
-	/* now obtain block start columns, a. a[i] is start column of block i.  */
-	a = (int *) CALLOC((size_t) (*nt + 1), sizeof(int));
-	a[0] = 0;
-	a[*nt] = *r;
-	x = (double) *r;
-	x = x * x * x / *nt;
-	/* compute approximate optimal split... */
-	for (i = 1; i < *nt; i++)
-		a[i] = round(pow(x * i, 1 / 3.0));
-	for (i = *nt - 1; i > 0; i--) { /* don't allow zero width blocks */
-		if (a[i] >= a[i + 1])
-			a[i] = a[i + 1] - 1;
-	}
-	r1 = *r + 1;
-#ifdef SUPPORT_OPENMP
-#pragma omp parallel private(b,i,j,k,zz,z,z1,rr,Rjj,dk) num_threads(*nt)
-#endif
-	{ /* open parallel section */
-#ifdef SUPPORT_OPENMP
-#pragma omp for
-#endif
-		for (b = 0; b < *nt; b++) { /* b is thread/block index */
-			for (i = a[b]; i < a[b + 1]; i++) { /* i is column index */
-				k = *r - i - 1; /* column of R in which to store result */
-				Rjj = rr = R + *r * (ptrdiff_t) i + i; /* Pointer to R[i,i] */
-				dk = d + k;
-				*dk = 1 / *rr; /* Ri[i,i] */
-				z = R + *r * (ptrdiff_t) k + k + 1; /* pointer to solution storage, below l.d. of R */
-				rr -= i; /* pointer moved back to start of R[,i] */
-				for (zz = z, z1 = z + i; zz < z1; zz++, rr++)
-					*zz = *rr * *dk; /* sum_0_{i-1} Rii * zz[i] */
-				for (j = i - 1; j >= 0; j--) {
-					Rjj -= r1;
-					dk = z + j;
-					*dk /= -*Rjj;
-					for (zz = z, z1 = z + j, rr = Rjj - j; zz < z1; zz++, rr++)
-						*zz += *rr * *dk;
-				}
-			} /* end of for i (columns for block b) */
-		} /* end of block, b, loop */
-	} /* end parallel section */
+   Only disadvantage of this approach is that all cores are assumed equal. 
 
-	/* now copy the solution back into original R */
-	/* different block structure is required here */
-	x = (double) *r;
-	x = x * x / *nt;
-	/* compute approximate optimal split... */
-	for (i = 1; i < *nt; i++)
-		a[i] = round(sqrt(x * i));
-	for (i = *nt - 1; i > 0; i--) { /* don't allow zero width blocks */
-		if (a[i] >= a[i + 1])
-			a[i] = a[i + 1] - 1;
-	}
+*/
+  int i,j,k,r1,*a,b;
+  double x,*d,*dk,*z,*zz,*z1,*rr,*Rjj,*r2;
+  #ifdef OMP_REPORT
+  Rprintf("mgcv_pbsi...");
+  #endif
+  d = (double *)CALLOC((size_t) *r,sizeof(double));
+  if (*nt < 1) *nt = 1;
+  if (*nt > *r) *nt = *r; /* no point having more threads than columns */
+  /* now obtain block start columns, a. a[i] is start column of block i.  */
+  a = (int *)CALLOC((size_t) (*nt+1),sizeof(int));
+  a[0] = 0;a[*nt] = *r;
+  x = (double) *r;x = x*x*x / *nt;
+  /* compute approximate optimal split... */
+  for (i=1;i < *nt;i++) a[i] = round(pow(x*i,1/3.0));
+  for (i=*nt-1;i>0;i--) { /* don't allow zero width blocks */
+    if (a[i]>=a[i+1]) a[i] = a[i+1]-1;
+  }
+  r1 = *r + 1;
+  #ifdef SUPPORT_OPENMP
+  #pragma omp parallel private(b,i,j,k,zz,z,z1,rr,Rjj,dk) num_threads(*nt)
+  #endif
+  { /* open parallel section */
+    #ifdef SUPPORT_OPENMP
+    #pragma omp for
+    #endif
+    for (b=0;b< *nt;b++) { /* b is thread/block index */
+      for (i=a[b];i<a[b+1];i++) { /* i is column index */	
+        k = *r - i -1; /* column of R in which to store result */
+        Rjj = rr = R + *r * (ptrdiff_t) i + i; /* Pointer to R[i,i] */
+        dk = d + k;
+        *dk = 1 / *rr; /* Ri[i,i] */
+        z = R + *r * (ptrdiff_t)k + k + 1; /* pointer to solution storage, below l.d. of R */
+        rr -= i; /* pointer moved back to start of R[,i] */
+        for (zz=z,z1 = z+i;zz<z1;zz++,rr++) *zz = *rr * *dk; /* sum_0_{i-1} Rii * zz[i] */
+        for (j=i-1;j>=0;j--) {
+          Rjj -= r1;
+          dk = z + j;
+          *dk /= - *Rjj;
+          for (zz=z,z1=z+j,rr=Rjj-j;zz<z1;zz++,rr++) *zz += *rr * *dk; 
+        }
+      } /* end of for i (columns for block b) */
+    } /* end of block, b, loop */
+  } /* end parallel section */
 
-#ifdef SUPPORT_OPENMP
+  /* now copy the solution back into original R */  
+  /* different block structure is required here */
+  x = (double) *r;x = x*x / *nt;
+  /* compute approximate optimal split... */
+  for (i=1;i < *nt;i++) a[i] = round(sqrt(x*i));
+  for (i=*nt-1;i>0;i--) { /* don't allow zero width blocks */
+    if (a[i]>=a[i+1]) a[i] = a[i+1]-1;
+  }
+
+  #ifdef SUPPORT_OPENMP
 #pragma omp parallel private(b,i,k,zz,rr,r2) num_threads(*nt)
-#endif
-	{ /* open parallel section */
-#ifdef SUPPORT_OPENMP
-#pragma omp for
-#endif
-		for (b = 0; b < *nt; b++) {
-			for (i = a[b]; i < a[b + 1]; i++) {
-				k = *r - i - 1;
-				zz = R + i * (ptrdiff_t) *r + i; /* leading diagonal element */
-				*zz = d[k];
-				zz -= i; /* shift back to start of column */
-				/* copy rest of column and wipe below diagonal storage */
-				for (rr = R + k * (ptrdiff_t) *r + k + 1, r2 = rr + i; rr < r2;
-						rr++, zz++) {
-					*zz = *rr;
-					*rr = 0.0;
-				}
-			}
-		}
-	} /* end parallel section */
-	FREE(d);
-	FREE(a);
-#ifdef OMP_REPORT
-	Rprintf("done\n");
-#endif
+  #endif 
+  { /* open parallel section */
+    #ifdef SUPPORT_OPENMP
+    #pragma omp for
+    #endif 
+    for (b=0;b<*nt;b++) {
+      for (i=a[b];i<a[b+1];i++) {
+        k = *r - i - 1;
+        zz = R + i * (ptrdiff_t) *r + i; /* leading diagonal element */
+        *zz = d[k];
+        zz -= i; /* shift back to start of column */
+        /* copy rest of column and wipe below diagonal storage */
+        for (rr = R + k * (ptrdiff_t)*r + k + 1, r2 = rr + i;rr<r2;rr++,zz++) {*zz = *rr;*rr = 0.0;}
+      }
+    } 
+  } /* end parallel section */
+  FREE(d);FREE(a);
+  #ifdef OMP_REPORT
+  Rprintf("done\n");
+  #endif
 } /* mgcv_pbsi */
 
+
+
 void mgcv_Rpbsi(SEXP A, SEXP NT) {
-	/* parallel back sub inversion of upper triangular matrix A
-	 designed for use with .call, but using mgcv_pbsi to do the work.
-	 */
-	int nt, r;
-	double *R;
-	nt = asInteger(NT);
-	r = nrows(A);
-	R = REAL(A);
-	mgcv_pbsi(R, &r, &nt);
+/* parallel back sub inversion of upper triangular matrix A 
+   designed for use with .call, but using mgcv_pbsi to do the work. 
+*/
+  int nt,r;
+  double *R;
+  nt = asInteger(NT);
+  r = nrows(A);
+  R = REAL(A);
+  mgcv_pbsi(R,&r,&nt);
 } /* mgcv_Rpbsi */
 
-void mgcv_PPt(double *A, double *R, int *r, int *nt) {
-	/* Computes A=RR', where R is r by r upper triangular.
-	 Computation uses *nt cores. */
-	double x, *ru, *rl, *r1, *ri, *rj, *Aji, *Aij;
-	int *a, i, j, b;
-#ifdef OMP_REPORT
-	Rprintf("mgcv_PPt...");
-#endif
-	if (*nt < 1)
-		*nt = 1;
-	if (*nt > *r)
-		*nt = *r; /* no point having more threads than columns */
-	a = (int *) CALLOC((size_t) (*nt + 1), sizeof(int));
-	a[0] = 0;
-	a[*nt] = *r;
-	/* It is worth transposing R into lower triangle */
-	x = (double) *r;
-	x = x * x / *nt;
-	/* compute approximate optimal split... */
-	for (i = 1; i < *nt; i++)
-		a[i] = round(*r - sqrt(x * (*nt - i)));
-	for (i = 1; i <= *nt; i++) { /* don't allow zero width blocks */
-		if (a[i] <= a[i - 1])
-			a[i] = a[i - 1] + 1;
-	}
 
-#ifdef SUPPORT_OPENMP
-#pragma omp parallel private(b,i,ru,rl,r1) num_threads(*nt)
-#endif
-	{ /* open parallel section */
-#ifdef SUPPORT_OPENMP
-#pragma omp for
-#endif
-		for (b = 0; b < *nt; b++) {
-			for (i = a[b]; i < a[b + 1]; i++) { /* work through rows */
-				ru = rl = R + i * (ptrdiff_t) *r + i; /* diagonal element R[i,i] */
-				ru += *r; /* move to R[i,i+1] */
-				/* now copy R[i,i:r] to R[i:r,i]... */
-				for (r1 = rl + *r - i, rl++; rl < r1; rl++, ru += *r)
-					*rl = *ru;
-			}
-		} /* end of for b block loop */
-	} /* end parallel section */
+void mgcv_PPt(double *A,double *R,int *r,int *nt) {
+/* Computes A=RR', where R is r by r upper triangular.
+   Computation uses *nt cores. */
+  double x,*ru,*rl,*r1,*ri,*rj,*Aji,*Aij;
+  int *a,i,j,b;
+  #ifdef OMP_REPORT
+  Rprintf("mgcv_PPt...");
+  #endif
+  if (*nt < 1) *nt = 1;
+  if (*nt > *r) *nt = *r; /* no point having more threads than columns */
+  a = (int *)CALLOC((size_t) (*nt+1),sizeof(int));
+  a[0] = 0;a[*nt] = *r;
+  /* It is worth transposing R into lower triangle */
+  x = (double) *r;x = x*x / *nt;
+  /* compute approximate optimal split... */
+  for (i=1;i < *nt;i++) a[i] = round(*r - sqrt(x*(*nt-i)));
+  for (i=1;i <= *nt;i++) { /* don't allow zero width blocks */
+    if (a[i]<=a[i-1]) a[i] = a[i-1]+1;
+  }
 
-	/* Now obtain approximate load balancing block starts for product... */
-	x = (double) *r;
-	x = x * x * x / *nt;
-	/* compute approximate optimal split... */
-	for (i = 1; i < *nt; i++)
-		a[i] = round(*r - pow(x * (*nt - i), 1 / 3.0));
-	for (i = 1; i <= *nt; i++) { /* don't allow zero width blocks */
-		if (a[i] <= a[i - 1])
-			a[i] = a[i - 1] + 1;
-	}
-#ifdef SUPPORT_OPENMP
-#pragma omp parallel private(x,b,i,j,ru,rl,r1,rj,ri,Aij,Aji) num_threads(*nt)
-#endif
-	{ /* start parallel block */
-#ifdef SUPPORT_OPENMP
-#pragma omp for
-#endif
-		for (b = 0; b < *nt; b++) {
-			for (i = a[b]; i < a[b + 1]; i++) { /* loop over this block's rows */
-				Aij = Aji = A + i * (ptrdiff_t) *r + i;
-				rl = ru = R + i * (ptrdiff_t) *r + i;
-				r1 = R + (i + 1) * (ptrdiff_t) *r; /* upper limit for ri */
-				for (j = i; j < *r; j++, Aij += *r, Aji++, ru++, rl += *r + 1) {
-					//rj = rl;// R + j * *r + j;
-					//ri = ru; // ri=R + i * *r + j;
-					//for (x=0.0,k=j;k<*r;k++,rj++,ri++) x += *rj * *ri;
-					for (x = 0.0, rj = rl, ri = ru; ri < r1; rj++, ri++)
-						x += *rj * *ri;
-					*Aij = *Aji = x;
-				}
-			}
-		} /* block loop end */
-	} /* end parallel block */
-	/* wipe lower triangle of input R */
-	x = (double) *r;
-	x = x * x / *nt;
-	/* compute approximate optimal split... */
-	for (i = 1; i < *nt; i++)
-		a[i] = round(*r - sqrt(x * (*nt - i)));
-	for (i = 1; i <= *nt; i++) { /* don't allow zero width blocks */
-		if (a[i] <= a[i - 1])
-			a[i] = a[i - 1] + 1;
-	}
-#ifdef SUPPORT_OPENMP
-#pragma omp parallel private(b,i,rl,r1) num_threads(*nt)
-#endif
-	{ /* start parallel block */
-#ifdef SUPPORT_OPENMP
-#pragma omp for
-#endif
-		for (b = 0; b < *nt; b++) {
-			for (i = a[b]; i < a[b + 1]; i++) { /* work through rows */
-				rl = R + i * (ptrdiff_t) *r + i; /* diagonal element R[i,i] */
-				/* now wipe sub diagonal elements...*/
-				for (r1 = rl + *r - i, rl++; rl < r1; rl++)
-					*rl = 0.0;
-			}
-		} /* end of for b block loop */
-	} /* end parallel block */
-	FREE(a);
-#ifdef OMP_REPORT
-	Rprintf("done\n");
-#endif
+  #ifdef SUPPORT_OPENMP
+  #pragma omp parallel private(b,i,ru,rl,r1) num_threads(*nt)
+  #endif
+  { /* open parallel section */
+    #ifdef SUPPORT_OPENMP
+    #pragma omp for
+    #endif 
+    for (b=0;b<*nt;b++) {
+      for (i=a[b];i<a[b+1];i++) { /* work through rows */
+        ru = rl = R + i * (ptrdiff_t)*r + i; /* diagonal element R[i,i] */
+        ru += *r; /* move to R[i,i+1] */
+        /* now copy R[i,i:r] to R[i:r,i]... */
+        for (r1=rl + *r - i,rl++;rl<r1;rl++,ru += *r) *rl = *ru;
+      }
+    } /* end of for b block loop */
+  } /* end parallel section */
+
+  /* Now obtain approximate load balancing block starts for product... */
+  x = (double) *r;x = x*x*x / *nt;
+  /* compute approximate optimal split... */
+  for (i=1;i < *nt;i++) a[i] = round(*r - pow(x*(*nt-i),1/3.0));
+  for (i=1;i <= *nt;i++) { /* don't allow zero width blocks */
+    if (a[i]<=a[i-1]) a[i] = a[i-1]+1;
+  }
+  #ifdef SUPPORT_OPENMP
+  #pragma omp parallel private(x,b,i,j,ru,rl,r1,rj,ri,Aij,Aji) num_threads(*nt)
+  #endif
+  { /* start parallel block */
+    #ifdef SUPPORT_OPENMP
+    #pragma omp for
+    #endif
+    for (b=0;b< *nt;b++) {
+      for (i=a[b];i<a[b+1];i++) { /* loop over this block's rows */
+        Aij = Aji = A + i * (ptrdiff_t)*r + i;
+        rl = ru =  R + i * (ptrdiff_t)*r + i;
+        r1 = R + (i+1) * (ptrdiff_t)*r; /* upper limit for ri */
+        for (j=i;j < *r;j++,Aij += *r,Aji++,ru++,rl+= *r + 1) {
+          //rj = rl;// R + j * *r + j;
+          //ri = ru; // ri=R + i * *r + j;
+          //for (x=0.0,k=j;k<*r;k++,rj++,ri++) x += *rj * *ri;
+          for (x=0.0,rj=rl,ri=ru;ri < r1;rj++,ri++) x += *rj * *ri;
+          *Aij = *Aji = x;  
+        }
+      }
+    } /* block loop end */
+  } /* end parallel block */
+  /* wipe lower triangle of input R */
+  x = (double) *r;x = x*x / *nt;
+  /* compute approximate optimal split... */
+  for (i=1;i < *nt;i++) a[i] = round(*r - sqrt(x*(*nt-i)));
+  for (i=1;i <= *nt;i++) { /* don't allow zero width blocks */
+    if (a[i]<=a[i-1]) a[i] = a[i-1]+1;
+  }
+  #ifdef SUPPORT_OPENMP
+  #pragma omp parallel private(b,i,rl,r1) num_threads(*nt)
+  #endif
+  { /* start parallel block */
+    #ifdef SUPPORT_OPENMP
+    #pragma omp for
+    #endif 
+    for (b=0;b<*nt;b++) {
+      for (i=a[b];i<a[b+1];i++) { /* work through rows */
+        rl = R + i * (ptrdiff_t)*r + i; /* diagonal element R[i,i] */
+        /* now wipe sub diagonal elements...*/
+        for (r1=rl + *r - i,rl++;rl<r1;rl++) *rl = 0.0;
+      }
+    } /* end of for b block loop */
+  } /* end parallel block */ 
+  FREE(a); 
+  #ifdef OMP_REPORT
+  Rprintf("done\n");
+  #endif
 } /* mgcv_PPt */
 
 void mgcv_RPPt(SEXP a,SEXP r, SEXP NT) {
@@ -2038,12 +1861,13 @@ SEXP mgcv_Rpforwardsolve(SEXP R, SEXP B,SEXP NT) {
   return(C);
 } /* mgcv_Rpforwardsolve */
 
-void row_block_reorder(double *x, int *r, int *c, int *nb, int *reverse) {
-	/* x contains an r by c matrix, which is to be split into k = ceil(r/nb)
-	 row-wise blocks each containing nb rows, except for the last.
 
-	 In forward mode, this splits the matrix blocks so they are stored one
-	 after another in x.
+void row_block_reorder(double *x,int *r,int *c,int *nb,int *reverse) {
+/* x contains an r by c matrix, which is to be split into k = ceil(r/nb)
+   row-wise blocks each containing nb rows, except for the last.
+  
+   In forward mode, this splits the matrix blocks so they are stored one 
+   after another in x.
 
    This routine re-orders these k submatrices, so that they occur one after 
    another in x. This is done largely in-situ, with the aid of 2 indexing
@@ -2215,128 +2039,114 @@ void mgcv_pqrqy0(double *b,double *a,double *tau,int *r,int *c,int *cb,int *tp,i
    tp=1 it contains a c by cb matrix on exit. Unused elments of b on entry assumed 0. 
    a and tau are the result of mgcv_pqr  
 
-	 This version matches mgcv_pqr0, which scales less well than current code.
-	 */
-	int i, j, k, l, left = 1, n, nb, nbf, nq, TRUE = 1, FALSE = 0;
-	double *x0, *x1, *Qb;
-#ifdef OMP_REPORT
-	Rprintf("mgcv_pqrqy0...");
-#endif
-	k = get_qpr_k(r, c, nt); /* number of blocks in use */
-	if (k == 1) { /* single block case */
-		if (*tp == 0) {/* re-arrange so b is a full matrix */
-			x0 = b + *r * *cb - 1; /* end of full b (target) */
-			x1 = b + *c * *cb - 1; /* end of used block (source) */
-			for (j = *cb; j > 0; j--) { /* work down columns */
-				/*for (i = *r;i > *c;i--,x0--) *x0 = 0.0;*//* clear unused */
-				x0 -= *r - *c; /* skip unused */
-				for (i = *c; i > 0; i--, x0--, x1--) {
-					*x0 = *x1; /* copy */
-					if (x0 != x1)
-						*x1 = 0.0; /* clear source */
-				}
-			}
-		} /* if (*tp) */
-		mgcv_qrqy(b, a, tau, r, cb, c, &left, tp);
-		if (*tp) { /* need to strip out the extra rows */
-			x1 = x0 = b;
-			for (i = 0; i < *cb; i++, x1 += *r - *c)
-				for (j = 0; j < *c; j++, x0++, x1++)
-					*x0 = *x1;
-		}
-		return;
-	}
+   This version matches mgcv_pqr0, which scales less well than current code. 
+*/
+  int i,j,k,l,left=1,n,nb,nbf,nq,TRUE=1,FALSE=0;
+  double *x0,*x1,*Qb;  
+  #ifdef OMP_REPORT
+  Rprintf("mgcv_pqrqy0...");
+  #endif
+  k = get_qpr_k(r,c,nt); /* number of blocks in use */
+  if (k==1) { /* single block case */ 
+    if (*tp == 0 ) {/* re-arrange so b is a full matrix */
+      x0 = b + *r * *cb -1; /* end of full b (target) */
+      x1 = b + *c * *cb -1; /* end of used block (source) */
+      for (j= *cb;j>0;j--) { /* work down columns */
+        /*for (i = *r;i > *c;i--,x0--) *x0 = 0.0;*/ /* clear unused */
+        x0 -= *r - *c; /* skip unused */
+        for (i = *c;i>0;i--,x0--,x1--) { 
+          *x0 = *x1; /* copy */
+          if (x0!=x1) *x1 = 0.0; /* clear source */
+        }
+      }
+    } /* if (*tp) */
+    mgcv_qrqy(b,a,tau,r,cb,c,&left,tp);
+    if (*tp) { /* need to strip out the extra rows */
+      x1 = x0 = b;
+      for (i=0;i < *cb;i++,x1 += *r - *c) 
+	for (j=0;j < *c;j++,x0++,x1++) *x0 = *x1; 
+    }
+    return;
+  }
+  
+  /* multi-block case starts here */
 
-	/* multi-block case starts here */
+  nb = (int)ceil(*r/(double)k); /* block size - in rows */
+  nbf = *r - (k-1)*nb; /* end block size */ 
+  Qb = (double *)CALLOC((size_t) (k * *c * *cb),sizeof(double));
+  nq = *c * k;
+  if (*tp) { /* Q'b */
+    /* first the component Q matrices are applied to the blocks of b */
+    if (*cb > 1) { /* matrix case - repacking needed */
+      row_block_reorder(b,r,cb,&nb,&FALSE);
+    }
+    #ifdef SUPPORT_OPENMP
+    #pragma omp parallel private(i,j,l,n,x1) num_threads(k)
+    #endif
+    { /* open parallel section */
+      #ifdef SUPPORT_OPENMP
+      #pragma omp for
+      #endif
+      for (i=0;i<k;i++) {
+        if (i == k-1) n = nbf; else n = nb; /* number of rows in this block */
+        x1 = b+ i * nb * *cb; /* start of current block of b */
+        mgcv_qrqy(x1,a + i * nb * *c,tau + i * *c,&n,cb,c,&left,tp);
+        /* extract the upper c by cb block into right part of Qb */
+        for (j = 0; j < *c;j++) for (l=0;l< *cb;l++) Qb[j + i * *c + nq * l] = x1[j + n * l];    
+      }
+    } /* end of parallel */      
+    /* Now multiply Qb by the combined Q' */
+    mgcv_qrqy(Qb,a + *r * *c,tau + k * *c,&nq,cb,c,&left,tp);
+    /* and finally copy the top c rows of Qb into b */
+    x0 = b; /* target */
+    x1 = Qb; /* source */
+    for (i=0;i<*cb;i++) { 
+      for (j=0;j<*c;j++,x0++,x1++) *x0 = *x1;
+      x1 += (k-1) * *c; /* skip rows of Qb */ 
+    }
+  } else {  /* Qb */
+    /* copy c by cb matrix at start of b into first c rows of Qb */
+    x0=Qb; /* target */
+    x1=b;
+    for (i=0;i<*cb;i++) {
+      for (j=0;j<*c;j++,x0++,x1++) {
+        *x0 = *x1;
+        *x1=0.0; /* erase or left in below */
+      }
+      x0 += (k-1) * *c; /* skip rows of Qb */ 
+    }
+    /* now apply the combined Q factor */
+    mgcv_qrqy(Qb,a + *r * *c,tau + k * *c,&nq,cb,c,&left,tp);
+    /* the blocks of Qb now have to be copied into separate blocks in b */
+    #ifdef SUPPORT_OPENMP
+    #pragma omp parallel private(i,j,l,n,x0,x1) num_threads(k)
+    #endif
+    { /* open parallel section */
+      #ifdef SUPPORT_OPENMP
+      #pragma omp for
+      #endif
+      for (i=0;i<k;i++) {
+        if (i == k-1) n = nbf; else n = nb; /* number of rows in this block */
+        x0 = b + nb * *cb * i; /* target block start */
+        x1 = Qb + i * *c; /* source row start */
+        for (j=0;j < *cb;j++) { /* across the cols */
+          for (l=0;l< *c;l++,x0++,x1++) *x0 = *x1;
+          x0 += n - *c; /* to start of next column */
+          x1 += nq - *c; /* ditto */ 
+        }
+        x1 = b+ i * nb * *cb; /* start of current block of b */
+        mgcv_qrqy(x1,a + i * nb * *c,tau + i * *c,&n,cb,c,&left,tp);
+      }
+    } /* end of parallel section */
+    /* now need to unscramble separate blocks back into b as regular matrix */
+    if (*cb>1) row_block_reorder(b,r,cb,&nb,&TRUE);
+  } 
+  #ifdef OMP_REPORT
+  Rprintf("done\n");
+  #endif
+  FREE(Qb);
+}  /* mgcv_pqrqy0 */
 
-	nb = (int) ceil(*r / (double) k); /* block size - in rows */
-	nbf = *r - (k - 1) * nb; /* end block size */
-	Qb = (double *) CALLOC((size_t) (k * *c * *cb), sizeof(double));
-	nq = *c * k;
-	if (*tp) { /* Q'b */
-		/* first the component Q matrices are applied to the blocks of b */
-		if (*cb > 1) { /* matrix case - repacking needed */
-			row_block_reorder(b, r, cb, &nb, &FALSE);
-		}
-#ifdef SUPPORT_OPENMP
-#pragma omp parallel private(i,j,l,n,x1) num_threads(k)
-#endif
-		{ /* open parallel section */
-#ifdef SUPPORT_OPENMP
-#pragma omp for
-#endif
-			for (i = 0; i < k; i++) {
-				if (i == k - 1)
-					n = nbf;
-				else
-					n = nb; /* number of rows in this block */
-				x1 = b + i * nb * *cb; /* start of current block of b */
-				mgcv_qrqy(x1, a + i * nb * *c, tau + i * *c, &n, cb, c, &left,
-						tp);
-				/* extract the upper c by cb block into right part of Qb */
-				for (j = 0; j < *c; j++)
-					for (l = 0; l < *cb; l++)
-						Qb[j + i * *c + nq * l] = x1[j + n * l];
-			}
-		} /* end of parallel */
-		/* Now multiply Qb by the combined Q' */
-		mgcv_qrqy(Qb, a + *r * *c, tau + k * *c, &nq, cb, c, &left, tp);
-		/* and finally copy the top c rows of Qb into b */
-		x0 = b; /* target */
-		x1 = Qb; /* source */
-		for (i = 0; i < *cb; i++) {
-			for (j = 0; j < *c; j++, x0++, x1++)
-				*x0 = *x1;
-			x1 += (k - 1) * *c; /* skip rows of Qb */
-		}
-	} else { /* Qb */
-		/* copy c by cb matrix at start of b into first c rows of Qb */
-		x0 = Qb; /* target */
-		x1 = b;
-		for (i = 0; i < *cb; i++) {
-			for (j = 0; j < *c; j++, x0++, x1++) {
-				*x0 = *x1;
-				*x1 = 0.0; /* erase or left in below */
-			}
-			x0 += (k - 1) * *c; /* skip rows of Qb */
-		}
-		/* now apply the combined Q factor */
-		mgcv_qrqy(Qb, a + *r * *c, tau + k * *c, &nq, cb, c, &left, tp);
-		/* the blocks of Qb now have to be copied into separate blocks in b */
-#ifdef SUPPORT_OPENMP
-#pragma omp parallel private(i,j,l,n,x0,x1) num_threads(k)
-#endif
-		{ /* open parallel section */
-#ifdef SUPPORT_OPENMP
-#pragma omp for
-#endif
-			for (i = 0; i < k; i++) {
-				if (i == k - 1)
-					n = nbf;
-				else
-					n = nb; /* number of rows in this block */
-				x0 = b + nb * *cb * i; /* target block start */
-				x1 = Qb + i * *c; /* source row start */
-				for (j = 0; j < *cb; j++) { /* across the cols */
-					for (l = 0; l < *c; l++, x0++, x1++)
-						*x0 = *x1;
-					x0 += n - *c; /* to start of next column */
-					x1 += nq - *c; /* ditto */
-				}
-				x1 = b + i * nb * *cb; /* start of current block of b */
-				mgcv_qrqy(x1, a + i * nb * *c, tau + i * *c, &n, cb, c, &left,
-						tp);
-			}
-		} /* end of parallel section */
-		/* now need to unscramble separate blocks back into b as regular matrix */
-		if (*cb > 1)
-			row_block_reorder(b, r, cb, &nb, &TRUE);
-	}
-#ifdef OMP_REPORT
-	Rprintf("done\n");
-#endif
-	FREE(Qb);
-} /* mgcv_pqrqy0 */
 
 void mgcv_pqrqy(double *b,double *a,double *tau,int *r,int *c,int *cb,int *tp,int *nt) {
 /* Applies factor Q of a QR factor computed by mgcv_pqr to b. 
@@ -2406,88 +2216,78 @@ void mgcv_pqrqy(double *b,double *a,double *tau,int *r,int *c,int *cb,int *tp,in
   return;
 }  /* mgcv_pqrqy */
 
-void mgcv_pqr(double *x, int *r, int *c, int *pivot, double *tau, int *nt) {
-	/* Function called from mgcv to request a multi-threaded pivoted QR decomposition.
-	 Basically a wrapper to call the actual code, allowing painless changing of the
-	 underlying technology.
+void mgcv_pqr(double *x,int *r, int *c,int *pivot, double *tau, int *nt) {
+/* Function called from mgcv to request a multi-threaded pivoted QR decomposition.
+   Basically a wrapper to call the actual code, allowing painless changing of the 
+   underlying technology.
 
-	 Currently Block Pivoted QR scales best from the codes available.
-	 Hard coded block size (30) is not ideal.
-	 */
-	//Rprintf("pqr %d ",*nt);
-	if (*nt == 1)
-		mgcv_qr(x, r, c, pivot, tau);
-	else { /* call bpqr */
-		/* int bpqr(double *A,int n,int p,double *tau,int *piv,int nb,int nt)*/
-		bpqr(x, *r, *c, tau, pivot, 30, *nt); /* 30 is hard coded block size here */
-	}
+   Currently Block Pivoted QR scales best from the codes available. 
+   Hard coded block size (30) is not ideal. 
+*/
+  //Rprintf("pqr %d ",*nt);
+  if (*nt==1) mgcv_qr(x,r,c,pivot,tau); else { /* call bpqr */
+    /* int bpqr(double *A,int n,int p,double *tau,int *piv,int nb,int nt)*/
+    bpqr(x,*r,*c,tau,pivot,30,*nt); /* 30 is hard coded block size here */ 
+  }
 } /* mgcv_pqr */
 
-void mgcv_pqr0(double *x, int *r, int *c, int *pivot, double *tau, int *nt) {
-	/* parallel qr decomposition using up to nt threads.
-	 * x is an r*c+nt*c^2 array. On entry first r*c entries is matrix to decompose.
-	 * pivot is a c vector and tau is a (nt+1)*c vector.
-	 On exit x, pivot and tau contain decompostion information in packed form
-	 for use by getRpqr and mgcv_pqrqy
-	 Routine first computes k, the optimal number of threads to use from 1 to nt.
 
-	 strategy is to split into row blocks, QR each and then combine the decompositions
-	 - good for n>>p, not so good otherwise.
+void mgcv_pqr0(double *x,int *r, int *c,int *pivot, double *tau, int *nt) {
+/* parallel qr decomposition using up to nt threads. 
+   * x is an r*c+nt*c^2 array. On entry first r*c entries is matrix to decompose.
+   * pivot is a c vector and tau is a (nt+1)*c vector.
+   On exit x, pivot and tau contain decompostion information in packed form
+   for use by getRpqr and mgcv_pqrqy
+   Routine first computes k, the optimal number of threads to use from 1 to nt.
 
-	 - this is old code, which is uniformly less efficient than replacement.
-	 */
+   strategy is to split into row blocks, QR each and then combine the decompositions
+   - good for n>>p, not so good otherwise. 
 
-	int i, j, k, l, *piv, nb, nbf, n, TRUE = 1, FALSE = 0, nr;
-	double *R, *R1, *xi;
-#ifdef OMP_REPORT
-	Rprintf("mgcv_pqr0...");
-#endif
-	k = get_qpr_k(r, c, nt);/* number of threads to use */
+   - this is old code, which is uniformly less efficient than replacement.
+*/
 
-	if (k == 1)
-		mgcv_qr(x, r, c, pivot, tau);
-	else { /* multi-threaded version */
-		nb = (int) ceil(*r / (double) k); /* block size */
-		nbf = *r - (k - 1) * nb; /* end block size */
-		/* need to re-arrange row blocks so that they can be split between qr calls */
-		row_block_reorder(x, r, c, &nb, &FALSE);
-		piv = (int *) CALLOC((size_t) (k * *c), sizeof(int));
-		R = x + *r * *c; /* pointer to combined unpivoted R matrix */
-		nr = *c * k; /* number of rows in R */
-#ifdef SUPPORT_OPENMP
-#pragma omp parallel private(i,j,l,n,xi,R1) num_threads(k)
-#endif
-		{ /* open parallel section */
-#ifdef SUPPORT_OPENMP
-#pragma omp for
-#endif
-			for (i = 0; i < k; i++) { /* QR the blocks */
-				if (i == k - 1)
-					n = nbf;
-				else
-					n = nb;
-				xi = x + nb * i * *c; /* current block */
-				mgcv_qr(xi, &n, c, piv + i * *c, tau + i * *c);
-				/* and copy the R factors, unpivoted into a new matrix */
-				R1 = (double *) CALLOC((size_t) (*c * *c), sizeof(double));
-				for (l = 0; l < *c; l++)
-					for (j = l; j < *c; j++)
-						R1[l + *c * j] = xi[l + n * j];
-				/* What if final nbf is less than c? - can't happen  */
-				pivoter(R1, c, c, piv + i * *c, &TRUE, &TRUE); /* unpivoting the columns of R1 */
-				for (l = 0; l < *c; l++)
-					for (j = 0; j < *c; j++)
-						R[i * *c + l + nr * j] = R1[l + *c * j];
-				FREE(R1);
-			}
-		} /* end of parallel section */
-		FREE(piv);
-		n = k * *c;
-		mgcv_qr(R, &n, c, pivot, tau + k * *c); /* final pivoted QR */
-	}
-#ifdef OMP_REPORT
-	Rprintf("done\n");
-#endif
+  int i,j,k,l,*piv,nb,nbf,n,TRUE=1,FALSE=0,nr; 
+  double *R,*R1,*xi; 
+  #ifdef OMP_REPORT
+  Rprintf("mgcv_pqr0...");
+  #endif
+  k = get_qpr_k(r,c,nt);/* number of threads to use */
+ 
+  if (k==1) mgcv_qr(x,r,c,pivot,tau); else { /* multi-threaded version */
+    nb = (int)ceil(*r/(double)k); /* block size */
+    nbf = *r - (k-1)*nb; /* end block size */
+    /* need to re-arrange row blocks so that they can be split between qr calls */
+    row_block_reorder(x,r,c,&nb,&FALSE); 
+    piv = (int *)CALLOC((size_t) (k * *c),sizeof(int));
+    R = x + *r * *c ; /* pointer to combined unpivoted R matrix */
+    nr = *c * k; /* number of rows in R */
+    #ifdef SUPPORT_OPENMP
+    #pragma omp parallel private(i,j,l,n,xi,R1) num_threads(k)
+    #endif
+    { /* open parallel section */
+      #ifdef SUPPORT_OPENMP
+      #pragma omp for
+      #endif
+      for (i=0;i<k;i++) { /* QR the blocks */
+        if (i==k-1) n = nbf; else n = nb; 
+        xi = x + nb * i * *c; /* current block */
+        mgcv_qr(xi,&n,c,piv + i * *c,tau + i * *c);
+        /* and copy the R factors, unpivoted into a new matrix */
+        R1 = (double *)CALLOC((size_t)(*c * *c),sizeof(double));
+        for (l=0;l<*c;l++) for (j=l;j<*c;j++) R1[l + *c * j] = xi[l + n * j]; 
+        /* What if final nbf is less than c? - can't happen  */
+        pivoter(R1,c,c,piv + i * *c,&TRUE,&TRUE); /* unpivoting the columns of R1 */
+        for (l=0;l<*c;l++) for (j=0;j<*c;j++) R[i * *c +l + nr *j] = R1[l+ *c * j];
+        FREE(R1);
+      }
+    } /* end of parallel section */
+    FREE(piv);
+    n = k * *c;
+    mgcv_qr(R,&n,c,pivot,tau + k * *c); /* final pivoted QR */
+  } 
+  #ifdef OMP_REPORT
+  Rprintf("done\n");
+  #endif
 } /* mgcv_pqr0 */
 
 void mgcv_qr(double *x, int *r, int *c,int *pivot,double *tau)
@@ -2652,21 +2452,20 @@ void update_qr(double *Q,double *R,int *n, int *q,double *lam, int *k)
 
    Some R code for testing the routine:
 
+library(mgcv)
+n<-4;q<-3
+X<-matrix(rnorm(n*q),n,q)
+#X[,q-1]<-X[,q]
+qrx<-qr(X,tol=0)
+Q<-qr.Q(qrx);R<-qr.R(qrx);lam<-1
+um<-.C("update_qr",as.double(Q),as.double(R),as.integer(n),as.integer(q),
+        as.double(lam),as.integer(q-1),PACKAGE="mgcv")
+R1<-matrix(um[[2]],q,q);Q1<-matrix(um[[1]],n,q)
+Xa<-matrix(0,n+1,q)
+Xa[1:n,]<-X;Xa[n+1,q]<-lam
+qr.R(qr(Xa,tol=0))   
 
- library(mgcv)
- n<-4;q<-3
- X<-matrix(rnorm(n*q),n,q)
- #X[,q-1]<-X[,q]
- qrx<-qr(X,tol=0)
- Q<-qr.Q(qrx);R<-qr.R(qrx);lam<-1
- um<-.C("update_qr",as.double(Q),as.double(R),as.integer(n),as.integer(q),
- as.double(lam),as.integer(q-1),PACKAGE="mgcv")
- R1<-matrix(um[[2]],q,q);Q1<-matrix(um[[1]],n,q)
- Xa<-matrix(0,n+1,q)
- Xa[1:n,]<-X;Xa[n+1,q]<-lam
- qr.R(qr(Xa,tol=0))
-
- */
+*/
 
 { double *x,*work,c,s,r,x0,x1,m,*xip,*xjp,*riip,*rijp,*Qp,*wp;
   x=(double *)CALLOC((size_t)*q,sizeof(double)); 
@@ -2826,356 +2625,288 @@ void mgcv_trisymeig(double *d,double *g,double *v,int *n,int getvec,int descendi
    dstevx may be faster, but needs argument changes.
 */ 
 		    
-{
-	char compz;
-	double *work, work1, x, *dum1, *dum2;
-	int ldz = 0, info, lwork = -1, liwork = -1, *iwork, iwork1, i, j;
+{ char compz;
+  double *work,work1,x,*dum1,*dum2;
+  int ldz=0,info,lwork=-1,liwork=-1,*iwork,iwork1,i,j;
 
-	if (getvec) {
-		compz = 'I';
-		ldz = *n;
-	} else {
-		compz = 'N';
-		ldz = 0;
-	}
+  if (getvec) { compz='I';ldz = *n;} else { compz='N';ldz=0;}
 
-	/* workspace query first .... */
-	F77_CALL(dstedc)(&compz, n, d, g, /* lead and su-diag */
-	v, /* eigenvectors on exit */
-	&ldz, /* dimension of v */
-	&work1, &lwork, &iwork1, &liwork, &info);
+  /* workspace query first .... */
+  F77_CALL(dstedc)(&compz,n,
+		   d, g, /* lead and su-diag */
+		   v, /* eigenvectors on exit */  
+                   &ldz, /* dimension of v */
+		   &work1, &lwork,
+		   &iwork1, &liwork, &info);
 
-	lwork = (int) floor(work1);
-	if (work1 - lwork > 0.5)
-		lwork++;
-	work = (double *) CALLOC((size_t) lwork, sizeof(double));
-	liwork = iwork1;
-	iwork = (int *) CALLOC((size_t) liwork, sizeof(int));
+   lwork=(int)floor(work1);if (work1-lwork>0.5) lwork++;
+   work=(double *)CALLOC((size_t)lwork,sizeof(double));
+   liwork = iwork1;
+   iwork= (int *)CALLOC((size_t)liwork,sizeof(int));
 
-	/* and the actual call... */
-	F77_CALL(dstedc)(&compz, n, d, g, /* lead and su-diag */
-	v, /* eigenvectors on exit */
-	&ldz, /* dimension of v */
-	work, &lwork, iwork, &liwork, &info);
+   /* and the actual call... */
+   F77_CALL(dstedc)(&compz,n,
+		   d, g, /* lead and su-diag */
+		   v, /* eigenvectors on exit */  
+                   &ldz, /* dimension of v */
+		   work, &lwork,
+		   iwork, &liwork, &info);
 
-	if (descending) { /* need to reverse eigenvalues/vectors */
-		for (i = 0; i < *n / 2; i++) { /* reverse the eigenvalues */
-			x = d[i];
-			d[i] = d[*n - i - 1];
-			d[*n - i - 1] = x;
-			dum1 = v + *n * i;
-			dum2 = v + *n * (*n - i - 1); /* pointers to heads of cols to exchange */
-			for (j = 0; j < *n; j++, dum1++, dum2++) { /* work down columns */
-				x = *dum1;
-				*dum1 = *dum2;
-				*dum2 = x;
-			}
-		}
-	}
+   if (descending) { /* need to reverse eigenvalues/vectors */
+     for (i=0;i<*n/2;i++) { /* reverse the eigenvalues */
+       x = d[i]; d[i] = d[*n-i-1];d[*n-i-1] = x;
+       dum1 = v + *n * i;dum2 = v + *n * (*n-i-1); /* pointers to heads of cols to exchange */
+       for (j=0;j<*n;j++,dum1++,dum2++) { /* work down columns */
+         x = *dum1;*dum1 = *dum2;*dum2 = x;
+       }
+     }
+   }
 
-	FREE(work);
-	FREE(iwork);
-	*n = info; /* zero is success */
+   FREE(work);FREE(iwork);
+   *n=info; /* zero is success */
 } /* mgcv_trisymeig */
 
-void Rlanczos(double *A, double *U, double *D, int *n, int *m, int *lm,
-		double *tol, int *nt) {
-	/* Faster version of lanczos_spd for calling from R.
-	 A is n by n symmetric matrix. Let k = m + max(0,lm).
-	 U is n by k and D is a k-vector.
-	 m is the number of upper eigenvalues required and lm the number of lower.
-	 If lm<0 then the m largest magnitude eigenvalues (and their eigenvectors)
-	 are returned
 
-	 Matrices are stored in R (and LAPACK) format (1 column after another).
 
-	 If nt>1 and there is openMP support then the routine computes the O(n^2) inner products in
-	 parallel.
+void Rlanczos(double *A,double *U,double *D,int *n, int *m, int *lm,double *tol,int *nt) {
+/* Faster version of lanczos_spd for calling from R.
+   A is n by n symmetric matrix. Let k = m + max(0,lm).
+   U is n by k and D is a k-vector.
+   m is the number of upper eigenvalues required and lm the number of lower.
+   If lm<0 then the m largest magnitude eigenvalues (and their eigenvectors)
+   are returned 
 
-	 ISSUE: 1. Currently all eigenvectors of Tj are found, although only the next unconverged one
-	 is really needed. Might be better to be more selective using dstein from LAPACK.
-	 2. Basing whole thing on dstevx might be faster
-	 3. Is random start vector really best? Actually Demmel (1997) suggests using a random vector,
-	 to avoid any chance of orthogonality with an eigenvector!
-	 4. Could use selective orthogonalization, but cost of full orth is only 2nj, while n^2 of method is
-	 unavoidable, so probably not worth it.
-	 */
-	int biggest = 0, f_check, i, k, kk, ok, l, j, vlength = 0, ni, pi,
-			converged, incx = 1, ri, ci, cir, one = 1;
-	double **q, *v = NULL, bt, xx, yy, *a, *b, *d, *g, *z, *err, *p0, *p1, *zp,
-			*qp, normTj, eps_stop, max_err, alpha = 1.0, beta = 0.0;
-	unsigned long jran = 1, ia = 106, ic = 1283, im = 6075; /* simple RNG constants */
-	const char uplo = 'U', trans = 'T';
-#ifdef OMP_REPORT
-	Rprintf("Rlanczos");
-#endif
+   Matrices are stored in R (and LAPACK) format (1 column after another).
 
-#ifndef SUPPORT_OPENMP
-	*nt = 1; /* reset number of threads to 1 if openMP not available  */
-#endif
-	if (*nt > *n)
-		*nt = *n; /* don't use more threads than columns! */
+   If nt>1 and there is openMP support then the routine computes the O(n^2) inner products in 
+   parallel.
 
-	eps_stop = *tol;
+   ISSUE: 1. Currently all eigenvectors of Tj are found, although only the next unconverged one
+             is really needed. Might be better to be more selective using dstein from LAPACK. 
+          2. Basing whole thing on dstevx might be faster
+          3. Is random start vector really best? Actually Demmel (1997) suggests using a random vector, 
+             to avoid any chance of orthogonality with an eigenvector!
+          4. Could use selective orthogonalization, but cost of full orth is only 2nj, while n^2 of method is
+             unavoidable, so probably not worth it.  
+*/
+    int biggest=0,f_check,i,k,kk,ok,l,j,vlength=0,ni,pi,converged,incx=1,ri,ci,cir,one=1;
+  double **q,*v=NULL,bt,xx,yy,*a,*b,*d,*g,*z,*err,*p0,*p1,*zp,*qp,normTj,eps_stop,max_err,alpha=1.0,beta=0.0;
+  unsigned long jran=1,ia=106,ic=1283,im=6075; /* simple RNG constants */
+  const char uplo='U',trans='T';
+  #ifdef OMP_REPORT
+  Rprintf("Rlanczos");
+  #endif
 
-	if (*lm < 0) {
-		biggest = 1;
-		*lm = 0;
-	} /* get m largest magnitude eigen-values */
-	f_check = (*m + *lm) / 2; /* how often to get eigen_decomp */
-	if (f_check < 10)
-		f_check = 10;
-	kk = (int) floor(*n / 10);
-	if (kk < 1)
-		kk = 1;
-	if (kk < f_check)
-		f_check = kk;
 
-	q = (double **) CALLOC((size_t) (*n + 1), sizeof(double *));
+  #ifndef SUPPORT_OPENMP
+  *nt = 1; /* reset number of threads to 1 if openMP not available  */ 
+  #endif
+  if (*nt > *n) *nt = *n; /* don't use more threads than columns! */
 
-	/* "randomly" initialize first q vector */
-	q[0] = (double *) CALLOC((size_t) *n, sizeof(double));
-	b = q[0];
-	bt = 0.0;
-	for (i = 0; i < *n; i++) /* somewhat randomized start vector!  */
-	{
-		jran = (jran * ia + ic) % im; /* quick and dirty generator to avoid too regular a starting vector */
-		xx = (double) jran / (double) im - 0.5;
-		b[i] = xx;
-		xx = -xx;
-		bt += b[i] * b[i];
-	}
-	bt = sqrt(bt);
-	for (i = 0; i < *n; i++)
-		b[i] /= bt;
+  eps_stop = *tol; 
 
-	/* initialise vectors a and b - a is leading diagonal of T, b is sub/super diagonal */
-	a = (double *) CALLOC((size_t) *n, sizeof(double));
-	b = (double *) CALLOC((size_t) *n, sizeof(double));
-	g = (double *) CALLOC((size_t) *n, sizeof(double));
-	d = (double *) CALLOC((size_t) *n, sizeof(double));
-	z = (double *) CALLOC((size_t) *n, sizeof(double));
-	err = (double *) CALLOC((size_t) *n, sizeof(double));
-	for (i = 0; i < *n; i++)
-		err[i] = 1e300;
-	/* figure out how to split up work if nt>1 */
-	if (*nt > 1) {
-		ci = *n / *nt; /* cols per thread */
-		cir = *n - ci * (*nt - 1); /* cols for final thread */
-		if (cir > ci) { /* final thread has more work than normal thread - redo */
-			ci++; /* up work per thread by one */
-			*nt = (int) ceil(*n / ci); /* drop number of threads */
-			cir = *n - ci * (*nt - 1); /* recompute cols for final thread */
-		}
-		if (cir == 0) {
-			(*nt)--;
-			cir = ci;
-		} /* no cols left for final thread so drop it */
-	}
-	//Rprintf("nt = %d, ci = %d, cir = %d\n",*nt,ci,cir);
-	/* The main loop. Will break out on convergence. */
-	for (j = 0; j < *n; j++) {
-		/* form z=Aq[j]=A'q[j], the O(n^2) step ...  */
+  if (*lm<0) { biggest=1;*lm=0;} /* get m largest magnitude eigen-values */
+  f_check = (*m + *lm)/2; /* how often to get eigen_decomp */
+  if (f_check<10) f_check =10;
+  kk = (int) floor(*n/10); if (kk<1) kk=1;  
+  if (kk<f_check) f_check = kk;
 
-		/*blas free version ... for (Ap=A,zp=z,p0=zp+*n;zp<p0;zp++)
-		 for (*zp=0.0,qp=q[j],p1=qp+*n;qp<p1;qp++,Ap++) *zp += *Ap * *qp;*/
+  q=(double **)CALLOC((size_t)(*n+1),sizeof(double *));
 
-		/*  BLAS versions y := alpha*A*x + beta*y, */
-		if (*nt > 1) { /* use parallel computation for the z = A q[j] */
-#ifdef SUPPORT_OPENMP
-#pragma omp parallel private(i,ri) num_threads(*nt)
-#endif
-			{
-#ifdef SUPPORT_OPENMP
-#pragma omp for
-#endif
-				for (i = 0; i < *nt; i++) {
-					if (i < *nt - 1)
-						ri = ci;
-					else
-						ri = cir; /* number of cols of A to process */
-					/* note that symmetry, A' == A, is exploited here, (rows a:b of A are same
-					 as cols a:b of A, but latter are easier to access as a block) */
-					F77_CALL(dgemv)(&trans, n, &ri, &alpha, A + i * ci * *n, n,
-							q[j], &one, &beta, z + i * ci, &one);
-				}
-			} /* end parallel */
-		} else
-			F77_CALL(dsymv)(&uplo, n, &alpha, A, n, q[j], &incx, &beta, z,
-					&incx);
-		/* Now form a[j] = q[j]'z.... */
-		for (xx = 0.0, qp = q[j], p0 = qp + *n, zp = z; qp < p0; qp++, zp++)
-			xx += *qp * *zp;
-		a[j] = xx;
+  /* "randomly" initialize first q vector */
+  q[0]=(double *)CALLOC((size_t)*n,sizeof(double));
+  b=q[0];bt=0.0;
+  for (i=0;i < *n;i++)   /* somewhat randomized start vector!  */
+  { jran=(jran*ia+ic) % im;   /* quick and dirty generator to avoid too regular a starting vector */
+    xx=(double) jran / (double) im -0.5; 
+    b[i]=xx;xx=-xx;bt+=b[i]*b[i];
+  } 
+  bt=sqrt(bt); 
+  for (i=0;i < *n;i++) b[i]/=bt;
 
-		/* Update z..... */
-		if (!j) { /* z <- z - a[j]*q[j] */
-			for (zp = z, p0 = zp + *n, qp = q[j]; zp < p0; qp++, zp++)
-				*zp -= xx * *qp;
-		} else { /* z <- z - a[j]*q[j] - b[j-1]*q[j-1] */
-			yy = b[j - 1];
-			for (zp = z, p0 = zp + *n, qp = q[j], p1 = q[j - 1]; zp < p0;
-					zp++, qp++, p1++)
-				*zp -= xx * *qp + yy * *p1;
+  /* initialise vectors a and b - a is leading diagonal of T, b is sub/super diagonal */
+  a=(double *)CALLOC((size_t) *n,sizeof(double));
+  b=(double *)CALLOC((size_t) *n,sizeof(double));
+  g=(double *)CALLOC((size_t) *n,sizeof(double));
+  d=(double *)CALLOC((size_t) *n,sizeof(double)); 
+  z=(double *)CALLOC((size_t) *n,sizeof(double));
+  err=(double *)CALLOC((size_t) *n,sizeof(double));
+  for (i=0;i< *n;i++) err[i]=1e300;
+  /* figure out how to split up work if nt>1 */
+  if (*nt>1) {
+    ci = *n / *nt; /* cols per thread */
+    cir = *n - ci * (*nt - 1); /* cols for final thread */  
+    if (cir>ci) { /* final thread has more work than normal thread - redo */
+      ci++; /* up work per thread by one */
+      *nt = (int)ceil(*n/ci); /* drop number of threads */
+      cir = *n - ci * (*nt - 1);  /* recompute cols for final thread */
+    }
+    if (cir == 0) { (*nt)--;cir=ci; } /* no cols left for final thread so drop it */
+  }
+  //Rprintf("nt = %d, ci = %d, cir = %d\n",*nt,ci,cir);
+  /* The main loop. Will break out on convergence. */
+  for (j=0;j< *n;j++) {
+    /* form z=Aq[j]=A'q[j], the O(n^2) step ...  */
+ 
+    /*blas free version ... for (Ap=A,zp=z,p0=zp+*n;zp<p0;zp++) 
+      for (*zp=0.0,qp=q[j],p1=qp+*n;qp<p1;qp++,Ap++) *zp += *Ap * *qp;*/
 
-			/* Now stabilize by full re-orthogonalization.... */
+    /*  BLAS versions y := alpha*A*x + beta*y, */
+    if (*nt>1) { /* use parallel computation for the z = A q[j] */
+      #ifdef SUPPORT_OPENMP
+      #pragma omp parallel private(i,ri) num_threads(*nt)
+      #endif
+      { 
+	#ifdef SUPPORT_OPENMP
+	#pragma omp for
+	#endif
+        for (i=0;i<*nt;i++) {
+          if (i < *nt-1) ri = ci; else ri = cir; /* number of cols of A to process */
+          /* note that symmetry, A' == A, is exploited here, (rows a:b of A are same 
+             as cols a:b of A, but latter are easier to access as a block) */  
+          F77_CALL(dgemv)(&trans,n,&ri,&alpha,A+i * ci * *n,n,q[j],
+                        &one,&beta,z+i*ci,&one);
+        }
+      } /* end parallel */
+    } else F77_CALL(dsymv)(&uplo,n,&alpha,
+		A,n,
+		q[j],&incx,
+		&beta,z,&incx);
+    /* Now form a[j] = q[j]'z.... */
+    for (xx=0.0,qp=q[j],p0=qp+*n,zp=z;qp<p0;qp++,zp++) xx += *qp * *zp;
+    a[j] = xx;
+ 
+    /* Update z..... */
+    if (!j)
+    { /* z <- z - a[j]*q[j] */
+      for (zp=z,p0=zp+*n,qp=q[j];zp<p0;qp++,zp++) *zp -= xx * *qp;
+    } else
+    { /* z <- z - a[j]*q[j] - b[j-1]*q[j-1] */
+      yy=b[j-1];      
+      for (zp=z,p0=zp + *n,qp=q[j],p1=q[j-1];zp<p0;zp++,qp++,p1++) *zp -= xx * *qp + yy * *p1;    
+  
+      /* Now stabilize by full re-orthogonalization.... */
+      
+      for (i=0;i<=j;i++) 
+      { /* form xx= z'q[i] */
+        /*for (xx=0.0,qp=q[i],p0=qp + *n,zp=z;qp<p0;zp++,qp++) xx += *zp * *qp;*/
+        xx = -F77_CALL(ddot)(n,z,&incx,q[i],&incx); /* BLAS version */
+        /* z <- z - xx*q[i] */
+        /*for (qp=q[i],zp=z;qp<p0;qp++,zp++) *zp -= xx * *qp;*/
+        F77_CALL(daxpy)(n,&xx,q[i],&incx,z,&incx); /* BLAS version */
+      } 
+      
+      /* exact repeat... */
+      for (i=0;i<=j;i++) 
+      { /* form xx= z'q[i] */
+        /* for (xx=0.0,qp=q[i],p0=qp + *n,zp=z;qp<p0;zp++,qp++) xx += *zp * *qp; */
+        xx = -F77_CALL(ddot)(n,z,&incx,q[i],&incx); /* BLAS version */
+        /* z <- z - xx*q[i] */
+        /* for (qp=q[i],zp=z;qp<p0;qp++,zp++) *zp -= xx * *qp; */
+        F77_CALL(daxpy)(n,&xx,q[i],&incx,z,&incx); /* BLAS version */
+      } 
+      /* ... stabilized!! */
+    } /* z update complete */
+    
 
-			for (i = 0; i <= j; i++) { /* form xx= z'q[i] */
-				/*for (xx=0.0,qp=q[i],p0=qp + *n,zp=z;qp<p0;zp++,qp++) xx += *zp * *qp;*/
-				xx = -F77_CALL(ddot)(n, z, &incx, q[i], &incx); /* BLAS version */
-				/* z <- z - xx*q[i] */
-				/*for (qp=q[i],zp=z;qp<p0;qp++,zp++) *zp -= xx * *qp;*/
-				F77_CALL(daxpy)(n, &xx, q[i], &incx, z, &incx); /* BLAS version */
-			}
+    /* calculate b[j]=||z||.... */
+    for (xx=0.0,zp=z,p0=zp+*n;zp<p0;zp++) xx += *zp * *zp;b[j]=sqrt(xx); 
+  
+     /* get q[j+1]      */
+    if (j < *n-1)
+    { q[j+1]=(double *)CALLOC((size_t) *n,sizeof(double));
+      for (xx=b[j],qp=q[j+1],p0=qp + *n,zp=z;qp<p0;qp++,zp++) *qp = *zp/xx; /* forming q[j+1]=z/b[j] */
+    }
 
-			/* exact repeat... */
-			for (i = 0; i <= j; i++) { /* form xx= z'q[i] */
-				/* for (xx=0.0,qp=q[i],p0=qp + *n,zp=z;qp<p0;zp++,qp++) xx += *zp * *qp; */
-				xx = -F77_CALL(ddot)(n, z, &incx, q[i], &incx); /* BLAS version */
-				/* z <- z - xx*q[i] */
-				/* for (qp=q[i],zp=z;qp<p0;qp++,zp++) *zp -= xx * *qp; */
-				F77_CALL(daxpy)(n, &xx, q[i], &incx, z, &incx); /* BLAS version */
-			}
-			/* ... stabilized!! */
-		} /* z update complete */
+    /* Now get the spectral decomposition of T_j.  */
 
-		/* calculate b[j]=||z||.... */
-		for (xx = 0.0, zp = z, p0 = zp + *n; zp < p0; zp++)
-			xx += *zp * *zp;
-		b[j] = sqrt(xx);
+    if (((j>= *m + *lm)&&(j%f_check==0))||(j == *n-1))   /* no  point doing this too early or too often */
+    { for (i=0;i<j+1;i++) d[i]=a[i]; /* copy leading diagonal of T_j */
+      for (i=0;i<j;i++) g[i]=b[i]; /* copy sub/super diagonal of T_j */   
+      /* set up storage for eigen vectors */
+      if (vlength) FREE(v); /* free up first */
+      vlength=j+1; 
+      v = (double *)CALLOC((size_t)(vlength*vlength),sizeof(double));
+ 
+      /* obtain eigen values/vectors of T_j in O(j^2) flops */
+    
+      kk = j + 1;
+      mgcv_trisymeig(d,g,v,&kk,1,1);
+      /* ... eigenvectors stored one after another in v, d[i] are eigenvalues */
 
-		/* get q[j+1]      */
-		if (j < *n - 1) {
-			q[j + 1] = (double *) CALLOC((size_t) *n, sizeof(double));
-			for (xx = b[j], qp = q[j + 1], p0 = qp + *n, zp = z; qp < p0;
-					qp++, zp++)
-				*qp = *zp / xx; /* forming q[j+1]=z/b[j] */
-		}
+      /* Evaluate ||Tj|| .... */
+      normTj=fabs(d[0]);if (fabs(d[j])>normTj) normTj=fabs(d[j]);
 
-		/* Now get the spectral decomposition of T_j.  */
+      for (k=0;k<j+1;k++) /* calculate error in each eigenvalue d[i] */
+      { err[k]=b[j]*v[k * vlength + j]; /* bound on kth e.v. is b[j]* (jth element of kth eigenvector) */
+        err[k]=fabs(err[k]);
+      }
+      /* and check for termination ..... */
+      if (j >= *m + *lm)
+      { max_err=normTj*eps_stop;
+        if (biggest) { /* getting m largest magnitude eigen values */
+	  /* only one convergence test is sane here:
+             1. Find the *m largest magnitude elements of d. (*lm is 0)
+             2. When all these have converged, we are done.
+          */   
+          pi=ni=0;converged=1;
+          while (pi+ni < *m) if (fabs(d[pi])>= fabs(d[j-ni])) { /* include d[pi] in largest set */
+              if (err[pi]>max_err) {converged=0;break;} else pi++;
+	    } else { /* include d[j-ni] in largest set */
+              if (err[ni]>max_err) {converged=0;break;} else ni++;
+            }
+   
+          if (converged) {
+            *m = pi;
+            *lm = ni;
+            j++;break;
+          }
+        } else /* number of largest and smallest supplied */
+        { ok=1;
+          for (i=0;i < *m;i++) if (err[i]>max_err) ok=0;
+          for (i=j;i > j - *lm;i--) if (err[i]>max_err) ok=0;
+          if (ok) 
+          { j++;break;}
+        }
+      }
+    }
+  }
+  /* At this stage, complete construction of the eigen vectors etc. */
+  
+  /* Do final polishing of Ritz vectors and load va and V..... */
+  /*  for (k=0;k < *m;k++) // create any necessary new Ritz vectors 
+  { va->V[k]=d[k];
+    for (i=0;i<n;i++) 
+    { V->M[i][k]=0.0; for (l=0;l<j;l++) V->M[i][k]+=q[l][i]*v[k][l];}
+  }*/
 
-		if (((j >= *m + *lm) && (j % f_check == 0)) || (j == *n - 1)) /* no  point doing this too early or too often */
-		{
-			for (i = 0; i < j + 1; i++)
-				d[i] = a[i]; /* copy leading diagonal of T_j */
-			for (i = 0; i < j; i++)
-				g[i] = b[i]; /* copy sub/super diagonal of T_j */
-			/* set up storage for eigen vectors */
-			if (vlength)
-				FREE(v); /* free up first */
-			vlength = j + 1;
-			v = (double *) CALLOC((size_t) (vlength * vlength), sizeof(double));
+  /* assumption that U is zero on entry! */
 
-			/* obtain eigen values/vectors of T_j in O(j^2) flops */
+  for (k=0;k < *m;k++) /* create any necessary new Ritz vectors */
+  { D[k]=d[k];
+    for (l=0;l<j;l++)
+    for (xx=v[l + k * vlength],p0=U + k * *n,p1 = p0 + *n,qp=q[l];p0<p1;p0++,qp++) *p0 += *qp * xx;
+  }
 
-			kk = j + 1;
-			mgcv_trisymeig(d, g, v, &kk, 1, 1);
-			/* ... eigenvectors stored one after another in v, d[i] are eigenvalues */
-
-			/* Evaluate ||Tj|| .... */
-			normTj = fabs(d[0]);
-			if (fabs(d[j]) > normTj)
-				normTj = fabs(d[j]);
-
-			for (k = 0; k < j + 1; k++) /* calculate error in each eigenvalue d[i] */
-			{
-				err[k] = b[j] * v[k * vlength + j]; /* bound on kth e.v. is b[j]* (jth element of kth eigenvector) */
-				err[k] = fabs(err[k]);
-			}
-			/* and check for termination ..... */
-			if (j >= *m + *lm) {
-				max_err = normTj * eps_stop;
-				if (biggest) { /* getting m largest magnitude eigen values */
-					/* only one convergence test is sane here:
-					 1. Find the *m largest magnitude elements of d. (*lm is 0)
-					 2. When all these have converged, we are done.
-					 */
-					pi = ni = 0;
-					converged = 1;
-					while (pi + ni < *m)
-						if (fabs(d[pi]) >= fabs(d[j - ni])) { /* include d[pi] in largest set */
-							if (err[pi] > max_err) {
-								converged = 0;
-								break;
-							} else
-								pi++;
-						} else { /* include d[j-ni] in largest set */
-							if (err[ni] > max_err) {
-								converged = 0;
-								break;
-							} else
-								ni++;
-						}
-
-					if (converged) {
-						*m = pi;
-						*lm = ni;
-						j++;
-						break;
-					}
-				} else /* number of largest and smallest supplied */
-				{
-					ok = 1;
-					for (i = 0; i < *m; i++)
-						if (err[i] > max_err)
-							ok = 0;
-					for (i = j; i > j - *lm; i--)
-						if (err[i] > max_err)
-							ok = 0;
-					if (ok) {
-						j++;
-						break;
-					}
-				}
-			}
-		}
-	}
-	/* At this stage, complete construction of the eigen vectors etc. */
-
-	/* Do final polishing of Ritz vectors and load va and V..... */
-	/*  for (k=0;k < *m;k++) // create any necessary new Ritz vectors
-	 { va->V[k]=d[k];
-	 for (i=0;i<n;i++)
-	 { V->M[i][k]=0.0; for (l=0;l<j;l++) V->M[i][k]+=q[l][i]*v[k][l];}
-	 }*/
-
-	/* assumption that U is zero on entry! */
-
-	for (k = 0; k < *m; k++) /* create any necessary new Ritz vectors */
-	{
-		D[k] = d[k];
-		for (l = 0; l < j; l++)
-			for (xx = v[l + k * vlength], p0 = U + k * *n, p1 = p0 + *n, qp =
-					q[l]; p0 < p1; p0++, qp++)
-				*p0 += *qp * xx;
-	}
-
-	for (k = *m; k < *lm + *m; k++) /* create any necessary new Ritz vectors */
-	{
-		kk = j - (*lm + *m - k); /* index for d and v */
-		D[k] = d[kk];
-		for (l = 0; l < j; l++)
-			for (xx = v[l + kk * vlength], p0 = U + k * *n, p1 = p0 + *n, qp =
-					q[l]; p0 < p1; p0++, qp++)
-				*p0 += *qp * xx;
-	}
-
-	/* clean up..... */
-	FREE(a);
-	FREE(b);
-	FREE(g);
-	FREE(d);
-	FREE(z);
-	FREE(err);
-	if (vlength)
-		FREE(v);
-	for (i = 0; i < *n + 1; i++)
-		if (q[i])
-			FREE(q[i]);
-	FREE(q);
-	*n = j; /* number of iterations taken */
-#ifdef OMP_REPORT
-	Rprintf("done\n");
-#endif
+  for (k= *m;k < *lm + *m;k++) /* create any necessary new Ritz vectors */
+  { kk=j-(*lm + *m - k); /* index for d and v */
+    D[k]=d[kk];
+    for (l=0;l<j;l++)
+    for (xx=v[l + kk * vlength],p0=U + k * *n,p1 = p0 + *n,qp=q[l];p0<p1;p0++,qp++) *p0 += *qp * xx;
+  }
+ 
+  /* clean up..... */
+  FREE(a);
+  FREE(b);
+  FREE(g);
+  FREE(d);
+  FREE(z);
+  FREE(err);
+  if (vlength) FREE(v);
+  for (i=0;i< *n+1;i++) if (q[i]) FREE(q[i]);FREE(q);  
+  *n = j; /* number of iterations taken */
+  #ifdef OMP_REPORT
+  Rprintf("done\n");
+  #endif
 } /* end of Rlanczos */
 

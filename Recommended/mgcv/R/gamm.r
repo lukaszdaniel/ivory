@@ -1159,6 +1159,11 @@ gammPQL <- function (fixed, random, family, data, correlation, weights,
 
   converged <- FALSE 
 
+  if (family$family %in% c("poisson","binomial")) {
+    control$sigma <- 1 ## set scale parameter to 1
+    control$apVar <- FALSE ## not available
+  }
+
   for (i in seq_len(niter)) {
     if (verbose) message(gettextf("iteration %d", i))
     fit <- lme(fixed=fixed,random=random,data=data,correlation=correlation,
@@ -1605,6 +1610,7 @@ test.gamm <- function(control=nlme::lmeControl(niterEM=3,tolerance=1e-11,msTol=1
   x<-runif(n)/20;z<-runif(n);
   f <- test1(x,z)
   y <- f + rnorm(n)*0.2
+  control$sigma <- NULL ## avoid failure on silly test
   cat(gettext("testing covariate scale invariance ... ", domain = "R-mgcv"))
   b <- gamm(y~te(x,z), control=control )
   x1 <- x*100 
