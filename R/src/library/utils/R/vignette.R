@@ -1,7 +1,7 @@
 #  File src/library/utils/R/vignette.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2015 The R Core Team
+#  Copyright (C) 1995-2016 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -48,17 +48,13 @@ vignette <-
         }
         else
             warning(gettextf("vignette %s not found", sQuote(topic)), call. = FALSE, domain = "R-utils")
-    }
 
-    if(missing(topic)) {
-        ## List all possible vignettes.
-
+    } else { ## missing(topic)) -- List all possible vignettes.
         title <- if(nrow(vinfo)) {
             paste(vinfo[, "Title"],
                   paste0(rep.int("(source", nrow(vinfo)),
                         ifelse(nzchar(vinfo[, "PDF"]),
-                               paste0(", ",
-                                      tools::file_ext(vinfo[, "PDF"])),
+                               paste0(", ", tools::file_ext(vinfo[, "PDF"])),
                                ""),
                          ")"))
         }
@@ -71,10 +67,10 @@ vignette <-
                     Title = title)
 	footer <- if (all) NULL else
 		  gettextf("Use %s to list the vignettes in all *available* packages.", sQuote("vignette(all = TRUE)"))
-
-        y <- list(type = "vignette", title = "Vignettes", header = NULL, results = db, footer = footer)
-        class(y) <- "packageIQR"
-        return(y)
+        ## return
+        structure(class = "packageIQR",
+                  list(type = "vignette", title = "Vignettes", header = NULL,
+                       results = db, footer = footer))
     }
 }
 
@@ -106,9 +102,10 @@ function(x, ...)
     invisible(x)
 }
 
-getSource <- function(x, ...) UseMethod("getSource")
+## Not exported yet
+getRcode <- function(x, ...) UseMethod("getRcode")
 
-getSource.vignette <- function(x, strict=TRUE, ...) {
+getRcode.vignette <- function(x, strict=TRUE, ...) {
     if(nzchar(p <- x$R)) {
         file.path(x$Dir, "doc", p)
     } else {
@@ -124,9 +121,9 @@ getSource.vignette <- function(x, strict=TRUE, ...) {
 
 edit.vignette <- function(name, ...)
 {
-    if(is.character(src <- getSource(name, strict=FALSE))) {
+    if(is.character(src <- getRcode(name, strict=FALSE))) {
         f <- tempfile(name$Topic, fileext = ".R")
         file.copy(src, f)
         file.edit(file = f, ...)
-    }
+    } # getRcode() did warn already
 }

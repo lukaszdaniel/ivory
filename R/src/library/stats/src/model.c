@@ -1301,6 +1301,7 @@ static SEXP TrimRepeats(SEXP list)
     if (list == R_NilValue || CDR(list) == R_NilValue)
 	return list;
 
+    PROTECT(list);
     // Find out which terms are duplicates.
     SEXP all_terms = PROTECT(PairToVectorList(list)),
 	duplicate_sexp = PROTECT(duplicated(all_terms, FALSE));
@@ -1317,7 +1318,7 @@ static SEXP TrimRepeats(SEXP list)
 	}
     }
 
-    UNPROTECT(2);
+    UNPROTECT(3);
     return list;
 }
 
