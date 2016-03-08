@@ -606,8 +606,10 @@ static void sigactionSegv(int signum, siginfo_t *ip, void *context)
 		if(ConsoleBuf[0] == '4') R_CleanUp(SA_SAVE, 71, 0);
 	    }
 	}
+	REprintf(_("R is aborting now ...\n"));
     }
-    REprintf(_("aborting ...\n"));
+    else // non-interactively :
+	REprintf(_("An irrecoverable exception occurred. R is aborting now ...\n"));
     R_CleanTempDir();
     /* now do normal behaviour, e.g. core dump */
     signal(signum, SIG_DFL);
