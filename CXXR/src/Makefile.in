@@ -1,0 +1,74 @@
+#CXXR $Id$
+#CXXR 
+#CXXR This file is part of CXXR, a project to refactor the R interpreter
+#CXXR into C++.  It may consist in whole or in part of program code and
+#CXXR documentation taken from the R project itself, incorporated into
+#CXXR CXXR (and possibly MODIFIED) under the terms of the GNU General Public
+#CXXR Licence.
+#CXXR 
+#CXXR CXXR is Copyright (C) 2008-14 Andrew R. Runnalls, subject to such other
+#CXXR copyrights and copyright restrictions as may be stated below.
+#CXXR 
+#CXXR CXXR is not part of the R project, and bugs and other issues should
+#CXXR not be reported via r-bugs or other R project channels; instead refer
+#CXXR to the CXXR website.
+
+#
+# ${R_HOME}/src/Makefile
+
+VPATH = @srcdir@
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+
+top_builddir = ..
+subdir = src
+
+include $(top_builddir)/Makeconf
+
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+DISTFILES = Makefile.in
+
+## need extra early to get libintl.h installed
+SUBDIRS = scripts include extra appl nmath unix main modules library
+SUBDIRS_WITH_NO_BUILD = gnuwin32
+
+all: Makefile R
+
+Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
+	@cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
+
+R: Makefile
+
+install install-strip TAGS info dvi dist check R docs:
+	@for d in $(SUBDIRS); do \
+	  (cd $${d} && $(MAKE) $@) || exit 1; \
+	done
+
+uninstall mostlyclean clean:
+	@(for d in $(SUBDIRS); do rsd="$${d} $${rsd}"; done; \
+	  for d in $${rsd}; do (cd $${d} && $(MAKE) $@); done)
+distclean:
+	@(for d in $(SUBDIRS); do rsd="$${d} $${rsd}"; done; \
+	  for d in $${rsd}; do (cd $${d} && $(MAKE) $@); done)
+	-@rm -f Makefile
+maintainer-clean: distclean
+
+distdir: $(DISTFILES)
+	@for f in $(DISTFILES); do \
+	  test -f $(distdir)/$${f} \
+	    || ln $(srcdir)/$${f} $(distdir)/$${f} 2>/dev/null \
+	    || cp -p $(srcdir)/$${f} $(distdir)/$${f}; \
+	done
+	@for d in $(SUBDIRS); do \
+	  test -d $(distdir)/$${d} \
+	    || mkdir $(distdir)/$${d} \
+	    || exit 1; \
+	  chmod 755 $(distdir)/$${d}; \
+	  (cd $${d} && $(MAKE) distdir) \
+	    || exit 1; \
+	done
+	@for d in $(SUBDIRS_WITH_NO_BUILD); do \
+	  ((cd $(srcdir); $(TAR) -c -f - --exclude=.svn --exclude=.git --exclude=CVS $${d}) \
+	      | (cd $(distdir); $(TAR) -x -f -)) \
+	    || exit 1; \
+	done
