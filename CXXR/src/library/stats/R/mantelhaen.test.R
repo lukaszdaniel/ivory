@@ -24,24 +24,23 @@ function(x, y = NULL, z = NULL,
     DNAME <- deparse(substitute(x))
     if(is.array(x)) {
         if(length(dim(x)) == 3L) {
-            if(anyNA(x)) stop("NAs are not allowed")
+            if(anyNA(x)) stop("NA values are not allowed")
             if(any(dim(x) < 2L)) stop("each dimension in table must be >= 2")
         }
         else
             stop("'x' must be a 3-dimensional array")
     }
     else {
-        if(is.null(y)) stop("if 'x' is not an array, 'y' must be given")
-        if(is.null(z)) stop("if 'x' is not an array, 'z' must be given")
+        if(is.null(y)) stop(gettextf("if '%s' argument is not an array, '%s' argument must be given", "x", "y"))
+        if(is.null(z)) stop(gettextf("if '%s' argument is not an array, '%s' argument must be given", "x", "z"))
         if(any(diff(c(length(x), length(y), length(z))) != 0L ))
-            stop("'x', 'y', and 'z' must have the same length")
-        DNAME <- paste(DNAME, "and", deparse(substitute(y)), "and",
-                       deparse(substitute(z)))
+            stop(gettextf("'%s', '%s' and '%s' arguments must have the same length", "x", "y", "z"))
+        DNAME <- gettextf("%s and %s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)), collapse = ""), paste(deparse(substitute(z)), collapse = ""), domain = "R-stats")
         OK <- complete.cases(x, y, z)
         x <- factor(x[OK])
         y <- factor(y[OK])
         if((nlevels(x) < 2L) || (nlevels(y) < 2L))
-            stop("'x' and 'y' must have at least 2 levels")
+            stop("'x' and 'y' arguments must have at least 2 levels")
         else
             x <- table(x, y, z[OK])
     }
@@ -59,9 +58,10 @@ function(x, y = NULL, z = NULL,
         if(!missing(conf.level) &&
            (length(conf.level) != 1 || !is.finite(conf.level) ||
             conf.level < 0 || conf.level > 1))
-            stop("'conf.level' must be a single number between 0 and 1")
+            stop(gettextf("'%s' argument must be a single number between 0 and 1", "conf.level"))
 
-        NVAL <- c("common odds ratio" = 1)
+        NVAL <- 1
+        names(NVAL) <- gettext("common odds ratio", domain = "R-stats")
 
         if(!exact) {
             ## Classical Mantel-Haenszel 2 x 2 x K test
@@ -82,11 +82,12 @@ function(x, y = NULL, z = NULL,
             }
 
 
-            names(STATISTIC) <- "Mantel-Haenszel X-squared"
+            names(STATISTIC) <- gettext("Mantel-Haenszel X-squared", domain = "R-stats")
             names(PARAMETER) <- "df"
-            METHOD <- paste("Mantel-Haenszel chi-squared test",
-                            if(YATES) "with" else "without",
-                            "continuity correction")
+	    if(YATES)
+            METHOD <- gettext("Mantel-Haenszel chi-squared test with continuity correction", domain = "R-stats")
+	    else
+            METHOD <- paste("Mantel-Haenszel chi-squared test without continuity correction", domain = "R-stats")
             s.diag <- sum(x[1L, 1L, ] * x[2L, 2L, ] / n)
             s.offd <- sum(x[1L, 2L, ] * x[2L, 1L, ] / n)
             ## Mantel-Haenszel (1959) estimate of the common odds ratio.
@@ -127,8 +128,7 @@ function(x, y = NULL, z = NULL,
             ## where or is the common odds ratio in the k tables (and
             ## d(.) is a product hypergeometric distribution).
 
-            METHOD <- paste("Exact conditional test of independence",
-                            "in 2 x 2 x k tables")
+            METHOD <- gettext("Exact conditional test of independence in 2 x 2 x k tables", domain = "R-stats")
             mn <- apply(x, c(2L, 3L), sum)
             m <- mn[1L, ]
             n <- mn[2L, ]
@@ -255,11 +255,17 @@ function(x, y = NULL, z = NULL,
 
         names(ESTIMATE) <- names(NVAL)
         attr(CINT, "conf.level") <- conf.level
+	alt.name <- switch(alternative,
+                           two.sided = gettextf("true common odds ratio is not equal to %s", NVAL, domain = "R-stats"),
+                           less = gettextf("true common odds ratio is less than %s", NVAL, domain = "R-stats"),
+                           greater = gettextf("true common odds ratio is greater than %s", NVAL, domain = "R-stats"))
+
         RVAL <- c(RVAL,
                   list(conf.int = CINT,
                        estimate = ESTIMATE,
                        null.value = NVAL,
-                       alternative = alternative))
+                       alternative = alternative,
+		       alt.name = alt.name))
 
     }
     else {
@@ -290,9 +296,9 @@ function(x, y = NULL, z = NULL,
         STATISTIC <- c(crossprod(n, qr.solve(V, n)))
         PARAMETER <- df
         PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
-        names(STATISTIC) <- "Cochran-Mantel-Haenszel M^2"
+        names(STATISTIC) <- gettext("Cochran-Mantel-Haenszel M^2", domain = "R-stats")
         names(PARAMETER) <- "df"
-        METHOD <- "Cochran-Mantel-Haenszel test"
+        METHOD <- gettext("Cochran-Mantel-Haenszel test", domain = "R-stats")
         RVAL <- list(statistic = STATISTIC,
                      parameter = PARAMETER,
                      p.value = PVAL)

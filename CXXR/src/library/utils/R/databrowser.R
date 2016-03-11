@@ -29,7 +29,7 @@ browseEnv <- function(envir = .GlobalEnv, pattern,
 		  cat("objlist =\n"); print(objlist) }
     n <- length(objlist)
     if(n == 0L) {
-	cat("Empty environment, nothing to do!\n")
+	cat(gettext("Empty environment, nothing to do!", domain = "R-utils"), "\n", sep = "")
 	return(invisible())
     }
 
@@ -166,7 +166,7 @@ browseEnv <- function(envir = .GlobalEnv, pattern,
     ItemsPerContainer <- c(ItemsPerContainer, rep.int(0, M-N))
 
     if(is.null(main))
-	main <- paste("R objects in", deparse(substitute(envir)))
+	main <- paste(gettextf("R objects in %s", paste(deparse(substitute(envir)), collapse = ""), domain = "R-utils"))
     if(is.null(properties)) {
 	properties <- as.list(c(date = format(Sys.time(), "%Y-%b-%d %H:%M"),
 				local({
@@ -188,11 +188,11 @@ browseEnv <- function(envir = .GlobalEnv, pattern,
 wsbrowser <- function(IDS, IsRoot, IsContainer, ItemsPerContainer,
 		      ParentID, NAMES, TYPES, DIMS, expanded=TRUE,
 		      kind = "HTML",
-		      main = "R Workspace", properties = list(),
+		      main = gettext("R Workspace", domain = "R-utils"), properties = list(),
 		      browser = getOption("browser"))
 {
     if(kind != "HTML")
-        stop(gettextf("kind '%s' not yet implemented", kind), domain = NA)
+        stop(gettextf("kind '%s' not yet implemented", kind), domain = "R-utils")
 
     bold <- function(ch) paste0("<b>",ch,"</b>")
     ital <- function(ch) paste0("<i>",ch,"</i>")
@@ -262,8 +262,10 @@ wsbrowser <- function(IDS, IsRoot, IsContainer, ItemsPerContainer,
     url <- paste0("file://", URLencode(url))
 
     browseURL(url = url, browser = browser)
-    cat(main, "environment is shown in browser",
-	if(is.character(browser)) sQuote(browser),"\n")
+    if(is.character(browser))
+     cat(gettextf("%s environment is shown in browser %s", main, sQuote(browser), domain = "R-utils"),"\n", sep = "")
+    else
+     cat(gettextf("%s environment is shown in browser", main, domain = "R-utils"), "\n", sep = "")
 
     invisible(fname)
 }

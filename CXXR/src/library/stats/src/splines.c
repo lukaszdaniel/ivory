@@ -47,6 +47,7 @@
 #include <stdio.h>
 #include <errno.h>
 #include <math.h>
+#include "localization.h"
 
 /*
  *	Natural Splines
@@ -370,7 +371,7 @@ SEXP SplineCoef(SEXP method, SEXP x, SEXP y)
     x = PROTECT(coerceVector(x, REALSXP));
     y = PROTECT(coerceVector(y, REALSXP));
     int n = LENGTH(x), m = asInteger(method);
-    if(LENGTH(y) != n) error("inputs of different lengths");
+    if(LENGTH(y) != n) error(_("inputs of different lengths"));
     SEXP b, c, d, ans, nm;
     b = PROTECT(allocVector(REALSXP, n));
     c = PROTECT(allocVector(REALSXP, n));

@@ -440,18 +440,18 @@ calcCurveGrob <- function(x, debug) {
 validDetails.curve <- function(x) {
     if ((!is.unit(x$x1) || !is.unit(x$y1)) ||
         (!is.unit(x$x2) || !is.unit(x$y2)))
-        stop("'x1', 'y1', 'x2', and 'y2' must be units")
+        stop(gettextf("'%s', '%s', '%s', and '%s' components of argument 'x' must be objects of class %s", "x1", "y1", "x2", "y2", dQuote("unit")))
     x$curvature <- as.numeric(x$curvature)
     x$angle <- x$angle %% 180
     x$ncp <- as.integer(x$ncp)
     if (x$shape < -1 || x$shape > 1)
-        stop("'shape' must be between -1 and 1")
+        stop(gettextf("'%s' component of argument 'x' must be between -1 and 1", "shape"))
     x$square <- as.logical(x$square)
     if (x$squareShape < -1 || x$squareShape > 1)
-        stop("'squareShape' must be between -1 and 1")
+        stop(gettextf("'%s' component of argument 'x' must be between -1 and 1", "squareShape"))
     x$inflect <- as.logical(x$inflect)
     if (!is.null(x$arrow) && !inherits(x$arrow, "arrow"))
-        stop("'arrow' must be an arrow object or NULL")
+        stop(gettextf("'%s' component of argument 'x' must be an object of class %s or NULL", "arror", dQuote("arrow")))
     x$open <- as.logical(x$open)
     x
 }

@@ -36,7 +36,7 @@ R.home <- function(component="home")
 }
 
 file.show <-
-    function (..., header = rep("", nfiles), title = "R Information",
+    function (..., header = rep("", nfiles), title = gettext("R Information", domain = "R-base"),
               delete.file = FALSE, pager = getOption("pager"), encoding = "")
 {
     files <- path.expand(c(...))
@@ -118,7 +118,7 @@ file.copy <- function(from, to,
                                    copy.mode, copy.date)))
     } else if (nf > nt) stop("more 'from' files than 'to' files")
     else if (recursive)
-        warning("'recursive' will be ignored as 'to' is not a single existing directory")
+        warning("'recursive' argument will be ignored as 'to' argument is not a single existing directory")
     if(nt > nf) from <- rep_len(from, length.out = nt)
     okay <- file.exists(from)
     if (!overwrite) okay[file.exists(to)] <- FALSE
@@ -186,7 +186,7 @@ system.file <- function(..., package = "base", lib.loc = NULL, mustWork = FALSE)
     if(nargs() == 0L)
         return(file.path(.Library, "base"))
     if(length(package) != 1L)
-        stop("'package' must be of length 1")
+        stop(gettextf("'%s' argument must be of length 1", "package"))
     packagePath <- find.package(package, lib.loc, quiet = TRUE)
     ans <- if(length(packagePath)) {
         FILES <- file.path(packagePath, ...)
@@ -239,8 +239,8 @@ normalizePath <- function(path, winslash = "\\", mustWork = NA)
 Sys.setFileTime <- function(path, time)
 {
     if (!is.character(path) || length(path) != 1L)
-        stop("invalid 'path' argument")
+        stop(gettextf("invalid '%s' argument", "path"))
     time <- as.POSIXct(time)
-    if (is.na(time))  stop("invalid 'time' argument")
+    if (is.na(time))  stop(gettextf("invalid '%s' argument", "time"))
     .Internal(setFileTime(path, time))
 }

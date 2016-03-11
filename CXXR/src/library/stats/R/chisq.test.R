@@ -29,7 +29,7 @@ chisq.test <- function(x, y = NULL, correct = TRUE,
     }
     if (!is.matrix(x) && !is.null(y)) {
 	if (length(x) != length(y))
-	    stop("'x' and 'y' must have the same length")
+	    stop(gettextf("'%s' and '%s' arguments must have the same length", "x", "y"))
         DNAME2 <- deparse(substitute(y))
         ## omit names on dims if too long (and 1 line might already be too long)
         xname <- if(length(DNAME) > 1L || nchar(DNAME, "w") > 30) "" else DNAME
@@ -38,15 +38,14 @@ chisq.test <- function(x, y = NULL, correct = TRUE,
 	x <- factor(x[OK])
 	y <- factor(y[OK])
 	if ((nlevels(x) < 2L) || (nlevels(y) < 2L))
-	    stop("'x' and 'y' must have at least 2 levels")
+	    stop("'x' and 'y' arguments must have at least 2 levels")
 	## Could also call table() with 'deparse.level = 2', but we need
 	## to deparse ourselves for DNAME anyway ...
 	x <- table(x, y)
 	names(dimnames(x)) <- c(xname, yname)
         ## unclear what to do here: might abbreviating be preferable?
-	DNAME <- paste(paste(DNAME, collapse = "\n"),
-                       "and",
-                       paste(DNAME2, collapse = "\n"))
+	#DNAME <- paste(paste(DNAME, collapse = "\n"), "and", paste(DNAME2, collapse = "\n"))
+	DNAME <- gettextf("%s and %s", paste(DNAME, collapse = "\n"), paste(DNAME2, collapse = "\n"), domain = "R-stats")
     }
 
     if (any(x < 0) || anyNA(x))
@@ -55,18 +54,16 @@ chisq.test <- function(x, y = NULL, correct = TRUE,
 	stop("at least one entry of 'x' must be positive")
 
     if(simulate.p.value) {
-	setMETH <- function() # you shalt not cut_n_paste
-	    METHOD <<- paste(METHOD,
-			     "with simulated p-value\n\t (based on", B,
-			     "replicates)")
+#	setMETH <- function() # you shalt not cut_n_paste
+#	    METHOD <<- paste(METHOD, gettextf("with simulated p-value\n\t (based on %d replicates)", B))
         almost.1 <- 1 - 64 * .Machine$double.eps
     }
     if (is.matrix(x)) {
-	METHOD <- "Pearson's Chi-squared test"
+	METHOD <- gettext("Pearson's Chi-squared test", domain = "R-stats")
         nr <- as.integer(nrow(x))
         nc <- as.integer(ncol(x))
         if (is.na(nr) || is.na(nc) || is.na(nr * nc))
-            stop("invalid nrow(x) or ncol(x)", domain = NA)
+            stop("invalid 'nrow(x)' or 'ncol(x)' value", domain = "R-stats")
 	sr <- rowSums(x)
 	sc <- colSums(x)
 	E <- outer(sr, sc, "*") / n
@@ -78,7 +75,8 @@ chisq.test <- function(x, y = NULL, correct = TRUE,
 
 	dimnames(E) <- dimnames(x)
 	if (simulate.p.value && all(sr > 0) && all(sc > 0)) {
-	    setMETH()
+	    #setMETH()
+	    METHOD <- gettextf("Pearson's Chi-squared test with simulated p-value\n\t (based on %d replicates)", B, domain = "R-stats")
             tmp <- .Call(C_chisq_sim, sr, sc, B, E)
 	    ## Sorting before summing may look strange, but seems to be
 	    ## a sensible way to deal with rounding issues (PR#3486):
@@ -93,7 +91,7 @@ chisq.test <- function(x, y = NULL, correct = TRUE,
 	    if (correct && nrow(x) == 2L && ncol(x) == 2L) {
 		YATES <- min(0.5, abs(x-E))
                 if (YATES > 0)
-		    METHOD <- paste(METHOD, "with Yates' continuity correction")
+		    METHOD <- gettext("Pearson's Chi-squared test with Yates' continuity correction", domain = "R-stats")
 	    }
 	    else
 		YATES <- 0
@@ -104,27 +102,28 @@ chisq.test <- function(x, y = NULL, correct = TRUE,
     }
     else {
         if(length(dim(x)) > 2L)
-            stop("invalid 'x'")
+            stop(gettextf("invalid '%s' argument", "x"))
 	if (length(x) == 1L)
 	    stop("'x' must at least have 2 elements")
 	if (length(x) != length(p))
-	    stop("'x' and 'p' must have the same number of elements")
+	    stop(gettextf("'%s' and '%s' arguments must have the same length", "x", "p"))
 	if(any(p < 0)) stop("probabilities must be non-negative.")
 	if(abs(sum(p)-1) > sqrt(.Machine$double.eps)) {
 	    if(rescale.p) p <- p/sum(p)
 	    else stop("probabilities must sum to 1.")
 	}
-	METHOD <- "Chi-squared test for given probabilities"
+	METHOD <- gettext("Chi-squared test for given probabilities", domain = "R-stats")
 	E <- n * p
         V <- n * p * (1 - p)
 	STATISTIC <- sum((x - E) ^ 2 / E)
 	names(E) <- names(x)
 	if(simulate.p.value) {
-	    setMETH()
+#	    setMETH()
+	    METHOD <- gettextf("Chi-squared test for given probabilities with simulated p-value\n\t (based on %d replicates)", B, domain = "R-stats")
 	    nx <- length(x)
 	    sm <- matrix(sample.int(nx, B*n, TRUE, prob = p),nrow = n)
 	    ss <- apply(sm, 2L, function(x,E,k) {
-		sum((table(factor(x, levels=1L:k)) - E)^2 / E)
+		sum((table(factor(x, levels = seq_len(k))) - E)^2 / E)
 	    }, E = E, k = nx)
 	    PARAMETER <- NA
 	    PVAL <- (1 + sum(ss >= almost.1 * STATISTIC))/(B + 1)
@@ -134,7 +133,7 @@ chisq.test <- function(x, y = NULL, correct = TRUE,
 	}
     }
 
-    names(STATISTIC) <- "X-squared"
+    names(STATISTIC) <- gettext("X-squared", domain = "R-stats")
     names(PARAMETER) <- "df"
     if (any(E < 5) && is.finite(PARAMETER))
 	warning("Chi-squared approximation may be incorrect")

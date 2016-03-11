@@ -56,13 +56,7 @@
 int	imax2(int, int);
 int	imin2(int, int);
 
-#ifdef ENABLE_NLS
-#define G_(String) libintl_dgettext("RGui", String)
-#define GN_(String) gettext_noop (String)
-#else /* not NLS */
-#define G_(String) (String)
-#define GN_(String) String
-#endif
+#include "localization.h"
 
 /* from extra.c */
 extern size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
@@ -577,11 +571,11 @@ static void RFontInit()
 	oops[0] = '\0';
 	notdone = optread(opt, ':');
 	if (notdone == 1)
-	    snprintf(oops, 256, "[%s] Error at line %d.", optfile(), optline());
+	    snprintf(oops, 256, _("[%s] Error at line %d."), optfile(), optline());
 	else if (notdone == 2) {
 	    fontname[fontnum] = strdup(opt[0]);
 	    if (!fontname[fontnum])
-		strcpy(oops, "Insufficient memory. ");
+		strcpy(oops, _("Insufficient memory. "));
 	    else {
 		if (!strcmpi(opt[1], "plain"))
 		    fontstyle[fontnum] = Plain;
@@ -592,7 +586,7 @@ static void RFontInit()
 		else if (!strcmpi(opt[1], "bold&italic"))
 		    fontstyle[fontnum] = BoldItalic;
 		else
-		    snprintf(oops, 256, "Unknown style at line %d. ", optline());
+		    snprintf(oops, 256, _("Unknown style at line %d. "), optline());
 		fontnum += 1;
 	    }
 	}
@@ -1231,7 +1225,7 @@ static void menunext(control m)
     pMUSTEXIST;
     pCHECK;
     if (pCURRENTPOS != (pNUMPLOTS - 1)) pMOVE(1);
-    PrintWarnings();
+    PrintWarnings(NULL);
 }
 
 static void menuprev(control m)
@@ -1254,7 +1248,7 @@ static void menuprev(control m)
 	}
 	pMOVE((xd->needsave) ? 0 : -1);
     }
-    PrintWarnings();
+    PrintWarnings(NULL);
 }
 
 static void menugrclear(control m)
@@ -3415,17 +3409,17 @@ SEXP savePlot(SEXP args)
     args = CDR(args); /* skip entry point name */
     device = asInteger(CAR(args));
     if(device < 1 || device > NumDevices())
-	error(_("invalid device number in 'savePlot'"));
+	error(_("invalid device number in 'savePlot()' function"));
     dd = GEgetDevice(device - 1)->dev;
     if(!dd) error(_("invalid device in 'savePlot'"));
     filename = CADR(args);
     if (!isString(filename) || LENGTH(filename) != 1)
-	error(_("invalid filename argument in 'savePlot'"));
+	error(_("invalid filename argument in 'savePlot()' function"));
     /* in 2.8.0 this will always be passed as native, but be conserative */
     fn = translateChar(STRING_ELT(filename, 0));
     type = CADDR(args);
     if (!isString(type) || LENGTH(type) != 1)
-	error(_("invalid type argument in 'savePlot'"));
+	error(_("invalid type argument in 'savePlot()' function"));
     tp = CHAR(STRING_ELT(type, 0));
     restoreConsole = asLogical(CADDDR(args));
 
@@ -3643,11 +3637,11 @@ SEXP devga(SEXP args)
     args = CDR(args);
     recording = asLogical(CAR(args));
     if (recording == NA_LOGICAL)
-	error(_("invalid value of '%s'"), "record");
+	error(_("invalid '%s' value"), "record");
     args = CDR(args);
     resize = asInteger(CAR(args));
     if (resize == NA_INTEGER)
-	error(_("invalid value of '%s'"), "rescale");
+	error(_("invalid '%s' value"), "rescale");
     args = CDR(args);
     xpinch = asReal(CAR(args));
     args = CDR(args);
@@ -3655,7 +3649,7 @@ SEXP devga(SEXP args)
     args = CDR(args);
     sc = CAR(args);
     if (!isString(sc) && !isInteger(sc) && !isLogical(sc) && !isReal(sc))
-	error(_("invalid value of '%s'"), "canvas");
+	error(_("invalid '%s' value"), "canvas");
     canvas = RGBpar(sc, 0);
     args = CDR(args);
     gamma = asReal(CAR(args));
@@ -3666,31 +3660,31 @@ SEXP devga(SEXP args)
     args = CDR(args);
     buffered = asLogical(CAR(args));
     if (buffered == NA_LOGICAL)
-	error(_("invalid value of '%s'"), "buffered");
+	error(_("invalid '%s' value"), "buffered");
     args = CDR(args);
     psenv = CAR(args);
     args = CDR(args);
     sc = CAR(args);
     if (!isString(sc) && !isInteger(sc) && !isLogical(sc) && !isReal(sc))
-	error(_("invalid value of '%s'"), "bg");
+	error(_("invalid '%s' value"), "bg");
     bg = RGBpar(sc, 0);
     args = CDR(args);
     restoreConsole = asLogical(CAR(args));
     args = CDR(args);
     sc = CAR(args);
     if (!isString(sc) || LENGTH(sc) != 1)
-	error(_("invalid value of '%s'"), "title");
+	error(_("invalid '%s' value"), "title");
     title = CHAR(STRING_ELT(sc, 0));
     args = CDR(args);
     clickToConfirm = asLogical(CAR(args));
     args = CDR(args);
     fillOddEven = asLogical(CAR(args));
     if (fillOddEven == NA_LOGICAL)
-	error(_("invalid value of '%s'"), "fillOddEven");
+	error(_("invalid '%s' value"), "fillOddEven");
     args = CDR(args);
     sc = CAR(args);
     if (!isString(sc) || LENGTH(sc) != 1)
-	error(_("invalid value of '%s'"), "family");
+	error(_("invalid '%s' value"), "family");
     family = CHAR(STRING_ELT(sc, 0));
     quality = DEFAULT_QUALITY;
     args = CDR(args);

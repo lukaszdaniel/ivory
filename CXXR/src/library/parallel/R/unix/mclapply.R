@@ -23,7 +23,7 @@ mclapply <- function(X, FUN, ..., mc.preschedule = TRUE, mc.set.seed = TRUE,
                      mc.cleanup = TRUE, mc.allow.recursive = TRUE)
 {
     cores <- as.integer(mc.cores)
-    if(is.na(cores) || cores < 1L) stop("'mc.cores' must be >= 1")
+    if(is.na(cores) || cores < 1L) stop(gettextf("'%s' argument must be >= 1", "mc.cores"))
     .check_ncores(cores)
 
     if (isChild() && !isTRUE(mc.allow.recursive))
@@ -130,7 +130,7 @@ mclapply <- function(X, FUN, ..., mc.preschedule = TRUE, mc.set.seed = TRUE,
         f <- mcfork()
         if (isTRUE(mc.set.seed)) mc.advance.stream()
         if (inherits(f, "masterProcess")) { # this is the child process
-            on.exit(mcexit(1L, structure("fatal error in wrapper code", class="try-error")))
+            on.exit(mcexit(1L, structure(gettext("fatal error in wrapper code"), class="try-error")))
             if (isTRUE(mc.set.seed)) mc.set.stream()
             if (isTRUE(mc.silent)) closeStdout(TRUE)
             sendMaster(try(lapply(X = S, FUN = FUN, ...), silent = TRUE))

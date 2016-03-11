@@ -44,34 +44,33 @@ match.arg <- function (arg, choices, several.ok = FALSE)
     }
     if (is.null(arg)) return(choices[1L])
     else if(!is.character(arg))
-	stop("'arg' must be NULL or a character vector")
+	stop(gettextf("'%s' argument must be NULL or a character vector", "arg"))
     if (!several.ok) { # most important (default) case:
         ## the arg can be the whole of choices as a default argument.
         if(identical(arg, choices)) return(arg[1L])
-        if(length(arg) > 1L) stop("'arg' must be of length 1")
-    } else if(length(arg) == 0L) stop("'arg' must be of length >= 1")
+        if(length(arg) > 1L) stop(gettextf("'%s' argument must be of length 1", "arg"))
+    } else if(length(arg) == 0L) stop(gettextf("'%s' argument must be of length greater or equal to 1", "arg"))
 
     ## handle each element of arg separately
     i <- pmatch(arg, choices, nomatch = 0L, duplicates.ok = TRUE)
     if (all(i == 0L))
-	stop(gettextf("'arg' should be one of %s",
-                      paste(dQuote(choices), collapse = ", ")),
-             domain = NA)
+	stop(gettextf("'%s' argument should be one of %s", "arg",
+                      paste(dQuote(choices), collapse = ", "), domain = "R-base"), domain = NA)
     i <- i[i > 0L]
     if (!several.ok && length(i) > 1)
-        stop("there is more than one match in 'match.arg'")
+        stop("there is more than one match in 'match.arg()' function")
     choices[i]
 }
 
 charmatch <- function(x, table, nomatch = NA_integer_)
     .Internal(charmatch(as.character(x), as.character(table), nomatch))
 
-char.expand <- function(input, target, nomatch = stop("no match"))
+char.expand <- function(input, target, nomatch = stop("no match in 'char.expand()' function"))
 {
     if(length(input) != 1L)
-	stop("'input' must have length 1")
+	stop(gettextf("'%s' argument must be of length 1", "input"))
     if(!(is.character(input) && is.character(target)))
-	stop("'input' and 'target' must be character vectors")
+	stop(gettextf("'%s' and '%s' arguments must be character vectors", "input", "target"))
     y <- .Internal(charmatch(input, target, NA_integer_))
     if(anyNA(y)) eval(nomatch)
     target[y]

@@ -21,7 +21,7 @@ local({
     pkg <- info$pkgname
     ns <- .getNamespace(as.name(pkg))
     if (is.null(ns))
-        stop("cannot find namespace environment for ", pkg, domain = NA);
+        stop(gettextf("cannot find namespace environment for package %s", sQuote(pkg)), domain = "R-base");
     dbbase <- file.path(info$libname, pkg, "R", pkg)
     lazyLoad(dbbase, ns, filter = function(n) n != ".__NAMESPACE__.")
 })

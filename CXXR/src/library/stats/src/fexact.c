@@ -34,6 +34,7 @@
 #include <limits.h>
 #include <math.h>
 #include <R.h>
+#include "localization.h"
 
 static void f2xact(int nrow, int ncol, int *table, int ldtabl,
 		   double *expect, double *percnt, double *emin,
@@ -202,19 +203,18 @@ fexact(int *nrow, int *ncol, int *table, int *ldtabl,
     iwkpt = 0;
 
     if (*nrow > *ldtabl)
-	prterr(1, "NROW must be less than or equal to LDTABL.");
+	prterr(1, _("NROW must be less than or equal to LDTABL."));
 
     ntot = 0;
     for (i = 0; i < *nrow; ++i) {
 	for (j = 0; j < *ncol; ++j) {
 	    if (table[i + j * *ldtabl] < 0)
-		prterr(2, "All elements of TABLE may not be negative.");
+		prterr(2, _("All elements of TABLE may not be negative."));
 	    ntot += table[i + j * *ldtabl];
 	}
     }
     if (ntot == 0) {
-	prterr(3, "All elements of TABLE are zero.\n"
-	       "PRT and PRE are set to missing values.");
+	prterr(3, _("All elements of TABLE are zero.\nPRT and PRE are set to missing values."));
 	*pre = *prt = amiss;
 	return;
     }
@@ -345,12 +345,12 @@ f2xact(int nrow, int ncol, int *table, int ldtabl,
     /* TOL is chosen as the square root of the smallest relative spacing. */
     const static double tol = 3.45254e-7;
 
-    const char* ch_err_5 =
+/*    const char* ch_err_5 =
 	"The hash table key cannot be computed because the largest key\n"
 	"is larger than the largest representable int.\n"
 	"The algorithm cannot proceed.\n"
 	"Reduce the workspace size or use another algorithm.";
-
+*/
     /* Local variables -- changed from "static"
      *  (*does* change results very slightly on i386 linux) */
     int i, ii, j, k, n,
@@ -390,9 +390,9 @@ f2xact(int nrow, int ncol, int *table, int ldtabl,
 
     /* Check table dimensions */
     if (nrow > ldtabl)
-	prterr(1, "NROW must be less than or equal to LDTABL.");
+	prterr(1, _("NROW must be less than or equal to LDTABL."));
     if (ncol <= 1)
-	prterr(4, "NCOL must be at least 2");
+	prterr(4, _("NCOL must be at least 2"));
 
     /* Initialize KEY array */
     for (i = 1; i <= *ldkey << 1; ++i) {
@@ -412,15 +412,14 @@ f2xact(int nrow, int ncol, int *table, int ldtabl,
 	iro[i] = 0;
 	for (j = 1; j <= ncol; ++j) {
 	    if (table[i + j * ldtabl] < 0.)
-		prterr(2, "All elements of TABLE may not be negative.");
+		prterr(2, _("All elements of TABLE may not be negative."));
 	    iro[i] += table[i + j * ldtabl];
 	}
 	ntot += iro[i];
     }
 
     if (ntot == 0) {
-	prterr(3, "All elements of TABLE are zero.\n"
-	       "PRT and PRE are set to missing values.");
+	prterr(3, _("All elements of TABLE are zero.\nPRT and PRE are set to missing values."));
 	*pre = *prt = amiss;
 	return;
     }
@@ -463,7 +462,7 @@ f2xact(int nrow, int ncol, int *table, int ldtabl,
 	    j /= kyy[i];
 	}
 	else {
-	    prterr(5, ch_err_5);
+	    prterr(5, _("The hash table key cannot be computed because the largest key\nis larger than the largest representable int.\nThe algorithm cannot proceed.\nReduce the workspace size or use another algorithm."));
 	    return;
 	}
     }
@@ -472,7 +471,7 @@ f2xact(int nrow, int ncol, int *table, int ldtabl,
     /* original code: if (iro[nro - 1] + 1 > imax / kyy[nro - 1]) */
     if (iro[nro] + 1 > imax / kyy[nro]) {
 	/* L_ERR_5: */
-	prterr(501, ch_err_5);
+	prterr(501, _("The hash table key cannot be computed because the largest key\nis larger than the largest representable int.\nThe algorithm cannot proceed.\nReduce the workspace size or use another algorithm."));
 	return;
     }
 
@@ -655,8 +654,7 @@ L150:
 	   "It is not possible to give the value of LDKEY required,\n"
 	   "but you could try doubling LDKEY (and possibly LDSTP).");
 	   */
-	prterr(6, "LDKEY is too small for this problem.\n"
-	       "Try increasing the size of the workspace.");
+	prterr(6, _("LDKEY is too small for this problem.\nTry increasing the size of the workspace."));
     }
 
 L240:
@@ -1031,7 +1029,7 @@ LoopNode: /* Generate a node */
 	    key = it[i] + key * kyy;
 	}
 	if (key < -1)
-	    PROBLEM "Bug in FEXACT: gave negative key" RECOVER(NULL_ENTRY);
+	    PROBLEM _("Bug in FEXACT: gave negative key") RECOVER(NULL_ENTRY);
 	/* Table index */
 	ipn = key % ldst + 1;
 	/* Find empty position */
@@ -1052,8 +1050,7 @@ LoopNode: /* Generate a node */
 	}
 
 	/* this happens less, now that we check for negative key above: */
-	prterr(30, "Stack length exceeded in f3xact.\n"
-	       "This problem should not occur.");
+	prterr(30, _("Stack length exceeded in f3xact.\nThis problem should not occur."));
 
 L180: /* Push onto stack */
 	ist[ii] = key;
@@ -1399,8 +1396,7 @@ f5xact(double *pastp, const double *tol, int *kval, int *key, int *ldkey,
 	  "required,\n"
 	  "but twice the current value may be sufficient.");
 	  */
-	prterr(6, "LDKEY is too small for this problem.\n"
-	       "Try increasing the size of the workspace.");
+	prterr(6, _("LDKEY is too small for this problem.\nTry increasing the size of the workspace."));
 
 
 L30: /* Update KEY */
@@ -1416,8 +1412,7 @@ L30: /* Update KEY */
 	       "required,\n"
 	       "but twice the current value may be sufficient.");
 	       */
-	    prterr(7, "LDSTP is too small for this problem.\n"
-		   "Try increasing the size of the workspace.");
+	    prterr(7, _("LDSTP is too small for this problem.\nTry increasing the size of the workspace."));
 	}
 	/* Update STP, etc. */
 	npoin[*itop] = -1;
@@ -1454,8 +1449,7 @@ L40: /* Find location, if any, of pastp */
 	  "required,\n"
 	  "but twice the current value may be sufficient.");
 	  */
-	prterr(7, "LDSTP is too small for this problem.\n"
-	       "Try increasing the size of the workspace.");
+	prterr(7, _("LDSTP is too small for this problem.\nTry increasing the size of the workspace."));
 	return;
     }
 
@@ -1812,7 +1806,7 @@ void NORET prterr(int icode, const char *mes)
      mes    - Character string containing the error message.	(Input)
   -----------------------------------------------------------------------
   */
-    PROBLEM "FEXACT error %d.\n%s", icode, mes RECOVER(NULL_ENTRY);
+    PROBLEM _("FEXACT error %d.\n%s"), icode, mes RECOVER(NULL_ENTRY);
 }
 
 int iwork(int iwkmax, int *iwkpt, int number, int itype)
@@ -1847,7 +1841,7 @@ int iwork(int iwkmax, int *iwkpt, int number, int itype)
 	i /= 2;
     }
     if (*iwkpt > iwkmax)
-	prterr(40, "Out of workspace.");
+	prterr(40, _("Out of workspace."));
 
     return i;
 }
@@ -1926,7 +1920,7 @@ L30:
 	++m;
 	goto L10;
     } else {
-	prterr(20, "This should never occur.");
+	prterr(20, _("This should never occur."));
     }
     /* Use another segment */
 L40:

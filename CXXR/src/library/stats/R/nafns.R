@@ -28,7 +28,7 @@ na.fail <- function(object, ...) UseMethod("na.fail")
 na.fail.default <- function(object, ...)
 {
     ok <- complete.cases(object)
-    if(all(ok)) object else stop("missing values in object")
+    if(all(ok)) object else stop(gettextf("missing values in '%s' argument", "object"))
 }
 
 na.omit <- function(object, ...) UseMethod("na.omit")
@@ -146,7 +146,7 @@ naresid.default <- function(omit, x, ...) x
 naresid.exclude <- function(omit, x, ...)
 {
     if (length(omit) == 0 || !is.numeric(omit))
-	stop("invalid argument 'omit'")
+	stop(gettextf("invalid '%s' argument", "omit"))
 
     ## the next line copes with calls from older versions of weights.default.
     if (is.null(x)) return(x)

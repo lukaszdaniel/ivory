@@ -19,7 +19,7 @@
 zapsmall <- function(x, digits = getOption("digits"))
 {
     if (length(digits) == 0L)
-        stop("invalid 'digits'")
+        stop(gettextf("invalid '%s' argument", "digits"))
     if (all(ina <- is.na(x)))
         return(x)
     mx <- max(abs(x[!ina]))

@@ -33,7 +33,7 @@ summaryRprof <-
     on.exit(close(con))
     firstline <- readLines(con, n = 1L)
     if(!length(firstline))
-        stop(gettextf("no lines found in %s", sQuote(filename)), domain = NA)
+        stop(gettextf("no lines found in %s", sQuote(filename)), domain = "R-utils")
     sample.interval <- as.numeric(strsplit(firstline, "=")[[1L]][2L])/1e6
     memory.profiling <- substr(firstline, 1L, 6L) == "memory"
     line.profiling <- grepl("line profiling", firstline)

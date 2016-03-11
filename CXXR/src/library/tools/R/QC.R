@@ -94,7 +94,7 @@ function(package, dir, lib.loc = NULL)
     ## </NOTE>
     if(!missing(package)) {
         if(length(package) != 1L)
-            stop("argument 'package' must be of length 1")
+            stop(gettextf("'%s' argument must be of length 1", "package"))
         dirdir <- dirname(dir <- find.package(package, lib.loc))
         ## Using package installed in @code{dir} ...
         is_base <- package == "base"
@@ -111,13 +111,12 @@ function(package, dir, lib.loc = NULL)
     }
     else {
         if(missing(dir))
-            stop("you must specify 'package' or 'dir'")
+            stop("you must specify 'package' or 'dir' argument")
         pkgname <- basename(dir)
         dirdir  <- dirname(dir)
         ## Using sources from directory @code{dir} ...
         if(!dir.exists(dir))
-            stop(gettextf("directory '%s' does not exist", dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
         else
             dir <- file_path_as_absolute(dir)
         is_base <- pkgname == "base"
@@ -283,17 +282,12 @@ function(x, ...)
     .fmt <- function(i) {
         tag <- names(x)[i]
         msg <- switch(tag,
-                      "code objects" =
-                      gettext("Undocumented code objects:"),
-                      "data sets" =
-                      gettext("Undocumented data sets:"),
-                      "S4 classes" =
-                      gettext("Undocumented S4 classes:"),
-                      "S4 methods" =
-                      gettext("Undocumented S4 methods:"),
-                      prim_extra =
-                      gettext("Prototyped non-primitives:"),
-                      gettextf("Undocumented %s:", tag))
+                      "code objects" = gettext("Undocumented code objects:", domain = "R-tools"),
+                      "data sets" = gettext("Undocumented data sets:", domain = "R-tools"),
+                      "S4 classes" = gettext("Undocumented S4 classes:", domain = "R-tools"),
+                      "S4 methods" = gettext("Undocumented S4 methods:", domain = "R-tools"),
+                      prim_extra = gettext("Prototyped non-primitives:", domain = "R-tools"),
+                      gettextf("Undocumented %s:", tag, domain = "R-tools"))
         c(msg,
           ## We avoid markup for indicating S4 methods, hence need to
           ## special-case output for these ...
@@ -318,16 +312,14 @@ function(package, dir, lib.loc = NULL,
     ## Argument handling.
     if(!missing(package)) {
         if(length(package) != 1L)
-            stop("argument 'package' must be of length 1")
+            stop(gettextf("'%s' argument must be of length 1", "package"))
         dir <- find.package(package, lib.loc)
         ## Using package installed in @code{dir} ...
         code_dir <- file.path(dir, "R")
         if(!dir.exists(code_dir))
-            stop(gettextf("directory '%s' does not contain R code", dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not contain R code", sQuote(dir)), domain = "R-tools")
         if(!.haveRds(dir))
-            stop(gettextf("directory '%s' does not contain Rd objects", dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not contain Rd objects", sQuote(dir)), domain = "R-tools")
         is_base <- basename(dir) == "base"
 
         ## Load package into code_env.
@@ -357,21 +349,20 @@ function(package, dir, lib.loc = NULL,
     }
     else {
         if(missing(dir))
-            stop("you must specify 'package' or 'dir'")
+            stop("you must specify 'package' or 'dir' argument")
         ## Using sources from directory @code{dir} ...
         if(!dir.exists(dir))
-            stop(gettextf("directory '%s' does not exist", dir), domain = NA)
+            stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
         ## else
         package_name <- basename(dir) # early, before resolving sym.links etc in next line:
         dirdir <- dirname(dir)        # early, ...
         dir <- file_path_as_absolute(dir)
         code_dir <- file.path(dir, "R")
         if(!dir.exists(code_dir))
-            stop(gettextf("directory '%s' does not contain R code", dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not contain R code", sQuote(dir)), domain = "R-tools")
+
         if(!.haveRds(dir))
-            stop(gettextf("directory '%s' does not contain Rd objects", dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not contain Rd objects", sQuote(dir)), domain = "R-tools")
         is_base <- package_name == "base"
 
         code_env <- new.env(hash = TRUE)
@@ -745,8 +736,7 @@ function(x, ...)
         attr(x, "functions_in_usages_not_in_code")
     if(length(functions_in_usages_not_in_code)) {
         for(fname in names(functions_in_usages_not_in_code)) {
-            writeLines(gettextf("Functions or methods with usage in documentation object '%s' but not in code:",
-                                fname))
+            writeLines(gettextf("Functions or methods with usage in documentation object %s but not in code:", sQuote(fname), domain = "R-tools"))
             .pretty_print(unique(functions_in_usages_not_in_code[[fname]]))
             writeLines("")
         }
@@ -756,8 +746,7 @@ function(x, ...)
         attr(x, "data_sets_in_usages_not_in_code")
     if(length(data_sets_in_usages_not_in_code)) {
         for(fname in names(data_sets_in_usages_not_in_code)) {
-            writeLines(gettextf("Data with usage in documentation object '%s' but not in code:",
-                                fname))
+            writeLines(gettextf("Data with usage in documentation object %s but not in code:", sQuote(fname), domain = "R-tools"))
             .pretty_print(unique(data_sets_in_usages_not_in_code[[fname]]))
             writeLines("")
         }
@@ -801,13 +790,13 @@ function(x, ...)
 
     summarize_mismatches_in_names <- function(nfc, nfd) {
         if(length(nms <- setdiff(nfc, nfd)))
-            writeLines(c(gettext("  Argument names in code not in docs:"),
-                         strwrap(paste(nms, collapse = " "),
-                                 indent = 4L, exdent = 4L)))
+            writeLines(c(gettext("  Argument names in code but not in docs:", domain = "R-tools"),
+                         strwrap(paste(nms, collapse = " "), indent = 4L, exdent = 4L)))
+
         if(length(nms <- setdiff(nfd, nfc)))
-            writeLines(c(gettext("  Argument names in docs not in code:"),
-                         strwrap(paste(nms, collapse = " "),
-                                 indent = 4L, exdent = 4L)))
+            writeLines(c(gettext("  Argument names in docs but not in code:", domain = "R-tools"),
+                         strwrap(paste(nms, collapse = " "), indent = 4L, exdent = 4L)))
+
         len <- min(length(nfc), length(nfd))
         if(len) {
             len <- seq_len(len)
@@ -817,14 +806,13 @@ function(x, ...)
             len <- length(ind)
             if(len) {
                 if(len > 3L) {
-                    writeLines(gettext("  Mismatches in argument names (first 3):"))
+                    writeLines(gettext("  Mismatches in argument names (first 3):", domain = "R-tools"))
                     ind <- ind[1L:3L]
                 } else {
-                    writeLines(gettext("  Mismatches in argument names:"))
+                    writeLines(gettext("  Mismatches in argument names:", domain = "R-tools"))
                 }
                 for(i in ind) {
-                    writeLines(sprintf("    Position: %d Code: %s Docs: %s",
-                                       i, nfc[i], nfd[i]))
+                    writeLines(gettextf("    Position: %d Code: %s Docs: %s", i, nfc[i], nfd[i], domain = "R-tools"))
                 }
             }
         }
@@ -839,10 +827,10 @@ function(x, ...)
         len <- length(ind)
         if(len) {
             if(len > 3L) {
-                writeLines(gettext("  Mismatches in argument default values (first 3):"))
+                writeLines(gettext("  Mismatches in argument default values (first 3):", domain = "R-tools"))
                 ind <- ind[1L:3L]
             } else {
-                writeLines(gettext("  Mismatches in argument default values:"))
+                writeLines(gettext("  Mismatches in argument default values:", domain = "R-tools"))
             }
             for(i in ind) {
                 multiline <- FALSE
@@ -857,9 +845,11 @@ function(x, ...)
                     multiline <- TRUE
                 }
                 dv <- gsub("<unescaped bksl>", "\\", dv, fixed = TRUE)
-                sep <- if(multiline) "\n    " else " "
-                writeLines(sprintf("    Name: '%s'%sCode: %s%sDocs: %s",
-                                   nms[i], sep, cv, sep, dv))
+                if(multiline) {
+		   writeLines(gettextf("    Name: %s\n    Code: %s\n    Docs: %s", sQuote(nms[i]), cv, dv, domain = "R-tools"))
+                } else {
+		   writeLines(gettextf("    Name: %s Code: %s Docs: %s", sQuote(nms[i]), cv, dv, domain = "R-tools"))
+	 	}
             }
         }
     }
@@ -874,17 +864,14 @@ function(x, ...)
     }
 
     for(fname in names(x)) {
-        writeLines(gettextf("Codoc mismatches from documentation object '%s':",
-                            fname))
+        writeLines(gettextf("Codoc mismatches from documentation object %s:", sQuote(fname), domain = "R-tools"))
         xfname <- x[[fname]]
         for(i in seq_along(xfname)) {
             ffc <- xfname[[i]][["code"]]
             ffd <- xfname[[i]][["docs"]]
             writeLines(c(xfname[[i]][["name"]],
-                         strwrap(gettextf("Code: %s", format_args(ffc)),
-                                 indent = 2L, exdent = 17L),
-                         strwrap(gettextf("Docs: %s", format_args(ffd)),
-                                 indent = 2L, exdent = 17L)))
+                         strwrap(gettextf("Code: %s", format_args(ffc), domain = "R-tools"), indent = 2L, exdent = 17L),
+                         strwrap(gettextf("Docs: %s", format_args(ffd), domain = "R-tools"), indent = 2L, exdent = 17L)))
             summarize_mismatches(ffc, ffd)
         }
         writeLines("")
@@ -914,14 +901,14 @@ function(package, lib.loc = NULL)
 
     ## Argument handling.
     if(length(package) != 1L)
-        stop("argument 'package' must be of length 1")
+        stop(gettextf("'%s' argument must be of length 1", "package"))
     dir <- find.package(package, lib.loc)
     if(!dir.exists(file.path(dir, "R")))
-        stop(gettextf("directory '%s' does not contain R code", dir),
-             domain = NA)
+        stop(gettextf("directory %s does not contain R code", sQuote(dir)), domain = "R-tools")
+
     if(!.haveRds(dir))
-        stop(gettextf("directory '%s' does not contain Rd objects", dir),
-             domain = NA)
+        stop(gettextf("directory %s does not contain Rd objects", sQuote(dir)), domain = "R-tools")
+
     is_base <- basename(dir) == "base"
 
     ## Load package into code_env.
@@ -1040,15 +1027,12 @@ function(x, ...)
             capWord <- function(w) sub("\\b(\\w)", "\\U\\1", w, perl = TRUE)
 
             if(length(O <- docObj[[nam]]))
-                strwrap(sprintf("%s: %s", gettextf(capWord(nam)),
-                                paste(O, collapse = " ")),
-                        indent = 2L, exdent = 8L)
+                strwrap(sprintf("%s: %s", gettextf(capWord(nam)), paste(O, collapse = " ")), indent = 2L, exdent = 8L)
         }
 
         docObj <- x[[nm]]
-        c(gettextf("S4 class codoc mismatches from documentation object '%s':",
-                   nm),
-          gettextf("Slots for class '%s'", docObj[["name"]]),
+        c(gettextf("S4 class codoc mismatches from documentation object %s:", sQuote(nm), domain = "R-tools"),
+          gettextf("Slots for class %s", dQuote(docObj[["name"]]), domain = "R-tools"),
           wrapPart("code"),
           wrapPart("inherited"),
           wrapPart("docs"),
@@ -1079,7 +1063,7 @@ function(package, lib.loc = NULL)
 
     ## Argument handling.
     if(length(package) != 1L)
-        stop("argument 'package' must be of length 1")
+        stop(gettextf("'%s' argument must be of length 1", "package"))
 
     dir <- find.package(package, lib.loc)
 
@@ -1176,8 +1160,7 @@ function(package, lib.loc = NULL)
         x <- .Rd_drop_comments(x[[1L]])
         ## </FIXME>
         ## What did the format section start with?
-        if(!grepl("^[ \n\t]*(A|This) data frame",
-                  .Rd_deparse(x, tag = FALSE)))
+        if(!grepl("^[ \n\t]*(A|This) data frame", .Rd_deparse(x, tag = FALSE)))
             return(character())
         ## Get \describe inside \format.
         ## Should this allow for several \describe blocks?
@@ -1255,12 +1238,10 @@ function(x, ...)
     .fmt <- function(nm) {
         docObj <- x[[nm]]
         ## FIXME singular or plural?
-        c(gettextf("Data codoc mismatches from documentation object '%s':", nm),
-          gettextf("Variables in data frame '%s'", docObj[["name"]]),
-          strwrap(gettextf("Code: %s", format_args(docObj[["code"]])),
-                  indent = 2L, exdent = 8L),
-          strwrap(gettextf("Docs: %s", format_args(docObj[["docs"]])),
-                  indent = 2L, exdent = 8L),
+        c(gettextf("Data codoc mismatches from documentation object %s:", sQuote(nm), domain = "R-tools"),
+          gettextf("Variables in data frame %s", sQuote(docObj[["name"]]), domain = "R-tools"),
+          strwrap(gettextf("Code: %s", format_args(docObj[["code"]]), domain = "R-tools"), indent = 2L, exdent = 8L),
+          strwrap(gettextf("Docs: %s", format_args(docObj[["docs"]]), domain = "R-tools"), indent = 2L, exdent = 8L),
           "")
     }
 
@@ -1275,17 +1256,16 @@ function(package, dir, lib.loc = NULL)
     ## Argument handling.
     if(!missing(package)) {
         if(length(package) != 1L)
-            stop("argument 'package' must be of length 1")
+            stop(gettextf("'%s' argument must be of length 1", "package"))
         dir <- find.package(package, lib.loc)
         ## Using package installed in @code{dir} ...
     }
     else {
         if(missing(dir))
-            stop("you must specify 'package' or 'dir'")
+            stop("you must specify 'package' or 'dir' argument")
         ## Using sources from directory @code{dir} ...
         if(!dir.exists(dir))
-            stop(gettextf("directory '%s' does not exist", dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
         else
             dir <- file_path_as_absolute(dir)
     }
@@ -1468,32 +1448,27 @@ function(x, ...)
         c(character(),
           if(length(arg_names_in_usage_missing_in_arg_list <-
                     x[[nm]][["missing"]])) {
-              c(gettextf("Undocumented arguments in documentation object '%s'",
-                         nm),
+              c(gettextf("Undocumented arguments in documentation object %s", sQuote(nm), domain = "R-tools"),
                 .pretty_format(unique(arg_names_in_usage_missing_in_arg_list)))
           },
           if(length(duplicated_args_in_arg_list <-
                     x[[nm]][["duplicated"]])) {
-              c(gettextf("Duplicated \\argument entries in documentation object '%s':",
-                         nm),
+              c(gettextf("Duplicated \\argument entries in documentation object %s:", sQuote(nm), domain = "R-tools"),
                 .pretty_format(duplicated_args_in_arg_list))
           },
           if(length(arg_names_in_arg_list_missing_in_usage <-
                     x[[nm]][["overdoc"]])) {
-              c(gettextf("Documented arguments not in \\usage in documentation object '%s':",
-                         nm),
+              c(gettextf("Documented arguments not in \\usage in documentation object %s:", sQuote(nm), domain = "R-tools"),
                 .pretty_format(unique(arg_names_in_arg_list_missing_in_usage)))
           },
           if(length(functions_not_in_aliases <-
                     x[[nm]][["unaliased"]])) {
-              c(gettextf("Objects in \\usage without \\alias in documentation object '%s':",
-                         nm),
+              c(gettextf("Objects in \\usage without \\alias in documentation object %s:", sQuote(nm), domain = "R-tools"),
                 .pretty_format(unique(functions_not_in_aliases)))
           },
           if(length(assignments <-
                     x[[nm]][["assignments"]])) {
-              c(gettextf("Assignments in \\usage in documentation object '%s':",
-                         nm),
+              c(gettextf("Assignments in \\usage in documentation object %s:", sQuote(nm), domain = "R-tools"),
                 sprintf("  %s", unlist(lapply(assignments, format))))
           },
           "")
@@ -1505,9 +1480,7 @@ function(x, ...)
         y <- c(y,
                unlist(lapply(names(bad_lines),
                              function(nm) {
-                                 c(gettextf("Bad \\usage lines found in documentation object '%s':",
-                                            nm),
-                                   paste(" ", bad_lines[[nm]]))
+                                 c(gettextf("Bad \\usage lines found in documentation object %s:", sQuote(nm), domain = "R-tools"), paste(" ", bad_lines[[nm]]))
                              })),
                "")
 
@@ -1524,7 +1497,7 @@ function(package, dir, lib.loc = NULL)
     ## Argument handling.
     if(!missing(package)) {
         if(length(package) != 1L)
-            stop("argument 'package' must be of length 1")
+            stop(gettextf("'%s' argument must be of length 1", "package"))
         dir <- find.package(package, lib.loc)
         ## Using package installed in 'dir' ...
         dfile <- file.path(dir, "DESCRIPTION")
@@ -1534,12 +1507,9 @@ function(package, dir, lib.loc = NULL)
             character()
         code_dir <- file.path(dir, "R")
         if(!dir.exists(code_dir))
-            stop(gettextf("directory '%s' does not contain R code",
-                          dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not contain R code", sQuote(dir)), domain = "R-tools")
         if(!.haveRds(dir))
-            stop(gettextf("directory '%s' does not contain Rd objects", dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not contain Rd objects", sQuote(dir)), domain = "R-tools")
         package_name <- package
         is_base <- package_name == "base"
 
@@ -1564,22 +1534,18 @@ function(package, dir, lib.loc = NULL)
     }
     else {
         if(missing(dir))
-            stop("you must specify 'package' or 'dir'")
+            stop("you must specify 'package' or 'dir' argument")
         package_name <- basename(dir) # early, before resolving sym.links
         ## Using sources from directory @code{dir} ...
         if(!dir.exists(dir))
-            stop(gettextf("directory '%s' does not exist", dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
         else
             dir <- file_path_as_absolute(dir)
         code_dir <- file.path(dir, "R")
         if(!dir.exists(code_dir))
-            stop(gettextf("directory '%s' does not contain R code",
-                          dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not contain R code", sQuote(dir)), domain = "R-tools")
         if(!.haveRds(dir))
-            stop(gettextf("directory '%s' does not contain Rd objects", dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not contain Rd objects", sQuote(dir)), domain = "R-tools")
         is_base <- package_name == "base"
 
         code_env <- new.env(hash = TRUE)
@@ -1765,10 +1731,8 @@ function(x, ...)
         ## </NOTE>
         methods_with_full_name <- x[[nm]][["withFullName"]]
         if(length(methods_with_full_name)) {
-            c(gettextf("S3 methods shown with full name in documentation object '%s':",
-                       nm),
-              .pretty_format(methods_with_full_name),
-              "")
+            c(gettextf("S3 methods shown with full name in documentation object %s:", sQuote(nm), domain = "R-tools"),
+              .pretty_format(methods_with_full_name), "")
         } else {
             character()
         }
@@ -1796,7 +1760,7 @@ function(package, dir, file, lib.loc = NULL,
     ## Argument handling.
     if(!missing(package)) {
         if(length(package) != 1L)
-            stop("argument 'package' must be of length 1")
+            stop(gettextf("'%s' argument must be of length 1", "package"))
         dir <- find.package(package, lib.loc)
         dfile <- file.path(dir, "DESCRIPTION")
         db <- .read_description(dfile)
@@ -1804,10 +1768,8 @@ function(package, dir, file, lib.loc = NULL,
         ## Using package installed in @code{dir} ...
         code_dir <- file.path(dir, "R")
         if(!dir.exists(code_dir))
-            stop(gettextf("directory '%s' does not contain R code",
-                          dir),
-                 domain = NA)
-        have_registration <- FALSE
+            stop(gettextf("directory %s does not contain R code", sQuote(dir)), domain = "R-tools")
+		have_registration <- FALSE
         if(basename(dir) != "base") {
             .load_package_quietly(package, lib.loc)
             code_env <- asNamespace(package)
@@ -1832,8 +1794,7 @@ function(package, dir, file, lib.loc = NULL,
         have_registration <- FALSE
         ## Using sources from directory @code{dir} ...
         if(!dir.exists(dir))
-            stop(gettextf("directory '%s' does not exist", dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
         else
             dir <- file_path_as_absolute(dir)
         pkg <- pkgDLL <- basename(dir)
@@ -1850,16 +1811,14 @@ function(package, dir, file, lib.loc = NULL,
         }
         code_dir <- file.path(dir, "R")
         if(!dir.exists(code_dir))
-            stop(gettextf("directory '%s' does not contain R code",
-                          dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not contain R code", sQuote(dir)), domain = "R-tools")
         file <- tempfile()
         on.exit(unlink(file))
-        if(!file.create(file)) stop("unable to create ", file, domain = NA)
+        if(!file.create(file)) stop(gettext("unable to create %s", file), domain = "R-tools")
         if(!all(.file_append_ensuring_LFs(file,
                                           list_files_with_type(code_dir,
                                                                "code"))))
-            stop("unable to write code files", domain = NA)
+            stop("unable to write code files", domain = "R-tools")
     }
     else if(!missing(file)) {
         pkg <- enc <- NA
@@ -1867,8 +1826,7 @@ function(package, dir, file, lib.loc = NULL,
         stop("you must specify 'package', 'dir' or 'file'")
 
     if(missing(package) && !file_test("-f", file))
-        stop(gettextf("file '%s' does not exist", file),
-             domain = NA)
+        stop(gettextf("file %s does not exist", sQuote(file)), domain = "R-tools")
 
     ## Should there really be a 'verbose' argument?
     ## It may be useful to extract all foreign function calls but then
@@ -1930,16 +1888,10 @@ function(package, dir, file, lib.loc = NULL,
                 if (have_registration) {
                     if (name %in% fr) {
                         other_problem <<- c(other_problem, e)
-                        other_desc <<-
-                            c(other_desc,
-                              sprintf("symbol %s in the local frame",
-                                      sQuote(name)))
+      other_desc <<- c(other_desc, gettextf("symbol %s in the local frame", sQuote(name), domain = "R-tools"))
                     } else {
                         other_problem <<- c(other_problem, e)
-                        other_desc <<-
-                            c(other_desc,
-                              sprintf("symbol %s not in namespace",
-                                      sQuote(name)))
+                        other_desc <<- c(other_desc, gettextf("symbol %s not in namespace", sQuote(name), domain = "R-tools"))
                     }
                 }
     	    	return("OTHER")
@@ -1950,10 +1902,8 @@ function(package, dir, file, lib.loc = NULL,
     	sym <- tryCatch(eval(sym, code_env), error = function(e) e)
     	if (inherits(sym, "error")) {
             if (have_registration || !allow_suppress)  {
-                other_problem <<- c(other_problem, e)
-                other_desc <<-
-                    c(other_desc, sprintf("Evaluating %s during check gives error\n%s",
-                                          sQuote(name), sQuote(sym$message)))
+    	    other_problem <<- c(other_problem, e)
+    	    other_desc <<- c(other_desc, gettextf("Evaluating %s during check gives error\n%s", sQuote(name), sQuote(sym$message), domain = "R-tools"))
             }
     	    return("OTHER")
     	}
@@ -1975,8 +1925,7 @@ function(package, dir, file, lib.loc = NULL,
         if (!inherits(sym, "NativeSymbolInfo")) {
     	    other_problem <<- c(other_problem, e)
             ## other_desc <<- c(other_desc, sprintf("\"%s\" is not of class \"%s\"", name, "NativeSymbolInfo"))
-    	    other_desc <<- c(other_desc, sprintf("%s is of class \"%s\"",
-                                                 sQuote(name), class(sym)))
+    	    other_desc <<- c(other_desc, gettextf("%s is of class %s", sQuote(name), dQuote(class(sym)), domain = "R-tools"))
     	    return("OTHER")
     	}
         ## This might be symbol from another (base?) package.
@@ -1993,9 +1942,9 @@ function(package, dir, file, lib.loc = NULL,
                 other_problem <<- c(other_problem, e)
                 other_desc <<-
                     c(other_desc,
-                      sprintf("call includes ..., expected %d %s",
-                              numparms,
-                              if(numparms > 1L) "parameters" else "parameter"))
+                      sprintf(ngettext(numparms, "call includes '...', expected %d parameter",
+						"call includes '...', expected %d parameters", domain = "R-tools"),
+                              numparms))
             } else {
                 callparms <- length(e) - 2L
                 if ("PACKAGE" %in% names(e)) callparms <- callparms - 1L
@@ -2005,22 +1954,21 @@ function(package, dir, file, lib.loc = NULL,
                     other_problem <<- c(other_problem, e)
                     other_desc <<-
                         c(other_desc,
-                          sprintf("call to %s with %d %s, expected %d",
-                                  sQuote(name), callparms,
-                                  if(callparms > 1L) "parameters" else "parameter",
-                                  numparms))
+                          paste(sprintf(ngettext(callparms, "call to %s with %d parameter, expected %d",
+						"call to %s with %d parameters, expected %d", domain = "R-tools"),
+                                  sQuote(name), callparms, numparms), collapse = ""))
                     return("OTHER")
                 }
             }
         }
     	if (inherits(sym, "CallRoutine") && !(FF_fun %in% c(".Call", ".Call.graphics"))) {
     	    other_problem <<- c(other_problem, e)
-    	    other_desc <<- c(other_desc, sprintf("%s registered as %s, but called with %s", sQuote(name), ".Call", FF_fun))
+    	    other_desc <<- c(other_desc, gettextf("%s registered as %s, but called with %s", sQuote(name), sQuote(".Call"), sQuote(FF_fun), domain = "R-tools"))
     	    return("OTHER")
     	}
     	if (inherits(sym, "ExternalRoutine") && !(FF_fun %in% c(".External", ".External.graphics"))) {
 	    other_problem <<- c(other_problem, e)
-	    other_desc <<- c(other_desc, sprintf("%s registered as %s, but called with %s", sQuote(name), ".External", FF_fun))
+	    other_desc <<- c(other_desc, gettextf("%s registered as %s, but called with %s", sQuote(name), sQuote(".External"), sQuote(FF_fun), domain = "R-tools"))
 	    return("OTHER")
 	}
 
@@ -2123,10 +2071,9 @@ function(package, dir, file, lib.loc = NULL,
         exprs <-
             tryCatch(parse(file = con, n = -1L),
                      error = function(e)
-                     stop(gettextf("parse error in file '%s':\n%s",
-                                   file,
-                                   .massage_file_parse_error_message(conditionMessage(e))),
-                          domain = NA, call. = FALSE))
+                     stop(gettextf("parse error in file %s:", sQuote(file)), "\n",
+                                   .massage_file_parse_error_message(conditionMessage(e)),
+                          domain = "R-tools", call. = FALSE))
     }
     for(i in seq_along(exprs)) {
         fr <- character()
@@ -2173,7 +2120,7 @@ function(x, ...)
         msg <- ngettext(length(x),
                         "Foreign function call without 'PACKAGE' argument:",
                         "Foreign function calls without 'PACKAGE' argument:",
-                        domain = NA)
+                        domain = "R-tools")
         res <- c(msg, unlist(lapply(x, .fmt)))
     }
     if (length(xx)) {
@@ -2182,7 +2129,7 @@ function(x, ...)
         msg <- ngettext(length(x),
                         "Foreign function call with empty 'PACKAGE' argument:",
                         "Foreign function calls with empty 'PACKAGE' argument:",
-                        domain = NA)
+                        domain = "R-tools")
        res <- c(res, msg, unlist(lapply(xx, .fmt)))
     }
 
@@ -2203,7 +2150,7 @@ function(x, ...)
             msg <- ngettext(length(xx),
                             "Foreign function call to a base package:",
                             "Foreign function calls to a base package:",
-                            domain = NA)
+                            domain = "R-tools")
             res <- c(res, msg, sort(xx))
         }
         if(any(!base)) {
@@ -2213,7 +2160,7 @@ function(x, ...)
             msg <- ngettext(length(xx),
                             "Foreign function call to a different package:",
                             "Foreign function calls to a different package:",
-                            domain = NA)
+                            domain = "R-tools")
             res <- c(res, msg, sort(xx))
         }
     }
@@ -2222,14 +2169,14 @@ function(x, ...)
         msg <- ngettext(length(zz),
                         "Undeclared package in foreign function calls:",
                         "Undeclared packages in foreign function calls:",
-                        domain = NA)
+                        domain = "R-tools")
         res <- c(res, msg, paste("  ", paste(sQuote(sort(zz)), collapse = ", ")))
     }
     if (length(other_problem)) {
     	msg <- ngettext(length(other_problem),
     		        "Registration problem:",
     		        "Registration problems:",
-    		        domain = NA)
+    		        domain = "R-tools")
         res <- c(res, msg)
         other_desc <- attr(x, "other_desc")
         for (i in seq_along(other_problem)) {
@@ -2240,9 +2187,9 @@ function(x, ...)
     z3 <- attr(x, "dup_false")
      if (length(z3)) {
     	msg <- ngettext(length(z3),
-    		        "Call with DUP:",
-    		        "Calls with DUP:",
-    		        domain = NA)
+    		        "Call with 'DUP':",
+    		        "Calls with 'DUP':",
+    		        domain = "R-tools")
         res <- c(res, msg)
         for (i in seq_along(z3)) {
             res <- c(res, paste0("   ", deparse(z3[[i]])))
@@ -2265,14 +2212,12 @@ function(package, dir, lib.loc = NULL)
     ## Argument handling.
     if(!missing(package)) {
         if(length(package) != 1L)
-            stop("argument 'package' must be of length 1")
+            stop(gettextf("'%s' argument must be of length 1", "package"))
         dir <- find.package(package, lib.loc)
         ## Using package installed in @code{dir} ...
         code_dir <- file.path(dir, "R")
         if(!dir.exists(code_dir))
-            stop(gettextf("directory '%s' does not contain R code",
-                          dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not contain R code", sQuote(dir)), domain = "R-tools")
         is_base <- basename(dir) == "base"
 
         ## Load package into code_env.
@@ -2299,18 +2244,17 @@ function(package, dir, lib.loc = NULL)
     }
     else {
         if(missing(dir))
-            stop("you must specify 'package' or 'dir'")
+            stop("you must specify 'package' or 'dir' argument")
+
         ## Using sources from directory @code{dir} ...
         if(!dir.exists(dir))
-            stop(gettextf("directory '%s' does not exist", dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
         else
             dir <- file_path_as_absolute(dir)
         code_dir <- file.path(dir, "R")
         if(!dir.exists(code_dir))
-            stop(gettextf("directory '%s' does not contain R code",
-                          dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not contain R code", sQuote(dir)), domain = "R-tools")
+
         is_base <- basename(dir) == "base"
 
         code_env <- new.env(hash = TRUE)
@@ -2385,7 +2329,7 @@ function(package, dir, lib.loc = NULL)
                 return(NULL)
             }
             if(is.null(mm <- get0(m, envir = S3Table))) {
-                warning(gettextf("declared S3 method '%s' not found", m),
+                warning(gettextf("declared S3 method %s not found", sQuote(m)),
                         domain = NA, call. = FALSE)
                 return(NULL)
             } else mm
@@ -2522,7 +2466,7 @@ function(x, ...)
     c(as.character(unlist(lapply(x, .fmt))),
       if(report_S3_methods_not_registered &&
          length(methods <- attr(x, "methods_not_registered_but_exported"))) {
-          c("Found the following apparent S3 methods exported but not registered:",
+          c(gettext("Found the following apparent S3 methods exported but not registered:", domain = "R-tools"),
             strwrap(paste(sort(methods), collapse = " "),
                     exdent = 2L, indent = 2L))
       }
@@ -2539,14 +2483,12 @@ function(package, dir, lib.loc = NULL)
     ## Argument handling.
     if(!missing(package)) {
         if(length(package) != 1L)
-            stop("argument 'package' must be of length 1")
+            stop(gettextf("'%s' argument must be of length 1", "package"))
         dir <- find.package(package, lib.loc)
         ## Using package installed in @code{dir} ...
         code_dir <- file.path(dir, "R")
         if(!dir.exists(code_dir))
-            stop(gettextf("directory '%s' does not contain R code",
-                          dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not contain R code", sQuote(dir)), domain = "R-tools")
         is_base <- basename(dir) == "base"
 
         ## Load package into code_env.
@@ -2567,18 +2509,15 @@ function(package, dir, lib.loc = NULL)
 
     else {
         if(missing(dir))
-            stop("you must specify 'package' or 'dir'")
+            stop("you must specify 'package' or 'dir' argument")
         ## Using sources from directory @code{dir} ...
         if(!dir.exists(dir))
-            stop(gettextf("directory '%s' does not exist", dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
         else
             dir <- file_path_as_absolute(dir)
         code_dir <- file.path(dir, "R")
         if(!dir.exists(code_dir))
-            stop(gettextf("directory '%s' does not contain R code",
-                          dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not contain R code", sQuote(dir)), domain = "R-tools")
         is_base <- basename(dir) == "base"
 
         code_env <- new.env(hash = TRUE)
@@ -2684,7 +2623,7 @@ function(package, dir, file, lib.loc = NULL)
     ## Argument handling.
     if(!missing(package)) {
         if(length(package) != 1L)
-            stop("argument 'package' must be of length 1")
+            stop(gettextf("'%s' argument must be of length 1", "package"))
         ## Using package installed in @code{dir} ...
         dir <- find.package(package, lib.loc)
         if(file.exists(file.path(dir, "R", "all.rda"))) {
@@ -2695,15 +2634,13 @@ function(package, dir, file, lib.loc = NULL)
             code_files <- code_file
         example_dir <- file.path(dir, "R-ex")
         if(dir.exists(example_dir)) {
-            code_files <- c(code_files,
-                            list_files_with_exts(example_dir, "R"))
+            code_files <- c(code_files, list_files_with_exts(example_dir, "R"))
         }
     }
     else if(!missing(dir)) {
         ## Using sources from directory @code{dir} ...
         if(!dir.exists(dir))
-            stop(gettextf("directory '%s' does not exist", dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
         else
             dir <- file_path_as_absolute(dir)
         code_dir <- file.path(dir, "R")
@@ -2715,13 +2652,12 @@ function(package, dir, file, lib.loc = NULL)
     }
     else if(!missing(file)) {
         if(!file_test("-f", file))
-            stop(gettextf("file '%s' does not exist", file),
-                 domain = NA)
+            stop(gettextf("file %s does not exist", sQuote(file)), domain = "R-tools")
         else
             code_files <- file
     }
     else
-        stop("you must specify 'package', 'dir' or 'file'")
+        stop("you must specify 'package', 'dir' or 'file' argument")
 
     find_TnF_in_code <- function(file, txt) {
         ## If 'txt' is given, it contains the extracted examples from
@@ -2744,16 +2680,14 @@ function(package, dir, file, lib.loc = NULL)
         exprs <- if(missing(txt))
             tryCatch(parse(file = file, n = -1L),
                      error = function(e)
-                     stop(gettextf("parse error in file '%s':\n",
-                                   file,
+                     stop(gettextf("parse error in file %s:\n",
+                                   sQuote(file),
                                    .massage_file_parse_error_message(conditionMessage(e))),
-                          domain = NA, call. = FALSE))
+                          domain = "R-tools", call. = FALSE))
         else
             tryCatch(parse(text = txt),
                      error = function(e)
-                     stop(gettextf("parse error in examples from file '%s':\n",
-                                   file, conditionMessage(e)),
-                          domain = NA, call. = FALSE))
+                     stop(gettextf("parse error in examples from file %s:\n", sQuote(file), conditionMessage(e)), domain = "R-tools", call. = FALSE))
         for(i in seq_along(exprs))
             find_bad_exprs(exprs[[i]], NULL)
         matches
@@ -2787,13 +2721,10 @@ function(x, ...)
 {
     .fmt <- function(fname) {
         xfname <- x[[fname]]
-        c(gettextf("File '%s':", fname),
+        c(gettextf("File %s:", sQuote(fname), domain = "R-tools"),
           unlist(lapply(seq_along(xfname),
                         function(i) {
-                            strwrap(gettextf("found T/F in %s",
-                                             paste(deparse(xfname[[i]]),
-                                                   collapse = "")),
-                                    exdent = 4L)
+                            strwrap(gettextf("found T/F in %s", paste(deparse(xfname[[i]]), collapse = ""), domain = "R-tools"), exdent = 4L)
                         })),
           "")
     }
@@ -2837,7 +2768,7 @@ function(dir, force_suggests = TRUE, check_incoming = FALSE,
         }
 
     if(length(dir) != 1L)
-        stop("argument 'package' must be of length 1")
+        stop(gettextf("'%s' argument must be of length 1", "package"))
 
     ## We definitely need a valid DESCRIPTION file.
     db <- .read_description(file.path(dir, "DESCRIPTION"))
@@ -2846,9 +2777,7 @@ function(dir, force_suggests = TRUE, check_incoming = FALSE,
     package_name <- db["Package"]
     if(!identical(package_name, dir_name) &&
        (!is.character(package_name) || !nzchar(package_name))) {
-	message(sprintf(
-            "package name '%s' seems invalid; using directory name '%s' instead",
-            package_name, dir_name))
+	message(gettextf("package name %s seems invalid; using directory name %s instead", sQuote(package_name), sQuote(dir_name)))
 	package_name <- dir_name
     }
 
@@ -2867,7 +2796,7 @@ function(dir, force_suggests = TRUE, check_incoming = FALSE,
             bad_depends$all_depends <- setdiff(ad, pkgname)
     } else if (check_incoming)
         bad_depends$skipped <-
-            "  No repository set, so cyclic dependency check skipped"
+            gettext("  No repository set, so cyclic dependency check skipped", domain = "R-tools")
 
     ldepends <-  .get_requires_with_version_from_package_db(db, "Depends")
     limports <-  .get_requires_with_version_from_package_db(db, "Imports")
@@ -2926,8 +2855,7 @@ function(dir, force_suggests = TRUE, check_incoming = FALSE,
                     where <- which(installed == pkg)
                     if(!length(where)) next
                     ## want the first one
-                    desc <- readRDS(file.path(installed_in[where[1L]], pkg,
-                                              "Meta", "package.rds"))
+                    desc <- readRDS(file.path(installed_in[where[1L]], pkg, "Meta", "package.rds"))
                     current <- desc$DESCRIPTION["Version"]
                     target <- as.package_version(r[[3L]])
                     if(eval(parse(text = paste("!(current", op, "target)"))))
@@ -3024,96 +2952,53 @@ function(x, ...)
     c(character(),
       if(length(x$skipped)) c(x$skipped, ""),
       if(length(x$all_depends)) {
-          c("There is circular dependency in the installation order:",
-            .pretty_format2("  One or more packages in", x$all_depends),
-            "  depend on this package (for the versions on the repositories).",
+          c(gettext("There is circular dependency in the installation order:", domain = "R-tools"),
+            "  ", .pretty_format2(gettextf("One or more packages in %s depend on this package.", x$all_depends, domain = "R-tools")),
             "")
       },
-      if(length(bad <- x$required_but_not_installed) > 1L) {
-          c(.pretty_format2("Packages required but not available:", bad), "")
-      } else if(length(bad)) {
-          c(sprintf("Package required but not available: %s", sQuote(bad)), "")
+      if(length(bad <- x$required_but_not_installed) >= 1L) {
+          c(.pretty_format2(ngettext(length(bad), "Package required but not available:", "Packages required but not available:", domain = "R-tools"), bad), "")
       },
-      if(length(bad <- x$suggested_but_not_installed) > 1L) {
-          c(.pretty_format2("Packages suggested but not available:", bad), "")
-      } else if(length(bad)) {
-          c(sprintf("Package suggested but not available: %s", sQuote(bad)), "")
+      if(length(bad <- x$suggested_but_not_installed) >= 1L) {
+          c(.pretty_format2(ngettext(length(bad), "Package suggested but not available:", "Packages suggested but not available:", domain = "R-tools"), bad), "")
       },
-      if(length(bad <- x$required_but_obsolete) > 1L) {
-          c(.pretty_format2("Packages required and available but unsuitable versions:",
-                            bad),
-            "")
-      } else if(length(bad)) {
-          c(sprintf("Package required and available but unsuitable version: %s", sQuote(bad)),
-            "")
+      if(length(bad <- x$required_but_obsolete) >= 1L) {
+          c(.pretty_format2(ngettext(length(bad), "Package required and available but unsuitable version:", "Packages required and available but unsuitable versions:", domain = "R-tools"), bad), "")
       },
-      if(length(bad <- x$required_but_stub) > 1L) {
-          c("Former standard packages required but now defunct:",
-            .pretty_format(bad),
-            "")
-      } else if(length(bad)) {
-          c(sprintf("Former standard package required but now defunct: %s",
-                    sQuote(bad)), "")
+      if(length(bad <- x$required_but_stub) >= 1L) {
+          c(.pretty_format2(ngettext(length(bad), "Former standard package required but now defunct:", "Former standard packages required but now defunct:", domain = "R-tools"), bad), "")
       },
-      if(length(bad <- x$suggests_but_not_installed) > 1L) {
-          c(.pretty_format2("Packages suggested but not available for checking:",
-                            bad),
-            "")
-      } else if(length(bad)) {
-          c(sprintf("Package suggested but not available for checking: %s",
-                     sQuote(bad)),
-            "")
+      if(length(bad <- x$suggests_but_not_installed) >= 1L) {
+          c(.pretty_format2(ngettext(length(bad), "Package suggested but not available for checking:", "Packages suggested but not available for checking:", domain = "R-tools"), bad), "")
       },
-      if(length(bad <- x$enhances_but_not_installed) > 1L) {
-          c(.pretty_format2("Packages which this enhances but not available for checking:",
-                            bad),
-            "")
-      } else if(length(bad)) {
-          c(sprintf("Package which this enhances but not available for checking: %s", sQuote(bad)),
-            "")
+      if(length(bad <- x$enhances_but_not_installed) >= 1L) {
+          c(.pretty_format2(ngettext(length(bad), "Package which this enhances but not available for checking:", "Packages which this enhances but not available for checking:", domain = "R-tools"), bad), "")
       },
-      if(length(bad <- x$required_for_checking_but_not_declared) > 1L) {
-          c(.pretty_format2("VignetteBuilder packages not declared:", bad), "")
-      } else if(length(bad)) {
-          c(sprintf("VignetteBuilder package not declared: %s", sQuote(bad)), "")
+      if(length(bad <- x$required_for_checking_but_not_declared) >= 1L) {
+          c(.pretty_format2(ngettext(length(bad), "VignetteBuilder package not declared:", "VignetteBuilder packages not declared:", domain = "R-tools"), bad), "")
       },
-      if(length(bad <- x$required_for_checking_but_not_installed) > 1L) {
-          c(.pretty_format2("VignetteBuilder packages required for checking but not installed:", bad), "")
-      } else if(length(bad)) {
-          c(sprintf("VignetteBuilder package required for checking but not installed: %s", sQuote(bad)), "")
+      if(length(bad <- x$required_for_checking_but_not_installed) >= 1L) {
+          c(.pretty_format2(ngettext(length(bad), "VignetteBuilder package required for checking but not installed:", "VignetteBuilder packages required for checking but not installed:", domain = "R-tools"), bad), "")
       },
-      if(length(bad <- x$missing_vignette_depends)) {
-          c(if(length(bad) > 1L) {
-                c("Vignette dependencies not required:", .pretty_format(bad))
-            } else {
-                sprintf("Vignette dependencies not required: %s", sQuote(bad))
-            },
+      if(length(bad <- x$missing_vignette_depends) >= 1L) {
+          c(.pretty_format2(ngettext(length(bad), "Vignette dependency not required:", "Vignette dependencies not required:", domain = "R-tools"), bad),
             strwrap(gettextf("Vignette dependencies (%s entries) must be contained in the DESCRIPTION Depends/Suggests/Imports entries.",
-                             "\\VignetteDepends{}")),
-            "")
+                             sQuote("\\VignetteDepends{}"), domain = "R-tools")), "")
       },
-      if(length(bad <- x$missing_namespace_depends) > 1L) {
-          c(.pretty_format2("Namespace dependencies not required:", bad), "")
-      } else if(length(bad)) {
-          c(sprintf("Namespace dependency not required: %s", sQuote(bad)), "")
+      if(length(bad <- x$missing_namespace_depends) >= 1L) {
+          c(.pretty_format2(ngettext(length(bad), "Namespace dependency not required:", "Namespace dependencies not required:", domain = "R-tools"), bad), "")
       },
       if(length(y <- x$many_depends)) {
-          c(.pretty_format2("Depends: includes the non-default packages:", y),
-            strwrap(paste("Adding so many packages to the search path",
-                          "is excessive",
-                          "and importing selectively is preferable."
-                          , collapse = ", ")),
-            "")
+          c(.pretty_format2(gettext("Depends: includes the non-default packages:", domain = "R-tools"), y),
+            strwrap(gettext("Adding so many packages to the search path is excessive and importing selectively is preferable.", domain = "R-tools")), "")
       },
       if(length(y <- x$bad_engine)) {
           c(y, "")
       },
       if(length(bad <- x$hdOnly)) {
-          c(if(length(bad) > 1L)
-            c("Packages in Depends/Imports which should probably only be in LinkingTo:", .pretty_format(bad))
-          else
-            sprintf("Package in Depends/Imports which should probably only be in LinkingTo: %s", sQuote(bad)),
-            "")
+          c(
+            c(sprintf(ngettext(length(bad), "Package in 'Depends/Imports' which should probably only be in 'LinkingTo': %s", "Packages in 'Depends/Imports' which should probably only be in 'LinkingTo': %s", domain = "R-tools"), .pretty_format(bad)), "")
+           )
       }
       )
   }
@@ -3145,8 +3030,7 @@ function(dfile, strict = FALSE)
         out$fields_with_non_ASCII_tags <- names(db)[ind]
     ## For all fields used by the R package management system, values
     ## must be ASCII as well (so that the RPM works in a C locale).
-    ASCII_fields <- c(.get_standard_repository_db_fields(),
-                      "Encoding", "License")
+    ASCII_fields <- c(.get_standard_repository_db_fields(), "Encoding", "License")
     ASCII_fields <- intersect(ASCII_fields, names(db))
     if(any(ind <- !.is_ASCII(db[ASCII_fields])))
         out$fields_with_non_ASCII_values <- ASCII_fields[ind]
@@ -3189,16 +3073,16 @@ function(dfile, strict = FALSE)
         tmp <- character()
         ## We allow 'R', which is not a valid package name.
         if(!grepl(sprintf("^(R|%s)$", valid_package_name_regexp), val))
-            tmp <- c(tmp, gettext("Malformed package name"))
+            tmp <- c(tmp, gettext("Malformed package name", domain = "R-tools"))
         if(!is_base_package) {
             if(val %in% standard_package_names$base)
                 tmp <- c(tmp,
-                         c("Invalid package name.",
-                           "This is the name of a base package."))
+                         c(gettext("Invalid package name.", domain = "R-tools"),
+                           gettext("This is the name of a base package.", domain = "R-tools")))
             else if(val %in% standard_package_names$stubs)
                 tmp <- c(tmp,
-                         c("Invalid package name.",
-                           "This name was used for a base package and is remapped by library()."))
+                         c(gettext("Invalid package name.", domain = "R-tools"),
+                           gettext("This name was used for a base package and is remapped by library().", domain = "R-tools")))
         }
         if(length(tmp))
             out$bad_package <- tmp
@@ -3283,18 +3167,18 @@ print.check_package_description <-
 function(x, ...)
 {
     if(length(x$missing_encoding))
-        writeLines(c(gettext("Unknown encoding"), ""))
+        writeLines(c(gettext("Unknown encoding", domain = "R-tools"), ""))
 
     if(length(x$fields_with_non_ASCII_tags)) {
-        writeLines(gettext("Fields with non-ASCII tags:"))
+        writeLines(gettext("Fields with non-ASCII tags:", domain = "R-tools"))
         .pretty_print(x$fields_with_non_ASCII_tags)
-        writeLines(c(gettext("All field tags must be ASCII."), ""))
+        writeLines(c(gettext("All field tags must be ASCII.", domain = "R-tools"), ""))
     }
 
     if(length(x$fields_with_non_ASCII_values)) {
-        writeLines(gettext("Fields with non-ASCII values:"))
+        writeLines(gettext("Fields with non-ASCII values:", domain = "R-tools"))
         .pretty_print(x$fields_with_non_ASCII_values)
-        writeLines(c(gettext("These fields must have ASCII values."), ""))
+        writeLines(c(gettext("These fields must have ASCII values.", domain = "R-tools"), ""))
     }
 
     s <- .format_check_package_description_authors_at_R_field_results(x)
@@ -3311,57 +3195,54 @@ function(x, ...)
         writeLines(c(strwrap(x$bad_package), ""))
 
     if(length(x$bad_version))
-        writeLines(c(gettext("Malformed package version."), ""))
+        writeLines(c(gettext("Malformed package version.", domain = "R-tools"), ""))
 
     if(length(x$bad_maintainer))
-        writeLines(c(gettext("Malformed maintainer field."), ""))
+        writeLines(c(gettext("Malformed maintainer field.", domain = "R-tools"), ""))
 
     if(any(as.integer(lengths(x$bad_depends_or_suggests_or_imports)) > 0L )) {
         bad <- x$bad_depends_or_suggests_or_imports
-        writeLines(gettext("Malformed Depends or Suggests or Imports or Enhances field."))
+        writeLines(gettext("Malformed Depends or Suggests or Imports or Enhances field.", domain = "R-tools"))
         if(length(bad$bad_dep_entry)) {
-            tmp <- c(gettext("Offending entries:"),
+            tmp <- c(gettext("Offending entries:", domain = "R-tools"),
                      paste(" ", bad$bad_dep_entry),
-                     strwrap(gettextf("Entries must be names of packages optionally followed by '<=' or '>=', white space, and a valid version number in parentheses.")))
+                     strwrap(gettext("Entries must be names of packages optionally followed by '<=' or '>=', white space, and a valid version number in parentheses.", domain = "R-tools")))
             writeLines(tmp)
         }
         if(length(bad$bad_dep_op)) {
-            tmp <- c(gettext("Entries with infeasible comparison operator:"),
+            tmp <- c(gettext("Entries with infeasible comparison operator:", domain = "R-tools"),
                      paste(" ", bad$bad_dep_entry),
-                     strwrap(gettextf("Only operators '<=' and '>=' are possible.")))
+                     strwrap(gettext("Only operators '<=' and '>=' are possible.", domain = "R-tools")))
 
             writeLines(tmp)
         }
         if(length(bad$bad_dep_version)) {
-            tmp <- c(gettext("Entries with infeasible version number:"),
+            tmp <- c(gettext("Entries with infeasible version number:", domain = "R-tools"),
                      paste(" ", bad$bad_dep_version),
-                     strwrap(gettextf("Version numbers must be sequences of at least two non-negative integers, separated by single '.' or '-'.")))
+                     strwrap(gettext("Version numbers must be sequences of at least two non-negative integers, separated by single '.' or '-'.", domain = "R-tools")))
             writeLines(tmp)
         }
         writeLines("")
     }
     if(identical(x$bad_vignettebuilder, TRUE)) {
-        writeLines(c(gettext("Invalid VignetteBuilder field."),
-                     strwrap(gettextf("This field must contain one or more packages (and no version requirement).")),
-                     ""))
+        writeLines(c(gettext("Invalid VignetteBuilder field.", domain = "R-tools"),
+                     strwrap(gettextf("This field must contain one or more packages (and no version requirement).", domain = "R-tools")), ""))
     }
 
     if(length(x$bad_priority))
-        writeLines(c(gettext("Invalid Priority field."),
-                     strwrap(gettextf("Packages with priorities 'base' or 'recommended' or 'defunct-base' must already be known to R.")),
-                     ""))
+        writeLines(c(gettext("Invalid Priority field.", domain = "R-tools"),
+                     strwrap(gettext("Packages with priorities 'base' or 'recommended' or 'defunct-base' must already be known to R.", domain = "R-tools")), ""))
 
     if(identical(x$bad_Title, TRUE))
-        writeLines(gettext("Malformed Title field: should not end in a period."))
+        writeLines(gettext("Malformed Title field: should not end in a period.", domain = "R-tools"))
 
     if(identical(x$bad_Description, TRUE))
-        writeLines(gettext("Malformed Description field: should contain one or more complete sentences."))
+        writeLines(gettext("Malformed Description field: should contain one or more complete sentences.", domain = "R-tools"))
 
     xx<- x; xx$bad_Title <- xx$bad_Description <- NULL
 
     if(any(as.integer(lengths(xx)) > 0L))
-        writeLines(c(strwrap(gettextf("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.")),
-                     ""))
+        writeLines(c(strwrap(gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.", domain = "R-tools")), ""))
 
     invisible(x)
 }
@@ -3422,30 +3303,14 @@ function(dfile)
 format.check_package_description2 <- function(x, ...)
 {
     c(if(length(xx <- x$duplicates)) {
-        c(if(length(xx) > 1L)
-          "Packages listed in more than one of Depends, Imports, Suggests, Enhances:"
-        else
-          "Package listed in more than one of Depends, Imports, Suggests, Enhances:",
-          paste(c(" ", sQuote(xx)), collapse = " "),
-          "A package should be listed in only one of these fields.")
+	sprintf(ngettext(length(xx), "Package listed in more than one of Depends, Imports, Suggests, Enhances: %s\nA package should be listed in only one of these fields.", "Packages listed in more than one of Depends, Imports, Suggests, Enhances: %s\nA package should be listed in only one of these fields.", domain = "R-tools"), paste(c(" ", sQuote(xx)), collapse = " "))
     },
-      if(!x$have_src) "'LinkingTo' field is unused: package has no 'src' directory",
+      if(!x$have_src) gettextf("'LinkingTo' field is unused: package has no 'src' directory", domain = "R-tools"),
       if(length(xx <- x$bad_links)) {
-          if(length(xx) > 1L)
-              c("Versioned 'LinkingTo' values for",
-                paste(c(" ", sQuote(xx)), collapse = " "),
-                "are only usable in R >= 3.0.2")
-          else
-              sprintf("Versioned 'LinkingTo' value for %s is only usable in R >= 3.0.2",
-                      sQuote(xx))
+	  sprintf(ngettext(length(xx), "Versioned 'LinkingTo' value for %s is only usable in R >= 3.0.2", "Versioned 'LinkingTo' values for %s are only usable in R >= 3.0.2", domain = "R-tools"), paste(c(" ", sQuote(xx)), collapse = " "))
       },
       if(x$have_src && length(xx <- x$missing_incs)) {
-          if(length(xx) > 1L)
-              c("'LinkingTo' for",
-                paste(c(" ", sQuote(xx)), collapse = " "),
-                "are unused as they have no 'include' directory")
-          else
-              sprintf("'LinkingTo' for %s is unused as it has no 'include' directory", sQuote(xx))
+	sprintf(ngettext(length(xx), "'LinkingTo' for %s is unused as it has no 'include' directory", "'LinkingTo' for %s are unused as they have no 'include' directory"), paste(sQuote(xx), collapse = ", "))
       })
 }
 
@@ -3525,32 +3390,28 @@ function(x)
 {
     c(character(),
       if(length(bad <- x[["bad_authors_at_R_field"]])) {
-          c(gettext("Malformed Authors@R field:"),
-            paste(" ", bad))
+          c(gettext("Malformed Authors@R field:", domain = "R-tools"), paste(" ", bad))
       },
       if(length(bad <- x[["bad_authors_at_R_field_for_author"]])) {
-          c(gettext("Cannot extract Author field from Authors@R field:"),
-            paste(" ", bad))
+          c(gettext("Cannot extract Author field from Authors@R field:", domain = "R-tools"), paste(" ", bad))
       },
       if(length(x[["bad_authors_at_R_field_has_no_author"]])) {
-          gettext("Authors@R field gives no person with author role.")
+          gettext("Authors@R field gives no person with author role.", domain = "R-tools")
       },
       if(length(bad <-
                 x[["bad_authors_at_R_field_has_author_without_role"]])) {
-          c(gettext("Authors@R field gives persons with no valid roles:"),
-            paste(" ", bad))
+          c(gettext("Authors@R field gives persons with no valid roles:", domain = "R-tools"), paste(" ", bad))
       },
       if(length(bad <- x[["bad_authors_at_R_field_for_maintainer"]])) {
-          c(gettext("Cannot extract Maintainer field from Authors@R field:"),
-            paste(" ", bad))
+          c(gettext("Cannot extract Maintainer field from Authors@R field:", domain = "R-tools"), paste(" ", bad))
       },
       if(length(bad <-
                 x[["bad_authors_at_R_field_too_many_maintainers"]])) {
-          c(gettext("Authors@R field gives more than one person with maintainer role:"),
+          c(gettext("Authors@R field gives more than one person with maintainer role:", domain = "R-tools"),
             paste(" ", bad))
       },
       if(length(x[["bad_authors_at_R_field_has_no_valid_maintainer"]])) {
-          strwrap(gettext("Authors@R field gives no person with maintainer role, valid email address and non-empty name."))
+          strwrap(gettext("Authors@R field gives no person with maintainer role, valid email address and non-empty name.", domain = "R-tools"))
       }
       )
 }
@@ -3591,26 +3452,19 @@ function(x, ...)
 {
     c(character(),
       if(length(x$non_portable_encoding)) {
-          c(gettextf("Encoding '%s' is not portable",
-                     x$non_portable_encoding),
-            "")
+          c(gettextf("Encoding %s is not portable", sQuote(x$non_portable_encoding), domain = "R-tools"), "")
       },
       if(length(x$missing_encoding)) {
-          gettext("Unknown encoding with non-ASCII data")
+          gettext("Unknown encoding with non-ASCII data", domain = "R-tools")
       },
       if(length(x$fields_with_non_ASCII_tags)) {
-          c(gettext("Fields with non-ASCII tags:"),
-            .pretty_format(x$fields_with_non_ASCII_tags),
-            gettext("All field tags must be ASCII."),
-            "")
+          c(gettext("Fields with non-ASCII tags:", domain = "R-tools"), .pretty_format(x$fields_with_non_ASCII_tags), gettext("All field tags must be ASCII.", domain = "R-tools"), "")
       },
       if(length(x$fields_with_non_ASCII_values)) {
-          c(gettext("Fields with non-ASCII values:"),
-            .pretty_format(x$fields_with_non_ASCII_values))
+          c(gettext("Fields with non-ASCII values:", domain = "R-tools"), .pretty_format(x$fields_with_non_ASCII_values))
       },
       if(any(as.integer(lengths(x)) > 0L)) {
-          c(strwrap(gettextf("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.")),
-            "")
+          c(strwrap(gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.", domain = "R-tools")), "")
       })
 }
 
@@ -3694,29 +3548,24 @@ function(x, ...)
 
     c(character(),
       if(!(x$is_canonical)) {
-          c(gettext("Non-standard license specification:"),
+          c(gettext("Non-standard license specification:", domain = "R-tools"),
             strwrap(x$license, indent = 2L, exdent = 2L),
-            gettextf("Standardizable: %s", x$is_standardizable),
+            paste(if(x$is_standardizable) gettext("Standardizable: TRUE", domain = "R-tools") else gettext("Standardizable: FALSE", domain = "R-tools"), sep = ""),
             if(x$is_standardizable) {
-                c(gettext("Standardized license specification:"),
-                  strwrap(x$standardization, indent = 2L, exdent = 2L))
+                c(gettext("Standardized license specification:", domain = "R-tools"), strwrap(x$standardization, indent = 2L, exdent = 2L))
             })
       },
       if(length(y <- x$deprecated)) {
-          c(gettextf("Deprecated license: %s",
-                     paste(y, collapse = " ")))
+          c(gettextf("Deprecated license: %s", paste(y, collapse = " "), domain = "R-tools"))
       },
       if(length(y <- x$bad_pointers)) {
-          c(gettextf("Invalid license file pointers: %s",
-                     paste(y, collapse = " ")))
+          c(paste(gettextf("Invalid license file pointers: %s", paste(y, collapse = " "), domain = "R-tools"), sep = ""))
       },
       if(length(y <- x$bad_extensions)) {
-          c(gettext("License components with restrictions not permitted:"),
-            paste(" ", y))
+          c(gettext("License components with restrictions not permitted:", domain = "R-tools"), paste(" ", y))
       },
       if(length(y <- x$miss_extension)) {
-          c(gettext("License components which are templates and need '+ file LICENSE':"),
-            paste(" ", y))
+          c(gettext("License components which are templates and need '+ file LICENSE':", domain = "R-tools"), paste(" ", y))
       }
       )
 }
@@ -3740,11 +3589,9 @@ function(dir, makevars = c("Makevars.in", "Makevars"))
     if(make == "") make <- "make"
     command <- sprintf("%s -f %s -f %s -f %s",
                        make,
-                       shQuote(file.path(R.home("share"), "make",
-                                         "check_vars_ini.mk")),
+                       shQuote(file.path(R.home("share"), "make", "check_vars_ini.mk")),
                        shQuote(mfile),
-                       shQuote(file.path(R.home("share"), "make",
-                                         "check_vars_out.mk")))
+                       shQuote(file.path(R.home("share"), "make", "check_vars_out.mk")))
     lines <- suppressWarnings(tryCatch(system(command, intern = TRUE,
                                               ignore.stderr = TRUE),
                                        error = identity))
@@ -3753,16 +3600,14 @@ function(dir, makevars = c("Makevars.in", "Makevars"))
 
     prefixes <- c("CPP", "C", "CXX", "CXX1X", "F", "FC", "OBJC", "OBJCXX")
 
-    uflags_re <- sprintf("^(%s)FLAGS: *(.*)$",
-                         paste(prefixes, collapse = "|"))
+    uflags_re <- sprintf("^(%s)FLAGS: *(.*)$", paste(prefixes, collapse = "|"))
     pos <- grep(uflags_re, lines)
     ind <- (sub(uflags_re, "\\2", lines[pos]) != "-o /dev/null")
     if(any(ind))
         bad_flags$uflags <- lines[pos[ind]]
 
     ## Try to be careful ...
-    pflags_re <- sprintf("^PKG_(%s)FLAGS: ",
-                         paste(prefixes, collapse = "|"))
+    pflags_re <- sprintf("^PKG_(%s)FLAGS: ", paste(prefixes, collapse = "|"))
     lines <- lines[grepl(pflags_re, lines)]
     names <- sub(":.*", "", lines)
     lines <- sub(pflags_re, "", lines)
@@ -3802,27 +3647,23 @@ function(x, ...)
 {
     .fmt <- function(x) {
         s <- Map(c,
-                 gettextf("Non-portable flags in variable '%s':",
-                          names(x)),
-                 sprintf("  %s", lapply(x, paste, collapse = " ")))
+                 gettextf("Non-portable flags in variable %s:", sQuote(names(x)), domain = "R-tools"), sprintf("  %s", lapply(x, paste, collapse = " ")))
         as.character(unlist(s))
     }
 
     c(character(),
       if(length(bad <- x$pflags)) .fmt(bad),
       if(length(bad <- x$uflags)) {
-          c(gettextf("Variables overriding user/site settings:"),
-            sprintf("  %s", bad))
+          c(gettext("Variables overriding user/site settings:", domain = "R-tools"), sprintf("  %s", bad))
       },
       if(length(x$paths) > 1L) {
-          c(sprintf("Package has both %s and %s.",
-                  sQuote("src/Makevars.in"), sQuote("src/Makevars")),
-            strwrap(sprintf("Installation with --no-configure' is unlikely to work.  If you intended %s to be used on Windows, rename it to %s otherwise remove it.  If %s created %s, you need a %s script.",
+          c(gettextf("Package has both %s and %s.", sQuote("src/Makevars.in"), sQuote("src/Makevars"), domain = "R-tools"),
+            strwrap(gettextf("Installation with --no-configure' is unlikely to work. If you intended %s to be used on Windows, rename it to %s otherwise remove it.  If %s created %s, you need a %s script.",
                             sQuote("src/Makevars"),
                             sQuote("src/Makevars.win"),
                             sQuote("configure"),
                             sQuote("src/Makevars"),
-                            sQuote("cleanup"))))
+                            sQuote("cleanup"), domain = "R-tools")))
       })
 }
 
@@ -3862,8 +3703,7 @@ function(package, lib.loc = NULL)
             assign("nsl", function(hostname) {}, envir = compat)
             assign("X11Font", function(font) {}, envir = compat)
             assign("X11Fonts", function(...) {}, envir = compat)
-            assign("X11.options", function(..., reset = TRUE) {},
-                   envir = compat)
+            assign("X11.options", function(..., reset = TRUE) {}, envir = compat)
             assign("quartz",
                    function(title, width, height, pointsize, family,
                             fontsmooth, antialias, type, file = NULL,
@@ -3871,8 +3711,7 @@ function(package, lib.loc = NULL)
                    envir = compat)
             assign("quartzFont", function(family) {}, envir = compat)
             assign("quartzFonts", function(...) {}, envir = compat)
-            assign("quartz.options", function(..., reset = TRUE) {},
-                   envir = compat)
+            assign("quartz.options", function(..., reset = TRUE) {}, envir = compat)
         }
         if(.Platform$OS.type != "windows") {
             assign("bringToTop", function (which = grDevices::dev.cur(), stay = FALSE) {},
@@ -3883,13 +3722,11 @@ function(package, lib.loc = NULL)
             assign("choose.files",
                    function (default = "", caption = "Select files",
                              multi = TRUE, filters = Filters,
-                             index = nrow(Filters)) {Filters=NULL}, envir = compat)
+                             index = nrow(Filters)) { Filters = NULL }, envir = compat)
             assign("DLL.version", function(path) {}, envir = compat)
-            assign("getClipboardFormats", function(numeric = FALSE) {},
-                   envir = compat)
+            assign("getClipboardFormats", function(numeric = FALSE) {}, envir = compat)
             assign("getIdentification", function() {}, envir = compat)
-            assign("getWindowsHandle", function(which = "Console") {},
-                   envir = compat)
+            assign("getWindowsHandle", function(which = "Console") {}, envir = compat)
             assign("getWindowTitle", function() {}, envir = compat)
             assign("readClipboard", function(format = 1, raw = FALSE) {},
                    envir = compat)
@@ -3898,9 +3735,7 @@ function(package, lib.loc = NULL)
                    envir = compat)
             assign("shell",
                    function(cmd, shell, flag = "/c", intern = FALSE,
-                            wait = TRUE, translate = FALSE, mustWork = FALSE,
-                            ...) {},
-                   envir = compat)
+                            wait = TRUE, translate = FALSE, mustWork = FALSE, ...) {}, envir = compat)
             assign("shell.exec", function(file) {}, envir = compat)
             assign("shortPathName", function(path) {}, envir = compat)
             assign("win.version", function() {}, envir = compat)
@@ -3963,8 +3798,7 @@ function(package, lib.loc = NULL)
                             ...) {}, envir = compat)
             assign("Sys.junction", function(from, to) {}, envir = compat)
         }
-        attach(compat, name="compat", pos = length(search()),
-               warn.conflicts = FALSE)
+        attach(compat, name="compat", pos = length(search()), warn.conflicts = FALSE)
         on.exit(detach("compat"))
     }
 
@@ -3992,7 +3826,7 @@ function(package, lib.loc = NULL)
     checkMethodUsagePackage <- function (pack, ...) {
 	pname <- paste("package", pack, sep = ":")
 	if (!pname %in% search())
-	    stop("package must be loaded", domain = NA)
+	    stop("package must be loaded", domain = "R-tools")
 	checkMethodUsageEnv(if (isNamespaceLoaded(pack))
 			    getNamespace(pack) else as.environment(pname), ...)
     }
@@ -4058,7 +3892,7 @@ function(x, ...)
         y <- sort(unique(c(funs, vars)))
         c(strwrap(x, indent = 0L, exdent = 2L),
           if(length(y)) {
-              c("Undefined global functions or variables:",
+              c(gettext("Undefined global functions or variables:", domain = "R-tools"),
                 strwrap(paste(y, collapse = " "),
                         indent = 2L, exdent = 2L))
           })
@@ -4158,8 +3992,7 @@ function(package, dir, lib.loc = NULL)
         if(nzchar(top)) {
             RdDB <- file.path(top, "help", "paths.rds")
             if(!file.exists(RdDB)) {
-                message(gettextf("package %s exists but was not installed under R >= 2.10.0 so xrefs cannot be checked", sQuote(pkg)),
-                        domain = NA)
+                message(gettextf("package %s exists but was not installed under R >= 2.10.0 so xrefs cannot be checked", sQuote(pkg)), domain = "R-tools")
                 next
             }
             nm <- sub("\\.[Rr]d", "", basename(readRDS(RdDB)))
@@ -4199,7 +4032,7 @@ function(package, dir, lib.loc = NULL)
     if (any(obsolete)) {
         message(sprintf(ngettext(sum(obsolete),
                                  "Obsolete package %s in Rd xrefs",
-                                 "Obsolete packages %s in Rd xrefs"),
+                                 "Obsolete packages %s in Rd xrefs", domain = "R-tools"),
                         paste(sQuote(unknown[obsolete]), collapse = ", ")),
                 domain = NA)
     }
@@ -4220,13 +4053,13 @@ function(package, dir, lib.loc = NULL)
         if(any(miss))
             message(sprintf(ngettext(sum(miss),
                                      "Package unavailable to check Rd xrefs: %s",
-                                     "Packages unavailable to check Rd xrefs: %s"),
+                                     "Packages unavailable to check Rd xrefs: %s", domain = "R-tools"),
                              paste(sQuote(unknown[miss]), collapse = ", ")),
                     domain = NA)
         if(any(!miss))
             message(sprintf(ngettext(sum(!miss),
                                      "Unknown package %s in Rd xrefs",
-                                     "Unknown packages %s in Rd xrefs"),
+                                     "Unknown packages %s in Rd xrefs", domain = "R-tools"),
                              paste(sQuote(unknown[!miss]), collapse = ", ")),
                     domain = NA)
     }
@@ -4242,15 +4075,12 @@ function(x, ...)
     xx <- x$bad
     if(length(xx)) {
         .fmt <- function(i) {
-            c(gettextf("Missing link or links in documentation object '%s':",
-                       names(xx)[i]),
+            c(gettextf("Missing link or links in documentation object %s:", sQuote(names(xx)[i]), domain = "R-tools"),
               ## NB, link might be empty, and was in mvbutils
-              .pretty_format(unique(xx[[i]])),
-              "")
+              .pretty_format(unique(xx[[i]])), "")
         }
         c(unlist(lapply(seq_along(xx), .fmt)),
-          strwrap(gettextf("See section 'Cross-references' in the 'Writing R Extensions' manual.")),
-          "")
+          strwrap(gettext("See section 'Cross-references' in the 'Writing R Extensions' manual.", domain = "R-tools")), "")
     } else {
         character()
     }
@@ -4298,8 +4128,7 @@ function(pkgDir)
     names(ans) <- files
     old <- setwd(pkgDir)
     for(f in files)
-        .try_quietly(utils::data(list = f, package = character(),
-                                 envir = dataEnv))
+        .try_quietly(utils::data(list = f, package = character(), envir = dataEnv))
     setwd(old)
 
     non_ASCII <- where <- character()
@@ -4331,28 +4160,27 @@ function(x, ...)
           sprintf(
                   ngettext(n,
                    "Note: found %d marked Latin-1 string",
-                   "Note: found %d marked Latin-1 strings"), n)
+                   "Note: found %d marked Latin-1 strings", domain = "R-tools"), n)
       },
       if((n <- x$utf8) && !suppress_notes) {
           sprintf(
                   ngettext(n,
                            "Note: found %d marked UTF-8 string",
-                           "Note: found %d marked UTF-8 strings"), n)
+                           "Note: found %d marked UTF-8 strings", domain = "R-tools"), n)
       },
       if((n <- x$bytes) && !suppress_notes) {
           sprintf(
                   ngettext(n,
                            "Note: found %d string marked as \"bytes\"",
-                           "Note: found %d strings marked as \"bytes\""), n)
+                           "Note: found %d strings marked as \"bytes\"", domain = "R-tools"), n)
       },
       if(nr <- nrow(x$unknown)) {
           msg <- ngettext(nr,
                           "Warning: found non-ASCII string",
                           "Warning: found non-ASCII strings",
-                          domain = NA)
+                          domain = "R-tools")
           c(msg,
-            paste0(iconv0(x$unknown[, 1L], "", "ASCII", sub = "byte"),
-                   " in object '", x$unknown[, 2L], "'"))
+            gettextf("%s in object %s", iconv0(x$unknown[, 1L], "", "ASCII", sub = "byte"), sQuote(x$unknown[, 2L]), domain = "R-tools"))
       })
 }
 
@@ -4370,9 +4198,9 @@ function(pkgDir, thorough = FALSE)
         Rdeps <- .split_description(.read_description(file.path(pkgDir, "DESCRIPTION")))$Rdepends2
         for(dep in Rdeps) {
             if(dep$op != '>=') next
-            if(dep$version >= package_version("2.10")) {OK <- TRUE; break;}
+            if(dep$version >= package_version("2.10")) { OK <- TRUE; break; }
         }
-        if(!OK) msg <- "Warning: package needs dependence on R (>= 2.10)"
+        if(!OK) msg <- gettext("Warning: package needs dependence on R (>= 2.10)", domain = "R-tools")
     }
     if (sum(rdas$size) < 1e5 || # we don't report unless we get a 1e5 reduction
         any(rdas$compress %in% c("bzip2", "xz"))) # assume already optimized
@@ -4421,7 +4249,7 @@ function(x, ...)
         msg <- ngettext(nr,
                         "Warning: large data file saved inefficiently:",
                         "Warning: large data files saved inefficiently:",
-                        domain = NA)
+                        domain = "R-tools")
         writeLines(msg)
         rdas <- x$rdas
         rdas$size <- reformat(rdas$size)
@@ -4430,9 +4258,7 @@ function(x, ...)
     if(!is.null(x$msg)) writeLines(x$msg)
     if(!is.null(s <- x$sizes) && s[1L] - s[2L] > 1e5  # save at least 100Kb
        && s[2L]/s[1L] < 0.9) { # and at least 10%
-        writeLines(c("",
-                     "Note: significantly better compression could be obtained",
-                     "      by using R CMD build --resave-data"))
+        writeLines(c("", gettext("Note: significantly better compression could be obtained by using R CMD build --resave-data", domain = "R-tools")))
         if(nrow(x$improve)) {
             improve <- x$improve
             improve$old_size <- reformat(improve$old_size)
@@ -4456,9 +4282,9 @@ function(pkgDir, thorough = FALSE)
         Rdeps <- .split_description(.read_description(file.path(pkgDir, "DESCRIPTION")))$Rdepends2
         for(dep in Rdeps) {
             if(dep$op != '>=') next
-            if(dep$version >= package_version("2.10")) {OK <- TRUE; break;}
+            if(dep$version >= package_version("2.10")) { OK <- TRUE; break; }
         }
-        if(!OK) msg <- "Warning: package needs dependence on R (>= 2.10)"
+        if(!OK) msg <- gettext("Warning: package needs dependence on R (>= 2.10)", domain = "R-tools")
     }
     if (sum(rdas$size) < 1e5 || # we don't report unless we get a 1e5 reduction
         any(rdas$compress %in% c("bzip2", "xz"))) # assume already optimized
@@ -4510,7 +4336,7 @@ function(dir, doDelete = FALSE)
     }
 
     if(!dir.exists(dir))
-        stop(gettextf("directory '%s' does not exist", dir), domain = NA)
+        stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
     else
         dir <- file_path_as_absolute(dir)
 
@@ -4551,8 +4377,7 @@ function(dir, doDelete = FALSE)
     demo_dir <- file.path(dir, "demo")
     if(dir.exists(demo_dir)) {
         all_files <- mydir(demo_dir)
-        demo_files <- list_files_with_type(demo_dir, "demo",
-                                           full.names = FALSE)
+        demo_files <- list_files_with_type(demo_dir, "demo", full.names = FALSE)
         wrong <- setdiff(all_files, c("00Index", demo_files))
         if(length(wrong)) {
             wrong_things$demo <- wrong
@@ -4590,9 +4415,7 @@ function(x, ...)
 {
     .fmt <- function(i) {
         tag <- names(x)[i]
-        c(sprintf("Subdirectory '%s' contains invalid file names:",
-                  tag),
-          .pretty_format(x[[i]]))
+        c(gettextf("Subdirectory %s contains invalid file names:", sQuote(tag), domain = "R-tools"), .pretty_format(x[[i]]))
     }
 
     as.character(unlist(lapply(which(lengths(x) > 0L), .fmt)))
@@ -4605,7 +4428,7 @@ function(dir, respect_quotes = FALSE)
 {
     OS_subdirs <- c("unix", "windows")
     if(!dir.exists(dir))
-        stop(gettextf("directory '%s' does not exist", dir), domain = NA)
+        stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
     else
         dir <- file_path_as_absolute(dir)
 
@@ -4631,7 +4454,7 @@ function(dir, respect_quotes = FALSE)
 function(dir)
 {
     if(!dir.exists(dir))
-        stop(gettextf("directory '%s' does not exist", dir), domain = NA)
+        stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
     else
         dir <- file_path_as_absolute(dir)
     dir_name <- basename(dir)
@@ -4688,8 +4511,7 @@ function(dir)
         file <- file.path(dir, f)
         if(!is.na(enc) &&
            !(Sys.getlocale("LC_CTYPE") %in% c("C", "POSIX"))) {
-            lines <- iconv(readLines(file, warn = FALSE), from = enc, to = "",
-                           sub = "byte")
+            lines <- iconv(readLines(file, warn = FALSE), from = enc, to = "", sub = "byte")
             withCallingHandlers(tryCatch(parse(text = lines),
                                          error = function(e)
                                          .error <<- conditionMessage(e)),
@@ -4717,10 +4539,7 @@ function(dir)
             NULL
     }
 
-    out <-
-        lapply(list_files_with_type(dir, "code", full.names = FALSE,
-                                    OS_subdirs = c("unix", "windows")),
-               collect_parse_woes)
+    out <- lapply(list_files_with_type(dir, "code", full.names = FALSE, OS_subdirs = c("unix", "windows")), collect_parse_woes)
     Sys.setlocale("LC_CTYPE", "C")
     structure(out[lengths(out) > 0L],
               class = "check_package_code_syntax")
@@ -4734,18 +4553,15 @@ function(x, ...)
         if(!first) writeLines("") else first <- FALSE
         xi <- x[[i]]
         if(length(xi$Error)) {
-            msg <- gsub("\n", "\n  ", sub("[^:]*: *", "", xi$Error),
-			perl = TRUE, useBytes = TRUE)
-            writeLines(c(sprintf("Error in file '%s':", xi$File),
-                         paste(" ", msg)))
+            msg <- gsub("\n", "\n  ", sub("[^:]*: *", "", xi$Error), perl = TRUE, useBytes = TRUE)
+            writeLines(c(gettextf("Error in file %s:", sQuote(xi$File), domain = "R-tools"), paste(" ", msg)))
         }
         if(len <- length(xi$Warnings))
             writeLines(c(sprintf(ngettext(len,
                                           "Warning in file %s:",
-                                          "Warnings in file %s:"),
+                                          "Warnings in file %s:", domain = "R-tools"),
                                  sQuote(xi$File)),
-                         paste(" ", gsub("\n\n", "\n  ", xi$Warnings,
-					 perl = TRUE, useBytes = TRUE))))
+                         paste(" ", gsub("\n\n", "\n  ", xi$Warnings, perl = TRUE, useBytes = TRUE))))
     }
     invisible(x)
 }
@@ -4763,15 +4579,12 @@ function(dir)
          && grepl("\\.(so|sl|dll)$", e[[2L]]))
     }
 
-    x <- Filter(length,
-                .find_calls_in_package_code(dir, predicate,
-                                            recursive = TRUE))
+    x <- Filter(length, .find_calls_in_package_code(dir, predicate, recursive = TRUE))
 
     ## Because we really only need this for calling from R CMD check, we
     ## produce output here in case we found something.
     if(length(x))
-        writeLines(c(unlist(Map(.format_calls_in_file, x, names(x))),
-                     ""))
+        writeLines(c(unlist(Map(.format_calls_in_file, x, names(x))), ""))
     ## (Could easily provide format() and print() methods ...)
 
     invisible(x)
@@ -4782,8 +4595,7 @@ function(dir)
 .check_package_code_startup_functions <-
 function(dir)
 {
-    bad_call_names <-
-        unlist(.bad_call_names_in_startup_functions)
+    bad_call_names <- unlist(.bad_call_names_in_startup_functions)
 
     .check_startup_function <- function(fcode, fname) {
         out <- list()
@@ -4845,38 +4657,35 @@ function(dir)
 format.check_package_code_startup_functions <-
 function(x, ...)
 {
-    res <- if(!is.null(attr(x, ".First.lib"))) "NB: .First.lib is obsolete and will not be used in R >= 3.0.0" else character()
+    if(!is.null(attr(x, ".First.lib"))) {
+	res <- gettext("NB: .First.lib is obsolete and will not be used in R >= 3.0.0", domain = "R-tools")
+   } else {
+	res <- character()
+   }
     if(length(x)) {
 
         ## Flatten out doubly recursive list of functions within list of
         ## files structure for computing summary messages.
         y <- unlist(x, recursive = FALSE)
 
-        has_bad_wrong_args <-
-            "bad_arg_names" %in% unlist(lapply(y, names))
-        calls <-
-            unique(unlist(lapply(y,
-                                 function(e) e[["bad_calls"]][["names"]])))
-        has_bad_calls_for_load <-
-            any(calls %in% .bad_call_names_in_startup_functions$load)
-        has_bad_calls_for_output <-
-            any(calls %in% .bad_call_names_in_startup_functions$output)
-        has_unsafe_calls <-
-            any(calls %in% .bad_call_names_in_startup_functions$unsafe)
+        has_bad_wrong_args <- "bad_arg_names" %in% unlist(lapply(y, names))
+        calls <- unique(unlist(lapply(y, function(e) e[["bad_calls"]][["names"]])))
+        has_bad_calls_for_load <- any(calls %in% .bad_call_names_in_startup_functions$load)
+        has_bad_calls_for_output <- any(calls %in% .bad_call_names_in_startup_functions$output)
+        has_unsafe_calls <- any(calls %in% .bad_call_names_in_startup_functions$unsafe)
 
         .fmt_entries_for_file <- function(e, f) {
-            c(gettextf("File %s:", sQuote(f)),
+            c(gettextf("File %s:", sQuote(f), domain = "R-tools"),
               unlist(Map(.fmt_entries_for_function, e, names(e))),
               "")
         }
 
         .fmt_entries_for_function <- function(e, f) {
             c(if(length(bad <- e[["bad_arg_names"]])) {
-                gettextf("  %s has wrong argument list %s",
-                         f, sQuote(paste(bad, collapse = ", ")))
+                gettextf("  %s has wrong argument list %s", sQuote(f), sQuote(paste(bad, collapse = ", ")), domain = "R-tools")
             },
               if(length(bad <- e[["bad_calls"]])) {
-                  c(gettextf("  %s calls:", f),
+                  c(gettextf("  %s calls:", sQuote(f), domain = "R-tools"),
                     paste0("    ",
                            unlist(lapply(bad[["calls"]], function(e)
                                          paste(deparse(e), collapse = "")))))
@@ -4888,23 +4697,14 @@ function(x, ...)
               unlist(Map(.fmt_entries_for_file, x, names(x)),
                      use.names = FALSE),
               if(has_bad_wrong_args)
-              strwrap(gettextf("Package startup functions should have two arguments with names starting with %s and %s, respectively.",
-                               sQuote("lib"), sQuote("pkg")),
-                      exdent = 2L),
+              strwrap(gettextf("Package startup functions should have two arguments with names starting with %s and %s, respectively.", sQuote("lib"), sQuote("pkg"), domain = "R-tools"), exdent = 2L),
               if(has_bad_calls_for_load)
-              strwrap(gettextf("Package startup functions should not change the search path."),
-                      exdent = 2L),
+              strwrap(gettext("Package startup functions should not change the search path.", domain = "R-tools"), exdent = 2L),
               if(has_bad_calls_for_output)
-              strwrap(gettextf("Package startup functions should use %s to generate messages.",
-                               sQuote("packageStartupMessage")),
-                      exdent = 2L),
+              strwrap(gettextf("Package startup functions should use %s to generate messages.", sQuote("packageStartupMessage"), domain = "R-tools"), exdent = 2L),
               if(has_unsafe_calls)
-              strwrap(gettextf("Package startup functions should not call %s.",
-                               sQuote("installed.packages")),
-                      exdent = 2L),
-              gettextf("See section %s in '%s'.",
-                       sQuote("Good practice"),
-                       "?.onAttach")
+              strwrap(gettextf("Package startup functions should not call %s.", sQuote("installed.packages"), domain = "R-tools"), exdent = 2L),
+              gettextf("See section %s in %s.", sQuote("Good practice"), sQuote("?.onAttach"), domain = "R-tools")
               )
     }
     res
@@ -4998,7 +4798,11 @@ function(dir)
 format.check_package_code_unload_functions <-
 function(x, ...)
 {
-    res <- if(!is.null(attr(x, ".Last.lib"))) "NB: .Last.lib will not be used unless it is exported" else character()
+    if(!is.null(attr(x, ".Last.lib"))) {
+	res <- gettext("NB: .Last.lib will not be used unless it is exported", domain = "R-tools")
+    } else {
+	res <- character()
+    }
     if(length(x)) {
 
         ## Flatten out doubly recursive list of functions within list of
@@ -5011,7 +4815,7 @@ function(x, ...)
 ##            unique(unlist(lapply(y,
 ##                                 function(e) e[["bad_calls"]][["names"]])))
         .fmt_entries_for_file <- function(e, f) {
-            c(gettextf("File %s:", sQuote(f)),
+            c(gettextf("File %s:", sQuote(f), domain = "R-tools"),
               unlist(Map(.fmt_entries_for_function, e, names(e))),
               "")
         }
@@ -5019,10 +4823,10 @@ function(x, ...)
         .fmt_entries_for_function <- function(e, f) {
             c(if(length(bad <- e[["bad_arg_names"]])) {
                 gettextf("  %s has wrong argument list %s",
-                         f, sQuote(paste(bad, collapse = ", ")))
+                         sQuote(f), sQuote(paste(bad, collapse = ", ")), domain = "R-tools")
             },
               if(length(bad <- e[["bad_calls"]])) {
-                  c(gettextf("  %s calls:", f),
+                  c(gettextf("  %s calls:", sQuote(f), domain = "R-tools"),
                     paste0("    ",
                            unlist(lapply(bad[["calls"]], function(e)
                                          paste(deparse(e), collapse = "")))))
@@ -5034,14 +4838,10 @@ function(x, ...)
               unlist(Map(.fmt_entries_for_file, x, names(x)),
                      use.names = FALSE),
               if(has_bad_wrong_args)
-              strwrap(gettextf("Package detach functions should have one argument with name starting with %s.", sQuote("lib")),
-                      exdent = 2L),
+              strwrap(gettextf("Package detach functions should have one arguments with names starting with %s.", sQuote("lib"), domain = "R-tools"), exdent = 2L),
               if(length(call))
-              strwrap(gettextf("Package detach functions should not call %s.",
-                               sQuote("library.dynam.unload")),
-                      exdent = 2L),
-              gettextf("See section %s in '%s'.",
-                       sQuote("Good practice"), "?.Last.lib")
+              strwrap(gettextf("Package detach functions should not call %s.", sQuote("library.dynam.unload"), domain = "R-tools"), exdent = 2L),
+              gettextf("See section %s in %s.", sQuote("Good practice"), sQuote("?.Last.lib"), domain = "R-tools")
               )
     }
     res
@@ -5152,7 +4952,7 @@ function(x, ...)
 {
     if(!length(x)) return(character())
 
-    c("Found the following assignments to the global environment:",
+    c(gettext("Found the following assignments to the global environment:", domain = "R-tools"),
       unlist(Map(.format_calls_in_file, x, names(x))))
 }
 
@@ -5176,7 +4976,7 @@ function(x, ...)
 {
     if(!length(x)) return(character())
 
-    c("Found the following calls to attach():",
+    c(gettext("Found the following calls passed to 'attach()':", domain = "R-tools"),
       unlist(Map(.format_calls_in_file, x, names(x))))
 }
 
@@ -5215,7 +5015,7 @@ function(x, ...)
 {
     if(!length(x)) return(character())
 
-    c("Found the following calls to data() loading into the global environment:",
+    c(gettext("Found the following calls passed to 'data()' loading into the global environment:", domain = "R-tools"),
       unlist(Map(.format_calls_in_file, x, names(x))))
 }
 
@@ -5228,14 +5028,12 @@ function(package, dir, lib.loc = NULL)
     ns <- NULL
     if(!missing(package)) {
         if(length(package) != 1L)
-            stop("argument 'package' must be of length 1")
+            stop(gettextf("'%s' argument must be of length 1", "package"))
         dir <- find.package(package, lib.loc)
         ## Using package installed in @code{dir} ...
         code_dir <- file.path(dir, "R")
         if(!dir.exists(code_dir))
-            stop(gettextf("directory '%s' does not contain R code",
-                          dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not contain R code", sQuote(dir)), domain = "R-tools")
         if(basename(dir) != "base")
             .load_package_quietly(package, lib.loc)
         code_env <- if(packageHasNamespace(package, dirname(dir)))
@@ -5256,8 +5054,7 @@ function(package, dir, lib.loc = NULL)
     else if(!missing(dir)) {
         ## Using sources from directory @code{dir} ...
         if(!dir.exists(dir))
-            stop(gettextf("directory '%s' does not exist", dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
         else
             dir <- file_path_as_absolute(dir)
         dfile <- file.path(dir, "DESCRIPTION")
@@ -5269,7 +5066,7 @@ function(package, dir, lib.loc = NULL)
         if(dir.exists(code_dir)) {
             file <- tempfile()
             on.exit(unlink(file))
-            if(!file.create(file)) stop("unable to create ", file)
+            if(!file.create(file)) stop(gettextf("unable to create file %s", sQuote(file)))
             if(!all(.file_append_ensuring_LFs(file,
                                               list_files_with_type(code_dir,
                                                                    "code"))))
@@ -5283,17 +5080,14 @@ function(package, dir, lib.loc = NULL)
     enhances <- .get_requires_from_package_db(db, "Enhances")
 
     ## it is OK to refer to yourself and non-S4 standard packages
-    standard_package_names <-
-        setdiff(.get_standard_package_names()$base,
-                c("methods", "stats4"))
+    standard_package_names <- setdiff(.get_standard_package_names()$base, c("methods", "stats4"))
     ## It helps to know if non-default standard packages are require()d
     ## but safer to list them: compiler & parallel got included for years
     ## Some people depend on 'base'!
     default_package_names <-
         c("base", "datasets", "grDevices", "graphics", "stats", "utils")
     depends_suggests <- c(depends, suggests, enhances, pkg_name, default_package_names)
-    imports <- c(imports, depends, suggests, enhances, pkg_name,
-                 standard_package_names)
+    imports <- c(imports, depends, suggests, enhances, pkg_name, standard_package_names)
     ## the first argument could be named, or could be a variable name.
     ## we just have a stop list here.
     common_names <- c("pkg", "pkgName", "package", "pos", "dep_name")
@@ -5373,8 +5167,7 @@ function(package, dir, lib.loc = NULL)
         ## Suggested way of checking for S4 metadata.
         ## Change to use as envir_has_S4_metadata() once this makes it
         ## into base or methods.
-        if(length(objects(code_env, all.names = TRUE,
-                          pattern = "^[.]__[CT]_")))
+        if(length(objects(code_env, all.names = TRUE, pattern = "^[.]__[CT]_")))
             uses_methods <- TRUE
         ## </FIXME>
         exprs <- lapply(ls(envir = code_env, all.names = TRUE),
@@ -5402,10 +5195,9 @@ function(package, dir, lib.loc = NULL)
         exprs <-
             tryCatch(parse(file = con, n = -1L),
                      error = function(e)
-                     stop(gettextf("parse error in file '%s':\n%s",
-                                   file,
-                                   .massage_file_parse_error_message(conditionMessage(e))),
-                               domain = NA, call. = FALSE))
+                     stop(gettextf("parse error in file %s:", sQuote(file)), "\n",
+                                   .massage_file_parse_error_message(conditionMessage(e)),
+                               domain = "R-tools", call. = FALSE))
     }
 
     for(i in seq_along(exprs)) find_bad_exprs(exprs[[i]])
@@ -5424,7 +5216,7 @@ function(package, dir, lib.loc = NULL)
 
     methods_message <-
         if(uses_methods && !"methods" %in% c(depends, imports))
-            gettext("package 'methods' is used but not declared")
+            gettext("package 'methods' is used but not declared", domain = "R-tools")
         else ""
 
     extras <- list(
@@ -5510,8 +5302,7 @@ function(package, dir, lib.loc = NULL)
             if (inherits(value, "error")) {
                 unknown <- c(unknown, p)
             } else {
-                 exps <- c(ls(envir = getNamespaceInfo(p, "exports"),
-                              all.names = TRUE), extras[[p]])
+                 exps <- c(ls(envir = getNamespaceInfo(p, "exports"), all.names = TRUE), extras[[p]])
                  this2 <- this %in% exps
                  if (any(this2))
                      imp32 <- c(imp32, paste(p, this[this2], sep = ":::"))
@@ -5573,147 +5364,93 @@ function(x, ...)
 
     c(character(),
       if(length(xx <- x$imports)) {
-          if(length(xx) > 1L) {
-              c(gettext("'::' or ':::' imports not declared from:"),
-                .pretty_format(sort(xx)))
-          } else {
-              gettextf("'::' or ':::' import not declared from: %s", sQuote(xx))
-          }
+	  paste(sprintf(ngettext(length(xx),
+ "'::' or ':::' import not declared from: %s",
+ "'::' or ':::' imports not declared from: %s", domain = "R-tools"),
+ .pretty_format(sort(xx))),
+ collapse = "")
       },
       if(length(xx <- x$others)) {
-          if(length(xx) > 1L) {
-              c(gettext("'library' or 'require' calls not declared from:"),
-                .pretty_format(sort(xx)))
-          } else {
-              gettextf("'library' or 'require' call not declared from: %s",
-                       sQuote(xx))
-          }
+	  paste(sprintf(ngettext(length(xx),
+ "'library' or 'require' call not declared from: %s",
+ "'library' or 'require' calls not declared from: %s", domain = "R-tools"),
+ .pretty_format(sort(xx))),
+ collapse = "")
       },
       if(length(xx <- x$imps)) {
-          if(length(xx) > 1L) {
-              c(gettext("'loadNamespace' or 'requireNamespace' calls not declared from:"),
-                .pretty_format(sort(xx)))
-          } else {
-              gettextf("'loadNamespace' or 'requireNamespace' call not declared from: %s",
-                       sQuote(xx))
-          }
+          sprintf(ngettext("'loadNamespace' or 'requireNamespace' call not declared from: %s", "'loadNamespace' or 'requireNamespace' calls not declared from: %s", domain = "R-tools"), .pretty_format(sort(xx)))
       },
       if(length(xx <- x$in_depends)) {
-          msg <- "  Please remove these calls from your code."
-          if(length(xx) > 1L) {
-              c(gettext("'library' or 'require' calls to packages already attached by Depends:"),
-                .pretty_format(sort(xx)), msg)
-          } else {
-              c(gettextf("'library' or 'require' call to %s which was already attached by Depends.",
-                         sQuote(xx)), msg)
-          }
+	  sprintf(ngettext(length(xx),
+ "'library' or 'require' call to package %s which was already attached by Depends. Please remove these calls from your code.",
+ "'library' or 'require' call to packages %s which were already attached by Depends. Please remove these calls from your code.", domain = "R-tools"),
+ .pretty_format(sort(xx)))
       },
       if(length(xx <- x$bad_practice)) {
-          msg <-
-              "  Please use :: or requireNamespace() instead.\n  See section 'Suggested packages' in the 'Writing R Extensions' manual."
-          if(length(xx) > 1L) {
-              c(gettext("'library' or 'require' calls in package code:"),
-                .pretty_format(sort(xx)), msg)
-          } else {
-              c(gettextf("'library' or 'require' call to %s in package code.",
-                         sQuote(xx)), msg)
-          }
+          sprintf(ngettext(length(xx), "'library' or 'require' call in package code: %s\n  Please use :: or requireNamespace() instead.\n  See section 'Suggested packages' in the 'Writing R Extensions' manual.", "'library' or 'require' calls in package code: %s\n  Please use :: or requireNamespace() instead.\n  See section 'Suggested packages' in the 'Writing R Extensions' manual.",domain = "R-tools"), .pretty_format(sort(xx)))
       },
 
       if(length(xx <- x$unused_imports) && !ignore_unused_imports) {
-          msg <- "  All declared Imports should be used."
-          if(length(xx) > 1L) {
-              c(gettext("Namespaces in Imports field not imported from:"),
-                .pretty_format(sort(xx)), msg)
-          } else {
-              c(gettextf("Namespace in Imports field not imported from: %s",
-                       sQuote(xx)), msg)
-          }
+	  sprintf(ngettext(length(xx),
+ "Namespace in Imports field not imported from: %s\nAll declared Imports should be used.",
+ "Namespaces in Imports field not imported from: %s\nAll declared Imports should be used.", domain = "R-tools"),
+ .pretty_format(sort(xx)))
       },
       if(length(xx <- x$depends_not_import)) {
-          msg <- c("  These packages need to be imported from (in the NAMESPACE file)",
-                   "  for when this namespace is loaded but not attached.")
-          if(length(xx) > 1L) {
-              c(gettext("Packages in Depends field not imported from:"),
-                .pretty_format(sort(xx)), msg)
-          } else {
-              c(gettextf("Package in Depends field not imported from: %s",
-                         sQuote(xx)), msg)
-          }
+	  sprintf(ngettext(length(xx),
+ "Package in Depends field not imported from: %s\nThese packages needs to imported from for the case when this namespace is loaded but not attached.",
+ "Packages in Depends field not imported from: %s\nThese packages needs to imported from for the case when this namespace is loaded but not attached.", domain = "R-tools"),
+ .pretty_format(sort(xx)))
       },
       if(length(xx <- x$imp2un)) {
-          if(length(xx) > 1L) {
-              c(gettext("Missing or unexported objects:"),
-                .pretty_format(sort(xx)))
-          } else {
-              gettextf("Missing or unexported object: %s", sQuote(xx))
-          }
+      sprintf(ngettext(length(xx),
+ "Missing or unexported object: %s",
+ "Missing or unexported objects: %s", domain = "R-tools"),
+ .pretty_format(sort(xx)))
       },
-      if(length(xx <- x$imp32)) { ## ' ' seems to get converted to dir quotes
-          msg <- "See the note in ?`:::` about the use of this operator."
-          msg <- strwrap(paste(msg, collapse = " "), indent = 2L, exdent = 2L)
-          if(length(xx) > 1L) {
-              c(gettext("':::' calls which should be '::':"),
-                .pretty_format(sort(xx)), msg)
-          } else {
-              c(gettextf("':::' call which should be '::': %s",
-                         sQuote(xx)), msg)
-          }
+      if(length(xx <- x$imp32)) {  ## ' ' seems to get converted to dir quotes
+	  sprintf(ngettext(length(xx),
+ "':::' call which should be '::': %s\nSee the note in ?`:::` about the use of this operator.",
+ "':::' calls which should be '::': %s\nSee the note in ?`:::` about the use of this operator.", domain = "R-tools"),
+ .pretty_format(sort(xx)))
       },
       if(length(xx <- x$imp3ff)) {
-           if(length(xx) > 1L) {
-              c(gettext("Missing objects imported by ':::' calls:"),
-                .pretty_format(sort(xx)))
-          } else {
-              gettextf("Missing object imported by a ':::' call: %s",
-                       sQuote(xx))
-          }
+      sprintf(ngettext(length(xx),
+ "Missing object imported by a ':::' call: %s",
+ "Missing objects imported by a ':::' calls: %s", domain = "R-tools"),
+ .pretty_format(sort(xx)))
      },
       if(length(xxx <- x$imp3f)) { ## ' ' seems to get converted to dir quotes
-          msg <- "See the note in ?`:::` about the use of this operator."
-          msg <- strwrap(paste(msg, collapse = " "), indent = 2L, exdent = 2L)
           if(incoming) {
               z <- sub(":::.*", "", xxx)
               base <- unlist(.get_standard_package_names()[c("base", "recommended")])
-              if (any(z %in% base))
-                  msg <- c(msg,
-                           "  Including base/recommended package(s):",
-                           .pretty_format(intersect(base, z)))
           }
-          if(length(xxx) > 1L) {
-              c(gettext("Unexported objects imported by ':::' calls:"),
-                .pretty_format(sort(xxx)), msg)
-          } else  if(length(xxx)) {
-              c(gettextf("Unexported object imported by a ':::' call: %s",
-                         sQuote(xxx)), msg)
-          }
+	  if(incoming && (any(z %in% base)) && (length(xxx) >= 1L)) {
+	  paste(sprintf(ngettext(length(xxx),
+ "Unexported object imported by a ':::' call: %s\nSee the note in ?`:::` about the use of this operator.\nIncluding base/recommended package(s): %s",
+ "Unexported objects imported by ':::' calls: %s\nSee the note in ?`:::` about the use of this operator.\nIncluding base/recommended package(s): %s", domain = "R-tools"),
+ .pretty_format(sort(xxx)), .pretty_format(intersect(base, z))), sep = "")
+	  } else if(length(xxx) >= 1L){
+	  sprintf(ngettext(length(xxx),
+ "Unexported object imported by a ':::' call: %s\nSee the note in ?`:::` about the use of this operator.",
+ "Unexported objects imported by ':::' calls: %s\nSee the note in ?`:::` about the use of this operator.", domain = "R-tools"),
+ .pretty_format(sort(xxx)))
+	  }
       },
       if(identical(x$imp3self, TRUE)) {
-          msg <-
-              c("There are ::: calls to the package's namespace in its code.",
-                "A package almost never needs to use ::: for its own objects:")
-          c(strwrap(paste(msg, collapse = " "), indent = 0L, exdent = 2L),
-            .pretty_format(sort(x$imp3selfcalls)))
+              gettextf("There are ::: calls to the package's namespace in its code. A package almost never needs to use ::: for its own objects: %s", .pretty_format(sort(x$imp3selfcalls)), domain = "R-tools")
       },
       if(length(xx <- x$imp3unknown)) {
-          msg <- "See the note in ?`:::` about the use of this operator."
-          msg <- strwrap(paste(msg, collapse = " "), indent = 2L, exdent = 2L)
-          if(length(xx) > 1L) {
-              c(gettext("Unavailable namespaces imported from by ':::' calls:"),
-                .pretty_format(sort(xx)), msg)
-          } else {
-              c(gettextf("Unavailable namespace imported from by a ':::' call: %s",
-                         sQuote(xx)), msg)
-          }
+	  sprintf(ngettext(length(xx),
+ "Unavailable namespace imported from by a ':::' call: %s\nSee the note in ?`:::` about the use of this operator.",
+ "Unavailable namespaces imported from by ':::' calls: %s\nSee the note in ?`:::` about the use of this operator.", domain = "R-tools"),
+ .pretty_format(sort(xx)))
       },
       if(length(xx <- x$data)) {
-          if(length(xx) > 1L) {
-              c(gettext("'data(package=)' calls not declared from:"),
-                .pretty_format(sort(xx)))
-          } else {
-              gettextf("'data(package=)' call not declared from: %s",
-                       sQuote(xx))
-          }
+	  paste(sprintf(ngettext(length(xx),
+ "'data(package=)' call not declared from: %s",
+ "'data(package=)' calls not declared from: %s", domain = "R-tools"),
+ .pretty_format(sort(xx))), collapse = "")
       },
       if(nzchar(x$methods_message)) {
           x$methods_message
@@ -5800,9 +5537,9 @@ function(db, files)
                 for(i in seq_along(exprs)) find_bad_exprs(exprs[[i]])
             },
                      error = function(e)
-                     warning(gettextf("parse error in file '%s':\n%s", f,
-                                      .massage_file_parse_error_message(conditionMessage(e))),
-                             domain = NA, call. = FALSE))
+                     warning(gettextf("parse error in file %s:", sQuote(f)), "\n",
+                                      .massage_file_parse_error_message(conditionMessage(e)),
+                             domain = "R-tools", call. = FALSE))
         }
     } else {
         ## called for examples with translation
@@ -5811,10 +5548,10 @@ function(db, files)
             for(i in seq_along(exprs)) find_bad_exprs(exprs[[i]])
         },
                  error = function(e)
-                 warning(gettextf("parse error in file '%s':\n%s",
-                                  summary(files)$description,
-                                  .massage_file_parse_error_message(conditionMessage(e))),
-                         domain = NA, call. = FALSE))
+                 warning(gettextf("parse error in file %s:",
+                                  sQuote(summary(files)$description)), "\n",
+                                  .massage_file_parse_error_message(conditionMessage(e)),
+                         domain = "R-tools", call. = FALSE))
     }
 
     res <- list(others = unique(bad_exprs),
@@ -5831,16 +5568,15 @@ function(package, dir, lib.loc = NULL)
     ## Argument handling.
     if(!missing(package)) {
         if(length(package) != 1L)
-            stop("argument 'package' must be of length 1")
+            stop(gettextf("'%s' argument must be of length 1", "package"))
         dir <- find.package(package, lib.loc)
         dfile <- file.path(dir, "DESCRIPTION")
         db <- .read_description(dfile)
-    }
-    else if(!missing(dir)) {
+    } else if(!missing(dir)) {
         ## Using sources from directory @code{dir} ...
         ## FIXME: not yet supported by .createExdotR.
         if(!dir.exists(dir))
-            stop(gettextf("directory '%s' does not exist", dir), domain = NA)
+            stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
         else
             dir <- file_path_as_absolute(dir)
         dfile <- file.path(dir, "DESCRIPTION")
@@ -5872,7 +5608,7 @@ function(dir, testdir, lib.loc = NULL)
     ## Argument handling.
     ## Using sources from directory @code{dir} ...
     if(!dir.exists(dir))
-        stop(gettextf("directory '%s' does not exist", dir), domain = NA)
+        stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
     else
         dir <- file_path_as_absolute(dir)
     dfile <- file.path(dir, "DESCRIPTION")
@@ -5893,7 +5629,7 @@ function(package, lib.loc = NULL)
 {
     ## Argument handling.
     if(missing(package) || length(package) != 1L)
-        stop("argument 'package' must be of length 1")
+        stop(gettextf("'%s' argument must be of length 1", "package"))
     dir <- find.package(package, lib.loc)
     ## FIXME: use Meta directory.
     db <- .read_description(file.path(dir, "DESCRIPTION"))
@@ -5982,7 +5718,7 @@ function(package, dir, lib.loc = NULL)
 
     if(!missing(package)) {
         if(length(package) != 1L)
-            stop("argument 'package' must be of length 1")
+            stop(gettextf("'%s' argument must be of length 1", "package"))
         dir <- find.package(package, lib.loc)
         if((package != "base")
            && !packageHasNamespace(package, dirname(dir))) {
@@ -5997,7 +5733,7 @@ function(package, dir, lib.loc = NULL)
     else {
         ## The dir case.
         if(missing(dir))
-            stop("you must specify 'package' or 'dir'")
+            stop("you must specify 'package' or 'dir' argument")
         dir <- file_path_as_absolute(dir)
         code_dir <- file.path(dir, "R")
         if(!packageHasNamespace(basename(dir), dirname(dir))
@@ -6050,18 +5786,14 @@ function(x, ...)
       if(length(x$bad_closures)) {
           msg <- ngettext(length(x$bad_closures),
                           "Found possibly global 'T' or 'F' in the following function:",
-                          "Found possibly global 'T' or 'F' in the following functions:"
-                          )
-          c(strwrap(msg),
-            .pretty_format(x$bad_closures))
+                          "Found possibly global 'T' or 'F' in the following functions:", domain = "R-tools")
+          c(strwrap(msg), .pretty_format(x$bad_closures))
       },
       if(length(x$bad_examples)) {
           msg <- ngettext(length(x$bad_examples),
                           "Found possibly global 'T' or 'F' in the examples of the following Rd file:",
-                          "Found possibly global 'T' or 'F' in the examples of the following Rd files:"
-                          )
-          c(strwrap(msg),
-            paste(" ", x$bad_examples))
+                          "Found possibly global 'T' or 'F' in the examples of the following Rd files:", domain = "R-tools")
+          c(strwrap(msg), paste(" ", x$bad_examples))
       })
 }
 
@@ -6106,7 +5838,7 @@ function(package, dir, lib.loc = NULL, details = TRUE)
     bad_refs <- character()
     if(!missing(package)) {
         if(length(package) != 1L)
-            stop("argument 'package' must be of length 1")
+            stop(gettextf("'%s' argument must be of length 1", "package"))
         dir <- find.package(package, lib.loc)
         if(! package %in% .get_standard_package_names()$base) {
             .load_package_quietly(package, lib.loc)
@@ -6124,7 +5856,7 @@ function(package, dir, lib.loc = NULL, details = TRUE)
     else {
         ## The dir case.
         if(missing(dir))
-            stop("you must specify 'package' or 'dir'")
+            stop("you must specify 'package' or 'dir' argument")
         dir <- file_path_as_absolute(dir)
         code_dir <- file.path(dir, "R")
         if(dir.exists(code_dir)) {
@@ -6163,27 +5895,29 @@ function(x, ...)
 {
     out <- if(length(x$bad_closures)) {
         msg <- ngettext(length(x$bad_closures),
-                        "Found a .Internal call in the following function:",
-                        "Found .Internal calls in the following functions:"
-                        )
+                        "Found an .Internal call in the following function:",
+                        "Found .Internal calls in the following functions:", domain = "R-tools")
         out <- c(strwrap(msg), .pretty_format(x$bad_closures))
-        if (length(unique(x$internals)))
-            out <- c(out, "with calls to .Internal functions",
-                     .pretty_format(sort(unique(x$internals))))
+        if (length(unique(x$internals))) {
+        msg <- sprintf(ngettext(length(x$bad_closures),
+                        "Found an .Internal call in the following function:\n%s\nwith calls to .Internal functions:\n%s",
+                        "Found .Internal calls in the following functions:\n%s\nwith calls to .Internal functions:\n%s", domain = "R-tools"),
+		.pretty_format(x$bad_closures), .pretty_format(sort(unique(x$internals))))
+
+        out <- c(strwrap(msg))
+	}
         out
     } else character()
     if(length(x$bad_S4methods)) {
         msg <- ngettext(length(x$bad_S4methods),
-                        "Found a.Internal call in methods for the following S4 generic:",
-                        "Found .Internal calls in methods for the following S4 generics:"
-                        )
+                        "Found an .Internal call in methods for the following S4 generic:",
+                        "Found .Internal calls in methods for the following S4 generics:", domain = "R-tools")
         out <- c(out, strwrap(msg), .pretty_format(x$bad_S4methods))
     }
     if(length(x$bad_refs)) {
         msg <- ngettext(length(x$bad_refs),
-                        "Found a .Internal call in methods for the following reference class:",
-                        "Found .Internal calls in methods for the following reference classes:"
-                        )
+                        "Found an .Internal call in methods for the following reference class:",
+                        "Found .Internal calls in methods for the following reference classes:", domain = "R-tools")
         out <- c(out, strwrap(msg), .pretty_format(x$bad_refs))
     }
     out
@@ -6197,7 +5931,7 @@ function(dir)
     dir <- file_path_as_absolute(dir)
     invisible(tryCatch(parseNamespaceFile(basename(dir), dirname(dir)),
                        error = function(e) {
-                           writeLines("Invalid NAMESPACE file, parsing gives:")
+                           writeLines(gettext("Invalid NAMESPACE file, parsing gives:", domain = "R-tools"))
                            stop(e)
                        }))
 }
@@ -6216,9 +5950,9 @@ function(cfile, dir = NULL)
             msg <- conditionMessage(db)
             call <- conditionCall(db)
             if(is.null(call))
-                msg <- c("Error: ", msg)
+                msg <- c(gettext("Error: ", domain = "R-tools"), msg)
             else
-                msg <- c("Error in ", deparse(call), ": ", msg)
+                msg <- c(gettextf("Error in %s: ", sQuote(deparse(call)), domain = "R-tools"), msg)
             writeLines(paste(msg, collapse = ""))
         }
         return(invisible())
@@ -6248,20 +5982,16 @@ function(cfile, dir = NULL)
         entries <-
             ifelse(nchar(entries) < 20L,
                    entries,
-                   paste(substring(entries, 1L, 20L), "[TRUNCATED]"))
-        writeLines(sprintf("entry %d: invalid type %s",
-                           pos, sQuote(entries)))
+                   paste(substring(entries, 1L, 20L), gettext("[TRUNCATED]", domain = "R-tools")))
+        writeLines(gettextf("entry %d: invalid type %s", pos, sQuote(entries), domain = "R-tools"))
     }
     pos <- which(!ind & (lengths(bad) > 0L))
     if(length(pos)) {
-        writeLines(strwrap(sprintf("entry %d (%s): missing required field(s) %s",
+        writeLines(strwrap(gettextf("entry %d (%s): missing required field(s) %s",
                                    pos,
                                    db$Entry[pos],
-                                   sapply(bad[pos],
-                                          function(s)
-                                          paste(sQuote(s),
-                                                collapse = ", "))),
-                           indent = 0L, exdent = 2L))
+                                   paste(sQuote(bad[pos]), collapse = ", ") #sapply(bad[pos], function(s) paste(sQuote(s), collapse = ", "))
+				, domain = "R-tools"), indent = 0L, exdent = 2L))
     }
 }
 
@@ -6299,10 +6029,8 @@ function(dir, silent = FALSE, def_enc = FALSE, minlevel = -1)
         } else print(tmp, minlevel = minlevel)
     }
     if(length(bad)) bad <- sQuote(sub(".*/", "", bad))
-    if(length(bad) > 1L)
-        cat("problems found in ", paste(bad, collapse=", "), "\n", sep = "")
-    else if(length(bad))
-        cat("problem found in ", bad, "\n", sep = "")
+    if(length(bad) > 0L)
+      cat(sprintf(ngettext(length(bad), "problem found in %s", "problems found in %s", domain = "R-tools"), paste(sQuote(bad), collapse = ", ")), "\n", sep = "")
     invisible()
 }
 
@@ -6386,7 +6114,7 @@ function(package, dir, lib.loc = NULL, WINDOWS = FALSE)
     bad_refs <- character()
     if(!missing(package)) {
         if(length(package) != 1L)
-            stop("argument 'package' must be of length 1")
+            stop(gettextf("'%s' argument must be of length 1", "package"))
         dir <- find.package(package, lib.loc)
         if(! package %in% .get_standard_package_names()$base) {
             .load_package_quietly(package, lib.loc)
@@ -6404,7 +6132,7 @@ function(package, dir, lib.loc = NULL, WINDOWS = FALSE)
     else {
         ## The dir case.
         if(missing(dir))
-            stop("you must specify 'package' or 'dir'")
+            stop("you must specify 'package' or 'dir' argument")
         dir <- file_path_as_absolute(dir)
         code_dir <- file.path(dir, "R")
         if(dir.exists(code_dir)) {
@@ -6436,47 +6164,39 @@ function(x, ...)
     out <- if(length(x$bad_closures)) {
         msg <- ngettext(length(x$bad_closures),
                         "Found an obsolete/platform-specific call in the following function:",
-                        "Found an obsolete/platform-specific call in the following functions:"
-                        )
+                        "Found an obsolete/platform-specific call in the following functions:", domain = "R-tools")
         c(strwrap(msg), .pretty_format(x$bad_closures))
     } else character()
     if(length(x$bad_S4methods)) {
         msg <- ngettext(length(x$bad_S4methods),
                         "Found an obsolete/platform-specific call in methods for the following S4 generic:",
-                        "Found an obsolete/platform-specific call in methods for the following S4 generics:"
-                        )
+                        "Found an obsolete/platform-specific call in methods for the following S4 generics:", domain = "R-tools")
         out <- c(out, strwrap(msg), .pretty_format(x$bad_S4methods))
     }
     if(length(x$bad_refs)) {
         msg <- ngettext(length(x$bad_refs),
                         "Found an obsolete/platform-specific call in methods for the following reference class:",
-                        "Found an obsolete/platform-specific call in methods for the following reference classes:"
-                        )
+                        "Found an obsolete/platform-specific call in methods for the following reference classes:", domain = "R-tools")
         out <- c(out, strwrap(msg), .pretty_format(x$bad_refs))
     }
     if(length(x$deprecated)) {
         msg <- ngettext(length(x$deprecated),
                         "Found the deprecated function:",
-                        "Found the deprecated functions:"
-                        )
+                        "Found the deprecated functions:", domain = "R-tools")
         out <- c(out, strwrap(msg), .pretty_format(x$deprecated))
     }
     if(length(x$defunct)) {
         msg <- ngettext(length(x$defunct),
                         "Found the defunct/removed function:",
-                        "Found the defunct/removed functions:"
-                        )
+                        "Found the defunct/removed functions:", domain = "R-tools")
         out <- c(out, strwrap(msg), .pretty_format(x$defunct))
     }
     if(length(x$devices)) {
         msg <- ngettext(length(x$devices),
                         "Found the platform-specific device:",
-                        "Found the platform-specific devices:"
-                        )
+                        "Found the platform-specific devices:", domain = "R-tools")
         out <- c(out, strwrap(msg), .pretty_format(x$devices),
-                 strwrap(paste("dev.new() is the preferred way to open a new device,",
-                               "in the unlikely event one is needed.",
-                               collapse = " ")))
+                 gettext("dev.new() is the preferred way to open a new device, in the unlikely event one is needed.", domain = "R-tools"))
     }
     out
 }
@@ -7176,137 +6896,122 @@ function(x, ...)
 
     c(character(),
       if(length(x$Maintainer))
-          sprintf("Maintainer: %s",
+          gettextf("Maintainer: %s",
                   sQuote(trimws(gsub("\n", " ",
                                      paste(x$Maintainer,
-                                           collapse = " ")))))
+                                           collapse = " ")))), domain = "R-tools")
       else
-          "No maintainer field in DESCRIPTION file",
+          gettext("No maintainer field in DESCRIPTION file", domain = "R-tools"),
       fmt(c(if(x$empty_Maintainer_name)
-                'The maintainer field lacks a name',
+                gettext("The maintainer field lacks a name", domain = "R-tools"),
             if(x$Maintainer_needs_quotes)
-                'The display-name part of the maintainer field should be enclosed in ""')
+                gettext("The display-name part of the maintainer field should be enclosed in \"\"", domain = "R-tools"))
           ),
       if(length(x$new_submission))
-          "New submission",
+          gettext("New submission", domain = "R-tools"),
       if(length(y <- x$bad_package))
-          sprintf("Conflicting package names (submitted: %s, existing: %s)",
-                  y[[1L]], y[[2L]]),
+          gettextf("Conflicting package names (submitted: %s, existing: %s)", y[[1L]], y[[2L]], domain = "R-tools"),
       if(length(y <- x$repositories))
-          sprintf("Package duplicated from %s", y),
+          gettextf("Package duplicated from %s", y, domain = "R-tools"),
       if(length(y <- x$CRAN_archive))
-          "Package was archived on CRAN",
+          gettext("Package was archived on CRAN", domain = "R-tools"),
       fmt(c(if(length(y <- x$bad_version))
-                sprintf("Insufficient package version (submitted: %s, existing: %s)",
-                        y[[1L]], y[[2L]]),
+                gettextf("Insufficient package version (submitted: %s, existing: %s)", y[[1L]], y[[2L]], domain = "R-tools"),
             if(length(y <- x$version_with_leading_zeroes))
-                sprintf("Version contains leading zeroes (%s)", y),
+                gettextf("Version contains leading zeroes (%s)", y, domain = "R-tools"),
             if(length(y <- x$version_with_large_components))
-                sprintf("Version contains large components (%s)", y),
+                gettextf("Version contains large components (%s)", y),
             if(length(y <- x$version_with_jump_in_minor))
-                sprintf("Version jumps in minor (submitted: %s, existing: %s)",
-                        y[[1L]], y[[2L]]))),
+                gettextf("Version jumps in minor (submitted: %s, existing: %s)", y[[1L]], y[[2L]], domain = "R-tools"))),
       fmt(c(if(length(y <- x$recency))
-                sprintf("Days since last update: %d", y),
+                gettextf("Days since last update: %d", y, domain = "R-tools"),
             if(length(y <- x$frequency))
-                sprintf("Number of updates in past 6 months: %d", y))),
+                gettextf("Number of updates in past 6 months: %d", y, domain = "R-tools"))),
       if(length(y <- x$new_maintainer))
-          paste(c("New maintainer:",
+          paste(c(gettext("New maintainer:", domain = "R-tools"),
                   strwrap(y[[1L]], indent = 2L, exdent = 4L),
-                  "Old maintainer(s):",
+                  gettext("Old maintainer(s):", domain = "R-tools"),
                   strwrap(y[[2L]], indent = 2L, exdent = 4L)),
                 collapse = "\n"),
       fmt(c(if(length(y <- x$bad_license))
-                sprintf("Non-FOSS package license (%s)", y),
+                gettextf("\nNon-FOSS package license (%s)", y, domain = "R-tools"),
             if(length(y <- x$new_license))
-                paste(c("Change to non-FOSS package license.",
-                        "New license:",
+                paste(c(gettext("\nChange to non-FOSS package license.", domain = "R-tools"),
+                        gettext("New license:", domain = "R-tools"),
                         strwrap(y[[1L]], indent = 2L, exdent = 4L),
-                        "Old license:",
+                        gettext("Old license:", domain = "R-tools"),
                         strwrap(y[[2L]], indent = 2L, exdent = 4L)),
                       collapse = "\n"),
             if(length(y <- x$extensions)) {
-                paste(c("License components with restrictions and base license permitting such:",
-                        paste(" ", y),
+                paste(c(gettext("\nLicense components with restrictions and base license permitting such:", domain = "R-tools"), paste(" ", y),
                         unlist(lapply(x$pointers,
                                       function(e) {
-                                          c(sprintf("File '%s':", e[1L]),
+                                          c(gettextf("File %s:", sQuote(e[1L]), domain = "R-tools"),
                                             paste(" ", e[-1L]))
                                       }))),
                       collapse = "\n")
             })),
       if(NROW(y <- x$spelling)) {
           s <- split(sprintf("%d:%d", y$Line, y$Column), y$Original)
-          paste(c("Possibly mis-spelled words in DESCRIPTION:",
-                  sprintf("  %s (%s)",
-                          names(s),
-                          lapply(s, paste, collapse = ", "))),
+          paste(c(gettext("\nPossibly mis-spelled words in DESCRIPTION:", domain = "R-tools"),
+                  sprintf("  %s (%s)", names(s), lapply(s, paste, collapse = ", "))),
                 collapse = "\n")
       },
       if(identical(x$foss_with_BuildVignettes, TRUE)) {
-          "FOSS licence with BuildVignettes: false"
+          gettext("FOSS licence with BuildVignettes: false", domain = "R-tools")
       },
       if(length(y <- x$fields)) {
-          paste(c("Unknown, possibly mis-spelled, fields in DESCRIPTION:",
+          paste(c(gettext("Unknown, possibly mis-spelled fields in DESCRIPTION:", domain = "R-tools"),
                   sprintf("  %s", paste(sQuote(y), collapse = " "))),
                 collapse = "\n")
       },
       fmt(c(if(length(y <- x$overrides)) {
-                paste(c("CRAN repository db overrides:", y),
+                paste(c(gettextf("CRAN repository db overrides: %s", sQuote(y), domain = "R-tools")),
                       collapse = "\n")
             },
             if(length(y <- x$conflicts)) {
-                paste(sprintf("CRAN repository db conflicts: %s",
-                              sQuote(y)),
+                paste(gettextf("CRAN repository db conflicts: %s", sQuote(y), domain = "R-tools"),
                       collapse = "\n")
             },
             if(length(y <- x$conflict_in_license_is_FOSS)) {
-                sprintf("Package license conflicts with %s override",
-                        sQuote(paste("License_is_FOSS:", y)))
+                gettextf("Package license conflicts with %s override", sQuote(paste("License_is_FOSS:", y)), domain = "R-tools")
             },
             if(length(y <- x$conflict_in_license_restricts_use)) {
-                sprintf("Package license conflicts with %s override",
-                        sQuote(paste("License_restricts_use:", y)))
+                gettextf("Package license conflicts with %s override", sQuote(paste("License_restricts_use:", y)), domain = "R-tools")
             })),
       fmt(c(if(length(y <- x$depends_with_restricts_use_TRUE)) {
-                paste(c("Package has a FOSS license but eventually depends on the following",
-                        if(length(y) > 1L)
-                            "packages which restrict use:"
-                        else
-                            "package which restricts use:",
-                        strwrap(paste(y, collapse = ", "),
-                                indent = 2L, exdent = 4L)),
+                paste(c(ngettext(length(y),
+                "Package has a FOSS license but eventually depends on the following package which restricts use:",
+                "Package has a FOSS license but eventually depends on the following packages which restrict use:", domain = "R-tools"),
+            strwrap(paste(y, collapse = ", "), indent = 2L, exdent = 4L)),
                       collapse = "\n")
             },
             if(length(y <- x$depends_with_restricts_use_NA)) {
-                paste(c("Package has a FOSS license but eventually depends on the following",
-                        if(length(y) > 1L)
-                            "packages which may restrict use:"
-                        else
-                            "package which may restrict use:",
-                        strwrap(paste(y, collapse = ", "),
-                                indent = 2L, exdent = 4L)),
+                paste(c(ngettext(length(y),
+                "Package has a FOSS license but eventually depends on the following package which may restrict use:",
+                "Package has a FOSS license but eventually depends on the following packages which may restrict use:", domain = "R-tools"),
+            strwrap(paste(y, collapse = ", "), indent = 2L, exdent = 4L)),
                       collapse = "\n")
             })),
       fmt(c(if(length(y <- x$strong_dependencies_not_in_mainstream_repositories)) {
-                  paste(c("Strong dependencies not in mainstream repositories:",
+                  paste(c(gettext("Strong dependencies not in mainstream repositories:", domain = "R-tools"),
                           strwrap(paste(y, collapse = ", "),
                                   indent = 2L, exdent = 4L)),
                         collapse = "\n")
               },
               if(length(y <- x$suggests_or_enhances_not_in_mainstream_repositories)) {
-                  paste(c("Suggests or Enhances not in mainstream repositories:",
+                  paste(c(gettext("'Suggests' or 'Enhances' packages are not in mainstream repositories:", domain = "R-tools"),
                           strwrap(paste(y, collapse = ", "),
                                   indent = 2L, exdent = 4L)),
                         collapse = "\n")
               },
               if(length(y <- x$additional_repositories_analysis_failed_with)) {
-                  paste(c("Using Additional_repositories specification failed with:",
+                  paste(c(gettext("Using 'Additional_repositories specification' failed with packages:", domain = "R-tools"),
                           paste(" ", y)),
                         collapse = "\n")
               },
               if(length(y <- x$additional_repositories_analysis_results)) {
-                  paste(c("Availability using Additional_repositories specification:",
+                  paste(c(gettext("Availability using 'Additional_repositories' specification:", domain = "R-tools"),
                           sprintf("  %s   %s   %s",
                                   format(y[, 1L], justify = "left"),
                                   format(y[, 2L], justify = "right"),
@@ -7314,134 +7019,125 @@ function(x, ...)
                         collapse = "\n")
               },
               if(length(y <- x$additional_repositories_with_no_packages)) {
-                  paste(c("Additional repositories with no packages:",
+                  paste(c(gettext("Additional repositories with no packages:", domain = "R-tools"),
                           paste(" ", y)),
                         collapse = "\n")
               })),
       if(length(y <- x$uses)) {
-          paste(if(length(y) > 1L)
-		"Uses the superseded packages:" else
-		"Uses the superseded package:",
+          paste(ngettext(length(y),
+                       "Uses the superseded package:",
+                       "Uses the superseded packages:", domain = "R-tools"),
                 paste(sQuote(y), collapse = ", "))
       },
       if(length(y <- x$BUGS)) {
-          paste(if(length(y) > 1L)
-		"Uses the non-portable packages:" else
+          paste(ngettext(length(y),
 		"Uses the non-portable package:",
+		"Uses the non-portable packages:", domain = "R-tools"),
                 paste(sQuote(y), collapse = ", "))
       },
       if(length(y <- x$authors_at_R_calls)) {
-          "Authors@R field should be a call to person(), or combine such calls."
+          gettext("Authors@R field should be a call to person(), or combine such calls.", domain = "R-tools")
       },
       if(length(y <- x$vignette_sources_only_in_inst_doc)) {
           if(identical(x$have_vignettes_dir, FALSE))
-              paste(c("Vignette sources in 'inst/doc' with no 'vignettes' directory:",
+              paste(c(gettext("Vignette sources in 'inst/doc' with no 'vignettes' directory:", domain = "R-tools"),
                       strwrap(paste(sQuote(y), collapse = ", "),
                               indent = 2L, exdent = 2L),
-                      "A 'vignettes' directory is required as from R 3.1.0"),
+                      gettext("A 'vignettes' directory is required as from R 3.1.0", domain = "R-tools")),
                     collapse = "\n")
           else
-              paste(c("Vignette sources in 'inst/doc' missing from the 'vignettes' directory:",
+              paste(c(gettext("Vignette sources in 'inst/doc' missing from the 'vignettes' directory:", domain = "R-tools"),
                       strwrap(paste(sQuote(y), collapse = ", "),
                               indent = 2L, exdent = 2L)),
                     collapse = "\n")
       },
       if(length(y <- x$missing_vignette_index)) {
-          "Package has a VignetteBuilder field but no prebuilt vignette index."
+          gettext("Package has a VignetteBuilder field but no prebuilt vignette index.", domain = "R-tools")
       },
       fmt(c(if(length(y <- x$missing_manual_rdb)) {
-                "Package has help file(s) containing build-stage \\Sexpr{} expressions but no 'build/partial.rdb' file."
+                gettext("Package has help file(s) containing build-stage \\Sexpr{} expresssons but no build/partial.rdb.", domain = "R-tools")
             },
             if(length(y <- x$missing_manual_pdf)) {
-                "Package has help file(s) containing install/render-stage \\Sexpr{} expressions but no prebuilt PDF manual."
+                gettext("Package has help file(s) containing install/render-stage \\Sexpr{} expresssons but no prebuilt PDF manual.", domain = "R-tools")
             })),
       fmt(c(if(length(y <- x$dotjava)) {
-                "Package installs .java files."
+                gettext("Package installs .java files.", domain = "R-tools")
             },
             if(length(y <- x$javafiles)) {
-                "Package has FOSS license, installs .class/.jar but has no 'java' directory."
+                gettext("Package has FOSS license, installs .class/.jar but has no 'java' directory.", domain = "R-tools")
             })),
       fmt(c(if(length(y <- x$citation_calls)) {
-                paste(c("Package CITATION file contains call(s) to:",
-                        strwrap(paste(y, collapse = ", "),
-                                indent = 2L, exdent = 4L)),
+                paste(c(gettext("Package CITATION file contains call(s) to:", domain = "R-tools"),
+                        strwrap(paste(y, collapse = ", "), indent = 2L, exdent = 4L)),
                       collapse = "\n")
             },
             if(length(y <- x$citation_error)) {
-                paste(c("Reading CITATION file fails with",
-                        paste(" ", y),
-                        "when package is not installed."),
+                paste(c(gettextf("Reading CITATION file fails with\n%s\nwhen package is not installed.",
+                        paste(" ", y), domain = "R-tools")),
                       collapse = "\n")
             })),
       fmt(c(if(length(y <- x$bad_urls)) {
                 if(inherits(y, "error"))
-                    paste(c("Checking URLs failed with message:",
+                    paste(c(gettext("Checking URLs failed with message:", domain = "R-tools"),
                             conditionMessage(y)),
                           collapse = "\n")
                 else
-                    paste(c(if(length(y) > 1L)
-                                "Found the following (possibly) invalid URLs:"
-                            else
-                                "Found the following (possibly) invalid URL:",
+                    paste(c(ngettext(length(y), "Found the following (possibly) invalid URL:", "Found the following (possibly) invalid URLs:", domain = "R-tools"),
                             paste(" ", gsub("\n", "\n    ", format(y)))),
                           collapse = "\n")
             },
             if(length(y) && any(nzchar(y$CRAN))) {
-                paste(c("  The canonical URL of the CRAN page for a package is ",
-                        "  https://cran.r-project.org/package=pkgname"),
+                paste(c("  ", gettext("The canonical URL of the CRAN page for a package is   https://cran.r-project.org/package=pkgname", domain = "R-tools")),
                       collapse = "\n")
             },
             if(length(y) && any(nzchar(y$Spaces))) {
-                "  Spaces in an http[s] URL should probably be replaced by %20"
+                c("  ", gettext("Spaces in an http[s] URL should probably be replaced by %20", domain = "R-tools"))
             },
             if(length(y <- x$no_url_checks) && y) {
-                "Checking URLs requires 'libcurl' support in the R build"
+                c(gettext("Checking URLs requires 'libcurl' support in the R build", domain = "R-tools"))
             })),
       fmt(if(length(y <- x$bad_dois)) {
               if(inherits(y, "error"))
-                  paste(c("Checking DOIs failed with message:",
+                  paste(c(gettext("Checking DOIs failed with message:", domain = "R-tools"),
                           conditionMessage(y)),
                         collapse = "\n")
               else
-                  paste(c(if(length(y) > 1L)
-                              "Found the following (possibly) invalid DOIs:"
-                          else
-                              "Found the following (possibly) invalid DOI:",
+                  paste(c(ngettext(length(y), "Found the following (possibly) invalid DOI:", "Found the following (possibly) invalid DOIs:", domain = "R-tools"),
                           paste(" ", gsub("\n", "\n    ", format(y)))),
                         collapse = "\n")
           }),
       if(length(y <- x$R_files_non_ASCII)) {
-          paste(c("No package encoding and non-ASCII characters in the following R files:",
+          paste(c(gettext("No package encoding and non-ASCII characters in the following R files:", domain = "R-tools"),
                   paste0("  ", names(y), "\n    ",
                          sapply(y, paste, collapse = "\n    "),
                          collapse = "\n")),
                 collapse = "\n")
       },
       fmt(c(if(length(x$title_is_name)) {
-                "The Title field is just the package name: provide a real title."
+                gettext("The Title field is just the package name: provide a real title.", domain = "R-tools")
             },
             if(length(x$title_includes_name)) {
-                "The Title field starts with the package name."
+                gettext("The Title field starts with the package name.", domain = "R-tools")
             },
             if(length(y <- x$title_case)) {
-                paste(c("The Title field should be in title case, current version then in title case:",
+                paste(c(gettext("The Title field should be in title case, current version then in title case:", domain = "R-tools"),
                         sQuote(y)),
                       collapse = "\n")
             })),
       fmt(c(if(length(x$descr_bad_initial)) {
-                "The Description field should start with a capital letter."
+                gettext("The Description field should start with a capital letter.", domain = "R-tools")
             },
             if(length(x$descr_bad_start)) {
-                "The Description field should not start with the package name,\n  'This package' or similar."
+                gettext("The Description field should not start with the package name,\n  'This package' or similar.", domain = "R-tools")
             })),
       fmt(c(if(length(x$bad_date)) {
-                "The Date field is not in ISO 8601 yyyy-mm-dd format."
+                gettext("The Date field is not in ISO 8601 yyyy-mm-dd format.", domain = "R-tools")
             },
             if(length(x$old_date)) {
-                "The Date field is over a month old."
+                gettext("The Date field is over a month old.", domain = "R-tools")
             })),
       if(length(y <- x$size_of_tarball))
-          paste("Size of tarball:", y, "bytes")
+          sprintf(ngettext(y, "Size of tarball: %d byte", "Size of tarball: %d bytes", domain = "R-tools"), y)
       )
 }
 
@@ -7468,7 +7164,7 @@ function(package, dir, lib.loc = NULL)
 
     if(!missing(package)) {
         if(length(package) != 1L)
-            stop("argument 'package' must be of length 1")
+            stop(gettextf("'%s' argument must be of length 1", "package"))
         dir <- find.package(package, lib.loc)
         rds <- file.path(dir, "Meta", "Rd.rds")
         if(file_test("-f", rds)) {
@@ -7524,17 +7220,14 @@ function(x, ...)
       if(length(bad <- x$files_with_duplicated_name)) {
           unlist(lapply(names(bad),
                  function(nm) {
-                     c(gettextf("Rd files with duplicated name '%s':",
-                                nm),
+                     c(gettextf("Rd files with duplicated name %s:", sQuote(nm), domain = "R-tools"),
                        .pretty_format(bad[[nm]]))
                  }))
       },
       if(length(bad <- x$files_with_duplicated_aliases)) {
           unlist(lapply(names(bad),
                  function(nm) {
-                     c(gettextf("Rd files with duplicated alias '%s':",
-                                nm),
-                       .pretty_format(bad[[nm]]))
+                     c(gettextf("Rd files with duplicated alias %s:", sQuote(nm), domain = "R-tools"), .pretty_format(bad[[nm]]))
                  }))
       })
 }
@@ -7550,17 +7243,16 @@ function(package, dir, lib.loc = NULL)
     ## Argument handling.
     if(!missing(package)) {
         if(length(package) != 1L)
-            stop("argument 'package' must be of length 1")
+            stop(gettextf("'%s' argument must be of length 1", "package"))
         dir <- find.package(package, lib.loc)
         ## Using package installed in @code{dir} ...
     }
     else {
         if(missing(dir))
-            stop("you must specify 'package' or 'dir'")
+            stop("you must specify 'package' or 'dir' argument")
         ## Using sources from directory @code{dir} ...
         if(!dir.exists(dir))
-            stop(gettextf("directory '%s' does not exist", dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
         else
             dir <- file_path_as_absolute(dir)
     }
@@ -7611,14 +7303,12 @@ function(x, ...)
         y <- x[[nm]]
         c(if(length(arguments_with_no_description <-
                     y[["arguments_with_no_description"]])) {
-              c(gettextf("Argument items with no description in Rd object '%s':",
-                         nm),
+              c(gettextf("Argument items with no description in Rd object %s:", sQuote(nm), domain = "R-tools"),
                 .pretty_format(arguments_with_no_description))
           },
           if(length(offending_autogenerated_content <-
                     y[["offending_autogenerated_content"]])) {
-              c(gettextf("Auto-generated content requiring editing in Rd object '%s':",
-                         nm),
+              c(gettextf("Auto-generated content requiring editing in Rd object %s:", sQuote(nm), domain = "R-tools"),
                 sprintf("  %s", offending_autogenerated_content[, 1L]))
           },
           "")
@@ -7650,7 +7340,7 @@ function(x, ...)
     .truncate <- function(s) {
         ifelse(nchar(s) > 140L,
                paste(substring(s, 1, 140L),
-                     "... [TRUNCATED]"),
+                     gettext("... [TRUNCATED]", domain = "R-tools")),
                s)
     }
 
@@ -7667,14 +7357,12 @@ function(x, ...)
 
     .fmt <- function(nm) {
         y <- x[[nm]]
-        c(sprintf("Rd file '%s':", nm),
+        c(gettextf("Rd file %s:", sQuote(nm), domain = "R-tools"),
           unlist(lapply(sections,
                         function(s) {
                             lines <- y[[s]]
                             if(!length(lines)) character() else {
-                                c(sprintf("  \\%s lines wider than %d characters:",
-                                          s, limit[s]),
-                                  .truncate(lines))
+                                c(sprintf(ngettext(limit[s], "  \\%s lines wider than %d character:", "  \\%s lines wider than %d characters:", domain = "R-tools"), s, limit[s]), .truncate(lines))
                             }
                         }),
                  use.names = FALSE),
@@ -7790,8 +7478,7 @@ function(txt, re)
         str <- substring(txt, ipos, epos)
         str <- sub("\"", "\\\"", str, fixed = TRUE)
         str <- sub("\\", "\\\\", str, fixed = TRUE)
-        out <- sprintf("%s%s\"%s\"", out,
-                       substring(txt, 1L, ipos - 1L), str)
+        out <- sprintf("%s%s\"%s\"", out, substring(txt, 1L, ipos - 1L), str)
         txt <- substring(txt, epos + 1L)
     }
     paste0(out, txt)
@@ -7802,7 +7489,7 @@ function(txt, re)
 .format_calls_in_file <-
 function(calls, f)
 {
-    c(gettextf("File %s:", sQuote(f)),
+    c(gettextf("File %s:", sQuote(f), domain = "R-tools"),
       paste0("  ",
              unlist(lapply(calls,
                            function(e)
@@ -7816,8 +7503,7 @@ function(package_name)
 {
     c("<-", "=",
       if(package_name == "base")
-      c("(", "{", "function", "if", "for", "while", "repeat",
-        "Math", "Ops", "Summary", "Complex"),
+      c("(", "{", "function", "if", "for", "while", "repeat", "Math", "Ops", "Summary", "Complex"),
       if(package_name == "utils") "?",
       if(package_name == "methods") "@")
 }
@@ -7844,15 +7530,11 @@ function(env, verbose = getOption("verbose"))
             ## FIXME: This warning should not happen here when called
             ## from R CMD check, but rather be part of a new "check"
             ## there !
-	    warning(gettextf("Generics 'g' in 'env' %s where '%s' errors: %s\nMay need something like\n\n%s\nin NAMESPACE.",
+	    warning(gettextf("Generics 'g' in 'env' %s where %s errors: %s\nMay need something like\n\n%s\nin NAMESPACE.",
                              format(env),
-                             "hasMethods(g, env)",
+                             sQuote("hasMethods(g, env)"),
                              paste(sQuote(rErr), collapse = ", "),
-                             paste0("  importFrom(",
-                                    paste(dq(pkgs), dq(rErr), sep =", "),
-                                    ")\n")
-                             ),
-                    domain = NA)
+                             paste0("  importFrom(", paste(dq(pkgs), dq(rErr), sep = ", "), ")\n")), domain = "R-tools")
 	    hasM <- hasM[!hasErr]
 	}
 	!all(ok <- unlist(hasM))
@@ -7860,8 +7542,8 @@ function(env, verbose = getOption("verbose"))
 	if(verbose)
             message(sprintf(ngettext(sum(!ok),
                                      "Generic without any methods in %s: %s",
-                                     "Generics without any methods in %s: %s"),
-                            format(env),
+                                     "Generics without any methods in %s: %s", domain = "R-tools"),
+                            sQuote(format(env)),
                             paste(sQuote(r[!ok]), collapse = ", ")),
                     domain = NA)
 	r[ok]
@@ -7974,8 +7656,7 @@ function(env)
 .get_namespace_from_package_env <-
 function(env)
 {
-    package <-
-        sub(".*:([^_]*).*", "\\1", attr(env, "name", exact = TRUE))
+    package <- sub(".*:([^_]*).*", "\\1", attr(env, "name", exact = TRUE))
     if(length(package) && nzchar(package)) .getNamespace(as.name(package))
 }
 
@@ -8038,9 +7719,7 @@ function(txt)
     bad_lines <- character()
     while((n <- length(lines))) {
         i <- 1L; txt <- lines[1L]
-        while(inherits(yy <- tryCatch(parse(text = txt),
-                                      error = identity),
-                       "error")
+        while(inherits(yy <- tryCatch(parse(text = txt), error = identity), "error")
               && (i < n)) {
             i <- i + 1L; txt <- paste(txt, lines[i], collapse = "\n")
         }
@@ -8068,8 +7747,7 @@ function(x)
     ## Remove calling .Rd_drop_comments() eventually.
     x <- .Rd_drop_comments(x)
     ## </FIXME>
-    txt <- .Rd_deparse(.Rd_drop_nodes_with_tags(x, "\\special"),
-                       tag = FALSE)
+    txt <- .Rd_deparse(.Rd_drop_nodes_with_tags(x, "\\special"), tag = FALSE)
     txt <- gsub("\\\\l?dots", "...", txt)
     txt <- .dquote_method_markup(txt, .S3_method_markup_regexp)
     txt <- .dquote_method_markup(txt, .S4_method_markup_regexp)
@@ -8086,11 +7764,9 @@ function(x)
     ## </FIXME>
     ## now any valid escape by \ is
     ##   \a \b \f \n \r \t \u \U \v \x \' \" \\ or \octal
-    txt <- gsub("(^|[^\\])\\\\($|[^abfnrtuUvx0-9'\"\\])",
-                "\\1<unescaped bksl>\\2", txt)
+    txt <- gsub("(^|[^\\])\\\\($|[^abfnrtuUvx0-9'\"\\])", "\\1<unescaped bksl>\\2", txt)
     ## and since this may overlap, try again
-    txt <- gsub("(^|[^\\])\\\\($|[^abfnrtuUvx0-9'\"\\])",
-                "\\1<unescaped bksl>\\2", txt)
+    txt <- gsub("(^|[^\\])\\\\($|[^abfnrtuUvx0-9'\"\\])", "\\1<unescaped bksl>\\2", txt)
     .parse_text_as_much_as_possible(txt)
 }
 
@@ -8099,14 +7775,13 @@ function(x)
 .pretty_format <-
 function(x)
 {
-    strwrap(paste(sQuote(x), collapse = " "),
-            indent = 2L, exdent = 2L)
+    strwrap(paste(sQuote(x), collapse = " "), indent = 2L, exdent = 2L)
 }
 .pretty_format2 <-
 function(msg, x)
 {
     xx <- strwrap(paste(sQuote(x), collapse = " "), exdent = 2L)
-    if (length(xx) > 1L || (nchar(msg) + nchar(xx) + 1L > 75L))
+    if (length(xx) > 1L || (nchar(msg) + nchar(xx) + 1L > options("width")$width))
         c(msg, .pretty_format(x))
     else paste(msg, xx, sep = " ")
 }
@@ -8116,8 +7791,7 @@ function(msg, x)
 .pretty_print <-
 function(x)
 {
-    writeLines(strwrap(paste(x, collapse = " "),
-                       indent = 2L, exdent = 2L))
+    writeLines(strwrap(paste(x, collapse = " "), indent = 2L, exdent = 2L))
 }
 
 ### ** .strip_backticks
@@ -8249,8 +7923,7 @@ function()
 }
 
 .valid_maintainer_field_regexp <-
-    sprintf("^[[:space:]]*(.*<%s>|ORPHANED)[[:space:]]*$",
-            .make_RFC_2822_email_address_regexp())
+    sprintf("^[[:space:]]*(.*<%s>|ORPHANED)[[:space:]]*$", .make_RFC_2822_email_address_regexp())
 
 ### ** .Rd_get_offending_autogenerated_content
 
@@ -8305,9 +7978,7 @@ function(x)
                 sprintf("~~Describe \\code{%s} here~~", tab[, 1L]))
         if(any(ind))
             out <- rbind(out,
-                         cbind(sprintf("\\arguments, description of item '%s'",
-                                       tab[ind, 1L]),
-                               tab[ind, 2L]))
+                         cbind(gettextf("\\arguments, description of item %s", sQuote(tab[ind, 1L]), domain = "R-tools"), tab[ind, 2L]))
     }
 
     ## <NOTE>
@@ -8320,9 +7991,7 @@ function(x)
         ind <- descriptions == "~~describe this method here"
         if(any(ind))
             out <- rbind(out,
-                         cbind(sprintf("section 'Methods', description of item '%s'",
-                                       tab[ind, 1L]),
-                               tab[ind, 2L]))
+                         cbind(gettextf("section 'Methods', description of item %s", sQuote(tab[ind, 1L]), domain = "R-tools"), tab[ind, 2L]))
     }
     ## </NOTE>
 

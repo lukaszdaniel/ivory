@@ -13,8 +13,8 @@
 }
 \usage{
 \method{plot}{isoreg}(x, plot.type = c("single", "row.wise", "col.wise"),
-      main = paste("Isotonic regression", deparse(x$call)),
-      main2 = "Cumulative Data and Convex Minorant",
+      main = gettextf("Isotonic regression \%s", paste(deparse(x$call), collapse = ""), domain = "R-stats"),
+      main2 = gettext("Cumulative Data and Convex Minorant", domain = "R-stats"),
       xlab = "x0", ylab = "x$y",
       par.fit = list(col = "red", cex = 1.5, pch = 13, lwd = 1.5),
       mar = if (both) 0.1 + c(3.5, 2.5, 1, 1) else par("mar"),

@@ -79,4 +79,4 @@ as.symbol <- function(x) .Internal(as.vector(x, "symbol"))
 as.name <- as.symbol
 ## would work too: as.name <- function(x) .Internal(as.vector(x, "name"))
 
-as.qr <- function(x) stop("you cannot be serious", domain = NA)
+as.qr <- function(x) stop("you cannot be serious", domain = "R-base")

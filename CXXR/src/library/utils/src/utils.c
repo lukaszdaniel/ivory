@@ -24,8 +24,9 @@
 #include <string.h>
 #include <R.h>
 #include <Rinternals.h>
-#include "localization.h"
+
 #include "utils.h"
+#include "localization.h"
 
 /* from src/main/eval.c */
 SEXP do_Rprof(SEXP args);
@@ -59,7 +60,7 @@ SEXP crc64(SEXP in)
 {
     uint64_t crc = 0;
     char ans[17];
-    if (!isString(in)) error("input must be a character string");
+    if (!isString(in)) error(_("'%s' argument must be a character string"), "input");
     const char *str = CHAR(STRING_ELT(in, 0));
 
     /* Seems this is really 64-bit only on 64-bit platforms */
@@ -82,20 +83,20 @@ SEXP nsl(SEXP hostname)
     struct hostent *hp;
 
     if (!isString(hostname) || length(hostname) != 1)
-	error(_("'hostname' must be a character vector of length 1"));
+	error(_("'hostname' argument must be a character vector of length 1"));
     name = translateChar(STRING_ELT(hostname, 0));
 
     hp = gethostbyname(name);
 
     if (hp == NULL) {		/* cannot resolve the address */
-	warning(_("nsl() was unable to resolve host '%s'"), name);
+	warning(_("'nsl()' was unable to resolve host '%s'"), name);
     } else {
 	if (hp->h_addrtype == AF_INET) {
 	    struct in_addr in;
 	    memcpy(&in.s_addr, *(hp->h_addr_list), sizeof (in.s_addr));
 	    strcpy(ip, inet_ntoa(in));
 	} else {
-	    warning(_("unknown format returned by 'gethostbyname'"));
+	    warning(_("unknown format returned by 'gethostbyname()'"));
 	}
 	ans = mkString(ip);
     }
@@ -104,7 +105,7 @@ SEXP nsl(SEXP hostname)
 #else
 SEXP nsl(SEXP hostname)
 {
-    warning(_("nsl() is not supported on this platform"));
+    warning(_("'nsl()' is not supported on this platform"));
     return R_NilValue;
 }
 #endif

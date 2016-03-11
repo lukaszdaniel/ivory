@@ -23,8 +23,7 @@ logLik <- function(object, ...) UseMethod("logLik")
 
 print.logLik <- function(x, digits = getOption("digits"), ...)
 {
-    cat("'log Lik.' ", paste(format(c(x), digits = digits), collapse = ", "),
-        " (df=", format(attr(x,"df")), ")\n", sep = "")
+    cat(gettextf("'log Lik.' %s (df=%s)", paste(format(c(x), digits = digits), collapse = ", "), format(attr(x,"df")), domain = "R-stats"), "\n", sep = "")
     invisible(x)
 }
 
@@ -34,12 +33,13 @@ str.logLik <- function(object, digits = max(2L, getOption("digits") - 3L),
     cl <- oldClass(object)
     len <- length(co <- c(object))
     cutl <- len > vec.len
-    cat("Class", if (length(cl) > 1L) "es",
-	" '", paste(cl, collapse = "', '"), "' : ",
-	paste
-        (format(co[seq_len(min(len,vec.len))], digits = digits),
-	      collapse = ", "), if(cutl) ", ...",
-	" (df=", format(attr(object,"df")), ")\n", sep = "")
+    if(cutl)
+    cat(sprintf(ngettext(length(cl), "Class %s: %s, ... (df=%s)\n", "Classes %s: %s, ... (df=%s)\n", domain = "R-stats"), paste(dQuote(cl), collapse = ", "),
+	paste(format(co[seq_len(min(len,vec.len))], digits = digits), collapse = ", "), format(attr(object,"df"))))
+    else
+    cat(sprintf(ngettext(length(cl), "Class %s: %s (df=%s)\n", "Classes %s: %s (df=%s)\n", domain = "R-stats"), paste(dQuote(cl), collapse = ", "),
+	paste(format(co[seq_len(min(len,vec.len))], digits = digits), collapse = ", "), format(attr(object,"df"))))
+
 }
 
 ## rather silly (but potentially used in pkg nlme):
@@ -53,7 +53,7 @@ as.data.frame.logLik <- function (x, ...)
 ## log-likelihood for glm objects
 logLik.glm <- function(object, ...)
 {
-    if(!missing(...)) warning("extra arguments discarded")
+    if(!missing(...)) warning("extra arguments were discarded")
     fam <- family(object)$family
     p <- object$rank
     ## allow for estimated dispersion
@@ -70,7 +70,7 @@ logLik.glm <- function(object, ...)
 logLik.lm <- function(object, REML = FALSE, ...)
 {
     if(inherits(object, "mlm"))
-        stop("'logLik.lm' does not support multiple responses")
+        stop("'logLik.lm()' does not support multiple responses")
     res <- object$residuals # not resid(object) because of NA methods
     p <- object$rank
     N <- length(res)
@@ -132,8 +132,8 @@ nobs.default <- function(object, use.fallback = FALSE, ...)
             NROW(object$residuals) # and not residuals(object)
             ## perhaps sum(!is.na(object$residuals)) ?
         else {
-            warning("no 'nobs' method is available")
+            warning("no 'nobs()' method is available")
             0L # which is what object$residuals used to give.
         }
-    } else stop("no 'nobs' method is available") # or maybe NA_integer_
+    } else stop("no 'nobs()' method is available") # or maybe NA_integer_
 }

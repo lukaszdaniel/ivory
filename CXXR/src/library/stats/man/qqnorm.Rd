@@ -7,8 +7,8 @@
 \title{Quantile-Quantile Plots}
 \usage{
 qqnorm(y, \dots)
-\method{qqnorm}{default}(y, ylim, main = "Normal Q-Q Plot",
-       xlab = "Theoretical Quantiles", ylab = "Sample Quantiles",
+\method{qqnorm}{default}(y, ylim, main = gettext("Normal Q-Q Plot"),
+       xlab = gettext("Theoretical Quantiles"), ylab = gettext("Sample Quantiles"),
        plot.it = TRUE, datax = FALSE, \dots)
 
 qqline(y, datax = FALSE, distribution = qnorm,

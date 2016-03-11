@@ -62,7 +62,7 @@ check_for_XQuartz <- function()
         if(length(ind)) {
             this <- sub(" .*", "", sub("^\t", "", out[ind]))
             if(!file.exists(this))
-                stop("X11 library is missing: install XQuartz from xquartz.macosforge.org", domain = NA)
+                stop("X11 library is missing: install XQuartz from xquartz.macosforge.org", domain = "R-utils")
         }
     }
 }
@@ -74,11 +74,10 @@ X11 <- function(display = "", width, height, pointsize, gamma,
 {
     if(display != "XImage") { # used by tkrplot
         check <- Sys.getenv("_R_CHECK_SCREEN_DEVICE_", "")
-        msg <- "screen devices should not be used in examples etc"
         if (identical(check, "stop"))
-            stop(msg, domain = NA)
+        stop("screen devices should not be used in examples etc", domain = "R-grDevices")
         else if (identical(check, "warn"))
-            warning(msg, immediate. = TRUE, noBreaks. = TRUE, domain = NA)
+        warning("screen devices should not be used in examples etc", immediate. = TRUE, noBreaks. = TRUE, domain = "R-grDevices")
     }
 
     if(display == "" && .Platform$GUI == "AQUA" &&
@@ -95,7 +94,7 @@ X11 <- function(display = "", width, height, pointsize, gamma,
     if(!missing(xpos)) new$xpos <- xpos
     if(!missing(ypos)) new$ypos <- ypos
     if(!missing(title)) new$title <- title
-    if(!checkIntFormat(new$title)) stop("invalid 'title'")
+    if(!checkIntFormat(new$title)) stop(gettextf("invalid '%s' argument", "title"))
     if(!missing(type)) {
         new$type <- match.arg(type, c("Xlib", "cairo", "nbcairo", "dbcairo"))
         if(!capabilities("cairo") && type != "Xlib")
@@ -109,7 +108,7 @@ X11 <- function(display = "", width, height, pointsize, gamma,
     if(d$type == "Xlib" && !missing(family)) {
         fns <- X11Fonts()
         if (! family %in% names(fns))
-            stop('unknown family for X11(type = "XLib")')
+            stop("unknown family for 'X11(type = \"XLib\")'")
         d$fonts[1] <- fns[[family]]
     }
     type <-
@@ -192,12 +191,12 @@ X11Fonts <- function(...)
         nnames <- length(fontNames)
         if (nnames == 0) {
             if (!all(sapply(fonts, is.character)))
-                stop("invalid arguments in 'X11Fonts' (must be font names)")
+                stop(gettextf("invalid arguments in %s (must be font names)", sQuote("X11Fonts")))
             else
                 get(".X11.Fonts", envir=.X11env)[unlist(fonts)]
         } else {
             if (ndots != nnames)
-                stop("invalid arguments in 'X11Fonts' (need named args)")
+                stop(gettextf("invalid arguments in %s (need named args)", sQuote("X11Fonts")))
             setX11Fonts(fonts, fontNames)
         }
     }

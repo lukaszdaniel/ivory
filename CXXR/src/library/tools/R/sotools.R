@@ -427,23 +427,20 @@ function(x, ...)
     names(objects) <- names(entries)
     if(length(objs <- attr(x, "objects")))
         objects[names(objs)] <- objs
-    c(gettextf("File %s:", sQuote(attr(x, "file"))),
+    c(gettextf("File %s:", sQuote(attr(x, "file")), domain = "R-tools"),
       unlist(Map(function(u, v, w)
                  c(strwrap(gettextf("Found %s, possibly from %s",
                                     sQuote(v),
                                     paste(sprintf("%s (%s)",
                                                   sQuote(u[, "ssname"]),
                                                   u[, "language"]),
-                                          collapse = ", ")),
+                                          collapse = ", "), domain = "R-tools"),
                            indent = 2L, exdent = 4L),
                    if(length(w) > 1L) {
-                       strwrap(sprintf("Objects: %s",
-                                       paste(sQuote(w), collapse =
-                                             ", ")),
-                               indent = 4L, exdent = 6L)
+                       strwrap(gettextf("Objects: %s",
+                                       paste(sQuote(w), collapse = ", "), domain = "R-tools"), indent = 4L, exdent = 6L)
                    } else if(length(w)) {
-                       strwrap(sprintf("Object: %s", sQuote(w)),
-                               indent = 4L, exdent = 6L)
+                       strwrap(gettextf("Object: %s", sQuote(w), domain = "R-tools"), indent = 4L, exdent = 6L)
                    }),
                  entries, names(entries), objects)))
 }
@@ -494,7 +491,7 @@ if(.Platform$OS.type == "windows") {
                 Filter(length, lapply(bad, compare, strip_ = TRUE))
             } else {
                 if(useST)
-                    cat("Note: information on .o files for i386 is not available\n")
+                    cat(gettext("Note: information on .o files for i386 is not available", domain = "R-tools"), "\n", sep = "")
                 Filter(length, lapply(so_files, check_so_symbols, rarch="i386"))
             }
         } else NULL
@@ -520,7 +517,7 @@ if(.Platform$OS.type == "windows") {
                 Filter(length, lapply(bad2, compare))
             } else {
                 if(useST)
-                    cat("Note: information on .o files for x64 is not available\n")
+                    cat(gettext("Note: information on .o files for x64 is not available", domain = "R-tools"), "\n", sep = "")
                 Filter(length, lapply(so_files, check_so_symbols, rarch="x64"))
             }
         } else NULL
@@ -588,7 +585,7 @@ if(.Platform$OS.type == "windows") {
             tables <- readRDS(objects_symbol_tables_file)
             bad <- Filter(length, lapply(bad, compare))
         } else if(useST)
-            cat("Note: information on .o files is not available\n")
+            cat(gettext("Note: information on .o files is not available", domain = "R-tools"), "\n", sep = "")
         nAPIs <- lapply(lapply(so_files, check_so_symbols),
                         function(x) if(length(z <- attr(x, "nonAPI")))
                         structure(z,
@@ -616,12 +613,10 @@ format.check_nonAPI_calls <-
 function(x, ...)
 {
     if(length(x))
-        c(gettextf("File %s:", sQuote(attr(x, "file"))),
+        c(gettextf("File %s:", sQuote(attr(x, "file")), domain = "R-tools"),
           if (length(x) > 1L) {
-              strwrap(paste("Found non-API calls to R:",
-                            paste(sQuote(x), collapse = ", ")),
-                      indent = 2L, exdent = 4L)
-          } else paste("  Found non-API call to R:", sQuote(x))
+              strwrap(gettextf("Found non-API calls to R: %s", paste(sQuote(x), collapse = ", "), domain = "R-tools"), indent = 2L, exdent = 4L)
+          } else gettextf("  Found non-API call to R: %s", sQuote(x), domain = "R-tools")
           )
     else character()
 }

@@ -90,7 +90,7 @@ as.relistable <- function(x)
 unlist.relistable <- function(x, recursive=TRUE, use.names=TRUE)
 {
     if (!recursive)
-	warning("relist() requires recursively unlisted objects.")
+	warning("'relist()' requires recursively unlisted objects.")
     skeleton <- x
 ### MM: FIXME?  I think this is just  NextMethod()
     ## remove 'relistable'
@@ -103,8 +103,7 @@ unlist.relistable <- function(x, recursive=TRUE, use.names=TRUE)
 relist <- function(flesh, skeleton=attr(flesh, "skeleton"))
 {
     if (is.null(skeleton)) {
-	stop("The 'flesh' argument does not contain a skeleton attribute.\n",
-	     "Either ensure you unlist a relistable object, or specify the skeleton separately.")
+	stop("The 'flesh' argument does not contain a skeleton attribute.\nEither ensure you unlist a relistable object, or specify the skeleton separately.")
     }
     UseMethod("relist", skeleton)
 }

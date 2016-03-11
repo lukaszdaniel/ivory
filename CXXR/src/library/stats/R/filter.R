@@ -24,20 +24,20 @@ filter <- function(x, filter, method = c("convolution", "recursive"),
     storage.mode(x) <- "double"
     xtsp <- tsp(x)
     n <- as.integer(NROW(x))
-    if (is.na(n)) stop("invalid value of nrow(x)", domain = NA)
+    if (is.na(n)) stop(gettextf("invalid '%s' value", "nrow(x)"), domain = "R-stats")
     nser <- NCOL(x)
     filter <- as.double(filter)
     nfilt <- as.integer(length(filter))
-    if (is.na(n)) stop("invalid value of length(filter)", domain = NA)
-    if(anyNA(filter)) stop("missing values in 'filter'")
+    if (is.na(n)) stop(gettextf("invalid '%s' value", "length(filter)"), domain = "R-stats")
+    if(anyNA(filter)) stop(gettextf("missing values in '%s' argument", "filter"))
 
     if(method == "convolution") {
         if(nfilt > n) stop("'filter' is longer than time series")
         sides <- as.integer(sides)
         if(is.na(sides) || (sides != 1L && sides != 2L))
-            stop("argument 'sides' must be 1 or 2")
+            stop("'sides' argument must be 1 or 2")
         circular <- as.logical(circular)
-        if (is.na(circular)) stop("'circular' must be logical and not NA")
+        if (is.na(circular)) stop("'circular' argument must be logical and not NA")
         if (is.matrix(x)) {
             y <- matrix(NA, n, nser)
             for (i in seq_len(nser))
@@ -50,7 +50,7 @@ filter <- function(x, filter, method = c("convolution", "recursive"),
         } else {
             ni <- NROW(init)
             if(ni != nfilt)
-                stop("length of 'init' must equal length of 'filter'")
+                stop("length of 'init' argument must equal length of 'filter' argument")
             if(NCOL(init) != 1L && NCOL(init) != nser) {
                 stop(sprintf(ngettext(nser,
                                       "'init' must have %d column",

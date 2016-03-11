@@ -150,8 +150,7 @@ double qgamma(double p, double alpha, double scale, int lower_tail, int log_p)
     if (alpha < 1e-10) {
     /* Warning seems unnecessary now: */
 #ifdef _DO_WARN_qgamma_
-	MATHLIB_WARNING(_("value of shape (%g) is extremely small: results may be unreliable"),
-			alpha);
+	MATHLIB_WARNING(_("value of shape (%g) is extremely small: results may be unreliable"), alpha);
 #endif
 	max_it_Newton = 7;/* may still be increased below */
     }
@@ -232,7 +231,7 @@ double qgamma(double p, double alpha, double scale, int lower_tail, int log_p)
 		     p, MAXIT, ch/fabs(q - ch));
 #endif
 /* was
- *    ML_ERROR(ME_PRECISION, "qgamma");
+ *    ML_ERROR(ME_PRECISION, "qgamma()");
  * does nothing in R !*/
 
 END:

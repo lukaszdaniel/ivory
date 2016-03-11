@@ -28,17 +28,17 @@ Box.test <- function (x, lag = 1, type=c("Box-Pierce", "Ljung-Box"), fitdf=0)
     obs <- cor$acf[2:(lag+1)]
     if (type=="Box-Pierce")
     {
-        METHOD <- "Box-Pierce test"
+        METHOD <- gettext("Box-Pierce test")
         STATISTIC <- n*sum(obs^2)
         PVAL <- 1-pchisq(STATISTIC, lag-fitdf)
     }
     else
     {
-        METHOD <- "Box-Ljung test"
+        METHOD <- gettext("Box-Ljung test")
         STATISTIC <- n*(n+2)*sum(1/seq.int(n-1, n-lag)*obs^2)
         PVAL <- 1-pchisq(STATISTIC, lag-fitdf)
     }
-    names(STATISTIC) <- "X-squared"
+    names(STATISTIC) <- gettext("X-squared")
     structure(list(statistic = STATISTIC,
                    parameter = PARAMETER,
                    p.value = PVAL,
@@ -50,13 +50,13 @@ Box.test <- function (x, lag = 1, type=c("Box-Pierce", "Ljung-Box"), fitdf=0)
 PP.test <- function (x, lshort = TRUE)
 {
     if (NCOL(x) > 1)
-        stop ("x is not a vector or univariate time series")
+        stop(gettextf("'%s' argument is not a vector or univariate time series", "x"))
     DNAME <- deparse(substitute(x))
     z <- embed (x, 2)
     yt <- z[,1]
     yt1 <- z[,2]
     n <- length (yt)
-    u <- (1L:n)-n/2
+    u <- seq_len(n)-n/2
     res <- lm(yt ~ 1 + u + yt1)
     if (res$rank < 3)
         stop ("singularities in regression")
@@ -68,8 +68,8 @@ PP.test <- function (x, lshort = TRUE)
     ssqrtl <- ssqru + .Call(C_pp_sum, u, l)
     n2 <- n^2
     trm1 <- n2*(n2-1)*sum(yt1^2)/12
-    trm2 <- n*sum(yt1*(1L:n))^2
-    trm3 <- n*(n+1)*sum(yt1*(1L:n))*sum(yt1)
+    trm2 <- n*sum(yt1*seq_len(n))^2
+    trm3 <- n*(n+1)*sum(yt1*seq_len(n))*sum(yt1)
     trm4 <- (n*(n+1)*(2*n+1)*sum(yt1)^2)/6
     Dx <- trm1-trm2+trm3-trm4
     STAT <- sqrt(ssqru)/sqrt(ssqrtl)*tstat-(n^3)/(4*sqrt(3)*sqrt(Dx)*sqrt(ssqrtl))*(ssqrtl-ssqru)
@@ -86,13 +86,13 @@ PP.test <- function (x, lshort = TRUE)
     tableT <- c(25,50,100,250,500,100000)
     tablep <- c(0.01,0.025,0.05,0.10,0.90,0.95,0.975,0.99)
     tableipl <- numeric(tablen)
-    for (i in (1L:tablen))
+    for (i in seq_len(tablen))
         tableipl[i] <- approx (tableT,table[,i],n,rule=2)$y
     PVAL <- approx (tableipl,tablep,STAT,rule=2)$y
     PARAMETER <- l
-    METHOD <- "Phillips-Perron Unit Root Test"
-    names(STAT) <- "Dickey-Fuller"
-    names(PARAMETER) <- "Truncation lag parameter"
+    METHOD <- gettext("Phillips-Perron Unit Root Test")
+    names(STAT) <- gettext("Dickey-Fuller")
+    names(PARAMETER) <- gettext("Truncation lag parameter")
     structure(list(statistic = STAT, parameter = PARAMETER,
                    p.value = PVAL, method = METHOD, data.name = DNAME),
               class = "htest")

@@ -66,7 +66,7 @@ find <- function(what, mode = "any", numeric = FALSE, simple.words=TRUE)
                 if(ll >= 2) # some languages have multiple plurals
                     warning(sprintf(ngettext(ll,
                                              "%d occurrence in %s",
-                                             "%d occurrences in %s"), ll, sp[i]),
+                                             "%d occurrences in %s", domain = "R-utils"), ll, sp[i]),
                             domain = NA)
             }
             ind[i] <- ll > 0L

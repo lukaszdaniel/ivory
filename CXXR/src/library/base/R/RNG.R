@@ -32,23 +32,23 @@ RNGkind <- function(kind = NULL, normal.kind = NULL)
     do.set <- length(kind) > 0L
     if(do.set) {
 	if(!is.character(kind) || length(kind) > 1L)
-	    stop("'kind' must be a character string of length 1 (RNG to be used).")
+	    stop(gettextf("'%s' argument must be a character string of length 1 (RNG to be used).", "kind"))
 	if(is.na(i.knd <- pmatch(kind, kinds) - 1L))
-	    stop(gettextf("'%s' is not a valid abbreviation of an RNG", kind),
-                 domain = NA)
+	    stop(gettextf("'%s' value is not a valid abbreviation of an RNG", kind),
+                 domain = "R-base")
         if(i.knd == length(kinds) - 1L) i.knd <- -1L
     } else i.knd <- NULL
 
     if(!is.null(normal.kind)) {
 	if(!is.character(normal.kind) || length(normal.kind) != 1L)
-	    stop("'normal.kind' must be a character string of length 1")
+	    stop(gettextf("'%s' argument must be a character string of length 1", "normal.kind"))
         normal.kind <- pmatch(normal.kind, n.kinds) - 1L
         if(is.na(normal.kind))
-	    stop(gettextf("'%s' is not a valid choice", normal.kind),
-                 domain = NA)
+	    stop(gettextf("'%s' value is not a valid choice", normal.kind),
+                 domain = "R-base")
 	if (normal.kind == 0L)
             warning("buggy version of Kinderman-Ramage generator used",
-                    domain = NA)
+                    domain = "R-base")
          if(normal.kind == length(n.kinds) - 1L) normal.kind <- -1L
     }
     r <- 1L + .Internal(RNGkind(i.knd, normal.kind))
@@ -66,23 +66,23 @@ set.seed <- function(seed, kind = NULL, normal.kind = NULL)
 		 "default")
     if(length(kind) ) {
 	if(!is.character(kind) || length(kind) > 1L)
-	    stop("'kind' must be a character string of length 1 (RNG to be used).")
+	    stop(gettextf("'%s' argument must be a character string of length 1 (RNG to be used).", "kind"))
 	if(is.na(i.knd <- pmatch(kind, kinds) - 1L))
-	    stop(gettextf("'%s' is not a valid abbreviation of an RNG", kind),
-                 domain = NA)
+	    stop(gettextf("'%s' value is not a valid abbreviation of an RNG", kind),
+                 domain = "R-base")
         if(i.knd == length(kinds) - 1L) i.knd <- -1L
     } else i.knd <- NULL
 
     if(!is.null(normal.kind)) {
 	if(!is.character(normal.kind) || length(normal.kind) != 1L)
-	    stop("'normal.kind' must be a character string of length 1")
+	    stop(gettextf("'%s' argument must be a character string of length 1", "normal.kind"))
         normal.kind <- pmatch(normal.kind, n.kinds) - 1L
         if(is.na(normal.kind))
-	    stop(gettextf("'%s' is not a valid choice", normal.kind),
-                 domain = NA)
+	    stop(gettextf("'%s' value is not a valid choice", normal.kind),
+                 domain = "R-base")
 	if (normal.kind == 0L)
             stop("buggy version of Kinderman-Ramage generator is not allowed",
-                 domain = NA)
+                 domain = "R-base")
          if(normal.kind == length(n.kinds) - 1L) normal.kind <- -1L
     }
     .Internal(set.seed(seed, i.knd, normal.kind))

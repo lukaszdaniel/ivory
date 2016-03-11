@@ -32,14 +32,13 @@ function(x, g, ...)
         l <- sapply(x, "length")
         if (any(l == 0))
             stop("all groups must contain data")
-        g <- factor(rep(1 : k, l))
+        g <- factor(rep(seq_len(k), l))
         x <- unlist(x)
     }
     else {
         if (length(x) != length(g))
-            stop("'x' and 'g' must have the same length")
-        DNAME <- paste(deparse(substitute(x)), "and",
-                       deparse(substitute(g)))
+            stop(gettextf("'%s' and '%s' arguments must have the same length", "x", "g"))
+        DNAME <- gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(g)), collapse = ""), domain = "R-stats")
         OK <- complete.cases(x, g)
         x <- x[OK]
         g <- g[OK]
@@ -63,9 +62,9 @@ function(x, g, ...)
     STATISTIC <- (STATISTIC - n * mean(a)^2) / var(a)
     PARAMETER <- k - 1
     PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
-    names(STATISTIC) <- "Fligner-Killeen:med chi-squared"
+    names(STATISTIC) <- gettext("Fligner-Killeen:med chi-squared", domain = "R-stats")
     names(PARAMETER) <- "df"
-    METHOD <- "Fligner-Killeen test of homogeneity of variances"
+    METHOD <- gettext("Fligner-Killeen test of homogeneity of variances", domain = "R-stats")
 
     RVAL <- list(statistic = STATISTIC,
                  parameter = PARAMETER,
@@ -80,15 +79,15 @@ fligner.test.formula <-
 function(formula, data, subset, na.action, ...)
 {
     if(missing(formula) || (length(formula) != 3L))
-        stop("'formula' missing or incorrect")
+        stop(gettextf("'%s' argument is missing or incorrect", "formula"))
     m <- match.call(expand.dots = FALSE)
     if(is.matrix(eval(m$data, parent.frame())))
         m$data <- as.data.frame(data)
     m[[1L]] <- quote(model.frame)
     mf <- eval(m, parent.frame())
     if(length(mf) != 2L)
-        stop("'formula' should be of the form response ~ group")
-    DNAME <- paste(names(mf), collapse = " by ")
+        stop("'formula' argument should be of the form response ~ group")
+    DNAME <- gettextf("%s by %s", names(mf[1]), names(mf[2]))
     names(mf) <- NULL
     y <- do.call("fligner.test", as.list(mf))
     y$data.name <- DNAME

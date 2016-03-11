@@ -54,9 +54,7 @@ function(query, package = "R", lib.loc = NULL,
     ## Canonicalize version entries which *start* with a valid numeric
     ## version, i.e., drop things like " patched".
     version <- db$Version
-    pos <- regexpr(sprintf("^%s",
-                           .standard_regexps()$valid_numeric_version),
-                   version)
+    pos <- regexpr(sprintf("^%s", .standard_regexps()$valid_numeric_version), version)
     if(any(ind <- (pos > -1L)))
         version[ind] <-
             substring(version[ind], 1L, attr(pos, "match.length")[ind])
@@ -109,11 +107,16 @@ function(x, ...)
             vstrings <- names(vchunks)
             ind <- vstrings != "R-devel"
             vstrings[ind] <- sprintf("version %s", vstrings[ind])
-            vheaders <-
-                sprintf("Changes in %s%s:",
-                        vstrings,
-                        ifelse(is.na(dates), "",
-                               sprintf(" (%s)", dates)))
+#            vheaders <-
+#                sprintf("Changes in %s%s:",
+#                        vstrings,
+#                        ifelse(is.na(dates), "",
+#                               sprintf(" (%s)", dates)))
+	 if(is.na(dates)) {
+	  vheaders <- gettextf("Changes in %s:", vstrings, domain = "R-utils")
+	 } else {
+	  vheaders <- gettextf("Changes in %s (%s):", vstrings, dates, domain = "R-utils")
+	 }
         } else vheaders <- character()
 
         format_items <- function(x)

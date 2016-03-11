@@ -42,7 +42,6 @@ makeUserAgent <- function(format = TRUE) {
         return(NULL)
     }
     if (length(agent) != 1L)
-        stop(gettextf("%s option must be a length one character vector or NULL",
-                      sQuote("HTTPUserAgent")), domain = NA)
+        stop(gettextf("%s option must be a length one character vector or NULL", sQuote("HTTPUserAgent")), domain = "R-utils")
     if (format) paste0("User-Agent: ", agent[1L], "\r\n") else agent[1L]
 }

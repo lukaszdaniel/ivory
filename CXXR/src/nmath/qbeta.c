@@ -521,7 +521,7 @@ L_Newton:
 
     /*-- NOT converged: Iteration count --*/
     warned = TRUE;
-    ML_ERROR(ME_PRECISION, "qbeta");
+    ML_ERROR(ME_PRECISION, "qbeta()");
 
 L_converged:
     log_ = log_p || use_log_x; // only for printing

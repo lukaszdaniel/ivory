@@ -23,7 +23,7 @@
                     is.null(object@prototype))
                      TRUE
                  else
-                     "Class must be an empty virtual class with NULL prototype"
+                     gettext("Class must be an empty virtual class with NULL prototype")
              }, where = where)
     ## some classes in methods package are unions--now they can be officially
     setClassUnion("OptionalFunction", c("function", "NULL"), where)
@@ -37,7 +37,7 @@ setClassUnion <- function(name, members = character(), where = topenv(parent.fra
     if(length(members)>0) {
         membersDefined <- sapply(members, isClass, where = as.environment(where))
         if(!all(membersDefined))
-            stop(gettextf("the member classes must be defined: not true of %s",
+            stop(sprintf(gettext("the member classes must be defined: not true of %s", domain = "R-methods"),
                           paste(.dQ(as(members[!membersDefined], "character")), collapse=", ")), domain = NA)
     }
     def <- new("ClassUnionRepresentation",
@@ -62,7 +62,7 @@ setClassUnion <- function(name, members = character(), where = topenv(parent.fra
             try(removeClass(name, where = where))
         else
             try(setClass(name, prev, where = where))
-        stop(gettextf("unable to create union class:  could not set members %s",
+        stop(sprintf(gettext("unable to create union class: could not set members %s", domain = "R-methods"),
                       paste(.dQ(failed), collapse=", ")), domain = NA)
     }
     invisible(value)

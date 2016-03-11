@@ -19,26 +19,26 @@
 ##' used here and in nls(... algorithm = "port")
 port_msg <- function(iv1) {
     switch(as.character(iv1),
-	   "3" = "X-convergence (3)",
-	   "4" = "relative convergence (4)",
-	   "5" = "both X-convergence and relative convergence (5)",
-	   "6" = "absolute function convergence (6)",
+	   "3" = gettext("X-convergence (3)"),
+	   "4" = gettext("relative convergence (4)"),
+	   "5" = gettext("both X-convergence and relative convergence (5)"),
+	   "6" = gettext("absolute function convergence (6)"),
 
-	   "7" = "singular convergence (7)",
-	   "8" = "false convergence (8)",
-	   "9" = "function evaluation limit reached without convergence (9)",
-	   "10" = "iteration limit reached without convergence (10)",
-	   "14" = "storage only has been allocated (14)",
+	   "7" = gettext("singular convergence (7)"),
+	   "8" = gettext("false convergence (8)"),
+	   "9" = gettext("function evaluation limit reached without convergence (9)"),
+	   "10" = gettext("iteration limit reached without convergence (10)"),
+	   "14" = gettext("storage only has been allocated (14)"),
 
-	   "15" = "LIV too small (15)",
-	   "16" = "LV too small (16)",
+	   "15" = gettext("LIV too small (15)"),
+	   "16" = gettext("LV too small (16)"),
 
-	   "63" = "fn cannot be computed at initial par (63)",
-	   "65" = "gr cannot be computed at initial par (65)",
+	   "63" = gettext("fn cannot be computed at initial par (63)"),
+	   "65" = gettext("gr cannot be computed at initial par (65)"),
 
-	   "300" = "initial par violates constraints",
+	   "300" = gettext("initial par violates constraints"),
 	   ## otherwise:
-	   sprintf("See PORT documentation.  Code (%d)", iv1))
+	   gettextf("See PORT documentation.  Code (%d)", iv1))
 }
 
 ## PORT  iv[] and v[] indices for setting and getting info :
@@ -82,10 +82,11 @@ nlminb <-
 	    stop("'control' argument must be a named list")
 	pos <- pmatch(nms, names(port_cpos))
 	if (any(nap <- is.na(pos))) {
+		tmp_n <- paste(sQuote(nms[nap]), collapse = ", ")
             warning(sprintf(ngettext(length(nap),
                                      "unrecognized control element named %s ignored",
-                                     "unrecognized control elements named %s ignored"),
-                            paste(sQuote(nms[nap]), collapse = ", ")),
+                                     "unrecognized control elements named %s ignored", domain = "R-stats"),
+                            tmp_n),
                     domain = NA)
 	    pos <- pos[!nap]
 	    control <- control[!nap]
@@ -129,10 +130,10 @@ nlminb <-
 	 evaluations = c("function" = iv[6L], "gradient" = iv[30L]),
 	 "message" = if(19 <= iv1 && iv1 <= 43) {
 	     if(any(B <- iv1 == port_cpos))
-		 sprintf("'control' component '%s' = %g, is out of range",
+		 gettextf("'control' component '%s' = %g, is out of range",
 			 names(port_cpos)[B], v[iv1])
 	     else
-		 sprintf("V[IV[1]] = V[%d] = %g is out of range (see PORT docu.)",
+		 gettextf("V[IV[1]] = V[%d] = %g is out of range (see PORT docu.)",
 			 iv1, v[iv1])
 	 } else port_msg(iv1))
 }

@@ -25,7 +25,6 @@
 
 #include <Defn.h>
 #include "localization.h"
-
 #ifdef HAVE_SYS_TYPES_H
 # include <sys/types.h>
 #endif
@@ -49,12 +48,12 @@ static void chmod_one(const char *name, const int grpwrt)
     DIR *dir;
     struct dirent *de;
     char p[PATH_MAX];
-#ifdef Win32
+#ifdef _WIN32
     struct _stati64 sb;
 #else
     struct stat sb;
 #endif
-#ifndef Win32
+#ifndef _WIN32
     mode_t mask, dirmask;
     if (grpwrt) {
 	mask = S_IRUSR | S_IRGRP | S_IROTH | S_IWUSR | S_IWGRP; /* 0664 */
@@ -67,7 +66,7 @@ static void chmod_one(const char *name, const int grpwrt)
 
     if (streql(name, ".") || streql(name, "..")) return;
     if (!R_FileExists(name)) return;
-#ifdef Win32
+#ifdef _WIN32
     _stati64(name, &sb);
     chmod(name, _S_IWRITE);
 #else
@@ -75,7 +74,7 @@ static void chmod_one(const char *name, const int grpwrt)
     chmod(name, (sb.st_mode | mask) & dirmask);
 #endif
     if ((sb.st_mode & S_IFDIR) > 0) { /* a directory */
-#ifndef Win32
+#ifndef _WIN32
 	chmod(name, dirmask);
 #endif
 	if ((dir = opendir(name)) != NULL) {

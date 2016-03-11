@@ -69,10 +69,7 @@ matplot <- function(x, y, type = "p",
     } else if(is.character(pch)) pch <- str2vec(pch)
     ## else pch is numeric supposedly
     if(verbose)
-	message("matplot: doing ", k, " plots with ",
-		paste0(" col= (", paste.ch(col), ")"),
-		paste0(" pch= (", paste.ch(pch), ")"),
-		" ...\n", domain=NA)
+	message(gettextf("matplot: doing %d plots with %s %s ...", k, paste0(" col= (", paste.ch(col), ")"), paste0(" pch= (", paste.ch(pch), ")")), domain = "R-graphics")
     ii <- match("log", names(xargs <- list(...)), nomatch = 0L)
     log <- if (ii != 0) xargs[[ii]]
     xy <- xy.coords(x, y, xlabel, ylabel, log = log)

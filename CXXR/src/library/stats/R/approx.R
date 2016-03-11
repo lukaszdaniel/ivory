@@ -61,10 +61,10 @@ approx <- function(x, y = NULL, xout, method = "linear", n = 50,
     y <- x$y
     x <- x$x
     nx <- as.integer(length(x))
-    if (is.na(nx)) stop("invalid length(x)")
+    if (is.na(nx)) stop(gettextf("invalid '%s' value", "length(x)"))
     if (nx <= 1) {
 	if(method == 1)# linear
-	    stop("need at least two non-NA values to interpolate")
+	    stop("at least two non-NA values to interpolate are needed")
 	if(nx == 0) stop("zero non-NA points")
     }
 
@@ -74,7 +74,7 @@ approx <- function(x, y = NULL, xout, method = "linear", n = 50,
 	yright <- if (rule[2L] == 1) NA else y[length(y)]
     stopifnot(length(yleft) == 1L, length(yright) == 1L, length(f) == 1L)
     if (missing(xout)) {
-	if (n <= 0) stop("'approx' requires n >= 1")
+	if (n <= 0) stop(gettextf("'%s' argument must be at least %d", "n", 1))
 	xout <- seq.int(x[1L], x[nx], length.out = n)
     }
     x <- as.double(x); y <- as.double(y)
@@ -94,11 +94,11 @@ approxfun <- function(x, y = NULL, method = "linear",
     y <- x$y
     x <- x$x
     n <- as.integer(length(x))
-    if (is.na(n)) stop("invalid length(x)")
+    if (is.na(n)) stop(gettextf("invalid '%s' value", "length(x)"))
 
     if (n <= 1) {
 	if(method == 1)# linear
-	    stop("need at least two non-NA values to interpolate")
+	    stop("at least two non-NA values to interpolate are needed")
 	if(n == 0) stop("zero non-NA points")
     }
     if (missing(yleft))

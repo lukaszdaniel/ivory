@@ -22,13 +22,6 @@
 
 /* definitions not involving SEXPs, plus _() */
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("stats", String)
-#else
-#define _(String) (String)
-#endif
-
 #include <R_ext/RS.h>
 void
 F77_SUB(hclust)(int *n, int *len, int *iopt, int *ia, int *ib,

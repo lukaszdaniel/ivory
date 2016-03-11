@@ -38,14 +38,13 @@ glm <- function(formula, family = gaussian, data, weights,
     if(is.function(family)) family <- family()
     if(is.null(family$family)) {
 	print(family)
-	stop("'family' not recognized")
+	stop("'family' argument was not recognized")
     }
 
     ## extract x, y, etc from the model formula and frame
     if(missing(data)) data <- environment(formula)
     mf <- match.call(expand.dots = FALSE)
-    m <- match(c("formula", "data", "subset", "weights", "na.action",
-                 "etastart", "mustart", "offset"), names(mf), 0L)
+    m <- match(c("formula", "data", "subset", "weights", "na.action", "etastart", "mustart", "offset"), names(mf), 0L)
     mf <- mf[c(1L, m)]
     mf$drop.unused.levels <- TRUE
     ## need stats:: for non-standard evaluation
@@ -54,7 +53,7 @@ glm <- function(formula, family = gaussian, data, weights,
     if(identical(method, "model.frame")) return(mf)
 
     if (!is.character(method) && !is.function(method))
-        stop("invalid 'method' argument")
+        stop(gettextf("invalid '%s' argument", "method"))
     ## for back-compatibility in return result
     if (identical(method, "glm.fit"))
         control <- do.call("glm.control", control)
@@ -73,15 +72,15 @@ glm <- function(formula, family = gaussian, data, weights,
     ## avoid any problems with 1D or nx1 arrays by as.vector.
     weights <- as.vector(model.weights(mf))
     if(!is.null(weights) && !is.numeric(weights))
-        stop("'weights' must be a numeric vector")
+        stop(gettextf("'%s' argument must be a numeric vector", "weights"))
     ## check weights and offset
     if( !is.null(weights) && any(weights < 0) )
-	stop("negative weights not allowed")
+	stop("negative weights are not allowed")
 
     offset <- as.vector(model.offset(mf))
     if(!is.null(offset)) {
         if(length(offset) != NROW(Y))
-            stop(gettextf("number of offsets is %d should equal %d (number of observations)", length(offset), NROW(Y)), domain = NA)
+            stop(gettextf("number of offsets (%d) should be equal to number of observations (%d)", length(offset), NROW(Y)), domain = "R-stats")
     }
     ## these allow starting values to be expressed in terms of other vars.
     mustart <- model.extract(mf, "mustart")
@@ -107,12 +106,12 @@ glm <- function(formula, family = gaussian, data, weights,
     if(length(offset) && attr(mt, "intercept") > 0L) {
         fit2 <-
             eval(call(if(is.function(method)) "method" else method,
-                      x = X[, "(Intercept)", drop=FALSE], y = Y,
+                      x = X[, gettext("(Intercept)", domain = NA), drop=FALSE], y = Y,
                       weights = weights, offset = offset, family = family,
                       control = control, intercept = TRUE))
         ## That fit might not have converged ....
         if(!fit2$converged)
-            warning("fitting to calculate the null deviance did not converge -- increase 'maxit'?")
+            warning("fitting to calculate the null deviance did not converge -- increase 'maxit' value?")
         fit$null.deviance <- fit2$deviance
     }
     if(model) fit$model <- mf
@@ -201,9 +200,9 @@ glm.fit <-
         eta <-
             if(!is.null(etastart)) etastart
             else if(!is.null(start))
-                if (length(start) != nvars)
-                    stop(gettextf("length of 'start' should equal %d and correspond to initial coefs for %s", nvars, paste(deparse(xnames), collapse=", ")),
-                         domain = NA)
+                if (length(start) != nvars) {
+		    tmp_N <- paste(deparse(xnames), collapse=", ")
+                    stop(gettextf("length of 'start' should equal %d and correspond to initial coefs for %s", nvars, tmp_N), domain = "R-stats") }
                 else {
                     coefold <- start
                     offset + as.vector(if (NCOL(x) == 1L) x * start else x %*% start)
@@ -232,8 +231,7 @@ glm.fit <-
 
             if (all(!good)) {
                 conv <- FALSE
-                warning(gettextf("no observations informative at iteration %d",
-                                 iter), domain = NA)
+                warning(gettextf("no observations informative at iteration %d", iter), domain = "R-stats")
                 break
             }
             z <- (eta - offset)[good] + (y - mu)[good]/mu.eta.val[good]
@@ -243,14 +241,14 @@ glm.fit <-
                          min(1e-7, control$epsilon/1000), check=FALSE)
             if (any(!is.finite(fit$coefficients))) {
                 conv <- FALSE
-                warning(gettextf("non-finite coefficients at iteration %d", iter), domain = NA)
+                warning(gettextf("non-finite coefficients at iteration %d", iter), domain = "R-stats")
                 break
             }
             ## stop if not enough parameters
             if (nobs < fit$rank)
                 stop(sprintf(ngettext(nobs,
                                       "X matrix has rank %d, but only %d observation",
-                                      "X matrix has rank %d, but only %d observations"),
+                                      "X matrix has rank %d, but only %d observations", domain = "R-stats"),
                              fit$rank, nobs), domain = NA)
             ## calculate updated values of eta and mu with the new coef:
             start[fit$pivot] <- fit$coefficients
@@ -258,7 +256,7 @@ glm.fit <-
             mu <- linkinv(eta <- eta + offset)
             dev <- sum(dev.resids(y, mu, weights))
             if (control$trace)
-                cat("Deviance = ", dev, " Iterations - ", iter, "\n", sep = "")
+                cat(gettextf("Deviance = %s Iterations - %d\n", dev, iter, domain = "R-stats"), sep = "")
             ## check for divergence
             boundary <- FALSE
             if (!is.finite(dev)) {
@@ -277,7 +275,7 @@ glm.fit <-
                 }
                 boundary <- TRUE
                 if (control$trace)
-                    cat("Step halved: new deviance = ", dev, "\n", sep = "")
+                    cat(gettextf("Step halved: new deviance = %s", dev, domain = "R-stats"), sep = "")
             }
             ## check for fitted values outside domain.
             if (!(valideta(eta) && validmu(mu))) {
@@ -296,7 +294,7 @@ glm.fit <-
                 boundary <- TRUE
                 dev <- sum(dev.resids(y, mu, weights))
                 if (control$trace)
-                    cat("Step halved: new deviance = ", dev, "\n", sep = "")
+                    cat(gettextf("Step halved: new deviance = %s", dev, domain = "R-stats"))
             }
             ## check for convergence
             if (abs(dev - devold)/(0.1 + abs(dev)) < control$epsilon) {
@@ -383,24 +381,22 @@ glm.fit <-
 
 print.glm <- function(x, digits = max(3L, getOption("digits") - 3L), ...)
 {
-    cat("\nCall:  ",
+    cat("\n", gettext("Call:  ", domain = "R-stats"),
 	paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n\n", sep = "")
     if(length(coef(x))) {
-        cat("Coefficients")
         if(is.character(co <- x$contrasts))
-            cat("  [contrasts: ",
-                apply(cbind(names(co),co), 1L, paste, collapse = "="), "]")
-        cat(":\n")
+            cat(gettextf("Coefficients  [contrasts: %s]:", apply(cbind(names(co),co), 1L, paste, collapse = "="), domain = "R-stats"))
+	else
+            cat(gettext("Coefficients:", domain = "R-stats"))
+        cat("\n")
         print.default(format(x$coefficients, digits = digits),
                       print.gap = 2, quote = FALSE)
-    } else cat("No coefficients\n\n")
-    cat("\nDegrees of Freedom:", x$df.null, "Total (i.e. Null); ",
-        x$df.residual, "Residual\n")
+    } else cat(gettext("No coefficients", domain = "R-stats"), "\n\n", sep = "")
+    cat("\n", gettextf("Degrees of Freedom: %d Total (i.e. Null); %d Residual", x$df.null, x$df.residual, domain = "R-stats"), "\n", sep = "")
     if(nzchar(mess <- naprint(x$na.action))) cat("  (",mess, ")\n", sep = "")
-    cat("Null Deviance:	   ",	format(signif(x$null.deviance, digits)),
-	"\nResidual Deviance:", format(signif(x$deviance, digits)),
-	"\tAIC:", format(signif(x$aic, digits)))
-    cat("\n")
+    cat(gettextf("Null Deviance:	   %s\nResidual Deviance: %s\tAIC: %s",	format(signif(x$null.deviance, digits)),
+	format(signif(x$deviance, digits)),
+	format(signif(x$aic, digits)), domain = "R-stats"), "\n", sep = "")
     invisible(x)
 }
 
@@ -411,9 +407,10 @@ anova.glm <- function(object, ..., dispersion = NULL, test = NULL)
     dotargs <- list(...)
     named <- if (is.null(names(dotargs)))
 	rep_len(FALSE, length(dotargs)) else (names(dotargs) != "")
-    if(any(named))
-	warning("the following arguments to 'anova.glm' are invalid and dropped: ",
-		paste(deparse(dotargs[named]), collapse=", "))
+    if(any(named)) {
+	tmp_N <- paste(deparse(dotargs[named]), collapse=", ")
+	warning("the following arguments to 'anova.glm' are invalid and dropped: ", tmp_N)
+	}
     dotargs <- dotargs[!named]
     is.glm <- vapply(dotargs,function(x) inherits(x,"glm"), NA)
     dotargs <- dotargs[is.glm]
@@ -512,14 +509,13 @@ anova.glm <- function(object, ..., dispersion = NULL, test = NULL)
 			c(NA, pmax(0, -diff(resdev))), resdf, resdev)
     tl <- attr(object$terms, "term.labels")
     if (length(tl) == 0L) table <- table[1,,drop=FALSE] # kludge for null model
-    dimnames(table) <- list(c("NULL", tl),
-			    c("Df", "Deviance", "Resid. Df", "Resid. Dev"))
+    dimnames(table) <- list(c("NULL", tl), c(gettext("Df", domain = NA), gettext("Deviance", domain = NA), gettext("Resid. Df", domain = NA), gettext("Resid. Dev", domain = NA)))
     if (doscore)
       table <- cbind(table, Rao=c(NA,score))
-    title <- paste0("Analysis of Deviance Table", "\n\nModel: ",
-                    object$family$family, ", link: ", object$family$link,
-                    "\n\nResponse: ", as.character(varlist[-1L])[1L],
-                    "\n\nTerms added sequentially (first to last)\n\n")
+    title <- paste0(gettext("Analysis of Deviance Table", domain = "R-stats"), "\n\n", gettext("Model: ", domain = "R-stats"),
+                    object$family$family, ", ", gettext("link: ", domain = "R-stats"), object$family$link,
+                    "\n\n", gettext("Response: ", domain = "R-stats"), as.character(varlist[-1L])[1L],
+                    "\n\n", gettext("Terms added sequentially (first to last)", domain = "R-stats"), "\n\n", sep = "")
 
     ## calculate test statistics if needed
 
@@ -532,9 +528,7 @@ anova.glm <- function(object, ..., dispersion = NULL, test = NULL)
         if(test == "F" && df.dispersion == Inf) {
             fam <- object$family$family
             if(fam == "binomial" || fam == "poisson")
-                warning(gettextf("using F test with a '%s' family is inappropriate",
-                                 fam),
-                        domain = NA)
+                warning(gettextf("using F test with a '%s' family is inappropriate", fam), domain = "R-stats")
             else
                 warning("using F test with a fixed dispersion is inappropriate")
         }
@@ -558,9 +552,7 @@ anova.glmlist <- function(object, ..., dispersion=NULL, test=NULL)
     sameresp <- responses==responses[1L]
     if(!all(sameresp)) {
 	object <- object[sameresp]
-        warning(gettextf("models with response %s removed because response differs from model 1",
-                         sQuote(deparse(responses[!sameresp]))),
-                domain = NA)
+        warning(gettextf("models with response %s removed because response differs from model 1", sQuote(deparse(responses[!sameresp]))), domain = "R-stats")
     }
 
     ns <- sapply(object, function(x) length(x$residuals))
@@ -604,14 +596,12 @@ anova.glmlist <- function(object, ..., dispersion=NULL, test=NULL)
 			c(NA, -diff(resdev)) )
     variables <- lapply(object, function(x)
 			paste(deparse(formula(x)), collapse="\n") )
-    dimnames(table) <- list(1L:nmodels, c("Resid. Df", "Resid. Dev", "Df",
-					 "Deviance"))
+    dimnames(table) <- list(1L:nmodels, c(gettext("Resid. Df", domain = NA), gettext("Resid. Dev", domain = NA), gettext("Df", domain = NA), gettext("Deviance", domain = NA)))
     if (doscore)
       table <- cbind(table, Rao=score)
 
-    title <- "Analysis of Deviance Table\n"
-    topnote <- paste("Model ", format(1L:nmodels),": ",
-		     variables, sep = "", collapse = "\n")
+    title <- paste(gettext("Analysis of Deviance Table", domain = "R-stats"), "\n", sep = "")
+    topnote <- paste(gettextf("Model %s: %s", format(1L:nmodels), variables, domain = "R-stats"), collapse = "\n")
 
     ## calculate test statistic if needed
 
@@ -622,9 +612,7 @@ anova.glmlist <- function(object, ..., dispersion=NULL, test=NULL)
         if(test == "F" && df.dispersion == Inf) {
             fam <- bigmodel$family$family
             if(fam == "binomial" || fam == "poisson")
-                warning(gettextf("using F test with a '%s' family is inappropriate",
-                                 fam),
-                        domain = NA, call. = FALSE)
+                warning(gettextf("using F test with a '%s' family is inappropriate", fam), domain = "R-stats", call. = FALSE)
             else
                 warning("using F test with a fixed dispersion is inappropriate")
         }
@@ -632,8 +620,7 @@ anova.glmlist <- function(object, ..., dispersion=NULL, test=NULL)
 			    scale = dispersion, df.scale = df.dispersion,
 			    n = length(bigmodel$residuals))
     }
-    structure(table, heading = c(title, topnote),
-	      class = c("anova", "data.frame"))
+    structure(table, heading = c(title, topnote), class = c("anova", "data.frame"))
 }
 
 
@@ -660,7 +647,7 @@ summary.glm <- function(object, dispersion = NULL,
     aliased <- is.na(coef(object))  # used in print method
     p <- object$rank
     if (p > 0) {
-        p1 <- 1L:p
+        p1 <- seq_len(p)
 	Qr <- qr.lm(object)
         ## WATCHIT! doesn't this rely on pivoting not permuting 1L:p? -- that's quaranteed
         coef.p <- object$coefficients[Qr$pivot[p1]]
@@ -674,27 +661,26 @@ summary.glm <- function(object, dispersion = NULL,
         s.err <- sqrt(var.cf)
         tvalue <- coef.p/s.err
 
-        dn <- c("Estimate", "Std. Error")
+        dn <- c(gettext("Estimate", domain = NA), gettext("Std. Error", domain = NA))
         if(!est.disp) { # known dispersion
             pvalue <- 2*pnorm(-abs(tvalue))
             coef.table <- cbind(coef.p, s.err, tvalue, pvalue)
-            dimnames(coef.table) <- list(names(coef.p),
-                                         c(dn, "z value","Pr(>|z|)"))
+            dimnames(coef.table) <- list(names(coef.p), c(dn, gettext("z value", domain = NA), gettext("Pr(>|z|)", domain = NA)))
         } else if(df.r > 0) {
             pvalue <- 2*pt(-abs(tvalue), df.r)
             coef.table <- cbind(coef.p, s.err, tvalue, pvalue)
             dimnames(coef.table) <- list(names(coef.p),
-                                         c(dn, "t value","Pr(>|t|)"))
+                                         c(dn, gettext("t value", domain = NA), gettext("Pr(>|t|)", domain = NA)))
         } else { # df.r == 0
             coef.table <- cbind(coef.p, NaN, NaN, NaN)
             dimnames(coef.table) <- list(names(coef.p),
-                                         c(dn, "t value","Pr(>|t|)"))
+                                         c(dn, gettext("t value", domain = NA), gettext("Pr(>|t|)", domain = NA)))
         }
         df.f <- NCOL(Qr$qr)
     } else {
         coef.table <- matrix(, 0L, 4L)
         dimnames(coef.table) <-
-            list(NULL, c("Estimate", "Std. Error", "t value", "Pr(>|t|)"))
+            list(NULL, c(gettext("Estimate", domain = NA), gettext("Std. Error", domain = NA), gettext("t value", domain = NA), gettext("Pr(>|t|)", domain = NA)))
         covmat.unscaled <- covmat <- matrix(, 0L, 0L)
         df.f <- length(aliased)
     }
@@ -728,26 +714,25 @@ print.summary.glm <-
 	      symbolic.cor = x$symbolic.cor,
 	      signif.stars = getOption("show.signif.stars"), ...)
 {
-    cat("\nCall:\n",
+    cat("\n", gettext("Call:", domain = "R-stats"), "\n",
 	paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n\n", sep = "")
-    cat("Deviance Residuals: \n")
+    cat(gettext("Deviance Residuals:", domain = "R-stats"), "\n", sep = "")
     if(x$df.residual > 5) {
-	x$deviance.resid <- setNames(quantile(x$deviance.resid, na.rm = TRUE),
-				     c("Min", "1Q", "Median", "3Q", "Max"))
+	x$deviance.resid <- setNames(quantile(x$deviance.resid, na.rm = TRUE), c("Min", "1Q", "Median", "3Q", "Max"))
     }
     xx <- zapsmall(x$deviance.resid, digits + 1L)
     print.default(xx, digits = digits, na.print = "", print.gap = 2L)
 
     if(length(x$aliased) == 0L) {
-        cat("\nNo Coefficients\n")
+        cat("\n", gettext("No coefficients", domain = "R-stats"), "\n", sep = "")
     } else {
         ## df component added in 1.8.0
         ## partial matching problem here.
         df <- if ("df" %in% names(x)) x[["df"]] else NULL
         if (!is.null(df) && (nsingular <- df[3L] - df[1L]))
-            cat("\nCoefficients: (", nsingular,
-                " not defined because of singularities)\n", sep = "")
-        else cat("\nCoefficients:\n")
+            cat("\n", sprintf(ngettext(nsingular, "Coefficients: (%d not defined because of singularity)",
+			"Coefficients: (%d not defined because of singularities)", domain = "R-stats"), nsingular), "\n", sep = "")
+        else cat("\n", gettext("Coefficients:", domain = "R-stats"), "\n", sep = "")
         coefs <- x$coefficients
         if(!is.null(aliased <- x$aliased) && any(aliased)) {
             cn <- names(aliased)
@@ -759,18 +744,13 @@ print.summary.glm <-
                      na.print = "NA", ...)
     }
     ##
-    cat("\n(Dispersion parameter for ", x$family$family,
-	" family taken to be ", format(x$dispersion), ")\n\n",
-	apply(cbind(paste(format(c("Null","Residual"), justify="right"),
-                          "deviance:"),
-		    format(unlist(x[c("null.deviance","deviance")]),
-			   digits = max(5L, digits + 1L)), " on",
-		    format(unlist(x[c("df.null","df.residual")])),
-		    " degrees of freedom\n"),
+    cat("\n", gettextf("(Dispersion parameter for %s family taken to be %s)", x$family$family, format(x$dispersion), domain = "R-stats"), "\n\n",
+	apply(cbind(format(c(gettext("Null deviance:", domain = "R-stats"),gettext("Residual deviance:", domain = "R-stats")), justify="right"),
+		    format(unlist(x[c("null.deviance","deviance")]), digits = max(5L, digits + 1L)), " on", format(unlist(x[c("df.null","df.residual")])), " degrees of freedom\n"),
 	      1L, paste, collapse = " "), sep = "")
     if(nzchar(mess <- naprint(x$na.action))) cat("  (", mess, ")\n", sep = "")
-    cat("AIC: ", format(x$aic, digits = max(4L, digits + 1L)),"\n\n",
-	"Number of Fisher Scoring iterations: ", x$iter,
+    cat(gettext("AIC: ", domain = "R-stats"), format(x$aic, digits = max(4L, digits + 1L)),"\n\n",
+	gettext("Number of Fisher Scoring iterations: ", domain = "R-stats"), x$iter,
 	"\n", sep = "")
 
     correl <- x$correlation
@@ -783,7 +763,7 @@ print.summary.glm <-
 #         }
 	p <- NCOL(correl)
 	if(p > 1) {
-	    cat("\nCorrelation of Coefficients:\n")
+	    cat("\n", gettext("Correlation of Coefficients:", domain = "R-stats"), "\n", sep = "")
 	    if(is.logical(symbolic.cor) && symbolic.cor) {# NULL < 1.7.0 objects
 		print(symnum(correl, abbr.colnames = NULL))
 	    } else {

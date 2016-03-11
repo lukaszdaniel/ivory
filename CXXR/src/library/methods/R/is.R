@@ -136,7 +136,7 @@ setIs <-
         stop(gettextf("class %s has no visible definition from package or environment %s",
                       dQuote(class2),
                       sQuote(getPackageName(where))),
-             domain = NA)
+             domain = "R-methods")
     ## check some requirements:
     ## One of the classes must be on the target environment (so that the relation can
     ## be retained by saving the corresponding image)
@@ -152,12 +152,12 @@ setIs <-
 		"cannot create a 'setIs' relation when neither of the classes (%s and %s) is local and modifiable in this package",
 			dQuote(class1),
 			dQuote(class2)),
-		 domain = NA)
+		 domain = "R-methods")
     }
     if(classDef@sealed && !isClassUnion(classDef2))
         stop(gettextf("class %s is sealed; new superclasses can not be defined, except by 'setClassUnion'",
                       dQuote(class1)),
-             domain = NA)
+             domain = "R-methods")
     prevIs <- !identical(possibleExtends(class1, class2,classDef, classDef2),
                          FALSE) # used in checking for previous coerce
     if(is.null(extensionObject))
@@ -212,7 +212,7 @@ setIs <-
             warning(gettextf("class %s is defined (with package slot %s) but no metadata object found to revise %s information---not exported?  Making a copy in package %s",
                          .dQ(class), sQuote(classDef@package), purpose,
                          sQuote(getPackageName(where, FALSE))),
-                call. = FALSE, domain = NA)
+                call. = FALSE, domain = "R-methods")
         where
     }
 }
@@ -237,7 +237,7 @@ setIs <-
                 return(c(.msg(class1, class2), ": ",
                          sprintf(ngettext(sum(is.na(match(n2, n1))),
                                           "class %s is missing slot from class %s (%s), and no coerce method was supplied",
-                                          "class %s is missing slots from class %s (%s), and no coerce method was supplied"),
+                                          "class %s is missing slots from class %s (%s), and no coerce method was supplied", domain = "R-methods"),
                                  dQuote(class1),
                                  dQuote(class2),
                                  paste(n2[is.na(match(n2, n1))], collapse = ", "))))
@@ -249,7 +249,7 @@ setIs <-
                 return(c(.msg(class1, class2), ": ",
                          sprintf(ngettext(length(bad),
                                           "slot in class %s must extend corresponding slot in class %s: fails for %s",
-                                          "slots in class %s must extend corresponding slots in class %s: fails for %s"),
+                                          "slots in class %s must extend corresponding slots in class %s: fails for %s", domain = "R-methods"),
                                  dQuote(class1),
                                  dQuote(class2),
                                  paste(bad, collapse = ", "))))

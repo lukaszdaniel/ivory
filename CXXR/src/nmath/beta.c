@@ -84,7 +84,7 @@ double beta(double a, double b)
 #ifndef IEEE_754
 	if (val < lnsml) {
 	    /* a and/or b so big that beta underflows */
-	    ML_ERROR(ME_UNDERFLOW, "beta");
+	    ML_ERROR(ME_UNDERFLOW, "beta()");
 	    /* return ML_UNDERFLOW; pointless giving incorrect value */
 	}
 #endif

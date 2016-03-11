@@ -48,11 +48,13 @@ residuals.isoreg <- function(object, ...) object$y - fitted(object)
 
 print.isoreg <- function(x, digits = getOption("digits"), ...)
 {
-  cat("Isotonic regression from ", deparse(x$call), ",\n", sep = "")
-  cat("  with", length(x$iKnots), "knots / breaks at obs.nr.", x$iKnots, ";\n")
-  if(x$isOrd) cat("  initially ordered 'x'\n")
-  else { cat("  (x,y) ordering:"); str(x$ord) }
-  cat("  and further components ")
+  cat(sprintf(ngettext(length(x$iKnots),
+		"Isotonic regression from %s\n  with %d knot / break at obs.nr. %s;\n",
+		"Isotonic regression from %s\n  with %d knots / breaks at obs.nr. %s;\n", domain = "R-stats"),
+		 deparse(x$call), length(x$iKnots), paste(x$iKnots, collapse = " ")),  sep = "")
+  if(x$isOrd) cat(gettext("  initially ordered 'x'", domain = "R-stats"), "\n", sep = "")
+  else { cat(gettextf("  (x,y) ordering: %s", str(x$ord), domain = "R-stats")) }
+  cat(gettext("  further components: ", domain = "R-stats"))
   str(x[1L:4], digits.d = 3L + max(0L, digits - 7L))
   invisible(x)
 }
@@ -69,8 +71,8 @@ lines.isoreg <- function(x, col = "red", lwd = 1.5,
 
 plot.isoreg <-
     function(x, plot.type = c("single", "row.wise", "col.wise"),
-	     main = paste("Isotonic regression", deparse(x$call)),
-	     main2 = "Cumulative Data and Convex Minorant",
+	     main = gettextf("Isotonic regression %s", paste(deparse(x$call), collapse = ""), domain = "R-stats"),
+	     main2 = gettext("Cumulative Data and Convex Minorant", domain = "R-stats"),
 	     xlab = "x0", ylab = "x$y",
 	     par.fit = list(col = "red", cex = 1.5, pch = 13, lwd = 1.5),
 	     mar = if(both) .1 + c(3.5,2.5,1,1) else par("mar"),

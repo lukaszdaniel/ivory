@@ -50,8 +50,8 @@ kernel <- function (coef, m = 2, r, name="unknown")
 
     fejer.kernel <- function (m, r)
     {
-        if (r < 1L) stop ("'r' is less than 1")
-        if (m < 1L) stop ("'m' is less than 1")
+        if (r < 1L) stop(gettextf("'%s' argument is less than %d", "r", 1))
+        if (m < 1L) stop(gettextf("'%s' argument is less than %d", "m", 1))
         n <- 2L*m+1L
         wn <- double(m+1L)
         wj <- 2*pi*(1L:m)/n
@@ -63,8 +63,8 @@ kernel <- function (coef, m = 2, r, name="unknown")
 
     dirichlet.kernel <- function (m, r)
     {
-        if (r < 0) stop ("'r' is less than 0")
-        if (m < 1) stop ("'m' is less than 1")
+        if (r < 0) stop(gettextf("'%s' argument is less than %d", "r", 0))
+        if (m < 1) stop(gettextf("'%s' argument is less than %d", "m", 1))
         n <- 2L*m+1L
         wn <- double(m+1L)
         wj <- 2*pi*(1L:m)/n
@@ -76,7 +76,7 @@ kernel <- function (coef, m = 2, r, name="unknown")
 
     if(!missing(m))
 	if(!is.numeric(m) || length(m) < 1L || m != round(m) || any(m < 0L))
-	    stop("'m' must be numeric with non-negative integers")
+	    stop("'m' argument must be numeric vector with non-negative integers")
 
     if(is.character(coef)) {
         switch(coef,
@@ -87,9 +87,9 @@ kernel <- function (coef, m = 2, r, name="unknown")
                stop("unknown named kernel"))
     } else {
         if (!is.numeric(coef))
-            stop ("'coef' must be a vector")
+            stop(gettextf("'%s' argument must be a vector", "coef"))
         if (length(coef) < 1L)
-            stop ("'coef' does not have the correct length")
+            stop(gettextf("'%s' argument is of the wrong length", "coef"))
         m <- length(coef) - 1L
         kernel <- list (coef=coef, m=m)
         attr(kernel, "name") <- name
@@ -150,8 +150,8 @@ kernapply <- function (x, ...)
 
 kernapply.vector <- function (x, k, circular = FALSE, ...)
 {
-    if (!is.vector(x)) stop ("'x' is not a vector")
-    if (!is.tskernel(k)) stop ("'k' is not a kernel")
+    if (!is.vector(x)) stop(gettextf("'%s' argument is not a vector", "x"))
+    if (!is.tskernel(k)) stop(gettextf("'%s' argument is not a kernel", "k"))
     m <- k$m
     if (length(x) <= 2L*m)
         stop ("'x' is shorter than kernel 'k'")
@@ -192,9 +192,9 @@ kernapply.ts <- function (x, k, circular = FALSE, ...)
 kernapply.tskernel <- function (x, k, ...)
 {
     if (!is.tskernel(x))
-        stop ("'x' is not a kernel")
+        stop(gettextf("'%s' argument is not a kernel", "x"))
     if (!is.tskernel(k))
-        stop ("'k' is not a kernel")
+        stop(gettextf("'%s' argument is not a kernel", "k"))
     n <- k$m
     xx <- c(rep_len(0,n), x[-x$m:x$m], rep_len(0,n))
     coef <- kernapply(xx, k, circular = TRUE)

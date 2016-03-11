@@ -21,15 +21,12 @@
 # include <config.h>
 #endif
 
+#include <R_ext/Minmax.h>
+
 #include <R.h>
 #include "ts.h"
+#include "localization.h"
 
-#ifndef max
-#define max(a,b) ((a < b)?(b):(a))
-#endif
-#ifndef min
-#define min(a,b) ((a > b)?(b):(a))
-#endif
 
 
 /* Internal */
@@ -463,7 +460,7 @@ ARMAtoMA(SEXP ar, SEXP ma, SEXP lag_max)
     SEXP res;
 
     if(m <= 0 || m == NA_INTEGER)
-	error(_("invalid value of lag.max"));
+	error(_("invalid '%s' value"), "lag.max");
     PROTECT(res = allocVector(REALSXP, m));
     psi = REAL(res);
     for(i = 0; i < m; i++) {

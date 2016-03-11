@@ -174,7 +174,7 @@ double dwilcox(double x, double m, double n, int give_log)
     if (m <= 0 || n <= 0)
 	ML_ERR_return_NAN;
 
-    if (fabs(x - R_forceint(x)) > 1e-7)
+    if (R_nonint(x))
 	return(R_D__0);
     x = R_forceint(x);
     if ((x < 0) || (x > m * n))

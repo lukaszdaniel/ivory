@@ -26,16 +26,10 @@
 #endif
 
 #include <Defn.h>
+#include "localization.h"
 #include <Graphics.h>
 #include <GraphicsBase.h>
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#undef _
-#define _(String) dgettext ("graphics", String)
-#else
-#define _(String) (String)
-#endif
 
 
 static R_INLINE GPar* dpSavedptr(pGEDevDesc dd) {
@@ -351,7 +345,7 @@ static SEXP baseCallback(GEevent task, pGEDevDesc dd, SEXP data)
 	    /* Modify the saved settings so this effects display list too */
 	    ddpSaved->scale *= rf;
 	} else
-	  error("event 'GE_ScalePS' requires a single numeric value");
+	  error(_("event 'GE_ScalePS' requires a single numeric value"));
 	break;
     }
     }

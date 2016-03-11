@@ -54,7 +54,7 @@ make.rgb <-
         ungamma <- function(x) ifelse(x <= 0.0031308,
                                       12.92*x,
                                       1.055*x %^% (1/2.4)-0.055)
-    } else stop("'gamma' must be a scalar or 'sRGB'")
+    } else stop("'gamma' argument must be a scalar or 'sRGB' value")
 
     toXYZ <- function(rgb,...) { dogamma(rgb) %*% M }
     toRGB <- function(xyz,...) { ungamma(xyz %*% solve(M)) }
@@ -67,16 +67,16 @@ make.rgb <-
 }
 
 print.colorConverter <- function(x,...) {
-    cat(gettextf("Color space converter: %s", x$name), "\n", sep = "")
+    cat(gettextf("Color space converter: %s", x$name, domain = "R-grDevices"), "\n", sep = "")
     if (!is.null(x$reference.white))
-        cat(gettextf("Reference white: %s", x$reference.white), "\n", sep = "")
+        cat(gettextf("Reference white: %s", x$reference.white, domain = "R-grDevices"), "\n", sep = "")
     invisible(x)
 }
 
 print.RGBcolorConverter <- function(x,...) {
     print.colorConverter(x, ...)
     if (!is.null(x$gamma))
-        cat(gettextf("display gamma = %s", format(x$gamma)), "\n", sep = "")
+        cat(gettextf("display gamma = %s", format(x$gamma), domain = "R-grDevices"), "\n", sep = "")
     invisible(x)
 }
 
@@ -213,11 +213,11 @@ convertColor <-
   if (is.character(from))
       from <- colorspaces[[match.arg(from, names(colorspaces))]]
   if (!inherits(from,"colorConverter"))
-      stop("'from' must be a \"colorConverter\" object or a string")
+      stop(gettextf("'%s' argument must be an object of class %s or a string", "from", dQuote("colorConverter")))
   if (is.character(to))
       to <- colorspaces[[match.arg(to, names(colorspaces))]]
   if (!inherits(to,"colorConverter"))
-      stop("'to' must be a \"colorConverter\" object or a string")
+      stop(gettextf("'%s' argument must be an object of class %s or a string", "to", dQuote("colorConverter")))
 
   ## Need a reference white. If both the definition and the argument
   ## specify one they must agree.
@@ -225,14 +225,12 @@ convertColor <-
   if (is.null(from.ref.white))
       from.ref.white <- from$white
   else if (!is.null(from$white) && from.ref.white != from$white)
-      stop(gettextf("'from.ref.white' disagrees with definition of %s",
-                    from$name), domain = NA)
+      stop(gettextf("'%s' argument disagrees with definition of '%s'", "from.ref.white", from$name))
 
   if (is.null(to.ref.white))
       to.ref.white <- to$white
   else if (!is.null(to$white) && to.ref.white != to$white)
-      stop(gettextf("'to.ref.white' disagrees with definition of %s",
-                    to$name), domain = NA)
+      stop(gettextf("'%s' argument disagrees with definition of '%s'", "to.ref.white", to$name))
 
   if (is.null(to.ref.white) && is.null(from.ref.white))
       to.ref.white <- from.ref.white <- "D65"

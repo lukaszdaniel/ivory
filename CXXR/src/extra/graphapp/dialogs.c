@@ -34,7 +34,7 @@
 # define _WIN32_WINNT 0x0500
 #endif
 
-#include "win-nls.h"
+#include <Localization.h>
 #include "internal.h"
 #include "ga.h"
 

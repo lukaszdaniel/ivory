@@ -19,6 +19,7 @@
 
 #include "modreg.h"
 #include <math.h>
+#include "localization.h"
 
 /* To be "exported" (as part of R's C API): */
 /**
@@ -33,7 +34,7 @@
 void monoFC_mod(double *m, double S[], int n)
 {
     if(n < 2)
-	error(_("n must be at least two"));
+	error(_("'%s' argument must be at least two"), "n");
 
     for(int k = 0; k < n - 1; k++) {
 	/* modify both (m[k] & m[k+1]) if needed : */
@@ -66,7 +67,7 @@ SEXP monoFC_m(SEXP m, SEXP Sx)
 	val = PROTECT(coerceVector(m, REALSXP));
     else {
 	if (!isReal(m))
-	    error(_("Argument m must be numeric"));
+	    error(_("'%s' argument must be numeric"), "m");
 	val = PROTECT(duplicate(m));
     }
     if(n < 2) error(_("length(m) must be at least two"));

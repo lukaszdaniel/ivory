@@ -46,7 +46,7 @@ function(formula, data, weights, subset, na.action, model = FALSE,
     nmx <- setNames(nm = colnames(x))
     drop.square <- match(nmx, nmx[drop.square], 0L) > 0L
     parametric <- match(nmx, nmx[parametric], 0L) > 0L
-    if(!match(degree, 0L:2L, 0L)) stop("'degree' must be 0, 1 or 2")
+    if(!match(degree, 0L:2L, 0L)) stop(gettextf("'%s' argument must be 0, 1 or 2", "degree"))
     iterations <- if(family == "gaussian") 1L else control$iterations
     if(!missing(enp.target))
 	if(!missing(span))
@@ -59,7 +59,7 @@ function(formula, data, weights, subset, na.action, model = FALSE,
     if(!is.list(control) || !is.character(control$surface) ||
        !is.character(control$statistics) || !is.character(control$trace.hat) ||
        !is.numeric(control$cell) || !is.numeric(iterations))
-        stop("invalid 'control' argument")
+        stop(gettextf("invalid '%s' argument", "control"))
     fit <- simpleLoess(y, x, w, span, degree=degree, parametric=parametric,
                        drop.square=drop.square, normalize=normalize,
                        statistics=control$statistics, surface=control$surface,
@@ -101,12 +101,12 @@ simpleLoess <- function(y, x, weights, span = 0.75, degree = 2L,
     ## loess_ translated to R.
 
     D <- as.integer(NCOL(x))
-    if (is.na(D)) stop("invalid NCOL(X)")
+    if (is.na(D)) stop(gettextf("invalid '%s' value", "NCOL(X)"))
     if(D > 4) stop("only 1-4 predictors are allowed")
     N <- as.integer(NROW(x))
-    if (is.na(N)) stop("invalid NROW(X)")
-    if(!N || !D)	stop("invalid 'x'")
-    if(length(y) != N)	stop("invalid 'y'")
+    if (is.na(N)) stop(gettextf("invalid '%s' value", "NROW(X)"))
+    if(!N || !D)	stop(gettextf("invalid '%s' argument", "x"))
+    if(length(y) != N)	stop(gettextf("invalid '%s' argument", "y"))
     x <- as.matrix(x)
     storage.mode(x) <- "double"
     storage.mode(y) <- "double"
@@ -132,9 +132,9 @@ simpleLoess <- function(y, x, weights, span = 0.75, degree = 2L,
     if(D == 1L && sum.drop.sqr)
 	stop("specified the square of a predictor to be dropped with only one numeric predictor")
     if(sum.parametric == D) stop("specified parametric for all predictors")
-    if (length(span) != 1L) stop("invalid argument 'span'")
-    if (length(cell) != 1L) stop("invalid argument 'cell'")
-    if (length(degree) != 1L) stop("invalid argument 'degree'")
+    if (length(span) != 1L) stop(gettextf("invalid '%s' argument", "span"))
+    if (length(cell) != 1L) stop(gettextf("invalid '%s' argument", "cell"))
+    if (length(degree) != 1L) stop(gettextf("invalid '%s' argument", "degree"))
 
     if(surface == "interpolate" && statistics == "approximate") # default
         statistics <- if(trace.hat == "exact") "1.approx"
@@ -142,7 +142,7 @@ simpleLoess <- function(y, x, weights, span = 0.75, degree = 2L,
     surf.stat <- paste(surface, statistics, sep = "/")
     do.rob <- (iterations > 1L) # will do robustness iter.
     if(!do.rob && iterTrace) {
-	warning("iterTrace = ", iterTrace," not obeyed as iterations = ", iterations)
+	warning(gettextf("iterTrace = %s not obeyed as iterations = %d", iterTrace, iterations))
 	iterTrace <- FALSE
     }
     no.st <- (statistics == "none")
@@ -197,9 +197,9 @@ simpleLoess <- function(y, x, weights, span = 0.75, degree = 2L,
 			   sum(abs(old.rob - robust)) / sum(robust) else NA
 	    cat(sprintf(
 		"iter.%2d: wRSS=%#14.9g, rel. changes: (SS=%#9.4g, rob.wgts=%#9.4g)\n",
-		j, wRSS, del.SS, d.rob.w))
+		j, wRSS, del.SS, d.rob.w)) #LUKI
 	    if(iterTrace >= 2 && j < iterations) {
-		cat("robustness weights:\n")
+		cat("robustness weights:", "\n", sep = "") #LUKI
 		print(quantile(robust, probs=(0:8)/8), digits=3)
 	    }
 	}
@@ -268,7 +268,7 @@ predict.loess <-
     function(object, newdata = NULL, se = FALSE, na.action = na.pass, ...)
 {
     if(!inherits(object, "loess"))
-	stop("first argument must be a \"loess\" object")
+	stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("loess")))
     if(is.null(newdata) && !se)
 	return(fitted(object))
 
@@ -421,14 +421,15 @@ pointwise <- function(results, coverage)
 print.loess <- function(x, digits = max(3L, getOption("digits") - 3L), ...)
 {
     if(!is.null(cl <- x$call)) {
-	cat("Call:\n")
+	cat(gettext("Call:", domain = "R-stats"), "\n", sep = "")
 	dput(cl, control=NULL)
     }
-    cat("\nNumber of Observations:", x$n, "\n")
-    cat("Equivalent Number of Parameters:", format(round(x$enp, 2L)), "\n")
-    cat("Residual",
-	if(x$pars$family == "gaussian")"Standard Error:" else "Scale Estimate:",
-	format(signif(x$s, digits)), "\n")
+    cat("\n", gettext("Number of Observations:", domain = "R-stats"), " ", x$n, "\n", sep = "")
+    cat(gettext("Equivalent Number of Parameters:", domain = "R-stats"), " ", format(round(x$enp, 2L)), sep = "", collapse = "\n")
+    if(x$pars$family == "gaussian")
+     cat(ngettext(1L, "Residual Standard Error:", "Residual Standard Errors:", domain = "R-stats"), " ", format(signif(x$s, digits)), "\n", sep = "")
+    else
+     cat(gettext("Residual Scale Estimate:", domain = "R-stats"), " ", format(signif(x$s, digits)), "\n", sep = "")
     invisible(x)
 }
 
@@ -441,7 +442,7 @@ summary.loess <- function(object, ...)
 print.summary.loess <-
     function(x, digits = max(3L, getOption("digits") - 3L), ...)
 {
-    print.loess(x, digits=digits, ...)
+    print.loess(x, digits=digits, ...) #LUKI
     cat("Trace of smoother matrix: ", format(round(x$trace.hat, 2L)),
         "  (",x$pars$trace.hat, ")\n", sep="")
     cat("\nControl settings:\n")
@@ -513,15 +514,12 @@ anova.loess <- function(object, ...)
     ## calculate the number of models
     if (!all(sameresp)) {
 	objects <- objects[sameresp]
-        warning(gettextf("models with response %s removed because response differs from model 1",
-                         sQuote(deparse(responses[!sameresp]))),
-                domain = NA)
+        warning(gettextf("models with response %s removed because response differs from model 1", sQuote(deparse(responses[!sameresp]))), domain = "R-stats")
     }
     nmodels <- length(objects)
     if(nmodels <= 1L) stop("no models to compare")
     models <- as.character(lapply(objects, function(x) x$call))
-    descr <- paste("Model ", format(1L:nmodels), ": ", models,
-		   sep = "", collapse = "\n")
+    descr <- paste(gettextf("Model %s: %s", format(seq_len(nmodels)), models, domain = "R-stats"), collapse = "\n")
     ## extract statistics
     delta1 <- sapply(objects, function(x) x$one.delta)
     delta2 <- sapply(objects, function(x) x$two.delta)
@@ -536,9 +534,9 @@ anova.loess <- function(object, ...)
     pr <- pf(Fvalue, dfnum, dfden, lower.tail = FALSE)
     ans <- data.frame(ENP = round(enp,2L), RSS = rss, "F-value" = Fvalue,
 		      "Pr(>F)" = pr, check.names = FALSE)
+    colnames(ans) <- c(gettext("ENP", domain = NA), gettext("RSS", domain = NA), gettext("F-value", domain = NA), gettext("Pr(>F)", domain = NA))
     attr(ans, "heading") <-
-	paste0(descr, "\n\n", "Analysis of Variance:   denominator df ",
-               format(round(dfden, 2L)), "\n")
+	paste0(descr, "\n\n", gettextf("Analysis of Variance:   denominator df %s", format(round(dfden, 2L)), domain = "R-stats"), "\n")
     class(ans) <- c("anova", "data.frame")
     ans
 }

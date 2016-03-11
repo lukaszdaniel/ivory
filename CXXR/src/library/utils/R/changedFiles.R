@@ -21,7 +21,7 @@ fileSnapshot <- function(path = ".", file.info = TRUE, timestamp = NULL,
 			 full.names = length(path) > 1, ...) {
 			 
     if (length(path) > 1 && !full.names)
-	stop("'full.names' must be TRUE for multiple paths.")
+	stop("'full.names' argument must be TRUE for multiple paths")
 
     if (length(timestamp) == 1)
 	file.create(timestamp)
@@ -121,33 +121,34 @@ changedFiles <- function(before, after, path = before$path, timestamp = before$t
 }
   
 print.fileSnapshot <- function(x, verbose = FALSE, ...) {
-    cat("File snapshot:\n path = ", x$path, 
-        "\n timestamp = ", x$timestamp, 
-	"\n file.info = ", x$file.info, 
-	"\n md5sum = ", x$md5sum, 
-	"\n digest = ", deparse(x$digest, control = NULL),
-	"\n full.names = ", x$full.names,
-	"\n args = ", deparse(x$args, control = NULL), 
-	"\n ", nrow(x$info), " files recorded.\n", sep="")
+    cat(sprintf(ngettext(nrow(x$info), "File snapshot:\n path = %s\n timestamp = %s\n file.info = %s\n md5sum = %s\n digest = %s\n full.names = %s\n args = %s\n %d file recorded.", "File snapshot:\n path = %s\n timestamp = %s\n file.info = %s\n md5sum = %s\n digest = %s\n full.names = %s\n args = %s\n %d files recorded.", domain = "R-utils"),
+	 x$path, 
+        x$timestamp, 
+	x$file.info, 
+	x$md5sum, 
+	deparse(x$digest, control = NULL),
+	x$full.names,
+	deparse(x$args, control = NULL), 
+	nrow(x$info), domain = "R-utils"), "\n", sep = "")
     if (verbose) {
 	if (ncol(x$info)) print(x$info)
-	else cat("Files:", rownames(x$info), sep="\n ")
+	else cat(gettext("Files:", domain = "R-utils"), rownames(x$info), sep = "\n ")
     }
     invisible(x)
 }
 
 print.changedFiles <- function(x, verbose = FALSE, ...) {
     if (length(x$added)) 
-    	cat("Files added:\n",  paste0("  ", x$added, collapse="\n"), "\n", sep="")
+    	cat(gettext("Files added:", domain = "R-utils"), "\n",  paste0("  ", x$added, collapse="\n"), "\n", sep = "")
     if (length(x$deleted)) 
-    	cat("Files deleted:\n",  paste0("  ", x$deleted, collapse="\n"), "\n", sep="")
+    	cat(gettext("Files deleted:", domain = "R-utils"), "\n",  paste0("  ", x$deleted, collapse="\n"), "\n", sep = "")
     changes <- x$changes
     if (!verbose) {
 	changes <- changes[rowSums(changes, na.rm = TRUE) > 0, , drop=FALSE]
 	changes <- changes[, colSums(changes, na.rm = TRUE) > 0, drop=FALSE]
     }	
     if (verbose || nrow(changes)) {
-        cat("File changes:\n")
+        cat(gettext("File changes:", domain = "R-utils"), "\n", sep = "")
         print(changes)
     }
     invisible(x)

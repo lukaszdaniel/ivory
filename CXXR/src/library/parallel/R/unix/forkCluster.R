@@ -19,7 +19,7 @@
 makeForkCluster <- function(nnodes = getOption("mc.cores", 2L), ...)
 {
     nnodes <- as.integer(nnodes)
-    if(is.na(nnodes) || nnodes < 1L) stop("'nnodes' must be >= 1")
+    if(is.na(nnodes) || nnodes < 1L) stop(gettextf("'%s' argument must be >= 1", "nnodes"))
     .check_ncores(nnodes)
     cl <- vector("list", nnodes)
     for (i in seq_along(cl)) cl[[i]] <- newForkNode(..., rank = i)
@@ -51,9 +51,9 @@ newForkNode <- function(..., options = defaultClusterOptions, rank)
             structure(list(con = con), class = "SOCK0node")
         }
         sinkWorkerOutput(outfile)
-        msg <- sprintf("starting worker pid=%d on %s at %s\n",
+        msg <- gettextf("starting worker pid=%d on %s at %s\n",
                        Sys.getpid(), paste(master, port, sep = ":"),
-                       format(Sys.time(), "%H:%M:%OS3"))
+                       format(Sys.time(), "%H:%M:%OS3"), domain = "R-parallel")
         cat(msg)
         ## allow this to quit when the loop is done.
         tools::pskill(Sys.getpid(), tools::SIGUSR1)

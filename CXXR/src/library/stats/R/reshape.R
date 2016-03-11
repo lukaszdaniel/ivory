@@ -63,7 +63,7 @@ reshape <-
             ll <- unlist(lapply(varying,length))
             if (any(ll != ll[1L]))
                 stop("'varying' arguments must be the same length")
-            if (ll[1L] != length(times)) stop("'times' is wrong length")
+            if (ll[1L] != length(times)) stop(gettextf("'%s' argument is of the wrong length", "times"))
 
             if (!is.null(drop)) {
                 if (is.character(drop))
@@ -173,9 +173,11 @@ reshape <-
                 unlist(lapply(rval,
                               function(a) all(tapply(a, as.vector(tmp),
                                                      function(b) length(unique(b)) == 1L))))
-            if (!all(really.constant))
+            if (!all(really.constant)) {
+		tmp_N <- paste(names(rval)[!really.constant],collapse = ",")
                 warning(gettextf("some constant variables (%s) are really varying",
-                                 paste(names(rval)[!really.constant],collapse = ",")), domain = NA)
+                                 tmp_N), domain = NA)
+		}
         }
 
         rval <- data[!duplicated(data[, idvar]),
@@ -185,7 +187,7 @@ reshape <-
             thistime <- data[data[, timevar] %in% times[i], ]
             tab <- table(thistime[, idvar])
             if (any(tab > 1L))
-                warning(sprintf("multiple rows match for %s=%s: first taken",
+                warning(gettextf("multiple rows match for %s=%s: first taken",
                                 timevar, times[i]), domain = NA)
             rval[, varying[, i]] <-
                 thistime[match(rval[, idvar], thistime[, idvar]), v.names]

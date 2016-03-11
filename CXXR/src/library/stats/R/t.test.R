@@ -30,10 +30,9 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
     if(!missing(conf.level) &&
        (length(conf.level) != 1 || !is.finite(conf.level) ||
         conf.level < 0 || conf.level > 1))
-        stop("'conf.level' must be a single number between 0 and 1")
+        stop(gettextf("'%s' argument must be a single number between 0 and 1", "conf.level"))
     if( !is.null(y) ) {
-	dname <- paste(deparse(substitute(x)),"and",
-		       deparse(substitute(y)))
+        DNAME <- gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)), collapse = ""), domain = "R-stats")
 	if(paired)
 	    xok <- yok <- complete.cases(x,y)
 	else {
@@ -43,7 +42,7 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
 	y <- y[yok]
     }
     else {
-	dname <- deparse(substitute(x))
+	DNAME <- deparse(substitute(x))
 	if (paired) stop("'y' is missing for paired test")
 	xok <- !is.na(x)
 	yok <- NULL
@@ -57,27 +56,26 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
     mx <- mean(x)
     vx <- var(x)
     if(is.null(y)) {
-        if(nx < 2) stop("not enough 'x' observations")
+        if(nx < 2) stop(gettextf("not enough '%s' observations", "x"))
 	df <- nx-1
 	stderr <- sqrt(vx/nx)
         if(stderr < 10 *.Machine$double.eps * abs(mx))
             stop("data are essentially constant")
-	tstat <- (mx-mu)/stderr
-	method <- if(paired) "Paired t-test" else "One Sample t-test"
-	estimate <-
-	    setNames(mx, if(paired)"mean of the differences" else "mean of x")
+	STATISTIC <- (mx-mu)/stderr
+	METHOD <- if(paired) gettext("Paired t-test") else gettext("One Sample t-test")
+	ESTIMATE <- setNames(mx, if(paired) gettext("mean of the differences") else gettext("mean of x"))
     } else {
 	ny <- length(y)
         if(nx < 1 || (!var.equal && nx < 2))
-            stop("not enough 'x' observations")
+            stop(gettextf("not enough '%s' observations", "x"))
 	if(ny < 1 || (!var.equal && ny < 2))
-            stop("not enough 'y' observations")
+            stop(gettextf("not enough '%s' observations", "y"))
         if(var.equal && nx+ny < 3) stop("not enough observations")
 	my <- mean(y)
 	vy <- var(y)
-	method <- paste(if(!var.equal)"Welch", "Two Sample t-test")
-	estimate <- c(mx,my)
-	names(estimate) <- c("mean of x","mean of y")
+	METHOD <- if(!var.equal) gettext("Welch Two Sample t-test") else gettext("Two Sample t-test")
+	ESTIMATE <- c(mx,my)
+	names(ESTIMATE) <- c(gettext("mean of x"),gettext("mean of y"))
 	if(var.equal) {
 	    df <- nx+ny-2
             v <- 0
@@ -93,33 +91,46 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
 	}
         if(stderr < 10 *.Machine$double.eps * max(abs(mx), abs(my)))
             stop("data are essentially constant")
-        tstat <- (mx - my - mu)/stderr
+        STATISTIC <- (mx - my - mu)/stderr
     }
     if (alternative == "less") {
-	pval <- pt(tstat, df)
-	cint <- c(-Inf, tstat + qt(conf.level, df) )
+	PVAL <- pt(STATISTIC, df)
+	CINT <- c(-Inf, STATISTIC + qt(conf.level, df) )
     }
     else if (alternative == "greater") {
-	pval <- pt(tstat, df, lower.tail = FALSE)
-	cint <- c(tstat - qt(conf.level, df), Inf)
+	PVAL <- pt(STATISTIC, df, lower.tail = FALSE)
+	CINT <- c(STATISTIC - qt(conf.level, df), Inf)
     }
     else {
-	pval <- 2 * pt(-abs(tstat), df)
+	PVAL <- 2 * pt(-abs(STATISTIC), df)
 	alpha <- 1 - conf.level
-        cint <- qt(1 - alpha/2, df)
-	cint <- tstat + c(-cint, cint)
+        CINT <- qt(1 - alpha/2, df)
+	CINT <- STATISTIC + c(-CINT, CINT)
     }
-    cint <- mu + cint * stderr
-    names(tstat) <- "t"
+    CINT <- mu + CINT * stderr
+    names(STATISTIC) <- "t"
     names(df) <- "df"
-    names(mu) <- if(paired || !is.null(y)) "difference in means" else "mean"
-    attr(cint,"conf.level") <- conf.level
-    rval <- list(statistic = tstat, parameter = df, p.value = pval,
-	       conf.int = cint, estimate = estimate, null.value = mu,
+    names(mu) <- if(paired || !is.null(y)) gettext("difference in means", domain = "R-stats") else gettext("mean", domain = "R-stats")
+    attr(CINT,"conf.level") <- conf.level
+    if(paired || !is.null(y)) {
+    alt.name <- switch(alternative,
+                           two.sided = gettextf("true difference in means is not equal to %s", mu, domain = "R-stats"),
+                           less = gettextf("true difference in means is less than %s", mu, domain = "R-stats"),
+                           greater = gettextf("true difference in means is greater than %s", mu, domain = "R-stats"))
+   } else {
+    alt.name <- switch(alternative,
+                           two.sided = gettextf("true mean is not equal to %s", mu, domain = "R-stats"),
+                           less = gettextf("true mean is less than %s", mu, domain = "R-stats"),
+                           greater = gettextf("true mean is greater than %s", mu, domain = "R-stats"))
+   }
+
+    RVAL <- list(statistic = STATISTIC, parameter = df, p.value = PVAL,
+	       conf.int = CINT, estimate = ESTIMATE, null.value = mu,
 	       alternative = alternative,
-	       method = method, data.name = dname)
-    class(rval) <- "htest"
-    return(rval)
+	       alt.name = alt.name,
+	       method = METHOD, data.name = DNAME)
+    class(RVAL) <- "htest"
+    return(RVAL)
 }
 
 t.test.formula <-
@@ -128,7 +139,7 @@ function(formula, data, subset, na.action, ...)
     if(missing(formula)
        || (length(formula) != 3L)
        || (length(attr(terms(formula[-2L]), "term.labels")) != 1L))
-        stop("'formula' missing or incorrect")
+        stop(gettextf("'%s' argument is missing or incorrect", "formula"))
     m <- match.call(expand.dots = FALSE)
     if(is.matrix(eval(m$data, parent.frame())))
         m$data <- as.data.frame(data)
@@ -136,7 +147,8 @@ function(formula, data, subset, na.action, ...)
     m[[1L]] <- quote(stats::model.frame)
     m$... <- NULL
     mf <- eval(m, parent.frame())
-    DNAME <- paste(names(mf), collapse = " by ")
+    if(length(mf) != 2L) stop("invalid formula")
+    DNAME <- gettextf("%s by %s", names(mf[1]), names(mf[2]))
     names(mf) <- NULL
     response <- attr(attr(mf, "terms"), "response")
     g <- factor(mf[[-response]])
@@ -146,6 +158,6 @@ function(formula, data, subset, na.action, ...)
     y <- do.call("t.test", c(DATA, list(...)))
     y$data.name <- DNAME
     if(length(y$estimate) == 2L)
-        names(y$estimate) <- paste("mean in group", levels(g))
+        names(y$estimate) <- gettextf("mean in group %s", levels(g))
     y
 }

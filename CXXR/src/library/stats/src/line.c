@@ -22,6 +22,7 @@
 
 #include <Rinternals.h>
 #include "statsR.h"
+#include "localization.h"
 
 /* Speed up by `inlining' these (as macros) [since R version 1.2] : */
 #if 1
@@ -111,7 +112,7 @@ void tukeyline0(double *x, double *y, double *z, double *w, int *n,
 SEXP tukeyline(SEXP x, SEXP y, SEXP call)
 {
     int n = LENGTH(x);
-    if (n < 2) error("insufficient observations");
+    if (n < 2) error(_("insufficient observations"));
     SEXP ans;
     ans = PROTECT(allocVector(VECSXP, 4));
     SEXP nm = allocVector(STRSXP, 4);

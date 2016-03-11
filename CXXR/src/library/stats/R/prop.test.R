@@ -37,9 +37,9 @@ function(x, n, p = NULL, alternative = c("two.sided", "less", "greater"),
 	x <- x[, 1L]
     }
     else {
-	DNAME <- paste(DNAME, "out of", deparse(substitute(n)))
+        DNAME <- gettextf("%s out of %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(n)), collapse = ""), domain = "R-stats")
 	if ((l <- length(x)) != length(n))
-	    stop("'x' and 'n' must have the same length")
+	    stop(gettextf("'%s' and '%s' arguments must have the same length", "x", "n"))
     }
 
     OK <- complete.cases(x, n)
@@ -57,11 +57,9 @@ function(x, n, p = NULL, alternative = c("two.sided", "less", "greater"),
     if (is.null(p) && (k == 1))
 	p <- .5
     if (!is.null(p)) {
-	DNAME <- paste0(DNAME, ", null ",
-		       if(k == 1) "probability " else "probabilities ",
-		       deparse(substitute(p)))
+	DNAME <- paste0(DNAME, ", ", sprintf(ngettext(k, "null probability %s", "null probabilities %s", domain = "R-stats"), paste(deparse(substitute(p)), collapse = "")))
 	if (length(p) != l)
-	    stop("'p' must have the same length as 'x' and 'n'")
+	    stop(gettextf("'%s', '%s' and '%s' arguments must have the same length", "x", "n", "p"))
 	p <- p[OK]
 	if (any((p <= 0) | (p >= 1)))
 	    stop("elements of 'p' must be in (0,1)")
@@ -73,12 +71,12 @@ function(x, n, p = NULL, alternative = c("two.sided", "less", "greater"),
 
     if ((length(conf.level) != 1L) || is.na(conf.level) ||
 	(conf.level <= 0) || (conf.level >= 1))
-	stop("'conf.level' must be a single number between 0 and 1")
+	stop(gettextf("'%s' argument must be a single number between 0 and 1", "conf.level"))
 
     correct <- as.logical(correct)
 
     ESTIMATE <- setNames(x/n,
-			 if (k == 1) "p" else paste("prop", 1L:l)[OK])
+			 if (k == 1) "proportion" else paste("prop", 1L:l)[OK])
     NVAL <- p
     CINT <- NULL
     YATES <- if(correct && (k <= 2)) .5 else 0
@@ -116,12 +114,29 @@ function(x, n, p = NULL, alternative = c("two.sided", "less", "greater"),
     if (!is.null(CINT))
 	attr(CINT, "conf.level") <- conf.level
 
-    METHOD <- paste(if(k == 1) "1-sample proportions test" else
-                    paste0(k, "-sample test for ",
-                           if(is.null(p)) "equality of" else "given",
-                           " proportions"),
-		    if(YATES) "with" else "without",
-		    "continuity correction")
+
+    if(is.null(p))
+    {
+     if(YATES)
+     METHOD <- sprintf(ngettext(k, "%d-sample proportions test with continuity correction",
+				"%d-sample test for equality of proportions with continuity correction", domain = "R-stats"),
+				k)
+     else
+     METHOD <- sprintf(ngettext(k, "%d-sample proportions test without continuity correction",
+				"%d-sample test for equality of proportions without continuity correction", domain = "R-stats"),
+				k)
+    }
+    else
+    {
+     if(YATES)
+     METHOD <- sprintf(ngettext(k, "%d-sample proportions test with continuity correction",
+                    		"%d-sample test for given proportions with continuity correction", domain = "R-stats"),
+				k)
+     else
+     METHOD <- sprintf(ngettext(k, "%d-sample proportions test without continuity correction",
+                    		"%d-sample test for given proportions without continuity correction", domain = "R-stats"),
+				k)
+    }
 
     if (is.null(p)) {
 	p <- sum(x)/sum(n)
@@ -129,7 +144,7 @@ function(x, n, p = NULL, alternative = c("two.sided", "less", "greater"),
     }
     else {
 	PARAMETER <- k
-	names(NVAL) <- names(ESTIMATE)
+	names(NVAL) <- if (k == 1) gettext("proportion", domain = "R-stats") else gettext("all proportions", domain = "R-stats")
     }
     names(PARAMETER) <- "df"
 
@@ -138,7 +153,7 @@ function(x, n, p = NULL, alternative = c("two.sided", "less", "greater"),
     if (any(E < 5))
 	warning("Chi-squared approximation may be incorrect")
     STATISTIC <- sum((abs(x - E) - YATES)^2 / E)
-    names(STATISTIC) <- "X-squared"
+    names(STATISTIC) <- gettext("X-squared", domain = "R-stats")
 
     if (alternative == "two.sided")
 	PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
@@ -149,7 +164,17 @@ function(x, n, p = NULL, alternative = c("two.sided", "less", "greater"),
 	    z <- sign(DELTA) * sqrt(STATISTIC)
 	PVAL <- pnorm(z, lower.tail = (alternative == "less"))
     }
-
+    if(k == 1) {
+    alt.name <- switch(alternative,
+                           two.sided = gettextf("true proportion is not equal to %s", NVAL, domain = "R-stats"),
+                           less = gettextf("true proportion is less than %s", NVAL, domain = "R-stats"),
+                           greater = gettextf("true proportion is greater than %s", NVAL, domain = "R-stats"))
+    } else {
+    alt.name <- switch(alternative,
+                           two.sided = gettextf("true proportion (%s) is not equal to %s", paste((1:l)[OK], collapse = ", "), NVAL, domain = "R-stats"),
+                           less = gettextf("true proportion (%s) is less than %s", paste((1:l)[OK], collapse = ", "), NVAL, domain = "R-stats"),
+                           greater = gettextf("true proportion (%s) is greater than %s", paste((1:l)[OK], collapse = ", "), NVAL, domain = "R-stats"))
+    }
     RVAL <- list(statistic = STATISTIC,
 		 parameter = PARAMETER,
 		 p.value = as.numeric(PVAL),
@@ -157,6 +182,7 @@ function(x, n, p = NULL, alternative = c("two.sided", "less", "greater"),
 		 null.value = NVAL,
 		 conf.int = CINT,
 		 alternative = alternative,
+		 alt.name = alt.name,
 		 method = METHOD,
 		 data.name = DNAME)
     class(RVAL) <- "htest"

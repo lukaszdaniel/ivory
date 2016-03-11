@@ -263,11 +263,8 @@ struct callinfo
 
 
 /*  Useful definitions.  */
+#include <R_ext/Minmax.h>
 
-#undef min
-#undef max
-#define min(a,b) (((a) < (b)) ? (a) : (b))
-#define max(a,b) (((a) > (b)) ? (a) : (b))
 
 #define MinMenuID  0x0100
 #define MinChildID 0x6000

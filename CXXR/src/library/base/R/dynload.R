@@ -48,17 +48,16 @@ getNativeSymbolInfo <- function(name, PACKAGE, unlist = TRUE,
     } else
         stop(gettextf("must pass a package name, %s or %s object",
                       dQuote("DLLInfo"),
-                      dQuote("DllInfoReference")),
+                      dQuote("DllInfoReference"), domain = "R-base"),
              domain = NA)
 
     syms <- lapply(name, function(id) {
 	v <- .Internal(getSymbolInfo(as.character(id), PACKAGE,
                                      as.logical(withRegistrationInfo)))
 	if(is.null(v)) {
-	    msg <- paste("no such symbol", id)
+	    stop(gettextf("no such symbol %s", id), domain = "R-base")
 	    if(length(pkgName) && nzchar(pkgName))
-		msg <- paste(msg, "in package", pkgName)
-	    stop(msg, domain = NA)
+		stop(gettextf("no such symbol %s in package %s", id, pkgName), domain = "R-base")
 	}
 	names(v) <- c("name", "address", "package", "numParameters")[seq_along(v)]
 	v
@@ -85,13 +84,11 @@ getDLLRegisteredRoutines.character <- function(dll, addNames = TRUE)
     w <- vapply(dlls, function(x) x[["name"]] == dll || x[["path"]] == dll, NA)
 
     if(!any(w))
-        stop(gettextf("No DLL currently loaded with name or path %s", sQuote(dll)),
-             domain = NA)
+        stop(gettextf("No DLL currently loaded with name or path %s", sQuote(dll)), domain = "R-base")
 
     dll <- which.max(w)
     if(sum(w) > 1L)
-        warning(gettextf("multiple DLLs match '%s'. Using '%s'",
-                         dll, dll[["path"]]), domain = NA)
+        warning(gettextf("multiple DLL files match %s. Using file %s", sQuote(dll), sQuote(dll[["path"]])), domain = "R-base")
 
     getDLLRegisteredRoutines(dlls[[dll]], addNames)
 }
@@ -101,9 +98,7 @@ getDLLRegisteredRoutines.DLLInfo <- function(dll, addNames = TRUE)
 {
     ## Provide methods for the different types.
     if(!inherits(dll, "DLLInfo"))
-        stop(gettextf("must specify DLL via a %s object. See getLoadedDLLs()",
-                      dQuote("DLLInfo")),
-             domain = NA)
+        stop(gettextf("must specify DLL file via an object of class %s. See 'getLoadedDLLs()' function", dQuote("DLLInfo")), domain = "R-base")
 
     info <- dll[["info"]]
     els <- .Internal(getRegisteredRoutines(info))

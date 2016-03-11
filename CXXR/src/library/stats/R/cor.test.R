@@ -25,12 +25,12 @@ function(x, y, alternative = c("two.sided", "less", "greater"),
 {
     alternative <- match.arg(alternative)
     method <- match.arg(method)
-    DNAME <- paste(deparse(substitute(x)), "and", deparse(substitute(y)))
+    DNAME <- gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)), collapse = ""), domain = "R-stats")
 
     if(length(x) != length(y))
-	stop("'x' and 'y' must have the same length")
-    if(!is.numeric(x)) stop("'x' must be a numeric vector")
-    if(!is.numeric(y)) stop("'y' must be a numeric vector")
+	stop(gettextf("'%s' and '%s' arguments must have the same length", "x", "y"))
+    if(!is.numeric(x)) stop(gettextf("'%s' argument must be a numeric vector", "x"))
+    if(!is.numeric(y)) stop(gettextf("'%s' argument must be a numeric vector", "y"))
     OK <- complete.cases(x, y)
     x <- x[OK]
     y <- y[OK]
@@ -42,8 +42,8 @@ function(x, y, alternative = c("two.sided", "less", "greater"),
     if(method == "pearson") {
 	if(n < 3L)
 	    stop("not enough finite observations")
-	method <- "Pearson's product-moment correlation"
-	names(NVAL) <- "correlation"
+	method <- gettext("Pearson's product-moment correlation", domain = "R-stats")
+	names(NVAL) <- gettext("correlation", domain = "R-stats")
 	r <- cor(x, y)
         df <- n - 2L
 	ESTIMATE <- c(cor = r)
@@ -53,7 +53,7 @@ function(x, y, alternative = c("two.sided", "less", "greater"),
             if(!missing(conf.level) &&
                (length(conf.level) != 1 || !is.finite(conf.level) ||
                 conf.level < 0 || conf.level > 1))
-                stop("'conf.level' must be a single number between 0 and 1")
+                stop(gettextf("'%s' argument must be a single number between 0 and 1", "conf.level"))
             conf.int <- TRUE
             z <- atanh(r)
             sigma <- 1 / sqrt(n - 3)
@@ -78,7 +78,7 @@ function(x, y, alternative = c("two.sided", "less", "greater"),
 	PARAMETER <- NULL
 	TIES <- (min(length(unique(x)), length(unique(y))) < n)
 	if(method == "kendall") {
-	    method <- "Kendall's rank correlation tau"
+	    method <- gettext("Kendall's rank correlation tau", domain = "R-stats")
 	    names(NVAL) <- "tau"
 	    r <- cor(x,y, method = "kendall")
             ESTIMATE <- c(tau = r)
@@ -117,15 +117,12 @@ function(x, y, alternative = c("two.sided", "less", "greater"),
                     vt <- sum(xties * (xties - 1) * (2 * xties + 5))
                     vu <- sum(yties * (yties - 1) * (2 * yties + 5))
                     v1 <- sum(xties * (xties - 1)) * sum(yties * (yties - 1))
-                    v2 <- sum(xties * (xties - 1) * (xties - 2)) *
-                        sum(yties * (yties - 1) * (yties - 2))
+                    v2 <- sum(xties * (xties - 1) * (xties - 2)) * sum(yties * (yties - 1) * (yties - 2))
 
-                    var_S <- (v0 - vt - vu) / 18 +
-                        v1 / (2 * n * (n - 1)) +
-                            v2 / (9 * n * (n - 1) * (n - 2))
+                    var_S <- (v0 - vt - vu) / 18 + v1 / (2 * n * (n - 1)) + v2 / (9 * n * (n - 1) * (n - 2))
 
                     if(exact && TIES)
-                        warning("Cannot compute exact p-value with ties")
+                        warning("cannot compute exact p-value with ties")
                     if (continuity) S <- sign(S) * (abs(S) - 1)
                     STATISTIC <- c(z = S / sqrt(var_S))
 		    PVAL <- switch(alternative,
@@ -136,7 +133,7 @@ function(x, y, alternative = c("two.sided", "less", "greater"),
                 }
             }
 	} else {
-	    method <- "Spearman's rank correlation rho"
+	    method <- gettext("Spearman's rank correlation rho", domain = "R-stats")
             if (is.null(exact))
                 exact <- TRUE
 	    names(NVAL) <- "rho"
@@ -160,15 +157,14 @@ function(x, y, alternative = c("two.sided", "less", "greater"),
                         ## Kendall et all (1939) p. 260
                         if (continuity) den <- den + 1
 			r <- 1 - q/den
-			pt(r / sqrt((1 - r^2)/(n-2)), df = n-2,
-			   lower.tail = !lower.tail)
+			pt(r / sqrt((1 - r^2)/(n-2)), df = n-2, lower.tail = !lower.tail)
 		    }
                 }
                 q <- (n^3 - n) * (1 - r) / 6
                 STATISTIC <- c(S = q)
                 if(TIES && exact){
                     exact <- FALSE
-                    warning("Cannot compute exact p-value with ties")
+                    warning("cannot compute exact p-value with ties")
                 }
                 PVAL <-
                     switch(alternative,
@@ -185,12 +181,31 @@ function(x, y, alternative = c("two.sided", "less", "greater"),
         }
     }
 
+    if(names(NVAL) == "correlation") {
+    alt.name <- switch(alternative,
+                           two.sided = gettextf("true correlation is not equal to %s", NVAL, domain = "R-stats"),
+                           less = gettextf("true correlation is less than %s", NVAL, domain = "R-stats"),
+                           greater = gettextf("true correlation is greater than %s", NVAL, domain = "R-stats"))
+    } else if(names(NVAL) == "tau") {
+    alt.name <- switch(alternative,
+                           two.sided = gettextf("true tau is not equal to %s", NVAL, domain = "R-stats"),
+                           less = gettextf("true tau is less than %s", NVAL, domain = "R-stats"),
+                           greater = gettextf("true tau is greater than %s", NVAL, domain = "R-stats"))
+   } else {
+    alt.name <- switch(alternative,
+                           two.sided = gettextf("true rho is not equal to %s", NVAL, domain = "R-stats"),
+                           less = gettextf("true rho is less than %s", NVAL, domain = "R-stats"),
+                           greater = gettextf("true rho is greater than %s", NVAL, domain = "R-stats"))
+
+   }
+
     RVAL <- list(statistic = STATISTIC,
                  parameter = PARAMETER,
                  p.value = as.numeric(PVAL),
                  estimate = ESTIMATE,
                  null.value = NVAL,
                  alternative = alternative,
+                 alt.name = alt.name,
                  method = method,
                  data.name = DNAME)
     if(conf.int)
@@ -205,7 +220,7 @@ function(formula, data, subset, na.action, ...)
     if(missing(formula)
        || !inherits(formula, "formula")
        || length(formula) != 2L)
-        stop("'formula' missing or invalid")
+        stop(gettextf("'%s' argument is missing or incorrect", "formula"))
     m <- match.call(expand.dots = FALSE)
     if(is.matrix(eval(m$data, parent.frame())))
         m$data <- as.data.frame(data)
@@ -213,9 +228,8 @@ function(formula, data, subset, na.action, ...)
     m[[1L]] <- quote(stats::model.frame)
     m$... <- NULL
     mf <- eval(m, environment(formula))
-    if(length(mf) != 2L)
-        stop("invalid formula")
-    DNAME <- paste(names(mf), collapse = " and ")
+    if(length(mf) != 2L) stop("invalid formula")
+    DNAME <- gettextf("%s and %s", names(mf[1]), names(mf[2]))
     names(mf) <- c("x", "y")
     y <- do.call("cor.test", c(mf, list(...)))
     y$data.name <- DNAME

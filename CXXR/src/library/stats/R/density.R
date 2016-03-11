@@ -43,16 +43,16 @@ density.default <-
                       ))
 
     if (!is.numeric(x))
-        stop("argument 'x' must be numeric")
+        stop(gettextf("'%s' argument must be numeric", "x"))
     name <- deparse(substitute(x))
     x <- as.vector(x)
     x.na <- is.na(x)
     if (any(x.na)) {
         if (na.rm) x <- x[!x.na]
-        else stop("'x' contains missing values")
+        else stop("'x' argument contains missing values")
     }
     N <- nx <- as.integer(length(x))
-    if(is.na(N)) stop("invalid value of length(x)")
+    if(is.na(N)) stop(gettextf("invalid '%s' value", "length(x)"))
     x.finite <- is.finite(x)
     if(any(!x.finite)) {
         x <- x[x.finite]
@@ -66,11 +66,11 @@ density.default <-
     }
     else {
         if(length(weights) != N)
-            stop("'x' and 'weights' have unequal length")
+            stop(gettextf("'%s' and '%s' arguments must have the same length", "x", "weights"))
         if(!all(is.finite(weights)))
-            stop("'weights' must all be finite")
+            stop("'weights' argument must all be finite")
         if(any(weights < 0))
-            stop("'weights' must not be negative")
+            stop("'weights' argument must not be negative")
         wsum <- sum(weights)
         if(any(!x.finite)) {
             weights <- weights[x.finite]
@@ -79,7 +79,7 @@ density.default <-
 
         ## No error, since user may have wanted "sub-density"
         if (!isTRUE(all.equal(1, wsum)))
-            warning("sum(weights) != 1  -- will not get true density")
+            warning("'sum(weights) != 1'  -- will not get true density")
     }
 
     n.user <- n
@@ -106,7 +106,7 @@ density.default <-
     }
     if (is.character(bw)) {
         if(nx < 2)
-            stop("need at least 2 points to select a bandwidth automatically")
+            stop("at least 2 points are needed to select a bandwidth automatically")
         bw <- switch(tolower(bw),
                      nrd0 = bw.nrd0(x),
                      nrd = bw.nrd(x),
@@ -116,16 +116,16 @@ density.default <-
                      "sj-dpi" = bw.SJ(x, method="dpi"),
                      stop("unknown bandwidth rule"))
     }
-    if (!is.finite(bw)) stop("non-finite 'bw'")
+    if (!is.finite(bw)) stop(gettextf("non-finite '%s' argument", "bw"))
     bw <- adjust * bw
-    if (bw <= 0) stop("'bw' is not positive.")
+    if (bw <= 0) stop(gettextf("'%s' argument is not positive", "bw"))
 
     if (missing(from))
         from <- min(x) - cut * bw
     if (missing(to))
 	to   <- max(x) + cut * bw
-    if (!is.finite(from)) stop("non-finite 'from'")
-    if (!is.finite(to)) stop("non-finite 'to'")
+    if (!is.finite(from)) stop(gettextf("non-finite '%s' argument", "from"))
+    if (!is.finite(to)) stop(gettextf("non-finite '%s' argument", "to"))
     lo <- from - 4 * bw
     up <- to + 4 * bw
     ## This bins weighted distances
@@ -157,7 +157,7 @@ density.default <-
                         ifelse(abs(kords) < a, pi/4*cos(pi*kords/(2*a))/a, 0)}
                     )
     kords <- fft( fft(y)* Conj(fft(kords)), inverse=TRUE)
-    kords <- pmax.int(0, Re(kords)[1L:n]/length(y))
+    kords <- pmax.int(0, Re(kords)[seq_len(n)]/length(y))
     xords <- seq.int(lo, up, length.out = n)
     x <- seq.int(from, to, length.out = n.user)
     structure(list(x = x, y = approx(xords, kords, x)$y, bw = bw, n = N,
@@ -165,11 +165,11 @@ density.default <-
 	      class="density")
 }
 
-plot.density <- function(x, main = NULL, xlab = NULL, ylab = "Density",
+plot.density <- function(x, main = NULL, xlab = NULL, ylab = gettext("Density", domain = "R-stats"),
                          type = "l", zero.line = TRUE, ...)
 {
     if(is.null(xlab))
-	xlab <- paste("N =", x$n, "  Bandwidth =", formatC(x$bw))
+	xlab <- gettextf("N = %s   Bandwidth = %s", x$n, formatC(x$bw), domain = "R-stats")
     if(is.null(main)) main <- deparse(x$call)
     plot.default(x, main = main, xlab = xlab, ylab = ylab, type = type, ...)
     if(zero.line) abline(h = 0, lwd = 0.1, col = "gray")
@@ -178,9 +178,9 @@ plot.density <- function(x, main = NULL, xlab = NULL, ylab = "Density",
 
 print.density <- function(x, digits = NULL, ...)
 {
-    cat("\nCall:\n\t", deparse(x$call),
-	"\n\nData: ", x$data.name, " (", x$n, " obs.);",
-	"\tBandwidth 'bw' = ", formatC(x$bw, digits = digits), "\n\n", sep = "")
+    cat("\n", gettext("Call:", domain = "R-stats"), "\n\t", deparse(x$call),
+	"\n\n", sprintf(ngettext(x$n, "Data: %s (%d observation);", "Data: %s (%d observations);", domain = "R-stats"), x$data.name, x$n),
+	"\t", gettextf("Bandwidth 'bw' = %s", formatC(x$bw, digits = digits), domain = "R-stats"), "\n\n", sep = "")
     print(summary(as.data.frame(x[c("x","y")])), digits = digits, ...)
     invisible(x)
 }

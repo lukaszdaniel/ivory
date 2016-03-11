@@ -23,8 +23,7 @@ code2LazyLoadDB <-
 {
     pkgpath <- find.package(package, lib.loc, quiet = TRUE)
     if(!length(pkgpath))
-        stop(gettextf("there is no package called '%s'", package),
-             domain = NA)
+        stop(gettextf("there is no package called %s", sQuote(package)), domain = "R-tools")
     dbbase <- file.path(pkgpath, "R", package)
     if (packageHasNamespace(package, dirname(pkgpath))) {
         if (! is.null(.getNamespace(as.name(package))))
@@ -33,7 +32,7 @@ code2LazyLoadDB <-
         makeLazyLoadDB(ns, dbbase, compress = compress)
     }
     else
-        stop("all packages should have a NAMESPACE")
+        stop("all packages should have a 'NAMESPACE' file")
 }
 
 sysdata2LazyLoadDB <- function(srcFile, destDir, compress = TRUE)
@@ -48,8 +47,7 @@ list_data_in_pkg <- function(package, lib.loc = NULL, dataDir = NULL)
     if(is.null(dataDir)) {
         pkgpath <- find.package(package, lib.loc, quiet = TRUE)
         if(!length(pkgpath))
-            stop(gettextf("there is no package called '%s'", package),
-                 domain = NA)
+            stop(gettextf("there is no package called %s", sQuote(package)), domain = "R-tools")
         dataDir <- file.path(pkgpath, "data")
     } else {
 	if(has.pkg <- !missing(package)) ## try with default lib.loc
@@ -98,8 +96,7 @@ data2LazyLoadDB <- function(package, lib.loc = NULL, compress = TRUE)
     options(warn=1)
     pkgpath <- find.package(package, lib.loc, quiet = TRUE)
     if(!length(pkgpath))
-        stop(gettextf("there is no package called '%s'", package),
-             domain = NA)
+        stop(gettextf("there is no package called %s", sQuote(package)), domain = "R-tools")
     dataDir <- file.path(pkgpath, "data")
     ## set the encoding for text files to be read, if specified
     enc <- .read_description(file.path(pkgpath, "DESCRIPTION"))["Encoding"]
@@ -136,8 +133,8 @@ data2LazyLoadDB <- function(package, lib.loc = NULL, compress = TRUE)
             if(any(dup))
                 warning(sprintf(ngettext(sum(dup),
                                          "object %s is created by more than one data call",
-                                         "objects %s are created by more than one data call"),
-                                paste(sQuote(loaded[dup]), collapse=", ")),
+                                         "objects %s are created by more than one data call", domain = "R-tools"),
+                                paste(sQuote(loaded[dup]), collapse = ", ")),
                         call. = FALSE, domain = NA)
 
             if(length(loaded)) {
@@ -158,7 +155,7 @@ makeLazyLoadDB <- function(from, filebase, compress = TRUE, ascii = FALSE,
 {
     ## pre-empt any problems with interpretation of 'ascii'
     ascii <- as.logical(ascii)
-    if (is.na(ascii)) stop("'ascii' must be TRUE or FALSE", domain = NA)
+    if (is.na(ascii)) stop(gettextf("'%s' argument must be TRUE or FALSE", "ascii", domain = "R-tools"))
     ascii <- as.integer(ascii)
 
     envlist <- function(e)
@@ -265,8 +262,7 @@ makeLazyLoading <-
     findpack <- function(package, lib.loc) {
         pkgpath <- find.package(package, lib.loc, quiet = TRUE)
         if(!length(pkgpath))
-            stop(gettextf("there is no package called '%s'", package),
-                 domain = NA)
+            stop(gettextf("there is no package called %s", sQuote(package)), domain = "R-tools")
         pkgpath
     }
 

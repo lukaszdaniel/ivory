@@ -62,7 +62,7 @@ as.Date.character <- function(x, format, ...)
 
 as.Date.numeric <- function(x, origin, ...)
 {
-    if(missing(origin)) stop("'origin' must be supplied")
+    if(missing(origin)) stop(gettextf("'%s' argument must be specified", "origin"))
     as.Date(origin, ...) + x
 }
 
@@ -71,10 +71,7 @@ as.Date.default <- function(x, ...)
     if(inherits(x, "Date")) return(x)
     if(is.logical(x) && all(is.na(x)))
         return(structure(as.numeric(x), class = "Date"))
-    stop(gettextf("do not know how to convert '%s' to class %s",
-                  deparse(substitute(x)),
-                  dQuote("Date")),
-         domain = NA)
+    stop(gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))), dQuote("Date")), domain = "R-base")
 }
 
 ## convert from package date
@@ -83,8 +80,7 @@ as.Date.date <- function(x, ...)
     if(inherits(x, "date")) {
         x <- (x - 3653) # origin 1960-01-01
         return(structure(x, class = "Date"))
-    } else stop(gettextf("'%s' is not a \"date\" object",
-                         deparse(substitute(x)) ))
+    } else stop(gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Date")))
 }
 
 ## convert from package chron
@@ -96,8 +92,7 @@ as.Date.dates <- function(x, ...)
         if(length(z) == 3L && is.numeric(z))
             x  <- x + as.numeric(as.Date(paste(z[3L], z[1L], z[2L], sep="/")))
         return(structure(x, class = "Date"))
-    } else stop(gettextf("'%s' is not a \"dates\" object",
-                         deparse(substitute(x)) ))
+    } else stop(gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Dates")))
 }
 
 format.Date <- function(x, ...)
@@ -113,8 +108,10 @@ print.Date <- function(x, max = NULL, ...)
     if(is.null(max)) max <- getOption("max.print", 9999L)
     if(max < length(x)) {
 	print(format(x[seq_len(max)]), max=max, ...)
-	cat(' [ reached getOption("max.print") -- omitted',
-	    length(x) - max, 'entries ]\n')
+	cat(sprintf(ngettext(as.integer(length(x) - max),
+			" [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",
+			" [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base"),
+			length(x) - max), "\n", sep = "")
     } else print(format(x), max=max, ...)
     invisible(x)
 }
@@ -142,7 +139,7 @@ summary.Date <- function(object, digits = 12L, ...)
     if (nargs() == 1) return(e1)
     # only valid if one of e1 and e2 is a scalar.
     if(inherits(e1, "Date") && inherits(e2, "Date"))
-        stop("binary + is not defined for \"Date\" objects")
+        stop(gettextf("binary '%s' operator is not defined for objects of class %s", "+", dQuote("Date")))
     if (inherits(e1, "difftime")) e1 <- coerceTimeUnit(e1)
     if (inherits(e2, "difftime")) e2 <- coerceTimeUnit(e2)
     structure(unclass(e1) + unclass(e2), class = "Date")
@@ -155,26 +152,24 @@ summary.Date <- function(object, digits = 12L, ...)
                                secs = x/86400, mins = x/1440, hours = x/24,
                                days = x, weeks = 7*x)))
     if(!inherits(e1, "Date"))
-        stop("can only subtract from \"Date\" objects")
-    if (nargs() == 1) stop("unary - is not defined for \"Date\" objects")
+        stop(gettextf("can only subtract from objects of class %s", dQuote("date")))
+    if (nargs() == 1) stop(gettextf("unary '%s' operator is not defined for objects of class %s", "-", dQuote("Date")))
     if(inherits(e2, "Date")) return(difftime(e1, e2, units="days"))
     if (inherits(e2, "difftime")) e2 <- coerceTimeUnit(e2)
     if(!is.null(attr(e2, "class")))
-        stop("can only subtract numbers from \"Date\" objects")
+        stop(gettextf("can only subtract numbers from objects of class %s", dQuote("Date")))
     structure(unclass(as.Date(e1)) - e2, class = "Date")
 }
 
 Ops.Date <- function(e1, e2)
 {
     if (nargs() == 1)
-        stop(gettextf("unary %s not defined for \"Date\" objects", .Generic),
-             domain = NA)
+        stop(gettextf("unary '%s' operator is not defined for objects of class %s", .Generic, dQuote("Date")), domain = "R-base")
     boolean <- switch(.Generic, "<" =, ">" =, "==" =,
                       "!=" =, "<=" =, ">=" = TRUE,
                       FALSE)
     if (!boolean)
-        stop(gettextf("%s not defined for \"Date\" objects", .Generic),
-             domain = NA)
+        stop(gettextf("binary '%s' operator is not defined for objects of class %s", .Generic, dQuote("Date")), domain = "R-base")
     ## allow character args to be coerced to dates
     if (is.character(e1)) e1 <- as.Date(e1)
     if (is.character(e2)) e2 <- as.Date(e2)
@@ -182,14 +177,12 @@ Ops.Date <- function(e1, e2)
 }
 
 Math.Date <- function (x, ...)
-    stop(gettextf("%s not defined for \"Date\" objects", .Generic),
-         domain = NA)
+    stop(gettextf("'%s' function is not defined for objects of class %s", .Generic, dQuote("Date")), domain = "R-base")
 
 Summary.Date <- function (..., na.rm)
 {
     ok <- switch(.Generic, max = , min = , range = TRUE, FALSE)
-    if (!ok) stop(gettextf("%s not defined for \"Date\" objects", .Generic),
-                  domain = NA)
+    if (!ok) stop(gettextf("'%s' function is not defined for objects of class %s", .Generic, dQuote("Date")), domain = "R-base")
    val <- NextMethod(.Generic)
     class(val) <- oldClass(list(...)[[1L]])
     val
@@ -239,22 +232,22 @@ mean.Date <- function (x, ...)
 
 seq.Date <- function(from, to, by, length.out = NULL, along.with = NULL, ...)
 {
-    if (missing(from)) stop("'from' must be specified")
-    if (!inherits(from, "Date")) stop("'from' must be a \"Date\" object")
-        if(length(as.Date(from)) != 1L) stop("'from' must be of length 1")
+    if (missing(from)) stop(gettextf("'%s' argument must be specified", "from"))
+    if (!inherits(from, "Date")) stop(gettextf("'%s' argument must be an object of class %s", "from", dQuote("Date")))
+        if(length(as.Date(from)) != 1L) stop(gettextf("'%s' argument must be of length 1", "from"))
     if (!missing(to)) {
-        if (!inherits(to, "Date")) stop("'to' must be a \"Date\" object")
-        if (length(as.Date(to)) != 1L) stop("'to' must be of length 1")
+        if (!inherits(to, "Date")) stop(gettextf("'%s' argument must be an object of class %s", "to", dQuote("Date")))
+        if (length(as.Date(to)) != 1L) stop(gettextf("'%s' argument must be of length 1", "to"))
     }
     if (!missing(along.with)) {
         length.out <- length(along.with)
     }  else if (!is.null(length.out)) {
-        if (length(length.out) != 1L) stop("'length.out' must be of length 1")
+        if (length(length.out) != 1L) stop(gettextf("'%s' argument must be of length 1", "length.out"))
         length.out <- ceiling(length.out)
     }
     status <- c(!missing(to), !missing(by), !is.null(length.out))
     if(sum(status) != 2L)
-        stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified")
+        stop("exactly two of 'to', 'by' and 'length.out' / 'along.with' arguments must be specified")
     if (missing(by)) {
         from <- unclass(as.Date(from))
         to <- unclass(as.Date(to))
@@ -262,7 +255,7 @@ seq.Date <- function(from, to, by, length.out = NULL, along.with = NULL, ...)
         return(structure(res, class = "Date"))
     }
 
-    if (length(by) != 1L) stop("'by' must be of length 1")
+    if (length(by) != 1L) stop(gettextf("'%s' argument must be of length 1", "by"))
     valid <- 0L
     if (inherits(by, "difftime")) {
         by <- switch(attr(by,"units"), secs = 1/86400, mins = 1/1440,
@@ -271,16 +264,15 @@ seq.Date <- function(from, to, by, length.out = NULL, along.with = NULL, ...)
         by2 <- strsplit(by, " ", fixed = TRUE)[[1L]]
         if(length(by2) > 2L || length(by2) < 1L)
             stop("invalid 'by' string")
-        valid <- pmatch(by2[length(by2)],
-                        c("days", "weeks", "months", "quarters", "years"))
-        if(is.na(valid)) stop("invalid string for 'by'")
+        valid <- pmatch(by2[length(by2)], c("days", "weeks", "months", "quarters", "years"))
+        if(is.na(valid)) stop("invalid string for 'by' argument")
         if(valid <= 2L) {
             by <- c(1, 7)[valid]
             if (length(by2) == 2L) by <- by * as.integer(by2[1L])
         } else
             by <- if(length(by2) == 2L) as.integer(by2[1L]) else 1
-    } else if(!is.numeric(by)) stop("invalid mode for 'by'")
-    if(is.na(by)) stop("'by' is NA")
+    } else if(!is.numeric(by)) stop("invalid mode for 'by' argument")
+    if(is.na(by)) stop(gettextf("'%s' argument is NA", "by"))
 
     if(valid <= 2L) { # days or weeks
         from <- unclass(as.Date(from))
@@ -328,7 +320,7 @@ cut.Date <-
     function (x, breaks, labels = NULL, start.on.monday = TRUE,
               right = FALSE, ...)
 {
-    if(!inherits(x, "Date")) stop("'x' must be a date-time object")
+    if(!inherits(x, "Date")) stop(gettextf("'%s' argument must be an object of class %s", "x", dQuote("Date")))
     x <- as.Date(x)
 
     if (inherits(breaks, "Date")) {
@@ -408,7 +400,7 @@ cut.Date <-
 
 julian.Date <- function(x, origin = as.Date("1970-01-01"), ...)
 {
-    if(length(origin) != 1L) stop("'origin' must be of length one")
+    if(length(origin) != 1L) stop(gettextf("'%s' argument must be of length 1", "origin"))
     structure(unclass(x) - unclass(origin), "origin" = origin)
 }
 
@@ -448,7 +440,7 @@ diff.Date <- function (x, lag = 1L, differences = 1L, ...)
     ismat <- is.matrix(x)
     xlen <- if (ismat) dim(x)[1L] else length(x)
     if (length(lag) != 1L || length(differences) > 1L || lag < 1L || differences < 1L)
-        stop("'lag' and 'differences' must be integers >= 1")
+        stop("'lag' and 'differences' arguments must be integers >= 1")
     if (lag * differences >= xlen)
         return(structure(numeric(), class="difftime", units="days"))
     r <- x

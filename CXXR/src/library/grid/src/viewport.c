@@ -19,6 +19,7 @@
  */
 
 #include "grid.h"
+#include "localization.h"
 #include <string.h>
 
 /* Some access methods for viewports */

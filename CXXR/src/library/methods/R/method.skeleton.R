@@ -23,9 +23,7 @@ method.skeleton <- function (generic, signature, file, external = FALSE,
     if (is.null(fdef)) {
         fdef <- implicitGeneric(generic, where = where)
         if(is.null(fdef))
-            stop(gettextf("no function definition found for %s",
-                          sQuote(generic)),
-                 domain = NA)
+            stop(gettextf("no function definition found for %s", sQuote(generic)), domain = "R-methods")
     }
     else {
         generic <- fdef@generic
@@ -57,8 +55,10 @@ method.skeleton <- function (generic, signature, file, external = FALSE,
         output <- c(method, "", output, paste0("  `", methodName, "`)"))
     }
     writeLines(output, file)
-    message(gettextf("Skeleton of method written to %s",
-                     if (is.character(file)) file else "connection"),
-            domain = NA)
+    if (is.character(file)) {
+    message(gettextf("Skeleton of method written to %s", sQuote(file)), domain = "R-methods")
+    } else {
+    message("Skeleton of method written to connection", domain = "R-methods")
+    }
     invisible(file)
 }

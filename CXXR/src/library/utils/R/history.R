@@ -37,7 +37,7 @@ history <- function(max.show = 25, reverse = FALSE, pattern, ...)
     } else inds <- integer()
     file2 <- tempfile("hist")
     writeLines(rawhist[inds], file2)
-    file.show(file2, title = "R History", delete.file = TRUE)
+    file.show(file2, title = gettext("R History", domain = "R-utils"), delete.file = TRUE)
 }
 
 timestamp <- function(stamp = date(), prefix = "##------ ",

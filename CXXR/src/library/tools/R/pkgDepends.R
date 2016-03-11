@@ -19,7 +19,7 @@
 pkgDepends <- function(pkg, recursive=TRUE, local=TRUE,
                        reduce=TRUE, lib.loc=NULL) {
     if (length(pkg) != 1L)
-        stop("argument 'pkg' must be of length 1")
+        stop(gettextf("'%s' argument must be of length 1", "pkg"))
 
     .Deprecated("package_dependencies()")# or also dependsOnPkgs() ?
 
@@ -27,8 +27,7 @@ pkgDepends <- function(pkg, recursive=TRUE, local=TRUE,
 
     depMtrx <- getDepMtrx(pkg, instPkgs, local)
     if (is.null(depMtrx))               # Package was not found
-        stop(gettextf("package '%s' was not found", pkg),
-             domain = NA)
+        stop(gettextf("package '%s' was not found", pkg), domain = "R-tools")
 
     getDepList(depMtrx, instPkgs, recursive, local, reduce)
 }
@@ -36,7 +35,7 @@ pkgDepends <- function(pkg, recursive=TRUE, local=TRUE,
 getDepList <- function(depMtrx, instPkgs, recursive=TRUE,
                        local=TRUE, reduce=TRUE, lib.loc=NULL)
 {
-    .Deprecated("dependsOnPkgs() or package_dependencies()")
+    .Deprecated(msg = gettextf("Function %s is deprecated.\nUse function %s or %s instead.\n", sQuote("getDepList()"), sQuote("dependsOnPkgs()"), sQuote("package_dependencies()")))
     if(!missing(lib.loc))
         warning("the 'lib.loc' argument has always been unused and is deprecated now")
 
@@ -183,7 +182,7 @@ foundDepends <- function(depMtrx, contriburl=getOption("repos")) {
             cur <- character()
             cran <- utils::available.packages(contriburl=c.url)
 
-            for (i in 1L:nrow(depMtrx)) {
+            for (i in seq_len(nrow(depMtrx))) {
                 found <- FALSE
                 cranRow <- which(depMtrx[i,1] == cran[,1])
                 if (length(cranRow)) {
@@ -267,9 +266,7 @@ reduceDepends <- function(depMtrx, quietly=TRUE) {
                     outRow <- minRow
             }
             if(!quietly)
-                warning(gettextf("Package '%s' had its dependencies reduced to a minimal set.",
-                                 pkgMtrx[1,]),
-                        domain = NA)
+                warning(gettextf("Package %s had its dependencies reduced to a minimal set.", sQuote(pkgMtrx[1,])), domain = "R-tools")
         }
 	pkgMtrx[outRow,]
     }, quietly)

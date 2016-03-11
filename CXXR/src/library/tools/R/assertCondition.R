@@ -49,8 +49,8 @@ assertCondition <-
                 if(verbose) {
                     found <-
                         unique(sapply(res, function(cond) class(cond)[class(cond) %in% conds]))
-                    message(sprintf("assertCondition: caught %s",
-                                    paste(dQuote(found), collapse =", ")), domain = NA)
+                    message(gettextf("assertCondition: caught %s",
+                                    paste(dQuote(found), collapse =", ")))
                 }
 		invisible(res)
             }
@@ -76,7 +76,7 @@ assertError <- function(expr, verbose = FALSE) {
              )
     if(verbose) {
         error <- res[ sapply(res, function(cond) "error" %in% class(cond)) ]
-        message(sprintf("Asserted error: %s", error[[1]]$message))
+        message(gettextf("Asserted error: %s", error[[1]]$message))
     }
     invisible(res)
 }
@@ -88,7 +88,7 @@ assertWarning <- function(expr, verbose = FALSE) {
         stop(gettextf("Got warning in evaluating %s, but also an error", d.expr))
     if(verbose) {
         warning <- res[ sapply(res, function(cond) "warning" %in% class(cond)) ]
-        message(sprintf("Asserted warning: %s", warning[[1]]$message))
+        message(gettextf("Asserted warning: %s", warning[[1]]$message))
     }
     invisible(res)
 }

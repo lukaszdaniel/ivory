@@ -20,7 +20,7 @@ rect.hclust <- function(tree, k=NULL, which=NULL,
                         x=NULL, h=NULL, border=2, cluster=NULL)
 {
     if(length(h) > 1L | length(k) > 1L)
-        stop("'k' and 'h' must be a scalar")
+        stop("'k' and 'h' arguments must be a scalar")
 
     if(!is.null(h)){
         if(!is.null(k))
@@ -33,8 +33,7 @@ rect.hclust <- function(tree, k=NULL, which=NULL,
             stop("specify exactly one of 'k' and 'h'")
 
     if(k < 2 | k > length(tree$height))
-        stop(gettextf("k must be between 2 and %d", length(tree$height)),
-             domain = NA)
+        stop(gettextf("'%s' argument must be between %s and %s", "k", "2", length(tree$height)), domain = "R-stats")
 
     if(is.null(cluster))
         cluster <- cutree(tree, k=k)
@@ -56,7 +55,7 @@ rect.hclust <- function(tree, k=NULL, which=NULL,
 
     if(any(which>k))
         stop(gettextf("all elements of 'which' must be between 1 and %d", k),
-             domain = NA)
+             domain = "R-stats")
 
     border <- rep_len(border, length(which))
 
@@ -80,7 +79,7 @@ identify.hclust <- function(x, FUN = NULL, N = 20, MAXCLUSTER = 20,
     oldx <- NULL
     DEV.x <- dev.cur()
 
-    for(n in 1L:N){
+    for(n in seq_len(N)){
 
         dev.set(DEV.x)
         X <- locator(1)

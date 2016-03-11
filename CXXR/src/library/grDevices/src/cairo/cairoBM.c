@@ -37,7 +37,7 @@
 
  */
 
-#ifdef Win32
+#ifdef _WIN32
 //#define HAVE_PANGOCAIRO 1
 #define HAVE_CAIRO_SVG 1
 #define HAVE_CAIRO_PDF 1
@@ -58,15 +58,7 @@
 #include "Fileio.h"		/* R_fopen */
 
 #include "cairoBM.h"
-
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#undef _
-#define _(String) dgettext ("grDevices", String)
-#else
-#define _(String) (String)
-#endif
-
+#include "../localization.h"
 
 static double RedGamma	 = 1.0;
 static double GreenGamma = 1.0;
@@ -87,7 +79,7 @@ static void cbm_Size(double *left, double *right,
 #define NO_X11 1
 #include "cairoFns.c"
 
-#ifdef Win32
+#ifdef _WIN32
 # include "winbitmap.h"
 #else
 # include "bitmap.h"
@@ -114,13 +106,13 @@ BM_Open(pDevDesc dd, pX11Desc xd, int width, int height)
 
     res = cairo_surface_status(xd->cs);
     if (res != CAIRO_STATUS_SUCCESS) {
-	warning("cairo error '%s'", cairo_status_to_string(res));
+	warning(_("cairo error '%s'"), cairo_status_to_string(res));
 	return FALSE;
     }
     xd->cc = cairo_create(xd->cs);
     res = cairo_status(xd->cc);
     if (res != CAIRO_STATUS_SUCCESS) {
-	warning("cairo error '%s'", cairo_status_to_string(res));
+	warning(_("cairo error '%s'"), cairo_status_to_string(res));
 	return FALSE;
     }
     cairo_set_operator(xd->cc, CAIRO_OPERATOR_OVER);
@@ -149,7 +141,7 @@ static void BM_Close_bitmap(pX11Desc xd)
 
     void *xi = cairo_image_surface_get_data(xd->cs);
     if (!xi) {
-	warning("BM_Close_bitmap called on non-surface");
+	warning(_("BM_Close_bitmap called on non-surface"));
 	return;
     }
 
@@ -214,14 +206,14 @@ static void BM_NewPage(const pGEcontext gc, pDevDesc dd)
 	    res = cairo_surface_status(xd->cs);
 	    if (res != CAIRO_STATUS_SUCCESS) {
 		xd->cs = NULL;
-		error("cairo error '%s'", cairo_status_to_string(res));
+		error(_("cairo error '%s'"), cairo_status_to_string(res));
 	    }
 	    if(xd->onefile)
 		cairo_svg_surface_restrict_to_version(xd->cs, CAIRO_SVG_VERSION_1_2);
 	    xd->cc = cairo_create(xd->cs);
 	    res = cairo_status(xd->cc);
 	    if (res != CAIRO_STATUS_SUCCESS) {
-		error("cairo error '%s'", cairo_status_to_string(res));
+		error(_("cairo error '%s'"), cairo_status_to_string(res));
 	    }
 	    cairo_set_antialias(xd->cc, xd->antialias);
 	}
@@ -243,14 +235,14 @@ static void BM_NewPage(const pGEcontext gc, pDevDesc dd)
 					      (double)xd->windowHeight);
 	    res = cairo_surface_status(xd->cs);
 	    if (res != CAIRO_STATUS_SUCCESS) {
-		error("cairo error '%s'", cairo_status_to_string(res));
+		error(_("cairo error '%s'"), cairo_status_to_string(res));
 	    }
 	    cairo_surface_set_fallback_resolution(xd->cs, xd->fallback_dpi,
 						  xd->fallback_dpi);
 	    xd->cc = cairo_create(xd->cs);
 	    res = cairo_status(xd->cc);
 	    if (res != CAIRO_STATUS_SUCCESS) {
-		error("cairo error '%s'", cairo_status_to_string(res));
+		error(_("cairo error '%s'"), cairo_status_to_string(res));
 	    }
 	    cairo_set_antialias(xd->cc, xd->antialias);
 	}
@@ -270,7 +262,7 @@ static void BM_NewPage(const pGEcontext gc, pDevDesc dd)
 					     (double)xd->windowHeight);
 	    res = cairo_surface_status(xd->cs);
 	    if (res != CAIRO_STATUS_SUCCESS) {
-		error("cairo error '%s'", cairo_status_to_string(res));
+		error(_("cairo error '%s'"), cairo_status_to_string(res));
 	    }
 // We already require >= 1.2
 #if CAIRO_VERSION_MAJOR > 2 || CAIRO_VERSION_MINOR >= 6
@@ -282,7 +274,7 @@ static void BM_NewPage(const pGEcontext gc, pDevDesc dd)
 	    xd->cc = cairo_create(xd->cs);
 	    res = cairo_status(xd->cc);
 	    if (res != CAIRO_STATUS_SUCCESS) {
-		error("cairo error '%s'", cairo_status_to_string(res));
+		error(_("cairo error '%s'"), cairo_status_to_string(res));
 	    }
 	    cairo_set_antialias(xd->cc, xd->antialias);
 	}
@@ -394,7 +386,7 @@ BMDeviceDriver(pDevDesc dd, int kind, const char *filename,
     dd->text = dd->textUTF8 = Cairo_Text;
 #endif
     dd->hasTextUTF8 = TRUE;
-#if defined(Win32) && !defined(USE_FC)
+#if defined(_WIN32) && !defined(USE_FC)
     dd->wantSymbolUTF8 = NA_LOGICAL;
 #else
     dd->wantSymbolUTF8 = TRUE;

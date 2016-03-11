@@ -115,22 +115,22 @@ print.sessionInfo <- function(x, locale=TRUE, ...)
     }
 
     cat(x$R.version$version.string, "\n", sep = "")
-    cat("Platform: ", x$platform, "\n", sep = "")
-    if (!is.null(x$running)) cat("Running under: ",  x$running, "\n", sep = "")
+    cat(gettext("Platform: ", domain = "R-utils"), x$platform, "\n", sep = "")
+    if (!is.null(x$running)) cat(gettext("Running under:", domain = "R-utils"), " ", x$running, "\n", sep = "")
     cat("\n")
     if(locale){
-        cat("locale:\n")
+        cat(gettext("locale:", domain = "R-utils"), "\n", sep = "")
 	print(strsplit(x$locale, ";", fixed=TRUE)[[1]], quote=FALSE, ...)
         cat("\n")
     }
-    cat("attached base packages:\n")
+    cat(gettext("attached base packages:", domain = "R-utils"), "\n", sep = "")
     print(x$basePkgs, quote=FALSE, ...)
     if(!is.null(x$otherPkgs)){
-        cat("\nother attached packages:\n")
+        cat("\n", gettext("other attached packages:", domain = "R-utils"), "\n", sep = "")
 	print(mkLabel(x, "otherPkgs"), quote=FALSE, ...)
     }
     if(!is.null(x$loadedOnly)){
-        cat("\nloaded via a namespace (and not attached):\n")
+        cat("\n", gettext("loaded via a namespace (and not attached):", domain = "R-utils"), "\n", sep = "")
 	print(mkLabel(x, "loadedOnly"), quote=FALSE, ...)
     }
     invisible(x)

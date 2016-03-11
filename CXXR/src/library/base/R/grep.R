@@ -250,9 +250,7 @@ regmatches <-
 function(x, m, invert = FALSE)
 {
     if(length(x) != length(m))
-        stop(gettextf("%s and %s must have the same length",
-                      sQuote("x"), sQuote("m")),
-             domain = NA)
+        stop(gettextf("'%s' and '%s' arguments must have the same length", "x", "m", domain = "R-base"), domain = NA)
 
     ili <- is.list(m)
 
@@ -299,7 +297,7 @@ function(x, m, invert = FALSE)
                     ##   eo[i] < so[i + 1], i = 1, ..., n - 1.
                     if(any(eo[-n] >= so[-1L]))
                         stop(gettextf("need non-overlapping matches for %s",
-                                      sQuote("invert = NA")),
+                                      sQuote("invert = NA"), domain = "R-base"),
                              domain = NA)
                 }
                 beg <- c(1L, c(rbind(so, eo + 1L)))
@@ -325,7 +323,7 @@ function(x, m, invert = FALSE)
                     eo <- so + ml - 1L
                     if(any(eo[-n] >= so[-1L]))
                         stop(gettextf("need non-overlapping matches for %s",
-                                      sQuote("invert = TRUE")),
+                                      sQuote("invert = TRUE"), domain = "R-base"),
                              domain = NA)
                     c(1L, eo + 1L)
                 } else {

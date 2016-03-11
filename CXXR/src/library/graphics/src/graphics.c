@@ -29,19 +29,12 @@
 #endif
 
 #include <Defn.h>
+#include "localization.h"
 #include <float.h> /* for DBL_EPSILON etc */
 #include <Graphics.h>
 // --> R_ext/GraphicsEngine.h + Rgraphics.h
 #include <GraphicsBase.h>       /* setBaseDevice */
 #include <Rmath.h>		/* eg. fmax2() */
-
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#undef _
-#define _(String) dgettext ("grDevices", String)
-#else
-#define _(String) (String)
-#endif
 
 /*--->> Documentation now in  ../include/Rgraphics.h  "API" ----- */
 
@@ -1840,13 +1833,13 @@ pGEDevDesc GNewPlot(Rboolean recording)
 
     dpptr(dd)->valid = gpptr(dd)->valid = FALSE;
     if (!validOuterMargins(dd)) {
-	G_ERR_MSG(_("outer margins too large (figure region too small)"));
+	G_ERR_MSG(_("outer margins are too large (figure region is too small)"));
     } else if (!validFigureRegion(dd)) {
-	G_ERR_MSG(_("figure region too large"));
+	G_ERR_MSG(_("figure region is too large"));
     } else if (!validFigureMargins(dd)) {
-	G_ERR_MSG(_("figure margins too large"));
+	G_ERR_MSG(_("figure margins are too large"));
     } else if (!validPlotRegion(dd)) {
-	G_ERR_MSG(_("plot region too large"));
+	G_ERR_MSG(_("plot region is too large"));
     } else {
 	dpptr(dd)->valid = gpptr(dd)->valid = TRUE;
 	/*
@@ -2601,7 +2594,7 @@ void GMetricInfo(int c, double *ascent, double *descent, double *width,
 void GMode(int mode, pGEDevDesc dd)
 {
     if (NoDevices())
-	error(_("No graphics device is active"));
+	error(_("no graphics device is active"));
     if(mode != gpptr(dd)->devmode) GEMode(mode, dd); /* dd->dev->mode(mode, dd->dev); */
     gpptr(dd)->newplot = dpptr(dd)->newplot = FALSE;
     gpptr(dd)->devmode = dpptr(dd)->devmode = mode;
@@ -3158,7 +3151,7 @@ void GBox(int which, pGEDevDesc dd)
 		 R_TRANWHITE, gpptr(dd)->col, dd);
 	break;
     default:
-	error(_("invalid argument to GBox"));
+	error(_("invalid argument passed to '%s' function"), "GBox()");
     }
 }
 

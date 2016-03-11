@@ -64,10 +64,10 @@ function(dir = ".", fields = NULL,
                 desci <- desc[i, !(is.na(desc[i, ]) | (desc[i, ] == "")),
                               drop = FALSE]
                 write.dcf(desci, file = out)
-                if(nzchar(path)) cat("Path: ", path, "\n", sep = "", file = out)
+                if(nzchar(path)) cat(gettext("Path: ", domain = "R-tools"), path, "\n", sep = "", file = out)
                 cat("\n", file = out)
                 write.dcf(desci, file = outgz)
-                if(nzchar(path)) cat("Path: ", path, "\n", sep = "", file = outgz)
+                if(nzchar(path)) cat(gettext("Path: ", domain = "R-tools"), path, "\n", sep = "", file = outgz)
                 cat("\n", file = outgz)
             }
             nfields <- nfields + nrow(desc)
@@ -137,7 +137,7 @@ function(dir, fields = NULL,
         if (is.null(cwd))
             stop("current working directory cannot be ascertained")
         td <- tempfile("PACKAGES")
-        if(!dir.create(td)) stop("unable to create ", td)
+        if(!dir.create(td)) stop(gettext("unable to create %s directory", sQuote(td)))
         on.exit(unlink(td, recursive = TRUE), add = TRUE)
         setwd(td)
         for(i in seq_along(files)) {
@@ -158,10 +158,10 @@ function(dir, fields = NULL,
                     temp["MD5sum"] <- md5sum(files[i])
                     db[[i]] <- temp
                 } else {
-                    message(gettextf("reading DESCRIPTION for package %s failed with message:\n  %s",
+                    message(gettextf("reading 'DESCRIPTION' file for package %s failed with message:\n  %s",
                                      sQuote(basename(dirname(p))),
                                      conditionMessage(temp)),
-                            domain = NA)
+                            domain = "R-tools")
                 }
             }
             unlink(packages[i], recursive = TRUE)
@@ -197,10 +197,10 @@ function(dir, fields = NULL, verbose = getOption("verbose"))
             ## on the unpacked sources ...
             db[[i]] <- temp
         } else {
-            warning(gettextf("reading DESCRIPTION for package %s failed with message:\n  %s",
+            warning(gettextf("reading 'DESCRIPTION' file for package %s failed with message:\n  %s",
                              sQuote(basename(paths[i])),
                              conditionMessage(temp)),
-                    domain = NA)
+                    domain = "R-tools")
         }
     }
     if(verbose) message("done")
@@ -380,7 +380,7 @@ function(packages = NULL, db = NULL,
     pos <- cbind(rep.int(p_L, lengths(p_R)), unlist(p_R))
     ctr <- 0L
     repeat {
-        if(verbose) cat("Cycle:", (ctr <- ctr + 1L))
+        if(verbose) cat(gettext("Cycle: ", domain = "R-tools"), (ctr <- ctr + 1L), sep = "")
         p_L <- split(pos[, 1L], pos[, 2L])
         new <- do.call(rbind,
                        Map(function(i, k)

@@ -23,9 +23,9 @@ diffinv <- function (x, ...) { UseMethod("diffinv") }
 ## the workhorse of diffinv.default:
 diffinv.vector <- function (x, lag = 1L, differences = 1L, xi, ...)
 {
-    if (!is.vector(x)) stop ("'x' is not a vector")
+    if (!is.vector(x)) stop(gettextf("'%s' argument is not a vector", "x"))
     lag <- as.integer(lag); differences <- as.integer(differences)
-    if (lag < 1L || differences < 1L) stop ("bad value for 'lag' or 'differences'")
+    if (lag < 1L || differences < 1L) stop ("bad value for 'lag' or 'differences' argument")
     if(missing(xi)) xi <- rep(0., lag*differences)
     if (length(xi) != lag*differences)
         stop("'xi' does not have the right length")
@@ -33,7 +33,7 @@ diffinv.vector <- function (x, lag = 1L, differences = 1L, xi, ...)
         x <- as.double(x)
         xi <- as.double(xi)
         n <- as.integer(length(x))
-        if (is.na(n)) stop ("invalid value of length(x)")
+        if (is.na(n)) stop(gettextf("invalid '%s' value", "length(x)"))
 #        y <- c(xi[1L:lag], double(n))
 #        z <- .C(C_R_intgrt_vec, x, y = y, as.integer(lag), n)$y
         .Call(C_intgrt_vec, x, xi, lag)
@@ -41,7 +41,7 @@ diffinv.vector <- function (x, lag = 1L, differences = 1L, xi, ...)
     else
 	diffinv.vector(diffinv.vector(x, lag, differences-1L,
 				      diff(xi, lag=lag, differences=1L)),
-		       lag, 1L, xi[1L:lag])
+		       lag, 1L, xi[seq_len(lag)])
 }
 
 diffinv.default <- function (x, lag = 1, differences = 1, xi, ...)
@@ -54,7 +54,7 @@ diffinv.default <- function (x, lag = 1, differences = 1, xi, ...)
             if(missing(xi)) xi <- matrix(0.0, lag*differences, m)
             if(NROW(xi) != lag*differences || NCOL(xi) != m)
                 stop("incorrect dimensions for 'xi'")
-            for (i in 1L:m)
+            for (i in seq_len(m))
                 y[,i] <- diffinv.vector(as.vector(x[,i]), lag, differences,
                                         as.vector(xi[,i]))
         }
@@ -62,7 +62,7 @@ diffinv.default <- function (x, lag = 1, differences = 1, xi, ...)
     else if (is.vector(x))
         y <- diffinv.vector(x, lag, differences, xi)
     else
-        stop ("'x' is not a vector or matrix")
+        stop(gettextf("'%s' argument is not a vector or matrix", "x"))
     y
 }
 
@@ -75,7 +75,7 @@ diffinv.ts <- function (x, lag = 1, differences = 1, xi, ...)
 
 toeplitz <- function (x)
 {
-    if(!is.vector(x)) stop("'x' is not a vector")
+    if(!is.vector(x)) stop(gettextf("'%s' argument is not a vector", "x"))
     n <- length(x)
     A <- matrix(raw(), n, n)
     matrix(x[abs(col(A) - row(A)) + 1L], n, n)

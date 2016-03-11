@@ -20,9 +20,9 @@ select.list <-
     function(choices, preselect = NULL, multiple = FALSE, title = NULL,
              graphics = getOption("menu.graphics"))
 {
-    if(!interactive()) stop("select.list() cannot be used non-interactively")
+    if(!interactive()) stop("'select.list()' cannot be used non-interactively")
     if(!is.null(title) && (!is.character(title) || length(title) != 1))
-        stop("'title' must be NULL or a length-1 character vector")
+        stop(gettextf("'%s' argument must be NULL or a length-1 character vector", "title"))
     if(isTRUE(graphics)) {
         if (.Platform$OS.type == "windows" || .Platform$GUI == "AQUA")
         return(.External2(C_selectlist, choices, preselect, multiple, title))
@@ -45,23 +45,20 @@ select.list <-
             cat(title, "\n", sep = "")
         def <- if(is.null(preselect)) rep(FALSE, nc)
         else choices %in% preselect
-        op <- paste0(format(seq_len(nc)), ": ",
-                     ifelse(def, "+", " "), " ", choices)
+        op <- paste0(format(seq_len(nc)), ": ", ifelse(def, "+", " "), " ", choices)
         if(nc > 10L) {
             fop <- format(op)
             nw <- nchar(fop[1L], "w") + 2L
             ncol <- getOption("width") %/% nw
             if(ncol > 1L)
-                op <- paste(fop, c(rep("  ", ncol - 1L), "\n"),
-                            sep = "", collapse="")
+                op <- paste(fop, c(rep("  ", ncol - 1L), "\n"), sep = "", collapse="")
             cat("", op, sep = "\n")
         } else cat("", op, "", sep = "\n")
-        cat(gettext("Enter one or more numbers separated by spaces, or an empty line to cancel\n"))
+        cat(gettext("Enter one or more numbers separated by spaces, or an empty line to cancel", domain = "R-utils"), "\n", sep = "")
 	repeat {
-            res <- tryCatch(scan("", what = 0, quiet = TRUE, nlines = 1),
-                            error = identity)
+            res <- tryCatch(scan("", what = 0, quiet = TRUE, nlines = 1), error = identity)
 	    if(!inherits(res, "error")) break
-	    cat(gettext("Invalid input, please try again\n"))
+	    cat(gettext("Invalid input, please try again", domain = "R-utils"), "\n", sep = "")
 	}
         if(!length(res) || (length(res) == 1L && !res[1L])) return(character())
         res <- sort(res[1 <= res && res <= nc])

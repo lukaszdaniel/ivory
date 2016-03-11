@@ -22,7 +22,7 @@ apply <- function(X, MARGIN, FUN, ...)
 
     ## Ensure that X is an array object
     dl <- length(dim(X))
-    if(!dl) stop("dim(X) must have a positive length")
+    if(!dl) stop("'dim(X)' value must have a positive length")
     if(is.object(X))
 	X <- if(dl == 2L) as.matrix(X) else as.array(X)
     ## now record dim as coercion can change it
@@ -67,12 +67,12 @@ apply <- function(X, MARGIN, FUN, ...)
     ans <- vector("list", d2)
     if(length(d.call) < 2L) {# vector
         if (length(dn.call)) dimnames(newX) <- c(dn.call, list(NULL))
-        for(i in 1L:d2) {
+        for(i in seq_len(d2)) {
             tmp <- forceAndCall(1, FUN, newX[,i], ...)
             if(!is.null(tmp)) ans[[i]] <- tmp
         }
     } else
-       for(i in 1L:d2) {
+       for(i in seq_len(d2)) {
            tmp <- forceAndCall(1, FUN, array(newX[,i], d.call, dn.call), ...)
            if(!is.null(tmp)) ans[[i]] <- tmp
         }

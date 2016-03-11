@@ -234,14 +234,11 @@ Rd2latex <- function(Rd, out="", defines=.Platform$OS.type, stages="render",
     }
 
     writeDR <- function(block, tag) {
+            of1("## Don't run: ")
+            writeContent(block, tag)
         if (length(block) > 1L) {
-            of1('## Not run: ')
-            writeContent(block, tag)
-            of1('\n## End(Not run)')
-        } else {
-            of1('## Not run: ')
-            writeContent(block, tag)
-       }
+            of1("\n## End (Don't run)")
+        }
     }
 
     ltxstriptitle <- function(x)
@@ -461,7 +458,7 @@ Rd2latex <- function(Rd, out="", defines=.Platform$OS.type, stages="render",
                	    	writeContent(block[[3L]], tag),
                "\\out" = for (i in seq_along(block))
 		   of1(block[[i]]),
-               stopRd(block, Rdfile, "Tag ", tag, " not recognized")
+               stopRd(block, Rdfile, gettextf("Tag %s not recognized", tag))
                )
     }
 
@@ -470,7 +467,7 @@ Rd2latex <- function(Rd, out="", defines=.Platform$OS.type, stages="render",
     	format <- table[[1L]]
     	content <- table[[2L]]
     	if (length(format) != 1L || RdTags(format) != "TEXT")
-    	    stopRd(table, Rdfile, "\\tabular format must be simple text")
+    	    stopRd(table, Rdfile, gettext("\\tabular format must be simple text"))
         tags <- RdTags(content)
         of0('\n\\Tabular{', format, '}{')
         for (i in seq_along(tags)) {
@@ -654,8 +651,6 @@ Rd2latex <- function(Rd, out="", defines=.Platform$OS.type, stages="render",
 	    writeSection(Rd[[i]], sections[i])
     }
     if (encode_warn)
-	warnRd(Rd, Rdfile, "Some input could not be re-encoded to ",
-	       outputEncoding)
-    invisible(structure(out, latexEncoding = latexEncoding,
-                        hasFigures = hasFigures))
+	warnRd(Rd, Rdfile, gettextf("Some input could not be re-encoded to %s", outputEncoding))
+    invisible(structure(out, latexEncoding = latexEncoding, hasFigures = hasFigures))
 }

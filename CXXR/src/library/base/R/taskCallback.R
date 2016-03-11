@@ -96,7 +96,7 @@ function(handlers = list(), registered = FALSE, verbose = FALSE)
         if(is.character(which)) {
             tmp <- seq_along(handlers)[!is.na(match(which, names(handlers)))]
             if(length(tmp))
-                stop(gettextf("no such element '%s'", which), domain = NA)
+                stop(gettextf("no such element '%s'", which), domain = "R-base")
             which <- tmp
         } else
         which <- as.integer(which)
@@ -136,7 +136,7 @@ function(handlers = list(), registered = FALSE, verbose = FALSE)
             }
             if(length(discard)) {
                 if(.verbose)
-                    cat(gettextf("Removing %s", paste(discard, collapse=", ")), "\n")
+                    cat(gettextf("Removing %s", paste(discard, collapse=", "), domain = "R-base"), "\n", sep = "")
                 idx <- is.na(match(names(handlers), discard))
                 if(length(idx))
                     handlers <<- handlers[idx]
@@ -155,7 +155,7 @@ function(handlers = list(), registered = FALSE, verbose = FALSE)
         function(name = "R-taskCallbackManager", verbose = .verbose)
         {
             if(verbose)
-                cat(gettext("Registering 'evaluate' as low-level callback\n"))
+                cat(gettext("Registering 'evaluate' as low-level callback", domain = "R-base"), "\n", sep = "")
             id <- addTaskCallback(evaluate, name = name)
             registered <<- TRUE
             id

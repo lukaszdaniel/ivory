@@ -10,7 +10,7 @@
   Plot method for objects of class \code{"acf"}.
 }
 \usage{
-\method{plot}{acf}(x, ci = 0.95, type = "h", xlab = "Lag", ylab = NULL,
+\method{plot}{acf}(x, ci = 0.95, type = "h", xlab = gettext("Lag", domain = "R-stats"), ylab = NULL,
      ylim = NULL, main = NULL,
      ci.col = "blue", ci.type = c("white", "ma"),
      max.mfrow = 6, ask = Npgs > 1 && dev.interactive(),

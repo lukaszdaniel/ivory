@@ -161,10 +161,7 @@ function(object, filename = NULL, name = NULL,
 
     cat(unlist(Rdtxt), file = filename, sep = "\n")
 
-    message(gettextf("Created file named %s.", sQuote(filename)),
-            "\n",
-            gettext("Edit the file and move it to the appropriate directory."),
-            domain = NA)
+    message(gettextf("Created file named %s.", sQuote(filename)), "\n", gettext("Edit the file and move it to the appropriate directory."), domain = "R-utils", sep = "")
 
     invisible(filename)
 }
@@ -314,7 +311,7 @@ function(object, filename = NULL, name = NULL)
     message(gettextf("Created file named %s.", sQuote(filename)),
             "\n",
             gettext("Edit the file and move it to the appropriate directory."),
-            domain = NA)
+            domain = "R-utils")
 
     invisible(filename)
 }
@@ -386,10 +383,7 @@ function(package, lib.loc = NULL, filename = NULL, name = NULL, final = FALSE)
 
     cat(unlist(Rdtxt), file = filename, sep = "\n")
 
-    message(gettextf("Created file named %s.", sQuote(filename)),
-            "\n",
-            gettext("Edit the file and move it to the appropriate directory."),
-            domain = NA)
+    message(gettextf("Created file named %s.", sQuote(filename)), "\n", gettext("Edit the file and move it to the appropriate directory."), domain = "R-utils", sep = "")
 
     invisible(filename)
 }
@@ -445,9 +439,9 @@ promptImport <- function(object, filename = NULL, name = NULL, importedFrom = NU
 
     cat(unlist(Rdtxt), file = filename, sep = "\n")
 
-    message(gettextf("Created file named %s.", sQuote(filename)),
+    message(gettextf("Created file named %s.", sQuote(filename), domain = "R-utils"),
             "\n",
-            gettext("Edit the file and move it to the appropriate directory."),
+            gettext("Edit the file and move it to the appropriate directory.", domain = "R-utils"),
             domain = NA)
 }
 

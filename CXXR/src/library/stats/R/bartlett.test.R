@@ -34,9 +34,8 @@ function(x, g, ...)
     }
     else {
         if (length(x) != length(g))
-            stop("'x' and 'g' must have the same length")
-        DNAME <- paste(deparse(substitute(x)), "and",
-                       deparse(substitute(g)))
+            stop(gettextf("'%s' and '%s' arguments must have the same length", "x", "g"))
+        DNAME <- gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(g)), collapse = ""), domain = "R-stats")
         OK <- complete.cases(x, g)
         x <- x[OK]
         g <- factor(g[OK])
@@ -62,14 +61,14 @@ function(x, g, ...)
                   (1 + (sum(1 / n) - 1 / n.total) / (3 * (k - 1))))
     PARAMETER <- k - 1
     PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
-    names(STATISTIC) <- "Bartlett's K-squared"
+    names(STATISTIC) <- gettext("Bartlett's K-squared", domain = "R-stats")
     names(PARAMETER) <- "df"
-
+	METHOD <- gettext("Bartlett test of homogeneity of variances", domain = "R-stats")
     RVAL <- list(statistic = STATISTIC,
                  parameter = PARAMETER,
                  p.value = PVAL,
                  data.name = DNAME,
-                 method = "Bartlett test of homogeneity of variances")
+                 method = METHOD)
     class(RVAL) <- "htest"
     return(RVAL)
 }
@@ -78,7 +77,7 @@ bartlett.test.formula <-
 function(formula, data, subset, na.action, ...)
 {
     if(missing(formula) || (length(formula) != 3L))
-        stop("'formula' missing or incorrect")
+        stop(gettextf("'%s' argument is missing or incorrect", "formula"))
     m <- match.call(expand.dots = FALSE)
     if(is.matrix(eval(m$data, parent.frame())))
         m$data <- as.data.frame(data)
@@ -86,8 +85,8 @@ function(formula, data, subset, na.action, ...)
     m[[1L]] <- quote(stats::model.frame)
     mf <- eval(m, parent.frame())
     if(length(mf) != 2L)
-        stop("'formula' should be of the form response ~ group")
-    DNAME <- paste(names(mf), collapse = " by ")
+        stop("'formula' argument should be of the form response ~ group")
+    DNAME <- gettextf("%s by %s", names(mf[1]), names(mf[2]))
     names(mf) <- NULL
     y <- do.call("bartlett.test", as.list(mf))
     y$data.name <- DNAME

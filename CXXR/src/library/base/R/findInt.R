@@ -24,7 +24,7 @@ findInterval <- function(x, vec, rightmost.closed = FALSE, all.inside = FALSE,
     ## ---------------------------------------------------------
     ## Author: Martin Maechler, Date: 4 Jan 2002 (of very different .C version)
     if(!identical(FALSE, is.unsorted(vec)))
-	stop("'vec' must be sorted non-decreasingly and not contain NAs")
+	stop("'vec' argument must be sorted non-decreasingly and not contain NA values")
     .Internal(findInterval(as.double(vec), as.double(x),
                            rightmost.closed, all.inside, left.open))
 }

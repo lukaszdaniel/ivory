@@ -106,10 +106,7 @@ print.help_files_with_topic <- function(x, ...)
         browser <- get("aqua.browser", envir = as.environment("tools:RGUI"))
     paths <- as.character(x)
     if(!length(paths)) {
-        writeLines(c(gettextf("No documentation for %s in specified packages and libraries:",
-                              sQuote(topic)),
-                     gettextf("you could try %s",
-                              sQuote(paste0("??", topic)))))
+        writeLines(gettextf("No documentation for %s in specified packages and libraries.\nYou could try %s", sQuote(topic), sQuote(paste0("??", topic)), domain = "R-utils"))
         return(invisible(x))
     }
 
@@ -117,8 +114,7 @@ print.help_files_with_topic <- function(x, ...)
 
     if(attr(x, "tried_all_packages")) {
         paths <- unique(dirname(dirname(paths)))
-        msg <- gettextf("Help for topic %s is not in any loaded package but can be found in the following packages:",
-                        sQuote(topic))
+        msg <- gettextf("Help for topic %s is not in any loaded package but can be found in the following packages:", sQuote(topic))
         if (type == "html" && port > 0L) {
             path <- file.path(tempdir(), ".R/doc/html")
             dir.create(path, recursive = TRUE, showWarnings = FALSE)
@@ -161,8 +157,7 @@ print.help_files_with_topic <- function(x, ...)
 	    }
             file <- paths[1L]
             p <- paths
-            msg <- gettextf("Help on topic %s was found in the following packages:",
-                            sQuote(topic))
+            msg <- gettextf("Help on topic %s was found in the following packages:", sQuote(topic), domain = "R-utils")
             paths <- dirname(dirname(paths))
             txt <- formatDL(c("Package", basename(paths)),
                             c("Library", dirname(paths)),
@@ -266,11 +261,11 @@ print.help_files_with_topic <- function(x, ...)
     path <- dirname(file)
     dirpath <- dirname(path)
     if(!file.exists(dirpath))
-        stop(gettextf("invalid %s argument", sQuote("file")), domain = NA)
+        stop(gettextf("invalid '%s' argument", "file"), domain = "R-utils")
     pkgname <- basename(dirpath)
     RdDB <- file.path(path, pkgname)
     if(!file.exists(paste(RdDB, "rdx", sep = ".")))
-        stop(gettextf("package %s exists but was not installed under R >= 2.10.0 so help cannot be accessed", sQuote(pkgname)), domain = NA)
+        stop(gettextf("package %s exists but was not installed under R >= 2.10.0 so help cannot be accessed", sQuote(pkgname)), domain = "R-utils")
     tools:::fetchRdDB(RdDB, basename(file))
 }
 
@@ -284,13 +279,12 @@ offline_help_helper <- function(texfile, type, texinputs = NULL)
     ofile <- sub("tex$", "pdf", tf)
     ofile2 <- sub("tex$", "pdf", texfile)
     if(!file.exists(ofile))
-        stop(gettextf("creation of %s failed", sQuote(ofile2)), domain = NA)
+        stop(gettextf("creation of %s failed", sQuote(ofile2)), domain = "R-utils")
     if(file.copy(ofile, ofile2, overwrite = TRUE)) {
         unlink(ofile)
-        message(gettextf("Saving help page to %s", sQuote(basename(ofile2))),
-                domain = NA)
+        message(gettextf("Saving help page to %s", sQuote(basename(ofile2))), domain = "R-utils")
     } else {
-        message(gettextf("Saving help page to %s", sQuote(ofile)), domain = NA)
+        message(gettextf("Saving help page to %s", sQuote(ofile)), domain = "R-utils")
     }
     invisible()
 }

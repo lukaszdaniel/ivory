@@ -21,10 +21,10 @@
 pvec <- function(v, FUN, ..., mc.set.seed = TRUE, mc.silent = FALSE,
                  mc.cores = getOption("mc.cores", 2L), mc.cleanup = TRUE)
 {
-    if (!is.vector(v)) stop("'v' must be a vector")
+    if (!is.vector(v)) stop("'v' argument must be a vector")
 
     cores <- as.integer(mc.cores)
-    if(cores < 1L) stop("'mc.cores' must be >= 1")
+    if(cores < 1L) stop(gettextf("'%s' argument must be >= 1", "mc.cores"))
     if(cores == 1L) return(FUN(v, ...))
     .check_ncores(cores)
 

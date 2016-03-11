@@ -843,7 +843,7 @@ void fft_factor(int n, int *pmaxf, int *pmaxp)
     *pmaxf = maxf;
     *pmaxp = maxp;
 }
-
+
 
 Rboolean fft_work(double *a, double *b, int nseg, int n, int nspn, int isn,
 		  double *work, int *iwork)

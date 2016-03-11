@@ -37,13 +37,13 @@ eigen <- function(x, symmetric, only.values = FALSE, EISPACK = FALSE)
 {
     x <- unname(as.matrix(x))
     n <- nrow(x)
-    if (!n) stop("0 x 0 matrix")
-    if (n != ncol(x)) stop("non-square matrix in 'eigen'")
+    if (!n) stop(gettextf("'%s' argument is a 0 x 0 matrix", "x"))
+    if (n != ncol(x)) stop("non-square matrix in 'eigen()' function")
     n <- as.integer(n)
-    if(is.na(n)) stop("invalid nrow(x)")
+    if(is.na(n)) stop(gettextf("invalid '%s' value", "nrow(x)"))
 
     complex.x <- is.complex(x)
-    if (!all(is.finite(x))) stop("infinite or missing values in 'x'")
+    if (!all(is.finite(x))) stop(gettextf("infinite or missing values in '%s' argument", "x"))
 
     if(missing(symmetric)) symmetric <- isSymmetric.matrix(x)
 

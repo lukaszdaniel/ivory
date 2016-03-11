@@ -20,10 +20,10 @@
 #ifdef HAVE_CONFIG_H
 # include <config.h>
 #endif
-#define NO_NLS
 #include <Defn.h>
 
 #include "methods.h"
+#include "localization.h"
 
 /* substitute in an _evaluated_ object, with an explicit list as
    second arg (although old-style lists and environments are allowed).

@@ -24,7 +24,7 @@ function (x, file = "", append = FALSE, quote = TRUE, sep = " ",
 {
     qmethod <- match.arg(qmethod)
     if(is.logical(quote) && (length(quote) != 1L || is.na(quote)))
-        stop("'quote' must be 'TRUE', 'FALSE' or numeric")
+        stop("'quote' argument must be TRUE, FALSE or numeric")
     ## quote column names unless quote == FALSE (see help).
     quoteC <- if(is.logical(quote)) quote else TRUE
     qset <- is.logical(quote) && quote
@@ -73,7 +73,7 @@ function (x, file = "", append = FALSE, quote = TRUE, sep = " ",
 	if(any(quote < 1L | quote > p))
 	    stop("invalid numbers in 'quote'")
     } else
-	stop("invalid 'quote' specification")
+	stop(gettextf("invalid '%s' specification", "quote"))
 
     rn <- FALSE
     rnames <- NULL
@@ -83,7 +83,7 @@ function (x, file = "", append = FALSE, quote = TRUE, sep = " ",
 	rnames <- as.character(row.names)
         rn <- TRUE
 	if(length(rnames) != nrow(x))
-            stop("invalid 'row.names' specification")
+	    stop(gettextf("invalid '%s' specification", "row.names"))
     }
     if(!is.null(quote) && rn) # quote the row names
 	quote <- c(0, quote)
@@ -96,7 +96,7 @@ function (x, file = "", append = FALSE, quote = TRUE, sep = " ",
     } else {
 	col.names <- as.character(col.names)
 	if(length(col.names) != p)
-	    stop("invalid 'col.names' specification")
+	    stop(gettextf("invalid '%s' specification", "col.names"))
     }
 
     if(file == "") file <- stdout()
@@ -110,18 +110,15 @@ function (x, file = "", append = FALSE, quote = TRUE, sep = " ",
         on.exit(close(file))
     }
     if(!inherits(file, "connection"))
-        stop("'file' must be a character string or connection")
+        stop(gettextf("'%s' argument must be a character string or connection", "file"))
 
     qstring <-                          # quoted embedded quote string
-        switch(qmethod,
-               "escape" = '\\\\"',
-               "double" = '""')
+        switch(qmethod, "escape" = '\\\\"', "double" = '""')
     if(!is.null(col.names)) {
 	if(append)
 	    warning("appending column names to file")
 	if(quoteC)
-	    col.names <- paste("\"", gsub('"', qstring, col.names),
-                               "\"", sep = "")
+	    col.names <- paste("\"", gsub('"', qstring, col.names), "\"", sep = "")
         writeLines(paste(col.names, collapse = sep), file, sep = eol)
     }
 
@@ -146,8 +143,7 @@ write.csv <- function(...)
     Call <- match.call(expand.dots = TRUE)
     for(argname in c("append", "col.names", "sep", "dec", "qmethod"))
         if(!is.null(Call[[argname]]))
-            warning(gettextf("attempt to set '%s' ignored", argname),
-                    domain = NA)
+            warning(gettextf("attempt to set '%s' ignored", argname), domain = "R-utils")
     rn <- eval.parent(Call$row.names)
     Call$append <- NULL
     Call$col.names <- if(is.logical(rn) && !rn) TRUE else NA
@@ -163,8 +159,7 @@ write.csv2 <- function(...)
     Call <- match.call(expand.dots = TRUE)
     for(argname in c("append", "col.names", "sep", "dec", "qmethod"))
         if(!is.null(Call[[argname]]))
-            warning(gettextf("attempt to set '%s' ignored", argname),
-                    domain = NA)
+            warning(gettextf("attempt to set '%s' ignored", argname), domain = "R-utils")
     rn <- eval.parent(Call$row.names)
     Call$append <- NULL
     Call$col.names <- if(is.logical(rn) && !rn) TRUE else NA

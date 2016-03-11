@@ -36,20 +36,20 @@ stl <- function(x, s.window,
     deg.check <- function(deg) {
 	degname <- deparse(substitute(deg))
 	deg <- as.integer(deg)
-	if(deg < 0 || deg > 1) stop(gettextf("%s must be 0 or 1", degname), domain = NA)
+	if(deg < 0 || deg > 1) stop(gettextf("%s must be 0 or 1", degname))
 	deg
     }
     x <- na.action(as.ts(x))
     if(is.matrix(x)) stop("only univariate series are allowed")
     n <- as.integer(length(x))
-    if (is.na(n)) stop("invalid length(x)")
+    if (is.na(n)) stop(gettextf("invalid '%s' value", "length(x)"))
     period <- frequency(x)
     if(period < 2 || n <= 2 * period)
 	stop("series is not periodic or has less than two periods")
     periodic <- FALSE
     if(is.character(s.window)) {
 	if(is.na(pmatch(s.window, "periodic")))
-	    stop("unknown string value for s.window")
+	    stop("unknown string value for 's.window' argument")
 	else {
 	    periodic <- TRUE
 	    s.window <- 10 * n + 1
@@ -96,30 +96,26 @@ stl <- function(x, s.window,
 
 print.stl <- function(x, ...)
 {
-    cat(" Call:\n ")
+    cat(gettext(" Call:", domain = "R-stats"), "\n", sep = "")
     dput(x$call, control=NULL)
-    cat("\nComponents\n")
+    cat("\n", gettext("Components", domain = "R-stats"), "\n", sep = "")
     print(x$time.series, ...)
     invisible(x)
 }
 
 summary.stl <- function(object, digits = getOption("digits"), ...)
 {
-    cat(" Call:\n ")
+    cat(gettext(" Call:", domain = "R-stats"), "\n", sep = "")
     dput(object$call, control=NULL)
-    cat("\n Time.series components:\n")
+    cat("\n ", gettext("Time.series components:", domain = "R-stats"), "\n", sep = "")
     print(summary(object$time.series, digits = digits, ...))
-    cat(" IQR:\n")
-    iqr <- apply(cbind(STL = object$time.series,
-                       data = object$time.series %*% rep(1,3)),
-		 2L, IQR)
-    print(rbind(format(iqr, digits = max(2L, digits - 3L)),
-		"   %"= format(round(100 * iqr / iqr["data"], 1))),
-	  quote = FALSE)
-    cat("\n Weights:")
-    if(all(object$weights == 1)) cat(" all == 1\n")
+    cat(gettext(" IQR:", domain = "R-stats"), "\n", sep = "")
+    iqr <- apply(cbind(STL = object$time.series, data = object$time.series %*% rep(1,3)), 2L, IQR)
+    print(rbind(format(iqr, digits = max(2L, digits - 3L)), "   %"= format(round(100 * iqr / iqr["data"], 1))), quote = FALSE)
+    cat("\n ", gettext("Weights:", domain = "R-stats"), sep = "")
+    if(all(object$weights == 1)) cat(gettext(" all == 1", domain = "R-stats"), "\n", sep = "")
     else { cat("\n"); print(summary(object$weights, digits = digits, ...)) }
-    cat("\n Other components: ")
+    cat("\n ", gettext("Other components: ", domain = "R-stats"), sep = "")
     str(object[-(1L:3)], give.attr = FALSE)
     invisible(object)
 }

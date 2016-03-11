@@ -233,4 +233,4 @@ QuartzDesc_t Quartz_C(QuartzParameters_t *par, quartz_create_fn_t q_create, int 
 }
 #endif   
 
-#endif
+#endif /* R_EXT_QUARTZDEVICE_H_ */

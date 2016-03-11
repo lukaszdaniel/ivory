@@ -107,7 +107,7 @@ function(ldb)
     lab[pos] <- ifelse(nzchar(abbrevs), abbrevs, ldb$Name[pos])
     ind <- nzchar(versions)
     pos <- pos[ind]
-    lab[pos] <- sprintf("%s version %s", lab[pos], versions[ind])
+    lab[pos] <- gettextf("%s version %s", lab[pos], versions[ind], domain = "R-tools")
     lab
 }
 

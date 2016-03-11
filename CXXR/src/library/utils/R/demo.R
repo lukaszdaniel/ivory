@@ -46,18 +46,14 @@ function(topic, package = NULL, lib.loc = NULL,
 				  entries))
 	    }
 	}
-	colnames(db) <- c("Package", "LibPath", "Item", "Title")
+	colnames(db) <- c(gettext("Package", domain = "R-utils"), gettext("LibPath", domain = "R-utils"), gettext("Item", domain = "R-utils"), gettext("Title", domain = "R-utils"))
 
-	footer <- if(missing(package))
-	    paste0("Use ",
-                   sQuote(paste("demo(package =",
-                                ".packages(all.available = TRUE))")),
-                   "\n",
-                   "to list the demos in all *available* packages.")
-	else
-	    NULL
-	y <- list(title = "Demos", header = NULL, results = db,
-		  footer = footer)
+	if(missing(package)) {
+	   footer <- gettextf("Use: %s to list the demos in all *available* packages.", sQuote("demo(package = .packages(all.available = TRUE))"), domain = "R-utils")
+	} else {
+	footer <- NULL
+	}
+	y <- list(title = gettext("Demos"), header = NULL, results = db, footer = footer)
 	class(y) <- "packageIQR"
 	return(y)
     }
@@ -81,11 +77,10 @@ function(topic, package = NULL, lib.loc = NULL,
 	    available <- c(available, file.path(p, files))
     }
     if(length(available) == 0L)
-	stop(gettextf("No demo found for topic %s", sQuote(topic)), domain = NA)
+	stop(gettextf("No demo found for topic %s", sQuote(topic)), domain = "R-utils")
     if(length(available) > 1L) {
 	available <- available[1L]
-	warning(gettextf("Demo for topic %s' found more than once,\nusing the one found in %s",
-                sQuote(topic), sQuote(dirname(available[1L]))), domain = NA)
+	warning(gettextf("Demo for topic %s' found more than once,\nusing the one found in %s", sQuote(topic), sQuote(dirname(available[1L]))), domain = "R-utils")
     }
 
     ## now figure out if the package has an encoding
@@ -115,8 +110,7 @@ function(topic, package = NULL, lib.loc = NULL,
 	    "\t---- ", rep.int("~", nchar(topic, type = "w")), "\n",
 	    sep = "")
 	if(ask && interactive())
-	    readline("\nType  <Return>	 to start : ")
+	    readline(paste("\n", gettext("Type  <Return> to start:"), " ", sep = ""))
     }
-    source(available, echo = echo, max.deparse.length = Inf,
-           keep.source = TRUE, encoding = encoding)
+    source(available, echo = echo, max.deparse.length = Inf, keep.source = TRUE, encoding = encoding)
 }

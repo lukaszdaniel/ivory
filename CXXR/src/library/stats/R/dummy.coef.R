@@ -111,8 +111,10 @@ dummy.coef.lm <- function(object, use.na=FALSE, ...)
 		    setNames(drop(mm[ij, keep, drop = FALSE] %*% cf), rnn[ij])
 	}
     }
-    if(int > 0)
+    if(int > 0) {
 	res <- c(list("(Intercept)" = if(isM) coef[int, ] else coef[int]), res)
+	names(res) <- c(gettext("(Intercept)", domain = "R-stats"), names(res[-1L]))
+    }
     structure(res, class = "dummy_coef",  matrix = isM)
 }
 
@@ -168,7 +170,7 @@ dummy.coef.aovlist <- function(object, use.na = FALSE, ...)
     lci <- vapply(dummy, is.factor, NA)
     lcontr <- lcontr[names(lci)[lci]] ## factors with 1 level have disappeared
     mm <- model.matrix(terms(formula(form)), dummy, lcontr, xl)
-    tl <- c("(Intercept)", tl)
+    tl <- c(gettext("(Intercept)", domain = "R-stats"), tl)
     res <- setNames(vector("list", N), names(object))
     allasgn <- attr(mm, "assign")
     for(i in names(object)) {
@@ -189,7 +191,7 @@ dummy.coef.aovlist <- function(object, use.na = FALSE, ...)
 			if(ncol(cf) >= 2)
 			    stop("multivariate case with missing coefficients is not yet implemented")
 			if(j == 0) {
-			    structure(cf[!na], names="(Intercept)")
+			    structure(cf[!na], names=gettext("(Intercept)", domain = "R-stats"))
 			} else {
 			    ## else: 1 column --> treat 'cf' as vector
 			    rj <- t( mm[ij, keep[!na], drop=FALSE] %*% cf[!na])
@@ -198,7 +200,7 @@ dummy.coef.aovlist <- function(object, use.na = FALSE, ...)
 			}
 		    } else { # no NA's
 			if(j == 0)
-			    structure(cf, names="(Intercept)")
+			    structure(cf, names=gettext("(Intercept)", domain = "R-stats"))
 			else
 			    t(mm[ij, keep, drop=FALSE] %*% cf)
 		    }
@@ -211,7 +213,7 @@ dummy.coef.aovlist <- function(object, use.na = FALSE, ...)
 		cf <- coef[keep]
 		mod[[tl[j+1L]]] <-
 		    if(j == 0) {
-			structure(cf, names="(Intercept)")
+			structure(cf, names=gettext("(Intercept)", domain = "R-stats"))
 		    } else {
 			ij <- rn == tl[j+1L]
 			if (any(na <- is.na(cf))) {
@@ -255,8 +257,8 @@ print.dummy_coef <- function(x, ..., title)
 	    if(nc1 > 1L) {
 		lin0 <- line + 2L
 		line <- line + nr1 + 1L
-		ans[lin0 - 1L, addcol + (1L:nc1)] <- colnames(this)
-		ans[lin0:line, addcol + (1L:nc1)] <- format(this, ...)
+		ans[lin0 - 1L, addcol + seq_len(nc1)] <- colnames(this)
+		ans[lin0:line, addcol + seq_len(nc1)] <- format(this, ...)
 		rn[lin0 - 1L] <- paste0(terms[j], ":   ")
 	    } else {
 		lin0 <- line + 1L
@@ -275,18 +277,18 @@ print.dummy_coef <- function(x, ..., title)
 	    n1 <- length(this)
 	    if(n1 > 1) {
 		line <- line + 2L
-		ans[line-1L, 1L:n1] <- names(this)
-		ans[line,    1L:n1] <- format(this, ...)
+		ans[line-1L, seq_len(n1)] <- names(this)
+		ans[line,    seq_len(n1)] <- format(this, ...)
 		rn [line-1L] <- paste0(terms[j], ":   ")
 	    } else {
 		line <- line + 1L
-		ans[line, 1L:n1] <- format(this, ...)
+		ans[line, seq_len(n1)] <- format(this, ...)
 		rn[line] <- paste0(terms[j], ":   ")
 	    }
 	}
     }
     dimnames(ans) <- list(rn, character(nm))
-    cat(if(missing(title)) "Full coefficients are" else title, "\n")
+    cat(if(missing(title)) gettext("Full coefficients are:", domain = "R-stats") else title, "\n", sep = "")
     print(ans[1L:line, , drop=FALSE], quote=FALSE, right=TRUE)
     invisible(x)
 }
@@ -294,6 +296,6 @@ print.dummy_coef <- function(x, ..., title)
 print.dummy_coef_list <- function(x, ...)
 {
     for(strata in names(x))
-	print.dummy_coef(x[[strata]], ..., title=paste("\n     Error:", strata))
+	print.dummy_coef(x[[strata]], ..., title=paste("\n    ", gettext("Error:", domain = "R-stats"), strata, sep = " "))
     invisible(x)
 }

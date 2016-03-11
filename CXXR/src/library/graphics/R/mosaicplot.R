@@ -179,10 +179,10 @@ function(x, main = deparse(substitute(x)), sub = NULL, xlab = NULL,
         x <- data.matrix(x)
     dimd <- length(dx <- dim(x))
     if(dimd == 0L || any(dx == 0L))
-        stop("'x' must not have 0 dimensionality")
+        stop("'x' argument must not have 0 dimensionality")
     chkDots(...)
     ##-- Set up 'Ind' matrix : to contain indices and data
-    Ind <- 1L:dx[1L]
+    Ind <- seq_len(dx[1L])
     if(dimd > 1L) {
         Ind <- rep.int(Ind, prod(dx[2:dimd]))
         for (i in 2:dimd) {
@@ -210,7 +210,7 @@ function(x, main = deparse(substitute(x)), sub = NULL, xlab = NULL,
         if(is.logical(shade))
             shade <- c(2, 4)
         else if(any(shade <= 0) || length(shade) > 5)
-            stop("invalid 'shade' specification")
+            stop(gettextf("invalid '%s' argument", "shade"))
         extended <- TRUE
         shade <- sort(shade)
         breaks <- c(-Inf, - rev(shade), 0, shade, Inf)
@@ -311,7 +311,7 @@ function(x, main = deparse(substitute(x)), sub = NULL, xlab = NULL,
         ## o.k. with integer breaks in 'shade'; rounding to two 2 digits
         ## will not be good enough if 'shade' has length 5.
         pin <- par("pin")
-        rtxt <- "Standardized\nResiduals:"
+        rtxt <- gettext("Standardized\nResiduals:")
         ## Compute cex so that the rotated legend text does not take up
         ## more than 1/12 of the of the plot region horizontally and not
         ## more than 1/4 vertically.
@@ -338,7 +338,7 @@ function(x, main = deparse(substitute(x)), sub = NULL, xlab = NULL,
         y.t <- 1000 * rev(seq.int(from = 0.95, by = - bh, length.out = 2 * len))
         y.b <- y.t - 1000 * 0.8 * bh
         ltype <- c(rep.int(2, len), rep.int(1, len))
-        for(i in 1 : (2 * len)) {
+        for(i in seq_len(2 * len)) {
             polygon(c(x.l, x.r, x.r, x.l),
                     c(y.b[i], y.b[i], y.t[i], y.t[i]),
                     col = color[i], lty = ltype[i], border = border)

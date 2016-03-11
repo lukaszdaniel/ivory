@@ -11,13 +11,7 @@
 #include <config.h>
 #endif
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("stats", String)
-#else
-#define _(String) (String)
-#endif
-
+#include "localization.h"
 #include <math.h>
 
 #include <R_ext/Random.h>

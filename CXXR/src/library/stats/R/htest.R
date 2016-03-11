@@ -21,7 +21,7 @@ print.htest <- function(x, digits = getOption("digits"), prefix = "\t", ...)
     cat("\n")
     cat(strwrap(x$method, prefix = prefix), sep = "\n")
     cat("\n")
-    cat("data:  ", x$data.name, "\n", sep = "")
+    cat(gettextf("data: %s", x$data.name, domain = "R-stats"), "\n", sep = "")
     out <- character()
     if(!is.null(x$statistic))
 	out <- c(out, paste(names(x$statistic), "=",
@@ -31,37 +31,30 @@ print.htest <- function(x, digits = getOption("digits"), prefix = "\t", ...)
 			    format(signif(x$parameter, max(1L, digits - 2L)))))
     if(!is.null(x$p.value)) {
 	fp <- format.pval(x$p.value, digits = max(1L, digits - 3L))
-	out <- c(out, paste("p-value",
+	out <- c(out, paste(gettext("p-value", domain = "R-stats"),
 			    if(substr(fp, 1L, 1L) == "<") fp else paste("=",fp)))
     }
     cat(strwrap(paste(out, collapse = ", ")), sep = "\n")
     if(!is.null(x$alternative)) {
-	cat("alternative hypothesis: ")
+	cat(gettext("alternative hypothesis: ", domain = "R-stats"))
 	if(!is.null(x$null.value)) {
 	    if(length(x$null.value) == 1L) {
-		alt.char <-
-		    switch(x$alternative,
-			   two.sided = "not equal to",
-			   less = "less than",
-			   greater = "greater than")
-		cat("true ", names(x$null.value), " is ", alt.char, " ",
-		    x$null.value, "\n", sep = "")
+		   cat(x$alt.name, "\n", sep = "")
 	    }
 	    else {
-		cat(x$alternative, "\nnull values:\n", sep = "")
+		cat(x$alternative, "\n", gettext("null values:", domain = "R-stats"), "\n", sep = "")
 		print(x$null.value, digits=digits, ...)
 	    }
 	}
 	else cat(x$alternative, "\n", sep = "")
     }
     if(!is.null(x$conf.int)) {
-	cat(format(100 * attr(x$conf.int, "conf.level")),
-	    " percent confidence interval:\n", " ",
-	    paste(format(c(x$conf.int[1L], x$conf.int[2L])), collapse = " "),
-            "\n", sep = "")
+        cat(gettextf("%s percent confidence interval:", format(100 * attr(x$conf.int, "conf.level")), domain = "R-stats"), "\n ", sep = "")
+        cat(format(c(x$conf.int[1L], x$conf.int[2L])))
+	cat("\n")
     }
     if(!is.null(x$estimate)) {
-	cat("sample estimates:\n")
+	cat(gettext("sample estimates:", domain = "R-stats"), "\n", sep = "")
 	print(x$estimate, digits=digits, ...)
     }
     cat("\n")

@@ -86,7 +86,7 @@ transformMethod <- function(i, blocks, Rdfile) {
     	    }
     	}
     	if (is.null(char))
-    	    stopRd(block, Rdfile, sprintf("no parenthesis following %s", blocktag))
+    	    stopRd(block, Rdfile, gettextf("no parenthesis following %s", blocktag))
     	chars <<- chars
     	char <<- char
     	j <<- j
@@ -112,7 +112,7 @@ transformMethod <- function(i, blocks, Rdfile) {
 	    }
 	}
 	if (is.null(char))
-	    stopRd(block, Rdfile, sprintf("no comma in argument list following %s", blocktag))
+	    stopRd(block, Rdfile, gettextf("no comma in argument list following %s", blocktag))
         chars <<- chars
         char <<- char
         j <<- j
@@ -523,15 +523,11 @@ Rd2txt <-
     }
 
     writeDR <- function(block, tag) {
+            putf("## Don't run:\n")
+            writeCodeBlock(block, tag)
+            blankLine(0L)
         if (length(block) > 1L) {
-            putf('## Not run:\n')
-            writeCodeBlock(block, tag)
-            blankLine(0L)
-            putf('## End(Not run)\n')
-        } else {
-            putf('## Not run: ')
-            writeCodeBlock(block, tag)
-            blankLine(0L)
+            putf("## End (Don't run)\n")
         }
     }
 
@@ -706,7 +702,7 @@ Rd2txt <-
                	   	writeContent(block[[3L]], tag),
                "\\out" = for (i in seq_along(block))
 		   put(block[[i]]),
-               stopRd(block, Rdfile, "Tag ", tag, " not recognized")
+               stopRd(block, Rdfile, gettextf("Tag %s not recognized", tag, domain = "R-tools"))
                )
     }
 
@@ -714,7 +710,7 @@ Rd2txt <-
     	formats <- table[[1L]]
     	content <- table[[2L]]
     	if (length(formats) != 1L || RdTags(formats) != "TEXT")
-    	    stopRd(table, Rdfile, "\\tabular format must be simple text")
+    	    stopRd(table, Rdfile, gettext("\\tabular format must be simple text", domain = "R-tools"))
     	formats <- strsplit(formats[[1L]], "", fixed = TRUE)[[1L]]
         tags <- RdTags(content)
         entries <- list()
@@ -735,8 +731,7 @@ Rd2txt <-
                    	col <- col + 1
                    	if (col > length(formats))
                    	    stopRd(content[[i]], Rdfile,
-                                   sprintf("too many columns for format '%s'",
-                                           table[[1L]]))
+                                   gettextf("too many columns for format '%s'", table[[1L]], domain = "R-tools"))
                    },
                    "\\cr" = {
                    	newEntry()
@@ -829,8 +824,7 @@ Rd2txt <-
                    "\\dontshow" =,
                    "\\testonly" = {}, # do nothing
                    ## All the markup such as \emph
-                   stopRd(block, Rdfile, "Tag ", tag,
-                          " not expected in code block")
+                   stopRd(block, Rdfile, gettextf("Tag %s not expected in code block", tag, domain = "R-tools"))
                    )
         }
     }

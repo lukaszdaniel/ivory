@@ -30,24 +30,28 @@ summary.default <-
 	c(Mode = "logical",
           {tb <- table(object, exclude = NULL) # incl. NA s
            if(!is.null(n <- dimnames(tb)[[1L]]) && any(iN <- is.na(n)))
-               dimnames(tb)[[1L]][iN] <- "NA's"
+               dimnames(tb)[[1L]][iN] <- gettext("NA's")
            tb
            })
     else if(is.numeric(object)) {
 	nas <- is.na(object)
 	object <- object[!nas]
 	qq <- stats::quantile(object)
-	qq <- signif(c(qq[1L:3L], mean(object), qq[4L:5L]), digits)
-	names(qq) <- c("Min.", "1st Qu.", "Median", "Mean", "3rd Qu.", "Max.")
-	if(any(nas))
-	    c(qq, "NA's" = sum(nas))
-	else qq
+	if(any(nas)) {
+	    qq <- c(signif(c(qq[1L:3L], mean(object), qq[4L:5L]), digits), sum(nas))
+	    names(qq) <- c(gettext("Min."), gettext("1st Qu."), gettext("Median"), gettext("Mean"), gettext("3rd Qu."), gettext("Max."), gettext("NA's"))
+	    qq
+	}
+	else {
+	    qq <- signif(c(qq[1L:3L], mean(object), qq[4L:5L]), digits)
+	    names(qq) <- c(gettext("Min."), gettext("1st Qu."), gettext("Median"), gettext("Mean"), gettext("3rd Qu."), gettext("Max."))
+	    qq
+	}
     } else if(is.recursive(object) && !is.language(object) &&
 	      (n <- length(object))) { # do not allow long dims
-	sumry <- array("", c(n, 3L), list(names(object),
-                                          c("Length", "Class", "Mode")))
+	sumry <- array("", c(n, 3L), list(names(object), c(gettext("Length", domain = "R-base"), gettext("Class", domain = "R-base"), gettext("Mode", domain = "R-base"))))
 	ll <- numeric(n)
-	for(i in 1L:n) {
+	for(i in seq_len(n)) {
 	    ii <- object[[i]]
 	    ll[i] <- length(ii)
 	    cls <- oldClass(ii)
@@ -57,7 +61,11 @@ summary.default <-
 	sumry[, 1L] <- format(as.integer(ll))
 	sumry
     }
-    else c(Length = length(object), Class = class(object), Mode = mode(object))
+    else { 
+	yy <- c(length(object), class(object), mode(object))
+	names(yy) <- c(gettext("Length"), gettext("Class"), gettext("Mode"))
+	yy
+    }
     class(value) <- c("summaryDefault", "table")
     value
 }
@@ -70,13 +78,19 @@ format.summaryDefault <- function(x, ...)
       xx[finite] <- zapsmall(x[finite])
     }
     class(xx) <- class(x)[-1]
-    m <- match("NA's", names(x), 0)
+    m <- match(gettext("NA's"), names(x), 0)
     if(inherits(x, "Date") || inherits(x, "POSIXct")) {
-        if(length(a <- attr(x, "NAs")))
-            c(format(xx, ...), "NA's" = as.character(a))
-        else format(xx)
-    } else if(m && !is.character(x))
-        xx <- c(format(xx[-m], ...), "NA's" = as.character(xx[m]))
+        if(length(a <- attr(x, "NAs"))) {
+            xx <- c(format(xx), as.character(a))
+            names(xx) <- c(gettext("Min."), gettext("1st Qu."), gettext("Median"), gettext("Mean"), gettext("3rd Qu."), gettext("Max."), gettext("NA's"))
+	    xx
+	}
+        else xx <- format(xx)
+    } else if(m && !is.character(x)) {
+        yy <- c(format(xx[-m], ...), as.character(xx[m]))
+        names(yy) <- c(gettext("Min."), gettext("1st Qu."), gettext("Median"), gettext("Mean"), gettext("3rd Qu."), gettext("Max."), gettext("NA's"))
+	yy
+	}
     else format(xx, ...)
 }
 
@@ -88,15 +102,21 @@ print.summaryDefault <- function(x, ...)
       xx[finite] <- zapsmall(x[finite])
     }
     class(xx) <- class(x)[-1] # for format
-    m <- match("NA's", names(xx), 0)
+    m <- match(gettext("NA's"), names(xx), 0)
     if(inherits(x, "Date") || inherits(x, "POSIXct")) {
-        xx <- if(length(a <- attr(x, "NAs")))
-            c(format(xx), "NA's" = as.character(a))
-        else format(xx)
+        if(length(a <- attr(x, "NAs"))) {
+            xx <- c(format(xx), as.character(a))
+            names(xx) <- c(gettext("Min."), gettext("1st Qu."), gettext("Median"), gettext("Mean"), gettext("3rd Qu."), gettext("Max."), gettext("NA's"))
+	    xx
+	}
+        else xx <- format(xx)
         print(xx, ...)
         return(invisible(x))
-    } else if(m && !is.character(x))
-        xx <- c(format(xx[-m]), "NA's" = as.character(xx[m]))
+    } else if(m && !is.character(x)) {
+        xx <- c(format(xx[-m]), as.character(xx[m]))
+        names(xx) <- c(gettext("Min."), gettext("1st Qu."), gettext("Median"), gettext("Mean"), gettext("3rd Qu."), gettext("Max."), gettext("NA's"))
+	xx
+    }
     print.table(xx, ...)
     invisible(x)
 }
@@ -112,9 +132,17 @@ summary.factor <- function(object, maxsum = 100, ...)
     if(length(ll) > maxsum) {
 	drop <- maxsum:length(ll)
 	o <- sort.list(tt, decreasing = TRUE)
-	tt <- c(tt[o[ - drop]], "(Other)" = sum(tt[o[drop]]))
+	tt <- c(tt[o[ - drop]], sum(tt[o[drop]]))
+        names(tt) <- c(names(tt)[ - drop], gettext("(Other)"))
+	tt
+	
     }
-    if(any(nas)) c(tt, "NA's" = sum(nas)) else tt
+    if(any(nas)) {
+	tt2 <- c(tt, sum(nas))
+	names(tt2) <- c(names(tt), gettext("NA's"))
+	tt2
+     }
+    else tt
 }
 
 summary.matrix <- function(object, ...) {
@@ -174,8 +202,7 @@ summary.data.frame <-
 	z <- unlist(z, use.names=TRUE)
 	dim(z) <- c(nr, nv)
 	if(anyNA(lw))
-	    warning("probably wrong encoding in names(.) of column ",
-		paste(which(is.na(lw)), collapse = ", "))
+	warning(gettextf("probably wrong encoding in 'names(.)' of column %s", paste(which(is.na(lw)), collapse = ", ")))
 	blanks <- paste(character(max(lw, na.rm=TRUE) + 2L), collapse = " ")
 	pad <- floor(lw - ncw(nm)/2)
 	nm <- paste0(substring(blanks, 1, pad), nm)

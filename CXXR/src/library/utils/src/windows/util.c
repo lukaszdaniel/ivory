@@ -27,7 +27,7 @@
 #include <Defn.h>
 #include <windows.h>
 
-#include "win-nls.h"
+#include "localization.h"
 
 typedef void (WINAPI *PGNSI)(LPSYSTEM_INFO);
 
@@ -278,7 +278,7 @@ SEXP writeClipboard(SEXP text, SEXP sformat)
 
     if (TYPEOF(text) == RAWSXP) raw = TRUE;
     else if(!isString(text))
-	error(_("argument must be a character vector or a raw vector"));
+	error(_("'%s' argument must be a character vector or a raw vector"), "text");
 
     n = length(text);
     if(n > 0) {
@@ -399,7 +399,7 @@ SEXP setWindowTitle(SEXP title)
 {
     if(!isString(title)  || LENGTH(title) != 1 ||
        STRING_ELT(title, 0) == NA_STRING)
-	error(_("'title' must be a character string"));
+	error(_("'%s' argument must be a character string"), "title");
     return in_setTitle(translateChar(STRING_ELT(title, 0)));
 }
 
@@ -408,7 +408,7 @@ SEXP setStatusBar(SEXP text)
 {
     if(!isString(text)  || LENGTH(text) != 1 ||
        STRING_ELT(text, 0) == NA_STRING)
-	error(_("'text' must be a character string"));
+	error(_("'%s' argument must be a character string"), "text");
     showstatusbar();
     setstatus(translateChar(STRING_ELT(text, 0)));
     return R_NilValue;
@@ -447,7 +447,7 @@ SEXP getWindowsHandle(SEXP which)
 {
     void * handle;
 
-    if(length(which) != 1) error(_("'%s' must be length 1"), "which");
+    if(length(which) != 1) error(_("'%s' argument must be of length 1"), "which");
     if (isString(which)) handle = getConsoleHandle(CHAR(STRING_ELT(which,0)));
     else if (isInteger(which)) handle = getDeviceHandle(INTEGER(which)[0]);
     else handle = NULL;
@@ -560,7 +560,7 @@ SEXP arrangeWindows(SEXP call, SEXP op, SEXP args, SEXP env)
     args = CDR(args);
     windows = CAR(args);
     if (length(windows)) {
-	if (TYPEOF(windows) != VECSXP) error(_("'%s' must be a list"), "windows");
+	if (TYPEOF(windows) != VECSXP) error(_("'%s' argument must be a list"), "windows");
 	void **handles = (void **) R_alloc(length(windows), sizeof(void *));
 	for (int i = 0; i < length(windows); i++) {
 	    if (TYPEOF(VECTOR_ELT(windows, i)) != EXTPTRSXP)

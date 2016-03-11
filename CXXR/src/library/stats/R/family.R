@@ -20,15 +20,15 @@ family <- function(object, ...) UseMethod("family")
 
 print.family <- function(x, ...)
 {
-    cat("\nFamily:", x$family, "\n")
-    cat("Link function:", x$link, "\n\n")
+    cat("\n", gettext("Family: ", domain = "R-stats"), x$family, "\n", sep = "")
+    cat(gettext("Link function: ", domain = "R-stats"), x$link, "\n\n", sep = "")
     invisible(x)
 }
 
 power <- function(lambda = 1)
 {
     if(!is.numeric(lambda) || is.na(lambda))
-        stop("invalid argument 'lambda'")
+        stop(gettextf("invalid '%s' argument", "lambda"))
     if(lambda <= 0) return(make.link("log"))
     if(lambda == 1) return(make.link("identity"))
     linkfun <- function(mu) mu^lambda
@@ -121,8 +121,7 @@ make.link <- function (link)
                valideta <- function(eta) all(is.finite(eta)) && all(eta != 0)
            },
            ## else :
-           stop(gettextf("%s link not recognised", sQuote(link)),
-                domain = NA)
+           stop(gettextf("%s link not recognised", sQuote(link)), domain = "R-stats")
            )# end switch(.)
     environment(linkfun) <- environment(linkinv) <- environment(mu.eta) <-
         environment(valideta) <- asNamespace("stats")
@@ -147,9 +146,8 @@ poisson <- function (link = "log")
             stats <- link
             if(!is.null(stats$name)) linktemp <- stats$name
         } else {
-            stop(gettextf('link "%s" not available for poisson family; available links are %s',
-			  linktemp, paste(sQuote(okLinks), collapse =", ")),
-		 domain = NA)
+		tmp_n <- paste(sQuote(okLinks), collapse =", ")
+            stop(gettextf("link %s not available for poisson family; available links are %s", sQuote(linktemp), tmp_n), domain = "R-stats")
         }
     }
     variance <- function(mu) mu
@@ -164,7 +162,7 @@ poisson <- function (link = "log")
     aic <- function(y, n, mu, wt, dev) -2*sum(dpois(y, mu, log=TRUE)*wt)
     initialize <- expression({
 	if (any(y < 0))
-	    stop("negative values not allowed for the 'Poisson' family")
+	    stop(gettextf("negative values are not allowed for the '%s' family", "Poisson"))
 	n <- rep.int(1, nobs)
 	mustart <- y + 0.1
     })
@@ -208,9 +206,8 @@ quasipoisson <- function (link = "log")
             stats <- link
             if(!is.null(stats$name)) linktemp <- stats$name
         } else {
-	    stop(gettextf('link "%s" not available for quasipoisson family; available links are %s',
-			  linktemp, paste(sQuote(okLinks), collapse =", ")),
-		 domain = NA)
+		tmp_n <- paste(sQuote(okLinks), collapse =", ")
+	    stop(gettextf("link %s not available for quasipoisson family; available links are %s", sQuote(linktemp), tmp_n), domain = "R-stats")
         }
     }
     variance <- function(mu) mu
@@ -225,7 +222,7 @@ quasipoisson <- function (link = "log")
     aic <- function(y, n, mu, wt, dev) NA
     initialize <- expression({
 	if (any(y < 0))
-	    stop("negative values not allowed for the 'quasiPoisson' family")
+	    stop(gettextf("negative values are not allowed for the '%s' family", "quasiPoisson"))
 	n <- rep.int(1, nobs)
 	mustart <- y + 0.1
     })
@@ -259,9 +256,8 @@ gaussian <- function (link = "identity")
             stats <- link
             if(!is.null(stats$name)) linktemp <- stats$name
         } else {
-	    stop(gettextf('link "%s" not available for gaussian family; available links are %s',
-			  linktemp, paste(sQuote(okLinks), collapse =", ")),
-		 domain = NA)
+		tmp_n <- paste(sQuote(okLinks), collapse =", ")
+	    stop(gettextf("link %s not available for gaussian family; available links are %s", sQuote(linktemp), tmp_n), domain = "R-stats")
         }
     }
     structure(list(family = "gaussian",
@@ -306,9 +302,8 @@ binomial <- function (link = "logit")
             stats <- link
             if(!is.null(stats$name)) linktemp <- stats$name
         } else {
-	    stop(gettextf('link "%s" not available for binomial family; available links are %s',
-			  linktemp, paste(sQuote(okLinks), collapse =", ")),
-	     domain = NA)
+		tmp_n <- paste(sQuote(okLinks), collapse =", ")
+	    stop(gettextf("link %s not available for binomial family; available links are %s", sQuote(linktemp), tmp_n), domain = "R-stats")
         }
     }
     variance <- function(mu) mu * (1 - mu)
@@ -332,7 +327,7 @@ binomial <- function (link = "logit")
             mustart <- (weights * y + 0.5)/(weights + 1)
             m <- weights * y
             if(any(abs(m - round(m)) > 1e-3))
-                warning("non-integer #successes in a binomial glm!")
+                warning("non-integer number of successes in a binomial glm!")
 	}
 	else if (NCOL(y) == 2) {
             if(any(abs(y - round(y)) > 1e-3))
@@ -342,7 +337,7 @@ binomial <- function (link = "logit")
 	    weights <- weights * n
             mustart <- (n * y + 0.5)/(n + 1)
 	}
-	else stop("for the 'binomial' family, y must be a vector of 0 and 1\'s\nor a 2 column matrix where col 1 is no. successes and col 2 is no. failures")
+	else stop(gettextf("for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 column matrix where first column is the number of successes and second column is the number of failures", sQuote("binomial")))
     })
     simfun <- function(object, nsim) {
         ftd <- fitted(object)
@@ -404,9 +399,8 @@ quasibinomial <- function (link = "logit")
             stats <- link
             if(!is.null(stats$name)) linktemp <- stats$name
         } else {
-	    stop(gettextf('link "%s" not available for quasibinomial family; available links are %s',
-			  linktemp, paste(sQuote(okLinks), collapse =", ")),
-	     domain = NA)
+		tmp_n <- paste(sQuote(okLinks), collapse =", ")
+	    stop(gettextf("link %s not available for quasibinomial family; available links are %s", sQuote(linktemp), tmp_n), domain = "R-stats")
         }
     }
     variance <- function(mu) mu * (1 - mu)
@@ -427,7 +421,7 @@ quasibinomial <- function (link = "logit")
 	    weights <- weights * n
             mustart <- (n * y + 0.5)/(n + 1)
 	}
-	else stop("for the 'quasibinomial' family, y must be a vector of 0 and 1\'s\nor a 2 column matrix where col 1 is no. successes and col 2 is no. failures")
+	else stop(gettextf("for the %s family, 'y' argument must be a vector of 0 and 1's or a 2 column matrix where first column is the number of successes and second column is the number of failures", sQuote("quasibinomial")))
     })
     structure(list(family = "quasibinomial",
 		   link = linktemp,
@@ -457,9 +451,8 @@ Gamma <- function (link = "inverse")
             stats <- link
             if(!is.null(stats$name)) linktemp <- stats$name
         } else {
-	    stop(gettextf('link "%s" not available for gamma family; available links are %s',
-			  linktemp, paste(sQuote(okLinks), collapse =", ")),
-	     domain = NA)
+		tmp_n <- paste(sQuote(okLinks), collapse = ", ")
+	    stop(gettextf("link %s not available for gamma family; available links are %s", sQuote(linktemp), tmp_n), domain = "R-stats")
         }
     }
     variance <- function(mu) mu^2
@@ -515,9 +508,7 @@ inverse.gaussian <- function(link = "1/mu^2")
             stats <- link
             if(!is.null(stats$name)) linktemp <- stats$name
         } else {
-	    stop(gettextf('link "%s" not available for inverse.gaussian family; available links are %s',
-			  linktemp, paste(sQuote(okLinks), collapse =", ")),
-                 domain = NA)
+	    stop(gettextf("link %s not available for inverse.gaussian family; available links are %s", sQuote(linktemp), paste(sQuote(okLinks), collapse = ", "), domain = "R-stats"), domain = NA)
         }
     }
     variance <- function(mu) mu^3
@@ -560,8 +551,7 @@ quasi <- function (link = "identity", variance = "constant")
 {
     linktemp <- substitute(link)
     if (!is.character(linktemp)) linktemp <- deparse(linktemp)
-    if (linktemp %in% c("logit", "probit", "cloglog", "identity",
-                        "inverse", "log", "1/mu^2", "sqrt"))
+    if (linktemp %in% c("logit", "probit", "cloglog", "identity", "inverse", "log", "1/mu^2", "sqrt"))
         stats <- make.link(linktemp)
     else if (is.character(link)) {
         stats <- make.link(link)
@@ -617,7 +607,7 @@ quasi <- function (link = "identity", variance = "constant")
 
     if(is.na(variance_nm)) {
         if(is.character(variance))
-            stop(gettextf('\'variance\' "%s" is invalid: possible values are "mu(1-mu)", "mu", "mu^2", "mu^3" and "constant"', variance_nm), domain = NA)
+            stop(gettextf("'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", \"mu^2\", \"mu^3\" and \"constant\"", variance_nm), domain = "R-stats")
         ## so we really meant the object.
         varfun <- variance$varfun
         validmu <- variance$validmu

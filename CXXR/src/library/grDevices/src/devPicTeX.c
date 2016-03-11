@@ -37,6 +37,7 @@
 #include <R_ext/GraphicsEngine.h>
 #include "Fileio.h"
 #include "grDevices.h"
+#include "localization.h"
 
 	/* device-specific information per picTeX device */
 
@@ -487,9 +488,9 @@ static double PicTeX_StrWidth(const char *str,
 		    if(ucs[i] < 128) sum += charwidth[ptd->fontface-1][ucs[i]];
 		    else sum += (double) Ri18n_wcwidth(ucs[i]) * 0.5; /* A guess */
 	    else
-		warning(_("invalid string in '%s'"), "PicTeX_StrWidth");
+		warning(_("invalid string in '%s' function"), "PicTeX_StrWidth()");
 	} else
-	    warning(_("invalid string in '%s'"), "PicTeX_StrWidth");
+	    warning(_("invalid string in '%s' function"), "PicTeX_StrWidth()");
     } else
 	for(p = str; *p; p++)
 	    sum += charwidth[ptd->fontface-1][(int)*p];

@@ -33,7 +33,7 @@ function(topic, package = NULL, lib.loc = NULL,
     ## will only return at most one path
     file <- index.search(topic, pkgpaths, TRUE)
     if(!length(file)) {
-	warning(gettextf("no help found for %s", sQuote(topic)), domain = NA)
+	warning(gettextf("no help found for %s", sQuote(topic)), domain = "R-utils")
 	return(invisible())
     }
     packagePath <- dirname(dirname(file))
@@ -44,8 +44,7 @@ function(topic, package = NULL, lib.loc = NULL,
 		 commentDonttest = !run.donttest)
     if (!file.exists(tf)) {
 	if(give.lines) return(character())
-        warning(gettextf("%s has a help file but no examples", sQuote(topic)),
-                domain = NA)
+        warning(gettextf("%s has a help file but no examples", sQuote(topic)), domain = "R-utils")
         return(invisible())
     }
     on.exit(unlink(tf))
@@ -57,8 +56,7 @@ function(topic, package = NULL, lib.loc = NULL,
 	## save current RNG state:
 	if((exists(".Random.seed", envir = .GlobalEnv))) {
 	    oldSeed <- get(".Random.seed", envir = .GlobalEnv)
-	    on.exit(assign(".Random.seed", oldSeed, envir = .GlobalEnv),
-                    add = TRUE)
+	    on.exit(assign(".Random.seed", oldSeed, envir = .GlobalEnv), add = TRUE)
 	} else {
 	    oldRNG <- RNGkind()
 	    on.exit(RNGkind(oldRNG[1L], oldRNG[2L]), add = TRUE)

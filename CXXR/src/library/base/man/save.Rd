@@ -20,7 +20,7 @@
 }
 \usage{
 save(\dots, list = character(),
-     file = stop("'file' must be specified"),
+     file = stop(gettextf("'\%s' argument must be specified", "file")),
      ascii = FALSE, version = NULL, envir = parent.frame(),
      compress = isTRUE(!ascii), compression_level,
      eval.promises = TRUE, precheck = TRUE)

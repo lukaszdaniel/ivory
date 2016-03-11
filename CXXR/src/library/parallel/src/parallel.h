@@ -21,12 +21,6 @@
 #define R_PARALLEL_H
 
 #include <Rinternals.h>
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("parallel", String)
-#else
-#define _(String) (String)
-#endif
 
 SEXP nextStream(SEXP);
 SEXP nextSubStream(SEXP);

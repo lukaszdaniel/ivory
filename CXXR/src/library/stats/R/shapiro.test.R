@@ -23,13 +23,14 @@ shapiro.test <- function(x)
     x <- sort(x[complete.cases(x)])
     n <- length(x)
     if(is.na(n) || n < 3L || n > 5000L)
-	stop("sample size must be between 3 and 5000")
+	stop("length of 'x' argument must be between 3 and 5000")
     rng <- x[n] - x[1L]
     if(rng == 0) stop("all 'x' values are identical")
     if(rng < 1e-10) x <- x/rng # rescale to avoid ifault=6 with single version.
     res <- .Call(C_SWilk, x)
+	METHOD <- gettext("Shapiro-Wilk normality test", domain = "R-stats")
     RVAL <- list(statistic = c(W = res[1]), p.value = res[2],
-		 method = "Shapiro-Wilk normality test", data.name = DNAME)
+		 method = METHOD, data.name = DNAME)
     class(RVAL) <- "htest"
     return(RVAL)
 }

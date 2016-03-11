@@ -25,21 +25,20 @@ help.start <-
         ## should always be set, but might be empty
         if (!is.function(browser) &&
             (length(browser) != 1L || !is.character(browser) || !nzchar(browser)))
-            stop("invalid browser name, check options(\"browser\").")
+            stop("invalid browser name, check 'options(\"browser\")'.")
     }
     home <- if (is.null(remote)) {
         port <- tools::startDynamicHelp(NA)
         if (port > 0L) {
             if (update) make.packages.html(temp = TRUE)
             paste0("http://127.0.0.1:", port)
-        } else stop("help.start() requires the HTTP server to be running",
-                    call. = FALSE)
+        } else stop("help.start() requires the HTTP server to be running", call. = FALSE)
     } else remote
     url <- paste0(home, "/doc/html/index.html")
 
     ## FIXME: maybe these should use message()?
     if (WINDOWS) {
-        cat(gettextf("If nothing happens, you should open\n%s yourself\n", sQuote(url)))
+        cat(gettextf("If nothing happens, you should open\n%s yourself\n", sQuote(url)), domain = "R-utils")
     } else if (is.character(browser)) {
         writeLines(strwrap(gettextf("If the browser launched by '%s' is already running, it is *not* restarted, and you must switch to its window.",
                                     browser),
@@ -55,14 +54,14 @@ browseURL <- function(url, browser = getOption("browser"), encodeIfNeeded=FALSE)
     WINDOWS <- .Platform$OS.type == "windows"
 
     if (!is.character(url) || length(url) != 1L|| !nzchar(url))
-        stop("'url' must be a non-empty character string")
+        stop(gettextf("'%s' argument must be a non-empty character string", "url"))
     if(identical(browser, "false")) return(invisible())
     if(WINDOWS && is.null(browser)) return(shell.exec(url))
     if (is.function(browser))
         return(invisible(browser(if(encodeIfNeeded) URLencode(url) else url)))
 
     if (!is.character(browser) || length(browser) != 1L || !nzchar(browser))
-        stop("'browser' must be a non-empty character string")
+        stop(gettextf("'%s' argument must be a non-empty character string", "browser"))
     if (WINDOWS) {
         ## No shell used, but spaces are possible
         return(system(paste0('"', browser, '" ',

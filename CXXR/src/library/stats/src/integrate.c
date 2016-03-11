@@ -24,6 +24,7 @@
 #include <math.h> // for isfinite
 #include <Rinternals.h>
 #include <R_ext/Applic.h>
+#include "localization.h"
 
 /* alled via .External(.) :*/
 SEXP call_dqags(SEXP args);
@@ -50,15 +51,15 @@ static void Rintfn(double *x, int n, void *ex)
     PROTECT(resultsxp = eval(tmp, IS->env));
 
     if(length(resultsxp) != n)
-	error("evaluation of function gave a result of wrong length");
+	error(_("evaluation of function gave a result of wrong length"));
     if(TYPEOF(resultsxp) == INTSXP) {
 	resultsxp = coerceVector(resultsxp, REALSXP);
     } else if(TYPEOF(resultsxp) != REALSXP)
-	error("evaluation of function gave a result of wrong type");
+	error(_("evaluation of function gave a result of wrong type"));
     for(i = 0; i < n; i++) {
 	x[i] = REAL(resultsxp)[i];
 	if(!R_FINITE(x[i]))
-	    error("non-finite function value");
+	    error(_("non-finite function value"));
     }
     UNPROTECT(3);
     return;

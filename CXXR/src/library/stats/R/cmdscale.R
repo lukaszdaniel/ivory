@@ -20,10 +20,10 @@ cmdscale <- function (d, k = 2, eig = FALSE, add = FALSE, x.ret = FALSE,
 		      list. = eig || add || x.ret)
 {
     if (anyNA(d))
-	stop("NA values not allowed in 'd'")
+	stop("NA values are not allowed in 'd' argument")
     if(!list.) {
-	if (eig)  warning(  "eig=TRUE is disregarded when list.=FALSE")
-	if(x.ret) warning("x.ret=TRUE is disregarded when list.=FALSE")
+	if (eig)  warning(gettextf("'%s' option is disregarded when '%s'", "eig=TRUE", "list.=FALSE"))
+	if(x.ret) warning(gettextf("'%s' option is disregarded when '%s'", "x.ret=TRUE", "list.=FALSE"))
     }
     if (is.null(n <- attr(d, "Size"))) {
         if(add) d <- as.matrix(d)
@@ -45,7 +45,7 @@ cmdscale <- function (d, k = 2, eig = FALSE, add = FALSE, x.ret = FALSE,
     }
     n <- as.integer(n)
     ## we need to handle nxn internally in dblcen
-    if(is.na(n) || n > 46340) stop("invalid value of 'n'")
+    if(is.na(n) || n > 46340) stop(gettextf("invalid '%s' value", "n"))
     if((k <- as.integer(k)) > n - 1 || k < 1)
         stop("'k' must be in {1, 2, ..  n - 1}")
     ## NB: this alters argument x, which is OK as it is re-assigned.
@@ -53,7 +53,7 @@ cmdscale <- function (d, k = 2, eig = FALSE, add = FALSE, x.ret = FALSE,
 
     if(add) { ## solve the additive constant problem
         ## it is c* = largest eigenvalue of 2 x 2 (n x n) block matrix Z:
-        i2 <- n + (i <- 1L:n)
+        i2 <- n + (i <- seq_len(n))
         Z <- matrix(0, 2L*n, 2L*n)
         Z[cbind(i2,i)] <- -1
         Z[ i, i2] <- -x
@@ -71,8 +71,7 @@ cmdscale <- function (d, k = 2, eig = FALSE, add = FALSE, x.ret = FALSE,
     evec <- e$vectors[, seq_len(k), drop = FALSE]
     k1 <- sum(ev > 0)
     if(k1 < k) {
-        warning(gettextf("only %d of the first %d eigenvalues are > 0", k1, k),
-                domain = NA)
+        warning(gettextf("only %d of the first %d eigenvalues are > 0", k1, k), domain = "R-stats")
         evec <- evec[, ev > 0,  drop = FALSE]
         ev <- ev[ev > 0]
     }

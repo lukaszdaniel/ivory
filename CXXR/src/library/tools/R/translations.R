@@ -25,10 +25,10 @@ en_quote <- function(potfile, outfile)
     tfile <- tempfile()
     cmd <- paste("msginit -i", potfile, "--no-translator -l en -o", tfile)
     if(system(cmd, ignore.stderr = TRUE) != 0L)
-        stop("running msginit failed", domain = NA)
+        stop("running 'msginit' failed", domain = "R-tools")
     tfile2 <- tempfile()
     cmd <- paste("msgconv -t UTF-8 -o", tfile2, tfile)
-    if(system(cmd) != 0L) stop("running msgconv failed", domain = NA)
+    if(system(cmd) != 0L) stop("running 'msgconv' failed", domain = "R-tools")
     lines <- readLines(tfile2) # will be in UTF-8
     starts <- grep("^msgstr", lines)
     current <- 1L; out <- character()
@@ -126,13 +126,13 @@ update_pkg_po <- function(pkgdir, pkg = NULL, version = NULL, copyright, bugs)
         ## This seems not to update the file dates.
         cmd <- paste("msgmerge --update", f, shQuote(potfile))
         if(system(cmd) != 0L) {
-            warning("running msgmerge on ", sQuote(f), " failed", domain = NA)
+            warning(gettextf("running 'msgmerge' on file %s failed", sQuote(f)), domain = "R-tools")
             next
         }
         res <- checkPoFile(f, TRUE)
         if(nrow(res)) {
             print(res)
-            message("not installing", domain = NA)
+            message(gettextf("not installing file %s", sQuote(f)), domain = "R-tools")
             next
         }
         dest <- file.path(stem, lang, "LC_MESSAGES")
@@ -141,8 +141,7 @@ update_pkg_po <- function(pkgdir, pkg = NULL, version = NULL, copyright, bugs)
  #       if(file_test("-ot", f, dest)) next
         cmd <- paste("msgfmt -c --statistics -o", shQuote(dest), shQuote(f))
         if(system(cmd) != 0L)
-            warning(sprintf("running msgfmt on %s failed", basename(f)),
-                    domain = NA, immediate. = TRUE)
+            warning(gettextf("running 'msgfmt' on file %s failed", basename(f)), domain = "R-tools", immediate. = TRUE)
     }
 
     ## do en@quot
@@ -157,8 +156,7 @@ update_pkg_po <- function(pkgdir, pkg = NULL, version = NULL, copyright, bugs)
         dest <- file.path(dest, sprintf("R-%s.mo", pkg))
         cmd <- paste("msgfmt -c --statistics -o", shQuote(dest), shQuote(f))
         if(system(cmd) != 0L)
-            warning(sprintf("running msgfmt on %s failed", basename(f)),
-                    domain = NA, immediate. = TRUE)
+            warning(gettextf("running 'msgfmt' on file %s failed", basename(f)), domain = "R-tools", immediate. = TRUE)
     }
 
     if(!(is_base || have_src)) return(invisible())
@@ -170,15 +168,13 @@ update_pkg_po <- function(pkgdir, pkg = NULL, version = NULL, copyright, bugs)
         exts <- "[.](c|cc|cpp|m|mm)$"
         cfiles <- dir(".", pattern = exts)
         if (file.exists("windows"))
-            cfiles <- c(cfiles,
-                        dir("windows", pattern = exts, full.names = TRUE))
+            cfiles <- c(cfiles, dir("windows", pattern = exts, full.names = TRUE))
     } else {
         dom <- "R"
         od <- setwd("../../..")
-        cfiles <- grep("^#", readLines("po/POTFILES"),
-                       value = TRUE, invert = TRUE)
+        cfiles <- grep("^#", readLines("po/POTFILES"), value = TRUE, invert = TRUE)
     }
-    cmd <- sprintf("xgettext --keyword=_ --keyword=N_ -o %s", shQuote(ofile))
+    cmd <- sprintf("xgettext --keyword=_ --keyword=N_ --keyword=n_:1,2 -o %s", shQuote(ofile))
     cmd <- c(cmd, paste("--package-name", name, sep = "="),
              paste("--package-version", version, sep = "="),
              "--add-comments=TRANSLATORS:",
@@ -188,7 +184,7 @@ update_pkg_po <- function(pkgdir, pkg = NULL, version = NULL, copyright, bugs)
                  sprintf('--msgid-bugs-address="%s"', bugs),
              if(is_base) "-C") # avoid messages about .y
     cmd <- paste(c(cmd, cfiles), collapse=" ")
-    if(system(cmd) != 0L) stop("running xgettext failed", domain = NA)
+    if(system(cmd) != 0L) stop("running 'xgettext' failed", domain = "R-tools")
     setwd(od)
 
     ## compare ofile and po/dom.pot, ignoring dates.
@@ -201,13 +197,13 @@ update_pkg_po <- function(pkgdir, pkg = NULL, version = NULL, copyright, bugs)
         message("  ", lang, ":", appendLF = FALSE, domain = NA)
         cmd <- paste("msgmerge --update", shQuote(f), shQuote(potfile))
         if(system(cmd) != 0L) {
-            warning("running msgmerge on ",  f, " failed", domain = NA)
+            warning(gettextf("running 'msgmerge' on file %s failed", sQuote(f)), domain = "R-tools")
             next
         }
         res <- checkPoFile(f, TRUE)
         if(nrow(res)) {
             print(res)
-            message("not installing", domain = NA)
+            message(gettextf("not installing file %s", sQuote(f)), domain = "R-tools")
             next
         }
         dest <- file.path(stem, lang, "LC_MESSAGES")
@@ -216,8 +212,7 @@ update_pkg_po <- function(pkgdir, pkg = NULL, version = NULL, copyright, bugs)
 #        if(file_test("-ot", f, dest)) next
         cmd <- paste("msgfmt -c --statistics -o", shQuote(dest), shQuote(f))
         if(system(cmd) != 0L)
-            warning(sprintf("running msgfmt on %s failed", basename(f)),
-                    domain = NA)
+            warning(sprintf("running 'msgfmt' on file %s failed", basename(f)), domain = "R-tools")
     }
     ## do en@quot
     if (l10n_info()[["UTF-8"]]) {
@@ -230,8 +225,7 @@ update_pkg_po <- function(pkgdir, pkg = NULL, version = NULL, copyright, bugs)
         dest <- file.path(dest, sprintf("%s.mo", dom))
         cmd <- paste("msgfmt -c --statistics -o", shQuote(dest), shQuote(f))
         if(system(cmd) != 0L)
-            warning(sprintf("running msgfmt on %s failed", basename(f)),
-                    domain = NA)
+            warning(sprintf("running 'msgfmt' on file %s failed", basename(f)), domain = "R-tools")
     }
 
     invisible()
@@ -270,7 +264,7 @@ update_RGui_po <- function(srcdir)
              '--copyright-holder="The R Core Team"',
              '--msgid-bugs-address="bugs.r-project.org"')
     cmd <- paste(c(cmd, cfiles), collapse=" ")
-    if(system(cmd) != 0L) stop("running xgettext failed", domain = NA)
+    if(system(cmd) != 0L) stop("running xgettext failed", domain = "R-tools")
     ## compare ofile and po/RGui.pot, ignoring dates.
     if(!same(potfile, ofile)) file.copy(ofile, potfile, overwrite = TRUE)
     pofiles <- dir("src/library/base/po", pattern = "^RGui-.*[.]po$", full.names = TRUE)
@@ -280,7 +274,7 @@ update_RGui_po <- function(srcdir)
         message("  ", lang2, ":", appendLF = FALSE, domain = NA)
         cmd <- paste("msgmerge --update", f, potfile)
         if(system(cmd) != 0L) {
-            warning("running msgmerge failed", domain = NA)
+            warning("running 'msgmerge' failed", domain = "R-tools")
             next
         }
         res <- checkPoFile(f, FALSE)
@@ -294,8 +288,7 @@ update_RGui_po <- function(srcdir)
         if (file_test("-ot", f, dest)) next
         cmd <- paste("msgfmt -c --statistics -o", dest, f)
         if(system(cmd) != 0L)
-            warning(sprintf("running msgfmt on %s failed", basename(f)),
-                    domain = NA)
+            warning(sprintf("running 'msgfmt' on file %s failed", basename(f)), domain = "R-tools")
    }
 
     invisible()
@@ -313,13 +306,12 @@ make_translations_pkg <- function(srcdir, outDir = ".", append = "-1")
     lines <- gsub("@VERSION@", ver, lines, fixed = TRUE)
     lines[2] <- paste0(lines[2], append)
     ver <- unclass(getRversion())[[1]]
-    deps <- sprintf("Depends: R (>= %s.%d.0), R (< %d.%d.0)",
-                    ver[1], ver[2], ver[1], ver[2] + 1)
+    deps <- sprintf("Depends: R (>= %s.%d.0), R (< %d.%d.0)", ver[1], ver[2], ver[1], ver[2] + 1)
     lines <- c(lines, deps)
     writeLines(lines, file.path(dest, "DESCRIPTION"))
     cmd <- file.path(R.home(), "bin", "R")
     cmd <- paste(cmd, "CMD", "build", shQuote(dest))
-    if(system(cmd) != 0L) stop("R CMD build failed")
+    if(system(cmd) != 0L) stop("'R CMD build' failed")
     tarball <- Sys.glob(file.path(tempdir(), "translations_*.tar.gz"))
     file.rename(tarball, file.path(outDir, basename(tarball)))
     invisible()

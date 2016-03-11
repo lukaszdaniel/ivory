@@ -26,11 +26,11 @@
     txt <- if(by) {
         ngettext(length(same),
                  "The following object is masked _by_ %s:\n\n%s\n",
-                 "The following objects are masked _by_ %s:\n\n%s\n")
+                 "The following objects are masked _by_ %s:\n\n%s\n", domain = "R-base")
     } else {
         ngettext(length(same),
                  "The following object is masked from %s:\n\n%s\n",
-                 "The following objects are masked from %s:\n\n%s\n")
+                 "The following objects are masked from %s:\n\n%s\n", domain = "R-base")
     }
     sprintf(txt, pkg, paste(objs, collapse="\n"))
 }
@@ -85,13 +85,13 @@ attach <- function(what, pos = 2L, name = deparse(substitute(what)),
     }
 
     if(pos == 1L) {
-        warning("*** 'pos=1' is not possible; setting 'pos=2' for now.\n",
-                "*** Note that 'pos=1' will give an error in the future")
+        warning("*** 'pos=1' is not possible; setting 'pos=2' for now.", "\n",
+                "*** Note that 'pos=1' will give an error in the future", sep = "")
         pos <- 2L
     }
     if (is.character(what) && (length(what) == 1L)){
         if (!file.exists(what))
-            stop(gettextf("file '%s' not found", what), domain = NA)
+            stop(gettextf("file '%s' was not found", what), domain = "R-base")
         if(missing(name)) name <- paste0("file:", what)
         value <- .Internal(attach(NULL, pos, name))
         load(what, envir = as.environment(pos))
@@ -118,7 +118,7 @@ detach <- function(name, pos = 2L, unload = FALSE, character.only = FALSE,
                 if (!is.character(name)) name <- deparse(name)
                 match(name, search())
             }
-	if(is.na(pos)) stop("invalid 'name' argument")
+	if(is.na(pos)) stop(gettextf("invalid '%s' argument", "name"))
     }
 
     packageName <- search()[[pos]]
@@ -136,11 +136,11 @@ detach <- function(name, pos = 2L, unload = FALSE, character.only = FALSE,
            pkgname %in% get(".Depends", pkg, inherits = FALSE))
             if(force)
                 warning(gettextf("package %s is required by %s, which may no longer work correctly",
-				 sQuote(pkgname), sQuote(.rmpkg(pkg))),
+				 sQuote(pkgname), sQuote(.rmpkg(pkg)), domain = "R-base"),
                      call. = FALSE, domain = NA)
             else
                 stop(gettextf("package %s is required by %s so will not be detached",
-			      sQuote(pkgname), sQuote(.rmpkg(pkg))),
+			      sQuote(pkgname), sQuote(.rmpkg(pkg)), domain = "R-base"),
                      call. = FALSE, domain = NA)
     }
     env <- as.environment(pos)
@@ -156,10 +156,9 @@ detach <- function(name, pos = 2L, unload = FALSE, character.only = FALSE,
         if(!is.null(libpath)) {
             res <- tryCatch(.onDetach(libpath), error = identity)
             if (inherits(res, "error")) {
-                warning(gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s",
-                                 ".onDetach", "detach", pkgname,
-                                 deparse(conditionCall(res))[1L],
-                                 conditionMessage(res)),
+                warning(gettextf("%s failed in %s function for package %s, details:\n  call: %s\n  error: %s",
+                                 sQuote(".onDetach"), sQuote("detach()"), sQuote(pkgname),
+                                 deparse(conditionCall(res))[1L], conditionMessage(res), domain = "R-base"),
                         call. = FALSE, domain = NA)
             }
         }
@@ -170,10 +169,10 @@ detach <- function(name, pos = 2L, unload = FALSE, character.only = FALSE,
         if(!is.null(libpath)) {
             res <- tryCatch(.Last.lib(libpath), error = identity)
             if (inherits(res, "error")) {
-                warning(gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s",
-                                 ".Last.lib", "detach", pkgname,
+                warning(gettextf("%s failed in %s function for package %s, details:\n  call: %s\n  error: %s",
+                                 sQuote(".Last.lib"), sQuote("detach()"), sQuote(pkgname),
                                  deparse(conditionCall(res))[1L],
-                                 conditionMessage(res)),
+                                 conditionMessage(res), domain = "R-base"),
                         call. = FALSE, domain = NA)
             }
         }
@@ -185,10 +184,9 @@ detach <- function(name, pos = 2L, unload = FALSE, character.only = FALSE,
         if(unload) {
             tryCatch(unloadNamespace(pkgname),
                      error = function(e)
-                     warning(gettextf("%s namespace cannot be unloaded:\n  ",
-                                      sQuote(pkgname)),
+                     warning(gettextf("%s namespace cannot be unloaded:", sQuote(pkgname), domain = "R-base"), "\n  ",
                              conditionMessage(e),
-                             call. = FALSE, domain = NA))
+                             call. = FALSE, domain = NA, sep = ""))
         }
     } else {
         if(.isMethodsDispatchOn() && methods:::.hasS4MetaData(env))
@@ -210,8 +208,7 @@ ls <- objects <-
             name <- substitute(name)
             if (!is.character(name))
                 name <- deparse(name)
-            warning(gettextf("%s converted to character string", sQuote(name)),
-                    domain = NA)
+            warning(gettextf("%s value was converted to character string", sQuote(name)), domain = "R-base")
             pos <- name
         }
     }

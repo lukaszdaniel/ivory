@@ -20,12 +20,7 @@ contributors <- function()
 {
     outFile <- tempfile()
     outConn <- file(outFile, open = "w")
-    writeLines(paste0("R is a project which is attempting to provide a ",
-                      "modern piece of\nstatistical software for the ",
-                      "GNU suite of software.\n\n",
-                      "The current R is the result of a collaborative ",
-                      "effort with\ncontributions from all over the ",
-                      "world.\n\n"), outConn)
+    writeLines(paste0(gettext("R is a project which is attempting to provide a modern piece of\nstatistical software for the GNU suite of software.\n\nThe current R is the result of a collaborative effort with\ncontributions from all over the world.", domain = "R-base"), "\n\n"), outConn, sep = "")
     writeLines(readLines(file.path(R.home("doc"), "AUTHORS")), outConn)
     writeLines("", outConn)
     writeLines(readLines(file.path(R.home("doc"), "THANKS")), outConn)

@@ -19,6 +19,7 @@
  */
 
 #include "grid.h"
+#include "localization.h"
 #include <math.h>
 #include <float.h>
 #include <string.h>
@@ -82,7 +83,7 @@ SEXP unitData(SEXP unit, int index) {
 	int n = LENGTH(data);
 	result = VECTOR_ELT(data, index % n);
     } else {
-	warning("unit attribute 'data' is of incorrect type");
+	warning(_("unit attribute 'data' is of incorrect type"));
 	return R_NilValue;
     }
     return result;
@@ -1699,7 +1700,7 @@ double transformXYFromINCHES(double location, int unit,
     if ((unit == L_NATIVE || unit == L_NPC) &&
         thisCM < 1e-6) {
         if (result != 0)
-            error(_("Viewport has zero dimension(s)"));
+            error(_("Viewport has zero dimensions"));
     } else {
         switch (unit) {
         case L_NATIVE:
@@ -1730,7 +1731,7 @@ double transformWidthHeightFromINCHES(double dimension, int unit,
     if ((unit == L_NATIVE || unit == L_NPC) &&
         thisCM < 1e-6) {
         if (result != 0)
-            error(_("Viewport has zero dimension(s)"));
+            error(_("Viewport has zero dimensions"));
     } else {
         switch (unit) {
         case L_NATIVE:       

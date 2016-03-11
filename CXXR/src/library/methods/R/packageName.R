@@ -58,7 +58,7 @@ getPackageName <- function(where = topenv(parent.frame()), create = TRUE) {
 #             setPackageName(pkg, env)
 #             ## packages OUGHT
 #             ## to be self-identifying
-#              warning("The package name \"", pkg, "\" was inferred, but not found in that package")
+#              warning(gettextf("The package name \"%s\" was inferred, but not found in that package", pkg))
 #         }
     }
     if (!nzchar(pkg)) {
@@ -71,7 +71,7 @@ getPackageName <- function(where = topenv(parent.frame()), create = TRUE) {
         pkg <- as.character(Sys.time())
         warning(gettextf("Created a package name, %s, when none found",
                          sQuote(pkg)),
-                domain = NA)
+                domain = "R-methods")
         assign(pkg, env, envir = .PackageEnvironments)
 	if(notSaved && !environmentIsLocked(env))
             setPackageName(pkg, env)

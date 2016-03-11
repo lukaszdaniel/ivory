@@ -38,10 +38,10 @@ ecdf <- function (x)
 print.ecdf <- function (x, digits = getOption("digits") - 2L, ...)
 {
     numform <- function(x) paste(formatC(x, digits = digits), collapse = ", ")
-    cat("Empirical CDF \nCall: ")
+    cat(gettext("Empirical CDF", domain = "R-stats"), "\n", gettext("Call: ", domain = "R-stats"), sep = "")
     print(attr(x, "call"), ...)
     n <- length(xx <- environment(x)$"x")
-    i1 <- 1L:min(3L,n)
+    i1 <- seq_len(min(3L,n))
     i2 <- if(n >= 4L) max(4L, n-1L):n else integer()
     cat(" x[1:",n,"] = ", numform(xx[i1]),
 	if(n>3L) ", ", if(n>5L) " ..., ", numform(xx[i2]), "\n", sep = "")
@@ -51,10 +51,8 @@ print.ecdf <- function (x, digits = getOption("digits") - 2L, ...)
 summary.ecdf <- function(object, ...)
 {
     n <- length(eval(expression(x), envir = environment(object)))
-    header <- paste("Empirical CDF:	 ", n,
-                    "unique values with summary\n")
-    structure(summary(knots(object), ...),
-              header = header, class = "summary.ecdf")
+    header <- gettextf("Empirical CDF:	  %d unique values with summary\n", n, domain = "R-stats")
+    structure(summary(knots(object), ...), header = header, class = "summary.ecdf")
 }
 
 print.summary.ecdf <- function(x, ...)

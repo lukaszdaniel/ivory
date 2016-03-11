@@ -22,9 +22,9 @@
 			old = as.character(sys.call(sys.parent()))[1L])
 {
     msg <- if( missing(msg) ) {
-	msg <- gettextf("'%s' is deprecated.\n", old)
+	msg <- gettextf("Function %s is deprecated.\n", sQuote(old))
 	if(!missing(new))
-	    msg <- c(msg, gettextf("Use '%s' instead.\n", new))
+	    msg <- gettextf("Function %s is deprecated.\nUse function %s instead.\n", sQuote(old), sQuote(new))
 	c(msg,
 	  if(!is.null(package))
 	  gettextf("See help(\"Deprecated\") and help(\"%s-deprecated\").",
@@ -32,7 +32,7 @@
 	  else gettext("See help(\"Deprecated\")"))
     }
     else as.character(msg)
-    warning(paste(msg, collapse=""), call. = FALSE, domain = NA)
+    warning(paste(msg, collapse=""), call. = FALSE, domain = "R-base")
 }
 
 ## consider keeping one (commented) entry here, for easier additions

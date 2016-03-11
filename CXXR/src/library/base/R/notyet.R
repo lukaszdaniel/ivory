@@ -17,11 +17,10 @@
 #  https://www.R-project.org/Licenses/
 
 .NotYetImplemented <- function ()
-    stop(gettextf("'%s' is not implemented yet",
-                  as.character(sys.call(sys.parent())[[1L]])), call. = FALSE)
+    stop(gettextf("%s value is not implemented yet", sQuote(as.character(sys.call(sys.parent())[[1L]]))), call. = FALSE)
 
 .NotYetUsed <- function(arg, error = TRUE) {
-    msg <- gettextf("argument '%s' is not used (yet)", arg)
+    msg <- gettextf("%s value is not used (yet)", sQuote(arg), domain = "R-base")
     if(error) stop(msg, domain = NA, call. = FALSE)
     else warning(msg, domain = NA, call. = FALSE)
 }

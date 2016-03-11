@@ -25,9 +25,8 @@ function(file, sep = "", quote = "\"'", skip = 0,
         on.exit(close(file))
     }
     if(!inherits(file, "connection"))
-        stop("'file' must be a character string or connection")
-    .External(C_countfields, file, sep, quote, skip, blank.lines.skip,
-              comment.char)
+        stop(gettextf("'%s' argument must be a character string or connection", "file"))
+    .External(C_countfields, file, sep, quote, skip, blank.lines.skip, comment.char)
 }
 
 
@@ -61,7 +60,7 @@ function(file, header = FALSE, sep = "", quote = "\"'", dec = ".",
         on.exit(close(file))
     }
     if(!inherits(file, "connection"))
-        stop("'file' must be a character string or connection")
+        stop(gettextf("'%s' argument must be a character string or connection", "file"))
     if(!isOpen(file, "rt")) {
         open(file, "rt")
         on.exit(close(file))
@@ -122,7 +121,7 @@ function(file, header = FALSE, sep = "", quote = "\"'", dec = ".",
                      blank.lines.skip, quote, sep, skipNul)
             if(missing(col.names)) col.names <- first
             else if(length(first) != length(col.names))
-                warning("header and 'col.names' are of different lengths")
+                warning("header and 'col.names' argument are of different lengths")
 
         } else if (missing(col.names))
             col.names <- paste0("V", 1L:cols)
@@ -181,8 +180,7 @@ function(file, header = FALSE, sep = "", quote = "\"'", dec = ".",
     ##	we do this here so that columns match up
 
     if(cols != length(data)) { # this should never happen
-	warning("cols = ", cols, " != length(data) = ", length(data),
-                domain = NA)
+	warning(gettextf("cols = %d != length(data) = %d", cols, length(data)), domain = "R-utils")
 	cols <- length(data)
     }
 
@@ -202,8 +200,7 @@ function(file, header = FALSE, sep = "", quote = "\"'", dec = ".",
         as.is <- rep.int(FALSE, cols)
         as.is[i] <- TRUE
     } else if (length(as.is) != cols)
-	stop(gettextf("'as.is' has the wrong length %d  != cols = %d",
-                     length(as.is), cols), domain = NA)
+	stop(gettextf("'as.is' has the wrong length %d != cols = %d", length(as.is), cols), domain = "R-utils")
 
     do <- keep & !known # & !as.is
     if(rlabp) do[1L] <- FALSE # don't convert "row.names"

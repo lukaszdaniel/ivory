@@ -76,7 +76,7 @@ print.listof <- function(x, ...)
 {
     nn <- names(x)
     ll <- length(x)
-    if(length(nn) != ll) nn <- paste("Component", seq.int(ll))
+    if(length(nn) != ll) nn <- gettextf("Component %d", seq.int(ll), domain = "R-base")
     for(i in seq_len(ll)) {
 	cat(nn[i], ":\n"); print(x[[i]], ...); cat("\n")
     }

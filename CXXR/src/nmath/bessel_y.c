@@ -30,7 +30,6 @@
 #include <R_ext/Memory.h>
 #endif
 
-#define min0(x, y) (((x) <= (y)) ? (x) : (y))
 
 static void Y_bessel(double *x, double *alpha, int *nb,
 		     double *by, int *ncalc);
@@ -49,7 +48,7 @@ double bessel_y(double x, double alpha)
     if (ISNAN(x) || ISNAN(alpha)) return x + alpha;
 #endif
     if (x < 0) {
-	ML_ERROR(ME_RANGE, "bessel_y");
+	ML_ERROR(ME_RANGE, "bessel_y()");
 	return ML_NAN;
     }
     na = floor(alpha);
@@ -60,11 +59,10 @@ double bessel_y(double x, double alpha)
 	       ((alpha      == na ) ? 0 : bessel_j(x, -alpha) * sinpi(alpha)));
     }
     else if (alpha > 1e7) {
-	MATHLIB_WARNING(_("besselY(x, nu): nu=%g too large for bessel_y() algorithm"),
-			alpha);
+	MATHLIB_WARNING(_("besselY(x, nu): nu=%g too large for 'bessel_y()' algorithm"), alpha);
 	return ML_NAN;
     }
-    nb = 1+ (int)na;/* nb-1 <= alpha < nb */
+    nb = 1 + (int)na; /* nb-1 <= alpha < nb */
     alpha -= (double)(nb-1);
 #ifdef MATHLIB_STANDALONE
     by = (double *) calloc(nb, sizeof(double));
@@ -84,10 +82,10 @@ double bessel_y(double x, double alpha)
 	    return ML_POSINF;
 	}
 	else if(ncalc < -1)
-	    MATHLIB_WARNING4(_("bessel_y(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?\n"),
+	    MATHLIB_WARNING4(_("bessel_y(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?"),
 			     x, ncalc, nb, alpha);
 	else /* ncalc >= 0 */
-	    MATHLIB_WARNING2(_("bessel_y(%g,nu=%g): precision lost in result\n"),
+	    MATHLIB_WARNING2(_("bessel_y(%g,nu=%g): precision lost in result"),
 			     x, alpha+(double)nb-1);
     }
     x = by[nb-1];
@@ -111,7 +109,7 @@ double bessel_y_ex(double x, double alpha, double *by)
     if (ISNAN(x) || ISNAN(alpha)) return x + alpha;
 #endif
     if (x < 0) {
-	ML_ERROR(ME_RANGE, "bessel_y");
+	ML_ERROR(ME_RANGE, "bessel_y()");
 	return ML_NAN;
     }
     na = floor(alpha);
@@ -122,21 +120,20 @@ double bessel_y_ex(double x, double alpha, double *by)
 	       ((alpha      == na ) ? 0 : bessel_j_ex(x, -alpha, by) * sinpi(alpha)));
     }
     else if (alpha > 1e7) {
-	MATHLIB_WARNING(_("besselY(x, nu): nu=%g too large for bessel_y() algorithm"),
-			alpha);
+	MATHLIB_WARNING(_("besselY(x, nu): nu=%g too large for 'bessel_y()' algorithm"), alpha);
 	return ML_NAN;
     }
-    nb = 1+ (int)na;/* nb-1 <= alpha < nb */
-    alpha -= (double)(nb-1);
+    nb = 1 + (int)na; /* nb-1 <= alpha < nb */
+    alpha -= (double)(nb-1); // ==> alpha' in [0, 1)
     Y_bessel(&x, &alpha, &nb, by, &ncalc);
     if(ncalc != nb) {/* error input */
 	if(ncalc == -1)
 	    return ML_POSINF;
 	else if(ncalc < -1)
-	    MATHLIB_WARNING4(_("bessel_y(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?\n"),
+	    MATHLIB_WARNING4(_("bessel_y(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?"),
 			     x, ncalc, nb, alpha);
 	else /* ncalc >= 0 */
-	    MATHLIB_WARNING2(_("bessel_y(%g,nu=%g): precision lost in result\n"),
+	    MATHLIB_WARNING2(_("bessel_y(%g,nu=%g): precision lost in result"),
 			     x, alpha+(double)nb-1);
     }
     x = by[nb-1];
@@ -154,8 +151,7 @@ v for non-negative argument X, and non-negative order N+ALPHA.
 
  Explanation of variables in the calling sequence
 
- X     - Non-negative argument for which
-	 Y's are to be calculated.
+ X     - Non-negative argument for which Y's are to be calculated.
  ALPHA - Fractional part of order for which
 	 Y's are to be calculated.  0 <= ALPHA < 1.0.
  NB    - Number of functions to be calculated, NB > 0.
@@ -172,13 +168,12 @@ v for non-negative argument X, and non-negative order N+ALPHA.
 	 NCALC=NB, i.e., all orders have been calculated to
 	 the desired accuracy.	See error returns below.
 
+	 ****************************************************************
 
- *******************************************************************
+ Error return codes
 
- Error returns
-
-  In case of an error, NCALC != NB, and not all Y's are
-  calculated to the desired accuracy.
+    In case of an error,  NCALC != NB, and not all Y's are
+    calculated to the desired accuracy.
 
   NCALC < -1:  An argument is out of range. For example,
 	NB <= 0, IZE is not 1 or 2, or IZE=1 and ABS(X) >=
@@ -223,16 +218,16 @@ v for non-negative argument X, and non-negative order N+ALPHA.
 	       Applied Mathematics Division
 	       Argonne National Laboratory
 	       Argonne, IL  60439
- ----------------------------------------------------------------------*/
+ *******************************************************************
+ */
 
-
-/* ----------------------------------------------------------------------
+/* ---------------------------------------------------------------------
   Mathematical constants
     FIVPI = 5*PI
     PIM5 = 5*PI - 15
  ----------------------------------------------------------------------*/
-    const static double fivpi = 15.707963267948966192;
-    const static double pim5	=   .70796326794896619231;
+    const static double fivpi = 5*M_PI; //15.707963267948966192;
+    const static double pim5	= fivpi - 15;//  .70796326794896619231;
 
     /*----------------------------------------------------------------------
       Coefficients for Chebyshev polynomial expansion of
@@ -265,7 +260,7 @@ v for non-negative argument X, and non-negative order N+ALPHA.
 	if(ex < DBL_MIN || ex > xlrg_BESS_Y) {
 	    /* Warning is not really appropriate, give
 	     * proper limit:
-	     * ML_ERROR(ME_RANGE, "Y_bessel"); */
+	     * ML_ERROR(ME_RANGE, "Y_bessel()"); */
 	    *ncalc = *nb;
 	    if(ex > xlrg_BESS_Y)  by[0]= 0.; /*was ML_POSINF */
 	    else if(ex < DBL_MIN) by[0]=ML_NEGINF;
@@ -512,7 +507,7 @@ L450:
 
     } else {
 	by[0] = 0.;
-	*ncalc = min0(*nb,0) - 1;
+	*ncalc = min(*nb,0) - 1;
     }
 }
 

@@ -28,9 +28,9 @@ traceback <- function(x = NULL, max.lines = getOption("deparse.max.lines"))
 {
     n <- length(x <- .traceback(x))
     if(n == 0L)
-        cat(gettext("No traceback available"), "\n")
+        cat(gettext("No traceback available", domain = "R-base"), "\n", sep = "")
     else {
-        for(i in 1L:n) {
+        for(i in seq_len(n)) {
             xi <- x[[i]]
             label <- paste0(n-i+1L, ": ")
             m <- length(xi)

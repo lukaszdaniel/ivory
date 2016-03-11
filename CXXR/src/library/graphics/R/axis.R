@@ -70,18 +70,18 @@ axTicks <- function(side, axp = NULL, usr = NULL, log = NULL, nintLog = NULL)
     ## using par("Xaxp") , par("usr") & par("Xlog") where X = x|y
     ## an R version of internal CreateAtVector()
     if(!(side <- as.integer(side)) %in% 1L:4L)
-        stop("'side' must be in {1:4}")
+        stop("'side' argument must be in {1:4}")
     is.x <- side %% 2 == 1
     XY <- function(ch) paste0(if(is.x) "x" else "y", ch)
     if(is.null(axp)) axp <- par(XY("axp"))
-    else if(!is.numeric(axp) || length(axp) != 3) stop("invalid 'axp'")
+    else if(!is.numeric(axp) || length(axp) != 3) stop(gettextf("invalid '%s' argument", "axp"))
     if(is.null(log)) log <- par(XY("log"))
-    else if(!is.logical(log) || anyNA(log)) stop("invalid 'log'")
+    else if(!is.logical(log) || anyNA(log)) stop(gettextf("invalid '%s' argument", "log"))
     if(log && axp[3L] > 0) { ## special log-scale axp[]
         if(!any((iC <- as.integer(axp[3L])) == 1L:3L))
             stop("invalid positive 'axp[3]'")
         if(is.null(usr)) usr <- par("usr")[if(is.x) 1:2 else 3:4]
-        else if(!is.numeric(usr) || length(usr) != 2) stop("invalid 'usr'")
+        else if(!is.numeric(usr) || length(usr) != 2) stop(gettextf("invalid '%s' argument", "usr"))
         if(is.null(nintLog)) nintLog <- par("lab")[2L - is.x]
         if(is.finite(nintLog)) {
             axisTicks(usr, log=log, axp=axp, nint=nintLog)

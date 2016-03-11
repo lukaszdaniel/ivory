@@ -22,6 +22,9 @@
  *
  * This is #included both from Specify() and Specify2() into ./par.c
 */
+
+#include "localization.h"
+
     if (streql(what, "adj")) {
 	lengthCheck(what, value, 1);	x = asReal(value);
 	BoundsCheck(x, 0.0, 1.0, what);

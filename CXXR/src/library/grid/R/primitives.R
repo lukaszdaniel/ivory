@@ -23,7 +23,7 @@ arrow <- function(angle=30, length=unit(0.25, "inches"),
                   ends="last", type="open") {
     angle <- as.numeric(angle)
     if (!is.unit(length))
-        stop("'length' must be a 'unit' object")
+        stop(gettextf("'%s' argument is not an object of class %s", "length", dQuote("unit")))
     ends <- as.integer(match(ends, c("first", "last", "both")))
     type <- as.integer(match(type, c("open", "closed")))
     if (anyNA(ends) || anyNA(type) ||
@@ -71,10 +71,10 @@ rep.arrow <- function(x, ...) {
 validDetails.move.to <- function(x) {
   if (!is.unit(x$x) ||
       !is.unit(x$y))
-    stop("'x' and 'y' must be units")
+    stop(gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y"))
   # Make sure that x and y are of length 1
   if (length(x$x) > 1 | length(x$y) > 1)
-    stop("'x' and 'y' must have length 1")
+    stop(gettextf("'%s' and '%s' components of argument 'x' must be of length 1", "x", "y"))
   x
 }
 
@@ -106,12 +106,12 @@ grid.move.to <- function(x=0, y=0,
 validDetails.line.to <- function(x) {
   if (!is.unit(x$x) ||
       !is.unit(x$y))
-    stop("'x' and 'y' must be units")
+    stop(gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y"))
   # Make sure that x and y are of length 1
   if (length(x$x) > 1 | length(x$y) > 1)
-    stop("'x' and 'y' must have length 1")
+    stop(gettextf("'%s' and '%s' components of argument 'x' must be of length 1", "x", "y"))
   if (!(is.null(x$arrow) || inherits(x$arrow, "arrow")))
-      stop("invalid 'arrow' argument")
+      stop(gettextf("invalid '%s' component of argument 'x'", "arrow"))
   x
 }
 
@@ -148,9 +148,9 @@ grid.line.to <- function(x=1, y=1,
 validDetails.lines <- function(x) {
   if (!is.unit(x$x) ||
       !is.unit(x$y))
-    stop("'x' and 'y' must be units")
+    stop(gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y"))
   if (!(is.null(x$arrow) || inherits(x$arrow, "arrow")))
-      stop("invalid 'arrow' argument")
+      stop(gettextf("invalid '%s' component of argument 'x'", "arrow"))
   x
 }
 
@@ -228,21 +228,21 @@ grid.lines <- function(x=unit(c(0, 1), "npc"),
 validDetails.polyline <- function(x) {
   if (!is.unit(x$x) ||
       !is.unit(x$y))
-      stop("'x' and 'y' must be units")
+      stop(gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y"))
   if (!is.null(x$id) && !is.null(x$id.lengths))
-      stop("it is invalid to specify both 'id' and 'id.lengths'")
+      stop("it is invalid to specify both 'id' and 'id.lengths' components of argument 'x'")
   if (length(x$x) != length(x$y))
-      stop("'x' and 'y' must be same length")
+      stop(gettextf("'%s' and '%s' components of argument 'x' must be same length", "x", "y"))
   if (!is.null(x$id) && (length(x$id) != length(x$x)))
-      stop("'x' and 'y' and 'id' must all be same length")
+      stop(gettextf("'%s' and '%s' and '%s' components of argument 'x' must all be same length", "x", "y", "id"))
   if (!is.null(x$id))
       x$id <- as.integer(x$id)
   if (!is.null(x$id.lengths) && (sum(x$id.lengths) != length(x$x)))
-      stop("'x' and 'y' and 'id.lengths' must specify same overall length")
+      stop(gettextf("'%s' and '%s' and '%s' components of argument 'x' must specify same overall length", "x", "y", "id.lengths"))
   if (!is.null(x$id.lengths))
       x$id.lengths <- as.integer(x$id.lengths)
   if (!(is.null(x$arrow) || inherits(x$arrow, "arrow")))
-      stop("invalid 'arrow' argument")
+      stop(gettextf("invalid '%s' component of argument 'x'", "arrow"))
   x
 }
 
@@ -323,7 +323,7 @@ validDetails.segments <- function(x) {
       !is.unit(x$y0) || !is.unit(x$y1))
     stop("'x0', 'y0', 'x1', and 'y1' must be units")
   if (!(is.null(x$arrow) || inherits(x$arrow, "arrow")))
-      stop("invalid 'arrow' argument")
+      stop(gettextf("invalid '%s' component of argument 'x'", "arrow"))
   x
 }
 
@@ -414,9 +414,9 @@ grid.segments <- function(x0=unit(0, "npc"), y0=unit(0, "npc"),
 validDetails.arrows <- function(x) {
   if ((!is.null(x$x) && !is.unit(x$x)) ||
       (!is.null(x$y) && !is.unit(x$y)))
-    stop("'x' and 'y' must be units or NULL")
+    stop(gettextf("'%s' and '%s' components of argument 'x' must be objects of class %s or NULL", "x", "y", dQuote("unit")))
   if (!is.unit(x$length))
-    stop("'length' must be a 'unit' object")
+    stop(gettextf("'%s' component of argument 'x' must be an object of class %s", "length", dQuote("unit")))
   x$ends <- as.integer(match(x$ends, c("first", "last", "both")))
   x$type <- as.integer(match(x$type, c("open", "closed")))
   if (any(is.na(x$ends)) || any(is.na(x$type)))
@@ -529,7 +529,7 @@ arrowsGrob <- function(x=c(0.25, 0.75), y=0.5,
                        angle=30, length=unit(0.25, "inches"),
                        ends="last", type="open",
                        name=NULL, gp=gpar(), vp=NULL) {
-    .Defunct(msg="'arrowsGrob' is defunct; use 'arrow' arguments to line drawing functions")
+    .Defunct(msg="'arrowsGrob()' is defunct; use 'arrow' arguments to line drawing functions")
 }
 
 grid.arrows <- function(x=c(0.25, 0.75), y=0.5,
@@ -538,7 +538,7 @@ grid.arrows <- function(x=c(0.25, 0.75), y=0.5,
                         angle=30, length=unit(0.25, "inches"),
                         ends="last", type="open",
                         name=NULL, gp=gpar(), draw=TRUE, vp=NULL) {
-    .Defunct(msg="'grid.arrows' is defunct; use 'arrow' arguments to line drawing functions")
+    .Defunct(msg="'grid.arrows()' is defunct; use 'arrow' arguments to line drawing functions")
 }
 
 ######################################
@@ -548,17 +548,17 @@ grid.arrows <- function(x=c(0.25, 0.75), y=0.5,
 validDetails.polygon <- function(x) {
   if (!is.unit(x$x) ||
       !is.unit(x$y))
-    stop("'x' and 'y' must be units")
+    stop(gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y"))
   if (!is.null(x$id) && !is.null(x$id.lengths))
-    stop("it is invalid to specify both 'id' and 'id.lengths'")
+    stop("it is invalid to specify both 'id' and 'id.lengths' components of argument 'x'")
   if (length(x$x) != length(x$y))
-    stop("'x' and 'y' must be same length")
+    stop(gettextf("'%s' and '%s' components of argument 'x' must be same length", "x", "y"))
   if (!is.null(x$id) && (length(x$id) != length(x$x)))
-    stop("'x' and 'y' and 'id' must all be same length")
+    stop(gettextf("'%s' and '%s' and '%s' components of argument 'x' must all be same length", "x", "y", "id"))
   if (!is.null(x$id))
     x$id <- as.integer(x$id)
   if (!is.null(x$id.lengths) && (sum(x$id.lengths) != length(x$x)))
-    stop("'x' and 'y' and 'id.lengths' must specify same overall length")
+    stop(gettextf("'%s' and '%s' and '%s' components of argument 'x' must specify same overall length", "x", "y", "id.lengths"))
   if (!is.null(x$id.lengths))
     x$id.lengths <- as.integer(x$id.lengths)
   x
@@ -644,17 +644,17 @@ grid.polygon <- function(x=c(0, 0.5, 1, 0.5), y=c(0.5, 1, 0.5, 0),
 
 validDetails.pathgrob <- function(x) {
     if (!is.unit(x$x) || !is.unit(x$y))
-        stop("'x' and 'y' must be units")
+        stop(gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y"))
     if (!is.null(x$id) && !is.null(x$id.lengths))
-        stop("it is invalid to specify both 'id' and 'id.lengths'")
+        stop("it is invalid to specify both 'id' and 'id.lengths' components of argument 'x'")
     if (length(x$x) != length(x$y))
-        stop("'x' and 'y' must be same length")
+        stop(gettextf("'%s' and '%s' components of argument 'x' must be same length", "x", "y"))
     if (!is.null(x$id) && (length(x$id) != length(x$x)))
-        stop("'x' and 'y' and 'id' must all be same length")
+        stop(gettextf("'%s' and '%s' and '%s' components of argument 'x' must all be same length", "x", "y", "id"))
     if (!is.null(x$id))
         x$id <- as.integer(x$id)
     if (!is.null(x$id.lengths) && (sum(x$id.lengths) != length(x$x)))
-        stop("'x' and 'y' and 'id.lengths' must specify same overall length")
+        stop(gettextf("'%s' and '%s' and '%s' components of argument 'x' must specify same overall length", "x", "y", "id.lengths"))
     if (!is.null(x$id.lengths))
         x$id.lengths <- as.integer(x$id.lengths)
     x
@@ -737,25 +737,25 @@ grid.path <- function(...) {
 validDetails.xspline <- function(x) {
   if (!is.unit(x$x) ||
       !is.unit(x$y))
-    stop("x and y must be units")
+    stop(gettextf("'%s' and '%s' components of argument 'x' must be objects of class %s", "x", "y", dQuote("unit")))
   if (!is.null(x$id) && !is.null(x$id.lengths))
-    stop("it is invalid to specify both 'id' and 'id.lengths'")
+    stop("it is invalid to specify both 'id' and 'id.lengths' components of argument 'x'")
   nx <- length(x$x)
   ny <- length(x$y)
   if (nx != ny)
-    stop("'x' and 'y' must be same length")
+    stop(gettextf("'%s' and '%s' components of argument 'x' must have same length", "x", "y"))
   if (!is.null(x$id) && (length(x$id) != nx))
-    stop("'x' and 'y' and 'id' must all be same length")
+    stop(gettextf("'%s' and '%s' and '%s' components of argument 'x' must all be same length", "x", "y", "id"))
   if (!is.null(x$id))
     x$id <- as.integer(x$id)
   if (!is.null(x$id.lengths) && (sum(x$id.lengths) != nx))
-    stop("'x' and 'y' and 'id.lengths' must specify same overall length")
+    stop(gettextf("'%s' and '%s' and '%s' components of argument 'x' must specify same overall length", "x", "y", "id.lengths"))
   if (!is.null(x$id.lengths))
     x$id.lengths <- as.integer(x$id.lengths)
   if (!(is.null(x$arrow) || inherits(x$arrow, "arrow")))
-      stop("invalid 'arrow' argument")
+      stop(gettextf("invalid '%s' component of argument 'x'", "arrow"))
   if (any(x$shape < -1 || x$shape > 1))
-    stop("'shape' must be between -1 and 1")
+    stop(gettextf("'%s' component of argument 'x' must be between -1 and 1", "shape"))
   x$open <- as.logical(x$open)
   # Force all first and last shapes to be 0 for open xsplines
   if (x$open) {
@@ -913,19 +913,19 @@ splinegrob <- function(x) {
 validDetails.beziergrob <- function(x) {
     if (!is.unit(x$x) ||
         !is.unit(x$y))
-        stop("x and y must be units")
+        stop(gettextf("'%s' and '%s' components of argument 'x' must be objects of class %s", "x", "y", dQuote("unit")))
     if (!is.null(x$id) && !is.null(x$id.lengths))
-        stop("it is invalid to specify both 'id' and 'id.lengths'")
+        stop("it is invalid to specify both 'id' and 'id.lengths' components of argument 'x'")
     nx <- length(x$x)
     ny <- length(x$y)
     if (nx != ny)
-        stop("'x' and 'y' must be same length")
+        stop(gettextf("'%s' and '%s' components of argument 'x' must be same length", "x", "y"))
     if (!is.null(x$id) && (length(x$id) != nx))
-        stop("'x' and 'y' and 'id' must all be same length")
+        stop(gettextf("'%s' and '%s' and '%s' components of argument 'x' must all be same length", "x", "y", "id"))
     if (!is.null(x$id))
         x$id <- as.integer(x$id)
     if (!is.null(x$id.lengths) && (sum(x$id.lengths) != nx))
-        stop("'x' and 'y' and 'id.lengths' must specify same overall length")
+        stop(gettextf("'%s' and '%s' and '%s' components of argument 'x' must specify same overall length", "x", "y", "id.lengths"))
     if (!is.null(x$id.lengths))
         x$id.lengths <- as.integer(x$id.lengths)
     if (is.null(x$id) && is.null(x$id.lengths)) {
@@ -934,7 +934,7 @@ validDetails.beziergrob <- function(x) {
     } else {
         if (is.null(x$id)) {
             n <- length(x$id.lengths)
-            id <- rep(1L:n, x$id.lengths)
+            id <- rep(seq_len(n), x$id.lengths)
         } else {
             id <- x$id
         }
@@ -943,7 +943,7 @@ validDetails.beziergrob <- function(x) {
             stop("must have exactly 4 control points per Bezier curve")
     }
     if (!(is.null(x$arrow) || inherits(x$arrow, "arrow")))
-        stop("invalid 'arrow' argument")
+        stop(gettextf("invalid '%s' component of argument 'x'", "arrow"))
     x
 }
 
@@ -1000,7 +1000,7 @@ validDetails.circle <- function(x) {
   if (!is.unit(x$x) ||
       !is.unit(x$y) ||
       !is.unit(x$r))
-    stop("'x', 'y', and 'r' must be units")
+    stop(gettextf("'%s', '%s' and '%s' components must be units", "x", "y", "r"))
   x
 }
 
@@ -1071,7 +1071,7 @@ validDetails.rect <- function(x) {
       !is.unit(x$y) ||
       !is.unit(x$width) ||
       !is.unit(x$height))
-    stop("'x', 'y', 'width', and 'height' must be units")
+    stop(gettextf("'%s', '%s', '%s', and '%s' components of argument 'x' must be units", "x", "y", "width", "height"))
   valid.just(x$just)
   if (!is.null(x$hjust))
     x$hjust <- as.numeric(x$hjust)
@@ -1173,7 +1173,7 @@ validDetails.rastergrob <- function(x) {
         !is.unit(x$y) ||
         (!is.null(x$width) && !is.unit(x$width)) ||
         (!is.null(x$height) && !is.unit(x$height)))
-        stop("'x', 'y', 'width', and 'height' must be units")
+        stop(gettextf("'%s', '%s', '%s', and '%s' components of argument 'x' must be units", "x", "y", "width", "height"))
     valid.just(x$just)
     if (!is.null(x$hjust))
         x$hjust <- as.numeric(x$hjust)
@@ -1347,10 +1347,10 @@ validDetails.text <- function(x) {
     x$label <- as.character(x$label)
   if (!is.unit(x$x) ||
       !is.unit(x$y))
-    stop("'x' and 'y' must be units")
+    stop(gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y"))
   x$rot <- as.numeric(x$rot)
   if (!all(is.finite(x$rot)) || length(x$rot) == 0)
-    stop("invalid 'rot' value")
+    stop(gettextf("invalid '%s' component of argument 'x'", "rot"))
   valid.just(x$just)
   if (!is.null(x$hjust))
     x$hjust <- as.numeric(x$hjust)
@@ -1468,7 +1468,7 @@ grid.text <- function(label, x=unit(0.5, "npc"), y=unit(0.5, "npc"),
 ######################################
 valid.pch <- function(pch) {
   if (length(pch) == 0L)
-    stop("zero-length 'pch'")
+    stop("zero-length 'pch' argument")
   if (is.null(pch))
     pch <- 1L
   else if (!is.character(pch))
@@ -1480,9 +1480,9 @@ validDetails.points <- function(x) {
   if (!is.unit(x$x) ||
       !is.unit(x$y) ||
       !is.unit(x$size))
-    stop("'x', 'y' and 'size' must be units")
+    stop(gettextf("'%s', '%s' and '%s' components must be units", "x", "y", "size"))
   if (length(x$x) != length(x$y))
-    stop("'x' and 'y' must be 'unit' objects and have the same length")
+    stop(gettextf("'%s' and '%s' components of argument 'x' must be objects of class %s and have the same length", "x", "y", dQuote("unit")))
   x$pch <- valid.pch(x$pch)
   x
 }
@@ -1559,10 +1559,10 @@ validDetails.clip <- function(x) {
       !is.unit(x$y) ||
       !is.unit(x$width) ||
       !is.unit(x$height))
-    stop("'x', 'y', 'width', and 'height' must be units")
+    stop(gettextf("'%s', '%s', '%s', and '%s' components of argument 'x' must be units", "x", "y", "width", "height"))
   if (length(x$x) > 1 || length(x$y) > 1 ||
       length(x$width) > 1 || length(x$height) > 1)
-    stop("'x', 'y', 'width', and 'height' must all be units of length 1")
+    stop(gettextf("'%s', '%s', '%s', and '%s' components of argument 'x' must all be units of length 1", "x", "y", "width", "height"))
   valid.just(x$just)
   if (!is.null(x$hjust))
     x$hjust <- as.numeric(x$hjust)
@@ -1607,9 +1607,9 @@ grid.clip <- function(...) {
 validDetails.null <- function(x) {
   if (!is.unit(x$x) ||
       !is.unit(x$y))
-    stop("'x' and 'y' must be units")
+    stop(gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y"))
   if (length(x$x) > 1 || length(x$y) > 1)
-    stop("'x' and 'y' must all be units of length 1")
+    stop(gettextf("'%s' and '%s' components of argument 'x' must all be units of length 1", "x", "y"))
   x
 }
 

@@ -46,6 +46,7 @@
 /*************************************************************************
  * Trio include files
  */
+#include <Localization.h>
 #include "triodef.h"
 #include "trio.h"
 #include "triop.h"
@@ -189,7 +190,7 @@
 // #include <assert.h>
 /* fake definition */
 extern void Rf_error(const char *str);
-#define assert(a) if(!(a)) Rf_error("internal error in trio library")
+#define assert(a) if(!(a)) Rf_error(_("internal error in trio library"))
 
 
 #include <ctype.h>
@@ -7612,25 +7613,25 @@ TRIO_ARGS1((errorcode),
   switch (TRIO_ERROR_CODE(errorcode))
     {
     case TRIO_EOF:
-      return "End of file";
+      return _("End of file");
     case TRIO_EINVAL:
-      return "Invalid argument";
+      return _("invalid argument");
     case TRIO_ETOOMANY:
-      return "Too many arguments";
+      return _("too many arguments");
     case TRIO_EDBLREF:
-      return "Double reference";
+      return _("Double reference");
     case TRIO_EGAP:
-      return "Reference gap";
+      return _("Reference gap");
     case TRIO_ENOMEM:
-      return "Out of memory";
+      return _("Out of memory");
     case TRIO_ERANGE:
-      return "Invalid range";
+      return _("Invalid range");
     case TRIO_ECUSTOM:
-      return "Custom error";
+      return _("Custom error");
     default:
-      return "Unknown";
+      return _("Unknown error");
     }
 #else
-  return "Unknown";
+  return _("Unknown error");
 #endif
 }

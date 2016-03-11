@@ -27,6 +27,7 @@
 #include <math.h>  // for floor
 #include <Rmath.h>		/* uses choose() */
 #include "stats.h"
+#include "localization.h"
 
 static double ***
 w_init(int m, int n)
@@ -115,7 +116,7 @@ qansari(int len, double *P, double *Q, int m, int n)
     for (i = 0; i < len; i++) {
 	xi = P[i];
 	if(xi < 0 || xi > 1)
-	    error(_("probabilities outside [0,1] in qansari()"));
+	    error(_("probabilities outside [0,1] in 'qansari()' function"));
 	if(xi == 0)
 	    Q[i] = l;
 	else if(xi == 1)

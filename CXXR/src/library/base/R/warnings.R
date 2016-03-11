@@ -36,7 +36,7 @@ unique.warnings <- function(x, incomparables = FALSE, ...)
 print.warnings <- function(x, ...)
 {
     if(n <- length(x)) {
-        cat(ngettext(n, "Warning message:\n", "Warning messages:\n"))
+        cat(ngettext(n, "Warning message:", "Warning messages:", domain = "R-base"), "\n", sep = "")
         msgs <- names(x)
         for(i in seq_len(n)) {
             ind <- if(n == 1L) "" else paste0(i, ": ")
@@ -45,12 +45,8 @@ print.warnings <- function(x, ...)
                 temp <- deparse(x[[i]], width.cutoff = 50L, nlines = 2L)
                 ## Put on one line if narrow enough.
                 sm <- strsplit(msgs[i], "\n")[[1L]]
-                nl <- if(nchar(ind, "w") + nchar(temp[1L], "w") +
-                         nchar(sm[1L], "w") <= 75L)
-                    " " else "\n  "
-                paste(ind, "In ",
-                      temp[1L], if(length(temp) > 1L) " ...",
-                      " :", nl, msgs[i], sep = "")
+                nl <- if(nchar(ind, "w") + nchar(temp[1L], "w") + nchar(sm[1L], "w") <= options("width")[[1]]) " " else "\n  "
+                paste(ind, gettextf("In command %s", sQuote(temp[1L]), domain = "R-base"), if(length(temp) > 1L) " ...", ":", nl, msgs[i], sep = "")
             } else paste0(ind, msgs[i])
             do.call("cat", c(list(out), attr(x, "dots"), fill=TRUE))
         }
@@ -68,9 +64,9 @@ print.warnings <- function(x, ...)
 chkDots <- function(..., which.call = -1, allowed = character(0)) {
     if(nx <- length(list(...))) ## <- or  if(missing(...)) ?
 	warning(sprintf(ngettext(nx,
-				 "In %s :\n extra argument %s will be disregarded",
-				 "In %s :\n extra arguments %s will be disregarded"),
-			paste(deparse(sys.call(which.call), control=c()), collapse="\n"),
+				 "In command '%s':\n extra argument %s will be disregarded",
+				 "In command '%s':\n extra arguments %s will be disregarded", domain = "R-base"),
+			paste(deparse(sys.call(which.call), control=c())),
 			## sub(")$", '', sub("^list\\(", '', deparse(list(...), control=c())))
 			paste(sQuote(names(list(...))), collapse = ", ")),
 		call. = FALSE, domain=NA)

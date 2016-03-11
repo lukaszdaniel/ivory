@@ -21,13 +21,13 @@ mean <- function(x, ...) UseMethod("mean")
 mean.default <- function(x, trim = 0, na.rm = FALSE, ...)
 {
     if(!is.numeric(x) && !is.complex(x) && !is.logical(x)) {
-        warning("argument is not numeric or logical: returning NA")
+        warning(gettextf("%s value is not numeric or logical: returning NA", sQuote(deparse(substitute(x)))))
         return(NA_real_)
     }
     if (na.rm)
 	x <- x[!is.na(x)]
     if(!is.numeric(trim) || length(trim) != 1L)
-        stop("'trim' must be numeric of length one")
+        stop(gettextf("'%s' argument must be numeric of length 1", "trim"))
     n <- length(x)
     if(trim > 0 && n) {
 	if(is.complex(x))

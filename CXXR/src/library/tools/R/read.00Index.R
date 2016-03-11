@@ -27,9 +27,7 @@ function(file)
         }
     }
     if(!inherits(file, "connection"))
-        stop(gettextf("argument '%s' must be a character string or connection",
-                      file),
-             domain = NA)
+        stop(gettextf("'%s' argument must be a character string or connection", file), domain = "R-tools")
 
     y <- matrix("", nrow = 0L, ncol = 2L)
     x <- paste(readLines(file), collapse = "\n")

@@ -26,12 +26,12 @@ function(data = NA, dim = length(data), dimnames = NULL)
     ## package rv has an as.vector() method which leave this as a classed list
     if(is.object(data)) {
         dim <- as.integer(dim)
-        if (!length(dim)) stop("'dims' cannot be of length 0")
+        if (!length(dim)) stop(gettextf("'%s' argument cannot be of length 0", "dims"))
         vl <- prod(dim)
         if(length(data) != vl) {
             ## C code allows long vectors, but rep() does not.
             if(vl > .Machine$integer.max)
-                stop("'dim' specifies too large an array")
+                stop("'dim' argument specifies too large array")
             data <- rep_len(data, vl)
         }
         if(length(dim)) dim(data) <- dim
@@ -49,11 +49,11 @@ function(x, MARGIN)
     n <- length(d)
 
     if((length(MARGIN) > 1L) || (MARGIN < 1L) || (MARGIN > n))
-        stop("incorrect value for 'MARGIN'")
+        stop(gettextf("incorrect value for '%s' argument", "MARGIN"))
 
     if(any(d == 0L)) return(array(integer(), d))
 
-    y <- rep.int(rep.int(1L:d[MARGIN],
+    y <- rep.int(rep.int(seq_len(d[MARGIN]),
 			 prod(d[seq_len(MARGIN - 1L)]) * rep.int(1L, d[MARGIN])),
 		 prod(d[seq.int(from = MARGIN + 1L, length.out = n - MARGIN)]))
     dim(y) <- d

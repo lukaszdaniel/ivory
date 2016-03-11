@@ -31,18 +31,18 @@ function(file, local = FALSE, echo = verbose, print.eval = echo,
         .GlobalEnv
     } else if (is.environment(local)) {
         local
-    } else stop("'local' must be TRUE, FALSE or an environment")
+    } else stop("'local' argument must be TRUE, FALSE or an environment")
     have_encoding <- !missing(encoding) && encoding != "unknown"
     if (!missing(echo)) {
 	if (!is.logical(echo))
-	    stop("'echo' must be logical")
+	    stop(gettextf("'%s' argument must be logical", "echo"))
 	if (!echo && verbose) {
-	    warning("'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'")
+	    warning("'verbose' argument is TRUE, 'echo' argument is not; ... coercing 'echo <- TRUE'")
 	    echo <- TRUE
 	}
     }
     if (verbose) {
-	cat("'envir' chosen:")
+	cat(gettext("'envir' chosen:", domain = "R-base"))
 	print(envir)
     }
     ofile <- file # for use with chdir = TRUE
@@ -68,7 +68,7 @@ function(file, local = FALSE, echo = verbose, print.eval = echo,
         if(is.na(encoding))
             stop("unable to find a plausible encoding")
         if(verbose)
-            cat(gettextf('encoding = "%s" chosen', encoding), "\n", sep = "")
+            cat(gettextf("'encoding = \"%s\"' chosen", encoding, domain = "R-base"), "\n", sep = "")
         if(file == "") {
 	    file <- stdin()
 	    srcfile <- "<stdin>"
@@ -118,7 +118,7 @@ function(file, local = FALSE, echo = verbose, print.eval = echo,
 
     Ne <- length(exprs)
     if (verbose)
-	cat("--> parsed", Ne, "expressions; now eval(.)ing them:\n")
+	cat(sprintf(ngettext(Ne, "--> parsed %d expression; now evaluating them:", "--> parsed %d expressions; now evaluating them:", domain = "R-base"), Ne), "\n", sep = "")
 
     if (chdir){
         if(is.character(ofile)) {
@@ -132,7 +132,7 @@ function(file, local = FALSE, echo = verbose, print.eval = echo,
                 setwd(path)
             }
         } else {
-            warning("'chdir = TRUE' makes no sense for a connection")
+            warning("'chdir = TRUE' option makes no sense for a connection")
         }
     }
 
@@ -200,7 +200,7 @@ function(file, local = FALSE, echo = verbose, print.eval = echo,
 		dep <- substr(dep, 1L, if (do.trunc) max.deparse.length else nd)
 		cat("\n", dep, if (do.trunc)
 		    paste(if (grepl(sd, dep) && grepl(oddsd, dep))
-			  " ...\" ..." else " ....", "[TRUNCATED] "),
+			  " ...\" ..." else " ....", gettext("[TRUNCATED] ", domain = "R-base")),
 		    "\n", sep = "")
 	    }
 	}
@@ -238,7 +238,7 @@ function(file, envir = baseenv(), chdir = FALSE,
 	 keep.source = getOption("keep.source.pkgs"))
 {
     if(!(is.character(file) && file.exists(file)))
-	stop(gettextf("'%s' is not an existing file", file))
+	stop(gettextf("%s is not an existing file", sQuote(file)))
     keep.source <- as.logical(keep.source)
     oop <- options(keep.source = keep.source,
 		   topLevelEnvironment = as.environment(envir))

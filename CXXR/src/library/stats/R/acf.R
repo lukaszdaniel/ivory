@@ -34,16 +34,16 @@ acf <-
     x.freq <- frequency(x)
     x <- as.matrix(x)
     if(!is.numeric(x))
-        stop("'x' must be numeric")
+        stop(gettextf("'%s' argument must be numeric", "x"))
     sampleT <- as.integer(nrow(x))
     nser <- as.integer(ncol(x))
     if(is.na(sampleT) || is.na(nser))
-        stop("'sampleT' and 'nser' must be integer")
+        stop("'sampleT' and 'nser' arguments must be integer")
     if (is.null(lag.max))
         lag.max <- floor(10 * (log10(sampleT) - log10(nser)))
     lag.max <- as.integer(min(lag.max, sampleT - 1L))
     if (is.na(lag.max) || lag.max < 0)
-        stop("'lag.max' must be at least 0")
+        stop(gettextf("'%s' argument must be at least %d", "lag.max", 0))
     if(demean)
 	x <- sweep(x, 2, colMeans(x, na.rm = TRUE), check.margin=FALSE)
     lag <- matrix(1, nser, nser)
@@ -66,30 +66,30 @@ pacf.default <- function(x, lag.max = NULL, plot = TRUE,
 {
     series <- deparse(substitute(x))
     x <- drop(na.action(as.ts(x)))  # use univariate code for a single series
-    if(!is.numeric(x)) stop("'x' must be numeric")
+    if(!is.numeric(x)) stop(gettextf("'%s' argument must be numeric", "x"))
     x.freq <- frequency(x)
     sampleT <- NROW(x)
     if (is.null(lag.max))
         lag.max <- if(is.matrix(x)) floor(10 * (log10(sampleT) - log10(ncol(x))))
         else floor(10 * (log10(sampleT)))
     lag.max <- min(lag.max, sampleT - 1)
-    if (lag.max < 1) stop("'lag.max' must be at least 1")
+    if (lag.max < 1) stop(gettextf("'%s' argument must be at least %d", "lag.max", 1))
 
     if(is.matrix(x)) {
-        if(anyNA(x)) stop("NAs in 'x'")
+        if(anyNA(x)) stop("NA values in 'x'")
         nser <- ncol(x)
         x <- sweep(x, 2, colMeans(x), check.margin=FALSE)
         lag <- matrix(1, nser, nser)
         lag[lower.tri(lag)] <- -1
         pacf <- ar.yw(x, order.max = lag.max)$partialacf
-        lag <- outer(1L:lag.max, lag/x.freq)
+        lag <- outer(seq_len(lag.max), lag/x.freq)
         snames <- colnames(x)
     } else {
         x <- scale(x, TRUE, FALSE)
         acf <- drop(acf(x, lag.max = lag.max, plot = FALSE,
                         na.action = na.action)$acf)
         pacf <- .Call(C_pacf1, acf, lag.max)
-        lag <- array((1L:lag.max)/x.freq, dim=c(lag.max,1L,1L))
+        lag <- array(seq_len(lag.max)/x.freq, dim=c(lag.max,1L,1L))
         snames <- NULL
     }
 
@@ -103,7 +103,7 @@ pacf.default <- function(x, lag.max = NULL, plot = TRUE,
 }
 
 plot.acf <-
-    function (x, ci = 0.95, type = "h", xlab = "Lag", ylab = NULL,
+    function (x, ci = 0.95, type = "h", xlab = gettext("Lag", domain = "R-stats"), ylab = NULL,
               ylim = NULL, main = NULL, ci.col="blue",
               ci.type = c("white", "ma"),
               max.mfrow = 6,
@@ -117,19 +117,20 @@ plot.acf <-
               ...)
 {
     ci.type <- match.arg(ci.type)
-    if((nser <- ncol(x$lag)) < 1L) stop("x$lag must have at least 1 column")
+    if((nser <- ncol(x$lag)) < 1L) stop("'x$lag' must have at least 1 column")
     if (is.null(ylab))
         ylab <- switch(x$type,
-                       correlation = "ACF",
-                       covariance = "ACF (cov)",
-                       partial = "Partial ACF")
+                       correlation = gettext("ACF", domain = "R-stats"),
+                       covariance = gettext("ACF (cov)", domain = "R-stats"),
+                       partial = gettext("Partial ACF", domain = "R-stats"))
     if (is.null(snames <- x$snames))
-        snames <- paste("Series ", if (nser == 1L) x$series else 1L:nser)
+        if(nser == 1L) snames <- gettextf("Series %s", x$series)
+	else snames <- gettextf("Series %s", seq_len(nser))
 
     with.ci <- ci > 0 && x$type != "covariance"
     with.ci.ma <- with.ci && ci.type == "ma" && x$type == "correlation"
     if(with.ci.ma && x$lag[1L, 1L, 1L] != 0L) {
-        warning("can use ci.type=\"ma\" only if first lag is 0")
+        warning("can use 'ci.type=\"ma\"' only if first lag is 0")
         with.ci.ma <- FALSE
     }
     clim0 <- if (with.ci) qnorm((1 + ci)/2)/sqrt(x$n.used) else c(0, 0)
@@ -158,23 +159,23 @@ plot.acf <-
 
     if (is.null(ylim)) {
         ## Calculate a common scale
-        ylim <- range(x$acf[, 1L:nser, 1L:nser], na.rm = TRUE)
+        ylim <- range(x$acf[, seq_len(nser), seq_len(nser)], na.rm = TRUE)
         if (with.ci) ylim <- range(c(-clim0, clim0, ylim))
         if (with.ci.ma) {
-	    for (i in 1L:nser) {
+	    for (i in seq_len(nser)) {
                 clim <- clim0 * sqrt(cumsum(c(1, 2*x$acf[-1, i, i]^2)))
                 ylim <- range(c(-clim, clim, ylim))
             }
         }
     }
 
-    for (I in 1L:Npgs) for (J in 1L:Npgs) {
+    for (I in seq_len(Npgs)) for (J in seq_len(Npgs)) {
         dev.hold()
         ## Page [ I , J ] : Now do   nr x nr  'panels' on this page
-        iind <- (I-1)*nr + 1L:nr
-        jind <- (J-1)*nr + 1L:nr
+        iind <- (I-1)*nr + seq_len(nr)
+        jind <- (J-1)*nr + seq_len(nr)
         if(verbose)
-            message(gettextf("Page [%d,%d]: i =%s; j =%s", I, J, paste(iind,collapse=","), paste(jind,collapse=",")), domain = NA)
+            message(gettextf("Page [%d,%d]: i =%s; j =%s", I, J, paste(iind,collapse=","), paste(jind,collapse=",")), domain = "R-stats")
         for (i in iind) for (j in jind)
             if(max(i,j) > nser) {
                 frame(); box(col = "light gray")
@@ -217,8 +218,7 @@ ccf <- function(x, y, lag.max = NULL,
         stop("univariate time series only")
     X <- ts.intersect(as.ts(x), as.ts(y))
     colnames(X) <- c(deparse(substitute(x))[1L], deparse(substitute(y))[1L])
-    acf.out <- acf(X, lag.max = lag.max, plot = FALSE, type = type,
-                   na.action = na.action)
+    acf.out <- acf(X, lag.max = lag.max, plot = FALSE, type = type, na.action = na.action)
     lag <- c(rev(acf.out$lag[-1,2,1]), acf.out$lag[,1,2])
     y   <- c(rev(acf.out$acf[-1,2,1]), acf.out$acf[,1,2])
     acf.out$acf <- array(y, dim=c(length(y),1L,1L))
@@ -243,9 +243,9 @@ ccf <- function(x, y, lag.max = NULL,
 print.acf <- function(x, digits = 3L, ...)
 {
     type <- match(x$type, c("correlation", "covariance", "partial"))
-    msg <- c("Autocorrelations", "Autocovariances", "Partial autocorrelations")
-    cat("\n", msg[type]," of series ", sQuote(x$series), ", by lag\n\n",
-        sep = "")
+    if(type == 1) cat("\n", gettextf("Autocorrelations of series %s, by lag", sQuote(x$series), domain = "R-stats"), "\n\n", sep = "")
+    else if(type == 2) cat("\n", gettextf("Autocovariances of series %s, by lag", sQuote(x$series), domain = "R-stats"), "\n\n", sep = "")
+    else cat("\n", gettextf("Partial autocorrelations of series %s, by lag", sQuote(x$series), domain = "R-stats"), "\n\n", sep = "")
     nser <- ncol(x$lag)
     if(type != 2) x$acf <- round(x$acf, digits)
     if(nser == 1) {

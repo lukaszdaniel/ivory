@@ -29,7 +29,7 @@ extendrange <- function(x, r = range(x, na.rm = TRUE), f = 0.05)
 {
     ## Purpose: extend a range by a factor 'f' - on each side
     if(!missing(r) && length(r) != 2)
-        stop("'r' must be a \"range\", hence of length 2")
+        stop("'r' must be a 'range()' result, hence of length 2")
     r + c(-f,f) * diff(r)
 
 }

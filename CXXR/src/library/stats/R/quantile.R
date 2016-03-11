@@ -36,7 +36,7 @@ quantile.default <-
 	stop("missing values and NaN's not allowed if 'na.rm' is FALSE")
     eps <- 100*.Machine$double.eps
     if (any((p.ok <- !is.na(probs)) & (probs < -eps | probs > 1+eps)))
-	stop("'probs' outside [0,1]")
+	stop(gettextf("'%s' argument is outside [0,1]", "probs"))
     n <- length(x)
     if(na.p <- any(!p.ok)) { # set aside NA & NaN
         o.pr <- probs

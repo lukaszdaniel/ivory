@@ -59,11 +59,11 @@ function(Log, ...)
 
 checkingLog <-
 function(Log, ...)
-    printLog(Log, Log$stars, " checking ", ..., " ...")
+    printLog(Log, Log$stars, " ", ...)
 
 creatingLog <-
 function(Log, text)
-    printLog(Log, Log$stars, " creating ", text, " ...")
+    printLog(Log, Log$stars, " ", text)
 
 messageLog <-
 function(Log, ...)
@@ -76,7 +76,7 @@ function(Log, text)
 errorLog <-
 function(Log, ...)
 {
-    resultLog(Log, "ERROR")
+    resultLog(Log, gettext("ERROR", domain = "R-tools"))
     text <- paste0(...)
     if (length(text) && nzchar(text)) printLog(Log, ..., "\n")
     Log$errors <- Log$errors + 1L
@@ -90,7 +90,7 @@ function(Log, ...)
 warningLog <-
 function(Log, text = "")
 {
-    resultLog(Log, "WARNING")
+    resultLog(Log, gettext("WARNING", domain = "R-tools"))
     if(nzchar(text)) printLog(Log, text, "\n")
     Log$warnings <- Log$warnings + 1L
 }
@@ -98,7 +98,7 @@ function(Log, text = "")
 noteLog <-
 function(Log, text = "")
 {
-    resultLog(Log, "NOTE")
+    resultLog(Log, gettext("NOTE", domain = "R-tools"))
     if(nzchar(text)) printLog(Log, text, "\n")
     Log$notes <- Log$notes + 1L
 }
@@ -106,7 +106,7 @@ function(Log, text = "")
 summaryLog <-
 function(Log)
 {
-    messageLog(Log, "DONE")
+    messageLog(Log, gettext("DONE", domain = "R-tools"))
     message("")
     counts <- c(ERROR = Log$errors,
                 WARNING = Log$warnings,
@@ -114,15 +114,19 @@ function(Log)
     counts <- counts[counts > 0L]
     if(!length(counts))
         printLog(Log,
-                 "Status: OK\n")
+                 gettext("Status: OK\n", domain = "R-tools"))
     else {
+      m <- c()
+      for(n in names(counts)){
+        switch(n, 
+               "NOTE" = m <- c(m, (sprintf(ngettext(counts["NOTE"], "%d NOTE", "%d NOTES", domain = "R-tools"), counts["NOTE"]))),
+               "ERROR" = m <- c(m, (sprintf(ngettext(counts["ERROR"], "%d ERROR", "%d ERRORS", domain = "R-tools"), counts["ERROR"]))),
+               "WARNING" = m <- c(m, (sprintf(ngettext(counts["WARNING"], "%d WARNING", "%d WARNINGS", domain = "R-tools"), counts["WARNING"])))
+        )
+      }
+      m <- paste(m, sep = "", collapse = ", ")
         printLog(Log,
-                 sprintf("Status: %s\n",
-                         paste(sprintf("%d %s%s",
-                                       counts,
-                                       names(counts),
-                                       ifelse(counts > 1L, "s", "")),
-                               collapse = ", ")))
-        message(sprintf("See\n  %s\nfor details.\n", sQuote(Log$filename)))
+                 gettextf("Status: %s\n", m, domain = "R-tools"))
+        message(gettextf("See\n  %s\nfor details.\n", sQuote(Log$filename), domain = "R-tools"))
     }
 }

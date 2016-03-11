@@ -2,90 +2,445 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-02-27 17:14\n"
-"PO-Revision-Date: 2012-01-29 12:58+0200\n"
-"Last-Translator: Joe <joedalton2@yahoo.dk>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: da\n"
+"POT-Creation-Date: 2016-01-09 15:48\n"
+"PO-Revision-Date: 2016-01-09 19:14+0100\n"
+"Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
+"Language-Team: \n"
+"Language: da_DK\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"X-Generator: Poedit 1.8.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
+#. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must all be same length",     "x", "y", "id")
+#. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must all be same length",     "x", "y", "id")
+#. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must all be same length",     "x", "y", "id")
+#. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must all be same length",     "x", "y", "id")
+#. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must all be same length",     "x", "y", "id")
+#: R/primitives.R:0
 #, fuzzy
-msgid "invalid 'at' location in 'axis'"
-msgstr "Ugyldig »at«-placering i »axis«"
-
-#, fuzzy
-msgid "invalid to specify axis labels when 'at' is NULL"
-msgstr "Ugyldigt at angive akseetiketter når »at« er NULL"
-
-msgid "'labels' and 'at' locations must have same length"
-msgstr "»labels«- og »at«-placeringer skal have samme længde"
-
-#, fuzzy
-msgid "logical 'label' supplied of length 0"
-msgstr "logisk »label« angivet ved længde 0"
-
-#, fuzzy
-msgid "end points must not be identical"
-msgstr "Slutpunkter må ikke være identiske"
-
-#, fuzzy
-msgid "'x1', 'y1', 'x2', and 'y2' must be units"
+msgid ""
+"'%s' and '%s' and '%s' components of argument 'x' must all be same length"
 msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
 
-msgid "'shape' must be between -1 and 1"
-msgstr "»shape« skal være mellem -1 og 1"
+#. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must specify same overall length",     "x", "y", "id.lengths")
+#. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must specify same overall length",     "x", "y", "id.lengths")
+#. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must specify same overall length",     "x", "y", "id.lengths")
+#. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must specify same overall length",     "x", "y", "id.lengths")
+#. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must specify same overall length",     "x", "y", "id.lengths")
+#: R/primitives.R:0
+#, fuzzy
+msgid ""
+"'%s' and '%s' and '%s' components of argument 'x' must specify same overall "
+"length"
+msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
 
-msgid "'squareShape' must be between -1 and 1"
-msgstr "»squareShape« skal være mellem -1 og 1"
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must all be units of length 1",     "x", "y")
+#: R/primitives.R:0
+#, fuzzy
+msgid "'%s' and '%s' components of argument 'x' must all be units of length 1"
+msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
 
-msgid "'arrow' must be an arrow object or NULL"
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be objects of class %s",     "x", "y", dQuote("unit"))
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be objects of class %s",     "x", "y", dQuote("unit"))
+#: R/primitives.R:0
+#, fuzzy
+msgid "'%s' and '%s' components of argument 'x' must be objects of class %s"
+msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be objects of class %s and have the same length",     "x", "y", dQuote("unit"))
+#: R/primitives.R:0
+#, fuzzy
+msgid ""
+"'%s' and '%s' components of argument 'x' must be objects of class %s and "
+"have the same length"
+msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be objects of class %s or NULL",     "x", "y", dQuote("unit"))
+#: R/primitives.R:0
+#, fuzzy
+msgid ""
+"'%s' and '%s' components of argument 'x' must be objects of class %s or NULL"
+msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be of length 1", "x", "y")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be of length 1", "x", "y")
+#: R/primitives.R:0
+#, fuzzy
+msgid "'%s' and '%s' components of argument 'x' must be of length 1"
+msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be same length", "x", "y")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be same length", "x", "y")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be same length", "x", "y")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be same length", "x", "y")
+#: R/primitives.R:0
+#, fuzzy
+msgid "'%s' and '%s' components of argument 'x' must be same length"
+msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y")
+#: R/primitives.R:0
+#, fuzzy
+msgid "'%s' and '%s' components of argument 'x' must be units"
+msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+
+#. R/components.R: gettextf("'%s' and '%s' components of argument 'x' must have same length", "labels",     "at")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must have same length", "x", "y")
+#: R/components.R:0 R/primitives.R:0
+#, fuzzy
+msgid "'%s' and '%s' components of argument 'x' must have same length"
+msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+
+#. R/edit.R: gettextf("'%s' argument is not an object of class %s", "edit", dQuote("gEdit"))
+#. R/edit.R: gettextf("'%s' argument is not an object of class %s", "edits", dQuote("gEditList"))
+#. R/frames.R: gettextf("'%s' argument is not an object of class %s", "frame", dQuote("frame"))
+#. R/frames.R: gettextf("'%s' argument is not an object of class %s", "grob", dQuote("grob"))
+#. R/frames.R: gettextf("'%s' argument is not an object of class %s", "frame", dQuote("frame"))
+#. R/frames.R: gettextf("'%s' argument is not an object of class %s", "grob", dQuote("grob"))
+#. R/gpar.R: gettextf("'%s' argument is not an object of class %s", "gp", dQuote("gpar"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "grob", dQuote("grob"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("gTree"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "children", dQuote("gList"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gTree", dQuote("gTree"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gPath", dQuote("gPath"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gTree", dQuote("gTree"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gPath", dQuote("gPath"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gPath", dQuote("gPath"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gTree", dQuote("gTree"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "newGrob", dQuote("grob"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gPath", dQuote("gPath"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gPath", dQuote("gPath"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "child", dQuote("grob"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gTree", dQuote("gTree"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gPath", dQuote("gPath"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gTree", dQuote("gTree"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gPath", dQuote("gPath"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gPath", dQuote("gPath"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "grob", dQuote("gTree"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gTree", dQuote("gTree"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gTree", dQuote("gTree"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("gTree"))
+#. R/ls.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("flatGridListing"))
+#. R/ls.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("flatGridListing"))
+#. R/primitives.R: gettextf("'%s' argument is not an object of class %s", "length", dQuote("unit"))
+#. R/unit.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("unit"))
+#: R/edit.R:0 R/frames.R:0 R/gpar.R:0 R/grob.R:0 R/ls.R:0 R/primitives.R:0
+#: R/unit.R:0
+#, fuzzy
+msgid "'%s' argument is not an object of class %s"
 msgstr "»arrow« skal være et arrow-objekt eller NULL"
 
+#. R/primitives.R: gettextf("'%s' component of argument 'x' must be an object of class %s", "length",     dQuote("unit"))
+#. R/roundRect.R: gettextf("'%s' component of argument 'x' must be an object of class %s", "r", dQuote("unit"))
+#: R/primitives.R:0 R/roundRect.R:0
 #, fuzzy
-msgid "how did we get here?"
-msgstr "Hvordan nåede vi hertil?"
+msgid "'%s' component of argument 'x' must be an object of class %s"
+msgstr "»arrow« skal være et arrow-objekt eller NULL"
 
+#. R/curve.R: gettextf("'%s' component of argument 'x' must be an object of class %s or NULL",     "arror", dQuote("arrow"))
+#: R/curve.R:0
 #, fuzzy
-msgid "must start new page if showing leaves separately"
-msgstr "Skal starte ny side hvis blade vises adskilt"
+msgid "'%s' component of argument 'x' must be an object of class %s or NULL"
+msgstr "»arrow« skal være et arrow-objekt eller NULL"
 
+#. R/curve.R: gettextf("'%s' component of argument 'x' must be between -1 and 1", "shape")
+#. R/curve.R: gettextf("'%s' component of argument 'x' must be between -1 and 1", "squareShape")
+#. R/primitives.R: gettextf("'%s' component of argument 'x' must be between -1 and 1", "shape")
+#: R/curve.R:0 R/primitives.R:0
 #, fuzzy
-msgid "invalid 'edit' information"
-msgstr "Ugyldig »edit-information«"
+msgid "'%s' component of argument 'x' must be between -1 and 1"
+msgstr "»shape« skal være mellem -1 og 1"
 
-msgid "'gEditList' can only contain 'gEdit' objects"
-msgstr "»gEditList« kan kun indeholder »gEdit-objekter«"
-
+#. R/grid.R: gettextf("'%s' component of argument 'x' must return an object of class %s or class %s",     "expr", dQuote("grob"), dQuote("gList"))
+#: R/grid.R:0
 #, fuzzy
-msgid "invalid 'frame'"
-msgstr "Ugyldig »frame«"
+msgid ""
+"'%s' component of argument 'x' must return an object of class %s or class %s"
+msgstr "»arrow« skal være et arrow-objekt eller NULL"
 
+#. R/primitives.R: gettextf("'%s', '%s' and '%s' components must be units", "x", "y", "r")
+#. R/primitives.R: gettextf("'%s', '%s' and '%s' components must be units", "x", "y", "size")
+#: R/primitives.R:0
 #, fuzzy
-msgid "invalid 'grob'"
-msgstr "Ugyldig »grob«"
+msgid "'%s', '%s' and '%s' components must be units"
+msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
 
+#. R/viewport.R: gettextf("'%s', '%s', '%s' and '%s' arguments must all be units of length 1", "x",     "y", "width", "height")
+#: R/viewport.R:0
 #, fuzzy
-msgid "invalid 'row' and/or 'col' (no such cell in frame layout)"
-msgstr "Ugyldig »row« og /eller »col« (ingen sådan celle i billedlayout)"
+msgid "'%s', '%s', '%s' and '%s' arguments must all be units of length 1"
+msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
 
+#. R/primitives.R: gettextf("'%s', '%s', '%s', and '%s' components of argument 'x' must all be units of length 1",     "x", "y", "width", "height")
+#: R/primitives.R:0
+#, fuzzy
+msgid ""
+"'%s', '%s', '%s', and '%s' components of argument 'x' must all be units of "
+"length 1"
+msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+
+#. R/curve.R: gettextf("'%s', '%s', '%s', and '%s' components of argument 'x' must be objects of class %s",     "x1", "y1", "x2", "y2", dQuote("unit"))
+#. R/roundRect.R: gettextf("'%s', '%s', '%s', and '%s' components of argument 'x' must be objects of class %s",     "x", "y", "width", "height", dQuote("unit"))
+#: R/curve.R:0 R/roundRect.R:0
+#, fuzzy
+msgid ""
+"'%s', '%s', '%s', and '%s' components of argument 'x' must be objects of "
+"class %s"
+msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+
+#. R/primitives.R: gettextf("'%s', '%s', '%s', and '%s' components of argument 'x' must be units", "x",     "y", "width", "height")
+#. R/primitives.R: gettextf("'%s', '%s', '%s', and '%s' components of argument 'x' must be units", "x",     "y", "width", "height")
+#. R/primitives.R: gettextf("'%s', '%s', '%s', and '%s' components of argument 'x' must be units", "x",     "y", "width", "height")
+#: R/primitives.R:0
+#, fuzzy
+msgid "'%s', '%s', '%s', and '%s' components of argument 'x' must be units"
+msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+
+#. R/roundRect.R: gettextf("'%s', '%s', '%s', and '%s' components of argument 'x' must have length 1",     "x", "y", "width", "height")
+#: R/roundRect.R:0
+#, fuzzy
+msgid ""
+"'%s', '%s', '%s', and '%s' components of argument 'x' must have length 1"
+msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+
+#. R/unit.R: gettextf("'Summary' function '%s' not meaningful for units", .Generic)
+#: R/unit.R:0
+msgid "'Summary' function '%s' not meaningful for units"
+msgstr ""
+
+#. R/grob.R: stop("'allDevices' argument is not yet implemented")
+#. R/grob.R: stop("'allDevices' argument is not yet implemented")
+#. R/grob.R: stop("'allDevices' argument is not yet implemented")
+#. R/grob.R: stop("'allDevices' argument is not yet implemented")
+#: R/grob.R:0
+msgid "'allDevices' argument is not yet implemented"
+msgstr ""
+
+#. R/frames.R: stop("'col' can only be a range of existing columns")
+#: R/frames.R:0
 msgid "'col' can only be a range of existing columns"
 msgstr "»col« kan kun være et interval af eksisterende kolonner"
 
+#. R/edit.R: stop("'gEditList()' can only contain objects of class \"gEdit\"")
+#: R/edit.R:0
 #, fuzzy
-msgid "invalid 'col' specification"
-msgstr "Ugyldig »col-specifikation«"
+msgid "'gEditList()' can only contain objects of class \"gEdit\""
+msgstr "»gEditList« kan kun indeholder »gEdit-objekter«"
 
+#. R/grob.R: gettextf("'gPath' (%s) was not found", as.character(gPath))
+#. R/grob.R: gettextf("'gPath' (%s) was not found", as.character(gPath))
+#. R/grob.R: gettextf("'gPath' (%s) was not found", as.character(gPath))
+#. R/grob.R: gettextf("'gPath' (%s) was not found", as.character(gPath))
+#. R/grob.R: gettextf("'gPath' (%s) was not found", gPath)
+#. R/grob.R: gettextf("'gPath' (%s) was not found", paste(gPath, name, sep = .grid.pathSep))
+#. R/grob.R: gettextf("'gPath' (%s) was not found", name)
+#: R/grob.R:0
+msgid "'gPath' (%s) was not found"
+msgstr ""
+
+#. R/grob.R: stop("'gPath' does not specify a valid child")
+#. R/grob.R: stop("'gPath' does not specify a valid child")
+#. R/grob.R: stop("'gPath' does not specify a valid child")
+#: R/grob.R:0
+msgid "'gPath' does not specify a valid child"
+msgstr ""
+
+#. R/unit.R: stop("'gPath' must have depth 1 in 'grobwidth/height' units")
+#: R/unit.R:0
+msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
+msgstr ""
+
+#. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
+#. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
+#. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
+#: R/gpar.R:0
+msgid "'gamma' 'gpar' element is defunct"
+msgstr ""
+
+#. R/gpar.R: gettextf("'gpar' element '%s' must not be length 0", gparname)
+#: R/gpar.R:0
+#, fuzzy
+msgid "'gpar' element '%s' must not be length 0"
+msgstr "»arrow« skal være et arrow-objekt eller NULL"
+
+#. R/grob.R: gettextf("'grob' (%s) was not found", name)
+#. R/grob.R: gettextf("'grob' (%s) was not found", name)
+#: R/grob.R:0
+msgid "'grob' (%s) was not found"
+msgstr ""
+
+#. R/highlevel.R: stop("'hgap' argument must be single unit")
+#: R/highlevel.R:0
+#, fuzzy
+msgid "'hgap' argument must be single unit"
+msgstr "»arrow« skal være et arrow-objekt eller NULL"
+
+#. R/highlevel.R: stop("'hgap' must be single unit")
+#: R/highlevel.R:0
+msgid "'hgap' must be single unit"
+msgstr ""
+
+#. R/highlevel.R: stop("'l' argument must be a layout")
+#: R/highlevel.R:0
+#, fuzzy
+msgid "'l' argument must be a layout"
+msgstr "»arrow« skal være et arrow-objekt eller NULL"
+
+#. R/components.R: stop("'label' argument must be of length > 0")
+#. R/components.R: stop("'label' argument must be of length > 0")
+#: R/components.R:0
+#, fuzzy
+msgid "'label' argument must be of length > 0"
+msgstr "»arrow« skal være et arrow-objekt eller NULL"
+
+#. R/highlevel.R: stop("'ncol' argument must be >= 1")
+#: R/highlevel.R:0
+#, fuzzy
+msgid "'ncol' argument must be >= 1"
+msgstr "»arrow« skal være et arrow-objekt eller NULL"
+
+#. R/highlevel.R: stop("'nrow' argument must be >= 1")
+#: R/highlevel.R:0
+#, fuzzy
+msgid "'nrow' argument must be >= 1"
+msgstr "»arrow« skal være et arrow-objekt eller NULL"
+
+#. R/viewport.R: stop("'parent' argument must be a viewport and 'children' argument must be a 'vpList' in 'vpTree'")
+#: R/viewport.R:0
+msgid ""
+"'parent' argument must be a viewport and 'children' argument must be a "
+"'vpList' in 'vpTree'"
+msgstr ""
+
+#. R/highlevel.R: stop("'pch' and 'labels' arguments are not of the same length")
+#: R/highlevel.R:0
+#, fuzzy
+msgid "'pch' and 'labels' arguments are not of the same length"
+msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+
+#. R/grid.R: stop("'pushViewport()' must specify at least one viewport")
+#: R/grid.R:0
+msgid "'pushViewport()' must specify at least one viewport"
+msgstr ""
+
+#. R/util.R: stop("'range' must be numeric")
+#: R/util.R:0
+msgid "'range' must be numeric"
+msgstr ""
+
+#. R/layout.R: stop("'respect' must be logical or an 'nrow' by 'ncol' matrix")
+#: R/layout.R:0
+msgid "'respect' must be logical or an 'nrow' by 'ncol' matrix"
+msgstr ""
+
+#. R/frames.R: stop("'row' can only be a range of existing rows")
+#: R/frames.R:0
 msgid "'row' can only be a range of existing rows"
 msgstr "»row« kan kun være et interval af eksisterende rækker"
 
-#, fuzzy
-msgid "invalid 'row' specification"
-msgstr "Ugyldig »row-specifikation«"
+#. R/unit.R: warning("'unit.length()' has been deprecated in favour of a unit method for the generic 'length()' function",     domain = "R-grid")
+#: R/unit.R:0
+msgid ""
+"'unit.length()' has been deprecated in favour of a unit method for the "
+"generic 'length()' function"
+msgstr ""
 
+#. R/unit.R: warning("'unit.rep()' has been deprecated in favour of a unit method for the generic 'rep()' function",     domain = "R-grid")
+#: R/unit.R:0
+msgid ""
+"'unit.rep()' has been deprecated in favour of a unit method for the generic "
+"'rep()' function"
+msgstr ""
+
+#. R/highlevel.R: stop("'vgap' argument must be single unit")
+#: R/highlevel.R:0
+#, fuzzy
+msgid "'vgap' argument must be single unit"
+msgstr "»arrow« skal være et arrow-objekt eller NULL"
+
+#. R/highlevel.R: stop("'vgap' must be single unit")
+#: R/highlevel.R:0
+msgid "'vgap' must be single unit"
+msgstr ""
+
+#. R/unit.R: stop("'x' and 'units' arguments must be of length > 0")
+#: R/unit.R:0
+#, fuzzy
+msgid "'x' and 'units' arguments must be of length > 0"
+msgstr "»arrow« skal være et arrow-objekt eller NULL"
+
+#. R/primitives.R: stop("'x0', 'y0', 'x1', and 'y1' must be units")
+#: R/primitives.R:0
+msgid "'x0', 'y0', 'x1', and 'y1' must be units"
+msgstr ""
+
+#. R/unit.R: gettextf("Class 'unit.arithmetic' [1:%d] ", length(object), domain = "R-grid")
+#: R/unit.R:0
+msgid "Class 'unit.arithmetic' [1:%d]"
+msgstr ""
+
+#. R/grob.R: stop("Invalid force target")
+#: R/grob.R:0
+#, fuzzy
+msgid "Invalid force target"
+msgstr "Ugyldig »frame«"
+
+#. R/grob.R: stop("Invalid revert target")
+#: R/grob.R:0
+#, fuzzy
+msgid "Invalid revert target"
+msgstr "Ugyldig »frame«"
+
+#. R/grob.R: gettextf("New 'grob' name (%s) does not match 'gPath' (%s)", newGrob$name, gPath)
+#: R/grob.R:0
+msgid "New 'grob' name (%s) does not match 'gPath' (%s)"
+msgstr ""
+
+#. R/unit.R: stop("Zero arguments where at least one expected")
+#: R/unit.R:0
+msgid "Zero arguments where at least one expected"
+msgstr ""
+
+#. R/grob.R: stop("a 'grob' path must contain at least one 'grob' name")
+#: R/grob.R:0
+msgid "a 'grob' path must contain at least one 'grob' name"
+msgstr ""
+
+#. R/viewport.R: stop("a viewport path must contain at least one viewport name")
+#: R/viewport.R:0
+msgid "a viewport path must contain at least one viewport name"
+msgstr ""
+
+#. R/viewport.R: gettextf("at least one of '%s' or '%s' arguments must be specified", "x", "xscale")
+#. R/viewport.R: gettextf("at least one of '%s' or '%s' arguments must be specified", "y", "yscale")
+#: R/viewport.R:0
+msgid "at least one of '%s' or '%s' arguments must be specified"
+msgstr ""
+
+#. R/unit.R: stop("both operands must be units")
+#: R/unit.R:0
+msgid "both operands must be units"
+msgstr ""
+
+#. R/unit.R: stop("cannot mix signs of indices")
+#. R/unit.R: stop("cannot mix signs of indices")
+#. R/unit.R: stop("cannot mix signs of indices")
+#: R/unit.R:0
+msgid "cannot mix signs of indices"
+msgstr ""
+
+#. R/frames.R: stop("cannot specify more than one of 'side=[\"left\", \"right\"]', 'col', 'col.before', or 'col.after'")
+#: R/frames.R:0
 #, fuzzy
 msgid ""
 "cannot specify more than one of 'side=[\"left\", \"right\"]', 'col', 'col."
@@ -94,6 +449,272 @@ msgstr ""
 "Kan ikke angive mere end en af »side=[\"left\", \"right\"]«, »col«, »col."
 "before« eller »col.after«"
 
+#. R/primitives.R: stop("corrupt 'arrows' object")
+#. R/primitives.R: stop("corrupt 'arrows' object")
+#. R/primitives.R: stop("corrupt 'arrows' object")
+#: R/primitives.R:0
+msgid "corrupt 'arrows' object"
+msgstr ""
+
+#. R/grid.R: stop("down viewport failed to record on display list")
+#: R/grid.R:0
+msgid "down viewport failed to record on display list"
+msgstr ""
+
+#. R/grid.R: warning("down viewport incorrectly recorded on display list")
+#: R/grid.R:0
+msgid "down viewport incorrectly recorded on display list"
+msgstr ""
+
+#. R/curve.R: stop("end points must not be identical")
+#: R/curve.R:0
+#, fuzzy
+msgid "end points must not be identical"
+msgstr "Slutpunkter må ikke være identiske"
+
+#. R/grab.R: warning("grob pushed viewports and did not pop/up them (grab MAY not be faithful)")
+#: R/grab.R:0
+msgid ""
+"grob pushed viewports and did not pop/up them (grab MAY not be faithful)"
+msgstr ""
+
+#. R/debug.R: stop("how did we get here?")
+#: R/debug.R:0
+#, fuzzy
+msgid "how did we get here?"
+msgstr "Hvordan nåede vi hertil?"
+
+#. R/unit.R: stop("index out of bounds ('unit' subsetting)")
+#: R/unit.R:0
+msgid "index out of bounds ('unit' subsetting)"
+msgstr ""
+
+#. R/unit.R: stop("index out of bounds (unit arithmetic subsetting)")
+#: R/unit.R:0
+msgid "index out of bounds (unit arithmetic subsetting)"
+msgstr ""
+
+#. R/unit.R: stop("index out of bounds (unit list subsetting)")
+#: R/unit.R:0
+msgid "index out of bounds (unit list subsetting)"
+msgstr ""
+
+#. R/grob.R: gettextf("invalid %s class", dQuote("grob"))
+#. R/grob.R: gettextf("invalid %s class", dQuote("gTree"))
+#: R/grob.R:0
+#, fuzzy
+msgid "invalid %s class"
+msgstr "Ugyldig »grob«"
+
+#. R/grob.R: gettextf("invalid '%s' argument", "vp")
+#. R/grob.R: gettextf("invalid '%s' argument", "result")
+#. R/ls.R: gettextf("invalid '%s' argument", "print")
+#. R/unit.R: gettextf("invalid '%s' argument", "x")
+#: R/grob.R:0 R/ls.R:0 R/unit.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "Ugyldig »grob«"
+
+#. R/viewport.R: gettextf("invalid '%s' argument in viewport", "xscale")
+#. R/viewport.R: gettextf("invalid '%s' argument in viewport", "yscale")
+#. R/viewport.R: gettextf("invalid '%s' argument in viewport", "angle")
+#. R/viewport.R: gettextf("invalid '%s' argument in viewport", "layout")
+#. R/viewport.R: gettextf("invalid '%s' argument in viewport", "layout.pos.row")
+#. R/viewport.R: gettextf("invalid '%s' argument in viewport", "layout.pos.col")
+#: R/viewport.R:0
+#, fuzzy
+msgid "invalid '%s' argument in viewport"
+msgstr "Ugyldig »edit-information«"
+
+#. R/components.R: gettextf("invalid '%s' component of argument 'x'", "at")
+#. R/function.R: gettextf("invalid '%s' component of argument 'x'", "n")
+#. R/function.R: gettextf("invalid '%s' component of argument 'x'", "f")
+#. R/primitives.R: gettextf("invalid '%s' component of argument 'x'", "arrow")
+#. R/primitives.R: gettextf("invalid '%s' component of argument 'x'", "arrow")
+#. R/primitives.R: gettextf("invalid '%s' component of argument 'x'", "arrow")
+#. R/primitives.R: gettextf("invalid '%s' component of argument 'x'", "arrow")
+#. R/primitives.R: gettextf("invalid '%s' component of argument 'x'", "arrow")
+#. R/primitives.R: gettextf("invalid '%s' component of argument 'x'", "arrow")
+#. R/primitives.R: gettextf("invalid '%s' component of argument 'x'", "rot")
+#: R/components.R:0 R/function.R:0 R/primitives.R:0
+#, fuzzy
+msgid "invalid '%s' component of argument 'x'"
+msgstr "Ugyldig »at«-placering i »axis«"
+
+#. R/gpar.R: gettextf("invalid '%s' value", "linemitre")
+#. R/gpar.R: gettextf("invalid '%s' value", "alpha")
+#. R/grob.R: gettextf("invalid '%s' value", "grep")
+#. R/grob.R: gettextf("invalid '%s' value", "grep")
+#. R/grob.R: gettextf("invalid '%s' value", "grep")
+#. R/grob.R: gettextf("invalid '%s' value", "grep")
+#. R/grob.R: gettextf("invalid '%s' value", "grep")
+#. R/grob.R: gettextf("invalid '%s' value", "grep")
+#. R/grob.R: gettextf("invalid '%s' value", "grep")
+#. R/grob.R: gettextf("invalid '%s' value", "grep")
+#. R/grob.R: gettextf("invalid '%s' value", "grep")
+#. R/grob.R: gettextf("invalid '%s' value", "grep")
+#. R/grob.R: gettextf("invalid '%s' value", "order")
+#. R/origin.R: gettextf("invalid '%s' value", "origin")
+#. R/unit.R: gettextf("invalid '%s' value", "theta")
+#. R/viewport.R: gettextf("invalid '%s' value", "gp")
+#. R/viewport.R: gettextf("invalid '%s' value", "clip")
+#: R/gpar.R:0 R/grob.R:0 R/origin.R:0 R/unit.R:0 R/viewport.R:0
+#, fuzzy
+msgid "invalid '%s' value"
+msgstr "Ugyldig »grob«"
+
+#. R/unit.R: stop("invalid 'axis' or 'type'")
+#: R/unit.R:0
+#, fuzzy
+msgid "invalid 'axis' or 'type'"
+msgstr "Ugyldig »grob«"
+
+#. R/frames.R: stop("invalid 'col' specification")
+#: R/frames.R:0
+#, fuzzy
+msgid "invalid 'col' specification"
+msgstr "Ugyldig »col-specifikation«"
+
+#. R/primitives.R: stop("invalid 'ends' or 'type' argument")
+#. R/primitives.R: stop("invalid 'ends' or 'type' argument")
+#: R/primitives.R:0
+#, fuzzy
+msgid "invalid 'ends' or 'type' argument"
+msgstr "Ugyldig »grob«"
+
+#. R/grob.R: stop("invalid 'gp' slot")
+#: R/grob.R:0
+#, fuzzy
+msgid "invalid 'gp' slot"
+msgstr "Ugyldig »grob«"
+
+#. R/frames.R: stop("invalid 'row' and/or 'col' arguments (no such cell in frame layout)")
+#: R/frames.R:0
+#, fuzzy
+msgid "invalid 'row' and/or 'col' arguments (no such cell in frame layout)"
+msgstr "Ugyldig »row« og /eller »col« (ingen sådan celle i billedlayout)"
+
+#. R/frames.R: stop("invalid 'row' specification")
+#: R/frames.R:0
+#, fuzzy
+msgid "invalid 'row' specification"
+msgstr "Ugyldig »row-specifikation«"
+
+#. R/grab.R: stop("invalid display list element")
+#: R/grab.R:0
+msgid "invalid display list element"
+msgstr ""
+
+#. R/grob.R: stop("invalid element to add to an object of class \"gList\"")
+#: R/grob.R:0
+#, fuzzy
+msgid "invalid element to add to an object of class \"gList\""
+msgstr "»arrow« skal være et arrow-objekt eller NULL"
+
+#. R/gpar.R: stop("invalid fontface ", ch)
+#: R/gpar.R:0
+#, fuzzy
+msgid "invalid fontface"
+msgstr "Ugyldig »grob«"
+
+#. R/just.R: stop("invalid horizontal justification")
+#: R/just.R:0
+#, fuzzy
+msgid "invalid horizontal justification"
+msgstr "Ugyldig »col-specifikation«"
+
+#. R/just.R: stop("invalid justification")
+#. R/just.R: stop("invalid justification")
+#: R/just.R:0
+#, fuzzy
+msgid "invalid justification"
+msgstr "Ugyldig »col-specifikation«"
+
+#. R/grid.R: stop("invalid modification of the display list")
+#: R/grid.R:0
+msgid "invalid modification of the display list"
+msgstr ""
+
+#. R/grid.R: stop("invalid number of generations")
+#. R/grid.R: stop("invalid number of generations")
+#: R/grid.R:0
+#, fuzzy
+msgid "invalid number of generations"
+msgstr "Ugyldig »edit-information«"
+
+#. R/ls.R: stop("invalid object in 'listing'")
+#: R/ls.R:0
+#, fuzzy
+msgid "invalid object in 'listing'"
+msgstr "Ugyldig »edit-information«"
+
+#. R/grid.R: stop("invalid object inserted on the display list")
+#: R/grid.R:0
+msgid "invalid object inserted on the display list"
+msgstr ""
+
+#. R/components.R: gettextf("invalid to specify axis labels when 'at' component of argument 'x' is NULL",     "at")
+#: R/components.R:0
+#, fuzzy
+msgid ""
+"invalid to specify axis labels when 'at' component of argument 'x' is NULL"
+msgstr "Ugyldigt at angive akseetiketter når »at« er NULL"
+
+#. R/just.R: stop("invalid vertical justification")
+#: R/just.R:0
+#, fuzzy
+msgid "invalid vertical justification"
+msgstr "Ugyldig »col-specifikation«"
+
+#. R/unit.R: stop("it is invalid to combine 'unit' objects with other types")
+#: R/unit.R:0
+msgid "it is invalid to combine 'unit' objects with other types"
+msgstr ""
+
+#. R/grob.R: stop("it is invalid to directly edit the 'children' or 'childrenOrder' slot")
+#: R/grob.R:0
+msgid "it is invalid to directly edit the 'children' or 'childrenOrder' slot"
+msgstr ""
+
+#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths' components of argument 'x'")
+#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths' components of argument 'x'")
+#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths' components of argument 'x'")
+#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths' components of argument 'x'")
+#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths' components of argument 'x'")
+#: R/primitives.R:0
+#, fuzzy
+msgid ""
+"it is invalid to specify both 'id' and 'id.lengths' components of argument "
+"'x'"
+msgstr "Ugyldig »at«-placering i »axis«"
+
+#. R/grob.R: stop("it is only valid to add a child to a \"gTree\"")
+#: R/grob.R:0
+msgid "it is only valid to add a child to a \"gTree\""
+msgstr ""
+
+#. R/primitives.R: stop("must have exactly 4 control points")
+#: R/primitives.R:0
+msgid "must have exactly 4 control points"
+msgstr ""
+
+#. R/primitives.R: stop("must have exactly 4 control points per Bezier curve")
+#: R/primitives.R:0
+msgid "must have exactly 4 control points per Bezier curve"
+msgstr ""
+
+#. R/grid.R: stop("must navigate up at least one viewport")
+#: R/grid.R:0
+msgid "must navigate up at least one viewport"
+msgstr ""
+
+#. R/grid.R: stop("must pop at least one viewport")
+#: R/grid.R:0
+msgid "must pop at least one viewport"
+msgstr ""
+
+#. R/frames.R: stop("must specify exactly one of 'side=[\"top\", \"bottom\"]', 'row', 'row.before', or 'row.after'")
+#: R/frames.R:0
 #, fuzzy
 msgid ""
 "must specify exactly one of 'side=[\"top\", \"bottom\"]', 'row', 'row."
@@ -102,474 +723,298 @@ msgstr ""
 "Kan ikke angive mere end en af »side=[\"left\", \"right\"]«, »col«, »col."
 "before« eller »col.after«"
 
-#, fuzzy
-msgid "invalid 'n'"
-msgstr "Ugyldig »grob«"
-
-#, fuzzy
-msgid "invalid 'f'"
-msgstr "Ugyldig »frame«"
-
-msgid "'gpar' element '%s' must not be length 0"
-msgstr ""
-
-msgid "'gamma' 'gpar' element is defunct"
-msgstr ""
-
-msgid "invalid 'linemitre' value"
-msgstr ""
-
-msgid "invalid 'alpha' value"
-msgstr ""
-
+#. R/gpar.R: stop("must specify only one of 'font' and 'fontface'")
+#: R/gpar.R:0
 msgid "must specify only one of 'font' and 'fontface'"
 msgstr ""
 
-#, fuzzy
-msgid "invalid fontface"
-msgstr "Ugyldig »grob«"
-
-#, fuzzy
-msgid "argument must be a 'gpar' object"
-msgstr "»arrow« skal være et arrow-objekt eller NULL"
-
+#. R/gpar.R: stop("must specify only valid 'gpar' names")
+#: R/gpar.R:0
 msgid "must specify only valid 'gpar' names"
 msgstr ""
 
-msgid "invalid display list element"
+#. R/debug.R: stop("must start new page if showing leaves separately")
+#: R/debug.R:0
+#, fuzzy
+msgid "must start new page if showing leaves separately"
+msgstr "Skal starte ny side hvis blade vises adskilt"
+
+#. R/unit.R: stop("no 'grob' supplied for 'grobwidth/height' unit")
+#: R/unit.R:0
+msgid "no 'grob' supplied for 'grobwidth/height' unit"
 msgstr ""
 
+#. R/unit.R: stop("no arguments where at least one expected")
+#: R/unit.R:0
+msgid "no arguments where at least one expected"
+msgstr ""
+
+#. R/unit.R: stop("no string supplied for 'strwidth/height' unit")
+#: R/unit.R:0
+msgid "no string supplied for 'strwidth/height' unit"
+msgstr ""
+
+#. R/unit.R: stop("non-NULL value supplied for plain unit")
+#: R/unit.R:0
+msgid "non-NULL value supplied for plain unit"
+msgstr ""
+
+#. R/unit.R: stop("non-unit operand must be numeric")
+#. R/unit.R: stop("non-unit operand must be numeric")
+#: R/unit.R:0
+msgid "non-unit operand must be numeric"
+msgstr ""
+
+#. R/highlevel.R: stop("nrow * ncol < #{legend labels}")
+#: R/highlevel.R:0
+msgid "nrow * ncol < #{legend labels}"
+msgstr ""
+
+#. R/grab.R: warning("one of more grobs overwritten (grab WILL not be faithful; try 'wrap = TRUE')")
+#: R/grab.R:0
 msgid ""
 "one of more grobs overwritten (grab WILL not be faithful; try 'wrap = TRUE')"
 msgstr ""
 
-msgid "viewport overwritten (grab MAY not be faithful)"
+#. R/grob.R: stop("only 'grobs' allowed in \"gList\"")
+#: R/grob.R:0
+msgid "only 'grobs' allowed in \"gList\""
 msgstr ""
 
-msgid ""
-"grob pushed viewports and did not pop/up them (grab MAY not be faithful)"
+#. R/unit.R: stop("only one operand may be a unit")
+#: R/unit.R:0
+msgid "only one operand may be a unit"
 msgstr ""
 
+#. R/grid.R: stop("only valid to push viewports")
+#: R/grid.R:0
 #, fuzzy
 msgid "only valid to push viewports"
 msgstr "Ugyldig »edit-information«"
 
-msgid "must specify at least one viewport"
-msgstr ""
-
-msgid "Down viewport failed to record on display list"
-msgstr ""
-
-msgid "Down viewport incorrectly recorded on display list"
-msgstr ""
-
-msgid "must pop at least one viewport"
-msgstr ""
-
-msgid "must navigate up at least one viewport"
-msgstr ""
-
-msgid "Invalid number of generations"
-msgstr ""
-
-msgid "invalid object inserted on the display list"
-msgstr ""
-
-msgid "invalid modification of the display list"
-msgstr ""
-
-msgid "'expr' must return a grob or gList"
-msgstr ""
-
-#, fuzzy
-msgid "invalid 'grob' argument"
-msgstr "Ugyldig »grob«"
-
-msgid "invalid 'vp' slot"
-msgstr ""
-
-#, fuzzy
-msgid "invalid 'gp' slot"
-msgstr "Ugyldig »grob«"
-
-#, fuzzy
-msgid "invalid 'grob' class"
-msgstr "Ugyldig »grob«"
-
-msgid "a 'grob' path must contain at least one 'grob' name"
-msgstr ""
-
-msgid "unable to coerce to \"gList\""
-msgstr ""
-
-msgid "only 'grobs' allowed in \"gList\""
-msgstr ""
-
-msgid "invalid element to add to \"gList\""
-msgstr ""
-
-msgid "can only set 'children' for a \"gTree\""
-msgstr ""
-
-msgid "'children' must be a \"gList\""
-msgstr ""
-
-msgid "it is only valid to get 'children' from a \"gTree\""
-msgstr ""
-
-#, fuzzy
-msgid "invalid \"gTree\" class"
-msgstr "Ugyldig »grob«"
-
-msgid "'allDevices' not yet implemented"
-msgstr ""
-
-#, fuzzy
-msgid "invalid 'gPath'"
-msgstr "Ugyldig »grob«"
-
-#, fuzzy
-msgid "invalid 'grep' value"
-msgstr "Ugyldig »grob«"
-
-msgid "it is only valid to get a child from a \"gTree\""
-msgstr ""
-
-msgid "'gPath' does not specify a valid child"
-msgstr ""
-
-msgid "it is only valid to set a child of a \"gTree\""
-msgstr ""
-
-msgid "it is only valid to set a 'grob' as child of a \"gTree\""
-msgstr ""
-
-msgid "New 'grob' name (%s) does not match 'gPath' (%s)"
-msgstr ""
-
-msgid "it is only valid to add a 'grob' to a \"gTree\""
-msgstr ""
-
-msgid "it is only valid to add a child to a \"gTree\""
-msgstr ""
-
-msgid "'gPath' (%s) not found"
-msgstr ""
-
-msgid "it is only valid to remove a child from a \"gTree\""
-msgstr ""
-
-msgid "it is only valid to edit a child of a \"gTree\""
-msgstr ""
-
-msgid "it is invalid to directly edit the 'children' or 'childrenOrder' slot"
-msgstr ""
-
-#, fuzzy
-msgid "invalid 'result'"
-msgstr "Ugyldig »frame«"
-
-msgid "the new 'grob' must have the same name as the old 'grob'"
-msgstr ""
-
-msgid "slot '%s' not found"
-msgstr ""
-
-msgid "gPath (%s) not found"
-msgstr ""
-
-msgid "grob '%s' not found"
-msgstr ""
-
-msgid "invalid element in the display list"
-msgstr ""
-
-#, fuzzy
-msgid "Invalid force target"
-msgstr "Ugyldig »frame«"
-
-#, fuzzy
-msgid "Invalid revert target"
-msgstr "Ugyldig »grob«"
-
-msgid "can only reorder 'children' for a \"gTree\""
-msgstr ""
-
-#, fuzzy
-msgid "Invalid 'order'"
-msgstr "Ugyldig »frame«"
-
-msgid "'l' must be a layout"
-msgstr ""
-
-msgid "'pch' and 'labels' not the same length"
-msgstr ""
-
-msgid "'hgap' must be single unit"
-msgstr ""
-
-msgid "'vgap' must be single unit"
-msgstr ""
-
-msgid "'nrow' must be >= 1"
-msgstr ""
-
-msgid "'ncol' must be >= 1"
-msgstr ""
-
-msgid "nrow * ncol < #{legend labels}"
-msgstr ""
-
-#, fuzzy
-msgid "invalid justification"
-msgstr "Ugyldig »col-specifikation«"
-
-#, fuzzy
-msgid "invalid horizontal justification"
-msgstr "Ugyldig »col-specifikation«"
-
-#, fuzzy
-msgid "invalid vertical justification"
-msgstr "Ugyldig »col-specifikation«"
-
-msgid "'respect' must be logical or an 'nrow' by 'ncol' matrix"
-msgstr ""
-
-#, fuzzy
-msgid "invalid 'print' argument"
-msgstr "Ugyldig »grob«"
-
-#, fuzzy
-msgid "invalid object in 'listing'"
-msgstr "Ugyldig »edit-information«"
-
-#, fuzzy
-msgid "invalid listing"
-msgstr "Ugyldig »grob«"
-
-#, fuzzy
-msgid "invalid 'listing'"
-msgstr "Ugyldig »grob«"
-
-msgid "Nothing on the display list"
-msgstr ""
-
-#, fuzzy
-msgid "invalid 'origin'"
-msgstr "Ugyldig »grob«"
-
-#, fuzzy
-msgid "'length' must be a 'unit' object"
-msgstr "»arrow« skal være et arrow-objekt eller NULL"
-
-#, fuzzy
-msgid "invalid 'ends' or 'type' argument"
-msgstr "Ugyldig »grob«"
-
-msgid "'x' and 'y' must be units"
-msgstr ""
-
-msgid "'x' and 'y' must have length 1"
-msgstr ""
-
-msgid "invalid 'arrow' argument"
-msgstr ""
-
-msgid "it is invalid to specify both 'id' and 'id.lengths'"
-msgstr ""
-
-msgid "'x' and 'y' must be same length"
-msgstr ""
-
-msgid "'x' and 'y' and 'id' must all be same length"
-msgstr ""
-
-msgid "'x' and 'y' and 'id.lengths' must specify same overall length"
-msgstr ""
-
-msgid "'x0', 'y0', 'x1', and 'y1' must be units"
-msgstr ""
-
-msgid "'x' and 'y' must be units or NULL"
-msgstr ""
-
-msgid "corrupt 'arrows' object"
-msgstr ""
-
-msgid "x and y must be units"
-msgstr ""
-
-msgid "must have exactly 4 control points"
-msgstr ""
-
-msgid "must have exactly 4 control points per Bezier curve"
-msgstr ""
-
-msgid "'x', 'y', and 'r' must be units"
-msgstr ""
-
-msgid "'x', 'y', 'width', and 'height' must be units"
-msgstr ""
-
-#, fuzzy
-msgid "invalid 'rot' value"
-msgstr "Ugyldig »grob«"
-
-msgid "zero-length 'pch'"
-msgstr ""
-
-msgid "'x', 'y' and 'size' must be units"
-msgstr ""
-
-#, fuzzy
-msgid "'x' and 'y' must be 'unit' objects and have the same length"
-msgstr "»labels«- og »at«-placeringer skal have samme længde"
-
-msgid "'x', 'y', 'width', and 'height' must all be units of length 1"
-msgstr ""
-
-msgid "'x' and 'y' must all be units of length 1"
-msgstr ""
-
-#, fuzzy
-msgid "'r' must be a 'unit' object"
-msgstr "»arrow« skal være et arrow-objekt eller NULL"
-
-msgid "'x', 'y', 'width', and 'height' must have length 1"
-msgstr ""
-
-msgid "'x' and 'units' must have length > 0"
-msgstr ""
-
-msgid "'x' argument must be a unit object"
-msgstr ""
-
-#, fuzzy
-msgid "invalid 'axis' or 'type'"
-msgstr "Ugyldig »grob«"
-
-msgid "no string supplied for 'strwidth/height' unit"
-msgstr ""
-
-msgid "no 'grob' supplied for 'grobwidth/height' unit"
-msgstr ""
-
-msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
-msgstr ""
-
-msgid "non-NULL value supplied for plain unit"
-msgstr ""
-
-msgid "operator '%s' not meaningful for units"
-msgstr ""
-
-msgid "only one operand may be a unit"
-msgstr ""
-
-msgid "non-unit operand must be numeric"
-msgstr ""
-
-msgid "both operands must be units"
-msgstr ""
-
-msgid "'Summary' function '%s' not meaningful for units"
-msgstr ""
-
-msgid "no arguments where at least one expected"
-msgstr ""
-
-msgid "Zero arguments where at least one expected"
-msgstr ""
-
-msgid "cannot mix signs of indices"
-msgstr ""
-
-msgid "index out of bounds ('unit' subsetting)"
-msgstr ""
-
-msgid "index out of bounds (unit arithmetic subsetting)"
-msgstr ""
-
-msgid "index out of bounds (unit list subsetting)"
-msgstr ""
-
-msgid "it is invalid to combine 'unit' objects with other types"
-msgstr ""
-
-#, fuzzy
-msgid "invalid 'unit' object"
-msgstr "Ugyldig »grob«"
-
-#, fuzzy
-msgid "invalid 'theta'"
-msgstr "Ugyldig »grob«"
-
-msgid "'range' must be numeric"
-msgstr ""
-
-#, fuzzy
-msgid "invalid 'gp' value"
-msgstr "Ugyldig »grob«"
-
-#, fuzzy
-msgid "invalid 'clip' value"
-msgstr "Ugyldig »grob«"
-
-#, fuzzy
-msgid "invalid 'xscale' in viewport"
-msgstr "Ugyldig »edit-information«"
-
-#, fuzzy
-msgid "invalid 'yscale' in viewport"
-msgstr "Ugyldig »edit-information«"
-
-#, fuzzy
-msgid "invalid 'angle' in viewport"
-msgstr "Ugyldig »edit-information«"
-
-#, fuzzy
-msgid "invalid 'layout' in viewport"
-msgstr "Ugyldig »edit-information«"
-
-msgid "invalid 'layout.pos.row' in viewport"
-msgstr ""
-
-msgid "invalid 'layout.pos.col' in viewport"
-msgstr ""
-
+#. R/viewport.R: stop("only viewports allowed in 'vpList'")
+#: R/viewport.R:0
 msgid "only viewports allowed in 'vpList'"
 msgstr ""
 
+#. R/viewport.R: stop("only viewports allowed in 'vpStack'")
+#: R/viewport.R:0
 msgid "only viewports allowed in 'vpStack'"
 msgstr ""
 
-msgid ""
-"'parent' must be a viewport and 'children' must be a 'vpList' in 'vpTree'"
+#. R/unit.R: gettextf("operator '%s' not meaningful for units", .Generic)
+#: R/unit.R:0
+msgid "operator '%s' not meaningful for units"
 msgstr ""
 
-msgid "a viewport path must contain at least one viewport name"
-msgstr ""
-
-msgid "must specify at least one of 'x' or 'xscale'"
-msgstr ""
-
-msgid "must specify at least one of 'y' or 'yscale'"
-msgstr ""
-
+#. R/zzz.R: warning("shutting down all devices when unloading 'grid' namespace", call. = FALSE)
+#: R/zzz.R:0
 msgid "shutting down all devices when unloading 'grid' namespace"
 msgstr ""
 
+#. R/grob.R: gettextf("slot '%s' was not found", i)
+#: R/grob.R:0
+msgid "slot '%s' was not found"
+msgstr ""
+
+#. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
+#. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
+#. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
+#: R/grob.R:0
+msgid "the new 'grob' must have the same name as the old 'grob'"
+msgstr ""
+
+#. R/grob.R: warning("this function is redundant and will disappear in future versions", domain = "R-grid")
+#: R/grob.R:0
+msgid "this function is redundant and will disappear in future versions"
+msgstr ""
+
+#. R/grob.R: stop("unable to coerce 'x' argument to an object of class \"gList\"")
+#: R/grob.R:0
+#, fuzzy
+msgid "unable to coerce 'x' argument to an object of class \"gList\""
+msgstr "»arrow« skal være et arrow-objekt eller NULL"
+
+#. R/grab.R: warning("viewport overwritten (grab MAY not be faithful)")
+#. R/grab.R: warning("viewport overwritten (grab MAY not be faithful)")
+#: R/grab.R:0
+msgid "viewport overwritten (grab MAY not be faithful)"
+msgstr ""
+
+#. R/primitives.R: stop("zero-length 'pch' argument")
+#: R/primitives.R:0
+msgid "zero-length 'pch' argument"
+msgstr ""
+
+#. R/grob.R: ngettext(sum(bad), "invalid grob name", "invalid grob names", domain = "R-grid")
+#: R/grob.R:0
 #, fuzzy
 msgid "invalid grob name"
 msgid_plural "invalid grob names"
 msgstr[0] "Ugyldig »grob«"
 msgstr[1] "Ugyldig »grob«"
 
+#. R/viewport.R: ngettext(sum(bad), "invalid viewport name", "invalid viewport names", domain = "R-grid")
+#: R/viewport.R:0
 #, fuzzy
 msgid "invalid viewport name"
 msgid_plural "invalid viewport names"
 msgstr[0] "Ugyldig »frame«"
 msgstr[1] "Ugyldig »frame«"
+
+#, fuzzy
+#~ msgid "'%s' argument must be an object of class %s"
+#~ msgstr "»arrow« skal være et arrow-objekt eller NULL"
+
+#, fuzzy
+#~ msgid ""
+#~ "'%s' and '%s' and '%sd' components of argument 'x' must all be same length"
+#~ msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+
+#, fuzzy
+#~ msgid "'labels' and 'at' components of argument 'x' must have same length"
+#~ msgstr "»labels«- og »at«-placeringer skal have samme længde"
+
+#, fuzzy
+#~ msgid "'x' and 'y' components must be units"
+#~ msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+
+#, fuzzy
+#~ msgid "'length' must be a 'unit' object"
+#~ msgstr "»arrow« skal være et arrow-objekt eller NULL"
+
+#, fuzzy
+#~ msgid "'x', 'y', 'width', and 'height' components must be units"
+#~ msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+
+#, fuzzy
+#~ msgid "'x' and 'y' must be 'unit' objects and have the same length"
+#~ msgstr "»labels«- og »at«-placeringer skal have samme længde"
+
+#, fuzzy
+#~ msgid ""
+#~ "'x', 'y', 'width', and 'height' components must all be units of length 1"
+#~ msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+
+#, fuzzy
+#~ msgid "'%s', '%s', and '%s' components must be units"
+#~ msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+
+#, fuzzy
+#~ msgid ""
+#~ "'x', 'y', 'width', and 'height' components of argument 'x' must be "
+#~ "objects of class %s"
+#~ msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+
+#, fuzzy
+#~ msgid "invalid listing"
+#~ msgstr "Ugyldig »grob«"
+
+#, fuzzy
+#~ msgid "invalid 'listing'"
+#~ msgstr "Ugyldig »grob«"
+
+#, fuzzy
+#~ msgid "invalid 'at' location in 'axis'"
+#~ msgstr "Ugyldig »at«-placering i »axis«"
+
+#, fuzzy
+#~ msgid "logical 'label' supplied of length 0"
+#~ msgstr "logisk »label« angivet ved længde 0"
+
+#, fuzzy
+#~ msgid "'gp' argument must be an object of class \"gpar\""
+#~ msgstr "»arrow« skal være et arrow-objekt eller NULL"
+
+#~ msgid "'shape' must be between -1 and 1"
+#~ msgstr "»shape« skal være mellem -1 og 1"
+
+#, fuzzy
+#~ msgid "'r' must be a 'unit' object"
+#~ msgstr "»arrow« skal være et arrow-objekt eller NULL"
+
+#, fuzzy
+#~ msgid "invalid 'n' component of 'x'"
+#~ msgstr "Ugyldig »at«-placering i »axis«"
+
+#, fuzzy
+#~ msgid "invalid 'f' component of 'x'"
+#~ msgstr "Ugyldig »at«-placering i »axis«"
+
+#, fuzzy
+#~ msgid "'x1', 'y1', 'x2', and 'y2' must be units"
+#~ msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+
+#~ msgid "'squareShape' must be between -1 and 1"
+#~ msgstr "»squareShape« skal være mellem -1 og 1"
+
+#, fuzzy
+#~ msgid "invalid 'gPath'"
+#~ msgstr "Ugyldig »grob«"
+
+#, fuzzy
+#~ msgid "invalid \"gTree\" class"
+#~ msgstr "Ugyldig »grob«"
+
+#, fuzzy
+#~ msgid "invalid 'result'"
+#~ msgstr "Ugyldig »frame«"
+
+#, fuzzy
+#~ msgid "invalid 'print' argument"
+#~ msgstr "Ugyldig »grob«"
+
+#, fuzzy
+#~ msgid "invalid 'rot' value"
+#~ msgstr "Ugyldig »grob«"
+
+#, fuzzy
+#~ msgid "invalid 'unit' object"
+#~ msgstr "Ugyldig »grob«"
+
+#, fuzzy
+#~ msgid "invalid 'frame'"
+#~ msgstr "Ugyldig »frame«"
+
+#, fuzzy
+#~ msgid "invalid 'grob'"
+#~ msgstr "Ugyldig »grob«"
+
+#, fuzzy
+#~ msgid "invalid 'n'"
+#~ msgstr "Ugyldig »grob«"
+
+#, fuzzy
+#~ msgid "invalid 'f'"
+#~ msgstr "Ugyldig »frame«"
+
+#, fuzzy
+#~ msgid "invalid 'grep' value"
+#~ msgstr "Ugyldig »grob«"
+
+#, fuzzy
+#~ msgid "invalid 'origin'"
+#~ msgstr "Ugyldig »grob«"
+
+#, fuzzy
+#~ msgid "invalid 'theta'"
+#~ msgstr "Ugyldig »grob«"
+
+#, fuzzy
+#~ msgid "invalid 'clip' value"
+#~ msgstr "Ugyldig »grob«"
+
+#, fuzzy
+#~ msgid "invalid 'xscale' in viewport"
+#~ msgstr "Ugyldig »edit-information«"
+
+#, fuzzy
+#~ msgid "invalid 'yscale' in viewport"
+#~ msgstr "Ugyldig »edit-information«"
+
+#, fuzzy
+#~ msgid "invalid 'layout' in viewport"
+#~ msgstr "Ugyldig »edit-information«"
 
 #, fuzzy
 #~ msgid "invalid graphics parameters"

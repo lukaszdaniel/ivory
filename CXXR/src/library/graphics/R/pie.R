@@ -23,7 +23,7 @@ pie <-
               lty = NULL, main = NULL, ...)
 {
     if (!is.numeric(x) || any(is.na(x) | x < 0))
-	stop("'x' values must be positive.")
+	stop("'x' values must be positive")
     if (is.null(labels))
 	labels <- as.character(seq_along(x))
     else labels <- as.graphicsAnnot(labels)

@@ -41,7 +41,7 @@ png <-
              restoreConsole = TRUE, type = c("windows", "cairo", "cairo-png"),
              antialias = c("default", "none", "cleartype", "gray", "subpixel"))
 {
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     g <- .geometry(width, height, units, res)
     if(match.arg(type) == "cairo") {
         antialias <- match(match.arg(antialias), aa.cairo)
@@ -79,7 +79,7 @@ bmp <-
              restoreConsole = TRUE, type = c("windows", "cairo"),
              antialias = c("default", "none", "cleartype", "gray", "subpixel"))
 {
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     g <- .geometry(width, height, units, res)
     if(match.arg(type) == "cairo") {
         antialias <- match(match.arg(antialias), aa.cairo)
@@ -111,7 +111,7 @@ jpeg <-
              restoreConsole = TRUE, type = c("windows", "cairo"),
              antialias = c("default", "none", "cleartype", "gray", "subpixel"))
 {
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     g <- .geometry(width, height, units, res)
     if(match.arg(type) == "cairo") {
         antialias <- match(match.arg(antialias), aa.cairo)
@@ -145,7 +145,7 @@ tiff <-
              restoreConsole = TRUE, type = c("windows", "cairo"),
              antialias = c("default", "none", "cleartype", "gray", "subpixel"))
 {
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     g <- .geometry(width, height, units, res)
     comp <-
         switch(match.arg(compression),

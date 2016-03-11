@@ -7,7 +7,7 @@
 \alias{plot.density}
 \title{Plot Method for Kernel Density Estimation}
 \usage{
-\method{plot}{density}(x, main = NULL, xlab = NULL, ylab = "Density", type = "l",
+\method{plot}{density}(x, main = NULL, xlab = NULL, ylab = gettext("Density", domain = "R-stats"), type = "l",
      zero.line = TRUE, \dots)
 }
 \arguments{

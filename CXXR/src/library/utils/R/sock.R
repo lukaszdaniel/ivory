@@ -18,17 +18,17 @@
 
 print.socket <- function(x, ...)
 {
-    if(length(as.integer(x$socket)) != 1L) stop("invalid 'socket' argument")
-    cat("Socket connection #", x$socket, "to", x$host, "on port", x$port, "\n")
+    if(length(as.integer(x$socket)) != 1L) stop(gettextf("invalid '%s' argument", "socket"))
+    cat(gettextf("Socket connection #%s to %s on port %s", x$socket, x$host, x$port, domain = "R-utils"), "\n", sep = "")
     invisible(x)
 }
 
 make.socket <- function(host = "localhost", port, fail = TRUE, server = FALSE)
 {
     if(length(port <- as.integer(port)) != 1L)
-	stop("'port' must be integer of length 1")
+	stop(gettextf("'%s' argument must be integer of length 1", "port"))
     if(length(host <- as.character(host)) != 1L)
-	stop("'host' must be character of length 1")
+	stop(gettextf("'%s' argument must be character of length 1", "host"))
     if (!server){
 	socket <- .Call(C_sockconnect, port, host)
     } else {
@@ -61,4 +61,3 @@ read.socket <- function(socket, maxlen = 256L, loop = FALSE)
 
 write.socket <- function(socket, string)
     invisible(.Call(C_sockwrite, socket$socket, string))
-

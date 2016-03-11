@@ -28,6 +28,7 @@
 #include <R.h>
 #include <Rmath.h>
 #include "stats.h"
+#include "localization.h"
 #ifdef _OPENMP
 # include <R_ext/MathThreads.h>
 #endif
@@ -222,10 +223,10 @@ void R_distance(double *x, int *nr, int *nc, double *d, int *diag,
 	break;
     case MINKOWSKI:
 	if(!R_FINITE(*p) || *p <= 0)
-	    error(_("distance(): invalid p"));
+	    error(_("'distance()': invalid 'p' argument"));
 	break;
     default:
-	error(_("distance(): invalid distance"));
+	error(_("'distance()': invalid distance"));
     }
     dc = (*diag) ? 0 : 1; /* diag=1:  we do the diagonal */
 #ifdef _OPENMP

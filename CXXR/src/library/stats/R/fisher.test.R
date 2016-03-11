@@ -23,38 +23,37 @@ function(x, y = NULL, workspace = 200000, hybrid = FALSE,
          simulate.p.value = FALSE, B = 2000)
 {
     DNAME <- deparse(substitute(x))
-    METHOD <- "Fisher's Exact Test for Count Data"
+    METHOD <- gettext("Fisher's Exact Test for Count Data", domain = "R-stats")
     if(is.data.frame(x))
         x <- as.matrix(x)
     if(is.matrix(x)) {
         if(any(dim(x) < 2L))
-            stop("'x' must have at least 2 rows and columns")
+            stop("'x' argument must have at least 2 rows and 2 columns")
         if(!is.numeric(x) || any(x < 0) || anyNA(x))
-            stop("all entries of 'x' must be nonnegative and finite")
+            stop("all entries of 'x' argument must be nonnegative and finite")
         if(!is.integer(x)) {
             xo <- x
             x <- round(x)
             if(any(x > .Machine$integer.max))
-                stop("'x' has entries too large to be integer")
+                stop("'x' argument has entries too large to be integer")
             if(!identical(TRUE, (ax <- all.equal(xo, x))))
-                warning(gettextf("'x' has been rounded to integer: %s", ax),
-                        domain = NA)
+                warning(gettextf("'x' argument has been rounded to integer: %s", ax), domain = "R-stats")
             storage.mode(x) <- "integer"
         }
     }
     else {
         if(is.null(y))
-            stop("if 'x' is not a matrix, 'y' must be given")
+            stop(gettextf("if '%s' argument is not a matrix, '%s' argument must be given", "x", "y"))
         if(length(x) != length(y))
-            stop("'x' and 'y' must have the same length")
-        DNAME <- paste(DNAME, "and", deparse(substitute(y)))
+            stop(gettextf("'%s' and '%s' arguments must have the same length", "x", "y"))
+        DNAME <- gettextf("%s and %s", paste(DNAME, collapse = ""), paste(deparse(substitute(y)), collapse = ""), domain = "R-stats")
         OK <- complete.cases(x, y)
         ## use as.factor rather than factor here to be consistent with
         ## pre-tabulated data
         x <- as.factor(x[OK])
         y <- as.factor(y[OK])
         if((nlevels(x) < 2L) || (nlevels(y) < 2L))
-            stop("'x' and 'y' must have at least 2 levels")
+            stop("'x' and 'y' arguments must have at least 2 levels")
         x <- table(x, y)
     }
     ## x is integer
@@ -67,15 +66,14 @@ function(x, y = NULL, workspace = 200000, hybrid = FALSE,
     nc <- ncol(x)
 
     if((nr == 2) && (nc == 2)) {
-        alternative <- char.expand(alternative,
-                                   c("two.sided", "less", "greater"))
+        alternative <- char.expand(alternative, c("two.sided", "less", "greater"))
         if(length(alternative) > 1L || is.na(alternative))
             stop("alternative must be \"two.sided\", \"less\" or \"greater\"")
         if(!((length(conf.level) == 1L) && is.finite(conf.level) &&
              (conf.level > 0) && (conf.level < 1)))
-            stop("'conf.level' must be a single number between 0 and 1")
+            stop(gettextf("'%s' argument must be a single number between 0 and 1", "conf.level"))
         if(!missing(or) && (length(or) > 1L || is.na(or) || or < 0))
-            stop("'or' must be a single number between 0 and Inf")
+            stop("'or' argument must be a single number between 0 and Inf")
     }
 
     PVAL <- NULL
@@ -88,13 +86,12 @@ function(x, y = NULL, workspace = 200000, hybrid = FALSE,
             nr <- as.integer(nrow(x))
             nc <- as.integer(ncol(x))
             if (is.na(nr) || is.na(nc) || is.na(nr * nc))
-                stop("invalid nrow(x) or ncol(x)", domain = NA)
+                stop("invalid 'nrow(x)' or 'ncol(x)' value")
             if(nr <= 1L)
-                stop("need 2 or more non-zero row marginals")
+                stop("2 or more non-zero row marginals are needed")
             if(nc <= 1L)
-                stop("need 2 or more non-zero column marginals")
-            METHOD <- paste(METHOD, "with simulated p-value\n\t (based on", B,
-			     "replicates)")
+                stop("2 or more non-zero column marginals are needed")
+            METHOD <- gettextf("Fisher's Exact Test for Count Data with simulated p-value\n\t (based on %d replicates)", B, domain = "R-stats")
             STATISTIC <- -sum(lfactorial(x))
             tmp <- .Call(C_Fisher_sim, rowSums(x), colSums(x), B)
 	    ## use correct significance level for a Monte Carlo test
@@ -113,14 +110,15 @@ function(x, y = NULL, workspace = 200000, hybrid = FALSE,
     }
 
     if((nr == 2) && (nc == 2)) {## conf.int and more only in  2 x 2 case
-        if(hybrid) warning("'hybrid' is ignored for a 2 x 2 table")
+        if(hybrid) warning("'hybrid' argument is ignored for a 2 x 2 table")
         m <- sum(x[, 1L])
         n <- sum(x[, 2L])
         k <- sum(x[1L, ])
         x <- x[1L, 1L]
         lo <- max(0L, k - n)
         hi <- min(k, m)
-        NVAL <- c("odds ratio" = or)
+        NVAL <- or
+	names(NVAL) <- gettext("odds ratio", domain = "R-stats")
 
         ## Note that in general the conditional distribution of x given
         ## the marginals is a non-central hypergeometric distribution H
@@ -196,7 +194,8 @@ function(x, y = NULL, workspace = 200000, hybrid = FALSE,
             else
                 1
         }
-        ESTIMATE <- c("odds ratio" = mle(x))
+        ESTIMATE <- mle(x)
+        names(ESTIMATE) <- gettext("odds ratio")
 
         if(conf.int) {
             ## Determine confidence intervals for the odds ratio.
@@ -238,9 +237,14 @@ function(x, y = NULL, workspace = 200000, hybrid = FALSE,
                            })
             attr(CINT, "conf.level") <- conf.level
         }
+    alt.name <- switch(alternative,
+                           two.sided = gettextf("true odds ratio is not equal to %s", NVAL, domain = "R-stats"),
+                           less = gettextf("true odds ratio is less than %s", NVAL, domain = "R-stats"),
+                           greater = gettextf("true odds ratio is greater than %s", NVAL, domain = "R-stats"))
         RVAL <- c(RVAL,
                   list(conf.int = if(conf.int) CINT,
                        estimate = ESTIMATE,
+		       alt.name = alt.name,
                        null.value = NVAL))
     } ## end (2 x 2)
 
@@ -248,6 +252,6 @@ function(x, y = NULL, workspace = 200000, hybrid = FALSE,
               alternative = alternative,
               method = METHOD,
               data.name = DNAME)
-    attr(RVAL, "class") <- "htest"
+    class(RVAL) <- "htest"
     return(RVAL)
 }

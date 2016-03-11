@@ -21,10 +21,8 @@
 cor <- function(x, y = NULL, use = "everything",
                 method = c("pearson", "kendall", "spearman"))
 {
-    na.method <-
-	pmatch(use, c("all.obs", "complete.obs", "pairwise.complete.obs",
-		      "everything", "na.or.complete"))
-    if(is.na(na.method)) stop("invalid 'use' argument")
+    na.method <- pmatch(use, c("all.obs", "complete.obs", "pairwise.complete.obs", "everything", "na.or.complete"))
+    if(is.na(na.method)) stop(gettextf("invalid '%s' argument", "use"))
     method <- match.arg(method)
     if(is.data.frame(y)) y <- as.matrix(y)
     if(is.data.frame(x)) x <- as.matrix(x)
@@ -32,10 +30,10 @@ cor <- function(x, y = NULL, use = "everything",
         stop("supply both 'x' and 'y' or a matrix-like 'x'")
     ## non-atomic x should not be 'numeric', but in case a method messes up
     ## allow logicals for back-compatibility (package mice).
-    if(!(is.numeric(x) || is.logical(x))) stop("'x' must be numeric")
+    if(!(is.numeric(x) || is.logical(x))) stop(gettextf("'%s' argument must be numeric", "x"))
     stopifnot(is.atomic(x))
     if(!is.null(y)) {
-        if(!(is.numeric(y) || is.logical(y))) stop("'y' must be numeric")
+        if(!(is.numeric(y) || is.logical(y))) stop(gettextf("'%s' argument must be numeric", "y"))
         stopifnot(is.atomic(y))
     }
 
@@ -74,7 +72,7 @@ cor <- function(x, y = NULL, use = "everything",
          ## matrix
          if (is.null(y)) {
              ncy <- ncx <- ncol(x)
-             if(ncx == 0) stop("'x' is empty")
+             if(ncx == 0) stop("'x' argument is empty")
              r <- matrix(0, nrow = ncx, ncol = ncy)
              ## 2.6.0 assumed the diagonal was 1, but not so for all NAs,
              ## nor single non-NA pairs.
@@ -125,9 +123,8 @@ cov <- function(x, y = NULL, use = "everything",
                 method = c("pearson", "kendall", "spearman"))
 {
     na.method <-
-	pmatch(use, c("all.obs", "complete.obs", "pairwise.complete.obs",
-		      "everything", "na.or.complete"))
-    if(is.na(na.method)) stop("invalid 'use' argument")
+	pmatch(use, c("all.obs", "complete.obs", "pairwise.complete.obs", "everything", "na.or.complete"))
+    if(is.na(na.method)) stop(gettextf("invalid '%s' argument", "use"))
     method <- match.arg(method)
     if(is.data.frame(y)) y <- as.matrix(y)
     if(is.data.frame(x)) x <- as.matrix(x)
@@ -176,9 +173,8 @@ var <- function(x, y = NULL, na.rm = FALSE, use) {
     if(missing(use))
 	use <- if(na.rm) "na.or.complete" else "everything"
     na.method <-
-	pmatch(use, c("all.obs", "complete.obs", "pairwise.complete.obs",
-		      "everything", "na.or.complete"))
-    if(is.na(na.method)) stop("invalid 'use' argument")
+	pmatch(use, c("all.obs", "complete.obs", "pairwise.complete.obs", "everything", "na.or.complete"))
+    if(is.na(na.method)) stop(gettextf("invalid '%s' argument", "use"))
     if (is.data.frame(x)) x <- as.matrix(x) else stopifnot(is.atomic(x))
     if (is.data.frame(y)) y <- as.matrix(y) else stopifnot(is.atomic(y))
     .Call(C_cov, x, y, na.method, FALSE)
@@ -200,6 +196,6 @@ cov2cor <- function(V)
     r <- V # keep dimnames
     r[] <- Is * V * rep(Is, each = p)
     ##	== D %*% V %*% D  where D = diag(Is)
-    r[cbind(1L:p,1L:p)] <- 1 # exact in diagonal
+    r[cbind(seq_len(p), seq_len(p))] <- 1 # exact in diagonal
     r
 }

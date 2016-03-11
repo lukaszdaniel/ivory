@@ -22,49 +22,53 @@ poisson.test <- function(x, T = 1, r = 1, alternative =
                          conf.level = 0.95)
 {
 
-    DNAME <- deparse(substitute(x))
-    DNAME <- paste(DNAME, "time base:", deparse(substitute(T)))
+    DNAME <- gettextf("%s time base: %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(T)), collapse = ""), domain = "R-stats")
     if ((l <- length(x)) != length(T))
         if (length(T) == 1L)
             T <- rep(T, l)
         else
-            stop("'x' and 'T' have incompatible length")
+            stop("'x' and 'T' arguments have incompatible length")
     xr <- round(x)
 
     if(any(!is.finite(x) | (x < 0)) || max(abs(x-xr)) > 1e-7)
-        stop("'x' must be finite, nonnegative, and integer")
+        stop("'x' argument must be finite, nonnegative, and integer")
     x <- xr
 
     if(any(is.na(T) | (T < 0)))
-        stop("'T' must be nonnegative")
+        stop("'T' argument must be nonnegative")
 
 
     if ((k <- length(x)) < 1L)
-        stop("not enough data")
+        stop(gettextf("not enough '%s' observations", "x"))
 
     if (k > 2L)
         stop("the case k > 2 is unimplemented")
 
     if(!missing(r) && (length(r) > 1 || is.na(r) || r < 0 ))
-        stop ("'r' must be a single positive number")
+        stop(gettextf("'%s' argument must be a single positive number", "r"))
     alternative <- match.arg(alternative)
 
 
     if (k == 2) {
 
-        RVAL <- binom.test(x, sum(x), r * T[1L]/(r * T[1L] + T[2L]),
-                           alternative=alternative, conf.level=conf.level)
+        RVAL <- binom.test(x, sum(x), r * T[1L]/(r * T[1L] + T[2L]), alternative=alternative, conf.level=conf.level)
 
         RVAL$data.name <- DNAME
         RVAL$statistic <- c(count1 = x[1L])
-        RVAL$parameter <- c("expected count1" = sum(x) * r * T[1L]/sum(T * c(1, r)))
-        RVAL$estimate  <- c("rate ratio" = (x[1L]/T[1L])/(x[2L]/T[2L]))
+        RVAL$parameter <- sum(x) * r * T[1L]/sum(T * c(1, r))
+	names(RVAL$parameter) <- gettext("expected count1", domain = "R-stats")
+        RVAL$estimate  <- (x[1L]/T[1L])/(x[2L]/T[2L])
+	names(RVAL$estimate) <- gettext("rate ratio", domain = "R-stats")
         pp <- RVAL$conf.int
         RVAL$conf.int <- pp/(1 - pp)*T[2L]/T[1L]
-        names(r) <- "rate ratio"
+        names(r) <- gettext("rate ratio", domain = "R-stats")
         RVAL$null.value <- r
+        RVAL$alt.name <- switch(alternative,
+                           two.sided = gettextf("true rate ratio is not equal to %s", r, domain = "R-stats"),
+                           less = gettextf("true rate ratio is less than %s", r, domain = "R-stats"),
+                           greater = gettextf("true rate ratio is greater than %s", r, domain = "R-stats"))
 
-        RVAL$method <- "Comparison of Poisson rates"
+        RVAL$method <- gettext("Comparison of Poisson rates", domain = "R-stats")
         return (RVAL)
     } else {
         m <- r * T
@@ -135,21 +139,29 @@ poisson.test <- function(x, T = 1, r = 1, alternative =
 
         ESTIMATE <- x / T
 
-        names(x) <- "number of events"	# or simply "x" ??
-        names(T) <- "time base"	# or simply "n" ??
+        names(x) <- gettext("number of events", domain = "R-stats")	# or simply "x" ??
+        names(T) <- gettext("time base", domain = "R-stats")	# or simply "n" ??
         names(ESTIMATE) <-
-            names(r) <- "event rate" # or simply "p" ??
-
-        structure(list(statistic = x,
+            names(r) <- gettext("event rate", domain = "R-stats") # or simply "p" ??
+		METHOD <- gettext("Exact Poisson test", domain = "R-stats")
+       
+       alt.name <- switch(alternative,
+                           two.sided = gettextf("true event rate is not equal to %s", r, domain = "R-stats"),
+                           less = gettextf("true event rate is less than %s", r, domain = "R-stats"),
+                           greater = gettextf("true event rate is greater than %s", r, domain = "R-stats"))
+	
+        RVAL <- list(statistic = x,
                        parameter = T,
                        p.value = PVAL,
                        conf.int = CINT,
                        estimate = ESTIMATE,
                        null.value = r,
                        alternative = alternative,
-                       method = "Exact Poisson test",
-                       data.name = DNAME),
-                  class = "htest")
+                       alt.name = alt.name,
+                       method = METHOD,
+                       data.name = DNAME)
+    class(RVAL) <- "htest"
+    return(RVAL)
 
     }
 }

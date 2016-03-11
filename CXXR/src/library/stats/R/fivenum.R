@@ -29,6 +29,8 @@ fivenum <- function(x, na.rm=TRUE)
     else {
         n4 <- floor((n+3)/2) / 2
 	d <- c(1, n4, (n+1)/2, n + 1 - n4, n)
-	0.5*(x[floor(d)] + x[ceiling(d)])
+	qq <- 0.5*(x[floor(d)] + x[ceiling(d)])
+	names(qq) <- c(gettext("Min.", domain = NA), gettext("L. hinge", domain = NA), gettext("Median", domain = NA), gettext("U. hinge", domain = NA), gettext("Max.", domain = NA))
+	qq
     }
 }

@@ -23,6 +23,7 @@
 #endif
 
 #include <Defn.h>
+#include "localization.h"
 #include <float.h>  /* for DBL_MAX */
 #include <Rmath.h>
 #include <Graphics.h>
@@ -34,7 +35,7 @@
 static void TypeCheck(SEXP s, SEXPTYPE type)
 {
     if (TYPEOF(s) != type)
-	error("invalid type passed to graphics function");
+	error(_("invalid type passed to graphics function"));
 }
 
 
@@ -1109,11 +1110,11 @@ SEXP C_persp(SEXP args)
     /* Checks on x/y/z Limits */
 
     if (!LimitCheck(REAL(xlim), &xc, &xs))
-	error(_("invalid 'x' limits"));
+	error(_("invalid '%s' limits"), "x");
     if (!LimitCheck(REAL(ylim), &yc, &ys))
-	error(_("invalid 'y' limits"));
+	error(_("invalid '%s' limits"), "y");
     if (!LimitCheck(REAL(zlim), &zc, &zs))
-	error(_("invalid 'z' limits"));
+	error(_("invalid '%s' limits"), "z");
 
     theta = asReal(CAR(args));	args = CDR(args);
     phi	  = asReal(CAR(args));	args = CDR(args);
@@ -1134,11 +1135,11 @@ SEXP C_persp(SEXP args)
     ylab = CAR(args); args = CDR(args);
     zlab = CAR(args); args = CDR(args);
     if (!isString(xlab) || length(xlab) < 1)
-	error(_("'xlab' must be a character vector of length 1"));
+	error(_("'%s' argument must be a character vector of length 1"), "xlab");
     if (!isString(ylab) || length(ylab) < 1)
-	error(_("'ylab' must be a character vector of length 1"));
+	error(_("'%s' argument must be a character vector of length 1"), "ylab");
     if (!isString(zlab) || length(zlab) < 1)
-	error(_("'zlab' must be a character vector of length 1"));
+	error(_("'%s' argument must be a character vector of length 1"), "zlab");
 
     if (R_FINITE(Shade) && Shade <= 0) Shade = 1;
     if (R_FINITE(ltheta) && R_FINITE(lphi) && R_FINITE(Shade))
@@ -1936,16 +1937,16 @@ SEXP C_contour(SEXP args)
 
     for (i = 0; i < nx; i++) {
 	if (!R_FINITE(REAL(x)[i]))
-	    error(_("missing 'x' values"));
+	    error(_("missing '%s' values"), "x");
 	if (i > 0 && REAL(x)[i] < REAL(x)[i - 1])
-	    error(_("increasing 'x' values expected"));
+	    error(_("increasing '%s' values expected"), "x");
     }
 
     for (i = 0; i < ny; i++) {
 	if (!R_FINITE(REAL(y)[i]))
-	    error(_("missing 'y' values"));
+	    error(_("missing '%s' values"), "y");
 	if (i > 0 && REAL(y)[i] < REAL(y)[i - 1])
-	    error(_("increasing 'y' values expected"));
+	    error(_("increasing '%s' values expected"), "y");
     }
 
     for (i = 0; i < nc; i++)
@@ -1962,9 +1963,9 @@ SEXP C_contour(SEXP args)
 
     if (zmin >= zmax) {
 	if (zmin == zmax)
-	    warning(_("all z values are equal"));
+	    warning(_("all 'z' values are equal"));
 	else
-	    warning(_("all z values are NA"));
+	    warning(_("all 'z' values are NA"));
 	UNPROTECT(8);
 	return R_NilValue;
     }

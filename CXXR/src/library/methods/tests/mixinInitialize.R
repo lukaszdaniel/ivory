@@ -33,7 +33,7 @@ setValidity("B", function(object) {
     if(all(is.na(object@a) | (object@a > 0)))
       TRUE
     else
-      "elements of slot \"a\" must be positive"
+      gettext("elements of slot \"a\" must be positive")
 })
 
 a2 <- new("A", a= c(NA,3, -1, 2))
@@ -44,12 +44,12 @@ muststop <- function(expr, silent = TRUE) {
     value <- eval.parent(tryExpr)
     if(inherits(value, "error")) {
         if(!silent)
-          message("muststop reports: ", value)
+          message(gettextf("muststop reports: %s", value))
         invisible(value)
     }
     else
-      stop(gettextf("The expression  %s should have thrown an error, but instead returned an object of class \"%s\"",
-           deparse(substitute(expr))[[1]], class(value)))
+      stop(gettextf("The expression %s should have thrown an error, but instead returned an object of class %s",
+           sQuote(deparse(substitute(expr))[[1]]), dQuote(class(value))))
 }
 
 muststop(new("B", m1, a2))

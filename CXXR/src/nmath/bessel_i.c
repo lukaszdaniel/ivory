@@ -30,7 +30,6 @@
 #include <R_ext/Memory.h>
 #endif
 
-#define min0(x, y) (((x) <= (y)) ? (x) : (y))
 
 static void I_bessel(double *x, double *alpha, int *nb,
 		     int *ize, double *bi, int *ncalc);
@@ -49,7 +48,7 @@ double bessel_i(double x, double alpha, double expo)
     if (ISNAN(x) || ISNAN(alpha)) return x + alpha;
 #endif
     if (x < 0) {
-	ML_ERROR(ME_RANGE, "bessel_i");
+	ML_ERROR(ME_RANGE, "bessel_i()");
 	return ML_NAN;
     }
     ize = (int)expo;
@@ -74,11 +73,9 @@ double bessel_i(double x, double alpha, double expo)
     I_bessel(&x, &alpha, &nb, &ize, bi, &ncalc);
     if(ncalc != nb) {/* error input */
 	if(ncalc < 0)
-	    MATHLIB_WARNING4(_("bessel_i(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?\n"),
-			     x, ncalc, nb, alpha);
+	    MATHLIB_WARNING4(_("bessel_i(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?"), x, ncalc, nb, alpha);
 	else
-	    MATHLIB_WARNING2(_("bessel_i(%g,nu=%g): precision lost in result\n"),
-			     x, alpha+(double)nb-1);
+	    MATHLIB_WARNING2(_("bessel_i(%g,nu=%g): precision lost in result"), x, alpha+(double)nb-1);
     }
     x = bi[nb-1];
 #ifdef MATHLIB_STANDALONE
@@ -101,7 +98,7 @@ double bessel_i_ex(double x, double alpha, double expo, double *bi)
     if (ISNAN(x) || ISNAN(alpha)) return x + alpha;
 #endif
     if (x < 0) {
-	ML_ERROR(ME_RANGE, "bessel_i");
+	ML_ERROR(ME_RANGE, "bessel_i()");
 	return ML_NAN;
     }
     ize = (int)expo;
@@ -119,11 +116,9 @@ double bessel_i_ex(double x, double alpha, double expo, double *bi)
     I_bessel(&x, &alpha, &nb, &ize, bi, &ncalc);
     if(ncalc != nb) {/* error input */
 	if(ncalc < 0)
-	    MATHLIB_WARNING4(_("bessel_i(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?\n"),
-			     x, ncalc, nb, alpha);
+	    MATHLIB_WARNING4(_("bessel_i(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?"), x, ncalc, nb, alpha);
 	else
-	    MATHLIB_WARNING2(_("bessel_i(%g,nu=%g): precision lost in result\n"),
-			     x, alpha+(double)nb-1);
+	    MATHLIB_WARNING2(_("bessel_i(%g,nu=%g): precision lost in result"), x, alpha+(double)nb-1);
     }
     x = bi[nb-1];
     return x;
@@ -318,7 +313,7 @@ static void I_bessel(double *x, double *alpha, int *nb,
 			p = plast * tover;
 			--n;
 			en -= 2.;
-			nend = min0(*nb,n);
+			nend = min(*nb,n);
 			for (l = nstart; l <= nend; ++l) {
 			    *ncalc = l;
 			    pold = psavel;
@@ -528,6 +523,6 @@ L230:
 	    }
 	}
     } else { /* argument out of range */
-	*ncalc = min0(*nb,0) - 1;
+	*ncalc = min(*nb,0) - 1;
     }
 }

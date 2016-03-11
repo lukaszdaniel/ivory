@@ -26,10 +26,9 @@
 
 #include <math.h>
 #include <Rmath.h>
+#include "localization.h"
+#include <R_ext/Minmax.h>
 
-#ifndef min
-# define min(a, b)		((a) > (b) ? (b) : (a))
-#endif
 
 static double poly(const double *, int, double);
 
@@ -206,7 +205,7 @@ SEXP SWilk(SEXP x)
     n = LENGTH(x);
     swilk(REAL(x), n, &W, &pw, &ifault);
     if (ifault > 0 && ifault != 7)
-	error("ifault=%d. This should not happen", ifault);
+	error(_("ifault=%d. This should not happen"), ifault);
     SEXP ans = PROTECT(allocVector(REALSXP, 2));
     REAL(ans)[0] = W, REAL(ans)[1] = pw;
     UNPROTECT(2);

@@ -22,7 +22,7 @@ svg <- function(filename = if(onefile) "Rplots.svg" else "Rplot%03d.svg",
                 onefile = FALSE, family = "sans", bg = "white",
                 antialias = c("default", "none", "gray", "subpixel"))
 {
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     antialiases <- eval(formals()$antialias)
     antialias <- match(match.arg(antialias, antialiases), antialiases)
     invisible(.External(C_devCairo, filename, 4L, 72*width, 72*height,
@@ -36,7 +36,7 @@ cairo_pdf <- function(filename = if(onefile) "Rplots.pdf" else "Rplot%03d.pdf",
                       antialias = c("default", "none", "gray", "subpixel"),
                       fallback_resolution = 300)
 {
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     antialiases <- eval(formals()$antialias)
     antialias <- match(match.arg(antialias, antialiases), antialiases)
     invisible(.External(C_devCairo, filename, 6L, 72*width, 72*height,
@@ -50,7 +50,7 @@ cairo_ps <- function(filename = if(onefile) "Rplots.ps" else "Rplot%03d.ps",
                      antialias = c("default", "none", "gray", "subpixel"),
                      fallback_resolution = 300)
 {
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     antialiases <- eval(formals()$antialias)
     antialias <- match(match.arg(antialias, antialiases), antialiases)
     invisible(.External(C_devCairo, filename, 7L, 72*width, 72*height,

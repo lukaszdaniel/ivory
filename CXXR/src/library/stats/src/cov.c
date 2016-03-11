@@ -30,15 +30,9 @@
 
 #include <Defn.h>
 #include <Rmath.h>
-
+#include <R_ext/Minmax.h>
+#include "localization.h"
 #include "statsR.h"
-#undef _
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("stats", String)
-#else
-#define _(String) (String)
-#endif
 
 static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP kendall, Rboolean cor);
 
@@ -62,7 +56,8 @@ SEXP cov(SEXP x, SEXP y, SEXP na_method, SEXP kendall)
 		    }
 
 #define ANS(I,J)  ans[I + J * ncx]
-#define CLAMP(X)  (X >= 1. ? 1. : (X <= -1. ? -1. : X))
+//#define CLAMP(X)  (X >= 1. ? 1. : (X <= -1. ? -1. : X))
+#define CLAMP(X)  max(-1., min(X,1.))
 
 /* Note that "if (kendall)" and	 "if (cor)" are used inside a double for() loop;
    which makes the code better readable -- and is hopefully dealt with
@@ -640,12 +635,12 @@ static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP skendall, Rboolean cor)
 
     /* Arg.1: x */
     if(isNull(x)) /* never allowed */
-	error(_("'x' is NULL"));
+	error(_("'%s' argument is NULL"), "x");
 #ifdef _R_in_2017_
-    if(isFactor(x)) error(_("'x' is a factor"));
+    if(isFactor(x)) error(_("'%s' argument is a factor"), "x");
 #else
-# define VAR_FACTOR_MSG "Calling var(x) on a factor x is deprecated and will become an error.\n  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
-    if(isFactor(x)) warning(_(VAR_FACTOR_MSG));
+# define VAR_FACTOR_MSG _("Calling 'var(x)' on a factor 'x' is deprecated and will become an error.\n  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector.")
+    if(isFactor(x)) warning(VAR_FACTOR_MSG);
 #endif
     /* length check of x -- only if(empty_err) --> below */
     x = PROTECT(coerceVector(x, REALSXP));
@@ -662,9 +657,9 @@ static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP skendall, Rboolean cor)
 	ncy = ncx;
     } else {
 #ifdef _R_in_2017_
-	if(isFactor(y)) error(_("'y' is a factor"));
+	if(isFactor(y)) error(_("'%s' argument is a factor"), "y");
 #else
-	if(isFactor(y)) warning(_(VAR_FACTOR_MSG));
+	if(isFactor(y)) warning(VAR_FACTOR_MSG);
 #endif
 	y = PROTECT(coerceVector(y, REALSXP));
 	nprotect++;

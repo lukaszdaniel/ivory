@@ -31,8 +31,6 @@
 #include <R_ext/Memory.h>
 #endif
 
-#define min0(x, y) (((x) <= (y)) ? (x) : (y))
-#define max0(x, y) (((x) <= (y)) ? (y) : (x))
 
 static void K_bessel(double *x, double *alpha, int *nb,
 		     int *ize, double *bk, int *ncalc);
@@ -50,7 +48,7 @@ double bessel_k(double x, double alpha, double expo)
     if (ISNAN(x) || ISNAN(alpha)) return x + alpha;
 #endif
     if (x < 0) {
-	ML_ERROR(ME_RANGE, "bessel_k");
+	ML_ERROR(ME_RANGE, "bessel_k()");
 	return ML_NAN;
     }
     ize = (int)expo;
@@ -68,11 +66,9 @@ double bessel_k(double x, double alpha, double expo)
     K_bessel(&x, &alpha, &nb, &ize, bk, &ncalc);
     if(ncalc != nb) {/* error input */
       if(ncalc < 0)
-	MATHLIB_WARNING4(_("bessel_k(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?\n"),
-			 x, ncalc, nb, alpha);
+	MATHLIB_WARNING4(_("bessel_k(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?"), x, ncalc, nb, alpha);
       else
-	MATHLIB_WARNING2(_("bessel_k(%g,nu=%g): precision lost in result\n"),
-			 x, alpha+(double)nb-1);
+	MATHLIB_WARNING2(_("bessel_k(%g,nu=%g): precision lost in result"), x, alpha+(double)nb-1);
     }
     x = bk[nb-1];
 #ifdef MATHLIB_STANDALONE
@@ -94,7 +90,7 @@ double bessel_k_ex(double x, double alpha, double expo, double *bk)
     if (ISNAN(x) || ISNAN(alpha)) return x + alpha;
 #endif
     if (x < 0) {
-	ML_ERROR(ME_RANGE, "bessel_k");
+	ML_ERROR(ME_RANGE, "bessel_k()");
 	return ML_NAN;
     }
     ize = (int)expo;
@@ -105,11 +101,9 @@ double bessel_k_ex(double x, double alpha, double expo, double *bk)
     K_bessel(&x, &alpha, &nb, &ize, bk, &ncalc);
     if(ncalc != nb) {/* error input */
       if(ncalc < 0)
-	MATHLIB_WARNING4(_("bessel_k(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?\n"),
-			 x, ncalc, nb, alpha);
+	MATHLIB_WARNING4(_("bessel_k(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?"), x, ncalc, nb, alpha);
       else
-	MATHLIB_WARNING2(_("bessel_k(%g,nu=%g): precision lost in result\n"),
-			 x, alpha+(double)nb-1);
+	MATHLIB_WARNING2(_("bessel_k(%g,nu=%g): precision lost in result"), x, alpha+(double)nb-1);
     }
     x = bk[nb-1];
     return x;
@@ -248,11 +242,11 @@ static void K_bessel(double *x, double *alpha, int *nb,
 
     ex = *x;
     nu = *alpha;
-    *ncalc = min0(*nb,0) - 2;
+    *ncalc = min(*nb,0) - 2;
     if (*nb > 0 && (0. <= nu && nu < 1.) && (1 <= *ize && *ize <= 2)) {
 	if(ex <= 0 || (*ize == 1 && ex > xmax_BESS_K)) {
 	    if(ex <= 0) {
-		if(ex < 0) ML_ERROR(ME_RANGE, "K_bessel");
+		if(ex < 0) ML_ERROR(ME_RANGE, "K_bessel()");
 		for(i=0; i < *nb; i++)
 		    bk[i] = ML_POSINF;
 	    } else /* would only have underflow */
@@ -502,7 +496,7 @@ static void K_bessel(double *x, double *alpha, int *nb,
 	if (iend == 1)
 	    return;
 
-	m = min0((int) (wminf - nu),iend);
+	m = min((int) (wminf - nu),iend);
 	for (i = 2; i <= m; ++i) {
 	    t1 = bk1;
 	    bk1 = bk2;
@@ -542,7 +536,7 @@ static void K_bessel(double *x, double *alpha, int *nb,
 		bk2 *= ratio;
 	    }
 	}
-	*ncalc = max0(1, mplus1 - k);
+	*ncalc = max(1, mplus1 - k);
 	if (*ncalc == 1)
 	    bk[0] = bk2;
 	if (*nb == 1)

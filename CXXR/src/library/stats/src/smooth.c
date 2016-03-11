@@ -32,12 +32,7 @@ typedef enum {
     sm_NO_ENDRULE, sm_COPY_ENDRULE, sm_TUKEY_ENDRULE
 } R_SM_ENDRULE;
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("stats", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 static double med3(double u, double v, double w)
 {
@@ -251,7 +246,7 @@ static int sm_3RSR(double *x, double *y, double *z, double *w, R_xlen_t n,
     return(iter);
 }
 
-
+
 /*-------- These are  called from R : -----------*/
 
 #include <Rinternals.h>

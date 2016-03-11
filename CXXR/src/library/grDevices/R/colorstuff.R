@@ -26,7 +26,7 @@ col2rgb <- function(col, alpha = FALSE)
 {
     ## R-level trap for now.
     if(any(as.character(col) %in% "0"))
-        stop("numerical color values must be positive", domain = NA)
+        stop("numerical color values must be positive")
     if (is.factor(col)) col <- as.character(col)
     .Call(C_col2rgb, col, alpha)
 }
@@ -40,7 +40,7 @@ rgb <- function(red, green, blue, alpha, names = NULL, maxColorValue = 1)
     if(missing(green) && missing(blue)) {
 	if(is.matrix(red) || is.data.frame(red)) {
 	    red <- data.matrix(red)
-	    if(ncol(red) < 3L) stop("at least 3 columns needed")
+	    if(ncol(red) < 3L) stop("at least 3 columns are needed")
 	    green <- red[,2L]; blue <- red[,3L]; red <- red[,1L]
 	}
     }
@@ -67,7 +67,7 @@ rgb2hsv <- function(r, g = NULL, b = NULL, maxColorValue = 255)
     ## else:
     rgb <- rgb/maxColorValue
     if(any(0 > rgb) || any(rgb > 1))
-        stop("rgb values must be in [0, maxColorValue]")
+        stop("'r', 'g', and 'b' arguments must be in [0, maxColorValue]")
 
     .Call(C_RGB2hsv, rgb)
 }

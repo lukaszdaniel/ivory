@@ -54,21 +54,16 @@ checkMD5sums <- function(package, dir)
     not.here <- !(nmxx %in% nmx)
     if(any(not.here)) {
         res <- FALSE
-        if (sum(not.here) > 1L)
-            cat("files", paste(sQuote(nmxx[not.here]), collapse = ", "),
-                "are missing\n", sep = " ")
-        else
-            cat("file", sQuote(nmxx[not.here]), "is missing\n", sep = " ")
+        cat(sprintf(ngettext(sum(not.here), "file %s is missing",
+					"files %s are missing", domain = "R-tools"), paste(sQuote(nmxx[not.here]), collapse = ", ")), "\n", sep = "")
     }
     nmxx <- nmxx[!not.here]
     diff <- xx[nmxx] != x[nmxx]
     if(any(diff)) {
         res <- FALSE
         files <- nmxx[diff]
-        if(length(files) > 1L)
-            cat("files", paste(sQuote(files), collapse = ", "),
-                "have the wrong MD5 checksums\n", sep = " ")
-        else cat("file", sQuote(files), "has the wrong MD5 checksum\n")
+	cat(sprintf(ngettext(length(files), "file %s has the wrong MD5 checksums",
+					"files %s have the wrong MD5 checksums", domain = "R-tools"), paste(sQuote(files), collapse = ", ")), "\n", sep = "")
     }
     res
 }

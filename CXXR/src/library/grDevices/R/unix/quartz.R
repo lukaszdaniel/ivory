@@ -51,11 +51,10 @@ quartz <- function(title, width, height, pointsize, family, antialias,
 {
     if (missing(type) || type %in% c("", "native", "Cocoa")) {
         check <- Sys.getenv("_R_CHECK_SCREEN_DEVICE_", "")
-        msg <- "screen devices should not be used in examples etc"
         if (identical(check, "stop"))
-            stop(msg, domain = NA)
+            stop("screen devices should not be used in examples etc", domain = "R-grDevices")
         else if (identical(check, "warn"))
-            warning(msg, immediate. = TRUE, noBreaks. = TRUE, domain = NA)
+            warning("screen devices should not be used in examples etc", immediate. = TRUE, noBreaks. = TRUE, domain = "R-grDevices")
     }
 
     new <- list()
@@ -69,8 +68,8 @@ quartz <- function(title, width, height, pointsize, family, antialias,
     if(!missing(canvas)) new$canvas <- canvas
     if(!missing(type)) new$type <- type
     if(!missing(dpi)) new$dpi <- dpi
-    if(!checkIntFormat(new$title)) stop("invalid 'title'")
-    if(!is.null(file) && !checkIntFormat(file)) stop("invalid 'file'")
+    if(!checkIntFormat(new$title)) stop(gettextf("invalid '%s' argument", "title"))
+    if(!is.null(file) && !checkIntFormat(file)) stop(gettextf("invalid '%s' argument", "file"))
     d <- check.options(new, name.opt = ".quartz.Options", envir = .Quartzenv)
     .External(C_Quartz, d$type, file, d$width, d$height, d$pointsize, d$family,
               d$antialias, d$title, d$bg, d$canvas,
@@ -128,12 +127,12 @@ quartzFonts <- function(...) {
         nnames <- length(fontNames)
         if (nnames == 0L) {
             if (!all(sapply(fonts, is.character)))
-                stop("invalid arguments in 'quartzFonts' (must be font names)")
+                stop(gettextf("invalid arguments in %s (must be font names)", sQuote("quartzFonts")))
             else
                 get(".Quartz.Fonts", envir=.Quartzenv)[unlist(fonts)]
         } else {
             if (ndots != nnames)
-                stop("invalid arguments in 'quartzFonts' (need named args)")
+                stop(gettextf("invalid arguments in %s (need named args)", sQuote("quartzFonts")))
             setQuartzFonts(fonts, fontNames)
         }
     }

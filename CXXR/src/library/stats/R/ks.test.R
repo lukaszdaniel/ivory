@@ -29,7 +29,7 @@ ks.test <-
     PVAL <- NULL
 
     if(is.numeric(y)) { ## two-sample case
-        DNAME <- paste(DNAME, "and", deparse(substitute(y)))
+        DNAME <- gettextf("%s and %s", paste(DNAME, collapse = ""), paste(deparse(substitute(y)), collapse = ""), domain = "R-stats")
         y <- y[!is.na(y)]
         n.x <- as.double(n)             # to avoid integer overflow
         n.y <- length(y)
@@ -37,7 +37,7 @@ ks.test <-
             stop("not enough 'y' data")
         if(is.null(exact))
             exact <- (n.x * n.y < 10000)
-        METHOD <- "Two-sample Kolmogorov-Smirnov test"
+        METHOD <- gettext("Two-sample Kolmogorov-Smirnov test", domain = "R-stats")
         TIES <- FALSE
         n <- n.x * n.y / (n.x + n.y)
         w <- c(x, y)
@@ -56,9 +56,9 @@ ks.test <-
                             "greater" = max(z),
                             "less" = - min(z))
         nm_alternative <- switch(alternative,
-                                 "two.sided" = "two-sided",
-                                 "less" = "the CDF of x lies below that of y",
-                                 "greater" = "the CDF of x lies above that of y")
+                                 "two.sided" = gettext("two-sided", domain = "R-stats"),
+                                 "less" = gettext("the CDF of x lies below that of y", domain = "R-stats"),
+                                 "greater" = gettext("the CDF of x lies above that of y", domain = "R-stats"))
         if(exact && (alternative == "two.sided") && !TIES)
             PVAL <- 1 - .Call(C_pSmirnov2x, STATISTIC, n.x, n.y)
     } else { ## one-sample case
@@ -66,7 +66,7 @@ ks.test <-
             y <- get(y, mode = "function", envir = parent.frame())
         if(!is.function(y))
             stop("'y' must be numeric or a function or a string naming a valid function")
-        METHOD <- "One-sample Kolmogorov-Smirnov test"
+        METHOD <- gettext("One-sample Kolmogorov-Smirnov test", domain = "R-stats")
         TIES <- FALSE
         if(length(unique(x)) < n) {
             warning("ties should not be present for the Kolmogorov-Smirnov test")
@@ -98,9 +98,9 @@ ks.test <-
         }
         nm_alternative <-
             switch(alternative,
-                   "two.sided" = "two-sided",
-                   "less" = "the CDF of x lies below the null hypothesis",
-                   "greater" = "the CDF of x lies above the null hypothesis")
+                   "two.sided" = gettext("two-sided", domain = "R-stats"),
+                   "less" = gettext("the CDF of x lies below the null hypothesis", domain = "R-stats"),
+                   "greater" = gettext("the CDF of x lies above the null hypothesis", domain = "R-stats"))
     }
 
     names(STATISTIC) <- switch(alternative,
@@ -114,7 +114,7 @@ ks.test <-
             ## Not really needed at this generality for computing a single
             ## asymptotic p-value as below.
             if(is.numeric(x)) x <- as.double(x)
-            else stop("argument 'x' must be numeric")
+            else stop(gettextf("'%s' argument must be numeric", "x"))
             p <- rep(0, length(x))
             p[is.na(x)] <- NA
             IND <- which(!is.na(x) & (x > 0))

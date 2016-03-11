@@ -26,7 +26,7 @@ xtabs <- function(formula = ~., data = parent.frame(), subset, sparse = FALSE,
 	## will coerce the original version later.
 	formula <- as.formula(formula)
 	if (!inherits(formula, "formula"))
-	    stop("'formula' missing or incorrect")
+	    stop(gettextf("'%s' argument is missing or incorrect", "formula"))
     }
     if (any(attr(terms(formula, data = data), "order") > 1))
 	stop("interactions are not allowed")
@@ -76,12 +76,12 @@ xtabs <- function(formula = ~., data = parent.frame(), subset, sparse = FALSE,
 	if (length(by) != 2L)
 	    stop(gettextf("%s applies only to two-way tables",
                           "xtabs(*, sparse=TRUE)"),
-                 domain = NA)
+                 domain = "R-stats")
         ## loadNamespace(.) is very quick, once it *is* loaded:
 	if(is.null(tryCatch(loadNamespace("Matrix"), error = function(e)NULL)))
             stop(gettextf("%s needs package 'Matrix' correctly installed",
                           "xtabs(*, sparse=TRUE)"),
-                 domain = NA)
+                 domain = "R-stats")
         if(length(i.ex <- unique(unlist(lapply(by,function(f) which(is.na(f)))))))
             by <- lapply(by, `[`, -i.ex)
 	rows <- by[[1L]]

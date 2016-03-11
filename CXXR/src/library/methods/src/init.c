@@ -22,6 +22,7 @@
 
 #include "methods.h"
 #include <R_ext/Rdynload.h>
+#include "localization.h"
 
 #define CALLDEF(name, n)  {#name, (DL_FUNC) &name, n}
 

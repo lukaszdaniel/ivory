@@ -32,9 +32,7 @@ contrasts <- function (x, contrasts = TRUE, sparse = FALSE)
 	ctrfn <- get(ctr, mode="function", envir=parent.frame())
 	if(useSparse <- isTRUE(sparse)) {
 	    if(!(useSparse <- any("sparse" == names(formals(ctrfn)))))
-		warning(sprintf(
-		"contrast function '%s' does not support 'sparse = TRUE'",
-				ctr), domain = NA)
+		warning(gettextf("contrast function '%s' does not support 'sparse = TRUE'", ctr), domain = "R-stats")
 	}
         ctr <- if(useSparse)
             ctrfn(levels(x), contrasts = contrasts, sparse = sparse)
@@ -66,11 +64,11 @@ contrasts <- function (x, contrasts = TRUE, sparse = FALSE)
 	    cm <- qr(cbind(1,value))
 	    if(cm$rank != nc+1) stop("singular contrast matrix")
 	    cm <- qr.qy(cm, diag(nlevs))[, 2L:nlevs]
-	    cm[,1L:nc] <- value
+	    cm[,seq_len(nc)] <- value
 	    dimnames(cm) <- list(levels(x),NULL)
 	    if(!is.null(nmcol <- dimnames(value)[[2L]]))
 		dimnames(cm)[[2L]] <- c(nmcol, rep.int("", n1-nc))
-	} else cm <- value[, 1L:n1, drop=FALSE]
+	} else cm <- value[, seq_len(n1), drop=FALSE]
     }
     else if(is.character(value)) cm <- value
     else if(is.null(value)) cm <- NULL
@@ -88,9 +86,7 @@ contrasts <- function (x, contrasts = TRUE, sparse = FALSE)
     dn <- list(nms, nms)
     if(sparse) {
         if(!suppressPackageStartupMessages(requireNamespace("Matrix")))
-	    stop(gettextf("%s needs package 'Matrix' correctly installed",
-                          "contr*(.., sparse=TRUE)"),
-                 domain = NA)
+	    stop(gettextf("%s needs package 'Matrix' correctly installed", "contr*(.., sparse=TRUE)"), domain = "R-stats")
 	methods::new("ddiMatrix", diag = "U", Dim = d, Dimnames = dn)
     } else
 	array(c(rep.int(c(1, numeric(n)), n-1L), 1), d, dn)
@@ -99,9 +95,7 @@ contrasts <- function (x, contrasts = TRUE, sparse = FALSE)
 .asSparse <- function(m) {
     ## ensure helpful error message when Matrix is missing:
     if(!suppressPackageStartupMessages(requireNamespace("Matrix")))
-	stop(gettextf("%s needs package 'Matrix' correctly installed",
-                      "contr*(.., sparse=TRUE)"),
-             domain = NA)
+	stop(gettextf("%s needs package 'Matrix' correctly installed", "contr*(.., sparse=TRUE)"), domain = "R-stats")
     methods::as(m, "sparseMatrix")
 }
 
@@ -142,8 +136,7 @@ contr.treatment <-
     contr <- .Diag(levels, sparse=sparse)
     if(contrasts) {
 	if(n < 2L)
-	    stop(gettextf("contrasts not defined for %d degrees of freedom",
-                          n - 1L), domain = NA)
+	    stop(gettextf("contrasts not defined for %d degrees of freedom", n - 1L), domain = "R-stats")
 	if (base < 1L | base > n)
 	    stop("baseline group number out of range")
 	contr <- contr[, -base, drop = FALSE]

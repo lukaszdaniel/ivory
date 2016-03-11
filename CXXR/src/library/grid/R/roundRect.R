@@ -44,14 +44,14 @@ validDetails.roundrect <- function(x) {
         !is.unit(x$y) ||
         !is.unit(x$width) ||
         !is.unit(x$height))
-        stop("'x', 'y', 'width', and 'height' must be units")
+        stop(gettextf("'%s', '%s', '%s', and '%s' components of argument 'x' must be objects of class %s", "x", "y", "width", "height", dQuote("unit")))
     if (!is.unit(x$r))
-        stop("'r' must be a 'unit' object")
+        stop(gettextf("'%s' component of argument 'x' must be an object of class %s", "r", dQuote("unit")))
     valid.just(x$just)
     # Make sure that x and y are of length 1
     if (length(x$x) != 1 | length(x$y) != 1 |
         length(x$width) != 1 | length(x$height) != 1)
-        stop("'x', 'y', 'width', and 'height' must have length 1")
+        stop(gettextf("'%s', '%s', '%s', and '%s' components of argument 'x' must have length 1", "x", "y", "width", "height"))
     x
 }
 

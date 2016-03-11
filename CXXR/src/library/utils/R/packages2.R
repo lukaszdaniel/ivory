@@ -52,26 +52,33 @@ getDependencies <-
     p0 <- unique(pkgs)
     miss <-  !p0 %in% row.names(available)
     if(sum(miss)) {
-        msg <- paste0(if(binary) "as a binary package ", "for ",
-                      sub(" *\\(.*","", R.version.string))
+      msg <- sub(" *\\(.*","", R.version.string)
+        if(binary) {
 	warning(sprintf(ngettext(sum(miss),
-				 "package %s is not available (%s)",
-				 "packages %s are not available (%s)"),
+				 "package %s is not available (as a binary package for %s)",
+				 "packages %s are not available (as a binary packages for %s)", domain = "R-utils"),
 			paste(sQuote(p0[miss]), collapse = ", "), msg),
                 domain = NA, call. = FALSE)
+        } else {
+	warning(sprintf(ngettext(sum(miss),
+				 "package %s is not available (for %s)",
+				 "packages %s are not available (for %s)", domain = "R-utils"),
+			paste(sQuote(p0[miss]), collapse = ", "), msg),
+                domain = NA, call. = FALSE)
+        }
         base <- vapply(p0[miss], isBasePkg, FALSE)
         if (sum(base))
           warning(sprintf(ngettext(sum(base),
                                    "package %s is a base package, and should not be updated",
-                                   "packages %s are base packages, and should not be updated"),
+                                   "packages %s are base packages, and should not be updated", domain = "R-utils"),
                           paste(sQuote(p0[miss][base]), collapse = ", ")),
                   domain = NA, call. = FALSE)
         if (sum(miss) == 1L &&
             !is.na(w <- match(tolower(p0[miss]),
                               tolower(row.names(available))))) {
-            warning(sprintf("Perhaps you meant %s ?",
+            warning(gettextf("Perhaps you meant %s?",
                             sQuote(row.names(available)[w])),
-                    call. = FALSE, domain = NA)
+                    call. = FALSE, domain = "R-utils")
         }
         flush.console()
     }
@@ -103,7 +110,7 @@ getDependencies <-
             not_avail <- unique(not_avail)
             warning(sprintf(ngettext(length(not_avail),
                                      "dependency %s is not available",
-                                     "dependencies %s are not available"),
+                                     "dependencies %s are not available", domain = "R-utils"),
                             paste(sQuote(not_avail), collapse=", ")),
                     domain = NA, call. = FALSE, immediate. = TRUE)
             flush.console()
@@ -115,7 +122,7 @@ getDependencies <-
             added <- setdiff(pkgs, p0)
             message(sprintf(ngettext(length(added),
                                      "also installing the dependency %s",
-                                     "also installing the dependencies %s"),
+                                     "also installing the dependencies %s", domain = "R-utils"),
                             paste(sQuote(added), collapse=", ")),
                     "\n", domain = NA)
             flush.console()
@@ -247,8 +254,8 @@ install.packages <-
         lib <- .libPaths()[1L]
 	if(!quiet && length(.libPaths()) > 1L)
 	    message(sprintf(ngettext(length(pkgs),
-                                     "Installing package into %s\n(as %s is unspecified)",
-                                     "Installing packages into %s\n(as %s is unspecified)"),
+                                     "Installing package into %s directory\n(as %s directory is unspecified)",
+                                     "Installing packages into %s directory\n(as %s directory is unspecified)", domain = "R-utils"),
                             sQuote(lib), sQuote("lib")), domain = NA)
     }
 
@@ -257,7 +264,7 @@ install.packages <-
     if(length(lib) > 1 && any(!ok))
         stop(sprintf(ngettext(sum(!ok),
                               "'lib' element %s is not a writable directory",
-                              "'lib' elements %s are not writable directories"),
+                              "'lib' elements %s are not writable directories", domain = "R-utils"),
                      paste(sQuote(lib[!ok]), collapse=", ")), domain = NA)
     if(length(lib) == 1L && .Platform$OS.type == "windows") {
         ## file.access is unreliable on Windows, especially >= Vista.
@@ -273,13 +280,13 @@ install.packages <-
     }
     if(length(lib) == 1L && !ok) {
         warning(gettextf("'lib = \"%s\"' is not writable", lib),
-                domain = NA, immediate. = TRUE)
+                domain = "R-utils", immediate. = TRUE)
         userdir <- unlist(strsplit(Sys.getenv("R_LIBS_USER"),
                                    .Platform$path.sep))[1L]
 	if(interactive()) {
 	    ask.yes.no <- function(msg) {
                 ##' returns "no" for "no",  otherwise 'ans', a string
-		msg <- gettext(msg)
+		#msg <- gettext(msg)
 		if(.Platform$OS.type == "windows") {
                     flush.console() # so warning is seen
 		    ans <- winDialog("yesno", sprintf(msg, sQuote(userdir)))
@@ -289,16 +296,16 @@ install.packages <-
 		    if(substr(ans, 1L, 1L) == "n") "no" else ans
 		}
 	    }
-	    ans <- ask.yes.no("Would you like to use a personal library instead?")
+	    ans <- ask.yes.no(gettext("Would you like to use a personal library instead?", domain = "R-utils"))
 	    if(identical(ans, "no")) stop("unable to install packages")
 
 	    lib <- userdir
 	    if(!file.exists(userdir)) {
-		ans <- ask.yes.no("Would you like to create a personal library\n%s\nto install packages into?")
+		ans <- ask.yes.no(gettext("Would you like to create a personal library\n%s\nto install packages into?", domain = "R-utils"))
 		if(identical(ans, "no")) stop("unable to install packages")
 		if(!dir.create(userdir, recursive = TRUE))
                     stop(gettextf("unable to create %s", sQuote(userdir)),
-                         domain = NA)
+                         domain = "R-utils")
 		.libPaths(c(userdir, .libPaths()))
 	    }
 	} else stop("unable to install packages")
@@ -351,7 +358,7 @@ install.packages <-
             if (!file.exists(tmpd) && !dir.create(tmpd))
                 stop(gettextf("unable to create temporary directory %s",
                               sQuote(tmpd)),
-                     domain = NA)
+                     domain = "R-utils")
         }
         if(nonlocalrepos) {
             urls <- pkgs[web]
@@ -411,7 +418,7 @@ install.packages <-
         if(any(later)) {
             msg <- ngettext(sum(later),
                             "There is a binary version available but the source version is later",
-                            "There are binary versions available but the source versions are later")
+                            "There are binary versions available but the source versions are later", domain = "R-utils")
             cat("\n",
                 paste(strwrap(msg, indent = 2, exdent = 2), collapse = "\n"),
                 ":\n", sep = "")
@@ -426,12 +433,12 @@ install.packages <-
                     msg <-
                         ngettext(sum(later & hasSrc),
                                  "Do you want to install from sources the package which needs compilation?",
-                                 "Do you want to install from sources the packages which need compilation?")
+                                 "Do you want to install from sources the packages which need compilation?", domain = "R-utils")
                     message(msg, domain = NA)
                     res <- readline("y/n: ")
                     if(res != "y") later <- later & !hasSrc
                 } else if (action == "never") {
-                    cat("  Binaries will be installed\n")
+                    cat("  ", gettext("Binaries will be installed", domain = "R-utils"), "\n", sep = "")
                     later <- later & !hasSrc
                 }
             }
@@ -444,7 +451,7 @@ install.packages <-
                 msg <-
                     ngettext(length(s2),
                              "Package which is only available in source form, and may need compilation of C/C++/Fortran",
-                             "Packages which are only available in source form, and may need compilation of C/C++/Fortran")
+                             "Packages which are only available in source form, and may need compilation of C/C++/Fortran", domain = "R-utils")
                 msg <- c(paste0(msg, ": "), sQuote(s2))
                 msg <- strwrap(paste(msg, collapse = " "), exdent = 2)
                 message(paste(msg, collapse = "\n"), domain = NA)
@@ -453,7 +460,7 @@ install.packages <-
                     res <- readline("y/n: ")
                     if(res != "y") pkgs <- setdiff(pkgs, s2)
                 } else if(action == "never") {
-                    cat("  These will not be installed\n")
+                    cat("  ", gettext("These will not be installed", domain = "R-utils"), "\n", sep = "")
                     pkgs <- setdiff(pkgs, s2)
                 }
             }
@@ -480,7 +487,7 @@ install.packages <-
         if(!length(pkgs)) return(invisible())
         message(sprintf(ngettext(length(pkgs),
                                      "installing the source package %s",
-                                     "installing the source packages %s"),
+                                     "installing the source packages %s", domain = "R-utils"),
                         paste(sQuote(pkgs), collapse=", ")),
                 "\n", domain = NA)
 	flush.console()
@@ -512,7 +519,7 @@ install.packages <-
                     msg <-
                         sprintf(ngettext(length(na),
                                          "package %s is available as a source package but not as a binary",
-                                         "packages %s are available as source packages but not as binaries"),
+                                         "packages %s are available as source packages but not as binaries", domain = "R-utils"),
                                 paste(sQuote(na), collapse = ", "))
                     cat("\n   ", msg, "\n\n", sep = "")
                 }
@@ -524,7 +531,7 @@ install.packages <-
                 if(any(later)) {
                     msg <- ngettext(sum(later),
                                     "There is a binary version available (and will be installed) but the source version is later",
-                                    "There are binary versions available (and will be installed) but the source versions are later")
+                                    "There are binary versions available (and will be installed) but the source versions are later", domain = "R-utils")
                     cat("\n",
                         paste(strwrap(msg, indent = 2, exdent = 2), collapse = "\n"),
                         ":\n", sep = "")
@@ -603,13 +610,11 @@ install.packages <-
               (length(keep_outputs) == 1L)) {
         if(!dir.exists(keep_outputs) &&
            !dir.create(keep_outputs, recursive = TRUE))
-            stop(gettextf("unable to create %s", sQuote(keep_outputs)),
-                 domain = NA)
+            stop(gettextf("unable to create %s", sQuote(keep_outputs)), domain = "R-utils")
         outdir <- normalizePath(keep_outputs)
         keep_outputs <- TRUE
     } else
-        stop(gettextf("invalid %s argument", sQuote("keep_outputs")),
-             domain = NA)
+        stop(gettextf("invalid '%s' argument", "keep_outputs"), domain = "R-utils")
 
     if(length(libpath)) {
         ## <NOTE>
@@ -641,9 +646,7 @@ install.packages <-
     }
 
     if(verbose)
-        message(gettextf("system (cmd0): %s",
-                         paste(c(cmd0, args0), collapse = " ")),
-                domain = NA)
+        message(gettextf("system (cmd0): %s", paste(c(cmd0, args0), collapse = " ")), domain = "R-utils")
 
     if(is.null(repos) & missing(contriburl)) {
         ## install from local source tarball(s)
@@ -660,12 +663,10 @@ install.packages <-
            status <- system2(cmd0, args, env = env,
                              stdout = output, stderr = output)
            if(status > 0L)
-               warning(gettextf("installation of package %s had non-zero exit status",
-                                sQuote(update[i, 1L])),
-                       domain = NA)
+               warning(gettextf("installation of package %s had non-zero exit status", sQuote(update[i, 1L]), domain = "R-utils"))
            else if(verbose) {
                cmd <- paste(c(cmd0, args), collapse = " ")
-               message(sprintf("%d): succeeded '%s'", i, cmd), domain = NA)
+               message(gettextf("%d): succeeded '%s'", i, cmd), domain = "R-utils")
            }
        }
         return(invisible())
@@ -676,9 +677,7 @@ install.packages <-
     if(is.null(destdir) && nonlocalrepos) {
         tmpd <- file.path(tempdir(), "downloaded_packages")
         if (!file.exists(tmpd) && !dir.create(tmpd))
-            stop(gettextf("unable to create temporary directory %s",
-                          sQuote(tmpd)),
-                 domain = NA)
+            stop(gettextf("unable to create temporary directory %s", sQuote(tmpd)), domain = "R-utils")
     }
 
     if(is.null(available))
@@ -694,16 +693,12 @@ install.packages <-
     ## at this point 'pkgs' may contain duplicates,
     ## the same pkg in different libs
     if(length(foundpkgs)) {
-	if(verbose) message(gettextf("foundpkgs: %s",
-                                     paste(foundpkgs, collapse=", ")),
-                            domain = NA)
+	if(verbose) message(gettextf("foundpkgs: %s", paste(foundpkgs, collapse=", ")), domain = "R-utils")
         update <- unique(cbind(pkgs, lib))
         colnames(update) <- c("Package", "LibPath")
         found <- pkgs %in% foundpkgs[, 1L]
         files <- foundpkgs[match(pkgs[found], foundpkgs[, 1L]), 2L]
-	if(verbose) message(gettextf("files: %s",
-                                     paste(files, collapse=", \n\t")),
-                            domain = NA)
+	if(verbose) message(gettextf("files: %s", paste(files, collapse=", \n\t")), domain = "R-utils")
         update <- cbind(update[found, , drop=FALSE], file = files)
         if(nrow(update) > 1L) {
             upkgs <- unique(pkgs <- update[, 1L])
@@ -719,9 +714,7 @@ install.packages <-
             args0 <- c(args0, "--pkglock")
             tmpd <- file.path(tempdir(), "make_packages")
             if (!file.exists(tmpd) && !dir.create(tmpd))
-                stop(gettextf("unable to create temporary directory %s",
-                              sQuote(tmpd)),
-                     domain = NA)
+                stop(gettextf("unable to create temporary directory %s", sQuote(tmpd)), domain = "R-utils")
             mfile <- file.path(tmpd, "Makefile")
             conn <- file(mfile, "wt")
             deps <- paste(paste0(update[, 1L], ".ts"), collapse=" ")
@@ -756,7 +749,7 @@ install.packages <-
                 deps <- if(length(deps))
                     paste(paste0(deps, ".ts"), collapse = " ") else ""
                 cat(paste0(pkg, ".ts: ", deps),
-                    paste("\t@echo begin installing package", sQuote(pkg)),
+                    paste("\t@echo ", gettextf("begin installing package %s", sQuote(pkg), domain = "R-utils"), sep = ""),
                     paste0("\t@", cmd, " && touch ", pkg, ".ts"),
                     paste0("\t@cat ", pkg, ".out"),
                     "", sep = "\n", file = conn)
@@ -775,9 +768,7 @@ install.packages <-
                 tss <- sub("[.]ts$", "", dir(".", pattern = "[.]ts$"))
                 failed <- pkgs[!pkgs %in% tss]
 		for (pkg in failed) system(paste0("cat ", pkg, ".out"))
-                warning(gettextf("installation of one or more packages failed,\n  probably %s",
-                                 paste(sQuote(failed), collapse = ", ")),
-                        domain = NA)
+                warning(gettextf("installation of one or more packages failed,\n  probably %s", paste(sQuote(failed), collapse = ", ")), domain = "R-utils")
             }
             if(keep_outputs)
                 file.copy(paste0(update[, 1L], ".out"), outdir)
@@ -798,13 +789,10 @@ install.packages <-
                 if(!quiet && keep_outputs)
                     writeLines(readLines(outfile))
                 if(status > 0L)
-                    warning(gettextf("installation of package %s had non-zero exit status",
-                                     sQuote(update[i, 1L])),
-                            domain = NA)
+                    warning(gettextf("installation of package %s had non-zero exit status", sQuote(update[i, 1L]), domain = "R-utils"))
 		else if(verbose) {
                     cmd <- paste(c(cmd0, args), collapse = " ")
-                    message(sprintf("%d): succeeded '%s'", i, cmd),
-                            domain = NA)
+                    message(gettextf("%d): succeeded '%s'", i, cmd, domain = "R-utils"))
                 }
             }
             if(keep_outputs && (outdir != getwd())) {
@@ -814,9 +802,7 @@ install.packages <-
         }
         ## Using stderr is the wish of PR#16420
         if(!quiet && nonlocalrepos && !is.null(tmpd) && is.null(destdir))
-            cat("\n", gettextf("The downloaded source packages are in\n\t%s",
-                               sQuote(normalizePath(tmpd, mustWork = FALSE))),
-                "\n", sep = "", file = stderr())
+            cat("\n", gettext("The downloaded source packages are in:", domain = "R-utils"), "\n\t",sQuote(normalizePath(tmpd, mustWork = FALSE)), "\n", sep = "", file = stderr())
         ## update packages.html on Unix only if .Library was installed into
         libs_used <- unique(update[, 2L])
         if(.Platform$OS.type == "unix" && .Library %in% libs_used) {

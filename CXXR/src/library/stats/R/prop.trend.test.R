@@ -18,9 +18,8 @@
 
 prop.trend.test <- function (x, n, score = seq_along(x))
 {
-    method <- "Chi-squared Test for Trend in Proportions"
-    dname <- paste(deparse(substitute(x)), "out of", deparse(substitute(n)))
-    dname <- paste(dname, ",\n using scores:", paste(score, collapse = " "))
+    METHOD <- gettext("Chi-squared Test for Trend in Proportions", domain = "R-stats")
+    DNAME <- gettextf("%s out of %s,\n using scores: %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(n)), collapse = ""), paste(score, collapse = " "), domain = "R-stats")
 
     ## Tabular input has caused grief, get rid of dim() attributes:
     x <- as.vector(x)
@@ -30,10 +29,13 @@ prop.trend.test <- function (x, n, score = seq_along(x))
     w <- n/p/(1 - p) # <- workaround 'codetools' inability to see the 'weights' in 'data':
     a <- anova(lm(freq ~ score, data = list(freq = x/n, score = as.vector(score)),
 		  weights = w))
-    chisq <- c("X-squared" = a["score", "Sum Sq"])
+    chisq <- a["score", "Sum Sq"]
+    names(chisq) <- gettext("X-squared", domain = "R-stats")
+    DF <- 1
+    names(DF) <- "df"
     structure(list(statistic = chisq,
-                   parameter = c(df = 1),
+                   parameter = DF,
                    p.value = pchisq(as.numeric(chisq), 1, lower.tail = FALSE),
-                   method = method, data.name = dname),
+                   method = METHOD, data.name = DNAME),
               class = "htest")
 }

@@ -22,7 +22,7 @@ stop <- function(..., call. = TRUE, domain = NULL)
     if (length(args) == 1L && inherits(args[[1L]], "condition")) {
         cond <- args[[1L]]
         if(nargs() > 1L)
-            warning("additional arguments ignored in stop()")
+            warning(gettextf("additional arguments ignored in '%s' function", "stop()"))
         message <- conditionMessage(cond)
         call <- conditionCall(cond)
         .Internal(.signalCondition(cond, message, call))
@@ -37,14 +37,14 @@ stopifnot <- function(...)
     if(n == 0L)
 	return(invisible())
     mc <- match.call()
-    for(i in 1L:n)
+    for(i in seq_len(n))
 	if(!(is.logical(r <- ll[[i]]) && !anyNA(r) && all(r))) {
 	    ch <- deparse(mc[[i+1]], width.cutoff = 60L)
 	    if(length(ch) > 1L) ch <- paste(ch[1L], "....")
             stop(sprintf(ngettext(length(r),
-                                  "%s is not TRUE",
-                                  "%s are not all TRUE"),
-                         ch), call. = FALSE, domain = NA)
+                                  "variable %s is not TRUE",
+                                  "variables %s are not all TRUE", domain = "R-base"),
+                         sQuote(ch)), call. = FALSE, domain = NA)
 	}
     invisible()
 }
@@ -56,8 +56,7 @@ warning <- function(..., call. = TRUE, immediate. = FALSE,
     if (length(args) == 1L && inherits(args[[1L]], "condition")) {
         cond <- args[[1L]]
         if(nargs() > 1L)
-            cat(gettext("additional arguments ignored in warning()"),
-                "\n", sep = "", file = stderr())
+            cat(gettextf("additional arguments ignored in '%s' function", "warning()", domain = "R-base"), "\n", sep = "", file = stderr())
         message <- conditionMessage(cond)
         call <- conditionCall(cond)
         withRestarts({

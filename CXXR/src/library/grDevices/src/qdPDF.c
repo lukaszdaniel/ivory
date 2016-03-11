@@ -31,7 +31,7 @@
 //#include <R.h>
 #include <Rinternals.h>
 //#include <R_ext/QuartzDevice.h>
-#define _(String) (String)
+#include "localization.h"
 
 typedef struct {
     CGContextRef context;   /* drawing context */
@@ -107,7 +107,7 @@ QuartzPDF_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzParameters_t *par)
 	int numK = 1;
 	CFStringRef keys[2], values[2];
 	keys[0] = kCGPDFContextCreator;
-	values[0] = CFSTR("Quartz R Device");
+	values[0] = CFSTR(_("Quartz R Device"));
 	if (par->title) {
 	    keys[numK] = kCGPDFContextTitle;
 	    values[numK] = CFStringCreateWithBytes(kCFAllocatorDefault, (UInt8*) par->title, strlen(par->title), kCFStringEncodingUTF8, FALSE);

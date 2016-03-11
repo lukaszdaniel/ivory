@@ -26,15 +26,7 @@
 #endif
 
 #include <Defn.h>
-
-#undef _
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("stats", String)
-#else
-#define _(String) (String)
-#endif
-
+#include "localization.h"
 
 void fft_factor(int n, int *pmaxf, int *pmaxp);
 Rboolean fft_work(double *a, double *b, int nseg, int n, int nspn,
@@ -84,7 +76,7 @@ SEXP fft(SEXP z, SEXP inverse)
 		error(_("fft factorization error"));
 	    smaxf = maxf;
 	    if (smaxf > maxsize)
-		error("fft too large");
+		error(_("fft is too large"));
 	    work = (double*)R_alloc(4 * smaxf, sizeof(double));
 	    iwork = (int*)R_alloc(maxp, sizeof(int));
 	    fft_work(&(COMPLEX(z)[0].r), &(COMPLEX(z)[0].i),
@@ -108,7 +100,7 @@ SEXP fft(SEXP z, SEXP inverse)
 	    }
 	    smaxf = maxmaxf;
 	    if (smaxf > maxsize)
-		error("fft too large");
+		error(_("fft is too large"));
 	    work = (double*)R_alloc(4 * smaxf, sizeof(double));
 	    iwork = (int*)R_alloc(maxmaxp, sizeof(int));
 	    nseg = LENGTH(z);
@@ -175,7 +167,7 @@ SEXP mvfft(SEXP z, SEXP inverse)
 	    error(_("fft factorization error"));
 	smaxf = maxf;
 	if (smaxf > maxsize)
-	    error("fft too large");
+	    error(_("fft is too large"));
 	work = (double*)R_alloc(4 * smaxf, sizeof(double));
 	iwork = (int*)R_alloc(maxp, sizeof(int));
 	for (i = 0; i < p; i++) {

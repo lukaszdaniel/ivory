@@ -24,11 +24,9 @@
 
 #include <R.h>
 #include "ts.h"
+#include "localization.h"
+#include <R_ext/Minmax.h>
 
-#ifndef min
-#define min(a, b) ((a < b)?(a):(b))
-#define max(a, b) ((a < b)?(b):(a))
-#endif
 
 // currently ISNAN includes NAs
 #define my_isok(x) (!ISNA(x) & !ISNAN(x))
@@ -36,10 +34,10 @@
 SEXP cfilter(SEXP sx, SEXP sfilter, SEXP ssides, SEXP scircular)
 {
    if (TYPEOF(sx) != REALSXP || TYPEOF(sfilter) != REALSXP)
-       error("invalid input");
+       error(_("invalid input"));
     R_xlen_t nx = XLENGTH(sx), nf = XLENGTH(sfilter);
     int sides = asInteger(ssides), circular = asLogical(scircular);
-    if(sides == NA_INTEGER || circular == NA_LOGICAL)  error("invalid input");
+    if(sides == NA_INTEGER || circular == NA_LOGICAL)  error(_("invalid input"));
 
     SEXP ans = allocVector(REALSXP, nx);
 
@@ -87,7 +85,7 @@ SEXP cfilter(SEXP sx, SEXP sfilter, SEXP ssides, SEXP scircular)
 SEXP rfilter(SEXP x, SEXP filter, SEXP out)
 {
    if (TYPEOF(x) != REALSXP || TYPEOF(filter) != REALSXP
-       || TYPEOF(out) != REALSXP) error("invalid input");
+       || TYPEOF(out) != REALSXP) error(_("invalid input"));
     R_xlen_t nx = XLENGTH(x), nf = XLENGTH(filter);
     double sum, tmp, *r = REAL(out), *rx = REAL(x), *rf = REAL(filter);
 

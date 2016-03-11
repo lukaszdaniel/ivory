@@ -23,18 +23,18 @@ hist.default <-
 	      probability = !freq, include.lowest= TRUE,
 	      right = TRUE, density = NULL, angle = 45,
 	      col = NULL, border = NULL,
-	      main = paste("Histogram of", xname),
+	      main = gettextf("Histogram of %s", xname, domain = "R-graphics"),
 	      xlim = range(breaks), ylim = NULL,
 	      xlab = xname, ylab,
 	      axes = TRUE, plot = TRUE, labels = FALSE, nclass = NULL,
 	      warn.unused = TRUE, ...)
 {
     if (!is.numeric(x))
-	stop("'x' must be numeric")
+	stop(gettextf("'%s' argument must be numeric", "x"))
     xname <- paste(deparse(substitute(x), 500), collapse="\n")
     n <- length(x <- x[is.finite(x)])
     n <- as.integer(n)
-    if(is.na(n)) stop("invalid length(x)")
+    if(is.na(n)) stop(gettextf("invalid '%s' value", "length(x)"))
     use.br <- !missing(breaks)
     if(use.br) {
 	if(!missing(nclass))
@@ -68,28 +68,25 @@ hist.default <-
         ## breaks <- pretty (range(x), n = breaks, min.n = 1)
         ## nB <- length(breaks)
         ## if(nB <= 1) ##-- Impossible !
-        ##     stop(gettextf("hist.default: pretty() error, breaks=%s",
-        ##                   format(breaks)), domain = NA)
+        ##     stop(gettextf("hist.default: pretty() error, breaks=%s", format(breaks)), domain = "R-graphics")
         if (length(breaks) == 1) {
             if(!is.numeric(breaks) || !is.finite(breaks) || breaks < 1L)
                 stop("invalid number of 'breaks'")
             breaks <- pretty (range(x), n = breaks, min.n = 1)
             nB <- length(breaks)
             if(nB <= 1) ##-- Impossible !
-                stop(gettextf("hist.default: pretty() error, breaks=%s",
-                              format(breaks)), domain = NA)
+                stop(gettextf("hist.default: pretty() error, breaks=%s", format(breaks)), domain = "R-graphics")
         }
         else {
             if(!is.numeric(breaks) || length(breaks) <= 1)
-                stop(gettextf("Invalid breakpoints produced by 'breaks(x)': %s",
-                              format(breaks)), domain = NA)
+                stop(gettextf("Invalid breakpoints produced by 'breaks(x)': %s", format(breaks)), domain = "R-graphics")
             breaks <- sort(breaks)
             nB <- length(breaks)
             use.br <- TRUE # To allow equidist=FALSE below (FIXME: Find better way?)
         }
     }
     nB <- as.integer(nB)
-    if(is.na(nB)) stop("invalid length(breaks)")
+    if(is.na(nB)) stop(gettextf("invalid '%s' value", "length(breaks)"))
 
     ## Do this *before* adding fuzz or logic breaks down...
 
@@ -120,7 +117,7 @@ hist.default <-
     ## arguments are often irrelevant (but not with integer data!)
     counts <- .Call(C_BinCount, x, fuzzybreaks, right, include.lowest)
     if (any(counts < 0L))
-	stop("negative 'counts'. Internal Error.", domain = NA)
+	stop("negative 'counts'. Internal Error.", domain = "R-graphics")
     if (sum(counts) < n)
 	stop("some 'x' not counted; maybe 'breaks' do not span range of 'x'")
     dens <- counts/(n*h) # use un-fuzzed intervals
@@ -148,7 +145,7 @@ hist.default <-
 	    if(any(not.miss))
 		warning(sprintf(ngettext(sum(not.miss),
 					 "argument %s is not made use of",
-					 "arguments %s are not made use of"),
+					 "arguments %s are not made use of", domain = "R-graphics"),
 				paste(sQuote(nf[not.miss]), collapse=", ")),
 			domain = NA)
 	}
@@ -159,7 +156,7 @@ hist.default <-
 plot.histogram <-
     function (x, freq = equidist, density = NULL, angle = 45,
 	      col = NULL, border = par("fg"), lty = NULL,
-	      main = paste("Histogram of", paste(x$xname, collapse="\n")),
+	      main = gettextf("Histogram of %s", paste(x$xname, collapse="\n"), domain = "R-graphics"),
               sub = NULL,
 	      xlab = x$xname, ylab,
 	      xlim = range(x$breaks), ylim = NULL,
@@ -180,7 +177,7 @@ plot.histogram <-
 	if(is.null(ylim))
 	    ylim <- range(y, 0)
 	if (missing(ylab))
-	    ylab <- if (!freq) "Density" else "Frequency"
+	    ylab <- if (!freq) gettext("Density", domain = "R-graphics") else gettext("Frequency", domain = "R-graphics")
 	plot.new()
 	plot.window(xlim, ylim, "", ...)	#-> ylim's default from 'y'
 	if(ann) title(main = main, sub = sub, xlab = xlab, ylab = ylab, ...)

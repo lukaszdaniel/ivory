@@ -44,8 +44,7 @@ if(substr(R.version$os, 1L, 6L) != "darwin") {
         xcode <- system(paste0("tar zxf \"", path.expand(what), "\" -C \"",
                                path.expand(where), "\""), intern=FALSE)
         if (xcode)
-            warning(gettextf("'tar' returned non-zero exit code %d", xcode),
-                    domain = NA, call. = FALSE)
+            warning(gettextf("'tar' returned non-zero exit code %d", xcode), domain = "R-utils", call. = FALSE)
     }
 
     unpackPkg <- function(pkg, pkgname, lib, lock = FALSE)
@@ -55,30 +54,25 @@ if(substr(R.version$os, 1L, 6L) != "darwin") {
         ## dir over to the appropriate install dir.
         tmpDir <- tempfile(, lib)
         if (!dir.create(tmpDir))
-            stop(gettextf("unable to create temporary directory %s",
-                          sQuote(tmpDir)),
-                 domain = NA, call. = FALSE)
+            stop(gettextf("unable to create temporary directory %s", sQuote(tmpDir)), domain = "R-utils", call. = FALSE)
         cDir <- getwd()
         on.exit(setwd(cDir), add = TRUE)
         res <- untar(pkg, tmpDir)
         setwd(tmpDir)
         ## sanity check: people have tried to install source .tgz files
         if (!file.exists(file <- file.path(pkgname, "Meta", "package.rds")))
-            stop(gettextf("file %s is not an OS X binary package", sQuote(pkg)),
-                 domain = NA, call. = FALSE)
+            stop(gettextf("file %s is not an OS X binary package", sQuote(pkg)), domain = "R-utils", call. = FALSE)
         desc <- readRDS(file)$DESCRIPTION
         if (length(desc) < 1L)
-            stop(gettextf("file %s is not an OS X binary package", sQuote(pkg)),
-                 domain = NA, call. = FALSE)
+            stop(gettextf("file %s is not an OS X binary package", sQuote(pkg)), domain = "R-utils", call. = FALSE)
         desc <- as.list(desc)
         if (is.null(desc$Built))
-            stop(gettextf("file %s is not an OS X binary package", sQuote(pkg)),
-                 domain = NA, call. = FALSE)
+            stop(gettextf("file %s is not an OS X binary package", sQuote(pkg)), domain = "R-utils", call. = FALSE)
 
         res <- tools::checkMD5sums(pkgname, file.path(tmpDir, pkgname))
         if(!quiet && !is.na(res) && res) {
-            cat(gettextf("package %s successfully unpacked and MD5 sums checked\n",
-                         sQuote(pkgname)))
+            cat(gettextf("package %s successfully unpacked and MD5 sums checked",
+                         sQuote(pkgname)), "\n", sep = "")
             flush.console()
         }
 
@@ -89,12 +83,11 @@ if(substr(R.version$os, 1L, 6L) != "darwin") {
             else file.path(lib, "00LOCK")
 	    if (file.exists(lockdir)) {
                 stop(gettextf("ERROR: failed to lock directory %s for modifying\nTry removing %s",
-                              sQuote(lib), sQuote(lockdir)), domain = NA)
+                              sQuote(lib), sQuote(lockdir)), domain = "R-utils")
 	    }
 	    dir.create(lockdir, recursive = TRUE)
 	    if (!dir.exists(lockdir))
-                stop(gettextf("ERROR: failed to create lock directory %s",
-                              sQuote(lockdir)), domain = NA)
+                stop(gettextf("ERROR: failed to create lock directory %s", sQuote(lockdir)), domain = "R-utils")
             ## Back up a previous version
             if (file.exists(instPath)) {
                 file.copy(instPath, lockdir, recursive = TRUE)
@@ -103,8 +96,7 @@ if(substr(R.version$os, 1L, 6L) != "darwin") {
                         try(unlink(instPath, recursive = TRUE))
         	    	savedcopy <- file.path(lockdir, pkgname)
         	    	file.copy(savedcopy, lib, recursive = TRUE)
-        	    	warning(gettextf("restored %s", sQuote(pkgname)),
-                                domain = NA, call. = FALSE, immediate. = TRUE)
+        	    	warning(gettextf("restored %s", sQuote(pkgname)), domain = "R-utils", call. = FALSE, immediate. = TRUE)
         	    }
         	}, add=TRUE)
         	restorePrevious <- FALSE
@@ -122,12 +114,11 @@ if(substr(R.version$os, 1L, 6L) != "darwin") {
                 warning(gettextf("unable to move temporary installation %s to %s",
                                  sQuote(file.path(tmpDir, pkgname)),
                                  sQuote(instPath)),
-                        domain = NA, call. = FALSE)
+                        domain = "R-utils", call. = FALSE)
                 restorePrevious <- TRUE # Might not be used
             }
         } else
-        stop(gettextf("cannot remove prior installation of package %s",
-                      sQuote(pkgname)), call. = FALSE, domain = NA)
+        stop(gettextf("cannot remove prior installation of package %s", sQuote(pkgname)), call. = FALSE, domain = "R-utils")
         setwd(cDir)
         unlink(tmpDir, recursive=TRUE)
     }
@@ -153,9 +144,7 @@ if(substr(R.version$os, 1L, 6L) != "darwin") {
     if(is.null(destdir) && nonlocalcran) {
         tmpd <- file.path(tempdir(), "downloaded_packages")
         if (!file.exists(tmpd) && !dir.create(tmpd))
-            stop(gettextf("unable to create temporary directory %s",
-                          sQuote(tmpd)),
-                 domain = NA)
+            stop(gettextf("unable to create temporary directory %s", sQuote(tmpd)), domain = "R-utils")
     }
 
     if(is.null(available))
@@ -181,7 +170,7 @@ if(substr(R.version$os, 1L, 6L) != "darwin") {
             }
         }
         if(!quiet && !is.null(tmpd) && is.null(destdir))
-            cat("\n", gettextf("The downloaded binary packages are in\n\t%s", tmpd),
+            cat("\n", gettext("The downloaded binary packages are in:", domain = "R-utils"), "\n\t", sQuote(tmpd),
                 "\n", sep = "")
     } else if(!is.null(tmpd) && is.null(destdir)) unlink(tmpd, recursive = TRUE)
 

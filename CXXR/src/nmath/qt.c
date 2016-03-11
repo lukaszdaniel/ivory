@@ -82,7 +82,7 @@ double qt(double p, double ndf, int lower_tail, int log_p)
 	    if (pt(nx, ndf, TRUE, FALSE) > p) ux = nx; else lx = nx;
 	} while ((ux - lx) / fabs(nx) > accu && ++iter < 1000);
 
-	if(iter >= 1000) ML_ERROR(ME_PRECISION, "qt");
+	if(iter >= 1000) ML_ERROR(ME_PRECISION, "qt()");
 
 	return 0.5 * (lx + ux);
     }

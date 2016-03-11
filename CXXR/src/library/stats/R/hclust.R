@@ -51,31 +51,31 @@ hclust <- function(d, method="complete", members=NULL)
                  "complete", "average", "mcquitty", # 3, 4, 5,
                  "median", "centroid", "ward.D2") # 6, 7, 8
     if(method == "ward") { # do not deprecate earlier than 2015!
-	message("The \"ward\" method has been renamed to \"ward.D\"; note new \"ward.D2\"")
+	message("The 'ward()' method has been renamed to 'ward.D()'; note new 'ward.D2()'")
 	method <- "ward.D"
     }
     i.meth <-  pmatch(method, METHODS)
     if(is.na(i.meth))
         ## TODO: use gettextf() [-> translation string change]
-	stop("invalid clustering method", paste("", method))
+	stop(gettextf("invalid clustering method %s", method))
     if(i.meth == -1)
-	stop("ambiguous clustering method", paste("", method))
+	stop(gettextf("ambiguous clustering method %s", method))
 
     n <- as.integer(attr(d, "Size"))
     if(is.null(n))
 	stop("invalid dissimilarities")
     if(is.na(n) || n > 65536L) stop("size cannot be NA nor exceed 65536")
     if(n < 2)
-        stop("must have n >= 2 objects to cluster")
+        stop("at least 2 objects are needed to cluster")
     len <- as.integer(n*(n-1)/2)
     if(length(d) != len)
-        (if (length(d) < len) stop else warning
-         )("dissimilarities of improper length")
+        (if (length(d) < len) stop("dissimilarities are of improper length")
+	 else warning("dissimilarities are of improper length"))
 
     if(is.null(members))
         members <- rep(1, n)
     else if(length(members) != n)
-        stop("invalid length of members")
+        stop(gettextf("invalid length of '%s' argument", "members"))
 
     storage.mode(d) <- "double"
     hcl <- .Fortran(C_hclust,
@@ -102,8 +102,8 @@ hclust <- function(d, method="complete", members=NULL)
 		      iia = integer(n),
 		      iib = integer(n))
 
-    structure(list(merge = cbind(hcass$iia[1L:(n-1)], hcass$iib[1L:(n-1)]),
-		   height = hcl$crit[1L:(n-1)],
+    structure(list(merge = cbind(hcass$iia[seq_len(n-1)], hcass$iib[seq_len(n-1)]),
+		   height = hcl$crit[seq_len(n-1)],
 		   order = hcass$order,
 		   labels = attr(d, "Labels"),
 		   method = METHODS[i.meth],
@@ -120,25 +120,25 @@ hclust <- function(d, method="complete", members=NULL)
 ##' @author Martin Maechler
 .validity.hclust <- function(x, merge = x$merge, order = TRUE) {
     if (!is.matrix(merge) || ncol(merge) != 2)
-	return("invalid dendrogram")
+	return(gettext("invalid dendrogram", domain = "R-stats"))
     ## merge should be integer but might not be after dump/restore.
     if (any(as.integer(merge) != merge))
-	return("'merge' component in dendrogram must be integer")
+	return(gettext("'merge' component in dendrogram must be integer", domain = "R-stats"))
     n1 <- nrow(merge) # == #{obs} - 1
     n <- n1+1L
-    if(length(x$height) != n1) return("'height' is of wrong length")
-    if(order && length(x$order ) != n ) return("'order' is of wrong length")
+    if(length(x$height) != n1) return(gettextf("'%s' argument is of the wrong length", "height", domain = "R-stats"))
+    if(order && length(x$order ) != n ) return(gettextf("'%s' argument is of the wrong length", "order", domain = "R-stats"))
     if(identical(sort(as.integer(merge)), c(-(n:1L), +seq_len(n-2L))))
 	TRUE
     else
-	"'merge' matrix has invalid contents"
+	gettext("'merge' matrix has invalid contents", domain = "R-stats")
 }
 
 plot.hclust <-
     function (x, labels = NULL, hang = 0.1, check = TRUE,
               axes = TRUE, frame.plot = FALSE, ann = TRUE,
-              main = "Cluster Dendrogram",
-              sub = NULL, xlab = NULL, ylab = "Height", ...)
+              main = gettext("Cluster Dendrogram"),
+              sub = NULL, xlab = NULL, ylab = gettext("Height"), ...)
 {
     merge <- x$merge
     if(check && !isTRUE(msg <- .validity.hclust(x,merge)))
@@ -181,12 +181,9 @@ as.hclust <- function(x, ...) UseMethod("as.hclust")
 as.hclust.default <- function(x, ...) {
     if(inherits(x, "hclust")) x
     else
-	stop(gettextf("argument 'x' cannot be coerced to class %s",
-                      dQuote("hclust")),
+	stop(gettextf("'%s' argument cannot be coerced to class %s", "x", dQuote("hclust")),
              if(!is.null(oldClass(x)))
-             gettextf("\n Consider providing an as.hclust.%s() method",
-                      oldClass(x)[1L]),
-             domain = NA)
+             gettextf("\n Consider providing '%s' method", paste("as.hclust.", oldClass(x)[1L], "()", collapse = "")), domain = "R-stats")
 }
 
 as.hclust.twins <- function(x, ...)
@@ -206,12 +203,12 @@ as.hclust.twins <- function(x, ...)
 print.hclust <- function(x, ...)
 {
     if(!is.null(x$call))
-        cat("\nCall:\n", deparse(x$call), "\n\n", sep = "")
+        cat("\n", gettext("Call:", domain = "R-stats"), "\n", deparse(x$call), "\n\n", sep = "")
     if(!is.null(x$method))
-        cat("Cluster method   :", x$method, "\n")
+        cat(gettext("Cluster method: ", domain = "R-stats"), x$method, "\n", sep = "")
     if(!is.null(x$dist.method))
-        cat("Distance         :", x$dist.method, "\n")
-    cat("Number of objects:", length(x$height)+1, "\n")
+        cat(gettext("Distance: ", domain = "R-stats"), x$dist.method, "\n", sep = "")
+    cat(gettext("Number of objects: ", domain = "R-stats"), length(x$height)+1, "\n", sep = "")
     cat("\n")
     invisible(x)
 }

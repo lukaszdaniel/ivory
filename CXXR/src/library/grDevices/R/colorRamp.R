@@ -32,7 +32,7 @@ colorRampPalette <- function(colors,...)
 colorRamp <- function(colors, bias = 1, space = c("rgb","Lab"),
                     interpolate = c("linear","spline"), alpha = FALSE)
 {
-    if (bias <= 0) stop("'bias' must be positive")
+    if (bias <= 0) stop(gettextf("'%s' argument must be positive", "bias"))
     if (!missing(space) && alpha)
         stop("'alpha' must be false if 'space' is specified")
 

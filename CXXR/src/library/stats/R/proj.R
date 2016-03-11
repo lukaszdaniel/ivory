@@ -36,7 +36,7 @@ proj.default <- function(object, onedf = TRUE, ...)
 proj.lm <- function(object, onedf = FALSE, unweighted.scale = FALSE, ...)
 {
     if(inherits(object, "mlm"))
-	stop("'proj' is not implemented for multiple responses")
+	stop("'proj()' is not implemented for multiple responses")
     rank <- object$rank
     if(rank > 0) {
 	prj <- proj.default(object, onedf = TRUE)[, 1L:rank, drop = FALSE]
@@ -46,7 +46,7 @@ proj.lm <- function(object, onedf = FALSE, unweighted.scale = FALSE, ...)
 	} else {
 	    asgn <- object$assign[object$qr$pivot[1L:object$rank]]
 	    uasgn <- unique(asgn)
-	    nmeffect <- c("(Intercept)",
+	    nmeffect <- c(gettext("(Intercept)", domain = "R-stats"),
 			  attr(object$terms, "term.labels"))[1 + uasgn]
 	    nterms <- length(uasgn)
 	    df <- vector("numeric", nterms)
@@ -90,10 +90,10 @@ proj.lm <- function(object, onedf = FALSE, unweighted.scale = FALSE, ...)
 proj.aov <- function(object, onedf = FALSE, unweighted.scale = FALSE, ...)
 {
     if(inherits(object, "maov"))
-	stop("'proj' is not implemented for multiple responses")
+	stop("'proj()' is not implemented for multiple responses")
     factors.aov <- function(pnames, tfactor)
     {
-	if(!is.na(int <- match("(Intercept)", pnames)))
+	if(!is.na(int <- match(gettext("(Intercept)", domain = "R-stats"), pnames)))
 	    pnames <- pnames[ - int]
 	tnames <- setNames(lapply(colnames(tfactor), function(x, mat)
 				  rownames(mat)[mat[, x] > 0], tfactor),
@@ -105,7 +105,11 @@ proj.aov <- function(object, onedf = FALSE, unweighted.scale = FALSE, ...)
 	    tnames <- append(tnames, list(Residuals = enames))
 	}
 	result <- tnames[match(pnames, names(tnames))]
-	if(!is.na(int)) result <- c("(Intercept)" = "(Intercept)", result)
+	if(!is.na(int)) {
+	  aaa <- gettext("(Intercept)", domain = "R-stats");
+	  names(aaa) <- gettext("(Intercept)", domain = "R-stats");
+	  result <- c(aaa, result)
+	}
 	## should reorder result, but probably OK
 	result
     }
@@ -138,7 +142,7 @@ proj.aovlist <- function(object, onedf = FALSE, unweighted.scale = FALSE, ...)
     factors.aovlist <- function(pnames, tfactor,
 				strata = FALSE, efactor = FALSE)
     {
-	if(!is.na(int <- match("(Intercept)", pnames))) pnames <- pnames[-int]
+	if(!is.na(int <- match(gettext("(Intercept)", domain = "R-stats"), pnames))) pnames <- pnames[-int]
 	tnames <- apply(tfactor, 2L, function(x, nms)
 			nms[as.logical(x)], rownames(tfactor))
 	if(!missing(efactor)) {
@@ -153,8 +157,11 @@ proj.aovlist <- function(object, onedf = FALSE, unweighted.scale = FALSE, ...)
 		tnames <- append(tnames, list(Residuals = enames))
 	}
 	result <- tnames[match(pnames, names(tnames))]
-	if(!is.na(int))
-	    result <- c("(Intercept)" = "(Intercept)", result)
+	if(!is.na(int)) {
+	    aaa <- gettext("(Intercept)", domain = "R-stats")
+	    names(aaa) <- gettext("(Intercept)", domain = "R-stats")
+	    result <- c(aaa, result)
+	}
 	##should reorder result, but probably OK
 	result
     }

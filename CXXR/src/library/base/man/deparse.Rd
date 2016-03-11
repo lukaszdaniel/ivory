@@ -10,7 +10,7 @@
   Turn unevaluated expressions into character strings.
 }
 \usage{
-deparse(expr, width.cutoff = 60L,
+deparse(expr, width.cutoff = getOption("width"),
         backtick = mode(expr) \%in\%
             c("call", "expression", "(", "function"),
         control = c("keepInteger", "showAttributes", "keepNA"),

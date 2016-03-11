@@ -23,7 +23,6 @@
 #include <config.h>
 #endif
 
-#define NO_NLS
 #include <Defn.h>
 #include <float.h>		/* for DBL_MAX */
 #include <R_ext/Applic.h>	/* for optif9, fdhess */
@@ -32,14 +31,7 @@
 #include "statsR.h"
 #include "stats.h" // R_zeroin2
 
-#undef _
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("stats", String)
-#else
-#define _(String) (String)
-#endif
-
+#include "localization.h"
 
 /* Formerly in src/appl/fmim.c */
 
@@ -234,7 +226,7 @@ static double fcn1(double x, struct callinfo *info)
 	goto badvalue;
     }
  badvalue:
-    error(_("invalid function value in 'optimize'"));
+    error(_("invalid function value in '%s' function"), "optimize()");
     return 0;/* for -Wall */
 }
 
@@ -325,7 +317,7 @@ static double fcn2(double x, struct callinfo *info)
 	goto badvalue;
     }
  badvalue:
-    error(_("invalid function value in 'zeroin'"));
+    error(_("invalid function value in '%s' function"), "zeroin()");
     return 0;/* for -Wall */
 
 }
@@ -360,12 +352,12 @@ SEXP zeroin2(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* f(ax) = f(xmin) */
     f_ax = asReal(CAR(args));
-    if (ISNA(f_ax)) error(_("NA value for '%s' is not allowed"), "f.lower");
+    if (ISNA(f_ax)) error(_("NA value for '%s' argument is not allowed"), "f.lower");
     args = CDR(args);
 
     /* f(bx) = f(xmax) */
     f_bx = asReal(CAR(args));
-    if (ISNA(f_bx)) error(_("NA value for '%s' is not allowed"), "f.upper");
+    if (ISNA(f_bx)) error(_("NA value for '%s' argument is not allowed"), "f.upper");
     args = CDR(args);
 
     /* tol */
@@ -375,7 +367,7 @@ SEXP zeroin2(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* maxiter */
     iter = asInteger(CAR(args));
-    if (iter <= 0) error(_("'maxiter' must be positive"));
+    if (iter <= 0) error(_("'%s' argument must be positive"), "maxiter");
 
     info.R_env = rho;
     PROTECT(info.R_fcall = lang2(v, R_NilValue)); /* the info used in fcn2() */
@@ -636,23 +628,23 @@ static void NORET opterror(int nerr)
     case -1:
 	error(_("non-positive number of parameters in nlm"));
     case -2:
-	error(_("nlm is inefficient for 1-d problems"));
+	error(_("'nlm()' function is inefficient for 1-d problems"));
     case -3:
-	error(_("invalid gradient tolerance in nlm"));
+	error(_("invalid gradient tolerance in 'nlm()' function"));
     case -4:
-	error(_("invalid iteration limit in nlm"));
+	error(_("invalid iteration limit in 'nlm()' function"));
     case -5:
 	error(_("minimization function has no good digits in nlm"));
     case -6:
-	error(_("no analytic gradient to check in nlm!"));
+	error(_("no analytic gradient to check in 'nlm()' function"));
     case -7:
-	error(_("no analytic Hessian to check in nlm!"));
+	error(_("no analytic Hessian to check in 'nlm()' function"));
     case -21:
 	error(_("probable coding error in analytic gradient"));
     case -22:
 	error(_("probable coding error in analytic Hessian"));
     default:
-	error(_("*** unknown error message (msg = %d) in nlm()\n*** should not happen!"), nerr);
+	error(_("*** unknown error message (msg = %d) in 'nlm()' function\n*** should not happen!"), nerr);
     }
 }
 
@@ -672,19 +664,13 @@ static void optcode(int code)
 	break;
     case 3:
 	Rprintf(_("Last global step failed to locate a point lower than x.\n"));
-	Rprintf(_("Either x is an approximate local minimum of the function,\n\
-the function is too non-linear for this algorithm,\n\
-or steptol is too large.\n"));
+	Rprintf(_("Either 'x' is an approximate local minimum of the function, the function is too non-linear for this algorithm, or 'steptol' is too large.\n"));
 	break;
     case 4:
-	Rprintf(_("Iteration limit exceeded.  Algorithm failed.\n"));
+	Rprintf(_("Iteration limit exceeded. Algorithm failed.\n"));
 	break;
     case 5:
-	Rprintf(_("Maximum step size exceeded 5 consecutive times.\n\
-Either the function is unbounded below,\n\
-becomes asymptotic to a finite value\n\
-from above in some direction,\n"\
-"or stepmx is too small.\n"));
+	Rprintf(_("Maximum step size exceeded 5 consecutive times. Either the function is unbounded below, becomes asymptotic to a finite value from above in some direction, or 'stepmx' is too small.\n"));
 	break;
     }
     Rprintf("\n");

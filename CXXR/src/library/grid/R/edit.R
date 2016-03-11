@@ -32,7 +32,7 @@ applyEdit <- function(x, edit) {
     x
   } else {
     if (!is.gEdit(edit))
-      stop("invalid 'edit' information")
+      stop(gettextf("'%s' argument is not an object of class %s", "edit", dQuote("gEdit")))
     # Intended to handle whether edit has gPath spec or not
     newx <- do.call("editGrob", c(list(x), edit))
     # If edit was specified for non-existent child, newx will be NULL
@@ -47,7 +47,7 @@ applyEdit <- function(x, edit) {
 gEditList <- function(...) {
   edits <- list(...)
   if (!all(sapply(edits, is.gEdit)))
-    stop("'gEditList' can only contain 'gEdit' objects")
+    stop("'gEditList()' can only contain objects of class \"gEdit\"")
   class(edits) <- "gEditList"
   edits
 }
@@ -64,7 +64,7 @@ applyEdits <- function(x, edits) {
       applyEdit(x, edits)
     else {
       if (!inherits(edits, "gEditList"))
-        stop("invalid 'edit' information")
+        stop(gettextf("'%s' argument is not an object of class %s", "edits", dQuote("gEditList")))
       for (i in edits)
         x <- applyEdits(x, i)
       x

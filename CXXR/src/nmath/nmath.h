@@ -26,11 +26,8 @@
 #endif
 
 /* Required by C99 but might be slow */
-#ifdef HAVE_LONG_DOUBLE
-#  define LDOUBLE long double
-#else
-#  define LDOUBLE double
-#endif
+#include <R_ext/Ldouble.h>
+#include <R_ext/Minmax.h>
 
 /* To ensure atanpi, cospi,  sinpi, tanpi are defined */
 # ifndef __STDC_WANT_IEC_60559_FUNCS_EXT__
@@ -89,12 +86,9 @@ void R_CheckUserInterrupt(void);
 #endif
 #define free R_chk_free
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) gettext (String)
-#else
-#define _(String) (String)
-#endif
+/* Localization */
+
+#include <localization.h>
 
 #else
 /* Mathlib standalone */
@@ -153,19 +147,19 @@ int R_finite(double);
        char *msg = ""; \
        switch(x) { \
        case ME_DOMAIN: \
-	   msg = _("argument out of domain in '%s'\n");	\
+	   msg = _("argument out of domain in '%s' function");	\
 	   break; \
        case ME_RANGE: \
-	   msg = _("value out of range in '%s'\n");	\
+	   msg = _("value out of range in '%s' function");	\
 	   break; \
        case ME_NOCONV: \
-	   msg = _("convergence failed in '%s'\n");	\
+	   msg = _("convergence failed in '%s' function");	\
 	   break; \
        case ME_PRECISION: \
-	   msg = _("full precision may not have been achieved in '%s'\n"); \
+	   msg = _("full precision may not have been achieved in '%s' function"); \
 	   break; \
        case ME_UNDERFLOW: \
-	   msg = _("underflow occurred in '%s'\n");	\
+	   msg = _("underflow occurred in '%s' function");	\
 	   break; \
        } \
        MATHLIB_WARNING(msg, s); \
@@ -176,11 +170,7 @@ int R_finite(double);
 
 #define WILCOX_MAX 50
 
-#ifdef HAVE_VISIBILITY_ATTRIBUTE
-# define attribute_hidden __attribute__ ((visibility ("hidden")))
-#else
-# define attribute_hidden
-#endif
+#include <R_ext/Visibility.h>
 
 /* Formerly private part of Mathlib.h */
 

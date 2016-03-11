@@ -95,7 +95,7 @@ tryNew(Class, where)
 
 empty.dump()
 
-showClass(Class, complete=TRUE, propertiesAreCalled="Slots")
+showClass(Class, complete=TRUE)
 
 showExtends(ext, printTo = stdout())
 

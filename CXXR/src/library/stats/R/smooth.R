@@ -27,7 +27,7 @@ smooth <- function(x, kind = c("3RS3R", "3RSS", "3RSR", "3R", "3", "S"),
     if(anyNA(x)) stop("attempt to smooth NA values")
     endrule <- match.arg(endrule)
     rules <- c("copy","Tukey")#- exact order matters!
-    if(is.na(iend <- pmatch(endrule, rules))) stop("invalid 'endrule' argument")
+    if(is.na(iend <- pmatch(endrule, rules))) stop(gettextf("invalid '%s' argument", "endrule"))
     kind <- match.arg(kind)
     if(substr(kind, 1L, 3L) == "3RS" && !do.ends) iend <- -iend
     else if(kind == "S") iend <- as.logical(do.ends)
@@ -55,11 +55,19 @@ smooth <- function(x, kind = c("3RS3R", "3RSS", "3RSR", "3R", "3", "S"),
 }
 
 print.tukeysmooth <- function(x, ...) {
-    cat(attr(x,"kind"), "Tukey smoother resulting from ",
-	deparse(attr(x, "call")),"\n")
-    if(attr(x,"twiced"))		cat(" __twiced__ ")
-    if(!is.null(it <- attr(x,"iter")))		cat(" used", it, "iterations\n")
-    if(!is.null(ch <- attr(x,"changed")))	cat(if(!ch)"NOT", "changed\n")
+    cat(gettextf("%s Tukey smoother resulting from %s", attr(x,"kind"), sQuote(paste(deparse(attr(x, "call")), collapse = "")), domain = "R-stats"),"\n", sep = "")
+    if(attr(x,"twiced")) {
+      if(!is.null(it <- attr(x,"iter")))		cat(sprintf(ngettext(it, "__twiced__ used %d iteration", "__twiced__ used %d iterations", domain = "R-stats"), it), "\n", sep = "")
+      if(is.null(it <- attr(x,"iter")) && !is.null(ch <- attr(x,"changed"))) {
+	 if(!ch) cat(gettext("__twiced__ NOT changed:", domain = "R-stats"), "\n", sep = "")
+	 else cat(gettext("__twiced__ changed:", domain = "R-stats"), "\n", sep = "")
+	 }
+    else if(!is.null(ch <- attr(x,"changed"))) if(!ch) cat(gettext("NOT changed:", domain = "R-stats"), "\n", sep = "") else cat(gettext("changed:", domain = "R-stats"), "\n", sep = "")
+    } else {
+     if(!is.null(it <- attr(x,"iter")))		cat(sprintf(ngettext(it, " used %d iteration", " used %d iterations", domain = "R-stats"), it), "\n", sep = "")
+     if(!is.null(ch <- attr(x,"changed")))	if(!ch) cat(gettext("NOT changed:", domain = "R-stats"), "\n", sep = "") else cat(gettext("changed:", domain = "R-stats"), "\n", sep = "")
+    }
+
     if(length(oldClass(x)) > 1L)
 	NextMethod()
     else {
@@ -71,11 +79,19 @@ print.tukeysmooth <- function(x, ...) {
 }
 
 summary.tukeysmooth <- function(object, ...) {
-    cat(attr(object,"kind"), "Tukey smoother resulting from\n",
-	deparse(attr(object, "call")),";  n =", length(object),"\n")
-    if(attr(object,"twiced"))		cat(" __twiced__ ")
-    if(!is.null(it <- attr(object,"iter")))	cat(" used", it, "iterations\n")
-    if(!is.null(ch <- attr(object,"changed")))	cat(if(!ch)" NOT", "changed\n")
+    cat(gettextf("%s Tukey smoother resulting from %s", attr(object,"kind"), sQuote(paste(deparse(attr(object, "call")), collapse = "")), domain = "R-stats"), ";  n = ", length(object), "\n", sep = "")
+    if(attr(object,"twiced")) {
+      if(!is.null(it <- attr(object,"iter")))		cat(sprintf(ngettext(it, "__twiced__ used %d iteration", "__twiced__ used %d iterations", domain = "R-stats"), it), "\n", sep = "")
+      if(is.null(it <- attr(object,"iter")) && !is.null(ch <- attr(object,"changed"))) {
+	 if(!ch) cat(gettext("__twiced__ NOT changed:", domain = "R-stats"), "\n", sep = "")
+	 else cat(gettext("__twiced__ changed:", domain = "R-stats"), "\n", sep = "")
+	 }
+    else if(!is.null(ch <- attr(object,"changed"))) if(!ch) cat(gettext("NOT changed:", domain = "R-stats"), "\n", sep = "") else cat(gettext("changed:", domain = "R-stats"), "\n", sep = "")
+    } else {
+     if(!is.null(it <- attr(object,"iter")))		cat(sprintf(ngettext(it, " used %d iteration", " used %d iterations", domain = "R-stats"), it), "\n", sep = "")
+     if(!is.null(ch <- attr(object,"changed")))	if(!ch) cat(gettext("NOT changed:", domain = "R-stats"), "\n", sep = "") else cat(gettext("changed:", domain = "R-stats"), "\n", sep = "")
+    }
+
     if(length(oldClass(object)) > 1L)
 	NextMethod()
     else {

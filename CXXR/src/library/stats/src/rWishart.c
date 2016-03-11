@@ -28,9 +28,8 @@
 #include <Rmath.h>
 #include <R_ext/Lapack.h>        /* for Lapack (dpotrf, etc.) and BLAS */
 
-#include "stats.h" // for _()
 #include "statsR.h"
-
+#include "localization.h" //for _()
 
 /**
  * Simulate the Cholesky factor of a standardized Wishart variate with

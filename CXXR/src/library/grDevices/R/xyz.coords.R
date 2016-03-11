@@ -100,7 +100,7 @@ xy.coords <-
 	    n <- as.integer(sum(ii))
 	    warning(sprintf(ngettext(n,
                             "%d x value <= 0 omitted from logarithmic plot",
-                            "%d x values <= 0 omitted from logarithmic plot"),
+                            "%d x values <= 0 omitted from logarithmic plot", domain = "R-grDevices"),
                             n), domain = NA)
 	    x[ii] <- NA
 	}
@@ -108,7 +108,7 @@ xy.coords <-
 	    n <- as.integer(sum(ii))
 	    warning(sprintf(ngettext(n,
                             "%d y value <= 0 omitted from logarithmic plot",
-                            "%d y values <= 0 omitted from logarithmic plot"),
+                            "%d y values <= 0 omitted from logarithmic plot", domain = "R-grDevices"),
                             n), domain = NA)
 	    y[ii] <- NA
 	}
@@ -136,7 +136,7 @@ xyz.coords <- function(x, y=NULL, z=NULL, xlab=NULL, ylab=NULL, zlab=NULL,
 	}
 	else if(is.matrix(x) || is.data.frame(x)) {
 	    x <- data.matrix(x)
-	    if(ncol(x) < 2) stop("at least 2 columns needed")
+	    if(ncol(x) < 2) stop("at least 2 columns are needed")
 	    if(ncol(x) == 2) {
 		xlab <- "Index"
 		y <- x[,1]
@@ -219,7 +219,7 @@ xyz.coords <- function(x, y=NULL, z=NULL, xlab=NULL, ylab=NULL, zlab=NULL,
 	    n <- sum(ii)
             warning(sprintf(ngettext(n,
                                      "%d x value <= 0 omitted from logarithmic plot",
-                                     "%d x values <= 0 omitted from logarithmic plot"),
+                                     "%d x values <= 0 omitted from logarithmic plot", domain = "R-grDevices"),
                             n), domain = NA)
 	    x[ii] <- NA
 	}
@@ -227,7 +227,7 @@ xyz.coords <- function(x, y=NULL, z=NULL, xlab=NULL, ylab=NULL, zlab=NULL,
 	    n <- sum(ii)
             warning(sprintf(ngettext(n,
                                      "%d y value <= 0 omitted from logarithmic plot",
-                                     "%d y values <= 0 omitted from logarithmic plot"),
+                                     "%d y values <= 0 omitted from logarithmic plot", domain = "R-grDevices"),
                             n), domain = NA)
 	    y[ii] <- NA
 	}
@@ -235,7 +235,7 @@ xyz.coords <- function(x, y=NULL, z=NULL, xlab=NULL, ylab=NULL, zlab=NULL,
 	    n <- sum(ii)
             warning(sprintf(ngettext(n,
                                      "%d z value <= 0 omitted from logarithmic plot",
-                                     "%d z values <= 0 omitted from logarithmic plot"),
+                                     "%d z values <= 0 omitted from logarithmic plot", domain = "R-grDevices"),
                             n), domain = NA)
 	    z[ii] <- NA
 	}

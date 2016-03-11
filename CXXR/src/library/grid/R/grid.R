@@ -95,7 +95,7 @@ push.viewport <- function(..., recording=TRUE) {
 
 pushViewport <- function(..., recording=TRUE) {
   if (missing(...))
-    stop("must specify at least one viewport")
+    stop("'pushViewport()' must specify at least one viewport")
   else {
     vps <- list(...)
     lapply(vps, push.vp, recording)
@@ -149,13 +149,13 @@ buildPath <- function(desc, anc, depth) {
     path <- desc$name
     while (!identical(desc$parent, anc)) {
         if (is.null(desc$parent))
-            stop("Down viewport failed to record on display list")
+            stop("down viewport failed to record on display list")
         desc <- desc$parent
         path <- c(desc$name, path)
     }
     result <- vpPath(path)
     if (depth(result) != depth)
-        warning("Down viewport incorrectly recorded on display list")
+        warning("down viewport incorrectly recorded on display list")
     result
 }
 
@@ -271,12 +271,12 @@ current.viewport <- function() {
 # (could be NULL)
 current.parent <- function(n=1) {
     if (n < 1)
-        stop("Invalid number of generations")
+        stop("invalid number of generations")
     vp <- grid.Call(L_currentViewport)
     generation <- 1
     while (generation <= n) {
         if (is.null(vp))
-            stop("Invalid number of generations")
+            stop("invalid number of generations")
         vp <- vp$parent
         generation <- generation + 1
     }
@@ -519,7 +519,7 @@ makeContent.delayedgrob <- function(x) {
     } else if (is.gList(grob)) {
         children <- grob
     } else {
-        stop("'expr' must return a grob or gList")
+        stop(gettextf("'%s' component of argument 'x' must return an object of class %s or class %s", "expr", dQuote("grob"), dQuote("gList")))
     }
     x <- setChildren(x, children)
     x

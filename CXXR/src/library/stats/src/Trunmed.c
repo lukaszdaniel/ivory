@@ -43,7 +43,7 @@
  * ...		 i	1st permuter  H[i[m]]    == X[i + m]
  * ...		 j	2nd permuter  X[i +j[m]] == H[m]
  */
-
+#include "localization.h"
 #include <math.h>
 
 static void
@@ -370,7 +370,7 @@ static void Trunmed(R_xlen_t n,/* = length(data) */
     /* window[], outlist[], and nrlist[] are all 1-based (indices) */
 
     if(print_level) {
-	Rprintf("After inittree():\n");
+	Rprintf(_("After inittree():\n"));
 	R_PRINT_4vec();
     }
     runmedint(n, k, k2, data, median, window, outlist, nrlist,

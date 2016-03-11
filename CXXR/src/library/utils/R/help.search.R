@@ -113,14 +113,14 @@ function(pattern, fields = c("alias", "concept", "title"),
          rebuild = FALSE, agrep = NULL, use_UTF8 = FALSE,
          types = getOption("help.search.types"))
 {
-    ### Argument handling.
-    .wrong_args <- function(args)
-	gettextf("argument %s must be a single character string", sQuote(args))
+    fields <- sort(fields)
+    types <- sort(types)
+
     if(is.logical(verbose)) verbose <- 2 * as.integer(verbose)
     fuzzy <- agrep
     if(!missing(pattern)) {
 	if(!is.character(pattern) || (length(pattern) > 1L))
-	    stop(.wrong_args("pattern"), domain = NA)
+	    stop(gettextf("%s argument must be a single character string", sQuote("pattern")), domain = "R-utils")
 	i <- pmatch(fields, hsearch_db_fields)
 	if(anyNA(i))
 	    stop("incorrect field specification")
@@ -128,14 +128,14 @@ function(pattern, fields = c("alias", "concept", "title"),
 	    fields <- hsearch_db_fields[i]
     } else if(!missing(apropos)) {
 	if(!is.character(apropos) || (length(apropos) > 1L))
-	    stop(.wrong_args("apropos"), domain = NA)
+	    stop(gettextf("%s argument must be a single character string", sQuote("apropos")), domain = "R-utils")
 	else {
 	    pattern <- apropos
 	    fields <- c("alias", "title")
 	}
     } else if(!missing(keyword)) {
 	if(!is.character(keyword) || (length(keyword) > 1L))
-	    stop(.wrong_args("keyword"), domain = NA)
+	    stop(gettextf("%s argument must be a single character string", sQuote("keyword")), domain = "R-utils")
 	else {
 	    pattern <- keyword
 	    fields <- "keyword"
@@ -143,7 +143,7 @@ function(pattern, fields = c("alias", "concept", "title"),
 	}
     } else if(!missing(whatis)) {
 	if(!is.character(whatis) || (length(whatis) > 1))
-	    stop(.wrong_args("whatis"), domain = NA)
+	    stop(gettextf("%s argument must be a single character string", sQuote("whatis")), domain = "R-utils")
 	else {
 	    pattern <- whatis
 	    fields <- "alias"
@@ -199,12 +199,7 @@ function(pattern, fields = c("alias", "concept", "title"),
 
     ### Matching.
     if(verbose >= 2L) {
-	message("Database of ",
-                NROW(db$Base), " help objects (",
-                NROW(db$Aliases), " aliases, ",
-                NROW(db$Concepts), " concepts, ",
-                NROW(db$Keywords), " keywords)",
-                domain = NA)
+        message(gettextf("Database of %d help objects (%d aliases, %d concepts, %d keywords)", NROW(db$Base), NROW(db$Aliases), NROW(db$Concepts), NROW(db$Keywords), domain = "R-utils"), domain = NA)
         flush.console()
     }
 
@@ -307,7 +302,7 @@ function(pattern, fields = c("alias", "concept", "title"),
         n_of_objects_matched <- length(unique(db[, "ID"]))
         message(sprintf(ngettext(n_of_objects_matched,
                                  "matched %d object.",
-                                 "matched %d objects."),
+                                 "matched %d objects.", domain = "R-utils"),
                         n_of_objects_matched),
                 domain = NA)
         flush.console()
@@ -369,8 +364,8 @@ function(package = NULL, lib.loc = NULL,
     }
     if(rebuild) {
 	if(verbose > 0L) {
-            message("Rebuilding the help.search() database", " ", "...",
-                    if(verbose > 1L) "...", domain = NA)
+            if(verbose > 1L) message("Rebuilding the help.search() database ... ...", domain = "R-utils")
+            else message("Rebuilding the help.search() database ...", domain = "R-utils")
             flush.console()
         }
 
@@ -410,13 +405,13 @@ function(package = NULL, lib.loc = NULL,
 	## Create the hsearch db.
 	np <- 0L
 	if(verbose >= 2L) {
-	    message("Packages {readRDS() sequentially}:", domain = NA)
+	    message("Packages {readRDS() sequentially}:", domain = "R-utils")
             flush.console()
         }
         tot <- length(package_paths)
         incr <- 0L
         if(verbose && WINDOWS) {
-            pb <- winProgressBar("R: creating the help.search() DB", max = tot)
+            pb <- winProgressBar(gettext("R: creating the help.search() DB", domain = "R-utils"), max = tot)
             on.exit(close(pb))
         } else if(verbose == 1L) incr <- ifelse(tot > 500L, 100L, 10L)
 
@@ -453,8 +448,7 @@ function(package = NULL, lib.loc = NULL,
 	    else find.package(p, lib.loc, quiet = TRUE)
 	    if(length(path) == 0L) {
                 if(is.null(package)) next
-		else stop(gettextf("could not find package %s", sQuote(p)),
-                          domain = NA)
+		else stop(gettextf("could not find package %s", sQuote(p)), domain = "R-utils")
             }
 	    ## Hsearch 'Meta/hsearch.rds' indices were introduced in
 	    ## R 1.8.0.	 If they are missing, we really cannot use
@@ -482,12 +476,12 @@ function(package = NULL, lib.loc = NULL,
                     } else if(verbose >= 2L) {
                         message(gettextf("package %s has empty hsearch data - strangely",
                                          sQuote(p)),
-                                domain = NA)
+                                domain = "R-utils")
                         flush.console()
                     }
                 } else if(!is.null(package))
-                      warning("no hsearch.rds meta data for package ", p,
-                              domain = NA)
+                      warning(gettextf("no hsearch.rds meta data for package %s", sQuote(p)),
+                              domain = "R-utils")
             }
             if(is.null(hDB))
                 hDB <- hDB0
@@ -506,7 +500,7 @@ function(package = NULL, lib.loc = NULL,
 
 	if(verbose >= 2L)  {
 	    message(ifelse(np %% 5L == 0L, "\n", "\n\n"),
-                    sprintf("Built dbMat[%d,%d]", nrow(dbMat), ncol(dbMat)),
+                    gettextf("Built dbMat[%d,%d]", nrow(dbMat), ncol(dbMat), domain = "R-utils"),
                     domain = NA)
             flush.console()
             ## DEBUG save(dbMat, file="~/R/hsearch_dbMat.rda", compress=TRUE)
@@ -549,7 +543,7 @@ function(package = NULL, lib.loc = NULL,
 	## And maybe re-encode ...
 	if(!identical(Sys.getlocale("LC_CTYPE"), "C")) {
 	    if(verbose >= 2L) {
-                message("reencoding ...", appendLF = FALSE, domain = NA)
+                message("reencoding ...", appendLF = FALSE, domain = "R-utils")
                 flush.console()
             }
 	    encoding <- db$Base[, "Encoding"]
@@ -565,7 +559,7 @@ function(package = NULL, lib.loc = NULL,
 		}
 	    }
 	    if(verbose >= 2L) {
-                message(" ", "done", domain = NA)
+                message(" ", "done", domain = "R-utils")
                 flush.console()
             }
 	}
@@ -642,7 +636,7 @@ function(package = NULL, lib.loc = NULL,
                      stringsAsFactors = FALSE, row.names = NULL)
 
         if(verbose >= 2L) {
-            message("saving the database ...", appendLF = FALSE, domain = NA)
+            message("saving the database ...", appendLF = FALSE, domain = "R-utils")
             flush.console()
         }
         attr(db, "LibPaths") <- lib.loc
@@ -652,11 +646,11 @@ function(package = NULL, lib.loc = NULL,
         class(db) <- "hsearch_db"
         .hsearch_db(db)
         if(verbose >= 2L) {
-            message(" ", "done", domain = NA)
+            message(" ", "done", domain = "R-utils")
             flush.console()
         }
         if(verbose > 0L) {
-            message("... database rebuilt", domain = NA)
+            message("... database rebuilt", domain = "R-utils")
             if(WINDOWS) {
                 close(pb)
                 on.exit()               # clear closing of progress bar
@@ -730,19 +724,18 @@ function(x, ...)
             return(invisible(x))
         }
     }
-    hfields <- paste(x$fields, collapse = " or ")
+
+    hfields <- paste(sQuote(x$fields), collapse = ", ")
     vfieldnames <-
         c(alias = "name", concept = "keyword", keyword = NA,
           name = "name", title = "title")
     vfieldnames <- vfieldnames[x$fields]
-    vfields <- paste(unique(vfieldnames[!is.na(vfieldnames)]),
-                     collapse = " or ")
+    vfields <- paste(unique(sQuote(vfieldnames[!is.na(vfieldnames)])), collapse = ", ")
     dfieldnames <-
         c(alias = "name", concept = NA, keyword = NA,
           name = "name", title = "title")
     dfieldnames <- dfieldnames[x$fields]
-    dfields <- paste(unique(dfieldnames[!is.na(dfieldnames)]),
-                     collapse = " or ")
+    dfields <- paste(unique(sQuote(dfieldnames[!is.na(dfieldnames)])), collapse = ", ")
     fields_used <-
         list(help = hfields, vignette = vfields, demo = dfields)
     matchtype <- switch(x$type, fuzzy = "fuzzy", "regular expression")
@@ -757,59 +750,39 @@ function(x, ...)
 
     db <- x$matches
     if(NROW(db) == 0) {
-    	typenames <- paste(tolower(typenames[types]), collapse= " or ")
-	writeLines(strwrap(paste("No", typenames,
-                                 "found with", fields_used$help,
-				 "matching", sQuote(x$pattern),
-				 "using", matchtype,
-                                 "matching.")))
+    	typenames <- paste(tolower(typenames[types]), collapse = ", ")
+	if(matchtype == "fuzzy") {
+	if(!is.na(match("demo", types))) writeLines(gettextf("No demos found with %s fields matching %s using fuzzy matching.", fields_used$help, sQuote(x$pattern), domain = "R-utils"))
+	if(!is.na(match("help", types))) writeLines(gettextf("No help files found with %s fields matching %s using fuzzy matching.", fields_used$help, sQuote(x$pattern), domain = "R-utils"))
+	if(!is.na(match("vignette", types))) writeLines(gettextf("No vignettes found with %s fields matching %s using fuzzy matching.", fields_used$help, sQuote(x$pattern), domain = "R-utils"))
+	} else {
+	if(!is.na(match("demo", types))) writeLines(gettextf("No demos found with %s fields matching %s using regular expression matching.", fields_used$help, sQuote(x$pattern), domain = "R-utils"))
+	if(!is.na(match("help", types))) writeLines(gettextf("No help files found with %s fields matching %s using regular expression matching.", fields_used$help, sQuote(x$pattern), domain = "R-utils"))
+	if(!is.na(match("vignette", types))) writeLines(gettextf("No vignettes found with %s fields matching %s using regular expression matching.", fields_used$help, sQuote(x$pattern), domain = "R-utils"))
+	}
         return(invisible(x))
     }
 
     outFile <- tempfile()
     outConn <- file(outFile, open = "w")
-    typeinstruct <-
-        c(vignette =
-              paste("Type 'vignette(\"FOO\", package=\"PKG\")' to",
-                    "inspect entries 'PKG::FOO'."),
-          help =
-              paste("Type '?PKG::FOO' to",
-                    "inspect entries 'PKG::FOO',",
-                    "or 'TYPE?PKG::FOO' for entries like",
-                    "'PKG::FOO-TYPE'."),
-          demo =
-              paste("Type 'demo(PKG::FOO)' to",
-                    "run demonstration 'PKG::FOO'."))
+    typeinstruct <- c(vignette = gettext("Type 'vignette(\"FOO\", package=\"PKG\")' to inspect entries 'PKG::FOO'.", domain = "R-utils"),
+                      help = gettext("Type '?PKG::FOO' to inspect entries 'PKG::FOO', or 'TYPE?PKG::FOO' for entries like 'PKG::FOO-TYPE'.", domain = "R-utils"),
+		      demo = gettext("Type 'demo(PKG::FOO)' to run demonstration 'PKG::FOO'.", domain = "R-utils"))
 
-    for(type in types) {
-	if(NROW(dbtemp <- db[db[, "Type"] == type, , drop = FALSE]) > 0) {
-	    writeLines(c(strwrap(paste(typenames[type], "with",
-                                       fields_used[[type]], "matching",
-                                       sQuote(x$pattern), "using",
-                                       matchtype, "matching:")),
-			 "\n"),
-		       outConn)
-            fields <- fields_for_match_details[[type]]
-            chunks <- split.data.frame(dbtemp,
-                                       paste0(dbtemp[, "Package"],
-                                              "::",
-                                              dbtemp[ , "Topic"]))
-            nms <- names(chunks)
-            for(i in seq_along(nms)) {
-                chunk <- chunks[[i]]
-                writeLines(formatDL(nms[i], chunk[1L, "Title"]),
-                           outConn)
-                matches <- Filter(length,
-                                  split(chunk[, "Entry"],
-                                        chunk[, "Field"])[fields])
-                if(length(matches)) {
-                    tags <- field_names_for_details[names(matches)]
-                    vals <- vapply(matches, paste, "", collapse = ", ")
-                    writeLines(strwrap(paste0(tags, ": ", vals),
-                                       indent = 2L, exdent = 4L),
-                               outConn)
-                }
-            }
+    for (type in types) {
+	if(NROW(dbtemp <- db[db[,"Type"] == type,,drop=FALSE]) > 0) {
+	    if(matchtype == "fuzzy") {
+	if(type == "demo") writeLines(c(strwrap(gettextf("Demos with %s fields matching %s using fuzzy matching:", fields_used[[type]], sQuote(x$pattern), domain = "R-utils")), "\n"), outConn)
+	else if(type == "help") writeLines(c(strwrap(gettextf("Help files with %s fields matching %s using fuzzy matching:", fields_used[[type]], sQuote(x$pattern), domain = "R-utils")), "\n"), outConn)
+	else if(type == "vignette") writeLines(c(strwrap(gettextf("Vignettes with %s fields matching %s using fuzzy matching:", fields_used[[type]], sQuote(x$pattern), domain = "R-utils")), "\n"), outConn)
+	    } else {
+	if(type == "demo") writeLines(c(strwrap(gettextf("Demos with %s fields matching %s using regular expression matching:", fields_used[[type]], sQuote(x$pattern), domain = "R-utils")), "\n"), outConn)
+	else if(type == "help") writeLines(c(strwrap(gettextf("Help files with %s fields matching %s using regular expression matching:", fields_used[[type]], sQuote(x$pattern), domain = "R-utils")), "\n"), outConn)
+	else if(type == "vignette") writeLines(c(strwrap(gettextf("Vignettes with %s fields matching %s using regular expression matching:", fields_used[[type]], sQuote(x$pattern), domain = "R-utils")), "\n"), outConn)
+	}
+	    dbnam <- paste0(dbtemp[, "Package"], "::", dbtemp[ , "Topic"])
+	    dbtit <- paste0(dbtemp[ , "Title"])
+	    writeLines(formatDL(dbnam, dbtit), outConn)
 	    writeLines(c("\n",
 			 strwrap(typeinstruct[type]),
 			 "\n\n"),
@@ -876,11 +849,11 @@ function(db = hsearch_db())
 print.hsearch_db <-
 function(x, ...)
 {
-    writeLines(c("A help search database:",
-                 sprintf("Objects: %d, Aliases: %d, Keywords: %d, Concepts: %d",
+    writeLines(c(gettext("A help search database:", domain = "R-utils"),
+                 gettextf("Objects: %d, Aliases: %d, Keywords: %d, Concepts: %d",
                          NROW(x$Base),
                          NROW(x$Aliases),
                          NROW(x$Keywords),
-                         NROW(x$Concepts))))
+                         NROW(x$Concepts), domain = "R-utils")))
     invisible(x)
 }

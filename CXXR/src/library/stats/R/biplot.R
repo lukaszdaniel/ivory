@@ -28,13 +28,13 @@ biplot.default <-
     p <- nrow(y)
     if(missing(xlabs)) {
 	xlabs <- dimnames(x)[[1L]]
-	if(is.null(xlabs)) xlabs <- 1L:n
+	if(is.null(xlabs)) xlabs <- seq_len(n)
     }
     xlabs <- as.character(xlabs)
     dimnames(x) <- list(xlabs, dimnames(x)[[2L]])
     if(missing(ylabs)) {
 	ylabs <- dimnames(y)[[1L]]
-	if(is.null(ylabs)) ylabs <- paste("Var", 1L:p)
+	if(is.null(ylabs)) ylabs <- paste("Var", seq_len(p))
     }
     ylabs <- as.character(ylabs)
     dimnames(y) <- list(ylabs, dimnames(y)[[2L]])
@@ -81,14 +81,13 @@ biplot.default <-
 
 biplot.princomp <- function(x, choices = 1L:2L, scale = 1, pc.biplot=FALSE, ...)
 {
-    if(length(choices) != 2L) stop("length of choices must be 2")
+    if(length(choices) != 2L) stop(gettextf("'%s' argument must be of length %d", "choices", 2))
     if(!length(scores <- x$scores))
-	stop(gettextf("object '%s' has no scores", deparse(substitute(x))),
-             domain = NA)
+	stop(gettextf("object '%s' has no scores", deparse(substitute(x))), domain = "R-stats")
     lam <- x$sdev[choices]
     if(is.null(n <- x$n.obs)) n <- 1
     lam <- lam * sqrt(n)
-    if(scale < 0 || scale > 1) warning("'scale' is outside [0, 1]")
+    if(scale < 0 || scale > 1) warning(gettextf("'%s' argument is outside [0,1]", "scale"))
     if(scale != 0) lam <- lam^scale else lam <- 1
     if(pc.biplot) lam <- lam / sqrt(n)
     biplot.default(t(t(scores[, choices]) / lam),
@@ -98,16 +97,15 @@ biplot.princomp <- function(x, choices = 1L:2L, scale = 1, pc.biplot=FALSE, ...)
 
 biplot.prcomp <- function(x, choices = 1L:2L, scale = 1, pc.biplot=FALSE, ...)
 {
-    if(length(choices) != 2L) stop("length of choices must be 2")
+    if(length(choices) != 2L) stop(gettextf("'%s' argument must be of length %d", "choices", 2))
     if(!length(scores <- x$x))
-	stop(gettextf("object '%s' has no scores", deparse(substitute(x))),
-             domain = NA)
+	stop(gettextf("object '%s' has no scores", deparse(substitute(x))), domain = "R-stats")
     if(is.complex(scores))
         stop("biplots are not defined for complex PCA")
     lam <- x$sdev[choices]
     n <- NROW(scores)
     lam <- lam * sqrt(n)
-    if(scale < 0 || scale > 1) warning("'scale' is outside [0, 1]")
+    if(scale < 0 || scale > 1) warning(gettextf("'%s' argument is outside [0,1]", "scale"))
     if(scale != 0) lam <- lam^scale else lam <- 1
     if(pc.biplot) lam <- lam / sqrt(n)
     biplot.default(t(t(scores[, choices]) / lam),

@@ -114,7 +114,7 @@ print.condition <- function(x, ...) {
     call <- conditionCall(x)
     cl <- class(x)[1L]
     if (! is.null(call))
-        cat("<", cl, " in ", deparse(call), ": ", msg, ">\n", sep="")
+	cat("<", gettextf("%s in %s: %s", cl, deparse(call), msg, domain = "R-base"), ">\n", sep = "")
     else
         cat("<", cl, ": ", msg, ">\n", sep="")
     invisible(x)
@@ -125,7 +125,7 @@ as.character.condition <- function(x, ...) {
     call <- conditionCall(x)
     cl <- class(x)[1L]
     if (! is.null(call))
-        paste0(cl, " in ", deparse(call)[1L], ": ", msg, "\n")
+	cat(gettextf("%s in %s: %s", cl, deparse(call)[1L], msg, domain = "R-base"), "\n", sep = "")
     else
         paste0(cl, ": ", msg, "\n")
 }
@@ -134,9 +134,9 @@ as.character.error <- function(x, ...) {
     msg <- conditionMessage(x)
     call <- conditionCall(x)
     if (! is.null(call))
-        paste0("Error in ", deparse(call)[1L], ": ", msg, "\n")
+	paste(gettextf("Error in command '%s':", deparse(call)[1L], domain = "R-base"), msg, "\n", sep = "")
     else
-        paste0("Error: ", msg, "\n")
+	paste(gettext("Error:", domain = "R-base"), msg, "\n", sep = "")
 }
 
 signalCondition <- function(cond) {
@@ -156,7 +156,7 @@ restartDescription <- function(r) r$description
 restartFormals <- function(r) formals(r$handler)
 
 print.restart <- function(x, ...) {
-    cat(paste("<restart:", x[[1L]], ">\n"))
+    cat(gettextf("<restart: %s>", x[[1L]], domain = "R-base"), "\n", sep = "")
     invisible(x)
 }
 
@@ -192,8 +192,7 @@ invokeRestart <- function(r, ...) {
     if (! isRestart(r)) {
         res <- findRestart(r)
         if (is.null(res))
-            stop(gettextf("no 'restart' '%s' found", as.character(r)),
-                 domain = NA)
+            stop(gettextf("no 'restart' '%s' found", as.character(r)), domain = "R-base")
         r <- res
     }
     .Internal(.invokeRestart(r, list(...)))
@@ -201,19 +200,18 @@ invokeRestart <- function(r, ...) {
 
 invokeRestartInteractively <- function(r) {
     if (! interactive())
-        stop("not an interactive session")
+        stop("this session is not interactive")
     if (! isRestart(r)) {
         res <- findRestart(r)
         if (is.null(res))
-            stop(gettextf("no 'restart' '%s' found", as.character(r)),
-                 domain = NA)
+            stop(gettextf("no 'restart' '%s' found", as.character(r)), domain = "R-base")
         r <- res
     }
     if (is.null(r$interactive)) {
         pars <- names(restartFormals(r))
         args <- NULL
         if (length(pars)) {
-            cat("Enter values for restart arguments:\n\n")
+            cat(gettext("Enter values for restart arguments:", domain = "R-base"), "\n\n", sep = "")
             for (p in pars) {
             if (p == "...") {
 		    prompt <- "... (a list): "
@@ -261,7 +259,7 @@ withRestarts <- function(expr, ...) {
             else if (is.list(spec))
                 restarts[[i]] <- docall("makeRestart", spec)
             else
-               stop("not a valid restart specification")
+               stop("this is not a valid restart specification")
             restarts[[i]]$name <- name
         }
         restarts

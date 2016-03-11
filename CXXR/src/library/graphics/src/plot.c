@@ -24,6 +24,7 @@
 #endif
 
 #include <Defn.h>
+#include "localization.h"
 #include <float.h>  /* for DBL_MAX */
 #include <Graphics.h>
 #include <Print.h>
@@ -34,7 +35,7 @@
 static R_INLINE void TypeCheck(SEXP s, SEXPTYPE type)
 {
     if (TYPEOF(s) != type)
-	error("invalid type passed to graphics function");
+	error(_("invalid type passed to graphics function"));
 }
 
 
@@ -182,7 +183,7 @@ static SEXP FixupFont(SEXP font, int dflt)
 	ans = allocVector(INTSXP, n);
 	for (i = 0; i < n; i++) {
 	    k = LOGICAL(font)[i];
-#ifndef Win32
+#ifndef _WIN32
 	    if (k < 1 || k > 5) k = NA_INTEGER;
 #else
 	    if (k < 1 || k > 32) k = NA_INTEGER;
@@ -194,7 +195,7 @@ static SEXP FixupFont(SEXP font, int dflt)
 	ans = allocVector(INTSXP, n);
 	for (i = 0; i < n; i++) {
 	    k = INTEGER(font)[i];
-#ifndef Win32
+#ifndef _WIN32
 	    if (k < 1 || k > 5) k = NA_INTEGER;
 #else
 	    if (k < 1 || k > 32) k = NA_INTEGER;
@@ -206,7 +207,7 @@ static SEXP FixupFont(SEXP font, int dflt)
 	ans = allocVector(INTSXP, n);
 	for (i = 0; i < n; i++) {
 	    k = (int) REAL(font)[i];
-#ifndef Win32
+#ifndef _WIN32
 	    if (k < 1 || k > 5) k = NA_INTEGER;
 #else
 	    if (k < 1 || k > 32) k = NA_INTEGER;
@@ -214,7 +215,7 @@ static SEXP FixupFont(SEXP font, int dflt)
 	    INTEGER(ans)[i] = k;
 	}
     }
-    else error(_("invalid font specification"));
+    else error(_("invalid '%s' specification"), "font");
     return ans;
 }
 
@@ -515,25 +516,25 @@ SEXP C_plot_window(SEXP args)
 
     if (isInteger(xlim)) {
 	if (INTEGER(xlim)[0] == NA_INTEGER || INTEGER(xlim)[1] == NA_INTEGER)
-	    error(_("NAs not allowed in 'xlim'"));
+	    error(_("NA values are not allowed in '%s'"), "xlim");
 	xmin = INTEGER(xlim)[0];
 	xmax = INTEGER(xlim)[1];
     }
     else {
 	if (!R_FINITE(REAL(xlim)[0]) || !R_FINITE(REAL(xlim)[1]))
-	    error(_("need finite 'xlim' values"));
+	    error(_("'%s' needs finite values"), "xlim");
 	xmin = REAL(xlim)[0];
 	xmax = REAL(xlim)[1];
     }
     if (isInteger(ylim)) {
 	if (INTEGER(ylim)[0] == NA_INTEGER || INTEGER(ylim)[1] == NA_INTEGER)
-	    error(_("NAs not allowed in 'ylim'"));
+	    error(_("NA values are not allowed in '%s'"), "ylim");
 	ymin = INTEGER(ylim)[0];
 	ymax = INTEGER(ylim)[1];
     }
     else {
 	if (!R_FINITE(REAL(ylim)[0]) || !R_FINITE(REAL(ylim)[1]))
-	    error(_("need finite 'ylim' values"));
+	    error(_("'%s' needs finite values"), "ylim");
 	ymin = REAL(ylim)[0];
 	ymax = REAL(ylim)[1];
     }
@@ -863,7 +864,7 @@ SEXP C_axis(SEXP args)
 
     /* Optional argument: "hadj" */
     if (length(CAR(args)) != 1)
-	error(_("'hadj' must be of length one"));
+	error(_("'%s' argument must be of length 1"), "hadj");
     hadj = asReal(CAR(args));
     args = CDR(args);
 
@@ -939,12 +940,11 @@ SEXP C_axis(SEXP args)
 	    lab = labelformat(at);
 	else {
 	    if (create_at)
-		error(_("'labels' is supplied and not 'at'"));
+		error(_("'labels' argument is supplied and not 'at' argument"));
 	    if (!isExpression(lab)) lab = labelformat(lab);
 	}
 	if (length(at) != length(lab))
-	    error(_("'at' and 'labels' lengths differ, %d != %d"),
-		      length(at), length(lab));
+	    error(_("'at' and 'labels' argument lengths differ, %d != %d"), length(at), length(lab));
     }
     PROTECT(lab);
 
@@ -1313,11 +1313,11 @@ SEXP C_plotXY(SEXP args)
     else							\
 	error(_("invalid plotting structure"));	\
     if (LENGTH(sx) != LENGTH(sy))				\
-	error(_("'x' and 'y' lengths differ in %s()"), subname);\
+	error(_("'x' and 'y' argument lengths differ in '%s' function"), subname);\
     n = LENGTH(sx);						\
     args = CDR(args)
 
-    PLOT_XY_DEALING("plot.xy");
+    PLOT_XY_DEALING("plot.xy()");
 
     if (isNull(CAR(args))) type = 'p';
     else {
@@ -1787,13 +1787,13 @@ SEXP C_path(SEXP args)
     xx = (double*) R_alloc(nx, sizeof(double));
     yy = (double*) R_alloc(nx, sizeof(double));
     if (!xx || !yy)
-	error("unable to allocate memory (in GPath)");
+	error("unable to allocate memory (in 'GPath()')");
     for (i=0; i<nx; i++) {
         xx[i] = REAL(sx)[i];
         yy[i] = REAL(sy)[i];
         GConvert(&(xx[i]), &(yy[i]), USER, DEVICE, dd);
         if (!(R_FINITE(xx[i]) && R_FINITE(yy[i])))
-            error("invalid 'x' or 'y' (in 'GPath')");
+            error("invalid 'x' or 'y' arguments (in 'GPath()')");
     }
 
     if (INTEGER(lty)[0] == NA_INTEGER)
@@ -2071,7 +2071,7 @@ SEXP C_text(SEXP args)
     args = CDR(args);
     if (length(args) < 3) error(_("too few arguments"));
 
-    PLOT_XY_DEALING("text");
+    PLOT_XY_DEALING("text()");
 
     /* labels */
     txt = CAR(args);
@@ -2778,7 +2778,7 @@ SEXP C_abline(SEXP args)
     if (a != R_NilValue) {  /* case where a ans b are supplied */
 	if (b == R_NilValue) {
 	    if (LENGTH(a) != 2)
-		error(_("invalid a=, b= specification"));
+		error(_("invalid '%s' specification"), "a=, b=");
 	    aa = REAL(a)[0];
 	    bb = REAL(a)[1];
 	}
@@ -2787,7 +2787,7 @@ SEXP C_abline(SEXP args)
 	    bb = asReal(b);
 	}
 	if (!R_FINITE(aa) || !R_FINITE(bb))
-	    error(_("'a' and 'b' must be finite"));
+	    error(_("'a' and 'b' arguments must be finite"));
 	gpptr(dd)->col = INTEGER(col)[0];
 	gpptr(dd)->lwd = REAL(lwd)[0];
 	if (nlty && INTEGER(lty)[0] != NA_INTEGER)
@@ -2994,7 +2994,7 @@ SEXP C_locator(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 	n = asInteger(CAR(args));
 	if (n <= 0 || n == NA_INTEGER)
-	    error(_("invalid number of points in %s"), "locator()");
+	    error(_("invalid number of points in '%s' function"), "locator()");
 	args = CDR(args);
 	if (isString(CAR(args)) && LENGTH(CAR(args)) == 1)
 	    stype = CAR(args);
@@ -3134,7 +3134,7 @@ SEXP C_identify(SEXP call, SEXP op, SEXP args, SEXP rho)
 	tol = asReal(CAR(args)); args = CDR(args);
 	atpen = asLogical(CAR(args));
 	if (npts <= 0 || npts == NA_INTEGER)
-	    error(_("invalid number of points in %s"), "identify()");
+	    error(_("invalid number of points in '%s' function"), "identify()");
 	if (!isReal(x) || !isReal(y) || !isString(l) || !isReal(Offset))
 	    error(_("incorrect argument type"));
 	if (tol <= 0 || ISNAN(tol))
@@ -3150,7 +3150,7 @@ SEXP C_identify(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (n != LENGTH(y))
 	    error(_("different argument lengths"));
 	if (nl > n)
-	    warning(_("more 'labels' than points"));
+	    warning(_("more labels than points"));
 
 	/*
 	 * Most of the appropriate settings have been set up in
@@ -3205,7 +3205,7 @@ SEXP C_identify(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 	    else if (LOGICAL(ind)[imin]) {
 		if(warn >= 0 ) {
-		    REprintf(_("warning: nearest point already identified\n"));
+		    REprintf(_("warning: nearest point is already identified\n"));
 		    R_FlushConsole();
 		}
 	    }
@@ -3807,7 +3807,7 @@ SEXP C_symbols(SEXP args)
 	    warning(_("'thermometers[, %s]' not in [0,1] -- may look funny"),
 		    (nc == 4)? "3:4" : "3");
 	if (!SymbolRange(REAL(p), 2 * nr, &pmax, &pmin))
-	    error(_("invalid 'thermometers[, 1:2]'"));
+	    error(_("invalid 'thermometers[, %s]'"), "1:2");
 	for (i = 0; i < nr; i++) {
 	    xx = REAL(x)[i];
 	    yy = REAL(y)[i];
@@ -3967,7 +3967,7 @@ SEXP C_xspline(SEXP args)
     xx = (double *) R_alloc(nx, sizeof(double));
     yy = (double *) R_alloc(nx, sizeof(double));
     if (!xx || !yy)
-	error("unable to allocate memory (in xspline)");
+	error(_("unable to allocate memory (in 'xspline()')"));
     for (i = 0; i < nx; i++) {
 	xx[i] = x[i];
 	yy[i] = y[i];
@@ -4019,16 +4019,16 @@ SEXP C_clip(SEXP args)
 
     args = CDR(args);
     x1 = asReal(CAR(args));
-    if(!R_FINITE(x1)) error("invalid '%s' argument", "x1");
+    if(!R_FINITE(x1)) error(_("invalid '%s' argument"), "x1");
     args = CDR(args);
     x2 = asReal(CAR(args));
-    if(!R_FINITE(x2)) error("invalid '%s' argument", "x2");
+    if(!R_FINITE(x2)) error(_("invalid '%s' argument"), "x2");
     args = CDR(args);
     y1 = asReal(CAR(args));
-    if(!R_FINITE(y1)) error("invalid '%s' argument", "y1");
+    if(!R_FINITE(y1)) error(_("invalid '%s' argument"), "y1");
     args = CDR(args);
     y2 = asReal(CAR(args));
-    if(!R_FINITE(y2)) error("invalid '%s' argument", "y2");
+    if(!R_FINITE(y2)) error(_("invalid '%s' argument"), "y2");
 
     GConvert(&x1, &y1, USER, DEVICE, dd);
     GConvert(&x2, &y2, USER, DEVICE, dd);

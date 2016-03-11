@@ -87,13 +87,13 @@ hist.POSIXt <- function(x, breaks, ..., xlab = deparse(substitute(x)),
                         plot = TRUE, freq = FALSE,
                         start.on.monday = TRUE, format, right = TRUE)
 {
-    if(!inherits(x, "POSIXt")) stop("wrong method")
+    if(!inherits(x, "POSIXt")) stop(gettextf("'%s' argument is not of class %s", "x", dQuote("POSIXt")))
     xlab
     x <- as.POSIXct(x)
     incr <- 1
     ## handle breaks ourselves
     if(missing(breaks))
-	stop("Must specify 'breaks' in hist(<POSIXt>)")
+        stop("'breaks' argument must be specified")
     if (inherits(breaks, "POSIXt")) {
         breaks <- as.POSIXct(breaks)
         d <- min(abs(diff(unclass(breaks))))
@@ -113,7 +113,7 @@ hist.POSIXt <- function(x, breaks, ..., xlab = deparse(substitute(x)),
                 pmatch(breaks,
                        c("secs", "mins", "hours", "days", "weeks",
                          "months", "years", "quarters"))
-            if(is.na(valid)) stop("invalid specification of 'breaks'")
+            if(is.na(valid)) stop(gettextf("invalid '%s' argument", "breaks"))
             start <- as.POSIXlt(min(x, na.rm = TRUE))
             ## may alter later
             ## we need to invalidate isdst whenever we play with components
@@ -172,7 +172,7 @@ hist.POSIXt <- function(x, breaks, ..., xlab = deparse(substitute(x)),
                 breaks <- breaks[seq_len(1L + max(which(breaks < maxx)))]
             }
         }
-        else stop("invalid specification of 'breaks'")
+        else stop(gettextf("invalid '%s' argument", "breaks"))
     }
     res <- hist.default(unclass(x), unclass(breaks), plot = FALSE,
                         warn.unused = FALSE, right = right, ...)
@@ -253,12 +253,12 @@ hist.Date <- function(x, breaks, ..., xlab = deparse(substitute(x)),
                       plot = TRUE, freq = FALSE,
                       start.on.monday = TRUE, format, right = TRUE)
 {
-    if(!inherits(x, "Date")) stop("wrong method")
+    if(!inherits(x, "Date")) stop(gettextf("'%s' argument is not of class %s", "x", dQuote("Date")))
     force(xlab)
     incr <- 1
     ## handle breaks ourselves
     if(missing(breaks))
-        stop("Must specify 'breaks' in hist(<Date>)")
+        stop("'breaks' argument must be specified")
     if (inherits(breaks, "Date")) {
         breaks <- as.Date(breaks)
         d <- min(abs(diff(unclass(breaks))))
@@ -274,7 +274,7 @@ hist.Date <- function(x, breaks, ..., xlab = deparse(substitute(x)),
         } else if(is.character(breaks) && length(breaks) == 1L) {
             valid <- pmatch(breaks, c("days", "weeks", "months", "years",
                                       "quarters"))
-            if(is.na(valid)) stop("invalid specification of 'breaks'")
+            if(is.na(valid)) stop(gettextf("invalid '%s' argument", "breaks"))
             start <- as.POSIXlt(min(x, na.rm = TRUE))
             incr <- 1
             if(valid > 1L) { start$isdst <- -1L}
@@ -326,7 +326,7 @@ hist.Date <- function(x, breaks, ..., xlab = deparse(substitute(x)),
                 breaks <- seq(start, maxx + incr, breaks)
                 breaks <- breaks[seq_len(1L + max(which(breaks < maxx)))]
             }
-        } else stop("invalid specification of 'breaks'")
+        } else stop(gettextf("invalid '%s' argument", "breaks"))
     }
     res <- hist.default(unclass(x), unclass(breaks), plot = FALSE, warn.unused = FALSE, right = right, ...)
     res$equidist <- TRUE # years are of uneven lengths

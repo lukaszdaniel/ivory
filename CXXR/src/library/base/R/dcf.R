@@ -24,7 +24,7 @@ function(file, fields = NULL, all = FALSE, keep.white = NULL)
         on.exit(close(file))
     }
     if(!inherits(file, "connection"))
-        stop("'file' must be a character string or connection")
+        stop(gettextf("'%s' argument must be a character string or connection", "file"))
 
     ## For historical reasons, the default is not to accumulate repeated
     ## fields in a record (in fact picking the *last* field occurrence).
@@ -78,9 +78,7 @@ function(file, fields = NULL, all = FALSE, keep.white = NULL)
     ind <- grep("^[^[:blank:]][^:]*$", lines)
     if(length(ind)) {
         lines <- strtrim(lines[ind], 0.7 * getOption("width"))
-        stop(gettextf("Invalid DCF format.\nRegular lines must have a tag.\nOffending lines start with:\n%s",
-                      paste0("  ", lines, collapse = "\n")),
-             domain = NA)
+        stop(gettextf("Invalid DCF format.\nRegular lines must have a tag.\nOffending lines start with:\n%s", paste0("  ", lines, collapse = "\n")), domain = "R-base")
     }
 
     line_is_not_empty <- !grepl("^[[:space:]]*$", lines)
@@ -102,9 +100,7 @@ function(file, fields = NULL, all = FALSE, keep.white = NULL)
     ind <- which(!line_has_tag[which(diff(nums) > 0L) + 1L])
     if(length(ind)) {
         lines <- strtrim(lines[ind], 0.7 * getOption("width"))
-        stop(gettextf("Invalid DCF format.\nContinuation lines must not start a record.\nOffending lines start with:\n%s",
-                      paste0("  ", lines, collapse = "\n")),
-             domain = NA)
+        stop(gettextf("Invalid DCF format.\nContinuation lines must not start a record.\nOffending lines start with:\n%s", paste0("  ", lines, collapse = "\n")), domain = "R-base")
     }
 
     lengths <- rle(cumsum(line_has_tag))$lengths
@@ -143,7 +139,7 @@ function(x, file = "", append = FALSE,
         on.exit(close(file))
     }
     if(!inherits(file, "connection"))
-        stop("'file' must be a character string or connection")
+        stop(gettextf("'%s' argument must be a character string or connection", "file"))
 
     ## We need to take care of two things:
     ## * We really should not write out NA entries.

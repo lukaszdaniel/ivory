@@ -24,7 +24,7 @@
  *                          printers can be deleted by 'del(printer)'
  */
 
-#include "win-nls.h"
+#include <Localization.h>
 #include "internal.h"
 #include "rui.h"
 

@@ -47,7 +47,7 @@ static const R_CallMethodDef CallEntries[] = {
     CALLDEF(socklisten, 1),
     CALLDEF(sockwrite, 2),
 
-#ifdef Win32
+#ifdef _WIN32
     CALLDEF(winver, 0),
     CALLDEF(dllversion, 1),
     CALLDEF(getClipboardFormats, 0),
@@ -72,7 +72,7 @@ static const R_CallMethodDef CallEntries[] = {
 #define EXTDEF(name, n)  {#name, (DL_FUNC) &name, n}
 
 static const R_ExternalMethodDef ExtEntries[] = {
-#ifdef Win32
+#ifdef _WIN32
     EXTDEF(download, 6),
 #else
     EXTDEF(download, 5),
@@ -96,7 +96,7 @@ static const R_ExternalMethodDef ExtEntries[] = {
     EXTDEF(fileedit, 3),
     EXTDEF(selectlist, 4),
 
-#ifdef Win32
+#ifdef _WIN32
     EXTDEF(winProgressBar, 6),
     EXTDEF(closeWinProgressBar, 1),
     EXTDEF(setWinProgressBar, 4),

@@ -40,8 +40,7 @@ function(x, method = "overplot", jitter = 0.1, offset = 1/3, vertical = FALSE,
 	attr(groups, "names") <- seq_len(n)
     if(is.null(at)) at <- seq_len(n)
     else if(length(at) != n)
-	stop(gettextf("'at' must have length equal to the number %d of groups",
-                      n), domain = NA)
+	stop(gettextf("'at' argument must have length equal to the number %d of groups", n), domain = "R-graphics")
     if (is.null(dlab)) dlab <- deparse(substitute(x))
 
     dev.hold(); on.exit(dev.flush())

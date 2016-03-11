@@ -22,16 +22,15 @@ interaction.plot <-
              trace.label=deparse(substitute(trace.factor)), fixed=FALSE,
              xlab = deparse(substitute(x.factor)), ylab = ylabel,
              ylim = range(cells, na.rm=TRUE),
-             lty = nc:1, col = 1, pch = c(1L:9, 0, letters),
+             lty = nc:1, col = 1, pch = c(seq_len(9), 0, letters),
              xpd = NULL, leg.bg = par("bg"), leg.bty = "n",
              xtick = FALSE, xaxt = par("xaxt"), axes = TRUE, ...)
 {
-    ylabel <- paste(deparse(substitute(fun)), "of ",
-                    deparse(substitute(response)))
+    ylabel <- gettextf("%s of %s", paste(deparse(substitute(fun)), collapse = ""), paste(deparse(substitute(response)), collapse = ""))
     type <- match.arg(type)
     cells <- tapply(response, list(x.factor, trace.factor), fun)
     nr <- nrow(cells); nc <- ncol(cells)
-    xvals <- 1L:nr
+    xvals <- seq_len(nr)
     ## See if the x.factor labels are a sensible scale
     if(is.ordered(x.factor)) {
         wn <- getOption("warn")
@@ -44,7 +43,7 @@ interaction.plot <-
     ylabs <- colnames(cells)
     nch <- max(sapply(ylabs, nchar, type="width"))
     if(is.null(xlabs)) xlabs <- as.character(xvals)
-    if(is.null(ylabs)) ylabs <- as.character(1L:nc)
+    if(is.null(ylabs)) ylabs <- as.character(seq_len(nc))
     xlim <- range(xvals)
     xleg <- xlim[2L] + 0.05 * diff(xlim)
     xlim <- xlim + c(-0.2/nr, if(legend) 0.2 + 0.02*nch else 0.2/nr) * diff(xlim)
@@ -57,8 +56,7 @@ interaction.plot <-
 	axisInt <- function(x, main, sub, lwd, bg, log, asp, ...)
 	    axis(1, x, ...)
 	mgp. <- par("mgp") ; if(!xtick) mgp.[2L] <- 0
-	axisInt(1, at = xvals, labels = xlabs, tick = xtick, mgp = mgp.,
-		xaxt = xaxt, ...)
+	axisInt(1, at = xvals, labels = xlabs, tick = xtick, mgp = mgp., xaxt = xaxt, ...)
     }
     if(legend) {
         yrng <- diff(ylim)

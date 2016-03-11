@@ -19,6 +19,7 @@
  */
 
 #include "grid.h"
+#include "localization.h"
 #include <string.h>
 
 /* Get the list element named str, or return NULL.
@@ -269,7 +270,7 @@ SEXP L_GetSEXPPtr(SEXP sp)
      * and then loaded.  The saved grob has its ptr null'ed
      */
     if (data == NULL)
-	error("grid grob object is empty");
+	error(_("grid grob object is empty"));
     return VECTOR_ELT(data, 0);
 }
 
@@ -281,7 +282,7 @@ SEXP L_SetSEXPPtr(SEXP sp, SEXP s)
      * and then loaded.  The saved grob has its ptr null'ed
      */
     if (data == NULL)
-	error("grid grob object is empty");
+	error(_("grid grob object is empty"));
     SET_VECTOR_ELT(data, 0, s);
     return R_NilValue;
 }

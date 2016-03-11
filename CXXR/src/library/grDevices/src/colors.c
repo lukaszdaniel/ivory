@@ -28,6 +28,7 @@
 #include <R_ext/GraphicsEngine.h>
 
 #include "grDevices.h"
+#include "localization.h"
 
 static char ColBuf[10];
 static char HexDigits[] = "0123456789ABCDEF";
@@ -66,7 +67,7 @@ char *RGBA2rgb(unsigned int r, unsigned int g, unsigned int b, unsigned int a)
 static unsigned int ScaleColor(double x)
 {
     if (ISNA(x))
-    	error(_("color intensity %s, not in [0,1]"), "NA");
+    	error(_("color intensity '%s' is not in [0,1]"), "NA");
     if (!R_FINITE(x) || x < 0.0 || x > 1.0)
 	error(_("color intensity %g, not in [0,1]"), x);
     return (unsigned int)(255*x + 0.5);
@@ -75,7 +76,7 @@ static unsigned int ScaleColor(double x)
 static unsigned int CheckColor(int x)
 {
     if (x == NA_INTEGER)
-    	error(_("color intensity %s, not in 0:255"), "NA");
+    	error(_("color intensity '%s' is not in 0:255"), "NA");
     if (x < 0 || x > 255)
 	error(_("color intensity %d, not in 0:255"), x);
     return (unsigned int)x;
@@ -84,7 +85,7 @@ static unsigned int CheckColor(int x)
 static unsigned int ScaleAlpha(double x)
 {
     if (ISNA(x))
-	error(_("alpha level %s, not in [0,1]"), "NA"); 
+	error(_("alpha level '%s' is not in [0,1]"), "NA"); 
     if (!R_FINITE(x) || x < 0.0 || x > 1.0)
 	error(_("alpha level %g, not in [0,1]"), x);
     return (unsigned int)(255*x + 0.5);
@@ -93,7 +94,7 @@ static unsigned int ScaleAlpha(double x)
 static unsigned int CheckAlpha(int x)
 {
     if (x == NA_INTEGER)
-    	error(_("alpha level %s, not in 0:255"), "NA");
+    	error(_("alpha level '%s' is not in 0:255"), "NA");
     if (x < 0 || x > 255)
 	error(_("alpha level %d, not in 0:255"), x);
     return (unsigned int)x;

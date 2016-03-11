@@ -164,7 +164,7 @@
             latexdir <- tempfile("ltx")
             dir.create(latexdir)
             if (!silent) message("Converting parsed Rd's to LaTeX ",
-                                 appendLF = FALSE, domain = NA)
+                                 appendLF = FALSE, domain = "R-tools")
             Rd <- Rd_db(basename(pkgdir), lib.loc = dirname(pkgdir))
             if (!length(Rd)) {
                 if (is.character(outfile))
@@ -198,7 +198,7 @@
                     hasFigures <- TRUE
                 }
             }
-            if (!silent) message(domain = NA)
+            if (!silent) message(domain = "R-tools")
         } else {
             ## As from R 2.15.3, give priority to a man dir.
             mandir <- file.path(pkgdir, "man")
@@ -211,15 +211,12 @@
                                Sys.glob(file.path(mandir, e, "*.Rd")),
                                Sys.glob(file.path(mandir, e, "*.rd")))
                 if (!length(files))
-                    stop("this package has a ", sQuote("man"), " directory but no .Rd files",
-                         domain = NA)
+                    stop(gettextf("this package has a %s directory but no .Rd files", sQuote("man")), domain = "R-tools")
            } else {
                 files <- c(Sys.glob(file.path(pkgdir, "*.Rd")),
                            Sys.glob(file.path(pkgdir, "*.rd")))
                 if (!length(files))
-                    stop("this package does not have either a ", sQuote("latex"),
-                         " or a (source) ", sQuote("man"), " directory",
-                         domain = NA)
+                    stop(gettextf("this package does not have either a %s or a (source) %s directory", sQuote("latex"), sQuote("man")), domain = "R-tools")
             }
             paths <- files
             ## Use a partial Rd db if there is one.
@@ -235,8 +232,7 @@
             }
             latexdir <- tempfile("ltx")
             dir.create(latexdir)
-            if (!silent) message("Converting Rd files to LaTeX ",
-                                 appendLF = FALSE, domain = NA)
+            if (!silent) message("Converting Rd files to LaTeX ", appendLF = FALSE, domain = "R-tools")
             cnt <- 0L
             macros <- loadPkgRdMacros(pkgdir)
             macros <- initialRdMacros(pkglist, macros)
@@ -266,7 +262,7 @@
                     hasFigures <- TRUE
                 }
             }
-            if (!silent) message(domain = NA)
+            if (!silent) message(domain = "R-tools")
         }
     }
     ## they might be zipped up
@@ -281,8 +277,7 @@
     ## too strict.
     files <- dir(latexdir, pattern = "\\.tex$", full.names = TRUE)
     if (!length(files))
-        stop("no validly-named files in the ", sQuote("latex"), " directory",
-             domain = NA)
+        stop(gettextf("no validly-named files in the %s directory", sQuote("latex")), domain = "R-tools")
 
     if (is.character(outfile)) {
         outcon <- file(outfile, if (append) "at" else "wt")
@@ -299,8 +294,7 @@
         hd <- grep("^\\\\HeaderA", lines, value = TRUE,
                    perl = TRUE, useBytes = TRUE)
         if (!length(hd)) {
-            warning("file ", sQuote(f), " lacks a header: skipping",
-                    domain = NA)
+            warning(gettextf("file %s lacks a header: skipping", sQuote(f), domain = "R-tools"))
             next
         }
         this <- sub("\\\\HeaderA\\{\\s*([^}]*)\\}.*", "\\1", hd[1L], perl = TRUE)
@@ -412,7 +406,7 @@
         } else if (substr(a, 1, 11) == "--RdMacros=") {
             pkglist <- substr(a, 12, 1000)
         } else if (substr(a, 1, 1) == "-") {
-            message("Warning: unknown option ", sQuote(a))
+            message(gettextf("Warning: unknown option %s", sQuote(a)))
         } else files <- c(files, a)
         args <- args[-1L]
     }
@@ -809,17 +803,17 @@ setEncoding2, "
     if(WINDOWS) files[1L] <- sub("[\\/]$", "", files[1L])
     if(dir.exists(files[1L])) {
         if(file.exists(file.path(files[1L], "DESCRIPTION"))) {
-            cat("Hmm ... looks like a package\n")
+            cat(gettext("Hmm ... looks like a package", domain = "R-tools"), "\n", sep = "")
             dir <- files[1L]
             if(!nzchar(output)) output <- paste(basename(dir), out_ext, sep = ".")
         } else if (file.exists(f <- file.path(files[1L], "DESCRIPTION.in"))
                    && any(grepl("^Priority: *base", readLines(f)))) {
-            cat("Hmm ... looks like a package from the R distribution\n")
+            cat(gettext("Hmm ... looks like a package from the R distribution", domain = "R-tools"), "\n", sep = "")
             dir <- files[1L]
             if(!nzchar(output)) output <- paste(basename(dir), out_ext, sep = ".")
             if(index && basename(dir) == "base") {
                 index <- FALSE
-                cat("_not_ indexing 'base' package\n")
+                cat(gettext("_not_ indexing 'base' package", domain = "R-tools"), "\n", sep = "")
             }
         } else {
             dir <- if(dir.exists(d <- file.path(files[1L], "man"))) d else files[1L]
@@ -833,13 +827,13 @@ setEncoding2, "
 
     ## Prepare for building the documentation.
     if(dir.exists(build_dir) && unlink(build_dir, recursive = TRUE)) {
-        cat("cannot write to build dir\n")
+        cat(gettext("cannot write to build dir", domain = "R-tools"), "\n", sep = "")
         q("no", status = 2L, runLast = FALSE)
     }
     dir.create(build_dir, FALSE)
     if(!nzchar(output)) output <- paste("Rd2", out_ext, sep = ".")
     if(file.exists(output) && !force) {
-        cat("file", sQuote(output), "exists; please remove it first\n")
+        cat(gettextf("file %s exists; please remove it first", sQuote(output), domain = "R-tools"), "\n", sep = "")
         q("no", status = 1L, runLast = FALSE)
     }
 
@@ -851,7 +845,7 @@ setEncoding2, "
     if (inherits(res, "try-error"))
         q("no", status = 11L, runLast = FALSE)
 
-    if (!batch)  cat("Creating", out_ext, "output from LaTeX ...\n")
+    if (!batch)  cat(gettextf("Creating %s output from LaTeX ...", out_ext, domain = "R-tools"), "\n", sep = "")
     setwd(build_dir)
 
     res <- try(texi2pdf('Rd2.tex', quiet = FALSE, index = index))
@@ -865,10 +859,9 @@ setEncoding2, "
     }
 
     setwd(startdir)
-    cat("Saving output to", sQuote(output), "...\n")
-    file.copy(file.path(build_dir, paste("Rd2", out_ext, sep = ".")), output,
-              overwrite = force)
-    cat("Done\n")
+    cat(gettextf("Saving output to %s ...", sQuote(output), domain = "R-tools"), "\n", sep = "")
+    file.copy(file.path(build_dir, paste("Rd2", out_ext, sep = ".")), output, overwrite = force)
+    cat(gettext("Done", domain = "R-tools"), "\n", sep = "")
 
     do_cleanup()
     if(preview != "false") system(paste(preview, output))

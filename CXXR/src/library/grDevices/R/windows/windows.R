@@ -65,11 +65,10 @@ windows <-
              fillOddEven, family = "", antialias)
 {
     check <- Sys.getenv("_R_CHECK_SCREEN_DEVICE_", "")
-    msg <- "screen devices should not be used in examples etc"
     if (identical(check, "stop"))
-        stop(msg, domain = NA)
+        stop("screen devices should not be used in examples etc", domain = "R-grDevices")
     else if (identical(check, "warn"))
-        warning(msg, immediate. = TRUE, noBreaks. = TRUE, domain = NA)
+        warning("screen devices should not be used in examples etc", immediate. = TRUE, noBreaks. = TRUE, domain = "R-grDevices")
 
     new <- list()
     if(!missing(width)) new$width <- as.double(width)
@@ -120,7 +119,7 @@ win.print <-
 {
     check <- Sys.getenv("_R_CHECK_WINDOWS_DEVICE_", "")
     if (identical(check, "stop"))
-        stop("windows devices should not be used in examples etc", domain = NA)
+        stop("windows devices should not be used in examples etc", domain = "R-grDevices")
 
     antialias <- match(match.arg(antialias, aa.win), aa.win)
     invisible(.External(C_devga, paste("win.print:", printer, sep=""),
@@ -137,9 +136,9 @@ win.metafile <-
 {
     check <- Sys.getenv("_R_CHECK_WINDOWS_DEVICE_", "")
     if (identical(check, "stop"))
-        stop("windows devices should not be used in examples etc", domain = NA)
+        stop("windows devices should not be used in examples etc", domain = "R-grDevices")
 
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     filename <- path.expand(filename)
     invisible(.External(C_devga, paste("win.metafile:", filename, sep=""),
                         width, height, pointsize, FALSE, 1L,
@@ -196,21 +195,21 @@ savePlot <- function(filename = "Rplot",
 print.SavedPlots <- function(x, ...)
 {
     if(x[[1L]] != 31416) {
-        cat("object is not of class `SavedPlots'\n")
+        cat(gettextf("'%s' argument is not an object of class %s", "x", dQuote("SavedPlots"), domain = "R-grDevices"), "\n", sep = "")
         return()
     }
-    cat("Saved Plots from R version 1.4.0 or later\n\n")
-    cat("  Contains", x[[2L]], "out of a maximum", x[[3L]], "plots\n")
+    cat(gettext("Saved Plots from R version 1.4.0 or later", domain = "R-grDevices"), "\n\n", sep = "")
+    cat(gettextf("  Contains %d out of a maximum %d plots", x[[2L]], x[[3L]], domain = "R-grDevices"), "\n", sep = "")
     lens <- sapply(x[[5L]], length)[1L:x[[2L]]]
-    cat("  #plot calls are", paste(lens, collapse=", "), "\n")
-    cat("  Current position is plot", 1L + x[[4L]], "\n")
+    cat(gettext("  #plot calls are:", domain = "R-grDevices"), paste(lens, collapse=", "), "\n", sep = "")
+    cat(gettextf("  Current position is plot %d", 1L + x[[4L]], domain = "R-grDevices"), "\n", sep = "")
     invisible(x)
 }
 
 `[.SavedPlots` <- function(x, i, ...)
 {
     numplots <- x[[2L]]
-    if(i > numplots || i < 1) stop("subscript out of range")
+    if(i > numplots || i < 1) stop("subscript is out of range")
     x[[5]][[i]]
 }
 
@@ -267,12 +266,12 @@ windowsFonts <- function(...)
         nnames <- length(fontNames)
         if (nnames == 0) {
             if (!all(sapply(fonts, is.character)))
-                stop("invalid arguments in 'windowsFonts' (must be font names)")
+                stop(gettextf("invalid arguments in %s (must be font names)", sQuote("windowsFonts")))
             else
                 get(".Windows.Fonts", envir=.WindowsEnv)[unlist(fonts)]
         } else {
             if (ndots != nnames)
-                stop("invalid arguments in 'windowsFonts' (need named args)")
+                stop(gettextf("invalid arguments in %s (need named args)", sQuote("windowsFonts")))
             setWindowsFonts(fonts, fontNames)
         }
     }

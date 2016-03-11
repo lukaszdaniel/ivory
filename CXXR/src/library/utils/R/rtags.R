@@ -77,10 +77,7 @@ write.etags <-
                simple = sapply(strsplit(lines, "function", fixed = TRUE), "[", 1),
                token = mapply(shorten.to.string, lines, tokens))
     tag.lines <-
-        paste(sprintf("%s\x7f%s\x01%d,%d",
-                      lines, tokens, startlines,
-                      as.integer(offsets)),
-              collapse = "\n")
+        paste(sprintf("%s\x7f%s\x01%d,%d", lines, tokens, startlines, as.integer(offsets)), collapse = "\n")
     ## simpler format: tag.lines <- paste(sprintf("%s\x7f%d,%d", lines, startlines, as.integer(offsets)), collapse = "\n")
     tagsize <- nchar(tag.lines, type = "bytes") + 1L
     cat("\x0c\n", src, ",", tagsize, "\n", tag.lines, "\n", sep = "", ...)
@@ -150,7 +147,7 @@ rtags.file <-
     tokens <- lapply(elist, expr2token)
     startlines <- sapply(attr(elist, "srcref"), "[", 1L)
     if (length(tokens) != length(startlines))
-        stop("length mismatch: bug in code!", domain = NA)
+        stop("length mismatch: bug in code!", domain = "R-utils")
     keep <- lengths(tokens) == 1L
     if (!any(keep)) return(invisible())
     tokens <- unlist(tokens[keep])
@@ -182,14 +179,13 @@ rtags <-
 {
     if (nzchar(ofile) && !append) {
         if (!file.create(ofile, showWarnings = FALSE))
-            stop(gettextf("Could not create file %s, aborting", ofile),
-                 domain = NA)
+            stop(gettextf("Could not create file %s, aborting", sQuote(ofile)), domain = "R-utils")
     }
     if (!missing(keep.re))
         src <- grep(keep.re, src, value = TRUE)
     for (s in src)
     {
-        if (verbose) message(gettextf("Processing file %s", s), domain = NA)
+        if (verbose) message(gettextf("Processing file %s", s), domain = "R-utils")
         tryCatch(
                  rtags.file(s, ofile = ofile, append = TRUE),
                  error = function(e) NULL)

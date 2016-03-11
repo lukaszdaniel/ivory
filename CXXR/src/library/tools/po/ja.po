@@ -5,18 +5,19 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: R 2.1.0 \n"
-"Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-06 13:51+0100\n"
-"PO-Revision-Date: 2014-03-26 13:56+0200 \n"
-"Last-Translator: Masafumi  \n"
-"Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
-"Language: ja \n"
-"MIME-Version: 1.0 \n"
-"Content-Type: text/plain; charset=UTF-8 \n"
-"Content-Transfer-Encoding: 8bit \n"
-"Plural-Forms: nplurals=1; plural=0; \n"
-"X-Generator: Pootle 2.0.5 \n"
+"Project-Id-Version: R 2.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-27 18:06+0100\n"
+"PO-Revision-Date: 2015-01-17 15:54+0100\n"
+"Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
+"Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: Rmd5.c:37
 msgid "argument 'files' must be character"
@@ -27,137 +28,146 @@ msgstr " 引数 'files' は文字型でなければなりません "
 msgid "md5 failed on file '%s'"
 msgstr " md5 はファイル '%s' で失敗しました "
 
-#: getfmts.c:61
+#: getfmts.c:53
 #, c-format
 msgid "only %d arguments are allowed"
-msgstr " 引数は %d 個までです "
+msgstr ""
 
-#: getfmts.c:66
+#: getfmts.c:58
 msgid "'fmt' is not a character vector"
-msgstr " 'fmt' は文字ベクトルではありません "
+msgstr ""
 
-#: getfmts.c:69
+#: getfmts.c:61
 msgid "'fmt' must be length 1"
-msgstr " 'fmt' の長さは 1 でなければなりません "
+msgstr ""
 
-#: getfmts.c:75
+#: getfmts.c:67
 #, c-format
 msgid "'fmt' length exceeds maximal format length %d"
-msgstr " 'fmt' の長さがフォーマットの最大長 %d を越えています "
+msgstr ""
 
-#: getfmts.c:96
+#: getfmts.c:88
 #, c-format
 msgid "unrecognised format specification '%s'"
-msgstr " 識別不能なフォーマット指定 '%s' です "
+msgstr ""
 
-#: getfmts.c:136
+#: getfmts.c:128
 msgid "at most one asterisk '*' is supported in each conversion specification"
-msgstr " 各変換指定に許されるアステリスク '*' は多くても一つです "
+msgstr ""
 
-#: gramLatex.c:2499 gramRd.c:3933
+#: gramLatex.c:2493 gramRd.c:3927
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
-msgstr " %d 行にある長い文字列のためのバッファを確保できませんでした "
+msgstr ""
 
-#: gramLatex.c:2736 gramRd.c:4422 gramRd.c:4428
-#, c-format
+#: gramLatex.c:2730 gramRd.c:4416 gramRd.c:4422
+#, fuzzy, c-format
 msgid "invalid '%s' value"
-msgstr " 不正な '%s' 値です "
+msgstr " 不正な引数の型です "
 
-#: gramRd.c:2591 gramRd.c:2594
+#: gramRd.c:2585 gramRd.c:2588
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
-msgstr " %s:%d:%d に誤ったマークアップがあります (スペースが余計?) "
+msgstr ""
 
-#: gramRd.c:3150
+#: gramRd.c:3144
 #, c-format
 msgid "Macro '%s' previously defined."
-msgstr " マクロ '%s' は既に定義されています。 "
+msgstr ""
 
-#: gramRd.c:3160
+#: gramRd.c:3154
 #, c-format
 msgid "At most 4 arguments are allowed for user defined macros."
-msgstr " ユーザー定義のマクロに許されている引数の数は最大 4 つです "
+msgstr ""
 
-#: gramRd.c:3194
+#: gramRd.c:3188
 #, c-format
 msgid "No macro definition for '%s'."
-msgstr " '%s' に対するマクロが定義されていません。 "
+msgstr ""
 
-#: gramRd.c:3348 gramRd.c:3352
+#: gramRd.c:3342 gramRd.c:3346
 #, c-format
 msgid "newline within quoted string at %s:%d"
-msgstr " 引用文字列の %s に改行:%d "
+msgstr ""
 
-#: gramRd.c:3371
+#: gramRd.c:3365
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
-msgstr " 行 %d にある長いマクロに対するバッファを確保できません "
+msgstr ""
 
-#: gramRd.c:3401
+#: gramRd.c:3395
 msgid "macros nested too deeply: infinite recursion?"
-msgstr " マクロが過剰に入れ子になっています: 無限な再帰？ "
+msgstr ""
 
-#: gramRd.c:3795
+#: gramRd.c:3789
 #, c-format
 msgid "Unable to find macro %s"
-msgstr " マクロ %s を見つけることができません "
+msgstr ""
 
-#: gramRd.c:3993
+#: gramRd.c:3987
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
-msgstr " 予想外の入力の停止 (%c 引用文字列中の %s:%d:%d で開かれた) "
+msgstr ""
 
-#: gramRd.c:4435
+#: gramRd.c:4429
 msgid "cannot open the connection"
-msgstr " コネクションを開くことができません "
+msgstr ""
 
-#: gramRd.c:4442
+#: gramRd.c:4436
 msgid "cannot read from this connection"
-msgstr " このコネクションからは読み取りができません "
+msgstr ""
 
-#: gramRd.c:4450
+#: gramRd.c:4444
 msgid "invalid Rd file"
-msgstr " 不正な Rd ファイルです "
+msgstr ""
 
-#: gramRd.c:4469
+#: gramRd.c:4463
 msgid "'deparseRd' only supports deparsing character elements"
-msgstr " 'deparseRd' は文字要素のディパースだけをサポートしています "
+msgstr ""
 
-#: gramRd.c:4472
+#: gramRd.c:4466
 msgid "bad state"
-msgstr " 不都合な状態 "
+msgstr ""
 
-#: gramRd.c:4485
+#: gramRd.c:4479
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
-msgstr " 'deparseRd' 中に不都合なテキストモード %d "
+msgstr ""
 
 #: http.c:32
 msgid "invalid bind address specification"
-msgstr " 不正な空白アドレス指定 "
+msgstr ""
 
-#: install.c:112 install.c:133 install.c:135
-#, c-format
+#: install.c:105 install.c:124 install.c:126
+#, fuzzy, c-format
 msgid "invalid '%s' argument"
-msgstr " 不正な引数 '%s' です "
+msgstr " 不正な引数の型です "
 
-#: install.c:163
+#: install.c:155
 msgid "write error during file append"
-msgstr " ファイルの付加中に書き込みエラー "
+msgstr ""
 
 #: signals.c:43
 msgid "pskill() is not supported on this platform"
-msgstr " pskill() はこのプラットホームではサポートされていません "
+msgstr " pskill()はこのプラットホームではサポートされていません "
 
 #: signals.c:140
 msgid "psnice() is not supported on this platform"
-msgstr " psnice() はこのプラットホームではサポートされていません "
+msgstr " psnice()はこのプラットホームではサポートされていません "
 
-#: text.c:66
+#: text.c:68
 msgid "invalid argument type"
 msgstr " 不正な引数の型です "
 
-#: text.c:223 text.c:245
+#: text.c:159
+#, c-format
+msgid "'%s' argument must be TRUE or FALSE"
+msgstr ""
+
+#: text.c:226 text.c:248
 msgid "out of memory"
 msgstr " メモリが足りません "
+
+#: text.c:268 text.c:270
+msgid "first arg must be a single character string"
+msgstr ""

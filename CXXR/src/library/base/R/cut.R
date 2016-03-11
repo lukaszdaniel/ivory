@@ -22,7 +22,7 @@ cut.default <-
     function (x, breaks, labels = NULL, include.lowest = FALSE,
               right = TRUE, dig.lab = 3L, ordered_result = FALSE, ...)
 {
-    if (!is.numeric(x)) stop("'x' must be numeric")
+    if (!is.numeric(x)) stop(gettextf("'%s' argument must be numeric", "x"))
     if (length(breaks) == 1L) {
 	if (is.na(breaks) || breaks < 2L)
 	    stop("invalid number of intervals")
@@ -37,7 +37,7 @@ cut.default <-
             breaks[c(1L, nb)] <- c(rx[1L] - dx/1000, rx[2L] + dx/1000)
         }
     } else nb <- length(breaks <- sort.int(as.double(breaks)))
-    if (anyDuplicated(breaks)) stop("'breaks' are not unique")
+    if (anyDuplicated(breaks)) stop("values in 'breaks' argument are not unique")
     codes.only <- FALSE
     if (is.null(labels)) {#- try to construct nice ones ..
 	for(dig in dig.lab:max(12L, dig.lab)) {
@@ -60,7 +60,7 @@ cut.default <-
     } else if (is.logical(labels) && !labels)
         codes.only <- TRUE
     else if (length(labels) != nb - 1L)
-        stop("lengths of 'breaks' and 'labels' differ")
+        stop("lengths of 'breaks' and 'labels' arguments differ")
     code <- .bincode(x, breaks, right, include.lowest)
     if(codes.only) code
     else factor(code, seq_along(labels), labels, ordered = ordered_result)

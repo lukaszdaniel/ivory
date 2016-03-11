@@ -18,6 +18,7 @@
  */
 
 #include "port.h"
+#include "localization.h"
 
 #include <R_ext/Constants.h>
 #include <R_ext/BLAS.h>
@@ -313,7 +314,7 @@ double* check_gv(SEXP gr, SEXP hs, SEXP rho, int n, double *gv, double *hv)
 	error(_("gradient function must return a numeric vector of length %d"), n);
     Memcpy(gv, REAL(gval), n);
     for (int i = 0; i < n; i++)
-	if(ISNAN(gv[i])) error("NA/NaN gradient evaluation");
+	if(ISNAN(gv[i])) error(_("NA/NaN gradient evaluation"));
     if (hv) {
 	SEXP hval = PROTECT(eval(hs, rho));
 	SEXP dim = getAttrib(hval, R_DimSymbol);
@@ -327,7 +328,7 @@ double* check_gv(SEXP gr, SEXP hs, SEXP rho, int n, double *gv, double *hv)
 	for (i = 0, pos = 0; i < n; i++) /* copy lower triangle row-wise */
 	    for (j = 0; j <= i; j++) {
 		hv[pos] = rhval[i + j * n];
-		if(ISNAN(hv[pos])) error("NA/NaN Hessian evaluation");
+		if(ISNAN(hv[pos])) error(_("NA/NaN Hessian evaluation"));
 		pos++;
 	    }
 	UNPROTECT(1);
@@ -377,9 +378,9 @@ SEXP port_nlminb(SEXP fn, SEXP gr, SEXP hs, SEXP rho,
 	rho = R_BaseEnv;
     } else
     if (!isEnvironment(rho))
-	error(_("'rho' must be an environment"));
+	error(_("'%s' argument must be an environment"));
     if (!isReal(d) || n < 1)
-	error(_("'d' must be a nonempty numeric vector"));
+	error(_("'%s' argument must be a nonempty numeric vector"), "d");
     if (hs != R_NilValue && gr == R_NilValue)
 	error(_("When Hessian defined must also have gradient defined"));
     if (R_NilValue == (xpt = findVarInFrame(rho, dot_par_symbol)) ||
@@ -413,7 +414,7 @@ SEXP port_nlminb(SEXP fn, SEXP gr, SEXP hs, SEXP rho,
 	else {
 	    fx = asReal(eval(fn, rho));
 	    if (ISNAN(fx)) {
-		warning("NA/NaN function evaluation");
+		warning(_("NA/NaN function evaluation"));
 		fx = R_PosInf;
 	    }
 	}
@@ -457,7 +458,7 @@ static R_INLINE SEXP getElement(SEXP list, char *nm)
     int i; SEXP names = getAttrib(list, R_NamesSymbol);
 
     if (!isNewList(list) || LENGTH(names) != LENGTH(list))
-	error(_("'getElement' applies only to named lists"));
+	error(_("'getElement()' function applies only to named lists"));
     for (i = 0; i < LENGTH(list); i++)
 	if (!strcmp(CHAR(STRING_ELT(names, i)), nm)) /* ASCII only */
 	    return(VECTOR_ELT(list, i));
@@ -477,8 +478,14 @@ static R_INLINE SEXP getElement(SEXP list, char *nm)
 static R_INLINE SEXP getFunc(SEXP list, char *enm, char *lnm)
 {
     SEXP ans;
-    if (!isFunction(ans = getElement(list, enm)))
-	error(_("%s$%s() not found"), lnm, enm);
+    if (!isFunction(ans = getElement(list, enm))) {
+	char *bf = NULL;
+	strcat(bf, lnm);
+	strcat(bf, "$");
+	strcat(bf, enm);
+	strcat(bf, "()");
+	error(_("'%s' was not found"), bf);
+	}
     return ans;
 }
 
@@ -491,8 +498,7 @@ static void neggrad(SEXP gf, SEXP rho, SEXP gg)
 
     if (TYPEOF(val) != TYPEOF(gg) || !isMatrix(val) || dims[0] != gdims[0] ||
 	dims[1] != gdims[1])
-	error(_("'gradient' must be a numeric matrix of dimension (%d,%d)"),
-	      gdims[0], gdims[1]);
+	error(_("'gradient' argument must be a numeric matrix of dimension (%d,%d)"), gdims[0], gdims[1]);
     for (i = 0; i < ntot; i++) REAL(gg)[i] = - REAL(val)[i];
     UNPROTECT(1);
 }
@@ -525,7 +531,7 @@ SEXP eval_check_store(SEXP fcn, SEXP rho, SEXP vv)
 	Memcpy(REAL(vv), REAL(v), LENGTH(vv));
 	break;
     default:
-	error(_("invalid type for eval_check_store"));
+	error(_("invalid type for 'eval_check_store()' function"));
     }
     UNPROTECT(1);
     return vv;
@@ -545,8 +551,8 @@ SEXP port_nlsb(SEXP m, SEXP d, SEXP gg, SEXP iv, SEXP v,
 	*rd = (double *)R_alloc(nd, sizeof(double));
 
     if (!isReal(d) || n < 1)
-	error(_("'d' must be a nonempty numeric vector"));
-    if(!isNewList(m)) error(_("m must be a list"));
+	error(_("'%s' argument must be a nonempty numeric vector"), "d");
+    if(!isNewList(m)) error(_("'%s' argument must be a list"), "m");
 				/* Initialize parameter vector */
     getPars = PROTECT(lang1(getFunc(m, "getPars", "m")));
     eval_check_store(getPars, R_GlobalEnv, x);
@@ -566,7 +572,7 @@ SEXP port_nlsb(SEXP m, SEXP d, SEXP gg, SEXP iv, SEXP v,
 		b[2*i] = rl[i];
 		b[2*i + 1] = ru[i];
 	    }
-	} else error(_("'lowerb' and 'upperb' must be numeric vectors"));
+	} else error(_("'lowerb' and 'upperb' arguments must be numeric vectors"));
     }
 
     do {
@@ -589,7 +595,7 @@ SEXP port_nlsb(SEXP m, SEXP d, SEXP gg, SEXP iv, SEXP v,
 	    neggrad(gradient, R_GlobalEnv, gg);
 	    break;
 	case 0:
-	    Rprintf("nlsb_iterate returned %d", INTEGER(iv)[0]);
+	    Rprintf(_("'nlsb_iterate()' function returned %d"), INTEGER(iv)[0]);
 	    break;
 	case 1:
 	    eval(setPars, R_GlobalEnv);

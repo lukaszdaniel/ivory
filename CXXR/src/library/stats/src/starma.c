@@ -23,14 +23,8 @@
 
 #include <R.h>
 #include "ts.h"
-
-
-#ifndef max
-#define max(a,b) ((a < b)?(b):(a))
-#endif
-#ifndef min
-#define min(a,b) ((a > b)?(b):(a))
-#endif
+#include "localization.h"
+#include <R_ext/Minmax.h>
 
 /* Code in this file based on Applied Statistics algorithms AS154/182
    (C) Royal Statistical Society 1980, 1982 */

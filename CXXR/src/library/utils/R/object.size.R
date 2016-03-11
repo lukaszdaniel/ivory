@@ -32,7 +32,7 @@ format.object_size <- function(x, units = "b", ...)
 	    else if (x >= 1024^2) "Mb"
 	    else if (x >= 1024  ) "Kb" else "b"
     switch(units,
-	   "b" =, "B" = paste(x, "bytes"),
+	   "b" =, "B" = sprintf(ngettext(as.integer(x), "%d byte", "%d bytes", domain = "R-utils"), as.integer(x)),
 	   "Kb" =, "KB" = paste(round(x/1024  , 1L), "Kb"),
 	   "Mb" =, "MB" = paste(round(x/1024^2, 1L), "Mb"),
 	   "Gb" =, "GB" = paste(round(x/1024^3, 1L), "Gb"),

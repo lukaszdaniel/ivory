@@ -398,7 +398,7 @@ nls_port_fit <- function(m, start, lower, upper, control, trace, give.v=FALSE)
 	if (any(nap <- is.na(pos))) {
             warning(sprintf(ngettext(length(nap),
                                      "unrecognized control element named %s ignored",
-                                     "unrecognized control elements named %s ignored"),
+                                     "unrecognized control elements named %s ignored", domain = "R-stats"),
                             paste(nms[nap], collapse = ", ")),
                     domain = NA)
 	    pos <- pos[!nap]
@@ -501,26 +501,30 @@ nls <-
                     stop("no starting values specified")
                 ## Provide some starting values instead of erroring out later;
                 ## '1' seems slightly better than 0 (which is often invalid):
-                warning("No starting values specified for some parameters.\n",
-                        "Initializing ", paste(sQuote(nnn), collapse=", "),
-                        " to '1.'.\n",
-                        "Consider specifying 'start' or using a selfStart model", domain = NA)
+		tmp_n <- paste(sQuote(nnn), collapse=", ")
+                warning("No starting values specified for some parameters.", "\n",
+                        gettextf("Initializing %s to '1.'.", tmp_n), "\n",
+                        "Consider specifying 'start' or using a selfStart model", domain = "R-stats", sep = "")
 		start <- setNames(as.list(rep_len(1., length(nnn))), nnn)
                 varNames <- varNames[i <- is.na(match(varNames, nnn))]
                 n <- n[i]
             }
             else                        # has 'start' but forgot some
+		{
+		tmp_n <- paste(nnn, collapse=", ")
                 stop(gettextf("parameters without starting value in 'data': %s",
-                              paste(nnn, collapse=", ")), domain = NA)
+                              tmp_n), domain = "R-stats")
+		}
         }
     }
     else { ## length(varNames) == 0
 	if(length(pnames) && any((np <- sapply(pnames, lenVar)) == -1)) {
+		tmp_n <- paste(sQuote(pnames[np == -1]), collapse=", ")
             ## Can fit a model with pnames even if no varNames
             message(sprintf(ngettext(sum(np == -1),
                                      "fitting parameter %s without any variables",
-                                     "fitting parameters %s without any variables"),
-                            paste(sQuote(pnames[np == -1]), collapse=", ")),
+                                     "fitting parameters %s without any variables", domain = "R-stats"),
+                            tmp_n),
                     domain = NA)
             n <- integer()
         }
@@ -539,9 +543,9 @@ nls <-
 	    ## 'data' is a list that can not be coerced to a data.frame
 	    mf <- data
             if(!missing(subset))
-                warning("argument 'subset' will be ignored")
+                warning(gettextf("'%s' argument will be ignored", "subset"))
             if(!missing(na.action))
-                warning("argument 'na.action' will be ignored")
+                warning(gettextf("'%s' argument will be ignored", "na.action"))
 	    if(missing(start))
 		start <- getInitial(formula, mf)
 	    startEnv <- new.env(hash = FALSE, parent = environment(formula)) # small
@@ -597,7 +601,7 @@ nls <-
     ## Iterate
     if (algorithm != "port") {
 	if (!identical(lower, -Inf) || !identical(upper, +Inf)) {
-	    warning('upper and lower bounds ignored unless algorithm = "port"')
+	    warning("upper and lower bounds ignored unless 'algorithm = \"port\"'")
 	    cl$lower <- NULL # see PR#15960 -- confint() would use these regardless of algorithm
 	    cl$upper <- NULL
 	}
@@ -612,7 +616,7 @@ nls <-
 	msg.nls <- port_msg(iv[1L])
 	conv <- (iv[1L] %in% 3:6)
 	if (!conv) {
-	    msg <- paste("Convergence failure:", msg.nls)
+	    msg <- gettextf("Convergence failure: %s", msg.nls)
 	    if(ctrl$warnOnly) warning(msg) else stop(msg)
 	}
 	v. <- port_get_named_v(pfit[["v"]])
@@ -696,18 +700,20 @@ summary.nls <-
         with(x$convInfo,
          {
              if(identical(x$call$algorithm, "port"))
-                 cat("\nAlgorithm \"port\", convergence message: ",
-                     stopMessage, "\n", sep = "")
+                 cat("\n", gettext("Algorithm \"port\", convergence message: ", domain = "R-stats"), stopMessage, "\n", sep = "")
              else {
                  if(!isConv || show.) {
-                     cat("\nNumber of iterations",
-                         if(isConv) "to convergence:" else "till stop:", finIter,
-                         "\nAchieved convergence tolerance:",
-                         format(finTol, digits = digits))
+		     cat("\n")
+		     if(isConv)
+			cat(gettext("Number of iterations to convergence:", domain = "R-stats"), finIter)
+		     else
+			cat(gettext("Number of iterations till stop:", domain = "R-stats"), finIter)
+		     cat("\n")
+		     cat(gettext("Achieved convergence tolerance:", domain = "R-stats"), format(finTol, digits = digits))
                      cat("\n")
                  }
                  if(!isConv) {
-                     cat("Reason stopped:", stopMessage)
+                     cat(gettext("Reason stopped:", domain = "R-stats"), stopMessage)
                      cat("\n")
                  }
              }
@@ -718,13 +724,14 @@ summary.nls <-
 
 print.nls <- function(x, digits = max(3L, getOption("digits") - 3L), ...)
 {
-    cat("Nonlinear regression model\n")
-    cat("  model: ", deparse(formula(x)), "\n", sep = "")
-    cat("   data: ", deparse(x$data), "\n", sep = "")
+    cat(gettext("Nonlinear regression model", domain = "R-stats"), "\n", sep = "")
+    cat("  ", gettext("Model:", domain = "R-stats"), " ", deparse(formula(x)), "\n", sep = "")
+    cat("   ", gettext("Data:", domain = "R-stats"), " ", deparse(x$data), "\n", sep = "")
     print(x$m$getAllPars(), digits = digits, ...)
-    cat(" ", if(!is.null(x$weights) && diff(range(x$weights))) "weighted ",
-	"residual sum-of-squares: ", format(x$m$deviance(), digits = digits),
-	"\n", sep = "")
+    if(!is.null(x$weights) && diff(range(x$weights)))
+    cat(" ", gettext("Weighted residual sum-of-squares:", domain = "R-stats"), " ", format(x$m$deviance(), digits = digits), "\n", sep = "")
+    else
+    cat(" ", gettext("Residual sum-of-squares:", domain = "R-stats"), " ", format(x$m$deviance(), digits = digits), "\n", sep = "")
     .p.nls.convInfo(x, digits = digits)
     invisible(x)
 }
@@ -734,22 +741,21 @@ print.summary.nls <-
             symbolic.cor = x$symbolic.cor,
             signif.stars = getOption("show.signif.stars"), ...)
 {
-    cat("\nFormula: ",
+    cat("\n", gettext("Formula:", domain = "R-stats"), " ",
 	paste(deparse(x$formula), sep = "\n", collapse = "\n"),
         "\n", sep = "")
     df <- x$df
     rdf <- df[2L]
-    cat("\nParameters:\n")
+    cat("\n", gettext("Parameters:", domain = "R-stats"), "\n", sep = "")
     printCoefmat(x$coefficients, digits = digits, signif.stars = signif.stars,
                  ...)
-    cat("\nResidual standard error:",
-        format(signif(x$sigma, digits)), "on", rdf, "degrees of freedom")
+    cat("\n", gettextf("Residual standard error: %s on %d degrees of freedom", format(signif(x$sigma, digits)), rdf, domain = "R-stats"), sep = "")
     cat("\n")
     correl <- x$correlation
     if (!is.null(correl)) {
         p <- NCOL(correl)
         if (p > 1) {
-            cat("\nCorrelation of Parameter Estimates:\n")
+            cat("\n", gettext("Correlation of Parameter Estimates:", domain = "R-stats"), "\n", sep = "")
 	    if(is.logical(symbolic.cor) && symbolic.cor) {
 		print(symnum(correl, abbr.colnames = NULL))
             } else {
@@ -783,7 +789,7 @@ fitted.nls <- function(object, ...)
 {
     val <- as.vector(object$m$fitted())
     if(!is.null(object$na.action)) val <- napredict(object$na.action, val)
-    lab <- "Fitted values"
+    lab <- gettext("Fitted values")
     if (!is.null(aux <- attr(object, "units")$y)) lab <- paste(lab, aux)
     attr(val, "label") <- lab
     val
@@ -799,12 +805,12 @@ residuals.nls <- function(object, type = c("response", "pearson"), ...)
         std <- sqrt(sum(val^2)/(length(val) - length(coef(object))))
         val <- val/std
         if(!is.null(object$na.action)) val <- naresid(object$na.action, val)
-        attr(val, "label") <- "Standardized residuals"
+        attr(val, "label") <- gettext("Standardized residuals")
     } else {
         val <- as.vector(object$m$lhs() - object$m$fitted())
         if(!is.null(object$na.action))
             val <- naresid(object$na.action, val)
-        lab <- "Residuals"
+        lab <- gettext("Residuals")
         if (!is.null(aux <- attr(object, "units")$y)) lab <- paste(lab, aux)
         attr(val, "label") <- lab
     }
@@ -847,7 +853,7 @@ vcov.nls <- function(object, ...)
 anova.nls <- function(object, ...)
 {
     if(length(list(object, ...)) > 1L) return(anovalist.nls(object, ...))
-    stop("anova is only defined for sequences of \"nls\" objects")
+    stop(gettextf("'anova()' function is only defined for sequences of objects of class %s", dQuote("nls")))
 }
 
 anovalist.nls <- function (object, ..., test = NULL)
@@ -860,12 +866,12 @@ anovalist.nls <- function (object, ..., test = NULL)
 	objects <- objects[sameresp]
         warning(gettextf("models with response %s removed because response differs from model 1",
                          sQuote(deparse(responses[!sameresp]))),
-                domain = NA)
+                domain = "R-stats")
     }
     ## calculate the number of models
     nmodels <- length(objects)
     if (nmodels == 1L)
-        stop("'anova' is only defined for sequences of \"nls\" objects")
+        stop(gettextf("'anova()' function is only defined for sequences of objects of class %s", dQuote("nls")))
 
     models <- as.character(lapply(objects, function(x) formula(x)))
 
@@ -893,9 +899,8 @@ anovalist.nls <- function (object, ..., test = NULL)
     dimnames(table) <- list(1L:nmodels, c("Res.Df", "Res.Sum Sq", "Df",
 					 "Sum Sq", "F value", "Pr(>F)"))
     ## construct table and title
-    title <- "Analysis of Variance Table\n"
-    topnote <- paste("Model ", format(1L:nmodels),": ",
-		     models, sep = "", collapse = "\n")
+    title <- paste(gettext("Analysis of Variance Table"), "\n", sep = "")
+    topnote <- paste(gettextf("Model %s:", format(1L:nmodels)), " ", models, sep = "", collapse = "\n")
 
     ## calculate test statistic if needed
     structure(table, heading = c(title, topnote),

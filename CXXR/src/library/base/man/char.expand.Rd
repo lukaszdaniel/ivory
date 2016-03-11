@@ -6,7 +6,7 @@
 \name{char.expand}
 \alias{char.expand}
 \title{Expand a String with Respect to a Target Table}
-\usage{char.expand(input, target, nomatch = stop("no match"))}
+\usage{char.expand(input, target, nomatch = stop("no match in 'char.expand()' function"))}
 \description{
   Seeks a unique match of its first argument among the
   elements of its second.  If successful, it returns this element;

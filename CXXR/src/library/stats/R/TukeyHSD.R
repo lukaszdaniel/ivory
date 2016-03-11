@@ -85,12 +85,11 @@ TukeyHSD.aov <-
 
 print.TukeyHSD <- function(x, digits = getOption("digits"), ...)
 {
-    cat("  Tukey multiple comparisons of means\n")
-    cat("    ", format(100*attr(x, "conf.level"), 2),
-        "% family-wise confidence level\n", sep = "")
+    cat("  ", gettext("Tukey multiple comparisons of means", domain = "R-stats"), "\n", sep = "")
+    cat("    ", gettextf("%s%% family-wise confidence level", format(100*attr(x, "conf.level"), 2), domain = "R-stats"), "\n", sep = "")
     if (attr(x, "ordered"))
-        cat("    factor levels have been ordered\n")
-    cat("\nFit: ", deparse(attr(x, "orig.call"), 500L), "\n\n", sep = "")
+        cat("    ", gettext("factor levels have been ordered", domain = "R-stats"), "\n", sep = "")
+    cat("\n", gettext("Fit: ", domain = "R-stats"), deparse(attr(x, "orig.call"), 500L), "\n\n", sep = "")
     xx <- unclass(x)
     attr(xx, "orig.call") <- attr(xx, "conf.level") <- attr(xx, "ordered") <- NULL
     xx[] <- lapply(xx, function(z, digits)
@@ -116,9 +115,8 @@ plot.TukeyHSD <- function (x, ...)
         segments(xi[, "lwr"], yvals, xi[, "upr"], yvals, ...)
         segments(as.vector(xi), rep.int(yvals - 0.1, 3L), as.vector(xi),
                  rep.int(yvals + 0.1, 3L), ...)
-        title(main = paste0(format(100 * attr(x, "conf.level"), digits = 2L),
-                            "% family-wise confidence level\n"),
-              xlab = paste("Differences in mean levels of", names(x)[i]))
+        title(main = paste(gettextf("%s%% family-wise confidence level", format(100 * attr(x, "conf.level"), digits = 2L), domain = "R-stats"), "\n", sep = ""),
+              xlab = gettextf("Differences in mean levels of %s", names(x)[i], domain = "R-stats"))
         box()
 	dev.flush(); on.exit()
     }

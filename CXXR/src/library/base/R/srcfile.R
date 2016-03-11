@@ -48,12 +48,15 @@ summary.srcfile <- function(object, ...) {
     cat(utils:::.normalizePath(object$filename, object$wd), "\n")
 
     if (inherits(object$timestamp, "POSIXt"))
-    	cat("Timestamp: ", format(object$timestamp, usetz=TRUE), "\n", sep="")
+    	cat(gettextf("Timestamp: %s", format(object$timestamp, usetz=TRUE), domain = "R-base"), "\n", sep = "")
 
-    cat('Encoding: "', object$encoding, '"', sep="")
+    
     if (!is.null(object$Enc) && object$Enc != object$encoding && object$Enc != "unknown")
-    	cat(', re-encoded to "', object$Enc, '"', sep="")
-    cat("\n")
+      cat(gettextf("Encoding: %s, re-encoded to %s", dQuote(object$encoding), dQuote(object$Enc), domain = "R-base"), "\n", sep = "")
+	else
+	  cat(gettextf("Encoding: %s", dQuote(object$encoding), domain = "R-base"), "\n", sep = "")
+	
+
 
     invisible(object)
 }
@@ -75,9 +78,7 @@ open.srcfile <- function(con, line, ...) {
 	if (!is.null(srcfile$timestamp)
 	    && !is.na(srcfile$timestamp)
 	    && ( is.na(timestamp) || timestamp != srcfile$timestamp) )
-            warning(gettextf("Timestamp of %s has changed",
-                             sQuote(srcfile$filename)),
-                    call. = FALSE, domain = NA)
+            warning(gettextf("Timestamp of %s has changed", sQuote(srcfile$filename)), call. = FALSE, domain = "R-base")
 	if (is.null(srcfile$encoding)) encoding <- getOption("encoding")
 	else encoding <- srcfile$encoding
 	# Specifying encoding below means that reads will convert to the native encoding
@@ -219,11 +220,11 @@ as.character.srcref <- function(x, useSource = TRUE, to = x, ...)
     srcfile <- attr(x, "srcfile")
     if (!missing(to)) {
         if (!identical(srcfile, attr(to, "srcfile")))
-    	    stop("'x' and 'to' must refer to same file")
+    	    stop("'x' and 'to' arguments must refer to the same file")
     	x[c(3L, 4L, 6L, 8L)] <- to[c(3L, 4L, 6L, 8L)]
     }	
     if (!is.null(srcfile) && !inherits(srcfile, "srcfile")) {
-        cat("forcing class on") ## debug
+        cat(gettext("forcing class on", domain = "R-base")) ## debug
         print(utils::str(srcfile))
         class(srcfile) <- c("srcfilealias", "srcfile")
     }

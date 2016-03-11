@@ -9,10 +9,10 @@
 \title{Plot Diagnostics for an lm Object}
 \usage{
 \method{plot}{lm}(x, which = c(1:3, 5), %% was which = 1:4
-     caption = list("Residuals vs Fitted", "Normal Q-Q",
-       "Scale-Location", "Cook's distance",
-       "Residuals vs Leverage",
-       expression("Cook's dist vs Leverage  " * h[ii] / (1 - h[ii]))),
+     caption = list(gettext("Residuals vs Fitted"), gettext("Normal Q-Q"),
+       gettext("Scale-Location"), gettext("Cook's distance"),
+       gettext("Residuals vs Leverage"),
+       expression(gettext("Cook's dist vs Leverage  ") * h[ii] / (1 - h[ii]))),
      panel = if(add.smooth) panel.smooth else points,
      sub.caption = NULL, main = "",
      ask = prod(par("mfcol")) < length(which) && dev.interactive(),

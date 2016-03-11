@@ -37,38 +37,38 @@ valid.viewport <- function(x, y, width, height, just,
                            name) {
   if (length(x) > 1 || length(y) > 1 ||
       length(width) > 1 || length(height) > 1)
-    stop("'x', 'y', 'width', and 'height' must all be units of length 1")
+    stop(gettextf("'%s', '%s', '%s' and '%s' arguments must all be units of length 1", "x", "y", "width", "height"))
   if (!is.gpar(gp))
-    stop("invalid 'gp' value")
+    stop(gettextf("invalid '%s' value", "gp"))
   if (!is.logical(clip))
     clip <- switch(as.character(clip),
                    on=TRUE,
                    off=NA,
                    inherit=FALSE,
-                   stop("invalid 'clip' value"))
+                   stop(gettextf("invalid '%s' value", "clip")))
   # Ensure both 'xscale' and 'yscale' are numeric (brute force defense)
   xscale <- as.numeric(xscale)
   yscale <- as.numeric(yscale)
   if (!is.numeric(xscale) || length(xscale) != 2 ||
       any(!is.finite(xscale)) || diff(xscale) == 0)
-    stop("invalid 'xscale' in viewport")
+    stop(gettextf("invalid '%s' argument in viewport", "xscale"))
   if (!is.numeric(yscale) || length(yscale) != 2 ||
       any(!is.finite(yscale)) || diff(yscale) == 0)
-    stop("invalid 'yscale' in viewport")
+    stop(gettextf("invalid '%s' argument in viewport", "yscale"))
   if (!is.numeric(angle) || length(angle) != 1 ||
       !is.finite(angle))
-    stop("invalid 'angle' in viewport")
+    stop(gettextf("invalid '%s' argument in viewport", "angle"))
   if (!(is.null(layout) || is.layout(layout)))
-    stop("invalid 'layout' in viewport")
+    stop(gettextf("invalid '%s' argument in viewport", "layout"))
   if (!is.null(layout.pos.row)) {
     layout.pos.row <- as.integer(range(layout.pos.row))
     if (any(!is.finite(layout.pos.row)))
-      stop("invalid 'layout.pos.row' in viewport")
+      stop(gettextf("invalid '%s' argument in viewport", "layout.pos.row"))
   }
   if (!is.null(layout.pos.col)) {
     layout.pos.col <- as.integer(range(layout.pos.col))
     if (any(!is.finite(layout.pos.col)))
-      stop("invalid 'layout.pos.col' in viewport")
+      stop(gettextf("invalid '%s' argument in viewport", "layout.pos.col"))
   }
   # If name is NULL then we give it a default
   # Otherwise it should be a valid R name
@@ -286,7 +286,7 @@ vpTree <- function(parent, children) {
     class(tree) <- c("vpTree", "viewport")
     tree
   } else {
-    stop("'parent' must be a viewport and 'children' must be a 'vpList' in 'vpTree'")
+    stop("'parent' argument must be a viewport and 'children' argument must be a 'vpList' in 'vpTree'")
   }
 }
 
@@ -323,7 +323,7 @@ vpPathFromVector <- function(names) {
   if (any(bad <- !is.character(names)))
       stop(ngettext(sum(bad),
                     "invalid viewport name",
-                    "invalid viewport names"),
+                    "invalid viewport names", domain = "R-grid"),
            domain = NA)
   names <- unlist(strsplit(names, .grid.pathSep))
   n <- length(names)
@@ -400,12 +400,12 @@ dataViewport <- function(xData = NULL, yData = NULL,
     extension <- rep(extension, length.out = 2)
     if (is.null(xscale)) {
         if (is.null(xData))
-            stop("must specify at least one of 'x' or 'xscale'")
+            stop(gettextf("at least one of '%s' or '%s' arguments must be specified", "x", "xscale"))
         xscale <- extendrange(xData, f = extension[1L])
     }
     if (is.null(yscale)) {
         if (is.null(yData))
-            stop("must specify at least one of 'y' or 'yscale'")
+            stop(gettextf("at least one of '%s' or '%s' arguments must be specified", "y", "yscale"))
         yscale <- extendrange(yData, f = extension[2L])
     }
     viewport(xscale = xscale, yscale = yscale, ...)

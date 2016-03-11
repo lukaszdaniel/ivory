@@ -28,7 +28,7 @@ system.time <- function(expr, gcFirst = TRUE)
     time <- proc.time()
     ## need on.exit after 'time' has been set:
     ## on some systems proc.time throws an error.
-    on.exit(cat("Timing stopped at:", ppt(proc.time() - time), "\n"))
+    on.exit(cat(gettextf("Timing stopped at: %s", ppt(proc.time() - time), domain = "R-base"), "\n", sep = ""))
     expr # evaluated here because of lazy evaluation
     new.time <- proc.time()
     on.exit()

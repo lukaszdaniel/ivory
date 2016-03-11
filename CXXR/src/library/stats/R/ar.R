@@ -50,8 +50,8 @@ ar.yw.default <-
     xfreq <- frequency(x)
     x <- as.matrix(x)
     if(!is.numeric(x))
-        stop("'x' must be numeric")
-    if(anyNA(x)) stop("NAs in 'x'")
+        stop(gettextf("'%s' argument must be numeric", "x"))
+    if(anyNA(x)) stop("NA values in 'x'")
     nser <- ncol(x)
     if (demean) {
         xm <- colMeans(x)
@@ -60,8 +60,8 @@ ar.yw.default <-
     n.used <- nrow(x)
     order.max <- if (is.null(order.max))
 	min(n.used - 1L, floor(10 * log10(n.used))) else round(order.max)
-    if (order.max < 1L) stop("'order.max' must be >= 1")
-    else if (order.max >= n.used) stop("'order.max' must be < 'n.used'")
+    if (order.max < 1L) stop(gettextf("'%s' argument must be >= %d", "order.max", 1))
+    else if (order.max >= n.used) stop("'order.max' argument must be < 'n.used' argument")
     xacf <- acf(x, type = "covariance", lag.max = order.max, plot = FALSE,
                 demean = demean)$acf
     if(nser > 1L) {
@@ -165,7 +165,7 @@ ar.yw.default <-
 
 print.ar <- function(x, digits = max(3L, getOption("digits") - 3L), ...)
 {
-    cat("\nCall:\n", deparse(x$call), "\n\n", sep = "")
+    cat("\n", gettext("Call:", domain = "R-stats"), "\n", deparse(x$call), "\n\n", sep = "")
     nser <- NCOL(x$var.pred)
     if(nser > 1L) {
         res <- x[c("ar", if(!is.null(x$x.intercept)) "x.intercept", "var.pred")]
@@ -173,18 +173,16 @@ print.ar <- function(x, digits = max(3L, getOption("digits") - 3L), ...)
         print(res, digits = digits)
     } else { ## univariate case
         if(x$order) {
-            cat("Coefficients:\n")
+            cat(gettext("Coefficients:", domain = "R-stats"), "\n", sep = "")
 	    coef <- setNames(round(drop(x$ar), digits = digits),
 			     seq_len(x$order))
             print.default(coef, print.gap = 2L)
         }
-        if(!is.null(xint <- x$x.intercept) && !is.na(xint))
-            cat("\nIntercept: ", format(xint, digits = digits),
+        if(!is.null(xint <- x$x.intercept) && !is.na(xint)) {
                 ## FIXME? asy.se.coef  *only* exists for  ar.ols (??)
-                " (", format(x$asy.se.coef$x.mean, digits = digits),
-                ") ", "\n", sep = "")
-        cat("\nOrder selected", x$order, " sigma^2 estimated as ",
-            format(x$var.pred, digits = digits))
+            cat("\n", gettext("Intercept: ", domain = "R-stats"), format(xint, digits = digits), " (", format(x$asy.se.coef$x.mean, digits = digits), ") ", "\n", sep = "")
+	}
+        cat("\n", gettextf("Order selected %s sigma^2 estimated as %s", x$order, format(x$var.pred, digits = digits), domain = "R-stats"), sep = "")
         cat("\n")
     }
     invisible(x)
@@ -192,7 +190,7 @@ print.ar <- function(x, digits = max(3L, getOption("digits") - 3L), ...)
 
 predict.ar <- function(object, newdata, n.ahead = 1L, se.fit = TRUE, ...)
 {
-    if (n.ahead < 1L) stop("'n.ahead' must be at least 1")
+    if (n.ahead < 1L) stop(gettextf("'%s' argument must be at least %d", "n.ahead", 1))
     if(missing(newdata)) {
         newdata <- eval.parent(parse(text=object$series))
         if (!is.null(nas <- object$call$na.action))
@@ -225,7 +223,7 @@ predict.ar <- function(object, newdata, n.ahead = 1L, se.fit = TRUE, ...)
         pred <- pred + matrix(object$x.mean, n.ahead, nser, byrow = TRUE)
         colnames(pred) <- colnames(object$var.pred)
         if(se.fit) {
-            warning("'se.fit' not yet implemented for multivariate models")
+            warning("'se.fit()' not yet implemented for multivariate models")
             se <- matrix(NA, n.ahead, nser)
         }
     } else {
@@ -261,9 +259,9 @@ ar.mle <- function (x, aic = TRUE, order.max = NULL, na.action = na.fail,
     if (!is.null(dim(x)))
         stop("MLE only implemented for univariate series")
     x <- na.action(as.ts(x))
-    if(anyNA(x)) stop("NAs in 'x'")
+    if(anyNA(x)) stop("NA values in 'x'")
     if(!is.numeric(x))
-        stop("'x' must be numeric")
+        stop(gettextf("'%s' argument must be numeric", "x"))
     if(ists)  xtsp <- tsp(x)
     xfreq <- frequency(x)
     x <- as.vector(x) # drop attributes, including class
@@ -272,8 +270,8 @@ ar.mle <- function (x, aic = TRUE, order.max = NULL, na.action = na.fail,
         min(n.used-1L, 12L, floor(10 * log10(n.used)))
     else round(order.max)
 
-    if (order.max < 0L) stop ("'order.max' must be >= 0")
-    else if (order.max >= n.used) stop("'order.max' must be < 'n.used'")
+    if (order.max < 0L) stop(gettextf("'%s' argument must be >= %d", "order.max", 0))
+    else if (order.max >= n.used) stop("'order.max' argument must be < 'n.used' argument")
     if (aic) {
         coefs <- matrix(NA, order.max+1L, order.max+1L)
         var.pred <- numeric(order.max+1L)
@@ -336,12 +334,12 @@ ar.ols <- function (x, aic = TRUE, order.max = NULL, na.action = na.fail,
     rescale <- TRUE
     ists <- is.ts(x)
     x <- na.action(as.ts(x))
-    if(anyNA(x)) stop("NAs in 'x'")
+    if(anyNA(x)) stop("NA values in 'x'")
     if(ists)  xtsp <- tsp(x)
     xfreq <- frequency(x)
     x <- as.matrix(x)
     if(!is.numeric(x))
-        stop("'x' must be numeric")
+        stop(gettextf("'%s' argument must be numeric", "x"))
     n.used <- nrow(x)
     nser <- ncol(x)
     iser <- seq_len(nser)
@@ -353,8 +351,8 @@ ar.ols <- function (x, aic = TRUE, order.max = NULL, na.action = na.fail,
 
     order.max <- if (is.null(order.max))
 	min(n.used-1L, floor(10 * log10(n.used))) else round(order.max)
-    if (order.max < 0L)	     stop("'order.max' must be >= 0")
-    if (order.max >= n.used) stop("'order.max' must be < 'n.used'")
+    if (order.max < 0L)	     stop(gettextf("'%s' argument must be >= %d", "order.max", 0))
+    if (order.max >= n.used) stop("'order.max' argument must be < 'n.used' argument")
     order.min <- if (aic) 0L else order.max
     varE <- seA <- A <- vector("list", order.max - order.min + 1L)
     xaic <- rep.int(Inf, order.max - order.min + 1L)
@@ -385,10 +383,8 @@ ar.ols <- function (x, aic = TRUE, order.max = NULL, na.action = na.fail,
         rank <- qr(XX)$rank
         if (rank != nrow(XX))
         {
-            warning(paste("model order: ", m,
-                          "singularities in the computation of the projection matrix",
-                          "results are only valid up to model order", m - 1L),
-                    domain = NA)
+            warning(gettextf("model order: %d singularities in the computation of the projection matrix results are only valid up to model order %d", m, m - 1L),
+                    domain = "R-stats")
             break
         }
         P <- if(ncol(XX) > 0) solve(XX) else XX
@@ -475,7 +471,7 @@ function (x, aic = TRUE, order.max = NULL, na.action = na.fail,
     if (is.null(series)) series <- deparse(substitute(x))
     if (ists <- is.ts(x)) xtsp <- tsp(x)
     x <- na.action(as.ts(x))
-    if (anyNA(x)) stop("NAs in 'x'")
+    if (anyNA(x)) stop("NA values in 'x'")
     if (ists) xtsp <- tsp(x)
     xfreq <- frequency(x)
     x <- as.matrix(x)
@@ -488,7 +484,7 @@ function (x, aic = TRUE, order.max = NULL, na.action = na.fail,
     else x.mean <- rep(0, nser)
     order.max <- if (is.null(order.max)) floor(10 * log10(n.used)) else floor(order.max)
     if (order.max < 1L)
-        stop("'order.max' must be >= 1")
+        stop(gettextf("'%s' argument must be >= %d", "order.max", 1))
     xacf <- acf(x, type = "cov", plot = FALSE, lag.max = order.max)$acf
     z <- .C(C_multi_yw,
             aperm(xacf, 3:1),
@@ -508,9 +504,9 @@ function (x, aic = TRUE, order.max = NULL, na.action = na.fail,
     resid <- x
     if (order > 0) {
         ar <- -aperm(array(z$coefs, dim = c(nser, nser, order.max + 1L)), 3:1)[2L:(order + 1L), , , drop = FALSE]
-        for (i in 1L:order)
-            resid[-(1L:order), ] <- resid[-(1L:order),] - x[(order - i + 1L):(n.used - i), ] %*% t(ar[i, , ])
-        resid[1L:order, ] <- NA
+        for (i in seq_len(order))
+            resid[-seq_len(order), ] <- resid[-seq_len(order),] - x[(order - i + 1L):(n.used - i), ] %*% t(ar[i, , ])
+        resid[seq_len(order), ] <- NA
     }
     else ar <- array(dim = c(0, nser, nser))
     var.pred <- var.pred[order + 1L, , , drop = TRUE] * n.used/(n.used - nser * (demean + order))
@@ -522,7 +518,7 @@ function (x, aic = TRUE, order.max = NULL, na.action = na.fail,
     colnames(resid) <- snames
     dimnames(ar) <- list(seq_len(order), snames, snames)
     dimnames(var.pred) <- list(snames, snames)
-    dimnames(partialacf) <- list(1L:order.max, snames, snames)
+    dimnames(partialacf) <- list(seq_len(order.max), snames, snames)
     res <- list(order = order, ar = ar, var.pred = var.pred,
         x.mean = x.mean, aic = xaic, n.used = n.used, order.max = order.max,
         partialacf = partialacf, resid = resid, method = "Yule-Walker",
@@ -540,7 +536,7 @@ ar.burg.default <-
     if(is.null(series)) series <- deparse(substitute(x))
     if (ists <- is.ts(x)) xtsp <- tsp(x)
     x <- na.action(as.ts(x))
-    if(anyNA(x)) stop("NAs in 'x'")
+    if(anyNA(x)) stop("NA values in 'x'")
     if (ists)  xtsp <- tsp(x)
     xfreq <- frequency(x)
     x <- as.vector(x) # drop attributes including class
@@ -552,8 +548,8 @@ ar.burg.default <-
     order.max <- if (is.null(order.max))
 	min(n.used-1L, floor(10 * log10(n.used)))
     else floor(order.max)
-    if (order.max < 1L) stop("'order.max' must be >= 1")
-    else if (order.max >= n.used) stop("'order.max' must be < 'n.used'")
+    if (order.max < 1L) stop(gettextf("'%s' argument must be >= %d", "order.max", 1))
+    else if (order.max >= n.used) stop("'order.max' argument must be < 'n.used' argument")
     xaic <- numeric(order.max + 1L)
     z <- .Call(C_Burg, x, order.max)
     coefs <- matrix(z[[1L]], order.max, order.max)
@@ -565,7 +561,7 @@ ar.burg.default <-
     xaic <- setNames(if(is.finite(maic)) xaic - min(xaic) else
 		     ifelse(xaic == maic, 0, Inf), 0L:order.max)
     order <- if (aic) (0L:order.max)[xaic == 0] else order.max
-    ar <- if (order) coefs[order, 1L:order] else numeric()
+    ar <- if (order) coefs[order, seq_len(order)] else numeric()
     var.pred <- var.pred[order + 1L]
     resid <- if(order) c(rep(NA, order), embed(x, order+1L) %*% c(1, -ar))
     else x
@@ -596,7 +592,7 @@ function (x, aic = TRUE, order.max = NULL, na.action = na.fail,
         xtsp <- tsp(x)
     x <- na.action(as.ts(x))
     if (anyNA(x))
-        stop("NAs in 'x'")
+        stop("NA values in 'x'")
     if (ists)
         xtsp <- tsp(x)
     xfreq <- frequency(x)

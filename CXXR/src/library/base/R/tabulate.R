@@ -19,12 +19,12 @@
 tabulate <- function(bin, nbins = max(1L, bin, na.rm = TRUE))
 {
     if(!is.numeric(bin) && !is.factor(bin))
-	stop("'bin' must be numeric or a factor")
+	stop("'bin' argument must be numeric or a factor")
     ## avoid a copy for factors, since as.integer strips attributes
     if (typeof(bin) != "integer") bin <- as.integer(bin)
     if (nbins > .Machine$integer.max)
         stop("attempt to make a table with >= 2^31 elements")
     nbins <- as.integer(nbins)
-    if (is.na(nbins)) stop("invalid value of 'nbins'")
+    if (is.na(nbins)) stop(gettextf("invalid '%s' value", "nbins"))
     .Internal(tabulate(bin, nbins))
 }

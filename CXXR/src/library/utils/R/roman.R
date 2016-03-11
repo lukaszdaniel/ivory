@@ -62,10 +62,8 @@ function(x, i)
 
 .numeric2roman <-
 function(x) {
-    romans <- c("M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX",
-                "V", "IV", "I")
-    numbers <- c(1000L, 900L, 500L, 400L, 100L, 90L, 50L, 40L, 10L, 9L,
-                 5L, 4L, 1L)
+    romans <- c("M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I")
+    numbers <- c(1000L, 900L, 500L, 400L, 100L, 90L, 50L, 40L, 10L, 9L, 5L, 4L, 1L)
     n2r <- function(z) {
         y <- character()
         for(i in seq_along(romans)) {
@@ -94,10 +92,8 @@ function(x)
     ## What if this fails?
     ## Should say something like "Not a valid roman number ..."
     ## </FIXME>
-    romans <- c("M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX",
-                "V", "IV", "I")
-    numbers <- c(1000L, 900L, 500L, 400L, 100L, 90L, 50L, 40L, 10L, 9L,
-                 5L, 4L, 1L)
+    romans <- c("M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I")
+    numbers <- c(1000L, 900L, 500L, 400L, 100L, 90L, 50L, 40L, 10L, 9L, 5L, 4L, 1L)
     out <- integer(length(x))
     ind <- is.na(x)
     out[ind] <- NA
@@ -113,7 +109,7 @@ function(x)
         if(any(!ok)) {
             warning(sprintf(ngettext(sum(!ok),
                                      "invalid roman numeral: %s",
-                                     "invalid roman numerals: %s"),
+                                     "invalid roman numerals: %s", domain = "R-utils"),
                             paste(x[!ind][!ok], collapse = " ")),
                     domain = NA)
             out[!ind][!ok] <- NA

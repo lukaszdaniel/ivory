@@ -22,7 +22,7 @@
 #include <config.h>
 #endif
 
-#include "win-nls.h"
+
 
 
 #include "Defn.h"
@@ -32,7 +32,7 @@
 #endif
 
 #include <windows.h>
-
+#include "localization.h"
 
 const static struct {
     const char * reg;
@@ -174,7 +174,7 @@ static SEXP readRegistryKey(HKEY hkey, int depth, int view)
 			  &nsubkeys, &maxsubkeylen, NULL, &nval,
 			  &maxvalnamlen, NULL, NULL, NULL);
     if (res != ERROR_SUCCESS)
-	error("RegQueryInfoKey error code %d: '%s'", (int) res,
+	error(_("RegQueryInfoKey error code %d: '%s'"), (int) res,
 	      formatError(res));
     size0 = max(maxsubkeylen, maxvalnamlen) + 1;
     name = (wchar_t *) R_alloc(size0, sizeof(wchar_t));

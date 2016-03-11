@@ -22,13 +22,13 @@ function(x, g, p.adjust.method = p.adjust.methods, pool.sd = !paired,
 {
     if (paired & pool.sd)
         stop("pooling of SD is incompatible with paired tests")
-    DNAME <- paste(deparse(substitute(x)), "and", deparse(substitute(g)))
+    DNAME <- gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(g)), collapse = ""))
     g <- factor(g)
     p.adjust.method <- match.arg(p.adjust.method)
     alternative <- match.arg(alternative)
     if (pool.sd)
     {
-        METHOD <- "t tests with pooled SD"
+        METHOD <- gettext("t tests with pooled SD", domain = "R-stats")
         xbar <- tapply(x, g, mean, na.rm = TRUE)
         s <- tapply(x, g, sd, na.rm = TRUE)
         n <- tapply(!is.na(x), g, sum)
@@ -46,8 +46,8 @@ function(x, g, p.adjust.method = p.adjust.methods, pool.sd = !paired,
                    lower.tail=(alternative == "less"))
         }
     } else {
-        METHOD <- if (paired) "paired t tests"
-        else "t tests with non-pooled SD"
+        METHOD <- if (paired) gettext("Paired t-tests", domain = "R-stats")
+        else gettext("t tests with non-pooled SD", domain = "R-stats")
         compare.levels <- function(i, j) {
             xi <- x[as.integer(g) == i]
             xj <- x[as.integer(g) == j]
@@ -67,10 +67,10 @@ pairwise.wilcox.test <-
 function(x, g, p.adjust.method = p.adjust.methods, paired=FALSE, ...)
 {
     p.adjust.method <- match.arg(p.adjust.method)
-    DNAME <- paste(deparse(substitute(x)), "and", deparse(substitute(g)))
+    DNAME <- gettextf("%s and %s", deparse(substitute(x)), deparse(substitute(g)), domain = "R-stats")
     g <- factor(g)
-    METHOD <- if (paired) "Wilcoxon signed rank test"
-        else "Wilcoxon rank sum test"
+    METHOD <- if (paired) gettext("Wilcoxon signed rank test", domain = "R-stats")
+        else gettext("Wilcoxon rank sum test", domain = "R-stats")
     compare.levels <- function(i, j) {
         xi <- x[as.integer(g) == i]
         xj <- x[as.integer(g) == j]
@@ -87,7 +87,7 @@ pairwise.prop.test <-
 function (x, n, p.adjust.method = p.adjust.methods, ...)
 {
     p.adjust.method <- match.arg(p.adjust.method)
-    METHOD <- "Pairwise comparison of proportions"
+    METHOD <- gettext("Pairwise comparison of proportions", domain = "R-stats")
     DNAME <- deparse(substitute(x))
     if (is.matrix(x)) {
         if (ncol(x) != 2)
@@ -96,9 +96,9 @@ function (x, n, p.adjust.method = p.adjust.methods, ...)
         x <- x[, 1]
     }
     else {
-        DNAME <- paste(DNAME, "out of", deparse(substitute(n)))
+        DNAME <- gettextf("%s out of %s", deparse(substitute(x)), deparse(substitute(n)), domain = "R-stats")
         if (length(x) != length(n))
-            stop("'x' and 'n' must have the same length")
+            stop(gettextf("'%s' and '%s' arguments must have the same length", "x", "n"))
     }
     OK <- complete.cases(x, n)
     x <- x[OK]
@@ -135,11 +135,11 @@ function(compare.levels, level.names, p.adjust.method)
 print.pairwise.htest <-
 function(x, digits = max(1L, getOption("digits") - 5L), ...)
 {
-    cat("\n\tPairwise comparisons using", x$method, "\n\n")
-    cat("data: ", x$data.name, "\n\n")
+    cat("\n\t", gettextf("Pairwise comparisons using %s", x$method, domain = "R-stats"), "\n\n", sep = "")
+    cat(gettext("Data: ", domain = "R-stats"), x$data.name, "\n\n", sep = "")
     pp <- format.pval(x$p.value, digits=digits, na.form="-")
     attributes(pp) <- attributes(x$p.value)
     print(pp, quote=FALSE, ...)
-    cat("\nP value adjustment method:", x$p.adjust.method, "\n")
+    cat("\n", gettext("P-value adjustment method: ", domain = "R-stats"), x$p.adjust.method, "\n", sep = "")
     invisible(x)
 }

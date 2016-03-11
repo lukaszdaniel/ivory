@@ -19,7 +19,7 @@
 cutree <- function(tree, k=NULL, h=NULL)
 {
     if(is.null(n1 <- nrow(tree$merge)) || n1 < 1)
-        stop("invalid 'tree' ('merge' component)")
+        stop("invalid 'tree' argument ('merge' component)")
     n <- n1 + 1
     if(is.null(k) && is.null(h))
         stop("either 'k' or 'h' must be specified")
@@ -30,13 +30,12 @@ cutree <- function(tree, k=NULL, h=NULL)
         ## S+6 help(cutree) says k(h) = k(h+), but does k(h-) [continuity]
         ## h < min() should give k = n;
         k <- n+1L - apply(outer(c(tree$height,Inf), h, ">"), 2, which.max)
-        if(getOption("verbose")) message("cutree(): k(h) = ", k, domain = NA)
+        if(getOption("verbose")) message("cutree(): k(h) = ", k, domain = "R-stats")
     }
     else {
         k <- as.integer(k)
         if(min(k) < 1 || max(k) > n)
-            stop(gettextf("elements of 'k' must be between 1 and %d", n),
-                 domain = NA)
+            stop(gettextf("elements of 'k' must be between 1 and %d", n), domain = "R-stats")
     }
 
     ans <- .Call(C_cutree, tree$merge, k)

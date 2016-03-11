@@ -29,8 +29,8 @@ try <- function(expr, silent = FALSE) {
             if (identical(call[[1L]], quote(doTryCatch)))
                 call <- sys.call(-4L)
             dcall <- deparse(call)[1L]
-            prefix <- paste("Error in", dcall, ": ")
-            LONG <- 75L # to match value in errors.c
+            prefix <- gettextf("Error in command '%s': ", paste(dcall, collapse = ""), domain = "R-base")
+            LONG <- getOption("width") - 5L # to match value in errors.c
             msg <- conditionMessage(e)
             sm <- strsplit(msg, "\n")[[1L]]
             w <- 14L + nchar(dcall, type="w") + nchar(sm[1L], type="w")
@@ -40,7 +40,7 @@ try <- function(expr, silent = FALSE) {
             if (w > LONG)
                 prefix <- paste0(prefix, "\n  ")
         }
-        else prefix <- "Error : "
+        else prefix <- gettext("Error: ")
         msg <- paste0(prefix, conditionMessage(e), "\n")
         ## Store the error message for legacy uses of try() with
         ## geterrmessage().
@@ -70,7 +70,7 @@ lfactorial <- function(x) lgamma(x + 1)
 
 choose <- function(n, k) .Internal(choose(n, k))
 lchoose <- function(n, k) .Internal(lchoose(n, k))
-
+
 ##-- 2nd part --
 R.Version <- function() .Internal(Version())
 
@@ -108,18 +108,18 @@ rbind <- function(..., deparse.level = 1)
     if (anyNA(opts))
         stop(sprintf(ngettext(as.integer(sum(is.na(opts))),
                               "deparse option %s is not recognized",
-                              "deparse options %s are not recognized"),
+                              "deparse options %s are not recognized", domain = "R-base"),
                      paste(sQuote(control[is.na(opts)]), collapse=", ")),
              call. = FALSE, domain = NA)
     if (any(opts == 1L))
         opts <- unique(c(opts[opts != 1L], 2L,3L,4L,5L,6L,8L)) # not (7,9:11)
     if(10L %in% opts && 11L %in% opts)
-        stop('"hexNumeric" and "digits17" are mutually exclusive')
+        stop("\"hexNumeric\" and \"digits17\" are mutually exclusive")
     return(sum(2^(opts-2)))
 }
 
 deparse <-
-    function(expr, width.cutoff = 60L,
+    function(expr, width.cutoff = getOption("width"),
 	     backtick = mode(expr) %in% c("call", "expression", "(", "function"),
 	     control = c("keepInteger", "showAttributes", "keepNA"),
              nlines = -1L)
@@ -129,7 +129,7 @@ deparse <-
 do.call <- function(what, args, quote = FALSE, envir = parent.frame())
 {
     if (!is.list(args))
-	stop("second argument must be a list")
+	stop(gettextf("'%s' argument must be a list", "args"))
     if (quote)
 	args <- lapply(args, enquote)
     .Internal(do.call(what, args, envir))
@@ -251,9 +251,9 @@ iconvlist <- function()
     if(length(int)) return(sort.int(int))
     icfile <- system.file("iconvlist", package="utils")
     if(!nchar(icfile, type="bytes"))
-        stop("'iconvlist' is not available on this system")
+        stop("'iconvlist()' function is not available on this system")
     ext <- readLines(icfile)
-    if(!length(ext)) stop("'iconvlist' is not available on this system")
+    if(!length(ext)) stop("'iconvlist()' function is not available on this system")
     ## glibc has lines ending //, some versions with a header and some without.
     ## libiconv has lines with multiple entries separated by spaces
     cnt <- grep("//$", ext)

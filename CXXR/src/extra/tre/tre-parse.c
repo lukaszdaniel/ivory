@@ -255,7 +255,7 @@ tre_parse_bracket_items(tre_parse_ctx_t *ctx, int negate,
 {
   const tre_char_t *re = ctx->re;
   reg_errcode_t status = REG_OK;
-  tre_ctype_t class = (tre_ctype_t)0;
+  tre_ctype_t classs = (tre_ctype_t)0;
   int i = *num_items;
   int max_i = *items_size;
   int skip;
@@ -278,7 +278,7 @@ tre_parse_bracket_items(tre_parse_ctx_t *ctx, int negate,
 	{
 	  tre_cint_t min = 0, max = 0;
 
-	  class = (tre_ctype_t)0;
+	  classs = (tre_ctype_t)0;
 	  if (re + 2 < ctx->re_end
 	      && *(re + 1) == CHAR_MINUS && *(re + 2) != CHAR_RBRACKET)
 	    {
@@ -308,7 +308,7 @@ tre_parse_bracket_items(tre_parse_ctx_t *ctx, int negate,
 		endptr++;
 	      if (endptr != ctx->re_end)
 		{
-		  len = MIN(endptr - re - 2, 63);
+		  len = min(endptr - re - 2, 63);
 #ifdef TRE_WCHAR
 		  {
 		    tre_char_t tmp_wcs[64];
@@ -330,15 +330,15 @@ tre_parse_bracket_items(tre_parse_ctx_t *ctx, int negate,
 #endif /* !TRE_WCHAR */
 		  tmp_str[len] = '\0';
 		  DPRINT(("  class name: %s\n", tmp_str));
-		  class = tre_ctype(tmp_str);
-		  if (!class)
+		  classs = tre_ctype(tmp_str);
+		  if (!classs)
 		    status = REG_ECTYPE;
 		  /* Optimize character classes for 8 bit character sets. */
 		  if (status == REG_OK && ctx->cur_max == 1)
 		    {
-		      status = tre_expand_ctype(ctx->mem, class, items,
+		      status = tre_expand_ctype(ctx->mem, classs, items,
 						&i, &max_i, ctx->cflags);
-		      class = (tre_ctype_t)0;
+		      classs = (tre_ctype_t)0;
 		      skip = 1;
 		    }
 		  re = endptr + 2;
@@ -361,22 +361,22 @@ tre_parse_bracket_items(tre_parse_ctx_t *ctx, int negate,
 	  if (status != REG_OK)
 	    break;
 
-	  if (class && negate)
+	  if (classs && negate)
 	    if (*num_neg_classes >= MAX_NEG_CLASSES)
 	      status = REG_ESPACE;
 	    else
-	      neg_classes[(*num_neg_classes)++] = class;
+	      neg_classes[(*num_neg_classes)++] = classs;
 	  else if (!skip)
 	    {
 	      status = tre_new_item(ctx->mem, min, max, &i, &max_i, items);
 	      if (status != REG_OK)
 		break;
-	      ((tre_literal_t*)((*items)[i-1])->obj)->u.class = class;
+	      ((tre_literal_t*)((*items)[i-1])->obj)->u.classs = classs;
 	    }
 
 	  /* Add opposite-case counterpoints if REG_ICASE is present.
 	     This is broken if there are more than two "same" characters. */
-	  if (ctx->cflags & REG_ICASE && !class && status == REG_OK && !skip)
+	  if (ctx->cflags & REG_ICASE && !classs && status == REG_OK && !skip)
 	    {
 	      tre_cint_t cmin, ccurr;
 
@@ -453,27 +453,27 @@ tre_parse_bracket(tre_parse_ctx_t *ctx, tre_ast_node_t **result)
   /* Build a union of the items in the array, negated if necessary. */
   for (j = 0; j < i && status == REG_OK; j++)
     {
-      int min, max;
+      int minn, maxx;
       tre_literal_t *l = items[j]->obj;
-      min = (int) l->code_min;
-      max = (int) l->code_max;
+      minn = (int) l->code_min;
+      maxx = (int) l->code_max;
 
       DPRINT(("item: %d - %d, class %p, curr_max = %d\n",
-	      (int)l->code_min, (int)l->code_max, (void *)l->u.class, curr_max));
+	      (int)l->code_min, (int)l->code_max, (void *)l->u.classs, curr_max));
 
       if (negate)
 	{
-	  if (min < curr_max)
+	  if (minn < curr_max)
 	    {
 	      /* Overlap. */
-	      curr_max = MAX(max + 1, curr_max);
+	      curr_max = max(maxx + 1, curr_max);
 	      DPRINT(("overlap, curr_max = %d\n", curr_max));
 	      l = NULL;
 	    }
 	  else
 	    {
 	      /* No overlap. */
-	      curr_max = min - 1;
+	      curr_max = minn - 1;
 	      if (curr_max >= curr_min)
 		{
 		  DPRINT(("no overlap\n"));
@@ -485,7 +485,7 @@ tre_parse_bracket(tre_parse_ctx_t *ctx, tre_ast_node_t **result)
 		  DPRINT(("no overlap, zero room\n"));
 		  l = NULL;
 		}
-	      curr_min = curr_max = max + 1;
+	      curr_min = curr_max = maxx + 1;
 	    }
 	}
 
@@ -1515,7 +1515,7 @@ tre_parse(tre_parse_ctx_t *ctx)
 		      if (result == NULL)
 			return REG_ESPACE;
 		      ctx->position++;
-		      ctx->max_backref = MAX(val, ctx->max_backref);
+		      ctx->max_backref = max(val, ctx->max_backref);
 		      ctx->re++;
 		    }
 		  else

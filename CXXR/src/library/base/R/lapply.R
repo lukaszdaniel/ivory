@@ -33,7 +33,7 @@ rapply <-
              how = c("unlist", "replace", "list"), ...)
 {
     if(typeof(object) != "list")
-        stop("'object' must be a list")
+        stop(gettextf("'%s' argument must be a list", "object"))
     how <- match.arg(how)
     res <- .Internal(rapply(object, f, classes, deflt, how))
     if(how == "unlist") unlist(res, recursive = TRUE) else res

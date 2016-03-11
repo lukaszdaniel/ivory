@@ -17,18 +17,18 @@
 #  https://www.R-project.org/Licenses/
 
 Filters <-
-structure(c("R or S files (*.R,*.q,*.ssc,*.S)",
-            "Enhanced metafiles (*.emf)",
-            "Postscript files (*.ps)",
-            "PDF files (*.pdf)",
-            "Png files (*.png)",
-            "Windows bitmap files (*.bmp)",
-            "Jpeg files (*.jpeg,*.jpg)",
-            "Text files (*.txt)",
-            "R images (*.RData,*.rda)",
-            "Zip files (*.zip)",
-            "Package tarballs (*.tar.gz)",
-            "All files (*.*)",
+structure(c(gettext("R or S files (*.R,*.q,*.ssc,*.S)", domain = "R-utils"),
+            gettext("Enhanced metafiles (*.emf)", domain = "R-utils"),
+            gettext("Postscript files (*.ps)", domain = "R-utils"),
+            gettext("PDF files (*.pdf)", domain = "R-utils"),
+            gettext("Png files (*.png)", domain = "R-utils"),
+            gettext("Windows bitmap files (*.bmp)", domain = "R-utils"),
+            gettext("Jpeg files (*.jpeg,*.jpg)", domain = "R-utils"),
+            gettext("Text files (*.txt)", domain = "R-utils"),
+            gettext("R images (*.RData,*.rda)", domain = "R-utils"),
+            gettext("Zip files (*.zip)", domain = "R-utils"),
+            gettext("Package tarballs (*.tar.gz)", domain = "R-utils"),
+            gettext("All files (*.*)", domain = "R-utils"),
 
             "*.R;*.q;*.ssc;*.S", "*.emf", "*.ps", "*.pdf", "*.png", "*.bmp",
             "*.jpeg;*.jpg", "*.txt", "*.RData;*.rda", "*.zip", "*.tar.gz", "*.*"),
@@ -37,9 +37,9 @@ structure(c("R or S files (*.R,*.q,*.ssc,*.S)",
                           "bmp", "jpeg", "txt", "RData", "zip", "tarball", "All"),
                         NULL))
 
-choose.files <- function(default = '', caption = 'Select files', multi = TRUE,
+choose.files <- function(default = '', caption = gettext("Select files", domain = "R-utils"), multi = TRUE,
                          filters = Filters, index = nrow(Filters) )
     .Call(C_chooseFiles, default, caption, multi, filters, index)
 
-choose.dir <- function(default = '', caption = 'Select folder')
+choose.dir <- function(default = '', caption = gettext("Select folder", domain = "R-utils"))
     .Call(C_chooseDir, default, caption)

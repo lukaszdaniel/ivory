@@ -50,16 +50,14 @@
                 this <- sub(" .*", "", sub("^\t", "", out[ind]))
                 ##  message("tcltk DLL is linked to ", shQuote(this))
                 if(!file.exists(this))
-                    stop("Tcl/Tk libraries are missing: install the Tcl/Tk component from the R installer",
-                         domain = NA)
+                    stop("Tcl/Tk libraries are missing: install the Tcl/Tk component from the R installer")
             }
             ind <- grep("libX11[.][0-9]+[.]dylib", out)
             if(length(ind)) {
                 this <- sub(" .*", "", sub("^\t", "", out[ind]))
                 ##  message("tcltk DLL is linked to ", shQuote(this))
                 if(!file.exists(this))
-                    stop("X11 library is missing: install XQuartz from xquartz.macosforge.org",
-                         domain = NA)
+                    stop("X11 library is missing: install XQuartz from xquartz.macosforge.org")
             }
         }
 

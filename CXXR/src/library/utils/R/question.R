@@ -31,10 +31,10 @@ function(e1, e2)
 	topicExpr <- topicExpr[[2L]]
 	if (is.call(te <- topicExpr	 ) && te[[1L]] == "?" &&
 	    is.call(te <- topicExpr[[2L]]) && te[[1L]] == "?") {
-	    cat("Contacting Delphi...")
+	    cat(gettext("Contacting Delphi...", domain = "R-utils"))
 	    flush.console()
 	    Sys.sleep(2 + stats::rpois(1,2))
-	    cat("the oracle is unavailable.\nWe apologize for any inconvenience.\n")
+	    cat(gettext("the oracle is unavailable.\nWe apologize for any inconvenience.", domain = "R-utils"), "\n", sep = "")
 	    return(invisible())
 	}
     }
@@ -86,9 +86,7 @@ function(e1, e2)
             if(is.null(h)) {
 		if(is.language(topicExpr))
 		    topicExpr <- deparse(topicExpr)
-		stop(gettextf("no documentation of type %s and topic %s (or error in processing help)",
-			      sQuote(type), sQuote(topicExpr)),
-                     domain = NA)
+		stop(gettextf("no documentation of type %s and topic %s (or error in processing help)", sQuote(type), sQuote(topicExpr)), domain = "R-utils")
 	    }
             h
 	}
@@ -119,14 +117,10 @@ function(expr, envir, doEval = TRUE)
         f <- as.character(f)
     if(!.isMethodsDispatchOn() || !methods::isGeneric(f, where = where)) {
         if(!is.character(f) || length(f) != 1L)
-            stop(gettextf("the object of class %s in the function call %s could not be used as a documentation topic",
-                          dQuote(class(f)), sQuote(deparse(expr))),
-                 domain = NA)
+            stop(gettextf("the object of class %s in the function call %s could not be used as a documentation topic", dQuote(class(f)), sQuote(deparse(expr))), domain = "R-utils")
         h <- .tryHelp(f)
         if(is.null(h))
-            stop(gettextf("no methods for %s and no documentation for it as a function",
-                          sQuote(f)),
-                 domain = NA)
+            stop(gettextf("no methods for %s and no documentation for it as a function", sQuote(f)), domain = "R-utils")
     }
     else {
         ## allow generic function objects or names
@@ -160,9 +154,7 @@ function(expr, envir, doEval = TRUE)
                 if(doEval || !simple) {
                     argVal <- try(eval(argExpr, envir))
                     if(methods::is(argVal, "try-error"))
-                        stop(gettextf("error in trying to evaluate the expression for argument %s (%s)",
-                                      sQuote(arg), deparse(argExpr)),
-                             domain = NA)
+                        stop(gettextf("error in trying to evaluate the expression for argument %s (%s)", sQuote(arg), deparse(argExpr)), domain = "R-utils")
                     sigClasses[[arg]] <- class(argVal)[1L]
                 }
                 else
@@ -179,17 +171,11 @@ function(expr, envir, doEval = TRUE)
                       rep.int("ANY", length(sigNames) - length(sigClasses)))
         }
         else
-            warning(gettextf("no method defined for function %s and signature %s",
-                             sQuote(f),
-                             sQuote(sigFormat(sigNames, sigClasses))),
-                    domain = NA)
+            warning(gettextf("no method defined for function %s and signature %s", sQuote(f), sQuote(sigFormat(sigNames, sigClasses))), domain = "R-utils")
         topic <- topicName("method", c(f, sigClasses))
         h <- .tryHelp(topic)
         if(is.null(h))
-            stop(gettextf("no documentation for function %s and signature %s",
-                          sQuote(f),
-                          sQuote(sigFormat(sigNames, sigClasses))),
-                 domain = NA)
+            stop(gettextf("no documentation for function %s and signature %s", sQuote(f), sQuote(sigFormat(sigNames, sigClasses))), domain = "R-utils")
     }
 
     h

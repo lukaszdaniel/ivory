@@ -75,9 +75,9 @@ pnbeta_raw(double x, double o_x, double a, double b, double ncp)
     while (errbd > errmax && j < itrmax + x0);
 
     if (errbd > errmax)
-	ML_ERROR(ME_PRECISION, "pnbeta");
+	ML_ERROR(ME_PRECISION, "pnbeta()");
     if (j >= itrmax + x0)
-	ML_ERROR(ME_NOCONV, "pnbeta");
+	ML_ERROR(ME_NOCONV, "pnbeta()");
 
     return ans;
 }
@@ -98,7 +98,7 @@ pnbeta2(double x, double o_x, double a, double b, double ncp,
 	return log_p ? log(ans) : ans;
 #endif
     else {
-	if (ans > 1. - 1e-10) ML_ERROR(ME_PRECISION, "pnbeta");
+	if (ans > 1. - 1e-10) ML_ERROR(ME_PRECISION, "pnbeta()");
 	if (ans > 1.0) ans = 1.0;  /* Precaution */
 #if defined(HAVE_LONG_DOUBLE) && defined(HAVE_LOG1PL)
 	return (double) (log_p ? log1pl(-ans) : (1. - ans));

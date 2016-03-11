@@ -19,7 +19,7 @@ pairs(x, \dots)
       na.action = stats::na.pass)
 
 \method{pairs}{default}(x, labels, panel = points, \dots,
-      horInd = 1:nc, verInd = 1:nc,
+      horInd = seq_len(nc), verInd = seq_len(nc),
       lower.panel = panel, upper.panel = panel,
       diag.panel = NULL, text.panel = textPanel,
       label.pos = 0.5 + has.diag/3, line.main = 3,

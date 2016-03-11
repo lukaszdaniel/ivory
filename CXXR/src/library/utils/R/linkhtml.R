@@ -56,7 +56,7 @@ make.packages.html <-
         return(FALSE)
     }
     if (verbose) {
-        message("Making 'packages.html' ...", appendLF = FALSE, domain = NA)
+        message("Making 'packages.html' ...", appendLF = FALSE, domain = "R-utils")
         flush.console()
     }
     file.append(f.tg,

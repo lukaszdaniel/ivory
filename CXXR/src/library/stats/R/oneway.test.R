@@ -20,11 +20,11 @@ oneway.test <-
 function(formula, data, subset, na.action, var.equal = FALSE)
 {
     if(missing(formula) || (length(formula) != 3L))
-        stop("'formula' missing or incorrect")
+        stop(gettextf("'%s' argument is missing or incorrect", "formula"))
     dp <- as.character(formula)
     if(length(dp) != 3L)
         stop("a two-sided formula is required")
-    DNAME <- paste(dp[[2L]], "and", dp[[3L]])
+    DNAME <- gettextf("%s and %s", dp[[2L]], dp[[3L]], domain = "R-stats")
     m <- match.call(expand.dots = FALSE)
     if(is.matrix(eval(m$data, parent.frame())))
         m$data <- as.data.frame(data)
@@ -49,7 +49,7 @@ function(formula, data, subset, na.action, var.equal = FALSE)
     w.i <- n.i / v.i
     sum.w.i <- sum(w.i)
     tmp <- sum((1 - w.i / sum.w.i)^2 / (n.i - 1)) / (k^2 - 1)
-    METHOD <- "One-way analysis of means"
+    METHOD <- gettext("One-way analysis of means", domain = "R-stats")
     if(var.equal) {
         n <- sum(n.i)
         STATISTIC <- ((sum(n.i * (m.i - mean(y))^2) / (k - 1)) /
@@ -65,7 +65,7 @@ function(formula, data, subset, na.action, var.equal = FALSE)
             ((k - 1) * (1 + 2 * (k - 2) * tmp))
         PARAMETER <- c(k - 1, 1 / (3 * tmp))
         PVAL <- pf(STATISTIC, k - 1, 1 / (3 * tmp), lower.tail = FALSE)
-        METHOD <- paste(METHOD, "(not assuming equal variances)")
+        METHOD <- gettext("One-way analysis of means (not assuming equal variances)", domain = "R-stats")
     }
     names(STATISTIC) <- "F"
     names(PARAMETER) <- c("num df", "denom df")

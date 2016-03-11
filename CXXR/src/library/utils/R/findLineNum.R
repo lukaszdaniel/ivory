@@ -171,7 +171,7 @@ findLineNum <- function(srcfile, line, nameonly=TRUE, envir=parent.frame(),
 }
 
 print.findLineNumResult <- function(x, steps=TRUE, ...) {
-    if (!length(x)) cat("No source refs found.\n")
+    if (!length(x)) cat(gettext("No source refs found.", domain = "R-utils"), "\n", sep = "")
     filename <- NULL
     line <- 0
     for (i in seq_along(x)) {
@@ -181,10 +181,16 @@ print.findLineNumResult <- function(x, steps=TRUE, ...) {
     	    line <- x[[i]]$line
     	    cat(filename, "#", line, ":\n", sep = "")
     	}
-        cat(" ", x[[i]]$name, if (steps) paste(" step ", paste(x[[i]]$at, collapse=",")) else "", sep = "")
-        if (!is.null(x[[i]]$signature))
-            cat(" signature ", paste(x[[i]]$signature, collapse=","), sep = "")
-        cat(" in ", format(x[[i]]$env), "\n", sep = "")
+
+	if(steps && !is.null(x[[i]]$signature))
+	 cat(gettextf(" %s step %s signature %s in %s", x[[i]]$name, paste(x[[i]]$at, collapse=","), paste(x[[i]]$signature, collapse=","), format(x[[i]]$env)))
+	else if(steps && is.null(x[[i]]$signature))
+	 cat(gettextf(" %s step %s in %s", x[[i]]$name, paste(x[[i]]$at, collapse=","), format(x[[i]]$env)))
+	else if(!steps && !is.null(x[[i]]$signature))
+	 cat(gettextf(" %s signature %s in %s", x[[i]]$name, paste(x[[i]]$signature, collapse=","), format(x[[i]]$env)))
+	else if(!steps && is.null(x[[i]]$signature))
+	 cat(gettextf(" %s in %s", x[[i]]$name, format(x[[i]]$env)))
+	cat("\n")
     }
 }
 

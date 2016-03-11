@@ -48,6 +48,5 @@ autoloader <- function (name, package, ...)
     if (exists(name, where = where, inherits = FALSE))
 	eval(as.name(name), as.environment(where))
     else
-	stop(gettextf("autoloader did not find '%s' in '%s'", name, package),
-             domain = NA)
+	stop(gettextf("autoloader did not find '%s' in package %s", name, sQuote(package), domain = "R-base"), domain = NA)
 }

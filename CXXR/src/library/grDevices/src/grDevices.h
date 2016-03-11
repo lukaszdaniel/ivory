@@ -21,14 +21,6 @@
 #include <R_ext/Boolean.h>
 #include <R_ext/GraphicsEngine.h> /* for DevDesc */
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#undef _
-#define _(String) dgettext ("grDevices", String)
-#else
-#define _(String) (String)
-#endif
-
 SEXP R_CreateAtVector(SEXP axp, SEXP usr, SEXP nint, SEXP is_log);
 SEXP R_GAxisPars(SEXP usr, SEXP is_log, SEXP nintLog);
 

@@ -17,7 +17,7 @@
 create.post(instructions = character(), description = "post",
             subject = "",
             method = getOption("mailer"),
-            address = "the relevant mailing list",
+            address = gettext("the relevant mailing list", domain = "R-utils"),
             ccaddress = getOption("ccaddress", ""),
             filename = "R.post", info = character())
 }

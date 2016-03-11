@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR The R Core Team
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: R 3.3.0\n"
-"Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-06 13:51+0100\n"
+"Project-Id-Version: tcltk 3.3.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-09 15:49+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,38 +17,38 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: tcltk.c:67
+#: tcltk.c:61
 msgid "parse error in R expression"
 msgstr ""
 
-#: tcltk.c:176 tcltk.c:253
+#: tcltk.c:170 tcltk.c:247
 msgid "tcl error.\n"
 msgstr ""
 
-#: tcltk.c:205 tcltk.c:750
+#: tcltk.c:199 tcltk.c:744
 msgid "invalid argument"
 msgstr ""
 
-#: tcltk.c:309 tcltk.c:327 tcltk.c:400 tcltk.c:463 tcltk.c:515
-msgid "invalid tclObj -- perhaps saved from another session?"
+#: tcltk.c:303 tcltk.c:321 tcltk.c:394 tcltk.c:457 tcltk.c:509
+msgid "invalid object of type tclObj -- perhaps saved from another session?"
 msgstr ""
 
-#: tcltk.c:625
+#: tcltk.c:619
 msgid "argument list is too long in tcltk internal function 'callback_closure'"
 msgstr ""
 
-#: tcltk.c:658
+#: tcltk.c:652
 msgid "argument is not of correct type"
 msgstr ""
 
-#: tcltk.c:709
+#: tcltk.c:703
 msgid "no DISPLAY variable so Tk is not available"
 msgstr ""
 
-#: tcltk_unix.c:94
+#: tcltk_unix.c:88
 msgid "Tcl is not loaded"
 msgstr ""
 
-#: tcltk_unix.c:98
+#: tcltk_unix.c:92
 msgid "Tcl is not last loaded handler"
 msgstr ""

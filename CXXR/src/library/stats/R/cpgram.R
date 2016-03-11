@@ -21,12 +21,12 @@
 
 cpgram <-
     function(ts, taper = 0.1,
-             main = paste("Series: ", deparse(substitute(ts))),
+             main = paste(gettext("Series: ", domain = "R-stats"), deparse(substitute(ts))),
              ci.col = "blue")
 {
     main
     if(NCOL(ts) > 1)
-	stop("only implemented for univariate time series")
+	stop("'cpgram()' is implemented only for univariate time series")
     x <- as.vector(ts)
     x <- x[!is.na(x)]
     x <- spec.taper(scale(x, TRUE, FALSE), p=taper)
@@ -36,8 +36,8 @@ cpgram <-
     x <- (0:(n/2))*frequency(ts)/n
     if(length(x)%%2==0) {
 	n <- length(x)-1
-	y <- y[1L:n]
-	x <- x[1L:n]
+	y <- y[seq_len(n)]
+	x <- x[seq_len(n)]
     } else y <- y[seq_along(x)]
     xm <- frequency(ts)/2
     mp <- length(x)-1
@@ -45,7 +45,7 @@ cpgram <-
     oldpty <- par(pty ="s")
     on.exit(par(oldpty))
     plot(x, cumsum(y)/sum(y), type="s", xlim=c(0, xm),
-	 ylim=c(0, 1), xaxs="i", yaxs="i", xlab="frequency",
+	 ylim=c(0, 1), xaxs="i", yaxs="i", xlab=gettext("frequency", domain = "R-stats"),
 	 ylab="")
     lines(c(0, xm*(1-crit)), c(crit, 1), col = ci.col, lty = 2)
     lines(c(xm*crit, xm), c(0, 1-crit), col = ci.col, lty = 2)

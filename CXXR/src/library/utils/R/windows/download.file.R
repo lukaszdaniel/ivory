@@ -31,7 +31,7 @@ download.file <-
         mode <- "wb"
     if(method == "auto") {
         if(length(url) != 1L || typeof(url) != "character")
-            stop("'url' must be a length-one character vector");
+            stop(gettextf("'%s' argument must be a length-one character vector", "url"));
 	method <-
             if(grepl("^ftps:", url) && capabilities("libcurl")) "libcurl"
             else "wininet"
@@ -47,9 +47,9 @@ download.file <-
 	   },
 	   "wget" = {
 	       if(length(url) != 1L || typeof(url) != "character")
-		   stop("'url' must be a length-one character vector");
+		   stop(gettextf("'%s' argument must be a length-one character vector", "url"));
 	       if(length(destfile) != 1L || typeof(destfile) != "character")
-		   stop("'destfile' must be a length-one character vector");
+		   stop(gettextf("'%s' argument must be a length-one character vector", "destfile"));
 	       if(quiet) extra <- c(extra, "--quiet")
 	       if(!cacheOK) extra <- c(extra, "--cache=off")
 	       status <- system(paste("wget",
@@ -59,9 +59,9 @@ download.file <-
 	   },
 	   "curl" = {
 	       if(length(url) != 1L || typeof(url) != "character")
-		   stop("'url' must be a length-one character vector");
+		   stop(gettextf("'%s' argument must be a length-one character vector", "url"));
 	       if(length(destfile) != 1L || typeof(url) != "character")
-		   stop("'destfile' must be a length-one character vector");
+		   stop(gettextf("'%s' argument must be a length-one character vector", "destfile"));        if(quiet) extra <- c(extra, "-s -S")
 	       if(quiet) extra <- c(extra, "-s -S")
 	       if(!cacheOK) extra <- c(extra, "-H 'Pragma: no-cache'")
 	       status <- system(paste("curl",
@@ -70,10 +70,9 @@ download.file <-
 				      " -o", shQuote(path.expand(destfile))))
 	   },
 	   "lynx" =
-	       stop("method 'lynx' is defunct", domain = NA))
+	       stop("method 'lynx' is defunct", domain = "R-utils"))
 
-    if(status > 0L)
-        warning("download had nonzero exit status")
+    if(status > 0L) warning("download had nonzero exit status")
 
     invisible(status)
 }

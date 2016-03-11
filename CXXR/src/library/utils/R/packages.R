@@ -88,7 +88,7 @@ function(contriburl = contrib.url(repos, type), method,
 
                 if (inherits(z, "error")) {
                     warning(gettextf("unable to access index for repository %s",
-                                     repos),
+                                     repos, domain = "R-utils"),
                             ":\n  ", conditionMessage(z),
                             call.=FALSE, immediate. = TRUE, domain = NA)
                     next
@@ -140,7 +140,7 @@ function(contriburl = contrib.url(repos, type), method,
             f <- available_packages_filters_db[[f[1L]]]
         }
         if(!is.function(f))
-            stop("invalid 'filters' argument.")
+            stop(gettextf("invalid '%s' argument", "filters"))
         res <- f(res)
     }
 
@@ -362,8 +362,8 @@ update.packages <- function(lib.loc = NULL, repos = getOption("repos"),
 		pkg <- pkg + 1L
 		if(find.package(oldPkgs[pkg], lib.loc = lib.loc) !=
 		   find.package(oldPkgs[pkg], lib.loc = oldPkgs[pkg,2])) {
-		    warning(sprintf("package '%s' in library '%s' will not be updated",
-				    oldPkgs[pkg], oldPkgs[pkg, 2]),
+		    warning(gettextf("package %s in library %s will not be updated",
+				    sQuote(oldPkgs[pkg]), sQuote(oldPkgs[pkg, 2])),
 			    call. = FALSE, immediate. = TRUE)
 		    oldPkgs <- oldPkgs[-pkg, , drop = FALSE]
 		    pkg <- pkg - 1L
@@ -475,7 +475,7 @@ new.packages <- function(lib.loc = NULL, repos = getOption("repos"),
     if(is.null(lib.loc)) lib.loc <- .libPaths()
     if(!is.matrix(instPkgs))
         stop(gettextf("no installed packages for (invalid?) 'lib.loc=%s'",
-                      lib.loc), domain = NA)
+                      lib.loc), domain = "R-utils")
     if(is.null(available))
         available <- available.packages(contriburl = contriburl,
                                         method = method)
@@ -550,14 +550,14 @@ new.packages <- function(lib.loc = NULL, repos = getOption("repos"),
             desc <- md$DESCRIPTION[fields]
             if (!length(desc)) {
                 warning(gettextf("metadata of %s is corrupt", sQuote(pkgpath)),
-                        domain = NA)
+                        domain = "R-utils")
                 next
             }
             if("Built" %in% fields) {
                 ## This should not be missing.
                 if(is.null(md$Built$R) || !("Built" %in% names(desc))) {
                     warning(gettextf("metadata of %s is corrupt",
-                                     sQuote(pkgpath)), domain = NA)
+                                     sQuote(pkgpath)), domain = "R-utils")
                     next
                 }
                 desc["Built"] <- as.character(md$Built$R)
@@ -576,7 +576,7 @@ installed.packages <-
         lib.loc <- .libPaths()
     if(!is.null(priority)) {
         if(!is.character(priority))
-            stop("'priority' must be character or NULL")
+            stop(gettextf("'%s' argument must be character or NULL", "priority"))
         if(any(b <- priority %in% "high"))
             priority <- c(priority[!b], "recommended","base")
     }
@@ -659,7 +659,7 @@ remove.packages <- function(pkgs, lib)
         lib <- .libPaths()[1L]
 	message(sprintf(ngettext(length(pkgs),
                                  "Removing package from %s\n(as %s is unspecified)",
-                                 "Removing packages from %s\n(as %s is unspecified)"),
+                                 "Removing packages from %s\n(as %s is unspecified)", domain = "R-utils"),
                         sQuote(lib), sQuote("lib")), domain = NA)
     }
 
@@ -692,7 +692,7 @@ download.packages <- function(pkgs, destdir, available = NULL,
         ok <- ok & !is.na(ok)
         if(!any(ok))
             warning(gettextf("no package %s at the repositories", sQuote(p)),
-                    domain = NA, immediate. = TRUE)
+                    domain = "R-utils", immediate. = TRUE)
         else {
             if(sum(ok) > 1L) { # have multiple copies
                 vers <- package_version(available[ok, "Version"])
@@ -730,7 +730,7 @@ download.packages <- function(pkgs, destdir, available = NULL,
                     retval <- rbind(retval, c(p, fn))
                 else
                     warning(gettextf("package %s does not exist on the local repository", sQuote(p)),
-                            domain = NA, immediate. = TRUE)
+                            domain = "R-utils", immediate. = TRUE)
             } else {
                 url <- paste(repos, fn, sep = "/")
                 destfile <- file.path(destdir, fn)
@@ -740,7 +740,7 @@ download.packages <- function(pkgs, destdir, available = NULL,
                     retval <- rbind(retval, c(p, destfile))
                 else
                     warning(gettextf("download of package %s failed", sQuote(p)),
-                            domain = NA, immediate. = TRUE)
+                            domain = "R-utils", immediate. = TRUE)
             }
         }
     }
@@ -760,8 +760,7 @@ contrib.url <- function(repos, type = getOption("pkgType"))
     type <- resolvePkgType(type)
     if(is.null(repos)) return(NULL)
     if("@CRAN@" %in% repos && interactive()) {
-        cat(gettext("--- Please select a CRAN mirror for use in this session ---"),
-            "\n", sep = "")
+        cat(gettext("--- Please select a CRAN mirror for use in this session ---", domain = "R-utils"), "\n", sep = "")
         flush.console()
         chooseCRANmirror()
         m <- match("@CRAN@", repos)
@@ -771,7 +770,7 @@ contrib.url <- function(repos, type = getOption("pkgType"))
         nm[m] <- "CRAN"
         names(repos) <- nm
     }
-    if("@CRAN@" %in% repos) stop("trying to use CRAN without setting a mirror")
+    if("@CRAN@" %in% repos) stop("trying to use CRAN without setting a mirror", domain = "R-utils")
 
     ver <- paste(R.version$major,
                  strsplit(R.version$minor, ".", fixed=TRUE)[[1L]][1L], sep = ".")
@@ -823,7 +822,7 @@ getCRANmirrors <- function(all = FALSE, local.only = FALSE)
 .chooseMirror <- function(m, label, graphics, ind, useHTTPS)
 {
     if(is.null(ind) && !interactive())
-        stop("cannot choose a ", label, " mirror non-interactively")
+        stop(gettextf("cannot choose a %s mirror non-interactively", label))
     if (length(ind))
         res <- as.integer(ind)[1L]
     else {
@@ -1036,7 +1035,7 @@ compareVersion <- function(a, b)
     ## If recursive = TRUE, do this recursively.
     if(!length(pkgs)) return(NULL)
     if(is.null(available))
-        stop(gettextf("%s must be supplied", sQuote("available")), domain = NA)
+        stop(gettextf("%s must be supplied", sQuote("available")), domain = "R-utils")
     info <- available[pkgs, dependencies, drop = FALSE]
     x <- vector("list", length(pkgs)); names(x) <- pkgs
     if(recursive) {
@@ -1084,7 +1083,7 @@ compareVersion <- function(a, b)
         if(!any(OK)) {
             warning(gettextf("packages %s are mutually dependent",
                              paste(sQuote(names(DL)), collapse = ", ")),
-                    domain = NA)
+                    domain = "R-utils")
             return(c(done,  names(DL)))
         }
         done <- c(done, names(DL[OK]))

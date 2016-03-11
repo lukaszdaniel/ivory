@@ -21,19 +21,8 @@
 #include <stdlib.h> //abs
 #include <math.h>
 #include <Rinternals.h>
-
-// or include "stats.h"
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("stats", String)
-#else
-#define _(String) (String)
-#endif
-
-#ifndef max
-#  define max(a,b) ((a) > (b) ? (a) : (b))
-#  define min(a,b) ((a) < (b) ? (a) : (b))
-#endif
+#include <R_ext/Minmax.h>
+#include "localization.h"
 
 
 #if !defined(PI)

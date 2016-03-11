@@ -1,8 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: R 3.3.0\n"
-"Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-06 13:51\n"
+"Project-Id-Version: parallel 3.3.0\n"
+"POT-Creation-Date: 2015-04-01 22:12\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -11,93 +10,273 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 
-msgid "invalid value of 'seed'"
-msgstr ""
 
-msgid "need at least one argument"
-msgstr ""
-
-msgid "zero-length inputs cannot be mixed with those of non-zero length"
-msgstr ""
-
-msgid "dim(X) must have a positive length"
-msgstr ""
-
-msgid "'X' must have named dimnames"
-msgstr ""
-
-msgid "not all elements of 'MARGIN' are names of dimensions"
-msgstr ""
-
-msgid "no cluster 'cl' supplied and none is registered"
-msgstr ""
-
-msgid "not a valid cluster"
-msgstr ""
-
-msgid "unknown cluster type"
-msgstr ""
-
-msgid "numeric 'names' must be >= 1"
-msgstr ""
-
-msgid "node of a socket cluster on host %s with pid %d"
-msgstr ""
-
-msgid "PORT must be specified"
-msgstr ""
-
-msgid "'nnodes' must be >= 1"
-msgstr ""
-
-msgid "invalid 'child' argument"
-msgstr ""
-
-msgid "'children' must be a list of processes or a single process"
-msgstr ""
-
-msgid "'process' must be of class %s"
-msgstr ""
-
-msgid "'child' must be a valid child process"
-msgstr ""
-
-msgid "'what' must be a character or raw vector"
-msgstr ""
-
-msgid "'mc.cores' must be >= 1"
-msgstr ""
+#: R/unix/mclapply.R: 0
+#. R/unix/mclapply.R: gettextf("%d function calls resulted in an error", has.errors)
 
 msgid "%d function calls resulted in an error"
 msgstr ""
 
-msgid "all scheduled cores encountered errors in user code"
+
+#: R/unix/forkCluster.R: 0
+#: R/unix/mclapply.R: 0
+#: R/unix/pvec.R: 0
+#: R/windows/mcdummies.R: 0
+#: R/windows/mcdummies.R: 0
+#: R/windows/mcdummies.R: 0
+#. R/unix/forkCluster.R: gettextf("'%s' argument must be >= 1", "nnodes")
+#. R/unix/mclapply.R: gettextf("'%s' argument must be >= 1", "mc.cores")
+#. R/unix/pvec.R: gettextf("'%s' argument must be >= 1", "mc.cores")
+#. R/windows/mcdummies.R: gettextf("'%s' argument must be >= 1", "mc.cores")
+#. R/windows/mcdummies.R: gettextf("'%s' argument must be >= 1", "mc.cores")
+#. R/windows/mcdummies.R: gettextf("'%s' argument must be >= 1", "mc.cores")
+
+msgid "'%s' argument must be >= 1"
 msgstr ""
+
+
+#: R/clusterApply.R: 0
+#. R/clusterApply.R: stop("'X' must have named dimnames")
+
+msgid "'X' must have named dimnames"
+msgstr ""
+
+
+#: R/unix/mcfork.R: 0
+#. R/unix/mcfork.R: stop("'child' argument must be a valid child process")
+
+msgid "'child' argument must be a valid child process"
+msgstr ""
+
+
+#: R/unix/mcfork.R: 0
+#. R/unix/mcfork.R: stop("'children' argument must be a list of processes or a single process")
+#. R/unix/mcfork.R: stop("'children' argument must be a list of processes or a single process")
+
+msgid "'children' argument must be a list of processes or a single process"
+msgstr ""
+
+
+#: R/snow.R: 0
+#. R/snow.R: stop("'cl' argument is not a valid object of class \"cluster\"")
+
+msgid "'cl' argument is not a valid object of class \"cluster\""
+msgstr ""
+
+
+#: R/unix/mcfork.R: 0
+#. R/unix/mcfork.R: warning("'closeAll()' is a no-op in the master process", domain = "R-parallel")
+
+msgid "'closeAll()' is a no-op in the master process"
+msgstr ""
+
+
+#: R/windows/mcdummies.R: 0
+#. R/windows/mcdummies.R: stop("'mc.cores' argument > 1 is not supported on Windows")
+#. R/windows/mcdummies.R: stop("'mc.cores' argument > 1 is not supported on Windows")
+#. R/windows/mcdummies.R: stop("'mc.cores' argument > 1 is not supported on Windows")
+
+msgid "'mc.cores' argument > 1 is not supported on Windows"
+msgstr ""
+
+
+#: R/snowSOCK.R: 0
+#. R/snowSOCK.R: stop("'port' argument must be specified")
+
+msgid "'port' argument must be specified"
+msgstr ""
+
+
+#: R/unix/mcfork.R: 0
+#. R/unix/mcfork.R: gettextf("'process' argument must be of class %s", dQuote("process"))
+
+msgid "'process' argument must be of class %s"
+msgstr ""
+
+
+#: R/unix/pvec.R: 0
+#: R/windows/mcdummies.R: 0
+#. R/unix/pvec.R: stop("'v' argument must be a vector")
+#. R/windows/mcdummies.R: stop("'v' argument must be a vector")
+
+msgid "'v' argument must be a vector"
+msgstr ""
+
+
+#: R/unix/mcfork.R: 0
+#. R/unix/mcfork.R: stop("'what' argument must be a character or raw vector")
+
+msgid "'what' argument must be a character or raw vector"
+msgstr ""
+
+
+#: R/snowSOCK.R: 0
+#. R/snowSOCK.R: gettextf("Manually start 'worker' on %s with\n    %s\n", machine, cmd, domain = "R-parallel")
+
+msgid "Manually start 'worker' on %s with\n    %s"
+msgstr ""
+
+
+#: R/unix/mcmapply.R: 0
+#. R/unix/mcmapply.R: stop("Zero-length inputs cannot be mixed with those of non-zero length")
 
 msgid "Zero-length inputs cannot be mixed with those of non-zero length"
 msgstr ""
 
-msgid "invalid 'jobs' argument"
+
+#: R/unix/mclapply.R: 0
+#. R/unix/mclapply.R: warning("all scheduled cores encountered errors in user code")
+
+msgid "all scheduled cores encountered errors in user code"
 msgstr ""
 
-msgid "'v' must be a vector"
+
+#: R/clusterApply.R: 0
+#. R/clusterApply.R: stop("at least one argument is needed")
+
+msgid "at least one argument is needed"
 msgstr ""
 
-msgid "some results may be missing, folded or caused an error"
+
+#: R/clusterApply.R: 0
+#. R/clusterApply.R: stop("dim(X) must have a positive length")
+
+msgid "dim(X) must have a positive length"
 msgstr ""
+
+
+#: R/unix/mclapply.R: 0
+#: R/unix/mcparallel.R: 0
+#. R/unix/mclapply.R: gettext("fatal error in wrapper code")
+#. R/unix/mcparallel.R: gettext("fatal error in wrapper code")
+
+msgid "fatal error in wrapper code"
+msgstr ""
+
+
+#: R/windows/forkCluster.R: 0
+#. R/windows/forkCluster.R: stop("fork clusters are not supported on Windows")
 
 msgid "fork clusters are not supported on Windows"
 msgstr ""
 
-msgid "'mc.cores' > 1 is not supported on Windows"
+
+#: R/unix/mcfork.R: 0
+#: R/unix/mcparallel.R: 0
+#. R/unix/mcfork.R: gettextf("invalid '%s' argument", "child")
+#. R/unix/mcfork.R: gettextf("invalid '%s' argument", "child")
+#. R/unix/mcparallel.R: gettextf("invalid '%s' argument", "jobs")
+
+msgid "invalid '%s' argument"
 msgstr ""
 
-msgid        "socket cluster with %d nodes on host %s"
-msgid_plural "socket cluster with %d nodes on hosts %s"
+
+#: R/RngStream.R: 0
+#. R/RngStream.R: stop("invalid value of 'seed'")
+#. R/RngStream.R: stop("invalid value of 'seed'")
+
+msgid "invalid value of 'seed'"
+msgstr ""
+
+
+#: R/snow.R: 0
+#. R/snow.R: stop("no cluster 'cl' argument supplied and none is registered")
+
+msgid "no cluster 'cl' argument supplied and none is registered"
+msgstr ""
+
+
+#: R/snowSOCK.R: 0
+#. R/snowSOCK.R: gettextf("node of a socket cluster on host %s with pid %d", sQuote(x[["host"]]),     pid, domain = "R-parallel")
+
+msgid "node of a socket cluster on host %s with pid %d"
+msgstr ""
+
+
+#: R/clusterApply.R: 0
+#. R/clusterApply.R: stop("not all elements of 'MARGIN' are names of dimensions")
+
+msgid "not all elements of 'MARGIN' are names of dimensions"
+msgstr ""
+
+
+#: R/snowSOCK.R: 0
+#. R/snowSOCK.R: stop("numeric 'names' must be >= 1")
+
+msgid "numeric 'names' must be >= 1"
+msgstr ""
+
+
+#: R/unix/pvec.R: 0
+#. R/unix/pvec.R: warning("some results may be missing, folded or caused an error")
+
+msgid "some results may be missing, folded or caused an error"
+msgstr ""
+
+
+#: R/snowSOCK.R: 0
+#: R/unix/forkCluster.R: 0
+#. R/snowSOCK.R: gettextf("starting worker pid=%d on %s at %s\n", Sys.getpid(), paste(master, port,     sep = ":"), format(Sys.time(), "%H:%M:%OS3"), domain = "R-parallel")
+#. R/unix/forkCluster.R: gettextf("starting worker pid=%d on %s at %s\n", Sys.getpid(), paste(master, port,     sep = ":"), format(Sys.time(), "%H:%M:%OS3"), domain = "R-parallel")
+
+msgid "starting worker pid=%d on %s at %s"
+msgstr ""
+
+
+#: R/snow.R: 0
+#. R/snow.R: stop("unknown cluster type")
+
+msgid "unknown cluster type"
+msgstr ""
+
+
+#: R/clusterApply.R: 0
+#. R/clusterApply.R: stop("zero-length inputs cannot be mixed with those of non-zero length")
+
+msgid "zero-length inputs cannot be mixed with those of non-zero length"
+msgstr ""
+
+
+#: R/snow.R: 0
+#. R/snow.R: ngettext(count, "%d node produced an error: %s", "%d nodes produced errors; first error: %s",     domain = "R-parallel")
+
+msgid        "%d node produced an error: %s"
+msgid_plural "%d nodes produced errors; first error: %s"
 msgstr[0]    ""
 msgstr[1]    ""
 
+
+#: R/detectCores.R: 0
+#. R/detectCores.R: ngettext(nc, "%d simultaneous process spawned", "%d simultaneous processes spawned",     domain = "R-parallel")
+
+msgid        "%d simultaneous process spawned"
+msgid_plural "%d simultaneous processes spawned"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/unix/mclapply.R: 0
+#. R/unix/mclapply.R: ngettext(has.errors, "scheduled core %s encountered error in user code, all values of the job will be affected",     "scheduled cores %s encountered errors in user code, all values of the jobs will be affected")
+
 msgid        "scheduled core %s encountered error in user code, all values of the job will be affected"
 msgid_plural "scheduled cores %s encountered errors in user code, all values of the jobs will be affected"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/snowSOCK.R: 0
+#. R/snowSOCK.R: ngettext(nc, "socket cluster with %d node on host %s", "socket cluster with %d nodes on host %s",     domain = "R-parallel")
+
+msgid        "socket cluster with %d node on host %s"
+msgid_plural "socket cluster with %d nodes on host %s"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/snowSOCK.R: 0
+#. R/snowSOCK.R: ngettext(nc, "socket cluster with %d node on hosts %s", "socket cluster with %d nodes on hosts %s",     domain = "R-parallel")
+
+msgid        "socket cluster with %d node on hosts %s"
+msgid_plural "socket cluster with %d nodes on hosts %s"
 msgstr[0]    ""
 msgstr[1]    ""

@@ -32,7 +32,7 @@ spline <-
     y <- x$y
     x <- x$x
     nx <- as.integer(length(x))
-    if(is.na(nx)) stop("invalid value of length(x)")
+    if(is.na(nx)) stop(gettextf("invalid '%s' value", "length(x)"))
 
     if(nx == 0) stop("zero non-NA points")
 

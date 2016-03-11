@@ -19,7 +19,7 @@
 
 C <- function(object, contr, how.many, ...)
 {
-    if(!nlevels(object)) stop("object not interpretable as a factor")
+    if(!nlevels(object)) stop("'object' argument is not interpretable as a factor")
     if(!missing(contr) && is.name(Xcontr <- substitute(contr)))
 	contr <- switch(as.character(Xcontr),
 			poly =	"contr.poly",

@@ -41,7 +41,7 @@ readChildren <- function(timeout = 0)
 readChild <- function(child)
 {
     if (inherits(child, "process")) child <- processID(child)
-    if (!is.numeric(child)) stop("invalid 'child' argument")
+    if (!is.numeric(child)) stop(gettextf("invalid '%s' argument", "child"))
     .Call(C_mc_read_child, as.integer(child))
 }
 
@@ -52,16 +52,16 @@ selectChildren <- function(children = NULL, timeout = 0)
     if (inherits(children, "process")) children <- processID(children)
     if (is.list(children))
         children <- unlist(lapply(children, function(x) if (inherits(x, "process")) x$pid
-        else stop("'children' must be a list of processes or a single process")))
+        else stop("'children' argument must be a list of processes or a single process")))
     if (!is.numeric(children))
-        stop("'children' must be a list of processes or a single process")
+        stop("'children' argument must be a list of processes or a single process")
     .Call(C_mc_select_children, as.double(timeout), as.integer(children))
 }
 
 rmChild <- function(child)
 {
     if (inherits(child, "process")) child <- processID(child)
-    if (!is.numeric(child)) stop("invalid 'child' argument")
+    if (!is.numeric(child)) stop(gettextf("invalid '%s' argument", "child"))
     .Call(C_mc_rm_child, as.integer(child))
 }
 
@@ -85,8 +85,7 @@ sendMaster <- function(what)
 processID <- function(process) {
     if (inherits(process, "process")) process$pid
     else if (is.list(process)) unlist(lapply(process, processID))
-    else stop(gettextf("'process' must be of class %s", dQuote("process")),
-              domain = NA)
+    else stop(gettextf("'process' argument must be of class %s", dQuote("process")), domain = "R-parallel")
 }
 
 # unused
@@ -94,10 +93,10 @@ sendChildStdin <- function(child, what)
 {
     if (inherits(child, "process") || is.list(child)) child <- processID(child)
     if (!is.numeric(child) || !length(child))
-        stop("'child' must be a valid child process")
+        stop("'child' argument must be a valid child process")
     child <- as.integer(child)
     if (is.character(what)) what <- charToRaw(paste(what, collapse='\n'))
-    if (!is.raw(what)) stop("'what' must be a character or raw vector")
+    if (!is.raw(what)) stop("'what' argument must be a character or raw vector")
     invisible(unlist(lapply(child, function(p)
                             .Call(C_mc_send_child_stdin, p, what))))
 }
@@ -133,7 +132,7 @@ closeFD <- function(fds) .Call(C_mc_close_fds, as.integer(fds))
 closeAll <- function(includeStd = FALSE)
 {
     if (!isChild()) {
-        warning("closeAll() is a no-op in the master process", domain = NA)
+        warning("'closeAll()' is a no-op in the master process", domain = "R-parallel")
         return(invisible(FALSE))
     }
     fds <- masterDescriptor()

@@ -25,9 +25,7 @@
 
 #include <Defn.h>
 #include "RBufferUtils.h"
-
 #include "localization.h"
-
 
 #define MAXLINE MAXELTSIZE
 #define MAXNARGS 100

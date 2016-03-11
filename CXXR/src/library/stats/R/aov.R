@@ -27,8 +27,8 @@ aov <- function(formula, data = NULL, projections = FALSE, qr = TRUE,
     ## in English.  But some languages have multiple plurals.
     if(length(indError) > 1L)
         stop(sprintf(ngettext(length(indError),
-                              "there are %d Error terms: only 1 is allowed",
-                              "there are %d Error terms: only 1 is allowed"),
+                              "there is %d Error term: only 1 is allowed",
+                              "there are %d Error terms: only 1 is allowed", domain = "R-stats"),
                      length(indError)), domain = NA)
     lmcall <- Call <- match.call()
     ## need stats:: for non-standard evaluation
@@ -71,14 +71,14 @@ aov <- function(formula, data = NULL, projections = FALSE, qr = TRUE,
         nmstrata <- attr(terms(er.fit), "term.labels")
         ## remove backticks from simple labels for strata (only)
         nmstrata <- sub("^`(.*)`$", "\\1", nmstrata)
-        nmstrata <- c("(Intercept)", nmstrata)
+        nmstrata <- c(gettext("(Intercept)", domain = NA), nmstrata)
         qr.e <- er.fit$qr
         rank.e <- er.fit$rank
         if(rank.e < NROW(er.fit$coefficients))
             warning("Error() model is singular")
         qty <- er.fit$residuals
         maov <- is.matrix(qty)
-        asgn.e <- er.fit$assign[qr.e$pivot[1L:rank.e]]
+        asgn.e <- er.fit$assign[qr.e$pivot[seq_len(rank.e)]]
         ## we want this to label the rows of qtx, not cols of x.
         maxasgn <- length(nmstrata) - 1L
         nobs <- NROW(qty)
@@ -107,7 +107,7 @@ aov <- function(formula, data = NULL, projections = FALSE, qr = TRUE,
         qty <- as.matrix(qr.qty(qr.e, resp))
         if((nc <- ncol(qty)) > 1L) {
             dny <- colnames(resp)
-            if(is.null(dny)) dny <- paste0("Y", 1L:nc)
+            if(is.null(dny)) dny <- paste0("Y", seq_len(nc))
             dimnames(qty) <- list(seq(nrow(qty)), dny)
         } else dimnames(qty) <- list(seq(nrow(qty)), NULL)
         qtx <- qr.qty(qr.e, qtx)
@@ -151,11 +151,11 @@ print.aov <-
 function(x, intercept = FALSE, tol = .Machine$double.eps^0.5, ...)
 {
     if(!is.null(cl <- x$call)) {
-        cat("Call:\n   ")
+        cat(gettext("Call:", domain = "R-stats"), "\n   ", sep = "")
         dput(cl, control = NULL)
     }
     qrx <- if(x$rank) qr(x)
-    asgn <- x$assign[qrx$pivot[1L:x$rank]]
+    asgn <- x$assign[qrx$pivot[seq_len(x$rank)]]
     effects <- x$effects
     if(!is.null(effects))
         effects <- as.matrix(effects)[seq_along(asgn),,drop=FALSE]
@@ -165,7 +165,7 @@ function(x, intercept = FALSE, tol = .Machine$double.eps^0.5, ...)
     if(!is.null(wt)) resid <- resid * wt^0.5
     RSS <- colSums(resid^2)
     uasgn <- unique(asgn)
-    nmeffect <- c("(Intercept)", attr(x$terms, "term.labels"))[1+uasgn]
+    nmeffect <- c(gettext("(Intercept)", domain = NA), attr(x$terms, "term.labels"))[1+uasgn]
     nterms <- length(uasgn)
     nresp <- NCOL(effects)
     df <- numeric(nterms)
@@ -184,7 +184,7 @@ function(x, intercept = FALSE, tol = .Machine$double.eps^0.5, ...)
         ss <- ss[keep, , drop = FALSE]
         nterms <- length(df)
     }
-    cat("\nTerms:\n")
+    cat("\n", gettext("Terms:", domain = "R-stats"), "\n", sep = "")
     if(nterms == 0L) {
         ## empty model
         if(rdf > 0L) {
@@ -195,31 +195,30 @@ function(x, intercept = FALSE, tol = .Machine$double.eps^0.5, ...)
             if(length(ss) > 1L) {
                 rn <- colnames(x$fitted.values)
                 if(is.null(rn)) rn <- paste("resp", seq_along(ss))
-            } else rn <- "Sum of Squares"
-            dimnames(tmp) <- list(c(rn, "Deg. of Freedom"), "Residuals")
+            } else rn <- gettext("Sum of Squares", domain = "R-stats")
+            dimnames(tmp) <- list(c(rn, gettext("Deg. of Freedom", domain = NA)), gettext("Residuals", domain = NA))
             print(tmp, quote = FALSE, right = TRUE)
             cat("\n")
             rs <- sqrt(RSS/rdf)
-            cat(if(length(rs) > 1L) "Residual standard errors:"
-                 else "Residual standard error:", sapply(rs, format))
+            cat(ngettext(length(rs), "Residual Standard Error:", "Residual Standard Errors:", domain = "R-stats"), sapply(rs, format))
             cat("\n")
         } else
         print(matrix(0, 2L, 1L, dimnames =
-                     list(c("Sum of Squares", "Deg. of Freedom"), "<empty>")))
+                     list(c(gettext("Sum of Squares", domain = NA), gettext("Deg. of Freedom", domain = NA)), gettext("<empty>", domain = NA))))
     } else {
         if(rdf > 0L) {
             nterms <- nterms + 1L
             df <- c(df, rdf)
             ss <- rbind(ss, RSS)
-            nmeffect <- c(nmeffect, "Residuals")
+            nmeffect <- c(nmeffect, gettext("Residuals", domain = NA))
         }
         ssp <- apply(zapsmall(ss), 2L, format)
         tmp <- t(cbind(ssp, format(df)))
         if(ncol(effects) > 1L) {
             rn <- colnames(x$coeffficients)
             if(is.null(rn)) rn <- paste("resp", seq(ncol(effects)))
-        } else rn <- "Sum of Squares"
-        dimnames(tmp) <- list(c(rn, "Deg. of Freedom"), nmeffect)
+        } else rn <- gettext("Sum of Squares", domain = NA)
+        dimnames(tmp) <- list(c(rn, gettext("Deg. of Freedom", domain = NA)), nmeffect)
         print(tmp, quote = FALSE, right = TRUE)
         rank <- x$rank
 #        int <- attr(x$terms, "intercept")
@@ -227,23 +226,22 @@ function(x, intercept = FALSE, tol = .Machine$double.eps^0.5, ...)
         cat("\n")
         if(rdf > 0L) {
             rs <- sqrt(RSS/rdf)
-            cat(if(length(rs) > 1L) "Residual standard errors:"
-                else "Residual standard error:", sapply(rs, format))
+            cat(ngettext(length(rs), "Residual Standard Error:", "Residual Standard Errors:", domain = "R-stats"), sapply(rs, format))
             cat("\n")
         }
         coef <- as.matrix(x$coefficients)[, 1L]
         R <- qrx$qr
-        R <- R[1L:min(dim(R)), , drop=FALSE]
+        R <- R[seq_len(min(dim(R))), , drop=FALSE]
         R[lower.tri(R)] <- 0
         if(rank < (nc <- length(coef))) {
-            cat(paste(nc - rank, "out of", nc, "effects not estimable\n"))
-            R <- R[, 1L:rank, drop = FALSE]
+            cat(gettextf("%d out of %d effects not estimable", nc - rank, nc, domain = "R-stats"), "\n", sep = "")
+            R <- R[, seq_len(rank), drop = FALSE]
         }
         d2 <- sum(abs(diag(R)))
         diag(R) <- 0
         if(sum(abs(R))/d2 > tol)
-            cat("Estimated effects may be unbalanced\n")
-        else cat("Estimated effects are balanced\n")
+            cat(gettext("Estimated effects may be unbalanced", domain = "R-stats"), "\n", sep = "")
+        else cat(gettext("Estimated effects are balanced", domain = "R-stats"), "\n", sep = "")
         if(nzchar(mess <- naprint(x$na.action))) cat(mess, "\n", sep = "")
     }
     invisible(x)
@@ -291,14 +289,14 @@ summary.aov <- function(object, intercept = FALSE, split,
         split
     }
 
-    asgn <- object$assign[object$qr$pivot[1L:object$rank]]
+    asgn <- object$assign[object$qr$pivot[seq_len(object$rank)]]
     uasgn <- unique(asgn)
     nterms <- length(uasgn)
     effects <- object$effects
     if(!is.null(effects))
         effects <- as.matrix(effects)[seq_along(asgn),,drop=FALSE]
     rdf <- object$df.residual
-    nmeffect <- c("(Intercept)", attr(object$terms, "term.labels"))
+    nmeffect <- c(gettext("(Intercept)", domain = NA), attr(object$terms, "term.labels"))
     coef <- as.matrix(object$coefficients)
     resid <- as.matrix(object$residuals)
     wt <- object$weights
@@ -307,10 +305,10 @@ summary.aov <- function(object, intercept = FALSE, split,
     ans <- vector("list", nresp)
     if(nresp > 1) {
         names(ans) <- character(nresp)
-        for (y in 1L:nresp) {
+        for (y in seq_len(nresp)) {
             cn <- colnames(resid)[y]
             if(is.null(cn) || cn == "") cn <- y
-            names(ans)[y] <- paste(" Response", cn)
+            names(ans)[y] <- gettextf("Response %s", cn, domain = "R-stats")
         }
     }
 
@@ -318,25 +316,25 @@ summary.aov <- function(object, intercept = FALSE, split,
         ns <- names(split)
         if(!is.null(Terms <- object$terms)) {
             if(!is.list(split))
-                stop("the 'split' argument must be a list")
+                stop(gettextf("'%s' argument must be a list", "split"))
             if(!all(ns %in% nmeffect)) {
                 na <- sum(!ns %in% nmeffect)
+		tmp_N <- paste(sQuote(ns[na]), collapse = ", ")
                 stop(sprintf(ngettext(na,
                                       "unknown name %s in the 'split' list",
-                                      "unknown names %s in the 'split' list"),
-                             paste(sQuote(ns[na]), collapse = ", ")),
+                                      "unknown names %s in the 'split' list", domain = "R-stats"),
+                             tmp_N),
                      domain = NA)
             }
         }
         if(expand.split) {
             df.names <- names(coef(object))
-            split <- splitInteractions(split, attr(Terms, "factors"),
-                                       nmeffect, asgn, df.names)
+            split <- splitInteractions(split, attr(Terms, "factors"), nmeffect, asgn, df.names)
             ns <- names(split)
         }
     }
 
-    for (y in 1L:nresp) {
+    for (y in seq_len(nresp)) {
         if(is.null(effects)) {
             nterms <- 0L
             df <- ss <- ms <- numeric()
@@ -364,23 +362,29 @@ summary.aov <- function(object, intercept = FALSE, split,
         if(rdf > 0L) {
             df <- c(df, rdf)
             ss <- c(ss, sum(resid[, y]^2))
-            nmrows <- c(nmrows,  "Residuals")
+            nmrows <- c(nmrows,  gettext("Residuals", domain = NA))
         }
         nt <- length(df)
         ms <- ifelse(df > 0L, ss/df, NA)
-        x <- list(Df = df, "Sum Sq" = ss, "Mean Sq" = ms)
         if(rdf > 0L) {
+            x <- list(Df = df, "Sum Sq" = ss, "Mean Sq" = ms, "F value" = 0, "Pr(>F)" = 0)
+	    names(x) <- c(gettext("Df", domain = NA), gettext("Sum Sq", domain = NA), gettext("Mean Sq", domain = NA), gettext("F value", domain = NA), gettext("Pr(>F)", domain = NA))
             TT <- ms/ms[nt]
             TP <- pf(TT, df, rdf, lower.tail = FALSE)
             TT[nt] <- TP[nt] <- NA
+	    #x[[which(names(x) == gettext("F value", domain = NA))]] <- TT
             x$"F value" <- TT
+	    #x[[which(names(x) == gettext("Pr(>F)", domain = NA))]] <- TP
             x$"Pr(>F)" <- TP
             ## 'nterms' ~= 'Residuals' have no P-value
-        }
+        } else {
+         x <- list(Df = df, "Sum Sq" = ss, "Mean Sq" = ms)
+	 names(x) <- c(gettext("Df", domain = NA), gettext("Sum Sq", domain = NA), gettext("Mean Sq", domain = NA))
+	}
         class(x) <- c("anova", "data.frame")
         attr(x, "row.names") <- format(nmrows)
         if(!keep.zero.df) x <- x[df > 0L, ]
-        pm <- pmatch("(Intercept)", row.names(x), 0L)
+        pm <- pmatch(gettext("(Intercept)", domain = NA), row.names(x), 0L)
         if(!intercept && pm > 0L) x <- x[-pm ,]
         ans[[y]] <- x
     }
@@ -395,8 +399,7 @@ print.summary.aov <-
              signif.stars = getOption("show.signif.stars"), ...)
 {
     if (length(x) == 1L)
-        print(x[[1L]], digits = digits, symbolic.cor = symbolic.cor,
-              signif.stars = signif.stars)
+        print(x[[1L]], digits = digits, symbolic.cor = symbolic.cor, signif.stars = signif.stars)
     else NextMethod()
     if(nzchar(mess <- naprint(attr(x, "na.action")))) cat(mess, "\n", sep = "")
     invisible(x)
@@ -440,7 +443,7 @@ alias.lm <- function(object, complete = TRUE, partial = FALSE,
         x[!z] <- ""
         collabs <- colnames(x)
         collabs <- if(length(collabs)) abbreviate(sub("\\.", "", collabs), 3L)
-        else 1L:ncol(x)
+        else seq_len(ncol(x))
         colnames(x) <- collabs
         class(x) <- "mtable"
         x
@@ -449,7 +452,7 @@ alias.lm <- function(object, complete = TRUE, partial = FALSE,
     attributes(Model) <- NULL
     value <- list(Model = Model)
     R <- qr(object)$qr
-    R <- R[1L:min(dim(R)), , drop=FALSE]
+    R <- R[seq_len(min(dim(R))), , drop=FALSE]
     R[lower.tri(R)] <- 0
     d <- dim(R)
     rank <- object$rank
@@ -457,7 +460,7 @@ alias.lm <- function(object, complete = TRUE, partial = FALSE,
     if(complete) {                      # full rank, no aliasing
         value$Complete <-
             if(is.null(p) || rank == p) NULL else {
-                p1 <- 1L:rank
+                p1 <- seq_len(rank)
                 X <- R[p1, p1]
                 Y <-  R[p1, -p1, drop = FALSE]
                 beta12 <- as.matrix(qr.coef(qr(X), Y))
@@ -484,23 +487,23 @@ print.aovlist <- function(x, ...)
 {
     cl <- attr(x, "call")
     if(!is.null(cl)) {
-        cat("\nCall:\n")
+        cat("\n", gettext("Call:", domain = "R-stats"), "\n", sep = "")
         dput(cl)
     }
     if(!is.null(attr(x, "weights")))
-        cat("Note: The results below are on the weighted scale\n")
+        cat(gettext("Note: The results below are on the weighted scale", domain = "R-stats"), "\n", sep = "")
     nx <- names(x)
-    if(nx[1L] == "(Intercept)") {
+    if(nx[1L] == gettext("(Intercept)", domain = NA)) {
         mn <- x[[1L]]$coefficients
         if(is.matrix(mn)) {
-            cat("\nGrand Means:\n")
+            cat("\n", gettext("Grand Means:", domain = "R-stats"), "\n", sep = "")
             print(format(mn[1,]), quote = FALSE)
-        } else cat("\nGrand Mean: ", format(mn[1L]), "\n", sep = "")
+        } else cat("\n", gettext("Grand Mean: ", domain = "R-stats"), format(mn[1L]), "\n", sep = "")
         nx <- nx[-1L]
     }
     for(ii in seq_along(nx)) {
         i <- nx[ii]
-        cat("\nStratum ", ii, ": ", i, "\n", sep = "")
+        cat("\n", gettextf("Stratum %d: %s", ii, i, domain = "R-stats"), "\n", sep = "")
         xi <- x[[i]]
         print(xi, ...)
     }
@@ -510,15 +513,14 @@ print.aovlist <- function(x, ...)
 summary.aovlist <- function(object, ...)
 {
     if(!is.null(attr(object, "weights")))
-        cat("Note: The results below are on the weighted scale\n")
+        cat(gettext("Note: The results below are on the weighted scale", domain = "R-stats"), "\n", sep = "")
     dots <- list(...)
     strata <- names(object)
-    if(strata[1L] == "(Intercept)") {
+    if(strata[1L] == gettext("(Intercept)", domain = NA)) {
         strata <- strata[-1L]
         object <- object[-1L]
     }
-    x <- setNames(vector(length = length(strata), mode = "list"),
-		  paste("Error:", strata))
+    x <- setNames(vector(length = length(strata), mode = "list"), gettextf("Error: %s", strata, domain = "R-stats"))
     for(i in seq_along(strata))
         x[[i]] <- do.call("summary", c(list(object = object[[i]]), dots))
     class(x) <- "summary.aovlist"
@@ -553,14 +555,12 @@ se.contrast.aov <-
     contrast.weight.aov <- function(object, contrast)
     {
         qro <- qr(object)
-        asgn <- object$assign[qro$pivot[1L:object$rank]]
+        asgn <- object$assign[qro$pivot[seq_len(object$rank)]]
         uasgn <- unique(asgn)
         nterms <- length(uasgn)
-        nmeffect <- c("(Intercept)",
-                      attr(object$terms, "term.labels"))[1L + uasgn]
+        nmeffect <- c(gettext("(Intercept)", domain = NA), attr(object$terms, "term.labels"))[1L + uasgn]
         effects <- as.matrix(qr.qty(qro, contrast))
-        res <- matrix(0, nrow = nterms, ncol = ncol(effects),
-                      dimnames = list(nmeffect, colnames(contrast)))
+        res <- matrix(0, nrow = nterms, ncol = ncol(effects), dimnames = list(nmeffect, colnames(contrast)))
         for(i in seq(nterms)) {
             select <- (asgn == uasgn[i])
             res[i,] <- colSums(effects[seq_along(asgn)[select], , drop = FALSE]^2)
@@ -572,17 +572,15 @@ se.contrast.aov <-
     if(!is.matrix(contrast.obj)) { # so a list
         if(!missing(coef)) {
             if(sum(coef) != 0)
-                stop("'coef' must define a contrast, i.e., sum to 0")
+                stop("'coef' argument must define a contrast, i.e., sum to 0")
             if(length(coef) != length(contrast.obj))
-                stop("'coef' must have same length as 'contrast.obj'")
+                stop(gettextf("'%s' and '%s' arguments must have the same length", "coef", "contrast.obj"))
         }
         contrast <-
             sapply(contrast.obj, function(x)
                {
                    if(!is.logical(x))
-                       stop(gettextf("each element of '%s' must be logical",
-                                     substitute(contrasts.list)),
-                            domain = NA)
+                       stop(gettextf("each element of '%s' must be logical", substitute(contrasts.list)), domain = "R-stats")
                    x/sum(x)
                })
         if(!length(contrast) || all(is.na(contrast)))
@@ -615,7 +613,7 @@ se.contrast.aovlist <-
     {
         e.qr <- attr(object, "error.qr")
         if(!is.qr(e.qr))
-            stop("'object' does not include an error 'qr' component")
+            stop("'object' argument does not include an error 'qr' component")
         c.qr <- qr.qty(e.qr, contrast)
         e.assign <- attr(e.qr$qr, "assign")
         n.object <- length(object)
@@ -627,9 +625,9 @@ se.contrast.aovlist <-
             if(is.qr(strata$qr)) {
                 scontrast <- c.qr[e.assign == (j - 1L), , drop = FALSE]
                 effects <- as.matrix(qr.qty(strata$qr, scontrast))
-                asgn <- strata$assign[strata$qr$pivot[1L:strata$rank]]
+                asgn <- strata$assign[strata$qr$pivot[seq_len(strata$rank)]]
                 uasgn <- unique(asgn)
-                nm <- c("(Intercept)", attr(strata$terms, "term.labels"))
+                nm <- c(gettext("(Intercept)", domain = NA), attr(strata$terms, "term.labels"))
                 res.i <-
                     matrix(0, length(uasgn), ncol(effects),
                            dimnames = list(nm[1L + uasgn], colnames(contrast)))
@@ -667,17 +665,15 @@ se.contrast.aovlist <-
     if(!is.matrix(contrast.obj)) {
         if(!missing(coef)) {
             if(sum(coef) != 0)
-                stop("'coef' must define a contrast, i.e., sum to 0")
+                stop("'coef' argument must define a contrast, i.e., sum to 0")
             if(length(coef) != length(contrast.obj))
-                stop("'coef' must have same length as 'contrast.obj'")
+                stop(gettextf("'%s' and '%s' arguments must have the same length", "coef", "contrast.obj"))
         }
         contrast <-
             sapply(contrast.obj,
                    function(x) {
                        if(!is.logical(x))
-                           stop(gettextf("each element of '%s' must be logical",
-                                         substitute(contrasts.obj)),
-                                domain = NA)
+                           stop(gettextf("each element of '%s' must be logical", substitute(contrasts.obj)), domain = "R-stats")
                        x/sum(x)
                    })
         if(!length(contrast) || all(is.na(contrast)))
@@ -689,10 +685,10 @@ se.contrast.aovlist <-
         if(any(abs(colSums(contrast)) > 1e-8))
             stop("columns of 'contrast.obj' must define a contrast(sum to zero)")
         if(!length(colnames(contrast)))
-            colnames(contrast) <- paste("Contrast", seq(ncol(contrast)))
+            colnames(contrast) <- gettextf("Contrast %s", seq(ncol(contrast)), domain = "R-stats")
     }
     weights <- contrast.weight.aovlist(object, contrast)
-    weights <- weights[-match("(Intercept)", names(weights))]
+    weights <- weights[-match(gettext("(Intercept)", domain = NA), names(weights))]
     effic <- eff.aovlist(object)
     ## Need to identify the lowest stratum where each nonzero term appears
     eff.used <- apply(effic, 2L,

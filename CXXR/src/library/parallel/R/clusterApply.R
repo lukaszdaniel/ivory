@@ -97,7 +97,7 @@ clusterMap <- function (cl = NULL, fun, ..., MoreArgs = NULL, RECYCLE = TRUE,
 {
     cl <- defaultCluster(cl)
     args <- list(...)
-    if (length(args) == 0) stop("need at least one argument")
+    if (length(args) == 0) stop("at least one argument is needed")
     .scheduling <- match.arg(.scheduling)
     n <- lengths(args)
     if (RECYCLE) {

@@ -40,7 +40,7 @@ function(cfile, encoding = NULL)
         x <- readLines(cfile, warn = FALSE)
         asc <- iconv(x, "latin1", "ASCII")
         if (any(is.na(asc) | asc != x))
-            stop("non-ASCII input in a CITATION file without a declared encoding")
+            stop("non-ASCII input in a 'CITATION' file without a declared encoding")
         parse(file = cfile)
     } else {
         con <- file(cfile, encoding = encoding)

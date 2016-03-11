@@ -49,7 +49,7 @@ deparseLatex <- function(x, dropBraces = FALSE)
         	deparseLatex(a[[2L]]),
         	"\\end{", a[[1L]], "}"),
         MATH = result <- c(result, "$", deparseLatex(a), "$"),
-        NULL = stop("Internal error, no tag", domain = NA)
+        NULL = stop("Internal error, no tag", domain = "R-tools")
         )
         lastTag <- tag
     }
@@ -85,7 +85,7 @@ latexToUtf8 <- function(x)
 		    if (getNext) {
 			j <- j + 1L
 			if (j > length(x)) {
-			    warning("argument for ", c(a), " not found", domain = NA)
+			    warning(gettext("argument for %s was not found", sQuote(c(a))), domain = "R-tools")
 			    nextobj <- latex_tag("", "TEXT")
 			    nexttag <- "TEXT"
 			    nextchars <- ""
@@ -113,7 +113,7 @@ latexToUtf8 <- function(x)
 			    k <- k+1L
 			    getNext <- TRUE
 			},
-			NULL = stop("Internal error:  NULL tag", domain = NA))
+			NULL = stop("Internal error: NULL tag", domain = "R-tools"))
 		}
 		index <- a
 		for (i1 in seq_along(args)) {
@@ -196,7 +196,7 @@ makeLatexTable <- function(utf8table)
     	    	    nextobj <- nextobj[-1L]
     	    	    argtag <- attr(arg, "latex_tag")
     	    	    if (argtag != "TEXT")
-    	    	    	stop("internal error", domain = NA)
+    	    	    	stop("internal error", domain = "R-tools")
     	    	}
     	    } else if (nexttag == "MACRO") {
     	    	arg <- nextobj[1L]
@@ -210,7 +210,7 @@ makeLatexTable <- function(utf8table)
 	    if (is.na(oldArgCount))
 		latexArgCount[macro] <<- argCount
 	    else if (oldArgCount != length(index) - 1L)
-    	    stop("Inconsistent arg count for ", macro, domain = NA)
+    	    stop(gettextf("Inconsistent arg count for %s", sQuote(macro)), domain = "R-tools")
 
 	    for (i in seq_along(index)) {
 		if (is.null(entry <- table[[index[1L:i]]])) {
@@ -219,7 +219,7 @@ makeLatexTable <- function(utf8table)
 		    else
 			table[[index]] <- intToUtf8(codepoint)
 		} else if (!is.list(entry))
-		    warning("entry for ", codepoint, "=", index[1L:i], " already defined to be", entry, domain = NA)
+		    warning(gettextf("entry for %s=%s already defined to be %s", codepoint, paste(index[1L:i], collapse = ", "), entry), domain = "R-tools")
 	    }
 	    if (index[1L] != "\\a") break
 	    index <- index[-1L]

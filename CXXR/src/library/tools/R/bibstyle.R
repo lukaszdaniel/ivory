@@ -384,7 +384,7 @@ toRd.bibentry <- function(obj, style=NULL, ...) {
     	    Proceedings = formatProceedings(paper),
     	    TechReport = formatTechreport(paper),
     	    Unpublished = formatUnpublished(paper),
-    	    paste("bibtype", attr(paper, "bibtype"),"not implemented") ))
+    	    gettextf("bibtype %s is not implemented", sQuote(attr(paper, "bibtype")))))
     }
     result
 }

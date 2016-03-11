@@ -34,7 +34,7 @@ arima0 <- function(x, order = c(0, 0, 0),
     {
         p <- max(which(c(1, -ar) != 0)) - 1
         if(!p) return(TRUE)
-        all(Mod(polyroot(c(1, -ar[1L:p]))) > 1)
+        all(Mod(polyroot(c(1, -ar[seq_len(p)]))) > 1)
     }
 
     maInvert <- function(ma)
@@ -43,7 +43,7 @@ arima0 <- function(x, order = c(0, 0, 0),
         q <- length(ma)
         q0 <- max(which(c(1,ma) != 0)) - 1
         if(!q0) return(ma)
-        roots <- polyroot(c(1, ma[1L:q0]))
+        roots <- polyroot(c(1, ma[seq_len(q0)]))
         ind <- Mod(roots) < 1
         if(all(!ind)) return(ma)
         warning("converting non-invertible initial MA values")
@@ -60,7 +60,7 @@ arima0 <- function(x, order = c(0, 0, 0),
     method <- match.arg(method)
     x <- as.ts(x)
     if(!is.numeric(x))
-        stop("'x' must be numeric")
+        stop(gettextf("'%s' argument must be numeric", "x"))
     dim(x) <- NULL
     n <- length(x)
 
@@ -71,19 +71,18 @@ arima0 <- function(x, order = c(0, 0, 0),
         if(is.list(seasonal)) {
             if(is.null(seasonal$order))
                 stop("'seasonal' must be a list with component 'order'")
-            if(!is.numeric(seasonal$order) || length(seasonal$order) != 3L
-               || any(seasonal$order < 0))
+            if(!is.numeric(seasonal$order) || length(seasonal$order) != 3L || any(seasonal$order < 0))
                 stop("'seasonal$order' must be a non-negative numeric vector of length 3")
         } else if(is.numeric(order)) {
             if(length(order) == 3) seasonal <- list(order=seasonal)
-            else ("'seasonal' is of the wrong length")
+            else gettextf("'%s' argument is of the wrong length", "seasonal")
         } else stop("'seasonal' must be a list with component 'order'")
 
     if(is.null(seasonal$period) || is.na(seasonal$period)
        || seasonal$period == 0) seasonal$period <- frequency(x)
     arma <- c(order[-2L], seasonal$order[-2L], seasonal$period,
               order[2L], seasonal$order[2L])
-    narma <- sum(arma[1L:4L])
+    narma <- sum(arma[seq_len(4)])
     if(d <- order[2L]) x <- diff(x, 1, d)
     if(d <- seasonal$order[2L]) x <- diff(x, seasonal$period, d)
     xtsp <- tsp(x)
@@ -99,22 +98,22 @@ arima0 <- function(x, order = c(0, 0, 0),
     if(is.null(xreg)) {
         ncxreg <- 0
     } else {
-        if(NROW(xreg) != n) stop("lengths of 'x' and 'xreg' do not match")
+        if(NROW(xreg) != n) stop(gettextf("lengths of '%s' and '%s' arguments must match", "x", "xreg"))
         ncxreg <- NCOL(xreg)
     }
     class(xreg) <- NULL
     if(include.mean && (nd == 0)) {
         if(is.matrix(xreg) && is.null(colnames(xreg)))
-            colnames(xreg) <- paste0("xreg", 1L:ncxreg)
+            colnames(xreg) <- paste0("xreg", seq_len(ncxreg))
         xreg <- cbind(intercept = rep_len(1, n), xreg = xreg)
         ncxreg <- ncxreg + 1
     }
 
     if (is.null(fixed)) fixed <- rep_len(NA_real_, narma + ncxreg)
-    else if(length(fixed) != narma + ncxreg) stop("wrong length for 'fixed'")
+    else if(length(fixed) != narma + ncxreg) stop(gettextf("'%s' argument is of the wrong length", "fixed"))
     mask <- is.na(fixed)
     if(!any(mask)) stop("all parameters were fixed")
-    if(transform.pars && any(!mask[1L:narma])) {
+    if(transform.pars && any(!mask[seq_len(narma)])) {
         warning("some ARMA parameters were fixed: setting transform.pars = FALSE")
         transform.pars <- FALSE
     }
@@ -123,21 +122,21 @@ arima0 <- function(x, order = c(0, 0, 0),
         if(d <- order[2L]) xreg <- diff(xreg, 1, d)
         if(d <- seasonal$order[2L]) xreg <- diff(xreg, seasonal$period, d)
         xreg <- as.matrix(xreg)
-        if(qr(na.omit(xreg))$rank < ncol(xreg)) stop("'xreg' is collinear")
+        if(qr(na.omit(xreg))$rank < ncol(xreg)) stop("'xreg' argument is collinear")
         if(is.null(cn <- colnames(xreg)))
-            cn <- paste0("xreg", 1L:ncxreg)
+            cn <- paste0("xreg", seq_len(ncxreg))
     }
     if(anyNA(x) || (ncxreg && anyNA(xreg)))
         ## only exact recursions handle NAs
         if(method == "ML" && delta >= 0) {
-            warning("NAs present: setting 'delta' to -1")
+            warning("NA values are present: setting 'delta' to -1")
             delta <- -1
         }
 
     init0 <- rep_len(0, narma)
     parscale <- rep_len(1, narma)
     if (ncxreg) {
-        orig.xreg <- (ncxreg == 1) || any(!mask[narma + 1L:ncxreg])
+        orig.xreg <- (ncxreg == 1) || any(!mask[narma + seq_len(ncxreg)])
         if(!orig.xreg) {
             S <- svd(na.omit(xreg))
             xreg <- xreg %*% S$v
@@ -157,25 +156,25 @@ arima0 <- function(x, order = c(0, 0, 0),
 
     if(!is.null(init)) {
         if(length(init) != length(init0))
-            stop("'init' is of the wrong length")
+            stop(gettextf("'%s' argument is of the wrong length", "init"))
         if(any(ind <- is.na(init))) init[ind] <- init0[ind]
         if(transform.pars) {
-            if(any(!mask[1L:narma]))
+            if(any(!mask[seq_len(narma)]))
                 warning("transformed ARMA parameters were fixed")
             ## check stationarity
             if(arma[1L] > 0)
-                if(!arCheck(init[1L:arma[1L]]))
+                if(!arCheck(init[seq_len(arma[1L])]))
                     stop("non-stationary AR part")
             if(arma[3L] > 0)
-                if(!arCheck(init[sum(arma[1L:2]) + 1L:arma[3L]]))
+                if(!arCheck(init[sum(arma[seq_len(2)]) + seq_len(arma[3L])]))
                     stop("non-stationary seasonal AR part")
             ## enforce invertibility
             if(arma[2L] > 0) {
-                ind <- arma[1L] + 1L:arma[2L]
+                ind <- arma[1L] + seq_len(arma[2L])
                 init[ind] <- maInvert(init[ind])
             }
             if(arma[4L] > 0) {
-                ind <- sum(arma[1L:3]) + 1L:arma[4L]
+                ind <- sum(arma[seq_len(3)]) + seq_len(arma[4L])
                 init[ind] <- maInvert(init[ind])
             }
             init <- .Call(C_Invtrans, G, as.double(init))
@@ -189,8 +188,7 @@ arima0 <- function(x, order = c(0, 0, 0),
     res <- optim(init[mask], arma0f, method = "BFGS",
                  hessian = TRUE, control = optim.control)
     if((code <- res$convergence) > 0)
-        warning(gettextf("possible convergence problem: optim gave code = %d",
-                         code), domain = NA)
+        warning(gettextf("possible convergence problem: optim gave code = %d", code), domain = "R-stats")
     coef <- res$par
 
     if(transform.pars) {
@@ -210,15 +208,15 @@ arima0 <- function(x, order = c(0, 0, 0),
     class(resid) <- "ts"
     n.used <- sum(!is.na(resid))
     nm <- NULL
-    if(arma[1L] > 0) nm <- c(nm, paste0("ar", 1L:arma[1L]))
-    if(arma[2L] > 0) nm <- c(nm, paste0("ma", 1L:arma[2L]))
-    if(arma[3L] > 0) nm <- c(nm, paste0("sar", 1L:arma[3L]))
-    if(arma[4L] > 0) nm <- c(nm, paste0("sma", 1L:arma[4L]))
+    if(arma[1L] > 0) nm <- c(nm, paste0("ar", seq_len(arma[1L])))
+    if(arma[2L] > 0) nm <- c(nm, paste0("ma", seq_len(arma[2L])))
+    if(arma[3L] > 0) nm <- c(nm, paste0("sar", seq_len(arma[3L])))
+    if(arma[4L] > 0) nm <- c(nm, paste0("sma", seq_len(arma[4L])))
     fixed[mask] <- coef
     if(ncxreg > 0) {
         nm <- c(nm, cn)
         if(!orig.xreg) {
-            ind <- narma + 1L:ncxreg
+            ind <- narma + seq_len(ncxreg)
             fixed[ind] <- S$v %*% fixed[ind]
             A <- diag(narma + ncxreg)
             A[ind, ind] <- S$v
@@ -243,8 +241,9 @@ arima0 <- function(x, order = c(0, 0, 0),
 print.arima0 <- function(x, digits = max(3L, getOption("digits") - 3L),
                          se = TRUE, ...)
 {
-    cat("\nCall:", deparse(x$call, width.cutoff = 75L), "", sep = "\n")
-    cat("Coefficients:\n")
+    cat("\n")
+    cat(gettext("Call:", domain = "R-stats"), deparse(x$call, width.cutoff = 75L), "", sep = "\n")
+    cat(gettext("Coefficients:", domain = "R-stats"), "\n", sep = "")
     coef <- round(x$coef, digits = digits)
     if (se && nrow(x$var.coef)) {
         ses <- rep_len(0, length(coef))
@@ -255,15 +254,10 @@ print.arima0 <- function(x, digits = max(3L, getOption("digits") - 3L),
     print.default(coef, print.gap = 2)
     cm <- x$call$method
     if(is.null(cm) || cm != "CSS")
-        cat("\nsigma^2 estimated as ",
-            format(x$sigma2, digits = digits),
-            ":  log likelihood = ", format(round(x$loglik,2)),
-            ",  aic = ", format(round(x$aic,2)),
-            "\n", sep = "")
+        cat("\n", gettextf("sigma^2 estimated as %s:  log likelihood = %s,  aic = %s", format(x$sigma2, digits = digits), format(round(x$loglik,2)),
+            format(round(x$aic,2)), domain = "R-stats"), "\n", sep = "")
     else
-        cat("\nsigma^2 estimated as ",
-            format(x$sigma2, digits = digits),
-            ":  part log likelihood = ", format(round(x$loglik,2)),
+        cat("\n", gettextf("sigma^2 estimated as %s:  part log likelihood = %s", format(x$sigma2, digits = digits), format(round(x$loglik,2)), domain = "R-stats"),
             "\n", sep = "")
     invisible(x)
 }
@@ -283,24 +277,24 @@ predict.arima0 <-
     n <- length(data)
     arma <- object$arma
     coefs <- object$coef
-    narma <- sum(arma[1L:4L])
+    narma <- sum(arma[seq_len(4)])
     if(length(coefs) > narma) {
         if(names(coefs)[narma+1] == "intercept") {
             xreg <- cbind(intercept = rep_len(1, n), xreg)
             newxreg <- cbind(intercept = rep_len(1, n.ahead), newxreg)
             ncxreg <- ncxreg+1
         }
-        data <- data - as.matrix(xreg) %*% coefs[-(1L:narma)]
-        xm <- drop(as.matrix(newxreg) %*% coefs[-(1L:narma)])
+        data <- data - as.matrix(xreg) %*% coefs[-seq_len(narma)]
+        xm <- drop(as.matrix(newxreg) %*% coefs[-seq_len(narma)])
     } else xm <- 0
     ## check invertibility of MA part(s)
     if(arma[2L] > 0) {
-        ma <- coefs[arma[1L] + 1L:arma[2L]]
+        ma <- coefs[arma[1L] + seq_len(arma[2L])]
         if(any(Mod(polyroot(c(1, ma))) < 1))
             warning("MA part of model is not invertible")
     }
     if(arma[4L] > 0) {
-        ma <- coefs[sum(arma[1L:3L]) + 1L:arma[4L]]
+        ma <- coefs[sum(arma[seq_len(3)]) + seq_len(arma[4L])]
         if(any(Mod(polyroot(c(1, ma))) < 1))
             warning("seasonal MA part of model is not invertible")
     }
@@ -335,8 +329,8 @@ tsdiag.Arima <- tsdiag.arima0 <- function(object, gof.lag = 10, ...)
         na.action = na.pass)
     nlag <- gof.lag
     pval <- numeric(nlag)
-    for(i in 1L:nlag) pval[i] <- Box.test(rs, i, type="Ljung-Box")$p.value
-    plot(1L:nlag, pval, xlab = "lag", ylab = "p value", ylim = c(0,1),
+    for(i in seq_len(nlag)) pval[i] <- Box.test(rs, i, type="Ljung-Box")$p.value
+    plot(seq_len(nlag), pval, xlab = "lag", ylab = "p value", ylim = c(0,1),
          main = "p values for Ljung-Box statistic")
     abline(h = 0.05, lty = 2, col = "blue")
 }

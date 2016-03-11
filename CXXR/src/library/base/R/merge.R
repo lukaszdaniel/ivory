@@ -38,21 +38,21 @@ merge.data.frame <-
             # names(df) are not necessarily unique, so check for multiple matches.
             if(any(bad <- !charmatch(by, poss, 0L)))
                 stop(ngettext(sum(bad),
-                              "'by' must specify a uniquely valid column",
-                              "'by' must specify uniquely valid columns"),
+                              "'by' argument must specify a uniquely valid column",
+                              "'by' argument must specify uniquely valid columns", domain = "R-base"),
                      domain = NA)
             by <- match(by, poss) - 1L
         } else if(is.numeric(by)) {
             if(any(by < 0L) || any(by > nc))
-                stop("'by' must match numbers of columns")
+                stop("'by' argument must match number of columns")
         } else if(is.logical(by)) {
-            if(length(by) != nc) stop("'by' must match number of columns")
+            if(length(by) != nc) stop("'by' argument must match number of columns")
             by <- seq_along(by)[by]
-        } else stop("'by' must specify one or more columns as numbers, names or logical")
+        } else stop("'by' argument must specify one or more columns as numbers, names or logical")
         if(any(bad <- is.na(by)))
             stop(ngettext(sum(bad),
-                          "'by' must specify a uniquely valid column",
-                          "'by' must specify uniquely valid columns"),
+                          "'by' argument must specify a uniquely valid column",
+                          "'by' argument must specify uniquely valid columns", domain = "R-base"),
                  domain = NA)
          unique(by)
     }
@@ -62,7 +62,7 @@ merge.data.frame <-
     by.x <- fix.by(by.x, x)
     by.y <- fix.by(by.y, y)
     if((l.b <- length(by.x)) != length(by.y))
-        stop("'by.x' and 'by.y' specify different numbers of columns")
+        stop("'by.x' and 'by.y' arguments specify different numbers of columns")
     if(l.b == 0L) {
         ## return the cartesian product of x and y, fixing up common names
         nm <- nm.x <- names(x)
@@ -97,7 +97,7 @@ merge.data.frame <-
             by <- y[, by.y]; if(is.factor(by)) by <- as.character(by)
         } else {
             if (!is.null(incomparables))
-                stop("'incomparables' is supported only for merging on a single column")
+                stop("'incomparables' argument is supported only for merging on a single column")
             ## Do these together for consistency in as.character.
             ## Use same set of names.
             bx <- x[, by.x, drop=FALSE]; by <- y[, by.y, drop=FALSE]
@@ -159,13 +159,7 @@ merge.data.frame <-
         if(has.common.nms) names(y) <- nm.y
         nm <- c(names(x), names(y))
         if(any(d <- duplicated(nm)))
-            if(sum(d) > 1L)
-                warning("column names ",
-                        paste(sQuote(nm[d]), collapse = ", "),
-                        " are duplicated in the result", domain = NA)
-            else
-                warning("column name ", sQuote(nm[d]),
-                        " is duplicated in the result", domain = NA)
+	    warning(sprintf(ngettext(sum(d), "column name %s is duplicated in the result", "column names %s are duplicated in the result", domain = "R-base"), paste(sQuote(nm[d]), collapse = ", ")), domain = NA)
         res <- cbind(x, y)
 
         if (sort)

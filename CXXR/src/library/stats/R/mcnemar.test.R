@@ -28,11 +28,10 @@ mcnemar.test <- function(x, y = NULL, correct = TRUE)
     }
     else {
         if (is.null(y))
-            stop("if 'x' is not a matrix, 'y' must be given")
+            stop(gettextf("if '%s' argument is not a matrix, '%s' argument must be given", "x", "y"))
         if (length(x) != length(y))
-            stop("'x' and 'y' must have the same length")
-        DNAME <- paste(deparse(substitute(x)), "and",
-                       deparse(substitute(y)))
+            stop(gettextf("'%s' and '%s' arguments must have the same length", "x", "y"))
+        DNAME <- gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)), collapse = ""), domain = "R-stats")
         OK <- complete.cases(x, y)
         x <- as.factor(x[OK])
         y <- as.factor(y[OK])
@@ -43,11 +42,11 @@ mcnemar.test <- function(x, y = NULL, correct = TRUE)
     }
 
     PARAMETER <- r * (r-1) / 2
-    METHOD <- "McNemar's Chi-squared test"
+    METHOD <- gettext("McNemar's Chi-squared test", domain = "R-stats")
 
     if (correct && (r == 2) && any(x - t(x) != 0)) {
         y <- (abs(x - t(x)) - 1)
-        METHOD <- paste(METHOD, "with continuity correction")
+        METHOD <- gettext("McNemar's Chi-squared test with continuity correction", domain = "R-stats")
     }
     else
         y <- x - t(x)
@@ -55,8 +54,8 @@ mcnemar.test <- function(x, y = NULL, correct = TRUE)
 
     STATISTIC <- sum(y[upper.tri(x)]^2 / x[upper.tri(x)])
     PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
-    names(STATISTIC) <- "McNemar's chi-squared"
-    names(PARAMETER) <- "df"
+    names(STATISTIC) <- gettext("McNemar's chi-squared", domain = "R-stats")
+    names(PARAMETER) <- gettext("df", domain = "R-stats")
 
     RVAL <- list(statistic = STATISTIC,
                  parameter = PARAMETER,

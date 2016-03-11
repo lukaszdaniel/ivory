@@ -22,7 +22,7 @@ mood.test.default <-
 function(x, y, alternative = c("two.sided", "less", "greater"), ...)
 {
     alternative <- match.arg(alternative)
-    DNAME <- paste(deparse(substitute(x)), "and", deparse(substitute(y)))
+    DNAME <- gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)), collapse = ""), domain = "R-stats")
 
     x <- x[is.finite(x)]
     y <- y[is.finite(y)]
@@ -56,12 +56,13 @@ function(x, y, alternative = c("two.sided", "less", "greater"), ...)
                    "greater" = 1 - p,
                    "two.sided" = 2 * min(p, 1 - p))
 
-    structure(list(statistic = structure(z, names = "Z"),
+    RVAL <- list(statistic = structure(z, names = "Z"),
                    p.value = PVAL,
                    alternative = alternative,
-                   method = "Mood two-sample test of scale",
-                   data.name = DNAME),
-              class = "htest")
+                   method = gettext("Mood two-sample test of scale", domain = "R-stats"),
+                   data.name = DNAME)
+    class(RVAL) <- "htest"
+    return(RVAL)
 }
 
 mood.test.formula <-
@@ -70,7 +71,7 @@ function(formula, data, subset, na.action, ...)
     if(missing(formula)
        || (length(formula) != 3L)
        || (length(attr(terms(formula[-2L]), "term.labels")) != 1L))
-        stop("'formula' missing or incorrect")
+        stop(gettextf("'%s' argument is missing or incorrect", "formula"))
     m <- match.call(expand.dots = FALSE)
     if(is.matrix(eval(m$data, parent.frame())))
         m$data <- as.data.frame(data)
@@ -78,7 +79,8 @@ function(formula, data, subset, na.action, ...)
     m[[1L]] <- quote(stats::model.frame)
     m$... <- NULL
     mf <- eval(m, parent.frame())
-    DNAME <- paste(names(mf), collapse = " by ")
+    if(length(mf) != 2L) stop("invalid formula")
+    DNAME <- gettextf("%s by %s", names(mf[1]), names(mf[2]))
     names(mf) <- NULL
     response <- attr(attr(mf, "terms"), "response")
     g <- factor(mf[[-response]])

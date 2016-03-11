@@ -28,8 +28,9 @@
 #include <Rmath.h>		/* for lgammafn, rmultinom */
 #include <errno.h>
 #include "statsR.h"
-#undef _
+
 #include "stats.h" // for rcont2
+#include "localization.h"
 
 /* interval at which to check interrupts */
 #define NINTERRUPT 1000000
@@ -50,7 +51,7 @@ static void fillWithNAs(SEXP x, R_xlen_t n, SEXPTYPE type) {
             REAL(x)[i] = NA_REAL;
         }
     }
-    warning(_("NAs produced"));
+    warning(_("NA values produced"));
 }
 
 static R_INLINE R_xlen_t resultLength(SEXP lengthArgument) {
@@ -125,7 +126,7 @@ static R_INLINE SEXP random1(SEXP sn, SEXP sa, ran1 fn, SEXPTYPE type)
 		if (ISNAN(rx[i])) naflag = TRUE;
 	    }
 	}
-	if (naflag) warning(_("NAs produced"));
+	if (naflag) warning(_("NA values produced"));
 	PutRNGstate();
 	UNPROTECT(1);
     }
@@ -197,7 +198,7 @@ static R_INLINE SEXP random2(SEXP sn, SEXP sa, SEXP sb, ran2 fn, SEXPTYPE type)
 		if (ISNAN(rx[i])) naflag = TRUE;
 	    }
 	}
-	if (naflag) warning(_("NAs produced"));
+	if (naflag) warning(_("NA values produced"));
 	PutRNGstate();
 	UNPROTECT(2);
     }
@@ -281,7 +282,7 @@ static R_INLINE SEXP random3(SEXP sn, SEXP sa, SEXP sb, SEXP sc, ran3 fn,
 		if (ISNAN(rx[i])) naflag = TRUE;
 	    }
 	}
-	if (naflag) warning(_("NAs produced"));
+	if (naflag) warning(_("NA values produced"));
 	PutRNGstate();
 	UNPROTECT(3);
     }
@@ -307,7 +308,7 @@ static void FixupProb(double *p, int n)
     int npos = 0;
     for (int i = 0; i < n; i++) {
 	if (!R_FINITE(p[i]))
-	    error(_("NA in probability vector"));
+	    error(_("NA value in probability vector"));
 	if (p[i] < 0.0)
 	    error(_("negative probability"));
 	if (p[i] > 0.0) {

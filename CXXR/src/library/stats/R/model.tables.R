@@ -22,10 +22,10 @@ model.tables <- function(x, ...) UseMethod("model.tables")
 model.tables.aov <- function(x, type = "effects", se = FALSE, cterms, ...)
 {
     if(inherits(x, "maov"))
-	stop("'model.tables' is not implemented for multiple responses")
+	stop("'model.tables()' is not implemented for multiple responses")
     type <- match.arg(type, c("effects", "means", "residuals"))
     if(type == "residuals")
-	stop(gettextf("type '%s' is not implemented yet", type), domain = NA)
+	stop(gettextf("type '%s' is not implemented yet", type), domain = "R-stats")
     prjs <- proj(x, unweighted.scale = TRUE)
     if(is.null(x$call)) stop("this fit does not inherit from \"lm\"")
     mf <- model.frame(x)
@@ -50,7 +50,7 @@ model.tables.aov <- function(x, type = "effects", se = FALSE, cterms, ...)
 	dn.proj <-
 	    lapply(dn.proj,
 		   function(x, mat, vn)
-		   c("(Intercept)",
+		   c(gettext("(Intercept)", domain = NA),
 		     vn[(t(mat) %*% (as.logical(mat[, x]) - 1)) == 0]),
 		   t.factor, vars)
     }
@@ -63,11 +63,11 @@ model.tables.aov <- function(x, type = "effects", se = FALSE, cterms, ...)
     for(xx in names(tables)) n <- c(n, replications(paste("~", xx), data=mf))
     if(se)
 	if(is.list(n)) {
-	    message("Design is unbalanced - use se.contrast() for se's")
+	    message("Design is unbalanced - use 'se.contrast()' for se's")
 	    se <- FALSE
 	} else se.tables <- se.aov(x, n, type = type)
     if(type == "means" && "(Intercept)" %in% colnames(prjs)) {
-	gmtable <- mean(prjs[,"(Intercept)"])
+	gmtable <- mean(prjs[,gettext("(Intercept)", domain = NA)])
 	class(gmtable) <- "mtable"
 	tables <- c("Grand mean" = gmtable, tables)
     }
@@ -104,7 +104,7 @@ model.tables.aovlist <- function(x, type = "effects", se = FALSE, ...)
 {
     type <- match.arg(type, c("effects", "means", "residuals"))
     if(type == "residuals")
-	stop(gettextf("type '%s' is not implemented yet", type), domain = NA)
+	stop(gettextf("type '%s' is not implemented yet", type), domain = "R-stats")
     prjs <- proj(x, unweighted.scale = TRUE)
     mf <- model.frame.aovlist(x)
     factors <- lapply(prjs, attr, "factors")
@@ -155,7 +155,7 @@ model.tables.aovlist <- function(x, type = "effects", se = FALSE, ...)
 	}
 	else make.tables.aovprojlist(dn.proj, dn.strata, m.factors, prjs, mf)
     if(type == "means") {
-	gmtable <- mean(prjs[["(Intercept)"]])
+	gmtable <- mean(prjs[[gettext("(Intercept)", domain = NA)]])
 	class(gmtable) <- "mtable"
 	tables <- lapply(tables, "+", gmtable)
 	tables <- c("Grand mean" = gmtable, tables)
@@ -167,8 +167,7 @@ model.tables.aovlist <- function(x, type = "effects", se = FALSE, ...)
 	    message("Standard error information not returned as design is unbalanced. \nStandard errors can be obtained through 'se.contrast'.")
 	    se <- FALSE
 	} else if(type != "effects") {
-	    warning(gettextf("SEs for type '%s' are not yet implemented",
-                             type), domain = NA)
+	    warning(gettextf("SE's for type '%s' are not yet implemented", type), domain = "R-stats")
 	    se <- FALSE
 	} else {
 	    se.tables <- se.aovlist(x, dn.proj, dn.strata, factors, mf,
@@ -185,8 +184,7 @@ se.aovlist <- function(object, dn.proj, dn.strata, factors, mf, efficiency, n,
 		       type = "diff.means", ...)
 {
     if(type != "effects")
-	stop(gettextf("SEs for type '%s' are not yet implemented", type),
-             domain = NA)
+	stop(gettextf("SE's for type '%s' are not yet implemented", type), domain = "R-stats")
     RSS <- sapply(object, function(x) sum(x$residuals^2)/x$df.residual)
     res <- vector(length = length(n), mode = "list")
     names(res) <- names(n)
@@ -307,7 +305,7 @@ replications <- function(formula, data = NULL, na.action)
 	v <- c(quote(data.frame), attr(formula, "variables"))
 	data <- eval(as.call(v), parent.frame())
     }
-    if(!is.function(na.action)) stop("na.action must be a function")
+    if(!is.function(na.action)) stop(gettextf("'%s' argument must be a function", "na.action"))
     data <- na.action(data)
     class(data) <- NULL
     n <- length(o)
@@ -321,9 +319,8 @@ replications <- function(formula, data = NULL, na.action)
 	if(o[i] < 1 || substring(l, 1L, 5L) == "Error") { z[[l]] <- NULL; next }
 	select <- vars[f[, i] > 0]
 	if(any(nn <- notfactor[select])) {
-            warning(gettextf("non-factors ignored: %s",
-                             paste(names(nn), collapse = ", ")),
-                    domain = NA)
+		tmp_n <- paste(names(nn), collapse = ", ")
+            warning(gettextf("non-factors ignored: %s", tmp_n), domain = "R-stats")
 	    next
 	}
 	if(length(select))
@@ -345,12 +342,11 @@ print.tables_aov <- function(x, digits = 4L, ...)
     se.aov <- if(se <- !is.na(match("se", names(x)))) x$se
     type <- attr(x, "type")
     switch(type,
-	   effects = cat("Tables of effects\n"),
-	   means = cat("Tables of means\n"),
-	   residuals = if(length(tables.aov) > 1L) cat(
-	   "Table of residuals from each stratum\n"))
+	   effects = cat(gettext("Tables of effects", domain = "R-stats"), "\n", sep = ""),
+	   means = cat(gettext("Tables of means", domain = "R-stats"), "\n", sep = ""),
+	   residuals = if(length(tables.aov) > 1L) cat(gettext("Table of residuals from each stratum", domain = "R-stats"), "\n", sep = ""))
     if(!is.na(ii <- match("Grand mean", names(tables.aov)))) {
-	cat("Grand mean\n")
+	cat(gettext("Grand mean", domain = "R-stats"), "\n", sep = "")
 	gmtable <- tables.aov[[ii]]
 	print.mtable(gmtable, digits = digits, ...)
     }
@@ -387,9 +383,9 @@ print.tables_aov <- function(x, digits = 4L, ...)
     if(se) {
 	if(type == "residuals") rn <- "df" else rn <- "replic."
 	switch(attr(se.aov, "type"),
-	       effects = cat("\nStandard errors of effects\n"),
-	       means = cat("\nStandard errors for differences of means\n"),
-	       residuals = cat("\nStandard errors of residuals\n"))
+	       effects = cat("\n", gettext("Standard errors of effects", domain = "R-stats"), "\n", sep = ""),
+	       means = cat("\n", gettext("Standard errors for differences of means", domain = "R-stats"), "\n", sep = ""),
+	       residuals = cat("\n", gettext("Standard errors of residuals", domain = "R-stats"), "\n"), sep = "")
 	if(length(unlist(se.aov)) == length(se.aov)) {
 	    ## the simplest case: single replication, unique se
 					# kludge for NA's
@@ -408,7 +404,7 @@ print.tables_aov <- function(x, digits = 4L, ...)
 	    } else {		## different se
 		dimnames(se)[[1L]] <- ""
 		cat("\n", i, "\n")
-		cat("When comparing means with same levels of:\n")
+		cat(gettext("When comparing means with same levels of:", domain = "R-stats"), "\n", sep = "")
 		print(se, digits, ...)
 		cat("replic.", n.aov[i], "\n")
 	    }
@@ -420,14 +416,14 @@ print.tables_aov <- function(x, digits = 4L, ...)
 eff.aovlist <- function(aovlist)
 {
     Terms <- terms(aovlist)
-    if(names(aovlist)[[1L]] == "(Intercept)") aovlist <- aovlist[-1L]
+    if(names(aovlist)[[1L]] == gettext("(Intercept)", domain = NA)) aovlist <- aovlist[-1L]
     pure.error.strata <- sapply(aovlist, function(x) is.null(x$qr))
     aovlist <- aovlist[!pure.error.strata]
     s.labs <- names(aovlist)
     ## find which terms are in which strata
     s.terms <-
         lapply(aovlist, function(x) {
-            asgn <- x$assign[x$qr$pivot[1L:x$rank]]
+            asgn <- x$assign[x$qr$pivot[seq_len(x$rank)]]
             attr(terms(x), "term.labels")[asgn]
         })
     t.labs <- attr(Terms, "term.labels")
@@ -443,7 +439,7 @@ eff.aovlist <- function(aovlist)
     pl <-
 	lapply(aovlist, function(x)
 	   {
-	       asgn <- x$assign[x$qr$pivot[1L:x$rank]]
+	       asgn <- x$assign[x$qr$pivot[seq_len(x$rank)]]
 	       sp <- split(seq_along(asgn), attr(terms(x), "term.labels")[asgn])
                sp <- sp[names(sp) %in% nm]
 	       sapply(sp, function(x, y) {
@@ -509,7 +505,7 @@ print.mtable <-
     }
     print(x, quote = quote, right = right, ...)
     if(length(xx)) {
-	cat("\nNotes:\n")
+	cat("\n", gettext("Notes:", domain = "R-stats"), "\n", sep = "")
 	print(xx)
     }
     invisible(xxx)

@@ -327,7 +327,7 @@ static SEGP* contourLines(double *x, int nx, double *y, int ny,
 		    seglist = ctr_newseg(xx[0], yy[0], xx[1], yy[1], seglist);
 		    seglist = ctr_newseg(xx[2], yy[2], xx[3], yy[3], seglist);
 		}
-		else error("k = %d, should be 2 or 4", k);
+		else error(_("k = %d, should be 2 or 4"), k);
 	    }
 	    segmentDB[i + j * nx] = seglist;
 	}

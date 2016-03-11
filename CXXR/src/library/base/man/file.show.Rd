@@ -11,7 +11,7 @@
 }
 \usage{
 file.show(\dots, header = rep("", nfiles),
-          title = "R Information",
+          title = gettext("R Information", domain = "R-base"),
           delete.file = FALSE, pager = getOption("pager"),
           encoding = "")
 }

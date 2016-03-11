@@ -22,10 +22,10 @@ cancor <- function(x, y, xcenter=TRUE, ycenter=TRUE)
 {
     x <- as.matrix(x)
     y <- as.matrix(y)
-    if((nr <- nrow(x)) != nrow(y)) stop("unequal number of rows in 'cancor'")
+    if((nr <- nrow(x)) != nrow(y)) stop("unequal number of rows in 'cancor()'")
     ncx <- ncol(x)
     ncy <- ncol(y)
-    if(!nr || !ncx || !ncy) stop("dimension 0 in 'x' or 'y'")
+    if(!nr || !ncx || !ncy) stop("dimension 0 in 'x' or 'y' argument")
     if(is.logical(xcenter)) {
 	if(xcenter) {
 	    xcenter <- colMeans(x,)
@@ -50,15 +50,14 @@ cancor <- function(x, y, xcenter=TRUE, ycenter=TRUE)
     }
     qx <- qr(x)
     qy <- qr(y)
-    dx <- qx$rank;	if(!dx) stop("'x' has rank 0")
-    dy <- qy$rank;	if(!dy) stop("'y' has rank 0")
+    dx <- qx$rank;	if(!dx) stop(gettextf("'%s' argument has rank 0", "x"))
+    dy <- qy$rank;	if(!dy) stop(gettextf("'%s' argument has rank 0", "y"))
     ## compute svd(Qx'Qy)
-    z <- svd(qr.qty(qx, qr.qy(qy, diag(1, nr, dy)))[1L:dx,, drop = FALSE],
+    z <- svd(qr.qty(qx, qr.qy(qy, diag(1, nr, dy)))[seq_len(dx),, drop = FALSE],
              dx, dy)
-    xcoef <- backsolve((qx$qr)[1L:dx, 1L:dx, drop = FALSE], z$u)
-    rownames(xcoef) <- colnames(x)[qx$pivot][1L:dx]
-    ycoef <-  backsolve((qy$qr)[1L:dy, 1L:dy, drop = FALSE], z$v)
-    rownames(ycoef) <- colnames(y)[qy$pivot][1L:dy]
-    list(cor = z$d, xcoef = xcoef, ycoef = ycoef, xcenter = xcenter,
-	 ycenter = ycenter)
+    xcoef <- backsolve((qx$qr)[seq_len(dx), seq_len(dx), drop = FALSE], z$u)
+    rownames(xcoef) <- colnames(x)[qx$pivot][seq_len(dx)]
+    ycoef <-  backsolve((qy$qr)[seq_len(dy), seq_len(dy), drop = FALSE], z$v)
+    rownames(ycoef) <- colnames(y)[qy$pivot][seq_len(dy)]
+    list(cor = z$d, xcoef = xcoef, ycoef = ycoef, xcenter = xcenter, ycenter = ycenter)
 }

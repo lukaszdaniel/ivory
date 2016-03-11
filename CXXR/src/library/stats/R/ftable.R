@@ -40,21 +40,21 @@ ftable.default <- function(..., exclude = c(NA, NaN),
 	if(is.character(row.vars)) {
 	    i <- pmatch(row.vars, names(dn))
 	    if(anyNA(i))
-		stop("incorrect specification for 'row.vars'")
+		stop(gettextf("incorrect specification for '%s' argument", "row.vars"))
 	    row.vars <- i
 	} else if(any((row.vars < 1) | (row.vars > n)))
-	    stop("incorrect specification for 'row.vars'")
+	    stop(gettextf("incorrect specification for '%s' argument", "row.vars"))
     }
     if(!is.null(col.vars)) {
 	if(is.character(col.vars)) {
 	    i <- pmatch(col.vars, names(dn))
 	    if(anyNA(i))
-	     stop("incorrect specification for 'col.vars'")
+	     stop(gettextf("incorrect specification for '%s' argument", "col.vars"))
 	    col.vars <- i
 	} else if(any((col.vars < 1) | (col.vars > n)))
-	    stop("incorrect specification for 'col.vars'")
+	    stop(gettextf("incorrect specification for '%s' argument", "col.vars"))
     }
-    i <- 1 : n
+    i <- seq_len(n)
     if(!is.null(row.vars) && !is.null(col.vars)) {
 	all.vars <- sort(c(row.vars, col.vars))
 	if ((p <- length(all.vars)) < n) {
@@ -86,7 +86,7 @@ ftable.default <- function(..., exclude = c(NA, NaN),
 ftable.formula <- function(formula, data = NULL, subset, na.action, ...)
 {
     if(missing(formula) || !inherits(formula, "formula"))
-        stop("'formula' missing or incorrect")
+        stop(gettextf("'%s' argument is missing or incorrect", "formula"))
     if(length(formula) != 3L)
         stop("'formula' must have both left and right hand sides")
     ## need to cope with '.' in formula
@@ -156,7 +156,7 @@ ftable.formula <- function(formula, data = NULL, subset, na.action, ...)
 as.table.ftable <- function(x, ...)
 {
     if(!inherits(x, "ftable"))
-        stop("'x' must be an \"ftable\" object")
+        stop(gettextf("'%s' argument must be an object of class %s", "x", dQuote("ftable")))
     xrv <- rev(attr(x, "row.vars"))
     xcv <- rev(attr(x, "col.vars"))
     x <- array(data = c(x),
@@ -176,7 +176,7 @@ format.ftable <-
 	     lsep=" | ", ...)
 {
     if(!inherits(x, "ftable"))
-	stop("'x' must be an \"ftable\" object")
+        stop(gettextf("'%s' argument must be an object of class %s", "x", dQuote("ftable")))
     charQuote <- function(s) if(quote && length(s)) paste0("\"", s, "\"") else s
     makeLabels <- function(lst) {
 	lens <- lengths(lst)
@@ -278,7 +278,7 @@ read.ftable <- function(file, sep = "", quote = "\"", row.var.names,
         on.exit(close(file))
     }
     if(!inherits(file, "connection"))
-        stop("'file' must be a character string or connection")
+        stop(gettextf("'%s' argument must be a character string or connection", "file"))
     if(!isSeekable(file)) {
         ## We really need something seekable, see below.  If it is not,
         ## the best we can do is write everything to a tempfile.
@@ -321,7 +321,7 @@ read.ftable <- function(file, sep = "", quote = "\"", row.var.names,
 	row.vars <- setNames(vector("list", length = n.row.vars),
 			     scan(file, what = "", sep = sep, quote = quote,
 				  nlines = 1, quiet = TRUE))
-        z <- z[-(1 : (n.col.vars + 1))]
+        z <- z[-(seq_len(n.col.vars + 1))]
     }
     else {
         ## This is not really an ftable.
@@ -339,7 +339,7 @@ read.ftable <- function(file, sep = "", quote = "\"", row.var.names,
             names(col.vars) <- s[1L]
             s <- s[-1L]
             row.vars <- vector("list", length = n.row.vars)
-            i <- 1 : n.row.vars
+            i <- seq_len(n.row.vars)
             names(row.vars) <- s[i]
             col.vars[[1L]] <- s[-i]
             z <- z[-(1 : 2)]
@@ -358,7 +358,7 @@ read.ftable <- function(file, sep = "", quote = "\"", row.var.names,
 				 as.character(row.var.names))
             if(missing(col.vars) || !is.list(col.vars)) {
                 ## 'col.vars' should be a list.
-                stop("'col.vars' missing or incorrect")
+                stop(gettextf("'%s' argument is missing or incorrect", "col.vars"))
             }
             col.vars <- lapply(col.vars, as.character)
             n.col.vars <- length(col.vars)
@@ -410,7 +410,7 @@ as.matrix.ftable <-
 function(x, sep = "_", ...)
 {
     if(!inherits(x, "ftable"))
-	stop("'x' must be an \"ftable\" object")
+	stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("ftable")))
 
     make_dimnames <- function(vars) {
         structure(list(do.call(paste,

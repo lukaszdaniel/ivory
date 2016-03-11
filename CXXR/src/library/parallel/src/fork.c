@@ -27,11 +27,10 @@
 #ifdef HAVE_CONFIG_H
 # include <config.h> /* for affinity function checks and sigaction */
 #endif
-#define NO_NLS
 #include <Defn.h> // for R_isForkedChild
 
 #include "parallel.h"
-
+#include "localization.h"
 #include <sys/types.h>
 #ifdef HAVE_UNISTD_H
 # include <unistd.h>
@@ -78,7 +77,7 @@ static int rm_child_(int pid)
 {
     child_info_t *ci = children, *prev = 0;
 #ifdef MC_DEBUG
-    Dprintf("removing child %d\n", pid);
+    Dprintf(_("removing child %d\n"), pid);
 #endif
     while (ci) {
 	if (ci->pid == pid) {
@@ -96,7 +95,7 @@ static int rm_child_(int pid)
 	ci = ci->next;
     }
 #ifdef MC_DEBUG
-    Dprintf("WARNING: child %d was to be removed but it doesn't exist\n", pid);
+    Dprintf(_("WARNING: child %d was to be removed but it doesn't exist\n"), pid);
 #endif
     return 0;
 }
@@ -150,8 +149,7 @@ static void child_sig_handler(int sig)
 {
     if (sig == SIGUSR1) {
 #ifdef MC_DEBUG
-	Dprintf("child process %d got SIGUSR1; child_exit_status=%d\n", 
-		getpid(), child_exit_status);
+	Dprintf(_("child process %d got SIGUSR1; child_exit_status=%d\n"), getpid(), child_exit_status);
 #endif
 	child_can_exit = 1;
 	if (child_exit_status >= 0)
@@ -166,9 +164,9 @@ static void clean_zombies() {
 	if (WIFEXITED(wstat) || WIFSIGNALED(wstat)) {
 #ifdef MC_DEBUG
 	    if (WIFEXITED(wstat))
-		Dprintf("child %d terminated with %d\n", pid, WEXITSTATUS(wstat));
+		Dprintf(_("child %d terminated with %d\n"), pid, WEXITSTATUS(wstat));
 	    else
-		Dprintf("child %d terminated by signal %d\n", pid, WTERMSIG(wstat));
+		Dprintf(_("child %d terminated by signal %d\n"), pid, WTERMSIG(wstat));
 #endif
 	    /* we can only flag at this point, since actually
 	       removing the child would cause re-entrance issues.
@@ -201,9 +199,9 @@ static void parent_sig_handler(int sig, siginfo_t *info, void *context) {
 		    if ((waitpid(pid, &wstat, WNOHANG) == pid) && (WIFEXITED(wstat) || WIFSIGNALED(wstat))) {
 #ifdef MC_DEBUG
 			if (WIFEXITED(wstat))
-			    Dprintf("child %d terminated with %d\n", pid, WEXITSTATUS(wstat));
+			    Dprintf(_("child %d terminated with %d\n"), pid, WEXITSTATUS(wstat));
 			else
-			    Dprintf("child %d terminated by signal %d\n", pid, WTERMSIG(wstat));
+			    Dprintf(_("child %d terminated by signal %d\n"), pid, WTERMSIG(wstat));
 #endif			
 			if (ci->pfd > 0)  { close(ci->pfd); ci->pfd = -1; }
 			if (ci->sifd > 0) { close(ci->sifd); ci->sifd = -1; }
@@ -254,8 +252,8 @@ SEXP mc_fork(SEXP sEstranged)
 	    error(_("unable to create a pipe"));
 	}
 #ifdef MC_DEBUG
-	Dprintf("parent[%d] created pipes: comm (%d->%d), sir (%d->%d)\n",
-		getpid(), pipefd[1], pipefd[0], sipfd[1], sipfd[0]);
+    Dprintf(_("parent[%d] created pipes: comm (%d->%d), sir (%d->%d)\n"),
+	    getpid(), pipefd[1], pipefd[0], sipfd[1], sipfd[0]);
 #endif
     }
 
@@ -296,7 +294,7 @@ SEXP mc_fork(SEXP sEstranged)
 	    signal(SIGUSR1, child_sig_handler);
 	}
 #ifdef MC_DEBUG
-	Dprintf("child process %d started\n", getpid());
+	Dprintf(_("child process %d started\n"), getpid());
 #endif
     } else { /* master process */
 	child_info_t *ci;
@@ -311,7 +309,7 @@ SEXP mc_fork(SEXP sEstranged)
 	res_i[2] = sipfd[1];
 
 #ifdef MC_DEBUG
-	Dprintf("parent registers new child %d\n", pid);
+	Dprintf(_("parent registers new child %d\n"), pid);
 #endif
 	/* register the new child and its pipes */
 	ci = (child_info_t*) malloc(sizeof(child_info_t));
@@ -356,7 +354,7 @@ SEXP mc_close_stderr(SEXP toNULL)
 SEXP mc_close_fds(SEXP sFDS) 
 {
     int *fd, fds, i = 0;
-    if (TYPEOF(sFDS) != INTSXP) error("descriptors must be integers");
+    if (TYPEOF(sFDS) != INTSXP) error(_("descriptors must be integers"));
     fds = LENGTH(sFDS);
     fd = INTEGER(sFDS);
     while (i < fds) close(fd[i++]);
@@ -376,7 +374,7 @@ SEXP mc_send_master(SEXP what)
     len = LENGTH(what);
     b = RAW(what);
 #ifdef MC_DEBUG
-    Dprintf("child %d: send_master (%d bytes)\n", getpid(), len);
+    Dprintf(_("child %d: send_master (%d bytes)\n"), getpid(), len);
 #endif
     if (write(master_fd, &len, sizeof(len)) != sizeof(len)) {
 	close(master_fd);
@@ -402,7 +400,7 @@ SEXP mc_send_child_stdin(SEXP sPid, SEXP what)
     int pid = asInteger(sPid);
     if (!is_master) 
 	error(_("only the master process can send data to a child process"));
-    if (TYPEOF(what) != RAWSXP) error("what must be a raw vector");
+    if (TYPEOF(what) != RAWSXP) error(_("what must be a raw vector"));
     child_info_t *ci = children;
     while (ci) {
 	if (ci->pid == pid) break;
@@ -496,7 +494,7 @@ SEXP mc_select_children(SEXP sTimeout, SEXP sWhich)
     }
     ci = children;
 #ifdef MC_DEBUG
-    Dprintf(" - read select %d children: ", maxfd);
+    Dprintf(_(" - read select %d children: "), maxfd);
 #endif
     res = allocVector(INTSXP, maxfd);
     res_i = INTEGER(res);
@@ -519,7 +517,7 @@ static SEXP read_child_ci(child_info_t *ci)
     int fd = ci->pfd;
     ssize_t n = read(fd, &len, sizeof(len));
 #ifdef MC_DEBUG
-    Dprintf(" read_child_ci(%d) - read length returned %d\n", ci->pid, n);
+    Dprintf(_(" read_child_ci(%d) - read length returned %d\n"), ci->pid, n);
 #endif
     if (n != sizeof(len) || len == 0) { /* error or child is exiting */
 	int pid = ci->pid;
@@ -534,7 +532,7 @@ static SEXP read_child_ci(child_info_t *ci)
 	while (i < len) {
 	    n = read(fd, rvb + i, len - i);
 #ifdef MC_DEBUG
-	    Dprintf(" read_child_ci(%d) - read %d at %d returned %d\n", ci->pid, len-i, i, n);
+	    Dprintf(_(" read_child_ci(%d) - read %d at %d returned %d\n"), ci->pid, len-i, i, n);
 #endif
 	    if (n < 1) {
 		int pid = ci->pid;
@@ -567,7 +565,7 @@ SEXP mc_read_child(SEXP sPid)
 	ci = ci->next;
     }
 #ifdef MC_DEBUG
-    if (!ci) Dprintf("read_child(%d) - pid is not in the list of children\n", pid);
+    if (!ci) Dprintf(_("read_child(%d) - pid is not in the list of children\n"), pid);
 #endif
     if (!ci) return R_NilValue; /* if the child doesn't exist anymore, returns NULL */
     return read_child_ci(ci);	
@@ -702,7 +700,7 @@ SEXP NORET mc_exit(SEXP sRes)
 {
     int res = asInteger(sRes);
 #ifdef MC_DEBUG
-    Dprintf("child %d: 'mcexit' called\n", getpid());
+    Dprintf(_("child %d: 'mcexit' called\n"), getpid());
 #endif
     if (is_master) error(_("'mcexit' can only be used in a child process"));
     if (master_fd != -1) { /* send 0 to signify that we're leaving */
@@ -716,16 +714,16 @@ SEXP NORET mc_exit(SEXP sRes)
     }
     if (!child_can_exit) {
 #ifdef MC_DEBUG
-	Dprintf("child %d is waiting for permission to exit\n", getpid());
+	Dprintf(_("child %d is waiting for permission to exit\n"), getpid());
 #endif
 	while (!child_can_exit) sleep(1);
     }
 		
 #ifdef MC_DEBUG
-    Dprintf("child %d: exiting\n", getpid());
+    Dprintf(_("child %d: exiting\n"), getpid());
 #endif
     _exit(res);
-    error(_("'mcexit' failed"));
+    error(_("'mcexit()' function failed"));
 }
 
 /* NA = query, TRUE/FALSE = set R_Interactive accordingly */

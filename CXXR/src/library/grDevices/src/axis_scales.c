@@ -26,6 +26,7 @@
 #include <R_ext/GraphicsEngine.h>
 
 #include "grDevices.h"
+#include "localization.h"
 
 SEXP R_CreateAtVector(SEXP axp, SEXP usr, SEXP nint, SEXP is_log)
 {

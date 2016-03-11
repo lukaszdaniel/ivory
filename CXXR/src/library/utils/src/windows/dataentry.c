@@ -27,7 +27,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include "win-nls.h"
+#include "localization.h"
 
 #include <wchar.h>
 #include <rlocale.h>
@@ -38,6 +38,7 @@
 #include "Print.h"
 #include <Rinternals.h>
 #include <R_ext/Parse.h>  /* parsing is used in handling escape codes */
+#include <R_ext/Minmax.h>
 
 #include "graphapp/ga.h"
 #include "console.h"
@@ -49,12 +50,6 @@ typedef enum {UNKNOWNN, NUMERIC, CHARACTER} CellType;
 /* Used to check if eventloop needs to be run */
 static Rboolean R_de_up;
 
-#ifndef max
-#define max(a, b) (((a)>(b))?(a):(b))
-#endif
-#ifndef min
-#define min(a, b) (((a)<(b))?(a):(b))
-#endif
 #define BOXW(x) (min(((x<100 && DE->nboxchars == 0) ? DE->boxw[x] : DE->box_w), DE->p->w - DE->boxw[0] - 2*DE->bwidth - 2))
 
 #define FIELDWIDTH 10
@@ -279,7 +274,7 @@ SEXP Win_dataentry(SEXP args)
 
     /* start up the window, more initializing in here */
     if (initwin(DE, G_("Data Editor")))
-	error("unable to start data editor");
+	error(G_("unable to start data editor"));
     R_de_up = TRUE;
 
     /* set up a context which will close the window if there is an error */
@@ -493,7 +488,7 @@ static void advancerect(DEstruct DE, int which)
 	    DE->ccol--;
 	break;
     default:
-	UNIMPLEMENTED("advancerect");
+	UNIMPLEMENTED("advancerect()");
     }
 
     highlightrect(DE);
@@ -1889,7 +1884,7 @@ SEXP Win_dataviewer(SEXP args)
 
     /* start up the window, more initializing in here */
     if (initwin(DE, CHAR(STRING_ELT(stitle, 0))))
-	error("unable to start data viewer");
+	error(G_("unable to start data viewer"));
 
     /* set up a context which will close the window if there is an error */
     begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,

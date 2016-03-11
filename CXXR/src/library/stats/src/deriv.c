@@ -27,13 +27,7 @@
 #endif
 
 #include "Defn.h"
-#undef _
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("stats", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 static SEXP ParenSymbol;
 static SEXP PlusSymbol;
@@ -383,7 +377,7 @@ static SEXP D(SEXP expr, SEXP var)
 	}
 	else if (CAR(expr) == LogSymbol) {
 	    if (length(expr) != 2)
-		error("only single-argument calls are supported");
+		error(_("only single-argument calls are supported"));
 	    ans = simplify(DivideSymbol,
 			   PP(D(CADR(expr), var)),
 			   CADR(expr));
@@ -528,8 +522,7 @@ static SEXP D(SEXP expr, SEXP var)
 
 	else {
 	    SEXP u = deparse1(CAR(expr), 0, SIMPLEDEPARSE);
-	    error(_("Function '%s' is not in the derivatives table"),
-		  translateChar(STRING_ELT(u, 0)));
+	    error(_("Function '%s' is not in the derivatives table"), translateChar(STRING_ELT(u, 0)));
 	}
 
 	break;

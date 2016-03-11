@@ -23,7 +23,7 @@ subset.data.frame <- function (x, subset, select, drop = FALSE, ...)
     else {
 	e <- substitute(subset)
 	r <- eval(e, x, parent.frame())
-        if(!is.logical(r)) stop("'subset' must be logical")
+        if(!is.logical(r)) stop(gettextf("'%s' argument must be logical", "subset"))
 	r & !is.na(r)
     }
     vars <- if(missing(select))
@@ -42,7 +42,7 @@ subset.data.frame <- function (x, subset, select, drop = FALSE, ...)
 subset <- function(x, ...) UseMethod("subset")
 
 subset.default <- function(x, subset, ...) {
-    if(!is.logical(subset)) stop("'subset' must be logical")
+    if(!is.logical(subset)) stop(gettextf("'%s' argument must be logical", "subset"))
     x[subset & !is.na(subset)]
 }
 
@@ -51,12 +51,12 @@ subset.matrix <- function(x, subset, select, drop = FALSE, ...)
     if(missing(select))
 	vars <- TRUE
     else {
-	nl <- as.list(1L:ncol(x))
+	nl <- as.list(seq_len(ncol(x)))
 	names(nl) <- colnames(x)
 	vars <- eval(substitute(select), nl, parent.frame())
     }
     if(missing(subset)) subset <- TRUE
-    else if(!is.logical(subset)) stop("'subset' must be logical")
+    else if(!is.logical(subset)) stop(gettextf("'%s' argument must be logical", "subset"))
     x[subset & !is.na(subset), vars, drop = drop]
 }
 

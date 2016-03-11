@@ -77,16 +77,16 @@ Rd2ex <-
 		if (!grepl("\n$", last[length(last)], perl = TRUE))
 		    writeLines("", con)
 		if (label)
-		    of0("## End(",txt,")")
+		    of0("## End (",txt,")")
 	    }
 	}
 	tag <- attr(x, "Rd_tag")
 	if(tag %in% c("\\dontshow", "\\testonly")) {
 	    renderDont("Don't show", comment=FALSE)
 	} else if (tag == "\\dontrun") {
-	    renderDont("Not run", commentDontrun, label=commentDontrun)
+	    renderDont("Don't run", commentDontrun, label=commentDontrun)
 	} else if (tag == "\\donttest") {
-	    renderDont("No test", commentDonttest, xtra1=FALSE)
+	    renderDont("Don't test", commentDonttest, xtra1=FALSE)
 	} else if (tag == "COMMENT") {
             ## % can escape a whole line (e.g. beavers.Rd) or
             ## be trailing when we want a NL

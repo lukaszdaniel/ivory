@@ -24,7 +24,7 @@ nlm <- function(f, p, ..., hessian=FALSE, typsize=rep(1,length(p)),
 
     print.level <- as.integer(print.level)
     if(print.level < 0 || print.level > 2)
-	stop("'print.level' must be in {0,1,2}")
+	 stop(gettextf("'%s' argument must be 0, 1 or 2", "print.level"))
     ## msg is collection of bits, i.e., sum of 2^k (k = 0,..,4):
     msg <- (1 + c(8,0,16))[1+print.level]
     if(!check.analyticals) msg <- msg + (2 + 4)
@@ -60,17 +60,17 @@ uniroot <- function(f, interval, ...,
 		    tol = .Machine$double.eps^0.25, maxiter = 1000, trace = 0)
 {
     if(!missing(interval) && length(interval) != 2L)
-        stop("'interval' must be a vector of length 2")
+        stop(gettextf("'%s' argument must be of length %d", "interval", 2))
     if(!is.numeric(lower) || !is.numeric(upper) || lower >= upper)
         stop("lower < upper  is not fulfilled")
-    if(is.na(f.lower)) stop("f.lower = f(lower) is NA")
-    if(is.na(f.upper)) stop("f.upper = f(upper) is NA")
+    if(is.na(f.lower)) stop("'f.lower = f(lower)' is NA")
+    if(is.na(f.upper)) stop("'f.upper = f(upper)' is NA")
     Sig <- switch(match.arg(extendInt),
 		  "yes" = NULL,
 		  "downX"= -1,
 		  "no"   =  0,
 		  "upX"  =  1,
-		  stop("invalid 'extendInt'; please report"))
+		  stop("invalid 'extendInt' argument; please report"))
     ## protect against later   0 * Inf  |--> NaN  and Inf * -Inf.
     truncate <- function(x) pmax.int(pmin(x, .Machine$double.xmax),
                                     -.Machine$double.xmax)
@@ -79,9 +79,12 @@ uniroot <- function(f, interval, ...,
     doX <- (   is.null(Sig) && f.low. * f.upp. > 0 ||
 	    is.numeric(Sig) && (Sig*f.low. > 0 || Sig*f.upp. < 0))
     if(doX) { ## extend the interval = [lower, upper]
-	if(trace)
-	    cat(sprintf("search in [%g,%g]%s", lower, upper,
-			if(trace >= 2)"\n" else " ... "))
+	if(trace) {
+	  if(trace >= 2)
+	    cat(gettextf("search in [%g,%g]\n", lower, upper, domain = "R-stats"))
+	  else
+	    cat(gettextf("search in [%g,%g] ... ", lower, upper, domain = "R-stats"))
+	}
 	Delta <- function(u) 0.01* pmax(1e-4, abs(u))
         it <- 0L
 	## Two cases:
@@ -91,8 +94,7 @@ uniroot <- function(f, interval, ...,
 	    while(isTRUE(f.lower*f.upper > 0) &&
                   any(iF <- is.finite(c(lower,upper)))) {
 		if((it <- it + 1L) > maxiter)
-		    stop(gettextf("no sign change found in %d iterations", it-1),
-			 domain=NA)
+		    stop(gettextf("no sign change found in %d iterations", it-1), domain=NA)
 		if(iF[1]) {
 		    ol <- lower; of <- f.lower
 		    if(is.na(f.lower <- f(lower <- lower - delta[1], ...))) {
@@ -116,8 +118,7 @@ uniroot <- function(f, interval, ...,
 	    delta <- Delta(lower)
 	    while(isTRUE(Sig*f.lower > 0)) {
 		if((it <- it + 1L) > maxiter)
-		    stop(gettextf("no sign change found in %d iterations", it-1),
-			 domain=NA)
+		    stop(gettextf("no sign change found in %d iterations", it-1), domain=NA)
 		f.lower <- f(lower <- lower - delta, ...)
 		if(trace >= 2) cat(sprintf(" .. modified lower: %g\n", lower))
 		delta <- 2 * delta
@@ -125,8 +126,7 @@ uniroot <- function(f, interval, ...,
 	    delta <- Delta(upper)
 	    while(isTRUE(Sig*f.upper < 0)) {
 		if((it <- it + 1L) > maxiter)
-		    stop(gettextf("no sign change found in %d iterations", it-1),
-			 domain=NA)
+		    stop(gettextf("no sign change found in %d iterations", it-1), domain=NA)
 		f.upper <- f(upper <- upper + delta, ...)
 		if(trace >= 2) cat(sprintf(" .. modified upper: %g\n", upper))
 		delta <- 2 * delta
@@ -139,7 +139,7 @@ uniroot <- function(f, interval, ...,
     if(!isTRUE(as.vector(sign(f.lower) * sign(f.upper) <= 0)))
 	stop(if(doX)
 	"did not succeed extending the interval endpoints for f(lower) * f(upper) <= 0"
-	     else "f() values at end points not of opposite sign")
+	     else "'f()' values at end points are not of opposite sign")
 
     if(check.conv) {
 	val <- tryCatch(.External2(C_zeroin2, function(arg) f(arg, ...),
@@ -157,8 +157,8 @@ uniroot <- function(f, interval, ...,
     if(iter < 0) {
 	(if(check.conv) stop else warning)(
 	    sprintf(ngettext(maxiter,
-			     "_NOT_ converged in %d iteration",
-			     "_NOT_ converged in %d iterations"),
+			     "'uniroot()' method did _NOT_ converge in %d iteration",
+			     "'uniroot()' method did _NOT_ converge in %d iterations", domain = "R-stats"),
 		    maxiter), domain = NA)
 	iter <- maxiter
     }

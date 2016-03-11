@@ -31,7 +31,7 @@ addmargins <-
     ##			      from unnamed lists
     ##-------------------------------------------------------------
 
-    if(is.null(dim(A))) stop("'A' must be an array or table")
+    if(is.null(dim(A))) stop(gettextf("'%s' argument must be an array or table", "A"))
     ## How many dimensions of A, and how many sides do we touch?
     n.sid <- length(margin)
 
@@ -76,9 +76,7 @@ addmargins <-
 	if(length(FUN) == 1L)
 	    FUN <- rep(FUN, n.sid)
 	else
-	    stop(gettextf(
-		"length of FUN, %d,\n does not match the length of the margins, %d",
-			  length(FUN), n.sid), domain = NA)
+	    stop(gettextf("length of FUN, %d, does not match the length of the margins, %d", length(FUN), n.sid), domain = "R-stats")
     }
 
     ## If FUN is not given the default sum is put in the margin
@@ -138,7 +136,7 @@ addmargins <-
 
 	## The positions in the vector-version of the new table
 	## where the original table values goes, as a logical vector
-	skip <- prod(d[1L:margin])
+	skip <- prod(d[seq_len(margin)])
 	runl <- skip / d[margin]
 	apos <- rep(c(rep_len(TRUE, skip), rep_len(FALSE, n.mar*runl)),
 		    n.new/(skip+n.mar*runl))
@@ -150,11 +148,10 @@ addmargins <-
 	values[apos] <- as.vector(A)
 
 	## Then sucessively compute and fill in the required margins
-	for(i in 1L:n.mar) {
-	    mtab <- if(n.dim > 1)
-			apply(A, (1L:n.dim)[-margin], FUN[[i]])
-		    else
-			FUN[[i]](A)
+	for(i in seq_len(n.mar)) {
+	    mtab <- if(n.dim > 1) {
+		apply(A, seq_len(n.dim)[-margin], FUN[[i]])
+	    } else FUN[[i]](A)
 	    ## Vector the same length as the number of margins
 	    select <- rep_len(FALSE, n.mar)
 	    ## The position of the current margin
@@ -172,16 +169,15 @@ addmargins <-
 
     ## Once defined, we can use the expand.one function repeatedly
     new.A <- A
-    for(i in 1L:n.sid)
-	new.A <- expand.one(A = new.A, margin = margin[i], FUN = FUN[[i]],
-			    fnames = fnames[[i]])
+    for(i in seq_len(n.sid))
+	new.A <- expand.one(A = new.A, margin = margin[i], FUN = FUN[[i]], fnames = fnames[[i]])
     if(inherits(A, "table")) # result shall be table, too
         class(new.A) <- c("table", class(new.A))
 
     ## Done! Now print it.
     ##
     if(!quiet && !miss.FUN && n.sid > 1) {
-	cat("Margins computed over dimensions\nin the following order:\n")
+	cat(gettext("Margins computed over dimensions in the following order:", domain = "R-stats"), "\n", sep = "")
         ## FIXME: what is paste(i) supposed to do?
 	for(i in seq_len(n.sid))
 	    cat(paste(i), ": ", names(dimnames(A))[margin[i]], "\n", sep = "")

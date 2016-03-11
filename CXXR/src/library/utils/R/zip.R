@@ -24,24 +24,21 @@ unzip <-
     if(identical(unzip, "internal")) {
         if(!list && !missing(exdir))
             dir.create(exdir, showWarnings = FALSE, recursive = TRUE)
-        res <- .External(C_unzip, zipfile, files, exdir, list, overwrite,
-                         junkpaths, setTimes)
+        res <- .External(C_unzip, zipfile, files, exdir, list, overwrite, junkpaths, setTimes)
         if(list) {
             dates <- as.POSIXct(res[[3]], "%Y-%m-%d %H:%M",  tz="UTC")
-            data.frame(Name = res[[1]], Length = res[[2]], Date = dates,
-                       stringsAsFactors = FALSE)
+            data.frame(Name = res[[1]], Length = res[[2]], Date = dates, stringsAsFactors = FALSE)
         } else invisible(attr(res, "extracted"))
     } else {
         WINDOWS <- .Platform$OS.type == "windows"
         if(!is.character(unzip) || length(unzip) != 1L || !nzchar(unzip))
-            stop("'unzip' must be a single character string")
+            stop(gettextf("'%s' argument must be a single character string", "unzip"))
         zipfile <- path.expand(zipfile)
         if (list) {
             res <- if (WINDOWS)
                     system2(unzip, c("-l", shQuote(zipfile)), stdout = TRUE)
                 else
-                    system2(unzip, c("-l", shQuote(zipfile)), stdout = TRUE,
-                            env = c("TZ=UTC"))
+                    system2(unzip, c("-l", shQuote(zipfile)), stdout = TRUE, env = c("TZ=UTC"))
             l <- length(res)
             res2 <- res[-c(1,3, l-1, l)]
             con <- textConnection(res2); on.exit(close(con))
@@ -73,8 +70,7 @@ unzip <-
             if (length(files)) args <- c(args, shQuote(files))
             if (exdir != ".") args <- c(args, "-d", shQuote(exdir))
             ## there is an unzip clone about that does not respect -q
-            system2(unzip, args, stdout = NULL, stderr = NULL,
-                    invisible = TRUE)
+            system2(unzip, args, stdout = NULL, stderr = NULL, invisible = TRUE)
             invisible(NULL)
         }
     }
@@ -85,8 +81,7 @@ zip <- function(zipfile, files, flags = "-r9X", extras = "",
 {
     if (missing(flags) && (!is.character(files) || !length(files)))
         stop("'files' must a character vector specifying one or more filepaths")
-    args <- c(flags, shQuote(path.expand(zipfile)),
-              shQuote(files), extras)
+    args <- c(flags, shQuote(path.expand(zipfile)), shQuote(files), extras)
     if (.Platform$OS.type == "windows")
         invisible(system2(zip, args, invisible = TRUE))
     else invisible(system2(zip, args))

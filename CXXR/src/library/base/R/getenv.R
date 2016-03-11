@@ -23,7 +23,7 @@ Sys.getenv <- function(x = NULL, unset = "", names = NA)
         ## of an environment variable.  That used to happen on Windows.
 	x <- strsplit(.Internal(Sys.getenv(character(), "")), "=", fixed=TRUE)
 	v <- n <- character(LEN <- length(x))
-	for (i in 1L:LEN) {
+	for (i in seq_len(LEN)) {
 	    n[i] <- x[[i]][1L]
 	    v[i] <- paste(x[[i]][-1L], collapse = "=")
 	}

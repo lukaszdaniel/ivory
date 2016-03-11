@@ -4321,7 +4321,7 @@ next_char:
 
     Riconv_close(cd);
     if (status == (size_t)-1)  /* internal error? */
-	error("conversion failure from %s to %s on '%s' in 'mbcsToSbcs()' function",
+	error(_("conversion failure from %s to %s on '%s' in 'mbcsToSbcs()' function"),
 	      (enc == CE_UTF8) ? "UTF-8" : "native", encoding, in);
 }
 

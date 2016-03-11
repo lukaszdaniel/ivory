@@ -22,7 +22,7 @@ trace <- function(what, tracer, exit, at, print, signature,
     if(nargs() > 1L && !.isMethodsDispatchOn()) {
         ns <- try(loadNamespace("methods"))
         if(isNamespace(ns))
-            message("(loaded the methods namespace)", domain = NA)
+            message("(loaded the methods namespace)", domain = "R-base")
         else ## (should not be possible)
             stop("tracing functions requires the 'methods' package, but unable to load the 'methods' namespace")
     }
@@ -72,7 +72,7 @@ asS3 <- function(object, flag = TRUE, complete = TRUE)
 	    call <- deparse(sys.call(sys.parent(1L)))
 	    if(length(call) > 1L)
 		call <- paste(call[[1L]], "....")
-	    cat("Tracing", call, msg, "\n")
+	    cat(gettextf("Tracing %s %s", call, msg, domain = "R-base"), "\n", sep = "")
 	}
 	exprObj <- substitute(expr)
 	eval.parent(exprObj)

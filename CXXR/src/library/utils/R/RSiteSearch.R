@@ -49,8 +49,7 @@ RSiteSearch <- function(string,
     ## OTOH, Namazu does not decode in, say, sort=date:late.
     qstring <- paste(string, mpp, format, sortby, restr, sep = "&")
     browseURL(qstring)
-    cat(gettextf("A search query has been submitted to %s",
-                 "http://search.r-project.org"), "\n", sep = "")
-    cat(gettext("The results page should open in your browser shortly\n"))
+    cat(gettextf("A search query has been submitted to %s", "http://search.r-project.org", domain = "R-utils"), "\n", sep = "")
+    cat(gettext("The results page should open in your browser shortly", domain = "R-utils"), "\n", sep = "")
     invisible(qstring)
 }

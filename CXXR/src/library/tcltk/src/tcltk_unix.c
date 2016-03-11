@@ -20,22 +20,16 @@
 #ifdef HAVE_CONFIG_H
 # include <config.h>
 #endif
-#define NO_NLS
 #include <Defn.h>
 #include "tcltk.h" /* declarations of our `public' interface */
 
-#ifndef Win32
+#ifndef _WIN32
 #include <R_ext/eventloop.h>
 #endif
 
 #include <stdlib.h>
+#include "localization.h"
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("tcltk", String)
-#else
-#define _(String) (String)
-#endif
 
 /* R event structure */
 typedef struct {

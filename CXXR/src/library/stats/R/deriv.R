@@ -25,7 +25,7 @@ deriv.formula <- function(expr, namevec, function.arg = NULL, tag = ".expr",
 {
     if((le <- length(expr)) > 1L)
 	.External(C_deriv, expr[[le]], namevec, function.arg, tag, hessian)
-    else stop("invalid formula in deriv")
+    else stop("invalid formula in 'deriv()'")
 }
 
 deriv.default <- function(expr, namevec, function.arg = NULL, tag = ".expr",
@@ -39,7 +39,7 @@ deriv3.formula <- function(expr, namevec, function.arg = NULL, tag = ".expr",
 {
     if((le <- length(expr)) > 1L)
 	.External(C_deriv, expr[[le]], namevec, function.arg, tag, hessian)
-    else stop("invalid formula in deriv")
+    else stop("invalid formula in 'deriv()'")
 }
 
 deriv3.default <- function(expr, namevec, function.arg = NULL, tag = ".expr",

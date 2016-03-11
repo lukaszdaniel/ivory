@@ -45,8 +45,7 @@ function(dataDir, contents)
     ## </NOTE>
 
     if(!dir.exists(dataDir))
-        stop(gettextf("directory '%s' does not exist", dataDir),
-             domain = NA)
+        stop(gettextf("directory %s does not exist", sQuote(dataDir)), domain = "R-tools")
     ## dataFiles <- list_files_with_type(dataDir, "data")
     dataTopics <- list_data_in_pkg(dataDir=dataDir)
     if(!length(dataTopics)) return(matrix("", 0L, 2L))
@@ -61,7 +60,7 @@ function(dataDir, contents)
     ## Note that NROW(contents) might be 0.
     if(length(datasets) && NROW(contents)) {
         aliasIndices <-
-            rep(1 : NROW(contents), lengths(contents$Aliases))
+            rep(seq_len(NROW(contents)), lengths(contents$Aliases))
         idx <- match(datasets, unlist(contents$Aliases), 0L)
         dataIndex[which(idx != 0L), 2L] <-
             contents[aliasIndices[idx], "Title"]
@@ -92,8 +91,7 @@ function(demoDir)
     ## </NOTE>
 
     if(!dir.exists(demoDir))
-        stop(gettextf("directory '%s' does not exist", demoDir),
-             domain = NA)
+        stop(gettextf("directory %s does not exist", sQuote(demoDir)), domain = "R-tools")
     demoFiles <- list_files_with_type(demoDir, "demo")
     demoTopics <- unique(basename(file_path_sans_ext(demoFiles)))
     if(!length(demoTopics)) return(matrix("", 0L, 2L))
@@ -101,9 +99,7 @@ function(demoDir)
     if(file_test("-f", INDEX <- file.path(demoDir, "00Index"))) {
         demoEntries <- tryCatch(read.00Index(INDEX), error = identity)
         if(inherits(demoEntries, "error"))
-            warning(gettextf("cannot read index information in file '%s'",
-                             INDEX),
-                    domain = NA)
+            warning(gettextf("cannot read index information in file '%s'", INDEX), domain = "R-tools")
         else {
             idx <- match(demoTopics, demoEntries[ , 1L], 0L)
             demoIndex[which(idx != 0L), 2L] <- demoEntries[idx, 2L]
@@ -119,15 +115,14 @@ function(demoDir)
 function(demoDir)
 {
     if(!dir.exists(demoDir))
-        stop(gettextf("directory '%s' does not exist", demoDir),
-             domain = NA)
+        stop(gettextf("directory %s does not exist", sQuote(demoDir)), domain = "R-tools")
     info_from_build <- .build_demo_index(demoDir)
     info_from_index <-
         tryCatch(read.00Index(file.path(demoDir, "00Index")),
                  error = function(e)
                  stop(gettextf("cannot read index information in file '%s'",
                                file.path(demoDir, "00Index")),
-                      domain = NA))
+                      domain = "R-tools"))
     bad_entries <-
         list(missing_from_index =
              info_from_build[grep("^[[:space:]]*$",

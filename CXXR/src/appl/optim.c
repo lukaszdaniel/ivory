@@ -21,8 +21,8 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <R_ext/Random.h>	/* for the random number generation in
 				   samin() */
 #include <R_ext/Applic.h>
@@ -146,7 +146,7 @@ vmmin(int n0, double *b, double *Fmin, optimfn fminfn, optimgr fmingr,
     f = fminfn(n0, b, ex);
     if (!R_FINITE(f))
 	error(_("initial value in 'vmmin' is not finite"));
-    if (trace) Rprintf("initial  value %f \n", f);
+    if (trace) { Rprintf(_("initial value %f"), f); Rprintf("\n"); }
     *Fmin = f;
     funcount = gradcount = 1;
     fmingr(n0, b, g, ex);
@@ -243,16 +243,20 @@ vmmin(int n0, double *b, double *Fmin, optimfn fminfn, optimgr fmingr,
 	    else ilast = gradcount;
 	    /* Resets unless has just been reset */
 	}
-	if (trace && (iter % nREPORT == 0))
-	    Rprintf("iter%4d value %f\n", iter, f);
+	if (trace && (iter % nREPORT == 0)) {
+	    Rprintf(_("iter %4d value %f"), iter, f);	
+	    Rprintf("\n");
+	}
 	if (iter >= maxit) break;
 	if (gradcount - ilast > 2 * n)
 	    ilast = gradcount;	/* periodic restart */
     } while (count != n || ilast != gradcount);
     if (trace) {
-	Rprintf("final  value %f \n", *Fmin);
-	if (iter < maxit) Rprintf("converged\n");
-	else Rprintf("stopped after %i iterations\n", iter);
+	Rprintf(_("final value %f"), *Fmin);
+	Rprintf("\n");
+	if (iter < maxit) Rprintf(_("'vmmin' alghoritm converged"));
+	else Rprintf(_("stopped after %i iterations"), iter);
+	Rprintf("\n");
     }
     *fail = (iter < maxit) ? 0 : 1;
     *fncount = funcount;
@@ -289,8 +293,10 @@ void nmmin(int n, double *Bvec, double *X, double *Fmin, optimfn fminfn,
 	*fail = 0;
 	return;
     }
-    if (trace)
-	Rprintf("  Nelder-Mead direct search function minimizer\n");
+    if (trace) {
+	Rprintf(_("  Nelder-Mead direct search function minimizer"));
+	Rprintf("\n");
+	}
     P = matrix(n, n+1);
     *fail = FALSE;
     f = fminfn(n, Bvec, ex);
@@ -298,10 +304,10 @@ void nmmin(int n, double *Bvec, double *X, double *Fmin, optimfn fminfn,
 	error(_("function cannot be evaluated at initial parameters"));
 	*fail = TRUE;
     } else {
-	if (trace) Rprintf("function value for initial parameters = %f\n", f);
+	if (trace) { Rprintf(_("function value for initial parameters = %f"), f); Rprintf("\n"); }
 	funcount = 1;
 	convtol = intol * (fabs(f) + intol);
-	if (trace) Rprintf("  Scaled convergence tolerance is %g\n", convtol);
+	if (trace) { Rprintf(_("  Scaled convergence tolerance is %g"), convtol); Rprintf("\n"); }
 	n1 = n + 1;
 	C = n + 2;
 	P[n1 - 1][0] = f;
@@ -317,7 +323,7 @@ void nmmin(int n, double *Bvec, double *X, double *Fmin, optimfn fminfn,
 		step = 0.1 * fabs(Bvec[i]);
 	}
 	if (step == 0.0) step = 0.1;
-	if (trace) Rprintf("Stepsize computed as %f\n", step);
+	if (trace) { Rprintf(_("Stepsize computed as %f"), step); Rprintf("\n"); }
 	for (j = 2; j <= n1; j++) {
 	    strcpy(action, "BUILD          ");
 	    for (i = 0; i < n; i++)
@@ -442,8 +448,10 @@ void nmmin(int n, double *Bvec, double *X, double *Fmin, optimfn fminfn,
 			if (size < oldsize) {
 			    oldsize = size;
 			} else {
-			    if (trace)
-				Rprintf("Polytope size measure not decreased in shrink\n");
+			    if (trace) {
+				Rprintf(_("Polytope size measure not decreased in shrink"));
+				Rprintf("\n");
+			    }
 			    *fail = 10;
 			    break;
 			}
@@ -456,8 +464,10 @@ void nmmin(int n, double *Bvec, double *X, double *Fmin, optimfn fminfn,
     }
 
     if (trace) {
-	Rprintf("Exiting from Nelder Mead minimizer\n");
-	Rprintf("    %d function evaluations used\n", funcount);
+	Rprintf(_("Exiting from Nelder Mead minimizer"));
+	Rprintf("\n    ");
+	Rprintf(n_("%d function evaluation used", "%d function evaluations used", funcount), funcount);
+	Rprintf("\n");
     }
     *Fmin = P[n1 - 1][L - 1];
     for (i = 0; i < n; i++) X[i] = P[i][L - 1];
@@ -489,14 +499,16 @@ void cgmin(int n, double *Bvec, double *X, double *Fmin,
 	return;
     }
     if (trace) {
-	Rprintf("  Conjugate gradients function minimizer\n");
+	Rprintf(_("  Conjugate gradients function minimizer"));
+	Rprintf("\n");
 	switch (type) {
-	case 1:	    Rprintf("Method: Fletcher Reeves\n");	break;
-	case 2:	    Rprintf("Method: Polak Ribiere\n");		break;
-	case 3:	    Rprintf("Method: Beale Sorenson\n");	break;
+	case 1:	    Rprintf(_("Method: Fletcher Reeves"));	break;
+	case 2:	    Rprintf(_("Method: Polak Ribiere"));	break;
+	case 3:	    Rprintf(_("Method: Beale Sorenson"));	break;
 	default:
-	    error(_("unknown 'type' in \"CG\" method of 'optim'"));
+	    error(_("unknown type in \"CG\" method of 'optim'"));
 	}
+	Rprintf("\n");
     }
     c = vect(n); g = vect(n); t = vect(n);
 
@@ -505,10 +517,10 @@ void cgmin(int n, double *Bvec, double *X, double *Fmin,
     cyclimit = n;
     tol = intol * n * sqrt(intol);
 
-    if (trace) Rprintf("tolerance used in gradient test=%g\n", tol);
+    if (trace) { Rprintf(_("tolerance used in gradient test=%g"), tol); Rprintf("\n"); }
     f = fminfn(n, Bvec, ex);
     if (!R_FINITE(f)) {
-	error(_("Function cannot be evaluated at initial parameters"));
+	error(_("function cannot be evaluated at initial parameters"));
     } else {
 	*Fmin = f;
 	funcount = 1;
@@ -525,7 +537,7 @@ void cgmin(int n, double *Bvec, double *X, double *Fmin,
 		cycle++;
 		if (trace) {
 		    Rprintf("%d %d %f\n", gradcount, funcount, *Fmin);
-		    Rprintf("parameters ");
+		    Rprintf(_("parameters: "));
 		    for (i = 1; i <= n; i++) {
 			Rprintf("%10.5f ", Bvec[i - 1]);
 			if (i / 7 * 7 == i && i < n)
@@ -629,9 +641,12 @@ void cgmin(int n, double *Bvec, double *X, double *Fmin,
 
     }
     if (trace) {
-	Rprintf("Exiting from conjugate gradients minimizer\n");
-	Rprintf("    %d function evaluations used\n", funcount);
-	Rprintf("    %d gradient evaluations used\n", gradcount);
+	Rprintf(_("Exiting from conjugate gradients minimizer"));
+	Rprintf("\n    ");
+	Rprintf(n_("%d function evaluation used", "%d function evaluations used", funcount), funcount);
+	Rprintf("\n    ");
+	Rprintf(n_("%d gradient evaluation used", "%d gradient evaluations used", gradcount), gradcount);
+	Rprintf("\n");
     }
     *fncount = funcount;
     *grcount = gradcount;
@@ -688,7 +703,8 @@ void lbfgsb(int n, int m, double *x, double *l, double *u, int *nbd,
 	} else if (strncmp(task, "NEW_X", 5) == 0) {
 	    iter++;
 	    if(trace == 1 && (iter % nREPORT == 0)) {
-		Rprintf("iter %4d value %f\n", iter, f);
+		Rprintf(_("iter %4d value %f"), iter, f);
+		Rprintf("\n");
 	    }
 	    if (iter > maxit) {
 		*fail = 1;
@@ -710,9 +726,11 @@ void lbfgsb(int n, int m, double *x, double *l, double *u, int *nbd,
     *Fmin = f;
     *fncount = *grcount = isave[12];
     if (trace) {
-	Rprintf("final  value %f \n", *Fmin);
-	if (iter < maxit && *fail == 0) Rprintf("converged\n");
-	else Rprintf("stopped after %i iterations\n", iter);
+	Rprintf(_("final value %f"), *Fmin);
+	Rprintf("\n");
+	if (iter < maxit && *fail == 0) Rprintf("converged");
+	else Rprintf(_("stopped after %i iterations"), iter);
+	Rprintf("\n");
     }
     strcpy(msg, task);
 }
@@ -752,8 +770,10 @@ void samin(int n, double *pb, double *yb, optimfn fminfn, int maxit,
     for (j = 0; j < n; j++) p[j] = pb[j];
     y = *yb;  /* init system state p, y */
     if (trace) {
-	Rprintf ("sann objective function values\n");
-	Rprintf ("initial       value %f\n", *yb);
+	Rprintf (_("sann objective function values"));
+	Rprintf("\n");
+	Rprintf (_("initial value %f"), *yb);
+	Rprintf("\n");
     }
     scale = 1.0/ti;
     its = itdoc = 1;
@@ -777,13 +797,17 @@ void samin(int n, double *pb, double *yb, optimfn fminfn, int maxit,
 	    }
 	    its++; k++;
 	}
-	if (trace && ((itdoc % trace) == 0))
-	    Rprintf("iter %8d value %f\n", its - 1, *yb);
+	if (trace && ((itdoc % trace) == 0)) {
+	    Rprintf(_("iter %8d value %f"), its - 1, *yb);
+	    Rprintf("\n");
+	}
 	itdoc++;
     }
     if (trace) {
-	Rprintf ("final         value %f\n", *yb);
-	Rprintf ("sann stopped after %d iterations\n", its - 1);
+	Rprintf (_("final value %f"), *yb);
+	Rprintf("\n");
+	Rprintf (_("sann stopped after %d iterations"), its - 1);
+	Rprintf("\n");
     }
     PutRNGstate();
 }

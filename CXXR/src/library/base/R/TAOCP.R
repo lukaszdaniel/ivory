@@ -22,7 +22,7 @@
     KKK <- KK + KK - 1L; KKL <- KK - LL
     ss <- seed - (seed %% 2L) + 2L
     X <- integer(KKK)
-    for(j in 1L:KK) {
+    for(j in seq_len(KK)) {
         X[j] <- ss
         ss <- ss+ss
         if(ss >= MM) ss <- ss - MM + 2L
@@ -47,6 +47,6 @@
         }
         if(ss) ss <- ss %/% 2L else T <- T - 1L
     }
-    rs <- c(X[(LL+1L):KK], X[1L:LL])
+    rs <- c(X[(LL+1L):KK], X[seq_len(LL)])
     invisible(rs)
 }

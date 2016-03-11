@@ -35,9 +35,7 @@ findGeneric <- function(fname, envir, warnS4only = TRUE)
 	if(any(ddm <- vapply(r, methods::is, logical(1L), "derivedDefaultMethod")))
 	    f <- r[ddm][[1]]@.Data
 	else if(warnS4only)
-	    warning(gettextf(
-	"'%s' is a formal generic function; S3 methods will not likely be found",
-			     fname), domain = NA)
+	    warning(gettextf("%s is a formal generic function; S3 methods will not likely be found", sQuote(fname)), domain = "R-utils")
     }
     isUMEbrace <- function(e) {
         for (ee in as.list(e[-1L]))
@@ -104,16 +102,14 @@ function(generic.function, class, envir=parent.frame())
         ## else
         if(!exists(generic.function, mode = "function", envir = envir) &&
            !any(generic.function == c("Math", "Ops", "Complex", "Summary")))
-            stop(gettextf("no function '%s' is visible", generic.function),
-                 domain = NA)
+            stop(gettextf("no function '%s' is visible", generic.function), domain = "R-utils")
         warn.not.generic <- FALSE
         if(!any(generic.function == knownGenerics)) {
 	    truegf <- findGeneric(generic.function, envir, warnS4only = !methods.called)
             if(truegf == "")
                 warn.not.generic <- TRUE
             else if(truegf != generic.function) {
-                warning(gettextf("generic function '%s' dispatches methods for generic '%s'",
-                        generic.function, truegf), domain = NA)
+                warning(gettextf("generic function '%s' dispatches methods for generic '%s'", generic.function, truegf), domain = "R-utils")
                 generic.function <- truegf
             }
         }
@@ -130,7 +126,7 @@ function(generic.function, class, envir=parent.frame())
 	if(warn.not.generic && nrow(info))
 	    warning(gettextf(
 	"function '%s' appears not to be S3 generic; found functions that look like S3 methods",
-			     generic.function), domain = NA)
+			     generic.function), domain = "R-utils")
 
         ## also look for registered methods from namespaces
         ## we assume that only functions get registered.
@@ -147,8 +143,7 @@ function(generic.function, class, envir=parent.frame())
                     pattern = name)
         if(length(S3reg))
             info <- rbindSome(info, S3reg, msg =
-                              paste("registered S3method for",
-                                    generic.function))
+                              gettextf("registered S3method for %s", generic.function, domain = "R-utils"))
         ## both all() and all.equal() are generic, so
         if(generic.function == "all")
             info <- info[-grep("^all\\.equal", row.names(info)), ]
@@ -188,9 +183,9 @@ function(generic.function, class, envir=parent.frame())
         if(length(S3reg))
             S3reg <- S3reg[vapply(gsub(name, "", S3reg), exists, NA)]
         if(length(S3reg))
-            info <- rbindSome(info, S3reg, msg = "registered S3method")
+            info <- rbindSome(info, S3reg, msg = gettext("registered S3method", domain = "R-utils"))
     }
-    else stop("must supply 'generic.function' or 'class'")
+    else stop("must supply 'generic.function' or 'class' argument")
 
     info$generic <- if (!missing(generic.function))
         rep(generic.function, nrow(info))
@@ -245,9 +240,9 @@ print.MethodsFunction <- function(x, byclass = attr(x, "byclass"), ...)
 
     if (length(values)) {
         print(noquote(values))
-        cat("see '?methods' for accessing help and source code\n")
+        cat(gettext("see '?methods' for accessing help and source code", domain = "R-utils"), "\n", sep = "")
     } else
-        cat("no methods found\n")
+        cat(gettext("no methods found", domain = "R-utils"), "\n", sep = "")
 
     invisible(x)
 }
@@ -259,7 +254,7 @@ getS3method <- function(f, class, optional = FALSE, envir = parent.frame())
         if(nzchar(truegf)) f <- truegf
         else {
             if(optional) return(NULL)
-            else stop(gettextf("no function '%s' could be found", f), domain = NA)
+            else stop(gettextf("no function '%s' could be found", f), domain = "R-utils")
         }
     }
     method <- paste(f, class, sep=".")
@@ -391,23 +386,19 @@ function(x, value, ns, pos = -1, envir = as.environment(pos))
     ns_name <- getNamespaceName(ns)
     if (nf > 1L) {
         if(ns_name %in% tools:::.get_standard_package_names()$base)
-            stop("locked binding of ", sQuote(x), " cannot be changed",
-                 domain = NA)
+            stop(gettextf("locked binding of %s cannot be changed", sQuote(x), domain = "R-utils"), domain = "R-utils")
     }
     if(bindingIsLocked(x, ns)) {
         in_load <- Sys.getenv("_R_NS_LOAD_")
         if (nzchar(in_load)) {
             if(in_load != ns_name) {
-                msg <-
-                    gettextf("changing locked binding for %s in %s whilst loading %s",
-                             sQuote(x), sQuote(ns_name), sQuote(in_load))
+                msg <- gettextf("changing locked binding for %s in %s whilst loading %s", sQuote(x), sQuote(ns_name), sQuote(in_load))
                 if (! in_load %in% c("Matrix", "SparseM"))
-                    warning(msg, call. = FALSE, domain = NA, immediate. = TRUE)
+                    warning(msg, call. = FALSE, domain = "R-utils", immediate. = TRUE)
             }
         } else if (nzchar(Sys.getenv("_R_WARN_ON_LOCKED_BINDINGS_"))) {
-            warning(gettextf("changing locked binding for %s in %s",
-                             sQuote(x), sQuote(ns_name)),
-                    call. = FALSE, domain = NA, immediate. = TRUE)
+            warning(gettextf("changing locked binding for %s in %s", sQuote(x), sQuote(ns_name)),
+                    call. = FALSE, domain = "R-utils", immediate. = TRUE)
         }
         unlockBinding(x, ns)
         assign(x, value, envir = ns, inherits = FALSE)
@@ -446,7 +437,7 @@ function(x, ns, pos = -1, envir = as.environment(pos), ...)
     if (is.name(subx))
         subx <- deparse(subx)
     if (!is.character(subx) || length(subx) != 1L)
-        stop("'fixInNamespace' requires a name")
+        stop(gettextf("'%s' function requires a name", "fixInNamespace"))
     if(missing(ns)) {
         nm <- attr(envir, "name", exact = TRUE)
         if(is.null(nm) || substr(nm, 1L, 8L) != "package:")
@@ -486,9 +477,10 @@ function(x)
                 ev <- topenv(environment(f), baseenv())
                 nmev <- if(isNamespace(ev)) getNamespaceName(ev) else NULL
 		objs <- c(objs, list(f))
-                msg <- paste("registered S3 method for", gen)
                 if(!is.null(nmev))
-                    msg <- paste(msg, "from namespace", nmev)
+                    msg <- gettextf("registered S3 method for %s from namespace %s", gen, nmev)
+		else
+                    msg <- gettextf("registered S3 method for %s", gen)
                 where <- c(where, msg)
                 visible <- c(visible, FALSE)
             }
@@ -524,19 +516,18 @@ function(x, ...)
 {
     n <- sum(!x$dups)
     if(n == 0L) {
-        cat("no object named", sQuote(x$name), "was found\n")
+        cat(gettextf("no object named %s was found", sQuote(x$name), domain = "R-utils"), "\n", sep = "")
     } else if (n == 1L) {
-        cat("A single object matching", sQuote(x$name), "was found\n")
-        cat("It was found in the following places\n")
-	cat(paste0("  ", x$where), sep="\n")
-        cat("with value\n\n")
+        cat(gettextf("A single object matching %s was found", sQuote(x$name), domain = "R-utils"), "\n", sep = "")
+        cat(gettextf("It was found in the following places\n%s\nwith value:", paste0("  ", x$where, collapse = "\n"), domain = "R-utils"))
+#	cat(paste0("  ", x$where, collapse = "\n"), sep="\n")
+        cat("\n\n")
         print(x$objs[[1L]])
     } else {
-        cat(n, "differing objects matching", sQuote(x$name),
-            "were found\n")
-        cat("in the following places\n")
+        cat(sprintf(ngettext(n, "%d differing object matching %s was found\nin the following places:",
+		"%d differing objects matching %s were found\nin the following places:", domain = "R-utils"), n, sQuote(x$name)), "\n", sep = "")
         cat(paste0("  ", x$where), sep="\n")
-        cat("Use [] to view one of them\n")
+        cat(gettextf("Use [] to view one of them", domain = "R-utils"), "\n", sep = "")
     }
     invisible(x)
 }

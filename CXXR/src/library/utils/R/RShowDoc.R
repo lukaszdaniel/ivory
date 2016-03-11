@@ -39,7 +39,7 @@ RShowDoc <- function(what, type = c("pdf", "html", "txt"), package)
 
     type <- match.arg(type)
     if(missing(what) || length(what) != 1L || !is.character(what)) {
-        message("   RShowDoc() should be used with a character string argument specifying\n   a documentation file")
+        message("RShowDoc() should be used with a character string argument specifying a documentation file")
         return(invisible())
     }
     if(!missing(package)) {
@@ -79,8 +79,7 @@ RShowDoc <- function(what, type = c("pdf", "html", "txt"), package)
             file.show(path)
             return(invisible(path))
         }
-        stop(gettextf("no documentation for %s found in package %s",
-                      sQuote(what), sQuote(package)), domain = NA)
+        stop(gettextf("no documentation for %s found in package %s", sQuote(what), sQuote(package)), domain = "R-utils")
     }
     if(what == "FAQ") what <- "R-FAQ"
     if(what == "NEWS") {
@@ -115,8 +114,7 @@ RShowDoc <- function(what, type = c("pdf", "html", "txt"), package)
         path <- file.path(R.home("share"), "licenses", what)
         file.show(path)
         return(invisible(path))
-    } else if(what %in% c("R-admin", "R-data", "R-exts", "R-FAQ", "R-intro",
-                          "R-ints", "R-lang")) {
+    } else if(what %in% c("R-admin", "R-data", "R-exts", "R-FAQ", "R-intro", "R-ints", "R-lang")) {
         if(type == "pdf") {
             path <- file.path(R.home("doc"), "manual", paste.(what, "pdf"))
             if(file.exists(path)) {
@@ -166,5 +164,5 @@ RShowDoc <- function(what, type = c("pdf", "html", "txt"), package)
             return(invisible(docs[m]))
         }
     }
-    stop("document not found")
+    stop("document was not found")
 }

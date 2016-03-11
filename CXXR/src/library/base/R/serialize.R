@@ -21,7 +21,7 @@ saveRDS <-
              compress = TRUE, refhook = NULL)
 {
     if(is.character(file)) {
-	if(file == "") stop("'file' must be non-empty string")
+	if(file == "") stop(gettextf("'%s' argument must be non-empty character string", "file"))
 	mode <- if(ascii %in% FALSE) "wb" else "w"
 	con <- if (is.logical(compress))
 		   if(compress) gzfile(file, mode) else file(file, mode)
@@ -30,16 +30,16 @@ saveRDS <-
 			  "bzip2" = bzfile(file, mode),
 			  "xz"    = xzfile(file, mode),
 			  "gzip"  = gzfile(file, mode),
-			  stop("invalid 'compress' argument: ", compress))
+			  stop(gettextf("invalid 'compress' argument: %s", compress, domain = "R-base")))
         on.exit(close(con))
     }
     else if(inherits(file, "connection")) {
         if (!missing(compress))
-            warning("'compress' is ignored unless 'file' is a file name")
+            warning("'compress' argument is ignored unless 'file' argument is a file name")
         con <- file
     }
     else
-        stop("bad 'file' argument")
+        stop(gettextf("invalid '%s' argument", "file"))
     .Internal(serializeToConn(object, con, ascii, version, refhook))
 }
 
@@ -50,7 +50,7 @@ readRDS <- function(file, refhook = NULL)
         on.exit(close(con))
     } else if(inherits(file, "connection"))
         con <- file
-    else stop("bad 'file' argument")
+    else stop(gettextf("invalid '%s' argument", "file"))
     .Internal(unserializeFromConn(con, refhook))
 }
 
@@ -60,7 +60,7 @@ serialize <-
 {
     if (!is.null(connection)) {
         if (!inherits(connection, "connection"))
-            stop("'connection' must be a connection")
+            stop("'connection' argument must be a connection")
         if (missing(ascii)) ascii <- summary(connection)$text == "text"
     }
     if (!ascii && inherits(connection, "sockconn"))
@@ -76,6 +76,6 @@ unserialize <- function(connection, refhook = NULL)
     if (typeof(connection) != "raw" &&
         !is.character(connection) &&
         !inherits(connection, "connection"))
-        stop("'connection' must be a connection")
+        stop("'connection' argument must be a connection")
     .Internal(unserialize(connection, refhook))
 }

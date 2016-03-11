@@ -156,7 +156,7 @@ check_nonASCII(SEXP text, SEXP ignore_quotes)
 
     if(TYPEOF(text) != STRSXP) error("invalid input");
     ign = asLogical(ignore_quotes);
-    if(ign == NA_LOGICAL) error("'ignore_quotes' must be TRUE or FALSE");
+    if(ign == NA_LOGICAL) error(_("'%s' argument must be TRUE or FALSE"), "ignore_quotes");
 
     for (i = 0; i < LENGTH(text); i++) {
 	p = CHAR(STRING_ELT(text, i)); // ASCII or not not affected by charset
@@ -265,9 +265,9 @@ SEXP doTabExpand(SEXP strings, SEXP starts)  /* does tab expansion for UTF-8 str
 SEXP splitString(SEXP string, SEXP delims)
 {
     if(!isString(string) || length(string) != 1)
-	error("first arg must be a single character string");
+	error(_("first arg must be a single character string"));
     if(!isString(delims) || length(delims) != 1)
-	error("first arg must be a single character string");
+	error(_("first arg must be a single character string"));
     const char *in = CHAR(STRING_ELT(string, 0)),
 	*del = CHAR(STRING_ELT(delims, 0));
     cetype_t ienc = getCharCE(STRING_ELT(string, 0));

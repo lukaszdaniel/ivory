@@ -32,7 +32,7 @@ diag <- function(x = 1, nrow, ncol)
         return(y)
     }
     if (is.array(x) && length(dim(x)) != 1L)
-        stop("'x' is an array, but not one-dimensional.")
+        stop(gettextf("'%s' argument is an array, but not one-dimensional.", "x"))
 
     if (missing(x)) n <- nrow
     else if (length(x) == 1L && nargs() == 1L) {

@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
-"Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-06 13:51+0100\n"
-"PO-Revision-Date: 2014-03-17 10:48+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-27 18:05+0100\n"
+"PO-Revision-Date: 2010-10-01 20:58+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
 "Language: fr\n"
@@ -16,106 +16,135 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.6.4\n"
+"X-Poedit-Language: French\n"
 
-#: grid.c:212
+#: grid.c:213
+#, fuzzy
 msgid "cannot clip to rotated viewport"
-msgstr "impossible de couper une vue pivotée"
+msgstr "Impossible de couper une vue pivotée"
 
-#: grid.c:697 grid.c:702 grid.c:792 grid.c:797
+#: grid.c:519 grid.c:663
+#, c-format
+msgid "Viewport '%s' was not found"
+msgstr ""
+
+#: grid.c:698 grid.c:703 grid.c:793 grid.c:798
+#, fuzzy
 msgid "cannot pop the top-level viewport ('grid' and 'graphics' output mixed?)"
 msgstr ""
-"impossible de rendre la vue de plus haut niveau active (sorties 'grid' et "
-"'graphics' mixées ?)"
+"Impossible de rendre la vue de plus haut niveau active (grid et sorties "
+"graphiques mixées ?)"
 
-#: grid.c:977
+#: grid.c:978
 msgid "attempt to plot on null device"
 msgstr "tentative de dessin dans un périphérique 'null'"
 
-#: grid.c:1309
+#: grid.c:1310
+#, fuzzy
 msgid "there is no layout defined"
-msgstr "aucune mise en page définie"
+msgstr "Aucune mise en page définie"
 
-#: grid.c:1529
+#: grid.c:1530
+#, fuzzy
 msgid "polygon edge not found (zero-width or zero-height?)"
-msgstr "extrémité de polygone non trouvé (longueur ou largeur nulle?)"
+msgstr "Polygône non trouvé (longueur ou largeur nulle?)"
 
-#: grid.c:1538
+#: grid.c:1539
+#, fuzzy
 msgid "polygon edge not found"
-msgstr "extrémités de polygone non trouvés"
+msgstr "Extrémités de polygône non trouvées"
 
-#: grid.c:1692
+#: grid.c:1693
+#, fuzzy
 msgid "require at least two points to draw arrow"
-msgstr "il faut au moins deux points pour tracer une flèche"
+msgstr "Il faut au moins deux points pour tracer une flêche"
 
-#: grid.c:2008
+#: grid.c:2009
+#, fuzzy
 msgid "non-finite control point in Xspline"
-msgstr "point de contrôle non fini dans Xspline"
+msgstr "Point de contrôle non fini dans Xspline"
 
-#: grid.c:2873
+#: grid.c:2874
 msgid "non-finite x or y in graphics path"
 msgstr "x ou y infinis dans le chemin graphique"
 
-#: grid.c:2914
+#: grid.c:2915
 msgid "Empty raster"
-msgstr "graphique raster vide"
+msgstr ""
 
-#: grid.c:3368
+#: grid.c:3369
 msgid "invalid plotting symbol"
 msgstr "symboles graphiques incorrects"
 
-#: grid.c:3454
+#: grid.c:3455
+#, fuzzy
 msgid "unable to clip to rotated rectangle"
-msgstr "impossible de couper au rectangle pivoté"
+msgstr "Impossible de couper au rectangle pivoté"
 
-#: layout.c:589
+#: layout.c:590
+#, fuzzy
 msgid "invalid 'layout.pos.row'"
-msgstr "'layout.pos.row' incorrect"
+msgstr "layout.pos.row incorrect"
 
-#: layout.c:593
+#: layout.c:594
+#, fuzzy
 msgid "invalid 'layout.pos.col'"
-msgstr "'layout.pos.col' incorrect"
+msgstr "layout.pos.col incorrect"
 
-#: matrix.c:49
+#: matrix.c:51
 msgid "singular transformation matrix"
 msgstr "matrice de transformation singulière"
 
-#: state.c:169
+#: state.c:171
+#, fuzzy
 msgid "unable to store 'grid' state.  Too many devices open?"
 msgstr ""
 "Impossible de conserver l'état de 'grid'. Trop de périphériques ouverts ?"
 
-#: unit.c:260 unit.c:410 unit.c:1210 unit.c:1290 unit.c:1370 unit.c:1450
+#: unit.c:86
+msgid "unit attribute 'data' is of incorrect type"
+msgstr ""
+
+#: unit.c:261 unit.c:411 unit.c:1211 unit.c:1291 unit.c:1371 unit.c:1451
+#, fuzzy
 msgid "unimplemented unit function"
-msgstr "fonction d'unité non implémentée"
+msgstr "Fonction d'unité non implémentée"
 
-#: unit.c:893 unit.c:1645
+#: unit.c:894 unit.c:1646
+#, fuzzy
 msgid "invalid unit or unit not yet implemented"
-msgstr "unité non autorisée ou pas encore implémentée"
+msgstr "Unité non autorisée ou pas encore implémentée"
 
-#: unit.c:1702 unit.c:1733
-msgid "Viewport has zero dimension(s)"
-msgstr "Le zone active (Viewport) a des dimensions nulles"
+#: unit.c:1703 unit.c:1734
+msgid "Viewport has zero dimensions"
+msgstr ""
 
-#: unit.c:1765 unit.c:1780 unit.c:1795 unit.c:1810
+#: unit.c:1766 unit.c:1781 unit.c:1796 unit.c:1811
 msgid "Unsupported unit conversion"
-msgstr "Conversion d'unités non supportée"
+msgstr ""
 
-#: unit.c:1898
+#: unit.c:1899
 msgid "Invalid unit"
 msgstr "Unité incorrecte"
 
-#: unit.c:1914
+#: unit.c:1915
+#, fuzzy
 msgid "'units' must be character"
-msgstr "les unités dans 'units' doivent être une chaîne de caractères"
+msgstr "Les unités doivent être une chaîne de caractères"
 
-#: unit.c:1917
+#: unit.c:1918
+#, fuzzy
 msgid "'units' must be of length > 0"
-msgstr "Les unités dans 'units' doivent être de longueur > 0"
+msgstr "Les unités doivent être de longueur > 0"
 
-#: viewport.c:315
+#: util.c:273 util.c:285
+msgid "grid grob object is empty"
+msgstr ""
+
+#: viewport.c:316
+#, fuzzy
 msgid "non-finite location and/or size for viewport"
-msgstr "position et / ou taille de vue non finies"
+msgstr "Position et / ou taille de vue non finies"
 
 #~ msgid "Invalid circle radius (must be non-negative)"
 #~ msgstr "Rayon de cercle incorrect (doit être positif ou nul)"

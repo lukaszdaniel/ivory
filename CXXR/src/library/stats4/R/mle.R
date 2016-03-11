@@ -77,16 +77,16 @@ setMethod("coef", "mle", function(object) object@fullcoef )
 setMethod("coef", "summary.mle", function(object) object@coef )
 
 setMethod("show", "mle", function(object){
-    cat("\nCall:\n")
+    cat("\n", gettext("Call:", domain = "R-stats4"),"\n", sep = "")
     print(object@call)
-    cat("\nCoefficients:\n")
+    cat("\n", gettext("Coefficients:", domain = "R-stats4"), "\n", sep = "")
     print(coef(object))
 })
 
 setMethod("show", "summary.mle", function(object){
-    cat("Maximum likelihood estimation\n\nCall:\n")
+    cat(gettext("Maximum likelihood estimation", domain = "R-stats4"), "\n\n", gettext("Call:", domain = "R-stats4"), "\n", sep = "")
     print(object@call)
-    cat("\nCoefficients:\n")
+    cat("\n", gettext("Coefficients:", domain = "R-stats4"), "\n", sep = "")
     print(coef(object))
     cat("\n-2 log L:", object@m2logL, "\n")
 })
@@ -151,7 +151,10 @@ setMethod("profile", "mle",
         if (!is.null(parscale)) call$control$parscale <- parscale[-i]
         for (sgn in c(-1, 1)) {
             if (trace)
-                cat("\nParameter:", pi, c("down", "up")[(sgn + 1)/2 + 1], "\n")
+	     if(sgn == -1)
+                cat("\n", gettextf("Parameter: %s down", pi, domain = "R-stats4"), "\n", sep = "")
+	     else
+                cat("\n", gettextf("Parameter: %s up", pi, domain = "R-stats4"), "\n", sep = "")
             step <- 0
             z <- 0
 
@@ -311,7 +314,7 @@ function (object, parm, level = 0.95, ...)
 setMethod("confint", "mle",
 function (object, parm, level = 0.95, ...)
 {
-    cat("Profiling...\n")
+    cat(gettext("Profiling...", domain = "R-stats4"), "\n", sep = "")
     confint(profile(object), alpha = (1 - level)/4, parm, level, ...)
 })
 

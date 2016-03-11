@@ -7,6 +7,7 @@
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
 #include <R_ext/Error.h>
+#include <Localization.h>
 
 static int	HIST_SIZE = 512;
 static int      hist_pos = 0, hist_last = 0, gl_beep_on = 1;
@@ -18,8 +19,7 @@ static void gl_error(char *msg)
     char buf[1001];
     
     wgl_init_done = 1;
-    snprintf(buf, 1000, 
-	     "%s\nDisabling commands history for this session", msg);
+    snprintf(buf, 1000, _("%s\nDisabling commands history for this session"), msg);
     buf[1000] = '\0';
     R_ShowMessage(buf);
 }
@@ -46,7 +46,7 @@ static wchar_t *hist_save(const wchar_t *p)
             wcscpy(s, p);
     }
     if (s == 0)
-	gl_error("*** Error: hist_save() failed on malloc");
+	gl_error(_("*** Error: 'hist_save()' failed on malloc"));
     
     return s;
 }
@@ -83,7 +83,7 @@ void wgl_histadd(const wchar_t *buf)
 	    hist_buf = (wchar_t **) 
 		realloc(hist_buf, size * sizeof(wchar_t *));
 	    if(!hist_buf) {
-		gl_error("*** Error: wgl_histadd() failed on realloc");
+		gl_error(_("*** Error: 'wgl_histadd()' failed on realloc"));
 		return;
 	    }
 	    for(i = HIST_SIZE; i < size; i++)
@@ -139,7 +139,7 @@ void wgl_savehistory(const char *file, int size)
     fp = fopen(file, "w");
     if (!fp) {
        char msg[256];
-       snprintf(msg, 256, "Unable to open %s", file);
+       snprintf(msg, 256, _("unable to open file '%s'"), file);
        R_ShowMessage(msg);
        return;
     }
@@ -175,7 +175,7 @@ void wgl_savehistoryW(const wchar_t *file, int size)
     fp = _wfopen(file, L"w");
     if (!fp) {
        char msg[256];
-       snprintf(msg, 256, "Unable to open %ls", file);
+       snprintf(msg, 256, _("Unable to open %ls"), file);
        R_ShowMessage(msg);
        return;
     }

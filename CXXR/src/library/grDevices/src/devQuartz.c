@@ -83,7 +83,7 @@ typedef float CGFloat;
 #define CGFLOAT_IS_DOUBLE 0
 #define CGFLOAT_DEFINED 1
 #endif
-
+#include "localization.h"
 typedef struct QuartzSpecific_s {
     double        ps;
     double        scalex, scaley;  /* resolution correction: px/pt ratio */
@@ -1603,6 +1603,7 @@ SEXP makeQuartzDefault() {
 
 #include "grDevices.h"
 #include <R_ext/QuartzDevice.h>
+#include "localization.h"
 
 SEXP Quartz(SEXP args)
 {

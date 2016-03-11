@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: R 3.2.0\n"
-"Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-06 13:51+0100\n"
+"Project-Id-Version: R 2.16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-27 18:05+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,104 +14,117 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.5.4\n"
 
-#: grid.c:212
+#: grid.c:213
 msgid "cannot clip to rotated viewport"
 msgstr "nie można przypiąć do obróconego okienka ekranu"
 
-#: grid.c:697 grid.c:702 grid.c:792 grid.c:797
+#: grid.c:519 grid.c:663
+#, c-format
+msgid "Viewport '%s' was not found"
+msgstr "Okno ekranu '%s' nie zostało znalezione"
+
+#: grid.c:698 grid.c:703 grid.c:793 grid.c:798
 msgid "cannot pop the top-level viewport ('grid' and 'graphics' output mixed?)"
 msgstr ""
 "nie można wyświetlić okienka ekranu na wierzchu (siatka oraz grafika "
 "pomieszały się?)"
 
-#: grid.c:977
+#: grid.c:978
 msgid "attempt to plot on null device"
 msgstr "próba rysowania na pustym urządzeniu"
 
-#: grid.c:1309
+#: grid.c:1310
 msgid "there is no layout defined"
 msgstr "nie określono układu"
 
-#: grid.c:1529
+#: grid.c:1530
 msgid "polygon edge not found (zero-width or zero-height?)"
 msgstr ""
 "nie znaleziono krawędzi wielokąta (zerowa szerokość lub zerowa wysokość?)"
 
-#: grid.c:1538
+#: grid.c:1539
 msgid "polygon edge not found"
 msgstr "nie znaleziono krawędzi wielokąta"
 
-#: grid.c:1692
+#: grid.c:1693
 msgid "require at least two points to draw arrow"
 msgstr "wymaga co najmniej dwu punktów, aby narysować strzałkę"
 
-#: grid.c:2008
+#: grid.c:2009
 msgid "non-finite control point in Xspline"
 msgstr "nieskończony punkt kontrolny w 'Xspline'"
 
-#: grid.c:2873
+#: grid.c:2874
 msgid "non-finite x or y in graphics path"
 msgstr "nieskończony 'x' lub 'y' w ścieżce grafiki"
 
-#: grid.c:2914
+#: grid.c:2915
 msgid "Empty raster"
 msgstr "Pusty raster"
 
-#: grid.c:3368
+#: grid.c:3369
 msgid "invalid plotting symbol"
 msgstr "Nieprawidłowy rysowany symbol"
 
-#: grid.c:3454
+#: grid.c:3455
 msgid "unable to clip to rotated rectangle"
 msgstr "nie można przypiąć do obróconego prostokąta"
 
-#: layout.c:589
+#: layout.c:590
 msgid "invalid 'layout.pos.row'"
 msgstr "niepoprawny 'layout.pos.row'"
 
-#: layout.c:593
+#: layout.c:594
 msgid "invalid 'layout.pos.col'"
 msgstr "niepoprawny 'layout.pos.col'"
 
-#: matrix.c:49
+#: matrix.c:51
 msgid "singular transformation matrix"
 msgstr "osobliwa macierz transformacyjna"
 
-#: state.c:169
+#: state.c:171
 msgid "unable to store 'grid' state.  Too many devices open?"
 msgstr "nie można zachować stanu siatki. Zbyt duża liczba otwartych urządzeń?"
 
-#: unit.c:260 unit.c:410 unit.c:1210 unit.c:1290 unit.c:1370 unit.c:1450
+#: unit.c:86
+msgid "unit attribute 'data' is of incorrect type"
+msgstr "atrybut 'data' klasy \"unit\" ma niepoprawny typ"
+
+#: unit.c:261 unit.c:411 unit.c:1211 unit.c:1291 unit.c:1371 unit.c:1451
 msgid "unimplemented unit function"
 msgstr "niezaimplementowana jednostkowa funkcja"
 
-#: unit.c:893 unit.c:1645
+#: unit.c:894 unit.c:1646
 msgid "invalid unit or unit not yet implemented"
 msgstr ""
 "niedozwolona jednostka lub jednostka nie została jeszcze zaimplementowana"
 
-#: unit.c:1702 unit.c:1733
-msgid "Viewport has zero dimension(s)"
+#: unit.c:1703 unit.c:1734
+msgid "Viewport has zero dimensions"
 msgstr "Okno ekranu ma zerowe wymiary"
 
-#: unit.c:1765 unit.c:1780 unit.c:1795 unit.c:1810
+#: unit.c:1766 unit.c:1781 unit.c:1796 unit.c:1811
 msgid "Unsupported unit conversion"
-msgstr "Niewspierana jednostka konwersji"
+msgstr "Niewspierana konwersja jednostek"
 
-#: unit.c:1898
+#: unit.c:1899
 msgid "Invalid unit"
 msgstr "Niepoprawna jednostka"
 
-#: unit.c:1914
+#: unit.c:1915
 msgid "'units' must be character"
 msgstr "'units' muszą być tekstem"
 
-#: unit.c:1917
+#: unit.c:1918
 msgid "'units' must be of length > 0"
 msgstr "'units' muszą mieć długość > 0"
 
-#: viewport.c:315
+#: util.c:273 util.c:285
+msgid "grid grob object is empty"
+msgstr "obiekt klasy \"grob\" jest pusty"
+
+#: viewport.c:316
 msgid "non-finite location and/or size for viewport"
 msgstr "nieskończone położenie oraz/lub rozmiar okna ekranu"

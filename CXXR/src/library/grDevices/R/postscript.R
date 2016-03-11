@@ -28,32 +28,27 @@ check.options <-
 {
     lnew <- length(new)
     if(lnew != length(newnames <- names(new)))
-	stop(gettextf("invalid arguments in '%s' (need named args)",
-                      deparse(sys.call(sys.parent()))), domain = NA)
+	stop(gettextf("invalid arguments in %s (need named args)", sQuote(deparse(sys.call(sys.parent())))), domain = "R-grDevice")
     if(!is.character(name.opt))
-	stop("'name.opt' must be character, name of an existing list")
+	stop("'name.opt' argument must be character, name of an existing list")
     if(reset) {
 	if(exists(name.opt, envir=envir, inherits=FALSE)) {
 	    if(length(utils::find(name.opt)) > 1)
 		rm(list=name.opt, envir=envir)
 
-	} else stop(gettextf("cannot reset non-existent '%s'", name.opt),
-                    domain = NA)
+	} else stop(gettextf("cannot reset non-existent '%s'", name.opt), domain = "R-grDevice")
     }
     old <- get(name.opt, envir=envir, inherits=FALSE)
     if(!is.list(old))
-	stop(gettextf("invalid options in '%s'", name.opt), domain = NA)
+	stop(gettextf("invalid options in '%s'", name.opt), domain = "R-grDevices")
     oldnames <- names(old)
     if(lnew > 0) {
 	matches <- pmatch(newnames, oldnames)
 	if(any(is.na(matches)))
 	    stop(sprintf(ngettext(as.integer(sum(is.na(matches))),
                                  "invalid argument name %s in '%s'",
-                                 "invalid argument names %s in '%s'"),
-                         paste(sQuote(newnames[is.na(matches)]),
-                               collapse=", "),
-                         deparse(sys.call(sys.parent()))),
-                 domain = NA)
+                                 "invalid argument names %s in '%s'", domain = "R-grDevices"),
+                         paste(sQuote(newnames[is.na(matches)]), collapse=", "), deparse(sys.call(sys.parent()))), domain = NA)
 	else { #- match(es) found:  substitute if appropriate
 	    i.match <- oldnames[matches]
 	    prev <- old[i.match]
@@ -65,18 +60,20 @@ check.options <-
                     if(!any(ii)) next
 		    doubt <- doubt | ii
 		    do.keep <- ii & !override.check
-		    warning(paste(sQuote(paste0(fn, "(", names(prev[ii]), ")" )),
-                                  collapse = " and "), " ",
-                            ngettext(as.integer(sum(ii)),
-                                     "differs between new and previous",
-                                     "differ between new and previous"),
-                            if(any(do.keep)) {
-                                paste("\n\t ==> ",
-                                      gettextf("NOT changing %s",
-                                              paste(sQuote(names(prev[do.keep])),
-                                                    collapse=" & ")),
-                                      sep = "")} else "",
+		    tmp_n <- paste(sQuote(paste0(fn, "(", names(prev[ii]), ")" )), collapse = " & ")
+			if(any(do.keep))
+			{
+                    warning(sprintf(ngettext(as.integer(sum(ii)),
+                                     "%s differs between new and previous\n\t ==> NOT changing %s",
+                                     "%s differ between new and previous\n\t ==> NOT changing %s", domain = "R-grDevices"),
+					tmp_n, paste(sQuote(names(prev[do.keep])), collapse=" & ")),
                             domain = NA, call. = FALSE)
+			}
+			else
+		    warning(sprintf(ngettext(as.integer(sum(ii)),
+                                     "%s differs between new and previous",
+                                     "%s differ between new and previous", domain = "R-grDevices"),
+				     tmp_n), domain = NA, call. = FALSE)
 		}
 	    names(new) <- NULL
 	    if(any(doubt)) {
@@ -252,16 +249,15 @@ postscript <- function(file = ifelse(onefile, "Rplots.ps", "Rplot%03d.ps"),
             ## and encoding to match.
             pf <- postscriptFonts(family)[[1L]]
             if(is.null(pf))
-              stop(gettextf("unknown family '%s'", family), domain = NA)
+              stop(gettextf("unknown family '%s'", family), domain = "R-grDevices")
             matchFont(pf, old$encoding)
         } else
-            stop("invalid 'family' argument")
+            stop(gettextf("invalid '%s' argument", "family"))
         old$family <- family
     }
 
     onefile <- old$onefile # for 'file'
-    if(!checkIntFormat(file))
-        stop(gettextf("invalid 'file' argument '%s'", file), domain = NA)
+    if(!checkIntFormat(file)) stop(gettextf("invalid 'file' argument '%s'", file))
     .External(C_PostScript,
               file, old$paper, old$family, old$encoding, old$bg, old$fg,
               old$width, old$height, old$horizontal, old$pointsize,
@@ -283,8 +279,7 @@ xfig <- function (file = ifelse(onefile,"Rplots.fig", "Rplot%03d.fig"),
     ## do initialization if needed
     initPSandPDFfonts()
 
-    if(!checkIntFormat(file))
-        stop(gettextf("invalid 'file' argument '%s'", file), domain = NA)
+    if(!checkIntFormat(file)) stop(gettextf("invalid 'file' argument '%s'", file))
     .External(C_XFig, file, paper, family, bg, fg,
               width, height, horizontal, pointsize,
               onefile, pagecentre, defaultfont, textspecial, encoding)
@@ -347,10 +342,10 @@ pdf <- function(file = ifelse(onefile, "Rplots.pdf", "Rplot%03d.pdf"),
             ## and encoding to match.
             pf <- pdfFonts(family)[[1L]]
             if(is.null(pf))
-              stop(gettextf("unknown family '%s'", family), domain = NA)
+              stop(gettextf("unknown family '%s'", family), domain = "R-grDevices")
             matchFont(pf, old$encoding)
         } else
-            stop("invalid 'family' argument")
+            stop(gettextf("invalid '%s' argument", "family"))
         old$family <- family
     }
     # Extract version
@@ -362,8 +357,7 @@ pdf <- function(file = ifelse(onefile, "Rplots.pdf", "Rplot%03d.pdf"),
         stop("invalid PDF version")
 
     onefile <- old$onefile # needed to set 'file'
-    if(!checkIntFormat(file))
-        stop(gettextf("invalid 'file' argument '%s'", file), domain = NA)
+    if(!checkIntFormat(file)) stop(gettextf("invalid 'file' argument '%s'", file))
     .External(C_PDF,
               file, old$paper, old$family, old$encoding, old$bg, old$fg,
               old$width, old$height, old$pointsize, onefile, old$pagecentre,
@@ -456,7 +450,7 @@ checkFont.Type1Font <- function(font) {
 # (I really hope we can dispense with the latter!)
 checkFont.CIDFont <- function(font) {
     if (!inherits(font, "CIDFont"))
-        stop("Not a CID font")
+        stop(gettextf("'%s' argument is not an object of class %s", "font", dQuote("CIDFont")))
     if (is.null(font$family) || !is.character(font$family))
         stop("invalid family name in font specification")
     if (is.null(font$metrics) || !is.character(font$metrics) ||
@@ -485,7 +479,7 @@ checkFontInUse <- function(names, fontDBname) {
     for (i in names)
         if (.Call(C_Type1FontInUse, i, isPDF(fontDBname))
             || .Call(C_CIDFontInUse, i, isPDF(fontDBname)))
-            stop(gettextf("font %s already in use", i), domain = NA)
+            stop(gettextf("font %s already in use", sQuote(i)), domain = "R-grDevices")
     invisible()
 }
 
@@ -534,14 +528,12 @@ postscriptFonts <- function(...)
         nnames <- length(fontNames)
         if (nnames == 0L) {
             if (!all(sapply(fonts, is.character)))
-                stop(gettextf("invalid arguments in '%s' (must be font names)",
-                              "postscriptFonts"), domain = NA)
+                stop(sprintf(gettext("invalid arguments in %s (must be font names)", domain = "R-grDevices"), sQuote("postscriptFonts")), domain = NA)
             else
                 get(".PostScript.Fonts", envir=.PSenv)[unlist(fonts)]
         } else {
             if (ndots != nnames)
-                stop(gettextf("invalid arguments in '%s' (need named args)",
-                              "postscriptFonts"), domain = NA)
+                stop(sprintf(gettext("invalid arguments in %s (need named args)", domain = "R-grDevices"), sQuote("postscriptFonts")), domain = NA)
             setFonts(fonts, fontNames, ".PostScript.Fonts")
         }
     }
@@ -588,14 +580,12 @@ pdfFonts <- function(...)
         nnames <- length(fontNames)
         if (nnames == 0L) {
             if (!all(sapply(fonts, is.character)))
-                stop(gettextf("invalid arguments in '%s' (must be font names)",
-                              "pdfFonts"), domain = NA)
+                stop(sprintf(gettext("invalid arguments in %s (must be font names)", domain = "R-grDevices"), sQuote("pdfFonts")), domain = NA)
             else
                 get(".PDF.Fonts", envir=.PSenv)[unlist(fonts)]
         } else {
             if (ndots != nnames)
-                stop(gettextf("invalid arguments in '%s' (need named args)",
-                              "pdfFonts"), domain = NA)
+                stop(sprintf(gettext("invalid arguments in %s (need named args)", domain = "R-grDevices"), sQuote("pdfFonts")), domain = NA)
             setFonts(fonts, fontNames, ".PDF.Fonts")
         }
     }
@@ -619,8 +609,7 @@ matchFont <- function(font, encoding) {
     if (is.null(font))
         stop("unknown font")
     if (!matchEncoding(font, encoding))
-        stop(gettextf("font encoding mismatch '%s'/'%s'",
-                      font$encoding, encoding), domain=NA)
+        stop(gettextf("font encoding mismatch '%s'/'%s'", font$encoding, encoding), domain = "R-grDevices")
 }
 
 # Function to initialise default PostScript and PDF fonts
@@ -956,7 +945,7 @@ embedFonts <- function(file, # The ps or pdf file to convert
                        )
 {
     if(!is.character(file) || length(file) != 1L || !nzchar(file))
-        stop("'file' must be a non-empty character string")
+        stop("'file' argument must be a non-empty character string")
     gsexe <- tools::find_gs_cmd()
     if(!nzchar(gsexe)) stop("GhostScript was not found")
     if(.Platform$OS.type == "windows") gsexe <- shortPathName(gsexe)
@@ -977,8 +966,7 @@ embedFonts <- function(file, # The ps or pdf file to convert
               fontpaths, options, shQuote(file))
     ret <- system2(gsexe, args)
     if(ret != 0)
-        stop(gettextf("status %d in running command '%s'", ret, cmd),
-             domain = NA)
+        stop(gettextf("status %d in running command '%s'", ret, cmd), domain = "R-grDevices")
     if(outfile != file) args[2] <- paste0(" -sOutputFile=", shQuote(outfile))
     cmd <- paste(c(shQuote(gsexe), args), collapse = " ")
     file.copy(tmpfile, outfile, overwrite = TRUE)

@@ -64,7 +64,7 @@ newPSOCKnode <- function(machine = "localhost", ...,
         cmd <- sprintf("nice +%d %s", as.integer(renice), cmd)
 
     if (manual) {
-        cat("Manually start worker on", machine, "with\n    ", cmd, "\n")
+        cat(gettextf("Manually start 'worker' on %s with\n    %s\n", machine, cmd, domain = "R-parallel"))
         utils::flush.console()
     } else {
         ## add the remote shell command if needed
@@ -138,9 +138,15 @@ print.SOCKcluster <- function(x, ...)
 {
     nc <- length(x)
     hosts <- unique(sapply(x, "[[", "host"))
-    msg <- sprintf(ngettext(length(hosts),
-                            "socket cluster with %d nodes on host %s",
-                            "socket cluster with %d nodes on hosts %s"),
+    if(length(hosts) == 1)
+    msg <- sprintf(ngettext(nc,
+                            "socket cluster with %d node on host %s",
+                            "socket cluster with %d nodes on host %s", domain = "R-parallel"),
+                   nc, sQuote(hosts))
+    else
+    msg <- sprintf(ngettext(nc,
+                            "socket cluster with %d node on hosts %s",
+                            "socket cluster with %d nodes on hosts %s", domain = "R-parallel"),
                    nc, paste(sQuote(hosts), collapse = ", "))
     cat(msg, "\n", sep = "")
     invisible(x)
@@ -151,9 +157,7 @@ print.SOCKnode <- print.SOCK0node <- function(x, ...)
     sendCall(x, eval, list(quote(Sys.getpid())))
     pid <- recvResult(x)
 
-    msg <- gettextf("node of a socket cluster on host %s with pid %d",
-                    sQuote(x[["host"]]), pid)
-    cat(msg, "\n", sep = "")
+    cat(gettextf("node of a socket cluster on host %s with pid %d", sQuote(x[["host"]]), pid, domain = "R-parallel"), "\n", sep = "")
     invisible(x)
 }
 
@@ -188,14 +192,14 @@ print.SOCKnode <- print.SOCK0node <- function(x, ...)
                TIMEOUT = {timeout <- value},
                XDR = {useXDR <- as.logical(value)})
     }
-    if (is.na(port)) stop("PORT must be specified")
+    if (is.na(port)) stop("'port' argument must be specified")
 
     ## We should not need to attach parallel, as we are running in the namespace.
 
     sinkWorkerOutput(outfile)
-    msg <- sprintf("starting worker pid=%d on %s at %s\n",
+    msg <- gettextf("starting worker pid=%d on %s at %s\n",
                    Sys.getpid(), paste(master, port, sep = ":"),
-                   format(Sys.time(), "%H:%M:%OS3"))
+                   format(Sys.time(), "%H:%M:%OS3"), domain = "R-parallel")
     cat(msg)
     slaveLoop(makeSOCKmaster(master, port, timeout, useXDR))
 }

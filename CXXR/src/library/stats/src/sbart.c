@@ -8,6 +8,7 @@
 #include "modreg.h"
 #include <math.h>
 #include <Rmath.h>
+#include "localization.h"
 
 /* sbart() : The cubic spline smoother
    -------
@@ -347,7 +348,7 @@ void F77_SUB(sbart)
 	fu = *crit;
 	if(tracing) Rprintf("%11g %12g\n", *lspar, CRIT(fu));
 	if(!R_FINITE(fu)) {
-	    REprintf("spar-finding: non-finite value %g; using BIG value\n", fu);
+	    REprintf(_("spar-finding: non-finite value %g; using BIG value\n"), fu);
 	    fu = 2. * BIG_f;
 	}
 

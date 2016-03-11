@@ -78,7 +78,7 @@ as.POSIXlt.character <- function(x, tz = "", format, ...)
 
 as.POSIXlt.numeric <- function(x, tz = "", origin, ...)
 {
-    if(missing(origin)) stop("'origin' must be supplied")
+    if(missing(origin)) stop(gettextf("'%s' argument must be specified", "origin"))
     as.POSIXlt(as.POSIXct(origin, tz = "UTC", ...) + x, tz = tz)
 }
 
@@ -88,10 +88,7 @@ as.POSIXlt.default <- function(x, tz = "", ...)
     if(inherits(x, "POSIXlt")) return(x)
     if(is.logical(x) && all(is.na(x)))
         return(as.POSIXlt(as.POSIXct.default(x), tz = tz))
-    stop(gettextf("do not know how to convert '%s' to class %s",
-                  deparse(substitute(x)),
-                  dQuote("POSIXlt")),
-         domain = NA)
+    stop(gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))), dQuote("POSIXlt")), domain = "R-base")
 }
 
 as.POSIXct <- function(x, tz = "", ...) UseMethod("as.POSIXct")
@@ -105,8 +102,7 @@ as.POSIXct.date <- function(x, ...)
     if(inherits(x, "date")) {
         x <- (x - 3653) * 86400 # origin 1960-01-01
         return(.POSIXct(x))
-    } else stop(gettextf("'%s' is not a \"date\" object",
-                         deparse(substitute(x)) ))
+    } else stop(gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Date")))
 }
 
 ## convert from package chron
@@ -118,8 +114,7 @@ as.POSIXct.dates <- function(x, ...)
         if(length(z) == 3L && is.numeric(z))
             x  <- x + as.numeric(ISOdate(z[3L], z[1L], z[2L], 0))
         return(.POSIXct(x))
-    } else stop(gettextf("'%s' is not a \"dates\" object",
-                         deparse(substitute(x)) ))
+    } else stop(gettextf("%s is not an object of class %s", sQuote(deparse(substitute(x))), dQuote("Dates")))
 }
 
 as.POSIXct.POSIXlt <- function(x, tz = "", ...)
@@ -136,7 +131,7 @@ as.POSIXct.POSIXlt <- function(x, tz = "", ...)
 
 as.POSIXct.numeric <- function(x, tz = "", origin, ...)
 {
-    if(missing(origin)) stop("'origin' must be supplied")
+    if(missing(origin)) stop(gettextf("'%s' argument must be specified", "origin"))
     .POSIXct(as.POSIXct(origin, tz = "GMT", ...) + x, tz)
 }
 
@@ -147,10 +142,7 @@ as.POSIXct.default <- function(x, tz = "", ...)
 	return(as.POSIXct(as.POSIXlt(x, tz, ...), tz, ...))
     if(is.logical(x) && all(is.na(x)))
         return(.POSIXct(as.numeric(x)))
-    stop(gettextf("do not know how to convert '%s' to class %s",
-                  deparse(substitute(x)),
-                  dQuote("POSIXct")),
-         domain = NA)
+    stop(gettextf("do not know how to convert %s to class %s", sQuote(deparse(substitute(x))), dQuote("POSIXct")), domain = "R-base")
 }
 
 as.double.POSIXlt <- function(x, ...) as.double(as.POSIXct(x))
@@ -161,7 +153,7 @@ length.POSIXlt <- function(x) length(x[[1L]])
 
 format.POSIXlt <- function(x, format = "", usetz = FALSE, ...)
 {
-    if(!inherits(x, "POSIXlt")) stop("wrong class")
+    if(!inherits(x, "POSIXlt")) stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("POSIXlt")))
     if(any(f0 <- format == "")) {
         ## need list [ method here.
 	times <- unlist(unclass(x)[1L:3L])[f0]
@@ -205,7 +197,7 @@ strptime <- function(x, format, tz = "")
 
 format.POSIXct <- function(x, format = "", tz = "", usetz = FALSE, ...)
 {
-    if(!inherits(x, "POSIXct")) stop("wrong class")
+    if(!inherits(x, "POSIXct")) stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("POSIXct")))
     if(missing(tz) && !is.null(tzone <- attr(x, "tzone"))) tz <- tzone
     structure(format.POSIXlt(as.POSIXlt(x, tz), format, usetz, ...),
               names = names(x))
@@ -217,8 +209,10 @@ print.POSIXct <- function(x, ...)
     max.print <- getOption("max.print", 9999L)
     if(max.print < length(x)) {
         print(format(x[seq_len(max.print)], usetz = TRUE), ...)
-        cat(' [ reached getOption("max.print") -- omitted',
-            length(x) - max.print, 'entries ]\n')
+	cat(sprintf(ngettext(as.integer(length(x) - max),
+			" [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",
+			" [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base"),
+			length(x) - max), "\n", sep = "")
     } else print(format(x, usetz = TRUE), ...)
     invisible(x)
 }
@@ -228,8 +222,10 @@ print.POSIXlt <- function(x, ...)
     max.print <- getOption("max.print", 9999L)
     if(max.print < length(x)) {
         print(format(x[seq_len(max.print)], usetz = TRUE), ...)
-        cat(' [ reached getOption("max.print") -- omitted',
-            length(x) - max.print, 'entries ]\n')
+        cat(sprintf(ngettext(as.integer(length(x) - max.print),
+	" [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",
+	" [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base"),
+            length(x) - max.print), "\n", sep = "")
    } else print(format(x, usetz = TRUE), ...)
     invisible(x)
 }
@@ -262,7 +258,7 @@ summary.POSIXlt <- function(object, digits = 15, ...)
     if (nargs() == 1) return(e1)
     # only valid if one of e1 and e2 is a scalar/difftime
     if(inherits(e1, "POSIXt") && inherits(e2, "POSIXt"))
-        stop("binary '+' is not defined for \"POSIXt\" objects")
+        stop(gettextf("binary '%s' operator is not defined for objects of class %s", "+", dQuote("POSIXt")))
     if(inherits(e1, "POSIXlt")) e1 <- as.POSIXct(e1)
     if(inherits(e2, "POSIXlt")) e2 <- as.POSIXct(e2)
     if (inherits(e1, "difftime")) e1 <- coerceTimeUnit(e1)
@@ -278,12 +274,12 @@ summary.POSIXlt <- function(object, digits = 15, ...)
                          secs = x, mins = 60*x, hours = 60*60*x,
                          days = 60*60*24*x, weeks = 60*60*24*7*x))
     if(!inherits(e1, "POSIXt"))
-        stop("can only subtract from \"POSIXt\" objects")
-    if (nargs() == 1) stop("unary '-' is not defined for \"POSIXt\" objects")
+        stop(gettextf("can only subtract from objects of class %s", dQuote("POSIXt")))
+    if (nargs() == 1) stop(gettextf("unary '%s' operator is not defined for objects of class %s", "-", dQuote("POSIXt")))
     if(inherits(e2, "POSIXt")) return(difftime(e1, e2))
     if (inherits(e2, "difftime")) e2 <- coerceTimeUnit(e2)
     if(!is.null(attr(e2, "class")))
-        stop("can only subtract numbers from \"POSIXt\" objects")
+        stop(gettextf("can only subtract numbers from objects of class %s", dQuote("POSIXt")))
     e1 <- as.POSIXct(e1)
     .POSIXct(unclass(e1) - e2, attr(e1, "tzone"))
 }
@@ -291,13 +287,10 @@ summary.POSIXlt <- function(object, digits = 15, ...)
 Ops.POSIXt <- function(e1, e2)
 {
     if (nargs() == 1)
-        stop(gettextf("unary '%s' not defined for \"POSIXt\" objects",
-                      .Generic), domain = NA)
-    boolean <- switch(.Generic, "<" = , ">" = , "==" = ,
-                      "!=" = , "<=" = , ">=" = TRUE, FALSE)
+        stop(gettextf("unary '%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt")), domain = "R-base")
+    boolean <- switch(.Generic, "<" = , ">" = , "==" = , "!=" = , "<=" = , ">=" = TRUE, FALSE)
     if (!boolean)
-        stop(gettextf("'%s' not defined for \"POSIXt\" objects", .Generic),
-             domain = NA)
+        stop(gettextf("binary '%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt")), domain = "R-base")
     if(inherits(e1, "POSIXlt") || is.character(e1)) e1 <- as.POSIXct(e1)
     if(inherits(e2, "POSIXlt") || is.character(e2)) e2 <- as.POSIXct(e2)
     check_tzones(e1, e2)
@@ -306,8 +299,7 @@ Ops.POSIXt <- function(e1, e2)
 
 Math.POSIXt <- function (x, ...)
 {
-    stop(gettextf("'%s' not defined for \"POSIXt\" objects", .Generic),
-         domain = NA)
+    stop(gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt")), domain = "R-base")
 }
 
 check_tzones <- function(...)
@@ -326,8 +318,7 @@ Summary.POSIXct <- function (..., na.rm)
 {
     ok <- switch(.Generic, max = , min = , range = TRUE, FALSE)
     if (!ok)
-        stop(gettextf("'%s' not defined for \"POSIXt\" objects", .Generic),
-             domain = NA)
+        stop(gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt")), domain = "R-base")
     args <- list(...)
     tz <- do.call("check_tzones", args)
     val <- NextMethod(.Generic)
@@ -340,8 +331,7 @@ Summary.POSIXlt <- function (..., na.rm)
 {
     ok <- switch(.Generic, max = , min = , range = TRUE, FALSE)
     if (!ok)
-        stop(gettextf("'%s' not defined for \"POSIXt\" objects", .Generic),
-             domain = NA)
+        stop(gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("POSIXt")), domain = "R-base")
     args <- list(...)
     tz <- do.call("check_tzones", args)
     args <- lapply(args, as.POSIXct)
@@ -481,10 +471,10 @@ as.difftime <- function(tim, format = "%X", units = "auto")
         difftime(strptime(tim, format = format),
              strptime("0:0:0", format = "%X"), units = units)
     } else {
-        if (!is.numeric(tim)) stop("'tim' is not character or numeric")
-	if (units == "auto") stop("need explicit units for numeric conversion")
+        if (!is.numeric(tim)) stop("'tim' argument is not character or numeric")
+	if (units == "auto") stop("'as.difftime()' function needs explicit 'units' argument for numeric conversion")
         if (!(units %in% c("secs", "mins", "hours", "days", "weeks")))
-	    stop("invalid units specified")
+	    stop("invalid 'units' specified")
         structure(tim, units = units, class = "difftime")
     }
 }
@@ -501,7 +491,7 @@ units.difftime <- function(x) attr(x, "units")
     from <- units(x)
     if (from == value) return(x)
     if (!(value %in% c("secs", "mins", "hours", "days", "weeks")))
-        stop("invalid units specified")
+	stop("invalid 'units' specified")
     sc <- cumprod(c(secs = 1, mins = 60, hours = 60, days = 24, weeks = 7))
     newx <- unclass(x) * as.vector(sc[from]/sc[value])
     .difftime(newx, value)
@@ -522,14 +512,21 @@ format.difftime <- function(x,...) paste(format(unclass(x),...), units(x))
 print.difftime <- function(x, digits = getOption("digits"), ...)
 {
     if(is.array(x) || length(x) > 1L) {
-        cat("Time differences in ", attr(x, "units"), "\n", sep = "")
+        if(attr(x, "units") == "secs") cat(gettext("Time differences in seconds", domain = "R-base"), "\n", sep = "")
+        else if(attr(x, "units") == "mins") cat(gettext("Time differences in minutes", domain = "R-base"), "\n", sep = "")
+        else if(attr(x, "units") == "hours") cat(gettext("Time differences in hours", domain = "R-base"), "\n", sep = "")
+        else if(attr(x, "units") == "days") cat(gettext("Time differences in days", domain = "R-base"), "\n", sep = "")
+        else cat(gettext("Time differences in weeks", domain = "R-base"), "\n", sep = "")
         y <- unclass(x); attr(y, "units") <- NULL
         print(y)
     }
-    else
-        cat("Time difference of ", format(unclass(x), digits = digits), " ",
-            attr(x, "units"), "\n", sep = "")
-
+    else {
+        if(attr(x, "units") == "secs") cat(gettextf("Time difference of %s seconds", format(unclass(x), digits = digits), domain = "R-base"), "\n", sep = "")
+        else if(attr(x, "units") == "mins") cat(gettextf("Time difference of %s minutes", format(unclass(x), digits = digits), domain = "R-base"), "\n", sep = "")
+        else if(attr(x, "units") == "hours") cat(gettextf("Time difference of %s hours", format(unclass(x), digits = digits), domain = "R-base"), "\n", sep = "")
+        else if(attr(x, "units") == "days") cat(gettextf("Time difference of %s days", format(unclass(x), digits = digits), domain = "R-base"), "\n", sep = "")
+        else cat(gettextf("Time difference of %s weeks", format(unclass(x), digits = digits), domain = "R-base"), "\n", sep = "")
+    }
     invisible(x)
 }
 
@@ -553,8 +550,7 @@ Ops.difftime <- function(e1, e2)
     }
     if (nargs() == 1) {
         switch(.Generic, "+" = {}, "-" = {e1[] <- -unclass(e1)},
-               stop(gettextf("unary '%s' not defined for \"difftime\" objects",
-                             .Generic), domain = NA, call. = FALSE)
+               stop(gettextf("unary '%s' operator is not defined for objects of class %s", .Generic, dQuote("difftime")), domain = "R-base", call. = FALSE)
                )
         return(e1)
     }
@@ -584,8 +580,7 @@ Ops.difftime <- function(e1, e2)
         }
     } else {
         ## '*' is covered by a specific method
-        stop(gettextf("'%s' not defined for \"difftime\" objects", .Generic),
-             domain = NA)
+        stop(gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("difftime")), domain = "R-base")
     }
 }
 
@@ -593,7 +588,7 @@ Ops.difftime <- function(e1, e2)
 {
     ## need one scalar, one difftime.
     if(inherits(e1, "difftime") && inherits(e2, "difftime"))
-        stop("both arguments of * cannot be \"difftime\" objects")
+        stop(gettextf("both arguments of '%s' operator cannot be objects of class %s", "*", dQuote("difftime")))
     if(inherits(e2, "difftime")) {tmp <- e1; e1 <- e2; e2 <- tmp}
     .difftime(e2 * unclass(e1), attr(e1, "units"))
 }
@@ -602,7 +597,7 @@ Ops.difftime <- function(e1, e2)
 {
     ## need one scalar, one difftime.
     if(inherits(e2, "difftime"))
-        stop("second argument of / cannot be a \"difftime\" object")
+        stop(gettextf("second argument of '/' operator cannot be an object of class %s", dQuote("difftime")))
     .difftime(unclass(e1) / e2, attr(e1, "units"))
 }
 
@@ -616,8 +611,7 @@ Math.difftime <- function (x, ...)
                .difftime(NextMethod(), units)
            },
            ### otherwise :
-           stop(gettextf("'%s' not defined for \"difftime\" objects", .Generic),
-                domain = NA))
+           stop(gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("difftime")), domain = "R-base"))
 }
 
 
@@ -635,8 +629,7 @@ Summary.difftime <- function (..., na.rm)
     }
     ok <- switch(.Generic, max = , min = , sum=, range = TRUE, FALSE)
     if (!ok)
-        stop(gettextf("'%s' not defined for \"difftime\" objects", .Generic),
-             domain = NA)
+        stop(gettextf("'%s' operator is not defined for objects of class %s", .Generic, dQuote("difftime")), domain = "R-base")
     x <- list(...)
     Nargs <- length(x)
     if(Nargs == 0) {
@@ -685,19 +678,19 @@ function(..., recursive = FALSE)
 seq.POSIXt <-
     function(from, to, by, length.out = NULL, along.with = NULL, ...)
 {
-    if (missing(from)) stop("'from' must be specified")
-    if (!inherits(from, "POSIXt")) stop("'from' must be a \"POSIXt\" object")
+    if (missing(from)) stop(gettextf("'%s' argument must be specified", "from"))
+    if (!inherits(from, "POSIXt")) stop(gettextf("'%s' argument must be an object of class %s", "from", dQuote("POSIXt")))
     cfrom <- as.POSIXct(from)
-    if(length(cfrom) != 1L) stop("'from' must be of length 1")
+    if(length(cfrom) != 1L) stop(gettextf("'%s' argument must be of length 1", "from"))
     tz <- attr(cfrom , "tzone")
     if (!missing(to)) {
-        if (!inherits(to, "POSIXt")) stop("'to' must be a \"POSIXt\" object")
-        if (length(as.POSIXct(to)) != 1) stop("'to' must be of length 1")
+        if (!inherits(to, "POSIXt")) stop(gettextf("'%s' argument must be an object of class %s", "to", dQuote("POSIXt")))
+        if (length(as.POSIXct(to)) != 1) stop(gettextf("'%s' argument must be of length 1", "to"))
     }
     if (!missing(along.with)) {
         length.out <- length(along.with)
     }  else if (!is.null(length.out)) {
-        if (length(length.out) != 1L) stop("'length.out' must be of length 1")
+        if (length(length.out) != 1L) stop(gettextf("'%s' argument must be of length 1", "length.out"))
         length.out <- ceiling(length.out)
     }
     status <- c(!missing(to), !missing(by), !is.null(length.out))
@@ -713,7 +706,7 @@ seq.POSIXt <-
         return(.POSIXct(res, tz))
     }
 
-    if (length(by) != 1L) stop("'by' must be of length 1")
+    if (length(by) != 1L) stop(gettextf("'%s' argument must be of length 1", "by"))
     valid <- 0L
     if (inherits(by, "difftime")) {
         by <- switch(attr(by,"units"), secs = 1, mins = 60, hours = 3600,
@@ -721,18 +714,16 @@ seq.POSIXt <-
     } else if(is.character(by)) {
         by2 <- strsplit(by, " ", fixed = TRUE)[[1L]]
         if(length(by2) > 2L || length(by2) < 1L)
-            stop("invalid 'by' string")
-        valid <- pmatch(by2[length(by2)],
-                        c("secs", "mins", "hours", "days", "weeks",
-                          "months", "years", "DSTdays", "quarters"))
-        if(is.na(valid)) stop("invalid string for 'by'")
+            stop("invalid string for 'by' argument")
+        valid <- pmatch(by2[length(by2)], c("secs", "mins", "hours", "days", "weeks", "months", "years", "DSTdays", "quarters"))
+        if(is.na(valid)) stop("invalid string for 'by' argument")
         if(valid <= 5L) {
             by <- c(1, 60, 3600, 86400, 7*86400)[valid]
             if (length(by2) == 2L) by <- by * as.integer(by2[1L])
         } else
             by <- if(length(by2) == 2L) as.integer(by2[1L]) else 1
-    } else if(!is.numeric(by)) stop("invalid mode for 'by'")
-    if(is.na(by)) stop("'by' is NA")
+    } else if(!is.numeric(by)) stop("invalid mode for 'by' argument")
+    if(is.na(by)) stop(gettextf("'%s' argument is NA", "by"))
 
     if(valid <= 5L) { # secs, mins, hours, days, weeks
         from <- unclass(as.POSIXct(from))
@@ -787,7 +778,7 @@ cut.POSIXt <-
     function (x, breaks, labels = NULL, start.on.monday = TRUE,
               right = FALSE, ...)
 {
-    if(!inherits(x, "POSIXt")) stop("'x' must be a date-time object")
+    if(!inherits(x, "POSIXt")) stop(gettextf("'%s' argument must be an object of class %s", "x", dQuote("POSIXt")))
     x <- as.POSIXct(x)
 
     if (inherits(breaks, "POSIXt")) {
@@ -871,7 +862,7 @@ julian <- function(x, ...) UseMethod("julian")
 julian.POSIXt <- function(x, origin = as.POSIXct("1970-01-01", tz = "GMT"), ...)
 {
     origin <- as.POSIXct(origin)
-    if(length(origin) != 1L) stop("'origin' must be of length one")
+    if(length(origin) != 1L) stop(gettextf("'%s' argument must be of length 1", "origin"))
     res <- difftime(as.POSIXct(x), origin, units = "days")
     structure(res, "origin" = origin)
 }
@@ -969,7 +960,7 @@ diff.POSIXt <- function (x, lag = 1L, differences = 1L, ...)
     r <- if(inherits(x, "POSIXlt")) as.POSIXct(x) else x
     xlen <- if (ismat) dim(x)[1L] else length(r)
     if (length(lag) != 1L || length(differences) > 1L || lag < 1L || differences < 1L)
-        stop("'lag' and 'differences' must be integers >= 1")
+        stop("'lag' and 'differences' arguments must be integers >= 1")
     if (lag * differences >= xlen) return(.difftime(numeric(), "secs"))
     i1 <- -seq_len(lag)
     if (ismat) for (i in seq_len(differences)) r <- r[i1, , drop = FALSE] -

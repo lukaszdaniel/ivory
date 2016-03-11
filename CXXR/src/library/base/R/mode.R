@@ -34,7 +34,7 @@ mode <- function(x) {
 `mode<-` <- function(x, value)
 {
     if (storage.mode(x) == value) return(x)
-    if(is.factor(x)) stop("invalid to change the storage mode of a factor")
+    if(is.factor(x)) stop("cannot change the storage mode of a factor")
     atr <- attributes(x)
     isSingle <- !is.null(attr(x, "Csingle"))
     setSingle <- value == "single"

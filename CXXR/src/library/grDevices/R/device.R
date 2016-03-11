@@ -251,7 +251,7 @@ dev.copy2pdf <- function(..., out.type = "pdf")
 dev.control <- function(displaylist = c("inhibit", "enable"))
 {
     if(dev.cur() <= 1)
-        stop("dev.control() called without an open graphics device")
+        stop(gettextf("'%s' function called without an open graphics device", "dev.control()"))
     if(!missing(displaylist)) {
         displaylist <- match.arg(displaylist)
 	.External(C_devcontrol, displaylist == "enable")
@@ -262,7 +262,7 @@ dev.control <- function(displaylist = c("inhibit", "enable"))
 dev.displaylist <- function()
 {
     if(dev.cur() <= 1)
-        stop("dev.displaylist() called without an open graphics device")
+        stop(gettextf("'%s' function called without an open graphics device", "dev.displaylist()"))
     .External(C_devdisplaylist)
 }
 
@@ -291,7 +291,7 @@ dev.new <- function(..., noRStudioGD = FALSE)
         dev <- if(exists(dev, .GlobalEnv)) get(dev, .GlobalEnv)
         else if(exists(dev, asNamespace("grDevices")))
             get(dev, asNamespace("grDevices"))
-        else stop(gettextf("device '%s' not found", dev), domain=NA)
+        else stop(gettextf("device '%s' was not found", dev), domain = "R-grDevices")
     }
     ## only include named args in the devices's arglist
     a <- list(...)
@@ -301,18 +301,16 @@ dev.new <- function(..., noRStudioGD = FALSE)
         ## Take care not to open device on top of another.
         if(is.null(a[["file"]]) && file.exists("Rplots.pdf")) {
             fe <- file.exists(tmp <- paste0("Rplots", 1L:999, ".pdf"))
-            if(all(fe)) stop("no suitable unused file name for pdf()")
-            message(gettextf("dev.new(): using pdf(file=\"%s\")", tmp[!fe][1L]),
-                    domain=NA)
+            if(all(fe)) stop(gettextf("no suitable unused file name for '%s'", "pdf()"))
+            message(gettextf("dev.new(): using '%s'", paste("pdf(file=\"", tmp[!fe][1L], "\")", collapse = "")), domain = "R-grDevices")
             a$file <- tmp[!fe][1L]
         }
     } else if(identical(dev, postscript)) {
         ## Take care not to open device on top of another.
         if(is.null(a[["file"]]) && file.exists("Rplots.ps")) {
             fe <- file.exists(tmp <- paste0("Rplots", 1L:999, ".ps"))
-            if(all(fe)) stop("no suitable unused file name for postscript()")
-            message(gettextf("dev.new(): using postscript(file=\"%s\")",
-                             tmp[!fe][1L]), domain=NA)
+            if(all(fe)) stop(gettextf("no suitable unused file name for '%s'", "postscript()"))
+            message(gettextf("dev.new(): using '%s'", paste("postscript(file=\"", tmp[!fe][1L], "\")", collapse = "")), domain = "R-grDevices")
             a$file <- tmp[!fe][1L]
         }
     } else if (!is.null(a[["width"]]) && !is.null(a[["height"]]) &&

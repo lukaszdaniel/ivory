@@ -35,11 +35,8 @@ function(dir, outDir, builtStamp=character())
     ok <- .check_package_description(file.path(dir, "DESCRIPTION"))
     if(any(as.integer(lengths(ok)) > 0L)) {
         stop(paste(gettext("Invalid DESCRIPTION file") ,
-                   paste(.eval_with_capture(print(ok))$output,
-                         collapse = "\n"),
-                   sep = "\n\n"),
-             domain = NA,
-             call. = FALSE)
+                   paste(.eval_with_capture(print(ok))$output, collapse = "\n"), sep = "\n\n"),
+             domain = "R-tools", call. = FALSE)
     }
 
     ## This reads (in C locale) byte-by-byte, declares latin1 or UTF-8
@@ -51,10 +48,7 @@ function(dir, outDir, builtStamp=character())
     nm <- names(db)
     if("Built" %in% nm) {
         db <- db[-match("Built", nm)]
-        warning(gettextf("*** someone has corrupted the Built field in package '%s' ***",
-                         db["Package"]),
-                domain = NA,
-                call. = FALSE)
+        warning(gettextf("*** someone has corrupted the Built field in package %s ***", sQuote(db["Package"])), domain = "R-tools", call. = FALSE)
     }
 
     OStype <- R.version$platform
@@ -94,9 +88,7 @@ function(dir, outDir, builtStamp=character())
 
     outMetaDir <- file.path(outDir, "Meta")
     if(!dir.exists(outMetaDir) && !dir.create(outMetaDir))
-         stop(gettextf("cannot open directory '%s'",
-                       outMetaDir),
-              domain = NA)
+         stop(gettextf("cannot open directory %s", sQuote(outMetaDir)), domain = "R-tools")
     saveInfo <- .split_description(db)
     saveRDS(saveInfo, file.path(outMetaDir, "package.rds"))
 
@@ -112,10 +104,7 @@ function(db, verbose = FALSE)
     if(!is.na(Built <- db["Built"])) {
         Built <- as.list(strsplit(Built, "; ")[[1L]])
         if(length(Built) != 4L) {
-            warning(gettextf("*** someone has corrupted the Built field in package '%s' ***",
-                             db["Package"]),
-                    domain = NA,
-                    call. = FALSE)
+            warning(gettextf("*** someone has corrupted the Built field in package %s ***", sQuote(db["Package"])), domain = "R-tools", call. = FALSE)
             Built <- NULL
         } else {
             names(Built) <- c("R", "Platform", "Date", "OStype")
@@ -166,7 +155,7 @@ function(dir, packages)
     for(p in unlist(strsplit(packages, "[[:space:]]+"))) {
         meta_dir <- file.path(dir, p, "Meta")
         if(!dir.exists(meta_dir) && !dir.create(meta_dir))
-            stop(gettextf("cannot open directory '%s'", meta_dir))
+            stop(gettextf("cannot open directory %s", sQuote(meta_dir)))
         package_info_dcf_file <- file.path(dir, p, "DESCRIPTION")
         package_info_rds_file <- file.path(meta_dir, "package.rds")
         if(file_test("-nt",
@@ -206,8 +195,7 @@ function(lib.loc = NULL)
 function(dir, outDir)
 {
     if(!dir.exists(dir))
-        stop(gettextf("directory '%s' does not exist", dir),
-             domain = NA)
+        stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
     dir <- file_path_as_absolute(dir)
 
     ## Attempt to set the LC_COLLATE locale to 'C' to turn off locale
@@ -243,37 +231,36 @@ function(dir, outDir)
         badFiles <-
             unique(codeFilesInCspec[duplicated(codeFilesInCspec)])
         if(length(badFiles)) {
-            out <- gettextf("\nduplicated files in '%s' field:",
-                            collationField)
+            out <- gettextf("\nduplicated files in %s field:", sQuote(collationField))
             out <- paste(out,
                          paste(" ", badFiles, collapse = "\n"),
                          sep = "\n")
-            stop(out, domain = NA)
+            stop(out, domain = "R-tools")
         }
         ## See which files are listed in the collation spec but don't
         ## exist.
         badFiles <- setdiff(codeFilesInCspec, codeFiles)
         if(length(badFiles)) {
-            out <- gettextf("\nfiles in '%s' field missing from '%s':",
-                            collationField,
-                            codeDir)
+            out <- gettextf("\nfiles in %s field missing from %s:",
+                            sQuote(collationField),
+                            sQuote(codeDir))
             out <- paste(out,
                          paste(" ", badFiles, collapse = "\n"),
                          sep = "\n")
-            stop(out, domain = NA)
+            stop(out, domain = "R-tools")
         }
         ## See which files exist but are missing from the collation
         ## spec.  Note that we do not want the collation spec to use
         ## only a subset of the available code files.
         badFiles <- setdiff(codeFiles, codeFilesInCspec)
         if(length(badFiles)) {
-            out <- gettextf("\nfiles in '%s' missing from '%s' field:",
-                            codeDir,
-                            collationField)
+            out <- gettextf("\nfiles in %s missing from %s field:",
+                            sQuote(codeDir),
+                            sQuote(collationField))
             out <- paste(out,
                          paste(" ", badFiles, collapse = "\n"),
                          sep = "\n")
-            stop(out, domain = NA)
+            stop(out, domain = "R-tools")
         }
         ## Everything's groovy ...
         codeFiles <- codeFilesInCspec
@@ -282,15 +269,13 @@ function(dir, outDir)
     codeFiles <- file.path(codeDir, codeFiles)
 
     if(!dir.exists(outDir) && !dir.create(outDir))
-        stop(gettextf("cannot open directory '%s'", outDir),
-             domain = NA)
+        stop(gettextf("cannot open directory %s", sQuote(outDir)), domain = "R-tools")
     outCodeDir <- file.path(outDir, "R")
     if(!dir.exists(outCodeDir) && !dir.create(outCodeDir))
-        stop(gettextf("cannot open directory '%s'", outCodeDir),
-             domain = NA)
+        stop(gettextf("cannot open directory %s", sQuote(outCodeDir)), domain = "R-tools")
     outFile <- file.path(outCodeDir, db["Package"])
     if(!file.create(outFile))
-        stop(gettextf("unable to create '%s'", outFile), domain = NA)
+        stop(gettextf("unable to create file %s", sQuote(outFile)), domain = "R-tools")
     writeLines(paste0(".packageName <- \"", db["Package"], "\""),
                outFile)
     enc <- as.vector(db["Encoding"])
@@ -304,7 +289,7 @@ function(dir, outDir)
             if(length(bad <- which(is.na(tmp)))) {
                 warning(sprintf(ngettext(length(bad),
                                          "unable to re-encode %s line %s",
-                                         "unable to re-encode %s lines %s"),
+                                         "unable to re-encode %s lines %s", domain = "R-tools"),
                                 sQuote(basename(f)),
                                 paste(bad, collapse = ", ")),
                         domain = NA, call. = FALSE)
@@ -343,11 +328,9 @@ function(dir, outDir)
 {
     options(warn = 1)                   # to ensure warnings get seen
     if(!dir.exists(dir))
-        stop(gettextf("directory '%s' does not exist", dir),
-             domain = NA)
+        stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
     if(!dir.exists(outDir))
-        stop(gettextf("directory '%s' does not exist", outDir),
-             domain = NA)
+        stop(gettextf("directory %s does not exist", sQuote(outDir)), domain = "R-tools")
 
     ## If there is an @file{INDEX} file in the package sources, we
     ## install this, and do not build it.
@@ -355,14 +338,11 @@ function(dir, outDir)
         if(!file.copy(file.path(dir, "INDEX"),
                       file.path(outDir, "INDEX"),
                       overwrite = TRUE))
-            stop(gettextf("unable to copy INDEX to '%s'",
-                          file.path(outDir, "INDEX")),
-                 domain = NA)
+            stop(gettextf("unable to copy INDEX to %s", sQuote(file.path(outDir, "INDEX"))), domain = "R-tools")
 
     outMetaDir <- file.path(outDir, "Meta")
     if(!dir.exists(outMetaDir) && !dir.create(outMetaDir))
-         stop(gettextf("cannot open directory '%s'", outMetaDir),
-              domain = NA)
+         stop(gettextf("cannot open directory %s", sQuote(outMetaDir)), domain = "R-tools")
     .install_package_Rd_indices(dir, outDir)
     .install_package_demo_index(dir, outDir)
     invisible()
@@ -533,8 +513,8 @@ function(dir, outDir, encoding = "")
             file <- basename(file)
             enc <- vigns$encodings[i]
 
-            cat("  ", sQuote(basename(file)),
-                if(nzchar(enc)) paste("using", sQuote(enc)), "\n")
+            if(nzchar(enc)) cat("  ", gettextf("%s is using %s encoding", sQuote(basename(file)), sQuote(enc), domain = "R-tools"), "\n", sep = "")
+            else cat("  ", sQuote(basename(file)), "\n", sep = "")
 
 	    engine <- try(vignetteEngine(vigns$engines[i]), silent = TRUE)
 	    if (!inherits(engine, "try-error"))
@@ -660,8 +640,7 @@ function(dir, outDir, keep.source = TRUE)
     outDir <- file_path_as_absolute(outDir)
     outVignetteDir <- file.path(outDir, "doc")
     if(!dir.exists(outVignetteDir) && !dir.create(outVignetteDir))
-        stop(gettextf("cannot open directory '%s'", outVignetteDir),
-             domain = NA)
+        stop(gettextf("cannot open directory %s", sQuote(outVignetteDir)), domain = "R-tools")
 
     ## We have to be careful to avoid repeated rebuilding.
     vignettePDFs <-
@@ -680,7 +659,7 @@ function(dir, outDir, keep.source = TRUE)
         stop("current working directory cannot be ascertained")
     buildDir <- file.path(cwd, ".vignettes")
     if(!dir.exists(buildDir) && !dir.create(buildDir))
-        stop(gettextf("cannot create directory '%s'", buildDir), domain = NA)
+        stop(gettextf("cannot create directory %s", sQuote(buildDir)), domain = "R-tools")
     on.exit(setwd(cwd))
     setwd(buildDir)
 
@@ -691,8 +670,7 @@ function(dir, outDir, keep.source = TRUE)
         name <- vigns$names[i]
         engine <- vignetteEngine(vigns$engines[i])
 
-        message(gettextf("processing %s", sQuote(basename(file))),
-                domain = NA)
+        message(gettextf("processing file %s", sQuote(basename(file))), domain = "R-tools")
 
         ## Note that contrary to all other weave/tangle calls, here
         ## 'file' is not a file in the current directory [hence no
@@ -704,9 +682,7 @@ function(dir, outDir, keep.source = TRUE)
             setwd(buildDir)
             find_vignette_product(name, by = "weave", engine = engine)
         }, error = function(e) {
-            stop(gettextf("running %s on vignette '%s' failed with message:\n%s",
-                 engine[["name"]], file, conditionMessage(e)),
-                 domain = NA, call. = FALSE)
+            stop(gettextf("running %s on vignette %s failed with message:\n%s", engine[["name"]], sQuote(file), conditionMessage(e)), domain = "R-tools", call. = FALSE)
         })
         ## In case of an error, do not clean up: should we point to
         ## buildDir for possible inspection of results/problems?
@@ -720,18 +696,13 @@ function(dir, outDir, keep.source = TRUE)
                 texi2pdf(file = output, quiet = TRUE, texinputs = vigns$dir)
                 output <- find_vignette_product(name, by = "texi2pdf", engine = engine)
             }, error = function(e) {
-                stop(gettextf("compiling TeX file %s failed with message:\n%s",
-                 sQuote(output), conditionMessage(e)),
-                 domain = NA, call. = FALSE)
+                stop(gettextf("compiling TeX file %s failed with message:\n%s", sQuote(output), conditionMessage(e)), domain = "R-tools", call. = FALSE)
             })
 	    ## </FIXME>
 	}
 
         if(!file.copy(output, outVignetteDir, overwrite = TRUE))
-            stop(gettextf("cannot copy '%s' to '%s'",
-                          output,
-                          outVignetteDir),
-                 domain = NA)
+            stop(gettextf("cannot copy file %s to directory %s", sQuote(output), sQuote(outVignetteDir)), domain = "R-tools")
     }
     ## Need to change out of this dir before we delete it,
     ## at least on Windows.
@@ -756,8 +727,7 @@ function(dir, outDir)
     nsInfo <- parseNamespaceFile(basename(dir), dirname(dir))
     outMetaDir <- file.path(outDir, "Meta")
     if(!dir.exists(outMetaDir) && !dir.create(outMetaDir))
-        stop(gettextf("cannot open directory '%s'", outMetaDir),
-             domain = NA)
+        stop(gettextf("cannot open directory %s", sQuote(outMetaDir)), domain = "R-tools")
     saveRDS(nsInfo, nsInfoFilePath)
     invisible()
 }
@@ -890,13 +860,10 @@ function(dir)
                 if(!nzchar(package))
                     package <- meta["Package"]
                 msg <- if(nzchar(package))
-                    gettextf("ERROR: this R is version %s, package '%s' requires R %s %s",
-                                    current, package,
-                                    depends$op, depends$version)
+                    gettextf("ERROR: this R is version %s, package %s requires R %s", current, sQuote(package), paste(depends$op, depends$version, collapse = " "))
                 else
-                    gettextf("ERROR: this R is version %s, required is R %s %s",
-                                    current, depends$op, depends$version)
-                message(strwrap(msg, exdent = 2L))
+                    gettextf("ERROR: this R is version %s, required is R %s", current, paste(depends$op, depends$version, collapse = " "))
+                message(strwrap(msg, exdent = 2L), domain = "R-tools")
                 break
             }
         }
@@ -917,7 +884,7 @@ function(dir)
     options(warn = 1)
     res <- try(suppressPackageStartupMessages(library(pkg_name, lib.loc = lib, character.only = TRUE, logical.return = TRUE)))
     if (inherits(res, "try-error") || !res)
-        stop("loading failed", call. = FALSE)
+        stop("loading package failed", call. = FALSE)
 }
 
 
@@ -1070,8 +1037,8 @@ format.compactPDF <- function(x, ratio = 0.9, diff = 1e4, ...)
     z[] <- lapply(y, function(x) sprintf("%.0fKb", x/1024))
     large <- y$new >= 1024^2
     z[large, ] <- lapply(y[large, ], function(x) sprintf("%.1fMb", x/1024^2))
-    paste('  compacted', sQuote(basename(row.names(y))),
-          'from', z[, 1L], 'to', z[, 2L])
+    #paste("  compacted", sQuote(basename(row.names(y))), "from", z[, 1L], "to", z[, 2L])
+    gettextf("  compacted %s from %s to %s", sQuote(basename(row.names(y))), z[, 1L], z[, 2L], domain = "R-tools")
 }
 
 ### * add_datalist

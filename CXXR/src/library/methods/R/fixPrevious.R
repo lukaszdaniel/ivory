@@ -29,9 +29,7 @@ fixPre1.8 <- function(names, where = topenv(parent.frame())) {
     for(what in names) {
         objWhere <- .findAll(what, where)
         if(length(objWhere) == 0) {
-            warning(gettextf("object %s not found",
-                             sQuote(what)),
-                    domain = NA)
+            warning(gettextf("object %s was not found", sQuote(what)), domain = "R-methods")
             next
         }
         objWhere <- objWhere[[1L]]
@@ -55,20 +53,13 @@ fixPre1.8 <- function(names, where = topenv(parent.frame())) {
                                      sQuote(what),
                                      dQuote(Class),
                                      sQuote(ClassDef@package)),
-                            domain = NA)
+                            domain = "R-methods")
             }
             else
-                warning(gettextf("no definition for the class of %s (class %s) found",
-                                 sQuote(what),
-                                 dQuote(class)),
-                        domain = NA)
+                warning(gettextf("no definition for the class of %s (class %s) found", sQuote(what), dQuote(class)), domain = "R-methods")
         }
         else
-            warning(gettextf("object %s not changed (it does not appear to be from a version of R earlier than 1.8.0)",
-                             sQuote(what)),
-                    domain = NA)
+            warning(gettextf("object %s not changed (it does not appear to be from a version of R earlier than 1.8.0)", sQuote(what)), domain = "R-methods")
     }
     done
 }
-
-

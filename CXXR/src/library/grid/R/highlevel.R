@@ -99,7 +99,7 @@ grid.multipanel <- function(x = stats::runif(90), y = stats::runif(90),
     xscale <- extendrange(x)
     yscale <- extendrange(y)
     breaks <- seq.int(min(z), max(z), length.out = nplots + 1)
-    for (i in 1L:nplots) {
+    for (i in seq_len(nplots)) {
         col <- (i - 1) %% ncol + 1
         row <- (i - 1) %/% ncol + 1
         panel.vp <- viewport(layout.pos.row = row,
@@ -135,7 +135,7 @@ grid.show.layout <- function(l, newpage=TRUE, vp.ex=0.8,
                              cell.label=TRUE, label.col="blue",
                              unit.col="red", vp=NULL) {
   if (!is.layout(l))
-    stop("'l' must be a layout")
+    stop("'l' argument must be a layout")
   if (newpage)
     grid.newpage()
   if (!is.null(vp))
@@ -145,8 +145,8 @@ grid.show.layout <- function(l, newpage=TRUE, vp.ex=0.8,
   pushViewport(vp.mid)
   grid.rect(gp=gpar(fill="white"))
   gp.red <- gpar(col=unit.col)
-  for (i in 1L:l$nrow)
-    for (j in 1L:l$ncol) {
+  for (i in seq_len(l$nrow))
+    for (j in seq_len(l$ncol)) {
       vp.inner <- viewport(layout.pos.row=i, layout.pos.col=j)
       pushViewport(vp.inner)
       grid.rect(gp=gpar(col=cell.border, fill=cell.fill))
@@ -269,7 +269,7 @@ function(pch, labels, frame=TRUE,
   labels <- as.character(labels)
   nkeys <- length(labels)
   if (length(pch) != nkeys)
-    stop("'pch' and 'labels' not the same length")
+    stop("'pch' and 'labels' arguments are not of the same length")
   if (!is.unit(hgap))
     hgap <- unit(hgap, default.units)
   if (length(hgap) != 1)
@@ -279,7 +279,7 @@ function(pch, labels, frame=TRUE,
   if (length(vgap) != 1)
     stop("'vgap' must be single unit")
   gf <- grid.frame(layout=grid.layout(nkeys, 2), vp=vp, gp=gp, draw=FALSE)
-  for (i in 1L:nkeys) {
+  for (i in seq_len(nkeys)) {
     if (i==1) {
       symbol.border <- unit.c(vgap, hgap, vgap, hgap)
       text.border <- unit.c(vgap, unit(0, "npc"), vgap, hgap)
@@ -316,18 +316,18 @@ legendGrob <-
     if(nkeys == 0) return(nullGrob(vp=vp))
     if (!is.unit(hgap))
 	hgap <- unit(hgap, default.units)
-    if (length(hgap) != 1) stop("'hgap' must be single unit")
+    if (length(hgap) != 1) stop("'hgap' argument must be single unit")
     if (!is.unit(vgap))
 	vgap <- unit(vgap, default.units)
-    if (length(vgap) != 1) stop("'vgap' must be single unit")
+    if (length(vgap) != 1) stop("'vgap' argument must be single unit")
     ## nrow, ncol
     miss.nrow <- missing(nrow)
     miss.ncol <- missing(ncol)
     if(miss.nrow && miss.ncol) {ncol <- 1; nrow <- nkeys} # defaults to 1-column legend
     else if( miss.nrow && !miss.ncol) nrow <- ceiling(nkeys / ncol)
     else if(!miss.nrow &&  miss.ncol) ncol <- ceiling(nkeys / nrow)
-    if(nrow < 1) stop("'nrow' must be >= 1")
-    if(ncol < 1) stop("'ncol' must be >= 1")
+    if(nrow < 1) stop("'nrow' argument must be >= 1")
+    if(ncol < 1) stop("'ncol' argument must be >= 1")
     if(nrow * ncol < nkeys)
         stop("nrow * ncol < #{legend labels}")
     ## pch, gp
@@ -403,7 +403,7 @@ grid.plot.and.legend <- function() {
   x <- stats::runif(10)
   y1 <- stats::runif(10)
   y2 <- stats::runif(10)
-  pch <- 1L:3
+  pch <- seq_len(3)
   labels <- c("Girls", "Boys", "Other")
   lf <- frameGrob()
   plot <- gTree(children=gList(rectGrob(),

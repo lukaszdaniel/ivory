@@ -75,7 +75,7 @@ double lchoose(double n, double k)
 #ifndef MATHLIB_STANDALONE
     R_CheckStack();
 #endif
-    if (fabs(k - k0) > 1e-7)
+    if (R_nonint(k))
 	MATHLIB_WARNING2(_("'k' (%.2f) must be integer, rounded to %.0f"), k0, k);
     if (k < 2) {
 	if (k <	 0) return ML_NEGINF;
@@ -118,7 +118,7 @@ double choose(double n, double k)
 #ifndef MATHLIB_STANDALONE
     R_CheckStack();
 #endif
-    if (fabs(k - k0) > 1e-7)
+    if (R_nonint(k))
 	MATHLIB_WARNING2(_("'k' (%.2f) must be integer, rounded to %.0f"), k0, k);
     if (k < k_small_max) {
 	int j;

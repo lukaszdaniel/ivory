@@ -36,7 +36,7 @@ asOneSidedFormula <-
     if (inherits(object, "formula")) {
         if (length(object) != 2L) {
             stop(gettextf("formula '%s' must be of the form '~expr'",
-                          deparse(as.vector(object))), domain = NA)
+                          deparse(as.vector(object))), domain = "R-stats")
         }
         return(object)
     }
@@ -47,9 +47,9 @@ asOneSidedFormula <-
                         call = object,
                         character = as.name(object),
                         expression = object[[1L]],
-                        stop(gettextf("'%s' cannot be of mode '%s'",
+                        stop(gettextf("'%s' argument cannot be of mode '%s'",
                                       substitute(object), mode(object)),
-                             domain = NA)
+                             domain = "R-stats")
                         ))
             )
 }

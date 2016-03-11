@@ -20,16 +20,7 @@
 
 #include "tre-internal.h"
 #include "tre.h"
-
-#ifdef HAVE_GETTEXT
-#include <libintl.h>
-#else
-#define dgettext(p, s) s
-#define gettext(s) s
-#endif
-
-#define _(String) dgettext(PACKAGE, String)
-#define gettext_noop(String) String
+#include <localization.h>
 
 /* Error message strings for error codes listed in `tre.h'.  This list
    needs to be in sync with the codes listed there, naturally. */

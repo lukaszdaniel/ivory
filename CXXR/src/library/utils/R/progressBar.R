@@ -105,7 +105,7 @@ getTxtProgressBar <- function(pb)
     if(!inherits(pb, "txtProgressBar"))
        stop(gettextf("'pb' is not from class %s",
                      dQuote("txtProgressBar")),
-            domain = NA)
+            domain = "R-utils")
     pb$getVal()
 }
 
@@ -114,7 +114,7 @@ setTxtProgressBar <- function(pb, value, title = NULL, label = NULL)
     if(!inherits(pb, "txtProgressBar"))
         stop(gettextf("'pb' is not from class %s",
                       dQuote("txtProgressBar")),
-             domain = NA)
+             domain = "R-utils")
     oldval <- pb$getVal()
     pb$up(value)
     invisible(oldval)

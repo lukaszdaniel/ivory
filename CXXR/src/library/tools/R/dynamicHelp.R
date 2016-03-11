@@ -102,7 +102,7 @@ httpd <- function(path, query, ...)
                        package = args$package <- strsplit(query[i], ";")[[1L]],
                        lib.loc = args$lib.loc <- strsplit(query[i], ";")[[1L]],
                        warning("Unrecognized search field: ", names(query)[i],
-                               domain = NA)
+                               domain = "R-tools")
                        )
             args$fields <- fields
             args$use_UTF8 <- TRUE
@@ -438,7 +438,7 @@ httpd <- function(path, query, ...)
         up <- paste0("/library/", pkg, "/html/00Index.html")
         if(!nzchar(docdir))
             return(error_page(gettextf("No docs found for package %s",
-                                       mono(pkg))))
+                                       sQuote(mono(pkg)), domain = "R-tools")))
         if(nzchar(rest) && rest != "/") {
             file <- paste0(docdir, rest)
             exists <- file.exists(file)
@@ -453,7 +453,7 @@ httpd <- function(path, query, ...)
             else if (exists)
                 return(list(file = file, "content-type" = mime_type(rest)))
             else
-            	return(error_page(gettextf("URL %s was not found", mono(path))))
+            	return(error_page(gettextf("URL '%s' was not found", mono(path), domain = "R-tools")))
         } else {
             ## request to list <pkg>/doc
             return(.HTMLdirListing(docdir,

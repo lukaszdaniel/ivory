@@ -294,8 +294,8 @@ function(mirrors = NULL, verbose = FALSE)
             readLines(con)
         })
         if(inherits(db, "error")) {
-            msg <- sprintf("Reading %s failed with message: %s",
-                           path, conditionMessage(db))
+            msg <- gettextf("Reading %s failed with message: %s",
+                           path, conditionMessage(db), domain = "R-tools")
             return(simpleError(msg))
         }
         db
@@ -305,8 +305,8 @@ function(mirrors = NULL, verbose = FALSE)
         path <- sprintf("%s%s", baseurl, path)
         ts <- retry_upon_error(readLines(path))
         if(inherits(ts, "error")) {
-            msg <- sprintf("Reading %s failed with message: %s",
-                           path, conditionMessage(ts))
+            msg <- gettextf("Reading %s failed with message: %s",
+                           path, conditionMessage(ts), domain = "R-tools")
             return(simpleError(msg))
         }
         as.POSIXct(as.numeric(ts), origin = "1970-01-01")
@@ -358,7 +358,7 @@ function(mirrors = NULL, verbose = FALSE)
     results <- lapply(mirrors,
                       function(m) {
                           if(verbose)
-                              message(sprintf("Checking %s", m))
+                              message(gettextf("Checking %s", m, domain = "R-tools"))
                           suppressWarnings(tryCatch(check_mirror(m),
                                                     error = identity))
                       })

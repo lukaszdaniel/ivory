@@ -23,7 +23,7 @@ toString.default <- function(x, width = NULL, ...)
 {
     string <- paste(x, collapse=", ")
     if( missing(width) || is.null(width) || width == 0) return(string)
-    if( width < 0 ) stop("'width' must be positive")
+    if( width < 0 ) stop(gettextf("'%s' argument must be positive", "width"))
     if(nchar(string, type = "w") > width) {
         width <- max(6, width) ## Leave something!
         string <- paste0(strtrim(string, width - 4), "....")

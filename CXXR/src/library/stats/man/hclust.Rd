@@ -17,8 +17,8 @@ hclust(d, method = "complete", members = NULL)
 
 \method{plot}{hclust}(x, labels = NULL, hang = 0.1, check = TRUE,
      axes = TRUE, frame.plot = FALSE, ann = TRUE,
-     main = "Cluster Dendrogram",
-     sub = NULL, xlab = NULL, ylab = "Height", \dots)
+     main = gettext("Cluster Dendrogram"),
+     sub = NULL, xlab = NULL, ylab = gettext("Height"), \dots)
 }
 \arguments{
   \item{d}{a dissimilarity structure as produced by \code{dist}.}

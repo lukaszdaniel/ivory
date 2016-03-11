@@ -29,7 +29,7 @@ unit <- function(x, units, data=NULL) {
     x <- as.numeric(x)
     units <- as.character(units)
     if (length(x) == 0 || length(units) == 0)
-        stop("'x' and 'units' must have length > 0")
+        stop("'x' and 'units' arguments must be of length > 0")
     valid.unit(x, units, recycle.data(data, FALSE, length(x), units))
 }
 
@@ -57,7 +57,7 @@ convertUnit <- function(x, unitTo, axisFrom="x", typeFrom="location",
   whatto <- match(axisTo, c("x", "y")) - 1L +
     2L*(match(typeTo, c("location", "dimension")) - 1L)
   if (!is.unit(x))
-    stop("'x' argument must be a unit object")
+    stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("unit")))
   if (is.na(whatfrom) || is.na(whatto))
     stop("invalid 'axis' or 'type'")
   value <- grid.Call(L_convert, x, as.integer(whatfrom),
@@ -225,8 +225,7 @@ unit.arithmetic <- function(func.name, arg1, arg2=NULL) {
 Ops.unit <- function(e1, e2) {
   ok <- switch(.Generic, "+"=TRUE, "-"=TRUE, "*"=TRUE, FALSE)
   if (!ok)
-    stop(gettextf("operator '%s' not meaningful for units", .Generic),
-         domain = NA)
+    stop(gettextf("operator '%s' not meaningful for units", .Generic), domain = "R-grid")
   if (.Generic == "*")
     # can only multiply a unit by a scalar
     if (nzchar(.Method[1L])) {
@@ -263,8 +262,7 @@ Summary.unit <- function(..., na.rm=FALSE) {
   x <- unit.c(...)
   ok <- switch(.Generic, "max"=TRUE, "min"=TRUE, "sum"=TRUE, FALSE)
   if (!ok)
-    stop(gettextf("'Summary' function '%s' not meaningful for units",
-                  .Generic), domain = NA)
+    stop(gettextf("'Summary' function '%s' not meaningful for units", .Generic), domain = "R-grid")
   unit.arithmetic(.Generic, x)
 }
 

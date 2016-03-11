@@ -19,7 +19,7 @@
 sort <- function(x, decreasing = FALSE, ...)
 {
     if(!is.logical(decreasing) || length(decreasing) != 1L)
-        stop("'decreasing' must be a length-1 logical vector.\nDid you intend to set 'partial'?")
+        stop("'decreasing' argument must be a logical vector of length 1.\nDid you intend to set 'partial'?")
     UseMethod("sort")
 }
 
@@ -39,7 +39,7 @@ sort.int <-
              (is.integer(x) || is.factor(x) || is.logical(x)))
     if (useRadix) {
         if (!is.null(partial)) {
-            stop("'partial' sorting not supported by radix method")
+            stop("'partial' sorting is not supported by 'radix()' method")
         }
         o <- order(x, na.last = na.last, decreasing = decreasing,
                    method = "radix")
@@ -50,20 +50,20 @@ sort.int <-
     }
     
     if(isfact <- is.factor(x)) {
-        if(index.return) stop("'index.return' only for non-factors")
+        if(index.return) stop(gettextf("'%s' argument is valid only for non-factors", "index.return"))
 	lev <- levels(x)
 	nlev <- nlevels(x)
  	isord <- is.ordered(x)
         x <- c(x) # drop attributes
     } else if(!is.atomic(x))
-        stop("'x' must be atomic")
+        stop(gettextf("'%s' argument must be atomic", "x"))
 
     if(has.na <- any(ina <- is.na(x))) {
         nas <- x[ina]
         x <-  x[!ina]
     }
     if(index.return && !is.na(na.last))
-        stop("'index.return' only for 'na.last = NA'")
+        stop(gettextf("'%s' argument is valid only for 'na.last = NA' option", "index.return"))
     if(!is.null(partial)) {
         if(index.return || decreasing || isfact || !missing(method))
 	    stop("unsupported options for partial sorting")
@@ -154,7 +154,7 @@ sort.list <- function(x, partial = NULL, na.last = TRUE, decreasing = FALSE,
     if (is.integer(x) || is.factor(x)) method <- "radix"
     method <- match.arg(method)
     if(!is.atomic(x))
-        stop("'x' must be atomic for 'sort.list'\nHave you called 'sort' on a list?")
+        stop("'x' argument must be atomic for 'sort.list()' function.\nHave you called 'sort()' function on a list?")
     if(!is.null(partial))
         .NotYetUsed("partial != NULL")
     if(method == "quick") {
@@ -162,7 +162,7 @@ sort.list <- function(x, partial = NULL, na.last = TRUE, decreasing = FALSE,
         if(is.numeric(x))
             return(sort(x, na.last = na.last, decreasing = decreasing,
                         method = "quick", index.return = TRUE)$ix)
-        else stop("method = \"quick\" is only for numeric 'x'")
+        else stop("'method = \"quick\"' option is only for numeric 'x'")
     }
     if (is.na(na.last)) {
         x <- x[!is.na(x)]

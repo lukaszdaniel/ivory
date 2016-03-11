@@ -28,7 +28,7 @@ get_link <- function(arg, tag, Rdfile) {
     ## As from 2.10.0, look for topic 'bar' if file not found.
 
     if (!all(RdTags(arg) == "TEXT"))
-    	stopRd(arg, Rdfile, "Bad \\link text")
+    	stopRd(arg, Rdfile, gettext("Bad \\link text"))
 
     option <- attr(arg, "Rd_option")
 
@@ -37,7 +37,7 @@ get_link <- function(arg, tag, Rdfile) {
     pkg <- NULL
     if (!is.null(option)) {
         if (!identical(attr(option, "Rd_tag"), "TEXT"))
-    	    stopRd(option, Rdfile, "Bad \\link option -- must be text")
+    	    stopRd(option, Rdfile, gettext("Bad \\link option -- must be text"))
     	if (grepl("^=", option, perl = TRUE, useBytes = TRUE))
     	    dest <- psub1("^=", "", option)
     	else if (grepl(":", option, perl = TRUE, useBytes = TRUE)) {
@@ -346,7 +346,7 @@ Rd2HTML <-
                 ## Used to use the search engine, but we no longer have one,
                 ## and we don't get here for dynamic help.
                 if (!no_links)
-                    warnRd(block, Rdfile, "missing link ", sQuote(topic))
+                    warnRd(block, Rdfile, gettextf("missing link %s", sQuote(topic)))
                 writeContent(block, tag)
             } else {
                 ## treat links in the same package specially -- was needed for CHM
@@ -375,14 +375,10 @@ Rd2HTML <-
                     ## so how about as a topic?
                     file <- utils:::index.search(parts$targetfile, pkgpath)
                     if (!length(file)) {
-                        warnRd(block, Rdfile,
-                               "file link ", sQuote(parts$targetfile),
-                               " in package ", sQuote(parts$pkg),
-                               " does not exist and so has been treated as a topic")
+                        warnRd(block, Rdfile, gettextf("file link %s in package %s does not exist and so has been treated as a topic", sQuote(parts$targetfile), sQuote(parts$pkg)))
                         parts$targetfile <- basename(file)
                     } else {
-                        warnRd(block, Rdfile, "missing file link ",
-                               sQuote(parts$targetfile))
+                        warnRd(block, Rdfile, gettextf("missing file link %s", sQuote(parts$targetfile)))
                     }
                 }
             }
@@ -405,14 +401,11 @@ Rd2HTML <-
     }
 
     writeDR <- function(block, tag) {
+            of1("## Dont't run: ")
+            writeContent(block, tag)
         if (length(block) > 1L) {
-            of1('## Not run: ')
-            writeContent(block, tag)
-            of1('\n## End(Not run)')
-        } else {
-            of1('## Not run: ')
-            writeContent(block, tag)
-       }
+            of1("\n## End (Don't run)")
+        }
     }
 
     writeBlock <- function(block, tag, blocktag) {
@@ -554,7 +547,7 @@ Rd2HTML <-
 		    	writeContent(block[[3L]], tag),
                "\\out" = for (i in seq_along(block))
 		   of1(block[[i]]),
-               stopRd(block, Rdfile, "Tag ", tag, " not recognized")
+               stopRd(block, Rdfile, gettextf("Tag %s not implemented", tag))
                )
     }
 
@@ -562,11 +555,11 @@ Rd2HTML <-
     	format <- table[[1L]]
     	content <- table[[2L]]
     	if (length(format) != 1 || RdTags(format) != "TEXT")
-    	    stopRd(table, Rdfile, "\\tabular format must be simple text")
+    	    stopRd(table, Rdfile, gettext("\\tabular format must be simple text"))
     	format <- strsplit(format[[1L]], "", fixed = TRUE)[[1L]]
     	if (!all(format %in% c("l", "c", "r")))
     	    stopRd(table, Rdfile,
-                   "Unrecognized \\tabular format: ", table[[1L]][[1L]])
+                   gettextf("Unrecognized \\tabular format: %s", table[[1L]][[1L]]))
         format <- c(l="left", c="center", r="right")[format]
 
         tags <- RdTags(content)
@@ -584,9 +577,7 @@ Rd2HTML <-
             if (newcol) {
                 col <- col + 1L
                 if (col > length(format))
-                    stopRd(table, Rdfile,
-                           "Only ", length(format),
-                           " columns allowed in this table")
+                    stopRd(table, Rdfile, sprintf(ngettext(length(format), "Only %d column allowed in this table", "Only %d columns allowed in this table", domain = "R-tools"), length(format)))
             	of0('<td style="text-align: ', format[col], ';">')
             	newcol <- FALSE
             }

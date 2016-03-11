@@ -23,10 +23,10 @@ power.t.test <-
 	     tol = .Machine$double.eps^0.25)
 {
     if ( sum(sapply(list(n, delta, sd, power, sig.level), is.null)) != 1 )
-	stop("exactly one of 'n', 'delta', 'sd', 'power', and 'sig.level' must be NULL")
+	stop(gettextf("exactly one of '%s', '%s', '%s', '%s', and '%s' arguments must be NULL", "n", "delta", "sd", "power", "sig.level"))
     if(!is.null(sig.level) && !is.numeric(sig.level) ||
        any(0 > sig.level | sig.level > 1))
-	stop("'sig.level' must be numeric in [0, 1]")
+	stop("'sig.level' argument must be numeric in [0, 1]")
 
     type <- match.arg(type)
     alternative <- match.arg(alternative)
@@ -63,16 +63,15 @@ power.t.test <-
 	sig.level <- uniroot(function(sig.level) eval(p.body) - power,
 		      c(1e-10, 1-1e-10), tol=tol, extendInt = "yes")$root
     else # Shouldn't happen
-	stop("internal error", domain = NA)
+	stop("internal error", domain = "R-stats")
     NOTE <- switch(type,
-		   paired = "n is number of *pairs*, sd is std.dev. of *differences* within pairs",
-		   two.sample = "n is number in *each* group", NULL)
+		   paired = gettext("'n' is number of *pairs*, 'sd' is std.dev. of *differences* within pairs"),
+		   two.sample = gettext("n is number in *each* group"), NULL)
 
-    METHOD <- paste(switch(type,
-			   one.sample = "One-sample",
-			   two.sample = "Two-sample",
-			   paired = "Paired"),
-		    "t test power calculation")
+    METHOD <- switch(type,
+			   one.sample = gettext("One-sample t test power calculation"),
+			   two.sample = gettext("Two-sample t test power calculation"),
+			   paired = gettext("Paired t test power calculation"))
 
     structure(list(n=n, delta=delta, sd=sd,
 		   sig.level=sig.level, power=power,
@@ -86,10 +85,10 @@ power.prop.test <-
 	     tol = .Machine$double.eps^0.25)
 {
     if ( sum(sapply(list(n, p1, p2, power, sig.level), is.null)) != 1 )
-	stop("exactly one of 'n', 'p1', 'p2', 'power', and 'sig.level' must be NULL")
+	stop(gettextf("exactly one of '%s', '%s', '%s', '%s', and '%s' arguments must be NULL", "n", "p1", "p2", "power", "sig.level"))
     if(!is.null(sig.level) && !is.numeric(sig.level) ||
        any(0 > sig.level | sig.level > 1))
-	stop("'sig.level' must be numeric in [0, 1]")
+	stop("'sig.level' argument must be numeric in [0, 1]")
 
     alternative <- match.arg(alternative)
     tside <- switch(alternative, one.sided = 1, two.sided = 2)
@@ -131,11 +130,11 @@ power.prop.test <-
 	sig.level <- uniroot(function(sig.level) eval(p.body) - power,
 		      c(1e-10, 1-1e-10), tol=tol, extendInt = "upX")$root
     else # Shouldn't happen
-	stop("internal error", domain = NA)
+	stop("internal error", domain = "R-stats")
 
-    NOTE <- "n is number in *each* group"
+    NOTE <- gettext("n is number in *each* group")
 
-    METHOD <-  "Two-sample comparison of proportions power calculation"
+    METHOD <-  gettext("Two-sample comparison of proportions power calculation")
 
     structure(list(n=n, p1=p1, p2=p2,
 		   sig.level=sig.level, power=power,
@@ -148,8 +147,7 @@ print.power.htest <- function(x, digits = getOption("digits"), ...)
     cat("\n    ", x$method, "\n\n")
     note <- x$note
     x[c("method", "note")] <- NULL
-    cat(paste(format(names(x), width = 15L, justify = "right"),
-	      format(x, digits=digits), sep = " = "), sep = "\n")
-    if(!is.null(note)) cat("\n", "NOTE: ", note, "\n\n", sep = "") else cat("\n")
+    cat(paste(format(names(x), width = 15L, justify = "right"), format(x, digits=digits), sep = " = "), sep = "\n")
+    if(!is.null(note)) cat("\n", gettext("NOTE: ", domain = "R-stats"), note, "\n\n", sep = "") else cat("\n")
     invisible(x)
 }

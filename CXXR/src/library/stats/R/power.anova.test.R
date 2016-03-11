@@ -30,7 +30,7 @@ function (groups = NULL, n = NULL, between.var = NULL, within.var = NULL,
       stop("number of observations in each group must be at least 2")
     if(!is.null(sig.level) && !is.numeric(sig.level) ||
        any(0 > sig.level | sig.level > 1))
-	stop("'sig.level' must be numeric in [0, 1]")
+	stop("'sig.level' argument must be numeric in [0, 1]")
 
     p.body <- quote({
 	lambda <- (groups-1)*n*(between.var/within.var)
@@ -54,11 +54,12 @@ function (groups = NULL, n = NULL, between.var = NULL, within.var = NULL,
     else if (is.null(sig.level))
 	sig.level <- uniroot(function(sig.level) eval(p.body) - power,
 			     c(1e-10, 1 - 1e-10))$root
-    else stop("internal error", domain = NA)
-    NOTE <- "n is number in each group"
-    METHOD <- "Balanced one-way analysis of variance power calculation"
-    structure(list(groups = groups, n = n, between.var = between.var,
+    else stop("internal error", domain = "R-stats")
+    NOTE <- gettext("'n' is number in each group", domain = "R-stats")
+    METHOD <- gettext("Balanced one-way analysis of variance power calculation", domain = "R-stats")
+    RVAL <-list(groups = groups, n = n, between.var = between.var,
 		   within.var = within.var, sig.level = sig.level,
-		   power = power, note = NOTE, method = METHOD),
-	      class = "power.htest")
+		   power = power, note = NOTE, method = METHOD)
+    class(RVAL) <- "power.htest"
+    return(RVAL)
 }

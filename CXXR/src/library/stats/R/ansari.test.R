@@ -28,18 +28,18 @@ function(x, y, alternative = c("two.sided", "less", "greater"),
              && is.finite(conf.level)
              && (conf.level > 0)
              && (conf.level < 1)))
-            stop("'conf.level' must be a single number between 0 and 1")
+            stop(gettextf("'%s' argument must be a single number between 0 and 1", "conf.level"))
     }
-    DNAME <- paste(deparse(substitute(x)), "and", deparse(substitute(y)))
+    DNAME <- gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)), collapse = ""), domain = "R-stats")
 
     x <- x[complete.cases(x)]
     y <- y[complete.cases(y)]
     m <- as.integer(length(x))
     if(is.na(m) || m < 1L)
-        stop("not enough 'x' observations")
+        stop(gettextf("not enough '%s' observations", "x"))
     n <- as.integer(length(y))
     if(is.na(n) || n < 1L)
-        stop("not enough 'y' observations")
+        stop(gettextf("not enough '%s' observations", "y"))
     N <- m + n
 
     r <- rank(c(x, y))
@@ -228,17 +228,29 @@ function(x, y, alternative = c("two.sided", "less", "greater"),
         }
     }
 
+		NVAL <- 1    
+        names(NVAL) <- gettext("ratio of scales", domain = "R-stats")
     names(STATISTIC) <- "AB"
+	METHOD <- gettext("Ansari-Bradley test", domain = "R-stats")
+    alt.name <- switch(alternative,
+                           two.sided = gettextf("true ratio of scales is not equal to %s", NVAL, domain = "R-stats"),
+                           less = gettextf("true ratio of scales is less than %s", NVAL, domain = "R-stats"),
+                           greater = gettextf("true ratio of scales is greater than %s", NVAL, domain = "R-stats"))
+
     RVAL <- list(statistic = STATISTIC,
                  p.value = PVAL,
-                 null.value = c("ratio of scales" = 1),
+                 null.value = NVAL,
                  alternative = alternative,
-                 method = "Ansari-Bradley test",
+                 alt.name = alt.name,
+                 method = METHOD,
                  data.name = DNAME)
-    if(conf.int)
+    if(conf.int) {
+#EST <- ESTIMATE
+names(ESTIMATE) <- names(NVAL)
         RVAL <- c(RVAL,
                   list(conf.int = cint,
-                       estimate = c("ratio of scales" = ESTIMATE)))
+                       estimate = ESTIMATE))
+}
     class(RVAL) <- "htest"
     return(RVAL)
 }
@@ -249,7 +261,7 @@ function(formula, data, subset, na.action, ...)
     if(missing(formula)
        || (length(formula) != 3L)
        || (length(attr(terms(formula[-2L]), "term.labels")) != 1L))
-        stop("'formula' missing or incorrect")
+        stop(gettextf("'%s' argument is missing or incorrect", "formula"))
     m <- match.call(expand.dots = FALSE)
     if(is.matrix(eval(m$data, parent.frame())))
         m$data <- as.data.frame(data)
@@ -257,7 +269,8 @@ function(formula, data, subset, na.action, ...)
     m[[1L]] <- quote(stats::model.frame)
     m$... <- NULL
     mf <- eval(m, parent.frame())
-    DNAME <- paste(names(mf), collapse = " by ")
+    if(length(mf) != 2L) stop("invalid formula")
+    DNAME <- gettextf("%s by %s", names(mf[1]), names(mf[2]))
     names(mf) <- NULL
     response <- attr(attr(mf, "terms"), "response")
     g <- factor(mf[[-response]])

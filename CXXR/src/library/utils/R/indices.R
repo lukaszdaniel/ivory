@@ -51,7 +51,7 @@ packageDescription <-
     }
 
     if(pkgpath == "") {
-        warning(gettextf("no package '%s' was found", pkg), domain = NA)
+        warning(gettextf("no package '%s' was found", pkg), domain = "R-utils")
         return(NA)
     }
 
@@ -62,14 +62,12 @@ packageDescription <-
     if(file.exists(file <- file.path(pkgpath, "Meta", "package.rds"))) {
         desc <- readRDS(file)$DESCRIPTION
         if(length(desc) < 1)
-            stop(gettextf("metadata of package '%s' is corrupt", pkg),
-                 domain = NA)
+            stop(gettextf("metadata of package '%s' is corrupt", pkg), domain = "R-utils")
         desc <- as.list(desc)
     } else if(file.exists(file <- file.path(pkgpath,"DESCRIPTION"))) {
         dcf <- read.dcf(file=file)
         if(NROW(dcf) < 1L)
-            stop(gettextf("DESCRIPTION file of package '%s' is corrupt", pkg),
-                 domain = NA)
+            stop(gettextf("DESCRIPTION file of package '%s' is corrupt", pkg), domain = "R-utils")
         desc <- as.list(dcf[1,])
     } else file <- ""
 
@@ -95,7 +93,7 @@ packageDescription <-
     }
 
     if((file == "") || (length(retval) == 0)){
-        warning(gettextf("DESCRIPTION file of package '%s' is missing or broken", pkg), domain = NA)
+        warning(gettextf("DESCRIPTION file of package '%s' is missing or broken", pkg), domain = "R-utils")
         return(NA)
     }
 
@@ -143,9 +141,9 @@ maintainer <- function(pkg)
 packageVersion <- function(pkg, lib.loc = NULL)
 {
     res <- suppressWarnings(packageDescription(pkg, lib.loc=lib.loc,
-                                               fields = "Version"))
+                                               fields = gettext("Version")))
     if (!is.na(res)) package_version(res) else
-    stop(gettextf("package %s not found", sQuote(pkg)), domain = NA)
+    stop(gettextf("package %s not found", sQuote(pkg), domain = "R-utils"), domain = NA)
 }
 
 ## used with firstOnly = TRUE for example()
@@ -175,24 +173,23 @@ print.packageIQR <- function(x, ...)
     db <- x$results
     ## Split according to Package.
     out <- if(nrow(db) > 0L)
-	       lapply(split(seq_len(nrow(db)), db[, "Package"]),
-		      function(ind) db[ind, c("Item", "Title"), drop = FALSE])
+	       lapply(split(seq_len(nrow(db)), db[, 1L]),
+		      function(ind) db[ind, 3L:4L, drop = FALSE])
     outFile <- tempfile("RpackageIQR")
     outConn <- file(outFile, open = "w")
     first <- TRUE
     for(pkg in names(out)) {
-        writeLines(paste0(ifelse(first, "", "\n"), x$title,
-                          " in package ", sQuote(pkg), ":\n"),
-                   outConn)
-        writeLines(formatDL(out[[pkg]][, "Item"],
-                            out[[pkg]][, "Title"]),
-                   outConn)
+	if(first)
+        writeLines(paste(gettextf("%s in package %s:", x$title, sQuote(pkg), domain = "R-utils"), "\n", sep = ""), outConn)
+	else
+        writeLines(paste("\n", gettextf("%s in package %s:", x$title, sQuote(pkg), domain = "R-utils"), "\n", sep = ""), outConn)
+        writeLines(formatDL(out[[pkg]][, 1L], out[[pkg]][, 2L]), outConn)
         first <- FALSE
     }
     if(first) {
         close(outConn)
         unlink(outFile)
-        writeLines(paste("no", tolower(x$title), "found"))
+        writeLines(gettextf("no %s found", tolower(x$title)))
         if(!is.null(x$footer))
             writeLines(c("", x$footer))
     }

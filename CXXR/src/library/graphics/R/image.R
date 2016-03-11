@@ -125,9 +125,7 @@ image.default <- function (x = seq(0, 1, length.out = nrow(z)),
     }
     if (useRaster) {
          if(check_irregular(x,y))
-            stop(gettextf("%s can only be used with a regular grid",
-                          sQuote("useRaster = TRUE")),
-                 domain = NA)
+            stop(gettextf("%s can only be used with a regular grid", sQuote("useRaster = TRUE")), domain = "R-graphics")
         # this should be mostly equivalent to RGBpar3 with bg = R_TRANWHITE
         if (!is.character(col)) {
             col <- as.integer(col)

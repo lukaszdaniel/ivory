@@ -19,7 +19,7 @@
 `mostattributes<-` <- function(obj, value)
 {
     if(length(value)) {
-	if(!is.list(value)) stop("'value' must be a list")
+	if(!is.list(value)) stop(gettextf("'%s' argument must be a list", "value"))
 	if(h.nam <- !is.na(inam <- match("names", names(value)))) {
 	    n1 <- value[[inam]];	value <- value[-inam] }
 	if(h.dim <- !is.na(idin <- match("dim", names(value)))) {

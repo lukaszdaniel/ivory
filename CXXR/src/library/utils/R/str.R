@@ -22,7 +22,7 @@ str <- function(object, ...) UseMethod("str")
 ## FIXME: convert to use sQuote
 str.data.frame <- function(object, ...)
 {
-    ## Method to 'str' for  'data.frame' objects
+    ## Method to 'str' for 'data.frame' objects
     if(! is.data.frame(object)) {
 	warning("str.data.frame() called with non-data.frame -- coercing to one.")
 	object <- data.frame(object)
@@ -31,11 +31,33 @@ str.data.frame <- function(object, ...)
     ## Show further classes // Assume that they do NOT have an own Method --
     ## not quite perfect ! (.Class = 'remaining classes', starting with current)
     cl <- oldClass(object); cl <- cl[cl != "data.frame"]  #- not THIS class
-    if(0 < length(cl)) cat("Classes", paste(sQuote(cl), collapse=", "), "and ")
 
-    cat("'data.frame':	", nrow(object), " obs. of  ",
-	(p <- length(object)), " variable", if(p != 1)"s", if(p > 0)":",
-	"\n", sep = "")
+    p <- length(object)
+    if(length(cl) > 0) {
+     if(p == 1)
+      {
+      cat(sprintf(ngettext(nrow(object), "Classes %s and 'data.frame':	%d observation of %d variable",
+				"Classes %s and 'data.frame':	%d observations of %d variable", domain = "R-utils"), paste(sQuote(cl), collapse=", "), nrow(object), p), ":\n", sep = "")
+      }
+     else
+      {
+      cat(sprintf(ngettext(nrow(object), "Classes %s and 'data.frame':	%d observation of %d variables",
+				"Classes %s and 'data.frame':	%d observations of %d variables", domain = "R-utils"), paste(sQuote(cl), collapse=", "), nrow(object), p), if(p > 0) ":", "\n", sep = "")
+      }
+    }
+    else
+    {
+     if(p == 1)
+      {
+      cat(sprintf(ngettext(nrow(object), "'data.frame':	%d observation of %d variable",
+				"'data.frame':	%d observations of %d variable", domain = "R-utils"), nrow(object), p), ":\n", sep = "")
+      }
+     else
+      {
+      cat(sprintf(ngettext(nrow(object), "'data.frame':	%d observation of %d variables",
+				"'data.frame':	%d observations of %d variables", domain = "R-utils"), nrow(object), p), if(p > 0) ":", "\n", sep = "")
+      }
+    }
 
     ## calling next method, usually  str.default:
     if(length(l <- list(...)) && any("give.length" == names(l)))
@@ -105,14 +127,12 @@ str.default <-
     ## from
     strO <- getOption("str")
     if (!is.list(strO)) {
-	warning('invalid options("str") -- using defaults instead')
+	warning("invalid options(\"str\") -- using defaults instead")
 	strO <- strOptions()
     }
     else {
         if (!all(names(strO) %in% oDefs))
-            warning(gettextf("invalid components in options(\"str\"): %s",
-                             paste(setdiff(names(strO), oDefs), collapse = ", ")),
-                    domain = NA)
+            warning(gettextf("invalid components in options(\"str\"): %s", paste(setdiff(names(strO), oDefs), collapse = ", ")), domain = "R-utils")
         strO <- modifyList(strOptions(), strO)
     }
     strict.width <- match.arg(strict.width, choices = c("no", "cut", "wrap"))
@@ -153,12 +173,12 @@ str.default <-
     oo <- options(digits = digits.d); on.exit(options(oo))
     le <- length(object)
     if(is.na(le)) {
-        warning("'str.default': 'le' is NA, so taken as 0", immediate. = TRUE)
+        warning("'str.default': 'object' argument is of length NA, so taken as 0", immediate. = TRUE)
         le <- 0
         vec.len <- 0
     }
 
-    maybe_truncate <- function(x, e.x = x, Sep = "\"", ch = "| __truncated__")
+    maybe_truncate <- function(x, e.x = x, Sep = "\"", ch = gettext("| __truncated__"))
     {
 	trimmed <- strtrim(e.x, nchar.max)
 	ii <- trimmed != e.x
@@ -166,9 +186,7 @@ str.default <-
 	if(any(ii)) x[ii] <- paste0(trimmed[ii], Sep, ch)
 	x
     }
-    pClass <- function(cls)
-	paste0("Class", if(length(cls) > 1) "es",
-	       " '", paste(cls, collapse = "', '"), "' ")
+
     `%w/o%` <- function(x,y) x[is.na(match(x,y))]
 
     nfS <- names(fStr <- formals())# names of all formal args to str.default()
@@ -191,7 +209,7 @@ str.default <-
 
     ## le.str: not used for arrays:
     le.str <-
-	if(is.na(le)) " __no length(.)__ "
+	if(is.na(le)) gettext(" __no length(.)__ ")
 	else if(give.length) {
 	    if(le > 0) paste0("[1:", paste(le), "]") else "(0)"
 	} else ""
@@ -209,8 +227,8 @@ str.default <-
     if(is.ts <- stats::is.ts(object))
         str1.ts <- function(o, lestr) {
             tsp.a <- stats::tsp(o)
-            paste0(" Time-Series ", lestr, " from ", format(tsp.a[1L]),
-                   " to ", format(tsp.a[2L]), ":")
+            gettextf(" Time-Series %s from %s to %s:", lestr, format(tsp.a[1L]),
+                   format(tsp.a[2L]), domain = "R-tools")
         }
     if (is.null(object))
 	cat(" NULL\n")
@@ -218,24 +236,20 @@ str.default <-
 	if(methods::is(object,"envRefClass")) {
 	    cld <- tryCatch(object$getClass(), error=function(e)e)
 	    if(inherits(cld, "error")) {
-		cat("Prototypical reference class", " '", paste(cl, collapse = "', '"),
-		    "' [package \"", attr(cl,"package"), "\"]\n", sep="")
+	    cat(gettextf("Prototypical reference class %s [package %s]", paste(dQuote(cl), collapse = ", "), sQuote(attr(cl,"package")), domain = "R-tools"), "\n", sep = "")
 		## add a bit more info ??
 		return(invisible())
 	    }
 	    nFlds <- names(cld@fieldClasses)
 	    a <- sapply(nFlds, function(ch) object[[ch]], simplify = FALSE)
-	    cat("Reference class", " '", paste(cl, collapse = "', '"),
-		"' [package \"", attr(cl,"package"), "\"] with ",
-                n.of(length(a), "field"), "\n", sep = "")
+	    cat(sprintf(ngettext(length(a), "Reference class %s [package %s] with %d field", "Reference class %s [package %s] with %d fields", domain = "R-utils"), paste(sQuote(cl), collapse = ", "), dQuote(attr(cl,"package")), length(a)), "\n", sep = "")
 	    strSub(a, no.list=TRUE, give.length=give.length,
 		   nest.lev = nest.lev + 1)
 	    meths <- names(cld@refMethods)
 	    oMeths <- meths[is.na(match(meths, methods:::envRefMethodNames))]
-	    cat(indent.str, "and ", n.of(length(meths), "method"), sep = "")
 	    sNms <- names(cld@slots)
-	    if(lo <- length(oMeths)) {
-		cat(", of which", lo, ngettext(lo, "is", "are", domain = NA), " possibly relevant")
+	    if(length(oMeths)) {
+		cat(sprintf(ngettext(length(meths), "%s and %d method, of which %d are possibly relevant", "%s and %d methods, of which %d are possibly relevant", domain = "R-utils"), indent.str, length(meths), length(oMeths)))
 		if (is.na(max.level) || nest.lev < max.level)
 		    cat(":",
 			strwrap(paste(sort(oMeths), collapse=", "),
@@ -243,24 +257,22 @@ str.default <-
 				prefix = indent.str, width=width),# exdent = nind),
 			sep = "\n")
 		else cat("\n")
+	    } else {
+		cat(sprintf(ngettext(length(meths), "%s and %d method,", "%s and %d methods,", domain = "R-utils"), indent.str, length(meths)))
 	    }
 	    if(length(sNms <- sNms[sNms != ".xData"])) {
 		sls <- sapply(sNms, methods::slot,
 			      object=object, simplify = FALSE)
-		cat(" and ", n.of(length(sNms), "slot"), "\n", sep="")
+		cat(sprintf(ngettext(length(sNms), " and %d slot", " and %d slots", domain = "R-utils"), length(sNms)), "\n", sep = "")
 		strSub(sls, comp.str = "@ ", no.list=TRUE, give.length=give.length,
 		       indent.str = paste(indent.str,".."), nest.lev = nest.lev + 1)
 	    }
-	    else if(lo == 0) cat(".\n")
-	}
-	else { ## S4 non-envRefClass
+
+	} else {
 	    a <- sapply(methods::.slotNames(object), methods::slot,
 			object=object, simplify = FALSE)
-	    cat("Formal class", " '", paste(cl, collapse = "', '"),
-		"' [package \"", attr(cl,"package"), "\"] with ",
-		n.of(length(a), "slot"), "\n", sep = "")
-	    strSub(a, comp.str = "@ ", no.list=TRUE, give.length=give.length,
-		   indent.str = paste(indent.str,".."), nest.lev = nest.lev + 1)
+	    cat(sprintf(ngettext(length(a), "Formal class %s [package %s] with %d slot", "Formal class %s [package %s] with %d slots", domain = "R-utils"), paste(sQuote(cl), collapse = ", "), dQuote(attr(cl,"package")),  length(a)), "\n", sep = "")
+	    strSub(a, comp.str = "@ ", no.list=TRUE, give.length=give.length, indent.str = paste(indent.str,".."), nest.lev = nest.lev + 1)
 	}
 	return(invisible())
     }
@@ -273,8 +285,13 @@ str.default <-
 	##?if(is.d.f) std.attr <- c(std.attr, "class", if(is.d.f) "row.names")
 	if(le == 0) {
 	    if(is.d.f) std.attr <- c(std.attr, "class", "row.names")
-	    else cat(" ", if(!is.null(names(object))) "Named ",
-		     if(i.pl)"pair", "list()\n", sep = "")
+	    else
+		{
+		if(!is.null(names(object)) && i.pl) cat(" ", gettext("Named pairlist()", domain = "R-utils"),"\n",  sep = "")
+		else if(!is.null(names(object))) cat(" ", gettext("Named list()", domain = "R-utils"), "\n", sep = "")
+		else if(i.pl) cat(" pairlist()\n")
+		else cat(" list()\n")
+		}
 	} else { # list, length >= 1 :
 	    if(irregCl <- has.class && identical(object[[1L]], object)) {
 		le <- length(object <- unclass(object))
@@ -288,9 +305,14 @@ str.default <-
 		## str.default is a 'NextMethod' : omit the 'List of ..'
 		std.attr <- c(std.attr, "class", if(is.d.f) "row.names")
 	    } else { # need as.character here for double lengths.
-		cat(if(i.pl) "Dotted pair list" else
-		    if(irregCl) paste(pClass(cl), "hidden list") else "List",
-		    " of ", as.character(le), "\n", sep = "")
+		if(i.pl) cat(sprintf(ngettext(as.integer(le), "Dotted pair list of %s component", "Dotted pair list of %s components", domain = "R-utils"), as.character(le)), "\n", sep = "")
+		else if(irregCl) {
+		 if(length(cl) == 1L) 
+			cat(sprintf(ngettext(as.integer(le), "Class %s hidden list of %s component", "Class %s hidden list of %s components", domain = "R-utils"), dQuote(cl), as.character(le)), "\n", sep = "")
+		 else
+			cat(sprintf(ngettext(as.integer(le), "Classes %s hidden list of %s component", "Classes %s hidden list of %s components", domain = "R-utils"), dQuote(cl), as.character(le)), "\n", sep = "")
+ }
+		else cat(sprintf(ngettext(as.integer(le), "List of %s component", "List of %s components", domain = "R-utils"), as.character(le)), "\n", sep = "")
 	    }
 	    if (is.na(max.level) || nest.lev < max.level) {
 		nam.ob <-
@@ -312,7 +334,7 @@ str.default <-
 		}
 	    }
 	    if(list.len < le)
-		cat(indent.str, "[list output truncated]\n")
+		cat(indent.str, gettext("[list output truncated]", domain = "R-utils"), "\n", sep = "")
 	}
     } else { #- not function, not list
 	if(is.vector(object)
@@ -325,11 +347,12 @@ str.default <-
 	    if(is.atomic(object)) {
 		##-- atomic:   numeric	complex	 character  logical
 		mod <- substr(mode(object), 1, 4)
-		if     (mod == "nume")
-		    mod <- if(is.integer(object)) "int"
-		    else if(has.class) cl[1L] else "num"
-		else if(mod == "char") { mod <- "chr"; char.like <- TRUE }
-		else if(mod == "comp") mod <- "cplx" #- else: keep 'logi'
+		if(mod == "nume" && is.integer(object)) mod <- gettext("integer", domain = "R-utils")
+		else if(mod == "nume" && has.class) mod <- cl[1L]
+		else if(mod == "nume" && !is.integer(object) && !has.class) mod <- gettext("numeric", domain = "R-utils")
+		else if(mod == "char") { mod <- gettext("character", domain = "R-utils"); char.like <- TRUE }
+		else if(mod == "comp") mod <- gettext("complex", domain = "R-utils")
+		else if(mod == "logi") mod <- gettext("logical", domain = "R-utils") #- else: keep 'logi'
 		if(is.array(object)) {
 		    rnk <- length(di. <- dim(object))
 		    di <- paste0(ifelse(di. > 1, "1:",""), di.,
@@ -339,7 +362,12 @@ str.default <-
 			       pDi(paste0(di[-rnk], ", "), di[rnk]))
                     std.attr <- c("dim", if(is.ts) c("tsp", "class"))
 		} else if(!is.null(names(object))) {
-		    mod <- paste("Named", mod)
+		    if(mod == gettext("integer", domain = "R-utils") && is.integer(object)) mod <- gettext("Named integer", domain = "R-utils")
+		    else if(mod == gettext("numeric", domain = "R-utils") && !is.integer(object) && !has.class) mod <- gettext("Named numeric", domain = "R-utils")
+		    else if(mod == gettext("numeric", domain = "R-utils") && has.class) mod <- gettext("Named numeric", domain = "R-utils")
+		    else if(mod == gettext("character", domain = "R-utils")) mod <- gettext("Named character", domain = "R-utils")
+		    else if(mod == gettext("complex", domain = "R-utils"))  mod <- gettext("Named complex", domain = "R-utils")
+		    else if(mod == gettext("logical", domain = "R-utils"))  mod <- gettext("Named logical", domain = "R-utils")
 		    std.attr <- std.attr[std.attr != "names"]
 		}
 		if(has.class && length(cl) == 1) {
@@ -411,19 +439,32 @@ str.default <-
 		ml <- length(lev.att <- "")
 
 	    lsep <- if(ord) "<" else ","
-	    str1 <-
-		paste0(if(ord)" Ord.f" else " F",
-		       "actor w/ ", nl, " level", if(nl != 1) "s",
-		       if(nl) " ",
-		       if(nl) paste0(lev.att, collapse = lsep),
-		       if(ml < nl) paste0(lsep, ".."), ":")
-
+	    if(ord && nl)
+	      str1 <- cat(sprintf(ngettext(nl,
+				" Ord.factor w/ %d level %s%s:",
+				" Ord.factor w/ %d levels %s%s:", domain = "R-utils"),
+				nl, paste0(lev.att, collapse = lsep), if(ml < nl) paste0(lsep, "..") else ""))
+	    else if(ord && !nl)
+	      str1 <- cat(sprintf(ngettext(nl,
+				" Ord.factor w/ %d level",
+				" Ord.factor w/ %d levels", domain = "R-utils"),
+				nl))
+	    else if(!ord && nl)
+	      str1 <- cat(sprintf(ngettext(nl,
+				" Factor w/ %d level %s%s:",
+				" Factor w/ %d levels %s%s:", domain = "R-utils"),
+				nl, paste0(lev.att, collapse = lsep), if(ml < nl) paste0(lsep, "..") else ""))
+	    else
+	      str1 <- cat(sprintf(ngettext(nl,
+				" Factor w/ %d level",
+				" Factor w/ %d levels", domain = "R-utils"),
+				nl))
 	    std.attr <- c("levels", "class")
 	} else if(typeof(object) %in%
 		  c("externalptr", "weakref", "environment", "bytecode")) {
 	    ## Careful here, we don't want to change pointer objects
 	    if(has.class)
-                cat(pClass(cl))
+                cat(sprintf(ngettext(length(cl), "Class %s ", "Classes %s ", domain = "R-utils"), paste(sQuote(cl), collapse = ", ")))
 	    le <- v.len <- 0
 	    str1 <-
 		if(is.environment(object)) format(object)
@@ -433,8 +474,7 @@ str.default <-
 	    ## ideally we would figure out if as.character has a
 	    ## suitable method and use that.
 	} else if(has.class) {
-	    cat("Class", if(length(cl) > 1) "es",
-		" '", paste(cl, collapse = "', '"), "' ", sep = "")
+	    cat(sprintf(ngettext(length(cl), "Class %s", "Classes %s", domain = "R-utils"), paste(sQuote(cl), collapse = ", ")), " ", sep = "")
 	    ## If there's a str.<method>, it should have been called before!
 	    uo <- unclass(object)
 	    if(!is.null(attributes(uo)$class)) {
@@ -449,23 +489,22 @@ str.default <-
 	    return(invisible())
 	} else if(is.atomic(object)) {
 	    if((1 == length(a <- attributes(object))) && (names(a) == "names"))
-		str1 <- paste(" Named vector", le.str)
+		str1 <- gettextf(" Named vector %s", le.str, domain = "R-utils")
 	    else {
 		##-- atomic / not-vector  "unclassified object" ---
-		str1 <- paste(" atomic", le.str)
+		str1 <- paste("atomic", le.str)
 	    }
 	} else if(typeof(object) == "promise") {
-	    cat(" promise ")
 	    if (!is.null(envir)) {
 		objExp <- eval(bquote(substitute(.(attr(envir, "nam")), envir)))
-		cat("to ")
+		cat("promise to ")
 		strSub(objExp)
-	    } else cat(" <...>\n")
+	    } else cat("promise <...>\n")
 	    return(invisible())
 	} else {
 	    ##-- NOT-atomic / not-vector  "unclassified object" ---
 	    ##str1 <- paste(" ??? of length", le, ":")
-	    str1 <- paste("length", le)
+	    str1 <- gettextf("length %d", le, domain = "R-utils")
 	}
 	##-- end  if else..if else...  {still non-list case}
 
@@ -504,7 +543,7 @@ str.default <-
 	    } else {
 		give.mode <- TRUE
 	    }
-	    if(give.mode) str1 <- paste0(str1, ', mode "', mod,'":')
+	    if(give.mode) str1 <- paste0(str1, gettextf(", mode %s:", dQuote(mod)))
 
 	} else if(is.logical(object)) {
 	    v.len <- 1.5 * v.len # was '3' originally (but S prints 'T' 'F' ..)
@@ -626,7 +665,7 @@ print.ls_str <- function(x, max.level = 1, give.attr = FALSE,
 ##__	    str(get(nam, envir = E, mode = M),
 ##__		max.level = max.level, give.attr = give.attr, ...)
 
-	o <- tryCatch(get(nam, envir = E, mode = M), error = function(e)e)
+	o <- tryCatch(get(nam, envir = E, mode = M), error = function(e) e)
 	if(inherits(o, "error")) {
 	    cat(## FIXME: only works with "C" (or English) LC_MESSAGES locale!
 		if(length(grep("missing|not found", o$message)))

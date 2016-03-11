@@ -17,6 +17,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
+
 SEXP objectSize(SEXP s);
 SEXP unzip(SEXP args);
 SEXP Rprof(SEXP args);
@@ -53,7 +54,7 @@ SEXP processevents(void);
 
 SEXP octsize(SEXP);
 
-#ifdef Win32
+#ifdef _WIN32
 SEXP winProgressBar(SEXP call, SEXP op, SEXP args, SEXP rho);
 SEXP closeWinProgressBar(SEXP call, SEXP op, SEXP args, SEXP rho);
 SEXP setWinProgressBar(SEXP call, SEXP op, SEXP args, SEXP rho);

@@ -279,15 +279,12 @@ rc.status <- function()
     start <-
         if (insideQuotes)
             ## set 'start' to the location of the last quote
-            suppressWarnings(gregexpr("['\"]", linebuffer,
-                                      perl = TRUE))[[1L]]
+            suppressWarnings(gregexpr("['\"]", linebuffer, perl = TRUE))[[1L]]
         else
             ##                    things that should not cause breaks
             ##                           _____.^._____
             ##                          /             \
-            suppressWarnings(gregexpr("[^\\.\\w:?$@[\\]]+",
-                                      linebuffer,
-                                      perl = TRUE))[[1L]]
+            suppressWarnings(gregexpr("[^\\.\\w:?$@[\\]]+", linebuffer, perl = TRUE))[[1L]]
     start <- ## 0-indexed
         if (all(start < 0L)) 0L
         else tail.default(start + attr(start, "match.length"), 1L) - 1L
@@ -769,7 +766,7 @@ specialFunctionArgs <- function(fun, text)
                if (.CompletionEnv$settings[["data"]])
                {
                    findMatches(sprintf("^%s", makeRegexpSafe(text)),
-                               data()$results[, "Item"])
+                               data()$results[, 3L])
                }
                else character()
            },

@@ -125,11 +125,11 @@ function(x, y, weights=rep(1,n), ww=rep(1,q), nterms, max.terms=nterms,
 print.ppr <- function(x, ...)
 {
     if(!is.null(cl <- x$call)) {
-	cat("Call:\n")
+	cat(gettext("Call:", domain = "R-stats"), "\n", sep = "")
 	dput(cl, control=NULL)
     }
     mu <- x$mu; ml <- x$ml
-    cat("\nGoodness of fit:\n")
+    cat("\n", gettext("Goodness of fit:", domain = "R-stats"), "\n", sep = "")
     gof <- setNames(x$gofn, paste(1L:ml, "terms"))
     print(format(gof[mu:ml], ...), quote=FALSE)
     invisible(x)
@@ -145,12 +145,12 @@ print.summary.ppr <- function(x, ...)
 {
     print.ppr(x, ...)
     mu <- x$mu
-    cat("\nProjection direction vectors:\n")
+    cat("\n", gettext("Projection direction vectors:", domain = "R-stats"), "\n", sep = "")
     print(format(x$alpha, ...), quote=FALSE)
-    cat("\nCoefficients of ridge terms:\n")
+    cat("\n", gettext("Coefficients of ridge terms:", domain = "R-stats"), "\n", sep = "")
     print(format(x$beta, ...), quote=FALSE)
     if(any(x$edf >0)) {
-	cat("\nEquivalent df for ridge terms:\n")
+	cat("\n", gettext("Equivalent df for ridge terms:", domain = "R-stats"), "\n", sep = "")
 	edf <- setNames(x$edf, paste("term", 1L:mu))
 	print(round(edf,2), ...)
     }

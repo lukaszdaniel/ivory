@@ -39,9 +39,9 @@
 #include <stdlib.h>
 
 #ifdef MATHLIB_STANDALONE
-#define ML_ERR_ret_NAN(_k_) {ML_ERROR(ME_DOMAIN, "rmultinom"); rN[_k_]=-1; return;}
+#define ML_ERR_ret_NAN(_k_) {ML_ERROR(ME_DOMAIN, "rmultinom()"); rN[_k_]=-1; return;}
 #else
-#define ML_ERR_ret_NAN(_k_) {ML_ERROR(ME_DOMAIN, "rmultinom"); rN[_k_]=NA_INTEGER; return;}
+#define ML_ERR_ret_NAN(_k_) {ML_ERROR(ME_DOMAIN, "rmultinom()"); rN[_k_]=NA_INTEGER; return;}
 #endif
 
 void rmultinom(int n, double* prob, int K, int* rN)
@@ -58,10 +58,10 @@ void rmultinom(int n, double* prob, int K, int* rN)
        result. */
 
 #ifdef MATHLIB_STANDALONE
-    if (K < 1) { ML_ERROR(ME_DOMAIN, "rmultinom"); return;}
+    if (K < 1) { ML_ERROR(ME_DOMAIN, "rmultinom()"); return;}
     if (n < 0)  ML_ERR_ret_NAN(0);
 #else
-    if (K == NA_INTEGER || K < 1) { ML_ERROR(ME_DOMAIN, "rmultinom"); return;}
+    if (K == NA_INTEGER || K < 1) { ML_ERROR(ME_DOMAIN, "rmultinom()"); return;}
     if (n == NA_INTEGER || n < 0)  ML_ERR_ret_NAN(0);
 #endif
 

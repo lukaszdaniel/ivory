@@ -113,7 +113,7 @@ formatC <- function (x, digits = NULL, width = NULL,
 {
     if(is.object(x)) {
         x <- unclass(x)
-        warning("class of 'x' was discarded")
+        warning("class of 'x' argument was discarded")
     }
 
     format.char <- function (x, width, flag)
@@ -131,11 +131,10 @@ formatC <- function (x, digits = NULL, width = NULL,
 	if(mode == "real") mode <- "double"
 	storage.mode(x) <- mode
     }
-    else if (mode != "character")
-        stop("'mode' must be \"double\" (\"real\"), \"integer\" or \"character\"")
+    else if (mode != "character") stop("'mode' argument must be \"double\" (\"real\"), \"integer\" or \"character\"")
     if (mode == "character" || (!is.null(format) && format == "s")) {
 	if (mode != "character") {
-	    warning('coercing argument to "character" for format="s"')
+	    warning("coercing argument to an object of class \"character\" for 'format=\"s\"' option")
 	    x <- as.character(x)
 	}
 	return(format.char(x, width=width, flag=flag))
@@ -149,7 +148,7 @@ formatC <- function (x, digits = NULL, width = NULL,
 	else if (format == "d") {
 	    if (mode != "integer") mode <- storage.mode(x) <- "integer"
 	}
-	else stop('\'format\' must be one of {"f","e","E","g","G", "fg", "s"}')
+	else stop("'format' argument must be one of {\"f\",\"e\",\"E\",\"g\",\"G\",\"fg\",\"s\"}")
     }
     some.special <- !all(Ok <- is.finite(x))
     if (some.special) {
@@ -164,10 +163,9 @@ formatC <- function (x, digits = NULL, width = NULL,
     else if(digits < 0L)
 	digits <- 6L
     else {
-	maxDigits <- if(format != "f") 50L else
-	    ceiling(-(.Machine$double.neg.ulp.digits + .Machine$double.min.exp) / log2(10))
+	maxDigits <- if(format != "f") 50L else ceiling(-(.Machine$double.neg.ulp.digits + .Machine$double.min.exp) / log2(10))
 	if (digits > maxDigits) {
-            warning(gettextf("'digits' reduced to %d", maxDigits), domain = NA)
+            warning(gettextf("'digits' argument reduced to %d", maxDigits), domain = "R-base")
 	    digits <- maxDigits
 	}
     }
@@ -191,7 +189,7 @@ formatC <- function (x, digits = NULL, width = NULL,
     flag <- as.character(flag)
     nf <- strsplit(flag, "")[[1L]]
     if(!all(nf %in% c("0", "+", "-", " ", "#")))
-	stop("'flag' can contain only '0+- #'")
+	stop("'flag' argument can contain only '0+- #'")
     if(digits > 0 && any(nf == "#"))
 	digits <- -digits # C-code will notice "do not drop trailing zeros"
 
@@ -229,7 +227,7 @@ format.data.frame <- function(x, ..., justify = "none")
 	rval[[i]] <- format(x[[i]], ..., justify = justify)
     lens <- vapply(rval, NROW, 1)
     if(any(lens != nr)) { # corrupt data frame, must have at least one column
-	warning("corrupt data frame: columns will be truncated or padded with NAs")
+	warning("corrupt data frame: columns will be truncated or padded with NA values")
 	for(i in seq_len(nc)) {
 	    len <- NROW(rval[[i]])
 	    if(len == nr) next
@@ -274,11 +272,11 @@ format.AsIs <- function(x, width = 12, ...)
 .format.zeros <- function(x, zero.print, nx = suppressWarnings(as.numeric(x))) {
     if (!is.null(zero.print) && any(i0 <- nx == 0 & !is.na(nx))) {
 	## print zeros according to 'zero.print' (logical or string):
-	if(length(zero.print) > 1L) stop("'zero.print' has length > 1")
+	if(length(zero.print) > 1L) stop(gettextf("'%s' argument has length > 1", "zero.print"))
 	if(is.logical(zero.print))
 	    zero.print <- if(zero.print) "0" else " "
 	if(!is.character(zero.print))
-	    stop("'zero.print' must be character, logical or NULL")
+	    stop(gettextf("'%s' argument must be character, logical or NULL", "zero.print"))
 	nz <- nchar(zero.print, "c")
 	nc <- nchar(x[i0], "c")
 	ind0 <- regexpr("0", x[i0], fixed = TRUE)# first '0' in string
@@ -308,8 +306,8 @@ prettyNum <-
     nMark <- big.mark == "" && small.mark == "" && (notChar || decimal.mark == input.d.mark)
 
     if (identical(big.mark, decimal.mark))
-        warning(gettextf("'big.mark' and 'decimal.mark' are both '%s', which could be confusing",
-                         big.mark), domain = NA)
+        warning(gettextf("'big.mark' and 'decimal.mark' arguments are both set to '%s', which could be confusing",
+                         big.mark), domain = "R-base")
 
     nZero <- is.null(zero.print) && !drop0trailing
     if(nMark && nZero)
@@ -361,7 +359,7 @@ prettyNum <-
     if(any((lx.sp <- lengths(x.sp)) > 2)) { # partly more than two parts
 	x.sp <- lapply(x.sp, function(xs) {
 	    lx <- length(xs)
-	    if(lx <= 2) xs else c(paste(xs[1:(lx-1)], collapse=input.d.mark),
+	    if(lx <= 2) xs else c(paste(xs[seq_len(lx-1)], collapse=input.d.mark),
 				  xs[lx])
 	})
     }

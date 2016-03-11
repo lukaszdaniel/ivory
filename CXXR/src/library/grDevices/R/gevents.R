@@ -35,7 +35,7 @@ getGraphicsEventEnv <- function(which=dev.cur()) {
     .External2(C_getGraphicsEventEnv, which)
 }
 
-getGraphicsEvent <- function(prompt = "Waiting for input",
+getGraphicsEvent <- function(prompt = gettext("Waiting for input", domain = "R-grDevices"),
                  onMouseDown = NULL, onMouseMove = NULL, onMouseUp = NULL,
                  onKeybd = NULL, consolePrompt = prompt) {
     if (!interactive()) return(NULL)

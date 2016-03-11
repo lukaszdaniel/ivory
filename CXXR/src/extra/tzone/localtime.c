@@ -37,6 +37,7 @@ use of tm_zone and tm_gmtoff on all platforms.
 #include <config.h>
 #include <string.h>
 #include <limits.h>	/* for CHAR_BIT et al. */
+#include <Localization.h>
 
 // To get tm_zone, tm_gmtoff defined in glibc
 // (although this file is not usually used there).
@@ -435,11 +436,11 @@ tzload(const char * name, struct state * const sp, const int doextend)
 	    name = fullname;
 	}
 	if (doaccess && access(name, R_OK) != 0) {
-	    Rf_warning("unknown timezone '%s'", sname);
+	    Rf_warning(_("unknown timezone '%s'"), sname);
 	    return -1;
 	}
 	if ((fid = open(name, OPEN_MODE)) == -1) {
-	    Rf_warning("unknown timezone '%s'", sname);
+	    Rf_warning(_("unknown timezone '%s'"), sname);
 	    return -1;
 	}
 		

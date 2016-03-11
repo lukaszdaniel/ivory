@@ -25,7 +25,7 @@ check_for_XQuartz <- function()
         if(length(ind)) {
             this <- sub(" .*", "", sub("^\t", "", out[ind]))
             if(!file.exists(this))
-                stop("X11 library is missing: install XQuartz from xquartz.macosforge.org", domain = NA)
+                stop("X11 library is missing: install XQuartz from xquartz.macosforge.org", domain = "R-utils")
         }
     }
 }
@@ -33,17 +33,17 @@ check_for_XQuartz <- function()
 dataentry <- function (data, modes)
 {
     check <- Sys.getenv("_R_CHECK_SCREEN_DEVICE_", "")
-    msg <- "dataentry() should not be used in examples etc"
+    msg <- gettextf("'%s' function should not be used in examples etc", "dataentry()", domain = "R-utils")
     if (identical(check, "stop"))
         stop(msg, domain = NA)
     else if (identical(check, "warn"))
         warning(msg, immediate. = TRUE, noBreaks. = TRUE, domain = NA)
 
     if(!is.list(data) || !length(data) || !all(sapply(data, is.vector)))
-        stop("invalid 'data' argument")
+        stop(gettextf("invalid '%s' argument", "data"))
     if(!is.list(modes) ||
        (length(modes) && !all(sapply(modes, is.character))))
-        stop("invalid 'modes' argument")
+        stop(gettextf("invalid '%s' argument", "modes"))
     if (grepl("darwin", R.version$os)) check_for_XQuartz()
     .External2(C_dataentry, data, modes)
 }
@@ -51,7 +51,7 @@ dataentry <- function (data, modes)
 View <- function (x, title)
 {
     check <- Sys.getenv("_R_CHECK_SCREEN_DEVICE_", "")
-    msg <- "View() should not be used in examples etc"
+    msg <- gettextf("'%s' function should not be used in examples etc", "View()", domain = "R-utils")
     if (identical(check, "stop"))
         stop(msg, domain = NA)
     else if (identical(check, "warn"))
@@ -71,7 +71,7 @@ View <- function (x, title)
     if(any(rn != seq_along(rn))) x <- c(list(row.names = rn), x)
     if(!is.list(x) || !length(x) || !all(sapply(x, is.atomic)) ||
        !max(lengths(x)))
-        stop("invalid 'x' argument")
+        stop(gettextf("invalid '%s' argument", "x"))
     if (grepl("darwin", R.version$os)) check_for_XQuartz()
     invisible(.External2(C_dataviewer, x, title))
 }
@@ -129,7 +129,7 @@ edit.data.frame <-
         if(any(has_class))
             warning(sprintf(ngettext(sum(has_class),
                                     "class discarded from column %s",
-                                    "classes discarded from columns %s"),
+                                    "classes discarded from columns %s", domain = "R-utils"),
                             paste(sQuote(names(name)[has_class]),
                                   collapse=", ")),
                     domain = NA, call. = FALSE, immediate. = TRUE)
@@ -165,7 +165,7 @@ edit.data.frame <-
             ok <- is.na(o) | (o > 0 & o <= length(a$levels))
             if (any(!ok)) {
                 warning(gettextf("invalid factor levels in '%s'", names(out)[i]),
-                        domain = NA)
+                        domain = "R-utils")
                 o[!ok] <- NA
             }
 	    attributes(o) <- a
@@ -174,7 +174,7 @@ edit.data.frame <-
             if (any(new <- is.na(match(o, c(a$levels, NA_integer_))))) {
                 new <- unique(o[new])
                 warning(gettextf("added factor levels in '%s'", names(out)[i]),
-                        domain = NA)
+                        domain = "R-utils")
                 o <- factor(o, levels=c(a$levels, new),
                             ordered = is.ordered(o))
             } else {

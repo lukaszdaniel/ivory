@@ -19,6 +19,7 @@
 
 #include <R.h>
 #include "parallel.h"
+#include "localization.h"
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
@@ -73,7 +74,7 @@ SEXP ncpus(SEXP virtual)
 	GetProcAddress(GetModuleHandle(TEXT("kernel32")),
 		       "GetLogicalProcessorInformation");
     if (NULL == glpi) {
-	warning("GetLogicalProcessorInformation is not supported on this OS.");
+	warning(_("GetLogicalProcessorInformation is not supported on this OS."));
         return ans;
     }
 
@@ -83,8 +84,8 @@ SEXP ncpus(SEXP virtual)
             if (GetLastError() == ERROR_INSUFFICIENT_BUFFER) {
                 if (buffer) free(buffer);
                 buffer = (PSYSTEM_LOGICAL_PROCESSOR_INFORMATION) malloc(returnLength);
-                if (!buffer) error("allocation failure");
-            } else error("in reading processor information, probable cause: %d", GetLastError());
+                if (!buffer) error(_("allocation failure"));
+            } else error(_("in reading processor information, probable cause: %d"), GetLastError());
         } else done = TRUE;
     }
 

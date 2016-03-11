@@ -25,19 +25,19 @@ sweep <- function(x, MARGIN, STATS, FUN = "-", check.margin = TRUE, ...)
         dimstats <- dim(STATS)
         lstats <- length(STATS)
         if (lstats > prod(dimmargin)) {
-            warning("STATS is longer than the extent of 'dim(x)[MARGIN]'")
+            warning("'STATS' argument is longer than the extent of 'dim(x)[MARGIN]'")
         } else if (is.null(dimstats)) { # STATS is a vector
             cumDim <- c(1L, cumprod(dimmargin))
             upper <- min(cumDim[cumDim >= lstats])
             lower <- max(cumDim[cumDim <= lstats])
             if (lstats && (upper %% lstats != 0L || lstats %% lower != 0L))
-                warning("STATS does not recycle exactly across MARGIN")
+                warning("'STATS' argument does not recycle exactly across 'MARGIN' argument")
         } else {
             dimmargin <- dimmargin[dimmargin > 1L]
             dimstats <- dimstats[dimstats > 1L]
             if (length(dimstats) != length(dimmargin) ||
                 any(dimstats != dimmargin))
-                warning("length(STATS) or dim(STATS) do not match dim(x)[MARGIN]")
+                warning("'length(STATS)' or 'dim(STATS)' do not match 'dim(x)[MARGIN]'")
         }
     }
     perm <- c(MARGIN, seq_along(dims)[ - MARGIN])

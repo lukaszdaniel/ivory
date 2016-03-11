@@ -32,12 +32,7 @@
 #include <R_ext/Error.h>
 #include <R_ext/Arith.h> /* for R_FINITE */
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("graphics", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 static void stem_print(int close, int dist, int ndigits)
 {
@@ -107,12 +102,15 @@ stem_leaf(double *x, int n, double scale, int width, double atom)
 
     pdigits = 1 - (int) floor(log10(c) + 0.5);
 
-    Rprintf("  The decimal point is ");
     if(pdigits == 0)
-	Rprintf("at the |\n\n");
+	Rprintf(_("  The decimal point is at the |\n\n"));
     else
-	Rprintf("%d digit(s) to the %s of the |\n\n",abs(pdigits),
-		(pdigits > 0) ? "right" : "left");
+	{
+	if(pdigits > 0)
+		Rprintf(n_("  The decimal point is %d digit to the right of the |\n\n", "  The decimal point is %d digits to the right of the |\n\n", pdigits), pdigits);
+	else
+		Rprintf(n_("  The decimal point is %d digit to the left of the |\n\n", "  The decimal point is %d digits to the left of the |\n\n", -pdigits), -pdigits);
+	}
     i = 0;
     do {
 	if(lo < 0)
@@ -149,7 +147,7 @@ stem_leaf(double *x, int n, double scale, int width, double atom)
 /* The R wrapper has removed NAs from x */
 SEXP C_StemLeaf(SEXP x, SEXP scale, SEXP swidth, SEXP atom)
 {
-    if(TYPEOF(x) != REALSXP || TYPEOF(scale) != REALSXP) error("invalid input");
+    if(TYPEOF(x) != REALSXP || TYPEOF(scale) != REALSXP) error(_("invalid input"));
 #ifdef LONG_VECTOR_SUPPORT
     if (IS_LONG_VEC(x))
 	error(_("long vector '%s' is not supported"), "x");
@@ -191,7 +189,7 @@ C_bincount(double *x, R_xlen_t n, double *breaks, R_xlen_t nb, int *count,
 		}
 #ifdef LONG_VECTOR_SUPPORT
 		if(count[lo] >= INT_MAX)
-		    error("count for a bin exceeds INT_MAX");
+		    error(_("count for a bin exceeds INT_MAX"));
 #endif
 		count[lo]++;
 	    }

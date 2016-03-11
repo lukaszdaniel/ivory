@@ -28,7 +28,7 @@ splinefun <-
     y <- x$y
     x <- x$x
     nx <- as.integer(length(x))
-    if(is.na(nx)) stop("invalid value of length(x)")
+    if(is.na(nx)) stop(gettextf("invalid '%s' value", "length(x)"))
     if(nx == 0) stop("zero non-NA points")
     method <- match.arg(method)
     if(method == "periodic" && y[1L] != y[nx]) {
@@ -64,7 +64,7 @@ splinefun <-
     function(x, deriv = 0L) {
 	deriv <- as.integer(deriv)
 	if (deriv < 0L || deriv > 3L)
-	    stop("'deriv' must be between 0 and 3")
+	    stop(gettextf("'%s' argument must be between %s and %s", "deriv", "0", "3"))
 	if (deriv > 0L) {
 	    ## For deriv >= 2, using approx() should be faster, but doing it correctly
 	    ## for all three methods is not worth the programmer's time...
@@ -103,7 +103,7 @@ splinefunH0 <- function(x0, y0, m, dx = x0[-1L] - x0[-length(x0)])
 	extrapol <- match.arg(extrapol)
 	deriv <- as.integer(deriv)
 	if (deriv < 0 || deriv > 3)
-	    stop("'deriv' must be between 0 and 3")
+	    stop(gettextf("'%s' argument must be between %s and %s", "deriv", "0", "3"))
 	i <- findInterval(x, x0, all.inside = (extrapol == "cubic"))
 	if(deriv == 0)
 	    interp <- function(x, i) {

@@ -28,12 +28,10 @@ function(y, groups, blocks, ...)
     }
     else {
         if(anyNA(groups) || anyNA(blocks))
-            stop("NA's are not allowed in 'groups' or 'blocks'")
+            stop("NA values are not allowed in 'groups' or 'blocks' arguments")
         if(any(diff(c(length(y), length(groups), length(blocks))) != 0L))
-            stop("'y', 'groups' and 'blocks' must have the same length")
-        DNAME <- paste0(DNAME, ", ",
-                        deparse(substitute(groups)), " and ",
-                        deparse(substitute(blocks)))
+            stop(gettextf("'%s', '%s' and '%s' arguments must have the same length", "y", "groups", "blocks"))
+        DNAME <- gettextf("%s and %s and %s", paste(deparse(substitute(y)), collapse = ""), paste(deparse(substitute(groups)), collapse = ""), paste(deparse(substitute(blocks)), collapse = ""), domain = "R-stats")
         if(any(table(groups, blocks) != 1))
             stop("not an unreplicated complete block design")
         groups <- factor(groups)
@@ -64,31 +62,31 @@ function(y, groups, blocks, ...)
         PARAMETER <- c(k - 1, (b-1) * (k-1))
         PVAL <- pf(STATISTIC, PARAMETER[1L], PARAMETER[2L], lower.tail = FALSE)
     }
-    names(STATISTIC) <- "Quade F"
+    names(STATISTIC) <- gettext("Quade F", domain = "R-stats")
     names(PARAMETER) <- c("num df", "denom df")
-
-    structure(list(statistic = STATISTIC,
+	METHOD <- gettext("Quade test", domain = "R-stats")
+    RVAL <- list(statistic = STATISTIC,
                    parameter = PARAMETER,
                    p.value = PVAL,
-                   method = "Quade test",
-                   data.name = DNAME),
-              class = "htest")
+                   method = METHOD,
+                   data.name = DNAME)
+    class(RVAL) <- "htest"
+    return(RVAL)
 }
 
 quade.test.formula <-
 function(formula, data, subset, na.action, ...)
 {
-    if(missing(formula))
-        stop("'formula' missing")
     ## <FIXME>
     ## Maybe put this into an internal rewriteTwoWayFormula() when
     ## adding support for strata()
-    if((length(formula) != 3L)
+    if(missing(formula)
+       || (length(formula) != 3L)
        || (length(formula[[3L]]) != 3L)
        || (formula[[3L]][[1L]] != as.name("|"))
        || (length(formula[[3L]][[2L]]) != 1L)
        || (length(formula[[3L]][[3L]]) != 1L))
-        stop("incorrect specification for 'formula'")
+        stop(gettextf("'%s' argument is missing or incorrect", "formula"))
     formula[[3L]][[1L]] <- as.name("+")
     ## </FIXME>
     m <- match.call(expand.dots = FALSE)
@@ -98,7 +96,8 @@ function(formula, data, subset, na.action, ...)
     ## need stats:: for non-standard evaluation
     m[[1L]] <- quote(stats::model.frame)
     mf <- eval(m, parent.frame())
-    DNAME <- paste(names(mf), collapse = " and ")
+    if(length(mf) != 3L) stop("invalid formula")
+    DNAME <- gettextf("%s and %s and %s", names(mf[1]), names(mf[2]), names(mf[3]), domain = "R-stats")
     names(mf) <- NULL
     y <- do.call("quade.test", as.list(mf))
     y$data.name <- DNAME

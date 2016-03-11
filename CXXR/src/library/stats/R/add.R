@@ -57,11 +57,10 @@ add1.default <- function(object, scope, scale = 0, test=c("none", "Chisq"),
     for(i in seq_len(ns)) {
 	tt <- scope[i]
 	if(trace > 1) {
-	    cat("trying +", tt, "\n", sep = "")
+	    cat(gettextf("trying +%s", tt, domain = "R-stats"), "\n", sep = "")
 	    flush.console()
 	}
-	nfit <- update(object, as.formula(paste("~ . +", tt)),
-                       evaluate = FALSE)
+	nfit <- update(object, as.formula(paste("~ . +", tt)), evaluate = FALSE)
 	nfit <- eval(nfit, envir=env) # was  eval.parent(nfit)
 	ans[i+1L, ] <- extractAIC(nfit, scale, k = k, ...)
         nnew <- nobs(nfit, use.fallback = TRUE)
@@ -78,10 +77,10 @@ add1.default <- function(object, scope, scale = 0, test=c("none", "Chisq"),
 	nas <- !is.na(dev)
 	P <- dev
 	P[nas] <- safe_pchisq(dev[nas], dfs[nas], lower.tail=FALSE)
-	aod[, c("LRT", "Pr(>Chi)")] <- list(dev, P)
+	aod[, c("LRT", gettext("Pr(>Chi)", domain = NA))] <- list(dev, P)
     }
-    head <- c("Single term additions", "\nModel:", deparse(formula(object)),
-	      if(scale > 0) paste("\nscale: ", format(scale), "\n"))
+    head <- paste(gettext("Single term additions", domain = "R-stats"), "\n\n", gettext("Model:", domain = "R-stats"), "\n", paste(deparse(formula(object)), collapse = ""),
+	      if(scale > 0) paste("\n", gettext("scale: ", domain = "R-stats"), format(scale), "\n", sep = ""), sep = "", collapse = "")
     class(aod) <- c("anova", "data.frame")
     attr(aod, "heading") <- head
     aod
@@ -101,14 +100,14 @@ check_exact <- function(object)
         rss <- sum(w * object$residuals^2)
     }
     if(rss < 1e-10*mss)
-	warning("attempting model selection on an essentially perfect fit is nonsense",
-		call. = FALSE)
+	warning("attempting model selection on an essentially perfect fit is nonsense", call. = FALSE)
 }
 
 add1.lm <- function(object, scope, scale = 0, test=c("none", "Chisq", "F"),
 		    x = NULL, k = 2,...)
 {
     Fstat <- function(table, RSS, rdf) {
+	#dev <- table[[which(names(table) == gettext("Sum of Sq", domain = "R-stats"))]]
 	dev <- table$"Sum of Sq"
 	df <- table$Df
 	rms <- (RSS - dev)/(rdf - df)
@@ -154,7 +153,7 @@ add1.lm <- function(object, scope, scale = 0, test=c("none", "Chisq", "F"),
         if(newn < oldn)
             warning(sprintf(ngettext(newn,
                                      "using the %d/%d row from a combined fit",
-                                     "using the %d/%d rows from a combined fit"),
+                                     "using the %d/%d rows from a combined fit", domain = "R-stats"),
                             newn, oldn), domain = NA)
     } else {
         ## need to get offset and weights from somewhere
@@ -175,9 +174,9 @@ add1.lm <- function(object, scope, scale = 0, test=c("none", "Chisq", "F"),
     RSS[1L] <- deviance(z)
     ## workaround for PR#7842. terms.formula may have flipped interactions
     sTerms <- sapply(strsplit(Terms, ":", fixed=TRUE),
-                     function(x) paste(sort(x), collapse=":"))
+                     function(x) paste(sort(x), collapse = ":"))
     for(tt in scope) {
-        stt <- paste(sort(strsplit(tt, ":")[[1L]]), collapse=":")
+        stt <- paste(sort(strsplit(tt, ":")[[1L]]), collapse = ":")
 	usex <- match(asgn, match(stt, sTerms), 0L) > 0L
 	X <- x[, usex|ousex, drop = FALSE]
 	z <- if(iswt) lm.wfit(X, y, wt, offset=offset)
@@ -193,9 +192,10 @@ add1.lm <- function(object, scope, scale = 0, test=c("none", "Chisq", "F"),
     aod <- data.frame(Df = dfs, "Sum of Sq" = c(NA, RSS[1L] - RSS[-1L]),
 		      RSS = RSS, AIC = aic,
                       row.names = names(dfs), check.names = FALSE)
-    if(scale > 0) names(aod) <- c("Df", "Sum of Sq", "RSS", "Cp")
+    if(scale > 0) names(aod) <- c(gettext("Df", domain = NA), gettext("Sum of Sq", domain = NA), gettext("RSS", domain = NA), gettext("Cp", domain = NA))
     test <- match.arg(test)
     if(test == "Chisq") {
+	#dev <- aod[[which(names(aod) == gettext("Sum of Sq", domain = "R-stats"))]]
         dev <- aod$"Sum of Sq"
         if(scale == 0) {
             dev <- n * log(RSS/n)
@@ -205,20 +205,19 @@ add1.lm <- function(object, scope, scale = 0, test=c("none", "Chisq", "F"),
         df <- aod$Df
         nas <- !is.na(df)
         dev[nas] <- safe_pchisq(dev[nas], df[nas], lower.tail=FALSE)
-        aod[, "Pr(>Chi)"] <- dev
+        aod[, gettext("Pr(>Chi)", domain = NA)] <- dev
     } else if(test == "F") {
 	rdf <- object$df.residual
-	aod[, c("F value", "Pr(>F)")] <- Fstat(aod, aod$RSS[1L], rdf)
+	aod[, c(gettext("F value", domain = NA), gettext("Pr(>F)", domain = NA))] <- Fstat(aod, aod$RSS[1L], rdf)
     }
-    head <- c("Single term additions", "\nModel:", deparse(formula(object)),
-	      if(scale > 0) paste("\nscale: ", format(scale), "\n"))
+    head <- paste(gettext("Single term additions", domain = "R-stats"), "\n\n", gettext("Model:", domain = "R-stats"), "\n", paste(deparse(formula(object)), collapse = ""),
+	      if(scale > 0) paste("\n", gettext("scale: ", domain = "R-stats"), format(scale), "\n", sep = ""), sep = "", collapse = "")
     class(aod) <- c("anova", "data.frame")
     attr(aod, "heading") <- head
     aod
 }
 
-add1.glm <- function(object, scope, scale = 0, test=c("none", "Rao", "LRT",
-                                                 "Chisq", "F"),
+add1.glm <- function(object, scope, scale = 0, test=c("none", "Rao", "LRT", "Chisq", "F"),
 		     x = NULL, k = 2, ...)
 {
     Fstat <- function(table, rdf) {
@@ -273,7 +272,7 @@ add1.glm <- function(object, scope, scale = 0, test=c("none", "Rao", "LRT",
         if(newn < oldn)
             warning(sprintf(ngettext(newn,
                                      "using the %d/%d row from a combined fit",
-                                     "using the %d/%d rows from a combined fit"),
+                                     "using the %d/%d rows from a combined fit", domain = "R-stats"),
                             newn, oldn), domain = NA)
 
     } else {
@@ -296,9 +295,9 @@ add1.glm <- function(object, scope, scale = 0, test=c("none", "Rao", "LRT",
     w <- z$weights
     ## workaround for PR#7842. terms.formula may have flipped interactions
     sTerms <- sapply(strsplit(Terms, ":", fixed=TRUE),
-                     function(x) paste(sort(x), collapse=":"))
+                     function(x) paste(sort(x), collapse = ":"))
     for(tt in scope) {
-        stt <- paste(sort(strsplit(tt, ":")[[1L]]), collapse=":")
+        stt <- paste(sort(strsplit(tt, ":")[[1L]]), collapse = ":")
 	usex <- match(asgn, match(stt, sTerms), 0L) > 0L
 	X <- x[, usex|ousex, drop = FALSE]
 	z <-  glm.fit(X, y, wt, offset=offset,
@@ -334,7 +333,7 @@ add1.glm <- function(object, scope, scale = 0, test=c("none", "Rao", "LRT",
         aod[, LRT] <- dev
         nas <- !is.na(dev)
         dev[nas] <- safe_pchisq(dev[nas], aod$Df[nas], lower.tail=FALSE)
-        aod[, "Pr(>Chi)"] <- dev
+        aod[, gettext("Pr(>Chi)", domain = NA)] <- dev
     } else if(test == "Rao") {
         dev <- pmax(0, score) # roundoff guard
         dev[1L] <- NA
@@ -343,16 +342,15 @@ add1.glm <- function(object, scope, scale = 0, test=c("none", "Rao", "LRT",
         dev <- dev/dispersion
         aod[, SC] <- dev
         dev[nas] <- safe_pchisq(dev[nas], aod$Df[nas], lower.tail=FALSE)
-        aod[, "Pr(>Chi)"] <- dev
+        aod[, gettext("Pr(>Chi)", domain = NA)] <- dev
     } else if(test == "F") {
         if(fam == "binomial" || fam == "poisson")
-            warning(gettextf("F test assumes quasi%s family", fam),
-                    domain = NA)
+            warning(gettextf("F test assumes 'quasi%s' family", fam), domain = "R-stats")
 	rdf <- object$df.residual
-	aod[, c("F value", "Pr(>F)")] <- Fstat(aod, rdf)
+	aod[, c(gettext("F value", domain = NA), gettext("Pr(>F)", domain = NA))] <- Fstat(aod, rdf)
     }
-    head <- c("Single term additions", "\nModel:", deparse(formula(object)),
-	      if(scale > 0) paste("\nscale: ", format(scale), "\n"))
+    head <- paste(gettext("Single term additions", domain = "R-stats"), "\n\n", gettext("Model:", domain = "R-stats"), "\n", paste(deparse(formula(object)), collapse = ""),
+	      if(scale > 0) paste("\n", gettext("scale: ", domain = "R-stats"), format(scale), "\n", sep = ""), sep = "", collapse = "")
     class(aod) <- c("anova", "data.frame")
     attr(aod, "heading") <- head
     aod
@@ -383,7 +381,7 @@ drop1.default <- function(object, scope, scale = 0, test=c("none", "Chisq"),
     for(i in seq_len(ns)) {
 	tt <- scope[i]
 	if(trace > 1) {
-	    cat("trying -", tt, "\n", sep = "")
+	    cat(gettextf("trying - %s", tt, domain = "R-stats"), "\n", sep = "")
 	    flush.console()
         }
         nfit <- update(object, as.formula(paste("~ . -", tt)),
@@ -404,10 +402,10 @@ drop1.default <- function(object, scope, scale = 0, test=c("none", "Chisq"),
         nas <- !is.na(dev)
         P <- dev
         P[nas] <- safe_pchisq(dev[nas], dfs[nas], lower.tail = FALSE)
-        aod[, c("LRT", "Pr(>Chi)")] <- list(dev, P)
+        aod[, c("LRT", gettext("Pr(>Chi)", domain = NA))] <- list(dev, P)
     }
-    head <- c("Single term deletions", "\nModel:", deparse(formula(object)),
-	      if(scale > 0) paste("\nscale: ", format(scale), "\n"))
+    head <- paste(gettext("Single term deletions", domain = "R-stats"), "\n\n", gettext("Model:", domain = "R-stats"), "\n", paste(deparse(formula(object)), collapse = ""),
+	      if(scale > 0) paste("\n", gettext("scale: ", domain = "R-stats"), format(scale), "\n", sep = ""), sep = "", collapse = "")
     class(aod) <- c("anova", "data.frame")
     attr(aod, "heading") <- head
     aod
@@ -458,9 +456,10 @@ drop1.lm <- function(object, scope, scale = 0, all.cols = TRUE,
     aod <- data.frame(Df = dfs, "Sum of Sq" = c(NA, RSS[-1L] - RSS[1L]),
 		      RSS = RSS, AIC = aic,
                       row.names = scope, check.names = FALSE)
-    if(scale > 0) names(aod) <- c("Df", "Sum of Sq", "RSS", "Cp")
+    if(scale > 0) names(aod) <- c(gettext("Df", domain = NA), gettext("Sum of Sq", domain = NA), gettext("RSS", domain = NA), gettext("Cp", domain = NA))
     test <- match.arg(test)
     if(test == "Chisq") {
+	#dev <- aod[[which(names(aod) == gettext("Sum of Sq", domain = "R-stats"))]]
         dev <- aod$"Sum of Sq"
         if(scale == 0) {
             dev <- n * log(RSS/n)
@@ -470,8 +469,9 @@ drop1.lm <- function(object, scope, scale = 0, all.cols = TRUE,
         df <- aod$Df
         nas <- !is.na(df)
         dev[nas] <- safe_pchisq(dev[nas], df[nas], lower.tail=FALSE)
-        aod[, "Pr(>Chi)"] <- dev
+        aod[, gettext("Pr(>Chi)", domain = NA)] <- dev
     } else if(test == "F") {
+	#dev <- aod[[which(names(aod) == gettext("Sum of Sq", domain = "R-stats"))]]
 	dev <- aod$"Sum of Sq"
 	dfs <- aod$Df
 	rdf <- object$df.residual
@@ -481,10 +481,10 @@ drop1.lm <- function(object, scope, scale = 0, all.cols = TRUE,
 	P <- Fs
 	nas <- !is.na(Fs)
 	P[nas] <- safe_pf(Fs[nas], dfs[nas], rdf, lower.tail=FALSE)
-	aod[, c("F value", "Pr(>F)")] <- list(Fs, P)
+	aod[, c(gettext("F value", domain = NA), gettext("Pr(>F)", domain = NA))] <- list(Fs, P)
     }
-    head <- c("Single term deletions", "\nModel:", deparse(formula(object)),
-	      if(scale > 0) paste("\nscale: ", format(scale), "\n"))
+    head <- paste(gettext("Single term deletions", domain = "R-stats"), "\n\n", gettext("Model:", domain = "R-stats"), "\n", paste(deparse(formula(object)), collapse = ""),
+	      if(scale > 0) paste("\n", gettext("scale: ", domain = "R-stats"), format(scale), "\n", sep = ""), sep = "", collapse = "")
     class(aod) <- c("anova", "data.frame")
     attr(aod, "heading") <- head
     aod
@@ -570,7 +570,7 @@ drop1.glm <- function(object, scope, scale = 0, test=c("none", "Rao", "LRT", "Ch
         LRT <- if(dispersion == 1) "LRT" else "scaled dev."
         aod[, LRT] <- dev
         dev[nas] <- safe_pchisq(dev[nas], aod$Df[nas], lower.tail=FALSE)
-        aod[, "Pr(>Chi)"] <- dev
+        aod[, gettext("Pr(>Chi)", domain = NA)] <- dev
     } else if(test == "Rao") {
         dev <- pmax(0, score) # roundoff guard
         nas <- !is.na(dev)
@@ -578,11 +578,10 @@ drop1.glm <- function(object, scope, scale = 0, test=c("none", "Rao", "LRT", "Ch
         dev <- dev/dispersion
         aod[, SC] <- dev
         dev[nas] <- safe_pchisq(dev[nas], aod$Df[nas], lower.tail=FALSE)
-        aod[, "Pr(>Chi)"] <- dev
+        aod[, gettext("Pr(>Chi)", domain = NA)] <- dev
     } else if(test == "F") {
         if(fam == "binomial" || fam == "poisson")
-            warning(gettextf("F test assumes 'quasi%s' family", fam),
-                    domain = NA)
+            warning(gettextf("F test assumes 'quasi%s' family", fam), domain = "R-stats")
 	dev <- aod$Deviance
 	rms <- dev[1L]/rdf
         dev <- pmax(0, dev - dev[1L])
@@ -593,11 +592,11 @@ drop1.glm <- function(object, scope, scale = 0, test=c("none", "Rao", "LRT", "Ch
 	P <- Fs
 	nas <- !is.na(Fs)
 	P[nas] <- safe_pf(Fs[nas], dfs[nas], rdf, lower.tail=FALSE)
-	aod[, c("F value", "Pr(>F)")] <- list(Fs, P)
+	aod[, c(gettext("F value", domain = NA), gettext("Pr(>F)", domain = NA))] <- list(Fs, P)
     }
-    head <- c("Single term deletions", "\nModel:", deparse(formula(object)),
+    head <- paste(gettext("Single term deletions", domain = "R-stats"), "\n\n", gettext("Model:", domain = "R-stats"), "\n", paste(deparse(formula(object)), collapse = ""),
 	      if(!is.null(scale) && scale > 0)
-	      paste("\nscale: ", format(scale), "\n"))
+	      paste("\n", gettext("scale: ", domain = "R-stats"), format(scale), "\n", xep = ""), sep = "", collapse = "")
     class(aod) <- c("anova", "data.frame")
     attr(aod, "heading") <- head
     aod
@@ -636,12 +635,13 @@ factor.scope <- function(factor, scope)
             nmdrop0 <- sapply(strsplit(nmdrop, ":", fixed=TRUE),
                              function(x) paste(sort(x), collapse=":"))
 	    where <- match(nmdrop0, nmfac0, 0L)
-	    if(any(!where))
+	    if(any(!where)) {
                 stop(sprintf(ngettext(sum(where==0),
                                       "lower scope has term %s not included in model",
-                                      "lower scope has terms %s not included in model"),
-                             paste(sQuote(nmdrop[where==0]), collapse=", ")),
+                                      "lower scope has terms %s not included in model", domain = "R-stats"),
+                             paste(sQuote(nmdrop[where==0]), collapse = ", ")),
                      domain = NA)
+		}
 	    facs <- factor[, -where, drop = FALSE]
 	    nmdrop <- nmfac[-where]
 	} else nmdrop <- colnames(factor)
@@ -666,12 +666,13 @@ factor.scope <- function(factor, scope)
             nmadd0 <- sapply(strsplit(nmadd, ":", fixed=TRUE),
                              function(x) paste(sort(x), collapse=":"))
 	    where <- match(nmfac0, nmadd0, 0L)
-	    if(any(!where))
+	    if(any(!where)) {
                 stop(sprintf(ngettext(sum(where==0),
                                       "upper scope has term %s not included in model",
-                                      "upper scope has terms %s not included in model"),
+                                      "upper scope has terms %s not included in model", domain = "R-stats"),
                              paste(sQuote(nmdrop[where==0]), collapse=", ")),
                      domain = NA)
+		}
 	    nmadd <- nmadd[-where]
 	    add <- add[, -where, drop = FALSE]
 	}
@@ -720,16 +721,16 @@ step <- function(object, scope, scale = 0,
 	rdf <- sapply(models, "[[", "df.resid")
 	ddf <- c(NA, diff(rdf))
 	AIC <- sapply(models, "[[", "AIC")
-	heading <- c("Stepwise Model Path \nAnalysis of Deviance Table",
-		     "\nInitial Model:", deparse(formula(object)),
-		     "\nFinal Model:", deparse(formula(fit)),
-		     "\n")
-	aod <- data.frame(Step = I(change), Df = ddf, Deviance = dd,
-                          "Resid. Df" = rdf, "Resid. Dev" = rd, AIC = AIC,
+	heading <- paste(gettext("Stepwise Model Path", domain = "R-stats"), "\n", gettext("Analysis of Deviance Table", domain = "R-stats"),
+		     "\n", gettext("Initial Model: ", domain = "R-stats"), paste(deparse(formula(object)), collapse = ""),
+		     "\n", gettext("Final Model: ", domain = "R-stats"), paste(deparse(formula(fit)), collapse = ""),
+		     "\n", sep = "", collapse = "")
+	aod <- data.frame(Step = I(change), Df = ddf, Deviance = dd, "Resid. Df" = rdf, "Resid. Dev" = rd, AIC = AIC,
                           check.names = FALSE)
+	names(aod) <- c(gettext("Step", domain = NA), gettext("Df", domain = NA), gettext("Deviance", domain = NA), gettext("Resid. Df", domain = NA), gettext("Resid. Dev", domain = NA), gettext("AIC", domain = NA))
         if(usingCp) {
             cn <- colnames(aod)
-            cn[cn == "AIC"] <- "Cp"
+            cn[cn == gettext("AIC", domain = NA)] <- gettext("Cp", domain = NA)
             colnames(aod) <- cn
         }
 	attr(aod, "heading") <- heading
@@ -777,8 +778,7 @@ step <- function(object, scope, scale = 0,
     nm <- 1
     ## Terms <- fit$terms
     if(trace) {
-	cat("Start:  AIC=", format(round(bAIC, 2)), "\n",
-	    cut.string(deparse(formula(fit))), "\n\n", sep = "")
+	cat(gettextf("Start:  AIC=%s", format(round(bAIC, 2)), domain = "R-stats"), "\n", cut.string(deparse(formula(fit))), "\n\n", sep = "")
         flush.console()
     }
 
@@ -841,8 +841,7 @@ step <- function(object, scope, scale = 0,
 	edf <- bAIC[1L]
 	bAIC <- bAIC[2L]
 	if(trace) {
-	    cat("\nStep:  AIC=", format(round(bAIC, 2)), "\n",
-		cut.string(deparse(formula(fit))), "\n\n", sep = "")
+	    cat("\n", gettextf("Step:  AIC=%s", format(round(bAIC, 2)), domain = "R-stats"), "\n", cut.string(deparse(formula(fit))), "\n\n", sep = "")
             flush.console()
         }
         ## add a tolerance as dropping 0-df terms might increase AIC slightly

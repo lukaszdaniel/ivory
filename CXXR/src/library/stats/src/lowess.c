@@ -22,12 +22,7 @@
 # include <config.h>
 #endif
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("stats", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 #include <math.h>
 #include <Rmath.h>		/* fmax2, imin2, imax2 */
@@ -285,17 +280,17 @@ void clowess(double *x, double *y, int n,
 #include <Rinternals.h>
 SEXP lowess(SEXP x, SEXP y, SEXP sf, SEXP siter, SEXP sdelta)
 {
-    if(TYPEOF(x) != REALSXP || TYPEOF(y) != REALSXP) error("invalid input");
+    if(TYPEOF(x) != REALSXP || TYPEOF(y) != REALSXP) error(_("invalid input"));
     int nx = LENGTH(x);
-    if (nx == NA_INTEGER || nx == 0) error("invalid input");
+    if (nx == NA_INTEGER || nx == 0) error(_("invalid input"));
     double f = asReal(sf);
-    if (!R_FINITE(f) || f <= 0) error(_("'f' must be finite and > 0"));
+    if (!R_FINITE(f) || f <= 0) error(_("'%s' argument must be finite and > 0"), "f");
     int iter = asInteger(siter);
     if (iter == NA_INTEGER || iter < 0) 
-	error(_("'iter' must be finite and >= 0"));
+	error(_("'%s' argument must be finite and >= 0"), "iter");
     double delta = asReal(sdelta), *rw, *res;
     if (!R_FINITE(delta) || delta < 0) 
-	error(_("'delta' must be finite and > 0"));
+	error(_("'%s' argument must be finite and > 0"), "delta");
     SEXP ans;
     PROTECT(ans = allocVector(REALSXP, nx));
     rw = (double *) R_alloc(nx, sizeof(double));

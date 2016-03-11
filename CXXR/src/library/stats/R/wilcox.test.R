@@ -31,17 +31,16 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
              && is.finite(conf.level)
              && (conf.level > 0)
              && (conf.level < 1)))
-            stop("'conf.level' must be a single number between 0 and 1")
+            stop(gettextf("'%s' argument must be a single number between 0 and 1", "conf.level"))
     }
 
-    if(!is.numeric(x)) stop("'x' must be numeric")
+    if(!is.numeric(x)) stop(gettextf("'%s' argument must be numeric", "x"))
     if(!is.null(y)) {
-        if(!is.numeric(y)) stop("'y' must be numeric")
-        DNAME <- paste(deparse(substitute(x)), "and",
-                       deparse(substitute(y)))
+        if(!is.numeric(y)) stop(gettextf("'%s' argument must be numeric", "y"))
+        DNAME <- gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)), collapse = ""), domain = "R-stats")
         if(paired) {
             if(length(x) != length(y))
-                stop("'x' and 'y' must have the same length")
+                stop(gettextf("'%s' and '%s' arguments must have the same length", "x", "y"))
             OK <- complete.cases(x, y)
             x <- x[OK] - y[OK]
             y <- NULL
@@ -58,10 +57,10 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
     }
 
     if(length(x) < 1L)
-        stop("not enough (finite) 'x' observations")
+        stop(gettextf("not enough '%s' observations", "x"))
     CORRECTION <- 0
     if(is.null(y)) {
-        METHOD <- "Wilcoxon signed rank test"
+        METHOD <- gettext("Wilcoxon signed rank test", domain = "R-stats")
         x <- x - mu
         ZEROES <- any(x == 0)
         if(ZEROES)
@@ -119,7 +118,8 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
                     conf.level <- 1 - signif(achieved.alpha, 2)
                 }
                 attr(cint, "conf.level") <- conf.level
-		ESTIMATE <- c("(pseudo)median" = median(diffs))
+		ESTIMATE <- median(diffs)
+		names(ESTIMATE) <- gettext("(pseudo)median", domain = "R-stats")
             }
         } else { ## not exact, maybe ties or zeroes
             NTIES <- table(r)
@@ -132,7 +132,7 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
                            "two.sided" = sign(z) * 0.5,
                            "greater" = 0.5,
                            "less" = -0.5)
-                METHOD <- paste(METHOD, "with continuity correction")
+                METHOD <- gettext("Wilcoxon signed rank test with continuity correction", domain = "R-stats")
             }
 	    z <- (z - CORRECTION) / SIGMA
 	    PVAL <- switch(alternative,
@@ -191,7 +191,7 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
                   }
                   if(1 - conf.level < alpha*0.75) {
                     conf.level <- 1 - alpha
-                    warning("requested conf.level not achievable")
+                    warning("requested 'conf.level' value is not achievable")
                   }
                   l <- uniroot(wdiff, c(mumin, mumax), tol=1e-4,
                                zq=qnorm(alpha/2, lower.tail=FALSE))$root
@@ -205,7 +205,7 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
                   }
                   if(1 - conf.level < alpha*0.75) {
                     conf.level <- 1 - alpha
-                    warning("requested conf.level not achievable")
+                    warning("requested 'conf.level' value is not achievable")
                   }
                   l <- uniroot(wdiff, c(mumin, mumax), tol = 1e-4,
                                zq = qnorm(alpha, lower.tail = FALSE))$root
@@ -217,7 +217,7 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
                   }
                   if (1 - conf.level < alpha*0.75) {
                     conf.level <- 1 - alpha
-                    warning("requested conf.level not achievable")
+                    warning("requested 'conf.level' value is not achievable")
                   }
                   u <- uniroot(wdiff, c(mumin, mumax), tol=1e-4,
                                zq = qnorm(alpha))$root
@@ -225,9 +225,8 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
                 })
                 attr(cint, "conf.level") <- conf.level
 		correct <- FALSE # no continuity correction for estimate
-		ESTIMATE <- c("(pseudo)median" =
-			      uniroot(wdiff, c(mumin, mumax), tol=1e-4,
-				      zq = 0)$root)
+		ESTIMATE <- uniroot(wdiff, c(mumin, mumax), tol=1e-4, zq = 0)$root
+		names(ESTIMATE) <- gettext("(pseudo)median", domain = "R-stats")
             }
 
             if(exact && TIES) {
@@ -244,8 +243,8 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
     }
     else { ##-------------------------- 2-sample case ---------------------------
         if(length(y) < 1L)
-            stop("not enough 'y' observations")
-        METHOD <- "Wilcoxon rank sum test"
+            stop(gettextf("not enough '%s' observations", "y"))
+        METHOD <- gettext("Wilcoxon rank sum test", domain = "R-stats")
         r <- rank(c(x - mu, y))
         n.x <- as.double(length(x))
         n.y <- as.double(length(y))
@@ -296,11 +295,12 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
                                c(-Inf, diffs[ql + 1])
                            })
                 if (achieved.alpha-alpha > alpha/2) {
-                    warning("Requested conf.level not achievable")
+                    warning("requested 'conf.level' value is not achievable")
                     conf.level <- 1 - achieved.alpha
                 }
                 attr(cint, "conf.level") <- conf.level
-                ESTIMATE <- c("difference in location" = median(diffs))
+                ESTIMATE <- median(diffs)
+		names(ESTIMATE) <- gettext("difference in location", domain = "R-stats")
             }
         }
         else {
@@ -315,7 +315,7 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
                                      "two.sided" = sign(z) * 0.5,
                                      "greater" = 0.5,
                                      "less" = -0.5)
-                METHOD <- paste(METHOD, "with continuity correction")
+                METHOD <- gettext("Wilcoxon rank sum test with continuity correction", domain = "R-stats")
             }
 	    z <- (z - CORRECTION) / SIGMA
 	    PVAL <- switch(alternative,
@@ -380,9 +380,8 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
                                })
                 attr(cint, "conf.level") <- conf.level
 		correct <- FALSE # no continuity correction for estimate
-		ESTIMATE <- c("difference in location" =
-			      uniroot(wdiff, c(mumin, mumax), tol = 1e-4,
-				      zq = 0)$root)
+		ESTIMATE <- uniroot(wdiff, c(mumin, mumax), tol = 1e-4, zq = 0)$root
+		names(ESTIMATE) <- gettext("difference in location", domain = "R-stats")
             }
 
             if(exact && TIES) {
@@ -393,12 +392,25 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
         }
     }
 
-    names(mu) <- if(paired || !is.null(y)) "location shift" else "location"
+    names(mu) <- if(paired || !is.null(y)) gettext("location shift", domain = "R-stats") else gettext("location", domain = "R-stats")
+
+   if(paired || !is.null(y)) {
+   alt.name <- switch(alternative,
+                           two.sided = gettextf("true location shift is not equal to %s", mu, domain = "R-stats"),
+                           less = gettextf("true location shift is less than %s", mu, domain = "R-stats"),
+                           greater = gettextf("true location shift is greater than %s", mu, domain = "R-stats"))
+  } else {
+  alt.name <- switch(alternative,
+                           two.sided = gettextf("true location is not equal to %s", mu, domain = "R-stats"),
+                           less = gettextf("true location is less than %s", mu, domain = "R-stats"),
+                           greater = gettextf("true location is greater than %s", mu, domain = "R-stats"))
+  }
     RVAL <- list(statistic = STATISTIC,
                  parameter = NULL,
                  p.value = as.numeric(PVAL),
                  null.value = mu,
                  alternative = alternative,
+                 alt.name = alt.name,
                  method = METHOD,
                  data.name = DNAME)
     if(conf.int)
@@ -415,7 +427,7 @@ function(formula, data, subset, na.action, ...)
     if(missing(formula)
        || (length(formula) != 3L)
        || (length(attr(terms(formula[-2L]), "term.labels")) != 1L))
-        stop("'formula' missing or incorrect")
+        stop(gettextf("'%s' argument is missing or incorrect", "formula"))
     m <- match.call(expand.dots = FALSE)
     if(is.matrix(eval(m$data, parent.frame())))
         m$data <- as.data.frame(data)
@@ -423,14 +435,14 @@ function(formula, data, subset, na.action, ...)
     m[[1L]] <- quote(stats::model.frame)
     m$... <- NULL
     mf <- eval(m, parent.frame())
-    DNAME <- paste(names(mf), collapse = " by ")
+    if(length(mf) != 2L) stop("invalid formula")
+    DNAME <- gettextf("%s by %s", names(mf[1]), names(mf[2]), domain = "R-stats")
     names(mf) <- NULL
     response <- attr(attr(mf, "terms"), "response")
     g <- factor(mf[[-response]])
     if(nlevels(g) != 2L)
         stop("grouping factor must have exactly 2 levels")
-    DATA <- setNames(split(mf[[response]], g),
-		     c("x", "y"))
+    DATA <- setNames(split(mf[[response]], g), c("x", "y"))
     y <- do.call("wilcox.test", c(DATA, list(...)))
     y$data.name <- DNAME
     y

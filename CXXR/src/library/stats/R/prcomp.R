@@ -83,12 +83,12 @@ plot.prcomp <- function(x, main = deparse(substitute(x)), ...)
     screeplot.default(x, main = main, ...)
 
 print.prcomp <- function(x, print.x = FALSE, ...) {
-    cat("Standard deviations:\n")
+    cat(gettext("Standard deviations:", domain = "R-stats"), "\n", sep = "")
     print(x$sdev, ...)
-    cat("\nRotation:\n")
+    cat("\n", gettext("Rotation:", domain = "R-stats"), "\n", sep = "")
     print(x$rotation, ...)
     if (print.x && length(x$x)) {
-        cat("\nRotated variables:\n")
+        cat("\n", gettext("Rotated variables:", domain = "R-stats"), "\n", sep = "")
         print(x$x, ...)
     }
     invisible(x)
@@ -111,7 +111,7 @@ summary.prcomp <- function(object, ...)
 print.summary.prcomp <-
 function(x, digits = max(3L, getOption("digits") - 3L), ...)
 {
-    cat("Importance of components:\n")
+    cat(gettext("Importance of components:", domain = "R-stats"), "\n", sep = "")
     print(x$importance, digits = digits, ...)
     invisible(x)
 }

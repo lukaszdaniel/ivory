@@ -31,7 +31,7 @@ scale.default <- function(x, center = TRUE, scale = TRUE)
     else if (is.numeric(center) && (length(center) == nc))
 	x <- sweep(x, 2L, center, check.margin=FALSE)
     else
-	stop("length of 'center' must equal the number of columns of 'x'")
+	stop(gettextf("length of '%s' argument must equal the number of columns of '%s' argument", "center", "x"))
     if (is.logical(scale)) {
 	if (scale) {
 	    f <- function(v) {
@@ -45,7 +45,7 @@ scale.default <- function(x, center = TRUE, scale = TRUE)
     else if (is.numeric(scale) && length(scale) == nc)
 	x <- sweep(x, 2L, scale, "/", check.margin=FALSE)
     else
-	stop("length of 'scale' must equal the number of columns of 'x'")
+	stop(gettextf("length of '%s' argument must equal the number of columns of '%s' argument", "scale", "x"))
     if(is.numeric(center)) attr(x, "scaled:center") <- center
     if(is.numeric(scale)) attr(x, "scaled:scale") <- scale
     x

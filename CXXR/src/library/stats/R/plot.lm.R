@@ -18,10 +18,10 @@
 
 plot.lm <-
 function (x, which = c(1L:3L,5L), ## was which = 1L:4L,
-	  caption = list("Residuals vs Fitted", "Normal Q-Q",
-	  "Scale-Location", "Cook's distance",
-	  "Residuals vs Leverage",
-	  expression("Cook's dist vs Leverage  " * h[ii] / (1 - h[ii]))),
+	  caption = list(gettext("Residuals vs Fitted"), gettext("Normal Q-Q"),
+	  gettext("Scale-Location"), gettext("Cook's distance"),
+	  gettext("Residuals vs Leverage"),
+	  expression(gettext("Cook's dist vs Leverage  ") * h[ii] / (1 - h[ii]))),
 	  panel = if(add.smooth) panel.smooth else points,
 	  sub.caption = NULL, main = "",
 	  ask = prod(par("mfcol")) < length(which) && dev.interactive(), ...,
@@ -32,18 +32,16 @@ function (x, which = c(1L:3L,5L), ## was which = 1L:4L,
 {
     dropInf <- function(x, h) {
 	if(any(isInf <- h >= 1.0)) {
-            warning(gettextf("not plotting observations with leverage one:\n  %s",
-                             paste(which(isInf), collapse=", ")),
-                    call. = FALSE, domain = NA)
+            warning(gettextf("not plotting observations with leverage one:\n  %s", paste(which(isInf), collapse=", "), domain = "R-stats"), call. = FALSE, domain = NA)
 	    x[isInf] <- NaN
 	}
 	x
     }
 
     if (!inherits(x, "lm"))
-	stop("use only with \"lm\" objects")
+	stop(gettextf("'%s' argument must be an object of class %s", "x", dQuote("lm")))
     if(!is.numeric(which) || any(which < 1) || any(which > 6))
-	stop("'which' must be in 1:6")
+	stop(gettextf("'%s' argument must be in {1,..,%d}", "which", 6))
     isGlm <- inherits(x, "glm")
     show <- rep(FALSE, 6)
     show[which] <- TRUE
@@ -69,7 +67,7 @@ function (x, which = c(1L:3L,5L), ## was which = 1L:4L,
 	}
     }
     if (any(show[2L:3L])) {
-	ylab23 <- if(isGlm) "Std. deviance resid." else "Standardized residuals"
+	ylab23 <- if(isGlm) gettext("Std. deviance resid.") else gettext("Standardized residuals")
 	r.w <- if (is.null(w)) r else sqrt(w) * r
         ## NB: rs is already NaN if r=0, hii=1
 	rs <- dropInf( r.w/(s * sqrt(1 - hii)), hii )
@@ -81,18 +79,18 @@ function (x, which = c(1L:3L,5L), ## was which = 1L:4L,
             diff(r.hat) < 1e-10 * mean(hii, na.rm = TRUE)
     }
     if (any(show[c(1L, 3L)]))
-	l.fit <- if (isGlm) "Predicted values" else "Fitted values"
+	l.fit <- if (isGlm) gettext("Predicted values") else gettext("Fitted values")
     if (is.null(id.n))
 	id.n <- 0
     else {
 	id.n <- as.integer(id.n)
 	if(id.n < 0L || id.n > n)
-	    stop(gettextf("'id.n' must be in {1,..,%d}", n), domain = NA)
+	    stop(gettextf("'%s' argument must be in {1,..,%d}", "id.n", n, domain = "R-stats"), domain = NA)
     }
     if(id.n > 0L) { ## label the largest residuals
 	if(is.null(labels.id))
-	    labels.id <- paste(1L:n)
-	iid <- 1L:id.n
+	    labels.id <- paste(seq_len(n))
+	iid <- seq_len(id.n)
 	show.r <- sort.list(abs(r), decreasing = TRUE)[iid]
 	if(any(show[2L:3L]))
 	    show.rs <- sort.list(abs(rs), decreasing = TRUE)[iid]
@@ -129,7 +127,7 @@ function (x, which = c(1L:3L,5L), ## was which = 1L:4L,
 	if(id.n > 0)
 	    ylim <- extendrange(r = ylim, f = 0.08)
         dev.hold()
-	plot(yh, r, xlab = l.fit, ylab = "Residuals", main = main,
+	plot(yh, r, xlab = l.fit, ylab = gettext("Residuals"), main = main,
 	     ylim = ylim, type = "n", ...)
 	panel(yh, r, ...)
 	if (one.fig)
@@ -179,7 +177,7 @@ function (x, which = c(1L:3L,5L), ## was which = 1L:4L,
 	} else ymx <- max(cook, na.rm = TRUE)
         dev.hold()
 	plot(cook, type = "h", ylim = c(0, ymx), main = main,
-	     xlab = "Obs. number", ylab = "Cook's distance", ...)
+	     xlab = gettext("Obs. number"), ylab = gettext("Cook's distance"), ...)
 	if (one.fig)
 	    title(sub = sub.caption, ...)
 	mtext(getCaption(4), 3, 0.25, cex = cex.caption)
@@ -188,7 +186,7 @@ function (x, which = c(1L:3L,5L), ## was which = 1L:4L,
         dev.flush()
     }
     if (show[5L]) {
-        ylab5 <- if (isGlm) "Std. Pearson resid." else "Standardized residuals"
+        ylab5 <- if (isGlm) gettext("Std. Pearson resid.") else gettext("Standardized residuals")
         r.w <- residuals(x, "pearson")
         if(!is.null(w)) r.w <- r.w[wind] # drop 0-weight cases
  	rsp <- dropInf( r.w/(s * sqrt(1 - hii)), hii )
@@ -200,7 +198,7 @@ function (x, which = c(1L:3L,5L), ## was which = 1L:4L,
         do.plot <- TRUE
         if(isConst.hat) { ## leverages are all the same
 	    if(missing(caption)) # set different default
-		caption[[5L]] <- "Constant Leverage:\n Residuals vs Factor Levels"
+		caption[[5L]] <- gettext("Constant Leverage:\n Residuals vs Factor Levels")
             ## plot against factor-level combinations instead
             aterms <- attributes(terms(x))
             ## classes w/o response
@@ -217,7 +215,7 @@ function (x, which = c(1L:3L,5L), ## was which = 1L:4L,
                 dev.hold()
                 plot(facval, rsp, xlim = c(-1/2, sum((nlev-1) * ff) + 1/2),
                      ylim = ylim, xaxt = "n",
-                     main = main, xlab = "Factor Level Combinations",
+                     main = main, xlab = gettext("Factor Level Combinations"),
                      ylab = ylab5, type = "n", ...)
                 axis(1, at = ff[1L]*(1L:nlev[1L] - 1/2) - 1/2,
                      labels = x$xlevels[[1L]])
@@ -229,8 +227,7 @@ function (x, which = c(1L:3L,5L), ## was which = 1L:4L,
             }
 	    else { # no factors
                 message(gettextf("hat values (leverages) are all = %s\n and there are no factor predictors; no plot no. 5",
-                                 format(mean(r.hat))),
-                        domain = NA)
+                                 format(mean(r.hat))), domain = "R-stats")
                 frame()
                 do.plot <- FALSE
             }
@@ -242,7 +239,7 @@ function (x, which = c(1L:3L,5L), ## was which = 1L:4L,
 
             dev.hold()
             plot(xx, rsp, xlim = c(0, max(xx, na.rm = TRUE)), ylim = ylim,
-                 main = main, xlab = "Leverage", ylab = ylab5, type = "n",
+                 main = main, xlab = gettext("Leverage"), ylab = ylab5, type = "n",
                  ...)
             panel(xx, rsp, ...)
             abline(h = 0, v = 0, lty = 3, col = "gray")
@@ -258,8 +255,7 @@ function (x, which = c(1L:3L,5L), ## was which = 1L:4L,
                     lines(hh, cl.h, lty = 2, col = 2)
                     lines(hh,-cl.h, lty = 2, col = 2)
                 }
-                legend("bottomleft", legend = "Cook's distance",
-                       lty = 2, col = 2, bty = "n")
+                legend("bottomleft", legend = gettext("Cook's distance"), lty = 2, col = 2, bty = "n")
                 xmax <- min(0.99, usr[2L])
                 ymult <- sqrt(p*(1-xmax)/xmax)
                 aty <- c(-sqrt(rev(cook.levels))*ymult,
@@ -285,8 +281,8 @@ function (x, which = c(1L:3L,5L), ## was which = 1L:4L,
 	ymx <- max(cook, na.rm = TRUE)*1.025
         dev.hold()
 	plot(g, cook, xlim = c(0, max(g, na.rm=TRUE)), ylim = c(0, ymx),
-	     main = main, ylab = "Cook's distance",
-             xlab = expression("Leverage  " * h[ii]),
+	     main = main, ylab = gettext("Cook's distance"),
+             xlab = expression(gettext("Leverage  ") * h[ii]),
 	     xaxt = "n", type = "n", ...)
 	panel(g, cook, ...)
         ## Label axis with h_ii values

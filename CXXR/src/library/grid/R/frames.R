@@ -133,9 +133,9 @@ grid.place <- function(gPath, grob,
 placeGrob <- function(frame, grob,
                       row=NULL, col=NULL) {
   if (!inherits(frame, "frame"))
-    stop("invalid 'frame'")
+    stop(gettextf("'%s' argument is not an object of class %s", "frame", dQuote("frame")))
   if (!is.grob(grob))
-    stop("invalid 'grob'")
+    stop(gettextf("'%s' argument is not an object of class %s", "grob", dQuote("grob")))
   dim <- frameDim(frame)
   if (is.null(row))
     row <- c(1, dim[1L])
@@ -147,7 +147,7 @@ placeGrob <- function(frame, grob,
     col <- rep(col, 2)
   if (min(row) < 1 || max(row) > dim[1L] ||
       min(col) < 1 || max(col) > dim[2L])
-    stop("invalid 'row' and/or 'col' (no such cell in frame layout)")
+    stop("invalid 'row' and/or 'col' arguments (no such cell in frame layout)")
   cgrob <- cellGrob(col, row, NULL, grob, FALSE,
                     cellViewport(col, row, NULL))
   addGrob(frame, cgrob)
@@ -324,9 +324,9 @@ packGrob <- function(frame, grob,
                      force.width=FALSE, force.height=FALSE,
                      border=NULL, dynamic=FALSE) {
   if (!inherits(frame, "frame"))
-    stop("invalid 'frame'")
+    stop(gettextf("'%s' argument is not an object of class %s", "frame", dQuote("frame")))
   if (!is.grob(grob))
-    stop("invalid 'grob'")
+    stop(gettextf("'%s' argument is not an object of class %s", "grob", dQuote("grob")))
   # col/row can be given as a range, but I only want to know
   # about the min and max
   if (!is.null(col) & length(col) > 1) {

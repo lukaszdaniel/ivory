@@ -71,7 +71,7 @@ function(file, widths, header = FALSE, sep = "\t",
             raw <- raw[1L:(nread-nread %% recordlength)]
             warning(sprintf(ngettext(nread %% recordlength,
                                      "last record incomplete, %d line discarded",
-                                     "last record incomplete, %d lines discarded"),
+                                     "last record incomplete, %d lines discarded", domain = "R-utils"),
                             nread %% recordlength), domain = NA)
         }
         if (recordlength > 1L) {

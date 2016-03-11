@@ -93,10 +93,10 @@
 
     res <- utils::summaryRprof(file, lines = if (lines) "show" else "hide")
 
-    cat("\nEach sample represents", format(res$sample.interval), "seconds.\n")
-    cat("Total run time:", format(res$sampling.time), "seconds.\n")
-    cat("\nTotal seconds: time spent in function and callees.\n")
-    cat("Self seconds: time spent in function alone.\n\n")
+    cat("\n", gettextf("Each sample represents %s seconds.", format(res$sample.interval), domain = "R-tools"), "\n", sep = "")
+    cat(gettextf("Total run time: %s seconds.", format(res$sampling.time), domain = "R-tools"), "\n", sep = "")
+    cat("\n", gettext("Total seconds: time spent in function and callees.", domain = "R-tools"), "\n", sep = "")
+    cat(gettext("Self seconds: time spent in function alone.", domain = "R-tools"), "\n\n", sep = "")
 
     printed <- FALSE
     if (bytotal) {

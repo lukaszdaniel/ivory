@@ -24,7 +24,7 @@ assign("default", NULL, envir = .reg)
 defaultCluster <- function(cl = NULL)
 {
     if(is.null(cl)) cl <- get("default", envir = .reg)
-    if(is.null(cl)) stop("no cluster 'cl' supplied and none is registered")
+    if(is.null(cl)) stop("no cluster 'cl' argument supplied and none is registered")
     checkCluster(cl)
     cl
 }
@@ -40,7 +40,7 @@ setDefaultCluster <- function(cl = NULL)
 #
 
 checkCluster <- function(cl)
-    if (!inherits(cl, "cluster")) stop("not a valid cluster");
+    if (!inherits(cl, "cluster")) stop("'cl' argument is not a valid object of class \"cluster\"");
 
 `[.cluster` <- function(cl, ...) {
     v <- NextMethod()
@@ -196,11 +196,11 @@ checkForRemoteErrors <- function(val)
             if (count == 1) firstmsg <- v
         }
     }
-    ## These will not translate
-    if (count == 1)
-        stop("one node produced an error: ", firstmsg, domain = NA)
-    else if (count > 1)
-        stop(count, " nodes produced errors; first error: ", firstmsg, domain = NA)
+    if(count > 0)
+    stop(sprintf(ngettext(count,
+		"%d node produced an error: %s",
+		"%d nodes produced errors; first error: %s", domain = "R-parallel"),
+		count, firstmsg), domain = NA)
     val
 }
 

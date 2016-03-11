@@ -16,7 +16,7 @@
 #  A copy of the GNU General Public License is available at
 #  https://www.R-project.org/Licenses/
 
-contr.poly <- function (n, scores = 1:n, contrasts = TRUE, sparse = FALSE)
+contr.poly <- function (n, scores = seq_len(n), contrasts = TRUE, sparse = FALSE)
 {
 ## sparse.model.matrix() may call this one with sparse=TRUE anyway ..
 ##     if(sparse)
@@ -31,7 +31,7 @@ contr.poly <- function (n, scores = 1:n, contrasts = TRUE, sparse = FALSE)
 	raw <- qr.qy(QR, z)
 	Z <- sweep(raw, 2L, apply(raw, 2L, function(x) sqrt(sum(x^2))), "/",
 		   check.margin=FALSE)
-	colnames(Z) <- paste0("^", 1L:n - 1L)
+	colnames(Z) <- paste0("^", seq_len(n) - 1L)
 	Z
     }
 
@@ -41,19 +41,18 @@ contr.poly <- function (n, scores = 1:n, contrasts = TRUE, sparse = FALSE)
 	n <- length(levs)
     }
     if (n < 2)
-        stop(gettextf("contrasts not defined for %d degrees of freedom",
-                      n - 1), domain = NA)
+        stop(gettextf("contrasts not defined for %d degrees of freedom", n - 1), domain = "R-stats")
     if (n > 95)
-        stop(gettextf("orthogonal polynomials cannot be represented accurately enough for %d degrees of freedom", n-1), domain = NA)
+        stop(gettextf("orthogonal polynomials cannot be represented accurately enough for %d degrees of freedom", n-1), domain = "R-stats")
     if (length(scores) != n)
-        stop("'scores' argument is of the wrong length")
+        stop(gettextf("'%s' argument is of the wrong length", "scores"))
     if (!is.numeric(scores) || anyDuplicated(scores))
         stop("'scores' must all be different numbers")
     contr <- make.poly(n, scores)
     if(sparse) contr <- .asSparse(contr)
     if (contrasts) {
 	dn <- colnames(contr)
-	dn[2:min(4,n)] <- c(".L", ".Q", ".C")[1:min(3, n-1)]
+	dn[2:min(4,n)] <- c(".L", ".Q", ".C")[seq_len(min(3, n-1))]
 	colnames(contr) <- dn
 	contr[, -1, drop = FALSE]
     }
@@ -77,13 +76,13 @@ poly <- function(x, ..., degree = 1, coefs = NULL, raw = FALSE, simple = FALSE)
 				list(coefs=coefs))))
     }
     if(degree < 1)
-        stop("'degree' must be at least 1")
+        stop(gettextf("'%s' argument must be at least %d", "degree", 1))
     if(raw) {
-        Z <- outer(x, 1L:degree, "^")
-        colnames(Z) <- 1L:degree
+        Z <- outer(x, seq_len(degree), "^")
+        colnames(Z) <- seq_len(degree)
     } else {
 	if(is.null(coefs)) { # fitting
-	    if(anyNA(x)) stop("missing values are not allowed in 'poly'")
+	    if(anyNA(x)) stop("missing values are not allowed in 'poly()'")
 	    if(degree >= length(unique(x)))
 		stop("'degree' must be less than number of unique points")
 	    xbar <- mean(x)
@@ -96,7 +95,7 @@ poly <- function(x, ..., degree = 1, coefs = NULL, raw = FALSE, simple = FALSE)
 	    z <- z * (row(z) == col(z))
 	    Z <- qr.qy(QR, z)
 	    norm2 <- colSums(Z^2)
-	    alpha <- (colSums(x*Z^2)/norm2 + xbar)[1L:degree]
+	    alpha <- (colSums(x*Z^2)/norm2 + xbar)[seq_len(degree)]
 	    norm2 <- c(1, norm2) # to use "common" code below
 	} else {            # prediction
 	    alpha <- coefs$alpha; norm2 <- coefs$norm2
@@ -113,7 +112,7 @@ poly <- function(x, ..., degree = 1, coefs = NULL, raw = FALSE, simple = FALSE)
         if(!simple) ## we may want to use the prediction to clone another prediction
             attr(Z, "coefs") <- list(alpha = alpha, norm2 = norm2)
     }
-    if(simple) Z else structure(Z, degree = 1L:degree, class = c("poly", "matrix"))
+    if(simple) Z else structure(Z, degree = seq_len(degree), class = c("poly", "matrix"))
 }
 
 predict.poly <- function(object, newdata, ...)

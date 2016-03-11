@@ -43,6 +43,8 @@
 #include <config.h>
 #endif
 
+#include <localization.h>
+
 #include <Defn.h>
 #include <Fileio.h>
 #include <Rconnections.h>
@@ -350,7 +352,7 @@ static void remove_worker(httpd_conn_t *c)
     free(c);
 }
 
-#ifndef Win32
+#ifndef _WIN32
 extern int R_ignore_SIGPIPE; /* defined in src/main/main.c on unix */
 #else
 static int R_ignore_SIGPIPE; /* for simplicity of the code below */
@@ -1186,7 +1188,7 @@ int in_R_HTTPDCreate(const char *ip, int port)
     /* create a new socket */
     srv_sock = socket(AF_INET, SOCK_STREAM, 0);
     if (srv_sock == INVALID_SOCKET)
-	Rf_error("unable to create socket");
+	Rf_error(_("unable to create socket"));
 
 #ifndef _WIN32
     /* set socket for reuse so we can re-init if we die */
@@ -1204,13 +1206,13 @@ int in_R_HTTPDCreate(const char *ip, int port)
 	} else {
 	    closesocket(srv_sock);
 	    srv_sock = INVALID_SOCKET;
-	    Rf_error("unable to bind socket to TCP port %d", port);
+	    Rf_error(_("unable to bind socket to TCP port %d"), port);
 	}
     }
 
     /* setup listen */
     if (listen(srv_sock, 8))
-	Rf_error("cannot listen to TCP port %d", port);
+	Rf_error(_("cannot listen to TCP port %d"), port);
 
 #ifndef _WIN32
     /* all went well, register the socket as a handler */
@@ -1258,7 +1260,7 @@ SEXP R_init_httpd(SEXP sIP, SEXP sPort)
 {
     const char *ip = 0;
     if (sIP != R_NilValue && (TYPEOF(sIP) != STRSXP || LENGTH(sIP) != 1))
-	Rf_error("invalid bind address specification");
+	Rf_error(_("invalid bind address specification"));
     if (sIP != R_NilValue)
 	ip = CHAR(STRING_ELT(sIP, 0));
     return ScalarInteger(in_R_HTTPDCreate(ip, asInteger(sPort)));

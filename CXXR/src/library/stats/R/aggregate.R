@@ -42,19 +42,19 @@ function(x, by, FUN, ..., simplify = TRUE, drop = TRUE)
         return(aggregate.data.frame(x, by, function(x) 0L)[seq_along(by)])
     }
     if(!is.list(by))
-        stop("'by' must be a list")
+        stop(gettextf("'%s' argument must be a list", "by"))
     if(is.null(names(by)) && length(by))
-        names(by) <- paste("Group", seq_along(by), sep = ".")
+        names(by) <- gettextf("Group.%d", seq_along(by))
     else {
         nam <- names(by)
         ind <- which(!nzchar(nam))
-        names(by)[ind] <- paste("Group", ind, sep = ".")
+        names(by)[ind] <- gettextf("Group.%d", ind)
     }
 
     nrx <- NROW(x)
 
     if(any(lengths(by) != nrx))
-        stop("arguments must have same length")
+        stop("arguments must have the same length")
 
     y <- as.data.frame(by, stringsAsFactors = FALSE)
     keep <- complete.cases(by)
@@ -128,7 +128,7 @@ aggregate.formula <-
 function(formula, data, FUN, ..., subset, na.action = na.omit)
 {
     if(missing(formula) || !inherits(formula, "formula"))
-        stop("'formula' missing or incorrect")
+        stop(gettextf("'%s' argument is missing or incorrect", "formula"))
     if(length(formula) != 3L)
         stop("'formula' must have both left and right hand sides")
 
@@ -204,8 +204,7 @@ function(x, nfrequency = 1, FUN = sum, ndeltat = 1,
         return(x)
     ratio <- ofrequency /nfrequency
     if(abs(ratio - round(ratio)) > ts.eps)
-        stop(gettextf("cannot change frequency from %g to %g",
-                      ofrequency, nfrequency), domain = NA)
+        stop(gettextf("cannot change frequency from %g to %g", ofrequency, nfrequency), domain = "R-stats")
     ## The desired result is obtained by applying FUN to blocks of
     ## length ofrequency/nfrequency, for each of the variables in x.
     ## We first get the new start and end right, and then break x into
@@ -222,7 +221,7 @@ function(x, nfrequency = 1, FUN = sum, ndeltat = 1,
     ## you get a vector of length 2.
     x <- as.matrix(x)
     nend <- floor(nrow(x) / len) * len
-    x <- apply(array(c(x[1 : nend, ]),
+    x <- apply(array(c(x[seq_len(nend), ]),
                      dim = c(len, nend / len, ncol(x))),
                MARGIN = c(2L, 3L), FUN = FUN, ...)
     if(!mat) x <- as.vector(x)

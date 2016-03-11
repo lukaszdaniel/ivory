@@ -48,8 +48,10 @@ optim <-
 	con$REPORT <- 100
     }
     con[(namc <- names(control))] <- control
-    if(length(noNms <- namc[!namc %in% nmsC]))
-	warning("unknown names in control: ", paste(noNms,collapse=", "))
+    if(length(noNms <- namc[!namc %in% nmsC])) {
+	tmp_N <- paste(noNms,collapse=", ")
+	warning(gettextf("unknown names in control: %s"), tmp_N)
+	}
     if(con$trace < 0)
 	warning("read the documentation for 'trace' more carefully")
     else if (method == "SANN" && con$trace && as.integer(con$REPORT) == 0)
@@ -60,12 +62,12 @@ optim <-
     if(npar == 1 && method == "Nelder-Mead")
         warning("one-dimensional optimization by Nelder-Mead is unreliable:\nuse \"Brent\" or optimize() directly")
     if(npar > 1 && method == "Brent")
-	stop('method = "Brent" is only available for one-dimensional optimization')
+	stop("method = \"Brent\" is only available for one-dimensional optimization")
     lower <- as.double(rep_len(lower, npar))
     upper <- as.double(rep_len(upper, npar))
     res <- if(method == "Brent") { ## 1-D
         if(any(!is.finite(c(upper, lower))))
-           stop("'lower' and 'upper' must be finite values")
+           stop("'lower' and 'upper' arguments must be finite values")
 	res <- optimize(function(par) fn(par,...)/con$fnscale,
                         lower = lower, upper = upper, tol = con$reltol)
 	names(res)[names(res) == c("minimum", "objective")] <- c("par", "value")

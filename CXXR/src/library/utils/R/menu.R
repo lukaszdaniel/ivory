@@ -18,7 +18,7 @@
 
 menu <- function(choices, graphics = FALSE, title = NULL)
 {
-    if(!interactive()) stop("menu() cannot be used non-interactively")
+    if(!interactive()) stop("'menu()' function cannot be used non-interactively")
     if(isTRUE(graphics)) {
         if(.Platform$OS.type == "windows" || .Platform$GUI == "AQUA"
            ## Tk might not require X11 on Mac OS X, but if DISPLAY is set
@@ -45,6 +45,6 @@ menu <- function(choices, graphics = FALSE, title = NULL)
     repeat {
 	ind <- .Call(C_menu, as.character(choices))
 	if(ind <= nc) return(ind)
-	cat(gettext("Enter an item from the menu, or 0 to exit\n"))
+	cat(gettext("Enter an item from the menu, or 0 to exit", domain = "R-utils"), "\n", sep = "")
     }
 }

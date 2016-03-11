@@ -28,7 +28,7 @@
    This file is an add-on  to GraphApp, a cross-platform C graphics library.
  */
 
-#include "win-nls.h"
+#include <Localization.h>
 #include "internal.h"
 #include "rui.h"
 

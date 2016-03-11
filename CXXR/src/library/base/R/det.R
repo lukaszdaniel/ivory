@@ -33,7 +33,7 @@ determinant <- function(x, logarithm = TRUE, ...) UseMethod("determinant")
 determinant.matrix <- function(x, logarithm = TRUE, ...)
 {
     if ((n <- ncol(x)) != nrow(x))
-        stop("'x' must be a square matrix")
+        stop(gettextf("'%s' argument must be a square matrix", "x"))
     if (n < 1L)
 	return(structure(list(modulus =
 			      structure(if(logarithm) 0 else 1,
@@ -41,7 +41,7 @@ determinant.matrix <- function(x, logarithm = TRUE, ...)
 			      sign = 1L),
 			 class = "det"))
     if (is.complex(x))
-        stop("'determinant' not currently defined for complex matrices")
+        stop("'determinant()' function not currently defined for complex matrices")
     ## FIXME: should not be so hard to implement; see
     ##      moddet_ge_real() in ../../../modules/lapack/Lapack.c
     ## the 'sign' would have to be complex z, with |z|=1

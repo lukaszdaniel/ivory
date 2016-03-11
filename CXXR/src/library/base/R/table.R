@@ -124,7 +124,7 @@ function (x, digits = getOption("digits"), quote = FALSE, na.print = "",
     ## return.
     d <- dim(x)
     if (any(d == 0)) {
-        cat ("< table of extent", paste(d, collapse=" x "), ">\n")
+        cat(gettextf("< table of extent %s>", paste(d, collapse = " x "), domain = "R-base"), "\n", sep = "")
         return ( invisible(x) )
     }
 
@@ -149,9 +149,7 @@ function (x, digits = getOption("digits"), quote = FALSE, na.print = "",
 summary.table <- function(object, ...)
 {
     if(!inherits(object, "table"))
-	stop(gettextf("'object' must inherit from class %s",
-                      dQuote("table")),
-             domain = NA)
+	stop(gettextf("'%s' argument must inherit from class %s", "object", dQuote("table"), domain = "R-base"), domain = NA)
     n.cases <- sum(object)
     n.vars <- length(dim(object))
     y <- list(n.vars = n.vars,
@@ -159,7 +157,7 @@ summary.table <- function(object, ...)
     if(n.vars > 1) {
 	m <- vector("list", length = n.vars)
 	relFreqs <- object / n.cases
-	for(k in 1L:n.vars)
+	for(k in seq_len(n.vars))
 	    m[[k]] <- apply(relFreqs, k, sum)
 	expected <- apply(do.call("expand.grid", m), 1L, prod) * n.cases
 	statistic <- sum((c(object) - expected)^2 / expected)
@@ -179,23 +177,18 @@ print.summary.table <-
 function(x, digits = max(1L, getOption("digits") - 3L), ...)
 {
     if(!inherits(x, "summary.table"))
-	stop(gettextf("'x' must inherit from class %s",
-                      dQuote("summary.table")),
-             domain = NA)
+	stop(gettextf("'%s' argument must inherit from class %s", "x", dQuote("summary.table"), domain = "R-base"), domain = NA)
     if(!is.null(x$call)) {
-	cat("Call: "); print(x$call)
+	cat(gettext("Call: ", domain = "R-base")); print(x$call)
     }
-    cat("Number of cases in table:", x$n.cases, "\n")
-    cat("Number of factors:", x$n.vars, "\n")
+    cat(gettext("Number of cases in table: ", domain = "R-base"), x$n.cases, "\n", sep = "")
+    cat(gettext("Number of factors: ", domain = "R-base"), x$n.vars, "\n", sep = "")
     if(x$n.vars > 1) {
-	cat("Test for independence of all factors:\n")
+	cat(gettext("Test for independence of all factors:", domain = "R-base"), "\n", sep = "")
 	ch <- x$statistic
-	cat("\tChisq = ",	format(round(ch, max(0, digits - log10(ch)))),
-	    ", df = ",		x$parameter,
-	    ", p-value = ",	format.pval(x$p.value, digits, eps = 0),
-	    "\n", sep = "")
+	cat("\t", gettextf("Chisq = %s, df = %s, p-value = %s",	format(round(ch, max(0, digits - log10(ch)))), x$parameter, format.pval(x$p.value, digits, eps = 0), domain = "R-base"), "\n", sep = "")
 	if(!x$approx.ok)
-	    cat("\tChi-squared approximation may be incorrect\n")
+	    cat("\t", gettext("Chi-squared approximation may be incorrect", domain = "R-base"), "\n", sep = "")
     }
     invisible(x)
 }
@@ -235,7 +228,7 @@ prop.table <- function(x, margin = NULL)
 
 margin.table <- function(x, margin = NULL)
 {
-    if(!is.array(x)) stop("'x' is not an array")
+    if(!is.array(x)) stop(gettextf("'%s' argument is not an array", "x"))
     if (length(margin)) {
 	z <- apply(x, margin, sum)
 	dim(z) <- dim(x)[margin]

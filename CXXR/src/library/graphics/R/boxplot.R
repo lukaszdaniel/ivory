@@ -93,7 +93,7 @@ boxplot.formula <-
     function(formula, data = NULL, ..., subset, na.action = NULL)
 {
     if(missing(formula) || (length(formula) != 3L))
-	stop("'formula' missing or incorrect")
+	stop("formula missing or incorrect")
     m <- match.call(expand.dots = FALSE)
     if(is.matrix(eval(m$data, parent.frame())))
 	m$data <- as.data.frame(data)
@@ -175,8 +175,8 @@ bxp <- function(z, notch = FALSE, width = NULL, varwidth = FALSE,
 		## FIXME: should MARK on plot !! (S-plus doesn't either)
 		warning(sprintf(ngettext(length(unique(out[inf])),
 				 "Outlier (%s) in boxplot %d is not drawn",
-				 "Outliers (%s) in boxplot %d are not drawn"),
-				paste(unique(out[inf]), collapse=", "), i),
+				 "Outliers (%s) in boxplot %d are not drawn", domain = "R-graphics"),
+				paste(unique(out[inf]), collapse = ", "), i),
 			domain = NA)
 	    }
 	}
@@ -188,8 +188,7 @@ bxp <- function(z, notch = FALSE, width = NULL, varwidth = FALSE,
     if(is.null(at))
 	at <- 1L:n
     else if(length(at) != n)
-        stop(gettextf("'at' must have same length as 'z$n', i.e. %d", n),
-             domain = NA)
+        stop(gettextf("'at' must have same length as 'z$n', i.e. %d", n), domain = "R-graphics")
     ## just for compatibility with S
     if(is.null(z$out))
 	z$out <- numeric()

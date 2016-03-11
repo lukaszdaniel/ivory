@@ -244,7 +244,7 @@ ts.intersect <- function(..., dframe = FALSE)
 diff.ts <- function (x, lag = 1, differences = 1, ...)
 {
     if (lag < 1 | differences < 1)
-        stop("bad value for 'lag' or 'differences'")
+        stop("bad value for 'lag' or 'differences' arguments")
     if (lag * differences >= NROW(x)) return(x[0L])
     ## <FIXME>
     ## lag() and its default method are defined in package ts, so we
@@ -286,7 +286,7 @@ na.omit.ts <- function(object, ...)
         tsp(object) <- c(tm[st], tm[en], xfreq)
         if(!is.null(cl)) class(object) <- cl
     }
-    if(anyNA(object)) stop("time series contains internal NAs")
+    if(anyNA(object)) stop("time series contains internal NA values")
     object
 }
 
@@ -369,13 +369,9 @@ print.ts <- function(x, calendar, ...)
 	calendar <- any(fr.x == c(4,12)) && length(start(x)) == 2L
     if(!calendar) {
         if(fr.x != 1)
-            cat("Time Series:\nStart =", deparse(start(x)),
-                "\nEnd =", deparse(end(x)),
-                "\nFrequency =", deparse(fr.x), "\n")
+			cat(gettextf("Time Series:\nStart = %s\nEnd = %s\nFrequency = %s", deparse(start(x)), deparse(end(x)), deparse(fr.x), domain = "R-stats"), "\n", sep = "")
         else
-            cat("Time Series:\nStart =", format(tsp(x)[1L]),
-                "\nEnd =", format(tsp(x)[2L]),
-                "\nFrequency =", deparse(fr.x), "\n")
+		cat(gettextf("Time Series:\nStart = %s\nEnd = %s\nFrequency = %s", format(tsp(x)[1L]), format(tsp(x)[2L]), deparse(fr.x), domain = "R-stats"), "\n", sep = "")
     }
     print(.preformat.ts(x, calendar, ...), quote = FALSE, right = TRUE, ...)
     invisible(x)
@@ -392,8 +388,7 @@ print.ts <- function(x, calendar, ...)
     if(is.null(Tsp)) stop("series is corrupt, with no 'tsp' attribute")
     nn <- 1 + round((Tsp[2L] - Tsp[1L]) * Tsp[3L])
     if(NROW(x) != nn) {
-        warning(gettextf("series is corrupt: length %d with 'tsp' implying %d",
-                         NROW(x), nn), domain=NA, call.=FALSE)
+        warning(gettextf("series is corrupt: length %d with 'tsp' implying %d", NROW(x), nn), domain = "R-stats", call.=FALSE)
         calendar <- FALSE
     }
     if(NCOL(x) == 1) { # could be 1-col matrix
@@ -455,7 +450,7 @@ plot.ts <-
 	function (x, y = NULL, plot.type = c("multiple", "single"),
 		  xy.labels, xy.lines, panel = lines, nc,
 		  xlabel, ylabel, type = "l", xlim = NULL, ylim = NULL,
-		  xlab = "Time", ylab, log = "", col = par("col"), bg = NA,
+		  xlab = gettext("Time", domain = "R-stats"), ylab, log = "", col = par("col"), bg = NA,
 		  pch = par("pch"), cex = par("cex"),
 		  lty = par("lty"), lwd = par("lwd"),
 		  axes = TRUE, frame.plot = axes, ann = par("ann"),
@@ -626,7 +621,7 @@ window.default <- function(x, start = NULL, end = NULL,
 
     if(!is.null(frequency) && !is.null(deltat) &&
        abs(frequency*deltat - 1) > ts.eps)
-        stop("'frequency' and 'deltat' are both supplied and are inconsistent")
+        stop("'frequency' and 'deltat' arguments are both supplied and are inconsistent")
     if (is.null(frequency) && is.null(deltat)) yfreq <- xfreq
     else if (is.null(deltat)) yfreq <- frequency
     else if (is.null(frequency)) yfreq <- 1/deltat
@@ -636,7 +631,7 @@ window.default <- function(x, start = NULL, end = NULL,
     } else {
         thin <- 1
         yfreq <- xfreq
-        warning("'frequency' not changed")
+        warning("'frequency' argument was not changed")
     }
     start <- if(is.null(start))
 	xtsp[1L]
@@ -646,7 +641,7 @@ window.default <- function(x, start = NULL, end = NULL,
 		stop("bad value for 'start'"))
     if(start < xtsp[1L]-ts.eps/xfreq && !extend) {
 	start <- xtsp[1L]
-	warning("'start' value not changed")
+	warning("'start' argument was not changed")
     }
 
     end <- if(is.null(end))
@@ -654,10 +649,10 @@ window.default <- function(x, start = NULL, end = NULL,
     else switch(length(end),
 		end,
 		end[1L] + (end[2L] - 1)/xfreq,
-		stop("bad value for 'end'"))
+		stop("bad value for 'end' argument"))
     if(end > xtsp[2L]+ts.eps/xfreq && !extend) {
 	end <- xtsp[2L]
-	warning("'end' value not changed")
+	warning("'end' argument was not changed")
     }
 
     if(start > end)
@@ -762,8 +757,7 @@ t.ts <- function(x) {
 ts.plot <- function(..., gpars = list())
 {
     dots <- list(...)
-    pars <- c("xlab", "ylab", "xlim", "ylim", "col", "lty", "lwd",
-              "type", "main", "sub", "log")
+    pars <- c("xlab", "ylab", "xlim", "ylim", "col", "lty", "lwd", "type", "main", "sub", "log")
     m <- names(dots) %in% pars
     if(length(m)) {
         gpars <- c(gpars, dots[m])
@@ -779,8 +773,8 @@ arima.sim <- function(model, n, rand.gen = rnorm,
                       innov = rand.gen(n, ...), n.start = NA,
                       start.innov = rand.gen(n.start, ...), ...)
 {
-    if(!is.list(model)) stop("'model' must be list")
-    if(n <= 0L) stop("'n' must be strictly positive")
+    if(!is.list(model)) stop(gettextf("'%s' argument must be a list", "model"))
+    if(n <= 0L) stop("'n' argument must be strictly positive")
     p <- length(model$ar)
     if(p) {
         minroots <- min(Mod(polyroot(c(1, -model$ar))))
@@ -801,8 +795,8 @@ arima.sim <- function(model, n, rand.gen = rnorm,
     }
     if(!missing(start.innov) && length(start.innov) < n.start)
         stop(sprintf(ngettext(n.start,
-                              "'start.innov' is too short: need %d point",
-                              "'start.innov' is too short: need %d points"),
+                              "'start.innov' argument is too short: need %d point",
+                              "'start.innov' argument is too short: need %d points", domain = "R-stats"),
                      n.start), domain = NA)
     x <- ts(c(start.innov[seq_len(n.start)], innov[1L:n]), start = 1 - n.start)
     if(length(model$ma)) {

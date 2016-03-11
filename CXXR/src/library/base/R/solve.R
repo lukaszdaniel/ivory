@@ -19,11 +19,11 @@
 solve.qr <- function(a, b, ...)
 {
     if( !is.qr(a) )
-	stop("this is the \"qr\" method for the generic function solve()")
+	stop("this is the 'qr' method for the generic function 'solve()'")
     nc <- ncol(a$qr); nr <- nrow(a$qr)
     if( a$rank != min(nc, nr) )
     if( a$rank != nc )
-	stop("singular matrix 'a' in 'solve'")
+	stop("singular matrix 'a' in 'solve()' function")
     if( missing(b) ) {
 	if( nc != nr )
 	    stop("only square matrices can be inverted")
@@ -47,7 +47,7 @@ solve.default <-
     }
 
     if(is.qr(a)) {
-	warning("solve.default called with a \"qr\" object: use 'qr.solve'")
+	warning("'solve.default()' function called with an object of class \"qr\": use 'qr.solve()' function")
 	return(solve.qr(a, b, tol))
     }
 
@@ -67,7 +67,7 @@ qr.solve <- function(a, b, tol = 1e-7)
 	a <- qr(a, tol = tol)
     nc <- ncol(a$qr); nr <- nrow(a$qr)
     if( a$rank != min(nc, nr) )
-	stop("singular matrix 'a' in solve")
+	stop("singular matrix 'a' in 'solve()' function")
     if( missing(b) ) {
 	if( nc != nr )
 	    stop("only square matrices can be inverted")

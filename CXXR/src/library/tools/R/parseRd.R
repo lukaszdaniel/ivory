@@ -46,12 +46,11 @@ parse_Rd <- function(file, srcfile = NULL, encoding = "unknown",
     enc <- grep("^[[:space:]]*\\\\encoding\\{([^}]*)\\}.*", lines[enc], value=TRUE)
     if(length(enc)) {
         if(length(enc) > 1L)
-            warning(file0, ": multiple \\encoding lines, using the first",
-                    domain = NA, call. = warningCalls)
+            warning(gettextf("file %s: multiple \\encoding lines, using the first", sQuote(file0)), domain = "R-tools", call. = warningCalls)
         ## keep first one
         enc <- enc[1L]
         enc <- sub("^[[:space:]]*\\\\encoding\\{([^}]*)\\}.*", "\\1", enc)
-        if(verbose) message("found encoding ", enc, domain = NA)
+        if(verbose) message(gettextf("found encoding %s", sQuote(enc)), domain = "R-tools")
         encoding <- if(enc %in% c("UTF-8", "utf-8", "utf8")) "UTF-8" else enc
     }
     if (encoding == "unknown") encoding <- ""
@@ -65,8 +64,7 @@ parse_Rd <- function(file, srcfile = NULL, encoding = "unknown",
 
     if (encoding == "ASCII") {
         if (any(is.na(iconv(lines, "", "ASCII"))))
-            stop(file0, ": non-ASCII input and no declared encoding",
-                 domain = NA, call. = warningCalls)
+            stop(gettextf("file %s: non-ASCII input and no declared encoding", sQuote(file0)), domain = "R-tools", call. = warningCalls)
     } else if (encoding != "UTF-8")
     	lines <- iconv(lines, encoding, "UTF-8", sub = "byte")
 

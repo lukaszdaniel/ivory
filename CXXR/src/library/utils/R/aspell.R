@@ -58,9 +58,7 @@ function(files, filter, control = list(), encoding = "unknown",
         filter <- aspell_filter_db[[filter_name]]
         ## Warn if the filter was not found in the db.
         if(is.null(filter))
-            warning(gettextf("Filter '%s' is not available.",
-                             filter_name),
-                    domain = NA)
+            warning(gettextf("Filter '%s' is not available.", filter_name), domain = "R-utils")
     }
     else if(is.list(filter)) {
         ## Support
@@ -71,12 +69,10 @@ function(files, filter, control = list(), encoding = "unknown",
         filter <- aspell_filter_db[[filter_name]]
         ## Warn if the filter was not found in the db.
         if(is.null(filter))
-            warning(gettextf("Filter '%s' is not available.",
-                             filter_name),
-                    domain = NA)
+            warning(gettextf("Filter '%s' is not available.", filter_name), domain = "R-utils")
     }
     else if(!is.function(filter))
-        stop("Invalid 'filter' argument.")
+        stop(gettextf("invalid '%s' argument", "filter"))
 
     encoding <- rep(encoding, length.out = length(files))
 
@@ -94,10 +90,7 @@ function(files, filter, control = list(), encoding = "unknown",
         paths <- aspell_find_dictionaries(dictionaries)
         ind <- paths == ""
         if(any(ind)) {
-            warning(gettextf("The following dictionaries were not found:\n%s",
-                             paste(sprintf("  %s", dictionaries[ind]),
-                                   collapse = "\n")),
-                    domain = NA)
+            warning(gettextf("The following dictionaries were not found:\n%s", paste(sprintf("  %s", dictionaries[ind]), collapse = "\n")), domain = "R-utils")
             paths <- paths[!ind]
         }
         if(length(paths)) {
@@ -142,8 +135,7 @@ function(files, filter, control = list(), encoding = "unknown",
         enc <- encoding[i]
 
         if(verbose)
-            message(gettextf("Processing file %s", fname),
-                    domain = NA)
+            message(gettextf("Processing file %s", fname), domain = "R-utils")
 
         lines <- if(is.null(filter))
             readLines(file, encoding = enc, warn = FALSE)
@@ -176,9 +168,7 @@ function(files, filter, control = list(), encoding = "unknown",
                                             stdin = tfile)
 
 	if(out$status != 0L)
-	    stop(gettextf("Running aspell failed with diagnostics:\n%s",
-			  paste(out$stderr, collapse = "\n")),
-                 domain = NA)
+	    stop(gettextf("Running aspell failed with diagnostics:\n%s", paste(out$stderr, collapse = "\n")), domain = "R-utils")
 
 	## Hopefully everything worked ok.
 	lines <- out$stdout[-1L]
@@ -286,7 +276,7 @@ function(object, ...)
 {
     words <- sort(unique(object$Original))
     if(length(words)) {
-        writeLines("Possibly mis-spelled words:")
+        writeLines(gettext("Possibly mis-spelled words:"))
         print(words)
     }
     invisible(words)
@@ -380,8 +370,8 @@ function(x, ...)
     nms <- names(s)
     for(i in seq_along(s)) {
         e <- s[[i]]
-        writeLines(c(sprintf("File '%s':", nms[i]),
-                     sprintf("  Line %s: \"%s\", \"%s\", \"%s\"",
+        writeLines(c(gettextf("File '%s':", nms[i]),
+                     gettextf("  Line %s: \"%s\", \"%s\", \"%s\"",
                              format(e$Line),
                              gsub("\"", "\\\"", e$Left),
                              e$Original,
@@ -562,9 +552,7 @@ aspell_control_R_vignettes <-
 aspell_R_vignettes <-
 function(program = NULL, dictionaries = aspell_dictionaries_R)
 {
-    files <- Sys.glob(file.path(tools:::.R_top_srcdir_from_Rd(),
-                                "src", "library", "*", "vignettes",
-                                "*.Rnw"))
+    files <- Sys.glob(file.path(tools:::.R_top_srcdir_from_Rd(), "src", "library", "*", "vignettes", "*.Rnw"))
 
     program <- aspell_find_program(program)
 
@@ -619,9 +607,7 @@ function(dir,
         ## Deprecated in favor of specifying R level dictionaries.
         ## Maybe give a warning (in particular if both are given)?
         if(!is.null(d <- defaults$personal))
-            control <- c(control,
-                         sprintf("-p %s",
-                                 shQuote(file.path(dir, ".aspell", d))))
+            control <- c(control, sprintf("-p %s", shQuote(file.path(dir, ".aspell", d))))
         ## </FIXME>
     }
 
@@ -1031,7 +1017,7 @@ function(dir, ignore = character(),
 ## Spell-checking DCF files.
 
 aspell_filter_db$dcf <-
-function(ifile, encoding, keep = c("Title", "Description"),
+function(ifile, encoding, keep = c(gettext("Title"), gettext("Description")),
          ignore = character())
 {
     lines <- readLines(ifile, encoding = encoding, warn = FALSE)
@@ -1123,8 +1109,7 @@ function(x, out, language = "en", program = NULL)
     ## </FIXME>
 
     if(names(program) == "aspell") {
-        header <- sprintf("personal_ws-1.1 %s %d UTF-8",
-                          language, length(x))
+        header <- sprintf("personal_ws-1.1 %s %d UTF-8", language, length(x))
         x <- enc2utf8(x)
     }
     else {

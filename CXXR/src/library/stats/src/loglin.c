@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <R_ext/Memory.h>
 #include <R_ext/Applic.h>
+#include "localization.h"
 
 #undef max
 #undef min
@@ -36,7 +37,7 @@ loglin(int nvar, int *dim, int ncon, int *config, int ntab,
        double *dev, int *nlast, int *ifault)
 {
     // nvar could be zero (no-segfault test)
-    if (!nvar) error("no variables");  // not translated
+    if (!nvar) error(_("no variables"));
     int i, j, k, n, point, size, check[nvar], icon[nvar];
     double x, y, xmax;
 
@@ -336,12 +337,6 @@ L50:
 #include <R.h>
 #include <Rinternals.h>
 #include "statsR.h"
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("stats", String)
-#else
-#define _(String) (String)
-#endif
 
 SEXP LogLin(SEXP dtab, SEXP conf, SEXP table, SEXP start, 
 	    SEXP snmar, SEXP eps, SEXP iter) 

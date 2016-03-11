@@ -102,8 +102,7 @@ Sweave <- function(file, driver = RweaveLatex(),
 	if(nzchar(Sys.getenv("R_DEBUG_Sweave"))) {
 	    ## Extensive logging for debugging, needs 'ls' (unix-like or Rtools):
 	    cat(sprintf("l.%3d: %30s -'%4s'- ", linenum, substr(line,1,30), mode))
-	    cat(sprintf("%16s\n", system(paste("ls -s",
-				   summary(drobj$output)$description), intern=TRUE)))
+	    cat(sprintf("%16s\n", system(paste("ls -s", summary(drobj$output)$description), intern=TRUE)))
 	}
         if (length(grep(syntax$doc, line))) { # start new documentation chunk
             if (mode == "doc") {
@@ -127,9 +126,7 @@ Sweave <- function(file, driver = RweaveLatex(),
             }
             mode <- "code"
             chunkopts <- sub(syntax$code, "\\1", line)
-            chunkopts <- SweaveParseOptions(chunkopts,
-                                            drobj$options,
-                                            driver$checkopts)
+            chunkopts <- SweaveParseOptions(chunkopts, drobj$options, driver$checkopts)
             ## these #line directives are used for error messages when parsing
             file <- srcFilenames[filenum]
             chunk <- paste0("#line ", linenum+linediff+1L, ' "', basename(file), '"')
@@ -143,25 +140,20 @@ Sweave <- function(file, driver = RweaveLatex(),
                 chunkref <- sub(syntax$coderef, "\\1", line)
                 if (!(chunkref %in% names(namedchunks))) {
                     ## omit unknown references
-                    warning(gettextf("reference to unknown chunk %s",
-                                     sQuote(chunkref)),
-                            call. = TRUE,domain = NA)
+                    warning(gettextf("reference to unknown chunk %s", sQuote(chunkref)), call. = TRUE,domain = "R-utils")
                     next
                 } else {
                     ## these #line directives are used for error messages
                     ## when parsing
                     file <- srcFilenames[filenum]
-                    line <- c(namedchunks[[chunkref]],
-			      paste0("#line ", linenum+linediff+1L,
-				     ' "', basename(file), '"'))
+                    line <- c(namedchunks[[chunkref]], paste0("#line ", linenum+linediff+1L, ' "', basename(file), '"'))
                 }
             }
             if (mode == "code" &&
                 (prevfilenum != filenum ||
                  prevlinediff != linediff)) {
                 file <- srcFilenames[filenum]
-                line <- c(paste0("#line ", linenum+linediff, ' "', basename(file), '"'),
-                          line)
+                line <- c(paste0("#line ", linenum+linediff, ' "', basename(file), '"'), line)
             }
             srclines <- c(attr(chunk, "srclines"), rep(linenum+linediff, length(line)))
             srcfilenum <- c(attr(chunk, "srcFilenum"), rep(filenum, length(line)))
@@ -199,8 +191,7 @@ SweaveReadFile <- function(file, syntax, encoding = "")
                         pattern = paste0(bf, syntax$extension))
 
         if (length(f) == 0L)
-            stop(gettextf("no Sweave file with name %s found",
-                          sQuote(file[1L])), domain = NA)
+            stop(gettextf("no Sweave file with name %s found", sQuote(file[1L])), domain = "R-utils")
         else if (length(f) > 1L)
             stop(paste(sprintf(ngettext(length(f), "%d Sweave file for basename %s found",
                                         "%d Sweave files for basename %s found",
@@ -222,14 +213,10 @@ SweaveReadFile <- function(file, syntax, encoding = "")
             enc <- if (nzchar(encoding)) {
                 encoding
             } else {
-                stop(sQuote(basename(file)),
-                        " is not ASCII and does not declare an encoding",
-                        domain = NA, call. = FALSE)
+                stop(gettextf("%s is not ASCII and does not declare an encoding", sQuote(basename(file)), domain = "R-utils"), domain = NA, call. = FALSE)
             }
         } else if (enc == "unknown") {
-            stop(sQuote(basename(file)),
-                 " declares an encoding that Sweave does not know about",
-                 domain = NA, call. = FALSE)
+            stop(gettextf("%s declares an encoding that Sweave does not know about", sQuote(basename(file)), domain = "R-utils"), domain = NA, call. = FALSE)
         }
         if (enc == "UTF-8")
             Encoding(text) <- enc
@@ -241,30 +228,24 @@ SweaveReadFile <- function(file, syntax, encoding = "")
     pos <- grep(syntax$syntaxname, text)
 
     if (length(pos) > 1L)
-        warning(gettextf("more than one syntax specification found, using the first one"),
-		domain = NA)
+        warning("more than one syntax specification found, using the first one", domain = "R-utils")
 
     if (length(pos) > 0L) {
         sname <- sub(syntax$syntaxname, "\\1", text[pos[1L]])
         syntax <- get(sname, mode = "list")
         if (!identical(class(syntax), "SweaveSyntax"))
-            stop(gettextf("object %s does not have class \"SweaveSyntax\"",
-                          sQuote(sname)), domain = NA)
+            stop(gettextf("object %s does not have class \"SweaveSyntax\"", sQuote(sname)), domain = "R-utils")
         text <- text[-pos]
         srcLinenum <- srcLinenum[-pos]
     }
-    srcFilenum <- rep_len(1, length(srcLinenum))
+    srcFilenum <- rep(1, length(srcLinenum))
 
     if (!is.null(syntax$input)) {
         while(length(pos <- grep(syntax$input, text))) {
             pos <- pos[1L]
             ifile <- file.path(df, sub(syntax$input, "\\1", text[pos]))
             if (any(ifile == file)) {
-                stop(paste(gettextf("recursive Sweave input %s in stack",
-                                    sQuote(ifile)),
-                           paste("\n         ", seq_len(file), ": ",
-                                 rev(file), collapse="")),
-                 domain = NA)
+                stop(paste(gettextf("recursive Sweave input %s in stack", sQuote(ifile), domain = "R-utils"), paste("\n         ", seq_len(file), ": ", rev(file), collapse = "")), domain = NA)
             }
             itext <- SweaveReadFile(c(ifile, file), syntax, encoding = encoding)
 
@@ -272,10 +253,8 @@ SweaveReadFile <- function(file, syntax, encoding = "")
 	    post <- seq_len(length(text) - pos) + pos
 	    text <- c(text[pre], itext, text[post])
 
-	    srcLinenum <- c(srcLinenum[pre], attr(itext, "srcLinenum"),
-	    		    srcLinenum[post])
-	    srcFilenum <- c(srcFilenum[pre], attr(itext, "srcFilenum")+length(f),
-	    		    srcFilenum[post])
+	    srcLinenum <- c(srcLinenum[pre], attr(itext, "srcLinenum"), srcLinenum[post])
+	    srcFilenum <- c(srcFilenum[pre], attr(itext, "srcFilenum")+length(f), srcFilenum[post])
 	    f <- c(f, attr(itext, "files"))
         }
     }
@@ -344,9 +323,7 @@ SweaveSyntConv <- function(file, syntax, output=NULL)
     if (is.character(syntax)) syntax <- get(syntax)
 
     if (!identical(class(syntax), "SweaveSyntax"))
-        stop(gettextf("target syntax not of class %s",
-                      dQuote("SweaveSyntax")),
-             domain = NA)
+        stop(gettextf("target syntax not of class %s", dQuote("SweaveSyntax")), domain = "R-utils")
     if (is.null(syntax$trans))
         stop("target syntax contains no translation table")
 
@@ -361,7 +338,7 @@ SweaveSyntConv <- function(file, syntax, output=NULL)
         if (n != "extension") text <- gsub(insynt[[n]], syntax$trans[[n]], text)
 
     cat(text, file = output, sep = "\n")
-    cat("Wrote file", output, "\n")
+    cat(gettextf("Wrote file %s", output, domain = "R-utils"), "\n", sep = "")
 }
 
 
@@ -387,7 +364,7 @@ SweaveParseOptions <- function(text, defaults = list(), check = NULL)
     } else return(defaults)
 
     if (any(lengths(x) != 2L))
-        stop(gettextf("parse error or empty option in\n%s", text), domain = NA)
+        stop(gettextf("parse error or empty option in %s", text), domain = "R-utils")
 
     options <- defaults
     for (k in seq_along(x)) options[[ x[[k]][1L] ]] <- x[[k]][2L]
@@ -395,8 +372,7 @@ SweaveParseOptions <- function(text, defaults = list(), check = NULL)
     ## This is undocumented
     if (!is.null(options[["label"]]) && !is.null(options[["engine"]]))
         options[["label"]] <-
-            sub(paste0("\\.", options[["engine"]], "$"),
-                "", options[["label"]])
+            sub(paste0("\\.", options[["engine"]], "$"), "", options[["label"]])
 
     if (!is.null(check)) check(options) else options
 }
@@ -493,7 +469,7 @@ SweaveHooks <- function(options, run = FALSE, envir = .GlobalEnv)
 			    "default" = TRUE,
 			    "keepOuts" = NA,
 			    message(gettextf("Warning: unknown option '--clean='%s",
-					     clean.), domain = NA))
+					     clean., domain = "R-tools"), domain = NA))
         } else if (substr(a, 1, 10) == "--options=") {
             options <- substr(a, 11, 1000)
         } else if (a == "--pdf") {
@@ -503,8 +479,7 @@ SweaveHooks <- function(options, run = FALSE, envir = .GlobalEnv)
         } else if (a == "--compact") {
             compact <- "qpdf"
         } else if (substr(a, 1, 1) == "-") {
-            message(gettextf("Warning: unknown option %s", sQuote(a)),
-                    domain = NA)
+            message(gettextf("Warning: unknown option %s", sQuote(a)), domain = "R-utils")
         } else file <- c(file, a)
        args <- args[-1L]
     }
@@ -605,8 +580,7 @@ SweaveHooks <- function(options, run = FALSE, envir = .GlobalEnv)
         } else if (substr(a, 1, 10) == "--options=") {
             options <- substr(a, 11, 1000)
         } else if (substr(a, 1, 1) == "-") {
-            message(gettextf("Warning: unknown option %s", sQuote(a)),
-                    domain = NA)
+            message(gettextf("Warning: unknown option %s", sQuote(a)), domain = "R-utils")
         } else file <- c(file, a)
         args <- args[-1L]
     }

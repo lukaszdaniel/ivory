@@ -21,7 +21,7 @@ showDefault <- function(object, oldMethods = TRUE)
     clDef <- getClass(cl <- class(object), .Force=TRUE)
     cl <- classLabel(cl)
     if(!is.null(clDef) && isS4(object) && is.na(match(clDef@className, .BasicClasses)) ) {
-        cat("An object of class ", cl, "\n", sep="")
+        cat(gettextf("An object of class %s", cl, domain = "R-methods"), "\n", sep = "")
         slots <- slotNames(clDef)
         dataSlot <- .dataSlot(slots)
         if(length(dataSlot) > 0) {
@@ -34,7 +34,7 @@ showDefault <- function(object, oldMethods = TRUE)
         for(what in slots) {
             if(identical(what, ".Data"))
                 next ## should have been done above
-	    cat("Slot ", deparse(what), ":\n", sep="")
+            cat(gettextf("Slot %s:", deparse(what), domain = "R-methods"), "\n", sep = "")
             print(slot(object, what))
             cat("\n")
         }
@@ -68,7 +68,7 @@ showDefault <- function(object, oldMethods = TRUE)
 ##         }
 ##     }
     else
-        ## NBB:  This relies on the delicate fact
+        ## NBB:  This relies on the delicate fact (as of version 1.7 at least)
         ## that print will NOT recursively call show if it gets more than one argument!
         print(object, useS4 = FALSE)
     invisible() # documented return for show().
@@ -81,10 +81,10 @@ showExtraSlots <- function(object, ignore) {
       ignore <- slotNames(ignore)
     else if(!is(ignore, "character"))
       stop(gettextf("invalid 'ignore' argument; should be a class definition or a character vector, got an object of class %s", dQuote(class(ignore))),
-           domain = NA)
+           domain = "R-methods")
     slots <- slotNames(class(object))
     for(s in slots[is.na(match(slots, ignore))]) {
-        cat("Slot ",s, ":\n", sep="")
+        cat(gettextf("Slot %s:", dQuote(s), domain = "R-methods"), "\n", sep = "")
         show(slot(object, s))
     }
     .extraSlotsDone # a signal not to call this function (again)
@@ -101,57 +101,51 @@ show <- function(object)
     setMethod("show", "MethodDefinition",
               function(object) {
                   cl <- class(object)
-		  nonStandard <-
 		      if(.identC(cl, "MethodDefinition"))
-			  "" else paste0(" (Class ", classLabel(cl),")")
-                  cat("Method Definition",nonStandard,":\n\n", sep = "")
+                  	cat(gettext("Method Definition:", domain = "R-methods"), "\n\n", sep = "")
+		      else cat(gettextf("Method Definition (Class %s):", dQuote(classLabel(cl)), domain = "R-methods"), "\n\n", sep = "")
                   show(object@.Data)
                   mm <- methodSignatureMatrix(object)
-                  cat("\nSignatures:\n")
+                  cat("\n", gettext("Signatures:", domain = "R-methods"), "\n", sep = "")
                   print(mm)
               },
               where = envir)
     setMethod("show", "MethodWithNext",
               function(object)  {
                   callNextMethod()
-                  cat("\nExcluded from nextMethod:\n")
+                  cat("\n", gettext("Excluded from nextMethod:", domain = "R-methods"), "\n", sep = "")
                   print(unlist(object@excluded))
               },
               where = envir)
     setMethod("show", "genericFunction",
               function(object)  {
-                  cat(class(object)," for \"", object@generic,
-                      "\" defined from package \"", object@package,
-                      "\"\n", sep = "")
-                  if(length(object@group))
-                      cat("  belonging to group(s):",
-                          paste(unlist(object@group), collapse =", "), "\n")
-                  if(length(object@valueClass))
-                      cat("  defined with value class: \"", object@valueClass,
-                          "\"\n", sep="")
+		if(length(object@group) && length(object@valueClass))
+                  cat(sprintf(gettext("Class %s for generic %s defined from package %s\n  belonging to group(s): %s\n  defined with value class: %s\n", domain = "R-methods"), dQuote(class(object)), dQuote(object@generic), sQuote(object@package), paste(unlist(object@group), collapse =", "), dQuote(object@valueClass)))
+		else if(!length(object@group) && length(object@valueClass))
+                  cat(gettextf("Class %s for generic %s defined from package %s\n  defined with value class: %s\n", dQuote(class(object)), dQuote(object@generic), sQuote(object@package), dQuote(object@valueClass), domain = "R-methods"))
+		else if(length(object@group) && !length(object@valueClass))
+                  cat(sprintf(gettext("Class %s for generic %s defined from package %s\n  belonging to group(s): %s\n", domain = "R-methods"), dQuote(class(object)), dQuote(object@generic), sQuote(object@package), paste(unlist(object@group), collapse =", ")))
+		else
+                  cat(gettextf("Class %s for generic %s defined from package %s", dQuote(class(object)), dQuote(object@generic), sQuote(object@package), domain = "R-methods"), "\n", sep = "")
+
                   cat("\n")
                   show(object@.Data)
-                  cat("Methods may be defined for arguments: ",
-                      paste(object@signature, collapse=", "), "\n",
-			    "Use  showMethods(\"", object@generic,
-			    "\")  for currently available ones.\n", sep="")
+                  cat(sprintf(gettext("Methods may be defined for arguments: %s\nUse 'showMethods(\"%s\")' for currently available ones.", domain = "R-methods"), paste(object@signature, collapse=", "), object@generic), "\n", sep = "")
                   if(.simpleInheritanceGeneric(object))
-                      cat("(This generic function excludes non-simple inheritance; see ?setIs)\n");
+                      cat(gettext("(This generic function excludes non-simple inheritance; see '?setIs')"), "\n", sep = "");
               },
               where = envir)
     setMethod("show", "classRepresentation",
               function(object){
                   if(!.identC(class(object), "classRepresentation"))
-                    cat("Extended class definition (", classLabel(class(object)),
-                        ")\n")
+                    cat(gettextf("Extended class definition (%s)", classLabel(class(object)), domain = "R-methods"), "\n", sep = "")
                   printClassRepresentation(object)
               },
               where = envir)
 
     ## a show() method for the signature class
     setMethod("show", "signature", function(object) {
-        message(gettextf("An object of class %s", dQuote(class(object))),
-                domain = NA)
+        message(gettextf("An object of class %s", dQuote(class(object))), domain = "R-methods")
         val <- object@.Data
         names(val) <- object@names
         callNextMethod(val)
@@ -178,16 +172,14 @@ classLabel <- function(Class) {
             className <- Class@className
             packageName <- Class@package
         }
-        else stop(gettextf("invalid call to 'classLabel': expected a name or a class definition, got an object of class %s", classLabel(class(Class))), domain = NA)
+        else stop(gettextf("invalid call passed to 'classLabel': expected a name or a class definition, got an object of class %s", classLabel(class(Class))), domain = "R-methods")
     }
     if(.showPackage(className)) {
-	packageName <-
 	    if(identical(packageName, ".GlobalEnv"))
-		" (from the global environment)"
+		gettextf("Class %s (from the global environment)", dQuote(className))
 	    else
-		paste0(" (from package \"", packageName, "\")")
-       paste0('"', className, '"', packageName)
+		gettextf("Class %s (from package %s)", dQuote(className), sQuote(packageName))
    }
    else
-       paste0('"', className, '"')
+       dQuote(className)
 }

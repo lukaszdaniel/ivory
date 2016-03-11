@@ -55,7 +55,7 @@ winMenuNames <- function() .External2(C_winMenuNames)
 winMenuItems <- function(menuname) .External2(C_winMenuItems, menuname)
 
 ## There is internal coercion, but using as.xxx here allows method dispatch
-winProgressBar <- function(title = "R progress bar", label = "",
+winProgressBar <- function(title = gettext("R progress bar", domain = "R-utils"), label = "",
                            min = 0, max = 1, initial = 0, width = 300L)
 {
     res <- .External2(C_winProgressBar, as.integer(width), as.character(title),
@@ -70,9 +70,7 @@ close.winProgressBar <- function(con, ...)
 setWinProgressBar <- function(pb, value, title=NULL, label=NULL)
 {
     if(!inherits(pb, "winProgressBar"))
-       stop(gettextf("'pb' is not from class %s",
-                     dQuote("winProgressBar")),
-            domain = NA)
+       stop(gettextf("'pb' is not from class %s", dQuote("winProgressBar")), domain = "R-utils")
     if(!is.null(title)) title <- as.character(title)
     if(!is.null(label)) label <- as.character(label)
     invisible(.External2(C_setWinProgressBar, pb$pb, as.double(value),
@@ -82,8 +80,6 @@ setWinProgressBar <- function(pb, value, title=NULL, label=NULL)
 getWinProgressBar <- function(pb)
 {
     if(!inherits(pb, "winProgressBar"))
-        stop(gettextf("'pb' is not from class %s",
-                      dQuote("winProgressBar")),
-             domain = NA)
+        stop(gettextf("'pb' is not from class %s", dQuote("winProgressBar")), domain = "R-utils")
     .External2(C_setWinProgressBar, pb$pb, NULL, NULL, NULL)
 }

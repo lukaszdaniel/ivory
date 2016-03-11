@@ -31,7 +31,6 @@
 #include <R_ext/Memory.h>
 #endif
 
-#define min0(x, y) (((x) <= (y)) ? (x) : (y))
 
 static void J_bessel(double *x, double *alpha, int *nb,
 		     double *b, int *ncalc);
@@ -50,7 +49,7 @@ double bessel_j(double x, double alpha)
     if (ISNAN(x) || ISNAN(alpha)) return x + alpha;
 #endif
     if (x < 0) {
-	ML_ERROR(ME_RANGE, "bessel_j");
+	ML_ERROR(ME_RANGE, "bessel_j()");
 	return ML_NAN;
     }
     na = floor(alpha);
@@ -61,8 +60,7 @@ double bessel_j(double x, double alpha)
 	       ((alpha      == na ) ? 0 : bessel_y(x, -alpha) * sinpi(alpha)));
     }
     else if (alpha > 1e7) {
-	MATHLIB_WARNING(_("besselJ(x, nu): nu=%g too large for bessel_j() algorithm"),
-			alpha);
+	MATHLIB_WARNING(_("besselJ(x, nu): nu=%g too large for 'bessel_j()' algorithm"), alpha);
 	return ML_NAN;
     }
     nb = 1 + (int)na; /* nb-1 <= alpha < nb */
@@ -77,11 +75,9 @@ double bessel_j(double x, double alpha)
     J_bessel(&x, &alpha, &nb, bj, &ncalc);
     if(ncalc != nb) {/* error input */
       if(ncalc < 0)
-	MATHLIB_WARNING4(_("bessel_j(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?\n"),
-			 x, ncalc, nb, alpha);
+	MATHLIB_WARNING4(_("bessel_j(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?"), x, ncalc, nb, alpha);
       else
-	MATHLIB_WARNING2(_("bessel_j(%g,nu=%g): precision lost in result\n"),
-			 x, alpha+(double)nb-1);
+	MATHLIB_WARNING2(_("bessel_j(%g,nu=%g): precision lost in result"), x, alpha+(double)nb-1);
     }
     x = bj[nb-1];
 #ifdef MATHLIB_STANDALONE
@@ -104,7 +100,7 @@ double bessel_j_ex(double x, double alpha, double *bj)
     if (ISNAN(x) || ISNAN(alpha)) return x + alpha;
 #endif
     if (x < 0) {
-	ML_ERROR(ME_RANGE, "bessel_j");
+	ML_ERROR(ME_RANGE, "bessel_j()");
 	return ML_NAN;
     }
     na = floor(alpha);
@@ -115,8 +111,7 @@ double bessel_j_ex(double x, double alpha, double *bj)
 	       ((alpha      == na ) ? 0 : bessel_y_ex(x, -alpha, bj) * sinpi(alpha)));
     }
     else if (alpha > 1e7) {
-	MATHLIB_WARNING(_("besselJ(x, nu): nu=%g too large for bessel_j() algorithm"),
-			alpha);
+	MATHLIB_WARNING(_("besselJ(x, nu): nu=%g too large for 'bessel_j()' algorithm"), alpha);
 	return ML_NAN;
     }
     nb = 1 + (int)na; /* nb-1 <= alpha < nb */
@@ -124,11 +119,9 @@ double bessel_j_ex(double x, double alpha, double *bj)
     J_bessel(&x, &alpha, &nb, bj, &ncalc);
     if(ncalc != nb) {/* error input */
       if(ncalc < 0)
-	MATHLIB_WARNING4(_("bessel_j(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?\n"),
-			 x, ncalc, nb, alpha);
+	MATHLIB_WARNING4(_("bessel_j(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?"), x, ncalc, nb, alpha);
       else
-	MATHLIB_WARNING2(_("bessel_j(%g,nu=%g): precision lost in result\n"),
-			 x, alpha+(double)nb-1);
+	MATHLIB_WARNING2(_("bessel_j(%g,nu=%g): precision lost in result"), x, alpha+(double)nb-1);
     }
     x = bj[nb-1];
     return x;
@@ -216,9 +209,9 @@ static void J_bessel(double *x, double *alpha, int *nb,
    TWOPI2 = (2*PI - TWOPI1) to working precision, i.e.,
 	    TWOPI1 + TWOPI2 = 2 * PI to extra precision.
  --------------------------------------------------------------------- */
-    const static double pi2 = .636619772367581343075535;
+    const static double pi2 = M_2_PI; //.636619772367581343075535;
     const static double twopi1 = 6.28125;
-    const static double twopi2 =  .001935307179586476925286767;
+    const static double twopi2 = M_2PI - twopi1; //.001935307179586476925286767;
 
 /*---------------------------------------------------------------------
  *  Factorial(N)
@@ -251,7 +244,7 @@ static void J_bessel(double *x, double *alpha, int *nb,
 
 	*ncalc = *nb;
 	if(*x > xlrg_BESS_IJ) {
-	    ML_ERROR(ME_RANGE, "J_bessel");
+	    ML_ERROR(ME_RANGE, "J_bessel()");
 	    /* indeed, the limit is 0,
 	     * but the cutoff happens too early */
 	    for(i=1; i <= *nb; i++)
@@ -419,7 +412,7 @@ static void J_bessel(double *x, double *alpha, int *nb,
 			p = plast * tover;
 			--n;
 			en -= 2.;
-			nend = min0(*nb,n);
+			nend = min(*nb,n);
 			for (l = nstart; l <= nend; ++l) {
 			    pold = psavel;
 			    psavel = psave;
@@ -581,6 +574,6 @@ L250:
     else {
       /* Error return -- X, NB, or ALPHA is out of range : */
 	b[1] = 0.;
-	*ncalc = min0(*nb,0) - 1;
+	*ncalc = min(*nb,0) - 1;
     }
 }

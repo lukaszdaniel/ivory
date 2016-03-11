@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
-"Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-06 13:51+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-04 22:32+0100\n"
 "PO-Revision-Date: 2012-03-16 15:59+0100\n"
 "Last-Translator: \n"
 "Language-Team: Spanish <pabloemilio.verde@uni-duesseldorf.de>\n"
@@ -18,90 +18,100 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-Language: Spanish\n"
 
-#: base.c:43
+#: base.c:37
 msgid "no base graphics system is registered"
 msgstr ""
 
-#: base.c:333 base.c:340 base.c:348
+#: base.c:304
+#, fuzzy
+msgid "Incompatible graphics state"
+msgstr "estado gráfico inválido"
+
+#: base.c:348
+#, fuzzy
+msgid "event 'GE_ScalePS' requires a single numeric value"
+msgstr "El evento GE_ScalePS requiere un único valor numérico"
+
+#: base.c:379 base.c:386 base.c:394
 msgid "the base graphics system is not registered"
 msgstr ""
 
-#: graphics.c:297
+#: graphics.c:290
 #, c-format
 msgid "bad units specified in '%s'"
 msgstr "unidades inválidas especificadas en '%s'"
 
-#: graphics.c:1791 graphics.c:1813
+#: graphics.c:1784 graphics.c:1806
 msgid "attempt to plot on null device"
 msgstr "tentativa de gráficar en un dispositivo nulo"
 
-#: graphics.c:1843
+#: graphics.c:1836
 #, fuzzy
-msgid "outer margins too large (figure region too small)"
+msgid "outer margins are too large (figure region is too small)"
 msgstr "márgenes externos muy grandes (fig.region muy pequeña)"
 
-#: graphics.c:1845
-msgid "figure region too large"
+#: graphics.c:1838
+#, fuzzy
+msgid "figure region is too large"
 msgstr "región para figura muy grande"
 
-#: graphics.c:1847
-msgid "figure margins too large"
+#: graphics.c:1840
+#, fuzzy
+msgid "figure margins are too large"
 msgstr "márgenes de figura muy grandes"
 
-#: graphics.c:1849
-msgid "plot region too large"
+#: graphics.c:1842
+#, fuzzy
+msgid "plot region is too large"
 msgstr "región del gráfico muy grande"
 
-#: graphics.c:1896
+#: graphics.c:1889
 #, fuzzy, c-format
 msgid "relative range of values (%4.0f * EPS) is small (axis %d)"
 msgstr "amplitud relativa de valores =%4.0f * EPS, es pequeño (eixo %d)"
 
-#: graphics.c:1948
+#: graphics.c:1941
 #, c-format
 msgid "nonfinite axis limits [GScale(%g,%g,%d, .); log=%d]"
 msgstr "límites de ejes no finitos [GScale(%g,%g,%d, .); log=%d]"
 
-#: graphics.c:1978
+#: graphics.c:1971
 #, c-format
 msgid "axis style \"%c\" unimplemented"
 msgstr "estilo de ejes \"%c\" ignorado"
 
-#: graphics.c:2216
+#: graphics.c:2209 graphics.c:2597
 #, fuzzy
 msgid "no graphics device is active"
 msgstr "Ningún dispositivo gráfico está activo"
 
-#: graphics.c:2411
+#: graphics.c:2404
 msgid "plot.new has not been called yet"
 msgstr "plot.new no ha sido llamado aún"
 
-#: graphics.c:2413
+#: graphics.c:2406
 msgid "invalid graphics state"
 msgstr "estado gráfico inválido"
 
-#: graphics.c:2555
+#: graphics.c:2548
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.c:2604
-msgid "No graphics device is active"
-msgstr "Ningún dispositivo gráfico está activo"
-
-#: graphics.c:3063
+#: graphics.c:3056
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "vector de argumento cero tiene un ángulo indeterminado y se saltea"
 
-#: graphics.c:3144
+#: graphics.c:3137
 #, c-format
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "parámetro inválido par(\"bty\") = '%c'; no box() desechado"
 
-#: graphics.c:3161
-msgid "invalid argument to GBox"
-msgstr "argumento inválido para GBox"
+#: graphics.c:3154 par.c:1121
+#, fuzzy, c-format
+msgid "invalid argument passed to '%s' function"
+msgstr "el parámetro pasado a par() es inválido"
 
-#: graphics.c:3406
+#: graphics.c:3399
 #, fuzzy
 msgid "metric information not available for this device"
 msgstr "\t\"Información métrica no disponible para este dispositivo"
@@ -110,180 +120,174 @@ msgstr "\t\"Información métrica no disponible para este dispositivo"
 msgid "graphical parameter 'family' has a maximum length of 200 bytes"
 msgstr "la familia de parámetros gráficos tiene un tamaño máximo de 200 bytes"
 
-#: par.c:160
+#: par-common.c:243
+msgid "'mgp[1:3]' are of differing sign"
+msgstr ""
+
+#: par.c:161
 #, c-format
 msgid "invalid value specified for graphical parameter \"%s\""
 msgstr "el valor especificado del parámetro del gráfico \"%s\" es inválido"
 
-#: par.c:167
+#: par.c:168
 #, c-format
 msgid "graphical parameter \"%s\" has the wrong length"
 msgstr "el parámetro del gráfico \"%s\" tiene tamaño incorrecto"
 
-#: par.c:262 par.c:673
+#: par.c:263 par.c:674
 #, c-format
 msgid "graphical parameter \"%s\" cannot be set"
 msgstr "el parámetro del gráfico \"%s\" no puede ser especificado"
 
-#: par.c:434
+#: par.c:435
 msgid "parameter \"mfg\" has the wrong length"
 msgstr "el parámetro \"mfg\" tiene tamaño incorrecto"
 
-#: par.c:442
-msgid "parameter \"i\" in \"mfg\" is out of range"
+#: par.c:443 par.c:445
+#, fuzzy, c-format
+msgid "parameter \"%s\" in \"mfg\" parameter is out of range"
 msgstr "el parámetro \"i\" en \"mfg\" está fuera del rango"
 
-#: par.c:444
-msgid "parameter \"j\" in \"mfg\" is out of range"
-msgstr "el parámetro \"j\" en \"mfg\" está fuera del rango"
-
-#: par.c:449
-#, fuzzy
-msgid "value of 'nr' in \"mfg\" is wrong and will be ignored"
+#: par.c:450 par.c:452
+#, fuzzy, c-format
+msgid "value of '%s' in \"mfg\" parameter is wrong and will be ignored"
 msgstr "el valor de nr en \"mfg\" es incorrecto y será ignorado"
 
-#: par.c:451
+#: par.c:479
 #, fuzzy
-msgid "value of 'nc' in \"mfg\" is wrong and will be ignored"
-msgstr "el valor de nc en \"mfg\" es incorrecto y será ignorado"
-
-#: par.c:478
-msgid "calling par(new=TRUE) with no plot"
+msgid "calling 'par(new=TRUE)' with no plot"
 msgstr "llamada par(new=TRUE) sin gráfico"
 
-#: par.c:665 par.c:1063
+#: par.c:666 par.c:1064
 #, fuzzy, c-format
 msgid "graphical parameter \"%s\" is obsolete"
 msgstr "lista de parámetros gráficos no válidos"
 
-#: par.c:669 par.c:1067
+#: par.c:670 par.c:1068
 #, fuzzy, c-format
 msgid "\"%s\" is not a graphical parameter"
 msgstr "parámetro gráfico inválido"
 
-#: par.c:1120
-msgid "invalid argument passed to par()"
-msgstr "el parámetro pasado a par() es inválido"
-
-#: par.c:1164
+#: par.c:1165
 #, c-format
 msgid "too many rows in layout, limit %d"
 msgstr "muchas filas en la salida, límite %d"
 
-#: par.c:1170
+#: par.c:1171
 #, c-format
 msgid "too many columns in layout, limit %d"
 msgstr "muchas columnas en la salida, límite %d"
 
-#: par.c:1172
+#: par.c:1173
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr "muchas celdas en la salida, límite %d"
 
-#: plot.c:60
+#: plot.c:38 plot3d.c:38
+msgid "invalid type passed to graphics function"
+msgstr ""
+
+#: plot.c:61
 #, fuzzy
 msgid "invalid color specification"
 msgstr "especificación de fuente no válida"
 
-#: plot.c:126
+#: plot.c:127
 msgid "only NA allowed in logical plotting symbol"
 msgstr "solamente NA pertimido como símbolo de gráfico lógico"
 
-#: plot.c:128
+#: plot.c:129
 msgid "invalid plotting symbol"
 msgstr "símbolo de gráfico inválido"
 
-#: plot.c:217
-msgid "invalid font specification"
-msgstr "especificación de fuente no válida"
+#: plot.c:218 plot.c:2781 plot3d.c:1180 plot3d.c:1184
+#, c-format
+msgid "invalid '%s' specification"
+msgstr "especificación '%s' inválida"
 
-#: plot.c:276 plot.c:290 plot.c:481 plot.c:486 plot.c:2112 plot.c:2119
-#: plot.c:3141 plot.c:3143 plot.c:3145 plot.c:3300 plot3d.c:1163 plot3d.c:1167
-#: plot3d.c:1169 plot3d.c:1903
+#: plot.c:277 plot.c:291 plot.c:482 plot.c:487 plot.c:2112 plot.c:2119
+#: plot.c:3141 plot.c:3143 plot.c:3145 plot.c:3300 plot3d.c:1164 plot3d.c:1168
+#: plot3d.c:1170 plot3d.c:1904
 #, c-format
 msgid "invalid '%s' value"
 msgstr "valor de '%s' no válido"
 
-#: plot.c:293
+#: plot.c:294
 #, fuzzy, c-format
 msgid "invalid 'vfont' value [typeface %d]"
 msgstr "valor de 'vfont' no válido [typeface]"
 
-#: plot.c:317
+#: plot.c:318
 #, fuzzy, c-format
 msgid "invalid 'vfont' value [typeface = %d, fontindex = %d]"
 msgstr "valor de 'vfont'  no válido [fontindex]"
 
-#: plot.c:391
+#: plot.c:392
 msgid "invalid graphics parameter"
 msgstr "parámetro gráfico inválido"
 
-#: plot.c:477
+#: plot.c:478
 msgid "at least 3 arguments required"
 msgstr "se necesitan al menos tres argumentos"
 
-#: plot.c:492
+#: plot.c:493
 msgid "\"log=\" specification must be character"
 msgstr "especificación de \"log=\" debe ser un carácter"
 
-#: plot.c:503
+#: plot.c:504
 #, c-format
 msgid "invalid \"log=%s\" specification"
 msgstr "especificación de \"log=%s\" no válida"
 
-#: plot.c:518
-msgid "NAs not allowed in 'xlim'"
+#: plot.c:519 plot.c:531
+#, fuzzy, c-format
+msgid "NA values are not allowed in '%s'"
 msgstr "NAs no permitidos en 'xlim'"
 
-#: plot.c:524
-msgid "need finite 'xlim' values"
+#: plot.c:525 plot.c:537
+#, fuzzy, c-format
+msgid "'%s' needs finite values"
 msgstr "se necesitan valores finitos de 'xlim'"
 
-#: plot.c:530
-msgid "NAs not allowed in 'ylim'"
-msgstr "NAs no permitidos en 'ylim'"
-
-#: plot.c:536
-msgid "need finite 'ylim' values"
-msgstr "se necesitan valores finitos de 'ylim'"
-
-#: plot.c:542
+#: plot.c:543
 msgid "Logarithmic axis must have positive limits"
 msgstr "Ejes logarítmicos deben tener limites positivos"
 
-#: plot.c:664
+#: plot.c:665
 msgid "invalid type for axis labels"
 msgstr "tipo inválido para rótulos de ejes"
 
-#: plot.c:765 plot.c:1298 plot.c:1621 plot.c:1686 plot.c:1761 plot.c:1827
+#: plot.c:766 plot.c:1298 plot.c:1621 plot.c:1686 plot.c:1761 plot.c:1827
 #: plot.c:1901 plot.c:1996 plot.c:2072 plot.c:2350 plot.c:2524 plot.c:2740
-#: plot.c:3282 plot.c:3409 plot.c:3485 plot.c:3651 plot.c:3931 plot3d.c:1872
+#: plot.c:3282 plot.c:3409 plot.c:3485 plot.c:3651 plot.c:3931 plot3d.c:1873
 msgid "too few arguments"
 msgstr "muy pocos argumentos"
 
-#: plot.c:776
+#: plot.c:777
 #, c-format
 msgid "invalid axis number %d"
 msgstr "número de ejes no válido %d"
 
-#: plot.c:866
-msgid "'hadj' must be of length one"
+#: plot.c:867
+#, fuzzy, c-format
+msgid "'%s' argument must be of length 1"
 msgstr "'hadj' debe tener longitud 1"
 
-#: plot.c:873 plot.c:2084 plot.c:2361 plot.c:2367 plot.c:2374 plot.c:2382
+#: plot.c:874 plot.c:2084 plot.c:2361 plot.c:2367 plot.c:2374 plot.c:2382
 #: plot.c:2389 plot.c:2396 plot.c:2403 plot.c:2410 plot.c:2418 plot.c:2425
 #: plot.c:3148
 #, fuzzy, c-format
 msgid "zero-length '%s' specified"
 msgstr "'side' de longitud cero fue especificado"
 
-#: plot.c:942
-msgid "'labels' is supplied and not 'at'"
+#: plot.c:943
+#, fuzzy
+msgid "'labels' argument is supplied and not 'at' argument"
 msgstr "se da 'labels' y no se especifica  'at'"
 
-#: plot.c:946
-#, c-format
-msgid "'at' and 'labels' lengths differ, %d != %d"
+#: plot.c:947
+#, fuzzy, c-format
+msgid "'at' and 'labels' argument lengths differ, %d != %d"
 msgstr "longitud de 'at' y 'labels' difieren, %d != %d"
 
 #: plot.c:963
@@ -295,8 +299,8 @@ msgid "invalid plotting structure"
 msgstr "estructura de gráfico inválida"
 
 #: plot.c:1316
-#, c-format
-msgid "'x' and 'y' lengths differ in %s()"
+#, fuzzy, c-format
+msgid "'x' and 'y' argument lengths differ in '%s' function"
 msgstr "longitudes de 'x' e 'y' difieren en %s()"
 
 #: plot.c:1327
@@ -354,25 +358,22 @@ msgstr "punta de flecha inválida"
 msgid "no coordinates were supplied"
 msgstr "no se especificó ninguna coordenada"
 
-#: plot.c:2781
-msgid "invalid a=, b= specification"
-msgstr "especificación a=, b= no válida"
-
 #: plot.c:2790
-msgid "'a' and 'b' must be finite"
+#, fuzzy
+msgid "'a' and 'b' arguments must be finite"
 msgstr "'a' y 'b' deben ser finitos"
 
-#: plot.c:2925 plot.c:4051 plot.c:4055 plot.c:4058 plot.c:4078 plot.c:4082
-#: plot.c:4085 plot3d.c:1085 plot3d.c:1089 plot3d.c:1094 plot3d.c:1098
-#: plot3d.c:1102 plot3d.c:1106 stem.c:158 stem.c:159 stem.c:161 stem.c:162
-#: stem.c:208 stem.c:209
+#: plot.c:2925 plot.c:4022 plot.c:4025 plot.c:4028 plot.c:4031 plot.c:4051
+#: plot.c:4055 plot.c:4058 plot.c:4078 plot.c:4082 plot.c:4085 plot3d.c:1086
+#: plot3d.c:1090 plot3d.c:1095 plot3d.c:1099 plot3d.c:1103 plot3d.c:1107
+#: stem.c:156 stem.c:157 stem.c:159 stem.c:160 stem.c:206 stem.c:207
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argumento '%s' inválido"
 
 #: plot.c:2997 plot.c:3137
 #, fuzzy, c-format
-msgid "invalid number of points in %s"
+msgid "invalid number of points in '%s' function"
 msgstr "número de puntos no válidos en locator()"
 
 #: plot.c:3139
@@ -384,7 +385,8 @@ msgid "different argument lengths"
 msgstr "argumentos de longitudes diferentes"
 
 #: plot.c:3153
-msgid "more 'labels' than points"
+#, fuzzy
+msgid "more labels than points"
 msgstr "mas 'labels'  que puntos"
 
 #: plot.c:3202
@@ -393,7 +395,8 @@ msgid "warning: no point within %.2f inches\n"
 msgstr "aviso: ningún punto con %.2f pulgadas\n"
 
 #: plot.c:3208
-msgid "warning: nearest point already identified\n"
+#, fuzzy
+msgid "warning: nearest point is already identified\n"
 msgstr "aviso: punto más próximo ya identificado\n"
 
 #: plot.c:3293
@@ -440,7 +443,7 @@ msgstr "datos de estrella no válidos"
 msgid "invalid thermometers data (need 3 or 4 columns)"
 msgstr "datos de termómetros no válidos (son necesarias 3 o 4 columnas)"
 
-#: plot.c:3804
+#: plot.c:3804 plot.c:3810
 #, fuzzy, c-format
 msgid "invalid 'thermometers[, %s]'"
 msgstr "termómetros[,%s] no válidos"
@@ -449,11 +452,6 @@ msgstr "termómetros[,%s] no válidos"
 #, fuzzy, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
 msgstr "termómetros[,%s] no están en [0,1] - puede parecer gracioso"
-
-#: plot.c:3810
-#, fuzzy
-msgid "invalid 'thermometers[, 1:2]'"
-msgstr "termómetros[,1:2] no válidos"
 
 #: plot.c:3849
 #, fuzzy
@@ -479,114 +477,181 @@ msgstr "tipo de símbolo no válido"
 msgid "incorrect length for '%s' argument"
 msgstr "longitud incorrecta para el argumento 'mode'"
 
-#: plot3d.c:181 plot3d.c:1929
+#: plot.c:3970
+#, fuzzy
+msgid "unable to allocate memory (in 'xspline()')"
+msgstr "imposible asignar memoria (en xspline)"
+
+#: plot3d.c:182 plot3d.c:1930
 msgid "insufficient 'x' or 'y' values"
 msgstr "valores insuficientes de 'x' o 'y'"
 
-#: plot3d.c:185 plot3d.c:1932
+#: plot3d.c:186 plot3d.c:1933
 msgid "dimension mismatch"
 msgstr "dimensión no compatible"
 
-#: plot3d.c:193 plot3d.c:1935
+#: plot3d.c:194 plot3d.c:1936
 msgid "no contour values"
 msgstr "no hay valores de contorno"
 
-#: plot3d.c:255
+#: plot3d.c:256
 msgid "invalid x / y values or limits"
 msgstr "valores o límites de x / y no válidos"
 
-#: plot3d.c:257
+#: plot3d.c:258
 msgid "invalid contour levels: must be strictly increasing"
 msgstr "valores de contorno no válidos: deben ser estrictamente crecientes"
 
-#: plot3d.c:1049 plot3d.c:1062
+#: plot3d.c:1050 plot3d.c:1063
 msgid "Axis orientation not calculated"
 msgstr "Orientación de ejes no calculada"
 
-#: plot3d.c:1082
+#: plot3d.c:1083
 msgid "too few parameters"
 msgstr "muy pocos parámetros"
 
-#: plot3d.c:1112
-msgid "invalid 'x' limits"
+#: plot3d.c:1113 plot3d.c:1115 plot3d.c:1117
+#, fuzzy, c-format
+msgid "invalid '%s' limits"
 msgstr "límites de 'x' no válidos"
 
-#: plot3d.c:1114
-msgid "invalid 'y' limits"
-msgstr "límites de 'y' no válidos"
-
-#: plot3d.c:1116
-msgid "invalid 'z' limits"
-msgstr "límites de 'z' no válidos"
-
-#: plot3d.c:1137
-msgid "'xlab' must be a character vector of length 1"
+#: plot3d.c:1138 plot3d.c:1140 plot3d.c:1142
+#, fuzzy, c-format
+msgid "'%s' argument must be a character vector of length 1"
 msgstr "'xlab' debe ser un vector de caracteres de longitud 1"
 
-#: plot3d.c:1139
-msgid "'ylab' must be a character vector of length 1"
-msgstr "'ylab' debe ser un vector de caracteres de longitud 1"
-
-#: plot3d.c:1141
-msgid "'zlab' must be a character vector of length 1"
-msgstr "'zlab' debe ser un vector de caracteres de longitud 1"
-
-#: plot3d.c:1161
+#: plot3d.c:1162
 msgid "invalid viewing parameters"
 msgstr "parámetros de visualización inválidos"
 
-#: plot3d.c:1179 plot3d.c:1183
-#, c-format
-msgid "invalid '%s' specification"
-msgstr "especificación '%s' inválida"
-
 # Parece raro pero... por favor fijate
-#: plot3d.c:1529
+#: plot3d.c:1530
 #, fuzzy, c-format
 msgid "contour(): circular/long seglist -- set %s > %d?"
 msgstr "contour(): tipo circular/largo -- bug.report()!"
 
-#: plot3d.c:1939
-msgid "missing 'x' values"
+#: plot3d.c:1940 plot3d.c:1947
+#, fuzzy, c-format
+msgid "missing '%s' values"
 msgstr "valores de 'x' perdidos"
 
-#: plot3d.c:1941
-msgid "increasing 'x' values expected"
+#: plot3d.c:1942 plot3d.c:1949
+#, fuzzy, c-format
+msgid "increasing '%s' values expected"
 msgstr "se esperan valores de 'x' crecientes"
 
-#: plot3d.c:1946
-msgid "missing 'y' values"
-msgstr "valores de 'y' perdidos"
-
-#: plot3d.c:1948
-msgid "increasing 'y' values expected"
-msgstr "se esperan valores de 'y' crecientes"
-
-#: plot3d.c:1953
+#: plot3d.c:1954
 msgid "invalid NA contour values"
 msgstr "valores de contorno NA no válidos"
 
-#: plot3d.c:1965
-msgid "all z values are equal"
+#: plot3d.c:1966
+#, fuzzy
+msgid "all 'z' values are equal"
 msgstr "todos los valores de z son iguales"
 
-#: plot3d.c:1967
-msgid "all z values are NA"
+#: plot3d.c:1968
+#, fuzzy
+msgid "all 'z' values are NA"
 msgstr "todos los valore de z son NA"
 
-#: stem.c:155
+#: stem.c:106
+msgid ""
+"  The decimal point is at the |\n"
+"\n"
+msgstr ""
+
+#: stem.c:110
+#, c-format
+msgid ""
+"  The decimal point is %d digit to the right of the |\n"
+"\n"
+msgid_plural ""
+"  The decimal point is %d digits to the right of the |\n"
+"\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#: stem.c:112
+#, c-format
+msgid ""
+"  The decimal point is %d digit to the left of the |\n"
+"\n"
+msgid_plural ""
+"  The decimal point is %d digits to the left of the |\n"
+"\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#: stem.c:150
+#, fuzzy
+msgid "invalid input"
+msgstr "unidades no válidas"
+
+#: stem.c:153
 #, c-format
 msgid "long vector '%s' is not supported"
 msgstr ""
+
+#: stem.c:192
+msgid "count for a bin exceeds INT_MAX"
+msgstr ""
+
+#, fuzzy
+#~ msgid "invalid argument passed to '%s'function"
+#~ msgstr "el parámetro pasado a par() es inválido"
+
+#~ msgid "No graphics device is active"
+#~ msgstr "Ningún dispositivo gráfico está activo"
+
+#~ msgid "invalid argument to GBox"
+#~ msgstr "argumento inválido para GBox"
+
+#, fuzzy
+#~ msgid "invalid 'thermometers[, 1:2]'"
+#~ msgstr "termómetros[,1:2] no válidos"
+
+#~ msgid "invalid 'y' limits"
+#~ msgstr "límites de 'y' no válidos"
+
+#~ msgid "invalid 'z' limits"
+#~ msgstr "límites de 'z' no válidos"
+
+#~ msgid "parameter \"j\" in \"mfg\" is out of range"
+#~ msgstr "el parámetro \"j\" en \"mfg\" está fuera del rango"
+
+#, fuzzy
+#~ msgid "value of 'nc' in \"mfg\" is wrong and will be ignored"
+#~ msgstr "el valor de nc en \"mfg\" es incorrecto y será ignorado"
+
+#~ msgid "invalid font specification"
+#~ msgstr "especificación de fuente no válida"
+
+#~ msgid "NAs not allowed in 'ylim'"
+#~ msgstr "NAs no permitidos en 'ylim'"
+
+#~ msgid "need finite 'ylim' values"
+#~ msgstr "se necesitan valores finitos de 'ylim'"
+
+#~ msgid "invalid a=, b= specification"
+#~ msgstr "especificación a=, b= no válida"
+
+#~ msgid "'ylab' must be a character vector of length 1"
+#~ msgstr "'ylab' debe ser un vector de caracteres de longitud 1"
+
+#~ msgid "'zlab' must be a character vector of length 1"
+#~ msgstr "'zlab' debe ser un vector de caracteres de longitud 1"
+
+#~ msgid "missing 'y' values"
+#~ msgstr "valores de 'y' perdidos"
+
+#~ msgid "increasing 'y' values expected"
+#~ msgstr "se esperan valores de 'y' crecientes"
 
 #~ msgid "unable to allocate memory (in GPolygon)"
 #~ msgstr "imposible asignar memoria (en GPolygon)"
 
 #~ msgid "invalid number of points in identify()"
 #~ msgstr "número de puntos no válidos en identify()"
-
-#~ msgid "Event GE_ScalePS requires a single numeric value"
-#~ msgstr "El evento GE_ScalePS requiere un único valor numérico"
 
 #~ msgid "zero length 'padj' specified"
 #~ msgstr "'padj' de longitud cero especificado"
@@ -625,6 +690,3 @@ msgstr ""
 
 #~ msgid "zero length 'font' specified"
 #~ msgstr "'font' de longitud cero fue especificado"
-
-#~ msgid "unable to allocate memory (in xspline)"
-#~ msgstr "imposible asignar memoria (en xspline)"

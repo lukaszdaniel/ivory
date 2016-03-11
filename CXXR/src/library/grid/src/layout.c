@@ -19,6 +19,7 @@
  */
 
 #include "grid.h"
+#include "localization.h"
 
 /* This stuff always returns an LViewportLocation in "npc" units
  */

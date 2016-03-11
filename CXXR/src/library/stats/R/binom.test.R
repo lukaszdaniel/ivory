@@ -24,7 +24,7 @@ function(x, n, p = 0.5, alternative = c("two.sided", "less", "greater"),
     xr <- round(x)
 
     if(any(is.na(x) | (x < 0)) || max(abs(x-xr)) > 1e-7)
-        stop("'x' must be nonnegative and integer")
+        stop("'x' argument must be non-negative and integer")
     x <- xr
     if(length(x) == 2L) {
         ## x gives successes and failures
@@ -36,20 +36,20 @@ function(x, n, p = 0.5, alternative = c("two.sided", "less", "greater"),
         nr <- round(n)
         if((length(n) > 1L) || is.na(n) || (n < 1) || abs(n-nr) > 1e-7
            || (x > nr))
-            stop("'n' must be a positive integer >= 'x'")
-        DNAME <- paste(DNAME, "and", deparse(substitute(n)))
+            stop("'n' argument must be a positive integer >= 'x' argument")
+        DNAME <- gettextf("%s and %s", paste(DNAME, collapse = ""), paste(deparse(substitute(n)), collapse = ""), domain = "R-stats")
         n <- nr
     }
     else
-        stop("incorrect length of 'x'")
+        stop(gettextf("invalid length of '%s' argument", "x"))
 
     if(!missing(p) && (length(p) > 1L || is.na(p) || p < 0 || p > 1))
-        stop ("'p' must be a single number between 0 and 1")
+        stop(gettextf("'%s' argument must be a single number between 0 and 1", "p"))
     alternative <- match.arg(alternative)
 
     if(!((length(conf.level) == 1L) && is.finite(conf.level) &&
          (conf.level > 0) && (conf.level < 1)))
-        stop("'conf.level' must be a single number between 0 and 1")
+        stop(gettextf("'%s' argument must be a single number between 0 and 1", "conf.level"))
 
     PVAL <- switch(alternative,
                    less = pbinom(x, n, p),
@@ -117,19 +117,26 @@ function(x, n, p = 0.5, alternative = c("two.sided", "less", "greater"),
 
     ESTIMATE <- x / n
 
-    names(x) <- "number of successes"	# or simply "x" ??
-    names(n) <- "number of trials"	# or simply "n" ??
+    names(x) <- gettext("number of successes", domain = "R-stats")	# or simply "x" ??
+    names(n) <- gettext("number of trials", domain = "R-stats")	# or simply "n" ??
     names(ESTIMATE) <-
-    names(p) <- "probability of success"# or simply "p" ??
+    names(p) <- gettext("probability of success", domain = "R-stats") # or simply "p" ??
+	METHOD <- gettext("Exact binomial test", domain = "R-stats")
+   alt.name <- switch(alternative,
+                           two.sided = gettextf("true probability of success is not equal to %s", p, domain = "R-stats"),
+                           less = gettextf("true probability of success is less than %s", p, domain = "R-stats"),
+                           greater = gettextf("true probability of success is greater than %s", p, domain = "R-stats"))
 
-    structure(list(statistic = x,
+    RVAL <- list(statistic = x,
                    parameter = n,
                    p.value = PVAL,
                    conf.int = CINT,
                    estimate = ESTIMATE,
                    null.value = p,
                    alternative = alternative,
-                   method = "Exact binomial test",
-                   data.name = DNAME),
-              class = "htest")
+                   alt.name = alt.name,
+                   method = METHOD,
+                   data.name = DNAME)
+    class(RVAL) <- "htest"
+    return(RVAL)
 }

@@ -39,8 +39,8 @@ RweaveLatexSetup <-
         output <- paste(prefix.string, "tex", sep = ".")
     } else prefix.string <- basename(sub("\\.tex$", "", output))
 
-    if (!quiet) cat("Writing to file ", output, "\n",
-                   "Processing code chunks with options ...\n", sep = "")
+    if (!quiet) cat(gettextf("Writing to file %s", output, domain = "R-utils"), "\n",
+                   gettext("Processing code chunks with options ...", domain = "R-utils"), "\n", sep = "")
     encoding <- attr(file, "encoding")
     if (encoding %in% c("ASCII", "bytes")) encoding <- ""
     output <- file(output, open = "w", encoding = encoding)
@@ -55,9 +55,7 @@ RweaveLatexSetup <-
         if (.Platform$OS.type == "windows")
             styfile <- chartr("\\", "/", styfile)
         if (length(grep(" ", styfile)))
-            warning(gettextf("path to %s contains spaces,\n", sQuote(styfile)),
-                    gettext("this may cause problems when running LaTeX"),
-                    domain = NA)
+            warning(gettextf("path to %s contains spaces, this may cause problems when running LaTeX", sQuote(styfile)), domain = "R-utils")
     } else styfile <- "Sweave"
 
     options <- list(prefix = TRUE, prefix.string = prefix.string,
@@ -177,8 +175,7 @@ makeRweaveLatexCodeRunner <- function(evalFunc = RweaveEvalWithOpt)
                 if (!is.null(options$label))
                     object$chunkout[[chunkprefix]] <- chunkout
                 if(!grepl(.SweaveValidFilenameRegexp, chunkout))
-                    warning("file stem ", sQuote(chunkout), " is not portable",
-                            call. = FALSE, domain = NA)
+                    warning(gettextf("file stem %s is not portable", sQuote(chunkout)), call. = FALSE, domain = "R-utils")
             }
         } else chunkout <- object$output
 
@@ -188,8 +185,7 @@ makeRweaveLatexCodeRunner <- function(evalFunc = RweaveEvalWithOpt)
         ## if you change this line:
         chunkexps <- try(parse(text = chunk, srcfile = srcfile), silent = TRUE)
         if (inherits(chunkexps, "try-error"))
-            chunkexps[1L] <- sub(" parse(text = chunk, srcfile = srcfile) : \n ",
-                                 "", chunkexps[1L], fixed = TRUE)
+            chunkexps[1L] <- sub(" parse(text = chunk, srcfile = srcfile) : \n ", "", chunkexps[1L], fixed = TRUE)
 
         RweaveTryStop(chunkexps, options)
 
@@ -207,13 +203,9 @@ makeRweaveLatexCodeRunner <- function(evalFunc = RweaveEvalWithOpt)
                 openSinput <<- TRUE
             }
             leading <- max(leading, 1L) # safety check
-            cat("\n", paste(getOption("prompt"), dce[seq_len(leading)],
-                            sep = "", collapse = "\n"),
-                file = chunkout, sep = "")
+            cat("\n", paste(getOption("prompt"), dce[seq_len(leading)], sep = "", collapse = "\n"), file = chunkout, sep = "")
             if (length(dce) > leading)
-                cat("\n", paste(getOption("continue"), dce[-seq_len(leading)],
-                                sep = "", collapse = "\n"),
-                    file = chunkout, sep = "")
+                cat("\n", paste(getOption("continue"), dce[-seq_len(leading)], sep = "", collapse = "\n"), file = chunkout, sep = "")
             linesout[thisline + seq_along(dce)] <<- srcline
             filenumout[thisline + seq_along(dce)] <<- srcfilenum
             thisline <<- thisline + length(dce)
@@ -259,12 +251,9 @@ makeRweaveLatexCodeRunner <- function(evalFunc = RweaveEvalWithOpt)
 
         if (length(devs)) {
             if(!grepl(.SweaveValidFilenameRegexp, chunkprefix))
-                warning("file stem ", sQuote(chunkprefix), " is not portable",
-                        call. = FALSE, domain = NA)
+                warning(gettextf("file stem %s is not portable", sQuote(chunkprefix)), call. = FALSE, domain = "R-utils")
             if (options$figs.only)
-                devs[[1L]](name = chunkprefix,
-                           width = options$width, height = options$height,
-                           options)
+                devs[[1L]](name = chunkprefix, width = options$width, height = options$height, options)
         }
         SweaveHooks(options, run = TRUE)
 
@@ -403,14 +392,13 @@ makeRweaveLatexCodeRunner <- function(evalFunc = RweaveEvalWithOpt)
                     eval(chunkexps, envir = .GlobalEnv)
                 }, error = function(e) {
                     devoffs[[i]]()
-                    stop(conditionMessage(e), call. = FALSE, domain = NA)
+                    stop(conditionMessage(e), call. = FALSE, domain = "R-utils")
                 })
                 devoffs[[i]]()
             }
 
             if (options$include) {
-                cat("\\includegraphics{", chunkprefix, "}\n", sep = "",
-                    file = object$output)
+                cat("\\includegraphics{", chunkprefix, "}\n", sep = "", file = object$output)
                 linesout[thisline + 1L] <- srcline
                 filenumout[thisline + 1L] <- srcfilenum
                 thisline <- thisline + 1L
@@ -461,7 +449,7 @@ RweaveLatexWritedoc <- function(object, chunk)
 	               filenum <- attr(chunk, "srcFilenum")[pos[1L]]
                        filename <- attr(chunk, "srcFilenames")[filenum]
                        location <- paste0(basename(filename), ":", attr(chunk, "srclines")[pos[1L]])
-		       stop("at ",location, ", ", conditionMessage(e), domain = NA, call. = FALSE)
+		       stop(gettextf("at %s, %s", location, conditionMessage(e)), call. = FALSE)
 		   })
             ## protect against character(), because sub() will fail
             if (length(val) == 0L) val <- ""
@@ -511,9 +499,7 @@ RweaveLatexFinish <- function(object, error = FALSE)
     if (!object$quiet && !error) {
 	if(!file.exists(outputname))
 	    stop(gettextf("the output file '%s' has disappeared", outputname))
-	cat("\n",
-	    sprintf("You can now run (pdf)latex on %s", sQuote(outputname)),
-	    "\n", sep = "")
+	cat("\n", gettextf("You can now run (pdf)latex on %s", sQuote(outputname), domain = "R-utils"), "\n", sep = "")
     }
     close(object$output)
     if (length(object$chunkout))
@@ -586,15 +572,13 @@ RweaveLatexOptions <- function(options)
         else if(!is.na(newval <- suppressWarnings(as.numeric(oldval))))
             options[[opt]] <- newval
         if (is.na(options[[opt]]))
-            stop(gettextf("invalid value for %s : %s", sQuote(opt), oldval),
-                 domain = NA)
+            stop(gettextf("invalid value for %s: %s", sQuote(opt), oldval), domain = "R-utils")
     }
 
     if (!is.null(options$results)) {
         res <- as.character(options$results)
         if(tolower(res) != res) # documented as lower-case
-            warning("value of 'results' option should be lowercase",
-                    call. = FALSE)
+            warning("value of 'results' option should be lowercase", call. = FALSE)
         options$results <- tolower(res)
     }
     options$results <- match.arg(options$results, c("verbatim", "tex", "hide"))
@@ -602,8 +586,7 @@ RweaveLatexOptions <- function(options)
     if (!is.null(options$strip.white)) {
         res <- as.character(options$strip.white)
         if(tolower(res) != res)
-            warning("value of 'strip.white' option should be lowercase",
-                    call. = FALSE)
+            warning("value of 'strip.white' option should be lowercase", call. = FALSE)
         options$strip.white <- tolower(res)
     }
     options$strip.white <-
@@ -643,10 +626,11 @@ RweaveTryStop <- function(err, options)
 {
     if (inherits(err, "try-error")) { ## from  RweaveEvalWithOpt()
         cat("\n")
-        msg <- paste(" chunk", options$chunknr)
-        if (!is.null(options$label))
-            msg <- paste0(msg, " (label = ", options$label, ")")
-        msg <- paste(msg, "\n")
+        if (!is.null(options$label)) {
+            msg <- gettextf(" chunk %s (label = %s)\n", paste(options$chunknr, collapse = ""), paste(options$label, collapse = ""), domain = "R-utils")
+        } else {
+	    msg <- gettextf(" chunk %s\n", paste(options$chunknr, collapse = ""), domain = "R-utils")
+		}
         stop(msg, err, call. = FALSE)
     }
 }
@@ -679,19 +663,19 @@ RtangleSetup <-
         if (identical(output, "stdout")) output <- stdout()
         else if (identical(output, "stderr")) output <- stderr()
         else {
-            if (!quiet) cat("Writing to file", output, "\n")
+            if (!quiet) cat(gettextf("Writing to file %s", output, domain = "R-utils"), "\n", sep = "")
             ## We could at some future point try to write the file in
             ## 'encoding'.
             output <- file(output, open = "w")
         }
-        lines <- c(sprintf("R code from vignette source '%s'", file),
+        lines <- c(gettextf("R code from vignette source '%s'", file, domain = "R-utils"),
                    if(attr(file, "encoding") != "ASCII")
-                   sprintf("Encoding: %s", localeToCharset()[1L])
+                   gettextf("Encoding: %s", localeToCharset()[1L], domain = "R-utils")
                    )
         lines <- c(paste("###", lines), "")
         writeLines(lines, output)
     } else {
-        if (!quiet) cat("Writing chunks to files ...\n")
+        if (!quiet) cat(gettext("Writing chunks to files ...", domain = "R-utils"), "\n", sep = "")
         output <- NULL
     }
 
@@ -718,8 +702,7 @@ RtangleRuncode <-  function(object, chunk, options)
 
     if (options$split) {
         if(!grepl(.SweaveValidFilenameRegexp, chunkprefix))
-            warning("file stem ", sQuote(chunkprefix), " is not portable",
-                    call. = FALSE, domain = NA)
+            warning(gettextf("file stem %s is not portable", sQuote(chunkprefix)), call. = FALSE, domain = "R-utils")
         outfile <- paste(chunkprefix, options$engine, sep = ".")
         if (!object$quiet) cat(options$chunknr, ":", outfile,"\n")
         ## [x][[1L]] avoids partial matching of x
@@ -755,8 +738,7 @@ RtangleRuncode <-  function(object, chunk, options)
     ## which are true and have hooks set.
     hooks <- SweaveHooks(options, run = FALSE)
     for (k in hooks)
-        cat("getOption(\"SweaveHooks\")[[\"", k, "\"]]()\n",
-            file = chunkout, sep = "")
+        cat("getOption(\"SweaveHooks\")[[\"", k, "\"]]()\n", file = chunkout, sep = "")
 
     if (!options$show.line.nos)
         chunk <- grep("^#line ", chunk, value = TRUE, invert = TRUE)

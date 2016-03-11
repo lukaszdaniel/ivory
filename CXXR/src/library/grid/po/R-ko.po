@@ -1,547 +1,1275 @@
-# Korean translation for R grid package
-# src/library/grid/po/R-ko.po
-#
-# Copyright (C) 1995-2015 The R Core Team
-#
-# This file is distributed under the same license as the R grid package.
-# Maintained by Chel Hee Lee <chl948@mail.usask.ca>, 2008-2015.
-# 
-# Notes:
-# Freezed on 30-MAR-2015 for R-3.2.0 - QC: PASS
-# Freezed on 06-FEB-2015 for R-3.1.3 - QC: PASS 
-#
+# # File R_HOME/src/library/grid/po/R-ko.po
+# # Managed by Chel Hee Lee (Korean, R Development Translation Team)
+# # Email <gnustats@gmail.com> or <chl948@mail.usask.ca>
+# # Copyright 1995-2012 R Core Team & R Develoment Translation Team
+# # Distributed under GPL 2 or later
+# #
 msgid ""
 msgstr ""
-"Project-Id-Version: R 3.2.0\n"
+"Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2014-02-27 17:14\n"
-"PO-Revision-Date: 2015-03-30 14:01-0600\n"
+"POT-Creation-Date: 2016-01-09 15:48\n"
+"PO-Revision-Date: 2005-05-25 16:34+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
-"Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
+"Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgid "invalid 'at' location in 'axis'"
-msgstr "'axis'에 유효하지 않은 'at' 위치입니다"
+#. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must all be same length",     "x", "y", "id")
+#. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must all be same length",     "x", "y", "id")
+#. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must all be same length",     "x", "y", "id")
+#. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must all be same length",     "x", "y", "id")
+#. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must all be same length",     "x", "y", "id")
+#: R/primitives.R:0
+#, fuzzy
+msgid ""
+"'%s' and '%s' and '%s' components of argument 'x' must all be same length"
+msgstr "'x' 그리고  'y', 'id'는 모두 동일 길이가 나오지 않으면 되지 않습니다"
 
-msgid "invalid to specify axis labels when 'at' is NULL"
-msgstr "'at'이 NULL인 경우에 축의 레이블을 지정하는 것은 유효하지 않습니다"
-
-msgid "'labels' and 'at' locations must have same length"
-msgstr "'labels'과 'at'는 반드시 같은 길이를 가져야 합니다"
-
-msgid "logical 'label' supplied of length 0"
+#. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must specify same overall length",     "x", "y", "id.lengths")
+#. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must specify same overall length",     "x", "y", "id.lengths")
+#. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must specify same overall length",     "x", "y", "id.lengths")
+#. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must specify same overall length",     "x", "y", "id.lengths")
+#. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must specify same overall length",     "x", "y", "id.lengths")
+#: R/primitives.R:0
+#, fuzzy
+msgid ""
+"'%s' and '%s' and '%s' components of argument 'x' must specify same overall "
+"length"
 msgstr ""
+"'x' 그리고 'y', 'id.lengths'는 모두 동일 길이를 지정하지 않으면 되지 않습니다"
 
-msgid "end points must not be identical"
-msgstr "끝점들은 반드시 같아야 합니다"
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must all be units of length 1",     "x", "y")
+#: R/primitives.R:0
+#, fuzzy
+msgid "'%s' and '%s' components of argument 'x' must all be units of length 1"
+msgstr "'x' 그리고  'y', 'id'는 모두 동일 길이가 나오지 않으면 되지 않습니다"
 
-msgid "'x1', 'y1', 'x2', and 'y2' must be units"
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be objects of class %s",     "x", "y", dQuote("unit"))
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be objects of class %s",     "x", "y", dQuote("unit"))
+#: R/primitives.R:0
+#, fuzzy
+msgid "'%s' and '%s' components of argument 'x' must be objects of class %s"
 msgstr ""
+"'x', 'y', 'width' 그리고 'height'는 모두 길이 1의 units가 나오지 않으면 되지 "
+"않습니다"
 
-msgid "'shape' must be between -1 and 1"
-msgstr "'shape'는 반드시 -1과 1 내에 있어야 합니다"
-
-msgid "'squareShape' must be between -1 and 1"
-msgstr "'squareShape'은 반드시 -1과 1 사이에 있어야 합니다"
-
-msgid "'arrow' must be an arrow object or NULL"
-msgstr "'arrow'는 반드시 화살표 객체 또는 NULL이어야 합니다"
-
-msgid "how did we get here?"
-msgstr "우리가 여기에 어떻게 온 것인가요?"
-
-msgid "must start new page if showing leaves separately"
-msgstr "만약 leaves가 따로 떨어져서 보인다면 새로운 페이지를 시작해야 합니다"
-
-msgid "invalid 'edit' information"
-msgstr "유효하지 않은 'edit'정보입니다"
-
-msgid "'gEditList' can only contain 'gEdit' objects"
-msgstr "'gEditList'은 'gEdit' 객체들을 포함만 할 수 있습니다"
-
-msgid "invalid 'frame'"
-msgstr "유효하지 않은 'frame'입니다"
-
-msgid "invalid 'grob'"
-msgstr "유효하지 않은 'grob'입니다"
-
-msgid "invalid 'row' and/or 'col' (no such cell in frame layout)"
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be objects of class %s and have the same length",     "x", "y", dQuote("unit"))
+#: R/primitives.R:0
+#, fuzzy
+msgid ""
+"'%s' and '%s' components of argument 'x' must be objects of class %s and "
+"have the same length"
 msgstr ""
-"유효하지 않은 'row' 그리고/또는 'col'입니다 (프레임 레이아웃에 그런 셀은 없습"
-"니다)"
+"'x', 'y', 'width' 그리고 'height'는 모두 길이 1의 units가 나오지 않으면 되지 "
+"않습니다"
 
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be objects of class %s or NULL",     "x", "y", dQuote("unit"))
+#: R/primitives.R:0
+#, fuzzy
+msgid ""
+"'%s' and '%s' components of argument 'x' must be objects of class %s or NULL"
+msgstr ""
+"'x', 'y', 'width' 그리고 'height'는 모두 길이 1의 units가 나오지 않으면 되지 "
+"않습니다"
+
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be of length 1", "x", "y")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be of length 1", "x", "y")
+#: R/primitives.R:0
+#, fuzzy
+msgid "'%s' and '%s' components of argument 'x' must be of length 1"
+msgstr "'x' 그리고  'y', 'id'는 모두 동일 길이가 나오지 않으면 되지 않습니다"
+
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be same length", "x", "y")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be same length", "x", "y")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be same length", "x", "y")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be same length", "x", "y")
+#: R/primitives.R:0
+#, fuzzy
+msgid "'%s' and '%s' components of argument 'x' must be same length"
+msgstr "'x' 그리고  'y', 'id'는 모두 동일 길이가 나오지 않으면 되지 않습니다"
+
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must be units", "x", "y")
+#: R/primitives.R:0
+#, fuzzy
+msgid "'%s' and '%s' components of argument 'x' must be units"
+msgstr "'x' 그리고  'y', 'id'는 모두 동일 길이가 나오지 않으면 되지 않습니다"
+
+#. R/components.R: gettextf("'%s' and '%s' components of argument 'x' must have same length", "labels",     "at")
+#. R/primitives.R: gettextf("'%s' and '%s' components of argument 'x' must have same length", "x", "y")
+#: R/components.R:0 R/primitives.R:0
+#, fuzzy
+msgid "'%s' and '%s' components of argument 'x' must have same length"
+msgstr "'x' 그리고  'y', 'id'는 모두 동일 길이가 나오지 않으면 되지 않습니다"
+
+#. R/edit.R: gettextf("'%s' argument is not an object of class %s", "edit", dQuote("gEdit"))
+#. R/edit.R: gettextf("'%s' argument is not an object of class %s", "edits", dQuote("gEditList"))
+#. R/frames.R: gettextf("'%s' argument is not an object of class %s", "frame", dQuote("frame"))
+#. R/frames.R: gettextf("'%s' argument is not an object of class %s", "grob", dQuote("grob"))
+#. R/frames.R: gettextf("'%s' argument is not an object of class %s", "frame", dQuote("frame"))
+#. R/frames.R: gettextf("'%s' argument is not an object of class %s", "grob", dQuote("grob"))
+#. R/gpar.R: gettextf("'%s' argument is not an object of class %s", "gp", dQuote("gpar"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "grob", dQuote("grob"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("gTree"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "children", dQuote("gList"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gTree", dQuote("gTree"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gPath", dQuote("gPath"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gTree", dQuote("gTree"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gPath", dQuote("gPath"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gPath", dQuote("gPath"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gTree", dQuote("gTree"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "newGrob", dQuote("grob"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gPath", dQuote("gPath"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gPath", dQuote("gPath"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "child", dQuote("grob"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gTree", dQuote("gTree"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gPath", dQuote("gPath"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gTree", dQuote("gTree"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gPath", dQuote("gPath"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gPath", dQuote("gPath"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "grob", dQuote("gTree"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gTree", dQuote("gTree"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "gTree", dQuote("gTree"))
+#. R/grob.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("gTree"))
+#. R/ls.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("flatGridListing"))
+#. R/ls.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("flatGridListing"))
+#. R/primitives.R: gettextf("'%s' argument is not an object of class %s", "length", dQuote("unit"))
+#. R/unit.R: gettextf("'%s' argument is not an object of class %s", "x", dQuote("unit"))
+#: R/edit.R:0 R/frames.R:0 R/gpar.R:0 R/grob.R:0 R/ls.R:0 R/primitives.R:0
+#: R/unit.R:0
+#, fuzzy
+msgid "'%s' argument is not an object of class %s"
+msgstr "인수'x'는 units 오브젝트가 아니면 되지 않습니다"
+
+#. R/primitives.R: gettextf("'%s' component of argument 'x' must be an object of class %s", "length",     dQuote("unit"))
+#. R/roundRect.R: gettextf("'%s' component of argument 'x' must be an object of class %s", "r", dQuote("unit"))
+#: R/primitives.R:0 R/roundRect.R:0
+#, fuzzy
+msgid "'%s' component of argument 'x' must be an object of class %s"
+msgstr "인수'x'는 units 오브젝트가 아니면 되지 않습니다"
+
+#. R/curve.R: gettextf("'%s' component of argument 'x' must be an object of class %s or NULL",     "arror", dQuote("arrow"))
+#: R/curve.R:0
+#, fuzzy
+msgid "'%s' component of argument 'x' must be an object of class %s or NULL"
+msgstr "'x' 그리고 'y'는 units 또는 NULL가 나오지 않으면 되지 않습니다"
+
+#. R/curve.R: gettextf("'%s' component of argument 'x' must be between -1 and 1", "shape")
+#. R/curve.R: gettextf("'%s' component of argument 'x' must be between -1 and 1", "squareShape")
+#. R/primitives.R: gettextf("'%s' component of argument 'x' must be between -1 and 1", "shape")
+#: R/curve.R:0 R/primitives.R:0
+#, fuzzy
+msgid "'%s' component of argument 'x' must be between -1 and 1"
+msgstr "'axis'에서 'at'의 location이 부적절합니다"
+
+#. R/grid.R: gettextf("'%s' component of argument 'x' must return an object of class %s or class %s",     "expr", dQuote("grob"), dQuote("gList"))
+#: R/grid.R:0
+#, fuzzy
+msgid ""
+"'%s' component of argument 'x' must return an object of class %s or class %s"
+msgstr "인수'x'는 units 오브젝트가 아니면 되지 않습니다"
+
+#. R/primitives.R: gettextf("'%s', '%s' and '%s' components must be units", "x", "y", "r")
+#. R/primitives.R: gettextf("'%s', '%s' and '%s' components must be units", "x", "y", "size")
+#: R/primitives.R:0
+#, fuzzy
+msgid "'%s', '%s' and '%s' components must be units"
+msgstr "'x', 'y' 그리고 'size'는 모두 units가 나오지 않으면 되지 않습니다"
+
+#. R/viewport.R: gettextf("'%s', '%s', '%s' and '%s' arguments must all be units of length 1", "x",     "y", "width", "height")
+#: R/viewport.R:0
+#, fuzzy
+msgid "'%s', '%s', '%s' and '%s' arguments must all be units of length 1"
+msgstr ""
+"'x', 'y', 'width' 그리고 'height'는 모두 길이 1의 units가 나오지 않으면 되지 "
+"않습니다"
+
+#. R/primitives.R: gettextf("'%s', '%s', '%s', and '%s' components of argument 'x' must all be units of length 1",     "x", "y", "width", "height")
+#: R/primitives.R:0
+#, fuzzy
+msgid ""
+"'%s', '%s', '%s', and '%s' components of argument 'x' must all be units of "
+"length 1"
+msgstr ""
+"'x', 'y', 'width' 그리고 'height'는 모두 길이 1의 units가 나오지 않으면 되지 "
+"않습니다"
+
+#. R/curve.R: gettextf("'%s', '%s', '%s', and '%s' components of argument 'x' must be objects of class %s",     "x1", "y1", "x2", "y2", dQuote("unit"))
+#. R/roundRect.R: gettextf("'%s', '%s', '%s', and '%s' components of argument 'x' must be objects of class %s",     "x", "y", "width", "height", dQuote("unit"))
+#: R/curve.R:0 R/roundRect.R:0
+#, fuzzy
+msgid ""
+"'%s', '%s', '%s', and '%s' components of argument 'x' must be objects of "
+"class %s"
+msgstr ""
+"'x', 'y', 'width' 그리고 'height'는 모두 길이 1의 units가 나오지 않으면 되지 "
+"않습니다"
+
+#. R/primitives.R: gettextf("'%s', '%s', '%s', and '%s' components of argument 'x' must be units", "x",     "y", "width", "height")
+#. R/primitives.R: gettextf("'%s', '%s', '%s', and '%s' components of argument 'x' must be units", "x",     "y", "width", "height")
+#. R/primitives.R: gettextf("'%s', '%s', '%s', and '%s' components of argument 'x' must be units", "x",     "y", "width", "height")
+#: R/primitives.R:0
+#, fuzzy
+msgid "'%s', '%s', '%s', and '%s' components of argument 'x' must be units"
+msgstr ""
+"'x', 'y', 'width' 그리고 'height'는 모두 길이 1의 units가 나오지 않으면 되지 "
+"않습니다"
+
+#. R/roundRect.R: gettextf("'%s', '%s', '%s', and '%s' components of argument 'x' must have length 1",     "x", "y", "width", "height")
+#: R/roundRect.R:0
+#, fuzzy
+msgid ""
+"'%s', '%s', '%s', and '%s' components of argument 'x' must have length 1"
+msgstr ""
+"'x', 'y', 'width' 그리고 'height'는 모두 길이 1의 units가 나오지 않으면 되지 "
+"않습니다"
+
+#. R/unit.R: gettextf("'Summary' function '%s' not meaningful for units", .Generic)
+#: R/unit.R:0
+msgid "'Summary' function '%s' not meaningful for units"
+msgstr "'Summary' 함수 '%s'는 units로서 의미를 작성하지 않습니다"
+
+#. R/grob.R: stop("'allDevices' argument is not yet implemented")
+#. R/grob.R: stop("'allDevices' argument is not yet implemented")
+#. R/grob.R: stop("'allDevices' argument is not yet implemented")
+#. R/grob.R: stop("'allDevices' argument is not yet implemented")
+#: R/grob.R:0
+#, fuzzy
+msgid "'allDevices' argument is not yet implemented"
+msgstr "'allDevices'는 실제 적용되지 않습니다"
+
+#. R/frames.R: stop("'col' can only be a range of existing columns")
+#: R/frames.R:0
 msgid "'col' can only be a range of existing columns"
-msgstr "'col'은 존재하는 열의 범위내에서만 얻을 수 있습니다"
+msgstr "'col'는 존재하는 열의 범위안에서만 얻을수 있습니다"
 
-msgid "invalid 'col' specification"
-msgstr "유효하지 않은 'col' 지정입니다"
+#. R/edit.R: stop("'gEditList()' can only contain objects of class \"gEdit\"")
+#: R/edit.R:0
+#, fuzzy
+msgid "'gEditList()' can only contain objects of class \"gEdit\""
+msgstr "'gEdutList'에는 'gEdit' 오브젝트만을 포함할 수가 없습니다"
 
+#. R/grob.R: gettextf("'gPath' (%s) was not found", as.character(gPath))
+#. R/grob.R: gettextf("'gPath' (%s) was not found", as.character(gPath))
+#. R/grob.R: gettextf("'gPath' (%s) was not found", as.character(gPath))
+#. R/grob.R: gettextf("'gPath' (%s) was not found", as.character(gPath))
+#. R/grob.R: gettextf("'gPath' (%s) was not found", gPath)
+#. R/grob.R: gettextf("'gPath' (%s) was not found", paste(gPath, name, sep = .grid.pathSep))
+#. R/grob.R: gettextf("'gPath' (%s) was not found", name)
+#: R/grob.R:0
+#, fuzzy
+msgid "'gPath' (%s) was not found"
+msgstr "'gPath'(%s)가 검색되지 않습니다"
+
+#. R/grob.R: stop("'gPath' does not specify a valid child")
+#. R/grob.R: stop("'gPath' does not specify a valid child")
+#. R/grob.R: stop("'gPath' does not specify a valid child")
+#: R/grob.R:0
+msgid "'gPath' does not specify a valid child"
+msgstr "'gPath'는 유효한 child를 지정하고 있지 않습니다"
+
+#. R/unit.R: stop("'gPath' must have depth 1 in 'grobwidth/height' units")
+#: R/unit.R:0
+msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
+msgstr ""
+"'gPath'는 'grobwidth/height' units에서는 깊이 1이 나오지 않으면 되지 않습니다"
+
+#. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
+#. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
+#. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
+#: R/gpar.R:0
+#, fuzzy
+msgid "'gamma' 'gpar' element is defunct"
+msgstr "'gamma' gpar는 없어져 버릴 예정입니다"
+
+#. R/gpar.R: gettextf("'gpar' element '%s' must not be length 0", gparname)
+#: R/gpar.R:0
+#, fuzzy
+msgid "'gpar' element '%s' must not be length 0"
+msgstr "gpar의 요소 '%s'는 길이 0으로서는 안됩니다"
+
+#. R/grob.R: gettextf("'grob' (%s) was not found", name)
+#. R/grob.R: gettextf("'grob' (%s) was not found", name)
+#: R/grob.R:0
+#, fuzzy
+msgid "'grob' (%s) was not found"
+msgstr "'gPath'(%s)가 검색되지 않습니다"
+
+#. R/highlevel.R: stop("'hgap' argument must be single unit")
+#: R/highlevel.R:0
+#, fuzzy
+msgid "'hgap' argument must be single unit"
+msgstr "'hgap'는 하나의 unit가 나오지 않으면 되지 않습니다"
+
+#. R/highlevel.R: stop("'hgap' must be single unit")
+#: R/highlevel.R:0
+msgid "'hgap' must be single unit"
+msgstr "'hgap'는 하나의 unit가 나오지 않으면 되지 않습니다"
+
+#. R/highlevel.R: stop("'l' argument must be a layout")
+#: R/highlevel.R:0
+#, fuzzy
+msgid "'l' argument must be a layout"
+msgstr "'l'는 layout가 나오지 않으면 되지 않습니다"
+
+#. R/components.R: stop("'label' argument must be of length > 0")
+#. R/components.R: stop("'label' argument must be of length > 0")
+#: R/components.R:0
+#, fuzzy
+msgid "'label' argument must be of length > 0"
+msgstr "'x'  그리고 'units'는 0보다 큰 길이가 나오지 않으면 되지 않습니다"
+
+#. R/highlevel.R: stop("'ncol' argument must be >= 1")
+#: R/highlevel.R:0
+#, fuzzy
+msgid "'ncol' argument must be >= 1"
+msgstr "'x'  그리고 'units'는 0보다 큰 길이가 나오지 않으면 되지 않습니다"
+
+#. R/highlevel.R: stop("'nrow' argument must be >= 1")
+#: R/highlevel.R:0
+#, fuzzy
+msgid "'nrow' argument must be >= 1"
+msgstr "'x'  그리고 'units'는 0보다 큰 길이가 나오지 않으면 되지 않습니다"
+
+#. R/viewport.R: stop("'parent' argument must be a viewport and 'children' argument must be a 'vpList' in 'vpTree'")
+#: R/viewport.R:0
+#, fuzzy
+msgid ""
+"'parent' argument must be a viewport and 'children' argument must be a "
+"'vpList' in 'vpTree'"
+msgstr ""
+"'parent'는 viewport가 나오지 않으면 안되고, 'children'는 'vpTree'에서 \n"
+"'vpList'가 나오지 않으면 되지 않습니다"
+
+#. R/highlevel.R: stop("'pch' and 'labels' arguments are not of the same length")
+#: R/highlevel.R:0
+#, fuzzy
+msgid "'pch' and 'labels' arguments are not of the same length"
+msgstr "'pch' 그리고 'labels'는 동일 길이가 아닙니다"
+
+#. R/grid.R: stop("'pushViewport()' must specify at least one viewport")
+#: R/grid.R:0
+#, fuzzy
+msgid "'pushViewport()' must specify at least one viewport"
+msgstr "적어도 1개의 viewport를 지정하지 않으면 안됩니다"
+
+#. R/util.R: stop("'range' must be numeric")
+#: R/util.R:0
+msgid "'range' must be numeric"
+msgstr "'range'는 수치가 아니면 되지 않습니다"
+
+#. R/layout.R: stop("'respect' must be logical or an 'nrow' by 'ncol' matrix")
+#: R/layout.R:0
+msgid "'respect' must be logical or an 'nrow' by 'ncol' matrix"
+msgstr "'respect'는 논리값 또는 'ncol * 'nrow' 행렬이 아니면 되지 않습니다"
+
+#. R/frames.R: stop("'row' can only be a range of existing rows")
+#: R/frames.R:0
 msgid "'row' can only be a range of existing rows"
-msgstr "'row'는 존재하는 행의 범위내에서만 얻을 수 있습니다"
+msgstr "'row'는 존재하는 행의 범위안에서만 얻을수 있습니다"
 
-msgid "invalid 'row' specification"
-msgstr "유효하지 않은 'row'지정입니다"
+#. R/unit.R: warning("'unit.length()' has been deprecated in favour of a unit method for the generic 'length()' function",     domain = "R-grid")
+#: R/unit.R:0
+msgid ""
+"'unit.length()' has been deprecated in favour of a unit method for the "
+"generic 'length()' function"
+msgstr ""
 
+#. R/unit.R: warning("'unit.rep()' has been deprecated in favour of a unit method for the generic 'rep()' function",     domain = "R-grid")
+#: R/unit.R:0
+msgid ""
+"'unit.rep()' has been deprecated in favour of a unit method for the generic "
+"'rep()' function"
+msgstr ""
+
+#. R/highlevel.R: stop("'vgap' argument must be single unit")
+#: R/highlevel.R:0
+#, fuzzy
+msgid "'vgap' argument must be single unit"
+msgstr "'vgap'는 하나의 unit가 나오지 않으면 되지 않습니다"
+
+#. R/highlevel.R: stop("'vgap' must be single unit")
+#: R/highlevel.R:0
+msgid "'vgap' must be single unit"
+msgstr "'vgap'는 하나의 unit가 나오지 않으면 되지 않습니다"
+
+#. R/unit.R: stop("'x' and 'units' arguments must be of length > 0")
+#: R/unit.R:0
+#, fuzzy
+msgid "'x' and 'units' arguments must be of length > 0"
+msgstr "'x'  그리고 'units'는 0보다 큰 길이가 나오지 않으면 되지 않습니다"
+
+#. R/primitives.R: stop("'x0', 'y0', 'x1', and 'y1' must be units")
+#: R/primitives.R:0
+msgid "'x0', 'y0', 'x1', and 'y1' must be units"
+msgstr "'x0', 'y0', 'x1' 그리고 'y1'는 units가 나오지 않으면 되지 않습니다"
+
+#. R/unit.R: gettextf("Class 'unit.arithmetic' [1:%d] ", length(object), domain = "R-grid")
+#: R/unit.R:0
+msgid "Class 'unit.arithmetic' [1:%d]"
+msgstr ""
+
+#. R/grob.R: stop("Invalid force target")
+#: R/grob.R:0
+#, fuzzy
+msgid "Invalid force target"
+msgstr "부적절한 'frame'입니다"
+
+#. R/grob.R: stop("Invalid revert target")
+#: R/grob.R:0
+#, fuzzy
+msgid "Invalid revert target"
+msgstr "부적절한 viewport명입니다"
+
+#. R/grob.R: gettextf("New 'grob' name (%s) does not match 'gPath' (%s)", newGrob$name, gPath)
+#: R/grob.R:0
+msgid "New 'grob' name (%s) does not match 'gPath' (%s)"
+msgstr "새로운 'grob' 이름(%s)은 'gPath'(%s)에 match하지 않습니다"
+
+#. R/unit.R: stop("Zero arguments where at least one expected")
+#: R/unit.R:0
+msgid "Zero arguments where at least one expected"
+msgstr "인수는 0개입니다만, 적어도 1개의 인수가 필요합니다"
+
+#. R/grob.R: stop("a 'grob' path must contain at least one 'grob' name")
+#: R/grob.R:0
+#, fuzzy
+msgid "a 'grob' path must contain at least one 'grob' name"
+msgstr ""
+"'grob'의 패스는 적어도 1개의 'grob' 이름을 포함하고 있지 않으면 안됩니다"
+
+#. R/viewport.R: stop("a viewport path must contain at least one viewport name")
+#: R/viewport.R:0
+#, fuzzy
+msgid "a viewport path must contain at least one viewport name"
+msgstr ""
+"viewport의 패스는 적어도 하나의 viewport명을 포함하고 있을 필요가 있습니다"
+
+#. R/viewport.R: gettextf("at least one of '%s' or '%s' arguments must be specified", "x", "xscale")
+#. R/viewport.R: gettextf("at least one of '%s' or '%s' arguments must be specified", "y", "yscale")
+#: R/viewport.R:0
+#, fuzzy
+msgid "at least one of '%s' or '%s' arguments must be specified"
+msgstr ""
+"'x','y','width' 그리고 'height'는 모두 units가 나오지 않으면 되지 않습니다"
+
+#. R/unit.R: stop("both operands must be units")
+#: R/unit.R:0
+#, fuzzy
+msgid "both operands must be units"
+msgstr "opreand는 양쪽 모두 units가 나오지 않으면 되지 않습니다"
+
+#. R/unit.R: stop("cannot mix signs of indices")
+#. R/unit.R: stop("cannot mix signs of indices")
+#. R/unit.R: stop("cannot mix signs of indices")
+#: R/unit.R:0
+msgid "cannot mix signs of indices"
+msgstr ""
+
+#. R/frames.R: stop("cannot specify more than one of 'side=[\"left\", \"right\"]', 'col', 'col.before', or 'col.after'")
+#: R/frames.R:0
+#, fuzzy
 msgid ""
 "cannot specify more than one of 'side=[\"left\", \"right\"]', 'col', 'col."
 "before', or 'col.after'"
 msgstr ""
-"'side=[\"left\", \"right\"]', 'col', 'col.before', 또는 'col.after' 중 하나 "
-"이상을 지정할 수 없습니다"
+"'side=[\"left\",\"right\"]','col','col.before','col.after'중에서 1개이상을 지"
+"정할수가 없습니다"
 
+#. R/primitives.R: stop("corrupt 'arrows' object")
+#. R/primitives.R: stop("corrupt 'arrows' object")
+#. R/primitives.R: stop("corrupt 'arrows' object")
+#: R/primitives.R:0
+#, fuzzy
+msgid "corrupt 'arrows' object"
+msgstr "파손된 'arrows'오브젝트입니다"
+
+#. R/grid.R: stop("down viewport failed to record on display list")
+#: R/grid.R:0
+#, fuzzy
+msgid "down viewport failed to record on display list"
+msgstr "display 리스트상에서 부적절한 오브젝트가 삽입되었습니다"
+
+#. R/grid.R: warning("down viewport incorrectly recorded on display list")
+#: R/grid.R:0
+#, fuzzy
+msgid "down viewport incorrectly recorded on display list"
+msgstr "display 리스트상에서 부적절한 오브젝트가 삽입되었습니다"
+
+#. R/curve.R: stop("end points must not be identical")
+#: R/curve.R:0
+msgid "end points must not be identical"
+msgstr ""
+
+#. R/grab.R: warning("grob pushed viewports and did not pop/up them (grab MAY not be faithful)")
+#: R/grab.R:0
+msgid ""
+"grob pushed viewports and did not pop/up them (grab MAY not be faithful)"
+msgstr ""
+"grob가 viewports에 push되어 viewports는 pop/up되지 않았습니다\n"
+"(아마 grab는 정확 할 수 있는것이 아닙니다)"
+
+#. R/debug.R: stop("how did we get here?")
+#: R/debug.R:0
+msgid "how did we get here?"
+msgstr ""
+
+#. R/unit.R: stop("index out of bounds ('unit' subsetting)")
+#: R/unit.R:0
+#, fuzzy
+msgid "index out of bounds ('unit' subsetting)"
+msgstr "첨자가 범위를 넘고 있습니다(unit의 부분집합입니다)"
+
+#. R/unit.R: stop("index out of bounds (unit arithmetic subsetting)")
+#: R/unit.R:0
+#, fuzzy
+msgid "index out of bounds (unit arithmetic subsetting)"
+msgstr "첨자가 범위를 넘고 있습니다(unit 계산의 부분집합입니다)"
+
+#. R/unit.R: stop("index out of bounds (unit list subsetting)")
+#: R/unit.R:0
+#, fuzzy
+msgid "index out of bounds (unit list subsetting)"
+msgstr "첨자가 범위를 넘고 있습니다(unit 리스트의 부분집합니다)"
+
+#. R/grob.R: gettextf("invalid %s class", dQuote("grob"))
+#. R/grob.R: gettextf("invalid %s class", dQuote("gTree"))
+#: R/grob.R:0
+#, fuzzy
+msgid "invalid %s class"
+msgstr "부적절한 'grob' class입니다"
+
+#. R/grob.R: gettextf("invalid '%s' argument", "vp")
+#. R/grob.R: gettextf("invalid '%s' argument", "result")
+#. R/ls.R: gettextf("invalid '%s' argument", "print")
+#. R/unit.R: gettextf("invalid '%s' argument", "x")
+#: R/grob.R:0 R/ls.R:0 R/unit.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "부적절한 'rot' 값입니다"
+
+#. R/viewport.R: gettextf("invalid '%s' argument in viewport", "xscale")
+#. R/viewport.R: gettextf("invalid '%s' argument in viewport", "yscale")
+#. R/viewport.R: gettextf("invalid '%s' argument in viewport", "angle")
+#. R/viewport.R: gettextf("invalid '%s' argument in viewport", "layout")
+#. R/viewport.R: gettextf("invalid '%s' argument in viewport", "layout.pos.row")
+#. R/viewport.R: gettextf("invalid '%s' argument in viewport", "layout.pos.col")
+#: R/viewport.R:0
+#, fuzzy
+msgid "invalid '%s' argument in viewport"
+msgstr "viewport에서 'angle'가 부적절합니다"
+
+#. R/components.R: gettextf("invalid '%s' component of argument 'x'", "at")
+#. R/function.R: gettextf("invalid '%s' component of argument 'x'", "n")
+#. R/function.R: gettextf("invalid '%s' component of argument 'x'", "f")
+#. R/primitives.R: gettextf("invalid '%s' component of argument 'x'", "arrow")
+#. R/primitives.R: gettextf("invalid '%s' component of argument 'x'", "arrow")
+#. R/primitives.R: gettextf("invalid '%s' component of argument 'x'", "arrow")
+#. R/primitives.R: gettextf("invalid '%s' component of argument 'x'", "arrow")
+#. R/primitives.R: gettextf("invalid '%s' component of argument 'x'", "arrow")
+#. R/primitives.R: gettextf("invalid '%s' component of argument 'x'", "arrow")
+#. R/primitives.R: gettextf("invalid '%s' component of argument 'x'", "rot")
+#: R/components.R:0 R/function.R:0 R/primitives.R:0
+#, fuzzy
+msgid "invalid '%s' component of argument 'x'"
+msgstr "'axis'에서 'at'의 location이 부적절합니다"
+
+#. R/gpar.R: gettextf("invalid '%s' value", "linemitre")
+#. R/gpar.R: gettextf("invalid '%s' value", "alpha")
+#. R/grob.R: gettextf("invalid '%s' value", "grep")
+#. R/grob.R: gettextf("invalid '%s' value", "grep")
+#. R/grob.R: gettextf("invalid '%s' value", "grep")
+#. R/grob.R: gettextf("invalid '%s' value", "grep")
+#. R/grob.R: gettextf("invalid '%s' value", "grep")
+#. R/grob.R: gettextf("invalid '%s' value", "grep")
+#. R/grob.R: gettextf("invalid '%s' value", "grep")
+#. R/grob.R: gettextf("invalid '%s' value", "grep")
+#. R/grob.R: gettextf("invalid '%s' value", "grep")
+#. R/grob.R: gettextf("invalid '%s' value", "grep")
+#. R/grob.R: gettextf("invalid '%s' value", "order")
+#. R/origin.R: gettextf("invalid '%s' value", "origin")
+#. R/unit.R: gettextf("invalid '%s' value", "theta")
+#. R/viewport.R: gettextf("invalid '%s' value", "gp")
+#. R/viewport.R: gettextf("invalid '%s' value", "clip")
+#: R/gpar.R:0 R/grob.R:0 R/origin.R:0 R/unit.R:0 R/viewport.R:0
+#, fuzzy
+msgid "invalid '%s' value"
+msgstr "부적절한 'ask'값입니다"
+
+#. R/unit.R: stop("invalid 'axis' or 'type'")
+#: R/unit.R:0
+#, fuzzy
+msgid "invalid 'axis' or 'type'"
+msgstr "부적절한 'axis' 또는 'type'입니다"
+
+#. R/frames.R: stop("invalid 'col' specification")
+#: R/frames.R:0
+#, fuzzy
+msgid "invalid 'col' specification"
+msgstr "부적절한 'row'의 지정입니다"
+
+#. R/primitives.R: stop("invalid 'ends' or 'type' argument")
+#. R/primitives.R: stop("invalid 'ends' or 'type' argument")
+#: R/primitives.R:0
+#, fuzzy
+msgid "invalid 'ends' or 'type' argument"
+msgstr "부적절한 'ends' 인수 또는 'type' 인수입니다"
+
+#. R/grob.R: stop("invalid 'gp' slot")
+#: R/grob.R:0
+#, fuzzy
+msgid "invalid 'gp' slot"
+msgstr "부적절한 'gp' slot입니다"
+
+#. R/frames.R: stop("invalid 'row' and/or 'col' arguments (no such cell in frame layout)")
+#: R/frames.R:0
+#, fuzzy
+msgid "invalid 'row' and/or 'col' arguments (no such cell in frame layout)"
+msgstr ""
+"부적절한 'row' 그리고/또는 'col' 입니다 (frame layout안에 그러한 셀은 존재하"
+"지 않습니다)"
+
+#. R/frames.R: stop("invalid 'row' specification")
+#: R/frames.R:0
+#, fuzzy
+msgid "invalid 'row' specification"
+msgstr "부적절한 'row'의 지정입니다"
+
+#. R/grab.R: stop("invalid display list element")
+#: R/grab.R:0
+#, fuzzy
+msgid "invalid display list element"
+msgstr "부적절한 display 리스트의 요소입니다"
+
+#. R/grob.R: stop("invalid element to add to an object of class \"gList\"")
+#: R/grob.R:0
+#, fuzzy
+msgid "invalid element to add to an object of class \"gList\""
+msgstr "'gList'에 부적절한 요소를 추가할수가 있습니다"
+
+#. R/gpar.R: stop("invalid fontface ", ch)
+#: R/gpar.R:0
+#, fuzzy
+msgid "invalid fontface"
+msgstr "부적절한 폰트의 서체입니다"
+
+#. R/just.R: stop("invalid horizontal justification")
+#: R/just.R:0
+#, fuzzy
+msgid "invalid horizontal justification"
+msgstr "부적절한 수평방향 위치의 결정 지정입니다"
+
+#. R/just.R: stop("invalid justification")
+#. R/just.R: stop("invalid justification")
+#: R/just.R:0
+#, fuzzy
+msgid "invalid justification"
+msgstr "부적절한 위치의 결정 지정입니다"
+
+#. R/grid.R: stop("invalid modification of the display list")
+#: R/grid.R:0
+#, fuzzy
+msgid "invalid modification of the display list"
+msgstr "display 리스트에서 부적절한 요소가 있습니다"
+
+#. R/grid.R: stop("invalid number of generations")
+#. R/grid.R: stop("invalid number of generations")
+#: R/grid.R:0
+#, fuzzy
+msgid "invalid number of generations"
+msgstr "부적절한 'edit'정보입니다"
+
+#. R/ls.R: stop("invalid object in 'listing'")
+#: R/ls.R:0
+#, fuzzy
+msgid "invalid object in 'listing'"
+msgstr "부적절한 위치의 결정 지정입니다"
+
+#. R/grid.R: stop("invalid object inserted on the display list")
+#: R/grid.R:0
+#, fuzzy
+msgid "invalid object inserted on the display list"
+msgstr "display 리스트상에서 부적절한 오브젝트가 삽입되었습니다"
+
+#. R/components.R: gettextf("invalid to specify axis labels when 'at' component of argument 'x' is NULL",     "at")
+#: R/components.R:0
+#, fuzzy
+msgid ""
+"invalid to specify axis labels when 'at' component of argument 'x' is NULL"
+msgstr "'at'가 NULL인경우 axis labels를 지정하는 것은 부적절합니다"
+
+#. R/just.R: stop("invalid vertical justification")
+#: R/just.R:0
+#, fuzzy
+msgid "invalid vertical justification"
+msgstr "부적절한 수직방향 위치의 결정지정입니다"
+
+#. R/unit.R: stop("it is invalid to combine 'unit' objects with other types")
+#: R/unit.R:0
+#, fuzzy
+msgid "it is invalid to combine 'unit' objects with other types"
+msgstr "unit 오브젝트와 그 이외의 형태 오브젝트를 결합할 수 없지 않습니다"
+
+#. R/grob.R: stop("it is invalid to directly edit the 'children' or 'childrenOrder' slot")
+#: R/grob.R:0
+#, fuzzy
+msgid "it is invalid to directly edit the 'children' or 'childrenOrder' slot"
+msgstr "'children' 또는 'childrenOrder'의 slot를 직접 편집해서는 안됩니다"
+
+#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths' components of argument 'x'")
+#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths' components of argument 'x'")
+#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths' components of argument 'x'")
+#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths' components of argument 'x'")
+#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths' components of argument 'x'")
+#: R/primitives.R:0
+#, fuzzy
+msgid ""
+"it is invalid to specify both 'id' and 'id.lengths' components of argument "
+"'x'"
+msgstr "'id' 그리고 'id.lengths'의 양쪽 모두를 지정할수 없지 않습니다"
+
+#. R/grob.R: stop("it is only valid to add a child to a \"gTree\"")
+#: R/grob.R:0
+#, fuzzy
+msgid "it is only valid to add a child to a \"gTree\""
+msgstr "'gTree'를 'child'에 추가하는 것만이 유효합니다"
+
+#. R/primitives.R: stop("must have exactly 4 control points")
+#: R/primitives.R:0
+msgid "must have exactly 4 control points"
+msgstr ""
+
+#. R/primitives.R: stop("must have exactly 4 control points per Bezier curve")
+#: R/primitives.R:0
+msgid "must have exactly 4 control points per Bezier curve"
+msgstr ""
+
+#. R/grid.R: stop("must navigate up at least one viewport")
+#: R/grid.R:0
+#, fuzzy
+msgid "must navigate up at least one viewport"
+msgstr "적어도 1개의 viewport를 navigate up하지 않으면 안됩니다"
+
+#. R/grid.R: stop("must pop at least one viewport")
+#: R/grid.R:0
+#, fuzzy
+msgid "must pop at least one viewport"
+msgstr "적어도 1개의 viewport를 pop하지 않으면 안됩니다"
+
+#. R/frames.R: stop("must specify exactly one of 'side=[\"top\", \"bottom\"]', 'row', 'row.before', or 'row.after'")
+#: R/frames.R:0
+#, fuzzy
 msgid ""
 "must specify exactly one of 'side=[\"top\", \"bottom\"]', 'row', 'row."
 "before', or 'row.after'"
 msgstr ""
-"'side=[\"top\", \"bottom\"]', 'row', 'row.before', 또는 'row.after' 중 하나만"
-"을 지정해야 합니다"
+"'side=[\"top\",\"bottom\"]\",'row','row.before','row,afer'중에서 1개만을 지정"
+"하지 않으면 안됩니다"
 
-msgid "invalid 'n'"
-msgstr "유효하지 않은 'n'입니다"
-
-msgid "invalid 'f'"
-msgstr "유효하지 않은 'f'입니다"
-
-msgid "'gpar' element '%s' must not be length 0"
-msgstr "'gpar' 요소 '%s'는 반드시 길이가 0이 아닙니다"
-
-msgid "'gamma' 'gpar' element is defunct"
-msgstr "'gamma' 'gpar' 요소는 더이상 지원되지 않습니다"
-
-msgid "invalid 'linemitre' value"
-msgstr "유효하지 않은 'linemitre' 값입니다"
-
-msgid "invalid 'alpha' value"
-msgstr "유효하지 않은 'alpha' 값입니다"
-
+#. R/gpar.R: stop("must specify only one of 'font' and 'fontface'")
+#: R/gpar.R:0
+#, fuzzy
 msgid "must specify only one of 'font' and 'fontface'"
-msgstr "'font'와 'fontface' 중 하나만을 선택해야 합니다"
+msgstr "'font'또는 'fontface'의 1개만을 지정하지 않으면 안됩니다"
 
-msgid "invalid fontface"
-msgstr "유효하지 않은 폰트페이스입니다"
-
-msgid "argument must be a 'gpar' object"
-msgstr "인자는 반드시 'gpar' 객체이어야 합니다"
-
+#. R/gpar.R: stop("must specify only valid 'gpar' names")
+#: R/gpar.R:0
+#, fuzzy
 msgid "must specify only valid 'gpar' names"
-msgstr "반드시 유효한 'gpar' 이름을 지정해야 합니다"
+msgstr "유효한 'gpar'의 이름만을 지정하지 않으면 안됩니다"
 
-msgid "invalid display list element"
-msgstr "유효하지 않은 디스플레이 리스트의 구성요소입니다"
-
-msgid ""
-"one of more grobs overwritten (grab WILL not be faithful; try 'wrap = TRUE')"
-msgstr ""
-"여러번 덮어 씌여진 grobs중 하나입니다 (grab은 정확한 것이 아닐 수도 있으므로 "
-"'wrap = TRUE'을 시도해보세요)"
-
-msgid "viewport overwritten (grab MAY not be faithful)"
-msgstr "덮어 씌어진 뷰포트입니다 (grab은 아마도 정확하지 못할 수도 있습니다)"
-
-msgid ""
-"grob pushed viewports and did not pop/up them (grab MAY not be faithful)"
+#. R/debug.R: stop("must start new page if showing leaves separately")
+#: R/debug.R:0
+msgid "must start new page if showing leaves separately"
 msgstr ""
 
-msgid "only valid to push viewports"
-msgstr ""
-
-msgid "must specify at least one viewport"
-msgstr "적어도 하나의 뷰포트를 지정해야 합니다"
-
-msgid "Down viewport failed to record on display list"
-msgstr "다운 뷰어포트는 디스플레이 목록에 기록하는데 실패했습니다"
-
-msgid "Down viewport incorrectly recorded on display list"
-msgstr "다운 뷰어포트가 디스플레이 목록에 올바르게 기록되지 않았습니다"
-
-msgid "must pop at least one viewport"
-msgstr "적어도 하나의 뷰포트를 띄어줘야 합니다"
-
-msgid "must navigate up at least one viewport"
-msgstr "적어도 하나의 뷰포트를 찾아야만 합니다"
-
-msgid "Invalid number of generations"
-msgstr ""
-
-msgid "invalid object inserted on the display list"
-msgstr "디스플레이 목록에 삽입되어 있는 유효하지 않은 객체입니다"
-
-msgid "invalid modification of the display list"
-msgstr "유효하지 않은 디스플레이 목록의 변경입니다"
-
-msgid "'expr' must return a grob or gList"
-msgstr "'expr'은 반드시 grob 또는 gList를 반환합니다"
-
-msgid "invalid 'grob' argument"
-msgstr "유효하지 않은 'grob' 인자입니다"
-
-msgid "invalid 'vp' slot"
-msgstr "유효하지 않은 'vp' 슬롯입니다"
-
-msgid "invalid 'gp' slot"
-msgstr "유효하지 않은 'gp' 슬롯입니다"
-
-msgid "invalid 'grob' class"
-msgstr "유효하지 않은 'grob' 클래스입니다"
-
-msgid "a 'grob' path must contain at least one 'grob' name"
-msgstr "'grob' 패스는 반드시 적어도 한개의 'grob' 이름을 포함해야 합니다"
-
-msgid "unable to coerce to \"gList\""
-msgstr "\"gList\"로 강제형변환을 할 수 없습니다"
-
-msgid "only 'grobs' allowed in \"gList\""
-msgstr "\"gList\"에서는 오로지 'grobs'만 허용됩니다"
-
-msgid "invalid element to add to \"gList\""
-msgstr ""
-
-msgid "can only set 'children' for a \"gTree\""
-msgstr "\"gTree\"에 'children' 지정만 할 수 있습니다"
-
-msgid "'children' must be a \"gList\""
-msgstr "'children'은 반드시 \"gList\"이어야 합니다"
-
-msgid "it is only valid to get 'children' from a \"gTree\""
-msgstr "\"gTree\"으로부터 'children'을 얻는 것만이 유효합니다"
-
-msgid "invalid \"gTree\" class"
-msgstr "유효하지 않은 \"gTree\" 클래스 입니다"
-
-msgid "'allDevices' not yet implemented"
-msgstr "아직 구현되지 않은 'allDevices'입니다"
-
-msgid "invalid 'gPath'"
-msgstr "유효하지 않은 'gPath'입니다"
-
-msgid "invalid 'grep' value"
-msgstr "유효하지 않은 'grep' 값입니다"
-
-msgid "it is only valid to get a child from a \"gTree\""
-msgstr "\"gTree\"로부터 child를 얻는 것만이 유효합니다"
-
-msgid "'gPath' does not specify a valid child"
-msgstr "'gPath'는 유효한 child를 지정하지 않습니다"
-
-msgid "it is only valid to set a child of a \"gTree\""
-msgstr "\"gTree\"의 child를 설정하는 것만이 유효합니다"
-
-msgid "it is only valid to set a 'grob' as child of a \"gTree\""
-msgstr "\"gTree\"의 child로서  'grob'를 정하는 것만이 유효합니다"
-
-msgid "New 'grob' name (%s) does not match 'gPath' (%s)"
-msgstr "새로운 'grob' 이름 (%1$s)이 'gPath' (%2$s)와 일치하지 않습니다"
-
-msgid "it is only valid to add a 'grob' to a \"gTree\""
-msgstr "\"gTree\"에 'grob'를 추가하는 것만이 유효합니다"
-
-msgid "it is only valid to add a child to a \"gTree\""
-msgstr "\"gTree\"에 child를 추가하는 것만이 유효합니다"
-
-msgid "'gPath' (%s) not found"
-msgstr "'gPath' (%s)를 찾을 수 없습니다"
-
-msgid "it is only valid to remove a child from a \"gTree\""
-msgstr "\"gTree\"으로부터 child를 제거하는 것만이 유효합니다"
-
-msgid "it is only valid to edit a child of a \"gTree\""
-msgstr "\"gTree\"의 child를 수정하는 것만이 유효합니다"
-
-msgid "it is invalid to directly edit the 'children' or 'childrenOrder' slot"
-msgstr ""
-"'children' 또는 'childrenOrder' 슬롯을 직접적으로 수정하는 것은 유효하지 않습"
-"니다"
-
-msgid "invalid 'result'"
-msgstr "유효하지 않은 'result'입니다"
-
-msgid "the new 'grob' must have the same name as the old 'grob'"
-msgstr "새로운 'grob'는 반드시 예전의 'grob'와 같은 이름을 가져야만 합니다"
-
-msgid "slot '%s' not found"
-msgstr "슬롯 '%s'를 찾을 수 없습니다"
-
-msgid "gPath (%s) not found"
-msgstr "gPath (%s)를 찾을 수 없습니다"
-
-msgid "grob '%s' not found"
-msgstr "grob '%s'를 찾을 수 없습니다"
-
-msgid "invalid element in the display list"
-msgstr "디스플레이 목록에 유효하지 않은 항목이 있습니다"
-
-msgid "Invalid force target"
-msgstr ""
-
-msgid "Invalid revert target"
-msgstr ""
-
-msgid "can only reorder 'children' for a \"gTree\""
-msgstr "\"gTree\"에 'children'을 재정렬만을 할 수 있습니다"
-
-msgid "Invalid 'order'"
-msgstr "유효하지 않은 'order'입니다"
-
-msgid "'l' must be a layout"
-msgstr "'l'은 반드시 레이아웃입니다"
-
-msgid "'pch' and 'labels' not the same length"
-msgstr "'pch'와 'labels'은 같은 길이를 가지지 않습니다"
-
-msgid "'hgap' must be single unit"
-msgstr ""
-
-msgid "'vgap' must be single unit"
-msgstr ""
-
-msgid "'nrow' must be >= 1"
-msgstr "'nrow'은 반드시 1 이상이어야 합니다"
-
-msgid "'ncol' must be >= 1"
-msgstr "'ncol'은 반드시 1 이상이어야 합니다"
-
-msgid "nrow * ncol < #{legend labels}"
-msgstr ""
-
-msgid "invalid justification"
-msgstr ""
-
-msgid "invalid horizontal justification"
-msgstr ""
-
-msgid "invalid vertical justification"
-msgstr ""
-
-msgid "'respect' must be logical or an 'nrow' by 'ncol' matrix"
-msgstr ""
-"'respect'는 반드시 논리값이거나 'nrow'행 'ncol'열을 가진 행렬이어야 합니다"
-
-msgid "invalid 'print' argument"
-msgstr "유효하지 않은 'print' 인자입니다"
-
-msgid "invalid object in 'listing'"
-msgstr "'listing'에 있는 유효하지 않은 객체입니다"
-
-msgid "invalid listing"
-msgstr "유효하지 않은 listing입니다"
-
-msgid "invalid 'listing'"
-msgstr "유효하지 않은 'listing'입니다"
-
-msgid "Nothing on the display list"
-msgstr "디스플레이 목록에 아무것도 없습니다"
-
-msgid "invalid 'origin'"
-msgstr "유효하지 않은 'origin'입니다"
-
-msgid "'length' must be a 'unit' object"
-msgstr "'length'는 반드시 'unit' 객체이어야 합니다"
-
-msgid "invalid 'ends' or 'type' argument"
-msgstr "유효하지 않은 'ends' 또는 'type' 인자입니다"
-
-msgid "'x' and 'y' must be units"
-msgstr "'x'와 'y'는 반드시 유닛이어야 합니다"
-
-msgid "'x' and 'y' must have length 1"
-msgstr "'x'와 'y'느느 반드시 길이 1을 가져야 합니다"
-
-msgid "invalid 'arrow' argument"
-msgstr "유효하지 않은 'arrow' 인자입니다"
-
-msgid "it is invalid to specify both 'id' and 'id.lengths'"
-msgstr "'id'와 'id.lengths'를 함께 지정하는 것은 유효하지 않습니다"
-
-msgid "'x' and 'y' must be same length"
-msgstr "'x'와 'y'는 반드시 같은 길이어야 합니다"
-
-msgid "'x' and 'y' and 'id' must all be same length"
-msgstr "'x'와 'y' 그리고 'id'는 반드시 같은 길이어야 합니다"
-
-msgid "'x' and 'y' and 'id.lengths' must specify same overall length"
-msgstr "'x'와 'y' 그리고 'id.lengths'는 반드시 같은 길이를 지정해야 합니다"
-
-msgid "'x0', 'y0', 'x1', and 'y1' must be units"
-msgstr "'x0', 'y0', 'x1', 그리고 'y1'는 반드시 유닛입니다"
-
-msgid "'x' and 'y' must be units or NULL"
-msgstr "'x'와'y'는 반드시 유닛이거나 NULL이어야 합니다"
-
-msgid "corrupt 'arrows' object"
-msgstr "'arrows' 객체가 손상되었습니다"
-
-msgid "x and y must be units"
-msgstr "x 그리고 y는 반드시 유닛이어야 합니다"
-
-msgid "must have exactly 4 control points"
-msgstr "반드시 4개의 컨트롤 포인트를 가져야만 합니다"
-
-msgid "must have exactly 4 control points per Bezier curve"
-msgstr "반드시 4개의 컨트롤 포인트를 Bezier curve마다 가져야 합니다"
-
-msgid "'x', 'y', and 'r' must be units"
-msgstr "'x', 'y', 그리고 'r'는 반드시 유닛이어야 합니다"
-
-msgid "'x', 'y', 'width', and 'height' must be units"
-msgstr "'x', 'y', 'width', 그리고 'height'는 반드시 유닛이어야 합니다"
-
-msgid "invalid 'rot' value"
-msgstr "유효하지 않은 'rot' 값입니다"
-
-msgid "zero-length 'pch'"
-msgstr "0의 길이르르 가지는 'pch'입니다"
-
-msgid "'x', 'y' and 'size' must be units"
-msgstr "'x', 'y' 그리고 'size'는 반드시 유닛이어야 합니다"
-
-msgid "'x' and 'y' must be 'unit' objects and have the same length"
-msgstr "'x'와 'y'는 반드시 'unit' 객체이어야 하며 같은 길이를 가져야 합니다"
-
-msgid "'x', 'y', 'width', and 'height' must all be units of length 1"
-msgstr ""
-"'x', 'y', 'width', 그리고 'height' 모두가 반드시 길이가 1인 유닛이어야 합니다"
-
-msgid "'x' and 'y' must all be units of length 1"
-msgstr "'x'와 'y' 모두가 반드시 길이가 1인 유닛이어야 합니다"
-
-msgid "'r' must be a 'unit' object"
-msgstr "'r'은 반드시 'unit'객체이어야 합니다"
-
-msgid "'x', 'y', 'width', and 'height' must have length 1"
-msgstr "'x', 'y', 'width', 그리고 'height'는 반드시 길이가 1 이어야 합니다"
-
-msgid "'x' and 'units' must have length > 0"
-msgstr "'x'와 'units'은 반드시 길이가 0보다 커야 합니다"
-
-msgid "'x' argument must be a unit object"
-msgstr "'x' 인수가 반드시 유닛객체이어야 합니다"
-
-msgid "invalid 'axis' or 'type'"
-msgstr "유효하지 않은 'axis' 또는 'type'입니다"
-
-msgid "no string supplied for 'strwidth/height' unit"
-msgstr "'strwidth/height' 유닛에 제공된 문자열이 없습니다"
-
+#. R/unit.R: stop("no 'grob' supplied for 'grobwidth/height' unit")
+#: R/unit.R:0
+#, fuzzy
 msgid "no 'grob' supplied for 'grobwidth/height' unit"
-msgstr "'grobwidth/height'에 제공된 'grob'가 없습니다"
+msgstr "'grobiwidth/height' units를 주는 'grob'가 없습니다"
 
-msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
-msgstr ""
+#. R/unit.R: stop("no arguments where at least one expected")
+#: R/unit.R:0
+#, fuzzy
+msgid "no arguments where at least one expected"
+msgstr "인수는 0개입니다만, 적어도 1개의 인수가 필요합니다"
 
+#. R/unit.R: stop("no string supplied for 'strwidth/height' unit")
+#: R/unit.R:0
+#, fuzzy
+msgid "no string supplied for 'strwidth/height' unit"
+msgstr "'strwidth/height' units를 주는 문자열이 없습니다"
+
+#. R/unit.R: stop("non-NULL value supplied for plain unit")
+#: R/unit.R:0
 msgid "non-NULL value supplied for plain unit"
 msgstr ""
 
-msgid "operator '%s' not meaningful for units"
-msgstr "유닛에 아무런 의미가 없는 연산자 '%s'입니다"
-
-msgid "only one operand may be a unit"
-msgstr ""
-
+#. R/unit.R: stop("non-unit operand must be numeric")
+#. R/unit.R: stop("non-unit operand must be numeric")
+#: R/unit.R:0
+#, fuzzy
 msgid "non-unit operand must be numeric"
+msgstr "단위는 아닌 opreand는 수치가 아니면 되지 않습니다"
+
+#. R/highlevel.R: stop("nrow * ncol < #{legend labels}")
+#: R/highlevel.R:0
+msgid "nrow * ncol < #{legend labels}"
 msgstr ""
 
-msgid "both operands must be units"
-msgstr ""
-
-msgid "'Summary' function '%s' not meaningful for units"
-msgstr ""
-
-msgid "no arguments where at least one expected"
-msgstr "적어도 한개의 인수가 필요한 곳에 아무것도 없습니다"
-
-msgid "Zero arguments where at least one expected"
-msgstr "적어도 한개의 인수가 필요한 곳에 아무것도 없습니다"
-
-msgid "cannot mix signs of indices"
-msgstr ""
-
-msgid "index out of bounds ('unit' subsetting)"
-msgstr ""
-
-msgid "index out of bounds (unit arithmetic subsetting)"
-msgstr ""
-
-msgid "index out of bounds (unit list subsetting)"
-msgstr ""
-
-msgid "it is invalid to combine 'unit' objects with other types"
-msgstr "'unit'객체들과 다른 타입들의 결합은 유효하지 않습니다"
-
-msgid "invalid 'unit' object"
-msgstr "유효하지 않은 'unit' 객체입니다"
-
-msgid "invalid 'theta'"
-msgstr "유효하지 않은 'theta'입니다"
-
-msgid "'range' must be numeric"
-msgstr "'range'는 반드시 수치형입니다"
-
-msgid "invalid 'gp' value"
-msgstr "유효하지 않는 'gp' 값입니다"
-
-msgid "invalid 'clip' value"
-msgstr "유효하지 않는 'clip' 값입니다"
-
-msgid "invalid 'xscale' in viewport"
-msgstr "뷰포트에 유효하지 않는 'xscale'입니다"
-
-msgid "invalid 'yscale' in viewport"
-msgstr "뷰포트에 유효하지 않는 'xscale'입니다"
-
-msgid "invalid 'angle' in viewport"
-msgstr "뷰포트에 유효하지 않는 'angle'입니다"
-
-msgid "invalid 'layout' in viewport"
-msgstr "뷰포트에 유효하지 않는 'layout'입니다"
-
-msgid "invalid 'layout.pos.row' in viewport"
-msgstr "뷰포트에 유효하지 않는 'layout.pos.row'입니다"
-
-msgid "invalid 'layout.pos.col' in viewport"
-msgstr "뷰포트에 유효하지 않는 'layout.pos.col'입니다"
-
-msgid "only viewports allowed in 'vpList'"
-msgstr "'vpList'에는 오로지 뷰포트만 허용됩니다"
-
-msgid "only viewports allowed in 'vpStack'"
-msgstr "'vpStack'에는 오로지 뷰포트만 허용됩니다"
-
+#. R/grab.R: warning("one of more grobs overwritten (grab WILL not be faithful; try 'wrap = TRUE')")
+#: R/grab.R:0
+#, fuzzy
 msgid ""
-"'parent' must be a viewport and 'children' must be a 'vpList' in 'vpTree'"
+"one of more grobs overwritten (grab WILL not be faithful; try 'wrap = TRUE')"
 msgstr ""
-"'vpTree'에서 'parent'는 반드시 뷰포트이고 'children'은 반드시 'vpList'입니다"
+"grob(s)가 다시쓰기 되었습니다(아마 grab는 정확 할수 있는것이 아닙니다;\n"
+"'wrap=TRUE'를 고려해해주십시오) "
 
-msgid "a viewport path must contain at least one viewport name"
-msgstr "뷰포트 패스는 적어도 뷰포트 이름을 포함하고 있어야 합니다"
+#. R/grob.R: stop("only 'grobs' allowed in \"gList\"")
+#: R/grob.R:0
+#, fuzzy
+msgid "only 'grobs' allowed in \"gList\""
+msgstr "'gList'에는 'grobs'만을 허용됩니다"
 
-msgid "must specify at least one of 'x' or 'xscale'"
-msgstr "'x' 또는 'xscale' 중 적어도 하나는 지정해야 합니다"
+#. R/unit.R: stop("only one operand may be a unit")
+#: R/unit.R:0
+#, fuzzy
+msgid "only one operand may be a unit"
+msgstr "하나의 opreand에서만 units가 될수가 있습니다"
 
-msgid "must specify at least one of 'y' or 'yscale'"
-msgstr "'y' 또는 'yscale' 중 적어도 하나는 지정해야 합니다"
+#. R/grid.R: stop("only valid to push viewports")
+#: R/grid.R:0
+#, fuzzy
+msgid "only valid to push viewports"
+msgstr "viewports를 push하는 것만이 유효합니다"
 
+#. R/viewport.R: stop("only viewports allowed in 'vpList'")
+#: R/viewport.R:0
+#, fuzzy
+msgid "only viewports allowed in 'vpList'"
+msgstr "viewports는 'vpList'에서만 허용됩니다"
+
+#. R/viewport.R: stop("only viewports allowed in 'vpStack'")
+#: R/viewport.R:0
+#, fuzzy
+msgid "only viewports allowed in 'vpStack'"
+msgstr "viewports는 'vpStack'에서만 허용됩니다"
+
+#. R/unit.R: gettextf("operator '%s' not meaningful for units", .Generic)
+#: R/unit.R:0
+#, fuzzy
+msgid "operator '%s' not meaningful for units"
+msgstr "연산자 '%s'는 units로서 의미를 작성하지 않습니다"
+
+#. R/zzz.R: warning("shutting down all devices when unloading 'grid' namespace", call. = FALSE)
+#: R/zzz.R:0
 msgid "shutting down all devices when unloading 'grid' namespace"
-msgstr "'grid'네임스페이스를 로딩하지 않을때에는 모든 장치를 닫아야 합니다"
+msgstr ""
 
+#. R/grob.R: gettextf("slot '%s' was not found", i)
+#: R/grob.R:0
+#, fuzzy
+msgid "slot '%s' was not found"
+msgstr "Slot '%s'가 검색되지 않습니다"
+
+#. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
+#. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
+#. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
+#: R/grob.R:0
+#, fuzzy
+msgid "the new 'grob' must have the same name as the old 'grob'"
+msgstr "새로운 'grob'는 오래된 'grob'와 동일 이름이 아니면 되지 않습니다"
+
+#. R/grob.R: warning("this function is redundant and will disappear in future versions", domain = "R-grid")
+#: R/grob.R:0
+#, fuzzy
+msgid "this function is redundant and will disappear in future versions"
+msgstr "이 함수의 여분, 그리고 새로운 버전에서는 보여지지 않을 것입니다"
+
+#. R/grob.R: stop("unable to coerce 'x' argument to an object of class \"gList\"")
+#: R/grob.R:0
+#, fuzzy
+msgid "unable to coerce 'x' argument to an object of class \"gList\""
+msgstr "인수'x'는 units 오브젝트가 아니면 되지 않습니다"
+
+#. R/grab.R: warning("viewport overwritten (grab MAY not be faithful)")
+#. R/grab.R: warning("viewport overwritten (grab MAY not be faithful)")
+#: R/grab.R:0
+msgid "viewport overwritten (grab MAY not be faithful)"
+msgstr ""
+"viewport가 다시쓰기 되었습니다(아마 grab는 정확 할수 있는 것이 아닙니다)"
+
+#. R/primitives.R: stop("zero-length 'pch' argument")
+#: R/primitives.R:0
+#, fuzzy
+msgid "zero-length 'pch' argument"
+msgstr "zero-length의 'pch'입니다"
+
+#. R/grob.R: ngettext(sum(bad), "invalid grob name", "invalid grob names", domain = "R-grid")
+#: R/grob.R:0
+#, fuzzy
 msgid "invalid grob name"
 msgid_plural "invalid grob names"
-msgstr[0] "유효하지 않은 grob 이름입니다"
+msgstr[0] "부적절한 'grob'의 이름입니다"
 
+#. R/viewport.R: ngettext(sum(bad), "invalid viewport name", "invalid viewport names", domain = "R-grid")
+#: R/viewport.R:0
+#, fuzzy
 msgid "invalid viewport name"
 msgid_plural "invalid viewport names"
-msgstr[0] "유효하지 않은 뷰포트 이름입니다"
+msgstr[0] "부적절한 viewport명입니다"
 
-#~ msgid "the 'vp' argument is deprecated"
-#~ msgstr "'vp' 인자는 더이상 지원되지 않습니다"
+#, fuzzy
+#~ msgid "Nothing on the display list"
+#~ msgstr "display 리스트에서 부적절한 요소가 있습니다"
 
-#~ msgid "grid.grob() is deprecated; please use grob() instead"
-#~ msgstr "grid.grob()는 더이상 지원되지 않으므로 대신 grob()를 사용하세요"
+#, fuzzy
+#~ msgid "invalid element in the display list"
+#~ msgstr "display 리스트에서 부적절한 요소가 있습니다"
 
+#, fuzzy
+#~ msgid "'%s' argument must be an object of class %s"
+#~ msgstr "인수'x'는 units 오브젝트가 아니면 되지 않습니다"
+
+#, fuzzy
+#~ msgid ""
+#~ "'%s' and '%s' and '%sd' components of argument 'x' must all be same length"
+#~ msgstr ""
+#~ "'x' 그리고  'y', 'id'는 모두 동일 길이가 나오지 않으면 되지 않습니다"
+
+#~ msgid "'x', 'y', 'width', and 'height' must all be units of length 1"
+#~ msgstr ""
+#~ "'x', 'y', 'width' 그리고 'height'는 모두 길이 1의 units가 나오지 않으면 되"
+#~ "지 않습니다"
+
+#, fuzzy
+#~ msgid "'labels' and 'at' components of argument 'x' must have same length"
+#~ msgstr "'labels' 그리고 위치'at'는 동일 길이가 나오지 않으면 되지 않습니다"
+
+#, fuzzy
+#~ msgid "'x' and 'y' components must be units"
+#~ msgstr "'x', 'y' 그리고 'size'는 모두 units가 나오지 않으면 되지 않습니다"
+
+#~ msgid "'x' and 'y' must be units"
+#~ msgstr "'x'그리고 'y'는 units가 나오지 않으면 되지 않습니다"
+
+#~ msgid "'x' and 'y' must have length 1"
+#~ msgstr "'x' 그리고 'y'는 길이 1이 아니면 안됩니다"
+
+#~ msgid "'x' and 'y' must be same length"
+#~ msgstr "'x'와 'y'는 동일 길이가 나오지 않으면 되지 않습니다"
+
+#~ msgid "'x' and 'y' and 'id' must all be same length"
+#~ msgstr ""
+#~ "'x' 그리고  'y', 'id'는 모두 동일 길이가 나오지 않으면 되지 않습니다"
+
+#~ msgid "'x' and 'y' and 'id.lengths' must specify same overall length"
+#~ msgstr ""
+#~ "'x' 그리고 'y', 'id.lengths'는 모두 동일 길이를 지정하지 않으면 되지 않습"
+#~ "니다"
+
+#~ msgid "'x' and 'y' must be units or NULL"
+#~ msgstr "'x' 그리고 'y'는 units 또는 NULL가 나오지 않으면 되지 않습니다"
+
+#, fuzzy
+#~ msgid "'length' must be a 'unit' object"
+#~ msgstr "'length'는 unit 오브젝트가 아니면 되지 않습니다"
+
+#, fuzzy
+#~ msgid "'x' and 'y' must all be units of length 1"
+#~ msgstr "'x' 그리고 'y'는 길이 1이 아니면 안됩니다"
+
+#, fuzzy
+#~ msgid "'x', 'y', 'width', and 'height' components must be units"
+#~ msgstr ""
+#~ "'x','y','width' 그리고 'height'는 모두 units가 나오지 않으면 되지 않습니다"
+
+#, fuzzy
+#~ msgid "'x' and 'y' must be 'unit' objects and have the same length"
+#~ msgstr ""
+#~ "'x' 그리고 'y'는 units가 나오지 않으면 안되고, 동일 길이가 나오지 않으면 "
+#~ "되지 않습니다"
+
+#, fuzzy
+#~ msgid ""
+#~ "'x', 'y', 'width', and 'height' components must all be units of length 1"
+#~ msgstr ""
+#~ "'x', 'y', 'width' 그리고 'height'는 모두 길이 1의 units가 나오지 않으면 되"
+#~ "지 않습니다"
+
+#, fuzzy
+#~ msgid "'%s', '%s', and '%s' components must be units"
+#~ msgstr "'x', 'y' 그리고 'r'는 모두 units가 나오지 않으면 되지 않습니다"
+
+#, fuzzy
+#~ msgid ""
+#~ "'x', 'y', 'width', and 'height' components of argument 'x' must be "
+#~ "objects of class %s"
+#~ msgstr ""
+#~ "'x', 'y', 'width' 그리고 'height'는 모두 길이 1의 units가 나오지 않으면 되"
+#~ "지 않습니다"
+
+#, fuzzy
+#~ msgid "'grid.grob()' is deprecated; please use 'grob()' instead"
+#~ msgstr ""
+#~ "grid.grob()는 없어져 버릴 예정입니다; 대신에 grob()를 사용해주십시오"
+
+#, fuzzy
 #~ msgid "the 'grob' argument must be a 'line.to', 'lines', or 'segments' grob"
 #~ msgstr ""
-#~ "'grob' 인자는 반드시 'line.to', 'lines', 또는 'segments' grob 중 하나이어"
-#~ "야 합니다"
+#~ "'grob'인수는 'line.to','limes','segments'인 몇개의 grob가 나오지 않으면 되"
+#~ "지 않습니다"
+
+#, fuzzy
+#~ msgid "the 'vp' argument is deprecated"
+#~ msgstr "인수 vp는 폐지 예정입니다"
+
+#, fuzzy
+#~ msgid "it is only valid to remove a child from a \"gTree\""
+#~ msgstr "child를 'gTree'로부터 제거하는 것만이 유효합니다"
+
+#, fuzzy
+#~ msgid "can only reorder 'children' for an object of class \"gTree\""
+#~ msgstr "'gTree'에는 'children'만을 세트할수 없지 않습니다"
+
+#, fuzzy
+#~ msgid "invalid listing"
+#~ msgstr "부적절한 'origin'입니다"
+
+#, fuzzy
+#~ msgid "invalid 'listing'"
+#~ msgstr "부적절한 'origin'입니다"
+
+#, fuzzy
+#~ msgid "it is invalid to specify both 'id' and 'id.lengths'"
+#~ msgstr "'id' 그리고 'id.lengths'의 양쪽 모두를 지정할수 없지 않습니다"
+
+#, fuzzy
+#~ msgid "x and y must be units"
+#~ msgstr "'x'그리고 'y'는 units가 나오지 않으면 되지 않습니다"
+
+#~ msgid "'x' and 'units' must have length > 0"
+#~ msgstr "'x'  그리고 'units'는 0보다 큰 길이가 나오지 않으면 되지 않습니다"
+
+#~ msgid "'x' argument must be a unit object"
+#~ msgstr "인수'x'는 units 오브젝트가 아니면 되지 않습니다"
+
+#, fuzzy
+#~ msgid "invalid 'at' location in 'axis'"
+#~ msgstr "'axis'에서 'at'의 location이 부적절합니다"
+
+#, fuzzy
+#~ msgid "'gp' argument must be an object of class \"gpar\""
+#~ msgstr "인수'x'는 units 오브젝트가 아니면 되지 않습니다"
+
+#, fuzzy
+#~ msgid "'r' must be a 'unit' object"
+#~ msgstr "'length'는 unit 오브젝트가 아니면 되지 않습니다"
+
+#, fuzzy
+#~ msgid "'x', 'y', 'width', and 'height' must have length 1"
+#~ msgstr ""
+#~ "'x', 'y', 'width' 그리고 'height'는 모두 길이 1의 units가 나오지 않으면 되"
+#~ "지 않습니다"
+
+#, fuzzy
+#~ msgid "invalid 'n' component of 'x'"
+#~ msgstr "'axis'에서 'at'의 location이 부적절합니다"
+
+#, fuzzy
+#~ msgid "invalid 'f' component of 'x'"
+#~ msgstr "'axis'에서 'at'의 location이 부적절합니다"
+
+#~ msgid "'allDevices' not yet implemented"
+#~ msgstr "'allDevices'는 실제 적용되지 않습니다"
+
+#, fuzzy
+#~ msgid "'allDevices' is not yet implemented"
+#~ msgstr "'allDevices'는 실제 적용되지 않습니다"
+
+#~ msgid "'gPath' (%s) not found"
+#~ msgstr "'gPath'(%s)가 검색되지 않습니다"
+
+#, fuzzy
+#~ msgid "grob '%s' not found"
+#~ msgstr "Grob '%s'가 검색되지 않습니다"
+
+#, fuzzy
+#~ msgid "invalid 'arrow' argument"
+#~ msgstr "부적절한 'rot' 값입니다"
+
+#, fuzzy
+#~ msgid "'x1', 'y1', 'x2', and 'y2' must be units"
+#~ msgstr "'x1', 'y1', 'x2' 그리고 'y2'는 units가 나오지 않으면 되지 않습니다"
+
+#, fuzzy
+#~ msgid "can only set 'children' for a \"gTree\""
+#~ msgstr "'gTree'에는 'children'만을 세트할수 없지 않습니다"
+
+#, fuzzy
+#~ msgid "'children' must be a \"gList\""
+#~ msgstr "'children'는 'gList'가 나오지 않으면 되지 않습니다"
+
+#, fuzzy
+#~ msgid "it is only valid to get 'children' from a \"gTree\""
+#~ msgstr "'children'는 'gTree'만을 유효하게 얻을수가 있습니다"
+
+#, fuzzy
+#~ msgid "invalid 'gPath'"
+#~ msgstr "부적절한 'gPath' 입니다"
+
+#, fuzzy
+#~ msgid "it is only valid to get a child from a \"gTree\""
+#~ msgstr "'child'는 'gTree'만을 유효하게 얻을수가 있습니다"
+
+#, fuzzy
+#~ msgid "it is only valid to set a child of a \"gTree\""
+#~ msgstr "'gTree'의 child를 세트하는것만이 유효합니다"
+
+#, fuzzy
+#~ msgid "it is only valid to set a 'grob' as child of a \"gTree\""
+#~ msgstr "'grob'를 'gTree'의 child로서 세트하는것만이 유효합니다"
+
+#, fuzzy
+#~ msgid "it is only valid to add a 'grob' to a \"gTree\""
+#~ msgstr "'grob'를 'gTree'에 추가하는 것만이 유효합니다"
+
+#, fuzzy
+#~ msgid "it is only valid to edit a child of a \"gTree\""
+#~ msgstr "'gTree'의 child를 편집하는 것만이 유효합니다"
+
+#, fuzzy
+#~ msgid "invalid 'vp' slot"
+#~ msgstr "부적절한 'vp' slot입니다"
+
+#, fuzzy
+#~ msgid "invalid \"gTree\" class"
+#~ msgstr "부적절한 'gTree' class입니다"
+
+#, fuzzy
+#~ msgid "invalid 'result'"
+#~ msgstr "부적절한 'result'입니다"
+
+#, fuzzy
+#~ msgid "invalid 'print' argument"
+#~ msgstr "부적절한 'rot' 값입니다"
+
+#, fuzzy
+#~ msgid "invalid 'rot' value"
+#~ msgstr "부적절한 'rot' 값입니다"
+
+#, fuzzy
+#~ msgid "invalid 'unit' object"
+#~ msgstr "부적절한 'theta' 입니다"
+
+#, fuzzy
+#~ msgid "invalid 'frame'"
+#~ msgstr "부적절한 'frame'입니다"
+
+#, fuzzy
+#~ msgid "invalid 'grob'"
+#~ msgstr "부적절한 'grob'입니다"
+
+#, fuzzy
+#~ msgid "invalid 'n'"
+#~ msgstr "부적절한 'origin'입니다"
+
+#, fuzzy
+#~ msgid "invalid 'f'"
+#~ msgstr "부적절한 'frame'입니다"
+
+#, fuzzy
+#~ msgid "invalid 'linemitre' value"
+#~ msgstr "부적절한 'linemitre'값입니다"
+
+#, fuzzy
+#~ msgid "invalid 'alpha' value"
+#~ msgstr "부적절한 'alpha'값입니다"
+
+#, fuzzy
+#~ msgid "argument must be a 'gpar' object"
+#~ msgstr "인수는 'gpar'오브젝트가 아니면 되지 않습니다"
+
+#, fuzzy
+#~ msgid "invalid 'grep' value"
+#~ msgstr "부적절한 'grep'값입니다"
+
+#~ msgid "gPath (%s) not found"
+#~ msgstr "'gPath(%s)가 검색되지 않습니다"
+
+#, fuzzy
+#~ msgid "invalid 'origin'"
+#~ msgstr "부적절한 'origin'입니다"
+
+#, fuzzy
+#~ msgid "invalid 'theta'"
+#~ msgstr "부적절한 'theta' 입니다"
+
+#, fuzzy
+#~ msgid "invalid 'gp' value"
+#~ msgstr "부적절한 'grep'값입니다"
+
+#, fuzzy
+#~ msgid "invalid 'clip' value"
+#~ msgstr "viewport에서 'clip'가 부적절합니다"
+
+#, fuzzy
+#~ msgid "invalid 'xscale' in viewport"
+#~ msgstr "viewport에서 'xscale'가 부적절합니다"
+
+#, fuzzy
+#~ msgid "invalid 'yscale' in viewport"
+#~ msgstr "viewport에서 'yscale'가 부적절합니다"
+
+#, fuzzy
+#~ msgid "invalid 'layout' in viewport"
+#~ msgstr "viewport에서 'layout'가 부적절합니다"
+
+#, fuzzy
+#~ msgid "invalid 'layout.pos.row' in viewport"
+#~ msgstr "viewport에서 'layout.pos.row'가 부적절합니다"
+
+#, fuzzy
+#~ msgid "invalid 'layout.pos.col' in viewport"
+#~ msgstr "viewport에서 'layout.pos.col'가 부적절합니다"
+
+#, fuzzy
+#~ msgid "must specify at least one of 'x' or 'xscale'"
+#~ msgstr "'x' 또는 'xscale' 중 적어도 하나를 지정하지 않으면 되지 않습니다"
+
+#, fuzzy
+#~ msgid "must specify at least one of 'y' or 'yscale'"
+#~ msgstr "'y' 또는 'yscale' 중 적어도 하나를 지정하지 않으면 되지 않습니다"
+
+#, fuzzy
+#~ msgid "It is only valid to remove a child from a \"gTree\""
+#~ msgstr "child를 'gTree'로부터 제거하는 것만이 유효합니다"
+
+#~ msgid "Non-unit operand must be numeric"
+#~ msgstr "단위는 아닌 opreand는 수치가 아니면 되지 않습니다"
+
+#, fuzzy
+#~ msgid "invalid graphics parameters"
+#~ msgstr "부적절한 graphics 파라미터입니다"
+
+#~ msgid "Viewport '%s' was not found"
+#~ msgstr "Viewport '%s'가 검색되지 않습니다"
+
+#, fuzzy
+#~ msgid "Invalid"
+#~ msgstr "부적절한 'theta' 입니다"
+
+#~ msgid "'x' must be numeric"
+#~ msgstr "'x'는 수치가 아니면 되지 않습니다"

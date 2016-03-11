@@ -48,13 +48,13 @@ termplot <- function(model, data = NULL, envir = environment(formula(model)),
     nmt <- colnames(tms)
     if (any(grepl(":", nmt, fixed = TRUE)))
         warning("'model' appears to involve interactions: see the help page",
-                domain = NA, immediate. = TRUE)
+                domain = "R-stats", immediate. = TRUE)
     cn <- parse(text = nmt, keep.source = FALSE)
     ## Defaults:
     if (!is.null(smooth))
       smooth <- match.fun(smooth)
     if (is.null(ylabs))
-	ylabs <- paste("Partial for",nmt)
+	ylabs <- gettextf("Partial for %s",nmt)
     if (is.null(main))
         main <- ""
     else if(is.logical(main))
@@ -115,7 +115,7 @@ termplot <- function(model, data = NULL, envir = environment(formula(model)),
     if (!is.null(smooth))
       smooth <- match.fun(smooth)
     if (is.null(ylabs))
-	ylabs <- paste("Partial for",nmt)
+	ylabs <- gettextf("Partial for %s",nmt)
     if (is.null(main))
         main <- ""
     else if(is.logical(main))

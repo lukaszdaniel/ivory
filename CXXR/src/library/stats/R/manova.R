@@ -41,19 +41,17 @@ summary.manova <-
              intercept = FALSE, tol = 1e-7, ...)
 {
     if(!inherits(object, "maov"))
-        stop(gettextf("object must be of class %s or %s",
-                      dQuote("manova"), dQuote("maov")),
-             domain = NA)
+        stop(gettextf("object must be of class %s or %s", dQuote("manova"), dQuote("maov")), domain = "R-stats")
     test <- match.arg(test)
 
-    asgn <- object$assign[object$qr$pivot[1L:object$rank]]
+    asgn <- object$assign[object$qr$pivot[seq_len(object$rank)]]
     uasgn <- unique(asgn)
     nterms <- length(uasgn)
     effects <- object$effects
     if (!is.null(effects))
         effects <- as.matrix(effects)[seq_along(asgn), , drop = FALSE]
     rdf <- object$df.residual
-    nmeffect <- c("(Intercept)", attr(object$terms, "term.labels"))
+    nmeffect <- c(gettext("(Intercept)", domain = "R-stats"), attr(object$terms, "term.labels"))
     resid <- as.matrix(object$residuals)
     wt <- object$weights
     if (!is.null(wt)) resid <- resid * wt^0.5
@@ -75,7 +73,7 @@ summary.manova <-
             ss[[i]] <- crossprod(effects[ai, , drop=FALSE])
         }
     }
-    pm <- pmatch("(Intercept)", nmrows, 0L)
+    pm <- pmatch(gettext("(Intercept)", domain = NA), nmrows, 0L)
     if (!intercept && pm > 0) {
         nterms <- nterms - 1
         df <- df[-pm]
@@ -89,35 +87,36 @@ summary.manova <-
         nt <- nterms + 1
         df[nt] <- rdf
         ss[[nt]] <- crossprod(resid)
-        names(ss)[nt] <- nmrows[nt] <- "Residuals"
+        names(ss)[nt] <- nmrows[nt] <- gettext("Residuals", domain = NA)
         ok <- df[-nt] > 0
-        eigs <- array(NA, c(nterms, nresp), dimnames =
-                          list(nmrows[-nt], NULL))
-        stats <- matrix(NA, nt, 5, dimnames = list(nmrows, c(test,
-                                       "approx F", "num Df", "den Df", "Pr(>F)")))
-        sc <- sqrt(sss <- diag(ss[[nt]]))
-        ## Let us try to distinguish bad scaling and near-perfect fit
-        for(i in seq_len(nterms)[ok]) sss <- sss + diag(ss[[i]])
+        eigs <- array(NA, c(nterms, nresp))
+        dimnames(eigs) <- list(nmrows[-nt], NULL)
+        stats <- matrix(NA, nt, 5)
+        dimnames(stats) <-  list(nmrows,
+                                 c(test, gettext("approx F", domain = NA), gettext("num Df", domain = NA), gettext("den Df", domain = NA), gettext("Pr(>F)", domain = NA)))
+        sc <- sqrt(diag(ss[[nt]]))
+        ## Let us try to distnguish bad scaling and near-perfect fit
+        sss <- sc^2
+        for(i in seq_len(nterms)[ok]) sss <- sss +  diag(ss[[i]])
         sc[sc < sqrt(sss)*1e-6] <- 1
         D <- diag(1/sc)
         rss.qr <- qr(D %*% ss[[nt]] %*% D, tol=tol)
         if(rss.qr$rank < ncol(resid))
-            stop(gettextf("residuals have rank %d < %d",
-                          rss.qr$rank, ncol(resid)), domain = NA)
+            stop(gettextf("residuals have rank %d < %d", rss.qr$rank, ncol(resid)), domain = "R-stats")
         if(!is.null(rss.qr))
             for(i in seq_len(nterms)[ok]) {
                 A1 <- qr.coef(rss.qr, D %*% ss[[i]] %*% D)
-                eigs[i, ] <- Re(eigen(A1, symmetric = FALSE, only.values = TRUE)$values)
-                stats[i, 1L:4L] <-
+                eigs[i, ] <- Re(eigen(A1, symmetric = FALSE)$values)
+                stats[i, seq_len(4)] <-
                     switch(test,
-			   "Pillai" = 		Pillai(eigs[i, ], df[i], df[nt]),
-			   "Wilks" = 		Wilks (eigs[i, ], df[i], df[nt]),
-			   "Hotelling-Lawley" = HL    (eigs[i, ], df[i], df[nt]),
-			   "Roy" =		Roy   (eigs[i, ], df[i], df[nt]))
-                ok <- stats[, 2L] >= 0 & stats[, 3L] > 0 & stats[, 4L] > 0
+                           "Pillai" = Pillai(eigs[i,  ], df[i], df[nt]),
+                           "Wilks" = Wilks(eigs[i,  ], df[i], df[nt]),
+                           "Hotelling-Lawley" = HL(eigs[i,  ], df[i], df[nt]),
+                           "Roy" = Roy(eigs[i,  ], df[i], df[nt]))
+                ok <- stats[, 2] >= 0 & stats[, 3] > 0 & stats[, 4] > 0
                 ok <- !is.na(ok) & ok
-                stats[ok, 5L] <- pf(stats[ok, 2L], stats[ok, 3L], stats[ok, 4L],
-                                    lower.tail = FALSE)
+                stats[ok, 5] <- pf(stats[ok, 2], stats[ok, 3], stats[ok, 4],
+                                   lower.tail = FALSE)
 
             }
         x <- list(row.names = nmrows, SS = ss,
@@ -132,7 +131,7 @@ print.summary.manova <- function(x, digits = getOption("digits"), ...)
     if(length(stats <- x$stats)) {
         print.anova(stats)
     } else {
-        cat("No error degrees of freedom\n\n")
+        cat(gettext("No error degrees of freedom", domain = "R-stats"), "\n\n", sep = "")
         print(data.frame(Df = x$Df, row.names = x$row.names))
     }
     invisible(x)

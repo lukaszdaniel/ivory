@@ -167,9 +167,7 @@ drop.terms <- function(termobj, dropx = NULL, keep.response = FALSE)
 	termobj
     else {
         if(!inherits(termobj, "terms"))
-            stop(gettextf("'termobj' must be a object of class %s",
-                          dQuote("terms")),
-                 domain = NA)
+            stop(gettextf("'%s' argument must be an object of class %s", "termobj", dQuote("terms")), domain = "R-stats")
 	newformula <- reformulate(attr(termobj, "term.labels")[-dropx],
 				  if (keep.response) termobj[[2L]] else NULL,
                                   attr(termobj, "intercept"))
@@ -351,12 +349,13 @@ offset <- function(object) object
             stop(gettextf(
     "variable '%s' was fitted with type \"%s\" but type \"%s\" was supplied",
                           names(old)[wrong], old[wrong], new[wrong]),
-                 call. = FALSE, domain = NA)
-        else
+                 call. = FALSE, domain = "R-stats")
+        else {
+	    tmp_N <- paste(sQuote(names(old)[wrong]), collapse=", ")
             stop(gettextf(
     "variables %s were specified with different types from the fit",
-                 paste(sQuote(names(old)[wrong]), collapse=", ")),
-                 call. = FALSE, domain = NA)
+                 tmp_N),
+                 call. = FALSE, domain = "R-stats") }
     }
 }
 
@@ -459,11 +458,11 @@ model.frame.default <-
         if(nr2 != nr)
             warning(sprintf(paste0(ngettext(nr,
                                             "'newdata' had %d row",
-                                            "'newdata' had %d rows"),
+                                            "'newdata' had %d rows", domain = "R-stats"),
                                    " ",
                                   ngettext(nr2,
                                            "but variable found had %d row",
-                                           "but variables found have %d rows")),
+                                           "but variables found have %d rows", domain = "R-stats")),
                             nr, nr2),
                     call. = FALSE, domain = NA)
     }
@@ -487,7 +486,7 @@ model.frame.default <-
                     xi <- as.factor(xi)
 		if(!is.factor(xi) || is.null(nxl <- levels(xi)))
 		    warning(gettextf("variable '%s' is not a factor", nm),
-                            domain = NA)
+                            domain = "R-stats")
 		else {
 		    ctr <- attr(xi, "contrasts")
 		    xi <- xi[, drop = TRUE] # drop unused levels
@@ -495,7 +494,7 @@ model.frame.default <-
 		    if(any(m <- is.na(match(nxl, xl))))
                         stop(sprintf(ngettext(length(m),
                                               "factor %s has new level %s",
-                                              "factor %s has new levels %s"),
+                                              "factor %s has new levels %s", domain = "R-stats"),
                                      nm, paste(nxl[m], collapse=", ")),
                              domain = NA)
 		    data[[nm]] <- factor(xi, levels=xl, exclude=NULL)
@@ -512,7 +511,7 @@ model.frame.default <-
 	        ctr <- attr(x, "contrasts")
 		data[[nm]] <- x[, drop = TRUE]
 		if (!identical(attr(data[[nm]], "contrasts"), ctr))
-		    warning(gettext(sprintf("contrasts dropped from factor %s due to missing levels", nm), domain = NA),
+		    warning(gettextf("contrasts dropped from factor %s due to missing levels", nm, domain = "R-stats"), 
 		            call. = FALSE)
 	    }
 	}
@@ -524,19 +523,35 @@ model.frame.default <-
 
 ## we don't assume weights are numeric or a vector, leaving this to the
 ## calling application
-model.weights <- function(x) x$"(weights)"
+#model.weights <- function(x) x$"(weights)"
+model.weights <- function(x) {
+   idx <- which(names(x) == gettext("(weights)", domain = "R-stats"))
+   if(length(idx) > 0L) {
+	x[[idx]]
+   } else x$"(weights)"
+}
 
 ## we do check that offsets are numeric.
 model.offset <- function(x) {
     offsets <- attr(attr(x, "terms"),"offset")
     if(length(offsets)) {
-	ans <- x$"(offset)"
+#		ans <- x$"(offset)"
+	idx <- which(names(x) == gettext("(offset)", domain = "R-stats"))
+	if(length(idx) > 0L) {
+	 ans <- x[[idx]]
+	} else ans <- x$"(offset)"
         if (is.null(ans)) ans <- 0
 	for(i in offsets) ans <- ans+x[[i]]
 	ans
     }
-    else ans <- x$"(offset)"
-    if(!is.null(ans) && !is.numeric(ans)) stop("'offset' must be numeric")
+#    else ans <- x$"(offset)"
+    else { 
+	idx <- which(names(x) == gettext("(offset)", domain = "R-stats"))
+	if(length(idx) > 0L) {
+	 ans <- x[[idx]]
+	} else ans <- x$"(offset)"
+    }
+    if(!is.null(ans) && !is.numeric(ans)) stop(gettextf("'%s' argument must be numeric", "offset"))
     ans
 }
 
@@ -577,11 +592,10 @@ model.matrix.default <- function(object, data = environment(object),
         ##	  get(contr.funs[1 + isOF[nn]])(nlevels(data[[nn]]))
         if (!is.null(contrasts.arg) && is.list(contrasts.arg)) {
             if (is.null(namC <- names(contrasts.arg)))
-                stop("invalid 'contrasts.arg' argument")
+                stop(gettextf("invalid '%s' argument", "contrasts.arg"))
             for (nn in namC) {
                 if (is.na(ni <- match(nn, namD)))
-                    warning(gettextf("variable '%s' is absent, its contrast will be ignored", nn),
-                            domain = NA)
+                    warning(gettextf("variable '%s' is absent, its contrast will be ignored", nn), domain = "R-stats")
                 else {
                     ca <- contrasts.arg[[nn]]
                     if(is.matrix(ca)) contrasts(data[[ni]], ncol(ca)) <- ca
@@ -606,7 +620,7 @@ model.response <- function (data, type = "any")
 	if (is.list(data) | is.data.frame(data)) {
 	    v <- data[[1L]]
 	    if (type == "numeric" && is.factor(v)) {
-		warning('using type = "numeric" with a factor response will be ignored')
+		warning("using type = \"numeric\" with a factor response will be ignored")
 	    } else if (type == "numeric" | type == "double")
 		storage.mode(v) <- "double"
 	    else if (type != "any") stop("invalid response type")
@@ -619,7 +633,7 @@ model.response <- function (data, type = "any")
 			dimnames(v) <- list(rows, dn[[2L]])
 	    }
 	    return(v)
-	} else stop("invalid 'data' argument")
+	} else stop(gettextf("invalid '%s' argument", "data"))
     } else return(NULL)
 }
 

@@ -32,8 +32,7 @@
 #endif
 
 #include <Defn.h>
-#undef _
-
+#include "localization.h"
 #include "RSMethods.h"
 #include "methods.h"
 #include <Rinternals.h>
@@ -219,7 +218,7 @@ static SEXP R_find_method(SEXP mlist, const char *class, SEXP fname)
     SEXP value, methods;
     methods = R_do_slot(mlist, s_allMethods);
     if(methods == R_NilValue) {
-	error(_("no \"allMethods\" slot found in object of class \"%s\" used as methods list for function '%s'"),
+	error(_("no 'allMethods' slot found in object of class \"%s\" used as methods list for function '%s'"),
 	      class_string(mlist), CHAR(asChar(fname)));
 	return(R_NilValue); /* -Wall */
     }
@@ -372,9 +371,9 @@ static SEXP R_S_MethodsListSelect(SEXP fname, SEXP ev, SEXP mlist, SEXP f_env)
     }
     val = R_tryEvalSilent(e, Methods_Namespace, &check_err);
     if(check_err)
-	error("S language method selection got an error when called from internal dispatch for function '%s'",
+	error(_("S language method selection got an error when called from internal dispatch for function '%s'"),
 	      check_symbol_or_string(fname, TRUE,
-				     "Function name for method selection called internally"));
+				     _("Function name for method selection called internally")));
     UNPROTECT(1);
     return val;
 }
@@ -408,7 +407,7 @@ static SEXP get_generic(SEXP symbol, SEXP rho, SEXP package)
 	    if(IS_GENERIC(vl)) {
 	      if(strlen(pkg)) {
 		  gpackage = PACKAGE_SLOT(vl);
-		  check_single_string(gpackage, FALSE, "The \"package\" slot in generic function object");
+		  check_single_string(gpackage, FALSE, _("The 'package' slot in generic function object"));
 		  ok = !strcmp(pkg, CHAR(STRING_ELT(gpackage, 0)));
 		}
 		else
@@ -429,7 +428,7 @@ static SEXP get_generic(SEXP symbol, SEXP rho, SEXP package)
 	    generic = vl;
 	    if(strlen(pkg)) {
 		gpackage = PACKAGE_SLOT(vl);
-		check_single_string(gpackage, FALSE, "The \"package\" slot in generic function object");
+		check_single_string(gpackage, FALSE, _("The 'package' slot in generic function object"));
 		if(strcmp(pkg, CHAR(STRING_ELT(gpackage, 0)))) generic = R_UnboundValue;
 	    }
 	}
@@ -441,8 +440,8 @@ SEXP R_getGeneric(SEXP name, SEXP mustFind, SEXP env, SEXP package)
 {
     SEXP value;
     if(isSymbol(name)) {}
-    else check_single_string(name, TRUE, "The argument \"f\" to getGeneric");
-    check_single_string(package, FALSE, "The argument \"package\" to getGeneric");
+    else check_single_string(name, TRUE, _("The argument 'f' passed to getGeneric"));
+    check_single_string(package, FALSE, _("The argument 'package' passed to getGeneric"));
     value = get_generic(name, env, package);
     if(value == R_UnboundValue) {
 	if(asLogical(mustFind)) {
@@ -471,7 +470,7 @@ SEXP R_standardGeneric(SEXP fname, SEXP ev, SEXP fdef)
     /* TODO:  the code for do_standardGeneric does a test of fsym,
      * with a less informative error message.  Should combine them.*/
     if(!isSymbol(fsym)) {
-	const char *fname = check_single_string(fsym, TRUE, "The function name in the call to standardGeneric");
+	const char *fname = check_single_string(fsym, TRUE, _("The function name in the call to standardGeneric"));
 	fsym = install(fname);
     }
     switch(TYPEOF(fdef)) {
@@ -547,7 +546,7 @@ static Rboolean is_missing_arg(SEXP symbol, SEXP ev)
     R_varloc_t loc;
 
     /* Sanity check, so don't translate */
-    if (!isSymbol(symbol)) error("'symbol' must be a SYMSXP");
+    if (!isSymbol(symbol)) error(_("'symbol' must be a SYMSXP expression"));
     loc = R_findVarLocInFrame(ev, symbol);
     if (loc == NULL)
 	error(_("could not find symbol '%s' in frame of call"),
@@ -679,14 +678,14 @@ SEXP R_nextMethodCall(SEXP matched_call, SEXP ev)
     */
     PROTECT(op = findVarInFrame3(ev, R_dot_nextMethod, TRUE));
     if(op == R_UnboundValue)
-	error("internal error in 'callNextMethod': '.nextMethod' was not assigned in the frame of the method call");
+	error(_("internal error in 'callNextMethod': '.nextMethod' was not assigned in the frame of the method call"));
     PROTECT(e = duplicate(matched_call));
     prim_case = isPrimitive(op);
     if (!prim_case) {
         if (inherits(op, "internalDispatchMethod")) {
 	    SEXP generic = findVarInFrame3(ev, R_dot_Generic, TRUE);
 	    if(generic == R_UnboundValue)
-	        error("internal error in 'callNextMethod': '.Generic' was not assigned in the frame of the method call");
+	        error("internal error in 'callNextMethod()': '.Generic' was not assigned in the frame of the method call");
 	    op = INTERNAL(install(CHAR(asChar(generic))));
 	    prim_case = TRUE;
 	}
@@ -854,11 +853,11 @@ SEXP R_methodsPackageMetaName(SEXP prefix, SEXP name, SEXP pkg)
     const char *prefixString, *nameString, *pkgString;
 
     prefixString = check_single_string(prefix, TRUE,
-				       "The internal prefix (e.g., \"C\") for a meta-data object");
+				       _("The internal prefix (e.g., \"C\") for a meta-data object"));
     nameString = check_single_string(name, FALSE,
-				     "The name of the object (e.g,. a class or generic function) to find in the meta-data");
+				     _("The name of the object (e.g,. a class or generic function) to find in the meta-data"));
     pkgString = check_single_string(pkg, FALSE,
-				   "The name of the package for a meta-data object");
+				   _("The name of the package for a meta-data object"));
     if(*pkgString)
       snprintf(str, 500, ".__%s__%s:%s", prefixString, nameString, pkgString);
     else
@@ -997,11 +996,11 @@ SEXP R_dispatchGeneric(SEXP fname, SEXP ev, SEXP fdef)
     PROTECT(siglength = findVarInFrame(f_env, R_siglength)); nprotect++;
     if(sigargs == R_UnboundValue || siglength == R_UnboundValue ||
        mtable == R_UnboundValue)
-	error("generic \"%s\" seems not to have been initialized for table dispatch---need to have '.SigArgs' and '.AllMtable' assigned in its environment");
+	error(_("generic \"%s\" seems not to have been initialized for table dispatch---need to have '.SigArgs' and '.AllMtable' assigned in its environment"));
     nargs = asInteger(siglength);
     PROTECT(classes = allocVector(VECSXP, nargs)); nprotect++;
     if (nargs > LENGTH(sigargs))
-	error("'.SigArgs' is shorter than '.SigLength' says it should be");
+	error(_("'.SigArgs' is shorter than '.SigLength' says it should be"));
     for(i = 0; i < nargs; i++) {
 	SEXP arg_sym = VECTOR_ELT(sigargs, i);
 	if(is_missing_arg(arg_sym, ev))

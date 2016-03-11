@@ -86,6 +86,7 @@
     pango_layout_set_text
 
 */
+#include "../localization.h"
 
 static void CairoColor(unsigned int col, pX11Desc xd)
 {
@@ -456,7 +457,7 @@ static PangoFontDescription
     PangoFontDescription *fontdesc;
     gint face = gc->fontface;
     double size = gc->cex * gc->ps * fs, ssize = PANGO_SCALE * size;
-#ifdef Win32
+#ifdef _WIN32
     const char *times = "Times New Roman", *hv = "Arial";
 #else
     const char *times = "times", *hv = "Helvetica";
@@ -757,7 +758,7 @@ static void FT_getFont(pGEcontext gc, pDevDesc dd, double fs)
     double size = gc->cex * gc->ps *fs;
     cairo_font_face_t *cairo_face = NULL;
     const char *family;
-#ifdef Win32
+#ifdef _WIN32
     char *times = "Times New Roman", *hv = "Arial";
 #else
     char *times = "times", *hv = "Helvetica";
@@ -766,7 +767,7 @@ static void FT_getFont(pGEcontext gc, pDevDesc dd, double fs)
     if (face < 1 || face > 5) face = 1;
     family = gc->fontfamily;
     if (face == 5) {
-#ifdef Win32
+#ifdef _WIN32
 	if (!*family) family = "Standard Symbols L";
 #else
 	if (!*family) family = "Symbol";
@@ -799,7 +800,7 @@ static void FT_getFont(pGEcontext gc, pDevDesc dd, double fs)
     double size = gc->cex * gc->ps *fs;
     char *family;
     int slant = CAIRO_FONT_SLANT_NORMAL, wt = CAIRO_FONT_WEIGHT_NORMAL;
-#ifdef Win32
+#ifdef _WIN32
     char *times = "Times New Roman", *hv = "Arial";
 #else
     char *times = "times", *hv = "Helvetica";
@@ -859,7 +860,7 @@ static double Cairo_StrWidth(const char *str, pGEcontext gc, pDevDesc dd)
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
     cairo_text_extents_t exts;
 
-    if (!utf8Valid(str)) error("invalid string in Cairo_StrWidth");
+    if (!utf8Valid(str)) error(_("invalid string in Cairo_StrWidth"));
     FT_getFont(gc, dd, xd->fontscale);
     cairo_text_extents(xd->cc, str, &exts);
     return exts.x_advance;
@@ -869,7 +870,7 @@ static void Cairo_Text(double x, double y,
 		       const char *str, double rot, double hadj,
 		       pGEcontext gc, pDevDesc dd)
 {
-    if (!utf8Valid(str)) error("invalid string in Cairo_Text");
+    if (!utf8Valid(str)) error(_("invalid string in Cairo_Text"));
     if (R_ALPHA(gc->col) > 0) {
 	pX11Desc xd = (pX11Desc) dd->deviceSpecific;
 	cairo_save(xd->cc);

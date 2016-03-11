@@ -30,6 +30,7 @@
 
 #include <R_ext/Arith.h> // includes math.h
 #include <Rinternals.h>
+#include "localization.h"
 
 /* NB: this only works in the lower half of y, but pads with zeros. */
 SEXP BinDist(SEXP sx, SEXP sw, SEXP slo, SEXP shi, SEXP sn)
@@ -37,7 +38,7 @@ SEXP BinDist(SEXP sx, SEXP sw, SEXP slo, SEXP shi, SEXP sn)
     PROTECT(sx = coerceVector(sx, REALSXP)); 
     PROTECT(sw = coerceVector(sw, REALSXP));
     int n = asInteger(sn);
-    if (n == NA_INTEGER || n <= 0) error("invalid '%s' argument", "n");
+    if (n == NA_INTEGER || n <= 0) error(_("invalid '%s' argument"), "n");
     SEXP ans = allocVector(REALSXP, 2*n);
     PROTECT(ans);
     double xlo = asReal(slo), xhi = asReal(shi);

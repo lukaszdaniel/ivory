@@ -14,7 +14,7 @@ This function waits for input from a graphics window in the
 form of a mouse or keyboard event.
 }
 \usage{
-getGraphicsEvent(prompt = "Waiting for input",
+getGraphicsEvent(prompt = gettext("Waiting for input", domain = "R-grDevices"),
                  onMouseDown = NULL, onMouseMove = NULL,
                  onMouseUp = NULL, onKeybd = NULL,
                  consolePrompt = prompt)

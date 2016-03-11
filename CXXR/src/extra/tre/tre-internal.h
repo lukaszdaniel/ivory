@@ -20,6 +20,9 @@
 #include <ctype.h>
 #include "tre.h"
 
+#include <localization.h>
+#include <R_ext/Minmax.h>
+
 #ifdef TRE_DEBUG
 #include <stdio.h>
 #define DPRINT(msg) do {printf msg; fflush(stdout);} while(/*CONSTCOND*/(void)0,0)
@@ -143,10 +146,6 @@ typedef enum { STR_WIDE, STR_BYTE, STR_MBS, STR_USER } tre_str_type_t;
    ? (sizeof(type) - (((size_t)ptr) % sizeof(type))) \
    : 0)
 
-#undef MAX
-#undef MIN
-#define MAX(a, b) (((a) >= (b)) ? (a) : (b))
-#define MIN(a, b) (((a) <= (b)) ? (a) : (b))
 
 /* Define STRF to the correct printf formatter for strings. */
 #ifdef TRE_WCHAR
@@ -176,7 +175,7 @@ struct tnfa_transition {
   /* Assertion parameters. */
   union {
     /* Character class assertion. */
-    tre_ctype_t class;
+    tre_ctype_t classs;
     /* Back reference assertion. */
     int backref;
   } u;
@@ -206,7 +205,7 @@ extern void Rf_error(const char *str, ...);
 #define R_assert(e) ((void) 0)
 #else
 /* The line below requires an ANSI C preprocessor (stringify operator) */
-#define R_assert(e) ((e) ? (void) 0 : Rf_error("assertion '%s' failed in executing regexp: file '%s', line %d\n", #e, __FILE__, __LINE__))
+#define R_assert(e) ((e) ? (void) 0 : Rf_error(_("assertion '%s' failed in executing regexp: file '%s', line %d\n"), #e, __FILE__, __LINE__))
 #endif /* NDEBUG */
 
 /* Tag directions. */

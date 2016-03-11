@@ -66,7 +66,7 @@ SSD.mlm <- function(object, ...){
     ## It's not all that hard to incorporate weights, but will
     ## anyone use them?
     if (!is.null(object$weights))
-        stop("'mlm' objects with weights are not supported")
+        stop("\"mlm\" objects with weights are not supported")
     ## avoid residuals(objects) -- if na.exclude was used
     ## that will introduce NAs
     structure(list(SSD=crossprod(object$residuals),
@@ -140,7 +140,7 @@ mauchly.test.SSD <- function(object, Sigma=diag(nrow=p),
 	if (inherits(M, "formula")) M <- model.matrix(M, idata)
 	if (inherits(X, "formula")) X <- model.matrix(X, idata)
         if (Rank(cbind(M,X)) != Rank(M))
-            stop("X does not define a subspace of M")
+            stop("'X' does not define a subspace of 'M'")
     }
     Psi <- T %*% Sigma %*% t(T)
     B <- T %*% object$SSD %*% t(T)
@@ -160,25 +160,24 @@ mauchly.test.SSD <- function(object, Sigma=diag(nrow=p),
     Pr2 <- pchisq(z, f+4, lower.tail=FALSE)
     pval <- Pr1 + w2 * (Pr2 - Pr1)
     transformnote <- if (!missing(T))
-        c("\nContrast matrix", apply(format(T), 1L, paste, collapse=" "))
+        c("", gettextf("Contrast matrix %s", apply(format(T), 1L, paste, collapse=" "), domain = "R-stats"))
     else
         c(
           if (!Xmis)
-          c("\nContrasts orthogonal to",
-            if (is.matrix(orig.X))  apply(format(X), 2L, paste, collapse=" ")
-            else deparse(formula(orig.X)),"",
+          c(
+            if (is.matrix(orig.X)) gettextf("Contrasts orthogonal to %s", apply(format(X), 2L, paste, collapse=" "), domain = "R-stats")
+            else gettextf("Contrasts orthogonal to %s", paste(deparse(formula(orig.X)), collapse = ""), domain = "R-stats"), "",
             if (!Mmis)
-            c("\nContrasts spanned by",
-              if (is.matrix(orig.M))  apply(format(M), 2L, paste, collapse=" ")
-              else deparse(formula(orig.M)),""
+            c(
+              if (is.matrix(orig.M)) gettextf("Contrasts spanned by %s" , apply(format(M), 2L, paste, collapse=" "), domain = "R-stats")
+              else gettextf("Contrasts spanned by %s", paste(deparse(formula(orig.M)), collapse = "") , domain = "R-stats"), ""
               )
             )
           )
 
     retval <- list(statistic=c(W=exp(logW)),p.value=pval,
-                   method=c("Mauchly's test of sphericity", transformnote),
-                   data.name=paste("SSD matrix from",
-                   deparse(object$call), collapse=" "))
+                   method=c(gettext("Mauchly's test of sphericity"), transformnote),
+                   data.name=gettextf("SSD matrix from %s", paste(deparse(object$call), collapse = "")))
     class(retval) <- "htest"
     retval
 }
@@ -234,34 +233,32 @@ anova.mlm <-
             if (Rank(cbind(M,X)) != Rank(M))
                 stop("X does not define a subspace of M")
         }
-        title <- "Analysis of Variance Table\n"
+        title <- paste(gettext("Analysis of Variance Table", domain = "R-stats"), "\n", sep = "")
         transformnote <- if (!missing(T))
-            c("\nContrast matrix", apply(format(T), 1L, paste, collapse=" "))
+        c("\n", gettextf("Contrast matrix %s", apply(format(T), 1L, paste, collapse=" "), domain = "R-stats"))
         else
-            c(
-              if (!Xmis)
-              c("\nContrasts orthogonal to",
-                if (is.matrix(orig.X))
-                apply(format(X), 2L, paste, collapse=" ")
-                else deparse(formula(orig.X)),"",
-                if (!Mmis)
-                c("\nContrasts spanned by",
-                  if (is.matrix(orig.M))
-                  apply(format(M), 2L, paste, collapse=" ")
-                  else deparse(formula(orig.M)),""
-                  )
-                )
+	c(
+          if (!Xmis)
+          c("",
+            if (is.matrix(orig.X)) gettextf("Contrasts orthogonal to %s", apply(format(X), 2L, paste, collapse=" "), domain = "R-stats")
+            else gettextf("Contrasts orthogonal to %s", paste(deparse(formula(orig.X)), collapse = ""), domain = "R-stats"), "",
+            if (!Mmis)
+            c("",
+              if (is.matrix(orig.M)) gettextf("Contrasts spanned by %s" , apply(format(M), 2L, paste, collapse=" "), domain = "R-stats")
+              else gettextf("Contrasts spanned by %s", paste(deparse(formula(orig.M)), collapse = ""), domain = "R-stats"), ""
               )
+            )
+          )
         epsnote <- NULL
 
         ssd <- SSD(object)
         rk <- object$rank
         pp <- nrow(T)
         if(rk > 0) {
-            p1 <- 1L:rk
+            p1 <- seq_len(rk)
             comp <- object$effects[p1, , drop=FALSE]
             asgn <- object$assign[object$qr$pivot][p1]
-            nmeffects <- c("(Intercept)", attr(object$terms, "term.labels"))
+            nmeffects <- c(gettext("(Intercept)", domain = NA), attr(object$terms, "term.labels"))
             tlabels <- nmeffects[1 + unique(asgn)]
 	    ix <- split(seq_len(nrow(comp)), asgn)
             ss <- lapply(ix, function(i) crossprod(comp[i,,drop=FALSE]))
@@ -279,8 +276,8 @@ anova.mlm <-
         if(test == "Spherical"){
             df.res <- ssd$df
             sph <- sphericity(ssd, T=T, Sigma=Sigma)
-            epsnote <- c(paste(format(c("Greenhouse-Geisser epsilon:",
-                                        "Huynh-Feldt epsilon:")),
+            epsnote <- c(paste(format(c(gettext("Greenhouse-Geisser epsilon:", domain = "R-stats"),
+                                        gettext("Huynh-Feldt epsilon:", domain = "R-stats"))),
                                format(c(sph$GG.eps, sph$HF.eps), digits = 4L)),
                          "")
 
@@ -315,17 +312,16 @@ anova.mlm <-
 
             rss.qr <- qr((T %*% ssd$SSD  %*% t(T)) * scm, tol=tol)
             if(rss.qr$rank < pp)
-                stop(gettextf("residuals have rank %s < %s", rss.qr$rank, pp),
-                     domain = NA)
+                stop(gettextf("residuals have rank %s < %s", rss.qr$rank, pp), domain = "R-stats")
             eigs <- array(NA, c(nmodels, pp))
             stats <- matrix(NA, nmodels+1L, 5L,
                             dimnames = list(NULL, c(test,
-                                "approx F", "num Df", "den Df", "Pr(>F)")))
+                                gettext("approx F", domain = NA), gettext("num Df", domain = NA), gettext("den Df", domain = NA), gettext("Pr(>F)", domain = NA))))
             for(i in seq_len(nmodels)) {
                 eigs[i, ] <- Re(eigen(qr.coef(rss.qr,
                                               (T %*% ss[[i]] %*% t(T)) * scm),
                                       symmetric = FALSE, only.values = TRUE)$values)
-                stats[i, 1L:4L] <-
+                stats[i, seq_len(4)] <-
                     switch(test,
 			   "Pillai" =		Pillai(eigs[i, ], df[i], df.res),
 			   "Wilks" =		Wilks (eigs[i, ], df[i], df.res),
@@ -429,9 +425,7 @@ anova.mlmlist <- function (object, ...,
     sameresp <- responses == responses[1L]
     if (!all(sameresp)) {
 	objects <- objects[sameresp]
-        warning(gettextf("models with response %s removed because response differs from model 1",
-                         sQuote(deparse(responses[!sameresp]))),
-                domain = NA)
+        warning(gettextf("models with response %s removed because response differs from model 1", sQuote(deparse(responses[!sameresp]))), domain = "R-stats")
     }
 
     ns <- sapply(objects, function(x) length(x$residuals))
@@ -462,22 +456,21 @@ anova.mlmlist <- function (object, ...,
     dimnames(table) <- list(seq_len(nmodels),
                             c("Res.Df", "Df", "Gen.var."))
 
-    title <- "Analysis of Variance Table\n"
-    topnote <- paste0("Model ", format(seq_len(nmodels)),": ", variables,
-		      collapse = "\n")
-    transformnote <- if (!missing(T))
-        c("\nContrast matrix", apply(format(T), 1L, paste, collapse = " "))
-    else
+    title <- paste(gettext("Analysis of Variance Table"), "\n", sep = "")
+    topnote <- paste(gettextf("Model %s: %s", format(seq_len(nmodels)), variables, domain = "R-stats"), collapse = "\n")
+        transformnote <- if (!missing(T))
+        c(gettextf("Contrast matrix %s", apply(format(T), 1L, paste, collapse=" "), domain = "R-stats"))
+        else
         c(
           if (!Xmis)
-          c("\nContrasts orthogonal to",
-            if (is.matrix(orig.X))  apply(format(X), 2L, paste, collapse = " ")
-            else deparse(formula(orig.X)),"",
+          c("",
+            if (is.matrix(orig.X)) gettextf("Contrasts orthogonal to %s", apply(format(X), 2L, paste, collapse=" "), domain = "R-stats")
+            else gettextf("Contrasts orthogonal to %s", paste(deparse(formula(orig.X)), collapse = ""), domain = "R-stats"), "",
             if (!Mmis)
-            c("\nContrasts spanned by",
-              if (is.matrix(orig.M))  apply(format(M), 2L, paste, collapse = " ")
-              else deparse(formula(orig.M)),
-              "")
+            c("",
+              if (is.matrix(orig.M)) gettextf("Contrasts spanned by %s" , apply(format(M), 2L, paste, collapse=" "), domain = "R-stats")
+              else gettextf("Contrasts spanned by %s", paste(deparse(formula(orig.M)), collapse = "") , domain = "R-stats"), ""
+              )
             )
           )
     epsnote <- NULL
@@ -489,8 +482,8 @@ anova.mlmlist <- function (object, ...,
 	bigmodel <- order(resdf)[1L]
         df.res <- resdf[bigmodel]
         sph <- sphericity(resssd[[bigmodel]],T=T,Sigma=Sigma)
-        epsnote <- c(paste(format(c("Greenhouse-Geisser epsilon:",
-                           "Huynh-Feldt epsilon:")),
+        epsnote <- c(paste(format(c(gettext("Greenhouse-Geisser epsilon:"),
+                          gettext("Huynh-Feldt epsilon:"))),
                          format(c(sph$GG.eps, sph$HF.eps), digits = 4L)),
                      "")
 
@@ -532,13 +525,12 @@ anova.mlmlist <- function (object, ...,
 
         rss.qr <- qr((T %*% resssd[[bigmodel]]$SSD %*% t(T)) * scm, tol=tol)
         if(rss.qr$rank < pp)
-            stop(gettextf("residuals have rank %s < %s", rss.qr$rank, pp),
-                 domain = NA)
+            stop(gettextf("residuals have rank %s < %s", rss.qr$rank, pp), domain = "R-stats")
         eigs <- array(NA, c(nmodels, pp))
         stats <- matrix(NA, nmodels, 5L)
         dimnames(stats) <-
             list(seq_len(nmodels),
-                 c(test, "approx F", "num Df", "den Df", "Pr(>F)"))
+                 c(test, gettext("approx F", domain = NA), gettext("num Df", domain = NA), gettext("den Df", domain = NA), gettext("Pr(>F)", domain = NA)))
 
         for(i in 2:nmodels) {
             sg <- (df[i] > 0) -  (df[i] < 0)
@@ -546,7 +538,7 @@ anova.mlmlist <- function (object, ...,
                                           sg * (T %*% deltassd[[i-1]] %*%
                                           t(T)) * scm),
                                   symmetric = FALSE, only.values = TRUE)$values)
-            stats[i, 1L:4] <-
+            stats[i, seq_len(4)] <-
                 switch(test,
                        "Pillai" = Pillai(eigs[i,  ],
                        sg * df[i], resdf[bigmodel]),

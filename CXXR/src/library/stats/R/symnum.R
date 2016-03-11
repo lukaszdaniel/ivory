@@ -39,25 +39,27 @@ symnum <- function(x, cutpoints = c(  .3,  .6,	 .8,  .9, .95),
 	if(corr) cutpoints <- c(0, cutpoints, 1)
 	if(anyDuplicated(cutpoints) ||
 	   (corr && (any(cutpoints > 1) || any(cutpoints < 0)) ))
-	    stop(if(corr) gettext("'cutpoints' must be unique in 0 < cuts < 1, but are = ")
-                 else gettext("'cutpoints' must be unique, but are = "),
-                 paste(format(cutpoints), collapse="|"), domain = NA)
+	    {
+		tmp_n <- paste(format(cutpoints), collapse="|")
+	     if(corr) stop(gettextf("'cutpoints' must be unique in 0 < cuts < 1, but are = %s", tmp_n), domain = "R-stats")
+             else stop(gettextf("'%s' must be unique, but are = %s", "cutpoints", tmp_n), domain = "R-stats")
+	    }
 	nc <- length(cutpoints)
 	minc <- cutpoints[1L]
 	maxc <- cutpoints[nc]
-	range.msg <- if(corr) gettext("'x' must be between -1 and 1")
-        else gettextf("'x' must be between %s and %s",
-                      format(minc), format(maxc))
+	range.msg <- if(corr) gettextf("'%s' argument must be between %s and %s", "x", "-1", "1")
+        else gettextf("'%s' argument must be between %s and %s", "x", format(minc), format(maxc))
 	if(corr) x <- abs(x)
 	else
-	    if(any(x < minc - eps, na.rm=TRUE)) stop(range.msg, domain = NA)
-	if (   any(x > maxc + eps, na.rm=TRUE)) stop(range.msg, domain = NA)
+	    if(any(x < minc - eps, na.rm=TRUE)) stop(range.msg, domain = "R-stats")
+	if (   any(x > maxc + eps, na.rm=TRUE)) stop(range.msg, domain = "R-stats")
 
 	ns <- length(symbols)
 	symbols <- as.character(symbols)
-	if(anyDuplicated(symbols))
-	    stop("'symbols' must be unique, but are = ",
-                 paste(symbols, collapse="|"), domain = NA)
+	if(anyDuplicated(symbols)) {
+		tmp_n <- paste(format(cutpoints), collapse="|")
+	    stop(gettextf("'%s' must be unique, but are = %s", "symbols", tmp_n), domain = "R-stats")
+	}
 	if(nc != ns+1)
             if(corr)
                 stop("number of 'cutpoints' must be one less than number of symbols")
@@ -107,7 +109,7 @@ symnum <- function(x, cutpoints = c(  .3,  .6,	 .8,  .9, .95),
 	}
 	else if(is.null(abbr.colnames) || is.null(dimnames(ans)[[2L]]))
 	    dimnames(ans)[[2L]] <- rep("", dim(ans)[2L])
-	else if(!is.logical(abbr.colnames)) stop("invalid 'abbr.colnames'")
+	else if(!is.logical(abbr.colnames)) stop(gettextf("invalid '%s' value", "abbr.colnames'"))
     }
     if(legend) {
 	legend <- c(rbind(sapply(cutpoints,format),

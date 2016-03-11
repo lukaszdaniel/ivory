@@ -34,6 +34,7 @@
 /*************************************************************************
  * Include files
  */
+#include <Localization.h>
 #include "triodef.h"
 #include "trionan.h"
 
@@ -77,15 +78,15 @@
 #if defined(__alpha) && !defined(_IEEE_FP)
 # if defined(TRIO_COMPILER_DECC)
 #  if defined(TRIO_PLATFORM_VMS)
-#   error "Must be compiled with option /IEEE_MODE=UNDERFLOW_TO_ZERO/FLOAT=IEEE"
+#   error _("Must be compiled with option /IEEE_MODE=UNDERFLOW_TO_ZERO/FLOAT=IEEE")
 #  else
 #   if !defined(_CFE)
-#    error "Must be compiled with option -ieee"
+#    error _("Must be compiled with option -ieee")
 #   endif
 #  endif
 # else
 #  if defined(TRIO_COMPILER_GCC)
-#   error "Must be compiled with option -mieee"
+#   error _("Must be compiled with option -mieee")
 #  endif
 # endif
 #endif /* __alpha && ! _IEEE_FP */

@@ -18,12 +18,12 @@
 
 memory.size <- function(max = FALSE)
 {
-    warning("'memory.size()' is Windows-specific", call.=FALSE)
+    warning(gettextf("'%s' function is Windows-specific", "memory.size()"), call.=FALSE)
     Inf
 }
 
 memory.limit <- function(size = NA)
 {
-   warning("'memory.limit()' is Windows-specific", call.=FALSE)
+   warning(gettextf("'%s' function is Windows-specific", "memory.limit()"), call.=FALSE)
    Inf
 }

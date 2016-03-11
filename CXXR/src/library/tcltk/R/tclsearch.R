@@ -34,8 +34,7 @@ tclRequire <- function(package, warn = TRUE)
     a <- tryCatch(tcl("package", "require", package), error = identity)
     if (inherits(a, "error")) {
         if (warn)
-            warning(gettextf("Tcl package '%s' not found", package),
-                    domain = NA)
+            warning(gettextf("Tcl package '%s' not found", package), domain = "R-tcltk")
         return(FALSE)
     } else return(a)
 }

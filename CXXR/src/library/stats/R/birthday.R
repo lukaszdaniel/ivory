@@ -22,6 +22,7 @@ qbirthday <- function(prob = 0.5, classes = 365, coincident = 2)
     k <- coincident
     c <- classes
     p <- prob
+    if (k < 2) return(1)
     if (p <= 0) return(1)
     if (p >= 1) return(c*(k-1)+1)
     ## We need smallest n with pbirthday(n, c, k) >= prob

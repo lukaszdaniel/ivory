@@ -26,18 +26,12 @@
 #ifdef HAVE_CONFIG_H
 # include <config.h>
 #endif
-#define NO_NLS
 #include <Defn.h>
 
 #include "tcltk.h" /* declarations of our `public' interface */
 #include <stdlib.h>
+#include "localization.h"
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("tcltk", String)
-#else
-#define _(String) (String)
-#endif
 
 static void RTcl_dec_refcount(SEXP R_tclobj)
 {
@@ -313,7 +307,7 @@ SEXP RTcl_StringFromObj(SEXP args)
     Tcl_Obj *obj;
 
     obj = (Tcl_Obj *) R_ExternalPtrAddr(CADR(args));
-    if (!obj) error(_("invalid tclObj -- perhaps saved from another session?"));
+    if (!obj) error(_("invalid object of type tclObj -- perhaps saved from another session?"));
     Tcl_DStringInit(&s_ds);
     str = Tcl_GetStringFromObj(obj, NULL);
     /* FIXME: could use UTF-8 here */
@@ -331,7 +325,7 @@ SEXP RTcl_ObjAsCharVector(SEXP args)
     SEXP ans;
 
     obj = (Tcl_Obj *) R_ExternalPtrAddr(CADR(args));
-    if (!obj) error(_("invalid tclObj -- perhaps saved from another session?"));
+    if (!obj) error(_("invalid object of type tclObj -- perhaps saved from another session?"));
     ret = Tcl_ListObjGetElements(RTcl_interp, obj, &count, &elem);
     if (ret != TCL_OK)
 	return RTcl_StringFromObj(args);
@@ -404,7 +398,7 @@ SEXP RTcl_ObjAsDoubleVector(SEXP args)
     SEXP ans;
 
     obj = (Tcl_Obj *) R_ExternalPtrAddr(CADR(args));
-    if (!obj) error(_("invalid tclObj -- perhaps saved from another session?"));
+    if (!obj) error(_("invalid object of type tclObj -- perhaps saved from another session?"));
 
     /* First try for single value */
     ret = Tcl_GetDoubleFromObj(RTcl_interp, obj, &x);
@@ -467,7 +461,7 @@ SEXP RTcl_ObjAsIntVector(SEXP args)
     SEXP ans;
 
     obj = (Tcl_Obj *) R_ExternalPtrAddr(CADR(args));
-    if (!obj) error(_("invalid tclObj -- perhaps saved from another session?"));
+    if (!obj) error(_("invalid object of type tclObj -- perhaps saved from another session?"));
 
     /* First try for single value */
     ret = Tcl_GetIntFromObj(RTcl_interp, obj, &x);
@@ -519,7 +513,7 @@ SEXP RTcl_ObjAsRawVector(SEXP args)
     SEXP ans, el;
 
     obj = (Tcl_Obj *) R_ExternalPtrAddr(CADR(args));
-    if (!obj) error(_("invalid tclObj -- perhaps saved from another session?"));
+    if (!obj) error(_("invalid object of type tclObj -- perhaps saved from another session?"));
     ret = Tcl_GetByteArrayFromObj(obj, &nb);
     if (ret) {
 	ans = allocVector(RAWSXP, nb);
@@ -695,7 +689,7 @@ void tcltk_init(int *TkUp)
    On Mac OS X we might be using Aqua Tcl/Tk or X11 Tcl/Tk, and that
    is in principle independent of whether we want quartz() built.
 */
-#if !defined(Win32) && !defined(HAVE_AQUA)
+#if !defined(_WIN32) && !defined(HAVE_AQUA)
     char *p= getenv("DISPLAY");
     if(p && p[0])  /* exclude DISPLAY = "" */
 #endif
@@ -711,7 +705,7 @@ void tcltk_init(int *TkUp)
 	    *TkUp = 1;
 	}
     }
-#if !defined(Win32) && !defined(HAVE_AQUA)
+#if !defined(_WIN32) && !defined(HAVE_AQUA)
     else
 	warningcall(R_NilValue, _("no DISPLAY variable so Tk is not available"));
 #endif
@@ -734,7 +728,7 @@ void tcltk_init(int *TkUp)
 		      (ClientData) NULL,
 		      (Tcl_CmdDeleteProc *) NULL);
 
-#ifndef Win32
+#ifndef _WIN32
     Tcl_unix_setup();
 #endif
     Tcl_SetServiceMode(TCL_SERVICE_ALL);

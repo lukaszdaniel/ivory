@@ -32,7 +32,7 @@ as.dendrogram.hclust <- function (object, hang = -1, check = TRUE, ...)
     z <- list()
     nMerge <- length(oHgt <- object$height)
     hMax <- oHgt[nMerge]
-    for (k in 1L:nMerge) {
+    for (k in seq_len(nMerge)) {
 	x <- merge[k, ]# no sort() anymore!
 	if (any(neg <- x < 0))
 	    h0 <- if (hang < 0) 0 else max(0, oHgt[k] - hang * hMax)
@@ -90,8 +90,8 @@ as.hclust.dendrogram <- function(x, ...)
     iOrd <- sort.list(ord)
     if(!identical(ord[iOrd], seq_len(n)))
 	stop(gettextf(
-	    "dendrogram entries must be 1,2,..,%d (in any order), to be coercible to \"hclust\"",
-	    n), domain=NA)
+	    "dendrogram entries must be 1,2,..,%d (in any order), to be coercible to an object of class \"hclust\"",
+	    n), domain = "R-stats")
     stopifnot(n == attr(x, "members"))
     n.h <- n - 1L
     ## labels: not sure, if we'll use this; there should be a faster way!
@@ -196,7 +196,7 @@ midcache.dendrogram <- function (x, type = "hclust", quiet=FALSE)
 	    if(!is.leaf(d)) {# no "midpoint" for leaf
 		k <- length(d)
 		if(k < 1)
-		    stop("dendrogram node with non-positive #{branches}")
+		    stop("dendrogram node with non-positive number of branches")
 		depth <- depth + 1L
 		if(verbose) cat(sprintf(" depth(+)=%4d, k=%d\n", depth, k))
 		kk[depth] <- k
@@ -216,7 +216,7 @@ midcache.dendrogram <- function (x, type = "hclust", quiet=FALSE)
 		if(verbose) cat(sprintf(" depth(-)=%4d, k=%d\n", depth, k))
 		midS <- sum(vapply(r, .midDend, 0))
 		if(!quiet && type == "hclust" && k != 2)
-		    warning("midcache() of non-binary dendrograms only partly implemented")
+		    warning("'midcache()' of non-binary dendrograms only partly implemented")
 		## compatible to as.dendrogram.hclust() {MM: doubtful if k > 2}
 		attr(r, "midpoint") <- (.memberDend(r[[1L]]) + midS) / 2
 		d <- r
@@ -235,14 +235,11 @@ midcache.dendrogram <- function (x, type = "hclust", quiet=FALSE)
 ##  Martin Maechler, 15 May 2002
 print.dendrogram <- function(x, digits = getOption("digits"), ...)
 {
-    cat("'dendrogram' ")
     if(is.leaf(x))
-	cat("leaf '", format(attr(x, "label"), digits = digits),"'", sep = "")
+	cat(gettextf("dendrogram leaf '%s', at height %s", format(attr(x, "label"), digits = digits), format(attr(x,"height"), digits = digits), domain = "R-stats"), "\n", sep = "")
     else
-	cat("with", length(x), "branches and",
-	    attr(x,"members"), "members total")
+	cat(gettextf("dendrogram with %d branches and %d members total, at height %s", length(x), attr(x,"members"), format(attr(x,"height"), digits = digits), domain = "R-stats"), "\n", sep = "")
 
-    cat(", at height", format(attr(x,"height"), digits = digits), "\n")
     invisible(x)
 }
 
@@ -276,28 +273,26 @@ function (object, max.level = NA, digits.d = 3L, give.attr = FALSE,
 	    if(nzchar(at <- pasteLis(at, c("class", "height", "members"))))
 		at <- paste(",", at)
 	}
-	cat("[dendrogram w/ ", le, " branches and ", memb, " members at h = ",
-            format(hgt, digits = digits.d), if(give.attr) at,
-            "]", if(!is.na(max.level) && nest.lev == max.level)" ..", "\n",
+	cat("[", gettextf("dendrogram with %d branches and %d members, at height %s", le, memb,
+            format(hgt, digits = digits.d), domain = "R-stats"), if(give.attr) at,
+            "]", if(!is.na(max.level) && nest.lev == max.level) " ..", "\n",
             sep = "")
 	if (is.na(max.level) || nest.lev < max.level) {
-	    for(i in 1L:le) {
-		##cat(indent.str, nam.ob[i], ":", sep = "")
+	    for(i in seq_len(le)) {
 		str(object[[i]], nest.lev = nest.lev + 1,
-		    indent.str = paste(indent.str, if(i < le) " |" else "  "),
+		    indent.str = paste(indent.str, if(i < le) "  |" else "   ", sep = ""),
                     last.str = last.str, stem = stem,
 		    max.level = max.level, digits.d = digits.d,
 		    give.attr = give.attr, wid = wid)
 	    }
 	}
     } else { ## leaf
-	cat("leaf",
-	    if(is.character(at$label)) paste("", at$label,"", sep = '"') else
-	    format(object, digits = digits.d),"")
+	if(is.character(at$label)) cat(gettextf("leaf %s", dQuote(at$label), domain = "R-stats"))
+	else cat(gettextf("leaf %s", format(object, digits = digits.d), domain = "R-stats"))
 	any.at <- hgt != 0
-	if(any.at) cat("(h=",format(hgt, digits = digits.d))
+	if(any.at) cat(" (h=",format(hgt, digits = digits.d))
 	if(memb != 1) #MM: when can this happen?
-	    cat(if(any.at)", " else {any.at <- TRUE; "("}, "memb= ", memb, sep = "")
+	    cat(if(any.at) ", " else {any.at <- TRUE; "("}, "memb= ", memb, sep = "")
 	at <- pasteLis(at, c("class", "height", "members", "leaf", "label"))
 	if(any.at || nzchar(at)) cat(if(!any.at)"(", at, ")")
 	cat("\n")
@@ -390,11 +385,10 @@ plotNode <-
     if(!hasP) nPar <- nodePar
 
     if(getOption("verbose")) {
-	cat(if(inner)"inner node" else "leaf", ":")
-	if(!is.null(nPar)) { cat(" with node pars\n"); str(nPar) }
-	cat(if(inner )paste(" height", formatC(yTop),"; "),
-	    "(x1,x2)= (", formatC(x1, width = 4), ",", formatC(x2, width = 4), ")",
-	    "--> xTop=", formatC(xTop, width = 8), "\n", sep = "")
+	if(inner) cat(gettext("inner node:", domain = "R-stats"))
+	else cat(gettextf("leaf:", domain = "R-stats"))
+	if(!is.null(nPar)) { cat(gettext(" with node pars", domain = "R-stats"), "\n", sep = ""); str(nPar) }
+	cat(if(inner) paste(" height", formatC(yTop),"; "), "(x1,x2)= (", formatC(x1, width = 4), ",", formatC(x2, width = 4), ")", "--> xTop=", formatC(xTop, width = 8), "\n", sep = "")
     }
 
     Xtract <- function(nam, L, default, indx)
@@ -472,7 +466,7 @@ plotNode <-
 	    if (is.leaf(child) && leaflab == "textlike") {
 		nodeText <- asTxt(attr(child,"label"))
 		if(getOption("verbose"))
-		    cat('-- with "label"',format(nodeText))
+		    cat("-- with \"label\"",format(nodeText))
 		hln <- 0.6 * strwidth(nodeText, cex = lab.cex)/2
 		vln <- 1.5 * strheight(nodeText, cex = lab.cex)/2
 		rect(xBot - hln, yBot,
@@ -483,7 +477,7 @@ plotNode <-
 	    if (!is.null(attr(child, "edgetext"))) {
 		edgeText <- asTxt(attr(child, "edgetext"))
 		if(getOption("verbose"))
-		    cat('-- with "edgetext"',format(edgeText))
+		    cat("-- with \"edgetext\"",format(edgeText))
 		if (!is.null(vln)) {
 		    mx <-
 			if(type == "triangle")
@@ -564,7 +558,7 @@ plotNodeLimit <- function(x1, x2, subtree, center)
 		   mTop <- .memberDend(subtree)
 		   limit <- integer(K)
 		   xx1 <- x1
-		   for(k in 1L:K) {
+		   for(k in seq_len(K)) {
 		       m <- .memberDend(subtree[[k]])
 		       ##if(is.null(m)) m <- 1
 		       xx1 <- xx1 + (if(center) (x2-x1) * m/mTop else m)
@@ -589,7 +583,7 @@ cut.dendrogram <- function(x, h, ...)
 	    if(!(K <- length(subtree)))
 		stop("non-leaf subtree of length 0")
 	    new.mem <- 0L
-	    for(k in 1L:K) {
+	    for(k in seq_len(K)) {
                 sub <- subtree[[k]]
 		if(attr(sub, "height") <= h) {
 		    ## cut it, i.e. save to LOWER[] and make a leaf
@@ -698,7 +692,7 @@ rev.dendrogram <- function(x) {
     if(k < 1)
 	stop("dendrogram non-leaf node with non-positive #{branches}")
     r <- x # incl. attributes!
-    for(j in 1L:k) ## recurse
+    for(j in seq_len(k)) ## recurse
 	r[[j]] <- rev(x[[k+1-j]])
     midcache.dendrogram( r )
 }
@@ -732,10 +726,10 @@ merge.dendrogram <- function(x, y, ..., height,
 	    xpr <- substitute(c(...))
 	    nms <- sapply(xpr[-1][!is.d], deparse, nlines = 1L)
             ## do not simplify: xgettext needs this form
-            msg <- ngettext(length(nms),
-                            "extra argument %s is not of class \"%s\"",
-                            "extra arguments %s are not of class \"%s\"s")
-	    stop(sprintf(msg, paste(nms, collapse=", "), "dendrogram"),
+	    stop(sprintf(ngettext(length(nms),
+                            "extra argument %s is not of class \"dendrogram\"",
+                            "extra arguments %s are not of class \"dendrogram\"", domain = "R-stats"),
+			paste(nms, collapse = ", ")),
                  domain = NA)
 	}
 	if(adjust == "add.max") {
@@ -753,7 +747,7 @@ merge.dendrogram <- function(x, y, ..., height,
 	height <- 1.1 * h.max
     else if(height < h.max) {
         msg <- gettextf("'height' must be at least %g, the maximal height of its components", h.max)
-        stop(msg, domain = NA)
+        stop(msg, domain = "R-stats")
     }
     attr(r, "height") <- height
     class(r) <- "dendrogram"
@@ -827,14 +821,14 @@ function (x, Rowv=NULL, Colv=if(symm)"Rowv" else NULL,
 	if(nr != length(rowInd <- order.dendrogram(ddr)))
 	    stop("row dendrogram ordering gave index of wrong length")
     }
-    else rowInd <- 1L:nr
+    else rowInd <- seq_len(nr)
 
     if(doCdend) {
 	if(inherits(Colv, "dendrogram"))
 	    ddc <- Colv
 	else if(identical(Colv, "Rowv")) {
 	    if(nr != nc)
-		stop('Colv = "Rowv" but nrow(x) != ncol(x)')
+		stop("Colv = \"Rowv\" but nrow(x) != ncol(x)")
 	    ddc <- ddr
 	}
 	else {
@@ -846,18 +840,18 @@ function (x, Rowv=NULL, Colv=if(symm)"Rowv" else NULL,
 	if(nc != length(colInd <- order.dendrogram(ddc)))
 	    stop("column dendrogram ordering gave index of wrong length")
     }
-    else colInd <- 1L:nc
+    else colInd <- seq_len(nc)
 
     ## reorder x
     x <- x[rowInd, colInd]
 
     labRow <-
 	if(is.null(labRow))
-	    if(is.null(rownames(x))) (1L:nr)[rowInd] else rownames(x)
+	    if(is.null(rownames(x))) seq_len(nr)[rowInd] else rownames(x)
 	else labRow[rowInd]
     labCol <-
 	if(is.null(labCol))
-	    if(is.null(colnames(x))) (1L:nc)[colInd] else colnames(x)
+	    if(is.null(colnames(x))) seq_len(nc)[colInd] else colnames(x)
 	else labCol[colInd]
 
     if(scale == "row") {
@@ -877,19 +871,19 @@ function (x, Rowv=NULL, Colv=if(symm)"Rowv" else NULL,
     lhei <- c((if(doCdend) 1 else 0.05) + if(!is.null(main)) 0.2 else 0, 4)
     if(!missing(ColSideColors)) { ## add middle row to layout
 	if(!is.character(ColSideColors) || length(ColSideColors) != nc)
-	    stop("'ColSideColors' must be a character vector of length ncol(x)")
+	    stop(gettextf("'%s' argument must be a character vector of length '%s'", "ColSideColors", "ncol(x)"))
 	lmat <- rbind(lmat[1,]+1, c(NA,1), lmat[2,]+1)
 	lhei <- c(lhei[1L], 0.2, lhei[2L])
     }
     if(!missing(RowSideColors)) { ## add middle column to layout
 	if(!is.character(RowSideColors) || length(RowSideColors) != nr)
-	    stop("'RowSideColors' must be a character vector of length nrow(x)")
+	    stop(gettextf("'%s' argument must be a character vector of length '%s'", "RowSideColors", "nrow(x)"))
 	lmat <- cbind(lmat[,1]+1, c(rep(NA, nrow(lmat)-1), 1), lmat[,2]+1)
 	lwid <- c(lwid[1L], 0.2, lwid[2L])
     }
     lmat[is.na(lmat)] <- 0
     if(verbose) {
-	cat("layout: widths = ", lwid, ", heights = ", lhei,"; lmat=\n")
+	cat(gettextf("layout: widths = %s, heights = %s; lmat=\n", paste(lwid, collapse = " "), paste(lhei, collapse = " "), domain = "R-stats"))
 	print(lmat)
     }
 
@@ -902,11 +896,11 @@ function (x, Rowv=NULL, Colv=if(symm)"Rowv" else NULL,
     ## draw the side bars
     if(!missing(RowSideColors)) {
 	par(mar = c(margins[1L],0, 0,0.5))
-	image(rbind(if(revC) nr:1L else 1L:nr), col = RowSideColors[rowInd], axes = FALSE)
+	image(rbind(if(revC) sort(seq_len(nr), decreasing = TRUE) else seq_len(nr)), col = RowSideColors[rowInd], axes = FALSE)
     }
     if(!missing(ColSideColors)) {
 	par(mar = c(0.5,0, 0,margins[2L]))
-	image(cbind(1L:nc), col = ColSideColors[colInd], axes = FALSE)
+	image(cbind(seq_len(nc)), col = ColSideColors[colInd], axes = FALSE)
     }
     ## draw the main carpet
     par(mar = c(margins[1L], 0, 0, margins[2L]))
@@ -916,11 +910,11 @@ function (x, Rowv=NULL, Colv=if(symm)"Rowv" else NULL,
 	iy <- nr:1
         if(doRdend) ddr <- rev(ddr)
 	x <- x[,iy]
-    } else iy <- 1L:nr
+    } else iy <- seq_len(nr)
 
-    image(1L:nc, 1L:nr, x, xlim = 0.5+ c(0, nc), ylim = 0.5+ c(0, nr),
+    image(seq_len(nc), seq_len(nr), x, xlim = 0.5+ c(0, nc), ylim = 0.5+ c(0, nr),
 	  axes = FALSE, xlab = "", ylab = "", ...)
-    axis(1, 1L:nc, labels = labCol, las = 2, line = -0.5, tick = 0,
+    axis(1, seq_len(nc), labels = labCol, las = 2, line = -0.5, tick = 0,
          cex.axis = cexCol)
     if(!is.null(xlab)) mtext(xlab, side = 1, line = margins[1L] - 1.25)
     axis(4, iy, labels = labRow, las = 2, line = -0.5, tick = 0,

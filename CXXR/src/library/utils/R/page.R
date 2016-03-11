@@ -33,7 +33,7 @@ page <- function(x, method = c("dput", "print"), ...)
         if(exists(subx, envir = parent)) # inherits=TRUE is default
             x <- get(subx, envir = parent)
         else
-            stop(gettextf("no object named '%s' to show", x), domain = NA)
+            stop(gettextf("no object named '%s' to show", x), domain = "R-utils")
     } else {
         subx <- deparse(substitute(x))
     }

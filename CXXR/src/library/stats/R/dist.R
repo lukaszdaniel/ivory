@@ -70,7 +70,7 @@ as.dist.default <- function(m, diag = FALSE, upper = FALSE)
         if(!is.numeric(m)) # coerce w/o losing attributes
             storage.mode(m) <- "numeric"
         p <- nrow(m)
-        if(ncol(m) != p) warning("non-square matrix")
+        if(ncol(m) != p) warning(gettextf("'%s' argument is not a square matrix", "m"))
 	ans <- m[row(m) > col(m)]
 	attributes(ans) <- NULL
 	if(!is.null(rownames(m)))

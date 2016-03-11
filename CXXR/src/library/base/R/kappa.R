@@ -57,7 +57,7 @@ kappa.default <- function(z, exact = FALSE,
     }
     else { ## exact = FALSE or norm in "1", "O", "I"
 	if(exact)
-	    warning(gettextf("norm '%s' currently always uses exact = FALSE",
+	    warning(gettextf("norm '%s' currently always uses 'exact = FALSE' option",
 			     norm))
         d <- dim(z)
         if(method == "qr" || d[1L] != d[2L])
@@ -85,7 +85,7 @@ kappa.qr <- function(z, ...)
     }
     else { ## norm is "1" ("O") or "I(nf)" :
         p <- as.integer(nrow(z))
-        if(is.na(p)) stop("invalid nrow(x)")
+        if(is.na(p)) stop(gettextf("invalid '%s' value", "nrow(x)"))
 	if(p != ncol(z)) stop("triangular matrix should be square")
 	if(is.null(norm)) norm <- "1"
 	if(is.complex(z)) 1/.Internal(La_ztrcon(z, norm))

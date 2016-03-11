@@ -20,9 +20,9 @@ dev2bitmap <- function(file, type = "png16m", height = 7, width = 7, res = 72,
                        units = "in", pointsize, ...,
                        method = c("postscript", "pdf"), taa = NA, gaa = NA)
 {
-    if(missing(file)) stop("'file' is missing with no default")
+    if(missing(file)) stop("'file' argument is missing with no default")
     if(!is.character(file) || length(file) != 1L || !nzchar(file))
-        stop("'file' must be a non-empty character string")
+        stop("'file' argument must be a non-empty character string")
     method <- match.arg(method)
     units <- match.arg(units, c("in", "px", "cm", "mm"))
     height <- switch(units, "in"=1, "cm"=1/2.54, "mm"=1/25.4, "px"=1/res) * height
@@ -64,9 +64,9 @@ dev2bitmap <- function(file, type = "png16m", height = 7, width = 7, res = 72,
 bitmap <- function(file, type = "png16m", height = 7, width = 7, res = 72,
                    units = "in", pointsize, taa = NA, gaa = NA, ...)
 {
-    if(missing(file)) stop("'file' is missing with no default")
+    if(missing(file)) stop("'file' argument is missing with no default")
     if(!is.character(file) || length(file) != 1L || !nzchar(file))
-        stop("'file' must be a non-empty character string")
+        stop("'file' argument must be a non-empty character string")
     units <- match.arg(units, c("in", "px", "cm", "mm"))
     height <- switch(units, "in"=1, "cm"=1/2.54, "mm"=1/25.4, "px"=1/res) * height
     width <- switch(units, "in"=1, "cm"=1/2.54, "mm"=1/25.4, "px"=1/res) * width
@@ -108,7 +108,7 @@ check_gs_type <- function(gsexe, type)
             stop(gettextf("device '%s' is not available\n", type),
                  gettextf("Available devices are:\n%s",
                           paste(gsdevs, collapse = "\n")),
-                 domain = NA)
+                 domain = "R-grDevices")
         }
     }
 }

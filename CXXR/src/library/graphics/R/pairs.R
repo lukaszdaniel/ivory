@@ -41,7 +41,7 @@ function(formula, data = NULL, ..., subset, na.action = stats::na.pass)
 
 pairs.default <-
 function (x, labels, panel = points, ...,
-          horInd = 1:nc, verInd = 1:nc,
+          horInd = seq_len(nc), verInd = seq_len(nc),
           lower.panel = panel, upper.panel = panel,
           diag.panel = NULL, text.panel = textPanel,
           label.pos = 0.5 + has.diag/3, line.main = 3,
@@ -99,9 +99,9 @@ function (x, labels, panel = points, ...,
     nc <- ncol(x)
     if (nc < 2L) stop("only one column in the argument to 'pairs'")
     if(!all(horInd >= 1L && horInd <= nc))
-        stop("invalid argument 'horInd'")
+        stop(gettextf("invalid '%s' argument", "hordInd"))
     if(!all(verInd >= 1L && verInd <= nc))
-        stop("invalid argument 'verInd'")
+        stop(gettextf("invalid '%s' argument", "verInd"))
     if(doText) {
 	if (missing(labels)) {
 	    labels <- colnames(x)

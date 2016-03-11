@@ -25,13 +25,7 @@
 #include <R_ext/Arith.h>
 #include <R_ext/Error.h>
 #include <R_ext/Applic.h>
-
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("stats", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 /* Linear and Step Function Interpolation */
 

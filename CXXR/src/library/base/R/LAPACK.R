@@ -19,12 +19,12 @@
 La.svd <- function(x, nu = min(n, p), nv = min(n, p))
 {
     if(!is.logical(x) && !is.numeric(x) && !is.complex(x))
-	stop("argument to 'La.svd' must be numeric or complex")
-    if (any(!is.finite(x))) stop("infinite or missing values in 'x'")
+	stop("argument passed to 'La.svd()' function must be logical, numeric or complex")
+    if (any(!is.finite(x))) stop(gettextf("infinite or missing values in '%s' argument", "x"))
     x <- as.matrix(x)
     n <- nrow(x)
     p <- ncol(x)
-    if(!n || !p) stop("a dimension is zero")
+    if(!n || !p) stop(gettextf("at least one dimension of '%s' argument is 0", "x"))
     zero <- if(is.complex(x)) 0+0i else 0
 
     if(nu || nv) {

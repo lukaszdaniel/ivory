@@ -39,30 +39,28 @@ debugger <- function(dump = last.dump)
         for(.obj in ls(envir=dump[[.selection]], all.names=TRUE))
             tryCatch(assign(.obj, get(.obj, envir=dump[[.selection]])),
                      error=function(e) {})
-        cat(gettext("Browsing in the environment with call:\n   "),
-            calls[.selection], "\n", sep = "")
+        cat(gettext("Browsing in the environment with call:", domain = "R-utils"), "\n   ", calls[.selection], "\n", sep = "")
         rm(.obj, .selection)
         browser()
     }
     if (!inherits(dump, "dump.frames")) {
-        cat(gettextf("'dump' is not an object of class %s\n",
-                     dQuote("dump.frames")))
+        cat(gettextf("'%s' argument is not an object of class %s", "dump", dQuote("dump.frames"), domain = "R-utils"), "\n", sep = "")
         return(invisible())
     }
     err.action <- getOption("error")
     on.exit(options(error=err.action))
     if (length(msg <- attr(dump, "error.message")))
-        cat(gettext("Message: "), msg)
+        cat(gettext("Message: ", domain = "R-utils"), msg)
     n <- length(dump)
     if (!n) {
-	cat(gettextf("'dump' is empty\n"))
+	cat(gettextf("'dump' is empty", domain = "R-utils"), "\n", sep = "")
 	return(invisible())
     }
     calls <- names(dump)
     repeat {
-        cat(gettext("Available environments had calls:\n"))
+        cat(gettext("Available environments had calls:", domain = "R-utils"), "\n", sep = "")
         cat(paste0(1L:n, ": ", calls), sep = "\n")
-        cat(gettext("\nEnter an environment number, or 0 to exit  "))
+        cat("\n", gettext("Enter an environment number, or 0 to exit  ", domain = "R-utils"), sep = "")
         repeat {
             ind <- .Call(C_menu, as.character(calls))
             if(ind <= n) break
@@ -128,22 +126,20 @@ recover <-
     if(from > 0L) {
         if(!interactive()) {
             try(dump.frames())
-            cat(gettext("recover called non-interactively; frames dumped, use debugger() to view\n"))
+            cat(gettext("recover called non-interactively; frames dumped, use debugger() to view", domain = "R-utils"), "\n", sep = "")
             return(NULL)
         }
         else if(identical(getOption("show.error.messages"), FALSE)) # from try(silent=TRUE)?
             return(NULL)
         calls <- limitedLabels(calls[1L:from])
         repeat {
-            which <- menu(calls,
-                          title="\nEnter a frame number, or 0 to exit  ")
+            which <- menu(calls, title=gettext("\nEnter a frame number, or 0 to exit  ", domain = "R-utils"))
             if(which)
-                eval(substitute(browser(skipCalls=skip),
-                                list(skip=7-which)), envir = sys.frame(which))
+                eval(substitute(browser(skipCalls=skip), list(skip=7-which)), envir = sys.frame(which))
             else
                 break
         }
     }
     else
-        cat(gettext("No suitable frames for recover()\n"))
+        cat(gettext("No suitable frames for recover()", domain = "R-utils"), "\n", sep = "")
 }

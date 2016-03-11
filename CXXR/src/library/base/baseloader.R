@@ -31,7 +31,7 @@
         gzfile <- function (description, open)
             .Internal(gzfile(description, open, "", 6))
         close <- function (con) .Internal(close(con, "rw"))
-        if (! is.character(file)) halt("bad file name")
+        if (! is.character(file)) halt(gettext("bad file name"))
         con <- gzfile(file, "rb")
         on.exit(close(con))
         .Internal(unserializeFromConn(con, baseenv()))

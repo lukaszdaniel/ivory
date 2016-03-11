@@ -21,18 +21,18 @@ mclapply <- function(X, FUN, ..., mc.preschedule = TRUE, mc.set.seed = TRUE,
                      mc.cleanup = TRUE, mc.allow.recursive = TRUE)
 {
     cores <- as.integer(mc.cores)
-    if(cores < 1L) stop("'mc.cores' must be >= 1")
-    if(cores > 1L) stop("'mc.cores' > 1 is not supported on Windows")
+    if(cores < 1L) stop(gettextf("'%s' argument must be >= 1", "mc.cores"))
+    if(cores > 1L) stop("'mc.cores' argument > 1 is not supported on Windows")
     lapply(X, FUN, ...)
 }
 
 pvec <- function(v, FUN, ..., mc.set.seed = TRUE, mc.silent = FALSE,
                  mc.cores = 1L, mc.cleanup = TRUE)
 {
-    if (!is.vector(v)) stop("'v' must be a vector")
+    if (!is.vector(v)) stop("'v' argument must be a vector")
     cores <- as.integer(mc.cores)
-    if(cores < 1L) stop("'mc.cores' must be >= 1")
-    if(cores > 1L) stop("'mc.cores' > 1 is not supported on Windows")
+    if(cores < 1L) stop(gettextf("'%s' argument must be >= 1", "mc.cores"))
+    if(cores > 1L) stop("'mc.cores' argument > 1 is not supported on Windows")
     FUN(v, ...)
 }
 
@@ -42,8 +42,8 @@ mcmapply <-
              mc.silent = FALSE, mc.cores  = 1L, mc.cleanup = TRUE)
 {
     cores <- as.integer(mc.cores)
-    if(cores < 1L) stop("'mc.cores' must be >= 1")
-    if(cores > 1L) stop("'mc.cores' > 1 is not supported on Windows")
+    if(cores < 1L) stop(gettextf("'%s' argument must be >= 1", "mc.cores"))
+    if(cores > 1L) stop("'mc.cores' argument > 1 is not supported on Windows")
     mapply(FUN = FUN, ..., MoreArgs = MoreArgs, SIMPLIFY = SIMPLIFY,
            USE.NAMES = USE.NAMES)
 }

@@ -304,7 +304,7 @@ mv$methods( initialize = function(file = "./matrixView.pdf", ...) {
     viewerFile <<- file
     pdf(viewerFile)
     viewerDevice <<- dev.cur()
-    message("Plotting to ", viewerFile)
+    message(gettextf("Plotting to %s", viewerFile))
     dev.set(dev.prev())
     setMarkViewer("ON")
     initFields(...)

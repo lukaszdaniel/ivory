@@ -42,10 +42,10 @@ bw.SJ <- function(x, nb = 1000L, lower = 0.1*hmax, upper = hmax,
 {
     if((n <- length(x)) < 2L) stop("need at least 2 data points")
     n <- as.integer(n)
-    if (is.na(n)) stop("invalid length(x)")
-    if(!is.numeric(x)) stop("invalid 'x'")
+    if (is.na(n)) stop(gettextf("invalid '%s' value", "length(x)"))
+    if(!is.numeric(x)) stop(gettextf("invalid '%s' value", "x"))
     nb <- as.integer(nb)
-    if (is.na(nb) || nb <= 0L) stop("invalid 'nb'")
+    if (is.na(nb) || nb <= 0L) stop(gettextf("invalid '%s' value", "nb"))
     storage.mode(x) <- "double"
 
     method <- match.arg(method)
@@ -61,7 +61,7 @@ bw.SJ <- function(x, nb = 1000L, lower = 0.1*hmax, upper = hmax,
     c1 <- 1/(2*sqrt(pi)*n)
     TD  <- -TDh(b)
     if(!is.finite(TD) || TD <= 0)
-        stop("sample is too sparse to find TD", domain = NA)
+        stop("sample is too sparse to find TD", domain = "R-stats")
     if(method == "dpi")
         res <- (c1/SDh((2.394/(n * TD))^(1/7)))^(1/5)
     else {
@@ -78,8 +78,7 @@ bw.SJ <- function(x, nb = 1000L, lower = 0.1*hmax, upper = hmax,
 		stop("no solution in the specified range of bandwidths")
 	    if(itry %% 2) upper <- upper * 1.2 else lower <- lower / 1.2
 	    if(getOption("verbose"))
-		message(gettextf("increasing bw.SJ() search interval (%d) to [%.4g,%.4g]",
-                                 itry, lower, upper), domain = NA)
+		message(gettextf("increasing bw.SJ() search interval (%d) to [%.4g,%.4g]", itry, lower, upper), domain = "R-stats")
 	    itry <- itry + 1L
 	}
         res <- uniroot(fSD, c(lower, upper), tol = tol)$root
@@ -93,10 +92,10 @@ bw.ucv <- function(x, nb = 1000L, lower = 0.1*hmax, upper = hmax,
 {
     if((n <- length(x)) < 2L) stop("need at least 2 data points")
     n <- as.integer(n)
-    if (is.na(n)) stop("invalid length(x)")
-    if(!is.numeric(x)) stop("invalid 'x'")
+    if (is.na(n)) stop(gettextf("invalid '%s' value", "length(x)"))
+    if(!is.numeric(x)) stop(gettextf("invalid '%s' value", "x"))
     nb <- as.integer(nb)
-    if (is.na(nb) || nb <= 0L) stop("invalid 'nb'")
+    if (is.na(nb) || nb <= 0L) stop(gettextf("invalid '%s' value", "nb"))
     storage.mode(x) <- "double"
 
     hmax <- 1.144 * sqrt(var(x)) * n^(-1/5)
@@ -113,10 +112,10 @@ bw.bcv <- function(x, nb = 1000L, lower = 0.1*hmax, upper = hmax,
 {
     if((n <- length(x)) < 2L) stop("need at least 2 data points")
     n <- as.integer(n)
-    if (is.na(n)) stop("invalid length(x)")
-    if(!is.numeric(x)) stop("invalid 'x'")
+    if (is.na(n)) stop(gettextf("invalid '%s' value", "length(x)"))
+    if(!is.numeric(x)) stop(gettextf("invalid '%s' value", "x"))
     nb <- as.integer(nb)
-    if (is.na(nb) || nb <= 0L) stop("invalid 'nb'")
+    if (is.na(nb) || nb <= 0L) stop(gettextf("invalid '%s' value", "nb"))
     storage.mode(x) <- "double"
 
     hmax <- 1.144 * sqrt(var(x)) * n^(-1/5)

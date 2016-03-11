@@ -38,8 +38,7 @@ factor <- function(x = character(), levels, labels = levels,
     nl <- length(labels)
     nL <- length(levels)
     if(!any(nl == c(1L, nL)))
-	stop(gettextf("invalid 'labels'; length %d should be 1 or %d", nl, nL),
-	     domain = NA)
+	stop(gettextf("invalid 'labels'; length %d should be 1 or %d", nl, nL), domain = "R-base")
     levels(f) <- ## nl == nL or 1
 	if (nl == nL) as.character(labels)
 	else paste0(labels, seq_along(levels))
@@ -139,7 +138,7 @@ print.factor <- function (x, quote = FALSE, max.levels = NULL,
     if (maxl) {
         n <- length(lev <- encodeString(levels(x), quote=ifelse(quote, '"', '')))
         colsep <- if(ord) " < " else " "
-        T0 <- "Levels: "
+        T0 <- gettext("Levels: ", domain = "R-base")
         if(is.logical(maxl))
             maxl <- { ## smart default
                 width <- width - (nchar(T0, "w") + 3L + 1L + 3L)
@@ -159,17 +158,17 @@ print.factor <- function (x, quote = FALSE, max.levels = NULL,
 
 
 Math.factor <- function(x, ...)
-    stop(gettextf("%s not meaningful for factors", sQuote(.Generic)))
+    stop(gettextf("%s function is not meaningful for factors", sQuote(.Generic)))
 
 ## The next two have an .ordered method:
 Summary.factor <- function(..., na.rm)
-    stop(gettextf("%s not meaningful for factors", sQuote(.Generic)))
+    stop(gettextf("%s function is not meaningful for factors", sQuote(.Generic)))
 
 Ops.factor <- function(e1, e2)
 {
     ok <- switch(.Generic, "=="=, "!="=TRUE, FALSE)
     if(!ok) {
-	warning(gettextf("%s not meaningful for factors", sQuote(.Generic)))
+	warning(gettextf("%s function is not meaningful for factors", sQuote(.Generic)))
 	return(rep.int(NA, max(length(e1), if(!missing(e2)) length(e2))))
     }
     nas <- is.na(e1) | is.na(e2)
@@ -218,7 +217,7 @@ Ops.factor <- function(e1, e2)
     if (is.factor(value)) value <- levels(value)[value]
     m <- match(value, lx)
     if (any(is.na(m) & !is.na(value)))
-	warning("invalid factor level, NA generated")
+	warning("invalid factor level, NA value generated")
     class(x) <- NULL
     x[...] <- m
     attr(x,"levels") <- lx
@@ -243,7 +242,7 @@ Ops.factor <- function(e1, e2)
     if (is.factor(value)) value <- levels(value)[value]
     m <- match(value, lx)
     if (any(is.na(m) & !is.na(value)))
-	warning("invalid factor level, NA generated")
+	warning("invalid factor level, NA value generated")
     class(x) <- NULL
     x[[...]] <- m
     attr(x,"levels") <- lx
@@ -251,7 +250,7 @@ Ops.factor <- function(e1, e2)
     x
 }
 
-
+
 ## ordered factors ...
 
 ordered <- function(x, ...) factor(x, ..., ordered=TRUE)
@@ -265,8 +264,7 @@ Ops.ordered <- function (e1, e2)
 		 "<" = , ">" = , "<=" = , ">=" = ,"=="=, "!=" =TRUE,
 		 FALSE)
     if(!ok) {
-	warning(sprintf("'%s' is not meaningful for ordered factors",
-                        .Generic))
+	warning(gettextf("'%s' operator is not meaningful for ordered factors", .Generic))
 	return(rep.int(NA, max(length(e1), if(!missing(e2)) length(e2))))
     }
     if (.Generic %in% c("==", "!="))
@@ -307,15 +305,13 @@ Summary.ordered <- function(..., na.rm)
     ok <- switch(.Generic, max = , min = , range = TRUE,
 		 FALSE)
     if (!ok)
-	stop(gettextf("'%s' not defined for ordered factors", .Generic),
-	     domain = NA)
+	stop(gettextf("'%s' operator is not defined for ordered factors", .Generic), domain = "R-base")
     args <- list(...)
     levl <- lapply(args, levels)
     levset <- levl[[1]]
     if (!all(vapply(args, is.ordered, NA)) ||
 	!all(vapply(levl, identical, NA, levset)))
-	stop(gettextf("'%s' is only meaningful for ordered factors if all arguments have the same level sets",
-		      .Generic))
+	stop(gettextf("'%s' operator is only meaningful for ordered factors if all arguments have the same level sets", .Generic))
     codes <- lapply(args, as.integer)
     ind <- do.call(.Generic, c(codes, na.rm = na.rm))
     ordered(levset[ind], levels = levset)

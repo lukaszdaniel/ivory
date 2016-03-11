@@ -118,10 +118,9 @@ princomp.default <-
 
 print.princomp <- function(x, ...)
 {
-    cat("Call:\n"); dput(x$call, control=NULL)
-    cat("\nStandard deviations:\n")
+    cat(gettext("Call:", domain = "R-stats"), "\n", sep = ""); dput(x$call, control=NULL)
+    cat("\n", gettext("Standard deviations:", domain = "R-stats"), "\n", sep = "")
     print(x$sdev, ...)
-    cat("\n", length(x$scale), " variables and ", x$n.obs,
-        "observations.\n")
+    cat("\n", sprintf(ngettext(length(x$scale), "%d variable and", "%d variables and", domain = "R-stats"), length(x$scale)), " ", sprintf(ngettext(x$n.obs, "%d observation.", "%d observations.", domain = "R-stats"), x$n.obs), "\n", sep = "")
     invisible(x)
 }

@@ -82,7 +82,7 @@ StructTS <- function(x, type = c("level", "trend", "BSM"),
         stop("only implemented for univariate time series")
     x <- as.ts(x)
     if(!is.numeric(x))
-        stop("'x' must be numeric")
+        stop(gettextf("'%s' argument must be numeric", "x"))
     storage.mode(x) <- "double"
     if(is.na(x[1L]))
         stop("the first value of the time series must not be missing")
@@ -110,8 +110,7 @@ StructTS <- function(x, type = c("level", "trend", "BSM"),
                  lower = rep(0, np+1L), upper = rep(Inf, np+1L),
                  control = optim.control)
         if(res$convergence > 0)
-            warning(gettextf("possible convergence problem: 'optim' gave code = %d and message %s",
-                             res$convergence, sQuote(res$message)), domain = NA)
+            warning(gettextf("possible convergence problem: 'optim' gave code = %d and message %s", res$convergence, sQuote(res$message)), domain = "R-stats")
     coef <- cf
     coef[mask] <- res$par
     Z$V[cbind(1L:np, 1L:np)] <- coef[1L:np]*vx
@@ -149,8 +148,8 @@ StructTS <- function(x, type = c("level", "trend", "BSM"),
 
 print.StructTS <- function(x, digits = max(3L, getOption("digits") - 3L), ...)
 {
-    cat("\nCall:", deparse(x$call, width.cutoff = 75L), "", sep = "\n")
-    cat("Variances:\n")
+    cat("\n", gettext("Call:", domain = "R-stats"), "\n", deparse(x$call, width.cutoff = 75L), "\n\n", sep = "")
+    cat(gettext("Variances:", domain = "R-stats"), "\n", sep = "")
     print.default(x$coef, print.gap = 2L, digits = digits, ...)
     invisible(x)
 }
@@ -175,15 +174,15 @@ tsdiag.StructTS <- function(object, gof.lag = 10L, ...)
     on.exit(par(oldpar))
     rs <- object$residuals
     stdres <- rs
-    plot(stdres, type = "h", main = "Standardized Residuals", ylab = "")
+    plot(stdres, type = "h", main = gettext("Standardized Residuals"), ylab = "")
     abline(h = 0.)
-    acf(object$residuals, plot = TRUE, main = "ACF of Residuals",
+    acf(object$residuals, plot = TRUE, main = gettext("ACF of Residuals"),
         na.action = na.pass)
     nlag <- gof.lag
     pval <- numeric(nlag)
     for(i in 1L:nlag) pval[i] <- Box.test(rs, i, type = "Ljung-Box")$p.value
-    plot(1L:nlag, pval, xlab = "lag", ylab = "p value", ylim = c(0,1),
-         main = "p values for Ljung-Box statistic")
+    plot(1L:nlag, pval, xlab = gettext("Lag"), ylab = gettext("p-value"), ylim = c(0,1),
+         main = gettext("p-values for Ljung-Box statistic"))
     abline(h = 0.05, lty = 2L, col = "blue")
 }
 

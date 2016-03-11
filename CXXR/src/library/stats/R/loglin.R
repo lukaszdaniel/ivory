@@ -36,18 +36,18 @@ loglin <- function(table, margin, start = rep(1, length(table)), fit =
             margin[[k]] <- tmp
         }
         if (!is.numeric(tmp) || any(is.na(tmp) | tmp <= 0))
-            stop("'margin' must contain names or numbers corresponding to 'table'")
+            stop("'margin' argument must contain names or numbers corresponding to 'table' argument")
         conf[seq_along(tmp), k] <- tmp
         nmar <- nmar + prod(dtab[tmp])
     }
 
     ntab <- length(table)
-    if (length(start) != ntab ) stop("'start' and 'table' must be same length")
+    if (length(start) != ntab ) stop(gettextf("'%s' and '%s' arguments must have the same length", "start", "table"))
 
     z <- .Call(C_LogLin, dtab, conf, table, start, nmar, eps, iter)
 
     if (print)
-        cat(z$nlast, "iterations: deviation", z$dev[z$nlast], "\n")
+        cat(sprintf(ngettext(z$nlast, "%d iteration: deviation %s", "%d iterations: deviation %s", domain = "R-stats"), z$nlast, z$dev[z$nlast]), "\n", sep = "")
 
     fit <- z$fit
     attributes(fit) <- attributes(table)
@@ -86,7 +86,7 @@ loglin <- function(table, margin, start = rep(1, length(table)), fit =
         for (k in seq_along(margin))
             margin[[k]] <- varnames[margin[[k]]]
     } else {
-        varnames <- as.character(1 : ntab)
+        varnames <- as.character(seq_len(ntab))
     }
 
     y <- list(lrt = lrt,
@@ -106,7 +106,7 @@ loglin <- function(table, margin, start = rep(1, length(table)), fit =
         parnam <- character(parlen)
 
         parval[[1L]] <- mean(fit)
-        parnam[1L] <- "(Intercept)"
+        parnam[1L] <- gettext("(Intercept)", domain = NA)
         fit <- fit - parval[[1L]]
 
         ## Get the u_i(B) in the rows of 'dyadic', see above.

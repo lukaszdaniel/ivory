@@ -72,7 +72,7 @@ double lgammafn_sign(double x, int *sgn)
 	*sgn = -1;
 
     if (x <= 0 && x == trunc(x)) { /* Negative integer argument */
-	ML_ERROR(ME_RANGE, "lgamma");
+	ML_ERROR(ME_RANGE, "lgamma()");
 	return ML_POSINF;/* +Inf, since lgamma(x) = log|gamma(x)| */
     }
 
@@ -84,7 +84,7 @@ double lgammafn_sign(double x, int *sgn)
       ELSE  y = |x| > 10 ---------------------- */
 
     if (y > xmax) {
-	ML_ERROR(ME_RANGE, "lgamma");
+	ML_ERROR(ME_RANGE, "lgamma()");
 	return ML_POSINF;
     }
 
@@ -114,7 +114,7 @@ double lgammafn_sign(double x, int *sgn)
 	/* The answer is less than half precision because
 	 * the argument is too near a negative integer. */
 
-	ML_ERROR(ME_PRECISION, "lgamma");
+	ML_ERROR(ME_PRECISION, "lgamma()");
     }
 
     return ans;

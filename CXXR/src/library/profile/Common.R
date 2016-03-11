@@ -61,8 +61,7 @@ Sys.setenv(R_LIBS_USER =
         res <- require(pkg, quietly = TRUE, warn.conflicts = FALSE,
                        character.only = TRUE)
         if(!res)
-            warning(gettextf('package %s in options("defaultPackages") was not found', sQuote(pkg)),
-                    call. = FALSE, domain = NA)
+            warning(gettextf("package %s in options(\"defaultPackages\") was not found", sQuote(pkg)), call. = FALSE, domain = "R-profile")
     }
 }
 
@@ -73,8 +72,7 @@ Sys.setenv(R_LIBS_USER =
     if(pkg %in% getOption("defaultPackages"))
         if(!require(pkg, quietly = TRUE, warn.conflicts = FALSE,
                     character.only = TRUE))
-            warning('package "methods" in options("defaultPackages") was not found',
-                    call. = FALSE)
+            warning("package 'methods' in options(\"defaultPackages\") was not found", call. = FALSE)
 }
 
 if(nzchar(Sys.getenv("R_BATCH"))) {

@@ -62,21 +62,21 @@ while(length(args)) {
     args <- args[-1]
 }
 if(!length(pkgs))
-    stop("ERROR: no packages specified", call.=FALSE)
+    stop("Error: no packages specified", domain = "R-base", call.=FALSE)
 if(!nzchar(lib)) {
     lib <- .libPaths()[1]
-    message("Removing from library ", sQuote(lib))
+    message(gettextf("Removing from library %s", sQuote(lib)), domain = "R-base")
 } else {
     ## lib is allowed to be a relative path.
     ## should be OK below, but be sure.
     cwd <- try(setwd(path.expand(lib)), silent = TRUE)
     if(inherits(cwd, "try-error"))
-        stop("ERROR: cannot cd to directory ", sQuote(lib), call. = FALSE)
+        stop(gettextf("Error: cannot cd to directory %s", sQuote(lib)), domain = "R-base", call. = FALSE)
     lib <- getwd()
     setwd(cwd)
 }
 if(!utils::file_test("-d", lib) || file.access(lib, 2L))
-    stop("ERROR: no permission to remove from directory ", sQuote(lib),
+    stop(gettextf("Error: no permission to remove from directory %s", sQuote(lib)), domain = "R-base",
          call. = FALSE)
 utils::remove.packages(pkgs, lib)
 q("no")

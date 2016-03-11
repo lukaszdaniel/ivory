@@ -61,7 +61,7 @@ grid.ls <- function(x=NULL, grobs=TRUE, viewports=FALSE, fullNames=FALSE,
     } else if (is.function(print)) {
         print(listing, ...)
     } else {
-        stop("invalid 'print' argument")
+        stop(gettextf("invalid '%s' argument", "print"))
     }
     invisible(listing)
 }
@@ -73,7 +73,7 @@ gridListDL <- function(x, grobs=TRUE, viewports=FALSE,
     } else {
         display.list <- grid.Call(L_getDisplayList)
         dl.index <- grid.Call(L_getDLindex)
-        result <- lapply(display.list[1L:dl.index], gridList,
+        result <- lapply(display.list[seq_len(dl.index)], gridList,
                          grobs=grobs, viewports=viewports,
                          fullNames=fullNames, recursive=recursive)
         names(result) <- NULL
@@ -696,7 +696,7 @@ nestedListing <- function(x, gindent="  ", vpindent=gindent) {
     }
 
     if (!inherits(x, "flatGridListing"))
-        stop("invalid listing")
+        stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("flatGridListing")))
     cat(paste0(makePrefix(gindent, x$gDepth),
                makePrefix(vpindent, x$vpDepth),
                x$name),
@@ -717,7 +717,7 @@ pathListing <- function(x, gvpSep=" | ", gAlign=TRUE) {
     }
 
     if (!inherits(x, "flatGridListing"))
-        stop("invalid 'listing'")
+        stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("flatGridListing")))
     vpListings <- seq_along(x$name) %in% grep("^vp", x$type)
     paths <- x$vpPath
     # Only if viewport listings

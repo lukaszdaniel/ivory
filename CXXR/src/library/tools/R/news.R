@@ -303,9 +303,8 @@ function(x, bad = NULL, classes = NULL)
     ##   if(!is.character(x) || ncol(x) != 4L)
     out <- data.frame(x, row.names = NULL, stringsAsFactors = FALSE)
     ## Note that we cannot do
-    ##   dimnames(out) <- list(NULL,
-    ##                         c("Version", "Date", "Category", "Text"))
-    colnames(out) <- c("Version", "Date", "Category", "Text")
+    ##   dimnames(out) <- list(NULL, c("Version", "Date", "Category", "Text"))
+    colnames(out) <- c(gettext("Version"), gettext("Date"), gettext("Category"), gettext("Text"))
     if(!is.null(bad))
         attr(out, "bad") <- bad
     class(out) <- unique(c(classes, "news_db", "data.frame"))
@@ -396,12 +395,12 @@ function(file, out = stdout(), codify = FALSE)
         dir <- file
         dfile <- file.path(dir, "DESCRIPTION")
         if(!file_test("-f", dfile))
-            stop("DESCRIPTION file not found")
+            stop(gettextf("%s file was not found", sQuote("DESCRIPTION")))
         file <- file.path(dir, "inst", "NEWS")
         if(!file_test("-f", file)) {
             file <- file.path(dir, "NEWS")
             if(!file_test("-f", file))
-                stop("NEWS file not found")
+                stop(gettextf("%s file was not found", sQuote("NEWS")))
         }
     } else {
         dir <- dirname(file)
@@ -411,7 +410,7 @@ function(file, out = stdout(), codify = FALSE)
                !file_test("-f",
                           dfile <- file.path(dirname(dir),
                                              "DESCRIPTION")))
-                stop("DESCRIPTION file not found")
+                stop(gettextf("%s file was not found", sQuote("DESCRIPTION")))
         }
     }
 
@@ -471,9 +470,7 @@ function(file, out = stdout(), codify = FALSE)
         if(any(bad)) {
             bad <- news$Text[bad]
             stop("Could not extract news from the following text chunks:\n",
-                 paste(sprintf("\nChunk %s:\n%s",
-                               format(seq_along(bad)), bad),
-                       collapse = "\n"))
+                 paste(gettextf("\nChunk %s:\n%s", format(seq_along(bad)), bad), collapse = "\n"))
         }
 
         encoding <- meta["Encoding"]
@@ -607,16 +604,10 @@ function(x)
         pos <- which(RdTags(x) == "\\itemize")
         if(!length(pos)) {
             stop(gettextf("Malformed NEWS.Rd file:\nChunk starting\n  %s\ncontains no \\itemize.",
-                          substring(sub("^[[:space:]]*", "",
-                                        .Rd_deparse(x)),
-                                    1L, 60L)),
-                 domain = NA)
+                          substring(sub("^[[:space:]]*", "", .Rd_deparse(x)), 1L, 60L)), domain = "R-tools")
         } else if(length(pos) > 1L) {
             warning(gettextf("Malformed NEWS.Rd file:\nChunk starting\n  %s\ncontains more than one \\itemize.\nUsing the first one.",
-                             substring(sub("^[[:space:]]*", "",
-                                           .Rd_deparse(x)),
-                                       1L, 60L)),
-                    domain = NA)
+                             substring(sub("^[[:space:]]*", "", .Rd_deparse(x)), 1L, 60L)), domain = "R-tools")
             pos <- pos[1L]
         }
         x <- x[pos]

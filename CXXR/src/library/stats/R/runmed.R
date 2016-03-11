@@ -25,20 +25,18 @@ runmed <- function(x, k, endrule = c("median","keep","constant"),
                    algorithm = NULL, print.level = 0)
 {
     n <- as.integer(length(x))
-    if(is.na(n)) stop("invalid value of length(x)")
+    if(is.na(n)) stop(gettextf("invalid '%s' value", "length(x)"))
     k <- as.integer(k)
-    if(is.na(k)) stop("invalid value of 'k'")
-    if(k < 0L) stop("'k' must be positive")
+    if(is.na(k)) stop(gettextf("invalid '%s' value", "k"))
+    if(k < 0L) stop(gettextf("'%s' argument must be positive", "k"))
     if(k %% 2L == 0L)
-        warning(gettextf("'k' must be odd!  Changing 'k' to %d",
-                         k <- as.integer(1+ 2*(k %/% 2))), domain = NA)
+        warning(gettextf("'k' must be odd!  Changing 'k' to %d", k <- as.integer(1+ 2*(k %/% 2))), domain = NA)
     if(n == 0L) {
 	x <- double(); attr(x, "k") <- k
 	return(x)
     }
     if (k > n)
-        warning(gettextf("'k' is bigger than 'n'!  Changing 'k' to %d",
-                         k <- as.integer(1+ 2*((n - 1)%/% 2))), domain = NA)
+        warning(gettextf("'k' is bigger than 'n'!  Changing 'k' to %d", k <- as.integer(1+ 2*((n - 1)%/% 2))), domain = NA)
     algorithm <-
         if(missing(algorithm)) { ## use efficient default
             ## This is too primitive, MM knows better :
@@ -51,8 +49,7 @@ runmed <- function(x, k, endrule = c("median","keep","constant"),
                    "median" =, "keep" = 0L,
                    "constant" = 1L)
     if(print.level)
-        cat("runmed(*, endrule=", endrule,", algorithm=",algorithm,
-            ", iend=",iend,")\n")
+        cat("runmed(*, endrule=", endrule,", algorithm=",algorithm, ", iend=",iend,")\n")
     res <- switch(algorithm,
                   Turlach = .Call(C_runmed, as.double(x), 1, k, iend, print.level),
                   Stuetzle = .Call(C_runmed, as.double(x), 0, k, iend, print.level))

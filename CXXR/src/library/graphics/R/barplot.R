@@ -94,9 +94,9 @@ function(height, width = 1, space = NULL, names.arg = NULL,
 	if (min(height + offset, na.rm = TRUE) <= 0)
 	    stop("log scale error: at least one 'height + offset' value <= 0")
 	if (logx && !is.null(xlim) && min(xlim) <= 0)
-	    stop("log scale error: 'xlim' <= 0")
+	    stop(gettextf("log scale error: '%s' <= 0", "xlim"))
 	if (logy && !is.null(ylim) && min(ylim) <= 0)
-	    stop("log scale error: 'ylim' <= 0")
+	    stop(gettextf("log scale error: '%s' <= 0", "ylim"))
 
 	## if axis limit is set to < above, adjust bar base value
 	## to draw a full bar

@@ -24,15 +24,15 @@ function(x, y, ratio = 1,
          conf.level = 0.95, ...)
 {
     if (!((length(ratio) == 1L) && is.finite(ratio) && (ratio > 0)))
-        stop("'ratio' must be a single positive number")
+        stop(gettextf("'%s' argument must be a single positive number", "ratio"))
 
     alternative <- match.arg(alternative)
 
     if (!((length(conf.level) == 1L) && is.finite(conf.level) &&
           (conf.level > 0) && (conf.level < 1)))
-        stop("'conf.level' must be a single number between 0 and 1")
+        stop(gettextf("'%s' argument must be a single number between 0 and 1", "conf.level"))
 
-    DNAME <- paste(deparse(substitute(x)), "and", deparse(substitute(y)))
+    DNAME <- gettextf("%s and %s", paste(deparse(substitute(x)), collapse = ""), paste(deparse(substitute(y)), collapse = ""), domain = "R-stats")
 
     if (inherits(x, "lm") && inherits(y, "lm")) {
         DF.x <- x$df.residual
@@ -43,17 +43,18 @@ function(x, y, ratio = 1,
         x <- x[is.finite(x)]
         DF.x <- length(x) - 1L
         if (DF.x < 1L)
-            stop("not enough 'x' observations")
+            stop(gettextf("not enough '%s' observations", "x"))
         y <- y[is.finite(y)]
         DF.y <- length(y) - 1L
         if (DF.y < 1L)
-            stop("not enough 'y' observations")
+            stop(gettextf("not enough '%s' observations", "y"))
         V.x <- var(x)
         V.y <- var(y)
     }
     ESTIMATE <- V.x / V.y
     STATISTIC <- ESTIMATE / ratio
-    PARAMETER <- c("num df" = DF.x, "denom df" = DF.y)
+    PARAMETER <- c(DF.x, DF.y)
+    names(PARAMETER) <- c(gettext("num df", domain = "R-stats"), gettext("denom df", domain = "R-stats"))
     PVAL <- pf(STATISTIC, DF.x, DF.y)
     if (alternative == "two.sided") {
         PVAL <- 2 * min(PVAL, 1 - PVAL)
@@ -68,8 +69,15 @@ function(x, y, ratio = 1,
     else
         CINT <- c(0, ESTIMATE / qf(1 - conf.level, DF.x, DF.y))
     names(STATISTIC) <- "F"
-    names(ESTIMATE) <- names(ratio) <- "ratio of variances"
+    names(ratio) <- gettext("ratio of variances", domain = "R-stats")
+    names(ESTIMATE) <- gettext("ratio of variances", domain = "R-stats")
     attr(CINT, "conf.level") <- conf.level
+	METHOD <- gettext("F test to compare two variances", domain = "R-stats")
+    alt.name <- switch(alternative,
+                           two.sided = gettextf("true ratio of variances is not equal to %s", ratio, domain = "R-stats"),
+                           less = gettextf("true ratio of variances is less than %s", ratio, domain = "R-stats"),
+                           greater = gettextf("true ratio of variances is greater than %s", ratio, domain = "R-stats"))
+
     RVAL <- list(statistic = STATISTIC,
                  parameter = PARAMETER,
                  p.value = PVAL,
@@ -77,9 +85,10 @@ function(x, y, ratio = 1,
                  estimate = ESTIMATE,
                  null.value = ratio,
                  alternative = alternative,
-                 method = "F test to compare two variances",
+                 alt.name = alt.name,
+                 method = METHOD,
                  data.name = DNAME)
-    attr(RVAL, "class") <- "htest"
+    class(RVAL) <- "htest"
     return(RVAL)
 }
 
@@ -89,7 +98,7 @@ function(formula, data, subset, na.action, ...)
     if(missing(formula)
        || (length(formula) != 3L)
        || (length(attr(terms(formula[-2L]), "term.labels")) != 1L))
-        stop("'formula' missing or incorrect")
+        stop(gettextf("'%s' argument is missing or incorrect", "formula"))
     m <- match.call(expand.dots = FALSE)
     if(is.matrix(eval(m$data, parent.frame())))
         m$data <- as.data.frame(data)
@@ -97,7 +106,8 @@ function(formula, data, subset, na.action, ...)
     m[[1L]] <- quote(stats::model.frame)
     m$... <- NULL
     mf <- eval(m, parent.frame())
-    DNAME <- paste(names(mf), collapse = " by ")
+    if(length(mf) != 2L) stop("invalid formula")
+    DNAME <- gettextf("%s by %s", names(mf[1]), names(mf[2]), domain = "R-stats")
     names(mf) <- NULL
     response <- attr(attr(mf, "terms"), "response")
     g <- factor(mf[[-response]])

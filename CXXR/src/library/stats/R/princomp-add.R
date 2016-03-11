@@ -49,12 +49,12 @@ print.summary.princomp <-
 {
     vars <- x$sdev^2
     vars <- vars/sum(vars)
-    cat("Importance of components:\n")
+    cat(gettext("Importance of components:", domain = "R-stats"), "\n", sep = "")
     print(rbind("Standard deviation" = x$sdev,
                 "Proportion of Variance" = vars,
                 "Cumulative Proportion" = cumsum(vars)))
     if(loadings) {
-        cat("\nLoadings:\n")
+        cat("\n", gettext("Loadings:", domain = "R-stats"), "\n", sep = "")
         cx <- format(round(x$loadings, digits = digits))
         cx[abs(x$loadings) < cutoff] <-
             strrep(" ", nchar(cx[1,1], type="w"))
@@ -80,10 +80,10 @@ function(x, npcs = min(10, length(x$sdev)),
     dev.hold(); on.exit(dev.flush())
     if(type == "barplot")
         barplot(pcs[xp], names.arg = names(pcs[xp]), main = main,
-                ylab = "Variances", ...)
+                ylab = gettext("Variances"), ...)
     else {
         plot(xp, pcs[xp], type = "b", axes = FALSE, main = main,
-             xlab = "", ylab = "Variances", ...)
+             xlab = "", ylab = gettext("Variances"), ...)
         axis(2)
         axis(1, at = xp, labels = names(pcs[xp]))
     }

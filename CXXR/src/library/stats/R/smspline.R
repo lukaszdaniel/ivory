@@ -31,7 +31,7 @@
     })
 }
 n.knots <- function(n) {
-    message(".nknots.smspl() is now exported; use it instead of n.knots()")
+    message("'.nknots.smspl()' is now exported; use it instead of 'n.knots()'")
     .nknots.smspl(n)
 }
 
@@ -49,7 +49,7 @@ smooth.spline <-
     contr.sp[names(control.spar)] <- control.spar
     if(!all(sapply(contr.sp[1:4], is.numeric)) ||
        contr.sp$tol < 0 || contr.sp$eps <= 0 || contr.sp$maxit <= 0)
-        stop("invalid 'control.spar'")
+        stop(gettextf("invalid '%s' value", "control.spar"))
 
     xy <- xy.coords(x, y)
     y <- xy$y
@@ -61,7 +61,7 @@ smooth.spline <-
     w <-
 	if(is.null(w)) rep_len(1, n)
 	else {
-	    if(n != length(w)) stop("lengths of 'x' and 'w' must match")
+	    if(n != length(w)) stop(gettextf("lengths of '%s' and '%s' arguments must match", "x", "w"))
 	    if(any(w < 0)) stop("all weights should be non-negative")
 	    if(all(w == 0)) stop("some weights should be positive")
 	    (w * sum(w > 0))/sum(w)
@@ -95,7 +95,7 @@ smooth.spline <-
     yssw <- sum(tmp[, 3L] - wbar*ybar^2) # will be added to RSS for GCV
     ## Note: now  cv in {NA,FALSE,TRUE}
     if(is.na(cv) && !missing(df))
-	stop("'cv' must not be NA when 'df' is specified")
+	stop("'cv' argument must not be NA when 'df' argument is specified")
     CV <- !is.na(cv) && cv
     if(CV && nx < n)
         warning("cross-validation with non-unique 'x' values seems doubtful")
@@ -103,7 +103,7 @@ smooth.spline <-
     xbar <- (ux - ux[1L])/r.ux           # scaled to [0,1]
     if(all.knots) {
         if(!missing(nknots) && !is.null(nknots))
-            warning("'all.knots' is TRUE; 'nknots' specification is disregarded")
+            warning("'all.knots' argument is TRUE; 'nknots' specification is disregarded")
         nknots <- nx
     } else if(is.null(nknots))# <- for back compatibility
 	nknots <- .nknots.smspl(nx)
@@ -113,7 +113,7 @@ smooth.spline <-
 	else if(!is.numeric(nknots))
 	    stop("'nknots' must be numeric (in {1,..,n})")
 	if(nknots < 1)
-	    stop("'nknots' must be at least 1")
+	    stop(gettextf("'%s' argument must be at least %d", "nknots", 1))
 	else if(nknots > nx)
 	    stop("cannot use more inner knots than unique 'x' values")
     }
@@ -130,7 +130,7 @@ smooth.spline <-
     spar <- if(ispar == 1L) as.double(spar) else double(1)
     ## was <- if(missing(spar)) 0 else if(spar < 1.01e-15) 0 else  1
     ## but package forecast passed a length-0 vector.
-    if(length(spar) != 1) stop("'spar' must be of length 1")
+    if(length(spar) != 1) stop(gettextf("'%s' argument must be of length %d", "spar", 1))
 
     ## icrit {../src/sslvrg.f}:
     ##		(0 = no crit,  1 = GCV ,  2 = ord.CV , 3 = df-matching)
@@ -142,7 +142,7 @@ smooth.spline <-
 		warning("specified both 'df' and 'cv'; will disregard the latter")
 	    icrit <- 3L
 	    dofoff <- df
-	} else warning("you must supply 1 < df <= n,  n = #{unique x} = ", nx)
+	} else warning(gettextf("you must supply 1 < df <= n,  n = #{unique x} = %d", nx))
     }
     iparms <- c(icrit=icrit, ispar=ispar, iter=as.integer(contr.sp$maxit))
 
@@ -179,19 +179,21 @@ smooth.spline <-
 	lev <- fit$lev
 	df <- sum(lev)
 	if(is.na(df))
-	    stop("NA lev[]; probably smoothing parameter 'spar' way too large!")
+	    stop("NA lev[]; probably smoothing parameter 'spar' is way too large!")
     }
     if(fit$ier > 0L ) {
         sml <- fit$spar < 0.5
-	wtxt <- paste("smoothing parameter value too",
-                      if(sml) "small" else "large")
+	if(sml)
+	 wtxt <- gettext("smoothing parameter value is too small")
+	else
+	 wtxt <- gettext("smoothing parameter value is too large")
         if(sml) {
             ## used to give warning too and mean() as below, but that's rubbish
             stop(wtxt)
         } else {
             fit$ty <- rep(mean(y), nx) ## would be df = 1
             df <- 1
-            warning(wtxt,"\nsetting df = 1  __use with care!__")
+            warning(wtxt,"\n", "setting df = 1  __use with care!__", sep = "")
         }
     }
     cv.crit <-
@@ -221,7 +223,7 @@ smooth.spline <-
 
 fitted.smooth.spline <- function(object, ...) {
     if(!is.list(dat <- object$data))
-        stop("need result of smooth.spline(keep.data = TRUE)")
+        stop("need result of 'smooth.spline(keep.data = TRUE)'")
     ## note that object$x == unique(sort(object$data$x))
     object$y[match(dat$x, object$x)]
 }
@@ -232,7 +234,7 @@ residuals.smooth.spline <-
 {
     type <- match.arg(type)
     if(!is.list(dat <- object$data))
-        stop("need result of smooth.spline(keep.data = TRUE)")
+        stop("need result of 'smooth.spline(keep.data = TRUE)'")
     r <- dat$y - object$y[match(dat$x, object$x)]
     ## this rest is `as' residuals.lm() :
     res <- switch(type,
@@ -243,7 +245,7 @@ residuals.smooth.spline <-
                   partial = r)
     res <- naresid(object$na.action, res)
     if (type == "partial")
-        stop('type = "partial" is not yet implemented')
+        stop("'type = \"partial\"' is not yet implemented")
         ## res <- res + predict(object, type = "terms")
     res
 }
@@ -252,23 +254,24 @@ residuals.smooth.spline <-
 print.smooth.spline <- function(x, digits = getOption("digits"), ...)
 {
     if(!is.null(cl <- x$call)) {
-	cat("Call:\n")
+	cat(gettext("Call:", domain = "R-stats"), "\n", sep = "")
 	dput(cl, control=NULL)
     }
     ip <- x$iparms
     cv <- cl$cv
-    if(is.null(cv)) cv <- FALSE else if(is.name(cv)) cv <- eval(cv)
-    cat("\nSmoothing Parameter  spar=", format(x$spar, digits=digits),
-        " lambda=", format(x$lambda, digits=digits),
-        if(ip["ispar"] != 1L) paste0("(", ip["iter"], " iterations)"))
+    if(is.null(cv)) cv <- FALSE else if(is.name(cv)) cv <- eval(cv) 
+      if(ip["ispar"] != 1L) cat("\n", sprintf(ngettext(ip["iter"], "Smoothing Parameter  spar=%s lambda=%s (%d iteration)", "Smoothing Parameter  spar=%s lambda=%s (%d iterations)", domain = "R-stats"), format(x$spar, digits=digits),
+			 format(x$lambda, digits=digits), ip["iter"]), sep = "")
+      else
+      cat("\n", gettextf("Smoothing Parameter  spar=%s lambda=%s", format(x$spar, digits=digits), format(x$lambda, digits=digits), domain = "R-stats"), sep = "")
+     
     cat("\n")
-    cat("Equivalent Degrees of Freedom (Df):", format(x$df,digits=digits))
+    cat(gettextf("Equivalent Degrees of Freedom (Df): %s", format(x$df,digits=digits), domain = "R-stats"))
     cat("\n")
-    cat("Penalized Criterion:", format(x$pen.crit, digits=digits))
+    cat(gettextf("Penalized Criterion: %s", format(x$pen.crit, digits=digits), domain = "R-stats"))
     cat("\n")
     if(!is.na(cv))
-        cat(if(cv) "PRESS: " else "GCV: ",
-            format(x$cv.crit, digits = digits), "\n", sep = "")
+        cat(if(cv) "PRESS: " else "GCV: ", format(x$cv.crit, digits = digits), "\n", sep = "")
     invisible(x)
 }
 
@@ -280,7 +283,7 @@ predict.smooth.spline <- function(object, x, deriv = 0, ...)
         else x <- object$x
     }
     fit <- object$fit
-    if(is.null(fit)) stop("not a valid \"smooth.spline\" object")
+    if(is.null(fit)) stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("smooth.spline")))
     else predict(fit, x, deriv, ...)
 }
 
@@ -332,11 +335,11 @@ supsmu <-
 {
     if(span == "cv") span <- 0
     n <- length(y)
-    if(!n || !is.numeric(y)) stop("'y' must be numeric vector")
-    if(length(x) != n) stop("number of observations in 'x' and 'y' must match.")
+    if(!n || !is.numeric(y)) stop(gettextf("'%s' argument must be a numeric vector", "y"))
+    if(length(x) != n) stop("number of observations in 'x' and 'y' arguments must match")
     if(length(wt) != n)
-	stop("number of weights must match number of observations.")
-    if(span < 0 || span > 1) stop("'span' must be between 0 and 1.")
+	stop("number of weights must match number of observations")
+    if(span < 0 || span > 1) stop(gettextf("'%s' argument must be between %s and %s", "span", "0", "1"))
     if(periodic) {
 	iper <- 2L
 	xrange <- range(x)
@@ -353,7 +356,7 @@ supsmu <-
     if(diff <- n - leno)
         warning(sprintf(ngettext(diff,
                                  "%d observation with NA, NaN or Inf deleted",
-                                 "%d observations with NAs, NaNs and/or Infs deleted"),
+                                 "%d observations with NAs, NaNs and/or Infs deleted", domain = "R-stats"),
                         diff), domain = NA)
     .Fortran(C_setsmu)
     smo <- .Fortran(C_supsmu,

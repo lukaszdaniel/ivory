@@ -1,8 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: R 3.3.0\n"
-"Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-06 13:51\n"
+"Project-Id-Version: splines 3.3.0\n"
+"POT-Creation-Date: 2015-11-04 21:37\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -11,62 +10,180 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 
-msgid "must have at least 'ord' knots"
-msgstr ""
 
-msgid "length of 'derivs' must match length of 'x'"
-msgstr ""
-
-msgid "'ord' must be positive integer, at most the number of knots"
-msgstr ""
-
-msgid "need at least %s (=%d) knots"
-msgstr ""
-
-msgid "the 'x' data must be in the range %g to %g unless you set '%s'"
-msgstr ""
+#: R/splineClasses.R: 0
+#. R/splineClasses.R: gettextf("%s needs package 'Matrix' correctly installed", "splineDesign(*, sparse=TRUE)",     domain = "R-splines")
 
 msgid "%s needs package 'Matrix' correctly installed"
 msgstr ""
 
-msgid "values of 'x' must be distinct"
+
+#: R/splineClasses.R: 0
+#: R/splines.R: 0
+#. R/splineClasses.R: gettextf("'%s' argument must be integer >= %d", "ord", 2)
+#. R/splines.R: gettextf("'%s' argument must be integer >= %d", "degree", 1)
+
+msgid "'%s' argument must be integer >= %d"
 msgstr ""
 
-msgid "'formula' must be of the form \"y ~ x\""
+
+#: R/splines.R: 0
+#. R/splines.R: gettextf("'%s' argument was too small; have used %d", "df", ord - (1L - intercept))
+#. R/splines.R: gettextf("'%s' argument was too small; have used %d", "df", 1L + intercept)
+
+msgid "'%s' argument was too small; have used %d"
 msgstr ""
 
-msgid "lengths of 'x' and 'y' must match"
-msgstr ""
 
-msgid "values of 'x' must be strictly increasing"
-msgstr ""
-
-msgid "'ord' must be >= 2"
-msgstr ""
-
-msgid "the range of 'x' values exceeds one period"
-msgstr ""
-
-msgid "knot positions must be non-decreasing"
-msgstr ""
-
-msgid "lengths of 'x' and 'y' must be the same"
-msgstr ""
+#: R/splineClasses.R: 0
+#. R/splineClasses.R: gettextf("'deriv' must be between 0 and %d", ord - 1)
+#. R/splineClasses.R: gettextf("'deriv' must be between 0 and %d", ord - 1)
 
 msgid "'deriv' must be between 0 and %d"
 msgstr ""
 
+
+#: R/splineClasses.R: 0
+#. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
+#. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
+
+msgid "'formula' must be of the form \"y ~ x\""
+msgstr ""
+
+
+#: R/splineClasses.R: 0
+#. R/splineClasses.R: stop("'ord' must be positive integer, at most the number of knots")
+
+msgid "'ord' must be positive integer, at most the number of knots"
+msgstr ""
+
+
+#: R/splineClasses.R: 0
+#. R/splineClasses.R: gettext("Period:", domain = "R-splines")
+
+msgid "Period:"
+msgstr ""
+
+
+#: R/splineClasses.R: 0
+#. R/splineClasses.R: gettext("bSpline representation of spline", domain = "R-splines")
+
+msgid "bSpline representation of spline"
+msgstr ""
+
+
+#: R/splineClasses.R: 0
+#. R/splineClasses.R: gettextf("bSpline representation of spline for %s", deparse(as.vector(form)), domain = "R-splines")
+
+msgid "bSpline representation of spline for %s"
+msgstr ""
+
+
+#: R/splineClasses.R: 0
+#. R/splineClasses.R: stop("empty 'derivs' argument")
+
+msgid "empty 'derivs' argument"
+msgstr ""
+
+
+#: R/splineClasses.R: 0
+#. R/splineClasses.R: stop("knot positions must be non-decreasing")
+#. R/splineClasses.R: stop("knot positions must be non-decreasing")
+
+msgid "knot positions must be non-decreasing"
+msgstr ""
+
+
+#: R/splineClasses.R: 0
+#. R/splineClasses.R: stop("knot positions must be strictly increasing")
+
 msgid "knot positions must be strictly increasing"
 msgstr ""
+
+
+#: R/splineClasses.R: 0
+#. R/splineClasses.R: stop("length of 'derivs' is larger than length of 'x'")
+
+msgid "length of 'derivs' is larger than length of 'x'"
+msgstr ""
+
+
+#: R/splineClasses.R: 0
+#. R/splineClasses.R: stop("lengths of 'x' and 'y' must be the same")
+
+msgid "lengths of 'x' and 'y' must be the same"
+msgstr ""
+
+
+#: R/splineClasses.R: 0
+#. R/splineClasses.R: stop("lengths of 'x' and 'y' must match")
+
+msgid "lengths of 'x' and 'y' must match"
+msgstr ""
+
+
+#: R/splineClasses.R: 0
+#. R/splineClasses.R: gettext("polynomial representation of spline", domain = "R-splines")
+
+msgid "polynomial representation of spline"
+msgstr ""
+
+
+#: R/splineClasses.R: 0
+#. R/splineClasses.R: gettextf("polynomial representation of spline for %s", deparse(as.vector(form)),     domain = "R-splines")
+
+msgid "polynomial representation of spline for %s"
+msgstr ""
+
+
+#: R/splines.R: 0
+#. R/splines.R: warning("some 'x' values beyond boundary knots may cause ill-conditioned bases")
+
+msgid "some 'x' values beyond boundary knots may cause ill-conditioned bases"
+msgstr ""
+
+
+#: R/splineClasses.R: 0
+#. R/splineClasses.R: stop("spline must be monotone")
 
 msgid "spline must be monotone"
 msgstr ""
 
-msgid "'degree' must be integer >= 1"
+
+#: R/splineClasses.R: 0
+#. R/splineClasses.R: gettextf("the 'x' data must be in the range %g to %g unless you set '%s'", knots[ord],     knots[nk - o1], "outer.ok = TRUE", domain = "R-splines")
+
+msgid "the 'x' data must be in the range %g to %g unless you set '%s'"
 msgstr ""
 
-msgid "'df' was too small; have used %d"
+
+#: R/splineClasses.R: 0
+#. R/splineClasses.R: stop("the range of 'x' values exceeds one period")
+
+msgid "the range of 'x' values exceeds one period"
 msgstr ""
 
-msgid "some 'x' values beyond boundary knots may cause ill-conditioned bases"
+
+#: R/splineClasses.R: 0
+#. R/splineClasses.R: stop("values of 'x' must be distinct")
+#. R/splineClasses.R: stop("values of 'x' must be distinct")
+
+msgid "values of 'x' must be distinct"
 msgstr ""
+
+
+#: R/splineClasses.R: 0
+#. R/splineClasses.R: stop("values of 'x' must be strictly increasing")
+
+msgid "values of 'x' must be strictly increasing"
+msgstr ""
+
+
+#: R/splineClasses.R: 0
+#. R/splineClasses.R: ngettext(ord, "at least '%s' (=%d) knots is needed", "at least '%s' (=%d) knots are needed",     domain = "R-splines")
+#. R/splineClasses.R: ngettext(2 * ord - 1, "at least '%s' (=%d) knots is needed", "at least '%s' (=%d) knots are needed",     domain = "R-splines")
+
+msgid        "at least '%s' (=%d) knots is needed"
+msgid_plural "at least '%s' (=%d) knots are needed"
+msgstr[0]    ""
+msgstr[1]    ""

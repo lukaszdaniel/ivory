@@ -735,7 +735,7 @@ globextend(const wchar_t *path, wglob_t *pglob, size_t *limitp)
     const wchar_t *p;
 
 #ifdef GLOB_DEBUG
-    Rprintf("Adding ");
+    Rprintf(_("Adding: "));
     for (p = path; *p; p++)
 	(void)Rprintf("%c", CHAR(*p));
     Rprintf("\n");

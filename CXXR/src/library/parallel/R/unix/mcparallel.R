@@ -26,7 +26,7 @@ mcparallel <- function(expr, name, mc.set.seed = TRUE, silent = FALSE, mc.affini
     env <- parent.frame()
     if (isTRUE(mc.set.seed)) mc.advance.stream()
     if (inherits(f, "masterProcess")) {
-        on.exit(mcexit(1L, structure("fatal error in wrapper code",
+        on.exit(mcexit(1L, structure(gettext("fatal error in wrapper code"),
                                   class = "try-error")))
         if (isTRUE(mc.set.seed)) mc.set.stream()
         mc.interactive <- as.logical(mc.interactive)
@@ -63,7 +63,7 @@ mccollect <- function(jobs, wait = TRUE, timeout = 0, intermediate = FALSE)
         pids <- if (inherits(jobs, "process") || is.list(jobs))
             processID(jobs) else jobs
         if (!length(pids)) return(NULL)
-        if (!is.numeric(pids)) stop("invalid 'jobs' argument")
+        if (!is.numeric(pids)) stop(gettextf("invalid '%s' argument", "jobs"))
         pids <- as.integer(pids)
         pnames <- as.character(pids)
         if (!inherits(jobs, "process") && is.list(jobs))

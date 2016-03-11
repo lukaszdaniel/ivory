@@ -23,38 +23,43 @@ stat.anova <-
     function(table, test=c("Rao","LRT","Chisq", "F", "Cp"), scale, df.scale, n)
 {
     test <- match.arg(test)
-    dev.col <- match("Deviance", colnames(table))
-    if (test == "Rao") dev.col <- match("Rao", colnames(table))
-    if (is.na(dev.col)) dev.col <- match("Sum of Sq", colnames(table))
+    dev.col <- match(gettext("Deviance", domain = NA), colnames(table))
+    if (test == "Rao") dev.col <- match(gettext("Rao", domain = NA), colnames(table))
+    if (is.na(dev.col)) dev.col <- match(gettext("Sum of Sq", domain = NA), colnames(table))
+#     oldnames <- names(table)
     switch(test,
 	   "Rao" = ,"LRT" = ,"Chisq" = {
-               dfs <- table[, "Df"]
+               dfs <- table[, gettext("Df", domain = NA)]
                vals <- table[, dev.col]/scale * sign(dfs)
 	       vals[dfs %in% 0] <- NA
                vals[!is.na(vals) & vals < 0] <- NA # rather than p = 0
-	       cbind(table,
+	       xx <- cbind(table,
                      "Pr(>Chi)" = pchisq(vals, abs(dfs), lower.tail = FALSE)
                      )
+#	      names(xx) <- c(oldnames, gettext("Pr(>Chi)", domain = NA))
 	   },
 	   "F" = {
-               dfs <- table[, "Df"]
+               dfs <- table[, gettext("Df", domain = NA)]
 	       Fvalue <- (table[, dev.col]/dfs)/scale
 	       Fvalue[dfs %in% 0] <- NA
                Fvalue[!is.na(Fvalue) & Fvalue < 0] <- NA # rather than p = 0
-	       cbind(table,
+	       xx <- cbind(table,
                      F = Fvalue,
 		     "Pr(>F)" = pf(Fvalue, abs(dfs), df.scale, lower.tail = FALSE)
                      )
+#	      names(xx) <- c(oldnames, gettext("F", domain = NA), gettext("Pr(>F)", domain = NA))
 	   },
 	   "Cp" = { # depends on the type of object.
-               if ("RSS" %in% names(table)) { # an lm object
-                   cbind(table, Cp = table[, "RSS"] +
-                         2*scale*(n - table[, "Res.Df"]))
+               if (!is.na(match(gettext("RSS", domain = NA), names(table)))) { # an lm object
+                   xx <- cbind(table, Cp = table[, gettext("RSS", domain = NA)] +
+                         2*scale*(n - table[, gettext("Res.Df", domain = NA)]))
                } else { # a glm object
-                   cbind(table, Cp = table[, "Resid. Dev"] +
-                         2*scale*(n - table[, "Resid. Df"]))
+                   xx <- cbind(table, Cp = table[, gettext("Resid. Dev", domain = NA)] +
+                         2*scale*(n - table[, gettext("Resid. Df", domain = NA)]))
                }
+#	      names(xx) <- c(oldnames, gettext("Cp", domain = NA))
 	   })
+	xx
 }
 
 printCoefmat <-
@@ -62,7 +67,7 @@ printCoefmat <-
 	     signif.stars = getOption("show.signif.stars"),
              signif.legend = signif.stars,
 	     dig.tst = max(1L, min(5L, digits - 1L)),
-	     cs.ind = 1:k, tst.ind = k+1, zap.ind = integer(),
+	     cs.ind = seq_len(k), tst.ind = k+1, zap.ind = integer(),
 	     P.values = NULL,
 	     has.Pvalue = nc >= 4 && substr(colnames(x)[nc], 1, 3) == "Pr(",
              eps.Pvalue = .Machine$double.eps,
@@ -74,22 +79,22 @@ printCoefmat <-
     ## By Default
     ## Assume: x is a matrix-like numeric object.
     ## ------  with *last* column = P-values  --iff-- P.values (== TRUE)
-    ##	  columns {cs.ind}= numbers, such as coefficients & std.err  [def.: 1L:k]
+    ##	  columns {cs.ind}= numbers, such as coefficients & std.err  [def.: seq_len(k)]
     ##	  columns {tst.ind}= test-statistics (as "z", "t", or "F")  [def.: k+1]
 
     if(is.null(d <- dim(x)) || length(d) != 2L)
-	stop("'x' must be coefficient matrix/data frame")
+	stop("'x' argument must be coefficient matrix or data frame")
     nc <- d[2L]
     if(is.null(P.values)) {
         scp <- getOption("show.coef.Pvalues")
         if(!is.logical(scp) || is.na(scp)) {
-            warning("option \"show.coef.Pvalues\" is invalid: assuming TRUE")
+            warning(gettextf("option \"%s\" is invalid: assuming TRUE", "show.coef.Pvalues"))
             scp <- TRUE
         }
 	P.values <- has.Pvalue && scp
     }
     else if(P.values && !has.Pvalue)
-	stop("'P.values' is TRUE, but 'has.Pvalue' is not")
+	stop("'P.values' argument is TRUE, but 'has.Pvalue' argument is not")
 
     if(has.Pvalue && !P.values) {# P values are there, but not wanted
 	d <- dim(xm <- data.matrix(x[,-nc , drop = FALSE]))
@@ -98,7 +103,7 @@ printCoefmat <-
     } else xm <- data.matrix(x)
 
     k <- nc - has.Pvalue - (if(missing(tst.ind)) 1 else length(tst.ind))
-    if(!missing(cs.ind) && length(cs.ind) > k) stop("wrong k / cs.ind")
+    if(!missing(cs.ind) && length(cs.ind) > k) stop("wrong 'cs.ind' argument")
 
     Cf <- array("", dim=d, dimnames = dimnames(xm))
 
@@ -118,7 +123,7 @@ printCoefmat <-
     if(length(tst.ind))
 	Cf[, tst.ind] <- format(round(xm[, tst.ind], digits = dig.tst),
                                 digits = digits)
-    if(any(r.ind <- !((1L:nc) %in% c(cs.ind, tst.ind, if(has.Pvalue) nc))))
+    if(any(r.ind <- !((seq_len(nc)) %in% c(cs.ind, tst.ind, if(has.Pvalue) nc))))
 	for(i in which(r.ind)) Cf[, i] <- format(xm[, i], digits = digits)
     ok[, tst.ind] <- FALSE
     okP <- if(has.Pvalue) ok[, -nc] else ok
@@ -137,7 +142,7 @@ printCoefmat <-
     if(any(ina)) Cf[ina] <- na.print
     if(P.values) {
         if(!is.logical(signif.stars) || is.na(signif.stars)) {
-            warning("option \"show.signif.stars\" is invalid: assuming TRUE")
+            warning(gettextf("option \"%s\" is invalid: assuming TRUE", "show.signif.stars"))
             signif.stars <- TRUE
         }
 	if(any(okP <- ok[,nc])) {
@@ -158,8 +163,7 @@ printCoefmat <-
 	if((w <- getOption("width")) < nchar(sleg <- attr(Signif,"legend")))# == 46
 	    sleg <- strwrap(sleg, width = w - 2, prefix = "  ")
 	##"FIXME": Double space __ is for reproducibility, rather than by design
-	cat("---\nSignif. codes:  ", sleg, sep = "",
-	    fill = w+4 + max(nchar(sleg,"bytes") - nchar(sleg)))# +4: "---"
+	cat("---\n", gettext("Signif. codes:  ", domain = "R-stats"), sleg, sep = "", fill = w+4 + max(nchar(sleg,"bytes") - nchar(sleg)))# +4: "---"
     }
     invisible(x)
 }
@@ -170,9 +174,9 @@ print.anova <- function(x, digits = max(getOption("digits") - 2L, 3L),
     if (!is.null(heading <- attr(x, "heading")))
 	cat(heading, sep = "\n")
     nc <- dim(x)[2L]
-    if(is.null(cn <- colnames(x))) stop("'anova' object must have colnames")
+    if(is.null(cn <- colnames(x))) stop("an object of class \"anova\" must have colnames")
     has.P <- grepl("^(P|Pr)\\(", cn[nc]) # P-value as last column
-    zap.i <- 1L:(if(has.P) nc-1 else nc)
+    zap.i <- if(has.P) seq_len(nc-1) else seq_len(nc)
     i <- which(substr(cn,2,7) == " value")
     i <- c(i, which(!is.na(match(cn, c("F", "Cp", "Chisq")))))
     if(length(i)) zap.i <- zap.i[!(zap.i %in% i)]

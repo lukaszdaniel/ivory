@@ -39,18 +39,18 @@ validDetails.axis <- function(x) {
     x$at <- as.numeric(x$at)
     if (length(x$at) < 1 ||
         !is.finite(x$at))
-      stop("invalid 'at' location in 'axis'")
+      stop(gettextf("invalid '%s' component of argument 'x'", "at"))
   }
   if (!is.logical(x$label)) {
     # labels specified
     # Can only spec labels if at is not NULL
     if (is.null(x$at))
-      stop("invalid to specify axis labels when 'at' is NULL")
+      stop(gettextf("invalid to specify axis labels when 'at' component of argument 'x' is NULL", "at"))
     # Must be either language object or string
     x$label <- as.graphicsAnnot(x$label)
     # Must be same number of labels as "at" locations
     if (length(x$label) != length(x$at))
-      stop("'labels' and 'at' locations must have same length")
+      stop(gettextf("'%s' and '%s' components of argument 'x' must have same length", "labels", "at"))
   }
   x$main <- as.logical(x$main)
   x
@@ -168,7 +168,7 @@ grid.xaxis <- function(at=NULL, label=TRUE, main=TRUE,
     major <- make.xaxis.major(at, main)
     ticks <- make.xaxis.ticks(at, main)
     if (is.logical(label) && length(label) == 0)
-	stop("logical 'label' supplied of length 0")
+	stop("'label' argument must be of length > 0")
     if (is.logical(label) && !label)
       labels <- NULL
     else
@@ -296,7 +296,7 @@ grid.yaxis <- function(at=NULL, label=TRUE, main=TRUE,
     major <- make.yaxis.major(at, main)
     ticks <- make.yaxis.ticks(at, main)
     if (is.logical(label) && length(label) == 0)
-	stop("logical 'label' supplied of length 0")
+	stop("'label' argument must be of length > 0")
     if (is.logical(label) && !label)
       labels <- NULL
     else

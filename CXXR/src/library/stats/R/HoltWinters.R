@@ -43,15 +43,15 @@ function (x,
     f <- frequency(x)
 
     if(!is.null(alpha) && (alpha == 0))
-        stop ("cannot fit models without level ('alpha' must not be 0 or FALSE)")
+        stop("cannot fit models without level ('alpha' must not be 0 or FALSE)")
     if(!all(is.null(c(alpha, beta, gamma))) &&
         any(c(alpha, beta, gamma) < 0 || c(alpha, beta, gamma) > 1))
-        stop ("'alpha', 'beta' and 'gamma' must be within the unit interval")
+        stop("'alpha', 'beta' and 'gamma' must be within the unit interval")
     if((is.null(gamma) || gamma > 0)) {
         if (seasonal == "multiplicative" && any(x == 0))
-            stop ("data must be non-zero for multiplicative Holt-Winters")
+            stop("data must be non-zero for multiplicative Holt-Winters")
         if (start.periods < 2)
-            stop ("need at least 2 periods to compute seasonal start values")
+            stop("need at least 2 periods to compute seasonal start values")
     }
 
     ## initialization
@@ -71,8 +71,7 @@ function (x,
         wind       <- start.periods * f
 
         ## decompose series
-        st <- decompose(ts(x[1L:wind], start = start(x), frequency = f),
-                        seasonal)
+        st <- decompose(ts(x[seq_len(wind)], start = start(x), frequency = f), seasonal)
 
 	if (is.null(l.start) || is.null(b.start)) {
 	    ## level & intercept
@@ -86,7 +85,7 @@ function (x,
 
     ## Call to filtering loop
     lenx <- as.integer(length(x))
-    if (is.na(lenx)) stop("invalid length(x)")
+    if (is.na(lenx)) stop(gettextf("invalid '%s' value", "length(x)"))
 
     len <- lenx - start.time + 1
     hw <- function(alpha, beta, gamma)
@@ -129,8 +128,7 @@ function (x,
                                control = optim.control)
                 if(sol$convergence || any(sol$par < 0 | sol$par > 1)) {
                     if (sol$convergence > 50) {
-                        warning(gettextf("optimization difficulties: %s",
-                                         sol$message), domain = NA)
+                        warning(gettextf("optimization difficulties: %s", sol$message), domain = "R-stats")
                     } else stop("optimization failure")
                 }
                 alpha <- sol$par[1L]
@@ -146,8 +144,7 @@ function (x,
                                control = optim.control)
                 if(sol$convergence || any(sol$par < 0 | sol$par > 1)) {
                     if (sol$convergence > 50) {
-                        warning(gettextf("optimization difficulties: %s",
-                                         sol$message), domain = NA)
+                        warning(gettextf("optimization difficulties: %s", sol$message), domain = "R-stats")
                     } else stop("optimization failure")
                 }
                 alpha <- sol$par[1L]
@@ -165,8 +162,7 @@ function (x,
                                control = optim.control)
                 if(sol$convergence || any(sol$par < 0 | sol$par > 1)) {
                     if (sol$convergence > 50) {
-                        warning(gettextf("optimization difficulties: %s",
-                                         sol$message), domain = NA)
+                        warning(gettextf("optimization difficulties: %s", sol$message), domain = "R-stats")
                     } else stop("optimization failure")
                 }
                 beta  <- sol$par[1L]
@@ -192,8 +188,7 @@ function (x,
                                control = optim.control)
                 if(sol$convergence || any(sol$par < 0 | sol$par > 1)) {
                     if (sol$convergence > 50) {
-                        warning(gettextf("optimization difficulties: %s",
-                                         sol$message), domain = NA)
+                        warning(gettextf("optimization difficulties: %s", sol$message), domain = "R-stats")
                     } else stop("optimization failure")
                 }
                 alpha <- sol$par[1L]
@@ -224,7 +219,7 @@ function (x,
                        trend  = if (!is.logical(beta) || beta)
                            final.fit$trend[-len-1],
                        season = if (!is.logical(gamma) || gamma)
-                           final.fit$seasonal[1L:len]),
+                           final.fit$seasonal[seq_len(len)]),
                  start = start(lag(x, k = 1 - start.time)),
                  frequency  = frequency(x)
                  )
@@ -241,7 +236,7 @@ function (x,
                    gamma     = gamma,
                    coefficients = c(a = final.fit$level[len + 1],
                                     b = if (!is.logical(beta) || beta) final.fit$trend[len + 1],
-                                    s = if (!is.logical(gamma) || gamma) final.fit$seasonal[len + 1L:f]),
+                                    s = if (!is.logical(gamma) || gamma) final.fit$seasonal[len + seq_len(f)]),
                    seasonal  = seasonal,
                    SSE       = final.fit$SSE,
                    call      = match.call()
@@ -262,7 +257,7 @@ predict.HoltWinters <-
             object$alpha * (1 + j * object$beta) +
                 (j %% f == 0) * object$gamma * (1 - object$alpha)
         var(residuals(object)) * if (object$seasonal == "additive")
-            sum(1, (h > 1) * sapply(1L:(h-1), function(j) crossprod(psi(j))))
+            sum(1, ifelse(h > 1, sapply(seq_len(h-1), function(j) crossprod(psi(j))), 0))
         else {
             rel <- 1 + (h - 1) %% f
             sum(sapply(0:(h-1), function(j) crossprod (psi(j) * object$coefficients[2 + rel] / object$coefficients[2 + (rel - j) %% f])))
@@ -274,26 +269,23 @@ predict.HoltWinters <-
     fit <- rep(as.vector(object$coefficients[1L]) ,n.ahead)
     # trend
     if (!is.logical(object$beta) || object$beta)
-        fit <- fit + as.vector((1L:n.ahead)*object$coefficients[2L])
+        fit <- fit + as.vector(seq_len(n.ahead)*object$coefficients[2L])
         # seasonal component
     if (!is.logical(object$gamma) || object$gamma)
         if (object$seasonal == "additive")
-            fit <- fit + rep(object$coefficients[-(1L:(1+(!is.logical(object$beta) || object$beta)))],
-                             length.out=length(fit))
+            fit <- fit + rep(object$coefficients[-(seq_len(1+(!is.logical(object$beta) || object$beta)))], length.out=length(fit))
         else
-            fit <- fit * rep(object$coefficients[-(1L:(1+(!is.logical(object$beta) || object$beta)))],
-                             length.out=length(fit))
+            fit <- fit * rep(object$coefficients[-(seq_len(1+(!is.logical(object$beta) || object$beta)))], length.out=length(fit))
 
     ## compute prediction intervals
     if (prediction.interval)
-      int <- qnorm((1 + level) / 2) * sqrt(sapply(1L:n.ahead,vars))
+      int <- qnorm((1 + level) / 2) * sqrt(sapply(seq_len(n.ahead), vars))
     ts(
        cbind(fit = fit,
              upr = if(prediction.interval) fit + int,
              lwr = if(prediction.interval) fit - int
              ),
-       start = end(lag(fitted(object)[,1], k = -1)),
-       frequency  = frequency(fitted(object)[,1])
+       start = end(lag(fitted(object)[,1], k = -1)), frequency  = frequency(fitted(object)[,1])
        )
 }
 
@@ -303,7 +295,7 @@ plot.HoltWinters <-
     function (x, predicted.values = NA, intervals = TRUE, separator = TRUE,
               col = 1, col.predicted = 2, col.intervals = 4, col.separator = 1,
               lty = 1, lty.predicted = 1, lty.intervals = 1, lty.separator = 3,
-              ylab = "Observed / Fitted", main = "Holt-Winters filtering",
+              ylab = gettext("Observed / Fitted"), main = gettext("Holt-Winters filtering"),
               ylim = NULL, ...)
 {
     if (is.null(ylim))
@@ -340,18 +332,30 @@ plot.HoltWinters <-
 ## print function
 print.HoltWinters <- function (x, ...)
 {
-    cat("Holt-Winters exponential smoothing",
-        if (is.logical(x$beta) && !x$beta) "without" else "with", "trend and",
-        if (is.logical(x$gamma) && !x$gamma) "without" else
-        paste0(if (is.logical(x$beta) && !x$beta) "with ", x$seasonal),
-        "seasonal component.")
-    cat("\n\nCall:\n", deparse (x$call), "\n\n", sep = "")
-    cat("Smoothing parameters:\n")
+    if (is.logical(x$beta) && !x$beta)
+     if (is.logical(x$gamma) && !x$gamma)
+      cat(gettext("Holt-Winters exponential smoothing without trend and without seasonal component.", domain = "R-stats"))
+     else
+	if (x$seasonal == "additive")
+         cat(gettext("Holt-Winters exponential smoothing without trend and with additive seasonal component.", domain = "R-stats"))
+	else
+         cat(gettext("Holt-Winters exponential smoothing without trend and with multiplicative seasonal component.", domain = "R-stats"))
+    else
+     if (is.logical(x$gamma) && !x$gamma)
+      cat(gettext("Holt-Winters exponential smoothing with trend and without seasonal component.", domain = "R-stats"))
+     else
+	if (x$seasonal == "additive")
+         cat(gettext("Holt-Winters exponential smoothing with trend and additive seasonal component.", domain = "R-stats"))
+	else
+         cat(gettext("Holt-Winters exponential smoothing with trend and multiplicative seasonal component.", domain = "R-stats"))
+
+    cat("\n\n", gettext("Call:", domain = "R-stats"), "\n", deparse (x$call), "\n\n", sep = "")
+    cat(gettext("Smoothing parameters:", domain = "R-stats"), "\n", sep = "")
     cat(" alpha: ", x$alpha, "\n", sep = "")
     cat(" beta : ", x$beta, "\n", sep = "")
     cat(" gamma: ", x$gamma, "\n\n", sep = "")
 
-    cat("Coefficients:\n")
+    cat(gettext("Coefficients:", domain = "R-stats"), "\n", sep = "")
     print(t(t(x$coefficients)))
     invisible(x)
 }
@@ -384,7 +388,7 @@ function (x, type = c("additive", "multiplicative"), filter = NULL)
     periods <- l %/% f
     index <- seq.int(1L, l, by = f) - 1L
     figure <- numeric(f)
-    for (i in 1L:f)
+    for (i in seq_len(f))
         figure[i] <- mean(season[index + i], na.rm = TRUE)
 
     ## normalize figure
@@ -392,8 +396,7 @@ function (x, type = c("additive", "multiplicative"), filter = NULL)
         figure - mean(figure)
     else figure / mean(figure)
 
-    seasonal <- ts(rep(figure, periods+1)[seq_len(l)],
-                   start = start(x), frequency = f)
+    seasonal <- ts(rep(figure, periods+1)[seq_len(l)], start = start(x), frequency = f)
 
     ## return values
     structure(list(x = x,
@@ -419,7 +422,7 @@ plot.decomposed.ts <- function(x, ...)
                seasonal = x$seasonal,
                random   = x$random
                ),
-         main = paste("Decomposition of", x$type, "time series"),
+         main = if (x$type == "additive") gettext("Decomposition of additive time series") else gettext("Decomposition of multiplicative time series"),
          ...)
 }
 

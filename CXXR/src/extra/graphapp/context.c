@@ -237,7 +237,7 @@ HDC get_context(object obj)
     }
     else {
 	return NULL;
-	/* apperror("Cannot find DC for non-drawable object."); */
+	/* apperror(_("Cannot find DC for non-drawable object.")); */
     }
 
     /* We only select in the brush or pen we need, when we

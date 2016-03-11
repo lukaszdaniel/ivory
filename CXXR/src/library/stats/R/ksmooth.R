@@ -22,7 +22,7 @@ ksmooth <-
 {
     ## box is [-0.5, 0.5]. normal is sd = 1.4826/4
     if(missing(y) || is.null(y))
-	stop("numeric y must be supplied.\nFor density estimation use density()")
+	stop("numeric 'y' argument must be supplied.\nFor density estimation use 'density()'")
     kernel <- match.arg(kernel)
     krn <- switch(kernel, "box" = 1L, "normal" = 2L)
     x.points <-

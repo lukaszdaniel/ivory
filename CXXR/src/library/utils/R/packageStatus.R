@@ -104,17 +104,17 @@ summary.packageStatus <- function(object, ...)
 
 print.summary.packageStatus <- function(x, ...)
 {
-    cat("\nInstalled packages:\n")
+    cat("\n", gettext("Installed packages:", domain = "R-utils"), "\n", sep = "")
     cat(  "-------------------\n")
     for(k in seq_along(x$Libs)) {
-        cat("\n*** Library ", names(x$Libs)[k], "\n", sep = "")
+        cat("\n*** ", gettextf("Library %s", names(x$Libs)[k], domain = "R-utils"), "\n", sep = "")
 	print(x$Libs[[k]], ...)
     }
-    cat("\n\nAvailable packages:\n")
+    cat("\n\n", gettext("Available packages:", domain = "R-utils"), "\n", sep = "")
     cat(    "-------------------\n")
-    cat("(each package appears only once)\n")
+    cat(gettext("(each package appears only once)", domain = "R-utils"), "\n", sep = "")
     for(k in seq_along(x$Repos)){
-        cat("\n*** Repository ", names(x$Repos)[k], "\n", sep = "")
+        cat("\n*** ", gettextf("Repository %s", names(x$Repos)[k], domain = "R-utils"), "\n", sep = "")
 	print(x$Repos[[k]], ...)
     }
     invisible(x)
@@ -122,10 +122,10 @@ print.summary.packageStatus <- function(x, ...)
 
 print.packageStatus <- function(x, ...)
 {
-    cat("Number of installed packages:\n")
+    cat(gettext("Number of installed packages:", domain = "R-utils"), "\n", sep = "")
     print(table(x$inst$LibPath, x$inst$Status), ...)
 
-    cat("\nNumber of available packages (each package counted only once):\n")
+    cat("\n", gettext("Number of available packages (each package counted only once):", domain = "R-utils"), "\n", sep = "")
     print(table(x$avail$Repository, x$avail$Status), ...)
     invisible(x)
 }
@@ -147,7 +147,7 @@ upgrade.packageStatus <- function(object, ask=TRUE, ...)
     update <- NULL
     old <- which(object$inst$Status == "upgrade")
     if(length(old) == 0L) {
-        cat("Nothing to do!\n")
+        cat(gettext("Nothing to do!", domain = "R-utils"), "\n", sep = "")
         return(invisible())
     }
 
@@ -166,9 +166,9 @@ upgrade.packageStatus <- function(object, ask=TRUE, ...)
             cat(pkg, ":\n")
             askprint(object$inst[k,c("Version", "LibPath")])
             askprint(object$avail[pkg, c("Version", "Repository")])
-            answer <- substr(readline("Update (y/N/x)?  "), 1L, 1L)
+            answer <- substr(readline(gettext("Update (y/N/x)?  ", domain = "R-utils")), 1L, 1L)
             if(answer == "c" | answer == "c") {
-                cat("cancelled by user\n")
+                cat(gettext("cancelled by user", domain = "R-utils"), "\n", sep = "")
                 return(invisible())
             }
             if(answer == "y" | answer == "Y")

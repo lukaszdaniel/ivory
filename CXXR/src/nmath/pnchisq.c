@@ -61,7 +61,7 @@ double pnchisq(double x, double df, double ncp, int lower_tail, int log_p)
 	    ans = fmin2(ans, R_D__1);  /* e.g., pchisq(555, 1.01, ncp = 80) */
 	} else { /* !lower_tail */
 	    /* since we computed the other tail cancellation is likely */
-	    if(ans < (log_p ? (-10. * M_LN10) : 1e-10)) ML_ERROR(ME_PRECISION, "pnchisq");
+	    if(ans < (log_p ? (-10. * M_LN10) : 1e-10)) ML_ERROR(ME_PRECISION, "pnchisq()");
 	    if(!log_p) ans = fmax2(ans, 0.0);  /* Precaution PR#7099 */
 	}
     }

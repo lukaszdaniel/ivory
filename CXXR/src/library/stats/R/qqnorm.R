@@ -19,8 +19,8 @@
 qqnorm <- function(y, ...) UseMethod("qqnorm")
 
 qqnorm.default <-
-    function(y, ylim, main = "Normal Q-Q Plot",
-	     xlab = "Theoretical Quantiles", ylab = "Sample Quantiles",
+    function(y, ylim, main = gettext("Normal Q-Q Plot"),
+	     xlab = gettext("Theoretical Quantiles"), ylab = gettext("Sample Quantiles"),
 	     plot.it = TRUE, datax = FALSE, ...)
 {
     if(has.na <- any(ina <- is.na(y))) { ## keep NA's in proper places
@@ -28,7 +28,7 @@ qqnorm.default <-
         y <- y[!ina]
     }
     if(0 == (n <- length(y)))
-        stop("y is empty or has only NAs")
+        stop("'y' argument is empty or has only NA values")
     if (plot.it && missing(ylim))
         ylim <- range(y)
     x <- qnorm(ppoints(n))[order(order(y))]

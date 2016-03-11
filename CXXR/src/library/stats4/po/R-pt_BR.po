@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2012-07-12 12:59\n"
+"POT-Creation-Date: 2014-07-19 18:11\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -17,6 +17,63 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Pootle 2.0.5\n"
 
+#. R/mle.R: stop("'start' must be a named list")
+#: R/mle.R:0
+msgid "'start' must be a named list"
+msgstr "'start' deve ser uma lista noemada"
+
+#. R/mle.R: gettext("Call:", domain = "R-stats4")
+#. R/mle.R: gettext("Call:", domain = "R-stats4")
+#: R/mle.R:0
+msgid "Call:"
+msgstr ""
+
+#. R/mle.R: gettext("Coefficients:", domain = "R-stats4")
+#. R/mle.R: gettext("Coefficients:", domain = "R-stats4")
+#: R/mle.R:0
+msgid "Coefficients:"
+msgstr ""
+
+#. R/mle.R: gettext("Maximum likelihood estimation", domain = "R-stats4")
+#: R/mle.R:0
+msgid "Maximum likelihood estimation"
+msgstr ""
+
+#. R/mle.R: gettextf("Parameter: %s down", pi, domain = "R-stats4")
+#: R/mle.R:0
+msgid "Parameter: %s down"
+msgstr ""
+
+#. R/mle.R: gettextf("Parameter: %s up", pi, domain = "R-stats4")
+#: R/mle.R:0
+msgid "Parameter: %s up"
+msgstr ""
+
+#. R/mle.R: gettext("Profiling...", domain = "R-stats4")
+#: R/mle.R:0
+msgid "Profiling..."
+msgstr ""
+
+#. R/mle.R: warning("extra arguments discarded")
+#: R/mle.R:0
+msgid "extra arguments discarded"
+msgstr "argumentos extras descartados"
+
+#. R/mle.R: warning("levels truncated to positive values only")
+#: R/mle.R:0
+msgid "levels truncated to positive values only"
+msgstr "níveis truncados para valores positivos"
+
+#. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
+#: R/mle.R:0
+msgid ""
+"profiling has found a better solution, so original fit had not converged"
+msgstr ""
+"análise do perfil encontrou uma solução melhor, então ajuste inicial não "
+"convergiu"
+
+#. R/mle.R: stop("some named arguments in 'fixed' are not arguments to the supplied log-likelihood")
+#: R/mle.R:0
 msgid ""
 "some named arguments in 'fixed' are not arguments to the supplied log-"
 "likelihood"
@@ -24,27 +81,14 @@ msgstr ""
 "alguns argumentos em 'fixed' não são argumentos para a log-verossimilhança "
 "fornecida"
 
-msgid "'start' must be a named list"
-msgstr "'start' deve ser uma lista noemada"
-
+#. R/mle.R: stop("some named arguments in 'start' are not arguments to the supplied log-likelihood")
+#: R/mle.R:0
 msgid ""
 "some named arguments in 'start' are not arguments to the supplied log-"
 "likelihood"
 msgstr ""
 "alguns argumentos nomeados em 'start' não são argumentos para a log-"
 "verossimilhança fornecida"
-
-msgid ""
-"profiling has found a better solution, so original fit had not converged"
-msgstr ""
-"análise do perfil encontrou uma solução melhor, então ajuste inicial não "
-"convergiu"
-
-msgid "levels truncated to positive values only"
-msgstr "níveis truncados para valores positivos"
-
-msgid "extra arguments discarded"
-msgstr "argumentos extras descartados"
 
 #~ msgid "empty model supplied"
 #~ msgstr "modelo provido é vazio"

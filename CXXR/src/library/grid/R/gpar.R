@@ -39,8 +39,7 @@ validGP <- function(gpars) {
   # Check a (non-NULL) gpar is not of length 0
   check.length <- function(gparname) {
     if (length(gpars[[gparname]]) == 0)
-      stop(gettextf("'gpar' element '%s' must not be length 0", gparname),
-           domain = NA)
+      stop(gettextf("'gpar' element '%s' must not be length 0", gparname), domain = "R-grid")
   }
   # Check a gpar is numeric and not NULL
   numnotnull <- function(gparname) {
@@ -103,12 +102,12 @@ validGP <- function(gpars) {
   numnotnull("linemitre")
   if (!is.na(match("linemitre", names(gpars)))) {
     if (any(gpars$linemitre < 1))
-      stop("invalid 'linemitre' value")
+      stop(gettextf("invalid '%s' value", "linemitre"))
   }
   # alpha should be 0 to 1
   if (!is.na(match("alpha", names(gpars)))) {
     if (any(gpars$alpha < 0 || gpars$alpha > 1))
-      stop("invalid 'alpha' value")
+      stop(gettextf("invalid '%s' value", "alpha"))
   }
   # font should be integer and not NULL
   if (!is.na(match("font", names(gpars)))) {
@@ -182,7 +181,7 @@ validGP <- function(gpars) {
 
 set.gpar <- function(gp) {
   if (!is.gpar(gp))
-    stop("argument must be a 'gpar' object")
+    stop(gettextf("'%s' argument is not an object of class %s", "gp", dQuote("gpar")))
   temp <- grid.Call(L_getGPar)
   # gamma defunct in 2.7.0
   if ("gamma" %in% names(gp)) {

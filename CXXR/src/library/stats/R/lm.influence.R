@@ -244,7 +244,7 @@ influence.measures <- function(model)
     si <- infl$sigma
     h <- infl$hat
     dfbetas <- infl$coefficients / outer(infl$sigma, sqrt(diag(xxi)))
-    vn <- variable.names(model); vn[vn == "(Intercept)"] <- "1_"
+    vn <- variable.names(model); vn[vn == gettext("(Intercept)", domain = "R-stats")] <- "1_"
     colnames(dfbetas) <- paste("dfb",abbreviate(vn),sep=".")
     ## Compatible to dffits():
     dffits <- e*sqrt(h)/(si*(1-h))
@@ -268,7 +268,7 @@ influence.measures <- function(model)
 print.infl <- function(x, digits = max(3L, getOption("digits") - 4L), ...)
 {
     ## `x' : as the result of  influence.measures(.)
-    cat("Influence measures of\n\t", deparse(x$call),":\n\n")
+    cat(gettextf("Influence measures of\n\t%s:", paste(deparse(x$call), collapse = ""), domain = "R-stats"),"\n\n", sep = "")
     is.star <- apply(x$is.inf, 1L, any, na.rm = TRUE)
     print(data.frame(x$infmat,
 		     inf = ifelse(is.star, "*", " ")),
@@ -285,8 +285,7 @@ summary.infl <-
     is.inf[is.na(is.inf)] <- FALSE
      is.star <- apply(is.inf, 1L, any)
     is.inf <- is.inf[is.star,]
-    cat("Potentially influential observations of\n\t",
-	deparse(object$call),":\n")
+    cat(gettextf("Potentially influential observations of\n\t%s", paste(deparse(object$call), collapse = ""), domain = "R-stats"),"\n", sep = "")
     if(any(is.star)) {
 	imat <- object $ infmat[is.star,, drop = FALSE]
 	if(is.null(rownam <- dimnames(object $ infmat)[[1L]]))
@@ -299,7 +298,7 @@ summary.infl <-
 	      quote = FALSE)
 	invisible(imat)
     } else {
-	cat("NONE\n")
+	cat(gettext("NONE", domain = "R-stats"), "\n", sep = "")
 	numeric()
     }
 }

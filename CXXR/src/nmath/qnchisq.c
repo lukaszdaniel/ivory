@@ -65,7 +65,7 @@ double qnchisq(double p, double df, double ncp, int lower_tail, int log_p)
 
     if(!lower_tail && ncp >= 80) {
 	/* in this case, pnchisq() works via lower_tail = TRUE */
-	if(pp < 1e-10) ML_ERROR(ME_PRECISION, "qnchisq");
+	if(pp < 1e-10) ML_ERROR(ME_PRECISION, "qnchisq()");
 	p = /* R_DT_qIv(p)*/ log_p ? -expm1(p) : (0.5 - (p) + 0.5);
 	lower_tail = TRUE;
     } else {

@@ -21,6 +21,7 @@
 
 #define GRID_MAIN
 #include "grid.h"
+#include "localization.h"
 #include <math.h>
 #include <float.h>
 #include <string.h>
@@ -515,7 +516,7 @@ SEXP L_downviewport(SEXP name, SEXP strict)
          * downViewport() will be recorded on the engine DL!
          */
         char msg[1024];
-        snprintf(msg, 1024, "Viewport '%s' was not found", 
+        snprintf(msg, 1024, _("Viewport '%s' was not found"), 
 		 CHAR(STRING_ELT(name, 0)));
         UNPROTECT(1);    
         error(_(msg));
@@ -659,7 +660,7 @@ SEXP L_downvppath(SEXP path, SEXP name, SEXP strict)
          * downViewport() will be recorded on the engine DL!
          */
         char msg[1024];
-        snprintf(msg, 1024, "Viewport '%s' was not found", 
+        snprintf(msg, 1024, _("Viewport '%s' was not found"), 
 		 CHAR(STRING_ELT(name, 0)));
         UNPROTECT(1);    
         error(_(msg));

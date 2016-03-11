@@ -46,11 +46,11 @@ medpolish <-
 	if(trace.iter) cat(iter, ": ", newsum, "\n", sep = "")
     }
     if(converged) {
-        if(trace.iter) cat("Final: ", newsum, "\n", sep = "")
+        if(trace.iter) cat(gettext("Final: ", domain = "R-stats"), newsum, "\n", sep = "")
     } else
     warning(sprintf(ngettext(maxiter,
                              "medpolish() did not converge in %d iteration",
-                             "medpolish() did not converge in %d iterations"),
+                             "medpolish() did not converge in %d iterations", domain = "R-stats"),
                     maxiter), domain = NA)
     names(r) <- rownames(z)
     names(c) <- colnames(z)
@@ -62,21 +62,21 @@ medpolish <-
 
 print.medpolish <- function(x, digits = getOption("digits"), ...)
 {
-    cat("\nMedian Polish Results (Dataset: \"", x$name, "\")\n", sep = "")
-    cat("\nOverall: ", x$overall, "\n\nRow Effects:\n", sep = "")
+    cat("\n", gettextf("Median Polish Results (Dataset: %s)", sQuote(x$name), domain = "R-stats"), "\n", sep = "")
+    cat("\n", gettext("Overall: ", domain = "R-stats"), x$overall, "\n\n", gettext("Row Effects:", domain = "R-stats"), "\n", sep = "")
     print(x$row, digits = digits, ...)
-    cat("\nColumn Effects:\n")
+    cat("\n", gettext("Column Effects:", domain = "R-stats"), "\n", sep = "")
     print(x$col, digits = digits, ...)
-    cat("\nResiduals:\n")
+    cat("\n", gettext("Residuals:", domain = "R-stats"), "\n", sep = "")
     print(x$residuals, digits = max(2L, digits - 2L), ...)
     cat("\n")
     invisible(x)
 }
 
-plot.medpolish <- function(x, main = "Tukey Additivity Plot", ...)
+plot.medpolish <- function(x, main = gettext("Tukey Additivity Plot", domain = "R-stats"), ...)
 {
     plot(outer(x$row,x$col)/x$overall, x$residuals,
-	 main = main, xlab = "Diagnostic Comparison Values",
-	 ylab = "Residuals", ...)
+	 main = main, xlab = gettext("Diagnostic Comparison Values", domain = "R-stats"),
+	 ylab = gettext("Residuals", domain = "R-stats"), ...)
     abline(h = 0, v = 0, lty = "dotted")
 }

@@ -39,7 +39,7 @@
 #include <R_ext/Applic.h>	/* Fortran routines */
 #include "ts.h"
 #include "stats.h"
-
+#include "localization.h"
 
 #define MAX_DIM_LENGTH 4
 
@@ -96,7 +96,7 @@ static void matrix_prod(Array mat1, Array mat2, int trans1, int trans2,
 static void assert(int condition)
 {
     if(!condition)
-	error(("assert failed in src/library/ts/src/carray.c"));
+	error(_("assert failed in src/library/ts/src/carray.c"));
 }
 
 static Array init_array(void)
@@ -337,7 +337,7 @@ static void array_op(Array arr1, Array arr2, char op, Array ans)
 		VECTOR(ans)[i] = VECTOR(arr1)[i] - VECTOR(arr2)[i];
 	    break;
 	default:
-	    printf("Unknown op in array_op");
+	    printf(_("Unknown operator in array_op"));
     }
 }
 
@@ -367,7 +367,7 @@ static void scalar_op(Array arr, double s, char op, Array ans)
 		VECTOR(ans)[i] = VECTOR(arr)[i] - s;
 	    break;
 	default:
-	    printf("Unknown op in array_op");
+	    printf(_("Unknown operator in array_op"));
     }
 }
 
@@ -483,7 +483,7 @@ static void qr_solve(Array x, Array y, Array coef)
 		       qraux, pivot, work);
 
     if (rank != p)
-	error(_("Singular matrix in qr_solve"));
+	error(_("Singular matrix in '%s' function"), "qr_solve()");
 
     yt = make_zero_matrix(NCOL(y), NROW(y));
     coeft = make_zero_matrix(NCOL(coef), NROW(coef));
@@ -526,7 +526,7 @@ static double ldet(Array x)
 		       qraux, pivot, work);
 
     if (rank != p)
-	error(_("Singular matrix in ldet"));
+	error(_("Singular matrix in '%s' function"), "ldet()");
 
     for (i = 0, ll=0.0; i < rank; i++) {
 	 ll += log(fabs(MATRIX(xtmp)[i][i]));
@@ -713,7 +713,7 @@ static void burg0(int omax, Array resid_f, Array resid_b, Array *A, Array *B,
 	    array_op(E, tmp, '+', E);
 	    scalar_op(E, 2.0*(n - m - 1), '/', E);
 	}
-	else error(_("Invalid vmethod"));
+	else error(_("invalid '%s' argument"), "vmethod");
 
 	copy_array(E, subarray(V,m+1));
 	copy_array(KA, subarray(P,m+1));

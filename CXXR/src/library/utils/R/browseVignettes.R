@@ -37,9 +37,7 @@ browseVignettes <- function(package = NULL, lib.loc = NULL, all = TRUE)
 print.browseVignettes <- function(x, ...)
 {
     if (length(x) == 0L) {
-        message(gettextf("No vignettes found by %s",
-                         paste(deparse(attr(x, "call")), collapse=" ")),
-                domain = NA)
+        message(gettextf("No vignettes found by %s", paste(deparse(attr(x, "call")), collapse=" ")), domain = "R-utils")
         return(invisible(x))
     }
 
@@ -57,13 +55,9 @@ print.browseVignettes <- function(x, ...)
         sprintf("  <li>%s  -  \n    %s  \n    %s  \n    %s \n  </li>\n",
                 title,
                 ifelse(nzchar(pdf),
-                       sprintf("<a href='%s/%s'>%s</a>&nbsp;",
-                               prefix, pdf, toupper(pdfext)),
-                       ""),
+                       sprintf("<a href='%s/%s'>%s</a>&nbsp;", prefix, pdf, toupper(pdfext)), ""),
 		sprintf("<a href='%s/%s'>source</a>&nbsp;", prefix, src),
-		ifelse(nzchar(rcode),
-                       sprintf("<a href='%s/%s'>R code</a>&nbsp;", prefix, rcode),
-                       ""))
+		ifelse(nzchar(rcode), sprintf("<a href='%s/%s'>R code</a>&nbsp;", prefix, rcode), ""))
     }
 
     port <- tools::startDynamicHelp(NA)
@@ -82,8 +76,7 @@ print.browseVignettes <- function(x, ...)
 <link rel='stylesheet' type='text/css' href='%s'>
 </head>
 <body>\n", css_file))
-    cat(sprintf("<h2>Vignettes found by <code><q>%s</q></code></h2>",
-                paste(deparse(attr(x, "call")), collapse=" ")))
+    cat(sprintf("<h2>Vignettes found by <code><q>%s</q></code></h2>", paste(deparse(attr(x, "call")), collapse=" ")))
     cat("<div class=\"vignettes\">")
     for (pkg in names(x))
     {

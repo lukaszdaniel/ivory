@@ -149,21 +149,21 @@ function(x, y, style = c("table", "list"),
             y <- x[[2L]]; x <- x[[1L]]
         }
         else
-            stop("incorrect value for 'x'")
+            stop(gettextf("incorrect value for '%s' argument", "x"))
     }
     else if(is.matrix(x)) {
         if(NCOL(x) == 2L) {
             y <- x[, 2L]; x <- x[, 1L]
         }
         else
-            stop("incorrect value for 'x'")
+            stop(gettextf("incorrect value for '%s' argument", "x"))
     }
     else if(missing(y) && !is.null(nms <- names(x))) {
         y <- x
         x <- nms
     }
     else if(length(x) != length(y))
-        stop("'x' and 'y' must have the same length")
+        stop(gettextf("'%s' and '%s' arguments must have the same length", "x", "y"))
     x <- as.character(x)
     if(!length(x)) return(x)
     y <- as.character(y)
@@ -173,7 +173,7 @@ function(x, y, style = c("table", "list"),
     if(is.null(indent))
         indent <- switch(style, table = width / 3, list = width / 9)
     if(indent > 0.5 * width)
-        stop("incorrect values of 'indent' and 'width'")
+        stop("incorrect values of 'indent' and 'width' arguments")
 
     indentString <- strrep(" ", indent)
 

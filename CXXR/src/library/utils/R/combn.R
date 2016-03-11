@@ -46,7 +46,7 @@ combn <- function(x, m, FUN = NULL, simplify = TRUE, ...)
     a <- seq_len(m)
     nofun <- is.null(FUN)
     if(!nofun && !is.function(FUN))
-	stop("'FUN' must be a function or NULL")
+	stop("'FUN' argument must be a function or NULL")
     # first result : what kind, what length,.. ?
     len.r <- length(r <- if(nofun) x[a] else FUN(x[a], ...))
     count <- as.integer(round(choose(n, m))) # >= 1

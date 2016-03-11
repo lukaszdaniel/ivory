@@ -48,9 +48,7 @@ function(x, strict = TRUE, regexp, classes = NULL)
     if(length(x)) {
         ok <- grepl(valid_numeric_version_regexp, x)
         if(!all(ok) && strict)
-            stop(gettextf("invalid version specification %s",
-                          paste(sQuote(unique(x[!ok])), collapse = ", ")),
-                 call. = FALSE, domain = NA)
+            stop(gettextf("invalid version specification %s", paste(sQuote(unique(x[!ok])), collapse = ", "), domain = "R-base"), call. = FALSE, domain = NA)
         y[ok] <- lapply(strsplit(x[ok], "[.-]"), as.integer)
     }
     names(y) <- nms
@@ -140,7 +138,7 @@ function(x)
     strrpad <- function(x, char, width)
         paste0(x, strrep(char, width - nchar(x)))
 
-    if(!is.numeric_version(x)) stop("wrong class")
+    if(!is.numeric_version(x)) stop(gettextf("'%s' argument is not an object of class %s", "x", dQuote("numeric_version")))
 
     classes <- class(x)
     nms <- names(x)
@@ -239,15 +237,15 @@ function(x, ..., value)
        if(length(..1) < 2L) {
            if(is.character(value) && length(value) == 1L)
                value <- unclass(as.numeric_version(value))[[1L]]
-           else if(!is.integer(value)) stop("invalid 'value'")
+           else if(!is.integer(value)) stop(gettextf("invalid '%s' value", "value"))
        } else {
            value <- as.integer(value)
-           if(length(value) != 1L) stop("invalid 'value'")
+           if(length(value) != 1L) stop(gettextf("invalid '%s' value", "value"))
        }
        z[[..1]] <- value
    } else {
        value <- as.integer(value)
-       if(length(value) != 1L) stop("invalid 'value'")
+       if(length(value) != 1L) stop(gettextf("invalid '%s' value", "value"))
        z[[..1]][..2] <- value
    }
    structure(z, class = oldClass(x))
@@ -257,13 +255,11 @@ Ops.numeric_version <-
 function(e1, e2)
 {
     if(nargs() == 1L)
-        stop(gettextf("unary '%s' not defined for \"numeric_version\" objects",
-                      .Generic), domain = NA)
+        stop(gettextf("unary '%s' operator is not defined for objects of class %s", .Generic, dQuote("numeric_version")), domain = "R-base")
     boolean <- switch(.Generic, "<" = , ">" = , "==" = , "!=" = ,
         "<=" = , ">=" = TRUE, FALSE)
     if(!boolean)
-        stop(gettextf("'%s' not defined for \"numeric_version\" objects",
-                      .Generic), domain = NA)
+        stop(gettextf("binary '%s' operator is not defined for objects of class %s", .Generic, dQuote("numeric_version")), domain = "R-base")
     if(!is.numeric_version(e1)) e1 <- as.numeric_version(e1)
     if(!is.numeric_version(e2)) e2 <- as.numeric_version(e2)
     n1 <- length(e1)
@@ -281,8 +277,7 @@ function(..., na.rm)
 {
     ok <- switch(.Generic, max = , min = , range = TRUE, FALSE)
     if(!ok)
-        stop(gettextf("%s not defined for \"numeric_version\" objects",
-                      .Generic), domain = NA)
+        stop(gettextf("%s is not defined for objects of class %s", .Generic, dQuote("numeric_version"), domain = "R-base"), domain = NA)
     x <- do.call("c", lapply(list(...), as.numeric_version))
     v <- xtfrm(x)
     if(!na.rm && length(pos <- which(is.na(v)))) {

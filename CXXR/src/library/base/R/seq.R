@@ -25,9 +25,9 @@ seq.default <-
     if((One <- nargs() == 1L) && !missing(from)) {
 	lf <- length(from)
 	return(if(mode(from) == "numeric" && lf == 1L) {
-            if(!is.finite(from)) stop("'from' cannot be NA, NaN or infinite")
-            1L:from
-        } else if(lf) 1L:lf else integer())
+            if(!is.finite(from)) stop(gettextf("'%s' argument cannot be NA, NaN or infinite", "from"))
+            seq_len(from)
+        } else if(lf) seq_len(lf) else integer())
     }
     if(!missing(along.with)) {
 	length.out <- length(along.with)
@@ -35,20 +35,21 @@ seq.default <-
     }
     else if(!missing(length.out)) {
         len <- length(length.out)
-        if(!len) stop("argument 'length.out' must be of length 1")
+        if(!len) stop(gettextf("'%s' argument must be of length 1", "length.out"))
         if(len > 1L) {
             warning("first element used of 'length.out' argument")
             length.out <- length.out[1L]
         }
 	length.out <- ceiling(length.out)
+	#length.out <- as.integer(length.out) #IVORY: maybe we should have this line in order to have: seq_len(12.3) == seq(length.out=12.3)
     }
     chkDots(...)
-    if (!missing(from) && length(from) != 1L) stop("'from' must be of length 1")
-    if (!missing(to) && length(to) != 1L) stop("'to' must be of length 1")
+    if (!missing(from) && length(from) != 1L) stop(gettextf("'%s' argument must be of length 1", "from"))
+    if (!missing(to) && length(to) != 1L) stop(gettextf("'%s' argument must be of length 1", "to"))
     if (!missing(from) && !is.finite(from))
-        stop("'from' cannot be NA, NaN or infinite")
+        stop(gettextf("'%s' argument cannot be NA, NaN or infinite", "from"))
     if (!missing(to) && !is.finite(to))
-        stop("'to' cannot be NA, NaN or infinite")
+        stop(gettextf("'%s' argument cannot be NA, NaN or infinite", "to"))
     if(is.null(length.out))
 	if(missing(by))
 	    from:to
@@ -59,12 +60,12 @@ seq.default <-
 	    if(!(length(n) && is.finite(n))) {
 		if(length(by) && by == 0 && length(del) && del == 0)
 		    return(from)
-		stop("invalid (to - from)/by in seq(.)")
+		stop("invalid '(to - from)/by' in 'seq(.)' function")
 	    }
 	    if(n < 0L)
 		stop("wrong sign in 'by' argument")
 	    if(n > .Machine$integer.max)
-		stop("'by' argument is much too small")
+		stop(gettextf("'%s' argument is much too small", "by"))
 
 	    dd <- abs(del)/max(abs(to), abs(from))
 	    if (dd < 100*.Machine$double.eps) return(from)
@@ -79,7 +80,7 @@ seq.default <-
             }
 	}
     else if(!is.finite(length.out) || length.out < 0L)
-	stop("length must be non-negative number")
+	stop(gettextf("'%s' argument must be non-negative number", "length.out"))
     else if(length.out == 0L) integer()
     else if (One) seq_len(length.out)
     else if(missing(by)) {

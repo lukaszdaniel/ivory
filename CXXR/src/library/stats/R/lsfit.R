@@ -26,16 +26,16 @@ lsfit <- function(x, y, wt = NULL, intercept = TRUE, tolerance = 1e-07,
     xnames <- colnames(x)
     if( is.null(xnames) ) {
 	if(ncol(x) == 1L) xnames <- "X"
-	else xnames <- paste0("X", 1L:ncol(x))
+	else xnames <- paste0("X", seq_len(ncol(x)))
     }
     if( intercept ) {
 	x <- cbind(1, x)
-	xnames <- c("Intercept", xnames)
+	xnames <- c(gettext("Intercept", domain = NA), xnames)
     }
 
     ## find names of y variables (responses)
 
-    if(is.null(yname) && ncol(y) > 1) yname <- paste0("Y", 1L:ncol(y))
+    if(is.null(yname) && ncol(y) > 1) yname <- paste0("Y", seq_len(ncol(y)))
 
     ## remove missing values
 
@@ -44,7 +44,7 @@ lsfit <- function(x, y, wt = NULL, intercept = TRUE, tolerance = 1e-07,
     if( any(!good) ) {
         warning(sprintf(ngettext(sum(!good),
                                  "%d missing value deleted",
-                                 "%d missing values deleted"),
+                                 "%d missing values deleted", domain = "R-stats"),
                         sum(!good)), domain = NA)
 	x <- as.matrix(x)[good, , drop=FALSE]
 	y <- as.matrix(y)[good, , drop=FALSE]
@@ -61,28 +61,28 @@ lsfit <- function(x, y, wt = NULL, intercept = TRUE, tolerance = 1e-07,
     if(nry != nrx)
         stop(sprintf(paste0(ngettext(nrx,
                        "'X' matrix has %d case (row)",
-                       "'X' matrix has %d cases (rows)"),
+                       "'X' matrix has %d cases (rows)", domain = "R-stats"),
               ", ",
               ngettext(nry,
                        "'Y' has %d case (row)",
-                       "'Y' has %d cases (rows)")),
+                       "'Y' has %d cases (rows)", domain = "R-stats")),
                        nrx, nry),
                        domain = NA)
     if(nry < ncx)
         stop(sprintf(paste0(ngettext(nry,
                               "only %d case",
-                              "only %d cases"),
+                              "only %d cases", domain = "R-stats"),
                      ", ",
                      ngettext(ncx,
                               "but %d variable",
-                              "but %d variables")),
+                              "but %d variables", domain = "R-stats")),
                      nry, ncx),
              domain = NA)
     ## check weights if necessary
     if( !is.null(wt) ) {
-	if(any(wt < 0)) stop("negative weights not allowed")
+	if(any(wt < 0)) stop("negative weights are not allowed")
 	if(nwts != nry)
-            stop(gettextf("number of weights = %d should equal %d (number of responses)", nwts, nry), domain = NA)
+            stop(gettextf("number of weights = %d should equal %d (number of responses)", nwts, nry), domain = "R-stats")
 	wtmult <- wt^0.5
 	if(any(wt == 0)) {
 	    xzero <- as.matrix(x)[wt == 0, ]
@@ -158,7 +158,7 @@ ls.diag <- function(ls.out)
 
     good <- complete.cases(resids, ls.out$wt)
     if( any(!good) ) {
-	warning("missing observations deleted")
+	warning("missing observations were deleted")
 	resids <- resids[good, , drop = FALSE]
     }
 
@@ -166,7 +166,7 @@ ls.diag <- function(ls.out)
 
     if( !is.null(ls.out$wt) ) {
 	if( any(ls.out$wt[good] == 0) )
-	    warning("observations with 0 weight not used in calculating standard deviation")
+	    warning("observations with 0 weight were not used in calculating standard deviation")
 	resids <- resids * ls.out$wt[good]^0.5
     }
 
@@ -202,7 +202,7 @@ ls.diag <- function(ls.out)
 
     ## calculate unscaled covariance matrix
 
-    qr <- as.matrix(ls.out$qr$qr[1L:p, 1L:p])
+    qr <- as.matrix(ls.out$qr$qr[seq_len(p), seq_len(p)])
     qr[row(qr)>col(qr)] <- 0
     qrinv <- solve(qr)
     covmat.unscaled <- qrinv%*%t(qrinv)
@@ -235,7 +235,7 @@ ls.print <- function(ls.out, digits = 4L, print.it = TRUE)
     resids <- as.matrix(ls.out$residuals)
     if( !is.null(ls.out$wt) ) {
 	if(any(ls.out$wt == 0))
-	    warning("observations with 0 weights not used")
+	    warning("observations with 0 weight were not used in calculating standard deviation")
 	resids <- resids * ls.out$wt^0.5
     }
     n <- apply(resids, 2L, length) - colSums(is.na(resids))
@@ -272,40 +272,34 @@ ls.print <- function(ls.out, digits = 4L, print.it = TRUE)
 		     format(degfree),
 		     format(n-p),
 		     format(round(pvalue, digits)))
-    dimnames(summary) <- list(Ynames,
-			      c("Mean Sum Sq", "R Squared",
-				"F-value", "Df 1", "Df 2", "Pr(>F)"))
-    mat <- as.matrix(lsqr$qr[1L:p, 1L:p])
+    dimnames(summary) <- list(Ynames, c(gettext("Mean Sum Sq", domain = NA), gettext("R Squared", domain = NA), gettext("F-value", domain = NA), gettext("Df 1", domain = NA), gettext("Df 2", domain = NA), gettext("Pr(>F)", domain = NA)))
+    mat <- as.matrix(lsqr$qr[seq_len(p), seq_len(p)])
     mat[row(mat)>col(mat)] <- 0
     qrinv <- solve(mat)
 
     ## construct coef table
 
     m.y <- ncol(resids)
-    coef.table <- as.list(1L:m.y)
+    coef.table <- as.list(seq_len(m.y))
     if(m.y==1) coef <- matrix(ls.out$coefficients, ncol=1)
     else coef <- ls.out$coefficients
-    for(i in 1L:m.y) {
+    for(i in seq_len(m.y)) {
 	covmat <- (resss[i]/(n[i]-p)) * (qrinv%*%t(qrinv))
 	se <- diag(covmat)^.5
 	coef.table[[i]] <- cbind(coef[, i], se, coef[, i]/se,
 				 2*pt(abs(coef[, i]/se), n[i]-p,
                                       lower.tail = FALSE))
-	dimnames(coef.table[[i]]) <-
-	    list(colnames(lsqr$qr),
-		 c("Estimate", "Std.Err", "t-value", "Pr(>|t|)"))
+	dimnames(coef.table[[i]]) <- list(colnames(lsqr$qr), c(gettext("Estimate", domain = NA), gettext("Std.Err", domain = NA), gettext("t-value", domain = NA), gettext("Pr(>|t|)", domain = NA)))
 
 	##-- print results --
 
 	if(print.it) {
 	    if(m.y>1)
-		cat("Response:", Ynames[i], "\n\n")
-	    cat(paste("Residual Standard Error=",
-                      format(round(resse[i], digits)), "\nR-Square=",
-                      format(round(rsquared[i], digits)), "\nF-statistic (df=",
-		      format(degfree), ", ", format(n[i]-p), ")=",
-		      format(round(fstat[i], digits)), "\np-value=",
-		      format(round(pvalue[i], digits)), "\n\n", sep=""))
+		cat(gettext("Response: ", domain = "R-stats"), Ynames[i], "\n\n", sep = "")
+	    cat(gettextf("Residual Standard Error=%s", format(round(resse[i], digits)), domain = "R-stats"), "\n",
+			gettextf("R-Square=%s", format(round(rsquared[i], digits)), domain = "R-stats"), "\n",
+			gettextf("F-statistic (df=%s, %s)=%s", format(degfree), format(n[i]-p), format(round(fstat[i], digits)), domain = "R-stats"), "\n",
+			gettextf("p-value=%s", format(round(pvalue[i], digits)), domain = "R-stats"), "\n\n", sep = "")
 	    print(round(coef.table[[i]], digits))
 	    cat("\n\n")
 	}

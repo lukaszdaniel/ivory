@@ -19,7 +19,7 @@
 rle <- function(x)
 {
     if (!is.vector(x) && !is.list(x))
-        stop("'x' must be a vector of an atomic type")
+        stop(gettextf("'%s' argument must be a vector of an atomic type", "x"))
     n <- length(x)
     if (n == 0L)
 	return(structure(list(lengths = integer(), values = x),
@@ -33,9 +33,9 @@ rle <- function(x)
 print.rle <- function(x, digits = getOption("digits"), prefix = "", ...)
 {
     if(is.null(digits)) digits <- getOption("digits")
-    cat("", "Run Length Encoding\n", "  lengths:", sep=prefix)
+    cat(prefix, gettext("Run Length Encoding", domain = "R-base"), "\n", prefix, gettext("  lengths:", domain = "R-base"), sep = "")
     utils::str(x$lengths)
-    cat("", "  values :", sep=prefix)
+    cat(prefix, gettext("  values :", domain = "R-base"), sep = "")
     utils::str(x$values, digits.d = digits)
     invisible(x)
 }

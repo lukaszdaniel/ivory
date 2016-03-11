@@ -42,10 +42,10 @@ function(x, y = NULL, legend, fill = NULL, col = par("col"), border="black",
         par(xpd=xpd)
     }
     title <- as.graphicsAnnot(title)
-    if(length(title) > 1) stop("invalid 'title'")
+    if(length(title) > 1) stop(gettextf("invalid '%s' argument", "title"))
     legend <- as.graphicsAnnot(legend)
     n.leg <- if(is.call(legend)) 1 else length(legend)
-    if(n.leg == 0) stop("'legend' is of length 0")
+    if(n.leg == 0) stop("'legend' argument is of length 0")
     auto <-
 	if (is.character(x))
 	    match.arg(x, c("bottomright", "bottom", "bottomleft", "left",
@@ -94,7 +94,7 @@ function(x, y = NULL, legend, fill = NULL, col = par("col"), border="black",
 	text.width <- max(abs(strwidth(legend, units="user",
 				       cex=cex, font = text.font)))
     else if(!is.numeric(text.width) || text.width < 0)
-	stop("'text.width' must be numeric, >= 0")
+	stop("'text.width' argument must be numeric, >= 0")
 
     xc <- Cex * xinch(cin[1L], warn.log=FALSE) # [uses par("usr") and "pin"]
     yc <- Cex * yinch(cin[2L], warn.log=FALSE)
@@ -122,7 +122,7 @@ function(x, y = NULL, legend, fill = NULL, col = par("col"), border="black",
 	if(horiz) {
 	    if(ncol != 1)
                 warning(gettextf("horizontal specification overrides: Number of columns := %d",
-                                 n.leg), domain = NA)
+                                 n.leg), domain = "R-graphics")
 	    ncol <- n.leg
 	    1
 	} else ceiling(n.leg / ncol)

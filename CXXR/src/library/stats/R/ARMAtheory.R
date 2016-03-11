@@ -36,7 +36,7 @@ ARMAacf <- function(ar = numeric(), ma = numeric(), lag.max = r,
             ind <- as.matrix(expand.grid(ind, ind))[, 2L:1L]
             ind[, 2] <- ind[, 1L] + ind[, 2L] - 1L
             A[ind] <- c(1, -ar)
-            A[, 1L:p] <- A[, 1L:p] + A[, p2.1:(p + 2L)]
+            A[,  seq_len(p)] <- A[, seq_len(p)] + A[, p2.1:(p + 2L)]
             rhs <- c(1, rep(0, p))
             if(q > 0) {
                 psi <- c(1, ARMAtoMA(ar, ma, q))
@@ -51,10 +51,10 @@ ARMAacf <- function(ar = numeric(), ma = numeric(), lag.max = r,
             xx <- rep(0, lag.max - p)
             Acf <- c(Acf, filter(xx, ar, "recursive", init = rev(Acf)))
         }
-        Acf <- c(1, Acf[1L:lag.max])
+        Acf <- c(1, Acf[seq_len(lag.max)])
     } else if(q > 0) {
         x <- c(1, ma)
-        Acf <- filter(c(x, rep(0, q)), rev(x), sides=1)[-(1L:q)]
+        Acf <- filter(c(x, rep(0, q)), rev(x), sides=1)[-seq_len(q)]
         if(lag.max > q) Acf <- c(Acf, rep(0, lag.max - q))
         Acf <- Acf/Acf[1L]
     }
@@ -66,12 +66,12 @@ acf2AR <- function(acf)
 {
     r <- as.double(drop(acf))
     order.max <- length(r) - 1
-    if(order.max <= 0) stop("'acf' must be of length two or more")
+    if(order.max <= 0) stop(gettextf("'%s' argument must have length >= %d", "acf", 2))
     z <- .Fortran(C_eureka, as.integer(order.max), r, r,
                   coefs = double(order.max^2), vars = double(order.max),
                   double(order.max))
-    nm <- paste0("ar(",1L:order.max, ")")
-    matrix(z$coefs, order.max, order.max, dimnames=list(nm, 1L:order.max))
+    nm <- paste0("ar(",seq_len(order.max), ")")
+    matrix(z$coefs, order.max, order.max, dimnames=list(nm, seq_len(order.max)))
 }
 
 ARMAtoMA <- function(ar = numeric(), ma = numeric(), lag.max)

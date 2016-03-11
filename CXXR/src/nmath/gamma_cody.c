@@ -55,7 +55,7 @@ double attribute_hidden Rf_gamma_cody(double x)
 /* ----------------------------------------------------------------------
    Mathematical constants
    ----------------------------------------------------------------------*/
-    const static double sqrtpi = .9189385332046727417803297; /* == ??? */
+    //const static double sqrtpi = M_LN_SQRT_2PI; //.9189385332046727417803297; /* == ln(2*pi)/2 */
 
 /* *******************************************************************
 
@@ -225,7 +225,7 @@ double attribute_hidden Rf_gamma_cody(double x)
 	    for (i = 0; i < 6; ++i) {
 		sum = sum / ysq + c[i];
 	    }
-	    sum = sum / y - y + sqrtpi;
+	    sum = sum / y - y + M_LN_SQRT_2PI;
 	    sum += (y - .5) * log(y);
 	    res = exp(sum);
 	} else {

@@ -19,11 +19,11 @@
 svd <- function(x, nu = min(n,p), nv = min(n,p), LINPACK = FALSE)
 {
     x <- as.matrix(x)
-    if (any(!is.finite(x))) stop("infinite or missing values in 'x'")
+    if (any(!is.finite(x))) stop(gettextf("infinite or missing values in '%s' argument", "x"))
     dx <- dim(x)
     n <- dx[1L]
     p <- dx[2L]
-    if(!n || !p) stop("a dimension is zero")
+    if(!n || !p) stop(gettextf("at least one dimension of '%s' argument is 0", "x"))
     La.res <- La.svd(x, nu, nv)
     res <- list(d = La.res$d)
     if (nu) res$u <- La.res$u

@@ -23,7 +23,7 @@ rm <-
     dots <- match.call(expand.dots=FALSE)$...
     if(length(dots) &&
        !all(vapply(dots, function(x) is.symbol(x) || is.character(x), NA, USE.NAMES=FALSE)))
-       stop("... must contain names or character strings")
+       stop("'...' must contain names or character strings")
     names <- vapply(dots, as.character, "")
     if (length(names) == 0L) names <- character()
     list <- .Primitive("c")(list, names)

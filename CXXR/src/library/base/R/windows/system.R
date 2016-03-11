@@ -23,19 +23,19 @@ system <- function(command, intern = FALSE,
                    invisible = TRUE)
 {
     if(!is.logical(intern) || is.na(intern))
-        stop("'intern' must be TRUE or FALSE")
+        stop(gettextf("'%s' argument must be TRUE or FALSE", "intern"))
     if(!is.logical(ignore.stdout) || is.na(ignore.stdout))
-        stop("'ignore.stdout' must be TRUE or FALSE")
+        stop(gettextf("'%s' argument must be TRUE or FALSE", "ignore.stdout"))
     if(!is.logical(ignore.stderr) || is.na(ignore.stderr))
-        stop("'ignore.stderr' must be TRUE or FALSE")
+        stop(gettextf("'%s' argument must be TRUE or FALSE", "ignore.stderr"))
     if(!is.logical(wait) || is.na(wait))
-        stop("'wait' must be TRUE or FALSE")
+        stop(gettextf("'%s' argument must be TRUE or FALSE", "wait"))
     if(!is.logical(show.output.on.console) || is.na(show.output.on.console))
-        stop("'show.output.on.console' must be TRUE or FALSE")
+        stop(gettextf("'%s' argument must be TRUE or FALSE", "show.output.on.console"))
     if(!is.logical(minimized) || is.na(minimized))
-        stop("'minimized' must be TRUE or FALSE")
+        stop(gettextf("'%s' argument must be TRUE or FALSE", "minimized"))
     if(!is.logical(invisible) || is.na(invisible))
-        stop("'invisible' must be TRUE or FALSE")
+        stop(gettextf("'%s' argument must be TRUE or FALSE", "invisible"))
     stdout <- ifelse(ignore.stdout, FALSE, "")
     stderr <- ifelse(ignore.stderr, FALSE, "")
 
@@ -65,11 +65,11 @@ system2 <- function(command, args = character(),
                     wait = TRUE, minimized = FALSE, invisible = TRUE)
 {
     if(!is.logical(wait) || is.na(wait))
-        stop("'wait' must be TRUE or FALSE")
+        stop(gettextf("'%s' argument must be TRUE or FALSE", "wait"))
     if(!is.logical(minimized) || is.na(minimized))
-        stop("'minimized' must be TRUE or FALSE")
+        stop(gettextf("'%s' argument must be TRUE or FALSE", "minimized"))
     if(!is.logical(invisible) || is.na(invisible))
-        stop("'invisible' must be TRUE or FALSE")
+        stop(gettextf("'%s' argument must be TRUE or FALSE", "invisible"))
     command <- paste(c(shQuote(command), env, args), collapse = " ")
 
     if(is.null(stdout)) stdout <- FALSE
@@ -107,14 +107,12 @@ shell <- function(cmd, shell, flag = "/c", intern = FALSE,
     if(!intern && res && !is.na(mustWork))
         if(mustWork)
             if(res == -1L)
-                stop(gettextf("'%s' could not be run", cmd0), domain = NA)
-            else stop(gettextf("'%s' execution failed with error code %d",
-                               cmd0, res), domain = NA)
+                stop(gettextf("'%s' command could not be run", cmd0), domain = "R-base")
+            else stop(gettextf("'%s' command execution failed with error code %d", cmd0, res), domain = "R-base")
         else
             if(res == -1L)
-                warning(gettextf("'%s' could not be run", cmd0), domain = NA)
-            else warning(gettextf("'%s' execution failed with error code %d",
-                                  cmd0, res), domain = NA)
+                warning(gettextf("'%s' command could not be run", cmd0), domain = "R-base")
+            else warning(gettextf("'%s' command execution failed with error code %d", cmd0, res), domain = "R-base")
     if(intern) res else invisible(res)
 }
 

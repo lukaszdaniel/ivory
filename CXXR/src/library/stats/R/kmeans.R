@@ -68,10 +68,10 @@ function(x, centers, iter.max = 10L, nstart = 1L,
 			call. = FALSE)
 	}
 	if(Z$iter > iter.max) {
-	    warning(sprintf(ngettext(iter.max,
-				     "did not converge in %d iteration",
-				     "did not converge in %d iterations"),
-			    iter.max), call. = FALSE, domain = NA)
+    warning(sprintf(ngettext(iter.max,
+                            "kmeans algorithm did not converge in %d iteration",
+                            "kmeans algorithm did not converge in %d iterations", domain = "R-stats"),
+                           iter.max), call. = FALSE, domain = NA)
 	    if(m23) Z$ifault <- 2L
 	}
         if(nmeth %in% c(2L, 3L)) {
@@ -83,8 +83,8 @@ function(x, centers, iter.max = 10L, nstart = 1L,
     }
     x <- as.matrix(x)
     ## as.integer(<too large>) gives NA ==> not allowing too large nrow() / ncol():
-    m <- as.integer(nrow(x)); if(is.na(m)) stop("invalid nrow(x)")
-    p <- as.integer(ncol(x)); if(is.na(p)) stop("invalid ncol(x)")
+    m <- as.integer(nrow(x)); if(is.na(m)) stop(gettextf("invalid '%s' value", "nrow(x)"))
+    p <- as.integer(ncol(x)); if(is.na(p)) stop(gettextf("invalid '%s' value", "ncol(x)"))
     if(missing(centers))
 	stop("'centers' must be a number or a matrix")
     nmeth <- switch(match.arg(algorithm),
@@ -114,10 +114,10 @@ function(x, centers, iter.max = 10L, nstart = 1L,
             stop("more cluster centers than data points")
     }
     k <- as.integer(k)
-    if(is.na(k)) stop("'invalid value of 'k'")
+    if(is.na(k)) stop(gettextf("invalid '%s' value", "k"))
     if (k == 1L) nmeth <- 3L # Hartigan-Wong, (Fortran) needs k > 1
     iter.max <- as.integer(iter.max)
-    if(is.na(iter.max) || iter.max < 1L) stop("'iter.max' must be positive")
+    if(is.na(iter.max) || iter.max < 1L) stop(gettextf("'%s' argument must be positive", "iter.max"))
     if(ncol(x) != ncol(centers))
 	stop("must have same number of columns in 'x' and 'centers'")
     storage.mode(centers) <- "double"
@@ -148,21 +148,20 @@ function(x, centers, iter.max = 10L, nstart = 1L,
 ## modelled on print methods in the cluster package
 print.kmeans <- function(x, ...)
 {
-    cat("K-means clustering with ", length(x$size), " clusters of sizes ",
-        paste(x$size, collapse = ", "), "\n", sep = "")
-    cat("\nCluster means:\n")
+    tmp_N <- paste(x$size, collapse=", ")
+    cat(sprintf(ngettext(length(x$size), "K-means clustering with %d cluster of size %s",
+				"K-means clustering with %d clusters of sizes %s", domain = "R-stats"), length(x$size), tmp_N), "\n", sep = "")
+    cat("\n", gettext("Cluster means:", domain = "R-stats"), "\n", sep = "")
     print(x$centers, ...)
-    cat("\nClustering vector:\n")
+    cat("\n", gettext("Clustering vector:", domain = "R-stats"), "\n", sep = "")
     print(x$cluster, ...)
-    cat("\nWithin cluster sum of squares by cluster:\n")
+    cat("\n", gettext("Within cluster sum of squares by cluster:", domain = "R-stats"), "\n", sep = "")
     print(x$withinss, ...)
-    ratio <- sprintf(" (between_SS / total_SS = %5.1f %%)\n",
-                     100 * x$betweenss/x$totss)
-    cat(sub(".", getOption("OutDec"), ratio, fixed = TRUE),
-	"Available components:\n", sep = "\n")
+    ratio <- gettextf(" (between_SS / total_SS = %5.1f %%)", 100 * x$betweenss/x$totss, domain = "R-stats")
+    cat(sub(".", getOption("OutDec"), ratio, fixed = TRUE), "\n\n", gettext("Available components:", domain = "R-stats"), "\n\n", sep = "")
     print(names(x))
     if(!is.null(x$ifault) && x$ifault == 2L)
-	cat("Warning: did *not* converge in specified number of iterations\n")
+	cat(gettext("Warning: did *not* converge in specified number of iterations\n", domain = "R-stats"))
     invisible(x)
 }
 

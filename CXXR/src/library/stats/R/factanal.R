@@ -96,7 +96,7 @@ factanal <-
     if(dof < 0)
         stop(sprintf(ngettext(factors,
                               "%d factor is too many for %d variables",
-                              "%d factors are too many for %d variables"),
+                              "%d factors are too many for %d variables", domain = "R-stats"),
                      factors, p), domain = NA)
     sds <- sqrt(diag(cv))
     cv <- cv/(sds %o% sds)
@@ -115,17 +115,16 @@ factanal <-
     if(nrow(start) != p)
     stop(sprintf(ngettext(p,
                        "'start' must have %d row",
-                       "'start' must have %d rows"),
+                       "'start' must have %d rows", domain = "R-stats"),
                  p), domain = NA)
     nc <- ncol(start)
-    if(nc < 1) stop("no starting values supplied")
+    if(nc < 1) stop("no starting values specified")
     best <- Inf
     for (i in 1L:nc) {
         nfit <- factanal.fit.mle(cv, factors, start[, i],
                                  max(cn$lower, 0), cn$opt)
         if(cn$trace)
-            cat("start", i, "value:", format(nfit$criteria[1L]),
-                "uniqs:", format(as.vector(round(nfit$uniquenesses, 4))), "\n")
+            cat(gettextf("start %d value: %s uniqs: %s", i, format(nfit$criteria[1L]), format(as.vector(round(nfit$uniquenesses, 4))), domain = "R-stats"), "\n", sep = "")
         if(nfit$converged && nfit$criteria[1L] < best) {
             fit <- nfit
             best <- fit$criteria[1L]
@@ -134,7 +133,7 @@ factanal <-
     if(best == Inf)
         stop(ngettext(nc,
                       "unable to optimize from this starting value",
-                      "unable to optimize from these starting values"),
+                      "unable to optimize from these starting values", domain = "R-stats"),
              domain = NA)
     load <- fit$loadings
     if(rotation != "none") {
@@ -247,7 +246,7 @@ print.loadings <- function(x, digits = 3L, cutoff = 0.1, sort = FALSE, ...)
         mx[abs(Lambda[ind]) < 0.5] <- factors + 1
         Lambda <- Lambda[order(mx, 1L:p),]
     }
-    cat("\nLoadings:\n")
+    cat("\n", gettext("Loadings:", domain = "R-stats"), "\n", sep = "")
     fx <- setNames(format(round(Lambda, digits)), NULL)
     nc <- nchar(fx[1L], type="c")
     fx[abs(Lambda) < cutoff] <- strrep(" ", nc)
@@ -266,8 +265,8 @@ print.loadings <- function(x, digits = 3L, cutoff = 0.1, sort = FALSE, ...)
 
 print.factanal <- function(x, digits = 3, ...)
 {
-    cat("\nCall:\n", deparse(x$call), "\n\n", sep = "")
-    cat("Uniquenesses:\n")
+    cat("\n", gettext("Call:", domain = "R-stats"), "\n", deparse(x$call), "\n\n", sep = "")
+    cat(gettext("Uniquenesses:", domain = "R-stats"), "\n", sep = "")
     print(round(x$uniquenesses, digits), ...)
     print(x$loadings, digits = digits, ...)
                                         # the following lines added by J. Fox, 26 June 2005
@@ -280,7 +279,7 @@ print.factanal <- function(x, digits = 3, ...)
 
                                         # the following line changed by Ulrich Keller, 9 Sept 2008
       if (TRUE != all.equal(c(R), c(diag(factors)))){
-        cat("\nFactor Correlations:\n")
+        cat("\n", gettext("Factor Correlations:", domain = "R-stats"), "\n", sep = "")
         print(R, digits=digits, ...)
       }
 
@@ -289,15 +288,17 @@ print.factanal <- function(x, digits = 3, ...)
                                         # end additions J. Fox, 23 June 2005
     if(!is.null(x$STATISTIC)) {
         factors <- x$factors
-        cat("\nTest of the hypothesis that", factors, if(factors == 1)
-            "factor is" else "factors are", "sufficient.\n")
-        cat("The chi square statistic is", round(x$STATISTIC, 2), "on", x$dof,
-            if(x$dof == 1) "degree" else "degrees",
-            "of freedom.\nThe p-value is", signif(x$PVAL, 3), "\n")
+        cat("\n", sprintf(ngettext(factors,
+				"Test of the hypothesis that %d factor is sufficient.",
+				"Test of the hypothesis that %d factors are sufficient.", domain = "R-stats"),
+				 factors), "\n", sep = "")
+        cat(sprintf(ngettext(x$dof,
+			"The chi square statistic is %s on %d degree of freedom.",
+			"The chi square statistic is %s on %d degrees of freedom.", domain = "R-stats"),
+			round(x$STATISTIC, 2), x$dof), "\n", gettextf("The p-value is %s", signif(x$PVAL, 3), domain = "R-stats"), "\n", sep = "")
     } else {
-        cat(paste("\nThe degrees of freedom for the model is",
-                  x$dof, "and the fit was", round(x$criteria["objective"], 4),
-                  "\n"))
+        cat("\n", gettextf("The degrees of freedom for the model is %d and the fit was %s", x$dof, round(x$criteria["objective"], 4), domain = "R-stats"),
+                  "\n", sep = "")
     }
     invisible(x)
 }

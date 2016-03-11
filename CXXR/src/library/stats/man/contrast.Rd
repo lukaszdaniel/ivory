@@ -15,7 +15,7 @@
 }
 \usage{
 contr.helmert(n, contrasts = TRUE, sparse = FALSE)
-contr.poly(n, scores = 1:n, contrasts = TRUE, sparse = FALSE)
+contr.poly(n, scores = seq_len(n), contrasts = TRUE, sparse = FALSE)
 contr.sum(n, contrasts = TRUE, sparse = FALSE)
 contr.treatment(n, base = 1, contrasts = TRUE, sparse = FALSE)
 contr.SAS(n, contrasts = TRUE, sparse = FALSE)

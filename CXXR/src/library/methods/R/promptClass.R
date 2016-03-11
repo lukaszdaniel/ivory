@@ -93,12 +93,12 @@ function (clName, filename = NULL, type = "class",
         whereClass <- utils::find(classMetaName(clName))
         if(length(whereClass) == 0L)
             stop(gettextf("no definition of class %s found",
-                          dQuote(clName)), domain = NA)
+                          dQuote(clName)), domain = "R-methods")
         else if(length(whereClass) > 1L) {
             if(identical(where, topenv(parent.frame()))) {
                 whereClass <- whereClass[[1L]]
                 warning(gettextf("multiple definitions of %s found; using the one on %s",
-                                 dQuote(clName), whereClass), domain = NA)
+                                 dQuote(clName), whereClass), domain = "R-methods")
             }
             else {
                 if(exists(classMetaName(clName), where, inherits = FALSE))
@@ -106,7 +106,7 @@ function (clName, filename = NULL, type = "class",
                 else
                     stop(sprintf(ngettext(length(whereClass),
                                           "no definition of class %s in the specified position, %s, definition on : %s",
-                                          "no definition of class %s in the specified position, %s, definitions on : %s"),
+                                          "no definition of class %s in the specified position, %s, definitions on : %s", domain = "R-methods"),
                                  dQuote(clName), where,
                                  paste(whereClass, collapse = ", ")),
                          domain = NA)
@@ -265,24 +265,21 @@ function (clName, filename = NULL, type = "class",
     if(is.na(filename)) return(Rdtxt)
 
     cat(unlist(Rdtxt), file = filename, sep = "\n")
-    .message("A shell of class documentation has been written",
-             .fileDesc(filename), ".\n")
+    if(is.character(filename)) {
+        if(nzchar(filename))
+    	    .message(gettextf("A shell of class documentation has been written to the file %s.\n", sQuote(filename), domain = "R-methods"))
+        else
+    	    .message("A shell of class documentation has been written to the standard output connection.\n", domain = "R-methods")
+    }
+    else if(inherits(filename, "connection"))
+    	    .message(gettextf("A shell of class documentation has been written to the connection %s.\n", sQuote(summary(filename)$description)), domain = "R-methods")
+    else # what, indeed?
+    .message("A shell of class documentation has been written.\n", domain = "R-methods")
     invisible(filename)
 }
 
 ## used in promptClass() above and in promptMethods() :
-.fileDesc <- function(file) {
-    if(is.character(file)) {
-	if(nzchar(file))
-	    paste(" to the file", sQuote(file))
-	else
-	    " to the standard output connection"
-    }
-    else if(inherits(file, "connection"))
-	paste(" to the connection",
-              sQuote(summary(file)$description))
-    else "" # what, indeed?
-}
+#R-ELS UPDATE: functionality of .fileDesc() is now incorporated in above methods
 
 refClassPrompt <- function(clDef, Rdtxt, nmeths, nslots, .meths.head) {
     ## exclude some sections that are usually irrelevant

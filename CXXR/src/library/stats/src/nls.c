@@ -30,11 +30,9 @@
 #include <float.h>
 #include <R.h>
 #include <Rinternals.h>
+#include <R_ext/Minmax.h>
 #include "nls.h"
-
-#ifndef MIN
-#define MIN(a,b) (((a)<(b))?(a):(b))
-#endif
+#include "localization.h"
 
 /*
  * get the list element named str. names is the name attribute of list
@@ -64,8 +62,7 @@ static SEXP
 ConvInfoMsg(char* msg, int iter, int whystop, double fac,
 	    double minFac, int maxIter, double convNew)
 {
-    const char *nms[] = {"isConv", "finIter", "finTol",
-			 "stopCode", "stopMessage",  ""};
+    const char *nms[] = {"isConv", "finIter", "finTol", "stopCode", "stopMessage",  ""};
     SEXP ans;
     PROTECT(ans = mkNamed(VECSXP, nms));
 
@@ -96,35 +93,35 @@ nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
     doTrace = asLogical(doTraceArg);
 
     if(!isNewList(control))
-	error(_("'control' must be a list"));
+	error(_("'%s' argument must be a list"), "control");
     if(!isNewList(m))
-	error(_("'m' must be a list"));
+	error(_("'%s' argument must be a list"), "m");
 
     PROTECT(tmp = getAttrib(control, R_NamesSymbol));
 
     conv = getListElement(control, tmp, "maxiter");
     if(conv == NULL || !isNumeric(conv))
-	error(_("'%s' absent"), "control$maxiter");
+	error(_("'%s' is absent"), "control$maxiter");
     maxIter = asInteger(conv);
 
     conv = getListElement(control, tmp, "tol");
     if(conv == NULL || !isNumeric(conv))
-	error(_("'%s' absent"), "control$tol");
+	error(_("'%s' is absent"), "control$tol");
     tolerance = asReal(conv);
 
     conv = getListElement(control, tmp, "minFactor");
     if(conv == NULL || !isNumeric(conv))
-	error(_("'%s' absent"), "control$minFactor");
+	error(_("'%s' is absent"), "control$minFactor");
     minFac = asReal(conv);
 
     conv = getListElement(control, tmp, "warnOnly");
     if(conv == NULL || !isLogical(conv))
-	error(_("'%s' absent"), "control$warnOnly");
+	error(_("'%s' is absent"), "control$warnOnly");
     warnOnly = asLogical(conv);
 
     conv = getListElement(control, tmp, "printEval");
     if(conv == NULL || !isLogical(conv))
-	error(_("'%s' absent"), "control$printEval");
+	error(_("'%s' is absent"), "control$printEval");
     printEval = asLogical(conv);
 
 #define CONV_INFO_MSG(_STR_, _I_)					\
@@ -165,32 +162,32 @@ nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
 
     conv = getListElement(m, tmp, "conv");
     if(conv == NULL || !isFunction(conv))
-	error(_("'%s' absent"), "m$conv()");
+	error(_("'%s' is absent"), "m$conv()");
     PROTECT(conv = lang1(conv));
 
     incr = getListElement(m, tmp, "incr");
     if(incr == NULL || !isFunction(incr))
-	error(_("'%s' absent"), "m$incr()");
+	error(_("'%s' is absent"), "m$incr()");
     PROTECT(incr = lang1(incr));
 
     deviance = getListElement(m, tmp, "deviance");
     if(deviance == NULL || !isFunction(deviance))
-	error(_("'%s' absent"), "m$deviance()");
+	error(_("'%s' is absent"), "m$deviance()");
     PROTECT(deviance = lang1(deviance));
 
     trace = getListElement(m, tmp, "trace");
     if(trace == NULL || !isFunction(trace))
-	error(_("'%s' absent"), "m$trace()");
+	error(_("'%s' is absent"), "m$trace()");
     PROTECT(trace = lang1(trace));
 
     setPars = getListElement(m, tmp, "setPars");
     if(setPars == NULL || !isFunction(setPars))
-	error(_("'%s' absent"), "m$setPars()");
+	error(_("'%s' is absent"), "m$setPars()");
     PROTECT(setPars);
 
     getPars = getListElement(m, tmp, "getPars");
     if(getPars == NULL || !isFunction(getPars))
-	error(_("'%s' absent"), "m$getPars()");
+	error(_("'%s' is absent"), "m$getPars()");
     PROTECT(getPars = lang1(getPars));
 
     PROTECT(pars = eval(getPars, R_GlobalEnv));
@@ -219,8 +216,7 @@ nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
 
 	while(fac >= minFac) {
 	    if(printEval) {
-		Rprintf("  It. %3d, fac= %11.6g, eval (no.,total): (%2d,%3d):",
-			i+1, fac, evalCnt, evaltotCnt);
+		Rprintf("  It. %3d, fac= %11.6g, eval (no.,total): (%2d,%3d):", i + 1, fac, evalCnt, evaltotCnt);
 		evalCnt++;
 		evaltotCnt++;
 	    }
@@ -240,7 +236,7 @@ nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
 		Rprintf(" new dev = %g\n", newDev);
 	    if(newDev <= dev) {
 		dev = newDev;
-		fac = MIN(2*fac, 1);
+		fac = min(2*fac, 1);
 		tmp = newPars;
 		newPars = pars;
 		pars = tmp;
@@ -287,13 +283,13 @@ numeric_deriv(SEXP expr, SEXP theta, SEXP rho, SEXP dir)
     int start, i, j, k, lengthTheta = 0;
 
     if(!isString(theta))
-	error(_("'theta' should be of type character"));
+	error(_("'%s' argument should be of type character"), "theta");
     if (isNull(rho)) {
 	error(_("use of NULL environment is defunct"));
 	rho = R_BaseEnv;
     } else
 	if(!isEnvironment(rho))
-	    error(_("'rho' should be an environment"));
+	    error(_("'%s' argument should be an environment"), "rho");
     PROTECT(dir = coerceVector(dir, REALSXP));
     if(TYPEOF(dir) != REALSXP || LENGTH(dir) != LENGTH(theta))
 	error(_("'dir' is not a numeric vector of the correct length"));

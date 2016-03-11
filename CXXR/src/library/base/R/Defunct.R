@@ -18,10 +18,9 @@
 
 .Defunct <- function(new, package=NULL, msg) {
     if (missing(msg)) {
-	msg <- gettextf("'%s' is defunct.\n",
-			as.character(sys.call(sys.parent())[[1L]]))
+	msg <- gettextf("Function %s is defunct.\n", sQuote(as.character(sys.call(sys.parent())[[1L]])))
 	if(!missing(new))
-	    msg <- c(msg, gettextf("Use '%s' instead.\n", new))
+	    msg <- gettextf("Function %s is defunct.\nUse function %s instead.\n", sQuote(as.character(sys.call(sys.parent())[[1L]])), sQuote(new))
 	msg <- c(msg,
 		 if(!is.null(package))
 		 gettextf("See help(\"Defunct\") and help(\"%s-defunct\").",
@@ -30,7 +29,7 @@
     }
     else msg <- as.character(msg)
 
-    stop(paste(msg, collapse=""), call. = FALSE, domain = NA)
+    stop(paste(msg, collapse = ""), call. = FALSE, domain = "R-base")
 }
 
 ## Version <- function() .Defunct("R.Version")
@@ -172,13 +171,13 @@
 ## Deprecated in 2.12.2 (and only ever experimental)
 ## Defunct in 2.13.0
 ## .Import <- function(...)
-##     .Defunct(msg = "namespaces should be specified via the 'NAMESPACE' file")
+##     .Defunct(msg = gettext("namespaces should be specified via the 'NAMESPACE' file"))
 ## .ImportFrom <- function(name, ...)
-##     .Defunct(msg = "namespaces should be specified via the 'NAMESPACE' file")
+##     .Defunct(msg = gettext("namespaces should be specified via the 'NAMESPACE' file"))
 ## .Export <- function(...)
-##     .Defunct(msg = "namespaces should be specified via the 'NAMESPACE' file")
+##     .Defunct(msg = gettext("namespaces should be specified via the 'NAMESPACE' file"))
 ## .S3method <- function(generic, class, method)
-##     .Defunct(msg = "namespaces should be specified via the 'NAMESPACE' file")
+##     .Defunct(msg = gettext("namespaces should be specified via the 'NAMESPACE' file"))
 ## </entry>
 
 ## <entry>

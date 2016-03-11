@@ -33,7 +33,7 @@ function(..., list = character(), package = NULL, lib.loc = NULL,
     ## directory.
     if(!is.null(package)) {
         if(!is.character(package))
-            stop("'package' must be a character string or NULL")
+            stop("'package' argument must be a character string or NULL")
         if(any(package %in% "base"))
             warning("datasets have been moved from package 'base' to package 'datasets'")
         if(any(package %in% "stats"))
@@ -82,23 +82,19 @@ function(..., list = character(), package = NULL, lib.loc = NULL,
                 if(is.matrix(entries) && ncol(entries) == 2L)
                     db <- rbind(db, cbind(packageName, dirname(path), entries))
                 else
-                    warning(gettextf("data index for package %s is invalid and will be ignored",
-                                     sQuote(packageName)),
-                            domain=NA, call.=FALSE)
+                    warning(gettextf("data index for package %s is invalid and will be ignored", sQuote(packageName)), domain = "R-utils", call.=FALSE)
             }
         }
-        colnames(db) <- c("Package", "LibPath", "Item", "Title")
+	#data() powoduje wyswietlenie komunikatu: Błąd w db[, "Package"]: indeks poza granicami
+        colnames(db) <- c(gettext("Package", domain = "R-utils"), gettext("LibPath", domain = "R-utils"), gettext("Item", domain = "R-utils"), gettext("Title", domain = "R-utils"))
+        #colnames(db) <- c("Package", "LibPath", "Item", "Title")
 
-        footer <- if(missing(package))
-            paste0("Use ",
-                   sQuote(paste("data(package =",
-                                ".packages(all.available = TRUE))")),
-                   "\n",
-                   "to list the data sets in all *available* packages.")
-        else
-            NULL
-        y <- list(title = "Data sets", header = NULL, results = db,
-                  footer = footer)
+        if(missing(package)) {
+         footer <- gettextf("Use %s\nto list the data sets in all *available* packages.", sQuote("data(package = .packages(all.available = TRUE))"), domain = "R-utils")
+        } else {
+         footer <- NULL
+	}
+        y <- list(title = gettext("Data sets", domain = "R-utils"), header = NULL, results = db, footer = footer)
         class(y) <- "packageIQR"
         return(y)
     }
@@ -114,8 +110,7 @@ function(..., list = character(), package = NULL, lib.loc = NULL,
                     ## found it, so copy objects from database
                     found <- TRUE
                     if(verbose)
-                        message(sprintf("name=%s:\t found in Rdata.rds", name),
-                                domain=NA)
+                        message(gettextf("name=%s: found in Rdata.rds", name, domain = "R-utils"), domain = NA)
                     thispkg <- sub(".*/([^/]*)/data$", "\\1", p)
                     thispkg <- sub("_.*$", "", thispkg) # versioned installs.
                     thispkg <- paste0("package:", thispkg)
@@ -124,20 +119,16 @@ function(..., list = character(), package = NULL, lib.loc = NULL,
                              filter = function(x) x %in% objs)
                     break
 		} else if(verbose)
-		    message(sprintf("name=%s:\t NOT found in names() of Rdata.rds, i.e.,\n\t%s\n",
-				    name, paste(names(rds), collapse=",")),
-				domain=NA)
+		    message(gettextf("name=%s: NOT found in names() of Rdata.rds, i.e.,\n\t%s",
+				    name, paste(names(rds), collapse = ",")), domain = "R-utils", "\n", sep = "")
             }
             ## check for zipped data dir
             if(file_test("-f", file.path(p, "Rdata.zip"))) {
-                warning("zipped data found for package ",
-                        sQuote(basename(dirname(p))),
-                        ".\nThat is defunct, so please re-install the package.",
-                        domain = NA)
+                warning(gettextf("zipped data found for package %s.\nThat is defunct, so please re-install the package.", sQuote(basename(dirname(p)))), domain = "R-utils")
                 if(file_test("-f", fp <- file.path(p, "filelist")))
                     files <- file.path(p, scan(fp, what="", quiet = TRUE))
                 else {
-                    warning(gettextf("file 'filelist' is missing for directory %s", sQuote(p)), domain = NA)
+                    warning(gettextf("file 'filelist' is missing for directory %s", sQuote(p)), domain = "R-utils")
                     next
                 }
             } else {
@@ -156,9 +147,7 @@ function(..., list = character(), package = NULL, lib.loc = NULL,
                 ## have a plausible candidate (or more)
                 for(file in files) {
                     if(verbose)
-                        message("name=", name, ":\t file= ...",
-                                .Platform$file.sep, basename(file), "::\t",
-                                appendLF = FALSE, domain = NA)
+                        message(gettextf("name=%s:\t file= ... %s::\t%s", name, .Platform$file.sep, basename(file)), appendLF = FALSE, domain = "R-utils")
                     ext <- fileExt(file)
                     ## make sure the match is really for 'name.ext'
                     if(basename(file) != paste0(name, ".", ext))
@@ -179,8 +168,7 @@ function(..., list = character(), package = NULL, lib.loc = NULL,
                                R = , r = {
                                    ## ensure utils is visible
                                    library("utils")
-                                   sys.source(zfile, chdir = TRUE,
-                                              envir = envir)
+                                   sys.source(zfile, chdir = TRUE, envir = envir)
                                },
                                RData = , rdata = , rda =
                                load(zfile, envir = envir),
@@ -202,14 +190,13 @@ function(..., list = character(), package = NULL, lib.loc = NULL,
                     }
                     if (found) break # from files
                 }
-                if(verbose) message(if(!found) "*NOT* ", "found", domain = NA)
+                if(verbose) message(if(!found) gettext("data *NOT* found") else gettext("data found"), domain = "R-utils")
             }
             if (found) break # from paths
         }
 
         if(!found)
-            warning(gettextf("data set %s not found", sQuote(name)),
-                    domain = NA)
+            warning(gettextf("data set %s not found", sQuote(name)), domain = "R-utils")
     }
     invisible(names)
 }

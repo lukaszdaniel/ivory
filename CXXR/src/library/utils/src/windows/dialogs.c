@@ -30,7 +30,7 @@
 #undef ERROR
 #include <R_ext/RS.h> /* for Calloc */
 
-#include "win-nls.h"
+#include "localization.h"
 #include "rui.h"
 
 #include "Startup.h"
@@ -242,7 +242,7 @@ SEXP winMenuItems(SEXP call, SEXP op, SEXP args, SEXP env)
 
     items = wingetmenuitems(translateChar(STRING_ELT(mname,0)), errmsg);
     if (items->numItems == 0) {
-	snprintf(msgbuf, 256, _("unable to retrieve items for %s (%s)"),
+	snprintf(msgbuf, 256, _("unable to retrieve items for '%s' (%s)"),
 		 translateChar(STRING_ELT(mname,0)), errmsg);
 	freemenuitems(items);
 	errorcall(call, msgbuf);

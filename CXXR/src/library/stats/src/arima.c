@@ -25,15 +25,11 @@
 #include <string.h>
 
 #include <R.h>
+#include <R_ext/Minmax.h>
 #include "ts.h"
 #include "statsR.h" // for getListElement
+#include "localization.h"
 
-#ifndef max
-#define max(a,b) ((a < b)?(b):(a))
-#endif
-#ifndef min
-#define min(a,b) ((a < b)?(a):(b))
-#endif
 
 
 /* 

@@ -109,16 +109,14 @@ function(file, cache = TRUE)
         file <- summary(con)$description
         keep <- TRUE
     } else {
-        stop(gettextf("%s must be a character string or a file/raw connection",
-                      sQuote("file")),
-             domain = NA)
+        stop(gettextf("%s argument must be a character string or a file/raw connection", sQuote("file")), domain = "R-tools")
     }
 
     ## Read header.
     .con_seek(con, 0L)
     header <- rawToChar(read_next_bytes_until_whitespace(con))
     if(substring(header, 1L, 5L) != "%PDF-")
-        stop("PDF header not found")
+        stop("PDF header was not found")
 
     ## Go to the end.
     .con_seek(con, -1L, 3L)
@@ -131,7 +129,7 @@ function(file, cache = TRUE)
     while(!length(bytes))
         bytes <- read_prev_bytes_after_eols(con)
     if(rawToChar(bytes) != "%%EOF")
-        stop("EOF marker not found")
+        stop("EOF marker was not found")
 
     ## Find startxref entry (the location of the xref table).
     ## See PDF Reference version 1.7 section 3.4.4:
@@ -182,7 +180,7 @@ function(file, cache = TRUE)
         if(rawToChar(.con_read_bytes(con, 4L)) == "xref")
             pos
         else
-            stop("cannot find xref table")
+            stop("cannot find 'xref' table")
     }
 
     ## Load the xref info.
@@ -193,7 +191,7 @@ function(file, cache = TRUE)
             ## A standard cross-reference table, hopefully.
             bytes <- read_next_bytes_until_whitespace(con)
             if(!rawToChar(bytes) == "ref")
-                stop("cannot read xref table")
+                stop("cannot read 'xref' table")
             read_next_non_whitespace_and_seek_back(con)
             repeat {
                 bytes <- read_next_bytes_until_whitespace(con)
@@ -327,9 +325,7 @@ function(file, cache = TRUE)
 print.pdf_doc <-
 function(x, ...)
 {
-    writeLines(strwrap(sprintf("PDF document (file \"%s\", %d bytes, %d objects)",
-                               x$file, x$size, x$length),
-                       exdent = 4L))
+    writeLines(strwrap(gettextf("PDF document (file %s, %d bytes, %d objects)", dQuote(x$file), x$size, x$length), exdent = 4L))
     invisible(x)
 }
 
@@ -344,7 +340,7 @@ function(x)
 `[.pdf_doc` <-
 function(x, i)
 {
-    if(!inherits(x, "pdf_doc")) stop("wrong class")
+    if(!inherits(x, "pdf_doc")) stop(gettextf("'%s' argument should be an object of class %s", "x", dQuote("pdf_doc")))
     if(missing(i)) return(pdf_doc_get_objects(x))
     i <- as.character(i)                # For now ...
     out <- vector("list", length(i))
@@ -359,7 +355,7 @@ function(x, i)
 `[[.pdf_doc` <-
 function(x, i)
 {
-    if(!inherits(x, "pdf_doc")) stop("wrong class")
+    if(!inherits(x, "pdf_doc")) stop(gettextf("'%s' argument should be an object of class %s", "x", dQuote("pdf_doc")))
     if(missing(i) || (!(len <- length(i <- as.character(i)))))
         stop("attempting to select less than one element")
     else if(len > 1L)
@@ -586,7 +582,7 @@ function(file)
                         rownames(pdf_page_sizes)[pos])
     }
 
-    info[["File size"]] <- sprintf("%d bytes", doc$size)
+    info[["File size"]] <- sprintf(ngettext(doc$size, "%d byte", "%d bytes", domain = "R-tools"), doc$size)
 
     version <- substring(doc$header, 6L)
     catalog <- pdf_doc_get_object(doc, doc$trailer[["Root"]], con)
@@ -618,7 +614,7 @@ function(con, doc = NULL)
 {
     if(pdftools_debug_level() > 0L) {
         bytes <- .con_read_bytes(con, 10L)
-        message(sprintf("looking at %s", deparse(intToUtf8(bytes))))
+        message(sprintf("looking at %s", sQuote(deparse(intToUtf8(bytes)))))
         .con_seek(con, -length(bytes), 2L)
     }
 
@@ -1019,7 +1015,7 @@ function(object, ...)
 {
     if(!is.null(bytes <- object[["__stream_bytes__"]]))
         object[["__stream_bytes__"]] <-
-            sprintf("%d bytes", length(bytes))
+            sprintf(ngettext(length(bytes), "%d byte", "%d bytes"), length(bytes))
     writeLines(sprintf("%s: %s", names(object), sapply(object, format)))
 }
 
@@ -1124,22 +1120,16 @@ function(con, pos, num = NA_integer_, gen = NA_integer_, doc = NULL)
     hdr <- pdf_read_object_header(con)
     ## Be paranoid.
     if(anyNA(hdr))
-        stop(gettextf("cannot find object header at xrefed position %d",
-                      pos),
-             domain = NA)
+        stop(gettextf("cannot find object header at 'xrefed' position %d", pos), domain = "R-tools")
     ## Apparently it is feasible to have cross-references to indirect
     ## objects with actually different object and/or generation numbers:
     ## as of 2011-09-27, grImport/inst/doc/Rnewspage27.pdf had both
     ## objects 69 and 70 point to the same offset [providing object 70].
     ## For now, give a message and proceed.
     if(!is.na(num) && (num != hdr["num"]))
-        message(gettextf("mismatch in object numbers (given: %d, found: %d)",
-                         num, hdr["num"]),
-                domain = NA)
+        message(gettextf("mismatch in object numbers (given: %d, found: %d)", num, hdr["num"]), domain = "R-tools")
     if(!is.na(gen) && (gen != hdr["gen"]))
-        message(gettextf("mismatch in generation numbers (given: %d, found: %d)",
-                         gen, hdr["gen"]),
-                domain = NA)
+        message(gettextf("mismatch in generation numbers (given: %d, found: %d)", gen, hdr["gen"]), domain = "R-tools")
     ## Read object.
     pdf_read_object(con, doc)
 }
@@ -1164,7 +1154,7 @@ function(con, obj, doc = NULL)
 pdf_doc_get_object <-
 function(doc, ref, con = NULL)
 {
-    if(!inherits(doc, "pdf_doc")) stop("wrong class")
+    if(!inherits(doc, "pdf_doc")) stop(gettextf("'%s' argument should be an object of class %s", "doc", dQuote("pdf_doc")))
 
     if(is.character(ref)) {
         ref <- as.integer(unlist(strsplit(ref, ".", fixed = TRUE)))
@@ -1256,7 +1246,7 @@ function(doc, ref, con = NULL)
 pdf_doc_get_objects <-
 function(doc, ids = NULL, con = NULL)
 {
-    if(!inherits(doc, "pdf_doc")) stop("wrong class")
+    if(!inherits(doc, "pdf_doc")) stop(gettextf("'%s' argument should be an object of class %s", "doc", dQuote("pdf_doc")))
 
     ## Start with the object cache.
     objects <- doc$objects
@@ -1312,8 +1302,7 @@ function(doc, ids = NULL, con = NULL)
     for(i in which(ind)) {
         entry <- tab[i, ]
         if(debug)
-            message(sprintf("processing %s",
-                            paste(names(entry), entry, collapse = " ")))
+            message(gettextf("processing %s", sQuote(paste(names(entry), entry, collapse = " "))))
         pos <- entry["pos"]
         num <- entry["num"]
         gen <- entry["gen"]
@@ -1368,7 +1357,7 @@ function(doc, ids = NULL, con = NULL)
 pdf_doc_get_page_tree <-
 function(doc, con = NULL)
 {
-    if(!inherits(doc, "pdf_doc")) stop("wrong class")
+    if(!inherits(doc, "pdf_doc")) stop(gettextf("'%s' argument should be an object of class %s", "doc", dQuote("pdf_doc")))
 
     if(is.null(con) && is.null(con <- doc$con)) {
         con <- file(doc$file, "rb")
@@ -1388,8 +1377,7 @@ function(doc, con = NULL)
                        function(kid)
                        if(inherits(kid, "PDF_Indirect_Reference")) {
                            if(debug) {
-                               message(sprintf("expanding %s",
-                                               format(kid)))
+                               message(gettextf("expanding %s", sQuote(format(kid))))
                            }
                            recurse(pdf_doc_get_object(doc, kid, con))
                        } else {
@@ -1409,7 +1397,7 @@ function(doc, con = NULL)
 pdf_doc_get_page_list <-
 function(doc, con = NULL)
 {
-    if(!inherits(doc, "pdf_doc")) stop("wrong class")
+    if(!inherits(doc, "pdf_doc")) stop(gettextf("'%s' argument should be an object of class %s", "doc", dQuote("pdf_doc")))
 
     if(is.null(con) && is.null(con <- doc$con)) {
         con <- file(doc$file, "rb")
@@ -1457,7 +1445,7 @@ function(doc, con = NULL)
 pdf_doc_get_page_content_streams <-
 function(doc, con = NULL)
 {
-    if(!inherits(doc, "pdf_doc")) stop("wrong class")
+    if(!inherits(doc, "pdf_doc")) stop(gettextf("'%s' argument should be an object of class %s", "doc", dQuote("pdf_doc")))
 
     if(is.null(con) && is.null(con <- doc$con)) {
         con <- file(doc$file, "rb")
@@ -1488,7 +1476,7 @@ function(doc, con = NULL)
 pdf_doc_get_page_resources <-
 function(doc, con = NULL)
 {
-    if(!inherits(doc, "pdf_doc")) stop("wrong class")
+    if(!inherits(doc, "pdf_doc")) stop(gettextf("'%s' argument should be an object of class %s", "doc", dQuote("pdf_doc")))
 
     if(is.null(con) && is.null(con <- doc$con)) {
         con <- file(doc$file, "rb")
@@ -1545,9 +1533,7 @@ function(obj, doc = NULL)
         if(filter == "FlateDecode")
             bytes <- pdf_filter_flate_decode(bytes, parameters[[i]])
         else
-            stop(gettextf("unsupported filter %s",
-                          sQuote(filter)),
-                 domain = NA)
+            stop(gettextf("unsupported filter %s", sQuote(filter)), domain = "R-tools")
     }
     bytes
 }
@@ -1563,10 +1549,7 @@ function(x, params)
     if(is.null(predictor) || (predictor == 1L))
         return(m)
     if((predictor < 10L) && (predictor > 15L)) {
-        stop(gettextf("unsupported %s predictor %d",
-                      "flatedecode",
-                      predictor),
-             domain = NA)
+        stop(gettextf("unsupported %s predictor %d", sQuote("flatedecode"), predictor), domain = "R-tools")
     }
     columns <- params[["Columns"]]
     bytes <- raw()
@@ -1586,8 +1569,7 @@ function(x, params)
             for(i in seq(2L, rowlength))
                 rowdata[i] <- (rowdata[i] + prev_rowdata[i]) %% 256
         } else if(fb != 0L) {
-            stop(gettextf("unsupported PNG filter %d", fb),
-                 domain = NA)
+            stop(gettextf("unsupported PNG filter %d", fb), domain = "R-tools")
         }
         prev_rowdata <- rowdata
         bytes <- c(bytes, as.raw(rowdata[-1L]))

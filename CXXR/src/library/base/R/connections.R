@@ -144,7 +144,7 @@ seek.connection <- function(con, where = NA, origin = "start", rw = "", ...)
     origin <- pmatch(origin, c("start", "current", "end"))
     rw <- pmatch(rw, c("read", "write"), 0L)
     if(is.na(origin))
-        stop("'origin' must be one of 'start', 'current' or 'end'")
+        stop("'origin' argument must be one of 'start', 'current' or 'end'")
     .Internal(seek(con, as.double(where), origin, rw))
 }
 
@@ -153,7 +153,7 @@ truncate <- function(con, ...)
 
 truncate.connection <- function(con, ...)
 {
-    if(!isOpen(con)) stop("can only truncate an open connection")
+    if(!isOpen(con)) stop("'truncate.connection()' function can only truncate an open connection")
     .Internal(truncate(con))
 }
 
@@ -259,7 +259,7 @@ writeChar <- function(object, con, nchars = nchar(object, type="chars"),
                       eos = "", useBytes = FALSE)
 {
     if(!is.character(object))
-        stop("can only write character objects")
+        stop("'writeChar()' can only write character objects")
     if(is.character(con)) {
         con <- file(con, "wb")
         on.exit(close(con))
@@ -274,7 +274,7 @@ socketSelect <- function(socklist, write = FALSE, timeout = NULL) {
     if (is.null(timeout))
         timeout <- -1
     else if (timeout < 0)
-        stop("'timeout' must be NULL or a non-negative number")
+        stop("'timeout' argument must be NULL or a non-negative number")
     if (length(write) < length(socklist))
         write <- rep_len(write, length(socklist))
     .Internal(sockSelect(socklist, write, timeout))
@@ -285,7 +285,7 @@ memCompress <-
 {
     if(is.character(from))
         from <- charToRaw(paste(from, collapse = "\n"))
-    else if(!is.raw(from)) stop("'from' must be raw or character")
+    else if(!is.raw(from)) stop("'from' argument must be raw or character")
     type <- match(match.arg(type), c("none", "gzip", "bzip2", "xz"))
     .Internal(memCompress(from, type))
 }

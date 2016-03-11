@@ -39,7 +39,7 @@ png <- function(filename = "Rplot%03d.png",
                 pointsize = 12, bg = "white", res = NA, ...,
                 type = c("cairo", "cairo-png", "Xlib", "quartz"), antialias)
 {
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     g <- .geometry(width, height, units, res)
     new <- list(...)
     if(missing(type)) type <- getOption("bitmapType")
@@ -74,7 +74,7 @@ jpeg <- function(filename = "Rplot%03d.jpeg",
                  bg = "white", res = NA, ...,
                  type = c("cairo", "Xlib", "quartz"), antialias)
 {
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     g <- .geometry(width, height, units, res)
     new <- list(...)
     type <- if(!missing(type)) match.arg(type) else getOption("bitmapType")
@@ -107,7 +107,7 @@ tiff <- function(filename = "Rplot%03d.tiff",
                  bg = "white", res = NA, ...,
                  type = c("cairo", "Xlib", "quartz"), antialias)
 {
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     g <- .geometry(width, height, units, res)
     new <- list(...)
     type <- if(!missing(type)) match.arg(type) else getOption("bitmapType")
@@ -141,7 +141,7 @@ bmp <- function(filename = "Rplot%03d.bmp",
                 bg = "white", res = NA, ...,
                 type = c("cairo", "Xlib", "quartz"), antialias)
 {
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     g <- .geometry(width, height, units, res)
     new <- list(...)
     type <- if(!missing(type)) match.arg(type) else getOption("bitmapType")

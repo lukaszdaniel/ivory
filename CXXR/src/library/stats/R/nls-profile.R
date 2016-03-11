@@ -54,17 +54,17 @@ profiler.nls <- function(fitted, ...)
                  } else {
                      if(!missing(params)) {
                          if(length(params) != length(fittedPars))
-                             stop("'params' has wrong length")
+                             stop(gettextf("'%s' argument is of the wrong length", "params"))
                          assign("defaultPars", params, envir = thisEnv)
                      }
                      if(!missing(varying)) {
                          if(is.numeric(varying)) {
                              if(!all(varying %in% seq_along(fittedPars)))
-                                 stop("'varying' must be in seq_along(pars)")
+                                 stop("'varying' argument must be in 'seq_along(pars)'")
                              varying <- !((seq_along(fittedPars)) %in% varying)
                          } else if(is.logical(varying)) {
                              if(length(varying) != length(fittedPars))
-                                 stop("'varying' has wrong length")
+                                 stop(gettextf("'%s' argument is of the wrong length", "varying"))
                          } else if(is.character(varying)) {
                              if(!all(varying %in% names(fittedPars)))
                                  stop("'varying' must be in seq_along(pars)")
@@ -90,7 +90,7 @@ profiler.nls <- function(fitted, ...)
                          params <- unlist(args[[1L]])
                      } else if(all(sapply(args, is.numeric))) {
                          params <- unlist(args)
-                     } else stop("invalid argument to 'getProfile'")
+                     } else stop("invalid argument passed to 'getProfile()'")
                      if(!all(names(params) %in% names(fittedPars)))
                          stop("cannot recognize parameter name")
                      startPars <- defaultPars

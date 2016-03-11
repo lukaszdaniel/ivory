@@ -30,7 +30,7 @@ spectrum <- function (x, ..., method = c("pgram", "ar"))
 spec.taper <- function (x, p = 0.1)
 {
     if (any(p < 0) || any(p > 0.5))
-        stop("'p' must be between 0 and 0.5")
+        stop(gettextf("'%s' argument must be between %s and %s", "p", "0", "0.5"))
     a <- attributes(x)
     x <- as.matrix(x)
     nc <- ncol(x)
@@ -227,7 +227,7 @@ plot.spec <-
         return(eval(m, parent.frame()))
     }
     if(is.null(ylab))
-        ylab <- if(log == "dB") "spectrum (dB)" else "spectrum"
+        ylab <- if(log == "dB") gettext("spectrum (dB)") else gettext("spectrum")
     if(is.logical(log))
         log <- if(log) "yes" else "no"
     if(missing(log) && getOption("ts.S.compat")) log <- "dB"

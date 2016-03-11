@@ -156,7 +156,7 @@
             setOldClass(el[[1L]], prototype = el[[2L]],  where = envir)
         else
 	    warning(gettextf("OOPS: something wrong with '.OldClassesPrototypes[[%d]]'", i),
-		    domain = NA)
+		    domain = "R-methods")
     }
     setGeneric("slotsFromS3", where = envir)
     ## the method for "oldClass" is really a constant, just hard to express that way
@@ -204,9 +204,9 @@
 	     validity = function(object) {
 		 levs <- levels(object)
 		 if (!is.character(levs))
-		     return("factor levels must be \"character\"")
+		     return(gettext("factor levels must be \"character\""))
 		 if (d <- anyDuplicated(levs))
-		     return(sprintf("duplicated level [%d] in factor", d))
+		     return(gettextf("duplicated level [%d] in factor", d))
 		 ## 'else'	ok :
 		 TRUE
 	     },
@@ -223,13 +223,13 @@
         S3Class <- object@.S3Class
         if(length(S3Class)) S3Class <- S3Class[[1L]]
         else S3Class <- "oldClass"      # or error?
-        cat("Object of class \"", cl, "\"\n", sep = "")
+        cat(gettextf("An object of class %s", dQuote(cl), domain = "R-methods"), "\n", sep = "")
         print(S3Part(object, strictS3 = TRUE))
         otherSlots <- slotNames(cl)
         S3slots <- slotNames(S3Class)
         otherSlots <- otherSlots[is.na(match(otherSlots, S3slots))]
         for(what in otherSlots) {
-            cat('Slot "', what, '":\n', sep = "")
+            cat(gettextf("Slot %s:", dQuote(what), domain = "R-methods"), "\n", sep = "")
             show(slot(object, what))
             cat("\n")
         }
@@ -260,10 +260,9 @@
             Classi <- class(obj)
             defi <- getClassDef(Classi)
             if(is.null(defi))
-                stop(gettextf(
-                    "unnamed argument to initialize() for S3 class must have a class definition; %s does not",
+                stop(gettextf("unnamed argument passed to 'initialize()' for S3 class must have a class definition; %s does not",
                     dQuote(Classi)),
-                     domain = NA)
+                     domain = "R-methods")
             if(is(obj, S3ClassP)) {
                 ## eligible to be the S3 part; merge other slots from prototype;
                 ## obj then becomes the object, with its original class as the S3Class
@@ -277,7 +276,7 @@
             }
             else stop(gettextf(
 	"unnamed argument must extend either the S3 class or the class of the data part; not true of class %s",
-			       dQuote(Classi)), domain = NA)
+			       dQuote(Classi)), domain = "R-methods")
         }
         ## named slots are done as in the default method, which will also call validObject()
         if(length(elements)>0) {
@@ -351,7 +350,7 @@
                          S4 =
                          stop(gettextf("class %s does not have an S3 data part, and so is of type \"S4\"; no S3 equivalent",
                                        dQuote(class(from))),
-                              domain = NA),
+                              domain = "R-methods"),
                          .notS4(from) )
               },
               where = envir)
@@ -364,18 +363,15 @@
                       cl <- .class1(from)
                       classDef <- getClass(cl)
                       if(identical(classDef@virtual, TRUE))
-                        stop(gettextf("class %s is VIRTUAL; not meaningful to create an S4 object from this class",
-                                      dQuote(cl)),
-                             domain = NA)
+                        stop(gettextf("class %s is VIRTUAL; not meaningful to create an S4 object from this class", dQuote(cl)), domain = "R-methods")
                       pr <- classDef@prototype
                       value <- new(cl)
                       slots <- classDef@slots
                       if(match(".Data", names(slots), 0L) > 0L) {
                           data <- unclass(from)
                           if(!is(data, slots[[".Data"]]))
-                            stop(gettextf("object must be a valid data part for class %s; not true of type %s",
-					  dQuote(cl), dQuote(class(data))),
-                                 domain = NA)
+                            stop(gettextf("object must be a valid data part for class %s; not true of type %s", dQuote(cl), dQuote(class(data))),
+                                 domain = "R-methods")
                           value@.Data <- unclass(from)
                       }
                       ## copy attributes:  Note that this copies non-slots as well
@@ -438,7 +434,7 @@
                     .Object <- .mergeAttrs(as.matrix(dat), .Object, dots)
                 }
                 else
-                  stop("cannot specify matrix() arguments when specifying '.Data'")
+                  stop("cannot specify arguments for 'matrix()' method when specifying '.Data'")
             }
         }
         else if(is.matrix(data) && na == 2 + length(dots))
@@ -480,7 +476,7 @@
                     .Object <- .mergeAttrs(as.array(dat), .Object, dots)
                 }
                 else
-                  stop("cannot specify array() arguments when specifying '.Data'")
+                  stop("cannot specify arguments for 'array()' method when specifying '.Data'")
             }
         }
         else if(is.array(data) && na == 2 + length(dots))
@@ -594,7 +590,7 @@
     if(!isGeneric("show", where))
         setGeneric("show", where = where, simpleInheritanceOnly = TRUE)
     setMethod("show", "namedList", function(object) {
-        cat("An object of class ", dQuote(class(object)), "\n")
+        cat(gettextf("An object of class %s", dQuote(class(object)), domain = "R-methods"), "\n", sep = "")
         print(structure(object@.Data, names=object@names))
         showExtraSlots(object, getClass("namedList"))
     })
@@ -623,7 +619,7 @@
                           args <- args[-i]
                           objs <- objs[-i]
                           if(!is(selfEnv, "environment"))
-                              stop("unnamed argument to new() must be an environment for the new object")
+                              stop("unnamed argument passed to 'new()' method must be an environment for the new object")
                           selfEnv <- as.environment(selfEnv)
                       }
                       ## else, no environment superclasses

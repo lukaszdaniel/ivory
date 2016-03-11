@@ -33,7 +33,7 @@ function(..., domain = NULL, appendLF = TRUE)
     args <- list(...)
     cond <- if (length(args) == 1L && inherits(args[[1L]], "condition")) {
         if(nargs() > 1L)
-            warning("additional arguments ignored in message()")
+            warning(gettextf("additional arguments ignored in '%s' function", "message()"))
         args[[1L]]
     } else {
         msg <- .makeMessage(..., domain=domain, appendLF = appendLF)

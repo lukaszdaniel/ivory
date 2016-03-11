@@ -30,7 +30,7 @@ stepfun <-
 {
     if(is.unsorted(x)) stop("stepfun: 'x' must be ordered increasingly")
     n <- length(x)
-    if(n < 1) stop("'x' must have length >= 1")
+    if(n < 1) stop(gettextf("'%s' argument must have length >= %d", "x", 1))
     n1 <- n + 1L
     if(length(y) != n1) stop("'y' must be one longer than 'x'")
     rval <- approxfun(x, y[- if(right)n1 else 1], method = "constant",
@@ -59,16 +59,13 @@ print.stepfun <- function (x, digits = getOption("digits") - 2, ...)
     numform <- function(x) paste(formatC(x, digits = digits), collapse=", ")
     i1 <- function(n) 1L:min(3L, n)
     i2 <- function(n) if(n >= 4L) max(4L, n-1L):n else integer()
-    cat("Step function\nCall: ")
+    cat(gettext("Step function", domain = "R-stats"), "\n", gettext("Call: ", domain = "R-stats"), sep = "")
     print(attr(x, "call"), ...)
     env <- environment(x)
     n <- length(xx <- eval(expression(x), envir = env))
-    cat(" x[1:", n, "] = ", numform(xx[i1(n)]),
-	if(n > 3L) ", ", if(n > 5L) " ..., ", numform(xx[i2(n)]), "\n", sep = "")
+    cat(" x[1:", n, "] = ", numform(xx[i1(n)]), if(n > 3L) ", ", if(n > 5L) " ..., ", numform(xx[i2(n)]), "\n", sep = "")
     y <- eval(expression(c(yleft, y)), envir = env)
-    cat(n+1L, " plateau levels = ", numform(y[i1(n+1L)]),
-	if(n+1L > 3L) ", ", if(n+1L > 5L) " ..., ", numform(y[i2(n+1L)]), "\n",
-	sep = "")
+    cat(n+1L, " plateau levels = ", numform(y[i1(n+1L)]), if(n+1L > 3L) ", ", if(n+1L > 5L) " ..., ", numform(y[i2(n+1L)]), "\n", sep = "")
     invisible(x)
 }
 
@@ -76,14 +73,14 @@ summary.stepfun <- function(object, ...)
 {
     n <- length(eval(expression(x), envir = environment(object)))
     if(!is.integer(n) || n < 1L) stop("not a valid step function")
-    cat("Step function with continuity 'f'=",
-	format(eval(expression(f), envir = environment(object))),
-	", ", n, if(n <= 6L) "knots at\n" else "knots with summary\n")
+    if(n <= 6L) {
+      cat(sprintf(ngettext(n, "Step function with continuity 'f'=%s, %d knot at:", "Step function with continuity 'f'=%s, %d knots at:", domain = "R-stats"), format(eval(expression(f), envir = environment(object))), n), "\n", sep = "")
+    } else {
+      cat(sprintf(ngettext(n, "Step function with continuity 'f'=%s, %d knot with summary:", "Step function with continuity 'f'=%s, %d knots with summary:", domain = "R-stats"), format(eval(expression(f), envir = environment(object))), n), "\n", sep = "")
+    }
     summ <- if(n > 6L) summary else function(x) x
     print(summ(knots(object)))
-    cat(if(n > 6L) "\n" else "  ", "and	", n+1L,
-        " plateau levels (y) ", if(n <= 6L) "at\n" else "with summary\n",
-        sep  = "")
+    cat(if(n > 6L) "\n" else "  ", "and	", n+1L, " plateau levels (y) ", if(n <= 6L) "at\n" else "with summary\n", sep  = "")
     print(summ(eval(expression(c(yleft,y)), envir = environment(object))))
     invisible()
 }

@@ -21,6 +21,7 @@
 #include <Defn.h>
 #include <Internal.h>
 #include "grDevices.h"
+#include "localization.h"
 
 #ifndef _WIN32
 SEXP do_X11(SEXP call, SEXP op, SEXP args, SEXP env);

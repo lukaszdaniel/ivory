@@ -52,6 +52,28 @@
     } while (0)
 
 
+#define mod_iterate(n1,i1) for (i = i1 = 0; i < n;							\
+	     i1 = (++i1 == n1) ? 0 : i1,				\
+		 ++i)
+
+#define mod_iterate2(n1,n2,i1,i2) for (i = i1 = i2 = 0; i<n; \
+        i1 = (++i1 == n1) ? 0 : i1,\
+        i2 = (++i2 == n2) ? 0 : i2,\
+        ++i)
+
+#define mod_iterate3(n1,n2,n3,i1,i2,i3) for (i = i1 = i2 = i3 = 0; i<n; \
+        i1 = (++i1==n1) ? 0 : i1,                               \
+        i2 = (++i2==n2) ? 0 : i2,                               \
+        i3 = (++i3==n3) ? 0 : i3,                               \
+        ++i)
+
+#define mod_iterate4(n1,n2,n3,n4,i1,i2,i3,i4) for (i = i1 = i2 = i3 = i4 = 0; i<n; \
+        i1 = (++i1==n1) ? 0 : i1,                                       \
+        i2 = (++i2==n2) ? 0 : i2,                                       \
+        i3 = (++i3==n3) ? 0 : i3,                                       \
+        i4 = (++i4==n4) ? 0 : i4,                                       \
+        ++i)
+
 #define MOD_ITERATE1_CORE(n, n1, i, i1, loop_body) do {	\
 	for (; i < n;							\
 	     i1 = (++i1 == n1) ? 0 : i1,				\

@@ -26,7 +26,7 @@ blues9 <- c("#F7FBFF", "#DEEBF7", "#C6DBEF", "#9ECAE1", "#6BAED6",
     if (length(nbin) == 1)
 	nbin <- c(nbin, nbin)
     if (!is.numeric(nbin) || length(nbin) != 2)
-	stop("'nbin' must be numeric of length 1 or 2")
+	stop("'nbin' argument must be numeric of length 1 or 2")
 
     if (missing(bandwidth)) { ## cheap
 	bandwidth <- diff(apply(x, 2, stats::quantile,
@@ -35,8 +35,8 @@ blues9 <- c("#F7FBFF", "#DEEBF7", "#C6DBEF", "#9ECAE1", "#6BAED6",
 	bandwidth[bandwidth==0] <- 1
     }
     else {
-	if(!is.numeric(bandwidth)) stop("'bandwidth' must be numeric")
-	if(any(bandwidth <= 0)) stop("'bandwidth' must be positive")
+	if(!is.numeric(bandwidth)) stop(gettextf("'%s' argument must be numeric", "bandwidth"))
+	if(any(bandwidth <= 0)) stop(gettextf("'%s' argument must be positive", "bandwidth"))
     }
     ## create density map
     rv <- KernSmooth::bkde2D(x, bandwidth=bandwidth, gridsize=nbin,

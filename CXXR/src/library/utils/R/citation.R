@@ -37,9 +37,7 @@ function(given = NULL, family = NULL, middle = NULL,
     args_length <- lengths(args)
     if(!all(args_length_ok <- args_length %in% c(1L, max(args_length))))
         warning(gettextf("Not all arguments are of the same length, the following need to be recycled: %s",
-                         paste(names(args)[!args_length_ok],
-                               collapse = ", ")),
-                domain = NA)
+                         paste(names(args)[!args_length_ok], collapse = ", ")), domain = "R-utils")
     args <- lapply(args, function(x) rep(x, length.out = max(args_length)))
 
     ## <COMMENT Z>
@@ -54,38 +52,27 @@ function(given = NULL, family = NULL, middle = NULL,
     {
         if(!.is_not_nonempty_text(first)) {
             if(!.is_not_nonempty_text(given))
-                stop(gettextf("Use either %s or %s/%s but not both.",
-                              sQuote("given"),
-                              sQuote("first"), sQuote("middle")),
-                     domain = NA)
+                stop(gettextf("Use either %s or %s but not both", sQuote("given"), paste(sQuote("first"), sQuote("middle"), sep = "/", collapse = "")), domain = "R-utils")
             ## <FIXME>
             ## Start warning eventually ... maybe use message() for now?
-            message(gettextf("It is recommended to use %s instead of %s.",
-                             sQuote("given"), sQuote("first")),
-                    domain = NA)
+            message(gettextf("It is recommended to use %s instead of %s", sQuote("given"), sQuote("first")), domain = "R-utils")
             ## </FIXME>
             given <- first
         }
         if(!.is_not_nonempty_text(middle)) {
             ## <FIXME>
             ## Start warning eventually ... maybe use message() for now?
-            message(gettextf("It is recommended to use %s instead of %s.",
-                             sQuote("given"), sQuote("middle")),
-                    domain = NA)
+            message(gettextf("It is recommended to use %s instead of %s", sQuote("given"), sQuote("middle")), domain = "R-utils")
             ## </FIXME>
             given <- c(given, unlist(strsplit(middle, "[[:space:]]+")))
         }
 
         if(!.is_not_nonempty_text(last)) {
             if(!.is_not_nonempty_text(family))
-                stop(gettextf("Use either %s or %s but not both.",
-                              sQuote("family"), sQuote("last")),
-                     domain = NA)
+                stop(gettextf("Use either %s or %s but not both", sQuote("family"), sQuote("last")), domain = "R-utils")
             ## <FIXME>
             ## Start warning eventually ... maybe use message() for now?
-            message(gettextf("It is recommended to use %s instead of %s.",
-                             sQuote("family"), sQuote("last")),
-                    domain = NA)
+            message(gettextf("It is recommended to use %s instead of %s", sQuote("family"), sQuote("last")), domain = "R-utils")
             ## </FIXME>
             family <- last
         }
@@ -97,8 +84,8 @@ function(given = NULL, family = NULL, middle = NULL,
         if(.is_not_nonempty_text(role)) {
             if(!is.null(role))
                 warning(sprintf(ngettext(length(role),
-                                         "Invalid role specification: %s.",
-                                         "Invalid role specifications: %s."),
+                                         "Invalid role specification: %s",
+                                         "Invalid role specifications: %s", domain = "R-utils"),
                                 paste(sQuote(role), collapse = ", ")),
                         domain = NA)
             role <- NULL
@@ -160,8 +147,8 @@ function(role)
         role[pos[ind > 0L]] <- MARC_relator_db$code[ind]
         if(any(ind <- (ind == 0L))) {
             warning(sprintf(ngettext(length(pos[ind]),
-                                     "Invalid role specification: %s.",
-                                     "Invalid role specifications: %s."),
+                                     "Invalid role specification: %s",
+                                     "Invalid role specifications: %s", domain = "R-utils"),
                             paste(sQuote(role[pos[ind]]), collapse = ", ")),
                     domain = NA)
             role <- role[-pos[ind]]
@@ -195,16 +182,15 @@ function(x, name)
     ## person())
     ## </COMMENT>
     name <- match.arg(name,
-                      c("given", "family", "role", "email", "comment",
-                        "first", "last", "middle")) # for now ...
+                      c("given", "family", "role", "email", "comment", "first", "last", "middle")) # for now ...
     ## <COMMENT Z>
     ## Let's be nice and support first/middle/last for now.
     ## </COMMENT>
     if(name %in% c("first", "last", "middle")) {
-        message(gettextf("It is recommended to use %s/%s instead of %s/%s/%s.",
-                         sQuote("given"), sQuote("family"),
-                         sQuote("first"), sQuote("middle"), sQuote("last")),
-                domain = NA)
+        message(gettextf("It is recommended to use %s instead of %s",
+                         paste(sQuote("given"), sQuote("family"), sep = "/", collapse = ""),
+                         paste(sQuote("first"), sQuote("middle"), sQuote("last"), sep = "/", collapse = "")),
+                domain = "R-utils")
         oname <- name
 	name <- switch(name,
 	    "first" = "given",
@@ -253,9 +239,7 @@ function(..., recursive = FALSE)
 {
     args <- list(...)
     if(!all(sapply(args, inherits, "person")))
-        warning(gettextf("method is only applicable to %s objects",
-                         sQuote("person")),
-                domain = NA)
+        warning(gettextf("method is only applicable to %s objects", sQuote("person")), domain = "R-utils")
     args <- lapply(args, unclass)
     rval <- do.call("c", args)
     class(rval) <- "person"
@@ -376,9 +360,7 @@ function(...)
 {
     z <- list(...)
     if(!all(sapply(z, inherits, "person")))
-        stop(gettextf("all arguments must be of class %s",
-                      dQuote("person")),
-             domain = NA)
+        stop(gettextf("all arguments must be of class %s", dQuote("person")), domain = "R-utils")
     do.call("c", z)
 }
 
@@ -492,17 +474,15 @@ function(bibtype, textVersion = NULL, header = NULL, footer = NULL, key = NULL,
     args_length <- lengths(args)
     if(!all(args_length_ok <- args_length %in% c(1L, max_length)))
         warning(gettextf("Not all arguments are of the same length, the following need to be recycled: %s",
-                         paste(names(args)[!args_length_ok],
-                               collapse = ", ")),
-                domain = NA)
+                         paste(names(args)[!args_length_ok], collapse = ", ")),
+                domain = "R-utils")
     args <- lapply(args, function(x) rep(x, length.out = max_length))
 
     other_length <- lengths(other)
     if(!all(other_length_ok <- other_length %in% c(1L, max_length)))
         warning(gettextf("Not all arguments are of the same length, the following need to be recycled: %s",
-                         paste(names(other)[!other_length_ok],
-                               collapse = ", ")),
-                domain = NA)
+                         paste(names(other)[!other_length_ok], collapse = ", ")),
+                domain = "R-utils")
     other <- lapply(other, function(x) rep(x, length.out = max_length))
 
     bibentry1 <-
@@ -513,10 +493,7 @@ function(bibtype, textVersion = NULL, header = NULL, footer = NULL, key = NULL,
 	stopifnot(length(bibtype) == 1L)
         pos <- match(tolower(bibtype), tolower(BibTeX_names))
 	if(is.na(pos))
-            stop(gettextf("%s has to be one of %s",
-                          sQuote("bibtype"),
-                          paste(BibTeX_names, collapse = ", ")),
-                 domain = NA)
+            stop(gettextf("%s has to be one of %s", sQuote("bibtype"), paste(BibTeX_names, collapse = ", ")), domain = "R-utils")
 	bibtype <- BibTeX_names[pos]
 
         ## process fields
@@ -581,7 +558,7 @@ function(x, force = FALSE)
         if(any(!ok))
             stop(sprintf(ngettext(sum(!ok),
                                   "A bibentry of bibtype %s has to specify the field: %s",
-                                  "A bibentry of bibtype %s has to specify the fields: %s"),
+                                  "A bibentry of bibtype %s has to specify the fields: %s", domain = "R-utils"),
                           sQuote(bibtype), paste(rfields[!ok], collapse = ", ")),
                  domain = NA)
     }
@@ -638,11 +615,7 @@ function(style)
     ind <- pmatch(tolower(style), tolower(bibentry_format_styles),
                   nomatch = 0L)
     if(all(ind == 0L))
-        stop(gettextf("%s should be one of %s",
-                      sQuote("style"),
-                      paste(dQuote(bibentry_format_styles),
-                            collapse = ", ")),
-             domain = NA)
+        stop(gettextf("%s should be one of %s", sQuote("style"), paste(dQuote(bibentry_format_styles), collapse = ", ")), domain = "R-utils")
     bibentry_format_styles[ind]
 }
 
@@ -696,8 +669,7 @@ function(x, style = "text", .bibstyle = NULL,
                           format(y)
                       },
                       if(bibtex) {
-                          c(gettext("\nA BibTeX entry for LaTeX users is\n"),
-			    paste0("  ", unclass(toBibtex(y))))
+                          c(gettextf("\nA BibTeX entry for LaTeX users is\n%s", paste0("  ", unclass(toBibtex(y)))))
                       },
                       if(!is.null(y$footer))
                       c("", strwrap(y$footer))),
@@ -770,9 +742,7 @@ function(x, more = list())
         bad <- which(sapply(status, inherits, "error"))
         if(length(bad)) {
             for(b in bad) {
-                warning(gettextf("Dropping invalid entry %d:\n%s",
-                                 pc[b],
-                                 conditionMessage(status[[b]])))
+                warning(gettextf("Dropping invalid entry %d:\n%s", pc[b], conditionMessage(status[[b]])))
             }
             x[pc[bad]] <- NULL
         }
@@ -954,10 +924,7 @@ function(x, name, value)
         value <- unlist(value)
         pos <- match(tolower(value), tolower(BibTeX_names))
         if(anyNA(pos))
-            stop(gettextf("%s has to be one of %s",
-                          sQuote("bibtype"),
-                          paste(BibTeX_names, collapse = ", ")),
-                 domain = NA)
+            stop(gettextf("%s has to be one of %s", sQuote("bibtype"), paste(BibTeX_names, collapse = ", ")), domain = "R-utils")
         value <- as.list(BibTeX_names[pos])
     }
 
@@ -988,9 +955,7 @@ function(..., recursive = FALSE)
 {
     args <- list(...)
     if(!all(sapply(args, inherits, "bibentry")))
-        warning(gettextf("method is only applicable to %s objects",
-                         sQuote("bibentry")),
-                domain = NA)
+        warning(gettextf("method is only applicable to %s objects", sQuote("bibentry")), domain = "R-utils")
     args <- lapply(args, unclass)
     rval <- do.call("c", args)
     class(rval) <- "bibentry"
@@ -1138,7 +1103,7 @@ function(package = "base", lib.loc = NULL, auto = NULL)
         dir <- system.file(package = package, lib.loc = lib.loc)
         if(dir == "")
             stop(gettextf("package %s not found", sQuote(package)),
-                 domain = NA)
+                 domain = "R-utils")
         meta <- packageDescription(pkg = package,
                                    lib.loc = dirname(dir))
         ## if(is.null(auto)): Use default auto-citation if no CITATION
@@ -1157,7 +1122,7 @@ function(package = "base", lib.loc = NULL, auto = NULL)
     if((!is.null(meta$Priority)) && (meta$Priority == "base")) {
     	cit <- citation("base", auto = FALSE)
     	attr(cit, "mheader")[1L] <-
-	    paste0("The ", sQuote(package), " package is part of R.  ",
+	    paste0(gettextf("The %s package is part of R.", sQuote(package), domain = "R-utils"), "  ",
 		   attr(cit, "mheader")[1L])
         return(.citation(cit))
     }
@@ -1165,9 +1130,7 @@ function(package = "base", lib.loc = NULL, auto = NULL)
     year <- sub("-.*", "", meta$`Date/Publication`)
     if(!length(year)) {
         if(is.null(meta$Date)) {
-            warning(gettextf("no date field in DESCRIPTION file of package %s",
-                             sQuote(package)),
-                    domain = NA)
+            warning(gettextf("no date field in DESCRIPTION file of package %s", sQuote(package)), domain = "R-utils")
         } else {
             date <- trimws(as.vector(meta$Date))[1L]
             date <- strptime(date, "%Y-%m-%d", tz = "GMT")
@@ -1181,9 +1144,7 @@ function(package = "base", lib.loc = NULL, auto = NULL)
         if(!is.na(date)) year <- format(date, "%Y")
     }
     if(!length(year)) {
-        warning(gettextf("could not determine year for %s from package DESCRIPTION file",
-                         sQuote(package)),
-                domain = NA)
+        warning(gettextf("could not determine year for %s from package DESCRIPTION file", sQuote(package)), domain = "R-utils")
         year <- NA_character_
     }
 
@@ -1234,8 +1195,7 @@ function(package = "base", lib.loc = NULL, auto = NULL)
     }
 
     header <- if(!auto_was_meta) {
-        gettextf("To cite package %s in publications use:",
-                 sQuote(package))
+        gettextf("To cite package %s in publications use:", sQuote(package))
     } else NULL
 
 
@@ -1357,13 +1317,11 @@ function(x)
                         paste, collapse = "\n"),
                  collapse = ",\n  ")
     if(!is.null(header)) {
-        header <- paste(strwrap(header, indent = 0L, exdent = 2L),
-                        collapse = "\n")
+        header <- paste(strwrap(header, indent = 0L, exdent = 2L), collapse = "\n")
         out <- paste(header, out, sep = "\n  ")
     }
     if(!is.null(footer)) {
-        footer <- paste(strwrap(footer, indent = 2L, exdent = 2L),
-                        collapse = "\n")
+        footer <- paste(strwrap(footer, indent = 2L, exdent = 2L), collapse = "\n")
         out <- paste(out, footer, sep = ".\n")
     }
     out

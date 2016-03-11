@@ -30,10 +30,10 @@ qr.default <- function(x, tol = 1e-07, LAPACK = FALSE, ...)
         return(structure(.Internal(La_qr(x)), useLAPACK = TRUE, class = "qr"))
 
     p <- as.integer(ncol(x))
-    if(is.na(p)) stop("invalid ncol(x)")
+    if(is.na(p)) stop(gettextf("invalid '%s' value", "ncol(x)"))
     n <- as.integer(nrow(x))
-    if(is.na(n)) stop("invalid nrow(x)")
-    if(1.0 * n * p > 2147483647) stop("too large a matrix for LINPACK")
+    if(is.na(n)) stop(gettextf("invalid '%s' value", "nrow(x)"))
+    if(1.0 * n * p > 2147483647) stop(gettextf("matrix %s is too large for LINPACK", dataname <- sQuote(deparse(substitute(x)))))
     storage.mode(x) <- "double"
     res <- .Fortran(.F_dqrdc2,
 	     qr = x,
@@ -56,14 +56,14 @@ qr.default <- function(x, tol = 1e-07, LAPACK = FALSE, ...)
 
 qr.coef <- function(qr, y)
 {
-    if( !is.qr(qr) ) stop("first argument must be a QR decomposition")
-    n <- as.integer(nrow(qr$qr)); if(is.na(n)) stop("invalid nrow(qr$qr)")
-    p <- as.integer(ncol(qr$qr)); if(is.na(p)) stop("invalid ncol(qr$qr)")
-    k <- as.integer(qr$rank); if(is.na(k)) stop("invalid ncol(qr$rank)")
+    if(!is.qr(qr)) stop(gettextf("'%s' argument is not a QR decomposition", "qr"))
+    n <- as.integer(nrow(qr$qr)); if(is.na(n)) stop(gettextf("invalid '%s' value", "nrow(qr$qr)"))
+    p <- as.integer(ncol(qr$qr)); if(is.na(p)) stop(gettextf("invalid '%s' value", "ncol(qr$qr)"))
+    k <- as.integer(qr$rank); if(is.na(k)) stop(gettextf("invalid '%s' value", "ncol(qr$rank)"))
     im <- is.matrix(y)
     if (!im) y <- as.matrix(y)
     ny <- as.integer(ncol(y))
-    if(is.na(ny)) stop("invalid ncol(y)")
+    if(is.na(ny)) stop(gettextf("invalid '%s' value", "ncol(y)"))
     if (p == 0L) return( if (im) matrix(0, p, ny) else numeric() )
     ix <- if ( p > n ) c(seq_len(n), rep(NA, p - n)) else seq_len(p)
     if(is.complex(qr$qr)) {
@@ -81,7 +81,7 @@ qr.coef <- function(qr, y)
 
     storage.mode(y) <- "double"
     if( nrow(y) != n )
-	stop("'qr' and 'y' must have the same number of rows")
+	stop("'qr' and 'y' arguments must have the same number of rows")
     z <- .Fortran(.F_dqrcf,
 		  as.double(qr$qr),
 		  n, k,
@@ -91,7 +91,7 @@ qr.coef <- function(qr, y)
 		  coef = matrix(0, nrow = k,ncol = ny),
 		  info = integer(1L),
 		  NAOK = TRUE)[c("coef","info")]
-    if(z$info) stop("exact singularity in 'qr.coef'")
+    if(z$info) stop("exact singularity in 'qr.coef()' function")
     if(k < p) {
 	coef <- matrix(NA_real_, nrow = p, ncol = ny)
 	coef[qr$pivot[seq_len(k)], ] <- z$coef
@@ -110,20 +110,20 @@ qr.coef <- function(qr, y)
 
 qr.qy <- function(qr, y)
 {
-    if(!is.qr(qr)) stop("argument is not a QR decomposition")
+    if(!is.qr(qr)) stop(gettextf("'%s' argument is not a QR decomposition", "qr"))
     if(is.complex(qr$qr))
         return(.Internal(qr_qy_cmplx(qr, as.matrix(y), FALSE)))
     if(isTRUE(attr(qr, "useLAPACK")))
         return(.Internal(qr_qy_real(qr, as.matrix(y), FALSE)))
 
     n <- as.integer(nrow(qr$qr))
-    if(is.na(n)) stop("invalid nrow(qr$qr)")
+    if(is.na(n)) stop(gettextf("invalid '%s' value", "nrow(qr$qr)"))
     k <- as.integer(qr$rank)
     ny <- as.integer(NCOL(y))
-    if(is.na(ny)) stop("invalid NCOL(y)")
+    if(is.na(ny)) stop(gettextf("invalid '%s' value", "NCOL(y)"))
     storage.mode(y) <- "double"
     if(NROW(y) != n)
-	stop("'qr' and 'y' must have the same number of rows")
+	stop("'qr' and 'y' arguments must have the same number of rows")
     .Fortran(.F_dqrqy,
 	     as.double(qr$qr),
 	     n, k,
@@ -136,19 +136,19 @@ qr.qy <- function(qr, y)
 
 qr.qty <- function(qr, y)
 {
-    if(!is.qr(qr)) stop("argument is not a QR decomposition")
+    if(!is.qr(qr)) stop(gettextf("'%s' argument is not a QR decomposition", "qr"))
     if(is.complex(qr$qr))
         return(.Internal(qr_qy_cmplx(qr, as.matrix(y), TRUE)))
     if(isTRUE(attr(qr, "useLAPACK")))
         return(.Internal(qr_qy_real(qr, as.matrix(y), TRUE)))
 
     n <- as.integer(nrow(qr$qr))
-    if(is.na(n)) stop("invalid nrow(qr$qr)")
+    if(is.na(n)) stop(gettextf("invalid '%s' value", "nrow(qr$qr)"))
     k <- as.integer(qr$rank)
     ny <- as.integer(NCOL(y))
-    if(is.na(ny)) stop("invalid NCOL(y)")
+    if(is.na(ny)) stop(gettextf("invalid '%s' value", "NCOL(y)"))
     if(NROW(y) != n)
-	stop("'qr' and 'y' must have the same number of rows")
+	stop("'qr' and 'y' arguments must have the same number of rows")
     storage.mode(y) <- "double"
     .Fortran(.F_dqrqty,
 	     as.double(qr$qr),
@@ -162,17 +162,17 @@ qr.qty <- function(qr, y)
 
 qr.resid <- function(qr, y)
 {
-    if(!is.qr(qr)) stop("argument is not a QR decomposition")
-    if(is.complex(qr$qr)) stop("not implemented for complex 'qr'")
-    if(isTRUE(attr(qr, "useLAPACK"))) stop("not supported for LAPACK QR")
+    if(!is.qr(qr)) stop(gettextf("'%s' argument is not a QR decomposition", "qr"))
+    if(is.complex(qr$qr)) stop("'qr()' function is not implemented for complex 'qr' argument")
+    if(isTRUE(attr(qr, "useLAPACK"))) stop("'qr()' function is not supported for LAPACK QR")
     k <- as.integer(qr$rank)
     if (k==0) return(y)
     n <- as.integer(nrow(qr$qr))
-    if(is.na(n)) stop("invalid nrow(qr$qr)")
+    if(is.na(n)) stop(gettextf("invalid '%s' value", "nrow(qr$qr)"))
     ny <- as.integer(NCOL(y))
-    if(is.na(ny)) stop("invalid NCOL(y)")
+    if(is.na(ny)) stop(gettextf("invalid '%s' value", "NCOL(y)"))
     if( NROW(y) != n )
-	stop("'qr' and 'y' must have the same number of rows")
+	stop("'qr' and 'y' arguments must have the same number of rows")
     storage.mode(y) <- "double"
     .Fortran(.F_dqrrsd,
 	     as.double(qr$qr), n, k, as.double(qr$qraux), y, ny, rsd = y)$rsd
@@ -180,17 +180,17 @@ qr.resid <- function(qr, y)
 
 qr.fitted <- function(qr, y, k=qr$rank)
 {
-    if(!is.qr(qr)) stop("argument is not a QR decomposition")
-    if(is.complex(qr$qr)) stop("not implemented for complex 'qr'")
-    if(isTRUE(attr(qr, "useLAPACK"))) stop("not supported for LAPACK QR")
+    if(!is.qr(qr)) stop(gettextf("'%s' argument is not a QR decomposition", "qr"))
+    if(is.complex(qr$qr)) stop("'qr()' function is not implemented for complex 'qr' argument")
+    if(isTRUE(attr(qr, "useLAPACK"))) stop("'qr()' function is not supported for LAPACK QR")
     n <- as.integer(nrow(qr$qr))
-    if(is.na(n)) stop("invalid nrow(qr$qr)")
+    if(is.na(n)) stop(gettextf("invalid '%s' value", "nrow(qr$qr)"))
     k <- as.integer(k)
-    if(k > qr$rank) stop("'k' is too large")
+    if(k > qr$rank) stop(gettextf("'%s' argument is too large", "k"))
     ny <- as.integer(NCOL(y))
-    if(is.na(ny)) stop("invalid NCOL(y)")
+    if(is.na(ny)) stop(gettextf("invalid '%s' value", "NCOL(y)"))
     if( NROW(y) != n )
-	stop("'qr' and 'y' must have the same number of rows")
+	stop("'qr' and 'y' arguments must have the same number of rows")
     storage.mode(y) <- "double"
     .Fortran(.F_dqrxb,
 	     as.double(qr$qr), n, k, as.double(qr$qraux), y, ny, xb = y)$xb
@@ -201,7 +201,7 @@ qr.fitted <- function(qr, y, k=qr$rank)
 ##---- The next three are from Doug Bates ('st849'):
 qr.Q <- function (qr, complete = FALSE, Dvec)
 {
-    if(!is.qr(qr)) stop("argument is not a QR decomposition")
+    if(!is.qr(qr)) stop(gettextf("'%s' argument is not a QR decomposition", "qr"))
     dqr <- dim(qr$qr)
     n <- dqr[1L]
     cmplx <- mode(qr$qr) == "complex"
@@ -219,7 +219,7 @@ qr.Q <- function (qr, complete = FALSE, Dvec)
 
 qr.R <- function (qr, complete = FALSE)
 {
-    if(!is.qr(qr)) stop("argument is not a QR decomposition")
+    if(!is.qr(qr)) stop(gettextf("'%s' argument is not a QR decomposition", "qr"))
     R <- qr$qr
     if (!complete)
 	R <- R[seq.int(min(dim(R))), , drop = FALSE]
@@ -230,14 +230,14 @@ qr.R <- function (qr, complete = FALSE)
 qr.X <- function (qr, complete = FALSE,
 		  ncol = if (complete) nrow(R) else min(dim(R)))
 {
-    if(!is.qr(qr)) stop("argument is not a QR decomposition")
+    if(!is.qr(qr)) stop(gettextf("'%s' argument is not a QR decomposition", "qr"))
     pivoted <- !identical(qr$pivot, ip <- seq_along(qr$pivot))
     R <- qr.R(qr, complete = TRUE)
     if(pivoted && ncol < length(qr$pivot))
         stop("need larger value of 'ncol' as pivoting occurred")
     cmplx <- mode(R) == "complex"
     p <- as.integer(dim(R)[2L])
-    if(is.na(p)) stop("invalid NCOL(R)")
+    if(is.na(p)) stop(gettextf("invalid '%s' value", "NCOL(R)"))
     if (ncol < p)
 	R <- R[, seq_len(ncol), drop = FALSE]
     else if (ncol > p) {

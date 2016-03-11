@@ -36,10 +36,7 @@ bug.report <- function(subject = "", address,
                        ...)
 {
     baseR <- function() {
-        writeLines(c("  Bug reports on R and the base packages need to be submitted",
-                     "  to the tracker at http://bugs.r-project.org/ .",
-                     "",
-                     "  We will now try to open that website in a browser"))
+        writeLines(gettext("  Bug reports on R and the base packages need to be submitted\n  to the tracker at http://bugs.r-project.org/ .\n\n  We will now try to open that website in a browser"))
         flush.console()
         Sys.sleep(2)
         browseURL("https://bugs.r-project.org/bugzilla3/index.cgi")
@@ -55,7 +52,7 @@ bug.report <- function(subject = "", address,
     DESC <- packageDescription(package, lib.loc)
     if (!inherits(DESC, "packageDescription"))
         stop(gettextf("Package %s: DESCRIPTION file not found",
-                      sQuote(package)), domain = NA)
+                      sQuote(package)), domain = "R-utils")
     info <- paste0(c("Package", " Version", " Maintainer", " Built"),
 		   ": ",
 		   c(DESC$Package, DESC$Version, DESC$Maintainer, DESC$Built))
@@ -64,11 +61,7 @@ bug.report <- function(subject = "", address,
 
     if (!is.null(DESC$BugReports)) {
         writeLines(info)
-        cat("\nThis package has a bug submission web page, which we will now attempt\n",
-            "to open.  The information above may be useful in your report. If the web\n",
-            "page doesn't work, you should send email to the maintainer,\n",
-            DESC$Maintainer, ".\n",
-            sep = "")
+        cat("\n", gettextf("This package has a bug submission web page, which we will now attempt to open. The information above may be useful in your report. If the web page doesn't work, you should send email to the maintainer, %s.", DESC$Maintainer), "\n", sep = "")
         flush.console()
         Sys.sleep(2)
         browseURL(DESC$BugReports)
@@ -76,8 +69,8 @@ bug.report <- function(subject = "", address,
     }
 
     if (missing(address)) address <- findEmail(DESC$Maintainer)
-    create.post(instructions = c("", "<<insert bug report here>>", rep("", 3)),
-                description = "bug report",
+    create.post(instructions = c("", gettext("<<insert bug report here>>"), rep("", 3)),
+                description = gettext("bug report"),
                 subject = subject, address = address,
                 filename = file, info = info, ...)
 }

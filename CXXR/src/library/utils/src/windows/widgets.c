@@ -29,7 +29,7 @@
 #include <rui.h> // RConsole
 #include <windows.h>
 
-#include "win-nls.h"
+#include "localization.h"
 
 static window wselect;
 static button bFinish, bCancel;
@@ -179,17 +179,17 @@ SEXP chooseFiles(SEXP def, SEXP caption, SEXP smulti, SEXP filters, SEXP sindex)
     multi = asLogical(smulti);
     filterindex = asInteger(sindex);
     if(length(def) != 1 )
-	error(_("'default' must be a character string"));
+	error(_("'%s' argument must be a character string"), "default");
     p = filenameToWchar(STRING_ELT(def, 0), 1);
-    if(wcslen(p) >= 32768) error(_("'default' is overlong"));
+    if(wcslen(p) >= 32768) error(_("'default' argument is overlong"));
     wcscpy(path, p);
     for(temp = path; *temp; temp++) if(*temp == L'/') *temp = L'\\';
     if(length(caption) != 1 )
-	error(_("'caption' must be a character string"));
+	error(_("'%s' argument must be a character string"), "caption");
     if(multi == NA_LOGICAL)
-	error(_("'multi' must be a logical value"));
+	error(_("'multi' argument must be a logical value"));
     if(filterindex == NA_INTEGER)
-	error(_("'filterindex' must be an integer value"));
+	error(_("'filterindex' argument must be an integer value"));
     lfilters = 1 + length(filters);
     for (i = 0; i < length(filters); i++)
 	lfilters += wcslen(filenameToWchar(STRING_ELT(filters, i), 0));
@@ -244,13 +244,13 @@ SEXP chooseDir(SEXP def, SEXP caption)
     char path[MAX_PATH];
 
     if(!isString(def) || length(def) != 1 )
-	error(_("'default' must be a character string"));
+	error(_("'%s' argument must be a character string"), "default");
     p = translateChar(STRING_ELT(def, 0));
-    if(strlen(p) >= MAX_PATH) error(_("'default' is overlong"));
+    if(strlen(p) >= MAX_PATH) error(_("'default' argument is overlong"));
     strcpy(path, R_ExpandFileName(p));
     R_fixbackslash(path);
     if(!isString(caption) || length(caption) != 1 )
-	error(_("'caption' must be a character string"));
+	error(_("'%s' argument must be a character string"), "caption");
     p = askcdstring(translateChar(STRING_ELT(caption, 0)), path);
 
     SEXP ans = PROTECT(allocVector(STRSXP, 1));

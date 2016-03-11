@@ -199,7 +199,7 @@ function(dir,
                               available[pos, "Repository"],
                               rfiles)
             for(i in seq_along(rfiles)) {
-                message(sprintf("downloading %s ... ", rfiles[i]),
+                message(sprintf("downloading file %s ... ", sQuote(rfiles[i])),
                         appendLF = FALSE)
                 status <- if(!utils::download.file(rfurls[i], rfiles[i],
                                                    quiet = TRUE))
@@ -237,9 +237,8 @@ function(dir,
                     utils::old.packages(libs,
                                         available = available)[, "Package"]))
     if(length(depends)) {
-        message(paste(strwrap(sprintf("installing dependencies %s",
-                                      paste(sQuote(sort(depends)),
-                                            collapse = ", ")),
+        message(paste(strwrap(sprintf(gettext("installing dependencies %s", domain = "R-tools"),
+                                      paste(sQuote(depends), collapse = ", ")),
                               exdent = 2L),
                       collapse = "\n"), domain = NA)
         ## <NOTE>
@@ -299,7 +298,7 @@ function(dir,
     pfiles <- c(pfiles, rfiles)
 
     check_package <- function(pfile, args_db = NULL, env_db = NULL) {
-        message(sprintf("checking %s ...", pfile))
+        message(sprintf("checking package %s ...", sQuote(pfile)))
         pname <- sub("_.*", "", basename(pfile))
         out <- file.path(outdir,
                          sprintf("check_%s_stdout.txt", pname))
@@ -366,17 +365,17 @@ print.check_packages_in_dir <-
 function(x, ...)
 {
     if(!length(x)) {
-        writeLines("No packages checked.")
+        writeLines(gettext("No packages checked.", domain = "R-tools"))
         return(invisible(x))
     }
 
     dir <- attr(x, "dir")
-    writeLines(c(strwrap(sprintf("Check results for packages in dir '%s':",
-                                 dir)),
-                 sprintf("Package sources: %d, Reverse depends: %d",
+    writeLines(c(strwrap(gettextf("Check results for packages in dir '%s':",
+                                 dir, domain = "R-tools")),
+                 gettextf("Package sources: %d, Reverse depends: %d",
                          length(attr(x, "pnames")),
-                         length(attr(x, "rnames"))),
-                 "Use summary() for more information."))
+                         length(attr(x, "rnames")), domain = "R-tools"),
+                 gettext("Use 'summary()' for more information.", domain = "R-tools")))
     invisible(x)
 }
 
@@ -386,17 +385,17 @@ summary.check_packages_in_dir <-
 function(object, all = TRUE, full = FALSE, ...)
 {
     if(!length(object)) {
-        writeLines("No packages checked.")
+        writeLines(gettext("No packages checked.", domain = "R-tools"))
         return(invisible(object))
     }
 
     dir <- attr(object, "dir")
-    writeLines(c(strwrap(sprintf("Check results for packages in dir '%s':",
-                                 dir)),
+    writeLines(c(strwrap(gettextf("Check results for packages in dir '%s':",
+                                 dir, domain = "R-tools")),
                  ""))
     details <- summarize_check_packages_in_dir_results(dir)
     if(!full && details) {
-        writeLines("\nUse summary(full = TRUE) for details.")
+        writeLines(gettext("\nUse 'summary(full = TRUE)' for details.", domain = "R-tools"))
     }
     invisible(object)
 }
@@ -586,7 +585,7 @@ function(dir, all = FALSE, full = FALSE)
                                      basename(dirname(tfiles))),
                                  sapply(timings, nrow)))
         invisible(Map(function(x, y) {
-            writeLines(sprintf("Example timings for package '%s':", x))
+            writeLines(gettextf("Example timings for package %s:", sQuote(x), domain = "R-tools"))
             cat(rbind(" ", t(as.matrix(y))),
                 sep = c(" ", " ", " ", " ", "\n"))
         },
@@ -623,7 +622,7 @@ function(dir, logs = NULL)
             else if(any(category == "WARNING")) "WARN"
             else "NOTE"
         } else {
-            "OK"
+            gettext("OK", domain = "R-tools")
         }
         list(status = status, lines = lines[ind])
     })
@@ -884,16 +883,16 @@ function(x, ...)
 {
     flags <- x$Flags
     flavor <- x$Flavor
-    paste(sprintf("Package: %s %s\n",
-                  x$Package, x$Version),
+    paste(gettextf("Package: %s %s\n",
+                  x$Package, x$Version, domain = "R-tools"),
           ifelse(nzchar(flavor),
-                 sprintf("Flavor: %s\n", flavor),
+                 gettextf("Flavor: %s\n", flavor, domain = "R-tools"),
                  ""),
           ifelse(nzchar(flags),
-                 sprintf("Flags: %s\n", flags),
+                 gettextf("Flags: %s\n", flags, domain = "R-tools"),
                  ""),
-          sprintf("Check: %s, Result: %s\n",
-                  x$Check, x$Status),
+          gettextf("Check: %s, Result: %s\n",
+                  x$Check, x$Status, domain = "R-tools"),
           sprintf("  %s",
                   gsub("\n", "\n  ", x$Output,
                        perl = TRUE, useBytes = TRUE)),

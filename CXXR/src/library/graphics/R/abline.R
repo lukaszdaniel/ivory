@@ -31,7 +31,7 @@ abline <- function(a = NULL, b = NULL, h = NULL, v = NULL, reg = NULL,
 	## was	(!is.null(a) && is.list(a))
 	p <- length(coefa <- as.vector(coef(a)))
 	if (p > 2)
-            warning(gettextf("only using the first two of %d regression coefficients", p), domain = NA)
+            warning(gettextf("only using the first two of %d regression coefficients", p), domain = "R-graphics")
 	islm <- inherits(a, "lm")
 	noInt <- if(islm) !as.logical(attr(stats::terms(a), "intercept")) else p == 1
 	if (noInt) {

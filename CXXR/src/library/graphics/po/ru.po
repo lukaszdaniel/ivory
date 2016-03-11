@@ -9,10 +9,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
-"Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-06-06 13:51+0100\n"
-"PO-Revision-Date: 2015-03-26 18:57-0600\n"
-"Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-04 22:32+0100\n"
+"PO-Revision-Date: 2015-01-17 15:10+0100\n"
+"Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -21,267 +21,280 @@ msgstr ""
 "First-Translator: Dmitri I GOULIAEV <dmitri.gouliaev@telkel.net\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
-#: base.c:43
+#: base.c:37
 msgid "no base graphics system is registered"
-msgstr "не зарегистрирована базовая графическая система"
+msgstr ""
 
-#: base.c:333 base.c:340 base.c:348
+#: base.c:304
+#, fuzzy
+msgid "Incompatible graphics state"
+msgstr "неправильное графическое состояние"
+
+#: base.c:348
+#, fuzzy
+msgid "event 'GE_ScalePS' requires a single numeric value"
+msgstr "Событие GE_ScalePS требует единичного числового значения"
+
+#: base.c:379 base.c:386 base.c:394
+#, fuzzy
 msgid "the base graphics system is not registered"
-msgstr "базовая графическая система не зарегистрирована"
+msgstr "слишком много зарегистрированных графических систем"
 
-#: graphics.c:297
+#: graphics.c:290
 #, c-format
 msgid "bad units specified in '%s'"
 msgstr "в %s указаны неправильные единицы"
 
-#: graphics.c:1791 graphics.c:1813
+#: graphics.c:1784 graphics.c:1806
 msgid "attempt to plot on null device"
 msgstr "попытка рисовать на null-устройстве"
 
-#: graphics.c:1843
-msgid "outer margins too large (figure region too small)"
-msgstr "внешние края слишком велики (область фигуры слишком мала)"
+#: graphics.c:1836
+#, fuzzy
+msgid "outer margins are too large (figure region is too small)"
+msgstr "внешние края слишком велики (fig.region слишком мал)"
 
-#: graphics.c:1845
-msgid "figure region too large"
+#: graphics.c:1838
+#, fuzzy
+msgid "figure region is too large"
 msgstr "область рисунка слишком велика"
 
-#: graphics.c:1847
-msgid "figure margins too large"
+#: graphics.c:1840
+#, fuzzy
+msgid "figure margins are too large"
 msgstr "края рисунка слишком велики"
 
-#: graphics.c:1849
-msgid "plot region too large"
+#: graphics.c:1842
+#, fuzzy
+msgid "plot region is too large"
 msgstr "область графика слишком велика"
 
-#: graphics.c:1896
-#, c-format
+#: graphics.c:1889
+#, fuzzy, c-format
 msgid "relative range of values (%4.0f * EPS) is small (axis %d)"
-msgstr "относительный размах значений (%4.0f * EPS) мал (ось %d)"
+msgstr "относительный размах значений =%4.0f * EPS мал (ось %d)"
 
-#: graphics.c:1948
+#: graphics.c:1941
 #, c-format
 msgid "nonfinite axis limits [GScale(%g,%g,%d, .); log=%d]"
 msgstr "неопределенные границы осей [GScale(%g,%g,%d, .); log=%d]"
 
-#: graphics.c:1978
+#: graphics.c:1971
 #, c-format
 msgid "axis style \"%c\" unimplemented"
 msgstr "стиль оси \"%c\" не разработан"
 
-#: graphics.c:2216
+#: graphics.c:2209 graphics.c:2597
+#, fuzzy
 msgid "no graphics device is active"
-msgstr "нет активного графического устройства"
+msgstr "Нет активного графического устройства"
 
-#: graphics.c:2411
+#: graphics.c:2404
 msgid "plot.new has not been called yet"
 msgstr "'plot.new' пока не вызван"
 
-#: graphics.c:2413
+#: graphics.c:2406
 msgid "invalid graphics state"
 msgstr "неправильное графическое состояние"
 
-#: graphics.c:2555
+#: graphics.c:2548
 msgid "graphics device closed during call to locator or identify"
-msgstr "графическое устройство закрыто в процессе вызова locator или identify"
+msgstr ""
 
-#: graphics.c:2604
-msgid "No graphics device is active"
-msgstr "Нет активного графического устройства"
-
-#: graphics.c:3063
+#: graphics.c:3056
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "стрелка нулевой длины имеет неопределенный угол и поэтому пропущена"
 
-#: graphics.c:3144
+#: graphics.c:3137
 #, c-format
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "неправильный par(\"bty\") = '%c'; не нарисован box()"
 
-#: graphics.c:3161
-msgid "invalid argument to GBox"
-msgstr "неправильный аргумент для GBox"
+#: graphics.c:3154 par.c:1121
+#, fuzzy, c-format
+msgid "invalid argument passed to '%s' function"
+msgstr "par() передан неправильный аргумент"
 
-#: graphics.c:3406
+#: graphics.c:3399
+#, fuzzy
 msgid "metric information not available for this device"
-msgstr "метрическая информация для этого устройства недоступна"
+msgstr "Метрическая информация для этого устройства недоступна"
 
 #: par-common.c:143
 msgid "graphical parameter 'family' has a maximum length of 200 bytes"
 msgstr "максимальная длина графического параметра 'family' -- 200 байт"
 
-#: par.c:160
+#: par-common.c:243
+msgid "'mgp[1:3]' are of differing sign"
+msgstr ""
+
+#: par.c:161
 #, c-format
 msgid "invalid value specified for graphical parameter \"%s\""
 msgstr "указано неправильное значение графического параметра \"%s\""
 
-#: par.c:167
+#: par.c:168
 #, c-format
 msgid "graphical parameter \"%s\" has the wrong length"
 msgstr "графический параметр \"%s\" неправильной длины"
 
-#: par.c:262 par.c:673
+#: par.c:263 par.c:674
 #, c-format
 msgid "graphical parameter \"%s\" cannot be set"
 msgstr "графический параметр \"%s\" не может быть установлен"
 
-#: par.c:434
+#: par.c:435
 msgid "parameter \"mfg\" has the wrong length"
 msgstr "параметр \"mfg\" неправильной длины"
 
-#: par.c:442
-msgid "parameter \"i\" in \"mfg\" is out of range"
+#: par.c:443 par.c:445
+#, fuzzy, c-format
+msgid "parameter \"%s\" in \"mfg\" parameter is out of range"
 msgstr "параметр \"i\" в \"mfg\" выходит за пределы"
 
-#: par.c:444
-msgid "parameter \"j\" in \"mfg\" is out of range"
-msgstr "параметр \"j\" в \"mfg\" выходит за пределы"
-
-#: par.c:449
-msgid "value of 'nr' in \"mfg\" is wrong and will be ignored"
+#: par.c:450 par.c:452
+#, fuzzy, c-format
+msgid "value of '%s' in \"mfg\" parameter is wrong and will be ignored"
 msgstr "значение 'nr' в \"mfg\" неправильное и будет пропущено"
 
-#: par.c:451
-msgid "value of 'nc' in \"mfg\" is wrong and will be ignored"
-msgstr "значение 'nc' в \"mfg\" неправильное и будет пропущено"
-
-#: par.c:478
-msgid "calling par(new=TRUE) with no plot"
+#: par.c:479
+#, fuzzy
+msgid "calling 'par(new=TRUE)' with no plot"
 msgstr "вызов par(new=TRUE) без графика"
 
-#: par.c:665 par.c:1063
+#: par.c:666 par.c:1064
 #, c-format
 msgid "graphical parameter \"%s\" is obsolete"
 msgstr "графический параметр \"%s\" устарел"
 
-#: par.c:669 par.c:1067
+#: par.c:670 par.c:1068
 #, c-format
 msgid "\"%s\" is not a graphical parameter"
 msgstr "\"%s\" -- не графический параметр"
 
-#: par.c:1120
-msgid "invalid argument passed to par()"
-msgstr "par() передан неправильный аргумент"
-
-#: par.c:1164
+#: par.c:1165
 #, c-format
 msgid "too many rows in layout, limit %d"
 msgstr "слишком много строк в разметке, надо не больше %d"
 
-#: par.c:1170
+#: par.c:1171
 #, c-format
 msgid "too many columns in layout, limit %d"
 msgstr "слишком много колонок в разметке, надо не больше %d"
 
-#: par.c:1172
+#: par.c:1173
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr "слишком много ячеек в разметке, надо не больше %d"
 
-#: plot.c:60
-msgid "invalid color specification"
-msgstr "неправильное указание цвета"
+#: plot.c:38 plot3d.c:38
+msgid "invalid type passed to graphics function"
+msgstr ""
 
-#: plot.c:126
+#: plot.c:61
+#, fuzzy
+msgid "invalid color specification"
+msgstr "неправильное указание шрифта"
+
+#: plot.c:127
 msgid "only NA allowed in logical plotting symbol"
 msgstr "только NA разрешены в логических графических символах"
 
-#: plot.c:128
+#: plot.c:129
 msgid "invalid plotting symbol"
 msgstr "неправильный графический символ"
 
-#: plot.c:217
-msgid "invalid font specification"
-msgstr "неправильное указание шрифта"
+#: plot.c:218 plot.c:2781 plot3d.c:1180 plot3d.c:1184
+#, c-format
+msgid "invalid '%s' specification"
+msgstr "неправильное определение '%s'"
 
-#: plot.c:276 plot.c:290 plot.c:481 plot.c:486 plot.c:2112 plot.c:2119
-#: plot.c:3141 plot.c:3143 plot.c:3145 plot.c:3300 plot3d.c:1163 plot3d.c:1167
-#: plot3d.c:1169 plot3d.c:1903
+#: plot.c:277 plot.c:291 plot.c:482 plot.c:487 plot.c:2112 plot.c:2119
+#: plot.c:3141 plot.c:3143 plot.c:3145 plot.c:3300 plot3d.c:1164 plot3d.c:1168
+#: plot3d.c:1170 plot3d.c:1904
 #, c-format
 msgid "invalid '%s' value"
 msgstr "неправильное значение '%s'"
 
-#: plot.c:293
-#, c-format
+#: plot.c:294
+#, fuzzy, c-format
 msgid "invalid 'vfont' value [typeface %d]"
-msgstr "неправильное значение 'vfont' [гарнитура %d]"
+msgstr "неправильный значение 'vfont' [typeface]"
 
-#: plot.c:317
+#: plot.c:318
 #, c-format
 msgid "invalid 'vfont' value [typeface = %d, fontindex = %d]"
 msgstr "неправильное значение 'vfont' [typeface = %d, fontindex = %d]"
 
-#: plot.c:391
+#: plot.c:392
 msgid "invalid graphics parameter"
 msgstr "неправильный графический параметр"
 
-#: plot.c:477
+#: plot.c:478
 msgid "at least 3 arguments required"
 msgstr "требуется не менее 3 аргументов"
 
-#: plot.c:492
+#: plot.c:493
 msgid "\"log=\" specification must be character"
 msgstr "указание \"log=\" должно быть текстом"
 
-#: plot.c:503
+#: plot.c:504
 #, c-format
 msgid "invalid \"log=%s\" specification"
 msgstr "неправильное указание \"log=%s\""
 
-#: plot.c:518
-msgid "NAs not allowed in 'xlim'"
+#: plot.c:519 plot.c:531
+#, fuzzy, c-format
+msgid "NA values are not allowed in '%s'"
 msgstr "NA не разрешены в 'xlim'"
 
-#: plot.c:524
-msgid "need finite 'xlim' values"
+#: plot.c:525 plot.c:537
+#, fuzzy, c-format
+msgid "'%s' needs finite values"
 msgstr "нужны конечные значения 'xlim'"
 
-#: plot.c:530
-msgid "NAs not allowed in 'ylim'"
-msgstr "NA не разрешены в 'ylim'"
-
-#: plot.c:536
-msgid "need finite 'ylim' values"
-msgstr "нужны конечные значения 'ylim'"
-
-#: plot.c:542
+#: plot.c:543
 msgid "Logarithmic axis must have positive limits"
 msgstr "Логарифмическая ось должна иметь положительные границы"
 
-#: plot.c:664
+#: plot.c:665
 msgid "invalid type for axis labels"
 msgstr "неправильный тип меток осей"
 
-#: plot.c:765 plot.c:1298 plot.c:1621 plot.c:1686 plot.c:1761 plot.c:1827
+#: plot.c:766 plot.c:1298 plot.c:1621 plot.c:1686 plot.c:1761 plot.c:1827
 #: plot.c:1901 plot.c:1996 plot.c:2072 plot.c:2350 plot.c:2524 plot.c:2740
-#: plot.c:3282 plot.c:3409 plot.c:3485 plot.c:3651 plot.c:3931 plot3d.c:1872
+#: plot.c:3282 plot.c:3409 plot.c:3485 plot.c:3651 plot.c:3931 plot3d.c:1873
 msgid "too few arguments"
 msgstr "слишком мало аргументов"
 
-#: plot.c:776
+#: plot.c:777
 #, c-format
 msgid "invalid axis number %d"
 msgstr "неправильное количество осей %d"
 
-#: plot.c:866
-msgid "'hadj' must be of length one"
+#: plot.c:867
+#, fuzzy, c-format
+msgid "'%s' argument must be of length 1"
 msgstr "'hadj' должен быть единичной длины"
 
-#: plot.c:873 plot.c:2084 plot.c:2361 plot.c:2367 plot.c:2374 plot.c:2382
+#: plot.c:874 plot.c:2084 plot.c:2361 plot.c:2367 plot.c:2374 plot.c:2382
 #: plot.c:2389 plot.c:2396 plot.c:2403 plot.c:2410 plot.c:2418 plot.c:2425
 #: plot.c:3148
-#, c-format
+#, fuzzy, c-format
 msgid "zero-length '%s' specified"
-msgstr "указана нулевая длина '%s'"
+msgstr "указана нулевая длина 'side'"
 
-#: plot.c:942
-msgid "'labels' is supplied and not 'at'"
+#: plot.c:943
+#, fuzzy
+msgid "'labels' argument is supplied and not 'at' argument"
 msgstr "есть 'labels', но нет 'at'"
 
-#: plot.c:946
-#, c-format
-msgid "'at' and 'labels' lengths differ, %d != %d"
+#: plot.c:947
+#, fuzzy, c-format
+msgid "'at' and 'labels' argument lengths differ, %d != %d"
 msgstr "'at' и 'label' различаются по длине, %d != %d"
 
 #: plot.c:963
@@ -293,8 +306,8 @@ msgid "invalid plotting structure"
 msgstr "неправильная структура графика"
 
 #: plot.c:1316
-#, c-format
-msgid "'x' and 'y' lengths differ in %s()"
+#, fuzzy, c-format
+msgid "'x' and 'y' argument lengths differ in '%s' function"
 msgstr "длины 'x' и 'y' в %s() различаются"
 
 #: plot.c:1327
@@ -333,7 +346,7 @@ msgstr "не могу смешивать координаты нулевой д�
 
 #: plot.c:1832
 msgid "Empty raster"
-msgstr "Пустой растр"
+msgstr ""
 
 #: plot.c:1914
 msgid "invalid arrow head length"
@@ -351,26 +364,23 @@ msgstr "неправильное определение наконечника �
 msgid "no coordinates were supplied"
 msgstr "не указаны координаты"
 
-#: plot.c:2781
-msgid "invalid a=, b= specification"
-msgstr "неправильное указание a=, b="
-
 #: plot.c:2790
-msgid "'a' and 'b' must be finite"
+#, fuzzy
+msgid "'a' and 'b' arguments must be finite"
 msgstr "'a' и 'b' должны быть конечными"
 
-#: plot.c:2925 plot.c:4051 plot.c:4055 plot.c:4058 plot.c:4078 plot.c:4082
-#: plot.c:4085 plot3d.c:1085 plot3d.c:1089 plot3d.c:1094 plot3d.c:1098
-#: plot3d.c:1102 plot3d.c:1106 stem.c:158 stem.c:159 stem.c:161 stem.c:162
-#: stem.c:208 stem.c:209
+#: plot.c:2925 plot.c:4022 plot.c:4025 plot.c:4028 plot.c:4031 plot.c:4051
+#: plot.c:4055 plot.c:4058 plot.c:4078 plot.c:4082 plot.c:4085 plot3d.c:1086
+#: plot3d.c:1090 plot3d.c:1095 plot3d.c:1099 plot3d.c:1103 plot3d.c:1107
+#: stem.c:156 stem.c:157 stem.c:159 stem.c:160 stem.c:206 stem.c:207
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "неправильный аргумент '%s'"
 
 #: plot.c:2997 plot.c:3137
-#, c-format
-msgid "invalid number of points in %s"
-msgstr "неправильное количество точек в %s"
+#, fuzzy, c-format
+msgid "invalid number of points in '%s' function"
+msgstr "неправильное количество точек в locator()"
 
 #: plot.c:3139
 msgid "incorrect argument type"
@@ -381,7 +391,8 @@ msgid "different argument lengths"
 msgstr "различные длины аргументов"
 
 #: plot.c:3153
-msgid "more 'labels' than points"
+#, fuzzy
+msgid "more labels than points"
 msgstr "'labels' больше чем точек"
 
 #: plot.c:3202
@@ -390,7 +401,8 @@ msgid "warning: no point within %.2f inches\n"
 msgstr "предупреждение: нет точки в пределах %.2f дюйма\n"
 
 #: plot.c:3208
-msgid "warning: nearest point already identified\n"
+#, fuzzy
+msgid "warning: nearest point is already identified\n"
 msgstr "предупреждение: ближайшая точка уже определена\n"
 
 #: plot.c:3293
@@ -437,29 +449,28 @@ msgstr "неправильные данные о звездочках"
 msgid "invalid thermometers data (need 3 or 4 columns)"
 msgstr "неправильные данные о градусниках (нужно 3 или 4 колонки)"
 
-#: plot.c:3804
-#, c-format
+#: plot.c:3804 plot.c:3810
+#, fuzzy, c-format
 msgid "invalid 'thermometers[, %s]'"
-msgstr "неправильные 'thermometers[, %s]'"
+msgstr "неправильные 'thermometers[,%s]'"
 
 #: plot.c:3807
-#, c-format
+#, fuzzy, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
-msgstr "'thermometers[, %s]' вне [0,1] -- может странно выглядеть"
-
-#: plot.c:3810
-msgid "invalid 'thermometers[, 1:2]'"
-msgstr "неправильные 'thermometers[, 1:2]'"
+msgstr "'thermometers[,%s]' вне [0,1] -- может странно выглядеть"
 
 #: plot.c:3849
+#, fuzzy
 msgid "invalid 'boxplots' data (need 5 columns)"
 msgstr "неправильные данные о ящиках-с-усами (нужно 5 колонок)"
 
 #: plot.c:3858
+#, fuzzy
 msgid "'boxplots[, 5]' outside [0,1] -- may look funny"
-msgstr "'boxplots[, 5]' вне [0,1] -- может странно выглядеть"
+msgstr "'boxplots[,5]' вне [0,1] -- может странно выглядеть"
 
 #: plot.c:3860
+#, fuzzy
 msgid "invalid 'boxplots[, 1:4]'"
 msgstr "неправильные 'boxplots[, 1:4]'"
 
@@ -472,113 +483,182 @@ msgstr "неправильный тип символа"
 msgid "incorrect length for '%s' argument"
 msgstr "неправильная длина аргумента '%s''"
 
-#: plot3d.c:181 plot3d.c:1929
+#: plot.c:3970
+#, fuzzy
+msgid "unable to allocate memory (in 'xspline()')"
+msgstr "не могу разместить память (в xspline)"
+
+#: plot3d.c:182 plot3d.c:1930
 msgid "insufficient 'x' or 'y' values"
 msgstr "недостаточные значения 'x' или 'y'"
 
-#: plot3d.c:185 plot3d.c:1932
+#: plot3d.c:186 plot3d.c:1933
 msgid "dimension mismatch"
 msgstr "несоответствие размерности"
 
-#: plot3d.c:193 plot3d.c:1935
+#: plot3d.c:194 plot3d.c:1936
 msgid "no contour values"
 msgstr "нет значений контура"
 
-#: plot3d.c:255
+#: plot3d.c:256
 msgid "invalid x / y values or limits"
 msgstr "неправильные x/y-значения или границы"
 
-#: plot3d.c:257
+#: plot3d.c:258
 msgid "invalid contour levels: must be strictly increasing"
 msgstr "неправильные уровни контура: должны четко увеличиваться"
 
-#: plot3d.c:1049 plot3d.c:1062
+#: plot3d.c:1050 plot3d.c:1063
 msgid "Axis orientation not calculated"
 msgstr "Положение осей не вычислено"
 
-#: plot3d.c:1082
+#: plot3d.c:1083
 msgid "too few parameters"
 msgstr "слишком мало параметров"
 
-#: plot3d.c:1112
-msgid "invalid 'x' limits"
+#: plot3d.c:1113 plot3d.c:1115 plot3d.c:1117
+#, fuzzy, c-format
+msgid "invalid '%s' limits"
 msgstr "неправильные границы 'x'"
 
-#: plot3d.c:1114
-msgid "invalid 'y' limits"
-msgstr "неправильные границы 'y'"
-
-#: plot3d.c:1116
-msgid "invalid 'z' limits"
-msgstr "неправильные границы 'z'"
-
-#: plot3d.c:1137
-msgid "'xlab' must be a character vector of length 1"
+#: plot3d.c:1138 plot3d.c:1140 plot3d.c:1142
+#, fuzzy, c-format
+msgid "'%s' argument must be a character vector of length 1"
 msgstr "'xlab' должен быть текстовым вектором единичной длины"
 
-#: plot3d.c:1139
-msgid "'ylab' must be a character vector of length 1"
-msgstr "'ylab' должен быть текстовым вектором единичной длины"
-
-#: plot3d.c:1141
-msgid "'zlab' must be a character vector of length 1"
-msgstr "'zlab' должен быть текстовым вектором единичной длины"
-
-#: plot3d.c:1161
+#: plot3d.c:1162
 msgid "invalid viewing parameters"
 msgstr "неправильные параметры просмотра"
 
-#: plot3d.c:1179 plot3d.c:1183
-#, c-format
-msgid "invalid '%s' specification"
-msgstr "неправильное определение '%s'"
-
-#: plot3d.c:1529
+#: plot3d.c:1530
 #, c-format
 msgid "contour(): circular/long seglist -- set %s > %d?"
 msgstr "contour(): круговой/длинный список сегментов -- set %s > %d?"
 
-#: plot3d.c:1939
-msgid "missing 'x' values"
+#: plot3d.c:1940 plot3d.c:1947
+#, fuzzy, c-format
+msgid "missing '%s' values"
 msgstr "пропущенные значения 'x'"
 
-#: plot3d.c:1941
-msgid "increasing 'x' values expected"
+#: plot3d.c:1942 plot3d.c:1949
+#, fuzzy, c-format
+msgid "increasing '%s' values expected"
 msgstr "нужны увеличивающиеся значения 'x'"
 
-#: plot3d.c:1946
-msgid "missing 'y' values"
-msgstr "пропущенные значения 'y'"
-
-#: plot3d.c:1948
-msgid "increasing 'y' values expected"
-msgstr "нужны увеличивающиеся значения 'y'"
-
-#: plot3d.c:1953
+#: plot3d.c:1954
 msgid "invalid NA contour values"
 msgstr "неправильные NA-значения контура"
 
-#: plot3d.c:1965
-msgid "all z values are equal"
+#: plot3d.c:1966
+#, fuzzy
+msgid "all 'z' values are equal"
 msgstr "все значения z равны"
 
-#: plot3d.c:1967
-msgid "all z values are NA"
+#: plot3d.c:1968
+#, fuzzy
+msgid "all 'z' values are NA"
 msgstr "все значения z являются NA"
 
-#: stem.c:155
+#: stem.c:106
+msgid ""
+"  The decimal point is at the |\n"
+"\n"
+msgstr ""
+
+#: stem.c:110
+#, c-format
+msgid ""
+"  The decimal point is %d digit to the right of the |\n"
+"\n"
+msgid_plural ""
+"  The decimal point is %d digits to the right of the |\n"
+"\n"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: stem.c:112
+#, c-format
+msgid ""
+"  The decimal point is %d digit to the left of the |\n"
+"\n"
+msgid_plural ""
+"  The decimal point is %d digits to the left of the |\n"
+"\n"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: stem.c:150
+#, fuzzy
+msgid "invalid input"
+msgstr "неправильные единицы"
+
+#: stem.c:153
 #, c-format
 msgid "long vector '%s' is not supported"
-msgstr "длинный вектор '%s' не поддерживается"
+msgstr ""
+
+#: stem.c:192
+msgid "count for a bin exceeds INT_MAX"
+msgstr ""
+
+#, fuzzy
+#~ msgid "invalid argument passed to '%s'function"
+#~ msgstr "par() передан неправильный аргумент"
+
+#~ msgid "No graphics device is active"
+#~ msgstr "Нет активного графического устройства"
+
+#~ msgid "invalid argument to GBox"
+#~ msgstr "неправильный аргумент для GBox"
+
+#, fuzzy
+#~ msgid "invalid 'thermometers[, 1:2]'"
+#~ msgstr "неправильные 'thermometers[,1:2]'"
+
+#~ msgid "invalid 'y' limits"
+#~ msgstr "неправильные границы 'y'"
+
+#~ msgid "invalid 'z' limits"
+#~ msgstr "неправильные границы 'z'"
+
+#~ msgid "parameter \"j\" in \"mfg\" is out of range"
+#~ msgstr "параметр \"j\" в \"mfg\" выходит за пределы"
+
+#, fuzzy
+#~ msgid "value of 'nc' in \"mfg\" is wrong and will be ignored"
+#~ msgstr "значение 'nc' в \"mfg\" неправильное и будет пропущено"
+
+#~ msgid "invalid font specification"
+#~ msgstr "неправильное указание шрифта"
+
+#~ msgid "NAs not allowed in 'ylim'"
+#~ msgstr "NA не разрешены в 'ylim'"
+
+#~ msgid "need finite 'ylim' values"
+#~ msgstr "нужны конечные значения 'ylim'"
+
+#~ msgid "invalid a=, b= specification"
+#~ msgstr "неправильное указание a=, b="
+
+#~ msgid "'ylab' must be a character vector of length 1"
+#~ msgstr "'ylab' должен быть текстовым вектором единичной длины"
+
+#~ msgid "'zlab' must be a character vector of length 1"
+#~ msgstr "'zlab' должен быть текстовым вектором единичной длины"
+
+#~ msgid "missing 'y' values"
+#~ msgstr "пропущенные значения 'y'"
+
+#~ msgid "increasing 'y' values expected"
+#~ msgstr "нужны увеличивающиеся значения 'y'"
 
 #~ msgid "unable to allocate memory (in GPolygon)"
 #~ msgstr "не могу разместить память (в GPolygon)"
 
 #~ msgid "invalid number of points in identify()"
 #~ msgstr "неправильное количество точек в identify()"
-
-#~ msgid "Event GE_ScalePS requires a single numeric value"
-#~ msgstr "Событие GE_ScalePS требует единичного числового значения"
 
 #~ msgid "zero length 'padj' specified"
 #~ msgstr "указан 'padj' нулевой длины"
@@ -615,6 +695,3 @@ msgstr "длинный вектор '%s' не поддерживается"
 
 #~ msgid "zero length 'font' specified"
 #~ msgstr "указана нулевая длина 'font'"
-
-#~ msgid "unable to allocate memory (in xspline)"
-#~ msgstr "не могу разместить память (в xspline)"
