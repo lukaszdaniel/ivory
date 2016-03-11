@@ -43,13 +43,7 @@
 #include <rlocale.h> /* for btowc */
 #include "CXXR/IntVector.h"
 
-#undef _
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("utils", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 
 /* The size of vector initially allocated by scan */

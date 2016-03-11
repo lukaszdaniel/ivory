@@ -22,12 +22,6 @@
 
 #include <R.h>
 #include <Rinternals.h>
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("tools", String)
-#else
-#define _(String) (String)
-#endif
 
 SEXP delim_match(SEXP x, SEXP delims);
 SEXP dirchmod(SEXP dr);

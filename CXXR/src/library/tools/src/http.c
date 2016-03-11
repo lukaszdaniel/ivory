@@ -20,7 +20,7 @@
 
 #include <Rinternals.h>
 #include "tools.h"
-
+#include "localization.h"
 
 extern int extR_HTTPDCreate(const char *ip, int port);
 extern void extR_HTTPDStop(void);

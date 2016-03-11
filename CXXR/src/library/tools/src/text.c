@@ -24,6 +24,7 @@
 #include <string.h>
 #include <R.h>
 #include "tools.h"
+#include "localization.h"
 
 #include <stdlib.h> /* for MB_CUR_MAX */
 #include <wchar.h>

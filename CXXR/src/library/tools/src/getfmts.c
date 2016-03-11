@@ -26,13 +26,7 @@
 #include <Defn.h>
 #include "RBufferUtils.h"
 
-#undef _
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("tools", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 
 #define MAXLINE MAXELTSIZE
