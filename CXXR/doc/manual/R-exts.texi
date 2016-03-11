@@ -12316,7 +12316,7 @@ use @code{ln(x)} for the natural logarithm (@code{log(x)} in @R{}).
 @end multitable
 @end quotation
 
-There are a set of constants (@code{PI}, @code{DOUBLE_EPS}) (and so on)
+There are a set of constants (@code{DOUBLE_EPS}) (and so on)
 defined (unless @code{STRICT_R_HEADERS} is defined) in the included
 header @file{R_ext/Constants.h}, mainly for compatibility with @Sl{}.
 

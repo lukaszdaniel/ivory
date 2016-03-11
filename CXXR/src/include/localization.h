@@ -50,6 +50,7 @@
 #define _(String) (String)
 #define N_(String) String
 #define P_(String, StringP, N) (N > 1 ? StringP: String)
+#define ngettext(String, StringP, N) (N > 1 ? StringP: String)
 #endif
 
 #endif /* LOCALIZATION_H_ */
