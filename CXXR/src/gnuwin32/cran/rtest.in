@@ -44,7 +44,7 @@
 </div>
 
 <p>This is a pre-release Windows 32/64 bit build of R-@RVER@,
-including changes up to @DATE@ (r@GITREVISION@).</p>
+including changes up to @DATE@ (r@SVNREVISION@).</p>
 
 <p>This is not an official release.  Please report bugs
 in this version on the R-devel mailing list. </p>

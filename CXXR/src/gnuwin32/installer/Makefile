@@ -108,7 +108,7 @@ imagedir:
 	$(MAKE) --no-print-directory -C ../../../tests -f Makefile.win \
 	  INST_TO=../src/gnuwin32/installer/$(RPREFIX)/tests install-tests
 #
-	$(FIND) $(RPREFIX) -name .git -prune -exec rm -rf \{\} \;
+	$(FIND) $(RPREFIX) -name .svn -prune -exec rm -rf \{\} \;
 	$(FIND) $(RPREFIX) -name \*~ -delete
 
 md5sums:
@@ -161,7 +161,7 @@ extras:
 
 R.iss: JRins.R header1.iss types3264.iss types32.iss code.iss \
    CustomMsg.iss imagedir fixups 32bit extras md5sums \
-  ../../../VERSION ../../../GIT-REVISION
+  ../../../VERSION ../../../SVN-REVISION
 	../../../bin$(R_ARCH)/Rscript JRins.R \
 	  $(RPREFIX) $(RPREFIX) $(MDISDI) \
 	  $(HelpStyle) $(Producer) "$(ISDIR)"

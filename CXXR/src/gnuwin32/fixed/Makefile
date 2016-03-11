@@ -5,7 +5,7 @@ R_HOME = ../../..
 # FIXME:  Should find a make where $(abspath ...) works and avoid this...
 LOCAL_SOFT := $(shell ../Rpwd.exe $(LOCAL_SOFT))
 
-all: profiles fixhtml fixetc fixdoc gitonly
+all: profiles fixhtml fixetc fixdoc svnonly
 
 profiles: $(R_HOME)/library/base/R/Rprofile
 
@@ -63,8 +63,8 @@ fixdoc: $(wildcard ../CHANGES?)
 	$(CP) -p $^ $(R_HOME)/doc
 	@$(ECHO) done > fixdoc
 
-gitonly:
-	@$(MAKE) -C ../../../doc/manual -f Makefile.win gitonly
+svnonly:
+	@$(MAKE) -C ../../../doc/manual -f Makefile.win svnonly
 
 clean:
 	$(RM) *~ */*~ fixhtml fixbin fixetc fixshare fixdoc

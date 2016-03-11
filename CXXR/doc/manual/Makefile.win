@@ -50,7 +50,7 @@ texinputs_BASE = $(R_PKGS_BASE:=-pkg.tex)
 texinputs_RECOMMENDED = $(R_PKGS_RECOMMENDED:=-pkg.tex)
 refman_DEPENDENCIES = version.tex $(top_srcdir)/share/texmf/tex/latex/Rd.sty
 fullrefman_TEXINPUTS = $(texinputs_BASE) $(texinputs_RECOMMENDED)
-GIT_REV = $(top_srcdir)/GIT-REVISION
+SVN_REV = $(top_srcdir)/SVN-REVISION
 
 texiincludes = version.texi $(srcdir)/R-defs.texi
 
@@ -163,10 +163,10 @@ fullrefman.pdf: $(fullrefman_TEXINPUTS) $(refman_DEPENDENCIES) \
 	@TEXINPUTS="$(top_srcdir)/share/texmf/tex/latex;$$TEXINPUTS" \
 	  $(BATCHPDFLATEX) fullrefman.tex
 
-version.tex: $(top_srcdir)/VERSION $(GIT_REV)
+version.tex: $(top_srcdir)/VERSION $(SVN_REV)
 	@$(ECHO) "creating $(subdir)/$@"
 	@(v=`cat $(top_srcdir)/VERSION`; \
-	  v="$${v} (`sed -e 1d -e 's/^Last Changed Date: //' $(GIT_REV)`)"; \
+	  v="$${v} (`sed -e 1d -e 's/^Last Changed Date: //' $(SVN_REV)`)"; \
 	  $(ECHO) "$${v}") > $@
 
 ## Unlike Unix, we don't check dates
@@ -176,11 +176,11 @@ version.tex: $(top_srcdir)/VERSION $(GIT_REV)
 	    | LC_ALL=C $(R_EXE) --slave --vanilla
 FORCE:
 
-version.texi: Makefile.win $(top_srcdir)/VERSION $(GIT_REV)
+version.texi: Makefile.win $(top_srcdir)/VERSION $(SVN_REV)
 	@$(ECHO) "creating $(subdir)/$@"
 	@(vv=`sed 's/ *(.*//' $(top_srcdir)/VERSION`;v=`echo $${vv}| sed 's/\([^ ]*\).*/\1/'`; \
 	  $(ECHO) "@set VERSIONno $${v}" > $@; \
-	  v="$${vv} (`sed -e 1d -e 's/^Last Changed Date: //' $(GIT_REV)`)"; \
+	  v="$${vv} (`sed -e 1d -e 's/^Last Changed Date: //' $(SVN_REV)`)"; \
 	  $(ECHO) "@set VERSION $${v}" >> $@; \
 	  rwv=$(shell ../../bin$(R_ARCH)/Rscript ../../src/gnuwin32/fixed/rwver.R); \
 	  $(ECHO) "@set RWVERSION $${rwv}" >> $@ )
@@ -217,7 +217,7 @@ else
 endif
 
 ## Run from src/gnuwin32/fixed/Makefile
-gitonly: ../FAQ ../RESOURCES ../html/resources.html
+svnonly: ../FAQ ../RESOURCES ../html/resources.html
 
 RVER = $(shell cut -d' ' -f1 $(top_srcdir)/VERSION | sed -n 1p)
 RPREFIX = $(shell ../../bin$(R_ARCH)/Rscript ../../src/gnuwin32/fixed/rwver.R)

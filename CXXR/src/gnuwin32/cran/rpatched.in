@@ -44,7 +44,7 @@
 </div>
 
 <p>This is a combined Windows 32/64 bit binary build R including
-patches up to @DATE@ (r@GITREVISION@).</p>
+patches up to @DATE@ (r@SVNREVISION@).</p>
 
 <p>This is not an official release of R. Please check bugs
 in this version against the official release before reporting them. </p>
