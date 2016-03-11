@@ -25,12 +25,7 @@
 #include <Rinternals.h>
 #include <string.h> // for memcpy
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("splines", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 typedef struct spl_struct {
     int order,			/* order of the spline */
@@ -150,7 +145,7 @@ spline_value(SEXP knots, SEXP coeff, SEXP order, SEXP x, SEXP deriv)
     int ord = asInteger(order);
     int der = asInteger(deriv);
     if (ord == NA_INTEGER || ord <= 0)
-	error(_("'ord' must be a positive integer"));
+	error(_("'%s' argument must be a positive integer"), "ord");
 
     /* populate the spl_struct */
     sp = (struct spl_struct *) R_alloc(1, sizeof(struct spl_struct));
