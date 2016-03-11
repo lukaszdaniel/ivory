@@ -35,7 +35,8 @@
 #include "CXXR/StackChecker.hpp"
 #include "CXXR/Symbol.h"
 #include "CXXR/jit/CompiledFrame.hpp"
-#include "Defn.h"
+#include <Defn.h>
+#include <localization.h>
 
 /*
  * This file contains functions that are available in the runtime module.

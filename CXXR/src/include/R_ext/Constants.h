@@ -30,6 +30,7 @@
 #define R_EXT_CONSTANTS_H_
 
 #ifndef STRICT_R_HEADERS
+#define PI             M_PI
 #include <float.h>  /* Defines the rest, at least in C99 */
 #define SINGLE_EPS     FLT_EPSILON
 #define SINGLE_BASE    FLT_RADIX

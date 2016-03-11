@@ -28,6 +28,7 @@
 #endif
 
 #include <Defn.h>
+#include <localization.h>
 #include <Internal.h>
 #include <R_ext/GraphicsEngine.h>
 #include <R_ext/Applic.h>	/* pretty() */

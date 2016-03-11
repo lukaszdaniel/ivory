@@ -35,6 +35,7 @@
 
 #include <stdlib.h> /* for setenv or putenv */
 #include <Defn.h> /* for PATH_MAX */
+#include <localization.h>
 #include <Internal.h>
 #include <Rinterface.h>
 #include <Fileio.h>

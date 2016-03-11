@@ -32,6 +32,7 @@
 #endif
 
 #include <Defn.h>
+#include <localization.h>
 #include <Internal.h>
 
 #include "CXXR/Browser.hpp"

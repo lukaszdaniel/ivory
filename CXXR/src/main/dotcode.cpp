@@ -30,6 +30,7 @@
 #endif
 
 #include <Defn.h>
+#include <localization.h>
 #include <Internal.h>
 #include <ctype.h> /* for tolower */
 #include <string.h>

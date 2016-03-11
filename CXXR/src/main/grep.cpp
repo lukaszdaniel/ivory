@@ -66,6 +66,7 @@ strsplit grep [g]sub [g]regexpr
 #define NWARN 5
 
 #include <Defn.h>
+#include <localization.h>
 #include <Internal.h>
 #include <R_ext/RS.h>  /* for Calloc/Free */
 #include <ctype.h>

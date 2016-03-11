@@ -26,6 +26,7 @@
  */
 
 #include "Rcomplex.h"
+#include <localization.h>
 
 /* Note: gcc may warn in several places about C99 features as extensions.
    This is a very-long-standing GCC bug, http://gcc.gnu.org/PR7263

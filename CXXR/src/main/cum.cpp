@@ -29,6 +29,7 @@
 #endif
 
 #include <Defn.h>
+#include <localization.h>
 #include <Internal.h>
 
 static SEXP cumsum(SEXP x, SEXP s)

@@ -31,6 +31,7 @@
 #include <stdlib.h> /* for putenv */
 #define R_USE_SIGNALS 1
 #include <Defn.h>
+#include <localization.h>
 #include <Internal.h>
 #include <Fileio.h>
 #include <R_ext/GraphicsEngine.h>

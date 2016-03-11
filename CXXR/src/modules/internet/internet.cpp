@@ -30,6 +30,7 @@
 #endif
 
 #include <Defn.h>
+#include <localization.h>
 #include <Fileio.h>
 #include <Rconnections.h>
 #include <R_ext/R-ftp-http.h>

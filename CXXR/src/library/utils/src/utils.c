@@ -24,7 +24,7 @@
 #include <string.h>
 #include <R.h>
 #include <Rinternals.h>
-
+#include "localization.h"
 #include "utils.h"
 
 /* from src/main/eval.c */

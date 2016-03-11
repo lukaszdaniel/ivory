@@ -35,6 +35,7 @@
 #endif
 
 #include <Defn.h>
+#include <localization.h>
 #include <float.h> /* for DBL_EPSILON etc */
 #include <Graphics.h>
 // --> R_ext/GraphicsEngine.h + Rgraphics.h

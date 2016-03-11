@@ -42,6 +42,7 @@
 #endif
 
 #include <Defn.h>
+#include <localization.h>
 #include <stdlib.h>
 #include <Rinternals.h>
 #include <R_ext/Parse.h>  /* parsing is used in handling escape codes */

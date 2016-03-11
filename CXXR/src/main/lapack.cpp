@@ -28,6 +28,7 @@
 #endif
 
 #include <Defn.h>
+#include <localization.h>
 #include <Internal.h>
 #include <Rdynpriv.h>
 #include <Rmodules/Rlapack.h>

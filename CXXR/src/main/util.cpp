@@ -29,6 +29,7 @@
 #endif
 
 #include <Defn.h>
+#include <localization.h>
 #include <Internal.h>
 #include <R_ext/Print.h>
 #include "basedecl.h"

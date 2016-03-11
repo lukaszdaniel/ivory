@@ -33,6 +33,7 @@
 /* ------------------- socket connections  --------------------- */
 
 #include <Defn.h>
+#include <localization.h>
 #include <Rconnections.h>
 #include <R_ext/R-ftp-http.h>
 #include "sock.h"

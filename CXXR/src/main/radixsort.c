@@ -29,6 +29,7 @@
 #undef COMPILING_RADIXSORT
 
 #include <Defn.h>
+#include <localization.h>
 #include <Internal.h>
 
 // gs = groupsizes e.g.23, 12, 87, 2, 1, 34,...

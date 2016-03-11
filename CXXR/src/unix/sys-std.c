@@ -40,6 +40,7 @@
 
 #define R_USE_SIGNALS 1
 #include <Defn.h>
+#include <localization.h>
 #include <Internal.h>
 
 #ifdef HAVE_STRINGS_H

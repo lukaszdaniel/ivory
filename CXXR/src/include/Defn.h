@@ -995,9 +995,9 @@ extern const char *locale2charset(const char *);
 
 /* Localization */
 
-#ifndef NO_NLS
-#include "localization.h"
-#endif
+//#ifndef NO_NLS
+//#include "localization.h"
+//#endif
 
 /* Macros for suspending interrupts: also in GraphicsDevice.h */
 #define BEGIN_SUSPEND_INTERRUPTS do { \

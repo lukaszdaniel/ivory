@@ -32,9 +32,10 @@
 #include <config.h>
 #endif
 
-#include "Defn.h"
-#include "Fileio.h" /* for R_fopen */
-#include "Startup.h"
+#include <Defn.h>
+#include <localization.h>
+#include <Fileio.h> /* for R_fopen */
+#include <Startup.h>
 
 /* These are used in ../gnuwin32/system.c, ../unix/sys-std.c */
 SA_TYPE SaveAction = SA_SAVEASK;

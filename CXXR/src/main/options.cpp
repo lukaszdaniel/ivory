@@ -28,9 +28,10 @@
 #include <config.h>
 #endif
 
-#include "Defn.h"
+#include <Defn.h>
+#include <localization.h>
 #include <Internal.h>
-#include "Print.h"
+#include <Print.h>
 #include <Rinternals.h>
 
 #include "CXXR/ArgMatcher.hpp"

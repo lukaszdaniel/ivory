@@ -85,6 +85,7 @@
 #endif
 
 #include <Defn.h>
+#include <localization.h>
 #include <Internal.h>
 #include <Fileio.h>
 #include <Rconnections.h>

@@ -41,6 +41,7 @@ R --slave --no-restore --vanilla --file=foo [script_args]
    argument quoting hell.
 */
 
+#include <localization.h>
 #ifdef HAVE_CONFIG_H
 # include <config.h>
 #endif
@@ -67,7 +68,7 @@ R --slave --no-restore --vanilla --file=foo [script_args]
 # if !defined(PATH_MAX)
 #  if defined(MAXPATHLEN)
 #    define PATH_MAX MAXPATHLEN
-#  elif defined(Win32)
+#  elif defined(_WIN32)
 #    define PATH_MAX 260
 #  else
 /* quite possibly unlimited, so we make this large, and test when used */
@@ -132,7 +133,7 @@ int main(int argc, char *argv[])
     }
     av = (char **) malloc((size_t) (argc+4)*sizeof(char *));
     if(!av) {
-	fprintf(stderr, "malloc failure\n");
+	fprintf(stderr, _("malloc failure\n"));
 	exit(1);
     }
 
@@ -144,7 +145,7 @@ int main(int argc, char *argv[])
 	char rhome[MAX_PATH];
 	GetModuleFileName(NULL, rhome, MAX_PATH);
 	p = strrchr(rhome,'\\');
-	if(!p) {fprintf(stderr, "installation problem\n"); exit(1);}
+	if(!p) {fprintf(stderr, _("installation problem\n")); exit(1);}
 	*p = '\0';
 	snprintf(cmd, PATH_MAX+1, "%s\\Rterm.exe",  rhome);
     }
@@ -152,7 +153,7 @@ int main(int argc, char *argv[])
     if(!(p && *p)) p = rhome;
     /* avoid snprintf here */
     if(strlen(p) + 6 > PATH_MAX) {
-	fprintf(stderr, "impossibly long path for RHOME\n");
+	fprintf(stderr, _("impossibly long path for RHOME\n"));
 	exit(1);
     }
     snprintf(cmd, PATH_MAX+1, "%s/bin/R", p);
@@ -171,9 +172,9 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "R scripting front-end version %s.%s (%s-%s-%s)\n",
 			R_MAJOR, R_MINOR, R_YEAR, R_MONTH, R_DAY);
 	    else
-		fprintf(stderr, "R scripting front-end version %s.%s %s (%s-%s-%s r%s)\n",
+		fprintf(stderr, "R scripting front-end version %s.%s %s (%s-%s-%s r%d)\n",
 			R_MAJOR, R_MINOR, R_STATUS, R_YEAR, R_MONTH, R_DAY,
-			R_GIT_REVISION);
+			R_SVN_REVISION);
 	    exit(0);
 	}
     }
@@ -184,7 +185,7 @@ int main(int argc, char *argv[])
 	    e_mode = 1;
 	    av[ac++] = argv[i];
 	    if(!argv[++i]) {
-		fprintf(stderr, "-e not followed by an expression\n");
+		fprintf(stderr, _("-e not followed by an expression\n"));
 		exit(1);
 	    }
 	    av[ac++] = argv[i];
@@ -200,17 +201,17 @@ int main(int argc, char *argv[])
 	if(strncmp(argv[i], "--default-packages=", 18) == 0) {
 	    set_dp = 1;
 	    if(strlen(argv[i]) > 1000) {
-		fprintf(stderr, "unable to set R_DEFAULT_PACKAGES\n");
+		fprintf(stderr, _("unable to set R_DEFAULT_PACKAGES\n"));
 		exit(1);
 	    }
 	    snprintf(buf2, 1100, "R_DEFAULT_PACKAGES=%s", argv[i]+19);
 	    if(verbose)
-		fprintf(stderr, "setting '%s'\n", buf2);
+		fprintf(stderr, _("setting '%s'\n"), buf2);
 #ifdef HAVE_PUTENV
 	    if(putenv(buf2))
 #endif
 	    {
-		fprintf(stderr, "unable to set R_DEFAULT_PACKAGES\n");
+		fprintf(stderr, _("unable to set R_DEFAULT_PACKAGES\n"));
 		exit(1);
 	    }
 	    i0 = i;
@@ -222,11 +223,11 @@ int main(int argc, char *argv[])
 
     if(!e_mode) {
 	if(++i0 >= argc) {
-	    fprintf(stderr, "file name is missing\n");
+	    fprintf(stderr, _("file name is missing\n"));
 	    exit(1);
 	}
 	if(strlen(argv[i0]) > PATH_MAX) {
-	    fprintf(stderr, "file name is too long\n");
+	    fprintf(stderr, "%s", strcat(_("file name is too long"), "\n"));
 	    exit(1);
 	}
 	snprintf(buf, PATH_MAX+8, "--file=%s", argv[i0]);
@@ -249,7 +250,7 @@ int main(int argc, char *argv[])
     if (!getenv("R_ARCH") && *rarch) {
 	/* we have to prefix / so we may as well use putenv */
 	if (strlen(rarch) + 9 > sizeof(buf2)) {
-	    fprintf(stderr, "impossibly long string for R_ARCH\n");
+	    fprintf(stderr, _("impossibly long string for R_ARCH\n"));
 	    exit(1);
 	}
 	strcpy(buf2, "R_ARCH=/");
@@ -259,19 +260,19 @@ int main(int argc, char *argv[])
 #endif
 #endif
     if(verbose) {
-	fprintf(stderr, "running\n  '%s", cmd);
+	fprintf(stderr, _("running\n  '%s"), cmd);
 	for(i = 1; i < ac; i++) fprintf(stderr, " %s", av[i]);
 	fprintf(stderr, "'\n\n");
     }
 #ifndef _WIN32
     res = execv(cmd, av); /* will not return if R is launched */
-    perror("Rscript execution error");
+    perror(_("Rscript execution error"));
 #else
     AppMain(ac, av);
 #endif
     return res;
 #else /* No execv*/
-    fprintf(stderr, "Rscript is not supported on this system");
+    fprintf(stderr, _("Rscript is not supported on this system"));
     exit(1);
 #endif
 }

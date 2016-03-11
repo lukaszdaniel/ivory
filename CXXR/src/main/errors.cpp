@@ -786,10 +786,10 @@ static void jump_to_top_ex(Rboolean traceback,
 	    s = GetOption1(install("error"));
 	    haveHandler = ( s != R_NilValue );
 	    if (haveHandler) {
-		if( !isLanguage(s) &&  ! isExpression(s) )  /* shouldn't happen */
+		if( !isLanguage(s) &&  ! isExpression(s) )  {/* shouldn't happen */
 		    REprintf(_("invalid \"%s\" option"), "error");
 		    REprintf("\n");
-		else {
+		} else {
 		    inError = 3;
 		    if (isLanguage(s))
 			eval(s, R_GlobalEnv);

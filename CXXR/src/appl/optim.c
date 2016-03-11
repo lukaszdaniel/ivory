@@ -22,6 +22,7 @@
 #endif
 
 #include <Defn.h>
+#include <localization.h>
 #include <R_ext/Random.h>	/* for the random number generation in
 				   samin() */
 #include <R_ext/Applic.h>

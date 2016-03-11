@@ -116,6 +116,7 @@ extern char *tzname[2];
 
 #include <stdlib.h> /* for setenv or putenv */
 #include <Defn.h>
+#include <localization.h>
 #include <Internal.h>
 
 #include <vector>

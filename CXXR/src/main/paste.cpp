@@ -34,13 +34,14 @@
 #include <config.h>
 #endif
 
-#include "Defn.h"
+#include <Defn.h>
+#include <localization.h>
 #include <Internal.h>
 
 #define imax2(x, y) ((x < y) ? y : x)
 
-#include "Print.h"
-#include "RBufferUtils.h"
+#include <Print.h>
+#include <RBufferUtils.h>
 #include <vector>
 
 using namespace std;

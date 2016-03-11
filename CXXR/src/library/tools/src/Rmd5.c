@@ -20,6 +20,7 @@
 /* <UTF8> OK since this is intended to treat chars as byte streams */
 
 #include "tools.h"
+#include "localization.h"
 #define ROL_UNUSED
 #include "md5.h"
 

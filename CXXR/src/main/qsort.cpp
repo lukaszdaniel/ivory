@@ -35,6 +35,7 @@
 #endif
 
 #include <Defn.h> /* => Utils.h with the protos from here */
+#include <localization.h>
 #include <Internal.h>
 #include <Rmath.h>
 

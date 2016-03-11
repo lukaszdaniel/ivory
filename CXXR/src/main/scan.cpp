@@ -44,6 +44,7 @@
 #endif
 
 #include <Defn.h>
+#include <localization.h>
 #include <Internal.h>
 #include <float.h>  /* for DBL_DIG */
 #include <Fileio.h>

@@ -23,6 +23,7 @@
  */
 
 #include "CXXR/StackChecker.hpp"
+#include <localization.h>
 
 namespace CXXR {
 

@@ -32,6 +32,7 @@
 
 #define NEED_CONNECTION_PSTREAMS
 #include <Defn.h>
+#include <localization.h>
 #include <Internal.h>
 #include <Rinterface.h>
 #include <Rmath.h>

@@ -32,6 +32,7 @@
 #include <config.h>
 #endif
 #include <Defn.h>
+#include <localization.h>
 
 #include <ctype.h>
 #include <rlocale.h>

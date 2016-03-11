@@ -30,13 +30,14 @@
 #endif
 
 #include <Defn.h>
+#include <localization.h>
 
 #include <R_ext/Random.h>
 #include <R_ext/RS.h>		/* for Calloc() */
 #include <Rmath.h>		/* for rxxx functions */
 #include "basedecl.h"
 #include <errno.h>
-#include "Internal.h"
+#include <Internal.h>
 #include "CXXR/GCStackRoot.hpp"
 #include "CXXR/RAllocStack.h"
 

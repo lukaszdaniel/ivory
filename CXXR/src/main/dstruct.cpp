@@ -29,7 +29,8 @@
 #include <config.h>
 #endif
 
-#include "Defn.h"
+#include <Defn.h>
+#include <localization.h>
 #include "CXXR/Closure.h"
 #include "CXXR/Environment.h"
 #include "CXXR/GCStackRoot.hpp"
