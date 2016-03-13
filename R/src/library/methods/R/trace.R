@@ -138,7 +138,7 @@
     }
     if(what %in% .InvalidTracedFunctions)
         stop(gettextf("tracing the internal function %s is not allowed",
-		      sQuote(what)), domain = NA)
+		      sQuote(what)), domain = "R-methods")
     if(.traceTraceState) {
         message(".TraceWithMethods: after computing what, whereF", domain = "R-methods")
         browser()

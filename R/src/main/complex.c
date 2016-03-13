@@ -1335,7 +1335,7 @@ static void nexth(Rboolean bool)
 	hi[0] = 0.;
     }
 }
-
+
 /*--------------------- Independent Complex Polynomial Utilities ----------*/
 
 static
