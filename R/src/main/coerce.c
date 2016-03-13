@@ -1226,7 +1226,7 @@ SEXP coerceVector(SEXP v, SEXPTYPE type)
 #define COERCE_ERROR_STRING _("cannot coerce type '%s' to vector of type '%s'")
 
 #define COERCE_ERROR							\
-	error(_(COERCE_ERROR_STRING), type2char(TYPEOF(v)), type2char(type))
+	error(COERCE_ERROR_STRING, type2char(TYPEOF(v)), type2char(type))
 
 	switch (type) {
 	case SYMSXP:

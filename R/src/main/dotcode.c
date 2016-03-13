@@ -1212,7 +1212,7 @@ SEXP attribute_hidden do_dotcall(SEXP call, SEXP op, SEXP args, SEXP env)
     const void *vmax = vmaxget();
     char buf[MaxSymbolBytes];
 
-    if (length(args) < 1) errorcall(call, _("'.NAME' is missing"));
+    if (length(args) < 1) errorcall(call, _("'%s' is missing"), ".NAME");
     check1arg2(args, call, ".NAME");
 
     args = resolveNativeRoutine(args, &ofun, &symbol, buf, NULL, NULL, call, env);
