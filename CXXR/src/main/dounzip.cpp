@@ -31,8 +31,8 @@
 
 #define HAVE_BZIP2
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Fileio.h> /* for R_fopen */
 #include "unzip.h"
 #ifdef HAVE_SYS_STAT_H
@@ -40,7 +40,7 @@
 #endif
 #include <errno.h>
 
-#ifdef Win32
+#ifdef _WIN32
 #include <io.h> /* for mkdir */
 #endif
 
@@ -49,7 +49,7 @@
 /* cf do_dircreate in platform.c */
 static int R_mkdir(char *path)
 {
-#ifdef Win32
+#ifdef _WIN32
     char local[PATH_MAX];
     strcpy(local, path);
     /* needed DOS paths on Win 9x */
@@ -61,7 +61,7 @@ static int R_mkdir(char *path)
 #endif
 }
 
-#ifdef Win32
+#ifdef _WIN32
 #include <windows.h>
 static void setFileTime(const char *fn, uLong dosdate)
 {
@@ -138,7 +138,7 @@ extract_one(unzFile uf, const char *const dest, const char * const filename,
 	fn0[PATH_MAX - 1] = '\0';
 	fn = fn0;
     }
-#ifdef Win32
+#ifdef _WIN32
     R_fixslash(fn);
 #endif
     if (junk && strlen(fn) >= 2) { /* need / and basename */
@@ -147,7 +147,7 @@ extract_one(unzFile uf, const char *const dest, const char * const filename,
     }
     strcat(outname, fn);
 
-#ifdef Win32
+#ifdef _WIN32
     R_fixslash(outname); /* ensure path separator is / */
 #endif
     p = outname + strlen(outname) - 1;
@@ -198,7 +198,7 @@ extract_one(unzFile uf, const char *const dest, const char * const filename,
 	SET_STRING_ELT(names, (*nnames)++, mkChar(outname));
     }
     unzCloseCurrentFile(uf);
-#ifdef Win32
+#ifdef _WIN32
     if (setTime) setFileTime(outname, file_info.dosDate);
 #else
     if (setTime) setFileTime(outname, file_info.tmu_date);
@@ -231,7 +231,7 @@ zipunzip(const char *zipname, const char *dest, int nfiles, const char **files,
 	    }
 	    if ((err = extract_one(uf, dest, nullptr, names, nnames, 
 				   overwrite, junk, setTime)) != UNZ_OK) break;
-#ifdef Win32
+#ifdef _WIN32
 	    R_ProcessEvents();
 #else
 	    R_CheckUserInterrupt();
@@ -242,7 +242,7 @@ zipunzip(const char *zipname, const char *dest, int nfiles, const char **files,
 	    if ((err = unzLocateFile(uf, files[i], 1)) != UNZ_OK) break;
 	    if ((err = extract_one(uf, dest, files[i], names, nnames,
 				   overwrite, junk, setTime)) != UNZ_OK) break;
-#ifdef Win32
+#ifdef _WIN32
 	    R_ProcessEvents();
 #else
 	    R_CheckUserInterrupt();
@@ -268,7 +268,7 @@ static SEXP ziplist(const char *zipname)
     gi.number_entry = 0; /* =Wall */
     err = unzGetGlobalInfo64 (uf, &gi);
     if (err != UNZ_OK)
-	error("error %d with zipfile in unzGetGlobalInfo", err);
+	error(_("error %d with zipfile in '%s'"), err, "unzGetGlobalInfo");
     nfiles = int( gi.number_entry);
     /* name, length, datetime */
     PROTECT(ans = allocVector(VECSXP, 3));
@@ -283,7 +283,7 @@ static SEXP ziplist(const char *zipname)
 	err = unzGetCurrentFileInfo64(uf, &file_info, filename_inzip,
 				      sizeof(filename_inzip), nullptr, 0, nullptr, 0);
 	if (err != UNZ_OK)
-	    error("error %d with zipfile in unzGetCurrentFileInfo\n", err);
+	    error(_("error %d with zipfile in '%s'"), err, "unzGetCurrentFileInfo");
 	/* In theory at least bit 11 of the flag tells us that the
 	   filename is in UTF-8, so FIXME */
 	SET_STRING_ELT(names, i, mkChar(filename_inzip));
@@ -299,7 +299,7 @@ static SEXP ziplist(const char *zipname)
         if (CXXRCONSTRUCT(int, i) < nfiles - 1) {
 	    err = unzGoToNextFile(uf);
 	    if (err != UNZ_OK)
-		error("error %d with zipfile in unzGoToNextFile\n",err);
+		error(_("error %d with zipfile in '%s'"), err, "unzGoToNextFile");
 	}
     }
     unzClose(uf);
@@ -340,7 +340,7 @@ SEXP Runzip(SEXP args)
 	error(_("invalid '%s' argument"), "exdir");
     p = R_ExpandFileName(translateChar(STRING_ELT(CAR(args), 0)));
     if (strlen(p) > PATH_MAX - 1)
-	error(_("'exdir' is too long"));
+	error(_("'%s' argument is too long"), "exdir");
     strcpy(dest, p);
     if (!R_FileExists(dest))
 	error(_("'exdir' does not exist"));
@@ -381,7 +381,7 @@ SEXP Runzip(SEXP args)
 	    break;
 	case UNZ_PARAMERROR:
 	case UNZ_INTERNALERROR:
-	    warning("internal error in 'unz' code");
+	    warning(_("internal error in 'unz' code"));
 	    break;
 	case -200:
 	    warning(_("write error in extracting from zip file"));
@@ -412,7 +412,7 @@ static Rboolean unz_open(Rconnection con)
     const char *tmp;
 
     if(con->mode[0] != 'r') {
-	warning(_("unz connections can only be opened for reading"));
+	warning(_("'unz' connections can only be opened for reading"));
 	return FALSE;
     }
     tmp = R_ExpandFileName(con->description);
@@ -2091,7 +2091,7 @@ static int unzOpenCurrentFile3 (unzFile file, int* method,
 	    iRead += (uInt)(uTotalOutAfter - uTotalOutBefore);
 	    // R addition for 3.2.0
 	    if(iRead < len && uTotalOutAfter == 4294967295U)
-		warning("possible truncation of >= 4GB file");
+		warning(_("possible truncation of >= 4GB file"));
 
 	    if (err == Z_STREAM_END)
 		return (iRead == 0) ? UNZ_EOF : iRead;
@@ -2151,7 +2151,7 @@ static int unzOpenCurrentFile3 (unzFile file, int* method,
 }
 
 
-#ifdef Win32
+#ifdef _WIN32
 # define f_seek fseeko64
 # define f_tell ftello64
 #elif defined(HAVE_OFF_T) && defined(HAVE_FSEEKO)

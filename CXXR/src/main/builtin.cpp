@@ -29,6 +29,7 @@
 #include <config.h>
 #endif
 
+#include <localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Print.h>
@@ -280,7 +281,7 @@ SEXP attribute_hidden do_newenv(/*const*/ CXXR::Expression* call, const CXXR::Bu
     hash = asInteger(hash_);
     Environment* enclos = simple_as_environment(parent_);
     if (!enclos)
-	error(_("'enclos' must be an environment"));
+	error(_("'%s' argument must be an environment"), "enclos");
 
     if( hash ) {
 	PROTECT(size = coerceVector(size_, INTSXP));
@@ -335,7 +336,7 @@ SEXP attribute_hidden do_parentenvgets(/*const*/ CXXR::Expression* call, const C
 
     Environment* parent = simple_as_environment(value_);
     if (!parent)
-	error(_("'parent' is not an environment"));
+	error(_("'%s' argument is not an environment"), "parent");
 
     env->setEnclosingEnvironment(parent);
     return(env);
@@ -363,7 +364,7 @@ SEXP attribute_hidden do_envirName(/*const*/ CXXR::Expression* call, const CXXR:
     return ans;
 }
 
-#ifdef Win32
+#ifdef _WIN32
 # include "rgui_UTF8.h"
 #endif
 /* Uses R_alloc but called by a .Internal.  Result may be R_alloc-ed */
@@ -387,7 +388,7 @@ static const char *trChar(SEXP x)
 	*qq = '\0';
 	return pp;
     } else {
-#ifdef Win32
+#ifdef _WIN32
 	static char buf[106];
 	char *p;
 	/* Long strings will be rare, and few per cat() call so we
@@ -448,7 +449,7 @@ static void cat_cleanup(cat_info* pci)
     if(changedcon) switch_stdout(-1, 0);
     /* previous line might have closed it */
     if(!wasopen && con->isopen) con->close(con);
-#ifdef Win32
+#ifdef _WIN32
     WinUTF8out = FALSE;
 #endif
 }
@@ -703,11 +704,11 @@ SEXP attribute_hidden do_makevector(/*const*/ CXXR::Expression* call, const CXXR
 	s = allocVector(mode, len);
 	break;
     case LISTSXP:
-	if (len > INT_MAX) error("too long for a pairlist");
+	if (len > INT_MAX) error(_("too long for a pairlist"));
 	s = allocList(int( len));
 	break;
     default:
-	error(_("vector: cannot make a vector of mode '%s'."),
+	error(_("'vector()': cannot make a vector of mode '%s'."),
 	      translateChar(STRING_ELT(s, 0))); /* should be ASCII */
     }
     if (mode == INTSXP || mode == LGLSXP)
@@ -926,11 +927,10 @@ SEXP attribute_hidden do_switch(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     PROTECT(x = eval(CAR(args), rho));
     if (!isVector(x) || length(x) != 1)
-	errorcall(call, _("EXPR must be a length 1 vector"));
+	errorcall(call, _("'%s' argument must be a vector of length 1"), "EXPR");
     if (isFactor(x))
 	warningcall(call,
-		    _("EXPR is a \"factor\", treated as integer.\n"
-		      " Consider using '%s' instead."),
+		    _("'EXPR' is a \"factor\", treated as integer.\n Consider using '%s' instead."),
 		    "switch(as.character( * ), ...)");
     if (nargs > 1) {
 	/* There is a complication: if called from lapply
@@ -977,7 +977,7 @@ SEXP attribute_hidden do_switch(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if (argval != NA_INTEGER && argval >= 1 && argval <= length(w)) {
 		SEXP alt = CAR(nthcdr(w, argval - 1));
 		if (alt == R_MissingArg)
-		    error("empty alternative in numeric switch");
+		    error(_("empty alternative in numeric switch"));
 		ans =  eval(alt, rho);
 		UNPROTECT(2);
 		return ans;
@@ -986,7 +986,7 @@ SEXP attribute_hidden do_switch(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 	UNPROTECT(1); /* w */
     } else
-	warningcall(call, _("'switch' with no alternatives"));
+	warningcall(call, _("'switch()' with no alternatives"));
     /* an error */
     UNPROTECT(1); /* x */
     R_Visible = FALSE;

@@ -29,6 +29,7 @@
 #include <config.h>
 #endif
 
+#include <localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rmath.h>
@@ -90,8 +91,7 @@ SEXP attribute_hidden do_matrix(/*const*/ CXXR::Expression* call, const CXXR::Bu
 	case VECSXP:
 	    break;
 	default:
-	    error(_("'data' must be of a vector type, was '%s'"),
-		type2char(TYPEOF(vals)));
+	    error(_("'data' argument must be of a vector type, was '%s'"), type2char(TYPEOF(vals)));
     }
     lendat = XLENGTH(vals);
     snr = args[0]; args = (args + 1);
@@ -108,23 +108,23 @@ SEXP attribute_hidden do_matrix(/*const*/ CXXR::Expression* call, const CXXR::Bu
 	if (!isNumeric(snr)) error(_("non-numeric matrix extent"));
 	nr = asInteger(snr);
 	if (nr == NA_INTEGER)
-	    error(_("invalid 'nrow' value (too large or NA)"));
+	    error(_("invalid '%s' value (too large or NA)"), "nrow");
 	if (nr < 0)
-	    error(_("invalid 'nrow' value (< 0)"));
+	    error(_("invalid '%s' value (< 0)"), "nrow");
     }
     if (!miss_nc) {
 	if (!isNumeric(snc)) error(_("non-numeric matrix extent"));
 	nc = asInteger(snc);
 	if (nc == NA_INTEGER)
-	    error(_("invalid 'ncol' value (too large or NA)"));
+	    error(_("invalid '%s' value (too large or NA)"), "ncol");
 	if (nc < 0)
-	    error(_("invalid 'ncol' value (< 0)"));
+	    error(_("invalid '%s' value (< 0)"), "ncol");
     }
     if (miss_nr && miss_nc) {
-	if (lendat > INT_MAX) error("data is too long");
+	if (lendat > INT_MAX) error(_("data is too long"));
 	nr = int( lendat);
     } else if (miss_nr) {
-	if (lendat > (double) nc * INT_MAX) error("data is too long");
+	if (lendat > (double) nc * INT_MAX) error(_("data is too long"));
 	// avoid division by zero
 	if (nc == 0) {
 	    if (lendat) error(_("nc = 0 for non-null data"));
@@ -132,7 +132,7 @@ SEXP attribute_hidden do_matrix(/*const*/ CXXR::Expression* call, const CXXR::Bu
 	} else
 	    nr = (int) ceil((double) lendat / (double) nc);
     } else if (miss_nc) {
-	if (lendat > (double) nr * INT_MAX) error("data is too long");
+	if (lendat > (double) nr * INT_MAX) error(_("data is too long"));
 	// avoid division by zero
 	if (nr == 0) {
 	    if (lendat) error(_("nr = 0 for non-null data"));
@@ -216,10 +216,10 @@ SEXP allocMatrix(SEXPTYPE mode, int nrow, int ncol)
     R_xlen_t n;
 
     if (nrow < 0 || ncol < 0)
-	error(_("negative extents to matrix"));
+	error(_("negative extents passed to matrix"));
 #ifndef LONG_VECTOR_SUPPORT
     if (double(nrow) * double(ncol) > INT_MAX)
-	error(_("allocMatrix: too many elements specified"));
+	error(_("'allocMatrix()': too many elements specified"));
 #endif
     n = (R_xlen_t( nrow)) * ncol;
     PROTECT(s = allocVector(mode, n));
@@ -247,10 +247,10 @@ SEXP alloc3DArray(SEXPTYPE mode, int nrow, int ncol, int nface)
     R_xlen_t n;
 
     if (nrow < 0 || ncol < 0 || nface < 0)
-	error(_("negative extents to 3D array"));
+	error(_("negative extents passed to 3D array"));
 #ifndef LONG_VECTOR_SUPPORT
     if (double(nrow) * double(ncol) * double(nface) > INT_MAX)
-	error(_("alloc3Darray: too many elements specified"));
+	error(_("'alloc3Darray()': too many elements specified"));
 #endif
     n = (R_xlen_t( nrow)) * ncol * nface;
     PROTECT(s = allocVector(mode, n));
@@ -275,7 +275,7 @@ SEXP allocArray(SEXPTYPE mode, SEXP dims)
 	dn *= INTEGER(dims)[i];
 #ifndef LONG_VECTOR_SUPPORT
 	if(dn > INT_MAX)
-	    error(_("'allocArray': too many elements specified by 'dims'"));
+	    error(_("'allocArray()': too many elements specified by 'dims' argument"));
 #endif
 	n *= INTEGER(dims)[i];
     }
@@ -431,7 +431,7 @@ SEXP attribute_hidden do_lengths(/*const*/ CXXR::Expression* call, const CXXR::B
 	case RAWSXP:
 	    break;
 	default:
-	    error(_("'%s' must be a list or atomic vector"), "x");
+	    error(_("'%s' argument must be a list or atomic vector"), "x");
     }
     x_len = get_object_length(x, rho);
     PROTECT(ans = allocVector(INTSXP, x_len));
@@ -468,7 +468,7 @@ SEXP attribute_hidden do_rowscols(/*const*/ CXXR::Expression* call, const CXXR::
     /* This is the dimensions vector */
     x = args[0];
     if (!isInteger(x) || LENGTH(x) != 2)
-	error(_("a matrix-like object is required as argument to '%s'"),
+	error(_("a matrix-like object is required as argument passed to '%s'"),
 	      (op->variant() == 2) ? "col" : "row");
 
     nr = INTEGER(x)[0];
@@ -672,7 +672,7 @@ SEXP do_crossprod(CXXR::Expression* call, const CXXR::BuiltInFunction* op, CXXR:
     sym = isNull(y);
     if (sym && (op->variant() > 0)) y = x;
     if ( !(isNumeric(x) || isComplex(x)) || !(isNumeric(y) || isComplex(y)) )
-	errorcall(call, _("requires numeric/complex matrix/vector arguments"));
+	errorcall(call, _("numeric/complex matrix/vector arguments are required"));
 
     xdims = getAttrib(x, R_DimSymbol);
     ydims = getAttrib(y, R_DimSymbol);
@@ -1176,7 +1176,7 @@ SEXP attribute_hidden do_aperm(/*const*/ CXXR::Expression* call, const CXXR::Bui
     for (i = 0; i < n; iip[i++] = 0);
     for (i = 0; i < n; i++)
 	if (pp[i] >= 0 && pp[i] < n) iip[pp[i]]++;
-	else error(_("value out of range in 'perm'"));
+	else error(_("value is out of range in 'perm' argument"));
     for (i = 0; i < n; i++)
 	if (iip[i] == 0) error(_("invalid '%s' argument"), "perm");
 
@@ -1258,7 +1258,7 @@ SEXP attribute_hidden do_aperm(/*const*/ CXXR::Expression* call, const CXXR::Bui
 
     /* handle the resize */
     int resize = asLogical(resize_);
-    if (resize == NA_LOGICAL) error(_("'resize' must be TRUE or FALSE"));
+    if (resize == NA_LOGICAL) error(_("'%s' argument must be TRUE or FALSE"), "resize");
 
     /* and handle names(dim(.)) and the dimnames if any */
     if (resize) {
@@ -1327,10 +1327,10 @@ SEXP attribute_hidden do_colsum(/*const*/ CXXR::Expression* call, const CXXR::Bu
     case INTSXP:
     case REALSXP: break;
     default:
-	error(_("'x' must be numeric"));
+	error(_("'%s' must be numeric"), "x");
     }
     if (n * (double)p > XLENGTH(x))
-    	error(_("'x' is too short")); /* PR#16367 */
+	error(_("'%s' argument is too short"), "x"); /* PR#16367 */
 
     int OP = op->variant();
     if (OP == 0 || OP == 1) { /* columns */
@@ -1495,15 +1495,14 @@ SEXP attribute_hidden do_array(/*const*/ CXXR::Expression* call, const CXXR::Bui
 	case VECSXP:
 	    break;
 	default:
-	    error(_("'data' must be of a vector type, was '%s'"),
-		type2char(TYPEOF(vals)));
+	    error(_("'data' argument must be of a vector type, was '%s'"), type2char(TYPEOF(vals)));
     }
     lendat = XLENGTH(vals);
     dims = dim_;
     dimnames = dimnames_;
     PROTECT(dims = coerceVector(dims, INTSXP));
     int nd = LENGTH(dims);
-    if (nd == 0) error(_("'dims' cannot be of length 0"));
+    if (nd == 0) error(_("'%s' argument cannot be of length 0"), "dims");
     double d = 1.0;
     for (int j = 0; j < nd; j++) d *= INTEGER(dims)[j];
 #ifndef LONG_VECTOR_SUPPORT
@@ -1599,17 +1598,17 @@ SEXP attribute_hidden do_diag(/*const*/ CXXR::Expression* call, const CXXR::Buil
     snc = ncol_;
     nr = asInteger(snr);
     if (nr == NA_INTEGER)
-	error(_("invalid 'nrow' value (too large or NA)"));
+	error(_("invalid '%s' value (too large or NA)"), "nrow");
     if (nr < 0)
-	error(_("invalid 'nrow' value (< 0)"));
+	error(_("invalid '%s' value (< 0)"), "nrow");
     nc = asInteger(snc);
     if (nc == NA_INTEGER)
-	error(_("invalid 'ncol' value (too large or NA)"));
+	error(_("invalid '%s' value (too large or NA)"), "ncol");
     if (nc < 0)
-	error(_("invalid 'ncol' value (< 0)"));
+	error(_("invalid '%s' value (< 0)"), "ncol");
     int mn = (nr < nc) ? nr : nc;
     if (mn > 0 && LENGTH(x) == 0)
-	error(_("'x' must have positive length"));
+	error(_("'%s' must have positive length"), "x");
 
 #ifndef LONG_VECTOR_SUPPORT
    if ((double)nr * (double)nc > INT_MAX)
@@ -1674,8 +1673,7 @@ SEXP attribute_hidden do_backsolve(/*const*/ CXXR::Expression* call, const CXXR:
     size_t incr = nrr + 1;
     for(int i = 0; i < k; i++) { /* check for zeros on diagonal */
 	if (rr[i * incr] == 0.0)
-	    error(_("singular matrix in 'backsolve'. First zero in diagonal [%d]"),
-		  i + 1);
+	    error(_("singular matrix in 'backsolve()'. First zero in diagonal [%d]"), i + 1);
     }
 
     SEXP ans = PROTECT(allocMatrix(REALSXP, k, ncb));

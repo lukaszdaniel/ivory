@@ -31,8 +31,8 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 
 #include "CXXR/Browser.hpp"
@@ -293,7 +293,7 @@ SEXP attribute_hidden do_sys(/*const*/ CXXR::Expression* call, const CXXR::Built
 	    error(_("invalid '%s' value"), "which");
 	return(R_sysfunction(n, cptr));
     default:
-	error(_("internal error in 'do_sys'"));
+	error(_("internal error in '%s' function"), "do_sys()");
 	return R_NilValue;/* just for -Wall */
     }
 }

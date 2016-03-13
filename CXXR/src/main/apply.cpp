@@ -27,6 +27,7 @@
 #include <config.h>
 #endif
 
+#include <localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include "CXXR/ExpressionVector.h"
@@ -100,7 +101,7 @@ SEXP attribute_hidden do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(XX = eval(CAR(args), rho));
     FUN = CADR(args);  /* must be unevaluated for use in e.g. bquote */
     PROTECT(value = eval(CADDR(args), rho));
-    if (!isVector(value)) error(_("'FUN.VALUE' must be a vector"));
+    if (!isVector(value)) error(_("'%s' argument must be a vector"), "FUN.VALUE");
     useNames = asLogical(eval(CADDDR(args), rho));
     if (useNames == NA_LOGICAL) error(_("invalid '%s' value"), "USE.NAMES");
 
@@ -165,8 +166,7 @@ SEXP attribute_hidden do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 		val = lazy_duplicate(val); // Need to duplicate? Copying again anyway
 	    PROTECT_WITH_INDEX(val, &indx);
 	    if (Rf_length(val) != commonLen)
-		error(_("values must be length %d,\n but FUN(X[[%d]]) result is length %d"),
-	               commonLen, i+1, Rf_length(val));
+		error(_("values must be length %d, but 'FUN(X[[%d]])' result is length %d"), commonLen, i+1, Rf_length(val));
 	    valType = TYPEOF(val);
 	    if (valType != commonType) {
 	    	bool okay = FALSE;
@@ -179,7 +179,7 @@ SEXP attribute_hidden do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    Rf_error(_("Internal error: unexpected SEXPTYPE"));
 		}
 		if (!okay)
-		    error(_("values must be type '%s',\n but FUN(X[[%d]]) result is type '%s'"),
+		    error(_("values must be type '%s', but 'FUN(X[[%d]])' result is type '%s'"),
 			  type2char(commonType), i+1, type2char(valType));
 		REPROTECT(val = coerceVector(val, commonType), indx);
 	    }
@@ -256,8 +256,7 @@ SEXP attribute_hidden do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if(array_value && !isNull(rowNames)) {
 		    if(TYPEOF(rowNames) != VECSXP || LENGTH(rowNames) != rnk_v)
 			// should never happen ..
-			error(_("dimnames(<value>) is neither NULL nor list of length %d"),
-			      rnk_v);
+			error(_("dimnames(<value>) is neither NULL nor list of length %d"), rnk_v);
 		    for(int j = 0; j < rnk_v; j++)
 			SET_VECTOR_ELT(dimnames, j, VECTOR_ELT(rowNames, j));
 		} else

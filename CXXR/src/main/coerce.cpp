@@ -40,6 +40,7 @@
 /* interval at which to check interrupts */
 #define NINTERRUPT 10000000
 
+#include <localization.h>
 #include <Defn.h> /*-- Maybe modularize into own Coerce.h ..*/
 #include <Internal.h>
 #include <float.h> /* for DBL_DIG */
@@ -90,9 +91,9 @@ void attribute_hidden Rf_CoercionWarning(int warn)
    WarningMessage(R_NilValue, WARNING_....);
 */
     if (warn & WARN_NA)
-	Rf_warning(_("NAs introduced by coercion"));
+	Rf_warning(_("NA values introduced by coercion"));
     if (warn & WARN_INT_NA)
-	Rf_warning(_("NAs introduced by coercion to integer range"));
+	Rf_warning(_("NA values introduced by coercion to integer range"));
     if (warn & WARN_IMAG)
 	Rf_warning(_("imaginary parts discarded in coercion"));
     if (warn & WARN_RAW)
@@ -412,8 +413,7 @@ static SEXP coerceToSymbol(SEXP v)
     SEXP ans = R_NilValue;
     int warn = 0;
     if (length(v) <= 0)
-	Rf_error(_("invalid data of mode '%s' (too short)"),
-	      Rf_type2char(TYPEOF(v)));
+	Rf_error(_("invalid data of mode '%s' (too short)"), Rf_type2char(TYPEOF(v)));
     PROTECT(v);
     switch(TYPEOF(v)) {
     case LGLSXP:
@@ -435,7 +435,7 @@ static SEXP coerceToSymbol(SEXP v)
 	ans = StringFromRaw(RAW(v)[0], &warn);
 	break;
     default:
-	UNIMPLEMENTED_TYPE("coerceToSymbol", v);
+	UNIMPLEMENTED_TYPE("coerceToSymbol()", v);
     }
     if (warn) Rf_CoercionWarning(warn);/*2000/10/23*/
     ans = Rf_installChar(ans);
@@ -483,7 +483,7 @@ static SEXP coerceToLogical(SEXP v)
 	}
 	break;
     default:
-	UNIMPLEMENTED_TYPE("coerceToLogical", v);
+	UNIMPLEMENTED_TYPE("coerceToLogical()", v);
     }
     if (warn) Rf_CoercionWarning(warn);
     UNPROTECT(1);
@@ -530,7 +530,7 @@ static SEXP coerceToInteger(SEXP v)
 	}
 	break;
     default:
-	UNIMPLEMENTED_TYPE("coerceToInteger", v);
+	UNIMPLEMENTED_TYPE("coerceToInteger()", v);
     }
     if (warn) Rf_CoercionWarning(warn);
     UNPROTECT(1);
@@ -577,7 +577,7 @@ static SEXP coerceToReal(SEXP v)
 	}
 	break;
     default:
-	UNIMPLEMENTED_TYPE("coerceToReal", v);
+	UNIMPLEMENTED_TYPE("coerceToReal()", v);
     }
     if (warn) Rf_CoercionWarning(warn);
     UNPROTECT(1);
@@ -624,7 +624,7 @@ static SEXP coerceToComplex(SEXP v)
 	}
 	break;
     default:
-	UNIMPLEMENTED_TYPE("coerceToComplex", v);
+	UNIMPLEMENTED_TYPE("coerceToComplex()", v);
     }
     if (warn) Rf_CoercionWarning(warn);
     UNPROTECT(1);
@@ -697,7 +697,7 @@ static SEXP coerceToRaw(SEXP v)
 	}
 	break;
     default:
-	UNIMPLEMENTED_TYPE("coerceToRaw", v);
+	UNIMPLEMENTED_TYPE("coerceToRaw()", v);
     }
     if (warn) Rf_CoercionWarning(warn);
     UNPROTECT(1);
@@ -751,7 +751,7 @@ static SEXP coerceToString(SEXP v)
 	}
 	break;
     default:
-	UNIMPLEMENTED_TYPE("coerceToString", v);
+	UNIMPLEMENTED_TYPE("coerceToString()", v);
     }
     if (warn) Rf_CoercionWarning(warn);/*2000/10/23*/
     UNPROTECT(1);
@@ -792,7 +792,7 @@ static SEXP coerceToExpression(SEXP v)
 		SET_XVECTOR_ELT(ans, i, Rf_ScalarRaw(RAW(v)[i]));
 	    break;
 	default:
-	    UNIMPLEMENTED_TYPE("coerceToExpression", v);
+	    UNIMPLEMENTED_TYPE("coerceToExpression()", v);
 	}
     }
     else {/* not used either */
@@ -856,7 +856,7 @@ static SEXP coerceToVectorList(SEXP v)
 	}
 	break;
     default:
-	UNIMPLEMENTED_TYPE("coerceToVectorList", v);
+	UNIMPLEMENTED_TYPE("coerceToVectorList()", v);
     }
     tmp = Rf_getAttrib(v, R_NamesSymbol);
     if (tmp != R_NilValue)
@@ -903,7 +903,7 @@ static SEXP coerceToPairList(SEXP v)
 	    SETCAR(ansp, VECTOR_ELT(v, i));
 	    break;
 	default:
-	    UNIMPLEMENTED_TYPE("coerceToPairList", v);
+	    UNIMPLEMENTED_TYPE("coerceToPairList()", v);
 	}
 	ansp = CDR(ansp);
     }
@@ -970,12 +970,11 @@ static SEXP coercePairList(SEXP v, SEXPTYPE type)
 		RAW(rval)[i] = Rbyte( Rf_asInteger(CAR(vp)));
 	    break;
 	default:
-	    UNIMPLEMENTED_TYPE("coercePairList", v);
+	    UNIMPLEMENTED_TYPE("coercePairList()", v);
 	}
     }
     else
-	Rf_error(_("'pairlist' object cannot be coerced to type '%s'"),
-	      Rf_type2char(type));
+	Rf_error(_("an object of class \"%s\" cannot be coerced to type '%s'"), "pairlist", Rf_type2char(type));
 
     /* If any tags are non-null then we */
     /* need to add a names attribute. */
@@ -1092,12 +1091,11 @@ static SEXP Rf_coerceVectorList(SEXP v, SEXPTYPE type)
 	    }
 	    break;
 	default:
-	    UNIMPLEMENTED_TYPE("coerceVectorList", v);
+	    UNIMPLEMENTED_TYPE("coerceVectorList()", v);
 	}
     }
     else
-	Rf_error(_("(list) object cannot be coerced to type '%s'"),
-	      Rf_type2char(type));
+	Rf_error(_("an object of class \"%s\" cannot be coerced to type '%s'"), "list", Rf_type2char(type));
 
     if (warn) Rf_CoercionWarning(warn);
     names = Rf_getAttrib(v, R_NamesSymbol);
@@ -1119,8 +1117,7 @@ static SEXP coerceSymbol(SEXP v, SEXPTYPE type)
     else if (type == STRSXP)
 	rval = Rf_ScalarString(PRINTNAME(v));
     else
-	Rf_warning(_("(symbol) object cannot be coerced to type '%s'"),
-		Rf_type2char(type));
+	Rf_warning(_("an object of class \"%s\" cannot be coerced to type '%s'"), "symbol", Rf_type2char(type));
     return rval;
 }
 
@@ -1207,10 +1204,10 @@ SEXP Rf_coerceVector(SEXP v, SEXPTYPE type)
     case STRSXP:
     case RAWSXP:
 
-#define COERCE_ERROR_STRING "cannot coerce type '%s' to vector of type '%s'"
+#define COERCE_ERROR_STRING _("cannot coerce type '%s' to vector of type '%s'")
 
 #define COERCE_ERROR							\
-	Rf_error(_(COERCE_ERROR_STRING), Rf_type2char(TYPEOF(v)), Rf_type2char(type))
+	Rf_error(COERCE_ERROR_STRING, Rf_type2char(TYPEOF(v)), Rf_type2char(type))
 
 	switch (type) {
 	case SYMSXP:
@@ -1550,7 +1547,7 @@ SEXP attribute_hidden do_ascall(/*const*/ CXXR::Expression* call, const CXXR::Bu
     case EXPRSXP:
 	{
 	    if(0 == (n = length(args)))
-		Rf_errorcall(call, _("invalid length 0 argument"));
+		Rf_errorcall(call, _("invalid argument of length 0"));
 	    names = Rf_getAttrib(args, R_NamesSymbol);
 	    GCStackRoot<PairList> tl(PairList::make(n - 1));
 	    PROTECT(ap = ans = new Expression(nullptr, tl));
@@ -1601,7 +1598,7 @@ int Rf_asLogical(SEXP x)
 	case RAWSXP:
 	    return LogicalFromInteger(int(RAW(x)[0]), &warn);
 	default:
-	    UNIMPLEMENTED_TYPE("asLogical", x);
+	    UNIMPLEMENTED_TYPE("asLogical()", x);
 	}
     } else if(TYPEOF(x) == CHARSXP) {
 	    return LogicalFromString(x, &warn);
@@ -1632,7 +1629,7 @@ int Rf_asInteger(SEXP x)
 	    Rf_CoercionWarning(warn);
 	    return res;
 	default:
-	    UNIMPLEMENTED_TYPE("asInteger", x);
+	    UNIMPLEMENTED_TYPE("asInteger()", x);
 	}
     } else if(TYPEOF(x) == CHARSXP) {
 	res = Rf_IntegerFromString(x, &warn);
@@ -1668,7 +1665,7 @@ double Rf_asReal(SEXP x)
 	    Rf_CoercionWarning(warn);
 	    return res;
 	default:
-	    UNIMPLEMENTED_TYPE("asReal", x);
+	    UNIMPLEMENTED_TYPE("asReal()", x);
 	}
     } else if(TYPEOF(x) == CHARSXP) {
 	res = RealFromString(x, &warn);
@@ -1704,7 +1701,7 @@ Rcomplex Rf_asComplex(SEXP x)
 	    Rf_CoercionWarning(warn);
 	    return z;
 	default:
-	    UNIMPLEMENTED_TYPE("asComplex", x);
+	    UNIMPLEMENTED_TYPE("asComplex()", x);
 	}
     } else if(TYPEOF(x) == CHARSXP) {
 	z = ComplexFromString(x, &warn);
@@ -1862,7 +1859,7 @@ SEXP attribute_hidden do_is(/*const*/ CXXR::Expression* call, const CXXR::BuiltI
 	break;
 
     case 999:		/* is.single */
-	Rf_errorcall(call, _("type \"single\" unimplemented in R"));
+	Rf_errorcall(call, _("type \"single\" is unimplemented in R"));
     default:
 	Rf_errorcall(call, _("unimplemented predicate"));
     }
@@ -2011,8 +2008,7 @@ SEXP attribute_hidden do_isna(/*const*/ CXXR::Expression* call, const CXXR::Buil
 	    LOGICAL(ans)[i] = 0;
 	break;
     default:
-	Rf_warningcall(call, _("%s() applied to non-(list or vector) of type '%s'"),
-		    "is.na", Rf_type2char(TYPEOF(x)));
+	Rf_warningcall(call, _("'%s' method applied to non-(list or vector) of type '%s'"), "is.na()", Rf_type2char(TYPEOF(x)));
 	for (i = 0; i < n; i++)
 	    LOGICAL(ans)[i] = 0;
     }
@@ -2130,8 +2126,7 @@ static Rboolean anyNA(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     default:
-	Rf_error("anyNA() applied to non-(list or vector) of type '%s'",
-		 Rf_type2char(TYPEOF(x)));
+	Rf_error(_("'%s' method applied to non-(list or vector) of type '%s'"), "anyNA()", Rf_type2char(TYPEOF(x)));
     }
     return FALSE;
 } // anyNA()
@@ -2142,7 +2137,7 @@ SEXP attribute_hidden do_anyNA(SEXP call, SEXP op, SEXP args, SEXP rho)
     static SEXP do_anyNA_formals = NULL;
 
     if (length(args) < 1 || length(args) > 2)
-	Rf_errorcall(call, "anyNA takes 1 or 2 arguments");
+	Rf_errorcall(call, _("'anyNA()' function takes 1 or 2 arguments"));
 
     if (Rf_DispatchOrEval(call, op, args, rho, &ans,
 			  MissingArgHandling::Keep, 1))
@@ -2231,7 +2226,7 @@ SEXP attribute_hidden do_isfinite(/*const*/ CXXR::Expression* call, const CXXR::
 
 #ifdef stringent_is
     if (!Rf_isList(CAR(args)) && !Rf_isVector(CAR(args)))
-	errorcall_return(call, "is.finite " R_MSG_list_vec);
+	errorcall_return(call, strcat(_("'%s' function applies only to lists and vectors"), "is.finite()"));
 #endif
     x = args[0];
     n = Rf_xlength(x);
@@ -2355,7 +2350,7 @@ SEXP attribute_hidden do_call(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (!Rf_isString(rfun) || length(rfun) != 1)
 	errorcall_return(call, _("first argument must be a character string"));
     const char *str = Rf_translateChar(STRING_ELT(rfun, 0));
-    if (streql(str, ".Internal")) Rf_error("illegal usage");
+    if (streql(str, ".Internal")) Rf_error(_("illegal usage"));
     PROTECT(rfun = Rf_install(str));
     PROTECT(evargs = Rf_shallow_duplicate(CDR(args)));
     for (rest = evargs; rest != R_NilValue; rest = CDR(rest)) {
@@ -2382,18 +2377,18 @@ SEXP attribute_hidden do_docall(/*const*/ CXXR::Expression* call, const CXXR::Bu
        better error message.
      */
     if(!(Rf_isFunction(fun) || (Rf_isString(fun) && length(fun) == 1)))
-	Rf_error(_("'what' must be a function or character string"));
+	Rf_error(_("'%s' argument must be a character string or a function"), "what");
 
 #ifdef __maybe_in_the_future__
     if (!isNull(args) && !isVectorList(args))
-	error(_("'args' must be a list or expression"));
+	error(_("'%s' argument must be a list or expression"), "args");
 #else
     if (!Rf_isNull(args) && !Rf_isNewList(args))
-        Rf_error(_("'%s' must be a list"), "args");
+        Rf_error(_("'%s' argument must be a list"), "args");
 #endif
 
     if (!Rf_isEnvironment(envir))
-	Rf_error(_("'envir' must be an environment"));
+	Rf_error(_("'%s' argument must be an environment"), "envir");
 
     n = length(args);
     names = Rf_getAttrib(args, R_NamesSymbol);
@@ -2402,11 +2397,11 @@ SEXP attribute_hidden do_docall(/*const*/ CXXR::Expression* call, const CXXR::Bu
     PROTECT(c = call = new Expression(nullptr, tl));
     if( Rf_isString(fun) ) {
 	const char *str = Rf_translateChar(STRING_ELT(fun, 0));
-	if (streql(str, ".Internal")) Rf_error("illegal usage");
+	if (streql(str, ".Internal")) Rf_error(_("illegal usage"));
 	SETCAR(c, Rf_install(str));
     } else {
 	if(TYPEOF(fun) == SPECIALSXP && streql(PRIMNAME(fun), ".Internal"))
-	    Rf_error("illegal usage");
+	    Rf_error(_("illegal usage"));
 	SETCAR(c, fun);
     }
     c = CDR(c);
@@ -2612,14 +2607,14 @@ static int class2type(const char *s)
 static SEXP do_unsetS4(SEXP obj, SEXP newClass)
 {
   if(Rf_isNull(newClass))  { /* NULL class is only valid for S3 objects */
-    Rf_warning(_("Setting class(x) to NULL;   result will no longer be an S4 object"));
+    Rf_warning(_("Setting 'class(x)' to NULL. Result will no longer be an S4 object"));
   }
   else if(length(newClass) > 1)
-    Rf_warning(_("Setting class(x) to multiple strings (\"%s\", \"%s\", ...); result will no longer be an S4 object"),
+    Rf_warning(_("Setting 'class(x)' to multiple strings (\"%s\", \"%s\", ...). Result will no longer be an S4 object"),
 	    Rf_translateChar(STRING_ELT(newClass, 0)),
 	    Rf_translateChar(STRING_ELT(newClass, 1)));
   else
-    Rf_warning(_("Setting class(x) to \"%s\" sets attribute to NULL; result will no longer be an S4 object"),
+    Rf_warning(_("Setting 'class(x)' to \"%s\" sets attribute to NULL. Result will no longer be an S4 object"),
 	    CHAR(Rf_asChar(newClass)));
   UNSET_S4_OBJECT(obj);
   return obj;
@@ -2726,14 +2721,14 @@ SEXP attribute_hidden do_storage_mode(/*const*/ CXXR::Expression* call, const CX
     SEXPTYPE type;
 
     if (!Rf_isValidString(value) || STRING_ELT(value, 0) == NA_STRING)
-	Rf_error(_("'value' must be non-null character string"));
+	Rf_error(_("'%s' argument must be a non-empty character string"), "value");
     type = Rf_str2type(CHAR(STRING_ELT(value, 0)));
     if(type == SEXPTYPE( -1)) {
 	/* For backwards compatibility we allow "real" and "single" */
 	if(streql(CHAR(STRING_ELT(value, 0)), "real")) {
-	    Rf_error("use of 'real' is defunct: use 'double' instead");
+	    Rf_error(_("use of 'real' is defunct: use 'double' instead"));
 	} else if(streql(CHAR(STRING_ELT(value, 0)), "single")) {
-	    Rf_error("use of 'single' is defunct: use mode<- instead");
+	    Rf_error(_("use of 'single' is defunct: use mode<- instead"));
 	} else
 	    Rf_error(_("invalid value"));
     }

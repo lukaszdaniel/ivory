@@ -115,8 +115,8 @@ extern char *tzname[2];
 #endif
 
 #include <stdlib.h> /* for setenv or putenv */
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 
 #include <vector>
@@ -570,7 +570,7 @@ static int set_tz(const char *tz, char *oldtz)
     p = getenv("TZ");
     if(p) {
 	if (strlen(p) > 1000)
-	    error("time zone specification is too long");
+	    error(_("time zone specification is too long"));
 	strcpy(oldtz, p);
     }
 #ifdef HAVE_SETENV
@@ -580,7 +580,7 @@ static int set_tz(const char *tz, char *oldtz)
     {
 	static char buff[1010];
 	if (strlen(tz) > 1000)
-	    error("time zone specification is too long");
+	    error(_("time zone specification is too long"));
 	strcpy(buff, "TZ="); strcat(buff, tz);
 	if(putenv(buff)) warning(_("problem with setting timezone"));
     }
@@ -923,7 +923,7 @@ SEXP attribute_hidden do_formatPOSIXlt(/*const*/ CXXR::Expression* call, const C
     if(n > 0) {
 	for(int i = 0; i < 9; i++)
 	    if(nlen[i] == 0)
-		error(_("zero length component in non-empty \"POSIXlt\" structure"));
+		error(_("zero-length component in non-empty \"POSIXlt\" structure"));
     }
     if(n > 0) N = (m > n) ? m:n; else N = 0;
     PROTECT(ans = allocVector(STRSXP, N));

@@ -27,8 +27,8 @@
 # include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 #include <Rconnections.h>
 
@@ -102,7 +102,7 @@ SEXP attribute_hidden do_readDCF(/*const*/ CXXR::Expression* call, const CXXR::B
 	has_fold_excludes = CXXRCONSTRUCT(Rboolean, (LENGTH(fold_excludes) > 0));
 
 	buf = static_cast<char *>( malloc(buflen));
-	if(!buf) error(_("could not allocate memory for 'read.dcf'"));
+	if(!buf) error(_("could not allocate memory for 'read.dcf()' function"));
 	nret = 20;
 	/* it is easier if we first have a record per column */
 	PROTECT(retval = allocMatrixNA(STRSXP, LENGTH(what), nret));
@@ -171,7 +171,7 @@ SEXP attribute_hidden do_readDCF(/*const*/ CXXR::Expression* call, const CXXR::B
 			    char *tmp = static_cast<char *>( realloc(buf, need));
 			    if(!tmp) {
 				free(buf);
-				error(_("could not allocate memory for 'read.dcf'"));
+				error(_("could not allocate memory for 'read.dcf()' function"));
 			    } else buf = tmp;
 			    buflen = need;
 			}
@@ -243,7 +243,7 @@ SEXP attribute_hidden do_readDCF(/*const*/ CXXR::Expression* call, const CXXR::B
 				char *tmp = static_cast<char *>( realloc(buf, need));
 				if(!tmp) {
 				    free(buf);
-				    error(_("could not allocate memory for 'read.dcf'"));
+				    error(_("could not allocate memory for 'read.dcf()' function"));
 				} else buf = tmp;
 				buflen = need;
 			    }

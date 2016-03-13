@@ -29,7 +29,8 @@
 #include <config.h>
 #endif
 
-#include "Defn.h"
+#include <localization.h>
+#include <Defn.h>
 #include "duplicate.h"
 
 #include "CXXR/DottedArgs.hpp"
@@ -187,7 +188,7 @@ SEXP lazy_duplicate(SEXP s) {
 	SET_NAMED(s, 2);
 	break;
     default:
-	UNIMPLEMENTED_TYPE("lazy_duplicate", s);
+	UNIMPLEMENTED_TYPE("lazy_duplicate()", s);
     }
     return s;
 }
@@ -244,7 +245,7 @@ void copyVector(SEXP s, SEXP t)
 {
     SEXPTYPE sT = TYPEOF(s), tT = TYPEOF(t);
     if (sT != tT)
-	error("vector types do not match in copyVector");
+	error(_("vector types do not match in 'copyVector()'"));
     R_xlen_t ns = XLENGTH(s), nt = XLENGTH(t);
     switch (sT) {
     case STRSXP:
@@ -270,7 +271,7 @@ void copyVector(SEXP s, SEXP t)
 	xcopyRawWithRecycle(RAW(s), RAW(t), 0, ns, nt);
 	break;
     default:
-	UNIMPLEMENTED_TYPE("copyVector", s);
+	UNIMPLEMENTED_TYPE("copyVector()", s);
     }
 }
 
@@ -346,7 +347,7 @@ void copyMatrix(SEXP s, SEXP t, Rboolean byrow)
 		RAW(s)[didx] = RAW(t)[sidx];
 	    break;
 	default:
-	    UNIMPLEMENTED_TYPE("copyMatrix", s);
+	    UNIMPLEMENTED_TYPE("copyMatrix()", s);
 	}
     }
     else

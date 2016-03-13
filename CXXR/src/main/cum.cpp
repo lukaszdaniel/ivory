@@ -28,8 +28,8 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 
 static SEXP cumsum(SEXP x, SEXP s)
@@ -53,7 +53,7 @@ static SEXP icumsum(SEXP x, SEXP s)
 	if (ix[i] == NA_INTEGER) break;
 	sum += ix[i];
 	if(sum > INT_MAX || sum < 1 + INT_MIN) { /* INT_MIN is NA_INTEGER */
-	    warning(_("integer overflow in 'cumsum'; use 'cumsum(as.numeric(.))'"));
+	    warning(_("integer overflow in '%s' function; use '%s'"), "cumsum()", "cumsum(as.numeric(.))");
 	    break;
 	}
 	is[i] = int( sum);
@@ -180,13 +180,13 @@ SEXP attribute_hidden do_cum(/*const*/ CXXR::Expression* call, const CXXR::Built
 	    return ccumprod(t, s);
 	    break;
 	case 3: /* cummax */
-	    errorcall(call, _("'cummax' not defined for complex numbers"));
+	    errorcall(call, _("'%s' function is not defined for complex numbers"), "cummax()");
 	    break;
 	case 4: /* cummin */
-	    errorcall(call, _("'cummin' not defined for complex numbers"));
+	    errorcall(call, _("'%s' function is not defined for complex numbers"), "cummin()");
 	    break;
 	default:
-	    errorcall(call, "unknown cumxxx function");
+	    errorcall(call, _("unknown '%s' function"), "cumxxx()");
 	}
     } else if( ( isInteger(args[0]) || isLogical(args[0]) ) &&
 	       op->variant() != 2) {
@@ -210,7 +210,7 @@ SEXP attribute_hidden do_cum(/*const*/ CXXR::Expression* call, const CXXR::Built
 	    ans = icummin(t,s);
 	    break;
 	default:
-	    errorcall(call, _("unknown cumxxx function"));
+	    errorcall(call, _("unknown '%s' function"), "cumxxx()");
 	    ans = R_NilValue;
 	}
 	UNPROTECT(2); /* t, s */
@@ -237,7 +237,7 @@ SEXP attribute_hidden do_cum(/*const*/ CXXR::Expression* call, const CXXR::Built
 	    return cummin(t,s);
 	    break;
 	default:
-	    errorcall(call, _("unknown cumxxx function"));
+	    errorcall(call, _("unknown '%s' function"), "cumxxx()");
 	}
     }
     return R_NilValue; /* for -Wall */

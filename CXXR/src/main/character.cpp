@@ -80,8 +80,8 @@ abbreviate chartr make.names strtrim tolower toupper give error.
 # include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 #include <errno.h>
 #include <R_ext/RS.h>  /* for Calloc/Free */
@@ -115,7 +115,7 @@ SEXP attribute_hidden do_nzchar(/*const*/ CXXR::Expression* call, const CXXR::Bu
     // checkArity(op, args);  .Primitive()  &  may have 1 or 2 args now
     if (num_args < 1 || num_args > 2)
 	errorcall(call,
-		  ngettext("%d argument passed to '%s' which requires %d to %d",
+		  n_("%d argument passed to '%s' which requires %d to %d",
 			   "%d arguments passed to '%s' which requires %d to %d",
 			   (unsigned long) num_args),
 		  num_args, op->name(), 1, 2);
@@ -123,10 +123,10 @@ SEXP attribute_hidden do_nzchar(/*const*/ CXXR::Expression* call, const CXXR::Bu
     x = args[0];
 
     if (isFactor(x))
-	error(_("'%s' requires a character vector"), "nzchar()");
+	error(_("'%s' function requires a character vector"), "nzchar()");
     PROTECT(x = coerceVector(x, STRSXP));
     if (!isString(x))
-	error(_("'%s' requires a character vector"), "nzchar()");
+	error(_("'%s' function requires a character vector"), "nzchar()");
 
     int keepNA = FALSE; // the default
     if(num_args > 1) {
@@ -232,15 +232,15 @@ SEXP attribute_hidden do_nchar(/*const*/ CXXR::Expression* call, const CXXR::Bui
 
     if (num_args < 3 || num_args > 4)
 	errorcall(call,
-		  ngettext("%d argument passed to '%s' which requires %d to %d",
+		  n_("%d argument passed to '%s' which requires %d to %d",
 			   "%d arguments passed to '%s' which requires %d to %d",
 			   (unsigned long) num_args),
 		  num_args, op->name(), 3, 4);
     if (isFactor(args[0]))
-	error(_("'%s' requires a character vector"), "nchar()");
+	error(_("'%s' function requires a character vector"), "nchar()");
     PROTECT(x = coerceVector(args[0], STRSXP));
     if (!isString(x))
-	error(_("'%s' requires a character vector"), "nchar()");
+	error(_("'%s' function requires a character vector"), "nchar()");
     R_xlen_t len = XLENGTH(x);
     stype = args[1];
     if (!isString(stype) || LENGTH(stype) != 1)
@@ -920,7 +920,7 @@ SEXP attribute_hidden do_makenames(/*const*/ CXXR::Expression* call, const CXXR:
 		}
 		wcstombs(tmp, wstr, strlen(tmp)+1);
 		Free(wstr);
-	    } else error(_("invalid multibyte string %d"), i+1);
+	    } else error(_("invalid multibyte input string %d"), i+1);
 	} else {
 	    for (p = tmp; *p; p++) {
 		if (*p == '.' || (allow_ && *p == '_')) /* leave alone */;
@@ -965,7 +965,7 @@ SEXP attribute_hidden do_tolower(/*const*/ CXXR::Expression* call, const CXXR::B
     if (!isString(x)) error(_("non-character argument"));
     n = XLENGTH(x);
     PROTECT(y = allocVector(STRSXP, n));
-#if defined(Win32) || defined(__STDC_ISO_10646__) || defined(__APPLE__) || defined(__FreeBSD__)
+#if defined(_WIN32) || defined(__STDC_ISO_10646__) || defined(__APPLE__) || defined(__FreeBSD__)
     /* utf8towcs is really to UCS-4/2 */
     for (i = 0; i < n; i++)
 	if (getCharCE(STRING_ELT(x, i)) == CE_UTF8) use_UTF8 = TRUE;
@@ -1016,7 +1016,7 @@ SEXP attribute_hidden do_tolower(/*const*/ CXXR::Expression* call, const CXXR::B
 		    }
 		    Free(cbuf);
 		} else {
-		    error(_("invalid multibyte string %d"), i+1);
+		    error(_("invalid multibyte input string %d"), i+1);
 		}
 	    }
 	    vmaxset(vmax);
@@ -1071,8 +1071,7 @@ wtr_build_spec(const wchar_t *s, struct wtr_spec *trs) {
 	if (s[i + 1] == L'-') {
 	    _new->type = WTR_RANGE;
 	    if (s[i] > s[i + 2])
-		error(_("decreasing range specification ('%lc-%lc')"),
-		      s[i], s[i + 2]);
+		error(_("decreasing range specification ('%lc-%lc')"), s[i], s[i + 2]);
 	    _new->u.r.first = s[i];
 	    _new->u.r.last = s[i + 2];
 	    i = i + 3;
@@ -1157,8 +1156,7 @@ tr_build_spec(const char *s, struct tr_spec *trs) {
 	if (s[i + 1] == '-') {
 	    _new->type = TR_RANGE;
 	    if (s[i] > s[i + 2])
-		error(_("decreasing range specification ('%c-%c')"),
-		      s[i], s[i + 2]);
+		error(_("decreasing range specification ('%c-%c')"), s[i], s[i + 2]);
 	    _new->u.r.first = s[i];
 	    _new->u.r.last = s[i + 2];
 	    i = i + 3;
@@ -1309,10 +1307,10 @@ SEXP attribute_hidden do_chartr(/*const*/ CXXR::Expression* call, const CXXR::Bu
 	error(_("invalid '%s' argument"), "new");
     if (LENGTH(_new) > 1)
 	warning(_("argument '%s' has length > 1 and only the first element will be used"), "new");
-    if (!isString(x)) error("invalid '%s' argument", "x");
+    if (!isString(x)) error(_("invalid '%s' argument"), "x");
 
     /* utf8towcs is really to UCS-4/2 */
-#if defined(Win32) || defined(__STDC_ISO_10646__) || defined(__APPLE__)  || defined(__FreeBSD__)
+#if defined(_WIN32) || defined(__STDC_ISO_10646__) || defined(__APPLE__)  || defined(__FreeBSD__)
     for (i = 0; i < n; i++)
 	if (getCharCE(STRING_ELT(x, i)) == CE_UTF8) use_UTF8 = TRUE;
 
@@ -1344,13 +1342,13 @@ SEXP attribute_hidden do_chartr(/*const*/ CXXR::Expression* call, const CXXR::Bu
 	if (use_UTF8 && getCharCE(STRING_ELT(old, 0)) == CE_UTF8) {
 	    s = CHAR(STRING_ELT(old, 0));
 	    nc = int( utf8towcs(nullptr, s, 0));
-	    if (nc < 0) error(_("invalid UTF-8 string 'old'"));
+	    if (nc < 0) error(_("invalid UTF-8 string '%s'"), "old");
 	    wc = static_cast<wchar_t *>( R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff));
 	    utf8towcs(wc, s, nc + 1);
 	} else {
 	    s = translateChar(STRING_ELT(old, 0));
 	    nc = int( mbstowcs(nullptr, s, 0));
-	    if (nc < 0) error(_("invalid multibyte string 'old'"));
+	    if (nc < 0) error(_("invalid multibyte string '%s'"), "old");
 	    wc = static_cast<wchar_t *>( R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff));
 	    mbstowcs(wc, s, nc + 1);
 	}
@@ -1363,13 +1361,13 @@ SEXP attribute_hidden do_chartr(/*const*/ CXXR::Expression* call, const CXXR::Bu
 	if (use_UTF8 && getCharCE(STRING_ELT(_new, 0)) == CE_UTF8) {
 	    s = CHAR(STRING_ELT(_new, 0));
 	    nc = int( utf8towcs(nullptr, s, 0));
-	    if (nc < 0) error(_("invalid UTF-8 string 'new'"));
+	    if (nc < 0) error(_("invalid UTF-8 string '%s'"), "new");
 	    wc = static_cast<wchar_t *>( R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff));
 	    utf8towcs(wc, s, nc + 1);
 	} else {
 	    s = translateChar(STRING_ELT(_new, 0));
 	    nc = int( mbstowcs(nullptr, s, 0));
-	    if (nc < 0) error(_("invalid multibyte string 'new'"));
+	    if (nc < 0) error(_("invalid multibyte string '%s'"), "new");
 	    wc = static_cast<wchar_t *>( R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff));
 	    mbstowcs(wc, s, nc + 1);
 	}
@@ -1429,7 +1427,7 @@ SEXP attribute_hidden do_chartr(/*const*/ CXXR::Expression* call, const CXXR::Bu
 		    ienc = CE_NATIVE;
 		}
 		if (nc < 0)
-		    error(_("invalid input multibyte string %d"), i+1);
+		    error(_("invalid multibyte input string %d"), i+1);
                 wc = static_cast<wchar_t *>( R_AllocStringBuffer((nc+1)*sizeof(wchar_t),
 								 &cbuff));
 		if (ienc == CE_UTF8) utf8towcs(wc, xi, nc + 1);
@@ -1535,7 +1533,7 @@ SEXP attribute_hidden do_strtrim(/*const*/ CXXR::Expression* call, const CXXR::B
 
     /* as.character happens at R level now */
     if (!isString(x = x_))
-	error(_("strtrim() requires a character vector"));
+	error(_("'strtrim()' function  requires a character vector"));
     len = XLENGTH(x);
     PROTECT(width = coerceVector(width_, INTSXP));
     nw = LENGTH(width);

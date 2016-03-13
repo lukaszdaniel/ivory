@@ -195,7 +195,7 @@ SEXP attribute_hidden do_agrep(/*const*/ CXXR::Expression* call, const CXXR::Bui
     patlen = asInteger(eval(call, env));
     UNPROTECT(1);
     if(!patlen)
-	error(_("'pattern' must be a non-empty character string"));
+	error(_("'%s' argument must be a non-empty character string"), "pattern");
 
     /* wtransChar and translateChar can R_alloc */
     vmax = vmaxget();
@@ -212,7 +212,7 @@ SEXP attribute_hidden do_agrep(/*const*/ CXXR::Expression* call, const CXXR::Bui
     if(rc) {
 	char errbuf[1001];
 	tre_regerror(rc, &reg, errbuf, 1001);
-	error(_("regcomp error:  '%s'"), errbuf);
+	error(_("regcomp error: '%s'"), errbuf);
     }
 
     tre_regaparams_default(&params);
@@ -619,8 +619,7 @@ SEXP attribute_hidden do_adist(/*const*/ CXXR::Expression* call, const CXXR::Bui
 	    } else {
 		s = translateChar(elt);
 		if(mbcslocale && !mbcsValid(s)) {
-		    error(_("input string x[%d] is invalid in this locale"),
-			  i + 1);
+		    error(_("input string x[%d] is invalid in this locale"), i + 1);
 		}
 		rc = tre_regcomp(&reg, s, cflags);
 		vmaxset(vmax);
@@ -628,7 +627,7 @@ SEXP attribute_hidden do_adist(/*const*/ CXXR::Expression* call, const CXXR::Bui
 	    if(rc) {
 		char errbuf[1001];
 		tre_regerror(rc, &reg, errbuf, 1001);
-		error(_("regcomp error:  '%s'"), errbuf);
+		error(_("regcomp error: '%s'"), errbuf);
 	    }
 	    if(opt_counts) {
 		nmatch = reg.re_nsub + 1;
@@ -665,8 +664,7 @@ SEXP attribute_hidden do_adist(/*const*/ CXXR::Expression* call, const CXXR::Bui
 		    } else {
 			t = translateChar(elt);
 			if(mbcslocale && !mbcsValid(t)) {
-			    error(_("input string y[%d] is invalid in this locale"),
-				  j + 1);
+			    error(_("input string y[%d] is invalid in this locale"), j + 1);
 			}
 			rc = tre_regaexec(&reg, t,
 					  &match, params, 0);
@@ -768,8 +766,7 @@ SEXP attribute_hidden do_aregexec(/*const*/ CXXR::Expression* call, const CXXR::
     if(opt_fixed == NA_INTEGER) opt_fixed = 0;
     if(useBytes == NA_INTEGER) useBytes = 0;
     if(opt_fixed && opt_icase) {
-	warning(_("argument '%s' will be ignored"),
-		"ignore.case = TRUE");
+	warning(_("argument '%s' will be ignored"), "ignore.case = TRUE");
 	opt_icase = 0;
     }
     if(opt_fixed) cflags |= REG_LITERAL;
@@ -824,7 +821,7 @@ SEXP attribute_hidden do_aregexec(/*const*/ CXXR::Expression* call, const CXXR::
     patlen = asInteger(eval(call, env));
     UNPROTECT(1);
     if(!patlen)
-	error(_("'pattern' must be a non-empty character string"));
+	error(_("'%s' argument must be a non-empty character string"), "pattern");
 
     if(useBytes)
 	rc = tre_regcompb(&reg, CHAR(STRING_ELT(pat, 0)), cflags);
@@ -878,8 +875,7 @@ SEXP attribute_hidden do_aregexec(/*const*/ CXXR::Expression* call, const CXXR::
 	    else {
 		t = translateChar(STRING_ELT(vec, i));
 		if(mbcslocale && !mbcsValid(t))
-		    error(_("input string %d is invalid in this locale"),
-			  i + 1);
+		    error(_("input string %d is invalid in this locale"), i + 1);
 		rc = tre_regaexec(&reg, t,
 				  &match, params, 0);
 		vmaxset(vmax);

@@ -45,6 +45,7 @@
 /* for definition of "struct exception" in math.h */
 # define __LIBM_PRIVATE
 #endif
+#include <localization.h>
 #include <Defn.h>		/*-> Arith.h -> math.h */
 #ifdef __OpenBSD__
 # undef __LIBM_PRIVATE
@@ -62,7 +63,7 @@
 #include <errno.h>
 #include <math.h>
 
-#include "R_ext/Itermacros.h"
+#include <R_ext/Itermacros.h>
 #include "CXXR/BinaryFunction.hpp"
 #include "CXXR/LogicalVector.h"
 #include "CXXR/GCStackRoot.hpp"
@@ -334,7 +335,7 @@ namespace {
 	case LGLSXP:
 	    break;
 	default:
-	    Rf_error(_("non-numeric argument to binary operator"));
+	    Rf_error(_("non-numeric argument passed to binary operator"));
 	}
 	return static_cast<VectorBase*>(v);
     }
@@ -463,7 +464,7 @@ SEXP attribute_hidden R_unary(SEXP call, SEXP op, SEXP s1)
     case CPLXSXP:
 	return complex_unary(operation, s1, call);
     default:
-	errorcall(call, _("invalid argument to unary operator"));
+	errorcall(call, _("invalid argument passed to unary operator"));
     }
     return s1;			/* never used; to keep -Wall happy */
 }
@@ -554,7 +555,7 @@ namespace {
     }
 }  // anonymous namespace
 
-#define INTEGER_OVERFLOW_WARNING _("NAs produced by integer overflow")
+#define INTEGER_OVERFLOW_WARNING _("NA values produced by integer overflow")
 
 
 static SEXP integer_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2, SEXP lcall)
@@ -781,7 +782,7 @@ SEXP attribute_hidden do_math1(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
 
     default:
-	errorcall(call, _("unimplemented real function of 1 argument"));
+	errorcall(call, n_("unimplemented real function of %d numeric argument", "unimplemented real function of %d numeric arguments", 1), 1);
     }
     return s; /* never used; to keep -Wall happy */
 }
@@ -1061,8 +1062,7 @@ SEXP attribute_hidden do_math2(SEXP call, SEXP op, SEXP args, SEXP env)
     case 26: return Math2(args, psigamma);
 
     default:
-	errorcall(call,
-		  _("unimplemented real function of %d numeric arguments"), 2);
+	errorcall(call, n_("unimplemented real function of %d numeric argument", "unimplemented real function of %d numeric arguments", 2), 2);
     }
     return op;			/* never used; to keep -Wall happy */
 }
@@ -1089,9 +1089,8 @@ SEXP attribute_hidden do_Math2(SEXP call, SEXP op, SEXP args, SEXP env)
 
     n = Rf_length(args);
     if (n != 1 && n != 2)
-        error(ngettext("%d argument passed to '%s' which requires 1 or 2 arguments",
-                       "%d arguments passed to '%s'which requires 1 or 2 arguments", n),
-              n, PRIMNAME(op));
+	error(n_("%d argument passed to '%s' function which requires 1 or 2 arguments", "%d arguments passed to '%s' function which requires 1 or 2 arguments", n),
+	      n, PRIMNAME(op));
 
     ArgList arglist(SEXP_downcast<PairList*>(args), ArgList::EVALUATED);
     auto dispatched = SEXP_downcast<BuiltInFunction*>(op)
@@ -1212,7 +1211,7 @@ SEXP attribute_hidden do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (n == 1) {
 	if (CAR(args) == R_MissingArg ||
 	    (TAG(args) != R_NilValue && TAG(args) != R_x_Symbol))
-	    error(_("argument \"%s\" is missing, with no default"), "x");
+	    error(_("argument '%s' is missing, with no default"), "x");
 
 	ArgList arglist(SEXP_downcast<PairList*>(args), ArgList::EVALUATED);
 	auto dispatched = builtin->InternalDispatch(callx, env, &arglist);
@@ -1234,7 +1233,7 @@ SEXP attribute_hidden do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP rho)
 	PROTECT(args = matchArgs(do_log_formals, args, call));
 
 	if(CAR(args) == R_MissingArg)
-	    error(_("argument \"%s\" is missing, with no default"), "x");
+	    error(_("argument '%s' is missing, with no default"), "x");
 	if (CADR(args) == R_MissingArg)
 	    SETCADR(args, ScalarReal(DFLT_LOG_BASE));
 
@@ -1464,8 +1463,7 @@ SEXP attribute_hidden do_math3(/*const*/ CXXR::Expression* call, const CXXR::Bui
     case 47:  return Math3_2(args, qnbinom_mu);
 
     default:
-	errorcall(call,
-		  _("unimplemented real function of %d numeric arguments"), 3);
+	errorcall(call, n_("unimplemented real function of %d numeric argument", "unimplemented real function of %d numeric arguments", 3), 3);
     }
     return nullptr;			/* never used; to keep -Wall happy */
 } /* do_math3() */
@@ -1600,12 +1598,11 @@ SEXP attribute_hidden do_math4(SEXP call, SEXP op, SEXP args, SEXP env)
     case 11: return Math4_2(args, ptukey);
     case 12: return Math4_2(args, qtukey);
     default:
-	errorcall(call,
-		  _("unimplemented real function of %d numeric arguments"), 4);
+	errorcall(call, n_("unimplemented real function of %d numeric argument", "unimplemented real function of %d numeric arguments", 4), 4);
     }
     return op;			/* never used; to keep -Wall happy */
 }
-
+
 
 #ifdef WHEN_MATH5_IS_THERE/* as in ./arithmetic.h */
 
@@ -1702,8 +1699,7 @@ SEXP attribute_hidden do_math5(SEXP call, SEXP op, SEXP args, SEXP env)
     case  3: return Math5(args, q...);
 #endif
     default:
-	errorcall(call,
-		  _("unimplemented real function of %d numeric arguments"), 5);
+	errorcall(call, n_("unimplemented real function of %d numeric argument", "unimplemented real function of %d numeric arguments", 5), 5);
     }
     return op;			/* never used; to keep -Wall happy */
 } /* do_math5() */

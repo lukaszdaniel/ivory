@@ -28,8 +28,8 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 #include "basedecl.h"
 #include "CXXR/Closure.h"
@@ -61,7 +61,7 @@ SEXP attribute_hidden do_debug(SEXP call, SEXP op, SEXP args, SEXP rho)
 	break;
     case 1: // undebug()
 	if( RDEBUG(CAR(args)) != 1 )
-	    warningcall(call, "argument is not being debugged");
+	    warningcall(call, _("argument is not being debugged"));
 	SET_RDEBUG(CAR(args), CXXRFALSE);
 	break;
     case 2: // isdebugged()
@@ -82,7 +82,7 @@ SEXP attribute_hidden do_trace(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (TYPEOF(CAR(args)) != CLOSXP &&
 	TYPEOF(CAR(args)) != SPECIALSXP &&
 	TYPEOF(CAR(args)) != BUILTINSXP)
-	    errorcall(call, _("argument must be a function"));
+	    errorcall(call, _("'%s' argument must be a function"), "what");
 
     switch(PRIMVAL(op)) {
     case 0:
@@ -113,8 +113,7 @@ SEXP attribute_hidden do_traceOnOff(/*const*/ CXXR::Expression* call, const CXXR
 		Closure::enableDebugging(_new);
 	}
 	else
-	    error(_("Value for '%s' must be TRUE or FALSE"),
-		  trace ? "tracingState" : "debuggingState");
+	    error(_("'%s' argument must be TRUE or FALSE"), trace ? "tracingState" : "debuggingState");
     }
     return ScalarLogical(prev);
 }
@@ -142,10 +141,10 @@ SEXP attribute_hidden do_tracemem(/*const*/ CXXR::Expression* call, const CXXR::
 
     if(TYPEOF(object) == ENVSXP || TYPEOF(object) == PROMSXP)
 	warningcall(call,
-		    _("'tracemem' is not useful for promise and environment objects"));
+		    _("'tracemem()' function is not useful for promise and environment objects"));
     if(TYPEOF(object) == EXTPTRSXP || TYPEOF(object) == WEAKREFSXP)
 	warningcall(call,
-		    _("'tracemem' is not useful for weak reference or external pointer objects"));
+		    _("'tracemem()' function is not useful for weak reference or external pointer objects"));
 
     object->setMemoryTracing(true);
     snprintf(buffer, 21, "<%p>", (void *) object);

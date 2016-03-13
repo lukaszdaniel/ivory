@@ -37,8 +37,8 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 #include <Graphics.h>
 #include <GraphicsBase.h>
@@ -58,7 +58,7 @@ GPar* dpptr(pGEDevDesc dd) {
 static SEXP R_INLINE getSymbolValue(SEXP symbol)
 {
     if (TYPEOF(symbol) != SYMSXP)
-	error("argument to 'getSymbolValue' is not a symbol");
+	error(_("argument passed to 'getSymbolValue()' function is not a symbol"));
     return findVar(symbol, R_BaseEnv);
 }
 
@@ -506,7 +506,7 @@ pGEDevDesc GEcreateDevDesc(pDevDesc dev)
      */
     int i;
     if (!gdd)
-	error(_("not enough memory to allocate device (in GEcreateDevDesc)"));
+	error(_("not enough memory to allocate device (in 'GEcreateDevDesc()' function)"));
     for (i = 0; i < MAX_GRAPHICS_SYSTEMS; i++) gdd->gesd[i] = nullptr;
     gdd->index = -1;
     gdd->dev = dev;

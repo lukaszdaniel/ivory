@@ -95,19 +95,20 @@
 #include <config.h>
 #endif
 
+#include <localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <float.h> /* for DBL_DIG */
 #include <Print.h>
 #include <Fileio.h>
-#ifdef Win32
+#ifdef _WIN32
 #include <trioremap.h>
 #endif
 
 #define BUFSIZE 512
 
 #define MIN_Cutoff 20
-#define DEFAULT_Cutoff 60
+#define DEFAULT_Cutoff GetOptionWidth()
 #define MAX_Cutoff (BUFSIZE - 12)
 /* ----- MAX_Cutoff  <	BUFSIZE !! */
 
@@ -169,7 +170,7 @@ SEXP attribute_hidden do_deparse(/*const*/ CXXR::Expression* call, const CXXR::B
     if(!isNull(width_cutoff_)) {
 	cut0 = asInteger(width_cutoff_);
 	if(cut0 == NA_INTEGER|| cut0 < MIN_Cutoff || cut0 > MAX_Cutoff) {
-	    warning(_("invalid 'cutoff' value for 'deparse', using default"));
+	    warning(_("invalid 'cutoff' value (%d) for 'deparse()', using default %d"), cut0, DEFAULT_Cutoff);
 	    cut0 = DEFAULT_Cutoff;
 	}
     }
@@ -271,11 +272,11 @@ static SEXP deparse1WithCutoff(SEXP call, Rboolean abbrev, int cutoff,
     PROTECT(svec); /* protect from warning() allocating, PR#14356 */
     R_print.digits = savedigits;
     if ((opts & WARNINCOMPLETE) && localData.isS4)
-	warning(_("deparse of an S4 object will not be source()able"));
+	warning(_("deparse of an S4 object will not be sourceable by 'source()'"));
     else if ((opts & WARNINCOMPLETE) && !localData.sourceable)
 	warning(_("deparse may be incomplete"));
     if ((opts & WARNINCOMPLETE) && localData.longstring)
-	warning(_("deparse may be not be source()able in R < 2.7.0"));
+	warning(_("deparse may be not be sourceable by 'source()' in R version less than 2.7.0"));
     /* somewhere lower down might have allocated ... */
     R_FreeStringBuffer(&(localData.buffer));
     UNPROTECT(1);
@@ -360,7 +361,7 @@ SEXP attribute_hidden do_dput(/*const*/ CXXR::Expression* call, const CXXR::Buil
     PROTECT(tval); /* against Rconn_printf */
 
     if(!inherits(file_, "connection"))
-	error(_("'file' must be a character string or connection"));
+	error(_("'%s' argument must be a character string or connection"), "file");
     ifile = asInteger(file_);
 
     wasopen = CXXRTRUE;
@@ -408,7 +409,7 @@ SEXP attribute_hidden do_dump(/*const*/ CXXR::Expression* call, const CXXR::Buil
     names = list_;
     file = file_;
     if(!inherits(file, "connection"))
-	error(_("'file' must be a character string or connection"));
+	error(_("'%s' must be a character string or connection"), "file");
     if(!isString(names))
 	error( _("character arguments expected"));
     nobjs = length(names);
@@ -420,7 +421,7 @@ SEXP attribute_hidden do_dump(/*const*/ CXXR::Expression* call, const CXXR::Buil
     opts = asInteger(opts_);
     /* <NOTE>: change this if extra options are added */
     if(opts == NA_INTEGER || opts < 0 || opts > 1024)
-	errorcall(call, _("'opts' should be small non-negative integer"));
+	errorcall(call, _("'opts' argument should be small non-negative integer"));
     evaluate = CXXRCONSTRUCT(Rboolean, asLogical(evaluate_));
     if (!evaluate) opts |= DELAYPROMISES;
 
@@ -430,7 +431,7 @@ SEXP attribute_hidden do_dump(/*const*/ CXXR::Expression* call, const CXXR::Buil
 	SET_TAG(o, installTrChar(STRING_ELT(names, j)));
 	SETCAR(o, findVar(TAG(o), source));
 	if (CAR(o) == R_UnboundValue)
-	    warning(_("object '%s' not found"), EncodeChar(PRINTNAME(TAG(o))));
+	    warning(_("object '%s' was not found"), EncodeChar(PRINTNAME(TAG(o))));
 	else nout++;
     }
     o = objs;
@@ -1279,7 +1280,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
     }
     default:
 	d->sourceable = FALSE;
-	UNIMPLEMENTED_TYPE("deparse2buff", s);
+	UNIMPLEMENTED_TYPE("deparse2buff()", s);
     }
 }
 

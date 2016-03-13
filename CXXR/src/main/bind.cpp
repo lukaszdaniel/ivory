@@ -31,11 +31,12 @@
 # include <config.h>
 #endif
 
+#include <localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/PrtUtil.h> // for IndexWidth
 #include <R_ext/Itermacros.h>
-#define imax2(x, y) ((x < y) ? y : x)
+#include <R_ext/Minmax.h>
 
 #include "duplicate.h"
 #include "RBufferUtils.h"
@@ -341,8 +342,8 @@ LogicalAnswer(SEXP x, struct BindData *data, SEXP call)
 	    LOGICAL(data->ans_ptr)[data->ans_length++] = (int)RAW(x)[i] != 0;
 	break;
     default:
-	errorcall(call, _("type '%s' is unimplemented in '%s'"),
-		  type2char(TYPEOF(x)), "LogicalAnswer");
+	errorcall(call, _("type '%s' is unimplemented in '%s' function"),
+		  type2char(TYPEOF(x)), "LogicalAnswer()");
     }
 }
 
@@ -380,8 +381,8 @@ IntegerAnswer(SEXP x, struct BindData *data, SEXP call)
 	    INTEGER(data->ans_ptr)[data->ans_length++] = int(RAW(x)[i]);
 	break;
     default:
-	errorcall(call, _("type '%s' is unimplemented in '%s'"),
-		  type2char(TYPEOF(x)), "IntegerAnswer");
+	errorcall(call, _("type '%s' is unimplemented in '%s' function"),
+		  type2char(TYPEOF(x)), "IntegerAnswer()");
     }
 }
 
@@ -432,8 +433,8 @@ RealAnswer(SEXP x, struct BindData *data, SEXP call)
 	    REAL(data->ans_ptr)[data->ans_length++] = int(RAW(x)[i]);
 	break;
     default:
-	errorcall(call, _("type '%s' is unimplemented in '%s'"),
-		  type2char(TYPEOF(x)), "RealAnswer");
+	errorcall(call, _("type '%s' is unimplemented in '%s' function"),
+		  type2char(TYPEOF(x)), "RealAnswer()");
     }
 }
 
@@ -508,8 +509,8 @@ ComplexAnswer(SEXP x, struct BindData *data, SEXP call)
 	break;
 
     default:
-	errorcall(call, _("type '%s' is unimplemented in '%s'"),
-		  type2char(TYPEOF(x)), "ComplexAnswer");
+	errorcall(call, _("type '%s' is unimplemented in '%s' function"),
+		  type2char(TYPEOF(x)), "ComplexAnswer()");
     }
 }
 
@@ -536,8 +537,8 @@ RawAnswer(SEXP x, struct BindData *data, SEXP call)
 	    RAW(data->ans_ptr)[data->ans_length++] = RAW(x)[i];
 	break;
     default:
-	errorcall(call, _("type '%s' is unimplemented in '%s'"),
-		  type2char(TYPEOF(x)), "RawAnswer");
+	errorcall(call, _("type '%s' is unimplemented in '%s' function"),
+		  type2char(TYPEOF(x)), "RawAnswer()");
     }
 }
 
@@ -758,7 +759,7 @@ static SEXP ExtractOptionals(SEXP ans, int *recurse, int *usenames, SEXP call)
 	next = CDR(a);
 	if (n != R_NilValue && pmatch(R_RecursiveSymbol, n, CXXRTRUE)) {
 	    if (n_recurse++ == 1)
-		errorcall(call, _("repeated formal argument 'recursive'"));
+		errorcall(call, _("repeated formal argument '%s'"), "recursive");
 	    if ((v = asLogical(CAR(a))) != NA_INTEGER) {
 		*recurse = v;
 	    }
@@ -769,7 +770,7 @@ static SEXP ExtractOptionals(SEXP ans, int *recurse, int *usenames, SEXP call)
 	}
 	else if (n != R_NilValue && pmatch(R_UseNamesSymbol, n, CXXRTRUE)) {
 	    if (n_usenames++ == 1)
-		errorcall(call, _("repeated formal argument 'use.names'"));
+		errorcall(call, _("repeated formal argument '%s'"), "user.names");
 	    if ((v = asLogical(CAR(a))) != NA_INTEGER) {
 		*usenames = v;
 	    }
@@ -962,7 +963,7 @@ SEXP attribute_hidden do_unlist(/*const*/ CXXR::Expression* call, const CXXR::Bu
     else {
 	UNPROTECT(1);
 	if (lenient || isVector(args)) return args;
-	else error(_("argument not a list"));
+	else error(_("argument is not a list"));
     }
 
     /* If a non-vector argument was encountered (perhaps a list if */
@@ -1109,7 +1110,7 @@ SEXP attribute_hidden do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
 	    for (int i = 0; i < length(classlist); i++) {
 		const char *s = translateChar(STRING_ELT(classlist, i));
 		if(strlen(generic) + strlen(s) + 2 > 512)
-		    error(_("class name too long in '%s'"), generic);
+		    error(_("class name is too long in '%s'"), generic);
 		sprintf(buf, "%s.%s", generic, s);
 		SEXP classmethod = R_LookupMethod(install(buf), env, env,
 						  R_BaseNamespace);
@@ -1196,8 +1197,7 @@ SEXP attribute_hidden do_bind(SEXP call, SEXP op, SEXP args, SEXP env)
 	   to an expression is not ideal.
 	   FIXME?  had  cbind(y ~ x, 1) work using lists, before */
     default:
-	error(_("cannot create a matrix from type '%s'"),
-	      type2char(mode));
+	error(_("cannot create a matrix from type '%s'"), type2char(mode));
     }
 
     if (PRIMVAL(op) == 1)
@@ -1265,12 +1265,11 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	    if (mrows == -1)
 		mrows = INTEGER(dims)[0];
 	    else if (mrows != INTEGER(dims)[0])
-		error(_("number of rows of matrices must match (see arg %d)"),
-		      na + 1);
+		error(_("number of rows of matrices must match (see argument %d)"), na + 1);
 	    cols += INTEGER(dims)[1];
 	}
 	else if (length(u) >= lenmin) {
-	    rows = imax2(rows, length(u));
+	    rows = max(rows, length(u));
 	    cols += 1;
 	}
     }
@@ -1293,7 +1292,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	    int k = length(u);
 	    if (!warned && k > 0 && (k > rows || rows % k)) {
 		warned = TRUE;
-		warning("number of rows of result is not a multiple of vector length (arg %d)", na + 1);
+		warning(_("number of rows of result is not a multiple of vector length (argument %d)"), na + 1);
 	    }
 	    PROTECT(dn = getAttrib(u, R_NamesSymbol));
 	    if (k >= lenmin && (TAG(t) != R_NilValue ||
@@ -1301,7 +1300,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 				((deparse_level == 1) &&
 				 isSymbol(substitute(CAR(t),R_NilValue)))))
 		have_cnames = TRUE;
-	    nnames = imax2(nnames, length(dn));
+	    nnames = max(nnames, length(dn));
 	    UNPROTECT(1); /* dn */
 	}
     }
@@ -1524,12 +1523,11 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	    if (mcols == -1)
 		mcols = INTEGER(dims)[1];
 	    else if (mcols != INTEGER(dims)[1])
-		error(_("number of columns of matrices must match (see arg %d)"),
-		      na + 1);
+		error(_("number of columns of matrices must match (see argument %d)"), na + 1);
 	    rows += INTEGER(dims)[0];
 	}
 	else if (length(u) >= lenmin){
-	    cols = imax2(cols, length(u));
+	    cols = max(cols, length(u));
 	    rows += 1;
 	}
     }
@@ -1554,7 +1552,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	    int k = length(u);
 	    if (!warned && k>0 && (k > cols || cols % k)) {
 		warned = TRUE;
-		warning("number of columns of result is not a multiple of vector length (arg %d)", na + 1);
+		warning(_("number of columns of result is not a multiple of vector length (argument %d)"), na + 1);
 	    }
 	    PROTECT(dn = getAttrib(u, R_NamesSymbol));
 	    if (k >= lenmin && (TAG(t) != R_NilValue ||
@@ -1562,7 +1560,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 				((deparse_level == 1) &&
 				 isSymbol(substitute(CAR(t),R_NilValue)))))
 		have_rnames = TRUE;
-	    nnames = imax2(nnames, length(dn));
+	    nnames = max(nnames, length(dn));
 	    UNPROTECT(1); /* dn */
 	}
     }
