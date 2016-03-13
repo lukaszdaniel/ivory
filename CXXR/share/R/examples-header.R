@@ -41,17 +41,16 @@ assign("cleanEx",
 	   set.seed(1)
    	   options(warn = 1)
 	   .CheckExEnv <- as.environment("CheckExEnv")
-	   delayedAssign("T", stop("T used instead of TRUE", domain = NA),
+	   delayedAssign("T", stop("T used instead of TRUE", domain = "R-base"),
 		  assign.env = .CheckExEnv)
-	   delayedAssign("F", stop("F used instead of FALSE", domain = NA),
+	   delayedAssign("F", stop("F used instead of FALSE", domain = "R-base"),
 		  assign.env = .CheckExEnv)
 	   sch <- search()
 	   newitems <- sch[! sch %in% .oldSearch]
            if(length(newitems)) tools:::detachPackages(newitems)
 	   missitems <- .oldSearch[! .oldSearch %in% sch]
 	   if(length(missitems))
-	       warning("items ", paste(missitems, collapse=", "),
-		       " have been removed from the search path", domain = NA)
+	       warning(gettextf("items %s have been removed from the search path", paste(missitems, collapse = ", ")), domain = "R-base")
        },
        pos = "CheckExEnv")
 assign("ptime", proc.time(), pos = "CheckExEnv")

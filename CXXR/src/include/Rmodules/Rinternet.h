@@ -87,4 +87,4 @@ R_InternetRoutines *R_setInternetRoutines(R_InternetRoutines *routines);
 }
 #endif
 
-#endif /* ifndef R_INTERNET_MODULE_H */
+#endif /* R_INTERNET_MODULE_H */

@@ -5,10 +5,6 @@
    14 digits accuracy.
 */
 
-#undef min
-#define min(a,b) ((a < b)?a:b)
-#undef max
-#define max(a,b) ((a > b)?a:b)
 
 #include "nmath.h"
 #include "dpq.h"
@@ -481,16 +477,16 @@ static double apser(double a, double b, double x, double eps)
  *     Use only if above inequalities are satisfied.
  * ----------------------------------------------------------------------- */
 
-    static double const g = .577215664901533;
+//    static double const g = M_EC; //.577215664901533;
 
     double tol, c, j, s, t, aj;
     double bx = b * x;
 
     t = x - bx;
     if (b * eps <= 0.02)
-	c = log(x) + psi(b) + g + t;
+	c = log(x) + psi(b) + M_EC + t;
     else // b > 2e13 : psi(b) ~= log(b)
-	c = log(bx) + g + t;
+	c = log(bx) + M_EC + t;
 
     tol = eps * 5. * fabs(c);
     j = 1.;
@@ -801,8 +797,7 @@ static double brcomp(double a, double b, double x, double y, int log_p)
  *		 Evaluation of x^a * y^b / Beta(a,b)
  * ----------------------------------------------------------------------- */
 
-    static double const__ = .398942280401433; /* == 1/sqrt(2*pi); */
-    /* R has  M_1_SQRT_2PI , and M_LN_SQRT_2PI = ln(sqrt(2*pi)) = 0.918938.. */
+//    static double const__ = M_1_SQRT_2PI; //.398942280401433; /* == 1/sqrt(2*pi); */
     int i, n;
     double c, e, u, v, z, a0, b0, apb;
 
@@ -926,7 +921,7 @@ static double brcomp(double a, double b, double x, double y, int log_p)
 
 	return(log_p
 	       ? -M_LN_SQRT_2PI + .5*log(b * x0) + z - bcorr(a,b)
-	       : const__ * sqrt(b * x0) * z * exp(-bcorr(a, b)));
+	       : M_1_SQRT_2PI * sqrt(b * x0) * z * exp(-bcorr(a, b)));
     }
 } /* brcomp */
 
@@ -938,8 +933,7 @@ static double brcmp1(int mu, double a, double b, double x, double y, int give_lo
  *          Evaluation of    exp(mu) * x^a * y^b / beta(a,b)
  * ----------------------------------------------------------------------- */
 
-    static double const__ = .398942280401433; /* == 1/sqrt(2*pi); */
-    /* R has  M_1_SQRT_2PI */
+//    static double const__ = M_1_SQRT_2PI; //.398942280401433; /* == 1/sqrt(2*pi); */
 
     /* Local variables */
     double c, t, u, v, z, a0, b0, apb;
@@ -1075,8 +1069,8 @@ static double brcmp1(int mu, double a, double b, double x, double y, int give_lo
 	// L130:
 	z = esum(mu, -(a * u + b * v), give_log);
 	return give_log
-	    ? log(const__)+ (log(b) + lx0)/2. + z      - bcorr(a, b)
-	    :     const__ * sqrt(b * x0)      * z * exp(-bcorr(a, b));
+	    ? -M_LN_SQRT_2PI + (log(b) + lx0)/2. + z      - bcorr(a, b)
+	    :     M_1_SQRT_2PI * sqrt(b * x0)      * z * exp(-bcorr(a, b));
     }
 
 } /* brcmp1 */
@@ -1314,9 +1308,9 @@ static double basym(double a, double b, double lambda, double eps, int log_p)
 #define num_IT 20
 /*            THE ARRAYS A0, B0, C, D HAVE DIMENSION NUM + 1. */
 
-    static double const e0 = 1.12837916709551;/* e0 == 2/sqrt(pi) */
+//    static double const e0 = 2.0/M_SQRT_PI; //1.12837916709551;/* e0 == 2/sqrt(pi) */
     static double const e1 = .353553390593274;/* e1 == 2^(-3/2)   */
-    static double const ln_e0 = 0.120782237635245; /* == ln(e0) */
+//    static double const ln_e0 = M_LN2 - M_LN_SQRT_PI; //0.120782237635245; /* == ln(e0) */
 
     double a0[num_IT + 1], b0[num_IT + 1], c[num_IT + 1], d[num_IT + 1];
 
@@ -1349,7 +1343,7 @@ static double basym(double a, double b, double lambda, double eps, int log_p)
     a0[0] = r1 * .66666666666666663;
     c[0] = a0[0] * -0.5;
     d[0] = -c[0];
-    double j0 = 0.5 / e0 * erfc1(1, z0),
+    double j0 = 0.5 / (2.0/M_SQRT_PI) * erfc1(1, z0),
 	j1 = e1,
 	sum = j0 + d[0] * w0 * j1;
 
@@ -1401,10 +1395,10 @@ static double basym(double a, double b, double lambda, double eps, int log_p)
     }
 
     if(log_p)
-	return ln_e0 + t - bcorr(a, b) + log(sum);
+	return (M_LN2 - M_LN_SQRT_PI) + t - bcorr(a, b) + log(sum);
     else {
 	double u = exp(-bcorr(a, b));
-	return e0 * t * u * sum;
+	return (2.0/M_SQRT_PI) * t * u * sum;
     }
 
 } /* basym_ */
@@ -1423,10 +1417,10 @@ static double exparg(int l)
  *     Note... only an approximate value for exparg(L) is needed.
  * -------------------------------------------------------------------- */
 
-    static double const lnb = .69314718055995;
+    //static double const lnb = M_LN2; //.69314718055995;
     int m = (l == 0) ? Rf_i1mach(16) : Rf_i1mach(15) - 1;
 
-    return m * lnb * .99999;
+    return m * M_LN2 * .99999;
 } /* exparg */
 
 static double esum(int mu, double x, int give_log)

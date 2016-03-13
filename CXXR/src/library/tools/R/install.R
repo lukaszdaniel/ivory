@@ -55,17 +55,16 @@
             pkgdir <- file.path(lib, curPkg)
             if (nzchar(pkgdir) && dir.exists(pkgdir) &&
                 is_subdir(pkgdir, lib)) {
-                starsmsg(stars, "removing ", sQuote(pkgdir))
+                starsmsg(stars, gettextf("removing package directory %s", sQuote(pkgdir)))
                 unlink(pkgdir, recursive = TRUE)
             }
 
             if (nzchar(lockdir) &&
                 dir.exists(lp <- file.path(lockdir, curPkg)) &&
                 is_subdir(lp, lockdir)) {
-                starsmsg(stars, "restoring previous ", sQuote(pkgdir))
+                starsmsg(stars, gettextf("restoring previous package directory %s", sQuote(pkgdir)))
                 if (WINDOWS) {
-                    file.copy(lp, dirname(pkgdir), recursive = TRUE,
-                              copy.date = TRUE)
+                    file.copy(lp, dirname(pkgdir), recursive = TRUE, copy.date = TRUE)
                     unlink(lp, recursive = TRUE)
                 } else {
                     ## some shells require that they be run in a known dir
@@ -112,8 +111,7 @@
         ## can we do better?
         mconf <- file.path(R.home(), paste0("etc", rarch), "Makeconf")
         ## PCRE needed for Debian arm* platforms
-        sub(".*= ", "", grep("^SHLIB_EXT", readLines(mconf), value = TRUE,
-                             perl = TRUE))
+        sub(".*= ", "", grep("^SHLIB_EXT", readLines(mconf), value = TRUE, perl = TRUE))
     }
 
     options(warn = 1)
@@ -191,8 +189,7 @@
             "      --compile-both	compile both architectures on 32-bit Windows",
             "",
             "Which of --html or --no-html is the default depends on the build of R:",
-            paste0("for this one it is ",
-		   if(static_html) "--html" else "--no-html", "."),
+                   if(static_html) "for this one it is --html." else "for this one it is --no-html.",
             "",
             "Report bugs at bugs.r-project.org .", sep = "\n")
     }
@@ -222,22 +219,22 @@
                     "yes"=, "Yes" =, "true" =, "True" =, "TRUE" = TRUE,
                     "no" =, "No" =, "false" =, "False" =, "FALSE" = FALSE,
                     ## default
-                    errmsg("invalid value of ", field, " field in DESCRIPTION")
+                    errmsg(gettextf("ERROR: invalid value of %s field in 'DESCRIPTION' file", sQuote(field)))
                     )
     }
 
     starsmsg <- function(stars, ...)
-        message(stars, " ", ..., domain = NA)
+        message(stars, " ", ..., domain = "R-tools")
 
     errmsg <- function(...)
     {
-        message("ERROR: ", ..., domain = NA)
+        message(..., domain = "R-tools")
         do_exit_on_error()
     }
 
-    pkgerrmsg <- function(msg, pkg)
+    pkgerrmsg <- function(msg)
     {
-        message("ERROR: ", msg, " for package ", sQuote(pkg), domain = NA)
+        message(msg, domain = "R-tools")
         do_exit_on_error()
     }
 
@@ -254,18 +251,16 @@
 
         setwd(pkg)
         ## We checked this exists, but not that it is readable
-        desc <- tryCatch(read.dcf(fd <- file.path(pkg, "DESCRIPTION")),
-                         error = identity)
+        desc <- tryCatch(read.dcf(fd <- file.path(pkg, "DESCRIPTION")), error = identity)
         if(inherits(desc, "error") || !length(desc))
-            stop(gettextf("error reading file '%s'", fd),
-                 domain = NA, call. = FALSE)
+            stop(gettextf("error reading file %s", sQuote(fd)), domain = "R-tools", call. = FALSE)
         desc <- desc[1L,]
         ## Let's see if we have a bundle
         if (!is.na(desc["Bundle"])) {
-            stop("this seems to be a bundle -- and they are defunct")
+            stop("'DESCRIPTION' file seems to be a bundle -- and they are defunct")
         } else {
             pkg_name <- desc["Package"]
-            if (is.na(pkg_name)) errmsg("no 'Package' field in 'DESCRIPTION'")
+            if (is.na(pkg_name)) errmsg(gettext("ERROR: no 'Package' field in 'DESCRIPTION' file"))
             curPkg <<- pkg_name
         }
 
@@ -276,19 +271,18 @@
 
         dir.create(instdir, recursive = TRUE, showWarnings = FALSE)
         if (!dir.exists(instdir)) {
-            message("ERROR: unable to create ", sQuote(instdir), domain = NA)
+            message(gettextf("ERROR: unable to create installation directory %s", sQuote(instdir)), domain = "R-tools")
             do_exit_on_error()
         }
 
         if (!is_subdir(instdir, lib)) {
-            message("ERROR: ", sQuote(pkg_name), " is not a legal package name",
-                    domain = NA)
+            message(gettextf("ERROR: %s is not a legal package name", sQuote(pkg_name)), domain = "R-tools")
             do_exit_on_error()
         }
 
         ## Make sure we do not attempt installing to srcdir.
         owd <- setwd(instdir)
-        if (owd == getwd()) pkgerrmsg("cannot install to srcdir", pkg_name)
+        if (owd == getwd()) pkgerrmsg(gettextf("ERROR: cannot install to source directory for package %s", sQuote(pkg_name)))
         setwd(owd)
 
         ## Figure out whether this is a source or binary package.
@@ -299,8 +293,7 @@
             sys_requires <- desc["SystemRequirements"]
             if (!is.na(sys_requires)) {
                 sys_requires <- unlist(strsplit(sys_requires, ","))
-                if(any(grepl("^[[:space:]]*C[+][+]11[[:space:]]*$",
-                             sys_requires, ignore.case=TRUE))) {
+                if(any(grepl("^[[:space:]]*C[+][+]11[[:space:]]*$", sys_requires, ignore.case=TRUE))) {
                     Sys.setenv("R_PKG_CXX_STD"="CXX11")
                     on.exit(Sys.unsetenv("R_PKG_CXX_STD"))
                 }
@@ -320,11 +313,10 @@
         is_first_package <<- FALSE
 
         if (tar_up) { # Unix only
-            starsmsg(stars, "creating tarball")
+            starsmsg(stars, gettext("creating tarball"))
             version <- desc["Version"]
             filename <- if (!grepl("darwin", R.version$os)) {
-                paste0(pkg_name, "_", version, "_R_",
-                       Sys.getenv("R_PLATFORM"), ".tar.gz")
+                paste0(pkg_name, "_", version, "_R_", Sys.getenv("R_PLATFORM"), ".tar.gz")
             } else {
                 paste0(pkg_name, "_", version,".tgz")
             }
@@ -334,15 +326,13 @@
                               compression_level = 9L,
                               tar = Sys.getenv("R_INSTALL_TAR"))
             if (res)
-                errmsg(sprintf("packaging into %s failed", sQuote(filename)))
-            message("packaged installation of ",
-                    sQuote(pkg_name), " as ", sQuote(filename),
-                    domain = NA)
+                errmsg(gettextf("packaging into %s failed", sQuote(filename), domain = "R-tools"))
+            message(gettextf("packaged installation of %s as %s", sQuote(pkg_name), sQuote(paste0(filename, ".gz"))), domain = "R-tools")
             setwd(owd)
         }
 
         if (zip_up) { # Windows only
-            starsmsg(stars, "MD5 sums")
+            starsmsg(stars, gettext("MD5 sums"))
             .installMD5sums(instdir)
             ## we could use utils::zip() here.
             ZIP <- "zip"                # Windows only
@@ -352,18 +342,16 @@
             ## system(paste("rm -f", filepath))
             unlink(filepath)
             owd <- setwd(lib)
-            res <- system(paste(shQuote(ZIP), "-r9Xq", filepath,
-                                paste(curPkg, collapse = " ")))
+            res <- system(paste(shQuote(ZIP), "-r9Xq", filepath, paste(curPkg, collapse = " ")))
             setwd(owd)
             if (res)
-                message("running 'zip' failed", domain = NA)
+                message("running 'zip' failed", domain = "R-tools")
             else
-                message("packaged installation of ",
-                        sQuote(pkg_name), " as ", filename, domain = NA)
+                message(gettextf("packaged installation of package %s as file %s", sQuote(pkg_name), filename), domain = "R-tools")
         }
         if (Sys.getenv("_R_INSTALL_NO_DONE_") != "yes") {
-            ## message("", domain = NA)  # ensure next starts on a new line, for R CMD check
-            starsmsg(stars, "DONE (", pkg_name, ")")
+            ## message("", domain = "R-tools")  # ensure next starts on a new line, for R CMD check
+            starsmsg(stars, gettextf("DONE (%s)", pkg_name))
         }
 
         curPkg <<- character()
@@ -373,23 +361,21 @@
     ## Unix only
     do_install_binary <- function(pkg, instdir, desc)
     {
-        starsmsg(stars, "installing *binary* package ", sQuote(pkg), " ...")
+        starsmsg(stars, gettextf("installing *binary* package %s ...", sQuote(pkg)))
 
         if (file.exists(file.path(instdir, "DESCRIPTION"))) {
             if (nzchar(lockdir))
-                system(paste("mv", shQuote(instdir),
-                             shQuote(file.path(lockdir, pkg))))
+                system(paste("mv", shQuote(instdir), shQuote(file.path(lockdir, pkg))))
             dir.create(instdir, recursive = TRUE, showWarnings = FALSE)
         }
         TAR <- Sys.getenv("TAR", 'tar')
         res <- system(paste("cp -R .", shQuote(instdir),
                             "|| (", TAR, "cd - .| (cd", shQuote(instdir), "&&", TAR, "-xf -))"
                             ))
-        if (res) errmsg("installing binary package failed")
+        if (res) errmsg(gettextf("ERROR: installing binary package failed"))
 
         if (tar_up) {
-            starsmsg(stars, sQuote(pkg),
-                     " was already a binary package and will not be rebuilt")
+            starsmsg(stars, gettextf("package %s was already a binary package and will not be rebuilt", sQuote(pkg)))
             tar_up <- FALSE
         }
     }
@@ -432,7 +418,7 @@
             if (file.exists("cleanup.win")) system("sh ./cleanup.win")
         } else if (file_test("-x", "cleanup")) system("./cleanup")
         else if (file.exists("cleanup"))
-            warning("'cleanup' exists but is not executable -- see the 'R Installation and Administration Manual'", call. = FALSE)
+            warning("'cleanup' file exists but is not executable -- see the 'R Installation and Administration Manual'", call. = FALSE)
 
     }
 
@@ -444,8 +430,7 @@
         {
             ## install.libs.R allows customization of the libs installation process
             if (file.exists("install.libs.R")) {
-                message("installing via 'install.libs.R' to ", instdir,
-                        domain = NA)
+                message(gettextf("installing via 'install.libs.R' to installation directory %s", sQuote(instdir)), domain = "R-tools")
                 ## the following variables are defined to be available,
                 ## and to prevent abuse we don't expose anything else
                 local.env <- local({ SHLIB_EXT <- SHLIB_EXT
@@ -464,7 +449,7 @@
             if (length(files)) {
                 libarch <- if (nzchar(arch)) paste0("libs", arch) else "libs"
                 dest <- file.path(instdir, libarch)
-                message('installing to ', dest, domain = NA)
+                message(gettextf("installing to directory %s", sQuote(dest)), domain = "R-tools")
                 dir.create(dest, recursive = TRUE, showWarnings = FALSE)
                 file.copy(files, dest, overwrite = TRUE)
                 ## not clear if this is still necessary, but sh version did so
@@ -476,14 +461,12 @@
 		## is no way to create it later.
 
 		if (dsym && startsWith(R.version$os, "darwin")) {
-		    message(gettextf("generating debug symbols (%s)", "dSYM"),
-                            domain = NA)
+		    message(gettextf("generating debug symbols (%s)", "dSYM"), domain = "R-tools")
 		    dylib <- Sys.glob(paste0(dest, "/*", SHLIB_EXT))
                     for (file in dylib) system(paste0("dsymutil ", file))
 		}
 
-                if(config_val_to_logical(Sys.getenv("_R_SHLIB_BUILD_OBJECTS_SYMBOL_TABLES_",
-                                                    "TRUE"))
+                if(config_val_to_logical(Sys.getenv("_R_SHLIB_BUILD_OBJECTS_SYMBOL_TABLES_", "TRUE"))
                    && file_test("-f", "symbols.rds")) {
                     file.copy("symbols.rds", dest)
                 }
@@ -498,9 +481,7 @@
         {
             args <- c(shargs, "-o", paste0(pkg_name, SHLIB_EXT), srcs)
             if (WINDOWS && debug) args <- c(args, "--debug")
-            if (debug) message("about to run ",
-                               "R CMD SHLIB ", paste(args, collapse = " "),
-                               domain = NA)
+            if (debug) message(gettextf("about to run command %s", sQuote(paste("R CMD SHLIB", args, collapse = " "))), domain = "R-tools")
             if (.shlib_internal(args) == 0L) {
                 if(WINDOWS && !file.exists("install.libs.R")
                    && !length(Sys.glob("*.dll"))) {
@@ -528,34 +509,32 @@
 
         Type <- desc["Type"]
         if (!is.na(Type) && Type == "Frontend") {
-            if (WINDOWS) errmsg("'Frontend' packages are Unix-only")
-            starsmsg(stars, "installing *Frontend* package ", sQuote(pkg_name), " ...")
+            if (WINDOWS) errmsg(gettext("ERROR: 'Frontend' packages are Unix-only"))
+            starsmsg(stars, gettextf("installing *Frontend* package %s ...", sQuote(pkg_name)))
             if (preclean) system(paste(MAKE, "clean"))
             if (use_configure) {
                 if (file_test("-x", "configure")) {
-                    res <- system(paste(paste(configure_vars, collapse = " "),
-                                        "./configure",
-                                        paste(configure_args, collapse = " ")))
-                    if (res) pkgerrmsg("configuration failed", pkg_name)
+                    res <- system(paste(paste(configure_vars, collapse = " "), "./configure", paste(configure_args, collapse = " ")))
+                    if (res) pkgerrmsg(gettextf("ERROR: configuration failed for package %s", sQuote(pkg_name)))
                 } else if (file.exists("configure"))
-                    errmsg("'configure' exists but is not executable -- see the 'R Installation and Administration Manual'")
+                    errmsg(gettext("ERROR: 'configure' file exists but is not executable -- see the 'R Installation and Administration Manual'"))
             }
             if (file.exists("Makefile"))
-                if (system(MAKE)) pkgerrmsg("make failed", pkg_name)
+                if (system(MAKE)) pkgerrmsg(gettextf("ERROR: make failed for package %s", sQuote(pkg_name)))
             if (clean) system(paste(MAKE, "clean"))
             return()
         }
 
         if (!is.na(Type) && Type == "Translation")
-            errmsg("'Translation' packages are defunct")
+            errmsg(gettext("ERROR: 'Translation' packages are defunct"))
 
         OS_type <- desc["OS_type"]
         if (WINDOWS) {
             if ((!is.na(OS_type) && OS_type == "unix") && !fake)
-                errmsg(" Unix-only package")
+                errmsg(gettext("ERROR: Unix-only package"))
         } else {
             if ((!is.na(OS_type) && OS_type == "windows") && !fake)
-                errmsg(" Windows-only package")
+                errmsg(gettext("ERROR: Windows-only package"))
         }
 
 	if(group.writable) { ## group-write modes if requested:
@@ -579,41 +558,32 @@
                 if(!length(find.package(pkg, quiet = TRUE)))
                     miss <- c(miss, pkg)
             }
-            if (length(miss) > 1)
-                 pkgerrmsg(sprintf("dependencies %s are not available",
-                                   paste(sQuote(miss), collapse = ", ")),
-                           pkg_name)
-            else if (length(miss))
-                pkgerrmsg(sprintf("dependency %s is not available",
-                                  sQuote(miss)), pkg_name)
+            if (length(miss) >= 1L)
+                 pkgerrmsg(sprintf(ngettext(length(miss), "ERROR: dependency %s is not available for package %s", "ERROR: dependencies %s are not available for package %s", domain = "R-tools"), paste(sQuote(miss), collapse = ", "), sQuote(pkg_name)))
+#            else if (length(miss))
+#                pkgerrmsg(gettextf("ERROR: dependency %s is not available for package %s", sQuote(miss), sQuote(pkg_name)))
          }
 
-        starsmsg(stars, "installing *source* package ",
-                 sQuote(pkg_name), " ...")
+        starsmsg(stars, gettextf("installing *source* package %s ...", sQuote(pkg_name)))
 
         stars <- "**"
 
         res <- checkMD5sums(pkg_name, getwd())
         if(!is.na(res) && res) {
-            starsmsg(stars,
-                     gettextf("package %s successfully unpacked and MD5 sums checked",
-                              sQuote(pkg_name)))
+            starsmsg(stars, gettextf("package %s successfully unpacked and MD5 sums checked", sQuote(pkg_name)))
         }
 
         if (file.exists(file.path(instdir, "DESCRIPTION"))) {
             ## Back up a previous version
             if (nzchar(lockdir)) {
-                if (debug) starsmsg(stars, "backing up earlier installation")
+                if (debug) starsmsg(stars, gettext("backing up earlier installation"))
                 if(WINDOWS) {
-                    file.copy(instdir, lockdir, recursive = TRUE,
-                              copy.date = TRUE)
+                    file.copy(instdir, lockdir, recursive = TRUE, copy.date = TRUE)
                     if (more_than_libs) unlink(instdir, recursive = TRUE)
                 } else if (more_than_libs)
-                    system(paste("mv", shQuote(instdir),
-                                 shQuote(file.path(lockdir, pkg_name))))
+                    system(paste("mv", shQuote(instdir), shQuote(file.path(lockdir, pkg_name))))
                 else
-                    file.copy(instdir, lockdir, recursive = TRUE,
-                              copy.date = TRUE)
+                    file.copy(instdir, lockdir, recursive = TRUE, copy.date = TRUE)
             } else if (more_than_libs) unlink(instdir, recursive = TRUE)
             dir.create(instdir, recursive = TRUE, showWarnings = FALSE)
         }
@@ -624,28 +594,23 @@
             if (WINDOWS) {
                 if (file.exists("configure.win")) {
                     res <- system("sh ./configure.win")
-                    if (res) pkgerrmsg("configuration failed", pkg_name)
+                    if (res) pkgerrmsg(gettextf("ERROR: configuration failed for package %s", sQuote(pkg_name)))
                 } else if (file.exists("configure"))
                     message("\n",
                             "   **********************************************\n",
-                            "   WARNING: this package has a configure script\n",
-                            "         It probably needs manual configuration\n",
+                            gettext("   WARNING: this package has a configure script\n         It probably needs manual configuration\n", domain = "R-tools"),
                             "   **********************************************\n\n", domain = NA)
             } else {
                 ## FIXME: should these be quoted?
                 if (file_test("-x", "configure")) {
-                    cmd <- paste(paste(configure_vars, collapse = " "),
-                                 "./configure",
-                                 paste(configure_args, collapse = " "))
-                    if (debug) message("configure command: ", sQuote(cmd),
-                                       domain = NA)
+                    cmd <- paste(paste(configure_vars, collapse = " "), "./configure", paste(configure_args, collapse = " "))
+                    if (debug) message(gettextf("configure command: %s", sQuote(cmd)), domain = "R-tools")
                     ## in case the configure script calls SHLIB (some do)
-                    cmd <- paste("_R_SHLIB_BUILD_OBJECTS_SYMBOL_TABLES_=false",
-                                 cmd)
+                    cmd <- paste("_R_SHLIB_BUILD_OBJECTS_SYMBOL_TABLES_=false", cmd)
                     res <- system(cmd)
-                    if (res) pkgerrmsg("configuration failed", pkg_name)
+                    if (res) pkgerrmsg(gettextf("ERROR: configuration failed for package %s", sQuote(pkg_name)))
                 }  else if (file.exists("configure"))
-                    errmsg("'configure' exists but is not executable -- see the 'R Installation and Administration Manual'")
+                    errmsg(gettext("ERROR: 'configure' file exists but is not executable -- see the 'R Installation and Administration Manual'"))
             }
         }
 
@@ -659,20 +624,20 @@
 
             res <- try(.install_package_description('.', instdir, built_stamp))
             if (inherits(res, "try-error"))
-                pkgerrmsg("installing package DESCRIPTION failed", pkg_name)
+                pkgerrmsg(gettextf("ERROR: installing package DESCRIPTION file failed for package %s", sQuote(pkg_name)))
             if (!file.exists(namespace <- file.path(instdir, "NAMESPACE")) ) {
                 if(dir.exists("R"))
-                    errmsg("a 'NAMESPACE' file is required")
-                else writeLines("## package without R code", namespace)
+                    errmsg(gettext("ERROR: a 'NAMESPACE' file is required"))
+                else writeLines(gettextf("## package without R code %s", sQuote(namespace)))
             }
         }
 
         if (install_libs && dir.exists("src") &&
             length(dir("src", all.files = TRUE) > 2L)) {
-            starsmsg(stars, "libs")
+            starsmsg(stars, gettextf("'%s' directory", "libs"))
             if (!file.exists(file.path(R.home("include"), "R.h")))
                 ## maybe even an error?  But installing Fortran-based packages should work
-                warning("R include directory is empty -- perhaps need to install R-devel.rpm or similar", call. = FALSE)
+                warning("R 'include' directory is empty -- perhaps need to install R-devel.rpm or similar", call. = FALSE)
             has_error <- FALSE
             linkTo <- pkgInfo$LinkingTo
             if (!is.null(linkTo)) {
@@ -715,7 +680,7 @@
                     makefiles <- f
                 if (file.exists("Makefile.win")) {
                     makefiles <- c("Makefile.win", makefiles)
-                    message("  running 'src/Makefile.win' ...", domain = NA)
+                    message("  running 'src/Makefile.win' ...", domain = "R-tools")
                     res <- system(paste("make --no-print-directory",
                                         paste("-f", shQuote(makefiles), collapse = " ")))
                     if (res == 0) shlib_install(instdir, rarch)
@@ -753,7 +718,7 @@
                             if(parse_description_field(desc, "Biarch", FALSE))
                                 force_biarch <- TRUE
                             else
-                                warning("this package has a non-empty 'configure.win' file,\nso building only the main architecture\n", call. = FALSE, domain = NA)
+                                warning("this package has a non-empty 'configure.win' file,\nso building only the main architecture\n", call. = FALSE, domain = "R-tools")
                         }
                     }
                     if(force_biarch) one_only <- FALSE
@@ -763,7 +728,7 @@
                         setwd(owd)
                         test_archs <- archs
                         for(arch in archs) {
-                            message("", domain = NA) # a blank line
+                            message("", domain = "R-tools") # a blank line
                             starsmsg("***", "arch - ", arch)
                             ss <- paste("src", arch, sep = "-")
                             dir.create(ss, showWarnings = FALSE)
@@ -821,8 +786,7 @@
                         if (!multiarch || length(archs) <= 1 ||
                             file_test("-x", "../configure")) {
                             if (nzchar(rarch))
-                                starsmsg("***", "arch - ",
-                                         substr(rarch, 2, 1000))
+                                starsmsg("***", "arch - ", substr(rarch, 2, 1000))
                             has_error <- run_shlib(pkg_name, srcs, instdir, rarch)
                         } else {
                             setwd(owd)
@@ -852,7 +816,7 @@
                 setwd(owd)
             }
             if (has_error)
-                pkgerrmsg("compilation failed", pkg_name)
+                pkgerrmsg(gettextf("ERROR: compilation failed for package %s", sQuote(pkg_name)))
 
             ## if we have subarchs, update DESCRIPTION
             fi <- file.info(Sys.glob(file.path(instdir, "libs", "*")))
@@ -862,11 +826,8 @@
             if (length(dirs)) {
                 descfile <- file.path(instdir, "DESCRIPTION")
                 olddesc <- readLines(descfile, warn = FALSE)
-                olddesc <- grep("^Archs:", olddesc,
-                                invert = TRUE, value = TRUE, useBytes = TRUE)
-                newdesc <- c(olddesc,
-                             paste("Archs:", paste(dirs, collapse = ", "))
-                             )
+                olddesc <- grep("^Archs:", olddesc, invert = TRUE, value = TRUE, useBytes = TRUE)
+                newdesc <- c(olddesc, paste("Archs:", paste(dirs, collapse = ", ")))
                 writeLines(newdesc, descfile, useBytes = TRUE)
             }
         } else if (multiarch) {   # end of src dir
@@ -890,13 +851,13 @@
 
         ## R files must start with a letter
 	if (install_R && dir.exists("R") && length(dir("R"))) {
-	    starsmsg(stars, "R")
+	    starsmsg(stars, gettextf("'%s' directory", "R"))
 	    dir.create(file.path(instdir, "R"), recursive = TRUE,
 		       showWarnings = FALSE)
 	    ## This cannot be done in a C locale
 	    res <- try(.install_package_code_files(".", instdir))
 	    if (inherits(res, "try-error"))
-		pkgerrmsg("unable to collate and parse R files", pkg_name)
+		pkgerrmsg(gettextf("ERROR: unable to collate and parse R files for package %s", sQuote(pkg_name)))
 
 	    if (file.exists(f <- file.path("R", "sysdata.rda"))) {
                 comp <- TRUE
@@ -912,15 +873,14 @@
 		res <- try(sysdata2LazyLoadDB(f, file.path(instdir, "R"),
                                               compress = comp))
 		if (inherits(res, "try-error"))
-		    pkgerrmsg("unable to build sysdata DB", pkg_name)
+		    pkgerrmsg(gettextf("ERROR: unable to build sysdata DB for package %s", sQuote(pkg_name)))
 	    }
 	    if (fake) {
 		## Fix up hook functions so they do not attempt to
 		## (un)load missing compiled code, initialize ...
 		## This does stop them being tested at all.
 		if (file.exists("NAMESPACE")) {
-		    cat("",
-			'.onLoad <- .onAttach <- function(lib, pkg) NULL',
+		    cat("", '.onLoad <- .onAttach <- function(lib, pkg) NULL',
 			'.onUnload <- function(libpaths) NULL',
 			sep = "\n",
 			file = file.path(instdir, "R", pkg_name), append = TRUE)
@@ -957,7 +917,7 @@
 
         ## data files must not be hidden: data() may ignore them
 	if (install_data && dir.exists("data") && length(dir("data"))) {
-	    starsmsg(stars, "data")
+	    starsmsg(stars, gettextf("'%s' directory", "data"))
 	    files <- Sys.glob(file.path("data", "*")) # ignores dotfiles
 	    if (length(files)) {
 		is <- file.path(instdir, "data")
@@ -973,14 +933,14 @@
 			paths <-
 			    c(paths, Sys.glob(file.path(is, "*.Rdata")))
 		    if (length(paths)) {
-			starsmsg(paste0(stars, "*"), "resaving rda files")
+			starsmsg(paste0(stars, "*"), gettext("resaving rda files"))
 			resaveRdaFiles(paths, compress = "auto")
 		    }
 		}
 		Sys.chmod(Sys.glob(file.path(instdir, "data", "*")), fmode)
 		if (thislazy) {
 		    starsmsg(paste0(stars, "*"),
-                             "moving datasets to lazyload DB")
+                             gettext("moving datasets to lazyload DB"))
 		    ## 'it is possible that data in a package will
 		    ## make use of the code in the package, so ensure
 		    ## the package we have just installed is on the
@@ -997,26 +957,26 @@
 		    res <- try(data2LazyLoadDB(pkg_name, lib,
 					       compress = data_compress))
 		    if (inherits(res, "try-error"))
-			pkgerrmsg("lazydata failed", pkg_name)
+			pkgerrmsg(gettextf("ERROR: lazydata failed for package %s", sQuote(pkg_name)))
 		}
 	    } else warning("empty 'data' directory", call. = FALSE)
         }
 
         ## demos must start with a letter
 	if (install_demo && dir.exists("demo") && length(dir("demo"))) {
-	    starsmsg(stars, "demo")
+	    starsmsg(stars, gettextf("'%s' directory", "demo"))
 	    dir.create(file.path(instdir, "demo"), recursive = TRUE,
 		       showWarnings = FALSE)
 	    file.remove(Sys.glob(file.path(instdir, "demo", "*")))
 	    res <- try(.install_package_demos(".", instdir))
 	    if (inherits(res, "try-error"))
-		pkgerrmsg("ERROR: installing demos failed")
+		pkgerrmsg(gettext("ERROR: installing demos failed for package %s", sQuote(pkg_name)))
 	    Sys.chmod(Sys.glob(file.path(instdir, "demo", "*")), fmode)
 	}
 
         ## dotnames are ignored.
 	if (install_exec && dir.exists("exec") && length(dir("exec"))) {
-	    starsmsg(stars, "exec")
+	    starsmsg(stars, gettextf("'%s' directory", "exec"))
 	    dir.create(file.path(instdir, "exec"), recursive = TRUE,
 		       showWarnings = FALSE)
 	    file.remove(Sys.glob(file.path(instdir, "exec", "*")))
@@ -1030,10 +990,9 @@
 
 	if (install_inst && dir.exists("inst") &&
             length(dir("inst", all.files = TRUE)) > 2L) {
-	    starsmsg(stars, "inst")
+	    starsmsg(stars, gettextf("'%s' directory", "inst"))
             i_dirs <- list.dirs("inst")[-1L] # not inst itself
-            i_dirs <- grep(.vc_dir_names_re, i_dirs,
-                           invert = TRUE, value = TRUE)
+            i_dirs <- grep(.vc_dir_names_re, i_dirs, invert = TRUE, value = TRUE)
             ## This ignores any restrictive permissions in the source
             ## tree, since the later .Call(dirchmod) call will
             ## fix the permissions.
@@ -1045,14 +1004,10 @@
                 ignore[nzchar(ignore)]
             } else character()
             for(e in ignore)
-                i_dirs <- grep(e, i_dirs, perl = TRUE, invert = TRUE,
-                               value = TRUE, ignore.case = TRUE)
-            lapply(gsub("^inst", instdir, i_dirs),
-                   function(p) dir.create(p, FALSE, TRUE)) # be paranoid
-            i_files <- list.files("inst", all.files = TRUE,
-                                  full.names = TRUE, recursive = TRUE)
-            i_files <- grep(.vc_dir_names_re, i_files,
-                            invert = TRUE, value = TRUE)
+                i_dirs <- grep(e, i_dirs, perl = TRUE, invert = TRUE, value = TRUE, ignore.case = TRUE)
+            lapply(gsub("^inst", instdir, i_dirs), function(p) dir.create(p, FALSE, TRUE)) # be paranoid
+            i_files <- list.files("inst", all.files = TRUE, full.names = TRUE, recursive = TRUE)
+            i_files <- grep(.vc_dir_names_re, i_files, invert = TRUE, value = TRUE)
             for(e in ignore)
                 i_files <- grep(e, i_files, perl = TRUE, invert = TRUE,
                                 value = TRUE, ignore.case = TRUE)
@@ -1087,13 +1042,13 @@
 
 	if (install_tests && dir.exists("tests") &&
             length(dir("tests", all.files = TRUE) > 2L)) {
-	    starsmsg(stars, "tests")
+	    starsmsg(stars, gettextf("'%s' directory", "tests"))
 	    file.copy("tests", instdir, recursive = TRUE)
 	}
 
 	## LazyLoading/Compiling
 	if (install_R && dir.exists("R") && length(dir("R"))) {
-            starsmsg(stars, "preparing package for lazy loading")
+                starsmsg(stars, gettext("preparing package for lazy loading"))
             keep.source <-
                 parse_description_field(desc, "KeepSource",
                                         default = keep.source)
@@ -1113,23 +1068,23 @@
                 makeLazyLoading(pkg_name, lib, keep.source = keep.source)
             })
 	    if (inherits(res, "try-error"))
-		pkgerrmsg("lazy loading failed", pkg_name)
+		pkgerrmsg(gettextf("ERROR: lazy loading failed for package %s", sQuote(pkg_name)))
             if (!is.null(libs0)) .libPaths(libs0)
 	}
 
 	if (install_help) {
-	    starsmsg(stars, "help")
+	    starsmsg(stars, gettextf("'%s' directory", "help"))
 	    if (!dir.exists("man") ||
 	       !length(list_files_with_type("man", "docs")))
-		cat("No man pages found in package ", sQuote(pkg_name), "\n")
+		cat(gettextf("No man pages found in package %s", sQuote(pkg_name), domain = "R-tools"), "\n", sep = "")
 	    encoding <- desc["Encoding"]
 	    if (is.na(encoding)) encoding <- "unknown"
 	    res <- try(.install_package_Rd_objects(".", instdir, encoding))
 	    if (inherits(res, "try-error"))
-		pkgerrmsg("installing Rd objects failed", pkg_name)
+		pkgerrmsg(gettextf("ERROR: installing Rd objects failed for package %s", sQuote(pkg_name)))
 
 
-	    starsmsg(paste0(stars, "*"), "installing help indices")
+	    starsmsg(paste0(stars, "*"), gettext("installing help indices"))
 	    ## always want HTML package index
 	    .writePkgIndices(pkg_dir, instdir)
 	    if (build_help) {
@@ -1141,7 +1096,7 @@
 				outenc = outenc)
 	    }
 	    if (dir.exists(figdir <- file.path(pkg_dir, "man", "figures"))) {
-		starsmsg(paste0(stars, "*"), "copying figures")
+		starsmsg(paste0(stars, "*"), gettext("copying figures"))
 		dir.create(destdir <- file.path(instdir, "help", "figures"))
 		file.copy(Sys.glob(c(file.path(figdir, "*.png"),
 		                     file.path(figdir, "*.jpg"),
@@ -1153,12 +1108,12 @@
 
 	## pkg indices: this also tangles the vignettes (if installed)
 	if (install_inst || install_demo || install_help) {
-	    starsmsg(stars, "building package indices")
+	    starsmsg(stars, gettext("building package indices"))
 	    res <- try(.install_package_indices(".", instdir))
 	    if (inherits(res, "try-error"))
-		errmsg("installing package indices failed")
+		errmsg(gettext("ERROR: installing package indices failed"))
             if(dir.exists("vignettes")) {
-                starsmsg(stars, "installing vignettes")
+                starsmsg(stars, gettext("installing vignettes"))
                 enc <- desc["Encoding"]
                 if (is.na(enc)) enc <- ""
 		if (!fake &&
@@ -1169,7 +1124,7 @@
 		    installer <- .install_package_vignettes2
                 res <- try(installer(".", instdir, enc))
 	    if (inherits(res, "try-error"))
-		errmsg("installing vignettes failed")
+		errmsg(gettext("ERROR: installing vignettes failed"))
             }
 	}
 
@@ -1178,14 +1133,14 @@
 	if (install_R && file.exists("NAMESPACE")) {
 	    res <- try(.install_package_namespace_info(if(fake) instdir else ".", instdir))
 	    if (inherits(res, "try-error"))
-		errmsg("installing namespace metadata failed")
+		errmsg(gettext("ERROR: installing namespace metadata failed"))
 	}
 
         if (clean) run_clean()
 
         if (test_load) {
             ## Do this in a separate R process, in case it crashes R.
-	    starsmsg(stars, "testing if installed package can be loaded")
+	    starsmsg(stars, gettext("testing if installed package can be loaded"))
             ## FIXME: maybe the quoting as 'lib' is not quite good enough
             ## On a Unix-alike this calls system(input=)
             ## and that uses a temporary file and redirection.
@@ -1206,9 +1161,7 @@
                         cat(paste(c(out, ""), collapse = "\n"))
                 }
                 if (length(msgs)) {
-                    msg <- paste("loading failed for",
-                                 paste(sQuote(msgs), collapse = ", "))
-                    errmsg(msg) # does not return
+                    errmsg(gettextf("ERROR: loading failed for %s", paste(sQuote(msgs), collapse = ", "))) # does not return
                 }
             } else {
                 opts <- if (deps_only) "--vanilla --slave"
@@ -1217,7 +1170,7 @@
                 if(length(out))
                     cat(paste(c(out, ""), collapse = "\n"))
                 if(length(attr(out, "status")))
-                    errmsg("loading failed") # does not return
+                    errmsg(gettext("ERROR: loading failed")) # does not return
             }
         }
     }
@@ -1284,13 +1237,12 @@
             q("no", runLast = FALSE)
         }
         else if (a %in% c("-v", "--version")) {
-            cat("R add-on package installer: ",
+            cat(gettext("R add-on package installer: ", domain = "R-tools"),
                 R.version[["major"]], ".",  R.version[["minor"]],
                 " (r", R.version[["svn rev"]], ")\n", sep = "")
             cat("",
                 "Copyright (C) 2000-2013 The R Core Team.",
-                "This is free software; see the GNU General Public License version 2",
-                "or later for copying conditions.  There is NO warranty.",
+                "This is free software; see the GNU General Public License version 2 or later for copying conditions. There is NO warranty.",
                 sep = "\n")
             q("no", runLast = FALSE)
         } else if (a %in% c("-c", "--clean")) {
@@ -1314,13 +1266,10 @@
         } else if (a == "--example") {
             build_example <- TRUE
         } else if (a == "--use-zip-data") {
-            warning("use of '--use-zip-data' is defunct",
-                    call. = FALSE, domain = NA)
-            warning("use of '--use-zip-data' is deprecated",
-                    call. = FALSE, domain = NA)
+            warning("use of '--use-zip-data' is defunct", call. = FALSE, domain = "R-tools")
+            warning("use of '--use-zip-data' is deprecated", call. = FALSE, domain = "R-tools")
         } else if (a == "--auto-zip") {
-            warning("'--auto-zip' is defunct",
-                           call. = FALSE, domain = NA)
+            warning("'--auto-zip' is defunct", call. = FALSE, domain = "R-tools")
         } else if (a == "-l") {
             if (length(args) >= 2L) {lib <- args[2L]; args <- args[-1L]}
             else stop("-l option without value", call. = FALSE)
@@ -1397,14 +1346,14 @@
         } else if (substr(a, 1, 18) == "--built-timestamp=") {
             built_stamp <- substr(a, 19, 1000)
         } else if (substr(a, 1, 1) == "-") {
-            message("Warning: unknown option ", sQuote(a), domain = NA)
+            message(gettextf("Warning: unknown option %s", sQuote(a)), domain = "R-tools")
         } else pkgs <- c(pkgs, a)
         args <- args[-1L]
     }
 
     if (keep.tmpdir) {
       make_tmpdir <- function(prefix, nchars = 8, ntries = 100) {
-        for(i in 1:ntries) {
+        for(i in seq_len(ntries)) {
           name = paste(sample(c(0:9, letters, LETTERS), nchars, replace=TRUE), collapse="")
           path = paste(prefix, name, sep = "/")
           if (dir.create(path, showWarnings = FALSE, recursive = T)) {
@@ -1422,8 +1371,7 @@
 
     if (merge) {
         if (length(pkgs) != 1L || !file_test("-f", pkgs))
-            stop("ERROR: '--merge-multiarch' applies only to a single tarball",
-                 call. = FALSE)
+            stop("ERROR: '--merge-multiarch' applies only to a single tarball", call. = FALSE)
         if (WINDOWS) {
             f  <- dir(file.path(R.home(), "bin"))
             archs <- f[f %in% c("i386", "x64")]
@@ -1434,15 +1382,14 @@
                 ## so use a backdoor to suppress it.
                 Sys.setenv("_R_INSTALL_NO_DONE_" = "yes")
                 for (arch in archs) {
-                    cmd <- c(file.path(R.home(), "bin", arch, "Rcmd.exe"),
-                             "INSTALL", args, "--no-multiarch")
+                    cmd <- c(file.path(R.home(), "bin", arch, "Rcmd.exe"), "INSTALL", args, "--no-multiarch")
                     if (arch == "x64") {
                         cmd <- c(cmd, "--libs-only", if(zip_up) "--build")
                         Sys.unsetenv("_R_INSTALL_NO_DONE_")
                     }
                     cmd <- paste(cmd, collapse = " ")
-                    if (debug) message("about to run ", cmd, domain = NA)
-                    message("\n", "install for ", arch, "\n", domain = NA)
+                    if (debug) message(gettextf("about to run command %s", sQuote(cmd)), domain = "R-tools")
+                    message("\n", gettextf("install for architecture %s", arch), "\n", sep = "", domain = "R-tools")
                     res <- system(cmd)
                     if(res) break
                 }
@@ -1466,8 +1413,8 @@
                         if(tar_up) cmd <- c(cmd, "--build")
                     }
                     cmd <- paste(cmd, collapse = " ")
-                    if (debug) message("about to run ", cmd, domain = NA)
-                    message("\n", "install for ", arch, "\n", domain = NA)
+                    if (debug) message(gettextf("about to run command %s", sQuote(cmd)), domain = "R-tools")
+                    message("\n", gettextf("install for architecture %s", arch), "\n", sep = "", domain = "R-tools")
                     res <- system(cmd)
                     if(res) break
                 }
@@ -1479,59 +1426,58 @@
             on.exit()
             return(invisible())
         }
-        message("only one architecture so ignoring '--merge-multiarch'",
-                domain = NA)
+        message("only one architecture so ignoring '--merge-multiarch'", domain = "R-tools")
     }
 
     ## now unpack tarballs and do some basic checks
     allpkgs <- character()
     for(pkg in pkgs) {
-        if (debug) message("processing ", sQuote(pkg), domain = NA)
+        if (debug) message(gettextf("processing package %s", sQuote(pkg)), domain = "R-tools")
         if (file_test("-f", pkg)) {
             if (WINDOWS && grepl("\\.zip$", pkg)) {
-                if (debug) message("a zip file", domain = NA)
+                if (debug) message("a zip file", domain = "R-tools")
                 pkgname <- basename(pkg)
                 pkgname <- sub("\\.zip$", "", pkgname)
                 pkgname <- sub("_[0-9.-]+$", "", pkgname)
                 allpkgs <- c(allpkgs, pkg)
                 next
             }
-            if (debug) message("a file", domain = NA)
+            if (debug) message("a file", domain = "R-tools")
             of <- dir(tmpdir, full.names = TRUE)
             ## force the use of internal untar unless over-ridden
             ## so e.g. .tar.xz works everywhere
             if (utils::untar(pkg, exdir = tmpdir,
                              tar =  Sys.getenv("R_INSTALL_TAR", "internal")))
-                errmsg("error unpacking tarball")
+                errmsg(gettext("ERROR: error unpacking tarball"))
             ## Now see what we got
             nf <- dir(tmpdir, full.names = TRUE)
             new <- nf[!nf %in% of]
             if (!length(new))
-                errmsg("cannot extract package from ", sQuote(pkg))
+                errmsg(gettextf("ERROR: cannot extract package from %s", sQuote(pkg)))
             if (length(new) > 1L)
-                errmsg("extracted multiple files from ", sQuote(pkg))
+                errmsg(gettextf("ERROR: extracted multiple files from %s", sQuote(pkg)))
             if (dir.exists(new)) pkgname <- basename(new)
-            else errmsg("cannot extract package from ", sQuote(pkg))
+            else errmsg(gettextf("ERROR: cannot extract package from %s", sQuote(pkg)))
 
             ## If we have a binary bundle distribution, there should
             ## be a DESCRIPTION file at top level. These are defunct
             if (file.exists(ff <- file.path(tmpdir, "DESCRIPTION"))) {
                 con <- read.dcf(ff, "Contains")
                 if (!is.na(con))
-                    message("looks like a binary bundle", domain = NA)
+                    message("looks like a binary bundle", domain = "R-tools")
                 else
-                    message("unknown package layout", domain = NA)
+                    message("unknown package layout", domain = "R-tools")
                 do_cleanup_tmpdir()
                 q("no", status = 1, runLast = FALSE)
             } else if (file.exists(file.path(tmpdir, pkgname, "DESCRIPTION"))) {
                 allpkgs <- c(allpkgs, file.path(tmpdir, pkgname))
-            } else errmsg("cannot extract package from ", sQuote(pkg))
+            } else errmsg(gettextf("ERROR: cannot extract package from %s", sQuote(pkg)))
         } else if (file.exists(file.path(pkg, "DESCRIPTION"))) {
-            if (debug) message("a directory", domain = NA)
+            if (debug) message("a directory", domain = "R-tools")
             pkgname <- basename(pkg)
             allpkgs <- c(allpkgs, fullpath(pkg))
         } else {
-            warning("invalid package ", sQuote(pkg), call. = FALSE)
+            warning(gettextf("invalid package %s", sQuote(pkg)), call. = FALSE)
             next
         }
     }
@@ -1542,19 +1488,16 @@
 
     if (!nzchar(lib)) {
         lib <- if (get_user_libPaths) { ## need .libPaths()[1L] *after* the site- and user-initialization
-	    system(paste(file.path(R.home("bin"), "Rscript"),
-                         "-e 'cat(.libPaths()[1L])'"),
-                   intern = TRUE)
+	    system(paste(file.path(R.home("bin"), "Rscript"), "-e 'cat(.libPaths()[1L])'"), intern = TRUE)
         }
         else .libPaths()[1L]
-        starsmsg(stars, "installing to library ", sQuote(lib))
+        starsmsg(stars, gettextf("installing to library %s", sQuote(lib)))
     } else {
         lib0 <- lib <- path.expand(lib)
         ## lib is allowed to be a relative path.
         ## should be OK below, but be sure.
         cwd <- tryCatch(setwd(lib), error = function(e)
-                        stop(gettextf("ERROR: cannot cd to directory %s", sQuote(lib)),
-                             call. = FALSE, domain = NA))
+                        stop(gettextf("ERROR: cannot enter to directory %s", sQuote(lib)), call. = FALSE, domain = "R-tools"))
         lib <- getwd()
         setwd(cwd)
     }
@@ -1571,8 +1514,7 @@
         } else ok <- file.access(lib, 2L) == 0
     }
     if (!ok)
-        stop("ERROR: no permission to install to directory ",
-             sQuote(lib), call. = FALSE)
+        stop(gettextf("ERROR: no permission to install to directory %s", sQuote(lib)), call. = FALSE)
 
     group.writable <- if(WINDOWS) FALSE else {
 	## install package group-writable  iff  in group-writable lib
@@ -1595,20 +1537,17 @@
     mk_lockdir <- function(lockdir)
     {
         if (file.exists(lockdir)) {
-            message("ERROR: failed to lock directory ", sQuote(lib),
-                    " for modifying\nTry removing ", sQuote(lockdir),
-                    domain = NA)
+            message(gettextf("ERROR: failed to lock directory %s for modifying\nTry removing lock directory %s", sQuote(lib), sQuote(lockdir)), domain = "R-tools")
             do_cleanup_tmpdir()
             q("no", status = 3, runLast = FALSE)
         }
         dir.create(lockdir, recursive = TRUE)
         if (!dir.exists(lockdir)) {
-            message("ERROR: failed to create lock directory ", sQuote(lockdir),
-                    domain = NA)
+            message(gettextf("ERROR: failed to create lock directory %s", sQuote(lockdir)), domain = "R-tools")
             do_cleanup_tmpdir()
             q("no", status = 3, runLast = FALSE)
         }
-        if (debug) starsmsg(stars, "created lock directory ", sQuote(lockdir))
+        if (debug) starsmsg(stars, gettextf("created lock directory %s", sQuote(lockdir)))
     }
 
     if (is.na(lock)) {
@@ -1641,11 +1580,10 @@
     build_help <- length(build_help_types) > 0L
 
     if (debug)
-        starsmsg(stars, "build_help_types=",
-                 paste(build_help_types, collapse = " "))
+        starsmsg(stars, "build_help_types=", paste(build_help_types, collapse = " "))
 
     if (debug)
-        starsmsg(stars, "DBG: 'R CMD INSTALL' now doing do_install()")
+        starsmsg(stars, gettext("DBG: 'R CMD INSTALL' now doing do_install()"))
 
     for(pkg in allpkgs) {
         if (pkglock) {
@@ -1752,13 +1690,12 @@
             return(0L)
         }
         else if (a %in% c("-v", "--version")) {
-            cat("R shared object builder: ",
+            cat(gettext("R shared object builder: ", domain = "R-tools"),
                 R.version[["major"]], ".",  R.version[["minor"]],
                 " (r", R.version[["svn rev"]], ")\n", sep = "")
             cat("",
                 "Copyright (C) 2000-2013 The R Core Team.",
-                "This is free software; see the GNU General Public License version 2",
-                "or later for copying conditions.  There is NO warranty.",
+                "This is free software; see the GNU General Public License version 2 or later for copying conditions. There is NO warranty.",
                 sep = "\n")
             return(0L)
         } else if (a %in% c("-n", "--dry-run")) {
@@ -1912,7 +1849,7 @@
     cmd <- paste(MAKE, p1(paste("-f", shQuote(makefiles))), p1(makeargs),
                  p1(makeobjs))
     if (dry_run) {
-        cat("make cmd is\n  ", cmd, "\n\nmake would use\n", sep = "")
+        cat(gettextf("make cmd is\n  %s\n\nmake would use:\n", cmd, domain = "R-tools"))
         system(paste(cmd, "-n"))
         res <- 0
     } else {
@@ -2145,18 +2082,18 @@
     for(type in types)
         dir.create(file.path(outDir, dirname[type]), showWarnings = FALSE)
 
-    cat("  converting help for package ", sQuote(pkg), "\n", sep = "")
+    cat(gettextf("  converting help for package %s", sQuote(pkg), domain = "R-tools"), "\n", sep = "")
 
     ## FIXME: add this lib to lib.loc?
     if ("html" %in% types) {
         ## may be slow, so add a message
-        if (!silent) message("    finding HTML links ...", appendLF = FALSE, domain = NA)
+        if (!silent) message("    finding HTML links ...", appendLF = FALSE, domain = "R-tools")
         Links <- findHTMLlinks(outDir, level = 0:1)
         if (!silent) message(" done")
         .Links2 <- function() {
-            message("\n    finding level-2 HTML links ...", appendLF = FALSE, domain = NA)
+            message("\n    finding level-2 HTML links ...", appendLF = FALSE, domain = "R-tools")
             Links2 <- findHTMLlinks(level = 2)
-            message(" done", domain = NA)
+            message(" done", domain = "R-tools")
             Links2
         }
         delayedAssign("Links2", .Links2())
@@ -2175,9 +2112,10 @@
         invokeRestart("muffleWarning")
     }
     .ehandler <- function(e) {
-        message("", domain = NA) # force newline
+        #message("", domain = "R-tools") # force newline
+	cat("\n")
         unlink(ff)
-        stop(conditionMessage(e), domain = NA, call. = FALSE)
+        stop(conditionMessage(e), domain = "R-tools", call. = FALSE)
     }
     .convert <- function(expr)
         withCallingHandlers(tryCatch(expr, error = .ehandler),
@@ -2218,8 +2156,7 @@
         }
         if ("example" %in% types) {
             type <- "example"
-            ff <- file.path(outDir, dirname[type],
-                            paste0(bf, ext[type]))
+            ff <- file.path(outDir, dirname[type], paste0(bf, ext[type]))
             if (!file_test("-f", ff) || file_test("-nt", f, ff)) {
                 .convert(Rd2ex(Rd, ff, defines = NULL))
                 if (file_test("-f", ff)) showtype(type)

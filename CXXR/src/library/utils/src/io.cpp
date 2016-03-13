@@ -33,6 +33,7 @@
 #endif
 
 #define R_USE_SIGNALS 1
+#include "localization.h"
 #include <Defn.h>
 #include <float.h>  /* for DBL_DIG */
 #include <Fileio.h>
@@ -43,7 +44,6 @@
 #include <rlocale.h> /* for btowc */
 #include "CXXR/IntVector.h"
 
-#include "localization.h"
 
 
 /* The size of vector initially allocated by scan */

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-23 20:39\n"
+"POT-Creation-Date: 2016-03-13 10:23\n"
 "PO-Revision-Date: 2015-01-17 15:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -1925,11 +1925,6 @@ msgstr ""
 "Scheint keine methodentabelle für das generische \"%s\" in der "
 "Verfolgungsumgeb ung zu sein"
 
-#. R/zzz.R: gettext(" done", domain = "R-methods")
-#: R/zzz.R:0
-msgid "done"
-msgstr ""
-
 #. R/SClasses.R: gettext("duplicate class names among superclasses: %s", domain = "R-methods")
 #: R/SClasses.R:0
 msgid "duplicate class names among superclasses: %s"
@@ -2277,11 +2272,6 @@ msgid ""
 msgstr ""
 "inkonsistente Klasseninformation für \"%s\" im alten Stil; die Klasse ist "
 "defineirt, erweitert aber nicht \"%s\" und ist als Datenteil unzulässig"
-
-#. R/zzz.R: gettext("initializing class and method definitions ...", domain = "R-methods")
-#: R/zzz.R:0
-msgid "initializing class and method definitions ..."
-msgstr ""
 
 #. R/RClassUtils.R: gettextf("initializing objects from class %s with these arguments is not supported",     dQuote(Class))
 #: R/RClassUtils.R:0
@@ -3561,11 +3551,11 @@ msgstr ""
 "existierenden Argumente ist kleiner als die Zahl der neuen Argumente: (%s) "
 "vs. (%s)"
 
-#. R/methodsTable.R: gettext("trying to check signature length of generic %s, but it is not a generic function: i = %d, funs = %s, gnames = %s",     domain = "R-methods")
+#. R/methodsTable.R: gettextf("trying to check signature length of generic '%s', but it is not a generic function: i = %d, funs = %s, gnames = %s",     what, i, paste(unlist(funs), collapse = ", "), paste(as.character(gnames), collapse = ", "))
 #: R/methodsTable.R:0
 #, fuzzy
 msgid ""
-"trying to check signature length of generic %s, but it is not a generic "
+"trying to check signature length of generic '%s', but it is not a generic "
 "function: i = %d, funs = %s, gnames = %s"
 msgstr ""
 "Versuch eine Methodensignatur auf ein Objekt (der Klasse %s) zu matchen, das "

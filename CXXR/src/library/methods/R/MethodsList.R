@@ -62,8 +62,7 @@ makeMethodsList <- function(object, level=1)
     }
     if(anyDuplicated(mnames))
         stop(gettextf("duplicate element names in 'MethodsList' at level %d: %s",
-             level, paste("\"", unique(mnames[duplicated(mnames)]), "\"",
-                          collapse=", ")), domain = NA)
+             level, paste(dQuote(unique(mnames[duplicated(mnames)])), collapse = ", "), domain = "R-methods"), domain = NA)
     for(i in seq_along(object)) {
         eli <- el(object, i)
         if(is(eli, "function")
@@ -74,7 +73,7 @@ makeMethodsList <- function(object, level=1)
         else
             stop(gettextf("element %d at level %d (class %s) cannot be interpreted as a function or named list",
                           i, level, dQuote(class(eli))),
-                 domain = NA)
+                 domain = "R-methods")
     }
     slot(value, "methods") <- object
     value
@@ -120,7 +119,7 @@ insertMethod <-
         if(identical(signature[[1L]], "ANY"))
            stop(gettextf("inserting method with invalid signature matching argument '...' to class %s",
                          dQuote(signature[[1L]])),
-                domain = NA)
+                domain = "R-methods")
         args <- args[-1L]
         signature <- signature[-1L]
         if(length(signature) == 0L)
@@ -129,9 +128,7 @@ insertMethod <-
     if(length(signature) == 0L)
         stop("inserting method corresponding to empty signature")
     if(!is(mlist, "MethodsList"))
-        stop(gettextf("inserting method into non-methods-list object (class %s)",
-                      dQuote(.class1(mlist))),
-             domain = NA)
+        stop(gettextf("inserting method into non-methods-list object (class %s)", dQuote(.class1(mlist))), domain = "R-methods")
     if(length(args) > 1 && !cacheOnly)
         mlist <- balanceMethodsList(mlist, args)
     Class <- el(signature, 1)
@@ -227,13 +224,13 @@ MethodsListSelect <-
         else if(!is.null(mlist)) # NULL => 1st call to genericFunction
             stop(gettextf("%f is not a valid generic function: methods list was an object of class %s",
                           sQuote(f), dQuote(class(mlist))),
-                 domain = NA)
+                 domain = "R-methods")
     }
     if(!is.logical(useInherited))
         stop(gettextf("%s must be TRUE, FALSE, or a named logical vector of those values; got an object of class %s",
                       sQuote("useInherited"),
                       dQuote(class(useInherited))),
-             domain = NA)
+             domain = "R-methods")
     if(identical(mlist, .getMethodsForDispatch(fdef))) {
         resetNeeded <- TRUE
         ## On the initial call:
@@ -396,7 +393,7 @@ finalDefaultMethod <-
           stop(gettextf(
 	"default method must be a method definition, a primitive or NULL: got an object of class %s",
 			dQuote(class(method))),
-               domain = NA)
+               domain = "R-methods")
     }
     method
 }
@@ -469,7 +466,7 @@ matchSignature <-
     if(!is(fun, "genericFunction"))
         stop(gettextf("trying to match a method signature to an object (of class %s) that is not a generic function",
                       dQuote(class(fun))),
-             domain = NA)
+             domain = "R-methods")
     anames <- fun@signature
     if(length(signature) == 0L)
         return(character())
@@ -497,13 +494,13 @@ matchSignature <-
             }
             else
                 stop(gettextf("invalid element in a list for \"signature\" argument; element %d is neither a class definition nor a class name",
-                     i), domain = NA)
+                     i), domain = "R-methods")
         }
     }
     else
         stop(gettextf("trying to match a method signature of class %s; expects a list or a character vector",
                       dQuote(class(signature))),
-             domain = NA)
+             domain = "R-methods")
     if(!identical(where, baseenv())) {
         ## fill in package information, warn about undefined classes
         unknown <- !nzchar(pkgs)
@@ -519,13 +516,12 @@ matchSignature <-
             ## coerce(), i.e., setAs() may use *one* unknown class
 	    MSG <- if(identical(as.vector(coerce@generic), "coerce") &&
 		      length(unknown) == 1) message
-	    else function(...) warning(..., call. = FALSE)
+	    else function(...) warning(..., call. = FALSE, domain = NA)
 	    MSG(.renderSignature(fun@generic, signature),
 		sprintf(ngettext(length(unknown),
 				 "no definition for class %s",
-				 "no definition for classes %s"),
-			paste(dQuote(unknown), collapse = ", ")),
-		domain = NA)
+				 "no definition for classes %s", domain = "R-methods"),
+			paste(dQuote(unknown), collapse = ", ")))
         }
     }
     signature <- as.list(signature)
@@ -534,12 +530,12 @@ matchSignature <-
                       sQuote(fun@generic),
                       length(sigClasses),
                       length(signature)),
-             domain = NA)
+             domain = "R-methods")
     if(is.null(names(signature))) {
         which <- seq_along(signature)
         if(length(which) > length(anames))
           stop(gettextf("more elements in the method signature (%d) than in the generic signature (%d) for function %s",
-	       length(which), length(anames), sQuote(fun@generic)), domain = NA)
+	       length(which), length(anames), sQuote(fun@generic)), domain = "R-methods")
     }
     else {
         ## construct a function call with the same naming pattern  &
@@ -565,7 +561,7 @@ matchSignature <-
         if(anyNA(which))
             stop(sprintf(ngettext(sum(is.na(which)),
                                   "in the method signature for function %s invalid argument name in the signature: %s",
-                                  "in the method signature for function %s invalid argument names in the signature: %s"),
+                                  "in the method signature for function %s invalid argument names in the signature: %s", domain = "R-methods"),
                          sQuote(fun@generic),
                          paste(snames[is.na(which)], collapse = ", ")),
                  domain = NA)
@@ -621,15 +617,14 @@ function(mlist, includeDefs = TRUE, inherited = TRUE, classes = NULL, useArgName
     args <- args[keep]
   }
   if(length(methods) == 0)
-    cat(file=con, "<Empty Methods List>\n")
+    cat(file=con, gettext("<Empty Methods List>", domain = "R-methods"), "\n", sep = "")
   else {
    n <- length(methods)
     labels <- character(n)
     if(useArgNames) {
       for(i in 1L:n) {
         sigi <- signatures[[i]]
-        labels[[i]] <- paste(args[[i]], " = \"", sigi, "\"",
-                             sep = "", collapse = ", ")
+        labels[[i]] <- paste(args[[i]], " = \"", sigi, "\"", sep = "", collapse = ", ")
       }
     }
     else {
@@ -637,7 +632,7 @@ function(mlist, includeDefs = TRUE, inherited = TRUE, classes = NULL, useArgName
         labels[[i]] <- paste(signatures[[i]], collapse = ", ")
     }
     for(i in seq_along(methods)) {
-      cat(file=con, (if(includeDefs) "## Signature:" else ""), labels[[i]])
+      cat(file=con, (if(includeDefs) gettext("## Signature:", domain = "R-methods") else ""), labels[[i]])
       method <- methods[[i]]
       if(includeDefs) {
         cat(file=con, ":\n")
@@ -651,9 +646,7 @@ function(mlist, includeDefs = TRUE, inherited = TRUE, classes = NULL, useArgName
           defFrom <- method@defined
           cat(file = con, if(includeDefs) "##:" else "\n",
               "    (inherited from ",
-              paste(names(defFrom), " = \"", as.character(defFrom),
-                    "\"", sep = "", collapse = ", "),
-               ")", if(includeDefs) "\n", sep="")
+              paste(names(defFrom), " = \"", as.character(defFrom), "\"", sep = "", collapse = ", "), ")", if(includeDefs) "\n", sep = "")
       }
       cat(file=con, "\n")
     }
@@ -682,7 +675,7 @@ promptMethods <- function(f, filename = NULL, methods)
     if(!isGeneric(f, fdef=fdef))
 	stop(gettextf("no generic function found corresponding to %s",
                       sQuote(f)),
-	     domain = NA)
+	     domain = "R-methods")
     if(missing(methods)) {
 	methods <- findMethods(fdef)
 	## try making  packageString
@@ -742,8 +735,16 @@ promptMethods <- function(f, filename = NULL, methods)
     if(is.na(filename)) return(Rdtxt)
 
     cat(unlist(Rdtxt), file = filename, sep = "\n")
-    .message("A shell of methods documentation has been written",
-             .fileDesc(filename), ".\n")
+    if(is.character(filename)) {
+        if(nzchar(filename))
+            .message(gettextf("A shell of methods documentation has been written to the file %s.\n", sQuote(filename)), domain = "R-methods")
+        else
+            .message("A shell of methods documentation has been written to the standard output connection.\n", domain = "R-methods")
+    }
+    else if(inherits(filename, "connection"))
+            .message(gettextf("A shell of methods documentation has been written to the connection %s.\n", sQuote(summary(filename)$description)), domain = "R-methods")
+    else # what, indeed?
+    .message("A shell of methods documentation has been written.\n", domain = "R-methods")
     invisible(filename)
 }
 
@@ -787,7 +788,7 @@ linearizeMlist <-
                 arguments <- c(arguments, lapply(mi@arguments, preC, argname))
             }
             else
-                warning(gettextf("skipping methods list element %s of unexpected class %s\n\n",
+                warning(sprintf(gettext("skipping methods list element %s of unexpected class %s\n\n", domain = "R-methods"),
                                  paste(cnames[i], collapse = ", "),
                                  dQuote(.class1(mi))),
                         domain = NA)
@@ -897,32 +898,32 @@ asMethodDefinition <- function(def, signature = list(.anyClassName), sealed = FA
     }
     msg <-
         if(missing(this))
-            "Use of the \"MethodsList\" meta data objects is deprecated."
+            gettext("Use of the \"MethodsList\" meta data objects is deprecated.", domain = "R-methods")
         else if(is.character(this))
             gettextf(
 	"%s, along with other use of the \"MethodsList\" metadata objects, is deprecated.",
-                 dQuote(this))
+                 dQuote(this), domain= "R-methods")
     else
-        gettextf("in %s: use of \"MethodsList\" metadata objects is deprecated.",
-                 deparse(this))
+        gettextf("in command %s: use of \"MethodsList\" metadata objects is deprecated.",
+                 sQuote(deparse(this)), domain = "R-methods")
     if(!missing(instead))
 	msg <- paste(msg, gettextf("use %s instead.", dQuote(instead)))
-    msg <- paste(msg, "see ?MethodsList. (This warning is shown once per session.)")
+    msg <- paste(msg, gettext("see ?MethodsList. (This warning is shown once per session.)", domain = "R-methods"))
     base::.Deprecated(msg = msg)
 }
 
 .MlistDefunct <- function(this = "<default>", instead) {
     msg <-
         if(missing(this))
-            "Use of the \"MethodsList\" meta data objects is defunct."
+            gettext("Use of the \"MethodsList\" meta data objects is defunct.", domain = "R-methods")
         else if(is.character(this))
             gettextf("%s, along with other use of the \"MethodsList\" metadata objects, is defunct.",
-                     dQuote(this))
+                     dQuote(this), domain = "R-methods")
         else
-            gettextf("in %s: use of \"MethodsList\" metadata objects is defunct.",
-                     deparse(this))
+            gettextf("in command %s: use of \"MethodsList\" metadata objects is defunct.",
+                     deparse(this), domain = "R-methods")
     if(!missing(instead))
-        msg <- paste(msg, gettextf("use %s instead.", dQuote(instead)))
-    msg <- paste(msg, "see ?MethodsList.")
+        msg <- paste(msg, gettextf("use %s instead.", dQuote(instead), domain = "R-methods"))
+    msg <- paste(msg, gettext("see ?MethodsList.", domain = "R-methods"))
     base::.Defunct(msg = msg)
 }

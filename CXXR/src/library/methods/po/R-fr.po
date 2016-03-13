@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-23 20:39\n"
+"POT-Creation-Date: 2016-03-13 10:23\n"
 "PO-Revision-Date: 2012-03-06 21:42+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -1955,11 +1955,6 @@ msgstr ""
 "Ne semble pas être une table de méthode pour le générique \"%s\" dans "
 "l'environnement de traçage"
 
-#. R/zzz.R: gettext(" done", domain = "R-methods")
-#: R/zzz.R:0
-msgid "done"
-msgstr ""
-
 #. R/SClasses.R: gettext("duplicate class names among superclasses: %s", domain = "R-methods")
 #: R/SClasses.R:0
 msgid "duplicate class names among superclasses: %s"
@@ -2314,11 +2309,6 @@ msgstr ""
 "information d'une classe d'ancien style (S3) incompatible pour \"%s\" ; la "
 "classe est définie mais n'étend pas \"%s\" et n'est pas utilisable comme sa "
 "partie 'data'"
-
-#. R/zzz.R: gettext("initializing class and method definitions ...", domain = "R-methods")
-#: R/zzz.R:0
-msgid "initializing class and method definitions ..."
-msgstr ""
 
 #. R/RClassUtils.R: gettextf("initializing objects from class %s with these arguments is not supported",     dQuote(Class))
 #: R/RClassUtils.R:0
@@ -3632,11 +3622,11 @@ msgstr ""
 "d'arguments existants est inférieur au nombre de nouveaux arguments : (%s) "
 "contre (%s)"
 
-#. R/methodsTable.R: gettext("trying to check signature length of generic %s, but it is not a generic function: i = %d, funs = %s, gnames = %s",     domain = "R-methods")
+#. R/methodsTable.R: gettextf("trying to check signature length of generic '%s', but it is not a generic function: i = %d, funs = %s, gnames = %s",     what, i, paste(unlist(funs), collapse = ", "), paste(as.character(gnames), collapse = ", "))
 #: R/methodsTable.R:0
 #, fuzzy
 msgid ""
-"trying to check signature length of generic %s, but it is not a generic "
+"trying to check signature length of generic '%s', but it is not a generic "
 "function: i = %d, funs = %s, gnames = %s"
 msgstr ""
 "tentative d'application d'une signature à un objet (de classe %s) qui n'est "

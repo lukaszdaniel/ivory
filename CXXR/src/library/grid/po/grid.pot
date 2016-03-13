@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grid 3.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-27 18:05+0100\n"
+"POT-Creation-Date: 2016-03-13 10:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,47 +26,47 @@ msgstr ""
 msgid "Viewport '%s' was not found"
 msgstr ""
 
-#: grid.c:698 grid.c:703 grid.c:793 grid.c:798
+#: grid.c:698 grid.c:703 grid.c:792 grid.c:797
 msgid "cannot pop the top-level viewport ('grid' and 'graphics' output mixed?)"
 msgstr ""
 
-#: grid.c:978
+#: grid.c:977
 msgid "attempt to plot on null device"
 msgstr ""
 
-#: grid.c:1310
+#: grid.c:1309
 msgid "there is no layout defined"
 msgstr ""
 
-#: grid.c:1530
+#: grid.c:1529
 msgid "polygon edge not found (zero-width or zero-height?)"
 msgstr ""
 
-#: grid.c:1539
+#: grid.c:1538
 msgid "polygon edge not found"
 msgstr ""
 
-#: grid.c:1693
+#: grid.c:1692
 msgid "require at least two points to draw arrow"
 msgstr ""
 
-#: grid.c:2009
+#: grid.c:2008
 msgid "non-finite control point in Xspline"
 msgstr ""
 
-#: grid.c:2874
+#: grid.c:2873
 msgid "non-finite x or y in graphics path"
 msgstr ""
 
-#: grid.c:2915
+#: grid.c:2914
 msgid "Empty raster"
 msgstr ""
 
-#: grid.c:3369
+#: grid.c:3368
 msgid "invalid plotting symbol"
 msgstr ""
 
-#: grid.c:3455
+#: grid.c:3454
 msgid "unable to clip to rotated rectangle"
 msgstr ""
 

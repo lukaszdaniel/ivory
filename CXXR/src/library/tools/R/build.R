@@ -192,7 +192,7 @@ get_exclude_patterns <- function()
 	    printLog0(Log, paste(c(res$stdout, ""),  collapse = "\n"))
 	    printLog(Log, "      -----------------------------------\n")
 	    unlink(libdir, recursive = TRUE)
-	    printLog(Log, "ERROR: package installation failed\n")
+	    printLog(Log, gettext("ERROR: package installation failed\n", domain = "R-tools"))
 	    do_exit(1)
 	}
 	Sys.setenv("R_BUILD_TEMPLIB" = libdir)
@@ -203,17 +203,17 @@ get_exclude_patterns <- function()
     {
         owd <- setwd(pkgdir); on.exit(setwd(owd))
 ##        pkgname <- basename(pkgdir)
-        checkingLog(Log, "DESCRIPTION meta-information")
+        checkingLog(Log, gettext("checking DESCRIPTION meta-information ...", domain = "R-tools"))
         res <- try(.check_package_description("DESCRIPTION"))
         if (inherits(res, "try-error")) {
-            resultLog(Log, "ERROR")
-            messageLog(Log, "running '.check_package_description' failed")
+            resultLog(Log, gettext("ERROR", domain = "R-tools"))
+            messageLog(Log, gettext("running '.check_package_description()' failed", domain = "R-tools"))
         } else {
             if (any(lengths(res))) {
-                resultLog(Log, "ERROR")
+                resultLog(Log, gettext("ERROR", domain = "R-tools"))
                 print(res) # FIXME print to Log?
                 do_exit(1L)
-            } else resultLog(Log, "OK")
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
         cleanup_pkg(pkgdir, Log)
 
@@ -222,7 +222,7 @@ get_exclude_patterns <- function()
         ensure_installed <- function()
 	    if (!pkgInstalled) {
 		messageLog(Log,
-			   "installing the package to build vignettes")
+			   gettext("installing the package to build vignettes", domain = "R-tools"))
 		pkgInstalled <<- temp_install_pkg(pkgdir, libdir)
 	    }
 
@@ -231,7 +231,7 @@ get_exclude_patterns <- function()
         if (file.exists("INDEX")) update_Rd_index("INDEX", "man", Log)
         doc_dir <- file.path("inst", "doc")
         if ("makefile" %in% dir(doc_dir)) { # avoid case-insensitive match
-            messageLog(Log, "renaming 'inst/doc/makefile' to 'inst/doc/Makefile'")
+            messageLog(Log, gettext("renaming 'inst/doc/makefile' to 'inst/doc/Makefile'", domain = "R-tools"))
             file.rename(file.path(doc_dir, "makefile"),
                         file.path(doc_dir, "Makefile"))
         }
@@ -249,7 +249,7 @@ get_exclude_patterns <- function()
             if (!is.null(vigns) && length(vigns$docs)) {
                 ensure_installed()
                 ## Good to do this in a separate process: it might die
-                creatingLog(Log, "vignettes")
+                creatingLog(Log, gettext("creating vignettes ...", domain = "R-tools"))
                 R_LIBS <- Sys.getenv("R_LIBS", NA_character_)
                 if (!is.na(R_LIBS)) {
                     on.exit(Sys.setenv(R_LIBS = R_LIBS), add = TRUE)
@@ -272,7 +272,7 @@ get_exclude_patterns <- function()
                 res <- system_with_capture(cmd, args)
                 Sys.setenv(PATH = oPATH)
                 if (res$status) {
-                    resultLog(Log, "ERROR")
+                    resultLog(Log, gettext("ERROR", domain = "R-tools"))
                     printLog0(Log, paste(c(res$stdout, ""),  collapse = "\n"))
                     do_exit(1L)
                 } else {
@@ -280,7 +280,7 @@ get_exclude_patterns <- function()
                     vigns <- pkgVignettes(dir = '.', output = TRUE, source = TRUE)
                     stopifnot(!is.null(vigns))
 
-                    resultLog(Log, "OK")
+                    resultLog(Log, gettext("OK", domain = "R-tools"))
                 }
 
                 ## We may need to install them.
@@ -330,23 +330,23 @@ get_exclude_patterns <- function()
         } else {
             fv <- file.path("build", "vignette.rds")
             if(file.exists(fv)) {
-                checkingLog(Log, "vignette meta-information")
+                checkingLog(Log, gettext("checking vignette meta-information ...", domain = "R-tools"))
                 db <- readRDS(fv)
                 pdfs <- file.path("inst", "doc", db[nzchar(db$PDF), ]$PDF)
                 missing <- !file.exists(pdfs)
                 if(any(missing)) {
-                    msg <- c("Output(s) listed in 'build/vignette.rds' but not in package:",
+                    msg <- c(gettext("Output(s) listed in 'build/vignette.rds' but not in package:", domain = "R-tools"),
                              strwrap(sQuote(pdfs[missing]), indent = 2L, exdent = 2L),
-                             "Run R CMD build without --no-build-vignettes to re-create")
+                             gettext("Run R CMD build without --no-build-vignettes to re-create", domain = "R-tools"))
                     errorLog(Log, paste(msg, collapse = "\n"))
                     do_exit(1L)
-                } else resultLog(Log, "OK")
+                } else resultLog(Log, gettext("OK"))
             }
         }
         if (compact_vignettes != "no" &&
             length(pdfs <- dir(doc_dir, pattern = "[.]pdf", recursive = TRUE,
                                full.names = TRUE))) {
-            messageLog(Log, "compacting vignettes and other PDF files")
+            messageLog(Log, gettext("compacting vignettes and other PDF files", domain = "R-tools"))
             if(compact_vignettes %in% c("gs", "gs+qpdf", "both")) {
                 gs_cmd <- find_gs_cmd()
                 gs_quality <- "ebook"
@@ -377,14 +377,13 @@ get_exclude_patterns <- function()
         pkgname <- basename(pkgdir)
         if (dir.exists("src")) {
             setwd("src")
-            messageLog(Log, "cleaning src")
+            messageLog(Log, gettext("cleaning 'src' directory", domain = "R-tools"))
             if (WINDOWS) {
                 have_make <- nzchar(Sys.which(Sys.getenv("MAKE", "make")))
                 if (file.exists("Makefile.win")) {
                     if (have_make)
                         Ssystem(Sys.getenv("MAKE", "make"), "-f Makefile.win clean")
-                    else warning("unable to run 'make clean' in 'src'",
-                                 domain = NA)
+                    else warning("unable to run 'make clean' in 'src'", domain = "R-tools")
                 } else {
                     if (file.exists("Makevars.win")) {
                         if (have_make) {
@@ -394,8 +393,7 @@ get_exclude_patterns <- function()
                                            "-f Makevars.win")
                             Ssystem(Sys.getenv("MAKE", "make"),
                                     c(makefiles, "clean"))
-                        } else warning("unable to run 'make clean' in 'src'",
-                                       domain = NA)
+                        } else warning("unable to run 'make clean' in 'src'", domain = "R-tools")
                     }
                     ## Also cleanup possible Unix leftovers ...
                     unlink(c(Sys.glob(c("*.o", "*.sl", "*.so", "*.dylib")),
@@ -442,7 +440,7 @@ get_exclude_patterns <- function()
                     Sys.setenv(R_PACKAGE_NAME = pkgname)
                     Sys.setenv(R_PACKAGE_DIR = pkgdir)
                     Sys.setenv(R_LIBRARY_DIR = dirname(pkgdir))
-                    messageLog(Log, "running 'cleanup.win'")
+                    messageLog(Log, gettext("running 'cleanup.win'", domain = "R-tools"))
                     Ssystem("sh", "./cleanup.win")
                 }
             }
@@ -450,7 +448,7 @@ get_exclude_patterns <- function()
             Sys.setenv(R_PACKAGE_NAME = pkgname)
             Sys.setenv(R_PACKAGE_DIR = pkgdir)
             Sys.setenv(R_LIBRARY_DIR = dirname(pkgdir))
-            messageLog(Log, "running 'cleanup'")
+            messageLog(Log, gettext("running 'cleanup'", domain = "R-tools"))
             Ssystem("./cleanup")
         }
     }
@@ -460,31 +458,29 @@ get_exclude_patterns <- function()
         newindex <- tempfile()
         res <- try(Rdindex(Rd_files, newindex))
         if (inherits(res, "try-error")) {
-            errorLog(Log, "computing Rd index failed")
+            errorLog(Log, gettext("computing Rd index failed", domain = "R-tools"))
             do_exit(1L)
         }
-        checkingLog(Log, "whether ", sQuote(oldindex), " is up-to-date")
+        checkingLog(Log, gettextf("checking whether %s is up-to-date ...", sQuote(oldindex), domain = "R-tools"))
         if (file.exists(oldindex)) {
             ol <- readLines(oldindex, warn = FALSE) # e.g. BaM had missing final NL
             nl <- readLines(newindex)
             if (!identical(ol, nl)) {
-                resultLog(Log, "NO")
+                resultLog(Log, gettext("NO", domain = "R-tools"))
                if (force) {
-                    messageLog(Log, "removing ", sQuote(oldindex),
-			      " as '--force' was given")
+                    messageLog(Log, gettextf("removing %s as '--force' was given", sQuote(oldindex), domain = "R-tools"))
                     unlink(oldindex)
                 } else {
-                    messageLog(Log, "use '--force' to remove ",
-			      "the existing ", sQuote(oldindex))
+                    messageLog(Log, gettextf("use '--force' to remove the existing %s", sQuote(oldindex), domain = "R-tools"))
                     unlink(newindex)
                 }
             } else {
-                resultLog(Log, "OK")
+                resultLog(Log, gettext("OK", domain = "R-tools"))
                 unlink(newindex)
             }
         } else {
-            resultLog(Log, "NO")
-            messageLog(Log, "creating new ", sQuote(oldindex))
+            resultLog(Log, gettext("NO", domain = "R-tools"))
+            messageLog(Log, gettextf("creating new %s", sQuote(oldindex), domain = "R-tools"))
             file.rename(newindex, oldindex)
         }
     }
@@ -502,7 +498,7 @@ get_exclude_patterns <- function()
             which(sapply(db, function(Rd) getDynamicFlags(Rd)["\\Sexpr"]))
 	if (!length(containsSexprs)) return(FALSE)
 
-	messageLog(Log, "installing the package to process help pages")
+	messageLog(Log, gettext("installing the package to process help pages", domain = "R-tools"))
 
         dir.create(libdir, mode = "0755", showWarnings = FALSE)
         savelib <- .libPaths()
@@ -518,7 +514,7 @@ get_exclude_patterns <- function()
 	    for (i in containsBuildSexprs)
 		db[[i]] <- prepare_Rd(db[[i]], stages = "build",
                                       stage2 = FALSE, stage3 = FALSE)
-	    messageLog(Log, "saving partial Rd database")
+	    messageLog(Log, gettext("saving partial Rd database", domain = "R-tools"))
 	    partial <- db[containsBuildSexprs]
 	    dir.create("build", showWarnings = FALSE)
 	    saveRDS(partial, file.path("build", "partial.rdb"))
@@ -527,7 +523,7 @@ get_exclude_patterns <- function()
             parse_description_field(desc, "BuildManual", TRUE) &&
             any(sapply(db, function(Rd) any(getDynamicFlags(Rd)[c("install", "render")])))
 	if (needRefman) {
-	    messageLog(Log, "building the PDF package manual")
+	    messageLog(Log, gettext("building the PDF package manual", domain = "R-tools"))
 	    dir.create("build", showWarnings = FALSE)
 	    refman <- file.path(pkgdir, "build",
                                 paste0(basename(pkgdir), ".pdf"))
@@ -621,8 +617,7 @@ get_exclude_patterns <- function()
 
         .write_description(desc, file.path(pkgname, "DESCRIPTION"))
 
-        printLog(Log,
-                 "  NB: this package now depends on R (>= ", ver, ")\n")
+        printLog(Log, gettextf("  NB: this package now depends on R (>= %s)\n", ver, domain = "R-tools"))
     }
 
     resave_data_rda <- function(pkgname, resave_data)
@@ -633,7 +628,7 @@ get_exclude_patterns <- function()
             files <- Sys.glob(c(file.path(ddir, "*.rda"),
                                 file.path(ddir, "*.RData"),
                                 file.path(pkgname, "R", "sysdata.rda")))
-            messageLog(Log, "re-saving image files")
+            messageLog(Log, gettext("re-saving image files", domain = "R-tools"))
             resaveRdaFiles(files)
             rdas <- checkRdaFiles(files)
             if(any(rdas$compress %in% c("bzip2", "xz")))
@@ -645,7 +640,7 @@ get_exclude_patterns <- function()
             if(nrow(rdas)) {
                 update <- with(rdas, ASCII | compress == "none" | version < 2)
                 if(any(update)) {
-                    messageLog(Log, "re-saving image files")
+                    messageLog(Log, gettext("re-saving image files", domain = "R-tools"))
                     resaveRdaFiles(row.names(rdas)[update], "gzip")
                 }
             }
@@ -653,7 +648,7 @@ get_exclude_patterns <- function()
                 rdas <- checkRdaFiles(f)
                 update <- with(rdas, ASCII | compress == "none" | version < 2)
                 if(any(update)) {
-                    messageLog(Log, "re-saving sysdata.rda")
+                    messageLog(Log, gettext("re-saving sysdata.rda", domain = "R-tools"))
                     resaveRdaFiles(f, "gzip")
                 }
             }
@@ -673,7 +668,7 @@ get_exclude_patterns <- function()
         on.exit(unlink(resaved))
         Rs <- grep("\\.[Rr]$", dataFiles, value = TRUE)
         if (length(Rs)) { # these might use .txt etc
-            messageLog(Log, "re-saving .R files as .rda")
+            messageLog(Log, gettext("re-saving .R files as .rda", domain = "R-tools"))
             ## ensure utils is visible
             ##   library("utils")
             lapply(Rs, function(x){
@@ -685,12 +680,11 @@ get_exclude_patterns <- function()
                      envir = envir)
                 resaved <<- c(resaved, x)
             })
-            printLog(Log,
-                     "  NB: *.R converted to .rda: other files may need to be removed\n")
+            printLog(Log, gettextf("  NB: *.R converted to .rda: other files may need to be removed\n", domain = "R-tools"))
         }
         tabs <- grep("\\.(CSV|csv|TXT|tab|txt)$", dataFiles, value = TRUE)
         if (length(tabs)) {
-            messageLog(Log, "re-saving tabular files")
+            messageLog(Log, gettext("re-saving tabular files", domain = "R-tools"))
             if (resave_data == "gzip") {
                 lapply(tabs, function(nm) {
                     ## DiceDesign/data/greenwood.table.txt is missing NL
@@ -779,8 +773,7 @@ get_exclude_patterns <- function()
         } else if (a == "--no-build-vignettes") {
             vignettes <- FALSE
         } else if (a == "--no-vignettes") { # pre-3.0.0 version
-            stop("'--no-vignettes' is defunct:\n  use '--no-build-vignettes' instead",
-                 call. = FALSE, domain = NA)
+            stop("'--no-vignettes' is defunct:\n  use '--no-build-vignettes' instead", call. = FALSE, domain = "R-tools")
         } else if (a == "--resave-data") {
             resave_data <- "best"
         } else if (a == "--no-resave-data") {
@@ -796,15 +789,13 @@ get_exclude_patterns <- function()
         } else if (a == "--md5") {
             with_md5 <- TRUE
         } else if (substr(a, 1, 1) == "-") {
-            message("Warning: unknown option ", sQuote(a))
+            message(gettextf("Warning: unknown option %s", sQuote(a)))
         } else pkgs <- c(pkgs, a)
         args <- args[-1L]
     }
 
     if(!compact_vignettes %in% c("no", "qpdf", "gs", "gs+qpdf", "both")) {
-        warning(gettextf("invalid value for '--compact-vignettes', assuming %s",
-                         "\"qpdf\""),
-                domain = NA)
+        warning(gettextf("invalid value for '--compact-vignettes', assuming %s", "\"qpdf\""), domain = "R-tools")
         compact_vignettes <-"qpdf"
     }
 
@@ -812,7 +803,7 @@ get_exclude_patterns <- function()
 
     startdir <- getwd()
     if (is.null(startdir))
-        stop("current working directory cannot be ascertained")
+        stop("current working directory cannot be ascertained", domain = "R-tools")
 ##    R_platform <- Sys.getenv("R_PLATFORM", "unknown-binary")
 ##    libdir <- tempfile("Rinst")
 
@@ -833,22 +824,22 @@ get_exclude_patterns <- function()
         setwd(startdir)
 	res <- tryCatch(setwd(pkg), error = function(e)e)
 	if (inherits(res, "error")) {
-            errorLog(Log, "cannot change to directory ", sQuote(pkg))
+            errorLog(Log, gettextf("cannot change to directory %s", sQuote(pkg), domain = "R-tools"))
             do_exit(1L)
         }
         pkgdir <- getwd()
         pkgname <- basename(pkgdir)
-        checkingLog(Log, "for file ", sQuote(file.path(pkg, "DESCRIPTION")))
+        checkingLog(Log, gettextf("checking for file %s ...", sQuote(file.path(pkg, "DESCRIPTION")), domain = "R-tools"))
         f <- file.path(pkgdir, "DESCRIPTION")
         if (file.exists(f)) {
             desc <- try(.read_description(f))
             if (inherits(desc, "try-error") || !length(desc)) {
-                resultLog(Log, "EXISTS but not correct format")
+                resultLog(Log, gettext("file EXISTS but is not of correct format", domain = "R-tools"))
                 do_exit(1L)
             }
-            resultLog(Log, "OK")
+            resultLog(Log, gettext("OK", domain = "R-tools"))
         } else {
-            resultLog(Log, "NO")
+            resultLog(Log, gettext("NO", domain = "R-tools"))
             do_exit(1L)
         }
         intname <- desc["Package"]
@@ -861,7 +852,7 @@ get_exclude_patterns <- function()
         if (WINDOWS) {
             ## This preserves read-only for files, but not dates
             if (!file.copy(pkgname, Tdir, recursive = TRUE)) {
-                errorLog(Log, "copying to build directory failed")
+                errorLog(Log, gettext("copying to build directory failed", domain = "R-tools"))
                 do_exit(1L)
             }
         } else {
@@ -872,7 +863,7 @@ get_exclude_patterns <- function()
 		## unfortunately, '-pr' does not dereference sym.links
 		"-Lr --preserve=timestamps" else "-pr"
             if (system(paste("cp", cp_sw, shQuote(pkgname), shQuote(Tdir)))) {
-                errorLog(Log, "copying to build directory failed")
+                errorLog(Log, gettext("copying to build directory failed", domain = "R-tools"))
                 do_exit(1L)
             }
         }
@@ -881,15 +872,14 @@ get_exclude_patterns <- function()
         ## Now correct the package name (PR#9266)
         if (pkgname != intname) {
             if (!file.rename(pkgname, intname)) {
-                message(gettextf("Error: cannot rename directory to %s",
-                                 sQuote(intname)), domain = NA)
+                message(gettextf("Error: cannot rename directory to %s", sQuote(intname)), domain = "R-tools")
                 do_exit(1L)
             }
             pkgname <- intname
         }
 
         ## prepare the copy
-        messageLog(Log, "preparing ", sQuote(pkgname), ":")
+        messageLog(Log, gettextf("preparing %s:", sQuote(pkgname)))
         prepare_pkg(normalizePath(pkgname, "/"), desc, Log);
         owd <- setwd(pkgname)
         ## remove exclude files
@@ -936,7 +926,7 @@ get_exclude_patterns <- function()
         ## Fix up man, R, demo inst/doc directories
         res <- .check_package_subdirs(pkgname, TRUE)
         if (any(lengths(res))) {
-            messageLog(Log, "excluding invalid files")
+            messageLog(Log, gettext("excluding invalid files", domain = "R-tools"))
             print(res) # FIXME print to Log?
         }
         setwd(Tdir)
@@ -949,21 +939,16 @@ get_exclude_patterns <- function()
         ## Add expanded R fields to the DESCRIPTION file.
         add_expanded_R_fields_to_description_file(file.path(pkgname,
                                                             "DESCRIPTION"))
-        messageLog(Log,
-                   "checking for LF line-endings in source and make files")
+        messageLog(Log, gettext("checking for LF line-endings in source and make files", domain = "R-tools"))
         fix_nonLF_in_source_files(pkgname, Log)
         fix_nonLF_in_make_files(pkgname, Log)
-        messageLog(Log, "checking for empty or unneeded directories");
+        messageLog(Log, gettext("checking for empty or unneeded directories", domain = "R-tools"));
         find_empty_dirs(pkgname)
         for(dir in c("Meta", "R-ex", "chtml", "help", "html", "latex")) {
             d <- file.path(pkgname, dir)
             if (dir.exists(d)) {
-                msg <- paste("WARNING: Removing directory",
-                             sQuote(d),
-                             "which should only occur",
-                             "in an installed package")
-                printLog(Log, paste(strwrap(msg, indent = 0L, exdent = 2L),
-                                    collapse = "\n"), "\n")
+                msg <- gettextf("WARNING: Removing directory %s which should only occur in an installed package", sQuote(d), domain = "R-tools")
+                printLog(Log, paste(strwrap(msg, indent = 0L, exdent = 2L), collapse = "\n"), "\n")
                 unlink(d, recursive = TRUE)
             }
         }
@@ -975,12 +960,12 @@ get_exclude_patterns <- function()
         ## work on 'data' directory if present
         if(dir.exists(file.path(pkgname, "data")) ||
            file_test("-f", file.path(pkgname, "R", "sysdata.rda"))) {
-            messageLog(Log, "looking to see if a 'data/datalist' file should be added")
+            messageLog(Log, gettext("looking to see if a 'data/datalist' file should be added", domain = "R-tools"))
             ## in some cases data() needs the package installed as
             ## there are links to the package's namespace
             tryCatch(add_datalist(pkgname),
                      error = function(e)
-                     printLog(Log, "  unable to create a 'datalist' file: may need the package to be installed\n"))
+                     printLog(Log, gettext("  unable to create a 'datalist' file: may need the package to be installed\n", domain = "R-tools")))
             ## allow per-package override
             resave_data1 <- parse_description_field(desc, "BuildResaveData",
                                                     resave_data, FALSE)
@@ -990,12 +975,12 @@ get_exclude_patterns <- function()
 
 	## add NAMESPACE if the author didn't write one
 	if(!file.exists(namespace <- file.path(pkgname, "NAMESPACE")) ) {
-	    messageLog(Log, "creating default NAMESPACE file")
+	    messageLog(Log, gettext("creating default NAMESPACE file", domain = "R-tools"))
 	    writeDefaultNamespace(namespace)
 	}
 
         if(with_md5) {
-	    messageLog(Log, "adding MD5 file")
+	    messageLog(Log, gettext("adding MD5 file", domain = "R-tools"))
             .installMD5sums(pkgname)
         } else {
             ## remove any stale file
@@ -1006,13 +991,13 @@ get_exclude_patterns <- function()
         filename <- paste0(pkgname, "_", desc["Version"], ".tar.gz")
         filepath <- file.path(startdir, filename)
         ## NB: tests/reg-packages.R relies on this exact format!
-        messageLog(Log, "building ", sQuote(filename))
+        messageLog(Log, gettextf("building %s", sQuote(filename)))
         res <- utils::tar(filepath, pkgname, compression = "gzip",
                           compression_level = 9L,
                           tar = Sys.getenv("R_BUILD_TAR"),
                           extra_flags = NULL) # use trapdoor
         if (res) {
-            errorLog(Log, "packaging into .tar.gz failed")
+            errorLog(Log, gettext("packaging into .tar.gz failed", domain = "R-tools"))
             do_exit(1L)
         }
         message("") # blank line

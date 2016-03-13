@@ -97,4 +97,4 @@ int R_TextBufferGetc(TextBuffer*);
 }
 #endif
 
-#endif /* not R_IOSTUFF_H */
+#endif /* R_IOSTUFF_H */

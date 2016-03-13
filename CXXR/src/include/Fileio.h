@@ -51,4 +51,4 @@ FILE *	R_fopen(const char *filename, const char *mode);
 }
 #endif
 
-#endif
+#endif /* RFILEIO_H_ */

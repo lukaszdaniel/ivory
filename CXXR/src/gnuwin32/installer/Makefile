@@ -18,7 +18,7 @@ MDISDI = 0
 HelpStyle = 1
 
 ## Used to set Registry entries
-Producer = R-core
+Producer = "Lukasz Daniel"
 
 ifeq "$(WIN)" "64"
 ifneq ($(strip $(HOME32)),)

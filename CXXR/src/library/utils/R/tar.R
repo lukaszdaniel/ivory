@@ -24,7 +24,7 @@ untar <- function(tarfile, files = NULL, list = FALSE, exdir = ".",
         return(untar2(tarfile, files, list, exdir, restore_times))
 
     if (!(is.character(tarfile) && length(tarfile) == 1L))
-        stop("invalid 'tarfile' argument")
+        stop(gettextf("invalid '%s' argument", "tarfile"))
 
     TAR <- tar
     if (!nzchar(TAR) && .Platform$OS.type == "windows" &&
@@ -45,7 +45,7 @@ untar <- function(tarfile, files = NULL, list = FALSE, exdir = ".",
             else if(rawToChar(magic[1:3]) == "BZh") cflag <- "j"
             else if(rawToChar(magic[1:5]) == "\xFD7zXZ") cflag <- "J"
         } else if (compressed) cflag <- "z"
-    } else stop("'compressed' must be logical or character")
+    } else stop(gettextf("'%s' argument argument must be logical or character", "compressed"))
     if (!restore_times) cflag <- paste0(cflag, "m")
 
     gzOK <- .Platform$OS.type == "windows"
@@ -79,7 +79,7 @@ untar <- function(tarfile, files = NULL, list = FALSE, exdir = ".",
     if (list) {
         cmd <- paste0(TAR, " -", cflag, "tf ", shQuote(tarfile))
         if (length(extras)) cmd <- paste(cmd, extras, collapse = " ")
-        if (verbose) message("untar: using cmd = ", sQuote(cmd), domain = NA)
+        if (verbose) message(gettextf("untar: using cmd = %s", sQuote(cmd)), domain = "R-utils")
         system(cmd, intern = TRUE)
     } else {
         cmd <- paste0(TAR, " -", cflag, "xf ", shQuote(tarfile))
@@ -87,7 +87,7 @@ untar <- function(tarfile, files = NULL, list = FALSE, exdir = ".",
             if (!dir.exists(exdir)) {
                 if(!dir.create(exdir, showWarnings = TRUE, recursive = TRUE))
                     stop(gettextf("failed to create directory %s", sQuote(exdir)),
-                         domain = NA)
+                         domain = "R-utils")
             }
             cmd <- if(.Platform$OS.type == "windows")
                 ## some versions of tar.exe need / here
@@ -98,10 +98,9 @@ untar <- function(tarfile, files = NULL, list = FALSE, exdir = ".",
         if (length(extras)) cmd <- paste(cmd, extras, collapse = " ")
         if (length(files))
             cmd <- paste(cmd, paste(shQuote(files), collapse = " "))
-        if (verbose) message("untar: using cmd = ", sQuote(cmd), domain = NA)
+        if (verbose) message(gettextf("untar: using cmd = %s", sQuote(cmd)), domain = "R-utils")
         res <- system(cmd)
-        if (res) warning(sQuote(cmd), " returned error code ", res,
-                         domain = NA)
+        if (res) warning(gettextf("command %s returned error code %s", sQuote(cmd), res), domain = "R-utils")
         invisible(res)
     }
 }
@@ -132,8 +131,7 @@ untar2 <- function(tarfile, files = NULL, list = FALSE, exdir = ".",
         path <- sub("[\\/]$", "", path)
         if(dir.exists(path)) return()
         if(!dir.create(path, showWarnings = TRUE, recursive = TRUE, ...))
-           stop(gettextf("failed to create directory %s", sQuote(path)),
-                domain = NA)
+           stop(gettextf("failed to create directory %s", sQuote(path)), domain = "R-utils")
     }
 
     warn1 <- character()
@@ -145,7 +143,7 @@ untar2 <- function(tarfile, files = NULL, list = FALSE, exdir = ".",
         con <- gzfile(path.expand(tarfile), "rb") # reads compressed formats
         on.exit(close(con))
     } else if(inherits(tarfile, "connection")) con <- tarfile
-    else stop("'tarfile' must be a character string or a connection")
+    else stop(gettextf("'%s' argument must be a character string or connection", "tarfile"))
     if (!missing(exdir)) {
         mydir.create(exdir)
         od <- setwd(exdir)
@@ -184,8 +182,7 @@ untar2 <- function(tarfile, files = NULL, list = FALSE, exdir = ".",
             ## try it with signed bytes.
             checksum <- sum(ifelse(xx > 127L, xx - 128L, xx)) %% 2^24 # 6 bytes
             if(csum != checksum)
-                warning(gettextf("checksum error for entry '%s'", name),
-                        domain = NA)
+                warning(gettextf("checksum error for entry '%s'", name), domain = "R-utils")
         }
         type <- block[157L]
         ctype <- rawToChar(type)
@@ -232,7 +229,7 @@ untar2 <- function(tarfile, files = NULL, list = FALSE, exdir = ".",
                         if(file.copy(name2, name))
                              warn1 <- c(warn1, "restoring hard link as a file copy")
                         else
-                            warning(gettextf("failed to copy %s to %s", sQuote(name2), sQuote(name)), domain = NA)
+                            warning(gettextf("failed to copy %s to %s", sQuote(name2), sQuote(name)), domain = "R-utils")
                     }
                 } else {
                     if(.Platform$OS.type == "windows") {
@@ -240,9 +237,9 @@ untar2 <- function(tarfile, files = NULL, list = FALSE, exdir = ".",
                         mydir.create(dirname(name))
                         from <- file.path(dirname(name), name2)
                         if (!file.copy(from, name))
-                            warning(gettextf("failed to copy %s to %s", sQuote(from), sQuote(name)), domain = NA)
+                            warning(gettextf("failed to copy %s to %s", sQuote(from), sQuote(name)), domain = "R-utils")
                         else
-                            warn1 <- c(warn1, "restoring symbolic link as a file copy")
+                            warn1 <- c(warn1, gettext("restoring symbolic link as a file copy"))
                    } else {
                        mydir.create(dirname(name))
                        od <- setwd(dirname(name))
@@ -251,9 +248,9 @@ untar2 <- function(tarfile, files = NULL, list = FALSE, exdir = ".",
                        if(!file.symlink(name2, nm)) { # will give a warning
                         ## so try a file copy: will not work for links to dirs
                         if (file.copy(name2, nm))
-                            warn1 <- c(warn1, "restoring symbolic link as a file copy")
+                            warn1 <- c(warn1, gettext("restoring symbolic link as a file copy"))
                            else
-                               warning(gettextf("failed to copy %s to %s", sQuote(from), sQuote(name)), domain = NA)
+                               warning(gettextf("failed to copy %s to %s", sQuote(from), sQuote(name)), domain = "R-utils")
                        }
                        setwd(od)
                    }
@@ -261,7 +258,7 @@ untar2 <- function(tarfile, files = NULL, list = FALSE, exdir = ".",
             }
         } else if(ctype %in% c("3", "4")) {
             ## 3 and 4 are devices
-            warn1 <- c(warn1, "skipping devices")
+            warn1 <- c(warn1, gettext("skipping devices"))
         } else if(ctype == "5") {
             ## directory
             contents <- c(contents, name)
@@ -272,7 +269,7 @@ untar2 <- function(tarfile, files = NULL, list = FALSE, exdir = ".",
             }
         } else if(ctype == "6") {
             ## 6 is a fifo
-            warn1 <- c(warn1, "skipping fifos")
+            warn1 <- c(warn1, gettext("skipping fifos"))
        } else if(ctype %in% c("L", "K")) {
             ## These are GNU extensions that are widely supported
             ## They use one or more blocks to store the name of
@@ -289,11 +286,10 @@ untar2 <- function(tarfile, files = NULL, list = FALSE, exdir = ".",
         } else if(ctype == "x") {
             ## pax headers misused by bsdtar.
             isUTF8 <- FALSE
-            warn1 <- c(warn1, "using pax extended headers")
+            warn1 <- c(warn1, gettext("using pax extended headers"))
             info <- readBin(con, "raw", n = 512L*ceiling(size/512L))
             info <- strsplit(rawToChar(info), "\n", fixed = TRUE)[[1]]
-            hcs <- grep("[0-9]* hdrcharset=", info, useBytes = TRUE,
-                        value = TRUE)
+            hcs <- grep("[0-9]* hdrcharset=", info, useBytes = TRUE, value = TRUE)
             if(length(hcs)) {
                 hcs <- sub("[0-9]* hdrcharset=", hcs, useBytes = TRUE)
                 isUTF8 <- identical(hcs, "ISO-IR 10646 2000 UTF-8")
@@ -303,8 +299,7 @@ untar2 <- function(tarfile, files = NULL, list = FALSE, exdir = ".",
                 lname <- sub("[0-9]* path=", "", path, useBytes = TRUE)
                 if(isUTF8) Encoding(lname) <- "UTF-8"
             }
-            linkpath <- grep("[0-9]* linkpath=", info, useBytes = TRUE,
-                             value = TRUE)
+            linkpath <- grep("[0-9]* linkpath=", info, useBytes = TRUE, value = TRUE)
             if(length(linkpath)) {
                 llink <- sub("[0-9]* linkpath=", "", linkpath, useBytes = TRUE)
                 if(isUTF8) Encoding(llink) <- "UTF-8"
@@ -313,13 +308,13 @@ untar2 <- function(tarfile, files = NULL, list = FALSE, exdir = ".",
             if(length(size))
                 lsize <- as.integer(sub("[0-9]* size=", "", size))
          } else if(ctype == "g") {
-            warn1 <- c(warn1, "skipping pax global extended headers")
+            warn1 <- c(warn1, gettext("skipping pax global extended headers"))
             readBin(con, "raw", n = 512L*ceiling(size/512L))
-        } else stop("unsupported entry type ", sQuote(ctype))
+        } else stop(gettextf("unsupported entry type %s", sQuote(ctype)))
     }
     if(length(warn1)) {
         warn1 <- unique(warn1)
-        for (w in warn1) warning(w, domain = NA)
+        for (w in warn1) warning(w, domain = "R-utils")
     }
     if(list) contents else invisible(0L)
 }
@@ -360,7 +355,7 @@ tar <- function(tarfile, files = NULL,
                       "xz" =    xzfile(tarfile, "wb", compression = compression_level))
         on.exit(close(con))
     } else if(inherits(tarfile, "connection")) con <- tarfile
-    else stop("'tarfile' must be a character string or a connection")
+    else stop(gettextf("'%s' argument must be a character string or connection", "tarfile"))
 
     ## FIXME: eventually we should use the pax extension, but
     ## that was first supported in R 2.15.3.
@@ -390,7 +385,7 @@ tar <- function(tarfile, files = NULL,
     for (f in unique(files)) {
         info <- file.info(f)
         if(is.na(info$size)) {
-            warning(gettextf("file '%s' not found", f), domain = NA)
+            warning(gettextf("file '%s' was not found", f), domain = "R-utils")
             next
         }
         header <- raw(512L)
@@ -407,8 +402,7 @@ tar <- function(tarfile, files = NULL,
                 s <- max(which(name[1:min(156, m - 1L)] == charToRaw("/")))
                 if(is.infinite(s) || s + 100L < length(name)) OK <- FALSE
             }
-            warning("storing paths of more than 100 bytes is not portable:\n  ",
-                    sQuote(f), domain = NA)
+            warning(gettextf("storing paths of more than 100 bytes is not portable:\n  %s", sQuote(f)), domain = "R-utils")
             if (OK) {
                 prefix <- name[1:(s-1L)]
                 name <- name[-(1:s)]
@@ -416,7 +410,7 @@ tar <- function(tarfile, files = NULL,
             } else {
                 GNUname(name)
                 name <- charToRaw("dummy")
-                warn1 <- c(warn1, "using GNU extension for long pathname")
+                warn1 <- c(warn1, gettext("using GNU extension for long pathname"))
             }
         }
         header[seq_along(name)] <- name
@@ -424,7 +418,7 @@ tar <- function(tarfile, files = NULL,
         ## for use by R CMD build
         if (is.null(extra_flags) && grepl("/(configure|cleanup)$", f) &&
             (mode & "111") != as.octmode("111")) {
-            warning(gettextf("file '%s' did not have execute permissions: corrected", f), domain = NA, call. = FALSE)
+            warning(gettextf("file '%s' did not have execute permissions: corrected", f), domain = "R-utils", call. = FALSE)
             mode <- mode | "111"
         }
         header[101:107] <- charToRaw(sprintf("%07o", mode))
@@ -451,7 +445,7 @@ tar <- function(tarfile, files = NULL,
                 if(nchar(lnk, "b") > 100L) {
                     ##  stop("linked path is too long")
                     GNUname(charToRaw(lnk), TRUE)
-                    warn1 <- c(warn1, "using GNU extension for long linkname")
+                    warn1 <- c(warn1, gettext("using GNU extension for long linkname"))
                     lnk <- "dummy"
                 }
                 header[157L + seq_len(nchar(lnk))] <- charToRaw(lnk)
@@ -492,17 +486,17 @@ tar <- function(tarfile, files = NULL,
     }
     if (invalid_uid)
         warning(gettextf("invalid uid value replaced by that for user 'nobody'", uid),
-                domain = NA, call. = FALSE)
+                domain = "R-utils", call. = FALSE)
     if (invalid_gid)
         warning(gettextf("invalid gid value replaced by that for user 'nobody'", uid),
-                domain = NA, call. = FALSE)
+                domain = "R-utils", call. = FALSE)
     ## trailer is two blocks of nuls.
     block <- raw(512L)
     writeBin(block, con)
     writeBin(block, con)
     if(length(warn1)) {
         warn1 <- unique(warn1)
-        for (w in warn1) warning(w, domain = NA)
+        for (w in warn1) warning(w, domain = "R-utils")
     }
     invisible(0L)
 }

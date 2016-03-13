@@ -39,4 +39,4 @@ Rboolean R_GetX11Image(int d, void *pximage, int *pwidth, int *pheight);
 }
 #endif
 
-#endif
+#endif /* GETX11IMAGE_H_ */

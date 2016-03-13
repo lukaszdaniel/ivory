@@ -26,14 +26,12 @@ setClass <-
 {
     oldDef <- getClassDef(Class, where)
     if(is(oldDef, "classRepresentation") && oldDef@sealed)
-        stop(gettextf("%s has a sealed class definition and cannot be redefined",
-                      dQuote(Class)),
-             domain = NA)
+        stop(gettextf("Class %s has a sealed class definition and cannot be redefined", dQuote(Class)), domain = "R-methods")
     if(!missing(slots)) {
         ## The modern version consistent with reference classes
         ## Arguments slots= and contains= are used, representation must not be
         if(!missing(representation))
-            stop("Argument \"representation\" cannot be used if argument \"slots\" is supplied")
+            stop("Argument 'representation' cannot be used if argument 'slots' is supplied")
         properties <- inferProperties(slots, "slot")
         classDef <- makeClassRepresentation(Class, properties,contains, prototype, package,
                                              validity, access, version, sealed, where = where)
@@ -44,7 +42,7 @@ setClass <-
         classDef <- representation
         if(!(missing(prototype) && missing(contains) && missing(validity) && missing(access)
              && missing(version) && missing(package)))
-            stop("only arguments 'Class' and 'where' can be supplied when argument 'representation' is a 'classRepresentation' object")
+            stop("only arguments 'Class' and 'where' can be supplied when argument 'representation' is a \"classRepresentation\" object")
         if(length(classDef@package) == 0L)
             classDef@package <- package # the default
         superClasses <- allNames(classDef@contains)
@@ -77,7 +75,7 @@ setClass <-
                 if(is.null(classDef))
                   stop(sprintf("internal error: definition of class %s not properly assigned",
                                 dQuote(Class)),
-                       domain = NA)
+                       domain = "R-methods")
             }
           }
         if(length(badContains)) {
@@ -86,22 +84,22 @@ setClass <-
                 stop(gettextf("error in contained classes (%s) for class %s and unable to remove definition from %s",
                               msg, dQuote(Class),
                               sQuote(getPackageName(where))),
-                     domain = NA)
+                     domain = "R-methods")
             if(is.null(oldDef))
                 stop(gettextf("error in contained classes (%s) for class %s; class definition removed from %s",
                               msg, dQuote(Class),
                               sQuote(getPackageName(where))),
-                     domain = NA)
+                     domain = "R-methods")
             else if(is(try(setClass(Class, oldDef, where=where)), "try-error"))
                 stop(gettextf("error in contained classes (%s) for class %s and unable to restore previous definition from %s",
                               msg, dQuote(Class),
                               sQuote(getPackageName(where))),
-                     domain = NA)
+                     domain = "R-methods")
             else
                 stop(gettextf("error in contained classes (%s) for class %s; previous definition restored to %s",
                               msg, dQuote(Class),
                               sQuote(getPackageName(where))),
-                     domain = NA)
+                     domain = "R-methods")
         }
         if(length(attr(classDef@contains, "conflicts")) > 0)
           .reportSuperclassConflicts(Class, classDef@contains, where)
@@ -129,21 +127,20 @@ representation <-
     for(i in seq_along(value)) {
         ei <- el(value, i)
         if(!is.character(ei) || length(ei) != 1L)
-            stop(gettextf("element %d of the representation was not a single character string", i), domain = NA)
+            stop(gettextf("element %d of the representation was not a single character string", i), domain = "R-methods")
     }
     includes <- as.character(value[!nzchar(anames)])
     if(anyDuplicated(includes))
-        stop(gettextf("duplicate class names among superclasses: %s",
-                      paste(.dQ(includes[duplicated(includes)]),
-                            collapse = ", ")),
+        stop(sprintf(gettext("duplicate class names among superclasses: %s", domain = "R-methods"),
+                      paste(.dQ(includes[duplicated(includes)]),  collapse = ", ")),
              domain = NA)
     slots <- anames[nzchar(anames)]
     if(anyDuplicated(slots)) {
         dslots <- slots[duplicated(slots)]
         stop(sprintf(ngettext(length(dslots),
                               "duplicated slot name: %s",
-                              "duplicated slot names: %s"),
-                     paste(sQuote(dslots), collapse="")),
+                              "duplicated slot names: %s", domain = "R-methods"),
+                     paste(sQuote(dslots), collapse = "")),
              domain = NA)
     }
     value
@@ -162,7 +159,7 @@ prototype <- function(...)
     dataPart <- any(data)
     if(dataPart) {
         if(sum(data) > 1)
-            stop("only one data object (unnamed argument to prototype) allowed")
+            stop("only one data object (unnamed argument passed to 'prototype()' function) allowed")
         obj <- unclass(props[[seq_along(data)[data] ]])
         props <- props[!data]
         names <- names[!data]
@@ -270,7 +267,7 @@ getClass <-
             if(!.Force)
                 stop(gettextf("%s is not a defined class",
                               dQuote(Class)),
-                     domain = NA)
+                     domain = "R-methods")
             else
                 value <- makeClassRepresentation(Class, package = "base",
                                                  virtual = TRUE, where = where)
@@ -309,7 +306,7 @@ checkSlotAssignment <- function(obj, name, value)
     if(is.null(slotClass))
         stop(gettextf("%s is not a slot in class %s",
                       sQuote(name), dQuote(cl)),
-             domain = NA)
+             domain = "R-methods")
     valueClass <- class(value)
     if(.identC(slotClass, valueClass))
        return(value)
@@ -320,7 +317,7 @@ checkSlotAssignment <- function(obj, name, value)
     if(identical(ok, FALSE))
        stop(gettextf("assignment of an object of class %s is not valid for slot %s in an object of class %s; is(value, \"%s\") is not TRUE",
 		     dQuote(valueClass), sQuote(name), dQuote(cl), slotClass),
-            domain = NA)
+            domain = "R-methods")
     else if(identical(ok, TRUE))
         value
     else
@@ -335,7 +332,7 @@ checkAtAssignment <- function(cl, name, valueClass)
     if(is.null(slotClass))
         stop(gettextf("%s is not a slot in class %s",
                       sQuote(name), dQuote(cl)),
-             domain = NA)
+             domain = "R-methods")
     if(.identC(slotClass, valueClass))
        return(TRUE)
     ## check the value, but be careful to use the definition of the slot's class from
@@ -345,7 +342,7 @@ checkAtAssignment <- function(cl, name, valueClass)
     if(identical(ok, FALSE))
        stop(gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE",
 		     dQuote(valueClass), sQuote(name), dQuote(cl), slotClass),
-            domain = NA)
+            domain = "R-methods")
     TRUE
 }
 
@@ -385,14 +382,14 @@ removeClass <-  function(Class, where = topenv(parent.frame()),
         if(length(classWhere) == 0L) {
             warning(gettextf("class definition for %s not found (no action taken)",
                              dQuote(Class)),
-                    domain = NA)
+                    domain = "R-methods")
             return(FALSE)
         }
         if(length(classWhere) > 1L)
 	    warning(gettextf(
 		"class %s has multiple definitions visible; only the first removed",
                              dQuote(Class)),
-                    domain = NA)
+                    domain = "R-methods")
         classWhere <- classWhere[[1L]]
     }
     else classWhere <- where
@@ -472,8 +469,8 @@ validObject <- function(object, test = FALSE, complete = FALSE)
         badSlots <- is.na(match(slotNames, attrNames))
 	errors <-
 	    c(errors,
-	      paste("slots in class definition but not in object:",
-		    paste0('"', slotNames[badSlots], '"', collapse = ", ")))
+	      paste(gettext("slots in class definition but not in object:"),
+		    paste0("'", slotNames[badSlots], "'", collapse = ", ")))
         slotTypes <- slotTypes[!badSlots]
         slotNames <- slotNames[!badSlots]
     }
@@ -482,8 +479,7 @@ validObject <- function(object, test = FALSE, complete = FALSE)
 	classDefi <- getClassDef(classi, where = where)
 	if(is.null(classDefi)) {
 	    errors <- c(errors,
-			paste0("undefined class for slot \"", slotNames[[i]],
-			       "\" (\"", classi, "\")"))
+			gettextf("undefined class for slot '%s' (\"%s\")", slotNames[[i]], classi))
 	    next
 	}
         namei <- slotNames[[i]]
@@ -501,18 +497,15 @@ validObject <- function(object, test = FALSE, complete = FALSE)
 	ok <- possibleExtends(class(sloti), classi, ClassDef2 = classDefi)
 	if(identical(ok, FALSE)) {
 	    errors <- c(errors,
-			paste0("invalid object for slot \"", slotNames[[i]],
-			       "\" in class \"", Class,
-			       "\": got class \"", class(sloti),
-			       "\", should be or extend class \"", classi, "\""))
+			gettextf("invalid object for slot '%s' in class \"%s\": got class \"%s\", should be or extend class \"%s\"", slotNames[[i]],
+			       Class, class(sloti), classi))
 	    next
 	}
 	if(!complete)
           next
         errori <- anyStrings(Recall(sloti, TRUE, TRUE))
         if(length(errori)) {
-	    errori <- paste0("In slot \"", slotNames[[i]],
-			     "\" of class \"", class(sloti), "\": ", errori)
+	    errori <- gettextf("In slot '%s' of class \"%s\": %s", slotNames[[i]], class(sloti), errori)
             errors <- c(errors, errori)
         }
     }
@@ -525,8 +518,7 @@ validObject <- function(object, test = FALSE, complete = FALSE)
 	superDef <- getClassDef(superClass, where = where)
 	if(is.null(superDef)) {
 	    errors <- c(errors,
-			paste0("superclass \"", superClass,
-			       "\" not defined in the environment of the object's class"))
+			gettextf("superclass \"%s\" not defined in the environment of the object's class", superClass))
 	    break
 	}
 	validityMethod <- superDef@validity
@@ -544,12 +536,11 @@ validObject <- function(object, test = FALSE, complete = FALSE)
 	if(test)
 	    errors
 	else {
-	    msg <- gettextf("invalid class %s object", dQuote(Class))
 	    if(length(errors) > 1L)
-		stop(paste(paste0(msg, ":"),
+		stop(paste(gettextf("invalid class %s object:", dQuote(Class), domain = "R-methods"), " ", 
                            paste(seq_along(errors), errors, sep=": "),
 			   collapse = "\n"), domain = NA)
-	    else stop(msg, ": ", errors, domain = NA)
+	    else stop(gettextf("invalid class %s object:", dQuote(Class), domain = "R-methods"), " ", errors, domain = NA)
 	}
     }
     else
@@ -601,20 +592,20 @@ resetClass <- function(Class, classDef, where) {
                     warning(gettextf("class %s not found on %s; 'resetClass' will have no effect",
                                      dQuote(Class),
                                      sQuote(getPackageName(where))),
-                            domain = NA)
+                            domain = "R-methods")
                     return(classDef)
                 }
             }
             else if(!is(classDef, "classRepresentation"))
                 stop(gettextf("argument 'classDef' must be a string or a class representation; got an object of class %s",
                               dQuote(class(classDef))),
-                     domain = NA)
+                     domain = "R-methods")
 #            package <- getPackageName(where)
         }
         if(classDef@sealed)
             warning(gettextf("class %s is sealed; 'resetClass' will have no effect",
                              dQuote(Class)),
-                    domain = NA)
+                    domain = "R-methods")
         else {
             classDef <-  .uncompleteClassDefinition(classDef)
             classDef <- completeClassDefinition(Class, classDef, where)
@@ -675,24 +666,23 @@ initialize <- function(.Object, ...) {
                         as(.Object, Classi) <- obj
                     }
                     else
-                        stop(gettextf("cannot use object of class %s in new():  class %s does not extend that class",
+                        stop(gettextf("cannot use object of class %s in new(): class %s does not extend that class",
                                       dQuote(Classi),
                                       dQuote(Class)),
-                             domain = NA)
+                             domain = "R-methods")
                 }
             }
         }
         if(length(elements)) {
             snames <- names(elements)
 	    if(anyDuplicated(snames))
-                stop(gettextf("duplicated slot names: %s",
-                              paste(sQuote(snames[duplicated(snames)]),
-                                    collapse = ", ")), domain = NA)
+                stop(sprintf(ngettext(length(duplicated(snames)), "duplicated slot name: %s", "duplicated slot names: %s", domain = "R-methods"),
+                              paste(sQuote(snames[duplicated(snames)]), collapse = ", ")), domain = NA)
             which  <- match(snames, names(slotDefs))
             if(anyNA(which))
                 stop(sprintf(ngettext(sum(is.na(which)),
                                       "invalid name for slot of class %s: %s",
-                                      "invalid names for slots of class %s: %s"),
+                                      "invalid names for slots of class %s: %s", domain = "R-methods"),
                               dQuote(Class),
                               paste(snames[is.na(which)], collapse=", ")),
                      domain = NA)
@@ -757,12 +747,12 @@ findClass <- function(Class, where = topenv(parent.frame()), unique = "") {
                 stop(gettextf("class %s is defined, with package %s, but no corresponding metadata object was found (not exported?)",
                               dQuote(Class),
                               sQuote(classDef@package)),
-                     domain = NA)
+                     domain = "R-methods")
             else
                 stop(gettextf("no definition of %s to use for %s",
                               dQuote(Class),
                               unique),
-                     domain = NA)
+                     domain = "R-methods")
         }
     }
     else if(length(where) > 1L) {
@@ -777,7 +767,7 @@ findClass <- function(Class, where = topenv(parent.frame()), unique = "") {
                 ## problem: 'unique'x is text passed in, so do not translate
                 warning(sprintf(ngettext(length(pkgs),
                                          "multiple definition of class %s visible (%s); using the definition\n   in package %s for %s",
-                                         "multiple definitions of class %s visible (%s); using the definition\n   in package %s for %s"),
+                                         "multiple definitions of class %s visible (%s); using the definition\n   in package %s for %s", domain = "R-methods"),
                                 dQuote(Class),
                                 paste(sQuote(pkgs), collapse = ", "),
                                 sQuote(pkgs[[1L]]),
@@ -827,18 +817,18 @@ names(.indirectAbnormalClasses) <- .AbnormalTypes
   if(length(type) == 0)
     return(classes)
   if(length(type) > 1)
-    stop(gettextf("class definition cannot extend more than one of these data types: %s",
-		  paste0('"',type, '"', collapse = ", ")),
+    stop(gettext("class definition cannot extend more than one of these data types:", domain = "R-methods"),
+		  paste0(dQuote(type), collapse = ", "),
          domain = NA)
   class <- .indirectAbnormalClasses[type]
   if(is.na(class))
     stop(gettextf("abnormal type %s is not supported as a superclass of a class definition",
                   dQuote(type)),
-         domain = NA)
+         domain = "R-methods")
   ## this message USED TO BE PRINTED: reminds programmers that
   ## they will see an unexpected superclass
   ## message(gettextf('Defining type "%s" as a superclass via class "%s"',
-  ##                 type, class), domain = NA)
+  ##                 type, class), domain = "R-methods")
   c(class, classes[!types])
 }
 
@@ -912,16 +902,16 @@ className <- function(class, package) {
                 package <- classDef@package
             else if(length(classDef) > 1L) {
                 pkgs <- sapply(classDef, function(cl)cl@package)
-                warning(gettextf("multiple class definitions for %s from packages: %s; picking the first",
+                warning(sprintf(gettext("multiple class definitions for class %s from packages: %s; picking the first", domain = "R-methods"),
                                  dQuote(className),
                                  paste(sQuote(pkgs), collapse = ", ")),
                         domain = NA)
                 package <- pkgs[[1L]]
             }
             else
-                stop(gettextf("no package name supplied and no class definition found for %s",
+                stop(gettextf("no package name supplied and no class definition found for class %s",
                               dQuote(className)),
-                     domain = NA)
+                     domain = "R-methods")
         }
     }
     else if(is(class, classDef)) {
@@ -971,13 +961,13 @@ inferProperties <- function(props, what) {
             return(character())
         else if(is.null(propNames))
             stop(gettextf("No %s names supplied", what),
-                 domain = NA, call. = FALSE)
+                 domain = "R-methods", call. = FALSE)
         else if(!all(nzchar(propNames)))
-            stop(gettextf("All %s names must be nonempty in:\n(%s)", what,
+            stop(sprintf(gettext("All %s names must be nonempty in:\n(%s)", domain = "R-methods"), what,
                           paste(sQuote(propNames), collapse = ", ")),
                  domain = NA, call. = FALSE)
         else if(any(duplicated(propNames))) # NB: not translatable because of plurals
-            stop(gettextf("All %s names must be distinct in:\n(%s)", what,
+            stop(sprintf(gettext("All %s names must be distinct in:\n(%s)", domain = "R-methods"), what,
                           paste(sQuote(propNames), collapse = ", ")),
                  domain = NA, call. = FALSE)
         propNames
@@ -1002,7 +992,7 @@ inferProperties <- function(props, what) {
     else
         stop(gettextf("argument %s must be a list or a character vector; got an object of class %s",
                       dQuote(what), dQuote(class(fields))),
-             domain = NA)
+             domain = "R-methods")
     props
 }
 

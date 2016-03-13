@@ -29,7 +29,7 @@ function(file, encoding = "unknown")
         Rd <- file
         description <- attr(attr(Rd, "srcref"), "srcfile")$filename
     } else
-        stop("Rd object required")
+        stop("Rd object is required")
 
     aliases <- .Rd_get_metadata(Rd, "alias")
     concepts <- .Rd_get_metadata(Rd, "concept")
@@ -42,23 +42,19 @@ function(file, encoding = "unknown")
     Rd_name <- .Rd_get_name(Rd)
     if(!length(Rd_name)) {
         msg <-
-            c(gettextf("missing/empty %s field in '%s'",
-                       "\\name",
-                       description),
-              gettextf("Rd files must have a non-empty %s.",
-                       "\\name"),
-              gettext("See chapter 'Writing R documentation' in manual 'Writing R Extensions'."))
-        stop(paste(msg, collapse = "\n"), domain = NA)
+            c(gettextf("missing/empty %s field in '%s'", "\\name", description, domain = "R-tools"),
+              gettextf("Rd files must have a non-empty %s.", "\\name", domain = "R-tools"),
+              gettext("See chapter 'Writing R documentation' in manual 'Writing R Extensions'.", domain = "R-tools"))
+        stop(paste(msg, collapse = "\n"), domain = "R-tools")
     }
 
     Rd_title <- .Rd_get_title(Rd)
     if(!nchar(Rd_title)) {
         msg <-
-            c(gettextf("missing/empty \\title field in '%s'",
-                       description),
-              gettext("Rd files must have a non-empty \\title."),
-              gettext("See chapter 'Writing R documentation' in manual 'Writing R Extensions'."))
-        stop(paste(msg, collapse = "\n"), domain = NA)
+            c(gettextf("missing/empty %s field in '%s'", "\\title", description, domain = "R-tools"),
+              gettextf("Rd files must have a non-empty %s.", "\\title", domain = "R-tools"),
+              gettext("See chapter 'Writing R documentation' in manual 'Writing R Extensions'.", domain = "R-tools"))
+        stop(paste(msg, collapse = "\n"), domain = "R-tools")
     }
 
     list(name = Rd_name, type = Rd_type, title = Rd_title,
@@ -240,7 +236,7 @@ function(RdFiles, outFile = "", type = NULL,
         on.exit(close(outFile))
     }
     if(!inherits(outFile, "connection"))
-        stop("argument 'outFile' must be a character string or connection")
+        stop(gettextf("'%s' argument must be a character string or connection", "outFile"))
 
     db <- .build_Rd_db(files = RdFiles, stages="build")
     index <- .build_Rd_index(Rd_contents(db), type = type)
@@ -264,7 +260,7 @@ function(package, dir, lib.loc = NULL)
     ## Argument handling.
     if(!missing(package)) {
         if(length(package) != 1L)
-            stop("argument 'package' must be of length 1")
+            stop(gettextf("'%s' argument must be of length 1", "package"))
         dir <- find.package(package, lib.loc)
         ## Using package installed in @code{dir} ...
         docs_dir <- file.path(dir, "man")
@@ -322,11 +318,10 @@ function(package, dir, lib.loc = NULL)
     }
     else {
         if(missing(dir))
-            stop("you must specify 'package' or 'dir'")
+            stop("you must specify 'package' or 'dir' argument")
         ## Using sources from directory @code{dir} ...
         if(!dir.exists(dir))
-            stop(gettextf("directory '%s' does not exist", dir),
-                 domain = NA)
+            stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
         else
             dir <- file_path_as_absolute(dir)
         built_file <- file.path(dir, "build", "partial.rdb")
@@ -368,7 +363,7 @@ function(dir = NULL, files = NULL, encoding = "unknown", db_file = NULL,
     } else if(!is.null(files))
         macros <- initialRdMacros()
     else
-        stop("you must specify 'dir' or 'files'")
+        stop("you must specify 'dir' or 'files' argument")
 
     .fetch_Rd_object <- function(f) {
         ## This calls parse_Rd if f is a filename
@@ -768,7 +763,7 @@ function(db)
         else {
             stop(sprintf(ngettext(sum(idx),
                                   "missing/empty \\name field in Rd file\n%s",
-                                  "missing/empty \\name field in Rd files\n%s"),
+                                  "missing/empty \\name field in Rd files\n%s", domain = "R-tools"),
                          paste(" ", Rd_paths[idx], collapse = "\n")),
                  call. = FALSE, domain = NA)
         }
@@ -818,9 +813,7 @@ function(filebase, key = NULL)
 
         if(length(key)) {
             if(! key %in% vars)
-                stop(gettextf("No help on %s found in RdDB %s",
-                              sQuote(key), sQuote(filebase)),
-                     domain = NA)
+                stop(gettextf("No help on %s found in RdDB %s", sQuote(key), sQuote(filebase)), domain = "R-tools")
             fetch(key)
         } else {
             res <- lapply(vars, fetch)
@@ -863,7 +856,7 @@ loadRdMacros <- function(file, macros = TRUE) {
 	)
     }
     if (bad)
-	warning(gettextf("Macro file %s should only contain Rd macro definitions and comments",
+	warning(gettextf("Macro file '%s' should only contain Rd macro definitions and comments",
 	                 file))
     attr(Rd, "macros")
 }
@@ -878,7 +871,7 @@ initialRdMacros <- function(pkglist = NULL,
     	    if (dir.exists(system.file("help/macros", package = p)))
     	    	macros <- loadPkgRdMacros(system.file(package = p), macros)
     	    else
-    	    	warning(gettextf("No Rd macros in package '%s'.", p), call. = FALSE)
+    	    	warning(gettextf("No Rd macros in package %s", sQuote(p)), call. = FALSE)
         }
     } else if (is.character(macros))
     	macros <- loadRdMacros(file = macros)

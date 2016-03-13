@@ -464,6 +464,7 @@ DEFAULT_MMAP_THRESHOLD       default: 256K
 
 */
 
+#include <localization.h>
 #ifndef WIN32
 #ifdef _WIN32
 #define WIN32 1
@@ -1353,7 +1354,7 @@ static void* win32mmap(size_t size) {
   /* printf("current %0.1f, asking %0.1f\n", R_used/1048576., size/1048576.);*/
   if (R_used + size > R_max_memory) {
       if(R_Is_Running) 
-	  Rf_warning("Reached total allocation of %dMb: see help(memory.size)",
+	  Rf_warning(_("Reached total allocation of %dMb: see help(memory.size)"),
 		     R_max_memory/1048576);
       return MFAIL;
   }
@@ -1368,7 +1369,7 @@ static void* win32direct_mmap(size_t size) {
   /* printf("current %0.1f, asking %0.1f\n", R_used/1048576., size/1048576.);*/
   if (R_used + size > R_max_memory) {
       if(R_Is_Running) 
-	  Rf_warning("Reached total allocation of %dMb: see help(memory.size)",
+	  Rf_warning(_("Reached total allocation of %dMb: see help(memory.size)"),
 		     R_max_memory/1048576);
       return MFAIL;
   }

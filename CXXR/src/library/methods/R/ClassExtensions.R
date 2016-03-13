@@ -84,7 +84,7 @@ S3Part <- function(object, strictS3 = FALSE, S3Class) {
      }
     else {
         if(all(is.na(match(extends(classDef), .BasicClasses))))
-          stop(gettextf("S3Part() is only defined for classes set up by setOldCLass(), basic classes or subclasses of these:  not true of class %s", dQuote(class(object))), domain = NA)
+          stop(gettextf("'S3Part()' method is only defined for classes set up by 'setOldCLass()' method, basic classes or subclasses of these: not true of class %s", dQuote(class(object))), domain = "R-methods")
         if(missing(S3Class)) {
             S3Class <- classDef@slots$.Data
             if(is.null(S3Class)) # is this an error?
@@ -95,7 +95,7 @@ S3Part <- function(object, strictS3 = FALSE, S3Class) {
           keepSlots <- slotNames(S3Class[[1L]])
     }
     if(!(defltS3Class || extends(classDef, S3Class)))
-      stop(gettextf("the 'S3Class' argument must be a superclass of %s:  not true of class %s", dQuote(class(object)), dQuote(S3Class)), domain = NA)
+      stop(gettextf("the 'S3Class' argument must be a superclass of %s: not true of class %s", dQuote(class(object)), dQuote(S3Class)), domain = "R-methods")
     if(strictS3)
       keepSlots <- keepSlots[is.na(match(keepSlots, ".S3Class"))]
     deleteSlots = slotNames(classDef)
@@ -115,7 +115,7 @@ S3Part <- function(object, strictS3 = FALSE, S3Class) {
     S3Class <- .S3Class(value)
     def <- getClassDef(S3Class[[1L]])
     if(is.null(def) || !extends(def, needClass[[1L]]))
-      stop(gettextf("replacement value must extend class %s, got %s", dQuote(needClass), dQuote(S3Class[[1L]])), domain = NA)
+      stop(gettextf("replacement value must extend class %s, got %s", dQuote(needClass), dQuote(S3Class[[1L]])), domain = "R-methods")
     slots <- slotNames(class(object))
     if(!strictS3) {
         fromValue <- names(attributes(value))
@@ -157,7 +157,7 @@ S3Part <- function(object, strictS3 = FALSE, S3Class) {
 
 .ErrorReplace <- function(from, to, value)
     stop(gettextf("no 'replace' method was defined for 'as(x, \"%s\") <- value' for class %s",
-                  to, dQuote(class(from))), domain = NA)
+                  to, dQuote(class(from))), domain = "R-methods")
 
 .objectSlotNames <- function(object) {
     ## a quick version that makes no attempt to check the class definition
@@ -223,7 +223,7 @@ makeExtends <- function(Class, to,
 
     }
     else stop(gettextf("the 'coerce' argument to 'setIs' should be a function of one argument, got an object of class %s",
-                       dQuote(class(coerce))), domain = NA)
+                       dQuote(class(coerce))), domain = "R-methods")
     if(is.null(test)) {
         test <- .simpleExtTest
         extClass <- "SClassExtension"
@@ -265,7 +265,7 @@ makeExtends <- function(Class, to,
                     substitute({
                         if(!is(value, TO))
                             stop(gettextf("the computation: 'as(object,\"%s\") <- value' is valid when object has class %s only if 'is(value, \"%s\")' is TRUE ('class(value)' was %s)\n",
-                                 TO, dQuote(FROM), TO, dQuote(class(value))), domain = NA)
+                                 TO, dQuote(FROM), TO, dQuote(class(value))), domain = "R-methods")
                         value
                     }, list(FROM = Class, TO = to))
             }
@@ -299,7 +299,7 @@ makeExtends <- function(Class, to,
             replace <- .ErrorReplace
         if(identical(replace, .ErrorReplace))
             warning(gettextf("there is no automatic definition for 'as(object, \"%s\") <- value' when object has class %s and no 'replace' argument was supplied; replacement will be an error",
-                             to, dQuote(Class)), domain = NA)
+                             to, dQuote(Class)), domain = "R-methods")
     }
     else if(is(replace, "function")) {
         ## turn function of two or three arguments into correct 3-arg form
@@ -314,7 +314,7 @@ makeExtends <- function(Class, to,
     }
     else
         stop(gettextf("the 'replace' argument to setIs() should be a function of 2 or 3 arguments, got an object of class %s",
-                      dQuote(class(replace))), domain = NA)
+                      dQuote(class(replace))), domain = "R-methods")
 
     new(extClass, subClass = Class, superClass = to, package = package,
 	coerce = coerce, test = test, replace = replace, simple = simple,

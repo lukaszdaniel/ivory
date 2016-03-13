@@ -152,13 +152,13 @@ rbinom <- function(n, size, prob) .Call(C_rbinom, n, size, prob)
 dmultinom <- function(x, size = NULL, prob, log = FALSE)
 {
     K <- length(prob)
-    if(length(x) != K) stop("x[] and prob[] must be equal length vectors.")
+    if(length(x) != K) stop("'x' and 'prob' arguments must be equal length vectors")
     if(any(!is.finite(prob)) || any(prob < 0) || (s <- sum(prob)) == 0)
 	stop("probabilities must be finite, non-negative and not all 0")
     prob <- prob / s
 
     x <- as.integer(x + 0.5)
-    if(any(x < 0)) stop("'x' must be non-negative")
+    if(any(x < 0)) stop("'x' argument must be non-negative")
     N <- sum(x)
     if(is.null(size)) size <- N
     else if (size != N) stop("size != sum(x), i.e. one is wrong")
@@ -232,7 +232,7 @@ rhyper <- function(nn, m, n, k) .Call(C_rhyper, nn, m, n, k)
 dnbinom <- function(x, size, prob, mu, log = FALSE)
 {
     if (!missing(mu)) {
-	if (!missing(prob)) stop("'prob' and 'mu' both specified")
+	if (!missing(prob)) stop("'prob' and 'mu' arguments are both specified")
 	.Call(C_dnbinom_mu, x, size, mu, log)
     }
     else
@@ -241,7 +241,7 @@ dnbinom <- function(x, size, prob, mu, log = FALSE)
 pnbinom <- function(q, size, prob, mu, lower.tail = TRUE, log.p = FALSE)
 {
     if (!missing(mu)) {
-	if (!missing(prob)) stop("'prob' and 'mu' both specified")
+	if (!missing(prob)) stop("'prob' and 'mu' arguments are both specified")
 	.Call(C_pnbinom_mu, q, size, mu, lower.tail, log.p)
     }
     else
@@ -250,7 +250,7 @@ pnbinom <- function(q, size, prob, mu, lower.tail = TRUE, log.p = FALSE)
 qnbinom <- function(p, size, prob, mu, lower.tail = TRUE, log.p = FALSE)
 {
     if (!missing(mu)) {
-	if (!missing(prob)) stop("'prob' and 'mu' both specified")
+	if (!missing(prob)) stop("'prob' and 'mu' arguments are both specified")
 ### FIXME: implement qnbinom_mu(...) properly
 	prob <- size/(size + mu)
     }
@@ -259,7 +259,7 @@ qnbinom <- function(p, size, prob, mu, lower.tail = TRUE, log.p = FALSE)
 rnbinom <- function(n, size, prob, mu)
 {
     if (!missing(mu)) {
-        if (!missing(prob)) stop("'prob' and 'mu' both specified")
+        if (!missing(prob)) stop("'prob' and 'mu' arguments are both specified")
         .Call(C_rnbinom_mu, n, size, mu)
     } else .Call(C_rnbinom, n, size, prob)
 }

@@ -44,13 +44,11 @@
 #include <R_ext/Linpack.h>
 #include <R_ext/Applic.h>
 #include <R_ext/Print.h> /* Rprintf */
+#include <R_ext/Minmax.h>
+#include <localization.h>
 
 #define FALSE_ 0
 #define TRUE_ 1
-#ifndef max
-# define max(a, b) (a < b)?(b):(a)
-# define min(a, b) (a > b)?(b):(a)
-#endif
 
 /* Constants -- needed only as pointer arguments to the BLAS routines
  * --------- Declaring them "const" would give compiler warnings
@@ -687,9 +685,12 @@ L222:
 	    sbgnrm, &info, &epsmch);
     if (info != 0) {
 /*	   singular triangular system detected; refresh the lbfgs memory. */
-	if (iprint >= 1)
-	    Rprintf("%s\n%s\n", "Singular triangular system detected;",
-		    "   refresh the lbfgs memory and restart the iteration.");
+	if (iprint >= 1) {
+	    Rprintf(_("Singular triangular system detected."));
+		Rprintf("\n");
+	    Rprintf(_("Refresh the lbfgs memory and restart the iteration."));
+		Rprintf("\n");
+	}
 	info = 0;
 	col = 0;
 	head = 1;
@@ -727,10 +728,12 @@ L333:
     if (info != 0) {
 /*	    nonpositive definiteness in Cholesky factorization; */
 /*	    refresh the lbfgs memory and restart the iteration. */
-	if (iprint >= 0)
-	    Rprintf("%s\n%s\n",
-		    "Nonpositive definiteness in Cholesky factorization in formk;",
-		    "   refresh the lbfgs memory and restart the iteration.");
+	if (iprint >= 0) {
+	    Rprintf(_("Nonpositive definiteness in Cholesky factorization in formk."));
+		Rprintf("\n");
+	    Rprintf(_("Refresh the lbfgs memory and restart the iteration."));
+		Rprintf("\n");
+	}
 	info = 0;
 	col = 0;
 	head = 1;
@@ -754,9 +757,12 @@ L444:
     if (info != 0) {
 /*	    singular triangular system detected; */
 /*	    refresh the lbfgs memory and restart the iteration. */
-	if (iprint >= 1)
-	    Rprintf("%s\n%s\n", "Singular triangular system detected;",
-		    "   refresh the lbfgs memory and restart the iteration.");
+	if (iprint >= 1) {
+	    Rprintf(_("Singular triangular system detected."));
+		Rprintf("\n");
+	    Rprintf(_("Refresh the lbfgs memory and restart the iteration."));
+		Rprintf("\n");
+	}
 	info = 0;
 	col = 0;
 	head = 1;
@@ -798,9 +804,12 @@ L666:
 	    goto L999;
 	} else {
 /*	       refresh the lbfgs memory and restart the iteration. */
-	    if (iprint >= 1)
-		Rprintf("%s\n%s\n", "Bad direction in the line search;",
-		    "   refresh the lbfgs memory and restart the iteration.");
+	    if (iprint >= 1) {
+		Rprintf(_("Bad direction in the line search."));
+		Rprintf("\n");
+	        Rprintf(_("Refresh the lbfgs memory and restart the iteration."));
+		Rprintf("\n");
+	    }
 	    if (info == 0)
 		--nfgv;
 	    info = 0;
@@ -882,10 +891,12 @@ L777:
     if (info != 0) {
 /*	    nonpositive definiteness in Cholesky factorization; */
 /*	    refresh the lbfgs memory and restart the iteration. */
-	if (iprint >= 0)
-	    Rprintf("%s\n%s\n",
-		    "Nonpositive definiteness in Cholesky factorization in formk;",
-		    "   refresh the lbfgs memory and restart the iteration.");
+	if (iprint >= 0) {
+	    Rprintf(_("Nonpositive definiteness in Cholesky factorization in formk."));
+		Rprintf("\n");
+	    Rprintf(_("Refresh the lbfgs memory and restart the iteration."));
+		Rprintf("\n");
+	}
 	info = 0;
 	col = 0;
 	head = 1;
@@ -1013,12 +1024,16 @@ static void active(int n, double *l, double *u,
 	}
     }
     if (iprint >= 0) {
-	if (*prjctd)
-	    Rprintf("The initial X is infeasible.  Restart with its projection.\n");
-	if (!*cnstnd) Rprintf("This problem is unconstrained.\n");
+	if (*prjctd) {
+	    Rprintf(_("The initial X is infeasible. Restart with its projection."));
+		Rprintf("\n");
+	}
+	if (!*cnstnd) { Rprintf(_("This problem is unconstrained.")); Rprintf("\n"); }
     }
-    if (iprint > 0)
-	Rprintf("At X0, %d variables are exactly at the bounds\n", nbdd);
+    if (iprint > 0) {
+	Rprintf(n_("At X0, %d variable is exactly at the bounds", "At X0, %d variables are exactly at the bounds", nbdd), nbdd);
+		Rprintf("\n");
+	}
 
     return;
 } /* active */
@@ -1383,9 +1398,11 @@ static void cauchy(int n, double *x, double *l, double *u, int *nbd,
     bkmin = 0.;
     col2 = *col << 1;
     f1 = 0.;
-    if (iprint >= 99)
-	Rprintf("\n---------------- CAUCHY entered-------------------\n\n");
-
+    if (iprint >= 99) {
+	Rprintf("\n---------------- ");
+	Rprintf(_("CAUCHY entered"));
+	Rprintf("-------------------\n\n");
+    }
 /*     We set p to zero and build it up as we determine d. */
     for (int i = 1; i <= col2; ++i)
 	p[i] = 0.;
@@ -1500,7 +1517,10 @@ static void cauchy(int n, double *x, double *l, double *u, int *nbd,
     dtm = -f1 / f2;
     tsum = 0.;
     *nint = 1;
-    if (iprint >= 99) Rprintf("There are %d  breakpoints\n", nbreak);
+    if (iprint >= 99) {
+		Rprintf(n_("There is %d breakpoint", "There are %d breakpoints", nbreak), nbreak);
+		Rprintf("\n");
+	}
 
 /*     If there are no breakpoints, locate the GCP and return. */
     if (nbreak == 0) {
@@ -1538,10 +1558,13 @@ L777:
     dt = tj - tj0;
 
     if (dt != 0 && iprint >=  100) {
-	Rprintf("\nPiece    %3i f1, f2 at start point %11.4e %11.4e\n",
-		*nint, f1, f2);
-	Rprintf("Distance to the next break point =  %11.4e\n", dt);
-	Rprintf("Distance to the stationary point =  %11.4e\n", dtm);
+	Rprintf("\n");
+	Rprintf(_("Piece %3i f1, f2 at start point %11.4e %11.4e"), *nint, f1, f2);
+	Rprintf("\n");
+	Rprintf(_("Distance to the next break point = %11.4e"), dt);
+	Rprintf("\n");
+	Rprintf(_("Distance to the stationary point = %11.4e"), dtm);
+	Rprintf("\n");
     }
 
 /*     If a minimizer is within this interval, */
@@ -1565,7 +1588,7 @@ L777:
 	xcp[ibp] = l[ibp];
 	iwhere[ibp] = 1;
     }
-    if (iprint >= 100) Rprintf("Variable  %d  is fixed.\n", ibp);
+    if (iprint >= 100) { Rprintf(_("Variable %d is fixed."), ibp); Rprintf("\n"); }
     if (nleft == 0 && nbreak == n) {
 /*					       all n variables are fixed, */
 /*						  return with xcp as GCP. */
@@ -1620,10 +1643,13 @@ L777:
 /* ------------------- the end of the loop ------------------------------- */
 L888:
     if (iprint >= 99) {
-	Rprintf("\nGCP found in this segment\n");
-	Rprintf("Piece    %3i f1, f2 at start point %11.4e %11.4e\n",
-		*nint,f1,f2);
-	Rprintf("Distance to the stationary point =  %11.4e\n", dtm);
+	Rprintf("\n");
+	Rprintf(_("GCP found in this segment"));
+	Rprintf("\n");
+	Rprintf(_("Piece %3i f1, f2 at start point %11.4e %11.4e"), *nint,f1,f2);
+	Rprintf("\n");
+	Rprintf(_("Distance to the stationary point = %11.4e"), dtm);
+	Rprintf("\n");
     }
 
     if (dtm <= 0.) {
@@ -1645,8 +1671,11 @@ L999:
 	Rprintf("\n");
     }
 
-    if (iprint >= 99)
-	Rprintf("\n---------------- exit CAUCHY----------------------\n\n");
+    if (iprint >= 99) {
+	Rprintf("\n---------------- ");
+	Rprintf(_("exit CAUCHY"));
+	Rprintf("----------------------\n\n");
+    }
     return;
 } /* cauchy */
 /* ====================== The end of cauchy ============================== */
@@ -2276,9 +2305,10 @@ static void freev(int n, int *nfree, int *indx,
 	    if (iwhere[k] > 0) {
 		--(*ileave);
 		indx2[*ileave] = k;
-		if (iprint >= 100)
-		    Rprintf("Variable %d leaves the set of free variables\n",
-			    k);
+		if (iprint >= 100) {
+		    Rprintf(_("Variable %d leaves the set of free variables"), k);
+			Rprintf("\n");
+		}
 	    }
 	}
 	for (int i = *nfree + 1; i <= n; ++i) {
@@ -2286,13 +2316,17 @@ static void freev(int n, int *nfree, int *indx,
 	    if (iwhere[k] <= 0) {
 		++(*nenter);
 		indx2[*nenter] = k;
-		if (iprint >= 100)
-		    Rprintf("Variable %d enters the set of free variables\n",
-			    k);
+		if (iprint >= 100) {
+		    Rprintf(_("Variable %d enters the set of free variables"), k);
+			Rprintf("\n");
+		}
 	    }
-	 if (iprint >= 100)
-	     Rprintf("%d variables leave; %d variables enter\n",
-		     n + 1 - *ileave, *nenter);
+	 if (iprint >= 100) {
+	     Rprintf(n_("%d variable leave", "%d variables leave", n + 1 - *ileave), n + 1 - *ileave);
+	     Rprintf("; ");
+	     Rprintf(n_("%d variable enter", "%d variables enter", *nenter), *nenter);
+		 Rprintf("\n");
+	 }
 	}
     }
     *wrk = *ileave < n + 1 || *nenter > 0 || *updatd;
@@ -2308,9 +2342,10 @@ static void freev(int n, int *nfree, int *indx,
 	    indx[iact] = i;
 	}
     }
-    if (iprint >= 99)
-	Rprintf("%d  variables are free at GCP on iteration %d\n",
-		*nfree, *iter + 1);
+    if (iprint >= 99) {
+	Rprintf(n_("%d variable is free at GCP on iteration %d", "%d variables are free at GCP on iteration %d", *nfree), *nfree, *iter + 1);
+	Rprintf("\n");
+	}
     return;
 } /* freev */
 /* ======================= The end of freev ============================== */
@@ -3553,22 +3588,24 @@ static void prn3lb(int n, double *x, double *f, char *task, int iprint,
 {
     if(strncmp(task, "CONV", 4) == 0) {
 	if (iprint >= 0) {
-	    Rprintf("\niterations %d\nfunction evaluations %d\nsegments explored during Cauchy searches %d\nBFGS updates skipped %d\nactive bounds at final generalized Cauchy point %d\nnorm of the final projected gradient %g\nfinal function value %g\n\n", iter, nfgv, nintol, nskip, nact, sbgnrm, *f);
+	    Rprintf("\n");
+	    Rprintf(_("iterations %d\nfunction evaluations %d\nsegments explored during Cauchy searches %d\nBFGS updates skipped %d\nactive bounds at final generalized Cauchy point %d\nnorm of the final projected gradient %g\nfinal function value %g"), iter, nfgv, nintol, nskip, nact, sbgnrm, *f);
+	    Rprintf("\n\n");
 	}
 	if (iprint >= 100) pvector("X =", x, n);
 	if (iprint >= 1) Rprintf("F = %g\n", *f);
     }
     if (iprint >= 0) {
 	switch(info) {
-	case -1: Rprintf("Matrix in 1st Cholesky factorization in formk is not Pos. Def."); break;
-	case -2: Rprintf("Matrix in 2st Cholesky factorization in formk is not Pos. Def."); break;
-	case -3: Rprintf("Matrix in the Cholesky factorization in formt is not Pos. Def."); break;
-	case -4: Rprintf("Derivative >= 0, backtracking line search impossible."); break;
-	case -5: Rprintf("l(%d) > u(%d).  No feasible solution", k, k); break;
-	case -6: Rprintf("Input nbd(%d) is invalid", k); break;
-	case -7: Rprintf("Warning:  more than 10 function and gradient evaluations\n   in the last line search\n"); break;
-	case -8: Rprintf("The triangular system is singular."); break;
-	case -9: Rprintf("%s\n%s\n", "Line search cannot locate an adequate point after 20 function", "and gradient evaluations"); break;
+	case -1: Rprintf(_("Matrix in 1st Cholesky factorization in formk is not Pos. Def.")); break;
+	case -2: Rprintf(_("Matrix in 2nd Cholesky factorization in formk is not Pos. Def.")); break;
+	case -3: Rprintf(_("Matrix in the Cholesky factorization in formt is not Pos. Def.")); break;
+	case -4: Rprintf(_("Derivative >= 0, backtracking line search impossible.")); break;
+	case -5: Rprintf(_("l(%d) > u(%d). No feasible solution"), k, k); break;
+	case -6: Rprintf(_("Input nbd(%d) is invalid"), k); break;
+	case -7: Rprintf(_("Warning: more than 10 function and gradient evaluations in the last line search")); break;
+	case -8: Rprintf(_("The triangular system is singular.")); break;
+	case -9: Rprintf(_("Line search cannot locate an adequate point after 20 function and gradient evaluations")); break;
 	default: break;
 	}
     }

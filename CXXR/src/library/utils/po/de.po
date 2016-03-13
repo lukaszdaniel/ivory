@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-27 18:06+0100\n"
+"POT-Creation-Date: 2016-03-13 10:24+0100\n"
 "PO-Revision-Date: 2014-03-16 16:24+0100\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -17,95 +17,91 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
 
-#: io.c:321 io.c:325 io.c:335 io.c:566 io.c:766 io.c:819 io.c:831 io.c:835
-#: io.c:841 io.c:842 io.c:1065 io.c:1066 io.c:1068 io.c:1069 io.c:1070
-#: io.c:1071 io.c:1072 io.c:1073 stubs.c:39 stubs.c:59 windows/dialogs.c:169
-#: windows/dialogs.c:194 windows/dialogs.c:197 windows/dialogs.c:241
-#: windows/dialogs.c:278 windows/dialogs.c:289 windows/dialogs.c:313
-#: windows/dialogs.c:321 windows/util.c:117 windows/widgets.c:78
-#: windows/widgets.c:81 windows/widgets.c:86
+#: io.cpp:324 io.cpp:328 io.cpp:338 io.cpp:569 io.cpp:766 io.cpp:820
+#: io.cpp:832 io.cpp:836 io.cpp:842 io.cpp:843 io.cpp:1065 io.cpp:1066
+#: io.cpp:1068 io.cpp:1069 io.cpp:1070 io.cpp:1071 io.cpp:1072 io.cpp:1073
+#: stubs.c:39 stubs.c:59 windows/dialogs.c:169 windows/dialogs.c:194
+#: windows/dialogs.c:197 windows/dialogs.c:241 windows/dialogs.c:278
+#: windows/dialogs.c:289 windows/dialogs.c:313 windows/dialogs.c:321
+#: windows/util.c:117 windows/widgets.c:78 windows/widgets.c:81
+#: windows/widgets.c:86
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "ungültiges '%s' Argument"
 
-#: io.c:344 io.c:828
+#: io.cpp:347 io.cpp:829
 msgid "invalid quote symbol set"
 msgstr "ungültiges Symbol für Quotatinen gesetzt"
 
-#: io.c:356 io.c:851 io.c:1053
+#: io.cpp:359 io.cpp:852 io.cpp:1053
 msgid "cannot open the connection"
 msgstr "kann die Verbindung nicht öffnen"
 
-#: io.c:359 io.c:363
+#: io.cpp:362 io.cpp:366
 msgid "cannot read from this connection"
 msgstr "kann aus dieser Verbindung nicht lesen"
 
-#: io.c:410 io.c:428
+#: io.cpp:413 io.cpp:431
 #, c-format
 msgid "quoted string on line %d terminated by EOF"
 msgstr "quotierte Zeichenkette in Zeile %d mit EOF beendet"
 
-#: io.c:562
+#: io.cpp:565
 msgid "the first argument must be of mode character"
 msgstr "das erste Argument muss vom Mode character sein"
 
-#: io.c:592
+#: io.cpp:595
 #, c-format
 msgid "invalid 'numerals' string: \"%s\""
 msgstr ""
 
-#: io.c:768
+#: io.cpp:768
 #, c-format
 msgid "Selection: "
 msgstr "Auswahl: "
 
-#: io.c:860 io.c:874
+#: io.cpp:861 io.cpp:875
 msgid "cannot allocate buffer in 'readTableHead'"
 msgstr "kann Buffer in 'readTableHead' nicht allokieren"
 
-#: io.c:885
+#: io.cpp:886
 msgid "\\ followed by EOF"
 msgstr "\\\\ gefolgt von EOF"
 
-#: io.c:920
-#, c-format
-msgid "line %d appears to contain embedded nulls"
-msgstr ""
-
-#: io.c:934 io.c:937
+#: io.cpp:935 io.cpp:938
 #, c-format
 msgid "incomplete final line found by readTableHeader on '%s'"
 msgstr "unvollstädige letzte Zeile von readTableHeader in '%s' gefunden"
 
-#: io.c:994
+#: io.cpp:995
 msgid "index out of range"
 msgstr "Index außerhalb der Grenzen"
 
-#: io.c:1046
+#: io.cpp:1046
 #, fuzzy
-msgid "'file' argument is not a connection"
+msgid "'file' is not a connection"
 msgstr "'file' ist keine Verbindung"
 
-#: io.c:1049
+#: io.cpp:1049
 msgid "cannot write to this connection"
 msgstr "kann in diese Verbindung nicht schreiben"
 
-#: io.c:1079
+#: io.cpp:1079
 #, fuzzy
-msgid "'dec' argument must be a single character"
+msgid "'dec' must be a single character"
 msgstr "'dec' muss ein einzelnes Zeichen sein"
 
-#: io.c:1105
+#: io.cpp:1101
 #, c-format
 msgid "corrupt data frame -- length of column %d does not not match nrows"
 msgstr "korrupter Datafram -- Länge der Spalte %d entspricht nicht nrows"
 
-#: io.c:1136
+#: io.cpp:1131
 #, c-format
 msgid "column %s claims to be a factor but does not have numeric codes"
 msgstr "Spalte %s behauptet Faktor zu sein, hat aber keine numerischen Kodes"
 
-#: io.c:1154
+#: io.cpp:1149
 msgid "corrupt matrix -- dims not not match length"
 msgstr "korrupte Matrix -- Dimensionen entsprechen nicht der Länge"
 

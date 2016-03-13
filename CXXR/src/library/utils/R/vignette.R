@@ -37,10 +37,8 @@ vignette <-
                     ## Should really offer a menu to select from.
                     pos <- pos[1L]
                     warning(gettextf("vignette %s found more than once,\nusing the one found in %s",
-                                     sQuote(topic),
-                                     sQuote(file.path(vinfo[pos, "Dir"],
-                                                      "doc"))),
-                            call. = FALSE, domain = NA)
+                                     sQuote(topic), sQuote(file.path(vinfo[pos, "Dir"], "doc"))),
+                            call. = FALSE, domain = "R-utils")
                     ## </FIXME>
                 }
                 z <- as.list(vinfo[pos, ])
@@ -51,8 +49,7 @@ vignette <-
             return(z)
         }
         else
-            warning(gettextf("vignette %s not found", sQuote(topic)),
-                    call. = FALSE, domain = NA)
+            warning(gettextf("vignette %s not found", sQuote(topic)), call. = FALSE, domain = "R-utils")
     }
 
     if(missing(topic)) {
@@ -75,10 +72,7 @@ vignette <-
                     Item = vinfo[, "Topic"],
                     Title = title)
 	footer <- if (all) NULL else
-		  paste0("Use ",
-                         sQuote("vignette(all = TRUE)"),
-                         "\n",
-                         "to list the vignettes in all *available* packages.")
+		  gettextf("Use %s to list the vignettes in all *available* packages.", sQuote("vignette(all = TRUE)"))
 
         y <- list(type = "vignette", title = "Vignettes", header = NULL,
                   results = db, footer = footer)
@@ -110,9 +104,7 @@ function(x, ...)
         } else
             browseURL(out)
     } else {
-        warning(gettextf("vignette %s has no PDF/HTML",
-                         sQuote(x$Topic)),
-                call. = FALSE, domain = NA)
+        warning(gettextf("vignette %s has no PDF/HTML", sQuote(x$Topic)), call. = FALSE, domain = "R-utils")
     }
     invisible(x)
 }
@@ -129,7 +121,7 @@ getSource.vignette <- function(x, strict=TRUE, ...) {
         ## but why should this not have been done at install time?
         (if(strict) stop else warning)(
             gettextf("vignette %s has no R code", sQuote(x$Topic)),
-            call. = FALSE, domain = NA)
+            call. = FALSE, domain = "R-utils")
     }
 }
 

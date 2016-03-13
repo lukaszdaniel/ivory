@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-03-03 21:07\n"
+"POT-Creation-Date: 2016-03-13 10:24\n"
 "PO-Revision-Date: 2012-03-09 06:16+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -73,7 +73,7 @@ msgstr "%s 는 도움말 파일이 있지만 예제는 없습니다 "
 msgid "%s has to be one of %s"
 msgstr "%s 은 %s 중에 하나이어야 합니다 "
 
-#. R/findLineNum.R: gettextf(" %s in %s", x[[i]]$name, format(x[[i]]$env))
+#. R/findLineNum.R: gettextf(" %s in %s", (x[[i]])$name, format((x[[i]])$env))
 #: R/findLineNum.R:0
 #, fuzzy
 msgid "%s in %s"
@@ -113,19 +113,19 @@ msgstr "옵션은 반드시 길이가 1인 문자벡터이거나 NULL 이어야 
 msgid "%s should be one of %s"
 msgstr "%s 은 %s 중 하나이어야 합니다"
 
-#. R/findLineNum.R: gettextf(" %s signature %s in %s", x[[i]]$name, paste(x[[i]]$signature, collapse = ","),     format(x[[i]]$env))
+#. R/findLineNum.R: gettextf(" %s signature %s in %s", (x[[i]])$name, paste((x[[i]])$signature, collapse = ","),     format((x[[i]])$env))
 #: R/findLineNum.R:0
 #, fuzzy
 msgid "%s signature %s in %s"
 msgstr "패키지 %s 를 찾을 수 없습니다 "
 
-#. R/findLineNum.R: gettextf(" %s step %s in %s", x[[i]]$name, paste(x[[i]]$at, collapse = ","), format(x[[i]]$env))
+#. R/findLineNum.R: gettextf(" %s step %s in %s", (x[[i]])$name, paste((x[[i]])$at, collapse = ","),     format((x[[i]])$env))
 #: R/findLineNum.R:0
 #, fuzzy
 msgid "%s step %s in %s"
 msgstr "패키지 %s 를 찾을 수 없습니다 "
 
-#. R/findLineNum.R: gettextf(" %s step %s signature %s in %s", x[[i]]$name, paste(x[[i]]$at, collapse = ","),     paste(x[[i]]$signature, collapse = ","), format(x[[i]]$env))
+#. R/findLineNum.R: gettextf(" %s step %s signature %s in %s", (x[[i]])$name, paste((x[[i]])$at, collapse = ","),     paste((x[[i]])$signature, collapse = ","), format((x[[i]])$env))
 #: R/findLineNum.R:0
 #, fuzzy
 msgid "%s step %s signature %s in %s"

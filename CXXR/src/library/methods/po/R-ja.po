@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-23 20:39\n"
+"POT-Creation-Date: 2016-03-13 10:23\n"
 "PO-Revision-Date: 2012-02-26 14:07+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -1902,11 +1902,6 @@ msgid ""
 msgstr ""
 " 総称に対するメソッドテーブルのようには見えません　トレース環境中の \"%s\" "
 
-#. R/zzz.R: gettext(" done", domain = "R-methods")
-#: R/zzz.R:0
-msgid "done"
-msgstr ""
-
 #. R/SClasses.R: gettext("duplicate class names among superclasses: %s", domain = "R-methods")
 #: R/SClasses.R:0
 msgid "duplicate class names among superclasses: %s"
@@ -2250,11 +2245,6 @@ msgid ""
 msgstr ""
 " \"%s\" に対する不整合な旧式のクラス情報；クラスは定義されていますが \"%s\" "
 "を拡張しておらず、データ部分として無効です "
-
-#. R/zzz.R: gettext("initializing class and method definitions ...", domain = "R-methods")
-#: R/zzz.R:0
-msgid "initializing class and method definitions ..."
-msgstr ""
 
 #. R/RClassUtils.R: gettextf("initializing objects from class %s with these arguments is not supported",     dQuote(Class))
 #: R/RClassUtils.R:0
@@ -3535,11 +3525,11 @@ msgstr ""
 " %s 中の形式的引数を変更しようとしましたが、既存の引数の数は新しい引数の数未"
 "満です： (%s) 対 (%s) "
 
-#. R/methodsTable.R: gettext("trying to check signature length of generic %s, but it is not a generic function: i = %d, funs = %s, gnames = %s",     domain = "R-methods")
+#. R/methodsTable.R: gettextf("trying to check signature length of generic '%s', but it is not a generic function: i = %d, funs = %s, gnames = %s",     what, i, paste(unlist(funs), collapse = ", "), paste(as.character(gnames), collapse = ", "))
 #: R/methodsTable.R:0
 #, fuzzy
 msgid ""
-"trying to check signature length of generic %s, but it is not a generic "
+"trying to check signature length of generic '%s', but it is not a generic "
 "function: i = %d, funs = %s, gnames = %s"
 msgstr ""
 " メソッドシグナチャを総称的関数でない(クラス %s の)オブジェクトにマッチしよう"

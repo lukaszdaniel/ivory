@@ -37,8 +37,8 @@
 # include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 #include <Fileio.h>
 #include <Rmath.h> /* for fround */
@@ -298,7 +298,7 @@ SEXP attribute_hidden do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
 	if ((res & 0xff)  == 127) {/* 127, aka -1 */
 	    if (errno)
-		error(_("error in running command: '%s'"), strerror(errno));
+		error(_("error in running command"), (": '%s'"), strerror(errno));
 	    else
 		error(_("error in running command"));
 	} else if (res) {

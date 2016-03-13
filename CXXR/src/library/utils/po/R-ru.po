@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-03-03 21:07\n"
+"POT-Creation-Date: 2016-03-13 10:24\n"
 "PO-Revision-Date: 2015-01-17 15:55+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -76,7 +76,7 @@ msgstr "у %s есть файл помощи, но нет примеров"
 msgid "%s has to be one of %s"
 msgstr "%s должен быть одним из %s"
 
-#. R/findLineNum.R: gettextf(" %s in %s", x[[i]]$name, format(x[[i]]$env))
+#. R/findLineNum.R: gettextf(" %s in %s", (x[[i]])$name, format((x[[i]])$env))
 #: R/findLineNum.R:0
 #, fuzzy
 msgid "%s in %s"
@@ -117,19 +117,19 @@ msgstr "'option' должна быть длиной с один текстовы
 msgid "%s should be one of %s"
 msgstr "%s должен быть одним из %s"
 
-#. R/findLineNum.R: gettextf(" %s signature %s in %s", x[[i]]$name, paste(x[[i]]$signature, collapse = ","),     format(x[[i]]$env))
+#. R/findLineNum.R: gettextf(" %s signature %s in %s", (x[[i]])$name, paste((x[[i]])$signature, collapse = ","),     format((x[[i]])$env))
 #: R/findLineNum.R:0
 #, fuzzy
 msgid "%s signature %s in %s"
 msgstr "не могу найти пакет %s"
 
-#. R/findLineNum.R: gettextf(" %s step %s in %s", x[[i]]$name, paste(x[[i]]$at, collapse = ","), format(x[[i]]$env))
+#. R/findLineNum.R: gettextf(" %s step %s in %s", (x[[i]])$name, paste((x[[i]])$at, collapse = ","),     format((x[[i]])$env))
 #: R/findLineNum.R:0
 #, fuzzy
 msgid "%s step %s in %s"
 msgstr "не могу найти пакет %s"
 
-#. R/findLineNum.R: gettextf(" %s step %s signature %s in %s", x[[i]]$name, paste(x[[i]]$at, collapse = ","),     paste(x[[i]]$signature, collapse = ","), format(x[[i]]$env))
+#. R/findLineNum.R: gettextf(" %s step %s signature %s in %s", (x[[i]])$name, paste((x[[i]])$at, collapse = ","),     paste((x[[i]])$signature, collapse = ","), format((x[[i]])$env))
 #: R/findLineNum.R:0
 #, fuzzy
 msgid "%s step %s signature %s in %s"

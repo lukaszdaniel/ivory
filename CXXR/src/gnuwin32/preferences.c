@@ -39,9 +39,9 @@
 #include <config.h>
 #endif
 
-#include "win-nls.h"
+#include <localization.h>
 
-#ifdef Win32
+#ifdef _WIN32
 #define USE_MDI 1
 #endif
 
@@ -58,6 +58,7 @@
 #include <Fileio.h>
 void R_fixbackslash(char *s);
 
+#undef gettext
 #define gettext GA_gettext
 
 extern char fontname[LF_FACESIZE+4]; /* from console.c */

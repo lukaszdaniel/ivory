@@ -83,4 +83,3 @@ static R_INLINE int S_iv_length(int alg, int n)
 
 #endif /* R_STATS_PACKAGE_H */
 
-

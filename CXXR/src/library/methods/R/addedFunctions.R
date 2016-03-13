@@ -37,7 +37,7 @@ getFunction <- function(name, generic = TRUE, mustFind = TRUE,
       ## find the object as a function.
 {
     if(!nzchar(name))
-        stop(gettextf('expected a non-empty character string for argument name'), domain = NA)
+        stop(gettextf("expected a non-empty character string for argument 'name'"), domain = "R-methods")
     found <- FALSE
     where <- as.environment(where)
     f <- NULL
@@ -56,7 +56,7 @@ getFunction <- function(name, generic = TRUE, mustFind = TRUE,
 	stop(if(generic)
 	     gettextf("no function %s found", sQuote(name)) else
 	     gettextf("no non-generic function %s found", sQuote(name)),
-	     domain = NA)
+	     domain = "R-methods")
     f
 }
 
@@ -79,9 +79,7 @@ elNamed <-
     i <- match(name, names(x))
     if(is.na(i)) {
         if(mustFind)
-            stop(gettextf("%s is not one of the element names",
-                          sQuote(name)),
-                 domain = NA)
+            stop(gettextf("%s is not one of the element names", sQuote(name)), domain = "R-methods")
         else NULL
     }
     else
@@ -126,9 +124,9 @@ Quote <- base::quote #was get("quote" , mode = "function")
 .message <- function(..., domain = NULL, appendLF = TRUE) {
     ## Output all the arguments, pasted together with no intervening spaces,
     ## wrapping long lines
-    text <- paste0(..., collapse="")
+    text <- paste0(..., collapse = "")
     lines <- strwrap(text, width = max(20, 7 * getOption("width") %/% 8))
-    message(paste(lines, collapse="\n"), domain = domain, appendLF = appendLF)
+    message(paste(lines, collapse = "\n"), domain = domain, appendLF = appendLF)
 }
 
 hasArg <- function(name) {

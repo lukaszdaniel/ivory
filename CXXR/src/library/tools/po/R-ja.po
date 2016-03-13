@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-03-03 21:07\n"
+"POT-Creation-Date: 2016-03-13 10:24\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -492,13 +492,13 @@ msgstr " コード中にはあるがドキュメント中には無い引数名: 
 msgid "Argument names in docs but not in code:"
 msgstr " ドキュメント中にはあるがコード中には無い引数名: "
 
-#. R/assertCondition.R: gettextf("Asserted error: %s", error[[1]]$message)
+#. R/assertCondition.R: gettextf("Asserted error: %s", (error[[1]])$message)
 #: R/assertCondition.R:0
 #, fuzzy
 msgid "Asserted error: %s"
 msgstr " ドキュメント: %s "
 
-#. R/assertCondition.R: gettextf("Asserted warning: %s", warning[[1]]$message)
+#. R/assertCondition.R: gettextf("Asserted warning: %s", (warning[[1]])$message)
 #: R/assertCondition.R:0
 #, fuzzy
 msgid "Asserted warning: %s"
@@ -1872,7 +1872,6 @@ msgstr ""
 
 #. R/utils.R: gettext("LaTeX errors:")
 #. R/utils.R: gettext("LaTeX errors:")
-#. R/utils.R: gettext("LaTeX errors:", domain = "R-tools")
 #: R/utils.R:0
 msgid "LaTeX errors:"
 msgstr ""
@@ -2879,12 +2878,6 @@ msgid ""
 "when package is not installed."
 msgstr ""
 
-#. R/build.R: gettextf("Removed empty directory %s\n", sQuote(d), domain = "R-tools")
-#: R/build.R:0
-#, fuzzy
-msgid "Removed empty directory %s"
-msgstr " 仮ディレクトリを生成することが出来ません "
-
 #. R/build.R: gettext("Run R CMD build without --no-build-vignettes to re-create", domain = "R-tools")
 #: R/build.R:0
 msgid "Run R CMD build without --no-build-vignettes to re-create"
@@ -3847,11 +3840,6 @@ msgid ""
 "package"
 msgstr ""
 
-#. R/build.R: gettextf("WARNING: directory %s is empty\n", sQuote(d), domain = "R-tools")
-#: R/build.R:0
-msgid "WARNING: directory %s is empty"
-msgstr ""
-
 #. R/admin.R: message("WARNING: malformed 'Depends' field in 'DESCRIPTION'")
 #: R/admin.R:0
 msgid "WARNING: malformed 'Depends' field in 'DESCRIPTION'"
@@ -4076,11 +4064,6 @@ msgstr ""
 #. R/build.R: gettext("building the PDF package manual", domain = "R-tools")
 #: R/build.R:0
 msgid "building the PDF package manual"
-msgstr ""
-
-#. R/install.R: gettext("byte-compile and prepare package for lazy loading")
-#: R/install.R:0
-msgid "byte-compile and prepare package for lazy loading"
 msgstr ""
 
 #. R/build.R: gettextf("cannot change to directory %s", sQuote(pkg), domain = "R-tools")
@@ -6058,7 +6041,7 @@ msgstr " 仮ディレクトリを生成することが出来ません "
 
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file))
 #. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(makeindex), sQuote(idxfile))
-#. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file), domain = "R-tools")
+#. R/utils.R: gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file))
 #: R/utils.R:0
 #, fuzzy
 msgid "unable to run %s command on file %s"
@@ -7034,6 +7017,10 @@ msgstr[0] " %s 中に T/F が見つかりました "
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] " '%s' ('%s'行')を再エンコード出来ません "
+
+#, fuzzy
+#~ msgid "Removed empty directory %s"
+#~ msgstr " 仮ディレクトリを生成することが出来ません "
 
 #, fuzzy
 #~ msgid ""

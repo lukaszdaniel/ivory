@@ -37,10 +37,9 @@ function(x)
     ## Turn a possibly relative file path absolute, performing tilde
     ## expansion if necessary.
     if(length(x) != 1L)
-        stop("'x' must be a single character string")
+        stop(gettextf("'%s' argument must be a single character string", "x"))
     if(!file.exists(epath <- path.expand(x)))
-        stop(gettextf("file '%s' does not exist", x),
-             domain = NA)
+        stop(gettextf("file %s does not exist", sQuote(x)), domain = "R-tools")
     normalizePath(epath, "/", TRUE)
 }
 
@@ -78,8 +77,7 @@ function(op, x, y)
                     & !is.na(mt.y <- file.mtime(y))
                     & (mt.x < mt.y)),
            "-x" = (file.access(x, 1L) == 0L),
-           stop(gettextf("test '%s' is not available", op),
-                domain = NA))
+           stop(gettextf("test %s is not available", sQuote(op)), domain = "R-tools"))
 }
 
 ### ** list_files_with_exts
@@ -125,8 +123,7 @@ function(dir, type, all.files = FALSE, full.names = TRUE,
 
     exts <- .make_file_exts(type)
     files <-
-        list_files_with_exts(dir, exts, all.files = all.files,
-                             full.names = full.names)
+        list_files_with_exts(dir, exts, all.files = all.files, full.names = full.names)
 
     if(type %in% c("code", "docs")) {
         for(os in OS_subdirs) {
@@ -197,12 +194,12 @@ delimMatch <-
 function(x, delim = c("{", "}"), syntax = "Rd")
 {
     if(!is.character(x))
-        stop("argument 'x' must be a character vector")
+        stop(gettextf("'%s' argument must be a character vector", "x"))
     ## FIXME: bytes or chars?
     if((length(delim) != 2L) || any(nchar(delim) != 1L))
-        stop("argument 'delim' must specify two characters")
+        stop("'delim' argument must specify two characters")
     if(syntax != "Rd")
-        stop("only Rd syntax is currently supported")
+        stop("currently only Rd syntax is supported")
 
     .Call(delim_match, x, delim)
 }
@@ -231,8 +228,7 @@ function(file, pdf = FALSE, clean = FALSE, quiet = TRUE,
             ## output file will be created in the current directory
             out_file <- paste(basename(file_path_sans_ext(file)),
                               if(pdf) "pdf" else "dvi", sep = ".")
-            files <- setdiff(list.files(all.files = TRUE),
-                             c(".", "..", out_file, pre_files))
+            files <- setdiff(list.files(all.files = TRUE), c(".", "..", out_file, pre_files))
             file.remove(files)
         }
 
@@ -338,7 +334,7 @@ function(file, pdf = FALSE, clean = FALSE, quiet = TRUE,
         if(file_test("-f", log)) {
             lines <- .get_LaTeX_errors_from_log_file(log)
             if(length(lines))
-                errors <- paste("LaTeX errors:",
+                errors <- paste(gettext("LaTeX errors:"),
                                 paste(lines, collapse = "\n"),
                                 sep = "\n")
         }
@@ -347,7 +343,7 @@ function(file, pdf = FALSE, clean = FALSE, quiet = TRUE,
         if(file_test("-f", log)) {
             lines <- .get_BibTeX_errors_from_blg_file(log)
             if(length(lines))
-                errors <- paste("BibTeX errors:",
+                errors <- paste(gettext("BibTeX errors:"),
                                 paste(lines, collapse = "\n"),
                                 sep = "\n")
         }
@@ -359,18 +355,18 @@ function(file, pdf = FALSE, clean = FALSE, quiet = TRUE,
             ##   if(out$status || length(errors))
             ## But shouldn't we be able to rely on out$status on Unix?
             ## </NOTE>
-            msg <- gettextf("Running 'texi2dvi' on '%s' failed.", file)
+            msg <- gettextf("Running 'texi2dvi' on file %s failed.", sQuote(file))
             ## Error messages from GNU texi2dvi are rather terse, so
             ## only use them in case no additional diagnostics are
             ## available (e.g, makeindex errors).
             if(length(errors))
                 msg <- paste(msg, errors, sep = "\n")
             else if(length(out$stderr))
-                msg <- paste(msg, "Messages:",
+                msg <- paste(msg, gettext("Messages:"),
                              paste(out$stderr, collapse = "\n"),
                              sep = "\n")
             if(!quiet)
-                msg <- paste(msg, "Output:",
+                msg <- paste(msg, gettext("Output:"),
                              paste(out$stdout, collapse = "\n"),
                              sep = "\n")
         }
@@ -378,7 +374,7 @@ function(file, pdf = FALSE, clean = FALSE, quiet = TRUE,
         do_cleanup(clean)
 
         if(nzchar(msg))
-            stop(msg, domain = NA)
+            stop(msg, domain = "R-tools")
         else if(!quiet)
             message(paste(paste(out$stderr, collapse = "\n"),
                           paste(out$stdout, collapse = "\n"),
@@ -413,7 +409,7 @@ function(file, pdf = FALSE, clean = FALSE, quiet = TRUE,
         if(file_test("-f", logfile)) {
             lines <- .get_LaTeX_errors_from_log_file(logfile)
             if(length(lines))
-                msg <- paste(msg, "LaTeX errors:",
+                msg <- paste(msg, gettext("LaTeX errors:"),
                              paste(lines, collapse = "\n"),
                              sep = "\n")
         }
@@ -422,16 +418,15 @@ function(file, pdf = FALSE, clean = FALSE, quiet = TRUE,
         if(file_test("-f", logfile)) {
             lines <- .get_BibTeX_errors_from_blg_file(logfile)
             if(length(lines))
-                msg <- paste(msg, "BibTeX errors:",
+                msg <- paste(msg, gettext("BibTeX errors:"),
                              paste(lines, collapse = "\n"),
                              sep = "\n")
         }
 
         do_cleanup(clean)
         if(nzchar(msg)) {
-            msg <- paste(gettextf("running 'texi2dvi' on '%s' failed", file),
-                         msg, "", sep = "\n")
-            stop(msg, call. = FALSE, domain = NA)
+            msg <- paste(gettextf("running 'texi2dvi' on file %s failed", sQuote(file)), msg, "", sep = "\n")
+            stop(msg, call. = FALSE, domain = "R-tools")
         }
     } else {
         ## Do not have texi2dvi or don't want to index
@@ -444,8 +439,10 @@ function(file, pdf = FALSE, clean = FALSE, quiet = TRUE,
         latex <- if(pdf) Sys.getenv("PDFLATEX", "pdflatex")
         else  Sys.getenv("LATEX", "latex")
         if(!nzchar(Sys.which(latex)))
-            stop(if(pdf) "pdflatex" else "latex", " is not available",
-                 domain = NA)
+		  if(pdf)
+		    stop(gettextf("%s command is not available", sQuote("pdflatex")), domain = "R-tools")
+		  else
+		    stop(gettextf("%s command is not available", sQuote("latex")), domain = "R-tools")
 
         sys2 <- if(quiet)
             function(...) system2(..., stdout = FALSE, stderr = FALSE)
@@ -454,23 +451,19 @@ function(file, pdf = FALSE, clean = FALSE, quiet = TRUE,
         makeindex <- Sys.getenv("MAKEINDEX", "makeindex")
         ltxargs <- c("-interaction=nonstopmode", texfile)
         if(sys2(latex, ltxargs))
-            stop(gettextf("unable to run '%s' on '%s'", latex, file),
-                 domain = NA)
-        nmiss <- length(grep("Warning:.*Citation.*undefined",
-                             readLines(paste0(base, ".log"))))
+            stop(gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file)), domain = "R-tools")
+        nmiss <- length(grep("Warning:.*Citation.*undefined", readLines(paste0(base, ".log"))))
         for(iter in 1L:10L) { ## safety check
             ## This might fail as the citations have been included in the Rnw
             if(nmiss) sys2(bibtex, shQuote(base))
             nmiss_prev <- nmiss
             if(index && file.exists(idxfile)) {
                 if(sys2(makeindex, shQuote(idxfile)))
-                    stop(gettextf("unable to run '%s' on '%s'",
-                                  makeindex, idxfile),
-                         domain = NA)
+                    stop(gettextf("unable to run %s command on file %s", sQuote(makeindex), sQuote(idxfile)), domain = "R-tools")
             }
             if(sys2(latex, ltxargs))
-                stop(gettextf("unable to run %s on '%s'", latex, file),
-                     domain = NA)
+                stop(gettextf("unable to run %s command on file %s", sQuote(latex), sQuote(file)),
+                     domain = "R-tools")
             Log <- readLines(paste0(base, ".log"))
             nmiss <- length(grep("Warning:.*Citation.*undefined", Log))
             if(nmiss == nmiss_prev &&
@@ -549,8 +542,7 @@ function()
 .R_top_srcdir_from_Rd <-
 function() {
     filebase <-
-        file_path_sans_ext(system.file("help", "tools.rdb",
-                                       package = "tools"))
+        file_path_sans_ext(system.file("help", "tools.rdb", package = "tools"))
     path <- attr(fetchRdDB(filebase, "QC"), "Rdfile")
     ## We could use 5 dirname() calls, but perhaps more easily:
     substring(path, 1L, nchar(path) - 28L)
@@ -569,8 +561,7 @@ function(val) {
     if (v %in% c("1", "yes", "true")) TRUE
     else if (v %in% c("0", "no", "false")) FALSE
     else {
-        warning(gettextf("cannot coerce %s to logical", sQuote(val)),
-                domain = NA)
+        warning(gettextf("cannot coerce %s to logical", sQuote(val)))
         NA
     }
 }
@@ -760,8 +751,7 @@ function(con)
     ## guessing ... and peeking at tex-buf.el from AUCTeX.
     really_has_errors <-
         (length(grep("^---", lines)) ||
-         regexpr("There (was|were) ([0123456789]+) error messages?",
-                 lines[length(lines)]) > -1L)
+         regexpr("There (was|were) ([0123456789]+) error messages?", lines[length(lines)]) > -1L)
     ## (Note that warnings are ignored for now.)
     ## MiKTeX does not give usage, so '(There were n error messages)' is
     ## last.
@@ -806,9 +796,7 @@ function(primitive = TRUE) # primitive means 'include primitives'
     out <-
         ## Get the names of R internal S3 generics (via DispatchOrEval(),
         ## cf. zMethods.Rd).
-        c("[", "[[", "$", "[<-", "[[<-", "$<-",
-          "as.vector", "unlist",
-          .get_S3_primitive_generics()
+        c("[", "[[", "$", "[<-", "[[<-", "$<-", "as.vector", "unlist", .get_S3_primitive_generics()
           ## ^^^^^^^ now contains the members of the group generics from
           ## groupGeneric.Rd.
           )
@@ -1652,16 +1640,14 @@ function(dfile)
     ## vector.
     ## </NOTE>
     if(!file_test("-f", dfile))
-        stop(gettextf("file '%s' does not exist", dfile), domain = NA)
+        stop(gettextf("file %s does not exist", sQuote(dfile)), domain = "R-tools")
     out <- tryCatch(read.dcf(dfile,
                              keep.white =
                              .keep_white_description_fields),
                     error = function(e)
-                    stop(gettextf("file '%s' is not in valid DCF format",
-                                  dfile),
-                         domain = NA, call. = FALSE))
+                    stop(gettextf("file %s is not in valid DCF format", sQuote(dfile)), domain = "R-tools", call. = FALSE))
     if (nrow(out) != 1)
-        stop("contains a blank line", call. = FALSE)
+        stop(gettextf("file %s contains a blank line", sQuote(dfile)), call. = FALSE)
     out <- out[1,]
     if(!is.na(encoding <- out["Encoding"])) {
         ## could convert everything to UTF-8
@@ -1691,8 +1677,7 @@ function(x, dfile)
         asc <- iconv(x, "latin1", "ASCII")
         ind <- is.na(asc) | (asc != x)
         if(any(ind)) {
-            warning(gettext("Unknown encoding with non-ASCII data: converting to ASCII"),
-                    domain = NA)
+            warning(gettext("Unknown encoding with non-ASCII data: converting to ASCII"), domain = "R-tools")
             x[ind] <- iconv(x[ind], "latin1", "ASCII", sub = "byte")
         }
     }
@@ -1806,7 +1791,7 @@ function(dir, envir, meta = character())
     con <- tempfile("Rcode")
     on.exit(unlink(con))
     if(!file.create(con))
-        stop("unable to create ", con)
+        stop(gettextf("unable to create file %s", con))
     ## If the (DESCRIPTION) metadata contain a Collate specification,
     ## use this for determining the code files and their order.
     txt <- meta[c(paste("Collate", .OStype(), sep = "."), "Collate")]
@@ -1821,9 +1806,7 @@ function(dir, envir, meta = character())
     tryCatch(.source_assignments(con, envir, enc = meta["Encoding"]),
              error =
              function(e)
-             stop("cannot source package code\n",
-                  conditionMessage(e),
-                  call. = FALSE))
+             stop("cannot source package code", "\n", conditionMessage(e), call. = FALSE))
 }
 
 ### * .split_dependencies
@@ -1929,7 +1912,7 @@ function(expr)
                                     calls <- rev(calls)[-c(1L, 2L)]
                                     tb <- lapply(calls, deparse)
                                     stop(conditionMessage(e),
-                                         "\nCall sequence:\n",
+                                         "\n", gettext("Call sequence:", domain = "R-tools"), "\n",
                                          paste(.eval_with_capture(traceback(tb))$output,
                                                collapse = "\n"),
                                          call. = FALSE)
@@ -1958,7 +1941,7 @@ function(dir, fun, ..., pattern = "*", verbose = FALSE)
         lapply(dirname(dfiles),
                function(dir) {
                    if(verbose)
-                       message(sprintf("processing %s", basename(dir)))
+                       message(gettextf("processing directory %s", sQuote(basename(dir))))
                    fun(dir, ...)
                })
     names(results) <- basename(dirname(dfiles))
@@ -1973,15 +1956,8 @@ function(args, msg)
     len <- length(args)
     if(!len)
         character()
-    else if(len == 1L)
-        paste("argument", sQuote(args), msg)
-    else
-        paste("arguments",
-              paste(c(rep.int("", len - 1L), "and "),
-                    sQuote(args),
-                    c(rep.int(", ", len - 1L), ""),
-                    sep = "", collapse = ""),
-              msg)
+    else if(len >= 1L)
+	paste(sprintf(ngettext(len, "argument %s", "arguments %s"), paste(sQuote(args), collapse = ", ")), msg)
 }
 
 
@@ -2048,7 +2024,7 @@ toTitleCase <- function(text)
         paste(xx, collapse = "")
     }
     if(typeof(text) != "character")
-        stop("'text' must be a character vector")
+        stop(gettextf("'%s' argument must be a character vector", "text"))
     sapply(text, titleCase1, USE.NAMES = FALSE)
 }
 

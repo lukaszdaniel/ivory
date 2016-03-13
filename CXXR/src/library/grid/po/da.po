@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-27 18:05+0100\n"
+"POT-Creation-Date: 2016-03-13 10:23+0100\n"
 "PO-Revision-Date: 2016-01-09 19:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -28,53 +28,53 @@ msgstr "Kan ikke klippe til roteret viewport"
 msgid "Viewport '%s' was not found"
 msgstr ""
 
-#: grid.c:698 grid.c:703 grid.c:793 grid.c:798
+#: grid.c:698 grid.c:703 grid.c:792 grid.c:797
 #, fuzzy
 msgid "cannot pop the top-level viewport ('grid' and 'graphics' output mixed?)"
 msgstr "Kan ikke pop topniveau-viewporten (gitter og grafiks uddata blandet?)"
 
-#: grid.c:978
+#: grid.c:977
 msgid "attempt to plot on null device"
 msgstr "forsøg på at plotte på null-enhed"
 
-#: grid.c:1310
+#: grid.c:1309
 #, fuzzy
 msgid "there is no layout defined"
 msgstr "Der er ingen layout defineret"
 
-#: grid.c:1530
+#: grid.c:1529
 #, fuzzy
 msgid "polygon edge not found (zero-width or zero-height?)"
 msgstr "Polygonkant ikke fundet (nulbredde eller nulhøjde?)"
 
-#: grid.c:1539
+#: grid.c:1538
 #, fuzzy
 msgid "polygon edge not found"
 msgstr "Polygonkant ikke fundet"
 
-#: grid.c:1693
+#: grid.c:1692
 #, fuzzy
 msgid "require at least two points to draw arrow"
 msgstr "Kræver mindst to punkter at tegne pil"
 
-#: grid.c:2009
+#: grid.c:2008
 #, fuzzy
 msgid "non-finite control point in Xspline"
 msgstr "Ikkebegrænsende kontrolpunkter i Xspline"
 
-#: grid.c:2874
+#: grid.c:2873
 msgid "non-finite x or y in graphics path"
 msgstr "ikkebegrænsende x eller y i grafiksti"
 
-#: grid.c:2915
+#: grid.c:2914
 msgid "Empty raster"
 msgstr ""
 
-#: grid.c:3369
+#: grid.c:3368
 msgid "invalid plotting symbol"
 msgstr "ugyldigt plotsymbol"
 
-#: grid.c:3455
+#: grid.c:3454
 #, fuzzy
 msgid "unable to clip to rotated rectangle"
 msgstr "Kan ikke klippe til roteret rektangel"

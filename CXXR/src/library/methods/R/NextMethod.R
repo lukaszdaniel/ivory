@@ -63,7 +63,7 @@ callNextMethod <- function(...) {
         if(is.null(fdef))
             stop(gettextf("a call to callNextMethod() appears in a call to %s, but the call does not seem to come from either a generic function or another 'callNextMethod'",
                           sQuote(f)),
-                 domain = NA)
+                 domain = "R-methods")
         f <- fdef@generic
         method <- maybeMethod
     }
@@ -97,7 +97,7 @@ callNextMethod <- function(...) {
     }
     else
         stop(gettextf("bad object found as method (class %s)",
-                      dQuote(class(method))), domain = NA)
+                      dQuote(class(method))), domain = "R-methods")
     if (is.null(nextMethod))
         stop("No next method available")
     subsetCase <- !is.na(match(f, .BasicSubsetFunctions))

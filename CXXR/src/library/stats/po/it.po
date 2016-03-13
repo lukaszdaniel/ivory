@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-03 21:07+0100\n"
+"POT-Creation-Date: 2016-03-13 10:24+0100\n"
 "PO-Revision-Date: 2005-04-14 18:06+0200\n"
 "Last-Translator: stefano iacus <stefano.iacus@r-project.org>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -128,33 +128,33 @@ msgstr ""
 msgid "only single-argument calls are supported"
 msgstr ""
 
-#: deriv.c:529
+#: deriv.c:525
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr "Funzione '%s' non presente nelle tavole delle derivate"
 
-#: deriv.c:634
+#: deriv.c:630
 msgid "'expr' must be an expression or call"
 msgstr ""
 
-#: deriv.c:637
+#: deriv.c:633
 msgid "variable must be a character string"
 msgstr "la variabile deve essere una stringa character"
 
-#: deriv.c:639
+#: deriv.c:635
 msgid "only the first element is used as variable name"
 msgstr "solo il primo elemento è utilizzato come nome di variabile"
 
-#: deriv.c:652
+#: deriv.c:648
 #, fuzzy, c-format
 msgid "invalid expression in '%s'"
 msgstr "espressione non valida in \"%s\""
 
-#: deriv.c:930 model.c:93
+#: deriv.c:926 model.cpp:115
 msgid "invalid variable names"
 msgstr "nomi variabili non validi"
 
-#: deriv.c:939
+#: deriv.c:935
 msgid "invalid tag"
 msgstr "'tag' non valido"
 
@@ -538,160 +538,165 @@ msgstr "'maxiter' deve essere positivo"
 msgid "'%s' argument must be finite and >= 0"
 msgstr "'maxiter' deve essere positivo"
 
-#: mAR.c:83
+#: mAR.c:99
 msgid "assert failed in src/library/ts/src/carray.c"
 msgstr ""
 
-#: mAR.c:324 mAR.c:354
+#: mAR.c:340 mAR.c:370
 #, c-format
 msgid "Unknown operator in array_op"
 msgstr ""
 
-#: mAR.c:470 mAR.c:513
+#: mAR.c:486 mAR.c:529
 #, fuzzy, c-format
 msgid "Singular matrix in '%s' function"
 msgstr "Matrice singolare in ldet"
 
-#: mAR.c:700 massdist.c:41 model.c:366 model.c:374 optim.c:191
+#: mAR.c:716 massdist.c:41 model.cpp:387 model.cpp:395 optim.c:191
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argomento '%s' non valido"
 
-#: mAR.c:836
+#: mAR.c:852
 msgid "Burg's algorithm failed to find partial correlation"
 msgstr "l'alrgoritmo di Burg non è riuscito a trovare correlazione parziale"
 
-#: model.c:91
+#: model.cpp:113
 msgid "invalid variables"
 msgstr "variabili non valide"
 
-#: model.c:95 model.c:100
+#: model.cpp:117 model.cpp:122
 msgid "number of variables != number of variable names"
 msgstr "numero di variabili != numero di nomi variabili"
 
-#: model.c:98
+#: model.cpp:120
 msgid "invalid extra variables"
 msgstr "variabili aggiuntive non valide"
 
-#: model.c:102
+#: model.cpp:124
 msgid "invalid extra variable names"
 msgstr "nomi variabili aggiuntive non validi"
 
-#: model.c:123
+#: model.cpp:145
 #, c-format
 msgid "overlong names in '%s'"
 msgstr "nomi troppo lunghi in '%s'"
 
-#: model.c:150
+#: model.cpp:172
 #, fuzzy, c-format
 msgid "invalid type (%s) for variable '%s'"
 msgstr "tipo non valido per le etichette dell'asse"
 
-#: model.c:155
+#: model.cpp:177
 #, fuzzy, c-format
 msgid "variable lengths differ (found for '%s')"
 msgstr "la lunghezza delle variabili differisce"
 
-#: model.c:209
+#: model.cpp:231
 msgid "invalid result from na.action"
 msgstr "risultato non valido da na.action"
 
-#: model.c:385
+#: model.cpp:406
 msgid "invalid model frame"
 msgstr "frame modello non valido"
 
-#: model.c:387
+#: model.cpp:408
 msgid "do not know how many cases"
 msgstr "numero di casi sconosciuto"
 
-#: model.c:411
+#: model.cpp:432
 #, fuzzy, c-format
 msgid "variable lengths differ (found for variable %d)"
 msgstr "la lunghezza delle variabili differisce"
 
-#: model.c:415 model.c:422
+#: model.cpp:436 model.cpp:443
 #, c-format
 msgid "variable %d has no levels"
 msgstr "la variabile %d non ha livelli"
 
-#: model.c:534
+#: model.cpp:556
 msgid "the response appeared on the right-hand side and was dropped"
 msgstr ""
 "la variabile risposta appare anche nel membro di destra ed è stata eliminata"
 
-#: model.c:554
+#: model.cpp:576
 #, c-format
 msgid "term %d would require %.0g columns"
 msgstr ""
 
-#: model.c:558
+#: model.cpp:580
 #, c-format
 msgid "matrix would require %.0g columns"
 msgstr ""
 
-#: model.c:569
+#: model.cpp:591
 #, fuzzy, c-format
-msgid "problem with term %d in model.matrix(): no columns are assigned"
+msgid "problem with term %d in model.matrix: no columns are assigned"
 msgstr "problema nel termine %d in model.matrix: nessuna colonna assegnata"
 
-#: model.c:617 model.c:622 model.c:628 model.c:639 model.c:645 model.c:651
+#: model.cpp:640 model.cpp:645 model.cpp:651 model.cpp:662 model.cpp:668
+#: model.cpp:674
 msgid "term names will be truncated"
 msgstr "i nomi dei termini saranno troncati"
 
-#: model.c:631
+#: model.cpp:654
 msgid "complex variables are not currently allowed in model matrices"
 msgstr ""
 
-#: model.c:655
+#: model.cpp:678
 #, fuzzy, c-format
 msgid "variables of type '%s' are not allowed in model matrices"
 msgstr "valori negativi non ammessi come indici di matrice"
 
-#: model.c:876
+#: model.cpp:890
 msgid "invalid formula in 'update'"
 msgstr "formula non valida in 'update'"
 
-#: model.c:910
+#: model.cpp:924
 msgid "formula expected"
 msgstr "necessaria formula"
 
-#: model.c:1041
+#: model.cpp:1055
 #, fuzzy
 msgid "invalid term in model formula"
 msgstr "valore di lag.max non valido"
 
-#: model.c:1116
+#: model.cpp:1130
 msgid "invalid model formula"
 msgstr "formula modello non valida"
 
-#: model.c:1142 model.c:1401
+#: model.cpp:1156 model.cpp:1404
 msgid "invalid power in formula"
 msgstr "potenza non valida nella formula"
 
-#: model.c:1178 model.c:1585
-#, fuzzy, c-format
-msgid "invalid model formula in '%s' function"
-msgstr "formula modello non valida in EncodeVars"
+#: model.cpp:1192
+msgid "invalid model formula in ExtractVars"
+msgstr "formula modello non valida in ExtractVars"
 
-#: model.c:1524
+#: model.cpp:1527
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "duplicazione nome '%s' nel data frame nell'usare '.'"
 
-#: model.c:1671
+#: model.cpp:1588
+#, fuzzy
+msgid "invalid model formula in EncodeVars"
+msgstr "formula modello non valida in ExtractVars"
+
+#: model.cpp:1674
 msgid "argument is not a valid model"
 msgstr "l'argomento non è un modello valido"
 
-#: model.c:1681
+#: model.cpp:1684
 #, fuzzy
 msgid "'specials' must be NULL or a character vector"
 msgstr "'path' deve essere un vettore di tipo character"
 
-#: model.c:1693
+#: model.cpp:1696
 msgid "'data' argument is of the wrong type"
 msgstr "l'argomento 'data' è di tipo sbagliato"
 
-#: model.c:1963
+#: model.cpp:1961
 msgid "'.' in formula and no 'data' argument"
 msgstr "nella formula c'è il '.' ma nessun argomento 'data'"
 
@@ -1171,6 +1176,10 @@ msgid "ifault=%d. This should not happen"
 msgstr ""
 
 #, fuzzy
+#~ msgid "invalid model formula in '%s' function"
+#~ msgstr "formula modello non valida in EncodeVars"
+
+#, fuzzy
 #~ msgid "'x' is NULL"
 #~ msgstr "'x' è vuoto"
 
@@ -1200,9 +1209,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "invalid model formula in '%s'function"
 #~ msgstr "formula modello non valida in EncodeVars"
-
-#~ msgid "invalid model formula in ExtractVars"
-#~ msgstr "formula modello non valida in ExtractVars"
 
 #~ msgid "span is too small"
 #~ msgstr "ampiezza troppo piccola"

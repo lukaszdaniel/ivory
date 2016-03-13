@@ -26,7 +26,6 @@
  */
 
 #include "Rcomplex.h"
-#include <localization.h>
 
 /* Note: gcc may warn in several places about C99 features as extensions.
    This is a very-long-standing GCC bug, http://gcc.gnu.org/PR7263
@@ -57,6 +56,7 @@
 #undef HAVE_CPOW
 #endif
 
+#include <localization.h>
 // #include <Internal.h>
 #include <Rmath.h>
 
@@ -75,7 +75,7 @@
    And use on Win32/64 suppresses warnings.
    The warning is also seen on Mac OS 10.5, but not later.
 */
-#if defined(__GNUC__) && (defined(__sun__) || defined(__hpux__) || defined(Win32))
+#if defined(__GNUC__) && (defined(__sun__) || defined(__hpux__) || defined(_WIN32))
 # undef  I
 # define I (__extension__ 1.0iF)
 #endif
@@ -146,7 +146,7 @@ static R_INLINE double complex R_cpow_n(double complex X, int k)
     }
 }
 
-#if defined(Win32)
+#if defined(_WIN32)
 # undef HAVE_CPOW
 #endif
 /* reason for this:
@@ -352,7 +352,7 @@ SEXP attribute_hidden do_cmathfuns(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 	UNPROTECT(1);
     }
-    else errorcall(call, _("non-numeric argument to function"));
+    else errorcall(call, _("non-numeric argument passed to function"));
 
     if (x != y && ATTRIB(x) != R_NilValue) {
 	PROTECT(x);
@@ -640,7 +640,7 @@ SEXP attribute_hidden complex_math1(SEXP call, SEXP op, SEXP args, SEXP env)
 	errorcall(call, _("unimplemented complex function"));
     }
     if (naflag)
-	warningcall(call, "NaNs produced in function \"%s\"", PRIMNAME(op));
+	warningcall(call, _("NaN values produced in '%s' function"), PRIMNAME(op));
     SHALLOW_DUPLICATE_ATTRIB(y, x);
     UNPROTECT(2);
     return y;
@@ -733,7 +733,7 @@ SEXP attribute_hidden complex_math2(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
     });
     if (naflag)
-	warningcall(call, "NaNs produced in function \"%s\"", PRIMNAME(op));
+	warningcall(call, _("NaN values produced in '%s' function"), PRIMNAME(op));
     if(n == na) {
 	SHALLOW_DUPLICATE_ATTRIB(sy, sa);
     } else if(n == nb) {
@@ -798,7 +798,7 @@ SEXP attribute_hidden do_polyroot(SEXP call, SEXP op, SEXP args, SEXP rho)
 	PROTECT(z = coerceVector(z, CPLXSXP));
 	break;
     default:
-	UNIMPLEMENTED_TYPE("polyroot", z);
+	UNIMPLEMENTED_TYPE("polyroot()", z);
     }
 #ifdef LONG_VECTOR_SUPPORT
     R_xlen_t nn = XLENGTH(z);
@@ -1335,7 +1335,7 @@ static void nexth(Rboolean bool_)
 	hi[0] = 0.;
     }
 }
-
+
 /*--------------------- Independent Complex Polynomial Utilities ----------*/
 
 static

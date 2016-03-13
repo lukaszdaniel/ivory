@@ -291,7 +291,7 @@ namespace CXXR {
 // ***** Implementation of non-inlined members *****
 
 #include <algorithm>
-#include "localization.h"
+#include <localization.h>
 #include "R_ext/Error.h"
 
 template <typename T, SEXPTYPE ST, typename Initr>

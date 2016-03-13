@@ -37,7 +37,7 @@ extern int 	(*gl_in_hook)(char *);
 extern int 	(*gl_out_hook)(char *);
 extern int	(*gl_tab_hook)(char *, int, int *);
 
-#ifdef Win32
+#ifdef _WIN32
 extern void 	(*gl_events_hook)(void);
 #endif
 

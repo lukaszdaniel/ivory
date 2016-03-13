@@ -45,7 +45,8 @@
 #include <string.h>
 
 #define __MAIN__
-#include "Defn.h"
+#include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 #include "Rinterface.h"
 #include "IOStuff.h"
@@ -238,7 +239,7 @@ static RObject* R_ReplFile_impl(FILE *fp, SEXP rho)
 	    if (R_Visible)
 		PrintValueEnv(R_CurrentExpr, rho);
 	    if( R_CollectWarnings )
-		PrintWarnings();
+		PrintWarnings(NULL);
 	    break;
 	case PARSE_ERROR:
 	    R_FinalizeSrcRefState();
@@ -408,7 +409,7 @@ Rf_ReplIteration(SEXP rho, CXXRUNSIGNED int savestack, R_ReplState *state)
 	    if (R_Visible)
 		PrintValueEnv(value, rho);
 	    if (R_CollectWarnings)
-		PrintWarnings();
+		PrintWarnings(NULL);
 	    Rf_callToplevelHandlers(thisExpr, value, TRUE, wasDisplayed);
 	    R_CurrentExpr = value; /* Necessary? Doubt it. */
 	    UNPROTECT(1);
@@ -520,7 +521,7 @@ int R_ReplDLLdo1(void)
 	if (R_Visible)
 	    PrintValueEnv(R_CurrentExpr, rho);
 	if (R_CollectWarnings)
-	    PrintWarnings();
+	    PrintWarnings(NULL);
 	Rf_callToplevelHandlers(lastExpr, R_CurrentExpr, TRUE, wasDisplayed);
 	UNPROTECT(1);
 	R_IoBufferWriteReset(&R_ConsoleIob);
@@ -560,19 +561,19 @@ static RETSIGTYPE handleInterrupt(int dummy)
    broken pipes on send().]
  */
 
-#ifndef Win32
+#ifndef _WIN32
 // controlled by the internal http server in the internet module
 int R_ignore_SIGPIPE = 0;
 
 static RETSIGTYPE handlePipe(int dummy)
 {
     signal(SIGPIPE, handlePipe);
-    if (!R_ignore_SIGPIPE) error("ignoring SIGPIPE signal");
+    if (!R_ignore_SIGPIPE) error(_("ignoring 'SIGPIPE' signal"));
 }
 #endif
 
 
-#ifdef Win32
+#ifdef _WIN32
 static int num_caught = 0;
 
 static void win32_segv(int signum)
@@ -583,7 +584,9 @@ static void win32_segv(int signum)
 	int line = 1, i;
 	PROTECT(trace = R_GetTraceback(0));
 	if(trace != R_NilValue) {
-	    REprintf("\nTraceback:\n");
+	    REprintf("\n");
+	    REprintf(_("Traceback:"));
+	    REprintf("\n");
 	    for(p = trace; p != R_NilValue; p = CDR(p), line++) {
 		q = CAR(p); /* a character vector */
 		REprintf("%2d: ", line);
@@ -596,10 +599,10 @@ static void win32_segv(int signum)
     }
     num_caught++;
     if(num_caught < 10) signal(signum, win32_segv);
-    if(signum == SIGILL)
-	error("caught access violation - continue with care");
-    else
-	error("caught access violation - continue with care");
+//    if(signum == SIGILL)
+	error(_("caught access violation - continue with care"));
+//    else
+//	error(_("caught access violation - continue with care"));
 }
 #endif
 
@@ -628,7 +631,8 @@ static void sigactionSegv(int signum, siginfo_t *ip, void *context)
 	uintptr_t upper = 0x1000000;  /* 16Mb */
 	if(intptr_t( R_CStackLimit) != -1) upper += R_CStackLimit;
 	if(diff > 0 && diff < CXXRCONSTRUCT(int, upper)) {
-	    REprintf(_("Error: segfault from C stack overflow\n"));
+	    REprintf(_("Error: segfault from C stack overflow"));
+	    REprintf("\n");
 	    jump_to_toplevel();
 	}
     }
@@ -636,88 +640,101 @@ static void sigactionSegv(int signum, siginfo_t *ip, void *context)
     /* need to take off stack checking as stack base has changed */
     R_CStackLimit = uintptr_t(-1);
 
-    /* Do not translate these messages */
-    REprintf("\n *** caught %s ***\n",
-	     signum == SIGILL ? "illegal operation" :
-	     signum == SIGBUS ? "bus error" : "segfault");
+    if(signum == SIGILL) REprintf(_("\n *** caught illegal operation ***\n"));
+    else if(signum == SIGBUS) REprintf(_("\n *** caught bus error ***\n"));
+    else REprintf(_("\n *** caught seqfault ***\n"));
     if(ip != CXXRNOCAST(siginfo_t *)nullptr) {
 	if(signum == SIGILL) {
 
 	    switch(ip->si_code) {
 #ifdef ILL_ILLOPC
 	    case ILL_ILLOPC:
-		s = "illegal opcode";
+	REprintf(_("address %p, cause: illegal opcode"), ip->si_addr);
+	REprintf("\n");
 		break;
 #endif
 #ifdef ILL_ILLOPN
 	    case ILL_ILLOPN:
-		s = "illegal operand";
+	REprintf(_("address %p, cause: illegal operand"), ip->si_addr);
+	REprintf("\n");
 		break;
 #endif
 #ifdef ILL_ILLADR
 	    case ILL_ILLADR:
-		s = "illegal addressing mode";
+	REprintf(_("address %p, cause: illegal addressing mode"), ip->si_addr);
+	REprintf("\n");
 		break;
 #endif
 #ifdef ILL_ILLTRP
 	    case ILL_ILLTRP:
-		s = "illegal trap";
+	REprintf(_("address %p, cause: illegal trap"), ip->si_addr);
+	REprintf("\n");
 		break;
 #endif
 #ifdef ILL_COPROC
 	    case ILL_COPROC:
-		s = "coprocessor error";
+	REprintf(_("address %p, cause: coprocessor error"), ip->si_addr);
+	REprintf("\n");
 		break;
 #endif
 	    default:
-		s = "unknown";
+	REprintf(_("address %p, cause: unknown"), ip->si_addr);
+	REprintf("\n");
 		break;
 	    }
 	} else if(signum == SIGBUS)
 	    switch(ip->si_code) {
 #ifdef BUS_ADRALN
 	    case BUS_ADRALN:
-		s = "invalid alignment";
+	REprintf(_("address %p, cause: invalid alignment"), ip->si_addr);
+	REprintf("\n");
 		break;
 #endif
 #ifdef BUS_ADRERR /* not on MacOS X, apparently */
 	    case BUS_ADRERR:
-		s = "non-existent physical address";
+	REprintf(_("address %p, cause: non-existent physical address"), ip->si_addr);
+	REprintf("\n");
 		break;
 #endif
 #ifdef BUS_OBJERR /* not on MacOS X, apparently */
 	    case BUS_OBJERR:
-		s = "object specific hardware error";
+	REprintf(_("address %p, cause: object specific hardware error"), ip->si_addr);
+	REprintf("\n");
 		break;
 #endif
 	    default:
-		s = "unknown";
+	REprintf(_("address %p, cause: unknown"), ip->si_addr);
+	REprintf("\n");
 		break;
 	    }
 	else
 	    switch(ip->si_code) {
 #ifdef SEGV_MAPERR
 	    case SEGV_MAPERR:
-		s = "memory not mapped";
+	REprintf(_("address %p, cause: memory not mapped"), ip->si_addr);
+	REprintf("\n");
 		break;
 #endif
 #ifdef SEGV_ACCERR
 	    case SEGV_ACCERR:
-		s = "invalid permissions";
+	REprintf(_("address %p, cause: invalid permissions"), ip->si_addr);
+	REprintf("\n");
 		break;
 #endif
 	    default:
-		s = "unknown";
+	REprintf(_("address %p, cause: unknown"), ip->si_addr);
+	REprintf("\n");
 		break;
 	    }
-	REprintf("address %p, cause '%s'\n", ip->si_addr, s);
     }
     {   /* A simple customized print of the traceback */
 	SEXP trace, p, q;
 	int line = 1, i;
 	PROTECT(trace = R_GetTraceback(0));
 	if(trace != R_NilValue) {
-	    REprintf("\nTraceback:\n");
+	    REprintf("\n");
+	    REprintf(_("Traceback:"));
+	    REprintf("\n");
 	    for(p = trace; p != R_NilValue; p = CDR(p), line++) {
 		q = CAR(p); /* a character vector */
 		REprintf("%2d: ", line);
@@ -729,14 +746,9 @@ static void sigactionSegv(int signum, siginfo_t *ip, void *context)
 	}
     }
     if(R_Interactive) {
-	REprintf("\nPossible actions:\n1: %s\n2: %s\n3: %s\n4: %s\n",
-		 "abort (with core dump, if enabled)",
-		 "normal R exit",
-		 "exit R without saving workspace",
-		 "exit R saving workspace");
+	REprintf(_("\nPossible actions:\n1: abort (with core dump, if enabled)\n2: normal R exit\n3: exit R without saving workspace\n4: exit R saving workspace\n"));
 	while(1) {
-	    if(R_ReadConsole("Selection: ", ConsoleBuf, CONSOLE_BUFFER_SIZE,
-			     0) > 0) {
+	    if(R_ReadConsole(_("Selection: "), ConsoleBuf, CONSOLE_BUFFER_SIZE, 0) > 0) {
 		if(ConsoleBuf[0] == '1') break;
 		if(ConsoleBuf[0] == '2') R_CleanUp(SA_DEFAULT, 0, 1);
 		if(ConsoleBuf[0] == '3') R_CleanUp(SA_NOSAVE, 70, 0);
@@ -744,7 +756,7 @@ static void sigactionSegv(int signum, siginfo_t *ip, void *context)
 	    }
 	}
     }
-    REprintf("aborting ...\n");
+    REprintf(_("R is aborting now ...\n"));
     R_CleanTempDir();
     /* now do normal behaviour, e.g. core dump */
     signal(signum, SIG_DFL);
@@ -773,9 +785,9 @@ static void init_signal_handlers(void)
 	sigstk.ss_size = SIGSTKSZ + R_USAGE;
 	sigstk.ss_flags = 0;
 	if(sigaltstack(&sigstk, nullptr) < 0)
-	    warning("failed to set alternate signal stack");
+	    warning(_("failed to set alternate signal stack"));
     } else
-	warning("failed to allocate alternate signal stack");
+	warning(_("failed to allocate alternate signal stack"));
     sa.sa_sigaction = sigactionSegv;
     sigemptyset(&sa.sa_mask);
     sa.sa_flags = SA_ONSTACK | SA_SIGINFO;
@@ -797,7 +809,7 @@ static void init_signal_handlers(void)
     signal(SIGINT,  handleInterrupt);
     signal(SIGUSR1, onsigusr1);
     signal(SIGUSR2, onsigusr2);
-#ifndef Win32
+#ifndef _WIN32
     signal(SIGPIPE, handlePipe);
 #else
     signal(SIGSEGV, win32_segv);
@@ -865,7 +877,7 @@ void setup_Rmainloop(void)
     /* Initialize the interpreter's internal structures. */
 
 #ifdef HAVE_LOCALE_H
-#ifdef Win32
+#ifdef _WIN32
     {
 	char *p, Rlocale[1000]; /* Windows' locales can be very long */
 	p = getenv("LC_ALL");
@@ -875,22 +887,18 @@ void setup_Rmainloop(void)
 	/* We'd like to use warning, but need to defer.
 	   Also cannot translate. */
 	if(!setlocale(LC_CTYPE, p))
-	    snprintf(deferred_warnings[ndeferred_warnings++], 250,
-		     "Setting LC_CTYPE=%s failed\n", p);
+	    snprintf(deferred_warnings[ndeferred_warnings++], 250, _("Setting LC_CTYPE=%s failed\n"), p);
 	if((p = getenv("LC_COLLATE"))) {
 	    if(!setlocale(LC_COLLATE, p))
-		snprintf(deferred_warnings[ndeferred_warnings++], 250,
-			 "Setting LC_COLLATE=%s failed\n", p);
+		snprintf(deferred_warnings[ndeferred_warnings++], 250, _("Setting LC_COLLATE=%s failed\n"), p);
 	} else setlocale(LC_COLLATE, Rlocale);
 	if((p = getenv("LC_TIME"))) {
 	    if(!setlocale(LC_TIME, p))
-		snprintf(deferred_warnings[ndeferred_warnings++], 250,
-			 "Setting LC_TIME=%s failed\n", p);
+		snprintf(deferred_warnings[ndeferred_warnings++], 250, _("Setting LC_TIME=%s failed\n"), p);
 	} else setlocale(LC_TIME, Rlocale);
 	if((p = getenv("LC_MONETARY"))) {
 	    if(!setlocale(LC_MONETARY, p))
-		snprintf(deferred_warnings[ndeferred_warnings++], 250,
-			 "Setting LC_MONETARY=%s failed\n", p);
+		snprintf(deferred_warnings[ndeferred_warnings++], 250, _("Setting LC_MONETARY=%s failed\n"), p);
 	} else setlocale(LC_MONETARY, Rlocale);
 	/* Windows does not have LC_MESSAGES */
 
@@ -902,34 +910,27 @@ void setup_Rmainloop(void)
     }
 #else /* not Win32 */
     if(!setlocale(LC_CTYPE, ""))
-	snprintf(deferred_warnings[ndeferred_warnings++], 250,
-		 "Setting LC_CTYPE failed, using \"C\"\n");
+	snprintf(deferred_warnings[ndeferred_warnings++], 250, _("Setting LC_CTYPE failed, using \"C\"\n"));
     if(!setlocale(LC_COLLATE, ""))
-	snprintf(deferred_warnings[ndeferred_warnings++], 250,
-		 "Setting LC_COLLATE failed, using \"C\"\n");
+	snprintf(deferred_warnings[ndeferred_warnings++], 250, _("Setting LC_COLLATE failed, using \"C\"\n"));
     if(!setlocale(LC_TIME, ""))
-	snprintf(deferred_warnings[ndeferred_warnings++], 250,
-		 "Setting LC_TIME failed, using \"C\"\n");
+	snprintf(deferred_warnings[ndeferred_warnings++], 250, _("Setting LC_TIME failed, using \"C\"\n"));
 #ifdef ENABLE_NLS
     if(!setlocale(LC_MESSAGES, ""))
-	snprintf(deferred_warnings[ndeferred_warnings++], 250,
-		 "Setting LC_MESSAGES failed, using \"C\"\n");
+	snprintf(deferred_warnings[ndeferred_warnings++], 250, _("Setting LC_MESSAGES failed, using \"C\"\n"));
 #endif
     /* NB: we do not set LC_NUMERIC */
 #ifdef LC_MONETARY
     if(!setlocale(LC_MONETARY, ""))
-	snprintf(deferred_warnings[ndeferred_warnings++], 250,
-		 "Setting LC_MONETARY failed, using \"C\"\n");
+	snprintf(deferred_warnings[ndeferred_warnings++], 250, _("Setting LC_MONETARY failed, using \"C\"\n"));
 #endif
 #ifdef LC_PAPER
     if(!setlocale(LC_PAPER, ""))
-	snprintf(deferred_warnings[ndeferred_warnings++], 250,
-		 "Setting LC_PAPER failed, using \"C\"\n");
+	snprintf(deferred_warnings[ndeferred_warnings++], 250, _("Setting LC_PAPER failed, using \"C\"\n"));
 #endif
 #ifdef LC_MEASUREMENT
     if(!setlocale(LC_MEASUREMENT, ""))
-	snprintf(deferred_warnings[ndeferred_warnings++], 250,
-		 "Setting LC_MEASUREMENT failed, using \"C\"\n");
+	snprintf(deferred_warnings[ndeferred_warnings++], 250, _("Setting LC_MEASUREMENT failed, using \"C\"\n"));
 #endif
 #endif /* not Win32 */
 #endif
@@ -1096,8 +1097,7 @@ void setup_Rmainloop(void)
 	    warning(deferred_warnings[i]);
     }
     if (R_CollectWarnings) {
-	REprintf(_("During startup - "));
-	PrintWarnings();
+	PrintWarnings(n_("Warning message during startup:", "Warning messages during startup:", R_CollectWarnings));
     }
     if(R_Verbose)
 	REprintf(" ending setup_Rmainloop(): R_Interactive = %d {main.c}\n",
@@ -1604,9 +1604,8 @@ Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
     while(h) {
 	again = (h->cb)(expr, value, succeeded, visible, h->data);
 	if(R_CollectWarnings) {
-	    REprintf(_("warning messages from top-level task callback '%s'\n"),
-		     h->name);
-	    PrintWarnings();
+	    REprintf(_("warning messages from top-level task callback '%s'\n"), h->name);
+	    PrintWarnings(NULL);
 	}
 	if(again) {
 	    prev = h;

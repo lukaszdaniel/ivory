@@ -27,9 +27,9 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include "win-nls.h"
+#include <localization.h>
 
-#ifdef Win32
+#ifdef _WIN32
 #define USE_MDI 1
 #endif
 
@@ -51,6 +51,7 @@
 void reEnc2(const char *x, char *y, int ny,
 	    cetype_t ce_in, cetype_t ce_out, int subst);
 
+#undef gettext
 #define gettext GA_gettext
 
 #define MCHECK(a) if (!(a)) {del(c); return NULL;}
@@ -261,7 +262,7 @@ static void editorprint(control m)
     while (i < strlen(contents)) {
 	if ( linep + fh >= rr ) { /* new page */
 	    if (page > 1) nextpage(lpr);
-	    snprintf(msg, LF_FACESIZE + 128, "Page %d", page++);
+	    snprintf(msg, LF_FACESIZE + 128, _("Page %d"), page++);
 	    gdrawstr(lpr, f, Black, pt(cc - gstrwidth(lpr, f, msg) - 1, top),
 		     msg);
 	    linep = top + 2*fh;
@@ -323,7 +324,7 @@ int editorchecksave(editor c)
     char buf[EDITORMAXTITLE + 100];
     if (ggetmodified(t)) {
 	snprintf(buf, EDITORMAXTITLE + 100,
-		 "\"%s\" has been modified.  Do you want to save the changes?",
+		 _("File \"%s\" has been modified. Do you want to save the changes?"),
 		 (p->title ? p->title : "Untitled"));
 	save = askyesnocancel(buf);
 	switch (save) {
@@ -612,13 +613,12 @@ static void editorhelp(void)
     strcat(s, G_("A standard text editor for editing and running R code.\n"));
     strcat(s, "\n");
     strcat(s, G_("RUNNING COMMANDS\n"));
-    strcat(s, G_("To run a line or section of R code, select the code and either\n"));
+    strcat(s, G_("To run a line or section of R code, select the code and either:\n"));
     strcat(s, G_("     Press Ctrl-R\n"));
     strcat(s, G_("     Select \"Run line or selection\" from the \"Edit\" menu\n"));
     strcat(s, G_("     Press the \"Run line or selection\" icon on the toolbar\n"));
     strcat(s, G_("This will copy the selected commands to the console and evaluate them.\n"));
-    strcat(s, G_("If there is no selection, this will just run the current line and advance\n"));
-    strcat(s, G_("the cursor by one line.\n"));
+    strcat(s, G_("If there is no selection, this will just run the current line and advance\nthe cursor by one line.\n"));
 
     askok(s);
 }

@@ -42,7 +42,7 @@
 #define R_USE_SIGNALS 1
 #include <Defn.h>
 #include <Internal.h>
-#include "win-nls.h"
+#include <localization.h>
 
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
@@ -712,7 +712,7 @@ static size_t Wpipe_write(const void *ptr, size_t size, size_t nitems,
     GetExitCodeProcess(rp->pi.hProcess, &ret);
     if(ret != STILL_ACTIVE) {
 	rp->active = 0;
-	warning("broken Windows pipe");
+	warning(_("broken Windows pipe"));
 	return 0;
     }
     if (WriteFile(rp->write, ptr, towrite, &write, NULL) != 0)
@@ -730,7 +730,7 @@ static int Wpipe_vfprintf(Rconnection con, const char *format, va_list ap)
     res = vsnprintf(b, BUFSIZE, format, ap);
     if(res < 0) { /* a failure indication, so try again */
 	b[BUFSIZE -1] = '\0';
-	warning("printing of extremely long output is truncated");
+	warning(_("printing of extremely long output is truncated"));
 	res = BUFSIZE;
     }
     return Wpipe_write(buf, res, 1, con);
@@ -802,7 +802,7 @@ SEXP do_syswhich(SEXP call, SEXP op, SEXP args, SEXP env)
 
     nm = CAR(args);
     if(!isString(nm))
-	error(_("'names' is not a character vector"));
+	error(_("'%s' argument is not a character vector"), "names");
     n = LENGTH(nm);
     PROTECT(ans = allocVector(STRSXP, n));
     for(i = 0; i < n; i++) {

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-03 21:07+0100\n"
+"POT-Creation-Date: 2016-03-13 10:24+0100\n"
 "PO-Revision-Date: 2012-03-08 20:50+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -130,33 +130,33 @@ msgstr "단항 마이너스 검사에 잘못된 형식이 있습니다"
 msgid "only single-argument calls are supported"
 msgstr ""
 
-#: deriv.c:529
+#: deriv.c:525
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr "함수 '%s'는 미분함수 테이블에 없습니다"
 
-#: deriv.c:634
+#: deriv.c:630
 msgid "'expr' must be an expression or call"
 msgstr ""
 
-#: deriv.c:637
+#: deriv.c:633
 msgid "variable must be a character string"
 msgstr "변수는 문자열이어야 합니다"
 
-#: deriv.c:639
+#: deriv.c:635
 msgid "only the first element is used as variable name"
 msgstr " 번째 요소만 변수 이름으로 사용되었습니다 "
 
-#: deriv.c:652
+#: deriv.c:648
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr "'%s'의 식이 잘못되었습니다"
 
-#: deriv.c:930 model.c:93
+#: deriv.c:926 model.cpp:115
 msgid "invalid variable names"
 msgstr "변수 이름들이 잘못되었습니다"
 
-#: deriv.c:939
+#: deriv.c:935
 msgid "invalid tag"
 msgstr "태그가 부적절합니다"
 
@@ -540,158 +540,163 @@ msgstr "'maxiter'는 양수여야 합니다"
 msgid "'%s' argument must be finite and >= 0"
 msgstr "'maxiter'는 양수여야 합니다"
 
-#: mAR.c:83
+#: mAR.c:99
 msgid "assert failed in src/library/ts/src/carray.c"
 msgstr ""
 
-#: mAR.c:324 mAR.c:354
+#: mAR.c:340 mAR.c:370
 #, c-format
 msgid "Unknown operator in array_op"
 msgstr ""
 
-#: mAR.c:470 mAR.c:513
+#: mAR.c:486 mAR.c:529
 #, fuzzy, c-format
 msgid "Singular matrix in '%s' function"
 msgstr "Singular matrix in ldet"
 
-#: mAR.c:700 massdist.c:41 model.c:366 model.c:374 optim.c:191
+#: mAR.c:716 massdist.c:41 model.cpp:387 model.cpp:395 optim.c:191
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "'%s' 인수가 잘못되었습니다 "
 
-#: mAR.c:836
+#: mAR.c:852
 msgid "Burg's algorithm failed to find partial correlation"
 msgstr "Burg 의 알고리즘를 이용하여 부분상관관계를 찾는데 실패했습니다 "
 
-#: model.c:91
+#: model.cpp:113
 msgid "invalid variables"
 msgstr "변수가 올바르지 않습니다"
 
-#: model.c:95 model.c:100
+#: model.cpp:117 model.cpp:122
 msgid "number of variables != number of variable names"
 msgstr "변수의 개수가 변수 이름의 개수와 일치하지 않습니다"
 
-#: model.c:98
+#: model.cpp:120
 msgid "invalid extra variables"
 msgstr "추가 변수가 잘못되었습니다"
 
-#: model.c:102
+#: model.cpp:124
 msgid "invalid extra variable names"
 msgstr "추가 변수 이름이 잘못되었습니다"
 
-#: model.c:123
+#: model.cpp:145
 #, c-format
 msgid "overlong names in '%s'"
 msgstr "'%s'의 이름이 너무 깁니다"
 
-#: model.c:150
+#: model.cpp:172
 #, c-format
 msgid "invalid type (%s) for variable '%s'"
 msgstr "형식 (%s)은 변수 '%s'에 대해서는 잘못되었습니다"
 
-#: model.c:155
+#: model.cpp:177
 #, c-format
 msgid "variable lengths differ (found for '%s')"
 msgstr "변수('%s'기준)의 길이가 다릅니다"
 
-#: model.c:209
+#: model.cpp:231
 msgid "invalid result from na.action"
 msgstr "na.action 결과가 올바르지 않습니다"
 
-#: model.c:385
+#: model.cpp:406
 msgid "invalid model frame"
 msgstr "모델 프레임이 잘못되었습니다"
 
-#: model.c:387
+#: model.cpp:408
 msgid "do not know how many cases"
 msgstr "케이스의 수가 몇인지 모르겠습니다"
 
-#: model.c:411
+#: model.cpp:432
 #, c-format
 msgid "variable lengths differ (found for variable %d)"
 msgstr "변수 (%d 변수 기준)의 길이가 다릅니다"
 
-#: model.c:415 model.c:422
+#: model.cpp:436 model.cpp:443
 #, c-format
 msgid "variable %d has no levels"
 msgstr "변수 %d 수준이 없습니다"
 
-#: model.c:534
+#: model.cpp:556
 msgid "the response appeared on the right-hand side and was dropped"
 msgstr "목적 변수가 우변에 있기 때문에 버려졌습니다"
 
-#: model.c:554
+#: model.cpp:576
 #, c-format
 msgid "term %d would require %.0g columns"
 msgstr "항목 %d은 %.0g 라인을 필요로 할 수도 있습니다"
 
-#: model.c:558
+#: model.cpp:580
 #, c-format
 msgid "matrix would require %.0g columns"
 msgstr "행렬은 %.0g 라인을 필요로 할 수도 있습니다"
 
-#: model.c:569
+#: model.cpp:591
 #, fuzzy, c-format
-msgid "problem with term %d in model.matrix(): no columns are assigned"
+msgid "problem with term %d in model.matrix: no columns are assigned"
 msgstr ""
 "model.matrix 중에 항 %d에 문제가 있습니다: 아무 열도 할당되지 않았습니다"
 
-#: model.c:617 model.c:622 model.c:628 model.c:639 model.c:645 model.c:651
+#: model.cpp:640 model.cpp:645 model.cpp:651 model.cpp:662 model.cpp:668
+#: model.cpp:674
 msgid "term names will be truncated"
 msgstr "항의 이름이 잘릴 것입니다"
 
-#: model.c:631
+#: model.cpp:654
 msgid "complex variables are not currently allowed in model matrices"
 msgstr "복소수는 현재 모델 행렬에서 허용되지 않습니다"
 
-#: model.c:655
+#: model.cpp:678
 #, c-format
 msgid "variables of type '%s' are not allowed in model matrices"
 msgstr "유형 '%s'변수는 모델 행렬에서 허용되지 않습니다"
 
-#: model.c:876
+#: model.cpp:890
 msgid "invalid formula in 'update'"
 msgstr "'update'의 식이 잘못되었습니다"
 
-#: model.c:910
+#: model.cpp:924
 msgid "formula expected"
 msgstr "식이 있어야 합니다"
 
-#: model.c:1041
+#: model.cpp:1055
 msgid "invalid term in model formula"
 msgstr "모델식에 잘못된 항목이 있습니다"
 
-#: model.c:1116
+#: model.cpp:1130
 msgid "invalid model formula"
 msgstr "모델식이 잘못되었습니다"
 
-#: model.c:1142 model.c:1401
+#: model.cpp:1156 model.cpp:1404
 msgid "invalid power in formula"
 msgstr "모델식에 잘못된 지수가 있습니다"
 
-#: model.c:1178 model.c:1585
-#, fuzzy, c-format
-msgid "invalid model formula in '%s' function"
-msgstr "EncodeVars의 모델식이 잘못되었습니다"
+#: model.cpp:1192
+msgid "invalid model formula in ExtractVars"
+msgstr "ExtractVars의 모델식이 잘못되었습니다"
 
-#: model.c:1524
+#: model.cpp:1527
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "''를 사용한 데이터 프레임에서 중복된 이름 '%s'이 있습니다"
 
-#: model.c:1671
+#: model.cpp:1588
+#, fuzzy
+msgid "invalid model formula in EncodeVars"
+msgstr "ExtractVars의 모델식이 잘못되었습니다"
+
+#: model.cpp:1674
 msgid "argument is not a valid model"
 msgstr "인수는 유효한 모델이 아닙니다"
 
-#: model.c:1681
+#: model.cpp:1684
 msgid "'specials' must be NULL or a character vector"
 msgstr "'specials' must be NULL or a character vector"
 
-#: model.c:1693
+#: model.cpp:1696
 msgid "'data' argument is of the wrong type"
 msgstr "'data'인수가 잘못된 유형입니다"
 
-#: model.c:1963
+#: model.cpp:1961
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.'가 수식에서 있습니다만, 'data'인수가 아닙니다"
 
@@ -1168,6 +1173,10 @@ msgstr "마지막 %d 개의 관측치가 결측치입니다 "
 msgid "ifault=%d. This should not happen"
 msgstr ""
 
+#, fuzzy
+#~ msgid "invalid model formula in '%s' function"
+#~ msgstr "EncodeVars의 모델식이 잘못되었습니다"
+
 #~ msgid "'x' is NULL"
 #~ msgstr "'x'이 비어 있습니다"
 
@@ -1200,9 +1209,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "invalid model formula in '%s'function"
 #~ msgstr "EncodeVars의 모델식이 잘못되었습니다"
-
-#~ msgid "invalid model formula in ExtractVars"
-#~ msgstr "ExtractVars의 모델식이 잘못되었습니다"
 
 #~ msgid "span is too small"
 #~ msgstr "범위가 너무 작습니다 "

@@ -40,7 +40,7 @@
 #define RTLD_NOW 0
 
 #include "hpdlfcn.h"
-
+#include <localization.h>
 /*
  * This is a minimal implementation of the ELF dlopen, dlclose, dlsym
  * and dlerror routines based on HP's shl_load, shl_unload and
@@ -153,12 +153,11 @@ void *dlopen(const char *fname, int mode)
     }
     if (handle == NULL) {
       dlerrno = 1;
-      sprintf(errbuf, "can't open %s", fname);
+      sprintf(errbuf, _("unable to open file '%s'"), fname);
     }
   }
 #ifdef DEBUG
-  printf("opening library %s, handle = %x, count = %d\n",
-	 fname, handle, entry ? lib_entry_count(entry) : -1);
+  printf(_("opening library %s, handle = %x, count = %d\n"), fname, handle, entry ? lib_entry_count(entry) : -1);
   if (dlerrno) printf("%s\n", dlerror());
 #endif
   return (void *) handle;
@@ -169,8 +168,7 @@ int dlclose(void *handle)
   LibEntry entry;
 #ifdef DEBUG
   entry = find_lib_entry(handle);
-  printf("closing library handle = %x, count = %d\n",
-	 handle, entry ? lib_entry_count(entry) : -1);
+  printf(("closing library handle = %x, count = %d\n"), handle, entry ? lib_entry_count(entry) : -1);
 #endif
 
   dlerrno = 0;
@@ -191,7 +189,7 @@ int dlclose(void *handle)
     }
     /* if you get to here, an error has occurred */
     dlerrno = 1;
-    sprintf(errbuf, "attempt to close library failed");
+    sprintf(errbuf, _("attempt to close library failed"));
 #ifdef DEBUG
     printf("%s\n", dlerror());
 #endif
@@ -214,9 +212,9 @@ void *dlsym(void *handle, const char *name)
 
   if (shl_findsym(&myhandle, name, TYPE_PROCEDURE, &f) != 0) {
     dlerrno = 1;
-    sprintf(errbuf, "symbol %s not found", name);
+    sprintf(errbuf, _("symbol '%s' was not found"), name);
 #ifdef DEBUG
-    printf("symbol %s not found", name);
+    printf(_("symbol '%s' was not found"), name);
 #endif
 
     f = NULL;

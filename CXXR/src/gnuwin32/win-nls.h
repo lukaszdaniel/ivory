@@ -24,4 +24,9 @@
  *  https://www.R-project.org/Licenses/
  */
 
-//#include <localization.h>
+/*
+ * IVORY:
+ * Definitions have been merged in 'Localization.h' header.
+ * Please use 'Localization.h' instead of 'win-nls.h'.
+ */
+#include <localization.h>

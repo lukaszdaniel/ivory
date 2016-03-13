@@ -39,8 +39,9 @@
 #endif
 
 #define R_USE_SIGNALS 1
-#include <Defn.h>
 #include <localization.h>
+#include <R_ext/Minmax.h>
+#include <Defn.h>
 #include <Internal.h>
 
 #ifdef HAVE_STRINGS_H
@@ -77,7 +78,7 @@ extern FILE* ifp; /* from system.c */
 
 void attribute_hidden Rstd_Suicide(const char *s)
 {
-    REprintf("Fatal error: %s\n", s);
+    REprintf(_("Fatal error: %s\n"), s);
     /* Might be called before translation is running */
     R_CleanUp(SA_SUICIDE, 2, 0);
 }
@@ -1056,7 +1057,7 @@ void attribute_hidden NORET Rstd_CleanUp(SA_TYPE saveact, int status, int runLas
 
 	    R_ClearerrConsole();
 	    R_FlushConsole();
-	    int res = R_ReadConsole("Save workspace image? [y/n/c]: ",
+	    int res = R_ReadConsole(_("Save workspace image? [y/n/c]: "),
 				    buf, 128, 0);
 	    if(res) {
 		switch (buf[0]) {
@@ -1108,7 +1109,7 @@ void attribute_hidden NORET Rstd_CleanUp(SA_TYPE saveact, int status, int runLas
     if(saveact != SA_SUICIDE) KillAllDevices();
     R_CleanTempDir();
     if(saveact != SA_SUICIDE && R_CollectWarnings)
-	PrintWarnings();	/* from device close and (if run) .Last */
+	PrintWarnings(NULL);	/* from device close and (if run) .Last */
     if(ifp) { 
 	fclose(ifp);    /* input file from -f or --file= */
 	ifp = NULL; 	/* To avoid trying to close it again */
@@ -1167,8 +1168,7 @@ Rstd_ShowFiles(int nfile,		/* number of files */
 			unlink(R_ExpandFileName(file[i]));
 		}
 		else
-		    fprintf(tfp, _("Cannot open file '%s': %s\n\n"),
-			    file[i], strerror(errno));
+		    fprintf(tfp, _("cannot open file '%s': %s"), file[i], strerror(errno));
 	    }
 	    fclose(tfp);
 	}
@@ -1194,7 +1194,7 @@ int attribute_hidden Rstd_ChooseFile(int _new, char *buf, int len)
 {
     size_t namelen;
     char *bufp;
-    R_ReadConsole("Enter file name: ", (unsigned char *)buf, len, 0);
+    R_ReadConsole(_("Enter file name: "), (unsigned char *)buf, len, 0);
     namelen = strlen(buf);
     bufp = &buf[namelen - 1];
     while (bufp >= buf && isspace((int)*bufp))
@@ -1231,7 +1231,7 @@ void attribute_hidden Rstd_loadhistory(SEXP call, SEXP op, SEXP args, SEXP env)
 	errorcall(call, _("invalid '%s' argument"), "file");
     p = R_ExpandFileName(translateChar(STRING_ELT(sfile, 0)));
     if(strlen(p) > PATH_MAX - 1)
-	errorcall(call, _("'file' argument is too long"));
+	errorcall(call, _("'%s' argument is too long"), "file");
     strcpy(file, p);
 #if defined(HAVE_LIBREADLINE) && defined(HAVE_READLINE_HISTORY_H)
     if(R_Interactive && UsingReadline) {
@@ -1254,7 +1254,7 @@ void attribute_hidden Rstd_savehistory(SEXP call, SEXP op, SEXP args, SEXP env)
 	errorcall(call, _("invalid '%s' argument"), "file");
     p = R_ExpandFileName(translateChar(STRING_ELT(sfile, 0)));
     if(strlen(p) > PATH_MAX - 1)
-	errorcall(call, _("'file' argument is too long"));
+	errorcall(call, _("'%s' argument is too long"), "file");
     strcpy(file, p);
 #if defined(HAVE_LIBREADLINE) && defined(HAVE_READLINE_HISTORY_H)
     if(R_Interactive && UsingReadline) {
@@ -1291,20 +1291,20 @@ void attribute_hidden Rstd_addhistory(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 
-#define R_MIN(a, b) ((a) < (b) ? (a) : (b))
+//#define R_MIN(a, b) ((a) < (b) ? (a) : (b))
 
 void Rsleep(double timeint)
 {
     double tm = timeint * 1e6, start = currentTime(), elapsed;
     for (;;) {
 	fd_set *what;
-	tm = R_MIN(tm, 2e9); /* avoid integer overflow */
+	tm = min(tm, 2e9); /* avoid integer overflow */
 	
 	int wt = -1;
 	if (R_wait_usec > 0) wt = R_wait_usec;
 	if (Rg_wait_usec > 0 && (wt < 0 || wt > Rg_wait_usec))
 	    wt = Rg_wait_usec;
-	int Timeout = (int) (wt > 0 ? R_MIN(tm, wt) : tm);
+	int Timeout = (int) (wt > 0 ? min(tm, wt) : tm);
 	what = R_checkActivity(Timeout, 1);
 	/* For polling, elapsed time limit ... */
 	R_CheckUserInterrupt();

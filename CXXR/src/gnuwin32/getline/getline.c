@@ -16,6 +16,7 @@
 
 #include <R_ext/Boolean.h>
 #include <R_ext/Error.h>
+#include <localization.h>
 
 /*
  * Copyright (C) 1991, 1992, 1993 by Chris Thewalt (thewalt@ce.berkeley.edu)
@@ -262,9 +263,9 @@ gl_init(void)
         gl_hist_init(512, 1);
     }
     if (isatty(0) == 0 || isatty(1) == 0)
-	gl_error("\n*** Error: getline(): not interactive, use stdio.\n");
+	gl_error(_("\n*** Error: getline(): not interactive, use stdio."));
     if (!(gl_killbuf=calloc(BUF_SIZE,sizeof(char))))
-        gl_error("\n*** Error: getline(): no enough memory.\n");
+        gl_error(_("\n*** Error: getline(): no enough memory."));
     gl_char_init();
     gl_init_done = 1;
 }
@@ -286,7 +287,7 @@ gl_setwidth(int w)
 	gl_termw = w;
 	gl_scroll = w / 3;
     } else {
-	gl_error("\n*** Error: minimum screen width is 21\n");
+	gl_error(_("\n*** Error: minimum screen width is 21"));
     }
 }
 
@@ -531,11 +532,11 @@ gl_addchar(int c)
 	        res = mbrtowc(&wc, s, clen, &mb_st);
 	        if(res >= 0) break;
 	        if(res == -1) 
-		    gl_error("invalid multibyte character in mbcs_get_next");
+		    gl_error(_("invalid multibyte character in mbcs_get_next"));
   	        /* so res == -2 */
 	        c = gl_getc();
 	        if(c == EOF) 
-		    gl_error("EOF whilst reading MBCS char");
+		    gl_error(_("EOF whilst reading MBCS char"));
 	        s[clen++] = c;
 	    } /* we've tried enough, so must be complete or invalid by now */
 	}
@@ -572,7 +573,7 @@ gl_yank(void)
     if (len > 0) {
 	if (gl_overwrite == 0) {
             if (gl_cnt + len >= BUF_SIZE - 1) 
-	        gl_error("\n*** Error: getline(): input buffer overflow\n");
+	        gl_error(_("\n*** Error: getline(): input buffer overflow"));
             for (i=gl_cnt; i >= gl_pos; i--)
                 gl_buf[i+len] = gl_buf[i];
 	    for (i=0; i < len; i++)
@@ -581,7 +582,7 @@ gl_yank(void)
 	} else {
 	    if (gl_pos + len > gl_cnt) {
                 if (gl_pos + len >= BUF_SIZE - 1) 
-	            gl_error("\n*** Error: getline(): input buffer overflow\n");
+	            gl_error(_("\n*** Error: getline(): input buffer overflow"));
 		gl_buf[gl_pos + len] = 0;
             }
 	    for (i=0; i < len; i++)
@@ -645,7 +646,7 @@ gl_newline(void)
     int len = gl_cnt;
     int loc = gl_width - 5;	/* shifts line back to start position */
     if (gl_cnt >= BUF_SIZE - 1) { 
-        gl_error("\n*** Error: getline(): input buffer overflow\n");
+        gl_error(_("\n*** Error: getline(): input buffer overflow"));
     }
     if (gl_out_hook) {
 	change = gl_out_hook(gl_buf);
@@ -947,7 +948,7 @@ gl_hist_init(int size, int beep)
     HIST_SIZE = size;
     hist_buf = (char **) malloc(size * sizeof(char *));
     if(!hist_buf)
-	gl_error("\n*** Error: gl_hist_init() failed on malloc\n");
+	gl_error(_("\n*** Error: gl_hist_init() failed on malloc"));
     hist_buf[0] = "";
     for (i = 1; i < HIST_SIZE; i++)
 	hist_buf[i] = (char *)0;
@@ -975,7 +976,7 @@ gl_histadd(const char *buf)
 	    int i, size = HIST_SIZE + 512;
 	    hist_buf = (char **) realloc(hist_buf, size * sizeof(char *));
 	    if(!hist_buf)
-		gl_error("\n*** Error: gl_histadd() failed on realloc\n");
+		gl_error(_("\n*** Error: gl_histadd() failed on realloc"));
 	    for(i = HIST_SIZE; i < size; i++)
 		hist_buf[i] = (char *)0;
 	    HIST_SIZE = size;
@@ -1040,7 +1041,7 @@ hist_save(const char *p)
         }
     }
     if (s == 0) 
-	gl_error("\n*** Error: hist_save() failed on malloc\n");
+	gl_error(_("\n*** Error: hist_save() failed on malloc"));
     return s;
 }
 
@@ -1053,7 +1054,7 @@ void gl_savehistory(const char *file, int size)
     fp = fopen(file, "w");
     if (!fp) {
        char msg[256];
-       sprintf(msg, "Unable to open %s", file);
+       sprintf(msg, _("unable to open file '%s'"), file);
        R_ShowMessage(msg);
        return;
     }

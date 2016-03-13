@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-23 20:39\n"
+"POT-Creation-Date: 2016-03-13 10:23\n"
 "PO-Revision-Date: 2015-01-17 15:43+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1792,11 +1792,6 @@ msgid ""
 "does not seem to be a method table for generic %s in tracing environment"
 msgstr "在追溯环境里找不到\"%s\"泛型函数的方法表"
 
-#. R/zzz.R: gettext(" done", domain = "R-methods")
-#: R/zzz.R:0
-msgid "done"
-msgstr ""
-
 #. R/SClasses.R: gettext("duplicate class names among superclasses: %s", domain = "R-methods")
 #: R/SClasses.R:0
 msgid "duplicate class names among superclasses: %s"
@@ -2104,11 +2099,6 @@ msgid ""
 msgstr ""
 "\"%s\"旧式类别信息有矛盾；虽然类别的定义是存在的，但它不扩展\"%s\"而且也不能"
 "当作数据来用"
-
-#. R/zzz.R: gettext("initializing class and method definitions ...", domain = "R-methods")
-#: R/zzz.R:0
-msgid "initializing class and method definitions ..."
-msgstr ""
 
 #. R/RClassUtils.R: gettextf("initializing objects from class %s with these arguments is not supported",     dQuote(Class))
 #: R/RClassUtils.R:0
@@ -3263,11 +3253,11 @@ msgid ""
 msgstr ""
 "无法在%s中改变正式参数，因为存在的参数数目比新的参数数目要小：(%s)比(%s)"
 
-#. R/methodsTable.R: gettext("trying to check signature length of generic %s, but it is not a generic function: i = %d, funs = %s, gnames = %s",     domain = "R-methods")
+#. R/methodsTable.R: gettextf("trying to check signature length of generic '%s', but it is not a generic function: i = %d, funs = %s, gnames = %s",     what, i, paste(unlist(funs), collapse = ", "), paste(as.character(gnames), collapse = ", "))
 #: R/methodsTable.R:0
 #, fuzzy
 msgid ""
-"trying to check signature length of generic %s, but it is not a generic "
+"trying to check signature length of generic '%s', but it is not a generic "
 "function: i = %d, funs = %s, gnames = %s"
 msgstr "无法将方法标记同一个不是泛型函数的对象(类别是%s)相对应起来"
 

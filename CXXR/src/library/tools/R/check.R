@@ -45,11 +45,11 @@ R_runR <- function(cmd = NULL, Ropts = "", env = "",
         } else Rin <- stdin
         suppressWarnings(system2(if(nzchar(arch)) file.path(R.home(), "bin", arch, "Rterm.exe")
                                  else file.path(R.home("bin"), "Rterm.exe"),
-                                 c(Ropts, paste("-f", Rin)), stdout, stderr, env = env))
+                                 c(Ropts, paste("-f", Rin)), stdout, stderr, env = c("LANGUAGE=en", env)))
     } else {
         suppressWarnings(system2(file.path(R.home("bin"), "R"),
                                  c(if(nzchar(arch)) paste0("--arch=", arch), Ropts),
-                                 stdout, stderr, stdin, input = cmd, env = env))
+                                 stdout, stderr, stdin, input = cmd, env = c("LANGUAGE=en", env)))
     }
 }
 
@@ -64,7 +64,7 @@ setRlibs <-
             if(useJunctions) Sys.junction(from, to)
             else file.copy(from, to, recursive = TRUE)
         } else file.symlink(from, to)
-        if (!res) stop(gettextf("cannot link from %s", from), domain = NA)
+        if (!res) stop(gettextf("cannot link from %s", sQuote(from)), domain = "R-tools")
     }
 
     pi <- .split_description(.read_description(file.path(pkgdir, "DESCRIPTION")))
@@ -207,8 +207,7 @@ setRlibs <-
                 {
                     out <- R_runR(cmd, R_opts2, env)
                     ## pesky gdata ....
-                    grep("^(ftype: not found|File type)", out,
-                         invert = TRUE, value = TRUE)
+                    grep("^(ftype: not found|File type)", out, invert = TRUE, value = TRUE)
                 }
         } else
             function(cmd,
@@ -255,15 +254,15 @@ setRlibs <-
         ## pkg is the argument we received from the main loop.
         ## pkgdir is the corresponding absolute path,
 
-        checkingLog(Log, "package directory")
+        checkingLog(Log, gettext("checking package directory ...", domain = "R-tools"))
         setwd(startdir)
         pkg <- sub("/$", "", pkg)
         if (dir.exists(pkg)) {
             setwd(pkg) ## wrap in try()?
             pkgdir <- getwd()
-            resultLog(Log, "OK")
+            resultLog(Log, gettext("OK", domain = "R-tools"))
         } else {
-            errorLog(Log, "Package directory ", sQuote(pkg), "does not exist.")
+            errorLog(Log, gettextf("Package directory %s does not exist.", sQuote(pkg), domain = "R-tools"))
             summaryLog(Log)
             do_exit(1L)
         }
@@ -287,7 +286,7 @@ setRlibs <-
             if (this_multiarch) {
                 Log$stars <<-  "**"
                 for (arch in inst_archs) {
-                    printLog(Log, "* loading checks for arch ", sQuote(arch), "\n")
+                    printLog(Log, gettextf("* loading checks for arch %s\n", sQuote(arch), domain = "R-tools"))
                     check_loading(arch)
                 }
                 Log$stars <<-  "*"
@@ -314,16 +313,14 @@ setRlibs <-
 
         miss <- file.path("inst", "doc", c("Rplots.ps", "Rplots.pdf"))
         if (any(f <- file.exists(miss))) {
-            checkingLog(Log, "for left-overs from vignette generation")
+            checkingLog(Log, gettext("checking for left-overs from vignette generation ...", domain = "R-tools"))
             warningLog(Log)
-            printLog(Log,
-                     paste("  file", paste(sQuote(miss[f]), collapse = ", "),
-                           "will not be installed: please remove it\n"))
+            printLog(Log, gettextf("  file %s will not be installed: please remove it\n", paste(sQuote(miss[f]), collapse = ", "), domain = "R-tools"))
         }
         if (dir.exists("inst/doc")) {
             if (R_check_doc_sizes) check_doc_size()
             else if (as_cran)
-                warningLog(Log, "'qpdf' is needed for checks on size reduction of PDFs")
+                warningLog(Log, gettext("'qpdf' is needed for checks on size reduction of PDFs", domain = "R-tools"))
         }
         if (dir.exists("inst/doc") && do_install) check_doc_contents()
         if (dir.exists("vignettes")) check_vign_contents(ignore_vignettes)
@@ -348,12 +345,10 @@ setRlibs <-
                 }
                 sources <- unique(sources)
                 if(length(sources)) {
-                    checkingLog(Log, "for old-style vignette sources")
-                    msg <- c("Vignette sources only in 'inst/doc':",
-                             strwrap(paste(sQuote(sources), collapse = ", "),
-                                     indent = 2L, exdent = 2L),
-                             "A 'vignettes' directory is required as from R 3.1.0",
-                             "and these will not be indexed nor checked")
+                    checkingLog(Log, gettext("checking for old-style vignette sources ...", domain = "R-tools"))
+                    msg <- c(gettext("Vignette sources only in 'inst/doc':", domain = "R-tools"),
+                            strwrap(paste(sQuote(sources), collapse = ", "), indent = 2L, exdent = 2L),
+                             gettext("A 'vignettes' directory is required as from R 3.1.0 and these will not be indexed nor checked", domain = "R-tools"))
                     ## warning or error eventually
                     noteLog(Log, paste(msg, collapse = "\n"))
                 }
@@ -366,15 +361,15 @@ setRlibs <-
         if (dir.exists(file.path(libdir, pkgname, "help"))) {
             run_examples()
         } else if (dir.exists(file.path(pkgdir, "man"))) {
-            checkingLog(Log, "examples")
-            resultLog(Log, "SKIPPED")
+            checkingLog(Log, gettext("checking examples ...", domain = "R-tools"))
+            resultLog(Log, gettext("SKIPPED", domain = "R-tools"))
         }
 
         ## Run the package-specific tests.
         tests_dir <- file.path(pkgdir, test_dir)
 	if (test_dir != "tests" && !dir.exists(tests_dir)) {
 	    warningLog(Log)
-	    printLog(Log, "directory ", sQuote(test_dir), " not found\n")
+	    printLog(Log, gettextf("directory %s was not found\n", sQuote(test_dir), domain = "R-tools"))
 	}
         if (dir.exists(tests_dir) && # trackObjs has only *.Rin
             length(dir(tests_dir, pattern = "\\.(R|Rin)$")))
@@ -389,7 +384,7 @@ setRlibs <-
     check_file_names <- function()
     {
         ## Check for portable file names.
-        checkingLog(Log, "for portable file names")
+        checkingLog(Log, gettext("checking for portable file names ...", domain = "R-tools"))
 
         ## Build list of exclude patterns.
         ignore <- get_exclude_patterns()
@@ -442,8 +437,7 @@ setRlibs <-
         ignore_re <- paste0("(", paste(ignore, collapse = "|"), ")")
         allfiles <- grep(ignore_re, allfiles, invert = TRUE, value = TRUE)
 
-        bad_files <- allfiles[grepl("[[:cntrl:]\"*/:<>?\\|]",
-                                    basename(allfiles))]
+        bad_files <- allfiles[grepl("[[:cntrl:]\"*/:<>?\\|]", basename(allfiles))]
         is_man <- grepl("man$", dirname(allfiles))
         bad <- sapply(strsplit(basename(allfiles[is_man]), ""),
                       function(x) any(grepl("[^ -~]|%", x)))
@@ -456,17 +450,12 @@ setRlibs <-
         bad_files <- c(bad_files, allfiles[bad])
         if (nb <- length(bad_files)) {
             errorLog(Log)
-            msg <- ngettext(nb,
+            wrapLog(ngettext(nb,
                             "Found the following file with a non-portable file name:\n",
                             "Found the following files with non-portable file names:\n",
-                            domain = NA)
-            wrapLog(msg)
+                            domain = "R-tools"))
             printLog0(Log, .format_lines_with_indent(bad_files), "\n")
-            wrapLog("These are not valid file names",
-                    "on all R platforms.\n",
-                    "Please rename the files and try again.\n",
-                    "See section 'Package structure'",
-                    "in the 'Writing R Extensions' manual.\n")
+            wrapLog(gettext("These are not valid file names on all R platforms.\nPlease rename the files and try again.\nSee section 'Package structure' in the 'Writing R Extensions' manual.\n", domain = "R-tools"))
 	    maybe_exit(1L)
         }
 
@@ -476,13 +465,9 @@ setRlibs <-
         dups <- unique(allfiles[duplicated(tolower(allfiles))])
         if (nb <- length(dups)) {
             errorLog(Log)
-            wrapLog("Found the following files with duplicate lower-cased file names:\n")
+            wrapLog(gettext("Found the following files with duplicate lower-cased file names:\n", domain = "R-tools"))
             printLog0(Log, .format_lines_with_indent(dups), "\n")
-            wrapLog("File names must not differ just by case",
-                    "to be usable on all R platforms.\n",
-                    "Please rename the files and try again.\n",
-                    "See section 'Package structure'",
-                    "in the 'Writing R Extensions' manual.\n")
+            wrapLog(gettext("File names must not differ just by case to be usable on all R platforms.\nPlease rename the files and try again.\nSee section 'Package structure' in the 'Writing R Extensions' manual.\n", domain = "R-tools"))
 	    maybe_exit(1L)
         }
 
@@ -494,15 +479,12 @@ setRlibs <-
         if (nb <- length(non_ASCII_files)) {
             any <- TRUE
             warningLog(Log)
-            msg <- ngettext(nb,
+            wrapLog(ngettext(nb,
                             "Found the following file with a non-portable file name:\n",
                             "Found the following files with non-portable file names:\n",
-                            domain = NA)
-            wrapLog(msg)
+                            domain = "R-tools"))
             printLog0(Log, .format_lines_with_indent(non_ASCII_files), "\n")
-            wrapLog("These are not fully portable file names.\n",
-                    "See section 'Package structure'",
-                    "in the 'Writing R Extensions' manual.\n")
+            wrapLog(gettext("These are not fully portable file names.\nSee section 'Package structure' in the 'Writing R Extensions' manual.\n", domain = "R-tools"))
         }
 
         ## now check lengths, as tarballs can only record up to 100 bytes
@@ -527,29 +509,23 @@ setRlibs <-
                     any <- TRUE
                 }
             }
-            msg <- ngettext(length(bad_files),
+            wrapLog(ngettext(length(bad_files),
                             "Found the following non-portable file path:\n",
                             "Found the following non-portable file paths:\n",
-                            domain = NA)
-            wrapLog(msg)
+                            domain = "R-tools"))
             printLog0(Log, .format_lines_with_indent(bad_files), "\n\n")
-            wrapLog("Tarballs are only required to store paths of up to 100",
-                    "bytes and cannot store those of more than 256 bytes,",
-                    "with restrictions including to 100 bytes for the",
-                    "final component.\n",
-                    "See section 'Package structure'",
-                    "in the 'Writing R Extensions' manual.\n")
+            wrapLog(gettext("Tarballs are only required to store paths of up to 100 bytes and cannot store those of more than 256 bytes, with restrictions including to 100 bytes for the final component.\nSee section 'Package structure' in the 'Writing R Extensions' manual.\n", domain = "R-tools"))
 	    if (!OK)
 		maybe_exit(1L)
         }
-        if (!any) resultLog(Log, "OK")
+        if (!any) resultLog(Log, gettext("OK", domain = "R-tools"))
 
         allfiles
     }
 
     check_permissions <- function(allfiles)
     {
-        checkingLog(Log, "for sufficient/correct file permissions")
+        checkingLog(Log, gettext("checking for sufficient/correct file permissions ...", domain = "R-tools"))
 
         ## This used to be much more 'aggressive', requiring that dirs
         ## and files have mode >= 00755 and 00644, respectively (with
@@ -579,9 +555,9 @@ setRlibs <-
         }
         if (length(bad_files)) {
             errorLog(Log)
-            wrapLog("Found the following files with insufficient permissions:\n")
+            wrapLog(gettext("Found the following files with insufficient permissions:\n", domain = "R-tools"))
             printLog0(Log, .format_lines_with_indent(bad_files), "\n")
-            wrapLog("Permissions should be at least 700 for directories and 400 for files.\nPlease fix permissions and try again.\n")
+            wrapLog(gettext("Permissions should be at least 700 for directories and 400 for files.\nPlease fix permissions and try again.\n", domain = "R-tools"))
 	    maybe_exit(1L)
 	}
 
@@ -597,10 +573,10 @@ setRlibs <-
         }
         if (length(bad_files)) {
             warningLog(Log)
-            wrapLog("The following files should most likely be executable (for the owner):\n")
+            wrapLog(gettext("The following files should most likely be executable (for the owner):\n", domain = "R-tools"))
             printLog0(Log, .format_lines_with_indent(bad_files), "\n")
-            printLog(Log, "Please fix their permissions\n")
-        } else resultLog(Log, "OK")
+            printLog(Log, gettext("Please fix their permissions\n", domain = "R-tools"))
+        } else resultLog(Log, gettext("OK", domain = "R-tools"))
     }
 
     check_meta <- function()
@@ -609,14 +585,13 @@ setRlibs <-
         ## validated most of the package DESCRIPTION metadata.  Otherwise,
         ## let us be defensive about this ...
 
-        checkingLog(Log, "DESCRIPTION meta-information")
+        checkingLog(Log, gettext("checking DESCRIPTION meta-information ...", domain = "R-tools"))
         dfile <- if (is_base_pkg) "DESCRIPTION.in" else "DESCRIPTION"
         any <- FALSE
 
         ## FIXME: this does not need to be run in another process
         ## but that needs conversion to format().
-        Rcmd <- sprintf("tools:::.check_package_description(\"%s\", TRUE)",
-                        dfile)
+        Rcmd <- sprintf("tools:::.check_package_description(\"%s\", TRUE)", dfile)
         out <- R_runR(Rcmd, R_opts2, "R_DEFAULT_PACKAGES=NULL")
         if (length(out)) {
             if(any(!grepl("^Malformed (Title|Description)", out))) {
@@ -653,8 +628,7 @@ setRlibs <-
             } else config_val_to_logical(Check_license)
         } else FALSE
         if (!identical(check_license, FALSE)) {
-            Rcmd <- sprintf("tools:::.check_package_license(\"%s\", \"%s\")",
-                            dfile, pkgdir)
+            Rcmd <- sprintf("tools:::.check_package_license(\"%s\", \"%s\")", dfile, pkgdir)
             ## FIXME: this does not need to be run in another process
             out <- R_runR(Rcmd, R_opts2, "R_DEFAULT_PACKAGES=NULL")
             if (length(out)) {
@@ -675,8 +649,7 @@ setRlibs <-
         ## and does not check for persons with no valid roles.
         db <- .read_description(dfile)
         if(!is.na(aar <- db["Authors@R"])) {
-            out <- .check_package_description_authors_at_R_field(aar,
-                                                                 strict = TRUE)
+            out <- .check_package_description_authors_at_R_field(aar, strict = TRUE)
             if(length(out)) {
                 if(!any) noteLog(Log)
                 any <- TRUE
@@ -707,15 +680,15 @@ setRlibs <-
                     if(!any) noteLog(Log)
                     any <- TRUE
                     if(diff[1L]) {
-                        printLog(Log, "Author field differs from that derived from Authors@R", "\n")
-                        printLog(Log, "  Author:    ", sQuote(yorig[1L]), "\n")
-                        printLog(Log, "  Authors@R: ", sQuote(y[1L]), "\n")
+                        printLog(Log, gettext("Author field differs from that derived from Authors@R", domain = "R-tools"), "\n")
+                        printLog(Log, gettext("  Author:    ", domain = "R-tools"), sQuote(yorig[1L]), "\n")
+                        printLog(Log, gettext("  Authors@R: ", domain = "R-tools"), sQuote(y[1L]), "\n")
                         printLog(Log, "\n")
                     }
                     if(diff[2L]) {
-                        printLog(Log, "Maintainer field differs from that derived from Authors@R", "\n")
-                        printLog(Log, "  Maintainer: ", sQuote(yorig[2L]), "\n")
-                        printLog(Log, "  Authors@R:  ", sQuote(y[2L]), "\n")
+                        printLog(Log, gettext("Maintainer field differs from that derived from Authors@R", domain = "R-tools"), "\n")
+                        printLog(Log, gettext("  Maintainer: ", domain = "R-tools"), sQuote(yorig[2L]), "\n")
+                        printLog(Log, gettext("  Authors@R:  ", domain = "R-tools"), sQuote(y[2L]), "\n")
                         printLog(Log, "\n")
                     }
                 }
@@ -726,7 +699,7 @@ setRlibs <-
             if (!ncomp %in% c("yes", "no")) {
                 if(!any) noteLog(Log)
                 any <- TRUE
-                printLog(Log, "NeedsCompilation field must take value 'yes' or 'no'", "\n")
+                printLog(Log, gettext("'NeedsCompilation' field must take value 'yes' or 'no'", domain = "R-tools"), "\n")
             }
         }
 
@@ -738,7 +711,7 @@ setRlibs <-
             printLog0(Log, paste(out, collapse = "\n"), "\n")
         }
 
-        if (!any) resultLog(Log, "OK")
+        if (!any) resultLog(Log, gettext("OK", domain = "R-tools"))
     }
 
     check_build <- function()
@@ -747,7 +720,7 @@ setRlibs <-
         if (ignore_vignettes) return()
         fv <- file.path("build", "vignette.rds")
         if(!file.exists(fv)) return()
-        checkingLog(Log, "'build' directory")
+        checkingLog(Log, gettext("checking 'build' directory ...", domain = "R-tools"))
         any <- FALSE
         db <- readRDS(fv)
         ## do as CRAN-pack does
@@ -755,7 +728,7 @@ setRlibs <-
         if(any(!keep)) {
             if(!any) warningLog(Log)
             any <- TRUE
-            msg <- c("Vignette(s) without any output listed in 'build/vignette.rds'",
+            msg <- c(gettext("Vignette(s) without any output listed in 'build/vignette.rds'", domain = "R-tools"),
                      strwrap(sQuote(db$file[!keep]), indent = 2L, exdent = 2L))
             printLog0(Log, paste(msg, collapse = "\n"), "\n")
         }
@@ -764,24 +737,23 @@ setRlibs <-
         if(any(missing)) {
             if(!any) warningLog(Log)
             any <- TRUE
-            msg <- c("Output(s) listed in 'build/vignette.rds' but not in package:",
+            msg <- c(gettext("Output(s) listed in 'build/vignette.rds' but not in package:", domain = "R-tools"),
                      strwrap(sQuote(pdfs[missing]), indent = 2L, exdent = 2L))
             printLog0(Log, paste(msg, collapse = "\n"), "\n")
         }
-        if (!any) resultLog(Log, "OK")
+        if (!any) resultLog(Log, gettext("OK", domain = "R-tools"))
     }
 
     check_top_level <- function()
     {
-        checkingLog(Log, "top-level files")
+        checkingLog(Log, gettext("checking top-level files ...", domain = "R-tools"))
         topfiles <- Sys.glob(c("install.R", "R_PROFILE.R"))
         any <- FALSE
         if (length(topfiles)) {
             any <- TRUE
             warningLog(Log)
             printLog0(Log, .format_lines_with_indent(topfiles), "\n")
-            wrapLog("These files are defunct.",
-                    "See manual 'Writing R Extensions'.\n")
+            wrapLog(gettext("These files are defunct. See manual 'Writing R Extensions'.\n", domain = "R-tools"))
         }
         if(check_incoming) {
             ## CRAN must be able to convert
@@ -816,7 +788,7 @@ setRlibs <-
                     if(!any) noteLog(Log)
                     any <- TRUE
                     printLog(Log,
-                             "Files 'README.md' or 'NEWS.md' cannot be checked without 'pandoc' being installed.\n")
+                             gettext("Files 'README.md' or 'NEWS.md' cannot be checked without 'pandoc' being installed.\n", domain = "R-tools"))
                 }
             }
         }
@@ -831,17 +803,10 @@ setRlibs <-
                 if (length(topfiles)) {
                     if(!any) noteLog(Log)
                     any <- TRUE
-                    one <- (length(topfiles) == 1L)
-                    msg <- c(if(one) "File" else "Files",
-                             "\n",
-                             .format_lines_with_indent(topfiles),
-                             "\n",
-                             if(one) {
-                                 "is not mentioned in the DESCRIPTION file.\n"
-                             } else {
-                                 "are not mentioned in the DESCRIPTION file.\n"
-                             })
-                    printLog(Log, msg)
+                    printLog(Log,
+                             sprintf(ngettext(length(topfiles),
+                             "File %s is not mentioned in the DESCRIPTION file.\n",
+                             "Files %s are not mentioned in the DESCRIPTION file.\n", domain = "R-tools"),.format_lines_with_indent(topfiles)))
                 }
             }
         }
@@ -856,17 +821,7 @@ setRlibs <-
                 if (length(topfiles)) {
                     if(!any) noteLog(Log)
                     any <- TRUE
-                    one <- (length(topfiles) == 1L)
-                    msg <- c(if(one) "File" else "Files",
-                             "\n",
-                             .format_lines_with_indent(topfiles),
-                             "\n",
-                             if(one) {
-                                 "will install at top-level and is not mentioned in the DESCRIPTION file.\n"
-                             } else {
-                                 "will install at top-level and are not mentioned in the DESCRIPTION file.\n"
-                             })
-                    printLog(Log, msg)
+                    printLog(Log, sprintf(ngettext(length(topfiles), "File\n%s\nwill install at top-level and is not mentioned in the 'DESCRIPTION' file.\n", "Files\n%s\nwill install at top-level and are not mentioned in the 'DESCRIPTION' file.\n", domain = "R-tools"), .format_lines_with_indent(topfiles)))
                 }
             }
         }
@@ -904,18 +859,16 @@ setRlibs <-
             if (lt <- length(topfiles)) {
                 if(!any) noteLog(Log)
                 any <- TRUE
-                printLog(Log, ## dirs are files, but maybe not on Windows
-                         if(lt > 1L) "Non-standard files/directories found at top level:\n"
-                         else "Non-standard file/directory found at top level:\n" )
-                msg <- strwrap(paste(sQuote(topfiles), collapse = " "),
-                               indent = 2L, exdent = 2L)
-                printLog0(Log, paste(c(msg, ""), collapse="\n"))
-                cp <- grep("^copyright", topfiles,
-                           ignore.case = TRUE, value = TRUE)
+                    printLog(Log, ## dirs are files, but maybe not on Windows
+                             ngettext(lt, "Non-standard file/directory found at top level:\n", "Non-standard files/directories found at top level:\n", domain = "R-tools"))
+                    msg <- strwrap(paste(sQuote(topfiles), collapse = " "),
+                                   indent = 2L, exdent = 2L)
+                    printLog0(Log, paste(c(msg, ""), collapse="\n"))
+                cp <- grep("^copyright", topfiles, ignore.case = TRUE, value = TRUE)
                 if (length(cp))
-                    printLog(Log, "Copyright information should be in file inst/COPYRIGHTS\n")
+                    printLog(Log, gettext("Copyright information should be in file inst/COPYRIGHTS\n", domain = "R-tools"))
                 if("AUTHORS" %in% topfiles)
-                    printLog(Log, "Authors information should be in file inst/AUTHORS\n")
+                    printLog(Log, gettext("Authors information should be in file inst/AUTHORS\n", domain = "R-tools"))
             }
         }
         if (!any) resultLog(Log, "OK")
@@ -923,7 +876,7 @@ setRlibs <-
 
     check_detritus <- function()
     {
-        checkingLog(Log, "for left-over files")
+        checkingLog(Log, gettext("checking for left-over files ...", domain = "R-tools"))
         files <- dir(".", full.names = TRUE, recursive = TRUE)
         bad <- grep("svn-commit[.].*tmp$", files, value = TRUE)
         bad <- c(bad, grep("^[.]/[^/]*[.][rR]d$", files, value = TRUE))
@@ -931,23 +884,21 @@ setRlibs <-
             bad <- sub("^[.]/", paste0(pkgname, "/"), bad)
             noteLog(Log)
             printLog0(Log,
-                      "The following files look like leftovers:\n",
-                      paste(strwrap(paste(sQuote(bad), collapse = ", "),
-                                    indent = 2, exdent = 2), collapse = "\n"),
-                      "\nPlease remove them from your package.\n")
-        } else resultLog(Log, "OK")
+                     gettextf("The following files look like leftovers:\n%s\nPlease remove them from your package.\n",
+                     paste(strwrap(paste(sQuote(bad), collapse = ", "), indent = 2, exdent = 2), collapse = "\n"), domain = "R-tools"))
+        } else resultLog(Log, gettext("OK", domain = "R-tools"))
     }
 
 
     check_indices <- function()
     {
         ## Check index information.
-        checkingLog(Log, "index information")
+        checkingLog(Log, gettext("checking index information ...", domain = "R-tools"))
         any <- FALSE
         if (file.exists("INDEX") &&
             !length(readLines("INDEX", warn = FALSE))) {
             any <- TRUE
-            warningLog(Log, "Empty file 'INDEX'.")
+            warningLog(Log, gettext("Empty file 'INDEX'.", domain = "R-tools"))
         }
         if (dir.exists("demo")) {
             index <- file.path("demo", "00Index")
@@ -955,9 +906,7 @@ setRlibs <-
                 !length(readLines(index, warn = FALSE))) {
                 if(!any) warningLog(Log)
                 any <- TRUE
-                printLog0(Log,
-                          sprintf("Empty or missing file %s.\n",
-                                  sQuote(index)))
+                printLog0(Log, gettextf("Empty or missing file %s.\n", sQuote(index), domain = "R-tools"))
             } else {
                 Rcmd <- "options(warn=1)\ntools:::.check_demo_index(\"demo\")\n"
                 ## FIXME: this does not need to be run in another process
@@ -980,18 +929,18 @@ setRlibs <-
             }
         }
         if (any)
-            wrapLog("See sections 'The INDEX file' and 'Package subdirectories' in the 'Writing R Extensions' manual.\n")
-        else resultLog(Log, "OK")
+            wrapLog(gettext("See sections 'The INDEX file' and 'Package subdirectories' in the 'Writing R Extensions' manual.\n", domain = "R-tools"))
+        else  resultLog(Log, gettext("OK", domain = "R-tools"))
     }
 
     check_subdirectories <- function(haveR, subdirs)
     {
-        checkingLog(Log, "package subdirectories")
+        checkingLog(Log, gettext("checking package subdirectories ...", domain = "R-tools"))
         any <- FALSE
         if (haveR && !length(list_files_with_type("R", "code")) &&
             !file.exists(file.path("R", "sysdata.rda"))) {
             haveR <- FALSE
-            warningLog(Log, "Found directory 'R' with no source files.")
+            warningLog(Log, gettext("Found directory 'R' with no source files.", domain = "R-tools"))
             any <- TRUE
         }
         if (R_check_subdirs_nocase) {
@@ -1009,20 +958,17 @@ setRlibs <-
             if ("./r" %in% list.dirs(recursive = FALSE)) {
                 if (!any) warningLog(Log)
                 any <- TRUE
-                printLog(Log, "Found subdirectory 'r'.\n",
-                         "Most likely, this should be 'R'.\n")
+                printLog(Log, gettext("Found subdirectory 'r'.\nMost likely, this should be 'R'.\n", domain = "R-tools"))
             }
             if ("./MAN" %in% list.dirs(recursive = FALSE)) {
                 if (!any) warningLog(Log)
                 any <- TRUE
-                printLog(Log, "Found subdirectory 'MAN'.\n",
-                         "Most likely, this should be 'man'.\n")
+                printLog(Log, gettext("Found subdirectory 'MAN'.\nMost likely, this should be 'man'.\n", domain = "R-tools"))
             }
             if ("./DATA" %in% list.dirs(recursive = FALSE)) {
                 if (!any) warningLog(Log)
                 any <- TRUE
-                printLog(Log, "Found subdirectory 'DATA'.\n",
-                         "Most likely, this should be 'data'.\n")
+                printLog(Log, gettext("Found subdirectory 'DATA'.\nMost likely, this should be 'data'.\n", domain = "R-tools"))
             }
         }
 
@@ -1039,13 +985,10 @@ setRlibs <-
         if(any(ind)) {
             if(!any) warningLog(Log)
             any <- TRUE
-            msg <- ngettext(sum(ind),
-                            "Found the following directory with the name of a check directory:\n",
-                            "Found the following directories with names of check directories:\n", domain = NA)
-            printLog0(Log, msg,
-                      .format_lines_with_indent(all_dirs[ind]),
-                      "\n",
-                      "Most likely, these were included erroneously.\n")
+            msg <- sprintf(ngettext(sum(ind),
+                            "Found the following directory with the name of a check directory:\n%s\nMost likely, these were included erroneously.\n",
+                            "Found the following directories with names of check directories:\n%s\nMost likely, these were included erroneously.\n", domain = "R-tools"), .format_lines_with_indent(all_dirs[ind]))
+            printLog0(Log, msg)
         }
 
         ## Several packages had leftover Rd2dvi build directories in
@@ -1054,13 +997,10 @@ setRlibs <-
         if(any(ind)) {
             if(!any) warningLog(Log)
             any <- TRUE
-            msg <- ngettext(sum(ind),
-                            "Found the following directory with the name of a Rd2pdf directory:\n",
-                            "Found the following directories with names of Rd2pdf directories:\n", domain = NA)
-           printLog0(Log, msg,
-                     .format_lines_with_indent(all_dirs[ind]),
-                     "\n",
-                     "Most likely, these were included erroneously.\n")
+            msg <- sprintf(ngettext(sum(ind),
+                            "Found the following directory with the name of a Rd2pdf directory:\n%s\nMost likely, these were included erroneously.\n",
+                            "Found the following directories with names of Rd2pdf directories:\n%s\nMost likely, these were included erroneously.\n", domain = "R-tools"), .format_lines_with_indent(all_dirs[ind]))
+           printLog0(Log, msg)
         }
 
 
@@ -1071,13 +1011,10 @@ setRlibs <-
             if(any(ind)) {
                 if(!any) warningLog(Log)
                 any <- TRUE
-            msg <- ngettext(sum(ind),
-                            "Found the following directory with the name of a version control directory:\n",
-                            "Found the following directories with names of version control directories:\n", domain = NA)
-                printLog0(Log, msg,
-                          .format_lines_with_indent(all_dirs[ind]),
-                          "\n",
-                          "These should not be in a package tarball.\n")
+            msg <- sprintf(ngettext(sum(ind),
+                            "Found the following directory with the name of a version control directory:\n%s\nThese should not be in a package tarball.\n",
+                            "Found the following directories with names of version control directories:\n%s\nThese should not be in a package tarball.\n", domain = "R-tools"), .format_lines_with_indent(all_dirs[ind]))
+                printLog0(Log, msg)
             }
         }
 
@@ -1091,9 +1028,7 @@ setRlibs <-
                 if(!any) warningLog(Log)
                 any <- TRUE
                 printLog0(Log, paste(c(out, ""), collapse = "\n"))
-                wrapLog("Please remove or rename the files.\n",
-                        "See section 'Package subdirectories'",
-                        "in the 'Writing R Extensions' manual.\n")
+                wrapLog(gettext("Please remove or rename the files.\nSee section 'Package subdirectories' in the 'Writing R Extensions' manual.\n", domain = "R-tools"))
             }
         }
 
@@ -1102,7 +1037,7 @@ setRlibs <-
             !length(list_files_with_type("data", "data"))) {
             if (!any) warningLog(Log)
             any <- TRUE
-            printLog(Log, "Subdirectory 'data' contains no data sets.\n")
+            printLog(Log, gettext("Subdirectory 'data' contains no data sets.\n", domain = "R-tools"))
        }
         ## Subdirectory 'demo' without demos?
 
@@ -1111,7 +1046,7 @@ setRlibs <-
             if(!length(demos)) {
                 if (!any) warningLog(Log)
                 any <- TRUE
-                printLog(Log, "Subdirectory 'demo' contains no demos.\n")
+                printLog(Log, gettext("Subdirectory 'demo' contains no demos.\n", domain = "R-tools"))
             } else {
                 ## check for non-ASCII code in each demo
                 bad <- character()
@@ -1124,14 +1059,12 @@ setRlibs <-
                 if (length(bad)) {
                     if (!any) warningLog(Log)
                     any <- TRUE
-                    printLog(Log, "Demos with non-ASCII characters:")
+                    printLog(Log, gettext("Demos with non-ASCII characters:", domain = "R-tools"))
                     if(length(bad) > 1L)
                         printLog0(Log, "\n",
                                   .format_lines_with_indent(bad), "\n")
                     else printLog0(Log, "  ", bad, "\n")
-                    wrapLog("Portable packages must use only ASCII",
-                            "characters in their demos.\n",
-                            "Use \\uxxxx escapes for other characters.\n")
+                    wrapLog(gettext("Portable packages must use only ASCII characters in their demos.\nUse \\uxxxx escapes for other characters.\n", domain = "R-tools"))
                     demos <- demos[! basename(demos) %in% bad]
                 }
                 ## check we can parse each demo.
@@ -1142,7 +1075,7 @@ setRlibs <-
                 if (length(bad)) {
                     if (!any) warningLog(Log)
                     any <- TRUE
-                    printLog(Log, "Demos which do not contain valid R code:")
+                    printLog(Log, gettext("Demos which do not contain valid R code:", domain = "R-tools"))
                     if(length(bad) > 1L)
                         printLog0(Log, "\n",
                                   .format_lines_with_indent(bad), "\n")
@@ -1155,14 +1088,14 @@ setRlibs <-
         if (dir.exists("exec") && !length(dir("exec"))) {
             if (!any) warningLog(Log)
             any <- TRUE
-            printLog(Log, "Subdirectory 'exec' contains no files.\n")
+            printLog(Log, gettext("Subdirectory 'exec' contains no files.\n", domain = "R-tools"))
         }
 
         ## Subdirectory 'inst' without files?
         if (dir.exists("inst") && !length(dir("inst", recursive = TRUE))) {
             if (!any) warningLog(Log)
             any <- TRUE
-            printLog(Log, "Subdirectory 'inst' contains no files.\n")
+            printLog(Log, gettext("Subdirectory 'inst' contains no files.\n", domain = "R-tools"))
         }
 
         ## Subdirectory 'src' without sources?
@@ -1176,7 +1109,7 @@ setRlibs <-
                                              "install.libs.R"))))) {
                 if (!length(dir("src", pattern = "\\.([cfmM]|cc|cpp|f90|f95|mm)"))) {
                     if (!any) warningLog(Log)
-                    printLog(Log, "Subdirectory 'src' contains no source files.\n")
+                    printLog(Log, gettext("Subdirectory 'src' contains no source files.\n", domain = "R-tools"))
                     any <- TRUE
                 }
             }
@@ -1201,12 +1134,9 @@ setRlibs <-
                 if (length(suspect)) {
                     if (!any) warningLog(Log)
                     any <- TRUE
-                    wrapLog("Found the following non-empty",
-                            "subdirectories of 'inst' also",
-                            "used by R:\n")
+                    wrapLog(gettext("Found the following non-empty subdirectories of 'inst' also used by R:\n", domain = "R-tools"))
                     printLog0(Log, .format_lines_with_indent(suspect), "\n")
-                    wrapLog("It is recommended not to interfere",
-                            "with package subdirectories used by R.\n")
+                    wrapLog(gettext("It is recommended not to interfere with package subdirectories used by R.\n", domain = "R-tools"))
                 }
             }
         }
@@ -1235,7 +1165,7 @@ setRlibs <-
             if(length(msg)) {
                 if(!any) warningLog(Log)
                 any <- TRUE
-                printLog(Log, "Problems with news in 'inst/NEWS.Rd':\n")
+                printLog(Log, gettext("Problems with news in 'inst/NEWS.Rd':\n", domain = "R-tools"))
                 printLog0(Log,
                           paste("  ",
                                 unlist(strsplit(msg, "\n", fixed = TRUE)),
@@ -1256,8 +1186,7 @@ setRlibs <-
             if(length(out)) {
                 if(!any) warningLog(Log)
                 any <- TRUE
-                printLog(Log,
-                         "Invalid citation information in 'inst/CITATION':\n")
+                printLog(Log, gettext("Invalid citation information in 'inst/CITATION':\n", domain = "R-tools"))
                 printLog0(Log, .format_lines_with_indent(out), "\n")
             }
         }
@@ -1275,12 +1204,10 @@ setRlibs <-
         if(length(files)) {
             if(!any) noteLog(Log)
             any <- TRUE
-            msg <- ngettext(length(files),
-                            "Found the following CITATION file in a non-standard place:\n",
-                            "Found the following CITATION files in a non-standard place:\n", domain = NA)
-            wrapLog(msg)
-            printLog0(Log, .format_lines_with_indent(files), "\n")
-            wrapLog("Most likely 'inst/CITATION' should be used instead.\n")
+            msg <- sprintf(ngettext(length(files),
+                            "Found the following CITATION file in a non-standard place:\n%s\nMost likely 'inst/CITATION' should be used instead.\n",
+                            "Found the following CITATION files in a non-standard place:\n%s\nMost likely 'inst/CITATION' should be used instead.\n", domain = "R-tools"), .format_lines_with_indent(files))
+            printLog0(Log, msg)
         }
 
         if(!any) resultLog(Log, "OK")
@@ -1288,24 +1215,20 @@ setRlibs <-
 
     check_non_ASCII <- function()
     {
-        checkingLog(Log, "R files for non-ASCII characters")
-        out <- R_runR("tools:::.check_package_ASCII_code('.')",
-                      R_opts2, "R_DEFAULT_PACKAGES=NULL")
+        checkingLog(Log, gettext("checking R files for non-ASCII characters ...", domain = "R-tools"))
+        out <- R_runR("tools:::.check_package_ASCII_code('.')", R_opts2, "R_DEFAULT_PACKAGES=NULL")
         if (length(out)) {
             warningLog(Log)
             msg <- ngettext(length(out),
                             "Found the following file with non-ASCII characters:\n",
                             "Found the following files with non-ASCII characters:\n",
-                            domain = NA)
+                            domain = "R-tools")
             wrapLog(msg)
             printLog0(Log, .format_lines_with_indent(out), "\n")
-            wrapLog("Portable packages must use only ASCII",
-                    "characters in their R code,\n",
-                    "except perhaps in comments.\n",
-                    "Use \\uxxxx escapes for other characters.\n")
-        } else resultLog(Log, "OK")
+            wrapLog(gettext("Portable packages must use only ASCII characters in their R code,\nexcept perhaps in comments.\nUse \\uxxxx escapes for other characters.\n", domain = "R-tools"))
+        } else resultLog(Log, gettext("OK", domain = "R-tools"))
 
-        checkingLog(Log, "R files for syntax errors")
+        checkingLog(Log, gettext("checking R files for syntax errors ...", domain = "R-tools"))
         Rcmd  <- "options(warn=1);tools:::.check_package_code_syntax(\"R\")"
         out <- R_runR(Rcmd, R_opts2, "R_DEFAULT_PACKAGES=NULL")
         if (any(startsWith(out, "Error"))) {
@@ -1315,16 +1238,15 @@ setRlibs <-
         } else if (length(out)) {
             warningLog(Log)
             printLog0(Log, paste(c(out, ""), collapse = "\n"))
-        } else resultLog(Log, "OK")
+        } else resultLog(Log, gettext("OK", domain = "R-tools"))
     }
 
     check_R_code <- function()
     {
         ## if (!is_base_pkg) {
-            checkingLog(Log, "dependencies in R code")
+            checkingLog(Log, gettext("checking dependencies in R code ...", domain = "R-tools"))
             if (do_install) {
-                Rcmd <- paste("options(warn=1, showErrorCalls=FALSE)\n",
-                              sprintf("tools:::.check_packages_used(package = \"%s\")\n", pkgname))
+                Rcmd <- sprintf("options(warn=1, showErrorCalls=FALSE)\ntools:::.check_packages_used(package = \"%s\")\n", pkgname)
 
                 out <- R_runR2(Rcmd, "R_DEFAULT_PACKAGES=NULL")
                 if (length(out)) {
@@ -1332,12 +1254,11 @@ setRlibs <-
                     else noteLog(Log)
                     printLog0(Log, paste(c(out, ""), collapse = "\n"))
                     ## wrapLog(msg_DESCRIPTION)
-                } else resultLog(Log, "OK")
+                } else resultLog(Log, gettext("OK", domain = "R-tools"))
             } else {
                 ## this needs to read the package code, and will fail on
                 ## syntax errors such as non-ASCII code.
-                Rcmd <- paste("options(warn=1, showErrorCalls=FALSE)\n",
-                              sprintf("tools:::.check_packages_used(dir = \"%s\")\n", pkgdir))
+                Rcmd <- sprintf("options(warn=1, showErrorCalls=FALSE)\ntools:::.check_packages_used(dir = \"%s\")\n", pkgdir)
 
                 out <- R_runR(Rcmd, R_opts2, "R_DEFAULT_PACKAGES=NULL")
                 if (length(out)) {
@@ -1345,13 +1266,13 @@ setRlibs <-
                     else noteLog(Log)
                     printLog0(Log, paste(c(out, ""), collapse = "\n"))
                     ## wrapLog(msg_DESCRIPTION)
-                } else resultLog(Log, "OK")
+                } else resultLog(Log, gettext("OK", domain = "R-tools"))
             }
         ## }
 
         ## Check whether methods have all arguments of the corresponding
         ## generic.
-        checkingLog(Log, "S3 generic/method consistency")
+        checkingLog(Log, gettext("checking S3 generic/method consistency ...", domain = "R-tools"))
         Rcmd <- paste("options(warn=1)\n",
                       "options(expressions=1000)\n",
                       if (do_install)
@@ -1372,22 +1293,20 @@ setRlibs <-
             if(length(out1)) {
                 warningLog(Log)
                 printLog0(Log, paste(c(out1, ""), collapse = "\n"))
-                wrapLog("See section 'Generic functions and methods'",
-                        "in the 'Writing R Extensions' manual.\n")
+            wrapLog(gettext("See section 'Generic functions and methods' in the 'Writing R Extensions' manual.\n", domain = "R-tools"))
             } else
                 noteLog(Log)
             if(length(out2)) {
                 printLog0(Log,
                           paste(c(if(length(out1)) "", out2, ""),
                                 collapse = "\n"))
-                wrapLog("See section 'Registering S3 methods'",
-                        "in the 'Writing R Extensions' manual.\n")
+                wrapLog(gettext("See section 'Registering S3 methods' in the 'Writing R Extensions' manual.\n", domain = "R-tools"))
             }
-        } else resultLog(Log, "OK")
+        } else resultLog(Log, gettext("OK", domain = "R-tools"))
 
         ## Check whether replacement functions have their final argument
         ## named 'value'.
-        checkingLog(Log, "replacement functions")
+        checkingLog(Log, gettext("checking replacement functions ...", domain = "R-tools"))
         Rcmd <- paste("options(warn=1)\n",
                       if (do_install)
                       sprintf("tools::checkReplaceFuns(package = \"%s\")\n", pkgname)
@@ -1402,10 +1321,8 @@ setRlibs <-
             warningLog(Log)
             ## </NOTE>
             printLog0(Log, paste(c(out, ""), collapse = "\n"))
-            wrapLog("The argument of a replacement function",
-                    "which corresponds to the right hand side",
-                    "must be named 'value'.\n")
-        } else resultLog(Log, "OK")
+            wrapLog(gettext("The argument of a replacement function which corresponds to the right hand side must be named 'value'.\n", domain = "R-tools"))
+        } else resultLog(Log, gettext("OK", domain = "R-tools"))
 
         ## Check foreign function calls.
         ## The neverending story ...
@@ -1414,7 +1331,7 @@ setRlibs <-
         if (nzchar(R_check_FF)) {
             registration <-
                 identical(R_check_FF, "registration") && install != "fake"
-            checkingLog(Log, "foreign function calls")
+            checkingLog(Log, gettext("checking foreign function calls ...", domain = "R-tools"))
             DUP <- R_check_FF_DUP
             if(as_cran) {
                 Sys.setenv("_R_CHECK_FF_AS_CRAN_" = "TRUE")
@@ -1438,23 +1355,18 @@ setRlibs <-
                 else noteLog(Log)
                 printLog0(Log, paste(c(out, ""), collapse = "\n"))
                 if(!is_base_pkg && any(grepl("to a base package:", out)))
-                    wrapLog("Packages should not make",
-                            ".C/.Call/.External/.Fortran",
-                            "calls to a base package.",
-                            "They are not part of the API,",
-                            "for use only by R itself",
-                            "and subject to change without notice.")
-                else if(any(grepl("with DUP:", out)))
-                    wrapLog("DUP is no longer supported and will be ignored.")
+                    wrapLog(gettext("Packages should not make .C/.Call/.External/.Fortran calls to a base package. They are not part of the API, for use only by R itself and subject to change without notice.", domain = "R-tools"))
+                else if(any(grepl("with 'DUP':", out)))
+                    wrapLog(gettext("'DUP' option is no longer supported and will be ignored.", domain = "R-tools"))
                 else
-                    wrapLog("See chapter 'System and foreign language interfaces' in the 'Writing R Extensions' manual.\n")
-            } else resultLog(Log, "OK")
+                    wrapLog(gettext("See chapter 'System and foreign language interfaces' in the 'Writing R Extensions' manual.\n", domain = "R-tools"))
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
     }
 
     check_R_files <- function(is_rec_pkg)
     {
-        checkingLog(Log, "R code for possible problems")
+        checkingLog(Log, gettext("checking R code for possible problems ...", domain = "R-tools"))
         if (!is_base_pkg) {
             Rcmd <- paste("options(warn=1)\n",
                           sprintf("tools:::.check_package_code_shlib(dir = \"%s\")\n",
@@ -1462,12 +1374,9 @@ setRlibs <-
             out <- R_runR(Rcmd, R_opts2, "R_DEFAULT_PACKAGES=NULL")
             if (length(out)) {
                 errorLog(Log)
-                wrapLog("Incorrect (un)loading of package",
-                        "shared object.\n")
+                wrapLog(gettext("Incorrect (un)loading of package shared object.\n", domain = "R-tools"))
                 printLog0(Log, paste(c(out, ""), collapse = "\n"))
-                wrapLog("The system-specific extension for",
-                        "shared objects must not be added.\n",
-                        "See ?library.dynam.\n")
+                wrapLog(gettext("The system-specific extension for shared objects must not be added.\nSee ?library.dynam.\n", domain = "R-tools"))
 		maybe_exit(1L)
             }
         }
@@ -1508,14 +1417,9 @@ setRlibs <-
                                       collapse = " "))
                     miss <- R_runR2(Rcmd, "R_DEFAULT_PACKAGES=")
                     if(length(miss)) {
-                        msg3 <- if(length(grep("^importFrom\\(\"methods\"",
-                                               miss))) {
-                            strwrap("to your NAMESPACE file (and ensure that your DESCRIPTION Imports field contains 'methods').")
-                        } else "to your NAMESPACE file."
                         out3 <- c(out3,
-                                  c("Consider adding",
-                                    paste0("  ", miss),
-                                    msg3))
+                                  c(if(length(grep("^importFrom\\(\"methods\"", miss))) gettextf("Consider adding %s to your NAMESPACE file (and ensure that your DESCRIPTION Imports field contains 'methods').", paste0("  ", miss), domain = "R-tools")
+				    else gettextf("Consider adding %s to your NAMESPACE file.", paste0("  ", miss), domain = "R-tools")))
                     }
                 }
             } else
@@ -1577,10 +1481,7 @@ setRlibs <-
                 first <- grep("^Found.* .Internal call", out4)[1L]
                 if(first > 1L) out4 <- out4[-seq_len(first-1)]
                 printLog0(Log, paste(c(ini, out4, "", ""), collapse = "\n"))
-                wrapLog(c("Packages should not call .Internal():",
-                          "it is not part of the API,",
-                          "for use only by R itself",
-                          "and subject to change without notice."))
+                wrapLog(gettext("Packages should not call .Internal(): it is not part of the API, for use only by R itself and subject to change without notice.", domain = "R-tools"))
                 ini <- ""
             }
             if (length(out8)) {
@@ -1590,9 +1491,7 @@ setRlibs <-
             }
             ## All remaining checks give notes and not warnings.
             if(length(ini))
-                ini <- c("",
-                         "In addition to the above warning(s), found the following notes:",
-                         "")
+                ini <- gettext("\nIn addition to the above warning(s), found the following notes:\n", domain = "R-tools")
 
             if (length(out1)) {
                 printLog0(Log, paste(c(ini, out1, ""), collapse = "\n"))
@@ -1601,7 +1500,7 @@ setRlibs <-
             if (length(out2)) {
                 printLog0(Log,
                           paste(c(ini,
-                                  "Found the following possibly unsafe calls:",
+                                  gettext("Found the following possibly unsafe calls:", domain = "R-tools"),
                                   out2, ""),
                                 collapse = "\n"))
                 ini <- ""
@@ -1617,38 +1516,35 @@ setRlibs <-
             if (length(out6)) {
                 printLog0(Log, paste(c(ini, out6, ""), collapse = "\n"))
                 ini <- ""
-                wrapLog(gettextf("See section %s in '%s'.",
-                                 sQuote("Good practice"), "?attach"))
+                wrapLog(gettextf("See section %s in '%s'.", sQuote("Good practice"), "?attach", domain = "R-tools"))
            }
             if (length(out7)) {
                 printLog0(Log, paste(c(ini, out7, ""), collapse = "\n"))
                 ini <- ""
-                wrapLog(gettextf("See section %s in '%s'.",
-                                 sQuote("Good practice"), "?data"))
+                wrapLog(gettextf("See section %s in '%s'.", sQuote("Good practice"), "?data", domain = "R-tools"))
             }
-        } else resultLog(Log, "OK")
+        } else resultLog(Log, gettext("OK", domain = "R-tools"))
     }
 
     check_Rd_files <- function(haveR)
     {
         msg_writing_Rd <-
-            c("See chapter 'Writing R documentation files' in the 'Writing R Extensions' manual.\n")
+            gettext("See chapter 'Writing R documentation files' in the 'Writing R Extensions' manual.\n", domain = "R-tools")
 
         if (dir.exists("man") && !extra_arch) {
-            checkingLog(Log, "Rd files")
+            checkingLog(Log, gettext("checking Rd files ...", domain = "R-tools"))
             minlevel <- Sys.getenv("_R_CHECK_RD_CHECKRD_MINLEVEL_", "-1")
             Rcmd <- paste("options(warn=1)\n",
                           sprintf("tools:::.check_package_parseRd('.', minlevel=%s)\n", minlevel))
             out <- R_runR(Rcmd, R_opts2, "R_DEFAULT_PACKAGES=NULL")
             if (length(out)) {
-                if(length(grep("^prepare.*Dropping empty section", out,
-                               invert = TRUE)))
+                if(length(grep("^prepare.*Dropping empty section", out, invert = TRUE)))
                     warningLog(Log)
                 else noteLog(Log)
                 printLog0(Log, paste(c(out, ""), collapse = "\n"))
-            } else resultLog(Log, "OK")
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
 
-            checkingLog(Log, "Rd metadata")
+            checkingLog(Log, gettext("checking Rd metadata ..", domain = "R-tools"))
             Rcmd <- paste("options(warn=1)\n",
                           if (do_install)
                           sprintf("tools:::.check_Rd_metadata(package = \"%s\")\n", pkgname)
@@ -1658,7 +1554,7 @@ setRlibs <-
             if (length(out)) {
                 warningLog(Log)
                 printLog0(Log, paste(c(out, ""), collapse = "\n"))
-            } else resultLog(Log, "OK")
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
 
         ## Check Rd line widths.
@@ -1676,7 +1572,7 @@ setRlibs <-
             if(length(out)) {
                 noteLog(Log)
                 printLog0(Log, paste(c(out, ""), collapse = "\n"))
-                wrapLog("These lines will be truncated in the PDF manual.\n")
+                wrapLog(gettext("These lines will be truncated in the PDF manual.\n", domain = "R-tools"))
 
             } else resultLog(Log, "OK")
         }
@@ -1697,7 +1593,7 @@ setRlibs <-
         ## </NOTE>
 
         if (dir.exists("man") && R_check_Rd_xrefs) {
-            checkingLog(Log, "Rd cross-references")
+            checkingLog(Log, gettext("checking Rd cross-references ...", domain = "R-tools"))
             Rcmd <- paste("options(warn=1)\n",
                           if (do_install)
                           sprintf("tools:::.check_Rd_xrefs(package = \"%s\")\n", pkgname)
@@ -1709,12 +1605,12 @@ setRlibs <-
                     warningLog(Log)
                 else noteLog(Log)
                 printLog0(Log, paste(c(out, ""), collapse = "\n"))
-            } else resultLog(Log, "OK")
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
 
         ## Check for missing documentation entries.
         if (!extra_arch && (haveR || dir.exists("data"))) {
-            checkingLog(Log, "for missing documentation entries")
+            checkingLog(Log, gettext("checking for missing documentation entries ...", domain = "R-tools"))
             Rcmd <- paste("options(warn=1)\n",
                           if (do_install)
                           sprintf("tools::undoc(package = \"%s\")\n", pkgname)
@@ -1745,18 +1641,17 @@ setRlibs <-
             } else if (length(out)) {
                 warningLog(Log)
                 printLog0(Log, paste(c(out, ""), collapse = "\n"))
-                wrapLog("All user-level objects",
-                        "in a package",
-                        if (any(startsWith(out, "Undocumented S4")))
-                        "(including S4 classes and methods)",
-                        "should have documentation entries.\n")
+                if (any(grepl("^Undocumented S4", out)))
+                 wrapLog(gettext("All user-level objects in a package (including S4 classes and methods) should have documentation entries.\n", domain = "R-tools"))
+		        else
+                 wrapLog(gettext("All user-level objects in a package should have documentation entries.\n", domain = "R-tools"))
                 wrapLog(msg_writing_Rd)
             } else resultLog(Log, "OK")
         }
 
         ## Check for code/documentation mismatches.
         if (dir.exists("man") && !extra_arch) {
-            checkingLog(Log, "for code/documentation mismatches")
+            checkingLog(Log, gettext("checking for code/documentation mismatches ...", domain = "R-tools"))
             if (!do_codoc) resultLog(Log, "SKIPPED")
             else {
                 any <- FALSE
@@ -1799,7 +1694,7 @@ setRlibs <-
                     }
                 }
 
-                if (!any) resultLog(Log, "OK")
+                if (!any) resultLog(Log, gettext("OK", domain = "R-tools"))
             }
         }
 
@@ -1807,14 +1702,10 @@ setRlibs <-
         ## all arguments shown in \usage documented in \arguments?) and
         ## aliases (do all functions shown in \usage have an alias?)
         if (dir.exists("man") && !extra_arch) {
-            checkingLog(Log, "Rd \\usage sections")
+            checkingLog(Log, gettext("checking Rd \\usage sections ...", domain = "R-tools"))
 
             msg_doc_files <-
-                c("Functions with \\usage entries",
-                  "need to have the appropriate \\alias entries,",
-                  "and all their arguments documented.\n",
-                  "The \\usage entries must correspond to syntactically",
-                  "valid R code.\n")
+                gettext("Functions with \\usage entries need to have the appropriate \\alias entries, and all their arguments documented.\nThe \\usage entries must correspond to syntactically valid R code.\n", domain = "R-tools")
             any <- FALSE
             Rcmd <- paste("options(warn=1)\n",
                           if (do_install)
@@ -1832,8 +1723,7 @@ setRlibs <-
 
             if (R_check_Rd_style && haveR) {
                 msg_doc_style <-
-                    c("The \\usage entries for S3 methods should use",
-                      "the \\method markup and not their full name.\n")
+                    gettext("The \\usage entries for S3 methods should use the \\method markup and not their full name.\n", domain = "R-tools")
 
                 Rcmd <- paste("options(warn=1)\n",
                               if (do_install)
@@ -1850,12 +1740,12 @@ setRlibs <-
                 }
             }
 
-            if (!any) resultLog(Log, "OK")
+            if (!any) resultLog(Log, gettext("OK", domain = "R-tools"))
         }
 
         ## Check Rd contents
         if (dir.exists("man") && R_check_Rd_contents && !extra_arch) {
-            checkingLog(Log, "Rd contents")
+            checkingLog(Log, gettext("checking Rd contents ...", domain = "R-tools"))
             Rcmd <- paste("options(warn=1)\n",
                           if (do_install)
                           sprintf("tools:::.check_Rd_contents(package = \"%s\")\n", pkgname)
@@ -1865,12 +1755,12 @@ setRlibs <-
             if (length(out)) {
                 warningLog(Log)
                 printLog0(Log, paste(c(out, ""), collapse = "\n"))
-            } else resultLog(Log, "OK")
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
 
         ## Check undeclared dependencies in examples (if any)
         if (dir.exists("man") && do_install && !extra_arch && !is_base_pkg) {
-            checkingLog(Log, "for unstated dependencies in examples")
+            checkingLog(Log, gettext("checking for unstated dependencies in examples ...", domain = "R-tools"))
             Rcmd <- paste("options(warn=1, showErrorCalls=FALSE)\n",
                           sprintf("tools:::.check_packages_used_in_examples(package = \"%s\")\n", pkgname))
 
@@ -1879,7 +1769,7 @@ setRlibs <-
                 warningLog(Log)
                 printLog0(Log, paste(c(out, ""), collapse = "\n"))
                 # wrapLog(msg_DESCRIPTION)
-            } else resultLog(Log, "OK")
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
         } ## FIXME, what if no install?
     }
 
@@ -1887,27 +1777,22 @@ setRlibs <-
     {
         ## Check contents of 'data'
         if (!is_base_pkg && dir.exists("data")) {
-            checkingLog(Log, "contents of 'data' directory")
+            checkingLog(Log, gettext("checking contents of 'data' directory ...", domain = "R-tools"))
             fi <- list.files("data")
             if (!any(grepl("\\.[Rr]$", fi))) { # code files can do anything
                 dataFiles <- basename(list_files_with_type("data", "data"))
                 odd <- fi[! fi %in% c(dataFiles, "datalist")]
                 if (length(odd)) {
                     warningLog(Log)
-                    msg <-
-                        c(sprintf("Files not of a type allowed in a %s directory:\n",
-                                  sQuote("data")),
-                          paste0(.pretty_format(odd), "\n"),
-                          sprintf("Please use e.g. %s for non-R data files\n",
-                                  sQuote("inst/extdata")))
-                    printLog0(Log, msg)
-                } else resultLog(Log, "OK")
-            } else resultLog(Log, "OK")
+                    msg <- gettextf("Files not of a type allowed in a 'data' directory:\n%s\nPlease use e.g. 'inst/extdata' for non-R data files\n", .pretty_format(odd), domain = "R-tools")
+                    printLog(Log, msg)
+                } else resultLog(Log, gettext("OK", domain = "R-tools"))
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
 
         ## Check for non-ASCII characters in 'data'
         if (!is_base_pkg && R_check_ascii_data && dir.exists("data")) {
-            checkingLog(Log, "data for non-ASCII characters")
+            checkingLog(Log, gettext("checking data for non-ASCII characters ...", domain = "R-tools"))
             out <- R_runR("tools:::.check_package_datasets('.')", R_opts2)
             out <- grep("Loading required package", out,
                         invert = TRUE, value = TRUE)
@@ -1917,12 +1802,12 @@ setRlibs <-
                 bad <- grep("^Warning:", out)
                 if (length(bad)) warningLog(Log) else noteLog(Log)
                 printLog0(Log, .format_lines_with_indent(out), "\n")
-            } else resultLog(Log, "OK")
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
 
         ## Check for ASCII and uncompressed/unoptimized saves in 'data'
         if (!is_base_pkg && R_check_compact_data && dir.exists("data")) {
-            checkingLog(Log, "data for ASCII and uncompressed saves")
+            checkingLog(Log, gettext("checking data for ASCII and uncompressed saves ...", domain = "R-tools"))
             out <- R_runR("tools:::.check_package_compact_datasets('.', TRUE)",
                           R_opts2)
             out <- grep("Warning: changing locked binding", out,
@@ -1930,20 +1815,20 @@ setRlibs <-
             if (length(out)) {
                 warningLog(Log)
                 printLog0(Log, .format_lines_with_indent(out), "\n")
-            } else resultLog(Log, "OK")
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
 
         ## Check for ASCII and uncompressed/unoptimized saves in 'sysdata':
         ## no base package has this
         if (R_check_compact_data && file.exists(file.path("R", "sysdata.rda"))) {
-            checkingLog(Log, "R/sysdata.rda")
+            checkingLog(Log, gettext("checking R/sysdata.rda ...", domain = "R-tools"))
             out <- R_runR("tools:::.check_package_compact_sysdata('.', TRUE)",
                           R_opts2)
             if (length(out)) {
                 bad <- grep("^Warning:", out)
                 if (length(bad)) warningLog(Log) else noteLog(Log)
                 printLog0(Log, .format_lines_with_indent(out), "\n")
-            } else resultLog(Log, "OK")
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
    }
 
@@ -1952,7 +1837,7 @@ setRlibs <-
         ## Have already checked that inst/doc exists
         doc_dir <- file.path(libdir, pkgname, "doc")
         if (!dir.exists(doc_dir)) return()
-        checkingLog(Log, "installed files from 'inst/doc'")
+        checkingLog(Log, gettext("checking installed files from 'inst/doc' ...", domain = "R-tools"))
         ## special case common problems.
         any <- FALSE
         files <- dir(file.path(pkgdir, "inst", "doc"))
@@ -1961,10 +1846,7 @@ setRlibs <-
         if (length(bad)) {
             noteLog(Log)
             any <- TRUE
-            printLog0(Log,
-                      "The following files are already in R: ",
-                      paste(sQuote(bad), collapse = ", "), "\n",
-                      "Please remove them from your package.\n")
+            printLog(Log, gettextf("The following files are already in R: %s\nPlease remove them from your package.\n", paste(sQuote(bad), collapse = ", "), domain = "R-tools"))
         }
         files2 <- dir(file.path(pkgdir, "inst", "doc"), recursive = TRUE,
                      pattern = "[.](cls|sty|drv)$", full.names = TRUE)
@@ -1980,11 +1862,7 @@ setRlibs <-
         if (length(bad)) {
             if(!any) noteLog(Log)
             any <- TRUE
-            printLog0(Log,
-                      "The following files contain a license that requires\n",
-                      "distribution of original sources:\n",
-                      "  ", paste(sQuote(bad), collapse = ", "), "\n",
-                      "Please ensure that you have complied with it.\n")
+            printLog(Log, gettextf("The following files contain a license that requires\ndistribution of original sources:\n  %s\nPlease ensure that you have complied with it.\n", paste(sQuote(bad), collapse = ", "), domain = "R-tools")) 
         }
 
         ## Now look for TeX leftovers (and soiltexture, Amelia ...).
@@ -1993,11 +1871,8 @@ setRlibs <-
         if (any(bad)) {
             if(!any) noteLog(Log)
             any <- TRUE
-            printLog0(Log,
-                      "The following files look like leftovers/mistakes:\n",
-                      paste(strwrap(paste(sQuote(files[bad]), collapse = ", "),
-                                    indent = 2, exdent = 2), collapse = "\n"),
-                      "\nPlease remove them from your package.\n")
+            printLog(Log, gettextf("The following files look like leftovers/mistakes:\n%s\nPlease remove them from your package.\n",
+                     paste(strwrap(paste(sQuote(files[bad]), collapse = ", "), indent = 2, exdent = 2), collapse = "\n"), domain = "R-tools"))
         }
 
         files <- dir(doc_dir)
@@ -2023,30 +1898,22 @@ setRlibs <-
             if(!any) noteLog(Log)
             any <- TRUE
             if(length(badf))
-                printLog0(Log,
-                          "The following files should probably not be installed:\n",
-                          paste(strwrap(paste(sQuote(badf), collapse = ", "),
-                                        indent = 2, exdent = 2), collapse = "\n"),
-                          "\n")
+                printLog(Log, gettextf("The following files should probably not be installed:\n%s\n", 
+                         paste(strwrap(paste(sQuote(badf), collapse = ", "), indent = 2, exdent = 2), collapse = "\n"), domain = "R-tools"))
             if(length(badd))
-                printLog0(Log,
-                          "The following directories should probably not be installed:\n",
-                          paste(strwrap(paste(sQuote(badd), collapse = ", "),
-                                        indent = 2, exdent = 2), collapse = "\n"),
-                          "\n")
-            printLog0(Log, "\nConsider the use of a .Rinstignore file: see ",
-                      sQuote("Writing R Extensions"), ",\n",
-                      "or move the vignette sources from ",
-                      sQuote("inst/doc"), " to ", sQuote("vignettes"), ".\n")
+                printLog(Log, gettextf("The following directories should probably not be installed:\n%s\n",
+                         paste(strwrap(paste(sQuote(badd), collapse = ", "), indent = 2, exdent = 2), collapse = "\n"), domain = "R-tools"))
+            printLog(Log, gettextf("\nConsider the use of a .Rinstignore file: see %s,\nor move the vignette sources from %s to %s.\n",
+                     sQuote("Writing R Extensions"), sQuote("inst/doc"), sQuote("vignettes"), domain = "R-tools"))
         }
         if (!any) resultLog(Log, "OK")
     }
 
     check_vign_contents <- function(ignore_vignettes = FALSE)
     {
-        checkingLog(Log, "files in 'vignettes'")
+        checkingLog(Log, gettext("checking files in 'vignettes' ...", domain = "R-tools"))
         if (ignore_vignettes) {
-            resultLog(Log, "SKIPPED")
+            resultLog(Log, gettext("SKIPPED", domain = "R-tools"))
             return()
         }
         ## special case common problems.
@@ -2059,11 +1926,10 @@ setRlibs <-
         if(length(sources)) {
             warningLog(Log)
             any <- TRUE
-            msg <- c("Vignette sources in 'inst/doc' missing from the 'vignettes' directory:",
-                    strwrap(paste(sQuote(sources), collapse = ", "),
-                            indent = 2L, exdent = 4L),
+            msg <- c(gettext("Vignette sources in 'inst/doc' missing from the 'vignettes' directory:", domain = "R-tools"),
+                    strwrap(paste(sQuote(sources), collapse = ", "), indent = 2L, exdent = 4L),
                      "")
-            printLog0(Log, paste(msg, collapse = "\n"))
+            printLog(Log, paste(msg, collapse = "\n"))
         }
 
         files <- dir(file.path(pkgdir, "vignettes"))
@@ -2072,10 +1938,8 @@ setRlibs <-
         if (length(bad)) {
             noteLog(Log)
             any <- TRUE
-            printLog0(Log,
-                      "The following files are already in R: ",
-                      paste(sQuote(bad), collapse = ", "), "\n",
-                      "Please remove them from your package.\n")
+            printLog(Log,
+                     gettextf("The following files are already in R: %s\nPlease remove them from your package.", paste(sQuote(bad), collapse = ", "), domain = "R-tools"), "\n")
         }
         files2 <- dir(file.path(pkgdir, "vignettes"), recursive = TRUE,
                      pattern = "[.](cls|sty|drv)$", full.names = TRUE)
@@ -2090,11 +1954,8 @@ setRlibs <-
         if (length(bad)) {
             if(!any) noteLog(Log)
             any <- TRUE
-            printLog0(Log,
-                      "The following files contain a license that requires\n",
-                      "distribution of original sources:\n",
-                      "  ", paste(sQuote(bad), collapse = ", "), "\n",
-                      "Please ensure that you have complied with it.\n")
+            printLog(Log,
+                     gettextf("The following files contain a license that requires distribution of original sources:\n  %s\nPlease ensure that you have complied with it.", paste(sQuote(bad), collapse = ", "), domain = "R-tools"), "\n")
         }
 
         ## Now look for TeX leftovers (and soiltexture, Amelia ...).
@@ -2104,11 +1965,9 @@ setRlibs <-
         if (any(bad)) {
             if(!any) noteLog(Log)
             any <- TRUE
-            printLog0(Log,
-                      "The following files look like leftovers/mistakes:\n",
-                      paste(strwrap(paste(sQuote(files[bad]), collapse = ", "),
-                                    indent = 2, exdent = 2), collapse = "\n"),
-                      "\nPlease remove them from your package.\n")
+            printLog(Log,
+                     gettextf("The following files look like leftovers/mistakes:\n%s\nPlease remove them from your package.",
+                     paste(strwrap(paste(sQuote(files[bad]), collapse = ", "), indent = 2, exdent = 2), collapse = "\n"), domain = "R-tools"), "\n")
         }
 
         ## Probable leftovers from knitr
@@ -2118,14 +1977,13 @@ setRlibs <-
             if(!any) noteLog(Log)
             any <- TRUE
             printLog0(Log,
-                      if(length(dirs)> 1L) "The following directories look like leftovers from 'knitr':\n"
-                      else "The following directory looks like a leftover from 'knitr':\n",
+                      sprintf(ngettext(length(dirs), "The following directory looks like a leftover from 'knitr':\n%s\nPlease remove from your package.\n", "The following directories look like leftovers from 'knitr':\n%s\nPlease remove from your package.\n", domain = "R-tools"),
                       paste(strwrap(paste(sQuote(dirs), collapse = ", "),
-                                    indent = 2, exdent = 2), collapse = "\n"),
-                      "\nPlease remove from your package.\n")
+                                    indent = 2, exdent = 2), collapse = "\n")),
+                      "")
         }
 
-        if (!any) resultLog(Log, "OK")
+        if (!any) resultLog(Log, gettext("OK", domain = "R-tools"))
     }
 
     check_doc_size <- function()
@@ -2135,7 +1993,7 @@ setRlibs <-
                     recursive = TRUE, full.names = TRUE)
         pdfs <- setdiff(pdfs, "inst/doc/Rplots.pdf")
         if (length(pdfs)) {
-            checkingLog(Log, "sizes of PDF files under 'inst/doc'")
+            checkingLog(Log, gettext("checking sizes of PDF files under 'inst/doc' ...", domain = "R-tools"))
             any <- FALSE
             td <- tempfile('pdf')
             dir.create(td)
@@ -2145,11 +2003,8 @@ setRlibs <-
             if(length(res)) {
                 noteLog(Log)
                 any <- TRUE
-                printLog(Log,
-                         "  'qpdf' made some significant size reductions:\n",
-                         paste("  ", res, collapse = "\n"),
-                         "\n",
-                         "  consider running tools::compactPDF() on these files\n")
+                printLog(Log, gettextf("  'qpdf' made some significant size reductions:\n%s\n  consider running tools::compactPDF() on these files\n",
+                         paste("  ", res, collapse = "\n"), domain = "R-tools"))
             }
             if (R_check_doc_sizes2) {
                 gs_cmd <- find_gs_cmd()
@@ -2159,20 +2014,16 @@ setRlibs <-
                     if(length(res)) {
                         if (!any) warningLog(Log)
                         any <- TRUE
-                        printLog(Log,
-                                 "  'gs+qpdf' made some significant size reductions:\n",
-                                 paste("  ", res, collapse = "\n"),
-                                 "\n",
-                                 '  consider running tools::compactPDF(gs_quality = "ebook") on these files\n')
+                        printLog(Log, gettextf("  'gs+qpdf' made some significant size reductions:\n%s\n  consider running tools::compactPDF(gs_quality = \"ebook\") on these files\n", paste("  ", res, collapse = "\n"), domain = "R-tools"))
                     }
                 } else {
                     if (!any) noteLog(Log)
                     any <- TRUE
-                    printLog(Log, "Unable to find GhostScript executable to run checks on size reduction\n")
+                    printLog(Log, gettext("Unable to find GhostScript executable to run checks on size reduction\n", domain = "R-tools"))
                 }
 
             }
-            if (!any) resultLog(Log, "OK")
+            if (!any) resultLog(Log, gettext("OK", domain = "R-tools"))
         }
     }
 
@@ -2186,7 +2037,7 @@ setRlibs <-
         ## (Sun Studio 12 definitely objects to CR in both C and Fortran).
         ## </FIXME>
         if(dir.exists("src")) {
-            checkingLog(Log, "line endings in C/C++/Fortran sources/headers")
+            checkingLog(Log, gettext("checking line endings in C/C++/Fortran sources/headers ...", domain = "R-tools"))
             ## pattern is "([cfh]|cc|cpp)"
             files <- dir("src", pattern = "\\.([cfh]|cc|cpp)$",
                          full.names = TRUE, recursive = TRUE)
@@ -2199,10 +2050,10 @@ setRlibs <-
                     bad_files <- c(bad_files, f)
             }
             if (length(bad_files)) {
-                warningLog(Log, "Found the following sources/headers with CR or CRLF line endings:")
+                warningLog(Log, gettext("Found the following sources/headers with CR or CRLF line endings:", domain = "R-tools"))
                 printLog0(Log, .format_lines_with_indent(bad_files), "\n")
-                printLog(Log, "Some Unix compilers require LF line endings.\n")
-            } else resultLog(Log, "OK")
+                printLog(Log, gettext("Some Unix compilers require LF line endings.\n", domain = "R-tools"))
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
 
         ## Check src/Make* for LF line endings, as Sun make does not accept CRLF
@@ -2217,7 +2068,7 @@ setRlibs <-
         all_files <- sub("^[.]/", "", all_files)
         all_files <- unique(sort(all_files))
         if(length(all_files)) {
-            checkingLog(Log, "line endings in Makefiles")
+        checkingLog(Log, gettext("checking line endings in Makefiles ...", domain = "R-tools"))
             bad_files <- noEOL<- character()
             for(f in all_files) {
                 if (!file.exists(f)) next
@@ -2228,18 +2079,18 @@ setRlibs <-
                     noEOL <- c(noEOL, f)
             }
             if (length(bad_files)) {
-                warningLog(Log, "Found the following Makefile(s) with CR or CRLF line endings:")
-                printLog0(Log, .format_lines_with_indent(bad_files), "\n")
-                printLog(Log, "Some Unix 'make' programs require LF line endings.\n")
+                warningLog(Log, gettext("Found the following Makefiles with CR or CRLF line endings:", domain = "R-tools"))
+                printLog(Log, .format_lines_with_indent(bad_files), "\n")
+                printLog(Log, gettext("Some Unix 'make' programs require LF line endings.\n", domain = "R-tools"))
             } else if (length(noEOL)) {
-                noteLog(Log, "Found the following Makefile(s) without a final LF:")
+                noteLog(Log, gettext("Found the following Makefile(s) without a final LF:", domain = "R-tools"))
                 printLog0(Log, .format_lines_with_indent(noEOL), "\n")
-                printLog(Log, "Some 'make' programs ignore lines not ending in LF.\n")
-            } else resultLog(Log, "OK")
+                printLog(Log, gettext("Some 'make' programs ignore lines not ending in LF.\n", domain = "R-tools"))
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
         ## Check src/Makevars[.in] compilation flags.
         if (length(makevars)) {
-            checkingLog(Log, "compilation flags in Makevars")
+            checkingLog(Log, gettext("checking compilation flags in Makevars", domain = "R-tools"))
 
             Rcmd <- sprintf("tools:::.check_make_vars(\"src\", %s)\n",
                             deparse(makevars))
@@ -2247,12 +2098,12 @@ setRlibs <-
             if (length(out)) {
                 if(any(grepl("^(Non-portable flags|Variables overriding)", out)))
                    warningLog(Log) else noteLog(Log)
-                printLog0(Log, paste(c(out, ""), collapse = "\n"))
-            } else resultLog(Log, "OK")
+                printLog(Log, paste(c(out, ""), collapse = "\n"))
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
         ## Check GNUisms
         if (length(all_files)) {
-            checkingLog(Log, "for GNU extensions in Makefiles")
+            checkingLog(Log, gettext("checking for GNU extensions in Makefiles ...", domain = "R-tools"))
             bad_files <- character()
             for(f in all_files) {
                 contents <- readLines(f, warn = FALSE)
@@ -2266,17 +2117,13 @@ setRlibs <-
             SysReq <- desc["SystemRequirements"]
             if (length(bad_files)) {
                 if(!is.na(SysReq) && grepl("GNU [Mm]ake", SysReq)) {
-                    noteLog(Log, "GNU make is a SystemRequirements.")
+                    noteLog(Log, gettext("GNU make is a SystemRequirements.", domain = "R-tools"))
                 } else {
-                    warningLog(Log, "Found the following file(s) containing GNU extensions:")
+                    warningLog(Log, ngettext(length(bad_files), "Found the following file containing GNU extensions:", "Found the following files containing GNU extensions:", domain = "R-tools"))
                     printLog0(Log, .format_lines_with_indent(bad_files), "\n")
-                    wrapLog("Portable Makefiles do not use GNU extensions",
-                            "such as +=, :=, $(shell), $(wildcard),",
-                            "ifeq ... endif.",
-                            "See section 'Writing portable packages'",
-                            "in the 'Writing R Extensions' manual.\n")
+                    wrapLog(gettext("Portable Makefiles do not use GNU extensions such as +=, :=, $(shell), $(wildcard), ifeq ... endif. See section 'Writing portable packages' in the 'Writing R Extensions' manual.\n", domain = "R-tools"))
                 }
-            } else resultLog(Log, "OK")
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
 
         ## check src/Makevar*, src/Makefile* for correct use of BLAS_LIBS
@@ -2286,7 +2133,7 @@ setRlibs <-
                                         c("Makevars", "Makevars.in",
                                           "Makefile", "Makefile.win")))
         if(length(makefiles)) {
-            checkingLog(Log, "for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS)")
+            checkingLog(Log, gettext("checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ...", domain = "R-tools"))
             any <- FALSE
             for (f in makefiles) {
                 lines <- readLines(f, warn = FALSE)
@@ -2308,34 +2155,31 @@ setRlibs <-
                 if (any(c1 & c2l & !c2b)) {
                     if (!any) warningLog(Log)
                     any <- TRUE
-                    printLog(Log,
-                             "  apparently using $(LAPACK_LIBS) without $(BLAS_LIBS) in ",
-                             sQuote(f), "\n")
+                    printLog(Log, gettextf("  apparently using $(LAPACK_LIBS) without $(BLAS_LIBS) in %s\n", sQuote(f), domain = "R-tools"))
                 }
                 if (any(c1 & (c2b | c2l) & !c3)) {
                     if (!any) warningLog(Log)
                     any <- TRUE
-                    printLog(Log, "  apparently PKG_LIBS is missing $(FLIBS) in ",
-                             sQuote(f), "\n")
+                    printLog(Log, gettextf("  apparently PKG_LIBS is missing $(FLIBS) in %s\n", sQuote(f), domain = "R-tools"))
                 }
             }
-            if (!any) resultLog(Log, "OK")
+            if (!any) resultLog(Log, gettext("OK", domain = "R-tools"))
         }
     }
 
     check_sos <- function() {
-        checkingLog(Log, "compiled code")
+        checkingLog(Log, gettext("checking compiled code ...", domain = "R-tools"))
         ## from sotools.R
         Rcmd <- paste("options(warn=1)\n",
                       sprintf("tools:::check_compiled_code(\"%s\")",
                               file.path(libdir, pkgname)))
         out <- R_runR(Rcmd, R_opts2, "R_DEFAULT_PACKAGES=NULL")
-        if(length(out) == 1L && startsWith(out, "Note:")) {
+        if(length(out) == 1L && startsWith(out,"Note:")) {
             ## This will be a note about symbols.rds not being available
             if(!is_base_pkg) {
                 noteLog(Log)
-                printLog0(Log, c(out, "\n"))
-            } else resultLog(Log, "OK")
+                printLog0(Log, c(gettext(out, domain = "R-tools"), "\n"))
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
         } else if(length(out)) {
             ## If we have named objects then we have symbols.rds and
             ## will not be picking up symbols just in system libraries.
@@ -2351,29 +2195,20 @@ setRlibs <-
             nBad <- length(grep(", possibly from ", out))
             msg <- if (nBad) {
                 if(haveObjs)
-                    c("Compiled code should not call entry points which",
-                      "might terminate R nor write to stdout/stderr instead",
-                      "of to the console, nor the system RNG.\n")
+                    gettext("Compiled code should not call entry points which might terminate R nor write to stdout/stderr instead of to the console.\n", domain = "R-tools")
                 else
-                    c("Compiled code should not call entry points which",
-                      "might terminate R nor write to stdout/stderr instead",
-                      "of to the console, nor the system RNG.",
-                      "The detected symbols are linked",
-                      "into the code but might come from libraries",
-                      "and not actually be called.\n")
+                    gettext("Compiled code should not call entry points which might terminate R nor write to stdout/stderr instead of to the console.  The detected symbols are linked into the code but might come from libraries and not actually be called.\n", domain = "R-tools")
             } else character()
             if(nAPIs)
-                msg <- c(msg,
-                         "Compiled code should not call non-API entry points in R.\n")
+                msg <- c(msg, gettext("Compiled code should not call non-API entry points in R.\n", domain = "R-tools"))
             wrapLog("\n", paste(msg, collapse = " "), "\n",
-                    "See 'Writing portable packages'",
-                    "in the 'Writing R Extensions' manual.\n")
-        } else resultLog(Log, "OK")
+                    gettext("See 'Writing portable packages' in the 'Writing R Extensions' manual.\n", domain = "R-tools"))
+        } else resultLog(Log, gettext("OK", domain = "R-tools"))
     }
 
     check_loading <- function(arch = "")
     {
-        checkingLog(Log, "whether the package can be loaded")
+        checkingLog(Log, gettext("checking whether the package can be loaded ...", domain = "R-tools"))
         Rcmd <- sprintf("library(%s)", pkgname)
         opts <- if(nzchar(arch)) R_opts4 else R_opts2
         env <- "R_DEFAULT_PACKAGES=NULL"
@@ -2381,37 +2216,28 @@ setRlibs <-
         out <- R_runR(Rcmd, opts, env1, arch = arch)
         if(length(st <- attr(out, "status"))) {
             errorLog(Log)
-            wrapLog("Loading this package had a fatal error",
-                    "status code ", st,  "\n")
+            wrapLog(gettextf("Loading this package had a fatal error status code %s", st, domain = "R-tools"),  "\n", sep = "")
             if(length(out))
-                printLog0(Log,
-                          paste(c("Loading log:", out, ""),
-                                collapse = "\n"))
+                printLog(Log, gettextf("Loading log:\n%s\n", paste(out, collapse = "\n"), domain = "R-tools"))
             summaryLog(Log)
             do_exit()
         }
         if (any(startsWith(out, "Error"))) {
             errorLog(Log)
-            printLog0(Log, paste(c(out, ""), collapse = "\n"))
-            wrapLog("\nIt looks like this package",
-                    "has a loading problem: see the messages",
-                    "for details.\n")
+            printLog(Log, paste(c(out, ""), collapse = "\n"))
+            wrapLog(gettext("\nIt looks like this package has a loading problem: see the messages for details.\n", domain = "R-tools"))
 	    maybe_exit(1L)
-        } else resultLog(Log, "OK")
+        } else resultLog(Log, gettext("OK", domain = "R-tools"))
 
-        checkingLog(Log, "whether the package can be loaded with stated dependencies")
+        checkingLog(Log, gettext("checking whether the package can be loaded with stated dependencies ...", domain = "R-tools"))
         out <- R_runR(Rcmd, opts, c(env, env1), arch = arch)
         if (any(startsWith(out, "Error")) || length(attr(out, "status"))) {
-            printLog0(Log, paste(c(out, ""), collapse = "\n"))
-            wrapLog("\nIt looks like this package",
-                    "(or one of its dependent packages)",
-                    "has an unstated dependence on a standard",
-                    "package.  All dependencies must be",
-                    "declared in DESCRIPTION.\n")
+            printLog(Log, paste(c(out, ""), collapse = "\n"))
+            wrapLog(gettext("\nIt looks like this package (or one of its dependent packages) has an unstated dependence on a standard package.  All dependencies must be declared in DESCRIPTION.\n", domain = "R-tools"))
             wrapLog(msg_DESCRIPTION)
-        } else resultLog(Log, "OK")
+        } else resultLog(Log, gettext("OK", domain = "R-tools"))
 
-        checkingLog(Log, "whether the package can be unloaded cleanly")
+        checkingLog(Log, gettext("checking whether the package can be unloaded cleanly ...", domain = "R-tools"))
         Rcmd <- sprintf("suppressMessages(library(%s)); cat('\n---- unloading\n'); detach(\"package:%s\")", pkgname, pkgname)
         out <- R_runR(Rcmd, opts, c(env, env1), arch = arch)
         if (any(grepl("^(Error|\\.Last\\.lib failed)", out)) ||
@@ -2422,13 +2248,13 @@ setRlibs <-
                 ll <- ll[length(ll)]
                 out <- out[ll:length(out)]
             }
-            printLog0(Log, paste(c(out, ""), collapse = "\n"))
-        } else resultLog(Log, "OK")
+            printLog(Log, paste(c(out, ""), collapse = "\n"))
+        } else resultLog(Log, gettext("OK", domain = "R-tools"))
 
         ## and if it has a namespace, that we can load/unload just
         ## the namespace
         if (file.exists(file.path(pkgdir, "NAMESPACE"))) {
-            checkingLog(Log, "whether the namespace can be loaded with stated dependencies")
+            checkingLog(Log, gettext("checking whether the namespace can be loaded with stated dependencies ...", domain = "R-tools"))
             Rcmd <-
                 sprintf("options(warn=1)\ntools:::.load_namespace_rather_quietly(\"%s\")",
                         pkgname)
@@ -2455,18 +2281,11 @@ setRlibs <-
                 }
             }
             if(any) {
-                printLog0(Log, paste(c(out, ""), collapse = "\n"))
-                wrapLog("\nA namespace must be able to be loaded",
-                        "with just the base namespace loaded:",
-                        "otherwise if the namespace gets loaded by a",
-                        "saved object, the session will be unable",
-                        "to start.\n\n",
-                        "Probably some imports need to be declared",
-                        "in the NAMESPACE file.\n")
-            } else resultLog(Log, "OK")
+                printLog(Log, paste(c(out, ""), collapse = "\n"))
+                wrapLog(gettext("\nA namespace must be able to be loaded with just the base namespace loaded: otherwise if the namespace gets loaded by a saved object, the session will be unable to start.\n\nProbably some imports need to be declared in the 'NAMESPACE' file.\n", domain = "R-tools"))
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
 
-            checkingLog(Log,
-                        "whether the namespace can be unloaded cleanly")
+            checkingLog(Log, gettext("checking whether the namespace can be unloaded cleanly ...", domain = "R-tools"))
             Rcmd <- sprintf("invisible(suppressMessages(loadNamespace(\"%s\"))); cat('\n---- unloading\n'); unloadNamespace(\"%s\")",
                             pkgname, pkgname)
             out <- if (is_base_pkg && pkgname != "stats4")
@@ -2480,13 +2299,13 @@ setRlibs <-
                     ll <- ll[length(ll)]
                     out <- out[ll:length(out)]
                 }
-                printLog0(Log, paste(c(out, ""), collapse = "\n"))
-            } else resultLog(Log, "OK")
+                printLog(Log, paste(c(out, ""), collapse = "\n"))
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
 
         ## No point in this test if already installed in .Library
         if (!pkgname %in% dir(.Library)) {
-            checkingLog(Log, "loading without being on the library search path")
+            checkingLog(Log, gettext("checking loading without being on the library search path ...", domain = "R-tools"))
             Rcmd <- sprintf("library(%s, lib.loc = '%s')", pkgname, libdir)
             opts <- if(nzchar(arch)) R_opts4 else R_opts2
             env <- setRlibs(pkgdir = pkgdir, libdir = libdir,
@@ -2495,11 +2314,9 @@ setRlibs <-
             out <- R_runR(Rcmd, opts, env, arch = arch)
             if (any(startsWith(out, "Error"))) {
                 warningLog(Log)
-                printLog0(Log, paste(c(out, ""), collapse = "\n"))
-                wrapLog("\nIt looks like this package",
-                        "has a loading problem when not on .libPaths:",
-                        "see the messages for details.\n")
-            } else resultLog(Log, "OK")
+                printLog(Log, paste(c(out, ""), collapse = "\n"))
+                wrapLog(gettext("\nIt looks like this package has a loading problem when not on .libPaths: see the messages for details.\n", domain = "R-tools"))
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
         if(!extra_arch && !is_base_pkg) {
             check_S3reg <-
@@ -2508,7 +2325,7 @@ setRlibs <-
                 config_val_to_logical(check_S3reg)
             }
             if(check_S3reg) {
-                checkingLog(Log, "use of S3 registration")
+                checkingLog(Log, gettext("checking use of S3 registration ...", domain = "R-tools"))
                 Rcmd <- sprintf("suppressPackageStartupMessages(loadNamespace('%s', lib.loc = '%s'))",
                                 pkgname, libdir)
                 opts <- if(nzchar(arch)) R_opts4 else R_opts2
@@ -2519,7 +2336,7 @@ setRlibs <-
                                 invert = TRUE, value = TRUE)
                     warningLog(Log)
                     printLog0(Log, paste(c(out, ""), collapse = "\n"))
-                } else resultLog(Log, "OK")
+                } else resultLog(Log, gettext("OK", domain = "R-tools"))
             }
         }
     }
@@ -2531,9 +2348,7 @@ setRlibs <-
             any <- FALSE
             ## moved here to avoid WARNING + OK
             if (nzchar(enc) && is_ascii) {
-                warningLog(Log,
-                           paste("checking a package with encoding ",
-                                 sQuote(e), " in an ASCII locale\n"))
+                warningLog(Log, gettextf("checking a package with encoding %s in an ASCII locale", sQuote(e), domain = "R-tools"))
                 any <- TRUE
             }
             Ropts <- if (nzchar(arch)) R_opts3 else R_opts
@@ -2542,16 +2357,14 @@ setRlibs <-
             ## might be diff-ing results against tests/Examples later
             ## so force LANGUAGE=en
             status <- R_runR(NULL, c(Ropts, enc),
-                             c("LANGUAGE=en", "_R_CHECK_INTERNALS2_=1",
+                             c("_R_CHECK_INTERNALS2_=1",
                                if(nzchar(arch)) env0,
                                jitstr, elibs),
                              stdout = exout, stderr = exout,
                              stdin = exfile, arch = arch)
             t2 <- proc.time()
             if (status) {
-                errorLog(Log, "Running examples in ",
-                         sQuote(basename(exfile)),
-                         " failed")
+                errorLog(Log, gettextf("Running examples in %s failed", sQuote(basename(exfile)), domain = "R-tools"))
                 ## Try to spot the offending example right away.
                 txt <- paste(readLines(exout, warn = FALSE),
                              collapse = "\n")
@@ -2563,13 +2376,12 @@ setRlibs <-
                 chunks <- strsplit(txt,
                                    "> ### \\* [^\n]+\n> \n> flush[^\n]+\n> \n", useBytes = TRUE)[[1L]]
                                        if((ll <- length(chunks)) >= 2) {
-                                           printLog(Log,
-                                                    "The error most likely occurred in:\n\n")
+                                           printLog(Log, gettext("The error most likely occurred in:\n\n", domain = "R-tools"))
                                            printLog0(Log, chunks[ll], "\n")
                                        } else {
                                            ## most likely error before the first example
                                            ## so show all the output.
-                                           printLog(Log, "The error occurred in:\n\n")
+                                           printLog(Log, gettext("The error occurred in:\n\n", domain = "R-tools"))
                                            printLog0(Log, txt, "\n")
                                        }
                 return(FALSE)
@@ -2586,11 +2398,9 @@ setRlibs <-
                               lines, useBytes = TRUE, value = TRUE)
             if(length(bad_lines)) {
                 bad <- TRUE
-                warningLog(Log, "Found the following significant warnings:\n")
-                printLog0(Log, .format_lines_with_indent(bad_lines), "\n")
-                wrapLog("Deprecated functions may be defunct as",
-                        "soon as of the next release of R.\n",
-                        "See ?Deprecated.\n")
+                warningLog(Log, gettext("Found the following significant warnings:\n", domain = "R-tools"))
+                printLog(Log, .format_lines_with_indent(bad_lines), "\n")
+                wrapLog(gettext("Deprecated functions may be defunct as soon as of the next release of R.\nSee ?Deprecated.\n", domain = "R-tools"))
             }
             bad_lines <- grep("^Warning.*screen devices should not be used in examples",
                               lines, useBytes = TRUE, value = TRUE)
@@ -2598,24 +2408,22 @@ setRlibs <-
             if(length(bad_lines)) {
                 if(!bad) {
                     warningLog(Log,
-                               "Found the following significant warnings:")
+                               gettext("Found the following significant warnings:", domain = "R-tools"))
                     bad <- TRUE
                 }
-                printLog0(Log, .format_lines_with_indent(bad_lines), "\n")
-                wrapLog("dev.new() is the preferred way to open a new device,",
-                        "in the unlikely event one is needed.")
+                printLog(Log, .format_lines_with_indent(bad_lines), "\n")
+                wrapLog("'dev.new()' is the preferred way to open a new device, in the unlikely event one is needed.")
             }
             bad_lines <- grep("^Warning: .*simultaneous processes spawned$",
                               lines, useBytes = TRUE, value = TRUE)
             if(length(bad_lines)) {
                 if(!bad) {
                     warningLog(Log,
-                               "Found the following significant warnings:")
+                               gettext("Found the following significant warnings:", domain = "R-tools"))
                     bad <- TRUE
                 }
-                printLog0(Log, .format_lines_with_indent(bad_lines), "\n")
-                wrapLog("Note that CRAN packages must never use more than two",
-                        "cores simultaneously during their checks.")
+                printLog(Log, .format_lines_with_indent(bad_lines), "\n")
+                wrapLog(gettext("Note that CRAN packages must never use more than two cores simultaneously during their checks.", domain = "R-tools"))
             }
             any <- any || bad
             if (!any) resultLog(Log, "OK")
@@ -2629,7 +2437,7 @@ setRlibs <-
                 times <- times[o, ]
                 keep <- (times[[1]] + times[[2]] > 5) | (times[[3]] > 5)
                 if(any(keep)) {
-                    printLog(Log, "Examples with CPU or elapsed time > 5s\n")
+                    printLog(Log, gettext("Examples with CPU or elapsed time > 5s\n", domain = "R-tools"))
                     times <- utils::capture.output(format(times[keep, ]))
                     printLog0(Log, paste(times, collapse = "\n"), "\n")
                 }
@@ -2640,13 +2448,11 @@ setRlibs <-
             exsave <- file.path(pkgdir, test_dir, "Examples",
                                 paste0(pkgname, "-Ex.Rout.save"))
             if (file.exists(exsave)) {
-                checkingLog(Log, "differences from ",
-                            sQuote(basename(exout)),
-                            " to ", sQuote(basename(exsave)))
+                checkingLog(Log, gettextf("checking differences from %s to %s ...", sQuote(basename(exout)), sQuote(basename(exsave)), domain = "R-tools"))
                 cmd <- paste0("invisible(tools::Rdiff('",
                               exout, "', '", exsave, "',TRUE,TRUE))")
                 out <- R_runR(cmd, R_opts2)
-                resultLog(Log, "OK")
+                resultLog(Log, gettext("OK", domain = "R-tools"))
                 if(length(out))
                     printLog0(Log, paste(c("", out, ""), collapse = "\n"))
             }
@@ -2654,8 +2460,8 @@ setRlibs <-
             TRUE
         }
 
-        checkingLog(Log, "examples")
-        if (!do_examples) resultLog(Log, "SKIPPED")
+        checkingLog(Log, gettext("checking examples ...", domain = "R-tools"))
+        if (!do_examples) resultLog(Log, gettext("SKIPPED", domain = "R-tools"))
         else {
             pkgtopdir <- file.path(libdir, pkgname)
             cmd <- sprintf('tools:::.createExdotR("%s", "%s", silent = TRUE, use_gct = %s, addTiming = %s, commentDontrun = %s, commentDonttest = %s)',
@@ -2667,13 +2473,9 @@ setRlibs <-
                              stdout = Rout, stderr = Rout)
             exfile <- paste0(pkgname, "-Ex.R")
             if (status) {
-                errorLog(Log,
-                         paste("Running massageExamples to create",
-                               sQuote(exfile), "failed"))
-                printLog0(Log,
-                          paste(readLines(Rout, warn = FALSE),
-                                collapse = "\n"),
-                          "\n")
+                errorLog(Log, gettextf("Running massageExamples to create %s failed", sQuote(exfile), domain = "R-tools"))
+                printLog(Log, paste(readLines(Rout, warn = FALSE),
+                                    collapse = "\n"), "\n")
 		maybe_exit(1L)
             }
             ## It ran, but did it create any examples?
@@ -2689,16 +2491,14 @@ setRlibs <-
                     Log$stars <<-  "**"
                     res <- TRUE
                     for (arch in inst_archs) {
-                        printLog(Log, "** running examples for arch ",
-                                 sQuote(arch), " ...")
+                        printLog(Log, gettextf("** running examples for arch %s ...", sQuote(arch), domain = "R-tools"))
                         if (arch %in% R_check_skip_examples_arch) {
-                            resultLog(Log, "SKIPPED")
+                            resultLog(Log, gettext("SKIPPED", domain = "R-tools"))
                         } else {
                             tdir <- paste0("examples_", arch)
                             dir.create(tdir)
                             if (!dir.exists(tdir)) {
-                                errorLog(Log,
-                                         "unable to create examples directory")
+                                errorLog(Log, gettext("unable to create examples directory", domain = "R-tools"))
                                 summaryLog(Log)
                                 do_exit(1L)
                             }
@@ -2717,11 +2517,10 @@ setRlibs <-
                 if (file.exists(cntFile)) {
                     unlink(cntFile)
                     if (as_cran)
-                        printLog(Log, "** found \\donttest examples:",
-                                 " check also with --run-donttest\n")
+                        printLog(Log, gettext("** found \\donttest examples: check also with --run-donttest\n", domain = "R-tools"))
                 }
             } else {
-                resultLog(Log, "NONE")
+                resultLog(Log, gettext("NONE", domain = "R-tools"))
                 no_examples <<- TRUE
             }
         }
@@ -2730,22 +2529,22 @@ setRlibs <-
     run_tests <- function()
     {
         if (!extra_arch && !is_base_pkg) {
-            checkingLog(Log, "for unstated dependencies in ", sQuote(test_dir))
+            checkingLog(Log, gettextf("checking for unstated dependencies in %s directory ...", sQuote(test_dir), domain = "R-tools"))
             Rcmd <- paste("options(warn=1, showErrorCalls=FALSE)\n",
                           sprintf("tools:::.check_packages_used_in_tests(\"%s\", \"%s\")\n", pkgdir, test_dir))
 
             out <- R_runR2(Rcmd, "R_DEFAULT_PACKAGES=NULL")
             if (length(out)) {
                 warningLog(Log)
-                printLog0(Log, paste(c(out, ""), collapse = "\n"))
+                printLog(Log, paste(c(out, ""), collapse = "\n"))
                 # wrapLog(msg_DESCRIPTION)
-            } else resultLog(Log, "OK")
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
 
         if (test_dir == "tests")
-	    checkingLog(Log, "tests")
+	    checkingLog(Log, gettext("checking tests ...", domain = "R-tools"))
 	else
-	    checkingLog(Log, "tests in ", sQuote(test_dir))
+	    checkingLog(Log, gettextf("checking tests in %s directory ...", sQuote(test_dir), domain = "R-tools"))
 
         run_one_arch <- function(arch = "")
         {
@@ -2754,8 +2553,7 @@ setRlibs <-
             if(nzchar(arch)) testdir <- paste(testdir, arch, sep = "_")
             if(!dir.exists(testdir)) dir.create(testdir, mode = "0755")
             if(!dir.exists(testdir)) {
-                errorLog(Log,
-                         sprintf("unable to create %s", sQuote(testdir)))
+                errorLog(Log, gettextf("unable to create %s", sQuote(testdir), domain = "R-tools"))
                 summaryLog(Log)
                 do_exit(1L)
             }
@@ -2769,13 +2567,11 @@ setRlibs <-
             extra <- c(extra, paste0('Log="', tf, '"'))
             ## might be diff-ing results against tests/*.R.out.save
             ## so force LANGUAGE=en
-            cmd <- paste0("tools:::.runPackageTestsR(",
-                         paste(extra, collapse = ", "), ")")
+            cmd <- paste0("tools:::.runPackageTestsR(", paste(extra, collapse = ", "), ")")
             t1 <- proc.time()
             status <- R_runR(cmd,
                              if(nzchar(arch)) R_opts4 else R_opts2,
-                             env = c("LANGUAGE=en",
-                             "_R_CHECK_INTERNALS2_=1",
+                             env = c("_R_CHECK_INTERNALS2_=1",
                              if(nzchar(arch)) env0,
                              jitstr, elibs),
                              stdout = "", stderr = "", arch = arch)
@@ -2796,17 +2592,15 @@ setRlibs <-
                     ll <- length(lines)
                     lines <- lines[max(1, ll-12):ll]
                     if (R_check_suppress_RandR_message)
-                        lines <- grep('^Xlib: *extension "RANDR" missing on display',
-                                      lines, invert = TRUE, value = TRUE,
-                                      useBytes = TRUE)
-                    printLog(Log, sprintf("Running the tests in %s failed.\n", sQuote(file)))
-                    printLog(Log, "Last 13 lines of output:\n")
+                        lines <- grep('^Xlib: *extension "RANDR" missing on display', lines, invert = TRUE, value = TRUE)
+                    printLog(Log, gettextf("Running the tests in %s failed.\n", sQuote(file), domain = "R-tools"))
+                    printLog(Log, gettext("Last 13 lines of output:\n", domain = "R-tools"))
                     printLog0(Log, .format_lines_with_indent(lines), "\n")
                 }
                 return(FALSE)
             } else {
                 print_time(t1, t2, Log)
-                resultLog(Log, "OK")
+                resultLog(Log, gettext("OK", domain = "R-tools"))
                 if (Log$con > 0L && file.exists(tf)) {
                     ## write results only to 00check.log
                     lines <- readLines(tf, warn = FALSE)
@@ -2825,13 +2619,12 @@ setRlibs <-
                 res <- TRUE
                 for (arch in inst_archs)
                     if (!(arch %in% R_check_skip_tests_arch)) {
-                        printLog(Log, "** running tests for arch ",
-                                 sQuote(arch), " ...")
+                        printLog(Log, gettextf("** running tests for arch %s", sQuote(arch), domain = "R-tools"))
                         res <- res & run_one_arch(arch)
                     }
             }
             if (!res) maybe_exit(1L)
-        } else resultLog(Log, "SKIPPED")
+        } else resultLog(Log, gettext("SKIPPED", domain = "R-tools"))
     }
 
     run_vignettes <- function(desc)
@@ -2844,17 +2637,17 @@ setRlibs <-
 
         if(do_install && !spec_install && !is_base_pkg && !extra_arch) {
             ## fake installs don't install inst/doc
-            checkingLog(Log, "for unstated dependencies in vignettes")
+            checkingLog(Log, gettext("checking for unstated dependencies in vignettes ...", domain = "R-tools"))
             Rcmd <- paste("options(warn=1, showErrorCalls=FALSE)\n",
                           sprintf("tools:::.check_packages_used_in_vignettes(package = \"%s\")\n", pkgname))
             out <- R_runR2(Rcmd, "R_DEFAULT_PACKAGES=NULL")
             if (length(out)) {
                 noteLog(Log)
-                printLog0(Log, paste(c(out, ""), collapse = "\n"))
-            } else resultLog(Log, "OK")
+                printLog(Log, paste(c(out, ""), collapse = "\n"))
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
         }
 
-        checkingLog(Log, "package vignettes in ", sQuote("inst/doc"))
+        checkingLog(Log, gettextf("checking package vignettes in %s ...", sQuote("inst/doc"), domain = "R-tools"))
         any <- FALSE
         ## Do PDFs or HTML files exist for all package vignettes?
         ## A base source package need not have PDFs to avoid
@@ -2876,12 +2669,9 @@ setRlibs <-
                 warningLog(Log)
                 msg <- ngettext(nb,
                                 "Package vignette without corresponding PDF/HTML:\n",
-                                "Package vignettes without corresponding PDF/HTML:\n", domain = NA)
-                printLog0(Log, msg)
-                printLog0(Log,
-                          paste(c(paste("  ",
-                                        sQuote(basename(bad_vignettes))),
-                                  "", ""), collapse = "\n"))
+                                "Package vignettes without corresponding PDF/HTML:\n", domain = "R-tools")
+                printLog(Log, msg)
+                printLog(Log, paste(c(paste("  ", sQuote(basename(bad_vignettes))), "", ""), collapse = "\n"))
             }
 	    defaultEncoding <- .get_package_metadata(pkgdir)["Encoding"]
             encs <- vapply(vigns$docs, getVignetteEncoding, "", default = defaultEncoding)
@@ -2891,12 +2681,9 @@ setRlibs <-
                 any <- TRUE
                 msg <- ngettext(nb,
                          "Non-ASCII package vignette without specified encoding:\n",
-                         "Non-ASCII package vignettes without specified encoding:\n", domain = NA)
-                printLog0(Log, "  ", msg)
-                printLog0(Log,
-                          paste(c(paste("  ",
-                                        sQuote(basename(bad_vignettes))),
-                                  "", ""), collapse = "\n"))
+                         "Non-ASCII package vignettes without specified encoding:\n", domain = "R-tools")
+                printLog(Log, "  ", msg)
+                printLog(Log, paste(c(paste("  ", sQuote(basename(bad_vignettes))), "", ""), collapse = "\n"))
             }
         }
 
@@ -2914,7 +2701,7 @@ setRlibs <-
 #                any <- TRUE
 #                msg <- ngettext(nb,
 #                                "Unused file in 'inst/doc' which is pointless or misleading",
-#                                "Unused files in 'inst/doc' which are pointless or misleading", domain = NA)
+#                                "Unused files in 'inst/doc' which are pointless or misleading", domain = "R-tools")
 #                printLog(Log, "  ",
 #                         paste(msg,
 #                               "  as they will be re-created from the vignettes:", "",
@@ -2928,8 +2715,7 @@ setRlibs <-
         if ("makefile" %in% dir(vigns$dir)) {
             if(!any) warningLog(Log)
             any <- TRUE
-            printLog(Log,
-                     "  Found 'inst/doc/makefile': should be 'Makefile' and will be ignored\n")
+            printLog(Log, gettext("  Found 'inst/doc/makefile': should be 'Makefile' and will be ignored\n", domain = "R-tools"))
         }
         if ("Makefile" %in% dir(vigns$dir)) {
             f <- file.path(vigns$dir, "Makefile")
@@ -2939,21 +2725,19 @@ setRlibs <-
             if(any(grepl("[^/]R +CMD", lines))) {
                 if(!any) warningLog(Log)
                 any <- TRUE
-                printLog(Log,
-                         "  Found 'R CMD' in Makefile: should be '\"$(R_HOME)/bin/R\" CMD'\n")
+                printLog(Log, gettext("  Found 'R CMD' in Makefile: should be '\"$(R_HOME)/bin/R\" CMD'\n", domain = "R-tools"))
             }
             contents <- readChar(f, file.size(f), useBytes = TRUE)
             if(any(grepl("\r", contents, fixed = TRUE, useBytes = TRUE))) {
                 if(!any) warningLog(Log)
                 any <- TRUE
-                printLog(Log, "Found Makefile with CR or CRLF line endings:\n")
-                printLog(Log, "some Unix 'make' programs require LF line endings.\n")
+                printLog(Log, gettext("Found Makefile with CR or CRLF line endings:\n", domain = "R-tools"))
+                printLog(Log, gettext("some Unix 'make' programs require LF line endings.\n", domain = "R-tools"))
            }
             if(any(grepl("[^/]Rscript", lines))) {
                 if(!any) warningLog(Log)
                 any <- TRUE
-                printLog(Log,
-                         "  Found 'Rscript' in Makefile: should be '\"$(R_HOME)/bin/Rscript\"'\n")
+                printLog(Log, gettext("  Found 'Rscript' in Makefile: should be '\"$(R_HOME)/bin/Rscript\"'\n", domain = "R-tools"))
             }
         }
 
@@ -2973,16 +2757,13 @@ setRlibs <-
                 any <- TRUE
                 msg <- ngettext(nb,
                                 "Package vignette which is not in its specified encoding:\n",
-                                "Package vignettes which are not in their specified encoding:\n", domain = NA)
-                printLog0(Log, "  ", msg)
-                printLog0(Log,
-                          paste(c(paste("  ",
-                                        sQuote(basename(bad_vignettes))),
-                                  "", ""), collapse = "\n"))
+                                "Package vignettes which are not in their specified encoding:\n", domain = "R-tools")
+                printLog(Log, "  ", msg)
+                printLog(Log, paste(c(paste("  ", sQuote(basename(bad_vignettes))), "", ""), collapse = "\n"))
             }
         }
 
-        if (!any) resultLog(Log, "OK")
+        if (!any) resultLog(Log, gettext("OK", domain = "R-tools"))
 
         if (do_install && do_vignettes) {
             ## Can we run the code in the vignettes?
@@ -3013,10 +2794,9 @@ setRlibs <-
             savefiles <-
                 file.path(dirname(vigns$docs),
                           paste0(vigns$names, ".Rout.save"))
-            ran <- FALSE
 
             if(!skip_run_maybe || any(file.exists(savefiles))) {
-                checkingLog(Log, "running R code from vignettes")
+                checkingLog(Log, gettext("checking running R code from vignettes ...", domain = "R-tools"))
                 res <- character()
                 cat("\n")
                 def_enc <- desc["Encoding"]
@@ -3047,24 +2827,19 @@ setRlibs <-
                                      stdout = outfile, stderr = outfile)
                     t2b <- proc.time()
                     out <- readLines(outfile, warn = FALSE)
-                    pos <- which(out == " *** Run successfully completed ***")
-                    if(!length(pos) || any(nzchar(out[seq_len(pos[1L] - 1L)])))
-                        ran <- TRUE
                     savefile <- savefiles[i]
                     if(length(grep("^  When (running|tangling|sourcing)", out,
                                    useBytes = TRUE))) {
-                        cat(" failed\n")
+                        cat(" ", gettext("failed", domain = "R-tools"), "\n", sep ="")
                         res <- c(res,
-                                 paste("when running code in", sQuote(basename(file))),
-                                 "  ...",
+                                 gettextf("when running code in %s ...", sQuote(basename(file)), domain = "R-tools"),
                                  utils::tail(out, as.numeric(Sys.getenv("_R_CHECK_VIGNETTES_NLINES_", "10"))))
                     } else if(status || ! " *** Run successfully completed ***" %in% out) {
                         ## (Need not be the final line if running under valgrind)
-                        cat(" failed to complete the test\n")
-                        out <- c(out, "", "... incomplete output.  Crash?")
+                        cat(" ", gettext("failed to complete the test", domain = "R-tools"), "\n", sep = "")
+                        out <- c(out, "", gettext("... incomplete output.  Crash?", domain = "R-tools"))
                         res <- c(res,
-                                 paste("when running code in", sQuote(basename(file))),
-                                 "  ...",
+                                 gettextf("when running code in %s ...", sQuote(basename(file)), domain = "R-tools"),
                                  utils::tail(out, as.numeric(Sys.getenv("_R_CHECK_VIGNETTES_NLINES_", "10"))))
                     } else if (file.exists(savefile)) {
                         cmd <- paste0("invisible(tools::Rdiff('",
@@ -3072,51 +2847,46 @@ setRlibs <-
                         out2 <- R_runR(cmd, R_opts2)
                         if(length(out2)) {
                             print_time(t1b, t2b, NULL)
-                            cat("\ndifferences from ", sQuote(basename(savefile)),
-                                "\n", sep = "")
+                            cat("\n", gettextf("differences from %s", sQuote(basename(savefile)), domain = "R-tools"), "\n", sep = "")
                             writeLines(c(out2, ""))
                         } else {
                             print_time(t1b, t2b, NULL)
-                            cat(" OK\n")
+                            cat(" ", gettext("OK", domain = "R-tools"), "\n")
                             if (!config_val_to_logical(Sys.getenv("_R_CHECK_ALWAYS_LOG_VIGNETTE_OUTPUT_", use_valgrind)))
                                 unlink(outfile)
                         }
                     } else {
                         print_time(t1b, t2b, NULL)
-                        cat(" OK\n")
+                        cat(" ", gettext("OK", domain = "R-tools"), "\n", sep = "")
                         if (!config_val_to_logical(Sys.getenv("_R_CHECK_ALWAYS_LOG_VIGNETTE_OUTPUT_", use_valgrind)))
                             unlink(outfile)
                     }
                 }
                 t2 <- proc.time()
-                if(!ran) {
-                    resultLog(Log, "NONE")
-                } else {
-                    print_time(t1, t2, Log)
-                    if(R_check_suppress_RandR_message)
-                        res <- grep('^Xlib: *extension "RANDR" missing on display', res,
-                                    invert = TRUE, value = TRUE, useBytes = TRUE)
-                    if(length(res)) {
-                        if(length(grep("there is no package called", res,
-                                       useBytes = TRUE))) {
-                            warningLog(Log, "Errors in running code in vignettes:")
-                            printLog0(Log, paste(c(res, "", ""), collapse = "\n"))
-                        } else {
-                            errorLog(Log, "Errors in running code in vignettes:")
-                            printLog0(Log, paste(c(res, "", ""), collapse = "\n"))
-                            maybe_exit(1L)
-                        }
-                    } else resultLog(Log, "OK")
-                }
+                print_time(t1, t2, Log)
+                if(R_check_suppress_RandR_message)
+                    res <- grep('^Xlib: *extension "RANDR" missing on display', res,
+                                invert = TRUE, value = TRUE, useBytes = TRUE)
+                if(length(res)) {
+                    if(length(grep("there is no package called", res,
+                                   useBytes = TRUE))) {
+                        warningLog(Log, gettext("Errors in running code in vignettes:", domain = "R-tool"))
+                        printLog0(Log, paste(c(res, "", ""), collapse = "\n"))
+                    } else {
+                        errorLog(Log, gettext("Errors in running code in vignettes:", domain = "R-tools"))
+                        printLog0(Log, paste(c(res, "", ""), collapse = "\n"))
+                        maybe_exit(1L)
+                    }
+                } else resultLog(Log, gettext("OK", domain = "R-tools"))
             }
 
             if (do_build_vignettes) {
-                checkingLog(Log, "re-building of vignette outputs")
+                checkingLog(Log, gettext("checking re-building of vignette outputs ...", domain = "R-tools"))
                 ## copy the whole pkg directory to check directory
                 ## so we can work in place, and allow ../../foo references.
                 dir.create(vd2 <- "vign_test")
                 if (!dir.exists(vd2)) {
-                    errorLog(Log, "unable to create 'vign_test'")
+                    errorLog(Log, gettext("unable to create 'vign_test'", domain = "R-tools"))
                     summaryLog(Log)
                     do_exit(1L)
                 }
@@ -3132,15 +2902,10 @@ setRlibs <-
                 Sys.setenv(MAKEFLAGS="")
                 ## we could use clean = FALSE, but that would not be
                 ## testing what R CMD build uses.
-                Rcmd <- "options(warn=1)\nlibrary(tools)\n"
-                Rcmd <- paste0(Rcmd, "buildVignettes(dir = '",
-                               file.path(pkgoutdir, "vign_test", pkgname0),
-                               "')")
+                Rcmd <- sprintf("options(warn=1)\nlibrary(tools)\nbuildVignettes(dir = '%s')", file.path(pkgoutdir, "vign_test", pkgname0))
                 t1 <- proc.time()
-#                outfile <- tempfile()
                 outfile <- file.path(pkgoutdir, "build_vignettes.log")
-                status <- R_runR(Rcmd, R_opts2, jitstr,
-                                 stdout = outfile, stderr = outfile)
+                status <- R_runR(Rcmd, R_opts2, jitstr, stdout = outfile, stderr = outfile)
                 t2 <- proc.time()
                 out <- readLines(outfile, warn = FALSE)
                 if(R_check_suppress_RandR_message)
@@ -3150,17 +2915,16 @@ setRlibs <-
                 warns <- grep("^Warning: file .* is not portable",
                               out, value = TRUE, useBytes = TRUE)
                 if (status) {
-                    if(skip_run_maybe || !ran) warningLog(Log) else noteLog(Log)
+                    if(skip_run_maybe) warningLog(Log) else noteLog(Log)
                     out <- utils::tail(out, as.numeric(Sys.getenv("_R_CHECK_VIGNETTES_NLINES_", "25")))
                     printLog0(Log,
-                              paste(c("Error in re-building vignettes:",
-                                      "  ...", out, "", ""), collapse = "\n"))
+                              paste(c(gettext("Error in re-building vignettes:", domain = "R-tools"), "  ...", out, "", ""), collapse = "\n"))
                 } else if(nw <- length(warns)) {
-                    if(skip_run_maybe || !ran) warningLog(Log) else noteLog(Log)
+                    if(skip_run_maybe) warningLog(Log) else noteLog(Log)
                     msg <- ngettext(nw,
                                     "Warning in re-building vignettes:\n",
                                     "Warnings in re-building vignettes:\n",
-                                    domain = NA)
+                                    domain = "R-tools")
                     wrapLog(msg)
                     printLog0(Log, .format_lines_with_indent(warns), "\n")
                 } else {
@@ -3170,17 +2934,17 @@ setRlibs <-
                     if (!config_val_to_logical(Sys.getenv("_R_CHECK_ALWAYS_LOG_VIGNETTE_OUTPUT_", "false")))
                             unlink(outfile)
                     print_time(t1, t2, Log)
-                    resultLog(Log, "OK")
+                    resultLog(Log, gettext("OK", domain = "R-tools"))
                 }
             } else {
-                checkingLog(Log, "re-building of vignette outputs")
-                resultLog(Log, "SKIPPED")
+                checkingLog(Log, gettext("checking re-building of vignette outputs ...", domain = "R-tools"))
+                resultLog(Log, gettext("SKIPPED", domain = "R-tools"))
             }
         } else {
-            checkingLog(Log, "running R code from vignettes")
-            resultLog(Log, "SKIPPED")
-            checkingLog(Log, "re-building of vignette outputs")
-            resultLog(Log, "SKIPPED")
+            checkingLog(Log, gettext("checking running R code from vignettes ...", domain = "R-tools"))
+            resultLog(Log, gettext("SKIPPED", domain = "R-tools"))
+            checkingLog(Log, gettext("checking re-building of vignette outputs ...", domain = "R-tools"))
+            resultLog(Log, gettext("SKIPPED", domain = "R-tools"))
         }
     }
 
@@ -3193,7 +2957,7 @@ setRlibs <-
             dir.exists(file.path(pkgdir, "man"))) {
             topdir <- pkgdir
             Rd2pdf_opts <- "--batch --no-preview"
-            checkingLog(Log, "PDF version of manual")
+            checkingLog(Log, gettext("checking PDF version of manual ...", domain = "R-tools"))
             build_dir <- gsub("\\", "/", tempfile("Rd2pdf"), fixed = TRUE)
             man_file <- paste0(pkgname, "-manual.pdf ")
             ## precautionary remove in case some other attempt left it behind
@@ -3206,10 +2970,9 @@ setRlibs <-
             if (file.exists(latex_log))
                 file.copy(latex_log, paste0(pkgname, "-manual.log"))
             if (res == 11) { ## return code from Rd2pdf
-                errorLog(Log, "Rd conversion errors:")
+                errorLog(Log, gettext("Rd conversion errors:", domain = "R-tools"))
                 lines <- readLines("Rdlatex.log", warn = FALSE)
-                lines <- grep("^(Hmm|Execution)", lines,
-                              invert = TRUE, value = TRUE)
+                lines <- grep("^(Hmm|Execution)", lines, invert = TRUE, value = TRUE)
                 printLog0(Log, paste(c(lines, ""), collapse = "\n"))
                 unlink(build_dir, recursive = TRUE)
 		maybe_exit(1L)
@@ -3218,19 +2981,17 @@ setRlibs <-
                 if (file.exists(latex_file))
                     file.copy(latex_file, paste0(pkgname, "-manual.tex"))
                 warningLog(Log)
-                printLog0(Log,
-                          paste0("LaTeX errors when creating PDF version.\n",
-                                 "This typically indicates Rd problems.\n"))
+                printLog(Log, gettext("LaTeX errors when creating PDF version.\nThis typically indicates Rd problems.\n", domain = "R-tools"))
                 ## If possible, indicate the problems found.
                 if (file.exists(latex_log)) {
                     lines <- .get_LaTeX_errors_from_log_file(latex_log)
-                    printLog(Log, "LaTeX errors found:\n")
+                    printLog(Log, gettext("LaTeX errors found:\n", domain = "R-tools"))
                     printLog0(Log, paste(c(lines, ""), collapse = "\n"))
                 }
                 unlink(build_dir, recursive = TRUE)
                 ## for Windows' sake: errors can make it unwritable
                 build_dir <- gsub("\\", "/", tempfile("Rd2pdf"), fixed = TRUE)
-                checkingLog(Log, "PDF version of manual without hyperrefs or index")
+                checkingLog(Log, gettext("checking PDF version of manual without hyperrefs or index ...", domain = "R-tools"))
                 ## Also turn off hyperrefs.
                 Sys.setenv(R_RD4PDF = "times")
                 args <- c( "Rd2pdf ", Rd2pdf_opts,
@@ -3251,7 +3012,7 @@ setRlibs <-
                         # printLog(Log, "Error when running command:\n")
                         # cmd <- paste(c("R CMD", args), collapse = " ")
                         # printLog(Log, strwrap(cmd, indent = 2, exdent = 4), "\n")
-                        printLog(Log, "Re-running with no redirection of stdout/stderr.\n")
+                        printLog(Log, gettext("Re-running with no redirection of stdout/stderr.\n", domain = "R-tools"))
                         unlink(build_dir, recursive = TRUE)
                         build_dir <- gsub("\\", "/", tempfile("Rd2pdf"), fixed = TRUE)
                         args <- c( "Rd2pdf ", Rd2pdf_opts,
@@ -3265,11 +3026,11 @@ setRlibs <-
 		    maybe_exit(1L)
                 } else {
                     unlink(build_dir, recursive = TRUE)
-                    resultLog(Log, "OK")
+                    resultLog(Log, gettext("OK", domain = "R-tools"))
                 }
             } else {
                 unlink(build_dir, recursive = TRUE)
-                resultLog(Log, "OK")
+                resultLog(Log, gettext("OK", domain = "R-tools"))
             }
         }
     }
@@ -3277,8 +3038,7 @@ setRlibs <-
     check_executables <- function()
     {
         owd <- setwd(pkgdir)
-        allfiles <- dir(".", all.files = TRUE, full.names = TRUE,
-                        recursive = TRUE)
+        allfiles <- dir(".", all.files = TRUE, full.names = TRUE, recursive = TRUE)
         allfiles <- sub("^./","", allfiles)
         ## this is tailored to the FreeBSD/Linux 'file',
         ## see http://www.darwinsys.com/file/
@@ -3297,7 +3057,7 @@ setRlibs <-
             have_free_file <- any(grepl("magic file from", lines))
         }
         if (have_free_file) {
-            checkingLog(Log, "for executable files")
+            checkingLog(Log, gettext("checking for executable files ...", domain = "R-tools"))
             ## Watch out for spaces in file names here
             ## Do in parallel for speed on Windows, but in batches
             ## since there may be a line-length limit.
@@ -3330,7 +3090,7 @@ setRlibs <-
             }
         } else {
             ## no 'file', so just check extensions
-            checkingLog(Log, "for .dll and .exe files")
+            checkingLog(Log, gettext("checking for .dll and .exe files ...", domain = "R-tools"))
             execs <- grep("\\.(exe|dll)$", allfiles, value = TRUE)
         }
         if (R_check_executables_exclusions && file.exists("BinaryFiles")) {
@@ -3341,13 +3101,11 @@ setRlibs <-
             msg <- ngettext(nb,
                             "Found the following executable file:",
                             "Found the following executable files:",
-                            domain = NA)
+                            domain = "R-tools")
             warningLog(Log, msg)
-            printLog0(Log, .format_lines_with_indent(execs), "\n")
-            wrapLog("Source packages should not contain undeclared executable files.\n",
-                    "See section 'Package structure'",
-                    "in the 'Writing R Extensions' manual.\n")
-        } else resultLog(Log, "OK")
+            printLog(Log, .format_lines_with_indent(execs), "\n")
+            wrapLog(gettext("Source packages should not contain undeclared executable files.\nSee section 'Package structure' in the 'Writing R Extensions' manual.\n", domain = "R-tools"))
+        } else resultLog(Log, gettext("OK", domain = "R-tools"))
         setwd(owd)
     }
 
@@ -3364,7 +3122,7 @@ setRlibs <-
 
     check_dot_files <- function(cran = FALSE)
     {
-        checkingLog(Log, "for hidden files and directories")
+        checkingLog(Log, gettext("checking for hidden files and directories ...", domain = "R-tools"))
         owd <- setwd(pkgdir)
         dots <- dir(".", all.files = TRUE, full.names = TRUE,
                         recursive = TRUE, pattern = "^[.]")
@@ -3378,11 +3136,9 @@ setRlibs <-
         bases <- basename(alldirs)
         dots <- c(dots, setdiff(alldirs[startsWith(bases, ".")], ".aspell"))
         if (length(dots)) {
-            noteLog(Log, "Found the following hidden files and directories:")
-            printLog0(Log, .format_lines_with_indent(dots), "\n")
-            wrapLog("These were most likely included in error.",
-                    "See section 'Package structure'",
-                    "in the 'Writing R Extensions' manual.\n")
+            noteLog(Log, gettext("Found the following hidden files and directories:", domain = "R-tools"))
+            printLog(Log, .format_lines_with_indent(dots), "\n")
+            wrapLog(gettext("These files and directories were most likely included in error. See section 'Package structure' in the 'Writing R Extensions' manual.\n", domain = "R-tools"))
             if(cran) {
                 known <- basename(dots) %in% .hidden_file_exclusions
                 known <- known | grepl("^.Rbuildindex[.]", dots) |
@@ -3392,13 +3148,13 @@ setRlibs <-
                     endsWith(dots, "vignettes/.Rinstignore") |
                     grepl("^src.*/[.]deps$", dots)
 		if (all(known))
-                    printLog(Log, "\nCRAN-pack knows about all of these\n")
+                    printLog(Log, gettext("\nCRAN-pack knows about all of these files and directories\n", domain = "R-tools"))
                 else if (any(!known)) {
-                    printLog(Log, "\nCRAN-pack does not know about\n")
-                    printLog0(Log, .format_lines_with_indent(dots[!known]), "\n")
+                    printLog(Log, gettext("\nCRAN-pack does not know about following files and directories:\n", domain = "R-tools"))
+                    printLog(Log, .format_lines_with_indent(dots[!known]), "\n")
                 }
             }
-        } else resultLog(Log, "OK")
+        } else resultLog(Log, gettext("OK", domain = "R-tools"))
         setwd(owd)
     }
 
@@ -3417,7 +3173,7 @@ setRlibs <-
         ## option '--library'.
 
         if (install == "skip")
-            messageLog(Log, "skipping installation test")
+            messageLog(Log, gettext("skipping installation test", domain = "R-tools"))
         else {
             use_install_log <-
                 (startsWith(install, "check") || R_check_use_install_log
@@ -3439,7 +3195,7 @@ setRlibs <-
                 message("")
                 ## Rare use of R CMD INSTALL
                 if (run_Rcmd(args)) {
-                    errorLog(Log, "Installation failed.")
+                    errorLog(Log, gettext("Installation failed.", domain = "R-tools"))
                     summaryLog(Log)
                     do_exit(1L)
                 }
@@ -3447,18 +3203,15 @@ setRlibs <-
             } else {
                 ## Case B. All output from installation redirected,
                 ## or already available in the log file.
-                checkingLog(Log,
-			    "whether package ", sQuote(desc["Package"]),
-                            " can be installed")
+                checkingLog(Log, gettextf("checking whether package %s can be installed ...", sQuote(desc["Package"]), domain = "R-tools"))
                 outfile <- file.path(pkgoutdir, "00install.out")
                 if (startsWith(install, "check")) {
                     if (!nzchar(arg_libdir))
-                        printLog(Log, "\nWarning: --install=check... specified without --library\n")
+                        printLog(Log, gettext("\nWarning: --install=check... specified without --library\n", domain = "R-tools"))
                     thislog <- substr(install, 7L, 1000L)
                                         #owd <- setwd(startdir)
                     if (!file.exists(thislog)) {
-                        errorLog(Log,
-                                 sprintf("install log %s does not exist", sQuote(thislog)))
+                        errorLog(Log, gettextf("install log %s does not exist", sQuote(thislog), domain = "R-tools"))
                         summaryLog(Log)
                         do_exit(2L)
                     }
@@ -3475,8 +3228,7 @@ setRlibs <-
                     install_error <- !any(grepl("^\\* DONE", lines))
                 } else {
                     ## record in the log what options were used
-                    cat("* install options ", sQuote(INSTALL_opts),
-                        "\n\n", sep = "", file = outfile)
+                    cat(gettextf("* install options %s", sQuote(INSTALL_opts), domain = "R-tools"), "\n\n", sep = "", file = outfile)
 ##                    env <- ""
                     ## Normal use of R CMD INSTALL
                     t1 <- proc.time()
@@ -3486,9 +3238,8 @@ setRlibs <-
                     lines <- readLines(outfile, warn = FALSE)
                 }
                 if (install_error) {
-                    errorLog(Log, "Installation failed.")
-                    printLog0(Log, "See ", sQuote(outfile),
-                             " for details.\n")
+                    errorLog(Log, gettext("Installation failed.", domain = "R-tools"))
+                    printLog(Log, gettextf("See %s for details.\n", sQuote(outfile), domain = "R-tools"))
                     summaryLog(Log)
                     do_exit(1L)
                 }
@@ -3701,34 +3452,33 @@ setRlibs <-
                 ## Can get reports like
                 ## Warning: No generic function ‘as.vector’ found corresponding to requested imported methods from package ‘Matrix’ when loading ‘MatrixModels’ (malformed exports?)
                 ## Exclude these unless they are about the current package.
-                load_re <- "Warning: No generic function.*corresponding to requested imported methods"
+                load_re <- gettext("Warning: No generic function.*corresponding to requested imported methods", domain = "R-tools")
                 ex <- grepl(load_re, lines, useBytes = TRUE) &
                     !grepl(pkgname, lines, fixed = TRUE, useBytes = TRUE)
                 lines <- lines[!ex]
 
                 note_re <-
-                    "warning: control may reach end of non-void function"
+                    gettext("warning: control may reach end of non-void function", domain = "R-tools")
 
                 notes <- grep(note_re, lines0, value = TRUE, useBytes = TRUE)
                 notes <- unique(notes)
 
                 if (length(lines)) {
-                    warningLog(Log, "Found the following significant warnings:")
+                    warningLog(Log, gettext("Found the following significant warnings:", domain = "R-tools"))
                     printLog0(Log, .format_lines_with_indent(lines), "\n")
                     if(length(notes)) {
                         printLog(Log,
-                                 "Found the following additional warnings:\n")
+                                 gettext("Found the following additional warnings:\n", domain = "R-tools"))
                         printLog0(Log, .format_lines_with_indent(notes),
                                   "\n")
                     }
-                    printLog0(Log, sprintf("See %s for details.\n",
-                                           sQuote(outfile)))
+                    printLog0(Log, gettextf("See %s for details.\n",
+                                           sQuote(outfile), domain = "R-tools"))
                 } else if(length(notes)) {
-                    noteLog(Log, "Found the following warnings:")
+                    noteLog(Log, gettext("Found the following warnings:", domain = "R-tools"))
                     printLog0(Log, .format_lines_with_indent(notes), "\n")
-                    printLog0(Log, sprintf("See %s for details.\n",
-                                           sQuote(outfile)))
-                } else resultLog(Log, "OK")
+                    printLog0(Log, gettextf("See %s for details.\n", sQuote(outfile), domain = "R-tools"))
+                } else resultLog(Log, gettext("OK", domain = "R-tools"))
             }   ## end of case B
         }
 
@@ -3742,7 +3492,7 @@ setRlibs <-
         pd <- file.path(libdir, pkgname)
         ## if we used a log, the installation would not need to remain.
         if (!dir.exists(pd)) return()
-        checkingLog(Log, "installed package size")
+        checkingLog(Log, gettext("checking installed package size ...", domain = "R-tools"))
         owd <- setwd(pd)
         res <- system2("du", "-k", TRUE, TRUE)
         sizes <- as.integer(sub("\\D.*", "", res))
@@ -3752,7 +3502,7 @@ setRlibs <-
         if(!is.na(total) && total > 1024*5 && # report at 5Mb
            pkgname != "Matrix") { # <- large recommended package
             noteLog(Log)
-            printLog(Log, sprintf("  installed size is %4.1fMb\n", total/1024))
+            printLog(Log, gettextf("  installed size is %4.1fMb\n", total/1024, domain = "R-tools"))
             rest <- res2[-nrow(res2), ]
             rest[, 2L] <- sub("./", "", rest[, 2L])
             ## keep only top-level directories
@@ -3760,25 +3510,24 @@ setRlibs <-
             rest <- rest[rest[, 1L] > 1024, ] # > 1Mb
             if(nrow(rest)) {
                 o <- sort.list(rest[, 2L])
-                printLog(Log, "  sub-directories of 1Mb or more:\n")
+                printLog(Log, gettextf("  sub-directories of 1Mb or more:\n", domain = "R-tools"))
                 size <- sprintf('%4.1fMb', rest[, 1L]/1024)
                 printLog0(Log,
 			  paste0("    ", format(rest[o, 2L], justify = "left"),
 				 "  ", format(size[o], justify = "right"), "\n"))
             }
-        } else resultLog(Log, "OK")
+        } else resultLog(Log, gettext("OK", domain = "R-tools"))
         setwd(owd)
     }
 
     check_description <- function()
     {
-        checkingLog(Log, "for file ",
-                    sQuote(file.path(pkgname0, "DESCRIPTION")))
+        checkingLog(Log, gettextf("checking for file %s ...", sQuote(file.path(pkgname0, "DESCRIPTION")), domain = "R-tools"))
         if ("DESCRIPTION" %in% dir(pkgdir)) {
             f <- file.path(pkgdir, "DESCRIPTION")
             desc <- try(.read_description(f))
             if (inherits(desc, "try-error") || !length(desc)) {
-                resultLog(Log, "EXISTS but not correct format")
+                resultLog(Log, gettext("file EXISTS but is not of correct format", domain = "R-tools"))
                 summaryLog(Log)
                 do_exit(1L)
             }
@@ -3789,7 +3538,7 @@ setRlibs <-
                 fail <- mandatory[!OK]
                 msg <- ngettext(length(fail),
                                 "Required field missing or empty:",
-                                "Required fields missing or empty:")
+                                "Required fields missing or empty:", domain = "R-tools")
                 msg <- paste0(msg, "\n", .pretty_format(fail))
                 errorLog(Log, msg)
                 summaryLog(Log)
@@ -3798,53 +3547,46 @@ setRlibs <-
             if(!grepl("^[[:alpha:]][[:alnum:].]*[[:alnum:]]$", desc["Package"])
                || grepl("[.]$", desc["Package"])) {
                 warningLog(Log)
-                printLog(Log,"  Package name is not portable:\n",
-                         "  It must start with a letter, contain letters, digits or dot\n",
-                         "  have at least 2 characters and not end with a dot.\n")
-            } else resultLog(Log, "OK")
+                printLog(Log, gettext("  Package name is not portable:\n  It must start with a letter, contain letters, digits or dot\n  have at least 2 characters and not end with a dot.\n", domain = "R-tools"))
+            } else resultLog(Log, gettext("OK", domain = "R-tools"))
             encoding <- desc["Encoding"]
         } else if (file.exists(f <- file.path(pkgdir, "DESCRIPTION"))) {
             errorLog(Log,
-                     "File DESCRIPTION does not exist but there is a case-insensitive match.")
+                     gettext("File DESCRIPTION does not exist but there is a case-insensitive match.", domain = "R-tools"))
             summaryLog(Log)
             do_exit(1L)
         } else {
-            resultLog(Log, "NO")
+            resultLog(Log, gettext("NO", domain = "R-tools"))
             summaryLog(Log)
             do_exit(1L)
         }
         if (!is.na(desc["Type"])) { # standard packages do not have this
-            checkingLog(Log, "extension type")
+            checkingLog(Log, gettext("checking extension type ...", domain = "R-tools"))
             resultLog(Log, desc["Type"])
             if (desc["Type"] != "Package") {
-                printLog(Log,
-                         "Only 'Type = Package' extensions can be checked.\n")
+                printLog(Log, gettext("Only 'Type = Package' extensions can be checked.\n", domain = "R-tools"))
                 summaryLog(Log)
                 do_exit(0L)
             }
         }
         if (!is.na(desc["Bundle"])) {
-            messageLog(Log, "looks like ", sQuote(pkgname0),
-                       " is a package bundle -- they are defunct")
+            messageLog(Log, gettextf("looks like %s is a package bundle -- they are defunct", sQuote(pkgname0), domain = "R-tools"))
             errorLog(Log, "")
             summaryLog(Log)
             do_exit(1L)
         }
 
-        messageLog(Log,
-                   sprintf("this is package %s version %s",
-                           sQuote(desc["Package"]),
-                           sQuote(desc["Version"])))
+        messageLog(Log, gettextf("this is package %s version %s", sQuote(desc["Package"]), sQuote(desc["Version"]), domain = "R-tools"))
 
         if (!is.na(encoding))
-            messageLog(Log, "package encoding: ", encoding)
+            messageLog(Log, gettextf("package encoding: %s", encoding, domain = "R-tools"))
 
         desc
     }
 
     check_CRAN_incoming <- function()
     {
-        checkingLog(Log, "CRAN incoming feasibility")
+        checkingLog(Log, gettext("checking CRAN incoming feasibility ...", domain = "R-tools"))
         res <- .check_package_CRAN_incoming(pkgdir)
         bad <- FALSE
         if(length(res)) {
@@ -3869,10 +3611,10 @@ setRlibs <-
                       res$Maintainer_needs_quotes)
                 warningLog(Log)
             else if(length(res) > 1L) noteLog(Log)
-            else resultLog(Log, "OK")
-            printLog0(Log, c(paste(out, collapse = "\n\n"), "\n"))
+            else resultLog(Log, gettext("OK", domain = "R-tools"))
+            printLog(Log, c(paste(out, collapse = "\n\n"), "\n"))
             if(bad) maybe_exit(1L)
-        } else resultLog(Log, "OK")
+        } else resultLog(Log, gettext("OK", domain = "R-tools"))
     }
 
     check_dependencies <- function()
@@ -3901,17 +3643,15 @@ setRlibs <-
 
         if (!extra_arch &&
             file.exists(file.path(pkgdir, "NAMESPACE"))) {
-            checkingLog(Log, "package namespace information")
+            checkingLog(Log, gettext("checking package namespace information ...", domain = "R-tools"))
             ns <- tryCatch(parseNamespaceFile(basename(pkgdir),
                                               dirname(pkgdir)),
                      error = function(e) {
                          errorLog(Log)
                          printLog0(Log,
-                                   "Invalid NAMESPACE file, parsing gives:",
-                                   "\n", as.character(e), "\n")
-                         msg_NAMESPACE <-
-                             c("See section 'Package namespaces'",
-                               " in the 'Writing R Extensions' manual.\n")
+                                   gettextf("Invalid 'NAMESPACE' file, parsing gives:\n%s\n", as.character(e), domain = "R-tools"))
+            msg_NAMESPACE <-
+                gettext("See section 'Package namespaces' in the 'Writing R Extensions' manual.\n", domain = "R-tools")
                          wrapLog(msg_NAMESPACE)
                          summaryLog(Log)
                          do_exit(1L)
@@ -3926,11 +3666,7 @@ setRlibs <-
             bad <- nm[lens == 0L]
             if(length(bad)) {
                 OK <- FALSE
-                msg <- if(length(bad) == 1L)
-                    sprintf("  Namespace with empty importFrom: %s", sQuote(bad))
-                else
-                    paste("  Namespaces with empty importFrom:",
-                          .pretty_format(sort(bad)), sep = "\n")
+                msg <- sprintf(ngettext(length(bad), "  Namespace with empty importFrom: %s", "  Namespaces with empty importFrom: %s", domain = "R-tools"), .pretty_format(sort(bad)))
                 noteLog(Log, msg)
             }
             nS3methods <- nrow(ns$S3methods)
@@ -3957,15 +3693,14 @@ setRlibs <-
                 }
                 if (status == 0L) {
                     OK <- FALSE
-                    msg <- sprintf("R < 3.0.2 had a limit of 500 registered S3 methods: found %d",
-                                   nS3methods)
+                    msg <- gettextf("R < 3.0.2 had a limit of 500 registered S3 methods: found %d", nS3methods, domain = "R-tools")
                     noteLog(Log, msg)
                 }
             }
-            if(OK) resultLog(Log, "OK")
+            if(OK) resultLog(Log, gettext("OK", domain = "R-tools"))
         }
 
-        checkingLog(Log, "package dependencies")
+        checkingLog(Log, gettext("checking package dependencies ...", domain = "R-tools"))
         ## Everything listed in Depends or Suggests or Imports
         ## should be available for successfully running R CMD check.
         ## \VignetteDepends{} entries not "required" by the package code
@@ -3985,34 +3720,29 @@ setRlibs <-
                          if(!check_incoming) "bad_engine")
             if(!all(names(res) %in% allowed)) {
                 errorLog(Log)
-                printLog0(Log, paste(out, collapse = "\n"), "\n")
+                printLog(Log, paste(out, collapse = "\n"), "\n")
                 if(length(res$suggested_but_not_installed))
-                   wrapLog("The suggested packages are required for",
-                           "a complete check.\n",
-                           "Checking can be attempted without them",
-                           "by setting the environment variable",
-                           "_R_CHECK_FORCE_SUGGESTS_",
-                           "to a false value.\n\n")
+                   wrapLog(gettext("The suggested packages are required for a complete check.\nChecking can be attempted without them by setting the environment variable _R_CHECK_FORCE_SUGGESTS_ to a false value.\n\n", domain = "R-tools"))
                 wrapLog(msg_DESCRIPTION)
                 summaryLog(Log)
                 do_exit(1L)
             } else {
                 noteLog(Log)
-                printLog0(Log, paste(out, collapse = "\n"))
+                printLog(Log, paste(out, collapse = "\n"))
             }
-        } else resultLog(Log, "OK")
+        } else resultLog(Log, gettext("OK", domain = "R-tools"))
     }
 
     check_sources <- function()
     {
-        checkingLog(Log, "if this is a source package")
+        checkingLog(Log, gettext("checking if this is a source package ...", domain = "R-tools"))
         ## <NOTE>
         ## This check should be adequate, but would not catch a manually
         ## installed package, nor one installed prior to 1.4.0.
         ## </NOTE>
         if (!is.na(desc["Built"])) {
             errorLog(Log)
-            printLog(Log, "Only *source* packages can be checked.\n")
+            printLog(Log, gettext("Only *source* packages can be checked.\n", domain = "R-tools"))
             summaryLog(Log)
             do_exit(1L)
         } else if (!startsWith(install, "check")) {
@@ -4028,13 +3758,13 @@ setRlibs <-
                 any <- TRUE
                 of <- sub(paste0(".*/", file.path(pkgname, "src"), "/"),
                           "", of)
-                printLog0(Log,
-                          sprintf("Subdirectory %s contains apparent object files/libraries\n",
-                                  sQuote(file.path(pkgname, "src"))),
-                          paste(strwrap(paste(of, collapse = " "),
-                                        indent = 2L, exdent = 2L),
-                                collapse = "\n"),
-                          "\nObject files/libraries should not be included in a source package.\n")
+                printLog(Log,
+                         gettextf("Subdirectory %s contains apparent object files/libraries\n",
+                                 sQuote(file.path(pkgname, "src")), domain = "R-tools"),
+                         paste(strwrap(paste(of, collapse = " "),
+                                       indent = 2L, exdent = 2L),
+                               collapse = "\n"),
+                         gettext("\nObject files/libraries should not be included in a source package.\n", domain = "R-tools"))
                 ini <- ""
             }
             ## A submission had src-i386 etc from multi-arch builds
@@ -4046,13 +3776,13 @@ setRlibs <-
                 msg <- ngettext(sum(ind),
                                 "Found the following directory with a name of a multi-arch build directory:\n",
                                 "Found the following directories with names of multi-arch build directories:\n",
-                                domain = NA)
-                printLog0(Log,
-                          ini,
-                          msg,
-                          .format_lines_with_indent(basename(ad[ind])),
-                          "\n",
-                          "Most likely, these were included erroneously.\n")
+                                domain = "R-tools")
+                printLog(Log,
+                         ini,
+                         msg,
+                         .format_lines_with_indent(basename(ad[ind])),
+                         "\n",
+                         gettext("Most likely, these were included erroneously.\n", domain = "R-tools"))
                 ini <- ""
             }
             if (thispkg_src_subdirs != "no" && dir.exists(srcd)) {
@@ -4069,14 +3799,12 @@ setRlibs <-
                         if (!any) warningLog(Log)
                         any <- TRUE
                         msg <- c(ini,
-                                 paste("Subdirectory",
-                                       sQuote("src"),
-                                       "contains:"),
+                                 gettextf("Subdirectory %s contains:", sQuote("src"), domain = "R-tools"),
                                  strwrap(paste(srcfiles, collapse = " "),
                                          indent = 2, exdent = 2),
-                                 strwrap("These are unlikely file names for src files."),
+                                 strwrap(gettext("These are unlikely file names for src files.", domain = "R-tools")),
                                  "")
-                        printLog0(Log, paste(msg, collapse = "\n"))
+                        printLog(Log, paste(msg, collapse = "\n"))
                         ini <- ""
                     }
                 }
@@ -4084,9 +3812,7 @@ setRlibs <-
             }
             ## All remaining checks give notes and not warnings.
             if(length(ini))
-                ini <- c("",
-                         "In addition to the above warning(s), found the following notes:",
-                         "")
+                ini <- c("", gettext("In addition to the above warning(s), found the following notes:", domain = "R-tools"), "")
             files <- list.files(pkgdir, recursive = TRUE)
             ## Check for object files not directly in src.
             ## (Note that the above does not look for object files in
@@ -4098,11 +3824,10 @@ setRlibs <-
                 if(!any) noteLog(Log)
                 any <- TRUE
                 msg <- c(ini,
-                         "Found the following apparent object files/libraries:",
-                         strwrap(paste(bad, collapse = " "),
-                                 indent = 2L, exdent = 2L),
-                         "Object files/libraries should not be included in a source package.\n")
-                printLog0(Log, paste(msg, collapse = "\n"))
+                         gettext("Found the following apparent object files/libraries:", domain = "R-tools"),
+                         strwrap(paste(bad, collapse = " "), indent = 2L, exdent = 2L),
+                         gettext("Object files/libraries should not be included in a source package.\n", domain = "R-tools"))
+                printLog(Log, paste(msg, collapse = "\n"))
                 ini <- ""
             }
             ## Check for installed copies of the package in some subdir.
@@ -4113,19 +3838,18 @@ setRlibs <-
                 if(!any) noteLog(Log)
                 any <- TRUE
                 msg <- c(ini,
-                         sprintf("Subdirectory %s seems to contain an installed version of the package.\n",
-                                 sQuote(dirname(dirname(files[1L])))))
-                printLog0(Log, paste(msg, collapse = "\n"))
+                         gettextf("Subdirectory %s seems to contain an installed version of the package.\n", sQuote(dirname(dirname(files[1L]))), domain = "R-tools"))
+                printLog(Log, paste(msg, collapse = "\n"))
             }
-            if (!any) resultLog(Log, "OK")
-        } else resultLog(Log, "OK")
+            if (!any) resultLog(Log, gettext("OK", domain = "R-tools"))
+        } else resultLog(Log, gettext("OK", domain = "R-tools"))
     }
 
     do_exit <- function(status = 1L) q("no", status = status, runLast = FALSE)
 
     maybe_exit <- function(status = 1L) {
 	if (R_check_exit_on_first_error) {
-	    printLog(Log, "NOTE:  Quitting check on first error.\n")
+	    printLog(Log, gettext("NOTE: Quitting check on first error.\n", domain = "R-tools"))
 	    summaryLog(Log)
 	    do_exit(status)
 	}
@@ -4299,8 +4023,7 @@ setRlibs <-
         } else if (a == "--no-build-vignettes") {
             do_build_vignettes  <- FALSE
         } else if (a == "--no-rebuild-vignettes") { # pre-3.0.0 version
-            stop("'--no-rebuild-vignettes' is defunct: use '--no-build-vignettes' instead",
-                 call. = FALSE, domain = NA)
+            stop("'--no-rebuild-vignettes' is defunct: use '--no-build-vignettes' instead", call. = FALSE, domain = "R-tools")
         } else if (a == "--no-vignettes") {
             do_vignettes  <- FALSE
         } else if (a == "--ignore-vignettes") {
@@ -4310,8 +4033,7 @@ setRlibs <-
        } else if (a == "--no-manual") {
             do_manual  <- FALSE
         } else if (a == "--no-latex") {
-            stop("'--no-latex' is defunct: use '--no-manual' instead",
-                 call. = FALSE, domain = NA)
+            stop("'--no-latex' is defunct: use '--no-manual' instead", call. = FALSE, domain = "R-tools")
         } else if (a == "--run-dontrun") {
             run_dontrun  <- TRUE
         } else if (a == "--run-donttest") {
@@ -4341,7 +4063,7 @@ setRlibs <-
         } else if (substr(a, 1, 9) == "--rcfile=") {
             warning("configuration files are not supported as from R 2.12.0")
         } else if (substr(a, 1, 1) == "-") {
-            message("Warning: unknown option ", sQuote(a))
+            message(gettextf("Warning: unknown option %s", sQuote(a)))
         } else pkgs <- c(pkgs, a)
         args <- args[-1L]
     }
@@ -4571,8 +4293,7 @@ setRlibs <-
     R_opts4 <- "--no-site-file --no-init-file --no-save --no-restore --slave"
     env0 <- if(WINDOWS) "R_ENVIRON_USER='no_such_file'" else "R_ENVIRON_USER=''"
 
-    msg_DESCRIPTION <-
-        c("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.\n")
+    msg_DESCRIPTION <- gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.", domain = "R-tools")
 
     if (!length(pkgs)) {
         message("Error: no packages were specified")
@@ -4608,8 +4329,7 @@ setRlibs <-
             pkgname0 <- sub("\\.(tar\\.gz|tgz|tar\\.bz2|tar\\.xz)$", "", pkgname0)
             pkgname0 <- sub("_[0-9.-]*$", "", pkgname0)
         } else {
-            warning(sQuote(pkg), " is neither a file nor directory, skipping\n",
-                    domain = NA, call. = FALSE, immediate. = TRUE)
+            warning(gettextf("%s is neither a file nor directory, skipping\n", sQuote(pkg)), domain = "R-tools", call. = FALSE, immediate. = TRUE)
             next
         }
         pkgoutdir <- file.path(outdir, paste(pkgname0, "Rcheck", sep = "."))
@@ -4619,7 +4339,7 @@ setRlibs <-
         }
         dir.create(pkgoutdir, mode = "0755")
         if (!dir.exists(pkgoutdir)) {
-            message(sprintf("ERROR: cannot create check dir %s", sQuote(pkgoutdir)))
+            message(gettextf("ERROR: cannot create check dir %s", sQuote(pkgoutdir), domain = "R-tools"))
             summaryLog(Log)
             do_exit(1L)
         }
@@ -4628,7 +4348,7 @@ setRlibs <-
             dir <- file.path(pkgoutdir, "00_pkg_src")
             dir.create(dir, mode = "0755")
             if (!dir.exists(dir)) {
-                errorLog(Log, sprintf("cannot create %s", sQuote(dir)))
+                errorLog(Log, gettextf("cannot create %s", sQuote(dir), domain = "R-tools"))
                 summaryLog(Log)
                 do_exit(1L)
             }
@@ -4636,7 +4356,7 @@ setRlibs <-
             ## so e.g. .tar.xz works everywhere
             if (utils::untar(pkg, exdir = dir,
                              tar = Sys.getenv("R_INSTALL_TAR", "internal"))) {
-                errorLog(Log, sprintf("cannot unpack %s", sQuote(pkg)))
+                errorLog(Log, gettextf("cannot unpack %s", sQuote(pkg), domain = "R-tools"))
                 summaryLog(Log)
                 do_exit(1L)
             }
@@ -4647,8 +4367,7 @@ setRlibs <-
             pkg <- file.path(dir, pkgname0)
         }
         if (!dir.exists(pkg))
-            stop(gettextf("package directory %s does not exist",
-                          sQuote(pkg)), domain = NA)
+            stop(gettextf("package directory %s does not exist", sQuote(pkg)), domain = "R-tools")
         setwd(pkg)
         pkgdir <- getwd()
         thispkg_src_subdirs <- thispkg_subdirs
@@ -4664,13 +4383,12 @@ setRlibs <-
         }
         setwd(startdir)
 
-        messageLog(Log, "using log directory ", sQuote(pkgoutdir))
-        messageLog(Log, "using ", R.version.string)
-        messageLog(Log, "using platform: ", R.version$platform,
-                   " (", 8*.Machine$sizeof.pointer, "-bit)")
+        messageLog(Log, gettextf("using log directory %s", sQuote(pkgoutdir), domain = "R-tools"))
+        messageLog(Log, gettextf("using %s", R.version.string, domain = "R-tools"))
+        messageLog(Log, gettextf("using platform: %s (%s-bit)", R.version$platform, 8*.Machine$sizeof.pointer, domain = "R-tools"))
         charset <-
             if (l10n_info()[["UTF-8"]]) "UTF-8" else utils::localeToCharset()
-        messageLog(Log, "using session charset: ", charset)
+        messageLog(Log, gettextf("using session charset: %s", charset, domain = "R-tools"))
         is_ascii <- charset == "ASCII"
 
         .unpack.time <- Sys.time()
@@ -4692,9 +4410,9 @@ setRlibs <-
         if (use_valgrind) opts <- c(opts, "--use-valgrind")
         if (as_cran) opts <- c(opts, "--as-cran")
         if (length(opts) > 1L)
-            messageLog(Log, "using options ", sQuote(paste(opts, collapse=" ")))
+            messageLog(Log, gettextf("using options %s", sQuote(paste(opts, collapse=" ")), domain = "R-tools"))
         else if (length(opts) == 1L)
-            messageLog(Log, "using option ", sQuote(opts))
+            messageLog(Log, gettextf("using option %s", sQuote(opts), domain = "R-tools"))
 
         if (!nzchar(libdir)) {
             libdir <- pkgoutdir
@@ -4715,15 +4433,14 @@ setRlibs <-
             file.exists(file.path(pkgdir, "Makefile.in"))) {
             desc <- try(read.dcf(f))
             if (inherits(desc, "try-error") || !length(desc)) {
-                resultLog(Log, "EXISTS but not correct format")
+                resultLog(Log, gettext("EXISTS but not correct format", domain = "R-tools"))
                 summaryLog(Log)
                 do_exit(1L)
             }
             desc <- desc[1L, ]
             if (identical(desc["Priority"], c(Priority = "base"))) {	# Priority might be missing
-                messageLog(Log, "looks like ", sQuote(pkgname0),
-                           " is a base package")
-                messageLog(Log, "skipping installation test")
+                messageLog(Log, gettextf("looks like %s is a base package", sQuote(pkgname0), domain = "R-tools"))
+                messageLog(Log, gettext("skipping installation test", domain = "R-tools"))
                 is_base_pkg <- TRUE
                 pkgname <- desc["Package"] # should be same as pkgname0
             }
@@ -4739,11 +4456,11 @@ setRlibs <-
             OS_type <- desc["OS_type"]
             if (do_install && !is.na(OS_type)) {
                 if (WINDOWS && OS_type != "windows") {
-                    messageLog(Log, "will not attempt to install this package on Windows")
+                    messageLog(Log, gettext("will not attempt to install this package on Windows", domain = "R-tools"))
                     do_install <- FALSE
                 }
                 if (!WINDOWS && OS_type == "windows") {
-                    messageLog(Log, "this is a Windows-only package, skipping installation")
+                    messageLog(Log, gettext("this is a Windows-only package, skipping installation", domain = "R-tools"))
                     do_install <- FALSE
                 }
             } else OS_type <- NA
@@ -4766,26 +4483,22 @@ setRlibs <-
             } else topfiles0 <- NULL
 
             check_sources()
-            checkingLog(Log, "if there is a namespace")
+            checkingLog(Log, gettext("checking if there is a namespace ...", domain = "R-tools"))
             ## careful: we need a case-sensitive match
             if ("NAMESPACE" %in% dir(pkgdir))
-                resultLog(Log, "OK")
+                resultLog(Log, gettext("OK", domain = "R-tools"))
             else  if (file.exists(file.path(pkgdir, "NAMESPACE"))) {
                 errorLog(Log,
-                       "File NAMESPACE does not exist but there is a case-insenstiive match.")
+                       gettext("File NAMESPACE does not exist but there is a case-insensitive match.", domain = "R-tools"))
                 summaryLog(Log)
                 do_exit(1L)
             } else if (dir.exists(file.path(pkgdir, "R"))) {
                 errorLog(Log)
-                wrapLog("All packages need a namespace as from R 3.0.0.\n",
-                        "R CMD build will produce a suitable starting point,",
-                        "but it is better to handcraft a NAMESPACE file.")
+                wrapLog(gettext("All packages need a namespace as from R 3.0.0.\nR CMD build will produce a suitable starting point, but it is better to handcraft a 'NAMESPACE' file.", domain = "R-tools"))
 	        maybe_exit(1L)
             } else {
                 noteLog(Log)
-                wrapLog("Packages without R code can be installed without",
-                        "a NAMESPACE file, but it is cleaner to add",
-                        "an empty one.")
+                wrapLog(gettext("Packages without R code can be installed without a 'NAMESPACE' file, but it is cleaner to add an empty one.", domain = "R-tools"))
             }
 
             ## we need to do this before installation
@@ -4825,13 +4538,9 @@ setRlibs <-
                         inst_archs <- inst_archs[inst_archs %in% archs]
                         if (!identical(inst_archs, archs)) {
                             if (length(inst_archs) > 1)
-				printLog0(Log,
-                                          "NB: this package is only installed for sub-architectures ",
-                                          paste(sQuote(inst_archs), collapse=", "), "\n")
+				printLog(Log, gettextf("NB: this package is only installed for sub-architectures %s\n", paste(sQuote(inst_archs), collapse=", "), domain = "R-tools"))
 			    else {
-				printLog0(Log,
-                                          "NB: this package is only installed for sub-architecture ",
-                                          sQuote(inst_archs), "\n")
+				printLog(Log, gettextf("NB: this package is only installed for sub-architecture %s\n", sQuote(inst_archs), domain = "R-tools"))
                                 if(inst_archs == .Platform$r_arch)
                                     this_multiarch <- FALSE
                             }
@@ -4875,8 +4584,8 @@ setRlibs <-
                 ns <- parseNamespaceFile(basename(pkgdir), dirname(pkgdir))
                 if(length(ns$exports) || length(ns$exportPatterns) ||
                    length(ns$exportMethods) || length(ns$S3methods)) {
-                    checkingLog(Log, "for code which exercises the package")
-                    warningLog(Log, "No examples, no tests, no vignettes")
+                    checkingLog(Log, gettext("checking for code which exercises the package ...", domain = "R-tools"))
+                    warningLog(Log, gettext("No examples, no tests, no vignettes", domain = "R-tools"))
                 }
             }
         }

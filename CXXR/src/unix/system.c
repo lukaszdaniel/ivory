@@ -40,8 +40,8 @@
 #undef LONGJMP
 
 #define R_USE_SIGNALS 1
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 
 #include <locale.h>
 
@@ -131,7 +131,7 @@ void R_setupHistory()
     if ((p = getenv("R_HISTSIZE"))) {
 	value = (int) R_Decode2Long(p, &ierr);
 	if (ierr != 0 || value < 0)
-	    R_ShowMessage("WARNING: invalid R_HISTSIZE ignored;");
+	    R_ShowMessage(_("WARNING: invalid R_HISTSIZE ignored;"));
 	else
 	    R_HistorySize = value;
     }
@@ -221,7 +221,7 @@ int Rf_initialize_R(int ac, char **av)
     Rboolean force_interactive = FALSE;
 
     if (num_initialized++) {
-	fprintf(stderr, "%s", "R is already initialized\n");
+	fprintf(stderr, "%s", _("R is already initialized\n"));
 	exit(1);
     }
 
@@ -246,7 +246,7 @@ int Rf_initialize_R(int ac, char **av)
     R_timeout_val = 0;
 
     if((R_Home = R_HomeDir()) == NULL)
-	R_Suicide("R home directory is not defined");
+	R_Suicide(_("R home directory is not defined"));
     BindDomain(R_Home);
 
     process_system_Renviron();
@@ -270,8 +270,7 @@ int Rf_initialize_R(int ac, char **av)
 		if(i+1 < ac) {
 		    avv++; p = *avv; ioff++;
 		} else {
-		    snprintf(msg, 1024,
-			    _("WARNING: --gui or -g without value ignored"));
+		    snprintf(msg, 1024, _("WARNING: --gui or -g without value ignored"));
 		    R_ShowMessage(msg);
 		    p = "X11";
 		}
@@ -288,11 +287,9 @@ int Rf_initialize_R(int ac, char **av)
 		useTk = TRUE;
 	    else {
 #ifdef HAVE_X11
-		snprintf(msg, 1024,
-			 _("WARNING: unknown gui '%s', using X11\n"), p);
+		snprintf(msg, 1024, _("WARNING: unknown gui '%s', using X11\n"), p);
 #else
-		snprintf(msg, 1024,
-			 _("WARNING: unknown gui '%s', using none\n"), p);
+		snprintf(msg, 1024, _("WARNING: unknown gui '%s', using none\n"), p);
 #endif
 		R_ShowMessage(msg);
 	    }
@@ -379,7 +376,7 @@ int Rf_initialize_R(int ac, char **av)
 	ifp = tmpfile();
 	if(!ifp) R_Suicide(_("creating temporary file for '-e' failed"));
 	res = fwrite(cmdlines, strlen(cmdlines)+1, 1, ifp);
-	if(res != 1) error("fwrite error in initialize_R");
+	if(res != 1) error(_("fwrite error in initialize_R"));
 	fflush(ifp);
 	rewind(ifp);
     }

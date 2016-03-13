@@ -22,7 +22,7 @@
 ## needs to have a special form (e.g., belonging to one of the
 ## predefined groups of functions).
 
-##' The list is expanded in .makeBasicFuns() -> ./makeBasicFunsList.R by 
+##' The list is expanded in .makeBasicFuns() -> ./makeBasicFunsList.R by
 ##' adding the S4 group generics and the remaining primitives.
 .BasicFunsList <-
 list(
@@ -152,6 +152,6 @@ genericForBasic <- function(f, where = topenv(parent.frame()),
     if(mustFind && identical(ans, FALSE))
         stop(gettextf("methods may not be defined for primitive function %s in this version of R",
                       sQuote(f)),
-             domain = NA)
+             domain = "R-methods")
     ans
 }

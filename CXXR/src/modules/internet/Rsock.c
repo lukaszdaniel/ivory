@@ -32,7 +32,7 @@
 #endif
 
 extern void R_ProcessEvents(void);
-#ifdef Win32
+#ifdef _WIN32
 #define R_SelectEx(n,rfd,wrd,efd,tv,ih) select(n,rfd,wrd,efd,tv)
 #endif
 
@@ -158,7 +158,7 @@ void in_Rsockwrite(int *sockp, char **buf, int *start, int *end, int *len)
 
 #include <R_ext/R-ftp-http.h>
 
-#ifdef Win32
+#ifdef _WIN32
 #include <winsock2.h>
 #include <io.h>
 #define EWOULDBLOCK             WSAEWOULDBLOCK
@@ -183,14 +183,14 @@ void in_Rsockwrite(int *sockp, char **buf, int *start, int *end, int *len)
 #endif
 
 
-#ifndef Win32
+#ifndef _WIN32
 #define closesocket(s) close(s)
 #define SOCKET int
 #endif
 
 static int socket_errno(void)
 {
-#ifdef Win32
+#ifdef _WIN32
     return(WSAGetLastError());
 #else
     return(errno);
@@ -238,7 +238,7 @@ static int R_SocketWait(int sockfd, int write, int timeout)
 	    tv.tv_sec = timeout;
 	    tv.tv_usec = 0;
 	}
-#elif defined(Win32)
+#elif defined(_WIN32)
 	tv.tv_sec = 0;
 	tv.tv_usec = 2e5;
 #else
@@ -311,11 +311,11 @@ int R_SocketWaitMultiple(int nsock, int *insockfd, int *ready, int *write,
 	} else if (mytimeout >= 0) {
 	    tv.tv_sec = (int)(mytimeout - used);
 	    tv.tv_usec = (int)(1e6 * (mytimeout - used - tv.tv_sec));
-	} else {  /* always poll occationally--not really necessary */
+	} else {  /* always poll occasionally--not really necessary */
 	    tv.tv_sec = 60;
 	    tv.tv_usec = 0;
 	}
-#elif defined(Win32)
+#elif defined(_WIN32)
 	tv.tv_sec = 0;
 	tv.tv_usec = 2e5;
 #else
@@ -402,7 +402,7 @@ int R_SockConnect(int port, char *host, int timeout)
     s = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
     if (s == -1)  return -1;
 
-#ifdef Win32
+#ifdef _WIN32
     {
 	u_long one = 1;
 
@@ -457,7 +457,7 @@ int R_SockConnect(int port, char *host, int timeout)
 	    tv.tv_sec = timeout;
 	    tv.tv_usec = 0;
 	}
-#elif defined(Win32)
+#elif defined(_WIN32)
 	tv.tv_sec = 0;
 	tv.tv_usec = 2e5;
 #else

@@ -48,13 +48,7 @@
 #ifndef DEFN_H_
 #define DEFN_H_
 
-#ifdef HAVE_VISIBILITY_ATTRIBUTE
-# define attribute_visible __attribute__ ((visibility ("default")))
-# define attribute_hidden __attribute__ ((visibility ("hidden")))
-#else
-# define attribute_visible
-# define attribute_hidden
-#endif
+#include <R_ext/Visibility.h>
 
 /* In CR, extern0 is defined as attribute_hidden if this file is
  * #included from main.c, and as extern otherwise.  In CXXR it always
@@ -126,7 +120,7 @@ extern "C" {
 #endif
 
 extern void R_ProcessEvents(void);
-#ifdef Win32
+#ifdef _WIN32
 extern void R_WaitEvent(void);
 #endif
 
@@ -135,7 +129,7 @@ extern void R_WaitEvent(void);
 #endif
 
 #ifdef R_USE_SIGNALS
-#ifdef Win32
+#ifdef _WIN32
 # include <psignal.h>
 #else
 # include <signal.h>
@@ -148,7 +142,7 @@ extern void R_WaitEvent(void);
 # define FILESEP     "/"
 #endif /* Unix */
 
-#ifdef Win32
+#ifdef _WIN32
 # define OSTYPE      "windows"
 # define FILESEP     "/"
 #endif /* Win32 */
@@ -235,7 +229,7 @@ extern int putenv(char *string);
 #  if defined(MAXPATHLEN)
 /* Try BSD name */
 #    define PATH_MAX MAXPATHLEN
-#  elif defined(Win32)
+#  elif defined(_WIN32)
 /* seems this is now defined by MinGW to be 259, whereas FILENAME_MAX
    and MAX_PATH are 260.  It is not clear that this really is in bytes,
    but might be chars for the Unicode interfaces.
@@ -441,7 +435,7 @@ extern0 int	R_NShowCalls INI_as(50);
 LibExtern Rboolean utf8locale  INI_as(FALSE);  /* is this a UTF-8 locale? */
 LibExtern Rboolean mbcslocale  INI_as(FALSE);  /* is this a MBCS locale? */
 extern0   Rboolean latin1locale INI_as(FALSE); /* is this a Latin-1 locale? */
-#ifdef Win32
+#ifdef _WIN32
 LibExtern unsigned int localeCP  INI_as(1252); /* the locale's codepage */
 extern0   Rboolean WinUTF8out  INI_as(FALSE);  /* Use UTF-8 for output */
 extern0   void WinCheckUTF8(void);
@@ -821,7 +815,7 @@ void Rf_PrintValueRec(SEXP, SEXP);
 void Rf_PrintVersion(char *, size_t len);
 void PrintVersion_part_1(char *, size_t len);
 void Rf_PrintVersionString(char *, size_t len);
-void Rf_PrintWarnings(void);
+void Rf_PrintWarnings(const char *);
 
 void process_site_Renviron(void);
 void process_system_Renviron(void);
@@ -962,7 +956,7 @@ void R_getProcTime(double *data);
 void InitDynload(void);
 void R_CleanTempDir(void);
 
-#ifdef Win32
+#ifdef _WIN32
 void R_fixslash(char *s);
 void R_fixbackslash(char *s);
 wchar_t *filenameToWchar(const SEXP fn, const Rboolean expand);
@@ -994,10 +988,9 @@ void set_rl_word_breaks(const char *str);
 extern const char *locale2charset(const char *);
 
 /* Localization */
+//IVORY UPDATE: localization moved to a separate file 'Localization.h'.
+// From now on it must be included separately.
 
-//#ifndef NO_NLS
-//#include "localization.h"
-//#endif
 
 /* Macros for suspending interrupts: also in GraphicsDevice.h */
 #define BEGIN_SUSPEND_INTERRUPTS do { \
@@ -1033,11 +1026,7 @@ extern void *alloca(size_t);
 #endif
 
 /* Required by C99, but might be slow */
-#ifdef HAVE_LONG_DOUBLE
-# define LDOUBLE long double
-#else
-# define LDOUBLE double
-#endif
+#include <R_ext/Ldouble.h>
 
 /* int_fast64_t is required by C99/C11
    Alternative would be to use intmax_t.

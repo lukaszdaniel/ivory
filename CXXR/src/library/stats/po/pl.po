@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-03 21:07+0100\n"
+"POT-Creation-Date: 2016-03-13 10:24+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -130,33 +130,33 @@ msgstr "niepoprawna forma sprawdzania jednoargumentowej operacji minus"
 msgid "only single-argument calls are supported"
 msgstr "tylko wywołania o jednym argumencie są wspierane"
 
-#: deriv.c:529
+#: deriv.c:525
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr "Funkcja '%s' nie znajduje się w tablicy pochodnych"
 
-#: deriv.c:634
+#: deriv.c:630
 msgid "'expr' must be an expression or call"
 msgstr "argument 'expr' musi być wyrażeniem lub wywołaniem"
 
-#: deriv.c:637
+#: deriv.c:633
 msgid "variable must be a character string"
 msgstr "zmienna musi być łańcuchem tekstowym"
 
-#: deriv.c:639
+#: deriv.c:635
 msgid "only the first element is used as variable name"
 msgstr "tylko pierwszy element jest używany jako nazwa zmiennej"
 
-#: deriv.c:652
+#: deriv.c:648
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr "niepoprawne wyrażenie w '%s'"
 
-#: deriv.c:930 model.c:93
+#: deriv.c:926 model.cpp:115
 msgid "invalid variable names"
 msgstr "niepoprawne nazwy zmiennych"
 
-#: deriv.c:939
+#: deriv.c:935
 msgid "invalid tag"
 msgstr "niepoprawny znacznik"
 
@@ -557,160 +557,165 @@ msgstr "argument '%s' musi być skończony oraz > 0"
 msgid "'%s' argument must be finite and >= 0"
 msgstr "argument '%s' musi być skończony oraz >= 0"
 
-#: mAR.c:83
+#: mAR.c:99
 msgid "assert failed in src/library/ts/src/carray.c"
 msgstr "założenie nie powiodło się w 'src/library/ts/src/carray.c'"
 
-#: mAR.c:324 mAR.c:354
+#: mAR.c:340 mAR.c:370
 #, c-format
 msgid "Unknown operator in array_op"
 msgstr "Nieznany operator w 'array_op'"
 
-#: mAR.c:470 mAR.c:513
+#: mAR.c:486 mAR.c:529
 #, c-format
 msgid "Singular matrix in '%s' function"
 msgstr "Osobliwa macierz w funkcji '%s'"
 
-#: mAR.c:700 massdist.c:41 model.c:366 model.c:374 optim.c:191
+#: mAR.c:716 massdist.c:41 model.cpp:387 model.cpp:395 optim.c:191
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
 
-#: mAR.c:836
+#: mAR.c:852
 msgid "Burg's algorithm failed to find partial correlation"
 msgstr ""
 "Algorytm Burga nie powiódł się przy próbie znalezienia częściowej korelacji"
 
-#: model.c:91
+#: model.cpp:113
 msgid "invalid variables"
 msgstr "niepoprawne zmienne"
 
-#: model.c:95 model.c:100
+#: model.cpp:117 model.cpp:122
 msgid "number of variables != number of variable names"
 msgstr "liczba zmiennych != liczbie nazw zmiennych"
 
-#: model.c:98
+#: model.cpp:120
 msgid "invalid extra variables"
 msgstr "niepoprawne dodatkowe zmienne"
 
-#: model.c:102
+#: model.cpp:124
 msgid "invalid extra variable names"
 msgstr "niepoprawne nazwy dodatkowych zmiennych"
 
-#: model.c:123
+#: model.cpp:145
 #, c-format
 msgid "overlong names in '%s'"
 msgstr "zbyt długie nazwy w '%s'"
 
-#: model.c:150
+#: model.cpp:172
 #, c-format
 msgid "invalid type (%s) for variable '%s'"
 msgstr "niepoprawny typ (%s) dla zmiennej '%s'"
 
-#: model.c:155
+#: model.cpp:177
 #, c-format
 msgid "variable lengths differ (found for '%s')"
 msgstr "długości zmiennych różnią się (znaleziono dla '%s')"
 
-#: model.c:209
+#: model.cpp:231
 msgid "invalid result from na.action"
 msgstr "niepoprawny wynik z 'na.action'"
 
-#: model.c:385
+#: model.cpp:406
 msgid "invalid model frame"
 msgstr "niepoprawna ramka modelu"
 
-#: model.c:387
+#: model.cpp:408
 msgid "do not know how many cases"
 msgstr "nie wiadomo jak wiele przypadków"
 
-#: model.c:411
+#: model.cpp:432
 #, c-format
 msgid "variable lengths differ (found for variable %d)"
 msgstr "długości zmiennej różnią się (znaleziono dla zmiennej %d)"
 
-#: model.c:415 model.c:422
+#: model.cpp:436 model.cpp:443
 #, c-format
 msgid "variable %d has no levels"
 msgstr "zmienna %d nie posiada poziomów"
 
-#: model.c:534
+#: model.cpp:556
 msgid "the response appeared on the right-hand side and was dropped"
 msgstr ""
 "zmienna zależna pojawiła się po prawej stronie równania więc została "
 "odrzucona"
 
-#: model.c:554
+#: model.cpp:576
 #, c-format
 msgid "term %d would require %.0g columns"
 msgstr "człon %d wymaga %.0g kolumn"
 
-#: model.c:558
+#: model.cpp:580
 #, c-format
 msgid "matrix would require %.0g columns"
 msgstr "macierz wymaga %.0g kolumn"
 
-#: model.c:569
-#, c-format
-msgid "problem with term %d in model.matrix(): no columns are assigned"
+#: model.cpp:591
+#, fuzzy, c-format
+msgid "problem with term %d in model.matrix: no columns are assigned"
 msgstr "problem z członem %d w 'model.matrix()': brak przypisanych kolumn"
 
-#: model.c:617 model.c:622 model.c:628 model.c:639 model.c:645 model.c:651
+#: model.cpp:640 model.cpp:645 model.cpp:651 model.cpp:662 model.cpp:668
+#: model.cpp:674
 msgid "term names will be truncated"
 msgstr "nazwy członów będą przycięte"
 
-#: model.c:631
+#: model.cpp:654
 msgid "complex variables are not currently allowed in model matrices"
 msgstr "zmienne zespolone nie są aktualnie dozwolone w macierzach modelu"
 
-#: model.c:655
+#: model.cpp:678
 #, c-format
 msgid "variables of type '%s' are not allowed in model matrices"
 msgstr "zmienne typu '%s' nie są dozwolone w macierzach modelu"
 
-#: model.c:876
+#: model.cpp:890
 msgid "invalid formula in 'update'"
 msgstr "niepoprawna formuła w 'update'"
 
-#: model.c:910
+#: model.cpp:924
 msgid "formula expected"
 msgstr "oczekiwano formuły"
 
-#: model.c:1041
+#: model.cpp:1055
 msgid "invalid term in model formula"
 msgstr "niepoprawny człon w formule modelu"
 
-#: model.c:1116
+#: model.cpp:1130
 msgid "invalid model formula"
 msgstr "niepoprawna formuła modelu"
 
-#: model.c:1142 model.c:1401
+#: model.cpp:1156 model.cpp:1404
 msgid "invalid power in formula"
 msgstr "niepoprawna potęga w formule"
 
-#: model.c:1178 model.c:1585
-#, c-format
-msgid "invalid model formula in '%s' function"
-msgstr "niepoprawna formuła modelu w funkcji '%s'"
+#: model.cpp:1192
+msgid "invalid model formula in ExtractVars"
+msgstr "niepoprawna formuła modelu w 'ExtractVars'"
 
-#: model.c:1524
+#: model.cpp:1527
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "powtórzona nazwa '%s' w ramce danych używając '.'"
 
-#: model.c:1671
+#: model.cpp:1588
+#, fuzzy
+msgid "invalid model formula in EncodeVars"
+msgstr "niepoprawna formuła modelu w 'ExtractVars'"
+
+#: model.cpp:1674
 msgid "argument is not a valid model"
 msgstr "argument nie jest poprawnym modelem"
 
-#: model.c:1681
+#: model.cpp:1684
 msgid "'specials' must be NULL or a character vector"
 msgstr "'specials' musi być wektorem tekstowym lub wartością 'NULL'"
 
-#: model.c:1693
+#: model.cpp:1696
 msgid "'data' argument is of the wrong type"
 msgstr "argument 'data' posiada niepoprawny typ"
 
-#: model.c:1963
+#: model.cpp:1961
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' w formule oraz brak argumentu 'data'"
 
@@ -1178,6 +1183,9 @@ msgstr "brakuje wartości w ostatnich %d obserwacjach"
 msgid "ifault=%d. This should not happen"
 msgstr "ifault=%d. To nie powinno się wydarzyć"
 
+#~ msgid "invalid model formula in '%s' function"
+#~ msgstr "niepoprawna formuła modelu w funkcji '%s'"
+
 #~ msgid "'x' is NULL"
 #~ msgstr "'x' ma wartość NULL"
 
@@ -1217,9 +1225,6 @@ msgstr "ifault=%d. To nie powinno się wydarzyć"
 
 #~ msgid "invalid model formula in '%s'function"
 #~ msgstr "niepoprawna formuła modelu w funkcji '%s'"
-
-#~ msgid "invalid model formula in ExtractVars"
-#~ msgstr "niepoprawna formuła modelu w 'ExtractVars'"
 
 #~ msgid "span is too small"
 #~ msgstr "rozpiętość jest za mała"

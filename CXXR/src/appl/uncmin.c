@@ -33,6 +33,7 @@
 
 /*--- The Dennis + Schnabel Minimizer -- used by R's  nlm() ---*/
 
+#include <localization.h>
 #include <math.h>
 #include <float.h> /* DBL_MAX */
 #include <R_ext/Applic.h>
@@ -2100,28 +2101,28 @@ prt_result(int nr, int n, const double x[], double f, const double g[],
 
     /* Print iteration number */
 
-    Rprintf("iteration = %d\n", itncnt);
+    Rprintf(_("iteration = %d\n"), itncnt);
 
     /* Print step */
 
     if (iflg != 0) {
-	Rprintf("Step:\n");
+	Rprintf(_("Step:\n"));
 	printRealVector((double *)p, n, 1);
     }
 
     /* Print current iterate */
 
-    Rprintf("Parameter:\n");
+    Rprintf(_("Parameter:\n"));
     printRealVector((double *)x, n, 1);
 
     /* Print function value */
 
-    Rprintf("Function Value\n");
+    Rprintf(_("Function Value\n"));
     printRealVector((double *)&f, 1, 1);
 
     /* Print gradient */
 
-    Rprintf("Gradient:\n");
+    Rprintf(_("Gradient:\n"));
     printRealVector((double *)g, n, 1);
 
 #ifdef NEVER

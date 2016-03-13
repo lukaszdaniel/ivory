@@ -40,7 +40,7 @@
 *****************************************************/
 
 
-#ifdef Win32
+#ifdef _WIN32
 #include <windows.h>
 #define CACHE_DLL_SYM 1
 #else
@@ -218,4 +218,4 @@ SEXP R_doDotCall(DL_FUNC, int, SEXP *, SEXP);
 }
 #endif
 
-#endif /* ifdef R_DYNPRIV_H */
+#endif /* R_DYNPRIV_H */

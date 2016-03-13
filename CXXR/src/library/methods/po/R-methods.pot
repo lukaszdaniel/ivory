@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 3.3.0\n"
-"POT-Creation-Date: 2016-02-23 20:39\n"
+"POT-Creation-Date: 2016-03-13 10:23\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1980,13 +1980,6 @@ msgid "does not seem to be a method table for generic %s in tracing environment"
 msgstr ""
 
 
-#: R/zzz.R: 0
-#. R/zzz.R: gettext(" done", domain = "R-methods")
-
-msgid "done"
-msgstr ""
-
-
 #: R/SClasses.R: 0
 #. R/SClasses.R: gettext("duplicate class names among superclasses: %s", domain = "R-methods")
 
@@ -2321,13 +2314,6 @@ msgstr ""
 #. R/oldClass.R: gettextf("inconsistent old-style class information for %s; the class is defined but does not extend %s and is not valid as the data part",     dQuote(cl), dQuote(prevClass))
 
 msgid "inconsistent old-style class information for %s; the class is defined but does not extend %s and is not valid as the data part"
-msgstr ""
-
-
-#: R/zzz.R: 0
-#. R/zzz.R: gettext("initializing class and method definitions ...", domain = "R-methods")
-
-msgid "initializing class and method definitions ..."
 msgstr ""
 
 
@@ -3524,9 +3510,9 @@ msgstr ""
 
 
 #: R/methodsTable.R: 0
-#. R/methodsTable.R: gettext("trying to check signature length of generic %s, but it is not a generic function: i = %d, funs = %s, gnames = %s",     domain = "R-methods")
+#. R/methodsTable.R: gettextf("trying to check signature length of generic '%s', but it is not a generic function: i = %d, funs = %s, gnames = %s",     what, i, paste(unlist(funs), collapse = ", "), paste(as.character(gnames), collapse = ", "))
 
-msgid "trying to check signature length of generic %s, but it is not a generic function: i = %d, funs = %s, gnames = %s"
+msgid "trying to check signature length of generic '%s', but it is not a generic function: i = %d, funs = %s, gnames = %s"
 msgstr ""
 
 

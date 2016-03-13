@@ -58,9 +58,7 @@
 using namespace std;
 using namespace CXXR;
 
-#ifndef min
-#define min(a, b) (a<b?a:b)
-#endif
+
 
 #if defined(__GNUC__) && __GNUC__ >= 3
 #define NORET __attribute__((noreturn))
@@ -174,7 +172,7 @@ RETSIGTYPE attribute_hidden onsigusr1(int dummy)
 
     inError = 1;
 
-    if(R_CollectWarnings) PrintWarnings();
+    if(R_CollectWarnings) PrintWarnings(NULL);
 
     R_ResetConsole();
     R_FlushConsole();
@@ -202,7 +200,7 @@ RETSIGTYPE attribute_hidden onsigusr2(int dummy)
 	return;
     }
 
-    if(R_CollectWarnings) PrintWarnings();
+    if(R_CollectWarnings) PrintWarnings(NULL);
 
     R_ResetConsole();
     R_FlushConsole();
@@ -408,10 +406,10 @@ void warningcall_immediate(SEXP call, const char *format, ...)
 }
 
 attribute_hidden
-void PrintWarnings(void)
+void PrintWarnings(const char *hdr)
 {
     int i;
-    char *header;
+    const char *header = hdr? hdr: n_("Warning message:", "Warning messages:", R_CollectWarnings);
     SEXP names, s, t;
 
     if (R_CollectWarnings == 0)
@@ -431,8 +429,6 @@ void PrintWarnings(void)
     /* use try-catch to restore inPrintWarnings if there is
        an exit */
     try {
-	header = ngettext("Warning message:", "Warning messages:", 
-			  R_CollectWarnings);
 	if( R_CollectWarnings == 1 ) {
 	    REprintf("%s\n", header);
 	    names = CAR(ATTRIB(R_Warnings));
@@ -676,8 +672,7 @@ verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	if (R_ShowErrorMessages) REprintf("%s", errbuf);
 	    
 	if( R_ShowErrorMessages && R_CollectWarnings ) {
-	    REprintf(_("In addition: "));
-	    PrintWarnings();
+	    PrintWarnings(n_("Additional warning message:", "Additional warning messages:", R_CollectWarnings));
 	}
 	
 	DisableStackCheckingScope scope;
@@ -807,7 +802,7 @@ static void jump_to_top_ex(Rboolean traceback,
 
 	/* print warnings if there are any left to be printed */
 	if( processWarnings && R_CollectWarnings )
-	    PrintWarnings();
+	    PrintWarnings(NULL);
 
 	/* reset some stuff--not sure (all) this belongs here */
 	if (resetConsole) {
@@ -1250,8 +1245,7 @@ static void R_SetErrmessage(const char *s)
 static void R_PrintDeferredWarnings(void)
 {
     if( R_ShowErrorMessages && R_CollectWarnings ) {
-	REprintf(_("In addition: "));
-	PrintWarnings();
+	PrintWarnings(n_("Additional warning message:", "Additional warning messages:", R_CollectWarnings));
     }
 }
 

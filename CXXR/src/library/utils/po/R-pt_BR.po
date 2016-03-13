@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-03-03 21:07\n"
+"POT-Creation-Date: 2016-03-13 10:24\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -65,7 +65,7 @@ msgstr ""
 msgid "%s has to be one of %s"
 msgstr ""
 
-#. R/findLineNum.R: gettextf(" %s in %s", x[[i]]$name, format(x[[i]]$env))
+#. R/findLineNum.R: gettextf(" %s in %s", (x[[i]])$name, format((x[[i]])$env))
 #: R/findLineNum.R:0
 msgid "%s in %s"
 msgstr ""
@@ -101,17 +101,17 @@ msgstr ""
 msgid "%s should be one of %s"
 msgstr ""
 
-#. R/findLineNum.R: gettextf(" %s signature %s in %s", x[[i]]$name, paste(x[[i]]$signature, collapse = ","),     format(x[[i]]$env))
+#. R/findLineNum.R: gettextf(" %s signature %s in %s", (x[[i]])$name, paste((x[[i]])$signature, collapse = ","),     format((x[[i]])$env))
 #: R/findLineNum.R:0
 msgid "%s signature %s in %s"
 msgstr ""
 
-#. R/findLineNum.R: gettextf(" %s step %s in %s", x[[i]]$name, paste(x[[i]]$at, collapse = ","), format(x[[i]]$env))
+#. R/findLineNum.R: gettextf(" %s step %s in %s", (x[[i]])$name, paste((x[[i]])$at, collapse = ","),     format((x[[i]])$env))
 #: R/findLineNum.R:0
 msgid "%s step %s in %s"
 msgstr ""
 
-#. R/findLineNum.R: gettextf(" %s step %s signature %s in %s", x[[i]]$name, paste(x[[i]]$at, collapse = ","),     paste(x[[i]]$signature, collapse = ","), format(x[[i]]$env))
+#. R/findLineNum.R: gettextf(" %s step %s signature %s in %s", (x[[i]])$name, paste((x[[i]])$at, collapse = ","),     paste((x[[i]])$signature, collapse = ","), format((x[[i]])$env))
 #: R/findLineNum.R:0
 msgid "%s step %s signature %s in %s"
 msgstr ""

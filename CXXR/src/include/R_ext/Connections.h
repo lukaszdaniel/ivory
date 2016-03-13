@@ -93,4 +93,4 @@ size_t R_WriteConnection(Rconnection con, const void *buf, size_t n);
 }
 #endif
 
-#endif
+#endif /* R_EXT_CONNECTIONS_H_ */

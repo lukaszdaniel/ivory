@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-27 18:05+0100\n"
+"POT-Creation-Date: 2016-03-13 10:23+0100\n"
 "PO-Revision-Date: 2015-01-17 15:12+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -28,55 +28,55 @@ msgstr "Não é possível cortar sobre uma viewport rotacionada"
 msgid "Viewport '%s' was not found"
 msgstr ""
 
-#: grid.c:698 grid.c:703 grid.c:793 grid.c:798
+#: grid.c:698 grid.c:703 grid.c:792 grid.c:797
 #, fuzzy
 msgid "cannot pop the top-level viewport ('grid' and 'graphics' output mixed?)"
 msgstr ""
 "Não é possível mostrar a viewport de nível máximo (saidas gráficas e grid "
 "misturadas?) "
 
-#: grid.c:978
+#: grid.c:977
 msgid "attempt to plot on null device"
 msgstr "tentativa de fazer um gráfico no dispositivo nulo"
 
-#: grid.c:1310
+#: grid.c:1309
 #, fuzzy
 msgid "there is no layout defined"
 msgstr "Não há layout definido"
 
-#: grid.c:1530
+#: grid.c:1529
 #, fuzzy
 msgid "polygon edge not found (zero-width or zero-height?)"
 msgstr "Limite do polígono não encontrado (largura ou altura zero?)"
 
-#: grid.c:1539
+#: grid.c:1538
 #, fuzzy
 msgid "polygon edge not found"
 msgstr "Limite do polígono não encontrado"
 
-#: grid.c:1693
+#: grid.c:1692
 #, fuzzy
 msgid "require at least two points to draw arrow"
 msgstr "Pelo menos dois pontos são necessários para desenhar uma seta"
 
-#: grid.c:2009
+#: grid.c:2008
 #, fuzzy
 msgid "non-finite control point in Xspline"
 msgstr "Ponto de controle não-finito em Xspline"
 
-#: grid.c:2874
+#: grid.c:2873
 msgid "non-finite x or y in graphics path"
 msgstr "valores não-finitos de x ou y no caminho do gráfico"
 
-#: grid.c:2915
+#: grid.c:2914
 msgid "Empty raster"
 msgstr ""
 
-#: grid.c:3369
+#: grid.c:3368
 msgid "invalid plotting symbol"
 msgstr "simbolo para gráfico inválido"
 
-#: grid.c:3455
+#: grid.c:3454
 #, fuzzy
 msgid "unable to clip to rotated rectangle"
 msgstr "Não é possível cortar sobre um retângulo rotacionado"

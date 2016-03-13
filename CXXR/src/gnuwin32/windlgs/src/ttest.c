@@ -193,7 +193,7 @@ SEXP menu_ttest3()
 	cmdexpr = PROTECT(R_ParseVector(cmdSexp, -1, &status, R_NilValue));
 	if (status != PARSE_OK) {
 	    UNPROTECT(2);
-	    error("invalid call %s", cmd);
+	    error(_("invalid call %s"), cmd);
 	}
 	/* Loop is needed here as EXPSEXP will be of length > 1 */
 	for(i = 0; i < length(cmdexpr); i++)

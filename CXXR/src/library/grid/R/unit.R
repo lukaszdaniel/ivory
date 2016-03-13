@@ -478,7 +478,7 @@ print.unit <- function(x, ...) {
 # but act like vectors
 # (e.g., report length greater than number of list components)
 str.unit.arithmetic <- function(object, ...) {
-    cat("Class 'unit.arithmetic' [1:", length(object), "] ", sep="")
+    cat(gettextf("Class 'unit.arithmetic' [1:%d] ", length(object), domain = "R-grid"))
     str(unclass(object), ...)
 }
 
@@ -538,7 +538,7 @@ unit.list.from.list <- function(x) {
 
 rep.unit <- function(x, times=1, length.out=NA, each=1, ...) {
     if (length(x) == 0)
-        stop("invalid 'unit' object")
+        stop(gettextf("invalid '%s' argument", "x"))
 
     # Determine an approprite index, then call subsetting code
     repIndex <- rep(seq_along(x), times=times, length.out=length.out, each=each)
@@ -548,7 +548,7 @@ rep.unit <- function(x, times=1, length.out=NA, each=1, ...) {
 # Vestige from when rep() was not generic
 unit.rep <- function (x, ...)
 {
-  warning("'unit.rep' has been deprecated in favour of a unit method for the generic rep function", domain = NA)
+  warning("'unit.rep()' has been deprecated in favour of a unit method for the generic 'rep()' function", domain = "R-grid")
   rep(x, ...)
 }
 
@@ -576,7 +576,7 @@ length.unit.arithmetic <- function(x) {
 
 # Vestige of when length was not generic
 unit.length <- function(unit) {
-   warning("'unit.length' has been deprecated in favour of a unit method for the generic length function", domain = NA)
+   warning("'unit.length()' has been deprecated in favour of a unit method for the generic 'length()' function", domain = "R-grid")
    length(unit)
 }
 
@@ -640,7 +640,7 @@ convertTheta <- function(theta) {
                north=90,
                west=180,
                south=270,
-               stop("invalid 'theta'"))
+               stop(gettextf("invalid '%s' value", "theta")))
     else
         # Ensure theta in [0, 360)
         theta <- as.numeric(theta) %% 360
@@ -831,5 +831,3 @@ absolute.units.unit.arithmetic <- function(unit) {
          "max"=unit.arithmetic("max", absolute.units(unit$arg1)),
          "sum"=unit.arithmetic("sum", absolute.units(unit$arg1)))
 }
-
-

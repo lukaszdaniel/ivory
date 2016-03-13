@@ -148,7 +148,7 @@ makePrototypeFromClassDef <-
                               dQuote(className),
                               dQuote(.class1(prototype)),
                               dQuote(dataPartClass)),
-                     domain = NA)
+                     domain = "R-methods")
         }
         iData <- -match(".Data", snames)
         snames <- snames[iData]
@@ -165,7 +165,7 @@ makePrototypeFromClassDef <-
     }
     extra <- pnames[is.na(match(pnames, snames)) & !is.na(match(pnames, pslots))]
     if(length(extra) && is.na(match("oldClass", supers)))
-        warning(gettextf("in constructing the prototype for class %s, slots in prototype and not in class: %s",
+        warning(sprintf(gettext("in constructing the prototype for class %s, slots in prototype and not in class: %s", domain = "R-methods"),
                          dQuote(className),
                          paste(extra, collapse=", ")),
                 domain = NA)
@@ -187,13 +187,9 @@ makePrototypeFromClassDef <-
         }
     }
     if(any(check))
-        stop(gettextf("in making the prototype for class %s elements of the prototype failed to match the corresponding slot class: %s",
+        stop(sprintf(gettext("in making the prototype for class %s elements of the prototype failed to match the corresponding slot class: %s", domain = "R-methods"),
                       dQuote(className),
-                      paste(pnames[check],
-                            "(class",
-                            .dQ(slotDefs[match(pnames[check], slotNames)]),
-                            ")",
-                            collapse = ", ")),
+                      paste(pnames[check], gettextf("(class %s)", .dQ(slotDefs[match(pnames[check], slotNames)])), collapse = ", ")),
              domain = NA)
     prototype
 }
@@ -245,7 +241,7 @@ completeClassDefinition <-
        && getOption("warn") > 0 ## NEEDED:  a better way to turn on strict testing
        ) {
         bad <- names(ClassDef@subclasses)[!is.na(match(names(ClassDef@subclasses), names(ClassDef@contains)))]
-        warning(gettextf("potential cycle in class inheritance: %s has duplicates in superclasses and subclasses (%s)",
+        warning(sprintf(gettext("potential cycle in class inheritance: %s has duplicates in superclasses and subclasses (%s)", domain = "R-methods"),
                          dQuote(Class),
                          paste(bad, collapse = ", ")),
                 domain = NA)
@@ -284,7 +280,7 @@ completeClassDefinition <-
 #                     if(length(dataPartClasses)>1)
 #                         warning("Inconsistent data part classes inherited (",
 #                                 paste(dataPartClasses, collapse = ", "),
-#                                 "): coercion to some may fail")
+#                                 "): coercion to some may fail", domain = NA)
 #                     ## remove all but the first .Data
 #                     properties <- properties[-dataParts[-1L]]
 #                 }
@@ -295,7 +291,7 @@ completeClassDefinition <-
 #                     }
 #                     stop(paste("Duplicate slot names: slots ",
 #                                paste(dupNames, collapse =", "), "; see classes ",
-#                                paste0(c(Class, ext)[dupClasses], collapse = ", ")))
+#                                paste0(c(Class, ext)[dupClasses], collapse = ", ")), domain = NA)
 #                }
             }
         }
@@ -406,13 +402,13 @@ superClassDepth <-
                           dQuote(ClassDef@className),
                           dQuote(what),
                           dQuote(class(exti))),
-                 domain = NA)
+                 domain = "R-methods")
         superClass <-  getClassDef(exti@superClass, package = exti@package)
             if(is.null(superClass)) {
                 warning(gettextf("class %s extends an undefined class, %s",
                                  dQuote(ClassDef@className),
                                  dQuote(what)),
-                        domain = NA)
+                        domain = "R-methods")
                 next
             }
             more <- Recall(superClass, soFar)
@@ -445,7 +441,7 @@ selectSuperClasses <-
         Class@contains
     else if(isClass(Class, where = where))
         getClass(Class, where = where)@contains
-    else stop("'Class' must be a valid class definition or class")
+    else stop("'Class' argument must be a valid class definition or class")
 
     .selectSuperClasses(ext, dropVirtual = dropVirtual, namesOnly = namesOnly,
                         directOnly = directOnly, simpleOnly = simpleOnly)
@@ -504,13 +500,13 @@ assignClassDef <-
           stop(gettextf("trying to assign an object of class %s as the definition of class %s: must supply a \"classRepresentation\" object",
                         dQuote(class(def)),
                         dQuote(Class)),
-               domain = NA)
+               domain = "R-methods")
       clName <- def@className; attributes(clName) <- NULL
       if(!.identC(Class, clName))
           stop(gettextf("assigning as %s a class representation with internal name %s",
                         dQuote(Class),
                         dQuote(def@className)),
-               domain = NA)
+               domain = "R-methods")
       where <- as.environment(where)
       mname <- classMetaName(Class)
       if(exists(mname, envir = where, inherits = FALSE) && bindingIsLocked(mname, where)) {
@@ -606,7 +602,7 @@ newBasic <-
                "expression" = eval(substitute(expression(...))),
                "externalptr" = {
                    if(nargs() > 1)
-                       stop("'externalptr' objects cannot be initialized from new()")
+                       stop("'externalptr' objects cannot be initialized from function 'new()'")
                    .newExternalptr()
                },
                "single" = as.single(c(...)),
@@ -626,18 +622,16 @@ newBasic <-
                           value <- as(args[[1L]], Class)
                       }
                       else if(is.na(match(Class, .BasicClasses)))
-                          msg <- paste("Calling new() on an undefined and non-basic class (\"",
-                               Class, "\")", sep="")
+                          msg <- gettextf("Calling function 'new()' on an undefined and non-basic class (\"%s\")", Class)
                       else
                           msg <-
-                              gettextf("initializing objects from class %s with these arguments is not supported",
-                                       dQuote(Class))
+                              gettextf("initializing objects from class %s with these arguments is not supported", dQuote(Class))
                   }
                   )
   if(is.null(msg))
       value
   else
-      stop(msg, domain = NA)
+      stop(msg, domain = "R-methods")
 }
 
 
@@ -677,7 +671,7 @@ reconcilePropertiesAndPrototype <-
       if(!is.null(dataPartClass) && is.null(.validDataPartClass(dataPartClass, where)))
           stop(gettextf("in defining class %s, the supplied data part class, %s is not valid (must be a basic class or a virtual class combining basic classes)",
                         dQuote(name), dQuote(dataPartClass)),
-               domain = NA)
+               domain = "R-methods")
       prototypeClass <- getClass(class(prototype), where = where)
       if((!is.null(dataPartClass) || length(superClasses))
          && is.na(match("VIRTUAL", superClasses))) {
@@ -688,7 +682,7 @@ reconcilePropertiesAndPrototype <-
               if(is.null(clDef))
                 stop(gettextf("no definition was found for superclass %s in the specification of class %s",
                               dQuote(cl), dQuote(name)),
-                     domain = NA)
+                     domain = "R-methods")
               thisDataPart <-  .validDataPartClass(clDef, where, dataPartClass)
               if(!is.null(thisDataPart)) {
                     dataPartClass <- thisDataPart
@@ -707,7 +701,7 @@ reconcilePropertiesAndPrototype <-
                   stop(gettextf("conflicting definition of data part: .Data = %s, superclass implies %s",
                                 dQuote(elNamed(properties, ".Data")),
                                 dQuote(dataPartClass)),
-                       domain = NA)
+                       domain = "R-methods")
 ##              pslots <- NULL
               if(is.null(prototype)) {
                   if(dataPartValue)
@@ -737,13 +731,13 @@ reconcilePropertiesAndPrototype <-
                           stop(gettextf("a prototype object was supplied with object slot of class %s, but the class definition requires an object that is class %s",
                                         dQuote(class(prototype@object)),
                                         dQuote(dataPartClass)),
-                               domain = NA)
+                               domain = "R-methods")
                   }
                   else if(!extends(prototypeClass, dataPartClass))
                       stop(gettextf("a prototype was supplied of class %s, but the class definition requires an object that is class %s",
                                     dQuote(class(prototype)),
                                     dQuote(dataPartClass)),
-                           domain = NA)
+                           domain = "R-methods")
               }
           }
           if(is.null(prototype)) { ## non-vector (may extend NULL)
@@ -766,7 +760,7 @@ reconcilePropertiesAndPrototype <-
                                     dQuote(name),
                                     elNamed(allProps, dup),
                                     dQuote(cl)),
-                           domain = NA)
+                           domain = "R-methods")
               theseSlots <- theseSlots[!dups]
               if(length(theseSlots))
                   allProps[theseSlots] <- theseProperties[theseSlots]
@@ -774,7 +768,7 @@ reconcilePropertiesAndPrototype <-
           else
               stop(gettextf("class %s extends an undefined class (%s)",
                             dQuote(name), dQuote(cl)),
-                   domain = NA)
+                   domain = "R-methods")
       }
       if(is.null(dataPartClass)) {
           if(extends(prototypeClass, "classPrototypeDef"))
@@ -796,12 +790,12 @@ reconcilePropertiesAndPrototype <-
           if(checkDataPart)
               stop(gettextf("%s is not eligible to be the data part of another class (must be a basic class or a virtual class with no slots)",
                             dQuote(dataPartClass)),
-                   domain = NA)
+                   domain = "R-methods")
           if(extends(prototypeClass, "classPrototypeDef"))
           {}
           else if(extends(prototypeClass, dataPartClass)) {
               if(extends(prototypeClass, "list") && length(names(prototype)))
-                  warning("prototype is a list with named elements (could be ambiguous):  better to use function prototype() to avoid trouble.")
+                  warning("prototype is a list with named elements (could be ambiguous): better to use function 'prototype()' to avoid trouble.")
           }
           else if(is.list(prototype))
               prototype <- do.call("prototype", prototype)
@@ -813,10 +807,8 @@ reconcilePropertiesAndPrototype <-
           if(length(superClasses) == 0L && any(is.na(match(pnames, slots))))
               stop(sprintf(ngettext(sum(is.na(match(pnames, slots))),
                                     "named elements of prototype do not correspond to slot name: %s",
-                                    "named elements of prototype do not correspond to slot names: %s"),
-                           paste(.dQ(pnames[is.na(match(pnames, slots))]),
-                                 collapse =", ")),
-                   domain = NA)
+                                    "named elements of prototype do not correspond to slot names: %s", domain = "R-methods"),
+                           paste(.dQ(pnames[is.na(match(pnames, slots))]), collapse = ", ")), domain = NA)
       }
       else
           pnames <- allNames(attributes(prototype))
@@ -868,7 +860,7 @@ isClassDef <- function(object) is(object, "classRepresentation")
 showClass <-
     ## print the information about a class definition.
     ## If complete==TRUE, include the indirect information about extensions.
-    function(Class, complete = TRUE, propertiesAreCalled = "Slots")
+    function(Class, complete = TRUE)
 {
     if(isClassDef(Class)) {
         ClassDef <- Class
@@ -878,38 +870,46 @@ showClass <-
         ClassDef <- getClass(Class)
     else
         ClassDef <- getClassDef(Class)
-    cat(if(identical(ClassDef@virtual, TRUE)) "Virtual ",
-	"Class ", .dQ(Class),
-	## Show the package if that is non-trivial:
-	if(nzchar(pkg <- ClassDef@package))
-	c(" [", if(pkg != ".GlobalEnv") "package" else "in", " \"", pkg,"\"]"),
-	"\n", sep="")
+     pkg <- ClassDef@package
+    if(identical(ClassDef@virtual, TRUE) && nzchar(pkg) && pkg != ".GlobalEnv")
+     cat(gettextf("Virtual Class %s [package in %s]", .dQ(Class), sQuote(pkg), domain = "R-methods"))
+    else if(!identical(ClassDef@virtual, TRUE) && nzchar(pkg) && pkg != ".GlobalEnv")
+     cat(gettextf("Class %s [package in %s]", .dQ(Class), sQuote(pkg), domain = "R-methods"))
+    else if(identical(ClassDef@virtual, TRUE) && nzchar(pkg) && pkg == ".GlobalEnv")
+     cat(gettextf("Virtual Class %s [in %s]", .dQ(Class), sQuote(pkg), domain = "R-methods"))
+    else if(!identical(ClassDef@virtual, TRUE) && nzchar(pkg) && pkg == ".GlobalEnv")
+     cat(gettextf("Class %s [in %s]", .dQ(Class), sQuote(pkg), domain = "R-methods"))
+    else if(identical(ClassDef@virtual, TRUE) && !nzchar(pkg))
+     cat(gettextf("Virtual Class %s", .dQ(Class), domain = "R-methods"))
+    else if(!identical(ClassDef@virtual, TRUE) && !nzchar(pkg))
+     cat(gettextf("Class %s", .dQ(Class), domain = "R-methods"))
+    cat("\n") 
     x <- ClassDef@slots
     if(length(x)) {
-        printPropertiesList(x, propertiesAreCalled)
+	cat("\n", gettext("Slots:", domain = "R-methods"), "\n", sep = "")
+        printPropertiesList(x)
     }
     else
-        cat("\nNo ", propertiesAreCalled, ", prototype of class \"",
-            .class1(ClassDef@prototype), "\"\n", sep="")
+        cat("\n", gettextf("No slots, prototype of class %s", dQuote(.class1(ClassDef@prototype)), domain = "R-methods"), "\n", sep = "")
     ext <- ClassDef@contains
     if(length(ext)) {
-        cat("\nExtends: ")
+        cat("\n", gettextf("Class %s consists of following classes: ", .dQ(Class), domain = "R-methods"), sep = "")
         showExtends(ext)
     }
     ext <- ClassDef@subclasses
     if(length(ext)) {
-        cat("\nKnown Subclasses: ")
+        cat("\n", gettext("Known Subclasses: ", domain = "R-methods"), sep = "")
         showExtends(ext)
     }
 }
 
-printPropertiesList <- function(x, propertiesAreCalled) {
+printPropertiesList <- function(x) {
     if(length(x)) {
         n <- length(x)
-        cat("\n",propertiesAreCalled, ":\n", sep="")
+#        cat("\n", gettext("Slots:", domain = "R-methods"), "\n", sep = "")
         text <- format(c(names(x), as.character(x)), justify="right")
         text <- matrix(text, nrow = 2L, ncol = n, byrow = TRUE)
-        dimnames(text) <- list(c("Name:", "Class:"), rep.int("", n))
+        dimnames(text) <- list(c(gettext("Name:", domain = "R-methods"), gettext("Class:", domain = "R-methods")), rep.int("", n))
         print(text, quote = FALSE)
     }
 }
@@ -921,45 +921,61 @@ showExtends <-
 {
     what <- names(ext)
     how <- character(length(ext))
+    directly <- logical(length(ext))
     for(i in seq_along(ext)) {
         eli <- el(ext, i)
         if(is(eli, "SClassExtension")) {
-            how[i] <-
-                if(length(eli@by))
-		    paste("by class", paste0("\"", eli@by, "\", distance ",
-					     eli@distance, collapse = ", "))
-                else if(identical(eli@dataPart, TRUE))
-                    "from data part"
-                else "directly"
-            if(!eli@simple) {
-                if(is.function(eli@test) && !identical(body(eli@test), TRUE)) {
-                    how[i] <-
-                        paste(how[i], if(is.function(eli@coerce))
-                              ", with explicit test and coerce" else
-                              ", with explicit test", sep="")
-                }
-                else if(is.function(eli@coerce))
-                    how[i] <- paste0(how[i], ", with explicit coerce")
-            }
+	   if(!eli@simple && is.function(eli@test) && !identical(body(eli@test), TRUE) && is.function(eli@coerce) && length(eli@by)) { #1
+		tmp_N <- paste(dQuote(eli@by), ", ", gettextf("distance %d", eli@distance), sep = "", collapse = ", ")
+		how[i] <- gettextf("Class %s, by class %s, with explicit test and coerce", dQuote(what[i]), tmp_N, domain = "R-methods")
+	   } else if(!eli@simple && is.function(eli@test) && !identical(body(eli@test), TRUE) && is.function(eli@coerce) && identical(eli@dataPart, TRUE)) { #2
+		how[i] <- gettextf("Class %s, from data part, with explicit test and coerce", dQuote(what[i]), domain = "R-methods")
+	   } else if(!eli@simple && is.function(eli@test) && !identical(body(eli@test), TRUE) && is.function(eli@coerce)) { #3
+		how[i] <- gettextf("Class %s, directly, with explicit test and coerce", dQuote(what[i]), domain = "R-methods");
+		directly[i] <- TRUE
+	   } else if(!eli@simple && is.function(eli@test) && !identical(body(eli@test), TRUE) && !is.function(eli@coerce) && length(eli@by)) { #4
+		tmp_N <- paste(dQuote(eli@by), ", ", gettextf("distance %d", eli@distance), sep = "", collapse = ", ")
+		how[i] <- gettextf("Class %s, by class %s, with explicit test", dQuote(what[i]), tmp_N, domain = "R-methods")
+	   } else if(!eli@simple && is.function(eli@test) && !identical(body(eli@test), TRUE) && !is.function(eli@coerce) && identical(eli@dataPart, TRUE)) { #5
+		how[i] <- gettextf("Class %s, from data part, with explicit test", dQuote(what[i]), domain = "R-methods")
+	   } else if(!eli@simple && is.function(eli@test) && !identical(body(eli@test), TRUE) && !is.function(eli@coerce)) { #6
+		how[i] <- gettextf("Class %s, directly, with explicit test", dQuote(what[i]), domain = "R-methods");
+		directly[i] <- TRUE
+	   } else if(!eli@simple && !(is.function(eli@test) && !identical(body(eli@test), TRUE)) && is.function(eli@coerce) && length(eli@by)) { #7
+		tmp_N <- paste(dQuote(eli@by), ", ", gettextf("distance %d", eli@distance), sep = "", collapse = ", ")
+		how[i] <- gettextf("Class %s, by class %s, with explicit coerce", dQuote(what[i]), tmp_N, domain = "R-methods")
+	   } else if(!eli@simple && !(is.function(eli@test) && !identical(body(eli@test), TRUE)) && is.function(eli@coerce) && identical(eli@dataPart, TRUE)) { #8
+		how[i] <- gettextf("Class %s, from data part, with explicit coerce", dQuote(what[i]), domain = "R-methods")
+	   } else if(!eli@simple && !(is.function(eli@test) && !identical(body(eli@test), TRUE)) && is.function(eli@coerce)) { #9
+		how[i] <- gettextf("Class %s, directly, with explicit coerce", dQuote(what[i]), domain = "R-methods");
+		directly[i] <- TRUE
+	   } else if(length(eli@by)) { #12
+		tmp_N <- paste(dQuote(eli@by), ", ", gettextf("distance %d", eli@distance), sep = "", collapse = ", ")
+                how[i] <- gettextf("Class %s, by class %s", dQuote(what[i]), tmp_N, domain = "R-methods")
+	   } else if(identical(eli@dataPart, TRUE)) { #11
+		how[i] <- gettextf("Class %s, from data part", dQuote(what[i]), domain = "R-methods")
+	   } else { # 10
+		how[i] <- gettextf("Class %s, directly", dQuote(what[i]), domain = "R-methods");
+		directly[i] <- TRUE
+	   }
         }
     }
     if(identical(printTo, FALSE))
         list(what = what, how = how)
-    else if(all(!nzchar(how)) ||  all(how == "directly")) {
-        what <- paste0('"', what, '"')
+    else if(all(!nzchar(how)) ||  all(directly == TRUE)) {
+        what <- dQuote(what)
         if(length(what) > 1L)
-            what <- c(paste0(what[-length(what)], ","), what[[length(what)]])
+            what <- c(paste(what[-length(what)], collapse = ", "), what[[length(what)]])
         cat(file = printTo, what, fill=TRUE)
     }
-    else cat(file = printTo, "\n",
-	     paste0("Class \"", what, "\", ", how, "\n"), sep = "")
+    else { cat(file = printTo, "\n"); cat(file = printTo, how, sep = "\n") }
 }
 
 
 
 printClassRepresentation <-
   function(x, ...)
-  showClass(x, propertiesAreCalled="Slots")
+  showClass(x)
 
 ## bootstrap definition to be used before getClass() works
 possibleExtends <- function(class1, class2, ClassDef1, ClassDef2)
@@ -1124,7 +1140,7 @@ completeSubclasses <-
                           if(superClassCase) "superClass" else "subClass",
                           dQuote(className),
                           dQuote(.className(by))),
-                 domain = NA)
+                 domain = "R-methods")
     }
     what <- names(ext)  ## the direct and indirect extensions
     if(!all(is.na(match(what, className)))) {
@@ -1135,17 +1151,19 @@ completeSubclasses <-
             exti <- ext[[i]]
             if(!is(exti, "conditionalExtension")) {
                 if(superClassCase) {
-                    whatError <-  "contain itself"
-                }
-                else {
-                    whatError <- "have itself as a subclass"
-                }
-                ## this is not translatable
-                stop(sprintf("class %s may not %s: it contains class %s, with a circular relation back to %s",
-                             dQuote(className), whatError,
+                stop(gettextf("class %s may not contain itself: it contains class %s, with a circular relation back to %s",
+                             dQuote(className),
                              dQuote(exti@by),
                              dQuote(className)),
-                     domain = NA)
+                     domain = "R-methods")
+                }
+                else {
+                stop(gettextf("class %s may not have itself as a subclass: it contains class %s, with a circular relation back to %s",
+                             dQuote(className),
+                             dQuote(exti@by),
+                             dQuote(className)),
+                     domain = "R-methods")
+                }
             }
         }
         ext <- ext[ok]
@@ -1169,7 +1187,7 @@ completeSubclasses <-
             exti <-  byDef@contains
             coni <- attr(exti, "conflicts") # .resolveSuperclasses makes this
             if( length(coni) > 0) {
-                warning(gettextf("class %s is inheriting an inconsistent superclass structure from class %s, inconsistent with %s",
+                warning(sprintf(gettext("class %s is inheriting an inconsistent superclass structure from class %s, inconsistent with %s", domain = "R-methods"),
                                  .dQ(className), .dQ(by),
                                  paste(.dQ(coni), collapse = ", ")),
                         call. = FALSE, domain = NA)
@@ -1179,7 +1197,7 @@ completeSubclasses <-
       }
           newconflicts <- attr(ext, "conflicts")
         if(length(newconflicts) > length(conflicts))
-          warning(gettextf("unable to find a consistent ordering of superclasses for class %s: order chosen is inconsistent with the superclasses of %s",
+          warning(sprintf(gettext("unable to find a consistent ordering of superclasses for class %s: order chosen is inconsistent with the superclasses of %s", domain = "R-methods"),
                            .dQ(className),
                            paste(.dQ(setdiff(newconflicts, conflicts)),
                                  collapse = ", ")),
@@ -1299,16 +1317,15 @@ requireMethods <-
 .missingMethod <- function(f, message = "", method) {
     if(nzchar(message))
         message <- paste0("(", message, ")")
-    message <- paste("for function", f, message)
+    message <- gettextf("for function %s: %s", f, message)
     if(is(method, "MethodDefinition")) {
-        target <-  paste(.dQ(method@target), collapse=", ")
-        defined <- paste(.dQ(method@defined), collapse=", ")
-        message <- paste("Required method", message, "not defined for signature",
-                         target)
+        target <-  paste(.dQ(method@target), collapse = ", ")
+        defined <- paste(.dQ(method@defined), collapse = ", ")
+        message <- gettextf("Required method %s not defined for signature %s", message, target)
         if(!identical(target, defined))
-            message <- paste(message, ", required for signature", defined)
+            message <- gettextf("Required method %s not defined for signature %s, required for signature %s", message, target, defined)
     }
-    else message <- paste("Required method not defined", message)
+    else message <- gettextf("Required method not defined: %s", message)
     message
 }
 
@@ -1326,7 +1343,7 @@ validSlotNames <- function(names) {
     if(is.na(match("class", names)))
         names
     else
-        stop("\"class\" is a reserved slot name and cannot be redefined")
+        stop("'class' is a reserved slot name and cannot be redefined")
 }
 
 ### utility function called from primitive code for "@"
@@ -1338,7 +1355,7 @@ getDataPart <- function(object) {
         if(is.null(value)) {
             value <- attr(object, ".xData")
             if(is.null(value))
-              stop("Data part is undefined for general S4 object")
+              stop("Data part ('.Data' slot) is undefined for general S4 object")
           }
         if(identical(value, .pseudoNULL))
           return(NULL)
@@ -1351,7 +1368,7 @@ getDataPart <- function(object) {
     if(is.na(match(".Data", names(temp))))
        stop(gettextf("no '.Data' slot defined for class %s",
                      dQuote(class(object))),
-            domain = NA)
+            domain = "R-methods")
     dataPart <- temp[[".Data"]]
     switch(dataPart,
            ## the common cases, for efficiency
@@ -1396,7 +1413,7 @@ setDataPart <- function(object, value, check = TRUE) {
         else if(check)
           stop(gettextf("class %s does not have a data part (a .Data slot) defined",
                         dQuote(class(object))),
-               domain = NA)
+               domain = "R-methods")
         else # this case occurs in making the methods package. why?
           return(.mergeAttrs(value, object))
         value <- as(value, dataClass)  # note that this is strict as()
@@ -1449,7 +1466,7 @@ setDataPart <- function(object, value, check = TRUE) {
     if(!(is.null(value) || is.null(prevDataPartClass) || extends(prevDataPartClass, value) ||
          isVirtualClass(value, where = where))) {
       warning(gettextf("more than one possible class for the data part: using %s rather than %s",
-                  .dQ(prevDataPartClass), .dQ(value)), domain = NA)
+                  .dQ(prevDataPartClass), .dQ(value)), domain = "R-methods")
       value <- NULL
     }
     value
@@ -1493,7 +1510,7 @@ setDataPart <- function(object, value, check = TRUE) {
 ## from that class to `by'
 .transitiveExtends <- function(from, by, byExt, moreExts, strictBy) {
     what <- names(moreExts)
-###    if(!strictBy) message("Extends: ",from, ": ", paste(what, collapse = ", "))
+###    if(!strictBy) message(gettextf("Extends: %s: ",from),  paste(what, collapse = ", "), domain = NA)
     for(i in seq_along(moreExts)) {
         toExt <- moreExts[[i]]
         to <- what[[i]]
@@ -1506,7 +1523,7 @@ setDataPart <- function(object, value, check = TRUE) {
 
 .transitiveSubclasses <- function(by, to, toExt, moreExts, strictBy) {
 ##    what <- names(moreExts)
-###    if(!strictBy) message("Subclasses: ",by, ": ", paste(what, collapse = ", "))
+###    if(!strictBy) message(gettextf("Subclasses: %s: ",by), paste(what, collapse = ", "), domain = NA)
     for(i in seq_along(moreExts)) {
         byExt <- moreExts[[i]]
         byExt <- .combineExtends(byExt, toExt, by, to, strictBy)
@@ -1693,18 +1710,15 @@ substituteFunctionArgs <-
 
         n <- length(args)
         if(n != length(newArgs))
-            stop(sprintf("trying to change the argument list of %s with %d arguments to have arguments (%s)",
-                         functionName, n, paste(newArgs, collapse = ", ")),
-                 domain = NA)
+            stop(sprintf(gettext("trying to change the argument list of %s with %d arguments to have arguments (%s)", domain = "R-methods"),
+                         functionName, n, paste(newArgs, collapse = ", ")), domain = NA)
         bdy <- body(def)
         ## check for other uses of newArgs
         checkFor <- newArgs[is.na(match(newArgs, args))]
         locals <- all.vars(bdy)
         if(length(checkFor) && any(!is.na(match(checkFor, locals))))
-            stop(sprintf("get rid of variables in definition %s (%s); they conflict with the needed change to argument names (%s)",
-                         functionName,
-                         paste(checkFor[!is.na(match(checkFor, locals))], collapse = ", "),
-                         paste(newArgs, collapse = ", ")), domain = NA)
+            stop(sprintf(gettext("get rid of variables in definition %s (%s); they conflict with the needed change to argument names (%s)", domain = "R-methods"),
+                         functionName, paste(checkFor[!is.na(match(checkFor, locals))], collapse = ", "), paste(newArgs, collapse = ", ")), domain = NA)
         ll <- vector("list", 2L*n)
         for(i in seq_len(n)) {
             ll[[i]] <- as.name(args[[i]])
@@ -1714,11 +1728,10 @@ substituteFunctionArgs <-
         body(def, envir = environment(def)) <- substituteDirect(bdy, ll)
         if(!silent) {
             msg <-
-                sprintf("NOTE: arguments in definition %s changed from (%s) to (%s)",
+                message(sprintf(gettext("NOTE: arguments in definition %s changed from (%s) to (%s)", domain = "R-methods"),
                         functionName,
                         paste(args, collapse = ", "),
-                        paste(newArgs, collapse = ", "))
-            message(msg, domain = NA)
+                        paste(newArgs, collapse = ", ")), domain = NA)
         }
     }
     def
@@ -1729,8 +1742,8 @@ substituteFunctionArgs <-
         if(!is(validity, "function"))
             stop(gettextf("a validity method must be a function of one argument, got an object of class %s",
                           dQuote(class(validity))),
-                 domain = NA)
-        validity <- substituteFunctionArgs(validity, "object", functionName = sprintf("validity method for class '%s'", Class))
+                 domain = "R-methods")
+        validity <- substituteFunctionArgs(validity, "object", functionName = gettextf("validity method for class \"%s\"", Class))
     }
     validity
 }
@@ -1801,7 +1814,7 @@ substituteFunctionArgs <-
         if(mustFind)
           stop(gettextf("unable to find required package %s",
                         sQuote(package)),
-               domain = NA)
+               domain = "R-methods")
         else
           return(NULL)
     }
@@ -1864,7 +1877,7 @@ substituteFunctionArgs <-
 	if(is.null(def) && mustFind)
 	    stop(gettextf("unable to find an environment containing class %s",
 			  dQuote(Class)),
-                 domain = NA)
+                 domain = "R-methods")
 	value
     }
     else
@@ -1972,11 +1985,11 @@ assign("#HAS_DUPLICATE_CLASS_NAMES", FALSE, envir = .classTable)
         dups <- match(supers, multipleClasses(), 0) > 0
         if(any(dups)) {
             if(verbose)
-                message(gettextf("Note: some superclasses of class %s in package %s have duplicate definitions.  This definition is not being treated as equivalent to that from package %s",
+                message(gettextf("Note: some superclasses of class %s in package %s have duplicate definitions. This definition is not being treated as equivalent to that from package %s",
                                  dQuote(def@className),
                                  sQuote(def@package),
                                  sQuote(prev@package)),
-                    domain = NA)
+                    domain = "R-methods")
             return(FALSE)
         }
     }
@@ -1997,11 +2010,11 @@ assign("#HAS_DUPLICATE_CLASS_NAMES", FALSE, envir = .classTable)
             return(FALSE)
     }
     if(verbose)
-        message(gettextf("Note: the specification for class %s in package %s seems equivalent to one from package %s: not turning on duplicate class definitions for this class.",
+        message(gettextf("Note: the specification for class %s in package %s seems equivalent to one from package %s and is not turning on duplicate class definitions for this class",
                          dQuote(def@className),
                          sQuote(def@package),
                          sQuote(prev@package)),
-                    domain = NA)
+                    domain = "R-methods")
     TRUE
 }
 
@@ -2050,8 +2063,8 @@ assign("#HAS_DUPLICATE_CLASS_NAMES", FALSE, envir = .classTable)
 		       "first" = {
 			   if(resolve.msg)
 			       message(gettextf(
-				"Found more than one class \"%s\" in cache; using the first, from namespace '%s'",
-				name, pkgs[1]), domain=NA)
+				"Found more than one class %s in cache; using the first, from namespace '%s'",
+				dQuote(name), pkgs[1]), domain = "R-methods")
 			   value[[1]]
 		       },
 		       "all" = value) # return all, a list
@@ -2110,14 +2123,14 @@ assign("#HAS_DUPLICATE_CLASS_NAMES", FALSE, envir = .classTable)
         else {
           warning(gettextf("subclass %s of class %s is not local and cannot be updated for new inheritance information; consider setClassUnion()",
                            .dQ(what), .dQ(class)),
-                  call. = FALSE, domain = NA)
+                  call. = FALSE, domain = "R-methods")
           next
         }
         extension <- extDefs[[what]]
         if(is.null(extension)) # not possible if the setIs behaved?
           warning(gettextf("no definition of inheritance from %s to %s, though the relation was implied by the setIs() from %s",
                            .dQ(what), .dQ(def2@className), .dQ(class)),
-                  call. = FALSE, domain = NA)
+                  call. = FALSE, domain = "R-methods")
         else if(is.na(match(class2, names(subDef@contains)))) {
             subDef@contains[[class2]] <- extension
             assignClassDef(what, subDef, cwhere, TRUE)
@@ -2302,7 +2315,7 @@ classesToAM <- function(classes, includeSubclasses = FALSE,
         else if(is.character(short)) {
             if(length(short) != length(nodes))
                 stop(gettextf("needed the supplied labels vector of length %d, got %d",
-                              length(nodes), length(short)), domain = NA)
+                              length(nodes), length(short)), domain = "R-methods")
             else short
         } else nodes
     size <- length(nodes)
@@ -2420,7 +2433,7 @@ S3forS4Methods <- function(where, checkClasses = character()) {
 ##         warning("S3 methods written for S4 classes will fail inheritance!\nPackage ", pkg, " apparently has ",
 ##             length(methods), " such methods  for the functions ", paste(attr(methods, "functions"), collapse = ", "), "\n\n",
 ##         "Possible dangerous methods: ", paste(methods, collapse =", "),
-##                 "\n\n(Warnings generated once per package per session)")
+##                 "\n\n(Warnings generated once per package per session)", domain = NA)
 ##       }
 ##   }
 ## }
@@ -2431,7 +2444,7 @@ S3forS4Methods <- function(where, checkClasses = character()) {
 ##   if(length(badMethods) > 0) {
 ##     msg <- paste0("The apparent methods are ", paste('"',badMethods, '"', collapse = ", "))
 ##     warning("Some of the superclasses in the definition of class \"",
-##             className, "\" have apparent S3 methods.\n\nThese will be hidden by the S3 class that this class contains. (See ?Methods)\n\n", msg)
+##             className, "\" have apparent S3 methods.\n\nThese will be hidden by the S3 class that this class contains. (See ?Methods)\n\n", msg, domain = NA)
 ##   }
 ## }
 

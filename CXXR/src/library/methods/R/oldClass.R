@@ -37,7 +37,7 @@ setOldClass <- function(Classes, prototype = NULL,
             else
               stop(gettextf("argument 'S4Class' must be a class definition: got an object of class %s",
                             dQuote(class(S4Class))),
-                   domain = NA)
+                   domain = "R-methods")
         }
         if(!is.null(prototype)) {
             S4prototype <- S4Class@prototype
@@ -76,7 +76,7 @@ setOldClass <- function(Classes, prototype = NULL,
                   stop(gettextf("inconsistent old-style class information for %s; the class is defined but does not extend %s and is not valid as the data part",
                                 dQuote(cl),
                                 dQuote(prevClass)),
-                       domain = NA)
+                       domain = "R-methods")
                 else dataPartClass <- cl1
               }
             else {
@@ -97,7 +97,7 @@ setOldClass <- function(Classes, prototype = NULL,
                 setClass(cl, contains = prevClass, prototype = prototype, where = where)
             else { #exceptionally, we allow an S3 object from the S3 class as prototype
                 if(.class1(prototype) != mainClass)
-                  stop(gettextf('the S3 class of the prototype, "%s", is undefined; only allowed when this is the S3 class being registered ("%s")', .class1(prototype), mainClass), domain = NA)
+                  stop(gettextf('the S3 class of the prototype, "%s", is undefined; only allowed when this is the S3 class being registered ("%s")', .class1(prototype), mainClass), domain = "R-methods")
                 setClass(cl, contains = prevClass, where = where)
                 useP <- FALSE
             }
@@ -118,7 +118,7 @@ setOldClass <- function(Classes, prototype = NULL,
 .restoreClass <- function(def, where) {
     cl <- def@className
     message(gettextf("restoring definition of class %s", dQuote(cl)),
-            domain = NA)
+            domain = "R-methods")
     if(isClass(cl, where = where))
        removeClass(cl, where = where)
     assignClassDef(cl, def, where = where)
@@ -189,12 +189,12 @@ setOldClass <- function(Classes, prototype = NULL,
                                sQuote(what),
                                dQuote(elNamed(slots1, what)),
                                dQuote(elNamed(slots2, what))),
-                      domain = NA)
+                      domain = "R-methods")
               bad <- c(bad, what)
           }
         if(length(bad)>0)
           stop(
-               gettextf("invalid S4 class corresponding to S3 class: slots in  S4 version must extend corresponding slots in S3 version: fails for %s",
+               sprintf(gettext("invalid S4 class corresponding to S3 class: slots in  S4 version must extend corresponding slots in S3 version: fails for %s", domain = "R-methods"),
                         paste0('"', bad, '"',  collapse = ", ")),
                domain = NA)
     }
@@ -211,13 +211,13 @@ utils::globalVariables("CLASS")
 .oldTestFun <- function(object) CLASS %in% attr(object, "class")
 .oldCoerceFun <- function(from, strict = TRUE) {
     if(strict)
-        stop(gettextf("explicit coercion of old-style class (%s) is not defined", paste(class(from), collapse = ", ")), domain = NA)
+        stop(sprintf(gettext("explicit coercion of old-style class (%s) is not defined", domain = "R-methods"), paste(class(from), collapse = ", ")), domain = NA)
     from
 }
 .oldReplaceFun <- function(from, to, value)
     stop(gettextf("explicit replacement not defined for as(x, \"%s\") <- value for old-style class %s",
                   to, dQuote(class(from)[1L])),
-         domain = NA)
+         domain = "R-methods")
 
 ## the inheritance of these S3 classes must be decided on a per-instance
 ## basis.  At one time, there were classes in base/stats that had this
@@ -226,12 +226,12 @@ utils::globalVariables("CLASS")
 ## for user-defined S3 classes.
 .setOldIs <- function(Classes, where) {
     if(length(Classes) != 2)
-        stop(gettextf("argument 'Classes' must be a vector of two classes; got an argument of length %d", length(Classes)), domain = NA)
+        stop(gettextf("argument 'Classes' must be a vector of two classes; got an argument of length %d", length(Classes)), domain = "R-methods")
     for(cl in Classes) {
         if(isClass(cl, where)) {
             if(!extends(cl, "oldClass"))
                 warning(gettextf("inconsistent old-style class information for %s (maybe mixing old and new classes?)",
-                                 dQuote(cl)), domain = NA)
+                                 dQuote(cl)), domain = "R-methods")
         }
         else
             setClass(cl, representation("oldClass", "VIRTUAL"), where = where)
@@ -259,7 +259,7 @@ S3Class <- function(object) {
                 stop(gettextf("'S3Class' only defined for extensions of %s or classes with a data part:  not true of class %s",
                               dQuote("oldClass"),
                               dQuote(class(object))),
-                     domain = NA)
+                     domain = "R-methods")
             class(getDataPart(object))
         }
         else
@@ -288,7 +288,7 @@ S3Class <- function(object) {
             if(is.na(match(value, .BasicClasses)))
                stop(gettextf("'S3Class' can only assign to S4 objects that extend \"oldClass\"; not true of class %s",
                              dQuote(class(object))),
-                    domain = NA)
+                    domain = "R-methods")
             mode(object) <- value ## may still fail, a further check would be good
         }
         else

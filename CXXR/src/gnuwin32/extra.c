@@ -33,12 +33,12 @@
 #include <config.h>
 #endif
 
-#include "win-nls.h"
+#include <localization.h>
 
 
 #include <stdio.h>
 #include <time.h>
-#include "Defn.h"
+#include <Defn.h>
 #include <Internal.h>
 #include "Fileio.h"
 #include <direct.h>
@@ -64,20 +64,19 @@ void internal_shellexec(const char * file)
 
     home = getenv("R_HOME");
     if (home == NULL)
-	error(_("R_HOME not set"));
+	error(_("R_HOME is not set"));
     strncpy(home2, home, 10000);
     for(p = home2; *p; p++) if(*p == '/') *p = '\\';
     ret = (uintptr_t) ShellExecute(NULL, "open", file, NULL, home2, SW_SHOW);
     if(ret <= 32) { /* an error condition */
 	if(ret == ERROR_FILE_NOT_FOUND  || ret == ERROR_PATH_NOT_FOUND
 	   || ret == SE_ERR_FNF || ret == SE_ERR_PNF)
-	    error(_("'%s' not found"), file);
+	    error(_("file '%s' was not found"), file);
 	if(ret == SE_ERR_ASSOCINCOMPLETE || ret == SE_ERR_NOASSOC)
-	    error(_("file association for '%s' not available or invalid"),
-		  file);
+	    error(_("file association for file '%s' is not available or invalid"), file);
 	if(ret == SE_ERR_ACCESSDENIED || ret == SE_ERR_SHARE)
-	    error(_("access to '%s' denied"), file);
-	error(_("problem in displaying '%s'"), file);
+	    error(_("access to file '%s' denied"), file);
+	error(_("problem in displaying file '%s'"), file);
     }
 }
 
@@ -92,7 +91,7 @@ static void internal_shellexecW(const wchar_t * file, Rboolean rhome)
     if (rhome) {
     	home = _wgetenv(L"R_HOME");
     	if (home == NULL)
-	    error(_("R_HOME not set"));
+	    error(_("R_HOME is not set"));
     	wcsncpy(home2, home, 10000);
     	for(p = home2; *p; p++) if(*p == L'/') *p = L'\\';
 	home = home2;
@@ -102,13 +101,12 @@ static void internal_shellexecW(const wchar_t * file, Rboolean rhome)
     if(ret <= 32) { /* an error condition */
 	if(ret == ERROR_FILE_NOT_FOUND  || ret == ERROR_PATH_NOT_FOUND
 	   || ret == SE_ERR_FNF || ret == SE_ERR_PNF)
-	    error(_("'%ls' not found"), file);
+	    error(_("file '%ls' was not found"), file);
 	if(ret == SE_ERR_ASSOCINCOMPLETE || ret == SE_ERR_NOASSOC)
-	    error(_("file association for '%ls' not available or invalid"),
-		  file);
+	    error(_("file association for file '%ls' is not available or invalid"), file);
 	if(ret == SE_ERR_ACCESSDENIED || ret == SE_ERR_SHARE)
-	    error(_("access to '%ls' denied"), file);
-	error(_("problem in displaying '%ls'"), file);
+	    error(_("access to file '%ls' denied"), file);
+	error(_("problem in displaying file '%ls'"), file);
     }
 }
 
@@ -130,7 +128,7 @@ int check_doc_file(const char * file)
 
     home = getenv("R_HOME");
     if (home == NULL)
-	error(_("R_HOME not set"));
+	error(_("R_HOME is not set"));
     if(strlen(home) + strlen(file) + 1 >= MAX_PATH) return(1); /* cannot exist */
     strcpy(path, home);
     strcat(path, "/");
@@ -426,14 +424,14 @@ SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
     int mustWork, fslash = 0;
 
     if(!isString(paths))
-	errorcall(call, _("'path' must be a character vector"));
+	errorcall(call, _("'%s' argument must be a character vector"), "path");
 
     slash = CADR(args);
     if(!isString(slash) || LENGTH(slash) != 1)
-	errorcall(call, "'winslash' must be a character string");
+	errorcall(call, _("'%s' argument must be a character string"), "winslash");
     const char *sl = CHAR(STRING_ELT(slash, 0));
     if (strcmp(sl, "/") && strcmp(sl, "\\"))
-	errorcall(call, "'winslash' must be '/' or '\\\\'");
+	errorcall(call, _("'winslash' argument must be '/' or '\\\\'"));
     if (strcmp(sl, "/") == 0) fslash = 1;
     
     mustWork = asLogical(CADDR(args));
@@ -527,7 +525,7 @@ SEXP in_shortpath(SEXP paths)
     DWORD res;
     const void *vmax = vmaxget();
 
-    if(!isString(paths)) error(_("'path' must be a character vector"));
+    if(!isString(paths)) error(_("'%s' argument must be a character vector"), "path");
 
     PROTECT(ans = allocVector(STRSXP, n));
     for (i = 0; i < n; i++) {
@@ -578,7 +576,7 @@ SEXP bringtotop(SEXP sdev, SEXP sstay)
 	if(!gdd) error(_("invalid device"));
 	xd = (gadesc *) gdd->dev->deviceSpecific;
 	if(!xd) error(_("invalid device"));
-	if(stay && ismdi()) error(_("requires SDI mode"));
+	if(stay && ismdi()) error(_("SDI mode is required"));
 	BringToTop(xd->gawin, stay);
     }
     return R_NilValue;
@@ -795,7 +793,7 @@ size_t Rmbstowcs(wchar_t *wc, const char *s, size_t n)
     if(wc) {
 	for(p = s; ; p+=m) {
 	    m = Rmbrtowc(wc+res, p);
-	    if(m < 0) error(_("invalid input in 'Rmbstowcs'"));
+	    if(m < 0) error(_("invalid input in '%s' function"), "Rmbstowcs()");
 	    if(m <= 0) break;
 	    res++;
 	    if(res >= n) break;
@@ -803,7 +801,7 @@ size_t Rmbstowcs(wchar_t *wc, const char *s, size_t n)
     } else {
 	for(p = s; ; p+=m) {
 	    m  = Rmbrtowc(NULL, p);
-	    if(m < 0) error(_("invalid input in 'Rmbstowcs'"));
+	    if(m < 0) error(_("invalid input in '%s' function"), "Rmbstowcs()");
 	    if(m <= 0) break;
 	    res++;
 	}
@@ -825,7 +823,7 @@ SEXP attribute_hidden do_filechoose(SEXP call, SEXP op, SEXP args, SEXP rho)
     setuserfilterW(L"All files (*.*)\0*.*\0\0");
     fn = askfilenameW(G_("Select file"), "");
     if (!fn)
-	error(_("file choice cancelled"));
+	error(_("file choice was cancelled"));
     wcstoutf8(str, fn, 4*MAX_PATH+1);
     PROTECT(ans = allocVector(STRSXP, 1));
     SET_STRING_ELT(ans, 0, mkCharCE(str, CE_UTF8));

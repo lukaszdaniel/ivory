@@ -39,7 +39,7 @@
 #include <R_ext/Arith.h>	/* NA handling */
 #include <Rmath.h>		/* fmax2 */
 #include <R_ext/Random.h>	/* ..RNGstate */
-
+#include <localization.h>
 #include <R_ext/Applic.h>	/* NA handling */
 
 #define RELTOL 1e-5
@@ -94,7 +94,7 @@ void R_max_col(double *matrix, int *nr, int *nc, int *maxes, int *ties_meth)
 			a = b; m = c;
 		    }
 		}
-	    else error("invalid 'ties_meth' {should not happen}");
+	    else error(_("invalid '%s' argument {should not happen}"), "ties_meth");
 	}
 	maxes[r] = m + 1;
     }

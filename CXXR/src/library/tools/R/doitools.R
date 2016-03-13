@@ -83,7 +83,7 @@ function(packages, lib.loc = NULL, verbose = FALSE)
     if(!length(packages)) return()
     one <- function(p) {
         if(verbose)
-            message(sprintf("processing %s", p))
+            message(gettextf("processing package %s", sQuote(p)))
         dir <- system.file(package = p, lib.loc = lib.loc)
         if(dir == "") return()
         meta <- .read_description(file.path(dir, "DESCRIPTION"))
@@ -114,7 +114,7 @@ function(db, verbose = FALSE)
     }
 
     .fetch <- function(d) {
-        if(verbose) message(sprintf("processing %s", d))
+        if(verbose) message(gettextf("processing DOI %s", d))
         u <- paste0("http://doi.org/", d)
         ## Do we need to percent encode parts of the DOI name?
         tryCatch(curlGetHeaders(u), error = identity)
@@ -158,7 +158,7 @@ function(db, verbose = FALSE)
         bad <- rbind(bad,
                      .gather(dois[ind],
                              parents[ind],
-                             m = rep.int("Invalid DOI", len)))
+                             m = rep.int(gettext("Invalid DOI"), len)))
     }
 
     pos <- which(!ind)
@@ -188,7 +188,7 @@ function(x, ...)
 {
     if(!NROW(x)) return(character())
 
-    paste0(sprintf("DOI: %s", x$DOI),
+    paste0(sprintf("DOI: %s", x$DOI), #LUKI
            sprintf("\nFrom: %s",
                    sapply(x$From, paste, collapse = "\n      ")),
            ifelse((s <- x$Status) == "",

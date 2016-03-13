@@ -28,8 +28,8 @@
  * @brief Macro definitions relating to localization.
  */
 
-#ifndef LOCALIZATION_H_
-#define LOCALIZATION_H_
+#ifndef LOCALIZATION_H
+#define LOCALIZATION_H
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>

@@ -38,7 +38,7 @@
 extern "C" {
 #endif
 
-#ifdef Win32
+#ifdef _WIN32
 typedef int (*blah1) (const char *, char *, int, int);
 typedef void (*blah2) (const char *, int);
 typedef void (*blah3) (void);
@@ -78,7 +78,7 @@ typedef struct
     size_t ppsize;    /* unused */
     int NoRenviron;
 
-#ifdef Win32
+#ifdef _WIN32
     char *rhome;               /* R_HOME */
     char *home;                /* HOME  */
     blah1 ReadConsole;
@@ -108,4 +108,4 @@ void setup_Rmainloop(void); // also in Rembedded.h
 }
 #endif
 
-#endif
+#endif /* R_EXT_RSTARTUP_H_ */

@@ -36,8 +36,8 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Rdynpriv.h>
 
 #ifdef HAVE_UNISTD_H
@@ -236,7 +236,7 @@ static void getFullDLLPath(SEXP call, char *buf, const char *path)
 #ifdef HAVE_GETCWD
 	if(!getcwd(buf, PATH_MAX))
 #endif
-	    errorcall(call, _("cannot get working directory!"));
+	    errorcall(call, _("cannot get working directory"));
 	strcat(buf, "/");
 	strcat(buf, path);
     }

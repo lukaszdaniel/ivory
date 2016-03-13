@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-23 20:39\n"
+"POT-Creation-Date: 2016-03-13 10:23\n"
 "PO-Revision-Date: 2012-03-15 11:56-0500\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -1899,11 +1899,6 @@ msgid ""
 msgstr ""
 "Похоже, что для общего  \"%s\" нет таблицы методов в отслеживаемом окружении"
 
-#. R/zzz.R: gettext(" done", domain = "R-methods")
-#: R/zzz.R:0
-msgid "done"
-msgstr ""
-
 #. R/SClasses.R: gettext("duplicate class names among superclasses: %s", domain = "R-methods")
 #: R/SClasses.R:0
 msgid "duplicate class names among superclasses: %s"
@@ -2250,11 +2245,6 @@ msgid ""
 msgstr ""
 "противоречивая, в старом стиле информация для \"%s\"; класс определен, но не "
 "расширяет %s и неправилен как часть данных"
-
-#. R/zzz.R: gettext("initializing class and method definitions ...", domain = "R-methods")
-#: R/zzz.R:0
-msgid "initializing class and method definitions ..."
-msgstr ""
 
 #. R/RClassUtils.R: gettextf("initializing objects from class %s with these arguments is not supported",     dQuote(Class))
 #: R/RClassUtils.R:0
@@ -3497,11 +3487,11 @@ msgstr ""
 "пытаюсь изменить формальные аргументы в %s, но число существующих аргументов "
 "меньше, чем число новых аргументов: (%s) против (%s)"
 
-#. R/methodsTable.R: gettext("trying to check signature length of generic %s, but it is not a generic function: i = %d, funs = %s, gnames = %s",     domain = "R-methods")
+#. R/methodsTable.R: gettextf("trying to check signature length of generic '%s', but it is not a generic function: i = %d, funs = %s, gnames = %s",     what, i, paste(unlist(funs), collapse = ", "), paste(as.character(gnames), collapse = ", "))
 #: R/methodsTable.R:0
 #, fuzzy
 msgid ""
-"trying to check signature length of generic %s, but it is not a generic "
+"trying to check signature length of generic '%s', but it is not a generic "
 "function: i = %d, funs = %s, gnames = %s"
 msgstr ""
 "попытка сопоставить идентификатор метода с объектом (класса %s), который не "

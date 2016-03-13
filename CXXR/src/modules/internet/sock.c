@@ -41,7 +41,7 @@
 #include <errno.h>
 #endif
 
-#if defined(Win32)
+#if defined(_WIN32)
 #  include <winsock2.h>
 #  include <io.h>
 #else
@@ -85,7 +85,7 @@ int __initialize(void *ignoredParameter) {
 /* Initialize the socket services */
 int Sock_init()
 {
-#if defined(Win32)
+#if defined(_WIN32)
     WSADATA wsaData;
     WORD wVers = MAKEWORD(1, 1);
     if (WSAStartup(wVers, &wsaData) != 0)
@@ -118,7 +118,7 @@ int Sock_open(Sock_port_t port, Sock_error_t perr)
     server.sin_addr.s_addr = INADDR_ANY;
     server.sin_port = htons((short)port);
 
-#ifndef Win32
+#ifndef _WIN32
     /* According to Stephens (1998) "Unix Network Programming, Vol 1",
        pp. 194 on UNIX we need to set the SO_REUSEADDR socket option
        if we want to be able to have a server create several
@@ -210,7 +210,7 @@ int Sock_connect(Sock_port_t port, char *sname, Sock_error_t perr)
     while (retval == -1 && errno == EINTR);
     if (retval == -1) {
 	Sock_error(perr, errno, 0);
-#ifdef Win32
+#ifdef _WIN32
 	closesocket(sock);
 #else
 	close(sock);
@@ -223,7 +223,7 @@ int Sock_connect(Sock_port_t port, char *sname, Sock_error_t perr)
 /* close a socket */
 int Sock_close(int fd, Sock_error_t perr)
 {
-#ifdef Win32
+#ifdef _WIN32
     if (closesocket(fd) != 0)
 	return Sock_error(perr, WSAENOTSOCK, 0);
 #else

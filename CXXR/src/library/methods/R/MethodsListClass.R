@@ -100,9 +100,7 @@
         switch(typeof(def),
                "builtin" = , "special" = , "NULL" = return(def),
                "closure" = {},
-               stop(gettextf("invalid object for formal method definition: type %s",
-                             dQuote(typeof(def))),
-                    domain = NA)
+               stop(gettextf("invalid object for formal method definition: type %s", dQuote(typeof(def))), domain = "R-methods")
                )
         if(is(def, "MethodDefinition")) {
             value <- def
@@ -160,15 +158,15 @@
                         warning(gettextf("missing package slot (%s) in object of class %s (package info added)",
                                          packageSlot(co),
                                          dQuote(class(.Object))),
-                                domain = NA)
+                                domain = "R-methods")
                         class(value) <- class(.Object)
                     }
                     else
                         return(value)
                 }
                 else
-                    stop(gettextf("'initialize' method returned an object of class %s instead of the required class %s",
-                                  paste(dQuote(class(value)), collapse=", "),
+                    stop(sprintf(gettext("'initialize' method returned an object of class %s instead of the required class %s", domain = "R-methods"),
+                                  paste(dQuote(class(value)), collapse = ", "),
                                   dQuote(class(.Object))),
                          domain = NA)
             }
@@ -219,15 +217,14 @@
               function(object) {
                   pkg <- object@package
                   data <- as(object, "character")
-                  cat("An object of class \"", class(object), "\":\n", sep="")
+                  cat(gettextf("An object of class %s:", dQuote(class(object)), domain = "R-methods"), "\n", sep = "")
                   if(length(unique(pkg))==1) {
                       show(data)
-                      cat("(All from \"", unique(pkg), "\")\n", sep="")
+                      cat(gettextf("(All objects are from package %s)", unique(sQuote(pkg)), domain = "R-methods"), "\n", sep = "")
                   }
                   else {
                       mat <- rbind(data, pkg)
-		      dimnames(mat) <- list(c("Object:", "Package:"),
-					    rep("", length(data)))
+		      dimnames(mat) <- list(c(gettext("Object:", domain = "R-methods"), gettext("Package:", domain = "R-methods")), rep("", length(data)))
                       show(mat)
                   }
               }, where = envir)
@@ -236,19 +233,18 @@
               function(object) {
                   nreport <- length(object@target)
                   cat(sprintf(ngettext(nreport,
-                                       "Reported %d ambiguous selection out of %d for function %s\n",
-                                       "Reported %d ambiguous selections out of %d for function %s\n"),
-                              nreport, length(object@allSelections), object@generic))
+                                       "Reported %d ambiguous selection out of %d for function %s",
+                                       "Reported %d ambiguous selections out of %d for function %s", domain = "R-methods"),
+                              nreport, length(object@allSelections), sQuote(object@generic)), "\n", sep = "")
                   target <- object@target; selected = object@selected
                   candidates <- object@candidates; note <- object@note
                   for(i in seq_len(nreport)) {
                       these <- candidates[[i]]; notei <- note[[i]]
                       these <- these[is.na(match(these, selected[[i]]))]
-                      cat(gettextf(
-                                   '%d: target "%s": chose "%s" (others: %s)',
-                                   i,target[[i]], selected[[i]], paste0('"', these, '"', collapse =", ")))
+                      cat(sprintf(gettext("%d: target %s: chose %s (others: %s)", domain = "R-methods"),
+                                   i, dQuote(target[[i]]), dQuote(selected[[i]]), paste(dQuote(these), collapse = ", ")))
                       if(nzchar(notei))
-                          cat(gettextf("\n    Notes: %s.\n", notei))
+                          cat("\n    ", gettextf("Notes: %s.", notei, domain = "R-methods"), "\n", sep = "")
                       else
                           cat(".\n")
                   }
@@ -256,9 +252,9 @@
               })
     setMethod("show", "classGeneratorFunction", where = envir,
               function(object) {
-                  cat(gettextf("class generator function for class %s from package %s\n",
+                  cat(gettextf("class generator function for class %s from package %s",
                                dQuote(object@className),
-                               sQuote(object@package)))
+                               sQuote(object@package), domain = "R-methods"), "\n", sep = "")
                   show(as(object, "function"))
               })
 

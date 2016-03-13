@@ -89,4 +89,4 @@ typedef struct {
 #define call_S call_R
 #endif
 
-#endif /* !R_S_H */
+#endif /* R_S_H */

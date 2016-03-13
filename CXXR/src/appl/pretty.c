@@ -50,12 +50,7 @@
 #include <config.h>
 #endif
 
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) gettext (String)
-#else
-#define _(String) (String)
-#endif
+#include <localization.h>
 
 #include <math.h>
 #include <float.h>
@@ -66,11 +61,7 @@
 # include <R_ext/Print.h>
 #endif
 
-#ifdef HAVE_VISIBILITY_ATTRIBUTE
-# define attribute_hidden __attribute__ ((visibility ("hidden")))
-#else
-# define attribute_hidden
-#endif
+#include <R_ext/Visibility.h>
 
 attribute_hidden
 double R_pretty(double *lo, double *up, int *ndiv, int min_n,

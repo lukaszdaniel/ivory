@@ -129,8 +129,7 @@
         result <- try(cacheMetaData(.GlobalEnv, TRUE))
         ## still attach  methods package if global env has bad objets
         if(inherits(result, "try-error"))
-          warning("apparently bad method or class metadata in saved environment;\n",
-                  "move the file or remove the class/method")
+          warning("apparently bad method or class metadata in saved environment;\nmove the file or remove the class/method")
     }
 }
 
@@ -142,4 +141,4 @@
 .saveImage <- FALSE
 
 ## cheap dQuote(): want ASCII quotes, not fancy nor translated ones
-.dQ <- function (x) paste0('"', x, '"')
+.dQ <- function (x) dQuote(x)

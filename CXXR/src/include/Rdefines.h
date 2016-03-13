@@ -128,8 +128,8 @@ extern "C" {
 #define NUMERIC_VALUE(x)	Rf_asReal(x)
 #define CHARACTER_VALUE(x)	CHAR(Rf_asChar(x))
 #define STRING_VALUE(x)		CHAR(Rf_asChar(x))
-#define LIST_VALUE(x)		Rf_error("the 'value' of a list object is not defined")
-#define RAW_VALUE(x)		Rf_error("the 'value' of a raw object is not defined")
+#define LIST_VALUE(x)		Rf_error(_("the 'value' of a list object is not defined"))
+#define RAW_VALUE(x)		Rf_error(_("the 'value' of a raw object is not defined"))
 
 #define SET_ELEMENT(x, i, val)	SET_VECTOR_ELT(x, i, val)
 #define GET_ATTR(x,what)       	Rf_getAttrib(x, what)
@@ -162,25 +162,7 @@ extern "C" {
 #define s_object                SEXPREC
 #define S_EVALUATOR             /**/
 
-/* These conflict with definitions in R_ext/Boolean.h,
-   but spatstat relies on them in a C file */
-#ifdef __cplusplus
-# ifndef R_EXT_BOOLEAN_H_
-#  ifndef TRUE
-#   define TRUE 1
-#  endif
-#  ifndef FALSE
-#   define FALSE 0
-#  endif
-# endif
-#else
-#  ifndef TRUE
-#   define TRUE 1
-#  endif
-#  ifndef FALSE
-#   define FALSE 0
-#  endif
-#endif
+#include <R_ext/Boolean.h>
 
 #define COPY_TO_USER_STRING(x)	mkChar(x)
 #define CREATE_STRING_VECTOR(x)	mkChar(x)

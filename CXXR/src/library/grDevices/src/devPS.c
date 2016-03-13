@@ -61,9 +61,6 @@ extern int errno;
 #include "zlib.h"
 #include "localization.h"
 
-#ifndef max
-#define max(a,b) ((a > b) ? a : b)
-#endif
 
 /* from connections.o */
 extern gzFile R_gzopen (const char *path, const char *mode);

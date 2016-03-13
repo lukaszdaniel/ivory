@@ -238,7 +238,7 @@ function(packages, lib.loc = NULL, verbose = FALSE)
     if(!length(packages)) return()
     one <- function(p) {
         if(verbose)
-            message(sprintf("processing %s", p))
+            message(gettextf("processing %s", p))
         dir <- system.file(package = p, lib.loc = lib.loc)
         if(dir == "") return()
         meta <- .read_description(file.path(dir, "DESCRIPTION"))
@@ -403,7 +403,7 @@ function(db, verbose = FALSE)
         bad <- rbind(bad,
                      .gather(urls[ind],
                              parents[ind],
-                             m = rep.int("Empty URL", len)))
+                             m = rep.int(gettext("Empty URL", domain = "R-tools"), len)))
     }
 
     ## Invalid URI schemes.
@@ -417,10 +417,10 @@ function(db, verbose = FALSE)
                          "javascript")))
     if(any(ind)) {
         len <- sum(ind)
-        msg <- rep.int("Invalid URI scheme", len)
+        msg <- rep.int(gettext("Invalid URI scheme", domain = "R-tools"), len)
         doi <- schemes[ind] == "doi"
         if(any(doi))
-            msg[doi] <- paste(msg[doi], "(use \\doi for DOIs)")
+            msg[doi] <- gettext("Invalid URI scheme (use \\doi for DOIs)", domain = "R-tools")
         bad <- rbind(bad,
                      .gather(urls[ind], parents[ind], m = msg))
     }

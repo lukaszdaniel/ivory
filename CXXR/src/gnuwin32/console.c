@@ -30,7 +30,7 @@
 #include <config.h>
 #endif
 
-#include "win-nls.h"
+#include <localization.h>
 #include <R_ext/Boolean.h>
 extern Rboolean mbcslocale;
 
@@ -1004,8 +1004,11 @@ static void performCompletion(control c)
             consolewrites(c, "\n");
 	    consolewrites(c, CHAR(STRING_ELT(VECTOR_ELT(ans, POSSIBLE), i)));
 	}
-	if (alen > max_show)
-	    consolewrites(c, "\n[...truncated]");
+	if (alen > max_show) {
+		consolewrites(c, "\n");
+	    const char *trunc = _("[... truncated]");
+	    consolewrites(c, trunc);
+	}
 	consolewrites(c, "\n");
 	p->wipe_completion = 1;
     }
@@ -2086,7 +2089,7 @@ void consoleprint(console c)
 	if (clinp + fh >= rr) {
 	    if (cp > 1) nextpage(lpr);
 	    gdrawstr(lpr, f, Black, pt(left, top), title);
-	    snprintf(msg, LF_FACESIZE + 128, "Page %d", cp++);
+	    snprintf(msg, LF_FACESIZE + 128, _("Page %d"), cp++);
 	    gdrawstr(lpr, f, Black,
 		     pt(cc - gstrwidth(lpr, f, msg) - 1, top),
 		     msg);
