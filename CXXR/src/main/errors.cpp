@@ -45,7 +45,6 @@
 #include <Rconnections.h>
 #include <Rinterface.h>
 #include <R_ext/GraphicsEngine.h> /* for GEonExit */
-#include <Rmath.h> /* for imax2 */
 #include <R_ext/Print.h>
 #include <cstdarg>
 

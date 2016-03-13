@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-13 10:22+0100\n"
+"POT-Creation-Date: 2016-03-13 22:46+0100\n"
 "PO-Revision-Date: 2011-02-18 09:09+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -474,12 +474,13 @@ msgstr "intern feil i do_random1"
 msgid "End of file"
 msgstr "linjeskift"
 
-#: src/extra/trio/trio.c:7618 src/main/builtin.cpp:837
+#: src/extra/trio/trio.c:7618 src/main/builtin.cpp:838
 #: src/main/options.cpp:663
 msgid "invalid argument"
 msgstr "ugyldig argument"
 
-#: src/extra/trio/trio.c:7620 src/main/dotcode.cpp:505 src/main/seq.cpp:933
+#: src/extra/trio/trio.c:7620 src/main/dotcode.cpp:484
+#: src/main/dotcode.cpp:579 src/main/dotcode.cpp:1092 src/main/seq.cpp:933
 msgid "too many arguments"
 msgstr "for mange argument"
 
@@ -514,7 +515,7 @@ msgid ""
 "please set environment variable 'TZ'"
 msgstr ""
 
-#: src/gnuwin32/console.c:1009 src/main/errors.cpp:248
+#: src/gnuwin32/console.c:1009 src/main/errors.cpp:247
 msgid "[... truncated]"
 msgstr ""
 
@@ -588,69 +589,70 @@ msgstr "feil ved vising av «%s»"
 
 #: src/gnuwin32/extra.c:119 src/gnuwin32/extra.c:161 src/gnuwin32/extra.c:349
 #: src/gnuwin32/extra.c:574 src/gnuwin32/extra.c:599 src/main/agrep.cpp:137
-#: src/main/agrep.cpp:141 src/main/agrep.cpp:781 src/main/agrep.cpp:786
-#: src/main/apply.cpp:336 src/main/apply.cpp:338 src/main/apply.cpp:341
+#: src/main/agrep.cpp:141 src/main/agrep.cpp:778 src/main/agrep.cpp:783
+#: src/main/apply.cpp:335 src/main/apply.cpp:337 src/main/apply.cpp:340
 #: src/main/array.cpp:101 src/main/array.cpp:1181 src/main/array.cpp:1319
-#: src/main/array.cpp:1321 src/main/array.cpp:1322 src/main/array.cpp:1664
-#: src/main/array.cpp:1666 src/main/array.cpp:1668 src/main/attrib.cpp:191
-#: src/main/builtin.cpp:87 src/main/builtin.cpp:91 src/main/builtin.cpp:109
-#: src/main/builtin.cpp:111 src/main/builtin.cpp:142 src/main/builtin.cpp:487
-#: src/main/builtin.cpp:502 src/main/builtin.cpp:686 src/main/builtin.cpp:688
-#: src/main/builtin.cpp:690 src/main/character.cpp:247
+#: src/main/array.cpp:1321 src/main/array.cpp:1322 src/main/array.cpp:1663
+#: src/main/array.cpp:1665 src/main/array.cpp:1667 src/main/attrib.cpp:189
+#: src/main/builtin.cpp:88 src/main/builtin.cpp:92 src/main/builtin.cpp:110
+#: src/main/builtin.cpp:112 src/main/builtin.cpp:143 src/main/builtin.cpp:488
+#: src/main/builtin.cpp:503 src/main/builtin.cpp:687 src/main/builtin.cpp:689
+#: src/main/builtin.cpp:691 src/main/character.cpp:247
 #: src/main/character.cpp:250 src/main/character.cpp:255
 #: src/main/character.cpp:807 src/main/character.cpp:810
-#: src/main/character.cpp:1305 src/main/character.cpp:1309
-#: src/main/character.cpp:1543 src/main/character.cpp:1547
-#: src/main/character.cpp:1606 src/main/character.cpp:1609
-#: src/main/connections.cpp:1242 src/main/connections.cpp:1248
-#: src/main/connections.cpp:1251 src/main/connections.cpp:1255
-#: src/main/connections.cpp:1400 src/main/connections.cpp:1416
-#: src/main/connections.cpp:1421 src/main/connections.cpp:2021
-#: src/main/connections.cpp:2027 src/main/connections.cpp:2031
-#: src/main/connections.cpp:2035 src/main/connections.cpp:2040
-#: src/main/connections.cpp:2688 src/main/connections.cpp:2693
-#: src/main/connections.cpp:2696 src/main/connections.cpp:2699
-#: src/main/connections.cpp:3079 src/main/connections.cpp:3084
-#: src/main/connections.cpp:3088 src/main/connections.cpp:3091
-#: src/main/connections.cpp:3095 src/main/connections.cpp:3110
-#: src/main/connections.cpp:3157 src/main/connections.cpp:3161
-#: src/main/connections.cpp:3164 src/main/connections.cpp:3167
-#: src/main/connections.cpp:3170 src/main/connections.cpp:3175
-#: src/main/connections.cpp:3218 src/main/connections.cpp:3224
-#: src/main/connections.cpp:3228 src/main/connections.cpp:3278
-#: src/main/connections.cpp:3281 src/main/connections.cpp:3542
-#: src/main/connections.cpp:3545 src/main/connections.cpp:3548
-#: src/main/connections.cpp:3554 src/main/connections.cpp:3666
-#: src/main/connections.cpp:3672 src/main/connections.cpp:3675
-#: src/main/connections.cpp:3826 src/main/connections.cpp:3829
-#: src/main/connections.cpp:3833 src/main/connections.cpp:3836
-#: src/main/connections.cpp:3956 src/main/connections.cpp:4083
-#: src/main/connections.cpp:4086 src/main/connections.cpp:4426
-#: src/main/connections.cpp:4449 src/main/connections.cpp:4487
-#: src/main/connections.cpp:4502 src/main/connections.cpp:4510
-#: src/main/connections.cpp:4536 src/main/connections.cpp:4684
-#: src/main/connections.cpp:4688 src/main/connections.cpp:4815
-#: src/main/connections.cpp:4817 src/main/connections.cpp:4819
-#: src/main/connections.cpp:4844 src/main/connections.cpp:4973
-#: src/main/connections.cpp:5010 src/main/connections.cpp:5015
-#: src/main/connections.cpp:5020 src/main/connections.cpp:5040
-#: src/main/context.cpp:242 src/main/context.cpp:251 src/main/context.cpp:255
-#: src/main/datetime.cpp:801 src/main/datetime.cpp:890
-#: src/main/datetime.cpp:892 src/main/datetime.cpp:896
-#: src/main/datetime.cpp:1063 src/main/datetime.cpp:1065
-#: src/main/datetime.cpp:1268 src/main/debug.cpp:244 src/main/deparse.cpp:419
-#: src/main/dotcode.cpp:508 src/main/dotcode.cpp:512 src/main/dotcode.cpp:517
-#: src/main/dounzip.cpp:333 src/main/dounzip.cpp:340 src/main/dounzip.cpp:350
-#: src/main/dounzip.cpp:355 src/main/dounzip.cpp:359 src/main/dounzip.cpp:363
-#: src/main/envir.cpp:710 src/main/envir.cpp:713 src/main/envir.cpp:794
-#: src/main/envir.cpp:798 src/main/envir.cpp:854 src/main/envir.cpp:869
-#: src/main/envir.cpp:875 src/main/envir.cpp:975 src/main/envir.cpp:983
-#: src/main/envir.cpp:990 src/main/envir.cpp:1001 src/main/envir.cpp:1167
-#: src/main/envir.cpp:1361 src/main/envir.cpp:1532 src/main/envir.cpp:1543
-#: src/main/envir.cpp:1550 src/main/envir.cpp:1564 src/main/envir.cpp:2015
+#: src/main/character.cpp:1303 src/main/character.cpp:1307
+#: src/main/character.cpp:1310 src/main/character.cpp:1541
+#: src/main/character.cpp:1545 src/main/character.cpp:1604
+#: src/main/character.cpp:1607 src/main/connections.cpp:1241
+#: src/main/connections.cpp:1247 src/main/connections.cpp:1250
+#: src/main/connections.cpp:1254 src/main/connections.cpp:1398
+#: src/main/connections.cpp:1414 src/main/connections.cpp:1419
+#: src/main/connections.cpp:2019 src/main/connections.cpp:2025
+#: src/main/connections.cpp:2029 src/main/connections.cpp:2033
+#: src/main/connections.cpp:2038 src/main/connections.cpp:2686
+#: src/main/connections.cpp:2691 src/main/connections.cpp:2694
+#: src/main/connections.cpp:2697 src/main/connections.cpp:3077
+#: src/main/connections.cpp:3082 src/main/connections.cpp:3086
+#: src/main/connections.cpp:3089 src/main/connections.cpp:3093
+#: src/main/connections.cpp:3108 src/main/connections.cpp:3155
+#: src/main/connections.cpp:3159 src/main/connections.cpp:3162
+#: src/main/connections.cpp:3165 src/main/connections.cpp:3168
+#: src/main/connections.cpp:3173 src/main/connections.cpp:3216
+#: src/main/connections.cpp:3222 src/main/connections.cpp:3226
+#: src/main/connections.cpp:3276 src/main/connections.cpp:3279
+#: src/main/connections.cpp:3540 src/main/connections.cpp:3543
+#: src/main/connections.cpp:3546 src/main/connections.cpp:3552
+#: src/main/connections.cpp:3664 src/main/connections.cpp:3670
+#: src/main/connections.cpp:3673 src/main/connections.cpp:3824
+#: src/main/connections.cpp:3827 src/main/connections.cpp:3831
+#: src/main/connections.cpp:3834 src/main/connections.cpp:3954
+#: src/main/connections.cpp:4081 src/main/connections.cpp:4084
+#: src/main/connections.cpp:4424 src/main/connections.cpp:4447
+#: src/main/connections.cpp:4485 src/main/connections.cpp:4500
+#: src/main/connections.cpp:4508 src/main/connections.cpp:4534
+#: src/main/connections.cpp:4682 src/main/connections.cpp:4686
+#: src/main/connections.cpp:4813 src/main/connections.cpp:4815
+#: src/main/connections.cpp:4817 src/main/connections.cpp:4842
+#: src/main/connections.cpp:4971 src/main/connections.cpp:5008
+#: src/main/connections.cpp:5013 src/main/connections.cpp:5018
+#: src/main/connections.cpp:5038 src/main/context.cpp:242
+#: src/main/context.cpp:251 src/main/context.cpp:255 src/main/datetime.cpp:801
+#: src/main/datetime.cpp:890 src/main/datetime.cpp:892
+#: src/main/datetime.cpp:896 src/main/datetime.cpp:1063
+#: src/main/datetime.cpp:1065 src/main/datetime.cpp:1268
+#: src/main/debug.cpp:243 src/main/deparse.cpp:420 src/main/dotcode.cpp:487
+#: src/main/dotcode.cpp:491 src/main/dotcode.cpp:496 src/main/dounzip.cpp:333
+#: src/main/dounzip.cpp:340 src/main/dounzip.cpp:350 src/main/dounzip.cpp:355
+#: src/main/dounzip.cpp:359 src/main/dounzip.cpp:363 src/main/envir.cpp:711
+#: src/main/envir.cpp:714 src/main/envir.cpp:795 src/main/envir.cpp:799
+#: src/main/envir.cpp:855 src/main/envir.cpp:870 src/main/envir.cpp:876
+#: src/main/envir.cpp:976 src/main/envir.cpp:984 src/main/envir.cpp:991
+#: src/main/envir.cpp:1002 src/main/envir.cpp:1168 src/main/envir.cpp:1362
+#: src/main/envir.cpp:1533 src/main/envir.cpp:1544 src/main/envir.cpp:1551
+#: src/main/envir.cpp:1565 src/main/envir.cpp:2016
 #: src/main/Environment.cpp:307 src/main/Environment.cpp:319
-#: src/main/errors.cpp:996 src/main/eval.cpp:476 src/main/eval.cpp:485
-#: src/main/eval.cpp:488 src/main/grep.cpp:785 src/main/grep.cpp:790
+#: src/main/errors.cpp:995 src/main/eval.cpp:477 src/main/eval.cpp:486
+#: src/main/eval.cpp:489 src/main/grep.cpp:785 src/main/grep.cpp:790
 #: src/main/grep.cpp:1083 src/main/grep.cpp:1085 src/main/grep.cpp:1087
 #: src/main/grep.cpp:1531 src/main/grep.cpp:1535 src/main/grep.cpp:1540
 #: src/main/grep.cpp:2347 src/main/grep.cpp:2352 src/main/grep.cpp:2661
@@ -747,11 +749,11 @@ msgstr "kan ikkje redusera minnegrensa: ignorert"
 msgid "'%s' argument must be a character vector"
 msgstr "det første argumentet må vera ein teiknvektor"
 
-#: src/gnuwin32/extra.c:431 src/main/errors.cpp:998 src/main/errors.cpp:1000
-#: src/modules/lapack/Lapack.c:91 src/modules/lapack/Lapack.c:334
-#: src/modules/lapack/Lapack.c:364 src/modules/lapack/Lapack.c:412
-#: src/modules/lapack/Lapack.c:448 src/modules/lapack/Lapack.c:505
-#: src/modules/lapack/Lapack.c:749
+#: src/gnuwin32/extra.c:431 src/main/edit.cpp:147 src/main/errors.cpp:997
+#: src/main/errors.cpp:999 src/modules/lapack/Lapack.c:91
+#: src/modules/lapack/Lapack.c:334 src/modules/lapack/Lapack.c:364
+#: src/modules/lapack/Lapack.c:412 src/modules/lapack/Lapack.c:448
+#: src/modules/lapack/Lapack.c:505 src/modules/lapack/Lapack.c:749
 #, fuzzy, c-format
 msgid "'%s' argument must be a character string"
 msgstr "«norm» må vera ein teiknstreng"
@@ -825,15 +827,15 @@ msgid "broken Windows pipe"
 msgstr ""
 
 #: src/gnuwin32/run.c:733 src/main/connections.cpp:365
-#: src/main/connections.cpp:382 src/main/connections.cpp:2938
+#: src/main/connections.cpp:382 src/main/connections.cpp:2936
 #: src/main/printutils.cpp:937
 msgid "printing of extremely long output is truncated"
 msgstr "vising av veldig lang tekst vart trunkert"
 
 #: src/gnuwin32/run.c:747 src/gnuwin32/run.c:751 src/gnuwin32/run.c:764
-#: src/gnuwin32/run.c:792 src/main/connections.cpp:1356
-#: src/main/connections.cpp:1360 src/main/connections.cpp:1366
-#: src/main/connections.cpp:1380
+#: src/gnuwin32/run.c:792 src/main/connections.cpp:1354
+#: src/main/connections.cpp:1358 src/main/connections.cpp:1364
+#: src/main/connections.cpp:1378
 msgid "allocation of pipe connection failed"
 msgstr "klarte ikkje reservera røyrsamband"
 
@@ -1031,6 +1033,7 @@ msgid ""
 msgstr ""
 
 #: src/gnuwin32/getline/getline.c:1057 src/gnuwin32/getline/wc_history.c:142
+#: src/main/edit.cpp:127 src/main/eval.cpp:2090 src/main/eval.cpp:2109
 #: src/unix/hpdlfcn.c:156
 #, fuzzy, c-format
 msgid "unable to open file '%s'"
@@ -1079,7 +1082,7 @@ msgstr ""
 msgid "the 'value' of a raw object is not defined"
 msgstr ""
 
-#: src/include/CXXR/BinaryFunction.hpp:249 src/main/arithmetic.cpp:367
+#: src/include/CXXR/BinaryFunction.hpp:249 src/main/arithmetic.cpp:368
 #: src/main/relop.cpp:179
 msgid "longer object length is not a multiple of shorter object length"
 msgstr ""
@@ -1107,30 +1110,31 @@ msgstr "«replacement» har lengd null"
 msgid "number of items to replace is not a multiple of replacement length"
 msgstr "talet på element å byta ut er ikkje eit multiplum av ubytingslengda"
 
-#: src/main/agrep.cpp:139 src/main/agrep.cpp:783 src/main/character.cpp:1307
-#: src/main/character.cpp:1311 src/main/grep.cpp:787 src/main/grep.cpp:1533
+#: src/main/agrep.cpp:139 src/main/agrep.cpp:780 src/main/character.cpp:1305
+#: src/main/character.cpp:1309 src/main/grep.cpp:787 src/main/grep.cpp:1533
 #: src/main/grep.cpp:1537 src/main/grep.cpp:2349 src/main/grep.cpp:2663
 #, c-format
 msgid "argument '%s' has length > 1 and only the first element will be used"
 msgstr ""
 "argumentet «%s» har lengd større enn 1 (berre første elementet vert brukt)"
 
-#: src/main/agrep.cpp:198 src/main/agrep.cpp:827
-#, fuzzy
-msgid "'pattern' must be a non-empty character string"
+#: src/main/agrep.cpp:198 src/main/agrep.cpp:824 src/main/coerce.cpp:2724
+#, fuzzy, c-format
+msgid "'%s' argument must be a non-empty character string"
 msgstr "«title» må vera ein teiknstreng"
 
-#: src/main/agrep.cpp:209 src/main/agrep.cpp:836 src/main/grep.cpp:858
+#: src/main/agrep.cpp:209 src/main/agrep.cpp:833 src/main/grep.cpp:858
 #: src/main/grep.cpp:2407 src/main/grep.cpp:2716
 msgid "regular expression is invalid in this locale"
 msgstr "det regulære uttrykket er ugyldig i dette lokalet"
 
-#: src/main/agrep.cpp:215 src/main/agrep.cpp:631
-#, c-format
-msgid "regcomp error:  '%s'"
+#: src/main/agrep.cpp:215 src/main/agrep.cpp:630 src/main/agrep.cpp:839
+#: src/main/grep.cpp:2722
+#, fuzzy, c-format
+msgid "regcomp error: '%s'"
 msgstr "regcomp-feil: «%s»"
 
-#: src/main/agrep.cpp:247 src/main/agrep.cpp:881 src/main/grep.cpp:239
+#: src/main/agrep.cpp:247 src/main/agrep.cpp:878 src/main/grep.cpp:239
 #: src/main/grep.cpp:329 src/main/grep.cpp:440 src/main/grep.cpp:596
 #: src/main/grep.cpp:912 src/main/grep.cpp:2512 src/main/grep.cpp:2590
 #: src/main/grep.cpp:2753
@@ -1138,7 +1142,7 @@ msgstr "regcomp-feil: «%s»"
 msgid "input string %d is invalid in this locale"
 msgstr "innteksten «%d» er ugyldig i dette lokalet"
 
-#: src/main/agrep.cpp:533 src/main/agrep.cpp:771 src/main/grep.cpp:165
+#: src/main/agrep.cpp:533 src/main/agrep.cpp:769 src/main/grep.cpp:165
 #: src/main/grep.cpp:778 src/main/grep.cpp:780 src/main/grep.cpp:1069
 #: src/main/grep.cpp:1077 src/main/grep.cpp:1524 src/main/grep.cpp:1526
 #: src/main/grep.cpp:2339 src/main/grep.cpp:2341 src/main/grep.cpp:2651
@@ -1151,28 +1155,23 @@ msgstr "argumentet «%s» vert ikkje brukt"
 msgid "input string x[%d] is invalid in this locale"
 msgstr "innteksten «%d» er ugyldig i dette lokalet"
 
-#: src/main/agrep.cpp:668
+#: src/main/agrep.cpp:667
 #, fuzzy, c-format
 msgid "input string y[%d] is invalid in this locale"
 msgstr "innteksten «%d» er ugyldig i dette lokalet"
 
-#: src/main/agrep.cpp:842 src/main/grep.cpp:2722
+#: src/main/apply.cpp:104
 #, fuzzy, c-format
-msgid "regcomp error: '%s'"
-msgstr "regcomp-feil: «%s»"
+msgid "'%s' argument must be a vector"
+msgstr "det første argumentet må vera ein vektor"
 
-#: src/main/apply.cpp:103
-#, fuzzy
-msgid "'FUN.VALUE' must be a vector"
-msgstr "«FUN.VALUE» må vera ein vektor"
-
-#: src/main/apply.cpp:105 src/main/array.cpp:421 src/main/character.cpp:865
-#: src/main/character.cpp:1663 src/main/connections.cpp:3550
+#: src/main/apply.cpp:106 src/main/array.cpp:421 src/main/character.cpp:865
+#: src/main/character.cpp:1661 src/main/connections.cpp:3548
 #: src/main/context.cpp:293 src/main/context.cpp:311 src/main/datetime.cpp:702
 #: src/main/datetime.cpp:803 src/main/datetime.cpp:1067
-#: src/main/dotcode.cpp:233 src/main/errors.cpp:894 src/main/errors.cpp:929
-#: src/main/errors.cpp:1035 src/main/errors.cpp:1059 src/main/errors.cpp:1064
-#: src/main/errors.cpp:1291 src/main/identical.cpp:74
+#: src/main/dotcode.cpp:228 src/main/errors.cpp:893 src/main/errors.cpp:928
+#: src/main/errors.cpp:1034 src/main/errors.cpp:1058 src/main/errors.cpp:1063
+#: src/main/errors.cpp:1290 src/main/identical.cpp:74
 #: src/main/identical.cpp:75 src/main/identical.cpp:76
 #: src/main/identical.cpp:77 src/main/identical.cpp:78
 #: src/main/platform.cpp:2960 src/main/seq.cpp:202 src/main/seq.cpp:356
@@ -1191,24 +1190,22 @@ msgstr "«FUN.VALUE» må vera ein vektor"
 msgid "invalid '%s' value"
 msgstr "ugyldig «%s»-verdi"
 
-#: src/main/apply.cpp:108 src/main/complex.c:755
+#: src/main/apply.cpp:109 src/main/complex.c:755
 msgid "invalid length"
 msgstr "ugyldig lengd"
 
-#: src/main/apply.cpp:113
+#: src/main/apply.cpp:114
 msgid "long vectors are not supported for matrix/array results"
 msgstr ""
 
-#: src/main/apply.cpp:120
+#: src/main/apply.cpp:121
 #, c-format
 msgid "type '%s' is not supported"
 msgstr "typen «%s» er ikkje støtta"
 
-#: src/main/apply.cpp:168
+#: src/main/apply.cpp:169
 #, fuzzy, c-format
-msgid ""
-"values must be length %d,\n"
-" but FUN(X[[%d]]) result is length %d"
+msgid "values must be length %d, but 'FUN(X[[%d]])' result is length %d"
 msgstr ""
 "verdiar må ha lengda %d,\n"
 " men resultatet av «FUN(X[[%d]])» har lengd %d"
@@ -1219,9 +1216,7 @@ msgstr ""
 
 #: src/main/apply.cpp:182
 #, fuzzy, c-format
-msgid ""
-"values must be type '%s',\n"
-" but FUN(X[[%d]]) result is type '%s'"
+msgid "values must be type '%s', but 'FUN(X[[%d]])' result is type '%s'"
 msgstr ""
 "verdiar må ha typen «%s»,\n"
 " men resultatet av «FUN(X[[%d]])» har typen «%s»"
@@ -1231,13 +1226,12 @@ msgstr ""
 msgid "dimnames(<value>) is neither NULL nor list of length %d"
 msgstr ""
 
-#: src/main/ArgList.cpp:114 src/main/eval.cpp:626
+#: src/main/ArgList.cpp:114 src/main/eval.cpp:627
 #, c-format
 msgid "argument %d is empty"
 msgstr "argumentet %d er tomt"
 
-#: src/main/ArgList.cpp:118 src/main/arithmetic.cpp:1215
-#: src/main/arithmetic.cpp:1237 src/main/envir.cpp:880
+#: src/main/ArgList.cpp:118 src/main/envir.cpp:881
 #: src/main/Environment.cpp:375 src/main/Symbol.cpp:117
 #, fuzzy, c-format
 msgid "argument \"%s\" is missing, with no default"
@@ -1247,8 +1241,8 @@ msgstr "argumentet «%s» manglar, og har ingen standardverdi"
 msgid "dispatch error"
 msgstr "avsendingsfeil"
 
-#: src/main/ArgList.cpp:292 src/main/ArgList.cpp:302 src/main/builtin.cpp:872
-#: src/main/coerce.cpp:2460 src/main/coerce.cpp:2501
+#: src/main/ArgList.cpp:292 src/main/ArgList.cpp:302 src/main/builtin.cpp:873
+#: src/main/coerce.cpp:2455 src/main/coerce.cpp:2496
 #: src/main/DottedArgs.cpp:45 src/main/Symbol.cpp:99
 msgid "'...' used in an incorrect context"
 msgstr "«...» brukt i feil samanheng"
@@ -1290,97 +1284,101 @@ msgstr "delvis argumentsamsvar av «%s» til «%s»"
 msgid "could not find symbol \"%s\" in environment of the generic function"
 msgstr "fann ikkje symbolet «%s» i omgjevnaden til den generiske funksjonen"
 
-#: src/main/arithmetic.cpp:55
+#: src/main/arithmetic.cpp:56
 msgid "NaNs produced"
 msgstr "NaN-verdiar vart laga"
 
-#: src/main/arithmetic.cpp:56
+#: src/main/arithmetic.cpp:57
 #, fuzzy
 msgid "non-numeric argument to mathematical function"
 msgstr "ikkje-numerisk argument til matematisk funksjon"
 
-#: src/main/arithmetic.cpp:193
+#: src/main/arithmetic.cpp:194
 msgid "probable complete loss of accuracy in modulus"
 msgstr "truleg fullstendig tap av nøyaktigheit ved modulus-operasjon"
 
-#: src/main/arithmetic.cpp:314
+#: src/main/arithmetic.cpp:315
 msgid "operator needs one or two arguments"
 msgstr "operatoren treng eitt eller to argument"
 
-#: src/main/arithmetic.cpp:337
+#: src/main/arithmetic.cpp:338
 #, fuzzy
-msgid "non-numeric argument to binary operator"
+msgid "non-numeric argument passed to binary operator"
 msgstr "ikkje-numerisk argument til binæroperator"
 
-#: src/main/arithmetic.cpp:420 src/main/arithmetic.cpp:444
+#: src/main/arithmetic.cpp:421 src/main/arithmetic.cpp:445
 msgid "invalid unary operator"
 msgstr "ugyldig unæroperator"
 
-#: src/main/arithmetic.cpp:466
+#: src/main/arithmetic.cpp:467
 #, fuzzy
-msgid "invalid argument to unary operator"
+msgid "invalid argument passed to unary operator"
 msgstr "ugyldig argument til unæroperator"
 
-#: src/main/arithmetic.cpp:557
+#: src/main/arithmetic.cpp:558
 #, fuzzy
-msgid "NAs produced by integer overflow"
+msgid "NA values produced by integer overflow"
 msgstr "NA-verdiar produsert av heiltalsoverflyt"
 
-#: src/main/arithmetic.cpp:784
-msgid "unimplemented real function of 1 argument"
-msgstr "ikkje-implementert reell funksjon med 1 argument"
+#: src/main/arithmetic.cpp:785 src/main/arithmetic.cpp:1065
+#: src/main/arithmetic.cpp:1466 src/main/arithmetic.cpp:1601
+#: src/main/arithmetic.cpp:1702
+#, fuzzy, c-format
+msgid "unimplemented real function of %d numeric argument"
+msgid_plural "unimplemented real function of %d numeric arguments"
+msgstr[0] "ikkje-implementert reell funksjon med %d numeriske argument"
+msgstr[1] "ikkje-implementert reell funksjon med %d numeriske argument"
 
-#: src/main/arithmetic.cpp:795 src/main/complex.c:640 src/main/complex.c:710
+#: src/main/arithmetic.cpp:796 src/main/complex.c:640 src/main/complex.c:710
 msgid "unimplemented complex function"
 msgstr "ikkje-implementert kompleks funksjon"
 
-#: src/main/arithmetic.cpp:1065 src/main/arithmetic.cpp:1468
-#: src/main/arithmetic.cpp:1604 src/main/arithmetic.cpp:1706
-#, fuzzy, c-format
-msgid "unimplemented real function of %d numeric arguments"
-msgstr "ikkje-implementert reell funksjon med %d numeriske argument"
-
 #: src/main/arithmetic.cpp:1092
 #, fuzzy, c-format
-msgid "%d argument passed to '%s' which requires 1 or 2 arguments"
-msgid_plural "%d arguments passed to '%s'which requires 1 or 2 arguments"
-msgstr[0] "%d argument sende til «log», som tek 1 eller 2 argument"
-msgstr[1] "%d argument sende til «log», som tek 1 eller 2 argument"
+msgid "%d argument passed to '%s' function which requires 1 or 2 arguments"
+msgid_plural ""
+"%d arguments passed to '%s' function which requires 1 or 2 arguments"
+msgstr[0] "%d argument sendt til «%s», som tek %d argument"
+msgstr[1] "%d argument sendt til «%s», som tek %d argument"
 
-#: src/main/arithmetic.cpp:1118
+#: src/main/arithmetic.cpp:1117
 msgid "invalid second argument of length 0"
 msgstr "ugyldig andreargument av lengd 0"
 
-#: src/main/arithmetic.cpp:1247
+#: src/main/arithmetic.cpp:1214 src/main/arithmetic.cpp:1236
+#, fuzzy, c-format
+msgid "argument '%s' is missing, with no default"
+msgstr "argumentet «%s» manglar, og har ingen standardverdi"
+
+#: src/main/arithmetic.cpp:1246
 msgid "invalid argument 'base' of length 0"
 msgstr "ugyldig argument «base» av lengd 0"
 
-#: src/main/array.cpp:93 src/main/array.cpp:1498
+#: src/main/array.cpp:94 src/main/array.cpp:1498
 #, fuzzy, c-format
-msgid "'data' must be of a vector type, was '%s'"
+msgid "'data' argument must be of a vector type, was '%s'"
 msgstr "«path» må vera ein teiknvektor"
 
 #: src/main/array.cpp:108 src/main/array.cpp:116
 msgid "non-numeric matrix extent"
 msgstr "ikkje-numerisk matrisestorleik"
 
-#: src/main/array.cpp:111 src/main/array.cpp:1602
+#: src/main/array.cpp:111 src/main/array.cpp:119 src/main/array.cpp:1601
+#: src/main/array.cpp:1606
+#, fuzzy, c-format
+msgid "invalid '%s' value (too large or NA)"
+msgstr "ugyldig «nrow»-verdi (for stor eller NA)"
+
+#: src/main/array.cpp:113 src/main/array.cpp:121 src/main/array.cpp:1603
+#: src/main/array.cpp:1608
+#, fuzzy, c-format
+msgid "invalid '%s' value (< 0)"
+msgstr "negativ «nrow»-verdi"
+
+#: src/main/array.cpp:124 src/main/array.cpp:127 src/main/array.cpp:135
 #, fuzzy
-msgid "invalid 'nrow' value (too large or NA)"
-msgstr "ugyldig «ncol»-verdi (for stor eller NA)"
-
-#: src/main/array.cpp:113 src/main/array.cpp:1604
-#, fuzzy
-msgid "invalid 'nrow' value (< 0)"
-msgstr "negativ «ncol»-verdi"
-
-#: src/main/array.cpp:119 src/main/array.cpp:1607
-msgid "invalid 'ncol' value (too large or NA)"
-msgstr "ugyldig «ncol»-verdi (for stor eller NA)"
-
-#: src/main/array.cpp:121 src/main/array.cpp:1609
-msgid "invalid 'ncol' value (< 0)"
-msgstr "negativ «ncol»-verdi"
+msgid "data is too long"
+msgstr "zip-adressa er for lang"
 
 #: src/main/array.cpp:130
 msgid "nc = 0 for non-null data"
@@ -1410,48 +1408,48 @@ msgstr ""
 msgid "data length exceeds size of matrix"
 msgstr "datalengda er større enn matrisa"
 
-#: src/main/array.cpp:161 src/main/array.cpp:1510 src/main/array.cpp:1616
+#: src/main/array.cpp:161 src/main/array.cpp:1509 src/main/array.cpp:1615
 msgid "too many elements specified"
 msgstr "for mange oppgjevne element"
 
 #: src/main/array.cpp:219
 #, fuzzy
-msgid "negative extents to matrix"
+msgid "negative extents passed to matrix"
 msgstr "negativ matrisestorleik"
 
 #: src/main/array.cpp:222
 #, fuzzy
-msgid "allocMatrix: too many elements specified"
+msgid "'allocMatrix()': too many elements specified"
 msgstr "allocMatrix: for mange oppgjevne element"
 
 #: src/main/array.cpp:250
 #, fuzzy
-msgid "negative extents to 3D array"
+msgid "negative extents passed to 3D array"
 msgstr "negativ storleik på 3D-array"
 
 #: src/main/array.cpp:253
 #, fuzzy
-msgid "alloc3Darray: too many elements specified"
+msgid "'alloc3Darray()': too many elements specified"
 msgstr "alloc3Darray: for mange oppgjevne element"
 
 #: src/main/array.cpp:278
 #, fuzzy
-msgid "'allocArray': too many elements specified by 'dims'"
+msgid "'allocArray()': too many elements specified by 'dims' argument"
 msgstr "allocArray: for mange element oppgjevne i «dims»"
 
 #: src/main/array.cpp:434
 #, fuzzy, c-format
-msgid "'%s' must be a list or atomic vector"
+msgid "'%s' argument must be a list or atomic vector"
 msgstr "det første argumentet må vera ein vektor"
 
 #: src/main/array.cpp:471
 #, fuzzy, c-format
-msgid "a matrix-like object is required as argument to '%s'"
+msgid "a matrix-like object is required as argument passed to '%s'"
 msgstr "«row» og «col» tek berre matriseliknande element"
 
 #: src/main/array.cpp:675
 #, fuzzy
-msgid "requires numeric/complex matrix/vector arguments"
+msgid "numeric/complex matrix/vector arguments are required"
 msgstr "tek berre numeriske eller komplekse matrise- og vektorargument"
 
 #: src/main/array.cpp:785 src/main/array.cpp:789 src/main/array.cpp:793
@@ -1482,42 +1480,43 @@ msgstr "«perm[%d]» er ikkje i samsvar med eit dimensjonsnamn"
 
 #: src/main/array.cpp:1179
 #, fuzzy
-msgid "value out of range in 'perm'"
+msgid "value is out of range in 'perm' argument"
 msgstr "verdien til «perm» er utanfor gyldig verdiområde"
 
-#: src/main/array.cpp:1261
-#, fuzzy
-msgid "'resize' must be TRUE or FALSE"
-msgstr "«all.x» må vera TRUE eller FALSE"
+#: src/main/array.cpp:1261 src/main/connections.cpp:5478
+#: src/main/debug.cpp:116
+#, fuzzy, c-format
+msgid "'%s' argument must be TRUE or FALSE"
+msgstr "«resize» må vera TRUE eller FALSE"
 
 #: src/main/array.cpp:1330
-#, fuzzy
-msgid "'x' must be numeric"
+#, fuzzy, c-format
+msgid "'%s' must be numeric"
 msgstr "«x» må vera numerisk"
 
 #: src/main/array.cpp:1333
-#, fuzzy
-msgid "'x' is too short"
+#, fuzzy, c-format
+msgid "'%s' argument is too short"
 msgstr "argumentet «file» er for langt"
 
-#: src/main/array.cpp:1506
-#, fuzzy
-msgid "'dims' cannot be of length 0"
+#: src/main/array.cpp:1505
+#, fuzzy, c-format
+msgid "'%s' argument cannot be of length 0"
 msgstr "«hadj» må ha lengd 1"
 
-#: src/main/array.cpp:1612
-#, fuzzy
-msgid "'x' must have positive length"
+#: src/main/array.cpp:1611
+#, fuzzy, c-format
+msgid "'%s' must have positive length"
 msgstr "«value» må ha positiv lengd"
 
-#: src/main/array.cpp:1677
+#: src/main/array.cpp:1676
 #, c-format
-msgid "singular matrix in 'backsolve'. First zero in diagonal [%d]"
+msgid "singular matrix in 'backsolve()'. First zero in diagonal [%d]"
 msgstr ""
 
-#: src/main/attrib.cpp:53 src/main/attrib.cpp:228 src/main/attrib.cpp:265
-#: src/main/attrib.cpp:286 src/main/attrib.cpp:373 src/main/attrib.cpp:420
-#: src/main/attrib.cpp:466
+#: src/main/attrib.cpp:53 src/main/attrib.cpp:226 src/main/attrib.cpp:263
+#: src/main/attrib.cpp:284 src/main/attrib.cpp:371 src/main/attrib.cpp:418
+#: src/main/attrib.cpp:464
 msgid "attempt to set an attribute on NULL"
 msgstr "prøvde å setja attributt på NULL"
 
@@ -1528,210 +1527,234 @@ msgstr ""
 "radnamn må vera av typen «character» (tekst) eller «integer» (heiltal), "
 "ikkje «%s»"
 
-#: src/main/attrib.cpp:132
+#: src/main/attrib.cpp:131
 #, fuzzy, c-format
-msgid "getAttrib: invalid type (%s) for TAG"
+msgid "'getAttrib()': invalid type (%s) for TAG"
 msgstr "getAttrib: ugyldig type (%s) for TAG"
 
-#: src/main/attrib.cpp:347
+#: src/main/attrib.cpp:145
+msgid "old list is no longer allowed for dimnames attribute"
+msgstr ""
+
+#: src/main/attrib.cpp:154
+msgid "cannot have attributes on a 'CHARSXP'"
+msgstr ""
+
+#: src/main/attrib.cpp:327
+msgid "cannot set attribute on a 'CHARSXP'"
+msgstr ""
+
+#: src/main/attrib.cpp:345
 #, c-format
 msgid "invalid type (%s) for 'names': must be vector"
 msgstr "ugyldig type (%s) for «names»: må vera ein vektor"
 
-#: src/main/attrib.cpp:350
+#: src/main/attrib.cpp:348
 #, c-format
 msgid "'names' attribute [%d] must be the same length as the vector [%d]"
 msgstr "«names»-attributtet [%d] må ha same lengd som vektoren [%d]"
 
-#: src/main/attrib.cpp:355
+#: src/main/attrib.cpp:353
 #, fuzzy
-msgid "names() applied to a non-vector"
+msgid "'names()' function applied to a non-vector"
 msgstr "names() brukt på ikkje-vektor"
 
-#: src/main/attrib.cpp:363
+#: src/main/attrib.cpp:361
 msgid "invalid time series parameters specified"
 msgstr "ugyldig tidsrekkjeparametrar oppgjevne"
 
-#: src/main/attrib.cpp:377
-#, fuzzy
-msgid "'tsp' attribute must be numeric"
+#: src/main/attrib.cpp:375
+#, fuzzy, c-format
+msgid "'%s' attribute must be numeric"
 msgstr "«tsp»-attributtet må vera numerisk"
 
-#: src/main/attrib.cpp:383
+#: src/main/attrib.cpp:381
 msgid "'tsp' attribute must be numeric of length three"
 msgstr "«tsp»-attributtet må vera numerisk av lengd tre"
 
-#: src/main/attrib.cpp:400
+#: src/main/attrib.cpp:398
 msgid "cannot assign 'tsp' to zero-length vector"
 msgstr "kan ikkje tildela «tsp» til vektor av lengd null"
 
-#: src/main/attrib.cpp:427
+#: src/main/attrib.cpp:425
 msgid "attempt to set invalid 'comment' attribute"
 msgstr "prøvde å definera eit ugyldig «comment»-attributt"
 
-#: src/main/attrib.cpp:475
+#: src/main/attrib.cpp:473
 msgid "adding class \"factor\" to an invalid object"
 msgstr "legg klassen «factor» til eit ugyldig objekt"
 
-#: src/main/attrib.cpp:505
+#: src/main/attrib.cpp:503
 msgid "attempt to set invalid 'class' attribute"
 msgstr "prøvde å definera eit ugyldig «class»-attributt"
 
+#: src/main/attrib.cpp:788
+#, fuzzy
+msgid "invalid class argument passed to internal '.class_cache'"
+msgstr "ugyldig argumenttal i call_R"
+
+#: src/main/attrib.cpp:816
+#, c-format
+msgid "class \"%s\" has no 'names' slot"
+msgstr ""
+
 #: src/main/attrib.cpp:818
 #, c-format
-msgid "class '%s' has no 'names' slot"
+msgid ""
+"class \"%s\" has no 'names' slot; assigning a 'names' attribute will create "
+"an invalid object"
 msgstr ""
 
-#: src/main/attrib.cpp:820
+#: src/main/attrib.cpp:821
 #, c-format
 msgid ""
-"class '%s' has no 'names' slot; assigning a names attribute will create an "
-"invalid object"
+"invalid to use 'names()<-' to set the 'names' slot in a non-vector class "
+"(\"%s\")"
 msgstr ""
 
-#: src/main/attrib.cpp:823
-#, c-format
-msgid ""
-"invalid to use names()<- to set the 'names' slot in a non-vector class ('%s')"
-msgstr ""
-
-#: src/main/attrib.cpp:852
+#: src/main/attrib.cpp:850
 msgid "incompatible 'names' argument"
 msgstr "ikkje-kompatibelt «names»-argument"
 
-#: src/main/attrib.cpp:907
+#: src/main/attrib.cpp:905
 #, c-format
 msgid "invalid type (%s) to set 'names' attribute"
 msgstr "ugyldig type (%s) for å setja «names»-attributt"
 
-#: src/main/attrib.cpp:967
+#: src/main/attrib.cpp:964
 #, fuzzy
-msgid "'dimnames' applied to non-array"
+msgid "'dimnames()' applied to non-array"
 msgstr "«dimnames» brukt på ikkje-array"
 
-#: src/main/attrib.cpp:972 src/main/coerce.cpp:2392
-#, c-format
-msgid "'%s' must be a list"
-msgstr "«%s» må vera ei liste"
+#: src/main/attrib.cpp:969 src/main/coerce.cpp:2387 src/main/engine.cpp:2998
+#, fuzzy, c-format
+msgid "'%s' argument must be a list"
+msgstr "«list»-argumentet må vera ei liste"
 
-#: src/main/attrib.cpp:975 src/main/attrib.cpp:1003
+#: src/main/attrib.cpp:972 src/main/attrib.cpp:999
 #, c-format
 msgid "length of 'dimnames' [%d] must match that of 'dims' [%d]"
 msgstr "lengda til «dimnames» [%d] må vera i samsvar med «dims» [%d]"
 
-#: src/main/attrib.cpp:1009
+#: src/main/attrib.cpp:1005
 #, c-format
 msgid "invalid type (%s) for 'dimnames' (must be a vector)"
 msgstr "ugyldig type (%s) for «dimnames» (må vera ein vektor)"
 
-#: src/main/attrib.cpp:1012
+#: src/main/attrib.cpp:1007
 #, c-format
 msgid "length of 'dimnames' [%d] not equal to array extent"
 msgstr "lengda til «dimnames» [%d] er ikkje lik array-storleiken"
 
-#: src/main/attrib.cpp:1063 src/main/builtin.cpp:81 src/main/builtin.cpp:105
-#: src/main/envir.cpp:701 src/main/envir.cpp:790 src/main/envir.cpp:841
-#: src/main/envir.cpp:963 src/main/paste.cpp:84 src/main/paste.cpp:301
+#: src/main/attrib.cpp:1057 src/main/builtin.cpp:82 src/main/builtin.cpp:106
+#: src/main/envir.cpp:702 src/main/envir.cpp:791 src/main/envir.cpp:842
+#: src/main/envir.cpp:964 src/main/paste.cpp:84 src/main/paste.cpp:301
 #: src/main/random.cpp:223 src/main/random.cpp:252 src/main/unique.cpp:1740
 msgid "invalid first argument"
 msgstr "ugyldig førsteargument"
 
-#: src/main/attrib.cpp:1066
+#: src/main/attrib.cpp:1060
 msgid "invalid second argument"
 msgstr "ugyldig andreargument"
 
-#: src/main/attrib.cpp:1074
+#: src/main/attrib.cpp:1068
 msgid "length-0 dimension vector is invalid"
 msgstr "dimensjonsvektoren kan ikkje ha lengd 0"
 
-#: src/main/attrib.cpp:1079
+#: src/main/attrib.cpp:1073
 #, fuzzy
-msgid "the dims contain missing values"
+msgid "the dimensions contain missing values"
 msgstr "dimensjonane inneheld manglande verdiar"
 
-#: src/main/attrib.cpp:1081
+#: src/main/attrib.cpp:1075
 #, fuzzy
-msgid "the dims contain negative values"
+msgid "the dimensions contain negative values"
 msgstr "dimensjonane inneheld negative verdiar"
 
-#: src/main/attrib.cpp:1086
+#: src/main/attrib.cpp:1080
 #, fuzzy
-msgid "dims do not match the length of object"
+msgid "dimensions do not match the length of object"
 msgstr "«dims» [produkt %d] er ikkje i samsvar med lengda av objektet [%d]"
 
-#: src/main/attrib.cpp:1089
+#: src/main/attrib.cpp:1082
 #, fuzzy, c-format
-msgid "dims [product %d] do not match the length of object [%d]"
+msgid "dimensions [product %d] do not match the length of object [%d]"
 msgstr "«dims» [produkt %d] er ikkje i samsvar med lengda av objektet [%d]"
 
-#: src/main/attrib.cpp:1158
+#: src/main/attrib.cpp:1151
 #, fuzzy
 msgid "duplicated levels in factors are deprecated"
 msgstr "faktorar kan ikkje lenger ha dupliserte nivå"
 
-#: src/main/attrib.cpp:1178
+#: src/main/attrib.cpp:1171
 msgid "attributes must be a list or NULL"
 msgstr "attributta må vera ei liste eller NULL"
 
-#: src/main/attrib.cpp:1183 src/main/RObject.cpp:144
+#: src/main/attrib.cpp:1176 src/main/RObject.cpp:144
 msgid "attributes must be named"
 msgstr "attributta må ha namn"
 
-#: src/main/attrib.cpp:1187
+#: src/main/attrib.cpp:1180
 #, c-format
 msgid "all attributes must have names [%d does not]"
 msgstr "alle attributta må ha namn (%d har ikkje det)"
 
-#: src/main/attrib.cpp:1285
+#: src/main/attrib.cpp:1271
 #, fuzzy
-msgid "'which' must be of mode character"
+msgid "either 2 or 3 arguments are required"
+msgstr "krev strengargument"
+
+#: src/main/attrib.cpp:1278
+#, fuzzy
+msgid "'which' attribute must be of mode character"
 msgstr "«which» må ha modus «character»"
 
-#: src/main/attrib.cpp:1287
+#: src/main/attrib.cpp:1280
 msgid "exactly one attribute 'which' must be given"
 msgstr "nøyaktig eitt «which»-attributt må vera oppgjeve"
 
-#: src/main/attrib.cpp:1348 src/main/attrib.cpp:1371
+#: src/main/attrib.cpp:1341 src/main/attrib.cpp:1364
 #: src/main/subscript.cpp:254 src/main/subscript.cpp:258
 #: src/main/subset.cpp:969 src/main/subset.cpp:1022
 #, c-format
 msgid "partial match of '%s' to '%s'"
 msgstr "«%s» vert tolka som «%s»"
 
-#: src/main/attrib.cpp:1412
+#: src/main/attrib.cpp:1404
 #, fuzzy, c-format
 msgid "invalid type '%s' for slot name"
 msgstr "ugyldig type eller lengd på slot-namn"
 
-#: src/main/attrib.cpp:1449
-msgid "'name' must be non-null character string"
-msgstr "«name» må vera ein teiknstreng ulik null"
+#: src/main/attrib.cpp:1440
+#, fuzzy, c-format
+msgid "'%s' argument must be non-null character string"
+msgstr "«norm» må vera ein teiknstreng"
 
-#: src/main/attrib.cpp:1573 src/main/attrib.cpp:1644 src/main/attrib.cpp:1682
+#: src/main/attrib.cpp:1564 src/main/attrib.cpp:1635 src/main/attrib.cpp:1673
 msgid "invalid type or length for slot name"
 msgstr "ugyldig type eller lengd på slot-namn"
 
-#: src/main/attrib.cpp:1607
+#: src/main/attrib.cpp:1598
 #, c-format
 msgid "cannot get a slot (\"%s\") from an object of type \"%s\""
 msgstr "klarte ikkje henta slot («%s») frå eit objekt av typen «%s»"
 
-#: src/main/attrib.cpp:1618
+#: src/main/attrib.cpp:1609
 #, c-format
 msgid "no slot of name \"%s\" for this object of class \"%s\""
 msgstr ""
 "det finst ikkje ein slot med namnet «%s» for dette objektet av klassen «%s»"
 
-#: src/main/attrib.cpp:1635
+#: src/main/attrib.cpp:1626
 msgid "attempt to set slot on NULL object"
 msgstr "prøvde å setja slot på eit NULL-objekt"
 
-#: src/main/attrib.cpp:1677
+#: src/main/attrib.cpp:1668
 #, fuzzy
 msgid "formal classes cannot be used without the 'methods' package"
 msgstr "formelle klassar kan ikkje brukast utan «methods»-pakken"
 
-#: src/main/attrib.cpp:1689
+#: src/main/attrib.cpp:1680
 #, c-format
 msgid ""
 "trying to get slot \"%s\" from an object of a basic class (\"%s\") with no "
@@ -1740,166 +1763,188 @@ msgstr ""
 "prøver å henta slot «%s» frå eit objekt av ein grunnklasse («%s») utan slot-"
 "ar"
 
-#: src/main/attrib.cpp:1693
+#: src/main/attrib.cpp:1684
 #, fuzzy, c-format
 msgid ""
 "trying to get slot \"%s\" from an object (class \"%s\") that is not an S4 "
-"object "
+"object"
 msgstr ""
 "prøver å henta slot «%s» frå eit objekt (klasse «%s») som ikkje er eit S4-"
 "objekt"
 
-#: src/main/bind.cpp:187
+#: src/main/bind.cpp:188
 #, c-format
 msgid "resulting vector exceeds vector length limit in '%s'"
 msgstr ""
 
-#: src/main/bind.cpp:344 src/main/bind.cpp:383 src/main/bind.cpp:435
-#: src/main/bind.cpp:511 src/main/bind.cpp:539
-#, c-format
-msgid "type '%s' is unimplemented in '%s'"
-msgstr "typen «%s» er ikkje implementert i «%s»"
+#: src/main/bind.cpp:345 src/main/bind.cpp:384 src/main/bind.cpp:436
+#: src/main/bind.cpp:512 src/main/bind.cpp:540
+#, fuzzy, c-format
+msgid "type '%s' is unimplemented in '%s' function"
+msgstr "typen %d er ikkje implementert i «%s»"
 
-#: src/main/bind.cpp:761
-#, fuzzy
-msgid "repeated formal argument 'recursive'"
+#: src/main/bind.cpp:762 src/main/bind.cpp:773
+#, fuzzy, c-format
+msgid "repeated formal argument '%s'"
 msgstr "gjenteke formelt argument: «recursive»"
 
-#: src/main/bind.cpp:772
-msgid "repeated formal argument 'use.names'"
-msgstr "gjenteke formelt argument: «use.names»"
-
-#: src/main/bind.cpp:965
+#: src/main/bind.cpp:966
 #, fuzzy
-msgid "argument not a list"
+msgid "argument is not a list"
 msgstr "argumentet er ikkje ei liste"
 
-#: src/main/bind.cpp:1112
-#, c-format
-msgid "class name too long in '%s'"
+#: src/main/bind.cpp:1113
+#, fuzzy, c-format
+msgid "class name is too long in '%s'"
 msgstr "klassenamnet er for langt i «%s»"
 
-#: src/main/bind.cpp:1199
+#: src/main/bind.cpp:1200
 #, fuzzy, c-format
 msgid "cannot create a matrix from type '%s'"
 msgstr "kan ikkje laga matrise frå desse typane"
 
 #: src/main/bind.cpp:1268
 #, fuzzy, c-format
-msgid "number of rows of matrices must match (see arg %d)"
+msgid "number of rows of matrices must match (see argument %d)"
 msgstr "talet på rader i matrisene må vera like (sjå argument %d)"
 
-#: src/main/bind.cpp:1527
+#: src/main/bind.cpp:1295
 #, fuzzy, c-format
-msgid "number of columns of matrices must match (see arg %d)"
+msgid ""
+"number of rows of result is not a multiple of vector length (argument %d)"
+msgstr "talet på element å byta ut er ikkje eit multiplum av ubytingslengda"
+
+#: src/main/bind.cpp:1526
+#, fuzzy, c-format
+msgid "number of columns of matrices must match (see argument %d)"
 msgstr "talet på kolonnar i matrisene må vera like (sjå argument %d)"
 
-#: src/main/builtin.cpp:52
+#: src/main/bind.cpp:1555
+#, fuzzy, c-format
+msgid ""
+"number of columns of result is not a multiple of vector length (argument %d)"
+msgstr "talet på element å byta ut er ikkje eit multiplum av ubytingslengda"
+
+#: src/main/builtin.cpp:53
 msgid "vector size cannot be NA"
 msgstr "vektorstorleiken kan ikkje vera NA"
 
-#: src/main/builtin.cpp:58 src/main/builtin.cpp:66 src/main/sort.cpp:1337
+#: src/main/builtin.cpp:59 src/main/builtin.cpp:67 src/main/sort.cpp:1337
 msgid "vector size cannot be NA/NaN"
 msgstr "vektorstorleiken kan ikkje vera NA/NaN"
 
-#: src/main/builtin.cpp:59 src/main/builtin.cpp:67 src/main/sort.cpp:1338
+#: src/main/builtin.cpp:60 src/main/builtin.cpp:68 src/main/sort.cpp:1338
 msgid "vector size cannot be infinite"
 msgstr "vektorstorleiken kan ikkje vera uendeleg"
 
-#: src/main/builtin.cpp:60 src/main/builtin.cpp:68 src/main/builtin.cpp:846
+#: src/main/builtin.cpp:61 src/main/builtin.cpp:69 src/main/builtin.cpp:847
 #: src/main/sort.cpp:1339
 msgid "vector size specified is too large"
 msgstr "den oppgjevne vektorstorleiken er for stor"
 
-#: src/main/builtin.cpp:264
+#: src/main/builtin.cpp:265
 msgid "replacement object is not an environment"
 msgstr "erstattingsobjektet er ikkje ein omgjevnad"
 
-#: src/main/builtin.cpp:283
-msgid "'enclos' must be an environment"
-msgstr "«enclos» må vera ein omgjevnad"
+#: src/main/builtin.cpp:284 src/main/coerce.cpp:2391 src/main/engine.cpp:3001
+#: src/main/envir.cpp:741 src/main/envir.cpp:1385 src/main/envir.cpp:1423
+#, fuzzy, c-format
+msgid "'%s' argument must be an environment"
+msgstr "«env»-argumentet må vera ein omgjevnad"
 
-#: src/main/builtin.cpp:300 src/main/builtin.cpp:328
+#: src/main/builtin.cpp:301 src/main/builtin.cpp:329
 msgid "argument is not an environment"
 msgstr "argumentet er ikkje ein omgjevnad"
 
-#: src/main/builtin.cpp:302
+#: src/main/builtin.cpp:303
 msgid "the empty environment has no parent"
 msgstr "den tomme omgjevnaden har ikkje nokon forelder"
 
-#: src/main/builtin.cpp:330
+#: src/main/builtin.cpp:331
 msgid "can not set parent of the empty environment"
 msgstr "kan ikkje definera forelderen til den tomme omgjevnaden"
 
-#: src/main/builtin.cpp:332
+#: src/main/builtin.cpp:333
 #, fuzzy
 msgid "can not set the parent environment of a namespace"
 msgstr "kan ikkje definera forelderen til den tomme omgjevnaden"
 
-#: src/main/builtin.cpp:334
+#: src/main/builtin.cpp:335
 #, fuzzy
 msgid "can not set the parent environment of package imports"
 msgstr "kan ikkje definera forelderen til den tomme omgjevnaden"
 
-#: src/main/builtin.cpp:338
-msgid "'parent' is not an environment"
-msgstr "«parent» er ikkje ein omgjevnad"
+#: src/main/builtin.cpp:339 src/main/envir.cpp:1641 src/main/envir.cpp:1661
+#: src/main/envir.cpp:1686 src/main/envir.cpp:1700 src/main/envir.cpp:1713
+#: src/main/envir.cpp:1716 src/main/envir.cpp:1729 src/main/envir.cpp:1743
+#, fuzzy, c-format
+msgid "'%s' argument is not an environment"
+msgstr "argumentet er ikkje ein omgjevnad"
 
-#: src/main/builtin.cpp:476 src/main/connections.cpp:3688
-#: src/main/connections.cpp:4077 src/main/connections.cpp:4108
-#: src/main/connections.cpp:4493 src/main/connections.cpp:4560
-#: src/main/connections.cpp:4774 src/main/connections.cpp:4778
-#: src/main/connections.cpp:5189 src/main/deparse.cpp:378
-#: src/main/deparse.cpp:464 src/main/serialize.cpp:2009
+#: src/main/builtin.cpp:477 src/main/connections.cpp:3686
+#: src/main/connections.cpp:4075 src/main/connections.cpp:4106
+#: src/main/connections.cpp:4491 src/main/connections.cpp:4558
+#: src/main/connections.cpp:4772 src/main/connections.cpp:4776
+#: src/main/connections.cpp:5187 src/main/deparse.cpp:379
+#: src/main/deparse.cpp:465 src/main/serialize.cpp:2009
 msgid "cannot write to this connection"
 msgstr "klarte ikkje skriva til sambandet"
 
-#: src/main/builtin.cpp:480 src/main/builtin.cpp:507
+#: src/main/builtin.cpp:481 src/main/builtin.cpp:508
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "ugyldig «%s»-format"
 
-#: src/main/builtin.cpp:496
+#: src/main/builtin.cpp:497
 msgid "non-positive 'fill' argument will be ignored"
 msgstr "ikkje-positivt «fill»-argument vert ikkje brukt"
 
-#: src/main/builtin.cpp:565
+#: src/main/builtin.cpp:566
 #, fuzzy, c-format
 msgid "argument %d (type '%s') cannot be handled by 'cat'"
 msgstr "«cat» kan ikkje handtera argument %d (type «%s»)"
 
-#: src/main/builtin.cpp:710
+#: src/main/builtin.cpp:707
+msgid "too long for a pairlist"
+msgstr ""
+
+#: src/main/builtin.cpp:711
 #, fuzzy, c-format
-msgid "vector: cannot make a vector of mode '%s'."
+msgid "'vector()': cannot make a vector of mode '%s'."
 msgstr "vector: kan ikkje laga vektor av modus «%s»"
 
-#: src/main/builtin.cpp:736
+#: src/main/builtin.cpp:737
 msgid "cannot set length of non-vector"
 msgstr "kan ikkje setja lengda til ikkje-vektor"
 
-#: src/main/builtin.cpp:839 src/main/builtin.cpp:841
-#: src/main/character.cpp:530 src/main/coerce.cpp:2738
+#: src/main/builtin.cpp:840 src/main/builtin.cpp:842
+#: src/main/character.cpp:530 src/main/coerce.cpp:2733
 msgid "invalid value"
 msgstr "ugyldig verdi"
 
-#: src/main/builtin.cpp:894
+#: src/main/builtin.cpp:895
 #, fuzzy, c-format
 msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "duplikat standardverdi i «switch»: «%s» og «%s»"
 
-#: src/main/builtin.cpp:929
-msgid "EXPR must be a length 1 vector"
-msgstr "«EXPR» må vera ein vektor av lengd 1"
+#: src/main/builtin.cpp:930
+#, fuzzy, c-format
+msgid "'%s' argument must be a vector of length 1"
+msgstr "«hostnamne» må vera ein teiknvektor av lengd 1"
 
-#: src/main/builtin.cpp:932
+#: src/main/builtin.cpp:933
 #, c-format
 msgid ""
-"EXPR is a \"factor\", treated as integer.\n"
+"'EXPR' is a \"factor\", treated as integer.\n"
 " Consider using '%s' instead."
 msgstr ""
 
+#: src/main/builtin.cpp:980
+msgid "empty alternative in numeric switch"
+msgstr ""
+
 #: src/main/builtin.cpp:989
-msgid "'switch' with no alternatives"
+msgid "'switch()' with no alternatives"
 msgstr ""
 
 #: src/main/BuiltInFunction.cpp:183
@@ -1930,8 +1975,8 @@ msgstr[1] "%d argument sende til «%s», som tek 1 eller 2 argument"
 
 #: src/main/character.cpp:126 src/main/character.cpp:129
 #: src/main/character.cpp:240 src/main/character.cpp:243
-#, c-format
-msgid "'%s' requires a character vector"
+#, fuzzy, c-format
+msgid "'%s' function requires a character vector"
 msgstr "«%s» tek berre ein teiknvektor"
 
 #: src/main/character.cpp:166 src/main/character.cpp:181
@@ -1981,9 +2026,10 @@ msgid "non-character names"
 msgstr "ikkjeteikn-namn"
 
 #: src/main/character.cpp:923 src/main/character.cpp:1019
-#, c-format
-msgid "invalid multibyte string %d"
-msgstr "ugyldig multibyte-streng: %d"
+#: src/main/character.cpp:1430
+#, fuzzy, c-format
+msgid "invalid multibyte input string %d"
+msgstr "ugyldig multibyte-inntekst"
 
 #: src/main/character.cpp:965 src/main/grep.cpp:169
 msgid "non-character argument"
@@ -1994,204 +2040,203 @@ msgstr "ikkjeteikn-argument"
 msgid "decreasing range specification ('%lc-%lc')"
 msgstr "minkande område valt («%lc-%lc»)"
 
-#: src/main/character.cpp:1160
+#: src/main/character.cpp:1159
 #, c-format
 msgid "decreasing range specification ('%c-%c')"
 msgstr "minkande område valt («%c-%c»)"
 
-#: src/main/character.cpp:1347
-#, fuzzy
-msgid "invalid UTF-8 string 'old'"
+#: src/main/character.cpp:1345 src/main/character.cpp:1364
+#, fuzzy, c-format
+msgid "invalid UTF-8 string '%s'"
 msgstr "ugyldig UTF-8-streng: «old»"
 
-#: src/main/character.cpp:1353
-msgid "invalid multibyte string 'old'"
-msgstr "ugyldig multibyte-streng: «old»"
+#: src/main/character.cpp:1351 src/main/character.cpp:1370
+#, fuzzy, c-format
+msgid "invalid multibyte string '%s'"
+msgstr "ugyldig multibyte-streng i «%s»"
 
-#: src/main/character.cpp:1366
-msgid "invalid UTF-8 string 'new'"
-msgstr "ugyldig UTF-8-streng: «new»"
-
-#: src/main/character.cpp:1372
-msgid "invalid multibyte string 'new'"
-msgstr "ugyldig multibyte-streng: «new»"
-
-#: src/main/character.cpp:1400 src/main/character.cpp:1489
+#: src/main/character.cpp:1398 src/main/character.cpp:1487
 msgid "'old' is longer than 'new'"
 msgstr "«old» er lengre enn «new»"
 
-#: src/main/character.cpp:1432
-#, c-format
-msgid "invalid input multibyte string %d"
-msgstr "ugyldig multibyte-inntekst %d"
-
-#: src/main/character.cpp:1538
+#: src/main/character.cpp:1536
 #, fuzzy
-msgid "strtrim() requires a character vector"
+msgid "'strtrim()' function  requires a character vector"
 msgstr "strtrim() tek berre ein teiknvektor"
 
-#: src/main/coerce.cpp:46
+#: src/main/coerce.cpp:47
 msgid "invalid 'mode' argument"
 msgstr "ugyldig «modus»-argument"
 
-#: src/main/coerce.cpp:47
+#: src/main/coerce.cpp:48
 #, fuzzy
 msgid "applies only to lists and vectors"
 msgstr "kan berre brukast på lister og vektorar"
 
-#: src/main/coerce.cpp:93
-msgid "NAs introduced by coercion"
-msgstr "det oppstod NA-verdiar ved typeomgjering"
-
-#: src/main/coerce.cpp:95
+#: src/main/coerce.cpp:94 src/main/errors.cpp:1174
 #, fuzzy
-msgid "NAs introduced by coercion to integer range"
+msgid "NA values introduced by coercion"
 msgstr "det oppstod NA-verdiar ved typeomgjering"
 
-#: src/main/coerce.cpp:97 src/main/errors.cpp:1177
+#: src/main/coerce.cpp:96
+#, fuzzy
+msgid "NA values introduced by coercion to integer range"
+msgstr "det oppstod NA-verdiar ved typeomgjering"
+
+#: src/main/coerce.cpp:98 src/main/errors.cpp:1176
 msgid "imaginary parts discarded in coercion"
 msgstr "imaginærdel forkasta ved talomgjering"
 
-#: src/main/coerce.cpp:99
+#: src/main/coerce.cpp:100
 msgid "out-of-range values treated as 0 in coercion to raw"
 msgstr "verdiar utanfor gyldig talområde vart 0 ved omgjering til råverdiar"
 
-#: src/main/coerce.cpp:415
+#: src/main/coerce.cpp:416
 #, c-format
 msgid "invalid data of mode '%s' (too short)"
 msgstr "ugyldig data av modus «%s» (for kort)"
 
-#: src/main/coerce.cpp:977
-#, c-format
-msgid "'pairlist' object cannot be coerced to type '%s'"
-msgstr "«pairlist»-objekt kan ikkje gjerast om til typen «%s»"
-
-#: src/main/coerce.cpp:1099
+#: src/main/coerce.cpp:977 src/main/coerce.cpp:1098 src/main/coerce.cpp:1120
 #, fuzzy, c-format
-msgid "(list) object cannot be coerced to type '%s'"
-msgstr "«pairlist»-objekt kan ikkje gjerast om til typen «%s»"
+msgid "an object of class \"%s\" cannot be coerced to type '%s'"
+msgstr "(liste-)objekt kan ikkje gjerast om til typen «%s»"
 
-#: src/main/coerce.cpp:1122
-#, c-format
-msgid "(symbol) object cannot be coerced to type '%s'"
-msgstr "(symbol-)objekt kan ikkje gjerast om til typen «%s»"
-
-#: src/main/coerce.cpp:1138 src/main/coerce.cpp:1443
+#: src/main/coerce.cpp:1135 src/main/coerce.cpp:1440
 msgid "no method for coercing this S4 class to a vector"
 msgstr "manglar metode for å gjera denne S4-klassen om til ein vektor"
 
-#: src/main/coerce.cpp:1201
+#: src/main/coerce.cpp:1198
 msgid "environments cannot be coerced to other types"
 msgstr "omgjevnader kan ikkje gjerast om til andre typar"
 
-#: src/main/coerce.cpp:1344
+#: src/main/coerce.cpp:1207
+#, fuzzy, c-format
+msgid "cannot coerce type '%s' to vector of type '%s'"
+msgstr "finn ikkje fila «%s» i zip-fila «%s»"
+
+#: src/main/coerce.cpp:1341
 msgid "attempting to coerce non-factor"
 msgstr "prøvde å gjera om ein ikkje-faktor"
 
-#: src/main/coerce.cpp:1349 src/main/coerce.cpp:1359
+#: src/main/coerce.cpp:1346 src/main/coerce.cpp:1356
 msgid "malformed factor"
 msgstr ""
 
-#: src/main/coerce.cpp:1489
+#: src/main/coerce.cpp:1486
 msgid "list argument expected"
 msgstr "venta listeargument"
 
-#: src/main/coerce.cpp:1493
+#: src/main/coerce.cpp:1490
 msgid "invalid environment"
 msgstr "ugyldig omgjevnad"
 
-#: src/main/coerce.cpp:1497
+#: src/main/coerce.cpp:1494
 msgid "argument must have length at least 1"
 msgstr "argumentet må ha lengd større enn 0"
 
-#: src/main/coerce.cpp:1518
+#: src/main/coerce.cpp:1515
 msgid "invalid body for function"
 msgstr "ugyldig funksjonskropp"
 
-#: src/main/coerce.cpp:1537 src/main/coerce.cpp:1553
+#: src/main/coerce.cpp:1534
 msgid "invalid length 0 argument"
 msgstr "ugyldig argument av lengd 0"
 
-#: src/main/coerce.cpp:1574
+#: src/main/coerce.cpp:1550
+#, fuzzy
+msgid "invalid argument of length 0"
+msgstr "ugyldig andreargument av lengd 0"
+
+#: src/main/coerce.cpp:1571
 msgid "invalid argument list"
 msgstr "ugyldig argumentliste"
 
-#: src/main/coerce.cpp:1865
+#: src/main/coerce.cpp:1862
 #, fuzzy
-msgid "type \"single\" unimplemented in R"
+msgid "type \"single\" is unimplemented in R"
 msgstr "typen «single» er ikkje implementert i R"
 
-#: src/main/coerce.cpp:1867
+#: src/main/coerce.cpp:1864
 msgid "unimplemented predicate"
 msgstr "ikkje-implementert predikat"
 
-#: src/main/coerce.cpp:2014
+#: src/main/coerce.cpp:2011 src/main/coerce.cpp:2129
 #, fuzzy, c-format
-msgid "%s() applied to non-(list or vector) of type '%s'"
+msgid "'%s' method applied to non-(list or vector) of type '%s'"
 msgstr "%s() brukt på ikkje-(liste eller vektor) av typen «%s»"
 
-#: src/main/coerce.cpp:2209 src/main/coerce.cpp:2268 src/main/coerce.cpp:2332
+#: src/main/coerce.cpp:2140
+#, fuzzy
+msgid "'anyNA()' function takes 1 or 2 arguments"
+msgstr "feil type for argument"
+
+#: src/main/coerce.cpp:2204 src/main/coerce.cpp:2263 src/main/coerce.cpp:2327
 #, fuzzy, c-format
 msgid "default method not implemented for type '%s'"
 msgstr "ikkje-implementert type «%s» i «%s»\n"
 
-#: src/main/coerce.cpp:2356
+#: src/main/coerce.cpp:2229
+#, fuzzy, c-format
+msgid "'%s' function applies only to lists and vectors"
+msgstr "kan berre brukast på lister og vektorar"
+
+#: src/main/coerce.cpp:2351
 msgid "first argument must be a character string"
 msgstr "det første argumentet må vera ein teiknstreng"
 
-#: src/main/coerce.cpp:2385
-#, fuzzy
-msgid "'what' must be a function or character string"
-msgstr "«text» må vera ein teiknstreng"
+#: src/main/coerce.cpp:2353 src/main/coerce.cpp:2400 src/main/coerce.cpp:2404
+msgid "illegal usage"
+msgstr ""
 
-#: src/main/coerce.cpp:2389
-#, fuzzy
-msgid "'args' must be a list or expression"
-msgstr "«args» må vera ei liste"
+#: src/main/coerce.cpp:2380
+#, fuzzy, c-format
+msgid "'%s' argument must be a character string or a function"
+msgstr "«what» må vera ein teiknstreng eller ein funksjon"
 
-#: src/main/coerce.cpp:2396 src/main/unique.cpp:1341
-msgid "'envir' must be an environment"
-msgstr "«envir» må vera ein omgjevnad"
+#: src/main/coerce.cpp:2384
+#, fuzzy, c-format
+msgid "'%s' argument must be a list or expression"
+msgstr "«expr»-argumentet må vera eit uttrykk"
 
-#: src/main/coerce.cpp:2551
+#: src/main/coerce.cpp:2546
 msgid "invalid environment specified"
 msgstr "ugyldig omgjevnad oppgjeven"
 
-#: src/main/coerce.cpp:2615
+#: src/main/coerce.cpp:2610
 #, fuzzy
-msgid "Setting class(x) to NULL;   result will no longer be an S4 object"
+msgid "Setting 'class(x)' to NULL. Result will no longer be an S4 object"
 msgstr "Set class(x) til NULL. Resultatet vil ikkje lenger vera eit S4-objekt."
 
-#: src/main/coerce.cpp:2618
+#: src/main/coerce.cpp:2613
 #, fuzzy, c-format
 msgid ""
-"Setting class(x) to multiple strings (\"%s\", \"%s\", ...); result will no "
+"Setting 'class(x)' to multiple strings (\"%s\", \"%s\", ...). Result will no "
 "longer be an S4 object"
 msgstr ""
 "Set class(x) til fleire teiknstrengar («%s», «%s», ...). Resultatet vil "
 "ikkje lenger vera eit S4-objekt."
 
-#: src/main/coerce.cpp:2622
+#: src/main/coerce.cpp:2617
 #, fuzzy, c-format
 msgid ""
-"Setting class(x) to \"%s\" sets attribute to NULL; result will no longer be "
-"an S4 object"
+"Setting 'class(x)' to \"%s\" sets attribute to NULL. Result will no longer "
+"be an S4 object"
 msgstr ""
 "Ved å setja class(x) til «%s», vert attributtet sett til NULL. Resultatet "
 "vil ikkje lenger vera eit S4-objekt."
 
-#: src/main/coerce.cpp:2655
+#: src/main/coerce.cpp:2650
 msgid "invalid replacement object to be a class string"
 msgstr "ugyldig erstattingsobjekt for å vera ein klassestreng"
 
-#: src/main/coerce.cpp:2676
+#: src/main/coerce.cpp:2671
 #, c-format
 msgid ""
 "\"%s\" can only be set as the class if the object has this type; found \"%s\""
 msgstr ""
 "«%s» kan berre setjast som klasse viss objektet har denne typen (fann «%s»)"
 
-#: src/main/coerce.cpp:2694
+#: src/main/coerce.cpp:2689
 #, c-format
 msgid ""
 "invalid to set the class to matrix unless the dimension attribute is of "
@@ -2200,7 +2245,7 @@ msgstr ""
 "kan ikkje setja klassen til «matrix» med mindre dimensjonsattributtet er av "
 "lengd 2 (var %d)"
 
-#: src/main/coerce.cpp:2702
+#: src/main/coerce.cpp:2697
 msgid ""
 "cannot set class to \"array\" unless the dimension attribute has length > 0"
 msgstr ""
@@ -2208,10 +2253,14 @@ msgstr ""
 "lengd > 0"
 
 #: src/main/coerce.cpp:2729
-msgid "'value' must be non-null character string"
-msgstr "«value» må vera ein teiknstreng ulik null"
+msgid "use of 'real' is defunct: use 'double' instead"
+msgstr ""
 
-#: src/main/coerce.cpp:2742
+#: src/main/coerce.cpp:2731
+msgid "use of 'single' is defunct: use mode<- instead"
+msgstr ""
+
+#: src/main/coerce.cpp:2737
 msgid "invalid to change the storage mode of a factor"
 msgstr "kan ikkje endra lagringsmodus til ein faktor"
 
@@ -2272,7 +2321,7 @@ msgstr "alle sambanda er i bruk"
 
 #: src/main/connections.cpp:180
 #, fuzzy
-msgid "connection not found"
+msgid "connection was not found"
 msgstr "fann ikkje samband"
 
 #: src/main/connections.cpp:191
@@ -2298,8 +2347,8 @@ msgstr "ikkje-støtta omgjering frå «%s» til «%s»"
 #: src/main/connections.cpp:496 src/main/connections.cpp:507
 #: src/main/connections.cpp:513
 #, fuzzy, c-format
-msgid "%s not enabled for this connection"
-msgstr "«seek» er ikkje slått på for dette sambandet"
+msgid "'%s' is not enabled for this connection"
+msgstr "%s er ikkje slått på for dette sambandet"
 
 #: src/main/connections.cpp:405
 msgid "invalid char string in output conversion"
@@ -2315,6 +2364,11 @@ msgstr "fann ugyldig inndata på sambandet «%s»"
 msgid "cannot open file '%ls': %s"
 msgstr "klarte ikkje opna fila «%s»: %s"
 
+#: src/main/connections.cpp:617
+#, fuzzy
+msgid "'fdopen' is not supported on this platform"
+msgstr "nsl() er ikkje støtta på denne plattforma"
+
 #: src/main/connections.cpp:718
 msgid "connection is not open for reading"
 msgstr "samband ikkje ope for lesing"
@@ -2323,7 +2377,7 @@ msgstr "samband ikkje ope for lesing"
 msgid "connection is not open for writing"
 msgstr "samband ikkje ope for skriving"
 
-#: src/main/connections.cpp:761 src/main/connections.cpp:2258
+#: src/main/connections.cpp:761 src/main/connections.cpp:2256
 msgid "can only truncate connections open for writing"
 msgstr "kan berre trunkera samband som er opne for skriving"
 
@@ -2333,7 +2387,7 @@ msgstr "feil ved filtrunkering"
 
 #: src/main/connections.cpp:769
 #, fuzzy
-msgid "file truncation unavailable on this platform"
+msgid "file truncation is unavailable on this platform"
 msgstr "filtrunkering er ikkje tilgjengeleg på denne plattforma"
 
 #: src/main/connections.cpp:815 src/main/connections.cpp:819
@@ -2341,591 +2395,701 @@ msgstr "filtrunkering er ikkje tilgjengeleg på denne plattforma"
 msgid "allocation of file connection failed"
 msgstr "feil ved reservering av filsamband"
 
-#: src/main/connections.cpp:893 src/main/connections.cpp:1070
+#: src/main/connections.cpp:893
 #, fuzzy, c-format
-msgid "cannot create fifo '%s', reason '%s'"
-msgstr "kan ikkje oppretta fila «%s», av grunnen «%s»"
+msgid "cannot create fifo connection '%s', reason '%s'"
+msgstr "klarte ikkje laga fifo-en «%s», av grunnen «%s»"
 
-#: src/main/connections.cpp:899
+#: src/main/connections.cpp:898
 #, fuzzy, c-format
-msgid "'%s' exists but is not a fifo"
+msgid "'%s' exists but is not a fifo connection"
 msgstr "«%s» finst, men er ikkje ein fifo"
+
+#: src/main/connections.cpp:912
+#, fuzzy, c-format
+msgid "fifo connection '%s' is not ready"
+msgstr "fifo-en «%s» er ikkje klar"
 
 #: src/main/connections.cpp:913
 #, fuzzy, c-format
-msgid "fifo '%s' is not ready"
-msgstr "fifo-en «%s» er ikkje klar"
+msgid "cannot open fifo connection '%s'"
+msgstr "klarte ikkje opna sambandet"
 
-#: src/main/connections.cpp:914
-#, c-format
-msgid "cannot open fifo '%s'"
-msgstr "klarte ikkje opna fifo-en «%s»"
+#: src/main/connections.cpp:954 src/main/connections.cpp:965
+#: src/main/connections.cpp:1129 src/main/connections.cpp:1148
+#: src/main/connections.cpp:1555 src/main/connections.cpp:1565
+#: src/main/connections.cpp:1684 src/main/connections.cpp:1744
+#: src/main/connections.cpp:2273 src/main/connections.cpp:2290
+#: src/main/connections.cpp:2594 src/main/connections.cpp:5368
+#: src/main/connections.cpp:5432
+#, fuzzy
+msgid "specified block is too large"
+msgstr "den oppgjevne vektorstorleiken er for stor"
 
-#: src/main/connections.cpp:955 src/main/connections.cpp:966
-#: src/main/connections.cpp:1130 src/main/connections.cpp:1149
-#: src/main/connections.cpp:1557 src/main/connections.cpp:1567
-#: src/main/connections.cpp:1686 src/main/connections.cpp:1746
-#: src/main/connections.cpp:2275 src/main/connections.cpp:2292
-#: src/main/connections.cpp:2596 src/main/connections.cpp:5370
-#: src/main/connections.cpp:5434
-msgid "too large a block specified"
-msgstr "for stor blokk oppgjeven"
-
-#: src/main/connections.cpp:1024 src/main/connections.cpp:1030
+#: src/main/connections.cpp:1023 src/main/connections.cpp:1029
 #, fuzzy
 msgid "allocation of fifo name failed"
 msgstr "feil ved reservering av fifo-samband"
 
-#: src/main/connections.cpp:1092
+#: src/main/connections.cpp:1069
+#, fuzzy, c-format
+msgid "cannot create fifo '%s', reason '%s'"
+msgstr "kan ikkje oppretta fila «%s», av grunnen «%s»"
+
+#: src/main/connections.cpp:1091
 #, fuzzy, c-format
 msgid "cannot open fifo '%s', reason '%s'"
 msgstr "klarte ikkje opna adressa «%s», av grunnen «%s»"
 
-#: src/main/connections.cpp:1133 src/main/connections.cpp:1157
+#: src/main/connections.cpp:1132 src/main/connections.cpp:1156
 #, fuzzy
 msgid "allocation of fifo buffer failed"
 msgstr "feil ved reservering av fifo-samband"
 
-#: src/main/connections.cpp:1165
+#: src/main/connections.cpp:1164
 #, fuzzy, c-format
 msgid "cannot write FIFO '%s'"
 msgstr "klarte ikkje opna adressa «%s»"
 
-#: src/main/connections.cpp:1201 src/main/connections.cpp:1205
-#: src/main/connections.cpp:1211 src/main/connections.cpp:1227
+#: src/main/connections.cpp:1200 src/main/connections.cpp:1204
+#: src/main/connections.cpp:1210 src/main/connections.cpp:1226
 msgid "allocation of fifo connection failed"
 msgstr "feil ved reservering av fifo-samband"
 
-#: src/main/connections.cpp:1244 src/main/connections.cpp:1402
-#: src/main/connections.cpp:2023 src/main/connections.cpp:3220
-#: src/main/connections.cpp:4975
-#, fuzzy
-msgid "only first element of 'description' argument used"
-msgstr "berre det første elementet i «destfile»-argumentet vert brukt"
+#: src/main/connections.cpp:1243 src/main/connections.cpp:1400
+#: src/main/connections.cpp:2021 src/main/connections.cpp:3218
+#: src/main/connections.cpp:4973
+#, fuzzy, c-format
+msgid "only first element of '%s' argument will be used"
+msgstr "berre det første elementet i «description»-argumentet vert brukt"
 
-#: src/main/connections.cpp:1261
-#, fuzzy
+#: src/main/connections.cpp:1260 src/main/connections.cpp:5091
+#, fuzzy, c-format
 msgid ""
-"fifo(\"\") only supports open = \"w+\" and open = \"w+b\": using the former"
+"'%s' only supports 'open = \"w+\"' and 'open = \"w+b\"': using the former"
 msgstr ""
-"file(\"\") støttar berre «open = \"w+\"» og «open = \"w+b\"» (brukar "
-"førstnemnde)"
+"fifo(\"\") støttar berre «open = \"w+\"» og «open = \"w+b\"» (brukar "
+"sistnemnde)"
 
-#: src/main/connections.cpp:1276 src/main/connections.cpp:1440
-#: src/main/connections.cpp:2090 src/main/connections.cpp:3191
-#: src/main/connections.cpp:3241 src/main/connections.cpp:3288
-#: src/main/connections.cpp:3563 src/main/connections.cpp:3683
-#: src/main/connections.cpp:3844 src/main/connections.cpp:4104
-#: src/main/connections.cpp:4435 src/main/connections.cpp:4556
-#: src/main/connections.cpp:4770 src/main/connections.cpp:5170
-#: src/main/dcf.cpp:92 src/main/deparse.cpp:375 src/main/deparse.cpp:460
+#: src/main/connections.cpp:1275 src/main/connections.cpp:1438
+#: src/main/connections.cpp:2088 src/main/connections.cpp:3189
+#: src/main/connections.cpp:3239 src/main/connections.cpp:3286
+#: src/main/connections.cpp:3561 src/main/connections.cpp:3681
+#: src/main/connections.cpp:3842 src/main/connections.cpp:4102
+#: src/main/connections.cpp:4433 src/main/connections.cpp:4554
+#: src/main/connections.cpp:4768 src/main/connections.cpp:5168
+#: src/main/dcf.cpp:92 src/main/deparse.cpp:376 src/main/deparse.cpp:461
 #: src/main/saveload.cpp:2264 src/main/saveload.cpp:2345 src/main/scan.cpp:936
 #: src/main/serialize.cpp:2171 src/main/serialize.cpp:2221
 #: src/main/source.cpp:269
 msgid "cannot open the connection"
 msgstr "klarte ikkje opna sambandet"
 
-#: src/main/connections.cpp:1291
+#: src/main/connections.cpp:1290
 msgid "fifo connections are not available on this system"
 msgstr "fifo-samband er ikkje tilgjengelege på dette systemet"
 
-#: src/main/connections.cpp:1321
+#: src/main/connections.cpp:1320
 #, fuzzy, c-format
-msgid "cannot pipe() cmd '%ls': %s"
+msgid "cannot open 'pipe()' command '%ls': %s"
 msgstr "klarte ikkje opna pipe()-kommandoen «%s»: %s"
 
-#: src/main/connections.cpp:1328
+#: src/main/connections.cpp:1327
 #, fuzzy, c-format
-msgid "cannot open pipe() cmd '%s': %s"
+msgid "cannot open 'pipe()' command '%s': %s"
 msgstr "klarte ikkje opna pipe()-kommandoen «%s»: %s"
 
-#: src/main/connections.cpp:1497 src/main/connections.cpp:1817
+#: src/main/connections.cpp:1495 src/main/connections.cpp:1815
 #, c-format
 msgid "cannot open compressed file '%s', probable reason '%s'"
 msgstr "klarte ikkje opna den komprimerte fila «%s», truleg av grunnen «%s»"
 
-#: src/main/connections.cpp:1537
+#: src/main/connections.cpp:1535
 #, fuzzy
-msgid "whence = \"end\" is not implemented for gzfile connections"
+msgid "'whence = \"end\"' option is not implemented for gzfile connections"
 msgstr "«whence = \"end\"» er ikkje implementert for gzfile-samband"
 
-#: src/main/connections.cpp:1542
+#: src/main/connections.cpp:1540
 msgid "seek on a gzfile connection returned an internal error"
 msgstr "søking i eit gzfile-samband gav ein intern feil"
 
-#: src/main/connections.cpp:1576 src/main/connections.cpp:1580
-#: src/main/connections.cpp:1586 src/main/connections.cpp:1603
+#: src/main/connections.cpp:1574 src/main/connections.cpp:1578
+#: src/main/connections.cpp:1584 src/main/connections.cpp:1601
 msgid "allocation of gzfile connection failed"
 msgstr "feil ved reservering av gzfile-samband"
 
-#: src/main/connections.cpp:1632
+#: src/main/connections.cpp:1630
 #, c-format
 msgid "cannot open bzip2-ed file '%s', probable reason '%s'"
 msgstr "klarte ikkje opna bzip2-komprimert fil «%s», truleg av grunnen «%s»"
 
-#: src/main/connections.cpp:1641
+#: src/main/connections.cpp:1639
 #, c-format
 msgid "file '%s' appears not to be compressed by bzip2"
 msgstr "fila «%s» ser ikkje ut til å vera komprimert med bzip2"
 
-#: src/main/connections.cpp:1650
+#: src/main/connections.cpp:1648
 #, c-format
 msgid "initializing bzip2 compression for file '%s' failed"
 msgstr "klarte ikkje starta bzip2-komprimering av fila «%s»"
 
-#: src/main/connections.cpp:1704
+#: src/main/connections.cpp:1702
 #, fuzzy
 msgid "allocation of overflow buffer for bzfile failed"
 msgstr "feil ved reservering av filsamband"
 
-#: src/main/connections.cpp:1711
+#: src/main/connections.cpp:1709
 #, fuzzy, c-format
 msgid ""
 "file '%s' has trailing content that appears not to be compressed by bzip2"
 msgstr "fila «%s» ser ikkje ut til å vera komprimert med bzip2"
 
-#: src/main/connections.cpp:1757 src/main/connections.cpp:1761
-#: src/main/connections.cpp:1767 src/main/connections.cpp:1784
+#: src/main/connections.cpp:1755 src/main/connections.cpp:1759
+#: src/main/connections.cpp:1765 src/main/connections.cpp:1782
 msgid "allocation of bzfile connection failed"
 msgstr "feil ved reservering av bzfile-samband"
 
-#: src/main/connections.cpp:1830 src/main/connections.cpp:6026
+#: src/main/connections.cpp:1828 src/main/connections.cpp:6023
 #, c-format
 msgid "cannot initialize lzma decoder, error %d"
 msgstr "klarte ikkje starta lzma-dekodaren (feil %d)"
 
-#: src/main/connections.cpp:1846
+#: src/main/connections.cpp:1837 src/main/connections.cpp:5751
+#: src/main/connections.cpp:5917
+#, fuzzy
+msgid "problem with setting presets"
+msgstr "feil ved setjing av tidssone"
+
+#: src/main/connections.cpp:1844
 #, c-format
 msgid "cannot initialize lzma encoder, error %d"
 msgstr "klarte ikkje starta lzma-kodaren (feil %d)"
 
-#: src/main/connections.cpp:1974 src/main/connections.cpp:1978
-#: src/main/connections.cpp:1984 src/main/connections.cpp:2002
+#: src/main/connections.cpp:1869 src/main/connections.cpp:1962
+#, fuzzy
+msgid "'fwrite' error"
+msgstr "lesefeil"
+
+#: src/main/connections.cpp:1904
+msgid "lzma decoder needed more memory"
+msgstr ""
+
+#: src/main/connections.cpp:1907
+msgid "lzma decoder format error"
+msgstr ""
+
+#: src/main/connections.cpp:1910
+msgid "lzma decoder corrupt data"
+msgstr ""
+
+#: src/main/connections.cpp:1913
+#, c-format
+msgid "lzma decoding result %d"
+msgstr ""
+
+#: src/main/connections.cpp:1953
+msgid "lzma encoder needed more memory"
+msgstr ""
+
+#: src/main/connections.cpp:1956
+#, c-format
+msgid "lzma encoding result %d"
+msgstr ""
+
+#: src/main/connections.cpp:1972 src/main/connections.cpp:1976
+#: src/main/connections.cpp:1982 src/main/connections.cpp:2000
 msgid "allocation of xzfile connection failed"
 msgstr "feil ved reservering av xzfile-samband"
 
-#: src/main/connections.cpp:2060
+#: src/main/connections.cpp:2058
 #, fuzzy, c-format
-msgid "this is a %s-compressed file which this build of R does not support"
+msgid ""
+"this is a file compressed using '%s' which this build of R does not support"
 msgstr ""
 "dette er ei %s-komprimert fil, som denne byggversjonen av R ikkje støttar"
 
-#: src/main/connections.cpp:2159 src/modules/X11/devX11.c:3378
+#: src/main/connections.cpp:2157 src/modules/X11/devX11.c:3378
 msgid "memory allocation to copy clipboard failed"
 msgstr "feil ved minnereservering til kopiering til utklippstavla"
 
-#: src/main/connections.cpp:2164 src/modules/X11/devX11.c:3357
+#: src/main/connections.cpp:2162 src/modules/X11/devX11.c:3357
 #: src/modules/X11/devX11.c:3362
 msgid "clipboard cannot be opened or contains no text"
 msgstr "utklippstavla kan ikkje opnast, eller inneheld ikkje noko tekst"
 
-#: src/main/connections.cpp:2175
+#: src/main/connections.cpp:2173
 msgid "memory allocation to open clipboard failed"
 msgstr "feil ved minnereservering til ope utklippstavle"
 
-#: src/main/connections.cpp:2203
+#: src/main/connections.cpp:2201
 #, fuzzy
 msgid "unable to open the clipboard"
 msgstr "Klarte ikkje opna utklippstavla"
 
-#: src/main/connections.cpp:2207
+#: src/main/connections.cpp:2205
 #, fuzzy
 msgid "unable to write to the clipboard"
 msgstr "Klarte ikkje skriva til utklippstavla"
 
-#: src/main/connections.cpp:2247
+#: src/main/connections.cpp:2245
 msgid "attempt to seek outside the range of the clipboard"
 msgstr "prøvde å søkja utanfor området til utklippstavla"
 
-#: src/main/connections.cpp:2290
+#: src/main/connections.cpp:2288
 msgid "clipboard connection is open for reading only"
 msgstr "utklippstavlesambandet er berre ope for lesing"
 
-#: src/main/connections.cpp:2310
+#: src/main/connections.cpp:2308
 msgid "clipboard buffer is full and output lost"
 msgstr "utklippstavlebufferen er full, og utdata gjekk tapt"
 
-#: src/main/connections.cpp:2331
+#: src/main/connections.cpp:2329
 msgid "'mode' for the clipboard must be 'r' or 'w'"
 msgstr "«mode» for utklippstavla må vera «r» eller «w»"
 
-#: src/main/connections.cpp:2334
+#: src/main/connections.cpp:2332
 msgid "'mode' for the clipboard must be 'r' on Unix"
 msgstr "«mode» for utklippstavla må vera «r» på Unix"
 
-#: src/main/connections.cpp:2337 src/main/connections.cpp:2343
-#: src/main/connections.cpp:2349 src/main/connections.cpp:2366
+#: src/main/connections.cpp:2335 src/main/connections.cpp:2341
+#: src/main/connections.cpp:2347 src/main/connections.cpp:2364
 msgid "allocation of clipboard connection failed"
 msgstr "feil ved reservering av utklippstavlesamband"
 
-#: src/main/connections.cpp:2435 src/main/connections.cpp:2439
-#: src/main/connections.cpp:2445
+#: src/main/connections.cpp:2433 src/main/connections.cpp:2437
+#: src/main/connections.cpp:2443
 msgid "allocation of terminal connection failed"
 msgstr "feil ved reservering av terminalsamband"
 
-#: src/main/connections.cpp:2573
+#: src/main/connections.cpp:2571
 msgid "attempting to add too many elements to raw vector"
 msgstr "prøvde å leggja for mange element til ein råvektor"
 
-#: src/main/connections.cpp:2625
+#: src/main/connections.cpp:2623
 msgid "attempt to seek outside the range of the raw connection"
 msgstr "prøvde å søkja utanfor området til råsambandet"
 
-#: src/main/connections.cpp:2636 src/main/connections.cpp:2640
-#: src/main/connections.cpp:2646 src/main/connections.cpp:2672
+#: src/main/connections.cpp:2634 src/main/connections.cpp:2638
+#: src/main/connections.cpp:2644 src/main/connections.cpp:2670
 msgid "allocation of raw connection failed"
 msgstr "feil ved reservering av råsamband"
 
-#: src/main/connections.cpp:2723
-msgid "'con' is not a rawConnection"
-msgstr "«con» er ikkje eit rawConnection-samband"
+#: src/main/connections.cpp:2721 src/main/connections.cpp:3132
+#: src/main/connections.cpp:3266 src/main/connections.cpp:3313
+#: src/main/connections.cpp:3323 src/main/connections.cpp:3369
+#: src/main/connections.cpp:3395 src/main/connections.cpp:3417
+#: src/main/connections.cpp:3428 src/main/connections.cpp:3536
+#: src/main/connections.cpp:3666 src/main/connections.cpp:5471
+#, fuzzy, c-format
+msgid "'%s' argument is not an object of class %s"
+msgstr "«con» er ikkje ein ut-«rawConnection»"
 
-#: src/main/connections.cpp:2726
-#, fuzzy
-msgid "'con' is not an output rawConnection"
-msgstr "«con» er ikkje eit rawConnection-samband"
+#: src/main/connections.cpp:2724 src/main/connections.cpp:3135
+#, fuzzy, c-format
+msgid "'%s' is not an output of class %s"
+msgstr "«con» er ikkje ein ut-«textConnection»"
 
-#: src/main/connections.cpp:2764
+#: src/main/connections.cpp:2762
 #, fuzzy
 msgid "too many characters for text connection"
 msgstr "klarte ikkje reservera minne til tekstsamband"
 
-#: src/main/connections.cpp:2769
+#: src/main/connections.cpp:2767
 msgid "cannot allocate memory for text connection"
 msgstr "klarte ikkje reservera minne til tekstsamband"
 
-#: src/main/connections.cpp:2818
+#: src/main/connections.cpp:2816
 msgid "seek is not relevant for text connection"
 msgstr "«seek» er ikkje relevant for tekstsamband"
 
-#: src/main/connections.cpp:2826 src/main/connections.cpp:2830
-#: src/main/connections.cpp:2836 src/main/connections.cpp:2849
-#: src/main/connections.cpp:3034 src/main/connections.cpp:3038
-#: src/main/connections.cpp:3044 src/main/connections.cpp:3057
-#: src/main/connections.cpp:3064
+#: src/main/connections.cpp:2824 src/main/connections.cpp:2828
+#: src/main/connections.cpp:2834 src/main/connections.cpp:2847
+#: src/main/connections.cpp:3032 src/main/connections.cpp:3036
+#: src/main/connections.cpp:3042 src/main/connections.cpp:3055
+#: src/main/connections.cpp:3062
 msgid "allocation of text connection failed"
 msgstr "feil ved reservering av tekstsamband"
 
-#: src/main/connections.cpp:3011
+#: src/main/connections.cpp:2965
+#, fuzzy
+msgid "last line is too long"
+msgstr "formateringsteksten er for lang"
+
+#: src/main/connections.cpp:2971
+#, fuzzy
+msgid "allocation problem for last line"
+msgstr "feil ved reservering av filsamband"
+
+#: src/main/connections.cpp:3009
 msgid "text connection: appending to a non-existent char vector"
 msgstr "tekstsamband: legg til på ein teiknvektor som ikkje finst"
 
-#: src/main/connections.cpp:3113
+#: src/main/connections.cpp:3111
 msgid "unsupported mode"
 msgstr "ikkje-støtta modus"
 
-#: src/main/connections.cpp:3134
-msgid "'con' is not a textConnection"
-msgstr "«con» er ikkje ein «textConnection»"
-
-#: src/main/connections.cpp:3137
-#, fuzzy
-msgid "'con' is not an output textConnection"
-msgstr "«con» er ikkje ein «textConnection»"
-
-#: src/main/connections.cpp:3268 src/main/connections.cpp:3315
-#: src/main/connections.cpp:3325 src/main/connections.cpp:3371
-#: src/main/connections.cpp:3397 src/main/connections.cpp:3419
-#: src/main/connections.cpp:3430 src/main/connections.cpp:3538
-#: src/main/connections.cpp:3668 src/main/connections.cpp:5473
-msgid "'con' is not a connection"
-msgstr "«con» er ikkje eit samband"
-
-#: src/main/connections.cpp:3271
+#: src/main/connections.cpp:3269
 msgid "cannot open standard connections"
 msgstr "klarte ikkje opna standardsamband"
 
-#: src/main/connections.cpp:3273
+#: src/main/connections.cpp:3271
 msgid "connection is already open"
 msgstr "sambandet er alt ope"
 
-#: src/main/connections.cpp:3305
+#: src/main/connections.cpp:3303
 msgid "unknown 'rw' value"
 msgstr "ukjend «rw»-verdi"
 
-#: src/main/connections.cpp:3373
+#: src/main/connections.cpp:3371
 msgid "cannot close standard connections"
 msgstr "klarte ikkje lukka standardsambanda"
 
-#: src/main/connections.cpp:3376
+#: src/main/connections.cpp:3374
 #, fuzzy
-msgid "cannot close output sink connection"
+msgid "cannot close 'output' sink connection"
 msgstr "klarte ikkje lukka utsink-samband"
 
-#: src/main/connections.cpp:3378
+#: src/main/connections.cpp:3376
 #, fuzzy
-msgid "cannot close messages sink connection"
+msgid "cannot close 'message' sink connection"
 msgstr "klarte ikkje lukka meldingssink-samband"
 
-#: src/main/connections.cpp:3399 src/main/connections.cpp:5188
-#: src/main/connections.cpp:5196 src/main/serialize.cpp:1999
+#: src/main/connections.cpp:3397 src/main/connections.cpp:5186
+#: src/main/connections.cpp:5194 src/main/serialize.cpp:1999
 #: src/main/serialize.cpp:2007
 msgid "connection is not open"
 msgstr "sambandet er ikkje ope"
 
-#: src/main/connections.cpp:3493 src/main/connections.cpp:3505
+#: src/main/connections.cpp:3491 src/main/connections.cpp:3503
 #, fuzzy
-msgid "line longer than buffer size"
+msgid "line is longer than buffer size"
 msgstr "Linja er lengre enn bufferstorleiken"
 
-#: src/main/connections.cpp:3567 src/main/connections.cpp:3570
-#: src/main/connections.cpp:3849 src/main/connections.cpp:4418
-#: src/main/connections.cpp:4440 src/main/connections.cpp:5197
+#: src/main/connections.cpp:3565 src/main/connections.cpp:3568
+#: src/main/connections.cpp:3847 src/main/connections.cpp:4416
+#: src/main/connections.cpp:4438 src/main/connections.cpp:5195
 #: src/main/dcf.cpp:95 src/main/scan.cpp:939 src/main/scan.cpp:943
 #: src/main/serialize.cpp:2001 src/main/source.cpp:270
 msgid "cannot read from this connection"
 msgstr "klarte ikkje lesa frå dette sambandet"
 
-#: src/main/connections.cpp:3582 src/main/connections.cpp:3604
-msgid "cannot allocate buffer in readLines"
+#: src/main/connections.cpp:3580 src/main/connections.cpp:3602
+#, fuzzy
+msgid "cannot allocate buffer in 'readLines()'"
 msgstr "klarte ikkje reservera buffer i readLines"
 
-#: src/main/connections.cpp:3617
+#: src/main/connections.cpp:3587 src/main/scan.cpp:591 src/main/scan.cpp:741
+#, fuzzy
+msgid "too many items"
+msgstr "for mange argument"
+
+#: src/main/connections.cpp:3615
 #, c-format
 msgid "line %d appears to contain an embedded nul"
 msgstr ""
 
-#: src/main/connections.cpp:3636
+#: src/main/connections.cpp:3634
 #, c-format
 msgid "incomplete final line found on '%s'"
 msgstr "fann ufullstendig sluttlinje på «%s»"
 
-#: src/main/connections.cpp:3647
+#: src/main/connections.cpp:3645
 #, fuzzy
-msgid "too few lines read in readLines"
+msgid "too few lines read in 'readLines()'"
 msgstr "for få linjer å lesa i readLines"
 
-#: src/main/connections.cpp:3753
+#: src/main/connections.cpp:3748 src/main/connections.cpp:3878
+#: src/main/connections.cpp:3970 src/main/connections.cpp:3985
+#: src/main/connections.cpp:4018
+#, fuzzy
+msgid "error reading from the connection"
+msgstr "feil ved lesing frå samband"
+
+#: src/main/connections.cpp:3751
 msgid "incomplete string at end of file has been discarded"
 msgstr "forkasta ufullstendig streng på slutten av fila"
 
-#: src/main/connections.cpp:3759
+#: src/main/connections.cpp:3757
 #, fuzzy
-msgid "null terminator not found: breaking string at 10000 bytes"
+msgid "null terminator was not found: breaking string at 10000 bytes"
 msgstr "fann ingen nullterminator: bryt strengen etter 10 000 byte"
 
-#: src/main/connections.cpp:3821
+#: src/main/connections.cpp:3819
 msgid "can only read from a binary connection"
 msgstr "kan berre lesa frå eit binærsamband"
 
-#: src/main/connections.cpp:3867 src/main/connections.cpp:4184
+#: src/main/connections.cpp:3865 src/main/connections.cpp:4182
 msgid "size changing is not supported for complex vectors"
 msgstr "endring av storleik er ikkje støtta for komplekse vektorar"
 
-#: src/main/connections.cpp:3907 src/main/connections.cpp:3925
-#: src/main/connections.cpp:3951 src/main/connections.cpp:4013
-#: src/main/connections.cpp:4034 src/main/connections.cpp:4165
-#: src/main/connections.cpp:4178 src/main/connections.cpp:4237
-#: src/main/connections.cpp:4269
+#: src/main/connections.cpp:3905 src/main/connections.cpp:3923
+#: src/main/connections.cpp:3949 src/main/connections.cpp:4011
+#: src/main/connections.cpp:4032 src/main/connections.cpp:4163
+#: src/main/connections.cpp:4176 src/main/connections.cpp:4235
+#: src/main/connections.cpp:4267
 #, c-format
 msgid "size %d is unknown on this machine"
 msgstr "storleiken %d er ukjend på denne maskina"
 
-#: src/main/connections.cpp:3936
+#: src/main/connections.cpp:3934
 msgid "raw is always of size 1"
 msgstr "raw er alltid av storleik 1"
 
-#: src/main/connections.cpp:3959
+#: src/main/connections.cpp:3957
 msgid "'signed = FALSE' is only valid for integers of sizes 1 and 2"
 msgstr ""
 
-#: src/main/connections.cpp:4069
+#: src/main/connections.cpp:4067
 #, fuzzy
-msgid "'x' is not an atomic vector type"
+msgid "'x' argument is not an atomic vector type"
 msgstr "«x» er ikkje ein atomsk vektortype"
 
-#: src/main/connections.cpp:4075
+#: src/main/connections.cpp:4073
 msgid "can only write to a binary connection"
 msgstr "kan berre skriva til binærsamband"
 
-#: src/main/connections.cpp:4094
+#: src/main/connections.cpp:4092
 msgid "only 2^31-1 bytes can be written to a raw vector"
 msgstr "berre 2³¹ − 1 byte kan skrivast til ein råvektor"
 
-#: src/main/connections.cpp:4096
+#: src/main/connections.cpp:4094
 #, fuzzy
-msgid "only 2^31-1 bytes can be written in a single writeBin() call"
+msgid "only 2^31-1 bytes can be written in a single 'writeBin()' call"
 msgstr "berre 2³¹ − 1 byte kan skrivast i eit einskild «readBin()»-kall"
 
-#: src/main/connections.cpp:4144 src/main/connections.cpp:4299
-#: src/main/connections.cpp:4582 src/main/connections.cpp:4622
+#: src/main/connections.cpp:4142 src/main/connections.cpp:4297
+#: src/main/connections.cpp:4580 src/main/connections.cpp:4620
 #, fuzzy
 msgid "problem writing to connection"
 msgstr "feil ved skriving til samband"
 
-#: src/main/connections.cpp:4189
+#: src/main/connections.cpp:4187
 msgid "size changing is not supported for raw vectors"
 msgstr "endring av storleik er ikkje støtta for råvektorar"
 
-#: src/main/connections.cpp:4338 src/main/connections.cpp:4342
-#: src/main/connections.cpp:4381
+#: src/main/connections.cpp:4336
 #, fuzzy
 msgid "invalid UTF-8 input in readChar()"
 msgstr "ugyldig UTF-8-data i readChar()"
 
-#: src/main/connections.cpp:4444
+#: src/main/connections.cpp:4340 src/main/connections.cpp:4379
+#, fuzzy
+msgid "invalid UTF-8 input in 'readChar()'"
+msgstr "ugyldig UTF-8-data i readChar()"
+
+#: src/main/connections.cpp:4442
 msgid "can only read in bytes in a non-UTF-8 MBCS locale"
 msgstr "kan berre lesa i byte i eit ikkje-UTF-8-basert MBCS-lokale"
 
-#: src/main/connections.cpp:4519
+#: src/main/connections.cpp:4517
 #, fuzzy
 msgid "'object' is too short"
 msgstr "«object» er for kort"
 
-#: src/main/connections.cpp:4571
+#: src/main/connections.cpp:4543
+msgid "too much data for a raw vector on this platform"
+msgstr ""
+
+#: src/main/connections.cpp:4569
 msgid "writeChar: more bytes requested than are in the string - will zero-pad"
 msgstr ""
 "writeChar: ba om fleire byte enn det er i strengen (nullverdiar vert lagde "
 "til på slutten)"
 
-#: src/main/connections.cpp:4596
+#: src/main/connections.cpp:4594
 msgid ""
 "writeChar: more characters requested than are in the string - will zero-pad"
 msgstr ""
 "writeChar: ba om fleire teikn enn det er i strengen (nullverdiar vert lagde "
 "til på slutten)"
 
-#: src/main/connections.cpp:4655
+#: src/main/connections.cpp:4653
 #, fuzzy
 msgid "maximum number of pushback lines exceeded"
 msgstr "meir enn maks tal på fargar brukt"
 
-#: src/main/connections.cpp:4661 src/main/connections.cpp:4665
-#: src/main/connections.cpp:4700 src/main/connections.cpp:4708
-#, fuzzy
-msgid "could not allocate space for pushback"
-msgstr "klarte ikkje reservera plass til pushBack"
+#: src/main/connections.cpp:4659 src/main/connections.cpp:4663
+#: src/main/connections.cpp:4698 src/main/connections.cpp:4706
+#, fuzzy, c-format
+msgid "could not allocate space for '%s'"
+msgstr "fann ikkje ledig plass til «path»"
 
-#: src/main/connections.cpp:4691
+#: src/main/connections.cpp:4689
 msgid "can only push back on open readable connections"
 msgstr "kan berre gjera «push back» på opne leselege samband"
 
-#: src/main/connections.cpp:4693
+#: src/main/connections.cpp:4691
 msgid "can only push back on text-mode connections"
 msgstr "kan berre gjera «push back» på tekstmodus-samband"
 
-#: src/main/connections.cpp:4755 src/main/connections.cpp:4824
+#: src/main/connections.cpp:4753 src/main/connections.cpp:4822
 msgid "sink stack is full"
 msgstr "sink-stakken er full"
 
-#: src/main/connections.cpp:4758
+#: src/main/connections.cpp:4756
 #, fuzzy
-msgid "cannot switch output to stdin"
+msgid "cannot switch output to 'stdin'"
 msgstr "klarte ikkje byta utdata til stdin"
 
-#: src/main/connections.cpp:4785
+#: src/main/connections.cpp:4783
 msgid "no sink to remove"
 msgstr "ingen sink å fjerna"
 
-#: src/main/connections.cpp:4899
+#: src/main/connections.cpp:4897
 #, fuzzy
 msgid "there is no connection NA"
 msgstr "sambandet %d finst ikkje"
 
-#: src/main/connections.cpp:4901
+#: src/main/connections.cpp:4899
 #, c-format
 msgid "there is no connection %d"
 msgstr "sambandet %d finst ikkje"
 
-#: src/main/connections.cpp:5030
+#: src/main/connections.cpp:5028
 #, fuzzy
-msgid "method = \"wininet\" is only supported on Windows"
+msgid "'method = \"wininet\"' is only supported on Windows"
 msgstr "«dirmark = TRUE» er ikkje støtta på denne plattforma"
 
-#: src/main/connections.cpp:5093
+#: src/main/connections.cpp:5046
 #, fuzzy
-msgid ""
-"file(\"\") only supports open = \"w+\" and open = \"w+b\": using the former"
-msgstr ""
-"file(\"\") støttar berre «open = \"w+\"» og «open = \"w+b\"» (brukar "
-"førstnemnde)"
+msgid "ftps:// URLs are not supported by this method"
+msgstr "typen «%s» er ikkje støtta"
 
-#: src/main/connections.cpp:5147
+#: src/main/connections.cpp:5053
+#, fuzzy
+msgid "https:// URLs are not supported by this method"
+msgstr "typen «%s» er ikkje støtta"
+
+#: src/main/connections.cpp:5059
+#, fuzzy
+msgid "https:// URLs are not supported by the \"internal\" method"
+msgstr "typen «%s» er ikkje støtta"
+
+#: src/main/connections.cpp:5079
+#, fuzzy
+msgid "'url(method = \"libcurl\")' is not supported on this platform"
+msgstr "«dirmark = TRUE» er ikkje støtta på denne plattforma"
+
+#: src/main/connections.cpp:5145
 #, fuzzy
 msgid "URL scheme unsupported by this method"
 msgstr "ICU er ikkje støtte på dette bygget"
 
-#: src/main/connections.cpp:5238
+#: src/main/connections.cpp:5236
 msgid "file stream does not have gzip magic number"
 msgstr "filstraumen har ikkje det magiske talet til gzip"
 
-#: src/main/connections.cpp:5249
+#: src/main/connections.cpp:5247
 msgid "file stream does not have valid gzip header"
 msgstr "filstraumen har ikkje eit gyldig gzip-hovud"
 
-#: src/main/connections.cpp:5314
+#: src/main/connections.cpp:5312
 #, fuzzy
 msgid "writing error whilst flushing 'gzcon' connection"
 msgstr "feil ved tømming av gzon-samband"
 
-#: src/main/connections.cpp:5416
+#: src/main/connections.cpp:5414
 #, c-format
 msgid "crc error %x %x\n"
 msgstr "CRC-feil %x %x\n"
 
-#: src/main/connections.cpp:5443
+#: src/main/connections.cpp:5441
 #, fuzzy
 msgid "write error on 'gzcon' connection"
 msgstr "feil ved skriving til gzcon-samband"
 
-#: src/main/connections.cpp:5477
+#: src/main/connections.cpp:5475
 #, fuzzy
-msgid "'level' must be one of 0 ... 9"
+msgid "'level' argument must be one of 0 ... 9"
 msgstr "«level» må vera éin av 0, 1, ..., 9"
 
-#: src/main/connections.cpp:5480
+#: src/main/connections.cpp:5481
 #, fuzzy
-msgid "'allowNonCompression' must be TRUE or FALSE"
-msgstr "«allowNonCompression» må vera «TRUE» (sann) eller «FALSE» (usann)"
-
-#: src/main/connections.cpp:5483
-#, fuzzy
-msgid "this is already a 'gzcon' connection"
+msgid "this is already a gzcon connection"
 msgstr "dette er alt eit gzcon-samband"
 
-#: src/main/connections.cpp:5489
+#: src/main/connections.cpp:5487
 msgid "can only use read- or write- binary connections"
 msgstr "kan berre bruka lese- eller skrive-binærsamband"
 
-#: src/main/connections.cpp:5492
+#: src/main/connections.cpp:5490
 msgid "using a text-mode 'file' connection may not work correctly"
 msgstr "bruk av tekstmodus-«file»-samband vil kanskje ikkje fungera skikkeleg"
 
-#: src/main/connections.cpp:5495
+#: src/main/connections.cpp:5493
 #, fuzzy
 msgid ""
-"cannot create a 'gzcon' connection from a writable textConnection; maybe use "
+"cannot create a gzcon connection from a writable textConnection; maybe use "
 "rawConnection"
 msgstr ""
 "kan ikkje oppretta eit gzcon-samband frå ein skrivar «textConnection» (du "
 "kan prøva å bruka «rawConnection»)"
 
-#: src/main/connections.cpp:5498 src/main/connections.cpp:5502
-#: src/main/connections.cpp:5509 src/main/connections.cpp:5523
+#: src/main/connections.cpp:5496 src/main/connections.cpp:5500
+#: src/main/connections.cpp:5507 src/main/connections.cpp:5521
 #, fuzzy
 msgid "allocation of 'gzcon' connection failed"
 msgstr "feil ved reservering av gzcon-samband"
 
-#: src/main/connections.cpp:5711
-#, fuzzy
-msgid "not a list of sockets"
+#: src/main/connections.cpp:5581 src/main/connections.cpp:5606
+#: src/main/connections.cpp:5632 src/main/connections.cpp:5665
+#: src/main/connections.cpp:5773 src/main/connections.cpp:5813
+#, fuzzy, c-format
+msgid "'%s' function requires a raw vector"
+msgstr "«%s» tek berre ein teiknvektor"
+
+#: src/main/connections.cpp:5588 src/main/connections.cpp:5612
+#: src/main/connections.cpp:5642 src/main/connections.cpp:5673
+#: src/main/connections.cpp:5682 src/main/connections.cpp:5783
+#: src/main/connections.cpp:5790 src/main/connections.cpp:5824
+#: src/main/connections.cpp:5844 src/main/connections.cpp:5852
+#: src/main/connections.cpp:5888 src/main/connections.cpp:5901
+#: src/main/connections.cpp:5923 src/main/connections.cpp:5933
+#, fuzzy, c-format
+msgid "internal error %d in '%s' function"
+msgstr "intern feil i «do_sys»"
+
+#: src/main/connections.cpp:5689 src/main/connections.cpp:5859
+#, fuzzy, c-format
+msgid "unknown type in '%s' function"
+msgstr "ukjend cumxxx-funksjon"
+
+#: src/main/connections.cpp:5709
+#, fuzzy, c-format
+msgid "'%s' argument is not a list of sockets"
 msgstr "ikkje ei liste over soklar"
 
-#: src/main/connections.cpp:5716
+#: src/main/connections.cpp:5714
 msgid "bad write indicators"
 msgstr "ugyldig skriveindikatorar"
 
-#: src/main/connections.cpp:5727
+#: src/main/connections.cpp:5725
 #, fuzzy
-msgid "not a socket connection"
+msgid "this is not a socket connection"
 msgstr "ikkje eit sokkelsamband"
 
-#: src/main/connections.cpp:5970
+#: src/main/connections.cpp:5834 src/main/connections.cpp:5986
+#: src/main/connections.cpp:6002
+#, fuzzy, c-format
+msgid "internal error %d in '%s' function (%d)"
+msgstr "intern feil i «do_sys»"
+
+#: src/main/connections.cpp:5876 src/main/connections.cpp:5955
+#, fuzzy
+msgid "'from' argument must be raw or character"
+msgstr "«norm» må vera ein teiknstreng"
+
+#: src/main/connections.cpp:5967
 msgid "unknown compression, assuming none"
 msgstr "ukjend komprimering – antek ukomprimerte data"
 
-#: src/main/connections.cpp:6088 src/main/connections.cpp:6092
-#: src/main/connections.cpp:6098
+#: src/main/connections.cpp:6048
+#, fuzzy, c-format
+msgid "internal error %d in '%s' function (%d) at %d"
+msgstr "intern feil i do_random1"
+
+#: src/main/connections.cpp:6084 src/main/connections.cpp:6088
+#: src/main/connections.cpp:6094
 #, fuzzy, c-format
 msgid "allocation of %s connection failed"
 msgstr "feil ved reservering av råsamband"
@@ -2968,7 +3132,8 @@ msgid "not that many functions on the call stack"
 msgstr "så mange funksjonar finst ikkje på stakken"
 
 #: src/main/context.cpp:296
-msgid "internal error in 'do_sys'"
+#, fuzzy, c-format
+msgid "internal error in '%s' function"
 msgstr "intern feil i «do_sys»"
 
 #: src/main/contour-common.h:330
@@ -2977,24 +3142,24 @@ msgid "k = %d, should be 2 or 4"
 msgstr ""
 
 #: src/main/cum.cpp:56
-#, fuzzy
-msgid "integer overflow in 'cumsum'; use 'cumsum(as.numeric(.))'"
-msgstr "Heiltalsoverflyt i «cumsum». Bruk «cumsum(as.numeric(.))»."
+#, fuzzy, c-format
+msgid "integer overflow in '%s' function; use '%s'"
+msgstr "intern feil i «do_sys»"
 
-#: src/main/cum.cpp:183
-#, fuzzy
-msgid "'cummax' not defined for complex numbers"
+#: src/main/cum.cpp:183 src/main/cum.cpp:186
+#, fuzzy, c-format
+msgid "'%s' function is not defined for complex numbers"
 msgstr "min/max er ikkje definert for komplekse tal"
 
-#: src/main/cum.cpp:186
-#, fuzzy
-msgid "'cummin' not defined for complex numbers"
-msgstr "min/max er ikkje definert for komplekse tal"
-
-#: src/main/cum.cpp:213 src/main/cum.cpp:240
-#, fuzzy
-msgid "unknown cumxxx function"
+#: src/main/cum.cpp:189 src/main/cum.cpp:213 src/main/cum.cpp:240
+#, fuzzy, c-format
+msgid "unknown '%s' function"
 msgstr "ukjend cumxxx-funksjon"
+
+#: src/main/datetime.cpp:573 src/main/datetime.cpp:583
+#, fuzzy
+msgid "time zone specification is too long"
+msgstr "innteksten er for lang"
 
 #: src/main/datetime.cpp:577 src/main/datetime.cpp:585
 #: src/main/datetime.cpp:599 src/main/datetime.cpp:604
@@ -3010,19 +3175,15 @@ msgid "problem with unsetting timezone"
 msgstr "feil ved avsetjing av tidssone"
 
 #: src/main/datetime.cpp:830 src/main/datetime.cpp:832
-#: src/main/datetime.cpp:1276 src/main/datetime.cpp:1278
+#: src/main/datetime.cpp:926 src/main/datetime.cpp:1276
+#: src/main/datetime.cpp:1278
 #, fuzzy
 msgid "zero-length component in non-empty \"POSIXlt\" structure"
 msgstr "komponent av lengd null i ikkje-tom POSIXlt-struktur"
 
-#: src/main/datetime.cpp:926
-#, fuzzy
-msgid "zero length component in non-empty \"POSIXlt\" structure"
-msgstr "komponent av lengd null i ikkje-tom POSIXlt-struktur"
-
 #: src/main/dcf.cpp:105 src/main/dcf.cpp:174 src/main/dcf.cpp:246
 #, fuzzy
-msgid "could not allocate memory for 'read.dcf'"
+msgid "could not allocate memory for 'read.dcf()' function"
 msgstr "klarte ikkje reservera minne til «read.dcf»"
 
 #: src/main/dcf.cpp:149
@@ -3035,85 +3196,96 @@ msgstr "Fann framhaldslinje som startar med «%s ...» på starten av posten."
 msgid "Line starting '%s ...' is malformed!"
 msgstr "Linja som startar med «%s ...» har feil format."
 
-#: src/main/debug.cpp:57 src/main/debug.cpp:85
+#: src/main/debug.cpp:57
 #, fuzzy
 msgid "argument must be a function"
 msgstr "argumentet kan ikkje vera ein funksjon"
 
-#: src/main/debug.cpp:116
-#, fuzzy, c-format
-msgid "Value for '%s' must be TRUE or FALSE"
-msgstr "«all.x» må vera TRUE eller FALSE"
+#: src/main/debug.cpp:64
+#, fuzzy
+msgid "argument is not being debugged"
+msgstr "argumentet er ikkje eit bytekode-objekt"
 
-#: src/main/debug.cpp:141
+#: src/main/debug.cpp:85
+#, fuzzy, c-format
+msgid "'%s' argument must be a function"
+msgstr "argumentet må vera ein funksjon"
+
+#: src/main/debug.cpp:140
 msgid "cannot trace NULL"
 msgstr "kan ikkje spora NULL"
 
-#: src/main/debug.cpp:145
+#: src/main/debug.cpp:144
 #, fuzzy
-msgid "'tracemem' is not useful for promise and environment objects"
+msgid "'tracemem()' function is not useful for promise and environment objects"
 msgstr "«tracemem» er ikkje nyttig for promise- og omgjevnadsobjekt"
 
-#: src/main/debug.cpp:148
+#: src/main/debug.cpp:147
 #, fuzzy
-msgid "'tracemem' is not useful for weak reference or external pointer objects"
+msgid ""
+"'tracemem()' function is not useful for weak reference or external pointer "
+"objects"
 msgstr ""
 "«tracemem» er ikkje nyttig for svake referansar eller eksternpeikar-objekt"
 
-#: src/main/debug.cpp:169 src/main/debug.cpp:174
+#: src/main/debug.cpp:168 src/main/debug.cpp:173
 msgid "R was not compiled with support for memory profiling"
 msgstr "R vart ikkje kompilert med støtte for minneprofilering"
 
-#: src/main/deparse.cpp:172
-#, fuzzy
-msgid "invalid 'cutoff' value for 'deparse', using default"
+#: src/main/deparse.cpp:173
+#, fuzzy, c-format
+msgid "invalid 'cutoff' value (%d) for 'deparse()', using default %d"
 msgstr "ugyldig «cutoff» for deparse (brukar standardverdien)"
 
-#: src/main/deparse.cpp:274
+#: src/main/deparse.cpp:275
 #, fuzzy
-msgid "deparse of an S4 object will not be source()able"
+msgid "deparse of an S4 object will not be sourceable by 'source()'"
 msgstr "deparse på S4-objekt kan ikkje seinare source()-ast"
 
-#: src/main/deparse.cpp:276
+#: src/main/deparse.cpp:277
 msgid "deparse may be incomplete"
 msgstr "deparse-resultatet kan vera ufullstendig"
 
-#: src/main/deparse.cpp:278
+#: src/main/deparse.cpp:279
 #, fuzzy
-msgid "deparse may be not be source()able in R < 2.7.0"
+msgid ""
+"deparse may be not be sourceable by 'source()' in R version less than 2.7.0"
 msgstr "deparse-resultatet kan kanskje ikkje source()-ast på R < 2.7.0"
 
-#: src/main/deparse.cpp:363 src/main/deparse.cpp:411 src/main/source.cpp:205
-#, fuzzy
-msgid "'file' must be a character string or connection"
+#: src/main/deparse.cpp:364
+#, fuzzy, c-format
+msgid "'%s' argument must be a character string or connection"
 msgstr "«what» må vera ein teiknstreng eller ein funksjon"
 
-#: src/main/deparse.cpp:387 src/main/deparse.cpp:479 src/main/deparse.cpp:485
+#: src/main/deparse.cpp:388 src/main/deparse.cpp:480 src/main/deparse.cpp:486
 msgid "wrote too few characters"
 msgstr "skreiv for få teikn"
 
-#: src/main/deparse.cpp:413
+#: src/main/deparse.cpp:412
+#, fuzzy, c-format
+msgid "'%s' must be a character string or connection"
+msgstr "«what» må vera ein teiknstreng eller ein funksjon"
+
+#: src/main/deparse.cpp:414
 msgid "character arguments expected"
 msgstr "venta teiknargument"
 
-#: src/main/deparse.cpp:416
+#: src/main/deparse.cpp:417
 #, fuzzy
 msgid "zero-length argument"
 msgstr "argument av lengd null"
 
-#: src/main/deparse.cpp:423
+#: src/main/deparse.cpp:424
 #, fuzzy
-msgid "'opts' should be small non-negative integer"
+msgid "'opts' argument should be small non-negative integer"
 msgstr "«opts» må vera eit lite, ikkje-negativt tal"
 
-#: src/main/deparse.cpp:433 src/main/envir.cpp:811 src/main/envir.cpp:890
-#: src/main/eval.cpp:731 src/main/saveload.cpp:1992 src/main/saveload.cpp:2302
-#: src/main/serialize.cpp:2720 src/main/Symbol.cpp:114
-#, c-format
-msgid "object '%s' not found"
+#: src/main/deparse.cpp:434 src/main/envir.cpp:812 src/main/eval.cpp:732
+#, fuzzy, c-format
+msgid "object '%s' was not found"
 msgstr "fann ikkje objektet «%s»"
 
-#: src/main/deparse.cpp:1621
+#: src/main/deparse.cpp:1622
 msgid "badly formed function expression"
 msgstr "feilutforma funksjonsuttrykk"
 
@@ -3121,6 +3293,11 @@ msgstr "feilutforma funksjonsuttrykk"
 #, fuzzy
 msgid "the base graphics system is not registered"
 msgstr "for mange grafikksystem registrerte"
+
+#: src/main/devices.cpp:61
+#, fuzzy
+msgid "argument passed to 'getSymbolValue()' function is not a symbol"
+msgstr "argumentet «editor» er ikkje definert"
 
 #: src/main/devices.cpp:183 src/main/devices.cpp:191
 msgid "no active or default device"
@@ -3132,157 +3309,229 @@ msgstr "for mange opne einingar"
 
 #: src/main/devices.cpp:509
 #, fuzzy
-msgid "not enough memory to allocate device (in GEcreateDevDesc)"
+msgid "not enough memory to allocate device (in 'GEcreateDevDesc()' function)"
 msgstr "ikkje nok minne å tildela eininga (i GEcreateDevDesc)"
 
 #: src/main/devices.cpp:551
 msgid "Hit <Return> to see next plot: "
 msgstr "Trykk «Enter» for å sjå det neste plottet: "
 
-#: src/main/dotcode.cpp:138 src/main/dotcode.cpp:168
+#: src/main/dotcode.cpp:52
+#, fuzzy
+msgid "the first argument should not be named"
+msgstr "det første argumentet må vera ei namna liste"
+
+#: src/main/dotcode.cpp:134 src/main/dotcode.cpp:163
 msgid "NULL value passed as symbol address"
 msgstr "NULL-verdi send som symboladresse"
 
-#: src/main/dotcode.cpp:159
-#, c-format
-msgid "Unimplemented type %d in createRSymbolObject"
-msgstr "Ikkje-implementert type «%d» i createRSymbolObject"
+#: src/main/dotcode.cpp:155
+#, fuzzy, c-format
+msgid "unimplemented type %d in '%s' function"
+msgstr "ikkje-implementert type (%d) i «%s»\n"
 
-#: src/main/dotcode.cpp:173 src/main/dotcode.cpp:271
+#: src/main/dotcode.cpp:168 src/main/dotcode.cpp:264
 #, c-format
 msgid "symbol '%s' is too long"
 msgstr "symbolet «%s» er for langt"
 
-#: src/main/dotcode.cpp:185
+#: src/main/dotcode.cpp:180
 #, fuzzy
 msgid ""
 "first argument must be a string (of length 1) or native symbol reference"
 msgstr "«name» må vera ein streng (av lengd 1) eller ein symbolreferanse"
 
-#: src/main/dotcode.cpp:235 src/main/dotcode.cpp:624
+#: src/main/dotcode.cpp:230 src/main/dotcode.cpp:603
 msgid "too many arguments in foreign function call"
 msgstr "for mange argument i eksternt funksjonskall"
 
-#: src/main/dotcode.cpp:247
-msgid "PACKAGE = \"\" is invalid"
+#: src/main/dotcode.cpp:242
+msgid "'PACKAGE = \"\"' is invalid"
 msgstr ""
 
-#: src/main/dotcode.cpp:303 src/main/dotcode.cpp:308 src/main/dotcode.cpp:313
-#: src/main/dotcode.cpp:318
+#: src/main/dotcode.cpp:255
+#, c-format
+msgid "using 'PACKAGE = \"%s\"' from namespace '%s'"
+msgstr ""
+
+#: src/main/dotcode.cpp:279
+#, c-format
+msgid "\"%s\" was not resolved from current namespace (%s)"
+msgstr ""
+
+#: src/main/dotcode.cpp:294 src/main/dotcode.cpp:297 src/main/dotcode.cpp:300
+#: src/main/dotcode.cpp:303
 #, fuzzy, c-format
-msgid "\"%s\" not available for %s() for package \"%s\""
+msgid "symbol name \"%s\" is not available for '%s' method for package '%s'"
 msgstr "%s er ikkje tilgjengeleg for eininga"
 
-#: src/main/dotcode.cpp:323
+#: src/main/dotcode.cpp:306
 #, fuzzy, c-format
-msgid "%s symbol name \"%s\" not in DLL for package \"%s\""
+msgid "'%s' symbol name \"%s\" is not in DLL for package '%s'"
 msgstr "%s symbolnamnet «%s» finst ikkje i DLL-fila for pakken «%s»"
 
-#: src/main/dotcode.cpp:328
+#: src/main/dotcode.cpp:310
 #, fuzzy, c-format
-msgid "%s symbol name \"%s\" not in load table"
+msgid "'%s' symbol name \"%s\" is not in load table"
 msgstr "%s symbolnamnet «%s» finst ikkje i lastetabellen"
 
-#: src/main/dotcode.cpp:379 src/main/dotcode.cpp:381 src/main/dotcode.cpp:391
-#: src/main/dotcode.cpp:457 src/main/dotcode.cpp:464
+#: src/main/dotcode.cpp:360 src/main/dotcode.cpp:362 src/main/dotcode.cpp:372
+#: src/main/dotcode.cpp:436 src/main/dotcode.cpp:443
 #, fuzzy, c-format
-msgid "'%s' used more than once"
+msgid "'%s' argument was used more than once"
 msgstr "DUP brukt meir enn éin gong"
 
-#: src/main/dotcode.cpp:387
-msgid "DLL name is too long"
-msgstr "DLL-namnet er for langt"
+#: src/main/dotcode.cpp:368
+#, fuzzy, c-format
+msgid "DLL name '%s' is too long"
+msgstr "DLLname «%s» er for langt"
 
-#: src/main/dotcode.cpp:433
+#: src/main/dotcode.cpp:389
+#, fuzzy, c-format
+msgid "incorrect type (%s) of 'PACKAGE' argument"
+msgstr "ugyldig type for andre argument"
+
+#: src/main/dotcode.cpp:412
+#, fuzzy, c-format
+msgid "'%s' argument must be a single character string"
+msgstr "«norm» må vera ein teiknstreng"
+
+#: src/main/dotcode.cpp:418 src/main/dounzip.cpp:343 src/unix/sys-std.c:1234
+#: src/unix/sys-std.c:1257
+#, fuzzy, c-format
+msgid "'%s' argument is too long"
+msgstr "argumentet «file» er for langt"
+
+#: src/main/dotcode.cpp:463 src/main/dotcode.cpp:467
 #, fuzzy
-msgid "PACKAGE argument must be a single character string"
-msgstr "PACKAGE-argumentet må vera ein einskild tekststreng"
+msgid "'ENCODING' argument is defunct and will be ignored"
+msgstr "argumentet «%s» vert ikkje brukt"
 
-#: src/main/dotcode.cpp:439
-msgid "PACKAGE argument is too long"
-msgstr "PACKAGE-argumentet er for langt"
-
-#: src/main/dotcode.cpp:504
+#: src/main/dotcode.cpp:483
 msgid "no arguments supplied"
 msgstr "ingen argument oppgjevne"
 
-#: src/main/dotcode.cpp:542 src/main/dotcode.cpp:616 src/main/dotcode.cpp:802
-#, fuzzy
-msgid "'.NAME' is missing"
-msgstr "«EXPR» manglar"
+#: src/main/dotcode.cpp:521 src/main/dotcode.cpp:595 src/main/dotcode.cpp:781
+#, c-format
+msgid "'%s' is missing"
+msgstr "«%s» manglar"
 
-#: src/main/dotcode.cpp:551 src/main/dotcode.cpp:631 src/main/dotcode.cpp:823
+#: src/main/dotcode.cpp:530 src/main/dotcode.cpp:610 src/main/dotcode.cpp:802
 #, fuzzy, c-format
 msgid "Incorrect number of arguments (%d), expecting %d for '%s'"
 msgstr "Feil tal på argument (%d). Venta %d for %s."
 
-#: src/main/dotcode.cpp:600 src/main/dotcode.cpp:1114
-#: src/main/Expression.cpp:204
-msgid "too many arguments, sorry"
-msgstr "for mange argument"
-
-#: src/main/dotcode.cpp:668 src/main/dotcode.cpp:685 src/main/engine.cpp:3024
+#: src/main/dotcode.cpp:647 src/main/dotcode.cpp:664 src/main/engine.cpp:3023
 msgid "invalid graphics state"
 msgstr "ugyldig grafikktilstand"
 
-#: src/main/dotcode.cpp:762
+#: src/main/dotcode.cpp:741
 #, fuzzy
-msgid "NULL value for DLLInfoReference when looking for DLL"
+msgid "NULL value for 'DLLInfoReference' when looking for DLL"
 msgstr "NULL-verdi for DLLInfoReference ved opning av DLL"
 
-#: src/main/dotcode.cpp:863
+#: src/main/dotcode.cpp:842
 #, fuzzy, c-format
-msgid "wrong type for argument %d in call to %s"
+msgid "wrong type for argument %d in call to '%s'"
 msgstr "Feil type for argument %d i kall til %s"
 
-#: src/main/dotcode.cpp:894
+#: src/main/dotcode.cpp:872
 #, fuzzy, c-format
 msgid "long vectors (argument %d) are not supported in %s"
 msgstr "symbolske lenkjer er ikkje støtta på denne plattforma"
 
-#: src/main/dotcode.cpp:926
+#: src/main/dotcode.cpp:904
 #, fuzzy, c-format
-msgid "NAs in foreign function call (arg %d)"
+msgid "NA values in foreign function call (arg %d)"
 msgstr "NA-verdiar i kall av ekstern funksjon (argument %d)"
 
-#: src/main/dotcode.cpp:951
+#: src/main/dotcode.cpp:929
 #, fuzzy, c-format
-msgid "NA/NaN/Inf in foreign function call (arg %d)"
+msgid "NA/NaN/Inf value in foreign function call (arg %d)"
 msgstr "NA-/NaN/Inf-verdiar i kall av ekstern funksjon (argument %d)"
 
-#: src/main/dotcode.cpp:983
+#: src/main/dotcode.cpp:961
 #, fuzzy, c-format
-msgid "complex NA/NaN/Inf in foreign function call (arg %d)"
+msgid "complex NA/NaN/Inf value in foreign function call (arg %d)"
 msgstr "komplekse NA-/NaN/Inf-verdiar i kall av ekstern funksjon (argument %d)"
 
-#: src/main/dotcode.cpp:1006
+#: src/main/dotcode.cpp:984
 #, fuzzy
-msgid "only first string in char vector used in .Fortran"
+msgid "only first string in character vector used in '.Fortran'"
 msgstr "berre den første strengen i ein teiknvektor vert brukt i .Fortran"
 
-#: src/main/dotcode.cpp:1050 src/main/dotcode.cpp:1063
-#: src/main/dotcode.cpp:1074
+#: src/main/dotcode.cpp:1028 src/main/dotcode.cpp:1041
+#: src/main/dotcode.cpp:1052
 #, fuzzy, c-format
 msgid "invalid mode (%s) to pass to Fortran (arg %d)"
 msgstr "ugyldig modus å senda til Fortran (argument %d)"
 
-#: src/main/dotcode.cpp:1068
+#: src/main/dotcode.cpp:1046
 #, fuzzy, c-format
 msgid "invalid mode (%s) to pass to C or Fortran (arg %d)"
 msgstr "ugyldig modus å senda til Fortran (argument %d)"
 
-#: src/main/dotcode.cpp:1079
+#: src/main/dotcode.cpp:1057
 msgid "pairlists are passed as SEXP as from R 2.15.0"
 msgstr ""
 
-#: src/main/dotcode.cpp:1335
+#: src/main/dotcode.cpp:1117 src/main/dotcode.cpp:1136
+#: src/main/dotcode.cpp:1159 src/main/dotcode.cpp:1217
+#, c-format
+msgid "array over-run in %s(\"%s\") in %s argument %d\n"
+msgstr ""
+
+#: src/main/dotcode.cpp:1123 src/main/dotcode.cpp:1142
+#: src/main/dotcode.cpp:1165 src/main/dotcode.cpp:1223
+#, c-format
+msgid "array under-run in %s(\"%s\") in %s argument %d\n"
+msgstr ""
+
+#: src/main/dotcode.cpp:1190
+#, c-format
+msgid "array over-run in %s(\"%s\") in %s argument %d"
+msgstr ""
+
+#: src/main/dotcode.cpp:1196
+#, c-format
+msgid "array under-run in %s(\"%s\") in %s argument %d"
+msgstr ""
+
+#: src/main/dotcode.cpp:1248
+#, c-format
+msgid "array under-run in .C(\"%s\") in character argument %d, element %d"
+msgstr ""
+
+#: src/main/dotcode.cpp:1258
+#, c-format
+msgid ""
+"array over-run in .C(\"%s\") in character argument %d, element %d\n"
+"'%s'->'%s'\n"
+msgstr ""
+
+#: src/main/dotcode.cpp:1313
 #, fuzzy, c-format
-msgid "type \"%s\" not supported in interlanguage calls"
+msgid "type '%s' is not supported in interlanguage calls"
 msgstr "typen «%s» er ikkje støtta i kall på tvers av språk"
 
-#: src/main/dotcode.cpp:1451
+#: src/main/dotcode.cpp:1391
+#, fuzzy
+msgid "invalid function in 'call_R()'"
+msgstr "ugyldig funksjon i call_R"
+
+#: src/main/dotcode.cpp:1393
+#, fuzzy
+msgid "invalid argument count in 'call_R()'"
+msgstr "ugyldig argumenttal i call_R"
+
+#: src/main/dotcode.cpp:1395
+#, fuzzy
+msgid "invalid return value count in 'call_R()'"
+msgstr "ugyldig returverdi i call_R"
+
+#: src/main/dotcode.cpp:1429
 #, fuzzy, c-format
-msgid "mode '%s' is not supported in call_R"
+msgid "mode '%s' is not supported in 'call_R()' function"
 msgstr "modusen «%s» er ikkje støtta i call_R"
 
 #: src/main/DotInternal.cpp:64 src/main/DotInternal.cpp:67
@@ -3304,6 +3553,11 @@ msgstr " skriv ikkje over fila «%s»"
 msgid "zip file '%s' cannot be opened"
 msgstr "zip-fila «%s» kan ikkje opnast"
 
+#: src/main/dounzip.cpp:271 src/main/dounzip.cpp:286 src/main/dounzip.cpp:302
+#, fuzzy, c-format
+msgid "error %d with zipfile in '%s'"
+msgstr "typen %d er ikkje implementert i «%s»"
+
 #: src/main/dounzip.cpp:323
 msgid "invalid zip name argument"
 msgstr "ugyldig zip-namneargument"
@@ -3311,10 +3565,6 @@ msgstr "ugyldig zip-namneargument"
 #: src/main/dounzip.cpp:326 src/main/dounzip.cpp:420
 msgid "zip path is too long"
 msgstr "zip-adressa er for lang"
-
-#: src/main/dounzip.cpp:343
-msgid "'exdir' is too long"
-msgstr "«exdir» er for lang"
 
 #: src/main/dounzip.cpp:346
 msgid "'exdir' does not exist"
@@ -3332,6 +3582,11 @@ msgstr "zip-fila er øydelagd"
 msgid "CRC error in zip file"
 msgstr "CRC-feil i zip-fil"
 
+#: src/main/dounzip.cpp:384
+#, fuzzy
+msgid "internal error in 'unz' code"
+msgstr "intern feil i unz-kode"
+
 #: src/main/dounzip.cpp:387
 msgid "write error in extracting from zip file"
 msgstr "skrivefeil ved utpakking av zip-fil"
@@ -3343,7 +3598,7 @@ msgstr "feil %d ved utpakking av zip-fil"
 
 #: src/main/dounzip.cpp:415
 #, fuzzy
-msgid "unz connections can only be opened for reading"
+msgid "'unz' connections can only be opened for reading"
 msgstr "unz-samband kan berre opnast for lesing"
 
 #: src/main/dounzip.cpp:426
@@ -3375,51 +3630,48 @@ msgstr "kan ikkje skriva med dette sambandet"
 msgid "allocation of 'unz' connection failed"
 msgstr "feil ved reservering av unz-samband"
 
+#: src/main/dounzip.cpp:2094
+#, fuzzy
+msgid "possible truncation of >= 4GB file"
+msgstr "feil ved filtrunkering"
+
 #: src/main/dstruct.cpp:118
 #, fuzzy
 msgid "invalid body argument for 'function'"
 msgstr "ugyldige formelle argument for «function»"
 
-#: src/main/edit.cpp:115
+#: src/main/edit.cpp:116
 #, fuzzy
-msgid "invalid argument to edit()"
-msgstr "ugyldig argumentstype"
+msgid "invalid argument passed to 'edit()' function"
+msgstr "ugyldig argument til edit()"
 
-#: src/main/edit.cpp:126 src/main/saveload.cpp:2086
-msgid "unable to open file"
-msgstr "klarte ikkje opna fila"
-
-#: src/main/edit.cpp:139
+#: src/main/edit.cpp:140
 msgid "argument 'editor' type not valid"
 msgstr "argumentet «editor» er ikkje gyldig"
 
-#: src/main/edit.cpp:141
+#: src/main/edit.cpp:142
 msgid "argument 'editor' is not set"
 msgstr "argumentet «editor» er ikkje definert"
 
-#: src/main/edit.cpp:146
-msgid "'title' must be a string"
-msgstr "«title» må vera ein teiknstreng"
-
-#: src/main/edit.cpp:164
+#: src/main/edit.cpp:165
 #, c-format
 msgid "unable to run editor '%s'"
 msgstr "klarte ikkje køyra skriveprogrammet «%s»"
 
-#: src/main/edit.cpp:166
+#: src/main/edit.cpp:167
 msgid "editor ran but returned error status"
 msgstr "køyrde skriveprogrammet, men det gav feilstatus"
 
-#: src/main/edit.cpp:176
+#: src/main/edit.cpp:177
 #, c-format
 msgid "problem with running editor %s"
 msgstr "feil ved køyring av skriveprogrammet %s"
 
-#: src/main/edit.cpp:194
+#: src/main/edit.cpp:195
 msgid "unable to open file to read"
 msgstr "klarte ikkje opna fila å lesa"
 
-#: src/main/edit.cpp:201
+#: src/main/edit.cpp:202
 #, c-format
 msgid ""
 "%s occurred on line %d\n"
@@ -3438,7 +3690,7 @@ msgstr "Ikkje samsvar mellom grafikk-API-versjonar"
 
 #: src/main/engine.cpp:123 src/main/engine.cpp:128 src/main/engine.cpp:192
 #, fuzzy
-msgid "unable to allocate memory (in GEregister)"
+msgid "unable to allocate memory (in 'GEregister()' function)"
 msgstr "klarte ikkje reservera minne (i GEregister)"
 
 #: src/main/engine.cpp:163
@@ -3464,7 +3716,7 @@ msgstr "ugyldig linjesamanslåing"
 #: src/main/engine.cpp:771 src/main/engine.cpp:875 src/main/engine.cpp:1108
 #: src/main/engine.cpp:1215 src/main/engine.cpp:1338 src/main/engine.cpp:1402
 #, fuzzy
-msgid "'lwd' must be non-negative and finite"
+msgid "'lwd' argument must be non-negative and finite"
 msgstr "«gap» må vera eit heiltal større enn null"
 
 #: src/main/engine.cpp:808
@@ -3492,297 +3744,282 @@ msgstr "%s er ikkje tilgjengeleg for eininga"
 
 #: src/main/engine.cpp:1672
 #, fuzzy, c-format
-msgid "font face %d not supported for font family '%s'"
+msgid "font face %d is not supported for font family '%s'"
 msgstr "skriftsnittet «%d» er ikkje støtta for skrifta «%s»"
 
-#: src/main/engine.cpp:1988
+#: src/main/engine.cpp:1987
 msgid "no graphics device is active"
 msgstr "ingen verksame grafikkeiningar"
 
-#: src/main/engine.cpp:2065
+#: src/main/engine.cpp:2025
+msgid "use of negative 'pch' argument with symbol font is invalid"
+msgstr ""
+
+#: src/main/engine.cpp:2064
 #, fuzzy, c-format
-msgid "pch value '%d' is invalid in this locale"
+msgid "'pch' value '%d' is invalid in this locale"
 msgstr "pch-verdien «%d» er ugyldig i dette lokalet"
 
-#: src/main/engine.cpp:2323
+#: src/main/engine.cpp:2322
 #, fuzzy, c-format
-msgid "unimplemented pch value '%d'"
+msgid "unimplemented 'pch' value '%d'"
 msgstr "ikkje-implementert pch-verdi «%d»"
 
-#: src/main/engine.cpp:2346
+#: src/main/engine.cpp:2345
 #, fuzzy, c-format
-msgid "invalid axis extents [GEPretty(.,.,n=%d)"
+msgid "invalid axis extents '[GEPretty(.,.,n=%d)]'"
 msgstr "ugyldig aksestorleik [GEPretty(.,.,n=%d)"
 
-#: src/main/engine.cpp:2350
+#: src/main/engine.cpp:2349
 #, fuzzy, c-format
-msgid "infinite axis extents [GEPretty(%g,%g,%d)]"
+msgid "infinite axis extents '[GEPretty(%g,%g,%d)]'"
 msgstr "uendeleg aksestorleik [GEPretty(%g,%g,%d)]"
 
-#: src/main/engine.cpp:2387
+#: src/main/engine.cpp:2386
 #, fuzzy, c-format
-msgid " .. GEPretty(.): new *lo = %g < %g = x1"
+msgid " .. 'GEPretty(.)': new *lo = %g < %g = x1"
 msgstr " .. GEPretty(.): new *lo = %g < %g = x1"
 
-#: src/main/engine.cpp:2389
+#: src/main/engine.cpp:2388
 #, fuzzy, c-format
-msgid " .. GEPretty(.): new *up = %g > %g = x2"
+msgid " .. 'GEPretty(.)': new *up = %g > %g = x2"
 msgstr " .. GEPretty(.): new *up = %g > %g = x2"
 
-#: src/main/engine.cpp:2801
+#: src/main/engine.cpp:2800
 #, fuzzy
 msgid "display list redraw incomplete"
 msgstr "Ufullstendig oppteikning av visingsliste"
 
-#: src/main/engine.cpp:2805
+#: src/main/engine.cpp:2804
 #, fuzzy
 msgid "invalid display list"
 msgstr "ugyldig argumentliste"
 
-#: src/main/engine.cpp:2917
+#: src/main/engine.cpp:2916
 #, c-format
 msgid ""
 "snapshot recorded with different graphics engine version (pre 11 - this is "
 "version %d)"
 msgstr ""
 
-#: src/main/engine.cpp:2921
+#: src/main/engine.cpp:2920
 #, c-format
 msgid ""
 "snapshot recorded with different graphics engine version (%d - this is "
 "version %d)"
 msgstr ""
 
-#: src/main/engine.cpp:2997
-#, fuzzy
-msgid "'expr' argument must be an expression"
+#: src/main/engine.cpp:2996
+#, fuzzy, c-format
+msgid "'%s' argument must be an expression"
 msgstr "«expr»-argumentet må vera eit uttrykk"
 
-#: src/main/engine.cpp:2999
-msgid "'list' argument must be a list"
-msgstr "«list»-argumentet må vera ei liste"
-
-#: src/main/engine.cpp:3002
+#: src/main/engine.cpp:3081 src/main/engine.cpp:3089
 #, fuzzy
-msgid "'env' argument must be an environment"
-msgstr "«env»-argumentet må vera ein omgjevnad"
-
-#: src/main/engine.cpp:3082 src/main/engine.cpp:3090
-#, fuzzy
-msgid "invalid multibyte char in pch=\"c\""
+msgid "invalid multibyte char in 'pch=\"c\"'"
 msgstr "ugyldig multibyte-teikn i pch=\"c\""
 
-#: src/main/engine.cpp:3137
+#: src/main/engine.cpp:3136
 #, fuzzy
-msgid "invalid hex digit in 'color' or 'lty'"
+msgid "invalid hex digit in 'color' or 'lty' argument"
 msgstr "ugyldig heksadesimal-siffer i «color» eller «lty»"
 
-#: src/main/engine.cpp:3160
+#: src/main/engine.cpp:3159
 msgid "invalid line type: must be length 2, 4, 6 or 8"
 msgstr "ugyldig linjetype: må ha lengd 2,4 6 eller 8"
 
-#: src/main/engine.cpp:3164
+#: src/main/engine.cpp:3163
 msgid "invalid line type: zeroes are not allowed"
 msgstr "ugyldig linjetype: nullar er ikkje tilletne"
 
-#: src/main/engine.cpp:3173 src/main/engine.cpp:3181 src/main/engine.cpp:3188
+#: src/main/engine.cpp:3172 src/main/engine.cpp:3180 src/main/engine.cpp:3187
 msgid "invalid line type"
 msgstr "ugyldig linjetype"
 
-#: src/main/envir.cpp:143 src/main/Frame.cpp:124
+#: src/main/envir.cpp:144 src/main/Frame.cpp:124
 #, c-format
 msgid "cannot change value of locked binding for '%s'"
 msgstr "kan ikkje endra verdi på låst binding for «%s»"
 
-#: src/main/envir.cpp:272
+#: src/main/envir.cpp:273
 msgid "cannot unbind in the base namespace"
 msgstr "klarte ikkje avbinda i namnerommet «base»"
 
-#: src/main/envir.cpp:274
+#: src/main/envir.cpp:275
 msgid "unbind in the base environment is unimplemented"
 msgstr "avbinding er ikkje implementert for namnerommet «base»"
 
-#: src/main/envir.cpp:373
+#: src/main/envir.cpp:374
 #, fuzzy, c-format
-msgid "argument to '%s' is not an environment"
-msgstr "argumentet er ikkje ein omgjevnad"
+msgid "argument passed to '%s' is not an environment"
+msgstr "argumentet til «%s» er ikkje ein omgjevnad"
 
-#: src/main/envir.cpp:542
+#: src/main/envir.cpp:543
 #, fuzzy, c-format
-msgid "the ... list does not contain %d elements"
+msgid "the '...' list does not contain %d elements"
 msgstr "Lista «...» inneheld ikkje %d element"
 
-#: src/main/envir.cpp:544
+#: src/main/envir.cpp:545
 #, fuzzy, c-format
-msgid "..%d used in an incorrect context, no ... to look in"
+msgid "'..%d' used in an incorrect context, no '...' list to look in"
 msgstr "..%d er brukt i feil samanheng: ingen «...» å sjå i"
 
-#: src/main/envir.cpp:599 src/main/Expression.cpp:82
-#: src/main/jit/Compiler.cpp:233
+#: src/main/envir.cpp:600 src/main/objects.cpp:221
 #, fuzzy, c-format
-msgid "could not find function \"%s\""
+msgid "could not find function '%s'"
 msgstr "fann ikkje funksjonen «%s»"
 
-#: src/main/envir.cpp:616
+#: src/main/envir.cpp:617
 msgid "cannot assign values in the empty environment"
 msgstr "kan ikkje tildela verdiar i den tomme omgjevnaden"
 
-#: src/main/envir.cpp:704
+#: src/main/envir.cpp:705
 msgid "only the first element is used as variable name"
 msgstr "berre det første elementet vert brukt som variabelnamn"
 
-#: src/main/envir.cpp:732
+#: src/main/envir.cpp:733
 msgid "first argument must be a named list"
 msgstr "det første argumentet må vera ei namna liste"
 
-#: src/main/envir.cpp:737
+#: src/main/envir.cpp:738
 #, fuzzy
-msgid "names(x) must be a character vector of the same length as x"
+msgid "'names(x)' must be a character vector of the same length as x"
 msgstr "names(x) må vera ein teiknvektor av same lengd som x«xosm"
 
-#: src/main/envir.cpp:740
-#, fuzzy
-msgid "'envir' argument must be an environment"
-msgstr "«env»-argumentet må vera ein omgjevnad"
-
-#: src/main/envir.cpp:766
+#: src/main/envir.cpp:767
 msgid "cannot remove variables from base namespace"
 msgstr "kan ikkje fjerna variablar frå namnerommet «base»"
 
-#: src/main/envir.cpp:768
+#: src/main/envir.cpp:769
 msgid "cannot remove variables from the base environment"
 msgstr "kan ikkje fjerna variablar frå omgjevnaden «base»"
 
-#: src/main/envir.cpp:770
+#: src/main/envir.cpp:771
 msgid "cannot remove variables from the empty environment"
 msgstr "kan ikkje fjerna variablar frå den tomme omgjevnaden"
 
-#: src/main/envir.cpp:772
+#: src/main/envir.cpp:773
 msgid "cannot remove bindings from a locked environment"
 msgstr "kan ikkje fjerna bindingar frå ein låst omgjevnad"
 
-#: src/main/envir.cpp:892
+#: src/main/envir.cpp:891 src/main/saveload.cpp:1992
+#: src/main/saveload.cpp:2302 src/main/serialize.cpp:2720
+#: src/main/Symbol.cpp:114
+#, c-format
+msgid "object '%s' not found"
+msgstr "fann ikkje objektet «%s»"
+
+#: src/main/envir.cpp:893
 #, c-format
 msgid "object '%s' of mode '%s' was not found"
 msgstr "fann ikkje objektet «%s» av modus «%s»"
 
-#: src/main/envir.cpp:966
+#: src/main/envir.cpp:967
 #, c-format
 msgid "invalid name in position %d"
 msgstr "ugyldig namn i posisjon %d"
 
-#: src/main/envir.cpp:970
+#: src/main/envir.cpp:971
 msgid "second argument must be an environment"
 msgstr "det andre argumentet må vera ein omgjevnad"
 
-#: src/main/envir.cpp:978 src/main/envir.cpp:986
+#: src/main/envir.cpp:979 src/main/envir.cpp:987
 #, c-format
 msgid "wrong length for '%s' argument"
 msgstr "feil lengd på «%s»-argumentet"
 
-#: src/main/envir.cpp:1062
+#: src/main/envir.cpp:1063
 msgid "invalid use of 'missing'"
 msgstr "ugyldig bruk av «missing»"
 
-#: src/main/envir.cpp:1088
+#: src/main/envir.cpp:1089
 msgid "'missing' can only be used for arguments"
 msgstr "«missing» kan berre brukast på argument"
 
-#: src/main/envir.cpp:1164
-msgid "'pos' must be an integer"
-msgstr "«pos» må vera eit heiltal"
+#: src/main/envir.cpp:1165
+#, fuzzy, c-format
+msgid "'%s' argument must be an integer"
+msgstr "«list»-argumentet må vera ei liste"
 
-#: src/main/envir.cpp:1180 src/main/envir.cpp:1184
+#: src/main/envir.cpp:1181 src/main/envir.cpp:1185
 msgid "all elements of a list must be named"
 msgstr "all elementa i ei liste må ha namn"
 
-#: src/main/envir.cpp:1193
+#: src/main/envir.cpp:1194
 #, fuzzy
 msgid "'attach' only works for lists, data frames and environments"
 msgstr "«attach» fungerer berre for lister, datarammer og omgjevnader"
 
-#: src/main/envir.cpp:1384 src/main/envir.cpp:1422
-msgid "argument must be an environment"
-msgstr "argumentet må vera ein omgjevnad"
-
-#: src/main/envir.cpp:1426
+#: src/main/envir.cpp:1427
 msgid "arguments must be symbolic"
 msgstr "argumenta må vera symbolske"
 
-#: src/main/envir.cpp:1539
+#: src/main/envir.cpp:1540
 msgid "no enclosing environment"
 msgstr "inga omslutnande omgjevnad"
 
-#: src/main/envir.cpp:1590
+#: src/main/envir.cpp:1591
 #, fuzzy, c-format
-msgid "no item called \"%s\" on the search list"
+msgid "no item called '%s' on the search list"
 msgstr "elementet «%s» finst ikkje i søkjelista"
 
-#: src/main/envir.cpp:1611
+#: src/main/envir.cpp:1612
 msgid "using 'as.environment(NULL)' is defunct"
 msgstr "bruk av «as.environment(NULL)» er ikkje lenger mogleg"
 
-#: src/main/envir.cpp:1617
+#: src/main/envir.cpp:1618
 msgid "S4 object does not extend class \"environment\""
 msgstr "S4-objekt utvidar ikkje klassen «environment»"
 
-#: src/main/envir.cpp:1631
+#: src/main/envir.cpp:1632
 #, fuzzy
-msgid "invalid object for 'as.environment'"
+msgid "invalid object for 'as.environment()' function"
 msgstr "ugyldig objekt til «as.environment»"
 
-#: src/main/envir.cpp:1640 src/main/envir.cpp:1660 src/main/envir.cpp:1685
-#: src/main/envir.cpp:1699 src/main/envir.cpp:1715 src/main/envir.cpp:1728
-#: src/main/envir.cpp:1742
-#, fuzzy
-msgid "not an environment"
-msgstr "ikkje ein omgjevnad"
-
-#: src/main/envir.cpp:1682 src/main/envir.cpp:1696 src/main/envir.cpp:1710
-#: src/main/envir.cpp:1725 src/main/envir.cpp:1739
-#, fuzzy
-msgid "not a symbol"
-msgstr "ugyldig symbol"
-
-#: src/main/envir.cpp:1689 src/main/envir.cpp:1703 src/main/envir.cpp:1732
-#: src/main/envir.cpp:1745
+#: src/main/envir.cpp:1683 src/main/envir.cpp:1697 src/main/envir.cpp:1711
+#: src/main/envir.cpp:1726 src/main/envir.cpp:1740
 #, fuzzy, c-format
-msgid "no binding for \"%s\""
+msgid "'%s' argument is not a symbol"
+msgstr "ikkje eit symbol"
+
+#: src/main/envir.cpp:1690 src/main/envir.cpp:1704 src/main/envir.cpp:1733
+#: src/main/envir.cpp:1746
+#, fuzzy, c-format
+msgid "no binding for '%s'"
 msgstr "inga binding for «%s»"
 
-#: src/main/envir.cpp:1712
-#, fuzzy
-msgid "not a function"
-msgstr "«fn» er ikkje ein funksjon"
-
-#: src/main/envir.cpp:1772 src/main/envir.cpp:1982
+#: src/main/envir.cpp:1773 src/main/envir.cpp:1983
 msgid "unknown op"
 msgstr "ukjend op"
 
-#: src/main/envir.cpp:1941
+#: src/main/envir.cpp:1942
 #, fuzzy
 msgid "bad namespace name"
 msgstr "ugyldig namn på namnerom"
 
-#: src/main/envir.cpp:1952
+#: src/main/envir.cpp:1953
 #, fuzzy
-msgid "namespace already registered"
+msgid "namespace is already registered"
 msgstr "namnerommet er alt registrert"
 
-#: src/main/envir.cpp:1962
+#: src/main/envir.cpp:1963
 #, fuzzy
-msgid "namespace not registered"
+msgid "namespace is not registered"
 msgstr "namnerommet er ikkje registrert"
 
-#: src/main/envir.cpp:2010 src/main/envir.cpp:2013
+#: src/main/envir.cpp:2011
 msgid "bad import environment argument"
 msgstr "ugyldig argument til importeringsomgjevnad"
 
-#: src/main/envir.cpp:2017
+#: src/main/envir.cpp:2014
+msgid "bad export environment argument"
+msgstr "ugyldig argument til eksporteringsomgjevnad"
+
+#: src/main/envir.cpp:2018
 msgid "length of import and export names must match"
 msgstr "importerings- og eksporteringsnamna må vera like lange"
 
-#: src/main/envir.cpp:2038
+#: src/main/envir.cpp:2039
 #, c-format
 msgid "exported symbol '%s' has no value"
 msgstr "det eksporterte symbolet «%s» har ikkje nokon verdi"
@@ -3800,316 +4037,341 @@ msgstr "kan ikkje kopla laus «package:base»"
 msgid "use of NULL environment is defunct"
 msgstr "bruk av NULL-omgjevnaden er ikkje lenger mogleg"
 
-#: src/main/errors.cpp:168 src/main/errors.cpp:198
+#: src/main/errors.cpp:167 src/main/errors.cpp:197
 msgid "interrupts suspended; signal ignored"
 msgstr "uverksame avbrot – signal ignorert"
 
-#: src/main/errors.cpp:301 src/main/errors.cpp:785
+#: src/main/errors.cpp:300 src/main/errors.cpp:784
 #, fuzzy, c-format
 msgid "invalid \"%s\" option"
 msgstr "ugyldig val «error»\n"
 
-#: src/main/errors.cpp:325
+#: src/main/errors.cpp:324
 #, c-format
 msgid "(converted from warning) %s"
 msgstr "(gjord om frå åtvaring) %s"
 
-#: src/main/errors.cpp:335
+#: src/main/errors.cpp:334
 #, fuzzy
 msgid "Warning:"
 msgstr "Åtvaring: %s\n"
 
-#: src/main/errors.cpp:337
+#: src/main/errors.cpp:336
 #, fuzzy, c-format
 msgid "Warning in command '%s':"
 msgstr "Åtvaring in %s: %s\n"
 
-#: src/main/errors.cpp:346 src/main/errors.cpp:361 src/main/errors.cpp:666
+#: src/main/errors.cpp:345 src/main/errors.cpp:360 src/main/errors.cpp:665
 msgid "Calls:"
 msgstr ""
 
-#: src/main/errors.cpp:412
+#: src/main/errors.cpp:411
 #, fuzzy
 msgid "Warning message:"
 msgid_plural "Warning messages:"
 msgstr[0] "Åtvaring:\n"
 msgstr[1] "Åtvaring:\n"
 
-#: src/main/errors.cpp:421 src/main/errors.cpp:519 src/main/errors.cpp:583
+#: src/main/errors.cpp:420 src/main/errors.cpp:518 src/main/errors.cpp:582
 #, fuzzy
 msgid "Lost warning messages"
 msgstr "Tapt åtvaringsmelding\n"
 
-#: src/main/errors.cpp:440 src/main/errors.cpp:469
+#: src/main/errors.cpp:439 src/main/errors.cpp:468
 #, fuzzy, c-format
 msgid "In command '%s':"
 msgstr ""
 "Åtvaring i %s:\n"
 "  %s\n"
 
-#: src/main/errors.cpp:494
+#: src/main/errors.cpp:493
 #, fuzzy, c-format
 msgid "There was %d warning (use 'warnings()' to see it)"
 msgid_plural "There were %d warnings (use 'warnings()' to see them)"
 msgstr[0] "Det oppstod %d åtvaringar (bruk «warnings()» for å sjå dei)\n"
 msgstr[1] "Det oppstod %d åtvaringar (bruk «warnings()» for å sjå dei)\n"
 
-#: src/main/errors.cpp:499
+#: src/main/errors.cpp:498
 #, fuzzy, c-format
 msgid "There were %d or more warnings (use 'warnings()' to see the first %d)"
 msgstr ""
 "Det oppstod 50 eller fleire åtvaringar (bruk «warnings()» for å sjå dei 50 "
 "første)\n"
 
-#: src/main/errors.cpp:574
+#: src/main/errors.cpp:573
 msgid "Error during wrapup: "
 msgstr "Feil ved wrapup: "
 
-#: src/main/errors.cpp:597
+#: src/main/errors.cpp:596
 #, fuzzy
 msgid "Error in command:"
 msgstr "ikkje ein funksjon"
 
-#: src/main/errors.cpp:619 src/main/errors.cpp:626
+#: src/main/errors.cpp:618 src/main/errors.cpp:625
 #, fuzzy, c-format
 msgid "Error in command '%s' (from %s): "
 msgstr "Feil i "
 
-#: src/main/errors.cpp:628
+#: src/main/errors.cpp:627
 #, fuzzy, c-format
 msgid "Error in command '%s': "
 msgstr "Feil i "
 
-#: src/main/errors.cpp:648 src/main/errors.cpp:654
+#: src/main/errors.cpp:647 src/main/errors.cpp:653
 #, c-format
 msgid "Error: "
 msgstr "Feil: "
 
-#: src/main/errors.cpp:675 src/main/errors.cpp:1248
+#: src/main/errors.cpp:674 src/main/errors.cpp:1247
 #, fuzzy
 msgid "Additional warning message:"
 msgid_plural "Additional warning messages:"
 msgstr[0] "Tapt åtvaringsmelding\n"
 msgstr[1] "Tapt åtvaringsmelding\n"
 
-#: src/main/errors.cpp:856
+#: src/main/errors.cpp:855
 msgid "Execution halted\n"
 msgstr "Stoppa køyring\n"
 
-#: src/main/errors.cpp:964
+#: src/main/errors.cpp:963
 #, c-format
 msgid "translating '%s' in domain '%s'\n"
 msgstr ""
 
-#: src/main/errors.cpp:1097 src/main/errors.cpp:1129
+#: src/main/errors.cpp:1096 src/main/errors.cpp:1128
 #, fuzzy, c-format
 msgid " [invalid string in '%s']"
 msgstr " [ugyldig streng i stop(.)]"
 
-#: src/main/errors.cpp:1145
+#: src/main/errors.cpp:1144
 #, fuzzy, c-format
 msgid "incorrect number of arguments passed to '%s' function"
 msgstr "feil tal på argument til «%s»"
 
-#: src/main/errors.cpp:1151 src/main/errors.cpp:1166
+#: src/main/errors.cpp:1150 src/main/errors.cpp:1165
 #, fuzzy, c-format
 msgid "unimplemented feature in '%s' function"
 msgstr "ikkje-implementert funksjon i %s"
 
-#: src/main/errors.cpp:1160
+#: src/main/errors.cpp:1159
 msgid "invalid number of arguments"
 msgstr "ugyldig tal på argument"
 
-#: src/main/errors.cpp:1161 src/main/logic.cpp:125
+#: src/main/errors.cpp:1160 src/main/logic.cpp:125
 msgid "invalid argument type"
 msgstr "ugyldig argumentstype"
 
-#: src/main/errors.cpp:1163 src/main/logic.cpp:312 src/main/logic.cpp:314
+#: src/main/errors.cpp:1162 src/main/logic.cpp:312 src/main/logic.cpp:314
 msgid "time-series/vector length mismatch"
 msgstr "ikkje samsvarande lengd på tidsrekkje/vektor"
 
-#: src/main/errors.cpp:1164
+#: src/main/errors.cpp:1163
 msgid "incompatible arguments"
 msgstr "ikkje-kompatible argument"
 
-#: src/main/errors.cpp:1167
+#: src/main/errors.cpp:1166
 msgid "unknown error (report this!)"
 msgstr "ukjend feil (meld frå om dette!)"
 
 #: src/main/errors.cpp:1175
-#, fuzzy
-msgid "NA values introduced by coercion"
-msgstr "det oppstod NA-verdiar ved typeomgjering"
-
-#: src/main/errors.cpp:1176
 msgid "inaccurate integer conversion in coercion"
 msgstr "unøyaktig heiltalsomgjering ved typeomgjering"
 
-#: src/main/errors.cpp:1179
+#: src/main/errors.cpp:1178
 msgid "unknown warning (report this!)"
 msgstr "ukjend åtvaring (meld frå om dette!)"
 
-#: src/main/errors.cpp:1494
+#: src/main/errors.cpp:1493
 msgid "bad handler data"
 msgstr "ugyldig handteringsdata"
 
-#: src/main/errors.cpp:1557 src/main/errors.cpp:1816 src/main/eval.cpp:1227
+#: src/main/errors.cpp:1556 src/main/errors.cpp:1815 src/main/eval.cpp:1228
 msgid "no function to return from, jumping to top level"
 msgstr "ingen funksjon å returnera frå (hoppar til toppnivå)"
 
-#: src/main/errors.cpp:1638
+#: src/main/errors.cpp:1637
 #, fuzzy
 msgid "error message is not a character string"
 msgstr "feilmeldinga må vera ein teiknstreng"
 
-#: src/main/errors.cpp:1709
+#: src/main/errors.cpp:1708
 msgid "handler or restart stack mismatch in old restart"
 msgstr "ikkje samsvar i handterings- eller omstartstakk i gammal omstart"
 
-#: src/main/errors.cpp:1732 src/main/errors.cpp:1746
+#: src/main/errors.cpp:1731 src/main/errors.cpp:1745
 msgid "bad error message"
 msgstr "ugyldig feilmelding"
 
-#: src/main/errors.cpp:1785
+#: src/main/errors.cpp:1784
 msgid "bad restart"
 msgstr "ugyldig omstart"
 
-#: src/main/errors.cpp:1820
+#: src/main/errors.cpp:1819
 #, fuzzy
 msgid "restart is not on stack"
 msgstr "omstart ikkje på stakk"
 
-#: src/main/errors.cpp:1836
+#: src/main/errors.cpp:1835
 #, fuzzy
 msgid "error message must be a character string"
 msgstr "feilmeldinga må vera ein teiknstreng"
 
-#: src/main/eval.cpp:392
+#: src/main/eval.cpp:393
 #, c-format
 msgid "source files skipped by Rprof; please increase '%s'"
 msgstr ""
 
-#: src/main/eval.cpp:412
+#: src/main/eval.cpp:413
 #, c-format
 msgid "Rprof: cannot open profile file '%s'"
 msgstr "Rprof: klarte ikkje opna profilfila «%s»"
 
-#: src/main/eval.cpp:501
+#: src/main/eval.cpp:449
+#, fuzzy
+msgid "unable to create profiling thread"
+msgstr "klarte ikkje laga pixmap"
+
+#: src/main/eval.cpp:502
 msgid "R profiling is not available on this system"
 msgstr "R-profilering er ikkje tilgjengeleg på dette systemet"
 
-#: src/main/eval.cpp:525
+#: src/main/eval.cpp:526
 #, c-format
 msgid "%s at %s#%d: "
 msgstr "%s på %s#%d: "
 
-#: src/main/eval.cpp:633 src/main/Expression.cpp:88
+#: src/main/eval.cpp:578
+msgid "debugging in: "
+msgstr ""
+
+#: src/main/eval.cpp:581
+msgid "debug: "
+msgstr ""
+
+#: src/main/eval.cpp:590
+msgid "exiting from: "
+msgstr ""
+
+#: src/main/eval.cpp:629
+#, fuzzy
+msgid "something weird happened"
+msgstr "ingenting å tilføya til"
+
+#: src/main/eval.cpp:634 src/main/Expression.cpp:88
 msgid "attempt to apply non-function"
 msgstr "prøvde å køyra ikkje-funksjon"
 
-#: src/main/eval.cpp:788
+#: src/main/eval.cpp:789
 msgid "the condition has length > 1 and only the first element will be used"
 msgstr "vilkåret har lengd større 1 enn (berre første elementet vert brukt)"
 
-#: src/main/eval.cpp:806
+#: src/main/eval.cpp:807
 msgid "missing value where TRUE/FALSE needed"
 msgstr "manglar verdi der TRUE/FALSE (sann/usann) trengst"
 
-#: src/main/eval.cpp:807
+#: src/main/eval.cpp:808
 msgid "argument is not interpretable as logical"
 msgstr "argumentet kan ikkje tolkast som ein logisk verdi"
 
-#: src/main/eval.cpp:808
-msgid "argument is of length zero"
+#: src/main/eval.cpp:809
+#, fuzzy
+msgid "argument is of length 0"
 msgstr "argumentet har lengd null"
 
-#: src/main/eval.cpp:909
+#: src/main/eval.cpp:910
 msgid "non-symbol loop variable"
 msgstr "lykkje-variabel som ikkje er eit symbol"
 
-#: src/main/eval.cpp:1000
-msgid "invalid for() loop sequence"
+#: src/main/eval.cpp:1001
+#, fuzzy
+msgid "invalid 'for()' loop sequence"
 msgstr "ugyldig for()-lykkje"
 
-#: src/main/eval.cpp:1171 src/main/jit/RuntimeImpl.cpp:152
+#: src/main/eval.cpp:1172 src/main/jit/RuntimeImpl.cpp:152
 #: src/main/jit/RuntimeImpl.cpp:158
 msgid "no loop to break from"
 msgstr ""
 
-#: src/main/eval.cpp:1222
+#: src/main/eval.cpp:1223
 msgid "multi-argument returns are not permitted"
 msgstr "fleire returverdiar er ikkje mogleg"
 
-#: src/main/eval.cpp:1244
+#: src/main/eval.cpp:1245
 #, fuzzy
 msgid "invalid formal argument list for 'function'"
 msgstr "ugyldig formell argumentliste til «function»"
 
-#: src/main/eval.cpp:1279
+#: src/main/eval.cpp:1280
 msgid "invalid (NULL) left side of assignment"
 msgstr "ugyldig venstreside (NULL) i tildeling"
 
-#: src/main/eval.cpp:1301
+#: src/main/eval.cpp:1302
 msgid "target of assignment expands to non-language object"
 msgstr "målet i tildelinga vert utvida til eit ikkje-språksobjekt"
 
-#: src/main/eval.cpp:1424
+#: src/main/eval.cpp:1425
 msgid "cannot do complex assignments in base namespace"
 msgstr "kan ikkje utføra komplekse tildelingar namnerommet «base»"
 
-#: src/main/eval.cpp:1426
+#: src/main/eval.cpp:1427
 msgid "cannot do complex assignments in base environment"
 msgstr "kan ikkje utføra komplekse tildelingar omgjevnaden «base»"
 
-#: src/main/eval.cpp:1463 src/main/eval.cpp:1496
+#: src/main/eval.cpp:1464 src/main/eval.cpp:1497
 msgid "invalid function in complex assignment"
 msgstr "ugyldig funksjon i kompleks tildeling"
 
-#: src/main/eval.cpp:1570
+#: src/main/eval.cpp:1571
 #, fuzzy
 msgid "invalid (do_set) left-hand side to assignment"
 msgstr "ugyldig (do_set) venstreside i tildeling"
 
-#: src/main/eval.cpp:1586
+#: src/main/eval.cpp:1587
 msgid "invalid assignment left-hand side"
 msgstr "ugyldig venstreside i tildeling"
 
-#: src/main/eval.cpp:1664 src/main/eval.cpp:1695 src/main/eval.cpp:1700
+#: src/main/eval.cpp:1665 src/main/eval.cpp:1696 src/main/eval.cpp:1701
 #, fuzzy, c-format
 msgid "invalid '%s' argument of type '%s'"
 msgstr "ugyldig «%s»-argument"
 
-#: src/main/eval.cpp:1692
+#: src/main/eval.cpp:1693
 #, fuzzy
-msgid "numeric 'envir' arg not of length one"
+msgid "numeric 'envir' argument is not of length one"
 msgstr "numerisk «envir»-argument ikkje av lengd 1"
 
-#: src/main/eval.cpp:1802 src/main/eval.cpp:1815
+#: src/main/eval.cpp:1803 src/main/eval.cpp:1816
 #, fuzzy
-msgid "'Recall' called from outside a closure"
+msgid "'Recall()' function called from outside a closure"
 msgstr "«Recall» kalla utanfrå ei omslutting"
 
-#: src/main/eval.cpp:2028
+#: src/main/eval.cpp:2029
 #, c-format
 msgid "Incompatible methods (\"%s\", \"%s\") for \"%s\""
 msgstr "Ikkje-kompatible metodar («%s», «%s») for «%s»"
 
-#: src/main/eval.cpp:2085
+#: src/main/eval.cpp:2086
 msgid "bad file name"
 msgstr "ugyldig filnamn"
 
-#: src/main/eval.cpp:2089 src/main/eval.cpp:2108
-msgid "unable to open 'file'"
-msgstr "klarte ikkje opna «file»"
+#: src/main/eval.cpp:2103
+#, fuzzy, c-format
+msgid "'%s' argument must be non-empty character string"
+msgstr "«title» må vera ein teiknstreng"
 
-#: src/main/eval.cpp:2102 src/main/saveload.cpp:1960
-msgid "'file' must be non-empty string"
-msgstr "«file» må vera ein ikkje-tom teiknstreng"
-
-#: src/main/eval.cpp:2104 src/main/saveload.cpp:1962
-#: src/main/saveload.cpp:2241 src/main/serialize.cpp:2144
-msgid "'ascii' must be logical"
+#: src/main/eval.cpp:2105 src/modules/lapack/Lapack.c:1243
+#, fuzzy, c-format
+msgid "'%s' argument must be logical"
 msgstr "«ascii» må vera ein logisk verdi"
+
+#: src/main/Expression.cpp:82 src/main/jit/Compiler.cpp:233
+#, fuzzy, c-format
+msgid "could not find function \"%s\""
+msgstr "fann ikkje funksjonen «%s»"
+
+#: src/main/Expression.cpp:204
+msgid "too many arguments, sorry"
+msgstr "for mange argument"
 
 #: src/main/Frame.cpp:86 src/main/Frame.cpp:101
 #, fuzzy, c-format
@@ -4901,11 +5163,6 @@ msgstr ""
 #: src/main/objects.cpp:205 src/main/objects.cpp:334
 msgid "'UseMethod' used in an inappropriate fashion"
 msgstr "«UseMethod» brukt på feil måte"
-
-#: src/main/objects.cpp:221
-#, fuzzy, c-format
-msgid "could not find function '%s'"
-msgstr "fann ikkje funksjonen «%s»"
 
 #: src/main/objects.cpp:232
 #, fuzzy
@@ -6318,6 +6575,15 @@ msgstr ""
 msgid "first argument must be a character vector"
 msgstr "det første argumentet må vera ein teiknvektor"
 
+#: src/main/saveload.cpp:1960
+msgid "'file' must be non-empty string"
+msgstr "«file» må vera ein ikkje-tom teiknstreng"
+
+#: src/main/saveload.cpp:1962 src/main/saveload.cpp:2241
+#: src/main/serialize.cpp:2144
+msgid "'ascii' must be logical"
+msgstr "«ascii» må vera ein logisk verdi"
+
 #: src/main/saveload.cpp:2024
 #, fuzzy
 msgid "not a valid named list"
@@ -6336,6 +6602,10 @@ msgstr "lasta data er ikkje i para listeform"
 #: src/main/saveload.cpp:2075
 msgid "first argument must be a file name"
 msgstr "det første argumentet må vera eit filnamn"
+
+#: src/main/saveload.cpp:2086
+msgid "unable to open file"
+msgstr "klarte ikkje opna fila"
 
 #: src/main/saveload.cpp:2115 src/main/saveload.cpp:2141
 #: src/main/serialize.cpp:880 src/main/serialize.cpp:917
@@ -6401,11 +6671,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "scan() expected '%s', got '%s'"
 msgstr "scan() venta «%s», men fekk «%s»"
-
-#: src/main/scan.cpp:591 src/main/scan.cpp:741
-#, fuzzy
-msgid "too many items"
-msgstr "for mange argument"
 
 #: src/main/scan.cpp:677
 msgid "empty 'what' specified"
@@ -6751,6 +7016,11 @@ msgstr "indeksen %d ligg utanfor gyldig verdiområde"
 #: src/main/sort.cpp:1358
 msgid "invalid ties.method for rank() [should never happen]"
 msgstr "ugyldig ties.method for rank() [skal aldri skje]"
+
+#: src/main/source.cpp:205
+#, fuzzy
+msgid "'file' must be a character string or connection"
+msgstr "«what» må vera ein teiknstreng eller ein funksjon"
 
 #: src/main/source.cpp:219
 msgid "coercion of 'text' to character was unsuccessful"
@@ -7372,6 +7642,10 @@ msgstr "... brukt i ein situasjon der han ikkje eksisterer"
 #, fuzzy
 msgid "... is not a pairlist"
 msgstr "verdien i «...» er ikkje eit «promise»"
+
+#: src/main/unique.cpp:1341
+msgid "'envir' must be an environment"
+msgstr "«envir» må vera ein omgjevnad"
 
 #: src/main/unique.cpp:1488
 #, fuzzy
@@ -8204,11 +8478,6 @@ msgstr "Lapack-rutinen dgesv: systemet er nøyaktig singulært"
 msgid "system is computationally singular: reciprocal condition number = %g"
 msgstr "systemet er reknemessig singulært: det resiproke kondisjonstalet er %g"
 
-#: src/modules/lapack/Lapack.c:1243
-#, fuzzy, c-format
-msgid "'%s' argument must be logical"
-msgstr "«ascii» må vera ein logisk verdi"
-
 #: src/modules/X11/dataentry.cpp:1872 src/modules/X11/devX11.c:1250
 #, c-format
 msgid "X11 protocol error: %s"
@@ -8826,11 +9095,6 @@ msgstr "feil ved lagring av historiefila «%s»"
 msgid "Enter file name: "
 msgstr "ikkje eit gyldig filnamn"
 
-#: src/unix/sys-std.c:1234 src/unix/sys-std.c:1257
-#, fuzzy, c-format
-msgid "'%s' argument is too long"
-msgstr "argumentet «file» er for langt"
-
 #: src/unix/sys-std.c:1240 src/unix/sys-std.c:1242
 msgid "no history mechanism available"
 msgstr "ingen historiemekanisme er tilgjengeleg"
@@ -8937,10 +9201,6 @@ msgid "X11 is not available"
 msgstr "X11 er ikkje tilgjengeleg"
 
 #, fuzzy
-#~ msgid "'%s' argument must be a vector"
-#~ msgstr "det første argumentet må vera ein vektor"
-
-#, fuzzy
 #~ msgid "NaN values produced"
 #~ msgstr "NA-verdiar produserte"
 
@@ -8948,126 +9208,12 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ msgstr "tidsrekkjer av ikkje-samsvarande storleikar"
 
 #, fuzzy
-#~ msgid "%d argument passed to '%s' function which requires 1 or 2 arguments"
-#~ msgid_plural ""
-#~ "%d arguments passed to '%s' function which requires 1 or 2 arguments"
-#~ msgstr[0] "%d argument sendt til «%s», som tek %d argument"
-#~ msgstr[1] "%d argument sendt til «%s», som tek %d argument"
-
-#, fuzzy
 #~ msgid "bad arithmetic function index"
 #~ msgstr "ugyldig funksjon"
 
 #, fuzzy
-#~ msgid "'data' argument must be of a vector type, was '%s'"
-#~ msgstr "«path» må vera ein teiknvektor"
-
-#, fuzzy
-#~ msgid "invalid '%s' value (too large or NA)"
-#~ msgstr "ugyldig «nrow»-verdi (for stor eller NA)"
-
-#, fuzzy
-#~ msgid "invalid '%s' value (< 0)"
-#~ msgstr "negativ «nrow»-verdi"
-
-#, fuzzy
-#~ msgid "data is too long"
-#~ msgstr "zip-adressa er for lang"
-
-#, fuzzy
-#~ msgid "'%s' argument must be TRUE or FALSE"
-#~ msgstr "«resize» må vera TRUE eller FALSE"
-
-#, fuzzy
-#~ msgid "invalid class argument passed to internal '.class_cache'"
-#~ msgstr "ugyldig argumenttal i call_R"
-
-#, fuzzy
-#~ msgid "'%s' argument must be a list"
-#~ msgstr "«list»-argumentet må vera ei liste"
-
-#, fuzzy
-#~ msgid "either 2 or 3 arguments are required"
-#~ msgstr "krev strengargument"
-
-#, fuzzy
-#~ msgid "'%s' argument must be non-null character string"
-#~ msgstr "«norm» må vera ein teiknstreng"
-
-#, fuzzy
-#~ msgid "type '%s' is unimplemented in '%s' function"
-#~ msgstr "typen %d er ikkje implementert i «%s»"
-
-#, fuzzy
-#~ msgid "class name is too long in '%s'"
-#~ msgstr "klassenamnet er for langt i «%s»"
-
-#, fuzzy
-#~ msgid ""
-#~ "number of rows of result is not a multiple of vector length (argument %d)"
-#~ msgstr "talet på element å byta ut er ikkje eit multiplum av ubytingslengda"
-
-#, fuzzy
-#~ msgid ""
-#~ "number of columns of result is not a multiple of vector length (argument "
-#~ "%d)"
-#~ msgstr "talet på element å byta ut er ikkje eit multiplum av ubytingslengda"
-
-#, fuzzy
-#~ msgid "'%s' argument must be an environment"
-#~ msgstr "«env»-argumentet må vera ein omgjevnad"
-
-#, fuzzy
-#~ msgid "'%s' argument is not an environment"
-#~ msgstr "argumentet er ikkje ein omgjevnad"
-
-#, fuzzy
 #~ msgid "'%s' argument is missing"
 #~ msgstr "argumentet %d er tomt"
-
-#, fuzzy
-#~ msgid "'%s' argument must be a vector of length 1"
-#~ msgstr "«hostnamne» må vera ein teiknvektor av lengd 1"
-
-#, fuzzy
-#~ msgid "'%s' function requires a character vector"
-#~ msgstr "«%s» tek berre ein teiknvektor"
-
-#, fuzzy
-#~ msgid "invalid multibyte input string %d"
-#~ msgstr "ugyldig multibyte-inntekst"
-
-#, fuzzy
-#~ msgid "invalid multibyte string '%s'"
-#~ msgstr "ugyldig multibyte-streng i «%s»"
-
-#, fuzzy
-#~ msgid "an object of class \"%s\" cannot be coerced to type '%s'"
-#~ msgstr "(liste-)objekt kan ikkje gjerast om til typen «%s»"
-
-#, fuzzy
-#~ msgid "cannot coerce type '%s' to vector of type '%s'"
-#~ msgstr "finn ikkje fila «%s» i zip-fila «%s»"
-
-#, fuzzy
-#~ msgid "invalid argument of length 0"
-#~ msgstr "ugyldig andreargument av lengd 0"
-
-#, fuzzy
-#~ msgid "'%s' method applied to non-(list or vector) of type '%s'"
-#~ msgstr "%s() brukt på ikkje-(liste eller vektor) av typen «%s»"
-
-#, fuzzy
-#~ msgid "'anyNA()' function takes 1 or 2 arguments"
-#~ msgstr "feil type for argument"
-
-#, fuzzy
-#~ msgid "'%s' argument must be a character string or a function"
-#~ msgstr "«what» må vera ein teiknstreng eller ein funksjon"
-
-#, fuzzy
-#~ msgid "'%s' argument must be a list or expression"
-#~ msgstr "«expr»-argumentet må vera eit uttrykk"
 
 #, fuzzy
 #~ msgid "package 'grDevices' must be loaded"
@@ -9086,113 +9232,6 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ msgstr "ÅTVARING: «--max-ppsize»-verdien er for høg, og vert ikkje brukt\n"
 
 #, fuzzy
-#~ msgid "'%s' is not enabled for this connection"
-#~ msgstr "%s er ikkje slått på for dette sambandet"
-
-#, fuzzy
-#~ msgid "'fdopen' is not supported on this platform"
-#~ msgstr "nsl() er ikkje støtta på denne plattforma"
-
-#, fuzzy
-#~ msgid "cannot create fifo connection '%s', reason '%s'"
-#~ msgstr "klarte ikkje laga fifo-en «%s», av grunnen «%s»"
-
-#, fuzzy
-#~ msgid "cannot open fifo connection '%s'"
-#~ msgstr "klarte ikkje opna sambandet"
-
-#, fuzzy
-#~ msgid "specified block is too large"
-#~ msgstr "den oppgjevne vektorstorleiken er for stor"
-
-#, fuzzy
-#~ msgid "only first element of '%s' argument will be used"
-#~ msgstr "berre det første elementet i «description»-argumentet vert brukt"
-
-#, fuzzy
-#~ msgid ""
-#~ "'%s' only supports 'open = \"w+\"' and 'open = \"w+b\"': using the former"
-#~ msgstr ""
-#~ "fifo(\"\") støttar berre «open = \"w+\"» og «open = \"w+b\"» (brukar "
-#~ "sistnemnde)"
-
-#, fuzzy
-#~ msgid "cannot open 'pipe()' command '%ls': %s"
-#~ msgstr "klarte ikkje opna pipe()-kommandoen «%s»: %s"
-
-#, fuzzy
-#~ msgid "problem with setting presets"
-#~ msgstr "feil ved setjing av tidssone"
-
-#, fuzzy
-#~ msgid "'fwrite' error"
-#~ msgstr "lesefeil"
-
-#, fuzzy
-#~ msgid "'%s' argument is not an object of class %s"
-#~ msgstr "«con» er ikkje ein ut-«rawConnection»"
-
-#, fuzzy
-#~ msgid "'%s' is not an output of class %s"
-#~ msgstr "«con» er ikkje ein ut-«textConnection»"
-
-#, fuzzy
-#~ msgid "last line is too long"
-#~ msgstr "formateringsteksten er for lang"
-
-#, fuzzy
-#~ msgid "allocation problem for last line"
-#~ msgstr "feil ved reservering av filsamband"
-
-#, fuzzy
-#~ msgid "cannot allocate buffer in 'readLines()'"
-#~ msgstr "klarte ikkje reservera buffer i readLines"
-
-#, fuzzy
-#~ msgid "error reading from the connection"
-#~ msgstr "feil ved lesing frå samband"
-
-#, fuzzy
-#~ msgid "could not allocate space for '%s'"
-#~ msgstr "fann ikkje ledig plass til «path»"
-
-#, fuzzy
-#~ msgid "ftps:// URLs are not supported by this method"
-#~ msgstr "typen «%s» er ikkje støtta"
-
-#, fuzzy
-#~ msgid "https:// URLs are not supported by this method"
-#~ msgstr "typen «%s» er ikkje støtta"
-
-#, fuzzy
-#~ msgid "https:// URLs are not supported by the \"internal\" method"
-#~ msgstr "typen «%s» er ikkje støtta"
-
-#, fuzzy
-#~ msgid "'%s' function requires a raw vector"
-#~ msgstr "«%s» tek berre ein teiknvektor"
-
-#, fuzzy
-#~ msgid "internal error %d in '%s' function"
-#~ msgstr "intern feil i «do_sys»"
-
-#, fuzzy
-#~ msgid "unknown type in '%s' function"
-#~ msgstr "ukjend cumxxx-funksjon"
-
-#, fuzzy
-#~ msgid "internal error %d in '%s' function (%d)"
-#~ msgstr "intern feil i «do_sys»"
-
-#, fuzzy
-#~ msgid "'from' argument must be raw or character"
-#~ msgstr "«norm» må vera ein teiknstreng"
-
-#, fuzzy
-#~ msgid "internal error %d in '%s' function (%d) at %d"
-#~ msgstr "intern feil i do_random1"
-
-#, fuzzy
 #~ msgid "bad target context--should NEVER happen if R was called correctly"
 #~ msgstr ""
 #~ "Ugyldig målkontekst. Skal ALDRI skje.\n"
@@ -9205,99 +9244,12 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ msgid "target context is not on the stack"
 #~ msgstr "målkonteksten er ikkje på stakken"
 
-#, fuzzy
-#~ msgid "internal error in '%s' function"
-#~ msgstr "intern feil i «do_sys»"
-
-#, fuzzy
-#~ msgid "integer overflow in '%s' function; use '%s'"
-#~ msgstr "intern feil i «do_sys»"
-
-#, fuzzy
-#~ msgid "'%s' function is not defined for complex numbers"
-#~ msgstr "min/max er ikkje definert for komplekse tal"
-
-#, fuzzy
-#~ msgid "unknown '%s' function"
-#~ msgstr "ukjend cumxxx-funksjon"
-
-#, fuzzy
-#~ msgid "time zone specification is too long"
-#~ msgstr "innteksten er for lang"
-
-#, fuzzy
-#~ msgid "argument is not being debugged"
-#~ msgstr "argumentet er ikkje eit bytekode-objekt"
-
-#, fuzzy
-#~ msgid "'%s' argument must be a function"
-#~ msgstr "argumentet må vera ein funksjon"
-
 #~ msgid "argument must not be a function"
 #~ msgstr "argumentet kan ikkje vera ein funksjon"
 
 #, fuzzy
-#~ msgid "'%s' argument must be a character string or connection"
-#~ msgstr "«what» må vera ein teiknstreng eller ein funksjon"
-
-#, fuzzy
-#~ msgid "object '%s' was not found"
-#~ msgstr "fann ikkje objektet «%s»"
-
-#, fuzzy
-#~ msgid "argument passed to 'getSymbolValue()' function is not a symbol"
-#~ msgstr "argumentet «editor» er ikkje definert"
-
-#, fuzzy
-#~ msgid "the first argument should not be named"
-#~ msgstr "det første argumentet må vera ei namna liste"
-
-#, fuzzy
-#~ msgid "'%s' argument was used more than once"
-#~ msgstr "DUP brukt meir enn éin gong"
-
-#, fuzzy
-#~ msgid "incorrect type (%s) of 'PACKAGE' argument"
-#~ msgstr "ugyldig type for andre argument"
-
-#, fuzzy
-#~ msgid "'%s' argument must be a single character string"
-#~ msgstr "«norm» må vera ein teiknstreng"
-
-#, fuzzy
-#~ msgid "'ENCODING' argument is defunct and will be ignored"
-#~ msgstr "argumentet «%s» vert ikkje brukt"
-
-#~ msgid "'%s' is missing"
-#~ msgstr "«%s» manglar"
-
-#, fuzzy
-#~ msgid "invalid function in 'call_R()'"
-#~ msgstr "ugyldig funksjon i call_R"
-
-#, fuzzy
-#~ msgid "invalid argument count in 'call_R()'"
-#~ msgstr "ugyldig argumenttal i call_R"
-
-#, fuzzy
-#~ msgid "invalid return value count in 'call_R()'"
-#~ msgstr "ugyldig returverdi i call_R"
-
-#, fuzzy
-#~ msgid "error %d with zipfile in '%s'"
-#~ msgstr "typen %d er ikkje implementert i «%s»"
-
-#, fuzzy
-#~ msgid "internal error in 'unz' code"
-#~ msgstr "intern feil i unz-kode"
-
-#, fuzzy
-#~ msgid "possible truncation of >= 4GB file"
-#~ msgstr "feil ved filtrunkering"
-
-#, fuzzy
-#~ msgid "invalid argument passed to 'edit()' function"
-#~ msgstr "ugyldig argument til edit()"
+#~ msgid "'.NAME' is missing"
+#~ msgstr "«EXPR» manglar"
 
 #, fuzzy
 #~ msgid "first argument ('table') is not of type '%s', from '%s'"
@@ -9312,10 +9264,6 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ "'findVarLocInFrame()' function cannot be used on the base environment"
 #~ msgstr "kan ikkje fjerna variablar frå omgjevnaden «base»"
 
-#, fuzzy
-#~ msgid "argument passed to '%s' function is not an environment"
-#~ msgstr "argumentet til «%s» er ikkje ein omgjevnad"
-
 #~ msgid "cannot assign variables to this database"
 #~ msgstr "kan ikkje tildela verdiar til databasen"
 
@@ -9326,16 +9274,8 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ msgstr "kan ikkje fjerna variablar frå denne databasen"
 
 #, fuzzy
-#~ msgid "'%s' argument must be an integer"
-#~ msgstr "«list»-argumentet må vera ei liste"
-
-#, fuzzy
 #~ msgid "bad hash table contents"
 #~ msgstr "ugyldige variabelnamn"
-
-#, fuzzy
-#~ msgid "'%s' argument is not a symbol"
-#~ msgstr "ikkje eit symbol"
 
 #, fuzzy
 #~ msgid "'%s' argument is not a function"
@@ -9346,9 +9286,6 @@ msgstr "X11 er ikkje tilgjengeleg"
 
 #~ msgid "cannot unbind an active binding"
 #~ msgstr "kan ikkje avbinda ei aktiv binding"
-
-#~ msgid "bad export environment argument"
-#~ msgstr "ugyldig argument til eksporteringsomgjevnad"
 
 #, fuzzy
 #~ msgid "'%s' argument must be a hashed environment"
@@ -9371,10 +9308,6 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ msgid "not in a try context"
 #~ msgstr "er ikkje i ein «try»-samanheng"
 
-#, fuzzy
-#~ msgid "unable to create profiling thread"
-#~ msgstr "klarte ikkje laga pixmap"
-
 #~ msgid "setting profile timer failed"
 #~ msgstr "klarte ikkje velja profiltidtakar"
 
@@ -9395,16 +9328,8 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ "det første argumentet må vera ein omgjevnad eller ein ekstern peikar"
 
 #, fuzzy
-#~ msgid "something weird happened"
-#~ msgstr "ingenting å tilføya til"
-
-#, fuzzy
 #~ msgid "symbol \"%s\" is not in environment of method"
 #~ msgstr "symbolet «%s» finst ikkje i omgjevnaden til metoden"
-
-#, fuzzy
-#~ msgid "invalid 'for()' loop sequence"
-#~ msgstr "ugyldig for()-lykkje"
 
 #, fuzzy
 #~ msgid "over-long name in '%s' function"
@@ -9484,13 +9409,12 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ msgid "invalid body"
 #~ msgstr "ugyldig symbol"
 
+#~ msgid "invalid symbol"
+#~ msgstr "ugyldig symbol"
+
 #, fuzzy
 #~ msgid "'code' argument is not a byte code object"
 #~ msgstr "argumentet er ikkje eit bytekode-objekt"
-
-#, fuzzy
-#~ msgid "'%s' argument must be non-empty character string"
-#~ msgstr "«title» må vera ein teiknstreng"
 
 #, fuzzy
 #~ msgid "'R_CompiledFileName()': buffer is too small"
@@ -10136,6 +10060,9 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ msgid "argument must be a closure"
 #~ msgstr "argumentet må vera ei omslutting"
 
+#~ msgid "invalid multibyte string %d"
+#~ msgstr "ugyldig multibyte-streng: %d"
+
 #~ msgid "binary operations require two arguments"
 #~ msgstr "binæroperasjonar krev to argument"
 
@@ -10168,6 +10095,10 @@ msgstr "X11 er ikkje tilgjengeleg"
 
 #~ msgid "Hershey fonts cannot be loaded"
 #~ msgstr "Hershey-skriftene kan ikkje lastast"
+
+#, fuzzy
+#~ msgid "integer overflow in 'cumsum()'; use 'cumsum(as.numeric(.))'"
+#~ msgstr "Heiltalsoverflyt i «cumsum». Bruk «cumsum(as.numeric(.))»."
 
 #~ msgid "invalid option \"warning.expression\""
 #~ msgstr "ugyldig val «warning.expression»"
@@ -10235,11 +10166,34 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ msgstr "(liste-)objekt kan ikkje gjerast om til typen «%s»"
 
 #, fuzzy
+#~ msgid "'allowNonCompression' argument must be TRUE or FALSE"
+#~ msgstr "«allowNonCompression» må vera «TRUE» (sann) eller «FALSE» (usann)"
+
+#, fuzzy
 #~ msgid "'%s' function  requires a character vector"
 #~ msgstr "«%s» tek berre ein teiknvektor"
 
 #~ msgid "No function to return from, jumping to top level"
 #~ msgstr "Ingen funksjon å venda tilbake frå. Hoppar til toppnivå."
+
+#~ msgid "repeated formal argument 'use.names'"
+#~ msgstr "gjenteke formelt argument: «use.names»"
+
+#~ msgid "'%s' requires a character vector"
+#~ msgstr "«%s» tek berre ein teiknvektor"
+
+#~ msgid "'pairlist' object cannot be coerced to type '%s'"
+#~ msgstr "«pairlist»-objekt kan ikkje gjerast om til typen «%s»"
+
+#~ msgid "(symbol) object cannot be coerced to type '%s'"
+#~ msgstr "(symbol-)objekt kan ikkje gjerast om til typen «%s»"
+
+#, fuzzy
+#~ msgid "'anyNA()' applied to non-(list or vector) of type '%s'"
+#~ msgstr "%s() brukt på ikkje-(liste eller vektor) av typen «%s»"
+
+#~ msgid "too large a block specified"
+#~ msgstr "for stor blokk oppgjeven"
 
 #, fuzzy
 #~ msgid "Value for tracingState must be TRUE or FALSE"
@@ -10252,6 +10206,18 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ msgstr[0] " [ nådde getOption(\"max.print\") – hoppa over siste rad ]]\n"
 #~ msgstr[1] ""
 #~ " [ nådde getOption(\"max.print\") – hoppa over siste %d rader ]]\n"
+
+#, fuzzy
+#~ msgid "'%s' is not an environment"
+#~ msgstr "ikkje ein omgjevnad"
+
+#, fuzzy
+#~ msgid "'%s' was used more than once"
+#~ msgstr "DUP brukt meir enn éin gong"
+
+#, fuzzy
+#~ msgid "'%s' is not a function"
+#~ msgstr "«fn» er ikkje ein funksjon"
 
 #, fuzzy
 #~ msgid "'jobu' argument must be a character string"
@@ -10270,6 +10236,16 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ msgstr[0] " [ nådde getOption(\"max.print\") – hoppa over siste rad ]]\n"
 #~ msgstr[1] ""
 #~ " [ nådde getOption(\"max.print\") – hoppa over siste %d rader ]]\n"
+
+#~ msgid "unimplemented real function of 1 argument"
+#~ msgstr "ikkje-implementert reell funksjon med 1 argument"
+
+#~ msgid "invalid input multibyte string %d"
+#~ msgstr "ugyldig multibyte-inntekst %d"
+
+#, fuzzy
+#~ msgid "unknown 'cumxxx()' function"
+#~ msgstr "ukjend cumxxx-funksjon"
 
 #, fuzzy
 #~ msgid ""
@@ -10305,8 +10281,25 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ msgstr "filtilknytinga for «%ls» er ikkje tilgjengeleg, eller er ugyldig"
 
 #, fuzzy
+#~ msgid "%d argument passed to '%s' which requires 1 or 2 arguments"
+#~ msgid_plural "%d arguments passed to '%s' which requires 1 or 2 arguments"
+#~ msgstr[0] "%d argument sende til «log», som tek 1 eller 2 argument"
+#~ msgstr[1] "%d argument sende til «log», som tek 1 eller 2 argument"
+
+#~ msgid "class name too long in '%s'"
+#~ msgstr "klassenamnet er for langt i «%s»"
+
+#, fuzzy
 #~ msgid "'%s' argument must be a length 1 vector"
 #~ msgstr "«EXPR» må vera ein vektor av lengd 1"
+
+#, fuzzy
+#~ msgid ""
+#~ "'file(\"\")' only supports 'open = \"w+\"' and 'open = \"w+b\"': using "
+#~ "the former"
+#~ msgstr ""
+#~ "file(\"\") støttar berre «open = \"w+\"» og «open = \"w+b\"» (brukar "
+#~ "førstnemnde)"
 
 #, fuzzy
 #~ msgid "invalid Unicode pch '%d'"
@@ -10343,6 +10336,9 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ msgid "problem in displaying '%ls'"
 #~ msgstr "feil ved vising av «%ls»"
 
+#~ msgid "Unimplemented type %d in createRSymbolObject"
+#~ msgstr "Ikkje-implementert type «%d» i createRSymbolObject"
+
 #, fuzzy
 #~ msgid ""
 #~ "'rho' argument must be an environment not %s: detected in C-level "
@@ -10356,6 +10352,24 @@ msgstr "X11 er ikkje tilgjengeleg"
 #, fuzzy
 #~ msgid "Invalid argument"
 #~ msgstr "ugyldig argument"
+
+#~ msgid "invalid multibyte string 'old'"
+#~ msgstr "ugyldig multibyte-streng: «old»"
+
+#~ msgid "invalid UTF-8 string 'new'"
+#~ msgstr "ugyldig UTF-8-streng: «new»"
+
+#~ msgid "invalid multibyte string 'new'"
+#~ msgstr "ugyldig multibyte-streng: «new»"
+
+#~ msgid "cannot allocate buffer in readLines"
+#~ msgstr "klarte ikkje reservera buffer i readLines"
+
+#~ msgid "DLL name is too long"
+#~ msgstr "DLL-namnet er for langt"
+
+#~ msgid "argument is of length zero"
+#~ msgstr "argumentet har lengd null"
 
 #, fuzzy
 #~ msgid "invalid 'socket' argument"
@@ -10454,16 +10468,45 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ msgid "assignment"
 #~ msgstr "tildeling"
 
+#~ msgid "invalid for() loop sequence"
+#~ msgstr "ugyldig for()-lykkje"
+
 #~ msgid "invalid %s type in 'x %s y'"
 #~ msgstr "ugyldig %s-type i «x %s y»"
+
+#~ msgid "cannot open fifo '%s'"
+#~ msgstr "klarte ikkje opna fifo-en «%s»"
+
+#, fuzzy
+#~ msgid "cannot pipe() cmd '%ls': %s"
+#~ msgstr "klarte ikkje opna pipe()-kommandoen «%s»: %s"
+
+#~ msgid "'con' is not a rawConnection"
+#~ msgstr "«con» er ikkje eit rawConnection-samband"
+
+#~ msgid "'con' is not a textConnection"
+#~ msgstr "«con» er ikkje ein «textConnection»"
+
+#~ msgid "'con' is not a connection"
+#~ msgstr "«con» er ikkje eit samband"
+
+#, fuzzy
+#~ msgid "could not allocate space for pushback"
+#~ msgstr "klarte ikkje reservera plass til pushBack"
 
 #, fuzzy
 #~ msgid "unknown type in '%s'"
 #~ msgstr "ÅTVARING: ukjent val («%s»)\n"
 
+#~ msgid "NAs introduced by coercion"
+#~ msgstr "det oppstod NA-verdiar ved typeomgjering"
+
 #, fuzzy
 #~ msgid "Error in:"
 #~ msgstr "Feil i "
+
+#~ msgid "regcomp error:  '%s'"
+#~ msgstr "regcomp-feil: «%s»"
 
 #~ msgid "error in running command: '%s'"
 #~ msgstr "feil ved køyring av kommando: «%s»"
@@ -10474,6 +10517,17 @@ msgstr "X11 er ikkje tilgjengeleg"
 #, fuzzy
 #~ msgid "unsupported type "
 #~ msgstr "ikkje-støtta type"
+
+#, fuzzy
+#~ msgid "'PACKAGE' argument must be a single character string"
+#~ msgstr "PACKAGE-argumentet må vera ein einskild tekststreng"
+
+#, fuzzy
+#~ msgid "'cummax()' is not defined for complex numbers"
+#~ msgstr "min/max er ikkje definert for komplekse tal"
+
+#~ msgid "PACKAGE argument is too long"
+#~ msgstr "PACKAGE-argumentet er for langt"
 
 #, fuzzy
 #~ msgid "too long a vector"
@@ -10490,11 +10544,30 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ msgid "'%s' must be a character vector"
 #~ msgstr "«x» må vera ein teiknvektor"
 
+#, fuzzy
+#~ msgid "'args' must be a list or expression"
+#~ msgstr "«args» må vera ei liste"
+
 #~ msgid "'args' must be a list"
 #~ msgstr "«args» må vera ei liste"
 
+#~ msgid "'exdir' is too long"
+#~ msgstr "«exdir» er for lang"
+
+#~ msgid "'pos' must be an integer"
+#~ msgstr "«pos» må vera eit heiltal"
+
+#~ msgid "argument must be an environment"
+#~ msgstr "argumentet må vera ein omgjevnad"
+
+#~ msgid "'title' must be a string"
+#~ msgstr "«title» må vera ein teiknstreng"
+
 #~ msgid "argument 'logarithm' must be logical"
 #~ msgstr "argumentet «logarithm» må vera logisk"
+
+#~ msgid "'list' argument must be a list"
+#~ msgstr "«list»-argumentet må vera ei liste"
 
 #, fuzzy
 #~ msgid "'type' argument must be a character string"
@@ -10527,6 +10600,9 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ msgid "'dimnames' must be a list"
 #~ msgstr "«dimnames» må vera ei liste"
 
+#~ msgid "'value' must be non-null character string"
+#~ msgstr "«value» må vera ein teiknstreng ulik null"
+
 #, fuzzy
 #~ msgid "<environment: %s"
 #~ msgstr "ugyldig omgjevnad"
@@ -10557,8 +10633,28 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ msgstr "krev SDI-modus"
 
 #, fuzzy
+#~ msgid "'FUN.VALUE' must be a vector"
+#~ msgstr "«FUN.VALUE» må vera ein vektor"
+
+#, fuzzy
+#~ msgid "'data' must be of a vector type, was '%s'"
+#~ msgstr "«path» må vera ein teiknvektor"
+
+#~ msgid "invalid 'ncol' value (too large or NA)"
+#~ msgstr "ugyldig «ncol»-verdi (for stor eller NA)"
+
+#~ msgid "invalid 'ncol' value (< 0)"
+#~ msgstr "negativ «ncol»-verdi"
+
+#, fuzzy
 #~ msgid "'resize' argument must be TRUE or FALSE"
 #~ msgstr "«resize» må vera TRUE eller FALSE"
+
+#~ msgid "'name' must be non-null character string"
+#~ msgstr "«name» må vera ein teiknstreng ulik null"
+
+#~ msgid "'parent' is not an environment"
+#~ msgstr "«parent» er ikkje ein omgjevnad"
 
 #, fuzzy
 #~ msgid "'%s' must be a character vector of length 1"
@@ -10566,6 +10662,13 @@ msgstr "X11 er ikkje tilgjengeleg"
 
 #, fuzzy
 #~ msgid "'%s' must be an environment"
+#~ msgstr "«enclos» må vera ein omgjevnad"
+
+#, fuzzy
+#~ msgid "'%s' must be TRUE or FALSE"
+#~ msgstr "«all.x» må vera TRUE eller FALSE"
+
+#~ msgid "'enclos' must be an environment"
 #~ msgstr "«enclos» må vera ein omgjevnad"
 
 #, fuzzy
@@ -10578,6 +10681,9 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ msgid "'EXPR' is missing"
 #~ msgstr "«EXPR» manglar"
 
+#~ msgid "EXPR must be a length 1 vector"
+#~ msgstr "«EXPR» må vera ein vektor av lengd 1"
+
 #~ msgid "'name' is missing"
 #~ msgstr "«name» manglar"
 
@@ -10585,11 +10691,21 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ msgid "internal error %d in memDecompress(%d)"
 #~ msgstr "intern feil i «do_sys»"
 
+#~ msgid "internal error in 'do_sys'"
+#~ msgstr "intern feil i «do_sys»"
+
+#, fuzzy
+#~ msgid "'envir' argument must be an environment"
+#~ msgstr "«env»-argumentet må vera ein omgjevnad"
+
 #~ msgid "'msg1' must be a character string"
 #~ msgstr "«msg1» må vera ein teiknstreng"
 
 #~ msgid "'msg2' must be a character string"
 #~ msgstr "«msg2» må vera ein teiknstreng"
+
+#~ msgid "unable to open 'file'"
+#~ msgstr "klarte ikkje opna «file»"
 
 #~ msgid "internal error in do_random3"
 #~ msgstr "intern feil i do_random3"
@@ -10851,6 +10967,12 @@ msgstr "X11 er ikkje tilgjengeleg"
 
 #~ msgid "'filterindex' must be an integer value"
 #~ msgstr "«filterindex» må vera ein heiltalsverdi"
+
+#~ msgid "'text' must be a character string"
+#~ msgstr "«text» må vera ein teiknstreng"
+
+#~ msgid "'%s' must be a list"
+#~ msgstr "«%s» må vera ei liste"
 
 #~ msgid "'%s' element %d is not a window handle"
 #~ msgstr "«%s» element %d er ikkje eit vindaugshandtak"

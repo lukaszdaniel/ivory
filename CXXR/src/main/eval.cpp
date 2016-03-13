@@ -40,6 +40,7 @@
 #ifdef HAVE_CONFIG_H
 # include <config.h>
 #endif
+#include <localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h>
@@ -109,7 +110,7 @@ using namespace CXXR;
 
    L. T.  */
 
-#ifdef Win32
+#ifdef _WIN32
 # define WIN32_LEAN_AND_MEAN 1
 # include <windows.h>		/* for CreateEvent, SetEvent */
 # include <process.h>		/* for _beginthread, _endthread */
@@ -132,7 +133,7 @@ static size_t R_Srcfile_bufcount;                  /* how big is the array above
 static GCRoot<> R_Srcfiles_buffer = nullptr;              /* a big RAWSXP to use as a buffer for filenames and pointers to them */
 static int R_Profiling_Error;		   /* record errors here */
 
-#ifdef Win32
+#ifdef _WIN32
 HANDLE MainThread;
 HANDLE ProfileEvent;
 #endif /* Win32 */
@@ -205,7 +206,7 @@ static void lineprof(char* buf, SEXP srcref)
 
 /* FIXME: This should be done wih a proper configure test, also making
    sure that the pthreads library is linked in. LT */
-#ifndef Win32
+#ifndef _WIN32
 #if (defined(__APPLE__) || defined(_REENTRANT) || defined(HAVE_OPENMP)) && \
      ! defined(HAVE_PTHREAD)
 # define HAVE_PTHREAD
@@ -225,7 +226,7 @@ static void doprof(int sig)  /* sig is ignored in Windows */
 
     buf[0] = '\0';
 
-#ifdef Win32
+#ifdef _WIN32
     SuspendThread(MainThread);
 #elif defined(HAVE_PTHREAD)
     if (! pthread_equal(pthread_self(), R_profiled_thread)) {
@@ -330,7 +331,7 @@ static void doprof(int sig)  /* sig is ignored in Windows */
 
     /* I believe it would be slightly safer to place this _after_ the
        next two bits, along with the signal() call. LT */
-#ifdef Win32
+#ifdef _WIN32
     ResumeThread(MainThread);
 #endif /* Win32 */
 
@@ -340,13 +341,13 @@ static void doprof(int sig)  /* sig is ignored in Windows */
     if(strlen(buf))
 	fprintf(R_ProfileOutfile, "%s\n", buf);
 
-#ifndef Win32
+#ifndef _WIN32
     signal(SIGPROF, doprof);
 #endif /* not Win32 */
 
 }
 
-#ifdef Win32
+#ifdef _WIN32
 /* Profiling thread main function */
 static void __cdecl ProfileThread(void *pwait)
 {
@@ -367,7 +368,7 @@ static void doprof_null(int sig)
 
 static void R_EndProfiling(void)
 {
-#ifdef Win32
+#ifdef _WIN32
     SetEvent(ProfileEvent);
     CloseHandle(MainThread);
 #else /* not Win32 */
@@ -397,7 +398,7 @@ static void R_InitProfiling(SEXP filename, int append, double dinterval,
 			    int mem_profiling, int gc_profiling,
 			    int line_profiling, int numfiles, int bufsize)
 {
-#ifndef Win32
+#ifndef _WIN32
     struct itimerval itv;
 #else
     int wait;
@@ -438,14 +439,14 @@ static void R_InitProfiling(SEXP filename, int append, double dinterval,
 	*(R_Srcfiles[0]) = '\0';
     }
 
-#ifdef Win32
+#ifdef _WIN32
     /* need to duplicate to make a real handle */
     DuplicateHandle(Proc, GetCurrentThread(), Proc, &MainThread,
 		    0, FALSE, DUPLICATE_SAME_ACCESS);
     wait = interval/1000;
     if(!(ProfileEvent = CreateEvent(NULL, FALSE, FALSE, NULL)) ||
        (_beginthread(ProfileThread, 0, &wait) == -1))
-	R_Suicide("unable to create profiling thread");
+	R_Suicide(_("unable to create profiling thread"));
     Sleep(wait/2); /* suspend this thread to ensure that the other one starts */
 #else /* not Win32 */
 #ifdef HAVE_PTHREAD
@@ -574,10 +575,10 @@ void Closure::DebugScope::startDebugging() const
     const Expression* call = ctxt->call();
     Environment* working_env = ctxt->workingEnvironment();
     working_env->setSingleStepping(true);
-    Rprintf("debugging in: ");
+    Rprintf(_("debugging in: "));
     PrintCall(const_cast<Expression*>(call), working_env);
 
-    Rprintf("debug: ");
+    Rprintf(_("debug: "));
     Rf_PrintValue(m_closure->m_body);
     do_browser(nullptr, nullptr, nullptr, working_env);
 }
@@ -586,7 +587,7 @@ void Closure::DebugScope::endDebugging() const
 {
     const ClosureContext* ctxt = ClosureContext::innermost();
     try {
-	Rprintf("exiting from: ");
+	Rprintf(_("exiting from: "));
 	PrintCall(const_cast<Expression*>(ctxt->call()), nullptr);
     }
     // Don't allow exceptions to escape destructor:
@@ -625,7 +626,7 @@ SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
 	    else if (p == R_MissingArg)
 		Rf_errorcall(e, _("argument %d is empty"), i + 1);
 	    else
-		Rf_error("something weird happened");
+		Rf_error(_("something weird happened"));
 	}
 	result = call->invokeClosure(closure, env, &arglist);
     }
@@ -728,7 +729,7 @@ static SEXP EnsureLocal(SEXP symbol, SEXP rho)
 
     vl = Rf_eval(symbol, ENCLOS(rho));
     if (vl == R_UnboundValue)
-	Rf_error(_("object '%s' not found"), CHAR(PRINTNAME(symbol)));
+	Rf_error(_("object '%s' was not found"), CHAR(PRINTNAME(symbol)));
 
     vl = Rf_duplicate(vl);
     Rf_defineVar(symbol, vl, rho);
@@ -805,7 +806,7 @@ Rboolean asLogicalNoNA(SEXP s, SEXP call)
 	char *msg = length(s) ? (Rf_isLogical(s) ?
 				 _("missing value where TRUE/FALSE needed") :
 				 _("argument is not interpretable as logical")) :
-	    _("argument is of length zero");
+	    _("argument is of length 0");
 	Rf_errorcall(call, msg);
     }
     return cond;
@@ -997,7 +998,7 @@ SEXP attribute_hidden do_for_impl(SEXP call, SEXP op, SEXP args, SEXP rho)
 		RAW(v)[0] = RAW(val)[i];
 		break;
 	    default:
-		Rf_errorcall(call, _("invalid for() loop sequence"));
+		Rf_errorcall(call, _("invalid 'for()' loop sequence"));
 	    }
 	    Rf_defineVar(sym, v, rho);
 	}
@@ -1238,7 +1239,7 @@ SEXP attribute_hidden do_function(SEXP call, SEXP op, SEXP args, SEXP rho)
 	op = forcePromise(op);
 	SET_NAMED(op, 2);
     }
-    if (length(args) < 2) WrongArgCount("function");
+    if (length(args) < 2) WrongArgCount("function()");
     SEXP formals = CAR(args);
     if (formals && formals->sexptype() != LISTSXP)
 	Rf_error(_("invalid formal argument list for 'function'"));
@@ -1586,7 +1587,7 @@ SEXP attribute_hidden do_set(SEXP call, SEXP op, SEXP args, SEXP rho)
 	else Rf_error(_("invalid assignment left-hand side"));
 
     default:
-	UNIMPLEMENTED("do_set");
+	UNIMPLEMENTED("do_set()");
 
     }
     return R_NilValue;/*NOTREACHED*/
@@ -1689,7 +1690,7 @@ SEXP attribute_hidden do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
     case INTSXP:
     case REALSXP:
 	if (length(env) != 1)
-	    Rf_error(_("numeric 'envir' arg not of length one"));
+	    Rf_error(_("numeric 'envir' argument is not of length one"));
 	frame = Rf_asInteger(env);
 	if (frame == NA_INTEGER)
 	    Rf_error(_("invalid '%s' argument of type '%s'"),
@@ -1799,7 +1800,7 @@ SEXP attribute_hidden do_recall(SEXP call, SEXP op, SEXP args, SEXP rho)
 	cptr = ClosureContext::innermost(cptr->nextOut());
     }
     if (cptr == nullptr)
-	Rf_error(_("'Recall' called from outside a closure"));
+	Rf_error(_("'Recall()' function called from outside a closure"));
 
     /* If the function has been recorded in the context, use it
        otherwise search for it by name or evaluate the expression
@@ -1812,7 +1813,7 @@ SEXP attribute_hidden do_recall(SEXP call, SEXP op, SEXP args, SEXP rho)
     else
 	PROTECT(s = Rf_eval(CAR(CXXRCCAST(Expression*, cptr->call())), cptr->callEnvironment()));
     if (TYPEOF(s) != CLOSXP)
-	Rf_error(_("'Recall' called from outside a closure"));
+	Rf_error(_("'Recall()' function called from outside a closure"));
     Closure* closure = SEXP_downcast<Closure*>(s);
     ans = cptr->call()->invokeClosure(closure, cptr->callEnvironment(),
                                       &arglist);
@@ -2086,7 +2087,7 @@ SEXP attribute_hidden do_loadfile(/*const*/ CXXR::Expression* call, const CXXR::
 
     fp = RC_fopen(STRING_ELT(file, 0), "rb", TRUE);
     if (!fp)
-	Rf_errorcall(call, _("unable to open 'file'"));
+	Rf_errorcall(call, _("unable to open file '%s'"), Rf_translateChar(STRING_ELT(file, 0)));
     s = R_LoadFromFile(fp, 0);
     fclose(fp);
 
@@ -2099,13 +2100,13 @@ SEXP attribute_hidden do_savefile(/*const*/ CXXR::Expression* call, const CXXR::
     FILE *fp;
 
     if (!Rf_isValidStringF(args[1]))
-	Rf_errorcall(call, _("'file' must be non-empty string"));
+	Rf_errorcall(call, _("'%s' argument must be non-empty character string"), "file");
     if (TYPEOF(args[2]) != LGLSXP)
-	Rf_errorcall(call, _("'ascii' must be logical"));
+	Rf_errorcall(call, _("'%s' argument must be logical"), "ascii");
 
     fp = RC_fopen(STRING_ELT(args[1], 0), "wb", TRUE);
     if (!fp)
-	Rf_errorcall(call, _("unable to open 'file'"));
+	Rf_errorcall(call, _("unable to open file '%s'"), Rf_translateChar(STRING_ELT(args[1], 0)));
 
     R_SaveToFileV(args[0], fp, INTEGER(args[2])[0], 0);
 

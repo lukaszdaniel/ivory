@@ -27,8 +27,8 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 #include <R_ext/GraphicsEngine.h>
 #include <R_ext/Applic.h>	/* pretty() */
@@ -120,12 +120,12 @@ static void registerOne(pGEDevDesc dd, int systemNumber, GEcallback cb) {
     dd->gesd[systemNumber] =
 	static_cast<GESystemDesc*>( calloc(1, sizeof(GESystemDesc)));
     if (dd->gesd[systemNumber] == nullptr)
-	error(_("unable to allocate memory (in GEregister)"));
+	error(_("unable to allocate memory (in 'GEregister()' function)"));
     result = cb(GE_InitState, dd, R_NilValue);
     if (isNull(result)) {
         /* tidy up */
         free(dd->gesd[systemNumber]);
-	error(_("unable to allocate memory (in GEregister)"));
+	error(_("unable to allocate memory (in 'GEregister()' function)"));
     } else {
 	dd->gesd[systemNumber]->callback = cb;
     }
@@ -189,7 +189,7 @@ void GEregisterSystem(GEcallback cb, int *systemRegisterIndex) {
     registeredSystems[*systemRegisterIndex] =
 	static_cast<GESystemDesc*>( calloc(1, sizeof(GESystemDesc)));
     if (registeredSystems[*systemRegisterIndex] == nullptr)
-	error(_("unable to allocate memory (in GEregister)"));
+	error(_("unable to allocate memory (in 'GEregister()' function)"));
     registeredSystems[*systemRegisterIndex]->callback = cb;
     numGraphicsSystems += 1;
 }
@@ -768,7 +768,7 @@ void GELine(double x1, double y1, double x2, double y2,
 {
     Rboolean clip_ok;
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
-	error(_("'lwd' must be non-negative and finite"));
+	error(_("'lwd' argument must be non-negative and finite"));
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK) return;
     if (dd->dev->canClip) {
 	clip_ok = clipLine(&x1, &y1, &x2, &y2, 1, dd);
@@ -872,7 +872,7 @@ static void clipPolyline(int n, double *x, double *y,
 void GEPolyline(int n, double *x, double *y, const pGEcontext gc, pGEDevDesc dd)
 {
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
-	error(_("'lwd' must be non-negative and finite"));
+	error(_("'lwd' argument must be non-negative and finite"));
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK) return;
     if (dd->dev->canClip) {
 	clipPolyline(n, x, y, gc, 1, dd);  /* clips to device extent
@@ -1105,7 +1105,7 @@ void GEPolygon(int n, double *x, double *y, const pGEcontext gc, pGEDevDesc dd)
      */
     const void *vmaxsave = vmaxget();
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
-	error(_("'lwd' must be non-negative and finite"));
+	error(_("'lwd' argument must be non-negative and finite"));
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK)
 	/* "transparent" border */
 	gc->col = R_TRANWHITE;
@@ -1212,7 +1212,7 @@ void GECircle(double x, double y, double radius, const pGEcontext gc, pGEDevDesc
     if (radius <= 0.0) return;
 
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
-	error(_("'lwd' must be non-negative and finite"));
+	error(_("'lwd' argument must be non-negative and finite"));
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK)
 	/* "transparent" border */
 	gc->col = R_TRANWHITE;
@@ -1335,7 +1335,7 @@ void GERect(double x0, double y0, double x1, double y1,
     int result;
 
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
-	error(_("'lwd' must be non-negative and finite"));
+	error(_("'lwd' argument must be non-negative and finite"));
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK)
 	/* "transparent" border */
 	gc->col = R_TRANWHITE;
@@ -1399,7 +1399,7 @@ void GEPath(double *x, double *y,
     /* FIXME: what about clipping? (if the device can't) 
     */
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
-	error(_("'lwd' must be non-negative and finite"));
+	error(_("'lwd' argument must be non-negative and finite"));
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK)
 	gc->col = R_TRANWHITE;
     if (npoly > 0) {
@@ -1669,8 +1669,7 @@ static int VFontFaceCode(int familycode, int fontface) {
 	    /*
 	     * Other font faces just too wacky so throw an error
 	     */
-	    error(_("font face %d not supported for font family '%s'"),
-		  fontface, VFontTable[familycode].name);
+	    error(_("font face %d is not supported for font family '%s'"), fontface, VFontTable[familycode].name);
 	}
     }
     return face;
@@ -1995,8 +1994,8 @@ void GEMode(int mode, pGEDevDesc dd)
  */
 #define SMALL	0.25
 #define RADIUS	0.375
-#define SQRC	0.88622692545275801364		/* sqrt(pi / 4) */
-#define DMDC	1.25331413731550025119		/* sqrt(pi / 4) * sqrt(2) */
+#define SQRC	M_SQRT_PI/2 //0.88622692545275801364		/* sqrt(pi / 4) */
+#define DMDC	SQRC * M_SQRT2 //1.25331413731550025119		/* sqrt(pi / 4) * sqrt(2) */
 #define TRC0	1.55512030155621416073		/* sqrt(4 * pi/(3 * sqrt(3))) */
 #define TRC1	1.34677368708859836060		/* TRC0 * sqrt(3) / 2 */
 #define TRC2	0.77756015077810708036		/* TRC0 / 2 */
@@ -2023,7 +2022,7 @@ void GESymbol(double x, double y, int pch, double size,
 	size_t res;
 	char str[16]; // probably 7 would do
 	if(gc->fontface == 5)
-	    error("use of negative pch with symbol font is invalid");
+	    error(_("use of negative 'pch' argument with symbol font is invalid"));
 	res = ucstoutf8(str, -pch); // throws error if unsuccessful 
 	str[res] = '\0';
 	GEText(x, y, str, CE_UTF8, NA_REAL, NA_REAL, 0., gc, dd);
@@ -2062,7 +2061,7 @@ void GESymbol(double x, double y, int pch, double size,
 	}
     }
     else if(pch > CXXRCONSTRUCT(int, maxchar))
-	    warning(_("pch value '%d' is invalid in this locale"), pch);
+	    warning(_("'pch' value '%d' is invalid in this locale"), pch);
     else {
 	double GSTR_0 = fromDeviceWidth(size, GE_INCHES, dd);
 
@@ -2320,7 +2319,7 @@ void GESymbol(double x, double y, int pch, double size,
 	    GEPolygon(3, xx, yy, gc, dd);
 	    break;
 	default:
-	    warning(_("unimplemented pch value '%d'"), pch);
+	    warning(_("unimplemented 'pch' value '%d'"), pch);
 	}
     }
 }
@@ -2343,11 +2342,11 @@ void GEPretty(double *lo, double *up, int *ndiv)
 #endif
 
     if(*ndiv <= 0)
-	error(_("invalid axis extents [GEPretty(.,.,n=%d)"), *ndiv);
+	error(_("invalid axis extents '[GEPretty(.,.,n=%d)]'"), *ndiv);
     if(*lo == R_PosInf || *up == R_PosInf ||
        *lo == R_NegInf || *up == R_NegInf ||
        !R_FINITE(*up - *lo)) {
-	error(_("infinite axis extents [GEPretty(%g,%g,%d)]"), *lo, *up, *ndiv);
+	error(_("infinite axis extents '[GEPretty(%g,%g,%d)]'"), *lo, *up, *ndiv);
 	return;/*-Wall*/
     }
 
@@ -2384,9 +2383,9 @@ void GEPretty(double *lo, double *up, int *ndiv)
 
 #ifdef DEBUG_PLOT
     if(*lo < x1)
-	warning(_(" .. GEPretty(.): new *lo = %g < %g = x1"), *lo, x1);
+	warning(_(" .. 'GEPretty(.)': new *lo = %g < %g = x1"), *lo, x1);
     if(*up > x2)
-	warning(_(" .. GEPretty(.): new *up = %g > %g = x2"), *up, x2);
+	warning(_(" .. 'GEPretty(.)': new *up = %g > %g = x2"), *up, x2);
 #endif
 }
 
@@ -2994,12 +2993,12 @@ SEXP attribute_hidden do_recordGraphics(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP code = CAR(args);
     SEXP list = CADR(args);
     if (!isLanguage(code))
-	error(_("'expr' argument must be an expression"));
+	error(_("'%s' argument must be an expression"), "expr");
     if (TYPEOF(list) != VECSXP)
-	error(_("'list' argument must be a list"));
+	error(_("'%s' argument must be a list"), "list");
     SEXP parentenv = downcast_to_env(CADDR(args));
     if (!parentenv)
-	error(_("'env' argument must be an environment"));
+	error(_("'%s' argument must be an environment"), "env");
     /*
      * This conversion of list to env taken from do_eval
      */
@@ -3079,7 +3078,7 @@ int GEstring_to_pch(SEXP pch)
 	wchar_t wc = 0;
 	if (ipch > 127) {
 	    if ( int( utf8toucs(&wc, CHAR(pch))) > 0) ipch = -wc;
-	    else error(_("invalid multibyte char in pch=\"c\""));
+	    else error(_("invalid multibyte char in 'pch=\"c\"'"));
 	}
     } else if(mbcslocale) {
 	/* Could we safely assume that 7-bit first byte means ASCII?
@@ -3087,7 +3086,7 @@ int GEstring_to_pch(SEXP pch)
 	 */
 	unsigned int ucs = 0;
 	if ( int( mbtoucs(&ucs, CHAR(pch), MB_CUR_MAX)) > 0) ipch = ucs;
-	else error(_("invalid multibyte char in pch=\"c\""));
+	else error(_("invalid multibyte char in 'pch=\"c\"'"));
 	if (ipch > 127) ipch = -ipch;
     }
 
@@ -3134,7 +3133,7 @@ static unsigned int hexdigit(int digit)
     if('0' <= digit && digit <= '9') return digit - '0';
     if('A' <= digit && digit <= 'F') return 10 + digit - 'A';
     if('a' <= digit && digit <= 'f') return 10 + digit - 'a';
-    /*else */ error(_("invalid hex digit in 'color' or 'lty'"));
+    /*else */ error(_("invalid hex digit in 'color' or 'lty' argument"));
     return digit; /* never occurs (-Wall) */
 }
 
@@ -3380,8 +3379,8 @@ void R_GE_rasterRotatedSize(int w, int h, double angle,
     /* 
      * Rotated image may be shorter or thinner than original
      */
-    *wnew = imax2(w, *wnew);
-    *hnew = imax2(h, *hnew);
+    *wnew = std::max(w, *wnew);
+    *hnew = std::max(h, *hnew);
 }
 
 /*

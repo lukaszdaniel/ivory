@@ -42,8 +42,8 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 #include <Rmath.h>
 #include <R_ext/GraphicsEngine.h>
@@ -155,7 +155,7 @@ do_getGraphicsEvent(SEXP call, SEXP op, SEXP args, SEXP env)
 	while (i++ < NumDevices()) {
 	    if ((gd = GEgetDevice(devNum)) && (dd = gd->dev)) {
 		if (dd->gettingEvent)
-		    error(_("recursive use of 'getGraphicsEvent' not supported"));
+		    error(_("recursive use of 'getGraphicsEvent()' function is not supported"));
 		if (dd->eventEnv != R_NilValue) {
 		    if (dd->eventHelper) dd->eventHelper(dd, 1);
 		    dd->gettingEvent = TRUE;
@@ -176,7 +176,7 @@ do_getGraphicsEvent(SEXP call, SEXP op, SEXP args, SEXP env)
 	    /* make sure we still have at least one device listening for events, and throw an error if not*/
 	    if(!haveListeningDev())
 		return R_NilValue;
-#ifdef Win32
+#ifdef _WIN32
 	    R_WaitEvent();
 #endif
 	    R_ProcessEvents();

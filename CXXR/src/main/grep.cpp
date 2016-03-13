@@ -65,8 +65,8 @@ strsplit grep [g]sub [g]regexpr
 /* How many encoding warnings to give */
 #define NWARN 5
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 #include <R_ext/RS.h>  /* for Calloc/Free */
 #include <ctype.h>
@@ -83,10 +83,6 @@ strsplit grep [g]sub [g]regexpr
 # include <pcre/pcre.h>
 #else
 # include <pcre.h>
-#endif
-
-#ifndef MAX
-# define MAX(a, b) ((a) > (b) ? (a) : (b))
 #endif
 
 #ifndef isRaw
@@ -340,7 +336,7 @@ SEXP attribute_hidden do_strsplit(/*const*/ CXXR::Expression* call, const CXXR::
 		    if ((slen == 1 && *bufp != *split) ||
 			(slen > 1 && strncmp(bufp, split, slen))) continue;
 		    ntok++;
-		    bufp += MAX(slen - 1, 0);
+		    bufp += std::max(slen - 1, 0);
 		    laststart = bufp+1;
 		}
 		bufp = laststart;
@@ -363,7 +359,7 @@ SEXP attribute_hidden do_strsplit(/*const*/ CXXR::Expression* call, const CXXR::
 			} else {
 			    pt[0] = *bufp; pt[1] ='\0';
 			}
-			bufp += MAX(slen-1, 0);
+			bufp += std::max(slen-1, 0);
 			laststart = bufp+1;
 			if (use_UTF8)
 			    SET_STRING_ELT(t, j, mkCharCE(pt, CE_UTF8));
@@ -449,7 +445,7 @@ SEXP attribute_hidden do_strsplit(/*const*/ CXXR::Expression* call, const CXXR::
 		    while(pcre_exec(re_pcre, re_pe, bufp, int( strlen(bufp)),
 				    0, 0, ovector, 30) >= 0) {
 			/* Empty matches get the next char, so move by one. */
-			bufp += MAX(ovector[1], 1);
+			bufp += std::max(ovector[1], 1);
 			ntok++;
 			if (*bufp == '\0')
 			    break;
@@ -523,7 +519,7 @@ SEXP attribute_hidden do_strsplit(/*const*/ CXXR::Expression* call, const CXXR::
 		if (*wbufp) {
 		    while(tre_regwexec(&reg, wbufp, 1, regmatch, 0) == 0) {
 			/* Empty matches get the next char, so move by one. */
-			wbufp += MAX(regmatch[0].rm_eo, 1);
+			wbufp += std::max(regmatch[0].rm_eo, 1);
 			ntok++;
 			if (!*wbufp) break;
 		    }
@@ -605,7 +601,7 @@ SEXP attribute_hidden do_strsplit(/*const*/ CXXR::Expression* call, const CXXR::
 		if (*bufp) {
 		    while(tre_regexec(&reg, bufp, 1, regmatch, 0) == 0) {
 			/* Empty matches get the next char, so move by one. */
-			bufp += MAX(regmatch[0].rm_eo, 1);
+			bufp += std::max(regmatch[0].rm_eo, 1);
 			ntok++;
 			if (*bufp == '\0') break;
 		    }
@@ -1661,11 +1657,11 @@ SEXP attribute_hidden do_gsub(/*const*/ CXXR::Expression* call, const CXXR::Buil
 	else if (use_WC) ;
 	else if (use_UTF8) {
 	    s = translateCharUTF8(STRING_ELT(text, i));
-	    if (!utf8Valid(s)) error(("input string %d is invalid UTF-8"), i+1);
+	    if (!utf8Valid(s)) error(_("input string %d is invalid UTF-8"), i+1);
 	} else {
 	    s = translateChar(STRING_ELT(text, i));
 	    if (mbcslocale && !mbcsValid(s))
-		error(("input string %d is invalid in this locale"), i+1);
+		error(_("input string %d is invalid in this locale"), i+1);
 	}
 
 	if (fixed_opt) {
@@ -2469,7 +2465,7 @@ SEXP attribute_hidden do_regexpr(/*const*/ CXXR::Expression* call, const CXXR::B
 	}
 	UNPROTECT(1);
 	if (perl_opt && capture_count) {
-	    if (n > INT_MAX) error("too long a vector");
+	    if (n > INT_MAX) error(_("vector is too long"));
 	    int nn = int( n);
 	    SEXP dmn;
 	    PROTECT(dmn = allocVector(VECSXP, 2));

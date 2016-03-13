@@ -27,8 +27,8 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 
 #include <Rconnections.h>
@@ -216,7 +216,7 @@ void extR_HTTPDStop(void)
 extern "C"
 SEXP Rsockconnect(SEXP sport, SEXP shost)
 {
-    if (length(sport) != 1) error("invalid 'socket' argument");
+    if (length(sport) != 1) error(_("invalid '%s' argument"), "socket");
     int port = asInteger(sport);
     char *host[1];
     host[0] = const_cast<char *>( translateChar(STRING_ELT(shost, 0)));
@@ -250,7 +250,7 @@ SEXP Rsockread(SEXP ssock, SEXP smaxlen)
 extern "C"
 SEXP Rsockclose(SEXP ssock)
 {
-    if (length(ssock) != 1) error("invalid 'socket' argument");
+    if (length(ssock) != 1) error(_("invalid '%s' argument"), "socket");
     int sock = asInteger(ssock);
     if (sock <= 0) error(_("attempt to close invalid socket"));
     if(!initialized) internet_Init();
@@ -264,7 +264,7 @@ SEXP Rsockclose(SEXP ssock)
 extern "C"
 SEXP Rsockopen(SEXP sport)
 {
-    if (length(sport) != 1) error("invalid 'port' argument");
+    if (length(sport) != 1) error(_("invalid '%s' argument"), "port");
     int port = asInteger(sport);
     if(!initialized) internet_Init();
     if(initialized > 0)
@@ -277,7 +277,7 @@ SEXP Rsockopen(SEXP sport)
 extern "C"
 SEXP Rsocklisten(SEXP ssock)
 {
-    if (length(ssock) != 1) error("invalid 'socket' argument");
+    if (length(ssock) != 1) error(_("invalid '%s' argument"), "socket");
     int sock = asInteger(ssock), len = 256;
     char buf[257], *abuf[1];
     abuf[0] = buf;
@@ -297,7 +297,7 @@ SEXP Rsocklisten(SEXP ssock)
 extern "C"
 SEXP Rsockwrite(SEXP ssock, SEXP sstring)
 {
-    if (length(ssock) != 1) error("invalid 'socket' argument");
+    if (length(ssock) != 1) error(_("invalid '%s' argument"), "socket");
     int sock = asInteger(ssock), start = 0, end, len;
     char *buf = const_cast<char *>( translateChar(STRING_ELT(sstring, 0))), *abuf[1];
     end = len = int( strlen(buf));

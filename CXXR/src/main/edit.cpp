@@ -32,7 +32,8 @@
 # include <config.h>
 #endif
 
-#include "Defn.h"
+#include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 #include "Print.h"
 #include "Fileio.h"
@@ -40,7 +41,7 @@
 #include "CXXR/ExpressionVector.h"
 
 #include <stdio.h>
-#ifdef Win32
+#ifdef _WIN32
 # include "run.h"
 int Rgui_Edit(char *filename, int enc, char *title, int modal);
 #endif
@@ -77,7 +78,7 @@ static int  EdFileUsed = 0;
 
 void attribute_hidden InitEd()
 {
-#ifdef Win32
+#ifdef _WIN32
     DefaultFileName = R_tmpnam2("Redit", R_TempDir, ".R");
 #else
     DefaultFileName = R_tmpnam2(nullptr, R_TempDir, ".R");
@@ -98,7 +99,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
     const char *cmd;
     const void *vmaxsave;
     FILE *fp;
-#ifdef Win32
+#ifdef _WIN32
     SEXP ti;
     char *title;
 #endif
@@ -112,7 +113,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     fn = CAR(args); args = CDR(args);
     if (!isString(fn))
-	error(_("invalid argument to edit()"));
+	error(_("invalid argument passed to 'edit()' function"));
 
     if (LENGTH(STRING_ELT(fn, 0)) > 0) {
 	const char *ss = translateChar(STRING_ELT(fn, 0));
@@ -123,7 +124,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (x != R_NilValue) {
 	if((fp=R_fopen(R_ExpandFileName(filename), "w")) == nullptr)
-	    errorcall(call, _("unable to open file"));
+	    errorcall(call, _("unable to open file '%s'"), filename);
 	if (LENGTH(STRING_ELT(fn, 0)) == 0) EdFileUsed++;
 	PROTECT(src = deparse1(x, CXXRFALSE, FORSOURCING)); /* deparse for sourcing, not for display */
 	for (i = 0; i < LENGTH(src); i++)
@@ -131,7 +132,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
 	UNPROTECT(1); /* src */
 	fclose(fp);
     }
-#ifdef Win32
+#ifdef _WIN32
     ti = CAR(args);
 #endif
     args = CDR(args);
@@ -140,10 +141,10 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
     cmd = translateChar(STRING_ELT(ed, 0));
     if (strlen(cmd) == 0) errorcall(call, _("argument 'editor' is not set"));
     editcmd = R_alloc(strlen(cmd) + strlen(filename) + 6, sizeof(char));
-#ifdef Win32
+#ifdef _WIN32
     if (!strcmp(cmd,"internal")) {
 	if (!isString(ti))
-	    error(_("'title' must be a string"));
+	    error(_("'%s' argument must be a character string"), "title");
 	if (LENGTH(STRING_ELT(ti, 0)) > 0) {
 	    title = R_alloc(strlen(CHAR(STRING_ELT(ti, 0)))+1, sizeof(char));
 	    strcpy(title, CHAR(STRING_ELT(ti, 0)));

@@ -27,6 +27,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
+#include <localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include "CXXR/ExpressionVector.h"
@@ -57,10 +58,15 @@ SEXP attribute_hidden do_identical(/*const*/ CXXR::Expression* call, const CXXR:
        'methods'!
 
        checkArity(op, args); */
-   if (nargs < 5)
-	error("%d arguments passed to .Internal(%s) which requires %d",
-	      num_args, op->name(), op->arity());
-
+   if (nargs < 5) {
+           const int bufsize = strlen(".Internal()") + strlen(op->name());
+           char result [bufsize];
+           snprintf(result, bufsize, ".Internal(%s)", op->name());
+            error(n_("%d argument passed to '%s' function which requires %d",
+                     "%d arguments passed to '%s' function which requires %d",
+                           num_args),
+                  num_args, result, op->arity());
+    }
     SEXP x = args[0]; args = (args + 1);
     SEXP y = args[0]; args = (args + 1);
     num_eq = asLogical(args[0]); args = (args + 1);
@@ -286,7 +292,7 @@ R_compute_identical(SEXP x, SEXP y, int flags)
     default:
 	/* these are all supposed to be types that represent constant
 	   entities, so no further testing required ?? */
-	printf("Unknown Type: %s (%x)\n", type2char(TYPEOF(x)), TYPEOF(x));
+	printf(_("Unknown Type: %s (%x)\n"), type2char(TYPEOF(x)), TYPEOF(x));
 	return TRUE;
     }
 }

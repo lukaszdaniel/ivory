@@ -46,6 +46,7 @@
 #include <config.h>
 #endif
 
+#include <localization.h>
 #include <Defn.h>
 #include <float.h> /* for DBL_EPSILON */
 #include "Rcomplex.h"
@@ -124,7 +125,7 @@ void formatInteger(int *x, R_xlen_t n, int *fieldwidth)
 	if (l > *fieldwidth) *fieldwidth = l;
     }
 }
-
+
 /*---------------------------------------------------------------------------
  * scientific format determination for real numbers.
  * This is time-critical code.	 It is worth optimizing.
