@@ -49,6 +49,7 @@
 #include "CXXR/RawVector.h"
 #include "CXXR/StdFrame.hpp"
 
+#include <localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/GraphicsEngine.h> /* GEDevDesc, GEgetDevice */
@@ -57,7 +58,7 @@
 
 using namespace CXXR;
 
-#if defined(Win32)
+#if defined(_WIN32)
 extern void *Rm_malloc(size_t n);
 extern void *Rm_calloc(size_t n_elements, size_t element_size);
 extern void Rm_free(void * p);
@@ -84,11 +85,11 @@ static int gc_force_gap = 0;
 static void DEBUG_ADJUST_HEAP_PRINT(double node_occup, double vect_occup)
 {
     R_size_t alloc;
-    REprintf("Node occupancy: %.0f%%\nVector occupancy: %.0f%%\n",
+    REprintf(_("Node occupancy: %.0f%%\nVector occupancy: %.0f%%\n"),
 	     100.0 * node_occup, 100.0 * vect_occup);
     alloc = MemoryBank::bytesAllocated();
-    REprintf("Total allocation: %lu\n", alloc);
-    REprintf("Ncells %lu\nVcells %lu\n", R_NSize, R_VSize);
+    REprintf(_("Total allocation: %lu\n"), alloc);
+    REprintf(_("Ncells %lu\nVcells %lu\n"), R_NSize, R_VSize);
 }
 #else
 #define DEBUG_ADJUST_HEAP_PRINT(node_occup, vect_occup)
@@ -320,7 +321,7 @@ SEXP allocVector3(SEXPTYPE type, R_xlen_t length, void*)
 	s = RawVector::create(length);
 	break;
     case CHARSXP:
-	error("use of allocVector(CHARSXP ...) is defunct\n");
+	error(_("use of allocVector(CHARSXP ...) is defunct\n"));
 	break;
     case LGLSXP:
 	s = LogicalVector::create(length);
@@ -348,7 +349,7 @@ SEXP allocVector3(SEXPTYPE type, R_xlen_t length, void*)
 	    if (length == 0)
 		return nullptr;
 #ifdef LONG_VECTOR_SUPPORT
-	    if (length > R_SHORT_LEN_MAX) error("invalid length for pairlist");
+	    if (length > R_SHORT_LEN_MAX) error(_("invalid length for pairlist"));
 #endif
 	    GCStackRoot<PairList> tl(PairList::make(length - 1));
 	    s = new Expression(nullptr, tl);
@@ -356,7 +357,7 @@ SEXP allocVector3(SEXPTYPE type, R_xlen_t length, void*)
 	}
     case LISTSXP:
 #ifdef LONG_VECTOR_SUPPORT
-	if (length > R_SHORT_LEN_MAX) error("invalid length for pairlist");
+	if (length > R_SHORT_LEN_MAX) error(_("invalid length for pairlist"));
 #endif
 	return allocList(int( length));
     default:
@@ -419,7 +420,6 @@ void R_gc(void)
 }
 
 
-#define R_MAX(a,b) (a) < (b) ? (b) : (a)
 
 SEXP attribute_hidden do_memoryprofile(/*const*/ CXXR::Expression* call, const CXXR::BuiltInFunction* op)
 {
@@ -448,7 +448,7 @@ void *R_chk_calloc(std::size_t nelem, std::size_t elsize)
 #endif
     p = calloc(nelem, elsize);
     if(!p) /* problem here is that we don't have a format for size_t. */
-	error(_("'Calloc' could not allocate memory (%.0f of %u bytes)"),
+	error(_("'Calloc()' function could not allocate memory (%.0f of %u bytes)"),
 	      double( nelem), elsize);
     return(p);
 }
@@ -459,7 +459,7 @@ void *R_chk_realloc(void *ptr, std::size_t size)
     /* Protect against broken realloc */
     if(ptr) p = realloc(ptr, size); else p = malloc(size);
     if(!p)
-	error(_("'Realloc' could not re-allocate memory (%.0f bytes)"), 
+	error(_("'Realloc()' function could not re-allocate memory (%.0f bytes)"),
 	      double( size));
     return(p);
 }
@@ -562,7 +562,7 @@ static void R_InitMemReporting(SEXP filename, int append,
     if(R_MemReportingOutfile != NULL) R_EndMemReporting();
     R_MemReportingOutfile = RC_fopen(filename, append ? "a" : "w", TRUE);
     if (R_MemReportingOutfile == NULL)
-	error(_("Rprofmem: cannot open output file '%s'"), filename);
+	error(_("'Rprofmem()': cannot open output file '%s'"), filename);
     MemoryBank::setMonitor(R_ReportAllocation, threshold);
 }
 
@@ -597,7 +597,7 @@ void *R_AllocStringBuffer(std::size_t blen, R_StringBuffer *buf)
 
     /* for backwards compatibility, this used to free the buffer */
     if(blen == std::size_t(-1)) {
-	error("R_AllocStringBuffer( (size_t)-1 ) is no longer allowed");
+	error(_("'R_AllocStringBuffer( (size_t)-1 )' function is no longer allowed"));
     }
 
     if(blen * sizeof(char) < buf->bufsize) return buf->data;
@@ -614,7 +614,7 @@ void *R_AllocStringBuffer(std::size_t blen, R_StringBuffer *buf)
     if(!buf->data) {
 	buf->bufsize = 0;
 	/* don't translate internal error message */
-	error("could not allocate memory (%u Mb) in C function 'R_AllocStringBuffer'",
+	error(_("could not allocate memory (%u Mb) in 'R_AllocStringBuffer()' function"),
 	      static_cast<unsigned int>( blen)/1024/1024);
     }
     return buf->data;

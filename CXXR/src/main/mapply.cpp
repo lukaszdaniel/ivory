@@ -27,8 +27,8 @@
 # include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 
 #include "CXXR/RAllocStack.h"
@@ -70,7 +70,7 @@ do_mapply(/*const*/ CXXR::Expression* call, const CXXR::BuiltInFunction* op, CXX
     else if (isVectorList(constantArgs))
 	fcall = VectorToPairList(constantArgs);
     else
-	error(_("argument 'MoreArgs' of 'mapply' is not a list"));
+	error(_("argument 'MoreArgs' of 'mapply()' function is not a list"));
     PROTECT_INDEX fi;
     PROTECT_WITH_INDEX(fcall, &fi);
 
@@ -107,7 +107,7 @@ do_mapply(/*const*/ CXXR::Expression* call, const CXXR::BuiltInFunction* op, CXX
 
     for (int j = 0; j < m; j++)
 	if (counters[j] != lengths[j])
-	    warning(_("longer argument not a multiple of length of shorter"));
+	    warning(_("longer argument is not a multiple of length of shorter"));
 
     UNPROTECT(5);
     return ans;

@@ -28,6 +28,7 @@
 #include <config.h>
 #endif
 
+#include <localization.h>
 #include <Defn.h>
 #include <Internal.h>
 
@@ -97,8 +98,7 @@ namespace {
 	    return bitwiseBinary(op->variant(), vl, vr);
 	}
 	if (!isNumber(x) || !isNumber(y))
-	    Rf_error(_("operations are possible only for"
-		       " numeric, logical or complex types"));
+	    Rf_error(_("operations are possible only for numeric, logical or complex types"));
 	GCStackRoot<LogicalVector>
 	    vl(static_cast<LogicalVector*>(coerceVector(x, LGLSXP)));
 	GCStackRoot<LogicalVector>
@@ -150,7 +150,7 @@ SEXP attribute_hidden do_logic(/*const*/ CXXR::Expression* call, const CXXR::Bui
 	op->checkNumArgs(num_args, 1, call);
 	return lnot(args[0]);
     default:
-	error(_("internal error in do_logic"));
+	error(_("internal error in 'do_logic()' function"));
     }
     return nullptr;  // -Wall
 }
@@ -164,21 +164,19 @@ SEXP attribute_hidden do_logic2(SEXP call, SEXP op, SEXP args, SEXP env)
     int ans;
 
     if (length(args) != 2)
-	error(_("'%s' operator requires 2 arguments"),
-	      PRIMVAL(op) == 1 ? "&&" : "||");
+	error(_("'%s' operator requires 2 arguments"), PRIMVAL(op) == 1 ? "&&" : "||");
 
     s1 = CAR(args);
     s2 = CADR(args);
     s1 = eval(s1, env);
     if (!isNumber(s1))
-	errorcall(call, _("invalid 'x' type in 'x %s y'"),
-		  PRIMVAL(op) == 1 ? "&&" : "||");
+	errorcall(call, _("invalid '%s' type in 'x %s y'"), "x", PRIMVAL(op) == 1 ? "&&" : "||");
     x1 = asLogical(s1);
 
 #define get_2nd							\
 	s2 = eval(s2, env);					\
 	if (!isNumber(s2))					\
-	    errorcall(call, _("invalid 'y' type in 'x %s y'"),	\
+	    errorcall(call, _("invalid '%s' type in 'x %s y'"),	"y", \
 		      PRIMVAL(op) == 1 ? "&&" : "||");		\
 	x2 = asLogical(s2);
 
@@ -230,7 +228,7 @@ static int checkValues(int op, int na_rm, int *x, R_xlen_t n)
     case _OP_ALL:
         return has_na ? NA_LOGICAL : TRUE;
     default:
-        error("bad op value for do_logic3");
+	error(_("bad operator value for 'do_logic3()' function"));
     }
     return NA_LOGICAL; /* -Wall */
 }

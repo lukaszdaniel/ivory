@@ -50,7 +50,8 @@
 #include <config.h>
 #endif
 
-#include "Defn.h"
+#include <localization.h>
+#include <Defn.h>
 #include "CXXR/ArgMatcher.hpp"
 #include "CXXR/DottedArgs.hpp"
 #include "CXXR/FunctionContext.hpp"
@@ -251,7 +252,7 @@ SEXP attribute_hidden Rf_matchArgs(SEXP formals, SEXP supplied, SEXP call)
 	    for (b = supplied, i = 1; b != R_NilValue; b = CDR(b), i++) {
 		if (TAG(b) != R_NilValue && Rf_pmatch(TAG(f), TAG(b), /*exact*/ TRUE)) {
 		    if (fargused[arg_i] == 2)
-			Rf_error(_("formal argument \"%s\" matched by multiple actual arguments"),
+			Rf_error(_("formal argument '%s' matched by multiple actual arguments"),
 			      CHAR(PRINTNAME(TAG(f))));
 		    if (ARGUSED(b) == 2)
 			Rf_error(_("argument %d matches multiple formal arguments"), i);
@@ -289,7 +290,7 @@ SEXP attribute_hidden Rf_matchArgs(SEXP formals, SEXP supplied, SEXP call)
 			if (ARGUSED(b))
 			    Rf_error(_("argument %d matches multiple formal arguments"), i);
 			if (fargused[arg_i] == 1)
-			    Rf_error(_("formal argument \"%s\" matched by multiple actual arguments"),
+			    Rf_error(_("formal argument '%s' matched by multiple actual arguments"),
 				  CHAR(PRINTNAME(TAG(f))));
 			if (ArgMatcher::warnOnPartialMatch()) {
 			    Rf_warningcall(call,
@@ -402,7 +403,7 @@ SEXP attribute_hidden Rf_matchArgs(SEXP formals, SEXP supplied, SEXP call)
                 }
             }
 	    Rf_errorcall(call /* R_GlobalContext->call */,
-		      ngettext("unused argument %s",
+		      n_("unused argument %s",
 			       "unused arguments %s",
 			       (unsigned long) length(unusedForError)),
 		      strchr(CHAR(Rf_asChar(Rf_deparse1line(unusedForError, FALSE))), '('));

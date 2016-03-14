@@ -200,7 +200,7 @@ Rboolean known_to_be_utf8 = FALSE;
 //LibExport int R_DirtyImage;
 //LibExport char *R_TempDir;
 
-#ifdef Win32   
+#ifdef _WIN32   
 LibExport int UserBreak;
 #endif
 
@@ -1277,7 +1277,7 @@ SEXP attribute_hidden do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (!ENV_DEBUG(rho)) {
 	ClosureContext* cptr = ClosureContext::innermost();
-	Rprintf("Called from: ");
+	Rprintf(_("Called from: "));
 	if( cptr ) {
 	    PrintCall(const_cast<Expression*>(cptr->call()), rho);
  	    SET_ENV_DEBUG(cptr->workingEnvironment(), TRUE);
@@ -1369,7 +1369,7 @@ SEXP attribute_hidden do_quit(/*const*/ CXXR::Expression* call, const CXXR::Buil
     if( !strcmp(tmp, "ask") ) {
 	ask = SA_SAVEASK;
 	if(!R_Interactive)
-	    warning(_("save=\"ask\" in non-interactive use: command-line default will be used"));
+	    warning(_("save=\"ask\" is in non-interactive use: command-line default will be used"));
     } else if( !strcmp(tmp, "no") )
 	ask = SA_NOSAVE;
     else if( !strcmp(tmp, "yes") )
@@ -1377,15 +1377,15 @@ SEXP attribute_hidden do_quit(/*const*/ CXXR::Expression* call, const CXXR::Buil
     else if( !strcmp(tmp, "default") )
 	ask = SA_DEFAULT;
     else
-	errorcall(call, _("unrecognized value of 'save'"));
+	errorcall(call, _("unrecognized value of 'save' argument"));
     status = asInteger(status_);
     if (status == NA_INTEGER) {
-	warning(_("invalid 'status', 0 assumed"));
+	warning(_("invalid 'status' argument, 0 assumed"));
 	runLast = 0;
     }
     runLast = asLogical(runLast_);
     if (runLast == NA_LOGICAL) {
-	warning(_("invalid 'runLast', FALSE assumed"));
+	warning(_("invalid 'runLast' argument, FALSE assumed"));
 	runLast = 0;
     }
     /* run the .Last function. If it gives an error, will drop back to main
@@ -1494,7 +1494,7 @@ Rf_removeTaskCallbackByIndex(int id)
     Rboolean status = TRUE;
 
     if(id < 0)
-	error(_("negative index passed to R_removeTaskCallbackByIndex"));
+	error(_("negative index passed to 'R_removeTaskCallbackByIndex()' function"));
 
     if(Rf_ToplevelTaskHandlers) {
 	if(id == 0) {
@@ -1604,7 +1604,8 @@ Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
     while(h) {
 	again = (h->cb)(expr, value, succeeded, visible, h->data);
 	if(R_CollectWarnings) {
-	    REprintf(_("warning messages from top-level task callback '%s'\n"), h->name);
+	    REprintf(_("warning messages from top-level task callback '%s'"), h->name);
+	    REprintf("\n");
 	    PrintWarnings(NULL);
 	}
 	if(again) {
@@ -1706,7 +1707,7 @@ R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP name)
 
 #undef __MAIN__
 
-#ifndef Win32
+#ifndef _WIN32
 /* this is here solely to pull in xxxpr.o */
 #include <R_ext/RS.h>
 extern "C" {
