@@ -1,4 +1,4 @@
-0c2fc8476ee215fdd2990b57428c5b0f *ChangeLog
+0b0d0a451fac7beb2290fa0e1595b264 *ChangeLog
 9999ac0304adfef7ace4b6d39b12fb79 *data/Wheat.rda
 9825eb1a55abd5454491207473b9932f *data/PBG.rda
 21982bd9f94e50afa7cc36fba49ca453 *data/Tetracycline2.rda
@@ -67,14 +67,14 @@ dcb449f377e446cd43ae8fc2a46d45e2 *inst/po/pl/LC_MESSAGES/R-nlme.mo
 a7bb1c7a387c9d02b421e646bda87a09 *R/reStruct.R
 d666be6c0639efc03be11a5eb65200e3 *R/VarCov.R
 983823605078d4566c9b1c73b97debd2 *R/zzMethods.R
-27b5bb134a16bb4c54cf202f3387ff9d *R/lmList.R
+5f36579d42b5a73d674b64d047853333 *R/lmList.R
 d341c30de17bbc0ed1fc8e11a9e472ed *R/VarCorr.R
 840fb67e3106ab38845a664337088e01 *R/varFunc.R
 e0c1f7fd19992cda1ba0f5ecf4689ec5 *R/gnls.R
 c326cdce9f049b912ffae06de6f48c00 *R/groupedData.R
-7df62597d6c06b01b58c09d5a46b3938 *R/nlsList.R
+c9ce801bde259cf74fe165132537f905 *R/nlsList.R
 7a0aaa73878a4b0c38b4485c7dfdee1f *R/newFunc.R
-5f3dd0386ff820e555680339e160e338 *R/nlme.R
+ae055d2fb1f20e0f0c320be2617f99ac *R/nlme.R
 f689c3f1649ea3bb29eab6b4631036d8 *R/lme.R
 18d2c0df7be96458bce6873c4c6d182b *R/corStruct.R
 5a8b5e0edb1c44539ec2332000c9aed1 *R/simulate.R
@@ -85,7 +85,7 @@ ee2d33e64ff539883bf31d743c6f5a23 *R/gls.R
 c843826752e9f806f255d79801354abb *INDEX
 b8deabb7c1ad40d063bf1389eed9fc8b *Changes
 ce3e1f9981bdcfd20e7fdc23050bd380 *NAMESPACE
-5ee341c2f806835e4ad1b6a6e95a0e6d *DESCRIPTION
+d252d20acf504226d0936ccdbf0df163 *DESCRIPTION
 698ed9dc9c450dce00df42c93bb40682 *po/fr.po
 ac82af44d6ef08d9a50b5999e239580a *po/R-de.po
 e3c793f8f2cea70e8b98e9e6bde55f54 *po/R-fr.po
@@ -418,8 +418,8 @@ ff23c357f09f1c7492a8256c15c0bdd2 *tests/sigma-fixed-etc.R
 6c2d6fabdab58ef9bf970f4bd7306b8a *tests/lme.R
 2d06207872197b9abd28f869ff06f086 *tests/getData.R
 1dcb40c8ec95980cb02af27cd02a6c8b *tests/predict.lme.R
-71e0f19e94843d44f0c9e4f8067de9f7 *tests/augPred_lab.R
-d4823e4fe8773fa8e82dd1f3cccd0348 *tests/nlme2.R
+395bfa0ee325c0e8b45d76b851e56b23 *tests/augPred_lab.R
+a2a080867a0982d4dcfc0a73e694f37c *tests/nlme2.R
 2c4e8ff230c5fcf0113220a47906b796 *tests/coef.Rout.save
 db2b6e128769fe949671803e3dff6737 *tests/gls.R
 eb723b61539feef013de476e68b5c50a *GPL-2

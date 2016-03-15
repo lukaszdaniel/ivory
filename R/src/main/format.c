@@ -111,7 +111,7 @@ void formatInteger(int *x, R_xlen_t n, int *fieldwidth)
 	if (l > *fieldwidth) *fieldwidth = l;
     }
 }
-
+
 /*---------------------------------------------------------------------------
  * scientific format determination for real numbers.
  * This is time-critical code.	 It is worth optimizing.

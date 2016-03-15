@@ -973,7 +973,7 @@ SEXP attribute_hidden do_gettext(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 	    if(strlen(tmp)) {
 #ifdef DEBUG_GETTEXT
-		REprintf(_("translating '%s' in domain '%s'\n"), tmp, domain); 
+		REprintf(_("translating '%s' in domain '%s'\n"), tmp, domain);
 #endif
 		tr = dgettext(domain, tmp);
 		R_CheckStack2(strlen(tr) + ihead + itail + 1);
