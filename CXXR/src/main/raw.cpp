@@ -27,8 +27,8 @@
 # include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 
 #include "CXXR/RAllocStack.h"
@@ -42,9 +42,9 @@ SEXP attribute_hidden do_charToRaw(/*const*/ CXXR::Expression* call, const CXXR:
     int nc;
 
     if (!isString(x) || LENGTH(x) == 0)
-	error(_("argument must be a character vector of length 1"));
+	error(_("'%s' argument must be a character vector of length 1"), "x");
     if (LENGTH(x) > 1)
-	warning(_("argument should be a character vector of length 1\nall but the first element will be ignored"));
+	warning(_("argument should be a character vector of length 1.\nAll but the first element will be ignored"));
     nc = LENGTH(STRING_ELT(x, 0));
     ans = allocVector(RAWSXP, nc);
     if (nc) memcpy(RAW(ans), CHAR(STRING_ELT(x, 0)), nc);
@@ -57,10 +57,10 @@ SEXP attribute_hidden do_rawToChar(/*const*/ CXXR::Expression* call, const CXXR:
     SEXP ans, x = x_;
 
     if (!isRaw(x))
-	error(_("argument 'x' must be a raw vector"));
+	error(_("'%s' argument must be a raw vector"), "x");
     int multiple = asLogical(multiple_);
     if (multiple == NA_LOGICAL)
-	error(_("argument 'multiple' must be TRUE or FALSE"));
+	error(_("'%s' argument must be TRUE or FALSE"), "multiple");
     if (multiple) {
 	R_xlen_t i, nc = XLENGTH(x);
 	char buf[2];
@@ -93,7 +93,7 @@ SEXP attribute_hidden do_rawShift(/*const*/ CXXR::Expression* call, const CXXR::
 
 
     if (!isRaw(x))
-	error(_("argument 'x' must be a raw vector"));
+	error(_("'%s' argument must be a raw vector"), "x");
     if (shift == NA_INTEGER || shift < -8 || shift > 8)
 	error(_("argument 'shift' must be a small integer"));
     PROTECT(ans = duplicate(x));
@@ -114,7 +114,7 @@ SEXP attribute_hidden do_rawToBits(/*const*/ CXXR::Expression* call, const CXXR:
     unsigned int tmp;
 
     if (!isRaw(x))
-	error(_("argument 'x' must be a raw vector"));
+	error(_("'%s' argument must be a raw vector"), "x");
     PROTECT(ans = allocVector(RAWSXP, 8*XLENGTH(x)));
     for (i = 0; i < XLENGTH(x); i++) {
 	tmp = static_cast<unsigned int>( RAW(x)[i]);
@@ -133,7 +133,7 @@ SEXP attribute_hidden do_intToBits(/*const*/ CXXR::Expression* call, const CXXR:
 
     PROTECT(x = coerceVector(x_, INTSXP));
     if (!isInteger(x))
-	error(_("argument 'x' must be an integer vector"));
+	error(_("'%s' argument must be an integer vector"), "x");
     PROTECT(ans = allocVector(RAWSXP, 32*XLENGTH(x)));
     for (i = 0; i < XLENGTH(x); i++) {
 	tmp = static_cast<unsigned int>( INTEGER(x)[i]);
@@ -152,9 +152,9 @@ SEXP attribute_hidden do_packBits(/*const*/ CXXR::Expression* call, const CXXR::
     int fac;
 
     if (TYPEOF(x) != RAWSXP && TYPEOF(x) != LGLSXP && TYPEOF(x) != INTSXP)
-	error(_("argument 'x' must be raw, integer or logical"));
+	error(_("'%s' argument must be raw, integer or logical"), "x");
     if (!isString(stype)  || LENGTH(stype) != 1)
-	error(_("argument '%s' must be a character string"), "type");
+	error(_("'%s' argument must be a character string"), "type");
     useRaw = CXXRCONSTRUCT(Rboolean, strcmp(CHAR(STRING_ELT(stype, 0)), "integer"));
     fac = useRaw ? 8 : 32;
     if (len% fac)
@@ -171,7 +171,7 @@ SEXP attribute_hidden do_packBits(/*const*/ CXXR::Expression* call, const CXXR::
 		else if (isLogical(x) || isInteger(x)) {
 		    int j = INTEGER(x)[8*i+k];
 		    if (j == NA_INTEGER)
-			error(_("argument 'x' must not contain NAs"));
+			error(_("argument 'x' must not contain NA values"));
 		    btmp |= j & 0x1;
 		}
 	    }
@@ -185,7 +185,7 @@ SEXP attribute_hidden do_packBits(/*const*/ CXXR::Expression* call, const CXXR::
 		else if (isLogical(x) || isInteger(x)) {
 		    int j = INTEGER(x)[32*i+k];
 		    if (j == NA_INTEGER)
-			error(_("argument 'x' must not contain NAs"));
+			error(_("argument 'x' must not contain NA values"));
 		    itmp |= j & 0x1;
 		}
 	    }
@@ -275,9 +275,9 @@ SEXP attribute_hidden do_utf8ToInt(/*const*/ CXXR::Expression* call, const CXXR:
     R_xlen_t i, j, nc;
 
     if (!isString(x) || LENGTH(x) == 0)
-	error(_("argument must be a character vector of length 1"));
+	error(_("'%s' argument must be a character vector of length 1"), "x");
     if (LENGTH(x) > 1)
-	warning(_("argument should be a character vector of length 1\nall but the first element will be ignored"));
+	warning(_("argument should be a character vector of length 1.\nAll but the first element will be ignored"));
     if (STRING_ELT(x, 0) == NA_STRING) return ScalarInteger(NA_INTEGER);
     const char *s = CHAR(STRING_ELT(x, 0));
     if (!utf8Valid(s)) return ScalarInteger(NA_INTEGER);
@@ -330,10 +330,10 @@ SEXP attribute_hidden do_intToUtf8(/*const*/ CXXR::Expression* call, const CXXR:
 
     PROTECT(x = coerceVector(x_, INTSXP));
     if (!isInteger(x))
-	error(_("argument 'x' must be an integer vector"));
+	error(_("'%s' argument must be an integer vector"), "x");
     multiple = asLogical(multiple_);
     if (multiple == NA_LOGICAL)
-	error(_("argument 'multiple' must be TRUE or FALSE"));
+	error(_("'%s' argument must be TRUE or FALSE"), "multiple");
     if (multiple) {
 	R_xlen_t i, nc = XLENGTH(x);
 	PROTECT(ans = allocVector(STRSXP, nc));

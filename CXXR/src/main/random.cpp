@@ -29,8 +29,8 @@
 # include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 
 #include <R_ext/Random.h>
 #include <R_ext/RS.h>		/* for Calloc() */
@@ -180,7 +180,7 @@ static void FixupProb(double *p, int n, int require_k, Rboolean replace)
     int npos = 0;
     for (int i = 0; i < n; i++) {
 	if (!R_FINITE(p[i]))
-	    error(_("NA in probability vector"));
+	    error(_("NA values in probability vector"));
 	if (p[i] < 0.0)
 	    error(_("negative probability"));
 	if (p[i] > 0.0) {

@@ -29,8 +29,8 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Random.h>
 
@@ -305,7 +305,7 @@ static void RNG_Init(RNGtype kind, Int32 seed)
 	break;
     case USER_UNIF:
 	User_unif_fun = R_FindSymbol("user_unif_rand", "", nullptr);
-	if (!User_unif_fun) error(_("'user_unif_rand' not in load table"));
+	if (!User_unif_fun) error(_("'%s' is not in load table"), "user_unif_rand");
 	User_unif_init = reinterpret_cast<UnifInitFun>( R_FindSymbol("user_unif_init", "", nullptr));
 	if (User_unif_init) (void) User_unif_init(seed);
 	User_unif_nseed = R_FindSymbol("user_unif_nseed", "", nullptr);
@@ -355,8 +355,8 @@ static void GetRNGkind(SEXP seeds)
     if (seeds == R_UnboundValue) return;
     if (!isInteger(seeds)) {
 	if (seeds == R_MissingArg) /* How can this happen? */
-	    error(_("'.Random.seed' is a missing argument with no default"));
-	warning(_("'.Random.seed' is not an integer vector but of type '%s', so ignored"),
+	    error(_("'%s' argument is missing, with no default"), ".Random.seed");
+	warning(_("'.Random.seed' is not an integer vector but of type '%s'"),
 		type2char(TYPEOF(seeds)));
 	goto invalid;
     }
@@ -435,7 +435,7 @@ void PutRNGstate()
     SEXP seeds;
 
     if (RNG_kind > LECUYER_CMRG || N01_kind > KINDERMAN_RAMAGE) {
-	warning("Internal .Random.seed is corrupt: not saving");
+	warning(_("Internal .Random.seed is corrupt: not saving"));
 	return;
     }
 
@@ -475,7 +475,7 @@ static void RNGkind(RNGtype newkind)
     // precaution against corruption as per package randtoolbox
     double u = unif_rand();
     if (u < 0.0 || u > 1.0) {
-	warning("someone corrupted the random-number generator: re-initializing");
+	warning(_("someone corrupted the random-number generator: re-initializing"));
 	RNG_Init(newkind, TimeToSeed());
     } else
 	RNG_Init(newkind, (Int32) (u * UINT_MAX));
@@ -492,7 +492,7 @@ static void Norm_kind(N01type kind)
 	error(_("invalid Normal type in 'RNGkind'"));
     if (kind == USER_NORM) {
 	User_norm_fun = R_FindSymbol("user_norm_rand", "", nullptr);
-	if (!User_norm_fun) error(_("'user_norm_rand' not in load table"));
+	if (!User_norm_fun) error(_("'%s' is not in load table"), "user_norm_rand");
     }
     GetRNGstate(); /* might not be initialized */
     if (kind == BOX_MULLER)
@@ -774,7 +774,7 @@ static void RNG_Init_R_KT(Int32 seed)
     SEXP fun, sseed, call, ans;
     PROTECT(fun = findVar1(install(".TAOCP1997init"), R_BaseEnv, CLOSXP, FALSE));
     if(fun == R_UnboundValue)
-	error("function '.TAOCP1997init' is missing");
+	error(_("function '.TAOCP1997init' is missing"));
     PROTECT(sseed = ScalarInteger(int(seed % 1073741821)));
     PROTECT(call = lang2(fun, sseed));
     ans = eval(call, R_GlobalEnv);

@@ -64,6 +64,7 @@
 #include <config.h>
 #endif
 
+#include <localization.h>
 #include <Defn.h>
 #include <Rmath.h>
 #include <Print.h>
@@ -84,11 +85,8 @@ using namespace CXXR;
 # define __STDC_ISO_10646__
 #endif
 
-#ifdef Win32
+#ifdef _WIN32
 #include <trioremap.h>
-#endif
-#ifndef min
-#define min(a, b) (((a)<(b))?(a):(b))
 #endif
 
 #define BUFSIZE 8192  /* used by Rprintf etc */
@@ -161,18 +159,18 @@ const char *EncodeEnvironment(SEXP x)
     const void *vmax = vmaxget();
     static char ch[1000];
     if (x == R_GlobalEnv)
-	sprintf(ch, "<environment: R_GlobalEnv>");
+	sprintf(ch, _("<environment: %s>"), "R_GlobalEnv");
     else if (x == R_BaseEnv)
-	sprintf(ch, "<environment: base>");
+	sprintf(ch, _("<environment: %s>"), "base");
     else if (x == R_EmptyEnv)
-	sprintf(ch, "<environment: R_EmptyEnv>");
+	sprintf(ch, _("<environment: %s>"), "R_EmptyEnv");
     else if (R_IsPackageEnv(x))
-	snprintf(ch, 1000, "<environment: %s>",
-		 translateChar(STRING_ELT(R_PackageEnvName(x), 0)));
+	snprintf(ch, 1000, _("<environment: %s>"),
+		translateChar(STRING_ELT(R_PackageEnvName(x), 0)));
     else if (R_IsNamespaceEnv(x))
-	snprintf(ch, 1000, "<environment: namespace:%s>",
+	snprintf(ch, 1000, _("<environment: namespace:%s>"),
 		 translateChar(STRING_ELT(R_NamespaceEnvSpec(x), 0)));
-    else snprintf(ch, 1000, "<environment: %p>", CXXRNOCAST(void *)x);
+    else snprintf(ch, 1000, _("<environment: %p>"), CXXRNOCAST(void *)x);
 
     vmaxset(vmax);
     return ch;
@@ -381,7 +379,7 @@ const char
 
 #include <rlocale.h> /* redefines isw* functions */
 
-#ifdef Win32
+#ifdef _WIN32
 #include "rgui_UTF8.h"
 #endif
 
@@ -408,7 +406,7 @@ int Rstrwid(const char *str, int slen, cetype_t ienc, int quote)
     /* Future-proof: currently that is all Rstrlen calls it with,
        and printarray has CE_NATIVE explicitly */
     if(ienc > 2) // CE_NATIVE, CE_UTF8, CE_BYTES are supported
-	warning("unsupported encoding (%d) in Rstrwid", ienc);
+	warning(_("unsupported encoding (%d) in '%s' function"), ienc, "Rstrwid()");
     if(mbcslocale || ienc == CE_UTF8) {
 	int res;
 	mbstate_t mb_st;
@@ -454,7 +452,7 @@ int Rstrwid(const char *str, int slen, cetype_t ienc, int quote)
 		    p++;
 		} else {
 		    len += iswprint(wint_t(wc)) ? Ri18n_wcwidth(wc) :
-#ifdef Win32
+#ifdef _WIN32
 			6;
 #else
 		    (k > 0xffff ? 10 : 6);
@@ -498,7 +496,7 @@ int Rstrwid(const char *str, int slen, cetype_t ienc, int quote)
 		    }
 		p++;
 	    } else { /* 8 bit char */
-#ifdef Win32 /* It seems Windows does not know what is printable! */
+#ifdef _WIN32 /* It seems Windows does not know what is printable! */
 		len++;
 #else
 		len += isprint(int(*p)) ? 1 : 4;
@@ -558,7 +556,7 @@ const char *EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 		      strlen(CHAR(R_print.na_string_noquote)));
 	quote = 0;
     } else {
-#ifdef Win32
+#ifdef _WIN32
 	if(WinUTF8out) {
 	    if(ienc == CE_UTF8) {
 		p = CHAR(s);
@@ -644,7 +642,7 @@ const char *EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 	Rboolean Unicode_warning = FALSE;
 #endif
 	if(ienc != CE_UTF8)  mbs_init(&mb_st);
-#ifdef Win32
+#ifdef _WIN32
 	else if(WinUTF8out) { memcpy(q, UTF8in, 3); q += 3; }
 #endif
 	for (i = 0; i < cnt; i++) {
@@ -696,7 +694,7 @@ const char *EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 			   device concerned. */
 			for(j = 0; j < res; j++) *q++ = *p++;
 		    } else {
-#ifndef Win32
+#ifndef _WIN32
 # ifndef __STDC_ISO_10646__
 			Unicode_warning = TRUE;
 # endif
@@ -760,7 +758,7 @@ const char *EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 		    }
 		p++;
 	    } else {  /* 8 bit char */
-#ifdef Win32 /* It seems Windows does not know what is printable! */
+#ifdef _WIN32 /* It seems Windows does not know what is printable! */
 		*q++ = *p++;
 #else
 		if(!isprint(int(*p) & 0xff)) {
@@ -773,7 +771,7 @@ const char *EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 	    }
 	}
 
-#ifdef Win32
+#ifdef _WIN32
     if(WinUTF8out && ienc == CE_UTF8)  { memcpy(q, UTF8out, 3); q += 3; }
 #endif
     if(quote) *q++ = char( quote);
@@ -832,7 +830,7 @@ const char *EncodeElement0(SEXP x, int indx, int quote, const char *dec)
 	break;
     default:
 	res = nullptr; /* -Wall */
-	UNIMPLEMENTED_TYPE("EncodeElement", x);
+	UNIMPLEMENTED_TYPE("EncodeElement()", x);
     }
     return res;
 }
@@ -911,7 +909,7 @@ void Rcons_vprintf(const char *format, va_list arg)
 	if (res < 0) {
 	    p = buf;
 	    buf[R_BUFSIZE - 1] = '\0';
-	    warning("printing of extremely long output is truncated");
+	    warning(_("printing of extremely long output is truncated"));
 	} else usedVasprintf = TRUE;
     }
 #else
@@ -925,7 +923,7 @@ void Rcons_vprintf(const char *format, va_list arg)
 	res = vsnprintf(p, 10*R_BUFSIZE, format, arg);
 	if (res < 0) {
 	    *(p + 10*R_BUFSIZE - 1) = '\0';
-	    warning("printing of extremely long output is truncated");
+	    warning(_("printing of extremely long output is truncated"));
 	}
     }
 #endif /* HAVE_VASPRINTF */
@@ -972,7 +970,7 @@ void Rvprintf(const char *format, va_list arg)
       con->fflush(con);
       con_num = getActiveSink(i++);
 #ifndef HAVE_VA_COPY
-      if (con_num>0) error("Internal error: this platform does not support split output");
+      if (con_num>0) error(_("Internal error: this platform does not support split output"));
 #endif
     } while(con_num>0);
 

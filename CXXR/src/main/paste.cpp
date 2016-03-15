@@ -34,11 +34,9 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
-
-#define imax2(x, y) ((x < y) ? y : x)
 
 #include <Print.h>
 #include <RBufferUtils.h>
@@ -125,7 +123,7 @@ SEXP attribute_hidden do_paste(/*const*/ CXXR::Expression* call, const CXXR::Bui
 		SET_VECTOR_ELT(x, j, coerceVector(xj, STRSXP));
 
 	    if (!isString(VECTOR_ELT(x, j)))
-		error(_("non-string argument to internal 'paste'"));
+		error(_("non-string argument passed to internal 'paste()' function"));
 	}
 	if(xlength(VECTOR_ELT(x, j)) > maxlen)
 	    maxlen = xlength(VECTOR_ELT(x, j));
@@ -326,7 +324,7 @@ SEXP attribute_hidden do_filepath(/*const*/ CXXR::Expression* call, const CXXR::
 		SET_VECTOR_ELT(x, j, coerceVector(xj, STRSXP));
 
 	    if (!isString(VECTOR_ELT(x, j)))
-		error(_("non-string argument to Internal paste"));
+		error(_("non-string argument passed to internal 'paste()' function"));
 	}
 	ln = length(VECTOR_ELT(x, j));
 	if(ln > maxlen) maxlen = ln;
@@ -356,7 +354,7 @@ SEXP attribute_hidden do_filepath(/*const*/ CXXR::Expression* call, const CXXR::
 		buf += sepw;
 	    }
 	}
-#ifdef Win32
+#ifdef _WIN32
 	// Trailing seps are invalid for file paths except for / and d:/
 	if(streql(csep, "/") || streql(csep, "\\")) {
 	    if(buf > cbuf) {
@@ -452,7 +450,7 @@ SEXP attribute_hidden do_format(/*const*/ CXXR::Expression* call, const CXXR::Bu
 	if(R_nchar(STRING_ELT(args[0], 0), Chars,
 		   /* allowNA = */ FALSE, /* keepNA = */ FALSE,
 		   "decimal.mark") != 1) // will become an error
-	    warning(_("'decimal.mark' must be a string of one character"));
+	    warning(_("'%s' argument must be a string of one character"), "decimal.mark");
 #endif
 	strncpy(sdec, CHAR(STRING_ELT(args[0], 0)), 10);
 	sdec[10] = '\0';
@@ -467,7 +465,7 @@ SEXP attribute_hidden do_format(/*const*/ CXXR::Expression* call, const CXXR::Bu
 	case LGLSXP:
 	    PROTECT(y = allocVector(STRSXP, n));
 	    if (trim) w = 0; else formatLogical(LOGICAL(x), n, &w);
-	    w = imax2(w, wd);
+	    w = max(w, wd);
 	    for (i = 0; i < n; i++) {
 		strp = EncodeLogical(LOGICAL(x)[i], w);
 		SET_STRING_ELT(y, i, mkChar(strp));
@@ -478,7 +476,7 @@ SEXP attribute_hidden do_format(/*const*/ CXXR::Expression* call, const CXXR::Bu
 	    PROTECT(y = allocVector(STRSXP, n));
 	    if (trim) w = 0;
 	    else formatInteger(INTEGER(x), n, &w);
-	    w = imax2(w, wd);
+	    w = max(w, wd);
 	    for (i = 0; i < n; i++) {
 		strp = EncodeInteger(INTEGER(x)[i], w);
 		SET_STRING_ELT(y, i, mkChar(strp));
@@ -488,7 +486,7 @@ SEXP attribute_hidden do_format(/*const*/ CXXR::Expression* call, const CXXR::Bu
 	case REALSXP:
 	    formatReal(REAL(x), n, &w, &d, &e, nsmall);
 	    if (trim) w = 0;
-	    w = imax2(w, wd);
+	    w = max(w, wd);
 	    PROTECT(y = allocVector(STRSXP, n));
 	    for (i = 0; i < n; i++) {
 		strp = EncodeReal0(REAL(x)[i], w, d, e, my_OutDec);
@@ -499,7 +497,7 @@ SEXP attribute_hidden do_format(/*const*/ CXXR::Expression* call, const CXXR::Bu
 	case CPLXSXP:
 	    formatComplex(COMPLEX(x), n, &w, &d, &e, &wi, &di, &ei, nsmall);
 	    if (trim) wi = w = 0;
-	    w = imax2(w, wd); wi = imax2(wi, wd);
+	    w = max(w, wd); wi = max(wi, wd);
 	    PROTECT(y = allocVector(STRSXP, n));
 	    for (i = 0; i < n; i++) {
 		strp = EncodeComplex(COMPLEX(x)[i], w, d, e, wi, di, ei, my_OutDec);
@@ -543,16 +541,16 @@ SEXP attribute_hidden do_format(/*const*/ CXXR::Expression* call, const CXXR::Bu
 	    if (adj != Rprt_adj_none) {
 		for (i = 0; i < n; i++)
 		    if (STRING_ELT(xx, i) != NA_STRING)
-			w = imax2(w, Rstrlen(STRING_ELT(xx, i), 0));
-		    else if (na) w = imax2(w, R_print.na_width);
+			w = max(w, Rstrlen(STRING_ELT(xx, i), 0));
+		    else if (na) w = max(w, R_print.na_width);
 	    } else w = 0;
 	    /* now calculate the buffer size needed, in bytes */
 	    for (i = 0; i < n; i++)
 		if (STRING_ELT(xx, i) != NA_STRING) {
 		    il = Rstrlen(STRING_ELT(xx, i), 0);
-		    cnt = imax2(cnt, LENGTH(STRING_ELT(xx, i)) + imax2(0, w-il));
+		    cnt = max(cnt, LENGTH(STRING_ELT(xx, i)) + max(0, w-il));
 		} else if (na)
-		    cnt = imax2(cnt, R_print.na_width + imax2(0, w-R_print.na_width));
+		    cnt = max(cnt, R_print.na_width + max(0, w-R_print.na_width));
 	    R_CheckStack2(cnt+1);
 	    vector<char> buffv(cnt+1);
 	    char* buff = &buffv[0];
@@ -584,7 +582,7 @@ SEXP attribute_hidden do_format(/*const*/ CXXR::Expression* call, const CXXR::Bu
 	PROTECT(y);
 	break;
 	default:
-	    error(_("Impossible mode ( x )")); y = R_NilValue;/* -Wall */
+	    error(_("Impossible mode(x)")); y = R_NilValue;/* -Wall */
 	}
     }
     if((l = getAttrib(x, R_DimSymbol)) != R_NilValue) {

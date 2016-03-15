@@ -29,6 +29,7 @@
 #include <config.h>
 #endif
 
+#include <localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rmath.h>
@@ -47,6 +48,7 @@
 
 using namespace CXXR;
 using namespace VectorOps;
+using namespace std;
 
 /* interval at which to check interrupts, a guess */
 #define NINTERRUPT 10000000
@@ -176,8 +178,7 @@ static SEXP do_relop_dflt(/*const*/ Expression* call,
 	if (nx > 0 && ny > 0)
 	    mismatch = (((nx > ny) ? nx % ny : ny % nx) != 0);
 	if (mismatch)
-	    warningcall(call, _("longer object length is not"
-				" a multiple of shorter object length"));
+	    warningcall(call, _("longer object length is not a multiple of shorter object length"));
 	GCStackRoot<VectorBase>
 	    ans(static_cast<VectorBase*>(string_relop(opcode, xv, yv)));
 	GeneralBinaryAttributeCopier::copyAttributes(ans, xv, yv);
@@ -370,20 +371,19 @@ static SEXP bitwiseNot(SEXP a)
 	}
 	break;
     default:
-	UNIMPLEMENTED_TYPE("bitNot", a);
+	UNIMPLEMENTED_TYPE("bitNot()", a);
     }
     if(np) UNPROTECT(np);
     return ans;
 }
 
-#define mymax(x, y) ((x >= y) ? x : y)
 
 #define BIT(op, name) \
     int np = 0; \
     if(isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;} \
     if(isReal(b)) {b = PROTECT(coerceVector(b, INTSXP)); np++;} \
-    if (TYPEOF(a) != TYPEOF(b)) error(_("'a' and 'b' must have the same type"));  \
-    R_xlen_t i, m = XLENGTH(a), n = XLENGTH(b), mn = (m && n) ? mymax(m, n) : 0;  \
+    if (TYPEOF(a) != TYPEOF(b)) error(_("'A' and 'B' must have the same type"));  \
+    R_xlen_t i, m = XLENGTH(a), n = XLENGTH(b), mn = (m && n) ? max(m, n) : 0;  \
     SEXP ans = allocVector(TYPEOF(a), mn); \
     switch(TYPEOF(a)) { \
     case INTSXP: \
@@ -400,17 +400,17 @@ static SEXP bitwiseNot(SEXP a)
 
 static SEXP bitwiseAnd(SEXP a, SEXP b)
 {
-    BIT(&, "bitwAnd");
+    BIT(&, "bitwAnd()");
 }
 
 static SEXP bitwiseOr(SEXP a, SEXP b)
 {
-    BIT(|, "bitwOr");
+    BIT(|, "bitwOr()");
 }
 
 static SEXP bitwiseXor(SEXP a, SEXP b)
 {
-    BIT(^, "bitwXor");
+    BIT(^, "bitwXor()");
 }
 
 static SEXP bitwiseShiftL(SEXP a, SEXP b)
@@ -419,7 +419,7 @@ static SEXP bitwiseShiftL(SEXP a, SEXP b)
     if(isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;}
     if(!isInteger(b)) {b = PROTECT(coerceVector(b, INTSXP)); np++;}
     R_xlen_t i, m = XLENGTH(a), n = XLENGTH(b), 
-	mn = (m && n) ? mymax(m, n) : 0;
+	mn = (m && n) ? max(m, n) : 0;
     SEXP ans = allocVector(TYPEOF(a), mn);
     switch(TYPEOF(a)) {
     case INTSXP:
@@ -430,7 +430,7 @@ static SEXP bitwiseShiftL(SEXP a, SEXP b)
 	}
 	break;
     default:
-	UNIMPLEMENTED_TYPE("bitShiftL", a);
+	UNIMPLEMENTED_TYPE("bitShiftL()", a);
     }
     if(np) UNPROTECT(np);
     return ans;
@@ -442,7 +442,7 @@ static SEXP bitwiseShiftR(SEXP a, SEXP b)
     if(isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;}
     if(!isInteger(b)) {b = PROTECT(coerceVector(b, INTSXP)); np++;}
     R_xlen_t i, m = XLENGTH(a), n = XLENGTH(b), 
-	mn = (m && n) ? mymax(m, n) : 0;
+	mn = (m && n) ? max(m, n) : 0;
     SEXP ans = allocVector(TYPEOF(a), mn);
     switch(TYPEOF(a)) {
     case INTSXP:
@@ -453,7 +453,7 @@ static SEXP bitwiseShiftR(SEXP a, SEXP b)
 	}
 	break;
     default:
-	UNIMPLEMENTED_TYPE("bitShiftR", a);
+	UNIMPLEMENTED_TYPE("bitShiftR()", a);
     }
     if(np) UNPROTECT(np);
     return ans;

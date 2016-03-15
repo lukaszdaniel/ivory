@@ -90,8 +90,8 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 
 #include <string.h>
@@ -130,7 +130,7 @@ using namespace CXXR;
 # endif /* HAVE_NO_SYMBOL_UNDERSCORE */
 #endif
 
-#ifdef Win32
+#ifdef _WIN32
 # define HAVE_DYNAMIC_LOADING
 #endif
 
@@ -259,7 +259,7 @@ R_registerRoutines(DllInfo *info, const R_CMethodDef * const croutines,
     int i, num;
 
     if(info == nullptr)
-	error(_("R_RegisterRoutines called with invalid DllInfo object."));
+	error(_("'R_RegisterRoutines()' called with invalid DllInfo object."));
 
     /* Default is to look in registered and then dynamic (unless
        the is no handle such as in "base" or "embedded")
@@ -322,7 +322,7 @@ R_setPrimitiveArgTypes(const R_FortranMethodDef * const croutine,
     sym->types = static_cast<R_NativePrimitiveArgType *>
 	(malloc(sizeof(R_NativePrimitiveArgType) * size_t( croutine->numArgs)));
     if(!sym->types)
-	error("allocation failure in R_setPrimitiveArgTypes");
+	error(_("allocation failure in '%s' function"), "R_setPrimitiveArgTypes()");
     if(sym->types)
 	memcpy(sym->types, croutine->types,
 	       sizeof(R_NativePrimitiveArgType) * size_t( croutine->numArgs));
@@ -336,7 +336,7 @@ R_setArgStyles(const R_FortranMethodDef * const croutine,
     sym->styles = static_cast<R_NativeArgStyle *>
 	(malloc(sizeof(R_NativeArgStyle) * size_t( croutine->numArgs)));
     if(!sym->styles)
-	error("allocation failure in R_setArgStyles");
+	error(_("allocation failure in '%s' function"), "R_setArgStyles()");
     if(sym->styles)
 	memcpy(sym->styles, croutine->styles,
 	       sizeof(R_NativeArgStyle) * size_t( croutine->numArgs));
@@ -521,7 +521,7 @@ DL_FUNC Rf_lookupCachedSymbol(const char *name, const char *pkg, int all)
 
 
 
-#ifdef Win32
+#ifdef _WIN32
 #define DLLerrBUFSIZE 4000
 #else  /* Not Windows */
 #define DLLerrBUFSIZE 1000
@@ -545,7 +545,7 @@ static DllInfo* AddDLL(const char *path, int asLocal, int now,
 
     DeleteDLL(path);
     if(CountDLL == MAX_NUM_DLLS) {
-	strcpy(DLLerror, _("maximal number of DLLs reached..."));
+	strcpy(DLLerror, _("maximal number of DLL files reached..."));
 	return nullptr;
     }
 
@@ -602,7 +602,7 @@ static DllInfo *R_RegisterDLL(HINSTANCE handle, const char *path)
 
     dpath = static_cast<char *>( malloc(strlen(path)+1));
     if(dpath == nullptr) {
-	strcpy(DLLerror, _("could not allocate space for 'path'"));
+	sprintf(DLLerror, _("could not allocate space for '%s'"), "path");
 	R_osDynSymbol->closeLibrary(handle);
 	return nullptr;
     }
@@ -614,11 +614,11 @@ static DllInfo *R_RegisterDLL(HINSTANCE handle, const char *path)
     p = Rf_strrchr(dpath, FILESEP[0]);
     if(!p) p = dpath; else p++;
     if(strlen(p) < PATH_MAX) strcpy(DLLname, p);
-    else error(_("DLLname '%s' is too long"), p);
+    else error(_("DLL name '%s' is too long"), p);
 
     /* remove SHLIB_EXT if present */
     p = DLLname + strlen(DLLname) - strlen(SHLIB_EXT);
-#ifdef Win32  /* case-insensitive file system */
+#ifdef _WIN32  /* case-insensitive file system */
     if(p > DLLname && stricmp(p, SHLIB_EXT) == 0) *p = '\0';
 #else
     if(p > DLLname && strcmp(p, SHLIB_EXT) == 0) *p = '\0';
@@ -635,7 +635,7 @@ addDLL(char *dpath, CXXRCONST char *DLLname, HINSTANCE handle)
     int ans = CountDLL;
     char *name = static_cast<char *>( malloc(strlen(DLLname)+1));
     if(name == nullptr) {
-	strcpy(DLLerror, _("could not allocate space for 'name'"));
+	sprintf(DLLerror, _("could not allocate space for '%s'"), "name");
 	if(handle)
 	    R_osDynSymbol->closeLibrary(handle);
 	free(dpath);
@@ -912,7 +912,7 @@ SEXP attribute_hidden do_dynunload(/*const*/ CXXR::Expression* call, const CXXR:
 	error(_("character argument expected"));
     GetFullDLLPath(call, buf, translateChar(STRING_ELT(x_, 0)));
     if(!DeleteDLL(buf))
-	error(_("shared object '%s\' was not loaded"), buf);
+	error(_("shared object '%s' was not loaded"), buf);
     return R_NilValue;
 }
 
@@ -993,7 +993,7 @@ Rf_MakeRegisteredNativeSymbol(R_RegisteredNativeSymbol *symbol)
     R_RegisteredNativeSymbol *copy;
     copy = static_cast<R_RegisteredNativeSymbol *>( malloc(1 * sizeof(R_RegisteredNativeSymbol)));
     if(!copy) {
-	error(ngettext("cannot allocate memory for registered native symbol (%d byte)",
+	error(n_("cannot allocate memory for registered native symbol (%d byte)",
 		       "cannot allocate memory for registered native symbol (%d bytes)",
 		      (int) sizeof(R_RegisteredNativeSymbol)),
 	      int( sizeof(R_RegisteredNativeSymbol)));
@@ -1213,8 +1213,8 @@ createRSymbolObject(SEXP sname, DL_FUNC f, R_RegisteredNativeSymbol *symbol,
 	    break;
 	default:
 	    /* Something unintended has happened if we get here. */
-	    error(_("unimplemented type %d in createRSymbolObject"),
-		  symbol->type);
+	    error(_("unimplemented type %d in '%s' function"),
+		  symbol->type, "createRSymbolObject()");
 	    break;
 	}
 	SET_VECTOR_ELT(sym, 3, tmp = ScalarInteger(nargs));
@@ -1295,7 +1295,7 @@ R_getRegisteredRoutines(SEXP dll)
 
     if(TYPEOF(dll) != EXTPTRSXP &&
        R_ExternalPtrTag(dll) != Rf_install("DLLInfo"))
-	error(_("R_getRegisteredRoutines() expects a DllInfo reference"));
+	error(_("'R_getRegisteredRoutines()' expects a DllInfo reference"));
 
     info = static_cast<DllInfo *>( R_ExternalPtrAddr(dll));
     if(!info) error(_("NULL value passed for DllInfo"));
@@ -1385,7 +1385,7 @@ do_getRegisteredRoutines(/*const*/ CXXR::Expression* call, const CXXR::BuiltInFu
 
     if(TYPEOF(dll) != EXTPTRSXP &&
        R_ExternalPtrTag(dll) != install("DLLInfo"))
-	error(_("R_getRegisteredRoutines() expects a DllInfo reference"));
+	error(_("'R_getRegisteredRoutines()' expects a DllInfo reference"));
 
     DllInfo *info = static_cast<DllInfo *>( R_ExternalPtrAddr(dll));
     if(!info) error(_("NULL value passed for DllInfo"));

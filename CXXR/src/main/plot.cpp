@@ -29,6 +29,7 @@
 # include <config.h>
 #endif
 
+#include <localization.h>
 #include <Defn.h>
 #include <float.h>  /* for DBL_MAX */
 #include <Graphics.h>
@@ -36,8 +37,9 @@
 #include "CXXR/GCStackRoot.hpp"
 
 using namespace CXXR;
+using namespace std;
 
-#include <Rmath.h> // for Rexp10, imax2
+#include <Rmath.h> // for Rexp10
 
 /* used in graphics and grid */
 SEXP CreateAtVector(double *axp, double *usr, int nint, Rboolean logflag)
@@ -57,7 +59,7 @@ SEXP CreateAtVector(double *axp, double *usr, int nint, Rboolean logflag)
     int i, n, ne;
     if (!logflag || axp[2] < 0) { /* --- linear axis --- Only use axp[] arg. */
 	n = int(fabs(axp[2]) + 0.25);/* >= 0 */
-	dn = imax2(1, n);
+	dn = max(1, n);
 	rng = axp[1] - axp[0];
 	small = fabs(rng)/(100.*dn);
 	at = allocVector(REALSXP, n + 1);
@@ -88,8 +90,7 @@ SEXP CreateAtVector(double *axp, double *usr, int nint, Rboolean logflag)
 	    }
 	    else {
 		/* can the following still happen... ? */
-		warning("CreateAtVector \"log\"(from axis()): "
-			"usr[0] = %g > %g = usr[1] !", umin, umax);
+		warning(_("CreateAtVector \"log\"(from axis()): usr[0] = %g > %g = usr[1] !"), umin, umax);
 	    }
 	}
 	/* allow a fuzz since we will do things like 0.2*dn >= umin */
@@ -98,9 +99,9 @@ SEXP CreateAtVector(double *axp, double *usr, int nint, Rboolean logflag)
 
 	dn = axp[0];
 	if (dn < DBL_MIN) {/* was 1e-300; now seems too cautious */
-	    warning("CreateAtVector \"log\"(from axis()): axp[0] = %g !", dn);
+	    warning(_("CreateAtVector \"log\"(from axis()): axp[0] = %g !"), dn);
 	    if (dn <= 0) /* real trouble (once for Solaris) later on */
-		error("CreateAtVector [log-axis()]: axp[0] = %g < 0!", dn);
+		error(_("CreateAtVector [log-axis()]: axp[0] = %g < 0!"), dn);
 	}
 
 	/* You get the 3 cases below by
@@ -111,13 +112,11 @@ SEXP CreateAtVector(double *axp, double *usr, int nint, Rboolean logflag)
 	    i = int(floor(log10(axp[1])) - ceil(log10(axp[0])) + 0.25);
 	    ne = i / nint + 1;
 #ifdef DEBUG_axis
-	    REprintf("CreateAtVector [log-axis(), case 1]: (nint, ne) = (%d,%d)\n",
+	    REprintf(_("CreateAtVector [log-axis(), case 1]: (nint, ne) = (%d,%d)\n"),
 		     nint, ne);
 #endif
 	    if (ne < 1)
-		error("log - axis(), 'at' creation, _LARGE_ range: "
-		      "ne = %d <= 0 !!\n"
-		      "\t axp[0:1]=(%g,%g) ==> i = %d;	nint = %d",
+		error(_("log - axis(), 'at' creation, _LARGE_ range: ne = %d <= 0 !!\n\t axp[0:1]=(%g,%g) ==> i = %d;	nint = %d"),
 		      ne, axp[0],axp[1], i, nint);
 	    rng = Rexp10((double)ne); /* >= 10 */
 	    n = 0;
@@ -126,9 +125,7 @@ SEXP CreateAtVector(double *axp, double *usr, int nint, Rboolean logflag)
 		dn *= rng;
 	    }
 	    if (!n)
-		error("log - axis(), 'at' creation, _LARGE_ range: "
-		      "invalid {xy}axp or par; nint=%d\n"
-		      "	 axp[0:1]=(%g,%g), usr[0:1]=(%g,%g); i=%d, ni=%d",
+		error(_("log - axis(), 'at' creation, _LARGE_ range: invalid {xy}axp or par; nint=%d\n	 axp[0:1]=(%g,%g), usr[0:1]=(%g,%g); i=%d, ni=%d"),
 		      nint, axp[0],axp[1], umin,umax, i,ne);
 	    at = allocVector(REALSXP, n);
 	    dn = axp[0];
@@ -150,9 +147,7 @@ SEXP CreateAtVector(double *axp, double *usr, int nint, Rboolean logflag)
 		dn *= 10;
 	    }
 	    if (!n)
-		error("log - axis(), 'at' creation, _MEDIUM_ range: "
-		      "invalid {xy}axp or par;\n"
-		      "	 axp[0]= %g, usr[0:1]=(%g,%g)",
+		error(_("log - axis(), 'at' creation, _MEDIUM_ range: invalid {xy}axp or par;\n	 axp[0]= %g, usr[0:1]=(%g,%g)"),
 		      axp[0], umin,umax);
 
 	    at = allocVector(REALSXP, n);
@@ -180,9 +175,7 @@ SEXP CreateAtVector(double *axp, double *usr, int nint, Rboolean logflag)
 		dn *= 10;
 	    }
 	    if (!n)
-		error("log - axis(), 'at' creation, _SMALL_ range: "
-		      "invalid {xy}axp or par;\n"
-		      "	 axp[0]= %g, usr[0:1]=(%g,%g)",
+		error(_("log - axis(), 'at' creation, _SMALL_ range: invalid {xy}axp or par;\n	 axp[0]= %g, usr[0:1]=(%g,%g)"),
 		      axp[0], umin,umax);
 	    at = allocVector(REALSXP, n);
 	    dn = axp[0];
@@ -197,7 +190,7 @@ SEXP CreateAtVector(double *axp, double *usr, int nint, Rboolean logflag)
 	    }
 	    break;
 	default:
-	    error("log - axis(), 'at' creation: INVALID {xy}axp[3] = %g",
+	    error(_("log - axis(), 'at' creation: INVALID {xy}axp[3] = %g"),
 		  axp[2]);
 	}
 

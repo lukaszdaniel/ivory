@@ -28,8 +28,8 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 #include <Print.h>
 #include <Rinternals.h>
@@ -343,7 +343,7 @@ SEXP attribute_hidden do_getOption(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP x = CAR(args);
     if (!isString(x) || LENGTH(x) != 1)
-	error(_("'%s' must be a character string"), "x");
+	error(_("'%s' argument must be a character string"), "x");
     return duplicate(GetOption1(install(CHAR(STRING_ELT(x, 0)))));
 }
 
@@ -424,7 +424,7 @@ SEXP attribute_hidden do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 	break;
     default:
-	UNIMPLEMENTED_TYPE("options", args);
+	UNIMPLEMENTED_TYPE("options()", args);
     }
 
     R_Visible = FALSE;
@@ -441,7 +441,7 @@ SEXP attribute_hidden do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    namei = STRING_ELT(argnames, i);
 	    break;
 	default: /* already checked, but be safe here */
-	    UNIMPLEMENTED_TYPE("options", args);
+	    UNIMPLEMENTED_TYPE("options()", args);
 	}
 
 	if (*CHAR(namei)) { /* name = value  ---> assignment */
@@ -570,7 +570,7 @@ SEXP attribute_hidden do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if(R_nchar(STRING_ELT(argi, 0), Chars,
 			   /* allowNA = */ FALSE, /* keepNA = */ FALSE,
 			   "OutDec") != 1) // will become an error
-		    warning(_("'OutDec' must be a string of one character"));
+		    warning(_("'%s' argument must be a string of one character"), "OutDec");
 		strncpy(sdec, CHAR(STRING_ELT(argi, 0)), 10);
 		sdec[10] = '\0';
 		OutDec = sdec;

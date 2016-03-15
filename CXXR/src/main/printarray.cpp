@@ -38,7 +38,8 @@
 #include <config.h>
 #endif
 
-#include "Defn.h"
+#include <localization.h>
+#include <Defn.h>
 #include "Print.h"
 
 #include <stdlib.h> /* for div() */
@@ -53,7 +54,10 @@ using namespace CXXR;
    so in native encoding.  (NULL ones from do_prmatrix are skipped.)
 */
 int Rstrwid(const char *str, int slen, cetype_t enc, int quote);  /* from printutils.c */
-#define strwidth(x) Rstrwid(x, (int) strlen(x), CE_NATIVE, 0)
+//#define strwidth(x) Rstrwid(x, (int) strlen(x), CE_NATIVE, 0)
+inline int strwidth(const char *x) {
+  return Rstrwid(x, (int) strlen(x), CE_NATIVE, 0);
+}
 
 /* ceil_DIV(a,b) :=  ceil(a / b)  in _int_ arithmetic : */
 static R_INLINE
@@ -367,7 +371,8 @@ void printMatrix(SEXP x, int offset, SEXP dim, int quote, int right,
     if ((cl != R_NilValue) && (c > length(cl)))
 	error(_("too few column labels"));
     if (r == 0 && c == 0) { // FIXME?  names(dimnames(.)) :
-	Rprintf("<0 x 0 matrix>\n");
+	Rprintf(_("<0 x 0 matrix>"));
+	Rprintf("\n");
 	return;
     }
     r_pr = r;
@@ -402,17 +407,19 @@ void printMatrix(SEXP x, int offset, SEXP dim, int quote, int right,
     default:
 	UNIMPLEMENTED_TYPE("printMatrix", x);
     }
-#ifdef ENABLE_NLS
-    if(r_pr < r) // number of formats must be consistent here
-	Rprintf(ngettext(" [ reached getOption(\"max.print\") -- omitted %d row ]\n",
-			 " [ reached getOption(\"max.print\") -- omitted %d rows ]\n",
+//#ifdef ENABLE_NLS
+    if(r_pr < r) { // number of formats must be consistent here
+	Rprintf(n_(" [ reached 'getOption(\"max.print\")' -- omitted %d row ]",
+			 " [ reached 'getOption(\"max.print\")' -- omitted %d rows ]",
 			 r - r_pr),
 		r - r_pr);
-#else
-    if(r_pr < r)
-	Rprintf(" [ reached getOption(\"max.print\") -- omitted %d rows ]\n",
-		r - r_pr);
-#endif
+	Rprintf("\n");
+    }
+//#else
+//    if(r_pr < r) 
+//	Rprintf(" [ reached 'getOption(\"max.print\")' -- omitted %d rows ]\n",
+//		r - r_pr);
+//#endif
     vmaxset(vmax);
 }
 
@@ -494,10 +501,38 @@ void printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 		    k *= dims[j];
 		}
 		Rprintf("\n\n");
-	    } else { // nb == 0 -- e.g. <2 x 3 x 0 array of logical>
-		for (i = 0; i < ndim; i++)
-		    Rprintf("%s%d", (i == 0) ? "<" : " x ", dims[i]);
-		Rprintf(" array of %s>\n", CHAR(type2str_nowarn(TYPEOF(x))));
+	    } else { // nb == 0 -- e.g. <logical array of size 2 x 3 x 0>
+	    	const int bufsize = 100;
+	    	char buf[bufsize];
+	    	int cx = 0;
+	    	int dx = 0;
+	    	for (i = 0; i < ndim; i++)  {
+	    		if(i == 0) cx = snprintf(buf, bufsize, "%d", dims[i]);
+	    		else {
+	    			dx = snprintf(buf+cx, bufsize-cx, " x %d", dims[i]);
+	    			cx += dx;
+	    		}
+	    	}
+		    switch (TYPEOF(x)) {
+		    case LGLSXP:
+		    	Rprintf(_("<logical array of size %s>"), buf);
+			break;
+		    case INTSXP:
+		    	Rprintf(_("<integer array of size %s>"), buf);
+			break;
+		    case REALSXP:
+		    	Rprintf(_("<real array of size %s>"), buf);
+			break;
+		    case CPLXSXP:
+		    	Rprintf(_("<complex array of size %s>"), buf);
+			break;
+		    case STRSXP:
+		    	Rprintf(_("<character array of size %s>"), buf);
+			break;
+		    default: //should never happen!
+		    	Rprintf("<%s array of size %s>", CHAR(type2str_nowarn(TYPEOF(x))), buf);
+		    }
+		    	Rprintf("\n");
 	    }
 	    switch (TYPEOF(x)) {
 	    case LGLSXP:
@@ -528,9 +563,18 @@ void printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 	}
 
 	if(max_reached && nb_pr < nb) {
-	    Rprintf(" [ reached getOption(\"max.print\") -- omitted");
-	    if(nr_last < nr) Rprintf(" %d row(s) and", nr - nr_last);
-	    Rprintf(" %d matrix slice(s) ]\n", nb - nb_pr);
+	    if(nr_last < nr) {
+	    Rprintf(n_(" [ reached 'getOption(\"max.print\")' -- omitted %d row and %d matrix slice ]",
+			     " [ reached 'getOption(\"max.print\")' -- omitted %d rows and %d matrix slices ]",
+			     nr - nr_last), nr - nr_last, nb - nb_pr);
+	   Rprintf("\n");
+		}
+	    else {
+	    Rprintf(n_(" [ reached 'getOption(\"max.print\")' -- omitted %d matrix slice ]",
+			     " [ reached 'getOption(\"max.print\")' -- omitted %d matrix slices ]",
+			     nb - nb_pr), nb - nb_pr);
+	   Rprintf("\n");
+	   }
 	}
     }
     vmaxset(vmax);

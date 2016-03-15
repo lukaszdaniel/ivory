@@ -44,6 +44,7 @@
 # include <config.h>
 #endif
 
+#include <localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h>
@@ -194,7 +195,7 @@ static void Init_R_Platform(SEXP rho)
 #else /* unix default */
     SET_VECTOR_ELT(value, 5, mkString("source"));
 #endif
-#ifdef Win32
+#ifdef _WIN32
     SET_VECTOR_ELT(value, 6, mkString(";"));
 #else /* not Win32 */
     SET_VECTOR_ELT(value, 6, mkString(":"));
@@ -254,7 +255,7 @@ void attribute_hidden R_check_locale(void)
     }
 #endif
     mbcslocale = CXXRCONSTRUCT(Rboolean, MB_CUR_MAX > 1);
-#ifdef Win32
+#ifdef _WIN32
     {
 	char *ctype = setlocale(LC_CTYPE, NULL), *p;
 	p = strrchr(ctype, '.');
@@ -315,7 +316,7 @@ SEXP attribute_hidden do_fileshow(/*const*/ CXXR::Expression* call, const CXXR::
     pg = pager_;
     n = 0;			/* -Wall */
     if (!isString(fn) || (n = length(fn)) < 1)
-	error(_("invalid filename specification"));
+	error(_("invalid '%s' specification"), "filename");
     if (!isString(hd) || length(hd) != n)
 	error(_("invalid '%s' argument"), "headers");
     if (!isString(tl))
@@ -327,13 +328,13 @@ SEXP attribute_hidden do_fileshow(/*const*/ CXXR::Expression* call, const CXXR::
     for (i = 0; i < n; i++) {
 	SEXP el = STRING_ELT(fn, i);
 	if (!isNull(el) && el != NA_STRING)
-#ifdef Win32
+#ifdef _WIN32
 	    f[i] = acopy_string(reEnc(CHAR(el), getCharCE(el), CE_UTF8, 1));
 #else
 	    f[i] = acopy_string(translateChar(el));
 #endif
 	else
-	    error(_("invalid filename specification"));
+	    error(_("invalid '%s' specification"), "filename");
 	if (STRING_ELT(hd, i) != NA_STRING)
 	    h[i] = acopy_string(translateChar(STRING_ELT(hd, i)));
 	else
@@ -489,7 +490,7 @@ SEXP attribute_hidden do_fileremove(/*const*/ CXXR::Expression* call, const CXXR
     for (i = 0; i < n; i++) {
 	if (STRING_ELT(f, i) != NA_STRING) {
 	    LOGICAL(ans)[i] =
-#ifdef Win32
+#ifdef _WIN32
 		(_wremove(filenameToWchar(STRING_ELT(f, i), TRUE)) == 0);
 #else
 		(remove(R_ExpandFileName(translateChar(STRING_ELT(f, i)))) == 0);
@@ -514,7 +515,7 @@ SEXP attribute_hidden do_fileremove(/*const*/ CXXR::Expression* call, const CXXR
 # include <sys/stat.h>
 #endif
 
-#ifdef Win32
+#ifdef _WIN32
 /* Mingw-w64 defines this to be 0x0502 */
 #ifndef _WIN32_WINNT
 # define _WIN32_WINNT 0x0500 /* for CreateHardLink */
@@ -576,7 +577,7 @@ SEXP attribute_hidden do_filesymlink(/*const*/ CXXR::Expression* call, const CXX
 	    STRING_ELT(f2, i%n2) == NA_STRING)
 	    LOGICAL(ans)[i] = 0;
 	else {
-#ifdef Win32
+#ifdef _WIN32
 	    wchar_t from[PATH_MAX+1], *to;
 	    struct _stati64 sb;
 	    from[PATH_MAX] = L'\0';
@@ -648,7 +649,7 @@ SEXP attribute_hidden do_filelink(/*const*/ CXXR::Expression* call, const CXXR::
 	    STRING_ELT(f2, i%n2) == NA_STRING)
 	    LOGICAL(ans)[i] = 0;
 	else {
-#ifdef Win32
+#ifdef _WIN32
 	    wchar_t from[PATH_MAX+1], *to;
 	    from[PATH_MAX] = L'\0';
 	    wcsncpy(from, filenameToWchar(STRING_ELT(f1, i%n1), TRUE), PATH_MAX);
@@ -689,7 +690,7 @@ SEXP attribute_hidden do_filelink(/*const*/ CXXR::Expression* call, const CXXR::
 #endif
 }
 
-#ifdef Win32
+#ifdef _WIN32
 int Rwin_rename(char *from, char *to);  /* in src/gnuwin32/extra.c */
 int Rwin_wrename(const wchar_t *from, const wchar_t *to);
 #endif
@@ -698,7 +699,7 @@ SEXP attribute_hidden do_filerename(/*const*/ CXXR::Expression* call, const CXXR
 {
     SEXP f1, f2, ans;
     int i, n1, n2;
-#ifdef Win32
+#ifdef _WIN32
     wchar_t from[PATH_MAX], to[PATH_MAX];
     const wchar_t *w;
 #else
@@ -714,7 +715,7 @@ SEXP attribute_hidden do_filerename(/*const*/ CXXR::Expression* call, const CXXR
     if (!isString(f2))
 	error(_("invalid '%s' argument"), "to");
     if (n2 != n1)
-	error(_("'from' and 'to' are of different lengths"));
+	error(_("'from' and 'to' arguments are of different lengths"));
     PROTECT(ans = allocVector(LGLSXP, n1));
     for (i = 0; i < n1; i++) {
 	if (STRING_ELT(f1, i) == NA_STRING ||
@@ -722,24 +723,24 @@ SEXP attribute_hidden do_filerename(/*const*/ CXXR::Expression* call, const CXXR
 	    LOGICAL(ans)[i] = 0;
 	    continue;
 	}
-#ifdef Win32
+#ifdef _WIN32
 	w = filenameToWchar(STRING_ELT(f1, i), TRUE);
 	if (wcslen(w) >= PATH_MAX - 1)
-	    error(_("expanded 'from' name too long"));
+	    error(_("expanded '%s' name is too long"), "from");
 	wcsncpy(from, w, PATH_MAX - 1);
 	w = filenameToWchar(STRING_ELT(f2, i), TRUE);
 	if (wcslen(w) >= PATH_MAX - 1)
-	    error(_("expanded 'to' name too long"));
+	    error(_("expanded '%s' name is too long"), "to");
 	wcsncpy(to, w, PATH_MAX - 1);
 	LOGICAL(ans)[i] = (Rwin_wrename(from, to) == 0);
 #else
 	p = R_ExpandFileName(translateChar(STRING_ELT(f1, i)));
 	if (strlen(p) >= PATH_MAX - 1)
-	    error(_("expanded 'from' name too long"));
+	    error(_("expanded '%s' name is too long"), "from");
 	strncpy(from, p, PATH_MAX - 1);
 	p = R_ExpandFileName(translateChar(STRING_ELT(f2, i)));
 	if (strlen(p) >= PATH_MAX - 1)
-	    error(_("expanded 'to' name too long"));
+	    error(_("expanded '%s' name is too long"), "to");
 	strncpy(to, p, PATH_MAX - 1);
 	res = rename(from, to);
 	if(res) {
@@ -760,7 +761,7 @@ SEXP attribute_hidden do_filerename(/*const*/ CXXR::Expression* call, const CXXR
 #  define UNIX_EXTRAS 1
 # endif
 
-#ifdef Win32
+#ifdef _WIN32
 # ifndef SCS_64BIT_BINARY
 #  define SCS_64BIT_BINARY 6
 # endif
@@ -788,7 +789,7 @@ SEXP attribute_hidden do_fileinfo(/*const*/ CXXR::Expression* call, const CXXR::
     SEXP uid = R_NilValue, gid = R_NilValue,
 	uname = R_NilValue, grname = R_NilValue; // silence -Wall
 #endif
-#ifdef Win32
+#ifdef _WIN32
     SEXP exe = R_NilValue;
     struct _stati64 sb;
 #else
@@ -797,7 +798,7 @@ SEXP attribute_hidden do_fileinfo(/*const*/ CXXR::Expression* call, const CXXR::
 
     fn = dots_;
     if (!isString(fn))
-	error(_("invalid filename argument"));
+	error(_("invalid '%s' argument"), "filename");
     int extras = asInteger(extra_cols_);
     if(extras == NA_INTEGER)
 	error(_("invalid '%s' argument"), "extra_cols");
@@ -805,7 +806,7 @@ SEXP attribute_hidden do_fileinfo(/*const*/ CXXR::Expression* call, const CXXR::
     if(extras) {
 #ifdef UNIX_EXTRAS
 	ncols = 10;
-#elif defined(Win32)
+#elif defined(_WIN32)
 	ncols = 7;
 #endif
     }
@@ -834,13 +835,13 @@ SEXP attribute_hidden do_fileinfo(/*const*/ CXXR::Expression* call, const CXXR::
 	grname = SET_VECTOR_ELT(ans, 9, allocVector(STRSXP, n));
 	SET_STRING_ELT(ansnames, 9, mkChar("grname"));
 #endif
-#ifdef Win32
+#ifdef _WIN32
 	exe = SET_VECTOR_ELT(ans, 6, allocVector(STRSXP, n));
 	SET_STRING_ELT(ansnames, 6, mkChar("exe"));
 #endif
     }
     for (int i = 0; i < n; i++) {
-#ifdef Win32
+#ifdef _WIN32
 	wchar_t *wfn = filenameToWchar(STRING_ELT(fn, i), TRUE);
 	/* trailing \ is not valid on Windows except for the
 	   root directory on a drive, specified as "\", or "D:\",
@@ -856,7 +857,7 @@ SEXP attribute_hidden do_fileinfo(/*const*/ CXXR::Expression* call, const CXXR::
 	const char *efn = R_ExpandFileName(translateChar(STRING_ELT(fn, i)));
 #endif
 	if (STRING_ELT(fn, i) != NA_STRING &&
-#ifdef Win32
+#ifdef _WIN32
 	    _wstati64(wfn, &sb)
 #else
 	    /* Target not link */
@@ -913,7 +914,7 @@ SEXP attribute_hidden do_fileinfo(/*const*/ CXXR::Expression* call, const CXXR::
 				   stgrp ? mkChar(stgrp->gr_name): NA_STRING);
 		}
 #endif
-#ifdef Win32
+#ifdef _WIN32
 		{
 		    char *s="no";
 		    DWORD type;
@@ -953,7 +954,7 @@ SEXP attribute_hidden do_fileinfo(/*const*/ CXXR::Expression* call, const CXXR::
 		SET_STRING_ELT(uname, i, NA_STRING);
 		SET_STRING_ELT(grname, i, NA_STRING);
 #endif
-#ifdef Win32
+#ifdef _WIN32
 		SET_STRING_ELT(exe, i, NA_STRING);
 #endif
 	    }
@@ -970,7 +971,7 @@ SEXP attribute_hidden do_direxists(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP fn, ans;
 
-#ifdef Win32
+#ifdef _WIN32
     struct _stati64 sb;
 #else
     struct stat sb;
@@ -978,11 +979,11 @@ SEXP attribute_hidden do_direxists(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     fn = CAR(args);
     if (!isString(fn))
-	error(_("invalid filename argument"));
+	error(_("invalid '%s' argument"), "filename");
     int n = length(fn);
     PROTECT(ans = allocVector(LGLSXP, n));
     for (int i = 0; i < n; i++) {
-#ifdef Win32
+#ifdef _WIN32
 	wchar_t *wfn = filenameToWchar(STRING_ELT(fn, i), TRUE);
 	/* trailing \ is not valid on Windows except for the
 	   root directory on a drive, specified as "\", or "D:\",
@@ -998,7 +999,7 @@ SEXP attribute_hidden do_direxists(SEXP call, SEXP op, SEXP args, SEXP rho)
 	const char *efn = R_ExpandFileName(translateChar(STRING_ELT(fn, i)));
 #endif
 	if (STRING_ELT(fn, i) != NA_STRING &&
-#ifdef Win32
+#ifdef _WIN32
 	    _wstati64(wfn, &sb)
 #else
 	    /* Target not link */
@@ -1035,7 +1036,7 @@ static SEXP filename(const char *dir, const char *file)
     SEXP ans;
     char cbuf[CBUFSIZE];
     if (dir) {
-#ifdef Win32
+#ifdef _WIN32
 	if ((strlen(dir) == 2 && dir[1] == ':') ||
 	    dir[strlen(dir) - 1] == '/' ||  dir[strlen(dir) - 1] == '\\')
 	    snprintf(cbuf, CBUFSIZE, "%s%s", dir, file);
@@ -1075,7 +1076,7 @@ list_files(const char *dnp, const char *stem, int *count, SEXP *pans,
 	    if (allfiles || !R_HiddenFile(de->d_name)) {
 		Rboolean not_dot = CXXRCONSTRUCT(Rboolean, strcmp(de->d_name, ".") && strcmp(de->d_name, ".."));
 		if (recursive) {
-#ifdef Win32
+#ifdef _WIN32
 		    if (strlen(dnp) == 2 && dnp[1] == ':') // e.g. "C:"
 			snprintf(p, PATH_MAX, "%s%s", dnp, de->d_name);
 		    else
@@ -1102,7 +1103,7 @@ list_files(const char *dnp, const char *stem, int *count, SEXP *pans,
 				IF_MATCH_ADD_TO_ANS
 			    }
 			    if (stem) {
-#ifdef Win32
+#ifdef _WIN32
 				if(strlen(stem) == 2 && stem[1] == ':')
 				    snprintf(stem2, PATH_MAX, "%s%s", stem,
 					     de->d_name);
@@ -1211,7 +1212,7 @@ static void list_dirs(const char *dnp, const char *nm,
 	    SET_STRING_ELT(*pans, (*count)++, mkChar(full ? dnp : nm));
 	}
 	while ((de = readdir(dir))) {
-#ifdef Win32
+#ifdef _WIN32
 	    if (strlen(dnp) == 2 && dnp[1] == ':')
 		snprintf(p, PATH_MAX, "%s%s", dnp, de->d_name);
 	    else
@@ -1287,7 +1288,7 @@ SEXP attribute_hidden do_Rhome(/*const*/ CXXR::Expression* call, const CXXR::Bui
     return mkString(path);
 }
 
-#ifdef Win32
+#ifdef _WIN32
 static Rboolean attribute_hidden R_WFileExists(const wchar_t *path)
 {
     struct _stati64 sb;
@@ -1306,7 +1307,7 @@ SEXP attribute_hidden do_fileexists(/*const*/ CXXR::Expression* call, const CXXR
     for (i = 0; i < nfile; i++) {
 	LOGICAL(ans)[i] = 0;
 	if (STRING_ELT(file, i) != NA_STRING) {
-#ifdef Win32
+#ifdef _WIN32
 	    /* Package XML sends arbitrarily long strings to file.exists! */
 	    size_t len = strlen(CHAR(STRING_ELT(file, i)));
 	    if (len > MAX_PATH)
@@ -1325,16 +1326,16 @@ SEXP attribute_hidden do_fileexists(/*const*/ CXXR::Expression* call, const CXXR
 
 #define CHOOSEBUFSIZE 1024
 
-#ifndef Win32
+#ifndef _WIN32
 SEXP attribute_hidden do_filechoose(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int _new, len;
     char buf[CHOOSEBUFSIZE];
     _new = asLogical(CAR(args));
     if ((len = R_ChooseFile(_new, buf, CHOOSEBUFSIZE)) == 0)
-	error(_("file choice cancelled"));
+	error(_("file choice was cancelled"));
     if (len >= CHOOSEBUFSIZE - 1)
-	error(_("file name too long"));
+	error(_("file name is too long"));
     return mkString(R_ExpandFileName(buf));
 }
 #endif
@@ -1344,7 +1345,7 @@ SEXP attribute_hidden do_filechoose(SEXP call, SEXP op, SEXP args, SEXP rho)
 # include <unistd.h>
 #endif
 
-#ifdef Win32
+#ifdef _WIN32
 extern int winAccessW(const wchar_t *path, int mode);
 #endif
 
@@ -1368,7 +1369,7 @@ SEXP attribute_hidden do_fileaccess(/*const*/ CXXR::Expression* call, const CXXR
     for (i = 0; i < n; i++)
 	if (STRING_ELT(fn, i) != NA_STRING) {
 	    INTEGER(ans)[i] =
-#ifdef Win32
+#ifdef _WIN32
 		winAccessW(filenameToWchar(STRING_ELT(fn, i), TRUE), modemask);
 #else
 		access(R_ExpandFileName(translateChar(STRING_ELT(fn, i))),
@@ -1379,7 +1380,7 @@ SEXP attribute_hidden do_fileaccess(/*const*/ CXXR::Expression* call, const CXXR
     return ans;
 }
 
-#ifdef Win32
+#ifdef _WIN32
 
 static int R_rmdir(const wchar_t *dir)
 {
@@ -1395,7 +1396,7 @@ static int isReparsePoint(const wchar_t *name)
 {
     DWORD res = GetFileAttributesW(name);
     if(res == INVALID_FILE_ATTRIBUTES) {
-	warning("cannot get info on '%ls', reason '%s'",
+	warning(_("cannot get info on '%ls', reason '%s'"),
 		name, formatError(GetLastError()));
 	return 0;
     }
@@ -1410,7 +1411,7 @@ static int delReparsePoint(const wchar_t *name)
 		    FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT,
 		    0);
     if(hd == INVALID_HANDLE_VALUE) {
-	warning("cannot open reparse point '%ls', reason '%s'",
+	warning(_("cannot open reparse point '%ls', reason '%s'"),
 		name, formatError(GetLastError()));
 	return 1;
     }
@@ -1422,7 +1423,7 @@ static int delReparsePoint(const wchar_t *name)
 			       NULL, 0, &dwBytes, 0);
     CloseHandle(hd);
     if(res == 0)
-	warning("cannot delete reparse point '%ls', reason '%s'",
+	warning(_("cannot delete reparse point '%ls', reason '%s'"),
 		name, formatError(GetLastError()));
     else /* This may leave an empty dir behind */
 	R_rmdir(name);
@@ -1555,7 +1556,7 @@ static int R_unlink(const char *name, int recursive, int force)
 
 
 /* Note that wildcards are allowed in 'names' */
-#ifdef Win32
+#ifdef _WIN32
 # include <dos_wglob.h>
 SEXP attribute_hidden do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
 {
@@ -1733,7 +1734,7 @@ SEXP attribute_hidden do_setlocale(/*const*/ CXXR::Expression* call, const CXXR:
 #if defined LC_MESSAGES
     case 7:
 	cat = LC_MESSAGES;
-#ifdef Win32
+#ifdef _WIN32
 /* this seems to exist in MinGW, but it does not work in Windows */
 	warning(_("LC_MESSAGES exists on Windows but is not operational"));
 	p = NULL;
@@ -1983,7 +1984,7 @@ SEXP attribute_hidden do_capabilities(/*const*/ CXXR::Expression* call, const CX
        if readline is available and in use. */
     SET_STRING_ELT(ansnames, i, mkChar("cledit"));
     LOGICAL(ans)[i] = FALSE;
-#if defined(Win32)
+#if defined(_WIN32)
     if (R_Interactive) LOGICAL(ans)[i] = TRUE;
 #endif
 #ifdef Unix
@@ -2019,7 +2020,7 @@ SEXP attribute_hidden do_capabilities(/*const*/ CXXR::Expression* call, const CX
     SET_STRING_ELT(ansnames, i, mkChar("cairo"));
 #ifdef HAVE_WORKING_CAIRO
     LOGICAL(ans)[i++] = TRUE;
-#elif defined(Win32)
+#elif defined(_WIN32)
 {
     /* This is true iff winCairo.dll is available */
     struct stat sb;
@@ -2067,7 +2068,7 @@ SEXP attribute_hidden do_sysgetpid(/*const*/ CXXR::Expression* call, const CXXR:
   allowed in C99 but disallowed in POSIX).  Also, something under
   warning() might set errno in a future version.
 */
-#ifndef Win32
+#ifndef _WIN32
 /* mkdir is defined in <sys/stat.h> */
 SEXP attribute_hidden do_dircreate(/*const*/ CXXR::Expression* call, const CXXR::BuiltInFunction* op, CXXR::RObject* path_, CXXR::RObject* showWarnings_, CXXR::RObject* recursive_, CXXR::RObject* mode_)
 {
@@ -2119,10 +2120,10 @@ SEXP attribute_hidden do_dircreate(/*const*/ CXXR::Expression* call, const CXXR:
     res = mkdir(dir, mode_t( mode));
     serrno = errno;
     if (show && res && serrno == EEXIST)
-	warning(_("'%s' already exists"), dir);
+	warning(_("directory '%s' already exists"), dir);
 end:
     if (show && res && serrno != EEXIST)
-	warning(_("cannot create dir '%s', reason '%s'"), dir,
+	warning(_("cannot create directory '%s', reason '%s'"), dir,
 		strerror(serrno));
     return ScalarLogical(res == 0);
 }
@@ -2168,15 +2169,15 @@ SEXP attribute_hidden do_dircreate(SEXP call, SEXP op, SEXP args, SEXP env)
     serrno = errno;
     if (show && res) {
     	if (serrno == EEXIST)
-	    warning(_("'%ls' already exists"), dir);
+	    warning(_("directory '%ls' already exists"), dir);
         else
-            warning(_("cannot create dir '%ls', reason '%s'"), dir,
+            warning(_("cannot create directory '%ls', reason '%s'"), dir,
             	    strerror(serrno));
     }
     return ScalarLogical(res == 0);
 end:
     if (show && res && serrno != EEXIST)
-	warning(_("cannot create dir '%ls', reason '%s'"), dir,
+	warning(_("cannot create directory '%ls', reason '%s'"), dir,
 		strerror(serrno));
     return ScalarLogical(res == 0);
 }
@@ -2185,7 +2186,7 @@ end:
 /* take file/dir 'name' in dir 'from' and copy it to 'to'
    'from', 'to' should have trailing path separator if needed.
 */
-#ifdef Win32
+#ifdef _WIN32
 static void copyFileTime(const wchar_t *from, const wchar_t * to)
 {
     HANDLE hFrom, hTo;
@@ -2218,7 +2219,7 @@ static int do_copy(const wchar_t* from, const wchar_t* name, const wchar_t* to,
     wchar_t dest[PATH_MAX + 1], this[PATH_MAX + 1];
 
     if (wcslen(from) + wcslen(name) >= PATH_MAX) {
-	warning(_("over-long path"));
+	warning(_("path is too long"));
 	return 1;
     }
     wsprintfW(this, L"%ls%ls", from, name);
@@ -2231,14 +2232,14 @@ static int do_copy(const wchar_t* from, const wchar_t* name, const wchar_t* to,
 	if (!recursive) return 1;
 	nc = wcslen(to);
 	if (wcslen(to) + wcslen(name) >= PATH_MAX) {
-	    warning(_("over-long path"));
+	    warning(_("path is too long"));
 	    return 1;
 	}
 	wsprintfW(dest, L"%ls%ls", to, name);
 	/* We could set the mode (only the 200 part matters) later */
 	res = _wmkdir(dest);
 	if (res && errno != EEXIST) {
-	    warning(_("problem creating directory %ls: %s"),
+	    warning(_("problem with creating directory %ls: %s"),
 		    dest, strerror(errno));
 	    return 1;
 	}
@@ -2249,7 +2250,7 @@ static int do_copy(const wchar_t* from, const wchar_t* name, const wchar_t* to,
 		if (!wcscmp(de->d_name, L".") || !wcscmp(de->d_name, L".."))
 		    continue;
 		if (wcslen(name) + wcslen(de->d_name) + 1 >= PATH_MAX) {
-		    warning(_("over-long path"));
+		    warning(_("path is too long"));
 		    return 1;
 		}
 		wsprintfW(p, L"%ls%\\%ls", name, de->d_name);
@@ -2258,7 +2259,7 @@ static int do_copy(const wchar_t* from, const wchar_t* name, const wchar_t* to,
 	    }
 	    _wclosedir(dir);
 	} else {
-	    warning(_("problem reading dir %ls: %s"), this, strerror(errno));
+	    warning(_("problem with reading directory %ls: %s"), this, strerror(errno));
 	    nfail++; /* we were unable to read a dir */
 	}
 	if(dates) copyFileTime(this, dest);
@@ -2269,7 +2270,7 @@ static int do_copy(const wchar_t* from, const wchar_t* name, const wchar_t* to,
 	nfail = 0;
 	nc = wcslen(to);
 	if (nc + wcslen(name) >= PATH_MAX) {
-	    warning(_("over-long path length"));
+	    warning(_("path is too long"));
 	    nfail++;
 	    goto copy_error;
 	}
@@ -2277,7 +2278,7 @@ static int do_copy(const wchar_t* from, const wchar_t* name, const wchar_t* to,
 	if (over || !R_WFileExists(dest)) { /* FIXME */
 	    if ((fp1 = _wfopen(this, L"rb")) == NULL ||
 		(fp2 = _wfopen(dest, L"wb")) == NULL) {
-		warning(_("problem copying %ls to %ls: %s"),
+		warning(_("problem with copying %ls to %ls: %s"),
 			this, dest, strerror(errno));
 		nfail++;
 		goto copy_error;
@@ -2437,7 +2438,7 @@ static int do_copy(const char* from, const char* name, const char* to,
 #endif
     /* REprintf("from: %s, name: %s, to: %s\n", from, name, to); */
     if (strlen(from) + strlen(name) >= PATH_MAX) {
-	warning(_("over-long path length"));
+	warning(_("path is too long"));
 	return 1;
     }
     snprintf(thispath, PATH_MAX+1, "%s%s", from, name);
@@ -2450,7 +2451,7 @@ static int do_copy(const char* from, const char* name, const char* to,
 
 	if (!recursive) return 1;
 	if (strlen(to) + strlen(name) >= PATH_MAX) {
-	    warning(_("over-long path length"));
+	    warning(_("path is too long"));
 	    return 1;
 	}
 	snprintf(dest, PATH_MAX+1, "%s%s", to, name);
@@ -2459,7 +2460,7 @@ static int do_copy(const char* from, const char* name, const char* to,
 	   setting mode */
 	res = mkdir(dest, 0700);
 	if (res && errno != EEXIST) {
-	    warning(_("problem creating directory %s: %s"),
+	    warning(_("problem with creating directory %s: %s"),
 		    thispath, strerror(errno));
 	    return 1;
 	}
@@ -2470,7 +2471,7 @@ static int do_copy(const char* from, const char* name, const char* to,
 		if (streql(de->d_name, ".") || streql(de->d_name, ".."))
 		    continue;
 		if (strlen(name) + strlen(de->d_name) + 1 >= PATH_MAX) {
-		    warning(_("over-long path length"));
+		    warning(_("path is too long"));
 		    return 1;
 		}
 		snprintf(p, PATH_MAX+1, "%s/%s", name, de->d_name);
@@ -2479,7 +2480,7 @@ static int do_copy(const char* from, const char* name, const char* to,
 	    }
 	    closedir(dir);
 	} else {
-	    warning(_("problem reading directory %s: %s"),
+	    warning(_("problem with reading directory %s: %s"),
 		    thispath, strerror(errno));
 	    nfail++; /* we were unable to read a dir */
 	}
@@ -2492,7 +2493,7 @@ static int do_copy(const char* from, const char* name, const char* to,
 	nfail = 0;
 	size_t nc = strlen(to);
 	if (strlen(to) + strlen(name) >= PATH_MAX) {
-	    warning(_("over-long path length"));
+	    warning(_("path is too long"));
 	    nfail++;
 	    goto copy_error;
 	}
@@ -2501,7 +2502,7 @@ static int do_copy(const char* from, const char* name, const char* to,
 	    /* REprintf("copying %s to %s\n", thispath, dest); */
 	    if ((fp1 = R_fopen(thispath, "rb")) == nullptr ||
 		(fp2 = R_fopen(dest, "wb")) == nullptr) {
-		warning(_("problem copying %s to %s: %s"),
+		warning(_("problem with copying %s to %s: %s"),
 			thispath, dest, strerror(errno));
 		nfail++;
 		goto copy_error;
@@ -2596,7 +2597,7 @@ SEXP attribute_hidden do_filecopy(/*const*/ CXXR::Expression* call, const CXXR::
 
 SEXP attribute_hidden do_l10n_info(/*const*/ CXXR::Expression* call, const CXXR::BuiltInFunction* op)
 {
-#ifdef Win32
+#ifdef _WIN32
     int len = 4;
 #else
     int len = 3;
@@ -2610,7 +2611,7 @@ SEXP attribute_hidden do_l10n_info(/*const*/ CXXR::Expression* call, const CXXR:
     SET_VECTOR_ELT(ans, 0, ScalarLogical(mbcslocale));
     SET_VECTOR_ELT(ans, 1, ScalarLogical(utf8locale));
     SET_VECTOR_ELT(ans, 2, ScalarLogical(latin1locale));
-#ifdef Win32
+#ifdef _WIN32
     SET_STRING_ELT(names, 3, mkChar("codepage"));
     SET_VECTOR_ELT(ans, 3, ScalarInteger(localeCP));
 #endif
@@ -2635,7 +2636,7 @@ SEXP attribute_hidden do_syschmod(/*const*/ CXXR::Expression* call, const CXXR::
     PROTECT(smode = coerceVector(mode_, INTSXP));
     modes = INTEGER(smode);
     m = LENGTH(smode);
-    if(!m && n) error(_("'mode' must be of length at least one"));
+    if(!m && n) error(_("'mode' argument must be of length at least one"));
     int useUmask = asLogical(use_umask_);
     if (useUmask == NA_LOGICAL)
 	error(_("invalid '%s' argument"), "use_umask");
@@ -2649,14 +2650,14 @@ SEXP attribute_hidden do_syschmod(/*const*/ CXXR::Expression* call, const CXXR::
 #ifdef HAVE_UMASK
 	if(useUmask) mode = mode & ~um;
 #endif
-#ifdef Win32
+#ifdef _WIN32
 	/* Windows' _[w]chmod seems only to support read access
 	   or read-write access.  _S_IWRITE is 0200.
 	*/
 	mode = (mode & 0200) ? (_S_IWRITE | _S_IREAD): _S_IREAD;
 #endif
 	if (STRING_ELT(paths, i) != NA_STRING) {
-#ifdef Win32
+#ifdef _WIN32
 	    res = _wchmod(filenameToWchar(STRING_ELT(paths, i), TRUE), mode);
 #else
 	    res = chmod(R_ExpandFileName(translateChar(STRING_ELT(paths, i))),
@@ -2675,7 +2676,7 @@ SEXP attribute_hidden do_syschmod(/*const*/ CXXR::Expression* call, const CXXR::
     if (!isString(paths))
 	error(_("invalid '%s' argument"), "paths");
     n = LENGTH(paths);
-    warning("insufficient OS support on this platform");
+    warning(_("insufficient OS support on this platform"));
     PROTECT(ans = allocVector(LGLSXP, n));
     for (i = 0; i < n; i++) LOGICAL(ans)[i] = 0;
     UNPROTECT(1);
@@ -2761,7 +2762,7 @@ SEXP attribute_hidden do_Cstack_info(/*const*/ CXXR::Expression* call, const CXX
     return ans;
 }
 
-#ifdef Win32
+#ifdef _WIN32
 static int winSetFileTime(const char *fn, time_t ftime)
 {
     SYSTEMTIME st;
@@ -2797,7 +2798,7 @@ do_setFileTime(/*const*/ CXXR::Expression* call, const CXXR::BuiltInFunction* op
     const char *fn = translateChar(STRING_ELT(path_, 0));
     int ftime = asInteger(time_), res;
 
-#ifdef Win32
+#ifdef _WIN32
     res  = winSetFileTime(fn, (time_t)ftime);
 #elif defined(HAVE_UTIMES)
     struct timeval times[2];
@@ -2814,7 +2815,7 @@ do_setFileTime(/*const*/ CXXR::Expression* call, const CXXR::BuiltInFunction* op
     return ScalarLogical(res);
 }
 
-#ifdef Win32
+#ifdef _WIN32
 /* based on ideas in
    http://www.codeproject.com/KB/winsdk/junctionpoints.aspx
 */
@@ -2845,7 +2846,7 @@ SEXP attribute_hidden do_mkjunction(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT,
 		    0);
     if(hd == INVALID_HANDLE_VALUE) {
-	warning("cannot open reparse point '%ls', reason '%s'",
+	warning(_("cannot open reparse point '%ls', reason '%s'"),
 		to, formatError(GetLastError()));
 	return ScalarLogical(1);
     }
@@ -2866,7 +2867,7 @@ SEXP attribute_hidden do_mkjunction(SEXP call, SEXP op, SEXP args, SEXP rho)
 			NULL, 0, &dwBytes, 0);
     CloseHandle(hd);
     if(!bOK)
-	warning("cannot set reparse point '%ls', reason '%s'",
+	warning(_("cannot set reparse point '%ls', reason '%s'"),
 		to, formatError(GetLastError()));
     return ScalarLogical(bOK != 0);
 }

@@ -34,8 +34,8 @@
 #endif
 
 #include <stdlib.h> /* for setenv or putenv */
-#include <Defn.h> /* for PATH_MAX */
 #include <localization.h>
+#include <Defn.h> /* for PATH_MAX */
 #include <Internal.h>
 #include <Rinterface.h>
 #include <Fileio.h>
@@ -140,11 +140,11 @@ static void Putenv(char *a, CXXRCONST char *b)
 
 #ifdef HAVE_SETENV
     buf = static_cast<char *>( malloc((strlen(b) + 1) * sizeof(char)));
-    if(!buf) R_Suicide("allocation failure in reading Renviron");
+    if(!buf) R_Suicide(_("allocation failure in reading Renviron"));
     value = buf;
 #else
     buf = (char *) malloc((strlen(a) + strlen(b) + 2) * sizeof(char));
-    if(!buf) R_Suicide("allocation failure in reading Renviron");
+    if(!buf) R_Suicide(_("allocation failure in reading Renviron"));
     strcpy(buf, a); strcat(buf, "=");
     value = buf+strlen(buf);
 #endif
@@ -196,8 +196,7 @@ static int process_Renviron(const char *filename)
     int errs = 0;
 
     if (!filename || !(fp = R_fopen(filename, "r"))) return 0;
-    snprintf(msg, MSG_SIZE+50,
-	     "\n   File %s contains invalid line(s)", filename);
+    snprintf(msg, MSG_SIZE+50, _("\n   File %s contains invalid line(s)"), filename);
 
     while(fgets(sm, BUF_SIZE, fp)) {
 	sm[BUF_SIZE-1] = '\0';
@@ -218,7 +217,7 @@ static int process_Renviron(const char *filename)
     }
     fclose(fp);
     if (errs) {
-	strcat(msg, "\n   They were ignored\n");
+	strcat(msg, _("\n   Invalid lines were ignored\n"));
 	R_ShowMessage(msg);
     }
     return 1;
@@ -232,7 +231,7 @@ void process_system_Renviron()
 
 #ifdef R_ARCH
     if(strlen(R_Home) + strlen("/etc/Renviron") + strlen(R_ARCH) + 1 > PATH_MAX - 1) {
-	R_ShowMessage("path to system Renviron is too long: skipping");
+	R_ShowMessage(_("path to system Renviron is too long: skipping"));
 	return;
     }
     strcpy(buf, R_Home);
@@ -241,14 +240,14 @@ void process_system_Renviron()
     strcat(buf, "/Renviron");
 #else
     if(strlen(R_Home) + strlen("/etc/Renviron") > PATH_MAX - 1) {
-	R_ShowMessage("path to system Renviron is too long: skipping");
+	R_ShowMessage(_("path to system Renviron is too long: skipping"));
 	return;
     }
     strcpy(buf, R_Home);
     strcat(buf, "/etc/Renviron");
 #endif
     if(!process_Renviron(buf))
-	R_ShowMessage("cannot find system Renviron");
+	R_ShowMessage(_("cannot find system Renviron"));
 }
 
 #ifdef HAVE_UNISTD_H
@@ -266,7 +265,7 @@ void process_site_Renviron ()
     }
 #ifdef R_ARCH
     if(strlen(R_Home) + strlen("/etc/Renviron.site") + strlen(R_ARCH) > PATH_MAX - 2) {
-	R_ShowMessage("path to arch-specific Renviron.site is too long: skipping");
+	R_ShowMessage(_("path to arch-specific Renviron.site is too long: skipping"));
     } else {
 	snprintf(buf, PATH_MAX, "%s/etc/%s/Renviron.site", R_Home, R_ARCH);
 	if(access(buf, R_OK) == 0) {
@@ -276,7 +275,7 @@ void process_site_Renviron ()
     }
 #endif
     if(strlen(R_Home) + strlen("/etc/Renviron.site") > PATH_MAX - 1) {
-	R_ShowMessage("path to Renviron.site is too long: skipping");
+	R_ShowMessage(_("path to Renviron.site is too long: skipping"));
 	return;
     }
     snprintf(buf, PATH_MAX, "%s/etc/Renviron.site", R_Home);
@@ -302,7 +301,7 @@ void process_user_Renviron()
 #ifdef Unix
     s = R_ExpandFileName("~/.Renviron");
 #endif
-#ifdef Win32
+#ifdef _WIN32
     {
 	char buf[1024]; /* MAX_PATH is less than this */
 	/* R_USER is not necessarily set yet, so we have to work harder */
@@ -324,7 +323,7 @@ SEXP attribute_hidden do_readEnviron(/*const*/ CXXR::Expression* call, const CXX
 {
     SEXP x = path_;
     if (Rf_length(x) != 1 || !isString(x))
-	errorcall(call, _("argument '%s' must be a character string"), "x");
+	errorcall(call, _("'%s' argument must be a character string"), "x");
     const char *fn = R_ExpandFileName(translateChar(STRING_ELT(x, 0)));
     int res = process_Renviron(fn);
     if (!res)

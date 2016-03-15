@@ -37,6 +37,7 @@
 #include <config.h>
 #endif
 
+#include <localization.h>
 #include <cstdarg>
 #include "Print.h"
 #include "CXXR/StringVector.h"
@@ -221,9 +222,11 @@ void printVector(SEXP x, int indx, int quote)
 	default:  // -Wswitch
 	    break;
 	}
-	if(n_pr < n)
-		Rprintf(" [ reached getOption(\"max.print\") -- omitted %d entries ]\n",
-			n - n_pr);
+	if(n_pr < n) {
+		Rprintf(n_(" [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",
+			" [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", n - n_pr), n - n_pr);
+		Rprintf("\n");
+	}
     }
     else
 #define PRINT_V_0						\
@@ -241,7 +244,7 @@ void printVector(SEXP x, int indx, int quote)
 
 #undef DO_first_lab
 #undef DO_newline
-
+
 
 /* The following code prints vectors which have every element named.
 
@@ -380,9 +383,11 @@ void printNamedVector(SEXP x, SEXP names, int quote, const char *title)
 	default:  // -Wswitch
 	    break;
 	}
-	if(n_pr < n)
-		Rprintf(" [ reached getOption(\"max.print\") -- omitted %d entries ]\n",
-			n - n_pr);
+	if(n_pr < n) {
+		Rprintf(n_(" [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",
+			" [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", n - n_pr), n - n_pr);
+		Rprintf("\n");
+	}
 
     }
     else {

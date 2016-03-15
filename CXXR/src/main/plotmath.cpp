@@ -31,8 +31,8 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 
 #include <ctype.h>
 #include <rlocale.h>
@@ -312,7 +312,7 @@ static double TeX(TEXPAR which, pGEcontext gc, pGEDevDesc dd)
     case xi13:	  /* big_op_spacing5 */
 	return 0.15 * XHeight(gc, dd);
     default:/* never happens (enum type) */
-	error(_("invalid `which' in C function TeX")); return 0;/*-Wall*/
+	error(_("invalid 'which' argument in C function TeX")); return 0;/*-Wall*/
     }
 }
 
@@ -986,7 +986,7 @@ static BBOX RenderSymbolStr(const char *str, int draw, mathContext *mc,
 	    while (*s) {
 		wc = 0;
 		res = mbrtowc(&wc, s, MB_LEN_MAX, &mb_st);
-		if(res == CXXRCONSTRUCT(size_t, -1)) error("invalid multibyte string '%s'", s);
+		if(res == CXXRCONSTRUCT(size_t, -1)) error(_("invalid multibyte string '%s'"), s);
 		if (iswdigit(wc) && font != PlainFont) {
 		    font = PlainFont;
 		    SetFont(PlainFont, gc);
@@ -1005,7 +1005,7 @@ static BBOX RenderSymbolStr(const char *str, int draw, mathContext *mc,
 		    memset(chr, 0, sizeof(chr));
 		    /* should not be possible, as we just converted to wc */
 		    if(wcrtomb(chr, wc, &mb_st) == CXXRCONSTRUCT(size_t, -1))
-			error("invalid multibyte string");
+			error(_("invalid multibyte string"));
 		    PMoveAcross(lastItalicCorr, mc);
 		    GEText(ConvertedX(mc ,dd), ConvertedY(mc, dd), chr,
 			   CE_NATIVE,
@@ -1069,7 +1069,7 @@ static BBOX RenderChar(int ascii, int draw, mathContext *mc,
 	if(mbcslocale) {
 	    size_t res = wcrtomb(asciiStr, ascii, nullptr);
 	    if(res == CXXRCONSTRUCT(size_t, -1))
-		error("invalid character in current multibyte locale");
+		error(_("invalid character in current multibyte locale"));
 	} else
 	    asciiStr[0] = char( ascii);
 	GEText(ConvertedX(mc ,dd), ConvertedY(mc, dd), asciiStr, CE_NATIVE,

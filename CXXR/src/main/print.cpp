@@ -67,8 +67,8 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 #include <Print.h>
 #include <Fileio.h>
@@ -149,7 +149,7 @@ SEXP attribute_hidden do_prmatrix(/*const*/ CXXR::Expression* call, const CXXR::
     naprint = na_print_;
     if(!isNull(naprint))  {
 	if(!isString(naprint) || LENGTH(naprint) < 1)
-	    error(_("invalid 'na.print' specification"));
+	    error(_("invalid '%s' specification"), "na.print");
 	R_print.na_string = R_print.na_string_noquote = STRING_ELT(naprint, 0);
 	R_print.na_width = R_print.na_width_noquote =
 	    int( strlen(CHAR(R_print.na_string)));
@@ -207,7 +207,7 @@ static void PrintLanguageEtc(SEXP s, Rboolean useSource, Rboolean isClosure)
 	Rprintf("%s\n", CHAR(STRING_ELT(t, i))); /* translated */
     UNPROTECT(1);
     if (isClosure) {
-	if (isByteCode(BODY(s))) Rprintf("<bytecode: %p>\n", BODY(s));
+	if (isByteCode(BODY(s))) Rprintf(_("<bytecode: %p>\n"), BODY(s));
 	t = CLOENV(s);
 	if (t != R_GlobalEnv)
 	    Rprintf("%s\n", EncodeEnvironment(t));
@@ -255,7 +255,7 @@ SEXP attribute_hidden do_printdefault(/*const*/ CXXR::Expression* call, const CX
     naprint = args[0];
     if(!isNull(naprint))  {
 	if(!isString(naprint) || LENGTH(naprint) < 1)
-	    error(_("invalid 'na.print' specification"));
+	    error(_("invalid '%s' specification"), "na.print");
 	R_print.na_string = R_print.na_string_noquote = STRING_ELT(naprint, 0);
 	R_print.na_width = R_print.na_width_noquote =
 	    int( strlen(CHAR(R_print.na_string)));
@@ -265,7 +265,7 @@ SEXP attribute_hidden do_printdefault(/*const*/ CXXR::Expression* call, const CX
     if(!isNull(args[0])) {
 	R_print.gap = asInteger(args[0]);
 	if (R_print.gap == NA_INTEGER || R_print.gap < 0)
-	    error(_("'gap' must be non-negative integer"));
+	    error(_("'%s' argument must be non-negative integer"), "gap");
     }
     args = (args + 1);
 
@@ -303,12 +303,12 @@ SEXP attribute_hidden do_printdefault(/*const*/ CXXR::Expression* call, const CX
 	if(showS == R_UnboundValue) {
 	    SEXP methodsNS = R_FindNamespace(mkString("methods"));
 	    if(methodsNS == R_UnboundValue)
-		error("missing methods namespace: this should not happen");
+		error(_("missing methods namespace: this should not happen"));
 	    PROTECT(methodsNS);
 	    showS = findVarInFrame3(methodsNS, install("show"), TRUE);
 	    UNPROTECT(1);
 	    if(showS == R_UnboundValue)
-		error("missing show() in methods namespace: this should not happen");
+		error(_("missing 'show()' in methods namespace: this should not happen"));
 	}
 	PROTECT(call = lang2(showS, x));
 	eval(call, rho);
@@ -399,7 +399,8 @@ static void PrintGenericVector(SEXP s, SEXP env)
 		    else {
 			snprintf(pbuf, 101, "\"%s\"", ctmp);
 			pbuf[100] = '"'; pbuf[101] = '\0';
-			strcat(pbuf, " [truncated]");
+			strcat(pbuf, " ");
+			strcat(pbuf, _("[truncated]"));
 		    }
 		    vmaxset(vmax);
 		} else
@@ -494,9 +495,10 @@ static void PrintGenericVector(SEXP s, SEXP env)
 		*ptag = '\0';
 	    }
 	    Rprintf("\n");
-	    if(n_pr < ns)
-		Rprintf(" [ reached getOption(\"max.print\") -- omitted %d entries ]\n",
-			ns - n_pr);
+	    if(n_pr < ns) {
+		Rprintf(n_(" [ reached 'getOption(\"max.print\")' -- omitted %d entry ]", " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", ns - n_pr), ns - n_pr);
+		Rprintf("\n");
+		}
 	}
 	else { /* ns = length(s) == 0 */
 	    const void *vmax = vmaxget();
@@ -515,15 +517,15 @@ static void PrintGenericVector(SEXP s, SEXP env)
 		}
 	    }
 	    if(className) {
-		Rprintf("An object of class \"%s\"\n", className);
+		Rprintf(_("An object of class \"%s\"\n"), className);
 		UNPROTECT(1);
 		printAttributes(s, env, TRUE);
 		vmaxset(vmax);
 		return;
 	    }
 	    else {
-		if(names != R_NilValue) Rprintf("named ");
-		Rprintf("list()\n");
+		if(names != R_NilValue) Rprintf(_("named list()\n"));
+		else Rprintf("list()\n");
 	    }
 	    vmaxset(vmax);
 	}
@@ -714,17 +716,17 @@ void attribute_hidden PrintValueRec(SEXP s, SEXP env)
 	if(isNull(cl)) {
 	    /* This might be a mistaken S4 bit set */
 	    if(TYPEOF(s) == S4SXP)
-		Rprintf("<S4 object without a class>\n");
+		Rprintf(_("<S4 object without a class>\n"));
 	    else
-		Rprintf("<Object of type '%s' with S4 bit but without a class>\n",
+		Rprintf(_("<Object of type '%s' with S4 bit but without a class>\n"),
 			type2char(TYPEOF(s)));
 	} else {
 	    SEXP pkg = getAttrib(s, R_PackageSymbol);
 	    if(isNull(pkg)) {
-		Rprintf("<S4 object of class \"%s\">\n",
+		Rprintf(_("<S4 object of class \"%s\">\n"),
 			CHAR(STRING_ELT(cl, 0)));
 	    } else {
-		Rprintf("<S4 object of class \"%s\" from package '%s'>\n",
+		Rprintf(_("<S4 object of class \"%s\" from package '%s'>\n"),
 			CHAR(STRING_ELT(cl, 0)), CHAR(STRING_ELT(pkg, 0)));
 	    }
 	}
@@ -762,7 +764,7 @@ void attribute_hidden PrintValueRec(SEXP s, SEXP env)
 	Rprintf("%s\n", EncodeEnvironment(s));
 	break;
     case PROMSXP:
-	Rprintf("<promise: %p>\n", s);
+	Rprintf(_("<promise: %p>\n"), s);
 	break;
     case DOTSXP:
 	Rprintf("<...>\n");
@@ -822,25 +824,25 @@ void attribute_hidden PrintValueRec(SEXP s, SEXP env)
 	UNPROTECT(1);
 	break;
     case EXTPTRSXP:
-	Rprintf("<pointer: %p>\n", R_ExternalPtrAddr(s));
+	Rprintf(_("<pointer: %p>\n"), R_ExternalPtrAddr(s));
 	break;
     case BCODESXP:
-	Rprintf("<bytecode: %p>\n", s);
+	Rprintf(_("<bytecode: %p>\n"), s);
 	break;
     case WEAKREFSXP:
-	Rprintf("<weak reference>\n");
+	Rprintf(_("<weak reference>\n"));
 	break;
     case S4SXP:
 	/*  we got here because no show method, usually no class.
 	    Print the "slots" as attributes, since we don't know the class.
 	*/
-	Rprintf("<S4 Type Object>\n");
+	Rprintf(_("<S4 Type Object>\n"));
 	break;
     default:
-	UNIMPLEMENTED_TYPE("PrintValueRec", s);
+	UNIMPLEMENTED_TYPE("PrintValueRec()", s);
     }
     printAttributes(s, env, FALSE);
-#ifdef Win32
+#ifdef _WIN32
     WinUTF8out = FALSE;
 #endif
 }
@@ -892,7 +894,7 @@ static void printAttributes(SEXP s, SEXP env, Rboolean useSlots)
 	       || TAG(a) == R_WholeSrcrefSymbol || TAG(a) == R_SrcfileSymbol)
 		goto nextattr;
 	    if(useSlots)
-		sprintf(ptag, "Slot \"%s\":", EncodeChar(PRINTNAME(TAG(a))));
+		sprintf(ptag, _("Slot \"%s\":"), EncodeChar(PRINTNAME(TAG(a))));
 	    else
 		sprintf(ptag, "attr(,\"%s\")", EncodeChar(PRINTNAME(TAG(a))));
 	    Rprintf("%s", tagbuf); Rprintf("\n");
@@ -911,13 +913,12 @@ static void printAttributes(SEXP s, SEXP env, Rboolean useSlots)
 		if(showS == R_UnboundValue) {
 		    SEXP methodsNS = R_FindNamespace(mkString("methods"));
 		    if(methodsNS == R_UnboundValue)
-			error("missing methods namespace: this should not happen");
-		    PROTECT(showS);
+			error(_("missing methods namespace: this should not happen"));
 		    PROTECT(methodsNS);
 		    showS = findVarInFrame3(methodsNS, install("show"), TRUE);
 		    UNPROTECT(2);
 		    if(showS == R_UnboundValue)
-			error("missing show() in methods namespace: this should not happen");
+			error(_("missing 'show()' in methods namespace: this should not happen"));
 		}
 		PROTECT(s = lang2(showS, CAR(a)));
 		eval(s, env);
@@ -995,12 +996,12 @@ void attribute_hidden PrintValueEnv(SEXP s, SEXP env)
 	    */
 	    SEXP methodsNS = R_FindNamespace(mkString("methods"));
 	    if(methodsNS == R_UnboundValue)
-		error("missing methods namespace: this should not happen");
+		error(_("missing methods namespace: this should not happen"));
 	    PROTECT(methodsNS);
 	    prinfun = findVarInFrame3(methodsNS, install("show"), TRUE);
 	    UNPROTECT(1);
 	    if(prinfun == R_UnboundValue)
-		error("missing show() in methods namespace: this should not happen");
+		error(_("missing 'show()' in methods namespace: this should not happen"));
 	}
 	else /* S3 */
 	    prinfun = findVar(install("print"), R_BaseNamespace);
@@ -1056,7 +1057,7 @@ int F77_NAME(dblep0) (const char *label, int *nchar, double *data, int *ndata)
 
     if(nc < 0) nc = int( strlen(label));
     if(nc > 255) {
-	warning(_("invalid character length in 'dblepr'"));
+	warning(_("invalid character length in '%s' function"), "dblepr()");
 	nc = 0;
     } else if(nc > 0) {
 	for (k = 0; k < nc; k++)
@@ -1074,7 +1075,7 @@ int F77_NAME(intpr0) (const char *label, int *nchar, int *data, int *ndata)
 
     if(nc < 0) nc = int( strlen(label));
     if(nc > 255) {
-	warning(_("invalid character length in 'intpr'"));
+	warning(_("invalid character length in '%s' function"), "intpr()");
 	nc = 0;
     } else if(nc > 0) {
 	for (k = 0; k < nc; k++)
@@ -1093,7 +1094,7 @@ int F77_NAME(realp0) (const char *label, int *nchar, float *data, int *ndata)
 
     if(nc < 0) nc = int( strlen(label));
     if(nc > 255) {
-	warning(_("invalid character length in 'realpr'"));
+	warning(_("invalid character length in '%s' function"), "realpr()");
 	nc = 0;
     }
     else if(nc > 0) {
