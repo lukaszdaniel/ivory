@@ -40,6 +40,7 @@
 #include <config.h>
 #endif
 
+#include <localization.h>
 #include <Defn.h>
 
 #include "CXXR/GCStackRoot.hpp"
@@ -305,7 +306,7 @@ vectorIndex(SEXP x, SEXP thesub, int start, int stop, int pok, SEXP call,
 
     /* sanity check */
     if (dup && MAYBE_SHARED(x))
-	error("should only be called in an assignment context.");
+	error(_("should only be called in an assignment context."));
 
     for(i = start; i < stop; i++) {
 	if(!isVectorList(x) && !isPairList(x)) {
@@ -324,7 +325,7 @@ vectorIndex(SEXP x, SEXP thesub, int start, int stop, int pok, SEXP call,
 	if(isPairList(x)) {
 #ifdef LONG_VECTOR_SUPPORT
 	    if (offset > R_SHORT_LEN_MAX)
-		error("invalid subscript for pairlist");
+		error(_("invalid subscript for pairlist"));
 #endif
 	    cx = nthcdr(x, (int) offset);
 	    if (NAMED(x) > NAMED(CAR(cx)))
@@ -390,7 +391,7 @@ SEXP attribute_hidden mat2indsub(SEXP dims, SEXP s, SEXP call)
 		    }
 		    if(k == 0.) {rv[i] = 0.; break;}
 		    if (k > INTEGER(dims)[j]) {
-			ECALL(call, _("subscript out of bounds"));
+			ECALL(call, _("subscript is out of bounds"));
 		    }
 		    rv[i] += (k - 1.) * tdim;
 		    tdim *= INTEGER(dims)[j];
@@ -408,7 +409,7 @@ SEXP attribute_hidden mat2indsub(SEXP dims, SEXP s, SEXP call)
 		    }
 		    if(k == 0) {rv[i] = 0.; break;}
 		    if (k > INTEGER(dims)[j]) {
-			ECALL(call, _("subscript out of bounds"));
+			ECALL(call, _("subscript is out of bounds"));
 		    }
 		    rv[i] += double ((k - 1) * tdim);
 		    tdim *= INTEGER(dims)[j];
@@ -432,7 +433,7 @@ SEXP attribute_hidden mat2indsub(SEXP dims, SEXP s, SEXP call)
 		}
 		if(k == 0) {iv[i] = 0; break;}
 		if (k > INTEGER(dims)[j]) {
-		    ECALL(call, _("subscript out of bounds"));
+		    ECALL(call, _("subscript is out of bounds"));
 		}
 		iv[i] += (k - 1) * tdim;
 		tdim *= INTEGER(dims)[j];
@@ -471,7 +472,7 @@ SEXP attribute_hidden strmat2intmat(SEXP s, SEXP dnamelist, SEXP call)
 	    s_elt = STRING_ELT(s, idx);
 	    if (s_elt == NA_STRING) v = NA_INTEGER;
 	    if (!CHAR(s_elt)[0]) v = 0; /* disallow "" match */
-	    if (v == 0) errorcall(call, _("subscript out of bounds"));
+	    if (v == 0) errorcall(call, _("subscript is out of bounds"));
 	    INTEGER(si)[idx] = v;
 	}
 	UNPROTECT(1);
@@ -506,7 +507,7 @@ logicalSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch, SEXP call)
     pair<VectorBase*, size_t> pr = Subscripting::canonicalize(s, nx);
     if (R_xlen_t(pr.second) > nx) {
 	if (!canstretch) {
-	    ECALL(call, _("subscript out of bounds"));
+	    ECALL(call, _("subscript is out of bounds"));
 	} else *stretch = pr.second;
     }
     return coerceVector(pr.first, INTSXP);
@@ -519,7 +520,7 @@ static SEXP integerSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch
     pair<VectorBase*, size_t> pr = Subscripting::canonicalize(s, nx);
     if (R_xlen_t(pr.second) > nx) {
 	if (!canstretch) {
-	    ECALL(call, _("subscript out of bounds"));
+	    ECALL(call, _("subscript is out of bounds"));
 	} else *stretch = pr.second;
     }
     return coerceVector(pr.first, INTSXP);
@@ -551,7 +552,7 @@ realSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch, SEXP call)
 #endif
 	if(canstretch) *stretch = R_xlen_t( max);
 	else {
-	    ECALL(call, _("subscript out of bounds"));
+	    ECALL(call, _("subscript is out of bounds"));
 	}
     }
     if (min < 0) {
@@ -635,7 +636,7 @@ stringSubscript(SEXP sarg, R_xlen_t ns, R_xlen_t nx, SEXP namesarg,
 				     SEXP_downcast<StringVector*>(namesarg));
     if (R_xlen_t(pr.second) > nx) {
 	if (!canstretch) {
-	    ECALL(call, _("subscript out of bounds"));
+	    ECALL(call, _("subscript is out of bounds"));
 	} else *stretch = pr.second;
     }
     return coerceVector(pr.first, INTSXP);

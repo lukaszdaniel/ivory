@@ -28,8 +28,8 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 #include "duplicate.h"
 
@@ -38,11 +38,11 @@
 #include <R_ext/Itermacros.h>
 
 using namespace CXXR;
+using namespace std;
 
 #include <float.h> // for DBL_MAX
 
 #define R_MSG_type	_("invalid 'type' (%s) of argument")
-#define imax2(x, y) ((x < y) ? y : x)
 
 #define R_INT_MIN	(1+INT_MIN)
 	/* since INT_MIN is the NA_INTEGER value ! */
@@ -77,7 +77,7 @@ static Rboolean isum(int *x, R_xlen_t n, int *value, Rboolean narm, SEXP call)
 		if (s > 9000000000000000L || s < -9000000000000000L) {
 		    if(!updated) updated = TRUE;
 		    *value = NA_INTEGER;
-		    warningcall(call, _("integer overflow - use sum(as.numeric(.))"));
+		    warningcall(call, _("integer overflow in '%s' function; use '%s'"), "isum()", "sum(as.numeric(.))");
 		    return updated;
 		}
 	    }
@@ -89,7 +89,7 @@ static Rboolean isum(int *x, R_xlen_t n, int *value, Rboolean narm, SEXP call)
 	}
     }
     if(s > INT_MAX || s < R_INT_MIN){
-	warningcall(call, _("integer overflow - use sum(as.numeric(.))"));
+	warningcall(call, _("integer overflow in '%s' function; use '%s'"), "isum()", "sum(as.numeric(.))");
 	*value = NA_INTEGER;
     }
     else *value = (int) s;
@@ -114,7 +114,7 @@ static Rboolean isum(int *x, R_xlen_t n, int *value, Rboolean narm, SEXP call)
 	}
     }
     if(s > INT_MAX || s < R_INT_MIN){
-	warningcall(call, _("integer overflow - use sum(as.numeric(.))"));
+	warningcall(call, _("integer overflow in '%s' function; use '%s'"), "isum()", "sum(as.numeric(.))");
 	*value = NA_INTEGER;
     }
     else *value = int( s);
@@ -158,7 +158,7 @@ static Rboolean csum(Rcomplex *x, R_xlen_t n, Rcomplex *value, Rboolean narm)
 
     return updated;
 }
-
+
 static Rboolean imin(int *x, R_xlen_t n, int *value, Rboolean narm)
 {
     int s = 0 /* -Wall */;
@@ -297,7 +297,7 @@ static Rboolean smax(SEXP x, SEXP *value, Rboolean narm)
     vmaxset(vmax);
     return updated;
 }
-
+
 static Rboolean iprod(int *x, R_xlen_t n, double *value, Rboolean narm)
 {
     LDOUBLE s = 1.0;
@@ -486,7 +486,7 @@ SEXP attribute_hidden do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
     UNPROTECT(1); /* call2 */
 
 #ifdef DEBUG_Summary
-    REprintf("C do_summary(op%s, *): did NOT dispatch\n", PRIMNAME(op));
+    REprintf(_("C do_summary(op%s, *): did NOT dispatch\n"), PRIMNAME(op));
 #endif
 
     ans = matchArgExact(R_NaRmSymbol, &args);
@@ -647,7 +647,7 @@ SEXP attribute_hidden do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 			if(ans_type == INTSXP) {
 			    s = double( icum) + double( itmp);
 			    if(s > INT_MAX || s < R_INT_MIN){
-				warningcall(call,_("Integer overflow - use sum(as.numeric(.))"));
+				warningcall(call,_("integer overflow in '%s' function; use '%s'"), "do_summary()", "sum(as.numeric(.))");
 				goto na_answer;
 			    }
 			    else icum += itmp;
@@ -763,9 +763,9 @@ SEXP attribute_hidden do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 	    warningcall(call, _("no non-missing arguments, returning NA"));
 	} else {
 	    if(iop == 2)
-		warningcall(call, _("no non-missing arguments to min; returning Inf"));
+		warningcall(call, _("no non-missing arguments passed to 'min()' function; returning Inf"));
 	    else
-		warningcall(call, _("no non-missing arguments to max; returning -Inf"));
+		warningcall(call, _("no non-missing arguments passed to 'max()' function; returning -Inf"));
 	    ans_type = REALSXP;
 	}
     }
@@ -925,7 +925,7 @@ SEXP attribute_hidden do_which(/*const*/ CXXR::Expression* call, const CXXR::Bui
 
     v = x_;
     if (!isLogical(v))
-	error(_("argument to 'which' is not logical"));
+	error(_("argument passed to 'which()' function is not logical"));
     len = length(v);
     buf = reinterpret_cast<int *>( R_alloc(len, sizeof(int)));
 
@@ -995,7 +995,7 @@ SEXP attribute_hidden do_pmin(/*const*/ CXXR::Expression* call, const CXXR::Buil
 	    len = 0;
 	    break;
 	}
-	len = imax2(len, n);
+	len = max(len, n);
     }
 
     if (num_args == 1)

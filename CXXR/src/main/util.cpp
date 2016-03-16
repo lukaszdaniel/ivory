@@ -28,8 +28,8 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Print.h>
 #include "basedecl.h"
@@ -47,14 +47,13 @@ using namespace CXXR;
 
 #undef COMPILING_R
 
-#define R_imax2(x, y) ((x < y) ? y : x)
 #include <Print.h>
 
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif
 
-#ifdef Win32
+#ifdef _WIN32
 void R_UTF8fixslash(char *s);
 static void R_wfixslash(wchar_t *s);
 #endif
@@ -121,15 +120,15 @@ int ncols(SEXP s)
 }
 
 #ifdef UNUSED
-const static char type_msg[] = "invalid type passed to internal function\n";
+//const static char type_msg[] = "invalid type passed to internal function\n";
 
 void internalTypeCheck(SEXP call, SEXP s, SEXPTYPE type)
 {
     if (TYPEOF(s) != type) {
 	if (call)
-	    errorcall(call, type_msg);
+	    errorcall(call, _("invalid type passed to internal function\n"));
 	else
-	    error(type_msg);
+	    error(_("invalid type passed to internal function\n"));
     }
 }
 #endif
@@ -315,9 +314,9 @@ SEXP type2str(SEXPTYPE t) /* returns a CHARSXP */
     if (s != R_NilValue) {
 	return s;
     }
-    warning(_("type %d is unimplemented in '%s'"), t, "type2str");
+    warning(_("type %d is unimplemented in '%s' function"), t, "type2str()");
     char buf[50];
-    snprintf(buf, 50, "unknown type #%d", t);
+    snprintf(buf, 50, _("unknown type #%d"), t);
     return mkChar(buf);
 }
 
@@ -327,8 +326,7 @@ SEXP type2rstr(SEXPTYPE t) /* returns a STRSXP */
 	SEXP res = Type2Table[t].rstrName;
 	if (res != NULL) return res;
     }
-    error(_("type %d is unimplemented in '%s'"), t,
-	  "type2ImmutableScalarString");
+    error(_("type %d is unimplemented in '%s' function"), t, "type2ImmutableScalarString()");
     return R_NilValue; /* for -Wall */
 }
 
@@ -338,9 +336,9 @@ const char *type2char(SEXPTYPE t) /* returns a char* */
 	const char * res = Type2Table[t].cstrName;
 	if (res != NULL) return res;
     }
-    warning(_("type %d is unimplemented in '%s'"), t, "type2char");
+    warning(_("type %d is unimplemented in '%s' function"), t, "type2char()");
     static char buf[50];
-    snprintf(buf, 50, "unknown type #%d", t);
+    snprintf(buf, 50, _("unknown type #%d"), t);
     return buf;
 }
 
@@ -353,7 +351,7 @@ SEXP NORET type2symbol(SEXPTYPE t)
 	    return res;
 	}
     }
-    error(_("type %d is unimplemented in '%s'"), t, "type2symbol");
+    error(_("type %d is unimplemented in '%s' function"), t, "type2symbol()");
 }
 #endif
 
@@ -364,9 +362,9 @@ void NORET UNIMPLEMENTED_TYPEt(const char *s, SEXPTYPE t)
 
     for (i = 0; TypeTable[i].str; i++) {
 	if (TypeTable[i].type == CXXRCONSTRUCT(int, t))
-	    error(_("unimplemented type '%s' in '%s'\n"), TypeTable[i].str, s);
+	    error(_("unimplemented type '%s' in '%s' function"), TypeTable[i].str, s);
     }
-    error(_("unimplemented type (%d) in '%s'\n"), t, s);
+    error(_("type %d is unimplemented in '%s' function"), t, s);
 }
 
 void NORET UNIMPLEMENTED_TYPE(const char *s, SEXP x)
@@ -540,7 +538,7 @@ SEXP nthcdr(SEXP s, int n)
     if (isList(s) || isLanguage(s) || isFrame(s) || TYPEOF(s) == DOTSXP ) {
 	while( n-- > 0 ) {
 	    if (s == R_NilValue)
-		error(_("'nthcdr' list shorter than %d"), n);
+		error(_("'nthcdr()' list is shorter than %d"), n);
 	    s = CDR(s);
 	}
 	return s;
@@ -645,9 +643,9 @@ SEXP attribute_hidden do_merge(/*const*/ CXXR::Expression* call, const CXXR::Bui
     if ( !isInteger(yi) || !(ny = LENGTH(yi)) )
 	error(_("invalid '%s' argument"), "yinds");
     if(!LENGTH(ans = all_x_) || NA_LOGICAL == (all_x = asLogical(ans)))
-	error(_("'all.x' must be TRUE or FALSE"));
+	error(_("'%s' argument must be TRUE or FALSE"), "all.x");
     if(!LENGTH(ans = all_y_)|| NA_LOGICAL == (all_y = asLogical(ans)))
-	error(_("'all.y' must be TRUE or FALSE"));
+	error(_("'%s' argument must be TRUE or FALSE"), "all.y");
 
     /* 0. sort the indices */
     int* ix = static_cast<int *>( CXXR_alloc(size_t( nx), sizeof(int)));
@@ -715,7 +713,7 @@ SEXP attribute_hidden do_merge(/*const*/ CXXR::Expression* call, const CXXR::Bui
 
 
 /* Functions for getting and setting the working directory. */
-#ifdef Win32
+#ifdef _WIN32
 # define WIN32_LEAN_AND_MEAN 1
 # include <windows.h>
 #endif
@@ -725,7 +723,7 @@ SEXP static intern_getwd(void)
     SEXP rval = R_NilValue;
     char buf[4*PATH_MAX+1];
 
-#ifdef Win32
+#ifdef _WIN32
     {
 	wchar_t wbuf[PATH_MAX+1];
 	int res = GetCurrentDirectoryW(PATH_MAX, wbuf);
@@ -750,7 +748,7 @@ SEXP attribute_hidden do_getwd(/*const*/ CXXR::Expression* call, const CXXR::Bui
 }
 
 
-#if defined(Win32) && defined(_MSC_VER)
+#if defined(_WIN32) && defined(_MSC_VER)
 # include <direct.h> /* for chdir, via io.h */
 #endif
 
@@ -766,7 +764,7 @@ SEXP attribute_hidden do_setwd(/*const*/ CXXR::Expression* call, const CXXR::Bui
     /* get current directory to return */
     PROTECT(wd = intern_getwd());
 
-#ifdef Win32
+#ifdef _WIN32
     {
 	const wchar_t *path = filenameToWchar(STRING_ELT(s, 0), TRUE);
 	if(_wchdir(path) < 0)
@@ -786,7 +784,7 @@ SEXP attribute_hidden do_setwd(/*const*/ CXXR::Expression* call, const CXXR::Bui
 
 /* remove portion of path before file separator if one exists */
 
-#ifdef Win32
+#ifdef _WIN32
 SEXP attribute_hidden do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, s = R_NilValue;	/* -Wall */
@@ -803,7 +801,7 @@ SEXP attribute_hidden do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    SET_STRING_ELT(ans, i, NA_STRING);
 	else {
 	    pp = filenameToWchar(STRING_ELT(s, i), TRUE);
-	    if (wcslen(pp) > PATH_MAX - 1) error(_("path too long"));
+	    if (wcslen(pp) > PATH_MAX - 1) error(_("'%s' argument is too long"), "path");
 	    wcscpy(buf, pp);
 	    R_wfixslash(buf);
 	    /* remove trailing file separator(s) */
@@ -837,7 +835,7 @@ SEXP attribute_hidden do_basename(/*const*/ CXXR::Expression* call, const CXXR::
 	else {
 	    pp = R_ExpandFileName(translateChar(STRING_ELT(s, i)));
 	    if (strlen(pp) > PATH_MAX - 1)
-		error(_("path too long"));
+		error(_("'%s' argument is too long"), "path");
 	    strcpy (buf, pp);
 	    if (*buf) {
 		p = buf + strlen(buf) - 1;
@@ -859,7 +857,7 @@ SEXP attribute_hidden do_basename(/*const*/ CXXR::Expression* call, const CXXR::
    return "."
    */
 
-#ifdef Win32
+#ifdef _WIN32
 SEXP attribute_hidden do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, s = R_NilValue;	/* -Wall */
@@ -878,7 +876,7 @@ SEXP attribute_hidden do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    memset(sp, 0, 4*PATH_MAX);
 	    pp = filenameToWchar(STRING_ELT(s, i), TRUE);
 	    if (wcslen(pp) > PATH_MAX - 1)
-		error(_("path too long"));
+		error(_("'%s' argument is too long"), "path");
 	    if (wcslen(pp)) {
 		wcscpy (buf, pp);
 		R_wfixslash(buf);
@@ -918,7 +916,7 @@ SEXP attribute_hidden do_dirname(/*const*/ CXXR::Expression* call, const CXXR::B
 	else {
 	    pp = R_ExpandFileName(translateChar(STRING_ELT(s, i)));
 	    if (strlen(pp) > PATH_MAX - 1)
-		error(_("path too long"));
+		error(_("'%s' argument is too long"), "path");
 	    size_t ll = strlen(pp);
 	    if (ll) { // svMisc calls this with ""
 		strcpy (buf, pp);
@@ -941,7 +939,7 @@ SEXP attribute_hidden do_dirname(/*const*/ CXXR::Expression* call, const CXXR::B
 #endif
 
 
-#ifndef Win32 /* Windows version is in src/gnuwin32/extra.c */
+#ifndef _WIN32 /* Windows version is in src/gnuwin32/extra.c */
 #ifndef HAVE_DECL_REALPATH
 extern char *realpath(const char *path, char *resolved_path);
 #endif
@@ -955,7 +953,7 @@ SEXP attribute_hidden do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
     char abspath[PATH_MAX+1];
 
     if (!isString(paths))
-	error(_("'path' must be a character vector"));
+	error(_("'%s' argument must be a character vector"), "path");
 
     int mustWork = asLogical(CADDR(args)); /* 1, NA_LOGICAL or 0 */
 
@@ -978,7 +976,7 @@ SEXP attribute_hidden do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 #else
     Rboolean OK;
-    warning("this platform does not have realpath so the results may not be canonical");
+    warning(_("this platform does not have realpath so the results may not be canonical"));
     PROTECT(ans = allocVector(STRSXP, n));
     for (i = 0; i < n; i++) {
 	path = translateChar(STRING_ELT(paths, i));
@@ -1020,7 +1018,7 @@ const char *getTZinfo(void)
     if(realpath("/etc/localtime", abspath))
 	return abspath + 20; // strip prefix of /usr/share/zoneinfo/
 #endif
-    warning("system timezone name is unknown: set environment variable TZ");
+    warning(_("system timezone name is unknown: set environment variable TZ"));
     return "unknown";
 }
 #endif
@@ -1066,7 +1064,7 @@ SEXP attribute_hidden do_encodeString(/*const*/ CXXR::Expression* call, const CX
 	for(i = 0; i < len; i++) {
 	    s = STRING_ELT(x, i);
 	    if(na || s != NA_STRING)
-		w = R_imax2(w, Rstrlen(s, quote));
+		w = max(w, Rstrlen(s, quote));
 	}
 	if(quote) w +=2; /* for surrounding quotes */
     }
@@ -1252,7 +1250,7 @@ utf8towcs(wchar_t *wc, const char *s, size_t n)
     if(wc)
 	for(p = wc, t = s; ; p++, t += m) {
 	    m  = ssize_t( utf8toucs(p, t));
-	    if (m < 0) error(_("invalid input '%s' in 'utf8towcs'"), s);
+	    if (m < 0) error(_("invalid input '%s' in 'utf8towcs()' function"), s);
 	    if (m == 0) break;
 	    res ++;
 	    if (res >= CXXRCONSTRUCT(int, n)) break;
@@ -1260,7 +1258,7 @@ utf8towcs(wchar_t *wc, const char *s, size_t n)
     else
 	for(t = s; ; res++, t += m) {
 	    m  = ssize_t( utf8toucs(&local, t));
-	    if (m < 0) error(_("invalid input '%s' in 'utf8towcs'"), s);
+	    if (m < 0) error(_("invalid input '%s' in 'utf8towcs()' function"), s);
 	    if (m == 0) break;
 	}
     return size_t( res);
@@ -1424,7 +1422,7 @@ char *Rf_strrchr(const char *s, int c)
     return plast;
 }
 
-#ifdef Win32
+#ifdef _WIN32
 void R_fixslash(char *s)
 {
     char *p = s;
@@ -1762,7 +1760,7 @@ SEXP attribute_hidden do_enc2(/*const*/ CXXR::Expression* call, const CXXR::Buil
     Rboolean duped = FALSE;
 
     if (!isString(ans))
-	errorcall(call, "argumemt is not a character vector");
+	errorcall(call, _("'%s' argument is not a character vector"), "x");
     for (i = 0; i < XLENGTH(ans); i++) {
 	el = STRING_ELT(ans, i);
 	if (el == NA_STRING) continue;
@@ -1918,7 +1916,7 @@ static const struct {
     { NULL,  0 }
 };
 
-#ifdef Win32
+#ifdef _WIN32
 #define BUFFER_SIZE 512
 typedef int (WINAPI *PGSDLN)(LPWSTR, int);
 
@@ -1977,11 +1975,11 @@ SEXP attribute_hidden do_ICUset(SEXP call, SEXP op, SEXP args, SEXP rho)
 			uloc_setDefault(getLocale(), &status);
 		    else uloc_setDefault(s, &status);
 		    if(U_FAILURE(status))
-			error("failed to set ICU locale %s (%d)", s, status);
+			error(_("failed to set ICU locale %s (%d)"), s, status);
 		    collator = ucol_open(NULL, &status);
 		    if (U_FAILURE(status)) {
 			collator = NULL;
-			error("failed to open ICU collator (%d)", status);
+			error(_("failed to open ICU collator (%d)"), status);
 		    }
 		}
 		collationLocaleSet = 1;
@@ -2003,7 +2001,7 @@ SEXP attribute_hidden do_ICUset(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    } else if (collator && at >= 0 && val >= 0) {
 		ucol_setAttribute(collator, CXXRCONSTRUCT(UColAttribute, at), CXXRCONSTRUCT(UColAttributeValue, val), &status);
 		if (U_FAILURE(status))
-		    error("failed to set ICU collator attribute");
+		    error(_("failed to set ICU collator attribute"));
 	    }
 	}
     }
@@ -2027,7 +2025,7 @@ SEXP attribute_hidden do_ICUget(SEXP call, SEXP op, SEXP args, SEXP rho)
 				   type == 1 ? ULOC_ACTUAL_LOCALE : ULOC_VALID_LOCALE,
 				   &status);
 	if(!U_FAILURE(status) && res) ans = res;
-    } else ans = "ICU not in use";
+    } else ans = _("ICU not in use");
     return mkString(ans);
 }
 
@@ -2039,7 +2037,7 @@ int Scollate(SEXP a, SEXP b)
     if (!collationLocaleSet) {
 	int errsv = errno;      /* OSX may set errno in the operations below. */
 	collationLocaleSet = 1;
-#ifndef Win32
+#ifndef _WIN32
 	if (strcmp("C", getLocale()) ) {
 #else
 	const char *p = getenv("R_ICU_LOCALE");
@@ -2048,11 +2046,11 @@ int Scollate(SEXP a, SEXP b)
 	    UErrorCode status = U_ZERO_ERROR;
 	    uloc_setDefault(getLocale(), &status);
 	    if(U_FAILURE(status))
-		error("failed to set ICU locale (%d)", status);
+		error(_("failed to set ICU locale (%d)"), status);
 	    collator = ucol_open(NULL, &status);
 	    if (U_FAILURE(status)) {
 		collator = NULL;
-		error("failed to open ICU collator (%d)", status);
+		error(_("failed to open ICU collator (%d)"), status);
 	    }
 	}
 	errno = errsv;
@@ -2069,7 +2067,7 @@ int Scollate(SEXP a, SEXP b)
     uiter_setUTF8(&bIter, bs, len2);
     UErrorCode status = U_ZERO_ERROR;
     int result = ucol_strcollIter(collator, &aIter, &bIter, &status);
-    if (U_FAILURE(status)) error("could not collate using ICU");
+    if (U_FAILURE(status)) error(_("could not collate using ICU"));
     return result;
 }
 
@@ -2083,12 +2081,12 @@ SEXP attribute_hidden do_ICUset(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 SEXP attribute_hidden do_ICUget(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    return mkString("ICU not in use");
+    return mkString(_("ICU not in use"));
 }
 
 void attribute_hidden resetICUcollator(void) {}
 
-# ifdef Win32
+# ifdef _WIN32
 
 static int Rstrcoll(const char *s1, const char *s2)
 {
@@ -2127,7 +2125,7 @@ bincode(double *x, R_xlen_t n, double *breaks, int nb,
 
     /* This relies on breaks being sorted, so wise to check that */
     for(int i = 1; i < nb; i++)
-	if(breaks[i-1] > breaks[i]) error(_("'breaks' is not sorted"));
+	if(breaks[i-1] > breaks[i]) error(_("'breaks' argument is not sorted"));
 
     for(R_xlen_t i = 0; i < n; i++) {
 	code[i] = NA_INTEGER;
@@ -2233,7 +2231,7 @@ SEXP attribute_hidden do_findinterval(/*const*/ CXXR::Expression* call, const CX
     return ans;
 }
 
-#ifdef Win32
+#ifdef _WIN32
 // this includes RS.h
 # undef ERROR
 #endif
@@ -2261,7 +2259,7 @@ SEXP attribute_hidden do_pretty(/*const*/ CXXR::Expression* call, const CXXR::Bu
 	error(_("invalid '%s' argument"), "u5.bias");
     int eps = asInteger(args[0]); /* eps.correct */
     if (eps == NA_INTEGER || eps < 0 || eps > 2) 
-	error(_("'eps.correct' must be 0, 1, or 2"));
+	error(_("'%s' argument must be 0, 1, or 2"), "eps.correct");
     R_pretty(&l, &u, &n, min_n, shrink, REAL(hi), eps, 1);
     PROTECT(ans = allocVector(VECSXP, 3));
     SET_VECTOR_ELT(ans, 0, ScalarReal(l));
@@ -2307,7 +2305,7 @@ SEXP attribute_hidden do_formatC(/*const*/ CXXR::Expression* call, const CXXR::B
     switch(TYPEOF(x)) {
     case INTSXP: px = INTEGER(x); break;
     case REALSXP: px = REAL(x); break;
-    default: error("unsupported type ");
+    default: error(_("unsupported type"));
     }
     str_signif(px, n, type, width, digits, fmt, flag, cptr);
     SEXP ans = PROTECT(allocVector(STRSXP, n));
@@ -2369,7 +2367,7 @@ SEXP attribute_hidden do_formatC(/*const*/ CXXR::Expression* call, const CXXR::B
 
 /* <UTF8> char here is either ASCII or handled as a whole */
 
-#ifdef Win32
+#ifdef _WIN32
 /* avoid latest MinGW's redefinition in stdio.h */
 #include <trioremap.h>
 #endif
@@ -2392,7 +2390,7 @@ void str_signif(void *x, R_xlen_t n, const char *type, int width, int digits,
 			 sizeof(char));
 
     if (width == 0)
-	error("width cannot be zero");
+	error(_("width cannot be zero"));
 
     if (strcmp("d", format) == 0) {
 	if (len_flag == 0)
@@ -2407,7 +2405,7 @@ void str_signif(void *x, R_xlen_t n, const char *type, int width, int digits,
 		snprintf(result[i], strlen(result[i]) + 1,
 			 form, width, (static_cast<int *>(x))[i]);
 	else
-	    error("'type' must be \"integer\" for  \"d\"-format");
+	    error(_("'type' argument must be \"integer\" for \"d\"-format"));
     }
     else { /* --- floating point --- */
 	if (len_flag == 0)
@@ -2491,7 +2489,7 @@ void str_signif(void *x, R_xlen_t n, const char *type, int width, int digits,
 		    snprintf(result[i], strlen(result[i]) + 1, 
 			     form, width, dig, (static_cast<double *>(x))[i]);
 	} else
-	    error("'type' must be \"real\" for this format");
+	    error(_("'type' argument must be \"real\" for this format"));
     }
     vmaxset(vmax);
 }

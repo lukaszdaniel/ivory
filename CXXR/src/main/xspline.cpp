@@ -28,7 +28,7 @@
  */
 
 #define         MAXNUMPTS       25000
-
+#include <localization.h>
 /*
  * From u_draw.c
  */
@@ -547,7 +547,7 @@ compute_closed_spline(int n, double *x, double *y, double *s,
   ypoints = NULL;
 
   if (n < 3)
-      error(_("There must be at least three control points"));
+      error(_("there must be at least three control points"));
 
   INIT_CONTROL_POINTS(n);
 

@@ -45,6 +45,7 @@
 #endif
 
 #include <stdexcept>
+#include <localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include "CXXR/ComplexVector.h"
@@ -161,7 +162,7 @@ static SEXP ExtractSubset(SEXP x, SEXP result, SEXP indx, SEXP call)
 	case LANGSXP:
 #ifdef LONG_VECTOR_SUPPORT
 	    if (ii > R_SHORT_LEN_MAX)
-		error("invalid subscript for pairlist");
+		error(_("invalid subscript for pairlist"));
 #endif
 	    if (0 <= ii && ii < nx && ii != NA_INTEGER) {
 		SEXP tmp2 = nthcdr(x, int( ii));
@@ -731,7 +732,7 @@ SEXP attribute_hidden do_subset2_dflt(SEXP call, SEXP op,
 		   x should have been duplicated if it might be
 		   shared */
 		if (MAYBE_SHARED(x))
-		    error("getter call used outside of a complex assignment.");
+		    error(_("getter call used outside of a complex assignment"));
 		x = vectorIndex(x, thesub, 0, len-1, pok, call, TRUE);
 	    }
 	    else
@@ -783,7 +784,7 @@ SEXP attribute_hidden do_subset2_dflt(SEXP call, SEXP op,
     if (isPairList(x)) {
 #ifdef LONG_VECTOR_SUPPORT
 	if (offset > R_SHORT_LEN_MAX)
-	    error("invalid subscript for pairlist");
+	    error(_("invalid subscript for pairlist"));
 #endif
 	SEXP ans = CAR(nthcdr(x, int( offset)));
 	if (named_x > NAMED(ans))
@@ -818,7 +819,7 @@ SEXP attribute_hidden do_subset2_dflt(SEXP call, SEXP op,
 	    RAW(ans)[0] = RAW(x)[offset];
 	    break;
 	default:
-	    UNIMPLEMENTED_TYPE("do_subset2", x);
+	    UNIMPLEMENTED_TYPE("do_subset2()", x);
 	}
 	return ans;
     }
@@ -928,7 +929,7 @@ SEXP attribute_hidden R_subset3_dflt(SEXP x, SEXP input, SEXP call)
     if( IS_S4_OBJECT(x) && TYPEOF(x) == S4SXP ){
 	x = R_getS4DataSlot(x, ANYSXP);
 	if(x == R_NilValue)
-	    errorcall(call, "$ operator not defined for this S4 class");
+	    errorcall(call, _("$ operator not defined for this S4 class"));
     }
 
     /* If this is not a list object we return NULL. */
@@ -964,7 +965,7 @@ SEXP attribute_hidden R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 		    st = translateChar(target);
 		    break;
 		default:
-		    throw std::logic_error("Unexpected SEXPTYPE");
+		    throw std::logic_error(_("Unexpected SEXPTYPE"));
 		}
 		warningcall(call, _("partial match of '%s' to '%s'"),
 			    translateChar(input), st);
@@ -1017,7 +1018,7 @@ SEXP attribute_hidden R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 		    st = translateChar(target);
 		    break;
 		default:
-		    throw std::logic_error("Unexpected SEXPTYPE");
+		    throw std::logic_error(_("Unexpected SEXPTYPE"));
 		}
 		warningcall(call, _("partial match of '%s' to '%s'"),
 			    translateChar(input), st);
@@ -1046,7 +1047,7 @@ SEXP attribute_hidden R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 	return R_NilValue;
     }
     else if( isVectorAtomic(x) ){
-	errorcall(call, "$ operator is invalid for atomic vectors");
+	errorcall(call, _("$ operator is invalid for atomic vectors"));
     }
     else /* e.g. a function */
 	errorcall(call, R_MSG_ob_nonsub, type2char(TYPEOF(x)));

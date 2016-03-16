@@ -30,8 +30,8 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 #include "basedecl.h"
 #include "CXXR/ClosureContext.hpp"
@@ -348,7 +348,7 @@ static void MKsetup(R_xlen_t n, HashData *d, R_xlen_t nmax)
     d->nmax = n;
 }
 
-#define IMAX 4294967296L
+#define IMAX 4294967296L //2^32
 static void HashTableSetup(SEXP x, HashData *d, R_xlen_t nmax)
 {
     d->useUTF8 = FALSE;
@@ -400,7 +400,7 @@ static void HashTableSetup(SEXP x, HashData *d, R_xlen_t nmax)
 	MKsetup(XLENGTH(x), d, nmax);
 	break;
     default:
-	UNIMPLEMENTED_TYPE("HashTableSetup", x);
+	UNIMPLEMENTED_TYPE("HashTableSetup()", x);
     }
 #ifdef LONG_VECTOR_SUPPORT
     d->isLong = CXXRCONSTRUCT(Rboolean, IS_LONG_VEC(x));
@@ -430,9 +430,9 @@ static int isDuplicated(SEXP x, R_xlen_t indx, HashData *d)
 		return h[i] >= 0 ? 1 : 0;
 	    i = (i + 1) % d->M;
 	}
-	if (d->nmax-- < 0) error("hash table is full");
+	if (d->nmax-- < 0) error(_("hash table is full"));
 	h[i] = double( indx);
-    } else 
+    } else
 #endif
     {
 	int *h = INTEGER(d->HashTable);
@@ -442,7 +442,7 @@ static int isDuplicated(SEXP x, R_xlen_t indx, HashData *d)
 		return h[i] >= 0 ? 1 : 0;
 	    i = (i + 1) % d->M;
 	}
-	if (d->nmax-- < 0) error("hash table is full");
+	if (d->nmax-- < 0) error(_("hash table is full"));
 	h[i] = int( indx);
     }
     return 0;
@@ -497,7 +497,7 @@ SEXP duplicated(SEXP x, Rboolean from_last)
     SEXP ans;
     int *v, nmax = NA_INTEGER;
 
-    if (!isVector(x)) error(_("'duplicated' applies only to vectors"));
+    if (!isVector(x)) error(_("'%s' method applies only to vectors"), "duplicated()");
     R_xlen_t i, n = XLENGTH(x);
     DUPLICATED_INIT;
 
@@ -526,7 +526,7 @@ static SEXP Duplicated(SEXP x, Rboolean from_last, int nmax)
     SEXP ans;
     int *v;
 
-    if (!isVector(x)) error(_("'duplicated' applies only to vectors"));
+    if (!isVector(x)) error(_("'%s' method applies only to vectors"), "duplicated()");
     R_xlen_t i, n = XLENGTH(x);
     DUPLICATED_INIT;
 
@@ -556,7 +556,7 @@ R_xlen_t any_duplicated(SEXP x, Rboolean from_last)
     R_xlen_t result = 0;
     int nmax = NA_INTEGER;
 
-    if (!isVector(x)) error(_("'duplicated' applies only to vectors"));
+    if (!isVector(x)) error(_("'%s' method applies only to vectors"), "duplicated()");
     R_xlen_t i, n = XLENGTH(x);
 
     DUPLICATED_INIT;
@@ -580,7 +580,7 @@ static SEXP duplicated3(SEXP x, SEXP incomp, Rboolean from_last, int nmax)
     SEXP ans;
     int *v, j, m;
 
-    if (!isVector(x)) error(_("'duplicated' applies only to vectors"));
+    if (!isVector(x)) error(_("'%s' method applies only to vectors"), "duplicated()");
     R_xlen_t i, n = XLENGTH(x);
     DUPLICATED_INIT;
 
@@ -619,7 +619,7 @@ R_xlen_t any_duplicated3(SEXP x, SEXP incomp, Rboolean from_last)
 {
     int j, m = Rf_length(incomp), nmax = NA_INTEGER;
 
-    if (!isVector(x)) error(_("'duplicated' applies only to vectors"));
+    if (!isVector(x)) error(_("'%s' method applies only to vectors"), "duplicated()");
     R_xlen_t i, n = XLENGTH(x);
     DUPLICATED_INIT;
     PROTECT(data.HashTable);
@@ -673,10 +673,10 @@ SEXP attribute_hidden do_duplicated(/*const*/ CXXR::Expression* call, const CXXR
     x = args[0];
     incomp = args[1];
     if (Rf_length(args[2]) < 1)
-	error(_("'fromLast' must be length 1"));
+	error(_("'%s' argument must be of length 1"), "fromLast");
     fromLast = asLogical(args[2]);
     if (fromLast == NA_LOGICAL)
-	error(_("'fromLast' must be TRUE or FALSE"));
+	error(_("'%s' argument must be TRUE or FALSE"), "fromLast");
 
     Rboolean fL = Rboolean( fromLast);
 
@@ -687,14 +687,14 @@ SEXP attribute_hidden do_duplicated(/*const*/ CXXR::Expression* call, const CXXR
 	       : ScalarInteger(0));
 
     if (!isVector(x)) {
-	error(_("%s() applies only to vectors"),
-	      (op->variant() == 0 ? "duplicated" :
-	       (op->variant() == 1 ? "unique" : /* 2 */ "anyDuplicated")));
+	error(_("'%s' method applies only to vectors"),
+	      (op->variant() == 0 ? "duplicated()" :
+	       (op->variant() == 1 ? "unique()" : /* 2 */ "anyDuplicated()")));
     }
     if (op->variant() <= 1) {
 	nmax = asInteger(args[3]);
 	if (nmax != NA_INTEGER && nmax <= 0)
-	    error(_("'nmax' must be positive"));
+	    error(_("'%s' argument must be positive"), "nmax");
     }
 
     if(Rf_length(incomp) && /* S has FALSE to mean empty */
@@ -766,7 +766,7 @@ SEXP attribute_hidden do_duplicated(/*const*/ CXXR::Expression* call, const CXXR
 		RAW(ans)[k++] = RAW(x)[i];
 	break;
     default:
-	UNIMPLEMENTED_TYPE("duplicated", x);
+	UNIMPLEMENTED_TYPE("duplicated()", x);
     }
     UNPROTECT(2);
     return ans;
@@ -981,7 +981,7 @@ SEXP attribute_hidden do_match(/*const*/ CXXR::Expression* call, const CXXR::Bui
 {
     if ((!isVector(args[0]) && !isNull(args[0]))
 	|| (!isVector(args[1]) && !isNull(args[1])))
-	error(_("'match' requires vector arguments"));
+	error(_("'match()' function requires vector arguments"));
 
     int nomatch = asInteger(args[2]);
     SEXP incomp = args[3];
@@ -1293,13 +1293,13 @@ static SEXP subDots(SEXP rho)
     dots = findVar(R_DotsSymbol, rho);
 
     if (dots == R_UnboundValue)
-	error(_("... used in a situation where it does not exist"));
+	error(_("'...' used in a situation where it does not exist"));
 
     if (dots == R_MissingArg)
 	return dots;
 
     if (!isPairList(dots))
-	error(_("... is not a pairlist"));
+    error(_("'...' is not a pairlist"));
 
     len = Rf_length(dots);
     PROTECT(rval=allocList(len));
@@ -1334,11 +1334,11 @@ SEXP attribute_hidden do_matchcall(SEXP call, SEXP op, SEXP args, SEXP env)
 
     b = CAR(args);
     if (TYPEOF(b) != CLOSXP)
-	error(_("invalid '%s' argument"), "definition");
+    error(_("invalid '%s' argument"), "definition");
 
     sysp = CAR(CDDDR(args));
     if (!isEnvironment(sysp))
-	error(_("'envir' must be an environment"));
+    error(_("'%s' argument must be an environment"), "envir");
 
     /* Do we expand ... ? */
 
@@ -1439,7 +1439,7 @@ rowsum(SEXP x, SEXP g, SEXP uniqueg, SEXP snarm, SEXP rn)
     n = LENGTH(g);
     ng = Rf_length(uniqueg);
     narm = asLogical(snarm);
-    if(narm == NA_LOGICAL) error("'na.rm' must be TRUE or FALSE");
+    if(narm == NA_LOGICAL) error(_("'%s' argument must be TRUE or FALSE"), "na.rm");
     if(isMatrix(x)) p = ncols(x); else p = 1;
 
     HashTableSetup(uniqueg, &data, NA_INTEGER);
@@ -1485,10 +1485,9 @@ rowsum(SEXP x, SEXP g, SEXP uniqueg, SEXP snarm, SEXP rn)
 	}
 	break;
     default:
-	error(_("non-numeric matrix in rowsum(): this should not happen"));
+	error(_("non-numeric matrix in 'rowsum()': this should not happen"));
     }
-
-    if (TYPEOF(rn) != STRSXP) error("row names are not character");
+    if (TYPEOF(rn) != STRSXP) error(_("row names are not character"));
     SEXP dn = allocVector(VECSXP, 2), dn2, dn3;
     setAttrib(ans, R_DimNamesSymbol, dn);
     SET_VECTOR_ELT(dn, 0, rn);
@@ -1512,7 +1511,7 @@ rowsum_df(SEXP x, SEXP g, SEXP uniqueg, SEXP snarm, SEXP rn)
     p = LENGTH(x);
     R_xlen_t ng = XLENGTH(uniqueg);
     narm = asLogical(snarm);
-    if(narm == NA_LOGICAL) error("'na.rm' must be TRUE or FALSE");
+    if(narm == NA_LOGICAL) error(_("'%s' argument must be TRUE or FALSE"), "na.rm");
 
     HashTableSetup(uniqueg, &data, NA_INTEGER);
     PROTECT(data.HashTable);
@@ -1524,7 +1523,7 @@ rowsum_df(SEXP x, SEXP g, SEXP uniqueg, SEXP snarm, SEXP rn)
     for(int i = 0; i < p; i++) {
 	xcol = VECTOR_ELT(x,i);
 	if (!isNumeric(xcol))
-	    error(_("non-numeric data frame in rowsum"));
+	    error(_("non-numeric data frame in 'rowsum()'"));
 	switch(TYPEOF(xcol)){
 	case REALSXP:
 	    PROTECT(col = allocVector(REALSXP,ng));
@@ -1560,8 +1559,7 @@ rowsum_df(SEXP x, SEXP g, SEXP uniqueg, SEXP snarm, SEXP rn)
 	}
     }
     namesgets(ans, getAttrib(x, R_NamesSymbol));
-
-    if (TYPEOF(rn) != STRSXP) error("row names are not character");
+    if (TYPEOF(rn) != STRSXP) error(_("row names are not character"));
     setAttrib(ans, R_RowNamesSymbol, rn);
     classgets(ans, mkString("data.frame"));
 
@@ -1626,11 +1624,11 @@ SEXP attribute_hidden do_makeunique(/*const*/ CXXR::Expression* call, const CXXR
 
     names = names_;
     if(!isString(names))
-	error(_("'names' must be a character vector"));
+	error(_("'%s' argument must be a character vector"), "names");
     n = LENGTH(names);
     sep = sep_;
     if(!isString(sep) || LENGTH(sep) != 1)
-	error(_("'%s' must be a character string"), "sep");
+	error(_("'%s' argument must be a character string"), "sep");
     csep = translateChar(STRING_ELT(sep, 0));
     PROTECT(ans = allocVector(STRSXP, n));
     vmax = vmaxget();
@@ -1707,7 +1705,7 @@ SEXP Rf_csduplicated(SEXP x)
     HashData data;
 
     if(TYPEOF(x) != STRSXP)
-	error(_("C function 'csduplicated' not called on a STRSXP"));
+	error(_("'csduplicated()' function was not called on a STRSXP"));
     n = LENGTH(x);
     HashTableSetup1(x, &data);
     PROTECT(data.HashTable);
@@ -1739,7 +1737,7 @@ SEXP attribute_hidden do_sample2(/*const*/ CXXR::Expression* call, const CXXR::B
     if (!R_FINITE(dn) || dn < 0 || dn > 4.5e15 || (k > 0 && dn == 0)) 
 	error(_("invalid first argument"));
     if (k < 0) error(_("invalid '%s' argument"), "size");
-    if (k > dn/2) error("This algorithm is for size <= n/2");
+    if (k > dn/2) error(_("This algorithm is for size <= n/2"));
     HashData data;
     GetRNGstate();
     if (dn > INT_MAX) {

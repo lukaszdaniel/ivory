@@ -30,8 +30,8 @@
 
 #include <stdlib.h> /* for putenv */
 #define R_USE_SIGNALS 1
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 #include <Fileio.h>
 #include <R_ext/GraphicsEngine.h>
@@ -66,7 +66,7 @@ using namespace std;
 int (*ptr_CocoaSystem)(const char*);
 #endif
 
-#ifdef Win32
+#ifdef _WIN32
 Rboolean R_FileExists(const char *path)
 {
     struct _stati64 sb;
@@ -112,7 +112,7 @@ Rboolean attribute_hidden R_HiddenFile(const char *name)
    by user code (most likely in embedded applications of R).
 */
 
-#ifdef Win32
+#ifdef _WIN32
 
 static char * fixmode(const char *mode)
 {
@@ -158,7 +158,7 @@ FILE *R_fopen(const char *filename, const char *mode)
    (UCS-2), and _wfopen is provided to access them by UCS-2 names.
 */
 
-#if defined(Win32)
+#if defined(_WIN32)
 
 #define BSIZE 100000
 wchar_t *filenameToWchar(const SEXP fn, const Rboolean expand)
@@ -260,11 +260,11 @@ SEXP attribute_hidden do_tempfile(/*const*/ CXXR::Expression* call, const CXXR::
     if (!isString(fileext))
 	error(_("invalid file extension"));
     if (n1 < 1)
-	error(_("no 'pattern'"));
+	error(_("no '%s' argument"), "pattern");
     if (n2 < 1)
-	error(_("no 'tempdir'"));
+	error(_("no '%s' argument"), "tempdir");
     if (n3 < 1)
-	error(_("no 'fileext'"));
+	error(_("no '%s' argument"), "fileext");
     slen = (n1 > n2) ? n1 : n2;
     slen = (n3 > slen) ? n3 : slen;
     PROTECT(ans = allocVector(STRSXP, slen));
@@ -349,7 +349,7 @@ int R_system(const char *command)
 extern char ** environ;
 #endif
 
-#ifdef Win32
+#ifdef _WIN32
 /* _wenviron is declared in stdlib.h */
 # define WIN32_LEAN_AND_MEAN 1
 # include <windows.h> /* _wgetenv etc */
@@ -368,7 +368,7 @@ SEXP attribute_hidden do_getenv(/*const*/ CXXR::Expression* call, const CXXR::Bu
 
     i = LENGTH(args[0]);
     if (i == 0) {
-#ifdef Win32
+#ifdef _WIN32
 	int n = 0, N;
 	wchar_t **w;
 	for (i = 0, w = _wenviron; *w != NULL; i++, w++)
@@ -391,7 +391,7 @@ SEXP attribute_hidden do_getenv(/*const*/ CXXR::Expression* call, const CXXR::Bu
     } else {
 	PROTECT(ans = allocVector(STRSXP, i));
 	for (j = 0; j < i; j++) {
-#ifdef Win32
+#ifdef _WIN32
 	    const wchar_t *wnm = wtransChar(STRING_ELT(CAR(args), j));
 	    wchar_t *w = _wgetenv(wnm);
 	    if (w == NULL)
@@ -421,7 +421,7 @@ SEXP attribute_hidden do_getenv(/*const*/ CXXR::Expression* call, const CXXR::Bu
     return (ans);
 }
 
-#ifdef Win32
+#ifdef _WIN32
 static int Rwputenv(const wchar_t *nm, const wchar_t *val)
 {
     wchar_t *buf;
@@ -467,7 +467,7 @@ SEXP attribute_hidden do_setenv(/*const*/ CXXR::Expression* call, const CXXR::Bu
 	LOGICAL(ans)[i] = setenv(translateChar(STRING_ELT(nm, i)),
 				 translateChar(STRING_ELT(vars, i)),
 				 1) == 0;
-#elif defined(Win32)
+#elif defined(_WIN32)
     for (i = 0; i < n; i++)
 	LOGICAL(ans)[i] = Rwputenv(wtransChar(STRING_ELT(nm, i)),
 				   wtransChar(STRING_ELT(vars, i))) == 0;
@@ -479,7 +479,7 @@ SEXP attribute_hidden do_setenv(/*const*/ CXXR::Expression* call, const CXXR::Bu
     UNPROTECT(1);
     return ans;
 #else
-    error(_("'Sys.setenv' is not available on this system"));
+    error(_("'%s' function is not available on this system"), "Sys.setenv()");
     return R_NilValue; /* -Wall */
 #endif
 }
@@ -533,7 +533,7 @@ SEXP attribute_hidden do_unsetenv(/*const*/ CXXR::Expression* call, const CXXR::
     }
 
 #else
-    warning(_("'Sys.unsetenv' is not available on this system"));
+    warning(_("'%s' function is not available on this system"), "Sys.unsetenv()");
 #endif
 
     PROTECT(ans = allocVector(LGLSXP, n));
@@ -623,7 +623,7 @@ SEXP attribute_hidden do_iconv(/*const*/ CXXR::Expression* call, const CXXR::Bui
 	if(streql(to, "") && known_to_be_utf8) isUTF8 = TRUE;
 	obj = Riconv_open(to, from);
 	if(obj == iconv_t((-1)))
-#ifdef Win32
+#ifdef _WIN32
 	    error(_("unsupported conversion from '%s' to '%s' in codepage %d"),
 		  from, to, localeCP);
 #else
@@ -639,7 +639,7 @@ SEXP attribute_hidden do_iconv(/*const*/ CXXR::Expression* call, const CXXR::Bui
 	    }
 	} else {
 	    if(TYPEOF(x) != STRSXP)
-		error(_("'x' must be a character vector"));
+		error(_("'%s' argument must be a character vector"), "x");
 	    if(toRaw) {
 		PROTECT(ans = allocVector(VECSXP, LENGTH(x)));
 		SHALLOW_DUPLICATE_ATTRIB(ans, x);
@@ -654,7 +654,7 @@ SEXP attribute_hidden do_iconv(/*const*/ CXXR::Expression* call, const CXXR::Bui
 		    if (!toRaw) SET_STRING_ELT(ans, i, NA_STRING);
 		    continue;
 		} else if (TYPEOF(si) != RAWSXP)
-		    error(_("'x' must be a character vector or a list of NULL or raw vectors"));
+		    error(_("'x' argument must be a character vector or a list of NULL or raw vectors"));
 	    } else {
 		si = STRING_ELT(x, i);
 		if (si == NA_STRING) {
@@ -742,8 +742,8 @@ cetype_t getCharCE(SEXP x)
 
 void * Riconv_open (const char* tocode, const char* fromcode)
 {
-#if defined Win32 || __APPLE__
-# ifdef Win32
+#if defined _WIN32 || __APPLE__
+# ifdef _WIN32
     const char *cp = "ASCII";
 #  ifndef SUPPORT_UTF8_WIN32 /* Always, at present */
     char to[20] = "";
@@ -826,7 +826,7 @@ static void translateToNative(const char *ans, R_StringBuffer *cbuff,
 	    obj = Riconv_open("", "latin1");
 	    /* should never happen */
 	    if(obj == (void *)(-1))
-#ifdef Win32
+#ifdef _WIN32
 		error(_("unsupported conversion from '%s' in codepage %d"),
 		      "latin1", localeCP);
 #else
@@ -841,7 +841,7 @@ static void translateToNative(const char *ans, R_StringBuffer *cbuff,
 	    obj = Riconv_open("", "UTF-8");
 	    /* should never happen */
 	    if(obj == (void *)(-1))
-#ifdef Win32
+#ifdef _WIN32
 		error(_("unsupported conversion from '%s' in codepage %d"),
 		      "latin1", localeCP);
 #else
@@ -878,12 +878,12 @@ next_char:
 	    clen = utf8toucs(&wc, inbuf);
 	    if(clen > 0 && inb >= clen) {
 		inbuf += clen; inb -= clen;
-# ifndef Win32
+# ifndef _WIN32
 		if((unsigned int) wc < 65536) {
 # endif
 		    snprintf(outbuf, 9, "<U+%04X>", (unsigned int) wc);
 		    outbuf += 8; outb -= 8;
-# ifndef Win32
+# ifndef _WIN32
 		} else {
 		    snprintf(outbuf, 13, "<U+%08X>", (unsigned int) wc);
 		    outbuf += 12; outb -= 12;
@@ -910,7 +910,7 @@ next_char:
 const char *translateChar(SEXP x)
 {
     if(TYPEOF(x) != CHARSXP)
-	error(_("'%s' must be called on a CHARSXP"), "translateChar");
+	error(_("'%s' function must be called on a CHARSXP"), "translateChar()");
     nttype_t t = needsTranslation(x);
     const char *ans = CHAR(x);
     assert(ans != nullptr);
@@ -973,7 +973,7 @@ const char *translateCharUTF8(SEXP x)
 
     obj = Riconv_open("UTF-8", IS_LATIN1(x) ? "latin1" : "");
     if(obj == reinterpret_cast<void *>((-1))) 
-#ifdef Win32
+#ifdef _WIN32
 	error(_("unsupported conversion from '%s' in codepage %d"),
 	      "latin1", localeCP);
 #else
@@ -1011,7 +1011,7 @@ next_char:
 }
 
 
-#ifdef Win32
+#ifdef _WIN32
 static const char TO_WCHAR[] = "UCS-2LE";
 #else
 # ifdef WORDS_BIGENDIAN
@@ -1069,7 +1069,7 @@ const wchar_t *wtransChar(SEXP x)
     } else {
 	obj = Riconv_open(TO_WCHAR, "");
 	if(obj == reinterpret_cast<void *>((-1)))
-#ifdef Win32
+#ifdef _WIN32
 	    error(_("unsupported conversion to '%s' from codepage %d"),
 		  TO_WCHAR, localeCP);
 #else
@@ -1122,7 +1122,7 @@ const char *reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst)
     char *outbuf, *p;
     size_t inb, outb, res, top;
     CXXRCONST char *tocode = nullptr, *fromcode = nullptr;
-#ifdef Win32
+#ifdef _WIN32
     char buf[20];
 #endif
     R_StringBuffer cbuff = {nullptr, 0, MAXELTSIZE};
@@ -1146,7 +1146,7 @@ const char *reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst)
     if(strIsASCII(x)) return x;
 
     switch(ce_in) {
-#ifdef Win32
+#ifdef _WIN32
     case CE_NATIVE:
 	{
 	    /* Looks like CP1252 is treated as Latin-1 by iconv */
@@ -1164,7 +1164,7 @@ const char *reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst)
     }
 
     switch(ce_out) {
- #ifdef Win32
+ #ifdef _WIN32
     case CE_NATIVE:
 	{
 	    /* avoid possible misidentification of CP1250 as LATIN-2 */
@@ -1335,13 +1335,13 @@ next_char:
     Riconv_close(obj);
     *outbuf = '\0';
     res = (top-outb)+1; /* strlen(cbuff.data) + 1; */
-    if (res > ny) error("converted string too long for buffer");
+    if (res > ny) error(_("converted string is too long for buffer"));
     memcpy(y, cbuff.data, res);
     R_FreeStringBuffer(&cbuff);
 }
 #endif
 
-#ifdef Win32
+#ifdef _WIN32
 /* A version avoiding R_alloc for use in the Rgui editor */
 void reEnc2(const char *x, char *y, int ny,
 	    cetype_t ce_in, cetype_t ce_out, int subst)
@@ -1441,7 +1441,7 @@ next_char:
     Riconv_close(obj);
     *outbuf = '\0';
     res = (top-outb)+1; /* strlen(cbuff.data) + 1; */
-    if (res > ny) error("converted string too long for buffer");
+    if (res > ny) error(_("converted string is too long for buffer"));
     memcpy(y, cbuff.data, res);
     R_FreeStringBuffer(&cbuff);
 }
@@ -1453,7 +1453,7 @@ invalidate_cached_recodings(void)
     latin1_obj = nullptr;
     utf8_obj = nullptr;
     ucsmb_obj = nullptr;
-#ifdef Win32
+#ifdef _WIN32
     latin1_wobj = NULL;
     utf8_wobj=NULL;
 #endif
@@ -1488,7 +1488,7 @@ size_t ucstomb(char *s, const unsigned int wc)
 
     if(ucsmb_obj == nullptr) {
 	if(reinterpret_cast<void *>((-1)) == (cd = Riconv_open("", UNICODE))) {
-#ifndef  Win32
+#ifndef  _WIN32
 	    char tocode[128];
 	    /* locale set fuzzy case */
 	    strncpy(tocode, locale2charset(nullptr), sizeof(tocode));
@@ -1609,7 +1609,7 @@ size_t ucstoutf8(char *s, const unsigned int wc)
 #  endif
 # endif
 
-#ifdef Win32
+#ifdef _WIN32
 # define WIN32_LEAN_AND_MEAN 1
 # include <windows.h> /* For GetShortPathName */
 #endif
@@ -1620,14 +1620,14 @@ size_t ucstoutf8(char *s, const unsigned int wc)
 
 static int isDir(CXXRCONST char *path)
 {
-#ifdef Win32
+#ifdef _WIN32
     struct _stati64 sb;
 #else
     struct stat sb;
 #endif
     int isdir = 0;
     if(!path) return 0;
-#ifdef Win32
+#ifdef _WIN32
     if(_stati64(path, &sb) == 0) {
 #else
     if(stat(path, &sb) == 0) {
@@ -1652,7 +1652,7 @@ static int isDir(CXXRCONST char *path)
 extern char * mkdtemp (char *template);
 #endif
 
-#ifdef Win32
+#ifdef _WIN32
 # include <ctype.h>
 #endif
 
@@ -1660,7 +1660,7 @@ void attribute_hidden InitTempDir()
 {
     char *tmp, tmp1[PATH_MAX+11], *p;
     CXXRCONST char* tm;
-#ifdef Win32
+#ifdef _WIN32
     char tmp2[PATH_MAX];
     int hasspace = 0;
 #endif
@@ -1674,14 +1674,14 @@ void attribute_hidden InitTempDir()
 	    if (!isDir(tm)) {
 		tm = getenv("TEMP");
 		if (!isDir(tm))
-#ifdef Win32
+#ifdef _WIN32
 		    tm = getenv("R_USER"); /* this one will succeed */
 #else
 		    tm = "/tmp";
 #endif
 	    }
 	}
-#ifdef Win32
+#ifdef _WIN32
 	/* make sure no spaces in path */
 	for (p = tm; *p; p++)
 	    if (isspace(*p)) { hasspace = 1; break; }
@@ -1695,7 +1695,7 @@ void attribute_hidden InitTempDir()
 #endif
 	tmp = mkdtemp(tmp1);
 	if(!tmp) R_Suicide(_("cannot create 'R_TempDir'"));
-#ifndef Win32
+#ifndef _WIN32
 # ifdef HAVE_SETENV
 	if(setenv("R_SESSION_TMPDIR", tmp, 1))
 	    errorcall(R_NilValue, _("unable to set R_SESSION_TMPDIR"));
@@ -1739,7 +1739,7 @@ char * R_tmpnam2(const char *prefix, const char *tempdir, const char *fileext)
 {
     char tm[PATH_MAX], *res;
     unsigned int n, done = 0, pid = getpid();
-#ifdef Win32
+#ifdef _WIN32
     char filesep[] = "\\";
 #else
     char filesep[] = "/";
@@ -1755,7 +1755,7 @@ char * R_tmpnam2(const char *prefix, const char *tempdir, const char *fileext)
 #endif
 
     if(strlen(tempdir) + 1 + strlen(prefix) + RAND_WIDTH + strlen(fileext) >= PATH_MAX)
-	error(_("temporary name too long"));
+	error(_("temporary name is too long"));
 
     for (n = 0; n < 100; n++) {
 	/* try a random number at the end.  Need at least 6 hex digits */
@@ -1806,7 +1806,7 @@ void attribute_hidden resetTimeLimits()
 	(elapsedLimit <= 0.0 || elapsedLimit2 < elapsedLimit))
 	elapsedLimit = elapsedLimit2;
 
-#ifdef Win32
+#ifdef _WIN32
     cpuLimit = (cpuLimitValue > 0) ? data[0] + data[1] + cpuLimitValue : -1.0;
 #else
     cpuLimit = (cpuLimitValue > 0) ? data[0] + data[1] + data[3] + data[4] + cpuLimitValue : -1.0;
@@ -1869,7 +1869,7 @@ do_setSessionTimeLimit(/*const*/ CXXR::Expression* call, const CXXR::BuiltInFunc
 #ifdef HAVE_GLOB_H
 # include <glob.h>
 #endif
-#ifdef Win32
+#ifdef _WIN32
 # include <dos_wglob.h>
 # define globfree dos_wglobfree
 # define glob_t wglob_t
@@ -1884,7 +1884,7 @@ SEXP attribute_hidden do_glob(/*const*/ CXXR::Expression* call, const CXXR::Buil
     R_xlen_t i, n;
     int res, dirmark, initialized=FALSE;
     glob_t globbuf;
-#ifdef Win32
+#ifdef _WIN32
     R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
 #endif
 
@@ -1902,7 +1902,7 @@ SEXP attribute_hidden do_glob(/*const*/ CXXR::Expression* call, const CXXR::Buil
     for (i = 0; i < XLENGTH(x); i++) {
 	SEXP el = STRING_ELT(x, i);
 	if (el == NA_STRING) continue;
-#ifdef Win32
+#ifdef _WIN32
 	res = dos_wglob(filenameToWchar(el, FALSE),
 			(dirmark ? GLOB_MARK : 0) |
 			GLOB_QUOTE | (initialized ? GLOB_APPEND : 0),
@@ -1943,7 +1943,7 @@ SEXP attribute_hidden do_glob(/*const*/ CXXR::Expression* call, const CXXR::Buil
 	SET_STRING_ELT(ans, i, mkChar(globbuf.gl_pathv[i]));
 #endif
     UNPROTECT(1);
-#ifdef Win32
+#ifdef _WIN32
     R_FreeStringBufferL(&cbuff);
 #endif
     if (initialized) globfree(&globbuf);

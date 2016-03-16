@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-13 22:46+0100\n"
+"POT-Creation-Date: 2016-03-16 20:45+0100\n"
 "PO-Revision-Date: 2012-03-16 15:59+0100\n"
 "Last-Translator: \n"
 "Language-Team: Spanish <pabloemilio.verde@uni-duesseldorf.de>\n"
@@ -652,65 +652,68 @@ msgstr "problemas al mostrar  '%s'"
 #: src/main/envir.cpp:1565 src/main/envir.cpp:2016
 #: src/main/Environment.cpp:307 src/main/Environment.cpp:319
 #: src/main/errors.cpp:995 src/main/eval.cpp:477 src/main/eval.cpp:486
-#: src/main/eval.cpp:489 src/main/grep.cpp:785 src/main/grep.cpp:790
-#: src/main/grep.cpp:1083 src/main/grep.cpp:1085 src/main/grep.cpp:1087
-#: src/main/grep.cpp:1531 src/main/grep.cpp:1535 src/main/grep.cpp:1540
-#: src/main/grep.cpp:2347 src/main/grep.cpp:2352 src/main/grep.cpp:2661
-#: src/main/grep.cpp:2666 src/main/memory.cpp:577 src/main/paste.cpp:106
-#: src/main/paste.cpp:399 src/main/paste.cpp:406 src/main/paste.cpp:413
-#: src/main/paste.cpp:418 src/main/paste.cpp:423 src/main/paste.cpp:428
-#: src/main/paste.cpp:431 src/main/paste.cpp:439 src/main/paste.cpp:444
-#: src/main/paste.cpp:626 src/main/paste.cpp:631 src/main/platform.cpp:320
-#: src/main/platform.cpp:322 src/main/platform.cpp:324
-#: src/main/platform.cpp:340 src/main/platform.cpp:351
-#: src/main/platform.cpp:403 src/main/platform.cpp:405
-#: src/main/platform.cpp:713 src/main/platform.cpp:715
-#: src/main/platform.cpp:803 src/main/platform.cpp:1139
-#: src/main/platform.cpp:1145 src/main/platform.cpp:1148
-#: src/main/platform.cpp:1151 src/main/platform.cpp:1154
-#: src/main/platform.cpp:1157 src/main/platform.cpp:1160
-#: src/main/platform.cpp:1163 src/main/platform.cpp:1260
-#: src/main/platform.cpp:1263 src/main/platform.cpp:1266
-#: src/main/platform.cpp:1303 src/main/platform.cpp:1359
-#: src/main/platform.cpp:1362 src/main/platform.cpp:1571
-#: src/main/platform.cpp:1574 src/main/platform.cpp:1577
-#: src/main/platform.cpp:1613 src/main/platform.cpp:1616
-#: src/main/platform.cpp:1619 src/main/platform.cpp:1654
-#: src/main/platform.cpp:1686 src/main/platform.cpp:1688
-#: src/main/platform.cpp:1759 src/main/platform.cpp:1842
-#: src/main/platform.cpp:2080 src/main/platform.cpp:2139
-#: src/main/platform.cpp:2323 src/main/platform.cpp:2326
-#: src/main/platform.cpp:2329 src/main/platform.cpp:2332
-#: src/main/platform.cpp:2335 src/main/platform.cpp:2338
-#: src/main/platform.cpp:2542 src/main/platform.cpp:2545
-#: src/main/platform.cpp:2548 src/main/platform.cpp:2551
-#: src/main/platform.cpp:2554 src/main/platform.cpp:2557
-#: src/main/platform.cpp:2633 src/main/platform.cpp:2641
-#: src/main/platform.cpp:2676 src/main/platform.cpp:2724
+#: src/main/eval.cpp:489 src/main/grep.cpp:781 src/main/grep.cpp:786
+#: src/main/grep.cpp:1079 src/main/grep.cpp:1081 src/main/grep.cpp:1083
+#: src/main/grep.cpp:1527 src/main/grep.cpp:1531 src/main/grep.cpp:1536
+#: src/main/grep.cpp:2343 src/main/grep.cpp:2348 src/main/grep.cpp:2657
+#: src/main/grep.cpp:2662 src/main/internet.cpp:219 src/main/internet.cpp:253
+#: src/main/internet.cpp:267 src/main/internet.cpp:280
+#: src/main/internet.cpp:300 src/main/memory.cpp:577 src/main/paste.cpp:104
+#: src/main/paste.cpp:397 src/main/paste.cpp:404 src/main/paste.cpp:411
+#: src/main/paste.cpp:416 src/main/paste.cpp:421 src/main/paste.cpp:426
+#: src/main/paste.cpp:429 src/main/paste.cpp:437 src/main/paste.cpp:442
+#: src/main/paste.cpp:624 src/main/paste.cpp:629 src/main/platform.cpp:321
+#: src/main/platform.cpp:323 src/main/platform.cpp:325
+#: src/main/platform.cpp:341 src/main/platform.cpp:352
+#: src/main/platform.cpp:404 src/main/platform.cpp:406
+#: src/main/platform.cpp:714 src/main/platform.cpp:716
+#: src/main/platform.cpp:801 src/main/platform.cpp:804
+#: src/main/platform.cpp:982 src/main/platform.cpp:1140
+#: src/main/platform.cpp:1146 src/main/platform.cpp:1149
+#: src/main/platform.cpp:1152 src/main/platform.cpp:1155
+#: src/main/platform.cpp:1158 src/main/platform.cpp:1161
+#: src/main/platform.cpp:1164 src/main/platform.cpp:1261
+#: src/main/platform.cpp:1264 src/main/platform.cpp:1267
+#: src/main/platform.cpp:1304 src/main/platform.cpp:1360
+#: src/main/platform.cpp:1363 src/main/platform.cpp:1572
+#: src/main/platform.cpp:1575 src/main/platform.cpp:1578
+#: src/main/platform.cpp:1614 src/main/platform.cpp:1617
+#: src/main/platform.cpp:1620 src/main/platform.cpp:1655
+#: src/main/platform.cpp:1687 src/main/platform.cpp:1689
+#: src/main/platform.cpp:1760 src/main/platform.cpp:1843
+#: src/main/platform.cpp:2081 src/main/platform.cpp:2140
+#: src/main/platform.cpp:2324 src/main/platform.cpp:2327
+#: src/main/platform.cpp:2330 src/main/platform.cpp:2333
+#: src/main/platform.cpp:2336 src/main/platform.cpp:2339
+#: src/main/platform.cpp:2543 src/main/platform.cpp:2546
+#: src/main/platform.cpp:2549 src/main/platform.cpp:2552
+#: src/main/platform.cpp:2555 src/main/platform.cpp:2558
+#: src/main/platform.cpp:2634 src/main/platform.cpp:2642
+#: src/main/platform.cpp:2677 src/main/platform.cpp:2725
 #: src/main/print.cpp:246 src/main/print.cpp:252 src/main/print.cpp:274
 #: src/main/print.cpp:280 src/main/print.cpp:287 src/main/random.cpp:214
 #: src/main/random.cpp:218 src/main/random.cpp:225 src/main/random.cpp:253
-#: src/main/saveload.cpp:1968 src/main/saveload.cpp:1971
-#: src/main/saveload.cpp:1974 src/main/saveload.cpp:2082
-#: src/main/saveload.cpp:2249 src/main/saveload.cpp:2254
-#: src/main/saveload.cpp:2257 src/main/saveload.cpp:2354 src/main/scan.cpp:690
-#: src/main/scan.cpp:856 src/main/scan.cpp:870 src/main/scan.cpp:874
-#: src/main/scan.cpp:876 src/main/scan.cpp:887 src/main/scan.cpp:914
-#: src/main/scan.cpp:917 src/main/scan.cpp:920 src/main/scan.cpp:971
-#: src/main/seq.cpp:646 src/main/seq.cpp:651 src/main/seq.cpp:659
+#: src/main/saveload.cpp:1967 src/main/saveload.cpp:1970
+#: src/main/saveload.cpp:1973 src/main/saveload.cpp:2081
+#: src/main/saveload.cpp:2248 src/main/saveload.cpp:2253
+#: src/main/saveload.cpp:2256 src/main/saveload.cpp:2353 src/main/scan.cpp:689
+#: src/main/scan.cpp:855 src/main/scan.cpp:869 src/main/scan.cpp:873
+#: src/main/scan.cpp:875 src/main/scan.cpp:886 src/main/scan.cpp:913
+#: src/main/scan.cpp:916 src/main/scan.cpp:919 src/main/scan.cpp:970
+#: src/main/seq.cpp:647 src/main/seq.cpp:652 src/main/seq.cpp:660
 #: src/main/seq.cpp:690 src/main/seq.cpp:694 src/main/seq.cpp:700
-#: src/main/seq.cpp:707 src/main/sort.cpp:189 src/main/sysutils.cpp:600
+#: src/main/seq.cpp:707 src/main/sort.cpp:190 src/main/sysutils.cpp:600
 #: src/main/sysutils.cpp:603 src/main/sysutils.cpp:606
 #: src/main/sysutils.cpp:611 src/main/sysutils.cpp:614
 #: src/main/sysutils.cpp:1892 src/main/sysutils.cpp:1896
 #: src/main/unique.cpp:1027 src/main/unique.cpp:1333 src/main/unique.cpp:1337
-#: src/main/unique.cpp:1347 src/main/unique.cpp:1741 src/main/util.cpp:643
-#: src/main/util.cpp:646 src/main/util.cpp:1369 src/main/util.cpp:1381
-#: src/main/util.cpp:1965 src/main/util.cpp:2169 src/main/util.cpp:2170
-#: src/main/util.cpp:2171 src/main/util.cpp:2187 src/main/util.cpp:2214
-#: src/main/util.cpp:2218 src/main/util.cpp:2220 src/main/util.cpp:2245
-#: src/main/util.cpp:2247 src/main/util.cpp:2249 src/main/util.cpp:2252
-#: src/main/util.cpp:2255 src/main/util.cpp:2259 src/main/util.cpp:2261
+#: src/main/unique.cpp:1347 src/main/unique.cpp:1739 src/main/util.cpp:641
+#: src/main/util.cpp:644 src/main/util.cpp:1367 src/main/util.cpp:1379
+#: src/main/util.cpp:1963 src/main/util.cpp:2167 src/main/util.cpp:2168
+#: src/main/util.cpp:2169 src/main/util.cpp:2185 src/main/util.cpp:2212
+#: src/main/util.cpp:2216 src/main/util.cpp:2218 src/main/util.cpp:2243
+#: src/main/util.cpp:2245 src/main/util.cpp:2247 src/main/util.cpp:2250
+#: src/main/util.cpp:2253 src/main/util.cpp:2257 src/main/util.cpp:2259
 #: src/modules/internet/internet.cpp:463 src/modules/internet/internet.cpp:469
 #: src/modules/internet/internet.cpp:475 src/modules/internet/internet.cpp:478
 #: src/modules/internet/internet.cpp:482 src/modules/internet/internet.cpp:487
@@ -745,13 +748,16 @@ msgstr ""
 msgid "cannot decrease memory limit: ignored"
 msgstr "no se puede disminuir el límite de la memoria: ignorado"
 
-#: src/gnuwin32/extra.c:427 src/gnuwin32/extra.c:528
+#: src/gnuwin32/extra.c:427 src/gnuwin32/extra.c:528 src/main/objects.cpp:856
+#: src/main/sysutils.cpp:642 src/main/unique.cpp:1627 src/main/util.cpp:956
 #, fuzzy, c-format
 msgid "'%s' argument must be a character vector"
 msgstr "el primer argumento debe ser un vector de caracteres"
 
 #: src/gnuwin32/extra.c:431 src/main/edit.cpp:147 src/main/errors.cpp:997
-#: src/main/errors.cpp:999 src/modules/lapack/Lapack.c:91
+#: src/main/errors.cpp:999 src/main/objects.cpp:289 src/main/objects.cpp:1164
+#: src/main/options.cpp:346 src/main/raw.cpp:157 src/main/Renviron.cpp:326
+#: src/main/unique.cpp:1631 src/modules/lapack/Lapack.c:91
 #: src/modules/lapack/Lapack.c:334 src/modules/lapack/Lapack.c:364
 #: src/modules/lapack/Lapack.c:412 src/modules/lapack/Lapack.c:448
 #: src/modules/lapack/Lapack.c:505 src/modules/lapack/Lapack.c:749
@@ -787,7 +793,7 @@ msgstr "dispositivo defectuoso "
 msgid "invalid input in '%s' function"
 msgstr "entrada no válida en Rmbstowcs"
 
-#: src/gnuwin32/extra.c:826
+#: src/gnuwin32/extra.c:826 src/main/platform.cpp:1336
 #, fuzzy
 msgid "file choice was cancelled"
 msgstr "selección de archivo cancelada"
@@ -829,7 +835,8 @@ msgstr ""
 
 #: src/gnuwin32/run.c:733 src/main/connections.cpp:365
 #: src/main/connections.cpp:382 src/main/connections.cpp:2936
-#: src/main/printutils.cpp:937
+#: src/main/printutils.cpp:912 src/main/printutils.cpp:926
+#: src/main/printutils.cpp:935
 msgid "printing of extremely long output is truncated"
 msgstr "impresión de longitud extremadamente larga está truncada"
 
@@ -840,7 +847,7 @@ msgstr "impresión de longitud extremadamente larga está truncada"
 msgid "allocation of pipe connection failed"
 msgstr "asignación de conexión pipe no lograda"
 
-#: src/gnuwin32/run.c:805
+#: src/gnuwin32/run.c:805 src/main/util.cpp:1763
 #, fuzzy, c-format
 msgid "'%s' argument is not a character vector"
 msgstr "'fmt' debe ser un vector de caracteres no vacío"
@@ -879,7 +886,7 @@ msgstr "<ERROR: entrada no válida para codificación '%s'>\n"
 #: src/gnuwin32/system.c:568 src/gnuwin32/system.c:1070
 #: src/gnuwin32/system.c:1082 src/main/connections.cpp:616
 #: src/main/connections.cpp:621 src/main/dounzip.cpp:187
-#: src/main/saveload.cpp:1979 src/main/serialize.cpp:2550
+#: src/main/saveload.cpp:1978 src/main/serialize.cpp:2550
 #: src/main/serialize.cpp:2555 src/main/serialize.cpp:2638
 #: src/main/serialize.cpp:2683 src/unix/sys-std.c:1171 src/unix/system.c:332
 #, c-format
@@ -1034,7 +1041,7 @@ msgstr ""
 
 #: src/gnuwin32/getline/getline.c:1057 src/gnuwin32/getline/wc_history.c:142
 #: src/main/edit.cpp:127 src/main/eval.cpp:2090 src/main/eval.cpp:2109
-#: src/unix/hpdlfcn.c:156
+#: src/main/saveload.cpp:2085 src/unix/hpdlfcn.c:156
 #, fuzzy, c-format
 msgid "unable to open file '%s'"
 msgstr "imposible abrir 'file'"
@@ -1064,7 +1071,11 @@ msgstr "no es posible abrir el archivo"
 msgid "invalid call %s"
 msgstr "valor no válido"
 
-#: src/include/Errormsg.h:47
+#: src/include/Errormsg.h:47 src/main/subscript.cpp:394
+#: src/main/subscript.cpp:412 src/main/subscript.cpp:436
+#: src/main/subscript.cpp:475 src/main/subscript.cpp:510
+#: src/main/subscript.cpp:523 src/main/subscript.cpp:555
+#: src/main/subscript.cpp:639
 #, fuzzy
 msgid "subscript is out of bounds"
 msgstr "subíndice fuera de  los límites"
@@ -1083,7 +1094,7 @@ msgid "the 'value' of a raw object is not defined"
 msgstr ""
 
 #: src/include/CXXR/BinaryFunction.hpp:249 src/main/arithmetic.cpp:368
-#: src/main/relop.cpp:179
+#: src/main/relop.cpp:181
 msgid "longer object length is not a multiple of shorter object length"
 msgstr "longitud de objeto mayor no es múltiplo de la longitud de uno menor"
 
@@ -1098,7 +1109,7 @@ msgid "NAs are not allowed in subscripted assignments"
 msgstr "NAs no son permitidos en asignaciones subscritas"
 
 #: src/include/CXXR/Subscripting.hpp:869
-#: src/include/CXXR/Subscripting.hpp:1020 src/main/subassign.cpp:615
+#: src/include/CXXR/Subscripting.hpp:1020 src/main/subassign.cpp:616
 #: src/main/subassign.cpp:1112
 #, fuzzy
 msgid "replacement has length zero"
@@ -1112,8 +1123,8 @@ msgstr ""
 "reemplazo"
 
 #: src/main/agrep.cpp:139 src/main/agrep.cpp:780 src/main/character.cpp:1305
-#: src/main/character.cpp:1309 src/main/grep.cpp:787 src/main/grep.cpp:1533
-#: src/main/grep.cpp:1537 src/main/grep.cpp:2349 src/main/grep.cpp:2663
+#: src/main/character.cpp:1309 src/main/grep.cpp:783 src/main/grep.cpp:1529
+#: src/main/grep.cpp:1533 src/main/grep.cpp:2345 src/main/grep.cpp:2659
 #, c-format
 msgid "argument '%s' has length > 1 and only the first element will be used"
 msgstr ""
@@ -1121,33 +1132,34 @@ msgstr ""
 "usado"
 
 #: src/main/agrep.cpp:198 src/main/agrep.cpp:824 src/main/coerce.cpp:2724
+#: src/main/saveload.cpp:1959
 #, fuzzy, c-format
 msgid "'%s' argument must be a non-empty character string"
 msgstr "'title' debe ser un string de caracteres"
 
-#: src/main/agrep.cpp:209 src/main/agrep.cpp:833 src/main/grep.cpp:858
-#: src/main/grep.cpp:2407 src/main/grep.cpp:2716
+#: src/main/agrep.cpp:209 src/main/agrep.cpp:833 src/main/grep.cpp:854
+#: src/main/grep.cpp:2403 src/main/grep.cpp:2712
 msgid "regular expression is invalid in this locale"
 msgstr "la expresión regular es inválida es este locale"
 
 #: src/main/agrep.cpp:215 src/main/agrep.cpp:630 src/main/agrep.cpp:839
-#: src/main/grep.cpp:2722
+#: src/main/grep.cpp:2718
 #, fuzzy, c-format
 msgid "regcomp error: '%s'"
 msgstr "error regcomp:  '%s'"
 
-#: src/main/agrep.cpp:247 src/main/agrep.cpp:878 src/main/grep.cpp:239
-#: src/main/grep.cpp:329 src/main/grep.cpp:440 src/main/grep.cpp:596
-#: src/main/grep.cpp:912 src/main/grep.cpp:2512 src/main/grep.cpp:2590
-#: src/main/grep.cpp:2753
+#: src/main/agrep.cpp:247 src/main/agrep.cpp:878 src/main/grep.cpp:235
+#: src/main/grep.cpp:325 src/main/grep.cpp:436 src/main/grep.cpp:592
+#: src/main/grep.cpp:908 src/main/grep.cpp:1664 src/main/grep.cpp:2508
+#: src/main/grep.cpp:2586 src/main/grep.cpp:2749
 #, c-format
 msgid "input string %d is invalid in this locale"
 msgstr "string de entrada %d es inválida en este locale"
 
-#: src/main/agrep.cpp:533 src/main/agrep.cpp:769 src/main/grep.cpp:165
-#: src/main/grep.cpp:778 src/main/grep.cpp:780 src/main/grep.cpp:1069
-#: src/main/grep.cpp:1077 src/main/grep.cpp:1524 src/main/grep.cpp:1526
-#: src/main/grep.cpp:2339 src/main/grep.cpp:2341 src/main/grep.cpp:2651
+#: src/main/agrep.cpp:533 src/main/agrep.cpp:769 src/main/grep.cpp:161
+#: src/main/grep.cpp:774 src/main/grep.cpp:776 src/main/grep.cpp:1065
+#: src/main/grep.cpp:1073 src/main/grep.cpp:1520 src/main/grep.cpp:1522
+#: src/main/grep.cpp:2335 src/main/grep.cpp:2337 src/main/grep.cpp:2647
 #, c-format
 msgid "argument '%s' will be ignored"
 msgstr "argumento '%s  será ignorado"
@@ -1173,16 +1185,16 @@ msgstr "primer argumento debe ser un vector"
 #: src/main/datetime.cpp:803 src/main/datetime.cpp:1067
 #: src/main/dotcode.cpp:228 src/main/errors.cpp:893 src/main/errors.cpp:928
 #: src/main/errors.cpp:1034 src/main/errors.cpp:1058 src/main/errors.cpp:1063
-#: src/main/errors.cpp:1290 src/main/identical.cpp:74
-#: src/main/identical.cpp:75 src/main/identical.cpp:76
-#: src/main/identical.cpp:77 src/main/identical.cpp:78
-#: src/main/platform.cpp:2960 src/main/seq.cpp:202 src/main/seq.cpp:356
-#: src/main/seq.cpp:361 src/main/seq.cpp:365 src/main/seq.cpp:405
-#: src/main/seq.cpp:409 src/main/seq.cpp:413 src/main/sort.cpp:1259
-#: src/main/sort.cpp:1341 src/main/sort.cpp:1345 src/main/sort.cpp:1352
-#: src/main/source.cpp:223 src/main/summary.cpp:970 src/main/sysutils.cpp:259
-#: src/main/util.cpp:1046 src/main/util.cpp:1051 src/main/util.cpp:1058
-#: src/main/util.cpp:1061 src/main/util.cpp:2024
+#: src/main/errors.cpp:1290 src/main/identical.cpp:80
+#: src/main/identical.cpp:81 src/main/identical.cpp:82
+#: src/main/identical.cpp:83 src/main/identical.cpp:84
+#: src/main/platform.cpp:2961 src/main/seq.cpp:203 src/main/seq.cpp:357
+#: src/main/seq.cpp:362 src/main/seq.cpp:366 src/main/seq.cpp:406
+#: src/main/seq.cpp:410 src/main/seq.cpp:414 src/main/sort.cpp:1260
+#: src/main/sort.cpp:1342 src/main/sort.cpp:1346 src/main/sort.cpp:1353
+#: src/main/source.cpp:220 src/main/summary.cpp:970 src/main/sysutils.cpp:259
+#: src/main/util.cpp:1044 src/main/util.cpp:1049 src/main/util.cpp:1056
+#: src/main/util.cpp:1059 src/main/util.cpp:2022
 #: src/modules/lapack/Lapack.c:946 src/modules/X11/devX11.c:3146
 #: src/modules/X11/devX11.c:3172 src/modules/X11/devX11.c:3177
 #: src/modules/X11/devX11.c:3182 src/modules/X11/devX11.c:3192
@@ -1266,18 +1278,18 @@ msgstr ""
 msgid "duplicated name in formals list"
 msgstr ""
 
-#: src/main/ArgMatcher.cpp:367
+#: src/main/ArgMatcher.cpp:367 src/main/match.cpp:255 src/main/match.cpp:293
 #, fuzzy, c-format
 msgid "formal argument '%s' matched by multiple actual arguments"
 msgstr ""
 "el argumento formal \"%s\" concuerda con múltiples argumentos especificados"
 
-#: src/main/ArgMatcher.cpp:377 src/main/match.cpp:257 src/main/match.cpp:290
+#: src/main/ArgMatcher.cpp:377 src/main/match.cpp:258 src/main/match.cpp:291
 #, c-format
 msgid "argument %d matches multiple formal arguments"
 msgstr "el argumento %d concuerda con multiples argumentos formales"
 
-#: src/main/ArgMatcher.cpp:381 src/main/match.cpp:296
+#: src/main/ArgMatcher.cpp:381 src/main/match.cpp:297
 #, c-format
 msgid "partial argument match of '%s' to '%s'"
 msgstr " argumentos parcialmente correctos de '%s' a '%s'"
@@ -1490,7 +1502,10 @@ msgid "value is out of range in 'perm' argument"
 msgstr "valor fuera de sus límites en 'perm'"
 
 #: src/main/array.cpp:1261 src/main/connections.cpp:5478
-#: src/main/debug.cpp:116
+#: src/main/debug.cpp:116 src/main/objects.cpp:1032 src/main/raw.cpp:63
+#: src/main/raw.cpp:336 src/main/sort.cpp:339 src/main/sort.cpp:1264
+#: src/main/unique.cpp:679 src/main/unique.cpp:1442 src/main/unique.cpp:1514
+#: src/main/util.cpp:646 src/main/util.cpp:648
 #, fuzzy, c-format
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr "'decreciente' debe ser TRUE o FALSE"
@@ -1658,8 +1673,8 @@ msgstr "la longitud de 'dimnames' [%d] no es igual a la extensión del arreglo"
 
 #: src/main/attrib.cpp:1057 src/main/builtin.cpp:82 src/main/builtin.cpp:106
 #: src/main/envir.cpp:702 src/main/envir.cpp:791 src/main/envir.cpp:842
-#: src/main/envir.cpp:964 src/main/paste.cpp:84 src/main/paste.cpp:301
-#: src/main/random.cpp:223 src/main/random.cpp:252 src/main/unique.cpp:1740
+#: src/main/envir.cpp:964 src/main/paste.cpp:82 src/main/paste.cpp:299
+#: src/main/random.cpp:223 src/main/random.cpp:252 src/main/unique.cpp:1738
 msgid "invalid first argument"
 msgstr "primer argumento inválido"
 
@@ -1724,8 +1739,8 @@ msgid "exactly one attribute 'which' must be given"
 msgstr "exactamente 1 atributo 'which' debe ser especificado"
 
 #: src/main/attrib.cpp:1341 src/main/attrib.cpp:1364
-#: src/main/subscript.cpp:254 src/main/subscript.cpp:258
-#: src/main/subset.cpp:969 src/main/subset.cpp:1022
+#: src/main/subscript.cpp:255 src/main/subscript.cpp:259
+#: src/main/subset.cpp:970 src/main/subset.cpp:1023
 #, c-format
 msgid "partial match of '%s' to '%s'"
 msgstr " encuentros parciales de '%s' to '%s'"
@@ -1843,16 +1858,16 @@ msgstr ""
 msgid "vector size cannot be NA"
 msgstr "tamaño del vector no puede ser NA"
 
-#: src/main/builtin.cpp:59 src/main/builtin.cpp:67 src/main/sort.cpp:1337
+#: src/main/builtin.cpp:59 src/main/builtin.cpp:67 src/main/sort.cpp:1338
 msgid "vector size cannot be NA/NaN"
 msgstr "tamaño del vector no puede ser NA/NaN"
 
-#: src/main/builtin.cpp:60 src/main/builtin.cpp:68 src/main/sort.cpp:1338
+#: src/main/builtin.cpp:60 src/main/builtin.cpp:68 src/main/sort.cpp:1339
 msgid "vector size cannot be infinite"
 msgstr "tamaño del vector no puede ser infinito"
 
 #: src/main/builtin.cpp:61 src/main/builtin.cpp:69 src/main/builtin.cpp:847
-#: src/main/sort.cpp:1339
+#: src/main/sort.cpp:1340
 msgid "vector size specified is too large"
 msgstr "tamaño del vector especificado es muy grande"
 
@@ -1862,6 +1877,7 @@ msgstr "el objeto de reemplazo no es un entorno"
 
 #: src/main/builtin.cpp:284 src/main/coerce.cpp:2391 src/main/engine.cpp:3001
 #: src/main/envir.cpp:741 src/main/envir.cpp:1385 src/main/envir.cpp:1423
+#: src/main/unique.cpp:1341
 #, fuzzy, c-format
 msgid "'%s' argument must be an environment"
 msgstr "el argumento 'env' debe ser un ambiente"
@@ -1904,7 +1920,8 @@ msgstr "el argumento no es un entorno"
 msgid "cannot write to this connection"
 msgstr "no es posible escribir en esa conexión"
 
-#: src/main/builtin.cpp:481 src/main/builtin.cpp:508
+#: src/main/builtin.cpp:481 src/main/builtin.cpp:508 src/main/platform.cpp:319
+#: src/main/platform.cpp:337 src/main/print.cpp:152 src/main/print.cpp:258
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "especificación '%s' inválida"
@@ -2051,7 +2068,7 @@ msgstr "nombres de tipo no carácter"
 msgid "invalid multibyte input string %d"
 msgstr "string de entrada multibyte no válida"
 
-#: src/main/character.cpp:965 src/main/grep.cpp:169
+#: src/main/character.cpp:965 src/main/grep.cpp:165
 msgid "non-character argument"
 msgstr "argumento de tipo no-carácter"
 
@@ -2071,6 +2088,7 @@ msgid "invalid UTF-8 string '%s'"
 msgstr "string UTF-8  no válido  'old'"
 
 #: src/main/character.cpp:1351 src/main/character.cpp:1370
+#: src/main/plotmath.cpp:989
 #, fuzzy, c-format
 msgid "invalid multibyte string '%s'"
 msgstr "string multibyte %d inválida"
@@ -2390,11 +2408,11 @@ msgstr "no fue posible abrir el archivo '%s': %s"
 msgid "'fdopen' is not supported on this platform"
 msgstr "esta plataforma no soporta nsl()"
 
-#: src/main/connections.cpp:718
+#: src/main/connections.cpp:718 src/main/saveload.cpp:2348
 msgid "connection is not open for reading"
 msgstr "la conexión no está abierta para la lectura"
 
-#: src/main/connections.cpp:723
+#: src/main/connections.cpp:723 src/main/saveload.cpp:2268
 msgid "connection is not open for writing"
 msgstr "la conexión no está abierta para la escritura"
 
@@ -2500,9 +2518,9 @@ msgstr ""
 #: src/main/connections.cpp:4433 src/main/connections.cpp:4554
 #: src/main/connections.cpp:4768 src/main/connections.cpp:5168
 #: src/main/dcf.cpp:92 src/main/deparse.cpp:376 src/main/deparse.cpp:461
-#: src/main/saveload.cpp:2264 src/main/saveload.cpp:2345 src/main/scan.cpp:936
+#: src/main/saveload.cpp:2263 src/main/saveload.cpp:2344 src/main/scan.cpp:935
 #: src/main/serialize.cpp:2171 src/main/serialize.cpp:2221
-#: src/main/source.cpp:269
+#: src/main/source.cpp:266
 msgid "cannot open the connection"
 msgstr "no se puede abrir la conexión"
 
@@ -2789,8 +2807,8 @@ msgstr "Línea más larga que el tamaño del buffer"
 #: src/main/connections.cpp:3565 src/main/connections.cpp:3568
 #: src/main/connections.cpp:3847 src/main/connections.cpp:4416
 #: src/main/connections.cpp:4438 src/main/connections.cpp:5195
-#: src/main/dcf.cpp:95 src/main/scan.cpp:939 src/main/scan.cpp:943
-#: src/main/serialize.cpp:2001 src/main/source.cpp:270
+#: src/main/dcf.cpp:95 src/main/scan.cpp:938 src/main/scan.cpp:942
+#: src/main/serialize.cpp:2001 src/main/source.cpp:267
 msgid "cannot read from this connection"
 msgstr "no se puede leer desde esta conexión"
 
@@ -2799,7 +2817,7 @@ msgstr "no se puede leer desde esta conexión"
 msgid "cannot allocate buffer in 'readLines()'"
 msgstr "no se puede asignar buffer en readLines"
 
-#: src/main/connections.cpp:3587 src/main/scan.cpp:591 src/main/scan.cpp:741
+#: src/main/connections.cpp:3587 src/main/scan.cpp:590 src/main/scan.cpp:740
 #, fuzzy
 msgid "too many items"
 msgstr "demasiados argumentos"
@@ -2934,6 +2952,7 @@ msgstr "excedido el número máximo de colores"
 
 #: src/main/connections.cpp:4659 src/main/connections.cpp:4663
 #: src/main/connections.cpp:4698 src/main/connections.cpp:4706
+#: src/main/Rdynload.cpp:605 src/main/Rdynload.cpp:638
 #, fuzzy, c-format
 msgid "could not allocate space for '%s'"
 msgstr "no fué posible asignar espacio a 'path'"
@@ -3166,7 +3185,8 @@ msgstr "error interno en 'do_sys'"
 msgid "k = %d, should be 2 or 4"
 msgstr ""
 
-#: src/main/cum.cpp:56
+#: src/main/cum.cpp:56 src/main/summary.cpp:80 src/main/summary.cpp:92
+#: src/main/summary.cpp:117 src/main/summary.cpp:650
 #, fuzzy, c-format
 msgid "integer overflow in '%s' function; use '%s'"
 msgstr "error interno en 'do_sys'"
@@ -3285,7 +3305,7 @@ msgstr "que debe ser un string de caracteres o una función"
 msgid "wrote too few characters"
 msgstr "muy pocos caracteres escritos"
 
-#: src/main/deparse.cpp:412
+#: src/main/deparse.cpp:412 src/main/source.cpp:202
 #, fuzzy, c-format
 msgid "'%s' must be a character string or connection"
 msgstr "que debe ser un string de caracteres o una función"
@@ -3305,6 +3325,8 @@ msgid "'opts' argument should be small non-negative integer"
 msgstr "'opts' debe ser un entero no negativo pequeño"
 
 #: src/main/deparse.cpp:434 src/main/envir.cpp:812 src/main/eval.cpp:732
+#: src/main/saveload.cpp:1991 src/main/saveload.cpp:2301
+#: src/main/serialize.cpp:2720
 #, fuzzy, c-format
 msgid "object '%s' was not found"
 msgstr "objeto '%s' no encontrado"
@@ -3350,7 +3372,7 @@ msgstr "el primer argumento debe ser una lista"
 msgid "NULL value passed as symbol address"
 msgstr "valor NULL pasado como un símbolo de dirección"
 
-#: src/main/dotcode.cpp:155
+#: src/main/dotcode.cpp:155 src/main/Rdynload.cpp:1216
 #, fuzzy, c-format
 msgid "unimplemented type %d in '%s' function"
 msgstr "tipo no implementado (%d) en '%s'\n"
@@ -3408,7 +3430,7 @@ msgstr "%s nombre de símbolo \"%s\" no está en la tabla de carga"
 msgid "'%s' argument was used more than once"
 msgstr "DUP usado más de un vez"
 
-#: src/main/dotcode.cpp:368
+#: src/main/dotcode.cpp:368 src/main/Rdynload.cpp:617
 #, fuzzy, c-format
 msgid "DLL name '%s' is too long"
 msgstr "DLLname '%s' es demasiado largo"
@@ -3423,8 +3445,9 @@ msgstr "rep() del segundo argumento de tipo incorrecto"
 msgid "'%s' argument must be a single character string"
 msgstr "'msg1' debe ser un string de caracteres"
 
-#: src/main/dotcode.cpp:418 src/main/dounzip.cpp:343 src/unix/sys-std.c:1234
-#: src/unix/sys-std.c:1257
+#: src/main/dotcode.cpp:418 src/main/dounzip.cpp:343 src/main/util.cpp:804
+#: src/main/util.cpp:838 src/main/util.cpp:879 src/main/util.cpp:919
+#: src/unix/sys-std.c:1234 src/unix/sys-std.c:1257
 #, fuzzy, c-format
 msgid "'%s' argument is too long"
 msgstr "argumento 'file' es muy largo"
@@ -3895,7 +3918,7 @@ msgstr "La lista ... no contiene elementos %d"
 msgid "'..%d' used in an incorrect context, no '...' list to look in"
 msgstr "..%d usado en un contexto incorreto, ningún ... para examinar"
 
-#: src/main/envir.cpp:600 src/main/objects.cpp:221
+#: src/main/envir.cpp:600 src/main/objects.cpp:222
 #, fuzzy, c-format
 msgid "could not find function '%s'"
 msgstr "no se pudo encontrar la función \"%s\""
@@ -3934,9 +3957,7 @@ msgstr "no se pueden quitar variables del ambiente vacio"
 msgid "cannot remove bindings from a locked environment"
 msgstr "no se pueden eliminar vinculaciones de un ambiente bloqueado"
 
-#: src/main/envir.cpp:891 src/main/saveload.cpp:1992
-#: src/main/saveload.cpp:2302 src/main/serialize.cpp:2720
-#: src/main/Symbol.cpp:114
+#: src/main/envir.cpp:891 src/main/Symbol.cpp:114
 #, c-format
 msgid "object '%s' not found"
 msgstr "objeto '%s' no encontrado"
@@ -4057,7 +4078,7 @@ msgstr "la longitud de los nombres de importación y exportación debe coincidir"
 msgid "exported symbol '%s' has no value"
 msgstr "símbolo exportado '%s' no tiene valor"
 
-#: src/main/Environment.cpp:256 src/main/serialize.cpp:1007
+#: src/main/Environment.cpp:256 src/main/serialize.cpp:1008
 #, c-format
 msgid "'%s' may not be available when loading"
 msgstr "'%s' puede no estar disponible en el proceso de carga"
@@ -4192,7 +4213,7 @@ msgstr "número inválido de argumentos"
 msgid "invalid argument type"
 msgstr "argumento de tipo inválido"
 
-#: src/main/errors.cpp:1162 src/main/logic.cpp:312 src/main/logic.cpp:314
+#: src/main/errors.cpp:1162 src/main/logic.cpp:310 src/main/logic.cpp:312
 msgid "time-series/vector length mismatch"
 msgstr "longitud de la serie-temporal/vector incompatible"
 
@@ -4392,7 +4413,9 @@ msgstr "nombre de archivo inválido"
 msgid "'%s' argument must be non-empty character string"
 msgstr "'title' debe ser un string de caracteres"
 
-#: src/main/eval.cpp:2105 src/modules/lapack/Lapack.c:1243
+#: src/main/eval.cpp:2105 src/main/saveload.cpp:1961
+#: src/main/saveload.cpp:2240 src/main/serialize.cpp:2144
+#: src/modules/lapack/Lapack.c:1243
 #, fuzzy, c-format
 msgid "'%s' argument must be logical"
 msgstr "'ascii' debe ser un valor lógico"
@@ -4465,7 +4488,7 @@ msgstr "prompt inválido"
 
 #: src/main/gevents.cpp:158
 #, fuzzy
-msgid "recursive use of 'getGraphicsEvent' not supported"
+msgid "recursive use of 'getGraphicsEvent()' function is not supported"
 msgstr "el modo '%s' no es soportado en call_R"
 
 #: src/main/gevents.cpp:169
@@ -4656,34 +4679,34 @@ msgstr "buffer de entrada desbordado en la linea %d"
 msgid "relative range of values =%4.0f * EPS, is small (axis %d)"
 msgstr "amplitud relativa de valores =%4.0f * EPS, es pequeño (eixo %d)"
 
-#: src/main/grep.cpp:103
+#: src/main/grep.cpp:99
 #, fuzzy, c-format
 msgid "invalid regular expression '%s', reason '%s'"
 msgstr "expresión regular '%s' inválida"
 
-#: src/main/grep.cpp:105
+#: src/main/grep.cpp:101
 #, fuzzy, c-format
 msgid "invalid regular expression, reason '%s'"
 msgstr "expresión regular '%s' inválida"
 
-#: src/main/grep.cpp:231 src/main/grep.cpp:321 src/main/grep.cpp:432
-#: src/main/grep.cpp:905 src/main/grep.cpp:2504
+#: src/main/grep.cpp:227 src/main/grep.cpp:317 src/main/grep.cpp:428
+#: src/main/grep.cpp:901 src/main/grep.cpp:1660 src/main/grep.cpp:2500
 #, fuzzy, c-format
 msgid "input string %d is invalid UTF-8"
 msgstr "string de entrada %d es inválida en este locale"
 
-#: src/main/grep.cpp:298 src/main/grep.cpp:397
+#: src/main/grep.cpp:294 src/main/grep.cpp:393
 #, fuzzy, c-format
 msgid "'split' string %d is invalid UTF-8"
 msgstr "string de entrada %d es inválida en este locale"
 
-#: src/main/grep.cpp:302 src/main/grep.cpp:401 src/main/grep.cpp:577
+#: src/main/grep.cpp:298 src/main/grep.cpp:397 src/main/grep.cpp:573
 #, fuzzy, c-format
 msgid "'split' string %d is invalid in this locale"
 msgstr "string de entrada %d es inválida en este locale"
 
-#: src/main/grep.cpp:410 src/main/grep.cpp:872 src/main/grep.cpp:1624
-#: src/main/grep.cpp:2421
+#: src/main/grep.cpp:406 src/main/grep.cpp:868 src/main/grep.cpp:1620
+#: src/main/grep.cpp:2417
 #, c-format
 msgid ""
 "PCRE pattern compilation error\n"
@@ -4694,13 +4717,13 @@ msgstr ""
 "\t'%s'\n"
 "\ta '%s'\n"
 
-#: src/main/grep.cpp:412
+#: src/main/grep.cpp:408
 #, c-format
 msgid "invalid split pattern '%s'"
 msgstr "patrón '%s' de separación inválido"
 
-#: src/main/grep.cpp:416 src/main/grep.cpp:878 src/main/grep.cpp:1631
-#: src/main/grep.cpp:2428
+#: src/main/grep.cpp:412 src/main/grep.cpp:874 src/main/grep.cpp:1627
+#: src/main/grep.cpp:2424
 #, c-format
 msgid ""
 "PCRE pattern study error\n"
@@ -4709,54 +4732,59 @@ msgstr ""
 "error en patron de estudio PCRE \n"
 "\t'%s'\n"
 
-#: src/main/grep.cpp:854 src/main/grep.cpp:2403
+#: src/main/grep.cpp:850 src/main/grep.cpp:2399
 #, fuzzy
 msgid "regular expression is invalid UTF-8"
 msgstr "la expresión regular es inválida es este locale"
 
-#: src/main/grep.cpp:874 src/main/grep.cpp:1626 src/main/grep.cpp:2423
+#: src/main/grep.cpp:870 src/main/grep.cpp:1622 src/main/grep.cpp:2419
 #, c-format
 msgid "invalid regular expression '%s'"
 msgstr "expresión regular '%s' inválida"
 
-#: src/main/grep.cpp:1286
+#: src/main/grep.cpp:1282
 msgid "pattern matches an empty string infinitely, returning first match only"
 msgstr ""
 "patrón coincide con una cadena vacía infinitamente, devolviendo primer "
 "patrón único "
 
-#: src/main/grep.cpp:1598
+#: src/main/grep.cpp:1594
 #, fuzzy
 msgid "'pattern' is invalid UTF-8"
 msgstr "'pattern' es inválido en este locale"
 
-#: src/main/grep.cpp:1600
+#: src/main/grep.cpp:1596
 #, fuzzy
 msgid "'replacement' is invalid UTF-8"
 msgstr "'replacement' es inválido en este locale"
 
-#: src/main/grep.cpp:1604
+#: src/main/grep.cpp:1600
 msgid "'pattern' is invalid in this locale"
 msgstr "'pattern' es inválido en este locale"
 
-#: src/main/grep.cpp:1607
+#: src/main/grep.cpp:1603
 msgid "'replacement' is invalid in this locale"
 msgstr "'replacement' es inválido en este locale"
 
-#: src/main/grep.cpp:1612
+#: src/main/grep.cpp:1608
 msgid "zero-length pattern"
 msgstr "patrón de longitud 0"
 
-#: src/main/grep.cpp:1756 src/main/grep.cpp:1772 src/main/grep.cpp:1820
-#: src/main/grep.cpp:1836 src/main/grep.cpp:1883 src/main/grep.cpp:1899
+#: src/main/grep.cpp:1752 src/main/grep.cpp:1768 src/main/grep.cpp:1816
+#: src/main/grep.cpp:1832 src/main/grep.cpp:1879 src/main/grep.cpp:1895
 #, fuzzy
 msgid "result string is too long"
 msgstr "string de entrada demasiado larga"
 
-#: src/main/grep.cpp:2438
+#: src/main/grep.cpp:2434
 #, fuzzy, c-format
 msgid "'pcre_fullinfo' returned '%d' "
 msgstr "pcre_fullinfo retornado '%d' "
+
+#: src/main/grep.cpp:2468
+#, fuzzy
+msgid "vector is too long"
+msgstr "tamaño del vector especificado es muy grande"
 
 #: src/main/gzio.h:293 src/main/gzio.h:353 src/main/gzio.h:375
 #, fuzzy
@@ -4768,9 +4796,21 @@ msgstr "función inválida en asignación compleja"
 msgid "error reading the file"
 msgstr "error CRC en el archivo zip"
 
-#: src/main/identical.cpp:129
+#: src/main/identical.cpp:65
+#, fuzzy, c-format
+msgid "%d argument passed to '%s' function which requires %d"
+msgid_plural "%d arguments passed to '%s' function which requires %d"
+msgstr[0] "%d argumentos dados a '%s', que requeiren 1 o 2"
+msgstr[1] "%d argumentos dados a '%s', que requeiren 1 o 2"
+
+#: src/main/identical.cpp:135
 msgid "ignoring non-pairlist attributes"
 msgstr ""
+
+#: src/main/identical.cpp:295
+#, fuzzy, c-format
+msgid "Unknown Type: %s (%x)\n"
+msgstr "símbolo desconocido"
 
 #: src/main/internet.cpp:91
 msgid "internet routines cannot be accessed in module"
@@ -4814,7 +4854,7 @@ msgstr "rutinas socket no pueden ser cargadas"
 msgid "attempt to set index %lu/%lu in SET_VECTOR_ELT"
 msgstr ""
 
-#: src/main/logic.cpp:100
+#: src/main/logic.cpp:101
 msgid "operations are possible only for numeric, logical or complex types"
 msgstr ""
 "solo son posibles operaciones para variables de tipo numérico, compleja o "
@@ -4822,34 +4862,33 @@ msgstr ""
 
 #: src/main/logic.cpp:153
 #, fuzzy
-msgid "internal error in do_logic"
-msgstr "error interno en do_random2"
+msgid "internal error in 'do_logic()' function"
+msgstr "error interno en 'do_sys'"
 
 #: src/main/logic.cpp:167
 #, c-format
 msgid "'%s' operator requires 2 arguments"
 msgstr "operador '%s' requiere 2 argumentos"
 
-#: src/main/logic.cpp:174
-#, c-format
-msgid "invalid 'x' type in 'x %s y'"
+#: src/main/logic.cpp:173 src/main/logic.cpp:179
+#, fuzzy, c-format
+msgid "invalid '%s' type in 'x %s y'"
 msgstr "tipo de 'x' inválido en 'x %s y'"
 
-#: src/main/logic.cpp:181
-#, c-format
-msgid "invalid 'y' type in 'x %s y'"
-msgstr "tipo de 'y' inválido en 'x %s y'"
+#: src/main/logic.cpp:231
+msgid "bad operator value for 'do_logic3()' function"
+msgstr ""
 
-#: src/main/logic.cpp:279
+#: src/main/logic.cpp:277
 #, c-format
 msgid "coercing argument of type '%s' to logical"
 msgstr "coarcionando argumento de tipo '%s' a logical"
 
-#: src/main/logic.cpp:307
+#: src/main/logic.cpp:305
 msgid "non-conformable arrays"
 msgstr "arreglos de dimensón no compatibles"
 
-#: src/main/logic.cpp:310
+#: src/main/logic.cpp:308
 msgid "non-conformable time-series"
 msgstr "series de tiempo no compatibles"
 
@@ -5045,6 +5084,10 @@ msgid_plural "Warning messages during startup:"
 msgstr[0] "Durante la inicialización - "
 msgstr[1] "Durante la inicialización - "
 
+#: src/main/main.cpp:1280
+msgid "Called from: "
+msgstr ""
+
 #: src/main/main.cpp:1363
 msgid "cannot quit from browser"
 msgstr "no se puede salir del navegador"
@@ -5057,24 +5100,25 @@ msgstr ""
 
 #: src/main/main.cpp:1372
 #, fuzzy
-msgid "save=\"ask\" in non-interactive use: command-line default will be used"
+msgid ""
+"save=\"ask\" is in non-interactive use: command-line default will be used"
 msgstr ""
 "guardar=\"ask\" en uso no-interactivo: se usará por defecto la línea de "
 "comando"
 
 #: src/main/main.cpp:1380
 #, fuzzy
-msgid "unrecognized value of 'save'"
+msgid "unrecognized value of 'save' argument"
 msgstr "no se reconoce el valor 'save'"
 
 #: src/main/main.cpp:1383
 #, fuzzy
-msgid "invalid 'status', 0 assumed"
+msgid "invalid 'status' argument, 0 assumed"
 msgstr "'status' inválido, se supone el valor 0"
 
 #: src/main/main.cpp:1388
 #, fuzzy
-msgid "invalid 'runLast', FALSE assumed"
+msgid "invalid 'runLast' argument, FALSE assumed"
 msgstr "'runLast' no es válida, se asume el valor FALSE"
 
 #: src/main/main.cpp:1419
@@ -5085,16 +5129,16 @@ msgstr ""
 
 #: src/main/main.cpp:1497
 #, fuzzy
-msgid "negative index passed to R_removeTaskCallbackByIndex"
+msgid "negative index passed to 'R_removeTaskCallbackByIndex()' function"
 msgstr "índice negativo pasado a R_removeTaskCallbackByIndex"
 
 #: src/main/main.cpp:1607
 #, fuzzy, c-format
-msgid "warning messages from top-level task callback '%s'\n"
+msgid "warning messages from top-level task callback '%s'"
 msgstr ""
 "mensajes de advertencia desde la llamada de tarea de nivel superior '%s'\n"
 
-#: src/main/main.cpp:1662
+#: src/main/main.cpp:1663
 msgid "top-level task callback did not return a logical value"
 msgstr "la llamada de tarea de nivel superior no devuelve un valor lógico"
 
@@ -5107,70 +5151,92 @@ msgstr ""
 
 #: src/main/mapply.cpp:73
 #, fuzzy
-msgid "argument 'MoreArgs' of 'mapply' is not a list"
+msgid "argument 'MoreArgs' of 'mapply()' function is not a list"
 msgstr "el argumento 'MoreArgs' de 'mapply' no es una lista"
 
 #: src/main/mapply.cpp:110
 #, fuzzy
-msgid "longer argument not a multiple of length of shorter"
+msgid "longer argument is not a multiple of length of shorter"
 msgstr "el argumento más largo no es múltiplo de la longitud del más corto"
 
-#: src/main/match.cpp:125
+#: src/main/match.cpp:126
 msgid "invalid partial string match"
 msgstr "la correspondencia de string parcial no es válida"
 
-#: src/main/match.cpp:146
+#: src/main/match.cpp:147
 #, fuzzy, c-format
 msgid "unused argument(s) %s"
 msgstr "el argumento(s) no fue utilizado(s) %s"
 
-#: src/main/match.cpp:254 src/main/match.cpp:292
-#, c-format
-msgid "formal argument \"%s\" matched by multiple actual arguments"
-msgstr ""
-"el argumento formal \"%s\" concuerda con múltiples argumentos especificados"
-
-#: src/main/match.cpp:405
+#: src/main/match.cpp:406
 #, fuzzy, c-format
 msgid "unused argument %s"
 msgid_plural "unused arguments %s"
 msgstr[0] "el argumento(s) no fue utilizado(s) %s"
 msgstr[1] "el argumento(s) no fue utilizado(s) %s"
 
-#: src/main/memory.cpp:104
+#: src/main/memory.cpp:88
+#, c-format
+msgid ""
+"Node occupancy: %.0f%%\n"
+"Vector occupancy: %.0f%%\n"
+msgstr ""
+
+#: src/main/memory.cpp:91
+#, c-format
+msgid "Total allocation: %lu\n"
+msgstr ""
+
+#: src/main/memory.cpp:92
+#, c-format
+msgid ""
+"Ncells %lu\n"
+"Vcells %lu\n"
+msgstr ""
+
+#: src/main/memory.cpp:105
 msgid "first argument must be environment or external pointer"
 msgstr "el primer argumento debe ser un indicador de entorno o externo"
 
-#: src/main/memory.cpp:106
+#: src/main/memory.cpp:107
 msgid "second argument must be a function"
 msgstr "el segundo argumento debe ser una función"
 
-#: src/main/memory.cpp:110
+#: src/main/memory.cpp:111
 msgid "third argument must be 'TRUE' or 'FALSE'"
 msgstr "el tercer argumento debe ser TRUE o FALSE"
 
-#: src/main/memory.cpp:308
+#: src/main/memory.cpp:309
 #, fuzzy
 msgid "vector is too large"
 msgstr "tamaño del vector especificado es muy grande"
 
-#: src/main/memory.cpp:313
+#: src/main/memory.cpp:314
 msgid "negative length vectors are not allowed"
 msgstr "no se permiten vectores de longitud negativa"
 
-#: src/main/memory.cpp:363
+#: src/main/memory.cpp:324
+msgid "use of allocVector(CHARSXP ...) is defunct\n"
+msgstr ""
+
+#: src/main/memory.cpp:352 src/main/memory.cpp:360
+#, fuzzy
+msgid "invalid length for pairlist"
+msgstr "longitud 0 del argumento inválida"
+
+#: src/main/memory.cpp:364
 #, c-format
 msgid "invalid type/length (%s/%d) in vector allocation"
 msgstr "tipo/longitud no válido (%s/%d) en la asignación del vector"
 
 #: src/main/memory.cpp:451
 #, fuzzy, c-format
-msgid "'Calloc' could not allocate memory (%.0f of %u bytes)"
+msgid "'Calloc()' function could not allocate memory (%.0f of %u bytes)"
 msgstr "Calloc no puede asignar memoria (%d de %d)"
 
 #: src/main/memory.cpp:462
 #, fuzzy, c-format
-msgid "'Realloc' could not re-allocate memory (%.0f bytes)"
+msgid "'Realloc()' function could not re-allocate memory (%.0f bytes)"
 msgstr "Realloc no puede re-asignar memoria (tamaño %d)"
 
 #: src/main/memory.cpp:515
@@ -5180,173 +5246,178 @@ msgstr "'R profiling' no disponible en este sistema"
 
 #: src/main/memory.cpp:565
 #, fuzzy, c-format
-msgid "Rprofmem: cannot open output file '%s'"
+msgid "'Rprofmem()': cannot open output file '%s'"
 msgstr "Rprofmem: no puede abrir el archivo de perfil '%s'"
+
+#: src/main/memory.cpp:600
+msgid "'R_AllocStringBuffer( (size_t)-1 )' function is no longer allowed"
+msgstr ""
+
+#: src/main/memory.cpp:617
+#, fuzzy, c-format
+msgid "could not allocate memory (%u Mb) in 'R_AllocStringBuffer()' function"
+msgstr "no se puede asignar memoria para 'read.dcf'"
 
 #: src/main/memory.cpp:669
 #, c-format
 msgid "long vectors not supported yet: %s:%d"
 msgstr ""
 
-#: src/main/names.cpp:915
+#: src/main/names.cpp:916
 msgid "string argument required"
 msgstr "se requiere el argumento del string"
 
-#: src/main/names.cpp:918
+#: src/main/names.cpp:919
 msgid "no such primitive function"
 msgstr "no existe esta función primitiva"
 
-#: src/main/objects.cpp:68
+#: src/main/objects.cpp:69
 msgid "generic 'function' is not a function"
 msgstr "la 'function' genérica no es una función"
 
-#: src/main/objects.cpp:152
+#: src/main/objects.cpp:153
 msgid "bad generic call environment"
 msgstr "el entorno de llamada genérico está mal"
 
-#: src/main/objects.cpp:156
+#: src/main/objects.cpp:157
 msgid "bad generic definition environment"
 msgstr "el entorno de definición genérico está mal"
 
-#: src/main/objects.cpp:183
+#: src/main/objects.cpp:184
 #, fuzzy
 msgid ""
-"no .S3MethodsClass table, cannot use S4 objects with S3 methods (methods "
+"no '.S3MethodsClass' table, cannot use S4 objects with S3 methods ('methods' "
 "package not attached?)"
 msgstr ""
 "No hay table de .S3MethodsClass, no puede usar objetos S4 con los métodos de "
 "S3 (paquete de métodos ne esta adjuntado?)"
 
-#: src/main/objects.cpp:205 src/main/objects.cpp:334
+#: src/main/objects.cpp:206
 msgid "'UseMethod' used in an inappropriate fashion"
 msgstr "'UseMethod' se usó de manera no apropiada"
 
-#: src/main/objects.cpp:232
+#: src/main/objects.cpp:233
 #, fuzzy
 msgid "Invalid generic function in 'usemethod'"
 msgstr "la función genérica en 'usemethod' no es válida"
 
-#: src/main/objects.cpp:284
+#: src/main/objects.cpp:285
 #, fuzzy
 msgid "there must be a 'generic' argument"
 msgstr "debe haber un primer argumento"
 
-#: src/main/objects.cpp:289
-#, fuzzy
-msgid "'generic' argument must be a character string"
-msgstr "el segundo argumento debe ser un string de caracteres"
-
 #: src/main/objects.cpp:291
 msgid "first argument must be a generic name"
 msgstr "el primer argumento debe ser un nombre genérico"
+
+#: src/main/objects.cpp:334
+#, fuzzy
+msgid "'UseMethod()' used in an inappropriate fashion"
+msgstr "'UseMethod' se usó de manera no apropiada"
 
 #: src/main/objects.cpp:383
 #, fuzzy, c-format
 msgid "no applicable method for '%s' applied to an object of class '%s'"
 msgstr "no hay método aplicable para \"%s\""
 
-#: src/main/objects.cpp:475
+#: src/main/objects.cpp:474
 #, fuzzy
-msgid "'NextMethod' called from outside a function"
+msgid "'NextMethod()' called from outside a function"
 msgstr "'NextMethod' fue llamado desde afuera de una función"
 
-#: src/main/objects.cpp:496
+#: src/main/objects.cpp:495
 #, fuzzy
-msgid "'NextMethod' called from an anonymous function"
+msgid "'NextMethod()' called from an anonymous function"
 msgstr "'NextMethod' fue llamado desde una función anónima"
 
-#: src/main/objects.cpp:505
+#: src/main/objects.cpp:504
 msgid "no calling generic was found: was a method called directly?"
 msgstr ""
 "no se encontró ninguna llamada genérica: se llamó un método directamente?"
 
-#: src/main/objects.cpp:508
+#: src/main/objects.cpp:506
 #, c-format
 msgid "'function' is not a function, but of type %d"
 msgstr "'function' no es una función, sino que es de tipo %d"
 
-#: src/main/objects.cpp:613
+#: src/main/objects.cpp:610
 msgid "object not specified"
 msgstr "No se especificó el objeto"
 
-#: src/main/objects.cpp:631 src/main/objects.cpp:638
+#: src/main/objects.cpp:628 src/main/objects.cpp:635
 msgid "generic function not specified"
 msgstr "no se especificó la función genérica"
 
-#: src/main/objects.cpp:635
+#: src/main/objects.cpp:632
 #, fuzzy
-msgid "invalid generic argument to NextMethod"
+msgid "invalid generic argument to 'NextMethod()'"
 msgstr "el argumento genérico no es válido para NextMethod"
 
-#: src/main/objects.cpp:651
+#: src/main/objects.cpp:648
 #, fuzzy
-msgid "invalid .Group found in NextMethod"
+msgid "invalid .Group found in 'NextMethod()'"
 msgstr "se encontró un argumento 'group' inválido en NextMethod"
 
-#: src/main/objects.cpp:667
+#: src/main/objects.cpp:664
 msgid "wrong value for .Method"
 msgstr "valor equivocado para .Method"
 
-#: src/main/objects.cpp:677
+#: src/main/objects.cpp:674
 msgid "Incompatible methods ignored"
 msgstr "se ignoran los métodos incompatibles"
 
-#: src/main/objects.cpp:737 src/main/objects.cpp:740 src/main/objects.cpp:749
+#: src/main/objects.cpp:734 src/main/objects.cpp:737 src/main/objects.cpp:746
 msgid "no method to invoke"
 msgstr "no existe ningún método para invocar"
 
-#: src/main/objects.cpp:819
+#: src/main/objects.cpp:816
 msgid "cannot unclass an environment"
 msgstr "no se puede desclasificar un entorno"
 
-#: src/main/objects.cpp:822
+#: src/main/objects.cpp:819
 msgid "cannot unclass an external pointer"
 msgstr "no se puede desclasificar un puntero externo"
 
-#: src/main/objects.cpp:859
-msgid "'what' must be a character vector"
-msgstr "'what' debe ser un vector de caracteres"
+#: src/main/objects.cpp:860
+#, fuzzy, c-format
+msgid "'%s' argument must be a logical vector of length 1"
+msgstr "'hostname' debe ser un vector de caracteres de longitud 1"
 
-#: src/main/objects.cpp:863
-#, fuzzy
-msgid "'which' must be a length 1 logical vector"
-msgstr "'which' debe ser un vector lógico de longitud 1"
-
-#: src/main/objects.cpp:869
+#: src/main/objects.cpp:866
 msgid "use 'is()' instead of 'inherits()' on S4 objects"
 msgstr "use 'is()' en lugar de 'inherits()' en objetos S4"
 
-#: src/main/objects.cpp:995
+#: src/main/objects.cpp:992
 msgid "could not find correct environment; please report!"
 msgstr "no se puede encontrar el entorno correcto; por favor reportar!"
 
-#: src/main/objects.cpp:1035
-#, fuzzy
-msgid "'onOff' must be TRUE or FALSE"
-msgstr "'all.x' debe ser TRUE o FALSE"
+#: src/main/objects.cpp:1039
+msgid "R_isMethodsDispatchOn(TRUE) called -- may not work correctly"
+msgstr ""
 
-#: src/main/objects.cpp:1101
+#: src/main/objects.cpp:1098
 #, c-format
 msgid "unable to find a non-generic version of function \"%s\""
 msgstr "no fue posible encontrar una versión no genérica de la función \"%s\""
 
-#: src/main/objects.cpp:1128
+#: src/main/objects.cpp:1125
 #, fuzzy
 msgid ""
-"'standardGeneric' called without methods dispatch enabled (will be ignored)"
+"'standardGeneric' called without 'methods' dispatch enabled (will be ignored)"
 msgstr ""
 "standardGeneric fue llamada sin método de despacho habilitado (será ignorada)"
 
-#: src/main/objects.cpp:1135
+#: src/main/objects.cpp:1132
 #, fuzzy
-msgid "argument to 'standardGeneric' must be a non-empty character string"
+msgid ""
+"argument passed to 'standardGeneric()' must be a non-empty character string"
 msgstr ""
 "el argumento para standardGeneric debe ser un string de caracteres no vacío"
 
 # ....desde el cuerpo de esa función genérica
 # o bien
 # ....desde el cuerpo de esa \"funtion\" genérica
-#: src/main/objects.cpp:1143
+#: src/main/objects.cpp:1140
 #, c-format
 msgid ""
 "call to standardGeneric(\"%s\") apparently not from the body of that generic "
@@ -5355,11 +5426,12 @@ msgstr ""
 "la llamada de standardGeneric(\"%s\") parece no haber sido originada desde "
 "el cuerpo de una \"function\" genérica"
 
-#: src/main/objects.cpp:1167
-msgid "argument 'code' must be a character string"
-msgstr "el argumento de 'code' debe ser un string de caracteres"
+#: src/main/objects.cpp:1185
+#, fuzzy, c-format
+msgid "'internal' slot does not name an internal function: %s"
+msgstr "no hay ninguna función interna \"%s\""
 
-#: src/main/objects.cpp:1244
+#: src/main/objects.cpp:1241
 #, c-format
 msgid ""
 "invalid primitive methods code (\"%s\"): should be \"clear\", \"reset\", "
@@ -5368,11 +5440,11 @@ msgstr ""
 "el código de los métodos primitivos no es válido (\"%s\"): debe ser \"clear"
 "\", \"reset\", \"set\", o \"suppress\""
 
-#: src/main/objects.cpp:1252
+#: src/main/objects.cpp:1249
 msgid "invalid object: must be a primitive function"
 msgstr "objeto inválido: debe ser una función primitiva"
 
-#: src/main/objects.cpp:1299
+#: src/main/objects.cpp:1296
 #, c-format
 msgid ""
 "the formal definition of a primitive generic must be a function object (got "
@@ -5381,44 +5453,49 @@ msgstr ""
 "la definición formal de una primitiva genérica debe ser un objeto del "
 "tipo=(got type '%s')"
 
-#: src/main/objects.cpp:1329
+#: src/main/objects.cpp:1326
 #, fuzzy, c-format
-msgid "object returned as generic function \"%s\" does not appear to be one"
+msgid "object returned as generic function '%s' does not appear to be one"
 msgstr "no parece ser un objecto retornado como funcion generica \"%s\""
 
-#: src/main/objects.cpp:1433
+#: src/main/objects.cpp:1430
 msgid "invalid primitive operation given for dispatch"
 msgstr "operación primitiva inválida para enviar"
 
-#: src/main/objects.cpp:1467
+#: src/main/objects.cpp:1464
 #, fuzzy, c-format
 msgid ""
-"primitive function \"%s\" has been set for methods but no generic function "
+"primitive function '%s' has been set for methods but no generic function "
 "supplied"
 msgstr ""
 "la función primitiva \"%s\" se ha fijado para los métodos pero no fue "
 "provista la función genérica"
 
-#: src/main/objects.cpp:1487
+#: src/main/objects.cpp:1483
 msgid "C level MAKE_CLASS macro called with NULL string pointer"
 msgstr "macro MAKE_CLASS en C llamado con el puntero de string NULL"
 
-#: src/main/objects.cpp:1503
+#: src/main/objects.cpp:1499
 #, fuzzy
-msgid "R_getClassDef(.) called with NULL string pointer"
+msgid "'R_getClassDef(.)' called with NULL string pointer"
 msgstr "macro MAKE_CLASS en C llamado con el puntero de string NULL"
 
-#: src/main/objects.cpp:1525
+#: src/main/objects.cpp:1521
 msgid "C level NEW macro called with null class definition pointer"
 msgstr ""
 "macro NEW en C llamado con el puntero nulo de la definición de la clase"
 
-#: src/main/objects.cpp:1529
+#: src/main/objects.cpp:1525
 #, fuzzy, c-format
 msgid "trying to generate an object from a virtual class (\"%s\")"
 msgstr "intención de generar un objeto en C de una clase virtual (\"%s\")"
 
-#: src/main/objects.cpp:1606
+#: src/main/objects.cpp:1570
+#, fuzzy
+msgid "'R_get_primname()' called on a non-primitive"
+msgstr "'R_get_primname' invocado en un ambiente no-primitivo"
+
+#: src/main/objects.cpp:1602
 #, fuzzy, c-format
 msgid "object of class \"%s\" does not correspond to a valid S3 object"
 msgstr "Objeto de la clase \"%s\" no corresponde a un objeto válido S3"
@@ -5443,11 +5520,6 @@ msgstr ""
 #: src/main/options.cpp:174
 msgid "invalid value for \"device.ask.default\", using FALSE"
 msgstr "valor no valido para \"device.ask.default\", usando FALSE"
-
-#: src/main/options.cpp:346 src/main/unique.cpp:1633
-#, fuzzy, c-format
-msgid "'%s' must be a character string"
-msgstr "'sep' debe ser una cadena (string) de caracteres"
 
 #: src/main/options.cpp:423
 #, fuzzy
@@ -5477,287 +5549,291 @@ msgstr "parámetro 'trans' no válido"
 msgid "invalid value for '%s'"
 msgstr "valor inválido para '%s'"
 
-#: src/main/options.cpp:573
-#, fuzzy
-msgid "'OutDec' must be a string of one character"
+#: src/main/options.cpp:573 src/main/paste.cpp:453
+#, fuzzy, c-format
+msgid "'%s' argument must be a string of one character"
 msgstr "'msg1' debe ser un string de caracteres"
 
 #: src/main/options.cpp:637 src/main/options.cpp:666
 msgid "\"par.ask.default\" has been replaced by \"device.ask.default\""
 msgstr "\"par.ask.default\" ha sido reemplazado por \"device.ask.default\""
 
-#: src/main/paste.cpp:90 src/main/paste.cpp:308
+#: src/main/paste.cpp:88 src/main/paste.cpp:306
 msgid "invalid separator"
 msgstr "separador inválido"
 
-#: src/main/paste.cpp:128
+#: src/main/paste.cpp:126 src/main/paste.cpp:327
 #, fuzzy
-msgid "non-string argument to internal 'paste'"
+msgid "non-string argument passed to internal 'paste()' function"
 msgstr "el argumento para pegado interno no es un string"
 
-#: src/main/paste.cpp:184 src/main/paste.cpp:254
+#: src/main/paste.cpp:182 src/main/paste.cpp:252
 msgid "result would exceed 2^31-1 bytes"
 msgstr ""
 
-#: src/main/paste.cpp:329
-msgid "non-string argument to Internal paste"
-msgstr "el argumento para pegado interno no es un string"
-
-#: src/main/paste.cpp:394
+#: src/main/paste.cpp:392
 msgid "first argument must be atomic"
 msgstr "primer argumento debe ser atómico"
 
-#: src/main/paste.cpp:455
+#: src/main/paste.cpp:585
 #, fuzzy
-msgid "'decimal.mark' must be a string of one character"
-msgstr "'msg1' debe ser un string de caracteres"
-
-#: src/main/paste.cpp:587
-#, fuzzy
-msgid "Impossible mode ( x )"
+msgid "Impossible mode(x)"
 msgstr "modo imposible (x)"
 
-#: src/main/paste.cpp:670
+#: src/main/paste.cpp:668
 msgid "atomic vector arguments only"
 msgstr "sólo argumentos de vectores atómicos"
 
-#: src/main/platform.cpp:318 src/main/platform.cpp:336
-msgid "invalid filename specification"
-msgstr "especificación del nombre de archivo inválido"
-
-#: src/main/platform.cpp:389 src/main/platform.cpp:432
+#: src/main/platform.cpp:390 src/main/platform.cpp:433
 msgid "write error during file append"
 msgstr "error de escritura mientras se añade el archivo"
 
-#: src/main/platform.cpp:407
+#: src/main/platform.cpp:408
 msgid "nothing to append to"
 msgstr "nada para añadir a"
 
-#: src/main/platform.cpp:460 src/main/platform.cpp:800
-#: src/main/platform.cpp:981
+#: src/main/platform.cpp:461
 msgid "invalid filename argument"
 msgstr "argumento del nombre de archivo inválido"
 
-#: src/main/platform.cpp:472
+#: src/main/platform.cpp:473
 #, fuzzy, c-format
 msgid "cannot create file '%s', reason '%s'"
 msgstr "no fue posible crear fifo '%s', motivo '%s'"
 
-#: src/main/platform.cpp:486 src/main/platform.cpp:555
-#: src/main/platform.cpp:636
+#: src/main/platform.cpp:487 src/main/platform.cpp:556
+#: src/main/platform.cpp:637
 msgid "invalid first filename"
 msgstr "primer nombre de archivo inválido"
 
-#: src/main/platform.cpp:498
+#: src/main/platform.cpp:499
 #, c-format
 msgid "cannot remove file '%s', reason '%s'"
 msgstr "no fue posible abrir el archivo '%s', motivo '%s'"
 
-#: src/main/platform.cpp:557 src/main/platform.cpp:638
+#: src/main/platform.cpp:558 src/main/platform.cpp:639
 msgid "invalid second filename"
 msgstr "segundo nombre de archivo inválido"
 
-#: src/main/platform.cpp:559 src/main/platform.cpp:640
+#: src/main/platform.cpp:560 src/main/platform.cpp:641
 msgid "nothing to link"
 msgstr "nada para vincular"
 
-#: src/main/platform.cpp:569
+#: src/main/platform.cpp:570
 #, fuzzy
 msgid "symbolic links are not supported on this version of Windows"
 msgstr "esta plataforma no soporta symlinks"
 
-#: src/main/platform.cpp:591
+#: src/main/platform.cpp:592
 #, fuzzy, c-format
 msgid "cannot symlink '%ls' to '%ls', reason '%s'"
 msgstr "no fue posible abrir el archivo '%s', motivo '%s'"
 
-#: src/main/platform.cpp:611
+#: src/main/platform.cpp:612
 #, fuzzy, c-format
 msgid "cannot symlink '%s' to '%s', reason '%s'"
 msgstr "no fue posible abrir el archivo '%s', motivo '%s'"
 
-#: src/main/platform.cpp:619
+#: src/main/platform.cpp:620
 #, fuzzy
 msgid "symbolic links are not supported on this platform"
 msgstr "esta plataforma no soporta symlinks"
 
-#: src/main/platform.cpp:658
+#: src/main/platform.cpp:659
 #, fuzzy, c-format
 msgid "cannot link '%ls' to '%ls', reason '%s'"
 msgstr "no fue posible abrir el archivo '%s', motivo '%s'"
 
-#: src/main/platform.cpp:678
+#: src/main/platform.cpp:679
 #, fuzzy, c-format
 msgid "cannot link '%s' to '%s', reason '%s'"
 msgstr "no fue posible abrir el archivo '%s', motivo '%s'"
 
-#: src/main/platform.cpp:687
+#: src/main/platform.cpp:688
 #, fuzzy
 msgid "(hard) links are not supported on this platform"
 msgstr "esta plataforma no soporta symlinks"
 
-#: src/main/platform.cpp:717
+#: src/main/platform.cpp:718
 #, fuzzy
-msgid "'from' and 'to' are of different lengths"
+msgid "'from' and 'to' arguments are of different lengths"
 msgstr "'from' y 'to' son de longitudes diferentes"
 
-#: src/main/platform.cpp:728 src/main/platform.cpp:738
-#, fuzzy
-msgid "expanded 'from' name too long"
+#: src/main/platform.cpp:729 src/main/platform.cpp:733
+#: src/main/platform.cpp:739 src/main/platform.cpp:743
+#, fuzzy, c-format
+msgid "expanded '%s' name is too long"
 msgstr "nombre ampliado de fuente demasiado largo"
 
-#: src/main/platform.cpp:732 src/main/platform.cpp:742
-#, fuzzy
-msgid "expanded 'to' name too long"
-msgstr "nombre ampliado de fuente demasiado largo"
-
-#: src/main/platform.cpp:746
+#: src/main/platform.cpp:747
 #, fuzzy, c-format
 msgid "cannot rename file '%s' to '%s', reason '%s'"
 msgstr "no fue posible crear fifo '%s', motivo '%s'"
 
-#: src/main/platform.cpp:1169
+#: src/main/platform.cpp:1170
 msgid "invalid 'pattern' regular expression"
 msgstr "expresión regular inválida en 'pattern'"
 
-#: src/main/platform.cpp:1286
+#: src/main/platform.cpp:1287
 msgid "unable to determine R home location"
 msgstr "no fue posible determinar el directorio inicial de R"
 
-#: src/main/platform.cpp:1335
-msgid "file choice cancelled"
-msgstr "selección de archivo cancelada"
-
-#: src/main/platform.cpp:1337
-msgid "file name too long"
+#: src/main/platform.cpp:1338 src/unix/Rscript.c:229
+#, fuzzy
+msgid "file name is too long"
 msgstr "nombre de archivo muy largo"
 
-#: src/main/platform.cpp:1584 src/main/platform.cpp:1631
+#: src/main/platform.cpp:1399
+#, fuzzy, c-format
+msgid "cannot get info on '%ls', reason '%s'"
+msgstr "no fue posible crear fifo '%s', motivo '%s'"
+
+#: src/main/platform.cpp:1414 src/main/platform.cpp:2849
+#, fuzzy, c-format
+msgid "cannot open reparse point '%ls', reason '%s'"
+msgstr "no fue posible abrir el archivo '%s', motivo '%s'"
+
+#: src/main/platform.cpp:1426
+#, fuzzy, c-format
+msgid "cannot delete reparse point '%ls', reason '%s'"
+msgstr "no fue posible crear fifo '%s', motivo '%s'"
+
+#: src/main/platform.cpp:1585 src/main/platform.cpp:1632
 #: src/main/sysutils.cpp:1911 src/main/sysutils.cpp:1925
 msgid "internal out-of-memory condition"
 msgstr "memoria interna rebasada"
 
-#: src/main/platform.cpp:1627 src/main/sysutils.cpp:1921
+#: src/main/platform.cpp:1628 src/main/sysutils.cpp:1921
 #, c-format
 msgid "read error on '%s'"
 msgstr "error de lectura en '%s'"
 
-#: src/main/platform.cpp:1724
+#: src/main/platform.cpp:1725
 msgid "setting 'LC_NUMERIC' may cause R to function strangely"
 msgstr ""
 "especificacion de 'LC_NUMERIC' puede forzar R a funcionar de forma extraña"
 
-#: src/main/platform.cpp:1738
+#: src/main/platform.cpp:1739
 msgid "LC_MESSAGES exists on Windows but is not operational"
 msgstr "existen LC_MESSAGES en Windows pero no es operacional "
 
-#: src/main/platform.cpp:1765
+#: src/main/platform.cpp:1766
 #, fuzzy, c-format
 msgid "OS reports request to set locale to \"%s\" cannot be honored"
 msgstr "el sistema operativo informa que un pedido no puede ser cumplido"
 
-#: src/main/platform.cpp:2122
+#: src/main/platform.cpp:2123
 #, fuzzy, c-format
-msgid "'%s' already exists"
+msgid "directory '%s' already exists"
 msgstr "'%s' ya existe"
 
-#: src/main/platform.cpp:2125
+#: src/main/platform.cpp:2126
 #, fuzzy, c-format
-msgid "cannot create dir '%s', reason '%s'"
+msgid "cannot create directory '%s', reason '%s'"
 msgstr "no fue posible crear fifo '%s', motivo '%s'"
 
-#: src/main/platform.cpp:2171
+#: src/main/platform.cpp:2172
 #, fuzzy, c-format
-msgid "'%ls' already exists"
+msgid "directory '%ls' already exists"
 msgstr "'%s' ya existe"
 
-#: src/main/platform.cpp:2173 src/main/platform.cpp:2179
+#: src/main/platform.cpp:2174 src/main/platform.cpp:2180
 #, fuzzy, c-format
-msgid "cannot create dir '%ls', reason '%s'"
+msgid "cannot create directory '%ls', reason '%s'"
 msgstr "no fue posible crear fifo '%s', motivo '%s'"
 
-#: src/main/platform.cpp:2213 src/main/platform.cpp:2424
+#: src/main/platform.cpp:2214 src/main/platform.cpp:2425
 msgid "too deep nesting"
 msgstr ""
 
-#: src/main/platform.cpp:2221 src/main/platform.cpp:2234
-#: src/main/platform.cpp:2252
+#: src/main/platform.cpp:2222 src/main/platform.cpp:2235
+#: src/main/platform.cpp:2253 src/main/platform.cpp:2273
+#: src/main/platform.cpp:2441 src/main/platform.cpp:2454
+#: src/main/platform.cpp:2474 src/main/platform.cpp:2496
 #, fuzzy
-msgid "over-long path"
-msgstr "patrón de longitud 0"
+msgid "path is too long"
+msgstr "camino (path) muy largo"
 
-#: src/main/platform.cpp:2241
+#: src/main/platform.cpp:2242
 #, fuzzy, c-format
-msgid "problem creating directory %ls: %s"
+msgid "problem with creating directory %ls: %s"
 msgstr "problema al ejecutar el editor %s"
 
-#: src/main/platform.cpp:2261
+#: src/main/platform.cpp:2262
 #, fuzzy, c-format
-msgid "problem reading dir %ls: %s"
+msgid "problem with reading directory %ls: %s"
 msgstr "problema al ejecutar el editor %s"
 
-#: src/main/platform.cpp:2272 src/main/platform.cpp:2440
-#: src/main/platform.cpp:2453 src/main/platform.cpp:2473
-#: src/main/platform.cpp:2495
-#, fuzzy
-msgid "over-long path length"
-msgstr "patrón de longitud 0"
-
-#: src/main/platform.cpp:2280
+#: src/main/platform.cpp:2281
 #, fuzzy, c-format
-msgid "problem copying %ls to %ls: %s"
+msgid "problem with copying %ls to %ls: %s"
 msgstr "problema al copiar %ls  a %ls: %s"
 
-#: src/main/platform.cpp:2462
+#: src/main/platform.cpp:2463
 #, fuzzy, c-format
-msgid "problem creating directory %s: %s"
+msgid "problem with creating directory %s: %s"
 msgstr "problema al ejecutar el editor %s"
 
-#: src/main/platform.cpp:2482
+#: src/main/platform.cpp:2483
 #, fuzzy, c-format
-msgid "problem reading directory %s: %s"
+msgid "problem with reading directory %s: %s"
 msgstr "problema al ejecutar el editor %s"
 
-#: src/main/platform.cpp:2504
+#: src/main/platform.cpp:2505
 #, fuzzy, c-format
-msgid "problem copying %s to %s: %s"
+msgid "problem with copying %s to %s: %s"
 msgstr "problema al copiar %s a %s: %s"
 
-#: src/main/platform.cpp:2638
+#: src/main/platform.cpp:2639
 #, fuzzy
-msgid "'mode' must be of length at least one"
+msgid "'mode' argument must be of length at least one"
 msgstr "'hadj' debe tener longitud 1"
 
-#: src/main/platform.cpp:2703
+#: src/main/platform.cpp:2679 src/main/platform.cpp:2704
 #, fuzzy
 msgid "insufficient OS support on this platform"
 msgstr "esta plataforma no soporta nsl()"
 
+#: src/main/platform.cpp:2870
+#, fuzzy, c-format
+msgid "cannot set reparse point '%ls', reason '%s'"
+msgstr "no fue posible crear fifo '%s', motivo '%s'"
+
 # Parece raro pero... por favor fijate
 #: src/main/plot3d.cpp:126
 #, fuzzy, c-format
-msgid "contour(): circular/long seglist -- set %s > %d?"
+msgid "contour(): circular/long segment list -- set '%s' > %d?"
 msgstr "contour(): tipo circular/largo -- bug.report()!"
 
 #: src/main/plot3d.cpp:204
 #, fuzzy
-msgid "all z values are equal"
+msgid "all 'z' values are equal"
 msgstr "todos los valores de z son iguales"
 
 #: src/main/plot3d.cpp:206
 #, fuzzy
-msgid "all z values are NA"
+msgid "all 'z' values are NA"
 msgstr "todos los valore de z son NA"
 
 #: src/main/plotmath.cpp:315
 #, fuzzy
-msgid "invalid `which' in C function TeX"
+msgid "invalid 'which' argument in C function TeX"
 msgstr "especificación 'which' no válida"
 
 #: src/main/plotmath.cpp:342
 #, fuzzy
 msgid "invalid math style encountered"
 msgstr "número de ejes no válido %d"
+
+#: src/main/plotmath.cpp:1008
+#, fuzzy
+msgid "invalid multibyte string"
+msgstr "string multibyte %d inválida"
+
+#: src/main/plotmath.cpp:1072
+#, fuzzy
+msgid "invalid character in current multibyte locale"
+msgstr "largo de carácter inválido en dblepr"
 
 #: src/main/plotmath.cpp:1269 src/main/plotmath.cpp:1374
 #: src/main/plotmath.cpp:2663
@@ -5790,24 +5866,67 @@ msgstr "Exhibición de rediseño de la lista incompleta"
 msgid "Metric information not available for this family/device"
 msgstr "truncamiento no habilitado para esta conexión"
 
-#: src/main/printarray.cpp:366
+#: src/main/printarray.cpp:370
 msgid "too few row labels"
 msgstr "muy pocos rótulos de filas"
 
-#: src/main/printarray.cpp:368
+#: src/main/printarray.cpp:372
 msgid "too few column labels"
 msgstr " muy pocos rótulos de columnas"
 
-#: src/main/printarray.cpp:407
+#: src/main/printarray.cpp:374
+msgid "<0 x 0 matrix>"
+msgstr ""
+
+#: src/main/printarray.cpp:412
 #, fuzzy, c-format
-msgid " [ reached getOption(\"max.print\") -- omitted %d row ]\n"
-msgid_plural " [ reached getOption(\"max.print\") -- omitted %d rows ]\n"
+msgid " [ reached 'getOption(\"max.print\")' -- omitted %d row ]"
+msgid_plural " [ reached 'getOption(\"max.print\")' -- omitted %d rows ]"
 msgstr[0] " [ reached getOption(\"max.print\") -- omitida la última fila ]]\n"
 msgstr[1] " [ reached getOption(\"max.print\") -- omitida la última fila ]]\n"
 
-#: src/main/print.cpp:152 src/main/print.cpp:258
-msgid "invalid 'na.print' specification"
-msgstr "especificación 'na.print' inválida"
+#: src/main/printarray.cpp:518
+#, fuzzy, c-format
+msgid "<logical array of size %s>"
+msgstr "modo raw es siempre de tamaño 1"
+
+#: src/main/printarray.cpp:521
+#, fuzzy, c-format
+msgid "<integer array of size %s>"
+msgstr "modo raw es siempre de tamaño 1"
+
+#: src/main/printarray.cpp:524
+#, fuzzy, c-format
+msgid "<real array of size %s>"
+msgstr "modo raw es siempre de tamaño 1"
+
+#: src/main/printarray.cpp:527
+#, fuzzy, c-format
+msgid "<complex array of size %s>"
+msgstr "modo raw es siempre de tamaño 1"
+
+#: src/main/printarray.cpp:530
+#, fuzzy, c-format
+msgid "<character array of size %s>"
+msgstr "modo raw es siempre de tamaño 1"
+
+#: src/main/printarray.cpp:567
+#, fuzzy, c-format
+msgid ""
+" [ reached 'getOption(\"max.print\")' -- omitted %d row and %d matrix slice ]"
+msgid_plural ""
+" [ reached 'getOption(\"max.print\")' -- omitted %d rows and %d matrix "
+"slices ]"
+msgstr[0] " [ reached getOption(\"max.print\") -- omitida la última fila ]]\n"
+msgstr[1] " [ reached getOption(\"max.print\") -- omitida la última fila ]]\n"
+
+#: src/main/printarray.cpp:573
+#, fuzzy, c-format
+msgid " [ reached 'getOption(\"max.print\")' -- omitted %d matrix slice ]"
+msgid_plural ""
+" [ reached 'getOption(\"max.print\")' -- omitted %d matrix slices ]"
+msgstr[0] " [ reached getOption(\"max.print\") -- omitida la última fila ]]\n"
+msgstr[1] " [ reached getOption(\"max.print\") -- omitida la última fila ]]\n"
 
 #: src/main/print.cpp:161
 msgid "invalid row labels"
@@ -5822,48 +5941,141 @@ msgstr "rótulos de columnas inválidos"
 msgid "non-function argument to .Internal(print.function(.))"
 msgstr "el argumento para pegado interno no es un string"
 
+#: src/main/print.cpp:210 src/main/print.cpp:830
+#, fuzzy, c-format
+msgid "<bytecode: %p>\n"
+msgstr "ambiente inválido"
+
 #: src/main/print.cpp:268
-msgid "'gap' must be non-negative integer"
+#, fuzzy, c-format
+msgid "'%s' argument must be non-negative integer"
 msgstr "'gap' debe ser un entero no negativo"
 
 #: src/main/print.cpp:293
 msgid "invalid 'tryS4' internal argument"
 msgstr "argumento interno 'tryS4' inválido"
 
-#: src/main/print.cpp:862
+#: src/main/print.cpp:306 src/main/print.cpp:916 src/main/print.cpp:999
+#, fuzzy
+msgid "missing methods namespace: this should not happen"
+msgstr "matrix no numérica en rowsum(): esto no puede ocurrir"
+
+#: src/main/print.cpp:311 src/main/print.cpp:921 src/main/print.cpp:1004
+msgid "missing 'show()' in methods namespace: this should not happen"
+msgstr ""
+
+#: src/main/print.cpp:403
+msgid "[truncated]"
+msgstr ""
+
+#: src/main/print.cpp:499
+#, fuzzy, c-format
+msgid " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]"
+msgid_plural " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]"
+msgstr[0] " [ reached getOption(\"max.print\") -- omitida la última fila ]]\n"
+msgstr[1] " [ reached getOption(\"max.print\") -- omitida la última fila ]]\n"
+
+#: src/main/print.cpp:520
+#, fuzzy, c-format
+msgid "An object of class \"%s\"\n"
+msgstr "'con' no es un resultado de una conexión básica"
+
+#: src/main/print.cpp:527
+msgid "named list()\n"
+msgstr ""
+
+#: src/main/print.cpp:719
+msgid "<S4 object without a class>\n"
+msgstr ""
+
+#: src/main/print.cpp:721
+#, fuzzy, c-format
+msgid "<Object of type '%s' with S4 bit but without a class>\n"
+msgstr "objeto de tipo '%s' no es subconjunto"
+
+#: src/main/print.cpp:726
+#, c-format
+msgid "<S4 object of class \"%s\">\n"
+msgstr ""
+
+#: src/main/print.cpp:729
+#, fuzzy, c-format
+msgid "<S4 object of class \"%s\" from package '%s'>\n"
+msgstr "el objeto (list) no puede ser coercionado a '%s'"
+
+#: src/main/print.cpp:767
+#, fuzzy, c-format
+msgid "<promise: %p>\n"
+msgstr "ambiente inválido"
+
+#: src/main/print.cpp:827
+#, fuzzy, c-format
+msgid "<pointer: %p>\n"
+msgstr "ambiente inválido"
+
+#: src/main/print.cpp:833
+#, fuzzy
+msgid "<weak reference>\n"
+msgstr "no es una referencia débil"
+
+#: src/main/print.cpp:839
+msgid "<S4 Type Object>\n"
+msgstr ""
+
+#: src/main/print.cpp:864
 #, fuzzy
 msgid "print buffer overflow"
 msgstr "buffer de entrada desbordado en la linea %d"
 
-#: src/main/print.cpp:1059
-#, fuzzy
-msgid "invalid character length in 'dblepr'"
-msgstr "largo de carácter inválido en dblepr"
+#: src/main/print.cpp:897
+#, c-format
+msgid "Slot \"%s\":"
+msgstr ""
 
-#: src/main/print.cpp:1077
-#, fuzzy
-msgid "invalid character length in 'intpr'"
-msgstr "largo de carácter inválido en dblepr"
+#: src/main/print.cpp:1060 src/main/print.cpp:1078 src/main/print.cpp:1097
+#, fuzzy, c-format
+msgid "invalid character length in '%s' function"
+msgstr " largo de carácter inválido en intpr"
 
-#: src/main/print.cpp:1096
-#, fuzzy
-msgid "invalid character length in 'realpr'"
-msgstr " largo de carácter inválido en realpr"
-
-#: src/main/print.cpp:1106
+#: src/main/print.cpp:1107
 #, fuzzy
 msgid "memory allocation error in 'realpr'"
 msgstr "error de asignación de memoria en realpr"
 
-#: src/main/print.cpp:1122
+#: src/main/print.cpp:1123
 #, c-format
 msgid "BLAS/LAPACK routine '%6s' gave error code %d"
 msgstr "rutina BLAS/LAPACK  '%6s' tuvo un error de código %d"
 
-#: src/main/printutils.cpp:723
+#: src/main/printutils.cpp:162 src/main/printutils.cpp:164
+#: src/main/printutils.cpp:166 src/main/printutils.cpp:168
+#, fuzzy, c-format
+msgid "<environment: %s>"
+msgstr "ambiente inválido"
+
+#: src/main/printutils.cpp:171
+#, fuzzy, c-format
+msgid "<environment: namespace:%s>"
+msgstr "ambiente inválido"
+
+#: src/main/printutils.cpp:173
+#, fuzzy, c-format
+msgid "<environment: %p>"
+msgstr "ambiente inválido"
+
+#: src/main/printutils.cpp:409
+#, fuzzy, c-format
+msgid "unsupported encoding (%d) in '%s' function"
+msgstr "tipo no implementado (%d) en '%s'\n"
+
+#: src/main/printutils.cpp:721
 #, fuzzy
 msgid "it is not known that wchar_t is Unicode on this platform"
 msgstr "esta plataforma no soporta nsl()"
+
+#: src/main/printutils.cpp:973
+msgid "Internal error: this platform does not support split output"
+msgstr ""
 
 #: src/main/Promise.cpp:65
 msgid "restarting interrupted promise evaluation"
@@ -6106,12 +6318,12 @@ msgstr ""
 msgid "radix sort assumes sizeof(double) == 8"
 msgstr ""
 
-#: src/main/radixsort.c:1622 src/main/sort.cpp:1272
+#: src/main/radixsort.c:1622 src/main/sort.cpp:1273
 #, c-format
 msgid "argument %d is not a vector"
 msgstr "argumento %d no es un vector"
 
-#: src/main/radixsort.c:1625 src/main/sort.cpp:1274
+#: src/main/radixsort.c:1625 src/main/sort.cpp:1275
 msgid "argument lengths differ"
 msgstr "argumentos con longitudes diferentes"
 
@@ -6169,7 +6381,7 @@ msgstr "'a' e 'b' deben ser finitos"
 
 #: src/main/random.cpp:183
 #, fuzzy
-msgid "NA in probability vector"
+msgid "NA values in probability vector"
 msgstr "NA en vector de probabilidades"
 
 #: src/main/random.cpp:185
@@ -6198,48 +6410,39 @@ msgid "n >= 2^31, replace = FALSE is only supported on 64-bit platforms"
 msgstr "esta plataforma no soporta 'dirmark = TRUE'"
 
 #: src/main/raw.cpp:45 src/main/raw.cpp:278
-#, fuzzy
-msgid "argument must be a character vector of length 1"
+#, fuzzy, c-format
+msgid "'%s' argument must be a character vector of length 1"
 msgstr "'hostname' debe ser un vector de caracteres de longitud 1"
 
 #: src/main/raw.cpp:47 src/main/raw.cpp:280
 #, fuzzy
 msgid ""
-"argument should be a character vector of length 1\n"
-"all but the first element will be ignored"
+"argument should be a character vector of length 1.\n"
+"All but the first element will be ignored"
 msgstr ""
 "el argumento '%s' tiene tiene longitud > 1 y sólo el primer elemento será "
 "usado"
 
 #: src/main/raw.cpp:60 src/main/raw.cpp:96 src/main/raw.cpp:117
-#, fuzzy
-msgid "argument 'x' must be a raw vector"
+#, fuzzy, c-format
+msgid "'%s' argument must be a raw vector"
 msgstr "primer argumento debe ser un vector"
-
-#: src/main/raw.cpp:63 src/main/raw.cpp:336
-#, fuzzy
-msgid "argument 'multiple' must be TRUE or FALSE"
-msgstr "'decreciente' debe ser TRUE o FALSE"
 
 #: src/main/raw.cpp:98
 #, fuzzy
 msgid "argument 'shift' must be a small integer"
 msgstr "el argumento 'size' debe ser un entero positivo"
 
+# Marca para mi 3pm
 #: src/main/raw.cpp:136 src/main/raw.cpp:333
-#, fuzzy
-msgid "argument 'x' must be an integer vector"
-msgstr "el primer argumento debe ser un vector de caracteres"
+#, fuzzy, c-format
+msgid "'%s' argument must be an integer vector"
+msgstr "el argumento 'list' debe ser una lista"
 
 #: src/main/raw.cpp:155
-#, fuzzy
-msgid "argument 'x' must be raw, integer or logical"
-msgstr "argumento 'logarithm' debe ser lógico"
-
-#: src/main/raw.cpp:157 src/main/Renviron.cpp:327
 #, fuzzy, c-format
-msgid "argument '%s' must be a character string"
-msgstr "el argumento de 'code' debe ser un string de caracteres"
+msgid "'%s' argument must be raw, integer or logical"
+msgstr "argumento 'logarithm' debe ser lógico"
 
 #: src/main/raw.cpp:161
 #, fuzzy, c-format
@@ -6248,7 +6451,7 @@ msgstr "argumento debe ser una función"
 
 #: src/main/raw.cpp:174 src/main/raw.cpp:188
 #, fuzzy
-msgid "argument 'x' must not contain NAs"
+msgid "argument 'x' must not contain NA values"
 msgstr "el argumento no debe ser una función"
 
 #: src/main/raw.cpp:292
@@ -6258,29 +6461,20 @@ msgstr "string UTF-8  no válido  'old'"
 
 #: src/main/Rdynload.cpp:262
 #, fuzzy
-msgid "R_RegisterRoutines called with invalid DllInfo object."
+msgid "'R_RegisterRoutines()' called with invalid DllInfo object."
 msgstr "R_RegisterRoutines invocado con un objeto DllInfo no válido."
+
+#: src/main/Rdynload.cpp:325 src/main/Rdynload.cpp:339
+#, fuzzy, c-format
+msgid "allocation failure in '%s' function"
+msgstr "fallo de asignación en GVText"
 
 #: src/main/Rdynload.cpp:548
 #, fuzzy
-msgid "maximal number of DLLs reached..."
+msgid "maximal number of DLL files reached..."
 msgstr "Número máximo de DLLs alcanzado..."
 
-#: src/main/Rdynload.cpp:605
-#, fuzzy
-msgid "could not allocate space for 'path'"
-msgstr "no fué posible asignar espacio a 'name'"
-
-#: src/main/Rdynload.cpp:617
-#, fuzzy, c-format
-msgid "DLLname '%s' is too long"
-msgstr "DLLname '%s' es demasiado largo"
-
-#: src/main/Rdynload.cpp:638
-msgid "could not allocate space for 'name'"
-msgstr "no fué posible asignar espacio a 'name'"
-
-#: src/main/Rdynload.cpp:897 src/main/Rdynload.cpp:912 src/main/util.cpp:762
+#: src/main/Rdynload.cpp:897 src/main/Rdynload.cpp:912 src/main/util.cpp:760
 msgid "character argument expected"
 msgstr "argumento carácter esperado"
 
@@ -6315,14 +6509,9 @@ msgstr[1] ""
 msgid "must pass package name or DllInfo reference"
 msgstr "debe darse un nombre de paquete o una referencia de DllInfo"
 
-#: src/main/Rdynload.cpp:1216
-#, fuzzy, c-format
-msgid "unimplemented type %d in createRSymbolObject"
-msgstr "Tipo %d no implementado  en createRSymbolObject"
-
 #: src/main/Rdynload.cpp:1298 src/main/Rdynload.cpp:1388
 #, fuzzy
-msgid "R_getRegisteredRoutines() expects a DllInfo reference"
+msgid "'R_getRegisteredRoutines()' expects a DllInfo reference"
 msgstr "R_getRegisteredRoutines() espera una refer=EAncia para DllInfo"
 
 #: src/main/Rdynload.cpp:1301 src/main/Rdynload.cpp:1391
@@ -6338,30 +6527,66 @@ msgstr "el paquete '%s' no ofrece la función '%s'"
 msgid "table entry must be an external pointer"
 msgstr "la entrada de 'table' debe ser un puntero externo"
 
-#: src/main/relop.cpp:121 src/main/relop.cpp:221
+#: src/main/relop.cpp:123 src/main/relop.cpp:222
 msgid "comparison of these types is not implemented"
 msgstr "comparaciones de estos tipoo no están implementadas"
 
-#: src/main/relop.cpp:153
+#: src/main/relop.cpp:155
 #, c-format
 msgid "comparison (%d) is possible only for atomic and list types"
 msgstr "comparación  (%d) es posible solo para tipos lista y atómico"
 
-#: src/main/relop.cpp:158
+#: src/main/relop.cpp:160
 msgid "comparison is not allowed for expressions"
 msgstr "comparación no permitida para expresiones"
 
 #: src/main/relop.cpp:385
 #, fuzzy
-msgid "'a' and 'b' must have the same type"
+msgid "'A' and 'B' must have the same type"
 msgstr "'path' debe ser un vector de caracteres"
+
+#: src/main/Renviron.cpp:143 src/main/Renviron.cpp:147
+#, fuzzy
+msgid "allocation failure in reading Renviron"
+msgstr "fallo de asignación en GVText"
 
 #: src/main/Renviron.cpp:176 src/main/Renviron.cpp:181
 #, fuzzy, c-format
 msgid "problem in setting variable '%s' in Renviron"
 msgstr "problema  al establecer zona horaria"
 
-#: src/main/Renviron.cpp:331
+#: src/main/Renviron.cpp:199
+#, c-format
+msgid ""
+"\n"
+"   File %s contains invalid line(s)"
+msgstr ""
+
+#: src/main/Renviron.cpp:220
+#, fuzzy
+msgid ""
+"\n"
+"   Invalid lines were ignored\n"
+msgstr "final de línea inválido"
+
+#: src/main/Renviron.cpp:234 src/main/Renviron.cpp:243
+msgid "path to system Renviron is too long: skipping"
+msgstr ""
+
+#: src/main/Renviron.cpp:250
+#, fuzzy
+msgid "cannot find system Renviron"
+msgstr "no se puede desclasificar un entorno"
+
+#: src/main/Renviron.cpp:268
+msgid "path to arch-specific Renviron.site is too long: skipping"
+msgstr ""
+
+#: src/main/Renviron.cpp:278
+msgid "path to Renviron.site is too long: skipping"
+msgstr ""
+
+#: src/main/Renviron.cpp:330
 #, fuzzy, c-format
 msgid "file '%s' cannot be opened for reading"
 msgstr "archivo zip '%s' no pueden ser cargadas"
@@ -6376,9 +6601,10 @@ msgstr "unif_rand: tipo RNG %d no implementado"
 msgid "FixupSeeds: unimplemented RNG kind %d"
 msgstr "FixupSeeds: tipo RNG %d no implementado"
 
-#: src/main/RNG.cpp:308
-msgid "'user_unif_rand' not in load table"
-msgstr "'user_unif_rand' no está en la tabla de carga"
+#: src/main/RNG.cpp:308 src/main/RNG.cpp:495
+#, fuzzy, c-format
+msgid "'%s' is not in load table"
+msgstr "%s nombre de símbolo \"%s\" no está en la tabla de carga"
 
 #: src/main/RNG.cpp:316
 msgid "cannot read seeds unless 'user_unif_nseed' is supplied"
@@ -6396,13 +6622,13 @@ msgid "RNG_Init: unimplemented RNG kind %d"
 msgstr "RNG_Init: tipo RNG %d no implementado"
 
 #: src/main/RNG.cpp:358
-#, fuzzy
-msgid "'.Random.seed' is a missing argument with no default"
-msgstr "el argumento .Random.seed no existe y no tiene valor por defecto"
+#, fuzzy, c-format
+msgid "'%s' argument is missing, with no default"
+msgstr "argumento ausente, sin argumento por omisión"
 
 #: src/main/RNG.cpp:359
 #, fuzzy, c-format
-msgid "'.Random.seed' is not an integer vector but of type '%s', so ignored"
+msgid "'.Random.seed' is not an integer vector but of type '%s'"
 msgstr ".Random.seed no es un vector de números enteros pero es de tipo '%s'"
 
 #: src/main/RNG.cpp:367
@@ -6430,23 +6656,31 @@ msgstr ".Random.seed[1] no es un tipo RNG válido (código)"
 msgid "'.Random.seed' has wrong length"
 msgstr ".Random.seed tiene una longitud no válida"
 
+#: src/main/RNG.cpp:438
+msgid "Internal .Random.seed is corrupt: not saving"
+msgstr ""
+
 #: src/main/RNG.cpp:472
 #, c-format
 msgid "RNGkind: unimplemented RNG kind %d"
 msgstr "RNGkind: tipo RNG %d no implementado"
+
+#: src/main/RNG.cpp:478
+msgid "someone corrupted the random-number generator: re-initializing"
+msgstr ""
 
 #: src/main/RNG.cpp:492
 #, fuzzy
 msgid "invalid Normal type in 'RNGkind'"
 msgstr "tipo Normal no válido en RNGkind"
 
-#: src/main/RNG.cpp:495
-msgid "'user_norm_rand' not in load table"
-msgstr "'user_norm_rand' no está en la tabla de carga"
-
 #: src/main/RNG.cpp:537
 msgid "supplied seed is not a valid integer"
 msgstr "la semilla especificada no es un entero válido"
+
+#: src/main/RNG.cpp:777
+msgid "function '.TAOCP1997init' is missing"
+msgstr ""
 
 #: src/main/Rstrptime.h:549 src/main/Rstrptime.h:1020
 #, fuzzy, c-format
@@ -6473,39 +6707,39 @@ msgstr "string de formato multibyte no válida"
 #: src/main/saveload.cpp:221 src/main/saveload.cpp:230
 #: src/main/saveload.cpp:239 src/main/saveload.cpp:248
 #: src/main/saveload.cpp:252 src/main/saveload.cpp:261
-#: src/main/saveload.cpp:1409 src/main/saveload.cpp:1414
-#: src/main/saveload.cpp:1458 src/main/saveload.cpp:1526
-#: src/main/saveload.cpp:1535 src/main/serialize.cpp:377
-#: src/main/serialize.cpp:384 src/main/serialize.cpp:397
-#: src/main/serialize.cpp:401 src/main/serialize.cpp:428
-#: src/main/serialize.cpp:444 src/main/serialize.cpp:2387
+#: src/main/saveload.cpp:1408 src/main/saveload.cpp:1413
+#: src/main/saveload.cpp:1457 src/main/saveload.cpp:1525
+#: src/main/saveload.cpp:1534 src/main/serialize.cpp:378
+#: src/main/serialize.cpp:385 src/main/serialize.cpp:398
+#: src/main/serialize.cpp:402 src/main/serialize.cpp:429
+#: src/main/serialize.cpp:445 src/main/serialize.cpp:2387
 #: src/main/serialize.cpp:2395
 msgid "read error"
 msgstr "error de lectura"
 
 #: src/main/saveload.cpp:339
 #, fuzzy
-msgid "a I read error occurred"
+msgid "a 'I' read error occurred"
 msgstr " ocurrió un error de lectura en I "
 
 #: src/main/saveload.cpp:349
 #, fuzzy
-msgid "a R read error occurred"
+msgid "a 'R' read error occurred"
 msgstr "ocurrió un error de lectura en R "
 
 #: src/main/saveload.cpp:359
 #, fuzzy
-msgid "a C read error occurred"
+msgid "a 'C' read error occurred"
 msgstr " ocurrió un error de lectura en C "
 
 #: src/main/saveload.cpp:369
 #, fuzzy
-msgid "a S read error occurred"
+msgid "a 'S' read error occurred"
 msgstr " ocurrió un error de lectura en S "
 
 #: src/main/saveload.cpp:394 src/main/saveload.cpp:402
-#: src/main/saveload.cpp:410 src/main/saveload.cpp:1622
-#: src/main/saveload.cpp:1630
+#: src/main/saveload.cpp:410 src/main/saveload.cpp:1621
+#: src/main/saveload.cpp:1629
 msgid "a read error occurred"
 msgstr "ocurrió un error de lectura "
 
@@ -6519,9 +6753,13 @@ msgid "restore compatibility error - no version %d compatibility"
 msgstr ""
 "error de compatibilidad de restauración - sin compatibilidad con versión %d"
 
+#: src/main/saveload.cpp:531
+msgid "Loading pre-version-1 serialization not (yet) supported in CXXR"
+msgstr ""
+
 #: src/main/saveload.cpp:583 src/main/saveload.cpp:654
 #, fuzzy
-msgid "bad SEXP type in data file"
+msgid "bad 'SEXP' type in data file"
 msgstr "tipo SEXP defectuoso en archivo de datos"
 
 #: src/main/saveload.cpp:598
@@ -6536,6 +6774,11 @@ msgstr "no es posible guardar posición de archivo mientras se restauran datos"
 msgid "cannot restore file position while restoring data"
 msgstr ""
 "no es posible restaurar posición de archivo mientras se restauran datos "
+
+#: src/main/saveload.cpp:774 src/main/serialize.cpp:211
+#, c-format
+msgid "assertion '%s' failed: file '%s', line %d\n"
+msgstr ""
 
 #: src/main/saveload.cpp:924
 msgid "base namespace is not preserved in version 1 workspaces"
@@ -6555,201 +6798,186 @@ msgstr ""
 "no es posible guardar ambiente con vínculos bloqueados/activos en áreas de "
 "trabajo de la versión 1"
 
-#: src/main/saveload.cpp:952
+#: src/main/saveload.cpp:951
 msgid "cannot save weak references in version 1 workspaces"
 msgstr ""
 "no es posible guardar referencias débiles en áreas de trabajo de la versión 1"
 
-#: src/main/saveload.cpp:1033
-msgid "NewWriteVec called with non-vector type"
+#: src/main/saveload.cpp:1032
+#, fuzzy
+msgid "'NewWriteVec()' function called with non-vector type"
 msgstr "NewWriteVec llamado con un tipo no vectorial"
 
-#: src/main/saveload.cpp:1096
+#: src/main/saveload.cpp:1095
 msgid "cannot save byte code objects in version 1 workspaces"
 msgstr ""
 "no es posible guardar objetos de tipo códigos de byte en áreas de trabajo de "
 "la versión 1"
 
-#: src/main/saveload.cpp:1098
-#, c-format
-msgid "NewWriteItem: unknown type %i"
+#: src/main/saveload.cpp:1097
+#, fuzzy, c-format
+msgid "'NewWriteItem()': unknown type %i"
 msgstr "NewWriteItem: tipo desconocido %i"
 
-#: src/main/saveload.cpp:1218
+#: src/main/saveload.cpp:1217
 msgid "NewReadVec called with non-vector type"
 msgstr "NewReadVec llamado con un tipo no vectorial"
 
-#: src/main/saveload.cpp:1305 src/main/serialize.cpp:1670
+#: src/main/saveload.cpp:1304 src/main/serialize.cpp:1670
 #, fuzzy, c-format
-msgid "unrecognized internal function name \"%s\""
+msgid "unrecognized internal function name '%s'"
 msgstr "no se pudo encontrar la función \"%s\""
 
-#: src/main/saveload.cpp:1319
+#: src/main/saveload.cpp:1318
 msgid "cannot read byte code objects from version 1 workspaces"
 msgstr ""
 "no es posible leer objetos de tipo códigos de byte a partir de áreas de "
 "trabajo de la versión 1"
 
-#: src/main/saveload.cpp:1321
+#: src/main/saveload.cpp:1320
 #, fuzzy, c-format
-msgid "NewReadItem: unknown type %i"
+msgid "'NewReadItem()': unknown type %i"
 msgstr "NewReadItem: tipo desconocido %i"
 
-#: src/main/saveload.cpp:1468
+#: src/main/saveload.cpp:1467
 #, fuzzy
-msgid "out of memory reading ascii string"
+msgid "out of memory while reading ascii string"
 msgstr "memoria insuficiente en lectura de string ascii"
 
-#: src/main/saveload.cpp:1593
+#: src/main/saveload.cpp:1592
 msgid "a binary read error occurred"
 msgstr "ocurrió un error de lectura binario"
 
-#: src/main/saveload.cpp:1608 src/main/saveload.cpp:1709
+#: src/main/saveload.cpp:1607 src/main/saveload.cpp:1708
 #, fuzzy
-msgid "out of memory reading binary string"
+msgid "out of memory while reading binary string"
 msgstr " memoria insuficiente en lectura de string binario"
 
-#: src/main/saveload.cpp:1613
+#: src/main/saveload.cpp:1612
 msgid "a binary string read error occurred"
 msgstr "ocurrió un error de lectura de string binario"
 
-#: src/main/saveload.cpp:1673
+#: src/main/saveload.cpp:1672
 msgid "an xdr integer data write error occurred"
 msgstr "ocurrió un error de escritura de un entero xdr "
 
-#: src/main/saveload.cpp:1680
+#: src/main/saveload.cpp:1679
 msgid "an xdr integer data read error occurred"
 msgstr " ocurrió un error de lectura de un entero xdr "
 
-#: src/main/saveload.cpp:1695 src/main/saveload.cpp:1714
+#: src/main/saveload.cpp:1694 src/main/saveload.cpp:1713
 msgid "an xdr string data write error occurred"
 msgstr " ocurrió un error de escritura de string xdr "
 
-#: src/main/saveload.cpp:1722
+#: src/main/saveload.cpp:1721
 msgid "an xdr real data write error occurred"
 msgstr " ocurrió un error de escritura de un real xdr "
 
-#: src/main/saveload.cpp:1729
+#: src/main/saveload.cpp:1728
 msgid "an xdr real data read error occurred"
 msgstr " ocurrió un error de lectura de un real xdr "
 
-#: src/main/saveload.cpp:1736
+#: src/main/saveload.cpp:1735
 msgid "an xdr complex data write error occurred"
 msgstr " ocurrió un error de escritura de un complejo xdr"
 
-#: src/main/saveload.cpp:1743
+#: src/main/saveload.cpp:1742
 msgid "an xdr complex data read error occurred"
 msgstr " ocurrió un error de lectura de un complejo xdr"
 
-#: src/main/saveload.cpp:1811 src/main/serialize.cpp:1961
+#: src/main/saveload.cpp:1810 src/main/serialize.cpp:1961
 #: src/main/serialize.cpp:2566 src/modules/internet/internet.cpp:524
 #: src/modules/internet/internet.cpp:600 src/modules/internet/internet.cpp:711
 msgid "write failed"
 msgstr "falló escritura"
 
-#: src/main/saveload.cpp:1938
+#: src/main/saveload.cpp:1937
 msgid "restore file may be empty -- no data loaded"
 msgstr "el archivo de restauración  puede estar vacío - ningún dato cargado"
 
-#: src/main/saveload.cpp:1940
+#: src/main/saveload.cpp:1939
 msgid "restore file may be from a newer version of R -- no data loaded"
 msgstr ""
 "el archivo de restauración puede ser de una versión  más nueva de R - ningún "
 "dato cargado"
 
-#: src/main/saveload.cpp:1942
+#: src/main/saveload.cpp:1941
 msgid "bad restore file magic number (file may be corrupted) -- no data loaded"
 msgstr ""
 "número mágico de archivo de restauración inválido (el archivo puede estar "
 "dañado) -- ningún dato recargado"
 
-#: src/main/saveload.cpp:1958 src/main/saveload.cpp:2235
+#: src/main/saveload.cpp:1957 src/main/saveload.cpp:2234
 msgid "first argument must be a character vector"
 msgstr "el primer argumento debe ser un vector de caracteres"
 
-#: src/main/saveload.cpp:1960
-msgid "'file' must be non-empty string"
-msgstr "'file' debe ser un string no vacío"
-
-#: src/main/saveload.cpp:1962 src/main/saveload.cpp:2241
-#: src/main/serialize.cpp:2144
-msgid "'ascii' must be logical"
-msgstr "'ascii' debe ser un valor lógico"
-
-#: src/main/saveload.cpp:2024
-#, fuzzy
-msgid "not a valid named list"
+#: src/main/saveload.cpp:2023
+#, fuzzy, c-format
+msgid "'%s' is not a valid named list"
 msgstr "no es una lista de nombres válida"
 
-#: src/main/saveload.cpp:2032 src/main/saveload.cpp:2054
+#: src/main/saveload.cpp:2031 src/main/saveload.cpp:2053
 #, c-format
 msgid "'%s' looks like a pre-2.4.0 S4 object: please recreate it"
 msgstr "'%s' parece un objecto pre-2.4.0 S4 : por favor recreelo"
 
-#: src/main/saveload.cpp:2040
+#: src/main/saveload.cpp:2039
 msgid "loaded data is not in pair list form"
 msgstr "los datos cargados no están en forma de lista pareada"
 
-#: src/main/saveload.cpp:2075
+#: src/main/saveload.cpp:2074
 msgid "first argument must be a file name"
 msgstr "el primer argumento debe ser un nombre de archivo"
 
-#: src/main/saveload.cpp:2086
-msgid "unable to open file"
-msgstr "no es posible abrir el archivo"
-
-#: src/main/saveload.cpp:2115 src/main/saveload.cpp:2141
-#: src/main/serialize.cpp:880 src/main/serialize.cpp:917
-#: src/main/serialize.cpp:955
+#: src/main/saveload.cpp:2114 src/main/saveload.cpp:2140
+#: src/main/serialize.cpp:881 src/main/serialize.cpp:918
+#: src/main/serialize.cpp:956
 msgid "XDR write failed"
 msgstr "escritura XDR falló"
 
-#: src/main/saveload.cpp:2128 src/main/saveload.cpp:2153
+#: src/main/saveload.cpp:2127 src/main/saveload.cpp:2152
 #: src/main/serialize.cpp:1302 src/main/serialize.cpp:1338
 #: src/main/serialize.cpp:1376
 msgid "XDR read failed"
 msgstr "lectura XDR falló"
 
-#: src/main/saveload.cpp:2164
+#: src/main/saveload.cpp:2163
 #, fuzzy, c-format
 msgid "cannot save data -- unable to open '%s': %s"
 msgstr "no es posible guardar los datos -- no fue posible abrir %s"
 
-#: src/main/saveload.cpp:2251 src/main/serialize.cpp:2157
+#: src/main/saveload.cpp:2186
+msgid ""
+"[Previously saved workspace restored]\n"
+"\n"
+msgstr ""
+
+#: src/main/saveload.cpp:2250 src/main/serialize.cpp:2157
 #, c-format
 msgid "cannot save to connections in version %d format"
 msgstr "no es posible guardar  para conexiones en formato de versión %d"
 
-#: src/main/saveload.cpp:2269 src/main/serialize.cpp:2177
-msgid "connection not open for writing"
-msgstr "conexión no abierta para escritura"
-
-#: src/main/saveload.cpp:2278
+#: src/main/saveload.cpp:2277
 msgid "cannot save XDR format to a text-mode connection"
 msgstr "no es posible guardar en formato XDR para una conexión de modo texto"
 
-#: src/main/saveload.cpp:2288 src/main/serialize.cpp:2069
+#: src/main/saveload.cpp:2287 src/main/serialize.cpp:2069
 #: src/main/serialize.cpp:2083 src/main/serialize.cpp:2261
 #: src/main/serialize.cpp:2283
 msgid "error writing to connection"
 msgstr "error al escribir en una conexión"
 
-#: src/main/saveload.cpp:2349 src/main/serialize.cpp:2225
+#: src/main/saveload.cpp:2349
 #, fuzzy
-msgid "connection not open for reading"
-msgstr "la conexión no está abierta para la lectura"
-
-#: src/main/saveload.cpp:2350
-#, fuzzy
-msgid "can only load() from a binary connection"
+msgid "can only load from a binary connection"
 msgstr "sólo se puede leer desde una conexión binaria"
 
-#: src/main/saveload.cpp:2359
+#: src/main/saveload.cpp:2358
 #, fuzzy
 msgid "no input is available"
 msgstr "no hay disponible mecanismos de historia"
 
-#: src/main/saveload.cpp:2371
+#: src/main/saveload.cpp:2370
 msgid ""
 "the input does not start with a magic number compatible with loading from a "
 "connection"
@@ -6761,116 +6989,172 @@ msgstr ""
 msgid "EOF within quoted string"
 msgstr ""
 
-#: src/main/scan.cpp:490
+#: src/main/scan.cpp:504
 #, fuzzy, c-format
-msgid "scan() expected '%s', got '%s'"
+msgid "scan() expected a logical, got '%s'"
 msgstr "scan() esperaba '%s', obtuvo '%s'"
 
-#: src/main/scan.cpp:677
+#: src/main/scan.cpp:513
+#, fuzzy, c-format
+msgid "scan() expected an integer, got '%s'"
+msgstr "scan() esperaba '%s', obtuvo '%s'"
+
+#: src/main/scan.cpp:522
+#, fuzzy, c-format
+msgid "scan() expected a real, got '%s'"
+msgstr "scan() esperaba '%s', obtuvo '%s'"
+
+#: src/main/scan.cpp:531
+#, fuzzy, c-format
+msgid "scan() expected a complex, got '%s'"
+msgstr "scan() esperaba '%s', obtuvo '%s'"
+
+#: src/main/scan.cpp:546
+#, fuzzy, c-format
+msgid "scan() expected a raw, got '%s'"
+msgstr "scan() esperaba '%s', obtuvo '%s'"
+
+#: src/main/scan.cpp:618
+#, c-format
+msgid "Read %d item\n"
+msgid_plural "Read %d items\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/main/scan.cpp:676
 msgid "empty 'what' specified"
 msgstr "especificación vacía de 'what'"
 
-#: src/main/scan.cpp:731
+#: src/main/scan.cpp:730
 #, c-format
 msgid "line %d did not have %d elements"
 msgstr "la linea %d no tiene %d elementos"
 
-#: src/main/scan.cpp:781
+#: src/main/scan.cpp:780
 msgid "number of items read is not a multiple of the number of columns"
 msgstr "número de items leídos no es múltiplo del número de columnas"
 
-#: src/main/scan.cpp:872
+#: src/main/scan.cpp:787
+#, c-format
+msgid "Read %d record\n"
+msgid_plural "Read %d records\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/main/scan.cpp:871
 msgid "invalid 'strip.white' length"
 msgstr "longitud de 'strip.white' inválido"
 
-#: src/main/scan.cpp:883
+#: src/main/scan.cpp:882
 msgid "invalid 'sep' value: must be one byte"
 msgstr "valor de 'sep' inválido: debe ser de un byte"
 
-#: src/main/scan.cpp:895
+#: src/main/scan.cpp:894
 msgid "invalid decimal separator: must be one byte"
 msgstr "separador decimal inválido: debe ser de un byte"
 
-#: src/main/scan.cpp:900
+#: src/main/scan.cpp:899
 msgid "invalid decimal separator"
 msgstr "separador decimal inválido"
 
-#: src/main/scan.cpp:909
+#: src/main/scan.cpp:908
 msgid "invalid quote symbol set"
 msgstr "símbolo de citación especificado inválido"
 
-#: src/main/scan.cpp:991
+#: src/main/scan.cpp:990
 #, fuzzy
 msgid "embedded nul(s) found in input"
 msgstr "nul incrustado en la cadena: '%s' \""
 
-#: src/main/seq.cpp:60
+#: src/main/seq.cpp:61
 msgid "unequal factor lengths"
 msgstr "factores de largos desiguales"
 
-#: src/main/seq.cpp:112
+#: src/main/seq.cpp:113
 msgid "result would be too long a vector"
 msgstr "el resultado seria un vector muy largo"
 
-#: src/main/seq.cpp:170
+#: src/main/seq.cpp:171
 #, fuzzy
 msgid "argument of length 0"
 msgstr "argumento tiene longitud cero"
 
-#: src/main/seq.cpp:173 src/main/seq.cpp:178
+#: src/main/seq.cpp:174 src/main/seq.cpp:179
 #, fuzzy, c-format
 msgid "numerical expression has %d element: only the first used"
 msgid_plural "numerical expression has %d elements: only the first used"
 msgstr[0] "expresión numérica tiene %d elementos: solo el primero es utilizado"
 msgstr[1] "expresión numérica tiene %d elementos: solo el primero es utilizado"
 
-#: src/main/seq.cpp:184
+#: src/main/seq.cpp:185
 msgid "NA/NaN argument"
 msgstr "Argumento NA/NaN"
 
-#: src/main/seq.cpp:346
+#: src/main/seq.cpp:347
 #, fuzzy
 msgid "incorrect type for second argument"
 msgstr "rep() del segundo argumento de tipo incorrecto"
 
-#: src/main/seq.cpp:349
+#: src/main/seq.cpp:350 src/main/seq.cpp:675
 #, fuzzy, c-format
 msgid "attempt to replicate an object of type '%s'"
 msgstr "intento de réplica de objeto que no es vector"
 
-#: src/main/seq.cpp:401
+#: src/main/seq.cpp:402
 msgid "attempt to replicate non-vector"
 msgstr "intento de réplica de objeto que no es vector"
 
-#: src/main/seq.cpp:417
+#: src/main/seq.cpp:418
 #, fuzzy
 msgid "cannot replicate NULL to a non-zero length"
 msgstr "no se puede asignar un vector de longitud %d"
 
-#: src/main/seq.cpp:654 src/main/seq.cpp:661 src/main/seq.cpp:788
+#: src/main/seq.cpp:640
+#, fuzzy
+msgid "replication of pairlists is defunct"
+msgstr "fallo de asignación en GVText"
+
+#: src/main/seq.cpp:655 src/main/seq.cpp:662 src/main/seq.cpp:788
 #: src/main/seq.cpp:978
 #, fuzzy, c-format
 msgid "first element used of '%s' argument"
 msgstr "solo se utilizó el primer elemento del argumento 'url'"
 
-#: src/main/seq.cpp:786
-#, fuzzy
-msgid "'length.out' must be a non-negative number"
-msgstr "'gap' debe ser un entero no negativo"
+#: src/main/seq.cpp:667
+msgid "'x' is NULL so the result will be NULL"
+msgstr ""
 
-#: src/main/seq.cpp:810 src/main/seq.cpp:876 src/main/seq.cpp:893
+#: src/main/seq.cpp:768 src/main/seq.cpp:800
 #, fuzzy
-msgid "'from' must be finite"
+msgid "'from' argument cannot be NA, NaN or infinite"
 msgstr "'a' e 'b' deben ser finitos"
 
-#: src/main/seq.cpp:812 src/main/seq.cpp:878 src/main/seq.cpp:915
+#: src/main/seq.cpp:786
+#, fuzzy, c-format
+msgid "'%s' argument must be a non-negative number"
+msgstr "'gap' debe ser un entero no negativo"
+
+#: src/main/seq.cpp:796 src/main/seq.cpp:798 src/main/seq.cpp:806
+#: src/main/unique.cpp:676
+#, fuzzy, c-format
+msgid "'%s' argument must be of length 1"
+msgstr "'%s' debe tener longitud 1"
+
+#: src/main/seq.cpp:802
 #, fuzzy
-msgid "'to' must be finite"
+msgid "'to' argument cannot be NA, NaN or infinite"
+msgstr "'hadj' debe tener longitud 1"
+
+#: src/main/seq.cpp:810 src/main/seq.cpp:812 src/main/seq.cpp:876
+#: src/main/seq.cpp:878 src/main/seq.cpp:893 src/main/seq.cpp:895
+#: src/main/seq.cpp:915 src/main/seq.cpp:917
+#, fuzzy, c-format
+msgid "'%s' argument must be finite"
 msgstr "'a' e 'b' deben ser finitos"
 
 #: src/main/seq.cpp:824
 #, fuzzy
-msgid "invalid '(to - from)/by' in 'seq'"
+msgid "invalid '(to - from)/by' in 'seq()' function"
 msgstr "'(to - from)/by' inválido en 'seq'"
 
 #: src/main/seq.cpp:836
@@ -6883,42 +7167,37 @@ msgstr "argumento 'file' es muy largo"
 msgid "wrong sign in 'by' argument"
 msgstr "longitud incorrecta para el argumento 'mode'"
 
-#: src/main/seq.cpp:895 src/main/seq.cpp:917
-#, fuzzy
-msgid "'by' must be finite"
-msgstr "'a' e 'b' deben ser finitos"
-
 #: src/main/seq.cpp:984 src/main/seq.cpp:989
 #, fuzzy
 msgid "argument must be coercible to non-negative integer"
 msgstr "argumento debe ser un entorno"
 
-#: src/main/serialize.cpp:251 src/main/serialize.cpp:298
-#: src/main/serialize.cpp:322
+#: src/main/serialize.cpp:252 src/main/serialize.cpp:299
+#: src/main/serialize.cpp:323
 msgid "unknown or inappropriate output format"
 msgstr "formato de salida inapropiado o desconocido"
 
-#: src/main/serialize.cpp:565
+#: src/main/serialize.cpp:566
 msgid "must specify ascii, binary, or xdr format"
 msgstr "formato debe ser de tipo ascii, binario o xdr"
 
-#: src/main/serialize.cpp:566
+#: src/main/serialize.cpp:567
 msgid "unknown output format"
 msgstr "formato de salida desconocido"
 
-#: src/main/serialize.cpp:597
+#: src/main/serialize.cpp:598
 msgid "unknown input format"
 msgstr "formato de entrada desconocido"
 
-#: src/main/serialize.cpp:602
+#: src/main/serialize.cpp:603
 msgid "input format does not match specified format"
 msgstr "formato de entrada no coincide con formato especificado"
 
-#: src/main/serialize.cpp:804
+#: src/main/serialize.cpp:805
 msgid "no restore method available"
 msgstr "ningún método de recuperación disponible"
 
-#: src/main/serialize.cpp:846
+#: src/main/serialize.cpp:847
 msgid "names in persistent strings are currently ignored"
 msgstr "nombres en strings persistentes son actualmente ignorados"
 
@@ -7030,6 +7309,15 @@ msgstr "valor de versión inválido"
 msgid "binary-mode connection required for ascii=FALSE"
 msgstr "operaciones binarias requieren dos argumentos"
 
+#: src/main/serialize.cpp:2177
+msgid "connection not open for writing"
+msgstr "conexión no abierta para escritura"
+
+#: src/main/serialize.cpp:2225
+#, fuzzy
+msgid "connection not open for reading"
+msgstr "la conexión no está abierta para la lectura"
+
 #: src/main/serialize.cpp:2339 src/main/serialize.cpp:2376
 #: src/main/serialize.cpp:2438
 msgid "serialization is too large to store in a raw vector"
@@ -7039,17 +7327,28 @@ msgstr " demasiado largo para ser guardado en un vector"
 msgid "cannot allocate buffer"
 msgstr "no puede asignarse buffer"
 
-#: src/main/serialize.cpp:2544 src/main/serialize.cpp:2615
-msgid "not a proper file name"
+#: src/main/serialize.cpp:2508
+#, fuzzy
+msgid "character vectors are no longer accepted by 'unserialize()' function"
+msgstr "reinicios no sustentados en 'eval'"
+
+#: src/main/serialize.cpp:2544
+#, fuzzy, c-format
+msgid "'%s' argument is not a proper file name"
 msgstr "nombre de archivo no válido"
 
 #: src/main/serialize.cpp:2546
-msgid "not a proper raw vector"
-msgstr "no es un vector crudo (raw)"
+#, fuzzy, c-format
+msgid "'%s' argument is not a proper raw vector"
+msgstr "'fmt' debe ser un vector de caracteres no vacío"
 
 #: src/main/serialize.cpp:2567
 msgid "could not determine file position"
 msgstr "no se pudo determinar posición del archivo"
+
+#: src/main/serialize.cpp:2615
+msgid "not a proper file name"
+msgstr "nombre de archivo no válido"
 
 #: src/main/serialize.cpp:2617
 msgid "bad offset/length argument"
@@ -7076,62 +7375,78 @@ msgstr "ambiente inválido"
 msgid "bad variable names"
 msgstr "nombres de variables incorrectos"
 
+#: src/main/serialize.cpp:2798
+#, c-format
+msgid "lazy-load database '%s' is corrupt"
+msgstr ""
+
 #: src/main/SEXP_downcast.cpp:41
 #, c-format
 msgid "'%s' supplied where '%s' expected."
 msgstr ""
 
-#: src/main/sort.cpp:108
+#: src/main/sort.cpp:109
 msgid "only atomic vectors can be tested to be sorted"
 msgstr "solo vectores atómicos pueden ser comparados para ordenarse"
 
-#: src/main/sort.cpp:338 src/main/sort.cpp:1263
-#, fuzzy
-msgid "'decreasing' must be TRUE or FALSE"
-msgstr "'decreciente' debe ser TRUE o FALSE"
-
-#: src/main/sort.cpp:341 src/main/sort.cpp:615
+#: src/main/sort.cpp:342 src/main/sort.cpp:616
 msgid "only atomic vectors can be sorted"
 msgstr "solo vectores atómicos pueden ser ordenados"
 
-#: src/main/sort.cpp:343 src/main/sort.cpp:617 src/main/sort.cpp:1331
+#: src/main/sort.cpp:344 src/main/sort.cpp:618 src/main/sort.cpp:1332
 msgid "raw vectors cannot be sorted"
 msgstr "vetores crudos (raw) no pueden ser ordenados"
 
-#: src/main/sort.cpp:627
+#: src/main/sort.cpp:388 src/main/sort.cpp:405 src/main/sort.cpp:422
+#: src/main/sort.cpp:445
+msgid "'n >= 2' is required"
+msgstr ""
+
+#: src/main/sort.cpp:628
 msgid "NA or infinite index"
 msgstr ""
 
-#: src/main/sort.cpp:630
+#: src/main/sort.cpp:631
 #, fuzzy, c-format
 msgid "index %ld outside bounds"
 msgstr "índice %d fuera de límites"
 
-#: src/main/sort.cpp:635 src/main/sort.cpp:647
+#: src/main/sort.cpp:636 src/main/sort.cpp:648
 msgid "NA index"
 msgstr "índice NA"
 
-#: src/main/sort.cpp:637 src/main/sort.cpp:649
+#: src/main/sort.cpp:638 src/main/sort.cpp:650
 #, c-format
 msgid "index %d outside bounds"
 msgstr "índice %d fuera de límites"
 
-#: src/main/sort.cpp:1358
+#: src/main/sort.cpp:1359
 msgid "invalid ties.method for rank() [should never happen]"
 msgstr "ties.method inválidod para rank() [nunca debería suceder]"
 
-#: src/main/source.cpp:205
-#, fuzzy
-msgid "'file' must be a character string or connection"
-msgstr "que debe ser un string de caracteres o una función"
+#: src/main/source.cpp:174
+#, fuzzy, c-format
+msgid "%s in command \"%s\""
+msgstr "%s en \"%s\""
 
-#: src/main/source.cpp:219
+#: src/main/source.cpp:177
+#, fuzzy, c-format
+msgid ""
+"%s in:\n"
+"\"%s\n"
+"%s\""
+msgstr ""
+"error de sintaxis en:\n"
+"\"%s\n"
+"%s\""
+
+#: src/main/source.cpp:216
 msgid "coercion of 'text' to character was unsuccessful"
 msgstr "coacción de \"texto \" a carácteres  no tuvo éxito"
 
-#: src/main/source.cpp:234
+#: src/main/source.cpp:231
 #, fuzzy, c-format
-msgid "argument '%s = \"%s\"' will be ignored"
+msgid "'%s = \"%s\"' option will be ignored"
 msgstr "argumento '%s  será ignorado"
 
 #: src/main/split.cpp:54
@@ -7245,7 +7560,7 @@ msgstr "use formato %s para objetos tipo carácter"
 msgid "likely truncation of character string to %d characters"
 msgstr "Probable truncamento de string de caracteres"
 
-#: src/main/sprintf.cpp:428
+#: src/main/sprintf.cpp:428 src/main/util.cpp:2308
 msgid "unsupported type"
 msgstr "tipo no soportado"
 
@@ -7266,6 +7581,25 @@ msgstr ""
 msgid "R_LibraryFileName: buffer too small"
 msgstr "R_LibraryFileName: buffer muy pequeño"
 
+#: src/main/startup.cpp:187
+#, fuzzy
+msgid "WARNING: invalid 'R_VSIZE' ignored\n"
+msgstr "ATENCIÓN: el valor '%s' no es válido: ignorado\n"
+
+#: src/main/startup.cpp:190
+#, fuzzy, c-format
+msgid "WARNING: R_VSIZE smaller than Min_Vsize = %lu is ignored\n"
+msgstr "ATENCIÓN: el valor '%s' no es válido: ignorado\n"
+
+#: src/main/startup.cpp:205
+msgid "WARNING: 'vsize' argument is ridiculously low, Megabytes assumed\n"
+msgstr ""
+
+#: src/main/startup.cpp:210
+#, c-format
+msgid "WARNING: invalid v(ector heap)size `%lu' ignored, using default = %gM\n"
+msgstr ""
+
 #: src/main/String.cpp:229
 #, fuzzy, c-format
 msgid "unknown encoding: %d"
@@ -7276,54 +7610,67 @@ msgstr "codificación '%s' no soportada"
 msgid "attempt to set index %lu/%lu in SET_STRING_ELT"
 msgstr ""
 
-#: src/main/subassign.cpp:116
+#: src/main/subassign.cpp:117
 msgid "attempt to enlarge non-vector"
 msgstr "intento de alargar un objeto diferente a un vector"
 
-#: src/main/subassign.cpp:121
+#: src/main/subassign.cpp:122
 #, c-format
 msgid "assignment outside vector/list limits (extending from %d to %d)"
 msgstr ""
 "asignación fuera de los límites del vector/lista (extendiendo de %d a %d)"
 
-#: src/main/subassign.cpp:384
+#: src/main/subassign.cpp:200
+msgid "implicit list embedding of S4 objects is deprecated"
+msgstr ""
+
+#: src/main/subassign.cpp:385
 #, c-format
 msgid "incompatible types (from %s to %s) in subassignment type fix"
 msgstr "tipos incompatibles (de %s a %s) en fijación de tipo sub-asignación"
 
-#: src/main/subassign.cpp:455
+#: src/main/subassign.cpp:456
 msgid "Internal error: unexpected type in DeleteListElements"
 msgstr ""
 
-#: src/main/subassign.cpp:711
+#: src/main/subassign.cpp:621
+msgid "sub assignment (*[*] <- *) not done; __bug?__"
+msgstr ""
+
+#: src/main/subassign.cpp:712
 #, c-format
 msgid "incompatible types (from %s to %s) in array subset assignment"
 msgstr ""
 "tipos incompatibles (de %s a %s) en asignaciones de subconjunto de arreglos "
 "(arrays)"
 
-#: src/main/subassign.cpp:735 src/main/subassign.cpp:756
+#: src/main/subassign.cpp:723
+#, fuzzy, c-format
+msgid "internal error: index %d from length %d"
+msgstr "error interno en do_random1"
+
+#: src/main/subassign.cpp:736 src/main/subassign.cpp:757
 #, fuzzy
 msgid "invalid subscript in list assign"
 msgstr "número de subscritos inválidos en asignación de lista"
 
-#: src/main/subassign.cpp:749
+#: src/main/subassign.cpp:750
 msgid "invalid number of subscripts to list assign"
 msgstr "número de subscritos inválidos en asignación de lista"
 
-#: src/main/subassign.cpp:827
+#: src/main/subassign.cpp:828
 #, fuzzy
-msgid "SubAssignArgs: invalid number of arguments"
+msgid "'SubAssignArgs()': invalid number of arguments"
 msgstr "SubAssignArgs: número de argumentos inválidos"
 
-#: src/main/subassign.cpp:962
+#: src/main/subassign.cpp:963
 msgid "result is zero-length and so cannot be a language object"
 msgstr ""
 "resultado longitud-cero y de este modo no pude ser un objecto de este "
 "lenguanje"
 
-#: src/main/subassign.cpp:998
-msgid "Internal error: unexpected type in DeleteOneVectorListItem"
+#: src/main/subassign.cpp:999
+msgid "Internal error: unexpected type in 'DeleteOneVectorListItem()' function"
 msgstr ""
 
 #: src/main/subassign.cpp:1082
@@ -7335,7 +7682,7 @@ msgstr ""
 
 #: src/main/subassign.cpp:1088
 #, fuzzy
-msgid "wrong args for environment subassignment"
+msgid "wrong arguments for environment subassignment"
 msgstr "argumentos inválidos para sub-asignación de entorno"
 
 #: src/main/subassign.cpp:1114
@@ -7344,33 +7691,33 @@ msgstr "se dan más elementos que los que pueden ser sustituídos"
 
 #: src/main/subassign.cpp:1116
 #, fuzzy
-msgid "[[ ]] with missing subscript"
+msgid "'[[ ]]' with missing subscript"
 msgstr "[[ ]] con subscrito ausente"
 
-#: src/main/subassign.cpp:1131 src/main/subassign.cpp:1149
+#: src/main/subassign.cpp:1131
 #, fuzzy
-msgid "[[ ]] subscript out of bounds"
+msgid "'[[ ]]' subscript out of bounds"
 msgstr "subscrito [[ ]] fuera de límites"
 
 #: src/main/subassign.cpp:1137 src/main/subassign.cpp:1321
 #, fuzzy
-msgid "[[ ]] improper number of subscripts"
+msgid "'[[ ]]' improper number of subscripts"
 msgstr "número inadecuado de subscritos en [[ ]]"
+
+#: src/main/subassign.cpp:1149 src/main/subassign.cpp:1332
+#, fuzzy, c-format
+msgid "'[[ ]]' subscript (%d) out of bounds"
+msgstr "subscrito (%d) en [[ ]] fuera de íimites"
 
 #: src/main/subassign.cpp:1288
 #, fuzzy, c-format
-msgid "incompatible types (from %s to %s) in [[ assignment"
+msgid "incompatible types (from %s to %s) in '[[' assignment"
 msgstr "tipos incompatibles (de %s a %s) en asignación [["
 
-#: src/main/subassign.cpp:1332
-#, fuzzy, c-format
-msgid "[[ ]] subscript (%d) out of bounds"
-msgstr "subscrito (%d) en [[ ]] fuera de íimites"
-
-#: src/main/subassign.cpp:1389 src/main/subscript.cpp:158
-#: src/main/subscript.cpp:288 src/main/subscript.cpp:685
-#: src/main/subscript.cpp:778 src/main/Subscripting.cpp:88
-#: src/main/Subscripting.cpp:98 src/main/subset.cpp:888
+#: src/main/subassign.cpp:1389 src/main/subscript.cpp:159
+#: src/main/subscript.cpp:289 src/main/subscript.cpp:686
+#: src/main/subscript.cpp:779 src/main/Subscripting.cpp:88
+#: src/main/Subscripting.cpp:98 src/main/subset.cpp:889
 #, fuzzy, c-format
 msgid "invalid subscript type '%s'"
 msgstr "tipo de subscrito inválido"
@@ -7381,73 +7728,73 @@ msgstr "ningún método para la asignación de subconjuntos de esta clase S4"
 
 #: src/main/subassign.cpp:1493
 #, fuzzy
-msgid "Coercing LHS to a list"
+msgid "coercing LHS to a list"
 msgstr "Realizando coercion de LHD a una lista"
 
-#: src/main/subscript.cpp:66 src/main/subscript.cpp:88
-#: src/main/subscript.cpp:191 src/main/subscript.cpp:215
+#: src/main/subscript.cpp:67 src/main/subscript.cpp:89
+#: src/main/subscript.cpp:192 src/main/subscript.cpp:216
 #, fuzzy, c-format
 msgid "attempt to select less than one element in %s"
 msgstr "intento de selecionar menos de un elemento"
 
-#: src/main/subscript.cpp:70 src/main/subscript.cpp:85
-#: src/main/subscript.cpp:189 src/main/subscript.cpp:219
-#: src/main/subscript.cpp:315
+#: src/main/subscript.cpp:71 src/main/subscript.cpp:86
+#: src/main/subscript.cpp:190 src/main/subscript.cpp:220
+#: src/main/subscript.cpp:316
 #, fuzzy, c-format
 msgid "attempt to select more than one element in %s"
 msgstr "intento de selecionar más de un elemento"
 
-#: src/main/subscript.cpp:195
+#: src/main/subscript.cpp:196
 msgid "internal error in use of recursive indexing"
 msgstr "error interno en uso de indexación recursiva"
 
-#: src/main/subscript.cpp:266
+#: src/main/subscript.cpp:267
 #, c-format
 msgid "further partial match of '%s' to '%s'"
 msgstr "mas encuentros parciales de  '%s' to '%s'"
 
-#: src/main/subscript.cpp:313
+#: src/main/subscript.cpp:309
+msgid "should only be called in an assignment context."
+msgstr ""
+
+#: src/main/subscript.cpp:314
 #, c-format
 msgid "recursive indexing failed at level %d\n"
 msgstr "falló indexación recursiva en nivel %d\n"
 
-#: src/main/subscript.cpp:323
+#: src/main/subscript.cpp:324
 #, c-format
 msgid "no such index at level %d\n"
 msgstr "indice inexistente en el nivel %d\n"
 
-#: src/main/subscript.cpp:370
+#: src/main/subscript.cpp:328 src/main/subset.cpp:165 src/main/subset.cpp:787
+#, fuzzy
+msgid "invalid subscript for pairlist"
+msgstr "número de subscritos inválidos en asignación de lista"
+
+#: src/main/subscript.cpp:371
 msgid "incorrect number of columns in matrix subscript"
 msgstr "número incorreto de columnas en subscrito de matriz"
 
-#: src/main/subscript.cpp:389 src/main/subscript.cpp:407
-#: src/main/subscript.cpp:431
+#: src/main/subscript.cpp:390 src/main/subscript.cpp:408
+#: src/main/subscript.cpp:432
 msgid "negative values are not allowed in a matrix subscript"
 msgstr "no se permiten valores negativos en subscrito de matriz"
 
-#: src/main/subscript.cpp:393 src/main/subscript.cpp:411
-#: src/main/subscript.cpp:435 src/main/subscript.cpp:474
-#: src/main/subscript.cpp:509 src/main/subscript.cpp:522
-#: src/main/subscript.cpp:554 src/main/subscript.cpp:638
-#: src/main/Subscripting.cpp:365
-#, fuzzy
-msgid "subscript out of bounds"
-msgstr "subíndice fuera de  los límites"
-
-#: src/main/subscript.cpp:549
+#: src/main/subscript.cpp:550
 msgid "subscript too large for 32-bit R"
 msgstr ""
 
-#: src/main/subscript.cpp:576 src/main/Subscripting.cpp:133
+#: src/main/subscript.cpp:577 src/main/Subscripting.cpp:133
 #: src/main/Subscripting.cpp:192
 msgid "only 0's may be mixed with negative subscripts"
 msgstr "solamente 0's pueden ser mezclados con subscritos negativos"
 
-#: src/main/subscript.cpp:676
+#: src/main/subscript.cpp:677
 msgid "no 'dimnames' attribute for array"
 msgstr "arreglo (array) sin atributo 'dimnames'"
 
-#: src/main/subscript.cpp:713
+#: src/main/subscript.cpp:714
 msgid "subscripting on non-vector"
 msgstr "intento de usar un subscrito en un objeto distinto a un vector"
 
@@ -7461,6 +7808,11 @@ msgstr "objeto no es una matriz"
 msgid "too few subscripts"
 msgstr "muy pocos argumentos"
 
+#: src/main/Subscripting.cpp:365
+#, fuzzy
+msgid "subscript out of bounds"
+msgstr "subíndice fuera de  los límites"
+
 #: src/main/Subscripting.cpp:369
 #, fuzzy
 msgid "too many subscripts"
@@ -7470,50 +7822,64 @@ msgstr "demasiados argumentos"
 msgid "dimensions would exceed maximum size of array"
 msgstr "dimensiones deben execeder el maximo tamaño de un arreglo"
 
-#: src/main/subset.cpp:316
+#: src/main/subset.cpp:317
 msgid "array subscripting not handled for this type"
 msgstr "uso de subscritos en arreglos (arrays) no disponibles para este tipo"
 
-#: src/main/subset.cpp:590
+#: src/main/subset.cpp:591
 msgid "incorrect number of dimensions"
 msgstr "número incorreto de dimensiones"
 
-#: src/main/subset.cpp:683
+#: src/main/subset.cpp:684
 msgid "no index specified"
 msgstr "ningún índice especificado"
 
-#: src/main/subset.cpp:687
+#: src/main/subset.cpp:688
 msgid "incorrect number of subscripts"
 msgstr "número incorrecto de subíndices"
 
-#: src/main/subset.cpp:693
+#: src/main/subset.cpp:694
 #, fuzzy
 msgid "this S4 class is not subsettable"
 msgstr "no es posible dividir el objeto en subconjuntos"
 
-#: src/main/subset.cpp:699
+#: src/main/subset.cpp:700
 msgid "wrong arguments for subsetting an environment"
 msgstr "argumentos incorrectos para obtención de subconjuntos de un ambiente"
 
-#: src/main/summary.cpp:44
+#: src/main/subset.cpp:735
+#, fuzzy
+msgid "getter call used outside of a complex assignment"
+msgstr "función inválida en asignación compleja"
+
+#: src/main/subset.cpp:932
+msgid "$ operator not defined for this S4 class"
+msgstr ""
+
+#: src/main/subset.cpp:968 src/main/subset.cpp:1021
+#, fuzzy
+msgid "Unexpected SEXPTYPE"
+msgstr "inesperado %s"
+
+#: src/main/subset.cpp:1050
+#, fuzzy
+msgid "$ operator is invalid for atomic vectors"
+msgstr "primer argumento debe ser un vector"
+
+#: src/main/summary.cpp:45
 #, c-format
 msgid "invalid 'type' (%s) of argument"
 msgstr "'type' (%s) de argumento no válido"
 
-#: src/main/summary.cpp:80 src/main/summary.cpp:92 src/main/summary.cpp:117
-#, fuzzy
-msgid "integer overflow - use sum(as.numeric(.))"
-msgstr "Exceso de capacidad (overflow) en sum(.); use sum(as.numeric(.))"
+#: src/main/summary.cpp:489
+#, c-format
+msgid "C do_summary(op%s, *): did NOT dispatch\n"
+msgstr ""
 
 #: src/main/summary.cpp:539
 #, c-format
 msgid "internal error ('op = %d' in do_summary).\t Call a Guru"
 msgstr "error interno ('op = %d' en do_summary).\t Llame a un Guru"
-
-#: src/main/summary.cpp:650
-#, fuzzy
-msgid "Integer overflow - use sum(as.numeric(.))"
-msgstr "Exceso de capacidad (overflow) en sum(.); use sum(as.numeric(.))"
 
 #: src/main/summary.cpp:763
 #, fuzzy
@@ -7522,17 +7888,17 @@ msgstr "ningún argumento finito para min; retornando Inf"
 
 #: src/main/summary.cpp:766
 #, fuzzy
-msgid "no non-missing arguments to min; returning Inf"
+msgid "no non-missing arguments passed to 'min()' function; returning Inf"
 msgstr "ningún argumento finito para min; retornando Inf"
 
 #: src/main/summary.cpp:768
 #, fuzzy
-msgid "no non-missing arguments to max; returning -Inf"
-msgstr "ningun argumento finito para max; retornando -Inf"
+msgid "no non-missing arguments passed to 'max()' function; returning -Inf"
+msgstr "ningún argumento finito para min; retornando Inf"
 
 #: src/main/summary.cpp:928
 #, fuzzy
-msgid "argument to 'which' is not logical"
+msgid "argument passed to 'which()' function is not logical"
 msgstr "argumento 'logarithm' debe ser lógico"
 
 #: src/main/summary.cpp:971
@@ -7598,17 +7964,11 @@ msgstr "patrón de nombre de archivo inválido"
 msgid "invalid file extension"
 msgstr "Expresión regular inválida"
 
-#: src/main/sysutils.cpp:263
-msgid "no 'pattern'"
-msgstr "'pattern' no especificado"
-
-#: src/main/sysutils.cpp:265
-msgid "no 'tempdir'"
-msgstr "'tempdir' no especificado"
-
+#: src/main/sysutils.cpp:263 src/main/sysutils.cpp:265
 #: src/main/sysutils.cpp:267
-msgid "no 'fileext'"
-msgstr "no hay 'fileext'"
+#, fuzzy, c-format
+msgid "no '%s' argument"
+msgstr "argumento '%s' inválido"
 
 #: src/main/sysutils.cpp:337
 #, fuzzy, c-format
@@ -7626,9 +7986,9 @@ msgstr "argumento de tipo inválido"
 msgid "wrong length for argument"
 msgstr "longitud incorrecta para el argumento 'mode'"
 
-#: src/main/sysutils.cpp:482
-#, fuzzy
-msgid "'Sys.setenv' is not available on this system"
+#: src/main/sysutils.cpp:482 src/main/sysutils.cpp:536
+#, fuzzy, c-format
+msgid "'%s' function is not available on this system"
 msgstr "'putenv' no está disponible en este sistema"
 
 #: src/main/sysutils.cpp:525
@@ -7637,28 +7997,20 @@ msgstr ""
 "este sistema no puede desvincular variables generales que han sido puestas a "
 "\"\""
 
-#: src/main/sysutils.cpp:536
-#, fuzzy
-msgid "'Sys.unsetenv' is not available on this system"
-msgstr "'putenv' no está disponible en este sistema"
-
 #: src/main/sysutils.cpp:627
 #, fuzzy, c-format
 msgid "unsupported conversion from '%s' to '%s' in codepage %d"
 msgstr "conversión no soportada de '%s' a '%s"
 
-#: src/main/sysutils.cpp:642
-msgid "'x' must be a character vector"
-msgstr "'x' debe ser un vector de caracteres"
-
 #: src/main/sysutils.cpp:657
 #, fuzzy
-msgid "'x' must be a character vector or a list of NULL or raw vectors"
+msgid ""
+"'x' argument must be a character vector or a list of NULL or raw vectors"
 msgstr "el argumento debe ser un vector de caracteres o un vector crudo (raw)"
 
-#: src/main/sysutils.cpp:735 src/main/sysutils.cpp:913
-#: src/main/sysutils.cpp:933 src/main/sysutils.cpp:951
-#: src/main/sysutils.cpp:967 src/main/sysutils.cpp:1044
+#: src/main/sysutils.cpp:735 src/main/sysutils.cpp:933
+#: src/main/sysutils.cpp:951 src/main/sysutils.cpp:967
+#: src/main/sysutils.cpp:1044
 #, fuzzy, c-format
 msgid "'%s' must be called on a CHARSXP"
 msgstr "csduplicated no llamada dentro de una STRSXP"
@@ -7673,10 +8025,20 @@ msgstr "no se permite traducción de cadenas con \"bytes\" de codificación"
 msgid "internal error: no translation needed"
 msgstr "error interno en do_random1"
 
+#: src/main/sysutils.cpp:913
+#, fuzzy, c-format
+msgid "'%s' function must be called on a CHARSXP"
+msgstr "csduplicated no llamada dentro de una STRSXP"
+
 #: src/main/sysutils.cpp:1073
 #, fuzzy, c-format
 msgid "unsupported conversion to '%s' from codepage %d"
 msgstr "conversión no soportada de '%s' a '%s"
+
+#: src/main/sysutils.cpp:1338 src/main/sysutils.cpp:1444
+#, fuzzy
+msgid "converted string is too long for buffer"
+msgstr "string de formato demasiado larga"
 
 #: src/main/sysutils.cpp:1594
 #, fuzzy, c-format
@@ -7700,7 +8062,7 @@ msgstr "no puede asignarse R_TempDir"
 
 #: src/main/sysutils.cpp:1758
 #, fuzzy
-msgid "temporary name too long"
+msgid "temporary name is too long"
 msgstr "nombre de archivo muy largo"
 
 #: src/main/sysutils.cpp:1773
@@ -7721,38 +8083,29 @@ msgstr "esta plataforma no soporta 'dirmark = TRUE'"
 msgid "length %d is too large for hashing"
 msgstr "longitud %d es muy grande para uso de hash"
 
+#: src/main/unique.cpp:433 src/main/unique.cpp:445
+#, fuzzy
+msgid "hash table is full"
+msgstr "pila sink esta llena"
+
 #: src/main/unique.cpp:500 src/main/unique.cpp:529 src/main/unique.cpp:559
-#: src/main/unique.cpp:583 src/main/unique.cpp:622
-msgid "'duplicated' applies only to vectors"
-msgstr "'duplicated' puede ser aplicada solamente a vectores"
+#: src/main/unique.cpp:583 src/main/unique.cpp:622 src/main/unique.cpp:690
+#, fuzzy, c-format
+msgid "'%s' method applies only to vectors"
+msgstr "%s() puede ser aplicada solamente a vectores"
 
 #: src/main/unique.cpp:627
 msgid "any_duplicated3(., <0-length incomp>)"
 msgstr "cualquier_duplicado3(., <longitud-0 incomp>)"
 
-#: src/main/unique.cpp:676
-#, fuzzy
-msgid "'fromLast' must be length 1"
-msgstr "'%s' debe tener longitud 1"
-
-#: src/main/unique.cpp:679
-#, fuzzy
-msgid "'fromLast' must be TRUE or FALSE"
-msgstr "'decreciente' debe ser TRUE o FALSE"
-
-#: src/main/unique.cpp:690
-#, fuzzy, c-format
-msgid "%s() applies only to vectors"
-msgstr "%s() puede ser aplicada solamente a vectores"
-
 #: src/main/unique.cpp:697
-#, fuzzy
-msgid "'nmax' must be positive"
-msgstr "argumento debe tener longitud positiva"
+#, fuzzy, c-format
+msgid "'%s' argument must be positive"
+msgstr "'a' e 'b' deben ser finitos"
 
 #: src/main/unique.cpp:984
 #, fuzzy
-msgid "'match' requires vector arguments"
+msgid "'match()' function requires vector arguments"
 msgstr "'match' requiere argumentos vectoriales"
 
 #: src/main/unique.cpp:1031 src/main/unique.cpp:1167
@@ -7761,187 +8114,232 @@ msgstr "argumento no es de modo carácter"
 
 #: src/main/unique.cpp:1296
 #, fuzzy
-msgid "... used in a situation where it does not exist"
+msgid "'...' used in a situation where it does not exist"
 msgstr "... usado en una situacion donde no existe"
 
 #: src/main/unique.cpp:1302
 #, fuzzy
-msgid "... is not a pairlist"
+msgid "'...' is not a pairlist"
 msgstr "no se espera el valor en '...'"
-
-#: src/main/unique.cpp:1341
-msgid "'envir' must be an environment"
-msgstr "'envir' debe ser un entorno"
 
 #: src/main/unique.cpp:1488
 #, fuzzy
-msgid "non-numeric matrix in rowsum(): this should not happen"
+msgid "non-numeric matrix in 'rowsum()': this should not happen"
 msgstr "matrix no numérica en rowsum(): esto no puede ocurrir"
 
-#: src/main/unique.cpp:1527
+#: src/main/unique.cpp:1490 src/main/unique.cpp:1562
 #, fuzzy
-msgid "non-numeric data frame in rowsum"
+msgid "row names are not character"
+msgstr "'fmt' debe ser un vector de caracteres no vacío"
+
+#: src/main/unique.cpp:1526
+#, fuzzy
+msgid "non-numeric data frame in 'rowsum()'"
 msgstr "data frame no numérico en rowsum"
 
-#: src/main/unique.cpp:1559
+#: src/main/unique.cpp:1558
 msgid "this cannot happen"
 msgstr "esto no puede ocurrir"
 
-#: src/main/unique.cpp:1629
-msgid "'names' must be a character vector"
-msgstr "'names' debe ser un vector de caracteres"
-
-#: src/main/unique.cpp:1710
+#: src/main/unique.cpp:1708
 #, fuzzy
-msgid "C function 'csduplicated' not called on a STRSXP"
+msgid "'csduplicated()' function was not called on a STRSXP"
 msgstr "csduplicated no llamada dentro de una STRSXP"
 
-#: src/main/util.cpp:101 src/main/util.cpp:119
+#: src/main/unique.cpp:1740
+msgid "This algorithm is for size <= n/2"
+msgstr ""
+
+#: src/main/util.cpp:100 src/main/util.cpp:118
 msgid "object is not a matrix"
 msgstr "objeto no es una matriz"
 
-#: src/main/util.cpp:318 src/main/util.cpp:330 src/main/util.cpp:341
-#: src/main/util.cpp:356
-#, fuzzy, c-format
-msgid "type %d is unimplemented in '%s'"
-msgstr "tipo '%s' no esta implementado en  '%s'"
+#: src/main/util.cpp:129 src/main/util.cpp:131
+#, fuzzy
+msgid "invalid type passed to internal function\n"
+msgstr "argumento no válido para edit()"
 
-#: src/main/util.cpp:367
+#: src/main/util.cpp:317 src/main/util.cpp:329 src/main/util.cpp:339
+#: src/main/util.cpp:354 src/main/util.cpp:367
 #, fuzzy, c-format
-msgid "unimplemented type '%s' in '%s'\n"
-msgstr "tipo no implementado '%s' en '%s'\n"
+msgid "type %d is unimplemented in '%s' function"
+msgstr "tipo %d no esta implementado en type2str"
 
-#: src/main/util.cpp:369
+#: src/main/util.cpp:319 src/main/util.cpp:341
 #, fuzzy, c-format
-msgid "unimplemented type (%d) in '%s'\n"
+msgid "unknown type #%d"
+msgstr "símbolo desconocido"
+
+#: src/main/util.cpp:365
+#, fuzzy, c-format
+msgid "unimplemented type '%s' in '%s' function"
 msgstr "tipo no implementado (%d) en '%s'\n"
 
-#: src/main/util.cpp:494
+#: src/main/util.cpp:492
 msgid "invalid tag in name extraction"
 msgstr "etiqueta invalida durante la extracción de nombre"
 
-#: src/main/util.cpp:516
+#: src/main/util.cpp:514
 #, c-format
 msgid "supplied argument name '%s' does not match '%s'"
 msgstr "nombre de argumento suministrado '%s' no coincide '%s'"
 
-#: src/main/util.cpp:543
+#: src/main/util.cpp:541
 #, fuzzy, c-format
-msgid "'nthcdr' list shorter than %d"
+msgid "'nthcdr()' list is shorter than %d"
 msgstr "lista \"nthcdr\" es menor que %d"
 
-#: src/main/util.cpp:548
+#: src/main/util.cpp:546
 #, fuzzy
 msgid "'nthcdr' needs a list to CDR down"
 msgstr "\"nthcdr\" requiere una lista para bajar CDR"
 
-#: src/main/util.cpp:648
-msgid "'all.x' must be TRUE or FALSE"
-msgstr "'all.x' debe ser TRUE o FALSE"
-
-#: src/main/util.cpp:650
-msgid "'all.y' must be TRUE or FALSE"
-msgstr "'all.y' debe ser TRUE o FALSE"
-
-#: src/main/util.cpp:675
+#: src/main/util.cpp:673
 #, fuzzy
 msgid "number of rows in the result exceeds maximum vector length"
 msgstr ""
 "número de items para para sustituir no es un múltiplo de la longitud del "
 "reemplazo"
 
-#: src/main/util.cpp:764
+#: src/main/util.cpp:762
 #, fuzzy
 msgid "missing value is invalid"
 msgstr "valor faltante para el parámetro"
 
-#: src/main/util.cpp:773 src/main/util.cpp:780
+#: src/main/util.cpp:771 src/main/util.cpp:778
 msgid "cannot change working directory"
 msgstr "no es posible cambiar el directorio de trabajo"
 
-#: src/main/util.cpp:799 src/main/util.cpp:832 src/main/util.cpp:872
-#: src/main/util.cpp:913 src/main/util.cpp:1041 src/main/util.cpp:1099
-#: src/main/util.cpp:1121
+#: src/main/util.cpp:797 src/main/util.cpp:830 src/main/util.cpp:870
+#: src/main/util.cpp:911 src/main/util.cpp:1039 src/main/util.cpp:1097
+#: src/main/util.cpp:1119
 msgid "a character vector argument expected"
 msgstr "se espera un vector de caracteres como argumento"
 
-#: src/main/util.cpp:806 src/main/util.cpp:840 src/main/util.cpp:881
-#: src/main/util.cpp:921
+#: src/main/util.cpp:979
+msgid ""
+"this platform does not have realpath so the results may not be canonical"
+msgstr ""
+
+#: src/main/util.cpp:1021
 #, fuzzy
-msgid "path too long"
-msgstr "camino (path) muy largo"
+msgid "system timezone name is unknown: set environment variable TZ"
+msgstr ""
+"este sistema no puede desvincular variables generales que han sido puestas a "
+"\"\""
 
-#: src/main/util.cpp:958
-msgid "'path' must be a character vector"
-msgstr "'path' debe ser un vector de caracteres"
-
-#: src/main/util.cpp:1055
+#: src/main/util.cpp:1053
 #, fuzzy
 msgid "only the first character of 'quote' will be used"
 msgstr "solo el primer carácter de 'quote' será utilizado"
 
-#: src/main/util.cpp:1123
+#: src/main/util.cpp:1121
 #, fuzzy
 msgid "a character vector 'value' expected"
 msgstr "se espera un vector de caracteres como argumento"
 
-#: src/main/util.cpp:1126
+#: src/main/util.cpp:1124
 #, fuzzy
 msgid "'value' must be of positive length"
 msgstr "argumento debe tener longitud positiva"
 
-#: src/main/util.cpp:1255 src/main/util.cpp:1263
+#: src/main/util.cpp:1253 src/main/util.cpp:1261
 #, fuzzy, c-format
-msgid "invalid input '%s' in 'utf8towcs'"
+msgid "invalid input '%s' in 'utf8towcs()' function"
 msgstr "entrada no válida en Rmbstowcs"
 
-#: src/main/util.cpp:1348
+#: src/main/util.cpp:1346
 #, fuzzy, c-format
 msgid "invalid multibyte string at '%s'"
 msgstr "string multibyte %d inválida"
 
-#: src/main/util.cpp:1487
+#: src/main/util.cpp:1485
 msgid "error message truncated to 255 chars"
 msgstr "mensage de error truncado en 255 caracteres"
 
-#: src/main/util.cpp:1500
+#: src/main/util.cpp:1498
 msgid "warning message truncated to 255 chars"
 msgstr "mensage de atención truncado en 255 caracteres"
 
-#: src/main/util.cpp:1649
+#: src/main/util.cpp:1647
 #, c-format
 msgid "accuracy loss in conversion from \"%s\" to numeric"
 msgstr ""
 
-#: src/main/util.cpp:1959
+#: src/main/util.cpp:1957
 #, fuzzy
 msgid "all arguments must be named"
 msgstr "los atributos deben tener nombre"
 
-#: src/main/util.cpp:2080
+#: src/main/util.cpp:1978
+#, fuzzy, c-format
+msgid "failed to set ICU locale %s (%d)"
+msgstr "se intenta especificar un atributo 'class' no válido"
+
+#: src/main/util.cpp:1982 src/main/util.cpp:2053
+#, fuzzy, c-format
+msgid "failed to open ICU collator (%d)"
+msgstr "fallo en el intento de vincular un puerto"
+
+#: src/main/util.cpp:2004
+#, fuzzy
+msgid "failed to set ICU collator attribute"
+msgstr "se intenta especificar un atributo 'class' no válido"
+
+#: src/main/util.cpp:2028 src/main/util.cpp:2084
+msgid "ICU not in use"
+msgstr ""
+
+#: src/main/util.cpp:2049
+#, fuzzy, c-format
+msgid "failed to set ICU locale (%d)"
+msgstr "se intenta especificar un atributo 'class' no válido"
+
+#: src/main/util.cpp:2070
+#, fuzzy
+msgid "could not collate using ICU"
+msgstr "no fue posible abrir el archivo PNG '%s'"
+
+#: src/main/util.cpp:2078
 #, fuzzy
 msgid "ICU is not supported on this build"
 msgstr "esta plataforma no soporta nsl()"
 
-#: src/main/util.cpp:2130
+#: src/main/util.cpp:2128
 #, fuzzy
-msgid "'breaks' is not sorted"
+msgid "'breaks' argument is not sorted"
 msgstr "el modo '%s' no es soportado en call_R"
 
-#: src/main/util.cpp:2163 src/main/util.cpp:2211
+#: src/main/util.cpp:2161 src/main/util.cpp:2209
 #, fuzzy, c-format
 msgid "long vector '%s' is not supported"
 msgstr "el modo '%s' no es soportado en call_R"
 
-#: src/main/util.cpp:2264
-#, fuzzy
-msgid "'eps.correct' must be 0, 1, or 2"
+#: src/main/util.cpp:2262
+#, fuzzy, c-format
+msgid "'%s' argument must be 0, 1, or 2"
 msgstr "primer argumento debe ser un vector"
 
-#: src/main/util.cpp:2291
+#: src/main/util.cpp:2289
 #, fuzzy
 msgid "'x' must be a vector"
 msgstr "'x' debe ser un vector de caracteres"
+
+#: src/main/util.cpp:2393
+#, fuzzy
+msgid "width cannot be zero"
+msgstr ".C(..): el ancho no puede ser cero"
+
+#: src/main/util.cpp:2408
+#, fuzzy
+msgid "'type' argument must be \"integer\" for \"d\"-format"
+msgstr ""
+".C(..): 'type' debe ser \"entero\" para poder utilizar el formato \"d\""
+
+#: src/main/util.cpp:2492
+#, fuzzy
+msgid "'type' argument must be \"real\" for this format"
+msgstr ".C(..): 'type' debe ser \"real\" para este formato"
 
 #: src/main/VectorBase.cpp:104
 msgid "Attempt to associate dimnames with a non-existent dimension"
@@ -7971,7 +8369,7 @@ msgstr "no se puede ubicar un vector de tamaño  %0.f Kb"
 msgid "CXXR Copyright (C) 2008-14 Andrew R. Runnalls.  CXXR like\n"
 msgstr ""
 
-#: src/main/version.cpp:49
+#: src/main/version.cpp:50
 msgid ""
 "R is free software and comes with ABSOLUTELY NO WARRANTY.\n"
 "You are welcome to redistribute it under certain conditions.\n"
@@ -7983,7 +8381,7 @@ msgstr ""
 "Escriba 'license()' o 'licence()' para detalles de distribucion.\n"
 "\n"
 
-#: src/main/version.cpp:52
+#: src/main/version.cpp:53
 msgid ""
 "R is a collaborative project with many contributors.\n"
 "Type 'contributors()' for more information and\n"
@@ -7995,7 +8393,7 @@ msgstr ""
 "'citation()' para saber cómo citar R o paquetes de R en publicaciones.\n"
 "\n"
 
-#: src/main/version.cpp:55
+#: src/main/version.cpp:56
 msgid ""
 "Type 'demo()' for some demos, 'help()' for on-line help, or\n"
 "'help.start()' for an HTML browser interface to help.\n"
@@ -8007,12 +8405,6 @@ msgstr ""
 "o 'help.start()' para abrir el sistema de ayuda HTML con su navegador.\n"
 "Escriba 'q()' para salir de R.\n"
 "\n"
-
-#: src/main/version.cpp:58
-msgid ""
-"CXXR is not part of the R project, so please do not report bugs\n"
-"via r-bugs or the R website; instead refer to the CXXR website.\n"
-msgstr ""
 
 #: src/main/WeakRef.cpp:75
 msgid "can only weakly reference/finalize reference objects"
@@ -8047,7 +8439,7 @@ msgstr "Deben existir al menos cuatro puntos control"
 
 #: src/main/xspline.cpp:550
 #, fuzzy
-msgid "There must be at least three control points"
+msgid "there must be at least three control points"
 msgstr "debe haber un primer argumento"
 
 #: src/modules/internet/internet.cpp:123
@@ -9182,11 +9574,6 @@ msgstr "probando la URL '%s'\n"
 msgid "file name is missing\n"
 msgstr "nombre esta perdido"
 
-#: src/unix/Rscript.c:229
-#, fuzzy
-msgid "file name is too long"
-msgstr "nombre de archivo muy largo"
-
 #: src/unix/Rscript.c:252
 #, c-format
 msgid "impossibly long string for R_ARCH\n"
@@ -9341,6 +9728,304 @@ msgid "X11 is not available"
 msgstr "X11 no está disponible"
 
 #, fuzzy
+#~ msgid "internal error in do_logic"
+#~ msgstr "error interno en do_random2"
+
+#~ msgid "invalid 'x' type in 'x %s y'"
+#~ msgstr "tipo de 'x' inválido en 'x %s y'"
+
+#~ msgid "invalid 'y' type in 'x %s y'"
+#~ msgstr "tipo de 'y' inválido en 'x %s y'"
+
+#~ msgid "formal argument \"%s\" matched by multiple actual arguments"
+#~ msgstr ""
+#~ "el argumento formal \"%s\" concuerda con múltiples argumentos "
+#~ "especificados"
+
+#, fuzzy
+#~ msgid "'generic' argument must be a character string"
+#~ msgstr "el segundo argumento debe ser un string de caracteres"
+
+#~ msgid "'what' must be a character vector"
+#~ msgstr "'what' debe ser un vector de caracteres"
+
+#, fuzzy
+#~ msgid "'which' must be a length 1 logical vector"
+#~ msgstr "'which' debe ser un vector lógico de longitud 1"
+
+#, fuzzy
+#~ msgid "'onOff' must be TRUE or FALSE"
+#~ msgstr "'all.x' debe ser TRUE o FALSE"
+
+#~ msgid "argument 'code' must be a character string"
+#~ msgstr "el argumento de 'code' debe ser un string de caracteres"
+
+#, fuzzy
+#~ msgid "'%s' must be a character string"
+#~ msgstr "'sep' debe ser una cadena (string) de caracteres"
+
+#, fuzzy
+#~ msgid "non-string argument to internal 'paste'"
+#~ msgstr "el argumento para pegado interno no es un string"
+
+#~ msgid "non-string argument to Internal paste"
+#~ msgstr "el argumento para pegado interno no es un string"
+
+#, fuzzy
+#~ msgid "'decimal.mark' must be a string of one character"
+#~ msgstr "'msg1' debe ser un string de caracteres"
+
+#~ msgid "invalid filename specification"
+#~ msgstr "especificación del nombre de archivo inválido"
+
+#, fuzzy
+#~ msgid "expanded 'from' name too long"
+#~ msgstr "nombre ampliado de fuente demasiado largo"
+
+#, fuzzy
+#~ msgid "expanded 'to' name too long"
+#~ msgstr "nombre ampliado de fuente demasiado largo"
+
+#~ msgid "file choice cancelled"
+#~ msgstr "selección de archivo cancelada"
+
+#~ msgid "file name too long"
+#~ msgstr "nombre de archivo muy largo"
+
+#, fuzzy
+#~ msgid "'%s' already exists"
+#~ msgstr "'%s' ya existe"
+
+#, fuzzy
+#~ msgid "cannot create dir '%s', reason '%s'"
+#~ msgstr "no fue posible crear fifo '%s', motivo '%s'"
+
+#, fuzzy
+#~ msgid "'%ls' already exists"
+#~ msgstr "'%s' ya existe"
+
+#, fuzzy
+#~ msgid "cannot create dir '%ls', reason '%s'"
+#~ msgstr "no fue posible crear fifo '%s', motivo '%s'"
+
+#, fuzzy
+#~ msgid "over-long path"
+#~ msgstr "patrón de longitud 0"
+
+#, fuzzy
+#~ msgid "problem creating directory %ls: %s"
+#~ msgstr "problema al ejecutar el editor %s"
+
+#, fuzzy
+#~ msgid "problem reading dir %ls: %s"
+#~ msgstr "problema al ejecutar el editor %s"
+
+#, fuzzy
+#~ msgid "over-long path length"
+#~ msgstr "patrón de longitud 0"
+
+#, fuzzy
+#~ msgid "problem creating directory %s: %s"
+#~ msgstr "problema al ejecutar el editor %s"
+
+#, fuzzy
+#~ msgid "problem reading directory %s: %s"
+#~ msgstr "problema al ejecutar el editor %s"
+
+#~ msgid "invalid 'na.print' specification"
+#~ msgstr "especificación 'na.print' inválida"
+
+#~ msgid "'gap' must be non-negative integer"
+#~ msgstr "'gap' debe ser un entero no negativo"
+
+#, fuzzy
+#~ msgid "invalid character length in 'dblepr'"
+#~ msgstr "largo de carácter inválido en dblepr"
+
+#, fuzzy
+#~ msgid "invalid character length in 'intpr'"
+#~ msgstr "largo de carácter inválido en dblepr"
+
+#, fuzzy
+#~ msgid "invalid character length in 'realpr'"
+#~ msgstr " largo de carácter inválido en realpr"
+
+#, fuzzy
+#~ msgid "argument must be a character vector of length 1"
+#~ msgstr "'hostname' debe ser un vector de caracteres de longitud 1"
+
+#, fuzzy
+#~ msgid "argument 'x' must be a raw vector"
+#~ msgstr "primer argumento debe ser un vector"
+
+#, fuzzy
+#~ msgid "argument 'multiple' must be TRUE or FALSE"
+#~ msgstr "'decreciente' debe ser TRUE o FALSE"
+
+#, fuzzy
+#~ msgid "argument 'x' must be an integer vector"
+#~ msgstr "el primer argumento debe ser un vector de caracteres"
+
+#, fuzzy
+#~ msgid "argument '%s' must be a character string"
+#~ msgstr "el argumento de 'code' debe ser un string de caracteres"
+
+#, fuzzy
+#~ msgid "could not allocate space for 'path'"
+#~ msgstr "no fué posible asignar espacio a 'name'"
+
+#, fuzzy
+#~ msgid "DLLname '%s' is too long"
+#~ msgstr "DLLname '%s' es demasiado largo"
+
+#~ msgid "could not allocate space for 'name'"
+#~ msgstr "no fué posible asignar espacio a 'name'"
+
+#, fuzzy
+#~ msgid "unimplemented type %d in createRSymbolObject"
+#~ msgstr "Tipo %d no implementado  en createRSymbolObject"
+
+#~ msgid "'user_unif_rand' not in load table"
+#~ msgstr "'user_unif_rand' no está en la tabla de carga"
+
+#, fuzzy
+#~ msgid "'.Random.seed' is a missing argument with no default"
+#~ msgstr "el argumento .Random.seed no existe y no tiene valor por defecto"
+
+#~ msgid "'user_norm_rand' not in load table"
+#~ msgstr "'user_norm_rand' no está en la tabla de carga"
+
+#, fuzzy
+#~ msgid "unrecognized internal function name \"%s\""
+#~ msgstr "no se pudo encontrar la función \"%s\""
+
+#~ msgid "'file' must be non-empty string"
+#~ msgstr "'file' debe ser un string no vacío"
+
+#~ msgid "'ascii' must be logical"
+#~ msgstr "'ascii' debe ser un valor lógico"
+
+#~ msgid "unable to open file"
+#~ msgstr "no es posible abrir el archivo"
+
+#, fuzzy
+#~ msgid "scan() expected '%s', got '%s'"
+#~ msgstr "scan() esperaba '%s', obtuvo '%s'"
+
+#, fuzzy
+#~ msgid "'length.out' must be a non-negative number"
+#~ msgstr "'gap' debe ser un entero no negativo"
+
+#, fuzzy
+#~ msgid "'from' must be finite"
+#~ msgstr "'a' e 'b' deben ser finitos"
+
+#, fuzzy
+#~ msgid "'to' must be finite"
+#~ msgstr "'a' e 'b' deben ser finitos"
+
+#, fuzzy
+#~ msgid "'by' must be finite"
+#~ msgstr "'a' e 'b' deben ser finitos"
+
+#~ msgid "not a proper raw vector"
+#~ msgstr "no es un vector crudo (raw)"
+
+#, fuzzy
+#~ msgid "'decreasing' must be TRUE or FALSE"
+#~ msgstr "'decreciente' debe ser TRUE o FALSE"
+
+#, fuzzy
+#~ msgid "'file' must be a character string or connection"
+#~ msgstr "que debe ser un string de caracteres o una función"
+
+#, fuzzy
+#~ msgid "argument '%s = \"%s\"' will be ignored"
+#~ msgstr "argumento '%s  será ignorado"
+
+#, fuzzy
+#~ msgid "integer overflow - use sum(as.numeric(.))"
+#~ msgstr "Exceso de capacidad (overflow) en sum(.); use sum(as.numeric(.))"
+
+#, fuzzy
+#~ msgid "Integer overflow - use sum(as.numeric(.))"
+#~ msgstr "Exceso de capacidad (overflow) en sum(.); use sum(as.numeric(.))"
+
+#, fuzzy
+#~ msgid "no non-missing arguments to min; returning Inf"
+#~ msgstr "ningún argumento finito para min; retornando Inf"
+
+#, fuzzy
+#~ msgid "no non-missing arguments to max; returning -Inf"
+#~ msgstr "ningun argumento finito para max; retornando -Inf"
+
+#~ msgid "no 'pattern'"
+#~ msgstr "'pattern' no especificado"
+
+#~ msgid "no 'tempdir'"
+#~ msgstr "'tempdir' no especificado"
+
+#~ msgid "no 'fileext'"
+#~ msgstr "no hay 'fileext'"
+
+#, fuzzy
+#~ msgid "'Sys.setenv' is not available on this system"
+#~ msgstr "'putenv' no está disponible en este sistema"
+
+#, fuzzy
+#~ msgid "'Sys.unsetenv' is not available on this system"
+#~ msgstr "'putenv' no está disponible en este sistema"
+
+#~ msgid "'x' must be a character vector"
+#~ msgstr "'x' debe ser un vector de caracteres"
+
+#~ msgid "'duplicated' applies only to vectors"
+#~ msgstr "'duplicated' puede ser aplicada solamente a vectores"
+
+#, fuzzy
+#~ msgid "'fromLast' must be length 1"
+#~ msgstr "'%s' debe tener longitud 1"
+
+#, fuzzy
+#~ msgid "'fromLast' must be TRUE or FALSE"
+#~ msgstr "'decreciente' debe ser TRUE o FALSE"
+
+#, fuzzy
+#~ msgid "'nmax' must be positive"
+#~ msgstr "argumento debe tener longitud positiva"
+
+#~ msgid "'envir' must be an environment"
+#~ msgstr "'envir' debe ser un entorno"
+
+#~ msgid "'names' must be a character vector"
+#~ msgstr "'names' debe ser un vector de caracteres"
+
+#, fuzzy
+#~ msgid "type %d is unimplemented in '%s'"
+#~ msgstr "tipo '%s' no esta implementado en  '%s'"
+
+#, fuzzy
+#~ msgid "unimplemented type '%s' in '%s'\n"
+#~ msgstr "tipo no implementado '%s' en '%s'\n"
+
+#, fuzzy
+#~ msgid "unimplemented type (%d) in '%s'\n"
+#~ msgstr "tipo no implementado (%d) en '%s'\n"
+
+#~ msgid "'all.x' must be TRUE or FALSE"
+#~ msgstr "'all.x' debe ser TRUE o FALSE"
+
+#~ msgid "'all.y' must be TRUE or FALSE"
+#~ msgstr "'all.y' debe ser TRUE o FALSE"
+
+#~ msgid "'path' must be a character vector"
+#~ msgstr "'path' debe ser un vector de caracteres"
+
+#, fuzzy
+#~ msgid "'eps.correct' must be 0, 1, or 2"
+#~ msgstr "primer argumento debe ser un vector"
+
+#, fuzzy
 #~ msgid "NaN values produced"
 #~ msgstr "NAs producidos"
 
@@ -9474,10 +10159,6 @@ msgstr "X11 no está disponible"
 #~ msgid "over-long name in '%s' function"
 #~ msgstr "nombre demasiado largo en '%s'"
 
-#, fuzzy
-#~ msgid "restarts are not supported in 'eval()' function"
-#~ msgstr "reinicios no sustentados en 'eval'"
-
 #~ msgid "value in '...' is not a promise"
 #~ msgstr "no se espera el valor en '...'"
 
@@ -9497,10 +10178,6 @@ msgstr "X11 no está disponible"
 #, fuzzy
 #~ msgid "bad operation code"
 #~ msgstr "Código de operador defectuoso"
-
-#, fuzzy
-#~ msgid "invalid '%s' type in 'x %s y'"
-#~ msgstr "tipo de 'x' inválido en 'x %s y'"
 
 #, fuzzy
 #~ msgid "argument %d is missing"
@@ -9613,10 +10290,6 @@ msgstr "X11 no está disponible"
 #~ msgstr "secuencia \\u{xxxx} inválida (linea %d)"
 
 #, fuzzy
-#~ msgid "vector is too long"
-#~ msgstr "tamaño del vector especificado es muy grande"
-
-#, fuzzy
 #~ msgid "\"%s\" (has value)"
 #~ msgstr "valor incorrecto"
 
@@ -9666,10 +10339,6 @@ msgstr "X11 no está disponible"
 #~ msgid "cannot allocate vector of length %d"
 #~ msgstr "no se puede asignar un vector de longitud %d"
 
-#, fuzzy
-#~ msgid "invalid length for pairlist"
-#~ msgstr "longitud 0 del argumento inválida"
-
 #~ msgid "protect(): protection stack overflow"
 #~ msgstr "protect(): protección del desborde de la pila"
 
@@ -9701,11 +10370,6 @@ msgstr "X11 no está disponible"
 #~ msgstr "no es seguro devolver un puntero de vector"
 
 #, fuzzy
-#~ msgid ""
-#~ "could not allocate memory (%u Mb) in 'R_AllocStringBuffer()' function"
-#~ msgstr "no se puede asignar memoria para 'read.dcf'"
-
-#, fuzzy
 #~ msgid "couldn't allocate memory for symbol table"
 #~ msgstr "no se puede asignar memoria para 'read.dcf'"
 
@@ -9720,141 +10384,12 @@ msgstr "X11 no está disponible"
 #~ msgid "'.Internal(%s())' called from namespace '%s'\n"
 #~ msgstr "no es posible remover las variables del 'base namespace'"
 
-#, fuzzy
-#~ msgid "'UseMethod()' used in an inappropriate fashion"
-#~ msgstr "'UseMethod' se usó de manera no apropiada"
-
 #~ msgid "wrong argument ..."
 #~ msgstr "argumento ... errado"
 
 #, fuzzy
-#~ msgid "'%s' argument must be a logical vector of length 1"
-#~ msgstr "'hostname' debe ser un vector de caracteres de longitud 1"
-
-#, fuzzy
-#~ msgid "'internal' slot does not name an internal function: %s"
-#~ msgstr "no hay ninguna función interna \"%s\""
-
-#, fuzzy
 #~ msgid "'methods' package not yet loaded"
 #~ msgstr "las fuentes Hershey no pueden ser cargadas"
-
-#, fuzzy
-#~ msgid "'R_get_primname()' called on a non-primitive"
-#~ msgstr "'R_get_primname' invocado en un ambiente no-primitivo"
-
-#, fuzzy
-#~ msgid "non-string argument passed to internal 'paste()' function"
-#~ msgstr "el argumento para pegado interno no es un string"
-
-#, fuzzy
-#~ msgid "expanded '%s' name is too long"
-#~ msgstr "nombre ampliado de fuente demasiado largo"
-
-#, fuzzy
-#~ msgid "cannot get info on '%ls', reason '%s'"
-#~ msgstr "no fue posible crear fifo '%s', motivo '%s'"
-
-#, fuzzy
-#~ msgid "cannot open reparse point '%ls', reason '%s'"
-#~ msgstr "no fue posible abrir el archivo '%s', motivo '%s'"
-
-#, fuzzy
-#~ msgid "cannot delete reparse point '%ls', reason '%s'"
-#~ msgstr "no fue posible crear fifo '%s', motivo '%s'"
-
-#, fuzzy
-#~ msgid "directory '%s' already exists"
-#~ msgstr "'%s' ya existe"
-
-#, fuzzy
-#~ msgid "cannot create directory '%s', reason '%s'"
-#~ msgstr "no fue posible crear fifo '%s', motivo '%s'"
-
-#, fuzzy
-#~ msgid "directory '%ls' already exists"
-#~ msgstr "'%s' ya existe"
-
-#, fuzzy
-#~ msgid "problem with reading directory %ls: %s"
-#~ msgstr "problema al ejecutar el editor %s"
-
-#, fuzzy
-#~ msgid "cannot set reparse point '%ls', reason '%s'"
-#~ msgstr "no fue posible crear fifo '%s', motivo '%s'"
-
-#, fuzzy
-#~ msgid "invalid multibyte string"
-#~ msgstr "string multibyte %d inválida"
-
-#, fuzzy
-#~ msgid "invalid character in current multibyte locale"
-#~ msgstr "largo de carácter inválido en dblepr"
-
-#, fuzzy
-#~ msgid "<real array of size %s>"
-#~ msgstr "modo raw es siempre de tamaño 1"
-
-#, fuzzy
-#~ msgid ""
-#~ " [ reached 'getOption(\"max.print\")' -- omitted %d row and %d matrix "
-#~ "slice ]"
-#~ msgid_plural ""
-#~ " [ reached 'getOption(\"max.print\")' -- omitted %d rows and %d matrix "
-#~ "slices ]"
-#~ msgstr[0] ""
-#~ " [ reached getOption(\"max.print\") -- omitida la última fila ]]\n"
-#~ msgstr[1] ""
-#~ " [ reached getOption(\"max.print\") -- omitida la última fila ]]\n"
-
-#, fuzzy
-#~ msgid " [ reached 'getOption(\"max.print\")' -- omitted %d matrix slice ]"
-#~ msgid_plural ""
-#~ " [ reached 'getOption(\"max.print\")' -- omitted %d matrix slices ]"
-#~ msgstr[0] ""
-#~ " [ reached getOption(\"max.print\") -- omitida la última fila ]]\n"
-#~ msgstr[1] ""
-#~ " [ reached getOption(\"max.print\") -- omitida la última fila ]]\n"
-
-#, fuzzy
-#~ msgid "'%s' argument must be non-negative integer"
-#~ msgstr "'gap' debe ser un entero no negativo"
-
-#, fuzzy
-#~ msgid " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]"
-#~ msgid_plural " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]"
-#~ msgstr[0] ""
-#~ " [ reached getOption(\"max.print\") -- omitida la última fila ]]\n"
-#~ msgstr[1] ""
-#~ " [ reached getOption(\"max.print\") -- omitida la última fila ]]\n"
-
-#, fuzzy
-#~ msgid "<Object of type '%s' with S4 bit but without a class>\n"
-#~ msgstr "objeto de tipo '%s' no es subconjunto"
-
-#, fuzzy
-#~ msgid "<promise: %p>\n"
-#~ msgstr "ambiente inválido"
-
-#, fuzzy
-#~ msgid "<weak reference>\n"
-#~ msgstr "no es una referencia débil"
-
-#, fuzzy
-#~ msgid "invalid character length in '%s' function"
-#~ msgstr " largo de carácter inválido en intpr"
-
-#, fuzzy
-#~ msgid "<environment: %s>"
-#~ msgstr "ambiente inválido"
-
-#, fuzzy
-#~ msgid "<environment: %p>"
-#~ msgstr "ambiente inválido"
-
-#, fuzzy
-#~ msgid "unsupported encoding (%d) in '%s' function"
-#~ msgstr "tipo no implementado (%d) en '%s'\n"
 
 #~ msgid "invalid arguments"
 #~ msgstr "argumentos inválidos"
@@ -9864,116 +10399,11 @@ msgstr "X11 no está disponible"
 #~ msgstr "NAs producidos"
 
 #, fuzzy
-#~ msgid "'%s' argument must be a character vector of length 1"
-#~ msgstr "'hostname' debe ser un vector de caracteres de longitud 1"
-
-#, fuzzy
-#~ msgid "'%s' argument must be a raw vector"
-#~ msgstr "primer argumento debe ser un vector"
-
-# Marca para mi 3pm
-#, fuzzy
-#~ msgid "'%s' argument must be an integer vector"
-#~ msgstr "el argumento 'list' debe ser una lista"
-
-#, fuzzy
-#~ msgid "allocation failure in '%s' function"
-#~ msgstr "fallo de asignación en GVText"
-
-#, fuzzy
 #~ msgid "operator needs two arguments"
 #~ msgstr "el operador necesita uno o dos argumentos"
 
 #~ msgid "invalid comparison with complex values"
 #~ msgstr "comparación con valores complejos es inválida"
-
-#, fuzzy
-#~ msgid "allocation failure in reading Renviron"
-#~ msgstr "fallo de asignación en GVText"
-
-#, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "   Invalid lines were ignored\n"
-#~ msgstr "final de línea inválido"
-
-#, fuzzy
-#~ msgid "cannot find system Renviron"
-#~ msgstr "no se puede desclasificar un entorno"
-
-#, fuzzy
-#~ msgid "'%s' is not in load table"
-#~ msgstr "%s nombre de símbolo \"%s\" no está en la tabla de carga"
-
-#, fuzzy
-#~ msgid "unrecognized internal function name '%s'"
-#~ msgstr "no se pudo encontrar la función \"%s\""
-
-#, fuzzy
-#~ msgid "scan() expected a logical, got '%s'"
-#~ msgstr "scan() esperaba '%s', obtuvo '%s'"
-
-#, fuzzy
-#~ msgid "scan() expected an integer, got '%s'"
-#~ msgstr "scan() esperaba '%s', obtuvo '%s'"
-
-#, fuzzy
-#~ msgid "scan() expected a real, got '%s'"
-#~ msgstr "scan() esperaba '%s', obtuvo '%s'"
-
-#, fuzzy
-#~ msgid "scan() expected a complex, got '%s'"
-#~ msgstr "scan() esperaba '%s', obtuvo '%s'"
-
-#, fuzzy
-#~ msgid "'from' argument cannot be NA, NaN or infinite"
-#~ msgstr "'a' e 'b' deben ser finitos"
-
-#, fuzzy
-#~ msgid "'%s' argument must be of length 1"
-#~ msgstr "'%s' debe tener longitud 1"
-
-#, fuzzy
-#~ msgid "'to' argument cannot be NA, NaN or infinite"
-#~ msgstr "'hadj' debe tener longitud 1"
-
-#, fuzzy
-#~ msgid "'%s' argument must be finite"
-#~ msgstr "'a' e 'b' deben ser finitos"
-
-#, fuzzy
-#~ msgid "'%s' argument is not a proper file name"
-#~ msgstr "nombre de archivo no válido"
-
-#, fuzzy
-#~ msgid "'%s' argument is not a proper raw vector"
-#~ msgstr "'fmt' debe ser un vector de caracteres no vacío"
-
-#, fuzzy
-#~ msgid "%s in command \"%s\""
-#~ msgstr "%s en \"%s\""
-
-#, fuzzy
-#~ msgid ""
-#~ "%s in:\n"
-#~ "\"%s\n"
-#~ "%s\""
-#~ msgstr ""
-#~ "error de sintaxis en:\n"
-#~ "\"%s\n"
-#~ "%s\""
-
-#, fuzzy
-#~ msgid "'%s = \"%s\"' option will be ignored"
-#~ msgstr "argumento '%s  será ignorado"
-
-#, fuzzy
-#~ msgid "WARNING: invalid 'R_VSIZE' ignored\n"
-#~ msgstr "ATENCIÓN: el valor '%s' no es válido: ignorado\n"
-
-#, fuzzy
-#~ msgid "WARNING: R_VSIZE smaller than Min_Vsize = %lu is ignored\n"
-#~ msgstr "ATENCIÓN: el valor '%s' no es válido: ignorado\n"
 
 #, fuzzy
 #~ msgid "WARNING: invalid 'R_NSIZE' ignored\n"
@@ -9991,85 +10421,11 @@ msgstr "X11 no está disponible"
 #~ "tipos incompatibles (de %s a %s) en asignaciones de subconjunto de la "
 #~ "matriz"
 
-#, fuzzy
-#~ msgid "internal error: index %d from length %d"
-#~ msgstr "error interno en do_random1"
-
-#, fuzzy
-#~ msgid "invalid subscript for pairlist"
-#~ msgstr "número de subscritos inválidos en asignación de lista"
-
 #~ msgid "(subscript) logical subscript too long"
 #~ msgstr "(subscript) subscrito lógico muy largo"
 
 #~ msgid "matrix subscripting not handled for this type"
 #~ msgstr "uso de subscritos en matrices no soportadas para este tipo"
-
-#, fuzzy
-#~ msgid "getter call used outside of a complex assignment"
-#~ msgstr "función inválida en asignación compleja"
-
-#, fuzzy
-#~ msgid "no non-missing arguments passed to 'min()' function; returning Inf"
-#~ msgstr "ningún argumento finito para min; retornando Inf"
-
-#, fuzzy
-#~ msgid "no '%s' argument"
-#~ msgstr "argumento '%s' inválido"
-
-#, fuzzy
-#~ msgid "'%s' function is not available on this system"
-#~ msgstr "'putenv' no está disponible en este sistema"
-
-#, fuzzy
-#~ msgid "'%s' function must be called on a CHARSXP"
-#~ msgstr "csduplicated no llamada dentro de una STRSXP"
-
-#, fuzzy
-#~ msgid "converted string too long for buffer"
-#~ msgstr "string de formato demasiado larga"
-
-#, fuzzy
-#~ msgid "hash table is full"
-#~ msgstr "pila sink esta llena"
-
-#, fuzzy
-#~ msgid "row names are not character"
-#~ msgstr "'fmt' debe ser un vector de caracteres no vacío"
-
-#, fuzzy
-#~ msgid "type %d is unimplemented in '%s' function"
-#~ msgstr "tipo %d no esta implementado en type2str"
-
-#, fuzzy
-#~ msgid "unknown type #%d"
-#~ msgstr "símbolo desconocido"
-
-#, fuzzy
-#~ msgid "system timezone name is unknown: set environment variable TZ"
-#~ msgstr ""
-#~ "este sistema no puede desvincular variables generales que han sido "
-#~ "puestas a \"\""
-
-#, fuzzy
-#~ msgid "failed to set ICU locale %s (%d)"
-#~ msgstr "se intenta especificar un atributo 'class' no válido"
-
-#, fuzzy
-#~ msgid "failed to open ICU collator (%d)"
-#~ msgstr "fallo en el intento de vincular un puerto"
-
-#, fuzzy
-#~ msgid "failed to set ICU collator attribute"
-#~ msgstr "se intenta especificar un atributo 'class' no válido"
-
-#, fuzzy
-#~ msgid "failed to set ICU locale (%d)"
-#~ msgstr "se intenta especificar un atributo 'class' no válido"
-
-#, fuzzy
-#~ msgid "could not collate using ICU"
-#~ msgstr "no fue posible abrir el archivo PNG '%s'"
 
 #, fuzzy
 #~ msgid "input must be a character string"
@@ -10078,19 +10434,6 @@ msgstr "X11 no está disponible"
 #, fuzzy
 #~ msgid "invalid input"
 #~ msgstr "de tipo línea inválido"
-
-#, fuzzy
-#~ msgid "width cannot be zero"
-#~ msgstr ".C(..): el ancho no puede ser cero"
-
-#, fuzzy
-#~ msgid "'type' argument must be \"integer\" for \"d\"-format"
-#~ msgstr ""
-#~ ".C(..): 'type' debe ser \"entero\" para poder utilizar el formato \"d\""
-
-#, fuzzy
-#~ msgid "'type' argument must be \"real\" for this format"
-#~ msgstr ".C(..): 'type' debe ser \"real\" para este formato"
 
 #, fuzzy
 #~ msgid "can only open URLs for reading"
@@ -10774,10 +11117,6 @@ msgstr "X11 no está disponible"
 
 #, fuzzy
 #~ msgid "<environment: %s"
-#~ msgstr "ambiente inválido"
-
-#, fuzzy
-#~ msgid "<environment: base>"
 #~ msgstr "ambiente inválido"
 
 #, fuzzy
