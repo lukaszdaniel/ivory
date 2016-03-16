@@ -23,9 +23,9 @@
 #endif
 
 #include <Localization.h>
-#include "Defn.h"
+#include <Defn.h>
 #include <Internal.h>
-#include "Print.h"
+#include <Print.h>
 #include <Rinternals.h>
 
 /* The global var. R_Expressions is in Defn.h */

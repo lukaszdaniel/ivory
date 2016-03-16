@@ -1047,7 +1047,7 @@ static SEXP R_isMethodsDispatchOn(SEXP onOff)
 	else if(NOT_METHODS_DISPATCH_PTR(old)) {
 	    // so not already on
 	    // This may not work correctly: the default arg is incorrect.
-	    warning("R_isMethodsDispatchOn(TRUE) called -- may not work correctly");
+	    warning(_("R_isMethodsDispatchOn(TRUE) called -- may not work correctly"));
 	    SEXP call = PROTECT(lang1(install("initMethodDispatch")));
 	    eval(call, R_MethodsNamespace); // only works with methods loaded
 	    UNPROTECT(1);

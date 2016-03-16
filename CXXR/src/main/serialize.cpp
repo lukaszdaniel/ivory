@@ -860,8 +860,8 @@ static void OutStringVec(R_outpstream_t stream, SEXP s, SEXP ref_table)
 
 #include <rpc/xdr.h>
 
-#define CHUNK_SIZE 8096
-
+//#define CHUNK_SIZE 8096
+const R_xlen_t CHUNK_SIZE = 8096;
 
 
 static R_INLINE void
@@ -1005,8 +1005,7 @@ static void WriteItem (SEXP s, SEXP ref_table, R_outpstream_t stream)
 	HashAdd(s, ref_table);
 	if (R_IsPackageEnv(s)) {
 	    SEXP name = R_PackageEnvName(s);
-	    Rf_warning(_("'%s' may not be available when loading"),
-		    CHAR(STRING_ELT(name, 0)));
+	    Rf_warning(_("'%s' may not be available when loading"), CHAR(STRING_ELT(name, 0)));
 	    OutInteger(stream, PACKAGESXP);
 	    OutStringVec(stream, name, ref_table);
 	}
@@ -1158,7 +1157,7 @@ static void WriteItem (SEXP s, SEXP ref_table, R_outpstream_t stream)
 	    {
 		R_xlen_t done, thiss;
 		for (done = 0; done < len; done += thiss) {
-		    thiss = min2(CHUNK_SIZE, len - done);
+		    thiss = min(CHUNK_SIZE, len - done);
 		    stream->OutBytes(stream, RAW(s) + done, int( thiss));
 		}
 		break;
@@ -1731,7 +1730,7 @@ static SEXP ReadItem (SEXP ref_table, R_inpstream_t stream)
 	    {
 	        R_xlen_t done, thiss;
 		for (done = 0; done < len; done += thiss) {
-		    thiss = min2(CHUNK_SIZE, len - done);
+		    thiss = min(CHUNK_SIZE, len - done);
 		    stream->InBytes(stream, RAW(s) + done, int( thiss));
 		}
 	    }

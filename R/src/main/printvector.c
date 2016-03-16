@@ -32,7 +32,7 @@
 #endif
 
 #include <Localization.h>
-#include "Rinternals.h"
+#include <Rinternals.h>
 #include "Print.h"
 
 #define DO_first_lab			\
@@ -226,7 +226,7 @@ void printVector(SEXP x, int indx, int quote)
 
 #undef DO_first_lab
 #undef DO_newline
-
+
 
 /* The following code prints vectors which have every element named.
 

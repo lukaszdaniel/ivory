@@ -62,11 +62,11 @@
 #endif
 
 #include <Localization.h>
-#include "Defn.h"
+#include <Defn.h>
 #include <Internal.h>
-#include "Print.h"
-#include "Fileio.h"
-#include "Rconnections.h"
+#include <Print.h>
+#include <Fileio.h>
+#include <Rconnections.h>
 #include <R_ext/RS.h>
 
 /* Global print parameter struct: */
