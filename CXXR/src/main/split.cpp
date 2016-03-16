@@ -38,8 +38,8 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Itermacros.h>
 
@@ -112,7 +112,7 @@ SEXP attribute_hidden do_split(/*const*/ CXXR::Expression* call, const CXXR::Bui
 		RAW(VECTOR_ELT(vec, j - 1))[k] = RAW(x)[i];
 		break;
 	    default:
-		UNIMPLEMENTED_TYPE("split", x);
+		UNIMPLEMENTED_TYPE("split()", x);
 	    }
 	    if(have_names) {
 		nmj = getAttrib(VECTOR_ELT(vec, j - 1), R_NamesSymbol);

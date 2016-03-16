@@ -90,6 +90,7 @@
 #include <config.h>
 #endif
 
+#include <localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/RS.h> /* for test of S4 objects */
@@ -171,7 +172,7 @@ static SEXP EnlargeVector(SEXP x, R_xlen_t newlen)
 	    RAW(newx)[i] = Rbyte( 0);
 	break;
     default:
-	UNIMPLEMENTED_TYPE("EnlargeVector", x);
+	UNIMPLEMENTED_TYPE("EnlargeVector()", x);
     }
 
     /* Adjust the attribute list. */
@@ -196,7 +197,7 @@ static SEXP EnlargeVector(SEXP x, R_xlen_t newlen)
 static SEXP embedInVector(SEXP v, SEXP call)
 {
     SEXP ans;
-    warningcall(call, "implicit list embedding of S4 objects is deprecated");
+    warningcall(call, _("implicit list embedding of S4 objects is deprecated"));
     PROTECT(ans = allocVector(VECSXP, 1));
     SET_VECTOR_ELT(ans, 0, v);
     UNPROTECT(1);
@@ -617,7 +618,7 @@ static SEXP VectorAssign(SEXP call, SEXP rho, SEXP xarg, SEXP sarg, SEXP yarg)
 	    }
 	}
 
-	warningcall(call, "sub assignment (*[*] <- *) not done; __bug?__");
+	warningcall(call, _("sub assignment (*[*] <- *) not done; __bug?__"));
     }
     return nullptr;  // -Wall
 }
@@ -719,7 +720,7 @@ static SEXP ArrayAssign(SEXP call, SEXP rho, SEXP xarg, PairList* subscripts,
 static SEXP GetOneIndex(SEXP sub, int ind)
 {
     if (ind < 0 || ind+1 > Rf_length(sub))
-    	error("internal error: index %d from length %d", ind, Rf_length(sub));
+    	error(_("internal error: index %d from length %d"), ind, Rf_length(sub));
     if (Rf_length(sub) > 1) {
 	switch (TYPEOF(sub)) {
 	case INTSXP:
@@ -824,7 +825,7 @@ static SEXP listRemove(SEXP x, SEXP s, int ind)
 static int SubAssignArgs(PairList* args, SEXP *x, PairList** s, SEXP *y)
 {
     if (CDR(args) == R_NilValue)
-	Rf_error(_("SubAssignArgs: invalid number of arguments"));
+	Rf_error(_("'SubAssignArgs()': invalid number of arguments"));
     *x = args->car();
     if(CDDR(args) == R_NilValue) {
 	*s = nullptr;
@@ -995,8 +996,7 @@ static SEXP DeleteOneVectorListItem(SEXP x, R_xlen_t which)
 		    SET_XVECTOR_ELT(y, k++, XVECTOR_ELT(x, i));
 	    break;
 	default:
-	    Rf_error(_("Internal error:"
-		       " unexpected type in DeleteOneVectorListItem"));
+	    Rf_error(_("Internal error: unexpected type in 'DeleteOneVectorListItem()' function"));
 	}
 	xnames = getAttrib(x, R_NamesSymbol);
 	if (xnames != R_NilValue) {
@@ -1085,7 +1085,7 @@ do_subassign2_dflt(SEXP call, SEXP op, SEXP argsarg, SEXP rho)
     /* ENVSXP special case first */
     if( TYPEOF(x) == ENVSXP) {
 	if( nsubs!=1 || !isString(CAR(subs)) || Rf_length(CAR(subs)) != 1 )
-	    error(_("wrong args for environment subassignment"));
+	    error(_("wrong arguments for environment subassignment"));
 	defineVar(installTrChar(STRING_ELT(CAR(subs), 0)), y, x);
 	UNPROTECT(1);
 	return(S4 ? xOrig : x);
@@ -1113,7 +1113,7 @@ do_subassign2_dflt(SEXP call, SEXP op, SEXP argsarg, SEXP rho)
 	if (!isVectorList(x) && LENGTH(y) > 1)
 	    error(_("more elements supplied than there are to replace"));
 	if (nsubs == 0 || CAR(subs) == R_MissingArg)
-	    error(_("[[ ]] with missing subscript"));
+	    error(_("'[[ ]]' with missing subscript"));
 	if (nsubs == 1) {
 	    offset = OneIndex(x, thesub, Rf_length(x), 0, &newname,
 			      recursed ? len-1 : -1, R_NilValue);
@@ -1128,13 +1128,13 @@ do_subassign2_dflt(SEXP call, SEXP op, SEXP argsarg, SEXP rho)
 		return xtop;
 	    }
 	    if (offset < 0)
-		error(_("[[ ]] subscript out of bounds"));
+		error(_("'[[ ]]' subscript out of bounds"));
 	    if (offset >= XLENGTH(x))
 		stretch = offset + 1;
 	}
 	else {
 	    if (ndims != nsubs)
-		error(_("[[ ]] improper number of subscripts"));
+		error(_("'[[ ]]' improper number of subscripts"));
 	    PROTECT(indx = allocVector(INTSXP, ndims));
 	    names = getAttrib(x, R_DimNamesSymbol);
 	    for (i = 0; i < ndims; i++) {
@@ -1146,7 +1146,7 @@ do_subassign2_dflt(SEXP call, SEXP op, SEXP argsarg, SEXP rho)
 		subs = subs->tail();
 		if (INTEGER(indx)[i] < 0 ||
 		    INTEGER(indx)[i] >= INTEGER(dims)[i])
-		    error(_("[[ ]] subscript out of bounds"));
+		    error(_("'[[ ]]' subscript (%d) out of bounds"), i+1);
 	    }
 	    offset = 0;
 	    for (i = (ndims - 1); i > 0; i--)
@@ -1285,7 +1285,7 @@ do_subassign2_dflt(SEXP call, SEXP op, SEXP argsarg, SEXP rho)
 	   break;
 
 	default:
-	    error(_("incompatible types (from %s to %s) in [[ assignment"),
+	    error(_("incompatible types (from %s to %s) in '[[' assignment"),
 		  type2char(CXXRCONSTRUCT(SEXPTYPE, which%100)), type2char(CXXRCONSTRUCT(SEXPTYPE, which/100)));
 	}
 	/* If we stretched, we may have a new name. */
@@ -1318,7 +1318,7 @@ do_subassign2_dflt(SEXP call, SEXP op, SEXP argsarg, SEXP rho)
 	}
 	else {
 	    if (ndims != nsubs)
-		error(_("[[ ]] improper number of subscripts"));
+		error(_("'[[ ]]' improper number of subscripts"));
 	    PROTECT(indx = allocVector(INTSXP, ndims));
 	    names = getAttrib(x, R_DimNamesSymbol);
 	    for (i = 0; i < ndims; i++) {
@@ -1329,7 +1329,7 @@ do_subassign2_dflt(SEXP call, SEXP op, SEXP argsarg, SEXP rho)
 		subs = subs->tail();
 		if (INTEGER(indx)[i] < 0 ||
 		    INTEGER(indx)[i] >= INTEGER(dims)[i])
-		    error(_("[[ ]] subscript (%d) out of bounds"), i+1);
+		    error(_("'[[ ]]' subscript (%d) out of bounds"), i+1);
 	    }
 	    offset = 0;
 	    for (i = (ndims - 1); i > 0; i--)
@@ -1490,7 +1490,7 @@ SEXP R_subassign3_dflt(SEXP call, SEXP x, SEXP nlist, SEXP val)
 	if (isExpression(x))
 	    type = EXPRSXP;
 	else if (!isNewList(x)) {
-	    warning(_("Coercing LHS to a list"));
+	    warning(_("coercing LHS to a list"));
 	    REPROTECT(x = coerceVector(x, VECSXP), pxidx);
 	}
 	names = getAttrib(x, R_NamesSymbol);

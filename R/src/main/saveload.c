@@ -1017,7 +1017,7 @@ static void NewWriteVec (SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, OutputR
 	}
 	break;
     default:
-	error(_("NewWriteVec called with non-vector type"));
+	error(_("'NewWriteVec()' function called with non-vector type"));
     }
 }
 
@@ -1082,7 +1082,7 @@ static void NewWriteItem (SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, Output
 	case BCODESXP:
 	    error(_("cannot save byte code objects in version 1 workspaces"));
 	default:
-	    error(_("NewWriteItem: unknown type %i"), TYPEOF(s));
+	    error(_("'NewWriteItem()': unknown type %i"), TYPEOF(s));
 	}
 	NewWriteItem(ATTRIB(s), sym_list, env_list, fp, m, d);
     }

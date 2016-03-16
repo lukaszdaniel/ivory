@@ -29,6 +29,7 @@
 #include <config.h>
 #endif
 
+#include <localization.h>
 #include <Defn.h> /* => Utils.h with the protos from here; Rinternals.h */
 #include <Internal.h>
 #include <Rmath.h>
@@ -176,7 +177,7 @@ Rboolean isUnsorted(SEXP x, Rboolean strictly)
 	    }
 	    break;
 	default:
-	    UNIMPLEMENTED_TYPE("isUnsorted", x);
+	    UNIMPLEMENTED_TYPE("isUnsorted()", x);
 	}
     return FALSE;/* sorted */
 } // isUnsorted()
@@ -335,7 +336,7 @@ SEXP attribute_hidden do_sort(/*const*/ CXXR::Expression* call, const CXXR::Buil
 
     decreasing = CXXRCONSTRUCT(Rboolean, asLogical(decreasing_));
     if(decreasing == NA_LOGICAL)
-	error(_("'decreasing' must be TRUE or FALSE"));
+	error(_("'%s' argument must be TRUE or FALSE"), "decreasing");
     if(x_ == R_NilValue) return R_NilValue;
     if(!isVectorAtomic(x_))
 	error(_("only atomic vectors can be sorted"));
@@ -384,7 +385,7 @@ static void R_isort2(int *x, R_xlen_t n, Rboolean decreasing)
     int v;
     R_xlen_t i, j, h, t;
 
-    if (n < 2) error("'n >= 2' is required");
+    if (n < 2) error(_("'n >= 2' is required"));
     for (t = 0; incs[t] > n; t++);
     if(decreasing)
 #define less <
@@ -401,7 +402,7 @@ static void R_rsort2(double *x, R_xlen_t n, Rboolean decreasing)
     double v;
     R_xlen_t i, j, h, t;
 
-    if (n < 2) error("'n >= 2' is required");
+    if (n < 2) error(_("'n >= 2' is required"));
     for (t = 0; incs[t] > n; t++);
     if(decreasing)
 #define less <
@@ -418,7 +419,7 @@ static void R_csort2(Rcomplex *x, R_xlen_t n, Rboolean decreasing)
     Rcomplex v;
     R_xlen_t i, j, h, t;
 
-    if (n < 2) error("'n >= 2' is required");
+    if (n < 2) error(_("'n >= 2' is required"));
     for (t = 0; incs[t] > n; t++);
     for (h = incs[t]; t < NI; h = incs[++t])
 	for (i = h; i < n; i++) {
@@ -441,7 +442,7 @@ static void ssort2(StringVector* sv, R_xlen_t n, Rboolean decreasing)
     String* v;
     R_xlen_t i, j, h, t;
 
-    if (n < 2) error("'n >= 2' is required");
+    if (n < 2) error(_("'n >= 2' is required"));
     for (t = 0; incs[t] > n; t++);
     for (h = incs[t]; t < NI; h = incs[++t])
 	for (i = h; i < n; i++) {
@@ -480,7 +481,7 @@ void sortVector(SEXP s, Rboolean decreasing)
 		break;
 	    }
 	default:
-	    UNIMPLEMENTED_TYPE("sortVector", s);
+	    UNIMPLEMENTED_TYPE("sortVector()", s);
 	}
 }
 
@@ -582,7 +583,7 @@ static void Psort(SEXP x, R_xlen_t lo, R_xlen_t hi, R_xlen_t k)
 	    break;
 	}
     default:
-	UNIMPLEMENTED_TYPE("Psort", x);
+	UNIMPLEMENTED_TYPE("Psort()", x);
     }
 }
 
@@ -686,7 +687,7 @@ static int equal(R_xlen_t i, R_xlen_t j, SEXP x, Rboolean nalast, SEXP rho)
 	    c = scmp(STRING_ELT(x, i), STRING_ELT(x, j), nalast);
 	    break;
 	default:
-	    UNIMPLEMENTED_TYPE("equal", x);
+	    UNIMPLEMENTED_TYPE("equal()", x);
 	    break;
 	}
     }
@@ -723,7 +724,7 @@ static int greater(R_xlen_t i, R_xlen_t j, SEXP x, Rboolean nalast,
 	    c = scmp(STRING_ELT(x, i), STRING_ELT(x, j), nalast);
 	    break;
 	default:
-	    UNIMPLEMENTED_TYPE("greater", x);
+	    UNIMPLEMENTED_TYPE("greater()", x);
 	    break;
 	}
     }
@@ -755,7 +756,7 @@ static int listgreater(int i, int j, SEXP key, Rboolean nalast,
 	    c = scmp(STRING_ELT(x, i), STRING_ELT(x, j), nalast);
 	    break;
 	default:
-	    UNIMPLEMENTED_TYPE("listgreater", x);
+	    UNIMPLEMENTED_TYPE("listgreater()", x);
 	}
 	if (decreasing) c = -c;
 	if (c > 0)
@@ -851,7 +852,7 @@ static int listgreaterl(R_xlen_t i, R_xlen_t j, SEXP key, Rboolean nalast,
 	    c = scmp(STRING_ELT(x, i), STRING_ELT(x, j), nalast);
 	    break;
 	default:
-	    UNIMPLEMENTED_TYPE("listgreater", x);
+	    UNIMPLEMENTED_TYPE("listgreater()", x);
 	}
 	if (decreasing) c = -c;
 	if (c > 0)
@@ -1018,7 +1019,7 @@ orderVector1(int *indx, int n, SEXP key, Rboolean nalast, Rboolean decreasing,
 	    for (i = 0; i < n; i++) isna[i] = ISNAN(cx[i].r) || ISNAN(cx[i].i);
 	    break;
 	default:
-	    UNIMPLEMENTED_TYPE("orderVector1", key);
+	    UNIMPLEMENTED_TYPE("orderVector1()", key);
 	}
 	for (i = 0; i < n; i++) numna += isna[i];
 
@@ -1157,7 +1158,7 @@ orderVector1l(R_xlen_t *indx, R_xlen_t n, SEXP key, Rboolean nalast,
 	    for (i = 0; i < n; i++) isna[i] = ISNAN(cx[i].r) || ISNAN(cx[i].i);
 	    break;
 	default:
-	    UNIMPLEMENTED_TYPE("orderVector1", key);
+	    UNIMPLEMENTED_TYPE("orderVector1()", key);
 	}
 	for (i = 0; i < n; i++) numna += isna[i];
 
@@ -1260,7 +1261,7 @@ SEXP attribute_hidden do_order(SEXP call, SEXP op, SEXP args, SEXP rho)
     args = CDR(args);
     decreasing = CXXRCONSTRUCT(Rboolean, asLogical(CAR(args)));
     if(decreasing == NA_LOGICAL)
-	error(_("'decreasing' must be TRUE or FALSE"));
+	error(_("'%s' argument must be TRUE or FALSE"), "decreasing");
     args = CDR(args);
     if (args == R_NilValue)
 	return R_NilValue;

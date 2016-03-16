@@ -43,8 +43,8 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 #include <float.h>  /* for DBL_DIG */
 #include <Fileio.h>
@@ -105,7 +105,7 @@ static SEXP insertString(char *str, LocalData *l)
 static R_INLINE Rboolean Rspace(unsigned int c)
 {
     if (c == ' ' || c == '\t' || c == '\n' || c == '\r') return TRUE;
-#ifdef Win32
+#ifdef _WIN32
     /* 0xa0 is NBSP in all 8-bit Windows locales */
     if(!mbcslocale && c == 0xa0) return TRUE;
 #else
@@ -480,14 +480,13 @@ static R_INLINE int isNAstring(const char *buf, int mode, LocalData *d)
     return 0;
 }
 
-static R_INLINE void NORET expected(const char *what, char *got, LocalData *d)
+static R_INLINE void expected(LocalData *d)
 {
     int c;
     if (d->ttyflag) { /* This is safe in a MBCS */
 	while ((c = scanchar(FALSE, d)) != R_EOF && c != '\n')
 	    ;
     }
-    error(_("scan() expected '%s', got '%s'"), what, got);
 }
 
 static void extractItem(char *buffer, SEXP ans, int i, LocalData *d)
@@ -502,7 +501,7 @@ static void extractItem(char *buffer, SEXP ans, int i, LocalData *d)
 	else {
 	    int tr = StringTrue(buffer), fa = StringFalse(buffer);
 	    if(tr || fa) LOGICAL(ans)[i] = tr;
-	    else expected("a logical", buffer, d);
+	    else { expected(d); error(_("scan() expected a logical, got '%s'"), buffer); };
 	}
 	break;
     case INTSXP:
@@ -511,7 +510,7 @@ static void extractItem(char *buffer, SEXP ans, int i, LocalData *d)
 	else {
 	    INTEGER(ans)[i] = Strtoi(buffer, 10);
 	    if (INTEGER(ans)[i] == NA_INTEGER)
-		expected("an integer", buffer, d);
+		{ expected(d); error(_("scan() expected an integer, got '%s'"), buffer); };
 	}
 	break;
     case REALSXP:
@@ -520,7 +519,7 @@ static void extractItem(char *buffer, SEXP ans, int i, LocalData *d)
 	else {
 	    REAL(ans)[i] = Strtod(buffer, &endp, TRUE, d);
 	    if (!isBlankString(endp))
-		expected("a real", buffer, d);
+		{ expected(d); error(_("scan() expected a real, got '%s'"), buffer); }
 	}
 	break;
     case CPLXSXP:
@@ -529,7 +528,7 @@ static void extractItem(char *buffer, SEXP ans, int i, LocalData *d)
 	else {
 	    COMPLEX(ans)[i] = strtoc(buffer, &endp, TRUE, d);
 	    if (!isBlankString(endp))
-		expected("a complex", buffer, d);
+		{ expected(d); error(_("scan() expected a complex, got '%s'"), buffer); }
 	}
 	break;
     case STRSXP:
@@ -544,11 +543,11 @@ static void extractItem(char *buffer, SEXP ans, int i, LocalData *d)
 	else {
 	    RAW(ans)[i] = strtoraw(buffer, &endp);
 	    if (!isBlankString(endp))
-		expected("a raw", buffer, d);
+		{ expected(d); error(_("scan() expected a raw, got '%s'"), buffer);  }
 	}
 	break;
     default:
-	UNIMPLEMENTED_TYPE("extractItem", ans);
+	UNIMPLEMENTED_TYPE("extractItem()", ans);
     }
 }
 
@@ -616,7 +615,7 @@ static SEXP scanVector(SEXPTYPE type, int maxitems, int maxlines,
 	    bch = c;
 	}
     }
-    if (!d->quiet) REprintf("Read %d item%s\n", n, (n == 1) ? "" : "s");
+    if (!d->quiet) REprintf(n_("Read %d item\n", "Read %d items\n", n), n );
     if (d->ttyflag) ConsolePrompt[0] = '\0';
 
     if (n == 0) {
@@ -654,7 +653,7 @@ static SEXP scanVector(SEXPTYPE type, int maxitems, int maxlines,
 	    RAW(bns)[i] = RAW(ans)[i];
 	break;
     default:
-	UNIMPLEMENTED_TYPEt("scanVector", type);
+	UNIMPLEMENTED_TYPEt("scanVector()", type);
     }
     UNPROTECT(1);
     R_FreeStringBuffer(&strBuf);
@@ -785,7 +784,7 @@ static SEXP scanFrame(SEXP what, int maxitems, int maxlines, int flush,
 	}
 	n++;
     }
-    if (!d->quiet) REprintf("Read %d record%s\n", n, (n == 1) ? "" : "s");
+    if (!d->quiet) REprintf(n_("Read %d record\n", "Read %d records\n", n), n);
     if (d->ttyflag) ConsolePrompt[0] = '\0';
 
     for (i = 0; i < nc; i++) {
@@ -816,7 +815,7 @@ static SEXP scanFrame(SEXP what, int maxitems, int maxlines, int flush,
 	case NILSXP:
 	    break;
 	default:
-	    UNIMPLEMENTED_TYPE("scanFrame", old);
+	    UNIMPLEMENTED_TYPE("scanFrame()", old);
 	}
 	SET_VECTOR_ELT(ans, i, newv);
     }

@@ -32,6 +32,7 @@
 #include <config.h>
 #endif
 
+#include <localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <float.h>  /* for DBL_EPSILON */
@@ -170,12 +171,12 @@ SEXP attribute_hidden do_colon(/*const*/ CXXR::Expression* call, const CXXR::Bui
 	errorcall(call, _("argument of length 0"));
     if (n1 > 1)
 	warningcall(call,
-		    ngettext("numerical expression has %d element: only the first used",
+		    n_("numerical expression has %d element: only the first used",
 			     "numerical expression has %d elements: only the first used",
 			     (int) n1), (int) n1);
     if (n2 > 1)
 	warningcall(call,
-		    ngettext("numerical expression has %d element: only the first used",
+		    n_("numerical expression has %d element: only the first used",
 			     "numerical expression has %d elements: only the first used",
 			     (int) n2), (int) n2);
     n1 = asReal(s1);
@@ -271,7 +272,7 @@ static SEXP rep2(SEXP s, SEXP ncopy)
 	}
 	break;
     default:
-	UNIMPLEMENTED_TYPE("rep2", s);
+	UNIMPLEMENTED_TYPE("rep2()", s);
     }
     UNPROTECT(2);
     return a;
@@ -330,7 +331,7 @@ static SEXP rep3(SEXP s, R_xlen_t ns, R_xlen_t na)
 	});
 	break;
     default:
-	UNIMPLEMENTED_TYPE("rep3", s);
+	UNIMPLEMENTED_TYPE("rep3()", s);
     }
     UNPROTECT(1);
     return a;
@@ -597,7 +598,7 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, int each, R_xlen_t nt)
 	}
 	break;
     default:
-	UNIMPLEMENTED_TYPE("rep4", x);
+	UNIMPLEMENTED_TYPE("rep4()", x);
     }
 done:
     UNPROTECT(1);
@@ -636,7 +637,7 @@ SEXP attribute_hidden do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
     x = CAR(args);
     /* supported in R 2.15.x */
     if (TYPEOF(x) == LISTSXP)
-	errorcall(call, "replication of pairlists is defunct");
+	errorcall(call, _("replication of pairlists is defunct"));
 
     lx = xlength(x);
 
@@ -663,7 +664,7 @@ SEXP attribute_hidden do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if(lx == 0) {
 	if(len > 0 && x == R_NilValue)
-	    warningcall(call, "'x' is NULL so the result will be NULL");
+	    warningcall(call, _("'x' is NULL so the result will be NULL"));
 	SEXP a;
 	PROTECT(a = duplicate(x));
 	if(len != NA_INTEGER && len > 0) a = xlengthgets(a, len);
@@ -671,8 +672,7 @@ SEXP attribute_hidden do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return a;
     }
     if (!isVector(x))
-	errorcall(call, "attempt to replicate an object of type '%s'",
-		  type2char(TYPEOF(x)));
+	errorcall(call, _("attempt to replicate an object of type '%s'"), type2char(TYPEOF(x)));
 
     /* So now we know x is a vector of positive length.  We need to
        replicate it, and its names if it has them. */
@@ -765,7 +765,7 @@ SEXP attribute_hidden do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if(lf == 1 && (TYPEOF(from) == INTSXP || TYPEOF(from) == REALSXP)) {
 	    double rfrom = asReal(from);
 	    if (!R_FINITE(rfrom))
-		errorcall(call, "'from' cannot be NA, NaN or infinite");
+		errorcall(call, _("'from' argument cannot be NA, NaN or infinite"));
 	    ans = seq_colon(1.0, rfrom, call);
 	}
 	else if (lf)
@@ -783,7 +783,7 @@ SEXP attribute_hidden do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
     } else if(len != R_MissingArg && len != R_NilValue) {
 	double rout = asReal(len);
 	if(ISNAN(rout) || rout <= -0.5)
-	    errorcall(call, _("'length.out' must be a non-negative number"));
+	    errorcall(call, _("'%s' argument must be a non-negative number"), "length.out");
 	if(length(len) != 1)
 	    warningcall(call, _("first element used of '%s' argument"),
 			"length.out");
@@ -793,23 +793,23 @@ SEXP attribute_hidden do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(lout == NA_INTEGER) {
 	double rfrom = asReal(from), rto = asReal(to), rby = asReal(by), *ra;
 	if(from == R_MissingArg) rfrom = 1.0;
-	else if(length(from) != 1) error("'from' must be of length 1");
+	else if(length(from) != 1) error(_("'%s' argument must be of length 1"), "from");
 	if(to == R_MissingArg) rto = 1.0;
-	else if(length(to) != 1) error("'to' must be of length 1");
+	else if(length(to) != 1) error(_("'%s' argument must be of length 1"), "to");
 	if (!R_FINITE(rfrom))
-	    errorcall(call, "'from' cannot be NA, NaN or infinite");
+	    errorcall(call, _("'from' argument cannot be NA, NaN or infinite"));
 	if (!R_FINITE(rto))
-	    errorcall(call, "'to' cannot be NA, NaN or infinite");
+	    errorcall(call, _("'to' argument cannot be NA, NaN or infinite"));
 	if(by == R_MissingArg)
 	    ans = seq_colon(rfrom, rto, call);
 	else {
-	    if(length(by) != 1) error("'by' must be of length 1");
+	    if(length(by) != 1) error(_("'%s' argument must be of length 1"), "by");
 	    double del = rto - rfrom, n, dd;
 	    R_xlen_t nn;
 	    if(!R_FINITE(rfrom))
-		errorcall(call, _("'from' must be finite"));
+		errorcall(call, _("'%s' argument must be finite"), "from");
 	    if(!R_FINITE(rto))
-		errorcall(call, _("'to' must be finite"));
+		errorcall(call, _("'%s' argument must be finite"), "to");
 	    if(del == 0.0 && rto == 0.0) {
 		ans = to;
 		goto done;
@@ -821,7 +821,7 @@ SEXP attribute_hidden do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    ans = from;
 		    goto done;
 		} else
-		    errorcall(call, _("invalid '(to - from)/by' in 'seq'"));
+		    errorcall(call, _("invalid '(to - from)/by' in 'seq()' function"));
 	    }
 	    dd = fabs(del)/fmax2(fabs(rto), fabs(rfrom));
 	    if(dd < 100 * DBL_EPSILON) {
@@ -873,9 +873,9 @@ SEXP attribute_hidden do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if(to == R_MissingArg) rto = rfrom + double(lout) - 1;
 	if(from == R_MissingArg) rfrom = rto - double(lout) + 1;
 	if(!R_FINITE(rfrom))
-	    errorcall(call, _("'from' must be finite"));
+	    errorcall(call, _("'%s' argument must be finite"), "from");
 	if(!R_FINITE(rto))
-	    errorcall(call, _("'to' must be finite"));
+	    errorcall(call, _("'%s' argument must be finite"), "to");
 	ans = allocVector(REALSXP, lout);
 	if(lout > 0) REAL(ans)[0] = rfrom;
 	if(lout > 1) REAL(ans)[lout - 1] = rto;
@@ -890,9 +890,9 @@ SEXP attribute_hidden do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 	double rfrom = asReal(from), rby = asReal(by), rto;
 	if(from == R_MissingArg) rfrom = 1.0;
 	if(!R_FINITE(rfrom))
-	    errorcall(call, _("'from' must be finite"));
+	    errorcall(call, _("'%s' argument must be finite"), "from");
 	if(!R_FINITE(rby))
-	    errorcall(call, _("'by' must be finite"));
+	    errorcall(call, _("'%s' argument must be finite"), "by");
 	rto = rfrom + double(lout-1)*rby;
 	if(rby == int(rby) && rfrom <= INT_MAX && rfrom >= INT_MIN
 	   && rto <= INT_MAX && rto >= INT_MIN) {
@@ -912,9 +912,9 @@ SEXP attribute_hidden do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 	double rto = asReal(to), rby = asReal(by),
 	    rfrom = rto - double(lout-1)*rby;
 	if(!R_FINITE(rto))
-	    errorcall(call, _("'to' must be finite"));
+	    errorcall(call, _("'%s' argument must be finite"), "to");
 	if(!R_FINITE(rby))
-	    errorcall(call, _("'by' must be finite"));
+	    errorcall(call, _("'%s' argument must be finite"), "by");
 	if(rby == int(rby) && rfrom <= INT_MAX && rfrom >= INT_MIN
 	   && rto <= INT_MAX && rto >= INT_MIN) {
 	    ans = allocVector(INTSXP, lout);

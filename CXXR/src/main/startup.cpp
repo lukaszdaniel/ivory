@@ -32,8 +32,8 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Fileio.h> /* for R_fopen */
 #include <Startup.h>
 
@@ -109,7 +109,7 @@ FILE *R_OpenSiteFile(void)
 
 	/* Saving and Restoring the Global Environment */
 
-#ifndef Win32
+#ifndef _WIN32
 static char workspace_name[1000] = ".RData";
 
 /*
@@ -184,10 +184,10 @@ void R_SizeFromEnv(Rstart Rp)
     if((p = getenv("R_VSIZE"))) {
 	value = R_Decode2Long(p, &ierr);
 	if(ierr != 0 || value > Max_Vsize)
-	    R_ShowMessage("WARNING: invalid R_VSIZE ignored\n");
+	    R_ShowMessage(_("WARNING: invalid 'R_VSIZE' ignored\n"));
 	else if(value < Min_Vsize) {
 	    snprintf(msg, 256,
-		     "WARNING: R_VSIZE smaller than Min_Vsize = %lu is ignored\n",
+		     _("WARNING: R_VSIZE smaller than Min_Vsize = %lu is ignored\n"),
 		     (unsigned long) Min_Vsize);
 	    R_ShowMessage(msg);
 	}
@@ -202,13 +202,12 @@ static void SetSize(R_size_t vsize)
 
     /* vsize > 0 to catch long->int overflow */
     if (vsize < 1000 && vsize > 0) {
-	R_ShowMessage("WARNING: vsize ridiculously low, Megabytes assumed\n");
+	R_ShowMessage(_("WARNING: 'vsize' argument is ridiculously low, Megabytes assumed\n"));
 	vsize *= R_size_t( Mega);
     }
     if(vsize < Min_Vsize || vsize > Max_Vsize) {
 	snprintf(msg, 1024, 
-		 "WARNING: invalid v(ector heap)size `%lu' ignored\n"
-		 "using default = %gM\n", static_cast<unsigned long>( vsize),
+		 _("WARNING: invalid v(ector heap)size `%lu' ignored, using default = %gM\n"), static_cast<unsigned long>( vsize),
 		 R_VSIZE / Mega);
 	R_ShowMessage(msg);
 	R_VSize = R_VSIZE;
@@ -229,7 +228,7 @@ void R_SetParams(Rstart Rp)
     LoadInitFile = Rp->LoadInitFile;
     DebugInitFile = Rp->DebugInitFile;
     SetSize(Rp->vsize);
-#ifdef Win32
+#ifdef _WIN32
     R_SetWin32(Rp);
 #endif
 }

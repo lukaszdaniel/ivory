@@ -31,8 +31,8 @@
 #endif
 
 #define NEED_CONNECTION_PSTREAMS
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h>
 #include <Rmath.h>
@@ -336,7 +336,7 @@ static int XdrInInteger(FILE * fp, SaveLoadData *d)
     int i;
     if (!xdr_int(&d->xdrs, &i)) {
 	xdr_destroy(&d->xdrs);
-	error(_("a I read error occurred"));
+	error(_("a 'I' read error occurred"));
     }
     return i;
 }
@@ -346,7 +346,7 @@ static double XdrInReal(FILE * fp, SaveLoadData *d)
     double x;
     if (!xdr_double(&d->xdrs, &x)) {
 	xdr_destroy(&d->xdrs);
-	error(_("a R read error occurred"));
+	error(_("a 'R' read error occurred"));
     }
     return x;
 }
@@ -356,7 +356,7 @@ static Rcomplex XdrInComplex(FILE * fp, SaveLoadData *d)
     Rcomplex x;
     if (!xdr_double(&d->xdrs, &(x.r)) || !xdr_double(&d->xdrs, &(x.i))) {
 	xdr_destroy(&d->xdrs);
-	error(_("a C read error occurred"));
+	error(_("a 'C' read error occurred"));
     }
     return x;
 }
@@ -366,7 +366,7 @@ static char *XdrInString(FILE *fp, SaveLoadData *d)
     char *bufp = d->buffer.data;
     if (!xdr_string(&d->xdrs, &bufp, static_cast<unsigned int>(d->buffer.bufsize))) {
 	xdr_destroy(&d->xdrs);
-	error(_("a S read error occurred"));
+	error(_("a 'S' read error occurred"));
     }
     return d->buffer.data;
 }
@@ -528,7 +528,7 @@ static void RemakeNextSEXP(FILE *fp, NodeInfo *node, int version, InputRoutines 
     case CLOSXP:
     case PROMSXP:
     case ENVSXP:
-	Rf_error("Loading pre-version-1 serialization not (yet) supported in CXXR");
+	Rf_error(_("Loading pre-version-1 serialization not (yet) supported in CXXR"));
 	// All this code needs fixing in CXXR!
 	// s = new RObject(type);
 	/* skip over CAR, CDR, and TAG */
@@ -580,7 +580,7 @@ static void RemakeNextSEXP(FILE *fp, NodeInfo *node, int version, InputRoutines 
 	    /* VECTOR(s)[j] = */ m->InInteger(fp, d);
 	}
 	break;
-    default: error(_("bad SEXP type in data file"));
+    default: error(_("bad 'SEXP' type in data file"));
     }
 
     /* install the new SEXP */
@@ -651,7 +651,7 @@ static void RestoreSEXP(SEXP s, FILE *fp, InputRoutines *m, NodeInfo *node, int 
 	for (j = 0; j < CXXRCONSTRUCT(uint, len); j++)
 	    SET_VECTOR_ELT(s, j, OffsetToNode(m->InInteger(fp, d), node));
 	break;
-    default: error(_("bad SEXP type in data file"));
+    default: error(_("bad 'SEXP' type in data file"));
     }
 }
 
@@ -771,7 +771,7 @@ static SEXP DataLoad(FILE *fp, int startup, InputRoutines *m,
 #define R_assert(e) ((void) 0)
 #else
 /* The line below requires an ANSI C preprocessor (stringify operator) */
-#define R_assert(e) ((e) ? (void) 0 : error("assertion `%s' failed: file `%s', line %d\n", #e, __FILE__, __LINE__))
+#define R_assert(e) ((e) ? (void) 0 : error(_("assertion '%s' failed: file '%s', line %d\n"), #e, __FILE__, __LINE__))
 #endif /* NDEBUG */
 
 
@@ -925,8 +925,7 @@ static void NewMakeLists (SEXP obj, SEXP sym_list, SEXP env_list)
 	else if (R_IsNamespaceEnv(obj))
 	    error(_("cannot save namespace in version 1 workspaces"));
 	if (R_HasFancyBindings(obj))
-	    error(_("cannot save environment with locked/active bindings \
-in version 1 workspaces"));
+	    error(_("cannot save environment with locked/active bindings in version 1 workspaces"));
 	HashAdd(obj, env_list);
 	/* FALLTHROUGH */
     case LISTSXP:
@@ -1030,7 +1029,7 @@ static void NewWriteVec (SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, OutputR
 	}
 	break;
     default:
-	error(_("NewWriteVec called with non-vector type"));
+	error(_("'NewWriteVec()' function called with non-vector type"));
     }
 }
 
@@ -1095,7 +1094,7 @@ static void NewWriteItem (SEXP s, SEXP sym_list, SEXP env_list, FILE *fp, Output
 	case BCODESXP:
 	    error(_("cannot save byte code objects in version 1 workspaces"));
 	default:
-	    error(_("NewWriteItem: unknown type %i"), TYPEOF(s));
+	    error(_("'NewWriteItem()': unknown type %i"), TYPEOF(s));
 	}
 	NewWriteItem(ATTRIB(s), sym_list, env_list, fp, m, d);
     }
@@ -1302,7 +1301,7 @@ static SEXP NewReadItem (SEXP sym_table, SEXP env_table, FILE *fp,
 	R_AllocStringBuffer(MAXELTSIZE - 1, &(d->buffer));
 	PROTECT(s = BuiltInFunction::obtainPrimitive(m->InString(fp, d)));
 	if (s == R_NilValue) {
-	    warning(_("unrecognized internal function name \"%s\""), d->buffer.data);
+	    warning(_("unrecognized internal function name '%s'"), d->buffer.data);
 	}
 	break;
     case CHARSXP:
@@ -1318,7 +1317,7 @@ static SEXP NewReadItem (SEXP sym_table, SEXP env_table, FILE *fp,
     case BCODESXP:
 	error(_("cannot read byte code objects from version 1 workspaces"));
     default:
-	error(_("NewReadItem: unknown type %i"), type);
+	error(_("'NewReadItem()': unknown type %i"), type);
     }
     SETLEVELS(s, static_cast<unsigned short>( levs));
     SET_ATTRIB(s, NewReadItem(sym_table, env_table, fp, m, d));
@@ -1465,7 +1464,7 @@ static char *InStringAscii(FILE *fp, SaveLoadData *unused)
 	if(buf) newbuf = static_cast<char *>( realloc(buf, nbytes + 1));
 	else newbuf = static_cast<char *>( malloc(nbytes + 1));
 	if (newbuf == nullptr) /* buf remains allocated */
-	    error(_("out of memory reading ascii string"));
+	    error(_("out of memory while reading ascii string"));
 	buf = newbuf;
 	buflen = nbytes + 1;
     }
@@ -1605,7 +1604,7 @@ static char *InStringBinary(FILE *fp, SaveLoadData *unused)
 	if(buf) newbuf = static_cast<char *>( realloc(buf, nbytes + 1));
 	else newbuf = static_cast<char *>( malloc(nbytes + 1));
 	if (newbuf == nullptr)
-	    error(_("out of memory reading binary string"));
+	    error(_("out of memory while reading binary string"));
 	buf = newbuf;
 	buflen = nbytes + 1;
     }
@@ -1706,7 +1705,7 @@ static char *InStringXdr(FILE *fp, SaveLoadData *d)
 	if(buf) newbuf = static_cast<char *>( realloc(buf, nbytes + 1));
 	else newbuf = static_cast<char *>( malloc(nbytes + 1));
 	if (newbuf == nullptr)
-	    error(_("out of memory reading binary string"));
+	    error(_("out of memory while reading binary string"));
 	buf = newbuf;
 	buflen = nbytes + 1;
     }
@@ -1957,9 +1956,9 @@ SEXP attribute_hidden do_save(/*const*/ CXXR::Expression* call, const CXXR::Buil
     if (TYPEOF(list_) != STRSXP)
 	error(_("first argument must be a character vector"));
     if (!isValidStringF(file_))
-	error(_("'file' must be non-empty string"));
+	error(_("'%s' argument must be a non-empty character string"), "file");
     if (TYPEOF(ascii_) != LGLSXP)
-	error(_("'ascii' must be logical"));
+	error(_("'%s' argument must be logical"), "ascii");
     if (version_ == R_NilValue)
 	version = R_DefaultSaveFormatVersion;
     else
@@ -1989,7 +1988,7 @@ SEXP attribute_hidden do_save(/*const*/ CXXR::Expression* call, const CXXR::Buil
 	    SET_TAG(t, installChar(STRING_ELT(list_, j)));
 	    GCStackRoot<> tmp(findVar(TAG(t), source));
 	    if (tmp == R_UnboundValue)
-		error(_("object '%s' not found"), EncodeChar(PRINTNAME(TAG(t))));
+		error(_("object '%s' was not found"), EncodeChar(PRINTNAME(TAG(t))));
 	    if(ep && TYPEOF(tmp) == PROMSXP)
 		tmp = eval(tmp, source);
 	    SETCAR(t, tmp);
@@ -2021,7 +2020,7 @@ static SEXP RestoreToEnv(SEXP ans, SEXP aenv)
 	PROTECT(ans);
 	PROTECT(names = getAttrib(ans, R_NamesSymbol)); /* PROTECT needed?? */
 	if (TYPEOF(names) != STRSXP || LENGTH(names) != LENGTH(ans))
-	    error(_("not a valid named list"));
+	    error(_("'%s' is not a valid named list"), CHAR(PRINTNAME(TAG(ans))));
 	ProvenanceTracker::flagXenogenesis();
 	for (i = 0; i < LENGTH(ans); i++) {
 	    SEXP sym = installChar(STRING_ELT(names, i));
@@ -2083,7 +2082,7 @@ SEXP attribute_hidden do_load(/*const*/ CXXR::Expression* call, const CXXR::Buil
 
     /* Process the saved file to obtain a list of saved objects. */
     fp = RC_fopen(STRING_ELT(fname, 0), "rb", TRUE);
-    if (!fp) error(_("unable to open file"));
+    if (!fp) error(_("unable to open file '%s'"), translateChar(STRING_ELT(fname, 0)));
 
     /* Use try-catch to close the file if there is an error */
     try {
@@ -2184,7 +2183,7 @@ void R_RestoreGlobalEnvFromFile(const char *name, Rboolean quiet)
 	if(fp != nullptr) {
 	    R_LoadSavedData(fp, R_GlobalEnv);
 	    if(! quiet)
-		Rprintf("[Previously saved workspace restored]\n\n");
+		Rprintf(_("[Previously saved workspace restored]\n\n"));
 	    fclose(fp);
 	}
     }
@@ -2238,7 +2237,7 @@ SEXP attribute_hidden do_saveToConn(/*const*/ CXXR::Expression* call, const CXXR
     con = getConnection(asInteger(con_));
 
     if (TYPEOF(ascii_) != LGLSXP)
-	error(_("'ascii' must be logical"));
+	error(_("'%s' argument must be logical"), "ascii");
     ascii = CXXRCONSTRUCT(Rboolean, INTEGER(ascii_)[0]);
 
     if (version_ == R_NilValue)
@@ -2266,7 +2265,7 @@ SEXP attribute_hidden do_saveToConn(/*const*/ CXXR::Expression* call, const CXXR
     }
     try {
 	if(!con->canwrite)
-	    error(_("connection not open for writing"));
+	    error(_("connection is not open for writing"));
 
 	if (ascii) {
 	    magic = "RDA2\n";
@@ -2299,7 +2298,7 @@ SEXP attribute_hidden do_saveToConn(/*const*/ CXXR::Expression* call, const CXXR
 	    SETCAR(t, findVar(TAG(t), source));
 	    tmp = findVar(TAG(t), source);
 	    if (tmp == R_UnboundValue)
-		error(_("object '%s' not found"), EncodeChar(PRINTNAME(TAG(t))));
+		error(_("object '%s' was not found"), EncodeChar(PRINTNAME(TAG(t))));
 	    if(ep && TYPEOF(tmp) == PROMSXP) {
 		PROTECT(tmp);
 		tmp = eval(tmp, source);
@@ -2346,8 +2345,8 @@ SEXP attribute_hidden do_loadFromConn2(/*const*/ CXXR::Expression* call, const C
 	strcpy(con->mode, mode);
     }
     try {
-	if(!con->canread) error(_("connection not open for reading"));
-	if(con->text) error(_("can only load() from a binary connection"));
+	if(!con->canread) error(_("connection is not open for reading"));
+	if(con->text) error(_("can only load from a binary connection"));
 
 	aenv = downcast_to_env(envir_);
 	if (!aenv)

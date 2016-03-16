@@ -2554,7 +2554,7 @@ SEXP attribute_hidden R_unserialize(SEXP icon, SEXP fun)
 
     if (TYPEOF(icon) == STRSXP && LENGTH(icon) > 0) {
 	/* was the format in R < 2.4.0, removed in R 2.8.0 */
-	error(_("character vectors are no longer accepted by unserialize()"));
+	error(_("character vectors are no longer accepted by 'unserialize()' function"));
 	return R_NilValue; /* -Wall */
     } else if (TYPEOF(icon) == RAWSXP) {
 	/* We might want to read from a long raw vector */

@@ -28,8 +28,8 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 #include <Fileio.h>
 #include <Fileio.h>
@@ -143,7 +143,7 @@ void NORET parseError(SEXP call, int linenum)
     if (linenum) {
 	getParseFilename(filename, sizeof(filename)-2);
 	if (strlen(filename)) strcpy(filename + strlen(filename), ":");
-
+    //R_ParseErrorMsg comes from gram.[cy]'s 'yyerror(const char *s)'
 	switch (len) {
 	case 0:
 	    error("%s%d:%d: %s",
@@ -171,13 +171,10 @@ void NORET parseError(SEXP call, int linenum)
 	    error("%s", R_ParseErrorMsg);
 	    break;
 	case 1:
-	    error("%s in \"%s\"",
-		  R_ParseErrorMsg, CHAR(STRING_ELT(context, 0)));
+	    error(_("%s in command \"%s\""), R_ParseErrorMsg, CHAR(STRING_ELT(context, 0)));
 	    break;
 	default:
-	    error("%s in:\n\"%s\n%s\"",
-		  R_ParseErrorMsg, CHAR(STRING_ELT(context, len-2)),
-		  CHAR(STRING_ELT(context, len-1)));
+	    error(_("%s in:\n\"%s\n%s\""),  R_ParseErrorMsg, CHAR(STRING_ELT(context, len-2)), CHAR(STRING_ELT(context, len-1)));
 	    break;
 	}
     }
@@ -202,7 +199,7 @@ SEXP attribute_hidden do_parse(/*const*/ CXXR::Expression* call, const CXXR::Bui
     ParseStatus status;
 
     if(!inherits(file_, "connection"))
-	error(_("'file' must be a character string or connection"));
+	error(_("'%s' must be a character string or connection"), "file");
     R_ParseError = 0;
     R_ParseErrorMsg[0] = '\0';
 
@@ -231,7 +228,7 @@ SEXP attribute_hidden do_parse(/*const*/ CXXR::Expression* call, const CXXR::Bui
 	known_to_be_utf8 = TRUE;
 	allKnown = FALSE;
     } else if(!streql(encoding, "unknown") && !streql(encoding, "native.enc"))
-	warning(_("argument '%s = \"%s\"' will be ignored"), "encoding", encoding);
+	warning(_("'%s = \"%s\"' option will be ignored"), "encoding", encoding);
 
     if (prompt == R_NilValue)
 	PROTECT(prompt);

@@ -29,12 +29,12 @@
 #include <config.h>
 #endif
 
-#include <Defn.h>
 #include <localization.h>
+#include <Defn.h>
 #include <Internal.h>
 #include "RBufferUtils.h"
 #include <R_ext/RS.h> /* for Calloc/Free */
-#ifdef Win32
+#ifdef _WIN32
 #include <trioremap.h>
 #endif
 
