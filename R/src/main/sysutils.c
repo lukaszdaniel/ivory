@@ -1333,7 +1333,7 @@ next_char:
     Riconv_close(obj);
     *outbuf = '\0';
     res = (top-outb)+1; /* strlen(cbuff.data) + 1; */
-    if (res > ny) error(_("converted string too long for buffer"));
+    if (res > ny) error(_("converted string is too long for buffer"));
     memcpy(y, cbuff.data, res);
     R_FreeStringBuffer(&cbuff);
 }

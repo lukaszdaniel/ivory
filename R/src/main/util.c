@@ -108,7 +108,7 @@ int ncols(SEXP s)
 }
 
 #ifdef UNUSED
-const static char type_msg[] = "invalid type passed to internal function\n";
+//const static char type_msg[] = "invalid type passed to internal function\n";
 
 void internalTypeCheck(SEXP call, SEXP s, SEXPTYPE type)
 {
