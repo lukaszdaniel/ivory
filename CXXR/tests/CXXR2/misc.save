@@ -16,7 +16,7 @@
 > quint(2)
 [1] 7
 > try(quint(break))
-Error in sum + arg : no loop to break from
+Error in command 'sum + arg': no loop to break from
 > 
 > # Missing ...
 > 

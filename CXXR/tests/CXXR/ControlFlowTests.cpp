@@ -46,8 +46,8 @@ TEST_P(ControlFlowTest, Parens)
 	{ "( 1 )", "1" },
 	{ "( cos(0) )", "1" },
 
-	{ "`(`()", Error("0 arguments passed to '(' which requires 1") },
-	{ "`(`(1, 2)", Error("2 arguments passed to '(' which requires 1") },
+	{ "`(`()", Error("Error in command '(NULL)': 0 arguments passed to '(' which requires 1") },
+	{ "`(`(1, 2)", Error("Error in command '(1)': 2 arguments passed to '(' which requires 1") },
 
 	{ "while(TRUE) (break)", "NULL" },
      });
@@ -111,8 +111,8 @@ TEST_P(ControlFlowTest, If)
 
 	// Error and corner cases.
 	{ "`if`(TRUE)", "NULL" },
-	{ "`if`()", Error("argument is of length zero") },
-	{ "if(logical(0)) 1", Error("argument is of length zero") },
+	{ "`if`()", Error("argument is of length 0") },
+	{ "if(logical(0)) 1", Error("argument is of length 0") },
 	{ "if (NA) 1" , Error("missing value where TRUE/FALSE needed") },
 	{ "if (NA_integer_) 1",
 		Error("argument is not interpretable as logical") },

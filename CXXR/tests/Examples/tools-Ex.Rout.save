@@ -1,7 +1,15 @@
 
-R Under development (unstable) (2016-02-05 r70096) -- "Unsuffered Consequences"
+Ivory Under development (unstable) (2016-03-17 r668) -- "Internationalized Version of R"
+Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
+
+R Under development (unstable) (2016-03-17 r70335) -- "Frisbee Sailing"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
+
+CXXR Copyright (C) 2008-14 Andrew R. Runnalls.
+Ivory nor CXXR are not part of the R project, so please do not report bugs
+via r-bugs or the R website - instead refer to the authors/CXXR website.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -114,19 +122,19 @@ Type 'q()' to quit R.
 >   assertCondition( ""-1 ) # ok, any condition would satisfy this
 > 
 > try( assertCondition(sqrt(2), "warning") )
-Error in assertCondition(sqrt(2), "warning") : 
+Error in command 'assertCondition(sqrt(2), "warning")': 
   Failed to get warning in evaluating sqrt(2)
 > ## .. Failed to get warning in evaluating sqrt(2)
 >      assertCondition(sqrt("abc"), "error")   # ok
 > try( assertCondition(sqrt("abc"), "warning") )# -> error: had no warning
-Error in assertCondition(sqrt("abc"), "warning") : 
+Error in command 'assertCondition(sqrt("abc"), "warning")': 
   Got simpleError in evaluating sqrt("abc"); wanted warning
 >      assertCondition(sqrt("abc"), "error")
 >   ## identical to assertError() call above
 > 
 > assertCondition(matrix(1:5, 2,3), "warning")
 > try( assertCondition(matrix(1:8, 4,3), "error") )
-Error in assertCondition(matrix(1:8, 4, 3), "error") : 
+Error in command 'assertCondition(matrix(1:8, 4, 3), "error")': 
   Got simpleWarning in evaluating matrix(1:8, 4, 3); wanted error
 > ## .. Failed to get expected error ....
 > 
@@ -139,7 +147,7 @@ Error in assertCondition(matrix(1:8, 4, 3), "error") :
 >     assertCondition(ff(), "warning")
 > ## but assertWarning does not allow an error to follow
 > try(assertWarning(ff()))
-Error in assertWarning(ff()) : 
+Error in command 'assertWarning(ff())': 
   Got warning in evaluating ff(), but also an error
 >     assertCondition(ff(), "error")          # ok
 > assertCondition(ff(), "error", "warning") # ok (quietly, catching warning)
@@ -167,7 +175,7 @@ Error in assertWarning(ff()) :
 > 
 > ## Don't show: 
 > options(useFancyQuotes = FALSE)
-> ## End(Don't show)
+> ## End (Don't show)
 > refs <-
 + c(bibentry(bibtype = "manual",
 +     title = "R: A Language and Environment for Statistical Computing",
@@ -188,7 +196,7 @@ Error in assertWarning(ff()) :
 > bibstyle("unsorted", sortKeys = function(refs) seq_along(refs),
 +     fmtPrefix = function(paper) paste0("[", paper$.index, "]"),
 +        .init = TRUE)
-<environment: 0x1fe9190>
+<environment: 0x7fd5be7ac400>
 > print(refs, .bibstyle = "unsorted")
 [1] R Core Team (2013). _R: A Language and Environment for Statistical
 Computing_. R Foundation for Statistical Computing, Vienna, Austria.
@@ -399,9 +407,9 @@ _Journal of the Royal Statistical Society, Series B_, *26*, pp.
 > 
 > ### ** Examples
 > 
-> ## Not run: 
+> ## Don't run: 
 > ##D checkPoFiles("de", "/path/to/R/src/directory")
-> ## End(Not run)
+> ## End (Don't run)
 > 
 > 
 > 
@@ -417,14 +425,14 @@ _Journal of the Royal Statistical Society, Series B_, *26*, pp.
 > ### Keywords: utilities
 > 
 > ### ** Examples
-> ## Not run: 
+> ## Don't run: 
 > ##D ## from a package top-level source directory
 > ##D paths <- sort(Sys.glob(c("data/*.rda", "data/*.RData")))
 > ##D (res <- checkRdaFiles(paths))
 > ##D ## pick out some that may need attention
 > ##D bad <- is.na(res$ASCII) | res$ASCII | (res$size > 1e4 & res$compress == "none")
 > ##D res[bad, ]
-> ## End(Not run)
+> ## End (Don't run)
 > 
 > 
 > cleanEx()
@@ -442,7 +450,7 @@ _Journal of the Royal Statistical Society, Series B_, *26*, pp.
 > 
 > ### ** Examples
 > 
-> ## Not run: 
+> ## Don't run: 
 > ##D ## Check packages in dir without reverse dependencies:
 > ##D check_packages_in_dir(dir)
 > ##D ## Check packages in dir and their reverse dependencies using the
@@ -459,7 +467,7 @@ _Journal of the Royal Statistical Society, Series B_, *26*, pp.
 > ##D check_packages_in_dir(dir,
 > ##D                       check_args = c("--as-cran", ""),
 > ##D                       reverse = list(repos = getOption("repos")["CRAN"]))
-> ## End(Not run)
+> ## End (Don't run)
 > 
 > 
 > 
@@ -518,7 +526,7 @@ attr(,"match.length")
 > x <- "fa\xE7ile"
 > encoded_text_to_latex(x, "latin1")
 [1] "fa{\\c c}ile"
-> ## Not run: 
+> ## Don't run: 
 > ##D ## create a tex file to show the upper half of 8-bit charsets
 > ##D x <- rawToChar(as.raw(160:255), multiple = TRUE)
 > ##D (x <- matrix(x, ncol = 16, byrow = TRUE))
@@ -554,7 +562,7 @@ attr(,"match.length")
 > ##D writeLines(paste(xx, "\\", sep = ""), con)
 > ##D writeLines(trailer, con)
 > ##D close(con)
-> ## End(Not run)
+> ## End (Don't run)
 > 
 > 
 > cleanEx()
@@ -583,11 +591,11 @@ attr(,"match.length")
 > ### Aliases: find_gs_cmd R_GSCMD GSC
 > 
 > ### ** Examples
-> ## Not run: 
+> ## Don't run: 
 > ##D ## Suppose a Solaris system has GhostScript 9.00 on the path and
 > ##D ## 9.07 in /opt/csw/bin.  Then one might set
 > ##D Sys.setenv(R_GSCMD = "/opt/csw/bin/gs")
-> ## End(Not run)
+> ## End (Don't run)
 > 
 > 
 > cleanEx()
@@ -604,15 +612,15 @@ attr(,"match.length")
 > ### ** Examples
 > 
 > pkgDepends("tools", local = FALSE)
-Warning: 'pkgDepends' is deprecated.
-Use 'package_dependencies()' instead.
+Warning: Function 'pkgDepends' is deprecated.
+Use function 'package_dependencies()' instead.
 See help("Deprecated")
-Warning: 'package.dependencies' is deprecated.
-Use 'package_dependencies' instead.
+Warning: Function 'package.dependencies' is deprecated.
+Use function 'package_dependencies' instead.
 See help("Deprecated")
-Warning: 'getDepList' is deprecated.
-Use 'dependsOnPkgs() or package_dependencies()' instead.
-See help("Deprecated")
+Warning: Function 'getDepList()' is deprecated.
+Use function 'dependsOnPkgs()' or 'package_dependencies()' instead.
+
 $Depends
 character(0)
 
@@ -667,15 +675,15 @@ attr(,"class")
 > dir.create(tmp)
 > 
 > pDL <- pkgDepends("tools", local = FALSE)
-Warning: 'pkgDepends' is deprecated.
-Use 'package_dependencies()' instead.
+Warning: Function 'pkgDepends' is deprecated.
+Use function 'package_dependencies()' instead.
 See help("Deprecated")
-Warning: 'package.dependencies' is deprecated.
-Use 'package_dependencies' instead.
+Warning: Function 'package.dependencies' is deprecated.
+Use function 'package_dependencies' instead.
 See help("Deprecated")
-Warning: 'getDepList' is deprecated.
-Use 'dependsOnPkgs() or package_dependencies()' instead.
-See help("Deprecated")
+Warning: Function 'getDepList()' is deprecated.
+Use function 'dependsOnPkgs()' or 'package_dependencies()' instead.
+
 > installFoundDepends(pDL$Found, destdir = tmp)
 Warning: 'installFoundDepends()' is deprecated: It is misleading nowadays
  since it has never taken 'Imports' into consideration
@@ -713,7 +721,7 @@ NULL
 > ### ** Examples
 > 
 > as.vector(md5sum(dir(R.home(), pattern = "^COPY", full.names = TRUE)))
-[1] "eb723b61539feef013de476e68b5c50a"
+[1] "12f884d2ae1ff87c09e5b7ccc2c4ca7e"
 > 
 > 
 > 
@@ -730,13 +738,13 @@ NULL
 > 
 > ### ** Examples
 > 
-> ## Not run: 
+> ## Don't run: 
 > ##D pdb <- available.packages()
 > ##D deps <- package_dependencies(packages = "MASS", pdb,
 > ##D                     which = c("Depends", "Imports", "LinkingTo", "Suggests"),
 > ##D                     recursive = TRUE, reverse = TRUE)
 > ##D length(deps$MASS)
-> ## End(Not run)
+> ## End (Don't run)
 > 
 > 
 > 
@@ -795,9 +803,9 @@ function (x, ...)
 > ### Keywords: utilities
 > 
 > ### ** Examples
-> ## Not run: 
+> ## Don't run: 
 > ##D pskill(c(237, 245), SIGKILL)
-> ## End(Not run)
+> ## End (Don't run)
 > 
 > 
 > cleanEx()
@@ -947,15 +955,15 @@ An illustration of lexical scoping.
 > ### ** Examples
 > 
 > str(vignetteEngine("Sweave"))
-List of 6
- $ name   : chr "Sweave"
- $ package: chr "utils"
- $ pattern: chr "[.][rRsS](nw|tex)$"
+List of 6 components
+ $ name   : character "Sweave"
+ $ package: character "utils"
+ $ pattern: character "[.][rRsS](nw|tex)$"
  $ weave  :function (...)  
  $ tangle :function (...)  
- $ aspell :List of 2
-  ..$ filter : chr "Sweave"
-  ..$ control: chr "-t"
+ $ aspell :List of 2 components
+  ..$ filter : character "Sweave"
+  ..$ control: character "-t"
 > 
 > 
 > 
@@ -972,11 +980,11 @@ List of 6
 > 
 > ### ** Examples
 > 
-> ## Not run: 
+> ## Don't run: 
 > ##D write_PACKAGES("c:/myFolder/myRepository")  # on Windows
 > ##D write_PACKAGES("/pub/RWin/bin/windows/contrib/2.9",
 > ##D                type = "win.binary")  # on Linux
-> ## End(Not run)
+> ## End (Don't run)
 > 
 > 
 > cleanEx()
@@ -991,17 +999,17 @@ List of 6
 > ### Keywords: utilities
 > 
 > ### ** Examples
-> ## Not run: 
+> ## Don't run: 
 > ##D ## in a source-directory build of R:
 > ##D xgettext(file.path(R.home(), "src", "library", "splines"))
-> ## End(Not run)
+> ## End (Don't run)
 > 
 > 
 > ### * <FOOTER>
 > ###
 > options(digits = 7L)
-> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.177 0.013 0.189 0 0 
+> base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  0.972 0.04 1.023 0 0 
 > grDevices::dev.off()
 null device 
           1 

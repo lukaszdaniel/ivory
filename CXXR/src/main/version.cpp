@@ -46,7 +46,7 @@ void attribute_hidden PrintGreeting(void)
     PrintVersion_part_1(buf, 500);
     Rprintf("%s\n", buf);
     Rprintf(_("CXXR Copyright (C) 2008-14 Andrew R. Runnalls.\n"));
-    Rprintf("Ivory nor CXXR are not part of the R project, so please do not report bugs\nvia r-bugs or the R website - instead refer to the author/CXXR website.\n\n");
+    Rprintf("Ivory nor CXXR are not part of the R project, so please do not report bugs\nvia r-bugs or the R website - instead refer to the authors/CXXR website.\n\n");
     Rprintf(_("R is free software and comes with ABSOLUTELY NO WARRANTY.\n\
 You are welcome to redistribute it under certain conditions.\n\
 Type 'license()' or 'licence()' for distribution details.\n\n"));
