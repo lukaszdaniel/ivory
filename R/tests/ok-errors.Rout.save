@@ -40,8 +40,12 @@ Error: test of `options(error=expression(NULL))'
 + }
 > 
 > ## bad infinite recursion / on.exit / ... interactions
+> ##   catch the error to permit different error messages emitted
+> ##   (handling of infinite recursion is different in the AST interpreter
+> ##   and the byte-code interpreter)
+> 
 > bar <- function() 1+1
 > foo <- function() { on.exit(bar()); foo() }
-> foo() # now simple "infinite recursion"
-Error: evaluation is nested too deeply: infinite recursion / options(expressions=)?
+> tryCatch(foo(), error=function(x) TRUE) # now simple "infinite recursion"
+[1] TRUE
 > 
