@@ -319,6 +319,10 @@
       the size of points separately from the size of plot labels.
       Thanks to Michael Friendly and Milan Bouchet-Valat for ideas
       and patches.
+
+      \item \code{as.roman(ch)} now correctly deals with more diverse
+      character vectors \code{ch}; also arithmetic with resulting roman
+      numbers works in more cases.  (\PR{16779})
     }
   }
 
