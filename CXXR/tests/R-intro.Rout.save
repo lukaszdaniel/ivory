@@ -1,7 +1,15 @@
 
-R Under development (unstable) (2016-02-05 r70096) -- "Unsuffered Consequences"
+Ivory Under development (unstable) (2016-03-18 r671) -- "Internationalized Version of R"
+Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
+
+R Under development (unstable) (2016-03-18 r70207) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
+
+CXXR Copyright (C) 2008-14 Andrew R. Runnalls.
+Ivory nor CXXR are not part of the R project, so please do not report bugs
+via r-bugs or the R website - instead refer to the authors/CXXR website.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -35,7 +43,7 @@ Type 'q()' to quit R.
 > y <- c(x, 0, x)
 > v <- 2*x + y + 1
 Warning message:
-In 2 * x + y :
+In command '2 * x + y':
   longer object length is not a multiple of shorter object length
 > ##-  Warning message:
 > ##-  longer object length
@@ -44,7 +52,7 @@ In 2 * x + y :
 > sqrt(-17)
 [1] NaN
 Warning message:
-In sqrt(-17) : NaNs produced
+In command 'sqrt(-17)': NaNs produced
 > ##- [1] NaN
 > ##- Warning message:
 > ##- NaNs produced in: sqrt(-17)
@@ -467,9 +475,9 @@ incomef   act nsw nt qld sa tas vic wa
 29  vic   58 (55,65]
 30  act   43 (35,45]
 > str(accountants)
-'data.frame':	30 obs. of  3 variables:
+'data.frame':	30 observations of 3 variables:
  $ home: Factor w/ 8 levels "act","nsw","nt",..: 6 5 4 2 2 3 8 8 4 7 ...
- $ loot: num  60 49 40 61 64 60 59 54 62 69 ...
+ $ loot: numeric  60 49 40 61 64 60 59 54 62 69 ...
  $ shot: Factor w/ 4 levels "(35,45]","(45,55]",..: 3 2 1 3 3 3 3 2 3 4 ...
 > 
 > ## ..........
@@ -489,11 +497,12 @@ incomef   act nsw nt qld sa tas vic wa
    1.60    2.16    4.00    3.49    4.45    5.10 
 > 
 > fivenum(eruptions)
-[1] 1.6000 2.1585 4.0000 4.4585 5.1000
+    Min. L. hinge   Median U. hinge     Max. 
+  1.6000   2.1585   4.0000   4.4585   5.1000 
 > 
 > stem(eruptions)
 
-  The decimal point is 1 digit(s) to the left of the |
+  The decimal point is 1 digit to the left of the |
 
   16 | 070355555588
   18 | 000022233333335577777777888822335777888
@@ -546,7 +555,7 @@ incomef   act nsw nt qld sa tas vic wa
 
 	Shapiro-Wilk normality test
 
-data:  long
+data: long
 W = 0.979, p-value = 0.011
 
 > 
@@ -554,12 +563,12 @@ W = 0.979, p-value = 0.011
 
 	One-sample Kolmogorov-Smirnov test
 
-data:  long
+data: long
 D = 0.0661, p-value = 0.43
 alternative hypothesis: two-sided
 
 Warning message:
-In ks.test(long, "pnorm", mean = mean(long), sd = sqrt(var(long))) :
+In command 'ks.test(long, "pnorm", mean = mean(long), sd = sqrt(var(long)))':
   ties should not be present for the Kolmogorov-Smirnov test
 > 
 > ##@section One- and two-sample tests
@@ -583,7 +592,7 @@ In ks.test(long, "pnorm", mean = mean(long), sd = sqrt(var(long))) :
 
 	Welch Two Sample t-test
 
-data:  A and B
+data: A and B
 t = 3.25, df = 12, p-value = 0.0069
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
@@ -597,7 +606,7 @@ mean of x mean of y
 
 	F test to compare two variances
 
-data:  A and B
+data: A and B
 F = 0.584, num df = 12, denom df = 7, p-value = 0.39
 alternative hypothesis: true ratio of variances is not equal to 1
 95 percent confidence interval:
@@ -611,7 +620,7 @@ ratio of variances
 
 	Two Sample t-test
 
-data:  A and B
+data: A and B
 t = 3.47, df = 19, p-value = 0.0026
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
@@ -625,12 +634,12 @@ mean of x mean of y
 
 	Wilcoxon rank sum test with continuity correction
 
-data:  A and B
+data: A and B
 W = 89, p-value = 0.0075
 alternative hypothesis: true location shift is not equal to 0
 
 Warning message:
-In wilcox.test.default(A, B) : cannot compute exact p-value with ties
+In command 'wilcox.test.default(A, B)': cannot compute exact p-value with ties
 > 
 > plot(ecdf(A), do.points=FALSE, verticals=TRUE, xlim=range(A, B))
 > plot(ecdf(B), do.points=FALSE, verticals=TRUE, add=TRUE)
@@ -704,7 +713,7 @@ x             0.9653     0.0743   12.99  1.4e-10 ***
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Residual standard error: 1.92 on 18 degrees of freedom
-Multiple R-squared:  0.904,	Adjusted R-squared:  0.898 
+Multiple R-squared: 0.904,	Adjusted R-squared: 0.898
 F-statistic:  169 on 1 and 18 DF,  p-value: 1.39e-10
 
 > fm1 <- lm(y ~ x, data=dummy, weight=1/w^2)
@@ -725,7 +734,7 @@ x             0.9721     0.0664   14.64  1.9e-11 ***
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Residual standard error: 0.72 on 18 degrees of freedom
-Multiple R-squared:  0.922,	Adjusted R-squared:  0.918 
+Multiple R-squared: 0.922,	Adjusted R-squared: 0.918
 F-statistic:  214 on 1 and 18 DF,  p-value: 1.94e-11
 
 > attach(dummy)

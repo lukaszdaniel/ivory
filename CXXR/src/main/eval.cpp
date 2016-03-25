@@ -460,7 +460,7 @@ static void R_InitProfiling(SEXP filename, int append, double dinterval,
     itv.it_value.tv_sec = 0;
     itv.it_value.tv_usec = interval;
     if (setitimer(ITIMER_PROF, &itv, nullptr) == -1)
-	R_Suicide("setting profile timer failed");
+	R_Suicide(_("setting profile timer failed"));
 #endif /* not Win32 */
     Evaluator::enableProfiling(true);
 }

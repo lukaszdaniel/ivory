@@ -1,7 +1,15 @@
 
-R Under development (unstable) (2016-02-05 r70096) -- "Unsuffered Consequences"
+Ivory Under development (unstable) (2016-03-18 r670) -- "Internationalized Version of R"
+Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
+
+R Under development (unstable) (2016-03-18 r70207) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
+
+CXXR Copyright (C) 2008-14 Andrew R. Runnalls.
+Ivory nor CXXR are not part of the R project, so please do not report bugs
+via r-bugs or the R website - instead refer to the authors/CXXR website.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -1360,5 +1368,5 @@ N
 > 
 > 
 > cat("Time elapsed: ", proc.time() - .ptime,"\n")
-Time elapsed:  0.901 0.009 0.909 0 0 
+Time elapsed:  3.868 0.068 3.936 0 0 
 > 

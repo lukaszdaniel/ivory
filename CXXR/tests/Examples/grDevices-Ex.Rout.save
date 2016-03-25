@@ -1,7 +1,15 @@
 
-R Under development (unstable) (2016-02-05 r70096) -- "Unsuffered Consequences"
+Ivory Under development (unstable) (2016-03-18 r670) -- "Internationalized Version of R"
+Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
+
+R Under development (unstable) (2016-03-18 r70207) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
+
+CXXR Copyright (C) 2008-14 Andrew R. Runnalls.
+Ivory nor CXXR are not part of the R project, so please do not report bugs
+via r-bugs or the R website - instead refer to the authors/CXXR website.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -35,11 +43,11 @@ Type 'q()' to quit R.
 > ### Keywords: device
 > 
 > ### ** Examples
-> ## Not run: 
+> ## Don't run: 
 > ##D ## open the default screen device on this platform if no device is
 > ##D ## open
 > ##D if(dev.cur() == 1) dev.new()
-> ## End(Not run)
+> ## End (Don't run)
 > 
 > 
 > cleanEx()
@@ -148,13 +156,13 @@ $allowed
 +                         "CM_symbol_10.afm"),
 +                       encoding = "TeXtext.enc")
 > 
-> ## Not run: 
+> ## Don't run: 
 > ##D ## This could be used by
 > ##D postscript(family = CMitalic)
 > ##D ## or
 > ##D postscriptFonts(CMitalic = CMitalic)  # once in a session
 > ##D postscript(family = "CMitalic", encoding = "TeXtext.enc")
-> ## End(Not run)
+> ## End (Don't run)
 > 
 > 
 > cleanEx()
@@ -353,7 +361,7 @@ $allowed
 +           identical(r[3:5], colors()[3:5]))
 > r[2:4] <- "black"
 > stopifnot(identical(r[1:4, 1], as.raster(c("white", rep("black", 3)))))
-> ## End(Don't show)
+> ## End (Don't show)
 > 
 > 
 > 
@@ -388,7 +396,7 @@ $allowed
  [1]   0  10  20  30  40  50  60  70  80  90 100
 > 
 > plot(10*(0:10), log = "y"); (pu <- par("usr"))
-Warning in xy.coords(x, y, xlabel, ylabel, log) :
+Warning in command 'xy.coords(x, y, xlabel, ylabel, log)':
   1 y value <= 0 omitted from logarithmic plot
 [1]  0.60 11.40  0.96  2.04
 > aX(2, print(ya <- axisTicks(pu[3:4], log = TRUE)))  # y axis
@@ -420,7 +428,8 @@ Warning in xy.coords(x, y, xlabel, ylabel, log) :
 > x <- c(1:100, 1000)
 > (b1 <- boxplot.stats(x))
 $stats
-[1]   1  26  51  76 100
+    Min. L. hinge   Median U. hinge     Max. 
+       1       26       51       76      100 
 
 $n
 [1] 101
@@ -433,7 +442,8 @@ $out
 
 > (b2 <- boxplot.stats(x, do.conf = FALSE, do.out = FALSE))
 $stats
-[1]   1  26  51  76 100
+    Min. L. hinge   Median U. hinge     Max. 
+       1       26       51       76      100 
 
 $n
 [1] 101
@@ -447,7 +457,8 @@ numeric(0)
 > stopifnot(b1 $ stats == b2 $ stats) # do.out = FALSE is still robust
 > boxplot.stats(x, coef = 3, do.conf = FALSE)
 $stats
-[1]   1  26  51  76 100
+    Min. L. hinge   Median U. hinge     Max. 
+       1       26       51       76      100 
 
 $n
 [1] 101
@@ -461,7 +472,8 @@ $out
 > ## no outlier treatment:
 > boxplot.stats(x, coef = 0)
 $stats
-[1]    1   26   51   76 1000
+    Min. L. hinge   Median U. hinge     Max. 
+       1       26       51       76     1000 
 
 $n
 [1] 101
@@ -475,7 +487,8 @@ numeric(0)
 > 
 > boxplot.stats(c(x, NA)) # slight change : n is 101
 $stats
-[1]   1  26  51  76 100
+    Min. L. hinge   Median U. hinge     Max. 
+       1       26       51       76      100 
 
 $n
 [1] 101
@@ -488,7 +501,8 @@ $out
 
 > (r <- boxplot.stats(c(x, -1:1/0)))
 $stats
-[1]   1.0  25.5  51.0  76.5 100.0
+    Min. L. hinge   Median U. hinge     Max. 
+     1.0     25.5     51.0     76.5    100.0 
 
 $n
 [1] 103
@@ -534,7 +548,7 @@ $out
 15  4.50  =    11.50  =   
 16  4.75  4.50 12.25 12.50
 17  5.00  =    13.00  =   
-> ## End(Don't show)
+> ## End (Don't show)
 > 
 > 
 > 
@@ -601,13 +615,13 @@ $ch
 > X <- matrix(stats::rnorm(2000), ncol = 2)
 > chull(X)
  [1]  61 442 165 899 697 446 975 656 232 557 938 295 495
-> ## Not run: 
+> ## Don't run: 
 > ##D   # Example usage from graphics package
 > ##D   plot(X, cex = 0.5)
 > ##D   hpts <- chull(X)
 > ##D   hpts <- c(hpts, hpts[1])
 > ##D   lines(X[hpts, ])
-> ## End(Not run)
+> ## End (Don't run)
 > 
 > 
 > 
@@ -1382,114 +1396,114 @@ yellowgreen          154   205   50
 > names(cl) <- apply(col2rgb(sapply(cl, function(x)x[1])),
 +                    2, function(n)paste(n, collapse = ","))
 > utils::str(cl)
-List of 150
- $ 0,0,0      : chr [1:3] "black" "gray0" "grey0"
- $ 0,0,128    : chr [1:2] "navy" "navyblue"
- $ 0,0,139    : chr [1:2] "blue4" "darkblue"
- $ 0,0,205    : chr [1:2] "blue3" "mediumblue"
- $ 0,0,255    : chr [1:2] "blue" "blue1"
- $ 0,139,139  : chr [1:2] "cyan4" "darkcyan"
- $ 0,191,255  : chr [1:2] "deepskyblue" "deepskyblue1"
- $ 0,255,0    : chr [1:2] "green" "green1"
- $ 0,255,127  : chr [1:2] "springgreen" "springgreen1"
- $ 0,255,255  : chr [1:2] "cyan" "cyan1"
- $ 3,3,3      : chr [1:2] "gray1" "grey1"
- $ 5,5,5      : chr [1:2] "gray2" "grey2"
- $ 8,8,8      : chr [1:2] "gray3" "grey3"
- $ 10,10,10   : chr [1:2] "gray4" "grey4"
- $ 13,13,13   : chr [1:2] "gray5" "grey5"
- $ 15,15,15   : chr [1:2] "gray6" "grey6"
- $ 18,18,18   : chr [1:2] "gray7" "grey7"
- $ 20,20,20   : chr [1:2] "gray8" "grey8"
- $ 23,23,23   : chr [1:2] "gray9" "grey9"
- $ 26,26,26   : chr [1:2] "gray10" "grey10"
- $ 28,28,28   : chr [1:2] "gray11" "grey11"
- $ 30,144,255 : chr [1:2] "dodgerblue" "dodgerblue1"
- $ 31,31,31   : chr [1:2] "gray12" "grey12"
- $ 33,33,33   : chr [1:2] "gray13" "grey13"
- $ 36,36,36   : chr [1:2] "gray14" "grey14"
- $ 38,38,38   : chr [1:2] "gray15" "grey15"
- $ 41,41,41   : chr [1:2] "gray16" "grey16"
- $ 43,43,43   : chr [1:2] "gray17" "grey17"
- $ 46,46,46   : chr [1:2] "gray18" "grey18"
- $ 46,139,87  : chr [1:2] "seagreen" "seagreen4"
- $ 47,79,79   : chr [1:2] "darkslategray" "darkslategrey"
- $ 48,48,48   : chr [1:2] "gray19" "grey19"
- $ 51,51,51   : chr [1:2] "gray20" "grey20"
- $ 54,54,54   : chr [1:2] "gray21" "grey21"
- $ 56,56,56   : chr [1:2] "gray22" "grey22"
- $ 59,59,59   : chr [1:2] "gray23" "grey23"
- $ 61,61,61   : chr [1:2] "gray24" "grey24"
- $ 64,64,64   : chr [1:2] "gray25" "grey25"
- $ 66,66,66   : chr [1:2] "gray26" "grey26"
- $ 69,69,69   : chr [1:2] "gray27" "grey27"
- $ 71,71,71   : chr [1:2] "gray28" "grey28"
- $ 74,74,74   : chr [1:2] "gray29" "grey29"
- $ 77,77,77   : chr [1:2] "gray30" "grey30"
- $ 79,79,79   : chr [1:2] "gray31" "grey31"
- $ 82,82,82   : chr [1:2] "gray32" "grey32"
- $ 84,84,84   : chr [1:2] "gray33" "grey33"
- $ 87,87,87   : chr [1:2] "gray34" "grey34"
- $ 89,89,89   : chr [1:2] "gray35" "grey35"
- $ 92,92,92   : chr [1:2] "gray36" "grey36"
- $ 94,94,94   : chr [1:2] "gray37" "grey37"
- $ 97,97,97   : chr [1:2] "gray38" "grey38"
- $ 99,99,99   : chr [1:2] "gray39" "grey39"
- $ 102,102,102: chr [1:2] "gray40" "grey40"
- $ 102,205,170: chr [1:2] "aquamarine3" "mediumaquamarine"
- $ 105,105,105: chr [1:4] "dimgray" "dimgrey" "gray41" "grey41"
- $ 107,107,107: chr [1:2] "gray42" "grey42"
- $ 110,110,110: chr [1:2] "gray43" "grey43"
- $ 112,112,112: chr [1:2] "gray44" "grey44"
- $ 112,128,144: chr [1:2] "slategray" "slategrey"
- $ 115,115,115: chr [1:2] "gray45" "grey45"
- $ 117,117,117: chr [1:2] "gray46" "grey46"
- $ 119,136,153: chr [1:2] "lightslategray" "lightslategrey"
- $ 120,120,120: chr [1:2] "gray47" "grey47"
- $ 122,122,122: chr [1:2] "gray48" "grey48"
- $ 125,125,125: chr [1:2] "gray49" "grey49"
- $ 127,127,127: chr [1:2] "gray50" "grey50"
- $ 127,255,0  : chr [1:2] "chartreuse" "chartreuse1"
- $ 127,255,212: chr [1:2] "aquamarine" "aquamarine1"
- $ 130,130,130: chr [1:2] "gray51" "grey51"
- $ 133,133,133: chr [1:2] "gray52" "grey52"
- $ 135,135,135: chr [1:2] "gray53" "grey53"
- $ 138,138,138: chr [1:2] "gray54" "grey54"
- $ 139,0,0    : chr [1:2] "darkred" "red4"
- $ 139,0,139  : chr [1:2] "darkmagenta" "magenta4"
- $ 139,69,19  : chr [1:2] "chocolate4" "saddlebrown"
- $ 140,140,140: chr [1:2] "gray55" "grey55"
- $ 143,143,143: chr [1:2] "gray56" "grey56"
- $ 144,238,144: chr [1:2] "lightgreen" "palegreen2"
- $ 145,145,145: chr [1:2] "gray57" "grey57"
- $ 148,148,148: chr [1:2] "gray58" "grey58"
- $ 150,150,150: chr [1:2] "gray59" "grey59"
- $ 153,153,153: chr [1:2] "gray60" "grey60"
- $ 154,205,50 : chr [1:2] "olivedrab3" "yellowgreen"
- $ 156,156,156: chr [1:2] "gray61" "grey61"
- $ 158,158,158: chr [1:2] "gray62" "grey62"
- $ 161,161,161: chr [1:2] "gray63" "grey63"
- $ 163,163,163: chr [1:2] "gray64" "grey64"
- $ 166,166,166: chr [1:2] "gray65" "grey65"
- $ 168,168,168: chr [1:2] "gray66" "grey66"
- $ 169,169,169: chr [1:2] "darkgray" "darkgrey"
- $ 171,171,171: chr [1:2] "gray67" "grey67"
- $ 173,173,173: chr [1:2] "gray68" "grey68"
- $ 176,176,176: chr [1:2] "gray69" "grey69"
- $ 179,179,179: chr [1:2] "gray70" "grey70"
- $ 181,181,181: chr [1:2] "gray71" "grey71"
- $ 184,184,184: chr [1:2] "gray72" "grey72"
- $ 186,186,186: chr [1:2] "gray73" "grey73"
- $ 189,189,189: chr [1:2] "gray74" "grey74"
- $ 190,190,190: chr [1:2] "gray" "grey"
-  [list output truncated]
-> ## Not run: 
+List of 150 components
+ $ 0,0,0      : character [1:3] "black" "gray0" "grey0"
+ $ 0,0,128    : character [1:2] "navy" "navyblue"
+ $ 0,0,139    : character [1:2] "blue4" "darkblue"
+ $ 0,0,205    : character [1:2] "blue3" "mediumblue"
+ $ 0,0,255    : character [1:2] "blue" "blue1"
+ $ 0,139,139  : character [1:2] "cyan4" "darkcyan"
+ $ 0,191,255  : character [1:2] "deepskyblue" "deepskyblue1"
+ $ 0,255,0    : character [1:2] "green" "green1"
+ $ 0,255,127  : character [1:2] "springgreen" "springgreen1"
+ $ 0,255,255  : character [1:2] "cyan" "cyan1"
+ $ 3,3,3      : character [1:2] "gray1" "grey1"
+ $ 5,5,5      : character [1:2] "gray2" "grey2"
+ $ 8,8,8      : character [1:2] "gray3" "grey3"
+ $ 10,10,10   : character [1:2] "gray4" "grey4"
+ $ 13,13,13   : character [1:2] "gray5" "grey5"
+ $ 15,15,15   : character [1:2] "gray6" "grey6"
+ $ 18,18,18   : character [1:2] "gray7" "grey7"
+ $ 20,20,20   : character [1:2] "gray8" "grey8"
+ $ 23,23,23   : character [1:2] "gray9" "grey9"
+ $ 26,26,26   : character [1:2] "gray10" "grey10"
+ $ 28,28,28   : character [1:2] "gray11" "grey11"
+ $ 30,144,255 : character [1:2] "dodgerblue" "dodgerblue1"
+ $ 31,31,31   : character [1:2] "gray12" "grey12"
+ $ 33,33,33   : character [1:2] "gray13" "grey13"
+ $ 36,36,36   : character [1:2] "gray14" "grey14"
+ $ 38,38,38   : character [1:2] "gray15" "grey15"
+ $ 41,41,41   : character [1:2] "gray16" "grey16"
+ $ 43,43,43   : character [1:2] "gray17" "grey17"
+ $ 46,46,46   : character [1:2] "gray18" "grey18"
+ $ 46,139,87  : character [1:2] "seagreen" "seagreen4"
+ $ 47,79,79   : character [1:2] "darkslategray" "darkslategrey"
+ $ 48,48,48   : character [1:2] "gray19" "grey19"
+ $ 51,51,51   : character [1:2] "gray20" "grey20"
+ $ 54,54,54   : character [1:2] "gray21" "grey21"
+ $ 56,56,56   : character [1:2] "gray22" "grey22"
+ $ 59,59,59   : character [1:2] "gray23" "grey23"
+ $ 61,61,61   : character [1:2] "gray24" "grey24"
+ $ 64,64,64   : character [1:2] "gray25" "grey25"
+ $ 66,66,66   : character [1:2] "gray26" "grey26"
+ $ 69,69,69   : character [1:2] "gray27" "grey27"
+ $ 71,71,71   : character [1:2] "gray28" "grey28"
+ $ 74,74,74   : character [1:2] "gray29" "grey29"
+ $ 77,77,77   : character [1:2] "gray30" "grey30"
+ $ 79,79,79   : character [1:2] "gray31" "grey31"
+ $ 82,82,82   : character [1:2] "gray32" "grey32"
+ $ 84,84,84   : character [1:2] "gray33" "grey33"
+ $ 87,87,87   : character [1:2] "gray34" "grey34"
+ $ 89,89,89   : character [1:2] "gray35" "grey35"
+ $ 92,92,92   : character [1:2] "gray36" "grey36"
+ $ 94,94,94   : character [1:2] "gray37" "grey37"
+ $ 97,97,97   : character [1:2] "gray38" "grey38"
+ $ 99,99,99   : character [1:2] "gray39" "grey39"
+ $ 102,102,102: character [1:2] "gray40" "grey40"
+ $ 102,205,170: character [1:2] "aquamarine3" "mediumaquamarine"
+ $ 105,105,105: character [1:4] "dimgray" "dimgrey" "gray41" "grey41"
+ $ 107,107,107: character [1:2] "gray42" "grey42"
+ $ 110,110,110: character [1:2] "gray43" "grey43"
+ $ 112,112,112: character [1:2] "gray44" "grey44"
+ $ 112,128,144: character [1:2] "slategray" "slategrey"
+ $ 115,115,115: character [1:2] "gray45" "grey45"
+ $ 117,117,117: character [1:2] "gray46" "grey46"
+ $ 119,136,153: character [1:2] "lightslategray" "lightslategrey"
+ $ 120,120,120: character [1:2] "gray47" "grey47"
+ $ 122,122,122: character [1:2] "gray48" "grey48"
+ $ 125,125,125: character [1:2] "gray49" "grey49"
+ $ 127,127,127: character [1:2] "gray50" "grey50"
+ $ 127,255,0  : character [1:2] "chartreuse" "chartreuse1"
+ $ 127,255,212: character [1:2] "aquamarine" "aquamarine1"
+ $ 130,130,130: character [1:2] "gray51" "grey51"
+ $ 133,133,133: character [1:2] "gray52" "grey52"
+ $ 135,135,135: character [1:2] "gray53" "grey53"
+ $ 138,138,138: character [1:2] "gray54" "grey54"
+ $ 139,0,0    : character [1:2] "darkred" "red4"
+ $ 139,0,139  : character [1:2] "darkmagenta" "magenta4"
+ $ 139,69,19  : character [1:2] "chocolate4" "saddlebrown"
+ $ 140,140,140: character [1:2] "gray55" "grey55"
+ $ 143,143,143: character [1:2] "gray56" "grey56"
+ $ 144,238,144: character [1:2] "lightgreen" "palegreen2"
+ $ 145,145,145: character [1:2] "gray57" "grey57"
+ $ 148,148,148: character [1:2] "gray58" "grey58"
+ $ 150,150,150: character [1:2] "gray59" "grey59"
+ $ 153,153,153: character [1:2] "gray60" "grey60"
+ $ 154,205,50 : character [1:2] "olivedrab3" "yellowgreen"
+ $ 156,156,156: character [1:2] "gray61" "grey61"
+ $ 158,158,158: character [1:2] "gray62" "grey62"
+ $ 161,161,161: character [1:2] "gray63" "grey63"
+ $ 163,163,163: character [1:2] "gray64" "grey64"
+ $ 166,166,166: character [1:2] "gray65" "grey65"
+ $ 168,168,168: character [1:2] "gray66" "grey66"
+ $ 169,169,169: character [1:2] "darkgray" "darkgrey"
+ $ 171,171,171: character [1:2] "gray67" "grey67"
+ $ 173,173,173: character [1:2] "gray68" "grey68"
+ $ 176,176,176: character [1:2] "gray69" "grey69"
+ $ 179,179,179: character [1:2] "gray70" "grey70"
+ $ 181,181,181: character [1:2] "gray71" "grey71"
+ $ 184,184,184: character [1:2] "gray72" "grey72"
+ $ 186,186,186: character [1:2] "gray73" "grey73"
+ $ 189,189,189: character [1:2] "gray74" "grey74"
+ $ 190,190,190: character [1:2] "gray" "grey"
+ [list output truncated]
+> ## Don't run: 
 > ##D  if(require(xgobi)) { ## Look at the color cube dynamically :
 > ##D    tc <- t(crgb[, !duplicated(ccodes)])
 > ##D    table(is.gray <- tc[,1] == tc[,2] & tc[,2] == tc[,3])  # (397, 105)
 > ##D    xgobi(tc, color = c("gold", "gray")[1 + is.gray])
 > ##D  }
-> ## End(Not run)
+> ## End (Don't run)
 > 
 > 
 > 
@@ -1626,7 +1640,7 @@ List of 150
 + }
 
 > showCols2()
-Loading required package: grid
+Loading required package: ‘grid’
 
 > showCols2(bg = "gray33")
 
@@ -1861,7 +1875,7 @@ gray    76.97594   0.00000    0.00000
 > 
 > ### ** Examples
 > 
-> ## Not run: 
+> ## Don't run: 
 > ##D ## Unix-specific example
 > ##D x11()
 > ##D plot(1:10)
@@ -1873,7 +1887,7 @@ gray    76.97594   0.00000    0.00000
 > ##D abline(h = 0, col = "gray") # for the residual plot
 > ##D dev.set(dev.prev())
 > ##D dev.off(); dev.off() #- close the two X devices
-> ## End(Not run)
+> ## End (Don't run)
 > 
 > 
 > 
@@ -1963,7 +1977,7 @@ character(0)
 > 
 > ### ** Examples
 > 
-> ## Not run: 
+> ## Don't run: 
 > ##D x11() # on a Unix-alike
 > ##D plot(rnorm(10), main = "Plot 1")
 > ##D dev.copy(device = x11)
@@ -1971,7 +1985,7 @@ character(0)
 > ##D dev.print(width = 6, height = 6, horizontal = FALSE) # prints it
 > ##D dev.off(dev.prev())
 > ##D dev.off()
-> ## End(Not run)
+> ## End (Don't run)
 > 
 > 
 > 
@@ -2017,7 +2031,7 @@ character(0)
 > 
 > # This currently only works on the Windows
 > # and X11(type = "Xlib") screen devices...
-> ## Not run: 
+> ## Don't run: 
 > ##D savepar <- par(ask = FALSE)
 > ##D dragplot <- function(..., xlim = NULL, ylim = NULL, xaxs = "r", yaxs = "r") {
 > ##D     plot(..., xlim = xlim, ylim = ylim, xaxs = xaxs, yaxs = yaxs)
@@ -2074,7 +2088,7 @@ character(0)
 > ##D dragplot(rnorm(1000), rnorm(1000))
 > ##D getGraphicsEvent()
 > ##D par(savepar)
-> ## End(Not run)
+> ## End (Don't run)
 > 
 > 
 > 
@@ -2544,25 +2558,25 @@ Sturges   Scott      FD
 > 
 > pdf.options(bg = "pink")
 > utils::str(pdf.options())
-List of 18
- $ width      : num 7
- $ height     : num 7
- $ onefile    : logi TRUE
- $ family     : chr "Helvetica"
- $ title      : chr "R Graphics Output"
+List of 18 components
+ $ width      : numeric 7
+ $ height     : numeric 7
+ $ onefile    : logical TRUE
+ $ family     : character "Helvetica"
+ $ title      : character "R Graphics Output"
  $ fonts      : NULL
- $ version    : chr "1.4"
- $ paper      : chr "special"
- $ encoding   : chr "default"
- $ bg         : chr "pink"
- $ fg         : chr "black"
- $ pointsize  : num 12
- $ pagecentre : logi TRUE
- $ colormodel : chr "srgb"
- $ useDingbats: logi TRUE
- $ useKerning : logi TRUE
- $ fillOddEven: logi FALSE
- $ compress   : logi TRUE
+ $ version    : character "1.4"
+ $ paper      : character "special"
+ $ encoding   : character "default"
+ $ bg         : character "pink"
+ $ fg         : character "black"
+ $ pointsize  : numeric 12
+ $ pagecentre : logical TRUE
+ $ colormodel : character "srgb"
+ $ useDingbats: logical TRUE
+ $ useKerning : logical TRUE
+ $ fillOddEven: logical FALSE
+ $ compress   : logical TRUE
 > pdf.options(reset = TRUE) # back to factory-fresh
 > 
 > 
@@ -2588,7 +2602,7 @@ List of 18
 pdf 
   2 
 > ##--------------------
-> ## Not run: 
+> ## Don't run: 
 > ##D %% LaTeX Example
 > ##D \documentclass{article}
 > ##D \usepackage{pictex}
@@ -2601,7 +2615,7 @@ pdf
 > ##D \end{figure}
 > ##D %...
 > ##D \end{document}
-> ## End(Not run)
+> ## End (Don't run)
 > ##--------------------
 > unlink("Rplots.tex")
 > 
@@ -3302,29 +3316,29 @@ $`span = 1000 years`
 > 
 > ps.options(bg = "pink")
 > utils::str(ps.options())
-List of 18
- $ onefile    : logi TRUE
- $ family     : chr "Helvetica"
- $ title      : chr "R Graphics Output"
+List of 18 components
+ $ onefile    : logical TRUE
+ $ family     : character "Helvetica"
+ $ title      : character "R Graphics Output"
  $ fonts      : NULL
- $ encoding   : chr "default"
- $ bg         : chr "pink"
- $ fg         : chr "black"
- $ width      : num 0
- $ height     : num 0
- $ horizontal : logi TRUE
- $ pointsize  : num 12
- $ paper      : chr "default"
- $ pagecentre : logi TRUE
- $ print.it   : logi FALSE
- $ command    : chr "default"
- $ colormodel : chr "srgb"
- $ useKerning : logi TRUE
- $ fillOddEven: logi FALSE
+ $ encoding   : character "default"
+ $ bg         : character "pink"
+ $ fg         : character "black"
+ $ width      : numeric 0
+ $ height     : numeric 0
+ $ horizontal : logical TRUE
+ $ pointsize  : numeric 12
+ $ paper      : character "default"
+ $ pagecentre : logical TRUE
+ $ print.it   : logical FALSE
+ $ command    : character "default"
+ $ colormodel : character "srgb"
+ $ useKerning : logical TRUE
+ $ fillOddEven: logical FALSE
 > 
 > ### ---- error checking of arguments: ----
 > ps.options(width = 0:12, onefile = 0, bg = pi)
-Warning: ‘mode(onefile)’ and ‘mode(bg)’ differ between new and previous
+Warning: ‘mode(onefile)’ & ‘mode(bg)’ differ between new and previous
 	 ==> NOT changing ‘onefile’ & ‘bg’
 Warning: ‘length(width)’ differs between new and previous
 	 ==> NOT changing ‘width’
@@ -3334,25 +3348,25 @@ Warning: ‘mode(bg)’ differs between new and previous
 	 ==> NOT changing ‘bg’
 Warning: ‘length(width)’ differs between new and previous
 > utils::str(ps.options())
-List of 18
- $ onefile    : logi TRUE
- $ family     : chr "Helvetica"
- $ title      : chr "R Graphics Output"
+List of 18 components
+ $ onefile    : logical TRUE
+ $ family     : character "Helvetica"
+ $ title      : character "R Graphics Output"
  $ fonts      : NULL
- $ encoding   : chr "default"
- $ bg         : chr "pink"
- $ fg         : chr "black"
- $ width      : int [1:13] 0 1 2 3 4 5 6 7 8 9 ...
- $ height     : num 0
- $ horizontal : logi TRUE
- $ pointsize  : num 12
- $ paper      : chr "default"
- $ pagecentre : logi TRUE
- $ print.it   : logi FALSE
- $ command    : chr "default"
- $ colormodel : chr "srgb"
- $ useKerning : logi TRUE
- $ fillOddEven: logi FALSE
+ $ encoding   : character "default"
+ $ bg         : character "pink"
+ $ fg         : character "black"
+ $ width      : integer [1:13] 0 1 2 3 4 5 6 7 8 9 ...
+ $ height     : numeric 0
+ $ horizontal : logical TRUE
+ $ pointsize  : numeric 12
+ $ paper      : character "default"
+ $ pagecentre : logical TRUE
+ $ print.it   : logical FALSE
+ $ command    : character "default"
+ $ colormodel : character "srgb"
+ $ useKerning : logical TRUE
+ $ fillOddEven: logical FALSE
 > ps.options(reset = TRUE) # back to factory-fresh
 > 
 > 
@@ -3446,7 +3460,7 @@ v    1 1.0000000 1.0000000  1.0 1.0000000 1.0000000
 > 
 > ## Don't show: 
 > set.seed(151)
-> ## End(Don't show)
+> ## End (Don't show)
 > (rgb3 <- floor(256 * matrix(stats::runif(3*12), 3, 12)))
      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12]
 [1,]  122  137  116  244   20  153  191  250  134   117    27   202
@@ -3580,7 +3594,7 @@ $ylab
 NULL
 
 > xy.coords(-2:10, NULL, log = "y")
-Warning in xy.coords(-2:10, NULL, log = "y") :
+Warning in command 'xy.coords(-2:10, NULL, log = "y")':
   3 y values <= 0 omitted from logarithmic plot
 $x
  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13
@@ -3637,7 +3651,7 @@ $number
 > ## Discretized uncorrelated Gaussian:
 > ## Don't show: 
 > set.seed(1)
-> ## End(Don't show)
+> ## End (Don't show)
 > require(stats)
 > xy <- data.frame(x = round(sort(rnorm(100))), y = rnorm(100))
 > xyTable(xy, digits = 1)
@@ -3736,7 +3750,7 @@ $zlab
 > 
 > xyz.coords(data.frame(x = -1:9, y = 2:12, z = 3:13), y = NULL, z = NULL,
 +            log = "xy")
-Warning in xyz.coords(data.frame(x = -1:9, y = 2:12, z = 3:13), y = NULL,  :
+Warning in command 'xyz.coords(data.frame(x = -1:9, y = 2:12, z = 3:13), y = NULL, z = NULL, log = "xy")':
   2 x values <= 0 omitted from logarithmic plot
 $x
  [1] NA NA  1  2  3  4  5  6  7  8  9
@@ -3763,8 +3777,8 @@ $zlab
 > ### * <FOOTER>
 > ###
 > options(digits = 7L)
-> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  7.678 0.142 7.821 0 0 
+> base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  18.032 0.48 18.683 0 0 
 > grDevices::dev.off()
 null device 
           1 

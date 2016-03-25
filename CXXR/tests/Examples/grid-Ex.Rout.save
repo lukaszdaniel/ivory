@@ -1,7 +1,15 @@
 
-R Under development (unstable) (2016-02-05 r70096) -- "Unsuffered Consequences"
+Ivory Under development (unstable) (2016-03-18 r670) -- "Internationalized Version of R"
+Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
+
+R Under development (unstable) (2016-03-18 r70207) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
+
+CXXR Copyright (C) 2008-14 Andrew R. Runnalls.
+Ivory nor CXXR are not part of the R project, so please do not report bugs
+via r-bugs or the R website - instead refer to the authors/CXXR website.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -314,22 +322,22 @@ g1::g2
 > 
 > gp <- get.gpar()
 > utils::str(gp)
-List of 14
- $ fill      : chr "transparent"
- $ col       : chr "black"
- $ lty       : chr "solid"
- $ lwd       : num 1
- $ cex       : num 1
- $ fontsize  : num 12
- $ lineheight: num 1.2
- $ font      : int 1
- $ fontfamily: chr ""
- $ alpha     : num 1
- $ lineend   : chr "round"
- $ linejoin  : chr "round"
- $ linemitre : num 10
- $ lex       : num 1
- - attr(*, "class")= chr "gpar"
+List of 14 components
+ $ fill      : character "transparent"
+ $ col       : character "black"
+ $ lty       : character "solid"
+ $ lwd       : numeric 1
+ $ cex       : numeric 1
+ $ fontsize  : numeric 12
+ $ lineheight: numeric 1.2
+ $ font      : integer 1
+ $ fontfamily: character ""
+ $ alpha     : numeric 1
+ $ lineend   : character "round"
+ $ linejoin  : character "round"
+ $ linemitre : numeric 10
+ $ lex       : numeric 1
+ - attr(*, "class")= character "gpar"
 > ## These *do* nothing but produce a "gpar" object:
 > gpar(col = "red")
 $col
@@ -656,8 +664,8 @@ NULL
 > grid.edit("xa", gp = gpar(col="red"))
 > # won't work because no ticks (at is NULL)
 > try(grid.edit(gPath("xa", "ticks"), gp = gpar(col="green")))
-Error in editDLfromGPath(gPath, specs, strict, grep, global, redraw) : 
-  'gPath' (xa::ticks) not found
+Error in command 'editDLfromGPath(gPath, specs, strict, grep, global, redraw)': 
+  'gPath' (xa::ticks) was not found
 > grid.edit("xa", at = 1:4/5)
 > # Now it should work
 > try(grid.edit(gPath("xa", "ticks"), gp = gpar(col="green")))
@@ -1140,14 +1148,14 @@ vp1::vp2
 vp1::vp2::2
 > # raw flat listing
 > str(grid.ls(sampleGTree, view=TRUE, print=FALSE))
-List of 6
- $ name   : chr [1:8] "parent" "vp1" "vp2" "2" ...
- $ gDepth : num [1:8] 0 1 1 1 1 1 1 1
- $ vpDepth: num [1:8] 0 0 1 2 0 1 2 2
- $ gPath  : chr [1:8] "" "parent" "parent" "parent" ...
- $ vpPath : chr [1:8] "" "" "vp1" "vp1::vp2" ...
- $ type   : chr [1:8] "gTreeListing" "vpListing" "vpListing" "vpUpListing" ...
- - attr(*, "class")= chr "flatGridListing"
+List of 6 components
+ $ name   : character [1:8] "parent" "vp1" "vp2" "2" ...
+ $ gDepth : numeric [1:8] 0 1 1 1 1 1 1 1
+ $ vpDepth: numeric [1:8] 0 0 1 2 0 1 2 2
+ $ gPath  : character [1:8] "" "parent" "parent" "parent" ...
+ $ vpPath : character [1:8] "" "" "vp1" "vp1::vp2" ...
+ $ type   : character [1:8] "gTreeListing" "vpListing" "vpListing" "vpUpListing" ...
+ - attr(*, "class")= character "flatGridListing"
 > 
 > 
 > 
@@ -1684,7 +1692,7 @@ List of 6
 +                          just=c("left", "top"))))
 +     })
 > 
-> ## Not run: 
+> ## Don't run: 
 > ##D     # Examples from higher-level packages
 > ##D 
 > ##D     library(lattice)
@@ -1701,7 +1709,7 @@ List of 6
 > ##D     showGrob(gPath="panel-3-3")
 > ##D     showGrob(gPath="axis.title", grep=TRUE)
 > ##D     showGrob(depth=2)
-> ## End(Not run)
+> ## End (Don't run)
 > 
 > 
 > 
@@ -2062,8 +2070,8 @@ vp1::vp2
 > ### * <FOOTER>
 > ###
 > options(digits = 7L)
-> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  1.017 0.013 1.031 0 0 
+> base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  7.404 0.092 7.495 0 0 
 > grDevices::dev.off()
 null device 
           1 

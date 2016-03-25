@@ -1,7 +1,15 @@
 
-R Under development (unstable) (2016-02-05 r70096) -- "Unsuffered Consequences"
+Ivory Under development (unstable) (2016-03-18 r670) -- "Internationalized Version of R"
+Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
+
+R Under development (unstable) (2016-03-18 r70207) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
+
+CXXR Copyright (C) 2008-14 Andrew R. Runnalls.
+Ivory nor CXXR are not part of the R project, so please do not report bugs
+via r-bugs or the R website - instead refer to the authors/CXXR website.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -69,7 +77,7 @@ attr(,"constant")
 > 
 > (im.lm0 <- influence.measures(roller.lm0))
 Influence measures of
-	 lm(formula = weight ~ depression, data = roller, weights = 0:9) :
+	lm(formula = weight ~ depression, data = roller, weights = 0:9):
 
     dfb.1_ dfb.dprs   dffit cov.r  cook.d    hat inf
 2  -0.0530   0.0482 -0.0530 1.551 0.00164 0.1277    
@@ -125,7 +133,7 @@ Residuals   7 204.20  29.172
 > lm.SR <- lm(sr ~ pop15 + pop75 + dpi + ddpi, data = LifeCycleSavings)
 > (IM <- influence.measures(lm.SR))
 Influence measures of
-	 lm(formula = sr ~ pop15 + pop75 + dpi + ddpi, data = LifeCycleSavings) :
+	lm(formula = sr ~ pop15 + pop75 + dpi + ddpi, data = LifeCycleSavings):
 
                  dfb.1_ dfb.pp15 dfb.pp75  dfb.dpi  dfb.ddpi   dffit cov.r
 Australia       0.01232 -0.01044 -0.02653  0.04534 -0.000159  0.0627 1.193
@@ -231,7 +239,7 @@ Libya          2.68e-01 0.5315   *
 Malaysia       9.11e-03 0.0652    
 > summary(IM)
 Potentially influential observations of
-	 lm(formula = sr ~ pop15 + pop75 + dpi + ddpi, data = LifeCycleSavings) :
+	lm(formula = sr ~ pop15 + pop75 + dpi + ddpi, data = LifeCycleSavings)
 
               dfb.1_ dfb.pp15 dfb.pp75 dfb.dpi dfb.ddpi dffit   cov.r   cook.d
 Chile         -0.20   0.13     0.22    -0.02    0.12    -0.46    0.65_*  0.04 

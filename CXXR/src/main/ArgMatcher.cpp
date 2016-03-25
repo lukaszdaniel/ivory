@@ -374,13 +374,10 @@ void ArgMatcher::match(const ArgList* supplied,
 			 && formals_status[(*fmit).second] == EXACT_TAG);
 		if (fmit != m_formal_index.end()
 		    && isPrefix(supplied_name, (*fmit).first))
-		    Rf_error(_("argument %d matches multiple formal arguments"),
-			     supplied_data.index + 1);
+		    Rf_error(_("argument %d matches multiple formal arguments"), supplied_data.index + 1);
 		// Partial match is OK:
 		if (s_warn_on_partial_match)
-		    Rf_warning(_("partial argument match of '%s' to '%s'"),
-			       supplied_name->c_str(),
-			       (*fmit).first->c_str());
+		    Rf_warning(_("partial argument match of '%s' to '%s'"), supplied_name->c_str(), (*fmit).first->c_str());
 		formals_status[findex] = PARTIAL_TAG;
 		callback->matchedArgument(m_formal_data[findex], supplied_data.index, supplied_data.value);
 		supplied_list.erase(slit);
@@ -436,9 +433,7 @@ void ArgMatcher::propagateFormalBindings(const Environment* fromenv,
 	const Symbol* symbol = fdata.symbol;
 	const Frame::Binding* frombdg = fromf->binding(symbol);
 	if (!frombdg)
-	    Rf_error(_("could not find symbol \"%s\" "
-		       "in environment of the generic function"),
-		     symbol->name()->c_str());
+	    Rf_error(_("could not find symbol \"%s\" in environment of the generic function"), symbol->name()->c_str());
 	RObject* val = frombdg->unforcedValue();
 	if (frombdg->origin() == Frame::Binding::EXPLICIT) {
 	    makeBinding(toenv, fdata, Frame::Binding::EXPLICIT, val);

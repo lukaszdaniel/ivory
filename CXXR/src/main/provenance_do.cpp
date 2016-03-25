@@ -37,6 +37,7 @@
 #include "CXXR/BuiltInFunction.h"
 #include "CXXR/IntVector.h"
 #include "CXXR/StringVector.h"
+#include "CXXR/RealVector.h" /* EJP */
 #include <Internal.h>
 
 #include <fstream>
@@ -47,8 +48,9 @@
 #include "CXXR/Provenance.hpp"
 #include "CXXR/StdFrame.hpp"
 
+#include <localization.h>
 // Try to get rid of this:
-#include "Defn.h"
+#include <Defn.h>
 
 using namespace std;
 using namespace CXXR;
@@ -106,7 +108,7 @@ SEXP attribute_hidden do_hasProvenance (SEXP call, SEXP op, SEXP args, SEXP rho)
 	errorcall(call,_("%d arguments passed to 'hasProvenance' which requires 1"),n);
 
     if (TYPEOF(CAR(args))!=SYMSXP)
-	errorcall(call,_("hasProvenance expects Symbol argument"));
+	errorcall(call,_("'hasProvenance()' function expects Symbol argument"));
 
     GCStackRoot<LogicalVector> v(LogicalVector::create(1));
 #ifdef PROVENANCE_TRACKING
@@ -190,10 +192,10 @@ SEXP attribute_hidden do_provenance (SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif  // PROVENANCE_TRACKING
 }
 
-SEXP attribute_hidden do_provCommand (/*const*/ CXXR::Expression* call, const CXXR::BuiltInFunction* op, CXXR::Environment* rho, CXXR::RObject* const* args, int num_args, const CXXR::PairList* tags)
+SEXP attribute_hidden do_provCommand (/*const*/ CXXR::Expression* call, const CXXR::BuiltInFunction* op, CXXR::Environment* rho, CXXR::RObject* /* const* */ args, int num_args, const CXXR::PairList* tags)
 {
 #ifndef PROVENANCE_TRACKING
-    Rf_error(_("provenance tracking not implemented in this build"));
+    Rf_error(_("provenance tracking is not implemented in this build"));
     return nullptr;
 #else
     int n;
@@ -201,7 +203,7 @@ SEXP attribute_hidden do_provCommand (/*const*/ CXXR::Expression* call, const CX
 	errorcall(call,_("%d arguments passed to 'provCommand' which requires 1"),n);
 
     if (TYPEOF(CAR(args))!=SYMSXP)
-	errorcall(call,_("provCommand expects Symbol argument"));
+	errorcall(call,_("'provCommand()' function expects Symbol argument"));
 
     Symbol* sym=SEXP_downcast<Symbol*>(CAR(args));
     Environment* env=static_cast<Environment*>(rho);
@@ -214,31 +216,31 @@ SEXP attribute_hidden
 do_provenance_graph(/*const*/ CXXR::Expression* call, const CXXR::BuiltInFunction* op, CXXR::Environment* rho, CXXR::RObject* const* args, int num_args, const CXXR::PairList* tags)
 {
 #ifndef PROVENANCE_TRACKING
-    Rf_error(_("provenance tracking not implemented in this build"));
+    Rf_error(_("provenance tracking is not implemented in this build"));
     return nullptr;
 #else
-    int nargs = length(args);
+    int nargs = num_args;
     if (nargs != 1)
-	Rf_error(_("%d arguments passed to 'provenance.graph' which requires 1"),
+	Rf_error(_("%d arguments passed to 'provenance.graph()' which requires 1"),
 		 nargs);
-    SEXP arg1 = CAR(args);
+    // SEXP arg1 = CAR((CXXR::RObject*) args);
+    const RObject* arg1 = args[0];
     if (!arg1 || arg1->sexptype() != STRSXP)
-	    Rf_error(_("invalid 'names' argument"));
+	    Rf_error(_("invalid '%s' argument"), "names");
 
     Environment* env = static_cast<Environment*>(rho);
     Provenance::Set provs;
-    StringVector* sv = static_cast<StringVector*>(arg1);
+    const StringVector* sv = static_cast<const StringVector*>(arg1);
     for (size_t i = 0; i < sv->size(); i++) {
 	const char* name = (*sv)[i]->c_str();
 	Symbol* sym = Symbol::obtain(name);
 	Frame::Binding* bdg = env->findBinding(sym);
 	if (!bdg)
-	    Rf_error(_("symbol '%s' not found"), name);
+	    Rf_error(_("symbol '%s' was not found"), name);
 	else {
 	    Provenance* prov = const_cast<Provenance*>(bdg->provenance());
 	    if (!prov)
-		Rf_warning(_("'%s' does not have provenance information"),
-			   name);
+		Rf_warning(_("'%s' does not have provenance information"), name);
 	    else provs.insert(prov);
 	    }
 	}

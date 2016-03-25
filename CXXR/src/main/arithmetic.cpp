@@ -53,8 +53,8 @@
 
 #include <Internal.h>
 
-#define R_MSG_NA	_("NaNs produced")
-#define R_MSG_NONNUM_MATH _("non-numeric argument to mathematical function")
+#define R_MSG_NA	_("NaN values produced")
+#define R_MSG_NONNUM_MATH _("non-numeric argument passed to mathematical function")
 
 #include <Rmath.h>
 
@@ -344,7 +344,7 @@ namespace {
 SEXP attribute_hidden R_binary(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
 {
     SEXP lcall = call;
-    ARITHOP_TYPE oper = ARITHOP_TYPE( PRIMVAL(op));
+    ARITHOP_TYPE oper = ARITHOP_TYPE(PRIMVAL(op));
 
     GCStackRoot<VectorBase> x(FIXUP_NULL_AND_CHECK_TYPES(xarg));
     GCStackRoot<VectorBase> y(FIXUP_NULL_AND_CHECK_TYPES(yarg));
@@ -555,7 +555,6 @@ namespace {
     }
 }  // anonymous namespace
 
-#define INTEGER_OVERFLOW_WARNING _("NA values produced by integer overflow")
 
 
 static SEXP integer_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2, SEXP lcall)
@@ -601,7 +600,7 @@ static SEXP integer_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2, SEXP lcall)
 	break;
     }
     if (naflag)
-	warningcall(lcall, INTEGER_OVERFLOW_WARNING);
+	warningcall(lcall, _("NA values produced by integer overflow"));
 
     return ans;
 }

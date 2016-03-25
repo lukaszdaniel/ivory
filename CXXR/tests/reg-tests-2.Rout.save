@@ -1,7 +1,15 @@
 
-R Under development (unstable) (2016-02-05 r70096) -- "Unsuffered Consequences"
+Ivory Under development (unstable) (2016-03-18 r671) -- "Internationalized Version of R"
+Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
+
+R Under development (unstable) (2016-03-18 r70207) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
+
+CXXR Copyright (C) 2008-14 Andrew R. Runnalls.
+Ivory nor CXXR are not part of the R project, so please do not report bugs
+via r-bugs or the R website - instead refer to the authors/CXXR website.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -91,7 +99,7 @@ Max.     3  5
 +          list(NULL,letters[1:d.arr[2]],NULL,paste("V",4+1:d.arr[4],sep="")))
 > aa <- array(1:20,c(2,2,5))
 > str(apply(aa[FALSE,,,drop=FALSE], 1, dim))# empty integer, `incorrect' dim.
- int(0) 
+ integer(0) 
 > stopifnot(
 +        apply(arr, 1:2, sum) == t(apply(arr, 2:1, sum)),
 +        aa == apply(aa,2:3,function(x) x),
@@ -342,7 +350,7 @@ c  203  215  227  239
 > summary(bY <- besselY(2,nu = nu <- seq(3,300,len=51)))
        Min.     1st Qu.      Median        Mean     3rd Qu.        Max. 
        -Inf        -Inf -2.248e+263        -Inf -3.777e+116  -1.000e+00 
-There were 22 warnings (use warnings() to see them)
+There were 22 warnings (use 'warnings()' to see them)
 > summary(bI <- besselI(x = x <- 10:700, 1))
       Min.    1st Qu.     Median       Mean    3rd Qu.       Max. 
  2.671e+03  6.026e+77 3.161e+152 3.501e+299 2.409e+227 1.529e+302 
@@ -353,9 +361,9 @@ There were 22 warnings (use warnings() to see them)
 > L3 <- LETTERS[1:3]
 > d <- data.frame(cbind(x=1, y=1:10), fac = sample(L3, 10, replace=TRUE))
 > str(d)
-'data.frame':	10 obs. of  3 variables:
- $ x  : num  1 1 1 1 1 1 1 1 1 1
- $ y  : num  1 2 3 4 5 6 7 8 9 10
+'data.frame':	10 observations of 3 variables:
+ $ x  : numeric  1 1 1 1 1 1 1 1 1 1
+ $ y  : numeric  1 2 3 4 5 6 7 8 9 10
  $ fac: Factor w/ 3 levels "A","B","C": 1 3 2 3 3 1 2 3 2 2
 > (d0  <- d[, FALSE]) # NULL dataframe with 10 rows
 data frame with 0 columns and 10 rows
@@ -463,8 +471,7 @@ numeric(0)
    100 -1e-13    Inf   -Inf    NaN   3.14     NA 
    100      0     NA     NA     NA      3     NA 
 Warning message:
-In structure(as.integer(x), names = names(x)) :
-  NAs introduced by coercion to integer range
+In command 'as.integer(x)': NA values introduced by coercion to integer range
 > ##-   100 -1e-13    Inf   -Inf    NaN   3.14     NA
 > ##-   100      0     NA     NA     NA      3     NA
 > all(is.na(ix) != is.finite(ix) | is.infinite(ix)) # TRUE (still)
@@ -814,15 +821,15 @@ attr(,"scaled:scale")
 > 
 > ts(1:5, start=2, end=4) # truncate
 Time Series:
-Start = 2 
-End = 4 
-Frequency = 1 
+Start = 2
+End = 4
+Frequency = 1
 [1] 1 2 3
 > ts(1:5, start=3, end=17)# repeat
 Time Series:
-Start = 3 
-End = 17 
-Frequency = 1 
+Start = 3
+End = 17
+Frequency = 1
  [1] 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5
 > ## end of moved from ts.Rd
 > 
@@ -1012,9 +1019,9 @@ Coefficients:
 (Intercept)  
     0.01587  
 
-Degrees of Freedom: 11 Total (i.e. Null);  11 Residual
-Null Deviance:	    32.83 
-Residual Deviance: 32.83 	AIC: 92.52
+Degrees of Freedom: 11 Total (i.e. Null); 11 Residual
+Null Deviance:	   32.83
+Residual Deviance: 32.83	AIC: 92.52
 > step(detg1.m0,scope=list(upper=~M.user*Temp*Soft))
 Start:  AIC=92.52
 cbind(X, M) ~ 1
@@ -1052,16 +1059,15 @@ cbind(X, M) ~ M.user + Temp + M.user:Temp
 - M.user:Temp  1   8.4440 72.142
 + Soft         2   5.4952 75.193
 
-Call:  glm(formula = cbind(X, M) ~ M.user + Temp + M.user:Temp, family = binomial, 
-    data = detg1)
+Call:  glm(formula = cbind(X, M) ~ M.user + Temp + M.user:Temp, family = binomial, data = detg1)
 
 Coefficients:
     (Intercept)          M.userY          TempLow  M.userY:TempLow  
         0.26236         -0.85183          0.04411          0.44427  
 
-Degrees of Freedom: 11 Total (i.e. Null);  8 Residual
-Null Deviance:	    32.83 
-Residual Deviance: 5.656 	AIC: 71.35
+Degrees of Freedom: 11 Total (i.e. Null); 8 Residual
+Null Deviance:	   32.83
+Residual Deviance: 5.656	AIC: 71.35
 > 
 > ## PR 829 (empty values in all.vars)
 > ## This example by Uwe Ligges <ligges@statistik.uni-dortmund.de>
@@ -1112,7 +1118,7 @@ Residual Deviance: 5.656 	AIC: 71.35
 > 
 > gofX.manova <- manova(formula = cbind(A, B, C, D) ~ groups, data = gofX.df)
 > try(summary(gofX.manova))
-Error in summary.manova(gofX.manova) : residuals have rank 3 < 4
+Error in command 'summary.manova(gofX.manova)': residuals have rank 3 < 4
 > ## should fail with an error message `residuals have rank 3 < 4'
 > 
 > ## Prior to 1.3.0 dist did not handle missing values, and the
@@ -1219,10 +1225,10 @@ Apr 1921 10     11
 > 
 > ## PR 883 (cor(x,y) when is.null(y))
 > try(cov(rnorm(10), NULL))
-Error in cov(rnorm(10), NULL) : 
+Error in command 'cov(rnorm(10), NULL)': 
   supply both 'x' and 'y' or a matrix-like 'x'
 > try(cor(rnorm(10), NULL))
-Error in cor(rnorm(10), NULL) : 
+Error in command 'cor(rnorm(10), NULL)': 
   supply both 'x' and 'y' or a matrix-like 'x'
 > ## gave the variance and 1 respectively in 1.2.2.
 > 
@@ -1410,15 +1416,15 @@ Coefficients:
 > x <- ts(1:10)
 > diffinv(diff(x),xi=x[1])
 Time Series:
-Start = 1 
-End = 10 
-Frequency = 1 
+Start = 1
+End = 10
+Frequency = 1
  [1]  1  2  3  4  5  6  7  8  9 10
 > diffinv(diff(x,lag=1,differences=2),lag=1,differences=2,xi=x[1:2])
 Time Series:
-Start = 1 
-End = 10 
-Frequency = 1 
+Start = 1
+End = 10
+Frequency = 1
  [1]  1  2  3  4  5  6  7  8  9 10
 > ## last had wrong start and end
 > 
@@ -1457,7 +1463,7 @@ Y    4   10   16   22
 > sink(type="message")
 > sink()
 > try(log("a"))
-Error in log("a") : non-numeric argument to mathematical function
+Error in command 'log("a")': non-numeric argument to mathematical function
 > 
 > ## capture all the output to a file.
 > zz <- file("all.Rout", open="wt")
@@ -1471,7 +1477,7 @@ Error in log("a") : non-numeric argument to mathematical function
      description class mode text isopen can read can write
 > stopifnot(nrow(foo) == 0)
 > try(log("a"))
-Error in log("a") : non-numeric argument to mathematical function
+Error in command 'log("a")': non-numeric argument to mathematical function
 > unlink("all.Rout")
 > ## many of these were untested before 1.4.0.
 > 
@@ -1483,8 +1489,8 @@ Error in log("a") : non-numeric argument to mathematical function
 > mean(as.factor(x))
 [1] NA
 Warning message:
-In mean.default(as.factor(x)) :
-  argument is not numeric or logical: returning NA
+In command 'mean.default(as.factor(x))':
+  'as.factor(x)' value is not numeric or logical: returning NA
 > ## last had confusing error message in 1.3.1.
 > 
 > 
@@ -1669,11 +1675,13 @@ Levels: C A B
 > sum(x, x)    # did not warn in 1.4.1
 [1] NA
 Warning message:
-In sum(x, x) : Integer overflow - use sum(as.numeric(.))
+In command 'sum(x, x)':
+  integer overflow in 'do_summary()' function; use 'sum(as.numeric(.))'
 > sum(c(x, x)) # did warn
 [1] NA
 Warning message:
-In sum(c(x, x)) : integer overflow - use sum(as.numeric(.))
+In command 'sum(c(x, x))':
+  integer overflow in 'isum()' function; use 'sum(as.numeric(.))'
 > (z <- sum(x, x, 0.0)) # was NA in 1.4.1
 [1] 2147483648
 > typeof(z)
@@ -1754,23 +1762,22 @@ Sep 1961  20  30
 +        0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1,
 +        1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0)
 > try(glm(y ~ x, family = poisson(identity)))
-Error : no valid set of coefficients has been found: please supply starting values
-In addition: Warning message:
-In log(y/mu) : NaNs produced
+Error: no valid set of coefficients has been found: please supply starting values
+Additional warning message:
+In command 'log(y/mu)': NaNs produced
 > ## failed because start = NULL in 1.4.1
 > ## now gives useful error message
 > glm(y ~ x, family = poisson(identity), start = c(1,0))
 
-Call:  glm(formula = y ~ x, family = poisson(identity), start = c(1, 
-    0))
+Call:  glm(formula = y ~ x, family = poisson(identity), start = c(1, 0))
 
 Coefficients:
 (Intercept)            x  
      0.5114       0.1690  
 
-Degrees of Freedom: 99 Total (i.e. Null);  98 Residual
-Null Deviance:	    68.01 
-Residual Deviance: 60.66 	AIC: 168.7
+Degrees of Freedom: 99 Total (i.e. Null); 98 Residual
+Null Deviance:	   68.01
+Residual Deviance: 60.66	AIC: 168.7
 Warning messages:
 1: step size truncated: out of bounds 
 2: step size truncated: out of bounds 
@@ -1779,17 +1786,16 @@ Warning messages:
 > y <- rpois(100, pmax(3*x, 0))
 > glm(y ~ x, family = poisson(identity), start = c(1,0))
 
-Call:  glm(formula = y ~ x, family = poisson(identity), start = c(1, 
-    0))
+Call:  glm(formula = y ~ x, family = poisson(identity), start = c(1, 0))
 
 Coefficients:
 (Intercept)            x  
      1.1561       0.4413  
 
-Degrees of Freedom: 99 Total (i.e. Null);  98 Residual
-Null Deviance:	    317.2 
-Residual Deviance: 228.5 	AIC: 344.7
-There were 27 warnings (use warnings() to see them)
+Degrees of Freedom: 99 Total (i.e. Null); 98 Residual
+Null Deviance:	   317.2
+Residual Deviance: 228.5	AIC: 344.7
+There were 27 warnings (use 'warnings()' to see them)
 > warnings()
 Warning messages:
 1: step size truncated: out of bounds
@@ -2305,11 +2311,11 @@ par("usr")[3:4]:     1.784     4.499
 par("yaxp") :            2         4         4
 
 Warning messages:
-1: In plot.window(...) :
+1: In command 'plot.window(...)':
   relative range of values =  43 * EPS, is small (axis 2)
-2: In plot.window(...) :
+2: In command 'plot.window(...)':
   relative range of values =  36 * EPS, is small (axis 2)
-3: In plot.window(...) :
+3: In command 'plot.window(...)':
   relative range of values =  17 * EPS, is small (axis 2)
 > par(mfrow = c(1,1))
 > ## The warnings from inside GScale() will differ in their  relrange() ...
@@ -2364,7 +2370,7 @@ Coefficients:
 > ## failed in 1.6.2
 > 
 > str(array(1))# not a scalar
- num [1(1d)] 1
+ numeric [1(1d)] 1
 > 
 > 
 > ## na.print="" shouldn't apply to (dim)names!
@@ -2375,7 +2381,7 @@ Coefficients:
 > identical(levels(ff), dimnames(tf)[[1]])
 [1] TRUE
 > str(levels(ff))
- chr [1:3] "1" "2" NA
+ character [1:3] "1" "2" NA
 > ## not quite ok previous to 1.7.0
 > 
 > 
@@ -2440,7 +2446,7 @@ Residuals:
     Min      1Q  Median      3Q     Max 
 -1.0572 -0.4836  0.0799  0.4424  1.2699 
 
-Coefficients: (1 not defined because of singularities)
+Coefficients: (1 not defined because of singularity)
             Estimate Std. Error t value Pr(>|t|)
 (Intercept)   1.4719     0.9484   1.552    0.165
 x1            0.5867     0.3961   1.481    0.182
@@ -2448,7 +2454,7 @@ x2                NA         NA      NA       NA
 x3            0.2587     0.3509   0.737    0.485
 
 Residual standard error: 0.8063 on 7 degrees of freedom
-Multiple R-squared:  0.9326,	Adjusted R-squared:  0.9134 
+Multiple R-squared: 0.9326,	Adjusted R-squared: 0.9134
 F-statistic: 48.43 on 2 and 7 DF,  p-value: 7.946e-05
 
 Correlation of Coefficients:
@@ -2464,19 +2470,19 @@ Coefficients:
 (Intercept)           x1           x2           x3  
      1.4719       0.5867           NA       0.2587  
 
-Degrees of Freedom: 9 Total (i.e. Null);  7 Residual
-Null Deviance:	    67.53 
-Residual Deviance: 4.551 	AIC: 28.51
+Degrees of Freedom: 9 Total (i.e. Null); 7 Residual
+Null Deviance:	   67.53
+Residual Deviance: 4.551	AIC: 28.51
 > summary(fit, cor = TRUE)
 
 Call:
 glm(formula = y ~ x1 + x2 + x3)
 
-Deviance Residuals: 
+Deviance Residuals:
     Min       1Q   Median       3Q      Max  
 -1.0572  -0.4836   0.0799   0.4424   1.2699  
 
-Coefficients: (1 not defined because of singularities)
+Coefficients: (1 not defined because of singularity)
             Estimate Std. Error t value Pr(>|t|)
 (Intercept)   1.4719     0.9484   1.552    0.165
 x1            0.5867     0.3961   1.481    0.182
@@ -2535,7 +2541,7 @@ x3  0.81       -0.97
 14     71
 15     72
 Warning message:
-In `[.data.frame`(women, "height", drop = FALSE) :
+In command '`[.data.frame`(women, "height", drop = FALSE)':
   'drop' argument will be ignored
 > women["height", drop = TRUE]   # ditto
    height
@@ -2555,7 +2561,7 @@ In `[.data.frame`(women, "height", drop = FALSE) :
 14     71
 15     72
 Warning message:
-In `[.data.frame`(women, "height", drop = TRUE) :
+In command '`[.data.frame`(women, "height", drop = TRUE)':
   'drop' argument will be ignored
 > women[,"height", drop = FALSE] # no warning
    height
@@ -2654,7 +2660,7 @@ Residuals:
      Min       1Q   Median       3Q      Max 
 -1.36919 -0.21073  0.00840  0.08437  0.55292 
 
-No Coefficients
+No coefficients
 
 Residual standard error: 0.5235 on 10 degrees of freedom
 
@@ -2751,7 +2757,7 @@ Residuals:
      Min       1Q   Median       3Q      Max 
 -1.36919 -0.21073  0.00840  0.08437  0.55292 
 
-Coefficients: (1 not defined because of singularities)
+Coefficients: (1 not defined because of singularity)
   Estimate Std. Error t value Pr(>|t|)
 x       NA         NA      NA       NA
 
@@ -2781,7 +2787,7 @@ $residual.scale
 [1] 0.5234843
 
 Warning message:
-In predict.lm(fit, data.frame(x = x), se = TRUE) :
+In command 'predict.lm(fit, data.frame(x = x), se = TRUE)':
   prediction from a rank-deficient fit may be misleading
 > predict(fit, type="terms", se=TRUE)
 $fit
@@ -2842,19 +2848,19 @@ Call:  glm(formula = y ~ 0)
 No coefficients
 
 
-Degrees of Freedom: 10 Total (i.e. Null);  10 Residual
-Null Deviance:	    2.74 
-Residual Deviance: 2.74 	AIC: 17.43
+Degrees of Freedom: 10 Total (i.e. Null); 10 Residual
+Null Deviance:	   2.74
+Residual Deviance: 2.74	AIC: 17.43
 > summary(fit)
 
 Call:
 glm(formula = y ~ 0)
 
-Deviance Residuals: 
+Deviance Residuals:
      Min        1Q    Median        3Q       Max  
 -1.36919  -0.21073   0.00840   0.08437   0.55292  
 
-No Coefficients
+No coefficients
 
 (Dispersion parameter for gaussian family taken to be 0.2740358)
 
@@ -2931,19 +2937,19 @@ Coefficients:
  x  
 NA  
 
-Degrees of Freedom: 10 Total (i.e. Null);  10 Residual
-Null Deviance:	    2.74 
-Residual Deviance: 2.74 	AIC: 17.43
+Degrees of Freedom: 10 Total (i.e. Null); 10 Residual
+Null Deviance:	   2.74
+Residual Deviance: 2.74	AIC: 17.43
 > summary(fit)
 
 Call:
 glm(formula = y ~ x + 0)
 
-Deviance Residuals: 
+Deviance Residuals:
      Min        1Q    Median        3Q       Max  
 -1.36919  -0.21073   0.00840   0.08437   0.55292  
 
-Coefficients: (1 not defined because of singularities)
+Coefficients: (1 not defined because of singularity)
   Estimate Std. Error t value Pr(>|t|)
 x       NA         NA      NA       NA
 
@@ -2983,7 +2989,7 @@ $residual.scale
 [1] 0.5234843
 
 Warning message:
-In predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type ==  :
+In command 'predict.lm(object, newdata, se.fit, scale = residual.scale, type = ifelse(type == ':
   prediction from a rank-deficient fit may be misleading
 > predict(fit, type="terms", se=TRUE)
 $fit
@@ -3251,11 +3257,11 @@ $wt.res
 > ## Indexing non-existent columns in a data frame
 > x <- data.frame(a = 1, b = 2)
 > try(x[c("a", "c")])
-Error in `[.data.frame`(x, c("a", "c")) : undefined columns selected
+Error in command '`[.data.frame`(x, c("a", "c"))': undefined columns selected
 > try(x[, c("a", "c")])
-Error in `[.data.frame`(x, , c("a", "c")) : undefined columns selected
+Error in command '`[.data.frame`(x, , c("a", "c"))': undefined columns selected
 > try(x[1, c("a", "c")])
-Error in `[.data.frame`(x, 1, c("a", "c")) : undefined columns selected
+Error in command '`[.data.frame`(x, 1, c("a", "c"))': undefined columns selected
 > ## Second succeeded, third gave uniformative error message in 1.7.x.
 > 
 > 
@@ -3372,7 +3378,7 @@ attr(,"contrasts")$x
 
 > lm.fit <- lm(y ~ x, data.frame(x=1:10, y=1:10))
 > try(predict(lm.fit, data.frame(x=NA)))
-Error : variable 'x' was fitted with type "numeric" but type "logical" was supplied
+Error: variable 'x' was fitted with type "numeric" but type "logical" was supplied
 > ## wrong answers in 1.8.0, refused to run in 1.8.1
 > 
 > 
@@ -3683,7 +3689,7 @@ Terms:
 Sum of Squares  1.389453 2.148149  5.048689
 Deg. of Freedom        1        1         4
 
-Residual standard error: 1.123464
+Residual Standard Error: 1.123464
 Estimated effects may be unbalanced
 > aov(y ~ a + b - 1 + Error(c), data=test.df)
 
@@ -3707,7 +3713,7 @@ Terms:
 Sum of Squares  1.389453 2.148149  5.048689
 Deg. of Freedom        1        1         4
 
-Residual standard error: 1.123464
+Residual Standard Error: 1.123464
 1 out of 3 effects not estimable
 Estimated effects may be unbalanced
 > ## wrong assignment to strata labels < 1.9.0
@@ -3717,7 +3723,7 @@ Estimated effects may be unbalanced
 
 	Exact binomial test
 
-data:  c(800, 10)
+data: c(800, 10)
 number of successes = 800, number of trials = 810, p-value < 2.2e-16
 alternative hypothesis: true probability of success is not equal to 0.5
 95 percent confidence interval:
@@ -3742,13 +3748,12 @@ probability of success
 + )
 > sample.aov <- aov(dep.variable ~ f1 * f2 + Error(subject/(f1+f2)), data=sample.df)
 Warning message:
-In aov(dep.variable ~ f1 * f2 + Error(subject/(f1 + f2)), data = sample.df) :
+In command 'aov(dep.variable ~ f1 * f2 + Error(subject/(f1 + f2)), data = sample.df)':
   Error() model is singular
 > sample.aov
 
 Call:
-aov(formula = dep.variable ~ f1 * f2 + Error(subject/(f1 + f2)), 
-    data = sample.df)
+aov(formula = dep.variable ~ f1 * f2 + Error(subject/(f1 + f2)), data = sample.df)
 
 Grand Mean: 65.07444
 
@@ -3778,7 +3783,7 @@ Terms:
 Sum of Squares   29204.13
 Deg. of Freedom        42
 
-Residual standard error: 26.36923
+Residual Standard Error: 26.36923
 > summary(sample.aov)
 
 Error: subject
@@ -3797,13 +3802,12 @@ Error: Within
 Residuals 42  29204   695.3               
 > sample.aov <- aov(dep.variable ~ f1 * f2 + Error(subject/(f2+f1)), data=sample.df)
 Warning message:
-In aov(dep.variable ~ f1 * f2 + Error(subject/(f2 + f1)), data = sample.df) :
+In command 'aov(dep.variable ~ f1 * f2 + Error(subject/(f2 + f1)), data = sample.df)':
   Error() model is singular
 > sample.aov
 
 Call:
-aov(formula = dep.variable ~ f1 * f2 + Error(subject/(f2 + f1)), 
-    data = sample.df)
+aov(formula = dep.variable ~ f1 * f2 + Error(subject/(f2 + f1)), data = sample.df)
 
 Grand Mean: 65.07444
 
@@ -3833,7 +3837,7 @@ Terms:
 Sum of Squares   29204.13
 Deg. of Freedom        42
 
-Residual standard error: 26.36923
+Residual Standard Error: 26.36923
 > summary(sample.aov)
 
 Error: subject
@@ -3862,13 +3866,13 @@ Residuals 42  29204   695.3
 
 > stem(rep(0.1, 10))
 
-  The decimal point is 1 digit(s) to the left of the |
+  The decimal point is 1 digit to the left of the |
 
   1 | 0000000000
 
 > stem(c(rep(1, 10), 1+1.e-8))
 
-  The decimal point is 8 digit(s) to the left of the |
+  The decimal point is 8 digits to the left of the |
 
   100000000 | 0000000000
   100000000 | 
@@ -3876,13 +3880,13 @@ Residuals 42  29204   695.3
 
 > stem(c(rep(1, 10), 1+1.e-9))
 
-  The decimal point is 8 digit(s) to the left of the |
+  The decimal point is 8 digits to the left of the |
 
   100000000 | 00000000001
 
 > stem(c(rep(1, 10), 1+1.e-10), atom=0) # integer-overflow is avoided.
 
-  The decimal point is 8 digit(s) to the left of the |
+  The decimal point is 8 digits to the left of the |
 
   100000000 | 00000000000
 
@@ -3896,7 +3900,7 @@ Residuals 42  29204   695.3
 > x1 * y1
 [1]  0.5574682  0.1410502  0.1609194 -0.3641637
 Warning message:
-In x1 * y1 :
+In command 'x1 * y1':
   longer object length is not a multiple of shorter object length
 > x1 * as.matrix(y1) # no warning in 1.8.1
            [,1]
@@ -3905,21 +3909,21 @@ In x1 * y1 :
 [3,]  0.1609194
 [4,] -0.3641637
 Warning message:
-In x1 * as.matrix(y1) :
+In command 'x1 * as.matrix(y1)':
   longer object length is not a multiple of shorter object length
 > x1 * matrix(y1,2,2)# ditto
           [,1]       [,2]
 [1,] 0.5574682  0.1609194
 [2,] 0.1410502 -0.3641637
 Warning message:
-In x1 * matrix(y1, 2, 2) :
+In command 'x1 * matrix(y1, 2, 2)':
   longer object length is not a multiple of shorter object length
 > z1 <- x1 > 0
 > z2 <- y1 > 0
 > z1 & z2
 [1]  TRUE  TRUE  TRUE FALSE
 Warning message:
-In z1 & z2 :
+In command 'z1 & z2':
   longer object length is not a multiple of shorter object length
 > z1 & as.matrix(z2) # no warning in 1.8.1
       [,1]
@@ -3928,12 +3932,12 @@ In z1 & z2 :
 [3,]  TRUE
 [4,] FALSE
 Warning message:
-In z1 & as.matrix(z2) :
+In command 'z1 & as.matrix(z2)':
   longer object length is not a multiple of shorter object length
 > x1 < y1            # no warning in 1.8.1
 [1] FALSE  TRUE FALSE FALSE
 Warning message:
-In x1 < y1 :
+In command 'x1 < y1':
   longer object length is not a multiple of shorter object length
 > x1 < as.matrix(y1) # ditto
       [,1]
@@ -3942,7 +3946,7 @@ In x1 < y1 :
 [3,] FALSE
 [4,] FALSE
 Warning message:
-In x1 < as.matrix(y1) :
+In command 'x1 < as.matrix(y1)':
   longer object length is not a multiple of shorter object length
 > ##
 > 
@@ -4038,7 +4042,7 @@ attr(,".Environment")
 > ## negative subscripts could be mixed with NAs
 > x <- 1:3
 > try(x[-c(1, NA)])
-Error in x[-c(1, NA)] : only 0's may be mixed with negative subscripts
+Error in command 'x[-c(1, NA)]': only 0's may be mixed with negative subscripts
 > ## worked on some platforms, segfaulted on others in 1.8.1
 > 
 > 
@@ -4116,7 +4120,7 @@ quote(b)
 > readBin(zz, "character", 100)  # is confused by embedded nul.
 [1] "A test string"
 Warning message:
-In readBin(zz, "character", 100) :
+In command 'readBin(zz, "character", 100)':
   incomplete string at end of file has been discarded
 > seek(zz, 0, "start")
 [1] 18
@@ -4357,9 +4361,9 @@ integer arg
 > ## str() interpreted escape sequences prior to 2.1.0
 > x <- "ab\bc\ndef"
 > str(x)
- chr "ab\bc\ndef"
+ character "ab\bc\ndef"
 > str(x, vec.len=0)# failed in rev 32244
- chr  ...
+ character  ...
 > str(factor(x))
  Factor w/ 1 level "ab\bc\ndef": 1
 > 
@@ -4371,7 +4375,7 @@ Levels: a b
 [1] a    <NA> b   
 Levels: a b <NA>
 > str(x)
- chr [1:3] "a" NA "b"
+ character [1:3] "a" NA "b"
 > str(factor(x))
  Factor w/ 2 levels "a","b": 1 NA 2
 > str(factor(x, exclude=""))
@@ -4388,10 +4392,10 @@ Levels: a a " test b
 [1] a        <NA>     b        a " test
 Levels: a a " test b <NA>
 > print(factor(x), quote=TRUE)
-[1] "a"         NA          "b"         "a \" test"
+[1] "a"        NA         "b"        "a \" test"
 Levels: "a" "a \" test" "b"
 > print(factor(x, exclude=""), quote=TRUE)
-[1] "a"         NA          "b"         "a \" test"
+[1] "a"        NA         "b"        "a \" test"
 Levels: "a" "a \" test" "b" NA
 > ## last two printed levels differently from values in 2.0.1
 > 
@@ -4505,7 +4509,7 @@ y ~ x
 <none>              20.191 5.1555
 x       1    1.4798 21.671 4.4993
 > res <-  try(stats:::drop1.default(fit))
-Error in stats:::drop1.default(fit) : 
+Error in command 'stats:::drop1.default(fit)': 
   number of rows in use has changed: remove missing values?
 > stopifnot(inherits(res, "try-error"))
 > add1(fit, ~ . +x2)
@@ -4517,9 +4521,9 @@ y ~ x
 <none>              17.605 3.6005
 x2      1  0.011746 17.593 5.5885
 Warning message:
-In add1.lm(fit, ~. + x2) : using the 18/19 rows from a combined fit
+In command 'add1.lm(fit, ~. + x2)': using the 18/19 rows from a combined fit
 > res <-  try(stats:::add1.default(fit, ~ . +x2))
-Error in stats:::add1.default(fit, ~. + x2) : 
+Error in command 'stats:::add1.default(fit, ~. + x2)': 
   number of rows in use has changed: remove missing values?
 > stopifnot(inherits(res, "try-error"))
 > ## 2.0.1 ran and gave incorrect answers.
@@ -4616,19 +4620,19 @@ integer(0)
 > x[rbind(c(1,0), c(2,NA), c(1,2))]
 [1] NA  4
 > try(x[rbind(c(1,1), c(2,2), c(-1,2))])
-Error in x[rbind(c(1, 1), c(2, 2), c(-1, 2))] : 
+Error in command 'x[rbind(c(1, 1), c(2, 2), c(-1, 2))]': 
   negative values are not allowed in a matrix subscript
 > try(x[rbind(c(1,1), c(2,2), c(-2,2))])
-Error in x[rbind(c(1, 1), c(2, 2), c(-2, 2))] : 
+Error in command 'x[rbind(c(1, 1), c(2, 2), c(-2, 2))]': 
   negative values are not allowed in a matrix subscript
 > try(x[rbind(c(1,1), c(2,2), c(-3,2))])
-Error in x[rbind(c(1, 1), c(2, 2), c(-3, 2))] : 
+Error in command 'x[rbind(c(1, 1), c(2, 2), c(-3, 2))]': 
   negative values are not allowed in a matrix subscript
 > try(x[rbind(c(1,1), c(2,2), c(-4,2))])
-Error in x[rbind(c(1, 1), c(2, 2), c(-4, 2))] : 
+Error in command 'x[rbind(c(1, 1), c(2, 2), c(-4, 2))]': 
   negative values are not allowed in a matrix subscript
 > try(x[rbind(c(1,1), c(2,2), c(-1,-1))])
-Error in x[rbind(c(1, 1), c(2, 2), c(-1, -1))] : 
+Error in command 'x[rbind(c(1, 1), c(2, 2), c(-1, -1))]': 
   negative values are not allowed in a matrix subscript
 > try(x[rbind(c(1,1,1), c(2,2,2))])
 [1] 1 2 1 2 1 2
@@ -4636,10 +4640,10 @@ Error in x[rbind(c(1, 1), c(2, 2), c(-1, -1))] :
 > # verify that range checks are applied to negative indices
 > x <- matrix(1:6, ncol=3)
 > try(x[rbind(c(1,1), c(2,2), c(-3,3))])
-Error in x[rbind(c(1, 1), c(2, 2), c(-3, 3))] : 
+Error in command 'x[rbind(c(1, 1), c(2, 2), c(-3, 3))]': 
   negative values are not allowed in a matrix subscript
 > try(x[rbind(c(1,1), c(2,2), c(-4,3))])
-Error in x[rbind(c(1, 1), c(2, 2), c(-4, 3))] : 
+Error in command 'x[rbind(c(1, 1), c(2, 2), c(-4, 3))]': 
   negative values are not allowed in a matrix subscript
 > ## generally allowed in 2.1.0.
 > 
@@ -4759,11 +4763,12 @@ z       1    82.814 89.130 23.8751
 > as.raw(1234)
 [1] 00
 Warning message:
-In as.raw(1234) : out-of-range values treated as 0 in coercion to raw 
+In command 'as.raw(1234)': out-of-range values treated as 0 in coercion to raw
 > as.raw(list(a=1234))
 [1] 00
 Warning message:
-In as.raw(list(a = 1234) : out-of-range values treated as 0 in coercion to raw 
+In command 'as.raw(list(a = 1234))':
+  out-of-range values treated as 0 in coercion to raw
 > ## 2.1.1: spurious and missing messages, wrong result for second.
 > 
 > 
@@ -4881,8 +4886,7 @@ coef[0] = 1
 > ## using NULL as a replacement value
 > DF <- data.frame(A=1:2, B=3:4)
 > try(DF[2, 1:3] <- NULL)
-Error in `[<-.data.frame`(`*tmp*`, 2, 1:3, value = NULL) : 
-  replacement has length zero
+Error in command 'x[[jj]][iseq] <- vjj': replacement has length zero
 > ## wrong error message in R < 2.2.0
 > 
 > 
@@ -4983,11 +4987,11 @@ NULL
 > dend <- as.dendrogram(hclust(dist(USArrests), "ave")) # "print()" method
 > dend2 <- cut(dend, h=70)
 > str(dend2$upper)
---[dendrogram w/ 2 branches and 4 members at h = 152]
-  |--[dendrogram w/ 2 branches and 2 members at h = 77.6]
+--[dendrogram with 2 branches and 4 members, at height 152]
+  |--[dendrogram with 2 branches and 2 members, at height 77.6]
   |  |--leaf "Branch 1" (h= 38.5 midpoint = 0.5, x.member = 2 )
   |  `--leaf "Branch 2" (h= 44.3 midpoint = 5.03, x.member = 14 )
-  `--[dendrogram w/ 2 branches and 2 members at h = 89.2]
+  `--[dendrogram with 2 branches and 2 members, at height 89.2]
      |--leaf "Branch 3" (h= 44.8 midpoint = 6.8, x.member = 14 )
      `--leaf "Branch 4" (h= 54.7 midpoint = 7.65, x.member = 20 )
 > ## {{for Emacs: `}}  gave much too many spaces in 2.2.[01]
@@ -5039,7 +5043,7 @@ NULL
 > failure <- c(0,0,0,0,0,0,0,2,2)
 > predictor <- c(0, 5^(0:7))
 > try(glm(cbind(success,failure) ~ 0+predictor, family = binomial(link="log")))
-Error : no valid set of coefficients has been found: please supply starting values
+Error: no valid set of coefficients has been found: please supply starting values
 > # no coefficient is possible as the first case will have mu = 1
 > ## 2.2.1 gave a subscript out of range warning instead.
 > 
@@ -5049,13 +5053,15 @@ Error : no valid set of coefficients has been found: please supply starting valu
 > rownames(temp) <- as.character(1:5)
 > colnames(temp) <- as.character(1:4)
 > try(solve(temp))
-Error in solve.default(temp) : 'a' (5 x 4) must be square
+Error in command 'solve.default(temp)': 'A' (5 x 4) must be a square matrix
 > # also complex
 > try(solve(temp+0i))
-Error in solve.default(temp + (0+0i)) : 'a' (5 x 4) must be square
+Error in command 'solve.default(temp + (0+0i))': 
+  'A' (5 x 4) must be a square matrix
 > # and non-comformant systems
 > try(solve(temp, diag(3)))
-Error in solve.default(temp, diag(3)) : 'a' (5 x 4) must be square
+Error in command 'solve.default(temp, diag(3))': 
+  'A' (5 x 4) must be a square matrix
 > ## gave errors from rownames<- in 2.2.1
 > 
 > 
@@ -5102,13 +5108,13 @@ Browse[1]> c
 > options(error = expression(NULL))
 > f <- function(...) stop()
 > do.call(f, mtcars)
-Error in (function (...)  : 
+Error in command '(function (...) ': 
 Calls: do.call -> <Anonymous>
 > traceback()
 3: stop()
 2: (function (...) 
-   stop())(mpg = c(21, 21, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 
-   19.2, 17.8, 16.4, 17.3, 15.2, 10.4, 10.4, 14.7, 32.4, 30.4, 33.9, 
+   stop())(mpg = c(21, 21, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8, 16.4, 
+   17.3, 15.2, 10.4, 10.4, 14.7, 32.4, 30.4, 33.9, 21.5, 15.5, 15.2, 13.3, 19.2, 27.3, 
     ...
 1: do.call(f, mtcars)
 > 
@@ -5161,7 +5167,7 @@ D1 30 60
 Call:
 glm(formula = y ~ x, weights = w)
 
-Deviance Residuals: 
+Deviance Residuals:
     Min       1Q   Median       3Q      Max  
 -1.7806  -0.1416   0.1863   0.5690   1.2057  
 
@@ -5179,14 +5185,14 @@ AIC: Inf
 Number of Fisher Scoring iterations: 2
 
 Warning message:
-In summary.glm(glm(y ~ x, weights = w)) :
+In command 'summary.glm(glm(y ~ x, weights = w))':
   observations with zero weight not used for calculating dispersion
 > summary(glm(y ~ x, subset = w > 0))
 
 Call:
 glm(formula = y ~ x, subset = w > 0)
 
-Deviance Residuals: 
+Deviance Residuals:
     Min       1Q   Median       3Q      Max  
 -1.7806  -0.1582   0.3726   0.5896   1.2057  
 
@@ -5235,7 +5241,8 @@ $estim.prec
 [1] 0.8295023
 
 Warning message:
-In uniroot(ff, c(-10, 10), maxiter = 10) : _NOT_ converged in 10 iterations
+In command 'uniroot(ff, c(-10, 10), maxiter = 10)':
+  'uniroot()' method did _NOT_ converge in 10 iterations
 > ## should warn, did not < 2.3.0
 > 
 > 
@@ -5244,28 +5251,28 @@ In uniroot(ff, c(-10, 10), maxiter = 10) : _NOT_ converged in 10 iterations
 > 
 > ## prod etc on empty lists and raw vectors
 > try(min(list()))
-Error in min(list()) : invalid 'type' (list) of argument
+Error in command 'min(list())': invalid 'type' (list) of argument
 > try(max(list()))
-Error in max(list()) : invalid 'type' (list) of argument
+Error in command 'max(list())': invalid 'type' (list) of argument
 > try(sum(list()))
-Error in sum(list()) : invalid 'type' (list) of argument
+Error in command 'sum(list())': invalid 'type' (list) of argument
 > try(prod(list()))
-Error in prod(list()) : invalid 'type' (list) of argument
+Error in command 'prod(list())': invalid 'type' (list) of argument
 > try(min(raw()))
-Error in min(raw()) : invalid 'type' (raw) of argument
+Error in command 'min(raw())': invalid 'type' (raw) of argument
 > try(max(raw()))
-Error in max(raw()) : invalid 'type' (raw) of argument
+Error in command 'max(raw())': invalid 'type' (raw) of argument
 > try(sum(raw()))
-Error in sum(raw()) : invalid 'type' (raw) of argument
+Error in command 'sum(raw())': invalid 'type' (raw) of argument
 > try(prod(raw()))
-Error in prod(raw()) : invalid 'type' (raw) of argument
+Error in command 'prod(raw())': invalid 'type' (raw) of argument
 > ## Inf, -Inf, list(NULL) etc in 2.2.1
 > 
 > r <- hist(rnorm(100), plot = FALSE, breaks = 12,
 +           ## arguments which don't make sense for plot=FALSE - give a warning:
 +           xlab = "N(0,1)", col = "blue")
 Warning message:
-In hist.default(rnorm(100), plot = FALSE, breaks = 12, xlab = "N(0,1)",  :
+In command 'hist.default(rnorm(100), plot = FALSE, breaks = 12, xlab = "N(0,1)", col = "blue")':
   arguments 'col', 'xlab' are not made use of
 > ## gave no warning in 2.3.0 and earlier
 > 
@@ -5384,10 +5391,10 @@ I II III
 > 
 > ## removing variable from baseenv
 > try(remove("ls", envir=baseenv()))
-Error in remove("ls", envir = baseenv()) : 
+Error in command 'remove("ls", envir = baseenv())': 
   cannot remove variables from the base environment
 > try(remove("ls", envir=asNamespace("base")))
-Error in remove("ls", envir = asNamespace("base")) : 
+Error in command 'remove("ls", envir = asNamespace("base"))': 
   cannot remove variables from base namespace
 > ## no message in 2.3.1
 > 
@@ -5512,7 +5519,7 @@ Levels: 1 2 3 4
 Levels: 7 8 9 10 11 12
 > str(A)
  factor [1:2, 1:3] 7 8 9 10 ...
- - attr(*, "levels")= chr [1:6] "7" "8" "9" "10" ...
+ - attr(*, "levels")= character [1:6] "7" "8" "9" "10" ...
 > A[, 1:2]
      [,1] [,2]
 [1,] 7    9   
@@ -5700,31 +5707,27 @@ $y
 +          i = as.character(NA), j = c("foo", NA, "bar")
 +          )
 > dput(x, control=NULL)
-list(a = NA, b = NA, c = NA, d = NA, e = 1, f = 1, g = 1:3, h = c(NA, 
-1, 2, 3), i = NA, j = c("foo", NA, "bar"))
-> dput(x, control="keepInteger")
-list(a = NA, b = NA_integer_, c = NA, d = NA, e = 1, f = 1L, 
-    g = 1:3, h = c(NA, 1L, 2L, 3L), i = NA, j = c("foo", NA, 
-    "bar"))
-> dput(x, control="keepNA")
-list(a = NA, b = NA_integer_, c = NA_real_, d = NA_complex_, 
-    e = 1, f = 1, g = 1:3, h = c(NA, 1, 2, 3), i = NA_character_, 
+list(a = NA, b = NA, c = NA, d = NA, e = 1, f = 1, g = 1:3, h = c(NA, 1, 2, 3), i = NA, 
     j = c("foo", NA, "bar"))
+> dput(x, control="keepInteger")
+list(a = NA, b = NA_integer_, c = NA, d = NA, e = 1, f = 1L, g = 1:3, h = c(NA, 1L, 
+2L, 3L), i = NA, j = c("foo", NA, "bar"))
+> dput(x, control="keepNA")
+list(a = NA, b = NA_integer_, c = NA_real_, d = NA_complex_, e = 1, f = 1, g = 1:3, 
+    h = c(NA, 1, 2, 3), i = NA_character_, j = c("foo", NA, "bar"))
 > dput(x)
-structure(list(a = NA, b = NA_integer_, c = NA_real_, d = NA_complex_, 
-    e = 1, f = 1L, g = 1:3, h = c(NA, 1L, 2L, 3L), i = NA_character_, 
-    j = c("foo", NA, "bar")), .Names = c("a", "b", "c", "d", 
-"e", "f", "g", "h", "i", "j"))
-> dput(x, control="all")
-structure(list(a = NA, b = NA_integer_, c = NA_real_, d = NA_complex_, 
-    e = 1, f = 1L, g = 1:3, h = c(NA, 1L, 2L, 3L), i = NA_character_, 
-    j = c("foo", NA, "bar")), .Names = c("a", "b", "c", "d", 
-"e", "f", "g", "h", "i", "j"))
-> dput(x, control=c("all", "S_compatible"))
-structure(list(a = NA, b = as.integer(NA), c = as.double(NA), 
-    d = as.complex(NA), e = 1., f = as.integer(1), g = 1:3, h = as.integer(c(NA, 
-    1, 2, 3)), i = as.character(NA), j = c("foo", NA, "bar")), .Names = c("a", 
+structure(list(a = NA, b = NA_integer_, c = NA_real_, d = NA_complex_, e = 1, f = 1L, 
+    g = 1:3, h = c(NA, 1L, 2L, 3L), i = NA_character_, j = c("foo", NA, "bar")), .Names = c("a", 
 "b", "c", "d", "e", "f", "g", "h", "i", "j"))
+> dput(x, control="all")
+structure(list(a = NA, b = NA_integer_, c = NA_real_, d = NA_complex_, e = 1, f = 1L, 
+    g = 1:3, h = c(NA, 1L, 2L, 3L), i = NA_character_, j = c("foo", NA, "bar")), .Names = c("a", 
+"b", "c", "d", "e", "f", "g", "h", "i", "j"))
+> dput(x, control=c("all", "S_compatible"))
+structure(list(a = NA, b = as.integer(NA), c = as.double(NA), d = as.complex(NA), 
+    e = 1., f = as.integer(1), g = 1:3, h = as.integer(c(NA, 1, 2, 3)), i = as.character(NA), 
+    j = c("foo", NA, "bar")), .Names = c("a", "b", "c", "d", "e", "f", "g", "h", 
+"i", "j"))
 > tmp <- tempfile()
 > dput(x, tmp, control="all")
 > stopifnot(identical(dget(tmp), x))
@@ -5738,7 +5741,7 @@ structure(list(a = NA, b = as.integer(NA), c = as.double(NA),
 > ## Ivo Welch, R-help, 2006-12-23.
 > d <- data.frame(y= runif(10), x=runif(10))
 > try(nls(y ~ 1/(1+x), data = d, start=list(x=0.5,y=0.5), trace=TRUE))
-Error in nls(y ~ 1/(1 + x), data = d, start = list(x = 0.5, y = 0.5),  : 
+Error in command 'nls(y ~ 1/(1 + x), data = d, start = list(x = 0.5, y = 0.5), trace = TRUE)': 
   no parameters to fit
 > ## changed in 2.4.1 patched
 > 
@@ -5756,7 +5759,7 @@ Levels: 2000-01-01 2001-01-01
 > ## manipulating rownames: problems in pre-2.5.0
 > A <- data.frame(a=character(0))
 > try(row.names(A) <- 1:10) # succeeded in Dec 2006
-Error in `row.names<-.data.frame`(`*tmp*`, value = 1:10) : 
+Error in command '`row.names<-.data.frame`(`*tmp*`, value = 1:10)': 
   invalid 'row.names' length
 > A <- list(a=1:3)
 > class(A) <- "data.frame"
@@ -5778,7 +5781,7 @@ z 3
   height weight
 1     58    115
 Warning message:
-In `[.data.frame`(w, , drop = TRUE) : 'drop' argument will be ignored
+In command '`[.data.frame`(w, , drop = TRUE)': 'drop' argument will be ignored
 > w[1,]
   height weight
 1     58    115
@@ -5824,24 +5827,21 @@ data frame with 0 columns and 4 rows
 > d0 <- d1 <- data.frame(1:4, row.names=1:4)
 > row.names(d0) <- NULL
 > dput(d0)
-structure(list(X1.4 = 1:4), .Names = "X1.4", row.names = c(NA, 
--4L), class = "data.frame")
+structure(list(X1.4 = 1:4), .Names = "X1.4", row.names = c(NA, -4L), class = "data.frame")
 > dput(d1)
-structure(list(X1.4 = 1:4), .Names = "X1.4", row.names = c(NA, 
-4L), class = "data.frame")
+structure(list(X1.4 = 1:4), .Names = "X1.4", row.names = c(NA, 4L), class = "data.frame")
 > identical(d0, d1)
 [1] TRUE
 > all.equal(d0, d1)
 [1] TRUE
 > row.names(d1) <- as.character(1:4)
 > dput(d1)
-structure(list(X1.4 = 1:4), .Names = "X1.4", row.names = c("1", 
-"2", "3", "4"), class = "data.frame")
+structure(list(X1.4 = 1:4), .Names = "X1.4", row.names = c("1", "2", "3", "4"), class = "data.frame")
 > identical(d0, d1)
 [1] FALSE
 > all.equal(d0, d1)
-[1] "Attributes: < Component \"row.names\": Modes: numeric, character >"              
-[2] "Attributes: < Component \"row.names\": target is numeric, current is character >"
+[1] "Attributes: < Component \"row.names\": Modes: numeric, character >"                                                  
+[2] "Attributes: < Component \"row.names\": 'target' argument's class is numeric, 'current' argument's class is character >"
 > ## identical used internal representation prior to 2.5.0
 > 
 > 
@@ -6105,8 +6105,8 @@ $`NA`
 > attr(x, NA_character_)
 NULL
 > try(attr(x, NA_character_) <- 5)
-Error in attr(x, NA_character_) <- 5 : 
-  'name' must be non-null character string
+Error in command 'x <- `attr<-`(`*tmp*`, NA_character_, value = 5)': 
+  'name' argument must be non-null character string
 > ## prior to 2.5.0 NA was treated as "NA"
 > 
 > 
@@ -6145,12 +6145,12 @@ zero  one
 > set.seed(1)
 > X <- cbind(NA, 1:3, rnorm(3))
 > try(cor(X, use = "complete"))
-Error in cor(X, use = "complete") : no complete element pairs
+Error in command 'cor(X, use = "complete")': no complete element pairs
 > try(cor(X, use = "complete", method="spearman"))
-Error in cor(X, use = "complete", method = "spearman") : 
+Error in command 'cor(X, use = "complete", method = "spearman")': 
   no complete element pairs
 > try(cor(X, use = "complete", method="kendall"))
-Error in cor(X, use = "complete", method = "kendall") : 
+Error in command 'cor(X, use = "complete", method = "kendall")': 
   no complete element pairs
 > cor(X, use = "pair")
      [,1]       [,2]       [,3]
@@ -6224,7 +6224,7 @@ uY          -2.1396554 0.3644116
 > x <- data.frame(a=1:3, b=2:4)
 > x[,3] <- x
 Warning message:
-In `[<-.data.frame`(`*tmp*`, , 3, value = list(a = 1:3, b = 2:4)) :
+In command '`[<-.data.frame`(`*tmp*`, , 3, value = list(a = 1:3, b = 2:4))':
   provided 2 variables to replace 1 variables
 > x
   a b a.1
@@ -6284,7 +6284,7 @@ In `[<-.data.frame`(`*tmp*`, , 3, value = list(a = 1:3, b = 2:4)) :
 > ## aggregate on an empty data frame (PR#13167)
 > z <- data.frame(a=integer(0), b=numeric(0))
 > try(aggregate(z, by=z[1], FUN=sum))
-Error in aggregate.data.frame(z, by = z[1], FUN = sum) : 
+Error in command 'aggregate.data.frame(z, by = z[1], FUN = sum)': 
   no rows to aggregate
 > ## failed in unlist in 2.8.0, now gives explicit message.
 > aggregate(data.frame(a=1:10)[F], list(rep(1:2, each=5)), sum)
@@ -6404,16 +6404,16 @@ function ()
 > print.function <- function(x, ...) { str(x,...); invisible(x) }
 > print.function
 function (x, ...)  
- - attr(*, "srcref")=Class 'srcref'  atomic [1:8] 1 19 1 63 19 63 1 1
-  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x48a7368> 
+ - attr(*, "srcref")=Class 'srcref' atomic [1:8] 1 19 1 63 19 63 1 1
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x7f01e8244840> 
 > f
 function ()  
- - attr(*, "srcref")=Class 'srcref'  atomic [1:8] 1 17 1 28 17 28 1 1
-  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x489dbb0> 
- - attr(*, "note")= chr "just a note"
+ - attr(*, "srcref")=Class 'srcref' atomic [1:8] 1 17 1 28 17 28 1 1
+  .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x7f01eb039d00> 
+ - attr(*, "note")= character "just a note"
  - attr(*, "yada")=function ()  
-  ..- attr(*, "srcref")=Class 'srcref'  atomic [1:8] 2 24 2 48 24 48 2 2
-  .. .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x489dbb0> 
+  ..- attr(*, "srcref")=Class 'srcref' atomic [1:8] 2 24 2 48 24 48 2 2
+  .. .. ..- attr(*, "srcfile")=Classes 'srcfilecopy', 'srcfile' <environment: 0x7f01eb039d00> 
 > rm(print.function)
 > ## auto-printing and printing differed up to R 2.9.x
 > 
@@ -6429,7 +6429,7 @@ function ()
 
 	Kendall's rank correlation tau
 
-data:  c(1, 2, 3, 4, 5) and c(8, 6, 7, 5, 3)
+data: c(1, 2, 3, 4, 5) and c(8, 6, 7, 5, 3)
 T = 1, p-value = 0.08333
 alternative hypothesis: true tau is not equal to 0
 sample estimates:
@@ -6441,7 +6441,7 @@ sample estimates:
 
 	Kendall's rank correlation tau
 
-data:  c(1, 2, 3, 4, 5) and c(8, 6, 7, 5, 3)
+data: c(1, 2, 3, 4, 5) and c(8, 6, 7, 5, 3)
 z = -1.9596, p-value = 0.05004
 alternative hypothesis: true tau is not equal to 0
 sample estimates:
@@ -6453,7 +6453,7 @@ sample estimates:
 
 	Kendall's rank correlation tau
 
-data:  c(1, 2, 3, 4, 5) and c(8, 6, 7, 5, 3)
+data: c(1, 2, 3, 4, 5) and c(8, 6, 7, 5, 3)
 z = -1.7146, p-value = 0.08641
 alternative hypothesis: true tau is not equal to 0
 sample estimates:
@@ -6466,7 +6466,7 @@ sample estimates:
 
 	Spearman's rank correlation rho
 
-data:  c(1, 2, 3, 4, 5) and c(8, 6, 7, 5, 3)
+data: c(1, 2, 3, 4, 5) and c(8, 6, 7, 5, 3)
 S = 38, p-value = 0.08333
 alternative hypothesis: true rho is not equal to 0
 sample estimates:
@@ -6478,7 +6478,7 @@ sample estimates:
 
 	Spearman's rank correlation rho
 
-data:  c(1, 2, 3, 4, 5) and c(8, 6, 7, 5, 3)
+data: c(1, 2, 3, 4, 5) and c(8, 6, 7, 5, 3)
 S = 38, p-value = 0.03739
 alternative hypothesis: true rho is not equal to 0
 sample estimates:
@@ -6490,7 +6490,7 @@ sample estimates:
 
 	Spearman's rank correlation rho
 
-data:  c(1, 2, 3, 4, 5) and c(8, 6, 7, 5, 3)
+data: c(1, 2, 3, 4, 5) and c(8, 6, 7, 5, 3)
 S = 38, p-value = 0.09689
 alternative hypothesis: true rho is not equal to 0
 sample estimates:
@@ -6505,11 +6505,11 @@ sample estimates:
 > bar <- as.data.frame(foo)
 > val <- integer(0)
 > try(bar$NewCol <- val)
-Error in `$<-.data.frame`(`*tmp*`, "NewCol", value = integer(0)) : 
+Error in command '`$<-.data.frame`(`*tmp*`, "NewCol", value = integer(0))': 
   replacement has 0 rows, data has 3
 > # similar, not in the report
 > try(bar[["NewCol"]] <- val)
-Error in `[[<-.data.frame`(`*tmp*`, "NewCol", value = integer(0)) : 
+Error in command '`[[<-.data.frame`(`*tmp*`, "NewCol", value = integer(0))': 
   replacement has 0 rows, data has 3
 > # [ ] is tricker, so just check the result is reasonable and prints
 > bar["NewCol"] <- val
@@ -6553,9 +6553,9 @@ cl :  language print("Boo !")
 > 
 > ## complete.cases with no input
 > try(complete.cases())
-Error in complete.cases() : no input has determined the number of cases
+Error in command 'complete.cases()': no input has determined the number of cases
 > try(complete.cases(list(), list()))
-Error in complete.cases(list(), list()) : 
+Error in command 'complete.cases(list(), list())': 
   no input has determined the number of cases
 > ## gave unhelpful messages in 2.10.0, silly results in pre-2.10.1
 > 
@@ -6563,10 +6563,9 @@ Error in complete.cases(list(), list()) :
 > ## error messages from (C-level) evalList
 > tst <- function(y) { stopifnot(is.numeric(y)); y+ 1 }
 > try(tst())
-Error in stopifnot(is.numeric(y)) : 
-  argument "y" is missing, with no default
+Error in command 'is.numeric(y)': argument "y" is missing, with no default
 > try(c(1,,2))
-Error in c(1, , 2) : argument 2 is empty
+Error in command 'c(1, , 2)': argument 2 is empty
 > ## change in 2.8.0 made these less clear
 > 
 > 
@@ -6598,16 +6597,16 @@ NULL
 > x <- rep(6:10, 1:5)
 > aggregate(as.ts(x), FUN = mean, ndeltat = 5)
 Time Series:
-Start = 1 
-End = 11 
-Frequency = 0.2 
+Start = 1
+End = 11
+Frequency = 0.2
 [1]  7.2  8.8 10.0
 > x <- rep(6:10, 1:5)
 > aggregate(as.ts(x), FUN = mean, nfrequency = 0.2)
 Time Series:
-Start = 1 
-End = 11 
-Frequency = 0.2 
+Start = 1
+End = 11
+Frequency = 0.2
 [1]  7.2  8.8 10.0
 > ## platform-dependent in 2.10.1
 > 
@@ -6689,7 +6688,7 @@ Frequency = 0.2
 
 	Exact conditional test of independence in 2 x 2 x k tables
 
-data:  Nitrous
+data: Nitrous
 S = 57, p-value = 0.1959
 alternative hypothesis: true common odds ratio is less than 1
 95 percent confidence interval:
@@ -6702,7 +6701,7 @@ common odds ratio
 
 	Mantel-Haenszel chi-squared test with continuity correction
 
-data:  Nitrous
+data: Nitrous
 Mantel-Haenszel X-squared = 0.71432, df = 1, p-value = 0.199
 alternative hypothesis: true common odds ratio is less than 1
 95 percent confidence interval:
@@ -6815,10 +6814,10 @@ Levels: a b c d e f g h i j k l m n o
 > 
 > ## Unwarranted conversion of logical values
 > try(double(FALSE))
-Error in double(FALSE) : invalid 'length' argument
+Error in command 'double(FALSE)': invalid 'length' argument
 > x <- 1:3
 > try(length(x) <- TRUE)
-Error in length(x) <- TRUE : invalid value
+Error in command 'x <- `length<-`(`*tmp*`, value = TRUE)': invalid value
 > ## coerced to integer in 2.13.x
 > 
 > 
@@ -6829,9 +6828,9 @@ Error in length(x) <- TRUE : invalid value
 +          "2"=filter(x, c(0.5, 0.0), method="recursive"),
 +          "3"=filter(x, c(0.5, 0.0, 0.0), method="recursive"))
 Time Series:
-Start = 1 
-End = 9 
-Frequency = 1 
+Start = 1
+End = 9
+Frequency = 1
    x     1     2     3
 1  1 1.000 1.000 1.000
 2  2 2.500 2.500 2.500
@@ -6855,7 +6854,7 @@ Frequency = 1
 > ## explicit error message for silly input (tol = 0)
 > aa <- c(1, 2, 3, 8, 8, 8, 8, 8, 8, 8, 8, 8, 12, 13, 14)
 > try(smooth.spline(aa, seq_along(aa)))
-Error in smooth.spline(aa, seq_along(aa)) : 
+Error in command 'smooth.spline(aa, seq_along(aa))': 
   'tol' must be strictly positive and finite
 > fit <- smooth.spline(aa, seq_along(aa), tol = 0.1)
 > # actual output is too unstable to diff.
@@ -6884,7 +6883,7 @@ x            0.99788    0.01502  66.419 7.83e-10 ***
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Residual standard error: 0.1232 on 6 degrees of freedom
-Multiple R-squared:  0.9986,	Adjusted R-squared:  0.9984 
+Multiple R-squared: 0.9986,	Adjusted R-squared: 0.9984
 F-statistic:  4412 on 1 and 6 DF,  p-value: 7.834e-10
 
 > ## issue is how the 5-number summary is labelled
@@ -6915,10 +6914,11 @@ Asserted error: no method found for function 'show' and signature bar
 > ## corner cases for array
 > # allowed, gave non-array in 2.15.x
 > try(array(1, integer()))
-Error in array(1, integer()) : 'dims' cannot be of length 0
+Error in command 'array(1, integer())': 'dims' argument cannot be of length 0
 > # if no dims, an error to supply dimnames
 > try(array(1, integer(), list(1, 2)))
-Error in array(1, integer(), list(1, 2)) : 'dims' cannot be of length 0
+Error in command 'array(1, integer(), list(1, 2))': 
+  'dims' argument cannot be of length 0
 > ##
 > 
 > 
@@ -6929,13 +6929,13 @@ Error in array(1, integer(), list(1, 2)) : 'dims' cannot be of length 0
 1
 2
 3
- logi[1:3, 0 ] 
- - attr(*, "dimnames")=List of 2
-  ..$ : chr [1:3] "1" "2" "3"
+ logical[1:3, 0 ] 
+ - attr(*, "dimnames")=List of 2 components
+  ..$ : character [1:3] "1" "2" "3"
   ..$ : NULL
 > is.na(DF[FALSE, ]); str(.Last.value)
 <0 x 0 matrix>
- logi[0 , 0 ] 
+ logical[0 , 0 ] 
 > ## first failed in R 2.15.1, second gave NULL
 > 
 > 
@@ -7063,10 +7063,10 @@ g(y)(x)
 > ## PR#15247 : str() on invalid data frame names (where print() works):
 > d <- data.frame(1:3, "B", 4); names(d) <- c("A", "B\xba","C\xabcd")
 > str(d)
-'data.frame':	3 obs. of  3 variables:
- $ A      : int  1 2 3
+'data.frame':	3 observations of 3 variables:
+ $ A      : integer  1 2 3
  $ Bº  : Factor w/ 1 level "B": 1 1 1
- $ C«cd: num  4 4 4
+ $ C«cd: numeric  4 4 4
 > ## gave an error in R <= 3.0.0
 > 
 > 
@@ -7093,24 +7093,27 @@ g(y)(x)
 >   pl$ab
 [1] 1
 Warning message:
-In pl$ab : partial match of 'ab' to 'abc'
+In command 'pl$ab': partial match of 'ab' to 'abc'
 >   if (!is.null(saveopt[["warnPartialMatchDollar"]])) options(saveopt)
 > ## 'abc' was just ''
 > 
 > 
 > ## seq() with NaN etc inputs now gives explicit error messages
 > try(seq(NaN))
-Error in seq.default(NaN) : 'from' cannot be NA, NaN or infinite
+Error in command 'seq.default(NaN)': 'from' argument cannot be NA, NaN or infinite
 > try(seq(to = NaN))
-Error in seq.default(to = NaN) : 'to' cannot be NA, NaN or infinite
+Error in command 'seq.default(to = NaN)': 
+  'to' argument cannot be NA, NaN or infinite
 > try(seq(NaN, NaN))
-Error in seq.default(NaN, NaN) : 'from' cannot be NA, NaN or infinite
+Error in command 'seq.default(NaN, NaN)': 
+  'from' argument cannot be NA, NaN or infinite
 > try(seq.int(NaN))
-Error in seq.int(NaN) : 'from' cannot be NA, NaN or infinite
+Error in command 'seq.int(NaN)': 'from' argument cannot be NA, NaN or infinite
 > try(seq.int(to = NaN))
-Error in seq.int(to = NaN) : 'to' cannot be NA, NaN or infinite
+Error in command 'seq.int(to = NaN)': 'to' argument cannot be NA, NaN or infinite
 > try(seq.int(NaN, NaN))
-Error in seq.int(NaN, NaN) : 'from' cannot be NA, NaN or infinite
+Error in command 'seq.int(NaN, NaN)': 
+  'from' argument cannot be NA, NaN or infinite
 > ## R 3.0.1 gave messages from ':' or about negative-length vectors.
 > 
 > 
@@ -7161,8 +7164,7 @@ sigma^2 estimated as 0.001499:  log likelihood = 163.79,  aic = -315.58
 +              include.mean = FALSE))
 
 Call:
-arima(x = diff(x), order = c(1, 0, 1), seasonal = c(1, 0, 1), xreg = diff(xreg), 
-    include.mean = FALSE)
+arima(x = diff(x), order = c(1, 0, 1), seasonal = c(1, 0, 1), xreg = diff(xreg),     include.mean = FALSE)
 
 Coefficients:
           ar1     ma1    sar1     sma1  diff(xreg)
@@ -7235,17 +7237,17 @@ elem2 2 12   14
 > 
 > ## NA_character_ was not handled properly in min and max (reported by Magnus Thor Torfason)
 > str(min(NA, "bla"))
- chr NA
+ character NA
 > str(min("bla", NA))
- chr NA
+ character NA
 > str(min(NA_character_, "bla"))
- chr NA
+ character NA
 > str(max(NA, "bla"))
- chr NA
+ character NA
 > str(max("bla", NA))
- chr NA
+ character NA
 > str(max(NA_character_, "bla"))
- chr NA
+ character NA
 > ## NA_character_ could be treated as "NA"; depending on the locale, it would not necessarily
 > ## be the min or max.
 > 
@@ -7259,8 +7261,8 @@ elem2 2 12   14
 > X <- data.frame( A = 1:n * M,
 +                  B = rep( longer.char.string, n))
 > str( X, strict.width = "cut")
-'data.frame':	11 obs. of  2 variables:
- $ A: num  1e+04 2e+04 3e+04 4e+04 5e+04 6e+04 7e+04 8e+04 9e+04 1e+..
+'data.frame':	11 observations of 2 variables:
+ $ A: numeric  1e+04 2e+04 3e+04 4e+04 5e+04 6e+04 7e+04 8e+04 9e+04..
  $ B: Factor w/ 1 level "zjtvorkmoydsepnxkabmeondrjaanutjmfxlgzmrbj"..
 > options(oldopts)
 > ## The first row of the str() result was duplicated.
@@ -7287,15 +7289,15 @@ elem2 2 12   14
 5        e   NA    1
 6        f   NA    1
 Warning messages:
-1: In read.table(file = file, header = header, sep = sep, quote = quote,  :
+1: In command 'lines <- .External(C_readtablehead, file, nlines, comment.char, blank.lines.skip, ':
   line 2 appears to contain embedded nulls
-2: In read.table(file = file, header = header, sep = sep, quote = quote,  :
+2: In command 'lines <- .External(C_readtablehead, file, nlines, comment.char, blank.lines.skip, ':
   line 3 appears to contain embedded nulls
-3: In read.table(file = file, header = header, sep = sep, quote = quote,  :
+3: In command 'lines <- .External(C_readtablehead, file, nlines, comment.char, blank.lines.skip, ':
   line 4 appears to contain embedded nulls
-4: In read.table(file = file, header = header, sep = sep, quote = quote,  :
+4: In command 'lines <- .External(C_readtablehead, file, nlines, comment.char, blank.lines.skip, ':
   line 5 appears to contain embedded nulls
-5: In scan(file = file, what = what, sep = sep, quote = quote, dec = dec,  :
+5: In command 'scan(file = file, what = what, sep = sep, quote = quote, dec = dec, nmax = nrows, ':
   embedded nul(s) found in input
 > read.csv(f, skipNul = TRUE, fileEncoding = "UTF-8-BOM")
   ColA ColB ColC
@@ -7326,11 +7328,11 @@ Warning messages:
 > 
 > ## Misuse of PR#15633
 > try(bartlett.test(yield ~ block*N, data = npk))
-Error in bartlett.test.formula(yield ~ block * N, data = npk) : 
-  'formula' should be of the form response ~ group
+Error in command 'bartlett.test.formula(yield ~ block * N, data = npk)': 
+  'formula' argument should be of the form response ~ group
 > try(fligner.test (yield ~ block*N, data = npk))
-Error in fligner.test.formula(yield ~ block * N, data = npk) : 
-  'formula' should be of the form response ~ group
+Error in command 'fligner.test.formula(yield ~ block * N, data = npk)': 
+  'formula' argument should be of the form response ~ group
 > ## used the first factor with an incorrect description in R < 3.0.3
 > 
 > 
@@ -7513,7 +7515,7 @@ Coefficients:
 x            -1,3275     0,9780  -1,357    0,212
 
 Residual standard error: 0,8648 on 8 degrees of freedom
-Multiple R-squared:  0,1872,	Adjusted R-squared:  0,08557 
+Multiple R-squared: 0,1872,	Adjusted R-squared: 0,08557
 F-statistic: 1,842 on 1 and 8 DF,  p-value: 0,2117
 
 > options(op)
@@ -7573,7 +7575,7 @@ Col
   c4
 > A <- array(dim=3:0, dimnames=list(D1=c("a","b","c"), D2=c("X","Y"), D3="I", D4=NULL))
 > A ## did not print *anything*
-<3 x 2 x 1 x 0 array of logical>
+<logical array of size 3 x 2 x 1 x 0>
    D2
 D1  X Y
   a
@@ -7581,7 +7583,7 @@ D1  X Y
   c
 
 > A[,,"I",] # ditto
-<3 x 2 x 0 array of logical>
+<logical array of size 3 x 2 x 0>
    D2
 D1  X Y
   a
@@ -7589,7 +7591,7 @@ D1  X Y
   c
 
 > A[,,0,]   # ditto
-<3 x 2 x 0 x 0 array of logical>
+<logical array of size 3 x 2 x 0 x 0>
    D2
 D1  X Y
   a
@@ -7597,13 +7599,13 @@ D1  X Y
   c
 
 > aperm(A, c(3:1,4))   # ditto
-<1 x 2 x 3 x 0 array of logical>
+<logical array of size 1 x 2 x 3 x 0>
    D2
 D3  X Y
   I
 
 > aperm(A, c(1:2, 4:3))# ditto
-<3 x 2 x 0 x 1 array of logical>
+<logical array of size 3 x 2 x 0 x 1>
    D2
 D1  X Y
   a
@@ -7611,14 +7613,14 @@ D1  X Y
   c
 
 > unname(A)            # ditto
-<3 x 2 x 1 x 0 array of logical>
+<logical array of size 3 x 2 x 1 x 0>
      [,1] [,2]
 [1,]
 [2,]
 [3,]
 
 > format(A[,,1,])	     # ditto
-<3 x 2 x 0 array of character>
+<character array of size 3 x 2 x 0>
    D2
 D1  X Y
   a
@@ -7786,6 +7788,7 @@ b = `?`(d)
 > ## dput() quoted the empty symbol (PR#16686)
 > a <- alist(one = 1, two = )
 > dput(a)
-structure(list(one = 1, two = ), .Names = c("one", "two"))
+structure(list(one = 1, two = ), .Names = c("one", 
+"two"))
 > ## deparsed two to quote()
 > 

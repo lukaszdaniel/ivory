@@ -468,8 +468,7 @@ SEXP attribute_hidden do_rowscols(/*const*/ CXXR::Expression* call, const CXXR::
     /* This is the dimensions vector */
     x = args[0];
     if (!isInteger(x) || LENGTH(x) != 2)
-	error(_("a matrix-like object is required as argument passed to '%s'"),
-	      (op->variant() == 2) ? "col" : "row");
+	error(_("a matrix-like object is required as argument passed to '%s'"), (op->variant() == 2) ? "col" : "row");
 
     nr = INTEGER(x)[0];
     nc = INTEGER(x)[1];

@@ -123,24 +123,14 @@ typedef struct SEXPREC* SEXP;
 			     * compatibility TYPEOF will return ::NILSXP
 			     * if passed a null pointer.
 			     */
-	SYMSXP	    = 1,    /**< symbols, implemented in class
-			       CXXR::Symbol. */
-	LISTSXP	    = 2,    /**< lists of dotted pairs, implemented in
-			       class CXXR::PairList. */
-	CLOSXP	    = 3,    /**< closures, implemented in class
-			       CXXR::Closure. */
-	ENVSXP	    = 4,    /**< environments, implemented in class
-			       CXXR::Environment. */
-	PROMSXP	    = 5,    /**< promises: [un]evaluated closure
-			       arguments, implemented in class
-			       CXXR::Promise. */
-	LANGSXP	    = 6,    /**< language constructs (special lists),
-			       implemented in class CXXR::Expression. */
-	SPECIALSXP  = 7,    /**< special forms, implemented in class
-			       CXXR::BuiltInFunction. */
-	BUILTINSXP  = 8,    /**< builtin non-special forms, also
-			       implemented in class
-			       CXXR::BuiltInFunction. */
+	SYMSXP	    = 1,    /**< symbols, implemented in class CXXR::Symbol. */
+	LISTSXP	    = 2,    /**< lists of dotted pairs, implemented in class CXXR::PairList. */
+	CLOSXP	    = 3,    /**< closures, implemented in class CXXR::Closure. */
+	ENVSXP	    = 4,    /**< environments, implemented in class CXXR::Environment. */
+	PROMSXP	    = 5,    /**< promises: [un]evaluated closure arguments, implemented in class CXXR::Promise. */
+	LANGSXP	    = 6,    /**< language constructs (special lists), implemented in class CXXR::Expression. */
+	SPECIALSXP  = 7,    /**< special forms, implemented in class CXXR::BuiltInFunction. */
+	BUILTINSXP  = 8,    /**< builtin non-special forms, also implemented in class CXXR::BuiltInFunction. */
 	CHARSXP	    = 9,    /**< "scalar" string type (internal only),
 			       implemented in class CXXR::String. */
 	LGLSXP	    = 10,   /**< logical vectors, implemented in class
@@ -168,20 +158,15 @@ typedef struct SEXPREC* SEXP;
 			       CXXR::WeakRef. */
 	RAWSXP      = 24,   /**< raw bytes, implemented in class
 			       CXXR::RawVector. */
-	S4SXP       = 25,   /**< S4 object not inheriting from another
-			     *   ::SEXPTYPE, implemented in class
-			     *   CXXR::S4Object.
-			     */
+	S4SXP       = 25,   /**< S4 object not inheriting from another ::SEXPTYPE, implemented in class CXXR::S4Object. */
 
-	CXXSXP      = 43,   /**< object types specific to CXXR.*/
-	                    /* (43 = ASCII +) */
+	CXXSXP      = 43,   /**< object types specific to CXXR.*/ /* (43 = ASCII +) */
 
 	BAILSXP     = 44,   /**< Object used to implement indirect flow of
 			     *   control in R without using a C++ exception.
 			     */
 
-	FUNSXP	    = 99    /**< Closure or Builtin.  No CXXR::RObject has
-			       this type. */
+	FUNSXP	    = 99    /**< Closure or Builtin.  No CXXR::RObject has this type. */
     } SEXPTYPE;
 
 /* These are also used with the write barrier on, in attrib.c and util.c */
@@ -530,7 +515,6 @@ SEXP Rf_allocMatrix(SEXPTYPE, int, int);
 SEXP Rf_allocList(unsigned int);
 SEXP Rf_allocS4Object(void);
 SEXP Rf_allocSExp(SEXPTYPE);
-SEXP Rf_allocVector(SEXPTYPE, R_xlen_t);
 SEXP Rf_allocVector3(SEXPTYPE, R_xlen_t, void*);
 R_xlen_t Rf_any_duplicated(SEXP x, Rboolean from_last);
 R_xlen_t Rf_any_duplicated3(SEXP x, SEXP incomp, Rboolean from_last);

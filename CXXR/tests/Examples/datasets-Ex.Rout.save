@@ -1,7 +1,15 @@
 
-R Under development (unstable) (2016-02-05 r70096) -- "Unsuffered Consequences"
+Ivory Under development (unstable) (2016-03-18 r670) -- "Internationalized Version of R"
+Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
+
+R Under development (unstable) (2016-03-18 r70207) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
+
+CXXR Copyright (C) 2008-14 Andrew R. Runnalls.
+Ivory nor CXXR are not part of the R project, so please do not report bugs
+via r-bugs or the R website - instead refer to the authors/CXXR website.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -36,7 +44,7 @@ Type 'q()' to quit R.
 > 
 > ### ** Examples
 > 
-> ## Not run: 
+> ## Don't run: 
 > ##D ## These are quite slow and so not run by example(AirPassengers)
 > ##D 
 > ##D ## The classic 'airline model', by full ML
@@ -62,7 +70,7 @@ Type 'q()' to quit R.
 > ##D par(mfrow = c(1, 2))
 > ##D plot(cbind(ap, fitted(fit)), plot.type = "single")
 > ##D plot(cbind(ap, tsSmooth(fit)), plot.type = "single")
-> ## End(Not run)
+> ## End (Don't run)
 > 
 > 
 > cleanEx()
@@ -81,7 +89,7 @@ Type 'q()' to quit R.
 > ## Don't show: 
 > options(show.nls.convergence=FALSE)
 > old <- options(digits = 5)
-> ## End(Don't show)
+> ## End (Don't show)
 > require(stats)
 > # simplest form of fitting a first-order model to these data
 > fm1 <- nls(demand ~ A*(1-exp(-exp(lrc)*Time)), data = BOD,
@@ -91,11 +99,11 @@ Type 'q()' to quit R.
 19.14258 -0.63282 
 > fm1
 Nonlinear regression model
-  model: demand ~ A * (1 - exp(-exp(lrc) * Time))
-   data: BOD
+  Model: demand ~ A * (1 - exp(-exp(lrc) * Time))
+   Data: BOD
      A    lrc 
 19.143 -0.633 
- residual sum-of-squares: 26
+ Residual sum-of-squares: 26
 > # using the plinear algorithm
 > fm2 <- nls(demand ~ (1-exp(-exp(lrc)*Time)), data = BOD,
 +    start = c(lrc = log(.35)), algorithm = "plinear", trace = TRUE)
@@ -120,7 +128,7 @@ Residual standard error: 2.55 on 4 degrees of freedom
 
 > ## Don't show: 
 > options(old)
-> ## End(Don't show)
+> ## End (Don't show)
 > 
 > 
 > 
@@ -154,7 +162,7 @@ Residual standard error: 2.55 on 4 degrees of freedom
 > require(stats); require(graphics)
 > ## Don't show: 
 > options(show.nls.convergence=FALSE)
-> ## End(Don't show)
+> ## End (Don't show)
 > coplot(density ~ conc | Run, data = DNase,
 +        show.given = FALSE, type = "b")
 > coplot(density ~ log(conc) | Run, data = DNase,
@@ -226,7 +234,7 @@ carb        0.876286   0.013535  64.744 3.41e-07 ***
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Residual standard error: 0.008649 on 4 degrees of freedom
-Multiple R-squared:  0.999,	Adjusted R-squared:  0.9988 
+Multiple R-squared: 0.999,	Adjusted R-squared: 0.9988
 F-statistic:  4192 on 1 and 4 DF,  p-value: 3.409e-07
 
 > opar <- par(mfrow = c(2, 2), oma = c(0, 0, 1.1, 0))
@@ -307,7 +315,7 @@ Proportion Var   0.508
 
 Test of the hypothesis that 1 factor is sufficient.
 The chi square statistic is 611.44 on 20 degrees of freedom.
-The p-value is 1.12e-116 
+The p-value is 1.12e-116
 > for(factors in 2:4) print(update(Harman23.FA, factors = factors))
 
 Call:
@@ -337,7 +345,7 @@ Cumulative Var   0.417   0.744
 
 Test of the hypothesis that 2 factors are sufficient.
 The chi square statistic is 75.74 on 13 degrees of freedom.
-The p-value is 6.94e-11 
+The p-value is 6.94e-11
 
 Call:
 factanal(factors = factors, covmat = Harman23.cor)
@@ -366,7 +374,7 @@ Cumulative Var   0.422   0.751   0.771
 
 Test of the hypothesis that 3 factors are sufficient.
 The chi square statistic is 22.81 on 7 degrees of freedom.
-The p-value is 0.00184 
+The p-value is 0.00184
 
 Call:
 factanal(factors = factors, covmat = Harman23.cor)
@@ -395,7 +403,7 @@ Cumulative Var   0.423   0.747   0.787   0.808
 
 Test of the hypothesis that 4 factors are sufficient.
 The chi square statistic is 4.63 on 2 degrees of freedom.
-The p-value is 0.0988 
+The p-value is 0.0988
 > 
 > 
 > 
@@ -469,7 +477,7 @@ Proportion Var   0.310
 
 Test of the hypothesis that 1 factor is sufficient.
 The chi square statistic is 622.91 on 252 degrees of freedom.
-The p-value is 2.28e-33 
+The p-value is 2.28e-33
 > for(factors in 2:5) print(update(Harman74.FA, factors = factors))
 
 Call:
@@ -527,7 +535,7 @@ Cumulative Var   0.191   0.380
 
 Test of the hypothesis that 2 factors are sufficient.
 The chi square statistic is 420.24 on 229 degrees of freedom.
-The p-value is 2.01e-13 
+The p-value is 2.01e-13
 
 Call:
 factanal(factors = factors, covmat = Harman74.cor)
@@ -584,7 +592,7 @@ Cumulative Var   0.158   0.304   0.436
 
 Test of the hypothesis that 3 factors are sufficient.
 The chi square statistic is 295.59 on 207 degrees of freedom.
-The p-value is 5.12e-05 
+The p-value is 5.12e-05
 
 Call:
 factanal(factors = factors, covmat = Harman74.cor)
@@ -641,7 +649,7 @@ Cumulative Var   0.152   0.272   0.382   0.478
 
 Test of the hypothesis that 4 factors are sufficient.
 The chi square statistic is 226.68 on 186 degrees of freedom.
-The p-value is 0.0224 
+The p-value is 0.0224
 
 Call:
 factanal(factors = factors, covmat = Harman74.cor)
@@ -698,7 +706,7 @@ Cumulative Var   0.151   0.275   0.377   0.475   0.503
 
 Test of the hypothesis that 5 factors are sufficient.
 The chi square statistic is 186.82 on 166 degrees of freedom.
-The p-value is 0.128 
+The p-value is 0.128
 > Harman74.FA <- factanal(factors = 5, covmat = Harman74.cor,
 +                         rotation = "promax")
 > print(Harman74.FA$loadings, sort = TRUE)
@@ -827,7 +835,7 @@ ddpi         0.4096949  0.1961971   2.088 0.042471 *
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Residual standard error: 3.803 on 45 degrees of freedom
-Multiple R-squared:  0.3385,	Adjusted R-squared:  0.2797 
+Multiple R-squared: 0.3385,	Adjusted R-squared: 0.2797
 F-statistic: 5.756 on 4 and 45 DF,  p-value: 0.0007904
 
 > 
@@ -885,7 +893,7 @@ Coefficients:
      1       2  
 0.4081  0.1812  
 
-Order selected 2  sigma^2 estimated as  21247
+Order selected 2 sigma^2 estimated as 21247
 > cpgram(ar(Nile)$resid)
 > par(mfrow = c(1, 1))
 > arima(Nile, c(2, 0, 0))
@@ -1034,7 +1042,7 @@ Variances:
 > boxplot(weight ~ group, data = PlantGrowth, main = "PlantGrowth data",
 +         ylab = "Dried weight of plants", col = "lightgray",
 +         notch = TRUE, varwidth = TRUE)
-Warning in bxp(list(stats = c(4.17, 4.53, 5.155, 5.33, 6.11, 3.59, 4.17,  :
+Warning in command 'bxp(list(stats = c(4.17, 4.53, 5.155, 5.33, 6.11, 3.59, 4.17, 4.55, 4.89, 5.87, 4.92, ':
   some notches went outside hinges ('box'): maybe set notch=FALSE
 > anova(lm(weight ~ group, data = PlantGrowth))
 Analysis of Variance Table
@@ -1064,7 +1072,7 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 > require(stats); require(graphics)
 > ## Don't show: 
 > options(show.nls.convergence=FALSE)
-> ## End(Don't show)
+> ## End (Don't show)
 > plot(rate ~ conc, data = Puromycin, las = 1,
 +      xlab = "Substrate concentration (ppm)",
 +      ylab = "Reaction velocity (counts/min/min)",
@@ -1134,7 +1142,7 @@ Residual standard error: 9.773 on 9 degrees of freedom
 > require(stats); require(graphics)
 > ## Don't show: 
 > options(show.nls.convergence=FALSE)
-> ## End(Don't show)
+> ## End (Don't show)
 > coplot(conc ~ Time | Subject, data = Theoph, show.given = FALSE)
 > Theoph.4 <- subset(Theoph, Subject == 4)
 > fm1 <- nls(conc ~ SSfol(Dose, Time, lKe, lKa, lCl),
@@ -1292,8 +1300,7 @@ sigma^2 estimated as 0.00157:  log likelihood = 300.85,  aic = -593.7
 +       seasonal = list(order = c(1, 0, 0)), xreg = X)
 
 Call:
-arima(x = log10(Seatbelts[, "drivers"]), order = c(1, 0, 0), seasonal = list(order = c(1, 
-    0, 0)), xreg = X)
+arima(x = log10(Seatbelts[, "drivers"]), order = c(1, 0, 0), seasonal = list(order = c(1,     0, 0)), xreg = X)
 
 Coefficients:
          ar1    sar1  intercept     kms  PetrolPrice      law
@@ -1407,7 +1414,7 @@ Private Education    0.341  0.974  1.80  2.6  3.64
 2: 1.032421
 Final: 1.032421
 
-Median Polish Results (Dataset: "log10(USPersonalExpenditure)")
+Median Polish Results (Dataset: ‘log10(USPersonalExpenditure)’)
 
 Overall: 0.9872192
 
@@ -1489,7 +1496,7 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 > require(graphics)
 > work <- diff(WWWusage)
 > par(mfrow = c(2, 1)); plot(WWWusage); plot(work)
-> ## Not run: 
+> ## Don't run: 
 > ##D require(stats)
 > ##D aics <- matrix(, 6, 6, dimnames = list(p = 0:5, q = 0:5))
 > ##D for(q in 1:5) aics[1, 1+q] <- arima(WWWusage, c(0, 1, q),
@@ -1498,7 +1505,7 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 > ##D    for(q in 0:5) aics[1+p, 1+q] <- arima(WWWusage, c(p, 1, q),
 > ##D        optim.control = list(maxit = 500))$aic
 > ##D round(aics - min(aics, na.rm = TRUE), 2)
-> ## End(Not run)
+> ## End (Don't run)
 > 
 > 
 > graphics::par(get("par.postscript", pos = 'CheckExEnv'))
@@ -1783,7 +1790,7 @@ advance     -0.21706    0.17821  -1.218 0.235577
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Residual standard error: 7.068 on 23 degrees of freedom
-Multiple R-squared:  0.7326,	Adjusted R-squared:  0.6628 
+Multiple R-squared: 0.7326,	Adjusted R-squared: 0.6628
 F-statistic:  10.5 on 6 and 23 DF,  p-value: 1.24e-05
 
 > opar <- par(mfrow = c(2, 2), oma = c(0, 0, 1.1, 0),
@@ -1806,7 +1813,7 @@ complaints   0.75461    0.09753   7.737 1.99e-08 ***
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Residual standard error: 6.993 on 28 degrees of freedom
-Multiple R-squared:  0.6813,	Adjusted R-squared:  0.6699 
+Multiple R-squared: 0.6813,	Adjusted R-squared: 0.6699
 F-statistic: 59.86 on 1 and 28 DF,  p-value: 1.988e-08
 
 > plot(fm2)
@@ -1891,7 +1898,7 @@ log(speed)    1.6024     0.1395  11.484 2.26e-15 ***
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Residual standard error: 0.4053 on 48 degrees of freedom
-Multiple R-squared:  0.7331,	Adjusted R-squared:  0.7276 
+Multiple R-squared: 0.7331,	Adjusted R-squared: 0.7276
 F-statistic: 131.9 on 1 and 48 DF,  p-value: 2.259e-15
 
 > opar <- par(mfrow = c(2, 2), oma = c(0, 0, 1.1, 0),
@@ -1941,7 +1948,7 @@ Model 4: dist ~ poly(speed, degree)
 > boxplot(weight ~ feed, data = chickwts, col = "lightgray",
 +     varwidth = TRUE, notch = TRUE, main = "chickwt data",
 +     ylab = "Weight at six weeks (gm)")
-Warning in bxp(list(stats = c(216, 271.5, 342, 373.5, 404, 108, 136, 151.5,  :
+Warning in command 'bxp(list(stats = c(216, 271.5, 342, 373.5, 404, 108, 136, 151.5, 179, 227, 141, 175, ':
   some notches went outside hinges ('box'): maybe set notch=FALSE
 > anova(fm1 <- lm(weight ~ feed, data = chickwts))
 Analysis of Variance Table
@@ -1997,10 +2004,10 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 > dim(crimtab)
 [1] 42 22
 > utils::str(crimtab)
- 'table' int [1:42, 1:22] 0 0 0 0 0 0 1 0 0 0 ...
- - attr(*, "dimnames")=List of 2
-  ..$ : chr [1:42] "9.4" "9.5" "9.6" "9.7" ...
-  ..$ : chr [1:22] "142.24" "144.78" "147.32" "149.86" ...
+ 'table' integer [1:42, 1:22] 0 0 0 0 0 0 1 0 0 0 ...
+ - attr(*, "dimnames")=List of 2 components
+  ..$ : character [1:42] "9.4" "9.5" "9.6" "9.7" ...
+  ..$ : character [1:22] "142.24" "144.78" "147.32" "149.86" ...
 > ## for nicer printing:
 > local({cT <- crimtab
 +        colnames(cT) <- substring(colnames(cT), 2, 3)
@@ -2164,10 +2171,10 @@ tobgp:alcgp  9    6.489        67     47.484
 > summary(model2)
 
 Call:
-glm(formula = cbind(ncases, ncontrols) ~ agegp + unclass(tobgp) + 
-    unclass(alcgp), family = binomial(), data = esoph)
+glm(formula = cbind(ncases, ncontrols) ~ agegp + unclass(tobgp) + unclass(alcgp), 
+    family = binomial(), data = esoph)
 
-Deviance Residuals: 
+Deviance Residuals:
     Min       1Q   Median       3Q      Max  
 -1.7628  -0.6426  -0.2709   0.3043   2.0421  
 
@@ -2353,7 +2360,7 @@ market.potential        1.3306     0.5093   2.613   0.0133 *
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Residual standard error: 0.01473 on 34 degrees of freedom
-Multiple R-squared:  0.9981,	Adjusted R-squared:  0.9978 
+Multiple R-squared: 0.9981,	Adjusted R-squared: 0.9978
 F-statistic:  4354 on 4 and 34 DF,  p-value: < 2.2e-16
 
 > opar <- par(mfrow = c(2, 2), oma = c(0, 0, 1.1, 0),
@@ -2382,10 +2389,9 @@ F-statistic:  4354 on 4 and 34 DF,  p-value: < 2.2e-16
 > summary(model1)
 
 Call:
-glm(formula = case ~ spontaneous + induced, family = binomial(), 
-    data = infert)
+glm(formula = case ~ spontaneous + induced, family = binomial(), data = infert)
 
-Deviance Residuals: 
+Deviance Residuals:
     Min       1Q   Median       3Q      Max  
 -1.6678  -0.8360  -0.5772   0.9030   1.9362  
 
@@ -2410,10 +2416,10 @@ Number of Fisher Scoring iterations: 4
 +                      data = infert, family = binomial()))
 
 Call:
-glm(formula = case ~ age + parity + education + spontaneous + 
-    induced, family = binomial(), data = infert)
+glm(formula = case ~ age + parity + education + spontaneous + induced, family = binomial(), 
+    data = infert)
 
-Deviance Residuals: 
+Deviance Residuals:
     Min       1Q   Median       3Q      Max  
 -1.7603  -0.8162  -0.4956   0.8349   2.6536  
 
@@ -2526,7 +2532,7 @@ Year          1.829e+00  4.555e-01   4.016 0.003037 **
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Residual standard error: 0.3049 on 9 degrees of freedom
-Multiple R-squared:  0.9955,	Adjusted R-squared:  0.9925 
+Multiple R-squared: 0.9955,	Adjusted R-squared: 0.9925
 F-statistic: 330.3 on 6 and 9 DF,  p-value: 4.984e-10
 
 > opar <- par(mfrow = c(2, 2), oma = c(0, 0, 1.1, 0),
@@ -2678,10 +2684,10 @@ Model 2: Speed ~ Run + Expt
 > summary(modUnif)
 
 Call:
-glm(formula = Freq ~ origin + destination + Diag + Rscore:Cscore, 
-    family = poisson, data = occupationalStatus)
+glm(formula = Freq ~ origin + destination + Diag + Rscore:Cscore, family = poisson, 
+    data = occupationalStatus)
 
-Deviance Residuals: 
+Deviance Residuals:
     Min       1Q   Median       3Q      Max  
 -2.6521  -0.6267   0.0000   0.5913   2.0964  
 
@@ -2846,7 +2852,7 @@ Warning: not plotting observations with leverage one:
 
 	Paired t-test
 
-data:  extra[group == 1] and extra[group == 2]
+data: extra[group == 1] and extra[group == 2]
 t = -4.0621, df = 9, p-value = 0.002833
 alternative hypothesis: true difference in means is not equal to 0
 95 percent confidence interval:
@@ -2901,7 +2907,7 @@ stack.xAcid.Conc.  -0.1521     0.1563  -0.973  0.34405
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Residual standard error: 3.243 on 17 degrees of freedom
-Multiple R-squared:  0.9136,	Adjusted R-squared:  0.8983 
+Multiple R-squared: 0.9136,	Adjusted R-squared: 0.8983
 F-statistic:  59.9 on 3 and 17 DF,  p-value: 3.016e-09
 
 > 
@@ -3190,7 +3196,7 @@ Infant.Mortality  1.07705    0.38172   2.822  0.00734 **
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Residual standard error: 7.165 on 41 degrees of freedom
-Multiple R-squared:  0.7067,	Adjusted R-squared:  0.671 
+Multiple R-squared: 0.7067,	Adjusted R-squared: 0.671
 F-statistic: 19.76 on 5 and 41 DF,  p-value: 5.594e-10
 
 > 
@@ -3231,7 +3237,7 @@ log(Girth)   2.19997    0.08983   24.49  < 2e-16 ***
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Residual standard error: 0.115 on 29 degrees of freedom
-Multiple R-squared:  0.9539,	Adjusted R-squared:  0.9523 
+Multiple R-squared: 0.9539,	Adjusted R-squared: 0.9523
 F-statistic: 599.7 on 1 and 29 DF,  p-value: < 2.2e-16
 
 > summary(fm2 <- update(fm1, ~ . + log(Height), data = trees))
@@ -3252,7 +3258,7 @@ log(Height)  1.11712    0.20444   5.464 7.81e-06 ***
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Residual standard error: 0.08139 on 28 degrees of freedom
-Multiple R-squared:  0.9777,	Adjusted R-squared:  0.9761 
+Multiple R-squared: 0.9777,	Adjusted R-squared: 0.9761
 F-statistic: 613.2 on 2 and 28 DF,  p-value: < 2.2e-16
 
 > step(fm2)
@@ -3363,7 +3369,7 @@ woolB:tensionH   10.556      7.294   1.447 0.154327
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Residual standard error: 10.94 on 48 degrees of freedom
-Multiple R-squared:  0.3778,	Adjusted R-squared:  0.3129 
+Multiple R-squared: 0.3778,	Adjusted R-squared: 0.3129
 F-statistic: 5.828 on 5 and 48 DF,  p-value: 0.0002772
 
 > anova(fm1)
@@ -3416,7 +3422,7 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 > require(stats); require(graphics)
 > ## Don't show: 
 > options(show.nls.convergence=FALSE)
-> ## End(Don't show)
+> ## End (Don't show)
 > coplot(uptake ~ conc | Plant, data = CO2, show.given = FALSE, type = "b")
 > ## fit the data for the first plant
 > fm1 <- nls(uptake ~ SSasymp(conc, Asym, lrc, c0),
@@ -3457,8 +3463,8 @@ c0   -5.14
 > ### * <FOOTER>
 > ###
 > options(digits = 7L)
-> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  1.274 0.032 1.307 0 0 
+> base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  6.584 0.228 6.817 0 0 
 > grDevices::dev.off()
 null device 
           1 

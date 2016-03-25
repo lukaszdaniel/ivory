@@ -144,7 +144,7 @@ void ArgMatcher::unusedArgsError(const SuppliedList& supplied_list)
 	argstrv(static_cast<StringVector*>(Rf_deparse1line(unused_list, FALSE)));
     // '+ 4' is to remove 'list' from 'list(badTag1, ...' :
     const char* errdetails = (*argstrv)[0]->c_str() + 4;
-    Rf_error(_("unused argument(s) %s"), errdetails);
+    Rf_error(n_("unused argument %s", "unused arguments %s", length(unused_list)), errdetails);
 }		 
 	
 /* Destructively Extract A Named List Element. */

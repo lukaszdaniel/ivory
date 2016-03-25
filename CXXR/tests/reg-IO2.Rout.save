@@ -1,7 +1,15 @@
 
-R Under development (unstable) (2016-02-05 r70096) -- "Unsuffered Consequences"
+Ivory Under development (unstable) (2016-03-18 r671) -- "Internationalized Version of R"
+Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
+
+R Under development (unstable) (2016-03-18 r70207) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
+
+CXXR Copyright (C) 2008-14 Andrew R. Runnalls.
+Ivory nor CXXR are not part of the R project, so please do not report bugs
+via r-bugs or the R website - instead refer to the authors/CXXR website.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -24,7 +32,7 @@ Type 'q()' to quit R.
 > file.create("foo1")
 [1] TRUE
 > try(read.table("foo1")) # fails
-Error in read.table("foo1") : no lines available in input
+Error in command 'read.table("foo1")': no lines available in input
 > read.table("foo1", col.names=LETTERS[1:4])
 [1] A B C D
 <0 rows> (or 0-length row.names)
@@ -64,11 +72,11 @@ Error in read.table("foo1") : no lines available in input
 > 
 > # wrong col.names
 > try(read.table("foo3", header=TRUE, col.names=letters[1:4]))
-Error in scan(file, what, nmax, sep, dec, quote, skip, nlines, na.strings,  : 
+Error in command 'scan(file = file, what = what, sep = sep, quote = quote, dec = dec, nmax = nrows, ': 
   line 1 did not have 4 elements
-In addition: Warning message:
-In read.table("foo3", header = TRUE, col.names = letters[1:4]) :
-  header and 'col.names' are of different lengths
+Additional warning message:
+In command 'read.table("foo3", header = TRUE, col.names = letters[1:4])':
+  header and 'col.names' argument are of different lengths
 > unlink("foo3")
 > 
 > # incomplete last line
@@ -78,7 +86,7 @@ In read.table("foo3", header = TRUE, col.names = letters[1:4]) :
 1    2
 3    4
 Warning message:
-In read.table("foo4", header = TRUE) :
+In command 'lines <- .External(C_readtablehead, file, nlines, comment.char, blank.lines.skip, ':
   incomplete final line found by readTableHeader on 'foo4'
 > unlink("foo4")
 > 
@@ -101,10 +109,10 @@ In read.table("foo4", header = TRUE) :
 > 
 > cat("head\n", 1:2, "\n", 3:5, "\n", 6:9, "\n", file = "foo6")
 > try(read.table("foo6", header=TRUE))
-Error in read.table("foo6", header = TRUE) : 
+Error in command 'read.table("foo6", header = TRUE)': 
   more columns than column names
 > try(read.table("foo6", header=TRUE, fill=TRUE))
-Error in read.table("foo6", header = TRUE, fill = TRUE) : 
+Error in command 'read.table("foo6", header = TRUE, fill = TRUE)': 
   more columns than column names
 > read.table("foo6", header=FALSE, fill=TRUE)
     V1 V2 V3 V4

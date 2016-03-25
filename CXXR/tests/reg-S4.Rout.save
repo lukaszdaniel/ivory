@@ -1,7 +1,15 @@
 
-R Under development (unstable) (2016-02-05 r70096) -- "Unsuffered Consequences"
+Ivory Under development (unstable) (2016-03-18 r671) -- "Internationalized Version of R"
+Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
+
+R Under development (unstable) (2016-03-18 r70207) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
+
+CXXR Copyright (C) 2008-14 Andrew R. Runnalls.
+Ivory nor CXXR are not part of the R project, so please do not report bugs
+via r-bugs or the R website - instead refer to the authors/CXXR website.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -23,13 +31,13 @@ Type 'q()' to quit R.
 > 
 > ## When this test comes too late, it fails too early in R <= 3.2.2
 > require(stats4)
-Loading required package: stats4
+Loading required package: 'stats4'
 > detach("package:methods")
 > require("methods")
-Loading required package: methods
+Loading required package: 'methods'
 > cc <- methods::getClassDef("standardGeneric")
 > cc ## (auto) print failed here, in R <= 3.2.2
-Class "standardGeneric" [package "methods"]
+Class "standardGeneric" [package in 'methods']
 
 Slots:
                                                                   
@@ -39,7 +47,7 @@ Class:       function      character      character           list
 Name:      valueClass      signature        default       skeleton
 Class:      character      character optionalMethod           call
 
-Extends: 
+Class "standardGeneric" consists of following classes: 
 Class "genericFunction", directly
 Class "function", by class "genericFunction", distance 2
 Class "OptionalFunction", by class "function", distance 3
@@ -174,7 +182,7 @@ S4 print method
 > nc <- new("c1", x = 1:2)
 > str(nc)# gave ^ANULL^A in 2.0.0
 Formal class 'c1' [package ".GlobalEnv"] with 2 slots
-  ..@ x   : int [1:2] 1 2
+  ..@ x   : integer [1:2] 1 2
   ..@ code: NULL
 > ##
 > 
@@ -819,14 +827,14 @@ NULL
 + }
 > R <- sapply(problNames, tstSlotname, simplify = FALSE)
 > str(R) # just so ...
-List of 7
- $ names    : logi TRUE
- $ dimnames : logi TRUE
- $ row.names: logi TRUE
- $ class    : chr "\"class\" is a reserved slot name and cannot be redefined"
- $ comment  : logi TRUE
- $ dim      : logi TRUE
- $ tsp      : logi TRUE
+List of 7 components
+ $ names    : logical TRUE
+ $ dimnames : logical TRUE
+ $ row.names: logical TRUE
+ $ class    : character "'class' is a reserved slot name and cannot be redefined"
+ $ comment  : logical TRUE
+ $ dim      : logical TRUE
+ $ tsp      : logical TRUE
 > stopifnot(is.character(R[["class"]]),
 +           sapply(R[names(R) != "class"], isTRUE))
 > ## only "class" (and ".Data", ...) is reserved as slot name
@@ -953,7 +961,7 @@ function(.Object, value) {
 > setMethod("f", c("numeric", "missing"), function(x, y) x)
 [1] "f"
 > try(?f(1))
-Error in .helpForCall(topicExpr, parent.frame()) : 
+Error in command '.helpForCall(topicExpr, parent.frame())': 
   no documentation for function 'f' and signature 'x = "numeric", y = "missing"'
 > 
 > ## "..." is not handled
@@ -962,7 +970,7 @@ Error in .helpForCall(topicExpr, parent.frame()) :
 > setMethod("f", "numeric", function(...) c(...))
 [1] "f"
 > try(?f(1,2))
-Error in .helpForCall(topicExpr, parent.frame()) : 
+Error in command '.helpForCall(topicExpr, parent.frame())': 
   no documentation for function 'f' and signature '... = "numeric"'
 > 
 > ## defaults in the generic formal arguments are not considered
@@ -971,7 +979,7 @@ Error in .helpForCall(topicExpr, parent.frame()) :
 > setMethod("f", c("numeric", "numeric"), function(x, y) x+y)
 [1] "f"
 > try(?f(1))
-Error in .helpForCall(topicExpr, parent.frame()) : 
+Error in command '.helpForCall(topicExpr, parent.frame())': 
   no documentation for function 'f' and signature 'x = "numeric", y = "numeric"'
 > 
 > ## Objects with S3 classes fail earlier
@@ -982,7 +990,7 @@ Error in .helpForCall(topicExpr, parent.frame()) :
 > setOldClass(c("foo", "numeric"))
 > n <- structure(1, class=c("foo", "numeric"))
 > try(?f(n))
-Error in .helpForCall(topicExpr, parent.frame()) : 
+Error in command '.helpForCall(topicExpr, parent.frame())': 
   no documentation for function 'f' and signature 'x = "numeric"'
 > ## different failures in R < 3.1.0.
 > 
@@ -1137,9 +1145,9 @@ rbind2(<A>, <matrix>) :  x@a done
 > stopifnot(c("package", "names") %in% slotNames(sig))
 > str(sig) # failed, too
 Formal class 'signature' [package "methods"] with 3 slots
-  ..@ .Data  : chr "mle"
-  ..@ names  : chr "obj"
-  ..@ package: chr ""
+  ..@ .Data  : character "mle"
+  ..@ names  : character "obj"
+  ..@ package: character ""
 > 
 > cl4 <- getClasses("package:stats4")
 > stopifnot(identical(getClasses(which(search() == "package:stats4")), cl4),
@@ -1150,7 +1158,7 @@ Formal class 'signature' [package "methods"] with 3 slots
 > C1@slot1 <- pi
 > stopifnot(identical(C1@slot1, pi))
 > stopifnot(require("methods"))
-Loading required package: methods
+Loading required package: 'methods'
 > ## Slot assignment failed in R <= 3.2.2, C code calling checkAtAssignment()
 > 
 > ## Error in argument evaluation of S4 generic - PR#16111

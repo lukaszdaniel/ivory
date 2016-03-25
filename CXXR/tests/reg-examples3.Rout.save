@@ -1,7 +1,15 @@
 
-R Under development (unstable) (2016-01-22 r69982) -- "Unsuffered Consequences"
+Ivory Under development (unstable) (2016-03-18 r671) -- "Internationalized Version of R"
+Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
+
+R Under development (unstable) (2016-03-18 r70207) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
+
+CXXR Copyright (C) 2008-14 Andrew R. Runnalls.
+Ivory nor CXXR are not part of the R project, so please do not report bugs
+via r-bugs or the R website - instead refer to the authors/CXXR website.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -20,7 +28,7 @@ Type 'q()' to quit R.
 > ## This is skipped entirely on a Unix-alike if recommended packages are,
 > ## so for Windows
 > if(!require("MASS")) q()
-Loading required package: MASS
+Loading required package: 'MASS'
 > 
 > pdf("reg-examples-3.pdf", encoding = "ISOLatin1.enc")
 > 
@@ -30,12 +38,12 @@ Loading required package: MASS
 +   print(summary(model3))
 +   detach("package:survival")  # survival (conflicts)
 + }
-Loading required package: survival
+Loading required package: 'survival'
 Call:
-coxph(formula = Surv(rep(1, 248L), case) ~ spontaneous + induced + 
-    strata(stratum), data = infert, method = "exact")
+coxph(formula = Surv(rep(1, 248L), case) ~ spontaneous + induced + strata(stratum), 
+    data = infert, method = "exact")
 
-  n= 248, number of events= 83 
+  n= 248, number of events= 83
 
               coef exp(coef) se(coef)     z Pr(>|z|)    
 spontaneous 1.9859    7.2854   0.3524 5.635 1.75e-08 ***
@@ -47,10 +55,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 spontaneous     7.285     0.1373     3.651    14.536
 induced         4.092     0.2444     2.018     8.298
 
-Rsquare= 0.193   (max possible= 0.519 )
-Likelihood ratio test= 53.15  on 2 df,   p=2.869e-12
-Wald test            = 31.84  on 2 df,   p=1.221e-07
-Score (logrank) test = 48.44  on 2 df,   p=3.032e-11
+Rsquare= 0.193  (max possible=0.519)
+Likelihood ratio test = 53.15 on 2 df, p=2.869e-12
+Wald test = 31.84 on 2 df, p=1.221e-07
+Score (logrank) test = 48.44 on 2 df, p=3.032e-11
 
 > 
 > 
@@ -180,7 +188,7 @@ factor> of <- ordered(ff)
 factor> stopifnot(identical(range(of, rev(of)), of[3:2]),
 factor+ 	  identical(max(of), of[2]))
 
-factor> ## End(Don't show)
+factor> ## End (Don't show)
 factor> 
 factor> ## suppose you want "NA" as a level, and to allow missing values.
 factor> (x <- factor(c(1, 2, NA), exclude = NULL))
@@ -246,10 +254,9 @@ t -1 -1 -1 -1
 > summary(anorex.1)
 
 Call:
-glm(formula = Postwt ~ Prewt + Treat + offset(Prewt), family = gaussian, 
-    data = anorexia)
+glm(formula = Postwt ~ Prewt + Treat + offset(Prewt), family = gaussian, data = anorexia)
 
-Deviance Residuals: 
+Deviance Residuals:
      Min        1Q    Median        3Q       Max  
 -14.1083   -4.2773   -0.5484    5.4838   15.2922  
 
@@ -317,7 +324,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Residual standard error: 4.67 on 57 degrees of freedom
 
-Number of iterations to convergence: 5 
+Number of iterations to convergence: 5
 Achieved convergence tolerance: 9.32e-07
 
 > 
@@ -384,7 +391,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Residual standard error: 1.11 on 17 degrees of freedom
 
-Number of iterations to convergence: 8 
+Number of iterations to convergence: 8
 Achieved convergence tolerance: 2.17e-06
 
 > options(od)
@@ -399,7 +406,7 @@ Standard deviations:
    Comp.1    Comp.2    Comp.3    Comp.4 
 7.8322873 4.0077676 1.9114016 0.7624211 
 
- 4  variables and  21 observations.
+4 variables and 21 observations.
 > 
 > # termplot.R
 > library(MASS)
@@ -425,7 +432,7 @@ Standard deviations:
 +  fr <- data.frame(inner = inner, outer = inout[as.integer(inner)])
 +  print(xtabs(~ inner + outer, fr, sparse = TRUE))
 + }
-Loading required package: Matrix
+Loading required package: 'Matrix'
 
 Attaching package: 'Matrix'
 
@@ -476,7 +483,7 @@ y . . . . 2
 > ## From utils
 > example(packageDescription)
 
-pckgDs> ## No test: 
+pckgDs> ## Don't test: 
 pckgDs> ##D packageDescription("stats")
 pckgDs> ##D packageDescription("stats", fields = c("Package", "Version"))
 pckgDs> ##D 
@@ -485,7 +492,7 @@ pckgDs> ##D packageDescription("stats", fields = "Version", drop = FALSE)
 pckgDs> ##D 
 pckgDs> ##D if(packageVersion("MASS") < "7.3.29")
 pckgDs> ##D   message("you need to update 'MASS'")
-pckgDs> ## End(No test)
+pckgDs> ## End (Don't test)
 pckgDs> 
 pckgDs> 
 > 
@@ -561,10 +568,10 @@ $R
 attr(,"class")
 [1] "DependsList"
 Warning messages:
-1: 'getDepList' is deprecated.
-Use 'dependsOnPkgs() or package_dependencies()' instead.
-See help("Deprecated") 
-2: 'package.dependencies' is deprecated.
-Use 'package_dependencies' instead.
+1: Function 'getDepList()' is deprecated.
+Use function 'dependsOnPkgs()' or 'package_dependencies()' instead.
+ 
+2: Function 'package.dependencies' is deprecated.
+Use function 'package_dependencies' instead.
 See help("Deprecated") 
 > 

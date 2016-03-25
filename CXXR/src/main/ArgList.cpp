@@ -115,8 +115,7 @@ RObject* ArgList::evaluateSingleArgument(const RObject* arg,
 	} else if (isMissingArgument(sym, env->frame())) {
 	    if (allow_missing == MissingArgHandling::Keep)
 		return Symbol::missingArgument();
-	    else Rf_error(_("argument \"%s\" is missing, with no default"),
-			  sym->name()->c_str());
+	    else Rf_error(_("argument '%s' is missing, with no default"), sym->name()->c_str());
 	}
     }
     return Evaluator::evaluate(const_cast<RObject*>(arg), env);

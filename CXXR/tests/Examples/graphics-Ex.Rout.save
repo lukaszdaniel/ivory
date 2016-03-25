@@ -1,7 +1,15 @@
 
-R Under development (unstable) (2016-02-05 r70096) -- "Unsuffered Consequences"
+Ivory Under development (unstable) (2016-03-18 r670) -- "Internationalized Version of R"
+Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
+
+R Under development (unstable) (2016-03-18 r70207) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
+
+CXXR Copyright (C) 2008-14 Andrew R. Runnalls.
+Ivory nor CXXR are not part of the R project, so please do not report bugs
+via r-bugs or the R website - instead refer to the authors/CXXR website.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -373,7 +381,7 @@ Hair    Brown Blue Hazel Green
 > # *add* notches (somewhat funny here):
 > boxplot(count ~ spray, data = InsectSprays,
 +         notch = TRUE, add = TRUE, col = "blue")
-Warning in bxp(list(stats = c(7, 11, 14, 18.5, 23, 7, 12, 16.5, 18, 21,  :
+Warning in command 'bxp(list(stats = c(7, 11, 14, 18.5, 23, 7, 12, 16.5, 18, 21, 0, 1, 1.5, 3, 4, 2, ':
   some notches went outside hinges ('box'): maybe set notch=FALSE
 > 
 > boxplot(decrease ~ treatment, data = OrchardSprays,
@@ -483,16 +491,16 @@ $names
 > op <- par(mfrow =  c(2, 2))
 > bxp(bx.p, xaxt = "n")
 > bxp(bx.p, notch = TRUE, axes = FALSE, pch = 4, boxfill = 1:5)
-Warning in bxp(bx.p, notch = TRUE, axes = FALSE, pch = 4, boxfill = 1:5) :
+Warning in command 'bxp(bx.p, notch = TRUE, axes = FALSE, pch = 4, boxfill = 1:5)':
   some notches went outside hinges ('box'): maybe set notch=FALSE
 > bxp(bx.p, notch = TRUE, boxfill = "lightblue", frame = FALSE,
 +     outl = FALSE, main = "bxp(*, frame= FALSE, outl= FALSE)")
-Warning in bxp(bx.p, notch = TRUE, boxfill = "lightblue", frame = FALSE,  :
+Warning in command 'bxp(bx.p, notch = TRUE, boxfill = "lightblue", frame = FALSE, outl = FALSE, main = "bxp(*, frame= FALSE, outl= FALSE)")':
   some notches went outside hinges ('box'): maybe set notch=FALSE
 > bxp(bx.p, notch = TRUE, boxfill = "lightblue", border = 2:6,
 +     ylim = c(-4,4), pch = 22, bg = "green", log = "x",
 +     main = "... log = 'x', ylim = *")
-Warning in bxp(bx.p, notch = TRUE, boxfill = "lightblue", border = 2:6,  :
+Warning in command 'bxp(bx.p, notch = TRUE, boxfill = "lightblue", border = 2:6, ylim = c(-4, 4), pch = 22, ':
   some notches went outside hinges ('box'): maybe set notch=FALSE
 > par(op)
 > op <- par(mfrow = c(1, 2))
@@ -960,14 +968,14 @@ Female Yes                89  17 202 131  94  24
 > op <- par(mfrow = c(2, 2))
 > hist(islands)
 > utils::str(hist(islands, col = "gray", labels = TRUE))
-List of 6
- $ breaks  : num [1:10] 0 2000 4000 6000 8000 10000 12000 14000 16000 18000
- $ counts  : int [1:9] 41 2 1 1 1 1 0 0 1
- $ density : num [1:9] 4.27e-04 2.08e-05 1.04e-05 1.04e-05 1.04e-05 ...
- $ mids    : num [1:9] 1000 3000 5000 7000 9000 11000 13000 15000 17000
- $ xname   : chr "islands"
- $ equidist: logi TRUE
- - attr(*, "class")= chr "histogram"
+List of 6 components
+ $ breaks  : numeric [1:10] 0 2000 4000 6000 8000 10000 12000 14000 16000 18000
+ $ counts  : integer [1:9] 41 2 1 1 1 1 0 0 1
+ $ density : numeric [1:9] 4.27e-04 2.08e-05 1.04e-05 1.04e-05 1.04e-05 ...
+ $ mids    : numeric [1:9] 1000 3000 5000 7000 9000 11000 13000 15000 17000
+ $ xname   : character "islands"
+ $ equidist: logical TRUE
+ - attr(*, "class")= character "histogram"
 > 
 > hist(sqrt(islands), breaks = 12, col = "lightblue", border = "pink")
 > ##-- For non-equidistant breaks, counts should NOT be graphed unscaled:
@@ -984,27 +992,27 @@ List of 6
 > 
 > require(utils) # for str
 > str(hist(islands, breaks = 12, plot =  FALSE)) #-> 10 (~= 12) breaks
-List of 6
- $ breaks  : num [1:10] 0 2000 4000 6000 8000 10000 12000 14000 16000 18000
- $ counts  : int [1:9] 41 2 1 1 1 1 0 0 1
- $ density : num [1:9] 4.27e-04 2.08e-05 1.04e-05 1.04e-05 1.04e-05 ...
- $ mids    : num [1:9] 1000 3000 5000 7000 9000 11000 13000 15000 17000
- $ xname   : chr "islands"
- $ equidist: logi TRUE
- - attr(*, "class")= chr "histogram"
+List of 6 components
+ $ breaks  : numeric [1:10] 0 2000 4000 6000 8000 10000 12000 14000 16000 18000
+ $ counts  : integer [1:9] 41 2 1 1 1 1 0 0 1
+ $ density : numeric [1:9] 4.27e-04 2.08e-05 1.04e-05 1.04e-05 1.04e-05 ...
+ $ mids    : numeric [1:9] 1000 3000 5000 7000 9000 11000 13000 15000 17000
+ $ xname   : character "islands"
+ $ equidist: logical TRUE
+ - attr(*, "class")= character "histogram"
 > str(hist(islands, breaks = c(12,20,36,80,200,1000,17000), plot = FALSE))
-List of 6
- $ breaks  : num [1:7] 12 20 36 80 200 1000 17000
- $ counts  : int [1:6] 12 11 8 6 4 7
- $ density : num [1:6] 0.03125 0.014323 0.003788 0.001042 0.000104 ...
- $ mids    : num [1:6] 16 28 58 140 600 9000
- $ xname   : chr "islands"
- $ equidist: logi FALSE
- - attr(*, "class")= chr "histogram"
+List of 6 components
+ $ breaks  : numeric [1:7] 12 20 36 80 200 1000 17000
+ $ counts  : integer [1:6] 12 11 8 6 4 7
+ $ density : numeric [1:6] 0.03125 0.014323 0.003788 0.001042 0.000104 ...
+ $ mids    : numeric [1:6] 16 28 58 140 600 9000
+ $ xname   : character "islands"
+ $ equidist: logical FALSE
+ - attr(*, "class")= character "histogram"
 > 
 > hist(islands, breaks = c(12,20,36,80,200,1000,17000), freq = TRUE,
 +      main = "WRONG histogram") # and warning
-Warning in plot.histogram(r, freq = freq1, col = col, border = border, angle = angle,  :
+Warning in command 'plot.histogram(r, freq = freq1, col = col, border = border, angle = angle, density = density, ':
   the AREAS in the plot are wrong -- rather use 'freq = FALSE'
 > 
 > require(stats)
@@ -1012,7 +1020,7 @@ Warning in plot.histogram(r, freq = freq1, col = col, border = border, angle = a
 > x <- rchisq(100, df = 4)
 > ## Don't show: 
 > op <- par(mfrow = 2:1, mgp = c(1.5, 0.6, 0), mar = .1 + c(3,3:1))
-> ## End(Don't show)
+> ## End (Don't show)
 > ## Comparing data with a model distribution should be done with qqplot()!
 > qqplot(x, qchisq(ppoints(x), df = 4)); abline(0, 1, col = 2, lty = 2)
 > 
@@ -1021,7 +1029,7 @@ Warning in plot.histogram(r, freq = freq1, col = col, border = border, angle = a
 > curve(dchisq(x, df = 4), col = 2, lty = 2, lwd = 2, add = TRUE)
 > ## Don't show: 
 > par(op)
-> ## End(Don't show)
+> ## End (Don't show)
 > 
 > 
 > 
@@ -1227,15 +1235,15 @@ Warning in plot.histogram(r, freq = freq1, col = col, border = border, angle = a
 > ex.cs1 <- expression(plain(sin) * phi,  paste("cos", phi))  # 2 ways
 > utils::str(legend(-3, .9, ex.cs1, lty = 1:2, plot = FALSE,
 +            adj = c(0, 0.6)))  # adj y !
-List of 2
- $ rect:List of 4
-  ..$ w   : num 1.2
-  ..$ h   : num 0.251
-  ..$ left: num -3
-  ..$ top : num 0.9
- $ text:List of 2
-  ..$ x: num [1:2] -2.29 -2.29
-  ..$ y: num [1:2] 0.816 0.733
+List of 2 components
+ $ rect:List of 4 components
+  ..$ w   : numeric 1.2
+  ..$ h   : numeric 0.251
+  ..$ left: numeric -3
+  ..$ top : numeric 0.9
+ $ text:List of 2 components
+  ..$ x: numeric [1:2] -2.29 -2.29
+  ..$ y: numeric [1:2] 0.816 0.733
 > legend(-3, 0.9, ex.cs1, lty = 1:2, col = 2:3,  adj = c(0, 0.6))
 > 
 > require(stats)
@@ -1246,15 +1254,15 @@ List of 2
 > ex12 <- expression(bar(x) == sum(over(x[i], n), i == 1, n),
 +                    hat(x) == median(x[i], i == 1, n))
 > utils::str(legend(4.1, 30, ex12, col = 2:3, lty = 2:3, lwd = 2))
-List of 2
- $ rect:List of 4
-  ..$ w   : num 4.27
-  ..$ h   : num 6.78
-  ..$ left: num 4.1
-  ..$ top : num 30
- $ text:List of 2
-  ..$ x: num [1:2] 5.22 5.22
-  ..$ y: num [1:2] 27.3 24.6
+List of 2 components
+ $ rect:List of 4 components
+  ..$ w   : numeric 4.27
+  ..$ h   : numeric 6.78
+  ..$ left: numeric 4.1
+  ..$ top : numeric 30
+ $ text:List of 2 components
+  ..$ x: numeric [1:2] 5.22 5.22
+  ..$ y: numeric [1:2] 27.3 24.6
 > 
 > ## 'Filled' boxes -- for more, see example(plot.factor)
 > op <- par(bg = "white") # to get an opaque box for the legend
@@ -1417,7 +1425,7 @@ List of 2
 > ## of independence and too few brown eyed blonde females.
 > ## The corresponding model is:
 > fm <- loglin(HairEyeColor, list(1, 2, 3))
-2 iterations: deviation 5.684342e-14 
+2 iterations: deviation 5.6843418860808e-14
 > pchisq(fm$pearson, fm$df, lower.tail = FALSE)
 [1] 5.320872e-23
 > 
@@ -1427,7 +1435,7 @@ List of 2
 > ## overrepresented among people with brown hair and blue eyes.
 > ## The corresponding model is:
 > fm <- loglin(HairEyeColor, list(1:2, 3))
-2 iterations: deviation 5.684342e-14 
+2 iterations: deviation 5.6843418860808e-14
 > pchisq(fm$pearson, fm$df, lower.tail = FALSE)
 [1] 0.1891745
 > 
@@ -1893,12 +1901,12 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 > 
 > ## More than one y :
 > utils::str(esoph)
-'data.frame':	88 obs. of  5 variables:
+'data.frame':	88 observations of 5 variables:
  $ agegp    : Ord.factor w/ 6 levels "25-34"<"35-44"<..: 1 1 1 1 1 1 1 1 1 1 ...
  $ alcgp    : Ord.factor w/ 4 levels "0-39g/day"<"40-79"<..: 1 1 1 1 2 2 2 2 3 3 ...
  $ tobgp    : Ord.factor w/ 4 levels "0-9g/day"<"10-19"<..: 1 2 3 4 1 2 3 4 1 2 ...
- $ ncases   : num  0 0 0 0 0 0 0 0 0 0 ...
- $ ncontrols: num  40 10 6 5 27 7 4 7 2 1 ...
+ $ ncases   : numeric  0 0 0 0 0 0 0 0 0 0 ...
+ $ ncontrols: numeric  40 10 6 5 27 7 4 7 2 1 ...
 > plot.design(esoph) ## two plots; if interactive you are "ask"ed
 > 
 > ## or rather, compare mean and median:
@@ -2066,7 +2074,6 @@ N
 > points.default # to see how it calls "plot.xy(xy.coords(x, y), ...)"
 function (x, y = NULL, type = "p", ...) 
 plot.xy(xy.coords(x, y), type = type, ...)
-<bytecode: 0x298cb30>
 <environment: namespace:graphics>
 > 
 > 
@@ -2141,14 +2148,14 @@ attr(,"class")
 +  main = 'plot(..., type="o", pch=21, bg=par("bg"))')
 > par(op)
 > 
-> ## Not run: 
+> ## Don't run: 
 > ##D ## The figure was produced by calls like
 > ##D png("pch.png", height = 0.7, width = 7, res = 100, units = "in")
 > ##D par(mar = rep(0,4))
 > ##D plot(c(-1, 26), 0:1, type = "n", axes = FALSE)
 > ##D text(0:25, 0.6, 0:25, cex = 0.5)
 > ##D points(0:25, rep(0.3, 26), pch = 0:25, bg = "grey")
-> ## End(Not run)
+> ## End (Don't run)
 > 
 > ##-------- Showing all the extra & some char graphics symbols ---------
 > pchShow <-
@@ -2307,7 +2314,7 @@ attr(,"class")
 > op <- par(bg = "thistle")
 > plot(c(100, 250), c(300, 450), type = "n", xlab = "", ylab = "")
 > image <- as.raster(matrix(0:1, ncol = 5, nrow = 3))
-Warning in matrix(0:1, ncol = 5, nrow = 3) :
+Warning in command 'matrix(0:1, ncol = 5, nrow = 3)':
   data length [2] is not a sub-multiple or multiple of the number of rows [3]
 > rasterImage(image, 100, 300, 150, 350, interpolate = FALSE)
 > rasterImage(image, 100, 400, 150, 450)
@@ -2635,7 +2642,7 @@ temperature no yes
 > 
 > stem(islands)
 
-  The decimal point is 3 digit(s) to the right of the |
+  The decimal point is 3 digits to the right of the |
 
    0 | 00000000000000000000000000000111111222338
    2 | 07
@@ -2819,10 +2826,10 @@ $`11.33`
 > xyT <- xyTable(x = sort(2*round(rnorm(100))), y = round(rnorm(100), 0),
 +                digits = 3)
 > utils::str(xyT, vec.len = 20)
-List of 3
- $ x     : num [1:25] -6 -4 -4 -4 -4 -2 -2 -2 -2 -2 0 0 0 0 0 0 2 2 2 2 2 4 4 4 4
- $ y     : num [1:25] 0 -2 0 1 2 -2 -1 0 1 2 -3 -2 -1 0 1 2 -2 -1 0 1 3 -1 0 1 2
- $ number: int [1:25] 1 1 1 1 3 1 4 8 4 1 1 3 5 17 12 2 1 8 12 6 1 1 3 2 1
+List of 3 components
+ $ x     : numeric [1:25] -6 -4 -4 -4 -4 -2 -2 -2 -2 -2 0 0 0 0 0 0 2 2 2 2 2 4 4 4 4
+ $ y     : numeric [1:25] 0 -2 0 1 2 -2 -1 0 1 2 -3 -2 -1 0 1 2 -2 -1 0 1 3 -1 0 1 2
+ $ number: integer [1:25] 1 1 1 1 3 1 4 8 4 1 1 3 5 17 12 2 1 8 12 6 1 1 3 2 1
 > sunflowerplot(xyT, main = "2nd Sunflower Plot of Rounded N(0,1)")
 > 
 > ## A 'marked point process' {explicit 'number' argument}:
@@ -2936,7 +2943,6 @@ function (xy = 1, warn.log = TRUE)
     u <- par("usr")
     xy * c(u[2L] - u[1L], u[4L] - u[3L])/par("pin")
 }
-<bytecode: 0x2b07b38>
 <environment: namespace:graphics>
 > 
 > ## plot labels offset 0.12 inches to the right
@@ -3015,8 +3021,8 @@ function (xy = 1, warn.log = TRUE)
 > ### * <FOOTER>
 > ###
 > options(digits = 7L)
-> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  1.79 0.03 1.821 0 0 
+> base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  7.364 0.196 7.556 0 0 
 > grDevices::dev.off()
 null device 
           1 

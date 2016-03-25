@@ -1,7 +1,15 @@
 
-R Under development (unstable) (2016-02-05 r70096) -- "Unsuffered Consequences"
+Ivory Under development (unstable) (2016-03-18 r670) -- "Internationalized Version of R"
+Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
+
+R Under development (unstable) (2016-03-18 r70207) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
+
+CXXR Copyright (C) 2008-14 Andrew R. Runnalls.
+Ivory nor CXXR are not part of the R project, so please do not report bugs
+via r-bugs or the R website - instead refer to the authors/CXXR website.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -99,7 +107,7 @@ Type 'q()' to quit R.
 > is.nan(log(-1))# TRUE and warning
 [1] TRUE
 Warning message:
-In log(-1) : NaNs produced
+In command 'log(-1)': NaNs produced
 > 
 > rp <- c(1:2,Inf); rn <- rev(- rp)
 > r <- c(rn, 0, rp, NA, NaN)
@@ -180,7 +188,7 @@ In log(-1) : NaNs produced
 > all(is.nan(gamma(0:-47))) # + warn.
 [1] TRUE
 Warning message:
-In gamma(0:-47) : NaNs produced
+In command 'gamma(0:-47)': NaNs produced
 > 
 > ## choose() {and lchoose}:
 > n51 <- c(196793068630200, 229591913401900, 247959266474052)
@@ -213,8 +221,8 @@ In gamma(0:-47) : NaNs produced
 > stopifnot(all.equal( digamma(x), psigamma(x,0), tolerance = 2*Meps),
 +           all.equal(trigamma(x), psigamma(x,1), tolerance = 2*Meps))# TRUE (+ NaN warnings)
 Warning messages:
-1: In digamma(x) : NaNs produced
-2: In psigamma(x, 0) : NaNs produced
+1: In command 'digamma(x)': NaNs produced
+2: In command 'psigamma(x, 0)': NaNs produced
 > ## very large x:
 > x <- 1e30 ^ (1:10)
 > a.relE <- function(appr, true) abs(1 - appr/true)
@@ -323,5 +331,5 @@ Warning messages:
 > 
 > ## Last Line:
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  0.135 0.003 0.138 0 0 
+Time elapsed:  0.948 0.012 0.957 0 0 
 > 

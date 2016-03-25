@@ -1,7 +1,15 @@
 
-R Under development (unstable) (2016-01-22 r69982) -- "Unsuffered Consequences"
+Ivory Under development (unstable) (2016-03-18 r671) -- "Internationalized Version of R"
+Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
+See README-IVORY file for details.
+
+R Under development (unstable) (2016-03-18 r70207) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
+
+CXXR Copyright (C) 2008-14 Andrew R. Runnalls.
+Ivory nor CXXR are not part of the R project, so please do not report bugs
+via r-bugs or the R website - instead refer to the authors/CXXR website.
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -23,7 +31,7 @@ Type 'q()' to quit R.
 > ## str() for character & factors with NA (levels), and for Surv objects:
 > ff <- factor(c(2:1,  NA),  exclude = NULL)
 > str(levels(ff))
- chr [1:3] "1" "2" NA
+ character [1:3] "1" "2" NA
 > str(ff)
  Factor w/ 3 levels "1","2",NA: 2 1 3
 > str(ordered(ff, exclude=NULL))
@@ -33,12 +41,12 @@ Type 'q()' to quit R.
 +     str(sa)
 +     detach("package:survival")
 + }
-Loading required package: survival
+Loading required package: 'survival'
  Surv [1:23, 1:2]   9   13   13+  18   23   28+  31   34   45+  48  ...
- - attr(*, "dimnames")=List of 2
+ - attr(*, "dimnames")=List of 2 components
   ..$ : NULL
-  ..$ : chr [1:2] "time" "status"
- - attr(*, "type")= chr "right"
+  ..$ : character [1:2] "time" "status"
+ - attr(*, "type")= character "right"
 > ## were different, the last one failed in 1.6.2 (at least)
 > 
 > 
@@ -49,7 +57,7 @@ Loading required package: survival
 +     ## row 57 should have hat = 1 and resid=0.
 +     summary(influence.measures(fit))
 + }
-Loading required package: MASS
+Loading required package: 'MASS'
 $hat
          1          2          3          4          5          6          7 
 0.09313909 0.07134091 0.19138434 0.08101081 0.24991662 0.10448752 0.12591828 
@@ -431,7 +439,7 @@ $wt.res
   7.334576566   3.283113507  -1.302710701 
 
 Potentially influential observations of
-	 lm(formula = 1000/MPG.city ~ Weight + Cylinders + Type + EngineSize +      DriveTrain, data = Cars93) :
+	lm(formula = 1000/MPG.city ~ Weight + Cylinders + Type + EngineSize + DriveTrain,     data = Cars93)
 
    dfb.1_ dfb.Wght dfb.Cyl4 dfb.Cyl5 dfb.Cyl6 dfb.Cyl8 dfb.Cyln dfb.TypL
 8  -0.16   0.00    -0.10    -0.07    -0.24    -0.44     0.01     0.12   
@@ -616,7 +624,7 @@ climb   1 320.99
 +     print(as.matrix(df.soac)) # character result
 +     detach("package:survival")
 + }
-Loading required package: survival
+Loading required package: 'survival'
      soa.time soa.status
 [1,]        1          0
 [2,]        2          0
@@ -827,7 +835,7 @@ X2 0           1  0
 +  rm(M,M1,M2)
 +  detach("package:Matrix", unload=TRUE)
 + }##{Matrix}
-Loading required package: Matrix
+Loading required package: 'Matrix'
 
 Attaching package: 'Matrix'
 
@@ -880,9 +888,9 @@ The following object is masked from 'package:base':
 > nchar(x, "b")
  [1]  4  2  4 15  5  3  8  3  8  5
 > try(nchar(x, "c"))
-Error in nchar(x, "c") : invalid multibyte string, element 10
+Error in command 'nchar(x, "c")': invalid multibyte string, element 10
 > try(nchar(x, "w"))
-Error in nchar(x, "w") : invalid multibyte string, element 10
+Error in command 'nchar(x, "w")': invalid multibyte string, element 10
 > nchar(x, "c", allowNA = TRUE)
  [1]  4  2  4 12  5  3  7  2  8 NA
 > nchar(x, "w", allowNA = TRUE)

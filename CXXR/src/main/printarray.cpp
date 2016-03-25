@@ -290,9 +290,11 @@ static void printComplexMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 		   if (ISNA(x[i + j * r].r) || ISNA(x[i + j * r].i))
 		       Rprintf("%s", EncodeReal0(NA_REAL, w[j], 0, 0, OutDec));
 		   else
+		       /* Note that the label printing may modify w[j], so wr[j] is not 
+		          necessarily still valid, and we use w[j] - wi[j] - 2  */
 		       Rprintf("%s",
 			       EncodeComplex(x[i + j * r],
-					     wr[j] + R_print.gap, dr[j], er[j],
+					     w[j] - wi[j] - 2, dr[j], er[j],
 					     wi[j], di[j], ei[j], OutDec)) )
 }
 
