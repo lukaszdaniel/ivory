@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 # Where CR source files have been converted into C++ and otherwise
-# adapted for use in CXXR, this script tries as far as possible to
+# adapted for use in rho, this script tries as far as possible to
 # reverse the systematic changes.  It is used when upgrading to a new
 # version of R to distinguish substantive from routine changes.
 
@@ -61,16 +61,16 @@ while (<>) {
   # Other changes:
   s/cDUPLICATE_ATTRIB/DUPLICATE_ATTRIB/g;
   s/\(char\*\)R_AllocStringBuffer/R_AllocStringBuffer/g;
-  s/CXXR_alloc/R_alloc/g;
-  s/CXXRBUILTINFUNCTION:://g;
-  s/CXXRCONSTRUCT\([^,]+, *((?:[^()]|$brack2)+)\)/$1/g;
-  s/CXXRCONST\s*//g;
-  s/CXXRCCAST\([^,]+, *((?:[^()]|$brack2)+)\)/$1/g;
-  s/CXXRSCAST\([^,]+, *((?:[^()]|$brack2)+)\)/$1/g;
-  s/CXXRFALSE/0/g;
-  s/CXXRNOCAST//g;
-  s/CXXRTRUE/1/g;
-  s/CXXRUNSIGNED\s*//g;
+  s/RHO_alloc/R_alloc/g;
+  s/BuiltInFunction:://g;
+  s/RHOCONSTRUCT\([^,]+, *((?:[^()]|$brack2)+)\)/$1/g;
+  s/RHOCONST\s*//g;
+  s/RHO_C_CAST\([^,]+, *((?:[^()]|$brack2)+)\)/$1/g;
+  s/RHO_S_CAST\([^,]+, *((?:[^()]|$brack2)+)\)/$1/g;
+  s/RHO_FALSE/0/g;
+  s/RHO_NO_CAST//g;
+  s/RHO_TRUE/1/g;
+  s/rhoUNSIGNED\s*//g;
   s/NODESTACKEND\[/R_BCNodeStackTop\[/g;
   s/Rf_//g;
   s/XVECTOR_ELT/VECTOR_ELT/g;
