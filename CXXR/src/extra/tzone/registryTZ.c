@@ -18,7 +18,7 @@
  */
 
 #include <string.h>
-#include <Localization.h>
+#include <localization.h>
 
 /*
   From http://unicode.org/cldr/data/diff/supplemental/windows_tzid.html
@@ -386,7 +386,7 @@ static const char *reg2Olson(const wchar_t *s)
 	}
     }
     
-    Rf_warning(_("unable to identify current timezone '%s':\nplease set environment variable 'TZ'"), s);
+    Rf_warning("unable to identify current timezone '%s':\nplease set environment variable 'TZ'", s);
     return "unknown";
 }
 

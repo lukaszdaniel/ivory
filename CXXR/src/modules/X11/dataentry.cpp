@@ -3,11 +3,11 @@
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 1998--2015  The R Core Team
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
- *  Copyright (C) 2014 and onwards the CXXR Project Authors.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
- *  CXXR is not part of the R project, and bugs and other issues should
+ *  Rho is not part of the R project, and bugs and other issues should
  *  not be reported via r-bugs or other R project channels; instead refer
- *  to the CXXR website.
+ *  to the Rho website.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -46,6 +46,7 @@
 #include <stdlib.h>
 #include <Rinternals.h>
 #include <R_ext/Parse.h>  /* parsing is used in handling escape codes */
+#include <R_ext/Minmax.h>
 
 
 #ifndef _Xconst
@@ -142,7 +143,7 @@ static void find_coords(DEstruct, int, int, int*, int*);
 static int  findcell(DEstruct);
 static char *GetCharP(DEEvent*);
 static KeySym GetKey(DEEvent*);
-static void handlechar(DEstruct, CXXRCONST char *);
+static void handlechar(DEstruct, RHOCONST char *);
 static void highlightrect(DEstruct);
 static Rboolean initwin(DEstruct, const char *);
 static void jumppage(DEstruct, DE_DIRECTION);
@@ -164,7 +165,7 @@ static void copyH(DEstruct, int, int, int);
 static void copyarea(DEstruct, int, int, int, int);
 static void doConfigure(DEstruct, DEEvent *ioevent);
 static void drawrectangle(DEstruct, int, int, int, int, int, int);
-static void drawtext(DEstruct, int, int, CXXRCONST char*, int);
+static void drawtext(DEstruct, int, int, RHOCONST char*, int);
 static void RefreshKeyboardMapping(DEEvent *ioevent);
 static void Rsync(DEstruct);
 static int textwidth(DEstruct, const char*, int);
@@ -230,12 +231,6 @@ static XIMStyle status_styles[] = {
 };
 static XIC ioic = NULL;
 
-#ifndef max
-#define max(a, b) (((a)>(b))?(a):(b))
-#endif
-#ifndef min
-#define min(a, b) (((a)<(b))?(a):(b))
-#endif
 #define BOXW(x) (min(((x<100 && DE->nboxchars==0)?DE->boxw[x]:DE->box_w), DE->fullwindowWidth-DE->boxw[0]-2*DE->bwidth-2))
 
 /*
@@ -275,7 +270,7 @@ static XIC ioic = NULL;
 
  */
 
-static CXXRCONST char *menu_label[] =
+static RHOCONST char *menu_label[] =
 {
     " Real",
     " Character",
@@ -309,7 +304,7 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXPTYPE type;
     int i, j, cnt, len, nprotect;
     char clab[25];
-    CXXRCONST char *title = "R Data Editor";
+    RHOCONST char *title = _("R Data Editor");
     destruct DE1;
     DEstruct DE = &DE1;
 
@@ -319,7 +314,7 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
     tnames = getAttrib(DE->work, R_NamesSymbol);
 
     if (TYPEOF(DE->work) != VECSXP || TYPEOF(colmodes) != VECSXP)
-	errorcall(call, "invalid argument");
+	errorcall(call, _("invalid argument"));
 
     /* initialize the constants */
 
@@ -338,7 +333,7 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
     nprotect++;
     DE->bwidth = 5;
     DE->hht = 30;
-    DE->isEditor = CXXRCONSTRUCT(Rboolean, TRUE);
+    DE->isEditor = RHOCONSTRUCT(Rboolean, TRUE);
 
     /* setup work, names, lens  */
     DE->xmaxused = Rf_length(DE->work); DE->ymaxused = 0;
@@ -367,7 +362,7 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if (type == NILSXP) type = REALSXP;
 	    SET_VECTOR_ELT(DE->work, i, ssNewVector(type, 100));
 	} else if (!isVector(VECTOR_ELT(DE->work, i)))
-	    errorcall(call, "invalid type for value");
+	    errorcall(call, _("invalid type for value"));
 	else {
 	    if (TYPEOF(VECTOR_ELT(DE->work, i)) != type)
 		SET_VECTOR_ELT(DE->work, i,
@@ -378,7 +373,7 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* start up the window, more initializing in here */
     if (initwin(DE, title))
-	errorcall(call, "unable to start data editor");
+	errorcall(call, _("unable to start data editor"));
 
     /* use try-catch to close the window if there is an error */
     try {
@@ -439,7 +434,7 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    else
 			SET_STRING_ELT(tvec2, j, NA_STRING);
 		} else
-		    error("dataentry: internal memory problem");
+		    error(_("dataentry: internal memory problem"));
 	    }
 	    SET_VECTOR_ELT(work2, i, tvec2);
 	}
@@ -464,10 +459,10 @@ SEXP in_R_X11_dataviewer(SEXP call, SEXP op, SEXP args, SEXP rho)
     DE->names = getAttrib(DE->work, R_NamesSymbol);
 
     if (TYPEOF(DE->work) != VECSXP)
-	errorcall(call, "invalid argument");
+	errorcall(call, _("invalid argument"));
     stitle = CADR(args);
     if (!isString(stitle) || LENGTH(stitle) != 1)
-	errorcall(call, "invalid argument");
+	errorcall(call, _("invalid argument"));
 
     /* initialize the constants */
 
@@ -484,7 +479,7 @@ SEXP in_R_X11_dataviewer(SEXP call, SEXP op, SEXP args, SEXP rho)
     DE->rowmin = 1;
     DE->bwidth = 5;
     DE->hht = 10;
-    DE->isEditor = CXXRCONSTRUCT(Rboolean, FALSE);
+    DE->isEditor = RHOCONSTRUCT(Rboolean, FALSE);
 
     /* setup work, names, lens  */
     DE->xmaxused = Rf_length(DE->work); DE->ymaxused = 0;
@@ -497,13 +492,13 @@ SEXP in_R_X11_dataviewer(SEXP call, SEXP op, SEXP args, SEXP rho)
 	DE->ymaxused = max(len, DE->ymaxused);
 	type = TYPEOF(VECTOR_ELT(DE->work, i));
 	if (type != STRSXP && type != REALSXP)
-	    errorcall(call, "invalid argument");
+	    errorcall(call, _("invalid argument"));
     }
 
 
     /* start up the window, more initializing in here */
     if (initwin(DE, CHAR(STRING_ELT(stitle, 0))))
-	errorcall(call, "unable to start data viewer");
+	errorcall(call, _("unable to start data viewer"));
 
     /* use try-catch to close the window if there is an error */
     try {
@@ -730,7 +725,7 @@ static void advancerect(DEstruct DE, DE_DIRECTION which)
 	    DE->ccol--;
 	break;
     default:
-	UNIMPLEMENTED("advancerect");
+	UNIMPLEMENTED("advancerect()");
     }
 
     highlightrect(DE);
@@ -783,7 +778,7 @@ static const char *get_col_name(DEstruct DE, int col)
     }
     nwrote = snprintf(clab, 25, "var%d", col);
     if (nwrote >= 25)
-	error("get_col_name: column number too big to stringify");
+	error(_("get_col_name: column number too big to stringify"));
     return (const char *)clab;
 }
 
@@ -910,7 +905,7 @@ static void printelt(DEstruct DE, SEXP invec, int vrow, int ssrow, int sscol)
 	}
     }
     else
-	error("dataentry: internal memory error");
+	error(_("dataentry: internal memory error"));
 }
 
 
@@ -1005,7 +1000,7 @@ static Rboolean getccol(DEstruct DE)
     int i, len, newlen, wcol, wrow;
     SEXPTYPE type;
     char clab[25];
-    Rboolean newcol = CXXRCONSTRUCT(Rboolean, FALSE);
+    Rboolean newcol = RHOCONSTRUCT(Rboolean, FALSE);
 
     wcol = DE->ccol + DE->colmin - 1;
     wrow = DE->crow + DE->rowmin - 1;
@@ -1021,13 +1016,13 @@ static Rboolean getccol(DEstruct DE)
 	DE->xmaxused = wcol;
     }
     if (isNull(VECTOR_ELT(DE->work, wcol - 1))) {
-	newcol = CXXRCONSTRUCT(Rboolean, TRUE);
+	newcol = RHOCONSTRUCT(Rboolean, TRUE);
 	SET_VECTOR_ELT(DE->work, wcol - 1,
 		       ssNewVector(REALSXP, max(100, wrow)));
 	INTEGER(DE->lens)[wcol - 1] = 0;
     }
     if (!isVector(tmp = VECTOR_ELT(DE->work, wcol - 1)))
-	error("internal type error in dataentry");
+	error(_("internal type error in dataentry"));
     len = INTEGER(DE->lens)[wcol - 1];
     type = TYPEOF(tmp);
     if (len < wrow) {
@@ -1040,7 +1035,7 @@ static Rboolean getccol(DEstruct DE)
 	    else if (type == STRSXP)
 		SET_STRING_ELT(tmp2, i, STRING_ELT(tmp, i));
 	    else
-		error("internal type error in dataentry");
+		error(_("internal type error in dataentry"));
 	SET_VECTOR_ELT(DE->work, wcol - 1, tmp2);
     }
     return newcol;
@@ -1133,7 +1128,7 @@ static void closerect(DEstruct DE)
 		/* do it this way to ensure NA, Inf, ...  can get set */
 		char *endp;
 		double newd = R_strtod(buf, &endp);
-		Rboolean warn = CXXRCONSTRUCT(Rboolean, !isBlankString(endp));
+		Rboolean warn = RHOCONSTRUCT(Rboolean, !isBlankString(endp));
 		if (TYPEOF(cvec) == STRSXP) {
 		    SEXP newval;
 		    PROTECT( newval = mkString(buf) );
@@ -1141,7 +1136,7 @@ static void closerect(DEstruct DE)
 		    if (TYPEOF(newval) == STRSXP && Rf_length(newval) == 1)
 			SET_STRING_ELT(cvec, wrow - 1, STRING_ELT(newval, 0));
 		    else
-			warning("dataentry: parse error on string");
+			warning(_("dataentry: parse error on string"));
 		    UNPROTECT(2);
 		} else
 		    REAL(cvec)[wrow - 1] = newd;
@@ -1163,7 +1158,7 @@ static void closerect(DEstruct DE)
 	    if(wrow > wrow0) drawcol(DE, wcol); /* to fill in NAs */
 	}
     }
-    CellModified = CXXRCONSTRUCT(Rboolean, FALSE);
+    CellModified = RHOCONSTRUCT(Rboolean, FALSE);
 
     downlightrect(DE);
 
@@ -1257,7 +1252,7 @@ static void clearrect(DEstruct DE)
 
 /* <FIXME> This is not correct for stateful MBCSs, but that's hard to
    do as we get a char at a time */
-static void handlechar(DEstruct DE, CXXRCONST char *text)
+static void handlechar(DEstruct DE, RHOCONST char *text)
 {
     int c = text[0], j;
     wchar_t wcs[BOOSTED_BUF_SIZE];
@@ -1265,14 +1260,14 @@ static void handlechar(DEstruct DE, CXXRCONST char *text)
     memset(wcs,0,sizeof(wcs));
 
     if ( c == '\033' ) { /* ESC */
-	CellModified = CXXRCONSTRUCT(Rboolean, FALSE);
+	CellModified = RHOCONSTRUCT(Rboolean, FALSE);
 	clength = 0;
 	bufp = buf;
 	drawelt(DE, DE->crow, DE->ccol);
 	cell_cursor_init(DE);
 	return;
     } else
-	CellModified = CXXRCONSTRUCT(Rboolean, TRUE);
+	CellModified = RHOCONSTRUCT(Rboolean, TRUE);
 
     if (clength == 0) {
 
@@ -1302,7 +1297,7 @@ static void handlechar(DEstruct DE, CXXRCONST char *text)
     }
 
     if (currentexp == 1) {	/* we are parsing a number */
-	CXXRCONST char *mbs = text;
+	RHOCONST char *mbs = text;
 	int i, cnt = (int)mbsrtowcs(wcs, (const char **)&mbs, (int) strlen(text)+1, NULL);
 
 	for(i = 0; i < cnt; i++) {
@@ -1332,7 +1327,7 @@ static void handlechar(DEstruct DE, CXXRCONST char *text)
 	}
     }
     if (currentexp == 3) {
-	CXXRCONST char *mbs = text;
+	RHOCONST char *mbs = text;
 	int i, cnt = (int) mbsrtowcs(wcs, (const char **)&mbs, (int) strlen(text)+1, NULL);
 	for(i = 0; i < cnt; i++) {
 	    if (iswspace(wcs[i])) goto donehc;
@@ -1343,7 +1338,7 @@ static void handlechar(DEstruct DE, CXXRCONST char *text)
     }
 
     if (clength+strlen(text) > BOOSTED_BUF_SIZE - MB_CUR_MAX - 1) {
-	warning("dataentry: expression too long");
+	warning(_("dataentry: expression too long"));
 	goto donehc;
     }
 
@@ -1625,7 +1620,7 @@ static int doMouseDown(DEstruct DE, DEEvent * event)
 static void doSpreadKey(DEstruct DE, int key, DEEvent * event)
 {
     KeySym iokey;
-    CXXRCONST char *text = "";
+    RHOCONST char *text = "";
 
     iokey = GetKey(event);
     if(DE->isEditor) text = GetCharP(event);
@@ -1682,7 +1677,7 @@ static void doSpreadKey(DEstruct DE, int key, DEEvent * event)
 	    clength -= last_w;
 	    bufp -= last_w;
 	    *bufp = '\0';
-	    CellModified = CXXRCONSTRUCT(Rboolean, TRUE);
+	    CellModified = RHOCONSTRUCT(Rboolean, TRUE);
 	    printstring(DE, buf, clength, DE->crow, DE->ccol, 1);
 	} else bell();
     }
@@ -1753,7 +1748,7 @@ static char *GetCharP(DEEvent * event)
 			    &iokey, &status);
 	/* FIXME check the return code */
 	if(status == XBufferOverflow)
-	    warning("dataentry: expression too long");
+	    warning(_("dataentry: expression too long"));
     } else
 	XLookupString((XKeyEvent *)event,
 		      text, sizeof(text) - clength,
@@ -1876,7 +1871,7 @@ static int R_X11Err(Display *dsp, XErrorEvent *event)
 
 static int NORET R_X11IOErr(Display *dsp)
 {
-    error("X11 fatal IO error: please save work and shut down R");
+    error(_("X11 fatal IO error: please save work and shut down R"));
 }
 
 /* set up the window, print the grid and column/row labels */
@@ -1887,7 +1882,7 @@ static Rboolean initwin(DEstruct DE, const char *title) /* TRUE = Error */
     int ioscreen;
     unsigned long iowhite, ioblack;
     char digits[] = "123456789.0";
-    CXXRCONST char             *font_name="9x15";
+    RHOCONST char             *font_name="9x15";
     Window root;
     XEvent ioevent;
     XSetWindowAttributes winattr;
@@ -1901,13 +1896,13 @@ static Rboolean initwin(DEstruct DE, const char *title) /* TRUE = Error */
     strcpy(copycontents, "");
 
     if (!XSupportsLocale ())
-	warning("locale not supported by Xlib: some X ops will operate in C locale");
-    if (!XSetLocaleModifiers ("")) warning("X cannot set locale modifiers");
+	warning(_("locale not supported by Xlib: some X ops will operate in C locale"));
+    if (!XSetLocaleModifiers ("")) warning(_("X cannot set locale modifiers"));
 
     if(!iodisplay) {
 	if ((iodisplay = XOpenDisplay(NULL)) == NULL) {
-	    warning("unable to open display");
-	    return CXXRCONSTRUCT(Rboolean, TRUE);
+	    warning(_("unable to open display"));
+	    return RHOCONSTRUCT(Rboolean, TRUE);
 	}
 	deContext = XUniqueContext();
 	XSetErrorHandler(R_X11Err);
@@ -1937,14 +1932,14 @@ static Rboolean initwin(DEstruct DE, const char *title) /* TRUE = Error */
 	    if (missing_charset_count) XFreeStringList(missing_charset_list);
 	}
 	if (font_set == NULL) {
-	    warning("unable to create fontset %s", opt_fontset_name);
-	    return CXXRCONSTRUCT(Rboolean, TRUE); /* ERROR */
+	    warning(_("unable to create fontset %s"), opt_fontset_name);
+	    return RHOCONSTRUCT(Rboolean, TRUE); /* ERROR */
 	}
     } else {
 	DE->font_info = XLoadQueryFont(iodisplay, font_name);
 	if (DE->font_info == NULL) {
-	    warning("unable to load font %s", font_name);
-	    return CXXRCONSTRUCT(Rboolean, TRUE); /* ERROR */
+	    warning(_("unable to load font %s"), font_name);
+	    return RHOCONSTRUCT(Rboolean, TRUE); /* ERROR */
 	}
     }
 
@@ -2068,8 +2063,8 @@ static Rboolean initwin(DEstruct DE, const char *title) /* TRUE = Error */
 	     DE->bwidth,
 	     ioblack,
 	     iowhite)) == 0) {
-	warning("unable to open window for data editor");
-	return CXXRCONSTRUCT(Rboolean, TRUE);
+	warning(_("unable to open window for data editor"));
+	return RHOCONSTRUCT(Rboolean, TRUE);
     }
 
     /*
@@ -2102,8 +2097,8 @@ static Rboolean initwin(DEstruct DE, const char *title) /* TRUE = Error */
 	if(!ioim) {
 	    XDestroyWindow(iodisplay, DE->iowindow);
 	    XCloseDisplay(iodisplay);
-	    warning("unable to open X Input Method");
-	    return CXXRCONSTRUCT(Rboolean, TRUE);
+	    warning(_("unable to open X Input Method"));
+	    return RHOCONSTRUCT(Rboolean, TRUE);
 	}
 
 	/* search supported input style */
@@ -2137,8 +2132,8 @@ static Rboolean initwin(DEstruct DE, const char *title) /* TRUE = Error */
 	    XCloseIM(ioim);
 	    XDestroyWindow(iodisplay, DE->iowindow);
 	    XCloseDisplay(iodisplay);
-	    warning("unable to open X Input Context");
-	    return CXXRCONSTRUCT(Rboolean, TRUE);
+	    warning(_("unable to open X Input Context"));
+	    return RHOCONSTRUCT(Rboolean, TRUE);
 	}
 
 	/* get XIM processes event. */
@@ -2173,7 +2168,7 @@ static Rboolean initwin(DEstruct DE, const char *title) /* TRUE = Error */
        dimensions as above */
 
     /* font size consideration */
-    for(i = 0; i < CXXRCONSTRUCT(int, (sizeof(menu_label)/sizeof(char *))); i++)
+    for(i = 0; i < RHOCONSTRUCT(int, (sizeof(menu_label)/sizeof(char *))); i++)
 	twidth = (twidth<textwidth(DE, menu_label[i],(int) strlen(menu_label[i]))) ?
 	    textwidth(DE, menu_label[i],(int) strlen(menu_label[i])) : twidth;
 
@@ -2214,9 +2209,9 @@ static Rboolean initwin(DEstruct DE, const char *title) /* TRUE = Error */
     /* set the active rectangle to be the upper left one */
     DE->crow = 1;
     DE->ccol = 1;
-    CellModified = CXXRCONSTRUCT(Rboolean, FALSE);
+    CellModified = RHOCONSTRUCT(Rboolean, FALSE);
     XSaveContext(iodisplay, DE->iowindow, deContext, (caddr_t) DE);
-    return CXXRCONSTRUCT(Rboolean, FALSE);/* success */
+    return RHOCONSTRUCT(Rboolean, FALSE);/* success */
 }
 
 /* MAC/X11 BASICS */
@@ -2276,7 +2271,7 @@ static void drawrectangle(DEstruct DE,
 		   width, height);
 }
 
-static void drawtext(DEstruct DE, int xpos, int ypos, CXXRCONST char *text, int len)
+static void drawtext(DEstruct DE, int xpos, int ypos, RHOCONST char *text, int len)
 {
     if(mbcslocale)
 #ifdef HAVE_XUTF8DRAWIMAGESTRING
@@ -2542,7 +2537,7 @@ static void pastecell(DEstruct DE, int row, int col)
 	strcpy(buf, copycontents);
 	clength = (int) strlen(copycontents);
 	bufp = buf + clength;
-	CellModified = CXXRCONSTRUCT(Rboolean, TRUE);
+	CellModified = RHOCONSTRUCT(Rboolean, TRUE);
     }
     closerect(DE);
     highlightrect(DE);

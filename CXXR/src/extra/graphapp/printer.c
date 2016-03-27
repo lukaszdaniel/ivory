@@ -24,7 +24,7 @@
  *                          printers can be deleted by 'del(printer)'
  */
 
-#include <Localization.h>
+#include <localization.h>
 #include "internal.h"
 #include "rui.h"
 

@@ -1,11 +1,11 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
- *  Copyright (C) 2014 and onwards the CXXR Project Authors.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
- *  CXXR is not part of the R project, and bugs and other issues should
+ *  Rho is not part of the R project, and bugs and other issues should
  *  not be reported via r-bugs or other R project channels; instead refer
- *  to the CXXR website.
+ *  to the Rho website.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,10 +22,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#include "CXXR/StackChecker.hpp"
 #include <localization.h>
+#include "rho/StackChecker.hpp"
 
-namespace CXXR {
+namespace rho {
 
 namespace {
     const unsigned int R_MIN_EXPRESSIONS_OPT = 25;
@@ -61,8 +61,7 @@ void StackChecker::setDepthLimit(unsigned int depth)
 void StackChecker::handleStackDepthExceeded()
 {
     DisableStackCheckingScope no_stack_checking;
-    Rf_errorcall(nullptr, _("evaluation nested too deeply: "
-		      "infinite recursion / options(expressions=)?"));
+    Rf_errorcall(nullptr, _("evaluation nested too deeply: infinite recursion / options(expressions=)?"));
 }	
 
 void StackChecker::handleStackSpaceExceeded()
@@ -90,4 +89,4 @@ DisableStackCheckingScope::~DisableStackCheckingScope()
     R_CStackLimit = m_previous_stack_limit;
 }
 
-}  // namespace CXXR
+}  // namespace rho

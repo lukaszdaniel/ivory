@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
- *  Copyright (C) 2014 and onwards the CXXR Project Authors.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
   *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
  * Implementation of class CellPool
  */
 
-#include "CXXR/CellPool.hpp"
+#include "rho/CellPool.hpp"
 
 #ifndef __APPLE__
 #include <features.h>
@@ -34,7 +34,7 @@
 #include <iostream>
 
 using namespace std;
-using namespace CXXR;
+using namespace rho;
 
 CellPool::~CellPool()
 {
@@ -77,8 +77,7 @@ void CellPool::checkAllocatedCell(const void* p) const
     for (Cell* c = m_free_cells; !found && c; c = c->m_next)
 	found = (c == cp);
     if (found) {
-	cerr << "CellPool::checkCell : designated block"
-	    " is (already) free.\n";
+	cerr << "CellPool::checkCell : designated block is (already) free.\n";
 	abort();
     }
 }
@@ -95,15 +94,13 @@ void CellPool::checkCell(const void* p) const
 	    && offset < static_cast<long>(m_admin->m_superblocksize)) {
 	    found = true;
 	    if (std::size_t(offset)%m_admin->m_cellsize != 0) {
-		cerr << "CellPool::checkCell : designated block"
-		        " is misaligned\n";
+		cerr << "CellPool::checkCell: designated block is misaligned\n";
 		abort();
 	    }
 	}
     }
     if (!found) {
-	cerr << "CellPool::checkCell : "
-	    "designated block doesn't belong to this CellPool\n";
+	cerr << "CellPool::checkCell: designated block doesn't belong to this CellPool\n";
 	abort();
     }
 }

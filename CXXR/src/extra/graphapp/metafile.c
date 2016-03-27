@@ -29,7 +29,7 @@
 */
 
 #define ENABLE_NLS 1
-#include <Localization.h>
+#include <localization.h>
 #include "internal.h"
 #include "rui.h"
 

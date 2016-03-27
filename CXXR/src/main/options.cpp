@@ -3,11 +3,11 @@
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 1998-2015   The R Core Team.
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
- *  Copyright (C) 2014 and onwards the CXXR Project Authors.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
- *  CXXR is not part of the R project, and bugs and other issues should
+ *  Rho is not part of the R project, and bugs and other issues should
  *  not be reported via r-bugs or other R project channels; instead refer
- *  to the CXXR website.
+ *  to the Rho website.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,11 +34,11 @@
 #include <Print.h>
 #include <Rinternals.h>
 
-#include "CXXR/ArgMatcher.hpp"
-#include "CXXR/Evaluator.h"
-#include "CXXR/StackChecker.hpp"
+#include "rho/ArgMatcher.hpp"
+#include "rho/Evaluator.hpp"
+#include "rho/StackChecker.hpp"
 
-using namespace CXXR;
+using namespace rho;
 
 /* Interface to the (polymorphous!)  options(...)  command.
  *
@@ -174,7 +174,7 @@ Rboolean Rf_GetOptionDeviceAsk(void)
 	warning(_("invalid value for \"device.ask.default\", using FALSE"));
 	return FALSE;
     }
-    return CXXRCONSTRUCT(Rboolean, ask != 0);
+    return RHOCONSTRUCT(Rboolean, ask != 0);
 }
 
 
@@ -294,7 +294,7 @@ void attribute_hidden InitOptions(void)
     v = CDR(v);
 
     p = getenv("R_KEEP_PKG_SOURCE");
-    R_KeepSource = (p && (strcmp(p, "yes") == 0)) ? CXXRTRUE : CXXRFALSE;
+    R_KeepSource = (p && (strcmp(p, "yes") == 0)) ? RHO_TRUE : RHO_FALSE;
 
     SET_TAG(v, install("keep.source")); /* overridden in common.R */
     SETCAR(v, ScalarLogical(R_KeepSource));
@@ -321,7 +321,7 @@ void attribute_hidden InitOptions(void)
     v = CDR(v);
 
     p = getenv("R_C_BOUNDS_CHECK");
-    R_CBoundsCheck = CXXRCONSTRUCT(Rboolean, (p && (strcmp(p, "yes") == 0)) ? 1 : 0);
+    R_CBoundsCheck = RHOCONSTRUCT(Rboolean, (p && (strcmp(p, "yes") == 0)) ? 1 : 0);
 
     SET_TAG(v, install("CBoundsCheck"));
     SETCAR(v, ScalarLogical(R_CBoundsCheck));
@@ -473,7 +473,7 @@ SEXP attribute_hidden do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if (TYPEOF(argi) != LGLSXP || LENGTH(argi) != 1)
 		    error(_("invalid value for '%s'"), CHAR(namei));
 		int k = asLogical(argi);
-		R_KeepSource = CXXRCONSTRUCT(Rboolean, k);
+		R_KeepSource = RHOCONSTRUCT(Rboolean, k);
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarLogical(k)));
 	    }
 	    else if (streql(CHAR(namei), "editor") && isString(argi)) {
@@ -560,7 +560,7 @@ SEXP attribute_hidden do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		/* Should be quicker than checking options(echo)
 		   every time R prompts for input:
 		   */
-		R_Slave = CXXRCONSTRUCT(Rboolean, !k);
+		R_Slave = RHOCONSTRUCT(Rboolean, !k);
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarLogical(k)));
 	    }
 	    else if (streql(CHAR(namei), "OutDec")) {
@@ -595,7 +595,7 @@ SEXP attribute_hidden do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if (TYPEOF(argi) != LGLSXP || LENGTH(argi) != 1)
 		    error(_("invalid value for '%s'"), CHAR(namei));
 		int k = asLogical(argi);
-		R_warn_partial_match_dollar = CXXRCONSTRUCT(Rboolean, k);
+		R_warn_partial_match_dollar = RHOCONSTRUCT(Rboolean, k);
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarLogical(k)));
 	    }
 	    else if (streql(CHAR(namei), "warnPartialMatchArgs")) {
@@ -609,21 +609,21 @@ SEXP attribute_hidden do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if (TYPEOF(argi) != LGLSXP || LENGTH(argi) != 1)
 		    error(_("invalid value for '%s'"), CHAR(namei));
 		int k = asLogical(argi);
-		R_warn_partial_match_attr = CXXRCONSTRUCT(Rboolean, k);
+		R_warn_partial_match_attr = RHOCONSTRUCT(Rboolean, k);
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarLogical(k)));
 	    }
 	    else if (streql(CHAR(namei), "showWarnCalls")) {
 		if (TYPEOF(argi) != LGLSXP || LENGTH(argi) != 1)
 		    error(_("invalid value for '%s'"), CHAR(namei));
 		int k = asLogical(argi);
-		R_ShowWarnCalls = CXXRCONSTRUCT(Rboolean, k);
+		R_ShowWarnCalls = RHOCONSTRUCT(Rboolean, k);
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarLogical(k)));
 	    }
 	    else if (streql(CHAR(namei), "showErrorCalls")) {
 		if (TYPEOF(argi) != LGLSXP || LENGTH(argi) != 1)
 		    error(_("invalid value for '%s'"), CHAR(namei));
 		int k = asLogical(argi);
-		R_ShowErrorCalls = CXXRCONSTRUCT(Rboolean, k);
+		R_ShowErrorCalls = RHOCONSTRUCT(Rboolean, k);
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarLogical(k)));
 	    }
 	    else if (streql(CHAR(namei), "showNCalls")) {
@@ -642,14 +642,14 @@ SEXP attribute_hidden do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		int k = asLogical(argi);
 		if (k == NA_LOGICAL)
 		    error(_("invalid value for '%s'"), CHAR(namei));
-		R_DisableNLinBrowser = CXXRCONSTRUCT(Rboolean, k);
+		R_DisableNLinBrowser = RHOCONSTRUCT(Rboolean, k);
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarLogical(k)));
 	    }
 	    else if (streql(CHAR(namei), "CBoundsCheck")) {
 		if (TYPEOF(argi) != LGLSXP || LENGTH(argi) != 1)
 		    error(_("invalid value for '%s'"), CHAR(namei));
 		int k = asLogical(argi);
-		R_CBoundsCheck = CXXRCONSTRUCT(Rboolean, k);
+		R_CBoundsCheck = RHOCONSTRUCT(Rboolean, k);
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarLogical(k)));
 	    }
 	    else {

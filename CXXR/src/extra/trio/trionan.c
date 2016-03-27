@@ -34,7 +34,7 @@
 /*************************************************************************
  * Include files
  */
-#include <Localization.h>
+#include <localization.h>
 #include "triodef.h"
 #include "trionan.h"
 

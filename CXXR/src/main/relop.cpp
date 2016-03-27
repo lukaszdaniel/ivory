@@ -3,11 +3,11 @@
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 1997--2014  The R Core Team
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
- *  Copyright (C) 2014 and onwards the CXXR Project Authors.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
- *  CXXR is not part of the R project, and bugs and other issues should
+ *  Rho is not part of the R project, and bugs and other issues should
  *  not be reported via r-bugs or other R project channels; instead refer
- *  to the CXXR website.
+ *  to the Rho website.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -38,17 +38,16 @@
 
 #include "basedecl.h"
 
-#include "CXXR/BinaryFunction.hpp"
-#include "CXXR/GCStackRoot.hpp"
-#include "CXXR/ComplexVector.h"
-#include "CXXR/IntVector.h"
-#include "CXXR/LogicalVector.h"
-#include "CXXR/RawVector.h"
-#include "CXXR/RealVector.h"
+#include "rho/BinaryFunction.hpp"
+#include "rho/GCStackRoot.hpp"
+#include "rho/ComplexVector.hpp"
+#include "rho/IntVector.hpp"
+#include "rho/LogicalVector.hpp"
+#include "rho/RawVector.hpp"
+#include "rho/RealVector.hpp"
 
-using namespace CXXR;
+using namespace rho;
 using namespace VectorOps;
-using namespace std;
 
 /* interval at which to check interrupts, a guess */
 #define NINTERRUPT 10000000
@@ -138,13 +137,13 @@ static SEXP do_relop_dflt(/*const*/ Expression* call,
     if ((iS = isSymbol(x)) || TYPEOF(x) == LANGSXP) {
 	GCStackRoot<> tmp(allocVector(STRSXP, 1));
 	SET_STRING_ELT(tmp, 0, (iS) ? PRINTNAME(x) :
-		       STRING_ELT(deparse1(x, CXXRFALSE, DEFAULTDEPARSE), 0));
+		       STRING_ELT(deparse1(x, RHO_FALSE, DEFAULTDEPARSE), 0));
 	x = tmp;
     }
     if ((iS = isSymbol(y)) || TYPEOF(y) == LANGSXP) {
 	GCStackRoot<> tmp(allocVector(STRSXP, 1));
 	SET_STRING_ELT(tmp, 0, (iS) ? PRINTNAME(y) :
-		       STRING_ELT(deparse1(y, CXXRFALSE, DEFAULTDEPARSE), 0));
+		       STRING_ELT(deparse1(y, RHO_FALSE, DEFAULTDEPARSE), 0));
 	y = tmp;
     }
 
@@ -168,7 +167,7 @@ static SEXP do_relop_dflt(/*const*/ Expression* call,
     RELOP_TYPE opcode = RELOP_TYPE(op->variant());
     if (isString(x) || isString(y)) {
 	// This case has not yet been brought into line with the
-	// general CXXR pattern.
+	// general rho pattern.
 	VectorBase* xv = static_cast<VectorBase*>(coerceVector(x, STRSXP));
 	VectorBase* yv = static_cast<VectorBase*>(coerceVector(y, STRSXP));
 	checkOperandsConformable(xv, yv);
@@ -383,7 +382,7 @@ static SEXP bitwiseNot(SEXP a)
     if(isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;} \
     if(isReal(b)) {b = PROTECT(coerceVector(b, INTSXP)); np++;} \
     if (TYPEOF(a) != TYPEOF(b)) error(_("'A' and 'B' must have the same type"));  \
-    R_xlen_t i, m = XLENGTH(a), n = XLENGTH(b), mn = (m && n) ? max(m, n) : 0;  \
+    R_xlen_t i, m = XLENGTH(a), n = XLENGTH(b), mn = (m && n) ? std::max(m, n) : 0;  \
     SEXP ans = allocVector(TYPEOF(a), mn); \
     switch(TYPEOF(a)) { \
     case INTSXP: \
@@ -419,7 +418,7 @@ static SEXP bitwiseShiftL(SEXP a, SEXP b)
     if(isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;}
     if(!isInteger(b)) {b = PROTECT(coerceVector(b, INTSXP)); np++;}
     R_xlen_t i, m = XLENGTH(a), n = XLENGTH(b), 
-	mn = (m && n) ? max(m, n) : 0;
+	mn = (m && n) ? std::max(m, n) : 0;
     SEXP ans = allocVector(TYPEOF(a), mn);
     switch(TYPEOF(a)) {
     case INTSXP:
@@ -442,7 +441,7 @@ static SEXP bitwiseShiftR(SEXP a, SEXP b)
     if(isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;}
     if(!isInteger(b)) {b = PROTECT(coerceVector(b, INTSXP)); np++;}
     R_xlen_t i, m = XLENGTH(a), n = XLENGTH(b), 
-	mn = (m && n) ? max(m, n) : 0;
+	mn = (m && n) ? std::max(m, n) : 0;
     SEXP ans = allocVector(TYPEOF(a), mn);
     switch(TYPEOF(a)) {
     case INTSXP:
@@ -459,7 +458,7 @@ static SEXP bitwiseShiftR(SEXP a, SEXP b)
     return ans;
 }
 
-SEXP attribute_hidden do_bitwise(/*const*/ CXXR::Expression* call, const CXXR::BuiltInFunction* op, CXXR::Environment* env, CXXR::RObject* const* args, int num_args, const CXXR::PairList* tags)
+SEXP attribute_hidden do_bitwise(/*const*/ rho::Expression* call, const rho::BuiltInFunction* op, rho::Environment* env, rho::RObject* const* args, int num_args, const rho::PairList* tags)
 {
     SEXP ans = R_NilValue; /* -Wall */
     switch(op->variant()) {

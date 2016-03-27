@@ -4,11 +4,11 @@
  *  Copyright (C) 1997--2014  The R Core Team
  *  Copyright (C) 2002--2009  The R Foundation
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
- *  Copyright (C) 2014 and onwards the CXXR Project Authors.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
- *  CXXR is not part of the R project, and bugs and other issues should
+ *  Rho is not part of the R project, and bugs and other issues should
  *  not be reported via r-bugs or other R project channels; instead refer
- *  to the CXXR website.
+ *  to the Rho website.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -34,10 +34,9 @@
 #include <float.h>  /* for DBL_MAX */
 #include <Graphics.h>
 #include <Print.h>
-#include "CXXR/GCStackRoot.hpp"
+#include "rho/GCStackRoot.hpp"
 
-using namespace CXXR;
-using namespace std;
+using namespace rho;
 
 #include <Rmath.h> // for Rexp10
 
@@ -59,7 +58,7 @@ SEXP CreateAtVector(double *axp, double *usr, int nint, Rboolean logflag)
     int i, n, ne;
     if (!logflag || axp[2] < 0) { /* --- linear axis --- Only use axp[] arg. */
 	n = int(fabs(axp[2]) + 0.25);/* >= 0 */
-	dn = max(1, n);
+	dn = std::max(1, n);
 	rng = axp[1] - axp[0];
 	small = fabs(rng)/(100.*dn);
 	at = allocVector(REALSXP, n + 1);
@@ -79,7 +78,7 @@ SEXP CreateAtVector(double *axp, double *usr, int nint, Rboolean logflag)
 	umin = usr[0];
 	umax = usr[1];
 	if (umin > umax) {
-	    reversed = CXXRCONSTRUCT(Rboolean, (axp[0] > axp[1]));
+	    reversed = RHOCONSTRUCT(Rboolean, (axp[0] > axp[1]));
 	    if (reversed) {
 		/* have *reversed* log axis -- whereas
 		 * the switch(n) { .. } below assumes *increasing* values
@@ -90,7 +89,8 @@ SEXP CreateAtVector(double *axp, double *usr, int nint, Rboolean logflag)
 	    }
 	    else {
 		/* can the following still happen... ? */
-		warning(_("CreateAtVector \"log\"(from axis()): usr[0] = %g > %g = usr[1] !"), umin, umax);
+		warning("CreateAtVector \"log\"(from axis()): "
+			"usr[0] = %g > %g = usr[1] !", umin, umax);
 	    }
 	}
 	/* allow a fuzz since we will do things like 0.2*dn >= umin */

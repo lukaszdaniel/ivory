@@ -3,11 +3,11 @@
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 1997-2015   The R Core Team
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
- *  Copyright (C) 2014 and onwards the CXXR Project Authors.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
- *  CXXR is not part of the R project, and bugs and other issues should
+ *  Rho is not part of the R project, and bugs and other issues should
  *  not be reported via r-bugs or other R project channels; instead refer
- *  to the CXXR website.
+ *  to the Rho website.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -33,12 +33,11 @@
 #include <Internal.h>
 #include "duplicate.h"
 
-#include "CXXR/Closure.h"
-#include "CXXR/GCStackRoot.hpp"
+#include "rho/Closure.hpp"
+#include "rho/GCStackRoot.hpp"
 #include <R_ext/Itermacros.h>
 
-using namespace CXXR;
-using namespace std;
+using namespace rho;
 
 #include <float.h> // for DBL_MAX
 
@@ -490,7 +489,7 @@ SEXP attribute_hidden do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
 
     ans = matchArgExact(R_NaRmSymbol, &args);
-    narm = CXXRCONSTRUCT(Rboolean, asLogical(ans));
+    narm = RHOCONSTRUCT(Rboolean, asLogical(ans));
     updated = 0;
     empty = 1;/*- =1: only zero-length arguments, or NA with na.rm=T */
 
@@ -825,10 +824,10 @@ SEXP attribute_hidden do_range(SEXP call, SEXP op, SEXP args, SEXP env)
     UNPROTECT(3);
     return(ans);
 }
-
+
 // which.min(x) : The index (starting at 1), of the first min(x) in x
 // which.max(x) : The index (starting at 1), of the first max(x) in x
-SEXP attribute_hidden do_first_min(/*const*/ CXXR::Expression* call, const CXXR::BuiltInFunction* op, CXXR::RObject* x_)
+SEXP attribute_hidden do_first_min(/*const*/ rho::Expression* call, const rho::BuiltInFunction* op, rho::RObject* x_)
 {
     SEXP sx = x_, ans;
     R_xlen_t i, n, indx = -1;
@@ -918,7 +917,7 @@ SEXP attribute_hidden do_first_min(/*const*/ CXXR::Expression* call, const CXXR:
 }
 
 /* which(x) : indices of non-NA TRUE values in x */
-SEXP attribute_hidden do_which(/*const*/ CXXR::Expression* call, const CXXR::BuiltInFunction* op, CXXR::RObject* x_)
+SEXP attribute_hidden do_which(/*const*/ rho::Expression* call, const rho::BuiltInFunction* op, rho::RObject* x_)
 {
     SEXP v, v_nms, ans, ans_nms = R_NilValue;
     int i, j = 0, len, *buf;
@@ -956,7 +955,7 @@ SEXP attribute_hidden do_which(/*const*/ CXXR::Expression* call, const CXXR::Bui
 /* op = 0 is pmin, op = 1 is pmax
    NULL and logicals are handled as if they had been coerced to integer.
  */
-SEXP attribute_hidden do_pmin(/*const*/ CXXR::Expression* call, const CXXR::BuiltInFunction* op, CXXR::Environment* rho, CXXR::RObject* const* args, int num_args, const CXXR::PairList* tags)
+SEXP attribute_hidden do_pmin(/*const*/ rho::Expression* call, const rho::BuiltInFunction* op, rho::Environment* rho, rho::RObject* const* args, int num_args, const rho::PairList* tags)
 {
     SEXP a, x, ans;
     int narm;
@@ -995,7 +994,7 @@ SEXP attribute_hidden do_pmin(/*const*/ CXXR::Expression* call, const CXXR::Buil
 	    len = 0;
 	    break;
 	}
-	len = max(len, n);
+	len = std::max(len, n);
     }
 
     if (num_args == 1)

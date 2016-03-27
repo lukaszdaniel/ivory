@@ -37,7 +37,7 @@ use of tm_zone and tm_gmtoff on all platforms.
 #include <config.h>
 #include <string.h>
 #include <limits.h>	/* for CHAR_BIT et al. */
-#include <Localization.h>
+#include <localization.h>
 
 // To get tm_zone, tm_gmtoff defined in glibc
 // (although this file is not usually used there).

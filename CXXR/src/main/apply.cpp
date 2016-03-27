@@ -2,11 +2,11 @@
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 2000-2015  The R Core Team
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
- *  Copyright (C) 2014 and onwards the CXXR Project Authors.
+ *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
- *  CXXR is not part of the R project, and bugs and other issues should
+ *  Rho is not part of the R project, and bugs and other issues should
  *  not be reported via r-bugs or other R project channels; instead refer
- *  to the CXXR website.
+ *  to the Rho website.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@
 #include <localization.h>
 #include <Defn.h>
 #include <Internal.h>
-#include "CXXR/ExpressionVector.h"
+#include "rho/ExpressionVector.hpp"
 
 /* .Internal(lapply(X, FUN)) */
 
@@ -107,7 +107,7 @@ SEXP attribute_hidden do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     n = xlength(XX);
     if (n == NA_INTEGER) error(_("invalid length"));
-    Rboolean realIndx = CXXRCONSTRUCT(Rboolean, n > INT_MAX);
+    Rboolean realIndx = RHOCONSTRUCT(Rboolean, n > INT_MAX);
 
     commonLen = Rf_length(value);
     if (commonLen > 1 && n > INT_MAX)
@@ -120,7 +120,7 @@ SEXP attribute_hidden do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	commonType != VECSXP)
 	error(_("type '%s' is not supported"), type2char(commonType));
     dim_v = getAttrib(value, R_DimSymbol);
-    array_value = CXXRCONSTRUCT(Rboolean, (TYPEOF(dim_v) == INTSXP && LENGTH(dim_v) >= 1));
+    array_value = RHOCONSTRUCT(Rboolean, (TYPEOF(dim_v) == INTSXP && LENGTH(dim_v) >= 1));
     PROTECT(ans = allocVector(commonType, n*commonLen));
     if (useNames) {
 	PROTECT(names = getAttrib(XX, R_NamesSymbol));
@@ -324,7 +324,7 @@ static SEXP do_one(SEXP X, SEXP FUN, SEXP classes, SEXP deflt,
     else return lazy_duplicate(deflt);
 }
 
-SEXP attribute_hidden do_rapply(/*const*/ CXXR::Expression* call, const CXXR::BuiltInFunction* op, CXXR::Environment* rho, CXXR::RObject* const* args, int num_args, const CXXR::PairList* tags)
+SEXP attribute_hidden do_rapply(/*const*/ rho::Expression* call, const rho::BuiltInFunction* op, rho::Environment* rho, rho::RObject* const* args, int num_args, const rho::PairList* tags)
 {
     SEXP X, FUN, classes, deflt, how, ans, names;
     int i, n;
@@ -338,7 +338,7 @@ SEXP attribute_hidden do_rapply(/*const*/ CXXR::Expression* call, const CXXR::Bu
     deflt = args[0]; args = (args + 1);
     how = args[0];
     if(!isString(how)) error(_("invalid '%s' argument"), "how");
-    replace = CXXRCONSTRUCT(Rboolean, strcmp(CHAR(STRING_ELT(how, 0)), "replace") == 0); /* ASCII */
+    replace = RHOCONSTRUCT(Rboolean, strcmp(CHAR(STRING_ELT(how, 0)), "replace") == 0); /* ASCII */
     n = Rf_length(X);
     if (replace) {
       PROTECT(ans = shallow_duplicate(X));
@@ -379,14 +379,14 @@ static Rboolean islistfactor(SEXP X)
 
 /* is this a tree with only factor leaves? */
 
-SEXP attribute_hidden do_islistfactor(/*const*/ CXXR::Expression* call, const CXXR::BuiltInFunction* op, CXXR::RObject* x_, CXXR::RObject* recursive_)
+SEXP attribute_hidden do_islistfactor(/*const*/ rho::Expression* call, const rho::BuiltInFunction* op, rho::RObject* x_, rho::RObject* recursive_)
 {
     SEXP X;
     Rboolean lans = TRUE, recursive;
     int i, n;
 
     X = x_;
-    recursive = CXXRCONSTRUCT(Rboolean, asLogical(recursive_));
+    recursive = RHOCONSTRUCT(Rboolean, asLogical(recursive_));
     n = Rf_length(X);
     if(n == 0 || !isVectorList(X)) {
 	lans = FALSE;

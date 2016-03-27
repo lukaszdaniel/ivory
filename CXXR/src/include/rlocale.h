@@ -79,7 +79,7 @@ extern int Ri18n_wcswidth (const wchar_t *, size_t);
  * Japanese "a-ru" of R as a letter. 
  * Therefore Japanese "Buraian.Ripuri-" of "Brian Ripley" is
  * shown of hex-string.:-)
- * We define alternatives to be used ifs
+ * We define alternatives to be used if
  * defined(_WIN32) || defined(__APPLE__) || defined(_AIX)
  */
 extern wctype_t Ri18n_wctype(const char *);

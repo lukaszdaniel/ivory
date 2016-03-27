@@ -46,7 +46,7 @@
 /*************************************************************************
  * Trio include files
  */
-#include <Localization.h>
+#include <localization.h>
 #include "triodef.h"
 #include "trio.h"
 #include "triop.h"
