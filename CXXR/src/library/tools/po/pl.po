@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-13 22:48+0100\n"
+"POT-Creation-Date: 2016-03-28 23:14+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -53,90 +53,90 @@ msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr ""
 "co najwyżej jedna gwiazdka '*' jest wspierana w każdym określeniu zamiany"
 
-#: gramLatex.c:2493 ../../../../../cxxr/src/library/tools/src/gramRd.y:1328
+#: gramLatex.c:2493 ../../../../../rho/src/library/tools/src/gramRd.y:1328
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "nie można przydzielić bufora dla długiego łańcucha w linii %d"
 
-#: gramLatex.c:2730 ../../../../../cxxr/src/library/tools/src/gramRd.y:1811
-#: ../../../../../cxxr/src/library/tools/src/gramRd.y:1817
+#: gramLatex.c:2730 ../../../../../rho/src/library/tools/src/gramRd.y:1811
+#: ../../../../../rho/src/library/tools/src/gramRd.y:1817
 #, c-format
 msgid "invalid '%s' value"
 msgstr "niepoprawny wartość '%s'"
 
-#: ../../../../../cxxr/src/library/tools/src/gramRd.y:303
-#: ../../../../../cxxr/src/library/tools/src/gramRd.y:306
+#: ../../../../../rho/src/library/tools/src/gramRd.y:303
+#: ../../../../../rho/src/library/tools/src/gramRd.y:306
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
 msgstr "błędne oznakowanie (dodatkowa spacja?) w %s:%d:%d"
 
-#: ../../../../../cxxr/src/library/tools/src/gramRd.y:545
+#: ../../../../../rho/src/library/tools/src/gramRd.y:545
 #, c-format
 msgid "Macro '%s' previously defined."
 msgstr "Makro '%s' zostało już poprzednio zdefiniowane."
 
-#: ../../../../../cxxr/src/library/tools/src/gramRd.y:555
+#: ../../../../../rho/src/library/tools/src/gramRd.y:555
 #, c-format
 msgid "At most 4 arguments are allowed for user defined macros."
 msgstr ""
 "Co najwyżej 4 argumenty są dozwolone dla makr zdefiniowanych przez "
 "użytkownika."
 
-#: ../../../../../cxxr/src/library/tools/src/gramRd.y:589
+#: ../../../../../rho/src/library/tools/src/gramRd.y:589
 #, c-format
 msgid "No macro definition for '%s'."
 msgstr "Brak makra zdefiniowanego dla '%s'"
 
-#: ../../../../../cxxr/src/library/tools/src/gramRd.y:743
-#: ../../../../../cxxr/src/library/tools/src/gramRd.y:747
+#: ../../../../../rho/src/library/tools/src/gramRd.y:743
+#: ../../../../../rho/src/library/tools/src/gramRd.y:747
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr "nowa linia wewnątrz cytowanego łańcucha w %s:%d"
 
-#: ../../../../../cxxr/src/library/tools/src/gramRd.y:766
+#: ../../../../../rho/src/library/tools/src/gramRd.y:766
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
 msgstr "nie można przydzielić bufora dla długiego makra w linii %d"
 
-#: ../../../../../cxxr/src/library/tools/src/gramRd.y:796
+#: ../../../../../rho/src/library/tools/src/gramRd.y:796
 msgid "macros nested too deeply: infinite recursion?"
 msgstr "makra są zagnieżdżone zbyt głęboko: nieskończona rekurencja?"
 
-#: ../../../../../cxxr/src/library/tools/src/gramRd.y:1190
+#: ../../../../../rho/src/library/tools/src/gramRd.y:1190
 #, c-format
 msgid "Unable to find macro %s"
 msgstr "Nie można znaleźć makra %s"
 
-#: ../../../../../cxxr/src/library/tools/src/gramRd.y:1388
+#: ../../../../../rho/src/library/tools/src/gramRd.y:1388
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr ""
 "Nieoczekiwane zakończenie wejścia (w %c cytowanym łańcuchu otwartym w %s:%d:"
 "%d)"
 
-#: ../../../../../cxxr/src/library/tools/src/gramRd.y:1825
+#: ../../../../../rho/src/library/tools/src/gramRd.y:1825
 msgid "cannot open the connection"
 msgstr "nie można otworzyć połączenia"
 
-#: ../../../../../cxxr/src/library/tools/src/gramRd.y:1826
+#: ../../../../../rho/src/library/tools/src/gramRd.y:1826
 msgid "cannot read from this connection"
 msgstr "nie można czytać z tego połączenia"
 
-#: ../../../../../cxxr/src/library/tools/src/gramRd.y:1838
+#: ../../../../../rho/src/library/tools/src/gramRd.y:1838
 msgid "invalid Rd file"
 msgstr "niepoprawny plik Rd"
 
-#: ../../../../../cxxr/src/library/tools/src/gramRd.y:1858
+#: ../../../../../rho/src/library/tools/src/gramRd.y:1858
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr ""
 "'deparseRd' wspiera tylko konwertowanie wyrażenia na łańcuch tekstowy dla "
 "elementów znakowych"
 
-#: ../../../../../cxxr/src/library/tools/src/gramRd.y:1861
+#: ../../../../../rho/src/library/tools/src/gramRd.y:1861
 msgid "bad state"
 msgstr "błędny stan"
 
-#: ../../../../../cxxr/src/library/tools/src/gramRd.y:1874
+#: ../../../../../rho/src/library/tools/src/gramRd.y:1874
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr "błędny tryb %d tekstu w 'deparseRd'"

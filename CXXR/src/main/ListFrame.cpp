@@ -31,8 +31,7 @@
 #include "rho/ListFrame.hpp"
 
 #include <cmath>
-#include "localization.h"
-#include "R_ext/Error.h"
+#include <R_ext/Error.h>
 #include "rho/GCStackRoot.hpp"
 #include "rho/SEXP_downcast.hpp"
 #include "rho/Symbol.hpp"

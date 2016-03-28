@@ -32,8 +32,8 @@
 #include "rho/FunctionBase.hpp"
 
 #include <cstdarg>
-#include "R_ext/Print.h"
-#include "Rinternals.h"  // For Rf_PrintValue
+#include <R_ext/Print.h>
+#include <Rinternals.h>  // For Rf_PrintValue
 #include "rho/Expression.hpp"
 
 using namespace rho;

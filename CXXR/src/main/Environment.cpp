@@ -34,8 +34,8 @@
 #include <cstdlib>
 #include <iostream>
 #include <typeinfo>
-#include "R_ext/Error.h"
-#include "localization.h"
+#include <R_ext/Error.h>
+#include <localization.h>
 #include "rho/BuiltInFunction.hpp"
 #include "rho/FunctionBase.hpp"
 #include "rho/ListFrame.hpp"
@@ -372,7 +372,7 @@ namespace {
     bool FunctionTester::operator()(const RObject* obj)
     {
 	if (obj == R_MissingArg)
-	    Rf_error(_("argument \"%s\" is missing, with no default"),
+	    Rf_error(_("argument '%s' is missing, with no default"),
 		     m_symbol->name()->c_str());
 	return FunctionBase::isA(obj);
     }

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-16 20:45+0100\n"
+"POT-Creation-Date: 2016-03-28 23:29+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -481,7 +481,9 @@ msgid "End of file"
 msgstr "koniec linii"
 
 #: src/extra/trio/trio.c:7618 src/main/builtin.cpp:838
-#: src/main/options.cpp:663
+#: src/main/options.cpp:663 src/modules/X11/dataentry.cpp:317
+#: src/modules/X11/dataentry.cpp:462 src/modules/X11/dataentry.cpp:465
+#: src/modules/X11/dataentry.cpp:495
 msgid "invalid argument"
 msgstr "niepoprawny argument"
 
@@ -510,15 +512,6 @@ msgstr "szczególny błąd"
 #, c-format
 msgid "unknown timezone '%s'"
 msgstr "nieznana strefa czasowa '%s'"
-
-#: src/extra/tzone/registryTZ.c:389
-#, c-format
-msgid ""
-"unable to identify current timezone '%s':\n"
-"please set environment variable 'TZ'"
-msgstr ""
-"nie można zidentyfikować bieżącej strefy czasowej '%s':\n"
-"proszę ustawić zmienną środowiskową 'TZ'"
 
 #: src/gnuwin32/console.c:1009 src/main/errors.cpp:247
 msgid "[... truncated]"
@@ -596,9 +589,9 @@ msgstr "problem z wyświetleniem pliku '%ls'"
 #: src/gnuwin32/extra.c:574 src/gnuwin32/extra.c:599 src/main/agrep.cpp:137
 #: src/main/agrep.cpp:141 src/main/agrep.cpp:778 src/main/agrep.cpp:783
 #: src/main/apply.cpp:335 src/main/apply.cpp:337 src/main/apply.cpp:340
-#: src/main/array.cpp:101 src/main/array.cpp:1181 src/main/array.cpp:1319
-#: src/main/array.cpp:1321 src/main/array.cpp:1322 src/main/array.cpp:1663
-#: src/main/array.cpp:1665 src/main/array.cpp:1667 src/main/attrib.cpp:189
+#: src/main/array.cpp:101 src/main/array.cpp:1180 src/main/array.cpp:1318
+#: src/main/array.cpp:1320 src/main/array.cpp:1321 src/main/array.cpp:1662
+#: src/main/array.cpp:1664 src/main/array.cpp:1666 src/main/attrib.cpp:189
 #: src/main/builtin.cpp:88 src/main/builtin.cpp:92 src/main/builtin.cpp:110
 #: src/main/builtin.cpp:112 src/main/builtin.cpp:143 src/main/builtin.cpp:488
 #: src/main/builtin.cpp:503 src/main/builtin.cpp:687 src/main/builtin.cpp:689
@@ -696,7 +689,8 @@ msgstr "problem z wyświetleniem pliku '%ls'"
 #: src/main/platform.cpp:2634 src/main/platform.cpp:2642
 #: src/main/platform.cpp:2677 src/main/platform.cpp:2725
 #: src/main/print.cpp:246 src/main/print.cpp:252 src/main/print.cpp:274
-#: src/main/print.cpp:280 src/main/print.cpp:287 src/main/random.cpp:214
+#: src/main/print.cpp:280 src/main/print.cpp:287
+#: src/main/provenance_do.cpp:229 src/main/random.cpp:214
 #: src/main/random.cpp:218 src/main/random.cpp:225 src/main/random.cpp:253
 #: src/main/saveload.cpp:1967 src/main/saveload.cpp:1970
 #: src/main/saveload.cpp:1973 src/main/saveload.cpp:2081
@@ -1111,30 +1105,33 @@ msgstr "wartość 'value' obiektu listy nie jest zdefiniowana"
 msgid "the 'value' of a raw object is not defined"
 msgstr "'value' pustego obiektu nie jest zdefiniowane"
 
-#: src/include/CXXR/BinaryFunction.hpp:249 src/main/arithmetic.cpp:368
-#: src/main/relop.cpp:181
+#: src/include/rho/BinaryFunction.hpp:249 src/main/arithmetic.cpp:368
+#: src/main/relop.cpp:180
 msgid "longer object length is not a multiple of shorter object length"
 msgstr ""
 "długość dłuszego obiektu nie jest wielokrotnością długości krótszego obiektu"
 
-#: src/include/CXXR/FixedVector.hpp:321
+#: src/include/rho/FixedVector.hpp:321
 msgid "request to create impossibly large vector."
 msgstr ""
 
-#: src/include/CXXR/Subscripting.hpp:855
-#: src/include/CXXR/Subscripting.hpp:1004
+#: src/include/rho/ListVector.hpp:81
+#, fuzzy, c-format
+msgid "%s() can only be applied to a list, not a '%s'"
+msgstr ""
+"funkcja 'VECTOR_ELT()' może być zastosowana jedynie do 'list', a nie '%s'"
+
+#: src/include/rho/Subscripting.hpp:855 src/include/rho/Subscripting.hpp:1004
 #, fuzzy
 msgid "NAs are not allowed in subscripted assignments"
 msgstr "wartości NA nie są dozwolone w przypisaniach indeksowych"
 
-#: src/include/CXXR/Subscripting.hpp:869
-#: src/include/CXXR/Subscripting.hpp:1020 src/main/subassign.cpp:616
-#: src/main/subassign.cpp:1112
+#: src/include/rho/Subscripting.hpp:869 src/include/rho/Subscripting.hpp:1020
+#: src/main/subassign.cpp:616 src/main/subassign.cpp:1112
 msgid "replacement has length zero"
 msgstr "zamiana ma długość zero"
 
-#: src/include/CXXR/Subscripting.hpp:871
-#: src/include/CXXR/Subscripting.hpp:1022
+#: src/include/rho/Subscripting.hpp:871 src/include/rho/Subscripting.hpp:1022
 msgid "number of items to replace is not a multiple of replacement length"
 msgstr ""
 "liczba pozycji do zastąpienia nie jest wielokrotnością długości zamiany"
@@ -1207,7 +1204,7 @@ msgstr "argument '%s' musi być wektorem"
 #: src/main/seq.cpp:362 src/main/seq.cpp:366 src/main/seq.cpp:406
 #: src/main/seq.cpp:410 src/main/seq.cpp:414 src/main/sort.cpp:1260
 #: src/main/sort.cpp:1342 src/main/sort.cpp:1346 src/main/sort.cpp:1353
-#: src/main/source.cpp:220 src/main/summary.cpp:970 src/main/sysutils.cpp:259
+#: src/main/source.cpp:220 src/main/summary.cpp:969 src/main/sysutils.cpp:259
 #: src/main/util.cpp:1044 src/main/util.cpp:1049 src/main/util.cpp:1056
 #: src/main/util.cpp:1059 src/main/util.cpp:2022
 #: src/modules/lapack/Lapack.c:946 src/modules/X11/devX11.c:3146
@@ -1256,17 +1253,17 @@ msgstr "dimnames(<value>) nie jest wartością NULL ani też listą o długości
 msgid "argument %d is empty"
 msgstr "argument %d jest pusty"
 
-#: src/main/ArgList.cpp:118 src/main/envir.cpp:881
-#: src/main/Environment.cpp:375 src/main/Symbol.cpp:117
-#, fuzzy, c-format
-msgid "argument \"%s\" is missing, with no default"
+#: src/main/ArgList.cpp:118 src/main/arithmetic.cpp:1213
+#: src/main/arithmetic.cpp:1235 src/main/Environment.cpp:375
+#, c-format
+msgid "argument '%s' is missing, with no default"
 msgstr "brakuje argumentu '%s', a nie ma określonej wartości domyślnej"
 
-#: src/main/ArgList.cpp:275
+#: src/main/ArgList.cpp:274
 msgid "dispatch error"
 msgstr "błąd wysyłania"
 
-#: src/main/ArgList.cpp:292 src/main/ArgList.cpp:302 src/main/builtin.cpp:873
+#: src/main/ArgList.cpp:291 src/main/ArgList.cpp:301 src/main/builtin.cpp:873
 #: src/main/coerce.cpp:2455 src/main/coerce.cpp:2496
 #: src/main/DottedArgs.cpp:45 src/main/Symbol.cpp:99
 msgid "'...' used in an incorrect context"
@@ -1288,7 +1285,7 @@ msgstr ""
 msgid "duplicated name in formals list"
 msgstr ""
 
-#: src/main/ArgMatcher.cpp:367 src/main/match.cpp:255 src/main/match.cpp:293
+#: src/main/ArgMatcher.cpp:367 src/main/match.cpp:255
 #, c-format
 msgid "formal argument '%s' matched by multiple actual arguments"
 msgstr "formalny argument '%s' dopasowany przez wiele aktualnych argumentów"
@@ -1298,23 +1295,23 @@ msgstr "formalny argument '%s' dopasowany przez wiele aktualnych argumentów"
 msgid "argument %d matches multiple formal arguments"
 msgstr "argument %d pasuje do wielu formalnych argumentów"
 
-#: src/main/ArgMatcher.cpp:381 src/main/match.cpp:297
+#: src/main/ArgMatcher.cpp:380 src/main/match.cpp:297
 #, c-format
 msgid "partial argument match of '%s' to '%s'"
 msgstr "częściowa zgodność pomiędzy argumentami '%s' oraz '%s'"
 
-#: src/main/ArgMatcher.cpp:439
+#: src/main/ArgMatcher.cpp:436
 #, c-format
 msgid "could not find symbol \"%s\" in environment of the generic function"
 msgstr "nie udało się znaleźć symbolu \"%s\" w środowisku ogólnej funkcji"
 
 #: src/main/arithmetic.cpp:56
-msgid "NaNs produced"
+msgid "NaN values produced"
 msgstr "wyprodukowano wartości NaN"
 
 #: src/main/arithmetic.cpp:57
 #, fuzzy
-msgid "non-numeric argument to mathematical function"
+msgid "non-numeric argument passed to mathematical function"
 msgstr "argument nieliczbowy przekazany do funkcji matematycznej"
 
 #: src/main/arithmetic.cpp:194
@@ -1337,14 +1334,14 @@ msgstr "niepoprawny operator jednoargumentowy"
 msgid "invalid argument passed to unary operator"
 msgstr "niepoprawny argument przekazany do operatora jednoargumentowego"
 
-#: src/main/arithmetic.cpp:558
+#: src/main/arithmetic.cpp:603
 msgid "NA values produced by integer overflow"
 msgstr ""
 "wyprodukowano wartości NA na skutek przepełnienia zakresu liczb całkowitych"
 
-#: src/main/arithmetic.cpp:785 src/main/arithmetic.cpp:1065
-#: src/main/arithmetic.cpp:1466 src/main/arithmetic.cpp:1601
-#: src/main/arithmetic.cpp:1702
+#: src/main/arithmetic.cpp:784 src/main/arithmetic.cpp:1064
+#: src/main/arithmetic.cpp:1465 src/main/arithmetic.cpp:1600
+#: src/main/arithmetic.cpp:1701
 #, c-format
 msgid "unimplemented real function of %d numeric argument"
 msgid_plural "unimplemented real function of %d numeric arguments"
@@ -1352,11 +1349,11 @@ msgstr[0] "niezaimplementowana rzeczywista funkcja %d argumentu liczbowego"
 msgstr[1] "niezaimplementowana rzeczywista funkcja %d argumentów liczbowych"
 msgstr[2] "niezaimplementowana rzeczywista funkcja %d argumentów liczbowych"
 
-#: src/main/arithmetic.cpp:796 src/main/complex.c:640 src/main/complex.c:710
+#: src/main/arithmetic.cpp:795 src/main/complex.c:640 src/main/complex.c:710
 msgid "unimplemented complex function"
 msgstr "niezaimplementowana funkcja zespolona"
 
-#: src/main/arithmetic.cpp:1092
+#: src/main/arithmetic.cpp:1091
 #, c-format
 msgid "%d argument passed to '%s' function which requires 1 or 2 arguments"
 msgid_plural ""
@@ -1368,20 +1365,15 @@ msgstr[1] ""
 msgstr[2] ""
 "przekazano %d argumentów do funkcji '%s', która wymaga 1 lub 2 argumentów"
 
-#: src/main/arithmetic.cpp:1117
+#: src/main/arithmetic.cpp:1116
 msgid "invalid second argument of length 0"
 msgstr "niepoprawny drugi argument o długości 0"
 
-#: src/main/arithmetic.cpp:1214 src/main/arithmetic.cpp:1236
-#, c-format
-msgid "argument '%s' is missing, with no default"
-msgstr "brakuje argumentu '%s', a nie ma określonej wartości domyślnej"
-
-#: src/main/arithmetic.cpp:1246
+#: src/main/arithmetic.cpp:1245
 msgid "invalid argument 'base' of length 0"
 msgstr "niepoprawny argument 'base' o zerowej długości"
 
-#: src/main/array.cpp:94 src/main/array.cpp:1498
+#: src/main/array.cpp:94 src/main/array.cpp:1497
 #, c-format
 msgid "'data' argument must be of a vector type, was '%s'"
 msgstr "argument 'data' musi być typu wektor, było '%s'"
@@ -1390,14 +1382,14 @@ msgstr "argument 'data' musi być typu wektor, było '%s'"
 msgid "non-numeric matrix extent"
 msgstr "nieliczbowy stopień macierzy"
 
-#: src/main/array.cpp:111 src/main/array.cpp:119 src/main/array.cpp:1601
-#: src/main/array.cpp:1606
+#: src/main/array.cpp:111 src/main/array.cpp:119 src/main/array.cpp:1600
+#: src/main/array.cpp:1605
 #, c-format
 msgid "invalid '%s' value (too large or NA)"
 msgstr "niepoprawna wartość '%s' (zbyt duża lub wartość NA)"
 
-#: src/main/array.cpp:113 src/main/array.cpp:121 src/main/array.cpp:1603
-#: src/main/array.cpp:1608
+#: src/main/array.cpp:113 src/main/array.cpp:121 src/main/array.cpp:1602
+#: src/main/array.cpp:1607
 #, c-format
 msgid "invalid '%s' value (< 0)"
 msgstr "niepoprawna wartość '%s' (< 0)"
@@ -1435,7 +1427,7 @@ msgstr ""
 msgid "data length exceeds size of matrix"
 msgstr "długość danych przewyższa rozmiar macierzy"
 
-#: src/main/array.cpp:161 src/main/array.cpp:1509 src/main/array.cpp:1615
+#: src/main/array.cpp:161 src/main/array.cpp:1508 src/main/array.cpp:1614
 msgid "too many elements specified"
 msgstr "określono zbyt dużo elementów"
 
@@ -1470,41 +1462,41 @@ msgid "a matrix-like object is required as argument passed to '%s'"
 msgstr ""
 "obiekt macierzopodobny jest wymagany jako argument przekazywany do '%s'"
 
-#: src/main/array.cpp:675
+#: src/main/array.cpp:674
 msgid "numeric/complex matrix/vector arguments are required"
 msgstr "wymagane są liczbowe/zespolone argumenty macierzy/wektorów"
 
-#: src/main/array.cpp:785 src/main/array.cpp:789 src/main/array.cpp:793
+#: src/main/array.cpp:784 src/main/array.cpp:788 src/main/array.cpp:792
 msgid "non-conformable arguments"
 msgstr "niezgodne argumenty"
 
-#: src/main/array.cpp:1030 src/main/array.cpp:1034 src/main/array.cpp:1078
+#: src/main/array.cpp:1029 src/main/array.cpp:1033 src/main/array.cpp:1077
 msgid "argument is not a matrix"
 msgstr "argument nie jest macierzą"
 
-#: src/main/array.cpp:1137
+#: src/main/array.cpp:1136
 msgid "invalid first argument, must be an array"
 msgstr "niepoprawny pierwszy argument, musi być tablicą"
 
-#: src/main/array.cpp:1151
+#: src/main/array.cpp:1150
 #, c-format
 msgid "'perm' is of wrong length %d (!= %d)"
 msgstr "'perm' posiada błędną długość %d (!= %d)"
 
-#: src/main/array.cpp:1156 src/main/array.cpp:1159
+#: src/main/array.cpp:1155 src/main/array.cpp:1158
 msgid "'a' does not have named dimnames"
 msgstr "'a' nie ma nazwanych wymiarów"
 
-#: src/main/array.cpp:1166
+#: src/main/array.cpp:1165
 #, c-format
 msgid "'perm[%d]' does not match a dimension name"
 msgstr "'perm[%d]' nie jest zgodne z nazwą wymiaru"
 
-#: src/main/array.cpp:1179
+#: src/main/array.cpp:1178
 msgid "value is out of range in 'perm' argument"
 msgstr "wartość w argumencie 'perm' jest poza zakresem"
 
-#: src/main/array.cpp:1261 src/main/connections.cpp:5478
+#: src/main/array.cpp:1260 src/main/connections.cpp:5478
 #: src/main/debug.cpp:116 src/main/objects.cpp:1032 src/main/raw.cpp:63
 #: src/main/raw.cpp:336 src/main/sort.cpp:339 src/main/sort.cpp:1264
 #: src/main/unique.cpp:679 src/main/unique.cpp:1442 src/main/unique.cpp:1514
@@ -1513,27 +1505,27 @@ msgstr "wartość w argumencie 'perm' jest poza zakresem"
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr "argument '%s' musi posiadać wartość TRUE lub FALSE"
 
-#: src/main/array.cpp:1330
+#: src/main/array.cpp:1329
 #, c-format
 msgid "'%s' must be numeric"
 msgstr "'%s' musi być liczbą"
 
-#: src/main/array.cpp:1333
+#: src/main/array.cpp:1332
 #, c-format
 msgid "'%s' argument is too short"
 msgstr "argument '%s' jest zbyt krótki"
 
-#: src/main/array.cpp:1505
+#: src/main/array.cpp:1504
 #, c-format
 msgid "'%s' argument cannot be of length 0"
 msgstr "argument '%s' nie może posiadać długości 0"
 
-#: src/main/array.cpp:1611
+#: src/main/array.cpp:1610
 #, c-format
 msgid "'%s' must have positive length"
 msgstr "'%s' musi posiadać dodatnią długość"
 
-#: src/main/array.cpp:1676
+#: src/main/array.cpp:1675
 #, c-format
 msgid "singular matrix in 'backsolve()'. First zero in diagonal [%d]"
 msgstr "osobliwa macierz w 'backsolve()'. Pierwsze zero na diagonali [%d]"
@@ -1964,7 +1956,11 @@ msgstr "pusta alternatywa w liczbowej operacji switch"
 msgid "'switch()' with no alternatives"
 msgstr "'switch()' nie posiada alternatyw"
 
-#: src/main/BuiltInFunction.cpp:183
+#: src/main/BuiltInFunction.cpp:176
+msgid "BuiltInFunction's destructor should never be called"
+msgstr ""
+
+#: src/main/BuiltInFunction.cpp:184
 #, fuzzy, c-format
 msgid "%d argument passed to .Internal(%s) which requires %d"
 msgid_plural "%d arguments passed to .Internal(%s) which requires %d"
@@ -1972,7 +1968,7 @@ msgstr[0] "%d argument przekazano do '.Internal(%s)' który wymaga %d"
 msgstr[1] "%d argumenty przekazano do '.Internal(%s)' który wymaga %d"
 msgstr[2] "%d argumentów przekazano do '.Internal(%s)' który wymaga %d"
 
-#: src/main/BuiltInFunction.cpp:189
+#: src/main/BuiltInFunction.cpp:190
 #, fuzzy, c-format
 msgid "%d argument passed to '%s' which requires %d"
 msgid_plural "%d arguments passed to '%s' which requires %d"
@@ -1983,9 +1979,13 @@ msgstr[1] ""
 msgstr[2] ""
 "%d argumentów przekazano do funkcji '%s', która wymaga %d lub %d argumentów"
 
-#: src/main/BuiltInFunction.cpp:218
+#: src/main/BuiltInFunction.cpp:219
 #, c-format
 msgid "%s is not the name of a built-in or special function"
+msgstr ""
+
+#: src/main/BuiltInFunction.cpp:283
+msgid "Attempting to do group dispatch without a group"
 msgstr ""
 
 #: src/main/character.cpp:118 src/main/character.cpp:235
@@ -2075,7 +2075,6 @@ msgid "invalid UTF-8 string '%s'"
 msgstr "niepoprawny łańcuch UTF-8 '%s'"
 
 #: src/main/character.cpp:1351 src/main/character.cpp:1370
-#: src/main/plotmath.cpp:989
 #, c-format
 msgid "invalid multibyte string '%s'"
 msgstr "niepoprawny wielobajtowy łańcuch '%s'"
@@ -2285,6 +2284,11 @@ msgstr "użycie 'single' jest przestarzałe: używaj w zamian mode<-"
 #: src/main/coerce.cpp:2737
 msgid "invalid to change the storage mode of a factor"
 msgstr "niepoprawna zmiana trybu przechowywania czynnika"
+
+#: src/main/colors.cpp:61 src/main/colors.cpp:75 src/main/colors.cpp:83
+#: src/main/colors.cpp:91
+msgid "package 'grDevices' must be loaded"
+msgstr "pakiet 'grDevices' musi być załadowany"
 
 #: src/main/CommandLineArgs.cpp:177
 msgid "WARNING: no value given for --encoding"
@@ -3125,8 +3129,8 @@ msgstr "błąd wewnętrzny w funkcji '%s'"
 msgid "k = %d, should be 2 or 4"
 msgstr "k = %d, powinno wynosić 2 lub 4"
 
-#: src/main/cum.cpp:56 src/main/summary.cpp:80 src/main/summary.cpp:92
-#: src/main/summary.cpp:117 src/main/summary.cpp:650
+#: src/main/cum.cpp:56 src/main/summary.cpp:79 src/main/summary.cpp:91
+#: src/main/summary.cpp:116 src/main/summary.cpp:649
 #, c-format
 msgid "integer overflow in '%s' function; use '%s'"
 msgstr "przepełnienie całkowitoliczbowe w funkcji '%s'; użyj '%s'"
@@ -3616,6 +3620,10 @@ msgstr "prawdopodobne przycięcie pliku >= 4GB"
 msgid "invalid body argument for 'function'"
 msgstr "nieprawidłowe argumenty w ciele dla 'function'"
 
+#: src/main/duplicate.cpp:248
+msgid "vector types do not match in 'copyVector()'"
+msgstr "typy wektorów nie zgadzają się w funkcji 'copyVector()'"
+
 #: src/main/edit.cpp:116
 msgid "invalid argument passed to 'edit()' function"
 msgstr "niepoprawny argument przekazany do funkcji 'edit()'"
@@ -3869,6 +3877,11 @@ msgstr "nie można usunąć zmiennych z pustego środowiska"
 #: src/main/envir.cpp:773
 msgid "cannot remove bindings from a locked environment"
 msgstr "nie można usunąć powiązań z zablokowanego środowiska"
+
+#: src/main/envir.cpp:881 src/main/Symbol.cpp:117
+#, fuzzy, c-format
+msgid "argument \"%s\" is missing, with no default"
+msgstr "brakuje argumentu '%s', a nie ma określonej wartości domyślnej"
 
 #: src/main/envir.cpp:891 src/main/Symbol.cpp:114
 #, c-format
@@ -4186,6 +4199,10 @@ msgstr "Rprof: nie można otworzyć pliku profilu '%s'"
 msgid "unable to create profiling thread"
 msgstr "nie można utworzyć wątku optymalizacji"
 
+#: src/main/eval.cpp:463
+msgid "setting profile timer failed"
+msgstr "ustawienie czasomierza profilu nie powiodło się"
+
 #: src/main/eval.cpp:502
 msgid "R profiling is not available on this system"
 msgstr "profilowanie R nie jest dostępne na tym systemie"
@@ -4390,172 +4407,172 @@ msgstr "rekursywne użycie funkcji 'getGraphicsEvent()' nie jest wspierane"
 msgid "no graphics event handlers set"
 msgstr "nie ustawiono obsługi zdarzeń grafiki"
 
-#: ../../../cxxr/src/main/gram.y:242 ../../../cxxr/src/main/gram.y:257
-#: ../../../cxxr/src/main/gram.y:2277 ../../../cxxr/src/main/gram.y:2291
+#: ../../../rho/src/main/gram.y:242 ../../../rho/src/main/gram.y:257
+#: ../../../rho/src/main/gram.y:2277 ../../../rho/src/main/gram.y:2291
 #: src/main/gram.y:242 src/main/gram.y:257 src/main/gram.y:2277
 #: src/main/gram.y:2291
 #, c-format
 msgid "EOF whilst reading MBCS char at line %d"
 msgstr "znak końca pliku (EOF) podczas czytania znaku MBCS w linii %d"
 
-#: ../../../cxxr/src/main/gram.y:246 ../../../cxxr/src/main/gram.y:254
-#: ../../../cxxr/src/main/gram.y:2281 ../../../cxxr/src/main/gram.y:2288
+#: ../../../rho/src/main/gram.y:246 ../../../rho/src/main/gram.y:254
+#: ../../../rho/src/main/gram.y:2281 ../../../rho/src/main/gram.y:2288
 #: src/main/gram.y:246 src/main/gram.y:254 src/main/gram.y:2281
 #: src/main/gram.y:2288
 #, c-format
 msgid "invalid multibyte character in parser at line %d"
 msgstr "niepoprawny wielobajtowy znak w parserze w linii %d"
 
-#: ../../../cxxr/src/main/gram.y:486 src/main/gram.y:486
+#: ../../../rho/src/main/gram.y:486 src/main/gram.y:486
 #, c-format
 msgid "input buffer overflow at line %d"
 msgstr "przepełnienie bufora wejściowego w linii %d"
 
-#: ../../../cxxr/src/main/gram.y:1082 src/main/gram.y:1082
+#: ../../../rho/src/main/gram.y:1082 src/main/gram.y:1082
 #, c-format
 msgid "incorrect tag type at line %d"
 msgstr "niepoprawny typ tagu w linii %d"
 
-#: ../../../cxxr/src/main/gram.y:1689 src/main/gram.y:1689
+#: ../../../rho/src/main/gram.y:1689 src/main/gram.y:1689
 msgid "contextstack overflow"
 msgstr "przepełniony stos kontekstu"
 
-#: ../../../cxxr/src/main/gram.y:1939 ../../../cxxr/src/main/gram.y:1945
+#: ../../../rho/src/main/gram.y:1939 ../../../rho/src/main/gram.y:1945
 #: src/main/gram.y:1939 src/main/gram.y:1945
 #, c-format
 msgid "unexpected input"
 msgstr "nieoczekiwane wejście"
 
-#: ../../../cxxr/src/main/gram.y:1942 src/main/gram.y:1942
+#: ../../../rho/src/main/gram.y:1942 src/main/gram.y:1942
 #: src/main/main.cpp:460
 #, c-format
 msgid "unexpected end of input"
 msgstr "nieoczekiwany koniec wejścia"
 
-#: ../../../cxxr/src/main/gram.y:1948 src/main/gram.y:1948
+#: ../../../rho/src/main/gram.y:1948 src/main/gram.y:1948
 #, c-format
 msgid "unexpected string constant"
 msgstr "nieoczekiwana stała tekstowa"
 
-#: ../../../cxxr/src/main/gram.y:1951 src/main/gram.y:1951
+#: ../../../rho/src/main/gram.y:1951 src/main/gram.y:1951
 #, c-format
 msgid "unexpected numeric constant"
 msgstr "nieoczekiwana stała liczbowa"
 
-#: ../../../cxxr/src/main/gram.y:1954 src/main/gram.y:1954
+#: ../../../rho/src/main/gram.y:1954 src/main/gram.y:1954
 #, c-format
 msgid "unexpected symbol"
 msgstr "nieoczekiwany symbol"
 
-#: ../../../cxxr/src/main/gram.y:1957 src/main/gram.y:1957
+#: ../../../rho/src/main/gram.y:1957 src/main/gram.y:1957
 #, c-format
 msgid "unexpected assignment"
 msgstr "nieoczekiwane przypisanie"
 
-#: ../../../cxxr/src/main/gram.y:1960 src/main/gram.y:1960
+#: ../../../rho/src/main/gram.y:1960 src/main/gram.y:1960
 #, c-format
 msgid "unexpected end of line"
 msgstr "nieoczekiwany koniec linii"
 
-#: ../../../cxxr/src/main/gram.y:1963 ../../../cxxr/src/main/gram.y:1971
+#: ../../../rho/src/main/gram.y:1963 ../../../rho/src/main/gram.y:1971
 #: src/main/gram.y:1963 src/main/gram.y:1971
 #, fuzzy, c-format
 msgid "unexpected %s"
 msgstr "nieoczekiwany symbol"
 
-#: ../../../cxxr/src/main/gram.y:1983 src/main/gram.y:1983
+#: ../../../rho/src/main/gram.y:1983 src/main/gram.y:1983
 #, c-format
 msgid "repeated formal argument '%s' on line %d"
 msgstr "powtórzony formalny argument '%s' w linii %d"
 
-#: ../../../cxxr/src/main/gram.y:2193 src/main/gram.y:2193
+#: ../../../rho/src/main/gram.y:2193 src/main/gram.y:2193
 #, c-format
 msgid "integer literal %s contains decimal; using numeric value"
 msgstr "stały literał %s zawiera część dziesiętną; używanie wartości liczbowej"
 
-#: ../../../cxxr/src/main/gram.y:2196 src/main/gram.y:2196
+#: ../../../rho/src/main/gram.y:2196 src/main/gram.y:2196
 #, c-format
 msgid "non-integer value %s qualified with L; using numeric value"
 msgstr ""
 "niecałkowita wartość %s zakwalifikowana z L; używanie wartości liczbowej"
 
-#: ../../../cxxr/src/main/gram.y:2208 src/main/gram.y:2208
+#: ../../../rho/src/main/gram.y:2208 src/main/gram.y:2208
 #, c-format
 msgid "integer literal %s contains unnecessary decimal point"
 msgstr "stały literał %s zawiera niepotrzebny separator dziesiętny"
 
-#: ../../../cxxr/src/main/gram.y:2240 src/main/gram.y:2240
+#: ../../../rho/src/main/gram.y:2240 src/main/gram.y:2240
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "nie można przydzielić bufora dla długiego łańcucha w linii %d"
 
-#: ../../../cxxr/src/main/gram.y:2379 ../../../cxxr/src/main/gram.y:2402
-#: ../../../cxxr/src/main/gram.y:2439 ../../../cxxr/src/main/gram.y:2475
+#: ../../../rho/src/main/gram.y:2379 ../../../rho/src/main/gram.y:2402
+#: ../../../rho/src/main/gram.y:2439 ../../../rho/src/main/gram.y:2475
 #: src/main/gram.y:2379 src/main/gram.y:2402 src/main/gram.y:2439
 #: src/main/gram.y:2475
 #, fuzzy, c-format
 msgid "nul character not allowed (line %d)"
 msgstr "znak nul nie jest dozwolony (linia %d)"
 
-#: ../../../cxxr/src/main/gram.y:2395 src/main/gram.y:2395
+#: ../../../rho/src/main/gram.y:2395 src/main/gram.y:2395
 #, c-format
 msgid "'\\x' used without hex digits in character string starting \"%s\""
 msgstr ""
 "'\\x' użyte bez szestnastkowych cyfr w łańcuchu tekstowym rozpoczynającym "
 "\"%s\""
 
-#: ../../../cxxr/src/main/gram.y:2411 src/main/gram.y:2411
+#: ../../../rho/src/main/gram.y:2411 src/main/gram.y:2411
 #, fuzzy, c-format
 msgid "\\uxxxx sequences not supported inside backticks (line %d)"
 msgstr ""
 "sekwencja \\Uxxxxxxxx nie jest wspierana wewnątrz odwrotnych cudzysłowiów "
 "(``) (linia %d)"
 
-#: ../../../cxxr/src/main/gram.y:2426 src/main/gram.y:2426
+#: ../../../rho/src/main/gram.y:2426 src/main/gram.y:2426
 #, c-format
 msgid "'\\u' used without hex digits in character string starting \"%s\""
 msgstr ""
 "'\\u' użyte bez szestnastkowych cyfr w łańcuchu tekstowym rozpoczynającym "
 "\"%s\""
 
-#: ../../../cxxr/src/main/gram.y:2434 src/main/gram.y:2434
+#: ../../../rho/src/main/gram.y:2434 src/main/gram.y:2434
 #, fuzzy, c-format
 msgid "invalid \\u{xxxx} sequence (line %d)"
 msgstr "niepoprawna sekwencja \\U{xxxxxxxx} (linia %d)"
 
-#: ../../../cxxr/src/main/gram.y:2448 src/main/gram.y:2448
+#: ../../../rho/src/main/gram.y:2448 src/main/gram.y:2448
 #, c-format
 msgid "\\Uxxxxxxxx sequences not supported inside backticks (line %d)"
 msgstr ""
 "sekwencja \\Uxxxxxxxx nie jest wspierana wewnątrz odwrotnych cudzysłowiów "
 "(``) (linia %d)"
 
-#: ../../../cxxr/src/main/gram.y:2463 src/main/gram.y:2463
+#: ../../../rho/src/main/gram.y:2463 src/main/gram.y:2463
 #, c-format
 msgid "'\\U' used without hex digits in character string starting \"%s\""
 msgstr ""
 "'\\U' użyte bez szestnastkowych cyfr w łańcuchu tekstowym rozpoczynającym "
 "\"%s\""
 
-#: ../../../cxxr/src/main/gram.y:2471 src/main/gram.y:2471
+#: ../../../rho/src/main/gram.y:2471 src/main/gram.y:2471
 #, c-format
 msgid "invalid \\U{xxxxxxxx} sequence (line %d)"
 msgstr "niepoprawna sekwencja \\U{xxxxxxxx} (linia %d)"
 
-#: ../../../cxxr/src/main/gram.y:2514 src/main/gram.y:2514
+#: ../../../rho/src/main/gram.y:2514 src/main/gram.y:2514
 #, c-format
 msgid "'\\%c' is an unrecognized escape in character string starting \"%s\""
 msgstr ""
 "'\\%c' jest nierozponanym znakiem modyfikacji w łańcuchu tekstowym "
 "rozpoczynającym \"%s\""
 
-#: ../../../cxxr/src/main/gram.y:2578 src/main/gram.y:2578
+#: ../../../rho/src/main/gram.y:2578 src/main/gram.y:2578
 msgid "mixing Unicode and octal/hex escapes in a string is not allowed"
 msgstr ""
 "mieszanie znaków Unicode oraz ósemkowych/szestnastkowych znaków modyfikacji "
 "w łańcuchu jest niedozwolone"
 
-#: ../../../cxxr/src/main/gram.y:2582 src/main/gram.y:2582
+#: ../../../rho/src/main/gram.y:2582 src/main/gram.y:2582
 #, c-format
 msgid ""
 "string at line %d containing Unicode escapes not in this locale\n"
@@ -4565,15 +4582,15 @@ msgstr ""
 "lokalizacji\n"
 "jest zbyt długi (maksymalnie 10000 znaków)"
 
-#: ../../../cxxr/src/main/gram.y:3179 ../../../cxxr/src/main/gram.y:3186
-#: ../../../cxxr/src/main/gram.y:3192 ../../../cxxr/src/main/gram.y:3199
+#: ../../../rho/src/main/gram.y:3179 ../../../rho/src/main/gram.y:3186
+#: ../../../rho/src/main/gram.y:3192 ../../../rho/src/main/gram.y:3199
 #: src/main/gram.y:3179 src/main/gram.y:3186 src/main/gram.y:3192
 #: src/main/gram.y:3199
 #, c-format
 msgid "contextstack overflow at line %d"
 msgstr "przepełnienie stosu kontekstu w linii %d"
 
-#: ../../../cxxr/src/main/gram.y:3294 src/main/gram.y:3294
+#: ../../../rho/src/main/gram.y:3294 src/main/gram.y:3294
 #, c-format
 msgid "internal parser error at line %d"
 msgstr "wewnętrzny błąd parsera w linii %d"
@@ -4747,10 +4764,16 @@ msgstr "procedury LAPACK nie są dostępne w module"
 msgid "LAPACK routines cannot be loaded"
 msgstr "procedury LAPACK nie mogą zostać załadowane"
 
-#: src/main/ListVector.cpp:55
+#: src/main/ListVector.cpp:56
 #, fuzzy, c-format
-msgid "attempt to set index %lu/%lu in SET_VECTOR_ELT"
+msgid "attempt to set index %lu/%lu in 'SET_VECTOR_ELT()' function"
 msgstr "próba ustawienia indeksu %lu/%lu w funkcji 'SET_VECTOR_ELT()'"
+
+#: src/main/ListVector.cpp:69
+#, fuzzy, c-format
+msgid "'%s' function can only be applied to a list, not a '%s'"
+msgstr ""
+"funkcja 'VECTOR_ELT()' może być zastosowana jedynie do 'list', a nie '%s'"
 
 #: src/main/logic.cpp:101
 msgid "operations are possible only for numeric, logical or complex types"
@@ -5065,18 +5088,18 @@ msgstr "dłuższy argument nie jest wielokrotnością długości krótszego"
 msgid "invalid partial string match"
 msgstr "niepoprawna częściowa zgodność łańcucha"
 
-#: src/main/match.cpp:147
-#, fuzzy, c-format
-msgid "unused argument(s) %s"
-msgstr "nieużywany argument %s"
-
-#: src/main/match.cpp:406
+#: src/main/match.cpp:147 src/main/match.cpp:406
 #, c-format
 msgid "unused argument %s"
 msgid_plural "unused arguments %s"
 msgstr[0] "nieużywany argument %s"
 msgstr[1] "nieużywane argumenty %s"
 msgstr[2] "nieużywane argumenty %s"
+
+#: src/main/match.cpp:293
+#, c-format
+msgid "formal argument \"%s\" matched by multiple actual arguments"
+msgstr "formalny argument \"%s\" dopasowany przez wiele aktualnych argumentów"
 
 #: src/main/memory.cpp:88
 #, c-format
@@ -5706,6 +5729,63 @@ msgstr "wszystkie wartości 'z' są równe"
 msgid "all 'z' values are NA"
 msgstr "wszystkie wartości 'z' to wartości NA"
 
+#: src/main/plot.cpp:102
+#, c-format
+msgid "CreateAtVector \"log\"(from axis()): axp[0] = %g !"
+msgstr "CreateAtVector \"log\"(z axis()): axp[0] = %g !"
+
+#: src/main/plot.cpp:104
+#, c-format
+msgid "CreateAtVector [log-axis()]: axp[0] = %g < 0!"
+msgstr "CreateAtVector [log-axis()]: axp[0] = %g < 0!"
+
+#: src/main/plot.cpp:115
+#, c-format
+msgid "CreateAtVector [log-axis(), case 1]: (nint, ne) = (%d,%d)\n"
+msgstr "CreateAtVector [log-axis(), przypadek 1]: (nint, ne) = (%d,%d)\n"
+
+#: src/main/plot.cpp:119
+#, c-format
+msgid ""
+"log - axis(), 'at' creation, _LARGE_ range: ne = %d <= 0 !!\n"
+"\t axp[0:1]=(%g,%g) ==> i = %d;\tnint = %d"
+msgstr ""
+"log - axis(), tworzenie 'at', _DUŻY_ zakres: ne = %d <= 0 !!\n"
+"\t axp[0:1]=(%g,%g) ==> i = %d;\tnint = %d"
+
+#: src/main/plot.cpp:128
+#, c-format
+msgid ""
+"log - axis(), 'at' creation, _LARGE_ range: invalid {xy}axp or par; nint=%d\n"
+"\t axp[0:1]=(%g,%g), usr[0:1]=(%g,%g); i=%d, ni=%d"
+msgstr ""
+"log - axis(), tworzenie 'at', _DUŻY_ zakres: niepoprawne {xy}axp lub par; "
+"nint=%d\n"
+"\t axp[0:1]=(%g,%g), usr[0:1]=(%g,%g); i=%d, ni=%d"
+
+#: src/main/plot.cpp:150
+#, c-format
+msgid ""
+"log - axis(), 'at' creation, _MEDIUM_ range: invalid {xy}axp or par;\n"
+"\t axp[0]= %g, usr[0:1]=(%g,%g)"
+msgstr ""
+"log - axis(), tworzenie 'at', _ŚREDNI_ zakres: niepoprawne {xy}axp lub par;\n"
+"\t axp[0]= %g, usr[0:1]=(%g,%g)"
+
+#: src/main/plot.cpp:178
+#, c-format
+msgid ""
+"log - axis(), 'at' creation, _SMALL_ range: invalid {xy}axp or par;\n"
+"\t axp[0]= %g, usr[0:1]=(%g,%g)"
+msgstr ""
+"log - axis(), tworzenie 'at', _MAŁY_ zakres: niepoprawne {xy}axp lub par;\n"
+"\t axp[0]= %g, usr[0:1]=(%g,%g)"
+
+#: src/main/plot.cpp:193
+#, c-format
+msgid "log - axis(), 'at' creation: INVALID {xy}axp[3] = %g"
+msgstr "log - axis(), tworzenie 'at': NIEPOPRAWNE {xy}axp[3] = %g"
+
 #: src/main/plotmath.cpp:315
 #, fuzzy
 msgid "invalid 'which' argument in C function TeX"
@@ -5748,19 +5828,19 @@ msgstr "grupa jest niekompletna"
 msgid "Metric information not available for this family/device"
 msgstr "Informacje metryczne nie są dostępne dla tej rodziny/urządzenia"
 
-#: src/main/printarray.cpp:370
+#: src/main/printarray.cpp:372
 msgid "too few row labels"
 msgstr "zbyt mało etykiet wierszy"
 
-#: src/main/printarray.cpp:372
+#: src/main/printarray.cpp:374
 msgid "too few column labels"
 msgstr "zbyt mało etykiet kolumn"
 
-#: src/main/printarray.cpp:374
+#: src/main/printarray.cpp:376
 msgid "<0 x 0 matrix>"
 msgstr "<macierz 0 x 0>"
 
-#: src/main/printarray.cpp:412
+#: src/main/printarray.cpp:414
 #, fuzzy, c-format
 msgid " [ reached 'getOption(\"max.print\")' -- omitted %d row ]"
 msgid_plural " [ reached 'getOption(\"max.print\")' -- omitted %d rows ]"
@@ -5768,32 +5848,32 @@ msgstr[0] " [ osiągnięto 'getOption(\"max.print\")' -- pominięto %d wiersz ]"
 msgstr[1] " [ osiągnięto 'getOption(\"max.print\")' -- pominięto %d wiersze ]"
 msgstr[2] " [ osiągnięto 'getOption(\"max.print\")' -- pominięto %d wierszy ]"
 
-#: src/main/printarray.cpp:518
+#: src/main/printarray.cpp:520
 #, c-format
 msgid "<logical array of size %s>"
 msgstr "<logiczna tablica o rozmiarze %s>"
 
-#: src/main/printarray.cpp:521
+#: src/main/printarray.cpp:523
 #, c-format
 msgid "<integer array of size %s>"
 msgstr "<całkowitoliczbowa tablica o rozmiarze %s>"
 
-#: src/main/printarray.cpp:524
+#: src/main/printarray.cpp:526
 #, c-format
 msgid "<real array of size %s>"
 msgstr "<rzeczywista tablica o rozmiarze %s>"
 
-#: src/main/printarray.cpp:527
+#: src/main/printarray.cpp:529
 #, c-format
 msgid "<complex array of size %s>"
 msgstr "<zespolona tablica o rozmiarze %s>"
 
-#: src/main/printarray.cpp:530
+#: src/main/printarray.cpp:532
 #, c-format
 msgid "<character array of size %s>"
 msgstr "<tekstowa tablica o rozmiarze %s>"
 
-#: src/main/printarray.cpp:567
+#: src/main/printarray.cpp:569
 #, c-format
 msgid ""
 " [ reached 'getOption(\"max.print\")' -- omitted %d row and %d matrix slice ]"
@@ -5810,7 +5890,7 @@ msgstr[2] ""
 " [ osiągnięto 'getOption(\"max.print\")' -- pominięto %d wierszy, przecięć "
 "macierzy %d ]"
 
-#: src/main/printarray.cpp:573
+#: src/main/printarray.cpp:575
 #, c-format
 msgid " [ reached 'getOption(\"max.print\")' -- omitted %d matrix slice ]"
 msgid_plural ""
@@ -5850,11 +5930,11 @@ msgstr "argument '%s' musi być nieujemną liczbą całkowitą"
 msgid "invalid 'tryS4' internal argument"
 msgstr "niepoprawny wewnętrzny argument 'tryS4' "
 
-#: src/main/print.cpp:306 src/main/print.cpp:916 src/main/print.cpp:999
+#: src/main/print.cpp:306 src/main/print.cpp:916 src/main/print.cpp:1000
 msgid "missing methods namespace: this should not happen"
 msgstr "brakuje przestrzeni nazw metod: to nie powinno się zdarzyć"
 
-#: src/main/print.cpp:311 src/main/print.cpp:921 src/main/print.cpp:1004
+#: src/main/print.cpp:311 src/main/print.cpp:922 src/main/print.cpp:1005
 msgid "missing 'show()' in methods namespace: this should not happen"
 msgstr ""
 "brakuje 'show()' w metodach przestrzeni nazw: to nie powinno się zdarzyć"
@@ -5863,7 +5943,8 @@ msgstr ""
 msgid "[truncated]"
 msgstr " [przycięte]"
 
-#: src/main/print.cpp:499
+#: src/main/print.cpp:499 src/main/printvector.cpp:226
+#: src/main/printvector.cpp:387
 #, c-format
 msgid " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]"
 msgid_plural " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]"
@@ -5926,16 +6007,16 @@ msgstr "przepełnienie bufora wyświetlania"
 msgid "Slot \"%s\":"
 msgstr "Gniazdo \"%s\":"
 
-#: src/main/print.cpp:1060 src/main/print.cpp:1078 src/main/print.cpp:1097
+#: src/main/print.cpp:1061 src/main/print.cpp:1079 src/main/print.cpp:1098
 #, c-format
 msgid "invalid character length in '%s' function"
 msgstr "niepoprawna długość tekstu w funkcji '%s'"
 
-#: src/main/print.cpp:1107
+#: src/main/print.cpp:1108
 msgid "memory allocation error in 'realpr'"
 msgstr "błąd przydziału pamięci w 'realpr'"
 
-#: src/main/print.cpp:1123
+#: src/main/print.cpp:1124
 #, c-format
 msgid "BLAS/LAPACK routine '%6s' gave error code %d"
 msgstr "procedura BLAS/LAPACK '%6s' zwróciła kod %d błędu"
@@ -5983,80 +6064,81 @@ msgstr ""
 "obietnica jest już w trakcie obliczania: rekursywne domyślne odwołanie do "
 "argumentu lub wcześniejsze problemy?"
 
-#: src/main/provenance_do.cpp:60
+#: src/main/provenance_do.cpp:62
 #, fuzzy, c-format
 msgid "%d arguments passed to 'castestfun' which requires 1"
 msgstr "przekazano %d argument do funkcji '%s', która wymaga %d"
 
-#: src/main/provenance_do.cpp:63
+#: src/main/provenance_do.cpp:65
 #, fuzzy
 msgid "castestfun expects Symbol argument"
 msgstr "oczekiwano łańcucha tekstowego jako pierwszego argumentu"
 
-#: src/main/provenance_do.cpp:106
+#: src/main/provenance_do.cpp:108
 #, fuzzy, c-format
 msgid "%d arguments passed to 'hasProvenance' which requires 1"
 msgstr ""
 "%d argument przekazano do funkcji '%s', która wymaga %d lub %d argumentów"
 
-#: src/main/provenance_do.cpp:109
+#: src/main/provenance_do.cpp:111
 #, fuzzy
-msgid "hasProvenance expects Symbol argument"
+msgid "'hasProvenance()' function expects Symbol argument"
 msgstr "oczekiwano łańcucha tekstowego jako pierwszego argumentu"
 
-#: src/main/provenance_do.cpp:126 src/main/provenance_do.cpp:196
-#: src/main/provenance_do.cpp:217
+#: src/main/provenance_do.cpp:128
 #, fuzzy
 msgid "provenance tracking not implemented in this build"
 msgstr "renderowanie ścieżki nie jest zaimplementowane dla tego urządzenia"
 
-#: src/main/provenance_do.cpp:132
+#: src/main/provenance_do.cpp:134
 #, fuzzy, c-format
 msgid "%d arguments passed to 'provenance' which requires 1"
 msgstr ""
 "%d argument przekazano do funkcji '%s', która wymaga %d lub %d argumentów"
 
-#: src/main/provenance_do.cpp:135
+#: src/main/provenance_do.cpp:137
 msgid "provenance expects Symbol argument"
 msgstr ""
 
-#: src/main/provenance_do.cpp:140
+#: src/main/provenance_do.cpp:142
 #, fuzzy
 msgid "invalid Symbol passed to 'provenance'"
 msgstr "niepoprawny typ przekazany do wewnętrznej funkcji\n"
 
-#: src/main/provenance_do.cpp:143
+#: src/main/provenance_do.cpp:145
 #, fuzzy
 msgid "object does not have any provenance"
 msgstr "obiekt S4 nie rozszerza klasy \"environment\""
 
-#: src/main/provenance_do.cpp:201
+#: src/main/provenance_do.cpp:198 src/main/provenance_do.cpp:219
+#, fuzzy
+msgid "provenance tracking is not implemented in this build"
+msgstr "renderowanie ścieżki nie jest zaimplementowane dla tego urządzenia"
+
+#: src/main/provenance_do.cpp:203
 #, fuzzy, c-format
 msgid "%d arguments passed to 'provCommand' which requires 1"
 msgstr ""
 "%d argument przekazano do funkcji '%s', która wymaga %d lub %d argumentów"
 
-#: src/main/provenance_do.cpp:204
-msgid "provCommand expects Symbol argument"
-msgstr ""
+#: src/main/provenance_do.cpp:206
+#, fuzzy
+msgid "'provCommand()' function expects Symbol argument"
+msgstr "oczekiwano łańcucha tekstowego jako pierwszego argumentu"
 
-#: src/main/provenance_do.cpp:222
+#: src/main/provenance_do.cpp:224
 #, fuzzy, c-format
-msgid "%d arguments passed to 'provenance.graph' which requires 1"
+msgid "%d arguments passed to 'provenance.graph()' which requires 1"
 msgstr ""
 "%d argument przekazano do funkcji '%s', która wymaga %d lub %d argumentów"
 
-#: src/main/provenance_do.cpp:226
-#, fuzzy
-msgid "invalid 'names' argument"
-msgstr "niepoprawny argument 'mode'"
-
-#: src/main/provenance_do.cpp:236
+#: src/main/provenance_do.cpp:239 src/unix/hpdlfcn.c:215
+#: src/unix/hpdlfcn.c:217
 #, c-format
-msgid "symbol '%s' not found"
+msgid "symbol '%s' was not found"
 msgstr "symbol '%s' nie został znaleziony"
 
-#: src/main/provenance_do.cpp:240
+#: src/main/provenance_do.cpp:243
 #, fuzzy, c-format
 msgid "'%s' does not have provenance information"
 msgstr "'a' nie ma nazwanych wymiarów"
@@ -6448,20 +6530,20 @@ msgstr "funkcja '%s' nie jest dostarczona przez pakiet '%s'"
 msgid "table entry must be an external pointer"
 msgstr "wpis w tabeli musi być wskaźnikiem zewnętrznym"
 
-#: src/main/relop.cpp:123 src/main/relop.cpp:222
+#: src/main/relop.cpp:122 src/main/relop.cpp:221
 msgid "comparison of these types is not implemented"
 msgstr "porównanie tych typów nie jest zaimplementowane"
 
-#: src/main/relop.cpp:155
+#: src/main/relop.cpp:154
 #, c-format
 msgid "comparison (%d) is possible only for atomic and list types"
 msgstr "porównanie (%d) jest możliwe jedynie dla typów atomowych oraz list"
 
-#: src/main/relop.cpp:160
+#: src/main/relop.cpp:159
 msgid "comparison is not allowed for expressions"
 msgstr "porównanie nie jest dozwolone dla wyrażeń"
 
-#: src/main/relop.cpp:385
+#: src/main/relop.cpp:384
 #, fuzzy
 msgid "'A' and 'B' must have the same type"
 msgstr "'A' oraz 'B' muszą mieć ten sam typ"
@@ -6671,7 +6753,7 @@ msgid "restore compatibility error - no version %d compatibility"
 msgstr "błąd przywrócenia zgodności -- brak zgodnościi dla wersji %d"
 
 #: src/main/saveload.cpp:531
-msgid "Loading pre-version-1 serialization not (yet) supported in CXXR"
+msgid "Loading pre-version-1 serialization not (yet) supported in rho"
 msgstr ""
 
 #: src/main/saveload.cpp:583 src/main/saveload.cpp:654
@@ -7280,7 +7362,7 @@ msgstr "baza danych leniwie ładowana'%s' jest uszkodzona"
 
 #: src/main/SEXP_downcast.cpp:41
 #, c-format
-msgid "'%s' supplied where '%s' expected."
+msgid "type '%s' supplied where type '%s' was expected."
 msgstr ""
 
 #: src/main/sort.cpp:109
@@ -7754,52 +7836,52 @@ msgstr "nieoczekiwany symbol"
 msgid "$ operator is invalid for atomic vectors"
 msgstr "operator $ jest niepoprawny dla atomowych wektorów"
 
-#: src/main/summary.cpp:45
+#: src/main/summary.cpp:44
 #, c-format
 msgid "invalid 'type' (%s) of argument"
 msgstr "niepoprawny 'type' (%s) argumentu"
 
-#: src/main/summary.cpp:489
+#: src/main/summary.cpp:488
 #, c-format
 msgid "C do_summary(op%s, *): did NOT dispatch\n"
 msgstr "C do_summary(op%s, *): nie rozdzielił się\n"
 
-#: src/main/summary.cpp:539
+#: src/main/summary.cpp:538
 #, c-format
 msgid "internal error ('op = %d' in do_summary).\t Call a Guru"
 msgstr "wewnętrzny błąd ('op = %d' w 'do_summary').\t Wezwij Guru"
 
-#: src/main/summary.cpp:763
+#: src/main/summary.cpp:762
 msgid "no non-missing arguments, returning NA"
 msgstr "brak argumentów; zwracanie wartości NA"
 
-#: src/main/summary.cpp:766
+#: src/main/summary.cpp:765
 msgid "no non-missing arguments passed to 'min()' function; returning Inf"
 msgstr ""
 "brak niebrakujących argumentów przekazanych do funkcji 'min()'; zwracanie "
 "wartości Inf"
 
-#: src/main/summary.cpp:768
+#: src/main/summary.cpp:767
 #, fuzzy
 msgid "no non-missing arguments passed to 'max()' function; returning -Inf"
 msgstr ""
 "brak niebrakujących argumentów przekazanych do funkcji 'min()'; zwracanie "
 "wartości Inf"
 
-#: src/main/summary.cpp:928
+#: src/main/summary.cpp:927
 #, fuzzy
 msgid "argument passed to 'which()' function is not logical"
 msgstr "argument przekazany do funkcji 'which()' nie jest argumentem logicznym"
 
-#: src/main/summary.cpp:971
+#: src/main/summary.cpp:970
 msgid "no arguments"
 msgstr "brak argumentów"
 
-#: src/main/summary.cpp:989
+#: src/main/summary.cpp:988
 msgid "invalid input type"
 msgstr "niepoprawny typ wejściowy"
 
-#: src/main/summary.cpp:1010
+#: src/main/summary.cpp:1009
 msgid "an argument will be fractionally recycled"
 msgstr "argument zostanie częściowo powtórzony"
 
@@ -8228,7 +8310,7 @@ msgid "cannot allocate vector of size %0.1f Kb"
 msgstr "nie można przydzielić wektora o rozmiarze %0.f Kb"
 
 #: src/main/version.cpp:48
-msgid "CXXR Copyright (C) 2008-14 Andrew R. Runnalls.  CXXR like\n"
+msgid "Rho Copyright (C) 2008-14 Andrew R. Runnalls.\n"
 msgstr ""
 
 #: src/main/version.cpp:50
@@ -8860,10 +8942,92 @@ msgstr "procedura Lapack %s: system jest dokładnie osobliwy: U[%d,%d] = 0"
 msgid "system is computationally singular: reciprocal condition number = %g"
 msgstr "system jest obliczeniowo osobliwy: numer odwrotnego warunku = %g"
 
-#: src/modules/X11/dataentry.cpp:1872 src/modules/X11/devX11.c:1250
+#: src/modules/X11/dataentry.cpp:307
+msgid "R Data Editor"
+msgstr "Edytor danych R"
+
+#: src/modules/X11/dataentry.cpp:365
+msgid "invalid type for value"
+msgstr "niepoprawny typ dla wartości"
+
+#: src/modules/X11/dataentry.cpp:376
+msgid "unable to start data editor"
+msgstr "nie można uruchomić edytora danych"
+
+#: src/modules/X11/dataentry.cpp:437
+msgid "dataentry: internal memory problem"
+msgstr "dataentry: wewnętrzny błąd pamięci"
+
+#: src/modules/X11/dataentry.cpp:501
+msgid "unable to start data viewer"
+msgstr "nie można uruchomić przeglądarki danych"
+
+#: src/modules/X11/dataentry.cpp:781
+msgid "get_col_name: column number too big to stringify"
+msgstr "get_col_name: numer kolumny jest zbyt duży, aby zamienić go na tekst"
+
+#: src/modules/X11/dataentry.cpp:908
+msgid "dataentry: internal memory error"
+msgstr "dataentry: błąd wewnętrzny pamięci"
+
+#: src/modules/X11/dataentry.cpp:1025 src/modules/X11/dataentry.cpp:1038
+#, fuzzy
+msgid "internal type error in dataentry"
+msgstr "błąd wewnętrzny w 'dataentry'"
+
+#: src/modules/X11/dataentry.cpp:1139
+msgid "dataentry: parse error on string"
+msgstr "dataentry: błąd przetwarzania łańcucha"
+
+#: src/modules/X11/dataentry.cpp:1341 src/modules/X11/dataentry.cpp:1751
+msgid "dataentry: expression too long"
+msgstr "wpis danych: wyrażenie jest zbyt długie"
+
+#: src/modules/X11/dataentry.cpp:1867 src/modules/X11/devX11.c:1250
 #, c-format
 msgid "X11 protocol error: %s"
 msgstr "błąd protokołu X11: %s"
+
+#: src/modules/X11/dataentry.cpp:1874 src/modules/X11/devX11.c:1275
+msgid "X11 fatal IO error: please save work and shut down R"
+msgstr ""
+"krytyczny błąd X11 wejścia/wyjścia: proszę zapisać pracę po czym zamknąć R"
+
+#: src/modules/X11/dataentry.cpp:1899
+msgid "locale not supported by Xlib: some X ops will operate in C locale"
+msgstr ""
+"lokalizacja nie jest wspierana przez 'Xlib': niektóre opcje X będą operowały "
+"w lokalizacji C"
+
+#: src/modules/X11/dataentry.cpp:1900 src/modules/X11/devX11.c:1331
+msgid "X cannot set locale modifiers"
+msgstr "X nie może ustawić modyfikatorów lokalizacji"
+
+#: src/modules/X11/dataentry.cpp:1904
+msgid "unable to open display"
+msgstr "nie można otworzyć okna"
+
+#: src/modules/X11/dataentry.cpp:1935
+#, c-format
+msgid "unable to create fontset %s"
+msgstr "nie można utworzyć czcionki %s"
+
+#: src/modules/X11/dataentry.cpp:1941
+#, c-format
+msgid "unable to load font %s"
+msgstr "nie można załadować czcionki %s"
+
+#: src/modules/X11/dataentry.cpp:2066
+msgid "unable to open window for data editor"
+msgstr "nie można otworzyć okna dla edytora danych"
+
+#: src/modules/X11/dataentry.cpp:2100
+msgid "unable to open X Input Method"
+msgstr "nie można otworzyć 'X Input Method'"
+
+#: src/modules/X11/dataentry.cpp:2135
+msgid "unable to open X Input Context"
+msgstr "nie można otworzyć 'X Input Context'"
 
 #: src/modules/X11/devX11.c:466
 msgid "cannot set grayscale: reverting to monochrome"
@@ -8963,21 +9127,12 @@ msgstr ""
 msgid "X11 I/O error while opening X11 connection to '%s'"
 msgstr "błąd X11 wejścia/wyjścia podczas otwierania połączenia X11 z '%s'"
 
-#: src/modules/X11/devX11.c:1275
-msgid "X11 fatal IO error: please save work and shut down R"
-msgstr ""
-"krytyczny błąd X11 wejścia/wyjścia: proszę zapisać pracę po czym zamknąć R"
-
 #: src/modules/X11/devX11.c:1330
 msgid ""
 "locale is not supported by Xlib: some X operations will operate in C locale"
 msgstr ""
 "lokalizacja nie jest wspierana przez 'Xlib': niektóre opcje X będą operowały "
 "w lokalizacji C"
-
-#: src/modules/X11/devX11.c:1331
-msgid "X cannot set locale modifiers"
-msgstr "X nie może ustawić modyfikatorów lokalizacji"
 
 #: src/modules/X11/devX11.c:1335 src/modules/X11/rbitmap.c:305
 msgid "no png support in this version of R"
@@ -9375,11 +9530,6 @@ msgstr "otwieranie biblioteki %s, operacja = %x, zliczenia = %d\n"
 msgid "attempt to close library failed"
 msgstr "próba zamknięcia biblioteki nie powiodła się"
 
-#: src/unix/hpdlfcn.c:215 src/unix/hpdlfcn.c:217
-#, c-format
-msgid "symbol '%s' was not found"
-msgstr "symbol '%s' nie został znaleziony"
-
 #: src/unix/Rscript.c:136
 #, c-format
 msgid "malloc failure\n"
@@ -9567,6 +9717,27 @@ msgstr "moduł X11 nie może zostać załadowany"
 msgid "X11 is not available"
 msgstr "X11 nie jest dostępne"
 
+#~ msgid ""
+#~ "unable to identify current timezone '%s':\n"
+#~ "please set environment variable 'TZ'"
+#~ msgstr ""
+#~ "nie można zidentyfikować bieżącej strefy czasowej '%s':\n"
+#~ "proszę ustawić zmienną środowiskową 'TZ'"
+
+#~ msgid "NaNs produced"
+#~ msgstr "wyprodukowano wartości NaN"
+
+#, fuzzy
+#~ msgid "unused argument(s) %s"
+#~ msgstr "nieużywany argument %s"
+
+#, fuzzy
+#~ msgid "invalid 'names' argument"
+#~ msgstr "niepoprawny argument 'mode'"
+
+#~ msgid "symbol '%s' not found"
+#~ msgstr "symbol '%s' nie został znaleziony"
+
 #, fuzzy
 #~ msgid "internal error in do_logic"
 #~ msgstr "błąd wewnętrzny w 'do_random2'"
@@ -9576,10 +9747,6 @@ msgstr "X11 nie jest dostępne"
 
 #~ msgid "invalid 'y' type in 'x %s y'"
 #~ msgstr "błędny typ 'y' w 'x %s y'"
-
-#~ msgid "formal argument \"%s\" matched by multiple actual arguments"
-#~ msgstr ""
-#~ "formalny argument \"%s\" dopasowany przez wiele aktualnych argumentów"
 
 #~ msgid "'generic' argument must be a character string"
 #~ msgstr "argument 'generic' musi być łańcuchem tekstowym"
@@ -9845,9 +10012,6 @@ msgstr "X11 nie jest dostępne"
 #~ msgid "cycle detected"
 #~ msgstr "wykryto cykl"
 
-#~ msgid "NaN values produced"
-#~ msgstr "wyprodukowano wartości NaN"
-
 #~ msgid "non-conformable time series"
 #~ msgstr "niezgodne szeregi czasowe"
 
@@ -9856,9 +10020,6 @@ msgstr "X11 nie jest dostępne"
 
 #~ msgid "'%s' argument is missing"
 #~ msgstr "brakuje argumentu '%s'"
-
-#~ msgid "package 'grDevices' must be loaded"
-#~ msgstr "pakiet 'grDevices' musi być załadowany"
 
 #~ msgid "WARNING: '--max-ppsize' value is negative: ignored"
 #~ msgstr "OSTRZEŻENIE: wartość '--max-ppsize' jest ujemna: zignorowano"
@@ -9893,9 +10054,6 @@ msgstr "X11 nie jest dostępne"
 
 #~ msgid "requested primitive type is not consistent with cached value"
 #~ msgstr "zażądany prymitywny typ nie jest spójny z wartością w pamięci cache"
-
-#~ msgid "vector types do not match in 'copyVector()'"
-#~ msgstr "typy wektorów nie zgadzają się w funkcji 'copyVector()'"
 
 #~ msgid "first argument ('table') is not of type '%s', from '%s'"
 #~ msgstr "pierwszy argument ('table') nie jest typu '%s', z '%s'"
@@ -9967,9 +10125,6 @@ msgstr "X11 nie jest dostępne"
 
 #~ msgid "not in a try context"
 #~ msgstr "to nie jest w kontekście 'try'"
-
-#~ msgid "setting profile timer failed"
-#~ msgstr "ustawienie czasomierza profilu nie powiodło się"
 
 #~ msgid "cannot use R profiling while byte code profiling"
 #~ msgstr "nie można użyć optymalizacji R podczas optymalizacji kodu bajtowego"
@@ -10288,10 +10443,6 @@ msgstr "X11 nie jest dostępne"
 #~ "funkcja 'STRING_ELT()' może być zastosowana jedynie do 'character "
 #~ "vector', a nie '%s'"
 
-#~ msgid "'VECTOR_ELT()' function can only be applied to a 'list', not a '%s'"
-#~ msgstr ""
-#~ "funkcja 'VECTOR_ELT()' może być zastosowana jedynie do 'list', a nie '%s'"
-
 #~ msgid "'LOGICAL()' function can only be applied to a 'logical', not a '%s'"
 #~ msgstr ""
 #~ "funkcja 'LOGICAL()' może być zastosowana jedynie do 'logical', a nie '%s'"
@@ -10356,50 +10507,6 @@ msgstr "X11 nie jest dostępne"
 
 #~ msgid "CreateAtVector \"log\"(from axis()): usr[0] = %g > %g = usr[1] !"
 #~ msgstr "CreateAtVector \"log\"(z axis()): usr[0] = %g > %g = usr[1] !"
-
-#~ msgid "CreateAtVector \"log\"(from axis()): axp[0] = %g !"
-#~ msgstr "CreateAtVector \"log\"(z axis()): axp[0] = %g !"
-
-#~ msgid "CreateAtVector [log-axis()]: axp[0] = %g < 0!"
-#~ msgstr "CreateAtVector [log-axis()]: axp[0] = %g < 0!"
-
-#~ msgid "CreateAtVector [log-axis(), case 1]: (nint, ne) = (%d,%d)\n"
-#~ msgstr "CreateAtVector [log-axis(), przypadek 1]: (nint, ne) = (%d,%d)\n"
-
-#~ msgid ""
-#~ "log - axis(), 'at' creation, _LARGE_ range: ne = %d <= 0 !!\n"
-#~ "\t axp[0:1]=(%g,%g) ==> i = %d;\tnint = %d"
-#~ msgstr ""
-#~ "log - axis(), tworzenie 'at', _DUŻY_ zakres: ne = %d <= 0 !!\n"
-#~ "\t axp[0:1]=(%g,%g) ==> i = %d;\tnint = %d"
-
-#~ msgid ""
-#~ "log - axis(), 'at' creation, _LARGE_ range: invalid {xy}axp or par; nint="
-#~ "%d\n"
-#~ "\t axp[0:1]=(%g,%g), usr[0:1]=(%g,%g); i=%d, ni=%d"
-#~ msgstr ""
-#~ "log - axis(), tworzenie 'at', _DUŻY_ zakres: niepoprawne {xy}axp lub par; "
-#~ "nint=%d\n"
-#~ "\t axp[0:1]=(%g,%g), usr[0:1]=(%g,%g); i=%d, ni=%d"
-
-#~ msgid ""
-#~ "log - axis(), 'at' creation, _MEDIUM_ range: invalid {xy}axp or par;\n"
-#~ "\t axp[0]= %g, usr[0:1]=(%g,%g)"
-#~ msgstr ""
-#~ "log - axis(), tworzenie 'at', _ŚREDNI_ zakres: niepoprawne {xy}axp lub "
-#~ "par;\n"
-#~ "\t axp[0]= %g, usr[0:1]=(%g,%g)"
-
-#~ msgid ""
-#~ "log - axis(), 'at' creation, _SMALL_ range: invalid {xy}axp or par;\n"
-#~ "\t axp[0]= %g, usr[0:1]=(%g,%g)"
-#~ msgstr ""
-#~ "log - axis(), tworzenie 'at', _MAŁY_ zakres: niepoprawne {xy}axp lub "
-#~ "par;\n"
-#~ "\t axp[0]= %g, usr[0:1]=(%g,%g)"
-
-#~ msgid "log - axis(), 'at' creation: INVALID {xy}axp[3] = %g"
-#~ msgstr "log - axis(), tworzenie 'at': NIEPOPRAWNE {xy}axp[3] = %g"
 
 #~ msgid "invalid arguments"
 #~ msgstr "niepoprawne argumenty"
@@ -10479,60 +10586,6 @@ msgstr "X11 nie jest dostępne"
 
 #~ msgid "%s:%d cannot be opened"
 #~ msgstr "%s:%d nie może zostać otwarte"
-
-#~ msgid "R Data Editor"
-#~ msgstr "Edytor danych R"
-
-#~ msgid "invalid type for value"
-#~ msgstr "niepoprawny typ dla wartości"
-
-#~ msgid "unable to start data editor"
-#~ msgstr "nie można uruchomić edytora danych"
-
-#~ msgid "dataentry: internal memory problem"
-#~ msgstr "dataentry: wewnętrzny błąd pamięci"
-
-#~ msgid "unable to start data viewer"
-#~ msgstr "nie można uruchomić przeglądarki danych"
-
-#~ msgid "get_col_name: column number too big to stringify"
-#~ msgstr ""
-#~ "get_col_name: numer kolumny jest zbyt duży, aby zamienić go na tekst"
-
-#~ msgid "dataentry: internal memory error"
-#~ msgstr "dataentry: błąd wewnętrzny pamięci"
-
-#~ msgid "internal type error in 'dataentry'"
-#~ msgstr "błąd wewnętrzny w 'dataentry'"
-
-#~ msgid "dataentry: parse error on string"
-#~ msgstr "dataentry: błąd przetwarzania łańcucha"
-
-#~ msgid "dataentry: expression too long"
-#~ msgstr "wpis danych: wyrażenie jest zbyt długie"
-
-#~ msgid "locale not supported by Xlib: some X ops will operate in C locale"
-#~ msgstr ""
-#~ "lokalizacja nie jest wspierana przez 'Xlib': niektóre opcje X będą "
-#~ "operowały w lokalizacji C"
-
-#~ msgid "unable to open display"
-#~ msgstr "nie można otworzyć okna"
-
-#~ msgid "unable to create fontset %s"
-#~ msgstr "nie można utworzyć czcionki %s"
-
-#~ msgid "unable to load font %s"
-#~ msgstr "nie można załadować czcionki %s"
-
-#~ msgid "unable to open window for data editor"
-#~ msgstr "nie można otworzyć okna dla edytora danych"
-
-#~ msgid "unable to open X Input Method"
-#~ msgstr "nie można otworzyć 'X Input Method'"
-
-#~ msgid "unable to open X Input Context"
-#~ msgstr "nie można otworzyć 'X Input Context'"
 
 #, fuzzy
 #~ msgid "Unable to normalize character encodings"

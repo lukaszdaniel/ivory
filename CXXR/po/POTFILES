@@ -27,7 +27,6 @@ src/extra/tre/tre-internal.h
 src/extra/trio/trio.c
 src/extra/trio/trionan.c
 src/extra/tzone/localtime.c
-src/extra/tzone/registryTZ.c
 src/gnuwin32/console.c
 src/gnuwin32/dos_wglob.c
 src/gnuwin32/dynload.c
@@ -50,9 +49,10 @@ src/include/Errormsg.h
 src/include/localization.h
 src/include/Rdefines.h
 src/include/Rinterface.h
-src/include/CXXR/BinaryFunction.hpp
-src/include/CXXR/FixedVector.hpp
-src/include/CXXR/Subscripting.hpp
+src/include/rho/BinaryFunction.hpp
+src/include/rho/FixedVector.hpp
+src/include/rho/ListVector.hpp
+src/include/rho/Subscripting.hpp
 src/main/agrep.cpp
 src/main/apply.cpp
 src/main/ArgList.cpp
@@ -65,6 +65,7 @@ src/main/builtin.cpp
 src/main/BuiltInFunction.cpp
 src/main/character.cpp
 src/main/coerce.cpp
+src/main/colors.cpp
 src/main/CommandLineArgs.cpp
 src/main/complex.c
 src/main/connections.cpp
@@ -82,6 +83,7 @@ src/main/DotInternal.cpp
 src/main/DottedArgs.cpp
 src/main/dounzip.cpp
 src/main/dstruct.cpp
+src/main/duplicate.cpp
 src/main/edit.cpp
 src/main/engine.cpp
 src/main/envir.cpp
@@ -112,10 +114,12 @@ src/main/PairList.cpp
 src/main/paste.cpp
 src/main/platform.cpp
 src/main/plot3d.cpp
+src/main/plot.cpp
 src/main/plotmath.cpp
 src/main/printarray.cpp
 src/main/print.cpp
 src/main/printutils.cpp
+src/main/printvector.cpp
 src/main/Promise.cpp
 src/main/provenance_do.cpp
 src/main/qsort.cpp
