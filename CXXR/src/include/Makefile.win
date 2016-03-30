@@ -17,7 +17,7 @@ all: fixh config.h trioremap.h
 	@mkdir -p $(R_HOME)/include/R_ext
 	@cp -p $(SRC_HEADERS) $(OBJ_HEADERS) iconv.h $(R_HOME)/include
 	@cp -p R_ext/*.h $(R_HOME)/include/R_ext
-	@cp -p R_ext/rho/*.hpp $(R_HOME)/include/R_ext/rho
+	@cp -p rho/*.hpp $(R_HOME)/include/rho
 	@cp -p ../extra/graphapp/graphapp.h ../extra/graphapp/ga.h \
 	  $(R_HOME)/include
 
