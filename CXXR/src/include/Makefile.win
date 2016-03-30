@@ -13,8 +13,9 @@ OBJ_HEADERS = Rconfig.h Rmath.h Rversion.h config.h
 GW32_HEADERS = iconv.h psignal.h
 
 all: fixh config.h trioremap.h
-	@echo 'installing C headers'
+	@echo 'installing C and CXX headers'
 	@mkdir -p $(R_HOME)/include/R_ext
+	@mkdir -p $(R_HOME)/include/rho
 	@cp -p $(SRC_HEADERS) $(OBJ_HEADERS) iconv.h $(R_HOME)/include
 	@cp -p R_ext/*.h $(R_HOME)/include/R_ext
 	@cp -p rho/*.hpp $(R_HOME)/include/rho
