@@ -2863,7 +2863,6 @@ msgstr "tylko 2^31-1 bajtów może być zapisane w jednym wywołaniu 'writeBin()
 
 #: src/main/connections.cpp:4142 src/main/connections.cpp:4297
 #: src/main/connections.cpp:4580 src/main/connections.cpp:4620
-#, fuzzy
 msgid "problem writing to connection"
 msgstr "problem z zapisywaniem do połączenia"
 
@@ -2885,7 +2884,6 @@ msgid "can only read in bytes in a non-UTF-8 MBCS locale"
 msgstr "można czytać w bajtach jedynie w kodowaniu nie-UTF-8 MBCS"
 
 #: src/main/connections.cpp:4517
-#, fuzzy
 msgid "'object' is too short"
 msgstr "argument 'object' jest zbyt krótki"
 
@@ -2978,7 +2976,6 @@ msgid "file stream does not have valid gzip header"
 msgstr "strumień plikowy nie posiada poprawnego nagłówka gzip"
 
 #: src/main/connections.cpp:5312
-#, fuzzy
 msgid "writing error whilst flushing 'gzcon' connection"
 msgstr "błąd zapisu podczas czyszczenia połączenia gzcon"
 
@@ -2988,7 +2985,6 @@ msgid "crc error %x %x\n"
 msgstr "błąd crc %x %x\n"
 
 #: src/main/connections.cpp:5441
-#, fuzzy
 msgid "write error on 'gzcon' connection"
 msgstr "błąd zapisu w połączeniu gzcon"
 
@@ -3525,7 +3521,7 @@ msgid "invalid .Internal() argument"
 msgstr "niepoprawny argument '.Internal()'"
 
 #: src/main/DotInternal.cpp:70
-#, fuzzy, c-format
+#, c-format
 msgid "there is no .Internal function \"%s\""
 msgstr "brak wewnętrznej (.Internal) funkcji '%s'"
 
@@ -3858,7 +3854,6 @@ msgid "first argument must be a named list"
 msgstr "pierwszy argument musi być nazwaną listą"
 
 #: src/main/envir.cpp:738
-#, fuzzy
 msgid "'names(x)' must be a character vector of the same length as x"
 msgstr "'names(x)' musi być wektorem tekstowym tej samej długości co 'x'"
 
@@ -4373,9 +4368,8 @@ msgid "cannot remove bindings from a locked frame"
 msgstr "nie można usunąć powiązań z zablokowanego środowiska"
 
 #: src/main/Frame.cpp:222
-#, fuzzy
 msgid "cannot add bindings to a locked frame"
-msgstr "nie można dodać powiązań do zablokowanego środowiska"
+msgstr "nie można dodać powiązań do zablokowanej ramki"
 
 #: src/main/Frame.cpp:270
 msgid "list used to set frame bindings must have symbols as tags throughout"
@@ -4510,7 +4504,7 @@ msgstr "nie można przydzielić bufora dla długiego łańcucha w linii %d"
 #: ../../../rho/src/main/gram.y:2439 ../../../rho/src/main/gram.y:2475
 #: src/main/gram.y:2379 src/main/gram.y:2402 src/main/gram.y:2439
 #: src/main/gram.y:2475
-#, fuzzy, c-format
+#, c-format
 msgid "nul character not allowed (line %d)"
 msgstr "znak nul nie jest dozwolony (linia %d)"
 
@@ -5040,12 +5034,10 @@ msgid "unrecognized value of 'save' argument"
 msgstr "nierozpoznana wartość argumentu 'save'"
 
 #: src/main/main.cpp:1383
-#, fuzzy
 msgid "invalid 'status' argument, 0 assumed"
 msgstr "niepoprawny argument 'status', założono wartość 0"
 
 #: src/main/main.cpp:1388
-#, fuzzy
 msgid "invalid 'runLast' argument, FALSE assumed"
 msgstr "niepoprawny argument 'runLast', przyjęto FALSE"
 
@@ -5075,7 +5067,6 @@ msgstr ""
 "długości"
 
 #: src/main/mapply.cpp:73
-#, fuzzy
 msgid "argument 'MoreArgs' of 'mapply()' function is not a list"
 msgstr "argument 'MoreArgs' w funkcji 'mapply()' nie jest listą"
 
@@ -5498,7 +5489,6 @@ msgid "first argument must be atomic"
 msgstr "pierwszy argument musi być atomowy"
 
 #: src/main/paste.cpp:585
-#, fuzzy
 msgid "Impossible mode(x)"
 msgstr "Niemożliwe 'mode( x )'"
 
@@ -6385,7 +6375,6 @@ msgid "S_alloc: element size must be positive."
 msgstr "argument '%s' musi być dodatni"
 
 #: src/main/random.cpp:183
-#, fuzzy
 msgid "NA values in probability vector"
 msgstr "wartość NA w wektorze prawdopodobieństwa"
 
@@ -6544,7 +6533,6 @@ msgid "comparison is not allowed for expressions"
 msgstr "porównanie nie jest dozwolone dla wyrażeń"
 
 #: src/main/relop.cpp:384
-#, fuzzy
 msgid "'A' and 'B' must have the same type"
 msgstr "'A' oraz 'B' muszą mieć ten sam typ"
 
@@ -6832,7 +6820,6 @@ msgid "'NewReadItem()': unknown type %i"
 msgstr "'NewReadItem()': nieznany typ %i"
 
 #: src/main/saveload.cpp:1467
-#, fuzzy
 msgid "out of memory while reading ascii string"
 msgstr "zabrakło pamięci podczas czytania łańcucha ASCII"
 
@@ -6841,7 +6828,6 @@ msgid "a binary read error occurred"
 msgstr "nastąpił błąd odczytu danych binarnych"
 
 #: src/main/saveload.cpp:1607 src/main/saveload.cpp:1708
-#, fuzzy
 msgid "out of memory while reading binary string"
 msgstr "zabrakło pamięci podczas czytania łańcucha binarnego"
 
@@ -6902,7 +6888,7 @@ msgid "first argument must be a character vector"
 msgstr "pierwszy argument musi być wektorem tekstowym"
 
 #: src/main/saveload.cpp:2023
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' is not a valid named list"
 msgstr "'%s' nie jest niepoprawnie nazwaną listą"
 
@@ -7001,7 +6987,7 @@ msgid "scan() expected a complex, got '%s'"
 msgstr "'scan()' oczekiwał zmiennej zespolonej, otrzymał '%s'"
 
 #: src/main/scan.cpp:546
-#, fuzzy, c-format
+#, c-format
 msgid "scan() expected a raw, got '%s'"
 msgstr "'scan()' oczekiwał zmiennej rzeczywistej, otrzymał '%s'"
 
@@ -7067,7 +7053,6 @@ msgid "result would be too long a vector"
 msgstr "wynikiem byłby zbyt długi wektor"
 
 #: src/main/seq.cpp:171
-#, fuzzy
 msgid "argument of length 0"
 msgstr "argument ma długość 0"
 
@@ -7141,7 +7126,6 @@ msgid "'%s' argument must be finite"
 msgstr "argument '%s' musi mieć skończoną wartość"
 
 #: src/main/seq.cpp:824
-#, fuzzy
 msgid "invalid '(to - from)/by' in 'seq()' function"
 msgstr "niepoprawne '(to - from)/by' w funkcji 'seq()'"
 
@@ -7656,7 +7640,6 @@ msgstr ""
 "'[[<-' zdefiniowane dla obiektów typu \"S4\" tylko dla podklas środowiska"
 
 #: src/main/subassign.cpp:1088
-#, fuzzy
 msgid "wrong arguments for environment subassignment"
 msgstr "niepoprawne argumenty dla przypisania środowiska"
 
@@ -7702,7 +7685,6 @@ msgid "no method for assigning subsets of this S4 class"
 msgstr "brak metody do przypisywania podgrup tej klasy S4"
 
 #: src/main/subassign.cpp:1493
-#, fuzzy
 msgid "coercing LHS to a list"
 msgstr "przekształcenie wyrażenia po lewej strony w listę"
 
@@ -7773,12 +7755,10 @@ msgid "subscripting on non-vector"
 msgstr "indeksowanie na nie-wektorze"
 
 #: src/main/Subscripting.cpp:351
-#, fuzzy
 msgid "not a matrix/array"
 msgstr "obiekt nie jest macierzą"
 
 #: src/main/Subscripting.cpp:358
-#, fuzzy
 msgid "too few subscripts"
 msgstr "zbyt mało argumentów"
 
@@ -7787,7 +7767,6 @@ msgid "subscript out of bounds"
 msgstr "indeks jest poza granicami"
 
 #: src/main/Subscripting.cpp:369
-#, fuzzy
 msgid "too many subscripts"
 msgstr "zbyt dużo pozycji"
 
@@ -7869,7 +7848,6 @@ msgstr ""
 "wartości Inf"
 
 #: src/main/summary.cpp:927
-#, fuzzy
 msgid "argument passed to 'which()' function is not logical"
 msgstr "argument przekazany do funkcji 'which()' nie jest argumentem logicznym"
 
@@ -8052,7 +8030,7 @@ msgstr "tablica mieszająca jest pełna"
 
 #: src/main/unique.cpp:500 src/main/unique.cpp:529 src/main/unique.cpp:559
 #: src/main/unique.cpp:583 src/main/unique.cpp:622 src/main/unique.cpp:690
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' method applies only to vectors"
 msgstr "funkcja '%s' ma zastosowanie jedynie do wektorów"
 
@@ -8075,12 +8053,10 @@ msgid "argument is not of mode character"
 msgstr "argument nie jest trybem tekstowym"
 
 #: src/main/unique.cpp:1296
-#, fuzzy
 msgid "'...' used in a situation where it does not exist"
 msgstr "'...' użyte w sytuacji w której nie istnieje"
 
 #: src/main/unique.cpp:1302
-#, fuzzy
 msgid "'...' is not a pairlist"
 msgstr "'...' nie jest sparowaną listą"
 
@@ -8192,7 +8168,6 @@ msgid "a character vector 'value' expected"
 msgstr "oczekiwano tekstowego wektora 'value'"
 
 #: src/main/util.cpp:1124
-#, fuzzy
 msgid "'value' must be of positive length"
 msgstr "argument 'value' musi posiadać dodatnią długość"
 
@@ -8380,7 +8355,6 @@ msgid "there must be at least four control points"
 msgstr "muszą być przynajmniej cztery punkty kontrolne"
 
 #: src/main/xspline.cpp:550
-#, fuzzy
 msgid "there must be at least three control points"
 msgstr "muszą być przynajmniej trzy punkty kontrolne"
 
@@ -8971,7 +8945,6 @@ msgid "dataentry: internal memory error"
 msgstr "dataentry: błąd wewnętrzny pamięci"
 
 #: src/modules/X11/dataentry.cpp:1025 src/modules/X11/dataentry.cpp:1038
-#, fuzzy
 msgid "internal type error in dataentry"
 msgstr "błąd wewnętrzny w 'dataentry'"
 

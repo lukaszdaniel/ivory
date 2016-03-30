@@ -1057,8 +1057,7 @@ void attribute_hidden NORET Rstd_CleanUp(SA_TYPE saveact, int status, int runLas
 
 	    R_ClearerrConsole();
 	    R_FlushConsole();
-	    int res = R_ReadConsole(_("Save workspace image? [y/n/c]: "),
-				    buf, 128, 0);
+	    int res = R_ReadConsole(_("Save workspace image? [y/n/c]: "), buf, 128, 0);
 	    if(res) {
 		switch (buf[0]) {
 		case 'y':
