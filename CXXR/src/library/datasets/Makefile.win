@@ -32,4 +32,4 @@ mkR:
 	@rm -f $(top_builddir)/library/$(pkg)/Meta/nsInfo.rds
 
 # dummy targets
-Rsimple Rlazy Rlazycomp:
+Rsimple Rlazy:

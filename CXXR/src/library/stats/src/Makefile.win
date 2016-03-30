@@ -11,6 +11,8 @@ top_builddir = ../../../..
 subdir = src/library/$(pkg)/src
 R_HOME = $(top_builddir)
 
+SOURCES_CXX = model.cpp
+
 SOURCES_C = init.c kmeans.c \
   ansari.c bandwidths.c chisqsim.c d2x2xk.c fexact.c kendall.c ks.c \
   line.c smooth.c \
@@ -21,7 +23,7 @@ SOURCES_C = init.c kmeans.c \
   HoltWinters.c PPsum.c arima.c burg.c filter.c \
   mAR.c pacf.c starma.c port.c family.c sbart.c \
   approx.c loglin.c lowess.c massdist.c splines.c lm.c \
-  complete_cases.c cov.c deriv.c fft.c fourier.c model.c optim.c optimize.c \
+  complete_cases.c cov.c deriv.c fft.c fourier.c optim.c optimize.c \
   integrate.c random.c distn.c zeroin.c rcont.c influence.c
 
 SOURCES_F = bsplvd.f bvalue.f bvalus.f loessf.f ppr.f qsbart.f \
@@ -29,8 +31,8 @@ SOURCES_F = bsplvd.f bvalue.f bvalus.f loessf.f ppr.f qsbart.f \
   hclust.f kmns.f \
   eureka.f stl.f portsrc.f lminfl.f
 
-DEPENDS = $(SOURCES_C:.c=.d)
-OBJECTS = $(SOURCES_C:.c=.o) $(SOURCES_F:.f=.o) ../../../gnuwin32/dllversion.o
+DEPENDS = $(SOURCES_C:.c=.d) $(SOURCES_CXX:.cpp=.d)
+OBJECTS = $(SOURCES_C:.c=.o) $(SOURCES_CXX:.cpp=.o) $(SOURCES_F:.f=.o) ../../../gnuwin32/dllversion.o
 
 SHLIB = $(pkg).dll
 RESFLAGS = -I $(R_HOME)/include
