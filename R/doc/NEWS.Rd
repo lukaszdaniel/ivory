@@ -8,7 +8,7 @@
 \section{\Rlogo CHANGES IN R-devel}{
   \subsection{NEW FEATURES}{
     \itemize{
-      \item Placeholder.
+      \item User errors such as \code{integrate(f, 0:1, 2)} are now caught.
     }
   }
   \subsection{DEPRECATED AND DEFUNCT}{
@@ -17,6 +17,13 @@
       be removed prior to \R 3.4.0.
 
       \item (Windows only) Function \code{setInternet2()} is defunct.
+    }
+  }
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item Getting or setting \code{body()} or \code{formals()} on
+      non-functions for now signals a warning and may become an error
+      for setting.
     }
   }
 }
@@ -335,6 +342,10 @@
       directly aim for less than \code{min(n,p)} PC's.  The
       \code{summary()} and its \code{print()} method have been amended,
       notably for this case.
+
+      \item \code{gzcon} gains a new option \code{text}, which marks the
+      connection as text-oriented (so e.g. \code{pushBack} works). It is
+      still always opened in binary mode.
     }
   }
 

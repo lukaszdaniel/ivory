@@ -26,7 +26,7 @@
 #include <R_ext/Applic.h>
 #include "localization.h"
 
-/* alled via .External(.) :*/
+/* called via .External(.) :*/
 SEXP call_dqags(SEXP args);
 SEXP call_dqagi(SEXP args);
 
@@ -75,7 +75,9 @@ SEXP call_dqags(SEXP args)
     args = CDR(args);
     is.f = CAR(args); args = CDR(args);
     is.env = CAR(args); args = CDR(args);
+    if(length(CAR(args)) > 1) error(_("'%s' argument must be of length one"), "lower");
     lower = asReal(CAR(args)); args = CDR(args);
+    if(length(CAR(args)) > 1) error(_("'%s' argument must be of length one"), "upper");
     upper = asReal(CAR(args)); args = CDR(args);
     epsabs = asReal(CAR(args)); args = CDR(args);
     epsrel = asReal(CAR(args)); args = CDR(args);
@@ -117,6 +119,7 @@ SEXP call_dqagi(SEXP args)
     args = CDR(args);
     is.f = CAR(args); args = CDR(args);
     is.env = CAR(args); args = CDR(args);
+    if(length(CAR(args)) > 1) error(_("'%s' argument must be of length one"), "bound");
     bound = asReal(CAR(args)); args = CDR(args);
     inf = asInteger(CAR(args)); args = CDR(args);
     epsabs = asReal(CAR(args)); args = CDR(args);

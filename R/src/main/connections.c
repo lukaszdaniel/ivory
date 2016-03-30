@@ -5476,6 +5476,7 @@ SEXP attribute_hidden do_gzcon(SEXP call, SEXP op, SEXP args, SEXP rho)
     int icon, level, allow;
     Rconnection incon = NULL, newcon = NULL;
     char *m, *mode = NULL /* -Wall */,  description[1000];
+    Rboolean text;
 
     checkArity(op, args);
     if(!inherits(CAR(args), "connection"))
@@ -5487,7 +5488,10 @@ SEXP attribute_hidden do_gzcon(SEXP call, SEXP op, SEXP args, SEXP rho)
     allow = asLogical(CADDR(args));
     if(allow == NA_INTEGER)
 	error(_("'%s' argument must be TRUE or FALSE"), "allowNonCompression");
-
+    text = asLogical(CADDDR(args));
+    if(text == NA_INTEGER)
+        error(_("'%s' argument must be TRUE or FALSE"), "text");
+    
     if(incon->isGzcon) {
 	warning(_("this is already a gzcon connection"));
 	return CAR(args);
@@ -5518,7 +5522,7 @@ SEXP attribute_hidden do_gzcon(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("allocation of gzcon connection failed"));
     }
     init_con(newcon, description, CE_NATIVE, mode);
-    newcon->text = FALSE;
+    newcon->text = text;
     newcon->isGzcon = TRUE;
     newcon->open = &gzcon_open;
     newcon->close = &gzcon_close;
@@ -5529,7 +5533,7 @@ SEXP attribute_hidden do_gzcon(SEXP call, SEXP op, SEXP args, SEXP rho)
     newcon->private = (void *) malloc(sizeof(struct gzconn));
     if(!newcon->private) {
 	free(newcon->description); free(newcon->conclass); free(newcon);
-	error(_("allocation of gzcon connection failed"));
+	error(_("allocation of 'gzcon' connection failed"));
     }
     ((Rgzconn)(newcon->private))->con = incon;
     ((Rgzconn)(newcon->private))->cp = level;

@@ -8067,6 +8067,15 @@ Error in command 'integrate(f, 0, 1)':
 0 with absolute error < 0
 > integrate(dnorm, 0, Inf)   ## works
 0.5 with absolute error < 4.7e-05
+> ## Don't show: 
+> tools::assertError(
++ ## End (Don't show)
++ integrate(dnorm, 0:1, 20) #-> error!
++ ## "silently" gave  integrate(dnorm, 0, 20)  in earlier versions of R
++ ## Don't show: 
++  , verbose=TRUE)
+Asserted error: 'lower' must be of length one
+> ## End (Don't show)
 > 
 > 
 > 
