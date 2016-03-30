@@ -11,8 +11,7 @@ CPPFLAGS = -I. -I../include -DHAVE_CONFIG_H -DR_DLL_BUILD $(arch_DEFS)
 SOURCES_C = complex.c inlined.c radixsort.c \
 	g_alab_her.c g_cntrlify.c g_fontdb.c g_her_glyph.c
 
-SOURCES_CXX = \
-	ArgList.cpp ArgMatcher.cpp \
+SOURCES_CXX = ArgList.cpp ArgMatcher.cpp \
 	BinaryFunction.cpp Browser.cpp BuiltInFunction.cpp \
 	CellPool.cpp Closure.cpp \
 	ClosureContext.cpp CommandChronicle.cpp CommandLineArgs.cpp \
@@ -69,9 +68,9 @@ FSOURCES = xxxpr.f
 OBJS = $(SOURCES_C:.c=.o) $(SOURCES_CXX:.cpp=.o) $(FSOURCES:.f=.o)
 
 ifdef RUN_BISON
-gram.c: gram.y
+gram.cpp: gram.y
 	bison gram.y
-	$(SED) -e "s/gram.tab.c/gram.c/" gram.tab.c > gram.c
+	$(SED) -e "s/gram.tab.c/gram.cpp/" gram.tab.c > gram.cpp
 	$(RM) gram.tab.c
 endif
 

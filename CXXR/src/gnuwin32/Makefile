@@ -56,9 +56,11 @@ MkRules: MkRules.rules
 endif
 
 CFLAGS = -O3 -Wall -pedantic $(EOPTS)
+CXXFLAGS = -O3 -Wall -pedantic $(EOPTS)
 FFLAGS = -O3 $(EOPTS)
 ifdef DEBUG
  CFLAGS += $(G_FLAG)
+ CXXFLAGS += $(G_FLAG)
  FFLAGS += $(G_FLAG)
  DLLFLAGS =
 else
@@ -123,7 +125,7 @@ rlibs:
 	$(MK) -C ../extra/intl CFLAGS='$(CFLAGS)' -f Makefile.win
 	$(MK) -C ../appl CFLAGS='$(CFLAGS)' FFLAGS='$(FFLAGS)' -f Makefile.win
 	$(MK) -C ../nmath CFLAGS='$(CFLAGS)' FFLAGS='${FFLAGS}' -f Makefile.win
-	$(MK) -C ../main CFLAGS='$(CFLAGS)' FFLAGS='$(FFLAGS)' malloc-DEFS='$(malloc-DEFS)' -f Makefile.win
+	$(MK) -C ../main CFLAGS='$(CFLAGS)' CXXFLAGS='$(CXXFLAGS)' FFLAGS='$(FFLAGS)' malloc-DEFS='$(malloc-DEFS)' -f Makefile.win
 	$(MK) -C ./getline CFLAGS='$(CFLAGS)'
 	@for ex in graphapp xdr tre trio tzone win_iconv ; do \
 	  $(MK) -C ../extra/$${ex} CFLAGS='$(CFLAGS)' -f Makefile.win || exit 1; \
