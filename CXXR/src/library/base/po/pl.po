@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-28 23:29+0200\n"
+"POT-Creation-Date: 2016-03-31 22:51+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -725,7 +725,7 @@ msgstr "problem z wyświetleniem pliku '%ls'"
 #: src/modules/lapack/Lapack.c:886 src/modules/lapack/Lapack.c:1211
 #: src/modules/X11/devX11.c:3244 src/modules/X11/devX11.c:3247
 #: src/modules/X11/devX11.c:3250 src/modules/X11/devX11.c:3274
-#: src/unix/sys-std.c:1231 src/unix/sys-std.c:1254
+#: src/unix/sys-std.c:1230 src/unix/sys-std.c:1253
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
@@ -849,124 +849,136 @@ msgstr "przydział połączenia potokowego nie powiódł się"
 msgid "'%s' argument is not a character vector"
 msgstr "argument '%s' nie jest wektorem tekstowym"
 
-#: src/gnuwin32/system.c:127 src/unix/sys-unix.c:444
+#: src/gnuwin32/system.c:100
+msgid ""
+"Thief about! Something other than package tcltk has set or is attempting to "
+"set R_Tcl_do"
+msgstr ""
+
+#: src/gnuwin32/system.c:110
+msgid ""
+"Thief about! Something other than package tcltk has set or is attempting to "
+"unset R_Tcl_do"
+msgstr ""
+
+#: src/gnuwin32/system.c:126 src/unix/sys-unix.c:444
 msgid "reached session elapsed time limit"
 msgstr "osiągnięto limit czasu sesji"
 
-#: src/gnuwin32/system.c:129 src/unix/sys-unix.c:446
+#: src/gnuwin32/system.c:128 src/unix/sys-unix.c:446
 msgid "reached elapsed time limit"
 msgstr "osiągnięto limit czasu"
 
-#: src/gnuwin32/system.c:135 src/unix/sys-unix.c:452
+#: src/gnuwin32/system.c:134 src/unix/sys-unix.c:452
 msgid "reached session CPU time limit"
 msgstr "osiągnięto limit czasu sesji CPU"
 
-#: src/gnuwin32/system.c:137 src/unix/sys-unix.c:454
+#: src/gnuwin32/system.c:136 src/unix/sys-unix.c:454
 msgid "reached CPU time limit"
 msgstr "osiągnięto limit czasu CPU"
 
-#: src/gnuwin32/system.c:162 src/unix/sys-std.c:81
+#: src/gnuwin32/system.c:161 src/unix/sys-std.c:81
 #, c-format
 msgid "Fatal error: %s\n"
 msgstr "Błąd krytyczny: %s\n"
 
-#: src/gnuwin32/system.c:340 src/unix/sys-std.c:875
+#: src/gnuwin32/system.c:339 src/unix/sys-std.c:875
 #, c-format
 msgid "encoding '%s' is not recognised"
 msgstr "kodowanie '%s' nie zostało rozpoznane"
 
-#: src/gnuwin32/system.c:346 src/unix/sys-std.c:881
+#: src/gnuwin32/system.c:345 src/unix/sys-std.c:881
 #, c-format
 msgid "<ERROR: re-encoding failure from encoding '%s'>\n"
 msgstr "<BŁĄD: ponowne kodowanie nie powiodło się dla kodowania '%s'>\n"
 
-#: src/gnuwin32/system.c:568 src/gnuwin32/system.c:1070
-#: src/gnuwin32/system.c:1082 src/main/connections.cpp:616
+#: src/gnuwin32/system.c:567 src/gnuwin32/system.c:1069
+#: src/gnuwin32/system.c:1081 src/main/connections.cpp:616
 #: src/main/connections.cpp:621 src/main/dounzip.cpp:187
 #: src/main/saveload.cpp:1978 src/main/serialize.cpp:2550
 #: src/main/serialize.cpp:2555 src/main/serialize.cpp:2638
-#: src/main/serialize.cpp:2683 src/unix/sys-std.c:1171 src/unix/system.c:332
+#: src/main/serialize.cpp:2683 src/unix/sys-std.c:1170 src/unix/system.c:332
 #, c-format
 msgid "cannot open file '%s': %s"
 msgstr "nie można otworzyć pliku '%s': %s"
 
-#: src/gnuwin32/system.c:582
+#: src/gnuwin32/system.c:581
 #, c-format
 msgid "file.show(): file '%s' does not exist\n"
 msgstr "file.show(): plik '%s' nie istnieje\n"
 
-#: src/gnuwin32/system.c:991
+#: src/gnuwin32/system.c:990
 #, c-format
 msgid "WARNING: R_MAX_MEM_SIZE value is invalid: ignored\n"
 msgstr "OSTRZEŻENIE: wartość R_MAX_MEM_SIZE jest niepoprawna: zignorowano\n"
 
-#: src/gnuwin32/system.c:1023
+#: src/gnuwin32/system.c:1022
 msgid "WARNING: no max-mem-size given\n"
 msgstr "OSTRZEŻENIE: nie podano max-mem-size\n"
 
-#: src/gnuwin32/system.c:1030
+#: src/gnuwin32/system.c:1029
 #, c-format
 msgid "WARNING: --max-mem-size value is invalid: ignored\n"
 msgstr "OSTRZEŻENIE: wartość --max-mem-size jest niepoprawna: zignorowano\n"
 
-#: src/gnuwin32/system.c:1033
+#: src/gnuwin32/system.c:1032
 #, c-format
 msgid "WARNING: --max-mem-size=%lu%c: too large and ignored\n"
 msgstr ""
 "OSTRZEŻENIE: --max-mem-size=%lu%c: wartość zbyt duża została zignorowana\n"
 
-#: src/gnuwin32/system.c:1039
+#: src/gnuwin32/system.c:1038
 #, c-format
 msgid "WARNING: --max-mem-size=%4.1fM: too small and ignored\n"
 msgstr ""
 "OSTRZEŻENIE: --max-mem-size=%4.1fM: wartość zbyt mała została zignorowano\n"
 
-#: src/gnuwin32/system.c:1044
+#: src/gnuwin32/system.c:1043
 #, c-format
 msgid "WARNING: --max-mem-size=%4.0fM: too large and taken as %uM\n"
 msgstr ""
 "OSTRZEŻENIE: --max-mem-size=%4.0fM: wartość zbyt duża została wzięta jako "
 "%uM\n"
 
-#: src/gnuwin32/system.c:1060
+#: src/gnuwin32/system.c:1059
 #, c-format
 msgid "option '%s' requires an argument"
 msgstr "opcja '%s' wymaga argumentu"
 
-#: src/gnuwin32/system.c:1091
+#: src/gnuwin32/system.c:1090
 #, c-format
 msgid "option '%s' requires a non-empty argument"
 msgstr "opcja '%s' wymaga niepustego argumentu"
 
-#: src/gnuwin32/system.c:1099 src/unix/system.c:351
+#: src/gnuwin32/system.c:1098 src/unix/system.c:351
 #, c-format
 msgid "WARNING: '-e %s' omitted as input is too long\n"
 msgstr "OSTRZEŻENIE: '-e %s' pominięto ponieważ wejście jest zbyt długie\n"
 
-#: src/gnuwin32/system.c:1103 src/unix/system.c:364
+#: src/gnuwin32/system.c:1102 src/unix/system.c:364
 #, c-format
 msgid "WARNING: unknown option '%s'\n"
 msgstr "OSTRZEŻENIE: nieznana opcja '%s'\n"
 
-#: src/gnuwin32/system.c:1125 src/unix/system.c:368
+#: src/gnuwin32/system.c:1124 src/unix/system.c:368
 #, c-format
 msgid "ARGUMENT '%s' __ignored__\n"
 msgstr "ARGUMENT '%s' __zignorowano__\n"
 
-#: src/gnuwin32/system.c:1131 src/unix/system.c:375
+#: src/gnuwin32/system.c:1130 src/unix/system.c:375
 msgid "cannot use -e with -f or --file"
 msgstr "nie można użyć -e razem z -f lub --file"
 
-#: src/gnuwin32/system.c:1149
+#: src/gnuwin32/system.c:1148
 msgid "creation of tmpfile failed -- set TMPDIR suitably?"
 msgstr ""
 "utworzenie pliku 'tmpfile' nie powiodło się -- ustawić 'TMPDIR' odpowiednio?"
 
-#: src/gnuwin32/system.c:1168 src/unix/system.c:426
+#: src/gnuwin32/system.c:1167 src/unix/system.c:426
 msgid "you must specify '--save', '--no-save' or '--vanilla'"
 msgstr "musisz określić '--save', '--no-save' lub '--vanilla'"
 
-#: src/gnuwin32/system.c:1173
+#: src/gnuwin32/system.c:1172
 msgid ""
 "impossible to create 'reader thread'; you must free some system resources"
 msgstr ""
@@ -1122,7 +1134,6 @@ msgstr ""
 "funkcja 'VECTOR_ELT()' może być zastosowana jedynie do 'list', a nie '%s'"
 
 #: src/include/rho/Subscripting.hpp:855 src/include/rho/Subscripting.hpp:1004
-#, fuzzy
 msgid "NAs are not allowed in subscripted assignments"
 msgstr "wartości NA nie są dozwolone w przypisaniach indeksowych"
 
@@ -1310,7 +1321,6 @@ msgid "NaN values produced"
 msgstr "wyprodukowano wartości NaN"
 
 #: src/main/arithmetic.cpp:57
-#, fuzzy
 msgid "non-numeric argument passed to mathematical function"
 msgstr "argument nieliczbowy przekazany do funkcji matematycznej"
 
@@ -1961,7 +1971,7 @@ msgid "BuiltInFunction's destructor should never be called"
 msgstr ""
 
 #: src/main/BuiltInFunction.cpp:184
-#, fuzzy, c-format
+#, c-format
 msgid "%d argument passed to .Internal(%s) which requires %d"
 msgid_plural "%d arguments passed to .Internal(%s) which requires %d"
 msgstr[0] "%d argument przekazano do '.Internal(%s)' który wymaga %d"
@@ -1986,6 +1996,22 @@ msgstr ""
 
 #: src/main/BuiltInFunction.cpp:283
 msgid "Attempting to do group dispatch without a group"
+msgstr ""
+
+#: src/main/CellPool.cpp:67
+msgid "CellPool::check(): internal inconsistency\n"
+msgstr ""
+
+#: src/main/CellPool.cpp:81
+msgid "CellPool::checkCell : designated block is (already) free.\n"
+msgstr ""
+
+#: src/main/CellPool.cpp:98
+msgid "CellPool::checkCell: designated block is misaligned\n"
+msgstr ""
+
+#: src/main/CellPool.cpp:104
+msgid "CellPool::checkCell: designated block doesn't belong to this CellPool\n"
 msgstr ""
 
 #: src/main/character.cpp:118 src/main/character.cpp:235
@@ -2295,7 +2321,7 @@ msgid "WARNING: no value given for --encoding"
 msgstr "OSTRZEŻENIE: nie podano wartości dla --encoding"
 
 #: src/main/CommandLineArgs.cpp:202
-#, fuzzy, c-format
+#, c-format
 msgid "WARNING: option '%s' no longer supported"
 msgstr "OSTRZEŻENIE: opcja '%s' nie jest już wspierana"
 
@@ -2352,9 +2378,9 @@ msgid "invalid connection"
 msgstr "niepoprawne połączenie"
 
 #: src/main/connections.cpp:223
-#, fuzzy, c-format
+#, c-format
 msgid "closing unused connection %d (%s)\n"
-msgstr "zamykanie nieużywanego połączenia %d (%s)"
+msgstr "zamykanie nieużywanego połączenia %d (%s)\n"
 
 #: src/main/connections.cpp:248 src/main/sysutils.cpp:630
 #: src/main/sysutils.cpp:833 src/main/sysutils.cpp:848
@@ -2871,7 +2897,6 @@ msgid "size changing is not supported for raw vectors"
 msgstr "zmiana rozmiaru nie jest wspierana dla prostych wektorów"
 
 #: src/main/connections.cpp:4336
-#, fuzzy
 msgid "invalid UTF-8 input in readChar()"
 msgstr "niepoprawne wejście UTF-8 w 'readChar()'"
 
@@ -3176,7 +3201,7 @@ msgstr ""
 "wiersza."
 
 #: src/main/dcf.cpp:275
-#, fuzzy, c-format
+#, c-format
 msgid "Line starting '%s ...' is malformed!"
 msgstr "Linia rozpoczynająca się od '%s ...' jest uszkodzona!"
 
@@ -3382,7 +3407,7 @@ msgstr "argument '%s' musi być pojedynczym łańcuchem tekstowym"
 
 #: src/main/dotcode.cpp:418 src/main/dounzip.cpp:343 src/main/util.cpp:804
 #: src/main/util.cpp:838 src/main/util.cpp:879 src/main/util.cpp:919
-#: src/unix/sys-std.c:1234 src/unix/sys-std.c:1257
+#: src/unix/sys-std.c:1233 src/unix/sys-std.c:1256
 #, c-format
 msgid "'%s' argument is too long"
 msgstr "argument '%s' jest zbyt długi"
@@ -3822,7 +3847,7 @@ msgid "unbind in the base environment is unimplemented"
 msgstr "odpinanie w bazowym środowisku jest niezaimplementowane"
 
 #: src/main/envir.cpp:374
-#, fuzzy, c-format
+#, c-format
 msgid "argument passed to '%s' is not an environment"
 msgstr "argument przekazywany do funkcji '%s' nie jest środowiskiem"
 
@@ -4176,7 +4201,6 @@ msgid "restart is not on stack"
 msgstr "restart nie jest na stosie"
 
 #: src/main/errors.cpp:1835
-#, fuzzy
 msgid "error message must be a character string"
 msgstr "komunikat błędu nie jest łańcuchem tekstowym"
 
@@ -4212,7 +4236,6 @@ msgid "debugging in: "
 msgstr "debugowanie w:"
 
 #: src/main/eval.cpp:581
-#, fuzzy
 msgid "debug: "
 msgstr "debugowanie w:"
 
@@ -4262,7 +4285,6 @@ msgid "multi-argument returns are not permitted"
 msgstr "zwracania wielu argumentów nie są dozwolone"
 
 #: src/main/eval.cpp:1245
-#, fuzzy
 msgid "invalid formal argument list for 'function'"
 msgstr "niepoprawna lista formalnych argumentów dla \"function\""
 
@@ -4287,7 +4309,6 @@ msgid "invalid function in complex assignment"
 msgstr "niepoprawna funkcja w złożonym przypisaniu"
 
 #: src/main/eval.cpp:1571
-#, fuzzy
 msgid "invalid (do_set) left-hand side to assignment"
 msgstr "niepoprawna (funkcja 'do_set()') lewa strona do przypisania"
 
@@ -4330,7 +4351,7 @@ msgid "'%s' argument must be logical"
 msgstr "argument '%s' musi być typem logicznym"
 
 #: src/main/Expression.cpp:82 src/main/jit/Compiler.cpp:233
-#, fuzzy, c-format
+#, c-format
 msgid "could not find function \"%s\""
 msgstr "nie udało się znaleźć funkcji '%s'"
 
@@ -4339,7 +4360,7 @@ msgid "too many arguments, sorry"
 msgstr "zbyt dużo argumentów, przykro mi"
 
 #: src/main/Frame.cpp:86 src/main/Frame.cpp:101
-#, fuzzy, c-format
+#, c-format
 msgid "internal error in %s"
 msgstr "błąd wewnętrzny w '%s'"
 
@@ -4530,9 +4551,9 @@ msgstr ""
 "\"%s\""
 
 #: ../../../rho/src/main/gram.y:2434 src/main/gram.y:2434
-#, fuzzy, c-format
+#, c-format
 msgid "invalid \\u{xxxx} sequence (line %d)"
-msgstr "niepoprawna sekwencja \\U{xxxxxxxx} (linia %d)"
+msgstr "niepoprawna sekwencja \\u{xxxx} (linia %d)"
 
 #: ../../../rho/src/main/gram.y:2448 src/main/gram.y:2448
 #, c-format
@@ -4759,7 +4780,7 @@ msgid "LAPACK routines cannot be loaded"
 msgstr "procedury LAPACK nie mogą zostać załadowane"
 
 #: src/main/ListVector.cpp:56
-#, fuzzy, c-format
+#, c-format
 msgid "attempt to set index %lu/%lu in 'SET_VECTOR_ELT()' function"
 msgstr "próba ustawienia indeksu %lu/%lu w funkcji 'SET_VECTOR_ELT()'"
 
@@ -5029,7 +5050,6 @@ msgstr ""
 "wiersz poleceń"
 
 #: src/main/main.cpp:1380
-#, fuzzy
 msgid "unrecognized value of 'save' argument"
 msgstr "nierozpoznana wartość argumentu 'save'"
 
@@ -5217,7 +5237,6 @@ msgid "'UseMethod' used in an inappropriate fashion"
 msgstr "'UseMethod' użyta w niepoprawny sposób"
 
 #: src/main/objects.cpp:233
-#, fuzzy
 msgid "Invalid generic function in 'usemethod'"
 msgstr "niepoprawna ogólna funkcja w 'usemethod'"
 
@@ -5266,12 +5285,10 @@ msgid "generic function not specified"
 msgstr "ogólna funkcja nie jest określona"
 
 #: src/main/objects.cpp:632
-#, fuzzy
 msgid "invalid generic argument to 'NextMethod()'"
 msgstr "niepoprawny ogólny argument przekazany do funkcji 'NextMethod()'"
 
 #: src/main/objects.cpp:648
-#, fuzzy
 msgid "invalid .Group found in 'NextMethod()'"
 msgstr "niepoprawny argument 'group' znaleziony w funkcji 'NextMethod()'"
 
@@ -5647,9 +5664,9 @@ msgid "directory '%ls' already exists"
 msgstr "katalog '%ls' już istnieje"
 
 #: src/main/platform.cpp:2174 src/main/platform.cpp:2180
-#, fuzzy, c-format
+#, c-format
 msgid "cannot create directory '%ls', reason '%s'"
-msgstr "nie można utworzyć katalogu '%s', powód '%s'"
+msgstr "nie można utworzyć katalogu '%ls', powód '%s'"
 
 #: src/main/platform.cpp:2214 src/main/platform.cpp:2425
 msgid "too deep nesting"
@@ -5777,7 +5794,6 @@ msgid "log - axis(), 'at' creation: INVALID {xy}axp[3] = %g"
 msgstr "log - axis(), tworzenie 'at': NIEPOPRAWNE {xy}axp[3] = %g"
 
 #: src/main/plotmath.cpp:315
-#, fuzzy
 msgid "invalid 'which' argument in C function TeX"
 msgstr "niepoprawny argument 'which' w funkcji C TeX"
 
@@ -5831,7 +5847,7 @@ msgid "<0 x 0 matrix>"
 msgstr "<macierz 0 x 0>"
 
 #: src/main/printarray.cpp:414
-#, fuzzy, c-format
+#, c-format
 msgid " [ reached 'getOption(\"max.print\")' -- omitted %d row ]"
 msgid_plural " [ reached 'getOption(\"max.print\")' -- omitted %d rows ]"
 msgstr[0] " [ osiągnięto 'getOption(\"max.print\")' -- pominięto %d wiersz ]"
@@ -6355,21 +6371,29 @@ msgstr "%d argument jest typu '%s', co nie jest obecnie wspierane"
 msgid "Internal error: at the end of forder sortStr==FALSE but ustr_n!=0 [%d]"
 msgstr ""
 
-#: src/main/RAllocStack.cpp:92
+#: src/main/RAllocStack.cpp:68
+msgid "RAllocStack::restoreSize: requested size greater than current size."
+msgstr ""
+
+#: src/main/RAllocStack.cpp:71
+msgid "RAllocStack::restoreSize: requested size too small for current scope."
+msgstr ""
+
+#: src/main/RAllocStack.cpp:90
 #, fuzzy
 msgid "R_alloc: element size must be positive."
 msgstr "argument '%s' musi być dodatni"
 
-#: src/main/RAllocStack.cpp:97 src/main/RAllocStack.cpp:112
+#: src/main/RAllocStack.cpp:95 src/main/RAllocStack.cpp:110
 msgid "R_alloc: requested allocation is impossibly large."
 msgstr ""
 
-#: src/main/RAllocStack.cpp:104
+#: src/main/RAllocStack.cpp:102
 #, fuzzy
 msgid "S_alloc: number of elements must be non-negative."
 msgstr "liczba kontekstów musi by dodatnia"
 
-#: src/main/RAllocStack.cpp:106
+#: src/main/RAllocStack.cpp:104
 #, fuzzy
 msgid "S_alloc: element size must be positive."
 msgstr "argument '%s' musi być dodatni"
@@ -6460,7 +6484,6 @@ msgid "allocation failure in '%s' function"
 msgstr "niepowodzenie przydziału w funkcji '%s'"
 
 #: src/main/Rdynload.cpp:548
-#, fuzzy
 msgid "maximal number of DLL files reached..."
 msgstr "osiągnięto maksymalną liczbę plików DLL..."
 
@@ -6614,12 +6637,12 @@ msgid "RNG_Init: unimplemented RNG kind %d"
 msgstr "RNG_Init: niezaimplementowany rodzaj %d RNG"
 
 #: src/main/RNG.cpp:358
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' argument is missing, with no default"
 msgstr "brakuje argumentu '%s', a nie ma określonej wartości domyślnej"
 
 #: src/main/RNG.cpp:359
-#, fuzzy, c-format
+#, c-format
 msgid "'.Random.seed' is not an integer vector but of type '%s'"
 msgstr "'.Random.seed' nie jest wektorem typu liczb całkowitych lecz typu '%s'"
 
@@ -7104,7 +7127,7 @@ msgid "'from' argument cannot be NA, NaN or infinite"
 msgstr "argument 'from' nie może mieć wartości NA, NaN lub nieskończoność"
 
 #: src/main/seq.cpp:786
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' argument must be a non-negative number"
 msgstr "argument '%s' musi być nieujemną liczbą całkowitą"
 
@@ -7571,7 +7594,7 @@ msgid "unknown encoding: %d"
 msgstr "nieznana strona kodowa: %d"
 
 #: src/main/StringVector.cpp:89
-#, fuzzy, c-format
+#, c-format
 msgid "attempt to set index %lu/%lu in SET_STRING_ELT"
 msgstr "próba ustawienia indeksu %lu/%lu w funkcji 'SET_STRING_ELT()'"
 
@@ -7648,22 +7671,19 @@ msgid "more elements supplied than there are to replace"
 msgstr "dostarczono więcej elementów niż jest do zastąpienia"
 
 #: src/main/subassign.cpp:1116
-#, fuzzy
 msgid "'[[ ]]' with missing subscript"
 msgstr "'[[ ]]' z brakującymi indeksami"
 
 #: src/main/subassign.cpp:1131
-#, fuzzy
 msgid "'[[ ]]' subscript out of bounds"
 msgstr "'[[ ]]' indeks poza granicami"
 
 #: src/main/subassign.cpp:1137 src/main/subassign.cpp:1321
-#, fuzzy
 msgid "'[[ ]]' improper number of subscripts"
 msgstr "'[[ ]]' niepoprawna liczba indeksów"
 
 #: src/main/subassign.cpp:1149 src/main/subassign.cpp:1332
-#, fuzzy, c-format
+#, c-format
 msgid "'[[ ]]' subscript (%d) out of bounds"
 msgstr "indeks '[[ ]]' (%d) poza granicami"
 
@@ -8061,7 +8081,6 @@ msgid "'...' is not a pairlist"
 msgstr "'...' nie jest sparowaną listą"
 
 #: src/main/unique.cpp:1488
-#, fuzzy
 msgid "non-numeric matrix in 'rowsum()': this should not happen"
 msgstr "nieliczbowa macierz w 'rowsum()': to nie powinno się wydarzyć"
 
@@ -8070,7 +8089,6 @@ msgid "row names are not character"
 msgstr "nazwy wierszy nie są tekstem"
 
 #: src/main/unique.cpp:1526
-#, fuzzy
 msgid "non-numeric data frame in 'rowsum()'"
 msgstr "nieliczbowa ramka w 'rowsum()'"
 
@@ -8122,7 +8140,7 @@ msgid "supplied argument name '%s' does not match '%s'"
 msgstr "dostarczona nazwa '%s' argumentu nie pasuje do '%s'"
 
 #: src/main/util.cpp:541
-#, fuzzy, c-format
+#, c-format
 msgid "'nthcdr()' list is shorter than %d"
 msgstr "lista 'nthcdr()' jest krótsza niż %d"
 
@@ -8159,7 +8177,6 @@ msgstr ""
 "systemowa nazwa strefy czasowej jest nieznana: ustaw zmienną środowiskową TZ"
 
 #: src/main/util.cpp:1053
-#, fuzzy
 msgid "only the first character of 'quote' will be used"
 msgstr "tylko pierwszy znak argumentu 'quote' zostanie użyty"
 
@@ -8172,7 +8189,7 @@ msgid "'value' must be of positive length"
 msgstr "argument 'value' musi posiadać dodatnią długość"
 
 #: src/main/util.cpp:1253 src/main/util.cpp:1261
-#, fuzzy, c-format
+#, c-format
 msgid "invalid input '%s' in 'utf8towcs()' function"
 msgstr "niepoprawne wejście '%s' w funkcji 'utf8towcs()'"
 
@@ -8260,7 +8277,7 @@ msgstr "argument 'type' musi być typu \"integer\" dla formatu \"d\""
 msgid "'type' argument must be \"real\" for this format"
 msgstr "argument 'type' musi być typu \"real\" dla tego formatu"
 
-#: src/main/VectorBase.cpp:104
+#: src/main/VectorBase.cpp:105
 msgid "Attempt to associate dimnames with a non-existent dimension"
 msgstr ""
 
@@ -8283,6 +8300,10 @@ msgstr "nie można przydzielić wektora o rozmiarze %0.1f Mb"
 #, fuzzy, c-format
 msgid "cannot allocate vector of size %0.1f Kb"
 msgstr "nie można przydzielić wektora o rozmiarze %0.f Kb"
+
+#: src/main/VectorBase.cpp:170
+msgid "'SETLENGTH()' invoked for a non-vector."
+msgstr ""
 
 #: src/main/version.cpp:48
 msgid "Rho Copyright (C) 2008-14 Andrew R. Runnalls.\n"
@@ -9577,28 +9598,28 @@ msgstr ""
 msgid "Save workspace image? [y/n/c]: "
 msgstr "Zapisać obraz obszaru roboczego? [y/n/c]: "
 
-#: src/unix/sys-std.c:1094 src/unix/sys-std.c:1263
+#: src/unix/sys-std.c:1093 src/unix/sys-std.c:1262
 #, c-format
 msgid "problem in saving the history file '%s'"
 msgstr "problem z zapisaniem pliku historii '%s'"
 
-#: src/unix/sys-std.c:1197
+#: src/unix/sys-std.c:1196
 msgid "Enter file name: "
 msgstr "Wprowadź nazwę pliku:"
 
-#: src/unix/sys-std.c:1240 src/unix/sys-std.c:1242
+#: src/unix/sys-std.c:1239 src/unix/sys-std.c:1241
 msgid "no history mechanism available"
 msgstr "brak dostępnego mechanizmu historii"
 
-#: src/unix/sys-std.c:1269
+#: src/unix/sys-std.c:1268
 msgid "problem in truncating the history file"
 msgstr "problem z przycięciem pliku historii"
 
-#: src/unix/sys-std.c:1271 src/unix/sys-std.c:1273
+#: src/unix/sys-std.c:1270 src/unix/sys-std.c:1272
 msgid "no history available to save"
 msgstr "brak dostępnej historii do zapisania"
 
-#: src/unix/sys-std.c:1285
+#: src/unix/sys-std.c:1284
 msgid "invalid timestamp"
 msgstr "niepoprawna sygnatura czasu"
 

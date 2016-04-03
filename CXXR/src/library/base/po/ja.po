@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-28 23:29+0200\n"
+"POT-Creation-Date: 2016-03-31 22:51+0200\n"
 "PO-Revision-Date: 2012-02-26 14:21+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: R-core <R-core@R-project.org> \n"
@@ -716,7 +716,7 @@ msgstr " '%s'の表示に問題があります "
 #: src/modules/lapack/Lapack.c:886 src/modules/lapack/Lapack.c:1211
 #: src/modules/X11/devX11.c:3244 src/modules/X11/devX11.c:3247
 #: src/modules/X11/devX11.c:3250 src/modules/X11/devX11.c:3274
-#: src/unix/sys-std.c:1231 src/unix/sys-std.c:1254
+#: src/unix/sys-std.c:1230 src/unix/sys-std.c:1253
 #, c-format
 msgid "invalid '%s' argument"
 msgstr " '%s' 引数が不正です "
@@ -841,121 +841,133 @@ msgstr " パイプ接続の割り当てに失敗しました "
 msgid "'%s' argument is not a character vector"
 msgstr " 'fmt' は文字ベクトルではありません "
 
-#: src/gnuwin32/system.c:127 src/unix/sys-unix.c:444
+#: src/gnuwin32/system.c:100
+msgid ""
+"Thief about! Something other than package tcltk has set or is attempting to "
+"set R_Tcl_do"
+msgstr ""
+
+#: src/gnuwin32/system.c:110
+msgid ""
+"Thief about! Something other than package tcltk has set or is attempting to "
+"unset R_Tcl_do"
+msgstr ""
+
+#: src/gnuwin32/system.c:126 src/unix/sys-unix.c:444
 msgid "reached session elapsed time limit"
 msgstr " セッション時間が経過して上限に達しました "
 
-#: src/gnuwin32/system.c:129 src/unix/sys-unix.c:446
+#: src/gnuwin32/system.c:128 src/unix/sys-unix.c:446
 msgid "reached elapsed time limit"
 msgstr " 時間が経過して上限に達しました "
 
-#: src/gnuwin32/system.c:135 src/unix/sys-unix.c:452
+#: src/gnuwin32/system.c:134 src/unix/sys-unix.c:452
 msgid "reached session CPU time limit"
 msgstr "  セッションCPU時間が経過して上限に達しました "
 
-#: src/gnuwin32/system.c:137 src/unix/sys-unix.c:454
+#: src/gnuwin32/system.c:136 src/unix/sys-unix.c:454
 msgid "reached CPU time limit"
 msgstr " CPU時間が経過して上限に達しました "
 
-#: src/gnuwin32/system.c:162 src/unix/sys-std.c:81
+#: src/gnuwin32/system.c:161 src/unix/sys-std.c:81
 #, c-format
 msgid "Fatal error: %s\n"
 msgstr " 致命的なエラーです： %s \n"
 
-#: src/gnuwin32/system.c:340 src/unix/sys-std.c:875
+#: src/gnuwin32/system.c:339 src/unix/sys-std.c:875
 #, c-format
 msgid "encoding '%s' is not recognised"
 msgstr " '%s' というエンコーディングは認識できません "
 
-#: src/gnuwin32/system.c:346 src/unix/sys-std.c:881
+#: src/gnuwin32/system.c:345 src/unix/sys-std.c:881
 #, c-format
 msgid "<ERROR: re-encoding failure from encoding '%s'>\n"
 msgstr ""
 " <エラー : エンコーディング '%s' からの再エンコーディングに失敗しました> \n"
 
-#: src/gnuwin32/system.c:568 src/gnuwin32/system.c:1070
-#: src/gnuwin32/system.c:1082 src/main/connections.cpp:616
+#: src/gnuwin32/system.c:567 src/gnuwin32/system.c:1069
+#: src/gnuwin32/system.c:1081 src/main/connections.cpp:616
 #: src/main/connections.cpp:621 src/main/dounzip.cpp:187
 #: src/main/saveload.cpp:1978 src/main/serialize.cpp:2550
 #: src/main/serialize.cpp:2555 src/main/serialize.cpp:2638
-#: src/main/serialize.cpp:2683 src/unix/sys-std.c:1171 src/unix/system.c:332
+#: src/main/serialize.cpp:2683 src/unix/sys-std.c:1170 src/unix/system.c:332
 #, c-format
 msgid "cannot open file '%s': %s"
 msgstr " ファイル '%s' を開くことができません: %s "
 
-#: src/gnuwin32/system.c:582
+#: src/gnuwin32/system.c:581
 #, c-format
 msgid "file.show(): file '%s' does not exist\n"
 msgstr " file.show()：ファイル '%s' は存在しません \n"
 
-#: src/gnuwin32/system.c:991
+#: src/gnuwin32/system.c:990
 #, fuzzy, c-format
 msgid "WARNING: R_MAX_MEM_SIZE value is invalid: ignored\n"
 msgstr " 警告: '%s' 値が不正なので無視されました "
 
-#: src/gnuwin32/system.c:1023
+#: src/gnuwin32/system.c:1022
 msgid "WARNING: no max-mem-size given\n"
 msgstr " 警告: max-mem-size が与えられていません \n"
 
-#: src/gnuwin32/system.c:1030
+#: src/gnuwin32/system.c:1029
 #, c-format
 msgid "WARNING: --max-mem-size value is invalid: ignored\n"
 msgstr " 警告: --max-mem-size 値が不正です : 無視されました \n"
 
-#: src/gnuwin32/system.c:1033
+#: src/gnuwin32/system.c:1032
 #, c-format
 msgid "WARNING: --max-mem-size=%lu%c: too large and ignored\n"
 msgstr " 警告: --max-mem-size =%lu'%c' は大きすぎるので無視されました \n"
 
-#: src/gnuwin32/system.c:1039
+#: src/gnuwin32/system.c:1038
 #, c-format
 msgid "WARNING: --max-mem-size=%4.1fM: too small and ignored\n"
 msgstr " 警告: max-mem-size =%4.1fM は小さすぎるので無視されます \n"
 
-#: src/gnuwin32/system.c:1044
+#: src/gnuwin32/system.c:1043
 #, c-format
 msgid "WARNING: --max-mem-size=%4.0fM: too large and taken as %uM\n"
 msgstr " 警告: max-mem-size =%4.0fM は大きすぎるので %uM とされました \n"
 
-#: src/gnuwin32/system.c:1060
+#: src/gnuwin32/system.c:1059
 #, fuzzy, c-format
 msgid "option '%s' requires an argument"
 msgstr " 二項演算には二つの引数が必要です "
 
-#: src/gnuwin32/system.c:1091
+#: src/gnuwin32/system.c:1090
 #, fuzzy, c-format
 msgid "option '%s' requires a non-empty argument"
 msgstr " 二項演算には二つの引数が必要です "
 
-#: src/gnuwin32/system.c:1099 src/unix/system.c:351
+#: src/gnuwin32/system.c:1098 src/unix/system.c:351
 #, c-format
 msgid "WARNING: '-e %s' omitted as input is too long\n"
 msgstr " 警告: 入力が長すぎるため, '-e %s'  は省略されました \n"
 
-#: src/gnuwin32/system.c:1103 src/unix/system.c:364
+#: src/gnuwin32/system.c:1102 src/unix/system.c:364
 #, c-format
 msgid "WARNING: unknown option '%s'\n"
 msgstr " 警告: 未知の '%s' オプション \n"
 
-#: src/gnuwin32/system.c:1125 src/unix/system.c:368
+#: src/gnuwin32/system.c:1124 src/unix/system.c:368
 #, c-format
 msgid "ARGUMENT '%s' __ignored__\n"
 msgstr " 引数 '%s' は無視されました \n"
 
-#: src/gnuwin32/system.c:1131 src/unix/system.c:375
+#: src/gnuwin32/system.c:1130 src/unix/system.c:375
 msgid "cannot use -e with -f or --file"
 msgstr " -e は-f や --file と併用することはできません "
 
-#: src/gnuwin32/system.c:1149
+#: src/gnuwin32/system.c:1148
 msgid "creation of tmpfile failed -- set TMPDIR suitably?"
 msgstr ""
 " 一時ファイルの作成に失敗しました -- TMPDIRは正しく設定されていますか? "
 
-#: src/gnuwin32/system.c:1168 src/unix/system.c:426
+#: src/gnuwin32/system.c:1167 src/unix/system.c:426
 msgid "you must specify '--save', '--no-save' or '--vanilla'"
 msgstr " '--save' ,  '--no-save',  '--vanilla' のいずれかを指定してください "
 
-#: src/gnuwin32/system.c:1173
+#: src/gnuwin32/system.c:1172
 msgid ""
 "impossible to create 'reader thread'; you must free some system resources"
 msgstr ""
@@ -1976,6 +1988,22 @@ msgstr ""
 
 #: src/main/BuiltInFunction.cpp:283
 msgid "Attempting to do group dispatch without a group"
+msgstr ""
+
+#: src/main/CellPool.cpp:67
+msgid "CellPool::check(): internal inconsistency\n"
+msgstr ""
+
+#: src/main/CellPool.cpp:81
+msgid "CellPool::checkCell : designated block is (already) free.\n"
+msgstr ""
+
+#: src/main/CellPool.cpp:98
+msgid "CellPool::checkCell: designated block is misaligned\n"
+msgstr ""
+
+#: src/main/CellPool.cpp:104
+msgid "CellPool::checkCell: designated block doesn't belong to this CellPool\n"
 msgstr ""
 
 #: src/main/character.cpp:118 src/main/character.cpp:235
@@ -3424,7 +3452,7 @@ msgstr " 'norm' は文字列でなければなりません "
 
 #: src/main/dotcode.cpp:418 src/main/dounzip.cpp:343 src/main/util.cpp:804
 #: src/main/util.cpp:838 src/main/util.cpp:879 src/main/util.cpp:919
-#: src/unix/sys-std.c:1234 src/unix/sys-std.c:1257
+#: src/unix/sys-std.c:1233 src/unix/sys-std.c:1256
 #, fuzzy, c-format
 msgid "'%s' argument is too long"
 msgstr " 'file' 引数が長過ぎます "
@@ -6363,21 +6391,29 @@ msgstr " '%s' という型はサポートされていません "
 msgid "Internal error: at the end of forder sortStr==FALSE but ustr_n!=0 [%d]"
 msgstr ""
 
-#: src/main/RAllocStack.cpp:92
+#: src/main/RAllocStack.cpp:68
+msgid "RAllocStack::restoreSize: requested size greater than current size."
+msgstr ""
+
+#: src/main/RAllocStack.cpp:71
+msgid "RAllocStack::restoreSize: requested size too small for current scope."
+msgstr ""
+
+#: src/main/RAllocStack.cpp:90
 #, fuzzy
 msgid "R_alloc: element size must be positive."
 msgstr " 'to' は有限な値でなければなりません "
 
-#: src/main/RAllocStack.cpp:97 src/main/RAllocStack.cpp:112
+#: src/main/RAllocStack.cpp:95 src/main/RAllocStack.cpp:110
 msgid "R_alloc: requested allocation is impossibly large."
 msgstr ""
 
-#: src/main/RAllocStack.cpp:104
+#: src/main/RAllocStack.cpp:102
 #, fuzzy
 msgid "S_alloc: number of elements must be non-negative."
 msgstr " コンテキストの数は正でなくてはなりません "
 
-#: src/main/RAllocStack.cpp:106
+#: src/main/RAllocStack.cpp:104
 #, fuzzy
 msgid "S_alloc: element size must be positive."
 msgstr " 'to' は有限な値でなければなりません "
@@ -8294,7 +8330,7 @@ msgstr ""
 msgid "'type' argument must be \"real\" for this format"
 msgstr " .C(..): 'type' はこの書式においては \"real\" でなくてはなりません "
 
-#: src/main/VectorBase.cpp:104
+#: src/main/VectorBase.cpp:105
 msgid "Attempt to associate dimnames with a non-existent dimension"
 msgstr ""
 
@@ -8317,6 +8353,10 @@ msgstr " サイズ %0.1f Mb のベクトルを割り当てることができま�
 #, fuzzy, c-format
 msgid "cannot allocate vector of size %0.1f Kb"
 msgstr " サイズ %0.f Kb のベクトルを割り当てることができません "
+
+#: src/main/VectorBase.cpp:170
+msgid "'SETLENGTH()' invoked for a non-vector."
+msgstr ""
 
 #: src/main/version.cpp:48
 msgid "Rho Copyright (C) 2008-14 Andrew R. Runnalls.\n"
@@ -9625,29 +9665,29 @@ msgstr ""
 msgid "Save workspace image? [y/n/c]: "
 msgstr ""
 
-#: src/unix/sys-std.c:1094 src/unix/sys-std.c:1263
+#: src/unix/sys-std.c:1093 src/unix/sys-std.c:1262
 #, c-format
 msgid "problem in saving the history file '%s'"
 msgstr " 履歴ファイル '%s' の保存に問題があります "
 
-#: src/unix/sys-std.c:1197
+#: src/unix/sys-std.c:1196
 #, fuzzy
 msgid "Enter file name: "
 msgstr " ファイル名が不適切です "
 
-#: src/unix/sys-std.c:1240 src/unix/sys-std.c:1242
+#: src/unix/sys-std.c:1239 src/unix/sys-std.c:1241
 msgid "no history mechanism available"
 msgstr " 利用できる履歴機構がありません "
 
-#: src/unix/sys-std.c:1269
+#: src/unix/sys-std.c:1268
 msgid "problem in truncating the history file"
 msgstr " 履歴ファイルの切り詰め中に問題がおきました "
 
-#: src/unix/sys-std.c:1271 src/unix/sys-std.c:1273
+#: src/unix/sys-std.c:1270 src/unix/sys-std.c:1272
 msgid "no history available to save"
 msgstr " 保存すべき履歴がありません "
 
-#: src/unix/sys-std.c:1285
+#: src/unix/sys-std.c:1284
 msgid "invalid timestamp"
 msgstr " タイムスタンプが不正です "
 

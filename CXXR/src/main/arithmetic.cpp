@@ -142,7 +142,7 @@ static double R_ValueOfNA(void)
 
 int R_IsNA(double x)
 {
-    if (isnan(x)) {
+    if (std::isnan(x)) {
 	ieee_double y;
 	y.value = x;
 	return (y.word[lw] == 1954);
@@ -152,7 +152,7 @@ int R_IsNA(double x)
 
 Rboolean R_IsNaN(double x)
 {
-    if (isnan(x)) {
+    if (std::isnan(x)) {
 	ieee_double y;
 	y.value = x;
 	return RHOCONSTRUCT(Rboolean, (y.word[lw] != 1954));
@@ -691,8 +691,8 @@ public:
 	/* This code assumes that isnan(in) implies isnan(m_f(in)), so we
 	   only need to check isnan(in) if isnan(m_f(in)) is true. */
 	double ans = m_f(in);
-	if (isnan(ans)) {
-	    if (isnan(in))
+	if (std::isnan(ans)) {
+	    if (std::isnan(in))
 		ans = in; // ensure the incoming NaN is preserved.
 	    else
 		m_any_NaN = true;

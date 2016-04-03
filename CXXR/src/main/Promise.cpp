@@ -66,9 +66,7 @@ RObject* Promise::evaluate(Environment* /*env*/)
 	    m_interrupted = false;
 	}
 	else if (m_under_evaluation)
-	    Rf_error(_("promise already under evaluation: "
-		       "recursive default argument reference "
-		       "or earlier problems?"));
+	    Rf_error(_("promise already under evaluation: recursive default argument reference or earlier problems?"));
 	m_under_evaluation = true;
 	try {
 	    IncrementStackDepthScope scope;

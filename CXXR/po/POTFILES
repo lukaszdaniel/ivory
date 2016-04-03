@@ -63,6 +63,7 @@ src/main/attrib.cpp
 src/main/bind.cpp
 src/main/builtin.cpp
 src/main/BuiltInFunction.cpp
+src/main/CellPool.cpp
 src/main/character.cpp
 src/main/coerce.cpp
 src/main/colors.cpp

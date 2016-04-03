@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-28 23:29+0200\n"
+"POT-Creation-Date: 2016-03-31 22:51+0200\n"
 "PO-Revision-Date: 2011-10-13 17:30+0800\n"
 "Last-Translator: Wei-Lun Chao <chaoweilun@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -715,7 +715,7 @@ msgstr "顯示'%s' 時發生問題"
 #: src/modules/lapack/Lapack.c:886 src/modules/lapack/Lapack.c:1211
 #: src/modules/X11/devX11.c:3244 src/modules/X11/devX11.c:3247
 #: src/modules/X11/devX11.c:3250 src/modules/X11/devX11.c:3274
-#: src/unix/sys-std.c:1231 src/unix/sys-std.c:1254
+#: src/unix/sys-std.c:1230 src/unix/sys-std.c:1253
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "'%s' 引數不正確"
@@ -840,119 +840,131 @@ msgstr "管道連結配置失敗"
 msgid "'%s' argument is not a character vector"
 msgstr "'fmt' 並非字元向量"
 
-#: src/gnuwin32/system.c:127 src/unix/sys-unix.c:444
+#: src/gnuwin32/system.c:100
+msgid ""
+"Thief about! Something other than package tcltk has set or is attempting to "
+"set R_Tcl_do"
+msgstr ""
+
+#: src/gnuwin32/system.c:110
+msgid ""
+"Thief about! Something other than package tcltk has set or is attempting to "
+"unset R_Tcl_do"
+msgstr ""
+
+#: src/gnuwin32/system.c:126 src/unix/sys-unix.c:444
 msgid "reached session elapsed time limit"
 msgstr "達到了作業階段經過時間的限制"
 
-#: src/gnuwin32/system.c:129 src/unix/sys-unix.c:446
+#: src/gnuwin32/system.c:128 src/unix/sys-unix.c:446
 msgid "reached elapsed time limit"
 msgstr "達到了經過時間的限制"
 
-#: src/gnuwin32/system.c:135 src/unix/sys-unix.c:452
+#: src/gnuwin32/system.c:134 src/unix/sys-unix.c:452
 msgid "reached session CPU time limit"
 msgstr "達到了作業階段 CPU 時間的限制"
 
-#: src/gnuwin32/system.c:137 src/unix/sys-unix.c:454
+#: src/gnuwin32/system.c:136 src/unix/sys-unix.c:454
 msgid "reached CPU time limit"
 msgstr "達到了 CPU 時間的限制"
 
-#: src/gnuwin32/system.c:162 src/unix/sys-std.c:81
+#: src/gnuwin32/system.c:161 src/unix/sys-std.c:81
 #, c-format
 msgid "Fatal error: %s\n"
 msgstr "嚴重錯誤：%s\n"
 
-#: src/gnuwin32/system.c:340 src/unix/sys-std.c:875
+#: src/gnuwin32/system.c:339 src/unix/sys-std.c:875
 #, c-format
 msgid "encoding '%s' is not recognised"
 msgstr "編碼 '%s' 無法確認"
 
-#: src/gnuwin32/system.c:346 src/unix/sys-std.c:881
+#: src/gnuwin32/system.c:345 src/unix/sys-std.c:881
 #, c-format
 msgid "<ERROR: re-encoding failure from encoding '%s'>\n"
 msgstr "<錯誤：從編碼 '%s' 重新編碼時失敗>\n"
 
-#: src/gnuwin32/system.c:568 src/gnuwin32/system.c:1070
-#: src/gnuwin32/system.c:1082 src/main/connections.cpp:616
+#: src/gnuwin32/system.c:567 src/gnuwin32/system.c:1069
+#: src/gnuwin32/system.c:1081 src/main/connections.cpp:616
 #: src/main/connections.cpp:621 src/main/dounzip.cpp:187
 #: src/main/saveload.cpp:1978 src/main/serialize.cpp:2550
 #: src/main/serialize.cpp:2555 src/main/serialize.cpp:2638
-#: src/main/serialize.cpp:2683 src/unix/sys-std.c:1171 src/unix/system.c:332
+#: src/main/serialize.cpp:2683 src/unix/sys-std.c:1170 src/unix/system.c:332
 #, c-format
 msgid "cannot open file '%s': %s"
 msgstr "無法開啟檔案 '%s' ：%s"
 
-#: src/gnuwin32/system.c:582
+#: src/gnuwin32/system.c:581
 #, c-format
 msgid "file.show(): file '%s' does not exist\n"
 msgstr "file.show(): 檔案 '%s' 不存在\n"
 
-#: src/gnuwin32/system.c:991
+#: src/gnuwin32/system.c:990
 #, fuzzy, c-format
 msgid "WARNING: R_MAX_MEM_SIZE value is invalid: ignored\n"
 msgstr "警告：'%s' 值無效：已忽略"
 
-#: src/gnuwin32/system.c:1023
+#: src/gnuwin32/system.c:1022
 msgid "WARNING: no max-mem-size given\n"
 msgstr "警告: max-mem-size 沒有定義\n"
 
-#: src/gnuwin32/system.c:1030
+#: src/gnuwin32/system.c:1029
 #, c-format
 msgid "WARNING: --max-mem-size value is invalid: ignored\n"
 msgstr "警告: --max-mem-size 值不正確: 忽略不用\n"
 
-#: src/gnuwin32/system.c:1033
+#: src/gnuwin32/system.c:1032
 #, c-format
 msgid "WARNING: --max-mem-size=%lu%c: too large and ignored\n"
 msgstr "警告：--max-mem-size=%lu%c：太大因而忽略\n"
 
-#: src/gnuwin32/system.c:1039
+#: src/gnuwin32/system.c:1038
 #, c-format
 msgid "WARNING: --max-mem-size=%4.1fM: too small and ignored\n"
 msgstr "警告：--max-mem-size=%4.1fM：太小因而忽略\n"
 
-#: src/gnuwin32/system.c:1044
+#: src/gnuwin32/system.c:1043
 #, c-format
 msgid "WARNING: --max-mem-size=%4.0fM: too large and taken as %uM\n"
 msgstr "警告：--max-mem-size=%4.0fM：太大因而視為 %uM\n"
 
-#: src/gnuwin32/system.c:1060
+#: src/gnuwin32/system.c:1059
 #, fuzzy, c-format
 msgid "option '%s' requires an argument"
 msgstr "二元運算需要兩個引數"
 
-#: src/gnuwin32/system.c:1091
+#: src/gnuwin32/system.c:1090
 #, fuzzy, c-format
 msgid "option '%s' requires a non-empty argument"
 msgstr "二元運算需要兩個引數"
 
-#: src/gnuwin32/system.c:1099 src/unix/system.c:351
+#: src/gnuwin32/system.c:1098 src/unix/system.c:351
 #, c-format
 msgid "WARNING: '-e %s' omitted as input is too long\n"
 msgstr "警告：'-e %s' 因為輸入太長而被省略\n"
 
-#: src/gnuwin32/system.c:1103 src/unix/system.c:364
+#: src/gnuwin32/system.c:1102 src/unix/system.c:364
 #, c-format
 msgid "WARNING: unknown option '%s'\n"
 msgstr "警告: 沒有 '%s' 這樣的選項\n"
 
-#: src/gnuwin32/system.c:1125 src/unix/system.c:368
+#: src/gnuwin32/system.c:1124 src/unix/system.c:368
 #, c-format
 msgid "ARGUMENT '%s' __ignored__\n"
 msgstr "引數 '%s' 忽略不用\n"
 
-#: src/gnuwin32/system.c:1131 src/unix/system.c:375
+#: src/gnuwin32/system.c:1130 src/unix/system.c:375
 msgid "cannot use -e with -f or --file"
 msgstr "無法將 -e 與 -f 或 --file 共同使用"
 
-#: src/gnuwin32/system.c:1149
+#: src/gnuwin32/system.c:1148
 msgid "creation of tmpfile failed -- set TMPDIR suitably?"
 msgstr "建立暫存檔時失敗 -- 已適當設定了 TMPDIR？"
 
-#: src/gnuwin32/system.c:1168 src/unix/system.c:426
+#: src/gnuwin32/system.c:1167 src/unix/system.c:426
 msgid "you must specify '--save', '--no-save' or '--vanilla'"
 msgstr "您必須指定 '--save'、'--no-save' 或 '--vanilla' 其中的一個"
 
-#: src/gnuwin32/system.c:1173
+#: src/gnuwin32/system.c:1172
 msgid ""
 "impossible to create 'reader thread'; you must free some system resources"
 msgstr "無法建立 'reader thread'；您必須釋放一些系統資源"
@@ -1954,6 +1966,22 @@ msgstr ""
 
 #: src/main/BuiltInFunction.cpp:283
 msgid "Attempting to do group dispatch without a group"
+msgstr ""
+
+#: src/main/CellPool.cpp:67
+msgid "CellPool::check(): internal inconsistency\n"
+msgstr ""
+
+#: src/main/CellPool.cpp:81
+msgid "CellPool::checkCell : designated block is (already) free.\n"
+msgstr ""
+
+#: src/main/CellPool.cpp:98
+msgid "CellPool::checkCell: designated block is misaligned\n"
+msgstr ""
+
+#: src/main/CellPool.cpp:104
+msgid "CellPool::checkCell: designated block doesn't belong to this CellPool\n"
 msgstr ""
 
 #: src/main/character.cpp:118 src/main/character.cpp:235
@@ -3376,7 +3404,7 @@ msgstr "'norm' 必須是字串"
 
 #: src/main/dotcode.cpp:418 src/main/dounzip.cpp:343 src/main/util.cpp:804
 #: src/main/util.cpp:838 src/main/util.cpp:879 src/main/util.cpp:919
-#: src/unix/sys-std.c:1234 src/unix/sys-std.c:1257
+#: src/unix/sys-std.c:1233 src/unix/sys-std.c:1256
 #, fuzzy, c-format
 msgid "'%s' argument is too long"
 msgstr "'file' 引數太長"
@@ -6275,21 +6303,29 @@ msgstr "類型 '%s' 未被支援"
 msgid "Internal error: at the end of forder sortStr==FALSE but ustr_n!=0 [%d]"
 msgstr ""
 
-#: src/main/RAllocStack.cpp:92
+#: src/main/RAllocStack.cpp:68
+msgid "RAllocStack::restoreSize: requested size greater than current size."
+msgstr ""
+
+#: src/main/RAllocStack.cpp:71
+msgid "RAllocStack::restoreSize: requested size too small for current scope."
+msgstr ""
+
+#: src/main/RAllocStack.cpp:90
 #, fuzzy
 msgid "R_alloc: element size must be positive."
 msgstr "'to' 必須是有限的"
 
-#: src/main/RAllocStack.cpp:97 src/main/RAllocStack.cpp:112
+#: src/main/RAllocStack.cpp:95 src/main/RAllocStack.cpp:110
 msgid "R_alloc: requested allocation is impossibly large."
 msgstr ""
 
-#: src/main/RAllocStack.cpp:104
+#: src/main/RAllocStack.cpp:102
 #, fuzzy
 msgid "S_alloc: number of elements must be non-negative."
 msgstr "狀態組合數量必須是正值"
 
-#: src/main/RAllocStack.cpp:106
+#: src/main/RAllocStack.cpp:104
 #, fuzzy
 msgid "S_alloc: element size must be positive."
 msgstr "'to' 必須是有限的"
@@ -8174,7 +8210,7 @@ msgstr ".C(..): 'type' 如果用於 \"d\"-格式的話必須是 \"integer\""
 msgid "'type' argument must be \"real\" for this format"
 msgstr ".C(..): 'type' 用於這種格式的話必須是 \"real\""
 
-#: src/main/VectorBase.cpp:104
+#: src/main/VectorBase.cpp:105
 msgid "Attempt to associate dimnames with a non-existent dimension"
 msgstr ""
 
@@ -8197,6 +8233,10 @@ msgstr "無法配置大小為 %0.1f Mb 的向量"
 #, fuzzy, c-format
 msgid "cannot allocate vector of size %0.1f Kb"
 msgstr "無法配置大小為 %0.f Kb 的向量"
+
+#: src/main/VectorBase.cpp:170
+msgid "'SETLENGTH()' invoked for a non-vector."
+msgstr ""
 
 #: src/main/version.cpp:48
 msgid "Rho Copyright (C) 2008-14 Andrew R. Runnalls.\n"
@@ -9482,29 +9522,29 @@ msgstr "巢狀 readline 輸入出了不尋常的錯，請用 bug.report()"
 msgid "Save workspace image? [y/n/c]: "
 msgstr ""
 
-#: src/unix/sys-std.c:1094 src/unix/sys-std.c:1263
+#: src/unix/sys-std.c:1093 src/unix/sys-std.c:1262
 #, c-format
 msgid "problem in saving the history file '%s'"
 msgstr "儲存歷史檔案 '%s' 時出了問題"
 
-#: src/unix/sys-std.c:1197
+#: src/unix/sys-std.c:1196
 #, fuzzy
 msgid "Enter file name: "
 msgstr "檔案名稱不正確"
 
-#: src/unix/sys-std.c:1240 src/unix/sys-std.c:1242
+#: src/unix/sys-std.c:1239 src/unix/sys-std.c:1241
 msgid "no history mechanism available"
 msgstr "沒有歷史功能"
 
-#: src/unix/sys-std.c:1269
+#: src/unix/sys-std.c:1268
 msgid "problem in truncating the history file"
 msgstr "截斷歷史檔案時發生問題"
 
-#: src/unix/sys-std.c:1271 src/unix/sys-std.c:1273
+#: src/unix/sys-std.c:1270 src/unix/sys-std.c:1272
 msgid "no history available to save"
 msgstr "沒有可以儲存的歷史紀錄"
 
-#: src/unix/sys-std.c:1285
+#: src/unix/sys-std.c:1284
 msgid "invalid timestamp"
 msgstr "時間戳記不正確"
 

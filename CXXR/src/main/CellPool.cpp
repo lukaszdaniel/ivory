@@ -23,6 +23,7 @@
  * Implementation of class CellPool
  */
 
+#include <localization.h>
 #include "rho/CellPool.hpp"
 
 #ifndef __APPLE__
@@ -63,7 +64,7 @@ bool CellPool::check() const
 	++free_cells;
     }
     if (free_cells > m_admin->cellsExisting()) {
-	cerr << "CellPool::check(): internal inconsistency\n";
+	cerr << _("CellPool::check(): internal inconsistency\n");
 	abort();
     }
     return true;
@@ -77,7 +78,7 @@ void CellPool::checkAllocatedCell(const void* p) const
     for (Cell* c = m_free_cells; !found && c; c = c->m_next)
 	found = (c == cp);
     if (found) {
-	cerr << "CellPool::checkCell : designated block is (already) free.\n";
+	cerr << _("CellPool::checkCell : designated block is (already) free.\n");
 	abort();
     }
 }
@@ -94,13 +95,13 @@ void CellPool::checkCell(const void* p) const
 	    && offset < static_cast<long>(m_admin->m_superblocksize)) {
 	    found = true;
 	    if (std::size_t(offset)%m_admin->m_cellsize != 0) {
-		cerr << "CellPool::checkCell: designated block is misaligned\n";
+		cerr << _("CellPool::checkCell: designated block is misaligned\n");
 		abort();
 	    }
 	}
     }
     if (!found) {
-	cerr << "CellPool::checkCell: designated block doesn't belong to this CellPool\n";
+	cerr << _("CellPool::checkCell: designated block doesn't belong to this CellPool\n");
 	abort();
     }
 }

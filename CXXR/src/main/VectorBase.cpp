@@ -27,6 +27,7 @@
  * @brief Implementation of class VectorBase and related functions.
  */
 
+#include <localization.h>
 #include "rho/VectorBase.hpp"
 
 #include "rho/IntVector.hpp"
@@ -101,8 +102,7 @@ void VectorBase::setDimensionNames(unsigned int d, StringVector* names)
 {
     size_t ndims = dimensions()->size();
     if (d == 0 || d > ndims)
-	Rf_error(_("Attempt to associate dimnames"
-		   " with a non-existent dimension"));
+	Rf_error(_("Attempt to associate dimnames with a non-existent dimension"));
     ListVector* lv
 	= static_cast<ListVector*>(getAttribute(DimNamesSymbol));
     if (!lv) {
@@ -167,6 +167,6 @@ void SETLENGTH(SEXP x, int v)
 {
     rho::VectorBase* vb = dynamic_cast<rho::VectorBase*>(x);
     if (!vb)
-	Rf_error("SETLENGTH invoked for a non-vector.");
+	Rf_error(_("'SETLENGTH()' invoked for a non-vector."));
     vb->decreaseSizeInPlace(VectorBase::size_type(v));
 }

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-28 23:29+0200\n"
+"POT-Creation-Date: 2016-03-31 22:51+0200\n"
 "PO-Revision-Date: 2015-01-17 13:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -735,7 +735,7 @@ msgstr "проблема при отображении '%s'"
 #: src/modules/lapack/Lapack.c:886 src/modules/lapack/Lapack.c:1211
 #: src/modules/X11/devX11.c:3244 src/modules/X11/devX11.c:3247
 #: src/modules/X11/devX11.c:3250 src/modules/X11/devX11.c:3274
-#: src/unix/sys-std.c:1231 src/unix/sys-std.c:1254
+#: src/unix/sys-std.c:1230 src/unix/sys-std.c:1253
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "неправильный аргумент '%s'"
@@ -860,119 +860,131 @@ msgstr "выделение соединения по каналу не удал�
 msgid "'%s' argument is not a character vector"
 msgstr "'fmt' не является текстовым вектором"
 
-#: src/gnuwin32/system.c:127 src/unix/sys-unix.c:444
+#: src/gnuwin32/system.c:100
+msgid ""
+"Thief about! Something other than package tcltk has set or is attempting to "
+"set R_Tcl_do"
+msgstr ""
+
+#: src/gnuwin32/system.c:110
+msgid ""
+"Thief about! Something other than package tcltk has set or is attempting to "
+"unset R_Tcl_do"
+msgstr ""
+
+#: src/gnuwin32/system.c:126 src/unix/sys-unix.c:444
 msgid "reached session elapsed time limit"
 msgstr "достигнуто сессионное ограничение времени операции"
 
-#: src/gnuwin32/system.c:129 src/unix/sys-unix.c:446
+#: src/gnuwin32/system.c:128 src/unix/sys-unix.c:446
 msgid "reached elapsed time limit"
 msgstr "достигнуто ограничение времени операции"
 
-#: src/gnuwin32/system.c:135 src/unix/sys-unix.c:452
+#: src/gnuwin32/system.c:134 src/unix/sys-unix.c:452
 msgid "reached session CPU time limit"
 msgstr "достигнуто сессионное ограничение времени ЦПУ"
 
-#: src/gnuwin32/system.c:137 src/unix/sys-unix.c:454
+#: src/gnuwin32/system.c:136 src/unix/sys-unix.c:454
 msgid "reached CPU time limit"
 msgstr "достигнуто ограничение времени ЦПУ"
 
-#: src/gnuwin32/system.c:162 src/unix/sys-std.c:81
+#: src/gnuwin32/system.c:161 src/unix/sys-std.c:81
 #, c-format
 msgid "Fatal error: %s\n"
 msgstr "Фатальная ошибка: %s\n"
 
-#: src/gnuwin32/system.c:340 src/unix/sys-std.c:875
+#: src/gnuwin32/system.c:339 src/unix/sys-std.c:875
 #, c-format
 msgid "encoding '%s' is not recognised"
 msgstr "кодировка '%s' не распознана"
 
-#: src/gnuwin32/system.c:346 src/unix/sys-std.c:881
+#: src/gnuwin32/system.c:345 src/unix/sys-std.c:881
 #, c-format
 msgid "<ERROR: re-encoding failure from encoding '%s'>\n"
 msgstr "<ОШИБКА: неудачная перекодировка из '%s'>\n"
 
-#: src/gnuwin32/system.c:568 src/gnuwin32/system.c:1070
-#: src/gnuwin32/system.c:1082 src/main/connections.cpp:616
+#: src/gnuwin32/system.c:567 src/gnuwin32/system.c:1069
+#: src/gnuwin32/system.c:1081 src/main/connections.cpp:616
 #: src/main/connections.cpp:621 src/main/dounzip.cpp:187
 #: src/main/saveload.cpp:1978 src/main/serialize.cpp:2550
 #: src/main/serialize.cpp:2555 src/main/serialize.cpp:2638
-#: src/main/serialize.cpp:2683 src/unix/sys-std.c:1171 src/unix/system.c:332
+#: src/main/serialize.cpp:2683 src/unix/sys-std.c:1170 src/unix/system.c:332
 #, c-format
 msgid "cannot open file '%s': %s"
 msgstr "не могу открыть файл '%s': %s"
 
-#: src/gnuwin32/system.c:582
+#: src/gnuwin32/system.c:581
 #, c-format
 msgid "file.show(): file '%s' does not exist\n"
 msgstr "file.show(): файл '%s' не существует\n"
 
-#: src/gnuwin32/system.c:991
+#: src/gnuwin32/system.c:990
 #, fuzzy, c-format
 msgid "WARNING: R_MAX_MEM_SIZE value is invalid: ignored\n"
 msgstr "ВНИМАНИЕ: '%s' значение неправильное: пропущено"
 
-#: src/gnuwin32/system.c:1023
+#: src/gnuwin32/system.c:1022
 msgid "WARNING: no max-mem-size given\n"
 msgstr "ВНИМАНИЕ: не задан max-mem-size\n"
 
-#: src/gnuwin32/system.c:1030
+#: src/gnuwin32/system.c:1029
 #, c-format
 msgid "WARNING: --max-mem-size value is invalid: ignored\n"
 msgstr "ВНИМАНИЕ: значение --max-mem-size неверное: пропущено\n"
 
-#: src/gnuwin32/system.c:1033
+#: src/gnuwin32/system.c:1032
 #, c-format
 msgid "WARNING: --max-mem-size=%lu%c: too large and ignored\n"
 msgstr "ВНИМАНИЕ: --max-mem-size=%lu%c: слишком велик и пропущен\n"
 
-#: src/gnuwin32/system.c:1039
+#: src/gnuwin32/system.c:1038
 #, c-format
 msgid "WARNING: --max-mem-size=%4.1fM: too small and ignored\n"
 msgstr "ВНИМАНИЕ: --max-mem-size =%4.1fM слишком мал и пропущен\n"
 
-#: src/gnuwin32/system.c:1044
+#: src/gnuwin32/system.c:1043
 #, c-format
 msgid "WARNING: --max-mem-size=%4.0fM: too large and taken as %uM\n"
 msgstr "ВНИМАНИЕ: --max-mem-size =%4.0fM: слишком велик, установлен в %uM\n"
 
-#: src/gnuwin32/system.c:1060
+#: src/gnuwin32/system.c:1059
 #, fuzzy, c-format
 msgid "option '%s' requires an argument"
 msgstr "бинарные операторы требуют два аргумента"
 
-#: src/gnuwin32/system.c:1091
+#: src/gnuwin32/system.c:1090
 #, fuzzy, c-format
 msgid "option '%s' requires a non-empty argument"
 msgstr "бинарные операторы требуют два аргумента"
 
-#: src/gnuwin32/system.c:1099 src/unix/system.c:351
+#: src/gnuwin32/system.c:1098 src/unix/system.c:351
 #, c-format
 msgid "WARNING: '-e %s' omitted as input is too long\n"
 msgstr "WARNING: '-e %s', пропущенная при вводе, слишком длинная\n"
 
-#: src/gnuwin32/system.c:1103 src/unix/system.c:364
+#: src/gnuwin32/system.c:1102 src/unix/system.c:364
 #, c-format
 msgid "WARNING: unknown option '%s'\n"
 msgstr "ВНИМАНИЕ: неизвестный параметр '%s'\n"
 
-#: src/gnuwin32/system.c:1125 src/unix/system.c:368
+#: src/gnuwin32/system.c:1124 src/unix/system.c:368
 #, c-format
 msgid "ARGUMENT '%s' __ignored__\n"
 msgstr "АРГУМЕНТ '%s' __пропущен__\n"
 
-#: src/gnuwin32/system.c:1131 src/unix/system.c:375
+#: src/gnuwin32/system.c:1130 src/unix/system.c:375
 msgid "cannot use -e with -f or --file"
 msgstr "не могу использовать -e вместе с -f или --file"
 
-#: src/gnuwin32/system.c:1149
+#: src/gnuwin32/system.c:1148
 msgid "creation of tmpfile failed -- set TMPDIR suitably?"
 msgstr "создание временного файла не удалось -- установить подходящую TMPDIR?"
 
-#: src/gnuwin32/system.c:1168 src/unix/system.c:426
+#: src/gnuwin32/system.c:1167 src/unix/system.c:426
 msgid "you must specify '--save', '--no-save' or '--vanilla'"
 msgstr "Вы должны задать '--save', '--no-save' или '--vanilla'"
 
-#: src/gnuwin32/system.c:1173
+#: src/gnuwin32/system.c:1172
 msgid ""
 "impossible to create 'reader thread'; you must free some system resources"
 msgstr ""
@@ -1993,6 +2005,22 @@ msgstr ""
 
 #: src/main/BuiltInFunction.cpp:283
 msgid "Attempting to do group dispatch without a group"
+msgstr ""
+
+#: src/main/CellPool.cpp:67
+msgid "CellPool::check(): internal inconsistency\n"
+msgstr ""
+
+#: src/main/CellPool.cpp:81
+msgid "CellPool::checkCell : designated block is (already) free.\n"
+msgstr ""
+
+#: src/main/CellPool.cpp:98
+msgid "CellPool::checkCell: designated block is misaligned\n"
+msgstr ""
+
+#: src/main/CellPool.cpp:104
+msgid "CellPool::checkCell: designated block doesn't belong to this CellPool\n"
 msgstr ""
 
 #: src/main/character.cpp:118 src/main/character.cpp:235
@@ -3438,7 +3466,7 @@ msgstr "'norm' должен быть текстовой строкой"
 
 #: src/main/dotcode.cpp:418 src/main/dounzip.cpp:343 src/main/util.cpp:804
 #: src/main/util.cpp:838 src/main/util.cpp:879 src/main/util.cpp:919
-#: src/unix/sys-std.c:1234 src/unix/sys-std.c:1257
+#: src/unix/sys-std.c:1233 src/unix/sys-std.c:1256
 #, fuzzy, c-format
 msgid "'%s' argument is too long"
 msgstr "аргумент 'file' слишком длинный"
@@ -6399,21 +6427,29 @@ msgstr "тип '%s' не поддерживается"
 msgid "Internal error: at the end of forder sortStr==FALSE but ustr_n!=0 [%d]"
 msgstr ""
 
-#: src/main/RAllocStack.cpp:92
+#: src/main/RAllocStack.cpp:68
+msgid "RAllocStack::restoreSize: requested size greater than current size."
+msgstr ""
+
+#: src/main/RAllocStack.cpp:71
+msgid "RAllocStack::restoreSize: requested size too small for current scope."
+msgstr ""
+
+#: src/main/RAllocStack.cpp:90
 #, fuzzy
 msgid "R_alloc: element size must be positive."
 msgstr "'to' должен быть конечным"
 
-#: src/main/RAllocStack.cpp:97 src/main/RAllocStack.cpp:112
+#: src/main/RAllocStack.cpp:95 src/main/RAllocStack.cpp:110
 msgid "R_alloc: requested allocation is impossibly large."
 msgstr ""
 
-#: src/main/RAllocStack.cpp:104
+#: src/main/RAllocStack.cpp:102
 #, fuzzy
 msgid "S_alloc: number of elements must be non-negative."
 msgstr "количество контекстов должно быть положительно"
 
-#: src/main/RAllocStack.cpp:106
+#: src/main/RAllocStack.cpp:104
 #, fuzzy
 msgid "S_alloc: element size must be positive."
 msgstr "'to' должен быть конечным"
@@ -8327,7 +8363,7 @@ msgstr ".C(..): для  \"d\"-формата 'тип' должно быть \"in
 msgid "'type' argument must be \"real\" for this format"
 msgstr ".C(..): для этого формата 'тип' должен быть \"real\""
 
-#: src/main/VectorBase.cpp:104
+#: src/main/VectorBase.cpp:105
 msgid "Attempt to associate dimnames with a non-existent dimension"
 msgstr ""
 
@@ -8350,6 +8386,10 @@ msgstr "не могу разместить вектор размером %0.1f M
 #, fuzzy, c-format
 msgid "cannot allocate vector of size %0.1f Kb"
 msgstr "не могу разместить вектор размером %0.f Kb"
+
+#: src/main/VectorBase.cpp:170
+msgid "'SETLENGTH()' invoked for a non-vector."
+msgstr ""
 
 #: src/main/version.cpp:48
 msgid "Rho Copyright (C) 2008-14 Andrew R. Runnalls.\n"
@@ -9676,29 +9716,29 @@ msgstr ""
 msgid "Save workspace image? [y/n/c]: "
 msgstr ""
 
-#: src/unix/sys-std.c:1094 src/unix/sys-std.c:1263
+#: src/unix/sys-std.c:1093 src/unix/sys-std.c:1262
 #, c-format
 msgid "problem in saving the history file '%s'"
 msgstr "проблема при сохранении файла истории '%s'"
 
-#: src/unix/sys-std.c:1197
+#: src/unix/sys-std.c:1196
 #, fuzzy
 msgid "Enter file name: "
 msgstr "неправильное имя файла"
 
-#: src/unix/sys-std.c:1240 src/unix/sys-std.c:1242
+#: src/unix/sys-std.c:1239 src/unix/sys-std.c:1241
 msgid "no history mechanism available"
 msgstr "механизм истории недоступен"
 
-#: src/unix/sys-std.c:1269
+#: src/unix/sys-std.c:1268
 msgid "problem in truncating the history file"
 msgstr "проблема с обрезкой файла истории"
 
-#: src/unix/sys-std.c:1271 src/unix/sys-std.c:1273
+#: src/unix/sys-std.c:1270 src/unix/sys-std.c:1272
 msgid "no history available to save"
 msgstr "нет истории, чтобы сохранить"
 
-#: src/unix/sys-std.c:1285
+#: src/unix/sys-std.c:1284
 msgid "invalid timestamp"
 msgstr "неправильная временная метка"
 
