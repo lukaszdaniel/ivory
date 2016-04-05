@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: R 2.16.0\n"
+"Project-Id-Version: R -core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-03 21:07\n"
+"POT-Creation-Date: 2016-04-03 21:10\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -13,8 +13,8 @@ msgstr ""
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-Bookmarks: -1,203,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #. R/unix/create.post.R: gettextf("# Your mailer is set to \"none\",\n# hence we cannot send the, %s directly from R.\n# Please copy the %s (after finishing it) to\n# your favorite email program and send it to\n#\n#       %s",     description, description, address)
@@ -386,11 +386,6 @@ msgstr ""
 "'topic' powinien być nazwą, wektorem tekstowym o długości jeden albo "
 "zarezerwowanym słowem"
 
-#. R/windows/sysutils.R: stop("'use != NA' option is defunct")
-#: R/windows/sysutils.R:0
-msgid "'use != NA' option is defunct"
-msgstr "opcja 'use != NA' została zlikwidowana"
-
 #. R/packageStatus.R: gettext("(each package appears only once)", domain = "R-utils")
 #: R/packageStatus.R:0
 msgid "(each package appears only once)"
@@ -502,6 +497,15 @@ msgstr ""
 #: R/help.search.R:0
 msgid "Built dbMat[%d,%d]"
 msgstr "Zbudowano dbMat[%d,%d]"
+
+#. R/debugcall.R: stop("Cannot debug primitive functions unless they are implicit generics (requires loading the methods package)")
+#: R/debugcall.R:0
+msgid ""
+"Cannot debug primitive functions unless they are implicit generics (requires "
+"loading the methods package)"
+msgstr ""
+"Nie można debugować funkcji prymitywnych o ile nie są one niejawnymi "
+"funkcjami ogólnymi (wymaga załadowania pakietu 'methods')"
 
 #. R/news.R: gettextf("Changes in %s (%s):", vstrings, dates, domain = "R-utils")
 #: R/news.R:0
@@ -1995,8 +1999,8 @@ msgstr "puste rozpoczęcie pliku"
 msgid "environment specified is not a package"
 msgstr "określone środowisko nie jest pakietem"
 
-#. R/question.R: gettextf("error in trying to evaluate the expression for argument %s (%s)", sQuote(arg),     deparse(argExpr))
-#: R/question.R:0
+#. R/debugcall.R: gettextf("error in trying to evaluate the expression for argument %s (%s)", sQuote(arg),     deparse(argExpr))
+#: R/debugcall.R:0
 msgid "error in trying to evaluate the expression for argument %s (%s)"
 msgstr "błąd podczas próby obliczenia wyrażenia dla argumentu %s (%s)"
 
@@ -2186,8 +2190,8 @@ msgstr "liczba całkowita"
 #. R/packages2.R: gettextf("invalid '%s' argument", "keep_outputs")
 #. R/sock.R: gettextf("invalid '%s' argument", "socket")
 #. R/tar.R: gettextf("invalid '%s' argument", "tarfile")
-#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0
-#: R/sock.R:0 R/tar.R:0
+#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0
+#: R/tar.R:0
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
 
@@ -2582,6 +2586,11 @@ msgstr "nie wszystkie kolumny nazwane w 'as.is' istnieją"
 #: R/read.DIF.R:0 R/readtable.R:0
 msgid "not all columns named in 'colClasses' exist"
 msgstr "nie wszystkie kolumny nazwane w 'colClasses' istnieją"
+
+#. R/strcapture.R: stop("number of matches does not always match ncol(proto)")
+#: R/strcapture.R:0
+msgid "number of matches does not always match ncol(proto)"
+msgstr "liczba dopasowań nie zawsze pasuje do 'ncol(proto)'"
 
 #. R/str.R: gettext("numeric", domain = "R-utils")
 #. R/str.R: gettext("numeric", domain = "R-utils")
@@ -3508,6 +3517,9 @@ msgid_plural "packages %s are not available (for %s)"
 msgstr[0] "pakiet %s nie jest dostępny (dla '%s')"
 msgstr[1] "pakiety %s nie są dostępne (dla %s)"
 msgstr[2] "pakiety %s nie są dostępne (dla %s)"
+
+#~ msgid "'use != NA' option is defunct"
+#~ msgstr "opcja 'use != NA' została zlikwidowana"
 
 #, fuzzy
 #~ msgid "mirror non-interactively"

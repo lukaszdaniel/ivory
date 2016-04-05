@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-23 20:39\n"
+"POT-Creation-Date: 2016-04-03 21:10\n"
 "PO-Revision-Date: 2012-02-26 14:07+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -816,6 +816,12 @@ msgstr " 関数 %s は既にグループ総称的です；変更しません  "
 msgid ""
 "Function %s:\n"
 "<not an S4 generic function>"
+msgstr " 総称的関数 %s が見つかりません "
+
+#. R/debug.R: stop("Function must be an S4 generic")
+#: R/debug.R:0
+#, fuzzy
+msgid "Function must be an S4 generic"
 msgstr " 総称的関数 %s が見つかりません "
 
 #. R/methodsTable.R: gettextf("Function: %s (package %s)", func, pkg, domain = "R-methods")
@@ -2536,6 +2542,11 @@ msgstr ""
 " プリミティブの traced バージョンを作っています；引数は '...' として扱われま"
 "す "
 
+#. R/debug.R: warning("method is not being debugged")
+#: R/debug.R:0
+msgid "method is not being debugged"
+msgstr ""
+
 #. R/RMethodUtils.R: gettextf("methods can add arguments to the generic %s only if '...' is an argument to the generic",     sQuote(generic@generic))
 #: R/RMethodUtils.R:0
 msgid ""
@@ -3191,7 +3202,7 @@ msgstr ""
 " スロット \"%s\" (クラス \"%s\" 中の)は現在  \"%s\" として定義(もしくは継承)"
 "されていますが, クラス %s 中の継承された定義と相克します "
 
-#. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what), dQuote(elNamed(slots1,     what)), dQuote(elNamed(slots2, what)))
+#. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what), dQuote(slots1[[what]]),     dQuote(slots2[[what]]))
 #: R/oldClass.R:0
 #, fuzzy
 msgid "slot %s: class %s should extend class %s"

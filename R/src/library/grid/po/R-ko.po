@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-09 15:48\n"
+"POT-Creation-Date: 2016-04-03 21:09\n"
 "PO-Revision-Date: 2005-05-25 16:34+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -435,6 +435,12 @@ msgstr "부적절한 viewport명입니다"
 #: R/grob.R:0
 msgid "New 'grob' name (%s) does not match 'gPath' (%s)"
 msgstr "새로운 'grob' 이름(%s)은 'gPath'(%s)에 match하지 않습니다"
+
+#. R/unit.R: stop("Value being assigned must be a unit")
+#: R/unit.R:0
+#, fuzzy
+msgid "Value being assigned must be a unit"
+msgstr "'x'그리고 'y'는 units가 나오지 않으면 되지 않습니다"
 
 #. R/unit.R: stop("Zero arguments where at least one expected")
 #: R/unit.R:0
@@ -1055,10 +1061,6 @@ msgstr[0] "부적절한 viewport명입니다"
 #, fuzzy
 #~ msgid "it is invalid to specify both 'id' and 'id.lengths'"
 #~ msgstr "'id' 그리고 'id.lengths'의 양쪽 모두를 지정할수 없지 않습니다"
-
-#, fuzzy
-#~ msgid "x and y must be units"
-#~ msgstr "'x'그리고 'y'는 units가 나오지 않으면 되지 않습니다"
 
 #~ msgid "'x' and 'units' must have length > 0"
 #~ msgstr "'x'  그리고 'units'는 0보다 큰 길이가 나오지 않으면 되지 않습니다"

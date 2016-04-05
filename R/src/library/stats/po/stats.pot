@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the stats package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: stats 3.3.0\n"
+"Project-Id-Version: stats 3.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-03 21:07+0100\n"
+"POT-Creation-Date: 2016-04-03 21:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -293,6 +293,11 @@ msgstr ""
 
 #: integrate.c:62
 msgid "non-finite function value"
+msgstr ""
+
+#: integrate.c:78 integrate.c:80 integrate.c:122
+#, c-format
+msgid "'%s' argument must be of length one"
 msgstr ""
 
 #: ksmooth.c:63
@@ -651,33 +656,33 @@ msgstr ""
 msgid "invalid model formula"
 msgstr ""
 
-#: model.c:1142 model.c:1401
+#: model.c:1142 model.c:1402
 msgid "invalid power in formula"
 msgstr ""
 
-#: model.c:1178 model.c:1585
+#: model.c:1178 model.c:1586
 #, c-format
 msgid "invalid model formula in '%s' function"
 msgstr ""
 
-#: model.c:1524
+#: model.c:1525
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr ""
 
-#: model.c:1671
+#: model.c:1672
 msgid "argument is not a valid model"
 msgstr ""
 
-#: model.c:1681
+#: model.c:1682
 msgid "'specials' must be NULL or a character vector"
 msgstr ""
 
-#: model.c:1693
+#: model.c:1694
 msgid "'data' argument is of the wrong type"
 msgstr ""
 
-#: model.c:1963
+#: model.c:1964
 msgid "'.' in formula and no 'data' argument"
 msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-09 15:47+0100\n"
+"POT-Creation-Date: 2016-04-03 21:09+0200\n"
 "PO-Revision-Date: 2005-05-31 10:31+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -400,6 +400,11 @@ msgstr "PostScript 디바이스에 포함하지 않는 family %s 입니다"
 msgid ""
 "conversion failure on '%s' in 'mbcsToSbcs()' function: dot substituted for <"
 "%02x>"
+msgstr ""
+
+#: devPS.c:4324
+#, c-format
+msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs()' function"
 msgstr ""
 
 #: devPS.c:4394

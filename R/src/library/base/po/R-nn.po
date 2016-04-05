@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-03 18:32\n"
+"POT-Creation-Date: 2016-04-03 21:09\n"
 "PO-Revision-Date: 2012-09-28 22:18+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -212,6 +212,13 @@ msgstr "det første argumentet må vera ei QR-dekomponering"
 #: R/all.equal.R:0
 #, fuzzy
 msgid "'%s' argument is not a factor"
+msgstr "ikkje ei dataramme"
+
+#. R/formals.R: gettextf("'%s' argument is not a function", "fun")
+#. R/formals.R: gettextf("'%s' argument is not a function", "fun")
+#: R/formals.R:0
+#, fuzzy
+msgid "'%s' argument is not a function"
 msgstr "ikkje ei dataramme"
 
 #. R/table.R: gettextf("'%s' argument is not an array", "x")
@@ -2166,6 +2173,22 @@ msgstr "klarte ikkje oppretta mappe for lenkja «%s»"
 #: R/namespace.R:0
 msgid "failed to find metadata object for %s"
 msgstr "fann ikkje metadataobjekt for %s"
+
+#. R/debug.R: stop("failed to load methods package for handling signature")
+#: R/debug.R:0
+msgid "failed to load methods package for handling signature"
+msgstr ""
+
+#. R/debug.R: stop("failed to load methods package for undebugging by signature")
+#: R/debug.R:0
+msgid "failed to load methods package for undebugging by signature"
+msgstr ""
+
+#. R/debug.R: stop("failed to load the methods package for debugging by signature")
+#. R/debug.R: stop("failed to load the methods package for debugging by signature")
+#: R/debug.R:0
+msgid "failed to load the methods package for debugging by signature"
+msgstr ""
 
 #. R/windows/junctions.R: stop("fewer 'from' files than 'to' files")
 #: R/windows/junctions.R:0

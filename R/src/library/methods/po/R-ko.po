@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-23 20:39\n"
+"POT-Creation-Date: 2016-04-03 21:10\n"
 "PO-Revision-Date: 2014-03-27 13:32-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -782,6 +782,12 @@ msgstr "함수 %s는 이미 그룹제네릭입니다; 변경하지 않습니다"
 msgid ""
 "Function %s:\n"
 "<not an S4 generic function>"
+msgstr "원래의 함수는 제네릭함수이기 때문에 사용될 수 없습니다"
+
+#. R/debug.R: stop("Function must be an S4 generic")
+#: R/debug.R:0
+#, fuzzy
+msgid "Function must be an S4 generic"
 msgstr "원래의 함수는 제네릭함수이기 때문에 사용될 수 없습니다"
 
 #. R/methodsTable.R: gettextf("Function: %s (package %s)", func, pkg, domain = "R-methods")
@@ -2372,6 +2378,11 @@ msgstr "특이 함수 %s에 대한 제네릭을 생성합니다"
 msgid "making a traced version of a special; arguments may be altered"
 msgstr ""
 
+#. R/debug.R: warning("method is not being debugged")
+#: R/debug.R:0
+msgid "method is not being debugged"
+msgstr ""
+
 #. R/RMethodUtils.R: gettextf("methods can add arguments to the generic %s only if '...' is an argument to the generic",     sQuote(generic@generic))
 #: R/RMethodUtils.R:0
 msgid ""
@@ -2958,7 +2969,7 @@ msgstr ""
 "클래스 %2$s내에 있는 슬롯 %1$s은 \"%3$s\"으로서 정의 (또는 상속)되었습니다, "
 "그러나 이는 클래스 %4$s내의 상속된 정의와 일치하지 않습니다"
 
-#. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what), dQuote(elNamed(slots1,     what)), dQuote(elNamed(slots2, what)))
+#. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what), dQuote(slots1[[what]]),     dQuote(slots2[[what]]))
 #: R/oldClass.R:0
 msgid "slot %s: class %s should extend class %s"
 msgstr "슬롯 %1$s: 클래스 %2$s는 클래스 %3$s를 확장해야 합니다"

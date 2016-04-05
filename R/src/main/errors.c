@@ -485,7 +485,7 @@ void PrintWarnings(const char *hdr)
 	    } else {
 		const char *dcall, *msg = CHAR(STRING_ELT(names, i));
 		dcall = CHAR(STRING_ELT(deparse1s(VECTOR_ELT(R_Warnings, i)), 0));
-		REprintf("%d: ", i + 1); 
+		REprintf("%d: ", i + 1);
 		REprintf(_("In command '%s':"), dcall); 
 		if (mbcslocale) {
 		    int msgline1;
@@ -496,15 +496,15 @@ void PrintWarnings(const char *hdr)
 			*p = '\n';
 		    } else msgline1 = wd(msg);
 		    if (10 + wd(dcall) + msgline1 > LONGWARN) {
-			REprintf("\n "); 
-                    }
+			REprintf("\n ");
+		    }
 		} else {
 		    size_t msgline1 = strlen(msg);
 		    char *p = strchr(msg, '\n');
 		    if (p) msgline1 = (int)(p - msg);
 		    if (10 + strlen(dcall) + msgline1 > LONGWARN) {
-			REprintf("\n "); 
-                    }
+			REprintf("\n ");
+		    }
 		}
 		REprintf(" %s\n", msg);
 	    }
@@ -680,7 +680,7 @@ verrorcall_dflt(SEXP call, const char *format, va_list ap)
     if(*p != '\n') strcat(errbuf, "\n");
 
     if(R_ShowErrorCalls && call != R_NilValue) {  /* assume we want to avoid deparse */
-	tr = R_ConciseTraceback(call, 0); 
+	tr = R_ConciseTraceback(call, 0);
 	size_t nc = strlen(tr);
 	if (nc && nc + strlen(errbuf) + 8 < BUFSIZE) {
 	    strcat(errbuf, _("Calls:"));
@@ -1845,7 +1845,7 @@ do_interruptsSuspended(SEXP call, SEXP op, SEXP args, SEXP env)
     return ScalarLogical(orig_value);
 }
 
-/* These functions are to be used in error messages, and available for others to use in the API 
+/* These functions are to be used in error messages, and available for others to use in the API
    GetCurrentSrcref returns the first non-NULL srcref after skipping skip of them.  If it
    doesn't find one it returns NULL. */
 
@@ -1855,38 +1855,37 @@ R_GetCurrentSrcref(int skip)
     RCNTXT *c = R_GlobalContext;
     SEXP srcref = R_Srcref;
     if (skip < 0) { /* to count up from the bottom, we need to count them all first */
-    	while (c) {
-    	    if (srcref && srcref != R_NilValue) 
+	while (c) {
+	    if (srcref && srcref != R_NilValue)
 		skip++;
-    	    srcref = c->srcref;
-    	    c = c->nextcontext;
-    	};
-    	if (skip < 0) return R_NilValue; /* not enough there */
-    	c = R_GlobalContext;
-    	srcref = R_Srcref;
+	    srcref = c->srcref;
+	    c = c->nextcontext;
+	};
+	if (skip < 0) return R_NilValue; /* not enough there */
+	c = R_GlobalContext;
+	srcref = R_Srcref;
     }
     while (c && (skip || !srcref || srcref == R_NilValue)) {
-    	if (srcref && srcref != R_NilValue) 
+	if (srcref && srcref != R_NilValue)
 	    skip--;
-    	srcref = c->srcref;
-    	c = c->nextcontext;
+	srcref = c->srcref;
+	c = c->nextcontext;
     }
     if (skip || !srcref)
-    	srcref = R_NilValue;
+	srcref = R_NilValue;
     return srcref;
 }
 
 /* Return the filename corresponding to a srcref, or "" if none is found */
 
-SEXP 
+SEXP
 R_GetSrcFilename(SEXP srcref)
 {
     SEXP srcfile = getAttrib(srcref, R_SrcfileSymbol);
-    if (TYPEOF(srcfile) != ENVSXP) 
-    	return ScalarString(mkChar(""));
-    srcfile = findVar(install("filename"), srcfile);	
+    if (TYPEOF(srcfile) != ENVSXP)
+	return ScalarString(mkChar(""));
+    srcfile = findVar(install("filename"), srcfile);
     if (TYPEOF(srcfile) != STRSXP)
-        return ScalarString(mkChar(""));
+	return ScalarString(mkChar(""));
     return srcfile;
 }
-

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-03 18:32\n"
+"POT-Creation-Date: 2016-04-03 21:09\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #. R/New-Internal.R: stop("\"hexNumeric\" and \"digits17\" are mutually exclusive")
 #: R/New-Internal.R:0
@@ -192,6 +192,12 @@ msgstr "argument '%s' nie jest dekompozycją QR"
 #: R/all.equal.R:0
 msgid "'%s' argument is not a factor"
 msgstr "argument '%s' nie jest czynnikiem"
+
+#. R/formals.R: gettextf("'%s' argument is not a function", "fun")
+#. R/formals.R: gettextf("'%s' argument is not a function", "fun")
+#: R/formals.R:0
+msgid "'%s' argument is not a function"
+msgstr "argument '%s' nie jest funkcją"
 
 #. R/table.R: gettextf("'%s' argument is not an array", "x")
 #: R/table.R:0
@@ -2047,6 +2053,22 @@ msgstr "nie udało się utworzyć katalogu dla łącza '%s"
 #: R/namespace.R:0
 msgid "failed to find metadata object for %s"
 msgstr "nie udało się znaleźć obiektu metadanych dla  %s"
+
+#. R/debug.R: stop("failed to load methods package for handling signature")
+#: R/debug.R:0
+msgid "failed to load methods package for handling signature"
+msgstr ""
+
+#. R/debug.R: stop("failed to load methods package for undebugging by signature")
+#: R/debug.R:0
+msgid "failed to load methods package for undebugging by signature"
+msgstr ""
+
+#. R/debug.R: stop("failed to load the methods package for debugging by signature")
+#. R/debug.R: stop("failed to load the methods package for debugging by signature")
+#: R/debug.R:0
+msgid "failed to load the methods package for debugging by signature"
+msgstr ""
 
 #. R/windows/junctions.R: stop("fewer 'from' files than 'to' files")
 #: R/windows/junctions.R:0

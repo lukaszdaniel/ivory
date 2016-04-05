@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-03-03 21:07\n"
+"POT-Creation-Date: 2016-04-03 21:10\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -367,11 +367,6 @@ msgstr ""
 msgid "'topic' should be a name, length-one character vector or reserved word"
 msgstr ""
 
-#. R/windows/sysutils.R: stop("'use != NA' option is defunct")
-#: R/windows/sysutils.R:0
-msgid "'use != NA' option is defunct"
-msgstr ""
-
 #. R/packageStatus.R: gettext("(each package appears only once)", domain = "R-utils")
 #: R/packageStatus.R:0
 msgid "(each package appears only once)"
@@ -475,6 +470,13 @@ msgstr ""
 #. R/help.search.R: gettextf("Built dbMat[%d,%d]", nrow(dbMat), ncol(dbMat), domain = "R-utils")
 #: R/help.search.R:0
 msgid "Built dbMat[%d,%d]"
+msgstr ""
+
+#. R/debugcall.R: stop("Cannot debug primitive functions unless they are implicit generics (requires loading the methods package)")
+#: R/debugcall.R:0
+msgid ""
+"Cannot debug primitive functions unless they are implicit generics (requires "
+"loading the methods package)"
 msgstr ""
 
 #. R/news.R: gettextf("Changes in %s (%s):", vstrings, dates, domain = "R-utils")
@@ -1883,8 +1885,8 @@ msgstr ""
 msgid "environment specified is not a package"
 msgstr ""
 
-#. R/question.R: gettextf("error in trying to evaluate the expression for argument %s (%s)", sQuote(arg),     deparse(argExpr))
-#: R/question.R:0
+#. R/debugcall.R: gettextf("error in trying to evaluate the expression for argument %s (%s)", sQuote(arg),     deparse(argExpr))
+#: R/debugcall.R:0
 msgid "error in trying to evaluate the expression for argument %s (%s)"
 msgstr ""
 
@@ -2068,8 +2070,8 @@ msgstr ""
 #. R/packages2.R: gettextf("invalid '%s' argument", "keep_outputs")
 #. R/sock.R: gettextf("invalid '%s' argument", "socket")
 #. R/tar.R: gettextf("invalid '%s' argument", "tarfile")
-#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0
-#: R/sock.R:0 R/tar.R:0
+#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0
+#: R/tar.R:0
 msgid "invalid '%s' argument"
 msgstr ""
 
@@ -2459,6 +2461,11 @@ msgstr ""
 #. R/readtable.R: warning("not all columns named in 'colClasses' exist")
 #: R/read.DIF.R:0 R/readtable.R:0
 msgid "not all columns named in 'colClasses' exist"
+msgstr ""
+
+#. R/strcapture.R: stop("number of matches does not always match ncol(proto)")
+#: R/strcapture.R:0
+msgid "number of matches does not always match ncol(proto)"
 msgstr ""
 
 #. R/str.R: gettext("numeric", domain = "R-utils")

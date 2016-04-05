@@ -248,7 +248,7 @@ SEXP attribute_hidden do_formals(SEXP call, SEXP op, SEXP args, SEXP rho)
     else {
 	if(!(TYPEOF(CAR(args)) == BUILTINSXP ||
 	     TYPEOF(CAR(args)) == SPECIALSXP))
-	    warningcall(call, _("argument is not a function"));
+	    warningcall(call, _("'%s' argument is not a function"), "fun");
 	return R_NilValue;
     }
 }
@@ -261,7 +261,7 @@ SEXP attribute_hidden do_body(SEXP call, SEXP op, SEXP args, SEXP rho)
     else {
 	if(!(TYPEOF(CAR(args)) == BUILTINSXP ||
 	     TYPEOF(CAR(args)) == SPECIALSXP))
-	    warningcall(call, _("argument is not a function"));
+	    warningcall(call, _("'%s' argument is not a function"), "fun");
 	return R_NilValue;
     }
 }

@@ -615,7 +615,7 @@ SEXP attribute_hidden R_binary(SEXP call, SEXP op, SEXP x, SEXP y)
     if (xts || yts) {
 	if (xts && yts) {
 	    if (!tsConform(x, y))
-		errorcall(lcall, _("non-conformable time series"));
+		errorcall(lcall, _("non-conformable time-series"));
 	    PROTECT(tsp = getAttrib(x, R_TspSymbol));
 	    PROTECT(klass = getAttrib(x, R_ClassSymbol));
 	}

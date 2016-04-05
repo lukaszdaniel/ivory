@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-09 15:47+0100\n"
+"POT-Creation-Date: 2016-04-03 21:09+0200\n"
 "PO-Revision-Date: 2012-02-26 14:10+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -407,6 +407,11 @@ msgstr " ポストスクリプトデバイス中にフォントファミリ '%s'
 msgid ""
 "conversion failure on '%s' in 'mbcsToSbcs()' function: dot substituted for <"
 "%02x>"
+msgstr " 'mbcsToSbcs' 中の '%s' で変換に失敗: <%02x>をドットで置き換えました "
+
+#: devPS.c:4324
+#, fuzzy, c-format
+msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs()' function"
 msgstr " 'mbcsToSbcs' 中の '%s' で変換に失敗: <%02x>をドットで置き換えました "
 
 #: devPS.c:4394

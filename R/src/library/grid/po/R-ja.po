@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-09 15:48\n"
+"POT-Creation-Date: 2016-04-03 21:09\n"
 "PO-Revision-Date: 2012-02-26 14:01+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -427,6 +427,12 @@ msgstr " 不正な viewport 名です "
 #: R/grob.R:0
 msgid "New 'grob' name (%s) does not match 'gPath' (%s)"
 msgstr " 新しい 'grob' 名(%s)は 'gPath'(%s) に合致しません "
+
+#. R/unit.R: stop("Value being assigned must be a unit")
+#: R/unit.R:0
+#, fuzzy
+msgid "Value being assigned must be a unit"
+msgstr " x と y は単位(units)でなければなりません "
 
 #. R/unit.R: stop("Zero arguments where at least one expected")
 #: R/unit.R:0
@@ -1057,9 +1063,6 @@ msgstr[0] " 不正な viewport 名です "
 #, fuzzy
 #~ msgid "it is invalid to specify both 'id' and 'id.lengths'"
 #~ msgstr " 'id' と 'id.lengths' の両方を指定することは出来ません "
-
-#~ msgid "x and y must be units"
-#~ msgstr " x と y は単位(units)でなければなりません "
 
 #~ msgid "'x' and 'units' must have length > 0"
 #~ msgstr " 'x' と 'units' は 0 より大きい長さでなければなりません "

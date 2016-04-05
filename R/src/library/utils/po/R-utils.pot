@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: utils 3.3.0\n"
-"POT-Creation-Date: 2016-03-03 21:07\n"
+"Project-Id-Version: utils 3.4.0\n"
+"POT-Creation-Date: 2016-04-03 21:10\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -491,13 +491,6 @@ msgid "'topic' should be a name, length-one character vector or reserved word"
 msgstr ""
 
 
-#: R/windows/sysutils.R: 0
-#. R/windows/sysutils.R: stop("'use != NA' option is defunct")
-
-msgid "'use != NA' option is defunct"
-msgstr ""
-
-
 #: R/packageStatus.R: 0
 #. R/packageStatus.R: gettext("(each package appears only once)", domain = "R-utils")
 
@@ -630,6 +623,13 @@ msgstr ""
 #. R/help.search.R: gettextf("Built dbMat[%d,%d]", nrow(dbMat), ncol(dbMat), domain = "R-utils")
 
 msgid "Built dbMat[%d,%d]"
+msgstr ""
+
+
+#: R/debugcall.R: 0
+#. R/debugcall.R: stop("Cannot debug primitive functions unless they are implicit generics (requires loading the methods package)")
+
+msgid "Cannot debug primitive functions unless they are implicit generics (requires loading the methods package)"
 msgstr ""
 
 
@@ -2486,8 +2486,8 @@ msgid "environment specified is not a package"
 msgstr ""
 
 
-#: R/question.R: 0
-#. R/question.R: gettextf("error in trying to evaluate the expression for argument %s (%s)", sQuote(arg),     deparse(argExpr))
+#: R/debugcall.R: 0
+#. R/debugcall.R: gettextf("error in trying to evaluate the expression for argument %s (%s)", sQuote(arg),     deparse(argExpr))
 
 msgid "error in trying to evaluate the expression for argument %s (%s)"
 msgstr ""
@@ -3270,6 +3270,13 @@ msgstr ""
 #. R/readtable.R: warning("not all columns named in 'colClasses' exist")
 
 msgid "not all columns named in 'colClasses' exist"
+msgstr ""
+
+
+#: R/strcapture.R: 0
+#. R/strcapture.R: stop("number of matches does not always match ncol(proto)")
+
+msgid "number of matches does not always match ncol(proto)"
 msgstr ""
 
 

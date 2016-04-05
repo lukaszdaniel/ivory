@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-03 18:32\n"
+"POT-Creation-Date: 2016-04-03 21:09\n"
 "PO-Revision-Date: 2014-01-23 22:09+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -217,6 +217,13 @@ msgstr "le premier argument doit être une décomposition QR"
 #: R/all.equal.R:0
 #, fuzzy
 msgid "'%s' argument is not a factor"
+msgstr "pas un tableau de données"
+
+#. R/formals.R: gettextf("'%s' argument is not a function", "fun")
+#. R/formals.R: gettextf("'%s' argument is not a function", "fun")
+#: R/formals.R:0
+#, fuzzy
+msgid "'%s' argument is not a function"
 msgstr "pas un tableau de données"
 
 #. R/table.R: gettextf("'%s' argument is not an array", "x")
@@ -2202,6 +2209,22 @@ msgstr "impossible de créer un répertoire pour le lien '%s"
 #: R/namespace.R:0
 msgid "failed to find metadata object for %s"
 msgstr "Objet métadonnées introuvable pour %s"
+
+#. R/debug.R: stop("failed to load methods package for handling signature")
+#: R/debug.R:0
+msgid "failed to load methods package for handling signature"
+msgstr ""
+
+#. R/debug.R: stop("failed to load methods package for undebugging by signature")
+#: R/debug.R:0
+msgid "failed to load methods package for undebugging by signature"
+msgstr ""
+
+#. R/debug.R: stop("failed to load the methods package for debugging by signature")
+#. R/debug.R: stop("failed to load the methods package for debugging by signature")
+#: R/debug.R:0
+msgid "failed to load the methods package for debugging by signature"
+msgstr ""
 
 #. R/windows/junctions.R: stop("fewer 'from' files than 'to' files")
 #: R/windows/junctions.R:0

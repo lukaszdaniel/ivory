@@ -1105,7 +1105,7 @@ static SEXP dispatchNonGeneric(SEXP name, SEXP env, SEXP fdef)
     }
     fun = SYMVALUE(symbol);
     if(fun == R_UnboundValue)
-	error(_("unable to find a non-generic version of function \"%s\""), translateChar(asChar(name)));
+	error(_("unable to find a non-generic version of function '%s'"), translateChar(asChar(name)));
     cptr = R_GlobalContext;
     /* check this is the right context */
     while (cptr != R_ToplevelContext) {

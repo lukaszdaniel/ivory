@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-03-03 21:07\n"
+"POT-Creation-Date: 2016-04-05 22:53\n"
 "PO-Revision-Date: 2012-02-26 14:22+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -3358,13 +3358,6 @@ msgstr ""
 msgid ""
 "The argument of a replacement function which corresponds to the right hand "
 "side must be named 'value'."
-msgstr ""
-
-#. R/QC.R: gettext("The canonical URL of the CRAN page for a package is   https://cran.r-project.org/package=pkgname",     domain = "R-tools")
-#: R/QC.R:0
-msgid ""
-"The canonical URL of the CRAN page for a package is   https://cran.r-project."
-"org/package=pkgname"
 msgstr ""
 
 #. R/bibstyle.R: stop("The default JSS style may not be modified.")

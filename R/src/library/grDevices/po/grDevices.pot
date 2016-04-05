@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the grDevices package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: grDevices 3.3.0\n"
+"Project-Id-Version: grDevices 3.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-09 15:47+0100\n"
+"POT-Creation-Date: 2016-04-03 21:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -370,6 +370,11 @@ msgstr ""
 msgid ""
 "conversion failure on '%s' in 'mbcsToSbcs()' function: dot substituted for <"
 "%02x>"
+msgstr ""
+
+#: devPS.c:4324
+#, c-format
+msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs()' function"
 msgstr ""
 
 #: devPS.c:4394

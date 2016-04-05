@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-23 20:39\n"
+"POT-Creation-Date: 2016-04-03 21:10\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -760,6 +760,14 @@ msgstr "funkcja %s już jest w grupie ogólnej; brak zmian"
 msgid ""
 "Function %s:\n"
 "<not an S4 generic function>"
+msgstr ""
+"Funkcja %s:\n"
+"<nie jest to funkcja ogólna S4>"
+
+#. R/debug.R: stop("Function must be an S4 generic")
+#: R/debug.R:0
+#, fuzzy
+msgid "Function must be an S4 generic"
 msgstr ""
 "Funkcja %s:\n"
 "<nie jest to funkcja ogólna S4>"
@@ -2381,6 +2389,11 @@ msgid "making a traced version of a special; arguments may be altered"
 msgstr ""
 "tworzenie śledzonej wersji funkcji prymitywnej; argumenty mogą ulec zmianie"
 
+#. R/debug.R: warning("method is not being debugged")
+#: R/debug.R:0
+msgid "method is not being debugged"
+msgstr ""
+
 #. R/RMethodUtils.R: gettextf("methods can add arguments to the generic %s only if '...' is an argument to the generic",     sQuote(generic@generic))
 #: R/RMethodUtils.R:0
 msgid ""
@@ -2969,7 +2982,7 @@ msgstr ""
 "gniazdo %s w klasie %s aktualnie zdefiniowane (lub odziedziczone) jako %s, "
 "jest w konflikcie z odziedziczoną definicją w klasie %s"
 
-#. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what), dQuote(elNamed(slots1,     what)), dQuote(elNamed(slots2, what)))
+#. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what), dQuote(slots1[[what]]),     dQuote(slots2[[what]]))
 #: R/oldClass.R:0
 msgid "slot %s: class %s should extend class %s"
 msgstr "gniazdo %s: klasa %s powinna rozszerzać klasę %s"

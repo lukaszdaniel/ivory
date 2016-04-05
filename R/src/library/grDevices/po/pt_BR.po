@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-09 15:47+0100\n"
+"POT-Creation-Date: 2016-04-03 21:09+0200\n"
 "PO-Revision-Date: 2015-01-17 15:07+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -387,6 +387,11 @@ msgstr ""
 msgid ""
 "conversion failure on '%s' in 'mbcsToSbcs()' function: dot substituted for <"
 "%02x>"
+msgstr ""
+
+#: devPS.c:4324
+#, c-format
+msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs()' function"
 msgstr ""
 
 #: devPS.c:4394

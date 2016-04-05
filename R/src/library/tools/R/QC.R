@@ -7085,11 +7085,18 @@ function(x, ...)
                     paste(c(ngettext(length(y), "Found the following (possibly) invalid URL:", "Found the following (possibly) invalid URLs:", domain = "R-tools"),
                             paste(" ", gsub("\n", "\n    ", format(y)))),
                           collapse = "\n")
-            },            if(length(y) &&
-               any(nzchar(y$CRAN)) &&
-               any(grepl("https?://cran.r-project.org/web/packages/[.[:alnum:]]+(|/|/index.html)$",
-                         y$CRAN))) {
-                paste(c("  ", gettext("The canonical URL of the CRAN page for a package is   https://cran.r-project.org/package=pkgname", domain = "R-tools")),
+            },
+            if(length(y) && any(nzchar(z <- y$CRAN))) {
+                ind <-
+                    grepl("https?://cran.r-project.org/web/packages/[.[:alnum:]]+(|/|/index.html)$",
+                          z)
+                paste(c(if(any(ind)) {
+                            c("  The canonical URL of the CRAN page for a package is ", #LUKI
+                              "  https://cran.r-project.org/package=pkgname")
+                        },
+                        if(any(nzchar(z) & !ind)) {
+                            "  A canonical CRAN URL starts with https://cran.r-project.org/" #LUKI
+                        }),
                       collapse = "\n")
             },
             if(length(y) && any(nzchar(y$Spaces))) {

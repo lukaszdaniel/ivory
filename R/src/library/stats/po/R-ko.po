@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-23 20:39\n"
+"POT-Creation-Date: 2016-04-03 21:10\n"
 "PO-Revision-Date: 2014-03-27 13:33-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -2176,6 +2176,11 @@ msgstr ""
 msgid "Importance of components:"
 msgstr ""
 
+#. R/prcomp.R: gettextf("Importance of first k=%d (out of %d) components:\n", k, p, domain = "R-stats")
+#: R/prcomp.R:0
+msgid "Importance of first k=%d (out of %d) components:"
+msgstr ""
+
 #. R/lm.influence.R: gettextf("Influence measures of\n\t%s:", paste(deparse(x$call), collapse = ""), domain = "R-stats")
 #: R/lm.influence.R:0
 msgid ""
@@ -2781,9 +2786,9 @@ msgstr ""
 msgid "Rotated variables:"
 msgstr ""
 
-#. R/prcomp.R: gettext("Rotation:", domain = "R-stats")
+#. R/prcomp.R: gettext("Rotation (n x k) = (%d x %d):", d[1], d[2], domain = "R-stats")
 #: R/prcomp.R:0
-msgid "Rotation:"
+msgid "Rotation (n x k) = (%d x %d):"
 msgstr ""
 
 #. R/medpolish.R: gettext("Row Effects:", domain = "R-stats")
@@ -2868,9 +2873,13 @@ msgstr ""
 msgid "Spearman's rank correlation rho"
 msgstr ""
 
-#. R/prcomp.R: gettext("Standard deviations:", domain = "R-stats")
+#. R/prcomp.R: gettext("Standard deviations (1, .., p=%d):", length(x$sdev), domain = "R-stats")
+#: R/prcomp.R:0
+msgid "Standard deviations (1, .., p=%d):"
+msgstr ""
+
 #. R/princomp.R: gettext("Standard deviations:", domain = "R-stats")
-#: R/prcomp.R:0 R/princomp.R:0
+#: R/princomp.R:0
 msgid "Standard deviations:"
 msgstr ""
 
@@ -3180,6 +3189,11 @@ msgstr ""
 msgid "__twiced__ changed:"
 msgstr ""
 
+#. R/integrate.R: stop("a limit is NA or NaN")
+#: R/integrate.R:0
+msgid "a limit is NA or NaN"
+msgstr ""
+
 #. R/oneway.test.R: stop("a two-sided formula is required")
 #: R/oneway.test.R:0
 msgid "a two-sided formula is required"
@@ -3344,11 +3358,6 @@ msgstr ""
 #: R/chisq.test.R:0
 msgid "at least one entry of 'x' must be positive"
 msgstr "'x'의 항목들중 적어도 한개는 양수이어야 합니다"
-
-#. R/integrate.R: stop("at least one integration limit is missing")
-#: R/integrate.R:0
-msgid "at least one integration limit is missing"
-msgstr ""
 
 #. R/approx.R: stop("at least two non-NA values to interpolate are needed")
 #. R/approx.R: stop("at least two non-NA values to interpolate are needed")
@@ -4215,10 +4224,9 @@ msgstr "유효하지 않은 'use' 인자입니다"
 #. R/splinefun.R: gettextf("invalid '%s' value", "length(x)")
 #. R/stl.R: gettextf("invalid '%s' value", "length(x)")
 #. R/symnum.R: gettextf("invalid '%s' value", "abbr.colnames'")
-#: R/HoltWinters.R:0 R/approx.R:0 R/bandwidths.R:0 R/cmdscale.R:0
-#: R/density.R:0 R/diffinv.R:0 R/filter.R:0 R/kmeans.R:0 R/loess.R:0
-#: R/runmed.R:0 R/smspline.R:0 R/spline.R:0 R/splinefun.R:0 R/stl.R:0
-#: R/symnum.R:0
+#: R/HoltWinters.R:0 R/approx.R:0 R/bandwidths.R:0 R/cmdscale.R:0 R/density.R:0
+#: R/diffinv.R:0 R/filter.R:0 R/kmeans.R:0 R/loess.R:0 R/runmed.R:0
+#: R/smspline.R:0 R/spline.R:0 R/splinefun.R:0 R/stl.R:0 R/symnum.R:0
 #, fuzzy
 msgid "invalid '%s' value"
 msgstr "유효하지 않은 'use' 인자입니다"

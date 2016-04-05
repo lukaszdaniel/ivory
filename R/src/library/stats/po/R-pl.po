@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-23 20:39\n"
+"POT-Creation-Date: 2016-04-03 21:10\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-Bookmarks: -1,20,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #. R/mlm.R: stop("\"mlm\" objects with weights are not supported")
@@ -2103,6 +2103,11 @@ msgstr ""
 msgid "Importance of components:"
 msgstr "Ważność komponentów:"
 
+#. R/prcomp.R: gettextf("Importance of first k=%d (out of %d) components:\n", k, p, domain = "R-stats")
+#: R/prcomp.R:0
+msgid "Importance of first k=%d (out of %d) components:"
+msgstr "Ważność pierwszych k=%d (z %d) komponentów:"
+
 #. R/lm.influence.R: gettextf("Influence measures of\n\t%s:", paste(deparse(x$call), collapse = ""), domain = "R-stats")
 #: R/lm.influence.R:0
 msgid ""
@@ -2708,10 +2713,10 @@ msgstr "Zmienna zależna:"
 msgid "Rotated variables:"
 msgstr "Obrócone zmienne:"
 
-#. R/prcomp.R: gettext("Rotation:", domain = "R-stats")
+#. R/prcomp.R: gettext("Rotation (n x k) = (%d x %d):", d[1], d[2], domain = "R-stats")
 #: R/prcomp.R:0
-msgid "Rotation:"
-msgstr "Obrót:"
+msgid "Rotation (n x k) = (%d x %d):"
+msgstr "Obrót (n x k) = (%d x %d):"
 
 #. R/medpolish.R: gettext("Row Effects:", domain = "R-stats")
 #: R/medpolish.R:0
@@ -2794,9 +2799,13 @@ msgstr "Parametry wygładzające:"
 msgid "Spearman's rank correlation rho"
 msgstr "Rho Spearmana rang korelacji"
 
-#. R/prcomp.R: gettext("Standard deviations:", domain = "R-stats")
+#. R/prcomp.R: gettext("Standard deviations (1, .., p=%d):", length(x$sdev), domain = "R-stats")
+#: R/prcomp.R:0
+msgid "Standard deviations (1, .., p=%d):"
+msgstr "Odchylenia standardowe (1, .., p=%d):"
+
 #. R/princomp.R: gettext("Standard deviations:", domain = "R-stats")
-#: R/prcomp.R:0 R/princomp.R:0
+#: R/princomp.R:0
 msgid "Standard deviations:"
 msgstr "Odchylenia standardowe:"
 
@@ -3115,6 +3124,11 @@ msgstr "__dwukrotnie__ NIE zmienione:"
 msgid "__twiced__ changed:"
 msgstr "__dwukrotnie__ zmienione:"
 
+#. R/integrate.R: stop("a limit is NA or NaN")
+#: R/integrate.R:0
+msgid "a limit is NA or NaN"
+msgstr "granica wynosi NA lub NaN"
+
 #. R/oneway.test.R: stop("a two-sided formula is required")
 #: R/oneway.test.R:0
 msgid "a two-sided formula is required"
@@ -3274,11 +3288,6 @@ msgstr ""
 #: R/chisq.test.R:0
 msgid "at least one entry of 'x' must be positive"
 msgstr "przynajmniej jeden wpis w 'x' musi być dodatni"
-
-#. R/integrate.R: stop("at least one integration limit is missing")
-#: R/integrate.R:0
-msgid "at least one integration limit is missing"
-msgstr "brakuje co najmniej jednej granicy całkowania"
 
 #. R/approx.R: stop("at least two non-NA values to interpolate are needed")
 #. R/approx.R: stop("at least two non-NA values to interpolate are needed")
@@ -4144,10 +4153,9 @@ msgstr "niepoprawny argument '%s'"
 #. R/splinefun.R: gettextf("invalid '%s' value", "length(x)")
 #. R/stl.R: gettextf("invalid '%s' value", "length(x)")
 #. R/symnum.R: gettextf("invalid '%s' value", "abbr.colnames'")
-#: R/HoltWinters.R:0 R/approx.R:0 R/bandwidths.R:0 R/cmdscale.R:0
-#: R/density.R:0 R/diffinv.R:0 R/filter.R:0 R/kmeans.R:0 R/loess.R:0
-#: R/runmed.R:0 R/smspline.R:0 R/spline.R:0 R/splinefun.R:0 R/stl.R:0
-#: R/symnum.R:0
+#: R/HoltWinters.R:0 R/approx.R:0 R/bandwidths.R:0 R/cmdscale.R:0 R/density.R:0
+#: R/diffinv.R:0 R/filter.R:0 R/kmeans.R:0 R/loess.R:0 R/runmed.R:0
+#: R/smspline.R:0 R/spline.R:0 R/splinefun.R:0 R/stl.R:0 R/symnum.R:0
 msgid "invalid '%s' value"
 msgstr "niepoprawna wartość '%s'"
 
@@ -6763,6 +6771,12 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "używanie %d/%d wiersza z połączonego dopasowania"
 msgstr[1] "używanie %d/%d wierszy z połączonego dopasowania"
 msgstr[2] "używanie %d/%d wierszy z połączonego dopasowania"
+
+#~ msgid "Rotation:"
+#~ msgstr "Obrót:"
+
+#~ msgid "at least one integration limit is missing"
+#~ msgstr "brakuje co najmniej jednej granicy całkowania"
 
 #~ msgid "no input has determined the number of cases"
 #~ msgstr "żadne wejście nie określiło liczbę przypadków"

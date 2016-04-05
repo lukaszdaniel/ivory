@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-03 21:07+0100\n"
+"POT-Creation-Date: 2016-04-03 21:10+0200\n"
 "PO-Revision-Date: 2012-03-08 20:50+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -304,6 +304,11 @@ msgstr ""
 #, fuzzy
 msgid "non-finite function value"
 msgstr "'zeroin'의 함수값이 잘못되었습니다"
+
+#: integrate.c:78 integrate.c:80 integrate.c:122
+#, fuzzy, c-format
+msgid "'%s' argument must be of length one"
+msgstr "'m' 은 반드시 list 이어야 합니다 "
 
 #: ksmooth.c:63
 msgid "only 2500 rows are allowed for sm.method=\"spline\""
@@ -665,33 +670,33 @@ msgstr "모델식에 잘못된 항목이 있습니다"
 msgid "invalid model formula"
 msgstr "모델식이 잘못되었습니다"
 
-#: model.c:1142 model.c:1401
+#: model.c:1142 model.c:1402
 msgid "invalid power in formula"
 msgstr "모델식에 잘못된 지수가 있습니다"
 
-#: model.c:1178 model.c:1585
+#: model.c:1178 model.c:1586
 #, fuzzy, c-format
 msgid "invalid model formula in '%s' function"
 msgstr "EncodeVars의 모델식이 잘못되었습니다"
 
-#: model.c:1524
+#: model.c:1525
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "''를 사용한 데이터 프레임에서 중복된 이름 '%s'이 있습니다"
 
-#: model.c:1671
+#: model.c:1672
 msgid "argument is not a valid model"
 msgstr "인수는 유효한 모델이 아닙니다"
 
-#: model.c:1681
+#: model.c:1682
 msgid "'specials' must be NULL or a character vector"
 msgstr "'specials' must be NULL or a character vector"
 
-#: model.c:1693
+#: model.c:1694
 msgid "'data' argument is of the wrong type"
 msgstr "'data'인수가 잘못된 유형입니다"
 
-#: model.c:1963
+#: model.c:1964
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.'가 수식에서 있습니다만, 'data'인수가 아닙니다"
 

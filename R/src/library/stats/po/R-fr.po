@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-23 20:39\n"
+"POT-Creation-Date: 2016-04-03 21:10\n"
 "PO-Revision-Date: 2012-03-06 21:48+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -2217,6 +2217,11 @@ msgstr ""
 msgid "Importance of components:"
 msgstr ""
 
+#. R/prcomp.R: gettextf("Importance of first k=%d (out of %d) components:\n", k, p, domain = "R-stats")
+#: R/prcomp.R:0
+msgid "Importance of first k=%d (out of %d) components:"
+msgstr ""
+
 #. R/lm.influence.R: gettextf("Influence measures of\n\t%s:", paste(deparse(x$call), collapse = ""), domain = "R-stats")
 #: R/lm.influence.R:0
 msgid ""
@@ -2839,11 +2844,10 @@ msgstr "modèles avec réponse"
 msgid "Rotated variables:"
 msgstr ""
 
-#. R/prcomp.R: gettext("Rotation:", domain = "R-stats")
+#. R/prcomp.R: gettext("Rotation (n x k) = (%d x %d):", d[1], d[2], domain = "R-stats")
 #: R/prcomp.R:0
-#, fuzzy
-msgid "Rotation:"
-msgstr "itérations"
+msgid "Rotation (n x k) = (%d x %d):"
+msgstr ""
 
 #. R/medpolish.R: gettext("Row Effects:", domain = "R-stats")
 #: R/medpolish.R:0
@@ -2929,9 +2933,13 @@ msgstr "valeurs des paramètres incorrectes"
 msgid "Spearman's rank correlation rho"
 msgstr ""
 
-#. R/prcomp.R: gettext("Standard deviations:", domain = "R-stats")
+#. R/prcomp.R: gettext("Standard deviations (1, .., p=%d):", length(x$sdev), domain = "R-stats")
+#: R/prcomp.R:0
+msgid "Standard deviations (1, .., p=%d):"
+msgstr ""
+
 #. R/princomp.R: gettext("Standard deviations:", domain = "R-stats")
-#: R/prcomp.R:0 R/princomp.R:0
+#: R/princomp.R:0
 msgid "Standard deviations:"
 msgstr ""
 
@@ -3245,6 +3253,11 @@ msgstr ""
 msgid "__twiced__ changed:"
 msgstr ""
 
+#. R/integrate.R: stop("a limit is NA or NaN")
+#: R/integrate.R:0
+msgid "a limit is NA or NaN"
+msgstr ""
+
 #. R/oneway.test.R: stop("a two-sided formula is required")
 #: R/oneway.test.R:0
 msgid "a two-sided formula is required"
@@ -3410,12 +3423,6 @@ msgstr ""
 #: R/chisq.test.R:0
 msgid "at least one entry of 'x' must be positive"
 msgstr "au moins une valeur de 'x' doit être positive"
-
-#. R/integrate.R: stop("at least one integration limit is missing")
-#: R/integrate.R:0
-#, fuzzy
-msgid "at least one integration limit is missing"
-msgstr "il manque une limite"
 
 #. R/approx.R: stop("at least two non-NA values to interpolate are needed")
 #. R/approx.R: stop("at least two non-NA values to interpolate are needed")
@@ -4317,10 +4324,9 @@ msgstr "argument 'use' incorrect"
 #. R/splinefun.R: gettextf("invalid '%s' value", "length(x)")
 #. R/stl.R: gettextf("invalid '%s' value", "length(x)")
 #. R/symnum.R: gettextf("invalid '%s' value", "abbr.colnames'")
-#: R/HoltWinters.R:0 R/approx.R:0 R/bandwidths.R:0 R/cmdscale.R:0
-#: R/density.R:0 R/diffinv.R:0 R/filter.R:0 R/kmeans.R:0 R/loess.R:0
-#: R/runmed.R:0 R/smspline.R:0 R/spline.R:0 R/splinefun.R:0 R/stl.R:0
-#: R/symnum.R:0
+#: R/HoltWinters.R:0 R/approx.R:0 R/bandwidths.R:0 R/cmdscale.R:0 R/density.R:0
+#: R/diffinv.R:0 R/filter.R:0 R/kmeans.R:0 R/loess.R:0 R/runmed.R:0
+#: R/smspline.R:0 R/spline.R:0 R/splinefun.R:0 R/stl.R:0 R/symnum.R:0
 #, fuzzy
 msgid "invalid '%s' value"
 msgstr "argument 'use' incorrect"
@@ -7051,6 +7057,14 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "utilisation des %d/%d lignes d'un ajustement combiné"
 msgstr[1] "utilisation des %d/%d lignes d'un ajustement combiné"
+
+#, fuzzy
+#~ msgid "Rotation:"
+#~ msgstr "itérations"
+
+#, fuzzy
+#~ msgid "at least one integration limit is missing"
+#~ msgstr "il manque une limite"
 
 #, fuzzy
 #~ msgid "not all arguments have the same length"

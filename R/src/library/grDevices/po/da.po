@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-09 15:47+0100\n"
+"POT-Creation-Date: 2016-04-03 21:09+0200\n"
 "PO-Revision-Date: 2016-01-09 18:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -402,6 +402,11 @@ msgstr "familie '%s' er ikke inkluderet i PostScript-enhed"
 msgid ""
 "conversion failure on '%s' in 'mbcsToSbcs()' function: dot substituted for <"
 "%02x>"
+msgstr "konverteringsfejl på '%s' i 'mbcsToSbcs': punktum erstattet for <%02x>"
+
+#: devPS.c:4324
+#, fuzzy, c-format
+msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs()' function"
 msgstr "konverteringsfejl på '%s' i 'mbcsToSbcs': punktum erstattet for <%02x>"
 
 #: devPS.c:4394

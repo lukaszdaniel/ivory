@@ -230,7 +230,7 @@ SEXP attribute_hidden do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
     } else if(streql(encoding, "UTF-8"))  {
 	known_to_be_utf8 = TRUE;
 	allKnown = FALSE;
-    } else if(!streql(encoding, "unknown") && !streql(encoding, "native.enc")) 
+    } else if(!streql(encoding, "unknown") && !streql(encoding, "native.enc"))
 	warning(_("'%s = \"%s\"' option will be ignored"), "encoding", encoding);
 
     if (prompt == R_NilValue)

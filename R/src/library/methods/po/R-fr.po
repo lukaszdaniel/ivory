@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-23 20:39\n"
+"POT-Creation-Date: 2016-04-03 21:10\n"
 "PO-Revision-Date: 2012-03-06 21:42+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -831,6 +831,12 @@ msgstr "la fonction %s est déjà un groupe générique ; Pas de changement"
 msgid ""
 "Function %s:\n"
 "<not an S4 generic function>"
+msgstr "aucune fonction générique %s n'est trouvée"
+
+#. R/debug.R: stop("Function must be an S4 generic")
+#: R/debug.R:0
+#, fuzzy
+msgid "Function must be an S4 generic"
 msgstr "aucune fonction générique %s n'est trouvée"
 
 #. R/methodsTable.R: gettextf("Function: %s (package %s)", func, pkg, domain = "R-methods")
@@ -2607,6 +2613,11 @@ msgstr ""
 "création d'une version de déboguage d'une primitive ; Les arguments seront "
 "traités comme '...'"
 
+#. R/debug.R: warning("method is not being debugged")
+#: R/debug.R:0
+msgid "method is not being debugged"
+msgstr ""
+
 #. R/RMethodUtils.R: gettextf("methods can add arguments to the generic %s only if '...' is an argument to the generic",     sQuote(generic@generic))
 #: R/RMethodUtils.R:0
 msgid ""
@@ -3280,7 +3291,7 @@ msgstr ""
 "le slot \"%s\" de la classe %s est actuellement défini (ou hérité) comme \"%s"
 "\", conflits avec une définition héritée de la classe %s"
 
-#. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what), dQuote(elNamed(slots1,     what)), dQuote(elNamed(slots2, what)))
+#. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what), dQuote(slots1[[what]]),     dQuote(slots2[[what]]))
 #: R/oldClass.R:0
 #, fuzzy
 msgid "slot %s: class %s should extend class %s"

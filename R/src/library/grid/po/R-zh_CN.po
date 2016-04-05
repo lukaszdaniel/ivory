@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-09 15:48\n"
+"POT-Creation-Date: 2016-04-03 21:09\n"
 "PO-Revision-Date: 2015-01-17 15:11+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -418,6 +418,12 @@ msgstr "视口名字不对"
 #: R/grob.R:0
 msgid "New 'grob' name (%s) does not match 'gPath' (%s)"
 msgstr "新的'grob'名(%s) 与原来的'gPath'(%s) 名不相配"
+
+#. R/unit.R: stop("Value being assigned must be a unit")
+#: R/unit.R:0
+#, fuzzy
+msgid "Value being assigned must be a unit"
+msgstr "x和y必需为单元值"
 
 #. R/unit.R: stop("Zero arguments where at least one expected")
 #: R/unit.R:0
@@ -1024,9 +1030,6 @@ msgstr[0] "视口名字不对"
 #, fuzzy
 #~ msgid "it is invalid to specify both 'id' and 'id.lengths'"
 #~ msgstr "不能同时对'id'和'id.lengths'进行设定"
-
-#~ msgid "x and y must be units"
-#~ msgstr "x和y必需为单元值"
 
 #~ msgid "'x' and 'units' must have length > 0"
 #~ msgstr "'x'和'unit'的长度必需大于零"

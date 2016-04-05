@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: tools 3.3.0\n"
-"POT-Creation-Date: 2016-03-03 21:07\n"
+"Project-Id-Version: tools 3.4.0\n"
+"POT-Creation-Date: 2016-04-05 22:53\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3989,13 +3989,6 @@ msgstr ""
 #. R/check.R: gettext("The argument of a replacement function which corresponds to the right hand side must be named 'value'.\n",     domain = "R-tools")
 
 msgid "The argument of a replacement function which corresponds to the right hand side must be named 'value'."
-msgstr ""
-
-
-#: R/QC.R: 0
-#. R/QC.R: gettext("The canonical URL of the CRAN page for a package is   https://cran.r-project.org/package=pkgname",     domain = "R-tools")
-
-msgid "The canonical URL of the CRAN page for a package is   https://cran.r-project.org/package=pkgname"
 msgstr ""
 
 

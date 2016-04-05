@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-09 15:48\n"
+"POT-Creation-Date: 2016-04-03 21:09\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -396,6 +396,12 @@ msgstr "Niepoprawny cel 'revert'"
 #: R/grob.R:0
 msgid "New 'grob' name (%s) does not match 'gPath' (%s)"
 msgstr "Nowa nazwa 'grob' (%s) nie zgadza się z 'gPath' (%s)"
+
+#. R/unit.R: stop("Value being assigned must be a unit")
+#: R/unit.R:0
+#, fuzzy
+msgid "Value being assigned must be a unit"
+msgstr "Wielkości 'x' oraz 'y' muszą być jednostkami"
 
 #. R/unit.R: stop("Zero arguments where at least one expected")
 #: R/unit.R:0
@@ -961,6 +967,3 @@ msgstr[2] "niepoprawne nazwy okien ekranu"
 
 #~ msgid "it is invalid to specify both 'id' and 'id.lengths'"
 #~ msgstr "nie jest poprawnie określać oba 'id' oraz 'id.lengths'"
-
-#~ msgid "x and y must be units"
-#~ msgstr "Wielkości 'x' oraz 'y' muszą być jednostkami"

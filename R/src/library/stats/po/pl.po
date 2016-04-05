@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-03 21:07+0100\n"
+"POT-Creation-Date: 2016-04-03 21:10+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: Srunmed.c:54
 msgid "bandwidth/span of running medians is larger than n"
@@ -311,6 +311,11 @@ msgstr "obliczenie funkcji zwróciło wynik o niepoprawnym typie"
 #: integrate.c:62
 msgid "non-finite function value"
 msgstr "nieskończona wartość funkcji"
+
+#: integrate.c:78 integrate.c:80 integrate.c:122
+#, c-format
+msgid "'%s' argument must be of length one"
+msgstr "argument '%s' musi mieć długość jeden"
 
 #: ksmooth.c:63
 msgid "only 2500 rows are allowed for sm.method=\"spline\""
@@ -684,33 +689,33 @@ msgstr "niepoprawny człon w formule modelu"
 msgid "invalid model formula"
 msgstr "niepoprawna formuła modelu"
 
-#: model.c:1142 model.c:1401
+#: model.c:1142 model.c:1402
 msgid "invalid power in formula"
 msgstr "niepoprawna potęga w formule"
 
-#: model.c:1178 model.c:1585
+#: model.c:1178 model.c:1586
 #, c-format
 msgid "invalid model formula in '%s' function"
 msgstr "niepoprawna formuła modelu w funkcji '%s'"
 
-#: model.c:1524
+#: model.c:1525
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "powtórzona nazwa '%s' w ramce danych używając '.'"
 
-#: model.c:1671
+#: model.c:1672
 msgid "argument is not a valid model"
 msgstr "argument nie jest poprawnym modelem"
 
-#: model.c:1681
+#: model.c:1682
 msgid "'specials' must be NULL or a character vector"
 msgstr "'specials' musi być wektorem tekstowym lub wartością 'NULL'"
 
-#: model.c:1693
+#: model.c:1694
 msgid "'data' argument is of the wrong type"
 msgstr "argument 'data' posiada niepoprawny typ"
 
-#: model.c:1963
+#: model.c:1964
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' w formule oraz brak argumentu 'data'"
 

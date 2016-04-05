@@ -3481,7 +3481,7 @@ SEXP (SET_VECTOR_ELT)(SEXP x, R_xlen_t i, SEXP v) {
 	error(_("'SET_VECTOR_ELT()' function can only be applied to a 'list', not a '%s'"),
 	      type2char(TYPEOF(x)));
     }
-    if (i < 0 || i >= XLENGTH(x)) 
+    if (i < 0 || i >= XLENGTH(x))
 	error(_("attempt to set index %lu/%lu in 'SET_VECTOR_ELT()' function"), i, XLENGTH(x));
     FIX_REFCNT(x, VECTOR_ELT(x, i), v);
     CHECK_OLD_TO_NEW(x, v);
@@ -3550,7 +3550,6 @@ SEXP (SETCADDR)(SEXP x, SEXP y)
     CAR(cell) = y;
     return y;
 }
-
 
 SEXP (SETCADDDR)(SEXP x, SEXP y)
 {

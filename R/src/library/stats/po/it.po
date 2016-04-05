@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-03 21:07+0100\n"
+"POT-Creation-Date: 2016-04-03 21:10+0200\n"
 "PO-Revision-Date: 2005-04-14 18:06+0200\n"
 "Last-Translator: stefano iacus <stefano.iacus@r-project.org>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -302,6 +302,11 @@ msgstr ""
 #, fuzzy
 msgid "non-finite function value"
 msgstr "valore funzione non valido in 'zeroin'"
+
+#: integrate.c:78 integrate.c:80 integrate.c:122
+#, fuzzy, c-format
+msgid "'%s' argument must be of length one"
+msgstr "'m' deve essere di tipo list"
 
 #: ksmooth.c:63
 msgid "only 2500 rows are allowed for sm.method=\"spline\""
@@ -664,34 +669,34 @@ msgstr "valore di lag.max non valido"
 msgid "invalid model formula"
 msgstr "formula modello non valida"
 
-#: model.c:1142 model.c:1401
+#: model.c:1142 model.c:1402
 msgid "invalid power in formula"
 msgstr "potenza non valida nella formula"
 
-#: model.c:1178 model.c:1585
+#: model.c:1178 model.c:1586
 #, fuzzy, c-format
 msgid "invalid model formula in '%s' function"
 msgstr "formula modello non valida in EncodeVars"
 
-#: model.c:1524
+#: model.c:1525
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "duplicazione nome '%s' nel data frame nell'usare '.'"
 
-#: model.c:1671
+#: model.c:1672
 msgid "argument is not a valid model"
 msgstr "l'argomento non è un modello valido"
 
-#: model.c:1681
+#: model.c:1682
 #, fuzzy
 msgid "'specials' must be NULL or a character vector"
 msgstr "'path' deve essere un vettore di tipo character"
 
-#: model.c:1693
+#: model.c:1694
 msgid "'data' argument is of the wrong type"
 msgstr "l'argomento 'data' è di tipo sbagliato"
 
-#: model.c:1963
+#: model.c:1964
 msgid "'.' in formula and no 'data' argument"
 msgstr "nella formula c'è il '.' ma nessun argomento 'data'"
 

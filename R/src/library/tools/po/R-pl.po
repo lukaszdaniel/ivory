@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-03 21:07\n"
+"POT-Creation-Date: 2016-04-05 22:53\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -3300,15 +3300,6 @@ msgid ""
 msgstr ""
 "Argument funkcji zastępującej, który odpowiada prawej stronie musi mieć "
 "nazwę 'value'."
-
-#. R/QC.R: gettext("The canonical URL of the CRAN page for a package is   https://cran.r-project.org/package=pkgname",     domain = "R-tools")
-#: R/QC.R:0
-msgid ""
-"The canonical URL of the CRAN page for a package is   https://cran.r-project."
-"org/package=pkgname"
-msgstr ""
-"Kanoniczny adres URL strony CRAN dla pakietu to https://cran.r-project.org/"
-"package=pkgname"
 
 #. R/bibstyle.R: stop("The default JSS style may not be modified.")
 #: R/bibstyle.R:0
@@ -7166,6 +7157,13 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "nie można przekodować %s linia %s"
 msgstr[1] "nie można przekodować %s linie %s"
 msgstr[2] "nie można przekodować %s linie %s"
+
+#~ msgid ""
+#~ "The canonical URL of the CRAN page for a package is   https://cran.r-"
+#~ "project.org/package=pkgname"
+#~ msgstr ""
+#~ "Kanoniczny adres URL strony CRAN dla pakietu to https://cran.r-project."
+#~ "org/package=pkgname"
 
 #~ msgid ""
 #~ "reading 'DESCRIPTION' for package %s failed with message:\n"

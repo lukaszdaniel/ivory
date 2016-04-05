@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-01-09 15:48\n"
+"POT-Creation-Date: 2016-04-03 21:09\n"
 "PO-Revision-Date: 2012-03-06 21:36+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -433,6 +433,12 @@ msgstr "Nom(s) de vue(s) incorrect(s)"
 #: R/grob.R:0
 msgid "New 'grob' name (%s) does not match 'gPath' (%s)"
 msgstr "Le nouveau nom de 'grob' (%s) n'est pas compatible avec 'gPath' (%s)"
+
+#. R/unit.R: stop("Value being assigned must be a unit")
+#: R/unit.R:0
+#, fuzzy
+msgid "Value being assigned must be a unit"
+msgstr "'x' et 'y' doivent être des unités"
 
 #. R/unit.R: stop("Zero arguments where at least one expected")
 #: R/unit.R:0
@@ -1067,9 +1073,6 @@ msgstr[1] "Nom(s) de vue(s) incorrect(s)"
 #, fuzzy
 #~ msgid "it is invalid to specify both 'id' and 'id.lengths'"
 #~ msgstr "Il n'est pas permi de spécifier simultanément 'id' et 'id.lengths'"
-
-#~ msgid "x and y must be units"
-#~ msgstr "'x' et 'y' doivent être des unités"
 
 #~ msgid "'x' and 'units' must have length > 0"
 #~ msgstr "'x' et 'units' doivent avoir une longueur positive"

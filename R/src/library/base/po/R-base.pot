@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: base 3.3.0\n"
-"POT-Creation-Date: 2016-02-03 18:32\n"
+"Project-Id-Version: base 3.4.0\n"
+"POT-Creation-Date: 2016-04-03 21:09\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -231,6 +231,14 @@ msgstr ""
 #. R/all.equal.R: gettextf("'%s' argument is not a factor", "current")
 
 msgid "'%s' argument is not a factor"
+msgstr ""
+
+
+#: R/formals.R: 0
+#. R/formals.R: gettextf("'%s' argument is not a function", "fun")
+#. R/formals.R: gettextf("'%s' argument is not a function", "fun")
+
+msgid "'%s' argument is not a function"
 msgstr ""
 
 
@@ -2594,6 +2602,28 @@ msgstr ""
 #. R/namespace.R: gettextf("failed to find metadata object for %s", sQuote(mi))
 
 msgid "failed to find metadata object for %s"
+msgstr ""
+
+
+#: R/debug.R: 0
+#. R/debug.R: stop("failed to load methods package for handling signature")
+
+msgid "failed to load methods package for handling signature"
+msgstr ""
+
+
+#: R/debug.R: 0
+#. R/debug.R: stop("failed to load methods package for undebugging by signature")
+
+msgid "failed to load methods package for undebugging by signature"
+msgstr ""
+
+
+#: R/debug.R: 0
+#. R/debug.R: stop("failed to load the methods package for debugging by signature")
+#. R/debug.R: stop("failed to load the methods package for debugging by signature")
+
+msgid "failed to load the methods package for debugging by signature"
 msgstr ""
 
 

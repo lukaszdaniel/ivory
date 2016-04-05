@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-23 20:39\n"
+"POT-Creation-Date: 2016-04-03 21:10\n"
 "PO-Revision-Date: 2015-01-17 15:43+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -784,6 +784,12 @@ msgstr "函数%s已经是群體泛型函数了；没有变动"
 msgid ""
 "Function %s:\n"
 "<not an S4 generic function>"
+msgstr "不存在%s这一泛型函数"
+
+#. R/debug.R: stop("Function must be an S4 generic")
+#: R/debug.R:0
+#, fuzzy
+msgid "Function must be an S4 generic"
 msgstr "不存在%s这一泛型函数"
 
 #. R/methodsTable.R: gettextf("Function: %s (package %s)", func, pkg, domain = "R-methods")
@@ -2362,6 +2368,11 @@ msgstr "为特殊函数 %s制造泛型函数"
 msgid "making a traced version of a special; arguments may be altered"
 msgstr "创造一个被追踪的基元函数版本；其参数将被当作'...'来用"
 
+#. R/debug.R: warning("method is not being debugged")
+#: R/debug.R:0
+msgid "method is not being debugged"
+msgstr ""
+
 #. R/RMethodUtils.R: gettextf("methods can add arguments to the generic %s only if '...' is an argument to the generic",     sQuote(generic@generic))
 #: R/RMethodUtils.R:0
 msgid ""
@@ -2958,7 +2969,7 @@ msgstr ""
 "类别%s里的槽\"%s\"目前被定义为(或继承于)\"%s\"，这与类别%s里所继承的定义相互"
 "有矛盾"
 
-#. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what), dQuote(elNamed(slots1,     what)), dQuote(elNamed(slots2, what)))
+#. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what), dQuote(slots1[[what]]),     dQuote(slots2[[what]]))
 #: R/oldClass.R:0
 #, fuzzy
 msgid "slot %s: class %s should extend class %s"

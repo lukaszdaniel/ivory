@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-23 20:39\n"
+"POT-Creation-Date: 2016-04-03 21:10\n"
 "PO-Revision-Date: 2016-01-09 19:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -708,6 +708,11 @@ msgstr ""
 msgid ""
 "Function %s:\n"
 "<not an S4 generic function>"
+msgstr ""
+
+#. R/debug.R: stop("Function must be an S4 generic")
+#: R/debug.R:0
+msgid "Function must be an S4 generic"
 msgstr ""
 
 #. R/methodsTable.R: gettextf("Function: %s (package %s)", func, pkg, domain = "R-methods")
@@ -2136,6 +2141,11 @@ msgstr ""
 msgid "making a traced version of a special; arguments may be altered"
 msgstr ""
 
+#. R/debug.R: warning("method is not being debugged")
+#: R/debug.R:0
+msgid "method is not being debugged"
+msgstr ""
+
 #. R/RMethodUtils.R: gettextf("methods can add arguments to the generic %s only if '...' is an argument to the generic",     sQuote(generic@generic))
 #: R/RMethodUtils.R:0
 msgid ""
@@ -2668,7 +2678,7 @@ msgid ""
 "with an inherited definition in class %s"
 msgstr ""
 
-#. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what), dQuote(elNamed(slots1,     what)), dQuote(elNamed(slots2, what)))
+#. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what), dQuote(slots1[[what]]),     dQuote(slots2[[what]]))
 #: R/oldClass.R:0
 msgid "slot %s: class %s should extend class %s"
 msgstr ""

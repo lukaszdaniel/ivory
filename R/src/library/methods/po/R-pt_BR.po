@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-23 20:39\n"
+"POT-Creation-Date: 2016-04-03 21:10\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -793,6 +793,12 @@ msgstr "função \"%s\" já um genérico de grupo; nenhuma mudança"
 msgid ""
 "Function %s:\n"
 "<not an S4 generic function>"
+msgstr "nenhuma função genérica \"%s\" encontrada"
+
+#. R/debug.R: stop("Function must be an S4 generic")
+#: R/debug.R:0
+#, fuzzy
+msgid "Function must be an S4 generic"
 msgstr "nenhuma função genérica \"%s\" encontrada"
 
 #. R/methodsTable.R: gettextf("Function: %s (package %s)", func, pkg, domain = "R-methods")
@@ -2443,6 +2449,11 @@ msgstr "Criando uma nova função genérica a partir da função \"%s\""
 msgid "making a traced version of a special; arguments may be altered"
 msgstr ""
 
+#. R/debug.R: warning("method is not being debugged")
+#: R/debug.R:0
+msgid "method is not being debugged"
+msgstr ""
+
 #. R/RMethodUtils.R: gettextf("methods can add arguments to the generic %s only if '...' is an argument to the generic",     sQuote(generic@generic))
 #: R/RMethodUtils.R:0
 msgid ""
@@ -3061,7 +3072,7 @@ msgstr ""
 "slot \"%s\" na classe \"%s\" definido atualmente (ou herdado) como \"%s\", "
 "conflita com uma definição herdada na classe \"%s\""
 
-#. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what), dQuote(elNamed(slots1,     what)), dQuote(elNamed(slots2, what)))
+#. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what), dQuote(slots1[[what]]),     dQuote(slots2[[what]]))
 #: R/oldClass.R:0
 #, fuzzy
 msgid "slot %s: class %s should extend class %s"

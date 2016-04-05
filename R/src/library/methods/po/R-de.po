@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-02-23 20:39\n"
+"POT-Creation-Date: 2016-04-03 21:10\n"
 "PO-Revision-Date: 2015-01-17 15:36+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -822,6 +822,12 @@ msgstr "Funktion %s ist bereits gruppengenerisch; keine Änderung"
 msgid ""
 "Function %s:\n"
 "<not an S4 generic function>"
+msgstr "keine generische Funktion %s gefunden"
+
+#. R/debug.R: stop("Function must be an S4 generic")
+#: R/debug.R:0
+#, fuzzy
+msgid "Function must be an S4 generic"
 msgstr "keine generische Funktion %s gefunden"
 
 #. R/methodsTable.R: gettextf("Function: %s (package %s)", func, pkg, domain = "R-methods")
@@ -2566,6 +2572,11 @@ msgstr ""
 "erzeuge verfolgte Version einer Primitiven; Argumente werden wie '...' "
 "behandelt"
 
+#. R/debug.R: warning("method is not being debugged")
+#: R/debug.R:0
+msgid "method is not being debugged"
+msgstr ""
+
 #. R/RMethodUtils.R: gettextf("methods can add arguments to the generic %s only if '...' is an argument to the generic",     sQuote(generic@generic))
 #: R/RMethodUtils.R:0
 msgid ""
@@ -3212,7 +3223,7 @@ msgstr ""
 "Slot \"%s\" in Klasse %s, momentan definiert (oder vererbt) als \"%s\", "
 "widerspricht einer vererbten Definition in Klasse %s"
 
-#. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what), dQuote(elNamed(slots1,     what)), dQuote(elNamed(slots2, what)))
+#. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what), dQuote(slots1[[what]]),     dQuote(slots2[[what]]))
 #: R/oldClass.R:0
 #, fuzzy
 msgid "slot %s: class %s should extend class %s"

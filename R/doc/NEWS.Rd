@@ -9,6 +9,34 @@
   \subsection{NEW FEATURES}{
     \itemize{
       \item User errors such as \code{integrate(f, 0:1, 2)} are now caught.
+
+      \item Add \code{signature} argument to \code{debug()},
+      \code{debugonce()}, \code{undebug()} and \code{isdebugged()} for
+      more conveniently debugging S3 and S4 methods. Based on a patch by
+      Gabe Becker.
+
+      \item Add \code{utils::debugcall()} and
+      \code{utils::undebugcall()} for debugging the function that would
+      be called by evaluating the given expression. When the call is to
+      an S4 generic or standard S3 generic, \code{debugcall()} debugs the
+      method that would be dispatched. A number of internal utilities
+      were added to support this, most notably
+      \code{utils::isS3stdGeneric()}. Based on a patch by Gabe Becker.
+
+      \item Add \code{utils::strcapture()}. Given a character vector and
+      a regular expression containing capture expressions,
+      \code{strcapture()} will extract the captured tokens into a
+      tabular data structure, typically a data.frame.
+
+      \item The \code{import()} namespace directive now accepts an
+      argument \code{except} which names symbols to exclude from the
+      imports. The \code{except} expression should evaluate to a
+      character vector (after substituting symbols for strings). See
+      Writing R Extensions.
+
+      \item \code{str()} and \code{strOptions()} get a new option
+      \code{drop.deparse.attr} with improved but \emph{changed} default
+      behaviour for expressions.% plan: backport to 3.3.1
     }
   }
   \subsection{DEPRECATED AND DEFUNCT}{
@@ -322,7 +350,8 @@
       \item \R now uses a new version of the logo (donated to the R
       Foundation by RStudio).  It is defined in \file{.svg} format, so
       will resize without unnecessary degradation when displayed on
-      HTML pages---there is also a vector PDF version.
+      HTML pages---there is also a vector PDF version.  Thanks to
+      Dirk Eddelbuettel for producing the corresponding X11 icon.
 
       \item New function \code{.traceback()} returns the stack trace
       which \code{traceback()} prints.
@@ -335,17 +364,17 @@
       and patches.
 
       \item \code{as.roman(ch)} now correctly deals with more diverse
-      character vectors \code{ch}; also arithmetic with resulting roman
-      numbers works in more cases.  (\PR{16779})
+      character vectors \code{ch}; also arithmetic with the resulting
+      roman numbers works in more cases.  (\PR{16779})
 
       \item \code{prcomp()} gains a new option \code{rank.} allowing to
       directly aim for less than \code{min(n,p)} PC's.  The
       \code{summary()} and its \code{print()} method have been amended,
       notably for this case.
 
-      \item \code{gzcon} gains a new option \code{text}, which marks the
-      connection as text-oriented (so e.g. \code{pushBack} works). It is
-      still always opened in binary mode.
+      \item \code{gzcon()} gains a new option \code{text}, which marks
+      the connection as text-oriented (so e.g.\sspace{}\code{pushBack()}
+      works).  It is still always opened in binary mode.
     }
   }
 

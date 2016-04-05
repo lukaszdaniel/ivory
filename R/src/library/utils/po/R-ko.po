@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-03-03 21:07\n"
+"POT-Creation-Date: 2016-04-03 21:10\n"
 "PO-Revision-Date: 2012-03-09 06:16+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -406,11 +406,6 @@ msgstr "'tar' 는 0 이 아닌 종료코드 %d 를 반환했습니다 "
 msgid "'topic' should be a name, length-one character vector or reserved word"
 msgstr "'topic' 은 이름, 길이가 한개인 문자 벡터, 또는 예약어 이어야 합니다 "
 
-#. R/windows/sysutils.R: stop("'use != NA' option is defunct")
-#: R/windows/sysutils.R:0
-msgid "'use != NA' option is defunct"
-msgstr ""
-
 #. R/packageStatus.R: gettext("(each package appears only once)", domain = "R-utils")
 #: R/packageStatus.R:0
 msgid "(each package appears only once)"
@@ -519,6 +514,13 @@ msgstr ""
 #. R/help.search.R: gettextf("Built dbMat[%d,%d]", nrow(dbMat), ncol(dbMat), domain = "R-utils")
 #: R/help.search.R:0
 msgid "Built dbMat[%d,%d]"
+msgstr ""
+
+#. R/debugcall.R: stop("Cannot debug primitive functions unless they are implicit generics (requires loading the methods package)")
+#: R/debugcall.R:0
+msgid ""
+"Cannot debug primitive functions unless they are implicit generics (requires "
+"loading the methods package)"
 msgstr ""
 
 #. R/news.R: gettextf("Changes in %s (%s):", vstrings, dates, domain = "R-utils")
@@ -2007,8 +2009,8 @@ msgstr "파일의 처음이 비었습니다 "
 msgid "environment specified is not a package"
 msgstr "지정된 환경은 패키지가 아닙니다"
 
-#. R/question.R: gettextf("error in trying to evaluate the expression for argument %s (%s)", sQuote(arg),     deparse(argExpr))
-#: R/question.R:0
+#. R/debugcall.R: gettextf("error in trying to evaluate the expression for argument %s (%s)", sQuote(arg),     deparse(argExpr))
+#: R/debugcall.R:0
 msgid "error in trying to evaluate the expression for argument %s (%s)"
 msgstr "인수 %s (%s) 에 대한 표현식을 평가할 때 생기는 에러입니다 "
 
@@ -2203,8 +2205,8 @@ msgstr ""
 #. R/packages2.R: gettextf("invalid '%s' argument", "keep_outputs")
 #. R/sock.R: gettextf("invalid '%s' argument", "socket")
 #. R/tar.R: gettextf("invalid '%s' argument", "tarfile")
-#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0
-#: R/sock.R:0 R/tar.R:0
+#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0
+#: R/tar.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "%s 인자가 잘못되었습니다 "
@@ -2610,6 +2612,11 @@ msgstr "'as.is' 내에 명명된 모든 열들이 존재하지 않습니다 "
 #: R/read.DIF.R:0 R/readtable.R:0
 msgid "not all columns named in 'colClasses' exist"
 msgstr "'colClasses' 안에 지정된 모든 열들이 존재하지 않습니다 "
+
+#. R/strcapture.R: stop("number of matches does not always match ncol(proto)")
+#: R/strcapture.R:0
+msgid "number of matches does not always match ncol(proto)"
+msgstr ""
 
 #. R/str.R: gettext("numeric", domain = "R-utils")
 #. R/str.R: gettext("numeric", domain = "R-utils")

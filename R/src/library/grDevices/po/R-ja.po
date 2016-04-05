@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-09-22 23:11\n"
+"POT-Creation-Date: 2016-04-03 21:09\n"
 "PO-Revision-Date: 2015-01-17 15:02+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -424,8 +424,8 @@ msgstr " 'x' と 'y' の値は昇順でなければなりません "
 #. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/windows.R: gettextf("invalid '%s' argument", "filename")
-#: R/cairo.R:0 R/postscript.R:0 R/unix/png.R:0 R/unix/quartz.R:0
-#: R/unix/x11.R:0 R/windows/png.R:0 R/windows/windows.R:0
+#: R/cairo.R:0 R/postscript.R:0 R/unix/png.R:0 R/unix/quartz.R:0 R/unix/x11.R:0
+#: R/windows/png.R:0 R/windows/windows.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr " 最初の引数が無効です "
@@ -607,12 +607,6 @@ msgstr " 'bias' は正の値でなければなりません "
 msgid "operator not meaningful for raster objects"
 msgstr " ラスターオブジェクトには無意味な操作です "
 
-#. R/prettyDate.R: stop("range too small for 'min.n'")
-#: R/prettyDate.R:0
-#, fuzzy
-msgid "range too small for 'min.n'"
-msgstr " min.n に対しては小さすぎるレンジです "
-
 #. R/colorstuff.R: stop("rgb matrix must be numeric")
 #: R/colorstuff.R:0
 msgid "rgb matrix must be numeric"
@@ -734,6 +728,10 @@ msgstr[0] " が新しいものと前のもので異なります "
 msgid "invalid argument name %s in '%s'"
 msgid_plural "invalid argument names %s in '%s'"
 msgstr[0] " %2$s 中の %1$s は不正な引数名です "
+
+#, fuzzy
+#~ msgid "range too small for 'min.n'"
+#~ msgstr " min.n に対しては小さすぎるレンジです "
 
 #, fuzzy
 #~ msgid "sorry, 'gs' command cannot be found"
