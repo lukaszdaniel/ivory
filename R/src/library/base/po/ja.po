@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-05 22:58+0200\n"
+"POT-Creation-Date: 2016-04-07 22:23+0200\n"
 "PO-Revision-Date: 2012-02-26 14:21+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: R-core <R-core@R-project.org> \n"
@@ -1275,7 +1275,7 @@ msgstr " 不正な関数です "
 
 #: src/main/array.c:83 src/main/array.c:1590
 #, fuzzy, c-format
-msgid "'data' argument must be of a vector type, was '%s'"
+msgid "'%s' argument must be of a vector type, was '%s'"
 msgstr " 'data' はベクトル型でなくてはなりません "
 
 #: src/main/array.c:97 src/main/array.c:105
@@ -1714,8 +1714,8 @@ msgid "repeated formal argument '%s'"
 msgstr " 'recursive' 仮引数が繰り返されました "
 
 #: src/main/bind.c:901
-#, fuzzy
-msgid "argument is not a list"
+#, fuzzy, c-format
+msgid "'%s' argument is not a list"
 msgstr " 引数はリストではありません "
 
 #: src/main/bind.c:1045 src/main/names.c:1274 src/main/names.c:1279
@@ -1791,20 +1791,21 @@ msgstr " 引数は関数でなければなりません "
 msgid "replacement object is not an environment"
 msgstr " 置き換えるオブジェクトが環境ではありません "
 
-#: src/main/builtin.c:343 src/main/coerce.c:2468 src/main/engine.c:2991
-#: src/main/envir.c:1852 src/main/envir.c:2867 src/main/envir.c:2948
-#: src/main/unique.c:1343
+#: src/main/builtin.c:343 src/main/builtin.c:364 src/main/builtin.c:414
+#: src/main/envir.c:3226 src/main/envir.c:3254 src/main/envir.c:3283
+#: src/main/envir.c:3304 src/main/envir.c:3326 src/main/envir.c:3360
+#: src/main/envir.c:3380
 #, fuzzy, c-format
-msgid "'%s' argument must be an environment"
-msgstr " 'env' 引数は環境でなくてはなりません "
-
-#: src/main/builtin.c:364 src/main/builtin.c:400
-msgid "argument is not an environment"
+msgid "'%s' argument is not an environment"
 msgstr " 引数が環境ではありません "
 
 #: src/main/builtin.c:366
 msgid "the empty environment has no parent"
 msgstr " 空の環境は親を持ちません "
+
+#: src/main/builtin.c:400
+msgid "argument is not an environment"
+msgstr " 引数が環境ではありません "
 
 #: src/main/builtin.c:402
 msgid "can not set parent of the empty environment"
@@ -1819,13 +1820,6 @@ msgstr " 空の環境の親は配置できません "
 #, fuzzy
 msgid "can not set the parent environment of package imports"
 msgstr " 空の環境の親は配置できません "
-
-#: src/main/builtin.c:414 src/main/envir.c:3226 src/main/envir.c:3254
-#: src/main/envir.c:3283 src/main/envir.c:3304 src/main/envir.c:3326
-#: src/main/envir.c:3360 src/main/envir.c:3380
-#, fuzzy, c-format
-msgid "'%s' argument is not an environment"
-msgstr " 引数が環境ではありません "
 
 #: src/main/builtin.c:557 src/main/connections.c:3681
 #: src/main/connections.c:4073 src/main/connections.c:4107
@@ -1899,12 +1893,12 @@ msgid ""
 msgstr ""
 
 #: src/main/builtin.c:1084
-msgid "empty alternative in numeric switch"
+msgid "empty alternative in numeric 'switch()' function"
 msgstr ""
 
-#: src/main/builtin.c:1093 src/main/eval.c:6101 src/main/eval.c:6129
+#: src/main/builtin.c:1093
 #, fuzzy
-msgid "'switch()' with no alternatives"
+msgid "'switch()' function with no alternatives"
 msgstr " 名前付きの代替値が無い switch() 関数には数値の EXPR が必要です "
 
 #: src/main/character.c:105 src/main/character.c:226
@@ -2000,9 +1994,9 @@ msgid "'old' is longer than 'new'"
 msgstr " 'old' が 'new' より長いです "
 
 #: src/main/character.c:1521
-#, fuzzy
-msgid "'strtrim()' function  requires a character vector"
-msgstr " strtrim 関数は文字ベクトルを要求します "
+#, fuzzy, c-format
+msgid "'%s' function  requires a character vector"
+msgstr " '%s'は文字ベクトルを要求します "
 
 #: src/main/coerce.c:76 src/main/errors.c:1191
 #, fuzzy
@@ -2095,7 +2089,7 @@ msgstr " リストとベクトルのみに適用できます "
 
 #: src/main/coerce.c:2065 src/main/coerce.c:2179
 #, fuzzy, c-format
-msgid "'%s' method applied to non-(list or vector) of type '%s'"
+msgid "'%s' function applied to non-(list or vector) of type '%s'"
 msgstr " %s() は型 '%s' のベクトル、リスト以外に適用されます "
 
 #: src/main/coerce.c:2190
@@ -2125,6 +2119,12 @@ msgstr " 'what'は、文字列または関数でなければならない "
 #, fuzzy, c-format
 msgid "'%s' argument must be a list or expression"
 msgstr " 'expr' 引数は式でなくてはなりません "
+
+#: src/main/coerce.c:2468 src/main/engine.c:2991 src/main/envir.c:1852
+#: src/main/envir.c:2867 src/main/envir.c:2948 src/main/unique.c:1343
+#, fuzzy, c-format
+msgid "'%s' argument must be an environment"
+msgstr " 'env' 引数は環境でなくてはなりません "
 
 #: src/main/coerce.c:2627
 msgid "invalid environment specified"
@@ -4571,6 +4571,11 @@ msgstr ""
 #, fuzzy
 msgid "bad numeric 'switch()' offsets"
 msgstr " 不正な数値スィッチオフセットです "
+
+#: src/main/eval.c:6101 src/main/eval.c:6129
+#, fuzzy
+msgid "'switch()' with no alternatives"
+msgstr " 名前付きの代替値が無い switch() 関数には数値の EXPR が必要です "
 
 #: src/main/eval.c:6104
 #, fuzzy
@@ -7895,42 +7900,42 @@ msgstr " それぞれの変換で指定できるアスタリスク'*'は最大�
 msgid "argument for '*' conversion specification must be a number"
 msgstr " `*' 変換指定に対する引数は数値でなければなりません "
 
-#: src/main/sprintf.c:270
+#: src/main/sprintf.c:271
 msgid "coercion has changed vector length to 0"
 msgstr " 変換によりベクトルの長さが 0 になりました "
 
-#: src/main/sprintf.c:344 src/main/sprintf.c:358 src/main/sprintf.c:372
-#: src/main/sprintf.c:407
+#: src/main/sprintf.c:346 src/main/sprintf.c:360 src/main/sprintf.c:374
+#: src/main/sprintf.c:409
 #, c-format
 msgid "invalid format '%s'; %s"
 msgstr " 不正な書式 '%s'  ; %s "
 
-#: src/main/sprintf.c:345
+#: src/main/sprintf.c:347
 #, c-format
 msgid "use format %d or %i for logical objects"
 msgstr " 論理オブジェクトには %d か %i 書式を使ってください "
 
-#: src/main/sprintf.c:359
+#: src/main/sprintf.c:361
 #, c-format
 msgid "use format %d, %i, %o, %x or %X for integer objects"
 msgstr " 整数オブジェクトには %d, %i, %o, %x または %X 書式を使ってください "
 
-#: src/main/sprintf.c:373
+#: src/main/sprintf.c:375
 #, c-format
 msgid "use format %f, %e, %g or %a for numeric objects"
 msgstr " 数値オブジェクトには %f, %e , %g または %a 書式を使ってください "
 
-#: src/main/sprintf.c:408
+#: src/main/sprintf.c:410
 #, c-format
 msgid "use format %s for character objects"
 msgstr " 文字オブジェクトには %s 書式を使ってください "
 
-#: src/main/sprintf.c:413
+#: src/main/sprintf.c:415
 #, c-format
 msgid "likely truncation of character string to %d characters"
 msgstr " 文字列は%d文字に丸められた可能性があります "
 
-#: src/main/sprintf.c:422 src/main/util.c:2346
+#: src/main/sprintf.c:424 src/main/util.c:2346
 msgid "unsupported type"
 msgstr " サポートされていないタイプです "
 
@@ -10108,6 +10113,10 @@ msgid "X11 is not available"
 msgstr " X11 が利用できません "
 
 #, fuzzy
+#~ msgid "'strtrim()' function  requires a character vector"
+#~ msgstr " strtrim 関数は文字ベクトルを要求します "
+
+#, fuzzy
 #~ msgid "argument is not a function"
 #~ msgstr " 引数は関数でなければなりません "
 
@@ -10331,10 +10340,6 @@ msgstr " X11 が利用できません "
 #, fuzzy
 #~ msgid "'allowNonCompression' argument must be TRUE or FALSE"
 #~ msgstr " 'allowNonCompression' は TRUEまたは FALSEでなければなりません "
-
-#, fuzzy
-#~ msgid "'%s' function  requires a character vector"
-#~ msgstr " '%s'は文字ベクトルを要求します "
 
 #~ msgid "No function to return from, jumping to top level"
 #~ msgstr " 戻るべき関数がないので，トップレベルへジャンプします "

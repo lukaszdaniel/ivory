@@ -340,7 +340,7 @@ SEXP attribute_hidden do_newenv(SEXP call, SEXP op, SEXP args, SEXP rho)
     } else
     if( !isEnvironment(enclos)   &&
 	!isEnvironment((enclos = simple_as_environment(enclos))))
-	error(_("'%s' argument must be an environment"), "enclos");
+	error(_("'%s' argument is not an environment"), "enclos");
 
     if( hash ) {
 	args = CDR(args);
@@ -361,7 +361,7 @@ SEXP attribute_hidden do_parentenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if( !isEnvironment(arg)  &&
 	!isEnvironment((arg = simple_as_environment(arg))))
-	error( _("argument is not an environment"));
+	error( _("'%s' argument is not an environment"), "env");
     if( arg == R_EmptyEnv )
 	error(_("the empty environment has no parent"));
     return( ENCLOS(arg) );
@@ -1081,7 +1081,7 @@ SEXP attribute_hidden do_switch(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if (argval != NA_INTEGER && argval >= 1 && argval <= length(w)) {
 		SEXP alt = CAR(nthcdr(w, argval - 1));
 		if (alt == R_MissingArg)
-		    error(_("empty alternative in numeric switch"));
+		    error(_("empty alternative in numeric 'switch()' function"));
 		ans =  eval(alt, rho);
 		UNPROTECT(2);
 		return ans;
@@ -1090,7 +1090,7 @@ SEXP attribute_hidden do_switch(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 	UNPROTECT(1); /* w */
     } else
-	warningcall(call, _("'switch()' with no alternatives"));
+	warningcall(call, _("'switch()' function with no alternatives"));
     /* an error */
     UNPROTECT(1); /* x */
     R_Visible = FALSE;

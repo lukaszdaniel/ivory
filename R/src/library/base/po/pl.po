@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-05 22:58+0200\n"
+"POT-Creation-Date: 2016-04-07 22:23+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1300,8 +1300,8 @@ msgstr "błędny indeks funkcji arytmetycznej"
 
 #: src/main/array.c:83 src/main/array.c:1590
 #, c-format
-msgid "'data' argument must be of a vector type, was '%s'"
-msgstr "argument 'data' musi być typu wektor, było '%s'"
+msgid "'%s' argument must be of a vector type, was '%s'"
+msgstr "argument '%s' musi być wektorem, był '%s'"
 
 #: src/main/array.c:97 src/main/array.c:105
 msgid "non-numeric matrix extent"
@@ -1719,8 +1719,9 @@ msgid "repeated formal argument '%s'"
 msgstr "powtórzony formalny argument '%s'"
 
 #: src/main/bind.c:901
-msgid "argument is not a list"
-msgstr "argument nie jest listą"
+#, c-format
+msgid "'%s' argument is not a list"
+msgstr "argument '%s' nie jest listą"
 
 #: src/main/bind.c:1045 src/main/names.c:1274 src/main/names.c:1279
 #: src/main/names.c:1284 src/main/names.c:1289
@@ -1797,20 +1798,21 @@ msgstr "argument '%s' nie jest funkcją"
 msgid "replacement object is not an environment"
 msgstr "zastępujący obiekt nie jest środowiskiem"
 
-#: src/main/builtin.c:343 src/main/coerce.c:2468 src/main/engine.c:2991
-#: src/main/envir.c:1852 src/main/envir.c:2867 src/main/envir.c:2948
-#: src/main/unique.c:1343
+#: src/main/builtin.c:343 src/main/builtin.c:364 src/main/builtin.c:414
+#: src/main/envir.c:3226 src/main/envir.c:3254 src/main/envir.c:3283
+#: src/main/envir.c:3304 src/main/envir.c:3326 src/main/envir.c:3360
+#: src/main/envir.c:3380
 #, c-format
-msgid "'%s' argument must be an environment"
-msgstr "argument '%s' musi być środowiskiem"
-
-#: src/main/builtin.c:364 src/main/builtin.c:400
-msgid "argument is not an environment"
-msgstr "argument nie jest środowiskiem"
+msgid "'%s' argument is not an environment"
+msgstr "argument '%s' nie jest środowiskiem"
 
 #: src/main/builtin.c:366
 msgid "the empty environment has no parent"
 msgstr "puste środowisko nie posiada rodzica"
+
+#: src/main/builtin.c:400
+msgid "argument is not an environment"
+msgstr "argument nie jest środowiskiem"
 
 #: src/main/builtin.c:402
 msgid "can not set parent of the empty environment"
@@ -1823,13 +1825,6 @@ msgstr "nie można ustawić nadrzędnego środowiska przestrzeni nazw"
 #: src/main/builtin.c:406
 msgid "can not set the parent environment of package imports"
 msgstr "nie można ustawić nadrzędnego środowiska importowanych pakietów"
-
-#: src/main/builtin.c:414 src/main/envir.c:3226 src/main/envir.c:3254
-#: src/main/envir.c:3283 src/main/envir.c:3304 src/main/envir.c:3326
-#: src/main/envir.c:3360 src/main/envir.c:3380
-#, c-format
-msgid "'%s' argument is not an environment"
-msgstr "argument '%s' nie jest środowiskiem"
 
 #: src/main/builtin.c:557 src/main/connections.c:3681
 #: src/main/connections.c:4073 src/main/connections.c:4107
@@ -1905,12 +1900,12 @@ msgstr ""
 " Rozważ użycie '%s' w zamian."
 
 #: src/main/builtin.c:1084
-msgid "empty alternative in numeric switch"
-msgstr "pusta alternatywa w liczbowej operacji switch"
+msgid "empty alternative in numeric 'switch()' function"
+msgstr "pusta alternatywa w liczbowej operacji 'switch()'"
 
-#: src/main/builtin.c:1093 src/main/eval.c:6101 src/main/eval.c:6129
-msgid "'switch()' with no alternatives"
-msgstr "'switch()' nie posiada alternatyw"
+#: src/main/builtin.c:1093
+msgid "'switch()' function with no alternatives"
+msgstr "funkcja 'switch()' nie posiada alternatyw"
 
 #: src/main/character.c:105 src/main/character.c:226
 #, c-format
@@ -2007,8 +2002,9 @@ msgid "'old' is longer than 'new'"
 msgstr "'old' jest dłuższe niż 'new'"
 
 #: src/main/character.c:1521
-msgid "'strtrim()' function  requires a character vector"
-msgstr "funkcja 'strtrim()' wymaga wektora tekstowego"
+#, c-format
+msgid "'%s' function  requires a character vector"
+msgstr "funkcja '%s' wymaga wektora tekstowego"
 
 #: src/main/coerce.c:76 src/main/errors.c:1191
 msgid "NA values introduced by coercion"
@@ -2100,7 +2096,7 @@ msgstr "funkcja '%s' ma zastosowanie jedynie do list oraz wektorów"
 
 #: src/main/coerce.c:2065 src/main/coerce.c:2179
 #, c-format
-msgid "'%s' method applied to non-(list or vector) of type '%s'"
+msgid "'%s' function applied to non-(list or vector) of type '%s'"
 msgstr ""
 "funkcja '%s' została zastosowana do nie-listy lub nie-wektora typu '%s'"
 
@@ -2130,6 +2126,12 @@ msgstr "argument '%s' musi być łańcuchem tekstowym lub funkcją"
 #, c-format
 msgid "'%s' argument must be a list or expression"
 msgstr "argument '%s' musi być listą lub wyrażeniem"
+
+#: src/main/coerce.c:2468 src/main/engine.c:2991 src/main/envir.c:1852
+#: src/main/envir.c:2867 src/main/envir.c:2948 src/main/unique.c:1343
+#, c-format
+msgid "'%s' argument must be an environment"
+msgstr "argument '%s' musi być środowiskiem"
 
 #: src/main/coerce.c:2627
 msgid "invalid environment specified"
@@ -4487,6 +4489,10 @@ msgstr ""
 #: src/main/eval.c:6098 src/main/eval.c:6123
 msgid "bad numeric 'switch()' offsets"
 msgstr "błędne przesunięcia liczbowe w funkcji 'switch()'"
+
+#: src/main/eval.c:6101 src/main/eval.c:6129
+msgid "'switch()' with no alternatives"
+msgstr "'switch()' nie posiada alternatyw"
 
 #: src/main/eval.c:6104
 msgid "numeric 'EXPR' required for 'switch()' without named alternatives"
@@ -7182,9 +7188,8 @@ msgid "cannot save weak references in version 1 workspaces"
 msgstr "nie można zachować słabej referencji w obszarze roboczym w wersji 1"
 
 #: src/main/saveload.c:1020
-#, fuzzy
 msgid "'NewWriteVec()' function called with non-vector type"
-msgstr "'NewWriteVec' wywołane z typem nie-wektora"
+msgstr "funkcja 'NewWriteVec()' wywołana z typem nie-wektora"
 
 #: src/main/saveload.c:1083
 msgid "cannot save byte code objects in version 1 workspaces"
@@ -7192,9 +7197,9 @@ msgstr ""
 "nie można zachować obiektów kodu bajtowego w obszarze roboczym w wersji 1"
 
 #: src/main/saveload.c:1085
-#, fuzzy, c-format
+#, c-format
 msgid "'NewWriteItem()': unknown type %i"
-msgstr "'NewWriteItem': nieznany typ %i"
+msgstr "'NewWriteItem()': nieznany typ %i"
 
 #: src/main/saveload.c:1215
 msgid "NewReadVec called with non-vector type"
@@ -7850,42 +7855,42 @@ msgstr ""
 msgid "argument for '*' conversion specification must be a number"
 msgstr "argument dla specyfikacji konwersji '*' musi być liczbą"
 
-#: src/main/sprintf.c:270
+#: src/main/sprintf.c:271
 msgid "coercion has changed vector length to 0"
 msgstr "konwersja zmieniła długość wektora na 0"
 
-#: src/main/sprintf.c:344 src/main/sprintf.c:358 src/main/sprintf.c:372
-#: src/main/sprintf.c:407
+#: src/main/sprintf.c:346 src/main/sprintf.c:360 src/main/sprintf.c:374
+#: src/main/sprintf.c:409
 #, c-format
 msgid "invalid format '%s'; %s"
 msgstr "niepoprawny format '%s'; %s"
 
-#: src/main/sprintf.c:345
+#: src/main/sprintf.c:347
 #, c-format
 msgid "use format %d or %i for logical objects"
 msgstr "użyj formatu %d lub %i dla obiektów logicznych"
 
-#: src/main/sprintf.c:359
+#: src/main/sprintf.c:361
 #, c-format
 msgid "use format %d, %i, %o, %x or %X for integer objects"
 msgstr "użyj formatu %d, %i, %o, %x lub %X dla liczb całkowitych"
 
-#: src/main/sprintf.c:373
+#: src/main/sprintf.c:375
 #, c-format
 msgid "use format %f, %e, %g or %a for numeric objects"
 msgstr "użyj formatu %f, %e, %g lub %a dla liczb rzeczywistych"
 
-#: src/main/sprintf.c:408
+#: src/main/sprintf.c:410
 #, c-format
 msgid "use format %s for character objects"
 msgstr "użyj formatu '%s' dla obiektu tekstowego"
 
-#: src/main/sprintf.c:413
+#: src/main/sprintf.c:415
 #, c-format
 msgid "likely truncation of character string to %d characters"
 msgstr "prawdopodobne przycięcie łańcucha tekstowego do %d znaków"
 
-#: src/main/sprintf.c:422 src/main/util.c:2346
+#: src/main/sprintf.c:424 src/main/util.c:2346
 msgid "unsupported type"
 msgstr "niewspierany typ"
 
@@ -10018,6 +10023,9 @@ msgstr "moduł X11 nie może zostać załadowany"
 msgid "X11 is not available"
 msgstr "X11 nie jest dostępne"
 
+#~ msgid "'strtrim()' function  requires a character vector"
+#~ msgstr "funkcja 'strtrim()' wymaga wektora tekstowego"
+
 #, fuzzy
 #~ msgid "argument is not a function"
 #~ msgstr "argument '%s' nie jest funkcją"
@@ -10328,9 +10336,6 @@ msgstr "X11 nie jest dostępne"
 #~ msgstr ""
 #~ "\n"
 #~ "Śledzenie:\n"
-
-#~ msgid "'%s' function  requires a character vector"
-#~ msgstr "funkcja '%s' wymaga wektora tekstowego"
 
 #~ msgid "No function to return from, jumping to top level"
 #~ msgstr ""

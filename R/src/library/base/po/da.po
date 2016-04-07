@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: r-2-15-branch\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-05 22:58+0200\n"
+"POT-Creation-Date: 2016-04-07 22:23+0200\n"
 "PO-Revision-Date: 2011-11-29 21:34+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -1265,7 +1265,7 @@ msgstr ""
 
 #: src/main/array.c:83 src/main/array.c:1590
 #, fuzzy, c-format
-msgid "'data' argument must be of a vector type, was '%s'"
+msgid "'%s' argument must be of a vector type, was '%s'"
 msgstr "'data'-argument er af forkert type"
 
 #: src/main/array.c:97 src/main/array.c:105
@@ -1680,8 +1680,8 @@ msgid "repeated formal argument '%s'"
 msgstr "ingen argumenter"
 
 #: src/main/bind.c:901
-#, fuzzy
-msgid "argument is not a list"
+#, fuzzy, c-format
+msgid "'%s' argument is not a list"
 msgstr "argument %d er ikke en vektor"
 
 #: src/main/bind.c:1045 src/main/names.c:1274 src/main/names.c:1279
@@ -1757,19 +1757,20 @@ msgstr "'path' skal være en tegnvektor"
 msgid "replacement object is not an environment"
 msgstr ""
 
-#: src/main/builtin.c:343 src/main/coerce.c:2468 src/main/engine.c:2991
-#: src/main/envir.c:1852 src/main/envir.c:2867 src/main/envir.c:2948
-#: src/main/unique.c:1343
+#: src/main/builtin.c:343 src/main/builtin.c:364 src/main/builtin.c:414
+#: src/main/envir.c:3226 src/main/envir.c:3254 src/main/envir.c:3283
+#: src/main/envir.c:3304 src/main/envir.c:3326 src/main/envir.c:3360
+#: src/main/envir.c:3380
 #, fuzzy, c-format
-msgid "'%s' argument must be an environment"
+msgid "'%s' argument is not an environment"
 msgstr "argument skal være et miljø"
-
-#: src/main/builtin.c:364 src/main/builtin.c:400
-msgid "argument is not an environment"
-msgstr ""
 
 #: src/main/builtin.c:366
 msgid "the empty environment has no parent"
+msgstr ""
+
+#: src/main/builtin.c:400
+msgid "argument is not an environment"
 msgstr ""
 
 #: src/main/builtin.c:402
@@ -1783,13 +1784,6 @@ msgstr ""
 #: src/main/builtin.c:406
 msgid "can not set the parent environment of package imports"
 msgstr ""
-
-#: src/main/builtin.c:414 src/main/envir.c:3226 src/main/envir.c:3254
-#: src/main/envir.c:3283 src/main/envir.c:3304 src/main/envir.c:3326
-#: src/main/envir.c:3360 src/main/envir.c:3380
-#, fuzzy, c-format
-msgid "'%s' argument is not an environment"
-msgstr "argument skal være et miljø"
 
 #: src/main/builtin.c:557 src/main/connections.c:3681
 #: src/main/connections.c:4073 src/main/connections.c:4107
@@ -1863,12 +1857,13 @@ msgid ""
 msgstr ""
 
 #: src/main/builtin.c:1084
-msgid "empty alternative in numeric switch"
+msgid "empty alternative in numeric 'switch()' function"
 msgstr ""
 
-#: src/main/builtin.c:1093 src/main/eval.c:6101 src/main/eval.c:6129
-msgid "'switch()' with no alternatives"
-msgstr ""
+#: src/main/builtin.c:1093
+#, fuzzy
+msgid "'switch()' function with no alternatives"
+msgstr "'names' er ikke en tegnstreng"
 
 #: src/main/character.c:105 src/main/character.c:226
 #, fuzzy, c-format
@@ -1962,8 +1957,8 @@ msgid "'old' is longer than 'new'"
 msgstr ""
 
 #: src/main/character.c:1521
-#, fuzzy
-msgid "'strtrim()' function  requires a character vector"
+#, fuzzy, c-format
+msgid "'%s' function  requires a character vector"
 msgstr "'path' skal være en tegnvektor"
 
 #: src/main/coerce.c:76 src/main/errors.c:1191
@@ -2056,7 +2051,7 @@ msgstr "kan ikke oprette mappe '%s', årsag '%s'"
 
 #: src/main/coerce.c:2065 src/main/coerce.c:2179
 #, fuzzy, c-format
-msgid "'%s' method applied to non-(list or vector) of type '%s'"
+msgid "'%s' function applied to non-(list or vector) of type '%s'"
 msgstr "kan ikke oprette mappe '%s', årsag '%s'"
 
 #: src/main/coerce.c:2190
@@ -2085,6 +2080,12 @@ msgstr "'msg1' skal være en tegnstreng"
 #: src/main/coerce.c:2461
 #, fuzzy, c-format
 msgid "'%s' argument must be a list or expression"
+msgstr "argument skal være et miljø"
+
+#: src/main/coerce.c:2468 src/main/engine.c:2991 src/main/envir.c:1852
+#: src/main/envir.c:2867 src/main/envir.c:2948 src/main/unique.c:1343
+#, fuzzy, c-format
+msgid "'%s' argument must be an environment"
 msgstr "argument skal være et miljø"
 
 #: src/main/coerce.c:2627
@@ -4459,6 +4460,10 @@ msgstr ""
 #, fuzzy
 msgid "bad numeric 'switch()' offsets"
 msgstr "ugyldige variabelnavne"
+
+#: src/main/eval.c:6101 src/main/eval.c:6129
+msgid "'switch()' with no alternatives"
+msgstr ""
 
 #: src/main/eval.c:6104
 msgid "numeric 'EXPR' required for 'switch()' without named alternatives"
@@ -7689,42 +7694,42 @@ msgstr ""
 msgid "argument for '*' conversion specification must be a number"
 msgstr ""
 
-#: src/main/sprintf.c:270
+#: src/main/sprintf.c:271
 msgid "coercion has changed vector length to 0"
 msgstr ""
 
-#: src/main/sprintf.c:344 src/main/sprintf.c:358 src/main/sprintf.c:372
-#: src/main/sprintf.c:407
+#: src/main/sprintf.c:346 src/main/sprintf.c:360 src/main/sprintf.c:374
+#: src/main/sprintf.c:409
 #, c-format
 msgid "invalid format '%s'; %s"
 msgstr ""
 
-#: src/main/sprintf.c:345
+#: src/main/sprintf.c:347
 #, c-format
 msgid "use format %d or %i for logical objects"
 msgstr ""
 
-#: src/main/sprintf.c:359
+#: src/main/sprintf.c:361
 #, c-format
 msgid "use format %d, %i, %o, %x or %X for integer objects"
 msgstr ""
 
-#: src/main/sprintf.c:373
+#: src/main/sprintf.c:375
 #, c-format
 msgid "use format %f, %e, %g or %a for numeric objects"
 msgstr ""
 
-#: src/main/sprintf.c:408
+#: src/main/sprintf.c:410
 #, c-format
 msgid "use format %s for character objects"
 msgstr ""
 
-#: src/main/sprintf.c:413
+#: src/main/sprintf.c:415
 #, c-format
 msgid "likely truncation of character string to %d characters"
 msgstr ""
 
-#: src/main/sprintf.c:422 src/main/util.c:2346
+#: src/main/sprintf.c:424 src/main/util.c:2346
 msgid "unsupported type"
 msgstr "ej understøttet type"
 
@@ -9824,6 +9829,10 @@ msgid "X11 is not available"
 msgstr ""
 
 #, fuzzy
+#~ msgid "'strtrim()' function  requires a character vector"
+#~ msgstr "'path' skal være en tegnvektor"
+
+#, fuzzy
 #~ msgid "argument is not a function"
 #~ msgstr "'path' skal være en tegnvektor"
 
@@ -9914,10 +9923,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "'allowNonCompression' argument must be TRUE or FALSE"
 #~ msgstr "'decreasing' skal være SAND eller FALSK"
-
-#, fuzzy
-#~ msgid "'%s' function  requires a character vector"
-#~ msgstr "'path' skal være en tegnvektor"
 
 #~ msgid "No function to return from, jumping to top level"
 #~ msgstr "Ingen funktion at returnere fra, hopper til øverste niveau"

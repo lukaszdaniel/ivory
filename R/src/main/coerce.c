@@ -2062,7 +2062,7 @@ SEXP attribute_hidden do_isna(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    LOGICAL(ans)[i] = 0;
 	break;
     default:
-	warningcall(call, _("'%s' method applied to non-(list or vector) of type '%s'"), "is.na()", type2char(TYPEOF(x)));
+	warningcall(call, _("'%s' function applied to non-(list or vector) of type '%s'"), "is.na()", type2char(TYPEOF(x)));
 	for (i = 0; i < n; i++)
 	    LOGICAL(ans)[i] = 0;
     }
@@ -2176,7 +2176,7 @@ static Rboolean anyNA(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     default:
-	error(_("'%s' method applied to non-(list or vector) of type '%s'"), "anyNA()", type2char(TYPEOF(x)));
+	error(_("'%s' function applied to non-(list or vector) of type '%s'"), "anyNA()", type2char(TYPEOF(x)));
     }
     return FALSE;
 } // anyNA()

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-05 22:58+0200\n"
+"POT-Creation-Date: 2016-04-07 22:23+0200\n"
 "PO-Revision-Date: 2011-10-13 17:30+0800\n"
 "Last-Translator: Wei-Lun Chao <chaoweilun@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -1271,7 +1271,7 @@ msgstr "不當的函數"
 
 #: src/main/array.c:83 src/main/array.c:1590
 #, fuzzy, c-format
-msgid "'data' argument must be of a vector type, was '%s'"
+msgid "'%s' argument must be of a vector type, was '%s'"
 msgstr "'data' 必須是向量類型"
 
 #: src/main/array.c:97 src/main/array.c:105
@@ -1696,8 +1696,8 @@ msgid "repeated formal argument '%s'"
 msgstr "正式引數 'recursive' 出現重複"
 
 #: src/main/bind.c:901
-#, fuzzy
-msgid "argument is not a list"
+#, fuzzy, c-format
+msgid "'%s' argument is not a list"
 msgstr "引數不是串列"
 
 #: src/main/bind.c:1045 src/main/names.c:1274 src/main/names.c:1279
@@ -1773,20 +1773,21 @@ msgstr "引數必須是個函數"
 msgid "replacement object is not an environment"
 msgstr "替換物件不是環境物件"
 
-#: src/main/builtin.c:343 src/main/coerce.c:2468 src/main/engine.c:2991
-#: src/main/envir.c:1852 src/main/envir.c:2867 src/main/envir.c:2948
-#: src/main/unique.c:1343
+#: src/main/builtin.c:343 src/main/builtin.c:364 src/main/builtin.c:414
+#: src/main/envir.c:3226 src/main/envir.c:3254 src/main/envir.c:3283
+#: src/main/envir.c:3304 src/main/envir.c:3326 src/main/envir.c:3360
+#: src/main/envir.c:3380
 #, fuzzy, c-format
-msgid "'%s' argument must be an environment"
-msgstr "'env' 引數必須是環境物件"
-
-#: src/main/builtin.c:364 src/main/builtin.c:400
-msgid "argument is not an environment"
+msgid "'%s' argument is not an environment"
 msgstr "引數不是環境物件"
 
 #: src/main/builtin.c:366
 msgid "the empty environment has no parent"
 msgstr "空環境沒有上一層"
+
+#: src/main/builtin.c:400
+msgid "argument is not an environment"
+msgstr "引數不是環境物件"
 
 #: src/main/builtin.c:402
 msgid "can not set parent of the empty environment"
@@ -1801,13 +1802,6 @@ msgstr "無法設定空環境的上層"
 #, fuzzy
 msgid "can not set the parent environment of package imports"
 msgstr "無法設定空環境的上層"
-
-#: src/main/builtin.c:414 src/main/envir.c:3226 src/main/envir.c:3254
-#: src/main/envir.c:3283 src/main/envir.c:3304 src/main/envir.c:3326
-#: src/main/envir.c:3360 src/main/envir.c:3380
-#, fuzzy, c-format
-msgid "'%s' argument is not an environment"
-msgstr "引數不是環境物件"
 
 #: src/main/builtin.c:557 src/main/connections.c:3681
 #: src/main/connections.c:4073 src/main/connections.c:4107
@@ -1881,12 +1875,12 @@ msgid ""
 msgstr ""
 
 #: src/main/builtin.c:1084
-msgid "empty alternative in numeric switch"
+msgid "empty alternative in numeric 'switch()' function"
 msgstr ""
 
-#: src/main/builtin.c:1093 src/main/eval.c:6101 src/main/eval.c:6129
+#: src/main/builtin.c:1093
 #, fuzzy
-msgid "'switch()' with no alternatives"
+msgid "'switch()' function with no alternatives"
 msgstr "switch() 需要數值而無需具名的替代方案"
 
 #: src/main/character.c:105 src/main/character.c:226
@@ -1981,9 +1975,9 @@ msgid "'old' is longer than 'new'"
 msgstr "'old' 比 'new' 要長"
 
 #: src/main/character.c:1521
-#, fuzzy
-msgid "'strtrim()' function  requires a character vector"
-msgstr "strtrim() 需要字元向量"
+#, fuzzy, c-format
+msgid "'%s' function  requires a character vector"
+msgstr "'%s' 需要字元向量"
 
 #: src/main/coerce.c:76 src/main/errors.c:1191
 #, fuzzy
@@ -2076,7 +2070,7 @@ msgstr "只能用於串列和向量"
 
 #: src/main/coerce.c:2065 src/main/coerce.c:2179
 #, fuzzy, c-format
-msgid "'%s' method applied to non-(list or vector) of type '%s'"
+msgid "'%s' function applied to non-(list or vector) of type '%s'"
 msgstr "%s() 套用到非串列或向量類型 '%s'"
 
 #: src/main/coerce.c:2190
@@ -2106,6 +2100,12 @@ msgstr "'what' 必須是字串或函數"
 #, fuzzy, c-format
 msgid "'%s' argument must be a list or expression"
 msgstr "'expr' 引數必須是運算式"
+
+#: src/main/coerce.c:2468 src/main/engine.c:2991 src/main/envir.c:1852
+#: src/main/envir.c:2867 src/main/envir.c:2948 src/main/unique.c:1343
+#, fuzzy, c-format
+msgid "'%s' argument must be an environment"
+msgstr "'env' 引數必須是環境物件"
 
 #: src/main/coerce.c:2627
 msgid "invalid environment specified"
@@ -4516,6 +4516,11 @@ msgstr ""
 #, fuzzy
 msgid "bad numeric 'switch()' offsets"
 msgstr "不當的數值切換偏移值"
+
+#: src/main/eval.c:6101 src/main/eval.c:6129
+#, fuzzy
+msgid "'switch()' with no alternatives"
+msgstr "switch() 需要數值而無需具名的替代方案"
 
 #: src/main/eval.c:6104
 #, fuzzy
@@ -7790,42 +7795,42 @@ msgstr "在每個轉換規格中只支援最多一個星號 '*'"
 msgid "argument for '*' conversion specification must be a number"
 msgstr "用於 '*' 轉換規格的引數必須是一個數字"
 
-#: src/main/sprintf.c:270
+#: src/main/sprintf.c:271
 msgid "coercion has changed vector length to 0"
 msgstr "強制變更時將向量長度改為 0"
 
-#: src/main/sprintf.c:344 src/main/sprintf.c:358 src/main/sprintf.c:372
-#: src/main/sprintf.c:407
+#: src/main/sprintf.c:346 src/main/sprintf.c:360 src/main/sprintf.c:374
+#: src/main/sprintf.c:409
 #, c-format
 msgid "invalid format '%s'; %s"
 msgstr "無效的格式 '%s'；%s"
 
-#: src/main/sprintf.c:345
+#: src/main/sprintf.c:347
 #, c-format
 msgid "use format %d or %i for logical objects"
 msgstr "邏輯物件套用格式 %d 或 %i"
 
-#: src/main/sprintf.c:359
+#: src/main/sprintf.c:361
 #, c-format
 msgid "use format %d, %i, %o, %x or %X for integer objects"
 msgstr "使用格式 %d, %i, %o, %x 或 %X 於整數物件"
 
-#: src/main/sprintf.c:373
+#: src/main/sprintf.c:375
 #, c-format
 msgid "use format %f, %e, %g or %a for numeric objects"
 msgstr "使用格式 %f, %e, %g 或 %a 於數值物件"
 
-#: src/main/sprintf.c:408
+#: src/main/sprintf.c:410
 #, c-format
 msgid "use format %s for character objects"
 msgstr "字元物件套用格式 %s"
 
-#: src/main/sprintf.c:413
+#: src/main/sprintf.c:415
 #, c-format
 msgid "likely truncation of character string to %d characters"
 msgstr "字串似乎被截斷成 %d 個字元"
 
-#: src/main/sprintf.c:422 src/main/util.c:2346
+#: src/main/sprintf.c:424 src/main/util.c:2346
 msgid "unsupported type"
 msgstr "不支援此一類型"
 
@@ -9970,6 +9975,10 @@ msgid "X11 is not available"
 msgstr "無法使用 X11"
 
 #, fuzzy
+#~ msgid "'strtrim()' function  requires a character vector"
+#~ msgstr "strtrim() 需要字元向量"
+
+#, fuzzy
 #~ msgid "argument is not a function"
 #~ msgstr "引數必須是個函數"
 
@@ -10187,10 +10196,6 @@ msgstr "無法使用 X11"
 #, fuzzy
 #~ msgid "'allowNonCompression' argument must be TRUE or FALSE"
 #~ msgstr "'allowNonCompression' 的值必須是 TRUE 或是 FALSE"
-
-#, fuzzy
-#~ msgid "'%s' function  requires a character vector"
-#~ msgstr "'%s' 需要字元向量"
 
 #~ msgid "No function to return from, jumping to top level"
 #~ msgstr "沒有可回返的函數, 跳到最高層"

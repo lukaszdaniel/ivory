@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must all be same length",     "x", "y", "id")
 #. R/primitives.R: gettextf("'%s' and '%s' and '%s' components of argument 'x' must all be same length",     "x", "y", "id")
@@ -399,9 +399,8 @@ msgstr "Nowa nazwa 'grob' (%s) nie zgadza się z 'gPath' (%s)"
 
 #. R/unit.R: stop("Value being assigned must be a unit")
 #: R/unit.R:0
-#, fuzzy
 msgid "Value being assigned must be a unit"
-msgstr "Wielkości 'x' oraz 'y' muszą być jednostkami"
+msgstr "Wartość przypisywana musi być jednostką"
 
 #. R/unit.R: stop("Zero arguments where at least one expected")
 #: R/unit.R:0

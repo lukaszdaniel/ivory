@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-05 22:58+0200\n"
+"POT-Creation-Date: 2016-04-07 22:23+0200\n"
 "PO-Revision-Date: 2015-01-17 13:37+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1272,7 +1272,7 @@ msgstr "函数不对"
 
 #: src/main/array.c:83 src/main/array.c:1590
 #, fuzzy, c-format
-msgid "'data' argument must be of a vector type, was '%s'"
+msgid "'%s' argument must be of a vector type, was '%s'"
 msgstr "'data'的种类必需为矢量"
 
 #: src/main/array.c:97 src/main/array.c:105
@@ -1697,8 +1697,8 @@ msgid "repeated formal argument '%s'"
 msgstr "不能有重复的正式参数'recursive' "
 
 #: src/main/bind.c:901
-#, fuzzy
-msgid "argument is not a list"
+#, fuzzy, c-format
+msgid "'%s' argument is not a list"
 msgstr "参数不是串列"
 
 #: src/main/bind.c:1045 src/main/names.c:1274 src/main/names.c:1279
@@ -1774,20 +1774,21 @@ msgstr "参数必需为函数"
 msgid "replacement object is not an environment"
 msgstr "替换对象不是环境"
 
-#: src/main/builtin.c:343 src/main/coerce.c:2468 src/main/engine.c:2991
-#: src/main/envir.c:1852 src/main/envir.c:2867 src/main/envir.c:2948
-#: src/main/unique.c:1343
+#: src/main/builtin.c:343 src/main/builtin.c:364 src/main/builtin.c:414
+#: src/main/envir.c:3226 src/main/envir.c:3254 src/main/envir.c:3283
+#: src/main/envir.c:3304 src/main/envir.c:3326 src/main/envir.c:3360
+#: src/main/envir.c:3380
 #, fuzzy, c-format
-msgid "'%s' argument must be an environment"
-msgstr "'env'参数必需是环境"
-
-#: src/main/builtin.c:364 src/main/builtin.c:400
-msgid "argument is not an environment"
+msgid "'%s' argument is not an environment"
 msgstr "参数不是环境"
 
 #: src/main/builtin.c:366
 msgid "the empty environment has no parent"
 msgstr "空环境没有父母环境"
+
+#: src/main/builtin.c:400
+msgid "argument is not an environment"
+msgstr "参数不是环境"
 
 #: src/main/builtin.c:402
 msgid "can not set parent of the empty environment"
@@ -1802,13 +1803,6 @@ msgstr "无法为空环境设父母环境"
 #, fuzzy
 msgid "can not set the parent environment of package imports"
 msgstr "无法为空环境设父母环境"
-
-#: src/main/builtin.c:414 src/main/envir.c:3226 src/main/envir.c:3254
-#: src/main/envir.c:3283 src/main/envir.c:3304 src/main/envir.c:3326
-#: src/main/envir.c:3360 src/main/envir.c:3380
-#, fuzzy, c-format
-msgid "'%s' argument is not an environment"
-msgstr "参数不是环境"
 
 #: src/main/builtin.c:557 src/main/connections.c:3681
 #: src/main/connections.c:4073 src/main/connections.c:4107
@@ -1882,12 +1876,12 @@ msgid ""
 msgstr ""
 
 #: src/main/builtin.c:1084
-msgid "empty alternative in numeric switch"
+msgid "empty alternative in numeric 'switch()' function"
 msgstr ""
 
-#: src/main/builtin.c:1093 src/main/eval.c:6101 src/main/eval.c:6129
+#: src/main/builtin.c:1093
 #, fuzzy
-msgid "'switch()' with no alternatives"
+msgid "'switch()' function with no alternatives"
 msgstr "没有名字替代的开关需要数值EXPR"
 
 #: src/main/character.c:105 src/main/character.c:226
@@ -1982,9 +1976,9 @@ msgid "'old' is longer than 'new'"
 msgstr "'old'比'new'要长"
 
 #: src/main/character.c:1521
-#, fuzzy
-msgid "'strtrim()' function  requires a character vector"
-msgstr "strtrim()需要字符矢量"
+#, fuzzy, c-format
+msgid "'%s' function  requires a character vector"
+msgstr "'%s'需要字符矢量"
 
 #: src/main/coerce.c:76 src/main/errors.c:1191
 #, fuzzy
@@ -2077,7 +2071,7 @@ msgstr "只能用于串列和矢量"
 
 #: src/main/coerce.c:2065 src/main/coerce.c:2179
 #, fuzzy, c-format
-msgid "'%s' method applied to non-(list or vector) of type '%s'"
+msgid "'%s' function applied to non-(list or vector) of type '%s'"
 msgstr "%s()不适用于类别为'%s'的非串列或非矢量"
 
 #: src/main/coerce.c:2190
@@ -2107,6 +2101,12 @@ msgstr "'what'必需是字符串或函数"
 #, fuzzy, c-format
 msgid "'%s' argument must be a list or expression"
 msgstr "'expr'参数必需是表达式"
+
+#: src/main/coerce.c:2468 src/main/engine.c:2991 src/main/envir.c:1852
+#: src/main/envir.c:2867 src/main/envir.c:2948 src/main/unique.c:1343
+#, fuzzy, c-format
+msgid "'%s' argument must be an environment"
+msgstr "'env'参数必需是环境"
 
 #: src/main/coerce.c:2627
 msgid "invalid environment specified"
@@ -4513,6 +4513,11 @@ msgstr ""
 #, fuzzy
 msgid "bad numeric 'switch()' offsets"
 msgstr "数字开关偏移设定不对"
+
+#: src/main/eval.c:6101 src/main/eval.c:6129
+#, fuzzy
+msgid "'switch()' with no alternatives"
+msgstr "没有名字替代的开关需要数值EXPR"
 
 #: src/main/eval.c:6104
 #, fuzzy
@@ -7786,42 +7791,42 @@ msgstr "每个轉換規格里最多只支持一个'*'号"
 msgid "argument for '*' conversion specification must be a number"
 msgstr "轉換規格'*'的参数必需是数字"
 
-#: src/main/sprintf.c:270
+#: src/main/sprintf.c:271
 msgid "coercion has changed vector length to 0"
 msgstr "矢量长度被強制改变成零"
 
-#: src/main/sprintf.c:344 src/main/sprintf.c:358 src/main/sprintf.c:372
-#: src/main/sprintf.c:407
+#: src/main/sprintf.c:346 src/main/sprintf.c:360 src/main/sprintf.c:374
+#: src/main/sprintf.c:409
 #, c-format
 msgid "invalid format '%s'; %s"
 msgstr "'%s'的格式不对；%s"
 
-#: src/main/sprintf.c:345
+#: src/main/sprintf.c:347
 #, c-format
 msgid "use format %d or %i for logical objects"
 msgstr "逻辑对象使用的格式应该是%d或%i"
 
-#: src/main/sprintf.c:359
+#: src/main/sprintf.c:361
 #, c-format
 msgid "use format %d, %i, %o, %x or %X for integer objects"
 msgstr "整数对象使用的格式应该是%d，%i，%o，%x或%X"
 
-#: src/main/sprintf.c:373
+#: src/main/sprintf.c:375
 #, c-format
 msgid "use format %f, %e, %g or %a for numeric objects"
 msgstr "数值对象使用的格式应该是%f,%e,%g或%a"
 
-#: src/main/sprintf.c:408
+#: src/main/sprintf.c:410
 #, c-format
 msgid "use format %s for character objects"
 msgstr "字符对象使用的格式应该是%s"
 
-#: src/main/sprintf.c:413
+#: src/main/sprintf.c:415
 #, c-format
 msgid "likely truncation of character string to %d characters"
 msgstr "字符串很可能被缩短到%d个字符"
 
-#: src/main/sprintf.c:422 src/main/util.c:2346
+#: src/main/sprintf.c:424 src/main/util.c:2346
 msgid "unsupported type"
 msgstr "不支持这一种类"
 
@@ -9965,6 +9970,10 @@ msgid "X11 is not available"
 msgstr "没有X11平台这一功能"
 
 #, fuzzy
+#~ msgid "'strtrim()' function  requires a character vector"
+#~ msgstr "strtrim()需要字符矢量"
+
+#, fuzzy
 #~ msgid "argument is not a function"
 #~ msgstr "参数必需为函数"
 
@@ -10182,10 +10191,6 @@ msgstr "没有X11平台这一功能"
 #, fuzzy
 #~ msgid "'allowNonCompression' argument must be TRUE or FALSE"
 #~ msgstr "'allowNonCompression'的值要么是TRUE要么是FALSE"
-
-#, fuzzy
-#~ msgid "'%s' function  requires a character vector"
-#~ msgstr "'%s'需要字符矢量"
 
 #~ msgid "No function to return from, jumping to top level"
 #~ msgstr "没有可回归的函数, 跳到最高层"

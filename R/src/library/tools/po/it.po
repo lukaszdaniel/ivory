@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-27 18:06+0100\n"
+"POT-Creation-Date: 2016-04-07 22:23+0200\n"
 "PO-Revision-Date: 2005-04-17 16:57+0200\n"
 "Last-Translator: stefano iacus <>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -53,12 +53,12 @@ msgstr ""
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr ""
 
-#: gramLatex.c:2493 gramRd.c:3927
+#: gramLatex.c:2493 gramRd.c:3929
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr ""
 
-#: gramLatex.c:2730 gramRd.c:4416 gramRd.c:4422
+#: gramLatex.c:2730 gramRd.c:4418 gramRd.c:4424
 #, fuzzy, c-format
 msgid "invalid '%s' value"
 msgstr "tipo argomento non valido"
@@ -83,51 +83,51 @@ msgstr ""
 msgid "No macro definition for '%s'."
 msgstr ""
 
-#: gramRd.c:3342 gramRd.c:3346
+#: gramRd.c:3344 gramRd.c:3348
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr ""
 
-#: gramRd.c:3365
+#: gramRd.c:3367
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
 msgstr ""
 
-#: gramRd.c:3395
+#: gramRd.c:3397
 msgid "macros nested too deeply: infinite recursion?"
 msgstr ""
 
-#: gramRd.c:3789
+#: gramRd.c:3791
 #, c-format
 msgid "Unable to find macro %s"
 msgstr ""
 
-#: gramRd.c:3987
+#: gramRd.c:3989
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr ""
 
-#: gramRd.c:4429
+#: gramRd.c:4431
 msgid "cannot open the connection"
 msgstr ""
 
-#: gramRd.c:4436
+#: gramRd.c:4438
 msgid "cannot read from this connection"
 msgstr ""
 
-#: gramRd.c:4444
+#: gramRd.c:4446
 msgid "invalid Rd file"
 msgstr ""
 
-#: gramRd.c:4463
+#: gramRd.c:4465
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr ""
 
-#: gramRd.c:4466
+#: gramRd.c:4468
 msgid "bad state"
 msgstr ""
 
-#: gramRd.c:4479
+#: gramRd.c:4481
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr ""

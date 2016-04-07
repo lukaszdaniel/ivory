@@ -898,7 +898,7 @@ SEXP attribute_hidden do_unlist(SEXP call, SEXP op, SEXP args, SEXP env)
     else {
 	UNPROTECT(1);
 	if (lenient || isVector(args)) return args;
-	else error(_("argument is not a list"));
+	else error(_("'%s' argument is not a list"), "x");
     }
 
     /* If a non-vector argument was encountered (perhaps a list if */

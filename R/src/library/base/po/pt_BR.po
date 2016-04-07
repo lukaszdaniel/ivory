@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-05 22:58+0200\n"
+"POT-Creation-Date: 2016-04-07 22:23+0200\n"
 "PO-Revision-Date: 2011-03-26 08:56-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -1284,7 +1284,7 @@ msgstr "função defeituosa"
 
 #: src/main/array.c:83 src/main/array.c:1590
 #, fuzzy, c-format
-msgid "'data' argument must be of a vector type, was '%s'"
+msgid "'%s' argument must be of a vector type, was '%s'"
 msgstr "'data' deve ser de tipo vetor"
 
 #: src/main/array.c:97 src/main/array.c:105
@@ -1718,8 +1718,8 @@ msgid "repeated formal argument '%s'"
 msgstr "argumento formal repetido 'recursive'"
 
 #: src/main/bind.c:901
-#, fuzzy
-msgid "argument is not a list"
+#, fuzzy, c-format
+msgid "'%s' argument is not a list"
 msgstr "argumento não é uma lista"
 
 #: src/main/bind.c:1045 src/main/names.c:1274 src/main/names.c:1279
@@ -1799,20 +1799,21 @@ msgstr "argumento deve ser uma função"
 msgid "replacement object is not an environment"
 msgstr "objeto substituto não é um ambiente"
 
-#: src/main/builtin.c:343 src/main/coerce.c:2468 src/main/engine.c:2991
-#: src/main/envir.c:1852 src/main/envir.c:2867 src/main/envir.c:2948
-#: src/main/unique.c:1343
+#: src/main/builtin.c:343 src/main/builtin.c:364 src/main/builtin.c:414
+#: src/main/envir.c:3226 src/main/envir.c:3254 src/main/envir.c:3283
+#: src/main/envir.c:3304 src/main/envir.c:3326 src/main/envir.c:3360
+#: src/main/envir.c:3380
 #, fuzzy, c-format
-msgid "'%s' argument must be an environment"
-msgstr "argumento 'env' deve ser um ambiente"
-
-#: src/main/builtin.c:364 src/main/builtin.c:400
-msgid "argument is not an environment"
+msgid "'%s' argument is not an environment"
 msgstr "argumento não é um ambiente"
 
 #: src/main/builtin.c:366
 msgid "the empty environment has no parent"
 msgstr "o ambiente vazio não tem pai"
+
+#: src/main/builtin.c:400
+msgid "argument is not an environment"
+msgstr "argumento não é um ambiente"
 
 #: src/main/builtin.c:402
 msgid "can not set parent of the empty environment"
@@ -1827,13 +1828,6 @@ msgstr "não é possível ajustar o pai do ambiente vazio"
 #, fuzzy
 msgid "can not set the parent environment of package imports"
 msgstr "não é possível ajustar o pai do ambiente vazio"
-
-#: src/main/builtin.c:414 src/main/envir.c:3226 src/main/envir.c:3254
-#: src/main/envir.c:3283 src/main/envir.c:3304 src/main/envir.c:3326
-#: src/main/envir.c:3360 src/main/envir.c:3380
-#, fuzzy, c-format
-msgid "'%s' argument is not an environment"
-msgstr "argumento não é um ambiente"
 
 #: src/main/builtin.c:557 src/main/connections.c:3681
 #: src/main/connections.c:4073 src/main/connections.c:4107
@@ -1908,12 +1902,12 @@ msgid ""
 msgstr ""
 
 #: src/main/builtin.c:1084
-msgid "empty alternative in numeric switch"
+msgid "empty alternative in numeric 'switch()' function"
 msgstr ""
 
-#: src/main/builtin.c:1093 src/main/eval.c:6101 src/main/eval.c:6129
+#: src/main/builtin.c:1093
 #, fuzzy
-msgid "'switch()' with no alternatives"
+msgid "'switch()' function with no alternatives"
 msgstr ""
 "expressão numérica (EXPR) requerida para switch() sem alternativas nomeadas"
 
@@ -2013,9 +2007,9 @@ msgid "'old' is longer than 'new'"
 msgstr "'old' é maior que 'new'"
 
 #: src/main/character.c:1521
-#, fuzzy
-msgid "'strtrim()' function  requires a character vector"
-msgstr "strtrim() requer um vetor de caracteres"
+#, fuzzy, c-format
+msgid "'%s' function  requires a character vector"
+msgstr "'%s' requer um vetor de caracteres"
 
 #: src/main/coerce.c:76 src/main/errors.c:1191
 #, fuzzy
@@ -2108,7 +2102,7 @@ msgstr "se aplica somente a listas e vetores"
 
 #: src/main/coerce.c:2065 src/main/coerce.c:2179
 #, fuzzy, c-format
-msgid "'%s' method applied to non-(list or vector) of type '%s'"
+msgid "'%s' function applied to non-(list or vector) of type '%s'"
 msgstr "%s() aplicado a um objeto diferente de lista ou vetor de tipo '%s'"
 
 #: src/main/coerce.c:2190
@@ -2138,6 +2132,12 @@ msgstr "'what' deve ser uma cadeia de caracteres ou uma função"
 #, fuzzy, c-format
 msgid "'%s' argument must be a list or expression"
 msgstr "argumento 'expr' deve ser uma expressão"
+
+#: src/main/coerce.c:2468 src/main/engine.c:2991 src/main/envir.c:1852
+#: src/main/envir.c:2867 src/main/envir.c:2948 src/main/unique.c:1343
+#, fuzzy, c-format
+msgid "'%s' argument must be an environment"
+msgstr "argumento 'env' deve ser um ambiente"
 
 #: src/main/coerce.c:2627
 msgid "invalid environment specified"
@@ -4593,6 +4593,12 @@ msgstr ""
 #, fuzzy
 msgid "bad numeric 'switch()' offsets"
 msgstr "nome de arquivo inválido"
+
+#: src/main/eval.c:6101 src/main/eval.c:6129
+#, fuzzy
+msgid "'switch()' with no alternatives"
+msgstr ""
+"expressão numérica (EXPR) requerida para switch() sem alternativas nomeadas"
 
 #: src/main/eval.c:6104
 #, fuzzy
@@ -7940,42 +7946,42 @@ msgstr ""
 msgid "argument for '*' conversion specification must be a number"
 msgstr "argumento para especificação de conversão `*' deve ser um número"
 
-#: src/main/sprintf.c:270
+#: src/main/sprintf.c:271
 msgid "coercion has changed vector length to 0"
 msgstr "coerção mudou o comprimento do vetor para 0"
 
-#: src/main/sprintf.c:344 src/main/sprintf.c:358 src/main/sprintf.c:372
-#: src/main/sprintf.c:407
+#: src/main/sprintf.c:346 src/main/sprintf.c:360 src/main/sprintf.c:374
+#: src/main/sprintf.c:409
 #, c-format
 msgid "invalid format '%s'; %s"
 msgstr "formato inválido'%s'; %s"
 
-#: src/main/sprintf.c:345
+#: src/main/sprintf.c:347
 #, c-format
 msgid "use format %d or %i for logical objects"
 msgstr "use o formato %d ou %i para objetos lógicos"
 
-#: src/main/sprintf.c:359
+#: src/main/sprintf.c:361
 #, c-format
 msgid "use format %d, %i, %o, %x or %X for integer objects"
 msgstr "use o formato %d, %i, %o, %x ou %X para objetos inteiros"
 
-#: src/main/sprintf.c:373
+#: src/main/sprintf.c:375
 #, c-format
 msgid "use format %f, %e, %g or %a for numeric objects"
 msgstr "use o formato %f, %e, %g ou %a para objetos numéricos"
 
-#: src/main/sprintf.c:408
+#: src/main/sprintf.c:410
 #, c-format
 msgid "use format %s for character objects"
 msgstr "use o formato %s para objetos caractere"
 
-#: src/main/sprintf.c:413
+#: src/main/sprintf.c:415
 #, c-format
 msgid "likely truncation of character string to %d characters"
 msgstr "provável truncamento de string de caracteres para %d caracteres"
 
-#: src/main/sprintf.c:422 src/main/util.c:2346
+#: src/main/sprintf.c:424 src/main/util.c:2346
 msgid "unsupported type"
 msgstr "tipo não suportado"
 
@@ -10173,6 +10179,10 @@ msgid "X11 is not available"
 msgstr "X11 não está disponível"
 
 #, fuzzy
+#~ msgid "'strtrim()' function  requires a character vector"
+#~ msgstr "strtrim() requer um vetor de caracteres"
+
+#, fuzzy
 #~ msgid "argument is not a function"
 #~ msgstr "argumento deve ser uma função"
 
@@ -10394,10 +10404,6 @@ msgstr "X11 não está disponível"
 #, fuzzy
 #~ msgid "'allowNonCompression' argument must be TRUE or FALSE"
 #~ msgstr "'allowNonCompression' deve ser TRUE ou FALSE"
-
-#, fuzzy
-#~ msgid "'%s' function  requires a character vector"
-#~ msgstr "'%s' requer um vetor de caracteres"
 
 #~ msgid "No function to return from, jumping to top level"
 #~ msgstr "Nenhuma função de onde retornar, pulando para o nível superior"

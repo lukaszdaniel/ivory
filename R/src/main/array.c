@@ -80,7 +80,7 @@ SEXP attribute_hidden do_matrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 	case VECSXP:
 	    break;
 	default:
-	    error(_("'data' argument must be of a vector type, was '%s'"), type2char(TYPEOF(vals)));
+	    error(_("'%s' argument must be of a vector type, was '%s'"), "data", type2char(TYPEOF(vals)));
     }
     lendat = XLENGTH(vals);
     snr = CAR(args); args = CDR(args);
@@ -1587,7 +1587,7 @@ SEXP attribute_hidden do_array(SEXP call, SEXP op, SEXP args, SEXP rho)
 	case VECSXP:
 	    break;
 	default:
-	    error(_("'data' argument must be of a vector type, was '%s'"), type2char(TYPEOF(vals)));
+	    error(_("'%s' argument must be of a vector type, was '%s'"), "data", type2char(TYPEOF(vals)));
     }
     lendat = XLENGTH(vals);
     dims = CADR(args);

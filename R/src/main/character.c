@@ -1518,7 +1518,7 @@ SEXP attribute_hidden do_strtrim(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     /* as.character happens at R level now */
     if (!isString(x = CAR(args)))
-	error(_("'strtrim()' function  requires a character vector"));
+	error(_("'%s' function  requires a character vector"), "strtrim()");
     len = XLENGTH(x);
     PROTECT(width = coerceVector(CADR(args), INTSXP));
     nw = LENGTH(width);
