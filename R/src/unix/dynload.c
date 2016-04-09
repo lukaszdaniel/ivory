@@ -30,8 +30,8 @@
 #include <config.h>
 #endif
 
-#include <Localization.h>
 #include <Defn.h>
+#include <Localization.h>
 #include <Rdynpriv.h>
 
 #ifdef HAVE_UNISTD_H

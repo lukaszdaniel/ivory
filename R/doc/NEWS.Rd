@@ -375,6 +375,9 @@
       imports. The \code{except} expression should evaluate to a
       character vector (after substituting symbols for strings). See
       Writing R Extensions.
+
+      \item \code{isSymmetrix(m)} is much faster for large asymmetric
+      matrices \code{m}.
     }
   }
 
@@ -613,6 +616,14 @@
       \item \code{install.packages()} could give false errors when
       \code{options("pkgType")} was \code{"binary"}.  (Reported by
       Jose Claudio Faria.)
+      
+      \item A bug fix in \R 3.0.2 fixed problems with \code{locator()}
+      in X11, but introduced problems in Windows.  Now both should be
+      fixed.  (\PR{15700})
+
+      \item \code{download.file()} with \code{method = "wininet"}
+      incorrectly warned of download file length difference when
+      reported length was unknown. (\PR{16805})
     }
   }
 }

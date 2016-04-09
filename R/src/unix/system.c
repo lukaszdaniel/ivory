@@ -29,8 +29,8 @@
 #endif
 
 #define R_USE_SIGNALS 1
-#include <Localization.h>
 #include <Defn.h>
+#include <Localization.h>
 
 #include <locale.h>
 

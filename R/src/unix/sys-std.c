@@ -33,9 +33,9 @@
 #endif
 
 #define R_USE_SIGNALS 1
-#include <Localization.h>
 #include <R_ext/Minmax.h>
 #include <Defn.h>
+#include <Localization.h>
 #include <Internal.h>
 
 #ifdef HAVE_STRINGS_H
