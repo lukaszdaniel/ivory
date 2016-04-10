@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-07 22:23+0200\n"
+"POT-Creation-Date: 2016-04-09 23:10+0200\n"
 "PO-Revision-Date: 2014-01-23 07:50+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -1280,10 +1280,12 @@ msgstr[1] "%d argument passés à '%s' qui en exige %d"
 msgid "invalid second argument of length 0"
 msgstr "second argument de taille nulle incorrect"
 
-#: src/main/arithmetic.c:1621 src/main/arithmetic.c:1639
+#: src/main/arithmetic.c:1621 src/main/arithmetic.c:1639 src/main/envir.c:1533
+#: src/main/envir.c:2041 src/main/eval.c:625 src/main/eval.c:626
+#: src/main/eval.c:4248 src/main/eval.c:4249 src/main/RNG.c:352
 #, fuzzy, c-format
-msgid "argument '%s' is missing, with no default"
-msgstr "l'argument \"%s\" est manquant, avec aucune valeur par défaut"
+msgid "'%s' argument is missing, with no default"
+msgstr "argument manquant, sans valeur associée par défaut"
 
 #: src/main/arithmetic.c:1645
 msgid "invalid argument 'base' of length 0"
@@ -1400,7 +1402,8 @@ msgid "non-conformable arguments"
 msgstr "arguments inadéquats"
 
 #: src/main/array.c:1192
-msgid "argument is not a matrix"
+#, fuzzy, c-format
+msgid "'%s' argument is not a matrix"
 msgstr "l'argument n'est pas une matrice"
 
 #: src/main/array.c:1227
@@ -1825,10 +1828,10 @@ msgstr "l'argument doit être une fonction"
 msgid "replacement object is not an environment"
 msgstr "l'objet de remplacement n'est pas un environnement"
 
-#: src/main/builtin.c:343 src/main/builtin.c:364 src/main/builtin.c:414
-#: src/main/envir.c:3226 src/main/envir.c:3254 src/main/envir.c:3283
-#: src/main/envir.c:3304 src/main/envir.c:3326 src/main/envir.c:3360
-#: src/main/envir.c:3380
+#: src/main/builtin.c:343 src/main/builtin.c:364 src/main/builtin.c:400
+#: src/main/builtin.c:414 src/main/envir.c:3226 src/main/envir.c:3254
+#: src/main/envir.c:3283 src/main/envir.c:3304 src/main/envir.c:3326
+#: src/main/envir.c:3360 src/main/envir.c:3380
 #, fuzzy, c-format
 msgid "'%s' argument is not an environment"
 msgstr "l'argument n'est pas un environnment"
@@ -1836,10 +1839,6 @@ msgstr "l'argument n'est pas un environnment"
 #: src/main/builtin.c:366
 msgid "the empty environment has no parent"
 msgstr "l'environnement vide n'a pas de parent"
-
-#: src/main/builtin.c:400
-msgid "argument is not an environment"
-msgstr "l'argument n'est pas un environnment"
 
 #: src/main/builtin.c:402
 msgid "can not set parent of the empty environment"
@@ -1943,7 +1942,7 @@ msgstr[0] "%d arguments passés à '%s' qui en exige 1 ou 2"
 msgstr[1] "%d arguments passés à '%s' qui en exige 1 ou 2"
 
 #: src/main/character.c:112 src/main/character.c:115 src/main/character.c:232
-#: src/main/character.c:235
+#: src/main/character.c:235 src/main/character.c:1521
 #, fuzzy, c-format
 msgid "'%s' function requires a character vector"
 msgstr "'%s' exige un vecteur de caractères comme argument"
@@ -2029,11 +2028,6 @@ msgstr "chaîne de charactères multioctets incorrecte à '%s'"
 #: src/main/character.c:1382 src/main/character.c:1471
 msgid "'old' is longer than 'new'"
 msgstr "'old' est plus long que 'new'"
-
-#: src/main/character.c:1521
-#, fuzzy, c-format
-msgid "'%s' function  requires a character vector"
-msgstr "'%s' exige un vecteur de caractères comme argument"
 
 #: src/main/coerce.c:76 src/main/errors.c:1191
 #, fuzzy
@@ -3328,9 +3322,9 @@ msgid "the base graphics system is not registered"
 msgstr "trop de systèmes graphiques enregistrés"
 
 #: src/main/devices.c:53
-#, fuzzy
-msgid "argument passed to 'getSymbolValue()' function is not a symbol"
-msgstr "argument 'editor' non fixé"
+#, fuzzy, c-format
+msgid "argument passed to '%s' function is not a symbol"
+msgstr "l'argument à '%s' n'est pas un environnment"
 
 #: src/main/devices.c:167 src/main/devices.c:175
 msgid "no active or default device"
@@ -3761,8 +3755,8 @@ msgstr "jonction de ligne incorrecte"
 
 #: src/main/engine.c:763 src/main/engine.c:867 src/main/engine.c:1100
 #: src/main/engine.c:1207 src/main/engine.c:1330 src/main/engine.c:1394
-#, fuzzy
-msgid "'lwd' argument must be non-negative and finite"
+#, fuzzy, c-format
+msgid "'%s' argument must be non-negative and finite"
 msgstr "'gap' doit être un entier positif ou nul"
 
 #: src/main/engine.c:800
@@ -3935,13 +3929,6 @@ msgstr "La liste ... ne contient pas %d éléments"
 #, fuzzy, c-format
 msgid "'..%d' used in an incorrect context, no '...' list to look in"
 msgstr "..%d utilisé dans un mauvais contexte, aucun ... où chercher"
-
-#: src/main/envir.c:1533 src/main/envir.c:2041 src/main/eval.c:625
-#: src/main/eval.c:626 src/main/eval.c:4248 src/main/eval.c:4249
-#: src/main/RNG.c:352
-#, fuzzy, c-format
-msgid "'%s' argument is missing, with no default"
-msgstr "argument manquant, sans valeur associée par défaut"
 
 #: src/main/envir.c:1537
 #, fuzzy, c-format
@@ -5749,57 +5736,48 @@ msgid "LENGTH or similar applied to %s object"
 msgstr ""
 
 #: src/main/memory.c:3397
-#, c-format
-msgid "'CHAR()' function can only be applied to a 'CHARSXP', not a '%s'"
-msgstr ""
+#, fuzzy, c-format
+msgid "'%s' function can only be applied to a charecter, not a '%s'"
+msgstr "nsl() est incapable de résoudre le nom de la machine hote '%s'"
 
-#: src/main/memory.c:3404
-#, c-format
-msgid ""
-"'STRING_ELT()' function can only be applied to a 'character vector', not a "
-"'%s'"
-msgstr ""
+#: src/main/memory.c:3404 src/main/memory.c:3464
+#, fuzzy, c-format
+msgid "'%s' function can only be applied to a character vector, not a '%s'"
+msgstr "nsl() est incapable de résoudre le nom de la machine hote '%s'"
 
-#: src/main/memory.c:3414
-#, c-format
-msgid "'VECTOR_ELT()' function can only be applied to a 'list', not a '%s'"
-msgstr ""
+#: src/main/memory.c:3414 src/main/memory.c:3481
+#, fuzzy, c-format
+msgid "'%s' function can only be applied to a list, not a '%s'"
+msgstr "nsl() est incapable de résoudre le nom de la machine hote '%s'"
 
 #: src/main/memory.c:3421
-#, c-format
-msgid "'LOGICAL()' function can only be applied to a 'logical', not a '%s'"
-msgstr ""
+#, fuzzy, c-format
+msgid "'%s' function can only be applied to a logical, not a '%s'"
+msgstr "nsl() est incapable de résoudre le nom de la machine hote '%s'"
 
 #: src/main/memory.c:3429
-#, c-format
-msgid "'INTEGER()' function can only be applied to a 'integer', not a '%s'"
-msgstr ""
+#, fuzzy, c-format
+msgid "'%s' function can only be applied to a integer, not a '%s'"
+msgstr "nsl() est incapable de résoudre le nom de la machine hote '%s'"
 
 #: src/main/memory.c:3436
 #, fuzzy, c-format
-msgid "'RAW()' function can only be applied to a 'raw', not a '%s'"
+msgid "'%s' function can only be applied to a raw, not a '%s'"
 msgstr "nsl() est incapable de résoudre le nom de la machine hote '%s'"
 
 #: src/main/memory.c:3443
-#, c-format
-msgid "'REAL()' function can only be applied to a 'numeric', not a '%s'"
-msgstr ""
+#, fuzzy, c-format
+msgid "'%s' function can only be applied to a numeric, not a '%s'"
+msgstr "nsl() est incapable de résoudre le nom de la machine hote '%s'"
 
 #: src/main/memory.c:3450
 #, fuzzy, c-format
-msgid "'COMPLEX()' function can only be applied to a 'complex', not a '%s'"
+msgid "'%s' function can only be applied to a complex, not a '%s'"
 msgstr "nsl() est incapable de résoudre le nom de la machine hote '%s'"
 
 #: src/main/memory.c:3459
 msgid "not safe to return vector pointer"
 msgstr "le renvoi d'un pointeur sur un vecteur n'est pas sûr"
-
-#: src/main/memory.c:3464
-#, c-format
-msgid ""
-"'SET_STRING_ELT()' function can only be applied to a 'character vector', not "
-"a '%s'"
-msgstr ""
 
 #: src/main/memory.c:3467
 #, c-format
@@ -5809,11 +5787,6 @@ msgstr ""
 #: src/main/memory.c:3470
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_STRING_ELT()' function"
-msgstr ""
-
-#: src/main/memory.c:3481
-#, c-format
-msgid "'SET_VECTOR_ELT()' function can only be applied to a 'list', not a '%s'"
 msgstr ""
 
 #: src/main/memory.c:3485
@@ -5955,9 +5928,9 @@ msgid "generic function not specified"
 msgstr "fonction générique non spécifiée"
 
 #: src/main/objects.c:664
-#, fuzzy
-msgid "invalid generic argument passed to 'NextMethod()'"
-msgstr "argument générique incorrect pour Nextmethod"
+#, fuzzy, c-format
+msgid "invalid generic argument passed to '%s' function"
+msgstr "argument incorrect pour edit()"
 
 #: src/main/objects.c:676
 #, fuzzy
@@ -6016,9 +5989,8 @@ msgstr ""
 "(sera ignoré)"
 
 #: src/main/objects.c:1146
-#, fuzzy
-msgid ""
-"argument passed to 'standardGeneric()' must be a non-empty character string"
+#, fuzzy, c-format
+msgid "argument passed to '%s' function must be a non-empty character string"
 msgstr ""
 "l'argument à standardGeneric doit être une chaîne de caractères non vide"
 
@@ -6749,7 +6721,8 @@ msgid "it is not known that wchar_t is Unicode on this platform"
 msgstr "nsl() ne fonctionne pas sur cette architecture"
 
 #: src/main/qsort.c:56
-msgid "argument is not a numeric vector"
+#, fuzzy, c-format
+msgid "'%s' argument is not a numeric vector"
 msgstr "l'argument n'est pas un vecteur numérique"
 
 #: src/main/radixsort.c:69
@@ -9034,7 +9007,7 @@ msgid_plural "Content type '%s' length %d bytes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/modules/internet/internet.c:798
+#: src/modules/internet/internet.c:798 src/modules/internet/internet.c:967
 #, c-format
 msgid "Content type '%s' length unknown"
 msgstr ""
@@ -9049,7 +9022,7 @@ msgid "ftp data connection made, file length unknown\n"
 msgstr ""
 
 #: src/modules/internet/internet.c:917 src/modules/internet/internet.c:931
-#: src/modules/internet/internet.c:1020 src/modules/internet/internet.c:1029
+#: src/modules/internet/internet.c:1021 src/modules/internet/internet.c:1030
 #, c-format
 msgid "InternetOpenUrl failed: '%s'"
 msgstr "échec de InternetOpenUrl : '%s'"
@@ -9267,7 +9240,8 @@ msgstr[1] ""
 
 #: src/modules/internet/nanohttp.c:1455
 msgid ""
-"Proxy authentication failed:\tplease re-enter the credentials or hit Cancel"
+"Proxy authentication failed:\n"
+"\tplease re-enter the credentials or hit Cancel"
 msgstr ""
 
 #: src/modules/internet/nanohttp.c:1469
@@ -10317,6 +10291,33 @@ msgstr "impossible de charger le module X11"
 #: src/unix/X11.c:145 src/unix/X11.c:151 src/unix/X11.c:157 src/unix/X11.c:163
 msgid "X11 is not available"
 msgstr "X11 indisponible"
+
+#, fuzzy
+#~ msgid "'' argument must be non-negative and finite"
+#~ msgstr "'gap' doit être un entier positif ou nul"
+
+#, fuzzy
+#~ msgid "'%sd' argument must be non-negative and finite"
+#~ msgstr "'gap' doit être un entier positif ou nul"
+
+#, fuzzy
+#~ msgid "argument '%s' is missing, with no default"
+#~ msgstr "l'argument \"%s\" est manquant, avec aucune valeur par défaut"
+
+#~ msgid "argument is not an environment"
+#~ msgstr "l'argument n'est pas un environnment"
+
+#, fuzzy
+#~ msgid "'%s' function  requires a character vector"
+#~ msgstr "'%s' exige un vecteur de caractères comme argument"
+
+#, fuzzy
+#~ msgid "argument passed to 'getSymbolValue()' function is not a symbol"
+#~ msgstr "argument 'editor' non fixé"
+
+#, fuzzy
+#~ msgid "invalid generic argument passed to 'NextMethod()'"
+#~ msgstr "argument générique incorrect pour Nextmethod"
 
 #, fuzzy
 #~ msgid "'strtrim()' function  requires a character vector"

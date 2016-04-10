@@ -28,8 +28,8 @@
 #include <config.h>
 #endif
 
-#include <Localization.h>
 #include <Defn.h> /* => Utils.h with the protos from here */
+#include <Localization.h>
 #include <Internal.h>
 #include <Rmath.h>
 
@@ -53,7 +53,7 @@ SEXP attribute_hidden do_qsort(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     x = CAR(args);
     if (!isNumeric(x))
-	error(_("argument is not a numeric vector"));
+	error(_("'%s' argument is not a numeric vector"), "x");
     x_real= TYPEOF(x) == REALSXP;
     x_int = !x_real && (TYPEOF(x) == INTSXP || TYPEOF(x) == LGLSXP);
     PROTECT(sx = (x_real || x_int) ? duplicate(x) : coerceVector(x, REALSXP));

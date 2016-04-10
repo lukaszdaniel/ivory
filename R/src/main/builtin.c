@@ -24,8 +24,8 @@
 #endif
 
 #define R_USE_SIGNALS 1
-#include <Localization.h>
 #include <Defn.h>
+#include <Localization.h>
 #include <Internal.h>
 #include <Print.h>
 #include <Fileio.h>
@@ -397,7 +397,7 @@ SEXP attribute_hidden do_parentenvgets(SEXP call, SEXP op, SEXP args, SEXP rho)
     } else
     if( !isEnvironment(env) &&
 	!isEnvironment((env = simple_as_environment(env))))
-	error(_("argument is not an environment"));
+	error(_("'%s' argument is not an environment"), "env");
     if( env == R_EmptyEnv )
 	error(_("can not set parent of the empty environment"));
     if (R_EnvironmentIsLocked(env) && R_IsNamespaceEnv(env))

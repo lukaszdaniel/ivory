@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-04 22:32+0100\n"
+"POT-Creation-Date: 2016-04-09 21:33+0200\n"
 "PO-Revision-Date: 2011-04-02 18:24+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -83,7 +83,7 @@ msgstr "sonlu olmayan eksen sınırları [GScale(%g,%g,%d, .); log=%d]"
 msgid "axis style \"%c\" unimplemented"
 msgstr "eksen biçimi \"%c\" tanımlanmamış"
 
-#: graphics.c:2209 graphics.c:2597
+#: graphics.c:2209 graphics.c:2606
 #, fuzzy
 msgid "no graphics device is active"
 msgstr "Hiç bir grafik aygıtı aktif değil"
@@ -96,25 +96,25 @@ msgstr "plot.new henüz çağırılmadı"
 msgid "invalid graphics state"
 msgstr "geçersiz grafik durumu"
 
-#: graphics.c:2548
+#: graphics.c:2556
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.c:3056
+#: graphics.c:3065
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "belirsiz açıda sıfır uzunlukta ok, atlandı"
 
-#: graphics.c:3137
+#: graphics.c:3146
 #, c-format
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "geçersiz par(\"bty\") = '%c'; box() çizilmedi"
 
-#: graphics.c:3154 par.c:1121
+#: graphics.c:3163 par.c:1121
 #, fuzzy, c-format
 msgid "invalid argument passed to '%s' function"
 msgstr "par()'a geçersiz bir argüman geçirildi"
 
-#: graphics.c:3399
+#: graphics.c:3408
 #, fuzzy
 msgid "metric information not available for this device"
 msgstr "Bu aygıtta metrik bilgisi bulunmuyor"

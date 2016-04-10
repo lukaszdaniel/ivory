@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-03 21:09+0200\n"
+"POT-Creation-Date: 2016-04-09 21:33+0200\n"
 "PO-Revision-Date: 2015-01-17 15:08+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -90,9 +90,9 @@ msgstr "'file'参数不对"
 msgid "invalid gray level, must be in [0,1]."
 msgstr ""
 
-#: colors.c:549 devPS.c:8248 devPS.c:8411 devPS.c:8414 devWindows.c:3640
-#: devWindows.c:3644 devWindows.c:3652 devWindows.c:3663 devWindows.c:3669
-#: devWindows.c:3676 devWindows.c:3683 devWindows.c:3687
+#: colors.c:549 devPS.c:8248 devPS.c:8411 devPS.c:8414 devWindows.c:3648
+#: devWindows.c:3652 devWindows.c:3660 devWindows.c:3671 devWindows.c:3677
+#: devWindows.c:3684 devWindows.c:3691 devWindows.c:3695
 #, fuzzy, c-format
 msgid "invalid '%s' value"
 msgstr "'file'参数不对"
@@ -353,7 +353,7 @@ msgstr "postscript(print.it=TRUE)不能用在空印刷命令里"
 msgid "invalid page type '%s' (postscript)"
 msgstr "页类别'%s'(postscript)不对"
 
-#: devPS.c:3463 devPS.c:4576 devWindows.c:2340
+#: devPS.c:3463 devPS.c:4576 devWindows.c:2343
 msgid ""
 "semi-transparency is not supported on this device: reported only once per "
 "page"
@@ -580,46 +580,46 @@ msgstr "%s里的'fonts'参数不对"
 msgid "unable to start '%s' function"
 msgstr "无法启动%s()装置"
 
-#: devPS.c:8428 devPicTeX.c:741 devWindows.c:3728
+#: devPS.c:8428 devPicTeX.c:741 devWindows.c:3736
 #, c-format
 msgid "unable to start %s() device"
 msgstr "无法启动%s()装置"
 
-#: devQuartz.c:651
+#: devQuartz.c:653
 #, c-format
 msgid "font \"%s\" could not be found for family \"%s\""
 msgstr "字体家族\"%s\"里没有\"%s\"这一字体"
 
-#: devQuartz.c:669
+#: devQuartz.c:671
 msgid "font family name is too long"
 msgstr "字体家族名字太长"
 
-#: devQuartz.c:709
+#: devQuartz.c:711
 #, c-format
 msgid "no font could be found for family \"%s\""
 msgstr "字体家族\"%s\"没有字体"
 
-#: devQuartz.c:1374
+#: devQuartz.c:1376
 msgid "invalid 'file' argument"
 msgstr "'file'参数不对"
 
-#: devQuartz.c:1401
+#: devQuartz.c:1403
 #, fuzzy
 msgid "invalid quartz() device size"
 msgstr "石英装置大小不对"
 
-#: devQuartz.c:1429
+#: devQuartz.c:1431
 #, fuzzy
 msgid "unable to create device description"
 msgstr "无法建立设备描述文件"
 
-#: devQuartz.c:1479
+#: devQuartz.c:1481
 #, fuzzy
 msgid ""
 "unable to create quartz() device target, given type may not be supported"
 msgstr "无法建立石英装置，可能不支持所提供的种类"
 
-#: devQuartz.c:1610
+#: devQuartz.c:1611
 msgid "Quartz device is not available on this platform"
 msgstr "这个平台上没有石英装置"
 
@@ -730,51 +730,55 @@ msgstr "剪輯板元文本只能保存一个图片."
 msgid "metafile '%s' could not be created"
 msgstr "无法建立元文本'%s'"
 
-#: devWindows.c:3111 devWindows.c:3752
+#: devWindows.c:3114 devWindows.c:3760
 msgid "R Graphics"
 msgstr "R Graphics"
 
-#: devWindows.c:3125
+#: devWindows.c:3128
 msgid "attempt to use the locator after dev.hold()"
 msgstr "调用dev.hold()后不能再用定位器"
 
-#: devWindows.c:3391
+#: devWindows.c:3159
+msgid "graphics device closed during call to locator or identify"
+msgstr ""
+
+#: devWindows.c:3399
 msgid "option 'windowsTimeouts' should be integer"
 msgstr "'windowsTimeouts'选择项必需是整数"
 
-#: devWindows.c:3412
+#: devWindows.c:3420
 #, fuzzy
 msgid "invalid device number in 'savePlot()' function"
 msgstr "'savePlot'里的装置数目出了错"
 
-#: devWindows.c:3414
+#: devWindows.c:3422
 msgid "invalid device in 'savePlot'"
 msgstr "'savePlot'装置出错"
 
-#: devWindows.c:3417
+#: devWindows.c:3425
 #, fuzzy
 msgid "invalid filename argument in 'savePlot()' function"
 msgstr "savePlot文本名字参数不对"
 
-#: devWindows.c:3422
+#: devWindows.c:3430
 #, fuzzy
 msgid "invalid type argument in 'savePlot()' function"
 msgstr "savePlot文本名字参数不对"
 
-#: devWindows.c:3449
+#: devWindows.c:3457
 msgid "unknown type in savePlot"
 msgstr "savePlot里没有类别"
 
-#: devWindows.c:3494 devWindows.c:3526 devWindows.c:3554 devWindows.c:3585
-#: devWindows.c:3606
+#: devWindows.c:3502 devWindows.c:3534 devWindows.c:3562 devWindows.c:3593
+#: devWindows.c:3614
 msgid "processing of the plot ran out of memory"
 msgstr "处理图象时内存用完了"
 
-#: devWindows.c:3570
+#: devWindows.c:3578
 msgid "Impossible to open "
 msgstr "无法打开"
 
-#: devWindows.c:3635
+#: devWindows.c:3643
 msgid "invalid 'width' or 'height'"
 msgstr "'width'或'height'的值不对"
 

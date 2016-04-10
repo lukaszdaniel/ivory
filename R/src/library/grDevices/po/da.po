@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-03 21:09+0200\n"
+"POT-Creation-Date: 2016-04-09 21:33+0200\n"
 "PO-Revision-Date: 2016-01-09 18:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -89,9 +89,9 @@ msgstr "ugyldigt 'fil'-argument"
 msgid "invalid gray level, must be in [0,1]."
 msgstr ""
 
-#: colors.c:549 devPS.c:8248 devPS.c:8411 devPS.c:8414 devWindows.c:3640
-#: devWindows.c:3644 devWindows.c:3652 devWindows.c:3663 devWindows.c:3669
-#: devWindows.c:3676 devWindows.c:3683 devWindows.c:3687
+#: colors.c:549 devPS.c:8248 devPS.c:8411 devPS.c:8414 devWindows.c:3648
+#: devWindows.c:3652 devWindows.c:3660 devWindows.c:3671 devWindows.c:3677
+#: devWindows.c:3684 devWindows.c:3691 devWindows.c:3695
 #, fuzzy, c-format
 msgid "invalid '%s' value"
 msgstr "ugyldigt 'fil'-argument"
@@ -359,7 +359,7 @@ msgstr "postscript(print.it=TRUE) brugt med en tom print-kommando"
 msgid "invalid page type '%s' (postscript)"
 msgstr "ugyldig sidetype '%s' (postscript)"
 
-#: devPS.c:3463 devPS.c:4576 devWindows.c:2340
+#: devPS.c:3463 devPS.c:4576 devWindows.c:2343
 msgid ""
 "semi-transparency is not supported on this device: reported only once per "
 "page"
@@ -598,47 +598,47 @@ msgid "unable to start '%s' function"
 msgstr "kan ikke starte %s()-enhed"
 
 # 85%
-#: devPS.c:8428 devPicTeX.c:741 devWindows.c:3728
+#: devPS.c:8428 devPicTeX.c:741 devWindows.c:3736
 #, c-format
 msgid "unable to start %s() device"
 msgstr "kan ikke starte %s()-enhed"
 
-#: devQuartz.c:651
+#: devQuartz.c:653
 #, c-format
 msgid "font \"%s\" could not be found for family \"%s\""
 msgstr "skrifttype »%s« kunne ikke findes for familie »%s«"
 
-#: devQuartz.c:669
+#: devQuartz.c:671
 msgid "font family name is too long"
 msgstr "skriftfamilienavnet er for langt"
 
-#: devQuartz.c:709
+#: devQuartz.c:711
 #, c-format
 msgid "no font could be found for family \"%s\""
 msgstr "ingen skrift kunne findes for familie »%s«"
 
-#: devQuartz.c:1374
+#: devQuartz.c:1376
 msgid "invalid 'file' argument"
 msgstr "ugyldigt 'fil'-argument"
 
-#: devQuartz.c:1401
+#: devQuartz.c:1403
 #, fuzzy
 msgid "invalid quartz() device size"
 msgstr "ugyldig Quartz-enhedsstørrelse"
 
-#: devQuartz.c:1429
+#: devQuartz.c:1431
 #, fuzzy
 msgid "unable to create device description"
 msgstr "Kan ikke oprette enhedsbeskrivelse."
 
-#: devQuartz.c:1479
+#: devQuartz.c:1481
 #, fuzzy
 msgid ""
 "unable to create quartz() device target, given type may not be supported"
 msgstr ""
 "Kan ikke oprette Quartz-enhedsmål, angivet type er måske ikke understøttet."
 
-#: devQuartz.c:1610
+#: devQuartz.c:1611
 msgid "Quartz device is not available on this platform"
 msgstr "Quartz-enhed er ikke tilgængelig på denne platform"
 
@@ -752,51 +752,55 @@ msgstr "En metafil for udklipsholderen kan kun lagre en figur."
 msgid "metafile '%s' could not be created"
 msgstr "metafilfil '%s' kunne ikke oprettes"
 
-#: devWindows.c:3111 devWindows.c:3752
+#: devWindows.c:3114 devWindows.c:3760
 msgid "R Graphics"
 msgstr "R-grafik"
 
-#: devWindows.c:3125
+#: devWindows.c:3128
 msgid "attempt to use the locator after dev.hold()"
 msgstr "forsøg på at bruge afgrænseren efter dev.hold()"
 
-#: devWindows.c:3391
+#: devWindows.c:3159
+msgid "graphics device closed during call to locator or identify"
+msgstr ""
+
+#: devWindows.c:3399
 msgid "option 'windowsTimeouts' should be integer"
 msgstr "tilvalg 'windows Timeouts' skal være et heltal"
 
-#: devWindows.c:3412
+#: devWindows.c:3420
 #, fuzzy
 msgid "invalid device number in 'savePlot()' function"
 msgstr "ugyldigt enhedstal i 'savePlot'"
 
-#: devWindows.c:3414
+#: devWindows.c:3422
 msgid "invalid device in 'savePlot'"
 msgstr "ugyldig enhed i 'savePlot'"
 
-#: devWindows.c:3417
+#: devWindows.c:3425
 #, fuzzy
 msgid "invalid filename argument in 'savePlot()' function"
 msgstr "ugyldigt filnavnsargument i savePlot"
 
-#: devWindows.c:3422
+#: devWindows.c:3430
 #, fuzzy
 msgid "invalid type argument in 'savePlot()' function"
 msgstr "ugyldigt filnavnsargument i savePlot"
 
-#: devWindows.c:3449
+#: devWindows.c:3457
 msgid "unknown type in savePlot"
 msgstr "ukendt type i savePlot"
 
-#: devWindows.c:3494 devWindows.c:3526 devWindows.c:3554 devWindows.c:3585
-#: devWindows.c:3606
+#: devWindows.c:3502 devWindows.c:3534 devWindows.c:3562 devWindows.c:3593
+#: devWindows.c:3614
 msgid "processing of the plot ran out of memory"
 msgstr "behandlingem af plottet løb tør for hukommelse"
 
-#: devWindows.c:3570
+#: devWindows.c:3578
 msgid "Impossible to open "
 msgstr "Umulig at åbne "
 
-#: devWindows.c:3635
+#: devWindows.c:3643
 msgid "invalid 'width' or 'height'"
 msgstr "ugyldig 'bredde' eller 'højde'"
 

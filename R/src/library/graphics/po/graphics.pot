@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: graphics 3.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-03 21:09+0200\n"
+"POT-Creation-Date: 2016-04-09 21:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,7 +74,7 @@ msgstr ""
 msgid "axis style \"%c\" unimplemented"
 msgstr ""
 
-#: graphics.c:2209 graphics.c:2597
+#: graphics.c:2209 graphics.c:2606
 msgid "no graphics device is active"
 msgstr ""
 
@@ -86,25 +86,25 @@ msgstr ""
 msgid "invalid graphics state"
 msgstr ""
 
-#: graphics.c:2548
+#: graphics.c:2556
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.c:3056
+#: graphics.c:3065
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr ""
 
-#: graphics.c:3137
+#: graphics.c:3146
 #, c-format
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr ""
 
-#: graphics.c:3154 par.c:1121
+#: graphics.c:3163 par.c:1121
 #, c-format
 msgid "invalid argument passed to '%s' function"
 msgstr ""
 
-#: graphics.c:3399
+#: graphics.c:3408
 msgid "metric information not available for this device"
 msgstr ""
 

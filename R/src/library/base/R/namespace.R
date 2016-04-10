@@ -734,7 +734,7 @@ asNamespace <- function(ns, base.OK = TRUE) {
     if (is.character(ns) || is.name(ns))
         ns <- getNamespace(ns)
     if (! isNamespace(ns))
-        stop("'ns' argument is not a namespace")
+        stop(gettextf("'%s' argument is not a namespace", "ns"))
     else if (! base.OK && isBaseNamespace(ns))
         stop("operation is not allowed on base namespace")
     else ns

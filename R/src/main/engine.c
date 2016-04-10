@@ -760,7 +760,7 @@ void GELine(double x1, double y1, double x2, double y2,
 {
     Rboolean clip_ok;
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
-	error(_("'lwd' argument must be non-negative and finite"));
+	error(_("'%s' argument must be non-negative and finite"), "lwd");
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK) return;
     if (dd->dev->canClip) {
 	clip_ok = clipLine(&x1, &y1, &x2, &y2, 1, dd);
@@ -864,7 +864,7 @@ static void clipPolyline(int n, double *x, double *y,
 void GEPolyline(int n, double *x, double *y, const pGEcontext gc, pGEDevDesc dd)
 {
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
-	error(_("'lwd' argument must be non-negative and finite"));
+	error(_("'%s' argument must be non-negative and finite"), "lwd");
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK) return;
     if (dd->dev->canClip) {
 	clipPolyline(n, x, y, gc, 1, dd);  /* clips to device extent
@@ -1097,7 +1097,7 @@ void GEPolygon(int n, double *x, double *y, const pGEcontext gc, pGEDevDesc dd)
      */
     const void *vmaxsave = vmaxget();
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
-	error(_("'lwd' argument must be non-negative and finite"));
+	error(_("'%s' argument must be non-negative and finite"), "lwd");
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK)
 	/* "transparent" border */
 	gc->col = R_TRANWHITE;
@@ -1204,7 +1204,7 @@ void GECircle(double x, double y, double radius, const pGEcontext gc, pGEDevDesc
     if (radius <= 0.0) return;
 
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
-	error(_("'lwd' argument must be non-negative and finite"));
+	error(_("'%s' argument must be non-negative and finite"), "lwd");
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK)
 	/* "transparent" border */
 	gc->col = R_TRANWHITE;
@@ -1327,7 +1327,7 @@ void GERect(double x0, double y0, double x1, double y1,
     int result;
 
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
-	error(_("'lwd' argument must be non-negative and finite"));
+	error(_("'%s' argument must be non-negative and finite"), "lwd");
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK)
 	/* "transparent" border */
 	gc->col = R_TRANWHITE;
@@ -1391,7 +1391,7 @@ void GEPath(double *x, double *y,
     /* FIXME: what about clipping? (if the device can't) 
     */
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
-	error(_("'lwd' argument must be non-negative and finite"));
+	error(_("'%s' argument must be non-negative and finite"), "lwd");
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK)
 	gc->col = R_TRANWHITE;
     if (npoly > 0) {

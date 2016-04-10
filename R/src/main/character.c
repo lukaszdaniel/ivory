@@ -69,8 +69,8 @@ abbreviate chartr make.names strtrim tolower toupper give error.
 # include <config.h>
 #endif
 
-#include <Localization.h>
 #include <Defn.h>
+#include <Localization.h>
 #include <Internal.h>
 #include <errno.h>
 #include <R_ext/RS.h>  /* for Calloc/Free */
@@ -1518,7 +1518,7 @@ SEXP attribute_hidden do_strtrim(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     /* as.character happens at R level now */
     if (!isString(x = CAR(args)))
-	error(_("'%s' function  requires a character vector"), "strtrim()");
+	error(_("'%s' function requires a character vector"), "strtrim()");
     len = XLENGTH(x);
     PROTECT(width = coerceVector(CADR(args), INTSXP));
     nw = LENGTH(width);

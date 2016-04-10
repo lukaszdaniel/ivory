@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-03 21:09+0200\n"
+"POT-Creation-Date: 2016-04-09 21:33+0200\n"
 "PO-Revision-Date: 2005-05-31 10:31+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -89,9 +89,9 @@ msgstr "무효의 문자열 인수입니다"
 msgid "invalid gray level, must be in [0,1]."
 msgstr ""
 
-#: colors.c:549 devPS.c:8248 devPS.c:8411 devPS.c:8414 devWindows.c:3640
-#: devWindows.c:3644 devWindows.c:3652 devWindows.c:3663 devWindows.c:3669
-#: devWindows.c:3676 devWindows.c:3683 devWindows.c:3687
+#: colors.c:549 devPS.c:8248 devPS.c:8411 devPS.c:8414 devWindows.c:3648
+#: devWindows.c:3652 devWindows.c:3660 devWindows.c:3671 devWindows.c:3677
+#: devWindows.c:3684 devWindows.c:3691 devWindows.c:3695
 #, fuzzy, c-format
 msgid "invalid '%s' value"
 msgstr "무효의 문자열 인수입니다"
@@ -360,7 +360,7 @@ msgstr ""
 msgid "invalid page type '%s' (postscript)"
 msgstr "무효의 페이지 유형 '%s' (postscript) 입니다"
 
-#: devPS.c:3463 devPS.c:4576 devWindows.c:2340
+#: devPS.c:3463 devPS.c:4576 devWindows.c:2343
 msgid ""
 "semi-transparency is not supported on this device: reported only once per "
 "page"
@@ -592,47 +592,47 @@ msgstr "%s에서 무효의 'fonts' 파라미터 입니다"
 msgid "unable to start '%s' function"
 msgstr "디바이스 pdf를 시작할수가 없습니다"
 
-#: devPS.c:8428 devPicTeX.c:741 devWindows.c:3728
+#: devPS.c:8428 devPicTeX.c:741 devWindows.c:3736
 #, fuzzy, c-format
 msgid "unable to start %s() device"
 msgstr "디바이스 pdf를 시작할수가 없습니다"
 
-#: devQuartz.c:651
+#: devQuartz.c:653
 #, fuzzy, c-format
 msgid "font \"%s\" could not be found for family \"%s\""
 msgstr "'%s' metafile 하는것을 작성할 수 없습니다"
 
-#: devQuartz.c:669
+#: devQuartz.c:671
 #, fuzzy
 msgid "font family name is too long"
 msgstr "pdf에 대해서 너무 긴 파일명입니다"
 
-#: devQuartz.c:709
+#: devQuartz.c:711
 #, c-format
 msgid "no font could be found for family \"%s\""
 msgstr ""
 
-#: devQuartz.c:1374
+#: devQuartz.c:1376
 #, fuzzy
 msgid "invalid 'file' argument"
 msgstr "무효의 문자열 인수입니다"
 
-#: devQuartz.c:1401
+#: devQuartz.c:1403
 #, fuzzy
 msgid "invalid quartz() device size"
 msgstr "savePlot의 무효인 디비이스입니다"
 
-#: devQuartz.c:1429
+#: devQuartz.c:1431
 #, fuzzy
 msgid "unable to create device description"
 msgstr "디바이스 PostSscript를 시작할수 없습니다"
 
-#: devQuartz.c:1479
+#: devQuartz.c:1481
 msgid ""
 "unable to create quartz() device target, given type may not be supported"
 msgstr ""
 
-#: devQuartz.c:1610
+#: devQuartz.c:1611
 #, fuzzy
 msgid "Quartz device is not available on this platform"
 msgstr "Quartz 디바이스는 이 platform에서 이용 가능하지는 않습니다"
@@ -746,52 +746,56 @@ msgstr "clipboard metafile은 단지 하나의 figure만을 저장할수가 있�
 msgid "metafile '%s' could not be created"
 msgstr "'%s' metafile 하는것을 작성할 수 없습니다"
 
-#: devWindows.c:3111 devWindows.c:3752
+#: devWindows.c:3114 devWindows.c:3760
 msgid "R Graphics"
 msgstr "R Graphics"
 
-#: devWindows.c:3125
+#: devWindows.c:3128
 msgid "attempt to use the locator after dev.hold()"
 msgstr ""
 
-#: devWindows.c:3391
+#: devWindows.c:3159
+msgid "graphics device closed during call to locator or identify"
+msgstr ""
+
+#: devWindows.c:3399
 msgid "option 'windowsTimeouts' should be integer"
 msgstr "옵션 'windowsTimeouts'는 정수가 아니면 되지 않습니다"
 
-#: devWindows.c:3412
+#: devWindows.c:3420
 #, fuzzy
 msgid "invalid device number in 'savePlot()' function"
 msgstr "savePlot의 무효인 디바이스번호입니다"
 
-#: devWindows.c:3414
+#: devWindows.c:3422
 #, fuzzy
 msgid "invalid device in 'savePlot'"
 msgstr "savePlot의 무효인 디비이스입니다"
 
-#: devWindows.c:3417
+#: devWindows.c:3425
 #, fuzzy
 msgid "invalid filename argument in 'savePlot()' function"
 msgstr "savaPlot에서 무효인 파일명 인수입니다"
 
-#: devWindows.c:3422
+#: devWindows.c:3430
 #, fuzzy
 msgid "invalid type argument in 'savePlot()' function"
 msgstr "savaPlot에서 무효인 파일명 인수입니다"
 
-#: devWindows.c:3449
+#: devWindows.c:3457
 msgid "unknown type in savePlot"
 msgstr "savePlot의 의미없는 유형입니다"
 
-#: devWindows.c:3494 devWindows.c:3526 devWindows.c:3554 devWindows.c:3585
-#: devWindows.c:3606
+#: devWindows.c:3502 devWindows.c:3534 devWindows.c:3562 devWindows.c:3593
+#: devWindows.c:3614
 msgid "processing of the plot ran out of memory"
 msgstr "plot 처리는 메모리를 전부 소모 했습니다"
 
-#: devWindows.c:3570
+#: devWindows.c:3578
 msgid "Impossible to open "
 msgstr "여는 것이 불가능합니다"
 
-#: devWindows.c:3635
+#: devWindows.c:3643
 #, fuzzy
 msgid "invalid 'width' or 'height'"
 msgstr "devWindow에서 무효인 폭 또는 높이 입니다"

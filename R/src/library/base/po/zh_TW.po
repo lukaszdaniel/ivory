@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-07 22:23+0200\n"
+"POT-Creation-Date: 2016-04-09 23:10+0200\n"
 "PO-Revision-Date: 2011-10-13 17:30+0800\n"
 "Last-Translator: Wei-Lun Chao <chaoweilun@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -1255,10 +1255,12 @@ msgstr[0] "傳遞了 %d 個引數給 '%s' 但它需要 %d 個"
 msgid "invalid second argument of length 0"
 msgstr "第二引數長度為 0，不正確"
 
-#: src/main/arithmetic.c:1621 src/main/arithmetic.c:1639
+#: src/main/arithmetic.c:1621 src/main/arithmetic.c:1639 src/main/envir.c:1533
+#: src/main/envir.c:2041 src/main/eval.c:625 src/main/eval.c:626
+#: src/main/eval.c:4248 src/main/eval.c:4249 src/main/RNG.c:352
 #, fuzzy, c-format
-msgid "argument '%s' is missing, with no default"
-msgstr "缺少引數 \"%s\"，也沒有預設值"
+msgid "'%s' argument is missing, with no default"
+msgstr "缺少引數, 也沒有預設值"
 
 #: src/main/arithmetic.c:1645
 msgid "invalid argument 'base' of length 0"
@@ -1369,7 +1371,8 @@ msgid "non-conformable arguments"
 msgstr "非調和引數"
 
 #: src/main/array.c:1192
-msgid "argument is not a matrix"
+#, fuzzy, c-format
+msgid "'%s' argument is not a matrix"
 msgstr "引數不是矩陣"
 
 #: src/main/array.c:1227
@@ -1773,10 +1776,10 @@ msgstr "引數必須是個函數"
 msgid "replacement object is not an environment"
 msgstr "替換物件不是環境物件"
 
-#: src/main/builtin.c:343 src/main/builtin.c:364 src/main/builtin.c:414
-#: src/main/envir.c:3226 src/main/envir.c:3254 src/main/envir.c:3283
-#: src/main/envir.c:3304 src/main/envir.c:3326 src/main/envir.c:3360
-#: src/main/envir.c:3380
+#: src/main/builtin.c:343 src/main/builtin.c:364 src/main/builtin.c:400
+#: src/main/builtin.c:414 src/main/envir.c:3226 src/main/envir.c:3254
+#: src/main/envir.c:3283 src/main/envir.c:3304 src/main/envir.c:3326
+#: src/main/envir.c:3360 src/main/envir.c:3380
 #, fuzzy, c-format
 msgid "'%s' argument is not an environment"
 msgstr "引數不是環境物件"
@@ -1784,10 +1787,6 @@ msgstr "引數不是環境物件"
 #: src/main/builtin.c:366
 msgid "the empty environment has no parent"
 msgstr "空環境沒有上一層"
-
-#: src/main/builtin.c:400
-msgid "argument is not an environment"
-msgstr "引數不是環境物件"
 
 #: src/main/builtin.c:402
 msgid "can not set parent of the empty environment"
@@ -1890,7 +1889,7 @@ msgid_plural "%d arguments passed to '%s' which requires %d to %d"
 msgstr[0] "%d 個引數傳遞給 '%s'，但它最多只能用兩個引數"
 
 #: src/main/character.c:112 src/main/character.c:115 src/main/character.c:232
-#: src/main/character.c:235
+#: src/main/character.c:235 src/main/character.c:1521
 #, fuzzy, c-format
 msgid "'%s' function requires a character vector"
 msgstr "'%s' 需要字元向量"
@@ -1973,11 +1972,6 @@ msgstr "無效的多位元組字串於 '%s'"
 #: src/main/character.c:1382 src/main/character.c:1471
 msgid "'old' is longer than 'new'"
 msgstr "'old' 比 'new' 要長"
-
-#: src/main/character.c:1521
-#, fuzzy, c-format
-msgid "'%s' function  requires a character vector"
-msgstr "'%s' 需要字元向量"
 
 #: src/main/coerce.c:76 src/main/errors.c:1191
 #, fuzzy
@@ -3218,9 +3212,9 @@ msgid "the base graphics system is not registered"
 msgstr "登記了太多的繪圖系統"
 
 #: src/main/devices.c:53
-#, fuzzy
-msgid "argument passed to 'getSymbolValue()' function is not a symbol"
-msgstr "引數 'editor' 還沒有被設定"
+#, fuzzy, c-format
+msgid "argument passed to '%s' function is not a symbol"
+msgstr "用於 '%s' 的引數不是環境物件"
 
 #: src/main/devices.c:167 src/main/devices.c:175
 msgid "no active or default device"
@@ -3643,8 +3637,8 @@ msgstr "線條接合發生錯誤"
 
 #: src/main/engine.c:763 src/main/engine.c:867 src/main/engine.c:1100
 #: src/main/engine.c:1207 src/main/engine.c:1330 src/main/engine.c:1394
-#, fuzzy
-msgid "'lwd' argument must be non-negative and finite"
+#, fuzzy, c-format
+msgid "'%s' argument must be non-negative and finite"
 msgstr "'gap' 必須是正整數"
 
 #: src/main/engine.c:800
@@ -3814,13 +3808,6 @@ msgstr "... 串列不包含 %d 個元素"
 #, fuzzy, c-format
 msgid "'..%d' used in an incorrect context, no '...' list to look in"
 msgstr "..%d 所用的上下文發生錯誤, 找不到..."
-
-#: src/main/envir.c:1533 src/main/envir.c:2041 src/main/eval.c:625
-#: src/main/eval.c:626 src/main/eval.c:4248 src/main/eval.c:4249
-#: src/main/RNG.c:352
-#, fuzzy, c-format
-msgid "'%s' argument is missing, with no default"
-msgstr "缺少引數, 也沒有預設值"
 
 #: src/main/envir.c:1537
 #, fuzzy, c-format
@@ -5569,57 +5556,48 @@ msgid "LENGTH or similar applied to %s object"
 msgstr ""
 
 #: src/main/memory.c:3397
-#, c-format
-msgid "'CHAR()' function can only be applied to a 'CHARSXP', not a '%s'"
-msgstr ""
+#, fuzzy, c-format
+msgid "'%s' function can only be applied to a charecter, not a '%s'"
+msgstr "nsl() 無法分辨主機 '%s'"
 
-#: src/main/memory.c:3404
-#, c-format
-msgid ""
-"'STRING_ELT()' function can only be applied to a 'character vector', not a "
-"'%s'"
-msgstr ""
+#: src/main/memory.c:3404 src/main/memory.c:3464
+#, fuzzy, c-format
+msgid "'%s' function can only be applied to a character vector, not a '%s'"
+msgstr "nsl() 無法分辨主機 '%s'"
 
-#: src/main/memory.c:3414
-#, c-format
-msgid "'VECTOR_ELT()' function can only be applied to a 'list', not a '%s'"
-msgstr ""
+#: src/main/memory.c:3414 src/main/memory.c:3481
+#, fuzzy, c-format
+msgid "'%s' function can only be applied to a list, not a '%s'"
+msgstr "nsl() 無法分辨主機 '%s'"
 
 #: src/main/memory.c:3421
-#, c-format
-msgid "'LOGICAL()' function can only be applied to a 'logical', not a '%s'"
-msgstr ""
+#, fuzzy, c-format
+msgid "'%s' function can only be applied to a logical, not a '%s'"
+msgstr "nsl() 無法分辨主機 '%s'"
 
 #: src/main/memory.c:3429
-#, c-format
-msgid "'INTEGER()' function can only be applied to a 'integer', not a '%s'"
-msgstr ""
+#, fuzzy, c-format
+msgid "'%s' function can only be applied to a integer, not a '%s'"
+msgstr "nsl() 無法分辨主機 '%s'"
 
 #: src/main/memory.c:3436
 #, fuzzy, c-format
-msgid "'RAW()' function can only be applied to a 'raw', not a '%s'"
+msgid "'%s' function can only be applied to a raw, not a '%s'"
 msgstr "nsl() 無法分辨主機 '%s'"
 
 #: src/main/memory.c:3443
-#, c-format
-msgid "'REAL()' function can only be applied to a 'numeric', not a '%s'"
-msgstr ""
+#, fuzzy, c-format
+msgid "'%s' function can only be applied to a numeric, not a '%s'"
+msgstr "nsl() 無法分辨主機 '%s'"
 
 #: src/main/memory.c:3450
 #, fuzzy, c-format
-msgid "'COMPLEX()' function can only be applied to a 'complex', not a '%s'"
+msgid "'%s' function can only be applied to a complex, not a '%s'"
 msgstr "nsl() 無法分辨主機 '%s'"
 
 #: src/main/memory.c:3459
 msgid "not safe to return vector pointer"
 msgstr "回傳向量指標不是安全的做法"
-
-#: src/main/memory.c:3464
-#, c-format
-msgid ""
-"'SET_STRING_ELT()' function can only be applied to a 'character vector', not "
-"a '%s'"
-msgstr ""
 
 #: src/main/memory.c:3467
 #, c-format
@@ -5629,11 +5607,6 @@ msgstr ""
 #: src/main/memory.c:3470
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_STRING_ELT()' function"
-msgstr ""
-
-#: src/main/memory.c:3481
-#, c-format
-msgid "'SET_VECTOR_ELT()' function can only be applied to a 'list', not a '%s'"
 msgstr ""
 
 #: src/main/memory.c:3485
@@ -5772,9 +5745,9 @@ msgid "generic function not specified"
 msgstr "一般功能沒有指定"
 
 #: src/main/objects.c:664
-#, fuzzy
-msgid "invalid generic argument passed to 'NextMethod()'"
-msgstr "NextMethod 不能用一般引數"
+#, fuzzy, c-format
+msgid "invalid generic argument passed to '%s' function"
+msgstr "edit() 引數不正確"
 
 #: src/main/objects.c:676
 #, fuzzy
@@ -5830,9 +5803,8 @@ msgid ""
 msgstr "standardGeneric 被呼叫，但方法分派沒有啟用 (忽略不用)"
 
 #: src/main/objects.c:1146
-#, fuzzy
-msgid ""
-"argument passed to 'standardGeneric()' must be a non-empty character string"
+#, fuzzy, c-format
+msgid "argument passed to '%s' function must be a non-empty character string"
 msgstr "standardGeneric 的引數必須是非空字串"
 
 #: src/main/objects.c:1151
@@ -6530,7 +6502,8 @@ msgid "it is not known that wchar_t is Unicode on this platform"
 msgstr "本平臺不支援 nsl()"
 
 #: src/main/qsort.c:56
-msgid "argument is not a numeric vector"
+#, fuzzy, c-format
+msgid "'%s' argument is not a numeric vector"
 msgstr "引數不是數值向量"
 
 #: src/main/radixsort.c:69
@@ -8733,7 +8706,7 @@ msgid "Content type '%s' length %d byte"
 msgid_plural "Content type '%s' length %d bytes"
 msgstr[0] ""
 
-#: src/modules/internet/internet.c:798
+#: src/modules/internet/internet.c:798 src/modules/internet/internet.c:967
 #, c-format
 msgid "Content type '%s' length unknown"
 msgstr ""
@@ -8748,7 +8721,7 @@ msgid "ftp data connection made, file length unknown\n"
 msgstr ""
 
 #: src/modules/internet/internet.c:917 src/modules/internet/internet.c:931
-#: src/modules/internet/internet.c:1020 src/modules/internet/internet.c:1029
+#: src/modules/internet/internet.c:1021 src/modules/internet/internet.c:1030
 #, c-format
 msgid "InternetOpenUrl failed: '%s'"
 msgstr "InternetOpenUrl 失敗: '%s'"
@@ -8961,7 +8934,8 @@ msgstr[0] ""
 
 #: src/modules/internet/nanohttp.c:1455
 msgid ""
-"Proxy authentication failed:\tplease re-enter the credentials or hit Cancel"
+"Proxy authentication failed:\n"
+"\tplease re-enter the credentials or hit Cancel"
 msgstr ""
 
 #: src/modules/internet/nanohttp.c:1469
@@ -9973,6 +9947,33 @@ msgstr "無法載入 X11 模組"
 #: src/unix/X11.c:145 src/unix/X11.c:151 src/unix/X11.c:157 src/unix/X11.c:163
 msgid "X11 is not available"
 msgstr "無法使用 X11"
+
+#, fuzzy
+#~ msgid "'' argument must be non-negative and finite"
+#~ msgstr "'gap' 必須是正整數"
+
+#, fuzzy
+#~ msgid "'%sd' argument must be non-negative and finite"
+#~ msgstr "'gap' 必須是正整數"
+
+#, fuzzy
+#~ msgid "argument '%s' is missing, with no default"
+#~ msgstr "缺少引數 \"%s\"，也沒有預設值"
+
+#~ msgid "argument is not an environment"
+#~ msgstr "引數不是環境物件"
+
+#, fuzzy
+#~ msgid "'%s' function  requires a character vector"
+#~ msgstr "'%s' 需要字元向量"
+
+#, fuzzy
+#~ msgid "argument passed to 'getSymbolValue()' function is not a symbol"
+#~ msgstr "引數 'editor' 還沒有被設定"
+
+#, fuzzy
+#~ msgid "invalid generic argument passed to 'NextMethod()'"
+#~ msgstr "NextMethod 不能用一般引數"
 
 #, fuzzy
 #~ msgid "'strtrim()' function  requires a character vector"

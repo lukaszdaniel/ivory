@@ -23,8 +23,8 @@
 #include <config.h>
 #endif
 
-#include <Localization.h>
 #include <Defn.h>
+#include <Localization.h>
 #include <Internal.h>
 #include <Rmath.h>
 #include <R_ext/RS.h>     /* for Calloc/Free */
@@ -1189,7 +1189,7 @@ SEXP attribute_hidden do_transpose(SEXP call, SEXP op, SEXP args, SEXP rho)
     UNPROTECT(2); /* r, dimnamesnames */
     return r;
  not_matrix:
-    error(_("argument is not a matrix"));
+    error(_("'%s' argument is not a matrix"), "x");
     return call;/* never used; just for -Wall */
 }
 

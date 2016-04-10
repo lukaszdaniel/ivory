@@ -82,8 +82,8 @@
 
 
 #define R_USE_SIGNALS 1
-#include <Localization.h>
 #include <Defn.h>
+#include <Localization.h>
 #include <Internal.h>
 #include <R_ext/GraphicsEngine.h> /* GEDevDesc, GEgetDevice */
 #include <R_ext/Rdynload.h>
@@ -3394,14 +3394,14 @@ int  (IS_LONG_VEC)(SEXP x) { return IS_LONG_VEC(CHK2(x)); }
 
 const char *(R_CHAR)(SEXP x) {
     if(TYPEOF(x) != CHARSXP)
-	error(_("'CHAR()' function can only be applied to a 'CHARSXP', not a '%s'"),
+	error(_("'%s' function can only be applied to a charecter, not a '%s'"), "CHAR()",
 	      type2char(TYPEOF(x)));
     return (const char *)CHAR(x);
 }
 
 SEXP (STRING_ELT)(SEXP x, R_xlen_t i) {
     if(TYPEOF(x) != STRSXP)
-	error(_("'STRING_ELT()' function can only be applied to a 'character vector', not a '%s'"),
+	error(_("'%s' function can only be applied to a character vector, not a '%s'"), "STRING_ELT()",
 	      type2char(TYPEOF(x)));
     return CHK(STRING_ELT(x, i));
 }
@@ -3411,14 +3411,14 @@ SEXP (VECTOR_ELT)(SEXP x, R_xlen_t i) {
     if(TYPEOF(x) != VECSXP &&
        TYPEOF(x) != EXPRSXP &&
        TYPEOF(x) != WEAKREFSXP)
-	error(_("'VECTOR_ELT()' function can only be applied to a 'list', not a '%s'"),
+	error(_("'%s' function can only be applied to a list, not a '%s'"), "VECTOR_ELT()",
 	      type2char(TYPEOF(x)));
     return CHK(VECTOR_ELT(x, i));
 }
 
 int *(LOGICAL)(SEXP x) {
     if(TYPEOF(x) != LGLSXP)
-	error(_("'LOGICAL()' function can only be applied to a 'logical', not a '%s'"),
+	error(_("'%s' function can only be applied to a logical, not a '%s'"), "LOGICAL()",
 	      type2char(TYPEOF(x)));
   return LOGICAL(x);
 }
@@ -3426,28 +3426,28 @@ int *(LOGICAL)(SEXP x) {
 /* Maybe this should exclude logicals, but it is widely used */
 int *(INTEGER)(SEXP x) {
     if(TYPEOF(x) != INTSXP && TYPEOF(x) != LGLSXP)
-	error(_("'INTEGER()' function can only be applied to a 'integer', not a '%s'"),
+	error(_("'%s' function can only be applied to a integer, not a '%s'"), "INTEGER()",
 	      type2char(TYPEOF(x)));
     return INTEGER(x);
 }
 
 Rbyte *(RAW)(SEXP x) {
     if(TYPEOF(x) != RAWSXP)
-	error(_("'RAW()' function can only be applied to a 'raw', not a '%s'"),
+	error(_("'%s' function can only be applied to a raw, not a '%s'"), "RAW()",
 	      type2char(TYPEOF(x)));
     return RAW(x);
 }
 
 double *(REAL)(SEXP x) {
     if(TYPEOF(x) != REALSXP)
-	error(_("'REAL()' function can only be applied to a 'numeric', not a '%s'"),
+	error(_("'%s' function can only be applied to a numeric, not a '%s'"), "REAL()",
 	      type2char(TYPEOF(x)));
     return REAL(x);
 }
 
 Rcomplex *(COMPLEX)(SEXP x) {
     if(TYPEOF(x) != CPLXSXP)
-	error(_("'COMPLEX()' function can only be applied to a 'complex', not a '%s'"),
+	error(_("'%s' function can only be applied to a complex, not a '%s'"), "COMPLEX()",
 	      type2char(TYPEOF(x)));
     return COMPLEX(x);
 }
@@ -3461,7 +3461,7 @@ SEXP * NORET (VECTOR_PTR)(SEXP x)
 
 void (SET_STRING_ELT)(SEXP x, R_xlen_t i, SEXP v) {
     if(TYPEOF(x) != STRSXP)
-	error(_("'SET_STRING_ELT()' function can only be applied to a 'character vector', not a '%s'"),
+	error(_("'%s' function can only be applied to a character vector, not a '%s'"), "SET_STRING_ELT()",
 	      type2char(TYPEOF(x)));
     if(TYPEOF(v) != CHARSXP)
        error(_("value of 'SET_STRING_ELT()' function must be a 'CHARSXP' not a '%s'"),
@@ -3478,7 +3478,7 @@ SEXP (SET_VECTOR_ELT)(SEXP x, R_xlen_t i, SEXP v) {
     if(TYPEOF(x) != VECSXP &&
        TYPEOF(x) != EXPRSXP &&
        TYPEOF(x) != WEAKREFSXP) {
-	error(_("'SET_VECTOR_ELT()' function can only be applied to a 'list', not a '%s'"),
+	error(_("'%s' function can only be applied to a list, not a '%s'"), "SET_VECTOR_ELT()",
 	      type2char(TYPEOF(x)));
     }
     if (i < 0 || i >= XLENGTH(x))

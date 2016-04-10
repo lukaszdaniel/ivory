@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-04 22:32+0100\n"
+"POT-Creation-Date: 2016-04-09 21:33+0200\n"
 "PO-Revision-Date: 2012-03-07 02:34+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -83,7 +83,7 @@ msgstr "축의 한계가 유한하지 않습니다 [GScale (%g,%g, %d,); log = %
 msgid "axis style \"%c\" unimplemented"
 msgstr "축 스타일 \"%c\"는 아직 구현되지 않았습니다"
 
-#: graphics.c:2209 graphics.c:2597
+#: graphics.c:2209 graphics.c:2606
 #, fuzzy
 msgid "no graphics device is active"
 msgstr "현재 유효한 그래픽 장치가 없습니다"
@@ -96,25 +96,25 @@ msgstr "아직 plot.new가 호출되지 않았습니다"
 msgid "invalid graphics state"
 msgstr "그래픽 상태가 올바르지 않습니다"
 
-#: graphics.c:2548
+#: graphics.c:2556
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.c:3056
+#: graphics.c:3065
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "길이가 0 인 arrow는 각도를 정할 수 없으므로, 지나 갑니다"
 
-#: graphics.c:3137
+#: graphics.c:3146
 #, c-format
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "par(\"bty\") = '%c'는 잘못되었습니다：box()를 그릴 수 없습니다"
 
-#: graphics.c:3154 par.c:1121
+#: graphics.c:3163 par.c:1121
 #, fuzzy, c-format
 msgid "invalid argument passed to '%s' function"
 msgstr "par()에 잘못된 매개 변수가 전달되었습니다"
 
-#: graphics.c:3399
+#: graphics.c:3408
 #, fuzzy
 msgid "metric information not available for this device"
 msgstr "이 장치에 대한 메트릭 정보를 사용할 수 없습니다"

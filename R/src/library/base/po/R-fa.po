@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-03 21:09\n"
+"POT-Creation-Date: 2016-04-09 23:04\n"
 "PO-Revision-Date: 2016-01-14 20:01+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Persian\n"
@@ -148,6 +148,11 @@ msgstr ""
 msgid "'%s' argument has length > 1"
 msgstr ""
 
+#. R/format.R: gettextf("'%s' argument has no characters", "input.d.mark")
+#: R/format.R:0
+msgid "'%s' argument has no characters"
+msgstr ""
+
 #. R/dates.R: gettextf("'%s' argument is NA", "by")
 #. R/datetime.R: gettextf("'%s' argument is NA", "by")
 #: R/dates.R:0 R/datetime.R:0
@@ -191,6 +196,11 @@ msgstr ""
 #. R/formals.R: gettextf("'%s' argument is not a function", "fun")
 #: R/formals.R:0
 msgid "'%s' argument is not a function"
+msgstr ""
+
+#. R/namespace.R: gettextf("'%s' argument is not a namespace", "ns")
+#: R/namespace.R:0
+msgid "'%s' argument is not a namespace"
 msgstr ""
 
 #. R/table.R: gettextf("'%s' argument is not an array", "x")
@@ -432,6 +442,20 @@ msgstr ""
 msgid "'%s' argument should be one of %s"
 msgstr ""
 
+#. R/all.equal.R: gettextf("'%s' argument's class is %s, '%s' argument's class is %s", "target", data.class(target),     "current", data.class(current))
+#. R/all.equal.R: gettextf("'%s' argument's class is %s, '%s' argument's class is %s", "target", data.class(target),     "current", data.class(current))
+#. R/all.equal.R: gettextf("'%s' argument's class is %s, '%s' argument's class is %s", "target", data.class(target),     "current", data.class(current))
+#. R/all.equal.R: gettextf("'%s' argument's class is %s, '%s' argument's class is %s", "target", data.class(target),     "current", data.class(current))
+#: R/all.equal.R:0
+msgid "'%s' argument's class is %s, '%s' argument's class is %s"
+msgstr ""
+
+#. R/all.equal.R: gettextf("'%s' argument's class is not list-like", "target")
+#. R/all.equal.R: gettextf("'%s' argument's class is not list-like", "current")
+#: R/all.equal.R:0
+msgid "'%s' argument's class is not list-like"
+msgstr ""
+
 #. R/windows/system.R: gettextf("'%s' command could not be run", cmd0)
 #. R/windows/system.R: gettextf("'%s' command could not be run", cmd0)
 #: R/windows/system.R:0
@@ -598,11 +622,6 @@ msgstr ""
 msgid "'current' argument is a subset of 'target' argument"
 msgstr ""
 
-#. R/all.equal.R: gettext("'current' argument's class is not list-like")
-#: R/all.equal.R:0
-msgid "'current' argument's class is not list-like"
-msgstr ""
-
 #. R/sort.R: stop("'decreasing' argument must be a logical vector of length 1.\nDid you intend to set 'partial'?")
 #: R/sort.R:0
 msgid ""
@@ -695,11 +714,6 @@ msgid ""
 "'incomparables' argument is supported only for merging on a single column"
 msgstr ""
 
-#. R/format.R: stop("'input.d.mark' has no characters")
-#: R/format.R:0
-msgid "'input.d.mark' has no characters"
-msgstr ""
-
 #. R/all.equal.R: gettextf("'is.NA' value mismatch: %d in 'current' argument, %d in 'target' argument",     sum(is.na(current)), sum(out))
 #. R/all.equal.R: gettextf("'is.NA' value mismatch: %d in 'current' argument, %d in 'target' argument",     sum(nasc), sum(nas))
 #. R/all.equal.R: gettextf("'is.NA' value mismatch: %d in 'current' argument, %d in 'target' argument",     sum(nasc), sum(nas))
@@ -744,11 +758,6 @@ msgstr ""
 #. R/diag.R: stop("'nrow' or 'ncol' cannot be specified when 'x' is a matrix")
 #: R/diag.R:0
 msgid "'nrow' or 'ncol' cannot be specified when 'x' is a matrix"
-msgstr ""
-
-#. R/namespace.R: stop("'ns' argument is not a namespace")
-#: R/namespace.R:0
-msgid "'ns' argument is not a namespace"
 msgstr ""
 
 #. R/dataframe.R: stop("'options(\"stringsAsFactors\")' is not set to TRUE or FALSE")
@@ -833,19 +842,6 @@ msgstr ""
 #. R/all.equal.R: gettext("'target' argument is a subset of 'current' argument")
 #: R/all.equal.R:0
 msgid "'target' argument is a subset of 'current' argument"
-msgstr ""
-
-#. R/all.equal.R: gettextf("'target' argument's class is %s, 'current' argument's class is %s", data.class(target),     data.class(current))
-#. R/all.equal.R: gettextf("'target' argument's class is %s, 'current' argument's class is %s", data.class(target),     data.class(current))
-#. R/all.equal.R: gettextf("'target' argument's class is %s, 'current' argument's class is %s", data.class(target),     data.class(current))
-#. R/all.equal.R: gettextf("'target' argument's class is %s, 'current' argument's class is %s", data.class(target),     data.class(current))
-#: R/all.equal.R:0
-msgid "'target' argument's class is %s, 'current' argument's class is %s"
-msgstr ""
-
-#. R/all.equal.R: gettext("'target' argument's class is not list-like")
-#: R/all.equal.R:0
-msgid "'target' argument's class is not list-like"
 msgstr ""
 
 #. R/datetime.R: stop("'tim' argument is not character or numeric")
@@ -2862,10 +2858,10 @@ msgstr ""
 msgid "shared object %s was not loaded"
 msgstr ""
 
-#. R/solve.R: stop("singular matrix 'a' in 'solve()' function")
-#. R/solve.R: stop("singular matrix 'a' in 'solve()' function")
+#. R/solve.R: gettextf("singular matrix '%s' in '%s' function", "a", "solve()")
+#. R/solve.R: gettextf("singular matrix '%s' in '%s' function", "a", "solve()")
 #: R/solve.R:0
-msgid "singular matrix 'a' in 'solve()' function"
+msgid "singular matrix '%s' in '%s' function"
 msgstr ""
 
 #. R/dataframe.R: gettextf("some row.names duplicated: %s --> row.names NOT used", paste(which(duplicated(new)),     collapse = ", "))
@@ -2888,9 +2884,9 @@ msgstr ""
 msgid "this is not a valid restart specification"
 msgstr ""
 
-#. R/solve.R: stop("this is the 'qr' method for the generic function 'solve()'")
+#. R/solve.R: stop("this is the 'qr()' method for the generic function 'solve()'")
 #: R/solve.R:0
-msgid "this is the 'qr' method for the generic function 'solve()'"
+msgid "this is the 'qr()' method for the generic function 'solve()'"
 msgstr ""
 
 #. R/conditions.R: stop("this session is not interactive")

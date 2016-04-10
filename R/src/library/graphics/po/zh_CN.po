@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-04 22:32+0100\n"
+"POT-Creation-Date: 2016-04-09 21:33+0200\n"
 "PO-Revision-Date: 2015-01-17 15:10+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -82,7 +82,7 @@ msgstr "座标范围不能无穷大[GScale(%g,%g,%d, .); log=%d]"
 msgid "axis style \"%c\" unimplemented"
 msgstr "座标形式\"%c\"目前没有实现"
 
-#: graphics.c:2209 graphics.c:2597
+#: graphics.c:2209 graphics.c:2606
 #, fuzzy
 msgid "no graphics device is active"
 msgstr "没有已积活的图形设备"
@@ -95,25 +95,25 @@ msgstr "还没有调用plot.new "
 msgid "invalid graphics state"
 msgstr "图形狀態不对"
 
-#: graphics.c:2548
+#: graphics.c:2556
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.c:3056
+#: graphics.c:3065
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "零长度箭头的角度不定，因此略过不用"
 
-#: graphics.c:3137
+#: graphics.c:3146
 #, c-format
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "par(\"bty\")=‘%c'不对; 因此没有画box()"
 
-#: graphics.c:3154 par.c:1121
+#: graphics.c:3163 par.c:1121
 #, fuzzy, c-format
 msgid "invalid argument passed to '%s' function"
 msgstr "传给par()的参数错误"
 
-#: graphics.c:3399
+#: graphics.c:3408
 #, fuzzy
 msgid "metric information not available for this device"
 msgstr "公制信息不适用于这个设备"

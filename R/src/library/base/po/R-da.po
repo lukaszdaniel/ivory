@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-03 21:09\n"
+"POT-Creation-Date: 2016-04-09 23:04\n"
 "PO-Revision-Date: 2016-01-09 18:48+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -169,6 +169,12 @@ msgstr "'to' skal være af længde 1"
 msgid "'%s' argument has length > 1"
 msgstr "'to' skal være af længde 1"
 
+#. R/format.R: gettextf("'%s' argument has no characters", "input.d.mark")
+#: R/format.R:0
+#, fuzzy
+msgid "'%s' argument has no characters"
+msgstr "andet argument skal være en liste"
+
 #. R/dates.R: gettextf("'%s' argument is NA", "by")
 #. R/datetime.R: gettextf("'%s' argument is NA", "by")
 #: R/dates.R:0 R/datetime.R:0
@@ -220,6 +226,12 @@ msgstr "andet argument skal være en liste"
 #, fuzzy
 msgid "'%s' argument is not a function"
 msgstr "andet argument skal være en liste"
+
+#. R/namespace.R: gettextf("'%s' argument is not a namespace", "ns")
+#: R/namespace.R:0
+#, fuzzy
+msgid "'%s' argument is not a namespace"
+msgstr "'from' skal angives"
 
 #. R/table.R: gettextf("'%s' argument is not an array", "x")
 #: R/table.R:0
@@ -494,6 +506,22 @@ msgstr "'to' skal være af længde 1"
 msgid "'%s' argument should be one of %s"
 msgstr "'to' skal være af længde 1"
 
+#. R/all.equal.R: gettextf("'%s' argument's class is %s, '%s' argument's class is %s", "target", data.class(target),     "current", data.class(current))
+#. R/all.equal.R: gettextf("'%s' argument's class is %s, '%s' argument's class is %s", "target", data.class(target),     "current", data.class(current))
+#. R/all.equal.R: gettextf("'%s' argument's class is %s, '%s' argument's class is %s", "target", data.class(target),     "current", data.class(current))
+#. R/all.equal.R: gettextf("'%s' argument's class is %s, '%s' argument's class is %s", "target", data.class(target),     "current", data.class(current))
+#: R/all.equal.R:0
+#, fuzzy
+msgid "'%s' argument's class is %s, '%s' argument's class is %s"
+msgstr "ikke defineret for Date-objekter"
+
+#. R/all.equal.R: gettextf("'%s' argument's class is not list-like", "target")
+#. R/all.equal.R: gettextf("'%s' argument's class is not list-like", "current")
+#: R/all.equal.R:0
+#, fuzzy
+msgid "'%s' argument's class is not list-like"
+msgstr "mål er %s, aktuel er %s"
+
 #. R/windows/system.R: gettextf("'%s' command could not be run", cmd0)
 #. R/windows/system.R: gettextf("'%s' command could not be run", cmd0)
 #: R/windows/system.R:0
@@ -683,11 +711,6 @@ msgstr "andet argument skal være en liste"
 msgid "'current' argument is a subset of 'target' argument"
 msgstr "mål er %s, aktuel er %s"
 
-#. R/all.equal.R: gettext("'current' argument's class is not list-like")
-#: R/all.equal.R:0
-msgid "'current' argument's class is not list-like"
-msgstr ""
-
 #. R/sort.R: stop("'decreasing' argument must be a logical vector of length 1.\nDid you intend to set 'partial'?")
 #: R/sort.R:0
 msgid ""
@@ -790,11 +813,6 @@ msgid ""
 msgstr ""
 "'rekursive' vil blive ignoreret da 'to' ikke er en enkelt eksisterende mappe"
 
-#. R/format.R: stop("'input.d.mark' has no characters")
-#: R/format.R:0
-msgid "'input.d.mark' has no characters"
-msgstr ""
-
 #. R/all.equal.R: gettextf("'is.NA' value mismatch: %d in 'current' argument, %d in 'target' argument",     sum(is.na(current)), sum(out))
 #. R/all.equal.R: gettextf("'is.NA' value mismatch: %d in 'current' argument, %d in 'target' argument",     sum(nasc), sum(nas))
 #. R/all.equal.R: gettextf("'is.NA' value mismatch: %d in 'current' argument, %d in 'target' argument",     sum(nasc), sum(nas))
@@ -843,12 +861,6 @@ msgstr "'mode' skal være »dobbelt« (»reel«), »heltal« eller »tegn«"
 #: R/diag.R:0
 msgid "'nrow' or 'ncol' cannot be specified when 'x' is a matrix"
 msgstr "'nrow' eller 'ncol' kan ikke angives når 'x' er en matrix"
-
-#. R/namespace.R: stop("'ns' argument is not a namespace")
-#: R/namespace.R:0
-#, fuzzy
-msgid "'ns' argument is not a namespace"
-msgstr "'from' skal angives"
 
 #. R/dataframe.R: stop("'options(\"stringsAsFactors\")' is not set to TRUE or FALSE")
 #: R/dataframe.R:0
@@ -941,20 +953,6 @@ msgstr ""
 #: R/all.equal.R:0
 #, fuzzy
 msgid "'target' argument is a subset of 'current' argument"
-msgstr "mål er %s, aktuel er %s"
-
-#. R/all.equal.R: gettextf("'target' argument's class is %s, 'current' argument's class is %s", data.class(target),     data.class(current))
-#. R/all.equal.R: gettextf("'target' argument's class is %s, 'current' argument's class is %s", data.class(target),     data.class(current))
-#. R/all.equal.R: gettextf("'target' argument's class is %s, 'current' argument's class is %s", data.class(target),     data.class(current))
-#. R/all.equal.R: gettextf("'target' argument's class is %s, 'current' argument's class is %s", data.class(target),     data.class(current))
-#: R/all.equal.R:0
-msgid "'target' argument's class is %s, 'current' argument's class is %s"
-msgstr ""
-
-#. R/all.equal.R: gettext("'target' argument's class is not list-like")
-#: R/all.equal.R:0
-#, fuzzy
-msgid "'target' argument's class is not list-like"
 msgstr "mål er %s, aktuel er %s"
 
 #. R/datetime.R: stop("'tim' argument is not character or numeric")
@@ -3101,11 +3099,11 @@ msgstr "delt objekt %s er ikke fundet"
 msgid "shared object %s was not loaded"
 msgstr "delt objekt %s blev ikke indlæst"
 
-#. R/solve.R: stop("singular matrix 'a' in 'solve()' function")
-#. R/solve.R: stop("singular matrix 'a' in 'solve()' function")
+#. R/solve.R: gettextf("singular matrix '%s' in '%s' function", "a", "solve()")
+#. R/solve.R: gettextf("singular matrix '%s' in '%s' function", "a", "solve()")
 #: R/solve.R:0
 #, fuzzy
-msgid "singular matrix 'a' in 'solve()' function"
+msgid "singular matrix '%s' in '%s' function"
 msgstr "entalsmatrix i 'chol2inv'"
 
 #. R/dataframe.R: gettextf("some row.names duplicated: %s --> row.names NOT used", paste(which(duplicated(new)),     collapse = ", "))
@@ -3131,9 +3129,9 @@ msgstr "ikkekvadratisk matrix i 'eigen'"
 msgid "this is not a valid restart specification"
 msgstr "ikke en gyldig genstartsspecifikation"
 
-#. R/solve.R: stop("this is the 'qr' method for the generic function 'solve()'")
+#. R/solve.R: stop("this is the 'qr()' method for the generic function 'solve()'")
 #: R/solve.R:0
-msgid "this is the 'qr' method for the generic function 'solve()'"
+msgid "this is the 'qr()' method for the generic function 'solve()'"
 msgstr ""
 
 #. R/conditions.R: stop("this session is not interactive")

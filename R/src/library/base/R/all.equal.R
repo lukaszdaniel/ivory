@@ -38,8 +38,8 @@ all.equal.default <- function(target, current, ...)
 		   ## assumes that slots are implemented as attributes :
 		   S4 = attr.all.equal(target, current, ...),
                    if(data.class(target) != data.class(current)) {
-                       gettextf("'target' argument's class is %s, 'current' argument's class is %s",
-                                data.class(target), data.class(current))
+                       gettextf("'%s' argument's class is %s, '%s' argument's class is %s",
+                                "target", data.class(target), "current", data.class(current))
                    } else NULL)
     if(is.null(msg)) TRUE else msg
 }
@@ -58,7 +58,7 @@ all.equal.numeric <-
 	attr.all.equal(target, current, tolerance = tolerance, scale = scale,
                        ...)
     if(data.class(target) != data.class(current)) {
-	msg <- c(msg, gettextf("'target' argument's class is %s, 'current' argument's class is %s", data.class(target), data.class(current)))
+	msg <- c(msg, gettextf("'%s' argument's class is %s, '%s' argument's class is %s", "target", data.class(target), "current", data.class(current)))
 	return(msg)
     }
 
@@ -135,7 +135,7 @@ all.equal.character <-
         stop(gettextf("'%s' argument must be logical", "check.attributes"), domain = "R-base")
     msg <-  if(check.attributes) attr.all.equal(target, current, ...)
     if(data.class(target) != data.class(current)) {
-	msg <- c(msg, gettextf("'target' argument's class is %s, 'current' argument's class is %s", data.class(target), data.class(current)))
+	msg <- c(msg, gettextf("'%s' argument's class is %s, '%s' argument's class is %s", "target", data.class(target), "current", data.class(current)))
 	return(msg)
     }
     lt <- length(target)
@@ -302,9 +302,9 @@ all.equal.list <- function(target, current, ...,
     current <- unclass(current)# ??
     ## Comparing the data.class() is not ok, as a list matrix is 'matrix' not 'list'
     if(!is.list(target) && !is.vector(target))
-	return(c(msg, gettext("'target' argument's class is not list-like")))
+	return(c(msg, gettextf("'%s' argument's class is not list-like", "target")))
     if(!is.list(current) && !is.vector(current))
-	return(c(msg, gettext("'current' argument's class is not list-like")))
+	return(c(msg, gettextf("'%s' argument's class is not list-like", "current")))
     if((n <- length(target)) != length(current)) {
 	if(!is.null(msg)) msg <- msg[- grep("\\bLengths\\b", msg)]
 	n <- min(n, length(current))
@@ -333,7 +333,7 @@ all.equal.raw <-
         stop(gettextf("'%s' argument must be logical", "check.attributes"), domain = "R-base")
     msg <-  if(check.attributes) attr.all.equal(target, current, ...)
     if(data.class(target) != data.class(current)) {
-	msg <- c(msg, gettextf("'target' argument's class is %s, 'current' argument's class is %s", data.class(target), data.class(current)))
+	msg <- c(msg, gettextf("'%s' argument's class is %s, '%s' argument's class is %s", "target", data.class(target), "current", data.class(current)))
 	return(msg)
     }
     lt <- length(target)

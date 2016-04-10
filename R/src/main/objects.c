@@ -27,8 +27,8 @@
 #endif
 
 #define R_USE_SIGNALS 1
-#include <Localization.h>
 #include <Defn.h>
+#include <Localization.h>
 #include <Internal.h>
 #include <R_ext/RS.h> /* for Calloc, Realloc and for S4 object bit */
 
@@ -661,7 +661,7 @@ SEXP attribute_hidden do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
     PROTECT(generic);
 
     if (!isString(generic) || LENGTH(generic) != 1)
-	error(_("invalid generic argument passed to 'NextMethod()'"));
+	error(_("invalid generic argument passed to '%s' function"), "NextMethod()");
 
     if (CHAR(STRING_ELT(generic, 0))[0] == '\0')
 	error(_("generic function not specified"));
@@ -1143,7 +1143,7 @@ SEXP attribute_hidden do_standardGeneric(SEXP call, SEXP op, SEXP args, SEXP env
     checkArity(op, args); /* set to -1 */
     arg = CAR(args);
     if(!isValidStringF(arg))
-	errorcall(call, _("argument passed to 'standardGeneric()' must be a non-empty character string"));
+	errorcall(call, _("argument passed to '%s' function must be a non-empty character string"), "standardGeneric()");
 
     PROTECT(fdef = get_this_generic(args));
 

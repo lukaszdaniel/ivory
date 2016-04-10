@@ -32,8 +32,8 @@
 /* for definition of "struct exception" in math.h */
 # define __LIBM_PRIVATE
 #endif
-#include <Localization.h>
 #include <Defn.h>		/*-> Arith.h -> math.h */
+#include <Localization.h>
 #ifdef __OpenBSD__
 # undef __LIBM_PRIVATE
 #endif
@@ -1618,7 +1618,7 @@ SEXP attribute_hidden do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
     if (n == 1) {
 	if (CAR(args) == R_MissingArg ||
 	    (TAG(args) != R_NilValue && TAG(args) != R_x_Symbol))
-	    error(_("argument '%s' is missing, with no default"), "x");
+	    error(_("'%s' argument is missing, with no default"), "x");
 
 	if (! DispatchGroup("Math", call, op, args, env, &res)) {
 	    if (isComplex(CAR(args)))
@@ -1636,7 +1636,7 @@ SEXP attribute_hidden do_log_builtin(SEXP call, SEXP op, SEXP args, SEXP env)
 	PROTECT(args = matchArgs(do_log_formals, args, call));
 
 	if(CAR(args) == R_MissingArg)
-	    error(_("argument '%s' is missing, with no default"), "x");
+	    error(_("'%s' argument is missing, with no default"), "x");
 	if (CADR(args) == R_MissingArg)
 	    SETCADR(args, ScalarReal(DFLT_LOG_BASE));
 

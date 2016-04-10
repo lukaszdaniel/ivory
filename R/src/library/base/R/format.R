@@ -353,7 +353,7 @@ prettyNum <-
 	return(x)
     }
     if(nchar(input.d.mark) == 0)
-        stop("'input.d.mark' has no characters")
+        stop(gettextf("'%s' argument has no characters", "input.d.mark"))
     x.sp <- strsplit(x, input.d.mark, fixed=TRUE)
     ## can have "1.005.987" here, if all *.mark == "."
     if(any((lx.sp <- lengths(x.sp)) > 2)) { # partly more than two parts

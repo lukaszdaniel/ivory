@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-03 21:09\n"
+"POT-Creation-Date: 2016-04-09 23:04\n"
 "PO-Revision-Date: 2015-01-17 13:33+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -174,6 +174,12 @@ msgstr "'arg'的长度必需为一"
 msgid "'%s' argument has length > 1"
 msgstr "'arg'的长度必需为一"
 
+#. R/format.R: gettextf("'%s' argument has no characters", "input.d.mark")
+#: R/format.R:0
+#, fuzzy
+msgid "'%s' argument has no characters"
+msgstr "不是数据框"
+
 #. R/dates.R: gettextf("'%s' argument is NA", "by")
 #. R/datetime.R: gettextf("'%s' argument is NA", "by")
 #: R/dates.R:0 R/datetime.R:0
@@ -225,6 +231,12 @@ msgstr "不是数据框"
 #, fuzzy
 msgid "'%s' argument is not a function"
 msgstr "不是数据框"
+
+#. R/namespace.R: gettextf("'%s' argument is not a namespace", "ns")
+#: R/namespace.R:0
+#, fuzzy
+msgid "'%s' argument is not a namespace"
+msgstr "不是名字空间"
 
 #. R/table.R: gettextf("'%s' argument is not an array", "x")
 #: R/table.R:0
@@ -499,6 +511,22 @@ msgstr "'arg'的长度必需为一"
 msgid "'%s' argument should be one of %s"
 msgstr "'arg'的长度必需为一"
 
+#. R/all.equal.R: gettextf("'%s' argument's class is %s, '%s' argument's class is %s", "target", data.class(target),     "current", data.class(current))
+#. R/all.equal.R: gettextf("'%s' argument's class is %s, '%s' argument's class is %s", "target", data.class(target),     "current", data.class(current))
+#. R/all.equal.R: gettextf("'%s' argument's class is %s, '%s' argument's class is %s", "target", data.class(target),     "current", data.class(current))
+#. R/all.equal.R: gettextf("'%s' argument's class is %s, '%s' argument's class is %s", "target", data.class(target),     "current", data.class(current))
+#: R/all.equal.R:0
+#, fuzzy
+msgid "'%s' argument's class is %s, '%s' argument's class is %s"
+msgstr "对Date对象不适用"
+
+#. R/all.equal.R: gettextf("'%s' argument's class is not list-like", "target")
+#. R/all.equal.R: gettextf("'%s' argument's class is not list-like", "current")
+#: R/all.equal.R:0
+#, fuzzy
+msgid "'%s' argument's class is not list-like"
+msgstr "目标应该是%s ，现在却是%s"
+
 #. R/windows/system.R: gettextf("'%s' command could not be run", cmd0)
 #. R/windows/system.R: gettextf("'%s' command could not be run", cmd0)
 #: R/windows/system.R:0
@@ -692,11 +720,6 @@ msgstr "'connection'必需是个链结"
 msgid "'current' argument is a subset of 'target' argument"
 msgstr "目标应该是%s ，现在却是%s"
 
-#. R/all.equal.R: gettext("'current' argument's class is not list-like")
-#: R/all.equal.R:0
-msgid "'current' argument's class is not list-like"
-msgstr ""
-
 #. R/sort.R: stop("'decreasing' argument must be a logical vector of length 1.\nDid you intend to set 'partial'?")
 #: R/sort.R:0
 #, fuzzy
@@ -803,11 +826,6 @@ msgid ""
 "'incomparables' argument is supported only for merging on a single column"
 msgstr "除非'file'是文件名，'compress'将被略过不用"
 
-#. R/format.R: stop("'input.d.mark' has no characters")
-#: R/format.R:0
-msgid "'input.d.mark' has no characters"
-msgstr ""
-
 #. R/all.equal.R: gettextf("'is.NA' value mismatch: %d in 'current' argument, %d in 'target' argument",     sum(is.na(current)), sum(out))
 #. R/all.equal.R: gettextf("'is.NA' value mismatch: %d in 'current' argument, %d in 'target' argument",     sum(nasc), sum(nas))
 #. R/all.equal.R: gettextf("'is.NA' value mismatch: %d in 'current' argument, %d in 'target' argument",     sum(nasc), sum(nas))
@@ -860,12 +878,6 @@ msgstr ""
 #: R/diag.R:0
 msgid "'nrow' or 'ncol' cannot be specified when 'x' is a matrix"
 msgstr "如果'x'是矩阵的话不能直接设定'nrow'或'ncol'"
-
-#. R/namespace.R: stop("'ns' argument is not a namespace")
-#: R/namespace.R:0
-#, fuzzy
-msgid "'ns' argument is not a namespace"
-msgstr "不是名字空间"
 
 #. R/dataframe.R: stop("'options(\"stringsAsFactors\")' is not set to TRUE or FALSE")
 #: R/dataframe.R:0
@@ -960,20 +972,6 @@ msgstr ""
 #: R/all.equal.R:0
 #, fuzzy
 msgid "'target' argument is a subset of 'current' argument"
-msgstr "目标应该是%s ，现在却是%s"
-
-#. R/all.equal.R: gettextf("'target' argument's class is %s, 'current' argument's class is %s", data.class(target),     data.class(current))
-#. R/all.equal.R: gettextf("'target' argument's class is %s, 'current' argument's class is %s", data.class(target),     data.class(current))
-#. R/all.equal.R: gettextf("'target' argument's class is %s, 'current' argument's class is %s", data.class(target),     data.class(current))
-#. R/all.equal.R: gettextf("'target' argument's class is %s, 'current' argument's class is %s", data.class(target),     data.class(current))
-#: R/all.equal.R:0
-msgid "'target' argument's class is %s, 'current' argument's class is %s"
-msgstr ""
-
-#. R/all.equal.R: gettext("'target' argument's class is not list-like")
-#: R/all.equal.R:0
-#, fuzzy
-msgid "'target' argument's class is not list-like"
 msgstr "目标应该是%s ，现在却是%s"
 
 #. R/datetime.R: stop("'tim' argument is not character or numeric")
@@ -3154,11 +3152,11 @@ msgstr "共享目标对象%s不存在"
 msgid "shared object %s was not loaded"
 msgstr "共享对象%s没有载入"
 
-#. R/solve.R: stop("singular matrix 'a' in 'solve()' function")
-#. R/solve.R: stop("singular matrix 'a' in 'solve()' function")
+#. R/solve.R: gettextf("singular matrix '%s' in '%s' function", "a", "solve()")
+#. R/solve.R: gettextf("singular matrix '%s' in '%s' function", "a", "solve()")
 #: R/solve.R:0
 #, fuzzy
-msgid "singular matrix 'a' in 'solve()' function"
+msgid "singular matrix '%s' in '%s' function"
 msgstr "'solve'里的'a'是奇异矩阵"
 
 #. R/dataframe.R: gettextf("some row.names duplicated: %s --> row.names NOT used", paste(which(duplicated(new)),     collapse = ", "))
@@ -3184,10 +3182,10 @@ msgstr "'match.arg'里有重复的匹配"
 msgid "this is not a valid restart specification"
 msgstr "重新开始的规格不对"
 
-#. R/solve.R: stop("this is the 'qr' method for the generic function 'solve()'")
+#. R/solve.R: stop("this is the 'qr()' method for the generic function 'solve()'")
 #: R/solve.R:0
 #, fuzzy
-msgid "this is the 'qr' method for the generic function 'solve()'"
+msgid "this is the 'qr()' method for the generic function 'solve()'"
 msgstr "泛型函数solve()有\"qr\" 方法"
 
 #. R/conditions.R: stop("this session is not interactive")

@@ -31,8 +31,8 @@
 #include <config.h>
 #endif
 
-#include <Localization.h>
 #include <Defn.h>
+#include <Localization.h>
 #include <Internal.h>
 #include <Graphics.h>
 #include <GraphicsBase.h>
@@ -50,7 +50,7 @@ GPar* dpptr(pGEDevDesc dd) {
 static SEXP R_INLINE getSymbolValue(SEXP symbol)
 {
     if (TYPEOF(symbol) != SYMSXP)
-	error(_("argument passed to 'getSymbolValue()' function is not a symbol"));
+	error(_("argument passed to '%s' function is not a symbol"), "getSymbolValue()");
     return findVar(symbol, R_BaseEnv);
 }
 

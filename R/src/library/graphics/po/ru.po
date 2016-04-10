@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-04 22:32+0100\n"
+"POT-Creation-Date: 2016-04-09 21:33+0200\n"
 "PO-Revision-Date: 2015-01-17 15:10+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -87,7 +87,7 @@ msgstr "неопределенные границы осей [GScale(%g,%g,%d, .
 msgid "axis style \"%c\" unimplemented"
 msgstr "стиль оси \"%c\" не разработан"
 
-#: graphics.c:2209 graphics.c:2597
+#: graphics.c:2209 graphics.c:2606
 #, fuzzy
 msgid "no graphics device is active"
 msgstr "Нет активного графического устройства"
@@ -100,25 +100,25 @@ msgstr "'plot.new' пока не вызван"
 msgid "invalid graphics state"
 msgstr "неправильное графическое состояние"
 
-#: graphics.c:2548
+#: graphics.c:2556
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: graphics.c:3056
+#: graphics.c:3065
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "стрелка нулевой длины имеет неопределенный угол и поэтому пропущена"
 
-#: graphics.c:3137
+#: graphics.c:3146
 #, c-format
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "неправильный par(\"bty\") = '%c'; не нарисован box()"
 
-#: graphics.c:3154 par.c:1121
+#: graphics.c:3163 par.c:1121
 #, fuzzy, c-format
 msgid "invalid argument passed to '%s' function"
 msgstr "par() передан неправильный аргумент"
 
-#: graphics.c:3399
+#: graphics.c:3408
 #, fuzzy
 msgid "metric information not available for this device"
 msgstr "Метрическая информация для этого устройства недоступна"
