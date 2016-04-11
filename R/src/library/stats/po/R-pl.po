@@ -6472,9 +6472,9 @@ msgstr[2] "'Y' ma %d przypadków (wierszy)"
 #: R/filter.R:0
 msgid "'init' must have %d column"
 msgid_plural "'init' must have 1 or %d columns"
-msgstr[0] "'x' musi mieć %d kolumnę"
-msgstr[1] "'x' musi mieć 1 lub %d kolumny"
-msgstr[2] "'x' musi mieć 1 lub %d kolumn"
+msgstr[0] "'init' musi mieć %d kolumnę"
+msgstr[1] "'init' musi mieć 1 lub %d kolumny"
+msgstr[2] "'init' musi mieć 1 lub %d kolumn"
 
 #. R/models.R: ngettext(nr, "'newdata' had %d row", "'newdata' had %d rows", domain = "R-stats")
 #: R/models.R:0
