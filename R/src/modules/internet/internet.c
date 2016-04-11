@@ -964,7 +964,7 @@ static void *in_R_HTTPOpen2(const char *url, const char *headers,
 	    REprintf(n_("Content type '%s' length %d byte (%d KB)", "Content type '%s' length %d bytes (%d KB)", (int)len), buf, (int) len, (int) (len/1024));
 	else if(wictxt->length >= 0) /* signed; len is not */
 	    REprintf(n_("Content type '%s' length %d byte", "Content type '%s' length %d bytes", (int)len), buf, (int) len);
-	else REprintf(_("Content type '%s' length unknown", buf));
+	else REprintf(_("Content type '%s' length unknown"), buf);
 	    REprintf("\n");
 	R_FlushConsole();
     }
