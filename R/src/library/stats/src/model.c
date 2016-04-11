@@ -1113,7 +1113,7 @@ static void ExtractVars(SEXP formula, int checkonly)
 	len = length(formula);
 	if (CAR(formula) == tildeSymbol) {
 	    if (response)
-		error(_("invalid model formula"));
+		error(_("invalid model formula in '%s' function"), "ExtractVars()");
 	    if (isNull(CDDR(formula))) {
 		response = 0;
 		ExtractVars(CADR(formula), 0);

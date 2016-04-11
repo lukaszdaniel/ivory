@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-09 21:33+0200\n"
+"POT-Creation-Date: 2016-04-11 12:35+0200\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -136,8 +136,9 @@ msgid "Function '%s' is not in the derivatives table"
 msgstr "Função '%s' não está na tabela de derivadas"
 
 #: deriv.c:634
-msgid "'expr' must be an expression or call"
-msgstr ""
+#, fuzzy, c-format
+msgid "'%s' argument must be an expression or call"
+msgstr "Argumento m deve ser numérico"
 
 #: deriv.c:637
 msgid "variable must be a character string"
@@ -189,14 +190,14 @@ msgstr "Argumento não-numérico para função matemática"
 msgid "Value %g out of range (0, 1)"
 msgstr "Valor %g fora do intervalo (0,1)"
 
-#: family.c:67 family.c:81 family.c:99
-#, c-format
-msgid "Argument %s must be a nonempty numeric vector"
+#: family.c:67 family.c:81 family.c:99 port.c:383 port.c:554
+#, fuzzy, c-format
+msgid "'%s' argument must be a nonempty numeric vector"
 msgstr "Argumento %s deve ser um vetor numérico não-vazio"
 
 #: family.c:132 family.c:135
-#, c-format
-msgid "argument %s must be a numeric vector of length 1 or length %d"
+#, fuzzy, c-format
+msgid "'%s' argument must be a numeric vector of length 1 or length %d"
 msgstr "argumento %s deve ser um vetor numérico com comprimento 1 ou %d"
 
 #: fexact.c:206 fexact.c:393
@@ -319,17 +320,17 @@ msgstr "são permitidas apenas 2500 linhas para sm.method=\"spline\""
 msgid "insufficient observations"
 msgstr "valor faltante nas últimas %d observações"
 
-#: lm.c:57
-#, fuzzy
-msgid "'x' is not a matrix"
+#: lm.c:51
+#, fuzzy, c-format
+msgid "'%s' argument is not a matrix"
 msgstr "'fn' não é uma função"
 
-#: lm.c:62
+#: lm.c:56
 #, c-format
 msgid "dimensions of 'x' (%d,%d) and 'y' (%d) do not match"
 msgstr ""
 
-#: lm.c:77 lm.c:81
+#: lm.c:71 lm.c:75
 #, c-format
 msgid "NA/NaN/Inf in '%s'"
 msgstr ""
@@ -667,18 +668,14 @@ msgstr "fórmula esperada"
 msgid "invalid term in model formula"
 msgstr "termo inválido na fórmula de modelo"
 
-#: model.c:1116
-msgid "invalid model formula"
-msgstr "fórmula de modelo inválida"
+#: model.c:1116 model.c:1178 model.c:1586
+#, fuzzy, c-format
+msgid "invalid model formula in '%s' function"
+msgstr "fórmula de modelo inválida em EncodeVars"
 
 #: model.c:1142 model.c:1402
 msgid "invalid power in formula"
 msgstr "potenciação inválida na fórmula"
-
-#: model.c:1178 model.c:1586
-#, fuzzy, c-format
-msgid "invalid model formula in '%s' function"
-msgstr "fórmula de modelo inválida em EncodeVars"
 
 #: model.c:1525
 #, c-format
@@ -1043,11 +1040,6 @@ msgstr ""
 msgid "'%s' argument must be an environment"
 msgstr "'rho' deve ser um ambiente"
 
-#: port.c:383 port.c:554
-#, fuzzy, c-format
-msgid "'%s' argument must be a nonempty numeric vector"
-msgstr "Argumento %s deve ser um vetor numérico não-vazio"
-
 #: port.c:385
 msgid "When Hessian defined must also have gradient defined"
 msgstr ""
@@ -1094,8 +1086,8 @@ msgid "invalid type for 'eval_check_store()' function"
 msgstr "tipo inválido para eval_check_store"
 
 #: port.c:575
-#, fuzzy
-msgid "'lowerb' and 'upperb' arguments must be numeric vectors"
+#, fuzzy, c-format
+msgid "'%s' and '%s' arguments must be numeric vectors"
 msgstr "'lowerb' e 'upperb' devem ser vetores numéricos"
 
 #: port.c:598
@@ -1174,6 +1166,20 @@ msgstr "valor faltante nas últimas %d observações"
 #, c-format
 msgid "ifault=%d. This should not happen"
 msgstr ""
+
+#, fuzzy
+#~ msgid "'%s' argument  must be a numeric vector of length 1 or length %d"
+#~ msgstr "argumento %s deve ser um vetor numérico com comprimento 1 ou %d"
+
+#~ msgid "Argument %s must be a nonempty numeric vector"
+#~ msgstr "Argumento %s deve ser um vetor numérico não-vazio"
+
+#, fuzzy
+#~ msgid "'x' is not a matrix"
+#~ msgstr "'fn' não é uma função"
+
+#~ msgid "invalid model formula"
+#~ msgstr "fórmula de modelo inválida"
 
 #~ msgid "'x' is NULL"
 #~ msgstr "'x' é NULL"

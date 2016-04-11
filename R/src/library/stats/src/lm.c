@@ -22,13 +22,7 @@
 #include <R_ext/Applic.h>
 
 #include "statsR.h"
-
-#ifdef ENABLE_NLS
-#include <libintl.h>
-#define _(String) dgettext ("stats", String)
-#else
-#define _(String) (String)
-#endif
+#include "localization.h"
 
 /* A wrapper to replace
 
@@ -54,7 +48,7 @@ SEXP Cdqrls(SEXP x, SEXP y, SEXP tol, SEXP chk)
     Rboolean check = asLogical(chk);
 
     ans = getAttrib(x, R_DimSymbol);
-    if(check && length(ans) != 2) error(_("'x' is not a matrix"));
+    if(check && length(ans) != 2) error(_("'%s' argument is not a matrix"));
     int *dims = INTEGER(ans);
     n = dims[0]; p = dims[1];
     if(n) ny = (int)(XLENGTH(y)/n); /* y :  n x ny, or an n - vector */

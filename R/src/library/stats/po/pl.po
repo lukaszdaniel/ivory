@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-09 21:33+0200\n"
+"POT-Creation-Date: 2016-04-11 12:35+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -136,8 +136,9 @@ msgid "Function '%s' is not in the derivatives table"
 msgstr "Funkcja '%s' nie znajduje się w tablicy pochodnych"
 
 #: deriv.c:634
-msgid "'expr' must be an expression or call"
-msgstr "argument 'expr' musi być wyrażeniem lub wywołaniem"
+#, c-format
+msgid "'%s' argument must be an expression or call"
+msgstr "argument '%s' musi być wyrażeniem lub wywołaniem"
 
 #: deriv.c:637
 msgid "variable must be a character string"
@@ -185,14 +186,14 @@ msgstr "Argument nieliczbowy przekazany do funkcji matematycznej"
 msgid "Value %g out of range (0, 1)"
 msgstr "Wartość %g jest poza zakresem (0, 1)"
 
-#: family.c:67 family.c:81 family.c:99
+#: family.c:67 family.c:81 family.c:99 port.c:383 port.c:554
 #, c-format
-msgid "Argument %s must be a nonempty numeric vector"
+msgid "'%s' argument must be a nonempty numeric vector"
 msgstr "argument '%s' musi być niepustym wektorem liczbowym"
 
 #: family.c:132 family.c:135
 #, c-format
-msgid "argument %s must be a numeric vector of length 1 or length %d"
+msgid "'%s' argument must be a numeric vector of length 1 or length %d"
 msgstr "argument '%s' musi być wektorem liczbowym o długości 1 lub długości %d"
 
 #: fexact.c:206 fexact.c:393
@@ -325,16 +326,17 @@ msgstr "tylko 2500 wierszy jest dozwolonych dla 'sm.method=\"spline\"'"
 msgid "insufficient observations"
 msgstr "niewystarczające obserwacje"
 
-#: lm.c:57
-msgid "'x' is not a matrix"
-msgstr "argument 'x' nie jest macierzą"
+#: lm.c:51
+#, c-format
+msgid "'%s' argument is not a matrix"
+msgstr "argument '%s' nie jest macierzą"
 
-#: lm.c:62
+#: lm.c:56
 #, c-format
 msgid "dimensions of 'x' (%d,%d) and 'y' (%d) do not match"
 msgstr "wymiary 'x' (%d,%d) oraz 'y' (%d) nie zgadzają się"
 
-#: lm.c:77 lm.c:81
+#: lm.c:71 lm.c:75
 #, c-format
 msgid "NA/NaN/Inf in '%s'"
 msgstr "wartość NA/NaN/Inf w '%s'"
@@ -685,18 +687,14 @@ msgstr "oczekiwano formuły"
 msgid "invalid term in model formula"
 msgstr "niepoprawny człon w formule modelu"
 
-#: model.c:1116
-msgid "invalid model formula"
-msgstr "niepoprawna formuła modelu"
+#: model.c:1116 model.c:1178 model.c:1586
+#, c-format
+msgid "invalid model formula in '%s' function"
+msgstr "niepoprawna formuła modelu w funkcji '%s'"
 
 #: model.c:1142 model.c:1402
 msgid "invalid power in formula"
 msgstr "niepoprawna potęga w formule"
-
-#: model.c:1178 model.c:1586
-#, c-format
-msgid "invalid model formula in '%s' function"
-msgstr "niepoprawna formuła modelu w funkcji '%s'"
 
 #: model.c:1525
 #, c-format
@@ -1058,11 +1056,6 @@ msgstr "wyliczenie wartości NA/NaN hesjanu"
 msgid "'%s' argument must be an environment"
 msgstr "argument '%s' musi być środowiskiem"
 
-#: port.c:383 port.c:554
-#, c-format
-msgid "'%s' argument must be a nonempty numeric vector"
-msgstr "argument '%s' musi być niepustym wektorem liczbowym"
-
 #: port.c:385
 msgid "When Hessian defined must also have gradient defined"
 msgstr "Kiedy jest zdefiniowany Hesjan musi być również zdefiniowany gradient"
@@ -1105,8 +1098,9 @@ msgid "invalid type for 'eval_check_store()' function"
 msgstr "niepoprawny typ dla funkcji 'eval_check_store()'"
 
 #: port.c:575
-msgid "'lowerb' and 'upperb' arguments must be numeric vectors"
-msgstr "argumenty 'lowerb' oraz 'upperb' muszą być wektorami liczbowymi"
+#, c-format
+msgid "'%s' and '%s' arguments must be numeric vectors"
+msgstr "argumenty '%s' oraz '%s' muszą być wektorami liczbowymi"
 
 #: port.c:598
 #, c-format
@@ -1182,6 +1176,19 @@ msgstr "brakuje wartości w ostatnich %d obserwacjach"
 #, c-format
 msgid "ifault=%d. This should not happen"
 msgstr "ifault=%d. To nie powinno się wydarzyć"
+
+#~ msgid "'%s' argument  must be a numeric vector of length 1 or length %d"
+#~ msgstr ""
+#~ "argument '%s' musi być wektorem liczbowym o długości 1 lub długości %d"
+
+#~ msgid "Argument %s must be a nonempty numeric vector"
+#~ msgstr "argument '%s' musi być niepustym wektorem liczbowym"
+
+#~ msgid "'x' is not a matrix"
+#~ msgstr "argument 'x' nie jest macierzą"
+
+#~ msgid "invalid model formula"
+#~ msgstr "niepoprawna formuła modelu"
 
 #~ msgid "'x' is NULL"
 #~ msgstr "'x' ma wartość NULL"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-09 21:33+0200\n"
+"POT-Creation-Date: 2016-04-11 12:35+0200\n"
 "PO-Revision-Date: 2012-03-08 20:50+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -136,8 +136,9 @@ msgid "Function '%s' is not in the derivatives table"
 msgstr "함수 '%s'는 미분함수 테이블에 없습니다"
 
 #: deriv.c:634
-msgid "'expr' must be an expression or call"
-msgstr ""
+#, fuzzy, c-format
+msgid "'%s' argument must be an expression or call"
+msgstr "인자 m 은 반드시 수치형이어야 합니다 "
 
 #: deriv.c:637
 msgid "variable must be a character string"
@@ -189,14 +190,14 @@ msgstr "수학 함수에 숫자가 아닌 인수가 전달되었습니다"
 msgid "Value %g out of range (0, 1)"
 msgstr "%g 값이 (0,1) 범위 외입니다 "
 
-#: family.c:67 family.c:81 family.c:99
-#, c-format
-msgid "Argument %s must be a nonempty numeric vector"
+#: family.c:67 family.c:81 family.c:99 port.c:383 port.c:554
+#, fuzzy, c-format
+msgid "'%s' argument must be a nonempty numeric vector"
 msgstr "%s 인자는 반드시 수치형 벡터이어야 합니다 "
 
 #: family.c:132 family.c:135
-#, c-format
-msgid "argument %s must be a numeric vector of length 1 or length %d"
+#, fuzzy, c-format
+msgid "'%s' argument must be a numeric vector of length 1 or length %d"
 msgstr "%s 는 길이가 1 이거나 %d 인 수치형 벡터이어야 합니다 "
 
 #: fexact.c:206 fexact.c:393
@@ -319,17 +320,17 @@ msgstr "sm.method=\"spline\" 에서는 최대 2500 개의 행만을 가질 수 �
 msgid "insufficient observations"
 msgstr "마지막 %d 개의 관측치가 결측치입니다 "
 
-#: lm.c:57
-#, fuzzy
-msgid "'x' is not a matrix"
+#: lm.c:51
+#, fuzzy, c-format
+msgid "'%s' argument is not a matrix"
 msgstr "'fn'은 함수가 아닙니다"
 
-#: lm.c:62
+#: lm.c:56
 #, c-format
 msgid "dimensions of 'x' (%d,%d) and 'y' (%d) do not match"
 msgstr ""
 
-#: lm.c:77 lm.c:81
+#: lm.c:71 lm.c:75
 #, c-format
 msgid "NA/NaN/Inf in '%s'"
 msgstr ""
@@ -666,18 +667,14 @@ msgstr "식이 있어야 합니다"
 msgid "invalid term in model formula"
 msgstr "모델식에 잘못된 항목이 있습니다"
 
-#: model.c:1116
-msgid "invalid model formula"
-msgstr "모델식이 잘못되었습니다"
+#: model.c:1116 model.c:1178 model.c:1586
+#, fuzzy, c-format
+msgid "invalid model formula in '%s' function"
+msgstr "EncodeVars의 모델식이 잘못되었습니다"
 
 #: model.c:1142 model.c:1402
 msgid "invalid power in formula"
 msgstr "모델식에 잘못된 지수가 있습니다"
-
-#: model.c:1178 model.c:1586
-#, fuzzy, c-format
-msgid "invalid model formula in '%s' function"
-msgstr "EncodeVars의 모델식이 잘못되었습니다"
 
 #: model.c:1525
 #, c-format
@@ -1042,11 +1039,6 @@ msgstr ""
 msgid "'%s' argument must be an environment"
 msgstr "'rho' 는 반드시 환경이어야 합니다 "
 
-#: port.c:383 port.c:554
-#, fuzzy, c-format
-msgid "'%s' argument must be a nonempty numeric vector"
-msgstr "%s 인자는 반드시 수치형 벡터이어야 합니다 "
-
 #: port.c:385
 msgid "When Hessian defined must also have gradient defined"
 msgstr "Hessian 이 정의되었다면 기울기도 정의되어야 합니다 "
@@ -1092,8 +1084,8 @@ msgid "invalid type for 'eval_check_store()' function"
 msgstr "eval_check_store 에 대한 유형이 잘못되었습니다 "
 
 #: port.c:575
-#, fuzzy
-msgid "'lowerb' and 'upperb' arguments must be numeric vectors"
+#, fuzzy, c-format
+msgid "'%s' and '%s' arguments must be numeric vectors"
 msgstr "'lowerb' 와 'upperb' 는 반드시 수치형 벡터이어야 합니다 "
 
 #: port.c:598
@@ -1172,6 +1164,20 @@ msgstr "마지막 %d 개의 관측치가 결측치입니다 "
 #, c-format
 msgid "ifault=%d. This should not happen"
 msgstr ""
+
+#, fuzzy
+#~ msgid "'%s' argument  must be a numeric vector of length 1 or length %d"
+#~ msgstr "%s 는 길이가 1 이거나 %d 인 수치형 벡터이어야 합니다 "
+
+#~ msgid "Argument %s must be a nonempty numeric vector"
+#~ msgstr "%s 인자는 반드시 수치형 벡터이어야 합니다 "
+
+#, fuzzy
+#~ msgid "'x' is not a matrix"
+#~ msgstr "'fn'은 함수가 아닙니다"
+
+#~ msgid "invalid model formula"
+#~ msgstr "모델식이 잘못되었습니다"
 
 #~ msgid "'x' is NULL"
 #~ msgstr "'x'이 비어 있습니다"

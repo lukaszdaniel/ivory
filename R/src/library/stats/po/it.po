@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-09 21:33+0200\n"
+"POT-Creation-Date: 2016-04-11 12:35+0200\n"
 "PO-Revision-Date: 2005-04-14 18:06+0200\n"
 "Last-Translator: stefano iacus <stefano.iacus@r-project.org>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -134,8 +134,9 @@ msgid "Function '%s' is not in the derivatives table"
 msgstr "Funzione '%s' non presente nelle tavole delle derivate"
 
 #: deriv.c:634
-msgid "'expr' must be an expression or call"
-msgstr ""
+#, fuzzy, c-format
+msgid "'%s' argument must be an expression or call"
+msgstr "'x' deve essere di tipo numeric"
 
 #: deriv.c:637
 msgid "variable must be a character string"
@@ -187,15 +188,15 @@ msgstr "Argomento non numerico in una funzione matematica"
 msgid "Value %g out of range (0, 1)"
 msgstr ""
 
-#: family.c:67 family.c:81 family.c:99
+#: family.c:67 family.c:81 family.c:99 port.c:383 port.c:554
 #, fuzzy, c-format
-msgid "Argument %s must be a nonempty numeric vector"
+msgid "'%s' argument must be a nonempty numeric vector"
 msgstr "'x' deve essere di tipo numeric"
 
 #: family.c:132 family.c:135
-#, c-format
-msgid "argument %s must be a numeric vector of length 1 or length %d"
-msgstr ""
+#, fuzzy, c-format
+msgid "'%s' argument must be a numeric vector of length 1 or length %d"
+msgstr "'m' deve essere di tipo list"
 
 #: fexact.c:206 fexact.c:393
 msgid "NROW must be less than or equal to LDTABL."
@@ -317,17 +318,17 @@ msgstr "sm.method=\"spline\" permette solo 2500 righe"
 msgid "insufficient observations"
 msgstr "valori mancanti nelle ultime %d osservazioni"
 
-#: lm.c:57
-#, fuzzy
-msgid "'x' is not a matrix"
+#: lm.c:51
+#, fuzzy, c-format
+msgid "'%s' argument is not a matrix"
 msgstr "'fn' non è una funzione"
 
-#: lm.c:62
+#: lm.c:56
 #, c-format
 msgid "dimensions of 'x' (%d,%d) and 'y' (%d) do not match"
 msgstr ""
 
-#: lm.c:77 lm.c:81
+#: lm.c:71 lm.c:75
 #, c-format
 msgid "NA/NaN/Inf in '%s'"
 msgstr ""
@@ -665,18 +666,14 @@ msgstr "necessaria formula"
 msgid "invalid term in model formula"
 msgstr "valore di lag.max non valido"
 
-#: model.c:1116
-msgid "invalid model formula"
-msgstr "formula modello non valida"
+#: model.c:1116 model.c:1178 model.c:1586
+#, fuzzy, c-format
+msgid "invalid model formula in '%s' function"
+msgstr "formula modello non valida in EncodeVars"
 
 #: model.c:1142 model.c:1402
 msgid "invalid power in formula"
 msgstr "potenza non valida nella formula"
-
-#: model.c:1178 model.c:1586
-#, fuzzy, c-format
-msgid "invalid model formula in '%s' function"
-msgstr "formula modello non valida in EncodeVars"
 
 #: model.c:1525
 #, c-format
@@ -1047,11 +1044,6 @@ msgstr ""
 msgid "'%s' argument must be an environment"
 msgstr "'rho' deve essere un environment"
 
-#: port.c:383 port.c:554
-#, fuzzy, c-format
-msgid "'%s' argument must be a nonempty numeric vector"
-msgstr "'x' deve essere di tipo numeric"
-
 #: port.c:385
 msgid "When Hessian defined must also have gradient defined"
 msgstr ""
@@ -1094,8 +1086,8 @@ msgid "invalid type for 'eval_check_store()' function"
 msgstr ""
 
 #: port.c:575
-#, fuzzy
-msgid "'lowerb' and 'upperb' arguments must be numeric vectors"
+#, fuzzy, c-format
+msgid "'%s' and '%s' arguments must be numeric vectors"
 msgstr "'x' deve essere di tipo numeric"
 
 #: port.c:598
@@ -1174,6 +1166,21 @@ msgstr "valori mancanti nelle ultime %d osservazioni"
 #, c-format
 msgid "ifault=%d. This should not happen"
 msgstr ""
+
+#, fuzzy
+#~ msgid "'%s' argument  must be a numeric vector of length 1 or length %d"
+#~ msgstr "'m' deve essere di tipo list"
+
+#, fuzzy
+#~ msgid "Argument %s must be a nonempty numeric vector"
+#~ msgstr "'x' deve essere di tipo numeric"
+
+#, fuzzy
+#~ msgid "'x' is not a matrix"
+#~ msgstr "'fn' non è una funzione"
+
+#~ msgid "invalid model formula"
+#~ msgstr "formula modello non valida"
 
 #, fuzzy
 #~ msgid "'x' is NULL"

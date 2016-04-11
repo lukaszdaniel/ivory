@@ -572,7 +572,7 @@ SEXP port_nlsb(SEXP m, SEXP d, SEXP gg, SEXP iv, SEXP v,
 		b[2*i] = rl[i];
 		b[2*i + 1] = ru[i];
 	    }
-	} else error(_("'lowerb' and 'upperb' arguments must be numeric vectors"));
+	} else error(_("'%s' and '%s' arguments must be numeric vectors"), "lowerb", "upperb");
     }
 
     do {

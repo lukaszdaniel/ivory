@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-09 21:33+0200\n"
+"POT-Creation-Date: 2016-04-11 12:35+0200\n"
 "PO-Revision-Date: 2012-03-06 21:47+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -135,8 +135,9 @@ msgid "Function '%s' is not in the derivatives table"
 msgstr "La fonction '%s' n'est pas dans la table des dérivées"
 
 #: deriv.c:634
-msgid "'expr' must be an expression or call"
-msgstr ""
+#, fuzzy, c-format
+msgid "'%s' argument must be an expression or call"
+msgstr "L'argument m doit être numérique"
 
 #: deriv.c:637
 msgid "variable must be a character string"
@@ -188,14 +189,14 @@ msgstr "Argument non numérique pour une fonction mathématique"
 msgid "Value %g out of range (0, 1)"
 msgstr "Valeur %g hors de l'intervalle (0, 1)"
 
-#: family.c:67 family.c:81 family.c:99
-#, c-format
-msgid "Argument %s must be a nonempty numeric vector"
+#: family.c:67 family.c:81 family.c:99 port.c:383 port.c:554
+#, fuzzy, c-format
+msgid "'%s' argument must be a nonempty numeric vector"
 msgstr "L'argument %s doit être un vecteur numérique non vide"
 
 #: family.c:132 family.c:135
-#, c-format
-msgid "argument %s must be a numeric vector of length 1 or length %d"
+#, fuzzy, c-format
+msgid "'%s' argument must be a numeric vector of length 1 or length %d"
 msgstr "l'argument %s doit être un vecteur numérique de longueur 1 ou %d"
 
 #: fexact.c:206 fexact.c:393
@@ -318,17 +319,17 @@ msgstr "seulement 2500 lignes autorisées pour sm.method=\"spline\""
 msgid "insufficient observations"
 msgstr "valeur manquante dans les %d dernières observations"
 
-#: lm.c:57
-#, fuzzy
-msgid "'x' is not a matrix"
+#: lm.c:51
+#, fuzzy, c-format
+msgid "'%s' argument is not a matrix"
 msgstr "'fn' n'est pas une fonction"
 
-#: lm.c:62
+#: lm.c:56
 #, c-format
 msgid "dimensions of 'x' (%d,%d) and 'y' (%d) do not match"
 msgstr ""
 
-#: lm.c:77 lm.c:81
+#: lm.c:71 lm.c:75
 #, c-format
 msgid "NA/NaN/Inf in '%s'"
 msgstr ""
@@ -668,18 +669,14 @@ msgstr "formule de modèle attendue"
 msgid "invalid term in model formula"
 msgstr "terme incorrect dans une formule de modèle"
 
-#: model.c:1116
-msgid "invalid model formula"
-msgstr "formule de modèle incorrecte"
+#: model.c:1116 model.c:1178 model.c:1586
+#, fuzzy, c-format
+msgid "invalid model formula in '%s' function"
+msgstr "formule de modèle incorrecte dans EncodeVars"
 
 #: model.c:1142 model.c:1402
 msgid "invalid power in formula"
 msgstr "puissance incorrecte dans une formule de modèle"
-
-#: model.c:1178 model.c:1586
-#, fuzzy, c-format
-msgid "invalid model formula in '%s' function"
-msgstr "formule de modèle incorrecte dans EncodeVars"
 
 #: model.c:1525
 #, c-format
@@ -1049,11 +1046,6 @@ msgstr ""
 msgid "'%s' argument must be an environment"
 msgstr "'rho' doit être un environnement"
 
-#: port.c:383 port.c:554
-#, fuzzy, c-format
-msgid "'%s' argument must be a nonempty numeric vector"
-msgstr "L'argument %s doit être un vecteur numérique non vide"
-
 #: port.c:385
 msgid "When Hessian defined must also have gradient defined"
 msgstr "Qaund Hessian est défini, un gradient doit l'être aussi"
@@ -1102,8 +1094,8 @@ msgid "invalid type for 'eval_check_store()' function"
 msgstr "type incorrect pour 'eval_check_store'"
 
 #: port.c:575
-#, fuzzy
-msgid "'lowerb' and 'upperb' arguments must be numeric vectors"
+#, fuzzy, c-format
+msgid "'%s' and '%s' arguments must be numeric vectors"
 msgstr "'lowerb' et 'upperb' doivent tous deux être des vecteurs numériques"
 
 #: port.c:598
@@ -1182,6 +1174,20 @@ msgstr "valeur manquante dans les %d dernières observations"
 #, c-format
 msgid "ifault=%d. This should not happen"
 msgstr ""
+
+#, fuzzy
+#~ msgid "'%s' argument  must be a numeric vector of length 1 or length %d"
+#~ msgstr "l'argument %s doit être un vecteur numérique de longueur 1 ou %d"
+
+#~ msgid "Argument %s must be a nonempty numeric vector"
+#~ msgstr "L'argument %s doit être un vecteur numérique non vide"
+
+#, fuzzy
+#~ msgid "'x' is not a matrix"
+#~ msgstr "'fn' n'est pas une fonction"
+
+#~ msgid "invalid model formula"
+#~ msgstr "formule de modèle incorrecte"
 
 #~ msgid "'x' is NULL"
 #~ msgstr "'x' est 'NULL'"

@@ -64,7 +64,7 @@ SEXP logit_link(SEXP mu)
     double *rans = REAL(ans), *rmu=REAL(mu);
 
     if (!n || !isReal(mu))
-	error(_("Argument %s must be a nonempty numeric vector"), "mu");
+	error(_("'%s' argument must be a nonempty numeric vector"), "mu");
     for (i = 0; i < n; i++)
 	rans[i] = log(x_d_omx(rmu[i]));
     UNPROTECT(1);
@@ -78,7 +78,7 @@ SEXP logit_linkinv(SEXP eta)
     double *rans = REAL(ans), *reta = REAL(eta);
 
     if (!n || !isReal(eta))
-	error(_("Argument %s must be a nonempty numeric vector"), "eta");
+	error(_("'%s' argument must be a nonempty numeric vector"), "eta");
     for (i = 0; i < n; i++) {
 	double etai = reta[i], tmp;
 	tmp = (etai < MTHRESH) ? DOUBLE_EPS :
@@ -96,7 +96,7 @@ SEXP logit_mu_eta(SEXP eta)
     double *rans = REAL(ans), *reta = REAL(eta);
 
     if (!n || !isReal(eta))
-	error(_("Argument %s must be a nonempty numeric vector"), "eta");
+	error(_("'%s' argument must be a nonempty numeric vector"), "eta");
     for (i = 0; i < n; i++) {
 	double etai = reta[i];
 	double opexp = 1 + exp(etai);
@@ -129,10 +129,10 @@ SEXP binomial_dev_resids(SEXP y, SEXP mu, SEXP wt)
     rmu = REAL(mu);
     rwt = REAL(wt);
     if (lmu != n && lmu != 1)
-	error(_("argument %s must be a numeric vector of length 1 or length %d"),
+	error(_("'%s' argument must be a numeric vector of length 1 or length %d"),
 	      "mu", n);
     if (lwt != n && lwt != 1)
-	error(_("argument %s must be a numeric vector of length 1 or length %d"),
+	error(_("'%s' argument must be a numeric vector of length 1 or length %d"),
 	      "wt", n);
     /* Written separately to avoid an optimization bug on Solaris cc */
     if(lmu > 1) {
