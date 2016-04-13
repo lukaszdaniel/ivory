@@ -475,7 +475,7 @@ SEXP C_plot_window(SEXP args)
 
     args = CDR(args);
     if (length(args) < 3)
-	error(_("at least 3 arguments required"));
+	error(_("at least 3 arguments are required"));
 
     xlim = CAR(args);
     if (!isNumeric(xlim) || LENGTH(xlim) != 2)

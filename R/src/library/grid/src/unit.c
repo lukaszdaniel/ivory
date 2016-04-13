@@ -1896,7 +1896,7 @@ int convertUnit(SEXP unit, int index)
 	i += 1;
     }
     if (result < 0)
-	error(_("Invalid unit"));
+	error(_("invalid '%s' argument"), "unit");
     return result;
 }
 	    
@@ -1912,10 +1912,10 @@ SEXP validUnits(SEXP units)
 		INTEGER(answer)[i] = convertUnit(units, i);
 	    UNPROTECT(1);
 	} else {
-	    error(_("'units' must be character"));
+	    error(_("'%s' argument must be character"), "units");
 	}
     } else {
-	error(_("'units' must be of length > 0"));
+	error(_("'%s' argument must be of length > 0"), "units");
     }
     return answer;
 }

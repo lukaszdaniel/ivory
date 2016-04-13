@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grid 3.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-03 21:09+0200\n"
+"POT-Creation-Date: 2016-04-11 20:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,12 +70,9 @@ msgstr ""
 msgid "unable to clip to rotated rectangle"
 msgstr ""
 
-#: layout.c:590
-msgid "invalid 'layout.pos.row'"
-msgstr ""
-
-#: layout.c:594
-msgid "invalid 'layout.pos.col'"
+#: layout.c:590 layout.c:594 unit.c:1899
+#, c-format
+msgid "invalid '%s' argument"
 msgstr ""
 
 #: matrix.c:51
@@ -106,16 +103,14 @@ msgstr ""
 msgid "Unsupported unit conversion"
 msgstr ""
 
-#: unit.c:1899
-msgid "Invalid unit"
-msgstr ""
-
 #: unit.c:1915
-msgid "'units' must be character"
+#, c-format
+msgid "'%s' argument must be character"
 msgstr ""
 
 #: unit.c:1918
-msgid "'units' must be of length > 0"
+#, c-format
+msgid "'%s' argument must be of length > 0"
 msgstr ""
 
 #: util.c:273 util.c:285

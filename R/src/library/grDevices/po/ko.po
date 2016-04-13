@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-09 21:33+0200\n"
+"POT-Creation-Date: 2016-04-11 21:07+0200\n"
 "PO-Revision-Date: 2005-05-31 10:31+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -306,24 +306,25 @@ msgstr "무효의 라인 mitre입니다"
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "font 1과 변경할 수 있던 무효의 font %d를 사용하기 위하여 시도합니다"
 
-#: devPS.c:3102 devPS.c:4726 devPS.c:5840
+#: devPS.c:3102 devPS.c:4726 devPS.c:5840 devWindows.c:1809 devWindows.c:1846
+#: devWindows.c:1876 devWindows.c:1908
 #, fuzzy, c-format
-msgid "filename too long in %s()"
+msgid "filename too long in '%s' call"
 msgstr "%s() 호출에 대해서 너무 긴 파일명입니다"
 
 #: devPS.c:3108 devPS.c:4732 devPS.c:5846
-#, c-format
-msgid "memory allocation problem in %s()"
-msgstr ""
-
-#: devPS.c:3125
 #, fuzzy, c-format
-msgid "encoding path is too long in %s()"
+msgid "memory allocation problem in '%s' function"
+msgstr "encoding 패스는 너무 깁니다"
+
+#: devPS.c:3125 devPS.c:5906
+#, fuzzy, c-format
+msgid "encoding path is too long in '%s' function"
 msgstr "encoding 패스는 너무 깁니다"
 
 #: devPS.c:3139 devPS.c:4772
 #, fuzzy, c-format
-msgid "failed to load encoding file in %s()"
+msgid "failed to load encoding file in '%s' function"
 msgstr "encode 파일을 적재하는데 실패되었습니다"
 
 #: devPS.c:3184 devPS.c:3247 devPS.c:5965 devPS.c:6020 devPS.c:7647
@@ -397,15 +398,13 @@ msgstr "PostScript 디바이스에 포함하지 않는 family %s 입니다"
 
 #: devPS.c:4316
 #, c-format
-msgid ""
-"conversion failure on '%s' in 'mbcsToSbcs()' function: dot substituted for <"
-"%02x>"
+msgid "conversion failure on '%s' in '%s' function: dot substituted for <%02x>"
 msgstr ""
 
 #: devPS.c:4324
-#, c-format
-msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs()' function"
-msgstr ""
+#, fuzzy, c-format
+msgid "conversion failure from %s to %s on '%s' in '%s' function"
+msgstr "encoding 패스는 너무 깁니다"
 
 #: devPS.c:4394
 #, fuzzy, c-format
@@ -495,11 +494,6 @@ msgstr "디바이스 encode를 기록하는것이 실패했습니다;font가 추
 msgid "increasing the PDF version to %s"
 msgstr ""
 
-#: devPS.c:5906
-#, fuzzy, c-format
-msgid "encoding path is too long in '%s' function"
-msgstr "encoding 패스는 너무 깁니다"
-
 #: devPS.c:5922
 #, fuzzy
 msgid "failed to load default encoding"
@@ -587,12 +581,12 @@ msgstr "PDF font를 검색 또는 적재하는데 실패되었습니다"
 msgid "invalid '%s' parameter in '%s'"
 msgstr "%s에서 무효의 'fonts' 파라미터 입니다"
 
-#: devPS.c:8261 devPS.c:8328
+#: devPS.c:8261 devPS.c:8328 devPS.c:8428
 #, fuzzy, c-format
-msgid "unable to start '%s' function"
+msgid "unable to start '%s' device"
 msgstr "디바이스 pdf를 시작할수가 없습니다"
 
-#: devPS.c:8428 devPicTeX.c:741 devWindows.c:3736
+#: devPicTeX.c:741 devWindows.c:3736
 #, fuzzy, c-format
 msgid "unable to start %s() device"
 msgstr "디바이스 pdf를 시작할수가 없습니다"
@@ -683,11 +677,6 @@ msgstr "plot 히스토리는 corrupt가 있는것처럼 보입니다"
 msgid "no plot history!"
 msgstr "plot history가 없습니다!"
 
-#: devWindows.c:1809
-#, c-format
-msgid "filename too long in %s() call"
-msgstr "%s() 호출에 대해서 너무 긴 파일명입니다"
-
 #: devWindows.c:1814 devWindows.c:1849 devWindows.c:1879
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
@@ -703,19 +692,6 @@ msgstr "bitmap 할당 할수가 없습니다"
 #, fuzzy, c-format
 msgid "unable to open file '%s' for writing"
 msgstr "쓰기 위해서 파일 '%s'을 열수가 없습니다"
-
-#: devWindows.c:1846
-msgid "filename too long in jpeg() call"
-msgstr "jpeg() 호출에 대해서 너무 긴 파일명입니다"
-
-#: devWindows.c:1876
-#, fuzzy
-msgid "filename too long in tiff() call"
-msgstr "%s() 호출에 대해서 너무 긴 파일명입니다"
-
-#: devWindows.c:1908
-msgid "filename too long in win.metafile() call"
-msgstr "win.metafile()에 대해 너무 긴 파일명입니다"
 
 #: devWindows.c:1918
 #, fuzzy, c-format
@@ -769,8 +745,8 @@ msgstr "savePlot의 무효인 디바이스번호입니다"
 
 #: devWindows.c:3422
 #, fuzzy
-msgid "invalid device in 'savePlot'"
-msgstr "savePlot의 무효인 디비이스입니다"
+msgid "invalid device in 'savePlot()' function"
+msgstr "savePlot의 무효인 디바이스번호입니다"
 
 #: devWindows.c:3425
 #, fuzzy
@@ -804,9 +780,9 @@ msgstr "devWindow에서 무효인 폭 또는 높이 입니다"
 msgid "argument must have positive length"
 msgstr ""
 
-#: devices.c:52
-#, fuzzy
-msgid "invalid argument"
+#: devices.c:52 stubs.c:105
+#, fuzzy, c-format
+msgid "invalid '%s' argument"
 msgstr "무효의 문자열 인수입니다"
 
 #: qdBitmap.c:79
@@ -822,10 +798,43 @@ msgstr ""
 msgid "Quartz R Device"
 msgstr ""
 
-#: stubs.c:105
-#, fuzzy, c-format
-msgid "invalid '%s' argument"
-msgstr "무효의 문자열 인수입니다"
+#, fuzzy
+#~ msgid "filename too long in '%s' function"
+#~ msgstr "%s() 호출에 대해서 너무 긴 파일명입니다"
+
+#, fuzzy
+#~ msgid "invalid device in 'savePlot'"
+#~ msgstr "savePlot의 무효인 디비이스입니다"
+
+#, fuzzy
+#~ msgid "filename too long in %s()"
+#~ msgstr "%s() 호출에 대해서 너무 긴 파일명입니다"
+
+#, fuzzy
+#~ msgid "encoding path is too long in %s()"
+#~ msgstr "encoding 패스는 너무 깁니다"
+
+#, fuzzy
+#~ msgid "failed to load encoding file in %s()"
+#~ msgstr "encode 파일을 적재하는데 실패되었습니다"
+
+#, fuzzy
+#~ msgid "unable to start '%s' function"
+#~ msgstr "디바이스 pdf를 시작할수가 없습니다"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "jpeg() 호출에 대해서 너무 긴 파일명입니다"
+
+#, fuzzy
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "%s() 호출에 대해서 너무 긴 파일명입니다"
+
+#~ msgid "filename too long in win.metafile() call"
+#~ msgstr "win.metafile()에 대해 너무 긴 파일명입니다"
+
+#, fuzzy
+#~ msgid "invalid argument"
+#~ msgstr "무효의 문자열 인수입니다"
 
 #, fuzzy
 #~ msgid "invalid string in '%s'function"

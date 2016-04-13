@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-09 21:33+0200\n"
+"POT-Creation-Date: 2016-04-11 21:07+0200\n"
 "PO-Revision-Date: 2012-03-06 21:34+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -307,25 +307,26 @@ msgstr "Mitre (jointure pointue) de ligne incorrecte"
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "tentative d'utiliser la police incorrecte %d remplacée par police 1"
 
-#: devPS.c:3102 devPS.c:4726 devPS.c:5840
-#, c-format
-msgid "filename too long in %s()"
-msgstr "nom de fichier trop long dans %s()"
+#: devPS.c:3102 devPS.c:4726 devPS.c:5840 devWindows.c:1809 devWindows.c:1846
+#: devWindows.c:1876 devWindows.c:1908
+#, fuzzy, c-format
+msgid "filename too long in '%s' call"
+msgstr "nom de fichier trop long dans l'appel %s()"
 
 #: devPS.c:3108 devPS.c:4732 devPS.c:5846
-#, c-format
-msgid "memory allocation problem in %s()"
+#, fuzzy, c-format
+msgid "memory allocation problem in '%s' function"
 msgstr "problème d'allocation mémoire dans %s()"
 
-#: devPS.c:3125
-#, c-format
-msgid "encoding path is too long in %s()"
+#: devPS.c:3125 devPS.c:5906
+#, fuzzy, c-format
+msgid "encoding path is too long in '%s' function"
 msgstr "chemin d'accès à l'encodage trop long dans %s()"
 
 #: devPS.c:3139 devPS.c:4772
-#, c-format
-msgid "failed to load encoding file in %s()"
-msgstr "Echec de chargement du fichier d'encodage dans %s"
+#, fuzzy, c-format
+msgid "failed to load encoding file in '%s' function"
+msgstr "Echec de chargement du fichier d'encodage '%s'"
 
 #: devPS.c:3184 devPS.c:3247 devPS.c:5965 devPS.c:6020 devPS.c:7647
 #, fuzzy
@@ -399,16 +400,14 @@ msgstr "famille '%s' non incluse dans le périphérique PostScript"
 
 #: devPS.c:4316
 #, fuzzy, c-format
-msgid ""
-"conversion failure on '%s' in 'mbcsToSbcs()' function: dot substituted for <"
-"%02x>"
+msgid "conversion failure on '%s' in '%s' function: dot substituted for <%02x>"
 msgstr ""
 "erreur de conversion de '%s' dans 'mbcsToSbcs' : le point est substitué pour "
 "<%02x>"
 
 #: devPS.c:4324
 #, fuzzy, c-format
-msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs()' function"
+msgid "conversion failure from %s to %s on '%s' in '%s' function"
 msgstr ""
 "erreur de conversion de '%s' dans 'mbcsToSbcs' : le point est substitué pour "
 "<%02x>"
@@ -500,11 +499,6 @@ msgstr ""
 msgid "increasing the PDF version to %s"
 msgstr "la version du PDF est augmentée à 1.2"
 
-#: devPS.c:5906
-#, fuzzy, c-format
-msgid "encoding path is too long in '%s' function"
-msgstr "chemin d'accès à l'encodage trop long dans %s()"
-
 #: devPS.c:5922
 msgid "failed to load default encoding"
 msgstr "Echec de chargement du fichier d'encodage par défaut"
@@ -589,12 +583,12 @@ msgstr "Impossible de trouver ou de charger la police PDF CID"
 msgid "invalid '%s' parameter in '%s'"
 msgstr "paramètre 'fonts' incorrect dans %s"
 
-#: devPS.c:8261 devPS.c:8328
+#: devPS.c:8261 devPS.c:8328 devPS.c:8428
 #, fuzzy, c-format
-msgid "unable to start '%s' function"
+msgid "unable to start '%s' device"
 msgstr "impossible de démarrer le périphérique %s()"
 
-#: devPS.c:8428 devPicTeX.c:741 devWindows.c:3736
+#: devPicTeX.c:741 devWindows.c:3736
 #, c-format
 msgid "unable to start %s() device"
 msgstr "impossible de démarrer le périphérique %s()"
@@ -687,11 +681,6 @@ msgstr "l'historique des graphes semble corrompu"
 msgid "no plot history!"
 msgstr "pas d'historique des graphes !"
 
-#: devWindows.c:1809
-#, c-format
-msgid "filename too long in %s() call"
-msgstr "nom de fichier trop long dans l'appel %s()"
-
 #: devWindows.c:1814 devWindows.c:1849 devWindows.c:1879
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
@@ -707,18 +696,6 @@ msgstr "Impossible d'allouer un bitmap"
 #, fuzzy, c-format
 msgid "unable to open file '%s' for writing"
 msgstr "Impossible d'ouvrir le fichier '%s' pour écriture"
-
-#: devWindows.c:1846
-msgid "filename too long in jpeg() call"
-msgstr "nom de fichier trop long dans l'appel à jpeg()"
-
-#: devWindows.c:1876
-msgid "filename too long in tiff() call"
-msgstr "nom de fichier trop long dans l'appel tiff()"
-
-#: devWindows.c:1908
-msgid "filename too long in win.metafile() call"
-msgstr "nom de fichier trop long dans l'appel à win.metafile()"
 
 #: devWindows.c:1918
 #, fuzzy, c-format
@@ -773,8 +750,9 @@ msgid "invalid device number in 'savePlot()' function"
 msgstr "numéro de périphérique incorrect dans 'savePlot'"
 
 #: devWindows.c:3422
-msgid "invalid device in 'savePlot'"
-msgstr "périphérique incorrect dans 'savePlot'"
+#, fuzzy
+msgid "invalid device in 'savePlot()' function"
+msgstr "numéro de périphérique incorrect dans 'savePlot'"
 
 #: devWindows.c:3425
 #, fuzzy
@@ -807,9 +785,9 @@ msgstr "'width' ou 'height' incorrecte"
 msgid "argument must have positive length"
 msgstr ""
 
-#: devices.c:52
-#, fuzzy
-msgid "invalid argument"
+#: devices.c:52 stubs.c:105
+#, fuzzy, c-format
+msgid "invalid '%s' argument"
 msgstr "argument 'file' incorrect"
 
 #: qdBitmap.c:79
@@ -826,10 +804,38 @@ msgstr "Le schéma n'est pas supporté, aucune donnée d'image n'est écrite"
 msgid "Quartz R Device"
 msgstr ""
 
-#: stubs.c:105
-#, fuzzy, c-format
-msgid "invalid '%s' argument"
-msgstr "argument 'file' incorrect"
+#, fuzzy
+#~ msgid "filename too long in '%s' function"
+#~ msgstr "nom de fichier trop long dans l'appel %s()"
+
+#~ msgid "invalid device in 'savePlot'"
+#~ msgstr "périphérique incorrect dans 'savePlot'"
+
+#~ msgid "filename too long in %s()"
+#~ msgstr "nom de fichier trop long dans %s()"
+
+#~ msgid "encoding path is too long in %s()"
+#~ msgstr "chemin d'accès à l'encodage trop long dans %s()"
+
+#~ msgid "failed to load encoding file in %s()"
+#~ msgstr "Echec de chargement du fichier d'encodage dans %s"
+
+#, fuzzy
+#~ msgid "unable to start '%s' function"
+#~ msgstr "impossible de démarrer le périphérique %s()"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "nom de fichier trop long dans l'appel à jpeg()"
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "nom de fichier trop long dans l'appel tiff()"
+
+#~ msgid "filename too long in win.metafile() call"
+#~ msgstr "nom de fichier trop long dans l'appel à win.metafile()"
+
+#, fuzzy
+#~ msgid "invalid argument"
+#~ msgstr "argument 'file' incorrect"
 
 #, fuzzy
 #~ msgid "invalid string in '%s'function"

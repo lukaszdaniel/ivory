@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: R 2.16.0\n"
+"Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-27 18:05+0100\n"
+"POT-Creation-Date: 2016-04-11 20:39+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -13,8 +13,8 @@ msgstr ""
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: grid.c:213
 msgid "cannot clip to rotated viewport"
@@ -72,13 +72,10 @@ msgstr "Nieprawidłowy rysowany symbol"
 msgid "unable to clip to rotated rectangle"
 msgstr "nie można przypiąć do obróconego prostokąta"
 
-#: layout.c:590
-msgid "invalid 'layout.pos.row'"
-msgstr "niepoprawny 'layout.pos.row'"
-
-#: layout.c:594
-msgid "invalid 'layout.pos.col'"
-msgstr "niepoprawny 'layout.pos.col'"
+#: layout.c:590 layout.c:594 unit.c:1899
+#, c-format
+msgid "invalid '%s' argument"
+msgstr "niepoprawny argument '%s'"
 
 #: matrix.c:51
 msgid "singular transformation matrix"
@@ -109,17 +106,15 @@ msgstr "Okno ekranu ma zerowe wymiary"
 msgid "Unsupported unit conversion"
 msgstr "Niewspierana konwersja jednostek"
 
-#: unit.c:1899
-msgid "Invalid unit"
-msgstr "Niepoprawna jednostka"
-
 #: unit.c:1915
-msgid "'units' must be character"
-msgstr "'units' muszą być tekstem"
+#, c-format
+msgid "'%s' argument must be character"
+msgstr "argument '%s' musi być tekstem"
 
 #: unit.c:1918
-msgid "'units' must be of length > 0"
-msgstr "'units' muszą mieć długość > 0"
+#, c-format
+msgid "'%s' argument must be of length > 0"
+msgstr "argumtn '%s' musi mieć długość > 0"
 
 #: util.c:273 util.c:285
 msgid "grid grob object is empty"
@@ -128,3 +123,9 @@ msgstr "obiekt klasy \"grob\" jest pusty"
 #: viewport.c:316
 msgid "non-finite location and/or size for viewport"
 msgstr "nieskończone położenie oraz/lub rozmiar okna ekranu"
+
+#~ msgid "invalid 'layout.pos.row'"
+#~ msgstr "niepoprawny 'layout.pos.row'"
+
+#~ msgid "invalid 'layout.pos.col'"
+#~ msgstr "niepoprawny 'layout.pos.col'"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-27 18:05+0100\n"
+"POT-Creation-Date: 2016-04-11 20:39+0200\n"
 "PO-Revision-Date: 2015-01-17 15:12+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -84,15 +84,10 @@ msgstr "неправильный символ графика"
 msgid "unable to clip to rotated rectangle"
 msgstr "Не могу обрезать повернутый четырехугольник"
 
-#: layout.c:590
-#, fuzzy
-msgid "invalid 'layout.pos.row'"
-msgstr "неправильный layout.pos.row"
-
-#: layout.c:594
-#, fuzzy
-msgid "invalid 'layout.pos.col'"
-msgstr "неправильный layout.pos.col"
+#: layout.c:590 layout.c:594 unit.c:1899
+#, fuzzy, c-format
+msgid "invalid '%s' argument"
+msgstr "Неправильная единица"
 
 #: matrix.c:51
 msgid "singular transformation matrix"
@@ -125,18 +120,14 @@ msgstr ""
 msgid "Unsupported unit conversion"
 msgstr ""
 
-#: unit.c:1899
-msgid "Invalid unit"
-msgstr "Неправильная единица"
-
 #: unit.c:1915
-#, fuzzy
-msgid "'units' must be character"
+#, fuzzy, c-format
+msgid "'%s' argument must be character"
 msgstr "Единицы должен быть буквами"
 
 #: unit.c:1918
-#, fuzzy
-msgid "'units' must be of length > 0"
+#, fuzzy, c-format
+msgid "'%s' argument must be of length > 0"
 msgstr "Единицы должны быть длиной > 0"
 
 #: util.c:273 util.c:285
@@ -147,6 +138,14 @@ msgstr ""
 #, fuzzy
 msgid "non-finite location and/or size for viewport"
 msgstr "Не-конечное положение и/или размер оконницы"
+
+#, fuzzy
+#~ msgid "invalid 'layout.pos.row'"
+#~ msgstr "неправильный layout.pos.row"
+
+#, fuzzy
+#~ msgid "invalid 'layout.pos.col'"
+#~ msgstr "неправильный layout.pos.col"
 
 #~ msgid "Invalid circle radius (must be non-negative)"
 #~ msgstr "Неправильный радиус круга (должен быть неотрицательным)"

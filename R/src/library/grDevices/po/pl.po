@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: R 2.16.0\n"
+"Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-09 21:33+0200\n"
+"POT-Creation-Date: 2016-04-11 21:07+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
 #: axis_scales.c:38 axis_scales.c:39 axis_scales.c:56
@@ -291,25 +291,26 @@ msgstr "niepoprawny ukośnik linii"
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "próba użycia niepoprawnej czcionki %d zastąpionej przez czcionkę 1"
 
-#: devPS.c:3102 devPS.c:4726 devPS.c:5840
+#: devPS.c:3102 devPS.c:4726 devPS.c:5840 devWindows.c:1809 devWindows.c:1846
+#: devWindows.c:1876 devWindows.c:1908
 #, c-format
-msgid "filename too long in %s()"
-msgstr "nazwa pliku w '%s()' jest zbyt długa"
+msgid "filename too long in '%s' call"
+msgstr "nazwa pliku jest zbyt długa w wywołaniu '%s'"
 
 #: devPS.c:3108 devPS.c:4732 devPS.c:5846
 #, c-format
-msgid "memory allocation problem in %s()"
-msgstr "problem przydziału pamięci w '%s()'"
+msgid "memory allocation problem in '%s' function"
+msgstr "problem przydziału pamięci w funkcji '%s'"
 
-#: devPS.c:3125
+#: devPS.c:3125 devPS.c:5906
 #, c-format
-msgid "encoding path is too long in %s()"
+msgid "encoding path is too long in '%s' function"
 msgstr "ścieżka kodowa w funkcji '%s' jest zbyt długa"
 
 #: devPS.c:3139 devPS.c:4772
 #, c-format
-msgid "failed to load encoding file in %s()"
-msgstr "nie udało się załadować pliku kodowego w %s()"
+msgid "failed to load encoding file in '%s' function"
+msgstr "nie udało się załadować pliku strony kodowej funkcji '%s'"
 
 #: devPS.c:3184 devPS.c:3247 devPS.c:5965 devPS.c:6020 devPS.c:7647
 msgid "invalid font type"
@@ -379,17 +380,13 @@ msgstr "rodzina '%s' nie jest uwzględniona w urządzeniu 'postScript()'"
 
 #: devPS.c:4316
 #, c-format
-msgid ""
-"conversion failure on '%s' in 'mbcsToSbcs()' function: dot substituted for <"
-"%02x>"
-msgstr ""
-"niepowodzenie konwersji '%s' w funkcji 'mbcsToSbcs()': kropka zastąpiona <"
-"%02x>"
+msgid "conversion failure on '%s' in '%s' function: dot substituted for <%02x>"
+msgstr "niepowodzenie konwersji '%s' w funkcji '%s': kropka zastąpiona <%02x>"
 
 #: devPS.c:4324
 #, c-format
-msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs()' function"
-msgstr "niepowodzenie konwersji z %s na %s w '%s' w funkcji 'mbcsToSbcs()'"
+msgid "conversion failure from %s to %s on '%s' in '%s' function"
+msgstr "niepowodzenie konwersji z %s na %s w '%s' w funkcji '%s'"
 
 #: devPS.c:4394
 #, c-format
@@ -472,11 +469,6 @@ msgstr ""
 msgid "increasing the PDF version to %s"
 msgstr "zwiększanie wersji PDF do %s"
 
-#: devPS.c:5906
-#, c-format
-msgid "encoding path is too long in '%s' function"
-msgstr "ścieżka kodowa w funkcji '%s' jest zbyt długa"
-
 #: devPS.c:5922
 msgid "failed to load default encoding"
 msgstr "nie udało się załadować domyślnej strony kodowej"
@@ -554,12 +546,12 @@ msgstr "nie udało się znaleźć lub załadować czcionkę CID PDF"
 msgid "invalid '%s' parameter in '%s'"
 msgstr "niepoprawny parametr '%s' w '%s'"
 
-#: devPS.c:8261 devPS.c:8328
+#: devPS.c:8261 devPS.c:8328 devPS.c:8428
 #, c-format
-msgid "unable to start '%s' function"
-msgstr "nie można uruchomić funkcji '%s()'"
+msgid "unable to start '%s' device"
+msgstr "nie można uruchomić urządzenia '%s'"
 
-#: devPS.c:8428 devPicTeX.c:741 devWindows.c:3736
+#: devPicTeX.c:741 devWindows.c:3736
 #, c-format
 msgid "unable to start %s() device"
 msgstr "nie można uruchomić urządzenia '%s()'"
@@ -644,11 +636,6 @@ msgstr "historia wykresu wygląda na uszkodzoną"
 msgid "no plot history!"
 msgstr "brak historii wykresu!"
 
-#: devWindows.c:1809
-#, c-format
-msgid "filename too long in %s() call"
-msgstr "nazwa pliku jest zbyt długa w wywołaniu '%s()'"
-
 #: devWindows.c:1814 devWindows.c:1849 devWindows.c:1879
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
@@ -663,18 +650,6 @@ msgstr "nie można przydzielić bitmapy"
 #, c-format
 msgid "unable to open file '%s' for writing"
 msgstr "nie można otworzyć pliku '%s' do zapisu"
-
-#: devWindows.c:1846
-msgid "filename too long in jpeg() call"
-msgstr "nazwa pliku w wywołaniu 'jpeg()' jest zbyt długa"
-
-#: devWindows.c:1876
-msgid "filename too long in tiff() call"
-msgstr "nazwa pliku w wywołaniu 'tiff()' jest zbyt długa"
-
-#: devWindows.c:1908
-msgid "filename too long in win.metafile() call"
-msgstr "nazwa pliku w wywołaniu 'win.metafile()' jest zbyt długa"
 
 #: devWindows.c:1918
 #, c-format
@@ -725,8 +700,8 @@ msgid "invalid device number in 'savePlot()' function"
 msgstr "niepoprawny numer urządzenia w funkcji 'savePlot()'"
 
 #: devWindows.c:3422
-msgid "invalid device in 'savePlot'"
-msgstr "niepoprawne urządzenie w 'savePlot'"
+msgid "invalid device in 'savePlot()' function"
+msgstr "niepoprawny numer urządzenia w funkcji 'savePlot()'"
 
 #: devWindows.c:3425
 msgid "invalid filename argument in 'savePlot()' function"
@@ -734,7 +709,7 @@ msgstr "niepoprawny argument nazwy pliku w funkcji 'savePlot()'"
 
 #: devWindows.c:3430
 msgid "invalid type argument in 'savePlot()' function"
-msgstr "niepoprawny argument nazwy pliku w funkcji 'savePlot()'"
+msgstr "niepoprawny typ argument w funkcji 'savePlot()'"
 
 #: devWindows.c:3457
 msgid "unknown type in savePlot"
@@ -757,9 +732,10 @@ msgstr "niepoprawna wartość 'width' lub 'height'"
 msgid "argument must have positive length"
 msgstr "argument musi mieć dodatnią długość"
 
-#: devices.c:52
-msgid "invalid argument"
-msgstr "niepoprawny argument"
+#: devices.c:52 stubs.c:105
+#, c-format
+msgid "invalid '%s' argument"
+msgstr "niepoprawny argument '%s'"
 
 #: qdBitmap.c:79
 #, c-format
@@ -774,10 +750,35 @@ msgstr "to nie jest wspierany schemat, nie zapisano danych obrazka"
 msgid "Quartz R Device"
 msgstr "Urządzenie R Quartz"
 
-#: stubs.c:105
-#, c-format
-msgid "invalid '%s' argument"
-msgstr "niepoprawny argument '%s'"
+#~ msgid "filename too long in '%s' function"
+#~ msgstr "nazwa pliku jest zbyt długa w wywołaniu '%s'"
+
+#~ msgid "invalid device in 'savePlot'"
+#~ msgstr "niepoprawne urządzenie w funkcji 'savePlot()'"
+
+#~ msgid "filename too long in %s()"
+#~ msgstr "nazwa pliku w '%s()' jest zbyt długa"
+
+#~ msgid "encoding path is too long in %s()"
+#~ msgstr "ścieżka kodowa w funkcji '%s' jest zbyt długa"
+
+#~ msgid "failed to load encoding file in %s()"
+#~ msgstr "nie udało się załadować pliku kodowego w %s()"
+
+#~ msgid "unable to start '%s' function"
+#~ msgstr "nie można uruchomić funkcji '%s()'"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "nazwa pliku w wywołaniu 'jpeg()' jest zbyt długa"
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "nazwa pliku w wywołaniu 'tiff()' jest zbyt długa"
+
+#~ msgid "filename too long in win.metafile() call"
+#~ msgstr "nazwa pliku w wywołaniu 'win.metafile()' jest zbyt długa"
+
+#~ msgid "invalid argument"
+#~ msgstr "niepoprawny argument"
 
 #~ msgid "invalid string in '%s'"
 #~ msgstr "niepoprawny łańcuch w '%s'"

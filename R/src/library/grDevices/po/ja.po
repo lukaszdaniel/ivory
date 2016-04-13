@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-09 21:33+0200\n"
+"POT-Creation-Date: 2016-04-11 21:07+0200\n"
 "PO-Revision-Date: 2012-02-26 14:10+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -312,25 +312,26 @@ msgstr " 不正な line mitre です "
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr " 不正なフォント %d を使おうとしましたが、フォント 1 で置き換えました "
 
-#: devPS.c:3102 devPS.c:4726 devPS.c:5840
-#, c-format
-msgid "filename too long in %s()"
-msgstr " %s() 中に長すぎるファイル名  "
+#: devPS.c:3102 devPS.c:4726 devPS.c:5840 devWindows.c:1809 devWindows.c:1846
+#: devWindows.c:1876 devWindows.c:1908
+#, fuzzy, c-format
+msgid "filename too long in '%s' call"
+msgstr " 呼出し %s() 中に長すぎるファイル名  "
 
 #: devPS.c:3108 devPS.c:4732 devPS.c:5846
-#, c-format
-msgid "memory allocation problem in %s()"
+#, fuzzy, c-format
+msgid "memory allocation problem in '%s' function"
 msgstr " %s() 中にメモリ割り当てのトラブルがあります "
 
-#: devPS.c:3125
-#, c-format
-msgid "encoding path is too long in %s()"
+#: devPS.c:3125 devPS.c:5906
+#, fuzzy, c-format
+msgid "encoding path is too long in '%s' function"
 msgstr " %s() 中のエンコーディングのパスが長すぎます "
 
 #: devPS.c:3139 devPS.c:4772
-#, c-format
-msgid "failed to load encoding file in %s()"
-msgstr " %s() 中にエンコーディングファイををロードできませんでした "
+#, fuzzy, c-format
+msgid "failed to load encoding file in '%s' function"
+msgstr " エンコーディングファイル '%s' をロードできませんでした "
 
 #: devPS.c:3184 devPS.c:3247 devPS.c:5965 devPS.c:6020 devPS.c:7647
 #, fuzzy
@@ -404,14 +405,12 @@ msgstr " ポストスクリプトデバイス中にフォントファミリ '%s'
 
 #: devPS.c:4316
 #, fuzzy, c-format
-msgid ""
-"conversion failure on '%s' in 'mbcsToSbcs()' function: dot substituted for <"
-"%02x>"
+msgid "conversion failure on '%s' in '%s' function: dot substituted for <%02x>"
 msgstr " 'mbcsToSbcs' 中の '%s' で変換に失敗: <%02x>をドットで置き換えました "
 
 #: devPS.c:4324
 #, fuzzy, c-format
-msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs()' function"
+msgid "conversion failure from %s to %s on '%s' in '%s' function"
 msgstr " 'mbcsToSbcs' 中の '%s' で変換に失敗: <%02x>をドットで置き換えました "
 
 #: devPS.c:4394
@@ -503,11 +502,6 @@ msgstr ""
 msgid "increasing the PDF version to %s"
 msgstr " PDF のバージョンを 1.2 に更新しています "
 
-#: devPS.c:5906
-#, fuzzy, c-format
-msgid "encoding path is too long in '%s' function"
-msgstr " %s() 中のエンコーディングのパスが長すぎます "
-
 #: devPS.c:5922
 msgid "failed to load default encoding"
 msgstr " 既定のエンコーディングのロードに失敗しました "
@@ -592,12 +586,12 @@ msgstr " PDF CID フォントが見付からないかロードできませんで
 msgid "invalid '%s' parameter in '%s'"
 msgstr " %s 中に不正な 'fonts' パラメータ "
 
-#: devPS.c:8261 devPS.c:8328
+#: devPS.c:8261 devPS.c:8328 devPS.c:8428
 #, fuzzy, c-format
-msgid "unable to start '%s' function"
+msgid "unable to start '%s' device"
 msgstr " デバイス %s() を開始できませんでした "
 
-#: devPS.c:8428 devPicTeX.c:741 devWindows.c:3736
+#: devPicTeX.c:741 devWindows.c:3736
 #, c-format
 msgid "unable to start %s() device"
 msgstr " デバイス %s() を開始できませんでした "
@@ -686,11 +680,6 @@ msgstr " 描画履歴が破損しているようです "
 msgid "no plot history!"
 msgstr " 描画履歴がありません "
 
-#: devWindows.c:1809
-#, c-format
-msgid "filename too long in %s() call"
-msgstr " 呼出し %s() 中に長すぎるファイル名  "
-
 #: devWindows.c:1814 devWindows.c:1849 devWindows.c:1879
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
@@ -706,18 +695,6 @@ msgstr " ビットマップを割り当てられません "
 #, fuzzy, c-format
 msgid "unable to open file '%s' for writing"
 msgstr " ファイル '%s' を書込み用に開くことができません "
-
-#: devWindows.c:1846
-msgid "filename too long in jpeg() call"
-msgstr " 呼出し jpeg() 中に長すぎるファイル名 "
-
-#: devWindows.c:1876
-msgid "filename too long in tiff() call"
-msgstr " 呼出し tiff() 中に長すぎるファイル名  "
-
-#: devWindows.c:1908
-msgid "filename too long in win.metafile() call"
-msgstr " 呼出し win.metafile() 中に長すぎるファイル名 "
 
 #: devWindows.c:1918
 #, fuzzy, c-format
@@ -769,8 +746,9 @@ msgid "invalid device number in 'savePlot()' function"
 msgstr " savePlot　中に不正なデバイス番号 "
 
 #: devWindows.c:3422
-msgid "invalid device in 'savePlot'"
-msgstr " savePlot 中に不正なデバイス "
+#, fuzzy
+msgid "invalid device in 'savePlot()' function"
+msgstr " savePlot　中に不正なデバイス番号 "
 
 #: devWindows.c:3425
 #, fuzzy
@@ -803,9 +781,9 @@ msgstr " 不正な幅か高さ "
 msgid "argument must have positive length"
 msgstr ""
 
-#: devices.c:52
-#, fuzzy
-msgid "invalid argument"
+#: devices.c:52 stubs.c:105
+#, fuzzy, c-format
+msgid "invalid '%s' argument"
 msgstr " 不正な 'file' 引数 "
 
 #: qdBitmap.c:79
@@ -823,10 +801,38 @@ msgstr ""
 msgid "Quartz R Device"
 msgstr ""
 
-#: stubs.c:105
-#, fuzzy, c-format
-msgid "invalid '%s' argument"
-msgstr " 不正な 'file' 引数 "
+#, fuzzy
+#~ msgid "filename too long in '%s' function"
+#~ msgstr " 呼出し %s() 中に長すぎるファイル名  "
+
+#~ msgid "invalid device in 'savePlot'"
+#~ msgstr " savePlot 中に不正なデバイス "
+
+#~ msgid "filename too long in %s()"
+#~ msgstr " %s() 中に長すぎるファイル名  "
+
+#~ msgid "encoding path is too long in %s()"
+#~ msgstr " %s() 中のエンコーディングのパスが長すぎます "
+
+#~ msgid "failed to load encoding file in %s()"
+#~ msgstr " %s() 中にエンコーディングファイををロードできませんでした "
+
+#, fuzzy
+#~ msgid "unable to start '%s' function"
+#~ msgstr " デバイス %s() を開始できませんでした "
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr " 呼出し jpeg() 中に長すぎるファイル名 "
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr " 呼出し tiff() 中に長すぎるファイル名  "
+
+#~ msgid "filename too long in win.metafile() call"
+#~ msgstr " 呼出し win.metafile() 中に長すぎるファイル名 "
+
+#, fuzzy
+#~ msgid "invalid argument"
+#~ msgstr " 不正な 'file' 引数 "
 
 #, fuzzy
 #~ msgid "invalid string in '%s'function"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-27 18:05+0100\n"
+"POT-Creation-Date: 2016-04-11 20:39+0200\n"
 "PO-Revision-Date: 2010-10-01 20:58+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -81,15 +81,10 @@ msgstr "symboles graphiques incorrects"
 msgid "unable to clip to rotated rectangle"
 msgstr "Impossible de couper au rectangle pivoté"
 
-#: layout.c:590
-#, fuzzy
-msgid "invalid 'layout.pos.row'"
-msgstr "layout.pos.row incorrect"
-
-#: layout.c:594
-#, fuzzy
-msgid "invalid 'layout.pos.col'"
-msgstr "layout.pos.col incorrect"
+#: layout.c:590 layout.c:594 unit.c:1899
+#, fuzzy, c-format
+msgid "invalid '%s' argument"
+msgstr "Unité incorrecte"
 
 #: matrix.c:51
 msgid "singular transformation matrix"
@@ -123,18 +118,14 @@ msgstr ""
 msgid "Unsupported unit conversion"
 msgstr ""
 
-#: unit.c:1899
-msgid "Invalid unit"
-msgstr "Unité incorrecte"
-
 #: unit.c:1915
-#, fuzzy
-msgid "'units' must be character"
+#, fuzzy, c-format
+msgid "'%s' argument must be character"
 msgstr "Les unités doivent être une chaîne de caractères"
 
 #: unit.c:1918
-#, fuzzy
-msgid "'units' must be of length > 0"
+#, fuzzy, c-format
+msgid "'%s' argument must be of length > 0"
 msgstr "Les unités doivent être de longueur > 0"
 
 #: util.c:273 util.c:285
@@ -145,6 +136,14 @@ msgstr ""
 #, fuzzy
 msgid "non-finite location and/or size for viewport"
 msgstr "Position et / ou taille de vue non finies"
+
+#, fuzzy
+#~ msgid "invalid 'layout.pos.row'"
+#~ msgstr "layout.pos.row incorrect"
+
+#, fuzzy
+#~ msgid "invalid 'layout.pos.col'"
+#~ msgstr "layout.pos.col incorrect"
 
 #~ msgid "Invalid circle radius (must be non-negative)"
 #~ msgstr "Rayon de cercle incorrect (doit être positif ou nul)"

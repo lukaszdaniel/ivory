@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-27 18:05+0100\n"
+"POT-Creation-Date: 2016-04-11 20:39+0200\n"
 "PO-Revision-Date: 2016-01-09 19:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -79,15 +79,10 @@ msgstr "ugyldigt plotsymbol"
 msgid "unable to clip to rotated rectangle"
 msgstr "Kan ikke klippe til roteret rektangel"
 
-#: layout.c:590
-#, fuzzy
-msgid "invalid 'layout.pos.row'"
-msgstr "ugyldig layout.pos.row"
-
-#: layout.c:594
-#, fuzzy
-msgid "invalid 'layout.pos.col'"
-msgstr "ugyldig layout.pos.col"
+#: layout.c:590 layout.c:594 unit.c:1899
+#, fuzzy, c-format
+msgid "invalid '%s' argument"
+msgstr "Ugyldig enhed"
 
 #: matrix.c:51
 msgid "singular transformation matrix"
@@ -120,18 +115,14 @@ msgstr ""
 msgid "Unsupported unit conversion"
 msgstr ""
 
-#: unit.c:1899
-msgid "Invalid unit"
-msgstr "Ugyldig enhed"
-
 #: unit.c:1915
-#, fuzzy
-msgid "'units' must be character"
+#, fuzzy, c-format
+msgid "'%s' argument must be character"
 msgstr "Enheder skal være tegn"
 
 #: unit.c:1918
-#, fuzzy
-msgid "'units' must be of length > 0"
+#, fuzzy, c-format
+msgid "'%s' argument must be of length > 0"
 msgstr "Enheder skal have længde > 0"
 
 #: util.c:273 util.c:285
@@ -142,3 +133,11 @@ msgstr ""
 #, fuzzy
 msgid "non-finite location and/or size for viewport"
 msgstr "Ikkebegrænsende placeirng og/eller størrelse for viewport"
+
+#, fuzzy
+#~ msgid "invalid 'layout.pos.row'"
+#~ msgstr "ugyldig layout.pos.row"
+
+#, fuzzy
+#~ msgid "invalid 'layout.pos.col'"
+#~ msgstr "ugyldig layout.pos.col"

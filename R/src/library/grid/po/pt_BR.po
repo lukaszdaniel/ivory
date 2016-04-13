@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-27 18:05+0100\n"
+"POT-Creation-Date: 2016-04-11 20:39+0200\n"
 "PO-Revision-Date: 2015-01-17 15:12+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -81,15 +81,10 @@ msgstr "simbolo para gráfico inválido"
 msgid "unable to clip to rotated rectangle"
 msgstr "Não é possível cortar sobre um retângulo rotacionado"
 
-#: layout.c:590
-#, fuzzy
-msgid "invalid 'layout.pos.row'"
-msgstr "layout.pos.row inválido"
-
-#: layout.c:594
-#, fuzzy
-msgid "invalid 'layout.pos.col'"
-msgstr "layout.pos.col inválido"
+#: layout.c:590 layout.c:594 unit.c:1899
+#, fuzzy, c-format
+msgid "invalid '%s' argument"
+msgstr "Unidade inválida"
 
 #: matrix.c:51
 msgid "singular transformation matrix"
@@ -123,18 +118,14 @@ msgstr ""
 msgid "Unsupported unit conversion"
 msgstr ""
 
-#: unit.c:1899
-msgid "Invalid unit"
-msgstr "Unidade inválida"
-
 #: unit.c:1915
-#, fuzzy
-msgid "'units' must be character"
+#, fuzzy, c-format
+msgid "'%s' argument must be character"
 msgstr "Unidades devem ser do tipo caractere"
 
 #: unit.c:1918
-#, fuzzy
-msgid "'units' must be of length > 0"
+#, fuzzy, c-format
+msgid "'%s' argument must be of length > 0"
 msgstr "Unidades devem ter comprimento > 0"
 
 #: util.c:273 util.c:285
@@ -145,6 +136,14 @@ msgstr ""
 #, fuzzy
 msgid "non-finite location and/or size for viewport"
 msgstr "Localização e/ou tamanhos não finitos para viewport"
+
+#, fuzzy
+#~ msgid "invalid 'layout.pos.row'"
+#~ msgstr "layout.pos.row inválido"
+
+#, fuzzy
+#~ msgid "invalid 'layout.pos.col'"
+#~ msgstr "layout.pos.col inválido"
 
 #~ msgid "Invalid circle radius (must be non-negative)"
 #~ msgstr "Raio de círculo inválido (deve ser não negativo)"

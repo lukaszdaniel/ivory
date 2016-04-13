@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-09 21:33+0200\n"
+"POT-Creation-Date: 2016-04-11 21:07+0200\n"
 "PO-Revision-Date: 2016-01-09 18:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -306,25 +306,27 @@ msgstr "Ugyldig linjegering"
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "forsøg på at bruge ugyldig skrifttype %d erstattet af skrifttype 1"
 
-#: devPS.c:3102 devPS.c:4726 devPS.c:5840
-#, c-format
-msgid "filename too long in %s()"
-msgstr "filnavn er for langt i %s()"
+# 83%
+#: devPS.c:3102 devPS.c:4726 devPS.c:5840 devWindows.c:1809 devWindows.c:1846
+#: devWindows.c:1876 devWindows.c:1908
+#, fuzzy, c-format
+msgid "filename too long in '%s' call"
+msgstr "filnavn er for langt i %s()-kald"
 
 #: devPS.c:3108 devPS.c:4732 devPS.c:5846
-#, c-format
-msgid "memory allocation problem in %s()"
+#, fuzzy, c-format
+msgid "memory allocation problem in '%s' function"
 msgstr "allokeringsproblem for hukommelsen i %s()"
 
-#: devPS.c:3125
-#, c-format
-msgid "encoding path is too long in %s()"
+#: devPS.c:3125 devPS.c:5906
+#, fuzzy, c-format
+msgid "encoding path is too long in '%s' function"
 msgstr "kodningssti er for lang i %s()"
 
 #: devPS.c:3139 devPS.c:4772
-#, c-format
-msgid "failed to load encoding file in %s()"
-msgstr "kunne ikke indlæse kodningsfil i %s()"
+#, fuzzy, c-format
+msgid "failed to load encoding file in '%s' function"
+msgstr "kunne ikke indlæse kodningsfil '%s'"
 
 #: devPS.c:3184 devPS.c:3247 devPS.c:5965 devPS.c:6020 devPS.c:7647
 #, fuzzy
@@ -399,14 +401,12 @@ msgstr "familie '%s' er ikke inkluderet i PostScript-enhed"
 
 #: devPS.c:4316
 #, fuzzy, c-format
-msgid ""
-"conversion failure on '%s' in 'mbcsToSbcs()' function: dot substituted for <"
-"%02x>"
+msgid "conversion failure on '%s' in '%s' function: dot substituted for <%02x>"
 msgstr "konverteringsfejl på '%s' i 'mbcsToSbcs': punktum erstattet for <%02x>"
 
 #: devPS.c:4324
 #, fuzzy, c-format
-msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs()' function"
+msgid "conversion failure from %s to %s on '%s' in '%s' function"
 msgstr "konverteringsfejl på '%s' i 'mbcsToSbcs': punktum erstattet for <%02x>"
 
 #: devPS.c:4394
@@ -498,11 +498,6 @@ msgstr "Kunne ikke optage enhedskodning: skrifttype ikke tilføjet"
 msgid "increasing the PDF version to %s"
 msgstr "øger PDF-versionen til 1.2"
 
-#: devPS.c:5906
-#, fuzzy, c-format
-msgid "encoding path is too long in '%s' function"
-msgstr "kodningssti er for lang i %s()"
-
 #: devPS.c:5922
 msgid "failed to load default encoding"
 msgstr "kunne ikke indlæse standardkodning"
@@ -592,13 +587,13 @@ msgid "invalid '%s' parameter in '%s'"
 msgstr "ugyldigt 'fonts'-parameter i %s"
 
 # 85%
-#: devPS.c:8261 devPS.c:8328
+#: devPS.c:8261 devPS.c:8328 devPS.c:8428
 #, fuzzy, c-format
-msgid "unable to start '%s' function"
+msgid "unable to start '%s' device"
 msgstr "kan ikke starte %s()-enhed"
 
 # 85%
-#: devPS.c:8428 devPicTeX.c:741 devWindows.c:3736
+#: devPicTeX.c:741 devWindows.c:3736
 #, c-format
 msgid "unable to start %s() device"
 msgstr "kan ikke starte %s()-enhed"
@@ -689,12 +684,6 @@ msgstr "plot-historik ser ud til at være ødelagt"
 msgid "no plot history!"
 msgstr "ingen plot-historik!"
 
-# 83%
-#: devWindows.c:1809
-#, c-format
-msgid "filename too long in %s() call"
-msgstr "filnavn er for langt i %s()-kald"
-
 #: devWindows.c:1814 devWindows.c:1849 devWindows.c:1879
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
@@ -710,18 +699,6 @@ msgstr "Kan ikke allokere bitmap"
 #, fuzzy, c-format
 msgid "unable to open file '%s' for writing"
 msgstr "Kan ikke åbne fil '%s' for skrivning"
-
-#: devWindows.c:1846
-msgid "filename too long in jpeg() call"
-msgstr "filnavn for langt i jpeg()-kald"
-
-#: devWindows.c:1876
-msgid "filename too long in tiff() call"
-msgstr "filnavn for langt i tiff()-kald"
-
-#: devWindows.c:1908
-msgid "filename too long in win.metafile() call"
-msgstr "filnavn for langt i win.metafile()-kald"
 
 #: devWindows.c:1918
 #, fuzzy, c-format
@@ -774,8 +751,9 @@ msgid "invalid device number in 'savePlot()' function"
 msgstr "ugyldigt enhedstal i 'savePlot'"
 
 #: devWindows.c:3422
-msgid "invalid device in 'savePlot'"
-msgstr "ugyldig enhed i 'savePlot'"
+#, fuzzy
+msgid "invalid device in 'savePlot()' function"
+msgstr "ugyldigt enhedstal i 'savePlot'"
 
 #: devWindows.c:3425
 #, fuzzy
@@ -808,9 +786,9 @@ msgstr "ugyldig 'bredde' eller 'højde'"
 msgid "argument must have positive length"
 msgstr ""
 
-#: devices.c:52
-#, fuzzy
-msgid "invalid argument"
+#: devices.c:52 stubs.c:105
+#, fuzzy, c-format
+msgid "invalid '%s' argument"
 msgstr "ugyldigt 'fil'-argument"
 
 #: qdBitmap.c:79
@@ -827,10 +805,40 @@ msgstr "Ikke et understøttet skema, ingen billeddata skrevet"
 msgid "Quartz R Device"
 msgstr ""
 
-#: stubs.c:105
-#, fuzzy, c-format
-msgid "invalid '%s' argument"
-msgstr "ugyldigt 'fil'-argument"
+# 83%
+#, fuzzy
+#~ msgid "filename too long in '%s' function"
+#~ msgstr "filnavn er for langt i %s()-kald"
+
+#~ msgid "invalid device in 'savePlot'"
+#~ msgstr "ugyldig enhed i 'savePlot'"
+
+#~ msgid "filename too long in %s()"
+#~ msgstr "filnavn er for langt i %s()"
+
+#~ msgid "encoding path is too long in %s()"
+#~ msgstr "kodningssti er for lang i %s()"
+
+#~ msgid "failed to load encoding file in %s()"
+#~ msgstr "kunne ikke indlæse kodningsfil i %s()"
+
+# 85%
+#, fuzzy
+#~ msgid "unable to start '%s' function"
+#~ msgstr "kan ikke starte %s()-enhed"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "filnavn for langt i jpeg()-kald"
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "filnavn for langt i tiff()-kald"
+
+#~ msgid "filename too long in win.metafile() call"
+#~ msgstr "filnavn for langt i win.metafile()-kald"
+
+#, fuzzy
+#~ msgid "invalid argument"
+#~ msgstr "ugyldigt 'fil'-argument"
 
 #, fuzzy
 #~ msgid "invalid string in '%s'function"

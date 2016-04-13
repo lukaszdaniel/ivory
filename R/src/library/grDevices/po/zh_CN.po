@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-09 21:33+0200\n"
+"POT-Creation-Date: 2016-04-11 21:07+0200\n"
 "PO-Revision-Date: 2015-01-17 15:08+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -300,25 +300,26 @@ msgstr "行斜接出错"
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "不能用%d这个字体，代用一字体"
 
-#: devPS.c:3102 devPS.c:4726 devPS.c:5840
-#, c-format
-msgid "filename too long in %s()"
-msgstr "%s()里的文本名字太长"
+#: devPS.c:3102 devPS.c:4726 devPS.c:5840 devWindows.c:1809 devWindows.c:1846
+#: devWindows.c:1876 devWindows.c:1908
+#, fuzzy, c-format
+msgid "filename too long in '%s' call"
+msgstr "%s()調用里的文本名字太长"
 
 #: devPS.c:3108 devPS.c:4732 devPS.c:5846
-#, c-format
-msgid "memory allocation problem in %s()"
+#, fuzzy, c-format
+msgid "memory allocation problem in '%s' function"
 msgstr "%s()内存分配出了问题"
 
-#: devPS.c:3125
-#, c-format
-msgid "encoding path is too long in %s()"
+#: devPS.c:3125 devPS.c:5906
+#, fuzzy, c-format
+msgid "encoding path is too long in '%s' function"
 msgstr "%s()里的编码路径太长"
 
 #: devPS.c:3139 devPS.c:4772
-#, c-format
-msgid "failed to load encoding file in %s()"
-msgstr "%s()中载入编码文本失败了'"
+#, fuzzy, c-format
+msgid "failed to load encoding file in '%s' function"
+msgstr "无法载入编码文本'%s'"
 
 #: devPS.c:3184 devPS.c:3247 devPS.c:5965 devPS.c:6020 devPS.c:7647
 #, fuzzy
@@ -390,14 +391,12 @@ msgstr "PostScript装置里没有'%s'系列"
 
 #: devPS.c:4316
 #, fuzzy, c-format
-msgid ""
-"conversion failure on '%s' in 'mbcsToSbcs()' function: dot substituted for <"
-"%02x>"
+msgid "conversion failure on '%s' in '%s' function: dot substituted for <%02x>"
 msgstr "'mbcsToSbcs'里转换'%s'出错：<%02x>代替了dot"
 
 #: devPS.c:4324
 #, fuzzy, c-format
-msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs()' function"
+msgid "conversion failure from %s to %s on '%s' in '%s' function"
 msgstr "'mbcsToSbcs'里转换'%s'出错：<%02x>代替了dot"
 
 #: devPS.c:4394
@@ -486,11 +485,6 @@ msgstr "无法记录装置编码; 字体没有加入"
 msgid "increasing the PDF version to %s"
 msgstr "增加PDF版本到1.2"
 
-#: devPS.c:5906
-#, fuzzy, c-format
-msgid "encoding path is too long in '%s' function"
-msgstr "%s()里的编码路径太长"
-
 #: devPS.c:5922
 msgid "failed to load default encoding"
 msgstr "无法载入默认编码"
@@ -575,12 +569,12 @@ msgstr "没有能够找到和载入PDFCID字体"
 msgid "invalid '%s' parameter in '%s'"
 msgstr "%s里的'fonts'参数不对"
 
-#: devPS.c:8261 devPS.c:8328
+#: devPS.c:8261 devPS.c:8328 devPS.c:8428
 #, fuzzy, c-format
-msgid "unable to start '%s' function"
+msgid "unable to start '%s' device"
 msgstr "无法启动%s()装置"
 
-#: devPS.c:8428 devPicTeX.c:741 devWindows.c:3736
+#: devPicTeX.c:741 devWindows.c:3736
 #, c-format
 msgid "unable to start %s() device"
 msgstr "无法启动%s()装置"
@@ -669,11 +663,6 @@ msgstr "绘图历史好象坏了"
 msgid "no plot history!"
 msgstr "没有绘图历史!"
 
-#: devWindows.c:1809
-#, c-format
-msgid "filename too long in %s() call"
-msgstr "%s()調用里的文本名字太长"
-
 #: devWindows.c:1814 devWindows.c:1849 devWindows.c:1879
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
@@ -689,18 +678,6 @@ msgstr "无法分配bitmap"
 #, fuzzy, c-format
 msgid "unable to open file '%s' for writing"
 msgstr "无法打开'%s'文本来进行读写"
-
-#: devWindows.c:1846
-msgid "filename too long in jpeg() call"
-msgstr "jpeg()調用中的文本名字太长"
-
-#: devWindows.c:1876
-msgid "filename too long in tiff() call"
-msgstr "tiff()調用里的文本名字太长"
-
-#: devWindows.c:1908
-msgid "filename too long in win.metafile() call"
-msgstr "win.metafile()調用里的文本名字太长"
 
 #: devWindows.c:1918
 #, fuzzy, c-format
@@ -752,8 +729,9 @@ msgid "invalid device number in 'savePlot()' function"
 msgstr "'savePlot'里的装置数目出了错"
 
 #: devWindows.c:3422
-msgid "invalid device in 'savePlot'"
-msgstr "'savePlot'装置出错"
+#, fuzzy
+msgid "invalid device in 'savePlot()' function"
+msgstr "'savePlot'里的装置数目出了错"
 
 #: devWindows.c:3425
 #, fuzzy
@@ -786,9 +764,9 @@ msgstr "'width'或'height'的值不对"
 msgid "argument must have positive length"
 msgstr ""
 
-#: devices.c:52
-#, fuzzy
-msgid "invalid argument"
+#: devices.c:52 stubs.c:105
+#, fuzzy, c-format
+msgid "invalid '%s' argument"
 msgstr "'file'参数不对"
 
 #: qdBitmap.c:79
@@ -805,10 +783,38 @@ msgstr "不支持这个规划，因此没有写任何图象数据"
 msgid "Quartz R Device"
 msgstr ""
 
-#: stubs.c:105
-#, fuzzy, c-format
-msgid "invalid '%s' argument"
-msgstr "'file'参数不对"
+#, fuzzy
+#~ msgid "filename too long in '%s' function"
+#~ msgstr "%s()調用里的文本名字太长"
+
+#~ msgid "invalid device in 'savePlot'"
+#~ msgstr "'savePlot'装置出错"
+
+#~ msgid "filename too long in %s()"
+#~ msgstr "%s()里的文本名字太长"
+
+#~ msgid "encoding path is too long in %s()"
+#~ msgstr "%s()里的编码路径太长"
+
+#~ msgid "failed to load encoding file in %s()"
+#~ msgstr "%s()中载入编码文本失败了'"
+
+#, fuzzy
+#~ msgid "unable to start '%s' function"
+#~ msgstr "无法启动%s()装置"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "jpeg()調用中的文本名字太长"
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "tiff()調用里的文本名字太长"
+
+#~ msgid "filename too long in win.metafile() call"
+#~ msgstr "win.metafile()調用里的文本名字太长"
+
+#, fuzzy
+#~ msgid "invalid argument"
+#~ msgstr "'file'参数不对"
 
 #, fuzzy
 #~ msgid "invalid string in '%s'function"

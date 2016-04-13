@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-27 18:05+0100\n"
+"POT-Creation-Date: 2016-04-11 20:39+0200\n"
 "PO-Revision-Date: 2015-01-17 15:12+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -82,15 +82,10 @@ msgstr " 不正なプロット記号です "
 msgid "unable to clip to rotated rectangle"
 msgstr " 回転矩形へクリップ出来ません "
 
-#: layout.c:590
-#, fuzzy
-msgid "invalid 'layout.pos.row'"
-msgstr " 不正な layout.pos.row です "
-
-#: layout.c:594
-#, fuzzy
-msgid "invalid 'layout.pos.col'"
-msgstr " 不正な layout.pos.col です "
+#: layout.c:590 layout.c:594 unit.c:1899
+#, fuzzy, c-format
+msgid "invalid '%s' argument"
+msgstr " 不正な単位(unit) です "
 
 #: matrix.c:51
 msgid "singular transformation matrix"
@@ -125,18 +120,14 @@ msgstr ""
 msgid "Unsupported unit conversion"
 msgstr ""
 
-#: unit.c:1899
-msgid "Invalid unit"
-msgstr " 不正な単位(unit) です "
-
 #: unit.c:1915
-#, fuzzy
-msgid "'units' must be character"
+#, fuzzy, c-format
+msgid "'%s' argument must be character"
 msgstr " 単位(Units)は文字型である必要があります "
 
 #: unit.c:1918
-#, fuzzy
-msgid "'units' must be of length > 0"
+#, fuzzy, c-format
+msgid "'%s' argument must be of length > 0"
 msgstr " 単位(Units)の長さは 0 より大きい必要があります "
 
 #: util.c:273 util.c:285
@@ -147,6 +138,14 @@ msgstr ""
 #, fuzzy
 msgid "non-finite location and/or size for viewport"
 msgstr " 有限でない location かつ/または 有限でない viewport です "
+
+#, fuzzy
+#~ msgid "invalid 'layout.pos.row'"
+#~ msgstr " 不正な layout.pos.row です "
+
+#, fuzzy
+#~ msgid "invalid 'layout.pos.col'"
+#~ msgstr " 不正な layout.pos.col です "
 
 #~ msgid "Invalid circle radius (must be non-negative)"
 #~ msgstr " 不正な円の半径です（非負でなければなりません） "

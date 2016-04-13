@@ -1806,8 +1806,8 @@ static Rboolean GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	xd->res_dpi = (xpos == NA_INTEGER) ? 0 : xpos;
 	xd->bg = dd->startfill = canvascolor;
 	xd->kind = (dsp[0]=='p') ? PNG : BMP;
-	if(strlen(dsp+4) >= 512) error(_("filename too long in %s() call"),
-				       (dsp[0]=='p') ? "png" : "bmp");
+	if(strlen(dsp+4) >= 512) error(_("filename too long in '%s' call"),
+				       (dsp[0]=='p') ? "png()" : "bmp()");
 	strcpy(xd->filename, R_ExpandFileName(dsp+4));
 
 	if (w < 20 && h < 20)
@@ -1843,7 +1843,7 @@ static Rboolean GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	*p = '\0';
 	xd->quality = atoi(&dsp[5]);
 	*p = ':' ;
-	if(strlen(p+1) >= 512) error(_("filename too long in jpeg() call"));
+	if(strlen(p+1) >= 512) error(_("filename too long in '%s' call"), "jpeg()");
 	strcpy(xd->filename, R_ExpandFileName(p+1));
 	if (w < 20 && h < 20)
 	    warning(_("'width=%d, height=%d' are unlikely values in pixels"),
@@ -1873,7 +1873,7 @@ static Rboolean GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	*p = '\0';
 	xd->quality = atoi(&dsp[5]);
 	*p = ':' ;
-	if(strlen(p+1) >= 512) error(_("filename too long in tiff() call"));
+	if(strlen(p+1) >= 512) error(_("filename too long in '%s' call"), "tiff()");
 	strcpy(xd->filename, R_ExpandFileName(p+1));
 	if (w < 20 && h < 20)
 	    warning(_("'width=%d, height=%d' are unlikely values in pixels"),
@@ -1905,7 +1905,7 @@ static Rboolean GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	    return FALSE;
 	}
 	if(ld > ls && strlen(&dsp[ls + 1]) >= 512)
-	    error(_("filename too long in win.metafile() call"));
+	    error(_("filename too long in '%s' call"), "win.metafile()");
 	strcpy(xd->filename, (ld > ls) ? &dsp[ls + 1] : "");
 	snprintf(buf, 600, xd->filename, 1);
 	xd->w = MM_PER_INCH * w;
@@ -3419,7 +3419,7 @@ SEXP savePlot(SEXP args)
     if(device < 1 || device > NumDevices())
 	error(_("invalid device number in 'savePlot()' function"));
     dd = GEgetDevice(device - 1)->dev;
-    if(!dd) error(_("invalid device in 'savePlot'"));
+    if(!dd) error(_("invalid device in 'savePlot()' function"));
     filename = CADR(args);
     if (!isString(filename) || LENGTH(filename) != 1)
 	error(_("invalid filename argument in 'savePlot()' function"));

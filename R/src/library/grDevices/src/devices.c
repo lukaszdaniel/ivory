@@ -49,7 +49,7 @@ SEXP devcontrol(SEXP args)
 
     args = CDR(args);
     listFlag = asLogical(CAR(args));
-    if(listFlag == NA_LOGICAL) error(_("invalid argument"));
+    if(listFlag == NA_LOGICAL) error(_("invalid '%s' argument"), "args");
     GEinitDisplayList(gdd);
     gdd->displayListOn = listFlag ? TRUE: FALSE;
     return ScalarLogical(listFlag);

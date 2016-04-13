@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-09 21:33+0200\n"
+"POT-Creation-Date: 2016-04-11 21:07+0200\n"
 "PO-Revision-Date: 2015-01-17 15:07+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -300,24 +300,25 @@ msgstr "cadeia de caracteres inválida em '%s'"
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr ""
 
-#: devPS.c:3102 devPS.c:4726 devPS.c:5840
-#, c-format
-msgid "filename too long in %s()"
-msgstr ""
+#: devPS.c:3102 devPS.c:4726 devPS.c:5840 devWindows.c:1809 devWindows.c:1846
+#: devWindows.c:1876 devWindows.c:1908
+#, fuzzy, c-format
+msgid "filename too long in '%s' call"
+msgstr "falha ao carregar arquivo de codificação '%s'"
 
 #: devPS.c:3108 devPS.c:4732 devPS.c:5846
-#, c-format
-msgid "memory allocation problem in %s()"
-msgstr ""
+#, fuzzy, c-format
+msgid "memory allocation problem in '%s' function"
+msgstr "cadeia de caracteres inválida em '%s'"
 
-#: devPS.c:3125
+#: devPS.c:3125 devPS.c:5906
 #, c-format
-msgid "encoding path is too long in %s()"
+msgid "encoding path is too long in '%s' function"
 msgstr ""
 
 #: devPS.c:3139 devPS.c:4772
 #, fuzzy, c-format
-msgid "failed to load encoding file in %s()"
+msgid "failed to load encoding file in '%s' function"
 msgstr "falha ao carregar arquivo de codificação '%s'"
 
 #: devPS.c:3184 devPS.c:3247 devPS.c:5965 devPS.c:6020 devPS.c:7647
@@ -384,15 +385,13 @@ msgstr ""
 
 #: devPS.c:4316
 #, c-format
-msgid ""
-"conversion failure on '%s' in 'mbcsToSbcs()' function: dot substituted for <"
-"%02x>"
+msgid "conversion failure on '%s' in '%s' function: dot substituted for <%02x>"
 msgstr ""
 
 #: devPS.c:4324
-#, c-format
-msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs()' function"
-msgstr ""
+#, fuzzy, c-format
+msgid "conversion failure from %s to %s on '%s' in '%s' function"
+msgstr "codificação desconhecida'%s' em 'PostScriptMetricInfo'"
 
 #: devPS.c:4394
 #, c-format
@@ -478,11 +477,6 @@ msgstr "falha ao alocar informação de codificação"
 msgid "increasing the PDF version to %s"
 msgstr ""
 
-#: devPS.c:5906
-#, c-format
-msgid "encoding path is too long in '%s' function"
-msgstr ""
-
 #: devPS.c:5922
 msgid "failed to load default encoding"
 msgstr ""
@@ -565,12 +559,12 @@ msgstr "falha ao alocar informação de fonte CID"
 msgid "invalid '%s' parameter in '%s'"
 msgstr "cadeia de caracteres inválida em '%s'"
 
-#: devPS.c:8261 devPS.c:8328
+#: devPS.c:8261 devPS.c:8328 devPS.c:8428
 #, fuzzy, c-format
-msgid "unable to start '%s' function"
+msgid "unable to start '%s' device"
 msgstr "não é possível iniciar dispositivo %s()"
 
-#: devPS.c:8428 devPicTeX.c:741 devWindows.c:3736
+#: devPicTeX.c:741 devWindows.c:3736
 #, c-format
 msgid "unable to start %s() device"
 msgstr "não é possível iniciar dispositivo %s()"
@@ -654,11 +648,6 @@ msgstr ""
 msgid "no plot history!"
 msgstr ""
 
-#: devWindows.c:1809
-#, c-format
-msgid "filename too long in %s() call"
-msgstr ""
-
 #: devWindows.c:1814 devWindows.c:1849 devWindows.c:1879
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
@@ -673,18 +662,6 @@ msgstr "falha ao alocar lista de fonte"
 #: devWindows.c:1833 devWindows.c:1863 devWindows.c:2183
 #, c-format
 msgid "unable to open file '%s' for writing"
-msgstr ""
-
-#: devWindows.c:1846
-msgid "filename too long in jpeg() call"
-msgstr ""
-
-#: devWindows.c:1876
-msgid "filename too long in tiff() call"
-msgstr ""
-
-#: devWindows.c:1908
-msgid "filename too long in win.metafile() call"
 msgstr ""
 
 #: devWindows.c:1918
@@ -735,8 +712,9 @@ msgid "invalid device number in 'savePlot()' function"
 msgstr ""
 
 #: devWindows.c:3422
-msgid "invalid device in 'savePlot'"
-msgstr ""
+#, fuzzy
+msgid "invalid device in 'savePlot()' function"
+msgstr "cadeia de caracteres inválida em '%s'"
 
 #: devWindows.c:3425
 msgid "invalid filename argument in 'savePlot()' function"
@@ -768,8 +746,9 @@ msgstr ""
 msgid "argument must have positive length"
 msgstr ""
 
-#: devices.c:52
-msgid "invalid argument"
+#: devices.c:52 stubs.c:105
+#, c-format
+msgid "invalid '%s' argument"
 msgstr ""
 
 #: qdBitmap.c:79
@@ -785,10 +764,17 @@ msgstr ""
 msgid "Quartz R Device"
 msgstr ""
 
-#: stubs.c:105
-#, c-format
-msgid "invalid '%s' argument"
-msgstr ""
+#, fuzzy
+#~ msgid "filename too long in '%s' function"
+#~ msgstr "cadeia de caracteres inválida em '%s'"
+
+#, fuzzy
+#~ msgid "failed to load encoding file in %s()"
+#~ msgstr "falha ao carregar arquivo de codificação '%s'"
+
+#, fuzzy
+#~ msgid "unable to start '%s' function"
+#~ msgstr "não é possível iniciar dispositivo %s()"
 
 #, fuzzy
 #~ msgid "invalid string in '%s'function"

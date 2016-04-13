@@ -3099,13 +3099,13 @@ PSDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 
     if(strlen(file) > PATH_MAX - 1) {
 	free(dd);
-	error(_("filename too long in %s()"), "postscript");
+	error(_("filename too long in '%s' call"), "postscript()");
     }
 
     /* allocate new postscript device description */
     if (!(pd = (PostScriptDesc *) malloc(sizeof(PostScriptDesc)))) {
 	free(dd);
-	error(_("memory allocation problem in %s()"), "postscript");
+	error(_("memory allocation problem in '%s' function"), "postscript()");
     }
 
     /* from here on, if need to bail out with "error", must also */
@@ -3122,7 +3122,7 @@ PSDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 
     if(strlen(encoding) > PATH_MAX - 1) {
 	PS_cleanup(1, dd, pd);
-	error(_("encoding path is too long in %s()"), "postscript");
+	error(_("encoding path is too long in '%s' function"), "postscript()");
     }
     /*
      * Load the default encoding AS THE FIRST ENCODING FOR THIS DEVICE.
@@ -3136,7 +3136,7 @@ PSDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 	pd->encodings = enclist;
     } else {
 	PS_cleanup(1, dd, pd);
-	error(_("failed to load encoding file in %s()"), "postscript");
+	error(_("failed to load encoding file in '%s' function"), "postscript()");
     }
 
     /*****************************
@@ -4313,16 +4313,16 @@ next_char:
     status = Riconv(cd, &i_buf, &i_len, &o_buf, &o_len);
     /* libiconv 1.13 gives EINVAL on \xe0 in UTF-8 (as used in fBasics) */
     if(status == (size_t) -1 && (errno == EILSEQ || errno == EINVAL)) {
-	warning(_("conversion failure on '%s' in 'mbcsToSbcs()' function: dot substituted for <%02x>"),
-		in, (unsigned char) *i_buf),
+	warning(_("conversion failure on '%s' in '%s' function: dot substituted for <%02x>"),
+		in, "mbcsToSbcs()", (unsigned char) *i_buf),
 	*o_buf++ = '.'; i_buf++; o_len--; i_len--;
 	if(i_len > 0) goto next_char;
     }
 
     Riconv_close(cd);
     if (status == (size_t)-1)  /* internal error? */
-	error(_("conversion failure from %s to %s on '%s' in 'mbcsToSbcs()' function"),
-	      (enc == CE_UTF8) ? "UTF-8" : "native", encoding, in);
+	error(_("conversion failure from %s to %s on '%s' in '%s' function"),
+	      (enc == CE_UTF8) ? "UTF-8" : "native", encoding, in, "mbcsToSbcs()");
 }
 
 static void PS_Text0(double x, double y, const char *str, int enc,
@@ -4723,13 +4723,13 @@ XFigDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 
     if(strlen(file) > PATH_MAX - 1) {
 	free(dd);
-	error(_("filename too long in %s()"), "xfig");
+	error(_("filename too long in '%s' call"), "xfig()");
     }
 
     /* allocate new xfig device description */
     if (!(pd = (XFigDesc *) malloc(sizeof(XFigDesc)))) {
 	free(dd);
-	error(_("memory allocation problem in %s()"), "xfig");
+	error(_("memory allocation problem in '%s' function"), "xfig()");
 	return FALSE;	
     }
 
@@ -4769,7 +4769,7 @@ XFigDeviceDriver(pDevDesc dd, const char *file, const char *paper,
     } else {
 	free(dd);
 	free(pd);
-	error(_("failed to load encoding file in %s()"), "xfig");
+	error(_("failed to load encoding file in '%s' function"), "xfig()");
     }
 
     /* Load default font */
@@ -5837,13 +5837,13 @@ PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
     if(file && strlen(file) > PATH_MAX - 1) {
 	/* not yet created PDFcleanup(0, pd); */
 	free(dd);
-	error(_("filename too long in %s()"), "pdf");
+	error(_("filename too long in '%s' call"), "pdf()");
     }
 
     /* allocate new PDF device description */
     if (!(pd = (PDFDesc *) malloc(sizeof(PDFDesc)))) {
 	free(dd);
-	error(_("memory allocation problem in %s()"), "pdf");
+	error(_("memory allocation problem in '%s' function"), "pdf()");
     }
     /* from here on, if need to bail out with "error", must also
        free(pd) */
@@ -8258,7 +8258,7 @@ SEXP PostScript(SEXP args)
 			   pagecentre, printit, cmd, title, fonts,
 			   colormodel, useKern, fillOddEven)) {
 	    /* we no longer get here: error is thrown in PSDeviceDriver */
-	    error(_("unable to start '%s' function"), "postscript()");
+	    error(_("unable to start '%s' device"), "postscript()");
 	}
 	gdd = GEcreateDevDesc(dev);
 	GEaddDevice2f(gdd, "postscript", file);
@@ -8325,7 +8325,7 @@ SEXP XFig(SEXP args)
 			     (double) horizontal, ps, onefile, pagecentre, defaultfont, textspecial,
 			     encoding)) {
 	    /* we no longer get here: error is thrown in XFigDeviceDriver */
-	    error(_("unable to start '%s' function"), "xfig()");
+	    error(_("unable to start '%s' device"), "xfig()");
 	}
 	gdd = GEcreateDevDesc(dev);
 	GEaddDevice2f(gdd, "xfig", file);
@@ -8425,7 +8425,7 @@ SEXP PDF(SEXP args)
 			    dingbats, useKern, fillOddEven,
 			    useCompression)) {
 	    /* we no longer get here: error is thrown in PDFDeviceDriver */
-	    error(_("unable to start %s() device"), "pdf");
+	    error(_("unable to start '%s' device"), "pdf()");
 	}
 	gdd = GEcreateDevDesc(dev);
 	GEaddDevice2f(gdd, "pdf", file);
