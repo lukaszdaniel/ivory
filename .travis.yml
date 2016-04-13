@@ -11,6 +11,13 @@ addons:
         sources:
         - ubuntu-toolchain-r-test
         packages:
+        - realpath
+        - libpango1.0-dev
+        - libpcre3-dev
+        - lpr
+        - texlive-latex-recommended
+        - texlive-fonts-extra
+        - texinfo
         - gcc-4.9
         - gfortran
         - zlib1g-dev
@@ -22,5 +29,5 @@ addons:
 script:
         - cd R
         - ./configure --enable-R-shlib --with-included-gettext --enable-R-profiling --enable-memory-profiling
-        - travis_wait 60 make -j 2
-        - travis_wait 60 make -j 2 check
+        - travis_wait 60 make
+        - travis_wait 60 make check
