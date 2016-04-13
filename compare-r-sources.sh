@@ -30,7 +30,7 @@ else
 fi;
 
 
-LC_ALL=C diff -qr --exclude=".svn" --exclude="translations" $X $Y | sort > $RANDSTRING
+LC_ALL=C diff -qr --exclude=".svn" --exclude=".git" --exclude="translations" $X $Y | sort > $RANDSTRING
 if test `wc -l $RANDSTRING | cut -d" " -f1` -ne 0; then
    sed -n -e "s/Files \(.*\)* .*/o \1/p" $RANDSTRING | cut -d" " -f1,2
    sed -n -e "s/Only in $X\/\([^: ]*\): \(.*\)/+ $X\/\1\/\2/p" $RANDSTRING | cut -d" " -f1,2
@@ -39,4 +39,4 @@ else
    echo "'"$X"' and '"$Y"' are identical"
 fi;
    rm $RANDSTRING
-# LC_ALL=C diff -qr --exclude=".svn" --exclude="translations" R-devel R-devel-frozen | sort | sed -n -e "s/Files \(.*\)* and .*/ \1\\\\/p"
+# LC_ALL=C diff -qr --exclude=".svn" --exclude=".git" --exclude="translations" R-devel R-frozen | sort | sed -n -e "s/Files \(.*\)* and .*/ \1\\\\/p"

@@ -20,6 +20,7 @@ addons:
         - libedit-dev
 
 script:
+        - cd R
         - ./configure --enable-R-shlib --with-included-gettext --enable-R-profiling --enable-memory-profiling
         - travis_wait 60 make -j 2
         - travis_wait 60 make -j 2 check

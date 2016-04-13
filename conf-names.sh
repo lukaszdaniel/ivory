@@ -6,7 +6,7 @@
 # IVORY - Ivory source code
 #
 DEVEL="R-devel";
-BASE="R-devel-frozen";
+BASE="R-frozen";
 IVORY="R";
 
 RECDEVEL="R-recommended";
