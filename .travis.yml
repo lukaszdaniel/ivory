@@ -28,6 +28,5 @@ addons:
 script:
         - cd R
         - ./configure --enable-R-shlib --with-included-gettext --enable-R-profiling --enable-memory-profiling
-        - svn info
         - travis_wait 60 make
         - travis_wait 60 make check
