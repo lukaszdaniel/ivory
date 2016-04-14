@@ -5,7 +5,7 @@ compiler:
         - clang
 matrix:
   allow_failures:
-    - compiler: gcc
+    - compiler: clang
 addons:
   apt:
         sources:
@@ -14,7 +14,6 @@ addons:
         - realpath
         - libpango1.0-dev
         - libpcre3-dev
-        - lpr
         - texlive-latex-recommended
         - texlive-fonts-extra
         - texinfo
@@ -29,5 +28,6 @@ addons:
 script:
         - cd R
         - ./configure --enable-R-shlib --with-included-gettext --enable-R-profiling --enable-memory-profiling
+        - svn info
         - travis_wait 60 make
         - travis_wait 60 make check
