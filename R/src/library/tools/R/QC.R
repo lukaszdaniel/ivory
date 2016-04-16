@@ -111,7 +111,7 @@ function(package, dir, lib.loc = NULL)
     }
     else {
         if(missing(dir))
-            stop("you must specify 'package' or 'dir' argument")
+            stop(gettextf("you must specify '%s' or '%s' argument", "package", "dir"))
         pkgname <- basename(dir)
         dirdir  <- dirname(dir)
         ## Using sources from directory @code{dir} ...
@@ -358,7 +358,7 @@ function(package, dir, lib.loc = NULL,
     }
     else {
         if(missing(dir))
-            stop("you must specify 'package' or 'dir' argument")
+            stop(gettextf("you must specify '%s' or '%s' argument", "package", "dir"))
         ## Using sources from directory @code{dir} ...
         if(!dir.exists(dir))
             stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
@@ -1271,7 +1271,7 @@ function(package, dir, lib.loc = NULL)
     }
     else {
         if(missing(dir))
-            stop("you must specify 'package' or 'dir' argument")
+            stop(gettextf("you must specify '%s' or '%s' argument", "package", "dir"))
         ## Using sources from directory @code{dir} ...
         if(!dir.exists(dir))
             stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
@@ -1543,7 +1543,7 @@ function(package, dir, lib.loc = NULL)
     }
     else {
         if(missing(dir))
-            stop("you must specify 'package' or 'dir' argument")
+            stop(gettextf("you must specify '%s' or '%s' argument", "package", "dir"))
         package_name <- basename(dir) # early, before resolving sym.links
         ## Using sources from directory @code{dir} ...
         if(!dir.exists(dir))
@@ -1832,7 +1832,7 @@ function(package, dir, file, lib.loc = NULL,
     else if(!missing(file)) {
         pkg <- enc <- NA
     } else
-        stop("you must specify 'package', 'dir' or 'file'")
+        stop(gettextf("you must specify '%s', '%s' or '%s' argument", "package", "dir", "file"))
 
     if(missing(package) && !file_test("-f", file))
         stop(gettextf("file %s does not exist", sQuote(file)), domain = "R-tools")
@@ -2253,7 +2253,7 @@ function(package, dir, lib.loc = NULL)
     }
     else {
         if(missing(dir))
-            stop("you must specify 'package' or 'dir' argument")
+            stop(gettextf("you must specify '%s' or '%s' argument", "package", "dir"))
 
         ## Using sources from directory @code{dir} ...
         if(!dir.exists(dir))
@@ -2518,7 +2518,7 @@ function(package, dir, lib.loc = NULL)
 
     else {
         if(missing(dir))
-            stop("you must specify 'package' or 'dir' argument")
+            stop(gettextf("you must specify '%s' or '%s' argument", "package", "dir"))
         ## Using sources from directory @code{dir} ...
         if(!dir.exists(dir))
             stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
@@ -2666,7 +2666,7 @@ function(package, dir, file, lib.loc = NULL)
             code_files <- file
     }
     else
-        stop("you must specify 'package', 'dir' or 'file' argument")
+        stop(gettextf("you must specify '%s', '%s' or '%s' argument", "package", "dir", "file"))
 
     find_TnF_in_code <- function(file, txt) {
         ## If 'txt' is given, it contains the extracted examples from
@@ -5742,7 +5742,7 @@ function(package, dir, lib.loc = NULL)
     else {
         ## The dir case.
         if(missing(dir))
-            stop("you must specify 'package' or 'dir' argument")
+            stop(gettextf("you must specify '%s' or '%s' argument", "package", "dir"))
         dir <- file_path_as_absolute(dir)
         code_dir <- file.path(dir, "R")
         if(!packageHasNamespace(basename(dir), dirname(dir))
@@ -5865,7 +5865,7 @@ function(package, dir, lib.loc = NULL, details = TRUE)
     else {
         ## The dir case.
         if(missing(dir))
-            stop("you must specify 'package' or 'dir' argument")
+            stop(gettextf("you must specify '%s' or '%s' argument", "package", "dir"))
         dir <- file_path_as_absolute(dir)
         code_dir <- file.path(dir, "R")
         if(dir.exists(code_dir)) {
@@ -5940,7 +5940,7 @@ function(dir)
     dir <- file_path_as_absolute(dir)
     invisible(tryCatch(parseNamespaceFile(basename(dir), dirname(dir)),
                        error = function(e) {
-                           writeLines(gettext("Invalid NAMESPACE file, parsing gives:", domain = "R-tools"))
+                           writeLines(gettext("Invalid 'NAMESPACE' file, parsing gives:", domain = "R-tools"))
                            stop(e)
                        }))
 }
@@ -6141,7 +6141,7 @@ function(package, dir, lib.loc = NULL, WINDOWS = FALSE)
     else {
         ## The dir case.
         if(missing(dir))
-            stop("you must specify 'package' or 'dir' argument")
+            stop(gettextf("you must specify '%s' or '%s' argument", "package", "dir"))
         dir <- file_path_as_absolute(dir)
         code_dir <- file.path(dir, "R")
         if(dir.exists(code_dir)) {
@@ -7267,7 +7267,7 @@ function(package, dir, lib.loc = NULL)
     }
     else {
         if(missing(dir))
-            stop("you must specify 'package' or 'dir' argument")
+            stop(gettextf("you must specify '%s' or '%s' argument", "package", "dir"))
         ## Using sources from directory @code{dir} ...
         if(!dir.exists(dir))
             stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")

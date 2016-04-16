@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-09 21:33+0200\n"
+"POT-Creation-Date: 2016-04-14 23:06+0200\n"
 "PO-Revision-Date: 2015-01-17 15:10+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -229,7 +229,8 @@ msgid "invalid graphics parameter"
 msgstr "图形参数不对"
 
 #: plot.c:478
-msgid "at least 3 arguments required"
+#, fuzzy
+msgid "at least 3 arguments are required"
 msgstr "至少需要三个参数"
 
 #: plot.c:493

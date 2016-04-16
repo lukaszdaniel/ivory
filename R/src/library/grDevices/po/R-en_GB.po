@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-03 21:09\n"
+"POT-Creation-Date: 2016-04-14 23:06\n"
 "PO-Revision-Date: 2015-01-17 15:01+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: English\n"
@@ -95,6 +95,11 @@ msgstr ""
 #. R/convertColor.R: stop("'gamma' argument must be a scalar or 'sRGB' value")
 #: R/convertColor.R:0
 msgid "'gamma' argument must be a scalar or 'sRGB' value"
+msgstr ""
+
+#. R/prettyDate.R: stop("'mday' argument must be 1 or 15 for \"halfmonth\"")
+#: R/prettyDate.R:0
+msgid "'mday' argument must be 1 or 15 for \"halfmonth\""
 msgstr ""
 
 #. R/device.R: stop("'name' must be a character vector")
@@ -354,6 +359,11 @@ msgstr ""
 #. R/convertColor.R: gettextf("display gamma = %s", format(x$gamma), domain = "R-grDevices")
 #: R/convertColor.R:0
 msgid "display gamma = %s"
+msgstr ""
+
+#. R/prettyDate.R: stop("failed to add more ticks; 'min.n' argument too large?")
+#: R/prettyDate.R:0
+msgid "failed to add more ticks; 'min.n' argument too large?"
 msgstr ""
 
 #. R/calc.R: stop("finite coordinates are required")

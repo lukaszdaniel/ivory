@@ -318,7 +318,7 @@ function(package, dir, lib.loc = NULL)
     }
     else {
         if(missing(dir))
-            stop("you must specify 'package' or 'dir' argument")
+            stop(gettextf("you must specify '%s' or '%s' argument", "package", "dir"))
         ## Using sources from directory @code{dir} ...
         if(!dir.exists(dir))
             stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
@@ -365,7 +365,7 @@ function(dir = NULL, files = NULL,
     } else if(!is.null(files))
         macros0 <- initialRdMacros()
     else
-        stop("you must specify 'dir' or 'files' argument")
+        stop(gettextf("you must specify '%s' or '%s' argument", "dir", "files"))
 
     if(length(macros)) {
         con <- textConnection(macros)

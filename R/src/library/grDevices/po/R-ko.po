@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-03 21:09\n"
+"POT-Creation-Date: 2016-04-14 23:06\n"
 "PO-Revision-Date: 2005-05-25 14:17+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -109,6 +109,12 @@ msgstr "'file'는 비어 있지 않은 문자열이 아니면 되지 않습니�
 #: R/convertColor.R:0
 #, fuzzy
 msgid "'gamma' argument must be a scalar or 'sRGB' value"
+msgstr "'gamma'는 scalar 또는 'sRGB'가 나오지 않으면 되지 않습니다"
+
+#. R/prettyDate.R: stop("'mday' argument must be 1 or 15 for \"halfmonth\"")
+#: R/prettyDate.R:0
+#, fuzzy
+msgid "'mday' argument must be 1 or 15 for \"halfmonth\""
 msgstr "'gamma'는 scalar 또는 'sRGB'가 나오지 않으면 되지 않습니다"
 
 #. R/device.R: stop("'name' must be a character vector")
@@ -391,6 +397,11 @@ msgstr ""
 #, fuzzy
 msgid "display gamma = %s"
 msgstr "gamma 디스플레이"
+
+#. R/prettyDate.R: stop("failed to add more ticks; 'min.n' argument too large?")
+#: R/prettyDate.R:0
+msgid "failed to add more ticks; 'min.n' argument too large?"
+msgstr ""
 
 #. R/calc.R: stop("finite coordinates are required")
 #: R/calc.R:0

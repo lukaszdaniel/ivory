@@ -50,21 +50,21 @@ SEXP getfmts(SEXP format)
     SEXP res = PROTECT(allocVector(STRSXP, MAXNARGS));
     
 #define SET_RESULT(n, s) {						\
-     if (n >= MAXNARGS) error(_("only %d arguments are allowed"), MAXNARGS); \
+     if (n >= MAXNARGS) error(n_("only %d argument is allowed", "only %d arguments are allowed", MAXNARGS), MAXNARGS); \
 	maxlen = (n) < maxlen ? maxlen : (n) + 1;			\
 	SET_STRING_ELT(res, (n), mkChar(s));				\
     }
     
-    if (!isString(format)) error(_("'fmt' is not a character vector"));
+    if (!isString(format)) error(_("'%s' argument is not a character vector"), "fmt");
     nfmt = LENGTH(format);
     if (nfmt != 1) 
-        error(_("'fmt' must be length 1"));
+        error(_("'%s' argument must be length 1"), "fmt");
 
     use_UTF8 = getCharCE(STRING_ELT(format, 0)) == CE_UTF8;
     formatString = TRANSLATE_CHAR(format, 0);
     n = strlen(formatString);
     if (n > MAXLINE)
-	error(_("'fmt' length exceeds maximal format length %d"), MAXLINE);
+	error(_("length of '%s' argument exceeds maximal format length %d"), "fmt", MAXLINE);
     /* process the format string */
     for (cur = 0, cnt = 0; cur < n; cur += chunk) {
 	const char *curFormat = formatString + cur;

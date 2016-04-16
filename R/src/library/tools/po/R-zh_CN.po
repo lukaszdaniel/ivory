@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-05 22:53\n"
+"POT-Creation-Date: 2016-04-15 14:51\n"
 "PO-Revision-Date: 2015-01-17 15:15+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -45,10 +45,13 @@ msgstr "%s调用："
 msgid "%s command is not available"
 msgstr "不存在'%s'这个测试"
 
+#. R/Vignettes.R: gettextf("%s file was not found", sQuote(file))
+#. R/Vignettes.R: gettextf("%s file was not found", sQuote(vignette))
 #. R/news.R: gettextf("%s file was not found", sQuote("DESCRIPTION"))
 #. R/news.R: gettextf("%s file was not found", sQuote("NEWS"))
 #. R/news.R: gettextf("%s file was not found", sQuote("DESCRIPTION"))
-#: R/news.R:0
+#. R/testing.R: gettextf("%s file was not found", sQuote(f))
+#: R/Vignettes.R:0 R/news.R:0 R/testing.R:0
 #, fuzzy
 msgid "%s file was not found"
 msgstr "找不到'%s'这个文件"
@@ -1729,6 +1732,11 @@ msgstr "内部错误，没有标签"
 msgid "Internal error: NULL tag"
 msgstr "内部错误：NULL标签"
 
+#. R/QC.R: gettext("Invalid 'NAMESPACE' file, parsing gives:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Invalid 'NAMESPACE' file, parsing gives:"
+msgstr ""
+
 #. R/check.R: gettextf("Invalid 'NAMESPACE' file, parsing gives:\n%s\n", as.character(e), domain = "R-tools")
 #: R/check.R:0
 msgid ""
@@ -1746,11 +1754,6 @@ msgstr "DESCRIPTION文件不对"
 #, fuzzy
 msgid "Invalid DOI"
 msgstr "程辑包名不对."
-
-#. R/QC.R: gettext("Invalid NAMESPACE file, parsing gives:", domain = "R-tools")
-#: R/QC.R:0
-msgid "Invalid NAMESPACE file, parsing gives:"
-msgstr ""
 
 #. R/QC.R: gettext("Invalid Priority field.", domain = "R-tools")
 #: R/QC.R:0
@@ -2519,10 +2522,11 @@ msgstr "程序包启动函数需要有两个名字分别为%s和%s的参数"
 msgid "Package detach functions should not call %s."
 msgstr "程序包启动函数不应该改变搜索路径"
 
-#. R/check.R: gettextf("Package directory %s does not exist.", sQuote(pkg), domain = "R-tools")
+#. R/check.R: gettextf("Package directory %s does not exist", sQuote(pkg), domain = "R-tools")
+#. R/check.R: gettextf("Package directory %s does not exist", sQuote(pkg))
 #: R/check.R:0
 #, fuzzy
-msgid "Package directory %s does not exist."
+msgid "Package directory %s does not exist"
 msgstr "不存在'%s'这个文件目录"
 
 #. R/QC.R: gettextf("Package duplicated from %s", y, domain = "R-tools")
@@ -3040,6 +3044,7 @@ msgid "Some 'make' programs ignore lines not ending in LF."
 msgstr ""
 
 #. R/check.R: gettext("Some Unix 'make' programs require LF line endings.\n", domain = "R-tools")
+#. R/check.R: gettext("Some Unix 'make' programs require LF line endings.\n", domain = "R-tools")
 #: R/check.R:0
 msgid "Some Unix 'make' programs require LF line endings."
 msgstr ""
@@ -3124,6 +3129,13 @@ msgstr "不存在'%s'这个文件目录"
 msgid "Subdirectory %s seems to contain an installed version of the package."
 msgstr "不存在'%s'这个文件目录"
 
+#. R/check.R: gettextf("Subdirectory '%s' contains no files.\n", "exec", domain = "R-tools")
+#. R/check.R: gettextf("Subdirectory '%s' contains no files.\n", "inst", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "Subdirectory '%s' contains no files."
+msgstr "不存在'%s'这个文件目录"
+
 #. R/check.R: gettext("Subdirectory 'data' contains no data sets.\n", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
@@ -3134,18 +3146,6 @@ msgstr "不存在'%s'这个文件目录"
 #: R/check.R:0
 #, fuzzy
 msgid "Subdirectory 'demo' contains no demos."
-msgstr "不存在'%s'这个文件目录"
-
-#. R/check.R: gettext("Subdirectory 'exec' contains no files.\n", domain = "R-tools")
-#: R/check.R:0
-#, fuzzy
-msgid "Subdirectory 'exec' contains no files."
-msgstr "不存在'%s'这个文件目录"
-
-#. R/check.R: gettext("Subdirectory 'inst' contains no files.\n", domain = "R-tools")
-#: R/check.R:0
-#, fuzzy
-msgid "Subdirectory 'inst' contains no files."
 msgstr "不存在'%s'这个文件目录"
 
 #. R/check.R: gettext("Subdirectory 'src' contains no source files.\n", domain = "R-tools")
@@ -4914,14 +4914,6 @@ msgstr "文件'%s'不含正确的DCF格式"
 msgid "file %s lacks a header: skipping"
 msgstr ""
 
-#. R/Vignettes.R: gettextf("file %s was not found", sQuote(file))
-#. R/Vignettes.R: gettextf("file %s was not found", sQuote(vignette))
-#. R/testing.R: gettextf("file %s was not found", sQuote(f))
-#: R/Vignettes.R:0 R/testing.R:0
-#, fuzzy
-msgid "file %s was not found"
-msgstr "找不到'%s'这个文件"
-
 #. R/check.R: gettextf("  file %s will not be installed: please remove it\n", paste(sQuote(miss[f]),     collapse = ", "), domain = "R-tools")
 #: R/check.R:0
 msgid "file %s will not be installed: please remove it"
@@ -5340,12 +5332,6 @@ msgstr "用了'methods'这个程辑包却没有被声明"
 msgid "package contains no R code"
 msgstr "程辑包没有包含任何R编码"
 
-#. R/check.R: gettextf("package directory %s does not exist", sQuote(pkg))
-#: R/check.R:0
-#, fuzzy
-msgid "package directory %s does not exist"
-msgstr "不存在'%s'这个文件目录"
-
 #. R/check.R: gettextf("package encoding: %s", encoding, domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
@@ -5738,11 +5724,6 @@ msgstr "已经试过打开服务器，但没有成功"
 msgid "skipping installation test"
 msgstr ""
 
-#. R/check.R: gettext("some Unix 'make' programs require LF line endings.\n", domain = "R-tools")
-#: R/check.R:0
-msgid "some Unix 'make' programs require LF line endings."
-msgstr ""
-
 #. R/makeLazyLoad.R: stop("source list must have names for all elements")
 #: R/makeLazyLoad.R:0
 msgid "source list must have names for all elements"
@@ -6066,39 +6047,30 @@ msgstr "调用程序于"
 msgid "will not attempt to install this package on Windows"
 msgstr ""
 
-#. R/Rd.R: stop("you must specify 'dir' or 'files' argument")
-#: R/Rd.R:0
-#, fuzzy
-msgid "you must specify 'dir' or 'files' argument"
-msgstr "你必需在'dir'或'files'中选一个"
-
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/Rd.R: stop("you must specify 'package' or 'dir' argument")
-#. R/Vignettes.R: stop("you must specify 'package' or 'dir' argument")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/Rd.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/Rd.R: gettextf("you must specify '%s' or '%s' argument", "dir", "files")
+#. R/Vignettes.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
 #: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0
 #, fuzzy
-msgid "you must specify 'package' or 'dir' argument"
-msgstr "你必需指定'package'或'dir'的值"
+msgid "you must specify '%s' or '%s' argument"
+msgstr "你必需在'dir'或'files'中选一个"
 
-#. R/QC.R: stop("you must specify 'package', 'dir' or 'file'")
-#: R/QC.R:0
-msgid "you must specify 'package', 'dir' or 'file'"
-msgstr "你必需设定'package', 'dir'或'file'三个中的一个"
-
-#. R/QC.R: stop("you must specify 'package', 'dir' or 'file' argument")
+#. R/QC.R: gettextf("you must specify '%s', '%s' or '%s' argument", "package", "dir", "file")
+#. R/QC.R: gettextf("you must specify '%s', '%s' or '%s' argument", "package", "dir", "file")
 #: R/QC.R:0
 #, fuzzy
-msgid "you must specify 'package', 'dir' or 'file' argument"
-msgstr "你必需设定'package', 'dir'或'file'三个中的一个"
+msgid "you must specify '%s', '%s' or '%s' argument"
+msgstr "你必需在'dir'或'files'中选一个"
 
 #. R/check.R: ngettext(length(bad), "  Namespace with empty importFrom: %s", "  Namespaces with empty importFrom: %s",     domain = "R-tools")
 #: R/check.R:0
@@ -6894,6 +6866,29 @@ msgstr[0] "%s里不能有T/F这样的值"
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "无法重新编码'%s'%s行"
+
+#, fuzzy
+#~ msgid "Subdirectory 'exec' contains no files."
+#~ msgstr "不存在'%s'这个文件目录"
+
+#, fuzzy
+#~ msgid "file %s was not found"
+#~ msgstr "找不到'%s'这个文件"
+
+#, fuzzy
+#~ msgid "package directory %s does not exist"
+#~ msgstr "不存在'%s'这个文件目录"
+
+#, fuzzy
+#~ msgid "you must specify 'package' or 'dir' argument"
+#~ msgstr "你必需指定'package'或'dir'的值"
+
+#~ msgid "you must specify 'package', 'dir' or 'file'"
+#~ msgstr "你必需设定'package', 'dir'或'file'三个中的一个"
+
+#, fuzzy
+#~ msgid "you must specify 'package', 'dir' or 'file' argument"
+#~ msgstr "你必需设定'package', 'dir'或'file'三个中的一个"
 
 #, fuzzy
 #~ msgid ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-05 22:53\n"
+"POT-Creation-Date: 2016-04-15 14:51\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -46,10 +46,13 @@ msgstr "%s는 다음을 호출합니다:"
 msgid "%s command is not available"
 msgstr "테스트 '%s'는 사용가능하지 않습니다"
 
+#. R/Vignettes.R: gettextf("%s file was not found", sQuote(file))
+#. R/Vignettes.R: gettextf("%s file was not found", sQuote(vignette))
 #. R/news.R: gettextf("%s file was not found", sQuote("DESCRIPTION"))
 #. R/news.R: gettextf("%s file was not found", sQuote("NEWS"))
 #. R/news.R: gettextf("%s file was not found", sQuote("DESCRIPTION"))
-#: R/news.R:0
+#. R/testing.R: gettextf("%s file was not found", sQuote(f))
+#: R/Vignettes.R:0 R/news.R:0 R/testing.R:0
 #, fuzzy
 msgid "%s file was not found"
 msgstr "파일 '%s'를 찾을 수 없습니다"
@@ -1719,6 +1722,11 @@ msgstr ""
 msgid "Internal error: NULL tag"
 msgstr ""
 
+#. R/QC.R: gettext("Invalid 'NAMESPACE' file, parsing gives:", domain = "R-tools")
+#: R/QC.R:0
+msgid "Invalid 'NAMESPACE' file, parsing gives:"
+msgstr ""
+
 #. R/check.R: gettextf("Invalid 'NAMESPACE' file, parsing gives:\n%s\n", as.character(e), domain = "R-tools")
 #: R/check.R:0
 msgid ""
@@ -1736,11 +1744,6 @@ msgstr "DESCRIPTION 파일이 잘못되었습니다"
 #, fuzzy
 msgid "Invalid DOI"
 msgstr "패키지가 잘못되었습니다"
-
-#. R/QC.R: gettext("Invalid NAMESPACE file, parsing gives:", domain = "R-tools")
-#: R/QC.R:0
-msgid "Invalid NAMESPACE file, parsing gives:"
-msgstr ""
 
 #. R/QC.R: gettext("Invalid Priority field.", domain = "R-tools")
 #: R/QC.R:0
@@ -2504,10 +2507,11 @@ msgstr ""
 msgid "Package detach functions should not call %s."
 msgstr "패키지 분리와 관계된 함수들은 %s를 호출하면 안됩니다."
 
-#. R/check.R: gettextf("Package directory %s does not exist.", sQuote(pkg), domain = "R-tools")
+#. R/check.R: gettextf("Package directory %s does not exist", sQuote(pkg), domain = "R-tools")
+#. R/check.R: gettextf("Package directory %s does not exist", sQuote(pkg))
 #: R/check.R:0
 #, fuzzy
-msgid "Package directory %s does not exist."
+msgid "Package directory %s does not exist"
 msgstr "패키지 디렉토리 %s가 존재하지 않습니다"
 
 #. R/QC.R: gettextf("Package duplicated from %s", y, domain = "R-tools")
@@ -3045,6 +3049,7 @@ msgid "Some 'make' programs ignore lines not ending in LF."
 msgstr ""
 
 #. R/check.R: gettext("Some Unix 'make' programs require LF line endings.\n", domain = "R-tools")
+#. R/check.R: gettext("Some Unix 'make' programs require LF line endings.\n", domain = "R-tools")
 #: R/check.R:0
 msgid "Some Unix 'make' programs require LF line endings."
 msgstr ""
@@ -3126,6 +3131,13 @@ msgstr "디렉토리 '%s'는 존재하지 않습니다"
 msgid "Subdirectory %s seems to contain an installed version of the package."
 msgstr ""
 
+#. R/check.R: gettextf("Subdirectory '%s' contains no files.\n", "exec", domain = "R-tools")
+#. R/check.R: gettextf("Subdirectory '%s' contains no files.\n", "inst", domain = "R-tools")
+#: R/check.R:0
+#, fuzzy
+msgid "Subdirectory '%s' contains no files."
+msgstr "디렉토리 '%s'는 존재하지 않습니다"
+
 #. R/check.R: gettext("Subdirectory 'data' contains no data sets.\n", domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
@@ -3137,18 +3149,6 @@ msgstr "디렉퇴 '%s'는 Rd 객체들을 포함하지 않습니다"
 #, fuzzy
 msgid "Subdirectory 'demo' contains no demos."
 msgstr "디렉토리 '%s'는 R 코드를 포함하지 않습니다"
-
-#. R/check.R: gettext("Subdirectory 'exec' contains no files.\n", domain = "R-tools")
-#: R/check.R:0
-#, fuzzy
-msgid "Subdirectory 'exec' contains no files."
-msgstr "디렉토리 '%s'는 존재하지 않습니다"
-
-#. R/check.R: gettext("Subdirectory 'inst' contains no files.\n", domain = "R-tools")
-#: R/check.R:0
-#, fuzzy
-msgid "Subdirectory 'inst' contains no files."
-msgstr "디렉토리 '%s'는 존재하지 않습니다"
 
 #. R/check.R: gettext("Subdirectory 'src' contains no source files.\n", domain = "R-tools")
 #: R/check.R:0
@@ -4889,14 +4889,6 @@ msgstr "파일 '%s'는 유효한 DCF 형식을 가지고 있지 않습니다."
 msgid "file %s lacks a header: skipping"
 msgstr ""
 
-#. R/Vignettes.R: gettextf("file %s was not found", sQuote(file))
-#. R/Vignettes.R: gettextf("file %s was not found", sQuote(vignette))
-#. R/testing.R: gettextf("file %s was not found", sQuote(f))
-#: R/Vignettes.R:0 R/testing.R:0
-#, fuzzy
-msgid "file %s was not found"
-msgstr "파일 '%s'를 찾을 수 없습니다"
-
 #. R/check.R: gettextf("  file %s will not be installed: please remove it\n", paste(sQuote(miss[f]),     collapse = ", "), domain = "R-tools")
 #: R/check.R:0
 msgid "file %s will not be installed: please remove it"
@@ -5309,11 +5301,6 @@ msgstr "패키지 'methods'가 사용되었으나 선언되지 않았습니다"
 msgid "package contains no R code"
 msgstr "패키지가 R 코드를 포함하지 않습니다"
 
-#. R/check.R: gettextf("package directory %s does not exist", sQuote(pkg))
-#: R/check.R:0
-msgid "package directory %s does not exist"
-msgstr "패키지 디렉토리 %s가 존재하지 않습니다"
-
 #. R/check.R: gettextf("package encoding: %s", encoding, domain = "R-tools")
 #: R/check.R:0
 #, fuzzy
@@ -5706,11 +5693,6 @@ msgstr "이전에 시도를 했었으나, 서버를 실행할 수 없었습니�
 msgid "skipping installation test"
 msgstr ""
 
-#. R/check.R: gettext("some Unix 'make' programs require LF line endings.\n", domain = "R-tools")
-#: R/check.R:0
-msgid "some Unix 'make' programs require LF line endings."
-msgstr ""
-
 #. R/makeLazyLoad.R: stop("source list must have names for all elements")
 #: R/makeLazyLoad.R:0
 msgid "source list must have names for all elements"
@@ -6029,39 +6011,30 @@ msgstr ""
 msgid "will not attempt to install this package on Windows"
 msgstr ""
 
-#. R/Rd.R: stop("you must specify 'dir' or 'files' argument")
-#: R/Rd.R:0
-#, fuzzy
-msgid "you must specify 'dir' or 'files' argument"
-msgstr "'dir' 또는 'files'을 반드시 지정해야 합니다"
-
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/Rd.R: stop("you must specify 'package' or 'dir' argument")
-#. R/Vignettes.R: stop("you must specify 'package' or 'dir' argument")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/Rd.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/Rd.R: gettextf("you must specify '%s' or '%s' argument", "dir", "files")
+#. R/Vignettes.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
 #: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0
 #, fuzzy
-msgid "you must specify 'package' or 'dir' argument"
-msgstr "'package' 또는 'dir'를 반드시 지정해야 합니다"
+msgid "you must specify '%s' or '%s' argument"
+msgstr "'dir' 또는 'files'을 반드시 지정해야 합니다"
 
-#. R/QC.R: stop("you must specify 'package', 'dir' or 'file'")
-#: R/QC.R:0
-msgid "you must specify 'package', 'dir' or 'file'"
-msgstr "'package', 'dir' 또는 'file'을 지정해야 합니다"
-
-#. R/QC.R: stop("you must specify 'package', 'dir' or 'file' argument")
+#. R/QC.R: gettextf("you must specify '%s', '%s' or '%s' argument", "package", "dir", "file")
+#. R/QC.R: gettextf("you must specify '%s', '%s' or '%s' argument", "package", "dir", "file")
 #: R/QC.R:0
 #, fuzzy
-msgid "you must specify 'package', 'dir' or 'file' argument"
-msgstr "'package', 'dir' 또는 'file'을 지정해야 합니다"
+msgid "you must specify '%s', '%s' or '%s' argument"
+msgstr "'dir' 또는 'files'을 반드시 지정해야 합니다"
 
 #. R/check.R: ngettext(length(bad), "  Namespace with empty importFrom: %s", "  Namespaces with empty importFrom: %s",     domain = "R-tools")
 #: R/check.R:0
@@ -6855,6 +6828,28 @@ msgstr[0] "%s 내에서 T/F를 찾았습니다"
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "코드 파일들을 기록할 수 없습니다"
+
+#, fuzzy
+#~ msgid "Subdirectory 'exec' contains no files."
+#~ msgstr "디렉토리 '%s'는 존재하지 않습니다"
+
+#, fuzzy
+#~ msgid "file %s was not found"
+#~ msgstr "파일 '%s'를 찾을 수 없습니다"
+
+#~ msgid "package directory %s does not exist"
+#~ msgstr "패키지 디렉토리 %s가 존재하지 않습니다"
+
+#, fuzzy
+#~ msgid "you must specify 'package' or 'dir' argument"
+#~ msgstr "'package' 또는 'dir'를 반드시 지정해야 합니다"
+
+#~ msgid "you must specify 'package', 'dir' or 'file'"
+#~ msgstr "'package', 'dir' 또는 'file'을 지정해야 합니다"
+
+#, fuzzy
+#~ msgid "you must specify 'package', 'dir' or 'file' argument"
+#~ msgstr "'package', 'dir' 또는 'file'을 지정해야 합니다"
 
 #, fuzzy
 #~ msgid ""

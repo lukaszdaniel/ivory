@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-09 21:33+0200\n"
+"POT-Creation-Date: 2016-04-14 23:06+0200\n"
 "PO-Revision-Date: 2011-02-18 09:09+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -228,7 +228,8 @@ msgid "invalid graphics parameter"
 msgstr "ugyldig grafikkparameter"
 
 #: plot.c:478
-msgid "at least 3 arguments required"
+#, fuzzy
+msgid "at least 3 arguments are required"
 msgstr "må ha minst 3 argument"
 
 #: plot.c:493

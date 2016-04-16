@@ -330,7 +330,7 @@ function(package, dir, subdirs = NULL, lib.loc = NULL, output = FALSE,
         dir <- find.package(package, lib.loc)
     }
     if(missing(dir))
-    stop("you must specify 'package' or 'dir' argument")
+    stop(gettextf("you must specify '%s' or '%s' argument", "package", "dir"))
     ## Using sources from directory @code{dir} ...
     if(!dir.exists(dir))
     stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
@@ -570,7 +570,7 @@ buildVignette <-
 	     encoding = getVignetteEncoding(file), ...)
 {
     if (!file_test("-f", file))
-	stop(gettextf("file %s was not found", sQuote(file)), domain = "R-tools")
+	stop(gettextf("%s file was not found", sQuote(file)), domain = "R-tools")
     if (!dir.exists(dir))
 	stop(gettextf("directory %s does not exist", sQuote(dir)), domain = "R-tools")
 
@@ -915,7 +915,7 @@ vignetteDepends <-
         stop(gettextf("'%s' argument must be of length 1", "vignette"))
     if (!nzchar(vignette)) return(invisible()) # lets examples work.
     if (!file.exists(vignette))
-        stop(gettextf("file %s was not found", sQuote(vignette)), domain = "R-tools")
+        stop(gettextf("%s file was not found", sQuote(vignette)), domain = "R-tools")
 
     vigDeps <- vignetteInfo(vignette)$depends
 

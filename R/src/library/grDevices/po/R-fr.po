@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.12.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-03 21:09\n"
+"POT-Creation-Date: 2016-04-14 23:06\n"
 "PO-Revision-Date: 2011-10-15 15:14+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -108,6 +108,12 @@ msgstr "'file' doit être une chaîne de caractère non vide"
 #: R/convertColor.R:0
 #, fuzzy
 msgid "'gamma' argument must be a scalar or 'sRGB' value"
+msgstr "'gamma' doit être une valeur simple ou 'sRGB'"
+
+#. R/prettyDate.R: stop("'mday' argument must be 1 or 15 for \"halfmonth\"")
+#: R/prettyDate.R:0
+#, fuzzy
+msgid "'mday' argument must be 1 or 15 for \"halfmonth\""
 msgstr "'gamma' doit être une valeur simple ou 'sRGB'"
 
 #. R/device.R: stop("'name' must be a character vector")
@@ -397,6 +403,11 @@ msgstr ""
 #, fuzzy
 msgid "display gamma = %s"
 msgstr "gamma d'affichage"
+
+#. R/prettyDate.R: stop("failed to add more ticks; 'min.n' argument too large?")
+#: R/prettyDate.R:0
+msgid "failed to add more ticks; 'min.n' argument too large?"
+msgstr ""
 
 #. R/calc.R: stop("finite coordinates are required")
 #: R/calc.R:0

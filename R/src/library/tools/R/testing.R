@@ -542,7 +542,7 @@ testInstalledBasic <- function(scope = c("basic", "devel", "both", "internet"))
         f <- paste(f, "R", sep = ".")
         if (!file.exists(f)) {
             if (!file.exists(fin <- paste0(f, "in")))
-                stop(gettextf("file %s was not found", sQuote(f)), domain = "R-tools")
+                stop(gettextf("%s file was not found", sQuote(f)), domain = "R-tools")
             message(gettextf("creating file %s", sQuote(f)), domain = "R-tools")
             cmd <- paste(shQuote(file.path(R.home("bin"), "R")), "--vanilla --slave -f", fin)
             if (system(cmd))

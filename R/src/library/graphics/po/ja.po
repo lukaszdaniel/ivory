@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-09 21:33+0200\n"
+"POT-Creation-Date: 2016-04-14 23:06+0200\n"
 "PO-Revision-Date: 2012-02-26 14:21+0200 \n"
 "Last-Translator: Shigeru Mase <maseshigeru@gmail.com> \n"
 "Language-Team: R-core <R-core@R-project.org> \n"
@@ -227,7 +227,8 @@ msgid "invalid graphics parameter"
 msgstr " グラフィックスパラメータが不正です "
 
 #: plot.c:478
-msgid "at least 3 arguments required"
+#, fuzzy
+msgid "at least 3 arguments are required"
 msgstr " 少なくとも3つの引数が必要です "
 
 #: plot.c:493

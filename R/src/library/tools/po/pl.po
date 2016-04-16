@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-07 22:23+0200\n"
+"POT-Creation-Date: 2016-04-14 23:06+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -17,8 +17,9 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 
 #: Rmd5.c:37
-msgid "argument 'files' must be character"
-msgstr "argument 'files' musi być tekstem"
+#, c-format
+msgid "'%s' argument must be character"
+msgstr "argument '%s' musi być tekstem"
 
 #: Rmd5.c:51
 #, c-format
@@ -27,21 +28,26 @@ msgstr "md5 nie powiodło się na pliku '%s'"
 
 #: getfmts.c:53
 #, c-format
-msgid "only %d arguments are allowed"
-msgstr "tylko %d argumentów jest dozwolonych"
+msgid "only %d argument is allowed"
+msgid_plural "only %d arguments are allowed"
+msgstr[0] "tylko %d argument jest dozwolony"
+msgstr[1] "tylko %d argumenty są dozwolone"
+msgstr[2] "tylko %d argumentów jest dozwolonych"
 
 #: getfmts.c:58
-msgid "'fmt' is not a character vector"
-msgstr "'fmt' nie jest wektorem tekstowym"
+#, c-format
+msgid "'%s' argument is not a character vector"
+msgstr "argument '%s' nie jest wektorem tekstowym"
 
 #: getfmts.c:61
-msgid "'fmt' must be length 1"
-msgstr "'fmt' musi mieć długość 1"
+#, c-format
+msgid "'%s' argument must be length 1"
+msgstr "argument '%s' musi mieć długość 1"
 
 #: getfmts.c:67
 #, c-format
-msgid "'fmt' length exceeds maximal format length %d"
-msgstr "długość 'fmt' przekracza maksymalną długość %d formatu"
+msgid "length of '%s' argument exceeds maximal format length %d"
+msgstr "długość argumentu '%s' przekracza maksymalną długość %d formatu"
 
 #: getfmts.c:88
 #, c-format
@@ -151,13 +157,10 @@ msgstr "niepoprawny argument '%s'"
 msgid "write error during file append"
 msgstr "błąd zapisu podczas dołączania pliku"
 
-#: signals.c:43
-msgid "pskill() is not supported on this platform"
-msgstr "'pskill()' nie jest wspierany na tej platformie"
-
-#: signals.c:140
-msgid "psnice() is not supported on this platform"
-msgstr "'psnice()' nie jest wspierany na tej platformie"
+#: signals.c:43 signals.c:140
+#, c-format
+msgid "'%s' function is not supported on this platform"
+msgstr "funkcja '%s' nie jest wspierany na tej platformie"
 
 #: text.c:68
 msgid "invalid argument type"
@@ -175,6 +178,9 @@ msgstr "brakło pamięci"
 #: text.c:268 text.c:270
 msgid "first arg must be a single character string"
 msgstr "pierwszy argument musi być pojedynczym łańcuchem tekstowym"
+
+#~ msgid "pskill() is not supported on this platform"
+#~ msgstr "'pskill()' nie jest wspierany na tej platformie"
 
 #~ msgid "input"
 #~ msgstr "wejście"

@@ -262,7 +262,7 @@ setRlibs <-
             pkgdir <- getwd()
             resultLog(Log, gettext("OK", domain = "R-tools"))
         } else {
-            errorLog(Log, gettextf("Package directory %s does not exist.", sQuote(pkg), domain = "R-tools"))
+            errorLog(Log, gettextf("Package directory %s does not exist", sQuote(pkg), domain = "R-tools"))
             summaryLog(Log)
             do_exit(1L)
         }
@@ -600,9 +600,14 @@ setRlibs <-
                 summaryLog(Log)
                 do_exit(1L)
             } else {
+                ## <FIXME>
+                ## This is not quite right: if we issue a NOTE here, we
+                ## can no longer issue a WARNING in the description
+                ## encoding check below ....
                 noteLog(Log)
                 any <- TRUE
                 printLog0(Log, paste(out, collapse = "\n"), "\n")
+                ## </FIXME>
             }
         }
         ## Check the encoding.
@@ -693,6 +698,14 @@ setRlibs <-
                     }
                 }
             }
+        }
+
+        if(!is_base_pkg && is.na(db["Packaged"])) {
+            if(!any) (noteLog(Log))
+            any <- TRUE
+            printLog(Log,
+                     gettext("Checking should be performed on sources prepared by 'R CMD build'.", domain = "R-tools"),
+                     "\n")
         }
 
         if(!is.na(ncomp <- db["NeedsCompilation"])) {
@@ -1088,14 +1101,14 @@ setRlibs <-
         if (dir.exists("exec") && !length(dir("exec"))) {
             if (!any) warningLog(Log)
             any <- TRUE
-            printLog(Log, gettext("Subdirectory 'exec' contains no files.\n", domain = "R-tools"))
+            printLog(Log, gettextf("Subdirectory '%s' contains no files.\n", "exec", domain = "R-tools"))
         }
 
         ## Subdirectory 'inst' without files?
         if (dir.exists("inst") && !length(dir("inst", recursive = TRUE))) {
             if (!any) warningLog(Log)
             any <- TRUE
-            printLog(Log, gettext("Subdirectory 'inst' contains no files.\n", domain = "R-tools"))
+            printLog(Log, gettextf("Subdirectory '%s' contains no files.\n", "inst", domain = "R-tools"))
         }
 
         ## Subdirectory 'src' without sources?
@@ -2732,7 +2745,7 @@ setRlibs <-
                 if(!any) warningLog(Log)
                 any <- TRUE
                 printLog(Log, gettext("Found Makefile with CR or CRLF line endings:\n", domain = "R-tools"))
-                printLog(Log, gettext("some Unix 'make' programs require LF line endings.\n", domain = "R-tools"))
+                printLog(Log, gettext("Some Unix 'make' programs require LF line endings.\n", domain = "R-tools"))
            }
             if(any(grepl("[^/]Rscript", lines))) {
                 if(!any) warningLog(Log)
@@ -4367,7 +4380,7 @@ setRlibs <-
             pkg <- file.path(dir, pkgname0)
         }
         if (!dir.exists(pkg))
-            stop(gettextf("package directory %s does not exist", sQuote(pkg)), domain = "R-tools")
+            stop(gettextf("Package directory %s does not exist", sQuote(pkg)), domain = "R-tools")
         setwd(pkg)
         pkgdir <- getwd()
         thispkg_src_subdirs <- thispkg_subdirs

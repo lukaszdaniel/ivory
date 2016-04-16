@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.4.0\n"
-"POT-Creation-Date: 2016-04-05 22:53\n"
+"POT-Creation-Date: 2016-04-15 14:51\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,10 +41,17 @@ msgid "%s command is not available"
 msgstr ""
 
 
+#: R/Vignettes.R: 0
 #: R/news.R: 0
+#: R/news.R: 0
+#: R/news.R: 0
+#: R/testing.R: 0
+#. R/Vignettes.R: gettextf("%s file was not found", sQuote(file))
+#. R/Vignettes.R: gettextf("%s file was not found", sQuote(vignette))
 #. R/news.R: gettextf("%s file was not found", sQuote("DESCRIPTION"))
 #. R/news.R: gettextf("%s file was not found", sQuote("NEWS"))
 #. R/news.R: gettextf("%s file was not found", sQuote("DESCRIPTION"))
+#. R/testing.R: gettextf("%s file was not found", sQuote(f))
 
 msgid "%s file was not found"
 msgstr ""
@@ -2067,6 +2074,13 @@ msgid "Internal error: NULL tag"
 msgstr ""
 
 
+#: R/QC.R: 0
+#. R/QC.R: gettext("Invalid 'NAMESPACE' file, parsing gives:", domain = "R-tools")
+
+msgid "Invalid 'NAMESPACE' file, parsing gives:"
+msgstr ""
+
+
 #: R/check.R: 0
 #. R/check.R: gettextf("Invalid 'NAMESPACE' file, parsing gives:\n%s\n", as.character(e), domain = "R-tools")
 
@@ -2085,13 +2099,6 @@ msgstr ""
 #. R/doitools.R: gettext("Invalid DOI")
 
 msgid "Invalid DOI"
-msgstr ""
-
-
-#: R/QC.R: 0
-#. R/QC.R: gettext("Invalid NAMESPACE file, parsing gives:", domain = "R-tools")
-
-msgid "Invalid NAMESPACE file, parsing gives:"
 msgstr ""
 
 
@@ -3104,9 +3111,10 @@ msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettextf("Package directory %s does not exist.", sQuote(pkg), domain = "R-tools")
+#. R/check.R: gettextf("Package directory %s does not exist", sQuote(pkg), domain = "R-tools")
+#. R/check.R: gettextf("Package directory %s does not exist", sQuote(pkg))
 
-msgid "Package directory %s does not exist."
+msgid "Package directory %s does not exist"
 msgstr ""
 
 
@@ -3703,6 +3711,7 @@ msgstr ""
 
 #: R/check.R: 0
 #. R/check.R: gettext("Some Unix 'make' programs require LF line endings.\n", domain = "R-tools")
+#. R/check.R: gettext("Some Unix 'make' programs require LF line endings.\n", domain = "R-tools")
 
 msgid "Some Unix 'make' programs require LF line endings."
 msgstr ""
@@ -3807,6 +3816,14 @@ msgstr ""
 
 
 #: R/check.R: 0
+#. R/check.R: gettextf("Subdirectory '%s' contains no files.\n", "exec", domain = "R-tools")
+#. R/check.R: gettextf("Subdirectory '%s' contains no files.\n", "inst", domain = "R-tools")
+
+msgid "Subdirectory '%s' contains no files."
+msgstr ""
+
+
+#: R/check.R: 0
 #. R/check.R: gettext("Subdirectory 'data' contains no data sets.\n", domain = "R-tools")
 
 msgid "Subdirectory 'data' contains no data sets."
@@ -3817,20 +3834,6 @@ msgstr ""
 #. R/check.R: gettext("Subdirectory 'demo' contains no demos.\n", domain = "R-tools")
 
 msgid "Subdirectory 'demo' contains no demos."
-msgstr ""
-
-
-#: R/check.R: 0
-#. R/check.R: gettext("Subdirectory 'exec' contains no files.\n", domain = "R-tools")
-
-msgid "Subdirectory 'exec' contains no files."
-msgstr ""
-
-
-#: R/check.R: 0
-#. R/check.R: gettext("Subdirectory 'inst' contains no files.\n", domain = "R-tools")
-
-msgid "Subdirectory 'inst' contains no files."
 msgstr ""
 
 
@@ -6041,16 +6044,6 @@ msgid "file %s lacks a header: skipping"
 msgstr ""
 
 
-#: R/Vignettes.R: 0
-#: R/testing.R: 0
-#. R/Vignettes.R: gettextf("file %s was not found", sQuote(file))
-#. R/Vignettes.R: gettextf("file %s was not found", sQuote(vignette))
-#. R/testing.R: gettextf("file %s was not found", sQuote(f))
-
-msgid "file %s was not found"
-msgstr ""
-
-
 #: R/check.R: 0
 #. R/check.R: gettextf("  file %s will not be installed: please remove it\n", paste(sQuote(miss[f]),     collapse = ", "), domain = "R-tools")
 
@@ -6582,13 +6575,6 @@ msgstr ""
 
 
 #: R/check.R: 0
-#. R/check.R: gettextf("package directory %s does not exist", sQuote(pkg))
-
-msgid "package directory %s does not exist"
-msgstr ""
-
-
-#: R/check.R: 0
 #. R/check.R: gettextf("package encoding: %s", encoding, domain = "R-tools")
 
 msgid "package encoding: %s"
@@ -7062,13 +7048,6 @@ msgid "skipping installation test"
 msgstr ""
 
 
-#: R/check.R: 0
-#. R/check.R: gettext("some Unix 'make' programs require LF line endings.\n", domain = "R-tools")
-
-msgid "some Unix 'make' programs require LF line endings."
-msgstr ""
-
-
 #: R/makeLazyLoad.R: 0
 #. R/makeLazyLoad.R: stop("source list must have names for all elements")
 
@@ -7479,44 +7458,33 @@ msgid "will not attempt to install this package on Windows"
 msgstr ""
 
 
-#: R/Rd.R: 0
-#. R/Rd.R: stop("you must specify 'dir' or 'files' argument")
-
-msgid "you must specify 'dir' or 'files' argument"
-msgstr ""
-
-
 #: R/QC.R: 0
+#: R/Rd.R: 0
 #: R/Rd.R: 0
 #: R/Vignettes.R: 0
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/QC.R: stop("you must specify 'package' or 'dir' argument")
-#. R/Rd.R: stop("you must specify 'package' or 'dir' argument")
-#. R/Vignettes.R: stop("you must specify 'package' or 'dir' argument")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/QC.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/Rd.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
+#. R/Rd.R: gettextf("you must specify '%s' or '%s' argument", "dir", "files")
+#. R/Vignettes.R: gettextf("you must specify '%s' or '%s' argument", "package", "dir")
 
-msgid "you must specify 'package' or 'dir' argument"
+msgid "you must specify '%s' or '%s' argument"
 msgstr ""
 
 
 #: R/QC.R: 0
-#. R/QC.R: stop("you must specify 'package', 'dir' or 'file'")
+#. R/QC.R: gettextf("you must specify '%s', '%s' or '%s' argument", "package", "dir", "file")
+#. R/QC.R: gettextf("you must specify '%s', '%s' or '%s' argument", "package", "dir", "file")
 
-msgid "you must specify 'package', 'dir' or 'file'"
-msgstr ""
-
-
-#: R/QC.R: 0
-#. R/QC.R: stop("you must specify 'package', 'dir' or 'file' argument")
-
-msgid "you must specify 'package', 'dir' or 'file' argument"
+msgid "you must specify '%s', '%s' or '%s' argument"
 msgstr ""
 
 
