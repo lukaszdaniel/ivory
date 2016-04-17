@@ -1,4 +1,4 @@
-# Automatically generated from all.nw using noweb
+# Automatically generated from the noweb directory
 survfitcoxph.fit <- function(y, x, wt, x2, risk, newrisk, strata, se.fit,
                               survtype, vartype, varmat, id, y2, strata2,
                               unlist=TRUE) {
@@ -8,9 +8,11 @@ survfitcoxph.fit <- function(y, x, wt, x2, risk, newrisk, strata, se.fit,
     survlist <- vector('list', nstrata)
     names(survlist) <- ustrata
 
-    for (i in seq_len(nstrata)) {
+    for (i in 1:nstrata) {
         indx <- which(strata== ustrata[i])
-        survlist[[i]] <- agsurv(y[indx,,drop=F], x[indx,,drop=F],  wt[indx], risk[indx], survtype, vartype)
+        survlist[[i]] <- agsurv(y[indx,,drop=F], x[indx,,drop=F], 
+                                wt[indx], risk[indx],
+                                survtype, vartype)
         }
 
     expand <- function(fit, x2, varmat, se.fit) {
@@ -23,9 +25,10 @@ survfitcoxph.fit <- function(y, x, wt, x2, risk, newrisk, strata, se.fit,
             dimnames(fit$surv) <- list(NULL, row.names(x2))
             if (se.fit) {
                 varh <- matrix(0., nrow=length(fit$varhaz), ncol=nrow(x2))
-                for (i in seq_len(nrow(x2))) {
+                for (i in 1:nrow(x2)) {
                     dt <- outer(fit$cumhaz, x2[i,], '*') - fit$xbar
-                    varh[,i] <- (cumsum(fit$varhaz) + rowSums((dt %*% varmat)* dt))* newrisk[i]^2
+                    varh[,i] <- (cumsum(fit$varhaz) + rowSums((dt %*% varmat)* dt))*
+                        newrisk[i]^2
                     }
                 fit$std.err <- sqrt(varh)
                 }
@@ -35,7 +38,8 @@ survfitcoxph.fit <- function(y, x, wt, x2, risk, newrisk, strata, se.fit,
             fit$surv <- surv^newrisk
             if (se.fit) {
                 dt <-  outer(fit$cumhaz, c(x2)) - fit$xbar
-                varh <- (cumsum(fit$varhaz) + rowSums((dt %*% varmat)* dt)) * newrisk^2
+                varh <- (cumsum(fit$varhaz) + rowSums((dt %*% varmat)* dt)) * 
+                    newrisk^2
                 fit$std.err <- sqrt(varh)
                 }
             fit$cumhaz <- fit$cumhaz * newrisk
@@ -52,7 +56,7 @@ survfitcoxph.fit <- function(y, x, wt, x2, risk, newrisk, strata, se.fit,
             hazard  <- vector('list', ntarget)
             stemp <- as.integer(strata2)
             timeforward <- 0
-            for (i in seq_len(ntarget)) {
+            for (i in 1:ntarget) {
                 slist <- survlist[[stemp[i]]]
                 indx <- which(slist$time > y2[i,1] & slist$time <= y2[i,2])
                 if (length(indx)==0) {
@@ -105,9 +109,11 @@ survfitcoxph.fit <- function(y, x, wt, x2, risk, newrisk, strata, se.fit,
         else {
             uid <- unique(id)
             result <- vector('list', length=length(uid))
-            for (i in seq_len(length(uid))) {
+            for (i in 1:length(uid)) {
                 indx <- which(id==uid[i])
-                result[[i]] <- onecurve(survlist, x2[indx,,drop=FALSE], y2[indx,,drop=FALSE], strata2[indx],  newrisk[indx], se.fit)
+                result[[i]] <- onecurve(survlist, x2[indx,,drop=FALSE], 
+                                         y2[indx,,drop=FALSE], 
+                                         strata2[indx],  newrisk[indx], se.fit)
                 }
             names(result) <- uid
             }
@@ -116,30 +122,46 @@ survfitcoxph.fit <- function(y, x, wt, x2, risk, newrisk, strata, se.fit,
     if (unlist) {
         if (length(result)==1) { # the no strata case
             if (se.fit)
-                result[[1]][c("n", "time", "n.risk", "n.event", "n.censor", "surv", "cumhaz", "std.err")]
-            else result[[1]][c("n", "time", "n.risk", "n.event", "n.censor", "surv", "cumhaz")]
+                result[[1]][c("n", "time", "n.risk", "n.event", "n.censor",
+                          "surv", "cumhaz", "std.err")]
+            else result[[1]][c("n", "time", "n.risk", "n.event", "n.censor",
+                          "surv", "cumhaz")]
         }
         else {
-            temp <-list(n   =    unlist(lapply(result, function(x) x$n), use.names=FALSE),
-                        time=    unlist(lapply(result, function(x) x$time), use.names=FALSE),
-                        n.risk=  unlist(lapply(result, function(x) x$n.risk), use.names=FALSE),
-                        n.event= unlist(lapply(result, function(x) x$n.event), use.names=FALSE),
-                        n.censor=unlist(lapply(result, function(x) x$n.censor), use.names=FALSE),
+            temp <-list(n   =    unlist(lapply(result, function(x) x$n),
+                                        use.names=FALSE),
+                        time=    unlist(lapply(result, function(x) x$time),
+                                        use.names=FALSE),
+                        n.risk=  unlist(lapply(result, function(x) x$n.risk),
+                                        use.names=FALSE),
+                        n.event= unlist(lapply(result, function(x) x$n.event),
+                                        use.names=FALSE),
+                        n.censor=unlist(lapply(result, function(x) x$n.censor),
+                                        use.names=FALSE),
                         strata = sapply(result, function(x) length(x$time)))
             names(temp$strata) <- names(result)
             
             if ((missing(id) || is.null(id)) && nrow(x2)>1) {
-                 temp$surv <- t(matrix(unlist(lapply(result, function(x) t(x$surv)), use.names=FALSE), nrow= nrow(x2)))
+                 temp$surv <- t(matrix(unlist(lapply(result, 
+                                   function(x) t(x$surv)), use.names=FALSE),
+                                       nrow= nrow(x2)))
                  dimnames(temp$surv) <- list(NULL, row.names(x2))
-                 temp$cumhaz <- t(matrix(unlist(lapply(result, function(x) t(x$cumhaz)), use.names=FALSE), nrow= nrow(x2)))
+                 temp$cumhaz <- t(matrix(unlist(lapply(result, 
+                                   function(x) t(x$cumhaz)), use.names=FALSE),
+                                       nrow= nrow(x2)))
                  if (se.fit) 
-                     temp$std.err <- t(matrix(unlist(lapply(result, function(x) t(x$std.err)), use.names=FALSE), nrow= nrow(x2)))
+                     temp$std.err <- t(matrix(unlist(lapply(result,
+                                    function(x) t(x$std.err)), use.names=FALSE),
+                                             nrow= nrow(x2)))
                  }
             else {             
-                temp$surv <- unlist(lapply(result, function(x) x$surv), use.names=FALSE)
-                temp$cumhaz <- unlist(lapply(result, function(x) x$cumhaz), use.names=FALSE)
+                temp$surv <- unlist(lapply(result, function(x) x$surv),
+                                    use.names=FALSE)
+                temp$cumhaz <- unlist(lapply(result, function(x) x$cumhaz),
+                                    use.names=FALSE)
                 if (se.fit) 
-                    temp$std.err <- unlist(lapply(result, function(x) x$std.err), use.names=FALSE)
+                    temp$std.err <- unlist(lapply(result, 
+                                   function(x) x$std.err), use.names=FALSE)
                 }
             temp
             }

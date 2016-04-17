@@ -1,4 +1,4 @@
-# Automatically generated from all.nw using noweb
+# Automatically generated from the noweb directory
 survfit.coxph <-
   function(formula, newdata, se.fit=TRUE, conf.int=.95, individual=FALSE,
             type, vartype,
@@ -9,7 +9,6 @@ survfit.coxph <-
     Call <- match.call()
     Call[[1]] <- as.name("survfit")  #nicer output for the user
     object <- formula     #'formula' because it has to match survfit
-
     if (!is.null(attr(object$terms, "specials")$tt))
         stop("The survfit function can not yet process coxph models with a tt term")
 
@@ -36,13 +35,24 @@ survfit.coxph <-
 
     if (!se.fit) conf.type <- "none"
     else conf.type <- match.arg(conf.type)
-    has.strata <- !is.null(attr(object$terms, 'specials')$strata) 
+
+    tfac <- attr(terms(object), 'factors')
+    temp <- attr(terms(object), 'specials')$strata 
+    has.strata <- !is.null(temp)
+    if (has.strata) {
+        # Toss out strata terms in tfac before doing the test 1 line below, as
+        #  strata end up in the model with age:strat(grp) terms or *strata() terms
+        #  (There might be more than one strata term)
+        for (i in temp) tfac <- tfac[,tfac[i,] ==0]  # toss out strata terms
+        }
+    if (any(tfac >1))
+        stop("not able to create a curve for models that contain an interaction without the lower order effect")
     if (is.null(object$y) || is.null(object[['x']]) ||
         !is.null(object$call$weights) || 
         (has.strata && is.null(object$strata)) ||
         !is.null(attr(object$terms, 'offset'))) {
         
-        mf <- model.frame(object)
+        mf <- stats::model.frame(object)
         }
     else mf <- NULL  #useful for if statements later
     if (is.null(mf)) y <- object[['y']]
@@ -68,7 +78,7 @@ survfit.coxph <-
 
     type <- attr(y, 'type')
     if (type != 'right' && type != 'counting') 
-        stop(gettextf("cannot handle \"%s\" type survival data", type))
+        stop(gettextf("Cannot handle \"%s\" type survival data", type))
     missid <- missing(id) # I need this later, and setting id below makes
                           # "missing(id)" always false
     if (!missid) individual <- TRUE
@@ -76,11 +86,11 @@ survfit.coxph <-
     else id <- NULL
 
     if (individual && missing(newdata)) {
-        stop("'id' and/or 'individual' arguments only make sense with new data")
+        stop("the id and/or individual options only make sense with new data")
     }
 
     if (individual && type!= 'counting')
-        stop("'individual' argument is only valid for start-stop data")
+        stop("The individual option is  only valid for start-stop data")
 
     if (is.null(mf)) offset <- 0
     else {
@@ -142,7 +152,7 @@ survfit.coxph <-
         tt
     }
     temp <- untangle.specials(Terms, 'cluster')
-    if (length(temp$vars)) 
+    if (length(temp$terms)) 
         Terms <- subterms(Terms, -temp$terms)
 
     if (missing(newdata)) {
@@ -153,14 +163,14 @@ survfit.coxph <-
     }
     else {
         if (!is.null(object$frail))
-            stop("'newdata' argument cannot be used when a model has frailty terms")
+            stop("Newdata cannot be used when a model has frailty terms")
 
         Terms2 <- Terms 
         if (!individual)  Terms2 <- delete.response(Terms)
         if (is.vector(newdata, "numeric")) {
-            if (individual) stop(gettextf("'%s' argument must be a data frame", "newdata"))
+            if (individual) stop("'newdata' argument must be a data frame")
             if (is.null(names(newdata))) {
-                stop(gettextf("'%s' argument must be a data frame", "newdata"))
+                stop("'newdata' argument must be a data frame")
             }
             newdata <- data.frame(as.list(newdata))
         }
@@ -179,7 +189,7 @@ survfit.coxph <-
                         found.strata <- FALSE
                 }
 
-                if (found.strata) mf2 <- model.frame(Terms2, data=newdata, 
+                if (found.strata) mf2 <- stats::model.frame(Terms2, data=newdata, 
                                        na.action=na.action, xlev=object$xlevels)
                 else {
                     Terms2 <- subterms(Terms2, -attr(Terms2, 'specials')$strata)
@@ -189,12 +199,12 @@ survfit.coxph <-
                         if (length(myxlev)==0) myxlev <- NULL
                     }
                     else myxlev <- NULL
-                    mf2 <- model.frame(Terms2, data=newdata, na.action=na.action, 
+                    mf2 <- stats::model.frame(Terms2, data=newdata, na.action=na.action, 
                                        xlev=myxlev)
                     }
                 }
             else {
-                mf2 <- model.frame(Terms2, data=newdata, na.action=na.action, 
+                mf2 <- stats::model.frame(Terms2, data=newdata, na.action=na.action, 
                                     xlev=object$xlevels)
                 found.strata <- has.strata  #would have failed otherwise
                 }
@@ -205,7 +215,7 @@ survfit.coxph <-
             tcall$data <- newdata
             tcall$formula <- Terms2
             tcall$xlev <- object$xlevels
-            tcall[[1]] <- as.name('model.frame')
+            tcall[[1L]] <- quote(stats::model.frame)
             mf2 <- eval(tcall)
             found.strata <- has.strata # would have failed otherwise
         }
@@ -216,16 +226,18 @@ survfit.coxph <-
         strata2 <- factor(strata2, levels=levels(strata))
         if (any(is.na(strata2)))
             stop("New data set has strata levels not found in the original")
-        Terms2 <- Terms2[-temp$terms]
+        # An expression like age:strata(sex) will have temp$vars= "strata(sex)"
+        #  and temp$terms = integer(0).  This does not work as a subscript
+        if (length(temp$terms) >0) Terms2 <- Terms2[-temp$terms]
     }
     else strata2 <- factor(rep(0, nrow(mf2)))
 
     if (individual) {
         if (missing(newdata)) 
-            stop("'newdata' argument must be present when 'individual=TRUE'")
+            stop("The newdata argument must be present when 'individual=TRUE'")
         if (!missid) {  #grab the id variable
             id <- model.extract(mf2, "id")
-            if (is.null(id)) stop("id=NULL is an invalid argument")
+            if (is.null(id)) stop("'id=NULL' is an invalid argument")
             }
         else id <- rep(1, nrow(mf2))
         
@@ -239,7 +251,7 @@ survfit.coxph <-
                     
         y2 <- model.extract(mf2, 'response')
         if (attr(y2,'type') != type)
-            stop("Survival type of 'newdata' argument does not match the fitted model")
+            stop("Survival type of newdata does not match the fitted model")
         if (attr(y2, "type") != "counting")
             stop("'individual=TRUE' is only valid for counting process data")
         y2 <- y2[,1:2, drop=F]  #throw away status, it's never used
@@ -252,7 +264,7 @@ survfit.coxph <-
     else {
         if (missing(newdata)) {
             if (has.strata && strata.interaction)
-                stop ("Models with strata by covariate interaction terms require newdata")
+                stop("Models with strata by covariate interaction terms require newdata")
             x2 <- matrix(0.0, nrow=1, ncol=ncol(x))
             offset2 <- 0
         }

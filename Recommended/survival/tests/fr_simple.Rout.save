@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-03-03 r635) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-04-16 r709) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-03-03 r70269) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-04-16 r70497) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -43,6 +43,9 @@ Type 'q()' to quit R.
 > tfit1 <- coxph(Surv(time,status) ~x, test1, eps=1e-7)
 > tfit2 <- coxph(Surv(time,status) ~x + frailty(zz, theta=0, sparse=T), test1)
 > tfit3 <- coxph(Surv(zz,time,status) ~x + frailty(zz, theta=0, sparse=T), test1)
+Warning message:
+In command 'coxph(Surv(zz, time, status) ~ x + frailty(zz, theta = 0, sparse = T), test1)':
+  a variable appears on both the left and right sides of the formula
 > 
 > temp <- c('coefficients', 'var', 'loglik', 'linear.predictors',
 + 	  'means', 'n', 'concordance')
@@ -73,6 +76,9 @@ Type 'q()' to quit R.
 + 	       + strata(x2), test3)
 > tfit3 <- coxph(Surv(zz,time,status) ~x + frailty(zz, theta=0, sparse=T)
 + 	         + strata(x2), test3)
+Warning message:
+In command 'coxph(Surv(zz, time, status) ~ x + frailty(zz, theta = 0, sparse = T) + strata(x2), ':
+  a variable appears on both the left and right sides of the formula
 > 
 > all.equal(tfit1[temp], tfit2[temp])
 [1] TRUE
@@ -93,4 +99,4 @@ Type 'q()' to quit R.
 > 
 > proc.time()
    user  system elapsed 
-  0.196   0.012   0.204 
+  1.304   0.060   1.372 

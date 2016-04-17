@@ -1,10 +1,10 @@
-# Automatically generated from all.nw using noweb
+# Automatically generated from the noweb directory
 survConcordance <- function(formula, data,
                             weights, subset, na.action) {
     Call <- match.call()  # save a copy of of the call, as documentation
 
     m <- match.call(expand.dots=FALSE)
-    m[[1]] <- as.name("model.frame")
+    m[[1L]] <-  quote(stats::model.frame)
     m$formula <- if(missing(data)) terms(formula, "strata")
                  else              terms(formula, "strata", data=data)
     m <- eval(m, sys.parent())
@@ -13,13 +13,13 @@ survConcordance <- function(formula, data,
     Y <- model.extract(m, "response")
     if (!inherits(Y, "Surv")) {
         if (is.numeric(Y) && is.vector(Y))  Y <- Surv(Y)
-        else stop(gettextf("left hand side of the formula must be a numeric vector or an object of class %s", dQuote("Surv")))
+        else stop("left hand side of the formula  must be a numeric vector or a surival")
     }
     n <- nrow(Y)
 
     wt <- model.extract(m, 'weights')
     offset<- attr(Terms, "offset")
-    if (length(offset)>0) stop("offset terms not allowed")
+    if (length(offset)>0) stop("Offset terms not allowed")
 
     stemp <- untangle.specials(Terms, 'strata')
     if (length(stemp$vars)) {
@@ -30,7 +30,7 @@ survConcordance <- function(formula, data,
     else strat <- NULL
     
     x <- model.matrix(Terms, m)[,-1, drop=FALSE]  #remove the intercept
-    if (ncol(x) > 1) stop("only one predictor variable allowed")
+    if (ncol(x) > 1) stop("Only one predictor variable allowed")
 
     count <- survConcordance.fit(Y, x, strat, wt)
     if (is.null(strat)) {
@@ -54,7 +54,7 @@ survConcordance <- function(formula, data,
 
 print.survConcordance <- function(x, ...) {
     if(!is.null(cl <- x$call)) {
-        cat(gettext("Call:", domain = "R-survival"), "\n", sep = "")
+        cat("Call:\n")
         dput(cl)
         cat("\n")
         }
@@ -62,7 +62,8 @@ print.survConcordance <- function(x, ...) {
     if(length(omit))
         cat("  n=", x$n, " (", naprint(omit), ")\n", sep = "")
     else cat("  n=", x$n, "\n")
-    cat(gettextf("Concordance= %s (se = %s)", format(x$concordance), format(x$std.err), domain = "R-survival"), "\n", sep = "")
+    cat("Concordance= ", format(x$concordance), " se= ", format(x$std.err),
+        '\n', sep='')
     print(x$stats)
 
     invisible(x)

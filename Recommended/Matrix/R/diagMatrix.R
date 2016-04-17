@@ -653,30 +653,34 @@ setMethod("tcrossprod", signature(x = "diagonalMatrix", y = "missing"), diagprod
 ## analogous to matdiagprod() below:
 diagmatprod <- function(x, y) {
     ## x is diagonalMatrix
-    if(x@Dim[2] != nrow(y)) stop("non-matching dimensions")
-    Matrix(if(x@diag == "U") y else x@x * y)
+    dy <- dim(y)
+    if(x@Dim[2L] != dy[1L]) stop("non-matching dimensions")
+    Matrix(if(x@diag == "U") y else x@x * y, nrow=dy[1L], ncol=dy[2L])
 }
 setMethod("%*%", signature(x = "diagonalMatrix", y = "matrix"), diagmatprod)
 
 ##formals(diagmatprod) <- alist(x=, y=NULL, boolArith = NA, ...=) ## FIXME boolArith
 diagmatprod2 <- function(x, y=NULL, boolArith = NA, ...) {
     ## x is diagonalMatrix
-    if(x@Dim[2] != nrow(y)) stop("non-matching dimensions")
-    Matrix(if(x@diag == "U") y else x@x * y)
+    dy <- dim(y)
+    if(x@Dim[2L] != dy[1L]) stop("non-matching dimensions")
+    Matrix(if(x@diag == "U") y else x@x * y, nrow=dy[1L], ncol=dy[2L])
 }
 setMethod("crossprod",  signature(x = "diagonalMatrix", y = "matrix"), diagmatprod2)
 
 diagGeprod <- function(x, y) {
-    if(x@Dim[2] != y@Dim[1]) stop("non-matching dimensions")
-    if(x@diag != "U")
+    if(x@Dim[2L] != y@Dim[1L]) stop("non-matching dimensions")
+    if(x@diag != "U") {
+        if(!is.numeric(y@x)) y <- as(y, "dMatrix")
         y@x <- x@x * y@x
+    }
     y
 }
 setMethod("%*%", signature(x= "diagonalMatrix", y= "dgeMatrix"), diagGeprod)
 setMethod("%*%", signature(x= "diagonalMatrix", y= "lgeMatrix"), diagGeprod)
 
 diagGeprodBool <- function(x, y) {
-    if(x@Dim[2] != y@Dim[1]) stop("non-matching dimensions")
+    if(x@Dim[2L] != y@Dim[1L]) stop("non-matching dimensions")
     if(!is.logical(y@x)) y <- as(y, "lMatrix")
     if(x@diag != "U")
         y@x <- x@x & y@x
@@ -685,9 +689,10 @@ diagGeprodBool <- function(x, y) {
 setMethod("%&%", signature(x= "diagonalMatrix", y= "geMatrix"), diagGeprodBool)
 
 diagGeprod2 <- function(x, y=NULL, boolArith = NA, ...) {
-    if(x@Dim[2] != y@Dim[1]) stop("non-matching dimensions")
+    if(x@Dim[2L] != y@Dim[1L]) stop("non-matching dimensions")
     bool <- isTRUE(boolArith)
     if(bool && !is.logical(y@x)) y <- as(y, "lMatrix")
+    else if(!bool && !is.numeric(y@x)) y <- as(y, "dMatrix")
     if(x@diag != "U")
         y@x <- if(bool) x@x & y@x else x@x * y@x
     y
@@ -699,16 +704,18 @@ setMethod("crossprod", signature(x = "diagonalMatrix", y = "lgeMatrix"), diagGep
 ## analogous to diagmatprod() above:
 matdiagprod <- function(x, y) {
     dx <- dim(x)
-    if(dx[2] != y@Dim[1]) stop("non-matching dimensions")
-    Matrix(if(y@diag == "U") x else x * rep(y@x, each = dx[1]))
+    if(dx[2L] != y@Dim[1L]) stop("non-matching dimensions")
+    Matrix(if(y@diag == "U") x else x * rep(y@x, each = dx[1L]))
 }
 setMethod("%*%", signature(x = "matrix", y = "diagonalMatrix"), matdiagprod)
 
 gediagprod <- function(x, y) {
     dx <- dim(x)
-    if(dx[2] != y@Dim[1]) stop("non-matching dimensions")
-    if(y@diag == "N")
-	x@x <- x@x * rep(y@x, each = dx[1])
+    if(dx[2L] != y@Dim[1L]) stop("non-matching dimensions")
+    if(y@diag == "N") {
+        if(!is.numeric(x@x)) x <- as(x, "dMatrix")
+	x@x <- x@x * rep(y@x, each = dx[1L])
+    }
     x
 }
 setMethod("%*%", signature(x= "dgeMatrix", y= "diagonalMatrix"), gediagprod)
@@ -716,10 +723,10 @@ setMethod("%*%", signature(x= "lgeMatrix", y= "diagonalMatrix"), gediagprod)
 
 gediagprodBool <- function(x, y) {
     dx <- dim(x)
-    if(dx[2] != y@Dim[1]) stop("non-matching dimensions")
+    if(dx[2L] != y@Dim[1L]) stop("non-matching dimensions")
     if(!is.logical(x@x)) x <- as(x, "lMatrix")
     if(y@diag == "N")
-	x@x <- x@x & rep(y@x, each = dx[1])
+	x@x <- x@x & rep(y@x, each = dx[1L])
     x
 }
 setMethod("%&%", signature(x= "geMatrix", y= "diagonalMatrix"), gediagprodBool)
@@ -727,34 +734,35 @@ setMethod("%&%", signature(x= "geMatrix", y= "diagonalMatrix"), gediagprodBool)
 setMethod("tcrossprod",signature(x = "matrix", y = "diagonalMatrix"),
           function(x, y=NULL, boolArith = NA, ...) {
               dx <- dim(x)
-              if(dx[2] != y@Dim[1]) stop("non-matching dimensions")
+              if(dx[2L] != y@Dim[1L]) stop("non-matching dimensions")
               bool <- isTRUE(boolArith)
               if(bool && !is.logical(y@x)) y <- as(y, "lMatrix")
               Matrix(if(y@diag == "U") x else
-                     if(bool) x & rep(y@x, each = dx[1])
-                     else     x * rep(y@x, each = dx[1]))
+                     if(bool) x & rep(y@x, each = dx[1L])
+                     else     x * rep(y@x, each = dx[1L]))
           })
 
 setMethod("crossprod", signature(x = "matrix", y = "diagonalMatrix"),
 	  function(x, y=NULL, boolArith = NA, ...) {
 	      dx <- dim(x)
-	      if(dx[1] != y@Dim[1]) stop("non-matching dimensions")
+	      if(dx[1L] != y@Dim[1L]) stop("non-matching dimensions")
               bool <- isTRUE(boolArith)
               if(bool && !is.logical(y@x)) y <- as(y, "lMatrix")
 	      Matrix(if(y@diag == "U") t(x) else
-		     if(bool) t(rep.int(y@x, dx[2]) & x)
-		     else     t(rep.int(y@x, dx[2]) * x))
+		     if(bool) t(rep.int(y@x, dx[2L]) & x)
+		     else     t(rep.int(y@x, dx[2L]) * x))
 	  })
 
 
 gediagprod2 <- function(x, y=NULL, boolArith = NA, ...) {
     dx <- dim(x)
-    if(dx[2] != y@Dim[1]) stop("non-matching dimensions")
+    if(dx[2L] != y@Dim[1L]) stop("non-matching dimensions")
     bool <- isTRUE(boolArith)
     if(bool && !is.logical(x@x)) x <- as(x, "lMatrix")
+    else if(!bool && !is.numeric(x@x)) x <- as(x, "dMatrix")
     if(y@diag == "N")
-	x@x <- if(bool) x@x & rep(y@x, each = dx[1])
-	       else     x@x * rep(y@x, each = dx[1])
+	x@x <- if(bool) x@x & rep(y@x, each = dx[1L])
+	       else     x@x * rep(y@x, each = dx[1L])
     x
 }
 setMethod("tcrossprod", signature(x = "dgeMatrix", y = "diagonalMatrix"), gediagprod2)
@@ -780,7 +788,7 @@ setMethod("%*%", signature(x = "denseMatrix", y = "diagonalMatrix"),
 ##' @param y diagonalMatrix
 ##' @return x %*% y
 Cspdiagprod <- function(x, y, boolArith = NA, ...) {
-    if((m <- ncol(x)) != y@Dim[1]) stop("non-matching dimensions")
+    if((m <- ncol(x)) != y@Dim[1L]) stop("non-matching dimensions")
     if(y@diag == "N") { ## otherwise: y == Diagonal(n) : multiplication is identity
 	x <- .Call(Csparse_diagU2N, x)
 	cx <- getClass(class(x))
@@ -821,7 +829,7 @@ Cspdiagprod <- function(x, y, boolArith = NA, ...) {
 ##' @param y CsparseMatrix
 ##' @return x %*% y
 diagCspprod <- function(x, y, boolArith = NA, ...) {
-    if(x@Dim[2] != y@Dim[1]) stop("non-matching dimensions")
+    if(x@Dim[2L] != y@Dim[1L]) stop("non-matching dimensions")
     if(x@diag == "N") {
 	y <- .Call(Csparse_diagU2N, y)
 	cy <- getClass(class(y))
@@ -928,7 +936,7 @@ setMethod("solve", signature(a = "diagonalMatrix", b = "missing"),
 	  })
 
 solveDiag <- function(a, b, ...) {
-    if(a@Dim[1] != nrow(b))
+    if(a@Dim[1L] != nrow(b))
         stop("incompatible matrix dimensions")
     ## trivially invert a 'in place' and multiply:
     a@x <- 1/ a@x
@@ -974,7 +982,7 @@ diagOdiag <- function(e1,e2) {
 	isLog <- (is.logical(r) || is.logical(r00))
         Matrix.msg(gettext("exploding <diag> o <diag> into dense matrix", domain = "R-Matrix"), .M.level = 2)
 	d <- e1@Dim
-	n <- d[1]
+	n <- d[1L]
 	stopifnot(length(r) == n)
 	if(isNum && !is.double(r)) r <- as.double(r)
 	xx <- as.vector(matrix(rbind(r, matrix(r00,n,n)), n,n))
@@ -1008,7 +1016,7 @@ diagOtri <- function(e1,e2) {
     r <- callGeneric(d1 <- .diag.x(e1), diag(e2)) # error if not "compatible"
     ## Check what happens with non-diagonals, i.e. (0 o 0), (FALSE o 0), ...:
     e1.0 <- if(is.numeric(d1)) 0 else FALSE
-    r00 <- callGeneric(e1.0, if(.n2 <- is.numeric(e2[0])) 0 else FALSE)
+    r00 <- callGeneric(e1.0, if(.n2 <- is.numeric(e2[0L])) 0 else FALSE)
     if(is0(r00)) { ##  r00 == 0 or FALSE --- result *is* triangular
         diag(e2) <- r
         ## check what happens "in the triangle"
@@ -1090,7 +1098,7 @@ setMethod("Ops", signature(e1 = "sparseMatrix", e2 = "ldiMatrix"),
 for(arg2 in c("numeric","logical"))
 setMethod("Arith", signature(e1 = "ddiMatrix", e2 = arg2),
 	  function(e1,e2) {
-	      n <- e1@Dim[1]
+	      n <- e1@Dim[1L]
 	      f0 <- callGeneric(0, e2)
 	      if(all0(f0)) { # remain diagonal
 		  L1 <- (le <- length(e2)) == 1L
@@ -1112,7 +1120,7 @@ setMethod("Arith", signature(e1 = "ddiMatrix", e2 = arg2),
 for(arg1 in c("numeric","logical"))
 setMethod("Arith", signature(e1 = arg1, e2 = "ddiMatrix"),
 	  function(e1,e2) {
-	      n <- e2@Dim[1]
+	      n <- e2@Dim[1L]
 	      f0 <- callGeneric(e1, 0)
 	      if(all0(f0)) { # remain diagonal
 		  L1 <- (le <- length(e1)) == 1L
@@ -1135,7 +1143,7 @@ setMethod("Arith", signature(e1 = arg1, e2 = "ddiMatrix"),
 for(arg2 in c("numeric","logical"))
 setMethod("Arith", signature(e1 = "ldiMatrix", e2 = arg2),
 	  function(e1,e2) {
-	      n <- e1@Dim[1]
+	      n <- e1@Dim[1L]
 	      f0 <- callGeneric(0, e2)
 	      if(all0(f0)) { # remain diagonal
 		  L1 <- (le <- length(e2)) == 1L
@@ -1159,7 +1167,7 @@ setMethod("Arith", signature(e1 = "ldiMatrix", e2 = arg2),
 for(arg1 in c("numeric","logical"))
 setMethod("Arith", signature(e1 = arg1, e2 = "ldiMatrix"),
 	  function(e1,e2) {
-	      n <- e2@Dim[1]
+	      n <- e2@Dim[1L]
 	      f0 <- callGeneric(e1, 0)
 	      if(all0(f0)) { # remain diagonal
 		  L1 <- (le <- length(e1)) == 1L
@@ -1191,7 +1199,7 @@ if(FALSE) {
 for(arg2 in c("numeric","logical"))
 setMethod("Ops", signature(e1 = "ddiMatrix", e2 = arg2),
 	  function(e1,e2) {
-	      n <- e1@Dim[1]
+	      n <- e1@Dim[1L]
 	      f0 <- callGeneric(0, e2)
 	      if(all0(f0)) { # remain diagonal
 		  L1 <- (le <- length(e2)) == 1L
@@ -1216,7 +1224,7 @@ setMethod("Ops", signature(e1 = "ddiMatrix", e2 = arg2),
 for(arg2 in c("numeric","logical"))
 setMethod("Ops", signature(e1 = "ldiMatrix", e2 = arg2),
 	  function(e1,e2) {
-	      n <- e1@Dim[1]
+	      n <- e1@Dim[1L]
 	      f0 <- callGeneric(FALSE, e2)
 	      if(all0(f0)) { # remain diagonal
 		  L1 <- (le <- length(e2)) == 1L
@@ -1286,13 +1294,13 @@ setMethod("any", cl,
 	      else if(x@diag == "U") TRUE else any(x@x, ..., na.rm = na.rm)
 	  })
 setMethod("all",  cl, function (x, ..., na.rm) {
-    n <- x@Dim[1]
+    n <- x@Dim[1L]
     if(n >= 2) FALSE
     else if(n == 0 || x@diag == "U") TRUE
     else all(x@x, ..., na.rm = na.rm)
 })
 setMethod("prod", cl, function (x, ..., na.rm) {
-    n <- x@Dim[1]
+    n <- x@Dim[1L]
     if(n >= 2) 0
     else if(n == 0 || x@diag == "U") 1
     else ## n == 1, diag = "N" :
@@ -1302,7 +1310,7 @@ setMethod("prod", cl, function (x, ..., na.rm) {
 setMethod("sum", cl,
 	  function(x, ..., na.rm) {
 	      r <- sum(x@x, ..., na.rm = na.rm)# double or integer, correctly
-	      if(x@diag == "U" && !is.na(r)) r + x@Dim[1] else r
+	      if(x@diag == "U" && !is.na(r)) r + x@Dim[1L] else r
 	  })
 }
 
@@ -1343,12 +1351,12 @@ setMethod("show", signature(object = "diagonalMatrix"),
 	  function(object) {
 	      d <- dim(object)
 	      cl <- class(object)
-	      if(d[1] < 50) {
-	      cat(gettextf("%d x %d diagonal matrix of class %s", d[1], d[2], dQuote(cl), domain = "R-Matrix"))
+	      if(d[1L] < 50) {
+	      cat(gettextf("%d x %d diagonal matrix of class %s", d[1L], d[2L], dQuote(cl), domain = "R-Matrix"))
 		  cat("\n")
 		  prDiag(object)
 	      } else {
-	      cat(gettextf("%d x %d diagonal matrix of class %s, with diagonal entries", d[1], d[2], dQuote(cl), domain = "R-Matrix"), "\n", sep = "")
+	      cat(gettextf("%d x %d diagonal matrix of class %s, with diagonal entries", d[1L], d[2L], dQuote(cl), domain = "R-Matrix"), "\n", sep = "")
 		  show(diag(object))
 		  invisible(object)
 	      }
@@ -1362,7 +1370,7 @@ setMethod("summary", signature(object = "diagonalMatrix"),
 	      d <- dim(object)
 	      r <- summary(object@x, ...)
 	      attr(r, "header") <-
-		  gettextf("%d x %d diagonal matrix of class %s", d[1], d[2], dQuote(class(object)), domain = "R-Matrix")
+		  gettextf("%d x %d diagonal matrix of class %s", d[1L], d[2L], dQuote(class(object)), domain = "R-Matrix")
 	      ## use ole' S3 technology for such a simple case
 	      class(r) <- c("diagSummary", class(r))
 	      r

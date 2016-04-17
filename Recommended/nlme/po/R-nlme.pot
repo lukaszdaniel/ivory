@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: nlme 3.1-125\n"
-"POT-Creation-Date: 2016-02-27 19:10\n"
+"Project-Id-Version: nlme 3.1-127\n"
+"POT-Creation-Date: 2016-04-17 14:04\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9,6 +9,13 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+
+
+#: R/lmList.R: 0
+#. R/lmList.R: gettextf("%d errors caught in %s. The error messages and their frequencies are\n%s",     sum(tt), e.call, paste(capture.output(sort(tt)), collapse = "\n"), domain = "R-nlme")
+
+msgid "%d errors caught in %s. The error messages and their frequencies are\n%s"
+msgstr ""
 
 
 #: R/gls.R: 0
@@ -516,13 +523,6 @@ msgid "'value' must be a square matrix"
 msgstr ""
 
 
-#: R/lmList.R: 0
-#. R/lmList.R: warning("An lm fit failed, probably because a factor only had one level")
-
-msgid "An lm fit failed, probably because a factor only had one level"
-msgstr ""
-
-
 #: R/gls.R: 0
 #: R/lme.R: 0
 #. R/gls.R: gettextf("Approximate %s %% confidence intervals", attr(x, "level") * 100, domain = "R-nlme")
@@ -535,9 +535,11 @@ msgstr ""
 #: R/gls.R: 0
 #: R/gnls.R: 0
 #: R/lme.R: 0
+#: R/nlme.R: 0
 #. R/gls.R: gettext("Approximate variance-covariance matrix not available", domain = "R-nlme")
 #. R/gnls.R: gettext("Approximate variance-covariance matrix not available", domain = "R-nlme")
 #. R/lme.R: gettext("Approximate variance-covariance matrix not available", domain = "R-nlme")
+#. R/nlme.R: gettext("Approximate variance-covariance matrix not available", domain = "R-nlme")
 
 msgid "Approximate variance-covariance matrix not available"
 msgstr ""
@@ -560,9 +562,7 @@ msgid "Call:"
 msgstr ""
 
 
-#: R/lmList.R: 0
 #: R/lme.R: 0
-#. R/lmList.R: gettext("Coefficients", domain = "R-nlme")
 #. R/lme.R: gettext("Coefficients", domain = "R-nlme")
 
 msgid "Coefficients"
@@ -1785,9 +1785,9 @@ msgstr ""
 
 
 #: R/corStruct.R: 0
-#. R/corStruct.R: stop("cannot have zero distances in \"corSpatial\"")
+#. R/corStruct.R: stop("cannot have zero distances in an object of class \"corSpatial\"")
 
-msgid "cannot have zero distances in \"corSpatial\""
+msgid "cannot have zero distances in an object of class \"corSpatial\""
 msgstr ""
 
 
@@ -2340,13 +2340,16 @@ msgid "moving average order must be a non-negative integer"
 msgstr ""
 
 
+#: R/nlsList.R: 0
+#. R/nlsList.R: stop("multiple levels are not allowed")
+
+msgid "multiple levels are not allowed"
+msgstr ""
+
+
 #: R/lmList.R: 0
-#: R/nlsList.R: 0
-#: R/nlsList.R: 0
 #. R/lmList.R: stop("multiple levels not allowed")
 #. R/lmList.R: stop("multiple levels not allowed")
-#. R/nlsList.R: stop("multiple levels not allowed")
-#. R/nlsList.R: stop("multiple levels not allowed")
 
 msgid "multiple levels not allowed"
 msgstr ""
@@ -2807,6 +2810,15 @@ msgstr ""
 
 msgid "x-y data passed to 'splom()' function got botched somehow"
 msgstr ""
+
+
+#: R/lmList.R: 0
+#. R/lmList.R: ngettext(tt[[1]], "%d error caught in %s: %s", "%d times caught the same error in %s: %s",     domain = "R-nlme")
+
+msgid        "%d error caught in %s: %s"
+msgid_plural "%d times caught the same error in %s: %s"
+msgstr[0]    ""
+msgstr[1]    ""
 
 
 #: R/lme.R: 0

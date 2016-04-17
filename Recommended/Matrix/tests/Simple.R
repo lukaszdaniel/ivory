@@ -244,7 +244,7 @@ dd0 <- as(d0, "denseMatrix")
 ## currently, both give --- Error in asMethod(object) :
 ##   Cholmod error 'problem too large' at file ../Core/cholmod_dense.c, line 105
 ##--> And there it is 'Int_max' ==> ../src/CHOLMOD/Include/cholmod_internal.h
-## defines 'Int_max'  and does that dependinging of "mode", and
+## defines 'Int_max'  and does that depending of "mode", and
 ## MM thinks we should use the "DLONG" mode now -- for 64-bit integers!
 ##  ==> Then Int_max := SuiteSparse_long_max := LONG_MAX
 ## (the latter from ../src/SuiteSparse_config/SuiteSparse_config.h )

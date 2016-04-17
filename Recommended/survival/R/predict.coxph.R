@@ -1,11 +1,11 @@
-# Automatically generated from all.nw using noweb
+# Automatically generated from the noweb directory
 predict.coxph <- function(object, newdata, 
                        type=c("lp", "risk", "expected", "terms"),
                        se.fit=FALSE, na.action=na.pass,
                        terms=names(object$assign), collapse, 
                        reference=c("strata", "sample"), ...) {
     if (!inherits(object, 'coxph'))
-	stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("coxph")))
+        stop("Primary argument much be a coxph object")
 
     Call <- match.call()
     type <-match.arg(type)
@@ -16,10 +16,10 @@ predict.coxph <- function(object, newdata,
         if (is.numeric(terms)) {
             if (any(terms != floor(terms) | 
                     terms > length(object$assign) |
-                    terms <1)) stop(gettextf("invalid '%s' argument", "terms"))
+                    terms <1)) stop("Invalid terms argument")
             }
         else if (any(is.na(match(terms, names(object$assign)))))
-           stop("a name given in the terms argument was not found in the model")
+           stop("a name given in the terms argument not found in the model")
         }
 
     # I will never need the cluster argument, if present delete it.
@@ -46,7 +46,7 @@ predict.coxph <- function(object, newdata,
     if (type == 'expected') {
         y <- object[['y']]
         if (is.null(y)) {  # very rare case
-            mf <- model.frame(object)
+            mf <- stats::model.frame(object)
             y <-  model.extract(mf, 'response')
             have.mf <- TRUE  #for the logic a few lines below, avoid double work
             }
@@ -58,7 +58,7 @@ predict.coxph <- function(object, newdata,
         if (is.null(object[['x']]) || has.weights || has.offset ||
              (has.strata && is.null(object$strata))) {
             # I need the original model frame
-            if (!have.mf) mf <- model.frame(object)
+            if (!have.mf) mf <- stats::model.frame(object)
             if (nrow(mf) != n)
                 stop("Data is not the same size as it was in the original fit")
             x <- model.matrix(object, data=mf)
@@ -102,7 +102,7 @@ predict.coxph <- function(object, newdata,
         names(tcall)[2] <- 'data'  #rename newdata to data
         tcall$formula <- Terms2  #version with no response
         tcall$na.action <- na.action #always present, since there is a default
-        tcall[[1]] <- as.name('model.frame')  # change the function called
+        tcall[[1L]] <- quote(stats::model.frame)  # change the function called
         
         if (!is.null(attr(Terms, "specials")$strata) && !has.strata) {
            temp.lev <- object$xlevels
@@ -167,7 +167,7 @@ predict.coxph <- function(object, newdata,
                 afit.n <- length(afit$time)
                 if (missing(newdata)) { 
                     # In this case we need se.fit, nothing else
-                    j1 <- approx(afit$time, seq_len(afit.n), y[indx,1], method='constant',
+                    j1 <- approx(afit$time, 1:afit.n, y[indx,1], method='constant',
                                  f=0, yleft=0, yright=afit.n)$y
                     chaz <- c(0, afit$cumhaz)[j1 +1]
                     varh <- c(0, cumsum(afit$varhaz))[j1 +1]
@@ -178,7 +178,7 @@ predict.coxph <- function(object, newdata,
                             risk[indx]
                         }
                     else {
-                        j2 <- approx(afit$time, seq_len(afit.n), y[indx,2], method='constant',
+                        j2 <- approx(afit$time, 1:afit.n, y[indx,2], method='constant',
                                  f=0, yleft=0, yright=afit.n)$y
                         chaz2 <- c(0, afit$cumhaz)[j2 +1]
                         varh2 <- c(0, cumsum(afit$varhaz))[j2 +1]
@@ -195,7 +195,7 @@ predict.coxph <- function(object, newdata,
                     #there is new data
                     use.x <- TRUE
                     indx2 <- which(newstrat == i)
-                    j1 <- approx(afit$time, seq_len(afit.n), newy[indx2,1], 
+                    j1 <- approx(afit$time, 1:afit.n, newy[indx2,1], 
                                  method='constant', f=0, yleft=0, yright=afit.n)$y
                     chaz <-c(0, afit$cumhaz)[j1+1]
                     pred[indx2] <- chaz * newrisk[indx2]
@@ -211,7 +211,7 @@ predict.coxph <- function(object, newdata,
                             }
                         }
                     else {
-                        j2 <- approx(afit$time, seq_len(afit.n), newy[indx2,2], 
+                        j2 <- approx(afit$time, 1:afit.n, newy[indx2,2], 
                                  method='constant', f=0, yleft=0, yright=afit.n)$y
                                     chaz2 <- approx(-afit$time, afit$cumhaz, -newy[indx2,2],
                                    method="constant", rule=2, f=0)$y
@@ -278,7 +278,7 @@ predict.coxph <- function(object, newdata,
             dimnames(pred) <- list(rownames(newx), names(asgn))
             if (se.fit) se <- pred
             
-            for (i in seq_len(nterms)) {
+            for (i in 1:nterms) {
                 tt <- asgn[[i]]
                 tt <- tt[!is.na(object$coefficients[tt])]
                 xtt <- newx[,tt, drop=F]

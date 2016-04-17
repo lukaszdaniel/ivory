@@ -1,4 +1,4 @@
-# Automatically generated from all.nw using noweb
+# Automatically generated from the noweb directory
 survexp <- function(formula, data,
         weights, subset, na.action, rmap, times,
         method=c("ederer", "hakulinen", "conditional", "individual.h", 
@@ -12,16 +12,16 @@ survexp <- function(formula, data,
     # keep the first element (the call), and the following selected arguments
     m <- m[c(1, match(c('formula', 'data', 'weights', 'subset', 'na.action'),
                       names(m), nomatch=0))]
-    m[[1]] <- as.name("model.frame")
+    m[[1L]] <- quote(stats::model.frame)
         
     Terms <- if(missing(data)) terms(formula, 'ratetable')
              else              terms(formula, 'ratetable',data=data)
     rate <- attr(Terms, "specials")$ratetable                   
     if(length(rate) > 1)
-            stop("can have only 1 'ratetable()' call in a formula")
+            stop("Can have only 1 ratetable() call in a formula")
     if(length(rate) == 1) {
         if (!missing(rmap)) 
-            stop("'ratetable()' call in a formula is deprecated")
+            stop("The ratetable() call in a formula is depreciated")
 
         stemp <- untangle.specials(Terms, 'ratetable')
         rcall <- as.call(parse(text=stemp$var)[[1]])   # as a call object
@@ -31,7 +31,7 @@ survexp <- function(formula, data,
     else if (!missing(rmap)) {
         rcall <- substitute(rmap)
         if (!is.call(rcall) || rcall[[1]] != as.name('list'))
-            stop(gettextf("invalid '%s' argument", "rmap"))
+            stop("Invalid rcall argument")
         }
     else rcall <- NULL   # A ratetable, but not rcall argument
 
@@ -43,7 +43,7 @@ survexp <- function(formula, data,
         #   variable names
         varlist <- all.vars(delete.response(ratetable$terms))
         }
-    else stop(gettextf("'%s' argument is not an object of class %s", "ratetable", dQuote("ratetable")))
+    else stop("Invalid rate table")
 
     temp <- match(names(rcall)[-1], varlist) # 2,3,... are the argument names
     if (any(is.na(temp)))
@@ -68,37 +68,37 @@ survexp <- function(formula, data,
 
     m <- eval(m, parent.frame())
     n <- nrow(m)
-    if (n==0) stop("data set has 0 rows")
+    if (n==0) stop("Data set has 0 rows")
     if (!missing(se.fit) && se.fit)
-        warning("se.fit value ignored")
+        warning("'se.fit' value ignored")
 
     weights <- model.extract(m, 'weights')
     if (length(weights) ==0) weights <- rep(1.0, n)
     if (class(ratetable)=='ratetable' && any(weights !=1))
-        warning(gettextf("weights are ignored in '%s' function", "survexp()"))
+        warning("weights ignored")
 
     if (any(attr(Terms, 'order') >1))
-            stop("'survexp()' cannot have interaction terms")
+            stop("Survexp cannot have interaction terms")
     if (!missing(times)) {
-        if (any(times<0)) stop("invalid time point requested")
+        if (any(times<0)) stop("Invalid time point requested")
         if (length(times) >1 )
-            if (any(diff(times)<0)) stop("times must be in increasing order")
+            if (any(diff(times)<0)) stop("Times must be in increasing order")
         }
     Y <- model.extract(m, 'response')
     no.Y <- is.null(Y)
     if (no.Y) {
         if (missing(times)) {
             if (is.ratetable(ratetable)) 
-                stop("either a 'times' argument or a 'response' is needed")
+                stop("either a times argument or a response is needed")
             }
         else newtime <- times
         }
     else {
         if (is.matrix(Y)) {
             if (is.Surv(Y) && attr(Y, 'type')=='right') Y <- Y[,1]
-            else stop("illegal response value")
+            else stop("Illegal response value")
             }
-        if (any(Y<0)) stop("negative follow up time")
+        if (any(Y<0)) stop("Negative follow up time")
     #    if (missing(npoints)) temp <- unique(Y)
     #    else                  temp <- seq(min(Y), max(Y), length=npoints)
         temp <- unique(Y)
@@ -117,7 +117,7 @@ survexp <- function(formula, data,
         if (!missing(cohort) && !cohort) method <- "individual.s"
         }
     if (no.Y && (method!="ederer")) 
-        stop("a 'response' is required in the formula unless method='ederer'")
+        stop("a response is required in the formula unless method='ederer'")
     ovars <- attr(Terms, 'term.labels')
     # rdata contains the variables matching the ratetable
     rdata <- data.frame(eval(rcall, m), stringsAsFactors=TRUE)  
@@ -133,23 +133,23 @@ survexp <- function(formula, data,
         israte <- FALSE
         Terms <- ratetable$terms
     #    if (!is.null(attr(Terms, 'offset')))
-    #        stop("cannot deal with models that contain an offset")
+    #        stop("Cannot deal with models that contain an offset")
     #    strats <- attr(Terms, "specials")$strata
     #    if (length(strats))
-    #        stop("'survexp()' cannot handle stratified Cox models")
+    #        stop("survexp cannot handle stratified Cox models")
     #
         if (any(names(m[,rate]) !=  attr(ratetable$terms, 'term.labels')))
-             stop("unable to match new data to old formula")
+             stop("Unable to match new data to old formula")
         }
-    else stop("invalid rate table")
+    else stop("Invalid ratetable")
     if (substring(method, 1, 10) == "individual") { #individual survival
         if (no.Y) stop("for individual survival an observation time must be given")
         if (israte)
-             temp <- survexp.fit (seq_len(n), R, Y, max(Y), TRUE, ratetable)
+             temp <- survexp.fit (1:n, R, Y, max(Y), TRUE, ratetable)
         else {
             rmatch <- match(names(data), names(rdata))
             if (any(is.na(rmatch))) rdata <- cbind(rdata, data[,is.na(rmatch)])
-            temp <- survexp.cfit(seq_len(n), rdata, Y, 'individual', ratetable)
+            temp <- survexp.cfit(1:n, rdata, Y, 'individual', ratetable)
         }
         if (method == "individual.s") xx <- temp$surv
         else xx <- -log(temp$surv)
@@ -161,11 +161,11 @@ survexp <- function(formula, data,
     if (length(ovars)==0)  X <- rep(1,n)  #no categories
     else {
         odim <- length(ovars)
-        for (i in seq_len(odim)) {
+        for (i in 1:odim) {
             temp <- m[[ovars[i]]]
             ctemp <- class(temp)
             if (!is.null(ctemp) && ctemp=='tcut')
-                stop("cannot use tcut variables in expected survival")
+                stop("Can't use tcut variables in expected survival")
             }
         X <- strata(m[ovars])
         }
@@ -191,7 +191,8 @@ survexp <- function(formula, data,
             #  for requested points that precede the Cox fit's
             #  first downward step.  The code is like summary.survfit.
             n <- length(temp$time)
-            keep <- approx(temp$time, seq_len(n), xout = times, yleft = 0, method = 'constant', f = 0, rule = 2)$y
+            keep <- approx(temp$time, 1:n, xout=times, yleft=0,
+                           method='constant', f=0, rule=2)$y
             }
 
         if (is.matrix(temp$surv)) {

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2 / nlme-3.1-105\n"
 "Report-Msgid-Bugs-To: bugs@r-project.org\n"
-"POT-Creation-Date: 2016-02-27 19:10\n"
+"POT-Creation-Date: 2016-04-17 14:04\n"
 "PO-Revision-Date: 2012-10-11 13:10+0200\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -15,6 +15,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. R/lmList.R: gettextf("%d errors caught in %s. The error messages and their frequencies are\n%s",     sum(tt), e.call, paste(capture.output(sort(tt)), collapse = "\n"), domain = "R-nlme")
+#: R/lmList.R:0
+msgid ""
+"%d errors caught in %s. The error messages and their frequencies are\n"
+"%s"
+msgstr ""
 
 #. R/gls.R: gettextf("%s and %s must have the same group levels", sQuote(c1), sQuote(c2))
 #: R/gls.R:0
@@ -428,11 +435,6 @@ msgstr "'subset' mit einzelnem Gruppierungsfaktor ignoriert"
 msgid "'value' must be a square matrix"
 msgstr "'value' muss eine quadratische Matrix sein"
 
-#. R/lmList.R: warning("An lm fit failed, probably because a factor only had one level")
-#: R/lmList.R:0
-msgid "An lm fit failed, probably because a factor only had one level"
-msgstr ""
-
 #. R/gls.R: gettextf("Approximate %s %% confidence intervals", attr(x, "level") * 100, domain = "R-nlme")
 #. R/lme.R: gettextf("Approximate %s %% confidence intervals", attr(x, "level") * 100, domain = "R-nlme")
 #: R/gls.R:0 R/lme.R:0
@@ -442,7 +444,8 @@ msgstr ""
 #. R/gls.R: gettext("Approximate variance-covariance matrix not available", domain = "R-nlme")
 #. R/gnls.R: gettext("Approximate variance-covariance matrix not available", domain = "R-nlme")
 #. R/lme.R: gettext("Approximate variance-covariance matrix not available", domain = "R-nlme")
-#: R/gls.R:0 R/gnls.R:0 R/lme.R:0
+#. R/nlme.R: gettext("Approximate variance-covariance matrix not available", domain = "R-nlme")
+#: R/gls.R:0 R/gnls.R:0 R/lme.R:0 R/nlme.R:0
 msgid "Approximate variance-covariance matrix not available"
 msgstr ""
 
@@ -458,9 +461,8 @@ msgstr ""
 msgid "Call:"
 msgstr ""
 
-#. R/lmList.R: gettext("Coefficients", domain = "R-nlme")
 #. R/lme.R: gettext("Coefficients", domain = "R-nlme")
-#: R/lmList.R:0 R/lme.R:0
+#: R/lme.R:0
 #, fuzzy
 msgid "Coefficients"
 msgstr "keine Koeffizienten anzupassen"
@@ -1383,9 +1385,10 @@ msgstr "Inverse eines nicht initialisierten Objekts kann nicht bestimmt werden"
 msgid "cannot have duplicated column names in a \"pdMat\" object"
 msgstr "In \"pdMat\"-Objekten darf es keine doppelten Spaltennamen geben."
 
-#. R/corStruct.R: stop("cannot have zero distances in \"corSpatial\"")
+#. R/corStruct.R: stop("cannot have zero distances in an object of class \"corSpatial\"")
 #: R/corStruct.R:0
-msgid "cannot have zero distances in \"corSpatial\""
+#, fuzzy
+msgid "cannot have zero distances in an object of class \"corSpatial\""
 msgstr "Es darf keine Null-Distanzen in \"corSpatial\" geben"
 
 #. R/pdMat.R: stop("cannot obtain constrained coefficients with uninitialized dimensions")
@@ -1856,11 +1859,15 @@ msgid "moving average order must be a non-negative integer"
 msgstr ""
 "Ordnung des gleitenden Durchschnitts muss eine nicht-negative Ganzzahl sein."
 
+#. R/nlsList.R: stop("multiple levels are not allowed")
+#: R/nlsList.R:0
+#, fuzzy
+msgid "multiple levels are not allowed"
+msgstr "mehrere Stufen nicht erlaubt"
+
 #. R/lmList.R: stop("multiple levels not allowed")
 #. R/lmList.R: stop("multiple levels not allowed")
-#. R/nlsList.R: stop("multiple levels not allowed")
-#. R/nlsList.R: stop("multiple levels not allowed")
-#: R/lmList.R:0 R/nlsList.R:0
+#: R/lmList.R:0
 msgid "multiple levels not allowed"
 msgstr "mehrere Stufen nicht erlaubt"
 
@@ -2264,6 +2271,13 @@ msgstr "falsche Gruppenstufen"
 #, fuzzy
 msgid "x-y data passed to 'splom()' function got botched somehow"
 msgstr "x-y-Daten an splom wurden irgendwie verpfuscht."
+
+#. R/lmList.R: ngettext(tt[[1]], "%d error caught in %s: %s", "%d times caught the same error in %s: %s",     domain = "R-nlme")
+#: R/lmList.R:0
+msgid "%d error caught in %s: %s"
+msgid_plural "%d times caught the same error in %s: %s"
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/lme.R: ngettext(sum(whichNA), "%s is not available for plotting", "%s are not available for plotting",     domain = "R-nlme")
 #. R/lme.R: ngettext(sum(whichNA), "%s is not available for plotting", "%s are not available for plotting",     domain = "R-nlme")

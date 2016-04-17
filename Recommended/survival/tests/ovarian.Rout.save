@@ -68,7 +68,6 @@ Call: survfit(formula = Surv(futime, fustat) ~ 1)
 Call:
 coxph(formula = Surv(futime, fustat) ~ age)
 
-
       coef exp(coef) se(coef)    z      p
 age 0.1616    1.1754   0.0497 3.25 0.0012
 
@@ -77,7 +76,6 @@ n= 26, number of events= 12
 > coxph(Surv(futime, fustat)~ resid.ds)
 Call:
 coxph(formula = Surv(futime, fustat) ~ resid.ds)
-
 
           coef exp(coef) se(coef)   z     p
 resid.ds 1.209     3.351    0.672 1.8 0.072
@@ -88,7 +86,6 @@ n= 26, number of events= 12
 Call:
 coxph(formula = Surv(futime, fustat) ~ rx)
 
-
      coef exp(coef) se(coef)     z    p
 rx -0.596     0.551    0.587 -1.02 0.31
 
@@ -97,7 +94,6 @@ n= 26, number of events= 12
 > coxph(Surv(futime, fustat)~ ecog.ps)
 Call:
 coxph(formula = Surv(futime, fustat) ~ ecog.ps)
-
 
          coef exp(coef) se(coef)    z   p
 ecog.ps 0.398     1.489    0.586 0.68 0.5
@@ -108,7 +104,6 @@ n= 26, number of events= 12
 > coxph(Surv(futime, fustat)~ resid.ds + rx + ecog.ps)
 Call:
 coxph(formula = Surv(futime, fustat) ~ resid.ds + rx + ecog.ps)
-
 
            coef exp(coef) se(coef)     z     p
 resid.ds  1.347     3.844    0.680  1.98 0.048
@@ -121,7 +116,6 @@ n= 26, number of events= 12
 Call:
 coxph(formula = Surv(futime, fustat) ~ age + rx + ecog.ps)
 
-
            coef exp(coef) se(coef)     z      p
 age      0.1470    1.1583   0.0463  3.17 0.0015
 rx      -0.8146    0.4428   0.6342 -1.28 0.1990
@@ -133,7 +127,6 @@ n= 26, number of events= 12
 Call:
 coxph(formula = Surv(futime, fustat) ~ age + resid.ds + ecog.ps)
 
-
           coef exp(coef) se(coef)    z      p
 age      0.142     1.153    0.052 2.74 0.0061
 resid.ds 0.663     1.940    0.750 0.88 0.3773
@@ -144,7 +137,6 @@ n= 26, number of events= 12
 > coxph(Surv(futime, fustat)~ age + resid.ds + rx)
 Call:
 coxph(formula = Surv(futime, fustat) ~ age + resid.ds + rx)
-
 
             coef exp(coef) se(coef)     z      p
 age       0.1285    1.1372   0.0473  2.72 0.0066
@@ -270,10 +262,10 @@ Call: survfit(formula = fit)
 Call: survfit(formula = fit, newdata = list(age = c(30, 70), ecog.ps = c(2, 3)))
 
          n events median 0.95LCL 0.95UCL
-1, rx=1 13      7     NA      NA      NA
-2, rx=1 13      7    268     115      NA
-1, rx=2 13      5     NA      NA      NA
-2, rx=2 13      5    365     353      NA
+rx=1, 1 13      7     NA      NA      NA
+rx=2, 1 13      5     NA      NA      NA
+rx=1, 2 13      7    268     115      NA
+rx=2, 2 13      5    365     353      NA
 > summary(sfit)
 Call: survfit(formula = fit, newdata = list(age = c(30, 70), ecog.ps = c(2, 3)))
 

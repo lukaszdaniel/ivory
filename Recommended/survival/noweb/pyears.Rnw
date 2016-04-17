@@ -47,7 +47,7 @@ call <- match.call()
 m <- match.call(expand.dots=FALSE)
 m <- m[c(1, match(c('formula', 'data', 'weights', 'subset', 'na.action'),
     	      names(m), nomatch=0))]
-m[[1]] <- as.name("model.frame")
+m[[1L]] <- quote(stats::model.frame)
 
 Terms <- if(missing(data)) terms(formula, 'ratetable')
          else              terms(formula, 'ratetable',data=data)
@@ -69,9 +69,9 @@ if (is.R())  m <- eval(m, parent.frame())
 else         m <- eval(m, sys.parent())
 
 Y <- model.extract(m, 'response')
-if (is.null(Y)) stop ("Follow-up time must appear in the formula")
+if (is.null(Y)) stop("Follow-up time must appear in the formula")
 if (!is.Surv(Y)){
-    if (any(Y <0)) stop ("Negative follow up time")
+    if (any(Y <0)) stop("Negative follow up time")
     Y <- as.matrix(Y)
     if (ncol(Y) >2) stop("Y has too many columns")
     }
@@ -81,9 +81,7 @@ else {
         if (any(Y[,1] <0)) stop("Negative survival time")
         nzero <- sum(Y[,1]==0 & Y[,2] ==1)
         if (nzero >0) 
-            warning(paste(nzero, 
-                     "observations with an event and 0 follow-up time,",
-                   "any rate calculations are statistically questionable"))
+            warning(gettextf("%d observations with an event and 0 follow-up time, any rate calculations are statistically questionable", nzero))
         }
     else if (stype != 'counting')
         stop("Only right-censored and counting process survival types are supported")
@@ -149,6 +147,7 @@ else {
     odims <- ofac <- double(odim)
     X <- matrix(0, n, odim)
     outdname <- vector("list", odim)
+    names(outdname) <- attr(Terms, 'term.labels')
     for (i in 1:odim) {
         temp <- m[[ovars[i]]]
         if (inherits(temp, 'tcut')) {
@@ -248,7 +247,7 @@ if (has.ratetable) {  #include expected
         #    byear <- date.mdy(bdate)$year
         #    offset <- bdate - mdy.date(1,1,byear)
         #    }
-        else stop("Can't find an appropriate date class\n") 
+        else stop("Can't find an appropriate date class") 
         R[,cols[2]] <- R[,cols[2]] - offset
 
         # Doctor up "cutpoints" - only needed for old style rate tables
@@ -361,6 +360,7 @@ else {
     	out$event <- array(temp$pcount, dim=odims, dimnames=outdname)
     }
 out$observations <- nrow(m)
+out$terms <- Terms
 na.action <- attr(m, "na.action")
 if (length(na.action))  out$na.action <- na.action
 if (model) out$model <- m

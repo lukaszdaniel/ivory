@@ -36,7 +36,6 @@ Call:
 coxph(formula = Surv(stop, event) ~ (rx + size + number) * strata(enum) + cluster(id), 
     data = bladder, method = "breslow")
 
-
                              coef exp(coef) se(coef) robust se     z      p
 rx                        -0.5176    0.5959   0.3158    0.3075 -1.68 0.0923
 size                       0.0679    1.0702   0.1012    0.0853  0.80 0.4260
@@ -113,7 +112,6 @@ Call:
 coxph(formula = Surv(stop, event) ~ rx + size + number, data = bladder2, subset = (enum == 
     1), method = "breslow")
 
-
           coef exp(coef) se(coef)     z      p
 rx     -0.5176    0.5959   0.3158 -1.64 0.1012
 size    0.0679    1.0702   0.1012  0.67 0.5025
@@ -125,7 +123,6 @@ n= 85, number of events= 47
 Call:
 coxph(formula = Surv(stop, event) ~ rx + size + number, data = bladder2, subset = (enum == 
     2), method = "breslow")
-
 
            coef exp(coef) se(coef)     z    p
 rx     -0.42421   0.65428  0.40220 -1.05 0.29
@@ -139,7 +136,6 @@ Call:
 coxph(formula = Surv(stop - start, event) ~ rx + size + number, data = bladder2, 
     subset = (enum == 2), method = "breslow")
 
-
            coef exp(coef) se(coef)     z    p
 rx     -0.25911   0.77174  0.40511 -0.64 0.52
 size   -0.11636   0.89015  0.11924 -0.98 0.33
@@ -151,7 +147,6 @@ n= 46, number of events= 29
 Call:
 coxph(formula = Surv(stop, event) ~ rx + size + number, data = bladder2, subset = (enum == 
     3), method = "breslow")
-
 
           coef exp(coef) se(coef)     z    p
 rx     -0.8985    0.4072   0.5535 -1.62 0.10

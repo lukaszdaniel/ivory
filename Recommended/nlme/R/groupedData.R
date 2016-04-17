@@ -2,7 +2,7 @@
 ###
 ### Copyright 1997-2003  Jose C. Pinheiro,
 ###                      Douglas M. Bates <bates@stat.wisc.edu>
-# Copyright 2006-2012 The R Core team
+### Copyright 2006-2016  The R Core team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -135,7 +135,7 @@ nmGroupedData <-
     if (is.null(object)) return(object)
     if (is.list(object)) {
       if (is.null(names(object))) {
-        names(object) <- nams[1:length(object)]
+        names(object) <- nams[seq_along(object)]
       }
       return(object)
     }
@@ -337,7 +337,7 @@ collapse.groupedData <-
     }
     displayGroups <- ordered(displayGroups,
       levels = unique(as.character(displayGroups[do.call("order", groups)])))
-    form[[3]][[3]] <- as.name(".groups")
+    form[[3]][[3]] <- quote(.groups)
     object[[".groups"]] <- displayGroups
     args[["formula"]] <- form
     args[["data"]] <- object
@@ -379,7 +379,7 @@ plot.nfnGroupedData <-
            }, key = TRUE, grid = TRUE, ...)
 {
   labels <- list(xlab = xlab, ylab =  ylab)
-  labels <- labels[unlist(lapply(labels, length)) > 0]
+  labels <- labels[lengths(labels) > 0]
   args <- c(list(attr(x, "formula"), data = x, strip = strip,
 		 aspect = aspect, panel = panel), labels)
   if (length(outer) > 0) {
@@ -481,7 +481,7 @@ plot.nffGroupedData <-
     groupLabel <- groupExpr
   }
   labels <- list(xlab = xlab, ylab = ylab)
-  labels <- labels[unlist(lapply(labels, length)) > 0]
+  labels <- labels[lengths(labels) > 0]
   if (length(outer) > 0) {
     if (is.logical(outer) && outer) {	# get the default outer formula
       form <- formula(paste(groupExpr,
@@ -562,7 +562,7 @@ print.groupedData <- function(x, ...)
   cat(gettext("Grouped Data: ", domain = "R-nlme"))
   if(identical(emptyenv(), environment(frm <- attr(x, "formula"))))
       environment(frm) <- globalenv()# for printing, as that will be suppressed
-  print(frm)
+  print(frm, ...)
   print.data.frame(x, ...)
 }
 

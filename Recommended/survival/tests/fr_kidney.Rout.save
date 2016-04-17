@@ -99,7 +99,6 @@ Likelihood ratio test = 63.8 on 20.6 df, p=2.53e-06 n=76
 Call:
 coxph(formula = Surv(time, status) ~ age + sex + disease, data = kidney)
 
-
                coef exp(coef) se(coef)     z       p
 age         0.00318   1.00319  0.01115  0.29   0.775
 sex        -1.48314   0.22692  0.35823 -4.14 3.5e-05

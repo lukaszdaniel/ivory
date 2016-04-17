@@ -81,7 +81,6 @@ Score (logrank) test = 12.02 on 5 df, p=0.03457
 Call:
 coxph(formula = Surv(start, stop, event) ~ year * transplant, data = jasa1, method = "breslow")
 
-
                   coef exp(coef) se(coef)     z     p
 year            -0.265     0.767    0.105 -2.52 0.012
 transplant      -0.287     0.750    0.514 -0.56 0.576
@@ -123,7 +122,6 @@ Call:
 coxph(formula = Surv(start, stop, event) ~ (year + surgery) * transplant, data = jasa1, 
     method = "breslow")
 
-
                      coef exp(coef) se(coef)     z     p
 year               -0.254     0.776    0.108 -2.36 0.018
 surgery            -0.237     0.789    0.628 -0.38 0.707
@@ -137,7 +135,6 @@ n= 170, number of events= 75
 Call:
 coxph(formula = Surv(start, stop, event) ~ (age + surgery) * transplant + year, data = jasa1, 
     method = "breslow")
-
 
                       coef exp(coef) se(coef)     z     p
 age                 0.0150    1.0152   0.0176  0.85 0.393
@@ -153,7 +150,6 @@ n= 170, number of events= 75
 Call:
 coxph(formula = Surv(start, stop, event) ~ age * transplant + surgery + year, data = jasa1, 
     method = "breslow")
-
 
                   coef exp(coef) se(coef)     z     p
 age             0.0153    1.0154   0.0175  0.87 0.383

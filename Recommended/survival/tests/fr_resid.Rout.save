@@ -275,7 +275,6 @@ Call:
 coxph(formula = Surv(time, status) ~ age + sex + offset(temp), data = kidney, init = kfit1$coef, 
     iter = 0)
 
-
         coef exp(coef) se(coef)     z     p
 age  0.00471   1.00472  0.00875  0.54  0.59
 sex -1.41082   0.24394  0.30916 -4.56 5e-06

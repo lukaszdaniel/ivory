@@ -1,4 +1,4 @@
-# Automatically generated from all.nw using noweb
+# Automatically generated from the noweb directory
 pyears <- function(formula, data,
         weights, subset, na.action, rmap,
         ratetable, scale=365.25,  expect=c('event', 'pyears'),
@@ -7,24 +7,25 @@ pyears <- function(formula, data,
     expect <- match.arg(expect)
     call <- match.call()
     m <- match.call(expand.dots=FALSE)
-    m <- m[c(1, match(c('formula', 'data', 'weights', 'subset', 'na.action'), names(m), nomatch=0))]
-    m[[1]] <- as.name("model.frame")
+    m <- m[c(1, match(c('formula', 'data', 'weights', 'subset', 'na.action'),
+                      names(m), nomatch=0))]
+    m[[1L]] <- quote(stats::model.frame)
 
     Terms <- if(missing(data)) terms(formula, 'ratetable')
              else              terms(formula, 'ratetable',data=data)
     if (any(attr(Terms, 'order') >1))
-            stop("'pyears()' cannot have interaction terms")
+            stop("Pyears cannot have interaction terms")
 
     rate <- attr(Terms, "specials")$ratetable                   
     if (length(rate) >0 || !missing(rmap) || !missing(ratetable)) {
         has.ratetable <- TRUE
         if(length(rate) > 1)
-            stop("can have only 1 'ratetable()' call in a formula")
+            stop("Can have only 1 ratetable() call in a formula")
         if (missing(ratetable)) stop("No rate table specified")
 
         if(length(rate) == 1) {
             if (!missing(rmap)) 
-                stop("'ratetable()' call in a formula is deprecated")
+                stop("The ratetable() call in a formula is depreciated")
 
             stemp <- untangle.specials(Terms, 'ratetable')
             rcall <- as.call(parse(text=stemp$var)[[1]])   # as a call object
@@ -34,7 +35,7 @@ pyears <- function(formula, data,
         else if (!missing(rmap)) {
             rcall <- substitute(rmap)
             if (!is.call(rcall) || rcall[[1]] != as.name('list'))
-                stop(gettextf("invalid '%s' argument", "rmap"))
+                stop("Invalid rcall argument")
             }
         else rcall <- NULL   # A ratetable, but not rcall argument
 
@@ -46,11 +47,11 @@ pyears <- function(formula, data,
             #   variable names
             varlist <- all.vars(delete.response(ratetable$terms))
             }
-        else stop("invalid rate table")
+        else stop("Invalid rate table")
 
         temp <- match(names(rcall)[-1], varlist) # 2,3,... are the argument names
         if (any(is.na(temp)))
-            stop("variable not found in the ratetable:", (names(rcall))[is.na(temp)])
+            stop("Variable not found in the ratetable:", (names(rcall))[is.na(temp)])
             
         if (any(!(varlist %in% names(rcall)))) {
             to.add <- varlist[!(varlist %in% names(rcall))]
@@ -75,29 +76,26 @@ pyears <- function(formula, data,
     else         m <- eval(m, sys.parent())
 
     Y <- model.extract(m, 'response')
-    if (is.null(Y)) stop("follow-up time must appear in the formula")
+    if (is.null(Y)) stop("Follow-up time must appear in the formula")
     if (!is.Surv(Y)){
-        if (any(Y <0)) stop("negative follow up time")
+        if (any(Y <0)) stop("Negative follow up time")
         Y <- as.matrix(Y)
         if (ncol(Y) >2) stop("Y has too many columns")
         }
     else {
         stype <- attr(Y, 'type')
         if (stype == 'right') {
-            if (any(Y[,1] <0)) stop("negative survival time")
+            if (any(Y[,1] <0)) stop("Negative survival time")
             nzero <- sum(Y[,1]==0 & Y[,2] ==1)
             if (nzero >0) 
-                warning(sprintf(ngettext(nzero, 
-                         "%d observation with an event and 0 follow-up time, any rate calculations are statistically questionable",
-                         "%d observations with an event and 0 follow-up time, any rate calculations are statistically questionable", domain = "R-survival"),
-			 nzero), domain = NA)
+                warning(gettextf("%d observations with an event and 0 follow-up time, any rate calculations are statistically questionable", nzero))
             }
         else if (stype != 'counting')
-            stop("only right-censored and counting process survival types are supported")
+            stop("Only right-censored and counting process survival types are supported")
         }
 
     n <- nrow(Y)
-    if (is.null(n) || n==0) stop("data set has 0 observations")
+    if (is.null(n) || n==0) stop("Data set has 0 observations")
 
     weights <- model.extract(m, 'weights')
     if (is.null(weights)) weights <- rep(1.0, n)
@@ -113,16 +111,16 @@ pyears <- function(formula, data,
             israte <- FALSE
             Terms <- ratetable$terms
             if (!is.null(attr(Terms, 'offset')))
-                stop("cannot deal with models that contain an offset")
+                stop("Cannot deal with models that contain an offset")
             strats <- attr(Terms, "specials")$strata
             if (length(strats))
-                stop("'pyears()' cannot handle stratified Cox models")
+                stop("pyears cannot handle stratified Cox models")
 
             if (any(names(m[,rate]) !=  attr(ratetable$terms, 'term.labels')))
-                 stop("unable to match new data to old formula")
+                 stop("Unable to match new data to old formula")
             R <- model.matrix.coxph(ratetable, data=rdata)
             }
-        else stop("invalid rate table")
+        else stop("Invalid ratetable")
         }
     ovars <- attr(Terms, 'term.labels')
     if (length(ovars)==0)  {
@@ -136,7 +134,8 @@ pyears <- function(formula, data,
         odims <- ofac <- double(odim)
         X <- matrix(0, n, odim)
         outdname <- vector("list", odim)
-        for (i in seq_len(odim)) {
+        names(outdname) <- attr(Terms, 'term.labels')
+        for (i in 1:odim) {
             temp <- m[[ovars[i]]]
             if (inherits(temp, 'tcut')) {
                 X[,i] <- temp
@@ -183,11 +182,12 @@ pyears <- function(formula, data,
             #
             cols <- match(c("age", "year"), atts$dimid)
                   if (any(is.na(cols))) 
-                 stop("ratetable does not have expected shape")
+                 stop("Ratetable does not have expected shape")
             if (exists("as.Date")) {  # true for modern version of R
                 bdate <- as.Date('1960/1/1') + (R[,cols[2]] - R[,cols[1]])
                 byear <- format(bdate, "%Y")
-                offset <- bdate - as.Date(paste(byear, "01/01", sep='/'), origin="1960/01/01")
+                offset <- bdate - as.Date(paste(byear, "01/01", sep='/'), 
+                                          origin="1960/01/01")
                 }
             #else if (exists('month.day.year')) { # Splus, usually
             #    bdate <- R[,cols[2]] - R[,cols[1]]
@@ -199,7 +199,7 @@ pyears <- function(formula, data,
             #    byear <- date.mdy(bdate)$year
             #    offset <- bdate - mdy.date(1,1,byear)
             #    }
-            else stop("cannot find an appropriate date class") 
+            else stop("Can't find an appropriate date class") 
             R[,cols[2]] <- R[,cols[2]] - offset
 
             # Doctor up "cutpoints" - only needed for old style rate tables
@@ -208,7 +208,7 @@ pyears <- function(formula, data,
                 temp <-  which(us.special)
                 nyear <- length(cuts[[temp]])
                 nint <- rfac[temp]       #intervals to interpolate over
-                cuts[[temp]] <- round(approx(nint*(seq_len(nyear)), cuts[[temp]],
+                cuts[[temp]] <- round(approx(nint*(1:nyear), cuts[[temp]],
                                         nint:(nint*nyear))$y - .0001)
                 }
             }
@@ -273,7 +273,7 @@ pyears <- function(formula, data,
                              pyears= temp$pyears[keep]/scale,
                              n = temp$pn[keep])
             }
-        row.names(df) <- seq_len(nrow(df))
+        row.names(df) <- 1:nrow(df)
         if (has.ratetable) df$expected <- temp$pexpect[keep]
         if (expect=='pyears') df$expected <- df$expected/scale
         if (docount) df$event <- temp$pcount[keep]
@@ -308,6 +308,7 @@ pyears <- function(formula, data,
                 out$event <- array(temp$pcount, dim=odims, dimnames=outdname)
         }
     out$observations <- nrow(m)
+    out$terms <- Terms
     na.action <- attr(m, "na.action")
     if (length(na.action))  out$na.action <- na.action
     if (model) out$model <- m

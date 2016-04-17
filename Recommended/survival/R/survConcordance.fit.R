@@ -1,5 +1,8 @@
-# Automatically generated from all.nw using noweb
-survConcordance.fit <- function(y, x, strata, weight) {    
+# Automatically generated from the noweb directory
+survConcordance.fit <- function(y, x, strata, weight) { 
+    # The coxph program may occassionally fail, and this will kill the C
+    #  routine below
+    if (any(is.na(x)) || any(is.na(y))) return(NULL)   
     btree <- function(n) {
         ranks <- rep(0L, n)  #will be overwritten
         yet.to.do <- 1:n
@@ -18,7 +21,7 @@ survConcordance.fit <- function(y, x, strata, weight) {
         }
         ranks
     }
-
+        
     docount <- function(stime, risk, wts) {
         if (attr(stime, 'type') == 'right') {
             ord <- order(stime[,1], -stime[,2])
@@ -55,19 +58,22 @@ survConcordance.fit <- function(y, x, strata, weight) {
         count <- docount(y, x, weight)
         if (count[1]==0 && count[2]==0) count[5]<-0
         else count[5] <- 2*sqrt(count[5])
-        names(count) <- c("concordant", "discordant", "tied.risk", "tied.time", "std(c-d)")
+        names(count) <- c("concordant", "discordant", "tied.risk", "tied.time",
+                          "std(c-d)")
     }
     else {
         strata <- as.factor(strata)
         ustrat <- levels(strata)[table(strata) >0]  #some strata may have 0 obs
         count <- matrix(0., nrow=length(ustrat), ncol=5)
-        for (i in seq_len(length(ustrat))) {
+        for (i in seq_along(ustrat)) {
             keep <- which(strata == ustrat[i])
             count[i,] <- docount(y[keep,,drop=F], x[keep], weight[keep])
         }
         
-        count[,5] <- 2*sqrt(ifelse(count[,1] + count[,2] == 0, 0, count[,5]))
-        dimnames(count) <- list(ustrat,  c("concordant", "discordant", "tied.risk", "tied.time", "std(c-d)"))
+        count[,5] <- 2*sqrt(ifelse(count[,1]+count[,2]==0, 0, count[,5]))
+        dimnames(count) <- list(ustrat,  c("concordant", "discordant",
+                                           "tied.risk", "tied.time",
+                                           "std(c-d)"))
     }
     count
 }

@@ -958,9 +958,8 @@ coef.varConstPower <-
     function (object, unconstrained = TRUE, allCoef = FALSE, ...)
 {
     wPar <- attr(object, "whichFix")
-    nonInit <- !unlist(lapply(object, length))
-    nonInit <- is.null(wPar) || (any(nonInit) && !all(c(wPar[nonInit,
-                                                             ])))
+    nonInit <- !lengths(object)
+    nonInit <- is.null(wPar) || (any(nonInit) && !all(c(wPar[nonInit, ])))
     if (nonInit || (!allCoef && (length(unlist(object)) == 0))) {
         return(numeric(0))
     }
@@ -1160,7 +1159,7 @@ varComb <-
     stop("all arguments passed to 'varComb()' function must be of class \"varFunc\"")
   }
   if (is.null(names(val))) {
-    names(val) <- LETTERS[1:length(val)]
+    names(val) <- LETTERS[seq_along(val)]
   }
   class(val) <- c("varComb", "varFunc")
   val

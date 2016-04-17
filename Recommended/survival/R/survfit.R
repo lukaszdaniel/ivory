@@ -1,4 +1,4 @@
-# Automatically generated from all.nw using noweb
+# Automatically generated from the noweb directory
 survfit <- function(formula, ...) {
     UseMethod("survfit", formula)
 }
@@ -10,7 +10,8 @@ dim.survfit <- function(x) {
     }
     else {
         nr <- length(x$strata)
-        if (is.matrix(x$xurv)) c(nr, ncol(x$surv))
+        if (is.matrix(x$surv)) c(nr, ncol(x$surv))
+        else if (is.matrix(x$prev)) c(nr, ncol(x$prev))
         else nr
     }
 }
@@ -39,15 +40,15 @@ dim.survfit <- function(x) {
             if (!is.null(x$lower)) x$lower <- x$lower[,j,drop=drop]
             if (!is.null(x$cumhaz)) x$cumhaz <- x$cumhaz[,j,drop=drop]
         }
-        else warning("Survfit object has only a single survival curve")
+        else warning("survfit object has only a single survival curve")
     }
     else {
         if (is.null(i)) keep <- seq(along.with=x$time)
         else {
             indx <- nmatch(i, names(x$strata)) #strata to keep
-                if (any(is.na(indx)))
-                    stop(gettextf("strata %s not matched", paste(i[is.na(indx)], collapse = ' '), domain = "R-survival"), domain = NA)
-
+            if (any(is.na(indx))) 
+                stop(gettextf("strata %s not matched", paste(i[is.na(indx)], collapse=' ')))
+ 
             # Now, indx may not be in order: some can use curve[3:2] to reorder
             #  The list/unlist construct will reorder the data
             temp <- rep(1:length(x$strata), x$strata)
@@ -100,12 +101,13 @@ survfit.formula <- function(formula, data, weights, subset,
     Call[[1]] <- as.name('survfit')  #make nicer printout for the user
     # create a copy of the call that has only the arguments we want,
     #  and use it to call model.frame()
-    indx <- match(c('formula', 'data', 'weights', 'subset','na.action', 'istate', 'id', "etype"), names(Call), nomatch=0)
+    indx <- match(c('formula', 'data', 'weights', 'subset','na.action',
+                    'istate', 'id', "etype"), names(Call), nomatch=0)
     #It's very hard to get the next error message other than malice
     #  eg survfit(wt=Surv(time, status) ~1) 
     if (indx[1]==0) stop("a formula argument is required")
     temp <- Call[c(1, indx)]
-    temp[[1]] <- as.name("model.frame")
+    temp[[1L]] <- quote(stats::model.frame)
     m <- eval.parent(temp)
     
     Terms <- terms(formula, c("strata", "cluster"))
@@ -115,19 +117,19 @@ survfit.formula <- function(formula, data, weights, subset,
 
     n <- nrow(m)
     Y <- model.extract(m, 'response')
-    if (!is.Surv(Y)) stop(gettextf("response is not an object of class %s", dQuote("Surv")))
+    if (!is.Surv(Y)) stop("Response must be a survival object")
 
     casewt <- model.extract(m, "weights")
     if (is.null(casewt)) casewt <- rep(1,n)
 
-    if (!is.null(attr(Terms, 'offset'))) warning("offset term ignored")
+    if (!is.null(attr(Terms, 'offset'))) warning("Offset term ignored")
 
     id    <- model.extract(m, 'id')
     istate <- model.extract(m,"istate")
     temp <- untangle.specials(Terms, "cluster")
     if (length(temp$vars)>0) {
         if (length(temp$vars) > 1) stop("can not have two cluster terms")
-        if (!is.null(id)) stop("cannot have both a cluster term and an id variable")       
+        if (!is.null(id)) stop("can not have both a cluster term and an id variable")       
         id <- m[[temp$vars]]
         Terms <- Terms[-temp$terms]
     }
@@ -136,16 +138,16 @@ survfit.formula <- function(formula, data, weights, subset,
     if (length(ll) == 0) X <- factor(rep(1,n))  # ~1 on the right
     else X <- strata(m[ll])
     
-    if (!is.Surv(Y)) stop(gettextf("response is not an object of class %s", dQuote("Surv")))
+    if (!is.Surv(Y)) stop("y must be a Surv object")
     
     # Backwards support for the now-depreciated etype argument
     etype <- model.extract(m, "etype")
     if (!is.null(etype)) {
         if (attr(Y, "type") == "mcounting" ||
             attr(Y, "type") == "mright")
-            stop("cannot use both the 'etype' argument and 'mstate' survival type")
+            stop("cannot use both the etype argument and mstate survival type")
         if (length(istate)) 
-            stop("cannot use both the 'etype' and 'istate' arguments")
+            stop("cannot use both the etype and istate arguments")
         status <- Y[,ncol(Y)]
         etype <- as.factor(etype)
         temp <- table(etype, status==0)
@@ -162,7 +164,7 @@ survfit.formula <- function(formula, data, weights, subset,
             Y <- Surv(Y[,1], status, type="mstate")
         else if (attr(Y, "type") == "counting")
             Y <- Surv(Y[,1], Y[,2], status, type="mstate")
-        else stop("'etype' argument incompatable with survival type")
+        else stop("etype argument incompatable with survival type")
     }
                          
     # At one point there were lines here to round the survival
@@ -189,4 +191,4 @@ survfit.formula <- function(formula, data, weights, subset,
     temp
     }
 survfit.Surv <- function(formula, ...)
-    stop("'survfit()' function requires a formula as its first argument")
+    stop("the survfit function requires a formula as its first argument")

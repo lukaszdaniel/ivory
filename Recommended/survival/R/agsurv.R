@@ -1,4 +1,4 @@
-# Automatically generated from all.nw using noweb
+# Automatically generated from the noweb directory
 agsurv <- function(y, x, wt, risk, survtype, vartype) {
     nvar <- ncol(as.matrix(x))
     status <- y[,ncol(y)]
@@ -19,7 +19,8 @@ agsurv <- function(y, x, wt, risk, survtype, vartype) {
     else {
         delta <- min(diff(time))/2
         etime <- c(sort(unique(y[,1])), max(y[,1])+delta)  #unique entry times
-        indx  <- approx(etime, seq_len(length(etime)), time, method='constant', rule = 2, f = 1)$y   
+        indx  <- approx(etime, 1:length(etime), time, method='constant',
+                        rule=2, f=1)$y   
         esum <- rcumsum(rowsum(wrisk, y[,1]))  #not yet entered
         nrisk <- nrisk - c(esum,0)[indx]
         irisk <- irisk - c(rcumsum(rowsum(wt, y[,1])),0)[indx]

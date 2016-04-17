@@ -34,7 +34,6 @@ Type 'q()' to quit R.
 Call:
 coxph(formula = Surv(aml$time, aml$status) ~ aml$x, method = "breslow")
 
-
                     coef exp(coef) se(coef)    z     p
 aml$xNonmaintained 0.904     2.470    0.512 1.77 0.078
 
@@ -176,7 +175,6 @@ Call: survfit(formula = tfit)
 > x1
 Call:
 coxph(formula = Surv(time, status) ~ x, data = aml, method = "efron")
-
 
                 coef exp(coef) se(coef)    z     p
 xNonmaintained 0.916     2.498    0.512 1.79 0.074

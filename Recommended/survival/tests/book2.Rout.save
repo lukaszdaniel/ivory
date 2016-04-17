@@ -107,7 +107,8 @@ Type 'q()' to quit R.
 > fit <- coxph(Surv(time, status) ~x, test1, eps=1e-8)
 > aeq(round(fit$coef,6), 1.676857)
 [1] TRUE
-> truth <- byhand(fit$coef, 0)
+> truebeta <- log(cos(acos((45/23)*sqrt(3/23))/3) * 2* sqrt(23/3))
+> truth <- byhand(truebeta, 0)
 > aeq(truth$loglik, fit$loglik[2])
 [1] TRUE
 > aeq(1/truth$imat, fit$var)

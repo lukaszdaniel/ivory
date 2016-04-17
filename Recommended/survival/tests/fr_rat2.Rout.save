@@ -63,7 +63,6 @@ Type 'q()' to quit R.
 Call:
 coxph(formula = Surv(start, stop, status) ~ rx + cluster(id), data = rat2)
 
-
      coef exp(coef) se(coef) robust se     z       p
 rx -0.827     0.438    0.151     0.204 -4.05 5.2e-05
 

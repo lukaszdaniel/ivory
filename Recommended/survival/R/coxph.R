@@ -1,4 +1,4 @@
-# Automatically generated from all.nw using noweb
+# Automatically generated from the noweb directory
 #tt <- function(x) x
 coxph <- function(formula, data, weights, subset, na.action,
         init, control, ties= c("efron", "breslow", "exact"),
@@ -7,16 +7,15 @@ coxph <- function(formula, data, weights, subset, na.action,
 
     ties <- match.arg(ties)
     Call <- match.call()
-
     # create a call to model.frame() that contains the formula (required)
     #  and any other of the relevant optional arguments
     # then evaluate it in the proper frame
     indx <- match(c("formula", "data", "weights", "subset", "na.action"),
                   names(Call), nomatch=0) 
-    if (indx[1] ==0) stop(gettextf("'%s' argument is required", "formula"))
+    if (indx[1] ==0) stop("A formula argument is required")
     temp <- Call[c(1,indx)]  # only keep the arguments we wanted
-    temp[[1]] <- as.name('model.frame')  # change the function called
-    
+    temp[[1L]] <- quote(stats::model.frame)  # change the function called
+
     special <- c("strata", "cluster", "tt")
     temp$formula <- if(missing(data)) terms(formula, special)
                     else              terms(formula, special, data=data)
@@ -28,10 +27,10 @@ coxph <- function(formula, data, weights, subset, na.action,
     }
 
     mf <- eval(temp, parent.frame())
-    if (nrow(mf) ==0) stop("no (non-missing) observations")
+    if (nrow(mf) ==0) stop("No (non-missing) observations")
     Terms <- terms(mf)
 
-    
+
     ## We want to pass any ... args to coxph.control, but not pass things
     ##  like "dats=mydata" where someone just made a typo.  The use of ...
     ##  is simply to allow things like "eps=1e6" with easier typing
@@ -40,20 +39,20 @@ coxph <- function(formula, data, weights, subset, na.action,
         controlargs <- names(formals(coxph.control)) #legal arg names
         indx <- pmatch(names(extraArgs), controlargs, nomatch=0L)
         if (any(indx==0L))
-            stop(gettextf("argument %s not matched", names(extraArgs)[indx==0L]), domain = "R-survival")
+            stop(gettextf("argument %s was not matched", names(extraArgs)[indx==0L]), domain = "R-survival")
     }
     if (missing(control)) control <- coxph.control(...)
 
     Y <- model.extract(mf, "response")
-    if (!inherits(Y, "Surv")) stop(gettextf("response is not an object of class %s", dQuote("Surv")))
+    if (!inherits(Y, "Surv")) stop("Response must be a survival object")
     type <- attr(Y, "type")
     if (type!='right' && type!='counting')
         stop(gettextf("Cox model doesn't support \"%s\" survival data", type))
     data.n <- nrow(Y)   #remember this before any time transforms
 
     if (length(attr(Terms, 'variables')) > 2) { # a ~1 formula has length 2
-        ytemp <- terms.inner(attr(Terms, 'variables')[1:2])
-        xtemp <- terms.inner(attr(Terms, 'variables')[-2])
+        ytemp <- terms.inner(formula[1:2])
+        xtemp <- terms.inner(formula[-2])
         if (any(!is.na(match(xtemp, ytemp))))
             warning("a variable appears on both the left and right sides of the formula")
     }
@@ -89,17 +88,17 @@ coxph <- function(formula, data, weights, subset, na.action,
              
          if (is.list(tt)) {
              if (any(!sapply(tt, is.function))) 
-                 stop("'tt' argument must contain a function or list of functions")
+                 stop(gettextf("'%s' argument must contain a function or list of functions", "tt"))
              if (length(tt) != ntrans) {
                  if (length(tt) ==1) {
                      temp <- vector("list", ntrans)
                      for (i in seq_len(ntrans)) temp[[i]] <- tt[[1]]
                      tt <- temp
                  }
-                 else stop(gettextf("wrong length for '%s' argument", "tt"))
+                 else stop("Wrong length for 'tt' argument")
              }
          }
-         else stop("'tt' argument must contain a function or list of functions")
+         else stop(gettextf("'%s' argument must contain a function or list of functions", "tt"))
 
          if (ncol(Y)==2) {
              if (length(strats)==0) {
@@ -138,13 +137,25 @@ coxph <- function(formula, data, weights, subset, na.action,
          mf <- mf[tindex,]
          Y <- Surv(rep(counts$time, counts$nrisk), counts$status)
          type <- 'right'  # new Y is right censored, even if the old was (start, stop]
-         strats <- rep(seq_len(length(counts$nrisk)), counts$nrisk)
+         strats <- rep(1:length(counts$nrisk), counts$nrisk)
          weights <- model.weights(mf)
          if (!is.null(weights) && any(!is.finite(weights)))
-             stop("weights must be finite")   
-         for (i in seq_len(ntrans))
-             mf[[timetrans$var[i]]] <- (tt[[i]])(mf[[timetrans$var[i]]], Y[,1], strats, 
-                                                weights)
+             stop("weights must be finite")  
+
+         tcall <- attr(Terms, 'variables')[timetrans$terms+2]
+         pvars <- attr(Terms, 'predvars')
+         pmethod <- sub("makepredictcall.", "", as.vector(methods("makepredictcall")))
+         for (i in seq_len(ntrans)) {
+             newtt <- (tt[[i]])(mf[[timetrans$var[i]]], Y[,1], strats, weights)
+             mf[[timetrans$var[i]]] <- newtt
+             nclass <- class(newtt)
+             if (any(nclass %in% pmethod)) { # It has a makepredictcall method
+                 dummy <- as.call(list(as.name(class(newtt)[1]), tcall[[i]][[2]]))
+                 ptemp <- makepredictcall(newtt, dummy)
+                 pvars[[timetrans$terms[i]+2]] <- ptemp
+             }
+         }
+         attr(Terms, "predvars") <- pvars
          }
 
     cluster<- attr(Terms, "specials")$cluster
@@ -152,7 +163,7 @@ coxph <- function(formula, data, weights, subset, na.action,
         robust <- TRUE  #flag to later compute a robust variance
         tempc <- untangle.specials(Terms, 'cluster', 1:10)
         ord <- attr(Terms, 'order')[tempc$terms]
-        if (any(ord>1)) stop("cluster cannot be used in an interaction")
+        if (any(ord>1)) stop("Cluster can not be used in an interaction")
         cluster <- strata(mf[,tempc$vars], shortlabel=TRUE)  #allow multiples
         dropterms <- tempc$terms  #we won't want this in the X matrix
         # Save away xlevels after removing cluster (we don't want to save upteen
@@ -172,7 +183,7 @@ coxph <- function(formula, data, weights, subset, na.action,
     if (length(stemp$vars) > 0) {  #if there is a strata statement
         hasinteractions <- FALSE
         for (i in stemp$vars) {  #multiple strata terms are allowed
-            # The factors att has one row for each variable in the frame, one
+            # The factors attr has one row for each variable in the frame, one
             #   col for each term in the model.  Pick rows for each strata
             #   var, and find if it participates in any interactions.
             if (any(attr(Terms, 'order')[attr(Terms, "factors")[i,] >0] >1))
@@ -219,7 +230,7 @@ coxph <- function(formula, data, weights, subset, na.action,
     contr.save <- attr(X, "contrasts")
     if (missing(init)) init <- NULL
     else {
-        if (length(init) != ncol(X)) stop(gettextf("wrong length for '%s' argument", "init"))
+        if (length(init) != ncol(X)) stop("wrong length for init argument")
         temp <- X %*% init - sum(colMeans(X) * init)
         if (any(temp < .Machine$double.min.exp | temp > .Machine$double.max.exp))
             stop("initial values lead to overflow or underflow of the exp function")
@@ -231,7 +242,7 @@ coxph <- function(formula, data, weights, subset, na.action,
         # 
         # Check the order of any penalty terms
         ord <- attr(Terms, "order")[match(pname, attr(Terms, 'term.labels'))]
-        if (any(ord>1)) stop("penalty terms cannot be in an interaction")
+        if (any(ord>1)) stop('Penalty terms cannot be in an interaction')
         pcols <- assign[match(pname, names(assign))] 
         
         fit <- coxpenal.fit(X, Y, strats, offset, init=init,
@@ -248,7 +259,7 @@ coxph <- function(formula, data, weights, subset, na.action,
             if (type== "right")  fitter <- get("coxexact.fit")
             else  fitter <- get("agexact.fit")
         }
-        else stop(gettextf("unknown method %s", method))
+        else stop(gettextf("Unknown method %s", method))
 
         fit <- fitter(X, Y, strats, offset, init, control, weights=weights,
                       method=method, row.names(mf))
@@ -259,8 +270,8 @@ coxph <- function(formula, data, weights, subset, na.action,
     }
     else {
         if (!is.null(fit$coefficients) && any(is.na(fit$coefficients))) {
-           vars <- seq_len(length(fit$coefficients))[is.na(fit$coefficients)]
-           msg <-gettextf("X matrix deemed to be singular; variable %s", paste(vars, collapse=" "))
+           vars <- seq_along(fit$coefficients)[is.na(fit$coefficients)]
+           msg <- gettextf("X matrix deemed to be singular; variable %s", paste(vars, collapse=" "))
            if (singular.ok) warning(msg)
            else             stop(msg)
         }
@@ -304,7 +315,7 @@ coxph <- function(formula, data, weights, subset, na.action,
             # The init vector might be longer than the betas, for a sparse term
             if (is.null(init)) temp <- fit$coefficients[nabeta]
             else temp <- (fit$coefficients - 
-                          init[seq_len(length(fit$coefficients))])[nabeta]
+                          init[1:length(fit$coefficients)])[nabeta]
             fit$wald.test <-  coxph.wtest(fit$var[nabeta,nabeta], temp,
                                           control$toler.chol)$test
         }

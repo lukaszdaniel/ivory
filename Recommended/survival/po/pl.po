@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: survival 2.37-2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-27 19:10+0100\n"
+"POT-Creation-Date: 2016-04-17 14:15+0200\n"
 "PO-Revision-Date: 2013-06-25 17:58+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -34,7 +34,3 @@ msgstr "flaga: niepoprawny typ\n"
 #: cox_Rcallback.c:86
 msgid "penalty: invalid type\n"
 msgstr "kara: niepoprawny typ\n"
-
-#: coxexact.c:177
-msgid "(number at risk) * (number tied deaths) is too large"
-msgstr ""

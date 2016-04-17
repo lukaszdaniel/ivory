@@ -93,7 +93,7 @@ Type 'q()' to quit R.
 > 
 > #dimnames(truth) <- list(c(5, 6, 10, 15, 18, 20, 25, 30, 34, 40, 50),
 > #                        c('a', 'b', 'c', 'd')
-> all.equal(truth, fit$prev)
+> all.equal(truth, fit$prev[,1:4])
 [1] TRUE
 > 
 > # Test the dfbetas
