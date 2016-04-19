@@ -38,7 +38,7 @@ Type 'q()' to quit R.
 > if(require(survival)) {
 +     (sa <- Surv(aml$time, aml$status))
 +     str(sa)
-+     detach("package:survival")
++     detach("package:survival", unload = TRUE)
 + }
 Loading required package: 'survival'
  Surv [1:23, 1:2]   9   13   13+  18   23   28+  31   34   45+  48  ...
@@ -621,7 +621,7 @@ climb   1 320.99
 +     print(as.matrix(df.soa)) # numeric result
 +     df.soac <- data.frame(soa, letters[1:5])
 +     print(as.matrix(df.soac)) # character result
-+     detach("package:survival")
++     detach("package:survival", unload = TRUE)
 + }
 Loading required package: 'survival'
      soa.time soa.status

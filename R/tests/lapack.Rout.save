@@ -269,6 +269,7 @@ attr(,"class")
 [1] 0.02466
 > 
 > eigen(A)
+eigen decomposition
 $values
 [1] 29.660+0.000i -4.631+0.000i  4.556+0.000i -2.292+3.117i -2.292-3.117i
 
