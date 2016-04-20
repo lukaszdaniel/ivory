@@ -25,7 +25,7 @@ pyears <- function(formula, data,
 
         if(length(rate) == 1) {
             if (!missing(rmap)) 
-                stop("The ratetable() call in a formula is depreciated")
+                stop("The 'ratetable()' call in a formula is depreciated")
 
             stemp <- untangle.specials(Terms, 'ratetable')
             rcall <- as.call(parse(text=stemp$var)[[1]])   # as a call object
@@ -35,7 +35,7 @@ pyears <- function(formula, data,
         else if (!missing(rmap)) {
             rcall <- substitute(rmap)
             if (!is.call(rcall) || rcall[[1]] != as.name('list'))
-                stop("Invalid rcall argument")
+                stop(gettextf("invalid '%s' argument", "rcall"))
             }
         else rcall <- NULL   # A ratetable, but not rcall argument
 
@@ -51,7 +51,7 @@ pyears <- function(formula, data,
 
         temp <- match(names(rcall)[-1], varlist) # 2,3,... are the argument names
         if (any(is.na(temp)))
-            stop("Variable not found in the ratetable:", (names(rcall))[is.na(temp)])
+            stop(gettextf("Variable not found in the ratetable: %s", (names(rcall))[is.na(temp)]))
             
         if (any(!(varlist %in% names(rcall)))) {
             to.add <- varlist[!(varlist %in% names(rcall))]
@@ -95,7 +95,7 @@ pyears <- function(formula, data,
         }
 
     n <- nrow(Y)
-    if (is.null(n) || n==0) stop("Data set has 0 observations")
+    if (is.null(n) || n==0) stop("data set has 0 observations")
 
     weights <- model.extract(m, 'weights')
     if (is.null(weights)) weights <- rep(1.0, n)

@@ -60,7 +60,7 @@ tmerge <- function(data1, data2, id, ..., tstart, tstop, options) {
 
     if (missing(data1) || missing(data2) || missing(id)) 
         stop("'data1', 'data2', and 'id' arguments are required")
-    if (!inherits(data1, "data.frame")) stop("'data1' argument must be a data frame")
+    if (!inherits(data1, "data.frame")) stop(gettextf("'%s' argument must be a data frame", "data1"))
     
     <<tmerge-setup>>
     <<tmerge-addvar>>
@@ -79,25 +79,25 @@ tmerge.control <- function(idname="id", tstartname="tstart", tstopname="tstop",
                            delay =0, na.rm=TRUE, ...) {
     extras <- list(...)
     if (length(extras) > 0) 
-        stop(gettextf("unrecognized option(s): %s", paste(names(extras), collapse = ", ")))
+        stop(sprintf(ngettext(length(extras), "unrecognized option: %s", "unrecognized options: %s", domain = "R-survival"), paste(names(extras), collapse = ", ")), domain = NA)
     if (length(idname) != 1 || make.names(idname) != idname)
-        stop("idname option must be a valid variable name")
+        stop(gettextf("'%s' argument must be a variable name", "idname"))
     if (!is.null(tstartname) && 
         (length(tstartname) !=1 || make.names(tstartname) != tstartname))
-        stop("tstart option must be NULL or a valid variable name")
+        stop(gettextf("'%s' argument must be NULL or a variable name", "tstartname"))
     if (length(tstopname) != 1 || make.names(tstopname) != tstopname)
-        stop("tstop option must be a valid variable name") 
+        stop(gettextf("'%s' argument must be a variable name", "tstopname"))
     if (length(delay) !=1 || !is.numeric(delay) || delay < 0)
-        stop("delay option must be a number >= 0")
+        stop(gettextf("'%s' argument must be a number >= 0", "delay"))
     if (length(na.rm) !=1 || ! is.logical(na.rm))
-        stop("na.rm option must be TRUE or FALSE")
+        stop(gettextf("'%s' argument must be TRUE or FALSE", "na.rm"))
    list(idname=idname, tstartname=tstartname, tstopname=tstopname, delay=delay, na.rm=na.rm)
 }
 
 tname <- attr(data1, "tname")
 firstcall <- is.null(tname)  #first call to the function
 if (!firstcall && any(is.null(match(unlist(tname), names(data1)))))
-    stop("data1 does not match its own tname attribute")
+    stop("'data1' does not match its own 'tname' attribute")
 
 if (!missing(options)) {
     if (!is.list(options)) stop("options must be a list")
@@ -163,7 +163,7 @@ else  args <- eval(dotarg, data2, enclos=new)
     
 argclass <- sapply(args, function(x) (class(x))[1])
 argname <- names(args)
-if (any(argname== "")) stop("all additional argments must have a name")
+if (any(argname== "")) stop("all additional arguments must have a name")
        
 check <- match(argclass, c("tdc", "cumtdc", "event", "cumevent"))
 if (any(is.na(check)))
@@ -288,10 +288,10 @@ for (ii in seq(along.with=args)) {
     # if an event time is missing then skip that obs
     etime <- argi$time
     if (length(etime) != length(saveid))
-        stop(gettextf("argument %s is not the same length as id", argname[ii]))
+        stop(gettextf("'%s' argument is not the same length as '%s' argument", argname[ii], "id"))
    if (!is.null(argi$value)) {
        if (length(argi$value) != length(saveid))
-            stop(gettextf("argument %s is not the same length as id", argname[ii]))
+            stop(gettextf("'%s' argument is not the same length as '%s' argument", argname[ii], "id"))
         if (topt$na.rm) keep <- !(is.na(etime) | is.na(argi$value))
         else keep <- !is.na(etime)
         if (!all(keep)) {
@@ -431,7 +431,7 @@ if (n4 > 0) {
     irep <- rep.int(1L, nrow(newdata))
     erow <- unique(indx1[indx4])   # which rows in newdata to be expanded
     irep[erow] <- 1+ n.add # number of rows in new data
-    jrep <- rep(1:nrow(newdata), irep)  #stutter the duplicated rows
+    jrep <- rep(seq_len(nrow(newdata)), irep)  #stutter the duplicated rows
     newdata <- newdata[jrep,]  #expand it out
     dstart <- dstart[jrep]
     dstop <-  dstop[jrep]
@@ -440,7 +440,7 @@ if (n4 > 0) {
     nfix <- length(erow)
     temp <- vector("list", nfix)
     iend <- (cumsum(irep))[irep >1]  #end row of each duplication set
-    for (j in 1:nfix) temp[[j]] <-  -(seq(n.add[j] -1, 0)) + iend[j]
+    for (j in seq_len(nfix)) temp[[j]] <-  -(seq(n.add[j] -1, 0)) + iend[j]
     newrows <- unlist(temp)
     dstart[newrows] <- dstop[newrows-1] <- unlist(icount)
     newdata[[topt$tstartname]] <- dstart

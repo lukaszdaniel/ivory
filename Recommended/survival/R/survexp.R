@@ -18,10 +18,10 @@ survexp <- function(formula, data,
              else              terms(formula, 'ratetable',data=data)
     rate <- attr(Terms, "specials")$ratetable                   
     if(length(rate) > 1)
-            stop("Can have only 1 ratetable() call in a formula")
+            stop("Can have only 1 'ratetable()' call in a formula")
     if(length(rate) == 1) {
         if (!missing(rmap)) 
-            stop("The ratetable() call in a formula is depreciated")
+            stop("The 'ratetable()' call in a formula is depreciated")
 
         stemp <- untangle.specials(Terms, 'ratetable')
         rcall <- as.call(parse(text=stemp$var)[[1]])   # as a call object
@@ -31,7 +31,7 @@ survexp <- function(formula, data,
     else if (!missing(rmap)) {
         rcall <- substitute(rmap)
         if (!is.call(rcall) || rcall[[1]] != as.name('list'))
-            stop("Invalid rcall argument")
+            stop(gettextf("invalid '%s' argument", "rcall"))
         }
     else rcall <- NULL   # A ratetable, but not rcall argument
 
@@ -47,7 +47,7 @@ survexp <- function(formula, data,
 
     temp <- match(names(rcall)[-1], varlist) # 2,3,... are the argument names
     if (any(is.na(temp)))
-        stop("Variable not found in the ratetable:", (names(rcall))[is.na(temp)])
+        stop(gettextf("Variable not found in the ratetable: %s", (names(rcall))[is.na(temp)]))
         
     if (any(!(varlist %in% names(rcall)))) {
         to.add <- varlist[!(varlist %in% names(rcall))]
@@ -68,7 +68,7 @@ survexp <- function(formula, data,
 
     m <- eval(m, parent.frame())
     n <- nrow(m)
-    if (n==0) stop("Data set has 0 rows")
+    if (n==0) stop("data set has 0 rows")
     if (!missing(se.fit) && se.fit)
         warning("'se.fit' value ignored")
 

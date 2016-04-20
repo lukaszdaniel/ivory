@@ -27,7 +27,7 @@ coxph <- function(formula, data, weights, subset, na.action,
     }
 
     mf <- eval(temp, parent.frame())
-    if (nrow(mf) ==0) stop("No (non-missing) observations")
+    if (nrow(mf) ==0) stop("no (non-missing) observations")
     Terms <- terms(mf)
 
 
@@ -95,7 +95,7 @@ coxph <- function(formula, data, weights, subset, na.action,
                      for (i in seq_len(ntrans)) temp[[i]] <- tt[[1]]
                      tt <- temp
                  }
-                 else stop("Wrong length for 'tt' argument")
+                 else stop(gettextf("wrong length for '%s' argument", "tt"))
              }
          }
          else stop(gettextf("'%s' argument must contain a function or list of functions", "tt"))
@@ -230,7 +230,7 @@ coxph <- function(formula, data, weights, subset, na.action,
     contr.save <- attr(X, "contrasts")
     if (missing(init)) init <- NULL
     else {
-        if (length(init) != ncol(X)) stop("wrong length for init argument")
+        if (length(init) != ncol(X)) stop(gettextf("wrong length for '%s' argument", "init"))
         temp <- X %*% init - sum(colMeans(X) * init)
         if (any(temp < .Machine$double.min.exp | temp > .Machine$double.max.exp))
             stop("initial values lead to overflow or underflow of the exp function")
@@ -259,7 +259,7 @@ coxph <- function(formula, data, weights, subset, na.action,
             if (type== "right")  fitter <- get("coxexact.fit")
             else  fitter <- get("agexact.fit")
         }
-        else stop(gettextf("Unknown method %s", method))
+        else stop(gettextf("unknown '%s' method", method))
 
         fit <- fitter(X, Y, strats, offset, init, control, weights=weights,
                       method=method, row.names(mf))

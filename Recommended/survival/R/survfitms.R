@@ -65,8 +65,8 @@ summary.survfit <- function(object, times, censored=FALSE,
         ilist1 <- ilist2 <- ilist3 <- vector('list', nstrat)
         newtime <- ilist1
         n <- length(stemp)
-        for (i in 1:nstrat) {
-            who <- (1:n)[stemp==i]  # the rows of the object for this strata
+        for (i in seq_len(nstrat)) {
+            who <- seq_len(n)[stemp==i]  # the rows of the object for this strata
             stime <- fit$time[who]
 
             # First, toss any printing times that are outside our range
@@ -97,7 +97,7 @@ summary.survfit <- function(object, times, censored=FALSE,
         cfun <- function(x, init=0) {  #cumulative counts over a time interval
             tlist <- vector("list", nstrat)
             if (is.matrix(x)) {
-                for (i in 1:nstrat) {
+                for (i in seq_len(nstrat)) {
                     # stemp is 1,1,1,....2,2,2,,.. to mark curves
                     x2 <- x[stemp==i,]  # all those in the group
                     j  <- c(0, ilist3[[i]])
@@ -107,7 +107,7 @@ summary.survfit <- function(object, times, censored=FALSE,
                 matrix(unlist(lapply(tlist, t)), byrow=T, ncol=ncol(x))
             } 
             else {
-                for (i in 1:nstrat) {
+                for (i in seq_len(nstrat)) {
                     x2 <- x[stemp==i] 
                     j  <- c(0, ilist3[[i]])
                     tlist[[i]] <- diff(cumsum(c(0,x2))[1+j])
@@ -139,7 +139,7 @@ summary.survfit <- function(object, times, censored=FALSE,
             }
         }
         if (!is.null(temp$strata))
-            temp$strata <- factor(stemp[indx1], levels=1:nstrat,
+            temp$strata <- factor(stemp[indx1], levels=seq_len(nstrat),
                                   labels=strata.names)
     }
     else { #times argument was given
@@ -166,7 +166,7 @@ summary.survfit <- function(object, times, censored=FALSE,
         
         if (!is.null(fit$strata)) {
             scount <- unlist(lapply(ilist1, length))
-            temp$strata <- factor(rep(1:nstrat, scount), levels=1:nstrat,
+            temp$strata <- factor(rep(seq_len(nstrat), scount), levels=seq_len(nstrat),
                                   labels=strata.names)
         }
     }
@@ -220,7 +220,7 @@ summary.survfitms <- function(object, times, censored=FALSE,
         }
     else   {
         nstrat <- length(fit$strata)
-        stemp <- rep(1:nstrat, fit$strata)
+        stemp <- rep(seq_len(nstrat), fit$strata)
         strata.names <- names(fit$strata)
     }
 
@@ -241,8 +241,8 @@ summary.survfitms <- function(object, times, censored=FALSE,
         ilist1 <- ilist2 <- ilist3 <- vector('list', nstrat)
         newtime <- ilist1
         n <- length(stemp)
-        for (i in 1:nstrat) {
-            who <- (1:n)[stemp==i]  # the rows of the object for this strata
+        for (i in seq_len(nstrat)) {
+            who <- seq_len(n)[stemp==i]  # the rows of the object for this strata
             stime <- fit$time[who]
 
             # First, toss any printing times that are outside our range
@@ -273,7 +273,7 @@ summary.survfitms <- function(object, times, censored=FALSE,
         cfun <- function(x, init=0) {  #cumulative counts over a time interval
             tlist <- vector("list", nstrat)
             if (is.matrix(x)) {
-                for (i in 1:nstrat) {
+                for (i in seq_len(nstrat)) {
                     # stemp is 1,1,1,....2,2,2,,.. to mark curves
                     x2 <- x[stemp==i,]  # all those in the group
                     j  <- c(0, ilist3[[i]])
@@ -283,7 +283,7 @@ summary.survfitms <- function(object, times, censored=FALSE,
                 matrix(unlist(lapply(tlist, t)), byrow=T, ncol=ncol(x))
             } 
             else {
-                for (i in 1:nstrat) {
+                for (i in seq_len(nstrat)) {
                     x2 <- x[stemp==i] 
                     j  <- c(0, ilist3[[i]])
                     tlist[[i]] <- diff(cumsum(c(0,x2))[1+j])
@@ -315,7 +315,7 @@ summary.survfitms <- function(object, times, censored=FALSE,
             }
         }
         if (!is.null(temp$strata))
-            temp$strata <- factor(stemp[indx1], levels=1:nstrat,
+            temp$strata <- factor(stemp[indx1], levels=seq_len(nstrat),
                                   labels=strata.names)
     }
     else { #times argument was given
@@ -336,7 +336,7 @@ summary.survfitms <- function(object, times, censored=FALSE,
             if (nstrat==1) temp$prev[indx1==0,] <- temp$p0
             else {
                 ninit <- sapply(ilist1, function(x) sum(x==0))
-                zz <- rep(1:nstrat, ninit)
+                zz <- rep(seq_len(nstrat), ninit)
                 temp$prev[indx1==0,] <- temp$p0[zz,]
             }
         }
@@ -351,7 +351,7 @@ summary.survfitms <- function(object, times, censored=FALSE,
         
         if (!is.null(fit$strata)) {
             scount <- unlist(lapply(ilist1, length))
-            temp$strata <- factor(rep(1:nstrat, scount), levels=1:nstrat,
+            temp$strata <- factor(rep(seq_len(nstrat), scount), levels=seq_len(nstrat),
                                   labels=strata.names)
         }
     }
@@ -403,7 +403,7 @@ survmean2 <- function(x, scale, rmean) {
     nstate <- length(x$states)  #there will always be at least 1 state
     ngrp   <- max(1, length(x$strata))
     if (ngrp >1)  {
-        igrp <- rep(1:ngrp, x$strata)
+        igrp <- rep(seq_len(ngrp), x$strata)
         rname <- names(x$strata)
         }
     else {
@@ -416,7 +416,7 @@ survmean2 <- function(x, scale, rmean) {
     if (is.matrix(x$n.event)) {
         nc <- ncol(x$n.event)
         nevent <- tapply(x$n.event, list(rep(igrp, nc), col(x$n.event)), sum)
-        dimnames(nevent) <- list(rname, x$states[1:nc])
+        dimnames(nevent) <- list(rname, x$states[seq_len(nc)])
         }
     else {
         nevent <- tapply(x$n.event, igrp, sum)
@@ -425,7 +425,7 @@ survmean2 <- function(x, scale, rmean) {
 
     outmat <- matrix(0., nrow=nstate*ngrp , ncol=2)
     outmat[,1] <- rep(x$n, nstate)
-    outmat[1:length(nevent), 2] <- c(nevent)
+    outmat[seq_along(nevent), 2] <- c(nevent)
   
     if (ngrp >1) 
         rowname <- c(outer(rname, x$states, paste, sep=", "))
@@ -439,7 +439,7 @@ survmean2 <- function(x, scale, rmean) {
     
         meantime <- matrix(0., ngrp, nstate)
         p0 <- matrix(x$p0, nrow=ngrp)  #in case there is only one row
-        for (i in 1:ngrp) {
+        for (i in seq_len(ngrp)) {
             if (is.matrix(x$prev))
                 temp <- rbind(p0[i,], x$prev[igrp==i,, drop=FALSE])
             else temp <- matrix(c(p0[i,], x$prev[igrp==i]), ncol=1)
@@ -449,7 +449,7 @@ survmean2 <- function(x, scale, rmean) {
 
             # Now cut it off at maxtime
             delta <- diff(c(tt[tt<maxtime[i]], maxtime[i]))
-            if (length(delta) > nrow(temp)) delta <- delta[1:nrow(temp)]
+            if (length(delta) > nrow(temp)) delta <- delta[seq_len(nrow(temp))]
             if (length(delta) < nrow(temp))
                 delta <- c(delta, rep(0, nrow(temp) - length(delta)))
             meantime[i,] <- colSums(delta*temp)
@@ -470,7 +470,7 @@ survmean2 <- function(x, scale, rmean) {
     nmatch <- function(indx, target) { 
         # This function lets R worry about character, negative, or logical subscripts
         #  It always returns a set of positive integer indices
-        temp <- 1:length(target)
+        temp <- seq_along(target)
         names(temp) <- target
         temp[indx]
     }
@@ -488,7 +488,7 @@ survmean2 <- function(x, scale, rmean) {
         }
     }
     if (is.null(i)) {
-        i2 <- 1:n
+        i2 <- seq_len(n)
         if (is.null(strata)) i <- 1
         else i <- seq(along=strata)
     }
@@ -501,7 +501,7 @@ survmean2 <- function(x, scale, rmean) {
         # Now, i may not be in order: a user has curve[3:2] to reorder 
         #  a plot.  Hence the "unlist(lapply(" construct which will reorder
         #  the data in the curves
-        temp <- rep(1:length(x$strata), x$strata)
+        temp <- rep(seq_along(x$strata), x$strata)
         keep <- unlist(lapply(i, function(x) which(temp==x)))
 
         if (length(i) <=1 && drop) x$strata <- NULL
@@ -512,7 +512,7 @@ survmean2 <- function(x, scale, rmean) {
     if (!is.null(j)) {
         indx <- nmatch(j, x$states)
         if (any(is.na(indx)))
-            stop(gettextf("subscript is out of bounds %s", j[is.na(indx)]))
+            stop("subscript is out of bounds")
         else j <- as.vector(indx)
     }
 

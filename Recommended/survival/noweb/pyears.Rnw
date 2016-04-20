@@ -88,7 +88,7 @@ else {
     }
 
 n <- nrow(Y)
-if (is.null(n) || n==0) stop("Data set has 0 observations")
+if (is.null(n) || n==0) stop("data set has 0 observations")
 
 weights <- model.extract(m, 'weights')
 if (is.null(weights)) weights <- rep(1.0, n)

@@ -7,21 +7,21 @@ survSplit <- function(formula, data, subset, na.action=na.pass,
         # an old style call
         # match arguments and build a formula
         if (is.data.frame(formula)) data <- formula
-        else if (missing(data)) stop("a data frame is required")
+        else if (missing(data)) stop(gettextf("'%s' argument is required", "data"))
 
         if (missing(end) || missing(event))
-            stop("either a formula or the end and event arguments are required")
+            stop(gettextf("'%s' or '%s' and '%s arguments are required", "formula", "end", "event"))
 
         if (!(is.character(event) && length(event) ==1 &&
               event %in% names(data)))
-            stop("'event' must be a variable name in the data set")
+            stop(gettextf("'%s' argument must be a variable name in the data set", "event"))
 
         if (!(is.character(end) && length(end) ==1 &&
               end %in% names(data)))
-            stop("'end' must be a variable name in the data set")
+            stop(gettextf("'%s' argument must be a variable name in the data set", "end"))
     
         if (!(is.character(start) && length(start)==1))
-            stop("'start' must be a variable name")
+            stop(gettextf("'%s' argument must be a variable name", "start"))
         if (start %in% names(data)) temp <- paste(start, end, event, sep=',')
         else temp <- paste(end, event, sep=',')
         
@@ -29,7 +29,7 @@ survSplit <- function(formula, data, subset, na.action=na.pass,
     }
 
     else if (missing(formula)) 
-        stop("either a formula or the end and event arguments are required")
+        stop(gettextf("'%s' or '%s' and '%s arguments are required", "formula", "end", "event"))
 
     # create a call to model.frame() that contains the formula (required)
     #  and any other of the relevant optional arguments
@@ -43,7 +43,7 @@ survSplit <- function(formula, data, subset, na.action=na.pass,
     mf <- eval.parent(temp)      
 
     Y <- model.response(mf)
-    if (!is.Surv(Y)) stop ("the model must have a Surv object as the response")
+    if (!is.Surv(Y)) stop ("the model must have an object of class \"Surv\" as the response")
     if (!(attr(Y, "type") %in% c("right", "mright", "counting", "mcounting")))
         stop(gettextf("not valid for %s censored survival data", attr(Y, "type")))
     nY <- ncol(Y)
@@ -51,13 +51,13 @@ survSplit <- function(formula, data, subset, na.action=na.pass,
     if (any(Y[,1] >= Y[,2]))    stop("start time must be < stop time")
         
     if (!is.numeric(cut) || any(!is.finite(cut)))
-        stop("cut must be a vector of finite numbers")
+        stop("'cut' argument must be a vector of finite numbers")
     cut <- sort(cut)
     ntimes <- length(cut)
     n <- nrow(data)
 
     if (!missing(id)) {
-        if (!is.character(id)) stop("id must be a variable name")
+        if (!is.character(id)) stop(gettextf("'%s' argument must be a variable name", "id"))
         if (id %in% names(mf)) stop("the suggested id name is already present")
         id <- make.names(id)
         if (id %in% names(mf)) stop("the suggested id name is already present")
@@ -103,7 +103,7 @@ survSplit <- function(formula, data, subset, na.action=na.pass,
     }
     else {
         if (class(formula[[2]]) != "name")
-            stop("left hand side not recognized")
+            stop("left hand side was not recognized")
         temp <- as.character(formula[[2]])
         newdata[temp] <- Surv(index$start, index$end, status)
     }

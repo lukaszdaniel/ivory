@@ -135,7 +135,7 @@ model.frame.coxph <- function(formula, ...) {
                       for (i in seq_len(ntrans)) temp[[i]] <- tt[[1]]
                       tt <- temp
                   }
-                  else stop("Wrong length for 'tt' argument")
+                  else stop(gettextf("wrong length for '%s' argument", "tt"))
               }
           }
           else stop(gettextf("'%s' argument must contain a function or list of functions", "tt"))

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cluster 1.14.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2015-07-29 22:14\n"
+"POT-Creation-Date: 2016-04-20 21:44\n"
 "PO-Revision-Date: 2015-07-30 09:44+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -375,6 +375,14 @@ msgstr "Dendrogram %s"
 #: R/daisy.q:0
 msgid "Dissimilarities:"
 msgstr "Odmienności:"
+
+#. R/clara.q: warning("Distance computations with NAs: using correct instead of pre-2016 wrong formula. Use  'correct.d=FALSE'  to get previous results or set 'correct.d=TRUE' explicitly to suppress this warning.")
+#: R/clara.q:0
+msgid ""
+"Distance computations with NAs: using correct instead of pre-2016 wrong "
+"formula. Use  'correct.d=FALSE'  to get previous results or set 'correct."
+"d=TRUE' explicitly to suppress this warning."
+msgstr ""
 
 #. R/plotpart.q: stop("Distances must be result of dist or a square matrix.")
 #: R/plotpart.q:0
@@ -821,6 +829,11 @@ msgstr ""
 #: R/daisy.q:0
 msgid "invalid %s; must be named list"
 msgstr "Niepoprawne %s; musi być nazwaną listą"
+
+#. R/clara.q: stop("invalid 'correct.d' value")
+#: R/clara.q:0
+msgid "invalid 'correct.d' value"
+msgstr ""
 
 #. R/clara.q: gettextf("invalid 'jstop' from .C(cl_clara,.): %s", res$jstop)
 #: R/clara.q:0

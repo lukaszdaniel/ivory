@@ -48,7 +48,7 @@ addterm <- function(oldform, new) {
 }
 newterm <- list()
 
-if (missing(subcoh)) stop("the subcoh argument is required")
+if (missing(subcoh)) stop(gettextf("'%s' argument is required", "subcoh"))
 else {
     if (is.call(Call$subcoh) && Call$subcoh[[1]] == as.name("~")) 
         newterm$subcoh <- Call$subcoh[[2]]
@@ -72,7 +72,7 @@ for (i in newterm) newform <- addterm(newform, newterm)
 # The next few lines are standard and almost identical to coxph
 indx <- match(c("formula", "data", "weights", "subset", "na.action"),
               names(Call), nomatch=0) 
-if (indx[1] ==0) stop("A formula argument is required")
+if (indx[1] ==0) stop(gettextf("'%s' argument is required", "formula"))
 temp <- Call[c(1,indx)]  # only keep the arguments we wanted
 temp[[1]] <-  quote(stats::model.frame)  # change the function called
     
@@ -92,7 +92,7 @@ names(extras) <- names(newterm)
 tdrop <- extras
 if (!is.null(attr(Terms, "specials")$id)) {
     if (!is.null(newterm$id)) 
-        stop("cannot have both an id argument and a cluster term in the formula")
+        stop("cannot have both an 'id' argument and a 'cluster' term in the formula")
     temp <- untangle.specials(Terms, "cluster")
     id <- m[[temp$vars]]
     tdrop <- c(tdrop, temp$terms)  #to be dropped later
@@ -101,7 +101,7 @@ else id <- mf[[extras["id"]]]  #will usually be NULL
 
 if (!is.null(attr(Terms, "specials")$strata)) {
     if (!is.null(newterms$stratum))
-        stop("cannot have both a stratum argument and a strata term in the formula")
+        stop("cannot have both a 'stratum' argument and a 'strata' term in the formula")
     temp <- untangle.specials(Terms, "strata")
     if (length(temp$vars)==1) strata <- m[[stemp$vars]]
     else strata <- strata(m[, temp$vars], shortlabel=TRUE)
@@ -119,7 +119,7 @@ Now do a few checks on the retrieved variables
 n <- nrow(mf)  #number of observations
 if (is.logical(subcoh)) subcoh <- as.numeric(subcoh)
 if (!all(subcoh %in% 0:1))
-    stop("subcoh values must be 0/1 or FALSE/TRUE")
+    stop("'subcoh' argument must be 0/1 or FALSE/TRUE")
 if (n > sum(cohort.size))
     stop("number of records is greater than the cohort size")
 
@@ -130,12 +130,12 @@ if (!is.null(strata)) {
         stop("invalid method for stratified data")
     strata <- as.factor(strata)
     if (length(cohort.size)!=length(levels(strata)))
-            stop("cohort.size and stratum do not match")
+            stop("'cohort.size' and 'stratum' arguments do not match")
     subcohort.sizes <- table(strata)
 }
 else {
     if (length(cohort.size)!=1)
-            stop("cohort size must be a scalar for unstratified analysis")
+            stop("'cohort' size must be a scalar for unstratified analysis")
     subcohort.sizes <- n
 }
 if (robust && method != "LinYing") 

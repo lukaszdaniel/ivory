@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: cluster 2.0.3\n"
-"POT-Creation-Date: 2015-07-29 22:14\n"
+"Project-Id-Version: cluster 2.0.4\n"
+"POT-Creation-Date: 2016-04-20 21:44\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -494,6 +494,13 @@ msgstr ""
 #. R/daisy.q: gettext("Dissimilarities:", domain = "R-cluster")
 
 msgid "Dissimilarities:"
+msgstr ""
+
+
+#: R/clara.q: 0
+#. R/clara.q: warning("Distance computations with NAs: using correct instead of pre-2016 wrong formula. Use  'correct.d=FALSE'  to get previous results or set 'correct.d=TRUE' explicitly to suppress this warning.")
+
+msgid "Distance computations with NAs: using correct instead of pre-2016 wrong formula. Use  'correct.d=FALSE'  to get previous results or set 'correct.d=TRUE' explicitly to suppress this warning."
 msgstr ""
 
 
@@ -1065,6 +1072,13 @@ msgstr ""
 #. R/daisy.q: gettextf("invalid %s; must be named list", sQuote("type"))
 
 msgid "invalid %s; must be named list"
+msgstr ""
+
+
+#: R/clara.q: 0
+#. R/clara.q: stop("invalid 'correct.d' value")
+
+msgid "invalid 'correct.d' value"
 msgstr ""
 
 

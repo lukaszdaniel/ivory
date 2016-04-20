@@ -4,7 +4,7 @@ finegray <- function(formula, data, subset, na.action= na.pass,
     Call <- match.call()
     indx <- match(c("formula", "data", "subset", "id"),
               names(Call), nomatch=0) 
-    if (indx[1] ==0) stop("A formula argument is required")
+    if (indx[1] ==0) stop(gettextf("'%s' argument is required", "formula"))
     temp <- Call[c(1,indx)]  # only keep the arguments we wanted
     temp$na.action <- na.action
     temp[[1L]] <- quote(stats::model.frame)  # change the function called
@@ -40,7 +40,7 @@ finegray <- function(formula, data, subset, na.action= na.pass,
 
     cluster<- attr(Terms, "specials")$cluster
     if (length(cluster)) {
-        if (!is.null(id)) stop("an id argument and a cluster() term are redundant")
+        if (!is.null(id)) stop("'id' argument and a 'cluster()' term are redundant")
         tempc <- untangle.specials(Terms, 'cluster', 1)
         id <- strata(mf[,tempc$vars], shortlabel=TRUE)  #allow multiples
         mf[tempc$vars] <- NULL
@@ -77,7 +77,7 @@ finegray <- function(formula, data, subset, na.action= na.pass,
     else {
         index <- match(etype, states)
         if (any(is.na(index)))
-            stop("etype argument has a state that is not in the data")
+            stop("'etype' argument has a state that is not in the data")
         enum <- index[1]
         if (length(index) > 1) warning("only the first endpoint was used")
     }
@@ -183,7 +183,7 @@ finegray <- function(formula, data, subset, na.action= na.pass,
 
     if (max(istrat) ==1) result <- stratfun(1)
     else {
-        tlist <- lapply(1:max(istrat), stratfun)
+        tlist <- lapply(seq_len(max(istrat)), stratfun)
         result <- do.call("rbind", tlist)
     }
 

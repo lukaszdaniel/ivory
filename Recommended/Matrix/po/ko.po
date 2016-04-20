@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Matrix 1.1-3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-03 20:43+0100\n"
+"POT-Creation-Date: 2016-04-20 21:44+0200\n"
 "PO-Revision-Date: 2015-03-29 18:45-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -395,12 +395,12 @@ msgstr "데이터의 길이(data length)가 행렬의 크기(size of matrix)를 
 msgid "too many elements specified"
 msgstr ""
 
-#: Mutils.c:1128
+#: Mutils.c:1129
 #, c-format
 msgid "the number of columns differ in R_rbind2_vector: %d != %d"
 msgstr ""
 
-#: Mutils.c:1182 Mutils.c:1213 Mutils.c:1224 Mutils.c:1251
+#: Mutils.c:1183 Mutils.c:1214 Mutils.c:1225 Mutils.c:1252
 msgid "Argument must be numeric-like atomic vector"
 msgstr ""
 
@@ -712,25 +712,25 @@ msgstr "dgeMatrix_exp: 에러코드 %d가 dgetrf로부터 반환되었습니다.
 msgid "Lapack routine 'dtrcon' returned error code %d"
 msgstr "에러코드 %d가 Lapack 루틴 dtrcon으로부터 반환되었습니다."
 
-#: dense.c:278
+#: dense.c:281
 #, c-format
 msgid "Lower band %d is greater than upper band %d"
 msgstr ""
 
-#: dense.c:349
+#: dense.c:352
 msgid "ddense_to_symmetric(): matrix is not square!"
 msgstr "ddense_to_symmetric(): 정방행렬이 아닙니다!"
 
-#: dense.c:360
+#: dense.c:363
 #, c-format
 msgid "matrix is not symmetric [%d,%d]"
 msgstr "행렬이 대칭(symmetric)적이지 않습니다 [%d,%d]."
 
-#: dense.c:421
+#: dense.c:424
 msgid "matrix is not square! (symmetric part)"
 msgstr "정방행렬이 아닙니다! (symmetric part)"
 
-#: dense.c:479
+#: dense.c:482
 msgid "matrix is not square! (skew-symmetric part)"
 msgstr "정방행렬이 아닙니다! (skew-symmetric part)"
 
@@ -759,8 +759,8 @@ msgstr ""
 "니다."
 
 #: dgCMatrix.c:160 dgCMatrix.c:187 dgCMatrix.c:502 dgCMatrix.c:543
-#: dgeMatrix.c:593 dpoMatrix.c:96 dpoMatrix.c:121 dppMatrix.c:81
-#: dspMatrix.c:79 dsyMatrix.c:79 dtCMatrix.c:90 dtCMatrix.c:120 dtrMatrix.c:92
+#: dgeMatrix.c:593 dpoMatrix.c:96 dpoMatrix.c:121 dppMatrix.c:81 dspMatrix.c:79
+#: dsyMatrix.c:79 dtCMatrix.c:90 dtCMatrix.c:120 dtrMatrix.c:92
 msgid "Dimensions of system to be solved are inconsistent"
 msgstr ""
 

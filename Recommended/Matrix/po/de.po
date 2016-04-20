@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0 / matrix 1.1-2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-03 20:43+0100\n"
+"POT-Creation-Date: 2016-04-20 21:44+0200\n"
 "PO-Revision-Date: 2014-03-16 16:50+0100\n"
 "Last-Translator: Detlef Steuer <detlef.steuer@gmx.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -394,12 +394,12 @@ msgstr "Datenlänge überschreitet Größe der Matrix"
 msgid "too many elements specified"
 msgstr "zu viele Elemente angegeben"
 
-#: Mutils.c:1128
+#: Mutils.c:1129
 #, c-format
 msgid "the number of columns differ in R_rbind2_vector: %d != %d"
 msgstr ""
 
-#: Mutils.c:1182 Mutils.c:1213 Mutils.c:1224 Mutils.c:1251
+#: Mutils.c:1183 Mutils.c:1214 Mutils.c:1225 Mutils.c:1252
 msgid "Argument must be numeric-like atomic vector"
 msgstr "Argument muss zahl-ähnlich atomar sein"
 
@@ -720,25 +720,25 @@ msgstr "Zweiter Aufruf von dgeqrf gab Fehlerkode %d zurück"
 msgid "Lapack routine 'dtrcon' returned error code %d"
 msgstr "Lapack-Routine dtrcon gab Fehlerkode %d zurück"
 
-#: dense.c:278
+#: dense.c:281
 #, fuzzy, c-format
 msgid "Lower band %d is greater than upper band %d"
 msgstr "Unteres Band %d > oberes Band %d"
 
-#: dense.c:349
+#: dense.c:352
 msgid "ddense_to_symmetric(): matrix is not square!"
 msgstr "ddense_to_symmetric(): Matrix ist nicht quadratisch."
 
-#: dense.c:360
+#: dense.c:363
 #, c-format
 msgid "matrix is not symmetric [%d,%d]"
 msgstr "Matrix ist nicht symmetrisch [%d,%d]"
 
-#: dense.c:421
+#: dense.c:424
 msgid "matrix is not square! (symmetric part)"
 msgstr "Matrix ist nicht quadratisch. (symmetrischer Teil)"
 
-#: dense.c:479
+#: dense.c:482
 msgid "matrix is not square! (skew-symmetric part)"
 msgstr "Matrix ist nicht quadratisch. (schief-symmetrischer Teil)"
 
@@ -765,8 +765,8 @@ msgid "dgCMatrix_lusol requires a square, non-empty matrix"
 msgstr "dgCMatrix_lusol benötigt eine quadratische, nicht leere Matrix"
 
 #: dgCMatrix.c:160 dgCMatrix.c:187 dgCMatrix.c:502 dgCMatrix.c:543
-#: dgeMatrix.c:593 dpoMatrix.c:96 dpoMatrix.c:121 dppMatrix.c:81
-#: dspMatrix.c:79 dsyMatrix.c:79 dtCMatrix.c:90 dtCMatrix.c:120 dtrMatrix.c:92
+#: dgeMatrix.c:593 dpoMatrix.c:96 dpoMatrix.c:121 dppMatrix.c:81 dspMatrix.c:79
+#: dsyMatrix.c:79 dtCMatrix.c:90 dtCMatrix.c:120 dtrMatrix.c:92
 msgid "Dimensions of system to be solved are inconsistent"
 msgstr "Dimensionen des Systems, das gelöst werden soll, sind inkonsistent"
 

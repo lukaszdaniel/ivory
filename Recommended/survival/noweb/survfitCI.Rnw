@@ -90,7 +90,7 @@ survfitCI <- function(X, Y, weights, id, istate,
     else {
         if (!is.numeric(istate) || any(istate != floor(istate)) || 
              any(istate < 1))
-        stop("istate should be a vector of integers or a factor")
+        stop("'istate' argument should be a vector of integers or a factor")
         if (max(istate) > nstate) 
             state.names <- c(state.names, (1+nstate):max(istate))
         }
@@ -99,7 +99,7 @@ survfitCI <- function(X, Y, weights, id, istate,
     # these next two lines should be impossible, since istate came from 
     #   the data frame
     if (length(istate) ==1) istate <- rep(istate,n)
-    if (length(istate) !=n) stop ("wrong length for istate")
+    if (length(istate) !=n) stop(gettextf("wrong length for '%s' argument", "istate"))
 
     # The states of the status variable are the first columns in the output
     states <- unique(c(seq_len(nstate), istate))

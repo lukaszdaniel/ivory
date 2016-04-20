@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Matrix 1.2-4\n"
+"Project-Id-Version: Matrix 1.2-5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-17 14:04+0200\n"
+"POT-Creation-Date: 2016-04-20 21:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -379,12 +379,12 @@ msgstr ""
 msgid "too many elements specified"
 msgstr ""
 
-#: Mutils.c:1128
+#: Mutils.c:1129
 #, c-format
 msgid "the number of columns differ in R_rbind2_vector: %d != %d"
 msgstr ""
 
-#: Mutils.c:1182 Mutils.c:1213 Mutils.c:1224 Mutils.c:1251
+#: Mutils.c:1183 Mutils.c:1214 Mutils.c:1225 Mutils.c:1252
 msgid "Argument must be numeric-like atomic vector"
 msgstr ""
 
@@ -669,25 +669,25 @@ msgstr ""
 msgid "Lapack routine 'dtrcon' returned error code %d"
 msgstr ""
 
-#: dense.c:278
+#: dense.c:281
 #, c-format
 msgid "Lower band %d is greater than upper band %d"
 msgstr ""
 
-#: dense.c:349
+#: dense.c:352
 msgid "ddense_to_symmetric(): matrix is not square!"
 msgstr ""
 
-#: dense.c:360
+#: dense.c:363
 #, c-format
 msgid "matrix is not symmetric [%d,%d]"
 msgstr ""
 
-#: dense.c:421
+#: dense.c:424
 msgid "matrix is not square! (symmetric part)"
 msgstr ""
 
-#: dense.c:479
+#: dense.c:482
 msgid "matrix is not square! (skew-symmetric part)"
 msgstr ""
 

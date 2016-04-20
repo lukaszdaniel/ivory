@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Matrix 1.2-0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-03-03 20:43\n"
+"POT-Creation-Date: 2016-04-20 21:44\n"
 "PO-Revision-Date: 2015-04-20 17:49+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -30,13 +30,13 @@ msgstr "macierz %d x %d klasy \"%s\""
 msgid "%d x %d Matrix of class \"%s\" (unitriangular)"
 msgstr "macierz %d x %d klasy \"%s\" (unitriangularna)"
 
-#. R/diagMatrix.R: gettextf("%d x %d diagonal matrix of class %s", d[1], d[2], dQuote(cl), domain = "R-Matrix")
-#. R/diagMatrix.R: gettextf("%d x %d diagonal matrix of class %s", d[1], d[2], dQuote(class(object)),     domain = "R-Matrix")
+#. R/diagMatrix.R: gettextf("%d x %d diagonal matrix of class %s", d[1L], d[2L], dQuote(cl), domain = "R-Matrix")
+#. R/diagMatrix.R: gettextf("%d x %d diagonal matrix of class %s", d[1L], d[2L], dQuote(class(object)),     domain = "R-Matrix")
 #: R/diagMatrix.R:0
 msgid "%d x %d diagonal matrix of class %s"
 msgstr "macierz diagonalna %d x %d klasy %s"
 
-#. R/diagMatrix.R: gettextf("%d x %d diagonal matrix of class %s, with diagonal entries", d[1], d[2],     dQuote(cl), domain = "R-Matrix")
+#. R/diagMatrix.R: gettextf("%d x %d diagonal matrix of class %s, with diagonal entries", d[1L], d[2L],     dQuote(cl), domain = "R-Matrix")
 #: R/diagMatrix.R:0
 msgid "%d x %d diagonal matrix of class %s, with diagonal entries"
 msgstr "macierz diagonalna %d x %d klasy %s, z diagonalnymi wpisami"

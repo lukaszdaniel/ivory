@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: cluster 1.15.2\n"
-"POT-Creation-Date: 2015-07-29 22:14\n"
+"POT-Creation-Date: 2016-04-20 21:44\n"
 "PO-Revision-Date: 2015-02-06 21:56-0600\n"
 "Last-Translator:Chel Hee Lee  <chl948@mail.usask.ca>\n"
 "Language-Team: Chel Hee Lee  <chl948@mail.usask.ca>\n"
@@ -403,6 +403,14 @@ msgstr ""
 #. R/daisy.q: gettext("Dissimilarities:", domain = "R-cluster")
 #: R/daisy.q:0
 msgid "Dissimilarities:"
+msgstr ""
+
+#. R/clara.q: warning("Distance computations with NAs: using correct instead of pre-2016 wrong formula. Use  'correct.d=FALSE'  to get previous results or set 'correct.d=TRUE' explicitly to suppress this warning.")
+#: R/clara.q:0
+msgid ""
+"Distance computations with NAs: using correct instead of pre-2016 wrong "
+"formula. Use  'correct.d=FALSE'  to get previous results or set 'correct."
+"d=TRUE' explicitly to suppress this warning."
 msgstr ""
 
 #. R/plotpart.q: stop("Distances must be result of dist or a square matrix.")
@@ -871,6 +879,11 @@ msgid "invalid %s; must be named list"
 msgstr ""
 "사용할 수 있는 %s가 아닙니다.  반드시 구성요소에 이름이 부여된 리스트(named "
 "list)이여야 합니다."
+
+#. R/clara.q: stop("invalid 'correct.d' value")
+#: R/clara.q:0
+msgid "invalid 'correct.d' value"
+msgstr ""
 
 #. R/clara.q: gettextf("invalid 'jstop' from .C(cl_clara,.): %s", res$jstop)
 #: R/clara.q:0
