@@ -92,7 +92,7 @@ names(extras) <- names(newterm)
 tdrop <- extras
 if (!is.null(attr(Terms, "specials")$id)) {
     if (!is.null(newterm$id)) 
-        stop("cannot have both an 'id' argument and a 'cluster' term in the formula")
+        stop(gettextf("cannot have both an '%s' argument and a '%s' term in the formula", "id", "cluster"))
     temp <- untangle.specials(Terms, "cluster")
     id <- m[[temp$vars]]
     tdrop <- c(tdrop, temp$terms)  #to be dropped later
@@ -101,7 +101,7 @@ else id <- mf[[extras["id"]]]  #will usually be NULL
 
 if (!is.null(attr(Terms, "specials")$strata)) {
     if (!is.null(newterms$stratum))
-        stop("cannot have both a 'stratum' argument and a 'strata' term in the formula")
+        stop(gettextf("cannot have both an '%s' argument and a '%s' term in the formula", "stratum", "strata"))
     temp <- untangle.specials(Terms, "strata")
     if (length(temp$vars)==1) strata <- m[[stemp$vars]]
     else strata <- strata(m[, temp$vars], shortlabel=TRUE)
@@ -152,7 +152,7 @@ is not.
 <<cch-setup-data>>=
 Y <-  model.extract(m, "response")
 if(!inherits(Y, "Surv"))
-    stop("Response must be a survival object")
+    stop(gettextf("'%s' argument is not an object of class %s", "formula", dQuote("Surv")))
 ytype <- attr(Y, "type")
 if (!ytype %in% c("right", "counting"))
     stop(gettextf("Cox model doesn't support \"%s\" survival data", type))
@@ -175,7 +175,7 @@ if (any (!subcoh & cens==0))
 
                  Y[,3])
     if (any(!subcoh & !cens))
-        stop(gettextf("%d censored observations not in subcohort", sum(!subcoh & !cens)))
+        stop(sprintf(ngettext(sum(!subcoh & !cens), "%d censored observation not in subcohort", "%d censored observations not in subcohort", domain = "R-survival"), sum(!subcoh & !cens)), domain = NA)
     cc<-cens+1-subcoh
     texit<-switch(itype+1, stop(), Y[,1], Y[,2])
     tenter<-switch(itype+1, stop(), rep(0,length(texit)), Y[,1])
@@ -303,7 +303,7 @@ LinYing <- function(tenter, texit, cc,  id, X, ntot,robust){
 I.Borgan <- function(tenter, texit, cc,  id, X, stratum, stratum.sizes){
   eps <- 0.00000001
   nobs <- length(texit)
-  idx <- 1:length(nobs)
+  idx <- seq_along(nobs)
   jj <- max(stratum)
   nn <- stratum.sizes  ## Cohort stratum sizes
   n <- table(stratum)  ## Sample stratum sizes
@@ -345,7 +345,7 @@ I.Borgan <- function(tenter, texit, cc,  id, X, stratum, stratum.sizes){
   score <- score-tscore[pscore]
   delta <- matrix(0,kk,kk)
   opt <- NULL
-  for (j in 1:jj) {
+  for (j in seq_len(jj)) {
     temp <- t(score[st==j,])%*%score[st==j,]/(m[j]-1)
     delta <- matrix(delta+(wt[j]-1)*nn[j]*temp,kk,kk)
     if(is.null(opt)) 
@@ -397,7 +397,7 @@ II.Borgan <- function(tenter, texit, cc,  id, X, stratum, stratum.sizes){
   score <- score-tscore[pscore] ## Subtract off within stratum score means
   delta <- matrix(0,kk,kk)
   opt <- NULL
-  for (j in 1:jj) {
+  for (j in seq_len(jj)) {
     temp <- t(score[st==j,])%*%score[st==j,]/(m0[j]-1) ## Borgan equation (19)
     delta <- delta+(wt[j]-1)*nn0[j]*temp ## Borgan equation (17)
     if(is.null(opt)) 

@@ -197,7 +197,7 @@ while(file.exists(paste('rates/us', i, '.dat', sep=''))) i <- i+1
 singleyear <- 1996:(i-1)   #the data we have
 nsingle <- length(singleyear)
 temp <- array(0, dim=c(113, 2, 3, nsingle)) #age, sex, race, year
-for (i in 1:nsingle) {
+for (i in seq_len(nsingle)) {
     tdata <- read.table(paste("rates/us", singleyear[i], ".dat", sep=''),
                                  header=TRUE)
     temp[4:103,,,i] <- -log(1- c(as.matrix(tdata[,-1]))/100000)
@@ -216,7 +216,7 @@ iyears <- unique(infant$year)
 deaths <- array(as.matrix(infant[,3:8]), dim=c(4, length(iyears), 2,3),
             dimnames=list(c('0', '1-6','7-27', '28-365'), iyears,
                           c("Male", "Female"), c("total", "white", "black")))
-for (i in 1:length(iyears)) {
+for (i in seq_along(iyears)) {
     for (j in 1:2) {
         for (k in 1:3) {
             deaths[,i,j,k] <- deaths[,i,j,k]/sum(deaths[,i,j,k])
@@ -228,7 +228,7 @@ for (i in 1:length(iyears)) {
 usy <- array(0., dim=c(113, 2,3, nsingle))
 indx <- match(singleyear, iyears)
 indx[singleyear < min(iyears)] <- 1
-for (i in 1:nsingle) {
+for (i in seq_len(nsingle)) {
     for (j in 1:2) {
         for (k in 1:3) {
             usy[1:4,j,k,i] <- temp[4,j,k,i] * 
@@ -270,7 +270,7 @@ years, along with 2006.
 <<survexp.us, plot=FALSE>>=
 for (i in 1:2) {
     for (j in 1:3) {
-        for (k in 1:nsingle) {
+        for (k in seq_len(nsingle)) {
             loghaz <- log(usy[4+ 80:99, i, j, k])
             tfit <- smooth.spline(80:99, loghaz, df=8)
             usy[4+ 100:109, i, j, k] <- exp(predict(tfit, 100:109)$y)
@@ -305,7 +305,7 @@ years <- seq(1940, max(singleyear))
 survexp.us <- array(0., dim=c(113, 2, length(years)))
 single2 <- singleyear[singleyear > 2000]
 xtemp <- c(1940, 1950, 1960, 1970, 1980, 1990, 2000, single2)
-for (i in 1:nrow(usd)) { 
+for (i in seq_len(nrow(usd))) { 
     for (j in 1:2) {  #so what if loops are slow, we only do this once
         ytemp <- c(usd[i,j,], usy[i,j,1, match(single2, singleyear)])
         survexp.us[i,j,] <- approx(xtemp, ytemp, xout=years)$y

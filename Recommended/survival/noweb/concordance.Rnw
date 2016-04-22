@@ -105,7 +105,7 @@ some care to make sure the result is an integer.
 <<btree>>=
 btree <- function(n) {
     ranks <- rep(0L, n)  #will be overwritten
-    yet.to.do <- 1:n
+    yet.to.do <- seq_len(n)
     depth <- floor(logb(n,2))
     start <- as.integer(2^depth)
     lastrow.length <- 1+n-start
@@ -650,7 +650,7 @@ survConcordance <- function(formula, data,
 
 print.survConcordance <- function(x, ...) {
     if(!is.null(cl <- x$call)) {
-        cat("Call:\n")
+        cat(gettext("Call:", domain = "R-survival"), "\n", sep = "")
         dput(cl)
         cat("\n")
         }
@@ -658,7 +658,7 @@ print.survConcordance <- function(x, ...) {
     if(length(omit))
         cat("  n=", x$n, " (", naprint(omit), ")\n", sep = "")
     else cat("  n=", x$n, "\n")
-    cat("Concordance= ", format(x$concordance), " se= ", format(x$std.err),
+    cat(gettextf("Concordance= %s se= %s", format(x$concordance), format(x$std.err), domain = "R-survival"),
         '\n', sep='')
     print(x$stats)
 
