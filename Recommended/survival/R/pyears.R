@@ -20,7 +20,7 @@ pyears <- function(formula, data,
     if (length(rate) >0 || !missing(rmap) || !missing(ratetable)) {
         has.ratetable <- TRUE
         if(length(rate) > 1)
-            stop("Can have only 1 ratetable() call in a formula")
+            stop("Can have only 1 'ratetable()' call in a formula")
         if (missing(ratetable)) stop("No rate table specified")
 
         if(length(rate) == 1) {
@@ -88,7 +88,7 @@ pyears <- function(formula, data,
             if (any(Y[,1] <0)) stop("Negative survival time")
             nzero <- sum(Y[,1]==0 & Y[,2] ==1)
             if (nzero >0) 
-                warning(gettextf("%d observations with an event and 0 follow-up time, any rate calculations are statistically questionable", nzero))
+                warning(sprintf(ngettext(nzero, "%d observation with an event and 0 follow-up time, any rate calculations are statistically questionable","%d observations with an event and 0 follow-up time, any rate calculations are statistically questionable", domain = "R-survival"), nzero), domain = NA)
             }
         else if (stype != 'counting')
             stop("Only right-censored and counting process survival types are supported")
@@ -135,7 +135,7 @@ pyears <- function(formula, data,
         X <- matrix(0, n, odim)
         outdname <- vector("list", odim)
         names(outdname) <- attr(Terms, 'term.labels')
-        for (i in 1:odim) {
+        for (i in seq_len(odim)) {
             temp <- m[[ovars[i]]]
             if (inherits(temp, 'tcut')) {
                 X[,i] <- temp
@@ -208,7 +208,7 @@ pyears <- function(formula, data,
                 temp <-  which(us.special)
                 nyear <- length(cuts[[temp]])
                 nint <- rfac[temp]       #intervals to interpolate over
-                cuts[[temp]] <- round(approx(nint*(1:nyear), cuts[[temp]],
+                cuts[[temp]] <- round(approx(nint*(seq_len(nyear)), cuts[[temp]],
                                         nint:(nint*nyear))$y - .0001)
                 }
             }
@@ -273,7 +273,7 @@ pyears <- function(formula, data,
                              pyears= temp$pyears[keep]/scale,
                              n = temp$pn[keep])
             }
-        row.names(df) <- 1:nrow(df)
+        row.names(df) <- seq_len(nrow(df))
         if (has.ratetable) df$expected <- temp$pexpect[keep]
         if (expect=='pyears') df$expected <- df$expected/scale
         if (docount) df$event <- temp$pcount[keep]

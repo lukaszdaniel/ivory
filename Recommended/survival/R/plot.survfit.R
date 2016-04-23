@@ -76,7 +76,7 @@ plot.survfit<- function(x, conf.int,  mark.time=FALSE,
     }
     else {
         nstrat <- length(x$strata)
-        stemp <- rep(1:nstrat, x$strata) # same length as stime
+        stemp <- rep(seq_len(nstrat), x$strata) # same length as stime
     }
     ncurve <- nstrat * ncol(ssurv)
     firsty <- matrix(firsty, nrow=nstrat, ncol=ncol(ssurv))
@@ -87,22 +87,22 @@ plot.survfit<- function(x, conf.int,  mark.time=FALSE,
         keepx <- keepy <- NULL  # lines to keep
         tempn <- table(stemp)
         offset <- cumsum(c(0, tempn))
-        for (i in 1:nstrat) {
+        for (i in seq_len(nstrat)) {
             ttime <-stime[stemp==i]
             if (all(ttime <= xmax)) {
-                keepx <- c(keepx, 1:tempn[i] + offset[i])
-                keepy <- c(keepy, 1:tempn[i] + offset[i])
+                keepx <- c(keepx, seq_len(tempn[i]) + offset[i])
+                keepy <- c(keepy, seq_len(tempn[i]) + offset[i])
             }
             else {
-                bad <- min((1:tempn[i])[ttime>xmax])
+                bad <- min(seq_len(tempn[i])[ttime>xmax])
                 if (bad==1)  {  #lost them all
                     if (!is.na(firstx)) { # and we are plotting lines
                         keepy <- c(keepy, 1+offset[i])
                         ssurv[1+offset[i],] <- firsty[i,]
                     }
                     } 
-                else  keepy<- c(keepy, c(1:(bad-1), bad-1) + offset[i])
-                keepx <- c(keepx, (1:bad)+offset[i])
+                else  keepy<- c(keepy, c(seq_len(bad-1), bad-1) + offset[i])
+                keepx <- c(keepx, seq_len(bad)+offset[i])
                 stime[bad+offset[i]] <- xmax
                 x$n.event[bad+offset[i]] <- 1   #don't plot a tick mark
             }
@@ -135,7 +135,7 @@ plot.survfit<- function(x, conf.int,  mark.time=FALSE,
                            )
         }
         else if (is.function(fun)) tfun <- fun
-        else stop("Invalid 'fun' argument")
+        else stop(gettextf("invalid '%s' argument", "fun"))
         
         ssurv <- tfun(ssurv )
         if (!is.null(supper)) {
@@ -165,7 +165,7 @@ plot.survfit<- function(x, conf.int,  mark.time=FALSE,
     if (is.logical(conf.int)) plot.surv <- TRUE
     else {
         temp <- match.arg(conf.int, c("both", "only", "none"))
-        if (is.na(temp)) stop("invalid value for 'conf.int' argument")
+        if (is.na(temp)) stop(gettextf("invalid '%s' argument", "conf.int"))
         if (temp=="none") conf.int <- FALSE  else conf.int <- TRUE
         if (temp=="only") plot.surv <- FALSE  else plot.surv <- TRUE
     }
@@ -301,11 +301,11 @@ plot.survfit<- function(x, conf.int,  mark.time=FALSE,
     c2 <- 1  # keeps track of the lty, col, etc
     xend <- yend <- double(ncurve)
     if (length(conf.offset) ==1) 
-        temp.offset <- (1:ncurve - (ncurve-1)/2)* conf.offset* diff(par("usr")[1:2])
+        temp.offset <- (seq_len(ncurve) - (ncurve-1)/2)* conf.offset* diff(par("usr")[1:2])
     else temp.offset <- rep(conf.offset, length=ncurve) *  diff(par("usr")[1:2])
     temp.cap    <-  conf.cap    * diff(par("usr")[1:2])
 
-    for (j in 1:ncol(ssurv)) {
+    for (j in seq_len(ncol(ssurv))) {
         for (i in unique(stemp)) {  #for each strata
             who <- which(stemp==i)
             censor <- if (is.null(x$n.censor))
@@ -415,7 +415,7 @@ lines.survfit <- function(x, type='s',
     }
     else {
         nstrat <- length(x$strata)
-        stemp <- rep(1:nstrat, x$strata) # same length as stime
+        stemp <- rep(seq_len(nstrat), x$strata) # same length as stime
     }
     ncurve <- nstrat * ncol(ssurv)
     firsty <- matrix(firsty, nrow=nstrat, ncol=ncol(ssurv))
@@ -426,22 +426,22 @@ lines.survfit <- function(x, type='s',
         keepx <- keepy <- NULL  # lines to keep
         tempn <- table(stemp)
         offset <- cumsum(c(0, tempn))
-        for (i in 1:nstrat) {
+        for (i in seq_len(nstrat)) {
             ttime <-stime[stemp==i]
             if (all(ttime <= xmax)) {
-                keepx <- c(keepx, 1:tempn[i] + offset[i])
-                keepy <- c(keepy, 1:tempn[i] + offset[i])
+                keepx <- c(keepx, seq_len(tempn[i]) + offset[i])
+                keepy <- c(keepy, seq_len(tempn[i]) + offset[i])
             }
             else {
-                bad <- min((1:tempn[i])[ttime>xmax])
+                bad <- min(seq_len(tempn[i])[ttime>xmax])
                 if (bad==1)  {  #lost them all
                     if (!is.na(firstx)) { # and we are plotting lines
                         keepy <- c(keepy, 1+offset[i])
                         ssurv[1+offset[i],] <- firsty[i,]
                     }
                     } 
-                else  keepy<- c(keepy, c(1:(bad-1), bad-1) + offset[i])
-                keepx <- c(keepx, (1:bad)+offset[i])
+                else  keepy<- c(keepy, c(seq_len(bad-1), bad-1) + offset[i])
+                keepx <- c(keepx, seq_len(bad)+offset[i])
                 stime[bad+offset[i]] <- xmax
                 x$n.event[bad+offset[i]] <- 1   #don't plot a tick mark
             }
@@ -474,7 +474,7 @@ lines.survfit <- function(x, type='s',
                            )
         }
         else if (is.function(fun)) tfun <- fun
-        else stop("Invalid 'fun' argument")
+        else stop(gettextf("invalid '%s' argument", "fun"))
         
         ssurv <- tfun(ssurv )
         if (!is.null(supper)) {
@@ -504,7 +504,7 @@ lines.survfit <- function(x, type='s',
     if (is.logical(conf.int)) plot.surv <- TRUE
     else {
         temp <- match.arg(conf.int, c("both", "only", "none"))
-        if (is.na(temp)) stop("invalid value for 'conf.int' argument")
+        if (is.na(temp)) stop(gettextf("invalid '%s' argument", "conf.int"))
         if (temp=="none") conf.int <- FALSE  else conf.int <- TRUE
         if (temp=="only") plot.surv <- FALSE  else plot.surv <- TRUE
     }
@@ -589,11 +589,11 @@ lines.survfit <- function(x, type='s',
     c2 <- 1  # keeps track of the lty, col, etc
     xend <- yend <- double(ncurve)
     if (length(conf.offset) ==1) 
-        temp.offset <- (1:ncurve - (ncurve-1)/2)* conf.offset* diff(par("usr")[1:2])
+        temp.offset <- (seq_len(ncurve) - (ncurve-1)/2)* conf.offset* diff(par("usr")[1:2])
     else temp.offset <- rep(conf.offset, length=ncurve) *  diff(par("usr")[1:2])
     temp.cap    <-  conf.cap    * diff(par("usr")[1:2])
 
-    for (j in 1:ncol(ssurv)) {
+    for (j in seq_len(ncol(ssurv))) {
         for (i in unique(stemp)) {  #for each strata
             who <- which(stemp==i)
             censor <- if (is.null(x$n.censor))
@@ -696,7 +696,7 @@ points.survfit <- function(x, xscale=1,
     }
     else {
         nstrat <- length(x$strata)
-        stemp <- rep(1:nstrat, x$strata) # same length as stime
+        stemp <- rep(seq_len(nstrat), x$strata) # same length as stime
     }
     ncurve <- nstrat * ncol(ssurv)
     firsty <- matrix(firsty, nrow=nstrat, ncol=ncol(ssurv))
@@ -707,22 +707,22 @@ points.survfit <- function(x, xscale=1,
         keepx <- keepy <- NULL  # lines to keep
         tempn <- table(stemp)
         offset <- cumsum(c(0, tempn))
-        for (i in 1:nstrat) {
+        for (i in seq_len(nstrat)) {
             ttime <-stime[stemp==i]
             if (all(ttime <= xmax)) {
-                keepx <- c(keepx, 1:tempn[i] + offset[i])
-                keepy <- c(keepy, 1:tempn[i] + offset[i])
+                keepx <- c(keepx, seq_len(tempn[i]) + offset[i])
+                keepy <- c(keepy, seq_len(tempn[i]) + offset[i])
             }
             else {
-                bad <- min((1:tempn[i])[ttime>xmax])
+                bad <- min(seq_len(tempn[i])[ttime>xmax])
                 if (bad==1)  {  #lost them all
                     if (!is.na(firstx)) { # and we are plotting lines
                         keepy <- c(keepy, 1+offset[i])
                         ssurv[1+offset[i],] <- firsty[i,]
                     }
                     } 
-                else  keepy<- c(keepy, c(1:(bad-1), bad-1) + offset[i])
-                keepx <- c(keepx, (1:bad)+offset[i])
+                else  keepy<- c(keepy, c(seq_len(bad-1), bad-1) + offset[i])
+                keepx <- c(keepx, seq_len(bad)+offset[i])
                 stime[bad+offset[i]] <- xmax
                 x$n.event[bad+offset[i]] <- 1   #don't plot a tick mark
             }
@@ -755,7 +755,7 @@ points.survfit <- function(x, xscale=1,
                            )
         }
         else if (is.function(fun)) tfun <- fun
-        else stop("Invalid 'fun' argument")
+        else stop(gettextf("invalid '%s' argument", "fun"))
         
         ssurv <- tfun(ssurv )
         if (!is.null(supper)) {

@@ -168,9 +168,9 @@ survfit.coxph <-
         Terms2 <- Terms 
         if (!individual)  Terms2 <- delete.response(Terms)
         if (is.vector(newdata, "numeric")) {
-            if (individual) stop("'newdata' argument must be a data frame")
+            if (individual) stop(gettextf("'%s' argument must be a data frame", "newdata"))
             if (is.null(names(newdata))) {
-                stop("'newdata' argument must be a data frame")
+                stop(gettextf("'%s' argument must be a data frame", "newdata"))
             }
             newdata <- data.frame(as.list(newdata))
         }
@@ -282,7 +282,7 @@ survfit.coxph <-
         if (has.strata && found.strata) {
             if (is.matrix(result$surv)) {
                 nr <- nrow(result$surv)  #a vector if newdata had only 1 row
-                indx1 <- split(1:nr, rep(1:length(result$strata), result$strata))
+                indx1 <- split(seq_len(nr), rep(seq_along(result$strata), result$strata))
                 rows <- indx1[as.numeric(strata2)]  #the rows for each curve
 
                 indx2 <- unlist(rows)  #index for time, n.risk, n.event, n.censor
@@ -351,7 +351,7 @@ survfit.coxph <-
 
     # The "type" component is in the middle -- match history
     indx <- match('surv', names(result))
-    result <- c(result[1:indx], type=attr(y, 'type'), result[-(1:indx)])
+    result <- c(result[seq_len(indx)], type=attr(y, 'type'), result[-seq_len(indx)])
     if (is.R()) class(result) <- c('survfit.cox', 'survfit')
     else        oldClass(result) <- 'survfit.cox'
     result

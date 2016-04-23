@@ -14,11 +14,11 @@ finegray <- function(formula, data, subset, na.action= na.pass,
     else              terms(formula, special, data=data)
 
     mf <- eval(temp, parent.frame())
-    if (nrow(mf) ==0) stop("No (non-missing) observations")
+    if (nrow(mf) ==0) stop("no (non-missing) observations")
     Terms <- terms(mf)
 
     Y <- model.extract(mf, "response")
-    if (!inherits(Y, "Surv")) stop("Response must be a survival object")
+    if (!inherits(Y, "Surv")) stop(gettextf("'%s' argument is not an object of class %s", "formula", dQuote("Surv")))
     type <- attr(Y, "type")
     if (type!='mright' && type!='mcounting')
         stop("Fine-Gray model requires a multi-state survival")

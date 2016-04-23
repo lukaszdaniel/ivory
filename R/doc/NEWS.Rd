@@ -39,6 +39,12 @@
 
       \item The result of \code{eigen()} now is of class \code{"eigen"}
       in the default case when eigenvectors are computed.
+
+      \item Zero-length date and datetime objects (\code{"POSIX[cl]?t"})
+      now \code{print()} \dQuote{recognizably}.
+
+      \item \code{xy.coords()} and \code{xyz.coords()} get new
+      \code{setLab} option.
     }
   }
   \subsection{DEPRECATED AND DEFUNCT}{
@@ -54,6 +60,10 @@
       \item Getting or setting \code{body()} or \code{formals()} on
       non-functions for now signals a warning and may become an error
       for setting.
+
+      \item In \code{text.default(x, y, labels)}, the rarely(?) used
+      default for \code{labels} is now correct also for the case of a
+      2-column matrix \code{x} and missing \code{y}.
     }
   }
 }

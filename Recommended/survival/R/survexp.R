@@ -89,7 +89,7 @@ survexp <- function(formula, data,
     if (no.Y) {
         if (missing(times)) {
             if (is.ratetable(ratetable)) 
-                stop("either a times argument or a response is needed")
+                stop("either a 'times' argument or a 'response' is needed")
             }
         else newtime <- times
         }
@@ -145,11 +145,11 @@ survexp <- function(formula, data,
     if (substring(method, 1, 10) == "individual") { #individual survival
         if (no.Y) stop("for individual survival an observation time must be given")
         if (israte)
-             temp <- survexp.fit (1:n, R, Y, max(Y), TRUE, ratetable)
+             temp <- survexp.fit (seq_len(n), R, Y, max(Y), TRUE, ratetable)
         else {
             rmatch <- match(names(data), names(rdata))
             if (any(is.na(rmatch))) rdata <- cbind(rdata, data[,is.na(rmatch)])
-            temp <- survexp.cfit(1:n, rdata, Y, 'individual', ratetable)
+            temp <- survexp.cfit(seq_len(n), rdata, Y, 'individual', ratetable)
         }
         if (method == "individual.s") xx <- temp$surv
         else xx <- -log(temp$surv)
@@ -161,7 +161,7 @@ survexp <- function(formula, data,
     if (length(ovars)==0)  X <- rep(1,n)  #no categories
     else {
         odim <- length(ovars)
-        for (i in 1:odim) {
+        for (i in seq_len(odim)) {
             temp <- m[[ovars[i]]]
             ctemp <- class(temp)
             if (!is.null(ctemp) && ctemp=='tcut')
@@ -191,7 +191,7 @@ survexp <- function(formula, data,
             #  for requested points that precede the Cox fit's
             #  first downward step.  The code is like summary.survfit.
             n <- length(temp$time)
-            keep <- approx(temp$time, 1:n, xout=times, yleft=0,
+            keep <- approx(temp$time, seq_len(n), xout=times, yleft=0,
                            method='constant', f=0, rule=2)$y
             }
 

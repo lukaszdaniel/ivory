@@ -52,11 +52,11 @@ survfitCI <- function(X, Y, weights, id, istate,
             state.names <- c(state.names, (1+nstate):max(istate))
         }
     
-    if (length(id) ==0) id <- 1:n
+    if (length(id) ==0) id <- seq_len(n)
     # these next two lines should be impossible, since istate came from 
     #   the data frame
     if (length(istate) ==1) istate <- rep(istate,n)
-    if (length(istate) !=n) stop(gettextf("wrong length for '%s' argument", "istate"))
+    if (length(istate) !=n) stop(gettextf("'%s' argument is of the wrong length", "istate"))
 
     # The states of the status variable are the first columns in the output
     states <- unique(c(seq_len(nstate), istate))
@@ -118,8 +118,8 @@ survfitCI <- function(X, Y, weights, id, istate,
         # make a table of transitions.  The from can range across
         #  all of the states, to can only have nstate categories
         nst <- length(state.names)
-        transitions <- table(factor(istate, 1:nst), factor(Y[,2], 1:nstate))
-        dimnames(transitions) <-list(from=state.names, to=state.names[1:nstate])
+        transitions <- table(factor(istate, seq_len(nst)), factor(Y[,2], seq_len(nstate)))
+        dimnames(transitions) <-list(from=state.names, to=state.names[seq_len(nstate)])
                              
         # dummy entry time that is < any event time
         entry <- rep(min(-1, 2*min(Y[,1])-1), n)  
@@ -165,12 +165,12 @@ survfitCI <- function(X, Y, weights, id, istate,
         # Make the table of transitions
         nst <- length(state.names)
         first <- indx[!duplicated(id[indx])]
-        transitions <- table(factor(istate[first], 1:nst), 
-                             factor(Y[first,3], 1:nstate))
+        transitions <- table(factor(istate[first], seq_len(nst)), 
+                             factor(Y[first,3], seq_len(nstate)))
         if (any(same))
-            transitions <- transitions + table(factor(Y[indx1[same],3], 1:nst),
-                                               factor(Y[indx2[same],3], 1:nstate))
-        dimnames(transitions) = list(from=state.names, to=state.names[1:nstate])
+            transitions <- transitions + table(factor(Y[indx1[same],3], seq_len(nst)),
+                                               factor(Y[indx2[same],3], seq_len(nstate)))
+        dimnames(transitions) = list(from=state.names, to=state.names[seq_len(nstate)])
         # We only want to pay attention to the istate variable for the very first
         #  observation of any given subject, but the program logic does better with
         #  a full one.  So construct one that will do this

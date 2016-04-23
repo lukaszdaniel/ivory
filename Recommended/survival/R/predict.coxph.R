@@ -5,7 +5,7 @@ predict.coxph <- function(object, newdata,
                        terms=names(object$assign), collapse, 
                        reference=c("strata", "sample"), ...) {
     if (!inherits(object, 'coxph'))
-        stop("Primary argument much be a coxph object")
+        stop(gettextf("'%s' argument is not an object of class %s", "object", dQuote("coxph")))
 
     Call <- match.call()
     type <-match.arg(type)
@@ -16,10 +16,10 @@ predict.coxph <- function(object, newdata,
         if (is.numeric(terms)) {
             if (any(terms != floor(terms) | 
                     terms > length(object$assign) |
-                    terms <1)) stop("Invalid terms argument")
+                    terms <1)) stop(gettextf("invalid '%s' argument", "terms"))
             }
         else if (any(is.na(match(terms, names(object$assign)))))
-           stop("a name given in the terms argument not found in the model")
+           stop("a name given in the 'terms' argument not found in the model")
         }
 
     # I will never need the cluster argument, if present delete it.
@@ -167,7 +167,7 @@ predict.coxph <- function(object, newdata,
                 afit.n <- length(afit$time)
                 if (missing(newdata)) { 
                     # In this case we need se.fit, nothing else
-                    j1 <- approx(afit$time, 1:afit.n, y[indx,1], method='constant',
+                    j1 <- approx(afit$time, seq_len(afit.n), y[indx,1], method='constant',
                                  f=0, yleft=0, yright=afit.n)$y
                     chaz <- c(0, afit$cumhaz)[j1 +1]
                     varh <- c(0, cumsum(afit$varhaz))[j1 +1]
@@ -178,7 +178,7 @@ predict.coxph <- function(object, newdata,
                             risk[indx]
                         }
                     else {
-                        j2 <- approx(afit$time, 1:afit.n, y[indx,2], method='constant',
+                        j2 <- approx(afit$time, seq_len(afit.n), y[indx,2], method='constant',
                                  f=0, yleft=0, yright=afit.n)$y
                         chaz2 <- c(0, afit$cumhaz)[j2 +1]
                         varh2 <- c(0, cumsum(afit$varhaz))[j2 +1]
@@ -195,7 +195,7 @@ predict.coxph <- function(object, newdata,
                     #there is new data
                     use.x <- TRUE
                     indx2 <- which(newstrat == i)
-                    j1 <- approx(afit$time, 1:afit.n, newy[indx2,1], 
+                    j1 <- approx(afit$time, seq_len(afit.n), newy[indx2,1], 
                                  method='constant', f=0, yleft=0, yright=afit.n)$y
                     chaz <-c(0, afit$cumhaz)[j1+1]
                     pred[indx2] <- chaz * newrisk[indx2]
@@ -211,7 +211,7 @@ predict.coxph <- function(object, newdata,
                             }
                         }
                     else {
-                        j2 <- approx(afit$time, 1:afit.n, newy[indx2,2], 
+                        j2 <- approx(afit$time, seq_len(afit.n), newy[indx2,2], 
                                  method='constant', f=0, yleft=0, yright=afit.n)$y
                                     chaz2 <- approx(-afit$time, afit$cumhaz, -newy[indx2,2],
                                    method="constant", rule=2, f=0)$y
@@ -278,7 +278,7 @@ predict.coxph <- function(object, newdata,
             dimnames(pred) <- list(rownames(newx), names(asgn))
             if (se.fit) se <- pred
             
-            for (i in 1:nterms) {
+            for (i in seq_len(nterms)) {
                 tt <- asgn[[i]]
                 tt <- tt[!is.na(object$coefficients[tt])]
                 xtt <- newx[,tt, drop=F]
@@ -305,7 +305,7 @@ predict.coxph <- function(object, newdata,
         }
 
     if (!missing(collapse) && !is.null(collapse)) {
-        if (length(collapse) != n2) stop("Collapse vector is the wrong length")
+        if (length(collapse) != n2) stop("Collapse vector is of the wrong length")
         pred <- rowsum(pred, collapse)  # in R, rowsum is a matrix, always
         if (se.fit) se <- sqrt(rowsum(se^2, collapse))
         if (type != 'terms') {

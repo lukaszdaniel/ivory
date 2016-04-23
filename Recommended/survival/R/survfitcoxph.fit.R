@@ -8,7 +8,7 @@ survfitcoxph.fit <- function(y, x, wt, x2, risk, newrisk, strata, se.fit,
     survlist <- vector('list', nstrata)
     names(survlist) <- ustrata
 
-    for (i in 1:nstrata) {
+    for (i in seq_len(nstrata)) {
         indx <- which(strata== ustrata[i])
         survlist[[i]] <- agsurv(y[indx,,drop=F], x[indx,,drop=F], 
                                 wt[indx], risk[indx],
@@ -25,7 +25,7 @@ survfitcoxph.fit <- function(y, x, wt, x2, risk, newrisk, strata, se.fit,
             dimnames(fit$surv) <- list(NULL, row.names(x2))
             if (se.fit) {
                 varh <- matrix(0., nrow=length(fit$varhaz), ncol=nrow(x2))
-                for (i in 1:nrow(x2)) {
+                for (i in seq_len(nrow(x2))) {
                     dt <- outer(fit$cumhaz, x2[i,], '*') - fit$xbar
                     varh[,i] <- (cumsum(fit$varhaz) + rowSums((dt %*% varmat)* dt))*
                         newrisk[i]^2
@@ -56,7 +56,7 @@ survfitcoxph.fit <- function(y, x, wt, x2, risk, newrisk, strata, se.fit,
             hazard  <- vector('list', ntarget)
             stemp <- as.integer(strata2)
             timeforward <- 0
-            for (i in 1:ntarget) {
+            for (i in seq_len(ntarget)) {
                 slist <- survlist[[stemp[i]]]
                 indx <- which(slist$time > y2[i,1] & slist$time <= y2[i,2])
                 if (length(indx)==0) {
@@ -109,7 +109,7 @@ survfitcoxph.fit <- function(y, x, wt, x2, risk, newrisk, strata, se.fit,
         else {
             uid <- unique(id)
             result <- vector('list', length=length(uid))
-            for (i in 1:length(uid)) {
+            for (i in seq_along(uid)) {
                 indx <- which(id==uid[i])
                 result[[i]] <- onecurve(survlist, x2[indx,,drop=FALSE], 
                                          y2[indx,,drop=FALSE], 

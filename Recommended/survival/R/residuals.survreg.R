@@ -10,7 +10,7 @@ residuals.survreg <- function(object, type=c('response', 'deviance',
     n <- length(object$linear.predictors)
     Terms <- object$terms
     if(!inherits(Terms, "terms"))
-            stop("invalid terms component of  object")
+            stop("invalid terms component of object")
     
     # If the variance wasn't estimated then it has no error
     if (nrow(object$var) == length(object$coefficients)) rsigma <- FALSE
@@ -152,7 +152,7 @@ residuals.survreg <- function(object, type=c('response', 'deviance',
             if (rsigma) {
                 if (nstrata > 1) {
                     d4 <- matrix(0., nrow=n, ncol=nstrata)
-                    d4[cbind(1:n, strata)] <- deriv[,4]
+                    d4[cbind(seq_len(n), strata)] <- deriv[,4]
                     score <- cbind(score, d4)
                     }
                 else score <- cbind(score, deriv[,4])
@@ -167,7 +167,7 @@ residuals.survreg <- function(object, type=c('response', 'deviance',
             if (rsigma) {
                 if (nstrata >1) {
                     d6 <- matrix(0., nrow=n, ncol=nstrata)
-                    d6[cbind(1:n, strata)] <- deriv[,6]*sigma
+                    d6[cbind(seq_len(n), strata)] <- deriv[,6]*sigma
                     rscore <- cbind(rscore, d6)
                     }
                 else rscore <- cbind(rscore, deriv[,6] * sigma)
@@ -181,7 +181,7 @@ residuals.survreg <- function(object, type=c('response', 'deviance',
             if (rsigma) {
                 if (nstrata >1) {
                     d5 <- matrix(0., nrow=n, ncol=nstrata)
-                    d5[cbind(1:n, strata)] <- deriv[,5]
+                    d5[cbind(seq_len(n), strata)] <- deriv[,5]
                     sscore <- cbind(sscore, d5)
                     }
                 else sscore <- cbind(sscore, deriv[,5])
@@ -206,7 +206,7 @@ residuals.survreg <- function(object, type=c('response', 'deviance',
 
     # Collapse if desired
     if (!missing(collapse)) {
-        if (length(collapse) !=n) stop("Wrong length for 'collapse'")
+        if (length(collapse) !=n) stop(gettextf("'%s' argument is of the wrong length", "collapse"))
         rr <- drop(rowsum(rr, collapse))
         }
 

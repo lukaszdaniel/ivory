@@ -20,7 +20,7 @@ dim.survfit <- function(x) {
     nmatch <- function(indx, target) { 
         # This function lets R worry about character, negative, or logical subscripts
         #  It always returns a set of positive integer indices
-        temp <- 1:length(target)
+        temp <- seq_along(target)
         names(temp) <- target
         temp[indx]
     }
@@ -51,7 +51,7 @@ dim.survfit <- function(x) {
  
             # Now, indx may not be in order: some can use curve[3:2] to reorder
             #  The list/unlist construct will reorder the data
-            temp <- rep(1:length(x$strata), x$strata)
+            temp <- rep(seq_along(x$strata), x$strata)
             keep <- unlist(lapply(indx, function(x) which(temp==x)))
 
             if (length(indx) <=1 && drop) x$strata <- NULL
@@ -117,7 +117,7 @@ survfit.formula <- function(formula, data, weights, subset,
 
     n <- nrow(m)
     Y <- model.extract(m, 'response')
-    if (!is.Surv(Y)) stop("Response must be a survival object")
+    if (!is.Surv(Y)) stop(gettextf("'%s' argument is not an object of class %s", "formula", dQuote("Surv")))
 
     casewt <- model.extract(m, "weights")
     if (is.null(casewt)) casewt <- rep(1,n)

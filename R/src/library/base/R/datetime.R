@@ -203,20 +203,8 @@ format.POSIXct <- function(x, format = "", tz = "", usetz = FALSE, ...)
               names = names(x))
 }
 
-## could handle arrays for max.print
-print.POSIXct <- function(x, ...)
-{
-    max.print <- getOption("max.print", 9999L)
-    if(max.print < length(x)) {
-        print(format(x[seq_len(max.print)], usetz = TRUE), ...)
-	cat(sprintf(ngettext(as.integer(length(x) - max),
-			" [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",
-			" [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base"),
-			length(x) - max), "\n", sep = "")
-    } else print(format(x, usetz = TRUE), ...)
-    invisible(x)
-}
-
+## could handle arrays for max.print; cf print.Date() in ./dates.R
+print.POSIXct <-
 print.POSIXlt <- function(x, ...)
 {
     max.print <- getOption("max.print", 9999L)
@@ -226,9 +214,11 @@ print.POSIXlt <- function(x, ...)
 	" [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",
 	" [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base"),
             length(x) - max.print), "\n", sep = "")
-   } else print(format(x, usetz = TRUE), ...)
+    } else print(if(length(x)) format(x, usetz = TRUE)
+		 else gettextf("class %s of length 0", dQuote(class(x)[1L])), ...)
     invisible(x)
 }
+
 
 summary.POSIXct <- function(object, digits = 15L, ...)
 {
@@ -442,16 +432,16 @@ difftime <-
     z <- unclass(time1) - unclass(time2)
     attr(z, "tzone") <- NULL # it may get copied from args of `-`
     units <- match.arg(units)
-    if(units == "auto") {
-        if(all(is.na(z))) units <- "secs"
-        else {
-            zz <- min(abs(z),na.rm = TRUE)
-            if(is.na(zz) || zz < 60) units <- "secs"
-            else if(zz < 3600) units <- "mins"
-            else if(zz < 86400) units <- "hours"
-            else units <- "days"
-        }
-    }
+    if(units == "auto")
+	units <-
+	    if(all(is.na(z))) "secs"
+	    else {
+		zz <- min(abs(z), na.rm = TRUE)
+		if(!is.finite(zz) || zz < 60) "secs"
+		else if(zz < 3600) "mins"
+		else if(zz < 86400) "hours"
+		else "days"
+	    }
     switch(units,
            "secs" = .difftime(z, units = "secs"),
            "mins" = .difftime(z/60, units = "mins"),
@@ -467,9 +457,9 @@ difftime <-
 as.difftime <- function(tim, format = "%X", units = "auto")
 {
     if (inherits(tim, "difftime")) return(tim)
-    if (is.character(tim)){
+    if (is.character(tim)) {
         difftime(strptime(tim, format = format),
-             strptime("0:0:0", format = "%X"), units = units)
+                 strptime("0:0:0", format = "%X"), units = units)
     } else {
         if (!is.numeric(tim)) stop("'tim' argument is not character or numeric")
 	if (units == "auto") stop("'as.difftime()' function needs explicit 'units' argument for numeric conversion")
@@ -518,7 +508,7 @@ print.difftime <- function(x, digits = getOption("digits"), ...)
         else if(attr(x, "units") == "days") cat(gettext("Time differences in days", domain = "R-base"), "\n", sep = "")
         else cat(gettext("Time differences in weeks", domain = "R-base"), "\n", sep = "")
         y <- unclass(x); attr(y, "units") <- NULL
-        print(y)
+	print(y, digits=digits, ...)
     }
     else {
         if(attr(x, "units") == "secs") cat(gettextf("Time difference of %s seconds", format(unclass(x), digits = digits), domain = "R-base"), "\n", sep = "")
@@ -635,7 +625,7 @@ Summary.difftime <- function (..., na.rm)
     if(Nargs == 0) {
         .difftime(do.call(.Generic), "secs")
     } else {
-        units <- sapply(x, function(x) attr(x, "units"))
+        units <- sapply(x, attr, "units")
         if(all(units == units[1L])) {
             args <- c(lapply(x, as.vector), na.rm = na.rm)
         } else {
@@ -866,6 +856,8 @@ julian.POSIXt <- function(x, origin = as.POSIXct("1970-01-01", tz = "GMT"), ...)
     res <- difftime(as.POSIXct(x), origin, units = "days")
     structure(res, "origin" = origin)
 }
+
+## Note that  'abbreviate' works *vectorized* here :
 
 weekdays <- function(x, abbreviate) UseMethod("weekdays")
 weekdays.POSIXt <- function(x, abbreviate = FALSE)

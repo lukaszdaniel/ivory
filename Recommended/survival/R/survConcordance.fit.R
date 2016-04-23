@@ -5,7 +5,7 @@ survConcordance.fit <- function(y, x, strata, weight) {
     if (any(is.na(x)) || any(is.na(y))) return(NULL)   
     btree <- function(n) {
         ranks <- rep(0L, n)  #will be overwritten
-        yet.to.do <- 1:n
+        yet.to.do <- seq_len(n)
         depth <- floor(logb(n,2))
         start <- as.integer(2^depth)
         lastrow.length <- 1+n-start
