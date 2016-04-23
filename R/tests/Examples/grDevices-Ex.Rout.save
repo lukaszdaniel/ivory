@@ -3563,7 +3563,8 @@ v 0.98039216 0.7647059 0.4588235 0.8549020 0.9960784
 > 
 > ### ** Examples
 > 
-> xy.coords(stats::fft(c(1:9)), NULL)
+> ff <- stats::fft(1:9)
+> xy.coords(ff)
 $x
 [1] 45.0 -4.5 -4.5 -4.5 -4.5 -4.5 -4.5 -4.5 -4.5
 
@@ -3577,11 +3578,35 @@ $xlab
 $ylab
 [1] "Im()"
 
-> 
+> xy.coords(ff, xlab = "fft") # labels "Re(fft)",  "Im(fft)"
+$x
+[1] 45.0 -4.5 -4.5 -4.5 -4.5 -4.5 -4.5 -4.5 -4.5
+
+$y
+[1]   0.0000000  12.3636484   5.3628912   2.5980762   0.7934714  -0.7934714
+[7]  -2.5980762  -5.3628912 -12.3636484
+
+$xlab
+[1] "Re(fft)"
+
+$ylab
+[1] "Im(fft)"
+
+> ## Don't show: 
+> stopifnot(identical(xy.coords(ff, xlab = "fft"),
++                     xy.coords(ff, ylab = "fft")))
+> xy.labs <- function(...) xy.coords(...)[c("xlab","ylab")]
+> stopifnot(identical(xy.labs(ff, xlab = "fft", setLab = FALSE),
++                     list(xlab = "fft", ylab = "fft")),
++           identical(xy.labs(ff, ylab = "fft", setLab = FALSE),
++                     list(xlab = NULL, ylab = "fft")),
++           identical(xy.labs(ff, xlab = "Re(fft)", ylab = "Im(fft)", setLab = FALSE),
++                     list(xlab = "Re(fft)", ylab = "Im(fft)")))
+> ## End(Don't show)
 > with(cars, xy.coords(dist ~ speed, NULL)$xlab ) # = "speed"
 [1] "speed"
 > 
-> xy.coords(1:3, 1:2, recycle = TRUE)
+> xy.coords(1:3, 1:2, recycle = TRUE) # otherwise error "lengths differ"
 $x
 [1] 1 2 3
 
@@ -3609,7 +3634,7 @@ $xlab
 $ylab
 NULL
 
-> ##> warning: 3 y values <= 0 omitted ..
+> ##> xlab: "Index"  \\  warning: 3 y values <= 0 omitted ..
 > 
 > 
 > 

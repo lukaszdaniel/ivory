@@ -156,12 +156,12 @@ a317b028c0068a3fe27c2d27219f13b6 *R/sammon.R
 35aff05a505ecf7e81e0473767794ca9 *INDEX
 efdd29c1f69621c9876c8389ade52011 *Changes
 026d810db3c67bd78387f8f0be8465f4 *NAMESPACE
-4a57ea9fed741e4f897fecfa0d716ae1 *DESCRIPTION
+b3b97a21483d908c0adf4e9384d9c158 *DESCRIPTION
 b678832e02372694edb83acf679710c9 *po/R-de.po
 f5dd576c663a4b04c2bb4833eea1ab63 *po/R-fr.po
 a6f395810b1c3c5e70030c359ba1ad5b *po/R-MASS.pot
 1a3cea834198e57a83f2895b07b1144c *po/pl.po
-a57d3dfeb3f8cbc78242bd64dae115a0 *po/MASS.pot
+527a0118365bf48bc77e4eb36b4b58d0 *po/MASS.pot
 821fc3e8e6376d620bc522146e6e4a64 *po/R-ko.po
 156797766d5176471ed9c747be9fc2d5 *po/R-pl.po
 8fbf3a0f6c57bb6815ec2d4fbe3faed9 *src/localization.h
@@ -336,4 +336,4 @@ a0854fee9b36691ca1d0880da31d6f79 *tests/fitdistr.R
 95d607421bd27acb314bfd4d40042891 *tests/regression.Rout.save
 5d907d24b9b8be28888e58b62e421fad *tests/fitdistr.Rout.save
 a23ddf89e02a02ed030e4ed5538d3430 *tests/regression.R
-fd9fbc52e72cc2fb95470ff7f531b216 *tests/Examples/MASS-Ex.Rout.save
+56792b626bf62ab63a5b087c09b7bff7 *tests/Examples/MASS-Ex.Rout.save
