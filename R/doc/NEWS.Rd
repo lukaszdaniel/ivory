@@ -393,6 +393,14 @@
       imports. The \code{except} expression should evaluate to a
       character vector (after substituting symbols for strings). See
       Writing R Extensions.
+
+      \item New convenience function \code{Rcmd()} in package
+      \pkg{tools} for invoking \command{R CMD} tools from within \R.
+
+      \item New functions \code{makevars_user()} and
+      \code{makevars_site()} in package \pkg{tools} to determine the
+      location of the user and site specific \file{Makevars} files for
+      customizing package compilation.
     }
   }
 
@@ -639,6 +647,9 @@
       \item \code{download.file()} with \code{method = "wininet"}
       incorrectly warned of download file length difference when
       reported length was unknown. (\PR{16805})
+      
+      \item \code{diag(NULL, 1)} crashed because of missed type
+      checking.  (\PR{16853})
     }
   }
 }

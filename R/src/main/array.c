@@ -1699,7 +1699,7 @@ SEXP attribute_hidden do_diag(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (nc < 0)
 	error(_("invalid '%s' value (< 0)"), "ncol");
     int mn = (nr < nc) ? nr : nc;
-    if (mn > 0 && LENGTH(x) == 0)
+    if (mn > 0 && length(x) == 0)
 	error(_("'%s' must have positive length"), "x");
 
 #ifndef LONG_VECTOR_SUPPORT
