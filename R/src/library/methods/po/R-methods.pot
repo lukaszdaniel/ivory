@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: methods 3.4.0\n"
-"POT-Creation-Date: 2016-04-03 21:10\n"
+"POT-Creation-Date: 2016-04-26 22:47\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -448,6 +448,13 @@ msgstr ""
 #. R/SClasses.R: gettext("All %s names must be nonempty in:\n(%s)", domain = "R-methods")
 
 msgid "All %s names must be nonempty in:\n(%s)"
+msgstr ""
+
+
+#: R/RClassUtils.R: 0
+#. R/RClassUtils.R: gettextf("Also defined by %s", paste(sQuote(pkgs[-1]), collapse = " "))
+
+msgid "Also defined by %s"
 msgstr ""
 
 

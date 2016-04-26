@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-03 21:10\n"
+"POT-Creation-Date: 2016-04-26 22:47\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #. R/RMethodUtils.R: warning("\"MethodsList\" is defunct; allMethods now are empty")
 #: R/RMethodUtils.R:0
@@ -395,6 +395,11 @@ msgstr ""
 "Wszystkie nazwy %s muszą być niepuste w:\n"
 "(%s)"
 
+#. R/RClassUtils.R: gettextf("Also defined by %s", paste(sQuote(pkgs[-1]), collapse = " "))
+#: R/RClassUtils.R:0
+msgid "Also defined by %s"
+msgstr "Również zdefiniowane przez %s"
+
 #. R/BasicClasses.R: gettextf("An object of class %s", dQuote(cl), domain = "R-methods")
 #. R/BasicClasses.R: gettextf("An object of class %s", dQuote(class(object)), domain = "R-methods")
 #. R/show.R: gettextf("An object of class %s", cl, domain = "R-methods")
@@ -766,11 +771,8 @@ msgstr ""
 
 #. R/debug.R: stop("Function must be an S4 generic")
 #: R/debug.R:0
-#, fuzzy
 msgid "Function must be an S4 generic"
-msgstr ""
-"Funkcja %s:\n"
-"<nie jest to funkcja ogólna S4>"
+msgstr "Funkcja musi być funkcją ogólną S4"
 
 #. R/methodsTable.R: gettextf("Function: %s (package %s)", func, pkg, domain = "R-methods")
 #: R/methodsTable.R:0
@@ -2392,7 +2394,7 @@ msgstr ""
 #. R/debug.R: warning("method is not being debugged")
 #: R/debug.R:0
 msgid "method is not being debugged"
-msgstr ""
+msgstr "metoda nie jest debugowana"
 
 #. R/RMethodUtils.R: gettextf("methods can add arguments to the generic %s only if '...' is an argument to the generic",     sQuote(generic@generic))
 #: R/RMethodUtils.R:0

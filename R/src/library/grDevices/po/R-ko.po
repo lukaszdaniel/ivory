@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-14 23:06\n"
+"POT-Creation-Date: 2016-04-26 22:47\n"
 "PO-Revision-Date: 2005-05-25 14:17+0900\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -219,6 +219,14 @@ msgstr ""
 msgid "GhostScript was not found"
 msgstr "디바이스 '%s'는 유효하지는 않습니다"
 
+#. R/xyz.coords.R: gettext("Index", domain = "R-grDevices")
+#. R/xyz.coords.R: gettext("Index", domain = "R-grDevices")
+#. R/xyz.coords.R: gettext("Index", domain = "R-grDevices")
+#. R/xyz.coords.R: gettext("Index", domain = "R-grDevices")
+#: R/xyz.coords.R:0
+msgid "Index"
+msgstr ""
+
 #. R/postscript.R: stop("Invalid font database name")
 #: R/postscript.R:0
 msgid "Invalid font database name"
@@ -238,6 +246,11 @@ msgstr "기준 백색:"
 #. R/windows/windows.R: gettext("Saved Plots from R version 1.4.0 or later", domain = "R-grDevices")
 #: R/windows/windows.R:0
 msgid "Saved Plots from R version 1.4.0 or later"
+msgstr ""
+
+#. R/xyz.coords.R: gettext("Time", domain = "R-grDevices")
+#: R/xyz.coords.R:0
+msgid "Time"
 msgstr ""
 
 #. R/gevents.R: gettext("Waiting for input", domain = "R-grDevices")

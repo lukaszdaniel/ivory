@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-09 23:04\n"
+"POT-Creation-Date: 2016-04-26 22:47\n"
 "PO-Revision-Date: 2016-01-09 18:48+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -1966,6 +1966,12 @@ msgstr ""
 msgid "character string is not in a standard unambiguous format"
 msgstr "tegnstreng er ikke i et utvetydigt standardformat"
 
+#. R/datetime.R: gettextf("class %s of length 0", dQuote(class(x)[1L]))
+#: R/datetime.R:0
+#, fuzzy
+msgid "class %s of length 0"
+msgstr "'to' skal være af længde 1"
+
 #. R/format.R: warning("class of 'x' argument was discarded")
 #: R/format.R:0
 #, fuzzy
@@ -2051,6 +2057,11 @@ msgstr "duplikate row.names:"
 #, fuzzy
 msgid "duplicate values in 'row.names' are not allowed"
 msgstr "duplikat 'row.names' er ikke tilladt"
+
+#. R/eigen.R: gettext("eigenvalues and eigenvectors decomposition", domain = "R-base")
+#: R/eigen.R:0
+msgid "eigenvalues and eigenvectors decomposition"
+msgstr ""
 
 #. R/scan.R: stop("either specify 'nmax' or 'n', but not both.")
 #: R/scan.R:0
@@ -3283,7 +3294,6 @@ msgid "you cannot be serious"
 msgstr "det mener du ikke"
 
 #. R/dates.R: ngettext(as.integer(length(x) - max), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
-#. R/datetime.R: ngettext(as.integer(length(x) - max), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
 #. R/datetime.R: ngettext(as.integer(length(x) - max.print), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
 #: R/dates.R:0 R/datetime.R:0
 msgid " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]"
@@ -3658,10 +3668,6 @@ msgstr[1] ""
 
 #, fuzzy
 #~ msgid "%s should be one of %s"
-#~ msgstr "'to' skal være af længde 1"
-
-#, fuzzy
-#~ msgid "%s must be of length 1"
 #~ msgstr "'to' skal være af længde 1"
 
 #, fuzzy

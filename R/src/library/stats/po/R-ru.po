@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-03 21:10\n"
+"POT-Creation-Date: 2016-04-26 22:47\n"
 "PO-Revision-Date: 2015-01-17 15:49+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -5186,6 +5186,12 @@ msgid ""
 "  %s"
 msgstr "Наблюдения с единичной трансляцией не рисую:"
 
+#. R/smspline.R: gettextf("not using invalid df; must have 1 < df <= n := #{unique x} = %d", nx)
+#: R/smspline.R:0
+#, fuzzy
+msgid "not using invalid df; must have 1 < df <= n := #{unique x} = %d"
+msgstr "Вы должны указать 1 < df <= n,  n = #{unique x} ="
+
 #. R/ftable.R: stop("nothing to tabulate")
 #: R/ftable.R:0
 msgid "nothing to tabulate"
@@ -5805,11 +5811,6 @@ msgstr "в некоторых выражениях будут NA вследст�
 #: R/smspline.R:0
 msgid "some weights should be positive"
 msgstr "некоторые веса должны быть положительны"
-
-#. R/smspline.R: warning("specified both 'df' and 'cv'; will disregard the latter")
-#: R/smspline.R:0
-msgid "specified both 'df' and 'cv'; will disregard the latter"
-msgstr "указано и 'df' и 'cv'; значение последнего проигнорировано"
 
 #. R/loess.R: stop("specified parametric for all predictors")
 #: R/loess.R:0
@@ -6556,12 +6557,6 @@ msgstr "x не является вектором или одномерным в�
 msgid "y values must be 0 <= y <= 1"
 msgstr "значения y должны быть 0 <= y <= 1"
 
-#. R/smspline.R: gettextf("you must supply 1 < df <= n,  n = #{unique x} = %d", nx)
-#: R/smspline.R:0
-#, fuzzy
-msgid "you must supply 1 < df <= n,  n = #{unique x} = %d"
-msgstr "Вы должны указать 1 < df <= n,  n = #{unique x} ="
-
 #. R/approx.R: stop("zero non-NA points")
 #. R/approx.R: stop("zero non-NA points")
 #. R/spline.R: stop("zero non-NA points")
@@ -7021,6 +7016,9 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "использую %d/%d строк из комбинированного выравнивания"
 msgstr[1] "использую %d/%d строк из комбинированного выравнивания"
 msgstr[2] "использую %d/%d строк из комбинированного выравнивания"
+
+#~ msgid "specified both 'df' and 'cv'; will disregard the latter"
+#~ msgstr "указано и 'df' и 'cv'; значение последнего проигнорировано"
 
 #, fuzzy
 #~ msgid "Rotation:"

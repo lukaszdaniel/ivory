@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-03 21:10\n"
+"POT-Creation-Date: 2016-04-26 22:47\n"
 "PO-Revision-Date: 2015-01-17 15:50+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -5134,6 +5134,12 @@ msgid ""
 "  %s"
 msgstr "不对杠杆效果为一的点绘图"
 
+#. R/smspline.R: gettextf("not using invalid df; must have 1 < df <= n := #{unique x} = %d", nx)
+#: R/smspline.R:0
+#, fuzzy
+msgid "not using invalid df; must have 1 < df <= n := #{unique x} = %d"
+msgstr "你必需提供1 < df <= n,  n = #{unique x} ="
+
 #. R/ftable.R: stop("nothing to tabulate")
 #: R/ftable.R:0
 msgid "nothing to tabulate"
@@ -5737,11 +5743,6 @@ msgstr "因为这个方法的限制，有些项的值为NA"
 #: R/smspline.R:0
 msgid "some weights should be positive"
 msgstr "至少有一些权数应该是正的"
-
-#. R/smspline.R: warning("specified both 'df' and 'cv'; will disregard the latter")
-#: R/smspline.R:0
-msgid "specified both 'df' and 'cv'; will disregard the latter"
-msgstr "'df'和'cv'都有设定；后者略过不用"
 
 #. R/loess.R: stop("specified parametric for all predictors")
 #: R/loess.R:0
@@ -6466,12 +6467,6 @@ msgstr "x不是矢量或单变量时间序列"
 msgid "y values must be 0 <= y <= 1"
 msgstr "y值必需满足0 <= y <= 1"
 
-#. R/smspline.R: gettextf("you must supply 1 < df <= n,  n = #{unique x} = %d", nx)
-#: R/smspline.R:0
-#, fuzzy
-msgid "you must supply 1 < df <= n,  n = #{unique x} = %d"
-msgstr "你必需提供1 < df <= n,  n = #{unique x} ="
-
 #. R/approx.R: stop("zero non-NA points")
 #. R/approx.R: stop("zero non-NA points")
 #. R/spline.R: stop("zero non-NA points")
@@ -6827,6 +6822,9 @@ msgstr[0] "模型里下範疇没有这些词条%s"
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "在组合拟合中用%d/%d行"
+
+#~ msgid "specified both 'df' and 'cv'; will disregard the latter"
+#~ msgstr "'df'和'cv'都有设定；后者略过不用"
 
 #, fuzzy
 #~ msgid "Rotation:"

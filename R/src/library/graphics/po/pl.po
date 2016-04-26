@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-14 23:06+0200\n"
-"PO-Revision-Date: 2016-04-11 21:11+0200\n"
+"PO-Revision-Date: 2016-04-26 22:56+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -218,7 +218,6 @@ msgid "invalid graphics parameter"
 msgstr "niepoprawne parametry grafiki"
 
 #: plot.c:478
-#, fuzzy
 msgid "at least 3 arguments are required"
 msgstr "wymagane są co najmniej 3 argumenty"
 

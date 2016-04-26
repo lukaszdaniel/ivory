@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 3.4.0\n"
-"POT-Creation-Date: 2016-04-14 23:06\n"
+"POT-Creation-Date: 2016-04-26 22:47\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -269,6 +269,16 @@ msgid "GhostScript was not found"
 msgstr ""
 
 
+#: R/xyz.coords.R: 0
+#. R/xyz.coords.R: gettext("Index", domain = "R-grDevices")
+#. R/xyz.coords.R: gettext("Index", domain = "R-grDevices")
+#. R/xyz.coords.R: gettext("Index", domain = "R-grDevices")
+#. R/xyz.coords.R: gettext("Index", domain = "R-grDevices")
+
+msgid "Index"
+msgstr ""
+
+
 #: R/postscript.R: 0
 #. R/postscript.R: stop("Invalid font database name")
 
@@ -294,6 +304,13 @@ msgstr ""
 #. R/windows/windows.R: gettext("Saved Plots from R version 1.4.0 or later", domain = "R-grDevices")
 
 msgid "Saved Plots from R version 1.4.0 or later"
+msgstr ""
+
+
+#: R/xyz.coords.R: 0
+#. R/xyz.coords.R: gettext("Time", domain = "R-grDevices")
+
+msgid "Time"
 msgstr ""
 
 

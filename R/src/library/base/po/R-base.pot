@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.4.0\n"
-"POT-Creation-Date: 2016-04-09 23:04\n"
+"POT-Creation-Date: 2016-04-26 22:47\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2411,6 +2411,13 @@ msgid "character string is not in a standard unambiguous format"
 msgstr ""
 
 
+#: R/datetime.R: 0
+#. R/datetime.R: gettextf("class %s of length 0", dQuote(class(x)[1L]))
+
+msgid "class %s of length 0"
+msgstr ""
+
+
 #: R/format.R: 0
 #. R/format.R: warning("class of 'x' argument was discarded")
 
@@ -2512,6 +2519,13 @@ msgstr ""
 #. R/dataframe.R: stop("duplicate values in 'row.names' are not allowed")
 
 msgid "duplicate values in 'row.names' are not allowed"
+msgstr ""
+
+
+#: R/eigen.R: 0
+#. R/eigen.R: gettext("eigenvalues and eigenvectors decomposition", domain = "R-base")
+
+msgid "eigenvalues and eigenvectors decomposition"
 msgstr ""
 
 
@@ -4098,9 +4112,7 @@ msgstr ""
 
 #: R/dates.R: 0
 #: R/datetime.R: 0
-#: R/datetime.R: 0
 #. R/dates.R: ngettext(as.integer(length(x) - max), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
-#. R/datetime.R: ngettext(as.integer(length(x) - max), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
 #. R/datetime.R: ngettext(as.integer(length(x) - max.print), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
 
 msgid        " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]"

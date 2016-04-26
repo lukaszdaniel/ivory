@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-09 23:04\n"
+"POT-Creation-Date: 2016-04-26 22:47\n"
 "PO-Revision-Date: 2015-01-17 13:33+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -2009,6 +2009,12 @@ msgstr "无法将消息链结分割"
 msgid "character string is not in a standard unambiguous format"
 msgstr "字符串的格式不够标准明确"
 
+#. R/datetime.R: gettextf("class %s of length 0", dQuote(class(x)[1L]))
+#: R/datetime.R:0
+#, fuzzy
+msgid "class %s of length 0"
+msgstr "'to'的长度必需为一"
+
 #. R/format.R: warning("class of 'x' argument was discarded")
 #: R/format.R:0
 #, fuzzy
@@ -2094,6 +2100,11 @@ msgstr "useDynlib(\"%2$s\")里有重复字符名字%1$s"
 #, fuzzy
 msgid "duplicate values in 'row.names' are not allowed"
 msgstr "不允许有重复的'row.names'"
+
+#. R/eigen.R: gettext("eigenvalues and eigenvectors decomposition", domain = "R-base")
+#: R/eigen.R:0
+msgid "eigenvalues and eigenvectors decomposition"
+msgstr ""
 
 #. R/scan.R: stop("either specify 'nmax' or 'n', but not both.")
 #: R/scan.R:0
@@ -3339,7 +3350,6 @@ msgid "you cannot be serious"
 msgstr "你是不是在耍我？"
 
 #. R/dates.R: ngettext(as.integer(length(x) - max), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
-#. R/datetime.R: ngettext(as.integer(length(x) - max), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
 #. R/datetime.R: ngettext(as.integer(length(x) - max.print), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
 #: R/dates.R:0 R/datetime.R:0
 msgid " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]"
@@ -3694,10 +3704,6 @@ msgstr[0] "用T代替TRUE"
 #, fuzzy
 #~ msgid "%s should be one of %s"
 #~ msgstr "'arg'应当是%s其中的一个"
-
-#, fuzzy
-#~ msgid "%s must be of length 1"
-#~ msgstr "'to'的长度必需为一"
 
 #, fuzzy
 #~ msgid "'%s' cannot be coerced to class %s"

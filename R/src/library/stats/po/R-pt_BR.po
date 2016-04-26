@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-03 21:10\n"
+"POT-Creation-Date: 2016-04-26 22:47\n"
 "PO-Revision-Date: 2011-03-26 08:57-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -5160,6 +5160,11 @@ msgid ""
 "  %s"
 msgstr ""
 
+#. R/smspline.R: gettextf("not using invalid df; must have 1 < df <= n := #{unique x} = %d", nx)
+#: R/smspline.R:0
+msgid "not using invalid df; must have 1 < df <= n := #{unique x} = %d"
+msgstr ""
+
 #. R/ftable.R: stop("nothing to tabulate")
 #: R/ftable.R:0
 msgid "nothing to tabulate"
@@ -5770,11 +5775,6 @@ msgstr "alguns termos terão NAs devido aos limites do método"
 #. R/smspline.R: stop("some weights should be positive")
 #: R/smspline.R:0
 msgid "some weights should be positive"
-msgstr ""
-
-#. R/smspline.R: warning("specified both 'df' and 'cv'; will disregard the latter")
-#: R/smspline.R:0
-msgid "specified both 'df' and 'cv'; will disregard the latter"
 msgstr ""
 
 #. R/loess.R: stop("specified parametric for all predictors")
@@ -6504,11 +6504,6 @@ msgstr ""
 #, fuzzy
 msgid "y values must be 0 <= y <= 1"
 msgstr "valores y devem ser 0 <= y <= 1"
-
-#. R/smspline.R: gettextf("you must supply 1 < df <= n,  n = #{unique x} = %d", nx)
-#: R/smspline.R:0
-msgid "you must supply 1 < df <= n,  n = #{unique x} = %d"
-msgstr ""
 
 #. R/approx.R: stop("zero non-NA points")
 #. R/approx.R: stop("zero non-NA points")

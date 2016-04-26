@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-03 21:10\n"
+"POT-Creation-Date: 2016-04-26 22:47\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -5016,6 +5016,11 @@ msgstr ""
 "brak wykreślalnych obserwacji z jednej transmisji:\n"
 "  %s"
 
+#. R/smspline.R: gettextf("not using invalid df; must have 1 < df <= n := #{unique x} = %d", nx)
+#: R/smspline.R:0
+msgid "not using invalid df; must have 1 < df <= n := #{unique x} = %d"
+msgstr "niepoprawne użycie df; musi być 1 < df <= n,  n = #{unikalne x} = %d"
+
 #. R/ftable.R: stop("nothing to tabulate")
 #: R/ftable.R:0
 msgid "nothing to tabulate"
@@ -5617,11 +5622,6 @@ msgstr ""
 #: R/smspline.R:0
 msgid "some weights should be positive"
 msgstr "niektóre wagi powinny być dodatnie"
-
-#. R/smspline.R: warning("specified both 'df' and 'cv'; will disregard the latter")
-#: R/smspline.R:0
-msgid "specified both 'df' and 'cv'; will disregard the latter"
-msgstr "określono jednocześnie 'df' oraz 'cv'; drugi zostanie odrzucony"
 
 #. R/loess.R: stop("specified parametric for all predictors")
 #: R/loess.R:0
@@ -6340,11 +6340,6 @@ msgstr "'x' nie jest wektorem ani jednowymiarowym szeregiem czasowym"
 msgid "y values must be 0 <= y <= 1"
 msgstr "wartości 'y' muszą być z przedziału 0 <= y <= 1"
 
-#. R/smspline.R: gettextf("you must supply 1 < df <= n,  n = #{unique x} = %d", nx)
-#: R/smspline.R:0
-msgid "you must supply 1 < df <= n,  n = #{unique x} = %d"
-msgstr "musisz dostarczyć 1 < df <= n,  n = #{unikalne x} = %d"
-
 #. R/approx.R: stop("zero non-NA points")
 #. R/approx.R: stop("zero non-NA points")
 #. R/spline.R: stop("zero non-NA points")
@@ -6771,6 +6766,9 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "używanie %d/%d wiersza z połączonego dopasowania"
 msgstr[1] "używanie %d/%d wierszy z połączonego dopasowania"
 msgstr[2] "używanie %d/%d wierszy z połączonego dopasowania"
+
+#~ msgid "specified both 'df' and 'cv'; will disregard the latter"
+#~ msgstr "określono jednocześnie 'df' oraz 'cv'; drugi zostanie odrzucony"
 
 #~ msgid "Rotation:"
 #~ msgstr "Obrót:"

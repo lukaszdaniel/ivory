@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-09 23:04\n"
+"POT-Creation-Date: 2016-04-26 22:47\n"
 "PO-Revision-Date: 2011-04-01 04:29+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -1871,6 +1871,12 @@ msgstr ""
 msgid "character string is not in a standard unambiguous format"
 msgstr ""
 
+#. R/datetime.R: gettextf("class %s of length 0", dQuote(class(x)[1L]))
+#: R/datetime.R:0
+#, fuzzy
+msgid "class %s of length 0"
+msgstr "isim alanı"
+
 #. R/format.R: warning("class of 'x' argument was discarded")
 #: R/format.R:0
 msgid "class of 'x' argument was discarded"
@@ -1947,6 +1953,11 @@ msgstr ""
 #. R/dataframe.R: stop("duplicate values in 'row.names' are not allowed")
 #: R/dataframe.R:0
 msgid "duplicate values in 'row.names' are not allowed"
+msgstr ""
+
+#. R/eigen.R: gettext("eigenvalues and eigenvectors decomposition", domain = "R-base")
+#: R/eigen.R:0
+msgid "eigenvalues and eigenvectors decomposition"
 msgstr ""
 
 #. R/scan.R: stop("either specify 'nmax' or 'n', but not both.")
@@ -3116,7 +3127,6 @@ msgid "you cannot be serious"
 msgstr ""
 
 #. R/dates.R: ngettext(as.integer(length(x) - max), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
-#. R/datetime.R: ngettext(as.integer(length(x) - max), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
 #. R/datetime.R: ngettext(as.integer(length(x) - max.print), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
 #: R/dates.R:0 R/datetime.R:0
 msgid " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]"

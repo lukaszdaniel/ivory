@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-09 23:04\n"
+"POT-Creation-Date: 2016-04-26 22:47\n"
 "PO-Revision-Date: 2015-01-17 13:31+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: R-core <r-core@r-project.org>\n"
@@ -2027,6 +2027,12 @@ msgstr "kann die Nachrichtenverbindung nicht aufteilen"
 msgid "character string is not in a standard unambiguous format"
 msgstr "Zeichenkette ist nicht in einem eindeutigen Standardformat"
 
+#. R/datetime.R: gettextf("class %s of length 0", dQuote(class(x)[1L]))
+#: R/datetime.R:0
+#, fuzzy
+msgid "class %s of length 0"
+msgstr "'to' muss Länge 1 haben"
+
 #. R/format.R: warning("class of 'x' argument was discarded")
 #: R/format.R:0
 #, fuzzy
@@ -2113,6 +2119,11 @@ msgstr "doppelte Symbolnamen %s in useDynlib(\"%s\")"
 #, fuzzy
 msgid "duplicate values in 'row.names' are not allowed"
 msgstr "doppelte 'row.names' nicht zulässig"
+
+#. R/eigen.R: gettext("eigenvalues and eigenvectors decomposition", domain = "R-base")
+#: R/eigen.R:0
+msgid "eigenvalues and eigenvectors decomposition"
+msgstr ""
 
 #. R/scan.R: stop("either specify 'nmax' or 'n', but not both.")
 #: R/scan.R:0
@@ -3381,7 +3392,6 @@ msgid "you cannot be serious"
 msgstr "Das meinen Sie nicht ernst"
 
 #. R/dates.R: ngettext(as.integer(length(x) - max), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
-#. R/datetime.R: ngettext(as.integer(length(x) - max), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
 #. R/datetime.R: ngettext(as.integer(length(x) - max.print), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
 #: R/dates.R:0 R/datetime.R:0
 msgid " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]"
@@ -3779,10 +3789,6 @@ msgstr[1] "T statt TRUE benutzt"
 #, fuzzy
 #~ msgid "%s should be one of %s"
 #~ msgstr "'arg' sollte eines  von '%s' sein"
-
-#, fuzzy
-#~ msgid "%s must be of length 1"
-#~ msgstr "'to' muss Länge 1 haben"
 
 #, fuzzy
 #~ msgid "'%s' cannot be coerced to class %s"

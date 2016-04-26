@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-09 23:04\n"
+"POT-Creation-Date: 2016-04-26 22:47\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -2022,6 +2022,12 @@ msgstr "메세지 연결을 분할 할 수 없습니다 "
 msgid "character string is not in a standard unambiguous format"
 msgstr "문자열이 표준서식을 따르지 않습니다 "
 
+#. R/datetime.R: gettextf("class %s of length 0", dQuote(class(x)[1L]))
+#: R/datetime.R:0
+#, fuzzy
+msgid "class %s of length 0"
+msgstr "'to' 의 길이는 반드시 1 이어야 합니다 "
+
 #. R/format.R: warning("class of 'x' argument was discarded")
 #: R/format.R:0
 #, fuzzy
@@ -2107,6 +2113,11 @@ msgstr "useDynlib(\"%s\") 에 심볼이름 %s 가 중복되었습니다 "
 #, fuzzy
 msgid "duplicate values in 'row.names' are not allowed"
 msgstr "'row.names' 가 중복되었습니다 "
+
+#. R/eigen.R: gettext("eigenvalues and eigenvectors decomposition", domain = "R-base")
+#: R/eigen.R:0
+msgid "eigenvalues and eigenvectors decomposition"
+msgstr ""
 
 #. R/scan.R: stop("either specify 'nmax' or 'n', but not both.")
 #: R/scan.R:0
@@ -3367,7 +3378,6 @@ msgid "you cannot be serious"
 msgstr "you cannot be serious"
 
 #. R/dates.R: ngettext(as.integer(length(x) - max), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
-#. R/datetime.R: ngettext(as.integer(length(x) - max), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
 #. R/datetime.R: ngettext(as.integer(length(x) - max.print), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
 #: R/dates.R:0 R/datetime.R:0
 msgid " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]"
@@ -3727,10 +3737,6 @@ msgstr[0] "TRUE 대신 T 가 사용되었습니다 "
 #, fuzzy
 #~ msgid "%s should be one of %s"
 #~ msgstr "'arg' 는 %s 중에 하나 이어야 합니다 "
-
-#, fuzzy
-#~ msgid "%s must be of length 1"
-#~ msgstr "'to' 의 길이는 반드시 1 이어야 합니다 "
 
 #, fuzzy
 #~ msgid "'%s' cannot be coerced to class %s"

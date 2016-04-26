@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-03 21:10\n"
+"POT-Creation-Date: 2016-04-26 22:47\n"
 "PO-Revision-Date: 2012-03-15 11:56-0500\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -428,6 +428,11 @@ msgstr ""
 msgid ""
 "All %s names must be nonempty in:\n"
 "(%s)"
+msgstr ""
+
+#. R/RClassUtils.R: gettextf("Also defined by %s", paste(sQuote(pkgs[-1]), collapse = " "))
+#: R/RClassUtils.R:0
+msgid "Also defined by %s"
 msgstr ""
 
 #. R/BasicClasses.R: gettextf("An object of class %s", dQuote(cl), domain = "R-methods")

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stats 3.4.0\n"
-"POT-Creation-Date: 2016-04-03 21:10\n"
+"POT-Creation-Date: 2016-04-26 22:47\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6774,6 +6774,13 @@ msgid "not plotting observations with leverage one:\n  %s"
 msgstr ""
 
 
+#: R/smspline.R: 0
+#. R/smspline.R: gettextf("not using invalid df; must have 1 < df <= n := #{unique x} = %d", nx)
+
+msgid "not using invalid df; must have 1 < df <= n := #{unique x} = %d"
+msgstr ""
+
+
 #: R/ftable.R: 0
 #. R/ftable.R: stop("nothing to tabulate")
 
@@ -7549,13 +7556,6 @@ msgstr ""
 #. R/smspline.R: stop("some weights should be positive")
 
 msgid "some weights should be positive"
-msgstr ""
-
-
-#: R/smspline.R: 0
-#. R/smspline.R: warning("specified both 'df' and 'cv'; will disregard the latter")
-
-msgid "specified both 'df' and 'cv'; will disregard the latter"
 msgstr ""
 
 
@@ -8519,13 +8519,6 @@ msgstr ""
 #. R/family.R: stop("y values must be 0 <= y <= 1")
 
 msgid "y values must be 0 <= y <= 1"
-msgstr ""
-
-
-#: R/smspline.R: 0
-#. R/smspline.R: gettextf("you must supply 1 < df <= n,  n = #{unique x} = %d", nx)
-
-msgid "you must supply 1 < df <= n,  n = #{unique x} = %d"
 msgstr ""
 
 

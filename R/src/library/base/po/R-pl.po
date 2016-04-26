@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-09 23:04\n"
+"POT-Creation-Date: 2016-04-26 22:47\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -156,9 +156,8 @@ msgstr "argument '%s' posiada długość > 1"
 
 #. R/format.R: gettextf("'%s' argument has no characters", "input.d.mark")
 #: R/format.R:0
-#, fuzzy
 msgid "'%s' argument has no characters"
-msgstr "argument '%s' nie jest czynnikiem"
+msgstr "argument '%s' nie ma znaków"
 
 #. R/dates.R: gettextf("'%s' argument is NA", "by")
 #. R/datetime.R: gettextf("'%s' argument is NA", "by")
@@ -207,9 +206,8 @@ msgstr "argument '%s' nie jest funkcją"
 
 #. R/namespace.R: gettextf("'%s' argument is not a namespace", "ns")
 #: R/namespace.R:0
-#, fuzzy
 msgid "'%s' argument is not a namespace"
-msgstr "argument 'ns' nie jest przestrzenią nazw"
+msgstr "argument '%s' nie jest przestrzenią nazw"
 
 #. R/table.R: gettextf("'%s' argument is not an array", "x")
 #: R/table.R:0
@@ -458,16 +456,14 @@ msgstr "argument '%s' powinien być jednym z %s"
 #. R/all.equal.R: gettextf("'%s' argument's class is %s, '%s' argument's class is %s", "target", data.class(target),     "current", data.class(current))
 #. R/all.equal.R: gettextf("'%s' argument's class is %s, '%s' argument's class is %s", "target", data.class(target),     "current", data.class(current))
 #: R/all.equal.R:0
-#, fuzzy
 msgid "'%s' argument's class is %s, '%s' argument's class is %s"
-msgstr "klasa argumentu 'target' to %s, klasa argumentu 'current' to %s"
+msgstr "klasa argumentu '%s' to %s, klasa argumentu '%s' to %s"
 
 #. R/all.equal.R: gettextf("'%s' argument's class is not list-like", "target")
 #. R/all.equal.R: gettextf("'%s' argument's class is not list-like", "current")
 #: R/all.equal.R:0
-#, fuzzy
 msgid "'%s' argument's class is not list-like"
-msgstr "klasa argumentu 'target' nie jest typu listy"
+msgstr "klasa argumentu '%s' nie jest typu listy"
 
 #. R/windows/system.R: gettextf("'%s' command could not be run", cmd0)
 #. R/windows/system.R: gettextf("'%s' command could not be run", cmd0)
@@ -1892,6 +1888,11 @@ msgstr "nie można rozdzielić komunikatu wiadomości"
 msgid "character string is not in a standard unambiguous format"
 msgstr "łańcuch tekstowy nie jest w standardowym jednoznacznym formacie"
 
+#. R/datetime.R: gettextf("class %s of length 0", dQuote(class(x)[1L]))
+#: R/datetime.R:0
+msgid "class %s of length 0"
+msgstr "klasa %s o długości 0"
+
 #. R/format.R: warning("class of 'x' argument was discarded")
 #: R/format.R:0
 msgid "class of 'x' argument was discarded"
@@ -1974,6 +1975,11 @@ msgstr "powtórzone nazwy symboli %s w 'useDynlib(\"%s\")'"
 #: R/dataframe.R:0
 msgid "duplicate values in 'row.names' are not allowed"
 msgstr "powtórzone wartości w 'row.names' nie są dozwolone"
+
+#. R/eigen.R: gettext("eigenvalues and eigenvectors decomposition", domain = "R-base")
+#: R/eigen.R:0
+msgid "eigenvalues and eigenvectors decomposition"
+msgstr "dekompozycja wartości własnych i wektorów własnych"
 
 #. R/scan.R: stop("either specify 'nmax' or 'n', but not both.")
 #: R/scan.R:0
@@ -3004,9 +3010,8 @@ msgstr "współdzielony obiekt %s nie został załadowany"
 #. R/solve.R: gettextf("singular matrix '%s' in '%s' function", "a", "solve()")
 #. R/solve.R: gettextf("singular matrix '%s' in '%s' function", "a", "solve()")
 #: R/solve.R:0
-#, fuzzy
 msgid "singular matrix '%s' in '%s' function"
-msgstr "osobliwa macierz 'a' w funkcji 'solve()'"
+msgstr "osobliwa macierz '%s' w funkcji '%s'"
 
 #. R/dataframe.R: gettextf("some row.names duplicated: %s --> row.names NOT used", paste(which(duplicated(new)),     collapse = ", "))
 #: R/dataframe.R:0
@@ -3032,7 +3037,6 @@ msgstr "to nie jest poprawne określenie restartu"
 
 #. R/solve.R: stop("this is the 'qr()' method for the generic function 'solve()'")
 #: R/solve.R:0
-#, fuzzy
 msgid "this is the 'qr()' method for the generic function 'solve()'"
 msgstr "to jest metoda 'qr()' dla ogólnej funkcji 'solve()'"
 
@@ -3181,7 +3185,6 @@ msgid "you cannot be serious"
 msgstr "chyba nie mówisz poważnie"
 
 #. R/dates.R: ngettext(as.integer(length(x) - max), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
-#. R/datetime.R: ngettext(as.integer(length(x) - max), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
 #. R/datetime.R: ngettext(as.integer(length(x) - max.print), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
 #: R/dates.R:0 R/datetime.R:0
 msgid " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]"
@@ -3646,9 +3649,6 @@ msgstr[2] "nie wszystkie zmienne %s mają wartość TRUE"
 
 #~ msgid "%s should be one of %s"
 #~ msgstr "argument %s powininen być jednym z %s"
-
-#~ msgid "%s must be of length 1"
-#~ msgstr "%s musi mieć długość 1"
 
 #~ msgid "'%s' cannot be coerced to class %s"
 #~ msgstr "argument '%s' nie może zostać przekształcony na klasę %s"

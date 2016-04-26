@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-09 23:04\n"
+"POT-Creation-Date: 2016-04-26 22:47\n"
 "PO-Revision-Date: 2011-03-26 08:54-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -2020,6 +2020,12 @@ msgstr "não é possível quebrar a mensagem de conexão"
 msgid "character string is not in a standard unambiguous format"
 msgstr "string de caracteres não é um formato padrão não ambíguo"
 
+#. R/datetime.R: gettextf("class %s of length 0", dQuote(class(x)[1L]))
+#: R/datetime.R:0
+#, fuzzy
+msgid "class %s of length 0"
+msgstr "'to' deve ter comprimento 1"
+
 #. R/format.R: warning("class of 'x' argument was discarded")
 #: R/format.R:0
 #, fuzzy
@@ -2106,6 +2112,11 @@ msgstr "nomes de símbolos duplicados %s em useDynlib(\"%s\")"
 #, fuzzy
 msgid "duplicate values in 'row.names' are not allowed"
 msgstr "'row.names' duplicados não são permitidos"
+
+#. R/eigen.R: gettext("eigenvalues and eigenvectors decomposition", domain = "R-base")
+#: R/eigen.R:0
+msgid "eigenvalues and eigenvectors decomposition"
+msgstr ""
 
 #. R/scan.R: stop("either specify 'nmax' or 'n', but not both.")
 #: R/scan.R:0
@@ -3388,7 +3399,6 @@ msgid "you cannot be serious"
 msgstr "você não pode estar falando sério"
 
 #. R/dates.R: ngettext(as.integer(length(x) - max), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
-#. R/datetime.R: ngettext(as.integer(length(x) - max), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
 #. R/datetime.R: ngettext(as.integer(length(x) - max.print), " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]",     " [ reached 'getOption(\"max.print\")' -- omitted %d entries ]", domain = "R-base")
 #: R/dates.R:0 R/datetime.R:0
 msgid " [ reached 'getOption(\"max.print\")' -- omitted %d entry ]"
@@ -3783,10 +3793,6 @@ msgstr[1] "T usado ao invés de TRUE"
 #, fuzzy
 #~ msgid "%s should be one of %s"
 #~ msgstr "'arg' deve ser um dentre %s"
-
-#, fuzzy
-#~ msgid "%s must be of length 1"
-#~ msgstr "'to' deve ter comprimento 1"
 
 #, fuzzy
 #~ msgid "'%s' cannot be coerced to class %s"
