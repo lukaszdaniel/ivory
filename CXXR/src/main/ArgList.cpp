@@ -187,6 +187,9 @@ const RObject* ArgList::getTag(int position) const {
 }
 
 bool ArgList::has3Dots() const {
+  if (!list())
+    return false;
+
   for (const ConsCell& cell : *list()) {
     if (cell.car() == R_DotsSymbol)
       return true;

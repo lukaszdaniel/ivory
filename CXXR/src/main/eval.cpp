@@ -780,7 +780,7 @@ static SEXP assignCall(SEXP op, SEXP symbol, SEXP fun,
 
 Rboolean asLogicalNoNA(SEXP s, SEXP call)
 {
-    Rboolean cond = RHOCONSTRUCT(Rboolean, NA_LOGICAL);
+    int cond = NA_LOGICAL;
 
     if (length(s) > 1)
     {
@@ -792,13 +792,13 @@ Rboolean asLogicalNoNA(SEXP s, SEXP call)
 	/* inline common cases for efficiency */
 	switch(TYPEOF(s)) {
 	case LGLSXP:
-	    cond = RHOCONSTRUCT(Rboolean, LOGICAL(s)[0]);
+	    cond = LOGICAL(s)[0];
 	    break;
 	case INTSXP:
-	    cond = RHOCONSTRUCT(Rboolean, INTEGER(s)[0]); /* relies on NA_INTEGER == NA_LOGICAL */
+	    cond = INTEGER(s)[0]; /* relies on NA_INTEGER == NA_LOGICAL */
 	    break;
 	default:
-	    cond = RHOCONSTRUCT(Rboolean, Rf_asLogical(s));
+	    cond = Rf_asLogical(s);
 	}
     }
 
@@ -809,7 +809,7 @@ Rboolean asLogicalNoNA(SEXP s, SEXP call)
 	    _("argument is of length 0");
 	Rf_errorcall(call, msg);
     }
-    return cond;
+    return static_cast<Rboolean>(cond);
 }
 
 
