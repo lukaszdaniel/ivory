@@ -6,7 +6,7 @@ Work began since R-3.0.0 and is being continued.
 R to some extent supports internationalization, yet the scope in my opinion isn't sufficient (i.e. right now mostly error and warning messages are translatable).
 
 
-IVORY has been tested only on Ubuntu 14.10 (64 bit) and Windows 7 (64 bit).
+IVORY was tested only on Ubuntu 14.10 (64 bit) and Windows 7 (64 bit).
 
 # Goals #
 Work on IVORY focuses on delivering solution that is functionally 100% compatible with original R-devel, and nonfunctional aspects (such as messages) differ only when it's necessary or it increases usability.
