@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-03-08 r639) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-04-29 r724) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-03-08 r70286) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-04-29 r70562) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -3784,7 +3784,7 @@ sigma^2 estimated as 0.4566:  log likelihood = -101.2,  aic = 212.4
 > 
 > asOneSidedFormula("age")
 ~age
-<environment: 0x23a01a8>
+<environment: 0x43ae5f8>
 > asOneSidedFormula(~ age)
 ~age
 > 
@@ -4747,7 +4747,7 @@ function (V)
     r[cbind(seq_len(p), seq_len(p))] <- 1
     r
 }
-<bytecode: 0x365d398>
+<bytecode: 0x411a738>
 <environment: namespace:stats>
 > stopifnot(all.equal(Cl, cov2cor(cov(longley))),
 +           all.equal(cor(longley, method = "kendall"),
@@ -7278,7 +7278,7 @@ attr(,".Environment")
 > environment(as.formula("y ~ x"))
 <environment: R_GlobalEnv>
 > environment(as.formula("y ~ x", env = new.env()))
-<environment: 0x1c32bb0>
+<environment: 0x57f7ad8>
 > 
 > 
 > ## Create a formula for a model with a large number of variables:
@@ -8074,7 +8074,7 @@ Error in command 'integrate(f, 0, 1)':
 + ## "silently" gave  integrate(dnorm, 0, 20)  in earlier versions of R
 + ## Don't show: 
 +  , verbose=TRUE)
-Asserted error: 'lower' must be of length one
+Asserted error: 'lower' argument must be of length one
 > ## End (Don't show)
 > 
 > 
@@ -11764,14 +11764,14 @@ attr(,"class")
 $linkfun
 function (mu) 
 mu^lambda
-<bytecode: 0x28259b8>
-<environment: 0x281d298>
+<bytecode: 0x575a5d8>
+<environment: 0x5221938>
 
 $linkinv
 function (eta) 
 pmax(eta^(1/lambda), .Machine$double.eps)
-<bytecode: 0x2825ad0>
-<environment: 0x281d298>
+<bytecode: 0x575a4c0>
+<environment: 0x5221938>
 
 > 
 > 
@@ -15399,7 +15399,7 @@ Penalized Criterion: 0.4973656
 > lines(predict(s02, xx), col = 3); mtext(deparse(s02$call), col = 3)
 > 
 > ## Don't show: 
-> stopifnot(all.equal(predict(s02, xx),
+> stopifnot(all.equal(predict(s02 , xx),
 + 		    predict(s02., xx), tolerance = 1e-15))
 > ## End (Don't show)
 > 
@@ -15786,8 +15786,8 @@ Step function with continuity 'f'=0.2, 3 knots at:
 > unclass(sfun0)
 function (v) 
 .approxfun(x, y, v, method, yleft, yright, f)
-<bytecode: 0x286c5a0>
-<environment: 0x47d4288>
+<bytecode: 0x434d5f0>
+<environment: 0x69ca4d8>
 attr(,"call")
 stepfun(1:3, y0, f = 0)
 > ls(envir = environment(sfun0))
@@ -18064,7 +18064,7 @@ Number of Fisher Scoring iterations: 6
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  6.024 0.764 6.961 0 0 
+Time elapsed:  6.66 0.748 7.431 0 0 
 > grDevices::dev.off()
 null device 
           1 

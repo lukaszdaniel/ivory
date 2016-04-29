@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-03-08 r639) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-04-29 r724) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-03-08 r70286) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-04-29 r70562) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -3602,7 +3602,7 @@ $ylab
 +                     list(xlab = NULL, ylab = "fft")),
 +           identical(xy.labs(ff, xlab = "Re(fft)", ylab = "Im(fft)", setLab = FALSE),
 +                     list(xlab = "Re(fft)", ylab = "Im(fft)")))
-> ## End(Don't show)
+> ## End (Don't show)
 > with(cars, xy.coords(dist ~ speed, NULL)$xlab ) # = "speed"
 [1] "speed"
 > 
@@ -3619,8 +3619,8 @@ NULL
 $ylab
 NULL
 
-> xy.coords(-2:10, NULL, log = "y")
-Warning in command 'xy.coords(-2:10, NULL, log = "y")':
+> xy.coords(-2:10, log = "y")
+Warning in command 'xy.coords(-2:10, log = "y")':
   3 y values <= 0 omitted from logarithmic plot
 $x
  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13
@@ -3724,7 +3724,7 @@ $z
 [1] -4 -4 -4 -4 -4 -4 -4 -4 -4
 
 $xlab
-[1] "Index"
+NULL
 
 $ylab
 NULL
@@ -3804,7 +3804,7 @@ $zlab
 > ###
 > options(digits = 7L)
 > base::cat(gettext("Time elapsed: ", domain = "R-base"), proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  9.628 0.328 9.966 0 0 
+Time elapsed:  10.72 0.476 11.207 0 0 
 > grDevices::dev.off()
 null device 
           1 

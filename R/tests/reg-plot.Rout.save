@@ -1,9 +1,9 @@
 
-Ivory Under development (unstable) (2016-03-08 r639) -- "Internationalized Version of R"
+Ivory Under development (unstable) (2016-04-29 r724) -- "Internationalized Version of R"
 Copyright (C) 2013-2016 Lukasz Daniel (lukasz.daniel@gmail.com)
 See README-IVORY file for details.
 
-R Under development (unstable) (2016-03-08 r70286) -- "Unsuffered Consequences"
+R Under development (unstable) (2016-04-29 r70562) -- "Unsuffered Consequences"
 Copyright (C) 2016 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -69,10 +69,10 @@ List of 3 components
 > t1 <- ts(0:100)
 > ## only warnings about values <= 0
 > plot(t1, log = "y")
-Warning in command 'xy.coords(x, NULL, log = log)':
+Warning in command 'xy.coords(x, NULL, log = log, setLab = FALSE)':
   1 y value <= 0 omitted from logarithmic plot
 > plot(cbind(t1, 10*t1, t1 - 4), log="y", plot.type = "single")
-Warning in command 'xy.coords(x = matrix(rep.int(tx, k), ncol = k), y = x, log = log)':
+Warning in command 'xy.coords(x = matrix(rep.int(tx, k), ncol = k), y = x, log = log, setLab = FALSE)':
   7 y values <= 0 omitted from logarithmic plot
 > stopifnot(par("usr")[4] > 3) # log10: ylim[2] = 1000
 > 
