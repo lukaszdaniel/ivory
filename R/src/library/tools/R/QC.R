@@ -6749,17 +6749,36 @@ function(dir)
     if(!isTRUE(out$descr_bad_start) && !grepl("^['\"]?[[:upper:]]", descr))
        out$descr_bad_initial <- TRUE
 
+    skip_dates <-
+        config_val_to_logical(Sys.getenv("_R_CHECK_CRAN_INCOMING_SKIP_DATES_",
+                                         "FALSE"))
+    
     ## Check Date
     date <- trimws(as.vector(meta["Date"]))
     if(!is.na(date)) {
         dd <- strptime(date, "%Y-%m-%d", tz = "GMT")
         if (is.na(dd)) out$bad_date <- TRUE
-        else if((as.Date(dd) < Sys.Date() - 31) &&
-                !config_val_to_logical(Sys.getenv("_R_CHECK_CRAN_INCOMING_SKIP_DATES_",
-                                                  "FALSE")))
+        else if(!skip_dates && (as.Date(dd) < Sys.Date() - 31))
             out$old_date <- TRUE
     }
 
+    ## Check build time stamp
+    info <- trimws(as.vector(meta["Packaged"]))
+    if(is.na(info)) {
+        out$build_time_stamp_msg <-
+            gettext("The build time stamp is missing.", domain = "R-tools")
+    } else {
+        ts <- strptime(info, "%Y-%m-%d", tz = "GMT")
+        if(is.na(ts)) {
+            out$build_time_stamp_msg <-
+                gettext("The build time stamp has invalid/outdated format.", domain = "R-tools")
+        }
+        else if(!skip_dates && (as.Date(ts) < Sys.Date() - 31)) {
+            out$build_time_stamp_msg <-
+                gettext("This build time stamp is over a month old.", domain = "R-tools")
+        }
+    }
+    
     ## Check URLs.
     if(capabilities("libcurl")) {
         ## Be defensive about building the package URL db.
@@ -7154,6 +7173,7 @@ function(x, ...)
             if(length(x$old_date)) {
                 gettext("The Date field is over a month old.", domain = "R-tools")
             })),
+      if(length(y <- x$build_time_stamp_msg)) y,
       if(length(y <- x$size_of_tarball))
           sprintf(ngettext(y, "Size of tarball: %d byte", "Size of tarball: %d bytes", domain = "R-tools"), y)
       )

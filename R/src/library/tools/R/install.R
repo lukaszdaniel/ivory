@@ -1468,18 +1468,7 @@
                 errmsg(gettextf("ERROR: extracted multiple files from %s", sQuote(pkg)))
             if (dir.exists(new)) pkgname <- basename(new)
             else errmsg(gettextf("ERROR: cannot extract package from %s", sQuote(pkg)))
-
-            ## If we have a binary bundle distribution, there should
-            ## be a DESCRIPTION file at top level. These are defunct
-            if (file.exists(ff <- file.path(tmpdir, "DESCRIPTION"))) {
-                con <- read.dcf(ff, "Contains")
-                if (!is.na(con))
-                    message("looks like a binary bundle", domain = "R-tools")
-                else
-                    message("unknown package layout", domain = "R-tools")
-                do_cleanup_tmpdir()
-                q("no", status = 1, runLast = FALSE)
-            } else if (file.exists(file.path(tmpdir, pkgname, "DESCRIPTION"))) {
+            if (file.exists(file.path(tmpdir, pkgname, "DESCRIPTION"))) {
                 allpkgs <- c(allpkgs, file.path(tmpdir, pkgname))
             } else errmsg(gettextf("ERROR: cannot extract package from %s", sQuote(pkg)))
         } else if (file.exists(file.path(pkg, "DESCRIPTION"))) {
@@ -2254,7 +2243,7 @@ function()
             m <- f
         else if(file.exists(f <- path.expand("~/.R/Makevars")))
             m <- f
-    } 
+    }
     else {
         if(!is.na(f <- Sys.getenv("R_MAKEVARS_USER", NA_character_))) {
             if(file.exists(f)) m <- f
@@ -2265,7 +2254,7 @@ function()
             m <- f
         else if(file.exists(f <- path.expand("~/.R/Makevars")))
             m <- f
-    }        
+    }
     m
 }
 
