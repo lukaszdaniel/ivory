@@ -5710,6 +5710,14 @@ static SEXP bcEval(SEXP body, SEXP rho, Rboolean useCache)
 	SEXP forms = VECTOR_ELT(fb, 0);
 	SEXP body = VECTOR_ELT(fb, 1);
 	value = mkCLOSXP(forms, body, rho);
+	/* The LENGTH check below allows for byte code object created
+	   by oder versions of the compiler that did not record a
+	   source attribute. */
+	/* FIXME: bump bc version and don't check LENGTH? */
+	if (LENGTH(fb) > 2) {
+	  SEXP srcref = VECTOR_ELT(fb, 2);
+	  if (!isNull(srcref)) setAttrib(value, R_SrcrefSymbol, srcref);
+	}
 	BCNPUSH(value);
 	NEXT();
       }
@@ -6196,6 +6204,13 @@ SEXP R_bcEncode(SEXP bytes)
 
 	/* install the current version number */
 	pc[0].i = R_bcVersion;
+
+	/* Revert to version 2 to allow for some one compiling in a
+	   new R, loading/saving in an old one, and then trying to run
+	   in a new one. This has happened! Setting the version number
+	   back tells bcEval to drop back to eval. */
+	if (n == 2 && ipc[1] == BCMISMATCH_OP)
+	    pc[0].i = 2;
 
 	for (i = 1; i < n;) {
 	    int op = pc[i].i;

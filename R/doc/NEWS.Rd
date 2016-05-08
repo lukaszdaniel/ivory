@@ -53,6 +53,11 @@
 
       \item \code{stopifnot(E, ..)} now reports differences when
       \code{E} is a call to \code{all.equal()} and that is not true.
+
+      \item \code{boxplot(<formula>, *)} gets optional arguments
+      \code{drop}, \code{sep}, and \code{lex.order} to pass to
+      \code{split.default()} which itself newly gets \code{lex.order} to
+      pass to \code{interaction()} for more flexibility.
     }
   }
   \subsection{DEPRECATED AND DEFUNCT}{
@@ -89,6 +94,12 @@
       \item \command{R CMD INSTALL} and hence \code{install.packages()}
       gave an internal error installing a package called
       \pkg{description} from a tarball on a case-insensitive file system.
+
+      \item \command{match(x, t)} (and hence \code{x \%in\% t}) failed
+      when \code{x} was of length one, and either \code{character} and \code{x}
+      and \code{t} only differed in their \code{Encoding} or when
+      \code{x} and \code{t} where \code{complex} with \code{NA}s or \code{NaN}s.
+      (\PR{16885}.)
     }
   }
 }
