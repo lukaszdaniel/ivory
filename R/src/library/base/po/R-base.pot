@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: base 3.4.0\n"
-"POT-Creation-Date: 2016-04-26 22:47\n"
+"POT-Creation-Date: 2016-05-11 18:13\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,6 +15,13 @@ msgstr ""
 #. R/New-Internal.R: stop("\"hexNumeric\" and \"digits17\" are mutually exclusive")
 
 msgid "\"hexNumeric\" and \"digits17\" are mutually exclusive"
+msgstr ""
+
+
+#: R/stop.R: 0
+#. R/stop.R: gettext("%s and %s are not equal:\n  %s", domain = "R-base")
+
+msgid "%s and %s are not equal:\n  %s"
 msgstr ""
 
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-26 22:47\n"
+"POT-Creation-Date: 2016-05-11 18:13\n"
 "PO-Revision-Date: 2016-01-09 20:39+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: \n"
@@ -717,6 +717,11 @@ msgstr ""
 #. R/check.R: gettext("Compiled code should not call non-API entry points in R.\n", domain = "R-tools")
 #: R/check.R:0
 msgid "Compiled code should not call non-API entry points in R."
+msgstr ""
+
+#. R/check.R: gettext("Complete output:\n", domain = "R-tools")
+#: R/check.R:0
+msgid "Complete output:"
 msgstr ""
 
 #. R/RdConv2.R: gettext("Condition must be \\Sexpr or plain text")
@@ -1759,11 +1764,6 @@ msgstr ""
 #. R/utils.R: gettext("LaTeX errors:", domain = "R-tools")
 #: R/utils.R:0
 msgid "LaTeX errors:"
-msgstr ""
-
-#. R/check.R: gettext("Last 13 lines of output:\n", domain = "R-tools")
-#: R/check.R:0
-msgid "Last 13 lines of output:"
 msgstr ""
 
 #. R/QC.R: gettext("License components which are templates and need '+ file LICENSE':", domain = "R-tools")
@@ -3137,6 +3137,17 @@ msgid ""
 "side must be named 'value'."
 msgstr ""
 
+#. R/QC.R: gettext("The build time stamp has invalid/outdated format.", domain = "R-tools")
+#: R/QC.R:0
+msgid "The build time stamp has invalid/outdated format."
+msgstr ""
+
+#. R/QC.R: gettext("The build time stamp is missing.", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "The build time stamp is missing."
+msgstr "Krævede felter mangler:"
+
 #. R/bibstyle.R: stop("The default JSS style may not be modified.")
 #: R/bibstyle.R:0
 msgid "The default JSS style may not be modified."
@@ -3301,6 +3312,11 @@ msgstr ""
 #. R/check.R: gettext("These lines will be truncated in the PDF manual.\n", domain = "R-tools")
 #: R/check.R:0
 msgid "These lines will be truncated in the PDF manual."
+msgstr ""
+
+#. R/QC.R: gettext("This build time stamp is over a month old.", domain = "R-tools")
+#: R/QC.R:0
+msgid "This build time stamp is over a month old."
 msgstr ""
 
 #. R/QC.R: gettextf("This field must contain one or more packages (and no version requirement).",     domain = "R-tools")
@@ -4930,11 +4946,6 @@ msgstr "Dette er navnet på en basispakke."
 msgid "looks like %s is a package bundle -- they are defunct"
 msgstr ""
 
-#. R/install.R: message("looks like a binary bundle", domain = "R-tools")
-#: R/install.R:0
-msgid "looks like a binary bundle"
-msgstr ""
-
 #. R/install.R: gettextf("make cmd is\n  %s\n\nmake would use:\n", cmd, domain = "R-tools")
 #: R/install.R:0
 msgid ""
@@ -5702,11 +5713,6 @@ msgstr "kan ikke skrive kodefiler"
 msgid "unimplemented encoding"
 msgstr ""
 
-#. R/install.R: message("unknown package layout", domain = "R-tools")
-#: R/install.R:0
-msgid "unknown package layout"
-msgstr ""
-
 #. R/pdftools.R: gettextf("unsupported %s predictor %d", sQuote("flatedecode"), predictor)
 #: R/pdftools.R:0
 msgid "unsupported %s predictor %d"
@@ -6251,6 +6257,13 @@ msgstr[1] ""
 #: R/dynamicHelp.R:0
 msgid "Help on topic '%s' was found in the following package:"
 msgid_plural "Help on topic '%s' was found in the following packages:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/check.R: ngettext(keep, "Last %i line of output:\n", "Last %i lines of output:\n", domain = "R-tools")
+#: R/check.R:0
+msgid "Last %i line of output:\n"
+msgid_plural "Last %i lines of output:\n"
 msgstr[0] ""
 msgstr[1] ""
 

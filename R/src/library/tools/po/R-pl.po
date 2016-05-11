@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-26 22:47\n"
+"POT-Creation-Date: 2016-05-11 18:13\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -763,6 +763,11 @@ msgstr ""
 msgid "Compiled code should not call non-API entry points in R."
 msgstr ""
 "Skompilowany kod nie powinien wywoływać punktów wejścia nie będących API w R."
+
+#. R/check.R: gettext("Complete output:\n", domain = "R-tools")
+#: R/check.R:0
+msgid "Complete output:"
+msgstr "Kompletne wyjście:"
 
 #. R/RdConv2.R: gettext("Condition must be \\Sexpr or plain text")
 #: R/RdConv2.R:0
@@ -1843,11 +1848,6 @@ msgstr ""
 #: R/utils.R:0
 msgid "LaTeX errors:"
 msgstr "Błędy LaTeXa:"
-
-#. R/check.R: gettext("Last 13 lines of output:\n", domain = "R-tools")
-#: R/check.R:0
-msgid "Last 13 lines of output:"
-msgstr "Ostatnie 13 linii wyjścia:"
 
 #. R/QC.R: gettext("License components which are templates and need '+ file LICENSE':", domain = "R-tools")
 #: R/QC.R:0
@@ -3309,6 +3309,17 @@ msgstr ""
 "Argument funkcji zastępującej, który odpowiada prawej stronie musi mieć "
 "nazwę 'value'."
 
+#. R/QC.R: gettext("The build time stamp has invalid/outdated format.", domain = "R-tools")
+#: R/QC.R:0
+msgid "The build time stamp has invalid/outdated format."
+msgstr ""
+
+#. R/QC.R: gettext("The build time stamp is missing.", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "The build time stamp is missing."
+msgstr "brakuje pliku %s"
+
 #. R/bibstyle.R: stop("The default JSS style may not be modified.")
 #: R/bibstyle.R:0
 msgid "The default JSS style may not be modified."
@@ -3506,6 +3517,12 @@ msgstr "Te pliki są przestarzałe. Zobacz podręcznik 'Writing R Extensions'."
 #: R/check.R:0
 msgid "These lines will be truncated in the PDF manual."
 msgstr "Te linie zostaną przycięte w podręczniku PDF."
+
+#. R/QC.R: gettext("This build time stamp is over a month old.", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "This build time stamp is over a month old."
+msgstr "Pole 'Date' jest ponad miesiąc stare."
 
 #. R/QC.R: gettextf("This field must contain one or more packages (and no version requirement).",     domain = "R-tools")
 #: R/QC.R:0
@@ -5110,11 +5127,6 @@ msgstr "wygląda na to, że %s jest bazowym pakietem"
 msgid "looks like %s is a package bundle -- they are defunct"
 msgstr "wygląda na to, że %s jest paczką pakietów - a one zostały zlikwidowane"
 
-#. R/install.R: message("looks like a binary bundle", domain = "R-tools")
-#: R/install.R:0
-msgid "looks like a binary bundle"
-msgstr "wygląda, że jest to binarna paczka"
-
 #. R/install.R: gettextf("make cmd is\n  %s\n\nmake would use:\n", cmd, domain = "R-tools")
 #: R/install.R:0
 msgid ""
@@ -5857,11 +5869,6 @@ msgstr "nie można zapisać plików kodu"
 msgid "unimplemented encoding"
 msgstr "niezaimplementowana strona kodowa"
 
-#. R/install.R: message("unknown package layout", domain = "R-tools")
-#: R/install.R:0
-msgid "unknown package layout"
-msgstr "niepoprawna struktura pakietu"
-
 #. R/pdftools.R: gettextf("unsupported %s predictor %d", sQuote("flatedecode"), predictor)
 #: R/pdftools.R:0
 msgid "unsupported %s predictor %d"
@@ -6569,6 +6576,14 @@ msgstr[0] "Pomoc na temat '%s' została znaleziona w następującym pakiecie:"
 msgstr[1] "Pomoc na temat '%s' została znaleziona w następujących pakietach:"
 msgstr[2] "Pomoc na temat '%s' została znaleziona w następujących pakietach:"
 
+#. R/check.R: ngettext(keep, "Last %i line of output:\n", "Last %i lines of output:\n", domain = "R-tools")
+#: R/check.R:0
+msgid "Last %i line of output:\n"
+msgid_plural "Last %i lines of output:\n"
+msgstr[0] "Ostatnia %i linia wyjścia:\n"
+msgstr[1] "Ostatnie %i linie wyjścia:\n"
+msgstr[2] "Ostatnie %i linii wyjścia:\n"
+
 #. R/QC.R: ngettext(length(xx), "Missing object imported by a ':::' call: %s", "Missing objects imported by a ':::' calls: %s",     domain = "R-tools")
 #: R/QC.R:0
 msgid "Missing object imported by a ':::' call: %s"
@@ -7140,6 +7155,12 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "nie można przekodować %s linia %s"
 msgstr[1] "nie można przekodować %s linie %s"
 msgstr[2] "nie można przekodować %s linie %s"
+
+#~ msgid "looks like a binary bundle"
+#~ msgstr "wygląda, że jest to binarna paczka"
+
+#~ msgid "unknown package layout"
+#~ msgstr "niepoprawna struktura pakietu"
 
 #~ msgid "Subdirectory 'exec' contains no files."
 #~ msgstr "Podkatalog 'exec' nie zawiera żadnych plików."

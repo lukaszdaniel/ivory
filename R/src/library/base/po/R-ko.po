@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-26 22:47\n"
+"POT-Creation-Date: 2016-05-11 18:13\n"
 "PO-Revision-Date: 2012-03-08 20:10+0200\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team: The Korean R Translation Council <gnustats@gmail.com>\n"
@@ -22,6 +22,13 @@ msgstr ""
 #. R/New-Internal.R: stop("\"hexNumeric\" and \"digits17\" are mutually exclusive")
 #: R/New-Internal.R:0
 msgid "\"hexNumeric\" and \"digits17\" are mutually exclusive"
+msgstr ""
+
+#. R/stop.R: gettext("%s and %s are not equal:\n  %s", domain = "R-base")
+#: R/stop.R:0
+msgid ""
+"%s and %s are not equal:\n"
+"  %s"
 msgstr ""
 
 #. R/namespace.R: gettextf("%s failed in %s function for namespace %s, details:\n  call: %s\n  error: %s",     sQuote(hookname), sQuote("attachNamespace()"), sQuote(nsname), deparse(conditionCall(res))[1L],     conditionMessage(res))

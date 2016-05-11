@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-09 23:10+0200\n"
+"POT-Creation-Date: 2016-05-11 18:13+0200\n"
 "PO-Revision-Date: 2012-10-26 22:30+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -634,7 +634,7 @@ msgstr ""
 #: src/main/grep.c:2345 src/main/grep.c:2647 src/main/grep.c:2652
 #: src/main/internet.c:209 src/main/internet.c:223 src/main/internet.c:241
 #: src/main/internet.c:254 src/main/internet.c:266 src/main/internet.c:285
-#: src/main/memory.c:3819 src/main/names.c:1308 src/main/names.c:1311
+#: src/main/memory.c:3793 src/main/names.c:1307 src/main/names.c:1310
 #: src/main/objects.c:1611 src/main/objects.c:1613 src/main/paste.c:96
 #: src/main/paste.c:392 src/main/paste.c:399 src/main/paste.c:406
 #: src/main/paste.c:411 src/main/paste.c:416 src/main/paste.c:421
@@ -671,8 +671,8 @@ msgstr ""
 #: src/main/seq.c:661 src/main/seq.c:667 src/main/seq.c:675 src/main/sort.c:176
 #: src/main/sysutils.c:597 src/main/sysutils.c:601 src/main/sysutils.c:605
 #: src/main/sysutils.c:611 src/main/sysutils.c:615 src/main/sysutils.c:1786
-#: src/main/sysutils.c:1790 src/main/unique.c:1029 src/main/unique.c:1335
-#: src/main/unique.c:1339 src/main/unique.c:1349 src/main/unique.c:1745
+#: src/main/sysutils.c:1790 src/main/unique.c:1039 src/main/unique.c:1345
+#: src/main/unique.c:1349 src/main/unique.c:1359 src/main/unique.c:1755
 #: src/main/util.c:639 src/main/util.c:642 src/main/util.c:1382
 #: src/main/util.c:1396 src/main/util.c:1978 src/main/util.c:2201
 #: src/main/util.c:2202 src/main/util.c:2203 src/main/util.c:2220
@@ -714,7 +714,7 @@ msgid "cannot decrease memory limit: ignored"
 msgstr ""
 
 #: src/gnuwin32/extra.c:425 src/gnuwin32/extra.c:526 src/main/objects.c:857
-#: src/main/sysutils.c:642 src/main/unique.c:1632 src/main/util.c:965
+#: src/main/sysutils.c:642 src/main/unique.c:1642 src/main/util.c:965
 #, c-format
 msgid "'%s' argument must be a character vector"
 msgstr ""
@@ -722,7 +722,7 @@ msgstr ""
 #: src/gnuwin32/extra.c:429 src/main/edit.c:142 src/main/errors.c:1011
 #: src/main/errors.c:1013 src/main/objects.c:420 src/main/objects.c:1175
 #: src/main/options.c:340 src/main/raw.c:155 src/main/Renviron.c:311
-#: src/main/unique.c:1636 src/modules/lapack/Lapack.c:85
+#: src/main/unique.c:1646 src/modules/lapack/Lapack.c:85
 #: src/modules/lapack/Lapack.c:328 src/modules/lapack/Lapack.c:358
 #: src/modules/lapack/Lapack.c:406 src/modules/lapack/Lapack.c:442
 #: src/modules/lapack/Lapack.c:499 src/modules/lapack/Lapack.c:743
@@ -996,7 +996,7 @@ msgid ""
 msgstr ""
 
 #: src/gnuwin32/getline/getline.c:1041 src/gnuwin32/getline/wc_history.c:142
-#: src/main/edit.c:122 src/main/eval.c:6369 src/main/eval.c:6390
+#: src/main/edit.c:122 src/main/eval.c:6384 src/main/eval.c:6405
 #: src/main/saveload.c:2071 src/unix/hpdlfcn.c:150
 #, c-format
 msgid "unable to open file '%s'"
@@ -1046,7 +1046,7 @@ msgstr ""
 msgid "the 'value' of a raw object is not defined"
 msgstr ""
 
-#: src/include/Rinlinedfuns.h:718
+#: src/include/Rinlinedfuns.h:725
 msgid "cycle detected"
 msgstr ""
 
@@ -1363,8 +1363,8 @@ msgstr ""
 #: src/main/array.c:1351 src/main/connections.c:5490
 #: src/main/connections.c:5493 src/main/debug.c:112 src/main/objects.c:1043
 #: src/main/raw.c:56 src/main/raw.c:336 src/main/sort.c:326
-#: src/main/sort.c:1249 src/main/unique.c:670 src/main/unique.c:1445
-#: src/main/unique.c:1517 src/main/util.c:644 src/main/util.c:646
+#: src/main/sort.c:1249 src/main/unique.c:680 src/main/unique.c:1455
+#: src/main/unique.c:1527 src/main/util.c:644 src/main/util.c:646
 #, c-format
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr ""
@@ -1524,7 +1524,7 @@ msgstr ""
 #: src/main/attrib.c:1147 src/main/builtin.c:76 src/main/builtin.c:113
 #: src/main/envir.c:1809 src/main/envir.c:1937 src/main/envir.c:1997
 #: src/main/envir.c:2134 src/main/paste.c:74 src/main/paste.c:293
-#: src/main/random.c:480 src/main/random.c:509 src/main/unique.c:1744
+#: src/main/random.c:480 src/main/random.c:509 src/main/unique.c:1754
 msgid "invalid first argument"
 msgstr ""
 
@@ -1655,8 +1655,8 @@ msgstr ""
 msgid "'%s' argument is not a list"
 msgstr ""
 
-#: src/main/bind.c:1045 src/main/names.c:1274 src/main/names.c:1279
-#: src/main/names.c:1284 src/main/names.c:1289
+#: src/main/bind.c:1045 src/main/names.c:1273 src/main/names.c:1278
+#: src/main/names.c:1283 src/main/names.c:1288
 #, c-format
 msgid "class name is too long in '%s'"
 msgstr ""
@@ -1713,7 +1713,7 @@ msgstr ""
 #: src/main/envir.c:2141 src/main/envir.c:2860 src/main/envir.c:2946
 #: src/main/envir.c:3251 src/main/envir.c:3280 src/main/envir.c:3301
 #: src/main/envir.c:3324 src/main/envir.c:3358 src/main/envir.c:3378
-#: src/main/envir.c:3699 src/main/envir.c:3704 src/main/eval.c:6282
+#: src/main/envir.c:3699 src/main/envir.c:3704 src/main/eval.c:6297
 #: src/main/objects.c:192 src/main/objects.c:200 src/main/saveload.c:2065
 #: src/main/saveload.c:2356 src/main/serialize.c:2756
 msgid "use of NULL environment is defunct"
@@ -1797,7 +1797,7 @@ msgstr ""
 #: src/main/builtin.c:975 src/main/coerce.c:2534 src/main/coerce.c:2577
 #: src/main/eval.c:615 src/main/eval.c:734 src/main/eval.c:2280
 #: src/main/eval.c:2360 src/main/eval.c:2421 src/main/eval.c:2759
-#: src/main/eval.c:5617 src/main/eval.c:5734
+#: src/main/eval.c:5617 src/main/eval.c:5742
 msgid "'...' used in an incorrect context"
 msgstr ""
 
@@ -1811,7 +1811,7 @@ msgstr ""
 msgid "'%s' argument is missing"
 msgstr ""
 
-#: src/main/builtin.c:1034 src/main/eval.c:6089
+#: src/main/builtin.c:1034 src/main/eval.c:6097
 #, c-format
 msgid "'%s' argument must be a vector of length 1"
 msgstr ""
@@ -1972,7 +1972,7 @@ msgstr ""
 msgid "list argument expected"
 msgstr ""
 
-#: src/main/coerce.c:1535 src/main/eval.c:6286
+#: src/main/coerce.c:1535 src/main/eval.c:6301
 msgid "invalid environment"
 msgstr ""
 
@@ -2039,7 +2039,7 @@ msgid "'%s' argument must be a list or expression"
 msgstr ""
 
 #: src/main/coerce.c:2468 src/main/engine.c:2991 src/main/envir.c:1852
-#: src/main/envir.c:2867 src/main/envir.c:2948 src/main/unique.c:1343
+#: src/main/envir.c:2867 src/main/envir.c:2948 src/main/unique.c:1353
 #, c-format
 msgid "'%s' argument must be an environment"
 msgstr ""
@@ -4070,7 +4070,7 @@ msgstr ""
 msgid "unable to create profiling thread"
 msgstr ""
 
-#: src/main/eval.c:433 src/main/eval.c:6566
+#: src/main/eval.c:433 src/main/eval.c:6581
 msgid "setting profile timer failed"
 msgstr ""
 
@@ -4308,107 +4308,107 @@ msgstr ""
 msgid "Possibly overriden builtin: %s\n"
 msgstr ""
 
-#: src/main/eval.c:5556 src/main/names.c:1313
+#: src/main/eval.c:5556 src/main/names.c:1312
 #, c-format
 msgid "there is no '.Internal' function '%s'"
 msgstr ""
 
-#: src/main/eval.c:5655 src/main/eval.c:6001 src/main/eval.c:6041
+#: src/main/eval.c:5655 src/main/eval.c:6009 src/main/eval.c:6049
 msgid "bad function"
 msgstr ""
 
-#: src/main/eval.c:6092
+#: src/main/eval.c:6100
 #, c-format
 msgid ""
 "'EXPR' is an object of class \"factor\", treated as integer.\n"
 " Consider using '%s' instead."
 msgstr ""
 
-#: src/main/eval.c:6098 src/main/eval.c:6123
+#: src/main/eval.c:6106 src/main/eval.c:6131
 msgid "bad numeric 'switch()' offsets"
 msgstr ""
 
-#: src/main/eval.c:6101 src/main/eval.c:6129
+#: src/main/eval.c:6109 src/main/eval.c:6137
 msgid "'switch()' with no alternatives"
 msgstr ""
 
-#: src/main/eval.c:6104
+#: src/main/eval.c:6112
 msgid "numeric 'EXPR' required for 'switch()' without named alternatives"
 msgstr ""
 
-#: src/main/eval.c:6107
+#: src/main/eval.c:6115
 msgid "bad character 'switch()' offsets"
 msgstr ""
 
-#: src/main/eval.c:6109
+#: src/main/eval.c:6117
 msgid "bad 'switch()' names"
 msgstr ""
 
-#: src/main/eval.c:6203
+#: src/main/eval.c:6218
 msgid "unknown instruction code"
 msgstr ""
 
-#: src/main/eval.c:6219
+#: src/main/eval.c:6234
 msgid "cannot find index for threaded code address"
 msgstr ""
 
-#: src/main/eval.c:6279
+#: src/main/eval.c:6294
 msgid "invalid body"
 msgstr ""
 
-#: src/main/eval.c:6299
+#: src/main/eval.c:6314
 msgid "invalid symbol"
 msgstr ""
 
-#: src/main/eval.c:6343
+#: src/main/eval.c:6358
 msgid "'code' argument is not a byte code object"
 msgstr ""
 
-#: src/main/eval.c:6365
+#: src/main/eval.c:6380
 msgid "bad file name"
 msgstr ""
 
-#: src/main/eval.c:6384
+#: src/main/eval.c:6399
 #, c-format
 msgid "'%s' argument must be non-empty character string"
 msgstr ""
 
-#: src/main/eval.c:6386 src/main/saveload.c:1943 src/main/saveload.c:2238
+#: src/main/eval.c:6401 src/main/saveload.c:1943 src/main/saveload.c:2238
 #: src/main/serialize.c:2190 src/modules/lapack/Lapack.c:1237
 #, c-format
 msgid "'%s' argument must be logical"
 msgstr ""
 
-#: src/main/eval.c:6416 src/main/eval.c:6423
+#: src/main/eval.c:6431 src/main/eval.c:6438
 msgid "'R_CompiledFileName()': buffer is too small"
 msgstr ""
 
-#: src/main/eval.c:6457 src/main/eval.c:6476 src/main/eval.c:6506
+#: src/main/eval.c:6472 src/main/eval.c:6491 src/main/eval.c:6521
 msgid "constant buffer must be a generic vector"
 msgstr ""
 
-#: src/main/eval.c:6480
+#: src/main/eval.c:6495
 #, c-format
 msgid "bad '%s' value"
 msgstr ""
 
-#: src/main/eval.c:6508
+#: src/main/eval.c:6523
 msgid "bad constant count"
 msgstr ""
 
-#: src/main/eval.c:6546
+#: src/main/eval.c:6561
 msgid "profile timer is in use"
 msgstr ""
 
-#: src/main/eval.c:6548
+#: src/main/eval.c:6563
 msgid "already byte code profiling"
 msgstr ""
 
-#: src/main/eval.c:6584
+#: src/main/eval.c:6599
 msgid "no byte code profiling"
 msgstr ""
 
-#: src/main/eval.c:6600 src/main/eval.c:6604 src/main/eval.c:6608
+#: src/main/eval.c:6615 src/main/eval.c:6619 src/main/eval.c:6623
 msgid "byte code profiling is not supported in this build"
 msgstr ""
 
@@ -5302,167 +5302,167 @@ msgstr ""
 msgid "internal logical NA value has been modified"
 msgstr ""
 
-#: src/main/memory.c:3071
+#: src/main/memory.c:3045
 msgid "protect(): protection stack overflow"
 msgstr ""
 
-#: src/main/memory.c:3078
+#: src/main/memory.c:3052
 #, c-format
 msgid "unprotect(): only %d protected item"
 msgid_plural "unprotect(): only %d protected items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/main/memory.c:3113
+#: src/main/memory.c:3087
 msgid "unprotect_ptr: pointer not found"
 msgstr ""
 
-#: src/main/memory.c:3151
+#: src/main/memory.c:3125
 #, c-format
 msgid "R_Reprotect: only %d protected item, can't reprotect index %d"
 msgid_plural "R_Reprotect: only %d protected items, can't reprotect index %d"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/main/memory.c:3203
+#: src/main/memory.c:3177
 #, c-format
 msgid "'Calloc()' function could not allocate memory (%.0f of %u bytes)"
 msgstr ""
 
-#: src/main/memory.c:3213
+#: src/main/memory.c:3187
 #, c-format
 msgid "'Realloc()' function could not re-allocate memory (%.0f bytes)"
 msgstr ""
 
-#: src/main/memory.c:3344
+#: src/main/memory.c:3318
 #, c-format
 msgid "value of 'SET_ATTRIB' must be a pairlist or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3382
+#: src/main/memory.c:3356
 #, c-format
 msgid "LENGTH or similar applied to %s object"
 msgstr ""
 
-#: src/main/memory.c:3397
+#: src/main/memory.c:3371
 #, c-format
 msgid "'%s' function can only be applied to a charecter, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3404 src/main/memory.c:3464
+#: src/main/memory.c:3378 src/main/memory.c:3438
 #, c-format
 msgid "'%s' function can only be applied to a character vector, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3414 src/main/memory.c:3481
+#: src/main/memory.c:3388 src/main/memory.c:3455
 #, c-format
 msgid "'%s' function can only be applied to a list, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3421
+#: src/main/memory.c:3395
 #, c-format
 msgid "'%s' function can only be applied to a logical, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3429
+#: src/main/memory.c:3403
 #, c-format
 msgid "'%s' function can only be applied to a integer, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3436
+#: src/main/memory.c:3410
 #, c-format
 msgid "'%s' function can only be applied to a raw, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3443
+#: src/main/memory.c:3417
 #, c-format
 msgid "'%s' function can only be applied to a numeric, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3450
+#: src/main/memory.c:3424
 #, c-format
 msgid "'%s' function can only be applied to a complex, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3459
+#: src/main/memory.c:3433
 msgid "not safe to return vector pointer"
 msgstr ""
 
-#: src/main/memory.c:3467
+#: src/main/memory.c:3441
 #, c-format
 msgid "value of 'SET_STRING_ELT()' function must be a 'CHARSXP' not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3470
+#: src/main/memory.c:3444
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_STRING_ELT()' function"
 msgstr ""
 
-#: src/main/memory.c:3485
+#: src/main/memory.c:3459
 #, c-format
 msgid "attempt to set index %lu/%lu in 'SET_VECTOR_ELT()' function"
 msgstr ""
 
-#: src/main/memory.c:3510 src/main/memory.c:3520 src/main/memory.c:3532
-#: src/main/memory.c:3546 src/main/memory.c:3561 src/main/memory.c:3579
+#: src/main/memory.c:3484 src/main/memory.c:3494 src/main/memory.c:3506
+#: src/main/memory.c:3520 src/main/memory.c:3535 src/main/memory.c:3553
 msgid "bad value"
 msgstr ""
 
-#: src/main/memory.c:3661
+#: src/main/memory.c:3635
 #, c-format
 msgid "value of 'SET_CXTAIL()' function must be a 'char' or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.c:3742
+#: src/main/memory.c:3716
 msgid "memory profiling is not available on this system"
 msgstr ""
 
-#: src/main/memory.c:3806
+#: src/main/memory.c:3780
 #, c-format
 msgid "'Rprofmem()': cannot open output file '%s'"
 msgstr ""
 
-#: src/main/memory.c:3842
+#: src/main/memory.c:3816
 msgid "'R_AllocStringBuffer( (size_t)-1 )' function is no longer allowed"
 msgstr ""
 
-#: src/main/memory.c:3859
+#: src/main/memory.c:3833
 #, c-format
 msgid "could not allocate memory (%u Mb) in 'R_AllocStringBuffer()' function"
 msgstr ""
 
-#: src/main/memory.c:3911
+#: src/main/memory.c:3885
 #, c-format
 msgid "long vectors not supported yet: %s:%d"
 msgstr ""
 
-#: src/main/names.c:1022
+#: src/main/names.c:1021
 msgid "string argument required"
 msgstr ""
 
-#: src/main/names.c:1025
+#: src/main/names.c:1024
 msgid "no such primitive function"
 msgstr ""
 
-#: src/main/names.c:1147
+#: src/main/names.c:1146
 msgid "couldn't allocate memory for symbol table"
 msgstr ""
 
-#: src/main/names.c:1213 src/main/names.c:1243
+#: src/main/names.c:1212 src/main/names.c:1242
 msgid "attempt to use zero-length variable name"
 msgstr ""
 
-#: src/main/names.c:1215 src/main/names.c:1245
+#: src/main/names.c:1214 src/main/names.c:1244
 #, c-format
 msgid "variable names are limited to %d bytes"
 msgstr ""
 
-#: src/main/names.c:1334
+#: src/main/names.c:1333
 #, c-format
 msgid "'.Internal(%s())' not called from a base namespace\n"
 msgstr ""
 
-#: src/main/names.c:1341
+#: src/main/names.c:1340
 #, c-format
 msgid "'.Internal(%s())' called from namespace '%s'\n"
 msgstr ""
@@ -7141,7 +7141,7 @@ msgid "'%s' argument must be a non-negative number"
 msgstr ""
 
 #: src/main/seq.c:763 src/main/seq.c:765 src/main/seq.c:773
-#: src/main/unique.c:667
+#: src/main/unique.c:677
 #, c-format
 msgid "'%s' argument must be of length 1"
 msgstr ""
@@ -7975,67 +7975,67 @@ msgstr ""
 msgid "'dirmark = TRUE' is not supported on this platform"
 msgstr ""
 
-#: src/main/unique.c:321 src/main/unique.c:324
+#: src/main/unique.c:331 src/main/unique.c:334
 #, c-format
 msgid "length %d is too large for hashing"
 msgstr ""
 
-#: src/main/unique.c:420 src/main/unique.c:432
+#: src/main/unique.c:430 src/main/unique.c:442
 msgid "hash table is full"
 msgstr ""
 
-#: src/main/unique.c:490 src/main/unique.c:519 src/main/unique.c:549
-#: src/main/unique.c:573 src/main/unique.c:612 src/main/unique.c:681
+#: src/main/unique.c:500 src/main/unique.c:529 src/main/unique.c:559
+#: src/main/unique.c:583 src/main/unique.c:622 src/main/unique.c:691
 #, c-format
 msgid "'%s' method applies only to vectors"
 msgstr ""
 
-#: src/main/unique.c:617
+#: src/main/unique.c:627
 msgid "any_duplicated3(., <0-length incomp>)"
 msgstr ""
 
-#: src/main/unique.c:688
+#: src/main/unique.c:698
 #, c-format
 msgid "'%s' argument must be positive"
 msgstr ""
 
-#: src/main/unique.c:985
+#: src/main/unique.c:995
 msgid "'match()' function requires vector arguments"
 msgstr ""
 
-#: src/main/unique.c:1033 src/main/unique.c:1171
+#: src/main/unique.c:1043 src/main/unique.c:1181
 msgid "argument is not of mode character"
 msgstr ""
 
-#: src/main/unique.c:1294
+#: src/main/unique.c:1304
 msgid "'...' used in a situation where it does not exist"
 msgstr ""
 
-#: src/main/unique.c:1300
+#: src/main/unique.c:1310
 msgid "'...' is not a pairlist"
 msgstr ""
 
-#: src/main/unique.c:1491
+#: src/main/unique.c:1501
 msgid "non-numeric matrix in 'rowsum()': this should not happen"
 msgstr ""
 
-#: src/main/unique.c:1493 src/main/unique.c:1565
+#: src/main/unique.c:1503 src/main/unique.c:1575
 msgid "row names are not character"
 msgstr ""
 
-#: src/main/unique.c:1529
+#: src/main/unique.c:1539
 msgid "non-numeric data frame in 'rowsum()'"
 msgstr ""
 
-#: src/main/unique.c:1561
+#: src/main/unique.c:1571
 msgid "this cannot happen"
 msgstr ""
 
-#: src/main/unique.c:1713
+#: src/main/unique.c:1723
 msgid "'csduplicated()' function was not called on a STRSXP"
 msgstr ""
 
-#: src/main/unique.c:1746
+#: src/main/unique.c:1756
 msgid "This algorithm is for size <= n/2"
 msgstr ""
 

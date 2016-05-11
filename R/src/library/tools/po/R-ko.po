@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-26 22:47\n"
+"POT-Creation-Date: 2016-05-11 18:13\n"
 "PO-Revision-Date: 2014-03-27 13:35-0600\n"
 "Last-Translator: Chel Hee Lee <chl948@mail.usask.ca>\n"
 "Language-Team:  <chl948@mail.usask.ca>\n"
@@ -757,6 +757,11 @@ msgstr ""
 #. R/check.R: gettext("Compiled code should not call non-API entry points in R.\n", domain = "R-tools")
 #: R/check.R:0
 msgid "Compiled code should not call non-API entry points in R."
+msgstr ""
+
+#. R/check.R: gettext("Complete output:\n", domain = "R-tools")
+#: R/check.R:0
+msgid "Complete output:"
 msgstr ""
 
 #. R/RdConv2.R: gettext("Condition must be \\Sexpr or plain text")
@@ -1834,11 +1839,6 @@ msgstr ""
 #. R/utils.R: gettext("LaTeX errors:", domain = "R-tools")
 #: R/utils.R:0
 msgid "LaTeX errors:"
-msgstr ""
-
-#. R/check.R: gettext("Last 13 lines of output:\n", domain = "R-tools")
-#: R/check.R:0
-msgid "Last 13 lines of output:"
 msgstr ""
 
 #. R/QC.R: gettext("License components which are templates and need '+ file LICENSE':", domain = "R-tools")
@@ -3279,6 +3279,17 @@ msgid ""
 "side must be named 'value'."
 msgstr ""
 
+#. R/QC.R: gettext("The build time stamp has invalid/outdated format.", domain = "R-tools")
+#: R/QC.R:0
+msgid "The build time stamp has invalid/outdated format."
+msgstr ""
+
+#. R/QC.R: gettext("The build time stamp is missing.", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "The build time stamp is missing."
+msgstr "파일 'DESCRIPTION'이 없습니다."
+
 #. R/bibstyle.R: stop("The default JSS style may not be modified.")
 #: R/bibstyle.R:0
 msgid "The default JSS style may not be modified."
@@ -3454,6 +3465,11 @@ msgstr ""
 #. R/check.R: gettext("These lines will be truncated in the PDF manual.\n", domain = "R-tools")
 #: R/check.R:0
 msgid "These lines will be truncated in the PDF manual."
+msgstr ""
+
+#. R/QC.R: gettext("This build time stamp is over a month old.", domain = "R-tools")
+#: R/QC.R:0
+msgid "This build time stamp is over a month old."
 msgstr ""
 
 #. R/QC.R: gettextf("This field must contain one or more packages (and no version requirement).",     domain = "R-tools")
@@ -5119,11 +5135,6 @@ msgstr ""
 msgid "looks like %s is a package bundle -- they are defunct"
 msgstr ""
 
-#. R/install.R: message("looks like a binary bundle", domain = "R-tools")
-#: R/install.R:0
-msgid "looks like a binary bundle"
-msgstr ""
-
 #. R/install.R: gettextf("make cmd is\n  %s\n\nmake would use:\n", cmd, domain = "R-tools")
 #: R/install.R:0
 msgid ""
@@ -5915,12 +5926,6 @@ msgstr "코드 파일들을 기록할 수 없습니다"
 msgid "unimplemented encoding"
 msgstr "구현되지 않은 인코딩입니다"
 
-#. R/install.R: message("unknown package layout", domain = "R-tools")
-#: R/install.R:0
-#, fuzzy
-msgid "unknown package layout"
-msgstr "패키지 레이아웃이 잘못되었습니다."
-
 #. R/pdftools.R: gettextf("unsupported %s predictor %d", sQuote("flatedecode"), predictor)
 #: R/pdftools.R:0
 msgid "unsupported %s predictor %d"
@@ -6436,6 +6441,12 @@ msgid "Help on topic '%s' was found in the following package:"
 msgid_plural "Help on topic '%s' was found in the following packages:"
 msgstr[0] "'%s'와 관련된 주제를 다음의 패키지들로부터 찾았습니다:"
 
+#. R/check.R: ngettext(keep, "Last %i line of output:\n", "Last %i lines of output:\n", domain = "R-tools")
+#: R/check.R:0
+msgid "Last %i line of output:\n"
+msgid_plural "Last %i lines of output:\n"
+msgstr[0] ""
+
 #. R/QC.R: ngettext(length(xx), "Missing object imported by a ':::' call: %s", "Missing objects imported by a ':::' calls: %s",     domain = "R-tools")
 #: R/QC.R:0
 #, fuzzy
@@ -6833,6 +6844,10 @@ msgstr[0] "%s 내에서 T/F를 찾았습니다"
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "코드 파일들을 기록할 수 없습니다"
+
+#, fuzzy
+#~ msgid "unknown package layout"
+#~ msgstr "패키지 레이아웃이 잘못되었습니다."
 
 #, fuzzy
 #~ msgid "Subdirectory 'exec' contains no files."

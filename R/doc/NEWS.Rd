@@ -6,6 +6,10 @@
 \encoding{UTF-8}
 
 \section{\Rlogo CHANGES IN R-devel}{
+  %% \subsection{SIGNIFICANT USER-VISIBLE CHANGES}{
+  %%   \itemize{
+  %%   }
+  %% }
   \subsection{NEW FEATURES}{
     \itemize{
       \item User errors such as \code{integrate(f, 0:1, 2)} are now caught.
@@ -84,6 +88,15 @@
       class cache. Also, pass along the package from the
       \code{ClassExtends} object when looking up superclasses in the
       cache.
+
+      \item \code{match(x, t)}, \code{duplicated(x)} and
+      \code{unique(x)} work as documented for complex numbers with \code{NA}s
+      or \code{NaN}s, namely by treating them as two equivalence
+      \dQuote{classes}, those with \code{NA} and those with
+      non-\code{NA} \code{NaN}s.
+      %% \code{print(x)} remains back compatible, treating all
+      %% \code{NA}s identically, but showing real and imaginary parts
+      %% for the \code{NaN} \dQuote{class}.
     }
   }
 }
@@ -95,11 +108,14 @@
       gave an internal error installing a package called
       \pkg{description} from a tarball on a case-insensitive file system.
 
-      \item \command{match(x, t)} (and hence \code{x \%in\% t}) failed
+      \item \code{match(x, t)} (and hence \code{x \%in\% t}) failed
       when \code{x} was of length one, and either \code{character} and \code{x}
       and \code{t} only differed in their \code{Encoding} or when
       \code{x} and \code{t} where \code{complex} with \code{NA}s or \code{NaN}s.
       (\PR{16885}.)
+
+      \item \code{unloadNamespace(ns)} also works again when \code{ns} is a
+      \sQuote{namespace}, as from \code{getNamespace()}.
     }
   }
 }

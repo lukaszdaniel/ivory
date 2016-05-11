@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: tools 3.4.0\n"
-"POT-Creation-Date: 2016-04-26 22:47\n"
+"POT-Creation-Date: 2016-05-11 18:13\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -902,6 +902,13 @@ msgstr ""
 #. R/check.R: gettext("Compiled code should not call non-API entry points in R.\n", domain = "R-tools")
 
 msgid "Compiled code should not call non-API entry points in R."
+msgstr ""
+
+
+#: R/check.R: 0
+#. R/check.R: gettext("Complete output:\n", domain = "R-tools")
+
+msgid "Complete output:"
 msgstr ""
 
 
@@ -2207,13 +2214,6 @@ msgstr ""
 #. R/utils.R: gettext("LaTeX errors:", domain = "R-tools")
 
 msgid "LaTeX errors:"
-msgstr ""
-
-
-#: R/check.R: 0
-#. R/check.R: gettext("Last 13 lines of output:\n", domain = "R-tools")
-
-msgid "Last 13 lines of output:"
 msgstr ""
 
 
@@ -4002,6 +4002,20 @@ msgid "The argument of a replacement function which corresponds to the right han
 msgstr ""
 
 
+#: R/QC.R: 0
+#. R/QC.R: gettext("The build time stamp has invalid/outdated format.", domain = "R-tools")
+
+msgid "The build time stamp has invalid/outdated format."
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettext("The build time stamp is missing.", domain = "R-tools")
+
+msgid "The build time stamp is missing."
+msgstr ""
+
+
 #: R/bibstyle.R: 0
 #. R/bibstyle.R: stop("The default JSS style may not be modified.")
 
@@ -4176,6 +4190,13 @@ msgstr ""
 #. R/check.R: gettext("These lines will be truncated in the PDF manual.\n", domain = "R-tools")
 
 msgid "These lines will be truncated in the PDF manual."
+msgstr ""
+
+
+#: R/QC.R: 0
+#. R/QC.R: gettext("This build time stamp is over a month old.", domain = "R-tools")
+
+msgid "This build time stamp is over a month old."
 msgstr ""
 
 
@@ -6342,13 +6363,6 @@ msgstr ""
 
 
 #: R/install.R: 0
-#. R/install.R: message("looks like a binary bundle", domain = "R-tools")
-
-msgid "looks like a binary bundle"
-msgstr ""
-
-
-#: R/install.R: 0
 #. R/install.R: gettextf("make cmd is\n  %s\n\nmake would use:\n", cmd, domain = "R-tools")
 
 msgid "make cmd is\n  %s\n\nmake would use:"
@@ -7331,13 +7345,6 @@ msgid "unimplemented encoding"
 msgstr ""
 
 
-#: R/install.R: 0
-#. R/install.R: message("unknown package layout", domain = "R-tools")
-
-msgid "unknown package layout"
-msgstr ""
-
-
 #: R/pdftools.R: 0
 #. R/pdftools.R: gettextf("unsupported %s predictor %d", sQuote("flatedecode"), predictor)
 
@@ -7934,6 +7941,15 @@ msgstr[1]    ""
 
 msgid        "Help on topic '%s' was found in the following package:"
 msgid_plural "Help on topic '%s' was found in the following packages:"
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/check.R: 0
+#. R/check.R: ngettext(keep, "Last %i line of output:\n", "Last %i lines of output:\n", domain = "R-tools")
+
+msgid        "Last %i line of output:\n"
+msgid_plural "Last %i lines of output:\n"
 msgstr[0]    ""
 msgstr[1]    ""
 

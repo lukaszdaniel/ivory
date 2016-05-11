@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.11.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2016-04-26 22:47\n"
+"POT-Creation-Date: 2016-05-11 18:13\n"
 "PO-Revision-Date: 2015-01-17 15:54+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -772,6 +772,11 @@ msgstr ""
 #. R/check.R: gettext("Compiled code should not call non-API entry points in R.\n", domain = "R-tools")
 #: R/check.R:0
 msgid "Compiled code should not call non-API entry points in R."
+msgstr ""
+
+#. R/check.R: gettext("Complete output:\n", domain = "R-tools")
+#: R/check.R:0
+msgid "Complete output:"
 msgstr ""
 
 #. R/RdConv2.R: gettext("Condition must be \\Sexpr or plain text")
@@ -1866,11 +1871,6 @@ msgstr ""
 #. R/utils.R: gettext("LaTeX errors:", domain = "R-tools")
 #: R/utils.R:0
 msgid "LaTeX errors:"
-msgstr ""
-
-#. R/check.R: gettext("Last 13 lines of output:\n", domain = "R-tools")
-#: R/check.R:0
-msgid "Last 13 lines of output:"
 msgstr ""
 
 #. R/QC.R: gettext("License components which are templates and need '+ file LICENSE':", domain = "R-tools")
@@ -3333,6 +3333,17 @@ msgid ""
 "side must be named 'value'."
 msgstr ""
 
+#. R/QC.R: gettext("The build time stamp has invalid/outdated format.", domain = "R-tools")
+#: R/QC.R:0
+msgid "The build time stamp has invalid/outdated format."
+msgstr ""
+
+#. R/QC.R: gettext("The build time stamp is missing.", domain = "R-tools")
+#: R/QC.R:0
+#, fuzzy
+msgid "The build time stamp is missing."
+msgstr "Файл 'DESCRIPTION' пропущен."
+
 #. R/bibstyle.R: stop("The default JSS style may not be modified.")
 #: R/bibstyle.R:0
 msgid "The default JSS style may not be modified."
@@ -3510,6 +3521,11 @@ msgstr ""
 #. R/check.R: gettext("These lines will be truncated in the PDF manual.\n", domain = "R-tools")
 #: R/check.R:0
 msgid "These lines will be truncated in the PDF manual."
+msgstr ""
+
+#. R/QC.R: gettext("This build time stamp is over a month old.", domain = "R-tools")
+#: R/QC.R:0
+msgid "This build time stamp is over a month old."
 msgstr ""
 
 #. R/QC.R: gettextf("This field must contain one or more packages (and no version requirement).",     domain = "R-tools")
@@ -5221,11 +5237,6 @@ msgstr "Это имя базового пакета."
 msgid "looks like %s is a package bundle -- they are defunct"
 msgstr "похоже, что это сборник -- они отключены"
 
-#. R/install.R: message("looks like a binary bundle", domain = "R-tools")
-#: R/install.R:0
-msgid "looks like a binary bundle"
-msgstr ""
-
 #. R/install.R: gettextf("make cmd is\n  %s\n\nmake would use:\n", cmd, domain = "R-tools")
 #: R/install.R:0
 msgid ""
@@ -6021,12 +6032,6 @@ msgstr "не могу записать файлы кода"
 msgid "unimplemented encoding"
 msgstr "не разработанная кодировка"
 
-#. R/install.R: message("unknown package layout", domain = "R-tools")
-#: R/install.R:0
-#, fuzzy
-msgid "unknown package layout"
-msgstr "неправильная структура пакета"
-
 #. R/pdftools.R: gettextf("unsupported %s predictor %d", sQuote("flatedecode"), predictor)
 #: R/pdftools.R:0
 #, fuzzy
@@ -6659,6 +6664,14 @@ msgstr[0] "Помощь по теме '%s' была найдена в следу
 msgstr[1] "Помощь по теме '%s' была найдена в следующих пакетах:"
 msgstr[2] "Помощь по теме '%s' была найдена в следующих пакетах:"
 
+#. R/check.R: ngettext(keep, "Last %i line of output:\n", "Last %i lines of output:\n", domain = "R-tools")
+#: R/check.R:0
+msgid "Last %i line of output:\n"
+msgid_plural "Last %i lines of output:\n"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 #. R/QC.R: ngettext(length(xx), "Missing object imported by a ':::' call: %s", "Missing objects imported by a ':::' calls: %s",     domain = "R-tools")
 #: R/QC.R:0
 msgid "Missing object imported by a ':::' call: %s"
@@ -7160,6 +7173,10 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "не могу перекодировать '%s' строк(и) %s"
 msgstr[1] "не могу перекодировать '%s' строк(и) %s"
 msgstr[2] "не могу перекодировать '%s' строк(и) %s"
+
+#, fuzzy
+#~ msgid "unknown package layout"
+#~ msgstr "неправильная структура пакета"
 
 #, fuzzy
 #~ msgid "Subdirectory 'exec' contains no files."
