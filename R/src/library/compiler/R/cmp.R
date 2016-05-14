@@ -2453,7 +2453,7 @@ setInlineHandler("switch", function(e, cb, cntxt) {
         ## make more sense but that isn't the way switch() works)
         if (any(miss)) {
             cb$putlabel(missLabel)
-            cmp(quote(stop("empty alternative in numeric switch")), cb, cntxt)
+            cmp(quote(stop("empty alternative in numeric 'switch()' function")), cb, cntxt)
         }
 
         ## emit code for the default case

@@ -1059,7 +1059,7 @@ static SEXP La_solve(SEXP A, SEXP Bin, SEXP tolin)
 	p = 1;
 	if(length(Bin) != n)
 	    error(_("'b' (%d x %d) must be compatible with 'a' (%d x %d)"), length(Bin), p, n, n);
-	PROTECT(B = allocVecor(REALSXP, n));
+	PROTECT(B = allocVector(REALSXP, n));
 	if (!isNull(Adn)) setAttrib(B, R_NamesSymbol, VECTOR_ELT(Adn, 1));
     }
     PROTECT(Bin = coerceVector(Bin, REALSXP));
