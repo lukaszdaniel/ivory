@@ -62,6 +62,12 @@
       \code{drop}, \code{sep}, and \code{lex.order} to pass to
       \code{split.default()} which itself newly gets \code{lex.order} to
       pass to \code{interaction()} for more flexibility.
+
+      \item The \code{plot} method for \code{ppr} got enhanced default
+      labels (xmin and main).
+
+      \item \code{sample.int()} got an explicit \code{useHash} option
+      (with a back compatible default).
     }
   }
   \subsection{DEPRECATED AND DEFUNCT}{
@@ -119,6 +125,9 @@
 
       \item \code{unloadNamespace(ns)} also works again when \code{ns} is a
       \sQuote{namespace}, as from \code{getNamespace()}.
+
+      \item \code{rgamma(1,Inf)} or \code{rgamma(1, 0,0)} no longer give
+      \code{NaN} but the correct limit.
     }
   }
 }

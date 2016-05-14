@@ -2,7 +2,7 @@
 #  Part of the R package, https://www.R-project.org
 #
 #  Copyright (C) 1998 B. D. Ripley
-#  Copyright (C) 2000-2015 The R Core Team
+#  Copyright (C) 2000-2016 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -145,9 +145,9 @@ print.summary.ppr <- function(x, ...)
 {
     print.ppr(x, ...)
     mu <- x$mu
-    cat("\n", gettext("Projection direction vectors:", domain = "R-stats"), "\n", sep = "")
+    cat("\n", gettext("Projection direction vectors ('alpha'):", domain = "R-stats"), "\n", sep = "")
     print(format(x$alpha, ...), quote=FALSE)
-    cat("\n", gettext("Coefficients of ridge terms:", domain = "R-stats"), "\n", sep = "")
+    cat("\n", gettext("Coefficients of ridge terms ('beta'):", domain = "R-stats"), "\n", sep = "")
     print(format(x$beta, ...), quote=FALSE)
     if(any(x$edf >0)) {
 	cat("\n", gettext("Equivalent df for ridge terms:", domain = "R-stats"), "\n", sep = "")
@@ -157,7 +157,11 @@ print.summary.ppr <- function(x, ...)
     invisible(x)
 }
 
-plot.ppr <- function(x, ask, type="o", ...)
+plot.ppr <- function(x, ask, type = "o", cex = 1/2,
+                     main = quote(bquote(
+                         "term"[.(i)]*":" ~~ hat(beta[.(i)]) == .(bet.i))),
+                     xlab = quote(bquote(bold(alpha)[.(i)]^T * bold(x))),
+                     ylab = "", ...)
 {
     ppr.funs <- function(obj)
     {
@@ -167,8 +171,8 @@ plot.ppr <- function(x, ask, type="o", ...)
 	n <- sm[4L]; mu <- sm[5L]; m <- sm[1L]
 	jf <- q+6+m*(p+q)
 	jt <- jf+m*n
-	f <- matrix(sm[jf+1L:(mu*n)],n, mu)
-	t <- matrix(sm[jt+1L:(mu*n)],n, mu)
+	f <- matrix(sm[jf+seq_len(mu*n)],n, mu)
+	t <- matrix(sm[jt+seq_len(mu*n)],n, mu)
 	list(x=t, y=f)
     }
     obj <- ppr.funs(x)
@@ -176,10 +180,13 @@ plot.ppr <- function(x, ask, type="o", ...)
         oask <- devAskNewPage(ask)
         on.exit(devAskNewPage(oask))
     }
-    for(i in 1L:x$mu) {
+    for(i in seq_len(x$mu)) {
 	ord <- order(obj$x[ ,i])
-	plot(obj$x[ord, i], obj$y[ord, i], type = type,
-	     xlab = paste("term", i), ylab = "", ...)
+        bet.i <- format(x$beta[[i]], digits = 3)
+	plot(obj$x[ord, i], obj$y[ord, i], type = type, cex = cex,
+	     main = if(is.call(main)) eval(main) else main,
+	     xlab = if(is.call(xlab)) eval(xlab) else xlab,
+             ylab = ylab, ...)
     }
     invisible()
 }
